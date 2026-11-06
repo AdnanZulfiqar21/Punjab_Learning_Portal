@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-14.4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/14.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 289,
+          "pdf_to": 289,
+          "note": "Book p. 284: heading 14.4 Scalar Triple Product, printed with no text of its own before 14.4.1. Page content (overview, road map, revision of dot and cross product and determinants) is ours."
+        }
+      ],
+      "title": "14.4 Scalar Triple Product",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The book goes straight from the heading 14.4 to its first sub-heading 14.4.1, so there is no printed text on this page; everything here is our introduction to the section.\nIn 14.2 you multiplied two vectors and got a number (the dot product). In 14.3 you multiplied two vectors and got a vector (the cross product). Section 14.4 combines the two: take three vectors \\(\\underline{u}, \\underline{v}, \\underline{w}\\), first form the cross product \\(\\underline{v}\\times \\underline{w}\\), then take its dot product with \\(\\underline{u}\\). The result is a single number, so it is called the scalar triple product.\nWhy learn it? That one number answers two practical questions: how much space a box (parallelepiped) or a tetrahedron built on three vectors encloses, and whether three vectors (or four points) lie in one plane."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Part of 14.4",
+              "What you will learn"
+            ],
+            "rows": [
+              [
+                "14.4.1 Scalar Triple Product of Vectors",
+                "the definition \\(\\underline{u}\\cdot(\\underline{v}\\times \\underline{w})\\) and the notation \\([\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\)"
+              ],
+              [
+                "14.4.2 The Volume of the Parallelepiped",
+                "why \\((\\underline{u}\\times \\underline{v})\\cdot \\underline{w}\\) is the volume of the box with edges \\(\\underline{u}, \\underline{v}, \\underline{w}\\)"
+              ],
+              [
+                "14.4.3 The Volume of the Tetrahedron",
+                "the volume of a tetrahedron is \\(\\frac{1}{6}[\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\)"
+              ],
+              [
+                "14.4.4 Scalar Triple Product of Vectors in Terms of Components",
+                "the determinant formula; Examples 23-26"
+              ],
+              [
+                "14.4.5 Coplanar Vectors and Condition for Coplanarity of Three Vectors",
+                "three vectors lie in one plane exactly when \\([\\underline{u}\\ \\underline{v}\\ \\underline{w}] = 0\\); Examples 27-28"
+              ],
+              [
+                "14.4.6 Applications of Vectors in Real World",
+                "torque, the magnitude of a force, total revenue; Examples 29-31"
+              ]
+            ],
+            "caption": "Our road map of 14.4 (not in the book)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Remember",
+            "text": "You will need three tools from earlier sections:\n1. Dot product (14.2): for \\(\\underline{u} = a_1\\underline{i} + b_1\\underline{j} + c_1\\underline{k}\\) and \\(\\underline{v} = a_2\\underline{i} + b_2\\underline{j} + c_2\\underline{k}\\), \\(\\underline{u}\\cdot \\underline{v} = a_1a_2 + b_1b_2 + c_1c_2\\), a number. Also \\(\\underline{u}\\cdot \\underline{v} = |\\underline{u}||\\underline{v}|\\cos\\theta\\), and \\(\\underline{u}\\cdot \\underline{v} = 0\\) when \\(\\underline{u} \\perp \\underline{v}\\).\n2. Cross product (14.3): \\(\\underline{v}\\times \\underline{w}\\) is a vector perpendicular to both \\(\\underline{v}\\) and \\(\\underline{w}\\), and \\(|\\underline{v}\\times \\underline{w}|\\) is the area of the parallelogram with sides \\(\\underline{v}\\) and \\(\\underline{w}\\). It is found with the determinant formula.\n3. A \\(3\\times 3\\) determinant, expanded along the first row with the signs \\(+, -, +\\):"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}\\begin{vmatrix} p_1 & q_1 & r_1 \\\\ p_2 & q_2 & r_2 \\\\ p_3 & q_3 & r_3 \\end{vmatrix} &= p_1(q_2r_3 - q_3r_2) \\\\ &\\quad - q_1(p_2r_3 - p_3r_2) \\\\ &\\quad + r_1(p_2q_3 - p_3q_2)\\end{aligned}",
+            "text_alt": "The 3 by 3 determinant with rows p1 q1 r1, p2 q2 r2, p3 q3 r3 equals p1 times (q2 r3 minus q3 r2), minus q1 times (p2 r3 minus p3 r2), plus r1 times (p2 q3 minus p3 q2)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A triple product combines three vectors; the scalar triple product \\(\\underline{u}\\cdot(\\underline{v}\\times \\underline{w})\\) gives a number.\n2. It measures the volume of the parallelepiped and the tetrahedron built on the three vectors.\n3. It is zero exactly when the three vectors are coplanar.\n4. To compute it you only need the dot product, the cross product and a \\(3\\times 3\\) determinant."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Thinking a triple product of vectors must be a vector: the scalar triple product is a number (a scalar).\n2. Forgetting the middle sign of a determinant expansion: it is \\(+, -, +\\) along the first row.\n3. Mixing up \\(\\underline{u}\\cdot \\underline{v}\\) (a number) and \\(\\underline{u}\\times \\underline{v}\\) (a vector); revise 14.2 and 14.3 if this is not yet clear."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,380 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 145,
+          "pdf_to": 151,
+          "note": "Book p. 140-146: Unit 8 Introduction (counter example, tables, Hypothesis, Induction of Hypothesis), 8.1 statement, procedure, Examples 1-6 with the dot box. Teaching notes, Key points, Common mistakes are ours."
+        }
+      ],
+      "title": "8.1 Principle of Mathematical Induction",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Introduction"
+          },
+          {
+            "type": "paragraph",
+            "text": "Francesco Maurolico (1494-1575) devised the method of induction and applied this device first to prove that the sum of the first \\(n\\) odd positive integers equals \\(n^{2}\\). He presented many properties of integers and proved some of these properties using the method of mathematical induction. In theoretical computer science, it plays a pivotal role in developing the reasoning skills needed for the effective design and implementation of algorithms, and for assessing both their correctness and their complexity.",
+            "bold": [
+              "mathematical induction"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The book spells the name \"Mourolico\"; the usual spelling is Maurolico. Induction is the tool we use whenever a statement is claimed for every natural number \\(n\\): a sum formula, a divisibility fact, an inequality. We cannot test infinitely many numbers one by one, so we need a proof that covers all of them at once."
+          },
+          {
+            "type": "paragraph",
+            "text": "We are aware of the fact that even one exception or case to a mathematical formula is enough to prove it to be false. Such a case or exception which fails the mathematical formula or statement is called a counter example.",
+            "bold": [
+              "counter example"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "The validity of a formula or statement depending on a variable belonging to a certain set is established if it is true for each element of the set under consideration."
+          },
+          {
+            "type": "paragraph",
+            "text": "For example, we consider the statement \\(S(n) = n^{2} - n + 41\\) is a prime number for every natural number \\(n\\). The values of the expression \\(n^{2} - n + 41\\) for some first natural numbers are given in the table as shown below:"
+          },
+          {
+            "type": "table",
+            "caption": "Values of \\(S(n) = n^{2} - n + 41\\) for the first eleven natural numbers",
+            "header": [
+              "\\(n\\)",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11"
+            ],
+            "rows": [
+              [
+                "\\(S(n)\\)",
+                "41",
+                "43",
+                "47",
+                "53",
+                "61",
+                "71",
+                "83",
+                "97",
+                "113",
+                "131",
+                "151"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "From the table, it appears that the statement \\(S(n)\\) has enough chance of being true. If we go on trying for the next natural numbers, we find \\(n = 41\\) as a counter example which fails the claim of the above statement. So we conclude that to derive a general formula without proof from some special cases is not a wise step. This example was discovered by Euler (1707-1783)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does \\(n = 41\\) fail? Put \\(n = 41\\):\n\\[S(41) = 41^{2} - 41 + 41\\]\n\\[= 41^{2} = 41 \\times 41 = 1681\\]\n1681 has the factor 41, so it is not prime. Yet \\(S(n)\\) is prime for every \\(n\\) from 1 to 40. Forty correct cases still did not make the statement true. This is exactly why we need a proof, and mathematical induction is such a proof."
+          },
+          {
+            "type": "paragraph",
+            "text": "Now we consider another example and try to formulate the result. Our task is to find the sum of the first \\(n\\) odd natural numbers. We write first few sums to see the pattern of sums."
+          },
+          {
+            "type": "table",
+            "caption": "Sums of the first \\(n\\) odd natural numbers",
+            "header": [
+              "\\(n\\) (the number of terms)",
+              "Sum"
+            ],
+            "rows": [
+              [
+                "1",
+                "\\(1 = 1^{2}\\)"
+              ],
+              [
+                "2",
+                "\\(1 + 3 = 4 = 2^{2}\\)"
+              ],
+              [
+                "3",
+                "\\(1 + 3 + 5 = 9 = 3^{2}\\)"
+              ],
+              [
+                "4",
+                "\\(1 + 3 + 5 + 7 = 16 = 4^{2}\\)"
+              ],
+              [
+                "5",
+                "\\(1 + 3 + 5 + 7 + 9 = 25 = 5^{2}\\)"
+              ],
+              [
+                "6",
+                "\\(1 + 3 + 5 + 7 + 9 + 11 = 36 = 6^{2}\\)"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "The sequence of sums is \\((1)^{2}, (2)^{2}, (3)^{2}, (4)^{2}, \\ldots\\)\nWe see that each sum is the square of the number of terms in the sum. So the following statement seems to be true. For each natural number \\(n\\),\n\\(1 + 3 + 5 + \\ldots - (2n - 1) = n^{2} \\quad \\ldots \\text{(i)}\\)   \\(\\because\\) \\(n\\text{th term} = 1 - 2(n - 1)\\)",
+            "book_errors": [
+              "\\(1 + 3 + 5 + \\ldots - (2n - 1) = n^{2} \\quad \\ldots \\text{(i)}\\)",
+              "\\(n\\text{th term} = 1 - 2(n - 1)\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \\(1 + 3 + 5 + \\ldots - (2n - 1) = n^{2}\\) and \"\\(n\\)th term \\(= 1 - 2(n - 1)\\)\". Both signs are misprints. The correct statement (i) is\n\\[1 + 3 + 5 + \\ldots + (2n - 1) = n^{2}\\]\nand the \\(n\\)th term of 1, 3, 5, ... (first term 1, common difference 2) is\n\\[a_{n} = 1 + 2(n - 1) = 2n - 1\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "But it is not possible to verify the statement (i) for each positive integer \\(n\\), because it involves infinitely many calculations which never end."
+          },
+          {
+            "type": "paragraph",
+            "text": "The method of mathematical induction is used to avoid such situations. Usually it is used to prove the statements or formulae relating to the set \\(\\{1, 2, 3, \\ldots\\}\\) but in some cases, it is also used to prove the statements relating to the set \\(\\{0, 1, 2, 3, \\ldots\\}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Hypothesis: A hypothesis is an educated guess or proposed explanation for a statement based on limited evidence. It serves as a starting point for further investigation and can be tested through experiments and observation. In scientific research, a hypothesis is usually framed as a statement that can be tested and either supported or rejected by data.",
+            "bold": [
+              "Hypothesis:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Induction of Hypothesis: It refers to the process of formulating a general statement or hypothesis based on specific examples or patterns observed in particular cases. This technique is often employed in mathematical reasoning to propose conjectures that can later be proven rigorously using deductive methods.",
+            "bold": [
+              "Induction of Hypothesis:",
+              "mathematical reasoning"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Look at the two examples together. In the prime example a pattern was guessed from 11 cases and turned out false. In the odd numbers example a pattern was guessed from 6 cases and is true. Guessing a pattern (a conjecture) is the \"induction of hypothesis\" step; it gives us a statement worth proving, not a proof.\nPicture a long row of dominoes. If (1) the first domino falls, and (2) every domino, when it falls, knocks down the next one, then all the dominoes fall. Mathematical induction proves a statement for all \\(n\\) in exactly this way."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "8.1 Principle of Mathematical Induction"
+          },
+          {
+            "type": "paragraph",
+            "text": "The principle of mathematical induction is stated as follows: If a proposition or statement \\(S(n)\\) for each positive integer \\(n\\) is such that"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Base Case: \\(S(1)\\) is true i.e., \\(S(n)\\) is true for \\(n = 1\\) and",
+              "Induction of Hypothesis: \\(S(k + 1)\\) is true whenever \\(S(k)\\) is true for any positive integer \\(k\\).",
+              "Conclusion: \\(S(n)\\) is true for all positive integers."
+            ],
+            "bold": [
+              "Base Case:",
+              "Induction of Hypothesis:",
+              "Conclusion:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why do two checks prove infinitely many cases? The base case gives \\(S(1)\\). The second condition with \\(k = 1\\) then gives \\(S(2)\\); with \\(k = 2\\) it gives \\(S(3)\\); and so on:\n\\[S(1) \\Rightarrow S(2) \\Rightarrow S(3) \\Rightarrow \\cdots\\]\nNo positive integer is missed.\nIn the second step we do not prove \\(S(k)\\). We assume it (this assumption is called the induction hypothesis) and show that \\(S(k + 1)\\) must then follow. Both steps are needed: without the base case the chain never starts, and without the second step it never moves."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Procedure for Induction of Hypothesis"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Substituting \\(n = 1\\), show that the statement is true for \\(n = 1\\).",
+              "Assuming that the statement is true for any positive integer \\(k\\), then show that it is true for the next higher integer."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "For the second condition, one of the following two methods can be used:\n\\(S(k + 1)\\) is proved using \\(S(k)\\).\n\\(S(k + 1)\\) is established by performing algebraic operations on \\(S(k)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A good way to write every induction proof for a sum:\n1. Name the statement \\(S(n)\\).\n2. Base case: check \\(S(1)\\), left side and right side separately.\n3. Write \\(S(k)\\) and call it (A).\n4. Write \\(S(k + 1)\\), simplify its right side and call it (B). This is your target.\n5. Add the \\((k + 1)\\)th term to both sides of (A) and simplify until you reach the right side of (B).\n6. Write the conclusion."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Use mathematical induction to prove that \\(3 + 6 + 9 + \\ldots + 3n = \\frac{3n(n + 1)}{2}\\) for every positive integer \\(n\\).",
+            "steps": [
+              "Given: \\(S(n): 3 + 6 + 9 + \\ldots + 3n = \\frac{3n(n + 1)}{2}\\).\nTo prove: \\(S(n)\\) is true for every positive integer \\(n\\).\nMethod: mathematical induction: base case \\(n = 1\\), then assume \\(S(k)\\) and prove \\(S(k + 1)\\).",
+              "Step 1: Base case (n = 1)\nLeft side: the sum stops at \\(3n = 3\\), so it is just 3.\n\\[\\text{Right side} = \\dfrac{3(1)(1 + 1)}{2}\\]\n\\[= \\dfrac{6}{2} = 3\\]\nThus \\(S(1)\\) is true, i.e., the base case is satisfied.\nWhy: both sides must be worked out separately and found equal.",
+              "Step 2: Induction hypothesis\nLet us assume that \\(S(n)\\) is true for any \\(n = k \\in \\mathbb{N}\\), that is,\n\\[3 + 6 + 9 + \\ldots + 3k = \\dfrac{3k(k + 1)}{2} \\quad (A)\\]\nWhy: this is the assumption we are allowed to use; we do not prove it.",
+              "Step 3: The statement for n = k + 1 (our target)\nThe next term after \\(3k\\) is \\(3(k + 1)\\):\n\\[3 + 6 + \\ldots + 3k + 3(k + 1)\\]\n\\[= \\dfrac{3(k + 1)[(k + 1) + 1]}{2}\\]\n\\[= \\dfrac{3(k + 1)(k + 2)}{2} \\quad (B)\\]\nWhy: replace every \\(n\\) in \\(S(n)\\) by \\(k + 1\\). Writing the target first tells us where the algebra must end.",
+              "Step 4: Add 3(k + 1) on both sides of (A)\nThe book prints the left side as\n\\[3 + 6 + 9 - \\ldots + 3k + 3(k + 1)\\]\n(the minus sign is a misprint for plus, see the Book correction below). So\n\\[3 + 6 + \\ldots + 3k + 3(k + 1)\\]\n\\[= \\dfrac{3k(k + 1)}{2} + 3(k + 1)\\]\nWhy: the left side of (A) plus the next term is exactly the left side of (B); on the right we may use (A).",
+              "Step 5: Take out the common factor 3(k + 1)\n\\[= 3(k + 1)\\left(\\dfrac{k}{2} + 1\\right)\\]\n\\[= \\dfrac{3(k + 1)(k + 2)}{2}\\]\nThus \\(S(k + 1)\\) is true if \\(S(k)\\) is true.\nWhy: both terms contain \\(3(k + 1)\\); what is left is \\(\\frac{k}{2} + 1 = \\frac{k + 2}{2}\\). The result is the right side of (B).",
+              "Step 6: Conclusion\nSince both the conditions are satisfied, therefore, \\(S(n)\\) is true for each positive integer \\(n\\).\nWhy: the base case starts the chain and Step 5 carries it from every \\(k\\) to \\(k + 1\\).",
+              "Check:\nFor \\(n = 3\\): left side \\(3 + 6 + 9 = 18\\); right side \\(\\frac{3(3)(4)}{2} = 18\\). Equal, as the formula says."
+            ],
+            "answer": "Hence proved: \\(3 + 6 + 9 + \\ldots + 3n = \\frac{3n(n + 1)}{2}\\) for every positive integer \\(n\\).",
+            "book_errors": [
+              "\\[3 + 6 + 9 - \\ldots + 3k + 3(k + 1)\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 1: in the line \"Adding \\(3(k + 1)\\) on both the sides of (A)\" the book prints \\(3 + 6 + 9 - \\ldots + 3k + 3(k + 1)\\). The minus sign is a misprint; it should be \\(3 + 6 + 9 + \\ldots + 3k + 3(k + 1)\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Use mathematical induction to prove that for any positive integer \\(n\\), \\(1^{2} + 2^{2} + 3^{2} + \\ldots + n^{2} = \\frac{n(n + 1)(2n + 1)}{6}\\).",
+            "steps": [
+              "Given: \\(S(n): 1^{2} + 2^{2} + 3^{2} + \\ldots + n^{2} = \\frac{n(n + 1)(2n + 1)}{6}\\).\nTo prove: \\(S(n)\\) is true for every positive integer \\(n\\).\nMethod: mathematical induction; in the step we add the next square \\((k + 1)^{2}\\).",
+              "Step 1: Base case (n = 1)\n\\[S(1): (1)^{2} = \\dfrac{1(1 + 1)(2 \\times 1 + 1)}{6}\\]\n\\[= \\dfrac{1 \\times 2 \\times 3}{6} = 1\\]\nwhich is true. Thus \\(S(1)\\) is true, i.e., the base case is satisfied.\nWhy: the left side is \\(1^{2} = 1\\) and the right side also gives 1.",
+              "Step 2: Induction hypothesis\nLet us assume that \\(S(k)\\) is true for any \\(k \\in \\mathbb{N}\\), that is,\n\\[1^{2} + 2^{2} + \\ldots + k^{2}\\]\n\\[= \\dfrac{k(k + 1)(2k + 1)}{6} \\quad (A)\\]\nWhy: the assumption we will build on.",
+              "Step 3: Write S(k + 1) (our target)\n\\[1^{2} + 2^{2} + \\ldots + k^{2} + (k + 1)^{2}\\]\n\\[= \\dfrac{(k + 1)(k + 1 + 1)(2(k + 1) + 1)}{6}\\]\n\\[= \\dfrac{(k + 1)(k + 2)(2k + 3)}{6} \\quad (B)\\]\nWhy: replace \\(n\\) by \\(k + 1\\); \\(2(k + 1) + 1 = 2k + 3\\). (The book writes \\(2(k + 1)\\) with a bar over \\(k + 1\\), an old way of grouping.)",
+              "Step 4: Add (k + 1)^2 to both sides of (A)\n\\[1^{2} + 2^{2} + \\ldots + k^{2} + (k + 1)^{2}\\]\n\\[= \\dfrac{k(k + 1)(2k + 1)}{6} + (k + 1)^{2}\\]\nWhy: this makes the left side of (A) into the left side of (B).",
+              "Step 5: Take (k + 1) common over the denominator 6\n\\[= \\dfrac{(k + 1)[k(2k + 1) + 6(k + 1)]}{6}\\]\n\\[= \\dfrac{(k + 1)(2k^{2} + k + 6k + 6)}{6}\\]\n\\[= \\dfrac{(k + 1)(2k^{2} + 7k + 6)}{6}\\]\nWhy: \\((k + 1)^{2} = \\frac{6(k + 1)^{2}}{6}\\), so both terms share \\(\\frac{(k + 1)}{6}\\); taking it out avoids a cubic expansion.",
+              "Step 6: Factorize the quadratic\n\\[2k^{2} + 7k + 6 = 2k^{2} + 4k + 3k + 6\\]\n\\[= (k + 2)(2k + 3)\\]\n\\[\\therefore \\; = \\dfrac{(k + 1)(k + 2)(2k + 3)}{6}\\]\nThus, the formula holds for \\(k + 1\\).\nWhy: we split \\(7k\\) into \\(4k + 3k\\) because \\(4 \\times 3 = 2 \\times 6\\). We already know the target factors from (B), which guides the factorization.",
+              "Step 7: Conclusion\nSince both the conditions are satisfied, therefore, by mathematical induction, the given statement holds for all positive integers.\nWhy: base case plus the step from \\(k\\) to \\(k + 1\\).",
+              "Check:\nFor \\(n = 3\\): \\(1 + 4 + 9 = 14\\) and \\(\\frac{3 \\cdot 4 \\cdot 7}{6} = 14\\). Equal."
+            ],
+            "answer": "Hence proved: \\(1^{2} + 2^{2} + \\ldots + n^{2} = \\frac{n(n + 1)(2n + 1)}{6}\\) for every positive integer \\(n\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Show that \\(\\frac{n^{3} + 2n}{3}\\) represents an integer \\(\\forall n \\in \\mathbb{N}\\).",
+            "steps": [
+              "Given: \\(S(n) = \\frac{n^{3} + 2n}{3}\\).\nTo prove: \\(S(n)\\) is an integer for every natural number \\(n\\).\nMethod: induction. In the step we split \\(S(k + 1)\\) into \\(S(k)\\) plus something that is clearly an integer.",
+              "Step 1: Base case (n = 1)\n\\[S(1) = \\dfrac{1^{3} + 2(1)}{3} = \\dfrac{3}{3}\\]\n\\[= 1 \\in \\mathbb{Z}\\]\nThe base case is satisfied.\nWhy: 1 is an integer.",
+              "Step 2: Induction hypothesis\nLet us assume that \\(S(n)\\) is true for any \\(n = k \\in \\mathbb{N}\\), that is, \\(S(k) = \\frac{k^{3} + 2k}{3}\\) represents an integer.\nWhy: the assumption we will use.",
+              "Step 3: Expand S(k + 1)\nNow we want to show that \\(S(k + 1)\\) is also an integer. For \\(n = k + 1\\),\n\\[S(k + 1) = \\dfrac{(k + 1)^{3} + 2(k + 1)}{3}\\]\n\\[= \\dfrac{k^{3} + 3k^{2} + 3k + 1 + 2k + 2}{3}\\]\nWhy: \\((k + 1)^{3} = k^{3} + 3k^{2} + 3k + 1\\).",
+              "Step 4: Regroup so that S(k) appears\n\\[= \\dfrac{(k^{3} + 2k) + (3k^{2} + 3k + 3)}{3}\\]\n\\[= \\dfrac{(k^{3} + 2k) + 3(k^{2} + k + 1)}{3}\\]\n\\[= \\dfrac{k^{3} + 2k}{3} + (k^{2} + k + 1)\\]\nWhy: we collect \\(k^{3} + 2k\\) (the top of \\(S(k)\\)); everything left over has a factor 3, which cancels the denominator.",
+              "Step 5: Both parts are integers\nAs \\(\\frac{k^{3} + 2k}{3}\\) is an integer by assumption and \\(k^{2} + k + 1\\) is an integer as \\(k \\in \\mathbb{N}\\), \\(S(k + 1)\\), being a sum of integers, is an integer. Thus the statement holds for \\(k + 1\\).\nWhy: the sum of two integers is always an integer.",
+              "Step 6: Conclusion\nSince both the conditions are satisfied, we conclude by mathematical induction that \\(\\frac{n^{3} + 2n}{3}\\) represents an integer for all positive integral values of \\(n\\).",
+              "Check:\n\\(n = 2\\): \\(\\frac{8 + 4}{3} = 4\\); \\(n = 4\\): \\(\\frac{64 + 8}{3} = 24\\). Both integers."
+            ],
+            "answer": "Hence proved: \\(\\frac{n^{3} + 2n}{3}\\) is an integer for every \\(n \\in \\mathbb{N}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "The dot (.) between two numbers stands for multiplication symbol. (Printed beside Example 4: \\(3.5^{2}\\) means \\(3 \\times 5^{2}\\). We write it as \\(3 \\cdot 5^{2}\\).)"
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "Use mathematical induction to prove that \\(3 + 3.5 + 3.5^{2} + \\ldots + 3.5^{n} = \\frac{3(5^{n + 1} - 1)}{4}\\), whenever \\(n\\) is a non-negative integer.",
+            "steps": [
+              "Given: \\(S(n): 3 + 3 \\cdot 5 + 3 \\cdot 5^{2} + \\ldots + 3 \\cdot 5^{n} = \\frac{3(5^{n + 1} - 1)}{4}\\) (the dot means multiplication).\nTo prove: \\(S(n)\\) is true for every non-negative integer \\(n = 0, 1, 2, \\ldots\\)\nMethod: induction starting from \\(n = 0\\), because the statement is claimed for \\(n \\ge 0\\).",
+              "Step 1: Base case (n = 0)\nFor \\(n = 0\\) the left side has only the first term \\(3 \\cdot 5^{0} = 3\\). The book prints the right side as\n\\[\\dfrac{3(5^{0-1} - 1)}{4}\\]\n(a misprint; see the Book correction). The correct right side is\n\\[\\dfrac{3(5^{0+1} - 1)}{4} = \\dfrac{3(5 - 1)}{4} = 3\\]\nThus \\(S(0)\\) is true, i.e., the base case is satisfied.\nWhy: the first value of \\(n\\) here is 0, not 1, so the chain must start at 0.",
+              "Step 2: Induction hypothesis\nLet us assume that \\(S(k)\\) is true for any non-negative integer \\(k\\), that is,\n\\[3 + 3 \\cdot 5 + \\ldots + 3 \\cdot 5^{k}\\]\n\\[= \\dfrac{3(5^{k + 1} - 1)}{4} \\quad (A)\\]\nWhy: the assumption we will use. (The book writes \\(k \\in N\\); since the statement starts at 0, \\(k\\) is any whole number.)",
+              "Step 3: Write S(k + 1) (our target)\nThe next term after \\(3 \\cdot 5^{k}\\) is \\(3 \\cdot 5^{k + 1}\\). The book prints the left side as\n\\[3 + 3 \\cdot 5 + \\ldots + 3 \\cdot 5^{k} + 3 \\cdot 5^{k-1}\\]\n(misprint: the last term must be \\(3 \\cdot 5^{k + 1}\\)). Correctly:\n\\[3 + 3 \\cdot 5 + \\ldots + 3 \\cdot 5^{k} + 3 \\cdot 5^{k + 1}\\]\n\\[= \\dfrac{3(5^{(k + 1) + 1} - 1)}{4}\\]\n\\[= \\dfrac{3(5^{k + 2} - 1)}{4} \\quad (B)\\]\nWhy: replace \\(n\\) by \\(k + 1\\) everywhere.",
+              "Step 4: Add 3·5^(k+1) on both sides of (A)\n\\[3 + 3 \\cdot 5 + \\ldots + 3 \\cdot 5^{k} + 3 \\cdot 5^{k + 1}\\]\n\\[= \\dfrac{3(5^{k + 1} - 1)}{4} + 3 \\cdot 5^{k + 1}\\]\nWhy: this turns the left side of (A) into the left side of (B).",
+              "Step 5: Simplify the right side\n\\[= \\dfrac{3(5^{k + 1} - 1 + 4 \\cdot 5^{k + 1})}{4}\\]\n\\[= \\dfrac{3[5^{k + 1}(1 + 4) - 1]}{4}\\]\n\\[= \\dfrac{3(5^{k + 2} - 1)}{4}\\]\nThis shows that \\(S(k + 1)\\) is true when \\(S(k)\\) is true.\nWhy: \\(3 \\cdot 5^{k + 1} = \\frac{3 \\cdot 4 \\cdot 5^{k + 1}}{4}\\), so 3 and the denominator 4 come out together. Then \\(5^{k + 1} \\times 5 = 5^{k + 2}\\).",
+              "Step 6: Conclusion\nSince both the conditions are satisfied, therefore, by the principle of mathematical induction, \\(S(n)\\) is true for each \\(n \\in W\\) (the whole numbers 0, 1, 2, ...).",
+              "Check:\n\\(n = 2\\): \\(3 + 15 + 75 = 93\\) and \\(\\frac{3(125 - 1)}{4} = \\frac{372}{4} = 93\\). Equal."
+            ],
+            "answer": "Hence proved: \\(3 + 3 \\cdot 5 + \\ldots + 3 \\cdot 5^{n} = \\frac{3(5^{n + 1} - 1)}{4}\\) for every non-negative integer \\(n\\).",
+            "book_errors": [
+              "\\[\\dfrac{3(5^{0-1} - 1)}{4}\\]",
+              "\\[3 + 3 \\cdot 5 + \\ldots + 3 \\cdot 5^{k} + 3 \\cdot 5^{k-1}\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 4, base case: the exponent is printed \\(5^{0-1}\\); it should be \\(5^{0+1}\\) (then \\(\\frac{3(5 - 1)}{4} = 3\\), as the book's next step shows).\nExample 4, \\(S(k + 1)\\): the last term on the left is printed \\(3.5^{k-1}\\); it should be \\(3.5^{k+1}\\).\nAlso, the hypothesis says \\(k \\in N\\), but the statement starts at \\(n = 0\\), so \\(k\\) is any whole number (\\(k \\in W\\))."
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Prove that \\(4^{n} + 6n - 1\\) is divisible by 9 for all \\(n \\in \\mathbb{N}\\).",
+            "steps": [
+              "Given: \\(S(n) = 4^{n} + 6n - 1\\).\nTo prove: \\(S(n)\\) is divisible by 9 for every natural number \\(n\\).\nMethod: induction. \"Divisible by 9\" means \"equal to 9 times an integer\", so we write the assumption as an equation and substitute it into \\(S(k + 1)\\).",
+              "Step 1: Base case (n = 1)\n\\[S(1) = 4^{1} + 6(1) - 1\\]\n\\[= 4 + 6 - 1 = 9\\]\nwhich is divisible by 9. Hence it is true for \\(n = 1\\).",
+              "Step 2: Induction hypothesis\nSuppose the statement is true for \\(n = k\\), i.e., \\(S(k) = 4^{k} + 6k - 1\\) is divisible by 9. (A)\nThis implies \\(4^{k} + 6k - 1 = 9k_{1}\\) for some integer \\(k_{1}\\), so\n\\[4^{k} = 9k_{1} - 6k + 1\\]\nWhy: writing divisibility as an equation lets us replace \\(4^{k}\\) later.",
+              "Step 3: Put n = k + 1\n\\[S(k + 1) = 4^{k + 1} + 6(k + 1) - 1\\]\n\\[= 4 \\cdot 4^{k} + 6k + 6 - 1\\]\nWhy: \\(4^{k + 1} = 4 \\cdot 4^{k}\\), which brings in \\(4^{k}\\), the quantity we know about.",
+              "Step 4: Substitute 4^k from the hypothesis\n\\[= 4(9k_{1} - 6k + 1) + 6k + 6 - 1\\]\n\\[= 36k_{1} - 24k + 4 + 6k + 5\\]\n\\[= 36k_{1} - 18k + 9\\]\n\\[= 9(4k_{1} - 2k + 1) \\quad (B)\\]\nwhich is divisible by 9.\nWhy: \\(36k_{1}\\), \\(18k\\) and 9 are all multiples of 9, and \\(4k_{1} - 2k + 1\\) is an integer.",
+              "Step 5: Conclusion\nThus \\(S(k + 1)\\) is true whenever \\(S(k)\\) is true. Since both the conditions are satisfied, by the principle of mathematical induction the given statement is true for all integers \\(n \\ge 1\\).",
+              "Check:\n\\(n = 2\\): \\(16 + 12 - 1 = 27 = 9 \\times 3\\). \\(n = 3\\): \\(64 + 18 - 1 = 81 = 9 \\times 9\\). Both divisible by 9."
+            ],
+            "answer": "Hence proved: \\(4^{n} + 6n - 1\\) is divisible by 9 for every \\(n \\in \\mathbb{N}\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Use mathematical induction to prove that \\(\\sum_{k=1}^{n} \\frac{1}{(2k - 1)(2k + 1)} = \\frac{n}{2n + 1}\\), whenever \\(n\\) is a positive integer.",
+            "steps": [
+              "Given: \\(S(n): \\sum_{k=1}^{n} \\frac{1}{(2k - 1)(2k + 1)} = \\frac{n}{2n + 1}\\), i.e.\n\\[\\dfrac{1}{1 \\cdot 3} + \\dfrac{1}{3 \\cdot 5} + \\ldots\\]\n\\[+ \\dfrac{1}{(2n - 1)(2n + 1)} = \\dfrac{n}{2n + 1}\\]\nTo prove: \\(S(n)\\) for every positive integer \\(n\\).\nMethod: induction. Here \\(k\\) is already used as the counter inside the sum, so the book uses \\(m\\) for the induction step.",
+              "Step 1: Base case (n = 1)\nThe sum has only the term with \\(k = 1\\):\n\\[\\dfrac{1}{1 \\cdot 3} = \\dfrac{1}{2 \\cdot 1 + 1}\\]\n\\[\\Rightarrow \\dfrac{1}{3} = \\dfrac{1}{3}\\]\nThe book then writes \"Thus S(0) is true\" (a misprint for \\(S(1)\\)); the base case is satisfied.\nWhy: put \\(k = 1\\) on the left and \\(n = 1\\) on the right.",
+              "Step 2: Induction hypothesis\nLet us assume that \\(S(n)\\) is true for \\(n = m\\), that is,\n\\[\\sum_{k=1}^{m} \\dfrac{1}{(2k - 1)(2k + 1)} = \\dfrac{m}{2m + 1} \\quad (A)\\]",
+              "Step 3: S(m + 1): add the next term\nThe term for \\(k = m + 1\\) is \\(\\frac{1}{(2m + 1)(2m + 3)}\\). The book prints the upper limit of this sum as\n\\[\\sum_{k=1}^{m-1} \\dfrac{1}{(2k - 1)(2k + 1)}\\]\n(misprint for \\(m + 1\\)). Using (A):\n\\[\\sum_{k=1}^{m+1} \\dfrac{1}{(2k - 1)(2k + 1)}\\]\n\\[= \\dfrac{m}{2m + 1} + \\dfrac{1}{(2m + 1)(2m + 3)}\\]\nWhy: the sum up to \\(m + 1\\) is the sum up to \\(m\\) plus one more term; \\(2(m + 1) - 1 = 2m + 1\\) and \\(2(m + 1) + 1 = 2m + 3\\).",
+              "Step 4: Add the fractions\n\\[= \\dfrac{m(2m + 3) + 1}{(2m + 1)(2m + 3)}\\]\n\\[= \\dfrac{2m^{2} + 3m + 1}{(2m + 1)(2m + 3)}\\]\n\\[= \\dfrac{(m + 1)(2m + 1)}{(2m + 1)(2m + 3)}\\]\nWhy: the common denominator is \\((2m + 1)(2m + 3)\\); then \\(2m^{2} + 3m + 1 = (m + 1)(2m + 1)\\), and \\((2m + 1)\\) cancels.",
+              "Step 5: Reach the form n/(2n + 1) with n = m + 1\n\\[= \\dfrac{m + 1}{2m + 3} = \\dfrac{m + 1}{2m + 2 + 1}\\]\n\\[= \\dfrac{m + 1}{2(m + 1) + 1} \\quad (B)\\]\nThis shows that S(k + 1) is true when S(k) is true (the book switches to the letter \\(k\\); it means \\(S(m + 1)\\) is true when \\(S(m)\\) is true).\nWhy: \\(\\frac{n}{2n + 1}\\) with \\(n = m + 1\\) is exactly \\(\\frac{m + 1}{2(m + 1) + 1}\\).",
+              "Step 6: Conclusion\nSince both the conditions are satisfied, therefore, by the principle of mathematical induction, \\(S(n)\\) is true for each \\(n \\in W\\). (Correctly: for each \\(n \\in \\mathbb{N}\\); the statement starts at \\(n = 1\\).)",
+              "Check:\n\\(n = 2\\): \\(\\frac{1}{3} + \\frac{1}{15} = \\frac{6}{15} = \\frac{2}{5}\\), and \\(\\frac{2}{2(2) + 1} = \\frac{2}{5}\\). Equal."
+            ],
+            "answer": "Hence proved: \\(\\sum_{k=1}^{n} \\frac{1}{(2k - 1)(2k + 1)} = \\frac{n}{2n + 1}\\) for every positive integer \\(n\\).",
+            "book_errors": [
+              "Thus S(0) is true",
+              "\\[\\sum_{k=1}^{m-1} \\dfrac{1}{(2k - 1)(2k + 1)}\\]",
+              "This shows that S(k + 1) is true when S(k) is true",
+              "\\(n \\in W\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 6 has four slips:\n1. \"Thus S(0) is true\" should be \"Thus \\(S(1)\\) is true\" (the base case is \\(n = 1\\)).\n2. In \\(S(m + 1)\\) the upper limit of the sum is printed \\(m - 1\\); it should be \\(m + 1\\).\n3. \"This shows that \\(S(k + 1)\\) is true when \\(S(k)\\) is true\" should use \\(m\\): \\(S(m + 1)\\) is true when \\(S(m)\\) is true.\n4. The conclusion says \\(n \\in W\\); the statement is for positive integers, so \\(n \\in \\mathbb{N}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A few true cases never prove a statement for all \\(n\\) (\\(n^{2} - n + 41\\) is prime for \\(n = 1\\) to 40 but not for 41). One counter example is enough to disprove it.\n2. Mathematical induction has three parts: Base Case (\\(S(1)\\) true), Induction of Hypothesis (\\(S(k)\\) true \\(\\Rightarrow\\) \\(S(k + 1)\\) true) and Conclusion.\n3. Start the base case at the first value in the statement: \\(n = 1\\) usually, \\(n = 0\\) for non-negative integers (Example 4).\n4. For a sum: write \\(S(k)\\) as (A) and \\(S(k + 1)\\) as (B), add the \\((k + 1)\\)th term to both sides of (A), and simplify to the right side of (B). Taking a common factor out first saves work.\n5. For divisibility: write the hypothesis as an equation (\\(= 9k_{1}\\)), express \\(S(k + 1)\\) through \\(4^{k}\\) and substitute (Example 5); or split \\(S(k + 1)\\) into \\(S(k)\\) plus an obvious integer (Example 3)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistakes",
+            "text": "1. Skipping the base case, or only saying \"true for \\(n = 1\\)\" without working out both sides.\n2. Proving \\(S(k)\\) instead of assuming it. \\(S(k)\\) is the assumption; \\(S(k + 1)\\) is what must be shown.\n3. Writing the wrong next term. The \\((k + 1)\\)th term is found by putting \\(n = k + 1\\) in the general term: \\(3(k + 1)\\) in Example 1, \\((k + 1)^{2}\\) in Example 2, not \\(3k + 1\\) or \\(k^{2} + 1\\).\n4. Adding the new term to only one side of (A). Whatever is added on the left must be added on the right too.\n5. Expanding everything into a big polynomial instead of taking the common factor \\((k + 1)\\) out first; the algebra becomes long and error-prone."
+          }
+        ]
+      }
+    }
+  ]
+}

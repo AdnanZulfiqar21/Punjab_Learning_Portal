@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 154,
+          "pdf_to": 154,
+          "note": "Exercise 8.1, Question 7: book page 149 (PDF 154); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7. [Prove by mathematical induction:] \\(1 + nx \\le (1 + x)^n\\) for \\(n \\ge 2\\) and \\(x > -1\\).",
+            "explanation": "An inequality containing a letter \\(x\\), proved by extended induction on \\(n\\) starting at \\(n = 2\\) (this is Bernoulli's inequality).\nThe condition \\(x > -1\\) makes \\(1 + x\\) positive, so we may multiply by it safely.\nPlan: base case by expanding \\((1 + x)^2\\); multiply the hypothesis by \\(1 + x\\); drop the term \\(kx^2 \\ge 0\\).",
+            "steps": [
+              "Given: \\(S(n): (1 + x)^n \\ge 1 + nx\\), with \\(x > -1\\) fixed.\nTo prove: \\(S(n)\\) is true for every integer \\(n \\ge 2\\).\nMethod: Extended mathematical induction on \\(n\\). From \\(x > -1\\): \\(1 + x > 0\\).",
+              "Base case: put \\(n = 2\\)\n\\[(1 + x)^2 = 1 + 2x + x^2\\]\n\\[\\ge 1 + 2x\\]\nSo \\(S(2)\\) is true.\nWhy: \\(x^2 \\ge 0\\) for every real \\(x\\); removing it can only make the right side smaller or equal.",
+              "Induction hypothesis: assume \\(S(k)\\), \\(k \\ge 2\\)\n\\[(1 + x)^k \\ge 1 + kx \\quad (A)\\]\nWhy: We suppose the inequality holds for some integer \\(k \\ge 2\\).",
+              "Target \\(S(k + 1)\\)\n\\[(1 + x)^{k+1} \\ge 1 + (k + 1)x\\]\nWhy: Put \\(n = k + 1\\).",
+              "Inductive step: multiply (A) by \\(1 + x\\)\n\\[(1 + x)^{k+1} = (1 + x)^k(1 + x)\\]\n\\[\\ge (1 + kx)(1 + x)\\]\nWhy: \\(1 + x > 0\\), so multiplying both sides of (A) by it keeps the sign \\(\\ge\\).",
+              "Expand and drop the extra term\n\\[(1 + kx)(1 + x) = 1 + x + kx + kx^2\\]\n\\[= 1 + (k + 1)x + kx^2\\]\n\\[\\ge 1 + (k + 1)x\\]\nWhy: \\(k > 0\\) and \\(x^2 \\ge 0\\), so \\(kx^2 \\ge 0\\); removing it gives \"\\(\\ge\\)\".",
+              "Join the results\n\\[(1 + x)^{k+1} \\ge 1 + (k + 1)x\\]\nSo \\(S(k + 1)\\) is true.\nWhy: The two previous steps form one chain of \\(\\ge\\) signs.",
+              "Conclusion\n\\(S(2)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\) for \\(k \\ge 2\\). By the principle of extended mathematical induction, \\(1 + nx \\le (1 + x)^n\\) for every integer \\(n \\ge 2\\) and every \\(x > -1\\).\nWhy: Both conditions of the principle hold.",
+              "Check: \\(n = 3,\\ x = -\\tfrac{1}{2}\\)\n\\[(1 - \\tfrac{1}{2})^3 = \\tfrac{1}{8}\\]\n\\[1 + 3(-\\tfrac{1}{2}) = -\\tfrac{1}{2} \\le \\tfrac{1}{8} \\;\\checkmark\\]\nWhy: It holds even for a negative \\(x\\) (greater than \\(-1\\))."
+            ],
+            "final_answer": "Hence proved: \\(1 + nx \\le (1 + x)^n\\) for every integer \\(n \\ge 2\\) and \\(x > -1\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

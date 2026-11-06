@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH11-EXERCISE-11-3-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch11",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch11/u-exercise-11-3-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 221,
+          "pdf_to": 222,
+          "note": "Exercise 11.3, Question 5 (a)-(c): Ferris wheel, diameter 60 ft, lowest point 6 ft, 80 s per turn (stem PDF 221, parts PDF 222). Answer key PDF 309."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(a)",
+            "prompt": "5 A giant Ferris wheel has a diameter of 60 feet. The lowest point of the wheel is located 6 feet above the ground. The wheel completes one full revolution every 80 seconds. (a) Model an equation that represent the height \\(h(t)\\) of a rider on the Ferris wheel at any given time \\(t\\).",
+            "explanation": "A modelling question: build \\(h(t) = a + b\\cos(ct)\\) from the facts.\nWe need the centre height, the radius and \\(c\\).\nPlan: radius \\(=\\) half the diameter; centre \\(=\\) lowest point \\(+\\) radius; \\(c = \\frac{2\\pi}{\\text{period}}\\); start at the bottom.",
+            "steps": [
+              "Given: diameter 60 ft, lowest point 6 ft above the ground, one revolution in 80 s.\nTo find: a formula for \\(h(t)\\).\nMethod: Height on a turning wheel \\(= \\text{centre} \\pm \\text{radius} \\times \\cos(\\ldots)\\). We take \\(t = 0\\) when the rider gets on at the lowest point (the usual assumption; the question does not say), so we use \\(-\\cos\\), which starts at its lowest value.",
+              "Radius (amplitude)\n\\[r = \\tfrac{60}{2} = 30 \\text{ ft}\\]\nWhy: The rider goes 30 ft above and 30 ft below the centre.",
+              "Height of the centre (midline)\n\\[a = 6 + 30 = 36 \\text{ ft}\\]\nWhy: The lowest point is one radius below the centre.",
+              "Angular speed \\(c\\)\n\\[c = \\dfrac{2\\pi}{80} = \\dfrac{\\pi}{40}\\]\nWhy: One revolution is \\(2\\pi\\) radians in 80 s, so \\(\\frac{2\\pi}{c} = 80\\).",
+              "Write the model\n\\[h(t) = 36 - 30\\cos\\left(\\tfrac{\\pi}{40}t\\right)\\]\nWhy: At \\(t = 0\\), \\(\\cos 0 = 1\\) gives \\(36 - 30 = 6\\): the rider starts at the lowest point.",
+              "Check\n\\[h(0) = 36 - 30 = 6 \\;\\checkmark\\]\n\\[h(40) = 36 - 30\\cos\\pi = 66 \\;\\checkmark\\]\n\\[h(80) = 6 \\;\\checkmark\\]\nWhy: Lowest at the start, highest after half a turn, back at the bottom after one full turn (80 s)."
+            ],
+            "final_answer": "\\(h(t) = 36 - 30\\cos\\left(\\tfrac{\\pi}{40}t\\right)\\) (rider at the lowest point at \\(t = 0\\))",
+            "answer_figure": {
+              "$asset": "c11-math-ch11-fig-ex11-3-q5-ferris",
+              "alt": "Graph of h(t) = 36 minus 30 cos(pi t over 40) for t from 0 to 80 seconds. The curve starts at (0, 6), rises through the centre line h = 36 at t = 20, peaks at (40, 66), passes (35, 63.72), and returns to (80, 6).",
+              "caption": "Exercise 11.3 Q5: height of a rider over one revolution (plotted from the model; original drawing)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(b)",
+            "prompt": "5 A giant Ferris wheel has a diameter of 60 feet. The lowest point of the wheel is located 6 feet above the ground. The wheel completes one full revolution every 80 seconds. (b) Find the maximum height of a rider.",
+            "explanation": "The highest point of the wheel.\nWe need the largest value of \\(h(t)\\).\nPlan: use \\(-1 \\le \\cos \\le 1\\) in the model.",
+            "steps": [
+              "Given: \\(h(t) = 36 - 30\\cos\\left(\\tfrac{\\pi}{40}t\\right)\\).\nTo find: the maximum of \\(h\\).\nMethod: Cosine lies between \\(-1\\) and \\(1\\); the minus sign makes \\(h\\) largest when cosine is \\(-1\\).",
+              "Range of the cosine part\n\\[-1 \\le \\cos\\left(\\tfrac{\\pi}{40}t\\right) \\le 1\\]\n\\[30 \\ge -30\\cos\\left(\\tfrac{\\pi}{40}t\\right) \\ge -30\\]\nWhy: Multiplying by \\(-30\\) reverses the signs.",
+              "Add 36\n\\[66 \\ge h(t) \\ge 6\\]\nWhy: 36 is the centre height.",
+              "Check\n\\[h(40) = 36 - 30(-1) = 66\\]\n\\[\\text{Top} = 6 + 60 = 66 \\;\\checkmark\\]\nWhy: Lowest point plus the diameter gives the same top height."
+            ],
+            "final_answer": "Maximum height \\(= 66\\) feet (at \\(t = 40\\) s)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(c)",
+            "prompt": "5 A giant Ferris wheel has a diameter of 60 feet. The lowest point of the wheel is located 6 feet above the ground. The wheel completes one full revolution every 80 seconds. (c) Find the height of the rider from the ground after 35 seconds.",
+            "explanation": "Substitution into the model from part (a).\nWe need \\(h(35)\\).\nPlan: work out the angle \\(\\frac{35\\pi}{40}\\), its cosine, then \\(h\\).",
+            "steps": [
+              "Given: \\(h(t) = 36 - 30\\cos\\left(\\tfrac{\\pi}{40}t\\right)\\), \\(t = 35\\).\nTo find: \\(h(35)\\).\nMethod: Substitute; \\(\\frac{7\\pi}{8} = 157.5^{\\circ}\\) is in Quadrant II, where cosine is negative.",
+              "Work out the angle\n\\[\\tfrac{\\pi}{40}(35) = \\tfrac{7\\pi}{8} = 157.5^{\\circ}\\]\nWhy: \\(\\frac{7}{8} \\times 180^{\\circ} = 157.5^{\\circ}\\).",
+              "Find the cosine\n\\[\\cos 157.5^{\\circ} = -\\cos 22.5^{\\circ}\\]\n\\[\\approx -0.92388\\]\nWhy: \\(\\cos(180^{\\circ} - \\theta) = -\\cos\\theta\\).",
+              "Find \\(h\\)\n\\[h(35) = 36 - 30(-0.92388)\\]\n\\[= 36 + 27.716\\]\n\\[\\approx 63.72 \\text{ ft}\\]\nWhy: Minus a negative is a plus.",
+              "Check\n\\[6 \\le 63.72 \\le 66 \\;\\checkmark\\]\nWhy: 35 s is just before the top (40 s), so the rider should be a little below 66 ft, and is."
+            ],
+            "final_answer": "\\(h(35) \\approx 63.72\\) feet"
+          }
+        ]
+      }
+    }
+  ]
+}

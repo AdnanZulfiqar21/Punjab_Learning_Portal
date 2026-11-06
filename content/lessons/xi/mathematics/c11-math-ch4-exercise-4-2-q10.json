@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-2-Q10",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-2-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 65,
+          "pdf_to": 65,
+          "note": "Exercise 4.2, Question 10: Inverse of A and A^{-1}A = I_3 (book page 60)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10. Find the inverse of \\(A = \\begin{bmatrix} 1 & 2 & 1 \\\\ -5 & 0 & 4 \\\\ 5 & 4 & 0 \\end{bmatrix}\\) and show that \\(A^{-1}A = I_3\\).",
+            "explanation": "We must find the inverse of a \\(3 \\times 3\\) matrix and then verify it.\nPlan: all nine cofactors, \\(|A|\\), adjoint (transpose of the cofactor matrix), \\(A^{-1} = \\frac{1}{|A|}\\operatorname{adj}A\\), then multiply \\(A^{-1}A\\).",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix} 1 & 2 & 1 \\\\ -5 & 0 & 4 \\\\ 5 & 4 & 0 \\end{bmatrix}\\)\nTo find: \\(A^{-1}\\), and to show \\(A^{-1}A = I_3\\).\nMethod: \\(A^{-1} = \\frac{1}{|A|}\\operatorname{adj}A\\), where \\(\\operatorname{adj}A\\) is the transpose of the matrix of cofactors; it exists only if \\(|A| \\neq 0\\).",
+              "Cofactors of row 1\n\\[A_{11} = +(0 \\cdot 0 - 4 \\cdot 4) = -16\\]\n\\[A_{12} = -((-5)(0) - (4)(5)) = 20\\]\n\\[A_{13} = +((-5)(4) - (0)(5)) = -20\\]\nWhy: Cover each entry's row and column; signs \\(+,\\,-,\\,+\\).",
+              "Cofactors of row 2\n\\[A_{21} = -(2 \\cdot 0 - 1 \\cdot 4) = 4\\]\n\\[A_{22} = +(1 \\cdot 0 - 1 \\cdot 5) = -5\\]\n\\[A_{23} = -(1 \\cdot 4 - 2 \\cdot 5) = 6\\]\nWhy: Row 2 signs are \\(-,\\,+,\\,-\\).",
+              "Cofactors of row 3\n\\[A_{31} = +(2 \\cdot 4 - 1 \\cdot 0) = 8\\]\n\\[A_{32} = -(1 \\cdot 4 - 1 \\cdot (-5)) = -9\\]\n\\[A_{33} = +(1 \\cdot 0 - 2 \\cdot (-5)) = 10\\]\nWhy: Row 3 signs are \\(+,\\,-,\\,+\\).",
+              "\\(|A|\\) (expand along row 1)\n\\[|A| = 1(-16) + 2(20) + 1(-20)\\]\n\\[= -16 + 40 - 20 = 4 \\neq 0\\]\nWhy: Row 1 entries times their cofactors. \\(|A| \\neq 0\\), so \\(A\\) is non-singular and \\(A^{-1}\\) exists.",
+              "Adjoint (transpose of the cofactor matrix)\n\\[\\operatorname{adj}A = \\begin{bmatrix} -16 & 4 & 8 \\\\ 20 & -5 & -9 \\\\ -20 & 6 & 10 \\end{bmatrix}\\]\nWhy: The cofactors of row 1 \\((-16, 20, -20)\\) become column 1, and so on.",
+              "Inverse\n\\[A^{-1} = \\dfrac{1}{4}\\begin{bmatrix} -16 & 4 & 8 \\\\ 20 & -5 & -9 \\\\ -20 & 6 & 10 \\end{bmatrix}\\]\n\\[= \\begin{bmatrix} -4 & 1 & 2 \\\\ 5 & -\\frac{5}{4} & -\\frac{9}{4} \\\\ -5 & \\frac{3}{2} & \\frac{5}{2} \\end{bmatrix}\\]\nWhy: Divide every entry of \\(\\operatorname{adj}A\\) by \\(|A| = 4\\).",
+              "Show \\(A^{-1}A = I_3\\)\n\\[(\\operatorname{adj}A)A = \\begin{bmatrix} 4 & 0 & 0 \\\\ 0 & 4 & 0 \\\\ 0 & 0 & 4 \\end{bmatrix}\\]\nWhy: Row 1 of adj \\(A\\) times columns of \\(A\\): \\(-16 - 20 + 40 = 4\\), \\(-32 + 0 + 32 = 0\\), \\(-16 + 16 + 0 = 0\\). Row 2: \\(20 + 25 - 45 = 0\\), \\(40 + 0 - 36 = 4\\), \\(20 - 20 + 0 = 0\\). Row 3: \\(-20 - 30 + 50 = 0\\), \\(-40 + 0 + 40 = 0\\), \\(-20 + 24 + 0 = 4\\).",
+              "Divide by \\(|A|\\)\n\\[A^{-1}A = \\dfrac{1}{4}\\begin{bmatrix} 4 & 0 & 0 \\\\ 0 & 4 & 0 \\\\ 0 & 0 & 4 \\end{bmatrix}\\]\n\\[= \\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix} = I_3\\]\nWhy: \\(A^{-1}A = \\frac{1}{4}(\\operatorname{adj}A)A\\); the diagonal 4s become 1s."
+            ],
+            "final_answer": "\\(A^{-1} = \\frac{1}{4}\\begin{bmatrix} -16 & 4 & 8 \\\\ 20 & -5 & -9 \\\\ -20 & 6 & 10 \\end{bmatrix} = \\begin{bmatrix} -4 & 1 & 2 \\\\ 5 & -\\frac{5}{4} & -\\frac{9}{4} \\\\ -5 & \\frac{3}{2} & \\frac{5}{2} \\end{bmatrix}\\), and \\(A^{-1}A = I_3\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

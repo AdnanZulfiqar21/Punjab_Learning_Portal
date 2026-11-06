@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-2-Q7-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-2-q7",
+      "title": "Question 7 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 65,
+          "pdf_to": 65,
+          "note": "Exercise 4.2, Question 7: Find |AA^t| and |A^tA|, parts (i)-(ii) (book page 60)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH4-EXERCISE-4-2-Q7",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(i)",
+            "prompt": "7 (i) Find \\(|AA^{t}|\\) and \\(|A^{t}A|\\) if \\(A = \\begin{bmatrix} -3 & 2 & -1 \\\\ 2 & 1 & 3 \\end{bmatrix}\\).",
+            "explanation": "\\(A\\) ka order \\(2 \\times 3\\) hai, yani yeh square nahi, is liye \\(A\\) ka apna determinant nahi hota. Lekin \\(AA^{t}\\) (\\(2 \\times 2\\)) aur \\(A^{t}A\\) (\\(3 \\times 3\\)) dono square hain.\nHumein dono products bana kar un ke determinants nikalne hain.\nPlan: pehle \\(A^{t}\\), phir multiplication (row \\(\\times\\) column), phir determinants.",
+            "steps": [
+              "Diya gaya hai: \\(A = \\begin{bmatrix} -3 & 2 & -1 \\\\ 2 & 1 & 3 \\end{bmatrix}\\)\nHumein find karna hai: \\(|AA^{t}|\\) aur \\(|A^{t}A|\\).\nTareeqa: Transpose (rows ko columns bana dena), matrix multiplication (pehle matrix ki row \\(\\cdot\\) doosre ka column), phir determinant ke rules. Order check: \\((2 \\times 3)(3 \\times 2) = 2 \\times 2\\) aur \\((3 \\times 2)(2 \\times 3) = 3 \\times 3\\).",
+              "Transpose likhein\n\\[A^{t} = \\begin{bmatrix} -3 & 2 \\\\ 2 & 1 \\\\ -1 & 3 \\end{bmatrix}\\]\nKyun: \\(A\\) ki row 1 ab \\(A^{t}\\) ka column 1 hai aur row 2 column 2. Order ulat kar \\(3 \\times 2\\) ho gaya.",
+              "\\(AA^{t}\\) nikalein (\\(2 \\times 2\\))\n\\[(1,1):\\ 9 + 4 + 1 = 14\\]\n\\[(1,2):\\ -6 + 2 - 3 = -7\\]\n\\[(2,1):\\ -6 + 2 - 3 = -7\\]\n\\[(2,2):\\ 4 + 1 + 9 = 14\\]\n\\[AA^{t} = \\begin{bmatrix} 14 & -7 \\\\ -7 & 14 \\end{bmatrix}\\]\nKyun: Entry \\((i, j)\\) = \\(A\\) ki row \\(i\\) \\(\\times\\) \\(A^{t}\\) ka column \\(j\\) (jo asal mein \\(A\\) ki row \\(j\\) hai). Masalan \\((1,1)\\): \\((-3)(-3) + (2)(2) + (-1)(-1)\\).\nDhyan dein: \\(AA^{t}\\) hamesha symmetric hota hai (\\((1,2) = (2,1)\\)); agar aap ke jawab mein yeh barabar na hon to multiplication dobara dekhein.",
+              "\\(|AA^{t}|\\)\n\\[|AA^{t}| = (14)(14) - (-7)(-7)\\]\n\\[= 196 - 49 = 147\\]\nKyun: \\(2 \\times 2\\) rule: leading diagonal \\(14 \\times 14 = 196\\), doosra diagonal \\((-7)(-7) = +49\\), aur dono ka farq 147. Do negative numbers ka product positive hota hai, yeh na bhoolein.",
+              "\\(A^{t}A\\) nikalein (\\(3 \\times 3\\))\n\\[A^{t}A = \\begin{bmatrix} 13 & -4 & 9 \\\\ -4 & 5 & 1 \\\\ 9 & 1 & 10 \\end{bmatrix}\\]\nKyun: Entry \\((i, j)\\) = \\(A\\) ka column \\(i\\) \\(\\cdot\\) \\(A\\) ka column \\(j\\). Columns hain \\((-3, 2)\\), \\((2, 1)\\), \\((-1, 3)\\). Masalan \\((1,1) = 9 + 4 = 13\\), \\((1,2) = -6 + 2 = -4\\), \\((1,3) = 3 + 6 = 9\\), \\((2,2) = 4 + 1 = 5\\), \\((2,3) = -2 + 3 = 1\\), \\((3,3) = 1 + 9 = 10\\).",
+              "\\(|A^{t}A|\\) (row 1 ke along)\n\\[= 13(50 - 1) + 4(-40 - 9) + 9(-4 - 45)\\]\n\\[= 637 - 196 - 441\\]\n\\[= 0\\]\nKyun: Signs \\(+,\\,-,\\,+\\); minors \\(49, -49, -49\\). Beech wali term: \\(-(-4)(-49) = -196\\). Teeno jama karne se zero.",
+              "Tasdeeq\n\\[R_1 + R_2 = (9, 1, 10) = R_3\\]\nKyun: Teesri row pehli do ka jama hai, to \\(R_3 - R_1 - R_2\\) zero row ban jati hai aur determinant zero hona hi chahiye. Asal wajah: \\(A^{t}A\\) sirf do numbers wale columns se bana hai, is liye us ka \\(3 \\times 3\\) determinant zero hi aata hai. Yaad rakhein: \\(|AA^{t}|\\) aur \\(|A^{t}A|\\) aksar barabar nahi hote jab \\(A\\) square na ho."
+            ],
+            "final_answer": "\\(|AA^{t}| = 147,\\quad |A^{t}A| = 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(ii)",
+            "prompt": "7 (ii) Find \\(|AA^{t}|\\) and \\(|A^{t}A|\\) if \\(A = \\begin{bmatrix} 3 & 1 \\\\ 2 & 2 \\\\ 1 & 3 \\end{bmatrix}\\).",
+            "explanation": "Ab \\(A\\) ka order \\(3 \\times 2\\) hai: is liye \\(AA^{t}\\) \\(3 \\times 3\\) aur \\(A^{t}A\\) \\(2 \\times 2\\) banega (part (i) ka ulta).\nPlan: \\(A^{t}\\) likhein, dono products banayein, determinants nikalein.",
+            "steps": [
+              "Diya gaya hai: \\(A = \\begin{bmatrix} 3 & 1 \\\\ 2 & 2 \\\\ 1 & 3 \\end{bmatrix}\\)\nHumein find karna hai: \\(|AA^{t}|\\) aur \\(|A^{t}A|\\).\nTareeqa: Transpose, multiplication, phir determinants. Order: \\((3 \\times 2)(2 \\times 3) = 3 \\times 3\\) aur \\((2 \\times 3)(3 \\times 2) = 2 \\times 2\\).",
+              "Transpose likhein\n\\[A^{t} = \\begin{bmatrix} 3 & 2 & 1 \\\\ 1 & 2 & 3 \\end{bmatrix}\\]\nKyun: \\(A\\) ke columns ab \\(A^{t}\\) ki rows hain: pehla column \\((3, 2, 1)\\) pehli row ban gaya aur doosra column \\((1, 2, 3)\\) doosri row. Order \\(3 \\times 2\\) se \\(2 \\times 3\\) ho gaya.",
+              "\\(AA^{t}\\) nikalein (\\(3 \\times 3\\))\n\\[AA^{t} = \\begin{bmatrix} 10 & 8 & 6 \\\\ 8 & 8 & 8 \\\\ 6 & 8 & 10 \\end{bmatrix}\\]\nKyun: Entry \\((i, j)\\) = \\(A\\) ki row \\(i\\) \\(\\cdot\\) \\(A\\) ki row \\(j\\). Rows hain \\((3,1)\\), \\((2,2)\\), \\((1,3)\\). Masalan \\((1,1) = 9 + 1 = 10\\), \\((1,2) = 6 + 2 = 8\\), \\((1,3) = 3 + 3 = 6\\), \\((2,2) = 4 + 4 = 8\\), \\((2,3) = 2 + 6 = 8\\), \\((3,3) = 1 + 9 = 10\\).",
+              "\\(|AA^{t}|\\) (row 1 ke along)\n\\[= 10(80 - 64) - 8(80 - 48) + 6(64 - 48)\\]\n\\[= 160 - 256 + 96 = 0\\]\nKyun: Signs \\(+,\\,-,\\,+\\); minors \\(16, 32, 16\\). \\(160 + 96 = 256\\), to farq zero.",
+              "\\(A^{t}A\\) nikalein (\\(2 \\times 2\\))\n\\[A^{t}A = \\begin{bmatrix} 9+4+1 & 3+4+3 \\\\ 3+4+3 & 1+4+9 \\end{bmatrix}\\]\n\\[= \\begin{bmatrix} 14 & 10 \\\\ 10 & 14 \\end{bmatrix}\\]\nKyun: Entry \\((i, j)\\) = \\(A\\) ka column \\(i\\) \\(\\cdot\\) column \\(j\\). Columns hain \\((3, 2, 1)\\) aur \\((1, 2, 3)\\).",
+              "\\(|A^{t}A|\\)\n\\[= (14)(14) - (10)(10)\\]\n\\[= 196 - 100 = 96\\]\nKyun: \\(2 \\times 2\\) rule: \\(196 - 100 = 96\\).",
+              "Tasdeeq\n\\[R_1 + R_3 = (16, 16, 16) = 2R_2\\]\nKyun: \\(AA^{t}\\) mein \\(R_1 + R_3 - 2R_2\\) zero row hai, is liye \\(|AA^{t}| = 0\\) bilkul sahi hai. Dhyan dein: is baar bara (\\(3 \\times 3\\)) product zero aaya aur chhota (\\(2 \\times 2\\)) non-zero; part (i) mein bhi yahi hua tha."
+            ],
+            "final_answer": "\\(|AA^{t}| = 0,\\quad |A^{t}A| = 96\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

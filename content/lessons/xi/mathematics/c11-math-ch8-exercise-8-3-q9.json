@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-3-Q9",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-3-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 167,
+          "pdf_to": 167,
+          "note": "Exercise 8.3, Question 9: book page 162 (PDF 167); proof question, no answer in the key (PDF 307)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9. If \\(y = \\frac{1}{3} + \\frac{1 \\cdot 3}{2!}\\left(\\frac{1}{3}\\right)^{2} + \\frac{1 \\cdot 3 \\cdot 5}{3!}\\left(\\frac{1}{3}\\right)^{3} + \\dots\\), prove that \\(y^{2} + 2y - 2 = 0\\).",
+            "explanation": "The series for \\(y\\) starts without the leading 1, so \\(1 + y\\) is a full binomial series.\nWe must find its sum, then show \\(y^{2} + 2y - 2 = 0\\).\nPlan: Compare the second and third terms with \\(nx\\) and \\(\\dfrac{n(n - 1)}{2!}x^{2}\\): two equations give \\(n\\) and \\(x\\). Then sum, find \\(y\\), substitute.",
+            "steps": [
+              "Given: \\(y = \\frac{1}{3} + \\frac{1 \\cdot 3}{2!}(\\frac{1}{3})^{2} + \\frac{1 \\cdot 3 \\cdot 5}{3!}(\\frac{1}{3})^{3} + \\dots\\)\nTo prove: \\(y^{2} + 2y - 2 = 0\\).\nMethod: Add 1 to both sides; \\(1 + y\\) is \\((1 + x)^{n}\\) for some \\(n\\), \\(x\\). Compare the second and third terms with \\(nx\\) and \\(\\dfrac{n(n - 1)}{2!}x^{2}\\): two equations give \\(n\\) and \\(x\\).",
+              "Add 1\n\\[1 + y = 1 + \\dfrac{1}{3} + \\dfrac{1 \\cdot 3}{2!}\\left(\\dfrac{1}{3}\\right)^{2} + \\dots\\]\nWhy: A binomial series always begins with 1.",
+              "Two equations\n\\[nx = \\dfrac{1}{3} \\quad (1)\\]\n\\[\\dfrac{n(n - 1)}{2}x^{2} = \\dfrac{3}{2} \\cdot \\dfrac{1}{9} = \\dfrac{1}{6} \\quad (2)\\]\nWhy: Match the second and third terms.",
+              "Find \\(n\\) and \\(x\\)\n\\[\\dfrac{n(n - 1)x^{2}}{(nx)^{2}} = \\dfrac{1/3}{1/9} = 3\\]\n\\[\\dfrac{n - 1}{n} = 3 \\Rightarrow n = -\\dfrac{1}{2}\\]\n\\[x = \\dfrac{1/3}{-1/2} = -\\dfrac{2}{3}\\]\nWhy: \\(n(n - 1)x^{2} = \\tfrac{1}{3}\\) from (2); divide by the square of (1).",
+              "Check the fourth term\n\\[\\dfrac{(-\\frac{1}{2})(-\\frac{3}{2})(-\\frac{5}{2})}{6}\\left(-\\dfrac{2}{3}\\right)^{3}\\]\n\\[= \\left(-\\dfrac{5}{16}\\right)\\left(-\\dfrac{8}{27}\\right) = \\dfrac{5}{54}\\]\n\\[\\dfrac{1 \\cdot 3 \\cdot 5}{3!} \\cdot \\dfrac{1}{27} = \\dfrac{15}{162} = \\dfrac{5}{54}\\ \\checkmark\\]\nWhy: The identification is confirmed.",
+              "Sum\n\\[1 + y = \\left(1 - \\dfrac{2}{3}\\right)^{-1/2} = \\left(\\dfrac{1}{3}\\right)^{-1/2}\\]\n\\[= \\sqrt{3}\\]\n\\[y = \\sqrt{3} - 1\\]\nWhy: \\(|x| = \\tfrac{2}{3} < 1\\), so the series converges.",
+              "Prove the equation\n\\[y + 1 = \\sqrt{3}\\]\n\\[(y + 1)^{2} = 3\\]\n\\[y^{2} + 2y + 1 = 3\\]\n\\[y^{2} + 2y - 2 = 0\\]\nWhy: Square both sides and move 3 to the left."
+            ],
+            "final_answer": "\\(1 + y = \\left(1 - \\frac{2}{3}\\right)^{-1/2} = \\sqrt{3}\\), so \\(y^{2} + 2y - 2 = 0\\). Hence proved."
+          }
+        ]
+      }
+    }
+  ]
+}

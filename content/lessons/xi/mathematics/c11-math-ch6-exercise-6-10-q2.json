@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-10-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-10-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 122,
+          "pdf_to": 122,
+          "note": "Exercise 6.10, Question 2: book p.117 (PDF 122; the 'Exercise 6.10' banner is blank in the scan; some + signs are faint, all confirmed by the key). Answer key PDF 305. Solution book PDF 578-595 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Sum the series: \\(1^2 - 2^2 + 3^2 - 4^2 + \\ldots + (2n - 1)^2 - (2n)^2\\)",
+            "explanation": "The signs alternate, so group the terms in pairs; each pair becomes one simple term.\nPlan: write the \\(k\\)th pair, simplify it, add the \\(n\\) pairs with the sigma formulas, check.",
+            "steps": [
+              "Given: \\(1^2 - 2^2 + 3^2 - 4^2 + \\ldots + (2n - 1)^2 - (2n)^2\\)\nTo find: the sum \\(S\\).\nMethod: Group into \\(n\\) pairs \\((2k - 1)^2 - (2k)^2\\), simplify, then use \\(\\sum 1 = n\\) and \\(\\sum k = \\frac{n(n + 1)}{2}\\).",
+              "Count the pairs and write the \\(k\\)th pair\n\\[(1^2 - 2^2) + (3^2 - 4^2) + \\cdots\\]\n\\[k\\text{th pair} = (2k - 1)^2 - (2k)^2\\]\nWhy: The series ends at \\((2n)^2\\): \\(2n\\) terms make \\(n\\) pairs. In the \\(k\\)th pair the odd number is \\(2k - 1\\), the even \\(2k\\).",
+              "Simplify the \\(k\\)th pair\n\\[(2k - 1)^2 - (2k)^2\\]\n\\[= (4k^2 - 4k + 1) - 4k^2\\]\n\\[= 1 - 4k\\]\nWhy: The \\(4k^2\\) terms cancel. (Also \\(a^2 - b^2 = (a - b)(a + b) = (-1)(4k - 1)\\).)",
+              "Add the \\(n\\) pairs\n\\[S = \\sum (1 - 4k) = n - 4 \\cdot \\dfrac{n(n + 1)}{2}\\]\n\\[= n - 2n^2 - 2n\\]\n\\[= -2n^2 - n = -n(2n + 1)\\]\nWhy: \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n + 1)}{2}\\); then collect and take out \\(-n\\).",
+              "Check with small \\(n\\)\n\\[n = 1:\\ 1 - 4 = -3 = -1(3) \\;\\checkmark\\]\n\\[n = 2:\\ 1 - 4 + 9 - 16 = -10\\]\n\\[-2(5) = -10 \\;\\checkmark\\]\nWhy: Direct addition matches the formula for \\(n = 1\\) and \\(n = 2\\)."
+            ],
+            "final_answer": "\\(S = -n(2n + 1)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Sum the series: \\(\\frac{1^2}{1} + \\frac{1^2 + 2^2}{2} + \\frac{1^2 + 2^2 + 3^2}{3} + \\ldots\\) to \\(n\\) terms",
+            "explanation": "The \\(k\\)th term is (sum of the first \\(k\\) squares) divided by \\(k\\).\nPlan: use the sum-of-squares formula, cancel \\(k\\), expand, add with the sigma formulas, check.",
+            "steps": [
+              "Given: \\(\\frac{1^2}{1} + \\frac{1^2 + 2^2}{2} + \\frac{1^2 + 2^2 + 3^2}{3} + \\ldots\\) to \\(n\\) terms\nTo find: \\(S_n\\).\nMethod: Write the \\(k\\)th term \\(T_k\\) as a polynomial in \\(k\\), then add all \\(n\\) terms with \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n + 1)}{2}\\), \\(\\sum k^2 = \\frac{n(n + 1)(2n + 1)}{6}\\), \\(\\sum k^3 = \\left[\\frac{n(n + 1)}{2}\\right]^2\\) (all sums from \\(k = 1\\) to \\(n\\)).",
+              "Find the \\(k\\)th term\n\\[T_k = \\dfrac{1^2 + 2^2 + \\cdots + k^2}{k}\\]\n\\[= \\dfrac{1}{k} \\cdot \\dfrac{k(k + 1)(2k + 1)}{6}\\]\n\\[= \\dfrac{(k + 1)(2k + 1)}{6}\\]\n\\[= \\dfrac{1}{6}(2k^2 + 3k + 1)\\]\nWhy: Use the sum-of-squares formula for the top; the \\(k\\) cancels.",
+              "Add all \\(n\\) terms with the sigma formulas\n\\[S_n = \\dfrac{1}{6}\\left[2\\sum k^2 + 3\\sum k + \\sum 1\\right]\\]\n\\[= \\dfrac{1}{6}\\left[\\dfrac{n(n + 1)(2n + 1)}{3} + \\dfrac{3n(n + 1)}{2} + n\\right]\\]\nWhy: Split the sigma; \\(\\frac{2}{6} = \\frac{1}{3}\\).",
+              "Take out \\(\\frac{n}{6}\\) and simplify\n\\[= \\dfrac{1}{6} \\cdot \\dfrac{n}{6}\\left[2(n + 1)(2n + 1) + 9(n + 1) + 6\\right]\\]\n\\[= \\dfrac{n}{36}(4n^2 + 6n + 2 + 9n + 9 + 6)\\]\n\\[= \\dfrac{n}{36}(4n^2 + 15n + 17)\\]\nWhy: Inside the bracket the common denominator is 6; \\(\\frac{1}{6} \\cdot \\frac{n}{6} = \\frac{n}{36}\\).",
+              "Check with a small \\(n\\)\n\\[n = 2:\\ 1 + \\dfrac{5}{2} = \\dfrac{7}{2}\\]\n\\[\\dfrac{2}{36}(16 + 30 + 17) = \\dfrac{126}{36} = \\dfrac{7}{2} \\;\\checkmark\\]\nWhy: Adding the first two terms directly gives the same value."
+            ],
+            "final_answer": "\\(S_n = \\frac{n}{36}(4n^2 + 15n + 17)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

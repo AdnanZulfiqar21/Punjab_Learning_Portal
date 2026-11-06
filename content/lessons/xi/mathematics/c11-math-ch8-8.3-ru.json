@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.3",
+      "title": "8.3 The Binomial Theorem When the Index n is a Negative Integer or a Fraction (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH8-8.3",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 162,
+          "pdf_to": 163,
+          "note": "Book p. 157-158: 8.3 Binomial Theorem when n is a negative integer or a fraction, binomial series (|x| < 1), Note box, Example 15, box of particular cases (i)-(vi) for n < 0"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab tak binomial theorem sirf positive integer powers (1, 2, 3, ...) ke liye tha. Lekin science aur maths mein aksar aisi powers aati hain jaise \\((1 + x)^{-1} = \\frac{1}{1 + x}\\) ya \\((1 + x)^{1/2} = \\sqrt{1 + x}\\). Is sabaq mein hum dekhenge ke jab power negative integer ya fraction ho to expansion kaisi hoti hai. Achhi khabar yeh hai ke formula taqreeban wahi hai; bas do nayi shartein (conditions) yaad rakhni hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Jab \\(n\\) negative integer ya fraction ho, to\n\\[(1 + x)^{n} = 1 + nx + \\dfrac{n(n-1)}{2!}x^{2}\\]\n\\[+ \\dfrac{n(n-1)(n-2)}{3!}x^{3} + \\dots\\]\n\\[+ \\dfrac{n(n-1)(n-2)\\cdots(n-r+1)}{r!}x^{r} + \\dots\\]\nbasharte ke (provided) \\(|x| < 1\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is qism ki series \\(1 + nx + \\frac{n(n-1)}{2!}x^{2} + \\frac{n(n-1)(n-2)}{3!}x^{3} + \\dots\\) ko binomial series kehte hain.",
+            "bold": [
+              "binomial series"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yahan naya kya hai? Teen baatein dhyan se samajh lijiye:\n1. Series kabhi khatam nahin hoti (infinite). Positive integer \\(n\\) par kisi coefficient mein factor \\((n - n) = 0\\) aa jata hai, us ke baad sab terms zero ho jati hain aur \\(n + 1\\) terms bachti hain. Lekin \\(n = -1\\) ya \\(n = \\frac{1}{2}\\) par koi factor kabhi zero nahin hota, is liye terms be-shumar hain.\n2. Shart \\(|x| < 1\\) bohat zaroori hai. Sirf tab hi terms chhoti se chhoti hoti jati hain aur jor ek khaas value par tik jata hai. Hamari taraf se misaal: \\((1 + x)^{-1} = \\frac{1}{1 + x}\\). \\(x = 0.1\\) par \\(1 - 0.1 + 0.01 - 0.001 + \\dots \\approx 0.909\\), aur \\(\\frac{1}{1.1} = 0.909\\dots\\); bilkul sahi! Lekin \\(x = 2\\) par series \\(1 - 2 + 4 - 8 + \\dots\\) kabhi kisi value par nahin tikti, halaan ke \\(\\frac{1}{3}\\) mojood hai. Yani \\(|x| \\ge 1\\) par formula jhoota jawab deta hai.\n3. Bracket ki pehli term 1 honi chahiye. Formula \\((1 + x)^{n}\\) ke liye hai; \\((4 - 3x)^{1/2}\\) jaisi cheez ko pehle \\(4^{1/2}\\left(1 - \\frac{3x}{4}\\right)^{1/2}\\) likhna parta hai, phir shart \\(\\left|\\frac{3x}{4}\\right| < 1\\) banti hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Is theorem ka proof is kitab ke daire se bahar hai.\nJab \\(n\\) negative integer ya fraction ho to \\(\\binom{n}{0}, \\binom{n}{1}, \\binom{n}{2}\\) waghaira symbols be-maani (meaningless) hain.\nExpansion ki general term yeh hai:\n\\[T_{r+1} = \\dfrac{n(n-1)(n-2)\\cdots(n-r+1)}{r!}x^{r}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Symbols be-maani kyun? \\(\\binom{n}{r} = \\frac{n!}{r!\\,(n-r)!}\\) mein \\(n!\\) aata hai, aur \\((-3)!\\) ya \\(\\left(\\frac{1}{2}\\right)!\\) is course mein define hi nahin. Factorial sirf \\(0, 1, 2, 3, \\dots\\) ka hota hai.\nLekin product wali shakal \\(\\frac{n(n-1)\\cdots(n-r+1)}{r!}\\) (jo 8.2.2 mein dekhi) mein sirf multiplication hai, jo kisi bhi number ke saath ho sakti hai. Isi liye general term isi shakal mein likhi jati hai.\nHamari taraf se misaal: \\(n = \\frac{1}{2}\\), \\(r = 2\\): \\(\\frac{\\frac{1}{2}\\left(\\frac{1}{2} - 1\\right)}{2!} = \\frac{\\frac{1}{2}\\cdot\\left(-\\frac{1}{2}\\right)}{2} = -\\frac{1}{8}\\). Yani \\(\\sqrt{1 + x} = 1 + \\frac{1}{2}x - \\frac{1}{8}x^{2} + \\dots\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki misaal mein yahi general term \\(n = -3\\) ke liye simplify karte hain."
+          },
+          {
+            "type": "example",
+            "title": "Example 15",
+            "problem": "Find the general term in the expansion of \\((1 + x)^{-3}\\) when \\(|x| < 1\\).",
+            "steps": [
+              "Given: \\((1 + x)^{-3}\\), \\(|x| < 1\\); yani \\(n = -3\\).\nTo find: general term \\(T_{r+1}\\).\nMethod: \\(T_{r+1} = \\frac{n(n-1)\\cdots(n-r+1)}{r!}x^{r}\\) mein \\(n = -3\\) rakhenge. Phir saare minus signs ek \\((-1)^{r}\\) mein ikatthe karenge, aur upar wale product ko factorial bana kar \\(r!\\) se kaatenge, taa ke jawab saaf aur chhota ho jaye.",
+              "Step 1: \\(n = -3\\) rakhein\n\\[T_{r+1} = \\dfrac{(-3)(-4)(-5)\\cdots(-3-r+1)}{r!}x^{r}\\]\nKyun: factors \\(n = -3\\) se shuru ho kar har dafa 1 kam hote hain: \\(-3, -4, -5, \\dots\\). Aakhri factor \\(n - r + 1 = -3 - r + 1 = -(r + 2)\\) hai. Kul \\(r\\) factors hain.",
+              "Step 2: Minus signs bahar nikaalein\n\\[= \\dfrac{(-1)^{r}\\cdot 3 \\cdot 4 \\cdot 5\\cdots(r+2)}{r!}x^{r}\\]\nKyun: \\(r\\) factors sab negative hain; har ek se \\((-1)\\) bahar nikaalein to \\((-1)^{r}\\) banta hai, aur andar \\(3 \\cdot 4 \\cdot 5 \\cdots (r+2)\\) bachta hai.",
+              "Step 3: Factorial poora karein\n\\[= (-1)^{r}\\dfrac{1 \\cdot 2 \\cdot 3 \\cdot 4 \\cdot 5\\cdots(r+2)}{1 \\cdot 2 \\cdot r!}x^{r}\\]\n\\[= (-1)^{r}\\dfrac{r!\\,(r+1)(r+2)}{2 \\cdot r!}x^{r}\\]\nKyun: \\(3 \\cdot 4 \\cdots (r+2)\\) mein shuru ke \\(1 \\cdot 2\\) ghayab hain. Upar neeche dono ko \\(1 \\cdot 2\\) se multiply kiya to upar \\((r+2)!\\) ban gaya, jise \\(r!\\,(r+1)(r+2)\\) likh sakte hain. Is chaal ka maqsad sirf yeh hai ke \\(r!\\) kat sake.",
+              "Step 4: \\(r!\\) kaatein\n\\[T_{r+1} = (-1)^{r}\\dfrac{(r+1)(r+2)}{2}x^{r}\\]\nKyun: \\(r!\\) upar bhi hai aur neeche bhi.",
+              "Tasdeeq:\n\\(r = 0\\): \\(1\\); \\(r = 1\\): \\(-\\frac{2 \\cdot 3}{2}x = -3x\\); \\(r = 2\\): \\(\\frac{3 \\cdot 4}{2}x^{2} = 6x^{2}\\); \\(r = 3\\): \\(-10x^{3}\\). Yani \\((1 + x)^{-3} = 1 - 3x + 6x^{2} - 10x^{3} + \\dots\\), jo computer algebra ki series se bhi milti hai aur neeche box ke case (iii) se bhi."
+            ],
+            "answer": "\\(T_{r+1} = (-1)^{r}\\frac{(r+1)(r+2)}{2}x^{r}\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Is misaal se do baatein seekhne wali hain. Pehli: negative \\(n\\) par saare factors negative hote hain, is liye un ke signs ko \\((-1)^{r}\\) mein samet lena sab se saaf tareeqa hai; isi se terms ke signs baari baari \\(+, -, +, -\\) aate hain. Doosri: jab upar lagataar barhte hue numbers ka product ho (\\(3 \\cdot 4 \\cdot 5 \\cdots\\)), to ghayab shuruati numbers se multiply aur divide kar ke use factorial bana lena ek aam aur kaam ki chaal hai. Yahi chaal Exercise 8.3 mein bhi kai dafa lagegi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Fraction wali power ka ek chhota sa hisaab: \\(\\sqrt{1.1}\\) ki qeemat. \\(\\sqrt{1 + x} = (1 + x)^{1/2}\\) aur \\(x = 0.1\\), jo \\(|x| < 1\\) ki shart poori karta hai.\n\\[(1 + x)^{1/2} = 1 + \\dfrac{1}{2}x - \\dfrac{1}{8}x^{2} + \\dots\\]\n\\[\\sqrt{1.1} \\approx 1 + 0.05 - 0.00125 = 1.04875\\]\nCalculator se \\(\\sqrt{1.1} = 1.04881\\dots\\); sirf teen terms se teen decimal tak bilkul sahi jawab mil gaya. Yahi idea agle sabaq 8.3.1 (approximations) ki bunyaad hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Some particular cases of the expansion of (1 + x)^n, n < 0",
+            "text": "(i) \\((1 + x)^{-1} = 1 - x + x^{2} - x^{3} + \\dots + (-1)^{r}x^{r} + \\dots\\)\n(ii) \\((1 + x)^{-2} = 1 - 2x + 3x^{2} - 4x^{3} + \\dots + (-1)^{r}(r+1)x^{r} + \\dots\\)\n(iii) \\((1 + x)^{-3} = 1 - 3x + 6x^{2} - 10x^{3} + \\dots + (-1)^{r}\\frac{(r+1)(r+2)}{2}x^{r} + \\dots\\)\n(iv) \\((1 - x)^{-1} = 1 + x + x^{2} + x^{3} + \\dots + x^{r} + \\dots\\)\n(v) \\((1 - x)^{-2} = 1 + 2x + 3x^{2} + 4x^{3} + \\dots + (r+1)x^{r} + \\dots\\)\n(vi) \\((1 - x)^{-3} = 1 + 3x + 6x^{2} + 10x^{3} + \\dots + \\frac{(r+1)(r+2)}{2}x^{r} + \\dots\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Cases (iv), (v), (vi) ko alag ratne ki zaroorat nahin: (i), (ii), (iii) mein \\(x\\) ki jagah \\(-x\\) likh dein, saare signs \\(+\\) ho jayenge. Case (iv) dar asal Unit 6 wali infinite geometric series hai jis ka common ratio \\(x\\) aur jor \\(\\frac{1}{1 - x}\\) hai.\nCoefficients ka pattern bhi dekhiye: power \\(-1\\) par 1, 1, 1, ...; power \\(-2\\) par 1, 2, 3, 4, ...; power \\(-3\\) par 1, 3, 6, 10, ... (triangular numbers). Yeh chhe cases yaad kar lijiye; 8.3.1 aur Exercise 8.3 mein baar baar kaam aayenge."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\((1 - x)^{-2}\\) mein \\(x^{9}\\) ka coefficient kya hai? (Ishara: case (v) mein \\((r+1)\\), to jawab 10.) Aur \\((1 + x)^{-1}\\) mein \\(x^{5}\\) ka? (Jawab: \\(-1\\).)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Negative ya fractional \\(n\\) ke liye: \\((1 + x)^{n} = 1 + nx + \\frac{n(n-1)}{2!}x^{2} + \\dots\\), infinite series, sirf \\(|x| < 1\\) par sahi.\n2. Bracket ki pehli term 1 honi chahiye.\n3. General term: \\(T_{r+1} = \\frac{n(n-1)\\cdots(n-r+1)}{r!}x^{r}\\); yahan \\(\\binom{n}{r}\\) istemal na karein.\n4. \\((1 + x)^{-3}\\) ki general term \\((-1)^{r}\\frac{(r+1)(r+2)}{2}x^{r}\\) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Series ko \\(n + 1\\) terms par rok dena: \\(n = -2\\) par terms be-shumar hain, \"\\(-1\\)\" terms ka koi matlab nahin.\n2. Shart \\(|x| < 1\\) (ya \\(|2x| < 1\\) waghaira) likhna bhool jana; exam mein is ke number katte hain.\n3. \\(\\binom{-3}{r}\\) ko factorial se nikaalne ki koshish: \\((-3)!\\) be-maani hai.\n4. Minus signs gum kar dena: \\(n = -3\\) par \\(n(n-1) = (-3)(-4) = 12\\), positive hai."
+          }
+        ]
+      }
+    }
+  ]
+}

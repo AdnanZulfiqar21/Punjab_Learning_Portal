@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-EXERCISE-9-1-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/u-exercise-9-1-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 179,
+          "pdf_to": 179,
+          "note": "Exercise 9.1, Question 4: book page 174 (PDF 179); answer key book page 302 (PDF 307); verified with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) Use synthetic division to show that \\(x\\) is the zero of the polynomial and use the result to factorize the polynomial completely: \\(x^{3} - 7x + 6\\), \\(x = 2\\).",
+            "explanation": "A zero of a polynomial is a value of \\(x\\) that makes it 0. If synthetic division by \\(x - a\\) leaves remainder 0, then \\(a\\) is a zero and \\(x - a\\) is a factor.\nWe must show the given value is a zero, then factorize completely.\nPlan: synthetic division, read the quotient, factorize the quadratic quotient, write all factors.",
+            "steps": [
+              "Given: \\(f(x) = x^{3} - 7x + 6\\), \\(x = 2\\).\nTo find: show this is a zero; factorize \\(f(x)\\) completely.\nMethod: Synthetic division by \\(x - a\\). Remainder 0 means \\(a\\) is a zero and \\(x - a\\) is a factor (factor theorem); the bottom row gives the quotient, which we factorize further.",
+              "Synthetic division of \\(x^{3} - 7x + 6\\) by \\(x - 2\\) (\\(a = 2\\))\n\\[\\begin{array}{r|rrrr} 2 & 1 & 0 & -7 & 6 \\\\  &  & 2 & 4 & -6 \\\\ \\hline & 1 & 2 & -3 & \\boxed{0} \\end{array}\\]\n\\[1 \\times 2 = 2,\\ 0 + 2 = 2\\]\n\\[2 \\times 2 = 4,\\ -7 + 4 = -3\\]\n\\[-3 \\times 2 = -6,\\ 6 + (-6) = 0\\]\nWhy: Bring down the first coefficient; then multiply by \\(2\\) and add, column by column. There is no \\(x^{2}\\) term, so 0 is written in its place.",
+              "Read the result\n\\[\\text{Remainder} = 0\\]\nSo \\(x = 2\\) is a zero and \\(x - 2\\) is a factor.\n\\[\\text{Quotient} = x^{2} + 2x - 3\\]\nWhy: The boxed last number is the remainder. The other bottom numbers are the coefficients of the quotient, one degree lower.",
+              "Write \\(f(x)\\) with the factors found\n\\[f(x) = (x - 2)(x^{2} + 2x - 3)\\]\nWhy: Dividend = Divisor × Quotient, because the remainder is 0.",
+              "Factorize the quadratic quotient\n\\[x^{2} + 2x - 3\\]\n\\[= x^{2} + 3x - x - 3\\]\n\\[= x(x + 3) - 1(x + 3)\\]\n\\[= (x + 3)(x - 1)\\]\nWhy: Split the middle term: we need two numbers with product \\(-3\\) and sum \\(2\\); they are \\(3\\) and \\(-1\\). Then take common factors in pairs.",
+              "Write the complete factorization\n\\[x^{3} - 7x + 6\\]\n\\[= (x - 2)(x - 1)(x + 3)\\]\nWhy: Every factor is now linear (degree 1), so nothing more can be factorized.",
+              "Check: put \\(x = 0\\) in both forms\n\\[f(0) = 6\\]\n\\[(-2)(-1)(3) = 6 \\;\\checkmark\\]\nWhy: The polynomial and its factorized form must give the same value for any \\(x\\)."
+            ],
+            "final_answer": "\\(x^{3} - 7x + 6 = (x - 2)(x - 1)(x + 3)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) Use synthetic division to show that \\(x\\) is the zero of the polynomial and use the result to factorize the polynomial completely: \\(x^{3} - 28x - 48\\), \\(x = -4\\).",
+            "explanation": "A zero of a polynomial is a value of \\(x\\) that makes it 0. If synthetic division by \\(x - a\\) leaves remainder 0, then \\(a\\) is a zero and \\(x - a\\) is a factor.\nWe must show the given value is a zero, then factorize completely.\nPlan: synthetic division, read the quotient, factorize the quadratic quotient, write all factors.",
+            "steps": [
+              "Given: \\(f(x) = x^{3} - 28x - 48\\), \\(x = -4\\).\nTo find: show this is a zero; factorize \\(f(x)\\) completely.\nMethod: Synthetic division by \\(x - a\\). Remainder 0 means \\(a\\) is a zero and \\(x - a\\) is a factor (factor theorem); the bottom row gives the quotient, which we factorize further.",
+              "Synthetic division of \\(x^{3} - 28x - 48\\) by \\(x + 4\\) (\\(a = -4\\))\n\\[\\begin{array}{r|rrrr} -4 & 1 & 0 & -28 & -48 \\\\  &  & -4 & 16 & 48 \\\\ \\hline & 1 & -4 & -12 & \\boxed{0} \\end{array}\\]\n\\[1 \\times (-4) = -4,\\ 0 + (-4) = -4\\]\n\\[-4 \\times (-4) = 16,\\ -28 + 16 = -12\\]\n\\[-12 \\times (-4) = 48,\\ -48 + 48 = 0\\]\nWhy: Bring down the first coefficient; then multiply by \\(-4\\) and add, column by column. There is no \\(x^{2}\\) term, so 0 is written in its place.",
+              "Read the result\n\\[\\text{Remainder} = 0\\]\nSo \\(x = -4\\) is a zero and \\(x + 4\\) is a factor.\n\\[\\text{Quotient} = x^{2} - 4x - 12\\]\nWhy: The boxed last number is the remainder. The other bottom numbers are the coefficients of the quotient, one degree lower.",
+              "Write \\(f(x)\\) with the factors found\n\\[f(x) = (x + 4)(x^{2} - 4x - 12)\\]\nWhy: Dividend = Divisor × Quotient, because the remainder is 0.",
+              "Factorize the quadratic quotient\n\\[x^{2} - 4x - 12\\]\n\\[= x^{2} - 6x + 2x - 12\\]\n\\[= x(x - 6) + 2(x - 6)\\]\n\\[= (x - 6)(x + 2)\\]\nWhy: Split the middle term: we need two numbers with product \\(-12\\) and sum \\(-4\\); they are \\(-6\\) and \\(2\\). Then take common factors in pairs.",
+              "Write the complete factorization\n\\[x^{3} - 28x - 48\\]\n\\[= (x + 4)(x - 6)(x + 2)\\]\nWhy: Every factor is now linear (degree 1), so nothing more can be factorized.",
+              "Check: put \\(x = 0\\) in both forms\n\\[f(0) = -48\\]\n\\[(4)(-6)(2) = -48 \\;\\checkmark\\]\nWhy: The polynomial and its factorized form must give the same value for any \\(x\\)."
+            ],
+            "final_answer": "\\(x^{3} - 28x - 48 = (x + 4)(x - 6)(x + 2)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iii)",
+            "prompt": "4 (iii) Use synthetic division to show that \\(x\\) is the zero of the polynomial and use the result to factorize the polynomial completely: \\(2x^{4} + 7x^{3} - 4x^{2} - 27x - 18\\), \\(x = 2, x = -3\\).",
+            "explanation": "A zero of a polynomial is a value of \\(x\\) that makes it 0. If synthetic division by \\(x - a\\) leaves remainder 0, then \\(a\\) is a zero and \\(x - a\\) is a factor.\nWe must show the given values are zeros, then factorize completely.\nPlan: synthetic division, read the quotient, factorize the quadratic quotient, write all factors.",
+            "steps": [
+              "Given: \\(f(x) = 2x^{4} + 7x^{3} - 4x^{2} - 27x - 18\\), \\(x = 2, x = -3\\).\nTo find: show these are zeros; factorize \\(f(x)\\) completely.\nMethod: Synthetic division by \\(x - a\\). Remainder 0 means \\(a\\) is a zero and \\(x - a\\) is a factor (factor theorem); the bottom row gives the quotient, which we factorize further.",
+              "Synthetic division of \\(2x^{4} + 7x^{3} - 4x^{2} - 27x - 18\\) by \\(x - 2\\) (\\(a = 2\\))\n\\[\\begin{array}{r|rrrrr} 2 & 2 & 7 & -4 & -27 & -18 \\\\  &  & 4 & 22 & 36 & 18 \\\\ \\hline & 2 & 11 & 18 & 9 & \\boxed{0} \\end{array}\\]\n\\[2 \\times 2 = 4,\\ 7 + 4 = 11\\]\n\\[11 \\times 2 = 22,\\ -4 + 22 = 18\\]\n\\[18 \\times 2 = 36,\\ -27 + 36 = 9\\]\n\\[9 \\times 2 = 18,\\ -18 + 18 = 0\\]\nWhy: Bring down the first coefficient; then multiply by \\(2\\) and add, column by column.",
+              "Read the result\n\\[\\text{Remainder} = 0\\]\nSo \\(x = 2\\) is a zero and \\(x - 2\\) is a factor.\n\\[\\text{Quotient} = 2x^{3} + 11x^{2} + 18x + 9\\]\nWhy: The boxed last number is the remainder. The other bottom numbers are the coefficients of the quotient, one degree lower.",
+              "Synthetic division of the quotient \\(2x^{3} + 11x^{2} + 18x + 9\\) by \\(x + 3\\) (\\(a = -3\\))\n\\[\\begin{array}{r|rrrr} -3 & 2 & 11 & 18 & 9 \\\\  &  & -6 & -15 & -9 \\\\ \\hline & 2 & 5 & 3 & \\boxed{0} \\end{array}\\]\n\\[2 \\times (-3) = -6,\\ 11 + (-6) = 5\\]\n\\[5 \\times (-3) = -15,\\ 18 + (-15) = 3\\]\n\\[3 \\times (-3) = -9,\\ 9 + (-9) = 0\\]\nWhy: Bring down the first coefficient; then multiply by \\(-3\\) and add, column by column.",
+              "Read the result\n\\[\\text{Remainder} = 0\\]\nSo \\(x = -3\\) is a zero and \\(x + 3\\) is a factor.\n\\[\\text{Quotient} = 2x^{2} + 5x + 3\\]\nWhy: The boxed last number is the remainder. The other bottom numbers are the coefficients of the quotient, one degree lower.",
+              "Write \\(f(x)\\) with the factors found\n\\[f(x) = (x - 2)(x + 3)(2x^{2} + 5x + 3)\\]\nWhy: Dividend = Divisor × Quotient, because the remainder is 0.",
+              "Factorize the quadratic quotient\n\\[2x^{2} + 5x + 3\\]\n\\[= 2x^{2} + 2x + 3x + 3\\]\n\\[= 2x(x + 1) + 3(x + 1)\\]\n\\[= (x + 1)(2x + 3)\\]\nWhy: Split the middle term: we need two numbers with product \\(6\\) and sum \\(5\\); they are \\(2\\) and \\(3\\). Then take common factors in pairs.",
+              "Write the complete factorization\n\\[2x^{4} + 7x^{3} - 4x^{2} - 27x - 18\\]\n\\[= (x - 2)(x + 3)(x + 1)(2x + 3)\\]\nWhy: Every factor is now linear (degree 1), so nothing more can be factorized.",
+              "Check: put \\(x = 0\\) in both forms\n\\[f(0) = -18\\]\n\\[(-2)(3)(1)(3) = -18 \\;\\checkmark\\]\nWhy: The polynomial and its factorized form must give the same value for any \\(x\\)."
+            ],
+            "final_answer": "\\(2x^{4} + 7x^{3} - 4x^{2} - 27x - 18 = (x - 2)(x + 3)(x + 1)(2x + 3)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

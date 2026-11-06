@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH5-EXERCISE-5-1-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch5",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch5/u-exercise-5-1-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 90,
+          "pdf_to": 90,
+          "note": "Exercise 5.1, Question 6: book page 85 (PDF 90); answer key book page 298 (PDF 303)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. Resolve into partial fractions: \\(\\frac{(x - 1)(x - 3)(x - 5)}{(x - 2)(x - 4)(x - 6)}\\)",
+            "explanation": "Top and bottom are both cubics (degree 3): improper.\nWe take out the quotient 1, then split the rest over three different linear factors (Case I).\nPlan: expand and divide, identity, put \\(x = 2, 4, 6\\), compare coefficients, recombine.",
+            "steps": [
+              "Given: \\(\\frac{(x - 1)(x - 3)(x - 5)}{(x - 2)(x - 4)(x - 6)}\\)\nTo find: its partial fractions.\nMethod: Equal degrees, so divide first. Both leading coefficients are 1, so the quotient is 1. Then Case I for the proper remainder.",
+              "Expand top and bottom\n\\[(x - 1)(x - 3)(x - 5)\\]\n\\[= x^3 - 9x^2 + 23x - 15\\]\n\\[(x - 2)(x - 4)(x - 6)\\]\n\\[= x^3 - 12x^2 + 44x - 48\\]\nWhy: We need the remainder, which is top minus 1 times bottom.",
+              "Divide\n\\[\\text{remainder} = (x^3 - 9x^2 + 23x - 15)\\]\n\\[- (x^3 - 12x^2 + 44x - 48)\\]\n\\[= 3x^2 - 21x + 33\\]\n\\[\\text{fraction} = 1 + \\dfrac{3x^2 - 21x + 33}{(x - 2)(x - 4)(x - 6)}\\]\nWhy: \\(x^3 \\div x^3 = 1\\), and subtracting the bottom leaves a remainder of degree 2.",
+              "Write the form and the identity\n\\[\\dfrac{3x^2 - 21x + 33}{(x - 2)(x - 4)(x - 6)}\\]\n\\[= \\dfrac{A}{x - 2} + \\dfrac{B}{x - 4} + \\dfrac{C}{x - 6}\\]\n\\[3x^2 - 21x + 33 = A(x - 4)(x - 6)\\]\n\\[+ B(x - 2)(x - 6) + C(x - 2)(x - 4) \\quad (i)\\]\nWhy: Three different linear factors; multiply through by the denominator.",
+              "Find \\(A\\): put \\(x = 2\\) in (i)\n\\[12 - 42 + 33 = A(-2)(-4)\\]\n\\[3 = 8A\\]\n\\[A = \\tfrac{3}{8}\\]\nWhy: \\(x - 2 = 0\\), so only the \\(A\\) term is left.",
+              "Find \\(B\\): put \\(x = 4\\) in (i)\n\\[48 - 84 + 33 = B(2)(-2)\\]\n\\[-3 = -4B\\]\n\\[B = \\tfrac{3}{4}\\]\nWhy: \\(x - 4 = 0\\), so only the \\(B\\) term is left.",
+              "Find \\(C\\): put \\(x = 6\\) in (i)\n\\[108 - 126 + 33 = C(4)(2)\\]\n\\[15 = 8C\\]\n\\[C = \\tfrac{15}{8}\\]\nWhy: \\(x - 6 = 0\\), so only the \\(C\\) term is left.",
+              "Compare coefficients\n\\[x^2:\\ A + B + C = \\tfrac{3}{8} + \\tfrac{6}{8} + \\tfrac{15}{8} = 3 \\;\\checkmark\\]\n\\[\\text{const}:\\ 24A + 12B + 8C\\]\n\\[= 9 + 9 + 15 = 33 \\;\\checkmark\\]\nWhy: Constants in (i): \\((-4)(-6) = 24\\), \\((-2)(-6) = 12\\), \\((-2)(-4) = 8\\).",
+              "Write the answer\n\\[= 1 + \\dfrac{3}{8(x - 2)} + \\dfrac{3}{4(x - 4)} + \\dfrac{15}{8(x - 6)}\\]\nWhy: Quotient 1 plus the three partial fractions.",
+              "Check: recombine the fractions\nOver \\(8(x - 2)(x - 4)(x - 6)\\) the numerator is\n\\[3(x^2 - 10x + 24) + 6(x^2 - 8x + 12)\\]\n\\[+ 15(x^2 - 6x + 8)\\]\n\\[= 24x^2 - 168x + 264\\]\n\\[= 8(3x^2 - 21x + 33) \\;\\checkmark\\]\nAdding 1 back: bottom + remainder \\(= x^3 - 9x^2 + 23x - 15\\), the original top \\(\\checkmark\\)\nWhy: Recombining gives the remainder, and quotient times bottom plus remainder gives the numerator."
+            ],
+            "final_answer": "\\(\\dfrac{(x - 1)(x - 3)(x - 5)}{(x - 2)(x - 4)(x - 6)} = 1 + \\dfrac{3}{8(x - 2)} + \\dfrac{3}{4(x - 4)} + \\dfrac{15}{8(x - 6)}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

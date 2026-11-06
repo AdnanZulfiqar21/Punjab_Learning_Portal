@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.5.1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.5.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 169,
+          "pdf_to": 171,
+          "note": "Book p. 164-166: 8.5.1 unnumbered example (8^100 divided by 7), Examples 23-25, Finding Digits of a Number (Example 26), Divisibility Test (Example 27). Teaching callouts and our own practice items are ours."
+        }
+      ],
+      "title": "8.5.1 Finding the Remainder using Binomial Theorem (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH8-8.5.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Is sabaq mein hum woh kaam karenge jo pehli nazar mein na-mumkin lagta hai: \\(8^{100}\\) jaise dio-qamat (bohat bare) numbers ka remainder, aakhri digit ya divisibility, bina poora number nikale. Hathiyaar wahi purana hai: binomial theorem. Har misaal mein ek hi chaal chalegi, is liye pehle chaal samajh lein, phir misaalein khud ba khud aasan lagengi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Chaal yeh hai: agar bari power \\(N^{m}\\) ko number \\(d\\) se divide karna ho to \\(N\\) ko \\(N = d \\cdot q + r\\) likho, jahan \\(r\\) chhota ho (aksar \\(1\\) ya \\(-1\\)). \\((dq + r)^{m}\\) ki expansion mein \\(r^{m}\\) ke ilawa har term mein \\(d\\) hota hai. Is liye \\(N^{m}\\) aur \\(r^{m}\\) ka remainder ek hi hota hai.\nAgar \\(r = 1\\) ho to remainder 1. Agar \\(r = -1\\) ho to aakhri term even power par \\(+1\\) aur odd power par \\(-1\\). \"Remainder \\(-1\\)\" ka matlab hai \\(d - 1\\), kyun ke remainder kabhi negative nahin likhte. Misaal: 13 ko 14 se divide karein to remainder 13 hai, jise hum \\(-1\\) bhi soch sakte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Pehle remainder ki bunyadi baat taaza kar lein. Jab kisi number ko \\(d\\) se divide karte hain to hamesha yun likh sakte hain: number = \\(d \\times\\) (quotient) + remainder, jahan remainder 0 se le kar \\(d - 1\\) tak hota hai. Misaal: \\(17 = 5 \\times 3 + 2\\), yani 17 ko 5 se divide karein to quotient 3 aur remainder 2.\nDo baatein is sabaq mein baar baar kaam aayengi: (1) agar har term \\(d\\) ka multiple ho to un ka jor bhi \\(d\\) ka multiple hai, us ka remainder 0; (2) is liye poore number ka remainder sirf us hisse se aata hai jo \\(d\\) ka multiple nahin. Binomial theorem bas yeh hissa alag kar ke dikha deta hai."
+          },
+          {
+            "type": "example",
+            "title": "Example (unnumbered)",
+            "problem": "Find the remainder when \\(8^{100}\\) is divided by 7.",
+            "steps": [
+              "Given: number \\(8^{100}\\) aur divisor 7.\nTo find: \\(8^{100}\\) ko 7 se divide karne par remainder (baqi).\nMethod: sab se pehle hum dekhte hain ke \\(8^{100}\\) itna bara hai ke seedha divide karna na-mumkin hai. Is liye chaal yeh hai: 8 ko 7 ke multiple ki shakal mein likhein, binomial theorem se expand karein, aur dekhein kaun se terms 7 se divide nahin hote.",
+              "Step 1: 8 ko 7 ke multiple se likhein\n\\[8 = 1 + 7\\]\n\\[8^{100} = (1 + 7)^{100}\\]\nKyun: 8, number 7 se sirf ek zyada hai. Jab hum \\((1 + 7)^{100}\\) kholenge to taqreeban har term mein 7 ka factor aa jayega, aur yahi humein chahiye.",
+              "Step 2: Binomial theorem se expand karein\n7 ko pehla term aur 1 ko doosra term lete hue:\n\\[(1 + 7)^{100} = {}^{100}C_{0}\\,7^{100}1^{0}\\]\n\\[+ {}^{100}C_{1}\\,7^{99}1^{1} + \\dots\\]\n\\[+ {}^{100}C_{99}\\,7^{1}1^{99}\\]\n\\[+ {}^{100}C_{100}\\,7^{0}1^{100}\\]\nKyun: \\((1 + 7)^{100}\\) aur \\((7 + 1)^{100}\\) ek hi cheez hain. 7 ko pehle likhne se us ki power 100 se ghatte ghatte aakhri term mein 0 ho jati hai, yani sirf aakhri term mein 7 nahin hota. Hum saare 101 terms nahin likhte, sirf shuru aur aakhir dikha dete hain.",
+              "Step 3: 7 se divide hone wale terms pehchaanein\nAakhri term \\({}^{100}C_{100}\\,7^{0}1^{100}\\) ke ilawa har term 7 se divide hota hai.\nKyun: baqi har term mein kam az kam \\(7^{1}\\) factor hai, aur \\({}^{100}C_{r}\\) hamesha poore numbers (integers) hote hain. 7 ke multiples ka jor bhi 7 ka multiple hota hai, is liye yeh sab mil kar remainder 0 dete hain. Ise aise samjhein: agar aap ke paas 7-7 ke bohat se packet hon to un mein se kuch nahin bachta; jo bachta hai woh sirf khula hissa hai.",
+              "Step 4: Remainder aakhri term se\n\\[\\text{Remainder} = {}^{100}C_{100}\\,7^{0}1^{100}\\]\n\\[= 1 \\cdot 1 \\cdot 1 = 1\\]\nKyun: \\(8^{100} = (7 \\text{ ka multiple}) + 1\\), aur \\(1\\) divisor 7 se chhota hai, is liye yahi remainder hai. \\({}^{100}C_{100} = 1\\), \\(7^{0} = 1\\), aur 1 ki har power 1.",
+              "Tasdeeq:\nChoti powers par yehi pattern dekhiye: \\(8 = 7 + 1\\), \\(8^{2} = 64 = 63 + 1\\), \\(8^{3} = 512 = 511 + 1\\) (aur \\(511 = 7 \\times 73\\)). Har dafa 7 ke multiple se ek zyada. Computer se \\(8^{100}\\) ko 7 se divide karne par bhi remainder 1 hi aata hai."
+            ],
+            "answer": "Remainder 1 hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Pichli misaal mein base divisor se ek zyada tha, is liye aakhri term \\(+1\\) aaya. Agli misaal mein base divisor se ek kam hai (\\(2 = 3 - 1\\)). Ab aakhri term \\((-1)^{100}\\) hoga, aur us ka sign power par munhasir hai. Yeh farq zehan mein rakhiye: \\((d + 1)^{m}\\) mein aakhri term hamesha \\(+1\\), magar \\((d - 1)^{m}\\) mein even power par \\(+1\\) aur odd power par \\(-1\\). Misaal ke dauran dekhiye ke 100 even hone ki wajah se jawab kya banta hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 23",
+            "problem": "Find the remainder when \\(2^{100}\\) is divided by 3.",
+            "steps": [
+              "Given: \\(2^{100}\\) aur divisor 3.\nTo find: \\(2^{100}\\) ko 3 se divide karne par remainder.\nMethod: pichli misaal mein base divisor se ek zyada tha (\\(8 = 7 + 1\\)). Yahan 2, number 3 se ek kam hai, is liye \\(2 = 3 - 1\\) likhenge. Phir \\((3 - 1)^{100}\\) ko expand kar ke aakhri term ke ilawa sab se 3 common nikaalenge.",
+              "Step 1: Base ko 3 ki madad se likhein\n\\[2^{100} = (3 - 1)^{100}\\]\nKyun: \\(3 - 1\\) mein 3 divisor hai aur \\(-1\\) chhota number. \\(-1\\) ki powers sirf \\(+1\\) ya \\(-1\\) hoti hain, is liye hisaab bohat aasan rehta hai.",
+              "Step 2: Binomial theorem se expand karein\n\\[= \\binom{100}{0}3^{100}(-1)^{0} + \\binom{100}{1}3^{99}(-1)^{1}\\]\n\\[+ \\binom{100}{2}3^{98}(-1)^{2} + \\dots\\]\n\\[+ \\binom{100}{100}3^{0}(-1)^{100}\\]\nKyun: yahan \\(a = 3\\), \\(b = -1\\), \\(n = 100\\). Har term ka sign \\((-1)^{r}\\) se aata hai: \\(r\\) even ho to plus, odd ho to minus.",
+              "Step 3: Coefficients nikaalein\n\\[\\binom{100}{1} = 100,\\quad \\binom{100}{2} = \\dfrac{100 \\cdot 99}{2} = 4950\\]\n\\[= 3^{100} - (100)3^{99} + 4950 \\cdot 3^{98}\\]\n\\[- \\dots - (100)(3) + 1\\]\nKyun: \\(\\binom{100}{2} = \\frac{100 \\times 99}{2 \\times 1} = 4950\\). Aakhri se pehla term \\(\\binom{100}{99}3^{1}(-1)^{99} = -100 \\times 3\\) hai (99 odd hai, is liye minus), aur aakhri term \\((-1)^{100} = +1\\) kyun ke 100 even hai.\nDhyan dein: aakhri term ka sign hi remainder ka faisla karta hai, is liye power even hai ya odd, yeh zaroor dekhein.",
+              "Step 4: Aakhri term ke ilawa sab se 3 common\n\\[= 3[3^{99} - (100)3^{98} + (4950)3^{97}\\]\n\\[- \\dots - 100] + 1\\]\n\\[= 3 \\times \\text{an integer} + 1\\]\nKyun: aakhri term ke ilawa har term mein kam az kam ek 3 hai, is liye 3 bahar nikal aata hai. Bracket ke andar sab poore numbers hain, to bracket bhi ek integer hai. Humein us integer ki value jaanne ki zaroorat hi nahin.",
+              "Step 5: Remainder parhein\nIs se saabit hua ke \\(2^{100}\\) ko 3 se divide karein to remainder 1 bachta hai.\nKyun: \\(2^{100} = 3 \\times (\\text{integer}) + 1\\), aur 1 divisor 3 se chhota hai.",
+              "Tasdeeq:\nEk doosra raasta: \\(2^{2} = 4 = 3 + 1\\), is liye \\(2^{100} = 4^{50} = (3 + 1)^{50}\\), jo bhi 3 ka multiple jama 1 hai. Computer bhi remainder 1 deta hai."
+            ],
+            "answer": "\\(2^{100}\\) ko 3 se divide karne par remainder 1 hai."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 23 mein kitab expansion mein \\(4900.3^{98}\\) aur bracket wali line mein \\((4900)3^{97}\\) chhaapti hai. Sahi coefficient \\(\\binom{100}{2} = \\frac{100 \\times 99}{2} = 4950\\) hai; upar hum ne 4950 likha hai. Remainder 1 par is ka koi asar nahin. (Kitab \"intiger\" bhi chhaapti hai, sahi spelling integer.)"
+          },
+          {
+            "type": "example",
+            "title": "Example 24",
+            "problem": "Find the unit digit of:\n(i) \\((43)^{126}\\) (ii) \\((25)^{272}\\) (iii) \\((74)^{247}\\)",
+            "steps": [
+              "Given: teen bari powers.\nTo find: har ek ka unit digit (aakhri digit, ikaai ka hindsa).\nMethod: kisi power ka aakhri digit sirf base ke aakhri digit par munhasir hai. Misaal: \\(43 = 40 + 3\\). \\((40 + 3)^{126}\\) ko binomial theorem se kholein to \\(3^{126}\\) ke ilawa har term mein 40 aata hai, jo 10 ka multiple hai aur aakhri digit par koi asar nahin dalta. Is liye sirf \\(3^{126}\\) ka aakhri digit chahiye. Powers ke aakhri digits ek chakkar (cycle) mein dohraate hain, is liye exponent ko 4 se divide kar ke remainder dekhte hain.",
+              "Step 1 (i): 3 ki powers ke aakhri digits ka cycle\n\\[3^{1} = 3,\\ 3^{2} = 9,\\ 3^{3} = 27,\\ 3^{4} = 81\\]\nAakhri digits \\(3, 9, 7, 1\\) hain, phir yehi dobara shuru.\nKyun: \\(3^{4} = 81\\) ka aakhri digit 1 hai, aur \\(81^{m} = (80 + 1)^{m}\\) ka aakhri digit bhi 1 hi hota hai (baqi har term mein 80 hai). Is liye har chauthi power ke baad cycle naye sire se shuru hota hai, bilkul ghari ki suiyon ki tarah jo 12 ke baad phir 1 par aa jati hain.",
+              "Step 2 (i): Exponent ko 4 se divide karein\n126 ko yun likh sakte hain:\n\\[126 = 4 \\times 31 + 2\\]\nRemainder 2 hai, is liye:\n\\[3^{2} = 9\\]\nLihaza \\((43)^{126}\\) ka unit digit 9 hai.\nKyun: \\(3^{126} = (3^{4})^{31} \\cdot 3^{2} = 81^{31} \\cdot 9\\). \\(81^{31}\\) ka aakhri digit 1 hai, aur \\(1 \\times 9 = 9\\). Remainder hi batata hai ke cycle mein kaun si jagah par hain.",
+              "Step 3 (ii): \\((25)^{272}\\)\nUnit digit 5 hai, aur 5 hamesha unit place par 5 hi rehta hai.\nKyun: 5 par khatam hone wale do numbers ka product hamesha 5 par khatam hota hai (\\(5 \\times 5 = 25\\)). Is liye 25 ki har power 5 par khatam hogi; exponent kuch bhi ho. Aise digits (0, 1, 5, 6) ka cycle sirf ek ka hota hai.",
+              "Step 4 (iii): \\((74)^{247}\\)\n\\(74 = 70 + 4\\), is liye \\(4^{247}\\) ka aakhri digit chahiye. 4 ki powers ke aakhri digits: \\(4, 6, 4, 6, \\dots\\) (\\(4, 16, 64, 256\\)).\n247 ko yun likhein:\n\\[247 = 4 \\times 61 + 3\\]\nRemainder 3 hai, is liye:\n\\[4^{3} = 64\\]\nLihaza \\((74)^{247}\\) ka unit digit 4 hai.\nKyun: \\(4^{247} = (4^{4})^{61} \\cdot 4^{3}\\). \\(4^{4} = 256\\) ka aakhri digit 6 hai, aur 6 par khatam hone wale number ki har power 6 par khatam hoti hai; \\(6 \\times 64\\) ka aakhri digit 4. Aasan tareeqa: 4 ki har odd power 4 par aur har even power 6 par khatam hoti hai; 247 odd hai.",
+              "Tasdeeq:\nComputer se \\(43^{126}\\), \\(25^{272}\\) aur \\(74^{247}\\) ke aakhri digits 9, 5 aur 4 hi aate hain. Divisions bhi check karein: \\(4 \\times 31 = 124\\), \\(124 + 2 = 126\\); \\(4 \\times 61 = 244\\), \\(244 + 3 = 247\\)."
+            ],
+            "answer": "(i) 9 (ii) 5 (iii) 4"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 24(ii) mein sawal \\((25)^{272}\\) ka hai magar kitab ka hal \\((25)^{271}\\) likhta hai. 25 ki har power 5 par khatam hoti hai, is liye jawab 5 dono surton mein sahi hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Aakhri digits ke cycles ek dafa achhi tarah samajh lein, phir unit digit ka koi sawal mushkil nahin rahega:\n0, 1, 5, 6 par khatam hone wale numbers ki har power usi digit par khatam hoti hai (cycle ki lambai 1).\n4 aur 9 ka cycle 2 ka hai: 4 ki powers \\(4, 6, 4, 6, \\dots\\) aur 9 ki powers \\(9, 1, 9, 1, \\dots\\)\n2, 3, 7, 8 ka cycle 4 ka hai: 2 ki powers \\(2, 4, 8, 6\\); 3 ki \\(3, 9, 7, 1\\); 7 ki \\(7, 9, 3, 1\\); 8 ki \\(8, 4, 2, 6\\).\nTareeqa: exponent ko 4 se divide karo. Remainder 1, 2, 3 ho to cycle ki pehli, doosri, teesri jagah; remainder 0 ho to cycle ki chauthi (aakhri) jagah. Yeh rule 2 ki lambai wale cycles ke liye bhi chal jata hai, kyun ke 4, 2 ka multiple hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Agli misaal mein ek naya lafz hai: fractional part (kasri hissa). Kisi bhi number ko do hisson mein baant sakte hain: poora (integer) hissa aur 1 se chhota bacha hua hissa. Misaal: \\(5.75 = 5 + 0.75\\), aur \\(\\frac{23}{4} = 5 + \\frac{3}{4}\\). Ghor kijiye: \\(\\frac{23}{4}\\) ka fractional part \\(\\frac{3}{4}\\) hai, aur 3 wahi remainder hai jo 23 ko 4 se divide karne par bachta hai. Yani fractional part nikalna bhi asal mein remainder nikalna hi hai! Isi liye yeh misaal is sabaq mein hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 25",
+            "problem": "If the fractional part of the number \\(\\frac{2^{504}}{31}\\) is \\(\\frac{k}{31}\\) then find \\(k\\).",
+            "steps": [
+              "Given: number \\(\\dfrac{2^{504}}{31}\\) (kitab sawal mein \\(\\frac{2}{31}\\) chhaapti hai magar hal \\(2^{504}\\) ka hai; neeche \"Kitab ki ghalti\" dekhiye). Is ka fractional part \\(\\frac{k}{31}\\) hai.\nTo find: \\(k\\).\nMethod: pehle samajh lein ke fractional part kya hai: kisi number ko (poora number) + (1 se chhota hissa) likhein, to woh chhota hissa fractional part hai. Misaal: \\(\\frac{7}{2} = 3 + \\frac{1}{2}\\), fractional part \\(\\frac{1}{2}\\). Yahan chaal yeh hai ke 2 ki aisi power banayein jo 31 ke qareeb ho: \\(2^{5} = 32 = 31 + 1\\).",
+              "Step 1: 2 ki power ko torein\n\\[\\dfrac{2^{504}}{31} = \\dfrac{2^{4} \\cdot 2^{500}}{31}\\]\n\\[= \\dfrac{2^{4} \\cdot (2^{5})^{100}}{31}\\]\n\\[= \\dfrac{16}{31}(32)^{100}\\]\nKyun: \\(504 = 4 + 500\\) aur \\(500 = 5 \\times 100\\). Is liye \\(2^{500} = (2^{5})^{100} = 32^{100}\\). Hum ne 500 is liye chuna kyun ke yeh 5 ka sab se bara multiple hai jo 504 se chhota ho.",
+              "Step 2: \\(32 = 31 + 1\\) use karein\n\\[= \\dfrac{16}{31}(31 + 1)^{100}\\]\n\\[= \\dfrac{16}{31}(31h + 1)\\]\nKyun: \\((31 + 1)^{100}\\) ki expansion mein aakhri term ke ilawa har term mein 31 hai, is liye un sab ka jor \\(31h\\) likh sakte hain, jahan \\(h\\) koi integer hai. Aakhri term \\(1^{100} = 1\\). Yeh wahi chaal hai jo pichli misaalon mein thi.",
+              "Step 3: Integer hissa alag karein\n\\[= \\dfrac{16 \\cdot 31h}{31} + \\dfrac{16}{31}\\]\n\\[= 16h + \\dfrac{16}{31}\\]\nKyun: bracket kholne par pehle hisse mein 31 cancel ho jata hai aur \\(16h\\) bachta hai, jo poora number hai.",
+              "Step 4: Fractional part parhein\n\\(16h\\) integer hai aur \\(0 < \\frac{16}{31} < 1\\), is liye fractional part \\(\\frac{16}{31}\\) hai.\nIs liye \\(k = 16\\).\nKyun: poora number hata dein to jo bachta hai woh fractional part hai, aur woh 0 aur 1 ke darmiyan hona chahiye; \\(\\frac{16}{31}\\) is shart par poora utarta hai.\nDhyan dein: integer \\(16h\\) hai, \\(8h\\) nahin; \\(\\frac{16}{31} \\times 31h = 16h\\).",
+              "Tasdeeq:\n\\(2^{5} = 32\\) ko 31 se divide karein to remainder 1. Is liye \\(2^{500} = (2^{5})^{100}\\) ka remainder bhi 1, aur \\(2^{504} = 16 \\times 2^{500}\\) ka remainder 16. Computer bhi \\(2^{504} \\div 31\\) ka remainder 16 deta hai, yani fractional part \\(\\frac{16}{31}\\)."
+            ],
+            "answer": "\\(k = 16\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 25 mein kitab sawal mein number \\(\\frac{2}{31}\\) chhaapti hai, jab ke hal \\(\\frac{2^{504}}{31}\\) ka hai; asal sawal yahi hai (\\(\\frac{2}{31}\\) to khud hi 1 se chhota hai, us ka fractional part seedha \\(\\frac{2}{31}\\) hota). Hum ne sawal \\(\\frac{2^{504}}{31}\\) ke saath likha hai. Hal mein \"8h is an integer\" bhi likha hai; integer hissa \\(16h\\) hai. Jawab \\(k = 16\\) durust hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Finding Digits of a Number"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Ek seedhi si baat: kisi number ka aakhri digit wahi hai jo 10 se divide karne par remainder bachta hai (347 ko 10 se divide karein, 7 bachta hai). Aur aakhri do digits woh hain jo 100 se divide karne par bachte hain. Is liye \"digits nikalna\" bhi wahi remainder wala tareeqa hai, bas divisor 10 ya 100 hai. Base ko (10 ya 100 ka multiple) + (chhota number) likho aur aage wahi kaam."
+          },
+          {
+            "type": "example",
+            "title": "Example 26",
+            "problem": "Find the last two digits of the number \\((11)^{12}\\).",
+            "steps": [
+              "Given: \\((11)^{12}\\).\nTo find: is ke aakhri do digits.\nMethod: kisi number ke aakhri do digits wahi hote hain jo 100 se divide karne par remainder bachta hai (misaal: 3456 ko 100 se divide karein to 56 bachta hai). Is liye base ko (10 ka multiple + 1) ki shakal mein likh kar expand karte hain aur jo terms 100 ke multiple hain unhein chhor dete hain.",
+              "Step 1: Base ko naye tareeqe se likhein\n\\[(11)^{12} = (11^{2})^{6}\\]\n\\[= (121)^{6} = (120 + 1)^{6}\\]\nKyun: \\((10 + 1)^{12}\\) bhi likh sakte the, magar \\(120\\) lene se kaam chhota ho jata hai: power 12 ki bajaye 6. \\(120^{2} = 14400\\) hai, jo 100 ka multiple hai, is liye expansion ke sirf aakhri do terms kaam ke rahenge.",
+              "Step 2: Binomial theorem se expand karein\n\\[= {}^{6}C_{0}(120)^{6} + {}^{6}C_{1}(120)^{5}(1)^{1}\\]\n\\[+ {}^{6}C_{2}(120)^{4}(1)^{2} + {}^{6}C_{3}(120)^{3}(1)^{3}\\]\n\\[+ {}^{6}C_{4}(120)^{2}(1)^{4} + {}^{6}C_{5}(120)^{1}(1)^{5}\\]\n\\[+ {}^{6}C_{6}(1)^{6}\\]\n1 ki har power 1 hai, is liye:\n\\[= {}^{6}C_{0}(120)^{6} + \\dots + {}^{6}C_{4}(120)^{2}\\]\n\\[+ {}^{6}C_{5}(120) + 1\\]\nKyun: yahan \\(a = 120\\), \\(b = 1\\), \\(n = 6\\); kul 7 terms.",
+              "Step 3: 100 ke multiples hata dein\n\\({}^{6}C_{0}(120)^{6}\\) se \\({}^{6}C_{4}(120)^{2}\\) tak har term mein \\((120)^{2} = 14400\\) maujood hai, is liye in sab ka jor 100 ka multiple hai. Baqi bacha:\n\\[{}^{6}C_{5}(120) + 1 = 6(120) + 1\\]\n\\[= 720 + 1 = 721\\]\nKyun: 100 ka multiple hamesha 00 par khatam hota hai, is liye woh aakhri do digits ko badal nahin sakta. Jaise 14400 + 721 = 15121, aakhri do digits 21 hi rahe.",
+              "Step 4: Aakhri do digits\n\\[(11)^{12} = \\text{(multiple of 100)} + 721\\]\n\\[= 100k + 21\\]\nKyun: \\(721 = 700 + 21\\), aur 700 bhi 100 ka multiple hai, woh baqi multiple mein shaamil ho jata hai. Is liye aakhri do digits 21 hain.\nDhyan dein: 721 ke aakhri do digits 21 hain, 72 nahin; pehle do digits uthana aam ghalti hai.",
+              "Tasdeeq:\n\\(11^{12} = 3138428376721\\), jo waqai 21 par khatam hota hai."
+            ],
+            "answer": "\\((11)^{12}\\) ke aakhri do digits 21 hain."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 26 mein kitab likhti hai: \"A multiple of \\(100 + 6(120) + 1 = 100k + 72\\)\". Magar \\(6(120) + 1 = 721\\) hai, is liye sahi \\(100k + 21\\) hai. Kitab ka aakhri jawab, 21, durust hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Hamari practice ki misaal (kitab ki nahin): \\(9^{10}\\) ke aakhri do digits nikaalein.\n\\(9 = 10 - 1\\), is liye \\(9^{10} = (10 - 1)^{10}\\). Expansion ke aakhri teen terms: \\({}^{10}C_{8}(10)^{2}(-1)^{8} + {}^{10}C_{9}(10)(-1)^{9} + (-1)^{10}\\).\nPehla term \\(45 \\times 100\\), yani 100 ka multiple; us se pehle wale sab terms bhi 100 ke multiple. Baqi: \\(-10 \\times 10 + 1 = -100 + 1\\), aur \\(-100\\) bhi 100 ka multiple hai.\nIs liye \\(9^{10} = 100k + 1\\): aakhri do digits 01. Tasdeeq: \\(9^{10} = 3486784401\\). Sahi!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Divisibility ka matlab hai poora poora divide hona, yani remainder 0. Kisi expression ko \\(d\\) se divisible saabit karne ke liye humein dikhana hota hai ke woh \\(d \\times k\\) ke barabar hai, jahan \\(k\\) koi integer hai. Agli misaal mein do alag powers ka jor hai. Tareeqa wahi: dono bases ko 14 ke parosi numbers se likho, expand karo, aur dekho ke aakhri terms ka kya hota hai. Yahan woh ek doosre ko khatam kar dete hain, aur baqi har term mein 14 hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Divisibility Test"
+          },
+          {
+            "type": "example",
+            "title": "Example 27",
+            "problem": "Show that \\((15)^{13} + (13)^{15}\\) is divisible by 14.",
+            "steps": [
+              "Given: \\((15)^{13} + (13)^{15}\\).\nTo prove: yeh jor 14 se poora divide hota hai.\nMethod: ghor karein ke 15 aur 13 dono 14 ke parosi hain: \\(15 = 14 + 1\\) aur \\(13 = 14 - 1\\). Dono powers ko expand karenge; aakhri terms ke ilawa har term mein 14 hoga, aur dono aakhri terms (\\(+1\\) aur \\(-1\\)) aapas mein cancel ho jayenge.",
+              "Step 1: Dono bases ko 14 ki madad se likhein\n\\[(15)^{13} + (13)^{15} = (14 + 1)^{13} + (14 - 1)^{15}\\]\nKyun: is tarah divisor 14 har base ke andar aa jata hai, aur binomial theorem use kar sakte hain.",
+              "Step 2: \\((14 + 1)^{13}\\) expand karein\n\\[= {}^{13}C_{0}(14)^{13} + {}^{13}C_{1}(14)^{12}\\]\n\\[+ {}^{13}C_{2}(14)^{11} + \\dots\\]\n\\[+ {}^{13}C_{12}(14) + {}^{13}C_{13}\\]\nKyun: \\(a = 14\\), \\(b = 1\\), aur 1 ki har power 1. Aakhri term \\({}^{13}C_{13} = 1\\) hai; sirf isi mein 14 nahin.",
+              "Step 3: \\((14 - 1)^{15}\\) expand karein\n\\[= {}^{15}C_{0}(14)^{15} - {}^{15}C_{1}(14)^{14}\\]\n\\[+ {}^{15}C_{2}(14)^{13} - {}^{15}C_{3}(14)^{12}\\]\n\\[+ \\dots + {}^{15}C_{14}(14) - {}^{15}C_{15}\\]\nKyun: yahan \\(b = -1\\), is liye signs baari baari badalte hain. Aakhri se pehle term mein \\((-1)^{14} = +1\\), aur aakhri term mein \\((-1)^{15} = -1\\). Is liye aakhri term \\(-{}^{15}C_{15} = -1\\).\nDhyan dein: odd power par \\(-1\\) negative rehta hai; yahi sign poore sawal ki jaan hai.",
+              "Step 4: Jor dein; \\(+1\\) aur \\(-1\\) cancel\n\\[= {}^{13}C_{0}(14)^{13} + \\dots + {}^{13}C_{12}(14) + 1\\]\n\\[+ {}^{15}C_{0}(14)^{15} - \\dots\\]\n\\[+ {}^{15}C_{14}(14) - 1\\]\nAb jo terms bache hain un sab mein 14 ka factor hai.\nKyun: \\(+1 - 1 = 0\\). Isi liye sawal mein \\((14 + 1)\\) aur \\((14 - 1)\\) jor diye gaye hain: ek se \\(+1\\) aata hai, doosre ki odd power se \\(-1\\).",
+              "Step 5: 14 common nikaalein\n\\[= 14[{}^{13}C_{0}(14)^{12} + \\dots + {}^{13}C_{12}\\]\n\\[+ {}^{15}C_{0}(14)^{14} - {}^{15}C_{1}(14)^{13}\\]\n\\[+ \\dots + {}^{15}C_{14}]\\]\n\\[= 14k\\]\njo 14 se divide hota hai.\nKyun: har term ko 14 se divide karne ke baad bracket ke andar sab poore numbers hain, is liye \\(k\\) integer hai. Pehle group ka aakhri term ab \\({}^{13}C_{12} = 13\\) hai; bracket ke andar koi akela 1 nahin, woh step 4 mein cancel ho chuka.",
+              "Tasdeeq:\n15 ko 14 se divide karein to remainder 1, is liye \\(15^{13}\\) ka remainder 1. 13 ka remainder 13 yani \\(-1\\), aur odd power ki wajah se \\(13^{15}\\) ka remainder bhi \\(-1\\) yani 13. Kul \\(1 + 13 = 14\\), jo 14 se poora divide hota hai. Computer bhi yehi tasdeeq karta hai."
+            ],
+            "answer": "Saabit ho gaya: \\((15)^{13} + (13)^{15} = 14k\\), jo 14 se divide hota hai."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 27 ki aakhri do lines mein kitab expansion ke andar aur 14 ke baad wale bracket mein \"\\(+ \\dots + 1 +\\)\" rakhti hai. \\((14 + 1)^{13}\\) ka \\(+1\\) aur \\((14 - 1)^{15}\\) ka \\(-1\\) aapas mein cancel ho jate hain, is liye koi 1 baqi nahin rehta. Pehla group \\({}^{13}C_{12}(14)\\) par, aur 14 bahar nikalne ke baad \\({}^{13}C_{12}\\) par khatam hona chahiye. Natija (14 se divisible) durust hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice ki misaal hai, kitab ki nahin: \\(2^{51}\\) ko 3 se divide karne par remainder kya hoga?\n\\(2 = 3 - 1\\), is liye \\(2^{51} = (3 - 1)^{51}\\). Aakhri term ke ilawa har term mein 3 hai. Aakhri term \\((-1)^{51} = -1\\), kyun ke 51 odd hai.\nTo \\(2^{51} = 3k - 1 = 3(k - 1) + 2\\). Remainder 2 hai (yani \\(3 - 1\\)).\nTasdeeq: \\(2^{1} = 2\\), \\(2^{3} = 8 = 6 + 2\\): odd powers ka remainder 2 hi aata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Ek aur practice: dikhaiye ke har natural number \\(n\\) ke liye \\(2^{3n} - 1\\) number 7 se divide hota hai.\n\\(2^{3n} = (2^{3})^{n} = 8^{n} = (7 + 1)^{n}\\). Expansion mein aakhri term \\(1^{n} = 1\\) hai aur baqi har term mein 7 hai, yani \\(8^{n} = 7k + 1\\).\nIs liye \\(2^{3n} - 1 = 7k + 1 - 1 = 7k\\), jo 7 se divide hota hai. Tasdeeq: \\(n = 1\\): \\(8 - 1 = 7\\); \\(n = 2\\): \\(64 - 1 = 63 = 7 \\times 9\\).\nYeh sawal aap ne Exercise 8.1 mein induction se bhi kiya hoga; binomial theorem se yeh do lines ka kaam hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(10^{50}\\) ko 9 se divide karein to remainder kya hoga?\nJawab: \\(10 = 9 + 1\\), is liye \\(10^{50} = (9 + 1)^{50} = 9k + 1\\); remainder 1. Isi wajah se kisi number ke digits ka jor aur khud number, 9 se divide karne par ek hi remainder dete hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(7^{100}\\) ka aakhri digit kya hai? Ishara: 7 ki powers ke aakhri digits \\(7, 9, 3, 1\\) hain, aur \\(100 = 4 \\times 25 + 0\\).\nJawab: remainder 0 ka matlab hai cycle ka aakhri number, yani \\(7^{4} = 2401\\) wala 1. Is liye aakhri digit 1."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Remainder, digit ya divisibility ke har sawal mein pehle yeh teen lines likhein:\n1. Base = (divisor ka multiple) \\(\\pm\\) (chhota number).\n2. \"Aakhri term ke ilawa har term mein divisor hai.\"\n3. Aakhri term, aur us ka sign power (even ya odd) se.\nPhir natija ek saaf jumle mein likhein, jaise kitab likhti hai. Examiner sab se pehle yehi teen baatein dhoondta hai.\nAakhri term ka sign likhte waqt power ko zor se parhiye: \"100 even hai, is liye \\((-1)^{100} = +1\\)\". Yeh ek jumla kai marks bacha leta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Khulasa: aaj humne dekha ke binomial theorem sirf algebra ka formula nahin, numbers ki duniya ka bhi auzaar hai. Bari power ka remainder, aakhri digit, aakhri do digits, fractional part aur divisibility, sab ek hi chaal se hal hue: base ko divisor ke qareeb wale number ki shakal mein likho, expand karo, aur sirf aakhri term par dhyan do. Agle sabaq (8.6) mein hum dekhenge ke binomial theorem aur induction asal zindagi ke masail mein kaise kaam aate hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(N^{m} \\div d\\) ka remainder: \\(N = (d \\text{ ka multiple}) \\pm r\\) likho; sirf \\((\\pm r)^{m}\\) ahem hai.\n2. \\((d + 1)^{m}\\) ka remainder 1; \\((d - 1)^{m}\\) ka remainder even \\(m\\) par 1 aur odd \\(m\\) par \\(d - 1\\).\n3. Aakhri digit = 10 se remainder; aakhri do digits = 100 se remainder.\n4. Powers ke aakhri digits 1, 2 ya 4 ke cycle mein dohraate hain; exponent ko 4 se divide kar ke remainder dekho.\n5. Fractional part: number ko integer + (1 se chhota fraction) likho.\n6. Divisibility: dikhao ke expression \\(d \\times k\\) hai, jahan \\(k\\) integer ho."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\((d - 1)^{m}\\) mein aakhri term ka sign bhool jana: odd \\(m\\) par yeh \\(-1\\) hai aur remainder \\(d - 1\\), \\(-1\\) nahin.\n2. \"Taqreeban sab terms divide ho gaye\" soch kar remainder 0 likh dena: asal jawab to aakhri term hi hai.\n3. Digits wale sawal mein 721 ke pehle do digits (72) utha lena; aakhri do digits 21 hain.\n4. Cycle ki ghalat lambai: 3 aur 7 ki powers 4 ke cycle mein, 4 aur 9 ki 2 ke cycle mein, 5 aur 6 ki 1 ke cycle mein dohraati hain."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-2-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-2-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 280,
+          "pdf_to": 280,
+          "note": "Exercise 14.2, Question 6 (i)-(ii) (book p.275). (ii) asks to show a right triangle but P, Q, R form none; the key (PDF 312) agrees; correction callout."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(i)",
+            "prompt": "6 (i) Show that the vectors \\(3\\underline{i} - 2\\underline{j} + \\underline{k}\\), \\(\\underline{i} - 3\\underline{j} + 5\\underline{k}\\) and \\(2\\underline{i} + \\underline{j} - 4\\underline{k}\\) form a right triangle.",
+            "explanation": "Two things must be shown: the three vectors really make a triangle, and one angle is \\(90^{\\circ}\\).\nPlan: show one vector is the sum of the other two (they close up head to tail), then find a pair with dot product 0.",
+            "steps": [
+              "Given: \\(\\underline{a} = 3\\underline{i} - 2\\underline{j} + \\underline{k}\\), \\(\\underline{b} = \\underline{i} - 3\\underline{j} + 5\\underline{k}\\), \\(\\underline{c} = 2\\underline{i} + \\underline{j} - 4\\underline{k}\\).\nTo prove: \\(\\underline{a}\\), \\(\\underline{b}\\), \\(\\underline{c}\\) form a right triangle.\nMethod: Three vectors are the sides of a triangle when one equals the sum of the other two. A right angle shows up as a zero dot product.",
+              "They form a triangle\n\\[\\underline{b} + \\underline{c} = (1 + 2)\\underline{i} + (-3 + 1)\\underline{j}\\]\n\\[\\quad + (5 - 4)\\underline{k}\\]\n\\[= 3\\underline{i} - 2\\underline{j} + \\underline{k} = \\underline{a}\\]\nWhy: Put \\(\\underline{b}\\) and \\(\\underline{c}\\) head to tail; \\(\\underline{a}\\) joins the start of \\(\\underline{b}\\) to the end of \\(\\underline{c}\\), so the three close a triangle.",
+              "Look for a zero dot product\n\\[\\underline{a}\\cdot\\underline{b} = 3 + 6 + 5 = 14\\]\n\\[\\underline{b}\\cdot\\underline{c} = 2 - 3 - 20 = -21\\]\n\\[\\underline{a}\\cdot\\underline{c} = 6 - 2 - 4 = 0\\]\nWhy: Only the pair \\(\\underline{a}\\), \\(\\underline{c}\\) gives 0, so sides \\(\\underline{a}\\) and \\(\\underline{c}\\) are perpendicular.",
+              "Check with Pythagoras\n\\[|\\underline{a}|^2 = 14,\\ |\\underline{b}|^2 = 35,\\ |\\underline{c}|^2 = 21\\]\n\\[|\\underline{a}|^2 + |\\underline{c}|^2 = 14 + 21\\]\n\\[= 35 = |\\underline{b}|^2 \\;\\checkmark\\]\nWhy: In a right triangle the square of the hypotenuse (\\(\\underline{b}\\), opposite the right angle) equals the sum of the squares of the other two sides."
+            ],
+            "final_answer": "Hence proved: \\(\\underline{b} + \\underline{c} = \\underline{a}\\), so the vectors form a triangle, and \\(\\underline{a}\\cdot\\underline{c} = 0\\), so it is a right triangle (right angle between \\(3\\underline{i} - 2\\underline{j} + \\underline{k}\\) and \\(2\\underline{i} + \\underline{j} - 4\\underline{k}\\))."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(ii)",
+            "prompt": "6 (ii) Show that the set of points \\(P(4, -1, 2)\\), \\(Q(1, 3, -1)\\) and \\(R(-2, 4, 6)\\) form a right triangle.",
+            "explanation": "A triangle has a right angle at a vertex when the two sides from that vertex have dot product 0.\nPlan: find the three side vectors, test the angle at each vertex, and conclude.",
+            "steps": [
+              "Given: \\(P(4, -1, 2)\\), \\(Q(1, 3, -1)\\), \\(R(-2, 4, 6)\\).\nTo test: is \\(PQR\\) a right triangle?\nMethod: Find \\(\\underline{PQ}\\), \\(\\underline{QR}\\), \\(\\underline{PR}\\) (head minus tail) and test the dot product at \\(P\\), \\(Q\\) and \\(R\\).",
+              "Side vectors\n\\[\\underline{PQ} = -3\\underline{i} + 4\\underline{j} - 3\\underline{k}\\]\n\\[\\underline{QR} = -3\\underline{i} + \\underline{j} + 7\\underline{k}\\]\n\\[\\underline{PR} = -6\\underline{i} + 5\\underline{j} + 4\\underline{k}\\]\nWhy: e.g. \\(\\underline{PQ} = (1 - 4, 3 + 1, -1 - 2)\\).",
+              "Angle at \\(P\\)\n\\[\\underline{PQ}\\cdot\\underline{PR} = 18 + 20 - 12\\]\n\\[= 26 \\ne 0\\]\nWhy: Both sides start at \\(P\\).",
+              "Angle at \\(Q\\)\n\\[\\underline{QP} = 3\\underline{i} - 4\\underline{j} + 3\\underline{k}\\]\n\\[\\underline{QP}\\cdot\\underline{QR} = -9 - 4 + 21\\]\n\\[= 8 \\ne 0\\]\nWhy: Both sides must start at \\(Q\\), so we use \\(\\underline{QP} = -\\underline{PQ}\\).",
+              "Angle at \\(R\\)\n\\[\\underline{RP} = 6\\underline{i} - 5\\underline{j} - 4\\underline{k}\\]\n\\[\\underline{RQ} = 3\\underline{i} - \\underline{j} - 7\\underline{k}\\]\n\\[\\underline{RP}\\cdot\\underline{RQ} = 18 + 5 + 28\\]\n\\[= 51 \\ne 0\\]\nWhy: Both sides start at \\(R\\).",
+              "Conclusion and check\n\\[|PQ|^2 = 34,\\ |QR|^2 = 59,\\ |PR|^2 = 77\\]\n\\[34 + 59 = 93 \\ne 77\\]\nWhy: No dot product is zero, so no angle is \\(90^{\\circ}\\) (all three are positive, so all angles are acute). Pythagoras also fails for the longest side."
+            ],
+            "final_answer": "The statement cannot be shown: \\(P\\), \\(Q\\), \\(R\\) form a triangle with no right angle (dot products 26, 8, 51)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book asks to show that \\(P(4, -1, 2)\\), \\(Q(1, 3, -1)\\), \\(R(-2, 4, 6)\\) form a right triangle. This is false: the dot products at \\(P\\), \\(Q\\), \\(R\\) are 26, 8 and 51, none zero. The book's own answer key (PDF 312) says the points do not form a right triangle, which is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-2-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-2-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 238,
+          "pdf_to": 238,
+          "note": "Exercise 12.2, Question 3: continuity at x = 2 and x = -2 (book p.233). Answer key PDF 310 labels the two answers (i), (ii) and wrongly says discontinuous at x = 2."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3 If \\[f(x) = \\begin{cases} 3x, & x \\le -2 \\\\ x^2 - 1, & -2 < x < 2 \\\\ 3, & x \\ge 2 \\end{cases}\\]discuss continuity at \\(x = 2\\) and \\(x = -2\\).",
+            "explanation": "A continuity question at two points of a three-piece function.\nAt each point where the formula changes we test the three conditions separately.\nPlan: (a) at \\(x = 2\\): \\(f(2)\\), LHL, RHL; (b) at \\(x = -2\\): the same.",
+            "steps": [
+              "Given: \\(f(x) = 3x\\) for \\(x \\le -2\\), \\(x^2 - 1\\) for \\(-2 < x < 2\\), \\(3\\) for \\(x \\ge 2\\).\nTo find: whether \\(f\\) is continuous at \\(x = 2\\) and at \\(x = -2\\).\nMethod: \\(f\\) is continuous at \\(x = c\\) when three conditions hold: (i) \\(f(c)\\) is defined, (ii) \\(\\lim_{x \\to c} f(x)\\) exists (LHL = RHL), (iii) \\(\\lim_{x \\to c} f(x) = f(c)\\). If any one fails, \\(f\\) is discontinuous at \\(c\\).",
+              "(a) At \\(x = 2\\): find \\(f(2)\\)\n\\[f(2) = 3\\]\nWhy: \\(x \\ge 2\\) includes 2, so the constant piece 3 gives \\(f(2)\\).",
+              "(a) Left hand limit at 2\n\\[\\lim_{x \\to 2^-} f(x) = \\lim_{x \\to 2^-} (x^2 - 1)\\]\n\\[= 4 - 1 = 3\\]\nWhy: Just left of 2 we are in \\(-2 < x < 2\\), the middle piece.",
+              "(a) Right hand limit at 2\n\\[\\lim_{x \\to 2^+} f(x) = \\lim_{x \\to 2^+} 3 = 3\\]\nWhy: Right of 2 the function is the constant 3; the limit of a constant is the constant.",
+              "(a) Conclusion at \\(x = 2\\)\n\\[\\text{LHL} = \\text{RHL} = 3 = f(2)\\]\nWhy: All three conditions hold, so \\(f\\) is continuous at \\(x = 2\\). The parabola reaches height 3 exactly where the flat line starts.",
+              "(b) At \\(x = -2\\): find \\(f(-2)\\)\n\\[f(-2) = 3(-2) = -6\\]\nWhy: \\(x \\le -2\\) includes \\(-2\\), so the first piece \\(3x\\) is used.",
+              "(b) Left hand limit at \\(-2\\)\n\\[\\lim_{x \\to -2^-} f(x) = \\lim_{x \\to -2^-} 3x\\]\n\\[= -6\\]\nWhy: Left of \\(-2\\) (like \\(-2.01\\)) the first piece is used.",
+              "(b) Right hand limit at \\(-2\\)\n\\[\\lim_{x \\to -2^+} f(x) = \\lim_{x \\to -2^+} (x^2 - 1)\\]\n\\[= (-2)^2 - 1 = 3\\]\nWhy: Right of \\(-2\\) (like \\(-1.99\\)) we are in the middle piece. Note \\((-2)^2 = +4\\).",
+              "(b) Conclusion at \\(x = -2\\)\n\\[\\text{LHL} = -6\\]\n\\[\\text{RHL} = 3\\]\n\\[-6 \\ne 3\\]\nWhy: The one-sided limits differ, so \\(\\lim_{x \\to -2} f(x)\\) does not exist; condition (ii) fails and \\(f\\) is discontinuous at \\(x = -2\\) (the graph jumps from \\(-6\\) up to 3).",
+              "Check\n\\[f(1.99) = 3.9601 - 1 = 2.9601\\]\n\\[f(-2.01) = -6.03,\\ f(-1.99) = 2.9601\\]\nWhy: Near 2 both sides are close to 3; near \\(-2\\) the two sides are far apart, confirming the jump."
+            ],
+            "final_answer": "\\(f\\) is continuous at \\(x = 2\\) and discontinuous at \\(x = -2\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \"(i) \\(f\\) is discontinuous at \\(x = 2\\)\". This is wrong: at \\(x = 2\\) the left hand limit is \\(2^2 - 1 = 3\\), the right hand limit is 3 and \\(f(2) = 3\\), so \\(f\\) is continuous at \\(x = 2\\). The key's \"(ii) \\(f\\) is discontinuous at \\(x = -2\\)\" is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-3-Q3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-3-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH4-EXERCISE-4-3-Q3",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 81,
+          "pdf_to": 81,
+          "note": "Exercise 4.3, Question 3: book page 76 (PDF 81); answer key PDF 303"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Solve the following system of linear equations by Cramer's rule: \\(2x + y - z = 1\\), \\(x - y + 2z = 3\\), \\(3x + 2y + z = 4\\)",
+            "explanation": "Teen unknowns wali teen equations hain, aur inhein determinants (Cramer's rule) se hal karna hai.\nTeeno unknowns nikalne hain.\nPlan: pehle \\(|A|\\), phir teen aur determinants jin mein ek ek column constants se badla gaya ho, phir divide, aur aakhir mein tasdeeq.\nDhyan dein: Cramer's rule mein sab se aam ghalti yeh hai ke constants ko ghalat column mein rakh diya jaye. \\(x\\) ke liye pehla column, \\(y\\) ke liye doosra aur \\(z\\) ke liye teesra column badalta hai, baqi columns bilkul waise hi rehte hain. Doosri ghalti determinant expand karte waqt beech wale term ka minus bhoolna hai: \\(a_{11}M_{11} - a_{12}M_{12} + a_{13}M_{13}\\). Yaad rakhein: yeh rule sirf tab chalta hai jab \\(|A| \\neq 0\\) ho.",
+            "steps": [
+              "Diya gaya hai: \\(2x + y - z = 1\\), \\(x - y + 2z = 3\\), \\(3x + 2y + z = 4\\)\nHumein find karna hai: Cramer's rule se \\(x, y, z\\).\nTareeqa: System ko \\(AX = B\\) ki shakal mein likhenge. Agar \\(|A| \\neq 0\\) ho to \\(x = \\dfrac{|A_{x}|}{|A|}\\), \\(y = \\dfrac{|A_{y}|}{|A|}\\), \\(z = \\dfrac{|A_{z}|}{|A|}\\). Yahan \\(|A_{x}|\\) ka matlab hai \\(|A|\\) ka pehla column hata kar us ki jagah constants (right side ke numbers) rakh dena; doosre ke liye doosra column, teesre ke liye teesra column.",
+              "Coefficient matrix aur constants likhein\n\\[A = \\begin{bmatrix}2 & 1 & -1 \\\\ 1 & -1 & 2 \\\\ 3 & 2 & 1\\end{bmatrix}\\]\n\\[B = \\begin{bmatrix}1 \\\\ 3 \\\\ 4\\end{bmatrix}\\]\nKyun: \\(A\\) ki har row ek equation ke coefficients hain, usi tarteeb mein jis mein variables \\(x, y, z\\) hain. Agar koi variable equation mein na ho to us ka coefficient 0 likhte hain, aur sirf \\(x\\) likha ho to coefficient 1 hota hai.",
+              "\\(|A|\\) nikalein (\\(R_1\\) ke saath expand)\n\\[|A| = \\begin{vmatrix}2 & 1 & -1 \\\\ 1 & -1 & 2 \\\\ 3 & 2 & 1\\end{vmatrix}\\]\n\\[= 2(-1 - 4) - 1(1 - 6) - 1(2 + 3)\\]\n\\[= -10 + 5 - 5\\]\n\\[= -10\\]\nKyun: \\(|A| \\neq 0\\) hai, is liye Cramer's rule lag sakta hai aur system ka ek hi (unique) hal hai. Agar \\(|A| = 0\\) hota to yeh rule kaam na karta, kyunke zero se divide nahi kar sakte.",
+              "\\(|A_{x}|\\) nikalein: column 1 ki jagah \\(B\\)\n\\[|A_{x}| = \\begin{vmatrix}1 & 1 & -1 \\\\ 3 & -1 & 2 \\\\ 4 & 2 & 1\\end{vmatrix}\\]\n\\[= 1(-1 - 4) - 1(3 - 8) - 1(6 + 4)\\]\n\\[= -5 + 5 - 10\\]\n\\[= -10\\]\nKyun: \\(x\\) ke liye \\(A\\) ka pehla column, yani \\(x\\) ke coefficients wala column, hata kar us ki jagah constants \\(1, 3, 4\\) rakhe. Baqi do columns bilkul waise hi rehte hain.",
+              "\\(|A_{y}|\\) nikalein: column 2 ki jagah \\(B\\)\n\\[|A_{y}| = \\begin{vmatrix}2 & 1 & -1 \\\\ 1 & 3 & 2 \\\\ 3 & 4 & 1\\end{vmatrix}\\]\n\\[= 2(3 - 8) - 1(1 - 6) - 1(4 - 9)\\]\n\\[= -10 + 5 + 5\\]\n\\[= 0\\]\nKyun: \\(y\\) ke liye \\(A\\) ka doosra column, yani \\(y\\) ke coefficients wala column, hata kar us ki jagah constants \\(1, 3, 4\\) rakhe. Baqi do columns bilkul waise hi rehte hain.",
+              "\\(|A_{z}|\\) nikalein: column 3 ki jagah \\(B\\)\n\\[|A_{z}| = \\begin{vmatrix}2 & 1 & 1 \\\\ 1 & -1 & 3 \\\\ 3 & 2 & 4\\end{vmatrix}\\]\n\\[= 2(-4 - 6) - 1(4 - 9) + 1(2 + 3)\\]\n\\[= -20 + 5 + 5\\]\n\\[= -10\\]\nKyun: \\(z\\) ke liye \\(A\\) ka teesra column, yani \\(z\\) ke coefficients wala column, hata kar us ki jagah constants \\(1, 3, 4\\) rakhe. Baqi do columns bilkul waise hi rehte hain.",
+              "Cramer's rule lagayein\n\\[x = \\dfrac{|A_{x}|}{|A|} = \\dfrac{-10}{-10} = 1\\]\n\\[y = \\dfrac{|A_{y}|}{|A|} = \\dfrac{0}{-10} = 0\\]\n\\[z = \\dfrac{|A_{z}|}{|A|} = \\dfrac{-10}{-10} = 1\\]\nKyun: Har variable ka apna determinant \\(|A|\\) se divide hota hai. Fraction ko simplify karein aur sign ka khayal rakhein: negative ko negative se divide karein to positive aata hai.",
+              "Tasdeeq: teeno equations mein rakh kar dekhein\n\\[2(1) + (0) - (1) = 1 \\;\\checkmark\\]\n\\[(1) - (0) + 2(1) = 3 \\;\\checkmark\\]\n\\[3(1) + 2(0) + (1) = 4 \\;\\checkmark\\]\nKyun: Values har equation ko poora karti hain, is liye hal bilkul sahi hai. Exam mein yeh check zaroor karein, ek determinant ki chhoti si ghalti poora jawab badal deti hai."
+            ],
+            "final_answer": "Solution set \\(\\{(1, 0, 1)\\}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Solve the following system of linear equations by Cramer's rule: \\(x_1 + 2x_2 - 3x_3 = 0\\), \\(4x_1 - x_2 + x_3 = 5\\), \\(-2x_1 + 3x_2 + 2x_3 = 3\\)",
+            "explanation": "Teen unknowns wali teen equations hain, aur inhein determinants (Cramer's rule) se hal karna hai.\nTeeno unknowns nikalne hain.\nPlan: pehle \\(|A|\\), phir teen aur determinants jin mein ek ek column constants se badla gaya ho, phir divide, aur aakhir mein tasdeeq.\nDhyan dein: Cramer's rule mein sab se aam ghalti yeh hai ke constants ko ghalat column mein rakh diya jaye. \\(x\\) ke liye pehla column, \\(y\\) ke liye doosra aur \\(z\\) ke liye teesra column badalta hai, baqi columns bilkul waise hi rehte hain. Doosri ghalti determinant expand karte waqt beech wale term ka minus bhoolna hai: \\(a_{11}M_{11} - a_{12}M_{12} + a_{13}M_{13}\\). Yaad rakhein: yeh rule sirf tab chalta hai jab \\(|A| \\neq 0\\) ho.",
+            "steps": [
+              "Diya gaya hai: \\(x_1 + 2x_2 - 3x_3 = 0\\), \\(4x_1 - x_2 + x_3 = 5\\), \\(-2x_1 + 3x_2 + 2x_3 = 3\\)\nHumein find karna hai: Cramer's rule se \\(x_1, x_2, x_3\\).\nTareeqa: System ko \\(AX = B\\) ki shakal mein likhenge. Agar \\(|A| \\neq 0\\) ho to \\(x_1 = \\dfrac{|A_{x_1}|}{|A|}\\), \\(x_2 = \\dfrac{|A_{x_2}|}{|A|}\\), \\(x_3 = \\dfrac{|A_{x_3}|}{|A|}\\). Yahan \\(|A_{x_1}|\\) ka matlab hai \\(|A|\\) ka pehla column hata kar us ki jagah constants (right side ke numbers) rakh dena; doosre ke liye doosra column, teesre ke liye teesra column.",
+              "Coefficient matrix aur constants likhein\n\\[A = \\begin{bmatrix}1 & 2 & -3 \\\\ 4 & -1 & 1 \\\\ -2 & 3 & 2\\end{bmatrix}\\]\n\\[B = \\begin{bmatrix}0 \\\\ 5 \\\\ 3\\end{bmatrix}\\]\nKyun: \\(A\\) ki har row ek equation ke coefficients hain, usi tarteeb mein jis mein variables \\(x_1, x_2, x_3\\) hain. Agar koi variable equation mein na ho to us ka coefficient 0 likhte hain, aur sirf \\(x\\) likha ho to coefficient 1 hota hai.",
+              "\\(|A|\\) nikalein (\\(R_1\\) ke saath expand)\n\\[|A| = \\begin{vmatrix}1 & 2 & -3 \\\\ 4 & -1 & 1 \\\\ -2 & 3 & 2\\end{vmatrix}\\]\n\\[= 1(-2 - 3) - 2(8 + 2) - 3(12 - 2)\\]\n\\[= -5 - 20 - 30\\]\n\\[= -55\\]\nKyun: \\(|A| \\neq 0\\) hai, is liye Cramer's rule lag sakta hai aur system ka ek hi (unique) hal hai. Agar \\(|A| = 0\\) hota to yeh rule kaam na karta, kyunke zero se divide nahi kar sakte.",
+              "\\(|A_{x_1}|\\) nikalein: column 1 ki jagah \\(B\\)\n\\[|A_{x_1}| = \\begin{vmatrix}0 & 2 & -3 \\\\ 5 & -1 & 1 \\\\ 3 & 3 & 2\\end{vmatrix}\\]\n\\[= 0(-2 - 3) - 2(10 - 3) - 3(15 + 3)\\]\n\\[= 0 - 14 - 54\\]\n\\[= -68\\]\nKyun: \\(x_1\\) ke liye \\(A\\) ka pehla column, yani \\(x_1\\) ke coefficients wala column, hata kar us ki jagah constants \\(0, 5, 3\\) rakhe. Baqi do columns bilkul waise hi rehte hain.",
+              "\\(|A_{x_2}|\\) nikalein: column 2 ki jagah \\(B\\)\n\\[|A_{x_2}| = \\begin{vmatrix}1 & 0 & -3 \\\\ 4 & 5 & 1 \\\\ -2 & 3 & 2\\end{vmatrix}\\]\n\\[= 1(10 - 3) + 0(8 + 2) - 3(12 + 10)\\]\n\\[= 7 + 0 - 66\\]\n\\[= -59\\]\nKyun: \\(x_2\\) ke liye \\(A\\) ka doosra column, yani \\(x_2\\) ke coefficients wala column, hata kar us ki jagah constants \\(0, 5, 3\\) rakhe. Baqi do columns bilkul waise hi rehte hain.",
+              "\\(|A_{x_3}|\\) nikalein: column 3 ki jagah \\(B\\)\n\\[|A_{x_3}| = \\begin{vmatrix}1 & 2 & 0 \\\\ 4 & -1 & 5 \\\\ -2 & 3 & 3\\end{vmatrix}\\]\n\\[= 1(-3 - 15) - 2(12 + 10) + 0(12 - 2)\\]\n\\[= -18 - 44 + 0\\]\n\\[= -62\\]\nKyun: \\(x_3\\) ke liye \\(A\\) ka teesra column, yani \\(x_3\\) ke coefficients wala column, hata kar us ki jagah constants \\(0, 5, 3\\) rakhe. Baqi do columns bilkul waise hi rehte hain.",
+              "Cramer's rule lagayein\n\\[x_1 = \\dfrac{|A_{x_1}|}{|A|} = \\dfrac{-68}{-55} = \\dfrac{68}{55}\\]\n\\[x_2 = \\dfrac{|A_{x_2}|}{|A|} = \\dfrac{-59}{-55} = \\dfrac{59}{55}\\]\n\\[x_3 = \\dfrac{|A_{x_3}|}{|A|} = \\dfrac{-62}{-55} = \\dfrac{62}{55}\\]\nKyun: Har variable ka apna determinant \\(|A|\\) se divide hota hai. Fraction ko simplify karein aur sign ka khayal rakhein: negative ko negative se divide karein to positive aata hai.",
+              "Tasdeeq: teeno equations mein rakh kar dekhein\n\\[\\left(\\frac{68}{55}\\right) + 2\\left(\\frac{59}{55}\\right) - 3\\left(\\frac{62}{55}\\right) = 0 \\;\\checkmark\\]\n\\[4\\left(\\frac{68}{55}\\right) - \\left(\\frac{59}{55}\\right) + \\left(\\frac{62}{55}\\right) = 5 \\;\\checkmark\\]\n\\[-2\\left(\\frac{68}{55}\\right) + 3\\left(\\frac{59}{55}\\right) + 2\\left(\\frac{62}{55}\\right) = 3 \\;\\checkmark\\]\nKyun: Values har equation ko poora karti hain, is liye hal bilkul sahi hai. Exam mein yeh check zaroor karein, ek determinant ki chhoti si ghalti poora jawab badal deti hai."
+            ],
+            "final_answer": "Solution set \\(\\{(\\frac{68}{55}, \\frac{59}{55}, \\frac{62}{55})\\}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) Solve the following system of linear equations by Cramer's rule: \\(2x_1 - x_2 + x_3 = 1\\), \\(x_1 + 2x_2 + 2x_3 = 2\\), \\(x_1 - 2x_2 - x_3 = 1\\)",
+            "explanation": "Teen unknowns wali teen equations hain, aur inhein determinants (Cramer's rule) se hal karna hai.\nTeeno unknowns nikalne hain.\nPlan: pehle \\(|A|\\), phir teen aur determinants jin mein ek ek column constants se badla gaya ho, phir divide, aur aakhir mein tasdeeq.\nDhyan dein: Cramer's rule mein sab se aam ghalti yeh hai ke constants ko ghalat column mein rakh diya jaye. \\(x\\) ke liye pehla column, \\(y\\) ke liye doosra aur \\(z\\) ke liye teesra column badalta hai, baqi columns bilkul waise hi rehte hain. Doosri ghalti determinant expand karte waqt beech wale term ka minus bhoolna hai: \\(a_{11}M_{11} - a_{12}M_{12} + a_{13}M_{13}\\). Yaad rakhein: yeh rule sirf tab chalta hai jab \\(|A| \\neq 0\\) ho.",
+            "steps": [
+              "Diya gaya hai: \\(2x_1 - x_2 + x_3 = 1\\), \\(x_1 + 2x_2 + 2x_3 = 2\\), \\(x_1 - 2x_2 - x_3 = 1\\)\nHumein find karna hai: Cramer's rule se \\(x_1, x_2, x_3\\).\nTareeqa: System ko \\(AX = B\\) ki shakal mein likhenge. Agar \\(|A| \\neq 0\\) ho to \\(x_1 = \\dfrac{|A_{x_1}|}{|A|}\\), \\(x_2 = \\dfrac{|A_{x_2}|}{|A|}\\), \\(x_3 = \\dfrac{|A_{x_3}|}{|A|}\\). Yahan \\(|A_{x_1}|\\) ka matlab hai \\(|A|\\) ka pehla column hata kar us ki jagah constants (right side ke numbers) rakh dena; doosre ke liye doosra column, teesre ke liye teesra column.",
+              "Coefficient matrix aur constants likhein\n\\[A = \\begin{bmatrix}2 & -1 & 1 \\\\ 1 & 2 & 2 \\\\ 1 & -2 & -1\\end{bmatrix}\\]\n\\[B = \\begin{bmatrix}1 \\\\ 2 \\\\ 1\\end{bmatrix}\\]\nKyun: \\(A\\) ki har row ek equation ke coefficients hain, usi tarteeb mein jis mein variables \\(x_1, x_2, x_3\\) hain. Agar koi variable equation mein na ho to us ka coefficient 0 likhte hain, aur sirf \\(x\\) likha ho to coefficient 1 hota hai.",
+              "\\(|A|\\) nikalein (\\(R_1\\) ke saath expand)\n\\[|A| = \\begin{vmatrix}2 & -1 & 1 \\\\ 1 & 2 & 2 \\\\ 1 & -2 & -1\\end{vmatrix}\\]\n\\[= 2(-2 + 4) + 1(-1 - 2) + 1(-2 - 2)\\]\n\\[= 4 - 3 - 4\\]\n\\[= -3\\]\nKyun: \\(|A| \\neq 0\\) hai, is liye Cramer's rule lag sakta hai aur system ka ek hi (unique) hal hai. Agar \\(|A| = 0\\) hota to yeh rule kaam na karta, kyunke zero se divide nahi kar sakte.",
+              "\\(|A_{x_1}|\\) nikalein: column 1 ki jagah \\(B\\)\n\\[|A_{x_1}| = \\begin{vmatrix}1 & -1 & 1 \\\\ 2 & 2 & 2 \\\\ 1 & -2 & -1\\end{vmatrix}\\]\n\\[= 1(-2 + 4) + 1(-2 - 2) + 1(-4 - 2)\\]\n\\[= 2 - 4 - 6\\]\n\\[= -8\\]\nKyun: \\(x_1\\) ke liye \\(A\\) ka pehla column, yani \\(x_1\\) ke coefficients wala column, hata kar us ki jagah constants \\(1, 2, 1\\) rakhe. Baqi do columns bilkul waise hi rehte hain.",
+              "\\(|A_{x_2}|\\) nikalein: column 2 ki jagah \\(B\\)\n\\[|A_{x_2}| = \\begin{vmatrix}2 & 1 & 1 \\\\ 1 & 2 & 2 \\\\ 1 & 1 & -1\\end{vmatrix}\\]\n\\[= 2(-2 - 2) - 1(-1 - 2) + 1(1 - 2)\\]\n\\[= -8 + 3 - 1\\]\n\\[= -6\\]\nKyun: \\(x_2\\) ke liye \\(A\\) ka doosra column, yani \\(x_2\\) ke coefficients wala column, hata kar us ki jagah constants \\(1, 2, 1\\) rakhe. Baqi do columns bilkul waise hi rehte hain.",
+              "\\(|A_{x_3}|\\) nikalein: column 3 ki jagah \\(B\\)\n\\[|A_{x_3}| = \\begin{vmatrix}2 & -1 & 1 \\\\ 1 & 2 & 2 \\\\ 1 & -2 & 1\\end{vmatrix}\\]\n\\[= 2(2 + 4) + 1(1 - 2) + 1(-2 - 2)\\]\n\\[= 12 - 1 - 4\\]\n\\[= 7\\]\nKyun: \\(x_3\\) ke liye \\(A\\) ka teesra column, yani \\(x_3\\) ke coefficients wala column, hata kar us ki jagah constants \\(1, 2, 1\\) rakhe. Baqi do columns bilkul waise hi rehte hain.",
+              "Cramer's rule lagayein\n\\[x_1 = \\dfrac{|A_{x_1}|}{|A|} = \\dfrac{-8}{-3} = \\dfrac{8}{3}\\]\n\\[x_2 = \\dfrac{|A_{x_2}|}{|A|} = \\dfrac{-6}{-3} = 2\\]\n\\[x_3 = \\dfrac{|A_{x_3}|}{|A|} = \\dfrac{7}{-3} = -\\dfrac{7}{3}\\]\nKyun: Har variable ka apna determinant \\(|A|\\) se divide hota hai. Fraction ko simplify karein aur sign ka khayal rakhein: negative ko negative se divide karein to positive aata hai.",
+              "Tasdeeq: teeno equations mein rakh kar dekhein\n\\[2\\left(\\frac{8}{3}\\right) - (2) + \\left(-\\frac{7}{3}\\right) = 1 \\;\\checkmark\\]\n\\[\\left(\\frac{8}{3}\\right) + 2(2) + 2\\left(-\\frac{7}{3}\\right) = 2 \\;\\checkmark\\]\n\\[\\left(\\frac{8}{3}\\right) - 2(2) - \\left(-\\frac{7}{3}\\right) = 1 \\;\\checkmark\\]\nKyun: Values har equation ko poora karti hain, is liye hal bilkul sahi hai. Exam mein yeh check zaroor karein, ek determinant ki chhoti si ghalti poora jawab badal deti hai."
+            ],
+            "final_answer": "Solution set \\(\\{(\\frac{8}{3}, 2, -\\frac{7}{3})\\}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

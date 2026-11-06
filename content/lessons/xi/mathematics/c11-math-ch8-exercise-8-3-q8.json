@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-3-Q8",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-3-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 167,
+          "pdf_to": 167,
+          "note": "Exercise 8.3, Question 8: book page 162 (PDF 167); show-that question, no answer in the key (PDF 307)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8. Use binomial theorem to show that \\(1 + \\frac{1}{4} + \\frac{1 \\cdot 3}{4 \\cdot 8} + \\frac{1 \\cdot 3 \\cdot 5}{4 \\cdot 8 \\cdot 12} + \\dots = \\sqrt{2}\\)",
+            "explanation": "The left side is an infinite series of binomial type (products of odd numbers over \\(4 \\cdot 8 \\cdot 12\\)).\nWe must find \\(n\\) and \\(x\\) with \\((1 + x)^{n}\\) equal to this series and show \\((1 + x)^{n} = \\sqrt{2}\\).\nPlan: Compare the second and third terms with \\(nx\\) and \\(\\dfrac{n(n - 1)}{2!}x^{2}\\): two equations give \\(n\\) and \\(x\\).",
+            "steps": [
+              "Given: \\(1 + \\frac{1}{4} + \\frac{1 \\cdot 3}{4 \\cdot 8} + \\frac{1 \\cdot 3 \\cdot 5}{4 \\cdot 8 \\cdot 12} + \\dots\\)\nTo show: the sum is \\(\\sqrt{2}\\).\nMethod: Suppose it equals \\((1 + x)^{n} = 1 + nx + \\frac{n(n - 1)}{2!}x^{2} + \\dots\\) Compare the second and third terms with \\(nx\\) and \\(\\dfrac{n(n - 1)}{2!}x^{2}\\): two equations give \\(n\\) and \\(x\\).",
+              "Two equations\n\\[nx = \\dfrac{1}{4} \\quad (1)\\]\n\\[\\dfrac{n(n - 1)}{2}x^{2} = \\dfrac{3}{32} \\quad (2)\\]\nWhy: \\(\\tfrac{1 \\cdot 3}{4 \\cdot 8} = \\tfrac{3}{32}\\).",
+              "Find \\(n\\)\n\\[n(n - 1)x^{2} = \\dfrac{3}{16}\\]\n\\[\\dfrac{n(n - 1)x^{2}}{(nx)^{2}} = \\dfrac{3/16}{1/16} = 3\\]\n\\[\\dfrac{n - 1}{n} = 3 \\Rightarrow n = -\\dfrac{1}{2}\\]\nWhy: Dividing by \\((nx)^{2}\\) removes \\(x\\); \\(n - 1 = 3n\\) gives \\(n = -\\tfrac{1}{2}\\).",
+              "Find \\(x\\)\n\\[x = \\dfrac{1/4}{n} = \\dfrac{1/4}{-1/2} = -\\dfrac{1}{2}\\]\nWhy: From (1).",
+              "Check the fourth term\n\\[\\dfrac{(-\\frac{1}{2})(-\\frac{3}{2})(-\\frac{5}{2})}{3!}\\left(-\\dfrac{1}{2}\\right)^{3}\\]\n\\[= \\dfrac{-15/8}{6} \\cdot \\left(-\\dfrac{1}{8}\\right) = \\dfrac{5}{128}\\]\n\\[\\dfrac{1 \\cdot 3 \\cdot 5}{4 \\cdot 8 \\cdot 12} = \\dfrac{15}{384} = \\dfrac{5}{128}\\ \\checkmark\\]\nWhy: The next term matches too, so the identification is right.",
+              "Sum\n\\[\\left(1 - \\dfrac{1}{2}\\right)^{-1/2} = \\left(\\dfrac{1}{2}\\right)^{-1/2}\\]\n\\[= 2^{1/2} = \\sqrt{2}\\]\nWhy: \\(|x| = \\tfrac{1}{2} < 1\\), so the series converges to this value."
+            ],
+            "final_answer": "The series is \\(\\left(1 - \\frac{1}{2}\\right)^{-1/2}\\), so \\(1 + \\frac{1}{4} + \\frac{1 \\cdot 3}{4 \\cdot 8} + \\dots = \\sqrt{2}\\). Hence proved."
+          }
+        ]
+      }
+    }
+  ]
+}

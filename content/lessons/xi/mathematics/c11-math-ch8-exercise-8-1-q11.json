@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q11",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q11",
+      "title": "Question 11",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 155,
+          "pdf_to": 155,
+          "note": "Exercise 8.1, Question 11: book page 150 (PDF 155); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11. If Salman starts with Rs. 5,000 and saves Rs. 1,000 monthly, derive \\(S(n)\\) and prove it by induction.",
+            "explanation": "A real-life question in two parts: first derive \\(S(n)\\), the savings after \\(n\\) months, then prove it by induction.\nHe starts with Rs. 5,000 and adds Rs. 1,000 at the end of every month.\nPlan: table, pattern \\(S(n) = 5000 + 1000n\\), rule \\(S(k + 1) = S(k) + 1000\\), induction.",
+            "steps": [
+              "Given: starting amount Rs. 5,000; Rs. 1,000 saved every month.\nTo find: \\(S(n)\\), the total savings after \\(n\\) months, and a proof by induction.\nMethod: Spot the pattern from a few months, then mathematical induction.",
+              "Make a table and spot the pattern\n\\[S(1) = 6000,\\ S(2) = 7000,\\ S(3) = 8000\\]\n\\[S(n) = 5000 + 1000n\\]\nWhy: After \\(n\\) months he has added Rs. 1,000 exactly \\(n\\) times to the starting Rs. 5,000.",
+              "Statement and monthly rule\n\\[P(n): S(n) = 5000 + 1000n\\]\n\\[S(k + 1) = S(k) + 1000\\]\nWhy: Each month adds Rs. 1,000. We call the statement \\(P(n)\\) because \\(S(n)\\) is already the name of the savings.",
+              "Base case: \\(n = 1\\)\n\\[S(1) = 5000 + 1000 = 6000\\]\n\\[5000 + 1000(1) = 6000\\]\nSo \\(P(1)\\) is true.\nWhy: After one month he has his Rs. 5,000 plus one saving of Rs. 1,000.",
+              "Induction hypothesis: assume \\(P(k)\\)\n\\[S(k) = 5000 + 1000k \\quad (A)\\]\nWhy: We suppose the formula is right after \\(k\\) months.",
+              "Inductive step: use the rule, then (A)\n\\[S(k + 1) = S(k) + 1000\\]\n\\[= 5000 + 1000k + 1000\\]\n\\[= 5000 + 1000(k + 1)\\]\nSo \\(P(k + 1)\\) is true.\nWhy: (A) replaces \\(S(k)\\); \\(1000k + 1000 = 1000(k + 1)\\). This is the formula with \\(n = k + 1\\).",
+              "Conclusion\n\\(P(1)\\) is true and \\(P(k) \\Rightarrow P(k + 1)\\). By the principle of mathematical induction, \\(S(n) = 5000 + 1000n\\) for every positive integer \\(n\\).\nWhy: Both conditions of the principle hold.",
+              "Check: \\(n = 12\\) (one year)\n\\[S(12) = 5000 + 12{,}000 = 17{,}000\\]\nWhy: 12 savings of Rs. 1,000 added to Rs. 5,000 give Rs. 17,000."
+            ],
+            "final_answer": "\\(S(n) = 5000 + 1000n\\) rupees after \\(n\\) months, proved by induction."
+          }
+        ]
+      }
+    }
+  ]
+}

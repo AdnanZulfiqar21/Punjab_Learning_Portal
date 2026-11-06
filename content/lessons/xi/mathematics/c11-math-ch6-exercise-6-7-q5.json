@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-7-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-7-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 111,
+          "pdf_to": 111,
+          "note": "Exercise 6.7, Question 5: book pages 105-106 (PDF 110-111): Q1, Q2, Q3(i)-(ii), Q4(i)-(ii), Q5, Q6 (8 parts); answer key book page 300 (PDF 305)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5. Sum the series \\(2 + (1 - i) + \\left(\\frac{1}{i}\\right) + \\cdots\\) to 8 terms.",
+            "explanation": "A geometric series with complex terms (\\(i^{2} = -1\\)).\nPlan: simplify \\(\\frac{1}{i}\\), find and check \\(r\\), get \\(r^{8}\\) by repeated squaring, use \\(S_8 = \\frac{a_1(1 - r^{8})}{1 - r}\\), and rationalise.",
+            "steps": [
+              "Given: \\(2 + (1 - i) + \\frac{1}{i} + \\cdots\\), 8 terms.\nTo find: \\(S_8\\).\nMethod: Show it is a G.P., then use \\(S_n = \\frac{a_1(1 - r^{n})}{1 - r}\\).",
+              "Simplify \\(\\frac{1}{i}\\)\n\\[\\dfrac{1}{i} = \\dfrac{i}{i^{2}} = \\dfrac{i}{-1} = -i\\]\nWhy: Multiply top and bottom by \\(i\\) to remove \\(i\\) from the bottom.",
+              "Find \\(r\\) and check it\n\\[r = \\dfrac{1 - i}{2}\\]\n\\[(1 - i) \\cdot \\dfrac{1 - i}{2} = \\dfrac{1 - 2i + i^{2}}{2} = \\dfrac{-2i}{2} = -i\\]\nWhy: \\(r\\) is the 2nd term over the 1st. The 2nd term times \\(r\\) gives \\(-i\\), the 3rd term, so the series is a G.P.",
+              "Find \\(r^{8}\\) by repeated squaring\n\\[r^{2} = \\dfrac{(1 - i)^{2}}{4} = \\dfrac{-2i}{4} = -\\dfrac{i}{2}\\]\n\\[r^{4} = \\left(-\\dfrac{i}{2}\\right)^{2} = -\\dfrac{1}{4}\\]\n\\[r^{8} = \\left(-\\dfrac{1}{4}\\right)^{2} = \\dfrac{1}{16}\\]\nWhy: \\((1 - i)^{2} = -2i\\) from the previous step; \\(i^{2} = -1\\). Squaring three times gives the 8th power quickly.",
+              "Find \\(1 - r\\)\n\\[1 - r = \\dfrac{2 - (1 - i)}{2} = \\dfrac{1 + i}{2}\\]\nWhy: Write 1 as \\(\\frac{2}{2}\\); the minus changes both signs inside \\((1 - i)\\).",
+              "Use the sum formula\n\\[S_8 = \\dfrac{2\\left(1 - \\frac{1}{16}\\right)}{\\frac{1 + i}{2}}\\]\n\\[= \\dfrac{15}{8} \\cdot \\dfrac{2}{1 + i} = \\dfrac{15}{4(1 + i)}\\]\nWhy: \\(2 \\cdot \\frac{15}{16} = \\frac{15}{8}\\); dividing by \\(\\frac{1 + i}{2}\\) means multiplying by \\(\\frac{2}{1 + i}\\).",
+              "Rationalise the denominator\n\\[S_8 = \\dfrac{15(1 - i)}{4(1 + i)(1 - i)}\\]\n\\[= \\dfrac{15(1 - i)}{4 \\times 2} = \\dfrac{15(1 - i)}{8}\\]\nWhy: Multiply top and bottom by the conjugate \\(1 - i\\); \\((1 + i)(1 - i) = 1 - i^{2} = 2\\).",
+              "Check: add the 8 terms\n\\[2,\\ 1 - i,\\ -i,\\ \\tfrac{-1 - i}{2},\\ -\\tfrac{1}{2},\\ \\tfrac{-1 + i}{4},\\ \\tfrac{i}{4},\\ \\tfrac{1 + i}{8}\\]\n\\[\\text{real: } \\tfrac{15}{8},\\ \\ \\text{imaginary: } -\\tfrac{15}{8}\\]\nWhy: Real parts \\(2 + 1 - \\frac{1}{2} - \\frac{1}{2} - \\frac{1}{4} + \\frac{1}{8} = \\frac{15}{8}\\); imaginary parts \\(-1 - 1 - \\frac{1}{2} + \\frac{1}{4} + \\frac{1}{4} + \\frac{1}{8} = -\\frac{15}{8}\\)."
+            ],
+            "final_answer": "\\(S_8 = \\frac{15(1 - i)}{8}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

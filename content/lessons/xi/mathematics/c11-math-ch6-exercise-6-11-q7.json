@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-11-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-11-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 126,
+          "pdf_to": 126,
+          "note": "Exercise 6.11, Question 7: book p.121-122 (PDF 126-127); Q14 is cut off on PDF 127 (rest of page blank). Answer key PDF 305-306. Solution book PDF 596-616 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(a)",
+            "prompt": "7 (a) At a toll booth, the number of vehicles passing through during the first minute is 100. Due to road congestion, each minute only 80% of the vehicles from the previous minute manage to pass. Represent the number of vehicles passing each minute as a sequence.",
+            "explanation": "Each minute's number is 0.8 times the previous one: a G.P.\nPlan: find \\(r\\), list the first terms, write \\(a_n = a_1 r^{n - 1}\\).",
+            "steps": [
+              "Given: First minute 100 vehicles; each minute 80% of the previous minute.\nTo find: the sequence of vehicles per minute.\nMethod: G.P.: multiply by \\(r\\) each minute; \\(a_n = a_1 r^{n - 1}\\).",
+              "Find the common ratio\n\\[r = \\dfrac{80}{100} = 0.8,\\quad a_1 = 100\\]\nWhy: 80% of a number is 0.8 times it.",
+              "Write the terms\n\\[100 \\times 0.8 = 80\\]\n\\[80 \\times 0.8 = 64\\]\n\\[64 \\times 0.8 = 51.2\\]\n\\[51.2 \\times 0.8 = 40.96\\]\nWhy: Each term is the previous one times 0.8.",
+              "Write the general term\n\\[100,\\ 80,\\ 64,\\ 51.2,\\ \\ldots\\]\n\\[a_n = 100(0.8)^{n - 1}\\]\nWhy: \\(n\\)th term of a G.P.: \\(a_1 r^{n - 1}\\)."
+            ],
+            "final_answer": "\\(100,\\ 80,\\ 64,\\ 51.2,\\ \\ldots\\) with \\(a_n = 100(0.8)^{n - 1}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(b)",
+            "prompt": "7 (b) At a toll booth, the number of vehicles passing through during the first minute is 100. Due to road congestion, each minute only 80% of the vehicles from the previous minute manage to pass. Find the total number of vehicles that pass through in 15 minutes.",
+            "explanation": "\"Total in 15 minutes\" is the sum of the first 15 terms of the G.P.\nPlan: use \\(S_n = \\frac{a_1(1 - r^n)}{1 - r}\\) (the form for \\(r < 1\\)) with \\(n = 15\\).",
+            "steps": [
+              "Given: First minute 100 vehicles; each minute 80% of the previous minute.\nTo find: \\(S_{15}\\), the total in 15 minutes.\nMethod: G.P. sum \\(S_n = \\frac{a_1(1 - r^n)}{1 - r}\\), \\(r = 0.8 < 1\\).",
+              "Find the common ratio\n\\[r = \\dfrac{80}{100} = 0.8,\\quad a_1 = 100\\]\nWhy: 80% of a number is 0.8 times it.",
+              "Write the sum of 15 terms\n\\[S_{15} = \\dfrac{100[1 - (0.8)^{15}]}{1 - 0.8}\\]\n\\[= 500[1 - (0.8)^{15}]\\]\nWhy: \\(1 - 0.8 = 0.2\\) and \\(100 \\div 0.2 = 500\\).",
+              "Work out \\((0.8)^{15}\\)\n\\[(0.8)^2 = 0.64\\]\n\\[(0.8)^4 = 0.4096\\]\n\\[(0.8)^8 \\approx 0.16777216\\]\n\\[(0.8)^{15} \\approx 0.0351844\\]\nWhy: \\(15 = 8 + 4 + 2 + 1\\), so \\((0.8)^{15} = (0.8)^8 (0.8)^4 (0.8)^2 (0.8)\\).",
+              "Find the total\n\\[S_{15} \\approx 500(1 - 0.0351844)\\]\n\\[\\approx 500(0.9648156)\\]\n\\[\\approx 482.4\\]\nWhy: Put the power back into the sum."
+            ],
+            "final_answer": "\\(S_{15} \\approx 482.4\\), about 482 vehicles"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(c)",
+            "prompt": "7 (c) At a toll booth, the number of vehicles passing through during the first minute is 100. Due to road congestion, each minute only 80% of the vehicles from the previous minute manage to pass. What is the maximum number of vehicles that can pass in the long run (as time \\(t \\to \\infty\\))",
+            "explanation": "\"In the long run\" means adding the terms for ever. Since \\(0 < r < 1\\), the terms shrink towards 0 and the sum settles at a limit.\nPlan: let \\(n \\to \\infty\\) in \\(S_n = 500[1 - (0.8)^n]\\).",
+            "steps": [
+              "Given: First minute 100 vehicles; each minute 80% of the previous minute.\nTo find: the limit of \\(S_n\\) as \\(n \\to \\infty\\).\nMethod: \\(S_n = 500[1 - (0.8)^n]\\) with \\((0.8)^n \\to 0\\).",
+              "Find the common ratio\n\\[r = \\dfrac{80}{100} = 0.8,\\quad a_1 = 100\\]\nWhy: 80% of a number is 0.8 times it.",
+              "Write \\(S_n\\) for any \\(n\\)\n\\[S_n = \\dfrac{100[1 - (0.8)^n]}{0.2}\\]\n\\[= 500[1 - (0.8)^n]\\]\nWhy: Same formula as in (b), with \\(n\\) left general.",
+              "Let \\(n \\to \\infty\\)\n\\[(0.8)^n \\to 0\\]\n\\[S_n \\to 500(1 - 0) = 500\\]\nWhy: Powers of a number between 0 and 1 get smaller and smaller (0.8, 0.64, 0.512, ...), so \\((0.8)^n\\) approaches 0. This is the infinite G.P. sum \\(S_\\infty = \\frac{a_1}{1 - r}\\), valid for \\(|r| < 1\\) (it is not printed in this unit, but follows from \\(S_n\\))."
+            ],
+            "final_answer": "500 vehicles"
+          }
+        ]
+      }
+    }
+  ]
+}

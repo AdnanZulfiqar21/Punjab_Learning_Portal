@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-4-Q10",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-4-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 204,
+          "pdf_to": 204,
+          "note": "Exercise 10.4, Question 10: book page 199 (PDF 204). No answer key (proof). Verified with sympy and the solution book."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10 Prove that: \\(\\sin\\alpha + \\sin\\beta + \\sin\\gamma - \\sin(\\alpha + \\beta + \\gamma) = 4\\sin\\left(\\dfrac{\\alpha + \\beta}{2}\\right)\\sin\\left(\\dfrac{\\beta + \\gamma}{2}\\right)\\sin\\left(\\dfrac{\\gamma + \\alpha}{2}\\right)\\)",
+            "explanation": "Three sines minus the sine of their sum must become a product of three sines.\nPlan: pair \\(\\sin\\alpha + \\sin\\beta\\) and \\(\\sin\\gamma - \\sin(\\alpha + \\beta + \\gamma)\\). Both pairs produce the factor \\(\\sin\\frac{\\alpha + \\beta}{2}\\); take it out and change the remaining difference of cosines into a product.",
+            "steps": [
+              "Given: L.H.S. \\(= \\sin\\alpha + \\sin\\beta + \\sin\\gamma - \\sin(\\alpha + \\beta + \\gamma)\\).\nTo prove: L.H.S. \\(= 4\\sin\\frac{\\alpha + \\beta}{2}\\sin\\frac{\\beta + \\gamma}{2}\\sin\\frac{\\gamma + \\alpha}{2}\\).\nMethod: \\(\\sin P \\pm \\sin Q\\) and \\(\\cos P - \\cos Q\\) formulas.",
+              "First pair\n\\[\\sin\\alpha + \\sin\\beta = 2\\sin\\tfrac{\\alpha + \\beta}{2}\\cos\\tfrac{\\alpha - \\beta}{2}\\]\nWhy: \\(\\sin P + \\sin Q\\) formula.",
+              "Second pair (\\(P = \\gamma\\), \\(Q = \\alpha + \\beta + \\gamma\\))\n\\[\\dfrac{P + Q}{2} = \\dfrac{\\alpha + \\beta + 2\\gamma}{2}\\]\n\\[\\dfrac{P - Q}{2} = -\\dfrac{\\alpha + \\beta}{2}\\]\n\\[\\sin\\gamma - \\sin(\\alpha + \\beta + \\gamma)\\]\n\\[= -2\\cos\\tfrac{\\alpha + \\beta + 2\\gamma}{2}\\sin\\tfrac{\\alpha + \\beta}{2}\\]\nWhy: \\(\\sin P - \\sin Q = 2\\cos\\frac{P + Q}{2}\\sin\\frac{P - Q}{2}\\) and \\(\\sin(-u) = -\\sin u\\).",
+              "Take out the common factor\n\\[\\text{L.H.S.} = 2\\sin\\tfrac{\\alpha + \\beta}{2}\\;\\times\\]\n\\[\\left[\\cos\\tfrac{\\alpha - \\beta}{2} - \\cos\\tfrac{\\alpha + \\beta + 2\\gamma}{2}\\right]\\]\nWhy: \\(2\\sin\\frac{\\alpha + \\beta}{2}\\) is in both pairs.",
+              "The bracket: \\(\\cos P - \\cos Q\\) with \\(P = \\frac{\\alpha - \\beta}{2}\\), \\(Q = \\frac{\\alpha + \\beta + 2\\gamma}{2}\\)\n\\[\\dfrac{P + Q}{2} = \\dfrac{2\\alpha + 2\\gamma}{4} = \\dfrac{\\gamma + \\alpha}{2}\\]\n\\[\\dfrac{P - Q}{2} = \\dfrac{-2\\beta - 2\\gamma}{4} = -\\dfrac{\\beta + \\gamma}{2}\\]\nWhy: Add and subtract the two angles carefully, then halve.",
+              "Change the bracket into a product\n\\[\\cos P - \\cos Q\\]\n\\[= -2\\sin\\tfrac{\\gamma + \\alpha}{2}\\sin\\left(-\\tfrac{\\beta + \\gamma}{2}\\right)\\]\n\\[= 2\\sin\\tfrac{\\gamma + \\alpha}{2}\\sin\\tfrac{\\beta + \\gamma}{2}\\]\nWhy: \\(\\sin(-u) = -\\sin u\\), so the two minus signs cancel.",
+              "Put it back\n\\[\\text{L.H.S.} = 2\\sin\\tfrac{\\alpha + \\beta}{2}\\;\\times\\]\n\\[2\\sin\\tfrac{\\gamma + \\alpha}{2}\\sin\\tfrac{\\beta + \\gamma}{2}\\]\n\\[= 4\\sin\\tfrac{\\alpha + \\beta}{2}\\sin\\tfrac{\\beta + \\gamma}{2}\\sin\\tfrac{\\gamma + \\alpha}{2}\\]\n\\[= \\text{R.H.S.}\\]\nWhy: \\(2 \\times 2 = 4\\); the order of the factors does not matter.",
+              "Check: \\(\\alpha = 30^{\\circ}\\), \\(\\beta = 40^{\\circ}\\), \\(\\gamma = 50^{\\circ}\\)\n\\[\\sin 30^{\\circ} + \\sin 40^{\\circ} + \\sin 50^{\\circ}\\]\n\\[- \\sin 120^{\\circ} \\approx 1.0428\\]\n\\[4\\sin 35^{\\circ}\\sin 45^{\\circ}\\sin 40^{\\circ} \\approx 1.0428 \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\sin\\alpha + \\sin\\beta + \\sin\\gamma - \\sin(\\alpha + \\beta + \\gamma) = 4\\sin\\frac{\\alpha + \\beta}{2}\\sin\\frac{\\beta + \\gamma}{2}\\sin\\frac{\\gamma + \\alpha}{2}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

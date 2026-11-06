@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH2-EXERCISE-2-1-Q10",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch2",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch2/u-exercise-2-1-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 32,
+          "pdf_to": 32,
+          "note": "Exercise 2.1, Question 10: Exercise 2.1, book pages 26-27: Q1-Q11 (33 parts)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10. Consider the function \\(f: \\mathbb{R}^{+} \\to \\mathbb{R}^{+}\\) defined by \\(f(x) = e^{-x}\\). Show that \\(f(x)\\) is a bijective.",
+            "explanation": "Bijective means one-to-one AND onto, so two things must be checked.\nThe tool that undoes \\(e\\) is the natural logarithm: \\(\\ln(e^t) = t\\), \\(e^{\\ln y} = y\\) for \\(y > 0\\).\nPlan: prove one-to-one; test onto for the printed domain \\(\\mathbb{R}^{+}\\); then state when the claim is true.",
+            "steps": [
+              "Given: \\(f(x) = e^{-x}\\), domain and co-domain \\(\\mathbb{R}^{+}\\) (positive reals).\nTo find / prove: whether \\(f\\) is one-to-one and onto.\nMethod: One-to-one from \\(f(x_1) = f(x_2)\\) by taking \\(\\ln\\); onto by solving \\(e^{-x} = y\\) and checking \\(x\\) is in the domain.",
+              "One-to-one\n\\[e^{-x_1} = e^{-x_2}\\]\n\\[-x_1 = -x_2 \\Rightarrow x_1 = x_2\\]\nWhy: Take \\(\\ln\\) of both sides; \\(\\ln(e^t) = t\\). So \\(f\\) is one-to-one (on \\(\\mathbb{R}^{+}\\) and on \\(\\mathbb{R}\\)).",
+              "Which outputs does \\(x > 0\\) give?\n\\[x > 0 \\Rightarrow e^{x} > 1\\]\n\\[0 < e^{-x} = \\dfrac{1}{e^{x}} < 1\\]\nWhy: \\(e^{-x} = \\frac{1}{e^x}\\), and the reciprocal of a number bigger than 1 lies between 0 and 1. So the range is \\((0, 1)\\), not all of \\(\\mathbb{R}^{+}\\).",
+              "A counter-example to onto\n\\[e^{-x} = 2 \\Rightarrow x = -\\ln 2\\]\n\\[-\\ln 2 \\approx -0.693 \\notin \\mathbb{R}^{+}\\]\nWhy: \\(2 \\in \\mathbb{R}^{+}\\) needs the input \\(-\\ln 2\\), which is negative. So 2 has no pre-image in \\(\\mathbb{R}^{+}\\): as printed, \\(f\\) is not onto and not bijective.",
+              "The true statement: domain \\(\\mathbb{R}\\)\n\\[y > 0:\\; x = -\\ln y \\in \\mathbb{R}\\]\n\\[f(-\\ln y) = e^{\\ln y} = y \\;\\checkmark\\]\nWhy: With \\(f: \\mathbb{R} \\to \\mathbb{R}^{+}\\), every positive \\(y\\) has the pre-image \\(-\\ln y\\), so \\(f\\) is onto; with the one-to-one step, \\(f\\) is bijective.",
+              "Check with the graph\nWhy: Every horizontal line \\(y = c\\), \\(c > 0\\), meets the whole curve exactly once (one-to-one and onto \\(\\mathbb{R}^{+}\\)), but for \\(c \\ge 1\\) it meets it at \\(x \\le 0\\), outside the printed domain."
+            ],
+            "final_answer": "As printed (\\(f: \\mathbb{R}^{+} \\to \\mathbb{R}^{+}\\)), \\(f\\) is one-to-one but not onto (range \\((0, 1)\\)), so it is not bijective. For \\(f: \\mathbb{R} \\to \\mathbb{R}^{+}\\), \\(f(x) = e^{-x}\\) is bijective (pre-image of \\(y\\) is \\(-\\ln y\\)).",
+            "answer_figure": {
+              "$asset": "c11-math-ch2-fig-ex2-1-q10-exp",
+              "alt": "Graph of y = e to the power minus x for x from -1.5 to 4. The curve falls from left to right, crosses the y-axis at (0, 1) and approaches the x-axis without touching it. The part for x greater than 0 is drawn solid and stays below the dashed line y = 1; the part for x less than 0 is dashed. A dashed horizontal line y = 2 meets the curve only at x = -ln 2, about -0.69, which is not a positive number.",
+              "caption": "Exercise 2.1 Q10: for x > 0 the values of e^(-x) stay between 0 and 1; the output 2 needs x = -ln 2 < 0 (original drawing)"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book asks to show that \\(f: \\mathbb{R}^{+} \\to \\mathbb{R}^{+}\\), \\(f(x) = e^{-x}\\), is bijective. As printed this is false: for \\(x > 0\\), \\(e^{-x}\\) lies in \\((0, 1)\\), so for example \\(2 \\in \\mathbb{R}^{+}\\) is never an output (even with \\(0\\) included in \\(\\mathbb{R}^{+}\\) the range is only \\((0, 1]\\)). The intended statement is \\(f: \\mathbb{R} \\to \\mathbb{R}^{+}\\), which is bijective (equally true: \\(f: \\mathbb{R}^{+} \\to (0, 1)\\)). No answer is printed in the key."
+          }
+        ]
+      }
+    }
+  ]
+}

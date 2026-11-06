@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-10-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-10-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 122,
+          "pdf_to": 122,
+          "note": "Exercise 6.10, Question 1: book p.117 (PDF 122; the 'Exercise 6.10' banner is blank in the scan; some + signs are faint, all confirmed by the key). Answer key PDF 305. Solution book PDF 578-595 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Sum the following series upto \\(n\\) terms: \\(1 \\times 1 + 2 \\times 4 + 3 \\times 7 + \\ldots\\)",
+            "explanation": "Each term is a product of factors, and each factor follows its own A.P.\nPlan: find the \\(k\\)th factor of each list, multiply to get \\(T_k\\), expand, add with the sigma formulas, simplify, check with small \\(n\\).",
+            "steps": [
+              "Given: \\(1 \\times 1 + 2 \\times 4 + 3 \\times 7 + \\ldots\\)\nTo find: \\(S_n\\), the sum of the first \\(n\\) terms.\nMethod: Write the \\(k\\)th term \\(T_k\\) as a polynomial in \\(k\\), then add all \\(n\\) terms with \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n + 1)}{2}\\), \\(\\sum k^2 = \\frac{n(n + 1)(2n + 1)}{6}\\), \\(\\sum k^3 = \\left[\\frac{n(n + 1)}{2}\\right]^2\\) (all sums from \\(k = 1\\) to \\(n\\)).",
+              "Find the \\(k\\)th term\n\\[1, 2, 3, \\ldots:\\ k\\]\n\\[1, 4, 7, \\ldots:\\ 1 + (k - 1)3 = 3k - 2\\]\n\\[T_k = k(3k - 2) = 3k^2 - 2k\\]\nWhy: First factors: A.P. with \\(a = 1, d = 1\\); second factors: A.P. with \\(a = 1, d = 3\\). Their \\(k\\)th terms multiply to give \\(T_k\\).",
+              "Add all \\(n\\) terms with the sigma formulas\n\\[S_n = 3\\sum k^2 - 2\\sum k\\]\n\\[= 3 \\cdot \\dfrac{n(n + 1)(2n + 1)}{6} - 2 \\cdot \\dfrac{n(n + 1)}{2}\\]\n\\[= \\dfrac{n(n + 1)(2n + 1)}{2} - n(n + 1)\\]\nWhy: The sigma of a sum splits into sigmas; constants come outside; then use the formulas.",
+              "Take out the common factor and simplify\n\\[= \\dfrac{n(n + 1)}{2}\\left[(2n + 1) - 2\\right]\\]\n\\[= \\dfrac{n(n + 1)(2n - 1)}{2}\\]\n\\[= \\dfrac{n}{2}(2n^2 + n - 1)\\]\nWhy: Both parts contain \\(n(n + 1)\\); taking out \\(\\frac{n(n + 1)}{2}\\) leaves 2 from the second part.",
+              "Check with a small \\(n\\)\n\\[n = 2:\\ 1 + 8 = 9\\]\n\\[\\tfrac{2}{2}(8 + 2 - 1) = 9 \\;\\checkmark\\]\nWhy: Adding the first terms directly gives the same value as the formula."
+            ],
+            "final_answer": "\\(S_n = \\frac{n}{2}(2n^2 + n - 1)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Sum the following series upto \\(n\\) terms: \\(1 \\times 3 + 3 \\times 6 + 5 \\times 9 + \\ldots\\)",
+            "explanation": "Each term is a product of factors, and each factor follows its own A.P.\nPlan: find the \\(k\\)th factor of each list, multiply to get \\(T_k\\), expand, add with the sigma formulas, simplify, check with small \\(n\\).",
+            "steps": [
+              "Given: \\(1 \\times 3 + 3 \\times 6 + 5 \\times 9 + \\ldots\\)\nTo find: \\(S_n\\), the sum of the first \\(n\\) terms.\nMethod: Write the \\(k\\)th term \\(T_k\\) as a polynomial in \\(k\\), then add all \\(n\\) terms with \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n + 1)}{2}\\), \\(\\sum k^2 = \\frac{n(n + 1)(2n + 1)}{6}\\), \\(\\sum k^3 = \\left[\\frac{n(n + 1)}{2}\\right]^2\\) (all sums from \\(k = 1\\) to \\(n\\)).",
+              "Find the \\(k\\)th term\n\\[1, 3, 5, \\ldots:\\ 2k - 1\\]\n\\[3, 6, 9, \\ldots:\\ 3k\\]\n\\[T_k = (2k - 1)(3k) = 6k^2 - 3k\\]\nWhy: Odd numbers have \\(k\\)th term \\(2k - 1\\); multiples of 3 have \\(k\\)th term \\(3k\\).",
+              "Add all \\(n\\) terms with the sigma formulas\n\\[S_n = 6\\sum k^2 - 3\\sum k\\]\n\\[= n(n + 1)(2n + 1) - \\dfrac{3n(n + 1)}{2}\\]\nWhy: \\(6 \\cdot \\frac{n(n + 1)(2n + 1)}{6} = n(n + 1)(2n + 1)\\).",
+              "Take out the common factor and simplify\n\\[= \\dfrac{n(n + 1)}{2}\\left[2(2n + 1) - 3\\right]\\]\n\\[= \\dfrac{n(n + 1)(4n - 1)}{2}\\]\nWhy: Take out \\(\\frac{n(n + 1)}{2}\\); the first part leaves \\(2(2n + 1)\\), the second leaves 3.",
+              "Check with a small \\(n\\)\n\\[n = 2:\\ 3 + 18 = 21\\]\n\\[\\tfrac{2 \\cdot 3 \\cdot 7}{2} = 21 \\;\\checkmark\\]\nWhy: Adding the first terms directly gives the same value as the formula."
+            ],
+            "final_answer": "\\(S_n = \\frac{n(n + 1)(4n - 1)}{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Sum the following series upto \\(n\\) terms: \\(1 \\times 4 + 2 \\times 7 + 3 \\times 10 + \\ldots\\)",
+            "explanation": "Each term is a product of factors, and each factor follows its own A.P.\nPlan: find the \\(k\\)th factor of each list, multiply to get \\(T_k\\), expand, add with the sigma formulas, simplify, check with small \\(n\\).",
+            "steps": [
+              "Given: \\(1 \\times 4 + 2 \\times 7 + 3 \\times 10 + \\ldots\\)\nTo find: \\(S_n\\), the sum of the first \\(n\\) terms.\nMethod: Write the \\(k\\)th term \\(T_k\\) as a polynomial in \\(k\\), then add all \\(n\\) terms with \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n + 1)}{2}\\), \\(\\sum k^2 = \\frac{n(n + 1)(2n + 1)}{6}\\), \\(\\sum k^3 = \\left[\\frac{n(n + 1)}{2}\\right]^2\\) (all sums from \\(k = 1\\) to \\(n\\)).",
+              "Find the \\(k\\)th term\n\\[1, 2, 3, \\ldots:\\ k\\]\n\\[4, 7, 10, \\ldots:\\ 4 + (k - 1)3 = 3k + 1\\]\n\\[T_k = k(3k + 1) = 3k^2 + k\\]\nWhy: Second factors: A.P. with \\(a = 4, d = 3\\).",
+              "Add all \\(n\\) terms with the sigma formulas\n\\[S_n = 3\\sum k^2 + \\sum k\\]\n\\[= \\dfrac{n(n + 1)(2n + 1)}{2} + \\dfrac{n(n + 1)}{2}\\]\nWhy: Split the sigma; \\(\\frac{3}{6} = \\frac{1}{2}\\).",
+              "Take out the common factor and simplify\n\\[= \\dfrac{n(n + 1)}{2}(2n + 1 + 1)\\]\n\\[= \\dfrac{n(n + 1)(2n + 2)}{2}\\]\n\\[= n(n + 1)^2\\]\nWhy: Take out \\(\\frac{n(n + 1)}{2}\\); then \\(2n + 2 = 2(n + 1)\\) cancels the 2.",
+              "Check with a small \\(n\\)\n\\[n = 2:\\ 4 + 14 = 18\\]\n\\[2(3)^2 = 18 \\;\\checkmark\\]\nWhy: Adding the first terms directly gives the same value as the formula."
+            ],
+            "final_answer": "\\(S_n = n(n + 1)^2\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Sum the following series upto \\(n\\) terms: \\(3 \\times 5 + 5 \\times 9 + 7 \\times 13 + \\ldots\\)",
+            "explanation": "Each term is a product of factors, and each factor follows its own A.P.\nPlan: find the \\(k\\)th factor of each list, multiply to get \\(T_k\\), expand, add with the sigma formulas, simplify, check with small \\(n\\).",
+            "steps": [
+              "Given: \\(3 \\times 5 + 5 \\times 9 + 7 \\times 13 + \\ldots\\)\nTo find: \\(S_n\\), the sum of the first \\(n\\) terms.\nMethod: Write the \\(k\\)th term \\(T_k\\) as a polynomial in \\(k\\), then add all \\(n\\) terms with \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n + 1)}{2}\\), \\(\\sum k^2 = \\frac{n(n + 1)(2n + 1)}{6}\\), \\(\\sum k^3 = \\left[\\frac{n(n + 1)}{2}\\right]^2\\) (all sums from \\(k = 1\\) to \\(n\\)).",
+              "Find the \\(k\\)th term\n\\[3, 5, 7, \\ldots:\\ 2k + 1\\]\n\\[5, 9, 13, \\ldots:\\ 4k + 1\\]\n\\[T_k = (2k + 1)(4k + 1)\\]\n\\[= 8k^2 + 6k + 1\\]\nWhy: \\(3 + 2(k - 1) = 2k + 1\\) and \\(5 + 4(k - 1) = 4k + 1\\).",
+              "Add all \\(n\\) terms with the sigma formulas\n\\[S_n = 8\\sum k^2 + 6\\sum k + \\sum 1\\]\n\\[= \\dfrac{4n(n + 1)(2n + 1)}{3}\\]\n\\[+ 3n(n + 1) + n\\]\nWhy: \\(\\frac{8}{6} = \\frac{4}{3}\\), \\(\\frac{6}{2} = 3\\), and \\(\\sum 1 = n\\) (adding 1 \\(n\\) times).",
+              "Take out the common factor and simplify\n\\[= \\dfrac{n}{3}\\left[4(n + 1)(2n + 1) + 9(n + 1) + 3\\right]\\]\n\\[= \\dfrac{n}{3}\\left[8n^2 + 12n + 4 + 9n + 12\\right]\\]\n\\[= \\dfrac{n}{3}(8n^2 + 21n + 16)\\]\nWhy: Take out \\(\\frac{n}{3}\\): \\(3n(n + 1)\\) leaves \\(9(n + 1)\\) and \\(n\\) leaves 3.",
+              "Check with a small \\(n\\)\n\\[n = 2:\\ 15 + 45 = 60\\]\n\\[\\tfrac{2}{3}(32 + 42 + 16) = 60 \\;\\checkmark\\]\nWhy: Adding the first terms directly gives the same value as the formula."
+            ],
+            "final_answer": "\\(S_n = \\frac{n}{3}(8n^2 + 21n + 16)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(v)",
+            "prompt": "1 (v) Sum the following series upto \\(n\\) terms: \\(1^2 + 3^2 + 5^2 + \\ldots\\)",
+            "explanation": "Each term is a product of factors, and each factor follows its own A.P.\nPlan: find the \\(k\\)th factor of each list, multiply to get \\(T_k\\), expand, add with the sigma formulas, simplify, check with small \\(n\\).",
+            "steps": [
+              "Given: \\(1^2 + 3^2 + 5^2 + \\ldots\\)\nTo find: \\(S_n\\), the sum of the first \\(n\\) terms.\nMethod: Write the \\(k\\)th term \\(T_k\\) as a polynomial in \\(k\\), then add all \\(n\\) terms with \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n + 1)}{2}\\), \\(\\sum k^2 = \\frac{n(n + 1)(2n + 1)}{6}\\), \\(\\sum k^3 = \\left[\\frac{n(n + 1)}{2}\\right]^2\\) (all sums from \\(k = 1\\) to \\(n\\)).",
+              "Find the \\(k\\)th term\n\\[T_k = (2k - 1)^2\\]\n\\[= 4k^2 - 4k + 1\\]\nWhy: The numbers being squared are the odd numbers \\(2k - 1\\).",
+              "Add all \\(n\\) terms with the sigma formulas\n\\[S_n = 4\\sum k^2 - 4\\sum k + \\sum 1\\]\n\\[= \\dfrac{2n(n + 1)(2n + 1)}{3}\\]\n\\[- 2n(n + 1) + n\\]\nWhy: \\(\\frac{4}{6} = \\frac{2}{3}\\) and \\(\\frac{4}{2} = 2\\).",
+              "Take out the common factor and simplify\n\\[= \\dfrac{n}{3}\\left[2(n + 1)(2n + 1) - 6(n + 1) + 3\\right]\\]\n\\[= \\dfrac{n}{3}(4n^2 + 6n + 2 - 6n - 3)\\]\n\\[= \\dfrac{n}{3}(4n^2 - 1)\\]\nWhy: Take out \\(\\frac{n}{3}\\); the \\(6n\\) terms cancel.",
+              "Check with a small \\(n\\)\n\\[n = 2:\\ 1 + 9 = 10\\]\n\\[\\tfrac{2}{3}(16 - 1) = 10 \\;\\checkmark\\]\nWhy: Adding the first terms directly gives the same value as the formula."
+            ],
+            "final_answer": "\\(S_n = \\frac{n}{3}(4n^2 - 1)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(vi)",
+            "prompt": "1 (vi) Sum the following series upto \\(n\\) terms: \\(2 \\times 1^2 + 4 \\times 2^2 + 6 \\times 3^2 + \\ldots\\)",
+            "explanation": "Each term is a product of factors, and each factor follows its own A.P.\nPlan: find the \\(k\\)th factor of each list, multiply to get \\(T_k\\), expand, add with the sigma formulas, simplify, check with small \\(n\\).",
+            "steps": [
+              "Given: \\(2 \\times 1^2 + 4 \\times 2^2 + 6 \\times 3^2 + \\ldots\\)\nTo find: \\(S_n\\), the sum of the first \\(n\\) terms.\nMethod: Write the \\(k\\)th term \\(T_k\\) as a polynomial in \\(k\\), then add all \\(n\\) terms with \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n + 1)}{2}\\), \\(\\sum k^2 = \\frac{n(n + 1)(2n + 1)}{6}\\), \\(\\sum k^3 = \\left[\\frac{n(n + 1)}{2}\\right]^2\\) (all sums from \\(k = 1\\) to \\(n\\)).",
+              "Find the \\(k\\)th term\n\\[2, 4, 6, \\ldots:\\ 2k\\]\n\\[1^2, 2^2, 3^2, \\ldots:\\ k^2\\]\n\\[T_k = 2k \\cdot k^2 = 2k^3\\]\nWhy: Even numbers \\(2k\\) times squares \\(k^2\\).",
+              "Add all \\(n\\) terms with the sigma formulas\n\\[S_n = 2\\sum k^3\\]\n\\[= 2\\left[\\dfrac{n(n + 1)}{2}\\right]^2\\]\nWhy: Only the sum of cubes is needed.",
+              "Take out the common factor and simplify\n\\[= 2 \\cdot \\dfrac{n^2(n + 1)^2}{4}\\]\n\\[= \\dfrac{n^2(n + 1)^2}{2}\\]\nWhy: Square the bracket (top and bottom), then \\(\\frac{2}{4} = \\frac{1}{2}\\).",
+              "Check with a small \\(n\\)\n\\[n = 2:\\ 2 + 16 = 18\\]\n\\[\\tfrac{4 \\cdot 9}{2} = 18 \\;\\checkmark\\]\nWhy: Adding the first terms directly gives the same value as the formula."
+            ],
+            "final_answer": "\\(S_n = \\frac{n^2(n + 1)^2}{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(vii)",
+            "prompt": "1 (vii) Sum the following series upto \\(n\\) terms: \\(3 \\times 2^2 + 5 \\times 3^2 + 7 \\times 4^2 + \\ldots\\)",
+            "explanation": "Each term is a product of factors, and each factor follows its own A.P.\nPlan: find the \\(k\\)th factor of each list, multiply to get \\(T_k\\), expand, add with the sigma formulas, simplify, check with small \\(n\\).",
+            "steps": [
+              "Given: \\(3 \\times 2^2 + 5 \\times 3^2 + 7 \\times 4^2 + \\ldots\\)\nTo find: \\(S_n\\), the sum of the first \\(n\\) terms.\nMethod: Write the \\(k\\)th term \\(T_k\\) as a polynomial in \\(k\\), then add all \\(n\\) terms with \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n + 1)}{2}\\), \\(\\sum k^2 = \\frac{n(n + 1)(2n + 1)}{6}\\), \\(\\sum k^3 = \\left[\\frac{n(n + 1)}{2}\\right]^2\\) (all sums from \\(k = 1\\) to \\(n\\)).",
+              "Find the \\(k\\)th term\n\\[3, 5, 7, \\ldots:\\ 2k + 1\\]\n\\[2^2, 3^2, 4^2, \\ldots:\\ (k + 1)^2\\]\n\\[T_k = (2k + 1)(k^2 + 2k + 1)\\]\n\\[= 2k^3 + 5k^2 + 4k + 1\\]\nWhy: The squared numbers start at 2, so the \\(k\\)th is \\((k + 1)^2\\). Multiply out carefully.",
+              "Add all \\(n\\) terms with the sigma formulas\n\\[S_n = 2\\sum k^3 + 5\\sum k^2 + 4\\sum k + n\\]\n\\[= \\dfrac{n^2(n + 1)^2}{2} + \\dfrac{5n(n + 1)(2n + 1)}{6}\\]\n\\[+ 2n(n + 1) + n\\]\nWhy: Four sigmas, each with its formula.",
+              "Take out the common factor and simplify\n\\[= \\dfrac{n}{6}\\left[3n(n + 1)^2 + 5(n + 1)(2n + 1)\\right.\\]\n\\[\\left. + 12(n + 1) + 6\\right]\\]\n\\[= \\dfrac{n}{6}(3n^3 + 6n^2 + 3n + 10n^2\\]\n\\[+ 15n + 5 + 12n + 12 + 6)\\]\n\\[= \\dfrac{n}{6}(3n^3 + 16n^2 + 30n + 23)\\]\nWhy: Take out \\(\\frac{n}{6}\\) (6 is the common denominator), expand each part and collect like terms.",
+              "Check with a small \\(n\\)\n\\[n = 2:\\ 12 + 45 = 57\\]\n\\[\\tfrac{2}{6}(24 + 64 + 60 + 23) = 57 \\;\\checkmark\\]\nWhy: Adding the first terms directly gives the same value as the formula."
+            ],
+            "final_answer": "\\(S_n = \\frac{n}{6}(3n^3 + 16n^2 + 30n + 23)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(viii)",
+            "prompt": "1 (viii) Sum the following series upto \\(n\\) terms: \\(1 + (1 + 2) + (1 + 2 + 3) + \\ldots\\)",
+            "explanation": "Each term is itself a sum: the \\(k\\)th bracket is \\(1 + 2 + \\cdots + k\\).\nPlan: write \\(T_k = \\frac{k(k + 1)}{2}\\), expand, add with the sigma formulas, simplify, check.",
+            "steps": [
+              "Given: \\(1 + (1 + 2) + (1 + 2 + 3) + \\ldots\\)\nTo find: \\(S_n\\), the sum of the first \\(n\\) terms.\nMethod: Write the \\(k\\)th term \\(T_k\\) as a polynomial in \\(k\\), then add all \\(n\\) terms with \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n + 1)}{2}\\), \\(\\sum k^2 = \\frac{n(n + 1)(2n + 1)}{6}\\), \\(\\sum k^3 = \\left[\\frac{n(n + 1)}{2}\\right]^2\\) (all sums from \\(k = 1\\) to \\(n\\)).",
+              "Find the \\(k\\)th term\n\\[T_k = 1 + 2 + \\cdots + k\\]\n\\[= \\dfrac{k(k + 1)}{2} = \\dfrac{1}{2}(k^2 + k)\\]\nWhy: The \\(k\\)th bracket is the sum of the first \\(k\\) natural numbers.",
+              "Add all \\(n\\) terms with the sigma formulas\n\\[S_n = \\dfrac{1}{2}\\left[\\sum k^2 + \\sum k\\right]\\]\n\\[= \\dfrac{1}{2}\\left[\\dfrac{n(n + 1)(2n + 1)}{6} + \\dfrac{n(n + 1)}{2}\\right]\\]\nWhy: Constant \\(\\frac{1}{2}\\) comes outside; split the sigma.",
+              "Take out the common factor and simplify\n\\[= \\dfrac{n(n + 1)}{4}\\left[\\dfrac{2n + 1}{3} + 1\\right]\\]\n\\[= \\dfrac{n(n + 1)}{4} \\cdot \\dfrac{2n + 4}{3}\\]\n\\[= \\dfrac{n(n + 1)(n + 2)}{6}\\]\nWhy: Take out \\(\\frac{n(n + 1)}{2}\\); \\(2n + 4 = 2(n + 2)\\) and \\(\\frac{2}{12} = \\frac{1}{6}\\).",
+              "Check with a small \\(n\\)\n\\[n = 3:\\ 1 + 3 + 6 = 10\\]\n\\[\\tfrac{3 \\cdot 4 \\cdot 5}{6} = 10 \\;\\checkmark\\]\nWhy: Adding the first terms directly gives the same value as the formula."
+            ],
+            "final_answer": "\\(S_n = \\frac{n(n + 1)(n + 2)}{6}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ix)",
+            "prompt": "1 (ix) Sum the following series upto \\(n\\) terms: \\(1^2 + (1^2 + 2^2) + (1^2 + 2^2 + 3^2) + \\ldots\\)",
+            "explanation": "Each term is itself a sum: the \\(k\\)th bracket is \\(1^2 + 2^2 + \\cdots + k^2\\).\nPlan: write \\(T_k\\) with the sum-of-squares formula, expand, add with the sigma formulas, simplify, check.",
+            "steps": [
+              "Given: \\(1^2 + (1^2 + 2^2) + (1^2 + 2^2 + 3^2) + \\ldots\\)\nTo find: \\(S_n\\), the sum of the first \\(n\\) terms.\nMethod: Write the \\(k\\)th term \\(T_k\\) as a polynomial in \\(k\\), then add all \\(n\\) terms with \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n + 1)}{2}\\), \\(\\sum k^2 = \\frac{n(n + 1)(2n + 1)}{6}\\), \\(\\sum k^3 = \\left[\\frac{n(n + 1)}{2}\\right]^2\\) (all sums from \\(k = 1\\) to \\(n\\)).",
+              "Find the \\(k\\)th term\n\\[T_k = 1^2 + 2^2 + \\cdots + k^2\\]\n\\[= \\dfrac{k(k + 1)(2k + 1)}{6}\\]\n\\[= \\dfrac{1}{6}(2k^3 + 3k^2 + k)\\]\nWhy: The \\(k\\)th bracket is the sum of the first \\(k\\) squares.",
+              "Add all \\(n\\) terms with the sigma formulas\n\\[S_n = \\dfrac{1}{6}\\left[2\\sum k^3 + 3\\sum k^2 + \\sum k\\right]\\]\n\\[= \\dfrac{1}{6}\\left[\\dfrac{n^2(n + 1)^2}{2} + \\dfrac{n(n + 1)(2n + 1)}{2}\\right.\\]\n\\[\\left. + \\dfrac{n(n + 1)}{2}\\right]\\]\nWhy: \\(2 \\cdot \\frac{n^2(n + 1)^2}{4} = \\frac{n^2(n + 1)^2}{2}\\) and \\(3 \\cdot \\frac{1}{6} = \\frac{1}{2}\\).",
+              "Take out the common factor and simplify\n\\[= \\dfrac{n(n + 1)}{12}\\left[n(n + 1) + (2n + 1) + 1\\right]\\]\n\\[= \\dfrac{n(n + 1)}{12}(n^2 + 3n + 2)\\]\n\\[= \\dfrac{n(n + 1)^2(n + 2)}{12}\\]\nWhy: Take out \\(\\frac{n(n + 1)}{2}\\); with the outer \\(\\frac{1}{6}\\) this gives \\(\\frac{n(n + 1)}{12}\\). Then \\(n^2 + 3n + 2 = (n + 1)(n + 2)\\).",
+              "Check with a small \\(n\\)\n\\[n = 2:\\ 1 + 5 = 6\\]\n\\[\\tfrac{2 \\cdot 9 \\cdot 4}{12} = 6 \\;\\checkmark\\]\nWhy: Adding the first terms directly gives the same value as the formula."
+            ],
+            "final_answer": "\\(S_n = \\frac{1}{12}n(n + 1)(n^2 + 3n + 2)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(x)",
+            "prompt": "1 (x) Sum the following series upto \\(n\\) terms: \\(2 \\times 4 \\times 7 + 3 \\times 6 \\times 10 + 4 \\times 8 \\times 13 + \\ldots\\)",
+            "explanation": "Each term is a product of three factors, each following its own A.P.\nPlan: find the three \\(k\\)th factors, multiply to get \\(T_k\\), expand, add with the sigma formulas, simplify, check.",
+            "steps": [
+              "Given: \\(2 \\times 4 \\times 7 + 3 \\times 6 \\times 10 + 4 \\times 8 \\times 13 + \\ldots\\)\nTo find: \\(S_n\\), the sum of the first \\(n\\) terms.\nMethod: Write the \\(k\\)th term \\(T_k\\) as a polynomial in \\(k\\), then add all \\(n\\) terms with \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n + 1)}{2}\\), \\(\\sum k^2 = \\frac{n(n + 1)(2n + 1)}{6}\\), \\(\\sum k^3 = \\left[\\frac{n(n + 1)}{2}\\right]^2\\) (all sums from \\(k = 1\\) to \\(n\\)).",
+              "Find the \\(k\\)th term\n\\[2, 3, 4:\\ k + 1\\]\n\\[4, 6, 8:\\ 2(k + 1)\\]\n\\[7, 10, 13:\\ 3k + 4\\]\n\\[T_k = 2(k + 1)^2(3k + 4)\\]\n\\[= 6k^3 + 20k^2 + 22k + 8\\]\nWhy: Three A.P.s of factors; \\((k + 1) \\cdot 2(k + 1) = 2(k + 1)^2\\), then multiply by \\(3k + 4\\).",
+              "Add all \\(n\\) terms with the sigma formulas\n\\[S_n = 6\\sum k^3 + 20\\sum k^2 + 22\\sum k + 8n\\]\n\\[= \\dfrac{3n^2(n + 1)^2}{2} + \\dfrac{10n(n + 1)(2n + 1)}{3}\\]\n\\[+ 11n(n + 1) + 8n\\]\nWhy: \\(\\frac{6}{4} = \\frac{3}{2}\\), \\(\\frac{20}{6} = \\frac{10}{3}\\), \\(\\frac{22}{2} = 11\\).",
+              "Take out the common factor and simplify\n\\[= \\dfrac{n}{6}\\left[9n(n + 1)^2 + 20(n + 1)(2n + 1)\\right.\\]\n\\[\\left. + 66(n + 1) + 48\\right]\\]\n\\[= \\dfrac{n}{6}(9n^3 + 18n^2 + 9n + 40n^2\\]\n\\[+ 60n + 20 + 66n + 66 + 48)\\]\n\\[= \\dfrac{n}{6}(9n^3 + 58n^2 + 135n + 134)\\]\nWhy: Common denominator 6: take out \\(\\frac{n}{6}\\), expand and collect.",
+              "Check with a small \\(n\\)\n\\[n = 1:\\ 2 \\times 4 \\times 7 = 56\\]\n\\[\\tfrac{1}{6}(9 + 58 + 135 + 134) = 56 \\;\\checkmark\\]\nWhy: Adding the first terms directly gives the same value as the formula."
+            ],
+            "final_answer": "\\(S_n = \\frac{n}{6}(9n^3 + 58n^2 + 135n + 134)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

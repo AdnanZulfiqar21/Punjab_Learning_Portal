@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-2-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-2-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 239,
+          "pdf_to": 239,
+          "note": "Exercise 12.2, Question 4: find c so that the limit at x = -1 exists (book p.234). Answer key PDF 310: c = -1."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4 If \\[f(x) = \\begin{cases} x + 2, & x \\le -1 \\\\ c + 2, & x > -1 \\end{cases}\\]find \\(c\\) so that \\(\\lim_{x \\to -1} f(x)\\) exists.",
+            "explanation": "A \"find the constant\" question: the limit at \\(x = -1\\) must exist.\nA limit exists exactly when LHL = RHL, so we get one equation in \\(c\\).\nPlan: find both one-sided limits in terms of \\(c\\), set them equal, solve.",
+            "steps": [
+              "Given: \\(f(x) = x + 2\\) for \\(x \\le -1\\), \\(c + 2\\) for \\(x > -1\\).\nTo find: \\(c\\) such that \\(\\lim_{x \\to -1} f(x)\\) exists.\nMethod: The limit exists if and only if \\(\\lim_{x \\to -1^-} f(x) = \\lim_{x \\to -1^+} f(x)\\).",
+              "Left hand limit\n\\[\\lim_{x \\to -1^-} f(x) = \\lim_{x \\to -1^-} (x + 2)\\]\n\\[= -1 + 2 = 1\\]\nWhy: Left of \\(-1\\) the first piece is used.",
+              "Right hand limit\n\\[\\lim_{x \\to -1^+} f(x) = \\lim_{x \\to -1^+} (c + 2)\\]\n\\[= c + 2\\]\nWhy: Right of \\(-1\\) the function is the constant \\(c + 2\\) (it does not contain \\(x\\)), so its limit is itself.",
+              "Set them equal and solve\n\\[c + 2 = 1\\]\n\\[c = 1 - 2 = -1\\]\nWhy: Only this value makes the two one-sided limits equal.",
+              "Check\n\\[c = -1:\\ c + 2 = 1\\]\n\\[\\text{LHL} = \\text{RHL} = 1\\]\nWhy: With \\(c = -1\\) both sides approach 1, so \\(\\lim_{x \\to -1} f(x) = 1\\) exists. (Here \\(f(-1) = 1\\) too, so \\(f\\) is even continuous there.)"
+            ],
+            "final_answer": "\\(c = -1\\) (then \\(\\lim_{x \\to -1} f(x) = 1\\))"
+          }
+        ]
+      }
+    }
+  ]
+}

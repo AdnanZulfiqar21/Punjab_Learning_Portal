@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-2-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-2-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 260,
+          "pdf_to": 260,
+          "note": "Exercise 13.2, Question 4: show that 2x dy/dx + y = 2 sqrt(x) for y = sqrt(x) - 1/sqrt(x) (book p.255)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. If \\(y = \\sqrt{x} - \\dfrac{1}{\\sqrt{x}}\\), show that \\(2x\\dfrac{dy}{dx} + y = 2\\sqrt{x}\\).",
+            "explanation": "A \"show that\" question.\nWe must find \\(\\frac{dy}{dx}\\) and put it into the left side.\nPlan: write \\(y\\) with powers, differentiate, compute \\(2x\\frac{dy}{dx}\\), add \\(y\\).",
+            "steps": [
+              "Given: \\(y = \\sqrt{x} - \\dfrac{1}{\\sqrt{x}} = x^{1/2} - x^{-1/2}\\), \\(x > 0\\).\nTo prove: \\(2x\\dfrac{dy}{dx} + y = 2\\sqrt{x}\\).\nMethod: Power rule for \\(\\frac{dy}{dx}\\), then simplify the left side until it equals the right side.",
+              "Differentiate\n\\[\\frac{dy}{dx} = \\frac{1}{2}x^{-1/2} + \\frac{1}{2}x^{-3/2}\\]\nWhy: Power rule: \\(-x^{-1/2}\\) gives \\(-(-\\frac{1}{2})x^{-3/2} = +\\frac{1}{2}x^{-3/2}\\).",
+              "Multiply by \\(2x\\)\n\\[2x\\frac{dy}{dx} = x \\cdot x^{-1/2} + x \\cdot x^{-3/2}\\]\n\\[= x^{1/2} + x^{-1/2}\\]\nWhy: \\(2 \\cdot \\frac{1}{2} = 1\\), and \\(x^1 \\cdot x^{-1/2} = x^{1/2}\\), \\(x^1 \\cdot x^{-3/2} = x^{-1/2}\\).",
+              "Add \\(y\\)\n\\[2x\\frac{dy}{dx} + y = x^{1/2} + x^{-1/2} + x^{1/2} - x^{-1/2}\\]\n\\[= 2x^{1/2} = 2\\sqrt{x}\\]\nWhy: The \\(x^{-1/2}\\) terms cancel. This is the right side.",
+              "Check\n\\[\\text{At } x = 4:\\ y = 2 - \\frac{1}{2} = 1.5,\\ y' = \\frac{1}{4} + \\frac{1}{16}\\]\n\\[8 \\times \\frac{5}{16} + 1.5 = 2.5 + 1.5 = 4 = 2\\sqrt{4}\\]\nWhy: The identity holds at a sample point."
+            ],
+            "final_answer": "Hence proved: \\(2x\\frac{dy}{dx} + y = 2\\sqrt{x}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

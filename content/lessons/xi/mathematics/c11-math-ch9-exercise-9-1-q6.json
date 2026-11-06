@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-EXERCISE-9-1-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/u-exercise-9-1-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 179,
+          "pdf_to": 179,
+          "note": "Exercise 9.1, Question 6: book page 174 (PDF 179); answer key book page 302 (PDF 307); verified with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. If \\(x + 1\\) and \\(x - 2\\) are factors of \\(x^{3} - px^{2} + qx + 2\\). Using of synthetic division find the values of \\(p\\) and \\(q\\).",
+            "explanation": "Two unknowns \\(p\\) and \\(q\\), and two factors: each factor gives one equation.\nA factor leaves remainder 0, so each synthetic division's remainder (in terms of \\(p\\) and \\(q\\)) is set to 0.\nPlan: divide by \\(x + 1\\) and by \\(x - 2\\), set both remainders 0, solve the two equations.",
+            "steps": [
+              "Given: \\(f(x) = x^{3} - px^{2} + qx + 2\\); \\(x + 1\\) and \\(x - 2\\) are factors.\nTo find: \\(p\\) and \\(q\\).\nMethod: Synthetic division keeping \\(p\\) and \\(q\\) as letters. A factor leaves remainder 0, so each division gives one equation.",
+              "Coefficients\n\\[1,\\ -p,\\ q,\\ 2\\]\nWhy: The letters are treated like numbers in the table. Note the coefficient of \\(x^{2}\\) is \\(-p\\), not \\(p\\).",
+              "Divide by \\(x + 1\\) (\\(a = -1\\))\n\\[\\begin{array}{r|rrrr} -1 & 1 & -p & q & 2 \\\\ & & -1 & p + 1 & -p - q - 1 \\\\ \\hline & 1 & -p - 1 & q + p + 1 & \\boxed{1 - p - q} \\end{array}\\]\n\\[1 \\times (-1) = -1,\\ -p - 1\\]\n\\[(-p - 1)(-1) = p + 1,\\ q + p + 1\\]\n\\[(q + p + 1)(-1) = -p - q - 1\\]\n\\[2 - p - q - 1 = 1 - p - q\\]\nWhy: \\(x + 1 = x - (-1)\\). Multiplying by \\(-1\\) changes every sign.",
+              "First equation\n\\[1 - p - q = 0\\]\n\\[p + q = 1 \\quad (1)\\]\nWhy: \\(x + 1\\) is a factor, so the remainder is 0.",
+              "Divide by \\(x - 2\\) (\\(a = 2\\))\n\\[\\begin{array}{r|rrrr} 2 & 1 & -p & q & 2 \\\\ & & 2 & 4 - 2p & 2q + 8 - 4p \\\\ \\hline & 1 & 2 - p & q + 4 - 2p & \\boxed{10 - 4p + 2q} \\end{array}\\]\n\\[1 \\times 2 = 2,\\ 2 - p\\]\n\\[2(2 - p) = 4 - 2p,\\ q + 4 - 2p\\]\n\\[2(q + 4 - 2p) = 2q + 8 - 4p\\]\n\\[2 + 2q + 8 - 4p = 10 - 4p + 2q\\]\nWhy: Same moves with \\(a = 2\\): multiply by 2, then add.",
+              "Second equation\n\\[10 - 4p + 2q = 0\\]\n\\[4p - 2q = 10\\]\n\\[2p - q = 5 \\quad (2)\\]\nWhy: \\(x - 2\\) is a factor, so this remainder is 0 too. Dividing by 2 makes the numbers smaller.",
+              "Solve (1) and (2): add them\n\\[(p + q) + (2p - q) = 1 + 5\\]\n\\[3p = 6\\]\n\\[p = 2\\]\nWhy: \\(q\\) and \\(-q\\) cancel when the equations are added.",
+              "Find \\(q\\) from (1)\n\\[2 + q = 1\\]\n\\[q = -1\\]\nWhy: Put \\(p = 2\\) in the simpler equation.",
+              "Check\n\\[f(x) = x^{3} - 2x^{2} - x + 2\\]\n\\[f(-1) = -1 - 2 + 1 + 2 = 0 \\;\\checkmark\\]\n\\[f(2) = 8 - 8 - 2 + 2 = 0 \\;\\checkmark\\]\nWhy: By the factor theorem both values must be 0, and they are."
+            ],
+            "final_answer": "\\(p = 2,\\ q = -1\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

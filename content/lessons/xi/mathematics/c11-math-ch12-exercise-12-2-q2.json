@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-2-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-2-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 238,
+          "pdf_to": 238,
+          "note": "Exercise 12.2, Question 2 (i)-(ii): continuity of piecewise functions at x = c (book p.233). Answer key PDF 310 wrongly says (i) is discontinuous at x = 2."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Discuss the continuity of \\(f(x)\\) at \\(x = c\\): \\[f(x) = \\begin{cases} 2x + 5, & x \\le 2 \\\\ 4x + 1, & x > 2 \\end{cases}\\]\\(c = 2\\)",
+            "explanation": "A continuity question for a two-piece function.\nWe must decide whether \\(f\\) is continuous at \\(x = 2\\), where the formula changes.\nPlan: find \\(f(2)\\), the LHL and the RHL, then test the three conditions.",
+            "steps": [
+              "Given: \\(f(x) = 2x + 5\\) for \\(x \\le 2\\), \\(4x + 1\\) for \\(x > 2\\); \\(c = 2\\).\nTo find: whether \\(f\\) is continuous at \\(x = 2\\).\nMethod: \\(f\\) is continuous at \\(x = c\\) when three conditions hold: (i) \\(f(c)\\) is defined, (ii) \\(\\lim_{x \\to c} f(x)\\) exists (LHL = RHL), (iii) \\(\\lim_{x \\to c} f(x) = f(c)\\). If any one fails, \\(f\\) is discontinuous at \\(c\\).",
+              "Condition (i): find \\(f(2)\\)\n\\[f(2) = 2(2) + 5 = 9\\]\nWhy: The sign \\(\\le\\) puts \\(x = 2\\) in the first piece \\(2x + 5\\).",
+              "Left hand limit\n\\[\\lim_{x \\to 2^-} f(x) = \\lim_{x \\to 2^-} (2x + 5)\\]\n\\[= 4 + 5 = 9\\]\nWhy: For \\(x < 2\\) the first piece is used.",
+              "Right hand limit\n\\[\\lim_{x \\to 2^+} f(x) = \\lim_{x \\to 2^+} (4x + 1)\\]\n\\[= 8 + 1 = 9\\]\nWhy: For \\(x > 2\\) the second piece is used.",
+              "Condition (ii): does the limit exist?\n\\[\\text{LHL} = \\text{RHL} = 9\\]\n\\[\\lim_{x \\to 2} f(x) = 9\\]\nWhy: The one-sided limits are equal.",
+              "Condition (iii): compare with \\(f(2)\\)\n\\[\\lim_{x \\to 2} f(x) = 9 = f(2)\\]\nWhy: All three conditions hold, so the two straight-line pieces meet at the same point \\((2, 9)\\): no break.",
+              "Check\n\\[f(1.99) = 3.98 + 5 = 8.98\\]\n\\[f(2.01) = 8.04 + 1 = 9.04\\]\nWhy: Values on both sides are close to \\(f(2) = 9\\)."
+            ],
+            "final_answer": "\\(f\\) is continuous at \\(x = 2\\) (LHL \\(=\\) RHL \\(= f(2) = 9\\))"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \"(i) \\(f\\) is discontinuous at \\(x = 2\\)\". This is wrong: \\(f(2) = 9\\), the left hand limit is \\(2(2) + 5 = 9\\) and the right hand limit is \\(4(2) + 1 = 9\\), so all three conditions hold. The correct answer is: \\(f\\) is continuous at \\(x = 2\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Discuss the continuity of \\(f(x)\\) at \\(x = c\\): \\[f(x) = \\begin{cases} 3x - 1, & x < 1 \\\\ 4, & x = 1 \\\\ 2x, & x > 1 \\end{cases}\\]\\(c = 1\\)",
+            "explanation": "A continuity question for a three-piece function: one formula on each side and a separate value at the point.\nWe must decide whether \\(f\\) is continuous at \\(x = 1\\).\nPlan: find \\(f(1)\\), the LHL and the RHL, then test the three conditions.",
+            "steps": [
+              "Given: \\(f(x) = 3x - 1\\) for \\(x < 1\\), \\(f(1) = 4\\), \\(f(x) = 2x\\) for \\(x > 1\\); \\(c = 1\\).\nTo find: whether \\(f\\) is continuous at \\(x = 1\\).\nMethod: \\(f\\) is continuous at \\(x = c\\) when three conditions hold: (i) \\(f(c)\\) is defined, (ii) \\(\\lim_{x \\to c} f(x)\\) exists (LHL = RHL), (iii) \\(\\lim_{x \\to c} f(x) = f(c)\\). If any one fails, \\(f\\) is discontinuous at \\(c\\).",
+              "Condition (i): find \\(f(1)\\)\n\\[f(1) = 4\\]\nWhy: The middle line gives the value at exactly \\(x = 1\\).",
+              "Left hand limit\n\\[\\lim_{x \\to 1^-} f(x) = \\lim_{x \\to 1^-} (3x - 1)\\]\n\\[= 3 - 1 = 2\\]\nWhy: For \\(x < 1\\) the first piece is used.",
+              "Right hand limit\n\\[\\lim_{x \\to 1^+} f(x) = \\lim_{x \\to 1^+} 2x\\]\n\\[= 2(1) = 2\\]\nWhy: For \\(x > 1\\) the third piece is used.",
+              "Condition (ii): does the limit exist?\n\\[\\text{LHL} = \\text{RHL} = 2\\]\n\\[\\lim_{x \\to 1} f(x) = 2\\]\nWhy: The one-sided limits are equal, so the limit exists.",
+              "Condition (iii): compare with \\(f(1)\\)\n\\[\\lim_{x \\to 1} f(x) = 2\\]\n\\[f(1) = 4\\]\n\\[2 \\ne 4\\]\nWhy: The limit does not equal the value of the function, so condition (iii) fails. The graph approaches the point \\((1, 2)\\) but the function's point is \\((1, 4)\\): a hole in the line with a separate dot above it.",
+              "Check\n\\[f(0.99) = 2.97 - 1 = 1.97\\]\n\\[f(1.01) = 2.02\\]\nWhy: Nearby values approach 2, not 4. (If \\(f(1)\\) were 2, \\(f\\) would be continuous.)"
+            ],
+            "final_answer": "\\(f\\) is discontinuous at \\(x = 1\\) (the limit is 2 but \\(f(1) = 4\\))"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.2.5-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.2.5",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 230,
+          "pdf_to": 231,
+          "note": "Book p. 225-226: 12.2.5 Methods for Evaluating the Limits at Infinity (divide by the highest power of x in the denominator); Examples 4, 5 and 6 (Example 6 (ii) on p. 226)."
+        }
+      ],
+      "title": "12.2.5 Methods for Evaluating the Limits at Infinity (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH12-12.2.5",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "12.2.3 mein humne seekha ke \\(\\frac{a}{x^{p}}\\) infinity par zero ki taraf jata hai. Ab is theorem ko istemal kar ke hum mushkil fractions ki limits at infinity nikalenge. Kitab ka method ek line ka hai, lekin is ki samajh poore section ki jaan hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab kehti hai: is surat mein hum pehle numerator aur denominator dono ki har term ko \\(x\\) ki us sab se bari power se divide karte hain jo denominator mein aati hai, aur phir limits ke theorems istemal karte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh method kyun? Jab \\(x \\to \\pm\\infty\\), to polynomial beghair had barhta hai. Do polynomials ka fraction is liye \\(\\frac{\\infty}{\\infty}\\) jaisa lagta hai, jis se kuch pata nahin chalta: kaun zyada tezi se barh raha hai, upar wala ya neeche wala?\nDenominator ki sab se bari power se divide karne ke baad:\n1. denominator ek finite, non-zero number ki taraf jata hai (us ka leading coefficient, yani sab se bari power ka coefficient);\n2. baqi har term \\(\\frac{a}{x^{p}}\\) ki shakal ki hoti hai aur 12.2.3 ke theorem se zero ho jati hai.\nPhir limit seedhi nazar aa jati hai.\nRozmarra ki misaal: agar ek ameer aadmi ke paas ek arab rupay hon aur us ki jeb mein 50 rupay aur aa jayen, to us ki daulat par koi farq nahin parta. Isi tarah \\(x\\) bohat bara ho to \\(10x^{2}\\) aur 50 jaisi chhoti terms, \\(x^{3}\\) ke muqable mein na hone ke barabar hain."
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "Evaluate \\(\\displaystyle\\lim_{x\\to +\\infty}\\frac{5x^{4}-10x^{2}+1}{-3x^{3}+10x^{2}+50}\\)",
+            "steps": [
+              "Given: \\(\\frac{5x^{4}-10x^{2}+1}{-3x^{3}+10x^{2}+50}\\) jab \\(x \\to +\\infty\\).\nTo find: limit.\nMethod: sab se pehle hum dekhte hain ke yahan substitution nahin ho sakti, kyun ke \\(\\infty\\) number nahin. Upar aur neeche dono beghair had barhte hain. Denominator mein \\(x\\) ki sab se bari power \\(x^{3}\\) hai, is liye numerator aur denominator ki har term ko \\(x^{3}\\) se divide karenge, aur phir \\(\\lim \\frac{a}{x^{p}} = 0\\) (12.2.3) lagayenge.",
+              "Step 1: Har term ko \\(x^{3}\\) se divide karein\nNumerator: \\(\\frac{5x^{4}}{x^{3}} - \\frac{10x^{2}}{x^{3}} + \\frac{1}{x^{3}} = 5x - \\frac{10}{x} + \\frac{1}{x^{3}}\\)\nDenominator: \\(\\frac{-3x^{3}}{x^{3}} + \\frac{10x^{2}}{x^{3}} + \\frac{50}{x^{3}} = -3 + \\frac{10}{x} + \\frac{50}{x^{3}}\\)\n\\[\\lim_{x\\to +\\infty}\\dfrac{5x^{4}-10x^{2}+1}{-3x^{3}+10x^{2}+50}\\]\n\\[= \\lim_{x\\to +\\infty}\\dfrac{5x - \\frac{10}{x} + \\frac{1}{x^{3}}}{-3 + \\frac{10}{x} + \\frac{50}{x^{3}}}\\]\nKyun: upar aur neeche ko ek hi non-zero cheez se divide karein to fraction ki value nahin badalti (jaise \\(\\frac{6}{8} = \\frac{3}{4}\\)). Denominator ki sab se bari power se divide karne ka faida yeh hai ke denominator ek finite, non-zero number (\\(-3\\)) ki taraf jata hai, aur neeche zero aane ka darr khatam.",
+              "Step 2: \\(x \\to +\\infty\\) karein\n\\[= \\dfrac{\\infty - 0 + 0}{-3 + 0 + 0} = -\\infty\\]\n\\[\\because \\lim_{x\\to\\infty}\\dfrac{a}{x^{p}} = 0\\]\nKyun: \\(\\frac{10}{x}\\), \\(\\frac{1}{x^{3}}\\), \\(\\frac{50}{x^{3}}\\) sab zero ki taraf jate hain. Lekin \\(5x\\) beghair had barhta hai, aur neeche \\(-3\\) bachta hai. Bohat bara positive number \\(-3\\) se divide ho to bohat bara negative number banta hai. Dhyan dein: kitab ka \"\\(\\infty - 0 + 0\\)\" sirf samjhane ka andaaz hai; \\(\\infty\\) ko number samajh kar hisaab na karein.",
+              "Step 3: Jawab ka matlab samjhein\nFraction beghair had ghat'ta jata hai, is liye limit \\(-\\infty\\) hai; yani yeh kisi finite number ki taraf nahin jata.\nKyun: numerator ki degree (4) denominator ki degree (3) se bari hai, is liye numerator \"jeet\" jata hai.",
+              "Tasdeeq:\n\\(x = 1000\\) par: numerator \\(\\approx 4.99999 \\times 10^{12}\\), denominator \\(\\approx -2.99 \\times 10^{9}\\), value taqreeban \\(-1672\\). \\(x = 10^{4}\\) par taqreeban \\(-16672\\). Value neeche hi neeche ja rahi hai, bilkul jaise \\(-\\infty\\) kehta hai."
+            ],
+            "answer": "\\(\\lim_{x\\to +\\infty}\\frac{5x^{4}-10x^{2}+1}{-3x^{3}+10x^{2}+50} = -\\infty\\) (fraction beghair had ghat'ta hai)"
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Evaluate \\(\\displaystyle\\lim_{x\\to -\\infty}\\frac{4x^{4}-5x^{3}}{-3x^{5}+2x^{2}+1}\\)",
+            "steps": [
+              "Given: \\(\\frac{4x^{4}-5x^{3}}{-3x^{5}+2x^{2}+1}\\) jab \\(x \\to -\\infty\\).\nTo find: limit.\nMethod: denominator mein sab se bari power \\(x^{5}\\) hai. Har term ko \\(x^{5}\\) se divide karenge aur \\(\\lim_{x\\to -\\infty}\\frac{a}{x^{p}} = 0\\) (12.2.3) lagayenge. Yahan \\(x\\) negative hai, magar integer powers negative \\(x\\) ke liye bhi defined hain, is liye theorem chal jata hai.",
+              "Step 1: Har term ko \\(x^{5}\\) se divide karein\n\\[\\lim_{x\\to -\\infty}\\dfrac{4x^{4}-5x^{3}}{-3x^{5}+2x^{2}+1}\\]\n\\[= \\lim_{x\\to -\\infty}\\dfrac{\\frac{4}{x} - \\frac{5}{x^{2}}}{-3 + \\frac{2}{x^{3}} + \\frac{1}{x^{5}}}\\]\nKyun: powers ka qanoon, divide karne par powers ghatti hain: \\(\\frac{4x^{4}}{x^{5}} = \\frac{4}{x}\\), \\(\\frac{5x^{3}}{x^{5}} = \\frac{5}{x^{2}}\\), \\(\\frac{-3x^{5}}{x^{5}} = -3\\), \\(\\frac{2x^{2}}{x^{5}} = \\frac{2}{x^{3}}\\), aur \\(\\frac{1}{x^{5}}\\) waise hi rehta hai.",
+              "Step 2: \\(x \\to -\\infty\\) karein\n\\[= \\dfrac{0 - 0}{-3 + 0 + 0} = \\dfrac{0}{-3} = 0\\]\nKyun: \\(\\frac{a}{x^{p}}\\) wali har term zero ki taraf jati hai. Neeche \\(-3\\) bachta hai jo zero nahin, is liye \\(\\frac{0}{-3} = 0\\). Dhyan dein: yeh \\(\\frac{0}{0}\\) form nahin hai, sirf upar zero hai; aur zero ko kisi non-zero number se divide karein to zero hi aata hai.",
+              "Tasdeeq:\n\\(x = -100\\) par: numerator \\(= 4.05 \\times 10^{8}\\), denominator \\(\\approx 3 \\times 10^{10}\\), value taqreeban 0.0135, jo zero ke qareeb hai. Numerator ki degree (4) denominator ki degree (5) se chhoti hai, is liye denominator \"jeet\" jata hai aur limit 0 aati hai."
+            ],
+            "answer": "\\(\\lim_{x\\to -\\infty}\\frac{4x^{4}-5x^{3}}{-3x^{5}+2x^{2}+1} = 0\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Examples 4 aur 5 se ek pattern nikalta hai. (Polynomial)/(polynomial) ki limit \\(x \\to \\pm\\infty\\) par degrees (sab se bari powers) compare kar ke andaza ho jata hai:\n1. numerator ki degree < denominator ki degree: limit 0 (Example 5);\n2. degrees barabar: limit = leading coefficients ka ratio. Misaal: \\(\\lim_{x\\to\\infty}\\frac{3x^{2}+1}{x^{2}-5} = \\frac{3}{1} = 3\\);\n3. numerator ki degree > denominator ki degree: fraction beghair had barhta ya ghat'ta hai, limit \\(+\\infty\\) ya \\(-\\infty\\) (Example 4).\nDhyan dein: yeh pattern sirf apna jawab check karne ke liye hai. Paper mein division wala poora tareeqa likhna zaroori hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh misaal humari taraf se hai: \\(\\lim_{x\\to\\infty}\\frac{2x+1}{x^{2}+3}\\).\nDenominator ki sab se bari power \\(x^{2}\\) hai. Har term ko \\(x^{2}\\) se divide karein:\n\\[\\lim_{x\\to\\infty}\\dfrac{\\frac{2}{x}+\\frac{1}{x^{2}}}{1+\\frac{3}{x^{2}}} = \\dfrac{0+0}{1+0} = 0\\]\nPattern se bhi yahi: upar degree 1, neeche degree 2, to limit 0."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Ab barabar degrees wali misaal poore tareeqe se: \\(\\lim_{x\\to\\infty}\\frac{3x^{2}+1}{x^{2}-5}\\).\nDenominator ki sab se bari power \\(x^{2}\\) hai, to har term ko \\(x^{2}\\) se divide karein:\n\\[\\lim_{x\\to\\infty}\\dfrac{3+\\frac{1}{x^{2}}}{1-\\frac{5}{x^{2}}} = \\dfrac{3+0}{1-0} = 3\\]\nDekhiye, jawab leading coefficients ka ratio, \\(\\frac{3}{1}\\), hi aaya. Example 3 (sequence wali) bhi isi qisam ki thi: \\(\\frac{2n+3}{n+1} \\to \\frac{2}{1} = 2\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab ek aisi misaal jahan square root bhi hai aur \\(x\\) negative bhi ho sakta hai. Is mein ek bareek nukta hai jo aksar students se reh jata hai, is liye dhyan se parhiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 6 se pehle ek purani baat taaza kar lein: \\(\\sqrt{x^{2}} = |x|\\), \\(x\\) nahin. Kyun? Kyun ke square root ka nishan hamesha non-negative (zero ya positive) jawab deta hai.\n\\(x = 4\\): \\(\\sqrt{16} = 4 = x\\).\n\\(x = -4\\): \\(\\sqrt{16} = 4 = -x\\), kyun ke \\(-(-4) = 4\\).\nTo jab \\(x \\to -\\infty\\) ho, yani \\(x\\) hamesha negative ho, to \\(\\sqrt{x^{2}} = -x\\). Is liye wahan hum \\(-x\\) se divide karte hain, jo khud positive hai aur aaram se root ke andar \\(x^{2}\\) ban kar ja sakta hai. Agar hum \\(x\\) se divide karein to woh negative hai aur root ke andar le jate waqt minus sign kho jata hai; yahi ghalat sign ki asal wajah hoti hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Evaluate: (i) \\(\\displaystyle\\lim_{x\\to -\\infty}\\frac{2-3x}{\\sqrt{3+4x^{2}}}\\)  (ii) \\(\\displaystyle\\lim_{x\\to +\\infty}\\frac{2-3x}{\\sqrt{3+4x^{2}}}\\)",
+            "steps": [
+              "Given: \\(\\frac{2-3x}{\\sqrt{3+4x^{2}}}\\), (i) jab \\(x \\to -\\infty\\), (ii) jab \\(x \\to +\\infty\\).\nTo find: dono limits.\nMethod: root ke andar sab se bari power \\(x^{2}\\) hai, is liye denominator taqreeban \\(\\sqrt{x^{2}}\\) ki tarah behave karta hai. Hum upar neeche \\(\\sqrt{x^{2}} = |x|\\) se divide karenge. \\(x < 0\\) ke liye \\(|x| = -x\\) aur \\(x > 0\\) ke liye \\(|x| = x\\); is liye part (i) mein \\(-x\\) se aur part (ii) mein \\(x\\) se divide karenge. Yahi is sawal ka asal nukta hai.",
+              "(i) Step 1: Negative \\(x\\) ke liye \\(\\sqrt{x^{2}}\\) pehchaanein\nYahan \\(\\sqrt{x^{2}} = |x| = -x\\), kyun ke \\(x < 0\\).\nKyun: square root kabhi negative nahin hota. Misaal: \\(x = -5\\) ho to \\(\\sqrt{(-5)^{2}} = \\sqrt{25} = 5\\), jo \\(-x = -(-5) = 5\\) ke barabar hai, \\(x = -5\\) ke nahin. Bohat se students yahan \\(\\sqrt{x^{2}} = x\\) likh kar sign ghalat kar dete hain.",
+              "(i) Step 2: Upar neeche \\(-x\\) se divide karein\nNumerator: \\(\\frac{2-3x}{-x} = -\\frac{2}{x} + 3\\)\nDenominator: \\(\\frac{\\sqrt{3+4x^{2}}}{-x} = \\frac{\\sqrt{3+4x^{2}}}{\\sqrt{x^{2}}} = \\sqrt{\\frac{3}{x^{2}} + 4}\\)\n\\[\\lim_{x\\to -\\infty}\\dfrac{2-3x}{\\sqrt{3+4x^{2}}} = \\lim_{x\\to -\\infty}\\dfrac{-\\frac{2}{x}+3}{\\sqrt{\\frac{3}{x^{2}}+4}}\\]\nKyun: yahan \\(-x\\) positive hai aur \\(-x = \\sqrt{x^{2}}\\), is liye yeh root ke andar \\(x^{2}\\) ban kar ja sakta hai. Phir \\(\\frac{3+4x^{2}}{x^{2}} = \\frac{3}{x^{2}} + 4\\).",
+              "(i) Step 3: \\(x \\to -\\infty\\) karein\nKitab yahan neeche ka root likhna bhool gayi hai (\\(\\frac{0+3}{0+4}\\), neeche \"Kitab ki ghalti\" dekhiye). Sahi:\n\\[= \\dfrac{0+3}{\\sqrt{0+4}} = \\dfrac{3}{2}\\]\nKyun: \\(\\frac{2}{x} \\to 0\\) aur \\(\\frac{3}{x^{2}} \\to 0\\), aur \\(\\sqrt{4} = 2\\). Agar root bhool jayein to \\(\\frac{3}{4}\\) aata, jo ghalat hai.",
+              "(ii) Step 1: Positive \\(x\\) ke liye \\(\\sqrt{x^{2}}\\) pehchaanein\nYahan \\(\\sqrt{x^{2}} = |x| = x\\), kyun ke \\(x > 0\\). Is liye upar neeche \\(x\\) se divide karenge.\nKyun: positive \\(x\\) ke liye \\(|x| = x\\); yahan koi sign ka masla nahin.",
+              "(ii) Step 2: Upar neeche \\(x\\) se divide karein\n\\[\\lim_{x\\to +\\infty}\\dfrac{2-3x}{\\sqrt{3+4x^{2}}} = \\lim_{x\\to +\\infty}\\dfrac{\\frac{2}{x}-3}{\\sqrt{\\frac{3}{x^{2}}+4}}\\]\nKyun: \\(\\frac{2-3x}{x} = \\frac{2}{x} - 3\\), aur \\(\\frac{\\sqrt{3+4x^{2}}}{x} = \\sqrt{\\frac{3+4x^{2}}{x^{2}}} = \\sqrt{\\frac{3}{x^{2}}+4}\\).",
+              "(ii) Step 3: \\(x \\to +\\infty\\) karein\nKitab yahan bhi root chhor deti hai (\\(\\frac{0-3}{0+4}\\)). Sahi:\n\\[= \\dfrac{0-3}{\\sqrt{0+4}} = \\dfrac{-3}{2}\\]\nKyun: wohi terms zero ki taraf jati hain jo part (i) mein; sirf numerator ka sign badla hai.",
+              "Tasdeeq:\n\\(x = -1000\\) par: \\(\\frac{3002}{\\sqrt{4000003}} \\approx 1.5010\\), jo \\(\\frac{3}{2}\\) ke qareeb hai.\n\\(x = 1000\\) par: \\(\\frac{-2998}{\\sqrt{4000003}} \\approx -1.4990\\), jo \\(-\\frac{3}{2}\\) ke qareeb hai.\nSigns bhi samajh aate hain: bare negative \\(x\\) par \\(2 - 3x\\) positive hai, bare positive \\(x\\) par negative, jab ke denominator hamesha positive hai."
+            ],
+            "answer": "(i) \\(\\lim_{x\\to -\\infty}\\frac{2-3x}{\\sqrt{3+4x^{2}}} = \\frac{3}{2}\\)  (ii) \\(\\lim_{x\\to +\\infty}\\frac{2-3x}{\\sqrt{3+4x^{2}}} = -\\frac{3}{2}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Dono parts mein kitab aakhri fraction ke denominator ka square root chhor deti hai: woh \\(\\frac{0+3}{0+4} = \\frac{3}{2}\\) aur \\(\\frac{0-3}{0+4} = \\frac{-3}{2}\\) chhaapti hai, halaan ke \\(\\frac{3}{4} \\ne \\frac{3}{2}\\). Denominator \\(\\sqrt{\\frac{3}{x^{2}}+4} \\to \\sqrt{0+4} = 2\\) hai, is liye sahi lines \\(\\frac{0+3}{\\sqrt{0+4}} = \\frac{3}{2}\\) aur \\(\\frac{0-3}{\\sqrt{0+4}} = -\\frac{3}{2}\\) hain. Aakhri jawab sahi hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(\\lim_{x\\to -\\infty}\\frac{x}{\\sqrt{x^{2}+1}}\\) aur \\(\\lim_{x\\to +\\infty}\\frac{x}{\\sqrt{x^{2}+1}}\\) kya hongi?\nJawab: \\(x \\to -\\infty\\) par \\(-x\\) se divide karein: \\(\\frac{-1}{\\sqrt{1+\\frac{1}{x^{2}}}} \\to -1\\). \\(x \\to +\\infty\\) par \\(x\\) se divide karein: \\(\\frac{1}{\\sqrt{1+\\frac{1}{x^{2}}}} \\to 1\\). Ek hi function, do mukhtalif jawab, sirf \\(|x|\\) ki wajah se!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Jab \\(x \\to -\\infty\\) ho aur even power ka square root maujood ho, to divide karne se pehle yeh line zaroor likhein: \"\\(\\sqrt{x^{2}} = |x| = -x\\) as \\(x < 0\\)\", jaise kitab likhti hai. Yahi ek line jawab ka sign tay karti hai, aur examiner isi ko dekhta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(x \\to \\pm\\infty\\) ke liye: numerator aur denominator ki har term ko denominator ki sab se bari power se divide karo.\n2. Phir \\(\\lim_{x\\to\\pm\\infty}\\frac{a}{x^{p}} = 0\\) lagao.\n3. \\(\\sqrt{x^{2}} = |x|\\): \\(x > 0\\) ho to \\(x\\), aur \\(x < 0\\) ho to \\(-x\\).\n4. Jawab koi number, 0, ya \\(\\pm\\infty\\) (yani koi finite limit nahin) ho sakta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Denominator ki bajaye numerator ki sab se bari power se divide karna; is se denominator zero ki taraf ja sakta hai aur method fail ho jata hai.\n2. \\(x \\to -\\infty\\) par \\(\\sqrt{x^{2}} = x\\) likh dena; is se sign ulat jata hai (Example 6 (i) mein \\(\\frac{3}{2}\\) ki jagah \\(-\\frac{3}{2}\\) aa jata).\n3. Number rakhte waqt square root bhool jana, jaisa kitab ki chhapi hui line \\(\\frac{0+3}{0+4}\\) mein hua.\n4. Sirf kuch terms ko divide karna; upar aur neeche ki har term ko divide karna zaroori hai."
+          }
+        ]
+      }
+    }
+  ]
+}

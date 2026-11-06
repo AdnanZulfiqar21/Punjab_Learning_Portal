@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.2.1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.2.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 227,
+          "pdf_to": 227,
+          "note": "Book p. 222: 12.2.1 lim (x^n - a^n)/(x - a) = n a^(n-1): Case 1 (n a positive integer, factorization) and Case II (n = -m a negative integer, reduced to Case 1)."
+        }
+      ],
+      "title": "12.2.1 Lim_{x->a} (x^n - a^n)/(x - a) = n a^(n-1) where n is a non-zero integer and a > 0 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH12-12.2.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Pichle section mein humne seekha ke jab substitution se \\(\\frac{0}{0}\\) aaye to factor bana kar common factor cancel karte hain. Ab hum ek aisi limit seekhenge jo baar baar kaam aati hai, aur jise ek dafa saabit kar liya to har dafa factorize karne ki zaroorat nahin rahegi. Yeh limit har non-zero integer \\(n\\) (yani zero ke ilawa koi bhi poora number, positive ya negative) aur \\(a > 0\\) ke liye sahi hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\lim_{x\\to a}\\dfrac{x^{n}-a^{n}}{x-a} = na^{n-1}",
+            "text_alt": "limit as x approaches a of (x to the power n minus a to the power n) over (x minus a) equals n times a to the power n minus 1"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh limit humein chahiye kyun? Agar seedha \\(x = a\\) rakhein to \\(\\frac{a^{n}-a^{n}}{a-a} = \\frac{0}{0}\\) aata hai, yani substitution se jawab nahin milta. Yeh result ek hi line mein jawab de deta hai.\n\\(n = 2\\) le kar khud dekh lijiye: \\(\\frac{x^{2}-a^{2}}{x-a} = \\frac{(x-a)(x+a)}{x-a} = x + a\\). Jab \\(x \\to a\\), to yeh \\(a + a = 2a\\) ban jata hai, aur formula bhi yahi kehta hai: \\(2a^{2-1} = 2a\\). Wah!\nAik aur baat: yeh limit aage agle unit mein \\(x^{n}\\) ka derivative (differentiation) nikalne ki pehli seerhi hai. Is liye ise sirf ratta na lagayein, is ka saboot (proof) samajh lein."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Case 1"
+          },
+          {
+            "type": "paragraph",
+            "text": "Pehle maan lete hain ke \\(n\\) ek positive integer hai (1, 2, 3, ...). \\(x = a\\) rakhne se \\(\\left(\\frac{0}{0}\\right)\\) form milti hai, is liye hum is tarah factors banate hain:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[x^{n}-a^{n} = (x-a)\\big(x^{n-1} + ax^{n-2}\\]\n\\[\\quad + a^{2}x^{n-3} + \\dots + a^{n-1}\\big)\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh factorization kahan se aayi? Chhoti powers se shuru karte hain, jo aap pehle se jaante hain:\n\\[x^{2}-a^{2} = (x-a)(x+a)\\]\n\\[x^{3}-a^{3} = (x-a)(x^{2}+ax+a^{2})\\]\nPattern dekhiye: bracket mein \\(x\\) ki power ek ek kar ke kam hoti hai (\\(n-1, n-2, \\dots, 0\\)) aur \\(a\\) ki power ek ek kar ke barhti hai (\\(0, 1, 2, \\dots, n-1\\)). Is liye bracket mein bilkul \\(n\\) terms hain.\nTasdeeq ka tareeqa: \\((x-a)\\) ko lambe bracket se zarb dein. Har darmiyani term ek dafa \\(+\\) ke saath aur ek dafa \\(-\\) ke saath aati hai, aur cancel ho jati hai. Aakhir mein sirf \\(x^{n}\\) aur \\(-a^{n}\\) bachte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab dekhiye: numerator mein factor \\((x - a)\\) nikal aaya hai, aur denominator bhi \\((x - a)\\) hai. Yahi woh factor hai jo \\(\\frac{0}{0}\\) paida kar raha tha. Is ko cancel karte hain (yeh zero nahin kyun ke \\(x \\ne a\\)), aur phir \\(x = a\\) rakhte hain:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\lim_{x\\to a}\\dfrac{x^{n}-a^{n}}{x-a}\\]\n\\[= \\lim_{x\\to a}\\dfrac{(x-a)\\big(x^{n-1} + \\dots + a^{n-1}\\big)}{x-a}\\]\n\\[= \\lim_{x\\to a}\\big(x^{n-1} + ax^{n-2} + a^{2}x^{n-3}\\]\n\\[\\quad + \\dots + a^{n-1}\\big)\\]\n\\[= a^{n-1} + a\\,a^{n-2} + a^{2}a^{n-3}\\]\n\\[\\quad + a^{3}a^{n-4} + \\dots + a^{n-1}\\]\n\\[= a^{n-1} + a^{n-1} + a^{n-1} + \\dots + a^{n-1}\\]\n\\[= na^{n-1}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Har term \\(a^{n-1}\\) kyun ban gayi? Har term mein \\(a\\) ki do powers hain jin ka jor (sum) hamesha \\(n-1\\) hai. Misaal: \\(a^{2}\\,a^{n-3} = a^{2+n-3} = a^{n-1}\\), aur \\(a^{3}a^{n-4} = a^{n-1}\\). Exponent ka qanoon yaad karein: same base ho to powers jama hoti hain.\nAur kitni terms hain? Bracket mein \\(n\\) terms thin, to \\(n\\) dafa \\(a^{n-1}\\) jama hua, yani \\(na^{n-1}\\). Jaise 5 dafa 7 jama karein to \\(5 \\times 7\\) banta hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Case II"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab maan lijiye \\(n\\) negative integer hai. Is ko \\(n = -m\\) likhte hain, jahan \\(m\\) positive integer hai. Misaal: \\(n = -3\\) ho to \\(m = 3\\). Maqsad yeh hai ke negative power ko positive power mein badal kar Case 1 wala result istemal kar sakein. To,"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\dfrac{x^{n}-a^{n}}{x-a} = \\dfrac{x^{-m}-a^{-m}}{x-a}\\]\n\\[= \\dfrac{\\frac{1}{x^{m}} - \\frac{1}{a^{m}}}{x-a}\\]\n\\[= \\dfrac{\\frac{a^{m}-x^{m}}{x^{m}a^{m}}}{x-a}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh qadam kyun? Negative power ka matlab ulta (reciprocal) hai: \\(x^{-m} = \\frac{1}{x^{m}}\\). Phir do fractions ka L.C.M. lene se \\(\\frac{1}{x^{m}} - \\frac{1}{a^{m}} = \\frac{a^{m}-x^{m}}{x^{m}a^{m}}\\).\nAb chaalaaki dekhiye: upar \\(a^{m}-x^{m}\\) hai, jab ke Case 1 mein \\(x^{m}-a^{m}\\) tha. Is liye minus bahar nikalte hain: \\(a^{m}-x^{m} = -(x^{m}-a^{m})\\). Is tarah expression do hisson mein toot jati hai: \\(\\frac{-1}{x^{m}a^{m}}\\) aur \\(\\frac{x^{m}-a^{m}}{x-a}\\). Doosra hissa bilkul Case 1 wala hai, positive integer \\(m\\) ke saath."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is liye (\\(\\therefore\\)) limit lete hain. Product ki limit = limits ka product (12.1.6 ka theorem):"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\lim_{x\\to a}\\dfrac{x^{n}-a^{n}}{x-a}\\]\n\\[= \\lim_{x\\to a}\\left(\\dfrac{-1}{x^{m}a^{m}}\\right)\\]\n\\[\\quad \\times \\lim_{x\\to a}\\left(\\dfrac{x^{m}-a^{m}}{x-a}\\right)\\]\n\\[= \\dfrac{-1}{a^{m}a^{m}}\\,(ma^{m-1}) \\quad \\text{(by Case 1)}\\]\n\\[= -ma^{-m-1}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\therefore\\ \\lim_{x\\to a}\\dfrac{x^{n}-a^{n}}{x-a} = na^{n-1}\\]\n\\[\\because\\ n = -m\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kitab yahan do chhote qadam chhor deti hai, woh hum poore karte hain:\n1. \\(\\dfrac{ma^{m-1}}{a^{m}a^{m}} = ma^{m-1-2m} = ma^{-m-1}\\). Kyun: neeche \\(a^{m}a^{m} = a^{2m}\\) hai, aur divide karne par powers ghatti (subtract hoti) hain.\n2. Ab \\(n = -m\\) rakhein: \\(na^{n-1} = (-m)a^{-m-1}\\). Yeh bilkul wahi hai jo humein mila!\nMatlab negative integers ke liye bhi wohi formula chalta hai. Dhyan dein: negative \\(n\\) ke liye \\(a \\ne 0\\) hona zaroori hai, kyun ke humne \\(a^{m}\\) se divide kiya hai; kitab \\(a > 0\\) leti hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh do misaalein humari taraf se hain. Pehle sawal ko formula ki shakal mein laate hain, phir formula lagate hain.\n\\[\\lim_{x\\to 2}\\dfrac{x^{3}-8}{x-2} = \\lim_{x\\to 2}\\dfrac{x^{3}-2^{3}}{x-2}\\]\n\\[= 3(2)^{2} = 12\\]\nKyun: \\(8 = 2^{3}\\), to \\(n = 3\\), \\(a = 2\\).\n\\[\\lim_{x\\to 1}\\dfrac{x^{-2}-1}{x-1} = \\lim_{x\\to 1}\\dfrac{x^{-2}-1^{-2}}{x-1}\\]\n\\[= -2(1)^{-3} = -2\\]\nKyun: \\(1 = 1^{-2}\\), to \\(n = -2\\), \\(a = 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(\\lim_{x\\to 3}\\frac{x^{4}-81}{x-3}\\) kitni hogi?\nJawab: \\(81 = 3^{4}\\), to \\(n = 4\\), \\(a = 3\\): limit \\(= 4(3)^{3} = 108\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Formula lagane se pehle sawal ko us ki bilkul sahi shakal mein layein: \\(x\\) aur constant dono par same power \\(n\\) ho, aur denominator \\(x - a\\) ho, usi \\(a\\) ke saath. Constants ko pehle power ki shakal mein likhein, jaise \\(8 = 2^{3}\\), \\(\\frac{1}{4} = 2^{-2}\\). Yeh ek line likhne se examiner ko pata chalta hai ke aap ne \\(n\\) aur \\(a\\) kaise pehchane."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(\\lim_{x\\to a}\\frac{x^{n}-a^{n}}{x-a} = na^{n-1}\\), har non-zero integer \\(n\\) ke liye.\n2. Case 1 (\\(n > 0\\)): \\(x^{n}-a^{n}\\) ke factors banao, \\(x - a\\) cancel karo, number rakho: \\(n\\) barabar terms milti hain.\n3. Case II (\\(n = -m < 0\\)): positive powers mein likh kar Case 1 istemal karo.\n4. Power ek kam hoti hai: \\(n\\) aage aata hai, \\(a\\) ki power \\(n-1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Jawab \\(na^{n}\\) ya \\(na^{n+1}\\) likh dena. Power ek kam hoti hai: \\(na^{n-1}\\).\n2. Jab denominator \\(a - x\\) ho tab bhi seedha formula laga dena. Kyun ke \\(a - x = -(x - a)\\), jawab ka sign ulat jata hai. Misaal: \\(\\lim_{x\\to 2}\\frac{x^{3}-8}{2-x} = -12\\).\n3. Constant ko same power mein likhna bhool jana, jaise \\(\\frac{x^{3}-8}{x-2}\\) mein \\(a = 8\\) le lena. Sahi: \\(8 = 2^{3}\\), is liye \\(a = 2\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

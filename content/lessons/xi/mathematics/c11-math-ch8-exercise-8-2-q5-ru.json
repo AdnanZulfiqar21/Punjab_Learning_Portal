@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-2-Q5-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-2-q5",
+      "title": "Question 5 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 162,
+          "pdf_to": 162,
+          "note": "Exercise 8.2, Question 5: book p.157 (PDF 162). Answer key book p.301-302 (PDF 306-307): key 5(iv) prints 462x^5y, correct 462x^5y^3. Solution book PDF 741-770 used as a reference only."
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-2-Q5",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(i)",
+            "prompt": "5 (i) Find the term involving: \\(x^4\\) in the expansion of \\((3 - 2x)^7\\).",
+            "explanation": "Bachon, yahan poori expansion nahi chahiye, sirf woh ek term jis mein \\(x^4\\) ho.\nIs liye general term \\(T_{r+1}\\) ka use karenge: us mein \\(x\\) ki power dekh kar \\(r\\) nikalenge.\nPlan: general term likho, \\(x\\) ki power ko 4 ke barabar rakho, \\(r\\) nikalo, phir \\(r\\) wapas daalo.",
+            "steps": [
+              "Diya gaya hai: \\((3 - 2x)^7\\).\nHumein find karna hai: woh term jis mein \\(x^4\\) hai.\nTareeqa: General term \\(T_{r+1} = \\binom{n}{r}a^{n-r}b^r\\), jahan \\(n = 7\\), \\(a = 3\\), \\(b = -2x\\). Aath terms likhne ke bajaye seedha sahi term tak pohanchna is ka faida hai.",
+              "General term\n\\[T_{r+1} = \\binom{7}{r}3^{7-r}(-2x)^r\\]\n\\[= (-1)^r\\binom{7}{r}3^{7-r}2^rx^r\\]\nKyun: Power \\(r\\) bracket ke har factor ko lagti hai: \\((-2x)^r = (-1)^r \\cdot 2^r \\cdot x^r\\).\nDhyan dein: \\((-2x)^r\\) ko \\(-2x^r\\) likhna ghalat hai; 2 aur minus sign dono ki bhi power lagti hai.",
+              "\\(r\\) chunein\n\\[x^r = x^4 \\Rightarrow r = 4\\]\nKyun: General term mein \\(x\\) ki power \\(r\\) hai, aur humein power 4 chahiye. Yaad rahe \\(r = 4\\) ka matlab 5th term \\(T_5\\) hai, kyunke term number \\(r + 1\\) hota hai.",
+              "\\(r = 4\\) rakhein\n\\[T_5 = (+1)\\binom{7}{4}3^{3}2^{4}x^4\\]\n\\[= 35 \\times 27 \\times 16\\,x^4\\]\n\\[= 945 \\times 16\\,x^4 = 15120x^4\\]\nKyun: \\((-1)^4 = +1\\) (even power). \\(\\binom{7}{4} = \\binom{7}{3} = \\frac{7 \\cdot 6 \\cdot 5}{3 \\cdot 2 \\cdot 1} = 35\\). \\(3^{7-4} = 27\\) aur \\(2^4 = 16\\). Phir \\(35 \\times 27 = 945\\), \\(945 \\times 16 = 15120\\).",
+              "Tasdeeq\n\\[35 \\times 432 = 15120 \\;\\checkmark\\]\nKyun: Doosri tarteeb se multiply kiya (\\(27 \\times 16 = 432\\) pehle), wahi number aaya."
+            ],
+            "final_answer": "\\(T_5 = 15120x^4\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(ii)",
+            "prompt": "5 (ii) Find the term involving: \\(x^{-2}\\) in the expansion of \\(\\left(x - \\frac{2}{x^2}\\right)^{13}\\).",
+            "explanation": "Yahan \\(x\\) dono terms mein hai: pehle mein upar, doosre mein neeche. Is liye general term mein pehle \\(x\\) ki saari powers ko ek power bana lenge.\nPlan: general term, \\(x\\) ki ek power, use \\(-2\\) ke barabar rakho, \\(r\\) nikalo.",
+            "steps": [
+              "Diya gaya hai: \\(\\left(x - \\frac{2}{x^2}\\right)^{13}\\).\nHumein find karna hai: woh term jis mein \\(x^{-2}\\) hai.\nTareeqa: \\(T_{r+1}\\) jahan \\(n = 13\\), \\(a = x\\), \\(b = -\\frac{2}{x^2}\\).",
+              "General term aur \\(x\\) ki power\n\\[T_{r+1} = \\binom{13}{r}x^{13-r}\\left(-\\dfrac{2}{x^2}\\right)^r\\]\n\\[= (-1)^r\\binom{13}{r}2^r\\dfrac{x^{13-r}}{x^{2r}}\\]\n\\[= (-1)^r\\binom{13}{r}2^rx^{13-3r}\\]\nKyun: \\((x^2)^r = x^{2r}\\), power of a power mein indices multiply. Phir divide karne par indices minus: \\(13 - r - 2r = 13 - 3r\\). Ab poore term mein \\(x\\) ki sirf ek power hai, jise hum control kar sakte hain.",
+              "\\(r\\) chunein\n\\[13 - 3r = -2\\]\n\\[-3r = -15 \\Rightarrow r = 5\\]\nKyun: Power \\(-2\\) chahiye. \\(r = 5\\) ek whole number hai aur 0 se 13 ke darmiyan hai, is liye aisa term maujood hai: \\(T_6\\). Agar \\(r\\) fraction aata to matlab hota ke aisa koi term hai hi nahi.",
+              "\\(r = 5\\) rakhein\n\\[T_6 = (-1)^5\\binom{13}{5}2^5x^{-2}\\]\n\\[= -1287 \\times 32\\,x^{-2}\\]\n\\[= -41184x^{-2}\\]\nKyun: \\((-1)^5 = -1\\) (odd power). \\(\\binom{13}{5} = \\frac{13 \\cdot 12 \\cdot 11 \\cdot 10 \\cdot 9}{5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}\\); pehle cancel karein: \\(\\frac{12}{4 \\cdot 3} = 1\\), \\(\\frac{10}{5 \\cdot 2} = 1\\), bacha \\(13 \\cdot 11 \\cdot 9 = 1287\\). \\(2^5 = 32\\).",
+              "Tasdeeq\n\\[13 - 3(5) = -2 \\;\\checkmark\\]\n\\[1287 \\times 32 = 41184 \\;\\checkmark\\]\nKyun: Power bhi sahi aur number bhi."
+            ],
+            "final_answer": "\\(T_6 = -41184x^{-2} = -\\dfrac{41184}{x^2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(iii)",
+            "prompt": "5 (iii) Find the term involving: \\(a^4\\) in the expansion of \\(\\left(\\frac{2}{x} - a\\right)^9\\).",
+            "explanation": "Yahan humein \\(a^4\\) wala term chahiye, aur \\(a\\) sirf doosre term mein hai.\nDhyan rahe: \\(a\\) is sawal ka apna letter hai, is liye hum formula mein pehle term ko \"\\(a\\)\" nahi kahenge, warna confusion hogi.\nPlan: general term mein \\(a\\) ki power \\(r\\) hai, to \\(r = 4\\).",
+            "steps": [
+              "Diya gaya hai: \\(\\left(\\frac{2}{x} - a\\right)^9\\).\nHumein find karna hai: woh term jis mein \\(a^4\\) hai.\nTareeqa: \\(n = 9\\), pehla term \\(\\frac{2}{x}\\), doosra term \\(-a\\).",
+              "General term\n\\[T_{r+1} = \\binom{9}{r}\\left(\\dfrac{2}{x}\\right)^{9-r}(-a)^r\\]\n\\[= (-1)^r\\binom{9}{r}\\dfrac{2^{9-r}}{x^{9-r}}a^r\\]\nKyun: Fraction ki power upar neeche dono ko: \\(\\left(\\frac{2}{x}\\right)^{9-r} = \\frac{2^{9-r}}{x^{9-r}}\\). Aur \\((-a)^r = (-1)^ra^r\\).",
+              "\\(r\\) chunein\n\\[a^r = a^4 \\Rightarrow r = 4\\]\nKyun: \\(a\\) ki power \\(r\\) hai. To term \\(T_5\\) hai.",
+              "\\(r = 4\\) rakhein\n\\[T_5 = (+1)\\binom{9}{4}\\dfrac{2^5}{x^5}a^4\\]\n\\[= 126 \\times \\dfrac{32}{x^5}a^4\\]\n\\[= \\dfrac{4032a^4}{x^5}\\]\nKyun: \\(\\binom{9}{4} = \\frac{9 \\cdot 8 \\cdot 7 \\cdot 6}{4 \\cdot 3 \\cdot 2 \\cdot 1} = \\frac{3024}{24} = 126\\). \\(2^{9-4} = 2^5 = 32\\) aur \\(x\\) ki power bhi 5 (neeche). \\(126 \\times 32 = 4032\\).\nDhyan dein: \\(x^5\\) denominator mein hai; ise \\(x^5\\) upar likhna ghalat hoga.",
+              "Tasdeeq\n\\[\\text{powers: } (9 - 4) + 4 = 9 \\;\\checkmark\\]\nKyun: Har term mein dono hisson ki powers ka jama \\(n = 9\\) hota hai: \\(\\frac{2}{x}\\) ki power 5 aur \\(a\\) ki 4."
+            ],
+            "final_answer": "\\(T_5 = \\dfrac{4032a^4}{x^5}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(iv)",
+            "prompt": "5 (iv) Find the term involving: \\(y^3\\) in the expansion of \\((x - \\sqrt{y})^{11}\\).",
+            "explanation": "Doosre term mein square root hai. Root ko power ki shakal mein likh lein: \\(\\sqrt{y} = y^{1/2}\\); powers ke saath kaam aasaan hota hai.\nPlan: general term mein \\(y\\) ki power \\(\\frac{r}{2}\\) aayegi; use 3 ke barabar rakh kar \\(r\\) nikaalenge.",
+            "steps": [
+              "Diya gaya hai: \\((x - \\sqrt{y})^{11}\\).\nHumein find karna hai: woh term jis mein \\(y^3\\) hai.\nTareeqa: \\(n = 11\\), \\(a = x\\), \\(b = -\\sqrt{y} = -y^{1/2}\\).",
+              "General term\n\\[T_{r+1} = \\binom{11}{r}x^{11-r}(-\\sqrt{y})^r\\]\n\\[= (-1)^r\\binom{11}{r}x^{11-r}y^{r/2}\\]\nKyun: \\((y^{1/2})^r = y^{r/2}\\), power of a power mein indices multiply hote hain.",
+              "\\(r\\) chunein\n\\[\\dfrac{r}{2} = 3 \\Rightarrow r = 6\\]\nKyun: \\(y\\) ki power 3 chahiye. \\(r = 6\\) ka matlab 7th term \\(T_7\\).\nDhyan dein: \\(r = 3\\) le lena aam ghalti hai; \\(r = 3\\) par to \\(y^{3/2}\\) aata hai.",
+              "\\(r = 6\\) rakhein\n\\[T_7 = (+1)\\binom{11}{6}x^{5}y^{3}\\]\n\\[= 462x^5y^3\\]\nKyun: \\((-1)^6 = +1\\). \\(\\binom{11}{6} = \\binom{11}{5} = \\frac{11 \\cdot 10 \\cdot 9 \\cdot 8 \\cdot 7}{5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1} = \\frac{55440}{120} = 462\\). \\(x\\) ki power \\(11 - 6 = 5\\).",
+              "Tasdeeq\n\\[(\\sqrt{y})^6 = y^3 \\;\\checkmark\\]\nKyun: \\(\\sqrt{y}\\) ke chhe factors \\(y^3\\) dete hain, aur 6 even hai is liye sign plus. Sab theek hai."
+            ],
+            "final_answer": "\\(T_7 = 462x^5y^3\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key \\(462x^5y\\) print karti hai; \\(y\\) ki power ghayab hai. Sahi term \\(462x^5y^3\\) hai, kyunke sawal \\(y^3\\) wala term poochhta hai aur \\((\\sqrt{y})^6 = y^3\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

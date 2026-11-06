@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH1-EXERCISE-1-4-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch1",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch1/u-exercise-1-4-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 18,
+          "pdf_to": 18,
+          "note": "Exercise 1.4, Question 5: Exercise 1.4, book page 13"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(a)",
+            "prompt": "5 (a) [the book does not label the parts] Prove that complex cube roots of \\(-1\\) are \\(\\frac{-1+\\sqrt{3}i}{2}\\) and \\(\\frac{-1-\\sqrt{3}i}{2}\\); and hence prove that \\(\\left(\\frac{-1+\\sqrt{-3}}{2}\\right)^{9}+\\left(\\frac{1-\\sqrt{-3}}{2}\\right)^{9}=-2\\). [As printed; the statement has two misprints, see the book correction below.]",
+            "explanation": "Two claims: what the complex cube roots of \\(-1\\) are, and the value of a sum of ninth powers. Plan: solve \\(x^{3}=-1\\) ourselves, compare with the printed roots, write the true roots with \\(\\omega\\), and then work out the ninth powers. We will find that the printed roots and the printed first bracket are wrong, and prove the corrected statement.",
+            "steps": [
+              "Step 1: Solve x cubed = -1\n\\[x^{3}=-1\\]\n\\[x^{3}+1=0\\]\n\\[(x+1)(x^{2}-x+1)=0\\]\nWhy: Sum of cubes \\(a^{3}+b^{3}=(a+b)(a^{2}-ab+b^{2})\\) with \\(a=x\\), \\(b=1\\).",
+              "Step 2: The real root and the complex roots\n\\[x+1=0\\Rightarrow x=-1\\]\n\\[x=\\dfrac{1\\pm\\sqrt{1-4}}{2}\\]\n\\[x=\\dfrac{1\\pm\\sqrt{3}i}{2}\\]\nWhy: Quadratic formula for \\(x^{2}-x+1=0\\) with \\(a=1,\\ b=-1,\\ c=1\\). So the complex cube roots of \\(-1\\) are \\(\\frac{1\\pm\\sqrt{3}i}{2}\\).",
+              "Step 3: Test the printed roots\n\\[\\left(\\dfrac{-1+\\sqrt{3}i}{2}\\right)^{3}=\\omega^{3}=1\\]\n\\[\\left(\\dfrac{-1-\\sqrt{3}i}{2}\\right)^{3}=\\omega^{6}=1\\]\nWhy: The printed numbers are \\(\\omega\\) and \\(\\omega^{2}\\); their cubes are \\(+1\\), not \\(-1\\). So they are cube roots of unity, and the printed claim cannot be proved.",
+              "Step 4: Write the true roots with omega\n\\[\\dfrac{1+\\sqrt{3}i}{2}=-\\dfrac{-1-\\sqrt{3}i}{2}=-\\omega^{2}\\]\n\\[\\dfrac{1-\\sqrt{3}i}{2}=-\\dfrac{-1+\\sqrt{3}i}{2}=-\\omega\\]\n\\[(-\\omega)^{3}=-\\omega^{3}=-1\\]\nWhy: Taking a minus sign outside flips every sign on top. The last line confirms \\(-\\omega\\) really cubes to \\(-1\\) (and likewise \\(-\\omega^{2}\\)).",
+              "Step 5: The ninth powers (corrected statement)\n\\[\\left(\\dfrac{1+\\sqrt{-3}}{2}\\right)^{9}=(-\\omega^{2})^{9}\\]\n\\[=-\\omega^{18}=-1\\]\n\\[\\left(\\dfrac{1-\\sqrt{-3}}{2}\\right)^{9}=(-\\omega)^{9}\\]\n\\[=-\\omega^{9}=-1\\]\n\\[\\text{Sum}=-1+(-1)=-2\\]\nWhy: \\(\\sqrt{-3}=\\sqrt{3}i\\), so the brackets are the cube roots of \\(-1\\) from Step 4. An odd power keeps the minus; \\(\\omega^{18}=(\\omega^{3})^{6}=1\\), \\(\\omega^{9}=(\\omega^{3})^{3}=1\\).",
+              "Step 6: What the printed sum gives\n\\[\\dfrac{-1+\\sqrt{-3}}{2}=\\omega\\]\n\\[\\omega^{9}+(-\\omega)^{9}=1-1=0\\]\nWhy: With the printed first bracket the sum is 0, not \\(-2\\); the value \\(-2\\) needs \\(\\frac{1+\\sqrt{-3}}{2}\\), which matches the corrected roots of Step 2.",
+              "Check: numbers\n\\[\\left(\\dfrac{1+\\sqrt{3}i}{2}\\right)^{3}=-1\\]\n\\[\\left(\\dfrac{1+\\sqrt{3}i}{2}\\right)^{9}=(-1)^{3}=-1\\]\nWhy: Cubing three times gives the ninth power; the same holds for the conjugate, so the sum is \\(-2\\)."
+            ],
+            "final_answer": "The complex cube roots of \\(-1\\) are \\(\\frac{1+\\sqrt{3}i}{2}\\) and \\(\\frac{1-\\sqrt{3}i}{2}\\) (that is, \\(-\\omega^{2}\\) and \\(-\\omega\\)); hence \\(\\left(\\frac{1+\\sqrt{-3}}{2}\\right)^{9}+\\left(\\frac{1-\\sqrt{-3}}{2}\\right)^{9}=-2\\). (With the printed first bracket \\(\\frac{-1+\\sqrt{-3}}{2}\\) the sum is \\(0\\).)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the complex cube roots of \\(-1\\) as \\(\\frac{-1+\\sqrt{3}i}{2}\\) and \\(\\frac{-1-\\sqrt{3}i}{2}\\); those are \\(\\omega\\) and \\(\\omega^{2}\\), whose cubes are \\(+1\\). The correct complex cube roots of \\(-1\\) are \\(\\frac{1+\\sqrt{3}i}{2}\\) and \\(\\frac{1-\\sqrt{3}i}{2}\\). The book also prints the first ninth-power bracket as \\(\\frac{-1+\\sqrt{-3}}{2}\\); with it the sum is \\(1+(-1)=0\\). The value \\(-2\\) is correct for \\(\\left(\\frac{1+\\sqrt{-3}}{2}\\right)^{9}+\\left(\\frac{1-\\sqrt{-3}}{2}\\right)^{9}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(b)",
+            "prompt": "5 (b) Prove that \\((-1+\\sqrt{-3})^{4}+(-1-\\sqrt{-3})^{4}=16\\). [As printed; see the book correction below.]",
+            "explanation": "We must find the value of a sum of fourth powers. Plan: as in Question 2 (v), write each bracket as \\(2\\omega\\) or \\(2\\omega^{2}\\), raise to the power 4, and reduce. The true value turns out to be \\(-16\\), not the printed 16.",
+            "steps": [
+              "Step 1: Write the brackets as 2 omega and 2 omega squared\n\\[-1+\\sqrt{-3}=-1+\\sqrt{3}i=2\\omega\\]\n\\[-1-\\sqrt{-3}=-1-\\sqrt{3}i=2\\omega^{2}\\]\nWhy: \\(\\sqrt{-3}=\\sqrt{3}i\\), and taking out the factor 2 leaves \\(\\omega\\) or \\(\\omega^{2}\\).",
+              "Step 2: Raise to the power 4 and reduce\n\\[(2\\omega)^{4}+(2\\omega^{2})^{4}=16\\omega^{4}+16\\omega^{8}\\]\n\\[=16(\\omega+\\omega^{2})\\]\n\\[=16(-1)=-16\\]\nWhy: \\(2^{4}=16\\); \\(\\omega^{4}=\\omega^{3}\\omega=\\omega\\) and \\(\\omega^{8}=\\omega^{6}\\omega^{2}=\\omega^{2}\\); then \\(\\omega+\\omega^{2}=-1\\).",
+              "Check: direct expansion without omega\n\\[(-1+\\sqrt{3}i)^{2}=1-2\\sqrt{3}i-3\\]\n\\[=-2-2\\sqrt{3}i\\]\n\\[(-2-2\\sqrt{3}i)^{2}=4+8\\sqrt{3}i-12\\]\n\\[=-8+8\\sqrt{3}i\\]\n\\[(-1-\\sqrt{3}i)^{4}=-8-8\\sqrt{3}i\\]\n\\[\\text{Sum}=-16\\]\nWhy: Squaring twice gives the fourth power; the second bracket is the conjugate, so its fourth power is the conjugate. The imaginary parts cancel and \\(-8-8=-16\\)."
+            ],
+            "final_answer": "\\((-1+\\sqrt{-3})^{4}+(-1-\\sqrt{-3})^{4}=-16\\), not \\(16\\) as printed."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book asks to prove \\((-1+\\sqrt{-3})^{4}+(-1-\\sqrt{-3})^{4}=16\\). The true value is \\(-16\\): the sum is \\(16(\\omega+\\omega^{2})=16(-1)\\). The minus sign is missing in print."
+          }
+        ]
+      }
+    }
+  ]
+}

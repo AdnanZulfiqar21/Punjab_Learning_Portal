@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-EXERCISE-9-2-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/u-exercise-9-2-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 181,
+          "pdf_to": 181,
+          "note": "Exercise 9.2, Question 7: book page 176 (PDF 181); its answer is key entry 8 on PDF 307 (response not zero at t = 4; 'in' for 'is'); checked with sympy and the solution book (PDF 864-865)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7. Given a signal represented by \\(Q(t) = t^3 - 6t^2 + 11t - 6\\), determine if the system response is zero at \\(t = 4\\). If so, identify the factor.",
+            "explanation": "The response at \\(t = 4\\) is \\(Q(4)\\); it is zero exactly when \\(t - 4\\) is a factor (Factor Theorem).\nWe must say yes or no, and name the factor if yes.\nPlan: work out \\(Q(4)\\); zero means factor \\(t - 4\\), otherwise no such factor.",
+            "steps": [
+              "Given: \\(Q(t) = t^3 - 6t^2 + 11t - 6\\), input \\(t = 4\\).\nTo find: whether \\(Q(4) = 0\\), and if so the factor.\nMethod: Factor Theorem: \\(t - 4\\) is a factor of \\(Q(t)\\) exactly when \\(Q(4) = 0\\).",
+              "Work out \\(Q(4)\\)\n\\[Q(4) = 4^3 - 6(4)^2 + 11(4) - 6\\]\n\\[= 64 - 6(16) + 44 - 6\\]\n\\[= 64 - 96 + 44 - 6\\]\n\\[= 6\\]\nWhy: Powers first (\\(4^3 = 64\\), \\(4^2 = 16\\)), then multiply (\\(6 \\times 16 = 96\\), \\(11 \\times 4 = 44\\)), then \\(64 - 96 = -32\\), \\(-32 + 44 = 12\\), \\(12 - 6 = 6\\).",
+              "Draw the conclusion\n\\[Q(4) = 6 \\neq 0\\]\nWhy: The response at \\(t = 4\\) is 6, not zero, so by the Factor Theorem \\(t - 4\\) is not a factor and there is no factor to identify.",
+              "Check by synthetic division by \\(t - 4\\)\nCoefficients \\(1,\\ -6,\\ 11,\\ -6\\), \\(a = 4\\):\nbring down 1; \\(1 \\times 4 = 4\\), \\(-6 + 4 = -2\\);\n\\(-2 \\times 4 = -8\\), \\(11 - 8 = 3\\);\n\\(3 \\times 4 = 12\\), \\(-6 + 12 = 6\\).\n\\[\\text{Remainder} = 6 \\;\\checkmark\\]\nWhy: Same remainder 6. For interest, \\(Q(1) = Q(2) = Q(3) = 0\\), so \\(Q(t) = (t - 1)(t - 2)(t - 3)\\): the response is zero only at \\(t = 1, 2, 3\\), and a cubic has at most three zeros."
+            ],
+            "final_answer": "No. \\(Q(4) = 6 \\neq 0\\), so the response is not zero at \\(t = 4\\) and \\(t - 4\\) is not a factor."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the answer key (PDF 307) this question's answer is printed as entry 8, \"System response in not zero when \\(t = 4\\)\" (\"in\" is a misprint for \"is\"). It agrees with our working; the key numbers are shifted because it has 10 entries for 7 printed questions."
+          }
+        ]
+      }
+    }
+  ]
+}

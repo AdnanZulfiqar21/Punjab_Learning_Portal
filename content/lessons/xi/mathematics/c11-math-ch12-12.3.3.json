@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.3.3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.3.3",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 237,
+          "pdf_to": 238,
+          "note": "Book p. 232-233: 12.3.3 Continuity of a Function at a Point: (a) Continuous Function, conditions (i)-(iii); (b) Discontinuous Function; Examples 11-14 with the graphs of Examples 13(a), 13(b) and 14."
+        }
+      ],
+      "title": "12.3.3 Continuity of a Function at a Point",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "(a) Continuous Function"
+          },
+          {
+            "type": "paragraph",
+            "text": "A function \\(f\\) is said to be continuous at a number \"\\(c\\)\" if and only if the following three conditions are satisfied.\n\n(i) \\(f(c)\\) is defined\n(ii) \\(\\lim_{x \\to c} f(x)\\) exists\n(iii) \\(\\lim_{x \\to c} f(x) = f(c)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What each condition guards against:\n(i) \\(f(c)\\) defined: there must be a point of the graph at \\(x = c\\) (no hole).\n(ii) the limit exists: the left and right parts of the graph must head for the same height (no jump).\n(iii) limit \\(= f(c)\\): the point at \\(x = c\\) must sit exactly where the curve is heading (no point out of place).\nIn short, continuity at \\(c\\) means you can draw the graph through \\(x = c\\) without lifting your pencil."
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "(b) Discontinuous Function"
+          },
+          {
+            "type": "paragraph",
+            "text": "If one or more of these three conditions fail to hold at \"\\(c\\)\", then the function \\(f\\) is said to be discontinuous at \"\\(c\\)\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Working order for any question: test (i), then (ii), then (iii). Stop at the first condition that fails and say which one failed. If all three hold, the function is continuous.\nFor a polynomial (like Example 12) all three conditions always hold at every real \\(c\\), because the limit is found by substitution, which gives exactly \\(f(c)\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "Consider the function \\(f(x) = \\frac{x^{2}-1}{x-1}\\), discuss the continuity of \\(f\\) at \\(x = 1\\).",
+            "steps": [
+              "Given: \\(f(x) = \\frac{x^{2}-1}{x-1}\\).\nTo find: whether \\(f\\) is continuous at \\(x = 1\\).\nMethod: test the three conditions of continuity in order; as soon as one fails, \\(f\\) is discontinuous.",
+              "Step 1: Condition (i), is \\(f(1)\\) defined?\n\\[f(1) = \\dfrac{1^{2}-1}{1-1} = \\dfrac{0}{0}\\]\nWhy: \\(\\frac{0}{0}\\) is not a number (division by zero is not defined), so \\(f(1)\\) is not defined.",
+              "Step 2: Conclusion\nCondition (i) fails, so \\(f(x)\\) is discontinuous at \\(x = 1\\).\nWhy: continuity needs all three conditions; one failure is enough for discontinuity.",
+              "Check: the limit itself does exist,\n\\[\\lim_{x \\to 1} \\dfrac{(x-1)(x+1)}{x-1} = \\lim_{x \\to 1}(x+1)\\]\n\\[= 2\\]\nbut there is no point of the graph at \\(x = 1\\): the graph is the line \\(y = x + 1\\) with a hole at \\((1, 2)\\). So the function is still discontinuous."
+            ],
+            "answer": "\\(f(1)\\) is not defined, so \\(f(x)\\) is discontinuous at \\(x = 1\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 12",
+            "problem": "For \\(f(x) = 3x^{2} - 5x + 4\\), discuss continuity of \\(f\\) at \\(x = 1\\).",
+            "steps": [
+              "Given: \\(f(x) = 3x^{2} - 5x + 4\\).\nTo find: whether \\(f\\) is continuous at \\(x = 1\\).\nMethod: find \\(\\lim_{x \\to 1} f(x)\\) and \\(f(1)\\) and compare (conditions (i)-(iii)).",
+              "Step 1: The limit\n\\[\\lim_{x \\to 1} f(x) = \\lim_{x \\to 1} (3x^{2} - 5x + 4)\\]\n\\[= 3 - 5 + 4 = 2\\]\nWhy: \\(f\\) is a polynomial, so by the theorems on limits its limit is found by substituting \\(x = 1\\): \\(3(1)^{2} - 5(1) + 4\\). The limit exists: condition (ii).",
+              "Step 2: The value\n\\[f(1) = 3 - 5 + 4 = 2\\]\nWhy: \\(f(1)\\) is a real number, so condition (i) holds.",
+              "Step 3: Compare\n\\[\\lim_{x \\to 1} f(x) = f(1) = 2\\]\nTherefore \\(f(x)\\) is continuous at \\(x = 1\\).\nWhy: all three conditions hold; (iii) is the equality of the limit and the value.",
+              "Check: values near 1 are near 2:\n\\[f(0.99) = 1.9903,\\quad f(1.01) = 2.0103\\]"
+            ],
+            "answer": "\\(\\lim_{x \\to 1} f(x) = f(1) = 2\\), so \\(f(x)\\) is continuous at \\(x = 1\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 13",
+            "problem": "Discuss the continuity of the functions \\(f(x)\\) and \\(g(x)\\) at \\(x = 3\\)\n(a) \\[f(x) = \\begin{cases} \\dfrac{x^{2}-9}{x-3} & \\text{if } x \\ne 3 \\\\ 6 & \\text{if } x = 3 \\end{cases}\\]\n(b) \\[g(x) = \\dfrac{x^{2}-9}{x-3} \\ \\text{ if } x \\ne 3\\]",
+            "steps": [
+              "Given: \\(f\\) and \\(g\\) above; both equal \\(\\frac{x^{2}-9}{x-3}\\) for \\(x \\ne 3\\), but \\(f(3) = 6\\) while \\(g\\) has no value at 3.\nTo find: whether \\(f\\) and \\(g\\) are continuous at \\(x = 3\\).\nMethod: check the three conditions; to find the limit, factorise \\(x^{2} - 9\\) and cancel \\(x - 3\\) (the \\(\\frac{0}{0}\\) form).",
+              "(a) Step 1: Condition (i)\n\\[f(3) = 6\\]\nWhy: the second line of the definition gives the value at \\(x = 3\\) directly.",
+              "(a) Step 2: Condition (ii), the limit\n\\[\\lim_{x \\to 3} f(x) = \\lim_{x \\to 3} \\dfrac{x^{2}-9}{x-3}\\]\n\\[= \\lim_{x \\to 3} \\dfrac{(x+3)(x-3)}{x-3}\\]\n\\[= \\lim_{x \\to 3} (x+3)\\]\n\\[= 3 + 3 = 6\\]\nWhy: near 3 (but \\(x \\ne 3\\)) the first formula is used. Direct substitution gives \\(\\frac{0}{0}\\), so we use \\(x^{2} - 9 = (x+3)(x-3)\\) and cancel \\(x - 3\\), which is allowed because \\(x \\ne 3\\) while \\(x \\to 3\\).",
+              "(a) Step 3: Condition (iii)\n\\[\\lim_{x \\to 3} f(x) = 6 = f(3)\\]\nSo \\(f(x)\\) is continuous at \\(x = 3\\). There is no break in the graph.\nWhy: all three conditions hold.",
+              "(b) Step 4: Condition (i) for \\(g\\)\n\\(g\\) is not defined at \\(x = 3\\) (its only formula is for \\(x \\ne 3\\)).\n\\(\\Rightarrow g(x)\\) is discontinuous at \\(x = 3\\).\nWhy: condition (i) fails. The limit is still 6 (same working as in (a)), but there is no point \\((3, g(3))\\), so the graph has a break (a hole) at \\(x = 3\\).",
+              "Check: for \\(x \\ne 3\\) both functions equal \\(x + 3\\); e.g.\n\\[f(2) = \\dfrac{4-9}{2-3} = 5 = 2 + 3\\]\nThe graphs are the line \\(y = x + 3\\); \\(f\\) fills the point \\((3, 6)\\), \\(g\\) leaves it empty."
+            ],
+            "answer": "(a) \\(f(x)\\) is continuous at \\(x = 3\\) (\\(\\lim_{x \\to 3} f(x) = 6 = f(3)\\)). (b) \\(g(x)\\) is discontinuous at \\(x = 3\\) (\\(g(3)\\) is not defined)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch12-fig-ex13a-continuous",
+            "alt": "Graph of f on axes x and y: a straight line y = x + 3 through the points (0, 3), (2, 5), (3, 6) and (4, 7), all drawn as filled dots, with a dashed vertical line from (3, 6) down to the x-axis. The line has no break.",
+            "caption": "Figure: Example 13(a), graph of f, no break at x = 3 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch12-fig-ex13b-hole",
+            "alt": "Graph of g on axes x and y: the straight line y = x + 3 through the filled points (0, 3), (2, 5) and (4, 7), with an open circle (a hole) at (3, 6) because g is not defined at x = 3; a dashed vertical line drops from the hole to x = 3 on the x-axis.",
+            "caption": "Figure: Example 13(b), graph of g, a hole at (3, 6) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the book's graph for Example 13(b), the point \\((3, 6)\\) is drawn as a solid dot on an unbroken line, although \\(g\\) is not defined at \\(x = 3\\) and the text says there is a break in the graph there. The point \\((3, 6)\\) must be an open circle (a hole), as in our drawing."
+          },
+          {
+            "type": "example",
+            "title": "Example 14",
+            "problem": "Discuss continuity of \\(f(x)\\) at \\(x = 3\\), when\n\\[f(x) = \\begin{cases} x - 1, & \\text{if } x < 3 \\\\ 2x + 1, & \\text{if } 3 \\le x \\end{cases}\\]",
+            "steps": [
+              "Given: \\(f(x) = x - 1\\) for \\(x < 3\\) and \\(f(x) = 2x + 1\\) for \\(x \\ge 3\\).\nTo find: whether \\(f\\) is continuous at \\(x = 3\\).\nMethod: \\(x = 3\\) is where the formula changes, so check \\(f(3)\\), then the left and right hand limits (criterion 12.3.2), then compare.",
+              "Step 1: Condition (i)\n\\[f(3) = 2(3) + 1 = 7\\]\nCondition (i) is satisfied.\nWhy: \\(x = 3\\) satisfies \\(3 \\le x\\), so the second formula gives the value.",
+              "Step 2: Left hand limit\n\\[\\lim_{x \\to 3^{-}} f(x) = \\lim_{x \\to 3^{-}} (x - 1)\\]\n\\[= 3 - 1 = 2\\]\nWhy: for \\(x < 3\\) the first formula applies.",
+              "Step 3: Right hand limit\n\\[\\lim_{x \\to 3^{+}} f(x) = \\lim_{x \\to 3^{+}} (2x + 1)\\]\n\\[= 6 + 1 = 7\\]\nWhy: for \\(x > 3\\) the second formula applies.",
+              "Step 4: Condition (ii)\n\\[\\lim_{x \\to 3^{-}} f(x) \\ne \\lim_{x \\to 3^{+}} f(x)\\]\ni.e., condition (ii) is not satisfied: \\(\\lim_{x \\to 3} f(x)\\) does not exist.\nHence \\(f(x)\\) is not continuous at \\(x = 3\\).\nWhy: \\(2 \\ne 7\\); by the criterion of 12.3.2 the limit does not exist, and without a limit condition (ii) fails.",
+              "Check: the graph (below) jumps at \\(x = 3\\) from height 2 (left piece, open end) to height 7 (right piece, filled end), e.g. \\(f(2.99) = 1.99\\) and \\(f(3.01) = 7.02\\)."
+            ],
+            "answer": "The left hand limit is 2 and the right hand limit is 7, so \\(\\lim_{x \\to 3} f(x)\\) does not exist; \\(f(x)\\) is not continuous at \\(x = 3\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch12-fig-ex14-jump",
+            "alt": "Graph of f on axes x and y: the line y = x minus 1 for x less than 3, crossing the axes at (1, 0) and (0, minus 1) and ending at an open circle at (3, 2); the line y = 2x + 1 for x at least 3, starting at a filled dot at (3, 7). Dashed lines join (3, 2) and (3, 7) to the y-axis at 2 and 7 and to x = 3 on the x-axis.",
+            "caption": "Figure: Example 14, a jump at x = 3 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book's solution calls the graph \"figure (iii)\", but the figure carries no number. In that graph the end of the left piece at \\((3, 2)\\) is drawn as a solid dot; since \\(f(3) = 7\\), the point \\((3, 2)\\) is not on the graph and must be an open circle, as in our drawing. The solid dot belongs at \\((3, 7)\\) only."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Write the three conditions in your answer with a tick or a cross: \"(i) \\(f(3) = 7\\) defined; (ii) LHL \\(= 2\\), RHL \\(= 7\\), limit does not exist; hence discontinuous.\" A clear statement of which condition fails earns full marks."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(f\\) is continuous at \\(c\\) if and only if (i) \\(f(c)\\) is defined, (ii) \\(\\lim_{x \\to c} f(x)\\) exists, (iii) \\(\\lim_{x \\to c} f(x) = f(c)\\).\n2. If any one condition fails, \\(f\\) is discontinuous at \\(c\\).\n3. Three kinds of break: a hole (Examples 11, 13(b)), a jump (Example 14), a point out of place (limit exists but \\(\\ne f(c)\\)).\n4. A polynomial is continuous at every real number."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Saying \"the limit exists, so \\(f\\) is continuous\": in Example 11 the limit is 2 but \\(f(1)\\) is not defined.\n2. Saying \"\\(f(c)\\) is defined, so \\(f\\) is continuous\": in Example 14 \\(f(3) = 7\\) but the limit does not exist.\n3. Cancelling \\(x - 3\\) and then putting \\(x = 3\\) into the original fraction to find \\(f(3)\\); \\(f(3)\\) comes only from the definition of the function."
+          }
+        ]
+      }
+    }
+  ]
+}

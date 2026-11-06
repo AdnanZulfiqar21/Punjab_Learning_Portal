@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH1-1.1.4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch1",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch1/1.1.4",
+      "title": "1.1.4 Properties of the Fundamental Operations on Complex Numbers",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 8,
+          "pdf_to": 8,
+          "note": "1.1.4 field properties (i)-(v), Note on order axioms, Example 2 (book p. 3); PDF 8-8."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "1.1.4 Properties of the Fundamental Operations on Complex Numbers"
+          },
+          {
+            "type": "paragraph",
+            "text": "It can easily be verified that the set \\(C\\) satisfies all the field axioms, i.e. it possesses the properties of real numbers. To explain some of the points, we observe the following:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "The additive identity in \\(C\\) is \\((0, 0)\\).",
+              "Every complex number \\((a, b)\\) has the additive inverse \\((-a, -b)\\), i.e. \\[(a, b) + (-a, -b) = (0, 0)\\]",
+              "The multiplicative identity is \\((1, 0)\\), i.e. \\[(a, b)(1, 0)\\] \\[= (a\\cdot1 - b\\cdot0,\\ b\\cdot1 + a\\cdot0)\\] \\[= (a, b)\\] \\[= (1, 0)(a, b)\\]",
+              "Every non-zero complex number (i.e. a number not equal to \\((0, 0)\\)) has a multiplicative inverse. The multiplicative inverse of \\((a, b)\\) is \\[\\left(\\dfrac{a}{a^2+b^2},\\ \\dfrac{-b}{a^2+b^2}\\right)\\] because \\[(a, b)\\left(\\dfrac{a}{a^2+b^2},\\ \\dfrac{-b}{a^2+b^2}\\right)\\] \\[= (1, 0),\\] the identity element, and this also equals \\[\\left(\\dfrac{a}{a^2+b^2},\\ \\dfrac{-b}{a^2+b^2}\\right)(a, b)\\]",
+              "\\[(a, b)[(c, d) \\pm (e, f)]\\] \\[= (a, b)(c, d) \\pm (a, b)(e, f)\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "The set \\(C\\) of complex numbers does not satisfy the order axioms. In fact, there is no sense in saying that one complex number is greater or less than the other."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\"Field axioms\" means the familiar rules of real-number arithmetic: addition and multiplication are closed, commutative and associative; there are identities \\((0,0)\\) and \\((1,0)\\); every number has an additive inverse and every non-zero number a multiplicative inverse; and multiplication distributes over addition (point (v)). So you may calculate with complex numbers just as with real numbers.\nWhy can't complex numbers be ordered? Suppose \\(i > 0\\). Multiplying both sides by the positive number \\(i\\) gives \\(i \\cdot i > 0\\), i.e. \\(-1 > 0\\), which is false. Suppose instead \\(i < 0\\); then \\(-i > 0\\) and \\((-i)(-i) > 0\\), i.e. \\(-1 > 0\\), again false. Since \\(i \\ne 0\\), no ordering obeying the order axioms is possible. (Our explanation, not printed in the book.)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Where does the inverse come from? Write \\((a, b)\\) as \\(a + ib\\) and multiply top and bottom by the conjugate:\n\\[\\dfrac{1}{a + ib} = \\dfrac{a - ib}{(a + ib)(a - ib)}\\]\n\\[= \\dfrac{a - ib}{a^2 + b^2}\\]\nwhich is the pair \\(\\left(\\frac{a}{a^2+b^2}, \\frac{-b}{a^2+b^2}\\right)\\). We need \\((a, b) \\ne (0, 0)\\) so that \\(a^2 + b^2 \\ne 0\\).\nIllustration (ours): the inverse of \\((3, 4)\\) is \\(\\left(\\frac{3}{25}, \\frac{-4}{25}\\right)\\), because \\(3^2 + 4^2 = 25\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "If \\(z_1 = (4, 2)\\) and \\(z_2 = (3, -1)\\), then find \\(\\frac{z_1}{z_2}\\).",
+            "steps": [
+              "Given: \\(z_1 = (4, 2)\\), \\(z_2 = (3, -1)\\).\nTo find: \\(\\frac{z_1}{z_2}\\).\nMethod: write the pairs in the form \\(a + ib\\), then multiply the numerator and the denominator by the conjugate of the denominator so that the denominator becomes real.",
+              "Step 1: write in the form \\(a + ib\\)\n\\[\\dfrac{z_1}{z_2} = \\dfrac{(4, 2)}{(3, -1)}\\]\n\\[= \\dfrac{4 + 2i}{3 - i}\\]\nWhy: the pair \\((a, b)\\) means \\(a + ib\\).",
+              "Step 2: multiply top and bottom by the conjugate \\(3 + i\\)\n\\[\\dfrac{4 + 2i}{3 - i} \\times \\dfrac{3 + i}{3 + i}\\]\nWhy: \\(\\frac{3+i}{3+i} = 1\\), so the value does not change; and \\((3-i)(3+i)\\) has no \\(i\\) left, so the denominator becomes real.",
+              "Step 3: the numerator\n\\[(4)(3) + (4)(i) + (2i)(3) + (2i)(i)\\]\n\\[= 12 + 4i + 6i + 2i^2\\]\n\\[= 12 + 10i - 2\\]\n\\[= 10 + 10i\\]\nWhy: each term multiplies each term; then \\(i^2 = -1\\) turns \\(2i^2\\) into \\(-2\\).",
+              "Step 4: the denominator\n\\[(3 - i)(3 + i) = (3)^2 - (i)^2\\]\n\\[= 9 - (-1)\\]\n\\[= 10\\]\nWhy: the identity \\((a - b)(a + b) = a^2 - b^2\\) and \\(i^2 = -1\\).",
+              "Step 5: divide\n\\[\\dfrac{z_1}{z_2} = \\dfrac{10 + 10i}{10}\\]\n\\[= 1 + i\\]\nWhy: both the real part and the imaginary part are divided by 10.",
+              "Check:\n\\[(1 + i)(3 - i) = 3 - i + 3i - i^2\\]\n\\[= 3 + 1 + 2i\\]\n\\[= 4 + 2i\\]\nThis is \\(z_1 = (4, 2)\\), so the answer is right."
+            ],
+            "answer": "\\(\\frac{z_1}{z_2} = 1 + i\\), i.e. the ordered pair \\((1, 1)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "To divide complex numbers, always multiply the numerator and the denominator by the conjugate of the denominator. The denominator becomes \\(c^2 + d^2\\), a real number, and the answer can be written as \\(x + iy\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(C\\) satisfies all the field axioms.\n2. Additive identity \\((0, 0)\\); additive inverse of \\((a, b)\\) is \\((-a, -b)\\).\n3. Multiplicative identity \\((1, 0)\\); inverse of \\((a, b) \\ne (0,0)\\) is \\(\\left(\\frac{a}{a^2+b^2}, \\frac{-b}{a^2+b^2}\\right)\\).\n4. \\(C\\) is not ordered: \\(z_1 > z_2\\) has no meaning for complex numbers."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistakes",
+            "text": "Writing the inverse of \\(a + ib\\) as \\(\\frac{1}{a} + \\frac{1}{ib}\\). Wrong: use the conjugate.\nForgetting the minus sign in the inverse: the second component is \\(\\frac{-b}{a^2+b^2}\\).\nWriting \\((3-i)(3+i) = 9 - 1 = 8\\). Since \\(i^2 = -1\\), it is \\(9 - (-1) = 10\\).\nComparing complex numbers, e.g. \"\\(3 + 2i > 1 + i\\)\". Only their moduli (1.1.5), which are real, can be compared."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH5-EXERCISE-5-1-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch5",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch5/u-exercise-5-1-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 90,
+          "pdf_to": 90,
+          "note": "Exercise 5.1, Question 4: book page 85 (PDF 90); answer key book page 298 (PDF 303)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. Resolve into partial fractions: \\(\\frac{3x^2 - 4x - 5}{(x - 2)(x^2 + 7x + 10)}\\)",
+            "explanation": "Proper fraction; the quadratic in the bottom still factorises, giving three different linear factors (Case I).\nWe need three constants.\nPlan: factorise \\(x^2 + 7x + 10\\), identity, put the three zeros, compare coefficients, recombine.",
+            "steps": [
+              "Given: \\(\\frac{3x^2 - 4x - 5}{(x - 2)(x^2 + 7x + 10)}\\)\nTo find: its partial fractions.\nMethod: Factorise the bottom completely first. If it gives only different linear factors, use Case I.",
+              "Check that the fraction is proper\nNumerator degree 2, denominator degree 3.\nWhy: \\(2 < 3\\), so no division is needed.",
+              "Factorise the quadratic factor\n\\[x^2 + 7x + 10 = (x + 2)(x + 5)\\]\nWhy: We need two numbers with product 10 and sum 7: they are 2 and 5. So \\(x^2 + 7x + 10\\) is not irreducible and must be split.",
+              "Write the form\n\\[\\dfrac{3x^2 - 4x - 5}{(x - 2)(x + 2)(x + 5)}\\]\n\\[= \\dfrac{A}{x - 2} + \\dfrac{B}{x + 2} + \\dfrac{C}{x + 5}\\]\nWhy: Three different linear factors, one fraction each.",
+              "Remove the denominators to get the identity\n\\[3x^2 - 4x - 5 = A(x + 2)(x + 5)\\]\n\\[+ B(x - 2)(x + 5)\\]\n\\[+ C(x - 2)(x + 2) \\quad (i)\\]\nWhy: Multiply both sides by \\((x - 2)(x + 2)(x + 5)\\).",
+              "Find \\(A\\): put \\(x = 2\\) in (i)\n\\[12 - 8 - 5 = A(4)(7)\\]\n\\[-1 = 28A\\]\n\\[A = -\\tfrac{1}{28}\\]\nWhy: \\(x - 2 = 0\\) at \\(x = 2\\), so only the \\(A\\) term is left.",
+              "Find \\(B\\): put \\(x = -2\\) in (i)\n\\[12 + 8 - 5 = B(-4)(3)\\]\n\\[15 = -12B\\]\n\\[B = -\\tfrac{5}{4}\\]\nWhy: \\(x + 2 = 0\\) at \\(x = -2\\); careful with \\(3(-2)^2 = 12\\) and \\(-4(-2) = +8\\).",
+              "Find \\(C\\): put \\(x = -5\\) in (i)\n\\[75 + 20 - 5 = C(-7)(-3)\\]\n\\[90 = 21C\\]\n\\[C = \\tfrac{30}{7}\\]\nWhy: \\(x + 5 = 0\\) at \\(x = -5\\); \\(\\tfrac{90}{21}\\) reduces to \\(\\tfrac{30}{7}\\).",
+              "Compare coefficients\n\\[x^2:\\ A + B + C = 3\\]\n\\[-\\tfrac{1}{28} - \\tfrac{35}{28} + \\tfrac{120}{28} = \\tfrac{84}{28} = 3 \\;\\checkmark\\]\nWhy: The \\(x^2\\) terms on the right come from \\(Ax^2\\), \\(Bx^2\\) and \\(Cx^2\\); on the left it is \\(3x^2\\).",
+              "Write the answer\n\\[= -\\dfrac{1}{28(x - 2)} + \\dfrac{30}{7(x + 5)} - \\dfrac{5}{4(x + 2)}\\]\nWhy: Put the three constants in the form (written in the key's order).",
+              "Check: recombine the fractions\nOver \\(28(x - 2)(x + 2)(x + 5)\\) the numerator is\n\\[-(x^2 + 7x + 10) - 35(x^2 + 3x - 10)\\]\n\\[+ 120(x^2 - 4)\\]\n\\[= 84x^2 - 112x - 140\\]\n\\[= 28(3x^2 - 4x - 5)\\]\nSo the sum is the original fraction \\(\\checkmark\\)\nWhy: \\(28A = -1\\), \\(28B = -35\\), \\(28C = 120\\); the factor 28 cancels."
+            ],
+            "final_answer": "\\(\\dfrac{3x^2 - 4x - 5}{(x - 2)(x^2 + 7x + 10)} = -\\dfrac{1}{28(x - 2)} + \\dfrac{30}{7(x + 5)} - \\dfrac{5}{4(x + 2)}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

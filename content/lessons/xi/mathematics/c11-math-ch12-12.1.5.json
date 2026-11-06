@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.1.5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.1.5",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 225,
+          "pdf_to": 225,
+          "note": "Book p. 220: 12.1.5 definition of the limit of a function and why theorems are needed instead of tables. No book errors. Our examples (x^2-1)/(x-1) near 1 and |x|/x near 0, teaching notes, Key points and Common mistakes are ours."
+        }
+      ],
+      "title": "12.1.5 Limit of a Function",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Let a function \\(f(x)\\) be defined in an open interval near the number \"\\(a\\)\" (need not be at \\(a\\)). If, as \\(x\\) approaches \"\\(a\\)\" from both left and right side of \"\\(a\\)\" \\(f(x)\\) approaches a specific number \"\\(L\\)\" then \"\\(L\\)\", is called the limit of \\(f(x)\\) as \\(x\\) approaches \\(a\\). Symbolically it is written as:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\lim_{x \\to a} f(x) = L",
+            "text_alt": "limit of f of x as x approaches a equals L"
+          },
+          {
+            "type": "paragraph",
+            "text": "read as \"limit of \\(f(x)\\) as \\(x \\to a\\), is \\(L\\)\""
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The definition has four parts. Check each one:\n1. \\(f\\) is defined on an open interval around \\(a\\), such as \\((a - h, a + h)\\) for some \\(h > 0\\), except possibly at \\(a\\) itself.\n2. \\(x\\) approaches \\(a\\) (from the left and from the right, never equal to \\(a\\)).\n3. The values \\(f(x)\\) approach one specific number \\(L\\).\n4. The same \\(L\\) must come from both sides.\nThe words \"need not be at \\(a\\)\" are important: the value \\(f(a)\\) plays no part in the limit. \\(f(a)\\) may be different from \\(L\\), or may not exist at all."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our example (not in the book): \\(g(x) = \\frac{x^{2} - 1}{x - 1}\\) is not defined at \\(x = 1\\) (it gives \\(\\frac{0}{0}\\)), but it is defined near \\(1\\). For \\(x \\ne 1\\):\n\\[g(x) = \\frac{(x - 1)(x + 1)}{x - 1} = x + 1\\]\nso the values near \\(1\\) approach \\(2\\) (see the table). Hence \\(\\lim_{x \\to 1} g(x) = 2\\), although \\(g(1)\\) does not exist."
+          },
+          {
+            "type": "table",
+            "header": [
+              "\\(x\\)",
+              "\\(g(x) = \\frac{x^{2} - 1}{x - 1}\\)"
+            ],
+            "rows": [
+              [
+                "0.9",
+                "1.9"
+              ],
+              [
+                "0.99",
+                "1.99"
+              ],
+              [
+                "0.999",
+                "1.999"
+              ],
+              [
+                "1",
+                "not defined"
+              ],
+              [
+                "1.001",
+                "2.001"
+              ],
+              [
+                "1.01",
+                "2.01"
+              ],
+              [
+                "1.1",
+                "2.1"
+              ]
+            ],
+            "caption": "Our table (not in the book): g(x) approaches 2 from both sides of 1, though g(1) is not defined."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "When does a limit fail to exist? When the two sides do not agree. Take \\(h(x) = \\frac{|x|}{x}\\) near \\(0\\):\nfor \\(x > 0\\), \\(h(x) = \\frac{x}{x} = 1\\);\nfor \\(x < 0\\), \\(h(x) = \\frac{-x}{x} = -1\\).\nFrom the right the values approach \\(1\\), from the left \\(-1\\). There is no single number \\(L\\), so \\(\\lim_{x \\to 0} \\frac{|x|}{x}\\) does not exist. (You will study such one-sided limits in 12.3.)"
+          },
+          {
+            "type": "paragraph",
+            "text": "It is neither desirable nor practicable to find the limit of a function by numerical approach. We must be able to evaluate a limit in some mechanical way. The theorems on limits will serve this purpose. Their proofs will be discussed in higher classes."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why are tables not enough? A table only shows a few values; it cannot prove what happens for all \\(x\\) near \\(a\\), it takes long to compute, and rounding can mislead (as the misprint in the 12.1.4 table shows). The theorems in 12.1.6 let us find limits by short algebra instead."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Learn the definition in this order: (1) \\(f\\) defined near \\(a\\), not necessarily at \\(a\\); (2) \\(x \\to a\\) from both sides; (3) \\(f(x) \\to L\\); (4) then \\(\\lim_{x \\to a} f(x) = L\\). Write the symbol with \\(x \\to a\\) under \"lim\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\lim_{x \\to a} f(x) = L\\) means \\(f(x)\\) approaches \\(L\\) as \\(x\\) approaches \\(a\\) from both sides.\n2. \\(f\\) need not be defined at \\(a\\); the value \\(f(a)\\), if any, does not decide the limit.\n3. If the left and right approaches give different numbers, the limit does not exist.\n4. Tables only suggest a limit; the theorems on limits (12.1.6) are used to evaluate it."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Saying \"the limit does not exist because \\(f(a)\\) is not defined\". The limit can exist even when \\(f(a)\\) does not, e.g. \\(\\lim_{x \\to 1} \\frac{x^{2} - 1}{x - 1} = 2\\).\n2. Writing \"lim\" without \\(x \\to a\\) under it. The limit depends on the point being approached.\n3. Checking only one side of \\(a\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

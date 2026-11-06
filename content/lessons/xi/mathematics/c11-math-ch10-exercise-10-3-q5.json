@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-3-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-3-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 200,
+          "pdf_to": 200,
+          "note": "Exercise 10.3, Question 5 (+ unlabelled Hence part as 5(v)): book page 195 (PDF 200); answer key PDF 308 values right, labels (15., ii-iv) wrong, boxed; checked with sympy and the solution book (PDF 954-959)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(i)",
+            "prompt": "5 (i) Find the values of \\(\\sin\\theta\\) and \\(\\cos\\theta\\) without using table or calculator, when \\(\\theta\\) is: \\(18^{\\circ}\\)",
+            "explanation": "\\(18^{\\circ}\\) is not a table angle, but \\(5 \\times 18^{\\circ} = 90^{\\circ}\\).\nWe must find exact values of \\(\\sin 18^{\\circ}\\) and \\(\\cos 18^{\\circ}\\).\nPlan (book's hint): \\(3\\theta = 90^{\\circ} - 2\\theta\\), so \\(\\sin 3\\theta = \\cos 2\\theta\\); this gives a cubic in \\(\\sin\\theta\\).",
+            "steps": [
+              "Given: \\(\\theta = 18^{\\circ}\\).\nTo find: \\(\\sin 18^{\\circ}\\) and \\(\\cos 18^{\\circ}\\).\nMethod: \\(5\\theta = 90^{\\circ}\\), so \\(3\\theta = 90^{\\circ} - 2\\theta\\). Take sine of both sides and use the triple- and double-angle formulas.",
+              "Form the equation\n\\[\\sin 3\\theta = \\sin(90^{\\circ} - 2\\theta)\\]\n\\[\\sin 3\\theta = \\cos 2\\theta\\]\nWhy: \\(\\sin(90^{\\circ} - x) = \\cos x\\).",
+              "Write in terms of \\(s = \\sin\\theta\\)\n\\[3s - 4s^3 = 1 - 2s^2\\]\n\\[4s^3 - 2s^2 - 3s + 1 = 0\\]\nWhy: \\(\\sin 3\\theta = 3\\sin\\theta - 4\\sin^3\\theta\\) and \\(\\cos 2\\theta = 1 - 2\\sin^2\\theta\\).",
+              "Factorise\n\\[(s - 1)(4s^2 + 2s - 1) = 0\\]\nWhy: \\(s = 1\\) satisfies the cubic (\\(4 - 2 - 3 + 1 = 0\\)), so \\(s - 1\\) is a factor. But \\(\\sin 18^{\\circ} \\neq 1\\), so \\(4s^2 + 2s - 1 = 0\\).",
+              "Solve the quadratic\n\\[s = \\dfrac{-2 \\pm \\sqrt{4 + 16}}{8}\\]\n\\[= \\dfrac{-1 \\pm \\sqrt{5}}{4}\\]\n\\[\\sin 18^{\\circ} = \\dfrac{\\sqrt{5} - 1}{4}\\]\nWhy: Quadratic formula with \\(a = 4, b = 2, c = -1\\); \\(\\sqrt{20} = 2\\sqrt{5}\\). \\(\\sin 18^{\\circ} > 0\\), so we keep the plus sign.",
+              "Find \\(\\cos 18^{\\circ}\\)\n\\[\\sin^2 18^{\\circ} = \\dfrac{6 - 2\\sqrt{5}}{16}\\]\n\\[\\cos^2 18^{\\circ} = \\dfrac{10 + 2\\sqrt{5}}{16}\\]\n\\[\\cos 18^{\\circ} = \\dfrac{\\sqrt{10 + 2\\sqrt{5}}}{4}\\]\nWhy: \\((\\sqrt{5} - 1)^2 = 6 - 2\\sqrt{5}\\); \\(\\cos^2 = 1 - \\sin^2\\); positive root in quadrant I.",
+              "Check (approximate)\n\\[\\dfrac{\\sqrt{5} - 1}{4} \\approx \\dfrac{1.236}{4} = 0.309\\]\nWhy: \\(\\sin 18^{\\circ} \\approx 0.309\\) is a sensible value between \\(\\sin 0^{\\circ} = 0\\) and \\(\\sin 30^{\\circ} = 0.5\\)."
+            ],
+            "final_answer": "\\(\\sin 18^{\\circ} = \\frac{\\sqrt{5} - 1}{4}\\), \\(\\cos 18^{\\circ} = \\frac{\\sqrt{10 + 2\\sqrt{5}}}{4}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(ii)",
+            "prompt": "5 (ii) Find the values of \\(\\sin\\theta\\) and \\(\\cos\\theta\\) without using table or calculator, when \\(\\theta\\) is: \\(36^{\\circ}\\)",
+            "explanation": "\\(5 \\times 36^{\\circ} = 180^{\\circ}\\), the second hint in the book.\nWe must find exact values of \\(\\sin 36^{\\circ}\\) and \\(\\cos 36^{\\circ}\\).\nPlan: \\(3\\theta = 180^{\\circ} - 2\\theta\\), so \\(\\sin 3\\theta = \\sin 2\\theta\\); this gives a quadratic in \\(\\cos\\theta\\).",
+            "steps": [
+              "Given: \\(\\theta = 36^{\\circ}\\).\nTo find: \\(\\sin 36^{\\circ}\\) and \\(\\cos 36^{\\circ}\\).\nMethod: \\(5\\theta = 180^{\\circ}\\), so \\(3\\theta = 180^{\\circ} - 2\\theta\\) and \\(\\sin 3\\theta = \\sin(180^{\\circ} - 2\\theta) = \\sin 2\\theta\\).",
+              "Write in terms of \\(s = \\sin\\theta\\), \\(c = \\cos\\theta\\)\n\\[3s - 4s^3 = 2sc\\]\n\\[3 - 4s^2 = 2c\\]\nWhy: Triple- and double-angle formulas; divide by \\(s = \\sin 36^{\\circ} \\neq 0\\).",
+              "Change to \\(c\\) only\n\\[3 - 4(1 - c^2) = 2c\\]\n\\[4c^2 - 2c - 1 = 0\\]\nWhy: \\(s^2 = 1 - c^2\\).",
+              "Solve the quadratic\n\\[c = \\dfrac{2 \\pm \\sqrt{4 + 16}}{8} = \\dfrac{1 \\pm \\sqrt{5}}{4}\\]\n\\[\\cos 36^{\\circ} = \\dfrac{1 + \\sqrt{5}}{4}\\]\nWhy: \\(\\cos 36^{\\circ} > 0\\), and \\(\\frac{1 - \\sqrt{5}}{4}\\) is negative.",
+              "Find \\(\\sin 36^{\\circ}\\)\n\\[\\cos^2 36^{\\circ} = \\dfrac{6 + 2\\sqrt{5}}{16}\\]\n\\[\\sin^2 36^{\\circ} = \\dfrac{10 - 2\\sqrt{5}}{16}\\]\n\\[\\sin 36^{\\circ} = \\dfrac{\\sqrt{10 - 2\\sqrt{5}}}{4}\\]\nWhy: \\((1 + \\sqrt{5})^2 = 6 + 2\\sqrt{5}\\); \\(\\sin^2 = 1 - \\cos^2\\); positive root.",
+              "Check with part (i)\n\\[\\cos 36^{\\circ} = 1 - 2\\sin^2 18^{\\circ}\\]\n\\[= 1 - \\dfrac{6 - 2\\sqrt{5}}{8} = \\dfrac{2 + 2\\sqrt{5}}{8}\\]\n\\[= \\dfrac{1 + \\sqrt{5}}{4} \\;\\checkmark\\]\nWhy: \\(\\cos 2x = 1 - 2\\sin^2 x\\) with \\(x = 18^{\\circ}\\) gives the same value."
+            ],
+            "final_answer": "\\(\\sin 36^{\\circ} = \\frac{\\sqrt{10 - 2\\sqrt{5}}}{4}\\), \\(\\cos 36^{\\circ} = \\frac{\\sqrt{5} + 1}{4}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(iii)",
+            "prompt": "5 (iii) Find the values of \\(\\sin\\theta\\) and \\(\\cos\\theta\\) without using table or calculator, when \\(\\theta\\) is: \\(54^{\\circ}\\)",
+            "explanation": "\\(54^{\\circ}\\) and \\(36^{\\circ}\\) are complementary.\nWe must find \\(\\sin 54^{\\circ}\\) and \\(\\cos 54^{\\circ}\\).\nPlan: \\(54^{\\circ} = 90^{\\circ} - 36^{\\circ}\\) and use part (ii).",
+            "steps": [
+              "Given: \\(\\theta = 54^{\\circ}\\).\nTo find: \\(\\sin 54^{\\circ}\\), \\(\\cos 54^{\\circ}\\).\nMethod: Co-ratios of complementary angles: \\(\\sin(90^{\\circ} - x) = \\cos x\\), \\(\\cos(90^{\\circ} - x) = \\sin x\\).",
+              "Use \\(54^{\\circ} = 90^{\\circ} - 36^{\\circ}\\)\n\\[\\sin 54^{\\circ} = \\cos 36^{\\circ} = \\dfrac{\\sqrt{5} + 1}{4}\\]\n\\[\\cos 54^{\\circ} = \\sin 36^{\\circ} = \\dfrac{\\sqrt{10 - 2\\sqrt{5}}}{4}\\]\nWhy: \\(90^{\\circ}\\) is an odd multiple, so sin and cos swap; quadrant I keeps both positive. Values from part (ii).",
+              "Check\n\\[\\sin^2 54^{\\circ} + \\cos^2 54^{\\circ}\\]\n\\[= \\dfrac{6 + 2\\sqrt{5} + 10 - 2\\sqrt{5}}{16} = 1 \\;\\checkmark\\]\nWhy: The \\(\\sqrt{5}\\) terms cancel and \\(16/16 = 1\\)."
+            ],
+            "final_answer": "\\(\\sin 54^{\\circ} = \\frac{\\sqrt{5} + 1}{4}\\), \\(\\cos 54^{\\circ} = \\frac{\\sqrt{10 - 2\\sqrt{5}}}{4}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(iv)",
+            "prompt": "5 (iv) Find the values of \\(\\sin\\theta\\) and \\(\\cos\\theta\\) without using table or calculator, when \\(\\theta\\) is: \\(72^{\\circ}\\)",
+            "explanation": "\\(72^{\\circ}\\) and \\(18^{\\circ}\\) are complementary.\nWe must find \\(\\sin 72^{\\circ}\\) and \\(\\cos 72^{\\circ}\\).\nPlan: \\(72^{\\circ} = 90^{\\circ} - 18^{\\circ}\\) and use part (i).",
+            "steps": [
+              "Given: \\(\\theta = 72^{\\circ}\\).\nTo find: \\(\\sin 72^{\\circ}\\), \\(\\cos 72^{\\circ}\\).\nMethod: Co-ratios of complementary angles.",
+              "Use \\(72^{\\circ} = 90^{\\circ} - 18^{\\circ}\\)\n\\[\\sin 72^{\\circ} = \\cos 18^{\\circ} = \\dfrac{\\sqrt{10 + 2\\sqrt{5}}}{4}\\]\n\\[\\cos 72^{\\circ} = \\sin 18^{\\circ} = \\dfrac{\\sqrt{5} - 1}{4}\\]\nWhy: Sin and cos swap for complementary angles; quadrant I keeps both positive. Values from part (i).",
+              "Check with a double angle\n\\[\\cos 72^{\\circ} = 2\\cos^2 36^{\\circ} - 1\\]\n\\[= \\dfrac{6 + 2\\sqrt{5}}{8} - 1 = \\dfrac{\\sqrt{5} - 1}{4} \\;\\checkmark\\]\nWhy: \\(72^{\\circ} = 2 \\times 36^{\\circ}\\); the result agrees."
+            ],
+            "final_answer": "\\(\\sin 72^{\\circ} = \\frac{\\sqrt{10 + 2\\sqrt{5}}}{4}\\), \\(\\cos 72^{\\circ} = \\frac{\\sqrt{5} - 1}{4}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(v)",
+            "prompt": "5 (v) [printed without a label] Hence prove that: \\(\\cos 36^{\\circ}\\cos 72^{\\circ}\\cos 108^{\\circ}\\cos 144^{\\circ} = \\frac{1}{16}\\)",
+            "explanation": "\"Hence\" means: use the values just found.\nWe must show the product of four cosines is \\(\\frac{1}{16}\\).\nPlan: change \\(108^{\\circ}\\) and \\(144^{\\circ}\\) into \\(72^{\\circ}\\) and \\(36^{\\circ}\\) with allied angles, then multiply.",
+            "steps": [
+              "Given: L.H.S. \\(= \\cos 36^{\\circ}\\cos 72^{\\circ}\\cos 108^{\\circ}\\cos 144^{\\circ}\\).\nTo prove: L.H.S. \\(= \\frac{1}{16}\\).\nMethod: \\(108^{\\circ} = 180^{\\circ} - 72^{\\circ}\\) and \\(144^{\\circ} = 180^{\\circ} - 36^{\\circ}\\); then the values from parts (ii) and (iv).",
+              "Reduce the two large angles\n\\[\\cos 108^{\\circ} = -\\cos 72^{\\circ}\\]\n\\[\\cos 144^{\\circ} = -\\cos 36^{\\circ}\\]\nWhy: Even multiple, cos stays cos; both angles are in quadrant II, where cosine is negative.",
+              "Collect the product\n\\[\\text{L.H.S.} = \\cos 36^{\\circ}\\cos 72^{\\circ}\\]\n\\[\\quad \\times (-\\cos 72^{\\circ})(-\\cos 36^{\\circ})\\]\n\\[= (\\cos 36^{\\circ}\\cos 72^{\\circ})^2\\]\nWhy: The two minus signs cancel.",
+              "Put in the values\n\\[\\cos 36^{\\circ}\\cos 72^{\\circ} = \\dfrac{(\\sqrt{5} + 1)(\\sqrt{5} - 1)}{16}\\]\n\\[= \\dfrac{5 - 1}{16} = \\dfrac{1}{4}\\]\nWhy: Difference of squares: \\((\\sqrt{5})^2 - 1^2 = 4\\).",
+              "Square\n\\[\\text{L.H.S.} = \\left(\\dfrac{1}{4}\\right)^2 = \\dfrac{1}{16} = \\text{R.H.S.}\\]\nWhy: The product found in the last step is squared."
+            ],
+            "final_answer": "Hence proved: \\(\\cos 36^{\\circ}\\cos 72^{\\circ}\\cos 108^{\\circ}\\cos 144^{\\circ} = \\frac{1}{16}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key lists this question as \"15.\" (not \"5.\") and arranges it by ratio, not by the printed parts: its (i) \\(\\sin 18^{\\circ} = \\cos 72^{\\circ}\\), (ii) \\(\\sin 54^{\\circ} = \\cos 36^{\\circ}\\), (iii) \\(\\cos 18^{\\circ} = \\sin 72^{\\circ}\\), (iv) \\(\\cos 54^{\\circ} = \\sin 36^{\\circ}\\). The values are correct, but its labels (ii)-(iv) do not match the printed parts (ii) \\(36^{\\circ}\\), (iii) \\(54^{\\circ}\\), (iv) \\(72^{\\circ}\\). Use the answers above, part by part."
+          }
+        ]
+      }
+    }
+  ]
+}

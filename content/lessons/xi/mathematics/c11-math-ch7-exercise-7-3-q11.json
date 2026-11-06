@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-3-Q11",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-3-q11",
+      "title": "Question 11",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 138,
+          "pdf_to": 138,
+          "note": "Exercise 7.3, Question 11: book page 133 (PDF 138); answer key book page 301 (PDF 306): 2880 (agrees)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11. Find the number of ways in which 5 men and 5 women can be seated at a round table in such a way that no two persons of the same sex sit together.",
+            "explanation": "No two men together and no two women together: the seats must alternate man, woman, man, woman.\nPlan: seat the men round the table, then put the women in the gaps.",
+            "steps": [
+              "Given: 5 men, 5 women, round table, no two of the same sex adjacent.\nTo find: the number of seatings.\nMethod: Men in a circle: \\((5 - 1)!\\). Women in the 5 gaps: \\(5!\\). Multiply.",
+              "Seat the men\n\\[(5 - 1)! = 4! = 24\\]\nWhy: Circular arrangement of 5 different men.",
+              "Seat the women in the gaps\n\\[5! = 120\\]\nWhy: 5 men in a circle leave 5 gaps; one woman in each gap keeps the sexes alternating. The gaps are now fixed by the men, so the women are arranged in 5! ways.",
+              "Multiply\n\\[4! \\times 5! = 24 \\times 120 = 2880\\]\nWhy: Fundamental Principle of Counting.",
+              "Check\n\\[\\text{same count as Question 4}\\]\nWhy: With 5 men and 5 women, 'no two women together' already forces alternation, so Questions 4 and 11 describe the same seatings; both give 2880. Equal numbers in a circle give only one alternating pattern, so we do not multiply by 2."
+            ],
+            "final_answer": "\\(2880\\) ways"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-1-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-1-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 190,
+          "pdf_to": 190,
+          "note": "Exercise 10.1, Question 5: book page 185 (PDF 190); no answer key entry (proof); checked with sympy and the solution book (PDF 889-890)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5. Show that: \\(\\sec\\left(\\frac{3\\pi}{2} - \\theta\\right)\\sec\\left(\\frac{5\\pi}{2} - \\theta\\right) - \\tan\\left(\\frac{3\\pi}{2} - \\theta\\right)\\tan\\left(\\frac{5\\pi}{2} + \\theta\\right) = -1\\)",
+            "explanation": "All four angles are odd multiples of \\(\\frac{\\pi}{2}\\) plus or minus \\(\\theta\\), so every ratio changes to its co-ratio.\nWe must show the expression equals \\(-1\\).\nPlan: reduce the four ratios, then use \\(\\operatorname{cosec}^2\\theta - \\cot^2\\theta = 1\\).",
+            "steps": [
+              "Given: L.H.S. \\(= \\sec\\left(\\frac{3\\pi}{2} - \\theta\\right)\\sec\\left(\\frac{5\\pi}{2} - \\theta\\right) - \\tan\\left(\\frac{3\\pi}{2} - \\theta\\right)\\tan\\left(\\frac{5\\pi}{2} + \\theta\\right)\\).\nTo prove: L.H.S. \\(= -1\\).\nMethod: \\(\\frac{3\\pi}{2}\\) and \\(\\frac{5\\pi}{2}\\) are odd multiples of \\(\\frac{\\pi}{2}\\): sec changes to cosec, tan changes to cot; the sign comes from the quadrant (\\(\\frac{5\\pi}{2} = 2\\pi + \\frac{\\pi}{2}\\)).",
+              "Reduce the two secants\n\\[\\sec\\left(\\tfrac{3\\pi}{2} - \\theta\\right) = -\\operatorname{cosec}\\theta\\]\n\\[\\sec\\left(\\tfrac{5\\pi}{2} - \\theta\\right) = \\operatorname{cosec}\\theta\\]\nWhy: \\(\\frac{3\\pi}{2} - \\theta\\) is in quadrant III, where cos (so sec) is negative. \\(\\frac{5\\pi}{2} - \\theta\\) is one full turn plus \\(\\frac{\\pi}{2} - \\theta\\), in quadrant I, so positive.",
+              "Reduce the two tangents\n\\[\\tan\\left(\\tfrac{3\\pi}{2} - \\theta\\right) = \\cot\\theta\\]\n\\[\\tan\\left(\\tfrac{5\\pi}{2} + \\theta\\right) = -\\cot\\theta\\]\nWhy: Quadrant III makes tan positive. \\(\\frac{5\\pi}{2} + \\theta\\) is one full turn plus \\(\\frac{\\pi}{2} + \\theta\\), in quadrant II, where tan is negative.",
+              "Substitute\n\\[\\text{L.H.S.} = (-\\operatorname{cosec}\\theta)(\\operatorname{cosec}\\theta)\\]\n\\[\\quad - (\\cot\\theta)(-\\cot\\theta)\\]\n\\[= -\\operatorname{cosec}^2\\theta + \\cot^2\\theta\\]\nWhy: Minus times minus in the second term gives plus.",
+              "Use a Pythagorean identity\n\\[= -(\\operatorname{cosec}^2\\theta - \\cot^2\\theta)\\]\n\\[= -1 = \\text{R.H.S.}\\]\nWhy: \\(1 + \\cot^2\\theta = \\operatorname{cosec}^2\\theta\\), so \\(\\operatorname{cosec}^2\\theta - \\cot^2\\theta = 1\\)."
+            ],
+            "final_answer": "Hence proved: the expression equals \\(-1\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

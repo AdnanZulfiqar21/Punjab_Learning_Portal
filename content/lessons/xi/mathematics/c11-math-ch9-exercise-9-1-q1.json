@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-EXERCISE-9-1-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/u-exercise-9-1-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 179,
+          "pdf_to": 179,
+          "note": "Exercise 9.1, Question 1: book page 174 (PDF 179); answer key book page 302 (PDF 307); verified with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Find remainder and quotient by simplifying the following: \\((3x^{2} - x + 2) \\div (x - 1)\\)",
+            "explanation": "This is a division of one polynomial by another, done like long division of numbers.\nWe must find two things: the quotient (the answer of the division) and the remainder (what is left over).\nPlan: arrange powers, then repeat divide, multiply, subtract until what is left has degree less than 1, the degree of \\(x - 1\\).",
+            "steps": [
+              "Given: dividend \\(3x^{2} - x + 2\\), divisor \\(x - 1\\).\nTo find: the quotient and the remainder.\nMethod: Long division. Divide the leading terms, multiply the divisor back, subtract, and repeat until the degree of what is left is less than 1, the degree of the divisor. The result obeys Dividend = Divisor × Quotient + Remainder.",
+              "Arrange the dividend and the divisor\n\\[3x^{2} - x + 2\\]\n\\[x - 1\\]\nWhy: Both are already in decreasing powers of \\(x\\) and no power is missing, so like terms will stand in one column.",
+              "Round 1: next quotient term \\(3x\\)\nDivide, multiply, subtract:\n\\[\\dfrac{3x^{2}}{x} = 3x\\]\n\\[3x(x - 1)\\]\n\\[= 3x^{2} - 3x\\]\n\\[3x^{2} - x + 2\\]\n\\[-(3x^{2} - 3x)\\]\n\\[= 2x + 2\\]\nWhy: Dividing the first terms gives the quotient term \\(3x\\) that makes the highest power \\(x^{2}\\) cancel. Subtracting a bracket changes the sign of every term inside it.",
+              "Round 2: next quotient term \\(2\\)\nDivide, multiply, subtract:\n\\[\\dfrac{2x}{x} = 2\\]\n\\[2(x - 1)\\]\n\\[= 2x - 2\\]\n\\[2x + 2\\]\n\\[-(2x - 2)\\]\n\\[= 4\\]\nWhy: What was left has degree 1, not less than 1, so we divide again with the same three moves. Now \\(4\\) has degree 0, which is less than 1, so it is the remainder and we stop.",
+              "Write the whole division in the usual layout\n\\[\\begin{array}{rrrr}  &  & 3x & +\\,2 \\\\ x - 1\\,\\big) & \\overline{3x^{2}} & \\overline{-\\,x} & \\overline{+\\,2} \\\\  & \\underline{\\pm 3x^{2}} & \\underline{\\mp 3x} &  \\\\  &  & 2x & +\\,2 \\\\  &  & \\underline{\\pm 2x} & \\underline{\\mp 2} \\\\  &  &  & 4 \\end{array}\\]\nWhy: In the exam the rounds are written together like this. A sign pair such as \\(\\pm\\) under a term shows the product's sign (top) and the changed sign used for subtracting (bottom).",
+              "Read the quotient and the remainder\n\\[\\text{Quotient} = 3x + 2\\]\n\\[\\text{Remainder} = 4\\]\nWhy: The top line is the quotient. The last line has degree less than the divisor's, so it is the remainder.",
+              "Check: Divisor × Quotient + Remainder\n\\[(x - 1)(3x + 2)\\]\n\\[= 3x^{2} - x - 2\\]\n\\[\\text{add } 4:\\]\n\\[= 3x^{2} - x + 2 \\;\\checkmark\\]\nWhy: By the division algorithm this must give back the dividend \\(3x^{2} - x + 2\\), and it does."
+            ],
+            "final_answer": "Quotient \\(= 3x + 2\\), Remainder \\(= 4\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Find remainder and quotient by simplifying the following: \\((x^{3} + 12x^{2} - 3x + 4) \\div (x - 2)\\)",
+            "explanation": "This is a division of one polynomial by another, done like long division of numbers.\nWe must find two things: the quotient (the answer of the division) and the remainder (what is left over).\nPlan: arrange powers, then repeat divide, multiply, subtract until what is left has degree less than 1, the degree of \\(x - 2\\).",
+            "steps": [
+              "Given: dividend \\(x^{3} + 12x^{2} - 3x + 4\\), divisor \\(x - 2\\).\nTo find: the quotient and the remainder.\nMethod: Long division. Divide the leading terms, multiply the divisor back, subtract, and repeat until the degree of what is left is less than 1, the degree of the divisor. The result obeys Dividend = Divisor × Quotient + Remainder.",
+              "Arrange the dividend and the divisor\n\\[x^{3} + 12x^{2} - 3x + 4\\]\n\\[x - 2\\]\nWhy: Both are already in decreasing powers of \\(x\\) and no power is missing, so like terms will stand in one column.",
+              "Round 1: next quotient term \\(x^{2}\\)\nDivide, multiply, subtract:\n\\[\\dfrac{x^{3}}{x} = x^{2}\\]\n\\[x^{2}(x - 2)\\]\n\\[= x^{3} - 2x^{2}\\]\n\\[x^{3} + 12x^{2} - 3x + 4\\]\n\\[-(x^{3} - 2x^{2})\\]\n\\[= 14x^{2} - 3x + 4\\]\nWhy: Dividing the first terms gives the quotient term \\(x^{2}\\) that makes the highest power \\(x^{3}\\) cancel. Subtracting a bracket changes the sign of every term inside it.",
+              "Round 2: next quotient term \\(14x\\)\nDivide, multiply, subtract:\n\\[\\dfrac{14x^{2}}{x} = 14x\\]\n\\[14x(x - 2)\\]\n\\[= 14x^{2} - 28x\\]\n\\[14x^{2} - 3x + 4\\]\n\\[-(14x^{2} - 28x)\\]\n\\[= 25x + 4\\]\nWhy: What was left has degree 2, not less than 1, so we divide again with the same three moves.",
+              "Round 3: next quotient term \\(25\\)\nDivide, multiply, subtract:\n\\[\\dfrac{25x}{x} = 25\\]\n\\[25(x - 2)\\]\n\\[= 25x - 50\\]\n\\[25x + 4\\]\n\\[-(25x - 50)\\]\n\\[= 54\\]\nWhy: What was left has degree 1, not less than 1, so we divide again with the same three moves. Now \\(54\\) has degree 0, which is less than 1, so it is the remainder and we stop.",
+              "Write the whole division in the usual layout\n\\[\\begin{array}{rrrrr}  &  & x^{2} & +\\,14x & +\\,25 \\\\ x - 2\\,\\big) & \\overline{x^{3}} & \\overline{+\\,12x^{2}} & \\overline{-\\,3x} & \\overline{+\\,4} \\\\  & \\underline{\\pm x^{3}} & \\underline{\\mp 2x^{2}} &  &  \\\\  &  & 14x^{2} & -\\,3x & +\\,4 \\\\  &  & \\underline{\\pm 14x^{2}} & \\underline{\\mp 28x} &  \\\\  &  &  & 25x & +\\,4 \\\\  &  &  & \\underline{\\pm 25x} & \\underline{\\mp 50} \\\\  &  &  &  & 54 \\end{array}\\]\nWhy: In the exam the rounds are written together like this. A sign pair such as \\(\\pm\\) under a term shows the product's sign (top) and the changed sign used for subtracting (bottom).",
+              "Read the quotient and the remainder\n\\[\\text{Quotient} = x^{2} + 14x + 25\\]\n\\[\\text{Remainder} = 54\\]\nWhy: The top line is the quotient. The last line has degree less than the divisor's, so it is the remainder.",
+              "Check: Divisor × Quotient + Remainder\n\\[(x - 2)(x^{2} + 14x + 25)\\]\n\\[= x^{3} + 12x^{2} - 3x - 50\\]\n\\[\\text{add } 54:\\]\n\\[= x^{3} + 12x^{2} - 3x + 4 \\;\\checkmark\\]\nWhy: By the division algorithm this must give back the dividend \\(x^{3} + 12x^{2} - 3x + 4\\), and it does."
+            ],
+            "final_answer": "Quotient \\(= x^{2} + 14x + 25\\), Remainder \\(= 54\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Find remainder and quotient by simplifying the following: \\((x^{4} - 5x^{3} - 8x^{2} + 13x + 12) \\div (x - 6)\\)",
+            "explanation": "This is a division of one polynomial by another, done like long division of numbers.\nWe must find two things: the quotient (the answer of the division) and the remainder (what is left over).\nPlan: arrange powers, then repeat divide, multiply, subtract until what is left has degree less than 1, the degree of \\(x - 6\\).",
+            "steps": [
+              "Given: dividend \\(x^{4} - 5x^{3} - 8x^{2} + 13x + 12\\), divisor \\(x - 6\\).\nTo find: the quotient and the remainder.\nMethod: Long division. Divide the leading terms, multiply the divisor back, subtract, and repeat until the degree of what is left is less than 1, the degree of the divisor. The result obeys Dividend = Divisor × Quotient + Remainder.",
+              "Arrange the dividend and the divisor\n\\[x^{4} - 5x^{3} - 8x^{2} + 13x + 12\\]\n\\[x - 6\\]\nWhy: Both are already in decreasing powers of \\(x\\) and no power is missing, so like terms will stand in one column.",
+              "Round 1: next quotient term \\(x^{3}\\)\nDivide, multiply, subtract:\n\\[\\dfrac{x^{4}}{x} = x^{3}\\]\n\\[x^{3}(x - 6)\\]\n\\[= x^{4} - 6x^{3}\\]\n\\[x^{4} - 5x^{3} - 8x^{2} + 13x + 12\\]\n\\[-(x^{4} - 6x^{3})\\]\n\\[= x^{3} - 8x^{2} + 13x + 12\\]\nWhy: Dividing the first terms gives the quotient term \\(x^{3}\\) that makes the highest power \\(x^{4}\\) cancel. Subtracting a bracket changes the sign of every term inside it.",
+              "Round 2: next quotient term \\(x^{2}\\)\nDivide, multiply, subtract:\n\\[\\dfrac{x^{3}}{x} = x^{2}\\]\n\\[x^{2}(x - 6)\\]\n\\[= x^{3} - 6x^{2}\\]\n\\[x^{3} - 8x^{2} + 13x + 12\\]\n\\[-(x^{3} - 6x^{2})\\]\n\\[= -2x^{2} + 13x + 12\\]\nWhy: What was left has degree 3, not less than 1, so we divide again with the same three moves.",
+              "Round 3: next quotient term \\(-2x\\)\nDivide, multiply, subtract:\n\\[\\dfrac{-2x^{2}}{x} = -2x\\]\n\\[-2x(x - 6)\\]\n\\[= -2x^{2} + 12x\\]\n\\[-2x^{2} + 13x + 12\\]\n\\[-(-2x^{2} + 12x)\\]\n\\[= x + 12\\]\nWhy: What was left has degree 2, not less than 1, so we divide again with the same three moves.",
+              "Round 4: next quotient term \\(1\\)\nDivide, multiply, subtract:\n\\[\\dfrac{x}{x} = 1\\]\n\\[1(x - 6)\\]\n\\[= x - 6\\]\n\\[x + 12\\]\n\\[-(x - 6)\\]\n\\[= 18\\]\nWhy: What was left has degree 1, not less than 1, so we divide again with the same three moves. Now \\(18\\) has degree 0, which is less than 1, so it is the remainder and we stop.",
+              "Write the whole division in the usual layout\n\\[\\begin{array}{rrrrrr}  &  & x^{3} & +\\,x^{2} & -\\,2x & +\\,1 \\\\ x - 6\\,\\big) & \\overline{x^{4}} & \\overline{-\\,5x^{3}} & \\overline{-\\,8x^{2}} & \\overline{+\\,13x} & \\overline{+\\,12} \\\\  & \\underline{\\pm x^{4}} & \\underline{\\mp 6x^{3}} &  &  &  \\\\  &  & x^{3} & -\\,8x^{2} & +\\,13x & +\\,12 \\\\  &  & \\underline{\\pm x^{3}} & \\underline{\\mp 6x^{2}} &  &  \\\\  &  &  & -2x^{2} & +\\,13x & +\\,12 \\\\  &  &  & \\underline{\\mp 2x^{2}} & \\underline{\\pm 12x} &  \\\\  &  &  &  & x & +\\,12 \\\\  &  &  &  & \\underline{\\pm x} & \\underline{\\mp 6} \\\\  &  &  &  &  & 18 \\end{array}\\]\nWhy: In the exam the rounds are written together like this. A sign pair such as \\(\\pm\\) under a term shows the product's sign (top) and the changed sign used for subtracting (bottom).",
+              "Read the quotient and the remainder\n\\[\\text{Quotient} = x^{3} + x^{2} - 2x + 1\\]\n\\[\\text{Remainder} = 18\\]\nWhy: The top line is the quotient. The last line has degree less than the divisor's, so it is the remainder.",
+              "Check: Divisor × Quotient + Remainder\n\\[(x - 6)(x^{3} + x^{2} - 2x + 1)\\]\n\\[= x^{4} - 5x^{3} - 8x^{2} + 13x - 6\\]\n\\[\\text{add } 18:\\]\n\\[= x^{4} - 5x^{3} - 8x^{2} + 13x + 12 \\;\\checkmark\\]\nWhy: By the division algorithm this must give back the dividend \\(x^{4} - 5x^{3} - 8x^{2} + 13x + 12\\), and it does."
+            ],
+            "final_answer": "Quotient \\(= x^{3} + x^{2} - 2x + 1\\), Remainder \\(= 18\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Find remainder and quotient by simplifying the following: \\((5x^{4} - 3x^{3} + 2x^{2} - 1) \\div (x^{2} + 4)\\)",
+            "explanation": "This is a division of one polynomial by another, done like long division of numbers.\nWe must find two things: the quotient (the answer of the division) and the remainder (what is left over).\nPlan: arrange powers, then repeat divide, multiply, subtract until what is left has degree less than 2, the degree of \\(x^{2} + 4\\).",
+            "steps": [
+              "Given: dividend \\(5x^{4} - 3x^{3} + 2x^{2} - 1\\), divisor \\(x^{2} + 4\\).\nTo find: the quotient and the remainder.\nMethod: Long division. Divide the leading terms, multiply the divisor back, subtract, and repeat until the degree of what is left is less than 2, the degree of the divisor. The result obeys Dividend = Divisor × Quotient + Remainder.",
+              "Arrange the dividend\n\\[5x^{4} - 3x^{3} + 2x^{2} + 0x - 1\\]\nWhy: The terms must be in decreasing powers of \\(x\\) so that like terms stand in one column. There is no \\(x\\) term, so we write it with coefficient 0 as a place holder.",
+              "Round 1: next quotient term \\(5x^{2}\\)\nDivide, multiply, subtract:\n\\[\\dfrac{5x^{4}}{x^{2}} = 5x^{2}\\]\n\\[5x^{2}(x^{2} + 4)\\]\n\\[= 5x^{4} + 20x^{2}\\]\n\\[5x^{4} - 3x^{3} + 2x^{2} - 1\\]\n\\[-(5x^{4} + 20x^{2})\\]\n\\[= -3x^{3} - 18x^{2} - 1\\]\nWhy: Dividing the first terms gives the quotient term \\(5x^{2}\\) that makes the highest power \\(x^{4}\\) cancel. Subtracting a bracket changes the sign of every term inside it.",
+              "Round 2: next quotient term \\(-3x\\)\nDivide, multiply, subtract:\n\\[\\dfrac{-3x^{3}}{x^{2}} = -3x\\]\n\\[-3x(x^{2} + 4)\\]\n\\[= -3x^{3} - 12x\\]\n\\[-3x^{3} - 18x^{2} - 1\\]\n\\[-(-3x^{3} - 12x)\\]\n\\[= -18x^{2} + 12x - 1\\]\nWhy: What was left has degree 3, not less than 2, so we divide again with the same three moves.",
+              "Round 3: next quotient term \\(-18\\)\nDivide, multiply, subtract:\n\\[\\dfrac{-18x^{2}}{x^{2}} = -18\\]\n\\[(-18)(x^{2} + 4)\\]\n\\[= -18x^{2} - 72\\]\n\\[-18x^{2} + 12x - 1\\]\n\\[-(-18x^{2} - 72)\\]\n\\[= 12x + 71\\]\nWhy: What was left has degree 2, not less than 2, so we divide again with the same three moves. Now \\(12x + 71\\) has degree 1, which is less than 2, so it is the remainder and we stop.",
+              "Write the whole division in the usual layout\n\\[\\begin{array}{rrrrrr}  &  &  & 5x^{2} & -\\,3x & -\\,18 \\\\ x^{2} + 4\\,\\big) & \\overline{5x^{4}} & \\overline{-\\,3x^{3}} & \\overline{+\\,2x^{2}} & \\overline{+\\,0x} & \\overline{-\\,1} \\\\  & \\underline{\\pm 5x^{4}} &  & \\underline{\\pm 20x^{2}} &  &  \\\\  &  & -3x^{3} & -\\,18x^{2} &  & -\\,1 \\\\  &  & \\underline{\\mp 3x^{3}} &  & \\underline{\\mp 12x} &  \\\\  &  &  & -18x^{2} & +\\,12x & -\\,1 \\\\  &  &  & \\underline{\\mp 18x^{2}} &  & \\underline{\\mp 72} \\\\  &  &  &  & 12x & +\\,71 \\end{array}\\]\nWhy: In the exam the rounds are written together like this. A sign pair such as \\(\\pm\\) under a term shows the product's sign (top) and the changed sign used for subtracting (bottom).",
+              "Read the quotient and the remainder\n\\[\\text{Quotient} = 5x^{2} - 3x - 18\\]\n\\[\\text{Remainder} = 12x + 71\\]\nWhy: The top line is the quotient. The last line has degree less than the divisor's, so it is the remainder.",
+              "Check: Divisor × Quotient + Remainder\n\\[(x^{2} + 4)(5x^{2} - 3x - 18)\\]\n\\[= 5x^{4} - 3x^{3} + 2x^{2} - 12x - 72\\]\n\\[\\text{add } (12x + 71):\\]\n\\[= 5x^{4} - 3x^{3} + 2x^{2} - 1 \\;\\checkmark\\]\nWhy: By the division algorithm this must give back the dividend \\(5x^{4} - 3x^{3} + 2x^{2} - 1\\), and it does."
+            ],
+            "final_answer": "Quotient \\(= 5x^{2} - 3x - 18\\), Remainder \\(= 12x + 71\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(v)",
+            "prompt": "1 (v) Find remainder and quotient by simplifying the following: \\((3x^{4} - 5x^{3} + 4x - 6) \\div (x^{2} - 3x + 5)\\)",
+            "explanation": "This is a division of one polynomial by another, done like long division of numbers.\nWe must find two things: the quotient (the answer of the division) and the remainder (what is left over).\nPlan: arrange powers, then repeat divide, multiply, subtract until what is left has degree less than 2, the degree of \\(x^{2} - 3x + 5\\).",
+            "steps": [
+              "Given: dividend \\(3x^{4} - 5x^{3} + 4x - 6\\), divisor \\(x^{2} - 3x + 5\\).\nTo find: the quotient and the remainder.\nMethod: Long division. Divide the leading terms, multiply the divisor back, subtract, and repeat until the degree of what is left is less than 2, the degree of the divisor. The result obeys Dividend = Divisor × Quotient + Remainder.",
+              "Arrange the dividend\n\\[3x^{4} - 5x^{3} + 0x^{2} + 4x - 6\\]\nWhy: The terms must be in decreasing powers of \\(x\\) so that like terms stand in one column. There is no \\(x^{2}\\) term, so we write it with coefficient 0 as a place holder.",
+              "Round 1: next quotient term \\(3x^{2}\\)\nDivide, multiply, subtract:\n\\[\\dfrac{3x^{4}}{x^{2}} = 3x^{2}\\]\n\\[3x^{2}(x^{2} - 3x + 5)\\]\n\\[= 3x^{4} - 9x^{3} + 15x^{2}\\]\n\\[3x^{4} - 5x^{3} + 4x - 6\\]\n\\[-(3x^{4} - 9x^{3} + 15x^{2})\\]\n\\[= 4x^{3} - 15x^{2} + 4x - 6\\]\nWhy: Dividing the first terms gives the quotient term \\(3x^{2}\\) that makes the highest power \\(x^{4}\\) cancel. Subtracting a bracket changes the sign of every term inside it.",
+              "Round 2: next quotient term \\(4x\\)\nDivide, multiply, subtract:\n\\[\\dfrac{4x^{3}}{x^{2}} = 4x\\]\n\\[4x(x^{2} - 3x + 5)\\]\n\\[= 4x^{3} - 12x^{2} + 20x\\]\n\\[4x^{3} - 15x^{2} + 4x - 6\\]\n\\[-(4x^{3} - 12x^{2} + 20x)\\]\n\\[= -3x^{2} - 16x - 6\\]\nWhy: What was left has degree 3, not less than 2, so we divide again with the same three moves.",
+              "Round 3: next quotient term \\(-3\\)\nDivide, multiply, subtract:\n\\[\\dfrac{-3x^{2}}{x^{2}} = -3\\]\n\\[(-3)(x^{2} - 3x + 5)\\]\n\\[= -3x^{2} + 9x - 15\\]\n\\[-3x^{2} - 16x - 6\\]\n\\[-(-3x^{2} + 9x - 15)\\]\n\\[= -25x + 9\\]\nWhy: What was left has degree 2, not less than 2, so we divide again with the same three moves. Now \\(-25x + 9\\) has degree 1, which is less than 2, so it is the remainder and we stop.",
+              "Write the whole division in the usual layout\n\\[\\begin{array}{rrrrrr}  &  &  & 3x^{2} & +\\,4x & -\\,3 \\\\ x^{2} - 3x + 5\\,\\big) & \\overline{3x^{4}} & \\overline{-\\,5x^{3}} & \\overline{+\\,0x^{2}} & \\overline{+\\,4x} & \\overline{-\\,6} \\\\  & \\underline{\\pm 3x^{4}} & \\underline{\\mp 9x^{3}} & \\underline{\\pm 15x^{2}} &  &  \\\\  &  & 4x^{3} & -\\,15x^{2} & +\\,4x & -\\,6 \\\\  &  & \\underline{\\pm 4x^{3}} & \\underline{\\mp 12x^{2}} & \\underline{\\pm 20x} &  \\\\  &  &  & -3x^{2} & -\\,16x & -\\,6 \\\\  &  &  & \\underline{\\mp 3x^{2}} & \\underline{\\pm 9x} & \\underline{\\mp 15} \\\\  &  &  &  & -25x & +\\,9 \\end{array}\\]\nWhy: In the exam the rounds are written together like this. A sign pair such as \\(\\pm\\) under a term shows the product's sign (top) and the changed sign used for subtracting (bottom).",
+              "Read the quotient and the remainder\n\\[\\text{Quotient} = 3x^{2} + 4x - 3\\]\n\\[\\text{Remainder} = -25x + 9\\]\nWhy: The top line is the quotient. The last line has degree less than the divisor's, so it is the remainder.",
+              "Check: Divisor × Quotient + Remainder\n\\[(x^{2} - 3x + 5)(3x^{2} + 4x - 3)\\]\n\\[= 3x^{4} - 5x^{3} + 29x - 15\\]\n\\[\\text{add } (-25x + 9):\\]\n\\[= 3x^{4} - 5x^{3} + 4x - 6 \\;\\checkmark\\]\nWhy: By the division algorithm this must give back the dividend \\(3x^{4} - 5x^{3} + 4x - 6\\), and it does."
+            ],
+            "final_answer": "Quotient \\(= 3x^{2} + 4x - 3\\), Remainder \\(= -25x + 9\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

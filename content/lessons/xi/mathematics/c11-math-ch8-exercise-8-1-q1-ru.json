@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q1",
+      "title": "Question 1 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 154,
+          "pdf_to": 154,
+          "note": "Exercise 8.1, Question 1: book page 149 (PDF 154); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-1-Q1",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(1 + 3 + 5 + \\cdots + (2n - 1) = n^2\\) [printed as \\((2n\\ \\ 1)\\): the minus sign is missing]",
+            "explanation": "Yeh ek sum ka formula hai jo har positive integer \\(n\\) ke liye sahi hona chahiye. Hum har \\(n\\) ko ek ek kar ke check nahi kar sakte, kyunke positive integers khatam hi nahi hote. Is liye mathematical induction (riyazi istiqra) ka tareeqa lagayenge.\nSaabit kya karna hai? Do baatein: formula \\(n = 1\\) par sahi hai, aur agar kisi \\(n = k\\) par sahi ho to \\(n = k + 1\\) par bhi zaroor sahi hoga.\nPlan: base case, hypothesis \\(S(k)\\), phir agli term \\(2k + 1\\) jama kar ke dikhana ke jawab \\((k + 1)^2\\) ban jata hai.",
+            "steps": [
+              "Diya gaya hai: \\(S(n): 1 + 3 + 5 + \\cdots + (2n - 1) = n^2\\).\nSaabit karna hai: \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nTareeqa: Principle of mathematical induction ke teen hisse hain: (1) base case \\(S(1)\\) check karna; (2) \\(S(k)\\) ko sahi maan kar \\(S(k + 1)\\) saabit karna; (3) conclusion likhna. Sab se pehle \\(n\\)th term pehchanein: \\(2n - 1\\). Is mein \\(n\\) ki jagah \\(k + 1\\) rakhein to \\((k + 1)\\)th term \\(2(k + 1) - 1 = 2k + 1\\) banti hai. Yehi woh \"agli term\" hai jo inductive step mein jama hogi.",
+              "Base case: \\(n = 1\\) rakhein\n\\[\\text{L.H.S.} = 1\\]\n\\[\\text{R.H.S.} = 1^2 = 1\\]\nDono barabar hain, is liye \\(S(1)\\) sahi hai.\nKyun: \\(n = 1\\) par left side mein sirf pehli term hoti hai, yani \\(2(1) - 1 = 1\\). Right side \\(1^2 = 1\\). Yeh pehla domino hai jo hum ne gira kar dikha diya.",
+              "Induction hypothesis: maan lein ke \\(S(k)\\) sahi hai\n\\[1 + 3 + \\cdots + (2k - 1) = k^2 \\quad (A)\\]\nKyun: Hum farz karte hain ke kisi positive integer \\(k\\) ke liye formula sahi hai. Is ko saabit nahi karte, sirf maante hain, aur agle qadam mein is ko istemal karte hain. Isay (A) ka naam de diya taake baad mein hawala de sakein.",
+              "Target \\(S(k + 1)\\) likhein\n\\[1 + 3 + \\cdots + (2k - 1)\\]\n\\[+\\, (2k + 1) = (k + 1)^2\\]\nKyun: Har jagah \\(n\\) ki jagah \\(k + 1\\) rakha. Left side mein ek nayi term \\(2k + 1\\) jur gayi aur right side \\((k + 1)^2\\) ho gayi. Pehle target likh lena achi aadat hai, is se pata rehta hai ke humein kahan pohanchna hai.",
+              "Inductive step: (A) istemal karein\n\\[\\text{L.H.S.} = k^2 + (2k + 1)\\]\n\\[= k^2 + 2k + 1\\]\n\\[= (k + 1)^2 = \\text{R.H.S.}\\]\nKyun: Target ki pehli \\(k\\) terms bilkul (A) ka left side hain, is liye un sab ki jagah seedha \\(k^2\\) rakh diya. Yahi woh line hai jahan hypothesis kaam aati hai. Phir \\(k^2 + 2k + 1\\) ko pehchana: yeh \\((a + b)^2 = a^2 + 2ab + b^2\\) wala perfect square hai, jahan \\(a = k\\), \\(b = 1\\).\nDhyan dein: Bahut se students yahan \\(S(k + 1)\\) ko seedha sahi maan lete hain. Aisa nahi karna; sirf \\(S(k)\\) maana hai, \\(S(k + 1)\\) ko saabit karna hai.",
+              "Conclusion\n\\(S(1)\\) sahi hai, aur \\(S(k)\\) sahi hone se \\(S(k + 1)\\) sahi ho jata hai. Is liye principle of mathematical induction se \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nKyun: Dominoes ki misaal sochiye: pehla domino gir gaya (base case), aur har domino apne agle ko gira deta hai (inductive step). Nateeja: saare dominoes girenge, yani formula har \\(n\\) ke liye sahi hai.",
+              "Tasdeeq: \\(n = 4\\)\n\\[1 + 3 + 5 + 7 = 16\\]\n\\[4^2 = 16 \\;\\checkmark\\]\nKyun: Ek chhota sa number rakh kar dekh liya ke formula waqai kaam karta hai. Yaad rahe, yeh sirf tasalli hai, saboot upar wala induction hi hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(1 + 3 + 5 + \\cdots + (2n - 1) = n^2\\) har positive integer \\(n\\) ke liye."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein aakhri term \\((2n\\ \\ 1)\\) chhapi hai, beech ka minus sign gayab hai. Sahi term \\((2n - 1)\\) hai, yani \\(n\\)th odd number. Check kijiye: \\(n = 3\\) par \\(2(3) - 1 = 5\\), jo teesra odd number hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(1 + \\frac{1}{2} + \\frac{1}{4} + \\cdots + \\frac{1}{2^{n-1}} = 2\\left[1 - \\frac{1}{2^n}\\right]\\)",
+            "explanation": "Yeh ek G.P. (geometric progression, yani har term pichhli ka aadha) ka sum hai: pehli term 1 aur common ratio \\(\\frac{1}{2}\\). Isay har positive integer \\(n\\) ke liye saabit karna hai.\nSaabit kya karna hai? Base case, aur yeh ke \\(S(k)\\) se \\(S(k + 1)\\) nikalta hai.\nPlan: right side ko \\(2 - \\frac{1}{2^{n-1}}\\) ki shakal mein likhenge, kyunke is shakal mein agli term \\(\\frac{1}{2^k}\\) jama karna bahut aasaan ho jata hai.",
+            "steps": [
+              "Diya gaya hai: \\(S(n): 1 + \\frac{1}{2} + \\cdots + \\frac{1}{2^{n-1}} = 2\\left[1 - \\frac{1}{2^n}\\right]\\).\nSaabit karna hai: \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nTareeqa: Mathematical induction. \\(n\\)th term \\(\\frac{1}{2^{n-1}}\\) hai, is liye \\((k + 1)\\)th term \\(\\frac{1}{2^k}\\) hogi. Bracket khol lena faidemand hai: \\(2\\left[1 - \\frac{1}{2^n}\\right] = 2 - \\frac{2}{2^n} = 2 - \\frac{1}{2^{n-1}}\\), kyunke \\(\\frac{2}{2^n}\\) mein upar ka 2 neeche ki ek power ko cancel kar deta hai.",
+              "Base case: \\(n = 1\\) rakhein\n\\[\\text{L.H.S.} = 1\\]\n\\[\\text{R.H.S.} = 2\\left[1 - \\tfrac{1}{2}\\right]\\]\n\\[= 2 \\times \\tfrac{1}{2} = 1\\]\nDono barabar, is liye \\(S(1)\\) sahi hai.\nKyun: \\(n = 1\\) par left side mein sirf pehli term \\(\\frac{1}{2^0}\\) hai, aur kisi bhi non-zero number ki power 0 ka jawab 1 hota hai.",
+              "Induction hypothesis: \\(S(k)\\) ko sahi maan lein\n\\[1 + \\tfrac{1}{2} + \\cdots + \\tfrac{1}{2^{k-1}}\\]\n\\[= 2 - \\dfrac{1}{2^{k-1}} \\quad (A)\\]\nKyun: Yeh \\(S(k)\\) hi hai, bas bracket khol diya: \\(2\\left[1 - \\frac{1}{2^k}\\right] = 2 - \\frac{2}{2^k} = 2 - \\frac{1}{2^{k-1}}\\). Is shakal mein agla qadam saaf nazar aayega.",
+              "Target \\(S(k + 1)\\) likhein\n\\[1 + \\tfrac{1}{2} + \\cdots + \\tfrac{1}{2^{k-1}} + \\tfrac{1}{2^k}\\]\n\\[= 2\\left[1 - \\dfrac{1}{2^{k+1}}\\right]\\]\n\\[= 2 - \\dfrac{1}{2^k}\\]\nKyun: \\(n = k + 1\\) rakha. Nayi aakhri term \\(\\frac{1}{2^k}\\) hai. Right side mein bracket kholne par \\(2 \\cdot \\frac{1}{2^{k+1}} = \\frac{1}{2^k}\\), is liye target \\(2 - \\frac{1}{2^k}\\) ban gaya.",
+              "Inductive step: (A) istemal karein\n\\[\\text{L.H.S.} = 2 - \\dfrac{1}{2^{k-1}} + \\dfrac{1}{2^k}\\]\n\\[= 2 - \\dfrac{2}{2^k} + \\dfrac{1}{2^k}\\]\n\\[= 2 - \\dfrac{1}{2^k}\\]\n\\[= 2\\left[1 - \\dfrac{1}{2^{k+1}}\\right] = \\text{R.H.S.}\\]\nKyun: Pehli \\(k\\) terms ki jagah (A) ki value rakhi; yahi hypothesis ka istemal hai. Phir dono fractions ka denominator ek jaisa karne ke liye \\(\\frac{1}{2^{k-1}}\\) ko \\(\\frac{2}{2^k}\\) likha (upar neeche dono ko 2 se multiply kiya). Ab numerator mein \\(-2 + 1 = -1\\), is liye \\(2 - \\frac{1}{2^k}\\) bacha, jo bilkul target hai.\nDhyan dein: \\(2^{k-1}\\) aur \\(2^k\\) ko ek jaisa samajh lena aam ghalti hai; \\(2^k = 2 \\times 2^{k-1}\\), yani dugna.",
+              "Conclusion\n\\(S(1)\\) sahi hai aur \\(S(k)\\) se \\(S(k + 1)\\) sahi hota hai. Principle of mathematical induction se \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nKyun: Induction ki dono sharten poori ho gayin, base case bhi aur inductive step bhi.",
+              "Tasdeeq: \\(n = 3\\)\n\\[1 + \\tfrac{1}{2} + \\tfrac{1}{4} = \\tfrac{7}{4}\\]\n\\[2\\left[1 - \\tfrac{1}{8}\\right] = 2 \\times \\tfrac{7}{8} = \\tfrac{7}{4} \\;\\checkmark\\]\nKyun: Chhoti value par dono sides barabar aa gayin. Ek dilchasp baat: jaise jaise \\(n\\) barhta hai, sum 2 ke qareeb jata hai lekin kabhi 2 tak nahi pohanchta."
+            ],
+            "final_answer": "Saabit ho gaya: \\(1 + \\frac{1}{2} + \\frac{1}{4} + \\cdots + \\frac{1}{2^{n-1}} = 2\\left[1 - \\frac{1}{2^n}\\right]\\) har positive integer \\(n\\) ke liye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) [printed as (ii); the book repeats the label (ii)] Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(2 + 6 + 18 + \\cdots + 2 \\times 3^{n-1} = 3^n - 1\\)",
+            "explanation": "Yeh bhi G.P. ka sum hai: har term pichhli term ka teen guna hai (2, 6, 18, ...). Isay har positive integer \\(n\\) ke liye saabit karna hai.\nNote: kitab ne is part ka label ghalti se dobara (ii) chhapa hai; tarteeb ke hisaab se yeh (iii) hai.\nPlan: \\(3^k - 1\\) mein agli term \\(2 \\times 3^k\\) jama kar ke 3 ki powers ko ikattha karna, taake \\(3^{k+1} - 1\\) ban jaye.",
+            "steps": [
+              "Diya gaya hai: \\(S(n): 2 + 6 + 18 + \\cdots + 2 \\times 3^{n-1} = 3^n - 1\\).\nSaabit karna hai: \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nTareeqa: Mathematical induction. \\(n\\)th term \\(2 \\times 3^{n-1}\\) hai; is mein \\(n = k + 1\\) rakhein to \\((k + 1)\\)th term \\(2 \\times 3^k\\) banti hai.",
+              "Base case: \\(n = 1\\) rakhein\n\\[\\text{L.H.S.} = 2 \\times 3^0 = 2\\]\n\\[\\text{R.H.S.} = 3^1 - 1 = 2\\]\nDono barabar, is liye \\(S(1)\\) sahi hai.\nKyun: \\(n = 1\\) par left side mein sirf pehli term hai, aur \\(3^0 = 1\\) hota hai.",
+              "Induction hypothesis: \\(S(k)\\) ko sahi maan lein\n\\[2 + 6 + \\cdots + 2 \\times 3^{k-1}\\]\n\\[= 3^k - 1 \\quad (A)\\]\nKyun: Hum farz karte hain ke kisi positive integer \\(k\\) par formula sahi hai, aur is farz ko agle qadam mein istemal karenge.",
+              "Target \\(S(k + 1)\\) likhein\n\\[2 + 6 + \\cdots + 2 \\times 3^{k-1} + 2 \\times 3^k\\]\n\\[= 3^{k+1} - 1\\]\nKyun: \\(n = k + 1\\) rakha. Left side mein ek nayi term \\(2 \\times 3^k\\) aayi, aur right side \\(3^{k+1} - 1\\) ho gayi.",
+              "Inductive step: (A) istemal karein\n\\[\\text{L.H.S.} = (3^k - 1) + 2 \\times 3^k\\]\n\\[= 3^k + 2 \\times 3^k - 1\\]\n\\[= 3 \\times 3^k - 1\\]\n\\[= 3^{k+1} - 1 = \\text{R.H.S.}\\]\nKyun: Pehli \\(k\\) terms ki jagah (A) se \\(3^k - 1\\) rakha. Ab \\(3^k\\) ko ek cheez samjhiye, jaise ek \"seb\": ek seb aur do seb mil kar teen seb, yani \\(3 \\times 3^k\\). Phir law of indices: \\(3^1 \\times 3^k = 3^{k+1}\\) (same base par powers jama hoti hain).\nDhyan dein: \\(3 \\times 3^k\\) ko \\(9^k\\) likhna ghalat hai; base 3 hi rehta hai, sirf power ek barhti hai.",
+              "Conclusion\n\\(S(1)\\) sahi hai aur \\(S(k)\\) se \\(S(k + 1)\\) sahi hota hai. Principle of mathematical induction se \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nKyun: Base case aur inductive step dono poore ho gaye, is liye induction ka nateeja laagu hota hai.",
+              "Tasdeeq: \\(n = 3\\)\n\\[2 + 6 + 18 = 26\\]\n\\[3^3 - 1 = 27 - 1 = 26 \\;\\checkmark\\]\nKyun: Chhoti value par dono sides barabar aa gayin, is se tasalli ho gayi ke formula aur hamari algebra dono theek hain."
+            ],
+            "final_answer": "Saabit ho gaya: \\(2 + 6 + 18 + \\cdots + 2 \\times 3^{n-1} = 3^n - 1\\) har positive integer \\(n\\) ke liye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(1 \\times 3 + 2 \\times 5 + 3 \\times 7 + \\cdots + n \\times (2n + 1) = \\frac{n(n + 1)(4n + 5)}{6}\\)",
+            "explanation": "Is sum ki har term do numbers ka product hai: pehla counting number (1, 2, 3, ...) aur doosra odd number (3, 5, 7, ...). Isay har positive integer \\(n\\) ke liye saabit karna hai.\nSaabit kya karna hai? Base case aur \\(S(k) \\Rightarrow S(k + 1)\\).\nPlan: agli term \\((k + 1)(2k + 3)\\) jama karna, \\((k + 1)\\) common nikalna, aur bracket ko factorise kar ke target tak pohanchna. Is sawal mein asal mehnat factorisation ki hai.",
+            "steps": [
+              "Diya gaya hai: \\(S(n): 1 \\times 3 + 2 \\times 5 + \\cdots + n(2n + 1) = \\frac{n(n + 1)(4n + 5)}{6}\\).\nSaabit karna hai: \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nTareeqa: Mathematical induction. \\(n\\)th term pehchanein: pehla number \\(n\\) aur doosra \\(2n + 1\\), yani \\(n(2n + 1)\\). Is mein \\(n = k + 1\\) rakhein: \\((k + 1)(2(k + 1) + 1) = (k + 1)(2k + 3)\\).",
+              "Base case: \\(n = 1\\) rakhein\n\\[\\text{L.H.S.} = 1 \\times 3 = 3\\]\n\\[\\text{R.H.S.} = \\dfrac{1 \\times 2 \\times 9}{6} = 3\\]\nDono barabar, is liye \\(S(1)\\) sahi hai.\nKyun: \\(n = 1\\) par \\(n + 1 = 2\\) aur \\(4n + 5 = 9\\); \\(\\frac{18}{6} = 3\\).",
+              "Induction hypothesis: \\(S(k)\\) ko sahi maan lein\n\\[1 \\times 3 + \\cdots + k(2k + 1)\\]\n\\[= \\dfrac{k(k + 1)(4k + 5)}{6} \\quad (A)\\]\nKyun: Kisi positive integer \\(k\\) ke liye formula ko sahi farz kiya; yeh (A) inductive step mein kaam aayega.",
+              "Target \\(S(k + 1)\\) likhein\n\\[1 \\times 3 + \\cdots + (k + 1)(2k + 3)\\]\n\\[= \\dfrac{(k + 1)(k + 2)(4k + 9)}{6}\\]\nKyun: \\(n = k + 1\\) rakha: \\(n + 1\\) ban gaya \\(k + 2\\), aur \\(4n + 5 = 4k + 4 + 5 = 4k + 9\\). Target pehle se saamne ho to factorisation ka andaza lagana aasaan ho jata hai: humein bracket mein \\((k + 2)(4k + 9)\\) chahiye.",
+              "Inductive step: (A) istemal karein\n\\[\\text{L.H.S.} = \\dfrac{k(k + 1)(4k + 5)}{6}\\]\n\\[+\\, (k + 1)(2k + 3)\\]\n\\[= \\dfrac{(k + 1)[k(4k + 5) + 6(2k + 3)]}{6}\\]\nKyun: Pehli \\(k\\) terms ki jagah (A) rakha. Ab dono hisson mein \\((k + 1)\\) maujood hai, is liye usay common nikala. Doosre hisse ka denominator 1 hai, is liye usay \\(\\frac{6}{6}\\) se multiply kiya, is wajah se bracket mein \\(6(2k + 3)\\) aaya.\nDhyan dein: Sab kuch multiply kar ke cubic bana lena bhi chalega, lekin \\((k + 1)\\) common nikalne se kaam aadha reh jata hai, kyunke target mein bhi \\((k + 1)\\) hai.",
+              "Bracket ko simplify karein\n\\[k(4k + 5) + 6(2k + 3)\\]\n\\[= 4k^2 + 5k + 12k + 18\\]\n\\[= 4k^2 + 17k + 18\\]\n\\[= (k + 2)(4k + 9)\\]\nKyun: Factorise karne ke liye middle term ko torte hain: aise do numbers chahiye jin ka jama 17 aur product \\(4 \\times 18 = 72\\) ho. Woh 8 aur 9 hain. To \\(4k^2 + 8k + 9k + 18 = 4k(k + 2) + 9(k + 2) = (k + 2)(4k + 9)\\).",
+              "Target tak pohanchein\n\\[\\text{L.H.S.} = \\dfrac{(k + 1)(k + 2)(4k + 9)}{6}\\]\n\\[= \\text{R.H.S.}\\]\nKyun: Yeh bilkul \\(S(k + 1)\\) ka right side hai. Is liye \\(S(k)\\) sahi ho to \\(S(k + 1)\\) bhi sahi hai.",
+              "Conclusion\n\\(S(1)\\) sahi hai aur \\(S(k)\\) se \\(S(k + 1)\\) sahi hota hai. Principle of mathematical induction se \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nKyun: Induction ki dono sharten poori ho gayin.",
+              "Tasdeeq: \\(n = 2\\)\n\\[1 \\times 3 + 2 \\times 5 = 13\\]\n\\[\\dfrac{2 \\times 3 \\times 13}{6} = 13 \\;\\checkmark\\]\nKyun: \\(n = 2\\) par \\(4n + 5 = 13\\); dono sides 13 aayin, is liye formula aur algebra dono theek hain."
+            ],
+            "final_answer": "Saabit ho gaya: \\(1 \\times 3 + 2 \\times 5 + \\cdots + n(2n + 1) = \\frac{n(n + 1)(4n + 5)}{6}\\) har positive integer \\(n\\) ke liye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(v)",
+            "prompt": "1 (v) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(\\frac{1}{1 \\times 2} + \\frac{1}{2 \\times 3} + \\frac{1}{3 \\times 4} + \\cdots + \\frac{1}{n(n + 1)} = 1 - \\frac{1}{n + 1}\\)",
+            "explanation": "Yeh fractions ka sum hai; har denominator do lagatar (consecutive) numbers ka product hai. Isay har positive integer \\(n\\) ke liye saabit karna hai.\nSaabit kya karna hai? Base case aur \\(S(k) \\Rightarrow S(k + 1)\\).\nPlan: right side ko \\(\\frac{n}{n + 1}\\) ki shakal mein likhna, agli term \\(\\frac{1}{(k + 1)(k + 2)}\\) jama karna, common denominator le kar perfect square pehchanna.",
+            "steps": [
+              "Diya gaya hai: \\(S(n): \\frac{1}{1 \\times 2} + \\cdots + \\frac{1}{n(n + 1)} = 1 - \\frac{1}{n + 1}\\).\nSaabit karna hai: \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nTareeqa: Mathematical induction. Pehle right side ko saaf kar lein: \\(1 - \\frac{1}{n + 1} = \\frac{n}{n + 1}\\). \\(n\\)th term \\(\\frac{1}{n(n + 1)}\\) hai, is liye \\((k + 1)\\)th term \\(\\frac{1}{(k + 1)(k + 2)}\\) hogi.",
+              "Base case: \\(n = 1\\) rakhein\n\\[\\text{L.H.S.} = \\dfrac{1}{1 \\times 2} = \\dfrac{1}{2}\\]\n\\[\\text{R.H.S.} = 1 - \\dfrac{1}{2} = \\dfrac{1}{2}\\]\nDono barabar, is liye \\(S(1)\\) sahi hai.\nKyun: \\(n = 1\\) par left side mein sirf pehli term hai.",
+              "Induction hypothesis: \\(S(k)\\) ko sahi maan lein\n\\[\\dfrac{1}{1 \\times 2} + \\cdots + \\dfrac{1}{k(k + 1)}\\]\n\\[= \\dfrac{k}{k + 1} \\quad (A)\\]\nKyun: \\(1 - \\frac{1}{k + 1}\\) ko ek fraction banaya: \\(\\frac{k + 1 - 1}{k + 1} = \\frac{k}{k + 1}\\). Ek fraction ke saath agla jama karna aasaan hota hai.",
+              "Target \\(S(k + 1)\\) likhein\n\\[\\dfrac{1}{1 \\times 2} + \\cdots + \\dfrac{1}{(k + 1)(k + 2)}\\]\n\\[= 1 - \\dfrac{1}{k + 2} = \\dfrac{k + 1}{k + 2}\\]\nKyun: \\(n = k + 1\\) rakha, aur right side ko bhi ek fraction bana liya taake aakhir mein milana aasaan ho.",
+              "Inductive step: (A) istemal karein\n\\[\\text{L.H.S.} = \\dfrac{k}{k + 1} + \\dfrac{1}{(k + 1)(k + 2)}\\]\n\\[= \\dfrac{k(k + 2) + 1}{(k + 1)(k + 2)}\\]\n\\[= \\dfrac{k^2 + 2k + 1}{(k + 1)(k + 2)}\\]\nKyun: Pehli \\(k\\) terms ki jagah (A) rakha. Do fractions jama karne ke liye common denominator \\((k + 1)(k + 2)\\) liya; pehle fraction mein \\((k + 2)\\) ki kami thi, is liye uske numerator ko \\((k + 2)\\) se multiply kiya.",
+              "Factorise aur cancel karein\n\\[= \\dfrac{(k + 1)^2}{(k + 1)(k + 2)}\\]\n\\[= \\dfrac{k + 1}{k + 2}\\]\n\\[= 1 - \\dfrac{1}{k + 2} = \\text{R.H.S.}\\]\nKyun: \\(k^2 + 2k + 1\\) perfect square \\((k + 1)^2\\) hai. Upar neeche ek \\((k + 1)\\) cancel ho gaya; yeh jaiz hai kyunke \\(k + 1\\) positive hai, zero nahi.\nDhyan dein: Sirf factors cancel hote hain, terms nahi. \\(\\frac{k^2 + 2k + 1}{\\ldots}\\) mein se seedha \\(k\\) kaatna ghalat hoga; pehle factorise, phir cancel.",
+              "Conclusion\n\\(S(1)\\) sahi hai aur \\(S(k)\\) se \\(S(k + 1)\\) sahi hota hai. Principle of mathematical induction se \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nKyun: Base case aur inductive step dono poore ho gaye.",
+              "Tasdeeq: \\(n = 3\\)\n\\[\\tfrac{1}{2} + \\tfrac{1}{6} + \\tfrac{1}{12} = \\tfrac{6 + 2 + 1}{12} = \\tfrac{3}{4}\\]\n\\[1 - \\tfrac{1}{4} = \\tfrac{3}{4} \\;\\checkmark\\]\nKyun: Dono sides barabar aa gayin. Chhupa raaz yeh hai ke \\(\\frac{1}{n(n + 1)} = \\frac{1}{n} - \\frac{1}{n + 1}\\), is liye sum mein beech ki sab terms cancel ho jati hain."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\frac{1}{1 \\times 2} + \\frac{1}{2 \\times 3} + \\cdots + \\frac{1}{n(n + 1)} = 1 - \\frac{1}{n + 1}\\) har positive integer \\(n\\) ke liye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(vi)",
+            "prompt": "1 (vi) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(r + r^2 + r^3 + \\cdots + r^n = \\frac{r(1 - r^n)}{1 - r},\\ (r \\ne 1)\\)",
+            "explanation": "Yeh G.P. ki pehli \\(n\\) terms ka sum hai jis ki pehli term \\(r\\) aur common ratio bhi \\(r\\) hai. Isay har positive integer \\(n\\) ke liye saabit karna hai.\nShart \\(r \\ne 1\\) kyun? Agar \\(r = 1\\) ho to denominator \\(1 - r = 0\\) ho jayega, aur zero se divide nahi ho sakta.\nPlan: agli term \\(r^{k+1}\\) jama karna, usay bhi \\(1 - r\\) ke upar likhna, aur dekhna ke beech ki powers kaise cancel hoti hain.",
+            "steps": [
+              "Diya gaya hai: \\(S(n): r + r^2 + \\cdots + r^n = \\frac{r(1 - r^n)}{1 - r}\\), \\(r \\ne 1\\).\nSaabit karna hai: \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nTareeqa: Mathematical induction. \\(n\\)th term \\(r^n\\) hai, is liye \\((k + 1)\\)th term \\(r^{k+1}\\) hogi.",
+              "Base case: \\(n = 1\\) rakhein\n\\[\\text{L.H.S.} = r\\]\n\\[\\text{R.H.S.} = \\dfrac{r(1 - r)}{1 - r} = r\\]\nDono barabar, is liye \\(S(1)\\) sahi hai.\nKyun: \\(r \\ne 1\\) di gayi hai, is liye \\(1 - r\\) zero nahi, aur upar neeche se cancel ho sakta hai. Yahi wajah hai ke shart sawal mein likhi gayi hai.",
+              "Induction hypothesis: \\(S(k)\\) ko sahi maan lein\n\\[r + r^2 + \\cdots + r^k = \\dfrac{r(1 - r^k)}{1 - r} \\quad (A)\\]\nKyun: Kisi positive integer \\(k\\) par formula ko sahi farz kiya.",
+              "Target \\(S(k + 1)\\) likhein\n\\[r + r^2 + \\cdots + r^k + r^{k+1}\\]\n\\[= \\dfrac{r(1 - r^{k+1})}{1 - r}\\]\nKyun: \\(n = k + 1\\) rakha; left mein nayi term \\(r^{k+1}\\) aayi aur right side mein power \\(k + 1\\) ho gayi.",
+              "Inductive step: (A) istemal karein\n\\[\\text{L.H.S.} = \\dfrac{r(1 - r^k)}{1 - r} + r^{k+1}\\]\n\\[= \\dfrac{r - r^{k+1} + r^{k+1}(1 - r)}{1 - r}\\]\n\\[= \\dfrac{r - r^{k+1} + r^{k+1} - r^{k+2}}{1 - r}\\]\nKyun: Pehli \\(k\\) terms ki jagah (A) rakha. Phir \\(r^{k+1}\\) ko bhi \\(1 - r\\) ke denominator par laane ke liye uske upar \\((1 - r)\\) se multiply kiya. Law of indices: \\(r \\cdot r^k = r^{k+1}\\) aur \\(r^{k+1} \\cdot r = r^{k+2}\\), kyunke same base par powers jama hoti hain.",
+              "Cancel kar ke \\(r\\) common nikalein\n\\[= \\dfrac{r - r^{k+2}}{1 - r}\\]\n\\[= \\dfrac{r(1 - r^{k+1})}{1 - r} = \\text{R.H.S.}\\]\nKyun: \\(-r^{k+1}\\) aur \\(+r^{k+1}\\) aapas mein cancel ho gaye, yahi is sawal ki khoobsurti hai. Phir \\(r^{k+2} = r \\times r^{k+1}\\), is liye \\(r\\) ko common nikala to bilkul target mil gaya.\nDhyan dein: \\(r^{k+1}(1 - r)\\) kholte waqt doosri term ka minus na bhoolein: \\(-r^{k+2}\\).",
+              "Conclusion\n\\(S(1)\\) sahi hai aur \\(S(k)\\) se \\(S(k + 1)\\) sahi hota hai. Principle of mathematical induction se \\(S(n)\\) har positive integer \\(n\\) (aur har real \\(r \\ne 1\\)) ke liye sahi hai.\nKyun: Induction ki dono sharten poori ho gayin.",
+              "Tasdeeq: \\(r = 2,\\ n = 3\\)\n\\[2 + 4 + 8 = 14\\]\n\\[\\dfrac{2(1 - 8)}{1 - 2} = \\dfrac{-14}{-1} = 14 \\;\\checkmark\\]\nKyun: Ek asaan misaal mein dono sides 14 aayin; negative divided by negative positive hota hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(r + r^2 + \\cdots + r^n = \\frac{r(1 - r^n)}{1 - r}\\) har positive integer \\(n\\) ke liye \\((r \\ne 1)\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(vii)",
+            "prompt": "1 (vii) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(a + (a + d) + (a + 2d) + \\cdots + [a + (n - 1)d] = \\frac{n}{2}[2a + (n - 1)d]\\)",
+            "explanation": "Yeh A.P. (arithmetic progression, jis mein har term pichhli se \\(d\\) zyada hoti hai) ke \\(n\\) terms ke sum ka mashhoor formula hai: pehli term \\(a\\), common difference \\(d\\).\nIs formula ko Unit 6 mein hum ne doosre tareeqe se nikala tha; ab isay induction se har positive integer \\(n\\) ke liye saabit karna hai.\nPlan: agli term \\(a + kd\\) jama karna, sab kuch 2 ke denominator par lana, aur \\(a\\) wali terms aur \\(d\\) wali terms ko alag alag group karna.",
+            "steps": [
+              "Diya gaya hai: \\(S(n): a + (a + d) + \\cdots + [a + (n - 1)d] = \\frac{n}{2}[2a + (n - 1)d]\\).\nSaabit karna hai: \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nTareeqa: Mathematical induction. \\(n\\)th term \\(a + (n - 1)d\\) hai; \\(n = k + 1\\) rakhein to \\((k + 1)\\)th term \\(a + kd\\) banti hai.",
+              "Base case: \\(n = 1\\) rakhein\n\\[\\text{L.H.S.} = a\\]\n\\[\\text{R.H.S.} = \\tfrac{1}{2}[2a + 0] = a\\]\nDono barabar, is liye \\(S(1)\\) sahi hai.\nKyun: \\(n = 1\\) par \\((n - 1)d = 0\\), is liye right side sirf \\(\\frac{1}{2} \\times 2a = a\\) reh jata hai.",
+              "Induction hypothesis: \\(S(k)\\) ko sahi maan lein\n\\[a + (a + d) + \\cdots + [a + (k - 1)d]\\]\n\\[= \\dfrac{k}{2}[2a + (k - 1)d] \\quad (A)\\]\nKyun: Kisi positive integer \\(k\\) par formula ko sahi farz kiya.",
+              "Target \\(S(k + 1)\\) likhein\n\\[a + \\cdots + [a + (k - 1)d] + (a + kd)\\]\n\\[= \\dfrac{k + 1}{2}[2a + kd]\\]\nKyun: \\(n = k + 1\\) rakha, to \\((n - 1)d\\) ban gaya \\(kd\\). Humein yahi shakal chahiye: bahar \\(\\frac{k + 1}{2}\\) aur bracket mein \\(2a + kd\\).",
+              "Inductive step: (A) istemal karein\n\\[\\text{L.H.S.} = \\dfrac{k}{2}[2a + (k - 1)d] + a + kd\\]\n\\[= \\dfrac{2ak + k(k - 1)d + 2a + 2kd}{2}\\]\nKyun: Pehli \\(k\\) terms ki jagah (A) rakha. Phir sab ko ek fraction banane ke liye \\(a + kd\\) ko \\(\\frac{2a + 2kd}{2}\\) likha (upar neeche 2 se multiply), aur \\(\\frac{k}{2}\\) ko bracket mein multiply kar diya.",
+              "\\(a\\) wali aur \\(d\\) wali terms ko group karein\n\\[= \\dfrac{2a(k + 1) + d(k^2 - k + 2k)}{2}\\]\n\\[= \\dfrac{2a(k + 1) + d\\,k(k + 1)}{2}\\]\n\\[= \\dfrac{k + 1}{2}[2a + kd] = \\text{R.H.S.}\\]\nKyun: \\(a\\) wali terms: \\(2ak + 2a = 2a(k + 1)\\). \\(d\\) wali terms: \\(k^2 - k + 2k = k^2 + k = k(k + 1)\\). Ab dono groups mein \\((k + 1)\\) common hai, usay bahar nikala to target ban gaya.\nDhyan dein: \\(k(k - 1)d\\) kholte waqt \\(-kd\\) aata hai; isay \\(2kd\\) ke saath jorein to \\(+kd\\) bachta hai, \\(3kd\\) nahi.",
+              "Conclusion\n\\(S(1)\\) sahi hai aur \\(S(k)\\) se \\(S(k + 1)\\) sahi hota hai. Principle of mathematical induction se \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nKyun: Base case aur inductive step dono poore ho gaye.",
+              "Tasdeeq: \\(a = 2,\\ d = 3,\\ n = 4\\)\n\\[2 + 5 + 8 + 11 = 26\\]\n\\[\\tfrac{4}{2}[4 + 9] = 2 \\times 13 = 26 \\;\\checkmark\\]\nKyun: Asal A.P. lekar dono taraf 26 aaya, is liye formula theek hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(a + (a + d) + \\cdots + [a + (n - 1)d] = \\frac{n}{2}[2a + (n - 1)d]\\) har positive integer \\(n\\) ke liye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(viii)",
+            "prompt": "1 (viii) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(a_n = a_1 + (n - 1)d\\) when \\(a_1,\\ a_1 + d,\\ a_1 + 2d, \\ldots\\) form an A.P.",
+            "explanation": "Is part mein left side koi sum nahi, balke A.P. ki \\(n\\)th term (general term) hai.\nHumein sirf ek hi baat istemal karni hai: A.P. ka rule, yani har term pichhli term mein \\(d\\) jama karne se banti hai: \\(a_{k+1} = a_k + d\\).\nPlan: base case, phir \\(a_k = a_1 + (k - 1)d\\) maan kar A.P. ka rule ek dafa lagana. Yeh Exercise ka sab se chhota proof hai, lekin structure wohi hai.",
+            "steps": [
+              "Diya gaya hai: A.P. \\(a_1,\\ a_1 + d,\\ a_1 + 2d, \\ldots\\), yani har \\(m\\) ke liye \\(a_{m+1} = a_m + d\\).\nSaabit karna hai: \\(S(n): a_n = a_1 + (n - 1)d\\) har positive integer \\(n\\) ke liye.\nTareeqa: Mathematical induction; inductive step mein A.P. ka rule lagega.",
+              "Base case: \\(n = 1\\) rakhein\n\\[\\text{R.H.S.} = a_1 + (1 - 1)d = a_1\\]\n\\[= \\text{L.H.S.}\\]\nIs liye \\(S(1)\\) sahi hai.\nKyun: \\((1 - 1)d = 0 \\times d = 0\\), to right side sirf \\(a_1\\) reh gaya, jo pehli term hi hai.",
+              "Induction hypothesis: \\(S(k)\\) ko sahi maan lein\n\\[a_k = a_1 + (k - 1)d \\quad (A)\\]\nKyun: Kisi positive integer \\(k\\) par formula ko sahi farz kiya.",
+              "Target \\(S(k + 1)\\) likhein\n\\[a_{k+1} = a_1 + kd\\]\nKyun: \\(n = k + 1\\) rakha: \\((k + 1 - 1)d = kd\\).",
+              "Inductive step: A.P. ka rule aur (A)\n\\[a_{k+1} = a_k + d\\]\n\\[= a_1 + (k - 1)d + d\\]\n\\[= a_1 + kd = \\text{R.H.S.}\\]\nKyun: Pehli line A.P. ki tareef (definition) hai: agli term = pichhli term + \\(d\\). Doosri line mein (A) se \\(a_k\\) ki value rakhi. Teesri line mein \\((k - 1)d + d = kd - d + d = kd\\).\nDhyan dein: Kuch students \\(a_{k+1}\\) ki value seedha formula se likh dete hain; yeh woh cheez hai jo saabit karni hai, is liye A.P. ke rule se shuru karna zaroori hai.",
+              "Conclusion\n\\(S(1)\\) sahi hai aur \\(S(k)\\) se \\(S(k + 1)\\) sahi hota hai. Principle of mathematical induction se \\(a_n = a_1 + (n - 1)d\\) har positive integer \\(n\\) ke liye sahi hai.\nKyun: Induction ki dono sharten poori ho gayin.",
+              "Tasdeeq: A.P. \\(5, 8, 11, 14, \\ldots\\)\n\\[a_4 = 5 + 3 \\times 3 = 14 \\;\\checkmark\\]\nKyun: List ki chauthi term waqai 14 hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(a_n = a_1 + (n - 1)d\\) har positive integer \\(n\\) ke liye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ix)",
+            "prompt": "1 (ix) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(a_n = a_1 r^{n-1}\\) when \\(a_1,\\ a_1 r,\\ a_1 r^2, \\ldots\\) form a G.P.",
+            "explanation": "Yeh part (viii) jaisa hi hai, bas A.P. ki jagah G.P. hai: left side G.P. ki \\(n\\)th term hai.\nG.P. ka rule: har term pichhli term ko common ratio \\(r\\) se multiply karne se banti hai: \\(a_{k+1} = a_k r\\). A.P. mein \"jama\" tha, yahan \"zarb (multiply)\" hai.\nPlan: base case, phir \\(a_k = a_1 r^{k-1}\\) maan kar G.P. ka rule ek dafa lagana.",
+            "steps": [
+              "Diya gaya hai: G.P. \\(a_1,\\ a_1 r,\\ a_1 r^2, \\ldots\\), yani har \\(m\\) ke liye \\(a_{m+1} = a_m r\\).\nSaabit karna hai: \\(S(n): a_n = a_1 r^{n-1}\\) har positive integer \\(n\\) ke liye.\nTareeqa: Mathematical induction; inductive step mein G.P. ka rule lagega.",
+              "Base case: \\(n = 1\\) rakhein\n\\[\\text{R.H.S.} = a_1 r^0 = a_1\\]\n\\[= \\text{L.H.S.}\\]\nIs liye \\(S(1)\\) sahi hai.\nKyun: Kisi bhi non-zero number ki power 0 ka jawab 1 hota hai, aur G.P. mein \\(r \\ne 0\\) hota hai. Is liye \\(a_1 r^0 = a_1\\).",
+              "Induction hypothesis: \\(S(k)\\) ko sahi maan lein\n\\[a_k = a_1 r^{k-1} \\quad (A)\\]\nKyun: Kisi positive integer \\(k\\) par formula ko sahi farz kiya.",
+              "Target \\(S(k + 1)\\) likhein\n\\[a_{k+1} = a_1 r^k\\]\nKyun: \\(n = k + 1\\) rakha: power \\((k + 1) - 1 = k\\) ban gayi.",
+              "Inductive step: G.P. ka rule aur (A)\n\\[a_{k+1} = a_k \\cdot r\\]\n\\[= a_1 r^{k-1} \\cdot r\\]\n\\[= a_1 r^k = \\text{R.H.S.}\\]\nKyun: Pehli line G.P. ki tareef hai: agli term = pichhli term \\(\\times r\\). Doosri line mein (A) se \\(a_k\\) rakha. Teesri line mein law of indices: \\(r^{k-1} \\times r^1 = r^{k-1+1} = r^k\\).\nDhyan dein: \\(r^{k-1} \\cdot r\\) ko \\(r^{k-1}\\) hi chhor dena ya \\(r^{2k}\\) likhna aam ghalti hai; powers jama hoti hain, multiply nahi.",
+              "Conclusion\n\\(S(1)\\) sahi hai aur \\(S(k)\\) se \\(S(k + 1)\\) sahi hota hai. Principle of mathematical induction se \\(a_n = a_1 r^{n-1}\\) har positive integer \\(n\\) ke liye sahi hai.\nKyun: Induction ki dono sharten poori ho gayin.",
+              "Tasdeeq: G.P. \\(3, 6, 12, 24, \\ldots\\)\n\\[a_4 = 3 \\times 2^3 = 24 \\;\\checkmark\\]\nKyun: List ki chauthi term waqai 24 hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(a_n = a_1 r^{n-1}\\) har positive integer \\(n\\) ke liye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(x)",
+            "prompt": "1 (x) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(\\binom{3}{3} + \\binom{4}{3} + \\binom{5}{3} + \\cdots + \\binom{n + 2}{3} = \\binom{n + 3}{4}\\)",
+            "explanation": "Is sum ki terms combinations hain: upar wala number \\(3, 4, 5, \\ldots, n + 2\\) barhta jata hai aur neeche wala hamesha 3 rehta hai.\nIsay har positive integer \\(n\\) ke liye induction se saabit karna hai.\nPlan: agli term \\(\\binom{k + 3}{3}\\) jama karna, aur do combinations ko Pascal's rule \\(\\binom{m}{r} + \\binom{m}{r - 1} = \\binom{m + 1}{r}\\) se jor kar ek bana dena. Pascal's rule ko Unit 7 aur Pascal's triangle se yaad kijiye: upar ki do saath wali values jama ho kar neeche wali banti hai.",
+            "steps": [
+              "Diya gaya hai: \\(S(n): \\binom{3}{3} + \\binom{4}{3} + \\cdots + \\binom{n + 2}{3} = \\binom{n + 3}{4}\\).\nSaabit karna hai: \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nTareeqa: Mathematical induction. \\(n\\)th term \\(\\binom{n + 2}{3}\\) hai, is liye \\((k + 1)\\)th term \\(\\binom{k + 3}{3}\\) hogi. Inductive step mein Pascal's rule lagega.",
+              "Base case: \\(n = 1\\) rakhein\n\\[\\text{L.H.S.} = \\tbinom{3}{3} = 1\\]\n\\[\\text{R.H.S.} = \\tbinom{4}{4} = 1\\]\nDono barabar, is liye \\(S(1)\\) sahi hai.\nKyun: \\(\\binom{m}{m} = 1\\), kyunke \\(m\\) cheezon mein se saari \\(m\\) chunne ka sirf ek hi tareeqa hai.",
+              "Induction hypothesis: \\(S(k)\\) ko sahi maan lein\n\\[\\tbinom{3}{3} + \\cdots + \\tbinom{k + 2}{3} = \\tbinom{k + 3}{4} \\quad (A)\\]\nKyun: Kisi positive integer \\(k\\) par formula ko sahi farz kiya.",
+              "Target \\(S(k + 1)\\) likhein\n\\[\\tbinom{3}{3} + \\cdots + \\tbinom{k + 2}{3} + \\tbinom{k + 3}{3}\\]\n\\[= \\tbinom{k + 4}{4}\\]\nKyun: \\(n = k + 1\\) rakha: \\(n + 2\\) ban gaya \\(k + 3\\), aur \\(n + 3\\) ban gaya \\(k + 4\\).",
+              "Inductive step: (A), phir Pascal's rule\n\\[\\text{L.H.S.} = \\tbinom{k + 3}{4} + \\tbinom{k + 3}{3}\\]\n\\[= \\tbinom{k + 4}{4} = \\text{R.H.S.}\\]\nKyun: Pehli \\(k\\) terms ki jagah (A) rakha. Ab dono combinations ka upar wala number ek hi hai \\((k + 3)\\), aur neeche wale 4 aur 3 hain, yani lagatar. Pascal's rule \\(\\binom{m}{r} + \\binom{m}{r - 1} = \\binom{m + 1}{r}\\) mein \\(m = k + 3\\), \\(r = 4\\) rakhein to jawab \\(\\binom{k + 4}{4}\\).\nDhyan dein: Pascal's rule mein neeche wala number bara wala hi rehta hai (4), aur upar wala ek barhta hai.",
+              "Factorials se Pascal wala qadam check karein\n\\[\\tbinom{k + 3}{4} + \\tbinom{k + 3}{3}\\]\n\\[= \\dfrac{(k + 3)!}{4!\\,(k - 1)!} + \\dfrac{(k + 3)!}{3!\\,k!}\\]\n\\[= \\dfrac{(k + 3)!}{4!\\,k!}[k + 4]\\]\n\\[= \\dfrac{(k + 4)!}{4!\\,k!} = \\tbinom{k + 4}{4}\\]\nKyun: Agar Pascal's rule yaad na ho to yeh tareeqa kaam aata hai. \\(\\binom{m}{r} = \\frac{m!}{r!(m - r)!}\\). Common denominator \\(4!\\,k!\\) banane ke liye pehle fraction ko \\(\\frac{k}{k}\\) se multiply kiya (kyunke \\(k! = k \\times (k - 1)!\\)) aur doosre ko \\(\\frac{4}{4}\\) se (kyunke \\(4! = 4 \\times 3!\\)). Numerators: \\(k + 4\\). Aakhir mein \\((k + 4) \\times (k + 3)! = (k + 4)!\\).",
+              "Conclusion\n\\(S(1)\\) sahi hai aur \\(S(k)\\) se \\(S(k + 1)\\) sahi hota hai. Principle of mathematical induction se \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nKyun: Induction ki dono sharten poori ho gayin.",
+              "Tasdeeq: \\(n = 3\\)\n\\[\\tbinom{3}{3} + \\tbinom{4}{3} + \\tbinom{5}{3} = 1 + 4 + 10 = 15\\]\n\\[\\tbinom{6}{4} = 15 \\;\\checkmark\\]\nKyun: Dono taraf 15 aaya. Pascal's triangle mein yeh \"hockey stick\" pattern kehlata hai: ek tirchhi line ke numbers ka jama neeche mur kar agli value deta hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\binom{3}{3} + \\binom{4}{3} + \\cdots + \\binom{n + 2}{3} = \\binom{n + 3}{4}\\) har positive integer \\(n\\) ke liye."
+          }
+        ]
+      }
+    }
+  ]
+}

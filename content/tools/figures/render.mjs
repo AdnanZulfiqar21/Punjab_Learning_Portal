@@ -27,7 +27,7 @@ const THREE_PATH = join(root, "apps", "web", "node_modules", "three", "build", "
 // Subject (argv[3], default biology) and grade (argv[4], 11 or 12, default 11): figures live under
 // content/lessons/<xi|xii>/<subject>/figures and only the svg/ files whose id starts with the book's prefix
 // (c11-bio-, c12-chem-, ...) are rendered. Class XI and XII books never share a folder or prefix.
-const SUBJECTS = { biology: { code: "bio", name: "Biology" }, chemistry: { code: "chem", name: "Chemistry" }, physics: { code: "phy", name: "Physics" }, computer_science: { code: "cs", name: "Computer Science" } };
+const SUBJECTS = { biology: { code: "bio", name: "Biology" }, chemistry: { code: "chem", name: "Chemistry" }, physics: { code: "phy", name: "Physics" }, computer_science: { code: "cs", name: "Computer Science" }, mathematics: { code: "math", name: "Mathematics" } };
 const GRADES = { 11: { dir: "xi", label: "XI" }, 12: { dir: "xii", label: "XII" } };
 const subject = process.argv[3] ?? "biology";
 const grade = process.argv[4] ?? "11";

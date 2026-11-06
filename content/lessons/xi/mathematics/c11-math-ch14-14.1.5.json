@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-14.1.5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/14.1.6",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 267,
+          "pdf_to": 268,
+          "note": "Book p. 262-263: heading printed 14.1.6; i, j, k, [x,y,z] = xi + yj + zk, Unit Vector, u + v in i, j, k, Examples 2-3, figure. Book error: Ex 3 solution prints u = 4i+6j+2k for v. Teaching notes ours."
+        }
+      ],
+      "title": "14.1.5 Components of a Vector",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note",
+            "text": "The textbook prints this heading as 14.1.6 (Book# 14.1.6). The book has no 14.1.1, so the portal numbers the sub-headings of 14.1 in sequence as 14.1.1 to 14.1.8; 14.1.5 here is the book's 14.1.6."
+          },
+          {
+            "type": "paragraph",
+            "text": "As in plane, we introduce three special vectors \\(\\underline{i} = [1, 0, 0]\\), \\(\\underline{j} = [0, 1, 0]\\) and \\(\\underline{k} = [0, 0, 1]\\) in \\(R^{3}\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch14-fig-14-1-unit-vectors-ijk",
+            "alt": "Axes x, y, z from O. Short blue arrows i, j and k go from O to the points (1, 0, 0) on the x-axis, (0, 1, 0) on the y-axis and (0, 0, 1) on the z-axis.",
+            "caption": "Unit vectors i, j, k along the x-, y- and z-axes (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "As magnitude of \\(\\underline{i} = \\sqrt{1^{2} + 0^{2} + 0^{2}} = 1\\), magnitude of \\(\\underline{j} = \\sqrt{0^{2} + 1^{2} + 0^{2}} = 1\\) and magnitude of \\(\\underline{k} = \\sqrt{0^{2} + 0^{2} + 1^{2}} = 1\\). So, \\(\\underline{i}\\), \\(\\underline{j}\\) and \\(\\underline{k}\\) are called unit vectors along x-axis, y-axis and z-axis respectively. Using the definition of addition and scalar multiplication, the vector \\([x, y, z]\\) can be written as:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\underline{u} = [x, y, z] \\\\ = [x, 0, 0] + [0, y, 0] + [0, 0, z]",
+            "text_alt": "u equals x, y, z equals x,0,0 plus 0,y,0 plus 0,0,z"
+          },
+          {
+            "type": "equation",
+            "latex": "= x[1, 0, 0] + y[0, 1, 0] + z[0, 0, 1] \\\\ = x\\underline{i} + y\\underline{j} + z\\underline{k}",
+            "text_alt": "equals x times i plus y times j plus z times k"
+          },
+          {
+            "type": "paragraph",
+            "text": "Thus, each vector \\([x, y, z]\\) in \\(R^{3}\\) can be uniquely represented by \\(x\\underline{i} + y\\underline{j} + z\\underline{k}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "So \\([3, -2, 5] = 3\\underline{i} - 2\\underline{j} + 5\\underline{k}\\), and \\(2\\underline{i} - \\underline{k} = [2, 0, -1]\\): a missing unit vector means that component is 0.\nThink of \\(\\underline{i}\\), \\(\\underline{j}\\), \\(\\underline{k}\\) as one step east, one step north and one step up; \\(x\\underline{i} + y\\underline{j} + z\\underline{k}\\) says how many steps of each kind to take. \\(x\\), \\(y\\), \\(z\\) are the components."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Unit Vector"
+          },
+          {
+            "type": "paragraph",
+            "text": "A unit vector is defined as a vector whose magnitude is unity. In three-dimensional space the unit vector of the vector \\(\\underline{u} = x\\underline{i} + y\\underline{j} + z\\underline{k}\\) is written as \\(\\hat{u}\\) (read as u hat) and is defined by"
+          },
+          {
+            "type": "equation",
+            "latex": "\\hat{u} = \\dfrac{\\underline{u}}{|\\underline{u}|}",
+            "text_alt": "u hat equals u over magnitude of u"
+          },
+          {
+            "type": "equation",
+            "latex": "\\hat{u} = \\dfrac{x}{\\sqrt{x^{2}+y^{2}+z^{2}}}\\underline{i} + \\dfrac{y}{\\sqrt{x^{2}+y^{2}+z^{2}}}\\underline{j} \\\\ + \\dfrac{z}{\\sqrt{x^{2}+y^{2}+z^{2}}}\\underline{k}",
+            "text_alt": "u hat equals x over root of x squared plus y squared plus z squared times i, plus the same with y times j, plus the same with z times k"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does dividing by \\(|\\underline{u}|\\) give length 1? Multiplying a vector by a positive number \\(c\\) multiplies its length by \\(c\\). With \\(c = \\frac{1}{|\\underline{u}|}\\) the new length is \\(|\\underline{u}| \\times \\frac{1}{|\\underline{u}|} = 1\\), and the direction is unchanged.\nUse: when a question asks for a vector of length 5 in the direction of \\(\\underline{u}\\), the answer is \\(5\\hat{u}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "In terms of unit vectors \\(\\underline{i}\\), \\(\\underline{j}\\) and \\(\\underline{k}\\), the sum \\(\\underline{u} + \\underline{v}\\) of two vectors \\(\\underline{u} = [x_{1}, y_{1}, z_{1}]\\) and \\(\\underline{v} = [x_{2}, y_{2}, z_{2}]\\) is written as:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\underline{u} + \\underline{v} = [x_{1} + x_{2},\\ y_{1} + y_{2},\\ z_{1} + z_{2}]",
+            "text_alt": "u plus v equals x1 plus x2, y1 plus y2, z1 plus z2"
+          },
+          {
+            "type": "equation",
+            "latex": "= (x_{1} + x_{2})\\underline{i} + (y_{1} + y_{2})\\underline{j} \\\\ + (z_{1} + z_{2})\\underline{k}",
+            "text_alt": "equals x1 plus x2 times i plus y1 plus y2 times j plus z1 plus z2 times k"
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Find the unit vector of \\(\\underline{u} = 2\\underline{i} + 5\\underline{j} - \\underline{k}\\).",
+            "steps": [
+              "Given: \\(\\underline{u} = 2\\underline{i} + 5\\underline{j} - \\underline{k}\\), that is \\([2, 5, -1]\\).\nTo find: the unit vector \\(\\hat{u}\\) in the direction of \\(\\underline{u}\\).\nMethod: \\(\\hat{u} = \\dfrac{\\underline{u}}{|\\underline{u}|}\\); dividing a vector by its own length keeps the direction and makes the length 1.",
+              "Find the magnitude\n\\[|\\underline{u}| = \\sqrt{(2)^{2} + (5)^{2} + (-1)^{2}}\\]\n\\[= \\sqrt{4 + 25 + 1} = \\sqrt{30}\\]\nWhy: the components are the coefficients of \\(\\underline{i}\\), \\(\\underline{j}\\), \\(\\underline{k}\\); \\(-\\underline{k}\\) means the z-component is \\(-1\\).",
+              "Divide by the magnitude\n\\[\\hat{u} = \\dfrac{\\underline{u}}{|\\underline{u}|} = \\dfrac{2\\underline{i} + 5\\underline{j} - \\underline{k}}{\\sqrt{30}}\\]\n\\[= \\dfrac{1}{\\sqrt{30}}(2\\underline{i} + 5\\underline{j} - \\underline{k})\\]\nWhy: multiplying by the positive number \\(\\frac{1}{\\sqrt{30}}\\) does not change the direction.",
+              "Check:\n\\[|\\hat{u}|^{2} = \\dfrac{4}{30} + \\dfrac{25}{30} + \\dfrac{1}{30} = \\dfrac{30}{30} = 1\\]\nSo \\(|\\hat{u}| = 1\\): it is a unit vector."
+            ],
+            "answer": "\\(\\hat{u} = \\dfrac{1}{\\sqrt{30}}(2\\underline{i} + 5\\underline{j} - \\underline{k})\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "If \\(\\underline{u} = 2\\underline{i} + 3\\underline{j} + \\underline{k}\\), \\(\\underline{v} = 4\\underline{i} + 6\\underline{j} + 2\\underline{k}\\) and \\(\\underline{w} = -6\\underline{i} - 9\\underline{j} - 3\\underline{k}\\), then show that \\(\\underline{u}\\), \\(\\underline{v}\\) and \\(\\underline{w}\\) are parallel to each other.",
+            "steps": [
+              "Given: \\(\\underline{u} = 2\\underline{i} + 3\\underline{j} + \\underline{k}\\), \\(\\underline{v} = 4\\underline{i} + 6\\underline{j} + 2\\underline{k}\\), \\(\\underline{w} = -6\\underline{i} - 9\\underline{j} - 3\\underline{k}\\).\nTo prove: the three vectors are parallel.\nMethod: two vectors are parallel when one is a non-zero scalar multiple of the other. So we try to write \\(\\underline{v}\\) and \\(\\underline{w}\\) as multiples of \\(\\underline{u}\\).",
+              "Write \\(\\underline{v}\\) in terms of \\(\\underline{u}\\) (the book's first line prints \\(\\underline{u} = 4\\underline{i} + 6\\underline{j} + 2\\underline{k}\\); it means \\(\\underline{v}\\))\n\\[\\underline{v} = 4\\underline{i} + 6\\underline{j} + 2\\underline{k}\\]\n\\[= 2(2\\underline{i} + 3\\underline{j} + \\underline{k}) = 2\\underline{u}\\]\nWhy: every coefficient of \\(\\underline{v}\\) is twice that of \\(\\underline{u}\\), so 2 can be taken out as a common factor.",
+              "Conclusion for \\(\\underline{u}\\) and \\(\\underline{v}\\)\n\\[\\underline{v} = 2\\underline{u}\\]\nSo \\(\\underline{u}\\) and \\(\\underline{v}\\) are parallel (same direction, since \\(2 > 0\\)).\nWhy: definition of parallel vectors.",
+              "Write \\(\\underline{w}\\) in terms of \\(\\underline{u}\\)\n\\[\\underline{w} = -6\\underline{i} - 9\\underline{j} - 3\\underline{k}\\]\n\\[= -3(2\\underline{i} + 3\\underline{j} + \\underline{k}) = -3\\underline{u}\\]\nSo \\(\\underline{u}\\) and \\(\\underline{w}\\) are parallel (opposite direction, since \\(-3 < 0\\)).\nWhy: every coefficient of \\(\\underline{w}\\) is \\(-3\\) times that of \\(\\underline{u}\\).",
+              "Hence\nSince \\(\\underline{v}\\) and \\(\\underline{w}\\) are both multiples of \\(\\underline{u}\\), the three vectors \\(\\underline{u}\\), \\(\\underline{v}\\) and \\(\\underline{w}\\) are parallel to each other.\nWhy: \\(\\underline{w} = -3\\underline{u} = -\\frac{3}{2}\\underline{v}\\), so \\(\\underline{v}\\) and \\(\\underline{w}\\) are also multiples of each other.",
+              "Check: ratios of components.\n\\(\\underline{v}\\) to \\(\\underline{u}\\): \\(\\frac{4}{2} = \\frac{6}{3} = \\frac{2}{1} = 2\\).\n\\(\\underline{w}\\) to \\(\\underline{u}\\): \\(\\frac{-6}{2} = \\frac{-9}{3} = \\frac{-3}{1} = -3\\).\nAll ratios equal in each case."
+            ],
+            "answer": "\\(\\underline{v} = 2\\underline{u}\\) and \\(\\underline{w} = -3\\underline{u}\\), so \\(\\underline{u}\\), \\(\\underline{v}\\) and \\(\\underline{w}\\) are parallel to each other.",
+            "book_errors": [
+              "\\(\\underline{u} = 4\\underline{i} + 6\\underline{j} + 2\\underline{k}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the first line of the solution of Example 3 the book prints \\(\\underline{u} = 4\\underline{i} + 6\\underline{j} + 2\\underline{k} = 2(2\\underline{i} + 3\\underline{j} + \\underline{k})\\). The vector \\(4\\underline{i} + 6\\underline{j} + 2\\underline{k}\\) is \\(\\underline{v}\\), not \\(\\underline{u}\\); the line should read \\(\\underline{v} = 4\\underline{i} + 6\\underline{j} + 2\\underline{k} = 2(2\\underline{i} + 3\\underline{j} + \\underline{k})\\), which gives \\(\\underline{v} = 2\\underline{u}\\) as the book then states."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "\\(\\underline{i} = [1, 0, 0]\\), \\(\\underline{j} = [0, 1, 0]\\), \\(\\underline{k} = [0, 0, 1]\\) are unit vectors along the axes.\n\\([x, y, z] = x\\underline{i} + y\\underline{j} + z\\underline{k}\\); the coefficients are the components.\nUnit vector: \\(\\hat{u} = \\dfrac{\\underline{u}}{|\\underline{u}|}\\), length 1, same direction as \\(\\underline{u}\\).\nParallel test: one vector is a non-zero multiple of the other."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Reading \\(-\\underline{k}\\) as having no z-component: it is \\(-1\\).\nForgetting to divide every component by \\(|\\underline{u}|\\) in a unit vector.\nThinking a negative multiple is not parallel: \\(\\underline{w} = -3\\underline{u}\\) is parallel to \\(\\underline{u}\\), only in the opposite direction."
+          }
+        ]
+      }
+    }
+  ]
+}

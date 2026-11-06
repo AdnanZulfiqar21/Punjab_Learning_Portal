@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-4-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-4-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 143,
+          "pdf_to": 143,
+          "note": "Exercise 7.4, Question 4: book p.138 (PDF 143). Answer key PDF 306 (book p.301). Solution book PDF 675-704 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4 Find how many ways there are to choose vowel words from the letter of English alphabet?",
+            "explanation": "The printed wording is unclear. The answer key gives 65,780, which is \\({}^{26}C_{5}\\): choose 5 letters (as many as there are vowels) out of the 26 letters.\nWe must count these selections.\nPlan: order does not matter, so use \\({}^{26}C_{5}\\).",
+            "steps": [
+              "Given: 26 letters A to Z; the English alphabet has 5 vowels (A, E, I, O, U), so 5 letters are chosen.\nTo find: the number of ways to choose 5 letters out of 26.\nMethod: only which letters are chosen matters, not the order of picking, so use \\({}^{n}C_{r}\\) with \\(n = 26\\), \\(r = 5\\).",
+              "Write the combination\n\\[{}^{26}C_{5} = \\dfrac{26!}{5!\\,21!}\\]\n\\[= \\dfrac{26 \\cdot 25 \\cdot 24 \\cdot 23 \\cdot 22}{5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}\\]\nWhy: \\(26!\\) opened down to \\(21!\\) cancels the \\(21!\\) below, leaving 5 factors on top.",
+              "Cancel before multiplying\n\\[\\dfrac{25}{5} = 5,\\quad \\dfrac{24}{4 \\cdot 3 \\cdot 2} = 1\\]\n\\[= 26 \\cdot 5 \\cdot 23 \\cdot 22\\]\nWhy: Cancelling first keeps the numbers small.",
+              "Multiply\n\\[26 \\cdot 5 = 130,\\quad 130 \\cdot 23 = 2990\\]\n\\[2990 \\cdot 22 = 65780\\]\nWhy: Multiply two at a time.",
+              "Check\n\\[26 \\cdot 25 \\cdot 24 \\cdot 23 \\cdot 22 = 7893600\\]\n\\[7893600 \\div 120 = 65780 \\;\\checkmark\\]\nWhy: The long way gives the same answer, and it matches the answer key."
+            ],
+            "final_answer": "65,780 ways"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The printed question ('choose vowel words from the letter of English alphabet') is unclear. The answer key gives 65,780, which equals \\({}^{26}C_{5}\\), so the intended question is: in how many ways can 5 letters (as many as the vowels) be chosen from the 26 letters of the English alphabet? We solved that question."
+          }
+        ]
+      }
+    }
+  ]
+}

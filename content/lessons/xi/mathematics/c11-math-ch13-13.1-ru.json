@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-13.1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/13.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 242,
+          "pdf_to": 243,
+          "note": "Book p. 237-238: unit introduction, 13.1 secant (1) with Figure 13.1, successive secants (Figure 13.2), tangent slope (2), Example 1 with its graph. Book errors: 'scent line' (x2), Leibniz's name. Road map, teaching notes, Key points, mistakes are ours."
+        }
+      ],
+      "title": "13.1 Tangent to a Curve at a Point (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH13-13.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Introduction"
+          },
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum bachon! Aaj hum Unit 13 shuru kar rahe hain: Differentiation. Yeh calculus ka woh hissa hai jo tabdeeli (change) ki raftaar naapta hai. Pichhle unit mein aap ne limits seekhi theen; ab woh limits asal kaam mein aayengi, kyun ke har derivative darasal ek limit hi hai. Ghabraiye nahin, hum har qadam aahista aahista aur misaalon ke saath chalenge."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab is unit ka taaruf (introduction) yun karwati hai: qadeem Yunani (ancient Greeks) area, volume aur centroid (kisi shakal ka markazi point) jaise tasawwurat jaante the, jin ka taalluq integral calculus se hai. Phir satarhween sadi (seventeenth century) mein do bade mathematicians, England ke Sir Isaac Newton (1642 – 1727) aur Germany ke Gottfried Wilhelm Leibniz (1646 – 1716), ne instantaneous rate of change (kisi ek lamhe par tabdeeli ki raftaar) ke masle par kaam kiya. Dono ne alag alag, ek doosre se aazaad reh kar, differential calculus ijaad kiya. Calculus banne ke baad maths tabdeeli ki raftaar naapne aur is kainaat (physical universe) ko bayan karne ka ek taqatwar auzaar (tool) ban gayi."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein German mathematician ka naam \"Gottfried Whilhe G. W. Leibniz\" chhapa hai. Sahi naam Gottfried Wilhelm Leibniz (G. W. Leibniz) hai. Upar hum ne sahi naam likha hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Differential calculus asal mein ek hi sawal poochta hai: koi cheez is waqt, isi lamhe, kitni tezi se badal rahi hai?\nGaari ka speedometer dekhiye. Woh poore safar ki average speed nahin batata, balke isi lamhe ki speed batata hai. Isi tarah doctor dekhta hai ke bukhar kitni tezi se chadh raha hai, dukaandaar dekhta hai ke ek aur cheez bechne se munafa (profit) kitna badhta hai, engineer dekhta hai ke kisi beam par dabao (stress) kitni tezi se badh raha hai. In sab sawalon ka jawab instantaneous rate of change hai.\nGraph ki zabaan mein yahi sawal yeh ban jata hai: curve kisi ek point par kitna dhalwan (steep) hai? Is ka jawab hai us point par tangent line ka slope. Yeh section isi khayal ko banata hai, aur 13.2 mein isi cheez ko naam milega: derivative."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Unit ka hissa",
+              "Aap kya seekhenge"
+            ],
+            "rows": [
+              [
+                "13.1 Tangent to a Curve at a Point",
+                "secant line, tangent line, aur tangent ka slope ek limit ki shakal mein"
+              ],
+              [
+                "13.2 Derivative as the Limit of a Difference Quotient",
+                "average aur instantaneous rate of change, \\(f'(x)\\) ki definition, velocity bataur derivative"
+              ],
+              [
+                "13.3 Process of Finding Derivative by Definition",
+                "notations \\(f'(x)\\), \\(\\frac{dy}{dx}\\), \\(y'\\); first principle se derivative ke chaar steps"
+              ],
+              [
+                "13.4 Derivative of \\(x^{n}\\)",
+                "power rule"
+              ],
+              [
+                "13.5 Derivatives and Continuity",
+                "differentiable function continuous hota hai; \\(0\\) par \\(|x|\\)"
+              ],
+              [
+                "13.6 Theorems on Differentiation",
+                "constant, constant multiple, sum, difference, product aur quotient rules"
+              ],
+              [
+                "13.7 Application of Differentiation",
+                "munafa (profit), harkat (motion), tameer (construction), sarmaya kaari aur stress ke sawal"
+              ]
+            ],
+            "caption": "Unit 13 ka hamara naqsha (kitab mein nahin)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "The secant line PQ"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab section 13.1 ki baat karte hain. Farz karein \\(y = f(x)\\) ek curve hai, aur is ke arc (tukde) \\(AB\\) par do points hain: \\(P(x, f(x))\\) aur \\(Q(x + \\delta x, f(x + \\delta x))\\), jaise Figure 13.1 mein dikhaya gaya hai.\nYahan \\(\\delta x\\) (parhein \"delta \\(x\\)\") \\(x\\) ki value mein ek chhota sa izafa (increment) hai. Yani \\(P\\) se chal kar hum \\(x\\)-axis par \\(\\delta x\\) aage gaye to \\(Q\\) wala \\(x\\) mila: \\(x + \\delta x\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch13-fig-13-1-secant",
+            "alt": "Graph of a curve y = f(x) from A to B with two points P(x, f(x)) and Q(x + delta x, f(x + delta x)) on it. The green secant line through P and Q meets the x-axis at S. Perpendiculars PM and QN drop to the x-axis; the horizontal line from P meets QN at R, so PR = delta x and RQ = f(x + delta x) - f(x).",
+            "caption": "Figure 13.1: the secant line PQ of the curve y = f(x) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(P\\) aur \\(Q\\) ko milane wali line \\(PQ\\) curve ki secant line (kaatne wali line) hai, kyun ke yeh curve ko do points par kaatti hai. Is secant line ka slope hai:\n\\[m_{\\text{sec}} = \\dfrac{RQ}{PR}\\]\n\\[= \\dfrac{f(x+\\delta x) - f(x)}{\\delta x} \\quad \\text{...(1)}\\]\nyahan \\(m_{\\text{sec}}\\) secant line ka slope hai."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab yahan do dafa \"scent line\" likhti hai. Sahi lafz \"secant line\" hai, yani woh line jo curve ko do points par kaatti hai. \"Scent\" ka matlab to khushboo hota hai!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Slope \\(\\frac{RQ}{PR}\\) kyun hai? Slope ka matlab hai \"kitna upar gaye, divide by kitna aage gaye\" (rise over run). Figure 13.1 mein:\naage (run): \\(PR = MN = ON - OM = (x + \\delta x) - x = \\delta x\\)\nupar (rise): \\(RQ = NQ - NR = NQ - MP = f(x + \\delta x) - f(x)\\)\nTo formula (1) koi nayi cheez nahin. Yeh wahi purana slope formula \\(\\frac{y_{2} - y_{1}}{x_{2} - x_{1}}\\) hai jo aap do points ke liye pehle se jaante hain, bas points ke naam \\(P\\) aur \\(Q\\) hain.\nLafz \"secant\" Latin ke \"secare\" se hai, jis ka matlab hai kaatna. Isi liye secant woh line hai jo curve ko kaat kar guzarti hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Agar \\(Q\\) bilkul \\(P\\) ke upar aa jaye, yani \\(\\delta x = 0\\), to formula (1) kya dega?\nJawab: \\(\\frac{f(x) - f(x)}{0} = \\frac{0}{0}\\), jis ka koi matlab nahin. Ek point se line ka slope nahin nikalta, do points chahiye. Isi mushkil ka hal agla hissa hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "From secant to tangent"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab secant line \\(PQ\\) ko \\(P\\) ke gird ghumaate hain, aur \\(Q\\) ko curve par chalate hue \\(P\\) ke qareeb laate hain. Figure 13.2 mein is ki kuch lagaataar positions \\(PQ_{1}, PQ_{2}, PQ_{3}, \\ldots\\) dikhayi gayi hain. Points \\(Q_{i}\\) \\((i = 1, 2, 3, \\ldots)\\) \\(P\\) ke qareeb se qareeb tar hote ja rahe hain, aur \\(PR_{i}\\), yani \\(\\delta x_{i}\\) \\((i = 1, 2, 3, \\ldots)\\), zero ki taraf ja rahe hain."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch13-fig-13-2-successive-secants",
+            "alt": "The same curve with the point P fixed and points Q, Q3, Q2, Q1 on the curve getting closer to P. Dashed secant lines PQ, PQ3, PQ2, PQ1 turn about P, and the green tangent line PT touches the curve at P and meets the x-axis at T, to the left of O.",
+            "caption": "Figure 13.2: successive secants PQ1, PQ2, PQ3 turning into the tangent PT at P (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Doosre lafzon mein, jab \\(\\delta x \\to 0\\), to point \\(Q\\) point \\(P\\) ke qareeb aata jata hai, aur secant line aakhir kaar tangent line (woh line jo curve ko sirf ek point par chhooti hai) ban jaati hai. Ghoomti hui secant line, \\(\\delta x\\) ke zero ki taraf jaane par, \\(P\\) par tangent line \\(PT\\) ban jaati hai, yani:"
+          },
+          {
+            "type": "equation",
+            "latex": "m_{\\text{tan}} = \\lim_{\\delta x \\to 0} \\dfrac{f(x+\\delta x) - f(x)}{\\delta x} \\quad \\text{...(2)}",
+            "text_alt": "m tan equals the limit, as delta x tends to 0, of f of x plus delta x minus f of x, over delta x; equation (2)"
+          },
+          {
+            "type": "paragraph",
+            "text": "yahan \\(m_{\\text{tan}}\\) tangent line ka slope hai. Hum dekhte hain ke \\(m_{\\text{tan}}\\) darasal \\(m_{\\text{sec}}\\) ki limit hai, jab \\(Q\\) curve \\(y = f(x)\\) par chalta hua \\(P\\) tak pohanchta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Limit ki zaroorat kyun padi? Kisi line ka slope nikalne ke liye do points chahiye, lekin tangent curve ko sirf ek point \\(P\\) par chhooti hai. Agar hum (1) mein seedha \\(\\delta x = 0\\) rakh dein to \\(\\frac{0}{0}\\) milta hai.\nTo hum woh karte hain jo sab se behtar mumkin hai: \\(Q\\) ko \\(P\\) ke qareeb, aur qareeb, aur qareeb laate hain aur dekhte hain ke secant ke slopes kis value ki taraf ja rahe hain. Woh manzil (target) value hi tangent ka slope hai. Yeh bilkul Unit 12 wala limit ka khayal hai.\nEk misaal sochiye: aap kisi pahaadi raaste par khade hain aur jaanna chahte hain ke bilkul aap ke qadmon ke neeche raasta kitna dhalwan hai. Aap das qadam aage ka point dekhein to average dhalwan milta hai; ek qadam aage ka dekhein to behtar; ek inch aage ka dekhein to aur behtar. Jitna chhota faasla, utna sahi jawab. Limit yahi \"chhote se chhota faasla\" wala kaam poori durusti (accuracy) se karti hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "\"Gradient\" aur \"slope\" ka ek hi matlab hai. Tangent ki equation ke liye hamesha do cheezein chahiye:\n1. slope \\(m\\), jo (2) se niklega (aage chal kar differentiation ke rules se bhi);\n2. woh point \\((x_{1}, y_{1})\\) jahan tangent curve ko chhooti hai.\nPhir point-slope form \\(y - y_{1} = m(x - x_{1})\\) laga dein. Examiner dono hisson ke number deta hai, is liye slope nikaal kar ruk na jayein."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Find the gradient and an equation of tangent line to the graph of \\(f(x) = x^{2} - 2\\) at the point \\(P(-1, -1)\\).",
+            "steps": [
+              "Given: \\(f(x) = x^{2} - 2\\) aur graph par point \\(P(-1, -1)\\).\nTo find: (a) \\(P\\) par tangent line ka gradient (slope, yani dhalwan); (b) us tangent line ki equation.\nMethod: sab se pehle dekhte hain ke humein kya chahiye: ek seedhi line jo curve ko \\(P\\) par sirf chhoo kar guzre. Line ke liye do cheezein chahiye hoti hain: ek point aur slope. Point humein diya hua hai, slope formula (2) se niklega jis mein hum \\(x = -1\\) rakhenge. Phir point-slope form \\(y - y_{1} = m(x - x_{1})\\) se line ki equation likh denge.",
+              "Step 1: Tasdeeq ke P curve par hai\n\\[f(-1) = (-1)^{2} - 2\\]\n\\[= 1 - 2 = -1\\]\nKyun: tangent hamesha curve ke kisi point par banti hai. Agar \\(P\\) curve par hi na hota to us par tangent ka sawal hi ghalat hota. \\(f(-1) = -1\\) hai, yani \\((-1, -1)\\) waqai curve par hai. Yeh chhota sa check exam mein bhi aap ko ghalat sawal ya ghalat copy kiye hue number se bacha leta hai.",
+              "Step 2: Equation (2) mein x = -1 rakhein\n\\[m_{\\text{tan}} = \\lim_{\\delta x \\to 0} \\dfrac{f(-1+\\delta x) - f(-1)}{\\delta x}\\]\nKyun: formula (2) kisi bhi \\(x\\) par tangent ka slope deta hai. Humein \\(x = -1\\) wale point par slope chahiye, is liye har jagah \\(x\\) ki jagah \\(-1\\) likh diya. \\(\\delta x\\) waisa hi rehta hai, kyun ke yahi woh chhota sa faasla hai jo baad mein zero ki taraf jayega.",
+              "Step 3: Dono function values likhein\n\\[f(-1+\\delta x) = (-1+\\delta x)^{2} - 2\\]\n\\[f(-1) = (-1)^{2} - 2\\]\nTo\n\\[m_{\\text{tan}} = \\lim_{\\delta x \\to 0} \\dfrac{(-1+\\delta x)^{2} - 2 - \\big((-1)^{2} - 2\\big)}{\\delta x}\\]\nKyun: \\(f\\) ek machine ki tarah hai: jo cheez andar daalo, \\(x\\) ki jagah wahi likh do. \\(f(-1+\\delta x)\\) mein poora \\((-1+\\delta x)\\) square hota hai.\nDhyan dein: \\(f(-1)\\) ko bracket mein likhna zaroori hai, warna minus sign sirf pehle term par lagta hai aur jawab ghalat ho jata hai.",
+              "Step 4: Numerator ko kholein aur simplify karein\n\\[(-1+\\delta x)^{2} = 1 - 2\\delta x + \\delta x^{2}\\]\nNumerator:\n\\[1 - 2\\delta x + \\delta x^{2} - 2 - (1 - 2)\\]\n\\[= 1 - 2\\delta x + \\delta x^{2} - 2 + 1\\]\n\\[= -2\\delta x + \\delta x^{2}\\]\nKyun: formula \\((a + b)^{2} = a^{2} + 2ab + b^{2}\\) mein \\(a = -1\\), \\(b = \\delta x\\) rakha: \\(1 - 2\\delta x + \\delta x^{2}\\). Phir constants \\(1 - 2 + 1 = 0\\) ho gaye. Yeh ittefaq nahin: har aise sawal mein constants khatam hote hain, kyun ke \\(\\delta x = 0\\) par numerator \\(f(-1) - f(-1) = 0\\) hota hai. Agar aap ke constants khatam na hon to samajh lein ke kahin ghalti hui hai.",
+              "Step 5: Common factor nikaal kar cancel karein\n\\[\\dfrac{-2\\delta x + \\delta x^{2}}{\\delta x} = \\dfrac{\\delta x(-2 + \\delta x)}{\\delta x}\\]\n\\[= -2 + \\delta x\\]\nKyun: \\(\\delta x\\) zero ke qareeb jata hai lekin zero hota nahin, is liye us se divide karna jaaiz (allowed) hai. Agar hum seedha \\(\\delta x = 0\\) rakh dete to \\(\\frac{0}{0}\\) milta, jis ka koi matlab nahin. Cancel karne se yeh rukawat door ho jaati hai. Yahi differentiation ka asal \"trick\" hai.",
+              "Step 6: Ab δx ko 0 ki taraf le jayein\n\\[m_{\\text{tan}} = \\lim_{\\delta x \\to 0} (-2 + \\delta x) = -2\\]\nKyun: cancel ke baad bacha hua \\(-2 + \\delta x\\) ek seedha sa polynomial hai, is mein \\(\\delta x = 0\\) rakhna bilkul theek hai. To \\(P\\) par tangent ka slope \\(-2\\) hai: line baayein se daayein jaate hue neeche aati hai.",
+              "Step 7: Tangent line ki equation\nPoint \\((x_{1}, y_{1}) = (-1, -1)\\), slope \\(m = -2\\):\n\\[y - (-1) = -2\\big(x - (-1)\\big)\\]\n\\[y + 1 = -2x - 2\\]\n\\[y = -2x - 3\\]\nKyun: point-slope form ko bilkul yahi do cheezein chahiye: line ka ek point aur us ka slope. Dono humare paas hain.\nDhyan dein: \\(x - (-1)\\) ko \\(x + 1\\) likhna hai, \\(x - 1\\) nahin. Minus minus plus.",
+              "Tasdeeq:\nPoint \\(P\\) line par hai: \\(-2(-1) - 3 = 2 - 3 = -1\\).\nLine aur parabola kahan milte hain?\n\\[x^{2} - 2 = -2x - 3\\]\n\\[x^{2} + 2x + 1 = 0\\]\n\\[(x + 1)^{2} = 0\\]\nSirf \\(x = -1\\) (dohra root, repeated root). Matlab line curve ko \\(P\\) par sirf chhoo rahi hai, kaat kar doosri jagah nahin nikalti. Tangent ki yahi pehchaan hai."
+            ],
+            "answer": "\\(P(-1, -1)\\) par tangent ka gradient: \\(m_{\\text{tan}} = -2\\). Tangent line ki equation: \\(y = -2x - 3\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(f\\) ka graph aur tangent line neeche figure mein dikhaye gaye hain. Ghor karein ke hari (green) line parabola ko sirf \\(P(-1, -1)\\) par chhoo rahi hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch13-fig-ex1-tangent",
+            "alt": "Grid with x from -4 to 4 and y from -4 to 5. The parabola y = x squared minus 2 has its lowest point at (0, -2) and cuts the x-axis near -1.41 and 1.41. The green straight line y = -2x - 3 touches the parabola only at the red point P(-1, -1) and cuts the y-axis at -3.",
+            "caption": "Example 1: the graph of f(x) = x² − 2 and its tangent line y = −2x − 3 at P(−1, −1) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Isi curve \\(f(x) = x^{2} - 2\\) par point \\((1, -1)\\) lein. Yahan tangent ka slope kya hoga?\n\\[\\dfrac{f(1+\\delta x) - f(1)}{\\delta x} = \\dfrac{(1+\\delta x)^{2} - 2 - (-1)}{\\delta x}\\]\n\\[= \\dfrac{2\\delta x + \\delta x^{2}}{\\delta x} = 2 + \\delta x\\]\n\\(\\delta x \\to 0\\) par slope \\(= 2\\). Tangent: \\(y + 1 = 2(x - 1)\\), yani \\(y = 2x - 3\\).\nDekhiye: \\(x = -1\\) par slope \\(-2\\) tha aur \\(x = 1\\) par \\(+2\\). Parabola apni line of symmetry (\\(y\\)-axis) ke dono taraf ek jaisa magar ulta jhuka hua hai, isi liye slopes bhi ulte sign ke hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Secant curve ko do points par kaatti hai; us ka slope \\(m_{\\text{sec}} = \\frac{f(x+\\delta x) - f(x)}{\\delta x}\\) ...(1).\n2. Jab \\(Q\\) curve par chalta hua \\(P\\) tak aata hai (\\(\\delta x \\to 0\\)), secant ghoom kar \\(P\\) par tangent ban jaati hai.\n3. Tangent ka slope: \\(m_{\\text{tan}} = \\lim_{\\delta x \\to 0} \\frac{f(x+\\delta x) - f(x)}{\\delta x}\\) ...(2).\n4. Kaam ka tareeqa: values rakhein, kholein (expand), \\(\\delta x\\) common nikaal kar cancel karein, phir \\(\\delta x \\to 0\\).\n5. Tangent ki equation: \\(y - y_{1} = m(x - x_{1})\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Cancel karne se pehle \\(\\delta x = 0\\) rakh dena. Is se \\(\\frac{0}{0}\\) milta hai. Hamesha pehle \\(\\delta x\\) cancel karein, phir limit lein.\n2. \\(\\delta x\\) ko \"\\(\\delta\\) zarb \\(x\\)\" samajhna. \\(\\delta x\\) ek hi nishan hai: \\(x\\) mein chhoti si tabdeeli.\n3. \\(f(-1 + \\delta x) - f(-1)\\) mein \\(f(-1)\\) ko bracket ke baghair likhna; phir minus sirf pehle term par lagta hai.\n4. Point-slope form mein \\(x - (-1)\\) ko \\(x - 1\\) likh dena. Sahi hai \\(x + 1\\).\n5. Sirf slope nikaal kar ruk jana jab sawal tangent ki equation bhi maang raha ho."
+          }
+        ]
+      }
+    }
+  ]
+}

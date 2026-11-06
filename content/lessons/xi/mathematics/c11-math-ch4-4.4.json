@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 58,
+          "pdf_to": 59,
+          "note": "Book p. 53-54: 4.4 Determinants, the opening lines before 4.4.1 (pattern for order n >= 3, |A| of a 3 x 3 matrix); callouts marked Teaching note / Key points / Common mistake are ours."
+        }
+      ],
+      "title": "4.4 Determinants",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What is a determinant? Every square matrix has one special number attached to it, called its determinant. For a matrix \\(A\\) we write it as \\(|A|\\) or \\(\\det A\\). A matrix is a table of numbers; its determinant is a single number worked out from that table.\nWhy do we need it? In this unit the determinant tells us whether a matrix has an inverse (4.5): if \\(|A| \\ne 0\\) the inverse exists, if \\(|A| = 0\\) it does not. Later it is also used to solve systems of linear equations (Cramer's rule)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Recall the determinant of order 2, which you met in earlier classes:\n\\[\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc\\]\nMultiply along the leading diagonal, then subtract the product along the other diagonal. For example\n\\[\\begin{vmatrix} 3 & 5 \\\\ 2 & 4 \\end{vmatrix} = 3(4) - 5(2) = 2\\]\nEvery determinant of order 3 will be reduced to determinants of order 2, so this rule must be automatic for you."
+          },
+          {
+            "type": "paragraph",
+            "text": "The determinants of square matrices of order \\(n \\ge 3\\) can be written by following the pattern. For example, if \\(n = 3\\) and"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[A = \\begin{bmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "then the determinant of \\(A\\) is"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = \\begin{vmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{vmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Now our aim is to compute the determinants of matrices of various orders."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Notice the two kinds of brackets. Square brackets \\([\\;\\,]\\) mean a matrix (a table). Straight vertical bars \\(|\\;\\,|\\) mean its determinant (one number). So \\(A\\) is a matrix but \\(|A|\\) is a number.\nOnly a square matrix (same number of rows and columns) has a determinant. A \\(2 \\times 3\\) matrix has no determinant."
+          },
+          {
+            "type": "paragraph",
+            "text": "To compute \\(|A|\\) for order 3 we need two new ideas, the minor and the cofactor of an element (4.4.1). With them the determinant of order 3 is expanded in 4.4.2, its properties are listed in 4.4.3, and in 4.5 the cofactors are used again to find the inverse of a matrix."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. The determinant is a number attached to a square matrix only; it is written \\(|A|\\) or \\(\\det A\\).\n2. Order 2: \\(\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc\\).\n3. Determinants of order 3 or more follow the same pattern and are worked out with minors and cofactors.\n4. \\(|A| \\ne 0\\) decides whether \\(A\\) has an inverse (4.5)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Reading \\(|A|\\) as an absolute value. A determinant can be negative: \\(\\begin{vmatrix} 1 & 2 \\\\ 3 & 4 \\end{vmatrix} = 4 - 6 = -2\\).\n2. Writing \\(ad + bc\\) or \\(bc - ad\\) for order 2. It is always (leading diagonal) minus (other diagonal): \\(ad - bc\\).\n3. Using square brackets for a determinant or bars for a matrix: the two mean different things.\n4. Trying to find the determinant of a non-square matrix."
+          }
+        ]
+      }
+    }
+  ]
+}

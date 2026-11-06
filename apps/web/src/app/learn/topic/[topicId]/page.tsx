@@ -7,9 +7,12 @@ import { chooseReadingLanguage } from "@/app/actions/learn";
 import { KeepPlace } from "@/components/keep-place";
 import { LectureView } from "@/components/lecture-view";
 import { LessonBlocks } from "@/components/lesson-blocks";
+import { solvedQuestions, VideoSolutions } from "@/components/video-solutions";
 import { continuesInto, headingOnly as isHeadingOnly, headingTone } from "@/lib/book-heading";
 import { premiumBook } from "@/lib/book-style";
-import { typesetEquations } from "@/lib/typeset";
+import { revealLabel } from "@/lib/exercises";
+import { solvedLabels } from "@/lib/solved-labels";
+import { typesetEquations, typesetMath } from "@/lib/typeset";
 import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
 import { ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icons";
@@ -79,12 +82,12 @@ type TopicLecture = {
 export default function TopicPage({ params, searchParams }: PageProps<"/learn/topic/[topicId]">) {
   return (
     <Suspense fallback={<SkeletonLines lines={8} label="Loading lesson" />}>
-      {Promise.all([params, searchParams]).then(([{ topicId }, sp]) => <TopicView id={topicId} view={sp.view === "lecture" ? "lecture" : "read"} />)}
+      {Promise.all([params, searchParams]).then(([{ topicId }, sp]) => <TopicView id={topicId} view={sp.view === "lecture" ? "lecture" : sp.view === "video" ? "video" : "read"} />)}
     </Suspense>
   );
 }
 
-async function TopicView({ id, view }: { id: string; view: "read" | "lecture" }) {
+async function TopicView({ id, view: asked }: { id: string; view: "read" | "lecture" | "video" }) {
   if (!UUID.test(id)) notFound();
   const user = await currentUser();
   const token = user?.token;
@@ -114,7 +117,15 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
   const note = lesson && readable ? missingLanguageNote(language, lesson.language) : null;
   const display = parseDisplay(jar.get(DISPLAY_COOKIE)?.value);
   const dataSaver = display ? display.dataSaver : (await headers()).get("save-data") === "on";
-  const lectureRes = readable ? await api<TopicLecture>(`/v1/topics/${id}/lecture`, token ? { token } : {}) : null;
+  // VIDEO-SOLUTION-01 (owner, 2026-11-05): a Mathematics page has no lecture. Its theory and worked examples have
+  // English and Roman Urdu only; an exercise question's page (solved parts with their printed numbers) adds "Video
+  // Solution".
+  const maths = subjectKey(reading.subject_name) === "mathematics";
+  const lectures = !maths;
+  const questions = maths && readable ? solvedQuestions(lesson?.body?.blocks as { type: string }[] | undefined) : [];
+  const videoTab = questions.length > 0;
+  const view = asked === "lecture" && lectures ? "lecture" : asked === "video" && videoTab ? "video" : "read";
+  const lectureRes = readable && lectures ? await api<TopicLecture>(`/v1/topics/${id}/lecture`, token ? { token } : {}) : null;
   const lecture = lectureRes?.ok ? lectureRes.data : null;
   // DESIGN-01: a pill segmented control; the chosen segment is the dark primary pill.
   const segment = "inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full px-4 text-sm transition duration-200 sm:px-5";
@@ -134,24 +145,33 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
         <form data-reading-bar action={chooseReadingLanguage} className="sticky top-0 z-10 -mx-4 space-y-2 bg-background/90 px-4 py-2.5 backdrop-blur" aria-label="Explanation language">
           <input type="hidden" name="topic" value={reading.topic_id} />
           <KeepPlace lessonId={lesson?.id ?? ""} signatures={(lesson?.body?.blocks ?? []).map((b) => placeSignature(b as PlaceBlock))} />
-          <div role="group" aria-label="Read or watch" className="glass inline-flex max-w-full gap-1 rounded-full p-1">
+          <div role="group" aria-label={lectures || videoTab ? "Read or watch" : "Explanation language"} className="glass inline-flex max-w-full gap-1 rounded-full p-1">
             {READING_LANGUAGES.map(([code, label]) =>
               view === "lecture" ? (
                 <Link key={code} href={`/learn/topic/${reading.topic_id}`} aria-current={undefined} className={off}>
                   {label}
                 </Link>
               ) : (
-                <button key={code} type="submit" name="language" value={code} aria-pressed={code === language} className={code === language ? on : off}>
+                // From "Video Solution" a language opens that language's reading (the action returns to this page).
+                <button key={code} type="submit" name="language" value={code} aria-pressed={view === "read" && code === language} className={view === "read" && code === language ? on : off}>
                   {label}
                 </button>
               ),
             )}
-            <Link href={`/learn/topic/${reading.topic_id}?view=lecture`} aria-current={view === "lecture" ? "page" : undefined} className={view === "lecture" ? on : off}>
-              <Icon name="play" size={14} />
-              Lecture
-            </Link>
+            {videoTab && (
+              <Link href={`/learn/topic/${reading.topic_id}?view=video`} aria-current={view === "video" ? "page" : undefined} className={view === "video" ? on : off}>
+                <Icon name="play" size={14} />
+                Video Solution
+              </Link>
+            )}
+            {lectures && (
+              <Link href={`/learn/topic/${reading.topic_id}?view=lecture`} aria-current={view === "lecture" ? "page" : undefined} className={view === "lecture" ? on : off}>
+                <Icon name="play" size={14} />
+                Lecture
+              </Link>
+            )}
           </div>
-          {note && view !== "lecture" && (
+          {note && view === "read" && (
             <p className="text-sm text-muted" role="status">
               {note}
             </p>
@@ -228,7 +248,8 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
           )}
         </section>
       )}
-      {view === "lecture" && readable ? null : reading.availability === "unavailable" || !lesson?.body || empty ? (
+      {view === "video" && <VideoSolutions questions={questions} />}
+      {view !== "read" && readable ? null : reading.availability === "unavailable" || !lesson?.body || empty ? (
         <Notice title="This topic’s lesson isn’t ready yet">The chapter outline lists the topic, but its lesson has not been published.</Notice>
       ) : lesson.locked ? (
         <Notice title="Included with a plan or the free 30-day trial">
@@ -244,10 +265,13 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
           <LessonBlocks
             blocks={lesson.body.blocks}
             typeset={typesetEquations(lesson.body.blocks)}
+            math={typesetMath(lesson.body.blocks)}
             blockIds
             dataSaver={dataSaver}
             premium={premiumBook(subjectKey(reading.subject_name), reading.grade_number)}
             runnable={lesson.language === "roman_ur"}
+            revealLabel={videoTab ? revealLabel(lesson.language) : undefined}
+            solvedLabels={solvedLabels(lesson.language)}
             assetUrl={(versionId) =>
               lesson.private_preview
                 ? `/learn/topics/${shown.topic_id}/preview-assets/${versionId}`

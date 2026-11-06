@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-3-Q4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-3-q4",
+      "title": "Question 4 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 167,
+          "pdf_to": 167,
+          "note": "Exercise 8.3, Question 4: book page 162 (PDF 167); no answer in key (PDF 307). Misprints: (i) denominator should be sqrt(1+x); (iii) 17/284 should be 17/384."
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-3-Q4",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) If \\(x\\) is so small that its square and higher powers can be neglected, then show that \\(\\frac{1 - x}{\\sqrt{1 - x}} \\approx 1 - \\frac{3}{2}x\\)",
+            "explanation": "Yeh approximation ka sawal hai: \\(x\\) itna chhota hai ke \\(x^{2}\\) ko chhor sakte hain, is liye har series ki sirf \\(1 + nx\\) leni hai.\nLekin pehle chhapa hua left side ghaur se dekhiye: \\(\\frac{1 - x}{\\sqrt{1 - x}}\\) seedha \\(\\sqrt{1 - x}\\) ke barabar hai, aur us ka jawab \\(1 - \\tfrac{3}{2}x\\) nahi aa sakta.\nPlan: pehle chhapa hua expression imaandari se hal karenge, phir dikhayenge ke diya gaya jawab \\(\\frac{1 - x}{\\sqrt{1 + x}}\\) ka hai (neeche kitab ki ghalti wala note dekhiye).",
+            "steps": [
+              "Diya gaya hai: \\(\\frac{1 - x}{\\sqrt{1 - x}}\\), aur \\(x^{2}\\) va us se bari powers qabil-e-nazarandaz (neglect karne layak) hain.\nDikhana hai (jaisa chhapa hai): \\(\\approx 1 - \\frac{3}{2}x\\).\nTareeqa: \\(x^{2}\\) aur us se bari powers chhorni hain, is liye har bracket sirf \\(1 + nx\\) tak kholi jayegi, aur do \\(x\\) wali terms ka product (jo \\(x^{2}\\) banata hai) bhi chhor diya jayega.",
+              "Chhapa hua left side simplify karein\n\\[\\dfrac{1 - x}{\\sqrt{1 - x}} = (1 - x)^{1 - \\frac{1}{2}}\\]\n\\[= (1 - x)^{1/2}\\]\nKyun: Upar \\((1 - x)^{1}\\) aur neeche \\((1 - x)^{1/2}\\). Same base ki powers divide hon to powers minus hoti hain: \\(1 - \\tfrac{1}{2} = \\tfrac{1}{2}\\). Yani yeh sirf \\(\\sqrt{1 - x}\\) hai.",
+              "\\(x\\) wali term tak kholein\n\\[(1 - x)^{1/2} \\approx 1 + \\dfrac{1}{2}(-x)\\]\n\\[= 1 - \\dfrac{1}{2}x\\]\nKyun: \\(1 + nx\\) mein \\(n = \\tfrac{1}{2}\\) aur \\(x\\) ki jagah \\(-x\\) rakha.",
+              "Chhape hue jawab se muqabla\n\\[1 - \\dfrac{1}{2}x \\ne 1 - \\dfrac{3}{2}x\\]\nKyun: Dono barabar nahi, is liye chhapi hui baat saabit ho hi nahi sakti. Matlab denominator mein misprint hai. Agar neeche \\(\\sqrt{1 + x}\\) ho to diya hua jawab bilkul sahi aata hai; ab wohi kar ke dekhte hain.\nDhyan dein: 'show that' wale sawal mein agar baar baar koshish ke bawajood jawab na mile to sawal ko simplify kar ke dekhiye; kabhi kabhi ghalti sawal mein hoti hai, aap ke kaam mein nahi.",
+              "Sahi expression ko product banayein\n\\[\\dfrac{1 - x}{\\sqrt{1 + x}} = (1 - x)(1 + x)^{-1/2}\\]\nKyun: Square root ka matlab power \\(\\tfrac{1}{2}\\), aur neeche se upar laane par \\(-\\tfrac{1}{2}\\).",
+              "\\((1 + x)^{-1/2}\\) kholein\n\\[(1 + x)^{-1/2} \\approx 1 - \\dfrac{1}{2}x\\]\nKyun: \\(1 + nx\\) mein \\(n = -\\tfrac{1}{2}\\). Baqi terms mein \\(x^{2}\\) ya us se bari powers hain, jo chhor deni hain.",
+              "Multiply karein aur \\(x^{2}\\) chhorein\n\\[(1 - x)\\left(1 - \\dfrac{1}{2}x\\right)\\]\n\\[= 1 - \\dfrac{1}{2}x - x + \\dfrac{1}{2}x^{2}\\]\n\\[\\approx 1 - \\dfrac{3}{2}x\\]\nKyun: Har term ko har term se multiply kiya. \\(\\tfrac{1}{2}x^{2}\\) wali term chhor di kyunke \\(x^{2}\\) neglect karna hai. \\(x\\) wali terms: \\(-\\tfrac{1}{2}x - x = -\\tfrac{3}{2}x\\).",
+              "Tasdeeq\n\\[x = 0.01:\\ \\dfrac{0.99}{\\sqrt{1.01}} = 0.985087\\]\n\\[1 - 0.015 = 0.985\\]\nKyun: Farq sirf 0.0001 ke qareeb hai, jo \\(x^{2}\\) ke size ka hai, yani wohi hissa jo humne chhora tha. Is liye approximation sahi hai."
+            ],
+            "final_answer": "Jaisa chhapa hai: \\(\\frac{1 - x}{\\sqrt{1 - x}} = \\sqrt{1 - x} \\approx 1 - \\frac{1}{2}x\\). Diya hua natija \\(\\frac{1 - x}{\\sqrt{1 + x}} \\approx 1 - \\frac{3}{2}x\\) ke liye sahi hai. Saabit ho gaya (sahi denominator ke saath)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein left side \\(\\frac{1 - x}{\\sqrt{1 - x}}\\) chhapa hai, jo asal mein \\(\\sqrt{1 - x} \\approx 1 - \\frac{1}{2}x\\) hai; yeh \\(1 - \\frac{3}{2}x\\) nahi ban sakta. Diya hua jawab \\(\\frac{1 - x}{\\sqrt{1 + x}}\\) ka hai, yani denominator mein \\(1 + x\\) hona chahiye tha. Humne wohi saabit kiya hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) If \\(x\\) is so small that its square and higher powers can be neglected, then show that \\(\\frac{\\sqrt{1 + 2x}}{\\sqrt{1 - x}} \\approx 1 + \\frac{3}{2}x\\)",
+            "explanation": "Yeh bhi approximation ka sawal hai jahan \\(x^{2}\\) chhorna hai.\nLeft side ko \\((1 + 2x)^{1/2}(1 - x)^{-1/2}\\) likh kar har ek ki sirf \\(1 + nx\\) leni hai.\nDikhana kya hai? Ke yeh \\(1 + \\tfrac{3}{2}x\\) ke barabar hai.\nPlan: dono kholna, multiply, \\(x^{2}\\) wali term hatana, muqabla.",
+            "steps": [
+              "Diya gaya hai: \\(\\frac{\\sqrt{1 + 2x}}{\\sqrt{1 - x}}\\), \\(x^{2}\\) va us se bari powers neglect.\nDikhana hai: \\(\\approx 1 + \\frac{3}{2}x\\).\nTareeqa: \\(x^{2}\\) aur us se bari powers chhorni hain, is liye har bracket sirf \\(1 + nx\\) tak kholi jayegi, aur do \\(x\\) wali terms ka product (jo \\(x^{2}\\) banata hai) bhi chhor diya jayega.",
+              "Product ki shakal\n\\[\\dfrac{\\sqrt{1 + 2x}}{\\sqrt{1 - x}} = (1 + 2x)^{1/2}(1 - x)^{-1/2}\\]\nKyun: Root ko power \\(\\tfrac{1}{2}\\) likha, aur neeche wali bracket ko upar la kar power \\(-\\tfrac{1}{2}\\) di. Ab do brackets ka seedha product hai.",
+              "Har bracket kholein\n\\[(1 + 2x)^{1/2} \\approx 1 + \\dfrac{1}{2}(2x) = 1 + x\\]\n\\[(1 - x)^{-1/2} \\approx 1 + \\left(-\\dfrac{1}{2}\\right)(-x)\\]\n\\[= 1 + \\dfrac{1}{2}x\\]\nKyun: \\(1 + nx\\) mein formula ke \\(x\\) ki jagah poori doosri term rakhi: pehli mein \\(2x\\), doosri mein \\(-x\\). Doosri mein minus mein minus plus ban gaya.\nDhyan dein: \\((1 - x)^{-1/2}\\) mein do minus hain (power ka aur \\(x\\) ka). Ek bhi bhool gaye to sign ulta ho jayega.",
+              "Multiply karein aur \\(x^{2}\\) chhorein\n\\[(1 + x)\\left(1 + \\dfrac{1}{2}x\\right)\\]\n\\[= 1 + \\dfrac{1}{2}x + x + \\dfrac{1}{2}x^{2}\\]\n\\[\\approx 1 + \\dfrac{3}{2}x\\]\nKyun: \\(\\tfrac{1}{2}x^{2}\\) neglect kar di. \\(x\\) wali terms jama: \\(x + \\tfrac{1}{2}x = \\tfrac{3}{2}x\\). Yahi right side hai.",
+              "Tasdeeq\n\\[x = 0.01:\\ \\sqrt{\\dfrac{1.02}{0.99}} = 1.015038\\]\n\\[1 + 0.015 = 1.015\\]\nKyun: Farq \\(x^{2}\\) jitna chhota hai, is liye natija sahi hai."
+            ],
+            "final_answer": "\\(\\frac{\\sqrt{1 + 2x}}{\\sqrt{1 - x}} \\approx 1 + \\frac{3}{2}x\\). Saabit ho gaya."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iii)",
+            "prompt": "4 (iii) If \\(x\\) is so small that its square and higher powers can be neglected, then show that \\(\\frac{(9 + 7x)^{1/2} - (16 + 3x)^{1/4}}{4 + 5x} \\approx \\frac{1}{4} - \\frac{17}{284}x\\)",
+            "explanation": "Yahan teen brackets hain aur koi bhi 1 se shuru nahi hoti. Is liye pehle 9, 16 aur 4 bahar nikalne honge.\nPhir har series ki sirf \\(1 + nx\\) leni hai, aur numerator ko \\((4 + 5x)^{-1}\\) se multiply karna hai.\nDikhana kya hai? \\(\\frac{1}{4} - \\frac{17}{284}x\\) (jaisa chhapa hai). Hum dekhenge ke sahi number 384 hai, 284 nahi.\nPlan: numerator, denominator, product, muqabla.",
+            "steps": [
+              "Diya gaya hai: \\(\\frac{(9 + 7x)^{1/2} - (16 + 3x)^{1/4}}{4 + 5x}\\), \\(x^{2}\\) va us se bari powers neglect.\nDikhana hai: \\(\\approx \\frac{1}{4} - \\frac{17}{284}x\\) (jaisa chhapa hai).\nTareeqa: Har bracket se ek number bahar nikal kar usay 1 se shuru karenge. Phir \\(x^{2}\\) aur us se bari powers chhorni hain, is liye har bracket sirf \\(1 + nx\\) tak kholi jayegi, aur do \\(x\\) wali terms ka product (jo \\(x^{2}\\) banata hai) bhi chhor diya jayega.",
+              "Pehli bracket\n\\[(9 + 7x)^{1/2} = 3\\left(1 + \\dfrac{7x}{9}\\right)^{1/2}\\]\n\\[\\approx 3\\left(1 + \\dfrac{7x}{18}\\right) = 3 + \\dfrac{7}{6}x\\]\nKyun: 9 bahar nikala to \\(9^{1/2} = 3\\) bana. \\(1 + nx\\): \\(\\tfrac{1}{2} \\cdot \\tfrac{7x}{9} = \\tfrac{7x}{18}\\). Phir 3 se multiply: \\(\\tfrac{21}{18} = \\tfrac{7}{6}\\).",
+              "Doosri bracket\n\\[(16 + 3x)^{1/4} = 2\\left(1 + \\dfrac{3x}{16}\\right)^{1/4}\\]\n\\[\\approx 2\\left(1 + \\dfrac{3x}{64}\\right) = 2 + \\dfrac{3}{32}x\\]\nKyun: \\(16^{1/4}\\) ka matlab 16 ka fourth root, jo 2 hai (\\(2^{4} = 16\\)). \\(\\tfrac{1}{4} \\cdot \\tfrac{3x}{16} = \\tfrac{3x}{64}\\), aur 2 se multiply karne par \\(\\tfrac{6}{64} = \\tfrac{3}{32}\\).",
+              "Numerator\n\\[\\left(3 + \\dfrac{7}{6}x\\right) - \\left(2 + \\dfrac{3}{32}x\\right)\\]\n\\[= 1 + \\left(\\dfrac{112}{96} - \\dfrac{9}{96}\\right)x\\]\n\\[= 1 + \\dfrac{103}{96}x\\]\nKyun: Numbers numbers se: \\(3 - 2 = 1\\). \\(x\\) wali terms ke liye common denominator chahiye: 6 aur 32 ka LCM 96 hai, \\(\\tfrac{7}{6} = \\tfrac{112}{96}\\), \\(\\tfrac{3}{32} = \\tfrac{9}{96}\\).\nDhyan dein: doosri bracket ke aage minus hai, is liye us ki \\(x\\) wali term bhi minus ho kar aati hai.",
+              "Denominator\n\\[(4 + 5x)^{-1} = \\dfrac{1}{4}\\left(1 + \\dfrac{5x}{4}\\right)^{-1}\\]\n\\[\\approx \\dfrac{1}{4}\\left(1 - \\dfrac{5}{4}x\\right)\\]\nKyun: Neeche wali bracket ko upar laya to power \\(-1\\) bani. 4 bahar nikala to \\(4^{-1} = \\tfrac{1}{4}\\). \\(1 + nx\\) mein \\(n = -1\\): \\(1 - \\tfrac{5x}{4}\\).",
+              "Multiply karein aur \\(x^{2}\\) chhorein\n\\[\\dfrac{1}{4}\\left(1 + \\dfrac{103}{96}x\\right)\\left(1 - \\dfrac{120}{96}x\\right)\\]\n\\[\\approx \\dfrac{1}{4}\\left(1 - \\dfrac{17}{96}x\\right)\\]\n\\[= \\dfrac{1}{4} - \\dfrac{17}{384}x\\]\nKyun: Dono brackets ki \\(x\\) wali terms ka product \\(x^{2}\\) deta hai, woh chhor diya. Baqi \\(x\\) wali terms jama: \\(\\tfrac{103}{96} - \\tfrac{120}{96} = -\\tfrac{17}{96}\\). Phir \\(\\tfrac{1}{4}\\) andar le gaye: \\(4 \\times 96 = 384\\).",
+              "Tasdeeq\n\\[x = 0.01:\\ \\text{L.H.S.} = 0.2495573\\]\n\\[\\dfrac{1}{4} - \\dfrac{17}{384}(0.01) = 0.2495573\\]\nKyun: Saat decimal tak barabar. Agar 284 hota to jawab 0.2494014 aata, jo saaf door hai. Is se pakka hua ke sahi number 384 hai."
+            ],
+            "final_answer": "\\(\\frac{(9 + 7x)^{1/2} - (16 + 3x)^{1/4}}{4 + 5x} \\approx \\frac{1}{4} - \\frac{17}{384}x\\). Saabit ho gaya (kitab mein 384 ki jagah 284 chhapa hai)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein right side \\(\\frac{1}{4} - \\frac{17}{284}x\\) chhapa hai. Sahi \\(\\frac{1}{4} - \\frac{17}{384}x\\) hai, kyunke \\(\\frac{1}{4} \\times \\frac{17}{96} = \\frac{17}{384}\\). Yeh sirf chhapai ki ghalti hai (3 ki jagah 2)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iv)",
+            "prompt": "4 (iv) If \\(x\\) is so small that its square and higher powers can be neglected, then show that \\(\\frac{\\sqrt{4 + x}}{(1 - x)^{3}} \\approx 2 + \\frac{25}{4}x\\)",
+            "explanation": "Phir wohi approximation: \\(x^{2}\\) chhorna hai. Expression \\((4 + x)^{1/2}(1 - x)^{-3}\\) hai.\nPehli bracket 4 se shuru hoti hai, is liye 4 bahar nikalna hoga; doosri pehle hi \\(1 - x\\) hai.\nDikhana kya hai? \\(2 + \\tfrac{25}{4}x\\).\nPlan: dono kholna, multiply, \\(x^{2}\\) hatana.",
+            "steps": [
+              "Diya gaya hai: \\(\\frac{\\sqrt{4 + x}}{(1 - x)^{3}}\\), \\(x^{2}\\) va us se bari powers neglect.\nDikhana hai: \\(\\approx 2 + \\frac{25}{4}x\\).\nTareeqa: \\(x^{2}\\) aur us se bari powers chhorni hain, is liye har bracket sirf \\(1 + nx\\) tak kholi jayegi, aur do \\(x\\) wali terms ka product (jo \\(x^{2}\\) banata hai) bhi chhor diya jayega.",
+              "Product ki shakal\n\\[\\dfrac{\\sqrt{4 + x}}{(1 - x)^{3}} = (4 + x)^{1/2}(1 - x)^{-3}\\]\nKyun: Root ko power \\(\\tfrac{1}{2}\\) banaya aur neeche wali bracket upar la kar power \\(-3\\) di.",
+              "Har bracket kholein\n\\[(4 + x)^{1/2} = 2\\left(1 + \\dfrac{x}{4}\\right)^{1/2} \\approx 2\\left(1 + \\dfrac{x}{8}\\right)\\]\n\\[(1 - x)^{-3} \\approx 1 + (-3)(-x) = 1 + 3x\\]\nKyun: 4 bahar nikala to \\(\\sqrt{4} = 2\\) aur andar \\(\\tfrac{x}{4}\\); \\(\\tfrac{1}{2} \\cdot \\tfrac{x}{4} = \\tfrac{x}{8}\\). Doosri mein \\(n = -3\\) aur \\(x\\) ki jagah \\(-x\\): minus mein minus plus, to \\(1 + 3x\\).\nDhyan dein: \\((1 - x)^{-3}\\) ko \\(1 - 3x\\) likhna aam ghalti hai. Power bhi negative hai aur term bhi, dono milkar plus dete hain.",
+              "Multiply karein aur \\(x^{2}\\) chhorein\n\\[2\\left(1 + \\dfrac{x}{8}\\right)(1 + 3x)\\]\n\\[\\approx 2\\left(1 + \\dfrac{x}{8} + 3x\\right)\\]\n\\[= 2\\left(1 + \\dfrac{25}{8}x\\right) = 2 + \\dfrac{25}{4}x\\]\nKyun: \\(\\tfrac{x}{8} \\cdot 3x\\) mein \\(x^{2}\\) hai, chhor diya. \\(\\tfrac{1}{8} + 3 = \\tfrac{1}{8} + \\tfrac{24}{8} = \\tfrac{25}{8}\\), phir 2 se multiply karne par \\(\\tfrac{25}{4}\\).",
+              "Tasdeeq\n\\[x = 0.01:\\ \\dfrac{\\sqrt{4.01}}{0.99^{3}} = 2.063795\\]\n\\[2 + 0.0625 = 2.0625\\]\nKyun: Farq takreeban 0.0013 hai. Yeh chhori hui \\(x^{2}\\) terms ka asar hai, jin ka coefficient yahan kaafi bara (takreeban 12.7) hai. \\(x\\) jitna chhota hoga, farq utna kam hoga."
+            ],
+            "final_answer": "\\(\\frac{\\sqrt{4 + x}}{(1 - x)^{3}} \\approx 2 + \\frac{25}{4}x\\). Saabit ho gaya."
+          }
+        ]
+      }
+    }
+  ]
+}

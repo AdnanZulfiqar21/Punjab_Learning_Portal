@@ -34,7 +34,7 @@ from typing import Any
 from urllib import error, request
 
 ROOT = Path(__file__).resolve().parents[2]
-SUBJECTS = {"biology": "bio", "chemistry": "chem", "physics": "phy", "computer_science": "cs"}  # subject -> code in the external-id prefix c<grade>-<code>
+SUBJECTS = {"biology": "bio", "chemistry": "chem", "physics": "phy", "computer_science": "cs", "mathematics": "math"}  # subject -> code in the external-id prefix c<grade>-<code>
 GRADES = {11: "xi", 12: "xii"}  # grade -> lesson folder; Class XI and XII books never share a folder or prefix
 LESSONS = ROOT / "content" / "lessons" / "xi" / "biology"  # overridden by --subject in main()
 FIGURES = LESSONS / "figures"

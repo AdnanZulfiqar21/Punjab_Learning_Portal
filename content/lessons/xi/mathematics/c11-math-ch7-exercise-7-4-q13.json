@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-4-Q13",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-4-q13",
+      "title": "Question 13",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 143,
+          "pdf_to": 143,
+          "note": "Exercise 7.4, Question 13: book p.138 (PDF 143). Answer key PDF 306 (book p.301). Solution book PDF 675-704 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13(i)",
+            "prompt": "13 (i) There are 6 men and 8 women members of a club. how many committees of seven can be formed? (i) 3 women",
+            "explanation": "A committee of 7 with exactly 3 women, so the other \\(7 - 3 = 4\\) are men.\nWe must count such committees; order does not matter.\nPlan: \\({}^{8}C_{3} \\times {}^{6}C_{4}\\).",
+            "steps": [
+              "Given: 6 men, 8 women; committee of 7 with 3 women.\nTo find: the number of committees.\nMethod: 3 women from 8 and 4 men from 6, chosen together, so multiply the two combinations.",
+              "Choose the women\n\\[{}^{8}C_{3} = \\dfrac{8 \\cdot 7 \\cdot 6}{3 \\cdot 2 \\cdot 1} = 56\\]\nWhy: 3 women out of 8.",
+              "Choose the men\n\\[{}^{6}C_{4} = {}^{6}C_{2} = \\dfrac{6 \\cdot 5}{2} = 15\\]\nWhy: The remaining 4 places go to men; choosing 4 of 6 equals leaving out 2 of 6.",
+              "Multiply\n\\[56 \\times 15 = 840\\]\nWhy: Each choice of women goes with each choice of men.",
+              "Check\n\\[3 + 4 = 7 \\text{ members}\\]\n\\[840 \\div 15 = 56 \\;\\checkmark\\]\nWhy: The committee size is right and the product divides back correctly."
+            ],
+            "final_answer": "840 committees"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13(ii)",
+            "prompt": "13 (ii) There are 6 men and 8 women members of a club. how many committees of seven can be formed? (ii) at the most 3 women",
+            "explanation": "\"At the most 3 women\" means 0, 1, 2 or 3 women; the men fill the rest of the 7 places.\nWe must add the committees of all allowed cases.\nPlan: for each case multiply \\({}^{8}C_{w} \\times {}^{6}C_{7-w}\\), then add.",
+            "steps": [
+              "Given: 6 men, 8 women; committee of 7 with at most 3 women.\nTo find: the number of committees.\nMethod: List the cases (number of women \\(w\\)). The cases cannot happen together, so add them.",
+              "Case \\(w = 0\\): 7 men\n\\[{}^{6}C_{7} = 0\\]\nWhy: There are only 6 men, so a committee of 7 men is impossible.",
+              "Case \\(w = 1\\): 1 woman, 6 men\n\\[{}^{8}C_{1} \\times {}^{6}C_{6} = 8 \\times 1 = 8\\]\nWhy: All 6 men must be taken (1 way).",
+              "Case \\(w = 2\\): 2 women, 5 men\n\\[{}^{8}C_{2} \\times {}^{6}C_{5} = 28 \\times 6 = 168\\]\nWhy: \\({}^{8}C_{2} = \\frac{8 \\cdot 7}{2} = 28\\) and \\({}^{6}C_{5} = {}^{6}C_{1} = 6\\).",
+              "Case \\(w = 3\\): 3 women, 4 men\n\\[{}^{8}C_{3} \\times {}^{6}C_{4} = 56 \\times 15 = 840\\]\nWhy: This is part (i).",
+              "Add the cases\n\\[0 + 8 + 168 + 840 = 1016\\]\nWhy: \"At the most\" joins the cases with OR, so we add.",
+              "Check\n\\[\\text{all committees} = {}^{14}C_{7} = 3432\\]\n\\[\\text{4 or more women} = 1400 + 840 + 168 + 8 = 2416\\]\n\\[1016 + 2416 = 3432 \\;\\checkmark\\]\nWhy: Every committee has either at most 3 women or at least 4."
+            ],
+            "final_answer": "1016 committees",
+            "answer_table": {
+              "header": [
+                "Women",
+                "Men",
+                "Committees"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "7",
+                  "0 (only 6 men)"
+                ],
+                [
+                  "1",
+                  "6",
+                  "8"
+                ],
+                [
+                  "2",
+                  "5",
+                  "168"
+                ],
+                [
+                  "3",
+                  "4",
+                  "840"
+                ],
+                [
+                  "Total",
+                  "-",
+                  "1016"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13(iii)",
+            "prompt": "13 (iii) There are 6 men and 8 women members of a club. how many committees of seven can be formed? (iii) at least 5 women?",
+            "explanation": "\"At least 5 women\" means 5, 6 or 7 women; men fill the rest.\nWe must add the committees of these cases.\nPlan: \\({}^{8}C_{w} \\times {}^{6}C_{7-w}\\) for \\(w = 5, 6, 7\\), then add.",
+            "steps": [
+              "Given: 6 men, 8 women; committee of 7 with at least 5 women.\nTo find: the number of committees.\nMethod: List the cases \\(w = 5, 6, 7\\) and add (a committee falls in only one case).",
+              "Case \\(w = 5\\): 5 women, 2 men\n\\[{}^{8}C_{5} \\times {}^{6}C_{2} = 56 \\times 15 = 840\\]\nWhy: \\({}^{8}C_{5} = {}^{8}C_{3} = 56\\) and \\({}^{6}C_{2} = 15\\).",
+              "Case \\(w = 6\\): 6 women, 1 man\n\\[{}^{8}C_{6} \\times {}^{6}C_{1} = 28 \\times 6 = 168\\]\nWhy: \\({}^{8}C_{6} = {}^{8}C_{2} = 28\\).",
+              "Case \\(w = 7\\): 7 women, no man\n\\[{}^{8}C_{7} \\times {}^{6}C_{0} = 8 \\times 1 = 8\\]\nWhy: \\({}^{8}C_{7} = {}^{8}C_{1} = 8\\) and \\({}^{6}C_{0} = 1\\). This case is possible because there are 8 women.",
+              "Add the cases\n\\[840 + 168 + 8 = 1016\\]\nWhy: \"At least\" joins the cases with OR, so we add.",
+              "Check\n\\[\\text{at most 4 women} = 0 + 8 + 168 + 840 + 1400 = 2416\\]\n\\[1016 + 2416 = 3432 = {}^{14}C_{7} \\;\\checkmark\\]\nWhy: Committees with at least 5 women and with at most 4 women together make all committees."
+            ],
+            "final_answer": "1016 committees",
+            "answer_table": {
+              "header": [
+                "Women",
+                "Men",
+                "Committees"
+              ],
+              "rows": [
+                [
+                  "5",
+                  "2",
+                  "840"
+                ],
+                [
+                  "6",
+                  "1",
+                  "168"
+                ],
+                [
+                  "7",
+                  "0",
+                  "8"
+                ],
+                [
+                  "Total",
+                  "-",
+                  "1016"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "For part (iii) the answer key prints 1008. That is \\(840 + 168\\) only: it leaves out the committee of 7 women and no men (\\({}^{8}C_{7} \\times {}^{6}C_{0} = 8\\)). The correct answer is \\(840 + 168 + 8 = 1016\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

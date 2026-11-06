@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.2.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.2.2",
+      "title": "8.2.2 Some Deductions from the binomial expansion of (a + x)^n",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 160,
+          "pdf_to": 161,
+          "note": "Book p. 155-156: 8.2.2 Some Deductions from the binomial expansion of (a + x)^n, deductions (i)-(iv), sum of coefficients 2^n, odd/even coefficient sums, Example 14"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "We know that\n\\[(a + x)^{n} = \\binom{n}{0}a^{n} + \\binom{n}{1}a^{n-1}x\\]\n\\[+ \\binom{n}{2}a^{n-2}x^{2} + \\dots\\]\n\\[+ \\binom{n}{r}a^{n-r}x^{r} + \\dots\\]\n\\[+ \\binom{n}{n-1}ax^{n-1} + \\binom{n}{n}x^{n} \\quad \\text{(A)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "(A) is true for every value of \\(a\\) and \\(x\\). So we may put particular values in it, such as \\(a = 1\\) or \\(x = -1\\). Each choice gives a new, useful result. These results are called deductions (consequences) of the binomial theorem."
+          },
+          {
+            "type": "paragraph",
+            "text": "(i) If we put \\(a = 1\\), in (I), then we have;\n\\[(1 + x)^{n} = \\binom{n}{0} + \\binom{n}{1}x + \\binom{n}{2}x^{2} + \\dots\\]\n\\[+ \\binom{n}{r}x^{r} + \\dots + \\binom{n}{n-1}x^{n-1}\\]\n\\[+ \\binom{n}{n}x^{n} \\quad \\text{(B)}\\]\n\\[= 1 + nx + \\dfrac{n(n-1)}{2!}x^{2} + \\dots\\]\n\\[+ \\dfrac{n(n-1)(n-2)\\cdots(n-r+1)}{r!}x^{r}\\]\n\\[+ \\dots + nx^{n-1} + x^{n}\\]",
+            "book_errors": [
+              "in (I)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In deductions (i), (ii), (iii) and (iv) the book says \"in (I)\", but the expansion it refers to is labelled (A). Read every \"(I)\" on this page as (A)."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\because\\ \\binom{n}{r} = \\dfrac{n!}{r!\\,(n-r)!}\\]\n\\[= \\dfrac{n(n-1)\\cdots(n-r+1)(n-r)!}{r!\\,(n-r)!}\\]\n\\[= \\dfrac{n(n-1)\\cdots(n-r+1)}{r!}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does \\((n-r)!\\) cancel? \\(n!\\) is \\(n(n-1)(n-2)\\cdots 1\\). Stop the product after \\(r\\) factors, at \\((n - r + 1)\\); what is left, \\((n-r)(n-r-1)\\cdots 1\\), is exactly \\((n-r)!\\), and it cancels with the denominator. So \\(\\binom{n}{r}\\) is \"\\(r\\) factors counting down from \\(n\\), divided by \\(r!\\)\". Example: \\(\\binom{7}{3} = \\dfrac{7 \\cdot 6 \\cdot 5}{3!} = 35\\).\nThis second form will be important in 8.3, where \\(n\\) need not be a positive integer."
+          },
+          {
+            "type": "paragraph",
+            "text": "(ii) Putting \\(a = 1\\) and replacing \\(x\\) by \\(-x\\), in (I), we get\n\\[(1 - x)^{n} = \\binom{n}{0} + \\binom{n}{1}(-x) + \\binom{n}{2}(-x)^{2}\\]\n\\[+ \\binom{n}{3}(-x)^{3} + \\dots + \\binom{n}{n-1}(-x)^{n-1}\\]\n\\[+ \\binom{n}{n}(-x)^{n}\\]\n\\[= \\binom{n}{0} - \\binom{n}{1}x + \\binom{n}{2}x^{2} - \\binom{n}{3}x^{3} + \\dots\\]\n\\[+ (-1)^{n-1}\\binom{n}{n-1}x^{n-1}\\]\n\\[+ (-1)^{n}\\binom{n}{n}x^{n} \\quad \\text{(C)}\\]",
+            "book_errors": [
+              "in (I)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In \\((1 - x)^{n}\\) the terms with odd powers of \\(x\\) are negative and those with even powers are positive, because \\((-x)^{r} = (-1)^{r}x^{r}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "(iii) We can find the sum of the binomial coefficients by putting \\(a = 1\\) and \\(x = 1\\) in (I).\ni.e.,\n\\[(1 + 1)^{n} = \\binom{n}{0} + \\binom{n}{1} + \\binom{n}{2} + \\dots\\]\n\\[+ \\binom{n}{n-1} + \\binom{n}{n}\\]\nor\n\\[2^{n} = \\binom{n}{0} + \\binom{n}{1} + \\binom{n}{2} + \\dots\\]\n\\[+ \\binom{n}{n-1} + \\binom{n}{n}\\]\nThus, the sum of coefficients in the binomial expansion equals to \\(2^{n}\\).",
+            "book_errors": [
+              "in (I)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Check with \\(n = 4\\): \\(1 + 4 + 6 + 4 + 1 = 16 = 2^{4}\\).\nA counting meaning: a set of \\(n\\) objects has \\(\\binom{n}{0} + \\binom{n}{1} + \\dots + \\binom{n}{n}\\) subsets in all (choose 0 objects, 1 object, ..., all \\(n\\)). Each object is either in or out, so there are \\(2^{n}\\) subsets. Both counts must agree."
+          },
+          {
+            "type": "paragraph",
+            "text": "(iv) Putting \\(a = 1\\) and \\(x = -1\\), in (I), we have\n\\[(1 - 1)^{n} = \\binom{n}{0} - \\binom{n}{1} + \\binom{n}{2} - \\binom{n}{3} + \\dots\\]\n\\[+ (-1)^{n-1}\\binom{n}{n-1} + (-1)^{n}\\binom{n}{n}\\]\nThus\n\\[\\binom{n}{0} - \\binom{n}{1} + \\binom{n}{2} - \\binom{n}{3} + \\dots\\]\n\\[+ (-1)^{n-1}\\binom{n}{n-1} + (-1)^{n}\\binom{n}{n} = 0\\]",
+            "book_errors": [
+              "in (I)"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "If \\(n\\) is odd positive integer, then\n\\[\\binom{n}{0} + \\binom{n}{2} + \\dots + \\binom{n}{n-1}\\]\n\\[= \\binom{n}{1} + \\binom{n}{3} + \\dots + \\binom{n}{n}\\]\nIf \\(n\\) is even positive integer, then\n\\[\\binom{n}{0} + \\binom{n}{2} + \\dots + \\binom{n}{n}\\]\n\\[= \\binom{n}{1} + \\binom{n}{3} + \\dots + \\binom{n}{n-1}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Thus, sum of odd coefficients of a binomial expansion equals to the sum of its even coefficients."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Here \"odd coefficients\" means the coefficients in the odd places (1st, 3rd, 5th, ...), i.e. \\(\\binom{n}{0}, \\binom{n}{2}, \\binom{n}{4}, \\dots\\), and \"even coefficients\" those in the even places, \\(\\binom{n}{1}, \\binom{n}{3}, \\dots\\). In the alternating sum the first group has \\(+\\) signs and the second group \\(-\\) signs; the total is 0, so the two groups are equal.\nSince together they make \\(2^{n}\\) (deduction iii), each group adds up to \\(2^{n-1}\\). Check with \\(n = 5\\): \\(1 + 10 + 5 = 16\\) and \\(5 + 10 + 1 = 16 = 2^{4}\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 14",
+            "problem": "Show that: \\(\\binom{n}{1} + 2\\binom{n}{2} + 3\\binom{n}{3} + \\dots + n\\binom{n}{n} = n \\cdot 2^{n-1}\\)",
+            "steps": [
+              "Given: the sum \\(\\binom{n}{1} + 2\\binom{n}{2} + 3\\binom{n}{3} + \\dots + n\\binom{n}{n}\\).\nTo prove: it equals \\(n \\cdot 2^{n-1}\\).\nMethod: write each \\(\\binom{n}{r}\\) in the product form \\(\\frac{n(n-1)\\cdots(n-r+1)}{r!}\\), cancel the multiplier \\(r\\) with \\(r!\\), take \\(n\\) common, and recognise the bracket as the sum of all the coefficients of \\((1 + x)^{n-1}\\), which is \\(2^{n-1}\\) by deduction (iii).",
+              "Step 1: Write the terms in product form\n\\[\\binom{n}{1} + 2\\binom{n}{2} + 3\\binom{n}{3} + \\dots + n\\binom{n}{n}\\]\n\\[= n + 2\\dfrac{n(n-1)}{2!} + 3\\dfrac{n(n-1)(n-2)}{3!}\\]\n\\[+ \\dots + n \\cdot 1\\]\nWhy: \\(\\binom{n}{1} = n\\), \\(\\binom{n}{2} = \\frac{n(n-1)}{2!}\\), \\(\\binom{n}{3} = \\frac{n(n-1)(n-2)}{3!}\\), and \\(\\binom{n}{n} = 1\\).",
+              "Step 2: Cancel and take \\(n\\) common\n\\[= n\\left[1 + (n-1) + \\dfrac{(n-1)(n-2)}{2!} + \\dots + 1\\right]\\]\nWhy: \\(\\frac{2}{2!} = 1\\) and \\(\\frac{3}{3!} = \\frac{1}{2!}\\); in general \\(\\frac{r}{r!} = \\frac{1}{(r-1)!}\\). Every term contains the factor \\(n\\), so it is taken outside.",
+              "Step 3: Recognise the bracket\n\\[= n\\left[\\binom{n-1}{0} + \\binom{n-1}{1} + \\binom{n-1}{2} + \\dots + \\binom{n-1}{n-1}\\right]\\]\nWhy: \\(1 = \\binom{n-1}{0}\\), \\(n - 1 = \\binom{n-1}{1}\\), \\(\\frac{(n-1)(n-2)}{2!} = \\binom{n-1}{2}\\), ..., and the last 1 is \\(\\binom{n-1}{n-1}\\). These are all the binomial coefficients of index \\(n - 1\\).",
+              "Step 4: Use deduction (iii)\n\\[= n \\cdot 2^{n-1}\\]\nWhy: the sum of all the binomial coefficients of index \\(m\\) is \\(2^{m}\\); here \\(m = n - 1\\).",
+              "Check:\n\\(n = 3\\): left side \\(\\binom{3}{1} + 2\\binom{3}{2} + 3\\binom{3}{3} = 3 + 6 + 3 = 12\\); right side \\(3 \\cdot 2^{2} = 12\\).\n\\(n = 4\\): \\(4 + 2(6) + 3(4) + 4(1) = 32 = 4 \\cdot 2^{3}\\). (Checked by computer for \\(n = 1\\) to \\(8\\).)"
+            ],
+            "answer": "Hence proved: \\(\\binom{n}{1} + 2\\binom{n}{2} + 3\\binom{n}{3} + \\dots + n\\binom{n}{n} = n \\cdot 2^{n-1}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(a = 1\\): \\((1 + x)^{n} = \\sum_{r=0}^{n}\\binom{n}{r}x^{r}\\), with \\(\\binom{n}{r} = \\frac{n(n-1)\\cdots(n-r+1)}{r!}\\).\n2. \\(a = 1\\), \\(x \\to -x\\): \\((1 - x)^{n}\\) has alternating signs.\n3. \\(\\binom{n}{0} + \\binom{n}{1} + \\dots + \\binom{n}{n} = 2^{n}\\).\n4. \\(\\binom{n}{0} - \\binom{n}{1} + \\binom{n}{2} - \\dots = 0\\); the sums of the coefficients in odd and in even places are equal, each \\(2^{n-1}\\).\n5. Useful identity: \\(r\\binom{n}{r} = n\\binom{n-1}{r-1}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing the sum of coefficients as \\(2n\\) instead of \\(2^{n}\\).\n2. Starting the alternating sum with a minus sign: it starts \\(+\\binom{n}{0}\\).\n3. In Example 14, cancelling \\(r\\) with \\(r!\\) incorrectly: \\(\\frac{r}{r!} = \\frac{1}{(r-1)!}\\), not \\(\\frac{1}{r}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

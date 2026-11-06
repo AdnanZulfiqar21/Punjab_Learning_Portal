@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-1-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-1-q1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 234,
+          "pdf_to": 234,
+          "note": "Exercise 12.1, Question 1 (book page 229): limits of four sequences, parts (i)-(iv). Answer key PDF 310 agrees with all four (2, 0, 5/2, 1/2); solution book PDF 1050-1054."
+        }
+      ],
+      "title": "Question 1",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Find the limit of the following sequences if exists: \\(a_n = \\frac{2n + 3}{n + 1}\\).",
+            "explanation": "This is the limit of a sequence: we must find what \\(a_n\\) approaches as \\(n \\to +\\infty\\).\nTop and bottom both grow without bound, so direct substitution gives \\(\\infty/\\infty\\), which tells us nothing.\nPlan: divide every term by \\(n\\) (the highest power in the denominator), then use \\(\\lim 1/n = 0\\).",
+            "steps": [
+              "Given: \\(a_n = \\dfrac{2n + 3}{n + 1}\\).\nTo find: \\(\\lim\\limits_{n \\to +\\infty} a_n\\), if it exists.\nMethod: For a quotient of polynomials in \\(n\\), divide the top and the bottom by the highest power of \\(n\\) in the denominator (here \\(n\\)). Every term \\(c/n\\) then tends to \\(0\\) (12.2.5).",
+              "See why we cannot just substitute\n\\[n = 1000:\\ \\frac{2003}{1001}\\]\nWhy: Both top and bottom become huge as \\(n\\) grows. \"Huge over huge\" (\\(\\infty/\\infty\\)) is undecided, so the fraction must be rewritten first.",
+              "Divide the top and the bottom by \\(n\\)\n\\[a_n = \\frac{\\dfrac{2n}{n} + \\dfrac{3}{n}}{\\dfrac{n}{n} + \\dfrac{1}{n}}\\]\n\\[= \\frac{2 + \\dfrac{3}{n}}{1 + \\dfrac{1}{n}}\\]\nWhy: Dividing the top and the bottom by the same non-zero number does not change the value of the fraction, but now every \"growing\" term has become a constant or a term \\(c/n\\).",
+              "Let \\(n \\to +\\infty\\)\n\\[\\lim_{n \\to +\\infty} a_n = \\frac{2 + 0}{1 + 0}\\]\n\\[= 2\\]\nWhy: A fixed number divided by a larger and larger \\(n\\) becomes smaller and smaller: \\(\\lim 3/n = 0\\), \\(\\lim 1/n = 0\\). The bottom tends to \\(1 \\ne 0\\), so the quotient theorem may be used.",
+              "Check\n\\[a_{1000} = \\frac{2003}{1001} \\approx 2.001\\]\nWhy: For a large \\(n\\) the term is very close to \\(2\\), as expected. The sequence converges."
+            ],
+            "final_answer": "\\(\\lim\\limits_{n \\to +\\infty} a_n = 2\\) (the sequence converges to \\(2\\))."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Find the limit of the following sequences if exists: \\(b_n = \\frac{2n + 3}{n^2 + 1}\\).",
+            "explanation": "Again a limit of a sequence as \\(n \\to +\\infty\\).\nThe bottom has a higher power (\\(n^2\\)) than the top (\\(n\\)), so the bottom grows much faster.\nPlan: divide every term by \\(n^2\\), then let \\(n \\to +\\infty\\).",
+            "steps": [
+              "Given: \\(b_n = \\dfrac{2n + 3}{n^2 + 1}\\).\nTo find: \\(\\lim\\limits_{n \\to +\\infty} b_n\\), if it exists.\nMethod: Divide the top and the bottom by \\(n^2\\), the highest power of \\(n\\) in the denominator, and use \\(c/n \\to 0\\), \\(c/n^2 \\to 0\\).",
+              "Divide the top and the bottom by \\(n^2\\)\n\\[b_n = \\frac{\\dfrac{2n}{n^2} + \\dfrac{3}{n^2}}{\\dfrac{n^2}{n^2} + \\dfrac{1}{n^2}}\\]\n\\[= \\frac{\\dfrac{2}{n} + \\dfrac{3}{n^2}}{1 + \\dfrac{1}{n^2}}\\]\nWhy: We divide by the highest power in the denominator so that the denominator tends to a non-zero number (here \\(1\\)).",
+              "Let \\(n \\to +\\infty\\)\n\\[\\lim_{n \\to +\\infty} b_n = \\frac{0 + 0}{1 + 0}\\]\n\\[= 0\\]\nWhy: \\(2/n\\), \\(3/n^2\\) and \\(1/n^2\\) all tend to \\(0\\). The top tends to \\(0\\) and the bottom to \\(1\\), so the quotient tends to \\(0/1 = 0\\).",
+              "Check\n\\[b_{1000} = \\frac{2003}{1000001} \\approx 0.002\\]\nWhy: For a large \\(n\\) the terms are tiny and close to \\(0\\). The sequence converges to \\(0\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{n \\to +\\infty} b_n = 0\\) (the sequence converges to \\(0\\))."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Find the limit of the following sequences if exists: \\(c_n = \\frac{5n}{2n + 3}\\).",
+            "explanation": "Limit of a sequence as \\(n \\to +\\infty\\); top and bottom both have degree 1.\nDirect substitution gives \\(\\infty/\\infty\\), which is undecided.\nPlan: divide by \\(n\\), then let \\(n \\to +\\infty\\).",
+            "steps": [
+              "Given: \\(c_n = \\dfrac{5n}{2n + 3}\\).\nTo find: \\(\\lim\\limits_{n \\to +\\infty} c_n\\), if it exists.\nMethod: Divide the top and the bottom by \\(n\\), the highest power of \\(n\\) in the denominator; then \\(3/n \\to 0\\).",
+              "Divide the top and the bottom by \\(n\\)\n\\[c_n = \\frac{\\dfrac{5n}{n}}{\\dfrac{2n}{n} + \\dfrac{3}{n}}\\]\n\\[= \\frac{5}{2 + \\dfrac{3}{n}}\\]\nWhy: This keeps the value of the fraction and turns the growing terms into constants.",
+              "Let \\(n \\to +\\infty\\)\n\\[\\lim_{n \\to +\\infty} c_n = \\frac{5}{2 + 0}\\]\n\\[= \\frac{5}{2}\\]\nWhy: \\(3/n \\to 0\\); the bottom tends to \\(2 \\ne 0\\), so the quotient theorem applies.",
+              "Check\n\\[c_{1000} = \\frac{5000}{2003} \\approx 2.496\\]\nWhy: This is close to \\(5/2 = 2.5\\). The sequence converges."
+            ],
+            "final_answer": "\\(\\lim\\limits_{n \\to +\\infty} c_n = \\dfrac{5}{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Find the limit of the following sequences if exists: \\(d_n = \\frac{n^2 - 3n + 1}{2n^2 + n + 4}\\).",
+            "explanation": "Limit of a sequence as \\(n \\to +\\infty\\); top and bottom both have degree 2.\nDirect substitution gives \\(\\infty/\\infty\\).\nPlan: divide every term by \\(n^2\\), then let \\(n \\to +\\infty\\).",
+            "steps": [
+              "Given: \\(d_n = \\dfrac{n^2 - 3n + 1}{2n^2 + n + 4}\\).\nTo find: \\(\\lim\\limits_{n \\to +\\infty} d_n\\), if it exists.\nMethod: Divide the top and the bottom by \\(n^2\\), the highest power of \\(n\\) in the denominator; then every \\(c/n\\) and \\(c/n^2\\) tends to \\(0\\).",
+              "Divide the top and the bottom by \\(n^2\\)\n\\[d_n = \\frac{1 - \\dfrac{3}{n} + \\dfrac{1}{n^2}}{2 + \\dfrac{1}{n} + \\dfrac{4}{n^2}}\\]\nWhy: \\(n^2/n^2 = 1\\), \\(3n/n^2 = 3/n\\), \\(1/n^2\\) stays; in the bottom \\(2n^2/n^2 = 2\\), \\(n/n^2 = 1/n\\), \\(4/n^2\\) stays.",
+              "Let \\(n \\to +\\infty\\)\n\\[\\lim_{n \\to +\\infty} d_n = \\frac{1 - 0 + 0}{2 + 0 + 0}\\]\n\\[= \\frac{1}{2}\\]\nWhy: Every term with \\(n\\) or \\(n^2\\) in its denominator tends to \\(0\\). The bottom tends to \\(2 \\ne 0\\).",
+              "Check\n\\[d_{1000} = \\frac{997001}{2001004} \\approx 0.498\\]\nWhy: This is close to \\(1/2\\). The sequence converges."
+            ],
+            "final_answer": "\\(\\lim\\limits_{n \\to +\\infty} d_n = \\dfrac{1}{2}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

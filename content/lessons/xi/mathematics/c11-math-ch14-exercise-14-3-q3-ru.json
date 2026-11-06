@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-3-Q3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-3-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 287,
+          "pdf_to": 287,
+          "note": "Exercise 14.3, Question 3 (i)-(ii): area of triangle PQR = (1/2)|PQ x PR| (book p.282). Answer key PDF 312."
+        }
+      ],
+      "variant_of": "C11-MATH-CH14-EXERCISE-14-3-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Find the area of the triangle, formed by the points \\(P\\), \\(Q\\) and \\(R\\): \\(P(2, 3, 5)\\), \\(Q(1, 2, 0)\\), \\(R(4, 1, 2)\\).",
+            "explanation": "Yeh space (3D) mein triangle ka area nikalne ka sawal hai.\nTeen kone (vertices) diye hain, area chahiye.\nPlan: \\(P\\) se do sides vectors bana kar likhein, cross product lein, us ki lambai nikalein aur aadha kar dein.",
+            "steps": [
+              "Diya gaya hai: \\(P(2, 3, 5)\\), \\(Q(1, 2, 0)\\), \\(R(4, 1, 2)\\).\nHumein find karna hai: triangle \\(PQR\\) ka area.\nTareeqa: Ek hi kone \\(P\\) se nikalne wali do sides \\(\\underline{PQ}\\) aur \\(\\underline{PR}\\) ek parallelogram banati hain jis ka area \\(|\\underline{PQ} \\times \\underline{PR}|\\) hai. Parallelogram ko diagonal do barabar triangles mein kaat deta hai, is liye triangle ka area us ka aadha hai (14.3.7 (b)). 3D mein base aur height naapna mushkil hai, cross product yeh kaam khud kar deta hai.",
+              "\\(P\\) se do sides ko vectors bana kar likhein\n\\[\\underline{PQ} = (1 - 2)\\underline{i} + (2 - 3)\\underline{j} + (0 - 5)\\underline{k}\\]\n\\[= -\\underline{i} - \\underline{j} - 5\\underline{k}\\]\n\\[\\underline{PR} = (4 - 2)\\underline{i} + (1 - 3)\\underline{j} + (2 - 5)\\underline{k}\\]\n\\[= 2\\underline{i} - 2\\underline{j} - 3\\underline{k}\\]\nKyun: Kisi point se doosre point tak ka vector = (aakhri point) minus (shuru wala point). Dono sides ek hi kone \\(P\\) se shuru honi chahiyein, tab hi woh parallelogram ki saath wali (adjacent) sides banti hain.\nDhyan dein: Ulta minus (shuru minus aakhir) karne se vector ulta ho jata hai; area par to asar nahi hota, lekin aadat sahi rakhein.",
+              "Determinant likhein\n\\[\\underline{PQ} \\times \\underline{PR} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ -1 & -1 & -5 \\\\ 2 & -2 & -3 \\end{vmatrix}\\]\nKyun: Pehli row mein unit vectors \\(\\underline{i}, \\underline{j}, \\underline{k}\\), doosri row mein pehle vector ke components \\(\\underline{PQ}\\), teesri row mein doosre vector ke components \\(\\underline{PR}\\). Rows ki tarteeb wohi honi chahiye jo product ki tarteeb hai, warna jawab ka sign ulta ho jayega.",
+              "Teenon minors nikalein\n\\[\\underline{i}\\text{ minor} = (-1)(-3) - (-5)(-2) = -7\\]\n\\[\\underline{j}\\text{ minor} = (-1)(-3) - (-5)(2) = 13\\]\n\\[\\underline{k}\\text{ minor} = (-1)(-2) - (-1)(2) = 4\\]\nKyun: Har unit vector ki row aur column ko dhak dein (cover kar dein); jo 2 by 2 bachta hai us ka (upar baayan)(neeche daayan) minus (upar daayan)(neeche baayan) minor hai. Har product ko bracket mein likhne se negative signs ki ghalti nahi hoti.",
+              "Signs \\(+, -, +\\) lagayein\n\\[\\underline{PQ} \\times \\underline{PR} = \\underline{i}(-7) - \\underline{j}(13) + \\underline{k}(4)\\]\n\\[= -7\\underline{i} - 13\\underline{j} + 4\\underline{k}\\]\nKyun: Determinant ko pehli row ke saath kholte waqt signs ka pattern \\(+, -, +\\) hota hai, yani beech wala \\(\\underline{j}\\) ka term minus ho kar aata hai.\nDhyan dein: Sab se zyada ghalti isi beech wale minus mein hoti hai; \\(-\\underline{j}(\\text{minor})\\) mein minor khud negative ho to jawab plus ban jata hai.",
+              "Cross product ki lambai\n\\[|\\underline{PQ} \\times \\underline{PR}| = \\sqrt{(-7)^2 + (-13)^2 + (4)^2}\\]\n\\[= \\sqrt{234} = 3 \\sqrt{26}\\]\nKyun: Yeh lambai us parallelogram ka area hai jo \\(\\underline{PQ}\\) aur \\(\\underline{PR}\\) par bana hai, kyunke \\(|\\underline{u} \\times \\underline{v}| = |\\underline{u}||\\underline{v}|\\sin\\theta\\) = base \\(\\times\\) height.",
+              "Aadha karein\n\\[\\text{Area} = \\dfrac{1}{2}\\,|\\underline{PQ} \\times \\underline{PR}|\\]\n\\[= \\dfrac{3\\sqrt{26}}{2}\\]\nKyun: Diagonal \\(QR\\) parallelogram ko do bilkul barabar triangles mein baant deti hai; un mein se ek hamara triangle \\(PQR\\) hai.\nDhyan dein: Exam mein \\(\\frac{1}{2}\\) bhool jana aam ghalti hai; parallelogram mein half nahi, triangle mein half.",
+              "Tasdeeq\n\\[\\underline{PQ} \\cdot (\\underline{PQ} \\times \\underline{PR}) = (-1)(-7) + (-1)(-13) + (-5)(4)\\]\n\\[= 7 + 13 - 20 = 0\\]\nKyun: Cross product ko \\(\\underline{PQ}\\) par perpendicular hona chahiye; dot product zero aaya to minors aur signs sahi hain."
+            ],
+            "final_answer": "Triangle \\(PQR\\) ka area \\(= \\dfrac{3\\sqrt{26}}{2}\\) square units"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Find the area of the triangle, formed by the points \\(P\\), \\(Q\\) and \\(R\\): \\(P(0, 0, 1)\\), \\(Q(2, -1, 2)\\), \\(R(-1, 3, 2)\\).",
+            "explanation": "Yeh space (3D) mein triangle ka area nikalne ka sawal hai.\nTeen kone (vertices) diye hain, area chahiye.\nPlan: \\(P\\) se do sides vectors bana kar likhein, cross product lein, us ki lambai nikalein aur aadha kar dein.",
+            "steps": [
+              "Diya gaya hai: \\(P(0, 0, 1)\\), \\(Q(2, -1, 2)\\), \\(R(-1, 3, 2)\\).\nHumein find karna hai: triangle \\(PQR\\) ka area.\nTareeqa: Ek hi kone \\(P\\) se nikalne wali do sides \\(\\underline{PQ}\\) aur \\(\\underline{PR}\\) ek parallelogram banati hain jis ka area \\(|\\underline{PQ} \\times \\underline{PR}|\\) hai. Parallelogram ko diagonal do barabar triangles mein kaat deta hai, is liye triangle ka area us ka aadha hai (14.3.7 (b)). 3D mein base aur height naapna mushkil hai, cross product yeh kaam khud kar deta hai.",
+              "\\(P\\) se do sides ko vectors bana kar likhein\n\\[\\underline{PQ} = (2 - 0)\\underline{i} + (-1 - 0)\\underline{j} + (2 - 1)\\underline{k}\\]\n\\[= 2\\underline{i} - \\underline{j} + \\underline{k}\\]\n\\[\\underline{PR} = (-1 - 0)\\underline{i} + (3 - 0)\\underline{j} + (2 - 1)\\underline{k}\\]\n\\[= -\\underline{i} + 3\\underline{j} + \\underline{k}\\]\nKyun: Kisi point se doosre point tak ka vector = (aakhri point) minus (shuru wala point). Dono sides ek hi kone \\(P\\) se shuru honi chahiyein, tab hi woh parallelogram ki saath wali (adjacent) sides banti hain.\nDhyan dein: Ulta minus (shuru minus aakhir) karne se vector ulta ho jata hai; area par to asar nahi hota, lekin aadat sahi rakhein.",
+              "Determinant likhein\n\\[\\underline{PQ} \\times \\underline{PR} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 2 & -1 & 1 \\\\ -1 & 3 & 1 \\end{vmatrix}\\]\nKyun: Pehli row mein unit vectors \\(\\underline{i}, \\underline{j}, \\underline{k}\\), doosri row mein pehle vector ke components \\(\\underline{PQ}\\), teesri row mein doosre vector ke components \\(\\underline{PR}\\). Rows ki tarteeb wohi honi chahiye jo product ki tarteeb hai, warna jawab ka sign ulta ho jayega.",
+              "Teenon minors nikalein\n\\[\\underline{i}\\text{ minor} = (-1)(1) - (1)(3) = -4\\]\n\\[\\underline{j}\\text{ minor} = (2)(1) - (1)(-1) = 3\\]\n\\[\\underline{k}\\text{ minor} = (2)(3) - (-1)(-1) = 5\\]\nKyun: Har unit vector ki row aur column ko dhak dein (cover kar dein); jo 2 by 2 bachta hai us ka (upar baayan)(neeche daayan) minus (upar daayan)(neeche baayan) minor hai. Har product ko bracket mein likhne se negative signs ki ghalti nahi hoti.",
+              "Signs \\(+, -, +\\) lagayein\n\\[\\underline{PQ} \\times \\underline{PR} = \\underline{i}(-4) - \\underline{j}(3) + \\underline{k}(5)\\]\n\\[= -4\\underline{i} - 3\\underline{j} + 5\\underline{k}\\]\nKyun: Determinant ko pehli row ke saath kholte waqt signs ka pattern \\(+, -, +\\) hota hai, yani beech wala \\(\\underline{j}\\) ka term minus ho kar aata hai.\nDhyan dein: Sab se zyada ghalti isi beech wale minus mein hoti hai; \\(-\\underline{j}(\\text{minor})\\) mein minor khud negative ho to jawab plus ban jata hai.",
+              "Cross product ki lambai\n\\[|\\underline{PQ} \\times \\underline{PR}| = \\sqrt{(-4)^2 + (-3)^2 + (5)^2}\\]\n\\[= \\sqrt{50} = 5 \\sqrt{2}\\]\nKyun: Yeh lambai us parallelogram ka area hai jo \\(\\underline{PQ}\\) aur \\(\\underline{PR}\\) par bana hai, kyunke \\(|\\underline{u} \\times \\underline{v}| = |\\underline{u}||\\underline{v}|\\sin\\theta\\) = base \\(\\times\\) height.",
+              "Aadha karein\n\\[\\text{Area} = \\dfrac{1}{2}\\,|\\underline{PQ} \\times \\underline{PR}|\\]\n\\[= \\dfrac{5\\sqrt{2}}{2}\\]\nKyun: Diagonal \\(QR\\) parallelogram ko do bilkul barabar triangles mein baant deti hai; un mein se ek hamara triangle \\(PQR\\) hai.\nDhyan dein: Exam mein \\(\\frac{1}{2}\\) bhool jana aam ghalti hai; parallelogram mein half nahi, triangle mein half.",
+              "Tasdeeq\n\\[\\underline{PQ} \\cdot (\\underline{PQ} \\times \\underline{PR}) = (2)(-4) + (-1)(-3) + (1)(5)\\]\n\\[= -8 + 3 + 5 = 0\\]\nKyun: Cross product ko \\(\\underline{PQ}\\) par perpendicular hona chahiye; dot product zero aaya to minors aur signs sahi hain."
+            ],
+            "final_answer": "Triangle \\(PQR\\) ka area \\(= \\dfrac{5\\sqrt{2}}{2}\\) square units"
+          }
+        ]
+      }
+    }
+  ]
+}

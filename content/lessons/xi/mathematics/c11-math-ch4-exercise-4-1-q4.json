@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-1-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-1-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 58,
+          "pdf_to": 58,
+          "note": "Exercise 4.1, Question 4: book page 53 (PDF 58); answer key PDF 302"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4 If\n\\[A = \\begin{bmatrix}-1 & 2 & 3 & 0 \\\\ 1 & 0 & 2 & -2 \\\\ -3 & 5 & 3 & -1\\end{bmatrix}\\]\nthen find \\(AA^t\\), \\(A^tA\\) and \\((A^t)^t\\).",
+            "explanation": "Three results are asked: two products of \\(A\\) with its transpose, and the transpose of the transpose.\nWe must first write \\(A^t\\), then multiply in both orders (the answers have different orders), then transpose \\(A^t\\) again.\nPlan: \\(A^t\\); orders; each entry of \\(AA^t\\) is (a row of \\(A\\))\\(\\cdot\\)(a row of \\(A\\)), each entry of \\(A^tA\\) is (a column of \\(A\\))\\(\\cdot\\)(a column of \\(A\\)).",
+            "steps": [
+              "Given: \\(A\\) of order \\(3 \\times 4\\).\nTo find: \\(AA^t\\), \\(A^tA\\) and \\((A^t)^t\\).\nMethod: The transpose \\(A^t\\) is made by writing the rows of \\(A\\) as columns. Then row-by-column multiplication.",
+              "Write the transpose\n\\[A^t = \\begin{bmatrix}-1 & 1 & -3 \\\\ 2 & 0 & 5 \\\\ 3 & 2 & 3 \\\\ 0 & -2 & -1\\end{bmatrix}\\]\nWhy: Row 1 of \\(A\\) becomes column 1 of \\(A^t\\), and so on. \\(A\\) is \\(3 \\times 4\\), so \\(A^t\\) is \\(4 \\times 3\\).",
+              "Find the order of each product\n\\[AA^t: (3 \\times 4)(4 \\times 3) \\to 3 \\times 3\\]\n\\[A^tA: (4 \\times 3)(3 \\times 4) \\to 4 \\times 4\\]\nWhy: The inner numbers match in both cases, so both products exist, but their orders are different, so \\(AA^t \\neq A^tA\\).",
+              "Name the rows of \\(A\\)\n\\[R_1 = (-1, 2, 3, 0)\\]\n\\[R_2 = (1, 0, 2, -2)\\]\n\\[R_3 = (-3, 5, 3, -1)\\]\nWhy: Column \\(j\\) of \\(A^t\\) is row \\(j\\) of \\(A\\), so entry \\((i, j)\\) of \\(AA^t\\) is \\(R_i \\cdot R_j\\) (multiply matching entries and add).",
+              "Entries of \\(AA^t\\) on the diagonal\n\\[R_1 \\cdot R_1 = 1 + 4 + 9 + 0 = 14\\]\n\\[R_2 \\cdot R_2 = 1 + 0 + 4 + 4 = 9\\]\n\\[R_3 \\cdot R_3 = 9 + 25 + 9 + 1 = 44\\]\nWhy: A row times itself is the sum of the squares of its entries.",
+              "Entries of \\(AA^t\\) off the diagonal\n\\[R_1 \\cdot R_2 = -1 + 0 + 6 + 0 = 5\\]\n\\[R_1 \\cdot R_3 = 3 + 10 + 9 + 0 = 22\\]\n\\[R_2 \\cdot R_3 = -3 + 0 + 6 + 2 = 5\\]\nWhy: For example \\(R_1 \\cdot R_2 = (-1)(1) + (2)(0) + (3)(2) + (0)(-2)\\). Since \\(R_i \\cdot R_j = R_j \\cdot R_i\\), entry \\((2, 1)\\) equals entry \\((1, 2)\\), and so on.",
+              "Write \\(AA^t\\)\n\\[AA^t = \\begin{bmatrix}14 & 5 & 22 \\\\ 5 & 9 & 5 \\\\ 22 & 5 & 44\\end{bmatrix}\\]\nWhy: Each value goes in its place \\((i, j)\\) and \\((j, i)\\). The matrix is symmetric.",
+              "Name the columns of \\(A\\)\n\\[C_1 = (-1, 1, -3)\\]\n\\[C_2 = (2, 0, 5)\\]\n\\[C_3 = (3, 2, 3)\\]\n\\[C_4 = (0, -2, -1)\\]\nWhy: Row \\(i\\) of \\(A^t\\) is column \\(i\\) of \\(A\\), so entry \\((i, j)\\) of \\(A^tA\\) is \\(C_i \\cdot C_j\\).",
+              "Diagonal entries of \\(A^tA\\)\n\\[C_1 \\cdot C_1 = 1 + 1 + 9 = 11\\]\n\\[C_2 \\cdot C_2 = 4 + 0 + 25 = 29\\]\n\\[C_3 \\cdot C_3 = 9 + 4 + 9 = 22\\]\n\\[C_4 \\cdot C_4 = 0 + 4 + 1 = 5\\]\nWhy: Each is the sum of the squares of a column.",
+              "Other entries of \\(A^tA\\)\n\\[C_1 \\cdot C_2 = -2 + 0 - 15 = -17\\]\n\\[C_1 \\cdot C_3 = -3 + 2 - 9 = -10\\]\n\\[C_1 \\cdot C_4 = 0 - 2 + 3 = 1\\]\n\\[C_2 \\cdot C_3 = 6 + 0 + 15 = 21\\]\n\\[C_2 \\cdot C_4 = 0 + 0 - 5 = -5\\]\n\\[C_3 \\cdot C_4 = 0 - 4 - 3 = -7\\]\nWhy: For example \\(C_1 \\cdot C_2 = (-1)(2) + (1)(0) + (-3)(5)\\). Each value is used in two symmetric places.",
+              "Write \\(A^tA\\)\n\\[A^tA = \\begin{bmatrix}11 & -17 & -10 & 1 \\\\ -17 & 29 & 21 & -5 \\\\ -10 & 21 & 22 & -7 \\\\ 1 & -5 & -7 & 5\\end{bmatrix}\\]\nWhy: \\(4 \\times 4\\), symmetric, as expected.",
+              "Transpose \\(A^t\\) again\n\\[(A^t)^t = \\begin{bmatrix}-1 & 2 & 3 & 0 \\\\ 1 & 0 & 2 & -2 \\\\ -3 & 5 & 3 & -1\\end{bmatrix}\\]\n\\[(A^t)^t = A\\]\nWhy: Writing the rows of \\(A^t\\) as columns undoes the first transpose and gives \\(A\\) back.",
+              "Check\n\\[\\text{tr}(AA^t) = 14 + 9 + 44 = 67\\]\n\\[\\text{tr}(A^tA) = 11 + 29 + 22 + 5 = 67\\]\nWhy: Both diagonal sums equal the sum of the squares of all 12 entries of \\(A\\) (\\(14 + 9 + 44 = 67\\)), so the diagonals agree; and both products came out symmetric, as \\(AA^t\\) and \\(A^tA\\) always are."
+            ],
+            "final_answer": "\\(AA^t = \\begin{bmatrix}14 & 5 & 22 \\\\ 5 & 9 & 5 \\\\ 22 & 5 & 44\\end{bmatrix}\\)\n\\(A^tA = \\begin{bmatrix}11 & -17 & -10 & 1 \\\\ -17 & 29 & 21 & -5 \\\\ -10 & 21 & 22 & -7 \\\\ 1 & -5 & -7 & 5\\end{bmatrix}\\)\n\\((A^t)^t = \\begin{bmatrix}-1 & 2 & 3 & 0 \\\\ 1 & 0 & 2 & -2 \\\\ -3 & 5 & 3 & -1\\end{bmatrix} = A\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints\n\\[AA^t = \\begin{bmatrix}14 & -5 & 8 \\\\ -5 & 9 & -11 \\\\ 8 & -11 & 44\\end{bmatrix}\\]\nand\n\\[A^tA = \\begin{bmatrix}11 & -3 & -6 & 1 \\\\ -3 & 29 & 19 & -5 \\\\ -6 & 19 & 22 & -4 \\\\ 1 & -5 & -4 & 5\\end{bmatrix}\\]\nThese do not belong to the printed matrix \\(A\\). Only the diagonal entries are right. For example, entry (1, 2) of \\(AA^t\\) is \\(R_1 \\cdot R_2 = -1 + 0 + 6 + 0 = 5\\), not \\(-5\\), and entry (1, 2) of \\(A^tA\\) is \\(C_1 \\cdot C_2 = -2 + 0 - 15 = -17\\), not \\(-3\\). The correct products are the ones worked out above. The key's answer (iii) \\((A^t)^t = A\\) is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q12",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q12",
+      "title": "Question 12",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 12: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12",
+            "prompt": "12 A line of 70 dominoes is set up so that when the first domino falls, it causes the second domino to fall, and so on. Prove that if the first domino falls, all 70 dominoes will fall.",
+            "explanation": "This is the 'domino effect', the picture behind mathematical induction.\nWe take \\(P(n)\\): 'the \\(n\\)th domino falls', for \\(n = 1, 2, \\dots, 70\\).\nPlan: base case from 'the first domino falls'; induction step from the way the dominoes are set up.",
+            "steps": [
+              "Given: 70 dominoes in a line; each falling domino makes the next one fall; the first domino falls.\nTo prove: all 70 dominoes fall.\nMethod: Mathematical induction on \\(n\\), the position of a domino, for \\(1 \\le n \\le 70\\).",
+              "Statement\n\\[P(n):\\ \\text{the } n\\text{th domino falls}\\]\nWhy: We must show \\(P(1), P(2), \\dots, P(70)\\) are all true.",
+              "Base case\n\\[P(1) \\text{ is true}\\]\nWhy: We are told that the first domino falls.",
+              "Induction hypothesis\n\\[\\text{Assume } P(k),\\quad 1 \\le k \\le 69\\]\nWhy: Suppose the \\(k\\)th domino falls, for some \\(k\\) before the last one.",
+              "Induction step\n\\[P(k) \\Rightarrow P(k + 1)\\]\nWhy: The dominoes are set up so that a falling domino knocks over the next one. So when the \\(k\\)th domino falls, the \\((k + 1)\\)th domino also falls.",
+              "Conclusion\n\\[P(1) \\Rightarrow P(2) \\Rightarrow \\dots \\Rightarrow P(70)\\]\nWhy: \\(P(1)\\) is true and each true case gives the next one, so by the principle of mathematical induction all 70 statements are true."
+            ],
+            "final_answer": "Hence proved: if the first domino falls, all 70 dominoes fall."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.9.1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.9.1",
+      "title": "4.9.1 Solution of System of Homogeneous Linear Equations by Gaussian Elimination Method (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 76,
+          "pdf_to": 79,
+          "note": "Book p. 71-74: 4.9.1 Gaussian elimination for homogeneous systems, Examples 14 and 15, Rule I and Rule II"
+        }
+      ],
+      "variant_of": "C11-MATH-CH4-4.9.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Pichle sabaq mein humne dekha ke homogeneous system ka \\((0, 0, 0)\\) hamesha solution hota hai, aur asal sawal yeh hai ke kya is ke ilawa bhi solutions hain. Aaj hum ek aisa tareeqa seekhenge jo dono baatein ek saath bata deta hai: kitne solutions hain, aur woh kya hain. Is tareeqe ka naam Gaussian elimination hai. Aap ne row operations se non-homogeneous systems hal karna 4.8 mein dekha hai; yahan bhi wahi row operations hain, bas right-hand side hamesha zero hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ke mutabiq: Gaussian elimination linear equations ke systems hal karne ka ek tarteeb wala (systematic) tareeqa hai, jo German mathematician Carl Friedrich Gauss ke naam par hai. Is mein system ke augmented matrix par row operations ki ek series karte hain taa ke woh row-echelon form mein aa jaye. Jab matrix is aasan shakal mein aa jaye to solution back substitution (neeche se oopar value rakhna) se mil jata hai. Yeh tareeqa apni raftar aur saafgoi ki wajah se bohat istemal hota hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Row operations wahi teen hain jo aap ne Section 4.6 mein parhe: do rows ki jagah badalna \\((R_i \\leftrightarrow R_j)\\), kisi row ko non-zero number se multiply karna \\((kR_i)\\), aur ek row ka multiple doosri row mein jama karna \\((R_i + kR_j \\to R_i')\\).\nYeh solutions ko kyun nahin badalte? Kyun ke har row ek equation hai. Equations ki tarteeb badalna, kisi equation ko 2 se multiply karna, ya ek equation ko doosri mein jama karna: in mein se koi bhi kaam jawab nahin badalta. Aap yeh kaam school se \"elimination method\" mein karte aaye hain; matrix sirf us ka saaf suthra likhne ka tareeqa hai.\n\\(\\overset{R}{\\sim}\\) ka matlab hai \"row equivalent\": naya matrix purane se row operations ke zariye bana hai, is liye dono ke solutions ek jaise hain.\nBack substitution: echelon form mein sab se neeche wali non-zero row mein sab se kam unknowns hote hain. Pehle use hal karte hain, phir woh value oopar wali rows mein rakhte jaate hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Tareeqa qadam ba qadam (ise yaad kar lein, har sawal mein yahi chalega):\n1. Augmented matrix \\(A_b = [A \\mid O]\\) likhein.\n2. Row 1 ke leading 1 ki madad se us ke neeche saare numbers zero karein.\n3. Row 2 ka leading entry 1 banayein aur us ke neeche zero karein; isi tarah aage.\n4. Echelon form mein non-zero rows ginein: yeh rank of \\(A\\) hai.\n5. Back substitution karein. Jis variable ka koi leading entry na ho woh free hai; use \\(t\\) keh dein."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki do misaalein dekhte hain. Pehli mein sirf trivial solution niklega, doosri mein be-shumaar solutions. Dono ka farq ghaur se dekhiye."
+          },
+          {
+            "type": "example",
+            "title": "Example 14",
+            "problem": "Solve the following system of equations by Gaussian Elimination method:\n\\[x + 2y + z = 0\\]\n\\[2x + 3y + 4z = 0\\]\n\\[4x + 3y + 2z = 0\\]",
+            "steps": [
+              "Given: teen variables \\(x, y, z\\) mein teen equations ka homogeneous system (har right-hand side zero).\nTo find: is ke saare solutions \\((x, y, z)\\).\nMethod: sab se pehle yeh dekhte hain ke kaam kya hai: humein maloom karna hai ke kya \\((0, 0, 0)\\) hi akela solution hai ya aur bhi hain. Is ke liye Gaussian elimination: augmented matrix banayein, row operations se use row-echelon form mein layein, rank parhein, phir neeche se oopar back substitution karein. Aakhri column hamesha zero rahega, kyun ke zero ka koi bhi multiple zero hi hota hai.",
+              "Step 1: Augmented matrix likhein\n\\[A_b = \\left[\\begin{array}{rrr|r}1 & 2 & 1 & 0 \\\\ 2 & 3 & 4 & 0 \\\\ 4 & 3 & 2 & 0\\end{array}\\right]\\]\nKyun: har row ek equation hai. Pehle teen numbers \\(x, y, z\\) ke coefficients hain aur bar ke baad right-hand side \\(0\\). Is tarah poora system ek saaf table mein aa jata hai aur hum variables likhe baghair kaam kar sakte hain.",
+              "Step 2: Pehli row ke leading 1 ke neeche zero banayein\n\\[R_2 + (-2)R_1 \\to R_2'\\]\n\\[R_3 + (-4)R_1 \\to R_3'\\]\n\\[(2, 3, 4, 0) - 2(1, 2, 1, 0)\\]\n\\[= (0, -1, 2, 0)\\]\n\\[(4, 3, 2, 0) - 4(1, 2, 1, 0)\\]\n\\[= (0, -5, -2, 0)\\]\n\\[\\overset{R}{\\sim}\\left[\\begin{array}{rrr|r}1 & 2 & 1 & 0 \\\\ 0 & -1 & 2 & 0 \\\\ 0 & -5 & -2 & 0\\end{array}\\right]\\]\nKyun: pehli row 1 se shuru hoti hai. Doosri row ka pehla number 2 hai, to us mein se pehli row ka 2 guna nikaal dein to wahan 0 aa jata hai. Teesri row ka pehla number 4 hai, to 4 guna nikaalein. Is tarah doosri aur teesri equation se \\(x\\) khatam ho gaya.\nDhyan dein: poori row par operation karein, sirf pehle number par nahin. Har entry alag alag compute karein.",
+              "Step 3: Doosri row ka leading entry 1 banayein\n\\[(-1)R_2 \\to R_2'\\]\n\\[\\overset{R}{\\sim}\\left[\\begin{array}{rrr|r}1 & 2 & 1 & 0 \\\\ 0 & 1 & -2 & 0 \\\\ 0 & -5 & -2 & 0\\end{array}\\right]\\]\nKyun: \\(-1\\) se multiply karne se \\((0, -1, 2, 0)\\) ban jata hai \\((0, 1, -2, 0)\\). Leading 1 hone se agla zero banana aasan hota hai, aur kitab ki row-echelon form mein leading entry 1 hi chahiye.",
+              "Step 4: Doosri row ke leading 1 ke neeche zero banayein\n\\[R_3 + 5R_2 \\to R_3'\\]\n\\[(0, -5, -2, 0) + 5(0, 1, -2, 0)\\]\n\\[= (0, 0, -12, 0)\\]\n\\[\\overset{R}{\\sim}\\left[\\begin{array}{rrr|r}1 & 2 & 1 & 0 \\\\ 0 & 1 & -2 & 0 \\\\ 0 & 0 & -12 & 0\\end{array}\\right]\\]\nKyun: teesri row mein leading 1 ke neeche \\(-5\\) hai. \\(-5 + 5 \\times 1 = 0\\), is liye doosri row ka 5 guna jama kiya. Ab teesri equation se \\(y\\) bhi khatam ho gaya; us mein sirf \\(z\\) bacha.\nDhyan dein: \\(-2 + 5(-2) = -2 - 10 = -12\\). Yahan sign ki ghalti bohat aam hai.",
+              "Step 5: Aakhri leading entry 1 banayein aur rank parhein\n\\[\\left(\\dfrac{-1}{12}\\right)R_3 \\to R_3'\\]\n\\[\\overset{R}{\\sim}\\left[\\begin{array}{rrr|r}1 & 2 & 1 & 0 \\\\ 0 & 1 & -2 & 0 \\\\ 0 & 0 & 1 & 0\\end{array}\\right]\\]\nAb matrix row-echelon form mein hai. Is mein teen non-zero rows hain, is liye\n\\[\\text{rank of } A = 3\\]\njo variables ki tadaad ke barabar hai.\nKyun: echelon form mein non-zero rows ginne se rank milta hai. Rank batata hai ke humare paas asal mein kitni \"alag\" (independent) equations hain. Teen unknowns aur teen alag equations: har unknown ki value bilkul tay ho jayegi.",
+              "Step 6: Back substitution\nTeesri row se:\n\\[z = 0\\]\nDoosri row se:\n\\[y - 2z = 0\\]\n\\[y - 2(0) = 0\\]\n\\[y = 0\\]\nPehli row se \\(x + 2y + z = 0\\). Is mein \\(y = 0\\) aur \\(z = 0\\) rakhein:\n\\[x + 2(0) + 0 = 0\\]\n\\[x = 0\\]\nKyun: echelon form ko hamesha neeche se oopar hal karte hain. Sab se neeche wali row mein sirf ek unknown hota hai; us ki value oopar wali rows mein rakhte jaate hain.",
+              "Tasdeeq:\n\\((0, 0, 0)\\) teeno equations ko zaahir hai satisfy karta hai. Lekin kya yahi akela solution hai? Coefficient matrix ka determinant nikaal kar dekhte hain:\n\\[|A| = 1(6 - 12) - 2(4 - 16)\\]\n\\[quad + 1(6 - 12)\\]\n\\[= -6 + 24 - 6 = 12\\]\n\\(|A| \\ne 0\\), is liye sirf trivial solution hai. Rank 3 wala nateeja bhi yahi keh raha tha. Dono tareeqe ek hi jawab dete hain."
+            ],
+            "answer": "System ka sirf trivial solution hai: \\((x, y, z) = (0, 0, 0)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 14 mein kitab ne operation \\(R_3 + (-4)R_1 \\to R_3'\\) ke beech ek faltu \"=\" chhaap diya hai. Sahi operation woh hai jo humne upar likha.\nBack substitution mein kitab likhti hai \"y = 0 aur x = 0 rakhein\". Lekin \\(x\\) to hum dhoondh rahe hain! Sahi yeh hai: \\(y = 0\\) aur \\(z = 0\\) rakhein. Final jawab \\((0, 0, 0)\\) kitab mein sahi hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Example 14 mein agar aakhri matrix ki teesri row \\(\\begin{bmatrix} 0 & 0 & 0 & 0 \\end{bmatrix}\\) aa jati to kya hota? Rank kitna hota aur solution kaisa?\n(Jawab: rank 2 hota, jo 3 se kam hai. Phir \\(z\\) free hota, \\(z = t\\) le kar \\(y = 2t\\) aur \\(x = -5t\\) jaisa general solution milta, yani be-shumaar solutions. Lekin asal mein \\(-12\\) aaya, zero nahin, is liye sirf trivial solution hai. Ek hi number poori kahani badal deta hai, is liye har entry dhyan se compute karein.)"
+          },
+          {
+            "type": "example",
+            "title": "Example 15",
+            "problem": "Solve the following system of equations using Gaussian Elimination Method.\n\\[x_1 + x_2 + x_3 = 0\\]\n\\[x_1 - x_2 + 3x_3 = 0\\]\n\\[x_1 + 3x_2 - x_3 = 0\\]",
+            "steps": [
+              "Given: \\(x_1, x_2, x_3\\) mein teen equations ka homogeneous system.\nTo find: is ke saare solutions.\nMethod: bilkul Example 14 wala tareeqa, Gaussian elimination. Farq yeh hoga ke is baar ek poori row zero ban jayegi, aur wahi humein batayegi ke non-trivial solutions bhi hain. Dekhte hain kaise.",
+              "Step 1: Augmented matrix likhein\n\\[A_b = \\left[\\begin{array}{rrr|r}1 & 1 & 1 & 0 \\\\ 1 & -1 & 3 & 0 \\\\ 1 & 3 & -1 & 0\\end{array}\\right]\\]\nKyun: har equation ke coefficients ek row bante hain aur zero right-hand sides aakhri column. (Kitab yahan \"argumented\" likhti hai; sahi lafz augmented hai, yani \"barhaya hua\": coefficient matrix ke saath ek column jor diya.)",
+              "Step 2: Pehli row ke leading 1 ke neeche zero banayein\n\\[R_2 + (-1)R_1 \\to R_2'\\]\n\\[R_3 + (-1)R_1 \\to R_3'\\]\n\\[(1, -1, 3, 0) - (1, 1, 1, 0)\\]\n\\[= (0, -2, 2, 0)\\]\n\\[(1, 3, -1, 0) - (1, 1, 1, 0)\\]\n\\[= (0, 2, -2, 0)\\]\n\\[\\overset{R}{\\sim}\\left[\\begin{array}{rrr|r}1 & 1 & 1 & 0 \\\\ 0 & -2 & 2 & 0 \\\\ 0 & 2 & -2 & 0\\end{array}\\right]\\]\nKyun: doosri aur teesri row dono 1 se shuru hoti hain, is liye dono mein se pehli row seedhi minus kar di. Is se \\(x_1\\) un dono equations se nikal gaya.\nDhyan dein: teesri row ka doosra number \\(3 - 1 = 2\\) hai, \\(-2\\) nahin. Kitab yahan ghalti se \\(-2\\) chhaapti hai (neeche \"Kitab ki ghalti\" dekhiye).",
+              "Step 3: Doosri row ka leading entry 1 banayein\n\\[\\left(-\\dfrac{1}{2}\\right)R_2 \\to R_2'\\]\n\\[\\overset{R}{\\sim}\\left[\\begin{array}{rrr|r}1 & 1 & 1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 2 & -2 & 0\\end{array}\\right]\\]\nKyun: \\((0, -2, 2, 0)\\) ko \\(-2\\) se divide karein to \\((0, 1, -1, 0)\\) milta hai. Har entry divide hoti hai: \\(-2 \\div -2 = 1\\), \\(2 \\div -2 = -1\\), \\(0 \\div -2 = 0\\).",
+              "Step 4: Doosri row ke leading 1 ke neeche zero banayein\n\\[R_3 + (-2)R_2 \\to R_3'\\]\n\\[(0, 2, -2, 0) - 2(0, 1, -1, 0)\\]\n\\[= (0, 0, 0, 0)\\]\n\\[\\overset{R}{\\sim}\\left[\\begin{array}{rrr|r}1 & 1 & 1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 0 & 0 & 0\\end{array}\\right]\\]\nAb matrix row-echelon form mein hai aur sirf do non-zero rows hain:\n\\[\\text{rank of } A = 2 < 3\\]\nyani rank variables ki tadaad se kam hai.\nKyun: poori zero row ka matlab hai ke teesri equation ne koi nayi maloomat nahin di. Woh pehli do equations se hi ban sakti thi: \\(2(x_1 + x_2 + x_3) - (x_1 - x_2 + 3x_3) = x_1 + 3x_2 - x_3\\). Teen unknowns hain magar asal mein sirf do alag equations, is liye ek unknown azad (free) rahega.",
+              "Step 5: Barabar (equivalent) system likhein\n\\[x_1 + x_2 + x_3 = 0 \\quad \\text{(i)}\\]\n\\[x_2 - x_3 = 0 \\quad \\text{(ii)}\\]\n\\[0x_3 = 0\\]\nKyun: \\(0x_3 = 0\\) har \\(x_3\\) ke liye sach hai, chahe \\(x_3 = 5\\) ho ya \\(-100\\). Is liye \\(x_3\\) ki value hum apni marzi se le sakte hain; yeh arbitrary (marzi wala) variable hai.",
+              "Step 6: Baqi unknowns ko \\(x_3\\) ki shakal mein likhein\n(i) aur (ii) se:\n\\[x_1 = -x_2 - x_3 \\quad \\text{(iii)}\\]\n\\[x_2 = x_3\\]\n\\(x_2 = x_3\\) ko (iii) mein rakhein:\n\\[x_1 = -x_3 - x_3\\]\n\\[x_1 = -2x_3 \\quad \\text{(iv)}\\]\nKyun: \\(-x_3 - x_3\\) do negative cheezon ka majmooa hai, jo negative hi rehta hai: \\(-2x_3\\). Jaise \\(-5 - 5 = -10\\). (Kitab beech wali line mein \\(2x_3\\) chhaapti hai, lekin agli line mein khud \\(-2x_3\\) likhti hai.)",
+              "Step 7: General solution\nMaan lein \\(x_3 = t\\), jahan \\(t\\) koi bhi number hai. To (ii) aur (iv) se:\n\\[x_1 = -2t,\\quad x_2 = t,\\quad x_3 = t\\]\nKyun: \\(t\\) ki har nayi value ek naya solution deti hai, is liye solutions be-shumaar hain. \\(t = 0\\) par trivial solution milta hai; \\(t \\ne 0\\) par har solution non-trivial hai.",
+              "Tasdeeq:\n\\((-2t, t, t)\\) ko har equation mein rakhein:\n\\[-2t + t + t = 0\\]\n\\[-2t - t + 3t = 0\\]\n\\[-2t + 3t - t = 0\\]\nTeeno har \\(t\\) ke liye sahi hain. Misal ke taur par \\(t = 1\\) se \\((-2, 1, 1)\\) milta hai. Aur determinant:\n\\[|A| = 1(1 - 9) - 1(-1 - 3)\\]\n\\[quad + 1(3 + 1)\\]\n\\[= -8 + 4 + 4 = 0\\]\nZero aaya, jo non-trivial solutions ke saath bilkul mutabiqat rakhta hai."
+            ],
+            "answer": "Be-shumaar (infinitely many) solutions: \\(x_1 = -2t,\\ x_2 = t,\\ x_3 = t\\), jahan \\(t\\) koi bhi number hai (\\(t \\ne 0\\) par non-trivial)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "1. Kitab \"argumented matrix\" likhti hai; sahi lafz augmented matrix hai.\n2. \\(R_3 + (-1)R_1 \\to R_3'\\) ke baad teesri row \\(\\begin{bmatrix} 0 & 2 & -2 & 0 \\end{bmatrix}\\) honi chahiye, kyun ke \\(3 - 1 = 2\\). Kitab \\(-2\\) chhaapti hai, lekin agle matrix mein khud sahi 2 istemal karti hai.\n3. Kitab \\(x_1 = -x_3 - x_3 = 2x_3\\) chhaapti hai. Sahi: \\(x_1 = -x_3 - x_3 = -2x_3\\), jaise kitab ki agli line (iv) aur final jawab \\(x_1 = -2t\\) dikhate hain.\nFinal jawab \\(x_1 = -2t,\\ x_2 = t,\\ x_3 = t\\) kitab mein sahi hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Upar wali misaalon se hum yeh dekhte hain:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Rule – I: Homogeneous linear equations ke system ka sirf trivial solution hota hai agar rank of \\(A\\) = variables ki tadaad.",
+            "bold": [
+              "Rule – I:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Rule – II: Homogeneous linear equations ke system ka non-trivial solution hota hai agar rank of \\(A\\) < variables ki tadaad.",
+            "bold": [
+              "Rule – II:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Dono rules ko misaalon se jor kar dekhiye. Example 14 mein rank 3 tha aur variables bhi 3: sirf \\((0, 0, 0)\\). Wahan \\(|A| = 12 \\ne 0\\) tha.\nExample 15 mein rank 2 tha jab ke variables 3: ek variable free raha aur be-shumaar solutions mile. Wahan \\(|A| = 0\\) tha.\nAam qaida: free variables ki tadaad = (variables ki tadaad) \\(-\\) (rank). Example 15 mein \\(3 - 2 = 1\\), isi liye sirf ek \\(t\\) aaya.\nSquare system ke liye rank = variables ki tadaad tab hi hota hai jab \\(|A| \\ne 0\\). Is liye determinant aur rank dono ek hi kahani sunate hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Rules ko aasan misaal se samjhiye. Maan lijiye aap ko teen numbers \\(x, y, z\\) dhoondne hain aur aap ko teen alag alag shartein (conditions) di gayi hain. Teen alag shartein teen unknowns ko poori tarah bandh deti hain, aur homogeneous system mein woh \\((0, 0, 0)\\) par hi ruk jaate hain. Yeh Rule I hai.\nAb maan lijiye teesri shart asal mein pehli do ka hi doosra roop hai (jaise Example 15 mein). To asal mein sirf do shartein hain aur teen unknowns. Ek unknown azad reh jata hai, aur us ki har value ke saath ek naya solution banta hai. Yeh Rule II hai.\nRank yahi ginta hai: kitni shartein waqai alag hain. Is liye rank aur variables ki tadaad ka muqabla hi faisla karta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Ek chhota system hal kar ke dekhiye (yeh hamari practice hai, kitab ka sawal nahin): \\(x + y - z = 0\\), \\(2x - y + z = 0\\), \\(x - 2y + 2z = 0\\).\n\\(R_2 - 2R_1\\): \\((0, -3, 3, 0)\\). \\(R_3 - R_1\\): \\((0, -3, 3, 0)\\). Phir \\(\\left(-\\frac{1}{3}\\right)R_2\\): \\((0, 1, -1, 0)\\), aur \\(R_3 + 3R_2\\): \\((0, 0, 0, 0)\\).\nRank 2 < 3, is liye non-trivial solutions. \\(y - z = 0\\) se \\(y = z = t\\); \\(x + y - z = 0\\) se \\(x = 0\\).\nJawab: \\((0, t, t)\\). Tasdeeq \\(t = 1\\) par: \\(0 + 1 - 1 = 0\\), \\(0 - 1 + 1 = 0\\), \\(0 - 2 + 2 = 0\\). Sahi!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Ek homogeneous system mein 3 variables hain aur echelon form mein do zero rows bach gayi hain (sirf ek non-zero row). Kitne free variables honge, aur solutions kitne?\n(Jawab: rank 1 hai, is liye \\(3 - 1 = 2\\) free variables, jaise \\(s\\) aur \\(t\\); solutions be-shumaar.)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Jab sawal kahe \"non-trivial solution nikaliye\" to jawab parameter ke saath likhein: \\(x_1 = -2t,\\ x_2 = t,\\ x_3 = t\\). Hal karne se pehle rank likh kar variables ki tadaad se muqabla zaroor karein; is se examiner ko pata chalta hai ke aap ne kaun sa rule lagaya aur kyun."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Gaussian elimination: augmented matrix \\(\\to\\) row-echelon form \\(\\to\\) back substitution.\n2. Homogeneous system mein aakhri column shuru se aakhir tak zero rehta hai.\n3. Rank of \\(A\\) = echelon form mein non-zero rows ki tadaad.\n4. Rank = variables ki tadaad: sirf trivial solution (Rule I).\n5. Rank < variables ki tadaad: non-trivial solutions, free variables ke saath (Rule II).\n6. General solution ko har equation mein rakh kar tasdeeq karein."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Row ke sirf kuch numbers par operation karna: row ki har entry badalni chahiye, aakhri column samet.\n2. Sign ki ghalti, jaise \\(-x_3 - x_3 = 2x_3\\) likh dena: do negative jama hon to negative hi rehta hai, \\(-2x_3\\). Kitab khud yeh ghalti kar gayi hai, aap na karein.\n3. Zero row dekh kar \"koi solution nahin\" likh dena: homogeneous system mein zero row ka matlab hai free variable aur be-shumaar solutions.\n4. Jab general solution poocha jaye to sirf ek solution \\((-2, 1, 1)\\) likh kar chhor dena. Bachne ka tareeqa: \\(t\\) wala jawab likhein, phir chahein to ek misaal bhi de dein."
+          }
+        ]
+      }
+    }
+  ]
+}

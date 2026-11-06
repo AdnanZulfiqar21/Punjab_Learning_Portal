@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-2-Q4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-2-q4",
+      "title": "Question 4 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 65,
+          "pdf_to": 65,
+          "note": "Exercise 4.2, Question 4: Cofactors and determinants of A and B, parts (i)-(ii) (book page 60)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH4-EXERCISE-4-2-Q4",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) If \\(A = \\begin{bmatrix} 1 & 2 & -3 \\\\ 0 & -5 & 0 \\\\ -2 & -2 & 7 \\end{bmatrix}\\) and \\(B = \\begin{bmatrix} -5 & -2 & 5 \\\\ -3 & -1 & 4 \\\\ -2 & -1 & 2 \\end{bmatrix}\\), then find: \\(A_{13}, A_{23}, A_{33}\\) and \\(|A|\\).",
+            "explanation": "Yeh cofactor ka sawal hai. Yaad rakhein: chhota \\(a_{ij}\\) entry hai, aur bara \\(A_{ij}\\) us entry ka cofactor (sign wala minor) hai; dono alag cheezein hain.\nTeeno maange gaye cofactors column 3 ke hain, is liye baad mein \\(|A|\\) bhi column 3 ke along nikalenge, taake mehnat dobara na karni pare.\nPlan: chhupao, minor nikalo, sign \\((-1)^{i+j}\\) lagao; phir \\(|A| = a_{13}A_{13} + a_{23}A_{23} + a_{33}A_{33}\\).",
+            "steps": [
+              "Diya gaya hai: \\(A = \\begin{bmatrix} 1 & 2 & -3 \\\\ 0 & -5 & 0 \\\\ -2 & -2 & 7 \\end{bmatrix}\\)\nHumein find karna hai: \\(A_{13}, A_{23}, A_{33}\\) aur \\(|A|\\).\nTareeqa: \\(A_{ij} = (-1)^{i+j}M_{ij}\\). Minor \\(M_{ij}\\) woh \\(2 \\times 2\\) determinant hai jo row \\(i\\) aur column \\(j\\) chhupane ke baad bachta hai. \\(i + j\\) even ho to sign plus, odd ho to minus.",
+              "Cofactor \\(A_{13}\\) (row 1, column 3 chhupayein)\n\\[A_{13} = (-1)^{1+3}\\begin{vmatrix} 0 & -5 \\\\ -2 & -2 \\end{vmatrix}\\]\n\\[= +[(0)(-2) - (-5)(-2)]\\]\n\\[= 0 - 10 = -10\\]\nKyun: \\(1 + 3 = 4\\) even hai, sign plus. \\((-5)(-2) = +10\\), aur us ko minus kiya.\nDhyan dein: Minor chhupane se banta hai, sign position se aata hai. Pehle minor poora nikalein, phir sign lagayein; entry \\(-3\\) ka apna sign yahan kaam nahi aata.",
+              "Cofactor \\(A_{23}\\) (row 2, column 3 chhupayein)\n\\[A_{23} = (-1)^{2+3}\\begin{vmatrix} 1 & 2 \\\\ -2 & -2 \\end{vmatrix}\\]\n\\[= -[(1)(-2) - (2)(-2)]\\]\n\\[= -[-2 + 4] = -2\\]\nKyun: \\(2 + 3 = 5\\) odd hai, is liye bahar minus. Pehle bracket ke andar \\(2\\) aaya, phir minus laga kar \\(-2\\).\nDhyan dein: Sign hamesha minor nikalne ke baad lagayein, warna do minus aapas mein uljhte hain.",
+              "Cofactor \\(A_{33}\\) (row 3, column 3 chhupayein)\n\\[A_{33} = (-1)^{3+3}\\begin{vmatrix} 1 & 2 \\\\ 0 & -5 \\end{vmatrix}\\]\n\\[= +[(1)(-5) - (2)(0)] = -5\\]\nKyun: \\(3 + 3 = 6\\) even, sign plus.",
+              "Column 3 ke along \\(|A|\\)\n\\[|A| = a_{13}A_{13} + a_{23}A_{23} + a_{33}A_{33}\\]\n\\[= (-3)(-10) + (0)(-2) + (7)(-5)\\]\n\\[= 30 + 0 - 35 = -5\\]\nKyun: Determinant = kisi bhi column ki entries \\(\\times\\) unhi ke cofactors ka jama. Signs pehle hi cofactors ke andar hain, dobara mat lagayein.",
+              "Tasdeeq (row 2 ke along)\n\\[|A| = (-5)(+1)\\begin{vmatrix} 1 & -3 \\\\ -2 & 7 \\end{vmatrix}\\]\n\\[= -5(7 - 6) = -5 \\;\\checkmark\\]\nKyun: Row 2 hai \\(0, -5, 0\\); sirf \\(a_{22} = -5\\) bachta hai, sign plus. Doosre raste se bhi \\(-5\\)."
+            ],
+            "final_answer": "\\(A_{13} = -10,\\ A_{23} = -2,\\ A_{33} = -5,\\ |A| = -5\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Part (i) ke liye answer key mein \\(A_{13} = -3,\\ A_{23} = 0,\\ A_{33} = 7\\) likha hai. Yeh cofactors nahi, balkay \\(A\\) ki entries \\(a_{13}, a_{23}, a_{33}\\) hain. Sahi cofactors: \\(A_{13} = -10,\\ A_{23} = -2,\\ A_{33} = -5\\). Key ka \\(|A| = -5\\) sahi hai. Sabaq: chhota \\(a_{ij}\\) (entry) aur bara \\(A_{ij}\\) (cofactor) kabhi mix na karein."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) If \\(A = \\begin{bmatrix} 1 & 2 & -3 \\\\ 0 & -5 & 0 \\\\ -2 & -2 & 7 \\end{bmatrix}\\) and \\(B = \\begin{bmatrix} -5 & -2 & 5 \\\\ -3 & -1 & 4 \\\\ -2 & -1 & 2 \\end{bmatrix}\\), then find: \\(B_{31}, B_{32}, B_{33}\\) and \\(|B|\\).",
+            "explanation": "Phir cofactors: \\(B_{3j}\\) row 3, column \\(j\\) wali entry ka cofactor hai.\nTeeno row 3 ke hain, to \\(|B|\\) row 3 ke along nikalenge.\nPlan: teen cofactors (signs \\(+,\\,-,\\,+\\)), phir \\(|B| = b_{31}B_{31} + b_{32}B_{32} + b_{33}B_{33}\\).",
+            "steps": [
+              "Diya gaya hai: \\(B = \\begin{bmatrix} -5 & -2 & 5 \\\\ -3 & -1 & 4 \\\\ -2 & -1 & 2 \\end{bmatrix}\\)\nHumein find karna hai: \\(B_{31}, B_{32}, B_{33}\\) aur \\(|B|\\).\nTareeqa: \\(B_{ij} = (-1)^{i+j}M_{ij}\\), phir row 3 ke along expansion. Is matrix mein bohat se negative numbers hain, is liye har product bracket mein likhein.",
+              "Cofactor \\(B_{31}\\) (row 3, column 1 chhupayein)\n\\[B_{31} = (-1)^{3+1}\\begin{vmatrix} -2 & 5 \\\\ -1 & 4 \\end{vmatrix}\\]\n\\[= +[(-2)(4) - (5)(-1)]\\]\n\\[= -8 + 5 = -3\\]\nKyun: \\(3 + 1 = 4\\) even, sign plus. Row 3 aur column 1 chhupane ke baad rows 1, 2 aur columns 2, 3 ki entries bachti hain: \\(-2, 5, -1, 4\\).",
+              "Cofactor \\(B_{32}\\) (row 3, column 2 chhupayein)\n\\[B_{32} = (-1)^{3+2}\\begin{vmatrix} -5 & 5 \\\\ -3 & 4 \\end{vmatrix}\\]\n\\[= -[(-5)(4) - (5)(-3)]\\]\n\\[= -[-20 + 15] = 5\\]\nKyun: \\(3 + 2 = 5\\) odd, sign minus. Bracket \\(-5\\) aaya, minus lagne se \\(+5\\).",
+              "Cofactor \\(B_{33}\\) (row 3, column 3 chhupayein)\n\\[B_{33} = (-1)^{3+3}\\begin{vmatrix} -5 & -2 \\\\ -3 & -1 \\end{vmatrix}\\]\n\\[= +[(-5)(-1) - (-2)(-3)]\\]\n\\[= 5 - 6 = -1\\]\nKyun: Sign plus. Dono products positive hain (\\(5\\) aur \\(6\\)), aur un ka farq \\(-1\\).",
+              "Row 3 ke along \\(|B|\\)\n\\[|B| = b_{31}B_{31} + b_{32}B_{32} + b_{33}B_{33}\\]\n\\[= (-2)(-3) + (-1)(5) + (2)(-1)\\]\n\\[= 6 - 5 - 2 = -1\\]\nKyun: Row 3 ki entries \\(\\times\\) unhi ke cofactors. Isi liye humne pehle row 3 ke cofactors nikale the: ab \\(|B|\\) ke liye koi naya minor nahi nikalna para. Exam mein yeh chhota rasta waqt bachata hai.",
+              "Tasdeeq (row 1 ke along)\n\\[|B| = -5(-2 + 4) + 2(-6 + 8) + 5(3 - 2)\\]\n\\[= -10 + 4 + 5 = -1 \\;\\checkmark\\]\nKyun: Row 1 ki entries \\(-5, -2, 5\\), signs \\(+,\\,-,\\,+\\); \\(-(-2) = +2\\). Wohi jawab."
+            ],
+            "final_answer": "\\(B_{31} = -3,\\ B_{32} = 5,\\ B_{33} = -1,\\ |B| = -1\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Part (ii) ke liye answer key mein \\(B_{31} = -2,\\ B_{32} = -1,\\ B_{33} = 2\\) likha hai. Yeh cofactors nahi, balkay \\(B\\) ki entries \\(b_{31}, b_{32}, b_{33}\\) hain. Sahi cofactors: \\(B_{31} = -3,\\ B_{32} = 5,\\ B_{33} = -1\\). Key ka \\(|B| = -1\\) sahi hai. Sabaq: chhota \\(a_{ij}\\) aur bara \\(A_{ij}\\) kabhi mix na karein."
+          }
+        ]
+      }
+    }
+  ]
+}

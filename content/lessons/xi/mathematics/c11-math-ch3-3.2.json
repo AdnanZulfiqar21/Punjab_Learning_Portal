@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH3-3.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch3",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch3/3.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 41,
+          "pdf_to": 42,
+          "note": "Book p. 36-37: 3.2 Inverse of Quadratic Function and Example 4 (domain and range); callouts marked Teaching note / Key points / Common mistake and the Book correction boxes are ours."
+        }
+      ],
+      "title": "3.2 Inverse of Quadratic Function",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Quadratic functions are typically not one-to-one over their entire domain. To find an inverse for a quadratic function, we must restrict its domain to a portion where it is one-to-one. Commonly, we restrict the domain to either \\(x \\ge h\\) (where \\(h\\) is the \\(x\\)-coordinate of the vertex) or \\(x \\le h\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is a quadratic function not one-to-one? Because of its symmetry: two different inputs at equal distances from the axis \\(x = h\\) give the same output. For \\(f(x) = x^{2} + 4x + 3\\): \\(f(-3) = 0\\) and \\(f(-1) = 0\\). An inverse would have to send 0 back to both \\(-3\\) and \\(-1\\), which a function cannot do.\nHorizontal line test (from Unit 2): a horizontal line cuts a parabola in two points, so the whole parabola fails the test. Cutting the parabola at its vertex keeps only one arm, which passes the test.\nSo: one arm (\\(x \\ge h\\) or \\(x \\le h\\)) = one-to-one = an inverse exists."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to find the inverse of a restricted quadratic function:\n1. Write \\(y = f(x)\\) and interchange \\(x\\) and \\(y\\).\n2. Solve for \\(y\\) by the quadratic formula (or by completing the square). You get \\(y = \\text{something} \\pm \\sqrt{\\ldots}\\).\n3. Find Domain \\(f\\) and Range \\(f\\). Then Domain \\(f^{-1}\\) = Range \\(f\\) and Range \\(f^{-1}\\) = Domain \\(f\\).\n4. Keep the sign whose outputs lie in Range \\(f^{-1}\\). Usually: \\(x \\ge h\\) gives the \\(+\\) sign, \\(x \\le h\\) gives the \\(-\\) sign."
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "Find the inverse of \\(f(x) = x^{2} + 4x + 3,\\ x \\ge -2\\). Also find its domain and range.",
+            "steps": [
+              "Given: \\(f(x) = x^{2} + 4x + 3\\) with the restricted domain \\(x \\ge -2\\).\nTo find: \\(f^{-1}(x)\\), and the domain and range of \\(f\\) and \\(f^{-1}\\).\nMethod: write \\(y = f(x)\\), interchange \\(x\\) and \\(y\\), and solve the new equation for \\(y\\) with the quadratic formula (it is quadratic in \\(y\\)). The formula gives two signs; the domain and range decide which one is the inverse.",
+              "Step 1: Write \\(y\\) and interchange \\(x\\) and \\(y\\)\n\\[y = x^{2} + 4x + 3\\]\n\\[x = y^{2} + 4y + 3\\]\n\\[y^{2} + 4y + 3 - x = 0\\]\nWhy: an inverse function undoes \\(f\\): it sends each output back to its input. Interchanging \\(x\\) and \\(y\\) expresses exactly this.",
+              "Step 2: Use the quadratic formula in \\(y\\)\nHere \\(a = 1\\), \\(b = 4\\), \\(c = 3 - x\\):\n\\[y = \\dfrac{-4 \\pm \\sqrt{(4)^{2} - 4(1)(3 - x)}}{2(1)}\\]\nWhy: the equation \\(y^{2} + 4y + (3 - x) = 0\\) is quadratic in \\(y\\); \\(x\\) is treated like a number, so the whole \\(3 - x\\) is the constant term.",
+              "Step 3: Simplify under the square root\n\\[y = \\dfrac{-4 \\pm \\sqrt{16 - 12 + 4x}}{2}\\]\n\\[y = \\dfrac{-4 \\pm \\sqrt{4 + 4x}}{2}\\]\n\\[y = \\dfrac{-4 \\pm 2\\sqrt{1 + x}}{2}\\]\nWhy: \\(-4(3 - x) = -12 + 4x\\); and \\(\\sqrt{4 + 4x} = \\sqrt{4(1 + x)} = 2\\sqrt{1 + x}\\).",
+              "Step 4: Divide by 2 and replace \\(y\\) with \\(f^{-1}(x)\\)\n\\[f^{-1}(x) = -2 \\pm \\sqrt{1 + x}\\]\nWhy: each term of the numerator is divided by 2. The above inverse function has both a positive and a negative component; to determine which is the inverse, we find the domain and range of the given function.",
+              "Step 5: Domain of \\(f\\)\n\\[\\text{Domain } f = [-2, \\infty)\\]\nWhy: the domain was restricted to \\(x \\ge -2\\) in the question. \\(-2\\) is the \\(x\\)-coordinate of the vertex (\\(h = -\\frac{4}{2} = -2\\)), so on this half the function is one-to-one.",
+              "Step 6: Range of \\(f\\)\nTo find the range, the book proceeds as: since \\(x \\ge -2\\), \\(x^{2} \\ge +4\\) and \\(4x \\ge -8\\), so \\(x^{2} + 4x \\ge -4\\), \\(x^{2} + 4x + 3 \\ge -4 + 3\\), i.e. \\(f(x) \\ge -1\\). (This chain is not valid; see the Book correction below.)\nAs \\(f(x) = x^{2} + 4x + 3\\):\n\\[f(x) = (x + 2)^{2} - 1\\]\nSince \\(x \\ge -2\\), \\(x + 2 \\ge 0\\), so \\((x + 2)^{2}\\) takes every value \\(\\ge 0\\) and \\(f(x) \\ge -1\\). Therefore, the minimum value of \\(f(x)\\) is \\(-1\\) and hence\n\\[\\text{Range } f = [-1, \\infty)\\]\nWhy: completing the square shows the lowest value directly: the vertex is \\((-2, -1)\\) and the parabola opens upward.",
+              "Step 7: Domain and range of \\(f^{-1}\\)\n\\[\\text{Domain } f^{-1} = [-1, \\infty)\\]\n\\[\\text{Range } f^{-1} = [-2, \\infty)\\]\nWhy: the inverse swaps inputs and outputs, so Domain \\(f^{-1}\\) = Range \\(f\\) and Range \\(f^{-1}\\) = Domain \\(f\\). Note also that \\(\\sqrt{1 + x}\\) needs \\(1 + x \\ge 0\\), i.e. \\(x \\ge -1\\).",
+              "Step 8: Choose the correct sign\nNow we substitute any value of \\(x\\) that falls within the domain. We choose the value \\(x = 0\\).\n\\[f^{-1}(0) = -2 + \\sqrt{1 + 0} = -1\\]\nThe book prints the second line as \\(f^{-1}(0) = +2 - \\sqrt{1 - 0} = -3\\); the negative component actually gives\n\\[f^{-1}(0) = -2 - \\sqrt{1 + 0} = -3\\]\nWe notice only \\(-1\\) lies in the range of \\(f^{-1}\\), \\([-2, \\infty)\\) (the book says \"the range of \\(f\\)\"; \\(-1\\) lies in that too). Therefore, we discard the negative component.\nWhy: every output of \\(f^{-1}\\) must be an input of \\(f\\), i.e. a number \\(\\ge -2\\); \\(-3\\) is not.",
+              "Step 9: Conclusion\n\\[f^{-1}(x) = -2 + \\sqrt{1 + x}\\]\nWhy: with the plus sign, \\(\\sqrt{1 + x} \\ge 0\\), so \\(f^{-1}(x) \\ge -2\\) for every \\(x\\) in its domain, exactly as required.",
+              "Check:\n\\(f(1) = 1 + 4 + 3 = 8\\) and \\(f^{-1}(8) = -2 + \\sqrt{9} = 1\\): the inverse brings 8 back to 1.\nIn general, \\(f(f^{-1}(x)) = (-2 + \\sqrt{1 + x})^{2} + 4(-2 + \\sqrt{1 + x}) + 3\\)\n\\[= 4 - 4\\sqrt{1+x} + 1 + x\\]\n\\[\\quad - 8 + 4\\sqrt{1+x} + 3 = x\\]"
+            ],
+            "answer": "\\(f^{-1}(x) = -2 + \\sqrt{1 + x}\\). Domain \\(f = [-2, \\infty)\\), Range \\(f = [-1, \\infty)\\); Domain \\(f^{-1} = [-1, \\infty)\\), Range \\(f^{-1} = [-2, \\infty)\\).",
+            "book_errors": [
+              "\\(x^{2} \\ge +4\\)",
+              "\\(f^{-1}(0) = +2 - \\sqrt{1 - 0} = -3\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Range working: the book writes \"since \\(x \\ge -2\\), \\(x^{2} \\ge +4\\)\". This does not follow: for example \\(x = 0 \\ge -2\\) but \\(0^{2} = 0\\), which is not \\(\\ge 4\\). (Squaring an inequality is allowed only when both sides are non-negative.) The correct argument is the one the book gives next: \\(f(x) = (x + 2)^{2} - 1\\) and \\(x + 2 \\ge 0\\), so \\(f(x) \\ge -1\\). The result, Range \\(f = [-1, \\infty)\\), is correct."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \\(f^{-1}(0) = +2 - \\sqrt{1 - 0} = -3\\). The negative component is \\(-2 - \\sqrt{1 + x}\\), so it should read \\(f^{-1}(0) = -2 - \\sqrt{1 + 0} = -3\\). (As printed, \\(+2 - \\sqrt{1 - 0}\\) equals \\(1\\), not \\(-3\\).) The value \\(-3\\) and the conclusion are correct."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A quadratic function is not one-to-one on all real numbers; restrict it to \\(x \\ge h\\) or \\(x \\le h\\).\n2. To find \\(f^{-1}\\): interchange \\(x\\) and \\(y\\), then solve for \\(y\\) (quadratic formula).\n3. Domain \\(f^{-1}\\) = Range \\(f\\); Range \\(f^{-1}\\) = Domain \\(f\\).\n4. Find Range \\(f\\) from the vertex form \\(a(x - h)^{2} + k\\).\n5. Choose the \\(\\pm\\) sign whose values lie in Range \\(f^{-1}\\); check with \\(f(f^{-1}(x)) = x\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Keeping both signs: \\(-2 \\pm \\sqrt{1 + x}\\) is not a function; exactly one sign is the inverse.\n2. Squaring both sides of an inequality like \\(x \\ge -2\\): this is not allowed when a side can be negative.\n3. Forgetting that \\(c = 3 - x\\) in the quadratic formula: the whole expression is the constant term.\n4. Mixing up domain and range of \\(f^{-1}\\): they are the range and domain of \\(f\\), swapped."
+          }
+        ]
+      }
+    }
+  ]
+}

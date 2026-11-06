@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-3-Q8",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-3-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 241,
+          "pdf_to": 241,
+          "note": "Exercise 12.3, Question 8: continuity of a piecewise cost function at x = 10 (book p.236). Answer key PDF 310: yes."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8 The cost to produce \\(x\\) units is: \\[C(x) = \\begin{cases} 5x + 20, & x \\le 10 \\\\ 6x + 10, & x > 10 \\end{cases}\\]Is the cost function continuous at \\(x = 10\\)?",
+            "explanation": "A continuity question for a two-piece cost function (same type as Question 6).\nWe must check whether both formulas give the same cost at \\(x = 10\\).\nPlan: find \\(C(10)\\), the LHL and the RHL, then test the three conditions.",
+            "steps": [
+              "Given: \\(C(x) = 5x + 20\\) for \\(x \\le 10\\), \\(6x + 10\\) for \\(x > 10\\).\nTo find: whether \\(C\\) is continuous at \\(x = 10\\).\nMethod: \\(C\\) is continuous at \\(x = c\\) when (i) \\(C(c)\\) is defined, (ii) \\(\\lim_{x \\to c} C(x)\\) exists (LHL = RHL), (iii) \\(\\lim_{x \\to c} C(x) = C(c)\\).",
+              "Condition (i): find \\(C(10)\\)\n\\[C(10) = 5(10) + 20 = 70\\]\nWhy: \\(x \\le 10\\) includes 10, so the first formula is used.",
+              "Left hand limit\n\\[\\lim_{x \\to 10^-} C(x) = \\lim_{x \\to 10^-} (5x + 20)\\]\n\\[= 50 + 20 = 70\\]\nWhy: Below 10 units the first formula applies.",
+              "Right hand limit\n\\[\\lim_{x \\to 10^+} C(x) = \\lim_{x \\to 10^+} (6x + 10)\\]\n\\[= 60 + 10 = 70\\]\nWhy: Above 10 units the second formula applies.",
+              "Conditions (ii) and (iii)\n\\[\\text{LHL} = \\text{RHL} = 70 = C(10)\\]\nWhy: All three conditions hold, so \\(C\\) is continuous at \\(x = 10\\).",
+              "Check\n\\[C(9.9) = 49.5 + 20 = 69.5\\]\n\\[C(10.1) = 60.6 + 10 = 70.6\\]\nWhy: Costs just below and just above 10 units are close to 70."
+            ],
+            "final_answer": "Yes. \\(C\\) is continuous at \\(x = 10\\) (LHL \\(=\\) RHL \\(= C(10) = 70\\))"
+          }
+        ]
+      }
+    }
+  ]
+}

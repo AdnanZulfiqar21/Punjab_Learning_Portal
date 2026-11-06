@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-2-Q3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-2-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 260,
+          "pdf_to": 260,
+          "note": "Exercise 13.2, Question 3: differentiate a quotient that simplifies by factorising (book p.255). The answer key (PDF 311) gives an equivalent unsimplified form."
+        }
+      ],
+      "variant_of": "C11-MATH-CH13-EXERCISE-13-2-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. Differentiate \\(\\dfrac{(\\sqrt{x} + 1)(x^{3/2} - 1)}{x^{3/2} - x^{1/2}}\\) with respect to \\(x\\).",
+            "explanation": "Yeh Sawal 2 ka bhai hai: lamba quotient jo pehle simplify ho jata hai.\nHumein derivative find karna hai.\nIs dafa neeche bhi factorise hoga: \\(x^{3/2} - x^{1/2} = \\sqrt{x}(x - 1)\\).\nPlan: upar cubes ka farq, neeche common factor aur squares ka farq, cancel, phir power rule.",
+            "steps": [
+              "Diya gaya hai: \\(y = \\dfrac{(\\sqrt{x} + 1)(x^{3/2} - 1)}{x^{3/2} - x^{1/2}}\\), \\(x > 0\\), \\(x \\ne 1\\) (warna neeche zero).\nHumein find karna hai: \\(\\frac{dy}{dx}\\).\nTareeqa: Factorise kar ke cancel, phir power rule. Pehle simplify karna yahan sab se bara time saver hai.",
+              "Neeche wala factorise karein\n\\[x^{3/2} - x^{1/2} = x^{1/2}(x - 1)\\]\n\\[= \\sqrt{x}(\\sqrt{x} - 1)(\\sqrt{x} + 1)\\]\nKyun: Dono terms mein \\(x^{1/2}\\) common hai: \\(x^{1/2} \\cdot x = x^{3/2}\\). Phir \\(x - 1 = (\\sqrt{x})^2 - 1^2 = (\\sqrt{x} - 1)(\\sqrt{x} + 1)\\), squares ka farq.",
+              "Upar wala factorise karein\n\\[x^{3/2} - 1 = (\\sqrt{x} - 1)(x + \\sqrt{x} + 1)\\]\nKyun: Cubes ka farq \\(a^3 - b^3 = (a - b)(a^2 + ab + b^2)\\), jahan \\(a = \\sqrt{x}\\), \\(b = 1\\), bilkul Sawal 2 ki tarah.",
+              "Cancel kar ke tor dein\n\\[y = \\dfrac{x + \\sqrt{x} + 1}{\\sqrt{x}}\\]\n\\[= x^{1/2} + 1 + x^{-1/2}\\]\nKyun: Upar aur neeche dono mein \\((\\sqrt{x} + 1)\\) aur \\((\\sqrt{x} - 1)\\) hain; yeh zero nahi (kyunke \\(x > 0\\), \\(x \\ne 1\\)), is liye cancel ho gaye. Phir har term ko \\(\\sqrt{x}\\) se divide kiya: \\(\\frac{x}{\\sqrt{x}} = \\sqrt{x}\\), \\(\\frac{\\sqrt{x}}{\\sqrt{x}} = 1\\), \\(\\frac{1}{\\sqrt{x}} = x^{-1/2}\\).",
+              "Differentiate karein\n\\[\\frac{dy}{dx} = \\frac{1}{2}x^{-1/2} - \\frac{1}{2}x^{-3/2}\\]\n\\[= \\dfrac{x - 1}{2x\\sqrt{x}}\\]\nKyun: Power rule: \\(x^{1/2} \\to \\frac{1}{2}x^{-1/2}\\), 1 ka derivative zero, \\(x^{-1/2} \\to -\\frac{1}{2}x^{-3/2}\\). Common denominator \\(2x^{3/2}\\) lene ke liye pehli term ko upar neeche \\(x\\) se guna kiya.\nDhyan dein: \\(-\\frac{1}{2} - 1 = -\\frac{3}{2}\\) hai; power ka hisaab dhyan se.",
+              "Answer key se muqabla\n\\[\\dfrac{x^3 - 3x^2 + 3x - 1}{2\\sqrt{x}(x^{3/2} - x^{1/2})^2} = \\dfrac{(x - 1)^3}{2\\sqrt{x} \\cdot x(x - 1)^2}\\]\n\\[= \\dfrac{x - 1}{2x\\sqrt{x}}\\]\nKyun: Key ka numerator \\((x - 1)^3\\) ka expansion hai, aur \\((x^{3/2} - x^{1/2})^2 = x(x - 1)^2\\). Cancel karne par bilkul humara jawab aata hai; key ne simplify nahi kiya.",
+              "Tasdeeq\n\\[\\text{At } x = 4:\\ \\frac{3}{16} = 0.1875\\]\n\\[\\frac{y(4.001) - y(3.999)}{0.002} \\approx 0.1875\\]\nKyun: \\(x = 4\\) par numerical slope bhi 0.1875 hai, to jawab sahi hai."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = \\frac{x - 1}{2x\\sqrt{x}}\\) (answer key ki shakal \\(\\frac{x^3 - 3x^2 + 3x - 1}{2\\sqrt{x}(x^{3/2} - x^{1/2})^2}\\) ke barabar)"
+          }
+        ]
+      }
+    }
+  ]
+}

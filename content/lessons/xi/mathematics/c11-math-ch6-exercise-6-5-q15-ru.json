@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-5-Q15-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-5-q15",
+      "title": "Question 15 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 107,
+          "pdf_to": 107,
+          "note": "Exercise 6.5, Question 15: Exercise 6.5, book pages 101-102: Q1-Q13, Q15, Q16 as printed (no Q14; 18 parts); answer key PDF 304-305"
+        }
+      ],
+      "variant_of": "C11-MATH-CH6-EXERCISE-6-5-Q15",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15",
+            "prompt": "15. If \\(p\\)th, \\(q\\)th terms of a G.P. are \\(q\\) and \\(p\\) respectively, show that \\((p + q)\\)th term is \\(\\left(q^{p} \\div p^{q}\\right)^{\\frac{1}{p - q}}\\).",
+            "explanation": "Yeh letters wala proof hai, jo pehli nazar mein mushkil lagta hai lekin qadam ba qadam bohat seedha hai.\nDiya kya hai? \\(p\\)th term \\(= q\\) aur \\(q\\)th term \\(= p\\).\nSaabit kya karna hai? \\((p + q)\\)th term \\(= (q^p \\div p^q)^{\\frac{1}{p-q}}\\).\nPlan: dono equations divide kar ke \\(r\\) nikalenge; phir \\(a_{p+q}\\) ko \\(a_p\\) se \\(q\\) qadam aage samajh kar \\(q \\cdot r^q\\) likhenge, aur indices ke qawaneen se shakal badlenge.",
+            "steps": [
+              "Diya gaya hai: \\(a_p = q\\), \\(a_q = p\\) (\\(p \\neq q\\)).\nSaabit karna hai: \\(a_{p+q} = (q^p \\div p^q)^{\\frac{1}{p-q}}\\).\nTareeqa: Pehle divide kar ke \\(r\\) nikalenge (jaise Sawal 6 mein kiya tha). Phir \\(a_1\\) dhoondne ki bajaye ek chaal: \\(a_{p+q}\\) asal mein \\(a_p\\) se \\(q\\) qadam aage hai, is liye \\(a_{p+q} = a_p \\cdot r^q\\). Is se hisaab bohat chhota ho jata hai.",
+              "Dono terms ki equations\n\\[a_1 r^{p-1} = q \\quad (1)\\]\n\\[a_1 r^{q-1} = p \\quad (2)\\]\nKyun: Formula \\(a_n = a_1 r^{n-1}\\) mein \\(n = p\\) rakha to term \\(q\\) ke barabar, aur \\(n = q\\) rakha to term \\(p\\) ke barabar. Letters ki jagah ulat pulat hai, is liye dhyan se likhiye.",
+              "(1) ko (2) se divide karein\n\\[r^{(p-1)-(q-1)} = \\dfrac{q}{p}\\]\n\\[r^{p-q} = \\dfrac{q}{p}\\]\n\\[r = \\left(\\dfrac{q}{p}\\right)^{\\frac{1}{p-q}}\\]\nKyun: \\(a_1\\) cancel ho gaya aur powers minus hui: \\((p - 1) - (q - 1) = p - q\\), kyunke \\(-1\\) aur \\(+1\\) khatam ho jate hain. \\(r\\) akela karne ke liye dono taraf power \\(\\frac{1}{p-q}\\) lagayi, kyunke \\((r^{p-q})^{\\frac{1}{p-q}} = r\\).",
+              "\\(a_p\\) se \\(q\\) qadam aage\n\\[a_{p+q} = a_1 r^{p+q-1}\\]\n\\[= \\left(a_1 r^{p-1}\\right) r^{q} = q\\, r^{q}\\]\nKyun: Power \\(p + q - 1\\) ko \\((p - 1) + q\\) mein toda, phir \\(r^{p+q-1} = r^{p-1} \\cdot r^{q}\\). Bracket wala hissa equation (1) ke mutabiq \\(q\\) hai. Is tarah \\(a_1\\) nikalne ki zaroorat hi nahi padi.",
+              "\\(r\\) ki value rakhein\n\\[q\\, r^{q} = q \\left(\\dfrac{q}{p}\\right)^{\\frac{q}{p-q}}\\]\n\\[= \\dfrac{q^{1 + \\frac{q}{p-q}}}{p^{\\frac{q}{p-q}}}\\]\nKyun: Power ki power mein powers multiply hoti hain: \\(\\left(x^{\\frac{1}{p-q}}\\right)^{q} = x^{\\frac{q}{p-q}}\\). Fraction ki power upar aur neeche dono par lagti hai. Upar \\(q^1\\) aur \\(q^{\\frac{q}{p-q}}\\) hain, jin ki powers jama hongi.\nDhyan dein: Bahar wala \\(q\\) bhi \\(q^1\\) hai; usay power mein jama karna mat bhooliye.",
+              "\\(q\\) ki powers jama karein\n\\[1 + \\dfrac{q}{p - q} = \\dfrac{p - q + q}{p - q}\\]\n\\[= \\dfrac{p}{p - q}\\]\nKyun: 1 ko \\(\\frac{p-q}{p-q}\\) likha taake denominator ek jaisa ho jaye, phir upar jama kiye: \\(-q + q = 0\\), sirf \\(p\\) bacha.",
+              "Mangi gayi shakal mein likhein\n\\[a_{p+q} = \\dfrac{q^{\\frac{p}{p-q}}}{p^{\\frac{q}{p-q}}}\\]\n\\[= \\left(\\dfrac{q^{p}}{p^{q}}\\right)^{\\frac{1}{p-q}}\\]\n\\[= \\left(q^{p} \\div p^{q}\\right)^{\\frac{1}{p-q}}\\]\nKyun: Dono powers mein \\(\\frac{1}{p-q}\\) common hai: \\(q^{\\frac{p}{p-q}} = (q^p)^{\\frac{1}{p-q}}\\) aur \\(p^{\\frac{q}{p-q}} = (p^q)^{\\frac{1}{p-q}}\\). Common power ko bahar nikala, aur fraction ka matlab hi divide hai. Yahi sawal wala expression hai.",
+              "Tasdeeq: numbers se\n\\[p = 2, q = 1:\\ a_2 = 1,\\ a_1 = 2\\]\n\\[r = \\tfrac{1}{2},\\ a_3 = \\tfrac{1}{2}\\]\n\\[(1^2 \\div 2^1)^{1} = \\tfrac{1}{2}\\ \\checkmark\\]\nKyun: \\(p = 2\\), \\(q = 1\\) lene par 2nd term 1 aur 1st term 2 hai, yani G.P. \\(2, 1, \\frac{1}{2}, \\ldots\\). Is ka 3rd term \\(\\frac{1}{2}\\) hai, aur formula ne bhi \\(\\frac{1}{2}\\) diya."
+            ],
+            "final_answer": "Saabit ho gaya: \\(a_{p+q} = \\left(q^{p} \\div p^{q}\\right)^{\\frac{1}{p-q}}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein Exercise 6.5 ki numbering 13 ke baad seedha 15 par chali jati hai: Sawal 14 chhapa hi nahi, aur page par koi khali jagah nahi, is liye lagta hai sirf number chhoot gaya hai, koi sawal ghayab nahi. Hum kitab wale numbers 15 aur 16 hi rakh rahe hain. Sawal mein \\\"show tha\\\" chhapa hai; sahi \\\"show that\\\" hai. Answer key mein is ka jawab nahi, kyunke yeh proof hai."
+          }
+        ]
+      }
+    }
+  ]
+}

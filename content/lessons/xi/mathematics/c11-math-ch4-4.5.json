@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.5",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 62,
+          "pdf_to": 63,
+          "note": "Book p. 57-58: 4.5 Adjoint and Inverse of a Square Matrix, matrix of cofactors, adj A, inverse of order n >= 3, Example 7; callouts marked Teaching note / Key points / Common mistake are ours."
+        }
+      ],
+      "title": "4.5 Adjoint and Inverse of a Square Matrix",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "For numbers, the inverse of 5 is \\(\\frac{1}{5}\\) because \\(5 \\times \\frac{1}{5} = 1\\). For matrices the role of 1 is played by the identity matrix \\(I\\), and the inverse \\(A^{-1}\\) is the matrix with \\(AA^{-1} = I\\). To build \\(A^{-1}\\) we use the cofactors of 4.4.1 again."
+          },
+          {
+            "type": "paragraph",
+            "text": "Let"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[A = \\begin{bmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "then the matrix of co-factors of \\(A\\) ="
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\begin{bmatrix} A_{11} & A_{12} & A_{13} \\\\ A_{21} & A_{22} & A_{23} \\\\ A_{31} & A_{32} & A_{33} \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "and"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\operatorname{adj} A = \\begin{bmatrix} A_{11} & A_{21} & A_{31} \\\\ A_{12} & A_{22} & A_{32} \\\\ A_{13} & A_{23} & A_{33} \\end{bmatrix}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Compare the two matrices: \\(\\operatorname{adj} A\\) (the adjoint of \\(A\\)) is the transpose of the matrix of cofactors. The cofactors of row 1 of \\(A\\) stand in column 1 of \\(\\operatorname{adj} A\\), those of row 2 in column 2, and those of row 3 in column 3."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Inverse of a Square Matrix of Order n ≥ 3"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(A\\) be a non singular (\\(|A| \\ne 0\\)) square matrix of order \\(n\\). If there exists a matrix \\(B\\) such that \\(AB = BA = I_{n}\\), then \\(B\\) is called the multiplicative inverse of \\(A\\) and is denoted by \\(A^{-1}\\). It is obvious that the order of \\(A^{-1}\\) is \\(n \\times n\\).\nThus, \\(AA^{-1} = I_{n}\\) and \\(A^{-1}A = I_{n}\\).\nIf \\(A\\) is non singular matrix then"
+          },
+          {
+            "type": "equation",
+            "latex": "A^{-1} = \\dfrac{1}{|A|}\\operatorname{adj} A",
+            "text_alt": "A inverse equals one over the determinant of A, times adjoint of A"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does the formula work? Multiply \\(A\\) by \\(\\operatorname{adj} A\\). Each diagonal entry is (a row of \\(A\\)) times (its own cofactors), which is the expansion of \\(|A|\\). Each off-diagonal entry is a row times the cofactors of a different row, which is the expansion of a determinant with two identical rows, so it is 0 (property iii). Hence\n\\[A(\\operatorname{adj} A) = |A|\\,I\\]\nand dividing by \\(|A|\\) gives \\(A\\left(\\frac{1}{|A|}\\operatorname{adj} A\\right) = I\\).\nThis is also why \\(|A| \\ne 0\\) is needed: we cannot divide by zero. A matrix with \\(|A| = 0\\) is called singular and has no inverse."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Steps to find \\(A^{-1}\\) (order 3):\n1. Find \\(|A|\\). If it is 0, stop: there is no inverse.\n2. Find all nine cofactors \\(A_{ij} = (-1)^{i+j}M_{ij}\\).\n3. Write the matrix of cofactors and take its transpose: this is \\(\\operatorname{adj} A\\).\n4. Divide every entry of \\(\\operatorname{adj} A\\) by \\(|A|\\).\n5. Check: \\(AA^{-1} = I\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example 7 below follows these steps. In the book's scan the labels and powers of the cofactors \\(A_{23}\\) and \\(A_{32}\\) are blurred; we have derived them (see the correction after the example)."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Find \\(A^{-1}\\) if \\(A = \\begin{bmatrix} 1 & 0 & 2 \\\\ 0 & 2 & 1 \\\\ 1 & -1 & 1 \\end{bmatrix}\\).",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix} 1 & 0 & 2 \\\\ 0 & 2 & 1 \\\\ 1 & -1 & 1 \\end{bmatrix}\\).\nTo find: \\(A^{-1}\\).\nMethod: \\(A^{-1} = \\frac{1}{|A|}\\operatorname{adj} A\\). So we need (1) all nine cofactors, (2) \\(\\operatorname{adj} A\\), the transpose of the matrix of cofactors, (3) \\(|A|\\), which must not be 0.",
+              "Step 1: Cofactors of row 1\n\\[A_{11} = (-1)^{1+1}\\begin{vmatrix} 2 & 1 \\\\ -1 & 1 \\end{vmatrix}\\]\n\\[= 1(2 + 1) = 3\\]\n\\[A_{12} = (-1)^{1+2}\\begin{vmatrix} 0 & 1 \\\\ 1 & 1 \\end{vmatrix}\\]\n\\[= (-1)(-1) = 1\\]\n\\[A_{13} = (-1)^{1+3}\\begin{vmatrix} 0 & 2 \\\\ 1 & -1 \\end{vmatrix}\\]\n\\[= 1(0 - 2) = -2\\]\nWhy: \\(A_{ij} = (-1)^{i+j}M_{ij}\\), and each minor is found by deleting row \\(i\\) and column \\(j\\) of \\(A\\).",
+              "Step 2: Cofactors of row 2\n\\[A_{21} = (-1)^{2+1}\\begin{vmatrix} 0 & 2 \\\\ -1 & 1 \\end{vmatrix}\\]\n\\[= (-1)(0 + 2) = -2\\]\n\\[A_{22} = (-1)^{2+2}\\begin{vmatrix} 1 & 2 \\\\ 1 & 1 \\end{vmatrix}\\]\n\\[= 1(1 - 2) = -1\\]\n\\[A_{23} = (-1)^{2+3}\\begin{vmatrix} 1 & 0 \\\\ 1 & -1 \\end{vmatrix}\\]\n\\[= (-1)(-1 - 0) = 1\\]\nWhy: same rule. For \\(A_{23}\\) delete row 2 and column 3: the entries \\(1, 0, 1, -1\\) are left, and \\(2 + 3 = 5\\) is odd, so the sign changes.",
+              "Step 3: Cofactors of row 3\n\\[A_{31} = (-1)^{3+1}\\begin{vmatrix} 0 & 2 \\\\ 2 & 1 \\end{vmatrix}\\]\n\\[= 1(0 - 4) = -4\\]\n\\[A_{32} = (-1)^{3+2}\\begin{vmatrix} 1 & 2 \\\\ 0 & 1 \\end{vmatrix}\\]\n\\[= (-1)(1 - 0) = -1\\]\n\\[A_{33} = (-1)^{3+3}\\begin{vmatrix} 1 & 0 \\\\ 0 & 2 \\end{vmatrix}\\]\n\\[= 1(2 - 0) = 2\\]\nWhy: same rule. For \\(A_{32}\\) delete row 3 and column 2: the entries \\(1, 2, 0, 1\\) are left, and \\(3 + 2 = 5\\) is odd.",
+              "Step 4: The matrix of cofactors and its transpose\n\\[[A_{ij}]_{3 \\times 3} = \\begin{bmatrix} 3 & 1 & -2 \\\\ -2 & -1 & 1 \\\\ -4 & -1 & 2 \\end{bmatrix}\\]\n\\[\\operatorname{adj} A = [A'_{ij}]_{3 \\times 3}\\]\n\\[= \\begin{bmatrix} 3 & -2 & -4 \\\\ 1 & -1 & -1 \\\\ -2 & 1 & 2 \\end{bmatrix}\\]\nWhy: \\(\\operatorname{adj} A\\) is the transpose of the matrix of cofactors (\\(A'_{ij} = A_{ji}\\)): the first row \\(3, 1, -2\\) becomes the first column, and so on.",
+              "Step 5: The determinant\n\\[|A| = a_{11}A_{11} + a_{12}A_{12} + a_{13}A_{13}\\]\n\\[= 1(3) + 0(1) + 2(-2)\\]\n\\[= 3 + 0 - 4 = -1\\]\nWhy: expand along row 1, using the cofactors already found. \\(|A| = -1 \\ne 0\\), so \\(A\\) is non-singular and \\(A^{-1}\\) exists.",
+              "Step 6: The inverse\n\\[A^{-1} = \\dfrac{1}{|A|}\\operatorname{adj} A\\]\n\\[= \\dfrac{1}{-1}\\begin{bmatrix} 3 & -2 & -4 \\\\ 1 & -1 & -1 \\\\ -2 & 1 & 2 \\end{bmatrix}\\]\n\\[= \\begin{bmatrix} -3 & 2 & 4 \\\\ -1 & 1 & 1 \\\\ 2 & -1 & -2 \\end{bmatrix}\\]\nWhy: dividing by \\(-1\\) changes the sign of every entry of \\(\\operatorname{adj} A\\).",
+              "Check:\n\\[AA^{-1} = \\begin{bmatrix} 1 & 0 & 2 \\\\ 0 & 2 & 1 \\\\ 1 & -1 & 1 \\end{bmatrix}\\]\n\\[\\times \\begin{bmatrix} -3 & 2 & 4 \\\\ -1 & 1 & 1 \\\\ 2 & -1 & -2 \\end{bmatrix}\\]\nRow 1: \\(-3 + 0 + 4 = 1\\), \\(2 + 0 - 2 = 0\\), \\(4 + 0 - 4 = 0\\)\nRow 2: \\(0 - 2 + 2 = 0\\), \\(0 + 2 - 1 = 1\\), \\(0 + 2 - 2 = 0\\)\nRow 3: \\(-3 + 1 + 2 = 0\\), \\(2 - 1 - 1 = 0\\), \\(4 - 1 - 2 = 1\\)\n\\[AA^{-1} = \\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix} = I_{3}\\]\nThe product is the identity matrix, so the inverse is correct."
+            ],
+            "answer": "\\(A^{-1} = \\begin{bmatrix} -3 & 2 & 4 \\\\ -1 & 1 & 1 \\\\ 2 & -1 & -2 \\end{bmatrix}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In Example 7 the labels of two cofactors print blurred: one reads like \\(A_{3} = (-1)^{2+}\\dots\\) and the other like \\(A_{2} = (-1)^{3\\,2}\\dots\\). From their position and their minors they are\n\\(A_{23} = (-1)^{2+3}\\begin{vmatrix} 1 & 0 \\\\ 1 & -1 \\end{vmatrix} = (-1)(-1 - 0) = 1\\) and\n\\(A_{32} = (-1)^{3+2}\\begin{vmatrix} 1 & 2 \\\\ 0 & 1 \\end{vmatrix} = (-1)(1 - 0) = -1\\).\nThe values 1 and \\(-1\\) printed in the book are correct, and so is the final \\(A^{-1}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Matrix of cofactors: replace each element by its cofactor.\n2. \\(\\operatorname{adj} A\\) = transpose of the matrix of cofactors.\n3. \\(A^{-1}\\) exists only if \\(|A| \\ne 0\\) (non-singular matrix).\n4. \\(A^{-1} = \\frac{1}{|A|}\\operatorname{adj} A\\), and \\(AA^{-1} = A^{-1}A = I\\).\n5. \\(A(\\operatorname{adj} A) = |A|\\,I\\); in Example 7 this is \\(-I\\).\n6. Always check by multiplying \\(A\\) and \\(A^{-1}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Forgetting to transpose: the matrix of cofactors itself is NOT \\(\\operatorname{adj} A\\).\n2. Forgetting the signs \\((-1)^{i+j}\\), i.e. using minors instead of cofactors.\n3. Dividing by \\(|A|\\) when \\(|A| = 0\\): a singular matrix has no inverse.\n4. Dividing only some entries by \\(|A|\\): every entry of \\(\\operatorname{adj} A\\) is divided.\n5. Writing \\(A^{-1} = \\frac{1}{A}\\): division by a matrix is not defined."
+          }
+        ]
+      }
+    }
+  ]
+}

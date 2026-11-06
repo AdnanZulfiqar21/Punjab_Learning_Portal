@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-6.8.2-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/6.8.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 112,
+          "pdf_to": 114,
+          "note": "Book p. 107-109: 6.8.2 S_inf = ab/(1-r) + dbr/(1-r)^2 for |r| < 1; Examples 19-22 (Ex 19 and Ex 20 have printed sign and (n+1)/(n+2) errors, marked)"
+        }
+      ],
+      "title": "6.8.2 Sum to Infinity of Arithmetico-Geometric Series (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH6-6.8.2",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Pichle hisse mein humne A.G.P. ki \\(n\\) terms ka jama (formula (iii)) nikaala. Ab sawal: agar terms kabhi khatam na hon, yani series infinity tak chale, to kya jama ek fixed number ban sakta hai? G.P. mein aap ne dekha ho ga ke \\(|r| < 1\\) ho to terms chhoti hoti jati hain aur jama ek had (limit) tak pohanch jata hai. A.G.P. mein bhi yahi hota hai. Is hisse mein yeh formula aur phir kitab ki chaar misaalein, jin mein poora tareeqa qadam ba qadam dikhaya gaya hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab kehti hai: agar \\(|r| < 1\\) ho to \\(n \\to \\infty\\) par \\(r^{n} \\to 0\\) aur \\(nr^{n} \\to 0\\).\nIs liye (iii) ka formula chhota ho kar yeh ban jata hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "S_{\\infty} = \\dfrac{ab}{1 - r} + \\dfrac{dbr}{(1 - r)^{2}}",
+            "text_alt": "S infinity equals a b over 1 minus r, plus d b r over 1 minus r squared"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahi arithmetico-geometric series ka sum to infinity (la-mehdood terms ka jama) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Kyun",
+            "text": "(iii) ki aakhri do terms kyun ghayab ho gayin? Un mein \\(r^{n}\\) aur \\(nr^{n}\\) hain, kyun ke \\([a + (n - 1)d]br^{n} = (a - d)br^{n} + d\\,b\\,nr^{n}\\). Jab \\(|r| < 1\\) ho to \\(r^{n}\\) itni tezi se chhota hota hai ke \\(n\\) se zarb ke baad bhi zero ki taraf jata hai. Misal: \\(r = \\frac{1}{2}\\) par \\(n = 10\\): \\(10 \\times \\frac{1}{1024} \\approx 0.0098\\); \\(n = 20\\) par to yeh \\(0.00002\\) ke qareeb hai.\nDhyan dein: agar \\(|r| \\ge 1\\) ho (jaise \\(r = 2\\)) to terms barhti jati hain aur series ka koi sum to infinity nahin hota. Examples 19 aur 20 mein \\(r = 2\\) hai, is liye wahan sirf \\(S_n\\) poocha gaya hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki misaalein. Har misaal mein yeh paanch qadam dekhiye: (1) \\(n\\)th term, (2) \\(S_n\\) likhna, (3) G.P. ke ratio se zarb, (4) tafreeq, (5) beech wali G.P. ka jama aur \\(S_n\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 19",
+            "problem": "Sum the series upto \\(n\\) terms: \\(2\\cdot 1 + 3\\cdot 2 + 4\\cdot 4 + 5\\cdot 8 + \\ldots\\)",
+            "steps": [
+              "Given: series \\(2\\cdot 1 + 3\\cdot 2 + 4\\cdot 4 + 5\\cdot 8 + \\ldots\\)\nTo find: pehli \\(n\\) terms ka jama \\(S_n\\).\nMethod: sab se pehle har term ko do factors mein toriye: pehle factors \\(2, 3, 4, 5, \\ldots\\) A.P. hain aur doosre factors \\(1, 2, 4, 8, \\ldots\\) G.P. (ratio 2). Yani yeh A.G.P. hai. Plan: \\(n\\)th term nikaalo, \\(S_n\\) likho, G.P. ke ratio 2 se zarb karo, tafreeq karo, aur beech wali G.P. ka jama karo.",
+              "Step 1: \\(n\\)th term ka A.P. hissa\n\\[a_1 + (n - 1)d = 2 + (n - 1)(1)\\]\n\\[= 2 + n - 1 = n + 1\\]\nKyun: A.P. \\(2, 3, 4, 5, \\ldots\\) mein \\(a_1 = 2\\) aur \\(d = 1\\); A.P. ki general term \\(a_1 + (n - 1)d\\) mein rakh diya.",
+              "Step 2: \\(n\\)th term ka G.P. hissa\n\\[a_1r^{n-1} = 1\\cdot 2^{n-1} = 2^{n-1}\\]\nKyun: G.P. \\(1, 2, 2^{2}, \\ldots\\) mein pehli term 1 aur ratio 2 hai. Is liye series ki \\(n\\)th term \\((n + 1)2^{n-1}\\) hai (dono hisson ka zarb).",
+              "Step 3: \\(S_n\\) likhein\n\\[S_n = 2\\cdot 1 + 3\\cdot 2 + 4\\cdot 2^{2} + 5\\cdot 2^{3}\\]\n\\[+ \\cdots + (n + 1)2^{n-1} \\quad \\text{(i)}\\]\nKyun: aakhri term Step 1 aur 2 ka zarb hai; poori series ek line mein saamne ho to aage tafreeq aasan hoti hai.",
+              "Step 4: Dono taraf G.P. ke ratio 2 se zarb karein\n\\[2S_n = 2\\cdot 2 + 3\\cdot 2^{2} + 4\\cdot 2^{3} + 5\\cdot 2^{4}\\]\n\\[+ \\cdots + n\\cdot 2^{n-1} + (n + 1)2^{n} \\quad \\text{(ii)}\\]\nKyun: 2 se zarb karne se har power ek barh jati hai. (ii) ki terms ko ek jagah aage likha hai taa ke same power wali terms ek doosre ke neeche hon. \\(2^{n-1}\\) wali term \\(n\\cdot 2^{n-1}\\) hai, kyun ke yeh (i) ki \\((n - 1)\\)th term \\(n\\cdot 2^{n-2}\\) ko 2 se zarb kar ke bani hai. (Kitab is line mein ghalti se minus sign chhaapti hai; neeche 'Kitab ki ghalti' dekhiye.)",
+              "Step 5: (ii) ko (i) mein se tafreeq karein\n\\[S_n - 2S_n = 2\\cdot 1 + (3 - 2)\\cdot 2\\]\n\\[+ (4 - 3)\\cdot 2^{2} + (5 - 4)\\cdot 2^{3}\\]\n\\[+ \\cdots + (n + 1 - n)2^{n-1}\\]\n\\[- (n + 1)2^{n}\\]\n\\[-S_n = 2\\cdot 1 + 1\\cdot 2 + 1\\cdot 2^{2}\\]\n\\[+ 1\\cdot 2^{3} + \\cdots + 1\\cdot 2^{n-1}\\]\n\\[- (n + 1)2^{n}\\]\nKyun: same power wali terms ke A.P. hisson ka farq hamesha \\(d = 1\\) hai, is liye beech ki har term sirf \\(1\\cdot 2^{k}\\) reh jati hai. (i) ki pehli term \\(2\\cdot 1\\) ke neeche kuch nahin, aur (ii) ki aakhri term \\((n + 1)2^{n}\\) ke upar kuch nahin, is liye woh minus ke saath aati hai.",
+              "Step 6: Beech wali G.P. ka jama karein\n\\[-S_n = 2 + \\{2 + 2^{2} + 2^{3} + \\cdots + 2^{n-1}\\}\\]\n\\[\\quad - (n + 1)2^{n}\\]\n\\[-S_n = 2 + \\dfrac{2(2^{n-1} - 1)}{2 - 1}\\]\n\\[\\quad - (n + 1)\\cdot 2^{n}\\]\nKyun: brackets mein \\(2 + 2^{2} + \\cdots + 2^{n-1}\\) ek G.P. hai: pehli term 2, ratio 2, aur terms \\(n - 1\\) (powers 1 se \\(n - 1\\) tak). \\(r > 1\\) hai is liye formula \\(\\frac{a_1(r^{m} - 1)}{r - 1}\\) liya, \\(m = n - 1\\).",
+              "Step 7: Simplify kar ke \\(S_n\\) nikaalein\n\\[-S_n = 2 + 2^{n} - 2\\]\n\\[\\quad - n\\cdot 2^{n} - 2^{n}\\]\n\\[-S_n = -n\\cdot 2^{n}\\]\n\\[S_n = n\\cdot 2^{n}\\]\nKyun: \\(2\\cdot 2^{n-1} = 2^{n}\\), aur \\((n + 1)2^{n} = n\\cdot 2^{n} + 2^{n}\\). Ab \\(2 - 2 = 0\\) aur \\(2^{n} - 2^{n} = 0\\), sirf \\(-n\\cdot 2^{n}\\) bachta hai. Aakhir mein dono taraf \\(-1\\) se zarb kiya.",
+              "Tasdeeq:\nAb formula ko pehli kuch terms par aazmaate hain.\n\\(n = 1\\): \\(1\\cdot 2 = 2 = 2\\cdot 1\\).\n\\(n = 2\\): \\(2\\cdot 4 = 8 = 2 + 6\\).\n\\(n = 3\\): \\(3\\cdot 8 = 24 = 2 + 6 + 16\\).\nTeeno durust hain."
+            ],
+            "answer": "\\(S_n = n\\cdot 2^{n}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "1. Sawal mein series \\(2\\cdot 1 + 3\\cdot 2 + 4\\cdot 4 + 5\\cdot 8 - \\ldots\\) chhapi hai; aakhri sign \\(+\\) hona chahiye (hal mein bhi \\(+\\) hi use hua hai).\n2. Line (ii) mein \\(\\ldots - (n)2^{n-1}\\) chhapa hai; sahi \\(+\\,n\\cdot 2^{n-1}\\) hai, jaisa agli line ka \\((n + 1 - n)2^{n-1}\\) bhi batata hai.\nAakhri jawab \\(S_n = n\\cdot 2^{n}\\) bilkul sahi hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 19 se kya seekha? Jab G.P. ka ratio 2 ho to tafreeq ke baad left side \\(S_n - 2S_n = -S_n\\) banta hai, yani minus sign ke saath. Bohat se students aakhir tak \\(-S_n\\) ko \\(S_n\\) samajh kar likhte rehte hain aur jawab ka sign ulta aa jata hai. Is liye har line ke shuru mein \\(-S_n\\) saaf likhiye, aur aakhri qadam mein dono taraf \\(-1\\) se zarb karna mat bhooliye. Doosri baat: jawab \\(n\\cdot 2^{n}\\) itna saaf hai ke \\(n = 1, 2, 3\\) par foran check ho jata hai; exam mein yeh das second ki tasdeeq poore marks bacha sakti hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 20",
+            "problem": "Sum the series upto \\(n\\) terms: \\(3\\cdot 1 + 4\\cdot 2 + 5\\cdot 2^{2} + 6\\cdot 2^{3} + \\ldots\\)",
+            "steps": [
+              "Given: series \\(3\\cdot 1 + 4\\cdot 2 + 5\\cdot 2^{2} + 6\\cdot 2^{3} + \\ldots\\)\nTo find: pehli \\(n\\) terms ka jama \\(S_n\\).\nMethod: yeh Example 19 jaisi hi hai, sirf A.P. hissa \\(3, 4, 5, 6, \\ldots\\) hai. G.P. hissa \\(1, 2, 2^{2}, \\ldots\\) (ratio 2) wahi hai. Plan wahi: \\(n\\)th term, \\(S_n\\), 2 se zarb, tafreeq, beech wali G.P. ka jama. Is misaal mein kitab ki kai lines mein \\((n + 2)\\) ki jagah \\((n + 1)\\) chhap gaya hai, is liye har qadam par \\(n\\)th term ka dhyan rakhein.",
+              "Step 1: \\(n\\)th term ke dono hisse\n\\[3 + (n - 1)(1) = 3 + n - 1 = n + 2\\]\n\\[a_1r^{n-1} = 1(2)^{n-1} = 2^{n-1}\\]\nKyun: A.P. mein \\(a_1 = 3\\), \\(d = 1\\); G.P. mein pehli term 1, ratio 2. Is liye series ki \\(n\\)th term \\((n + 2)2^{n-1}\\) hai. Yeh \\((n + 2)\\) yaad rakhiye; aage yahi kaam aayega.",
+              "Step 2: \\(S_n\\) likhein\n\\[S_n = 3\\cdot 1 + 4\\cdot 2 + 5\\cdot 2^{2} + 6\\cdot 2^{3}\\]\n\\[+ \\cdots + (n + 2)2^{n-1} \\quad \\text{(i)}\\]\nKyun: aakhri term \\(n\\)th term hai, yani \\((n + 2)2^{n-1}\\). Tasdeeq ke liye \\(n = 1\\) rakhein: \\(3\\cdot 2^{0} = 3\\cdot 1\\), jo pehli term hi hai. (Kitab yahan \\((n+1)2^{n-1}\\) chhaapti hai, jo ghalat hai.)",
+              "Step 3: Dono taraf 2 se zarb karein\n\\[2S_n = 3\\cdot 2 + 4\\cdot 2^{2} + 5\\cdot 2^{3} + \\cdots\\]\n\\[+ (n + 1)2^{n-1} + (n + 2)2^{n} \\quad \\text{(ii)}\\]\nKyun: har power ek barh gayi aur terms ek jagah aage khiska di gayin. Aakhri se pehli term \\((n + 1)2^{n-1}\\) hai, kyun ke yeh (i) ki \\((n - 1)\\)th term \\((n + 1)2^{n-2}\\) ko 2 se zarb kar ke bani; aur aakhri term \\((n + 2)2^{n}\\) hai.",
+              "Step 4: (ii) ko (i) mein se tafreeq karein\n\\[S_n - 2S_n = 3\\cdot 1 + (4 - 3)\\cdot 2\\]\n\\[+ (5 - 4)\\cdot 2^{2} + (6 - 5)\\cdot 2^{3}\\]\n\\[+ \\cdots + (n + 2 - n - 1)2^{n-1}\\]\n\\[- (n + 2)2^{n}\\]\n\\[-S_n = 3\\cdot 1 + 1\\cdot 2 + 1\\cdot 2^{2} + 1\\cdot 2^{3}\\]\n\\[+ \\cdots + 1\\cdot 2^{n-1} - (n + 2)2^{n}\\]\nKyun: same power wali terms mein A.P. hisson ka farq \\(d = 1\\) hai, aur \\((n + 2) - (n + 1) = 1\\) bhi. Pehli term \\(3\\cdot 1\\) ke neeche kuch nahin (kitab yahan \\(3\\cdot 2\\) chhaapti hai, jo ghalat hai), aur aakhri term \\((n + 2)2^{n}\\) minus ke saath aati hai.",
+              "Step 5: Beech wali G.P. ka jama karein\n\\[-S_n = 3 + \\{2 + 2^{2} + 2^{3} + \\cdots + 2^{n-1}\\}\\]\n\\[\\quad - (n + 2)2^{n}\\]\n\\[-S_n = 3 + \\dfrac{2(2^{n-1} - 1)}{2 - 1}\\]\n\\[\\quad - (n + 2)2^{n}\\]\nKyun: brackets mein G.P. hai: pehli term 2, ratio 2, terms \\(n - 1\\). Ghor karein ke left side \\(-S_n\\) hai aur saare signs plus hain; kitab ki teesri line mein minus sign, ek faltu dot aur \\((n+2)\\) ki jagah \\((n+1)\\) chhap gaya hai.",
+              "Step 6: Simplify kar ke \\(S_n\\) nikaalein\n\\[-S_n = 3 + 2^{n} - 2\\]\n\\[\\quad - n\\cdot 2^{n} - 2\\cdot 2^{n}\\]\n\\[-S_n = 1 + 2^{n} - n\\cdot 2^{n} - 2\\cdot 2^{n}\\]\n\\[= 1 + (1 - n - 2)2^{n}\\]\n\\[-S_n = 1 + (-n - 1)2^{n}\\]\n\\[S_n = -1 + (n + 1)2^{n}\\]\nKyun: \\(2\\cdot 2^{n-1} = 2^{n}\\) aur \\((n + 2)2^{n} = n\\cdot 2^{n} + 2\\cdot 2^{n}\\). Phir \\(3 - 2 = 1\\), aur \\(2^{n}\\) wali terms ko common le kar \\((1 - n - 2)2^{n} = (-n - 1)2^{n}\\). Aakhir mein dono taraf \\(-1\\) se zarb.",
+              "Tasdeeq:\nAb pehli kuch terms se check karte hain.\n\\(n = 1\\): \\(-1 + 2\\cdot 2 = 3\\).\n\\(n = 2\\): \\(-1 + 3\\cdot 4 = 11 = 3 + 8\\).\n\\(n = 3\\): \\(-1 + 4\\cdot 8 = 31 = 3 + 8 + 20\\).\nTeeno durust; kitab ka aakhri jawab sahi hai."
+            ],
+            "answer": "\\(S_n = -1 + (n + 1)2^{n}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Is misaal ki \\(n\\)th term \\((n + 2)2^{n-1}\\) hai, magar kitab ki kai lines mein \\((n + 1)\\) ya ghalat sign chhap gaya:\n1. 'Let' wali line mein \\(5\\cdot 2^{2} - 6\\cdot 2^{3}, \\ldots\\) hai; sahi \\(5\\cdot 2^{2} + 6\\cdot 2^{3} + \\ldots\\) hai.\n2. Line (i) ka aakhri term \\((n+1)2^{n-1}\\) chhapa hai; sahi \\((n + 2)2^{n-1}\\).\n3. Line (ii) ka aakhri term \\((n+1)2^{n}\\) chhapa hai; sahi \\((n + 2)2^{n}\\).\n4. Tafreeq wali line \\(3\\cdot 2\\) se shuru hoti hai; sahi \\(3\\cdot 1\\).\n5. Teesri line mein \\(-S_n\\) ka minus, brackets ke andar plus signs aur aakhri term se pehle minus gum hain, aur \\((n+1)\\) chhapa hai; sahi: \\(-S_n = 3 + \\{2 + 2^{2} + \\cdots + 2^{n-1}\\} - (n + 2)2^{n}\\).\nBaad ki lines \\((n + 2)\\) sahi use karti hain aur aakhri jawab \\(S_n = -1 + (n + 1)2^{n}\\) durust hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 21",
+            "problem": "Sum the series upto \\(n\\) terms: \\(2 + \\frac{4}{3} + \\frac{6}{9} + \\frac{8}{27} + \\ldots\\)",
+            "steps": [
+              "Given: series \\(2 + \\frac{4}{3} + \\frac{6}{9} + \\frac{8}{27} + \\ldots\\)\nTo find: pehli \\(n\\) terms ka jama \\(S_n\\).\nMethod: pehli nazar mein yeh fractions ki series lagti hai, lekin har term ko \\(\\text{(A.P. term)} \\times \\text{(G.P. term)}\\) likha ja sakta hai: numerators \\(2, 4, 6, 8\\) A.P. hain aur denominators ki wajah se G.P. hissa \\(1, \\frac{1}{3}, \\frac{1}{9}, \\frac{1}{27}\\) hai, ratio \\(\\frac{1}{3}\\). To yeh A.G.P. hai; is baar \\(\\frac{1}{3}\\) se zarb karenge.",
+              "Step 1: \\(n\\)th term ke dono hisse\n\\[2 + (n - 1)(2) = 2 + 2n - 2 = 2n\\]\n\\[(1)\\left(\\tfrac{1}{3}\\right)^{n-1} = \\tfrac{1}{3^{n-1}}\\]\nKyun: A.P. \\(2, 4, 6, 8\\) mein \\(a_1 = 2\\), \\(d = 2\\); G.P. mein pehli term 1, ratio \\(\\frac{1}{3}\\). Is liye \\(n\\)th term \\(\\frac{2n}{3^{n-1}}\\). Tasdeeq: \\(n = 2\\) par \\(\\frac{4}{3}\\), jo doosri term hai.",
+              "Step 2: \\(S_n\\) aur \\(\\frac{1}{3}S_n\\) likhein\n\\[S_n = 2 + \\tfrac{4}{3} + \\tfrac{6}{9} + \\tfrac{8}{27}\\]\n\\[+ \\cdots + \\tfrac{2n}{3^{n-1}} \\quad \\text{(i)}\\]\n\\[\\tfrac{1}{3}S_n = \\tfrac{2}{3} + \\tfrac{4}{9} + \\tfrac{6}{27} + \\cdots\\]\n\\[+ \\tfrac{2n - 2}{3^{n-1}} + \\tfrac{2n}{3^{n}} \\quad \\text{(ii)}\\]\nKyun: \\(\\frac{1}{3}\\) se zarb karne se har denominator mein 3 ki power ek barh jati hai. (ii) ki terms ko ek jagah aage likha hai taa ke same denominator wali terms ek doosre ke neeche hon. Aakhri se pehli term \\(\\frac{2n - 2}{3^{n-1}}\\) hai: yeh (i) ki \\((n - 1)\\)th term \\(\\frac{2(n - 1)}{3^{n-2}}\\) ko \\(\\frac{1}{3}\\) se zarb kar ke bani.",
+              "Step 3: (ii) ko (i) mein se tafreeq karein\n\\[\\left(1 - \\tfrac{1}{3}\\right)S_n = 2 + \\tfrac{4 - 2}{3} + \\tfrac{6 - 4}{9}\\]\n\\[+ \\tfrac{8 - 6}{27} + \\cdots\\]\n\\[+ \\tfrac{2n - 2n + 2}{3^{n-1}} - \\tfrac{2n}{3^{n}}\\]\n\\[\\tfrac{2}{3}S_n = 2 + \\left[\\tfrac{2}{3} + \\tfrac{2}{9} + \\tfrac{2}{27}\\right.\\]\n\\[\\left. + \\cdots + \\tfrac{2}{3^{n-1}}\\right]\\]\n\\[\\quad - \\tfrac{2n}{3^{n}}\\]\nKyun: same denominator wali terms ke numerators ka farq hamesha \\(d = 2\\) hai, is liye beech ki har term \\(\\frac{2}{3^{k}}\\) ban jati hai. \\(1 - \\frac{1}{3} = \\frac{2}{3}\\).",
+              "Step 4: Brackets wali G.P. ka jama\n\\[\\tfrac{2}{3}S_n = 2 + \\dfrac{\\frac{2}{3}\\left\\{1 - \\left(\\frac{1}{3}\\right)^{n-1}\\right\\}}{1 - \\frac{1}{3}}\\]\n\\[\\quad - \\dfrac{2n}{3^{n}}\\]\n\\[= 2 + \\dfrac{\\frac{2}{3}\\left\\{1 - \\left(\\frac{1}{3}\\right)^{n-1}\\right\\}}{\\frac{2}{3}}\\]\n\\[\\quad - \\dfrac{2n}{3^{n}}\\]\n\\[= 2 + 1 - \\left(\\tfrac{1}{3}\\right)^{n-1} - 2n\\left(\\tfrac{1}{3}\\right)^{n}\\]\nKyun: brackets mein G.P. hai: pehli term \\(\\frac{2}{3}\\), ratio \\(\\frac{1}{3}\\), terms \\(n - 1\\). Yahan \\(r < 1\\) hai is liye formula \\(\\frac{a_1(1 - r^{m})}{1 - r}\\) liya. Phir \\(\\frac{2}{3}\\) upar aur neeche cut ho gaya, aur \\(\\frac{2n}{3^{n}} = 2n\\left(\\frac{1}{3}\\right)^{n}\\) likha.",
+              "Step 5: \\(S_n\\) nikaalein\n\\[\\tfrac{2}{3}S_n = 3 - \\left(\\tfrac{1}{3}\\right)^{n-1} - 2n\\left(\\tfrac{1}{3}\\right)^{n}\\]\n\\[S_n = \\tfrac{9}{2} - \\tfrac{3}{2}\\left(\\tfrac{1}{3}\\right)^{n-1} - 3n\\left(\\tfrac{1}{3}\\right)^{n}\\]\nKyun: \\(2 + 1 = 3\\); phir dono taraf \\(\\frac{3}{2}\\) se zarb kiya taa ke \\(\\frac{2}{3}\\) khatam ho: \\(3\\times\\frac{3}{2} = \\frac{9}{2}\\) aur \\(2n\\times\\frac{3}{2} = 3n\\). Dhyan dein: \\(\\frac{3}{2}\\) se right side ki har term ko zarb karna hai.",
+              "Tasdeeq:\nAb formula ko pehli do terms se check karte hain.\n\\(n = 1\\): \\(\\frac{9}{2} - \\frac{3}{2} - 3\\cdot\\frac{1}{3} = 2\\).\n\\(n = 2\\): \\(\\frac{9}{2} - \\frac{1}{2} - \\frac{6}{9} = 4 - \\frac{2}{3} = \\frac{10}{3} = 2 + \\frac{4}{3}\\).\nDono durust."
+            ],
+            "answer": "\\(S_n = \\frac{9}{2} - \\frac{3}{2}\\left(\\frac{1}{3}\\right)^{n-1} - 3n\\left(\\frac{1}{3}\\right)^{n}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Ek dilchasp rishta: yahan \\(r = \\frac{1}{3}\\) hai, yani \\(|r| < 1\\). Jab \\(n \\to \\infty\\) ho to \\(\\left(\\frac{1}{3}\\right)^{n-1}\\) aur \\(3n\\left(\\frac{1}{3}\\right)^{n}\\) dono zero ki taraf jate hain, aur jawab \\(\\frac{9}{2}\\) ki taraf. Ab \\(S_{\\infty}\\) ke formula se dekhiye (\\(a = 2, d = 2, b = 1, r = \\frac{1}{3}\\)):\n\\[S_{\\infty} = \\dfrac{2}{\\frac{2}{3}} + \\dfrac{2\\cdot\\frac{1}{3}}{\\left(\\frac{2}{3}\\right)^{2}} = 3 + \\tfrac{3}{2} = \\tfrac{9}{2}\\]\nBilkul wahi! Dono tareeqe ek doosre ki tasdeeq karte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Aakhri misaal mein ek nayi baat hai: G.P. ka ratio koi number nahin balke variable \\(x\\) hai. Ghabraane ki zaroorat nahin; tareeqa wahi rehta hai, bas hisaab algebra mein hota hai. Aur is misaal mein hum pehli dafa \\(n\\) terms ke jama se infinity tak ka jama bhi nikaalenge, bilkul 6.8.2 ke formula wali soch se."
+          },
+          {
+            "type": "example",
+            "title": "Example 22",
+            "problem": "Find the sum to \\(n\\) terms of the series: \\(1 + 2x + 3x^{2} + 4x^{3} + \\ldots\\) where \\(x \\ne 1\\). If \\(|x| < 1\\), sum the series to infinity.",
+            "steps": [
+              "Given: series \\(1 + 2x + 3x^{2} + 4x^{3} + \\ldots\\), \\(x \\ne 1\\).\nTo find: (a) \\(S_n\\); (b) agar \\(|x| < 1\\) ho to \\(S_{\\infty}\\).\nMethod: coefficients \\(1, 2, 3, 4\\) A.P. hain (\\(d = 1\\)) aur powers \\(1, x, x^{2}, \\ldots\\) G.P. (ratio \\(x\\)). Is baar ratio koi number nahin balke variable \\(x\\) hai, magar tareeqa bilkul wahi: \\(x\\) se zarb, tafreeq, G.P. ka jama. Phir \\(n \\to \\infty\\) par dekhenge kaunsi terms zero ho jati hain.",
+              "Step 1: \\(S_n\\) aur \\(xS_n\\) likhein\n\\[S_n = 1 + 2x + 3x^{2} + 4x^{3} + \\cdots\\]\n\\[+ nx^{n-1} \\quad \\text{...(i)}\\]\n\\[xS_n = x + 2x^{2} + 3x^{3} + \\cdots\\]\n\\[+ (n - 1)x^{n-1} + nx^{n} \\quad \\text{...(ii)}\\]\nKyun: \\(n\\)th term: A.P. hissa \\(1 + (n - 1)1 = n\\), G.P. hissa \\(x^{n-1}\\), to \\(nx^{n-1}\\). \\(x\\) se zarb karne par har power ek barhti hai; same power wali terms ek doosre ke neeche likhi hain.",
+              "Step 2: Tafreeq aur G.P. ka jama\n\\[(1 - x)S_n = 1 + x + x^{2} + x^{3}\\]\n\\[+ \\cdots + x^{n-1} - nx^{n}\\]\n\\[= \\dfrac{1(1 - x^{n})}{1 - x} - nx^{n}\\]\nKyun: same power wali terms ke coefficients mein farq 1 hai, to har term sirf \\(x^{k}\\) reh jati hai. \\(1 + x + \\cdots + x^{n-1}\\) ek G.P. hai: pehli term 1, ratio \\(x\\), aur is baar poori \\(n\\) terms (powers 0 se \\(n - 1\\) tak). \\(x \\ne 1\\) hai is liye formula lag sakta hai.",
+              "Step 3: Ek fraction banayein aur \\(S_n\\) nikaalein\n\\[= \\dfrac{1 - x^{n} - n(1 - x)x^{n}}{1 - x}\\]\n\\[= \\dfrac{1 - x^{n} - nx^{n} + nx^{n+1}}{1 - x}\\]\n\\[(1 - x)S_n = \\dfrac{1 - (n + 1)x^{n} + nx^{n+1}}{1 - x}\\]\n\\[S_n = \\dfrac{1 - (n + 1)x^{n} + nx^{n+1}}{(1 - x)^{2}}\\]\nKyun: \\(nx^{n}\\) ko \\(\\frac{n(1 - x)x^{n}}{1 - x}\\) likh kar common denominator banaya. Phir \\(-n(1 - x)x^{n} = -nx^{n} + nx^{n+1}\\), aur \\(-x^{n} - nx^{n} = -(n + 1)x^{n}\\). Aakhir mein dono taraf \\(1 - x\\) se divide kiya, to neeche \\((1 - x)^{2}\\) aa gaya.",
+              "Step 4: Sum to infinity (\\(|x| < 1\\))\nAgar \\(|x| < 1\\) ho to \\(n \\to \\infty\\) par \\(x^{n} \\to 0\\).\n\\[S_{\\infty} = \\dfrac{1}{(1 - x)^{2}}\\]\nKyun: numerator ki terms \\((n + 1)x^{n}\\) aur \\(nx^{n+1}\\) dono zero ki taraf jati hain. Kitab sirf \\(x^{n} \\to 0\\) likhti hai; asal mein yahan yeh bhi chahiye ke \\(nx^{n} \\to 0\\), jo 6.8.2 ke shuru mein bataya gaya hai: \\(|x| < 1\\) par \\(x^{n}\\) itni tezi se chhota hota hai ke \\(n\\) se zarb ke bawajood zero ki taraf jata hai. Sirf 1 bachta hai.",
+              "Tasdeeq:\nAb do tareeqon se check karte hain.\n\\(n = 2\\): \\(1 - 3x^{2} + 2x^{3} = (1 - x)^{2}(1 + 2x)\\), to \\(S_2 = 1 + 2x\\), jo pehli do terms ka jama hai.\n\\(S_{\\infty}\\) formula se (\\(a = 1, d = 1, b = 1, r = x\\)): \\(\\frac{1}{1 - x} + \\frac{x}{(1 - x)^{2}} = \\frac{1 - x + x}{(1 - x)^{2}} = \\frac{1}{(1 - x)^{2}}\\). Wahi jawab!"
+            ],
+            "answer": "\\(S_n = \\frac{1 - (n + 1)x^{n} + nx^{n+1}}{(1 - x)^{2}}\\); \\(|x| < 1\\) ho to \\(S_{\\infty} = \\frac{1}{(1 - x)^{2}}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Example 22 ke jawab mein \\(x = \\frac{1}{2}\\) rakhiye: \\(1 + 2\\cdot\\frac{1}{2} + 3\\cdot\\frac{1}{4} + 4\\cdot\\frac{1}{8} + \\cdots = \\frac{1}{\\left(1 - \\frac{1}{2}\\right)^{2}} = \\frac{1}{\\frac{1}{4}} = 4\\).\nPehli chand terms jama kar ke dekhiye: \\(1 + 1 + 0.75 + 0.5 + 0.3125 + 0.1875 + \\cdots\\); jama \\(3.75\\) ho chuka hai aur dheere dheere \\(4\\) ke qareeb ja raha hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "1. Example 19 ka \\(S_{\\infty}\\) kyun nahin nikal sakta?\n2. Example 21 mein beech wali G.P. ki \\(n - 1\\) terms thi, aur Example 22 mein \\(n\\). Farq kyun? (Ishara: powers kahan se shuru hoti hain.)\n3. \\(1 + \\frac{2}{2} + \\frac{3}{4} + \\frac{4}{8} + \\cdots\\) ka \\(S_{\\infty}\\) formula se nikaaliye. (Jawab: 4)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(|r| < 1\\) ho to \\(S_{\\infty} = \\frac{ab}{1 - r} + \\frac{dbr}{(1 - r)^{2}}\\).\n2. Har A.G.P. ka tareeqa: \\(n\\)th term, \\(S_n\\), \\(r\\) se zarb, tafreeq, beech ki G.P. ka jama.\n3. Tafreeq ke baad left side \\((1 - r)S_n\\) hota hai: \\(r = 2\\) par \\(-S_n\\), \\(r = \\frac{1}{3}\\) par \\(\\frac{2}{3}S_n\\).\n4. Beech wali G.P. ki terms hamesha gin kar likhein.\n5. Jawab ko \\(n = 1\\) aur \\(n = 2\\) par zaroor check karein."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(|r| \\ge 1\\) par bhi \\(S_{\\infty}\\) laga dena: \\(r = 2\\) wali series ka koi infinite sum nahin.\n2. Tafreeq ke baad aakhri term ka minus sign bhool jana.\n3. Beech wali G.P. ki terms ghalat ginna: \\(2 + \\cdots + 2^{n-1}\\) mein \\(n - 1\\), aur \\(1 + x + \\cdots + x^{n-1}\\) mein \\(n\\) terms.\n4. Left side par \\(-S_n\\) chhor dena aur aakhir mein \\(-1\\) se zarb na karna.\n5. Example 20 jaisi series mein \\(n\\)th term \\((n + 1)2^{n-1}\\) likh dena; hamesha \\(n = 1\\) rakh kar check karein ke pehli term aati hai ya nahin."
+          }
+        ]
+      }
+    }
+  ]
+}

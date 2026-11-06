@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-3-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-3-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 200,
+          "pdf_to": 200,
+          "note": "Exercise 10.3, Question 3: book page 195 (PDF 200); printed left side 2cos2θ is a misprint for 2cosθ, boxed; no answer key entry; checked with sympy and the solution book (PDF 951-952)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. Show that: \\(2\\cos 2\\theta = \\sqrt{2 + \\sqrt{2 + 2\\cos 4\\theta}}\\) [as printed; the left side should be \\(2\\cos\\theta\\), see the correction below]",
+            "explanation": "A nested square root: we simplify from the inside out.\nWe must find what the right side really equals.\nPlan: use \\(1 + \\cos 2x = 2\\cos^2 x\\) twice, once with \\(x = 2\\theta\\) and once with \\(x = \\theta\\).",
+            "steps": [
+              "Given: R.H.S. \\(= \\sqrt{2 + \\sqrt{2 + 2\\cos 4\\theta}}\\).\nTo show: R.H.S. \\(= 2\\cos\\theta\\) (the printed left side \\(2\\cos 2\\theta\\) is a misprint).\nMethod: The identity \\(1 + \\cos 2x = 2\\cos^2 x\\) turns \\(2 + 2\\cos(\\text{angle})\\) into a perfect square. We take \\(0 \\le \\theta \\le \\frac{\\pi}{4}\\), so that \\(\\cos\\theta\\) and \\(\\cos 2\\theta\\) are not negative and each square root gives back the cosine itself.",
+              "Simplify the inner root\n\\[2 + 2\\cos 4\\theta = 2(1 + \\cos 4\\theta)\\]\n\\[= 2(2\\cos^2 2\\theta) = 4\\cos^2 2\\theta\\]\n\\[\\sqrt{2 + 2\\cos 4\\theta} = 2\\cos 2\\theta\\]\nWhy: \\(1 + \\cos 4\\theta = 2\\cos^2 2\\theta\\) (put \\(x = 2\\theta\\)). \\(\\cos 2\\theta \\ge 0\\) in our range.",
+              "Simplify the outer root\n\\[2 + 2\\cos 2\\theta = 2(1 + \\cos 2\\theta)\\]\n\\[= 2(2\\cos^2\\theta) = 4\\cos^2\\theta\\]\n\\[\\sqrt{4\\cos^2\\theta} = 2\\cos\\theta\\]\nWhy: The same identity with \\(x = \\theta\\); \\(\\cos\\theta \\ge 0\\).",
+              "Conclusion\n\\[\\sqrt{2 + \\sqrt{2 + 2\\cos 4\\theta}} = 2\\cos\\theta\\]\nWhy: The right side is \\(2\\cos\\theta\\), not \\(2\\cos 2\\theta\\).",
+              "Check with \\(\\theta = 30^{\\circ}\\)\n\\[\\sqrt{2 + \\sqrt{2 + 2\\cos 120^{\\circ}}} = \\sqrt{2 + 1}\\]\n\\[= \\sqrt{3} = 2\\cos 30^{\\circ} \\;\\checkmark\\]\n\\[2\\cos 60^{\\circ} = 1 \\neq \\sqrt{3}\\]\nWhy: \\(2 + 2(-\\frac{1}{2}) = 1\\). The value matches \\(2\\cos\\theta\\) and not the printed \\(2\\cos 2\\theta\\)."
+            ],
+            "final_answer": "\\(\\sqrt{2 + \\sqrt{2 + 2\\cos 4\\theta}} = 2\\cos\\theta\\) (for \\(0 \\le \\theta \\le \\frac{\\pi}{4}\\)). Hence proved, with the left side corrected to \\(2\\cos\\theta\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \\(2\\cos 2\\theta = \\sqrt{2 + \\sqrt{2 + 2\\cos 4\\theta}}\\). This is a misprint: each square root halves the angle (\\(4\\theta \\to 2\\theta \\to \\theta\\)), so the right side equals \\(2\\cos\\theta\\). At \\(\\theta = 30^{\\circ}\\) the printed left side is \\(1\\) but the right side is \\(\\sqrt{3}\\). The correct statement is \\(2\\cos\\theta = \\sqrt{2 + \\sqrt{2 + 2\\cos 4\\theta}}\\) (for \\(0 \\le \\theta \\le \\frac{\\pi}{4}\\))."
+          }
+        ]
+      }
+    }
+  ]
+}

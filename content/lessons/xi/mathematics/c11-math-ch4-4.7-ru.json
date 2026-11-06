@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.7-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.7",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 67,
+          "pdf_to": 69,
+          "note": "Book p. 62-64: leading entry, echelon form (i)-(iii), reduced echelon form, Example 8, inverse by row operations, Example 9, rank, Example 10"
+        }
+      ],
+      "title": "4.7 Echelon and Reduced Echelon Forms of Matrices (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH4-4.7",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Pichle sabaq mein hum ne row operations seekhe. Ab sawal yeh hai: in operations se matrix ko kis shakal mein lana hai? Jawab hai echelon form aur reduced echelon form. Yeh woh saaf suthri shaklein hain jin mein matrix se rank, inverse aur equations ka hal seedha parha ja sakta hai. Is sabaq mein teen kaam seekhenge: matrix ko echelon aur reduced echelon form mein lana, row operations se inverse nikalna, aur rank nikalna."
+          },
+          {
+            "type": "paragraph",
+            "text": "Matrix ki kisi bhi non-zero row mein pehla non-zero entry us row ka leading entry kehlata hai.",
+            "bold": [
+              "leading entry"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Har row ko bayen se dayen parhiye aur pehle aise number par ruk jaiye jo zero na ho: wahi leading entry hai. Misaal:\n\\[\\begin{bmatrix}0 & 3 & 5 \\\\ 2 & 0 & 1 \\\\ 0 & 0 & 0\\end{bmatrix}\\]\n\\(R_1\\) ka leading entry 3 hai (pehla 0 chhor diya), \\(R_2\\) ka 2 hai, aur \\(R_3\\) zero row hai, is liye us ka koi leading entry nahi. Leading entry ko \"row ka sardar\" samjhein: yahi batata hai ke row kahan se shuru hoti hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Echelon Form of a Matrix"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ek \\(m \\times n\\) matrix \\(A\\) echelon form mein kehlata hai agar:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) Har row mein leading entry se pehle ke zeros ki tadaad pichli (upar wali) row ke zeros se zyada ho.",
+              "(ii) \\(A\\) ki har non-zero row har zero row se pehle aaye (agar koi zero row ho).",
+              "(iii) Har row ka pehla non-zero entry (yani leading entry) 1 ho."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab shart (i) mein \"the number zeros\" chhapti hai, beech mein \"of\" reh gaya hai. Sahi jumla: \"greater than the number of zeros in the preceding row\". Matlab par koi farq nahi parta; upar humne shart sahi likhi hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh matrices\n\\[\\begin{bmatrix}0 & 1 & -2 & 4 \\\\ 0 & 0 & 1 & 2 \\\\ 0 & 0 & 0 & 0\\end{bmatrix}\\]\naur\n\\[\\begin{bmatrix}1 & 2 & -3 & 4 \\\\ 0 & 0 & 1 & 2 \\\\ 0 & 0 & 0 & 1\\end{bmatrix}\\]\nechelon form mein hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Echelon form ko seerhi (staircase) ki tarah sochiye: har neeche wali row ka leading 1 upar wali row ke leading 1 se dayen taraf hota hai, aur zero rows sab se neeche baithti hain. \"Echelon\" ka lafzi matlab bhi seerhi-numa tarteeb hai.\nPehle matrix ko check karein: \\(R_1\\) mein leading entry se pehle 1 zero, \\(R_2\\) mein 2 zeros (zyada), zero row \\(R_3\\) sab se aakhir mein, aur dono leading entries 1 hain. Teeno shartein poori.\nAb ek aisa matrix jo echelon form mein nahi:\n\\[\\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix}\\]\nDono rows bina zero ke shuru hoti hain, yani \\(R_2\\) mein zeros \\(R_1\\) se zyada nahi. Shart (i) toot gayi. Is ko echelon banane ke liye \\(R_2 + (-3)R_1\\) lagana parega."
+          },
+          {
+            "type": "paragraph",
+            "text": "Reduced Echelon Form of a Matrix: Ek \\(m \\times n\\) matrix \\(A\\) reduced (row) echelon form mein kehlata hai agar \\(R_i\\) ka pehla non-zero entry (leading entry) column \\(C_j\\) mein ho, to \\(C_j\\) ki baaqi tamam entries zero hon.",
+            "bold": [
+              "Reduced Echelon Form of a Matrix:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh matrices\n\\[\\begin{bmatrix}0 & 1 & 0 & 4 \\\\ 0 & 0 & 1 & 2 \\\\ 0 & 0 & 0 & 0\\end{bmatrix}\\]\naur\n\\[\\begin{bmatrix}1 & 2 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & 1\\end{bmatrix}\\]\n(row) reduced echelon form mein hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Poori baat yun samjhein: matrix pehle echelon form mein ho, aur saath hi har leading 1 apne column mein akela non-zero number ho (upar bhi zero, neeche bhi zero). \\(C_j\\) ka matlab \\(j\\)-wan column hai.\nUpar doosre matrix mein leading 1 columns 1, 3 aur 4 mein hain, aur in columns mein aur kuch nahi. Column 2 mein 2 hai, lekin column 2 mein koi leading 1 nahi, is liye yeh jaiz hai.\nFarq yaad rakhiye: rank ke liye echelon form kaafi hai; equations ka hal seedha parhne ke liye reduced echelon form behtar hai, kyun ke us mein har variable alag ho jata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki misaal mein matrix ko qadam ba qadam pehle echelon aur phir reduced echelon form mein laate hain. Har step mein dekhiye ke kaun sa operation kyun chuna gaya; yahi soch exam mein kaam aati hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Reduce\n\\[\\begin{bmatrix}2 & 3 & -1 & 9 \\\\ 1 & -1 & 2 & -3 \\\\ 3 & 1 & 3 & 2\\end{bmatrix}\\]\nto (row) echelon and reduced (row) echelon form.",
+            "steps": [
+              "Given: \\(3 \\times 4\\) matrix\n\\[\\begin{bmatrix}2 & 3 & -1 & 9 \\\\ 1 & -1 & 2 & -3 \\\\ 3 & 1 & 3 & 2\\end{bmatrix}\\]\nTo find: is ki (row) echelon form aur reduced (row) echelon form.\nMethod: sab se pehle samajh lein ke humein kya banana hai: seerhi (staircase) jaisi shakal jis mein har row ka pehla non-zero number 1 ho aur us ke neeche zero hon. Is ke liye elementary row operations column ba column lagayenge: pehle leading 1 banao, phir us ke neeche zero (yeh echelon form hai); phir har leading 1 ke upar bhi zero banao (yeh reduced echelon form hai).",
+              "Step 1: Bayen upar wale kone mein 1 laayein\n\\(R_1 \\leftrightarrow R_2\\)\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 2 & 3 & -1 & 9 \\\\ 3 & 1 & 3 & 2\\end{bmatrix}\\]\nKyun: \\(R_1\\) ka leading entry 1 hona chahiye. \\(R_2\\) pehle hi 1 se shuru ho rahi hai, is liye rows badal dena \\(R_1\\) ko 2 se divide karne se behtar hai (divide karne se fractions aa jate, aur fractions mein ghalti ka imkaan barh jata hai). Kitab is step ko \\(R_1 \\sim R_2\\) likhti hai; is ka matlab interchange \\(R_1 \\leftrightarrow R_2\\) hi hai.",
+              "Step 2: Leading 1 ke neeche zero banayein\n\\(R_2 + (-2)R_1 \\to R_2'\\)\n\\[(2,\\ 3,\\ -1,\\ 9)\\]\n\\[+(-2)(1,\\ -1,\\ 2,\\ -3)\\]\n\\[= (0,\\ 5,\\ -5,\\ 15)\\]\n\\(R_3 + (-3)R_1 \\to R_3'\\)\n\\[(3,\\ 1,\\ 3,\\ 2)\\]\n\\[+(-3)(1,\\ -1,\\ 2,\\ -3)\\]\n\\[= (0,\\ 4,\\ -3,\\ 11)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 0 & 5 & -5 & 15 \\\\ 0 & 4 & -3 & 11\\end{bmatrix}\\]\nKyun: \\(R_2\\) ke pehle entry 2 ko khatam karne ke liye \\(R_1\\) ka \\((-2)\\) guna jama karte hain, aur \\(R_3\\) ke 3 ko khatam karne ke liye \\((-3)\\) guna. Qaida yaad rakhiye: jis number ko khatam karna hai, us ka ulta sign wala multiple lein. Ab column 1 mein upar 1 aur neeche zero hain.",
+              "Step 3: \\(R_2\\) ka leading entry 1 banayein\n\\(\\frac{1}{5}R_2 \\to R_2'\\)\n\\[\\frac{1}{5}(0,\\ 5,\\ -5,\\ 15)\\]\n\\[= (0,\\ 1,\\ -1,\\ 3)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 0 & 1 & -1 & 3 \\\\ 0 & 4 & -3 & 11\\end{bmatrix}\\]\nKyun: \\(R_2\\) ka leading entry 5 hai; \\(\\frac{1}{5}\\) se multiply karne par 1 ban jata hai. \\(R_2\\) ki saari entries 5 par poori taqseem hoti hain, is liye fractions nahi aaye.",
+              "Step 4: \\(R_2\\) ke leading 1 ke neeche zero banayein\n\\(R_3 + (-4)R_2 \\to R_3'\\)\n\\[(0,\\ 4,\\ -3,\\ 11)\\]\n\\[+(-4)(0,\\ 1,\\ -1,\\ 3)\\]\n\\[= (0,\\ 0,\\ 1,\\ -1)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 0 & 1 & -1 & 3 \\\\ 0 & 0 & 1 & -1\\end{bmatrix}\\]\nKyun: \\(R_3\\) mein \\(R_2\\) ke leading 1 ke theek neeche 4 hai; \\((-4)R_2\\) jama karne se woh zero ho jata hai. Ab \\(R_3\\) ka leading entry bhi 1 hai. Yeh matrix teeno shartein poori karta hai (har row mein pichli row se zyada zero pehle, zero row koi nahi, har leading entry 1), yani yeh echelon form hai. Pehla jawab yahin mil gaya.",
+              "Step 5: Ab reduced form: column 2 mein leading 1 ke upar zero\n\\(R_1 + 1\\cdot R_2 \\to R_1'\\)\n\\[(1,\\ -1,\\ 2,\\ -3)\\]\n\\[+(0,\\ 1,\\ -1,\\ 3)\\]\n\\[= (1,\\ 0,\\ 1,\\ 0)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & 0 & 1 & 0 \\\\ 0 & 1 & -1 & 3 \\\\ 0 & 0 & 1 & -1\\end{bmatrix}\\]\nKyun: reduced echelon form mein har leading 1 ka column baaqi har jagah zero hona chahiye. Column 2 mein \\(R_1\\) mein \\(-1\\) hai, is liye \\(R_1\\) mein \\(1\\cdot R_2\\) jama karte hain. \\(-1 + 1 = 0\\).",
+              "Step 6: Column 3 mein \\(R_3\\) ke leading 1 ke upar zero\n\\(R_1 + (-1)R_3 \\to R_1'\\)\n\\[(1,\\ 0,\\ 1,\\ 0)\\]\n\\[+(-1)(0,\\ 0,\\ 1,\\ -1)\\]\n\\[= (1,\\ 0,\\ 0,\\ 1)\\]\n\\(R_2 + 1\\cdot R_3 \\to R_2'\\)\n\\[(0,\\ 1,\\ -1,\\ 3)\\]\n\\[+(0,\\ 0,\\ 1,\\ -1)\\]\n\\[= (0,\\ 1,\\ 0,\\ 2)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & 0 & 0 & 1 \\\\ 0 & 1 & 0 & 2 \\\\ 0 & 0 & 1 & -1\\end{bmatrix}\\]\nKyun: column 3 mein abhi \\(R_1\\) mein 1 aur \\(R_2\\) mein \\(-1\\) hai. \\(R_1\\) mein \\((-1)R_3\\) aur \\(R_2\\) mein \\(1\\cdot R_3\\) jama karne se dono zero ho jate hain. Hum aakhri leading 1 se upar ki taraf kaam karte hain, kyun ke \\(R_3\\) ke pehle do entries zero hain; is liye pehle banaye hue zero kharab nahi hote.",
+              "Tasdeeq:\nReduced matrix ko system \\(2x + 3y - z = 9\\), \\(x - y + 2z = -3\\), \\(3x + y + 3z = 2\\) ki tarah parhein: yeh batata hai \\(x = 1\\), \\(y = 2\\), \\(z = -1\\). In values ko asal rows mein rakhein:\n\\[2(1) + 3(2) - (-1) = 9\\]\n\\[1 - 2 + 2(-1) = -3\\]\n\\[3(1) + 2 + 3(-1) = 2\\]\nTeeno sahi hain, matlab hamare row operations mein koi ghalti nahi hui. Yeh tasdeeq ka tareeqa yaad rakhiye: aakhri column ko \"=\" ke baad wala hissa samjhein aur values wapas rakh kar dekhein."
+            ],
+            "answer": "Echelon form:\n\\[\\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 0 & 1 & -1 & 3 \\\\ 0 & 0 & 1 & -1\\end{bmatrix}\\]\nReduced echelon form:\n\\[\\begin{bmatrix}1 & 0 & 0 & 1 \\\\ 0 & 1 & 0 & 2 \\\\ 0 & 0 & 1 & -1\\end{bmatrix}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Hal ke pehle step mein kitab \\(R_1 \\sim R_2\\) chhapti hai. Asal mein yahan pehli do rows ki jagah badli gayi hai, jise Section 4.6 ki notation mein \\(R_1 \\leftrightarrow R_2\\) likhte hain. Exam mein \\(R_1 \\leftrightarrow R_2\\) hi likhiye."
+          },
+          {
+            "type": "paragraph",
+            "text": "Inverse of a Matrix: Maan lijiye \\(A\\) ek non-singular matrix hai. Agar \\(A \\vdots I\\) par ek ke baad ek elementary row operations lagane se \\(A\\) badal kar \\(I\\) ban jaye, to hasil hone wala matrix \\(I \\vdots A^{-1}\\) hota hai.",
+            "bold": [
+              "Inverse of a Matrix:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh tareeqa kaam kyun karta hai? \\(A^{-1}\\) dhoondne ka matlab hai aisa matrix \\(X\\) dhoondna jis ke liye \\(AX = I\\). \\(X\\) ka har column ek system ka hal hai jis ka dayan hissa \\(I\\) ka ek column hai. Teeno dayen hisse \\(A\\) ke saath likh kar \\(A\\) ko \\(I\\) bana dein to teeno systems ek saath hal ho jate hain, aur dayen hissa \\(X = A^{-1}\\) ban jata hai.\nAgar \\(A\\) singular ho (\\(|A| = 0\\)), to bayen taraf ek zero row aa jayegi aur \\(A\\) kabhi \\(I\\) nahi banega: inverse mojood nahi. Is liye pehle determinant dekh lena aqalmandi hai.\nEk chhoti misaal: \\(\\begin{bmatrix}2 & 1 \\\\ 5 & 3\\end{bmatrix}\\) par yeh tareeqa \\(\\begin{bmatrix}3 & -1 \\\\ -5 & 2\\end{bmatrix}\\) deta hai, jo Section 4.5 ke adjoint formula se bhi yahi aata hai. Dono raste ek hi manzil par pohanchte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki Example 9 dekhte hain. Ek kaam ki tarteeb zehan mein bitha lijiye, jo har inverse wale sawal mein chalti hai: (1) determinant check karo; (2) \\(A \\vdots I\\) likho; (3) column 1 mein leading 1 aur neeche zero; (4) column 2 mein leading 1 aur upar neeche zero; (5) column 3 mein leading 1 aur upar zero; (6) dayen hissa parh lo. Is tarteeb se chalne par aap kabhi raasta nahi bhoolenge."
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "Find the inverse of the matrix\n\\[A = \\begin{bmatrix}2 & 5 & -1 \\\\ 3 & 4 & 2 \\\\ 1 & 2 & -2\\end{bmatrix}\\]",
+            "steps": [
+              "Given:\n\\[A = \\begin{bmatrix}2 & 5 & -1 \\\\ 3 & 4 & 2 \\\\ 1 & 2 & -2\\end{bmatrix}\\]\nTo find: \\(A^{-1}\\).\nMethod: sab se pehle \\(|A|\\) dekhte hain, kyun ke agar \\(|A| = 0\\) ho to inverse mojood hi nahi, aur saari mehnat bekaar jayegi. Phir \\(A \\vdots I_3\\) likh kar row operations lagate hain jab tak bayen hissa \\(I_3\\) na ban jaye; us waqt dayen hissa khud \\(A^{-1}\\) hoga.",
+              "Step 1: Dekhein ke \\(A\\) non-singular hai\n\\(R_1\\) ke saath expand karein:\n\\[|A| = 2(-8-4) - 5(-6-2)\\]\n\\[\\quad - 1(6-4)\\]\n\\[= -24 + 40 - 2\\]\n\\[= 14\\]\nKyun: \\(|A| \\ne 0\\) hai, is liye \\(A\\) non-singular hai aur \\(A^{-1}\\) mojood hai. Minors yeh hain: \\(4(-2) - 2(2) = -12\\), \\(3(-2) - 2(1) = -8\\) aur \\(3(2) - 4(1) = 2\\); signs \\(+, -, +\\) ki tarteeb se lagte hain. Beech wale term mein minus sign aur \\(-8\\) mil kar \\(+40\\) banate hain; yahan aksar ghalti hoti hai.",
+              "Step 2: \\(A\\) ke dayen taraf \\(I_3\\) lagayein\n\\[\\left[\\begin{array}{ccc|ccc}2 & 5 & -1 & 1 & 0 & 0 \\\\ 3 & 4 & 2 & 0 & 1 & 0 \\\\ 1 & 2 & -2 & 0 & 0 & 1\\end{array}\\right]\\]\nKyun: jo row operation hum \\(A\\) par lagayenge, wahi \\(I_3\\) par bhi lagega. Jab \\(A\\) badal kar \\(I_3\\) banega, to unhi operations se \\(I_3\\) badal kar \\(A^{-1}\\) ban chuka hoga. Yani \\(I_3\\) ek \"record\" ki tarah hai jo hamare saare operations yaad rakhta hai.",
+              "Step 3: Bayen upar kone mein 1 laayein\n\\(R_1 \\leftrightarrow R_3\\)\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|ccc}1 & 2 & -2 & 0 & 0 & 1 \\\\ 3 & 4 & 2 & 0 & 1 & 0 \\\\ 2 & 5 & -1 & 1 & 0 & 0\\end{array}\\right]\\]\nKyun: \\(R_3\\) pehle hi 1 se shuru hoti hai, is liye \\(R_1\\) aur \\(R_3\\) ki jagah badalne se baghair fraction ke leading 1 mil jata hai. Dhyan dein: row ka dayan hissa (\\(I\\) wala) bhi saath hi jata hai, kyun ke poori row ek hi equation hai.",
+              "Step 4: Pehle leading 1 ke neeche zero\n\\(R_2 + (-3)R_1 \\to R_2'\\)\n\\[(3,\\ 4,\\ 2 \\mid 0,\\ 1,\\ 0)\\]\n\\[+(-3)(1,\\ 2,\\ -2 \\mid 0,\\ 0,\\ 1)\\]\n\\[= (0,\\ -2,\\ 8 \\mid 0,\\ 1,\\ -3)\\]\n\\(R_3 + (-2)R_1 \\to R_3'\\)\n\\[(2,\\ 5,\\ -1 \\mid 1,\\ 0,\\ 0)\\]\n\\[+(-2)(1,\\ 2,\\ -2 \\mid 0,\\ 0,\\ 1)\\]\n\\[= (0,\\ 1,\\ 3 \\mid 1,\\ 0,\\ -2)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|ccc}1 & 2 & -2 & 0 & 0 & 1 \\\\ 0 & -2 & 8 & 0 & 1 & -3 \\\\ 0 & 1 & 3 & 1 & 0 & -2\\end{array}\\right]\\]\nKyun: \\(R_2\\) ka 3 khatam karne ke liye \\((-3)R_1\\) aur \\(R_3\\) ka 2 khatam karne ke liye \\((-2)R_1\\) jama kiya. Har operation poori row par lagta hai, dayen hisse samet; yahi sab se zyada bhooli jane wali baat hai.",
+              "Step 5: \\(R_2\\) mein leading 1\n\\(-\\frac{1}{2}R_2 \\to R_2'\\)\n\\[-\\frac{1}{2}(0,\\ -2,\\ 8 \\mid 0,\\ 1,\\ -3)\\]\n\\[= (0,\\ 1,\\ -4 \\mid 0,\\ -\\frac{1}{2},\\ \\frac{3}{2})\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|ccc}1 & 2 & -2 & 0 & 0 & 1 \\\\ 0 & 1 & -4 & 0 & -\\frac{1}{2} & \\frac{3}{2} \\\\ 0 & 1 & 3 & 1 & 0 & -2\\end{array}\\right]\\]\nKyun: \\(R_2\\) ka leading entry \\(-2\\) hai; \\(-\\frac{1}{2}\\) se multiply karne par 1 ban jata hai. Sign ka khayal rakhein: negative se multiply karne par har entry ka sign badal jata hai.",
+              "Step 6: Column 2 mein neeche aur upar zero\n\\(R_3 + (-1)R_2 \\to R_3'\\)\n\\[(0,\\ 1,\\ 3 \\mid 1,\\ 0,\\ -2)\\]\n\\[+(-1)(0,\\ 1,\\ -4 \\mid 0,\\ -\\frac{1}{2},\\ \\frac{3}{2})\\]\n\\[= (0,\\ 0,\\ 7 \\mid 1,\\ \\frac{1}{2},\\ -\\frac{7}{2})\\]\n\\(R_1 + (-2)R_2 \\to R_1'\\)\n\\[(1,\\ 2,\\ -2 \\mid 0,\\ 0,\\ 1)\\]\n\\[+(-2)(0,\\ 1,\\ -4 \\mid 0,\\ -\\frac{1}{2},\\ \\frac{3}{2})\\]\n\\[= (1,\\ 0,\\ 6 \\mid 0,\\ 1,\\ -2)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|ccc}1 & 0 & 6 & 0 & 1 & -2 \\\\ 0 & 1 & -4 & 0 & -\\frac{1}{2} & \\frac{3}{2} \\\\ 0 & 0 & 7 & 1 & \\frac{1}{2} & -\\frac{7}{2}\\end{array}\\right]\\]\nKyun: column 2 mein \\(R_3\\) mein 1 aur \\(R_1\\) mein 2 hai; \\((-1)R_2\\) aur \\((-2)R_2\\) jama karne se dono zero ho jate hain. Inverse ke liye humein bayen taraf poora \\(I\\) chahiye, is liye upar bhi zero banane hain.",
+              "Step 7: \\(R_3\\) mein leading 1\n\\(\\frac{1}{7}R_3 \\to R_3'\\)\n\\[\\frac{1}{7}(0,\\ 0,\\ 7 \\mid 1,\\ \\frac{1}{2},\\ -\\frac{7}{2})\\]\n\\[= (0,\\ 0,\\ 1 \\mid \\frac{1}{7},\\ \\frac{1}{14},\\ -\\frac{1}{2})\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|ccc}1 & 0 & 6 & 0 & 1 & -2 \\\\ 0 & 1 & -4 & 0 & -\\frac{1}{2} & \\frac{3}{2} \\\\ 0 & 0 & 1 & \\frac{1}{7} & \\frac{1}{14} & -\\frac{1}{2}\\end{array}\\right]\\]\nKyun: column 3 mein 7 ko 1 banana hai, is liye \\(R_3\\) ko \\(\\frac{1}{7}\\) se multiply karte hain.",
+              "Step 8: Aakhri leading 1 ke upar zero\n\\(R_1 + (-6)R_3 \\to R_1'\\)\n\\[(1,\\ 0,\\ 6 \\mid 0,\\ 1,\\ -2)\\]\n\\[+(-6)(0,\\ 0,\\ 1 \\mid \\frac{1}{7},\\ \\frac{1}{14},\\ -\\frac{1}{2})\\]\n\\[= (1,\\ 0,\\ 0 \\mid -\\frac{6}{7},\\ \\frac{4}{7},\\ 1)\\]\n\\(R_2 + 4R_3 \\to R_2'\\)\n\\[(0,\\ 1,\\ -4 \\mid 0,\\ -\\frac{1}{2},\\ \\frac{3}{2})\\]\n\\[+4(0,\\ 0,\\ 1 \\mid \\frac{1}{7},\\ \\frac{1}{14},\\ -\\frac{1}{2})\\]\n\\[= (0,\\ 1,\\ 0 \\mid \\frac{4}{7},\\ -\\frac{3}{14},\\ -\\frac{1}{2})\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|ccc}1 & 0 & 0 & -\\frac{6}{7} & \\frac{4}{7} & 1 \\\\ 0 & 1 & 0 & \\frac{4}{7} & -\\frac{3}{14} & -\\frac{1}{2} \\\\ 0 & 0 & 1 & \\frac{1}{7} & \\frac{1}{14} & -\\frac{1}{2}\\end{array}\\right]\\]\nKyun: column 3 mein \\(R_1\\) mein 6 aur \\(R_2\\) mein \\(-4\\) hai; \\((-6)R_3\\) aur \\(4R_3\\) jama karne se dono khatam. Ab bayen hissa \\(I_3\\) ban gaya, yani kaam mukammal.",
+              "Step 9: Inverse parh lein\n\\[A^{-1} = \\begin{bmatrix}-\\frac{6}{7} & \\frac{4}{7} & 1 \\\\ \\frac{4}{7} & -\\frac{3}{14} & -\\frac{1}{2} \\\\ \\frac{1}{7} & \\frac{1}{14} & -\\frac{1}{2}\\end{bmatrix}\\]\nKyun: bayen hissa \\(I_3\\) ban chuka hai, is liye dayen hissa hi \\(A^{-1}\\) hai.",
+              "Tasdeeq: \\(A\\) ko \\(A^{-1}\\) se multiply karein. Fractions se bachne ke liye \\(\\frac{1}{14}\\) bahar nikaal lein:\n\\[14A^{-1} = \\begin{bmatrix}-12 & 8 & 14 \\\\ 8 & -3 & -7 \\\\ 2 & 1 & -7\\end{bmatrix}\\]\n\\(A\\) ki \\(R_1\\) columns ke saath: \\(-24 + 40 - 2 = 14\\), \\(16 - 15 - 1 = 0\\), \\(28 - 35 + 7 = 0\\).\n\\(R_2\\): \\(-36 + 32 + 4 = 0\\), \\(24 - 12 + 2 = 14\\), \\(42 - 28 - 14 = 0\\).\n\\(R_3\\): \\(-12 + 16 - 4 = 0\\), \\(8 - 6 - 2 = 0\\), \\(14 - 14 + 14 = 14\\).\nYani \\(A(14A^{-1}) = 14I_3\\), is liye \\(AA^{-1} = I_3\\). Jawab bilkul sahi hai."
+            ],
+            "answer": "\\[A^{-1} = \\begin{bmatrix}-\\frac{6}{7} & \\frac{4}{7} & 1 \\\\ \\frac{4}{7} & -\\frac{3}{14} & -\\frac{1}{2} \\\\ \\frac{1}{7} & \\frac{1}{14} & -\\frac{1}{2}\\end{bmatrix}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Dhyan dein",
+            "text": "Is sawal mein fractions (\\(\\frac{1}{2}\\), \\(\\frac{1}{7}\\), \\(\\frac{1}{14}\\)) aate hain, aur zyada tar ghaltiyan yahin hoti hain. Do mashware: pehla, har operation ke baad poori row ka hisaab alag line mein likhein, jaise upar steps mein likha hai, sirf dimagh mein na karein. Doosra, aakhir mein \\(AA^{-1} = I\\) zaroor check karein; agar koi entry ghalat hui to yahin pakri jayegi. Fractions se bachne ka ek tareeqa yeh bhi hai ke \\(\\frac{1}{14}\\) jaisa common factor bahar nikaal kar sirf integers se multiply karein, jaisa humne Tasdeeq mein kiya."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Example 9 mein hum ne pehle \\(|A| = 14\\) kyun nikala, jab ke row operations se inverse waise bhi mil jata? Sochiye, phir jawab parhiye.\nJawab: agar \\(|A| = 0\\) hota to row operations ke beech bayen taraf zero row aa jati aur \\(I\\) kabhi na banta. Pehle determinant dekh lene se pata chal jata hai ke inverse mojood hai ya nahi, aur bekaar mehnat se bach jate hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Rank of a Matrix: Maan lijiye \\(A\\) ek non-zero matrix hai. Agar echelon form mein lane ke baad is ki non-zero rows ki tadaad \\(r\\) ho, to \\(r\\) ko matrix \\(A\\) ka rank kehte hain.",
+            "bold": [
+              "Rank of a Matrix:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Rank yeh ginta hai ke matrix ki kitni rows waqai nayi maloomat de rahi hain. Jo row baaqi rows ka combination (jor) ho, woh reduce karte waqt zero row ban jati hai.\nMisaal: \\(\\begin{bmatrix}1 & 2 \\\\ 2 & 4\\end{bmatrix}\\) mein doosri row pehli ka do guna hai. \\(R_2 + (-2)R_1\\) lagane se zero row milti hai, is liye rank 1 hai. Jaise do log ek hi khabar sunayein to khabar ek hi gini jati hai.\n\\(m \\times n\\) matrix ka rank kabhi \\(m\\) aur \\(n\\) mein se chhote number se zyada nahi hota."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab Example 10 mein rank nikalte hain. Yahan ek baat pehle se samajh lein: rank ke liye humein reduced form tak jane ki zaroorat nahi, aur leading entries ko 1 banana bhi asal mein zaroori nahi (zero rows ki ginti wahi rehti hai). Phir bhi kitab echelon form ki poori definition follow karti hai, is liye hum bhi leading 1 banayenge, taa ke jawab saaf aur definition ke mutabiq ho."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "Find the rank of the matrix\n\\[\\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 2 & 0 & 7 & -7 \\\\ 3 & 1 & 12 & -11\\end{bmatrix}\\]",
+            "steps": [
+              "Given:\n\\[A = \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 2 & 0 & 7 & -7 \\\\ 3 & 1 & 12 & -11\\end{bmatrix}\\]\nTo find: \\(A\\) ka rank.\nMethod: rank ki definition hi tareeqa batati hai: \\(A\\) ko echelon form mein layein aur non-zero rows ginein. Reduced form ki zaroorat nahi; sirf echelon form kaafi hai.",
+              "Step 1: \\(R_1\\) ke leading 1 ke neeche zero\n\\(R_2 + (-2)R_1 \\to R_2'\\)\n\\[(2,\\ 0,\\ 7,\\ -7)\\]\n\\[+(-2)(1,\\ -1,\\ 2,\\ -3)\\]\n\\[= (0,\\ 2,\\ 3,\\ -1)\\]\n\\(R_3 + (-3)R_1 \\to R_3'\\)\n\\[(3,\\ 1,\\ 12,\\ -11)\\]\n\\[+(-3)(1,\\ -1,\\ 2,\\ -3)\\]\n\\[= (0,\\ 4,\\ 6,\\ -2)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 0 & 2 & 3 & -1 \\\\ 0 & 4 & 6 & -2\\end{bmatrix}\\]\nKyun: \\(R_1\\) pehle hi 1 se shuru hoti hai; \\((-2)R_1\\) aur \\((-3)R_1\\) jama karne se column 1 saaf ho jata hai.",
+              "Step 2: \\(R_2\\) mein leading 1\n\\(\\frac{1}{2}R_2 \\to R_2'\\)\n\\[\\frac{1}{2}(0,\\ 2,\\ 3,\\ -1)\\]\n\\[= (0,\\ 1,\\ \\frac{3}{2},\\ -\\frac{1}{2})\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 0 & 1 & \\frac{3}{2} & -\\frac{1}{2} \\\\ 0 & 4 & 6 & -2\\end{bmatrix}\\]\nKyun: \\(R_2\\) ka leading entry 2 hai; \\(\\frac{1}{2}\\) se multiply karne par 1 ban jata hai, jaisa echelon form ki shart (iii) maangti hai.",
+              "Step 3: \\(R_2\\) ke leading 1 ke neeche zero\n\\(R_3 + (-4)R_2 \\to R_3'\\)\n\\[(0,\\ 4,\\ 6,\\ -2)\\]\n\\[+(-4)(0,\\ 1,\\ \\frac{3}{2},\\ -\\frac{1}{2})\\]\n\\[= (0,\\ 0,\\ 0,\\ 0)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 0 & 1 & \\frac{3}{2} & -\\frac{1}{2} \\\\ 0 & 0 & 0 & 0\\end{bmatrix}\\]\nKyun: \\(R_3\\) ke column 2 mein 4 hai; \\((-4)R_2\\) jama karne se woh khatam, aur poori row zero ho gayi. Ab matrix echelon form mein hai. Zero row ka matlab hai ke teesri row pehli do rows se ban sakti thi; us mein koi nayi maloomat nahi thi.",
+              "Step 4: Non-zero rows ginein\n\\(R_1\\) aur \\(R_2\\) non-zero hain, \\(R_3\\) zero hai, is liye \\(r = 2\\).\nKyun: definition ke mutabiq echelon form mein non-zero rows ki tadaad hi rank hai.",
+              "Tasdeeq: asal \\(R_3\\) baaqi do rows se ban jati hai:\n\\[2R_2 - R_1 = (4,\\ 0,\\ 14,\\ -14)\\]\n\\[\\quad - (1,\\ -1,\\ 2,\\ -3)\\]\n\\[= (3,\\ 1,\\ 12,\\ -11) = R_3\\]\nYani sirf do rows \"asal\" (independent) hain, jo rank 2 se bilkul milta hai."
+            ],
+            "answer": "Diye gaye matrix ka rank 2 hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahi. \\(\\begin{bmatrix}1 & 3 \\\\ 2 & 7\\end{bmatrix}\\) ka rank aur reduced echelon form nikaliye.\n\\(R_2 + (-2)R_1 \\to R_2'\\): \\((2, 7) - 2(1, 3) = (0, 1)\\), to matrix \\(\\begin{bmatrix}1 & 3 \\\\ 0 & 1\\end{bmatrix}\\) (echelon form). Do non-zero rows, is liye rank 2.\n\\(R_1 + (-3)R_2 \\to R_1'\\): \\((1, 3) - 3(0, 1) = (1, 0)\\), to reduced echelon form \\(\\begin{bmatrix}1 & 0 \\\\ 0 & 1\\end{bmatrix} = I_2\\).\nDhyan dein: jab square matrix ka reduced echelon form \\(I\\) ho, to us ka inverse mojood hota hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Leading entry: non-zero row ka pehla non-zero entry.\n2. Echelon form: har leading entry 1, har leading 1 upar wale se dayen taraf, aur zero rows sab se neeche.\n3. Reduced echelon form: echelon form jis mein har leading 1 ke upar aur neeche zero hon.\n4. Inverse row operations se: \\(A \\vdots I\\) ko \\(I \\vdots A^{-1}\\) banao; pehle \\(|A| \\ne 0\\) check karo.\n5. Rank: echelon form mein non-zero rows ki tadaad."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(A \\vdots I\\) mein operation sirf bayen hisse par lagana. Har operation poori row par lagta hai; bachne ke liye har row ke chhe ke chhe numbers likhein.\n2. \\(R_1 + R_2\\) jaisa operation kar ke dono rows badal dena. Sirf \\(\\to\\) ke saath likhi row badalti hai.\n3. Asal matrix ki rows gin kar rank bata dena. Pehle echelon form banayein, phir ginein.\n4. Sawal reduced form maange aur echelon par ruk jana. Har leading 1 ke upar bhi zero banayein.\n5. Negative multiplier mein sign ki ghalti: \\(R_3 + (-4)R_2\\) ka matlab \\(R_2\\) ka chaar guna ghatana hai. Har entry alag likh kar hisaab karein."
+          }
+        ]
+      }
+    }
+  ]
+}

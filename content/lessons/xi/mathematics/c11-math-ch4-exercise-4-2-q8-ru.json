@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-2-Q8-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-2-q8",
+      "title": "Question 8 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 65,
+          "pdf_to": 65,
+          "note": "Exercise 4.2, Question 8: Show that |kA| = k^3|A| for a square matrix of order 3 (book page 60)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH4-EXERCISE-4-2-Q8",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8. If \\(A\\) is a square matrix of order 3, then show that \\(|kA| = k^{3}|A|\\).",
+            "explanation": "Yeh general saboot hai: har \\(3 \\times 3\\) matrix ke liye sahi hona chahiye, is liye numbers ki jagah letters \\(a_{ij}\\) lenge.\nMatrix ko \\(k\\) se multiply karne ka matlab hai har entry ko \\(k\\) se multiply karna. To har row mein \\(k\\) common hai, aur rows teen hain.\nPlan: \\(kA\\) likhein, phir har row se ek ek \\(k\\) bahar nikalein (Property v).",
+            "steps": [
+              "Diya gaya hai: \\(A = \\begin{bmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{bmatrix}\\), order 3 ka square matrix, aur ek number \\(k\\).\nSaabit karna hai: \\(|kA| = k^{3}|A|\\)\nTareeqa: Scalar multiplication, phir Property v: kisi ek row ka common factor determinant se ek dafa bahar aata hai.",
+              "\\(|kA|\\) likhein\n\\[|kA| = \\begin{vmatrix} ka_{11} & ka_{12} & ka_{13} \\\\ ka_{21} & ka_{22} & ka_{23} \\\\ ka_{31} & ka_{32} & ka_{33} \\end{vmatrix}\\]\nKyun: Scalar multiplication mein \\(A\\) ki har entry \\(k\\) se multiply hoti hai, sirf ek row ya ek column nahi; poore naun (9) elements.",
+              "Row 1 se \\(k\\) bahar nikalein\n\\[|kA| = k\\begin{vmatrix} a_{11} & a_{12} & a_{13} \\\\ ka_{21} & ka_{22} & ka_{23} \\\\ ka_{31} & ka_{32} & ka_{33} \\end{vmatrix}\\]\nKyun: \\(R_1\\) ki har entry mein \\(k\\) hai (Property v).",
+              "Row 2 aur row 3 se bhi \\(k\\) bahar\n\\[|kA| = k \\cdot k \\cdot k\\begin{vmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{vmatrix}\\]\n\\[= k^{3}|A|\\]\nKyun: Property v do dafa aur: ek \\(R_2\\) ke liye, ek \\(R_3\\) ke liye. Teen rows se teen \\(k\\), yani \\(k^{3}\\); bacha hua determinant bilkul \\(|A|\\) hai.\nDhyan dein: Bohat se students \\(|kA| = k|A|\\) likh dete hain. Yaad rakhein: determinant mein factor har row se alag nikalta hai, is liye order \\(n\\) ho to \\(|kA| = k^{n}|A|\\).",
+              "Tasdeeq (number rakh kar)\n\\[A = I_3,\\ k = 2:\\ |2I_3| = 2 \\cdot 2 \\cdot 2 = 8\\]\n\\[k^{3}|I_3| = 8 \\times 1 = 8 \\;\\checkmark\\]\nKyun: \\(2I_3\\) diagonal matrix hai jis ke diagonal par teen 2 hain; us ka determinant \\(2 \\times 2 \\times 2 = 8\\). Agar formula \\(k|A|\\) hota to jawab 2 aata, jo ghalat hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(|kA| = k^{3}|A|\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

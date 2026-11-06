@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-4-Q13-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-4-q13",
+      "title": "Question 13 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 143,
+          "pdf_to": 143,
+          "note": "Exercise 7.4, Question 13: book p.138 (PDF 143). Answer key PDF 306 (book p.301). Solution book PDF 675-704 used as a reference only."
+        }
+      ],
+      "variant_of": "C11-MATH-CH7-EXERCISE-7-4-Q13",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13(i)",
+            "prompt": "13 (i) There are 6 men and 8 women members of a club. how many committees of seven can be formed? (i) 3 women",
+            "explanation": "7 members ki committee jis mein theek 3 auratein (women) hon, yani baqi \\(7 - 3 = 4\\) mard (men).\nFind kya karna hai? Aisi committees ki tadaad; tarteeb se farq nahi parta.\nPlan: \\({}^{8}C_{3} \\times {}^{6}C_{4}\\).",
+            "steps": [
+              "Diya gaya hai: 6 men, 8 women; 7 ki committee jis mein 3 women.\nHumein find karna hai: committees ki tadaad.\nTareeqa: 8 women mein se 3, aur 6 men mein se 4. Dono kaam ek saath hone hain, is liye dono combinations ko multiply karenge. Sawal mein men ka zikr nahi, lekin committee 7 ki hai, is liye baqi 4 seats men ki hain.",
+              "Women chunein\n\\[{}^{8}C_{3} = \\dfrac{8 \\cdot 7 \\cdot 6}{3 \\cdot 2 \\cdot 1} = 56\\]\nKyun: 8 women mein se 3 chunni hain; \\(3! = 6\\) upar ke 6 ko cancel karta hai.",
+              "Men chunein\n\\[{}^{6}C_{4} = {}^{6}C_{2} = \\dfrac{6 \\cdot 5}{2} = 15\\]\nKyun: Baqi 4 seats men se bharni hain. 6 mein se 4 lena aur 2 chhorna barabar hai, is liye chhota hisaab \\({}^{6}C_{2}\\) kiya.",
+              "Multiply karein\n\\[56 \\times 15 = 840\\]\nKyun: Har women wala group har men wale group ke saath committee bana sakta hai.\nDhyan dein: Sirf \\({}^{8}C_{3}\\) likh kar ruk jana ghalat hai; men ki seats bhi bharni hain.",
+              "Tasdeeq\n\\[3 + 4 = 7 \\text{ members}\\]\n\\[840 \\div 15 = 56 \\;\\checkmark\\]\nKyun: Committee ka size sahi hai aur multiplication ulta divide karne par sahi nikla."
+            ],
+            "final_answer": "840 committees"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13(ii)",
+            "prompt": "13 (ii) There are 6 men and 8 women members of a club. how many committees of seven can be formed? (ii) at the most 3 women",
+            "explanation": "\"At the most 3 women\" (zyada se zyada 3 auratein) ka matlab hai 0, 1, 2 ya 3 women; baqi seats men bharenge.\nFind kya karna hai? Tamam jaiz suraton ki committees ka jama.\nPlan: har surat mein \\({}^{8}C_{w} \\times {}^{6}C_{7-w}\\) nikalein, phir sab jama karein.",
+            "steps": [
+              "Diya gaya hai: 6 men, 8 women; 7 ki committee jis mein zyada se zyada 3 women.\nHumein find karna hai: committees ki tadaad.\nTareeqa: Pehle suraton (cases) ki list banayein, \\(w\\) = women ki tadaad. Ek committee ek waqt mein sirf ek surat mein aati hai (ya 1 woman, ya 2), is liye cases ko jama karte hain. List pehle banane se koi surat chhoot nahi jati.",
+              "Surat \\(w = 0\\): 7 men\n\\[{}^{6}C_{7} = 0\\]\nKyun: Club mein sirf 6 men hain, 7 men ki committee mumkin hi nahi. Yeh surat 0 deti hai, lekin isay list mein likhna zaroori hai taake pata ho ke humne isay socha.",
+              "Surat \\(w = 1\\): 1 woman, 6 men\n\\[{}^{8}C_{1} \\times {}^{6}C_{6} = 8 \\times 1 = 8\\]\nKyun: 1 woman 8 tareeqon se, aur saare 6 men lene ka sirf 1 tareeqa.",
+              "Surat \\(w = 2\\): 2 women, 5 men\n\\[{}^{8}C_{2} \\times {}^{6}C_{5} = 28 \\times 6 = 168\\]\nKyun: \\({}^{8}C_{2} = \\frac{8 \\cdot 7}{2} = 28\\), aur \\({}^{6}C_{5} = {}^{6}C_{1} = 6\\) (5 lena yani 1 chhorna).",
+              "Surat \\(w = 3\\): 3 women, 4 men\n\\[{}^{8}C_{3} \\times {}^{6}C_{4} = 56 \\times 15 = 840\\]\nKyun: Yeh wahi hai jo part (i) mein nikala tha, dobara hisaab ki zaroorat nahi.",
+              "Cases jama karein\n\\[0 + 8 + 168 + 840 = 1016\\]\nKyun: \"At the most\" ka matlab hai yeh surat YA woh surat, aur \"ya\" (OR) par jama hota hai.\nDhyan dein: Sirf \\(w = 3\\) wala case likh kar 840 jawab dena aam ghalti hai.",
+              "Tasdeeq\n\\[\\text{all committees} = {}^{14}C_{7} = 3432\\]\n\\[\\text{4 or more women} = 1400 + 840 + 168 + 8 = 2416\\]\n\\[1016 + 2416 = 3432 \\;\\checkmark\\]\nKyun: Har committee mein ya to zyada se zyada 3 women hain ya kam az kam 4. Dono hisson ka jama kul committees ke barabar aaya, is liye jawab pakka hai."
+            ],
+            "final_answer": "1016 committees",
+            "answer_table": {
+              "header": [
+                "Women",
+                "Men",
+                "Committees"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "7",
+                  "0 (sirf 6 men hain)"
+                ],
+                [
+                  "1",
+                  "6",
+                  "8"
+                ],
+                [
+                  "2",
+                  "5",
+                  "168"
+                ],
+                [
+                  "3",
+                  "4",
+                  "840"
+                ],
+                [
+                  "Total",
+                  "-",
+                  "1016"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13(iii)",
+            "prompt": "13 (iii) There are 6 men and 8 women members of a club. how many committees of seven can be formed? (iii) at least 5 women?",
+            "explanation": "\"At least 5 women\" (kam az kam 5 auratein) ka matlab hai 5, 6 ya 7 women; baqi seats men ki.\nFind kya karna hai? In suraton ki committees ka jama.\nPlan: \\(w = 5, 6, 7\\) ke liye \\({}^{8}C_{w} \\times {}^{6}C_{7-w}\\) nikal kar jama karein.",
+            "steps": [
+              "Diya gaya hai: 6 men, 8 women; 7 ki committee jis mein kam az kam 5 women.\nHumein find karna hai: committees ki tadaad.\nTareeqa: Suraton ki list \\(w = 5, 6, 7\\) banayein aur jama karein. Dhyan rahe ke list 7 tak jati hai, kyunke committee mein 7 hi log hain aur women 8 hain, is liye saari 7 seats women le sakti hain.",
+              "Surat \\(w = 5\\): 5 women, 2 men\n\\[{}^{8}C_{5} \\times {}^{6}C_{2} = 56 \\times 15 = 840\\]\nKyun: \\({}^{8}C_{5} = {}^{8}C_{3} = 56\\) aur \\({}^{6}C_{2} = 15\\). Complementary rule se dono ka hisaab chhota ho gaya.",
+              "Surat \\(w = 6\\): 6 women, 1 man\n\\[{}^{8}C_{6} \\times {}^{6}C_{1} = 28 \\times 6 = 168\\]\nKyun: \\({}^{8}C_{6} = {}^{8}C_{2} = 28\\); 1 man 6 tareeqon se.",
+              "Surat \\(w = 7\\): 7 women, koi man nahi\n\\[{}^{8}C_{7} \\times {}^{6}C_{0} = 8 \\times 1 = 8\\]\nKyun: \\({}^{8}C_{7} = {}^{8}C_{1} = 8\\) (7 lena yani 1 chhorna) aur \\({}^{6}C_{0} = 1\\). Yeh surat mumkin hai kyunke women 8 hain.\nDhyan dein: Yahi surat bhool jana is sawal ki sab se aam ghalti hai.",
+              "Cases jama karein\n\\[840 + 168 + 8 = 1016\\]\nKyun: \"At least\" bhi suraton ko \"ya\" se jorta hai, is liye jama.",
+              "Tasdeeq\n\\[\\text{at most 4 women} = 0 + 8 + 168 + 840 + 1400 = 2416\\]\n\\[1016 + 2416 = 3432 = {}^{14}C_{7} \\;\\checkmark\\]\nKyun: Kam az kam 5 women wali aur zyada se zyada 4 women wali committees mil kar saari committees banti hain (\\({}^{14}C_{7} = 3432\\)). Jama barabar aaya, is liye 1016 sahi hai."
+            ],
+            "final_answer": "1016 committees",
+            "answer_table": {
+              "header": [
+                "Women",
+                "Men",
+                "Committees"
+              ],
+              "rows": [
+                [
+                  "5",
+                  "2",
+                  "840"
+                ],
+                [
+                  "6",
+                  "1",
+                  "168"
+                ],
+                [
+                  "7",
+                  "0",
+                  "8"
+                ],
+                [
+                  "Total",
+                  "-",
+                  "1016"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Part (iii) ke liye answer key 1008 likhti hai. Yeh sirf \\(840 + 168\\) hai: is mein 7 women aur koi man nahi wali surat (\\({}^{8}C_{7} \\times {}^{6}C_{0} = 8\\)) chhoot gayi. Sahi jawab \\(840 + 168 + 8 = 1016\\) hai."
+          }
+        ]
+      }
+    }
+  ]
+}

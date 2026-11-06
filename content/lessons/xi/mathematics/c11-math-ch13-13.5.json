@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-13.5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/13.5",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 252,
+          "pdf_to": 252,
+          "note": "Book p. 247: 13.5 differentiability implies continuity, not conversely; f(x) = |x| at x = 0 with one-sided limits 1 and -1; Figure 13.3 (redrawn as original SVG)"
+        }
+      ],
+      "title": "13.5 Connection Between Derivatives and Continuity",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Calculus is a powerful branch of mathematics that allows us to study change and motion. Two of its foundational concepts, continuity and derivatives, are deeply connected. While each concept has its own definition and application, understanding how they relate to each other is essential for solving real-world problems in mathematics."
+          },
+          {
+            "type": "paragraph",
+            "text": "As discussed in previous units, a function is continuous at a point if its graph has no breaks, jumps, or holes at that point. On the other hand, the derivative of a function at a point measures the instantaneous rate of change or equivalently, the slope of the tangent line at that point. However, this definition depends on the function being well-behaved around the point. This leads to a well-known result:"
+          },
+          {
+            "type": "paragraph",
+            "text": "If a function is differentiable at a point, it must also be continuous there. This means that differentiability implies continuity, but the reverse is not necessarily true. For example, consider the function \\(f(x) = |x|\\), clearly this function is continuous at \\(x = 0\\) (see Figure 1.1). Now we check the differentiability of \\(f(x) = |x|\\) at \\(x = 0\\).",
+            "book_errors": [
+              "(see Figure 1.1)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book refers to \"Figure 1.1\". The graph of \\(f(x) = |x|\\) on this page is Figure 13.3, shown below."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch13-fig-13-3-abs-x",
+            "alt": "Graph of f(x) = |x| on x and y axes marked from -6 to 6: two straight rays meeting at the origin O, the left ray y = -x rising to the left with slope -1 and the right ray y = x rising to the right with slope 1. The point O is marked as a sharp corner where there is no tangent.",
+            "caption": "Figure 13.3: graph of f(x) = |x|, continuous at x = 0 but with a corner there (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does differentiability imply continuity? A short reason (ours, not in the book). Suppose \\(f'(a)\\) exists. For \\(\\delta x \\ne 0\\),\n\\[f(a+\\delta x) - f(a)\\]\n\\[= \\dfrac{f(a+\\delta x) - f(a)}{\\delta x}\\cdot\\delta x\\]\nAs \\(\\delta x \\to 0\\), the fraction tends to \\(f'(a)\\) and \\(\\delta x\\) tends to \\(0\\), so the right side tends to \\(f'(a)\\cdot 0 = 0\\). Hence \\(f(a+\\delta x) \\to f(a)\\), which is exactly continuity at \\(a\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[f(x) = |x|\\]\n\\[f(0) = |0| = 0\\]\nand,\n\\[f(0 + \\delta x) = |0 + \\delta x| = |\\delta x|\\]\nso\n\\[f(0 + \\delta x) - f(0) = |\\delta x| - 0\\]\nand\n\\[\\dfrac{f(0+\\delta x) - f(0)}{\\delta x} = \\dfrac{|\\delta x|}{\\delta x}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Thus\n\\[f'(x) = \\lim_{\\delta x \\to 0}\\dfrac{|\\delta x|}{\\delta x}\\]",
+            "book_errors": [
+              "\\[f'(x) = \\lim_{\\delta x \\to 0}\\dfrac{|\\delta x|}{\\delta x}\\]"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Because \\(|\\delta x| = \\delta x\\) when \\(\\delta x > 0\\) and \\(|\\delta x| = -\\delta x\\) when \\(\\delta x < 0\\), so, we consider one-sided limits\n\\[\\lim_{\\delta x \\to 0^{+}}\\dfrac{|\\delta x|}{\\delta x}\\]\n\\[= \\lim_{\\delta x \\to 0^{-}}\\dfrac{\\delta x}{\\delta x} = 1\\]\nand\n\\[\\lim_{\\delta x \\to 0^{-}}\\dfrac{|\\delta x|}{\\delta x}\\]\n\\[= \\lim_{\\delta x \\to 0^{-}}\\dfrac{-\\delta x}{\\delta x} = -1\\]",
+            "book_errors": [
+              "\\[= \\lim_{\\delta x \\to 0^{-}}\\dfrac{\\delta x}{\\delta x} = 1\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "1. The book writes \\(f'(x) = \\lim\\limits_{\\delta x \\to 0}\\frac{|\\delta x|}{\\delta x}\\). We are testing the derivative at the point \\(x = 0\\), so it should be \\(f'(0) = \\lim\\limits_{\\delta x \\to 0}\\frac{|\\delta x|}{\\delta x}\\).\n2. In the right-hand limit the book prints \\(\\lim\\limits_{\\delta x \\to 0^{-}}\\frac{\\delta x}{\\delta x} = 1\\). It should be \\(\\delta x \\to 0^{+}\\): \\(|\\delta x| = \\delta x\\) only for \\(\\delta x > 0\\), i.e. when \\(\\delta x\\) approaches \\(0\\) from the right. The values \\(1\\) and \\(-1\\) are correct."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Reading the two one-sided limits: for \\(\\delta x > 0\\) the quotient \\(\\frac{|\\delta x|}{\\delta x}\\) is \\(\\frac{\\delta x}{\\delta x} = 1\\); for \\(\\delta x < 0\\) it is \\(\\frac{-\\delta x}{\\delta x} = -1\\). For example \\(\\delta x = 0.01\\) gives \\(1\\) and \\(\\delta x = -0.01\\) gives \\(\\frac{0.01}{-0.01} = -1\\). The quotient never settles on one value, however small \\(\\delta x\\) is."
+          },
+          {
+            "type": "paragraph",
+            "text": "The right hand and left hand limits are not equal, therefore, the \\(\\lim\\limits_{\\delta x \\to 0}\\frac{|\\delta x|}{\\delta x}\\) does not exist."
+          },
+          {
+            "type": "paragraph",
+            "text": "This implies that derivative of \\(f\\) at \\(x = 0\\) does not exist, and thus, there is no tangent line to the graph of \\(f\\) at this point (see Figure 13.3). However the derivative exists at all other points of \\(f\\), i.e., it is \\(1\\) on the right side and \\(-1\\) on the left side. A function can be continuous at a point but not necessarily differentiable there."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Look at Figure 13.3. To the right of \\(O\\) the graph is the line \\(y = x\\) (slope \\(1\\)); to the left it is \\(y = -x\\) (slope \\(-1\\)). At \\(O\\) the two pieces meet in a sharp corner. A tangent must have one definite slope, but here the slope \"jumps\" from \\(-1\\) to \\(1\\), so no single line can be the tangent. The graph is still drawn without lifting the pen, so it is continuous at \\(0\\)."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Situation at x = a",
+              "Continuous?",
+              "Differentiable?"
+            ],
+            "rows": [
+              [
+                "Smooth curve, e.g. \\(x^{2}\\) at \\(0\\)",
+                "Yes",
+                "Yes"
+              ],
+              [
+                "Sharp corner, e.g. \\(|x|\\) at \\(0\\)",
+                "Yes",
+                "No"
+              ],
+              [
+                "Break or jump in the graph",
+                "No",
+                "No"
+              ]
+            ],
+            "caption": "Our summary (not in the book): continuity and differentiability at a point"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "The result has a useful reverse form: if a function is not continuous at a point, it cannot be differentiable there. But \"continuous\" never proves \"differentiable\"; \\(|x|\\) at \\(0\\) is the standard counter-example. To show a derivative does not exist, compute the right-hand and left-hand limits of the difference quotient and show they differ."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Differentiable at a point \\(\\Rightarrow\\) continuous at that point.\n2. Continuous does not imply differentiable.\n3. \\(f(x) = |x|\\) is continuous at \\(x = 0\\), but \\(\\lim\\limits_{\\delta x \\to 0^{+}}\\frac{|\\delta x|}{\\delta x} = 1\\) and \\(\\lim\\limits_{\\delta x \\to 0^{-}}\\frac{|\\delta x|}{\\delta x} = -1\\), so \\(f'(0)\\) does not exist.\n4. At a sharp corner there is no tangent line; elsewhere \\(|x|\\) has derivative \\(1\\) (for \\(x > 0\\)) and \\(-1\\) (for \\(x < 0\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Thinking that a function with no breaks must have a derivative everywhere. A corner is enough to destroy the derivative.\n2. Simplifying \\(\\frac{|\\delta x|}{\\delta x}\\) to \\(1\\) for all \\(\\delta x\\). This is true only for \\(\\delta x > 0\\).\n3. Mixing up the one-sided limits: \\(0^{+}\\) means from the right (\\(\\delta x > 0\\)), \\(0^{-}\\) means from the left (\\(\\delta x < 0\\))."
+          }
+        ]
+      }
+    }
+  ]
+}

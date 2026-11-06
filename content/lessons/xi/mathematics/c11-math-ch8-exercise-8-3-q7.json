@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-3-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-3-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 167,
+          "pdf_to": 167,
+          "note": "Exercise 8.3, Question 7: book page 162 (PDF 167); answer key book page 302 (PDF 307): 2/sqrt(5) (agrees)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7. Identify the following series as binomial expansion and find the sum: \\(1 - \\frac{1}{2}\\left(\\frac{1}{4}\\right) + \\frac{1 \\cdot 3}{2! \\cdot 4}\\left(\\frac{1}{4}\\right)^{2} - \\frac{1 \\cdot 3 \\cdot 5}{3! \\cdot 8}\\left(\\frac{1}{4}\\right)^{3} + \\dots\\)",
+            "explanation": "The terms have the pattern of a binomial series: products \\(1 \\cdot 3 \\cdot 5\\) over factorials, alternating signs, powers of \\(\\tfrac{1}{4}\\).\nWe must name \\(n\\) and \\(x\\) so the series is \\((1 + x)^{n}\\), then the sum is that power.\nPlan: rewrite each term with powers of 2, match with \\((1 + x)^{n}\\), check the third term, sum.",
+            "steps": [
+              "Given: \\(1 - \\frac{1}{2}(\\frac{1}{4}) + \\frac{1 \\cdot 3}{2! \\cdot 4}(\\frac{1}{4})^{2} - \\frac{1 \\cdot 3 \\cdot 5}{3! \\cdot 8}(\\frac{1}{4})^{3} + \\dots\\) (the dot means multiplication).\nTo find: the binomial it comes from, and its sum.\nMethod: Match with\n\\[(1 + x)^{n} = 1 + nx\\]\n\\[+ \\dfrac{n(n - 1)}{2!}x^{2}\\]\n\\[+ \\dfrac{n(n - 1)(n - 2)}{3!}x^{3} + \\dots\\]",
+              "Spot the pattern\n\\[4 = 2^{2},\\quad 8 = 2^{3}\\]\n\\[\\dfrac{1 \\cdot 3}{2! \\cdot 2^{2}} = \\dfrac{(-\\frac{1}{2})(-\\frac{3}{2})}{2!}\\]\n\\[-\\dfrac{1 \\cdot 3 \\cdot 5}{3! \\cdot 2^{3}} = \\dfrac{(-\\frac{1}{2})(-\\frac{3}{2})(-\\frac{5}{2})}{3!}\\]\nWhy: Each factor \\(\\tfrac{1}{2}, \\tfrac{3}{2}, \\tfrac{5}{2}\\) uses one 2 from the denominator, and an odd number of minus signs gives the minus term.",
+              "Read off \\(n\\) and \\(x\\)\n\\[n = -\\dfrac{1}{2},\\quad x = \\dfrac{1}{4}\\]\n\\[nx = -\\dfrac{1}{2} \\cdot \\dfrac{1}{4}\\ \\checkmark\\]\nWhy: Then \\(n - 1 = -\\tfrac{3}{2}\\), \\(n - 2 = -\\tfrac{5}{2}\\), exactly the factors found above.",
+              "Validity\n\\[|x| = \\dfrac{1}{4} < 1\\]\nWhy: So the infinite series converges to \\((1 + x)^{n}\\).",
+              "Sum\n\\[\\left(1 + \\dfrac{1}{4}\\right)^{-1/2} = \\left(\\dfrac{5}{4}\\right)^{-1/2}\\]\n\\[= \\sqrt{\\dfrac{4}{5}} = \\dfrac{2}{\\sqrt{5}}\\]\nWhy: A negative power flips the fraction; \\(\\sqrt{4} = 2\\).",
+              "Check\n\\[1 - 0.125 + 0.0234 - 0.0049 = 0.8936\\]\n\\[\\dfrac{2}{\\sqrt{5}} = 0.8944\\]\nWhy: Four terms already come close; later terms add the rest."
+            ],
+            "final_answer": "The series is the expansion of \\(\\left(1 + \\frac{1}{4}\\right)^{-1/2}\\); sum \\(= \\frac{2}{\\sqrt{5}}\\) \\(\\left(= \\frac{2\\sqrt{5}}{5}\\right)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

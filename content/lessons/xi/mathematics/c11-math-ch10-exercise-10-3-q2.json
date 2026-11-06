@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-3-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-3-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 199,
+          "pdf_to": 200,
+          "note": "Exercise 10.3, Question 2: book pages 194-195 (PDF 199-200); no answer key entry (proofs); (v) holds only where its right side is positive, boxed; checked with sympy and the solution book (PDF 936-951)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Prove the following identity: \\(\\cot\\alpha - \\tan\\alpha = 2\\cot 2\\alpha\\)",
+            "explanation": "A difference of cot and tan must become a double-angle cot.\nPlan: write both in sin and cos, take a common denominator, then spot \\(\\cos 2\\alpha\\) on top and \\(\\frac{1}{2}\\sin 2\\alpha\\) below.",
+            "steps": [
+              "Given: L.H.S. \\(= \\cot\\alpha - \\tan\\alpha\\).\nTo prove: L.H.S. \\(= 2\\cot 2\\alpha\\).\nMethod: Change to sin and cos; use \\(\\cos 2\\alpha = \\cos^2\\alpha - \\sin^2\\alpha\\) and \\(\\sin 2\\alpha = 2\\sin\\alpha\\cos\\alpha\\).",
+              "Common denominator\n\\[\\text{L.H.S.} = \\dfrac{\\cos\\alpha}{\\sin\\alpha} - \\dfrac{\\sin\\alpha}{\\cos\\alpha}\\]\n\\[= \\dfrac{\\cos^2\\alpha - \\sin^2\\alpha}{\\sin\\alpha\\cos\\alpha}\\]\nWhy: The common denominator is \\(\\sin\\alpha\\cos\\alpha\\).",
+              "Use double-angle formulas\n\\[= \\dfrac{\\cos 2\\alpha}{\\tfrac{1}{2}\\sin 2\\alpha}\\]\n\\[= \\dfrac{2\\cos 2\\alpha}{\\sin 2\\alpha} = 2\\cot 2\\alpha\\]\nWhy: \\(\\sin\\alpha\\cos\\alpha = \\frac{1}{2}\\sin 2\\alpha\\); and \\(\\frac{\\cos}{\\sin} = \\cot\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\cot\\alpha - \\tan\\alpha = 2\\cot 2\\alpha\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Prove the following identity: \\(\\frac{\\sin 2\\alpha}{1 + \\cos 2\\alpha} = \\tan\\alpha\\)",
+            "explanation": "Double angles on the left, a single angle on the right.\nPlan: open \\(\\sin 2\\alpha\\) and use \\(1 + \\cos 2\\alpha = 2\\cos^2\\alpha\\), then cancel.",
+            "steps": [
+              "Given: L.H.S. \\(= \\frac{\\sin 2\\alpha}{1 + \\cos 2\\alpha}\\).\nTo prove: L.H.S. \\(= \\tan\\alpha\\).\nMethod: \\(\\sin 2\\alpha = 2\\sin\\alpha\\cos\\alpha\\) and \\(1 + \\cos 2\\alpha = 2\\cos^2\\alpha\\) (from \\(\\cos 2\\alpha = 2\\cos^2\\alpha - 1\\)).",
+              "Open both double angles\n\\[\\text{L.H.S.} = \\dfrac{2\\sin\\alpha\\cos\\alpha}{2\\cos^2\\alpha}\\]\nWhy: The form \\(2\\cos^2\\alpha - 1\\) is chosen because the 1 cancels with the 1 already present.",
+              "Cancel\n\\[= \\dfrac{\\sin\\alpha}{\\cos\\alpha} = \\tan\\alpha\\]\nWhy: \\(2\\cos\\alpha\\) cancels from top and bottom."
+            ],
+            "final_answer": "Hence proved: \\(\\frac{\\sin 2\\alpha}{1 + \\cos 2\\alpha} = \\tan\\alpha\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) Prove the following identity: \\(\\frac{1 - \\cos\\alpha}{\\sin\\alpha} = \\tan\\frac{\\alpha}{2}\\)",
+            "explanation": "The right side has a half angle, so we treat \\(\\alpha\\) as double of \\(\\frac{\\alpha}{2}\\).\nPlan: \\(1 - \\cos\\alpha = 2\\sin^2\\frac{\\alpha}{2}\\), \\(\\sin\\alpha = 2\\sin\\frac{\\alpha}{2}\\cos\\frac{\\alpha}{2}\\), then cancel.",
+            "steps": [
+              "Given: L.H.S. \\(= \\frac{1 - \\cos\\alpha}{\\sin\\alpha}\\).\nTo prove: L.H.S. \\(= \\tan\\frac{\\alpha}{2}\\).\nMethod: Double-angle formulas with angle \\(\\frac{\\alpha}{2}\\): \\(\\cos\\alpha = 1 - 2\\sin^2\\frac{\\alpha}{2}\\), \\(\\sin\\alpha = 2\\sin\\frac{\\alpha}{2}\\cos\\frac{\\alpha}{2}\\).",
+              "Write everything with \\(\\frac{\\alpha}{2}\\)\n\\[\\text{L.H.S.} = \\dfrac{2\\sin^2\\frac{\\alpha}{2}}{2\\sin\\frac{\\alpha}{2}\\cos\\frac{\\alpha}{2}}\\]\nWhy: \\(\\alpha = 2 \\cdot \\frac{\\alpha}{2}\\), so the double-angle formulas apply.",
+              "Cancel\n\\[= \\dfrac{\\sin\\frac{\\alpha}{2}}{\\cos\\frac{\\alpha}{2}} = \\tan\\dfrac{\\alpha}{2}\\]\nWhy: \\(2\\sin\\frac{\\alpha}{2}\\) cancels."
+            ],
+            "final_answer": "Hence proved: \\(\\frac{1 - \\cos\\alpha}{\\sin\\alpha} = \\tan\\frac{\\alpha}{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iv)",
+            "prompt": "2 (iv) Prove the following identity: \\(\\frac{\\cos\\alpha - \\sin\\alpha}{\\cos\\alpha + \\sin\\alpha} = \\sec 2\\alpha - \\tan 2\\alpha\\)",
+            "explanation": "The right side has double angles; the left side has single angles.\nPlan: multiply the left side top and bottom by \\(\\cos\\alpha - \\sin\\alpha\\) so that the bottom becomes \\(\\cos 2\\alpha\\).",
+            "steps": [
+              "Given: L.H.S. \\(= \\frac{\\cos\\alpha - \\sin\\alpha}{\\cos\\alpha + \\sin\\alpha}\\).\nTo prove: L.H.S. \\(= \\sec 2\\alpha - \\tan 2\\alpha\\).\nMethod: \\((\\cos\\alpha - \\sin\\alpha)^2 = 1 - \\sin 2\\alpha\\) and \\((\\cos\\alpha - \\sin\\alpha)(\\cos\\alpha + \\sin\\alpha) = \\cos 2\\alpha\\).",
+              "Multiply top and bottom by \\(\\cos\\alpha - \\sin\\alpha\\)\n\\[\\text{L.H.S.} = \\dfrac{(\\cos\\alpha - \\sin\\alpha)^2}{\\cos^2\\alpha - \\sin^2\\alpha}\\]\nWhy: The bottom becomes a difference of squares.",
+              "Simplify top and bottom\n\\[(\\cos\\alpha - \\sin\\alpha)^2 = 1 - 2\\sin\\alpha\\cos\\alpha\\]\n\\[= 1 - \\sin 2\\alpha\\]\n\\[\\text{L.H.S.} = \\dfrac{1 - \\sin 2\\alpha}{\\cos 2\\alpha}\\]\nWhy: \\(\\cos^2\\alpha + \\sin^2\\alpha = 1\\) and \\(\\cos^2\\alpha - \\sin^2\\alpha = \\cos 2\\alpha\\).",
+              "Split the fraction\n\\[= \\dfrac{1}{\\cos 2\\alpha} - \\dfrac{\\sin 2\\alpha}{\\cos 2\\alpha}\\]\n\\[= \\sec 2\\alpha - \\tan 2\\alpha\\]\nWhy: Divide each term by \\(\\cos 2\\alpha\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\frac{\\cos\\alpha - \\sin\\alpha}{\\cos\\alpha + \\sin\\alpha} = \\sec 2\\alpha - \\tan 2\\alpha\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(v)",
+            "prompt": "2 (v) Prove the following identity: \\(\\sqrt{\\frac{1 + \\sin\\alpha}{1 - \\sin\\alpha}} = \\frac{\\sin\\frac{\\alpha}{2} + \\cos\\frac{\\alpha}{2}}{\\sin\\frac{\\alpha}{2} - \\cos\\frac{\\alpha}{2}}\\)",
+            "explanation": "The right side uses \\(\\frac{\\alpha}{2}\\), so we write \\(1 \\pm \\sin\\alpha\\) as perfect squares in \\(\\frac{\\alpha}{2}\\).\nPlan: \\(1 = \\sin^2\\frac{\\alpha}{2} + \\cos^2\\frac{\\alpha}{2}\\) and \\(\\sin\\alpha = 2\\sin\\frac{\\alpha}{2}\\cos\\frac{\\alpha}{2}\\), then take the square root.",
+            "steps": [
+              "Given: L.H.S. \\(= \\sqrt{\\frac{1 + \\sin\\alpha}{1 - \\sin\\alpha}}\\).\nTo prove: L.H.S. \\(= \\frac{\\sin\\frac{\\alpha}{2} + \\cos\\frac{\\alpha}{2}}{\\sin\\frac{\\alpha}{2} - \\cos\\frac{\\alpha}{2}}\\).\nMethod: Write \\(s = \\sin\\frac{\\alpha}{2}\\), \\(c = \\cos\\frac{\\alpha}{2}\\). Then \\(1 + \\sin\\alpha = (s + c)^2\\) and \\(1 - \\sin\\alpha = (s - c)^2\\).",
+              "Make \\(1 + \\sin\\alpha\\) a perfect square\n\\[1 + \\sin\\alpha = s^2 + c^2 + 2sc\\]\n\\[= (s + c)^2\\]\nWhy: \\(s^2 + c^2 = 1\\) and \\(2sc = \\sin\\alpha\\) (double angle with \\(\\frac{\\alpha}{2}\\)).",
+              "Make \\(1 - \\sin\\alpha\\) a perfect square\n\\[1 - \\sin\\alpha = s^2 + c^2 - 2sc\\]\n\\[= (s - c)^2\\]\nWhy: The same idea with a minus sign.",
+              "Take the square root\n\\[\\text{L.H.S.} = \\sqrt{\\dfrac{(s + c)^2}{(s - c)^2}}\\]\n\\[= \\dfrac{s + c}{s - c}\\]\nWhy: The root of a square gives back the quantity, provided \\(\\frac{s + c}{s - c}\\) is positive (see the correction below). This is the printed right side."
+            ],
+            "final_answer": "Hence proved: \\(\\sqrt{\\frac{1 + \\sin\\alpha}{1 - \\sin\\alpha}} = \\frac{\\sin\\frac{\\alpha}{2} + \\cos\\frac{\\alpha}{2}}{\\sin\\frac{\\alpha}{2} - \\cos\\frac{\\alpha}{2}}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "As printed, this identity is true only when its right side is positive, for example \\(\\frac{\\pi}{2} < \\alpha < \\frac{3\\pi}{2}\\). For acute \\(\\alpha\\) it fails: at \\(\\alpha = 0\\) the left side is \\(1\\) but the right side is \\(\\frac{0 + 1}{0 - 1} = -1\\). In general the left side equals \\(\\left|\\frac{\\sin\\frac{\\alpha}{2} + \\cos\\frac{\\alpha}{2}}{\\sin\\frac{\\alpha}{2} - \\cos\\frac{\\alpha}{2}}\\right|\\); for \\(-\\frac{\\pi}{2} < \\alpha < \\frac{\\pi}{2}\\) the right side should be \\(\\frac{\\cos\\frac{\\alpha}{2} + \\sin\\frac{\\alpha}{2}}{\\cos\\frac{\\alpha}{2} - \\sin\\frac{\\alpha}{2}}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(vi)",
+            "prompt": "2 (vi) Prove the following identity: \\(\\frac{\\operatorname{cosec}\\theta + 2\\operatorname{cosec} 2\\theta}{\\sec\\theta} = \\cot\\frac{\\theta}{2}\\)",
+            "explanation": "Reciprocal ratios with \\(\\theta\\) and \\(2\\theta\\) on the left; a half angle on the right.\nPlan: change to sin and cos, simplify to \\(\\frac{1 + \\cos\\theta}{\\sin\\theta}\\), then use half-angle forms.",
+            "steps": [
+              "Given: L.H.S. \\(= \\frac{\\operatorname{cosec}\\theta + 2\\operatorname{cosec} 2\\theta}{\\sec\\theta}\\).\nTo prove: L.H.S. \\(= \\cot\\frac{\\theta}{2}\\).\nMethod: \\(\\operatorname{cosec} 2\\theta = \\frac{1}{2\\sin\\theta\\cos\\theta}\\); then \\(1 + \\cos\\theta = 2\\cos^2\\frac{\\theta}{2}\\) and \\(\\sin\\theta = 2\\sin\\frac{\\theta}{2}\\cos\\frac{\\theta}{2}\\).",
+              "Change to sin and cos\n\\[\\text{L.H.S.} = \\cos\\theta\\left[\\dfrac{1}{\\sin\\theta} + \\dfrac{2}{2\\sin\\theta\\cos\\theta}\\right]\\]\nWhy: Dividing by \\(\\sec\\theta\\) is multiplying by \\(\\cos\\theta\\); \\(\\sin 2\\theta = 2\\sin\\theta\\cos\\theta\\).",
+              "Multiply out\n\\[= \\dfrac{\\cos\\theta}{\\sin\\theta} + \\dfrac{1}{\\sin\\theta}\\]\n\\[= \\dfrac{1 + \\cos\\theta}{\\sin\\theta}\\]\nWhy: In the second term \\(2\\cos\\theta\\) cancels.",
+              "Use half-angle forms\n\\[= \\dfrac{2\\cos^2\\frac{\\theta}{2}}{2\\sin\\frac{\\theta}{2}\\cos\\frac{\\theta}{2}}\\]\n\\[= \\dfrac{\\cos\\frac{\\theta}{2}}{\\sin\\frac{\\theta}{2}} = \\cot\\dfrac{\\theta}{2}\\]\nWhy: \\(\\cos\\theta = 2\\cos^2\\frac{\\theta}{2} - 1\\) and the double-angle form of \\(\\sin\\theta\\); then cancel."
+            ],
+            "final_answer": "Hence proved: \\(\\frac{\\operatorname{cosec}\\theta + 2\\operatorname{cosec} 2\\theta}{\\sec\\theta} = \\cot\\frac{\\theta}{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(vii)",
+            "prompt": "2 (vii) Prove the following identity: \\(1 + \\tan\\alpha\\tan 2\\alpha = \\sec 2\\alpha\\)",
+            "explanation": "After writing in sin and cos, the top becomes \\(\\cos(2\\alpha - \\alpha)\\).\nPlan: common denominator, then the fundamental law \\(\\cos(a - b) = \\cos a\\cos b + \\sin a\\sin b\\).",
+            "steps": [
+              "Given: L.H.S. \\(= 1 + \\tan\\alpha\\tan 2\\alpha\\).\nTo prove: L.H.S. \\(= \\sec 2\\alpha\\).\nMethod: Change to sin and cos; use \\(\\cos 2\\alpha\\cos\\alpha + \\sin 2\\alpha\\sin\\alpha = \\cos(2\\alpha - \\alpha)\\).",
+              "Common denominator\n\\[\\text{L.H.S.} = 1 + \\dfrac{\\sin\\alpha\\sin 2\\alpha}{\\cos\\alpha\\cos 2\\alpha}\\]\n\\[= \\dfrac{\\cos\\alpha\\cos 2\\alpha + \\sin\\alpha\\sin 2\\alpha}{\\cos\\alpha\\cos 2\\alpha}\\]\nWhy: Write 1 as \\(\\frac{\\cos\\alpha\\cos 2\\alpha}{\\cos\\alpha\\cos 2\\alpha}\\).",
+              "Use the fundamental law\n\\[= \\dfrac{\\cos(2\\alpha - \\alpha)}{\\cos\\alpha\\cos 2\\alpha}\\]\n\\[= \\dfrac{\\cos\\alpha}{\\cos\\alpha\\cos 2\\alpha}\\]\nWhy: \\(\\cos a\\cos b + \\sin a\\sin b = \\cos(a - b)\\) with \\(a = 2\\alpha\\), \\(b = \\alpha\\).",
+              "Cancel\n\\[= \\dfrac{1}{\\cos 2\\alpha} = \\sec 2\\alpha\\]\nWhy: \\(\\cos\\alpha\\) cancels."
+            ],
+            "final_answer": "Hence proved: \\(1 + \\tan\\alpha\\tan 2\\alpha = \\sec 2\\alpha\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(viii)",
+            "prompt": "2 (viii) Prove the following identity: \\(\\frac{2\\sin\\theta\\sin 2\\theta}{\\cos\\theta + \\cos 3\\theta} = \\tan 2\\theta\\tan\\theta\\)",
+            "explanation": "The bottom has \\(\\cos 3\\theta\\); the triple-angle formula turns it into powers of \\(\\cos\\theta\\).\nPlan: show \\(\\cos\\theta + \\cos 3\\theta = 2\\cos\\theta\\cos 2\\theta\\), then divide.",
+            "steps": [
+              "Given: L.H.S. \\(= \\frac{2\\sin\\theta\\sin 2\\theta}{\\cos\\theta + \\cos 3\\theta}\\).\nTo prove: L.H.S. \\(= \\tan 2\\theta\\tan\\theta\\).\nMethod: \\(\\cos 3\\theta = 4\\cos^3\\theta - 3\\cos\\theta\\) (Section 10.6) and \\(2\\cos^2\\theta - 1 = \\cos 2\\theta\\).",
+              "Simplify the denominator\n\\[\\cos\\theta + \\cos 3\\theta = \\cos\\theta + 4\\cos^3\\theta - 3\\cos\\theta\\]\n\\[= 4\\cos^3\\theta - 2\\cos\\theta\\]\n\\[= 2\\cos\\theta(2\\cos^2\\theta - 1)\\]\n\\[= 2\\cos\\theta\\cos 2\\theta\\]\nWhy: Triple-angle formula, then take out \\(2\\cos\\theta\\).",
+              "Divide\n\\[\\text{L.H.S.} = \\dfrac{2\\sin\\theta\\sin 2\\theta}{2\\cos\\theta\\cos 2\\theta}\\]\n\\[= \\dfrac{\\sin\\theta}{\\cos\\theta} \\cdot \\dfrac{\\sin 2\\theta}{\\cos 2\\theta}\\]\n\\[= \\tan\\theta\\tan 2\\theta\\]\nWhy: The 2 cancels; each sin over its own cos is a tan."
+            ],
+            "final_answer": "Hence proved: \\(\\frac{2\\sin\\theta\\sin 2\\theta}{\\cos\\theta + \\cos 3\\theta} = \\tan 2\\theta\\tan\\theta\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ix)",
+            "prompt": "2 (ix) Prove the following identity: \\(\\frac{\\sin 3\\theta}{\\sin\\theta} - \\frac{\\cos 3\\theta}{\\cos\\theta} = 2\\)",
+            "explanation": "Each fraction simplifies nicely with the triple-angle formulas.\nPlan: divide \\(\\sin 3\\theta\\) by \\(\\sin\\theta\\) and \\(\\cos 3\\theta\\) by \\(\\cos\\theta\\), then subtract.",
+            "steps": [
+              "Given: L.H.S. \\(= \\frac{\\sin 3\\theta}{\\sin\\theta} - \\frac{\\cos 3\\theta}{\\cos\\theta}\\).\nTo prove: L.H.S. \\(= 2\\).\nMethod: \\(\\sin 3\\theta = 3\\sin\\theta - 4\\sin^3\\theta\\) and \\(\\cos 3\\theta = 4\\cos^3\\theta - 3\\cos\\theta\\).",
+              "Simplify each fraction\n\\[\\dfrac{\\sin 3\\theta}{\\sin\\theta} = 3 - 4\\sin^2\\theta\\]\n\\[\\dfrac{\\cos 3\\theta}{\\cos\\theta} = 4\\cos^2\\theta - 3\\]\nWhy: Every term of each triple-angle formula has the factor \\(\\sin\\theta\\) or \\(\\cos\\theta\\).",
+              "Subtract\n\\[\\text{L.H.S.} = 3 - 4\\sin^2\\theta - 4\\cos^2\\theta + 3\\]\n\\[= 6 - 4(\\sin^2\\theta + \\cos^2\\theta)\\]\n\\[= 6 - 4 = 2\\]\nWhy: \\(\\sin^2\\theta + \\cos^2\\theta = 1\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\frac{\\sin 3\\theta}{\\sin\\theta} - \\frac{\\cos 3\\theta}{\\cos\\theta} = 2\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(x)",
+            "prompt": "2 (x) Prove the following identity: \\(\\frac{\\cos 3\\theta}{\\cos\\theta} + \\frac{\\sin 3\\theta}{\\sin\\theta} = 4\\cos 2\\theta\\)",
+            "explanation": "The same two fractions as part (ix), but added.\nPlan: simplify each with the triple-angle formulas, add, then use \\(\\cos^2\\theta - \\sin^2\\theta = \\cos 2\\theta\\).",
+            "steps": [
+              "Given: L.H.S. \\(= \\frac{\\cos 3\\theta}{\\cos\\theta} + \\frac{\\sin 3\\theta}{\\sin\\theta}\\).\nTo prove: L.H.S. \\(= 4\\cos 2\\theta\\).\nMethod: Triple-angle formulas for \\(\\sin 3\\theta\\) and \\(\\cos 3\\theta\\).",
+              "Simplify each fraction\n\\[\\dfrac{\\cos 3\\theta}{\\cos\\theta} = 4\\cos^2\\theta - 3\\]\n\\[\\dfrac{\\sin 3\\theta}{\\sin\\theta} = 3 - 4\\sin^2\\theta\\]\nWhy: As in part (ix).",
+              "Add\n\\[\\text{L.H.S.} = 4\\cos^2\\theta - 3 + 3 - 4\\sin^2\\theta\\]\n\\[= 4(\\cos^2\\theta - \\sin^2\\theta)\\]\n\\[= 4\\cos 2\\theta\\]\nWhy: The 3s cancel; \\(\\cos^2\\theta - \\sin^2\\theta = \\cos 2\\theta\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\frac{\\cos 3\\theta}{\\cos\\theta} + \\frac{\\sin 3\\theta}{\\sin\\theta} = 4\\cos 2\\theta\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(xi)",
+            "prompt": "2 (xi) Prove the following identity: \\(\\frac{\\tan\\frac{\\theta}{2} + \\cot\\frac{\\theta}{2}}{\\cot\\frac{\\theta}{2} - \\tan\\frac{\\theta}{2}} = \\sec\\theta\\)",
+            "explanation": "Half angles on the left, a full angle on the right.\nPlan: write \\(s = \\sin\\frac{\\theta}{2}\\), \\(c = \\cos\\frac{\\theta}{2}\\); simplify top and bottom separately.",
+            "steps": [
+              "Given: L.H.S. \\(= \\frac{\\tan\\frac{\\theta}{2} + \\cot\\frac{\\theta}{2}}{\\cot\\frac{\\theta}{2} - \\tan\\frac{\\theta}{2}}\\).\nTo prove: L.H.S. \\(= \\sec\\theta\\).\nMethod: In terms of \\(s, c\\): \\(\\tan\\frac{\\theta}{2} = \\frac{s}{c}\\), \\(\\cot\\frac{\\theta}{2} = \\frac{c}{s}\\). Then \\(s^2 + c^2 = 1\\) and \\(c^2 - s^2 = \\cos\\theta\\).",
+              "Simplify the numerator\n\\[\\dfrac{s}{c} + \\dfrac{c}{s} = \\dfrac{s^2 + c^2}{sc} = \\dfrac{1}{sc}\\]\nWhy: Common denominator \\(sc\\); \\(s^2 + c^2 = 1\\).",
+              "Simplify the denominator\n\\[\\dfrac{c}{s} - \\dfrac{s}{c} = \\dfrac{c^2 - s^2}{sc} = \\dfrac{\\cos\\theta}{sc}\\]\nWhy: \\(\\cos^2\\frac{\\theta}{2} - \\sin^2\\frac{\\theta}{2} = \\cos\\theta\\) (double angle with \\(\\frac{\\theta}{2}\\)).",
+              "Divide\n\\[\\text{L.H.S.} = \\dfrac{1/(sc)}{\\cos\\theta/(sc)}\\]\n\\[= \\dfrac{1}{\\cos\\theta} = \\sec\\theta\\]\nWhy: The common \\(sc\\) cancels."
+            ],
+            "final_answer": "Hence proved: \\(\\frac{\\tan\\frac{\\theta}{2} + \\cot\\frac{\\theta}{2}}{\\cot\\frac{\\theta}{2} - \\tan\\frac{\\theta}{2}} = \\sec\\theta\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(xii)",
+            "prompt": "2 (xii) Prove the following identity: \\(\\frac{\\sin 3\\theta}{\\cos\\theta} + \\frac{\\cos 3\\theta}{\\sin\\theta} = 2\\cot 2\\theta\\)",
+            "explanation": "Unlike parts (ix)-(x), the denominators are swapped, so a common denominator is better than the triple-angle formulas.\nPlan: common denominator; the top is \\(\\cos(3\\theta - \\theta)\\); the bottom is \\(\\frac{1}{2}\\sin 2\\theta\\).",
+            "steps": [
+              "Given: L.H.S. \\(= \\frac{\\sin 3\\theta}{\\cos\\theta} + \\frac{\\cos 3\\theta}{\\sin\\theta}\\).\nTo prove: L.H.S. \\(= 2\\cot 2\\theta\\).\nMethod: \\(\\cos 3\\theta\\cos\\theta + \\sin 3\\theta\\sin\\theta = \\cos(3\\theta - \\theta)\\) and \\(\\sin\\theta\\cos\\theta = \\frac{1}{2}\\sin 2\\theta\\).",
+              "Common denominator\n\\[\\text{L.H.S.} = \\dfrac{\\sin 3\\theta\\sin\\theta + \\cos 3\\theta\\cos\\theta}{\\sin\\theta\\cos\\theta}\\]\nWhy: Cross-multiply over \\(\\sin\\theta\\cos\\theta\\).",
+              "Use the fundamental law and the double angle\n\\[= \\dfrac{\\cos(3\\theta - \\theta)}{\\tfrac{1}{2}\\sin 2\\theta}\\]\n\\[= \\dfrac{2\\cos 2\\theta}{\\sin 2\\theta} = 2\\cot 2\\theta\\]\nWhy: \\(\\cos a\\cos b + \\sin a\\sin b = \\cos(a - b)\\) with \\(a = 3\\theta\\), \\(b = \\theta\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\frac{\\sin 3\\theta}{\\cos\\theta} + \\frac{\\cos 3\\theta}{\\sin\\theta} = 2\\cot 2\\theta\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(xiii)",
+            "prompt": "2 (xiii) Prove the following identity: \\(\\frac{3 + \\cos 4\\theta}{1 - \\cos 4\\theta} = \\frac{1}{2}\\left(\\tan^{2}\\theta + \\cot^{2}\\theta\\right)\\)",
+            "explanation": "Both sides can be written in terms of \\(\\sin^2 2\\theta\\); we reduce each side to the same expression.\nPlan: left side with \\(\\cos 4\\theta = 1 - 2\\sin^2 2\\theta\\); right side with \\(\\sin^4\\theta + \\cos^4\\theta = 1 - \\frac{1}{2}\\sin^2 2\\theta\\).",
+            "steps": [
+              "Given: L.H.S. \\(= \\frac{3 + \\cos 4\\theta}{1 - \\cos 4\\theta}\\).\nTo prove: L.H.S. \\(= \\frac{1}{2}\\left(\\tan^{2}\\theta + \\cot^{2}\\theta\\right)\\).\nMethod: Let \\(u = \\sin^2 2\\theta\\). Show both sides equal \\(\\frac{2 - u}{u}\\).",
+              "Left side\n\\[\\cos 4\\theta = 1 - 2\\sin^2 2\\theta = 1 - 2u\\]\n\\[\\text{L.H.S.} = \\dfrac{3 + 1 - 2u}{1 - 1 + 2u}\\]\n\\[= \\dfrac{4 - 2u}{2u} = \\dfrac{2 - u}{u}\\]\nWhy: Double-angle formula with angle \\(2\\theta\\).",
+              "Right side: common denominator\n\\[\\tan^2\\theta + \\cot^2\\theta = \\dfrac{\\sin^4\\theta + \\cos^4\\theta}{\\sin^2\\theta\\cos^2\\theta}\\]\nWhy: \\(\\frac{\\sin^2}{\\cos^2} + \\frac{\\cos^2}{\\sin^2}\\) over \\(\\sin^2\\theta\\cos^2\\theta\\).",
+              "Write the right side with \\(u\\)\n\\[\\sin^4\\theta + \\cos^4\\theta\\]\n\\[= (\\sin^2\\theta + \\cos^2\\theta)^2\\]\n\\[\\quad - 2\\sin^2\\theta\\cos^2\\theta\\]\n\\[= 1 - \\tfrac{1}{2}u\\]\n\\[\\sin^2\\theta\\cos^2\\theta = \\tfrac{1}{4}u\\]\nWhy: \\(a^2 + b^2 = (a + b)^2 - 2ab\\); \\(\\sin\\theta\\cos\\theta = \\frac{1}{2}\\sin 2\\theta\\), so its square is \\(\\frac{1}{4}u\\).",
+              "Finish the right side\n\\[\\text{R.H.S.} = \\dfrac{1}{2} \\cdot \\dfrac{1 - \\frac{1}{2}u}{\\frac{1}{4}u}\\]\n\\[= \\dfrac{2(1 - \\frac{1}{2}u)}{u} = \\dfrac{2 - u}{u}\\]\nWhy: \\(\\frac{1}{2} \\div \\frac{1}{4} = 2\\). Both sides equal \\(\\frac{2 - u}{u}\\), so L.H.S. = R.H.S."
+            ],
+            "final_answer": "Hence proved: \\(\\frac{3 + \\cos 4\\theta}{1 - \\cos 4\\theta} = \\frac{1}{2}\\left(\\tan^{2}\\theta + \\cot^{2}\\theta\\right)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(xiv)",
+            "prompt": "2 (xiv) Prove the following identity: \\(\\frac{1 + \\sin 2\\theta}{1 - \\sin 2\\theta} = \\tan^{2}\\left(\\frac{\\pi}{4} + \\theta\\right)\\)",
+            "explanation": "\\(1 \\pm \\sin 2\\theta\\) are perfect squares, and \\(\\frac{1 + \\tan\\theta}{1 - \\tan\\theta}\\) is \\(\\tan(\\frac{\\pi}{4} + \\theta)\\).\nPlan: perfect squares, divide by \\(\\cos\\theta\\), then the formula for \\(\\tan(a + b)\\).",
+            "steps": [
+              "Given: L.H.S. \\(= \\frac{1 + \\sin 2\\theta}{1 - \\sin 2\\theta}\\).\nTo prove: L.H.S. \\(= \\tan^{2}\\left(\\frac{\\pi}{4} + \\theta\\right)\\).\nMethod: \\(1 \\pm \\sin 2\\theta = (\\cos\\theta \\pm \\sin\\theta)^2\\) and \\(\\tan(a + b) = \\frac{\\tan a + \\tan b}{1 - \\tan a\\tan b}\\) with \\(\\tan\\frac{\\pi}{4} = 1\\).",
+              "Perfect squares\n\\[1 + \\sin 2\\theta = (\\cos\\theta + \\sin\\theta)^2\\]\n\\[1 - \\sin 2\\theta = (\\cos\\theta - \\sin\\theta)^2\\]\nWhy: \\(\\cos^2\\theta + \\sin^2\\theta = 1\\) and \\(2\\sin\\theta\\cos\\theta = \\sin 2\\theta\\).",
+              "Divide top and bottom by \\(\\cos\\theta\\)\n\\[\\text{L.H.S.} = \\left(\\dfrac{\\cos\\theta + \\sin\\theta}{\\cos\\theta - \\sin\\theta}\\right)^2\\]\n\\[= \\left(\\dfrac{1 + \\tan\\theta}{1 - \\tan\\theta}\\right)^2\\]\nWhy: \\(\\frac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta\\).",
+              "Recognise \\(\\tan(\\frac{\\pi}{4} + \\theta)\\)\n\\[\\dfrac{1 + \\tan\\theta}{1 - \\tan\\theta} = \\dfrac{\\tan\\frac{\\pi}{4} + \\tan\\theta}{1 - \\tan\\frac{\\pi}{4}\\tan\\theta}\\]\n\\[= \\tan\\left(\\tfrac{\\pi}{4} + \\theta\\right)\\]\n\\[\\text{L.H.S.} = \\tan^2\\left(\\tfrac{\\pi}{4} + \\theta\\right)\\]\nWhy: \\(\\tan\\frac{\\pi}{4} = 1\\), then the formula for \\(\\tan(a + b)\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\frac{1 + \\sin 2\\theta}{1 - \\sin 2\\theta} = \\tan^{2}\\left(\\frac{\\pi}{4} + \\theta\\right)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(xv)",
+            "prompt": "2 (xv) Prove the following identity: \\(\\cos^{2}\\frac{\\pi}{8} + \\cos^{2}\\frac{3\\pi}{8} + \\cos^{2}\\frac{5\\pi}{8} + \\cos^{2}\\frac{7\\pi}{8} = 2\\)",
+            "explanation": "Four angles that pair up: \\(\\frac{7\\pi}{8} = \\pi - \\frac{\\pi}{8}\\), \\(\\frac{5\\pi}{8} = \\pi - \\frac{3\\pi}{8}\\), and \\(\\frac{3\\pi}{8} = \\frac{\\pi}{2} - \\frac{\\pi}{8}\\).\nPlan: reduce everything to \\(\\frac{\\pi}{8}\\), then \\(\\sin^2 + \\cos^2 = 1\\).",
+            "steps": [
+              "Given: L.H.S. \\(= \\cos^{2}\\frac{\\pi}{8} + \\cos^{2}\\frac{3\\pi}{8} + \\cos^{2}\\frac{5\\pi}{8} + \\cos^{2}\\frac{7\\pi}{8}\\).\nTo prove: L.H.S. \\(= 2\\).\nMethod: Allied angles: \\(\\cos(\\pi - x) = -\\cos x\\) (the square removes the sign) and \\(\\cos(\\frac{\\pi}{2} - x) = \\sin x\\).",
+              "Pair the last two with the first two\n\\[\\cos^2\\tfrac{7\\pi}{8} = \\cos^2\\left(\\pi - \\tfrac{\\pi}{8}\\right) = \\cos^2\\tfrac{\\pi}{8}\\]\n\\[\\cos^2\\tfrac{5\\pi}{8} = \\cos^2\\left(\\pi - \\tfrac{3\\pi}{8}\\right) = \\cos^2\\tfrac{3\\pi}{8}\\]\nWhy: \\(\\cos(\\pi - x) = -\\cos x\\), and squaring removes the minus sign.",
+              "Collect\n\\[\\text{L.H.S.} = 2\\cos^2\\tfrac{\\pi}{8} + 2\\cos^2\\tfrac{3\\pi}{8}\\]\nWhy: Each square now appears twice.",
+              "Use the co-ratio\n\\[\\cos\\tfrac{3\\pi}{8} = \\cos\\left(\\tfrac{\\pi}{2} - \\tfrac{\\pi}{8}\\right) = \\sin\\tfrac{\\pi}{8}\\]\n\\[\\text{L.H.S.} = 2\\left(\\cos^2\\tfrac{\\pi}{8} + \\sin^2\\tfrac{\\pi}{8}\\right)\\]\n\\[= 2(1) = 2\\]\nWhy: \\(\\frac{\\pi}{2}\\) is an odd multiple, so cos changes to sin; then \\(\\sin^2 + \\cos^2 = 1\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\cos^{2}\\frac{\\pi}{8} + \\cos^{2}\\frac{3\\pi}{8} + \\cos^{2}\\frac{5\\pi}{8} + \\cos^{2}\\frac{7\\pi}{8} = 2\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

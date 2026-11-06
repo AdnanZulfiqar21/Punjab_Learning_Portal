@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-3-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-3-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 262,
+          "pdf_to": 262,
+          "note": "Exercise 13.3, Question 4 (a)-(c): rate of change and value of A(t) = 10000(1 + 0.05t)^3 (book p.257). Answer key (PDF 311) prints it as number 8."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(a)",
+            "prompt": "4 (a) An investment grows according to the function \\(A(t) = 10000(1 + 0.05t)^3\\), where \\(A(t)\\) is the value of the investment and \\(t\\) is the time in years. Find the rate of change of the investment after 8 years.",
+            "explanation": "A rate-of-change question.\nWe must find \\(A'(8)\\).\nPlan: expand \\(A(t)\\) into powers of \\(t\\), differentiate, substitute \\(t = 8\\).",
+            "steps": [
+              "Given: \\(A(t) = 10000(1 + 0.05t)^3\\).\nTo find: \\(A'(8)\\).\nMethod: Rate of change \\(= A'(t)\\). Expanding the cube lets us use the power rule.",
+              "Expand the cube\n\\[(1 + 0.05t)^3 = 1 + 0.15t + 0.0075t^2 + 0.000125t^3\\]\n\\[A(t) = 10000 + 1500t + 75t^2 + 1.25t^3\\]\nWhy: \\((1 + b)^3 = 1 + 3b + 3b^2 + b^3\\) with \\(b = 0.05t\\); then multiply each term by 10000. Now only the power rule is needed.",
+              "Differentiate\n\\[A'(t) = 1500 + 150t + 3.75t^2\\]\nWhy: Power rule: \\(75 \\cdot 2t = 150t\\), \\(1.25 \\cdot 3t^2 = 3.75t^2\\).",
+              "Substitute \\(t = 8\\)\n\\[A'(8) = 1500 + 1200 + 240 = 2940\\]\nWhy: \\(150 \\times 8 = 1200\\), \\(3.75 \\times 64 = 240\\).",
+              "Check by a factorised form\n\\[A'(t) = 1500(1 + 0.05t)^2\\]\n\\[A'(8) = 1500(1.4)^2 = 1500 \\times 1.96 = 2940\\]\nWhy: \\(1500(1 + 0.1t + 0.0025t^2) = 1500 + 150t + 3.75t^2\\), the same derivative in a shorter form."
+            ],
+            "final_answer": "\\(A'(8) = 2940\\) per year"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(b)",
+            "prompt": "4 (b) An investment grows according to the function \\(A(t) = 10000(1 + 0.05t)^3\\), where \\(A(t)\\) is the value of the investment and \\(t\\) is the time in years. What is the investment value after 8 years?",
+            "explanation": "A substitution question (no derivative needed).\nWe must find \\(A(8)\\).\nPlan: put \\(t = 8\\) into \\(A(t)\\).",
+            "steps": [
+              "Given: \\(A(t) = 10000(1 + 0.05t)^3\\).\nTo find: \\(A(8)\\).\nMethod: The value at a time is found by substituting that time.",
+              "Substitute \\(t = 8\\)\n\\[A(8) = 10000(1 + 0.4)^3\\]\n\\[= 10000 \\times 2.744 = 27440\\]\nWhy: \\(0.05 \\times 8 = 0.4\\) and \\(1.4^3 = 1.96 \\times 1.4 = 2.744\\).",
+              "Check with the expanded form\n\\[10000 + 12000 + 4800 + 640 = 27440\\]\nWhy: \\(1500(8)\\), \\(75(64)\\) and \\(1.25(512)\\) give the same total."
+            ],
+            "final_answer": "\\(A(8) = 27440\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(c)",
+            "prompt": "4 (c) An investment grows according to the function \\(A(t) = 10000(1 + 0.05t)^3\\), where \\(A(t)\\) is the value of the investment and \\(t\\) is the time in years. Determine the time at which the investment is growing the fastest.",
+            "explanation": "We must decide when the growth rate \\(A'(t)\\) is largest.\nPlan: see whether \\(A'(t)\\) has a highest point by looking at its own rate of change.",
+            "steps": [
+              "Given: \\(A'(t) = 1500 + 150t + 3.75t^2 = 1500(1 + 0.05t)^2\\), \\(t \\ge 0\\).\nTo find: the time of fastest growth.\nMethod: The growth rate is \\(A'(t)\\). If \\(A'(t)\\) keeps increasing, there is no time at which it is greatest.",
+              "Rate of change of the growth rate\n\\[\\frac{d}{dt}A'(t) = 150 + 7.5t\\]\nWhy: Power rule on \\(A'(t)\\).",
+              "Its sign\n\\[150 + 7.5t > 0 \\text{ for all } t \\ge 0\\]\nWhy: Both terms are positive, so \\(A'(t)\\) is always increasing and is never zero-sloped for \\(t \\ge 0\\).",
+              "Conclusion\n\\[A'(0) = 1500,\\ A'(8) = 2940,\\ A'(20) = 6000\\]\nWhy: The growth rate keeps rising with time, so there is no finite time of fastest growth: the longer the investment is kept, the faster it grows."
+            ],
+            "final_answer": "There is no finite fastest time: the rate of growth increases as time increases"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key numbers the answers of Exercise 13.3 as 4, 5, 6, 8, 11, 12, 13, 14 instead of 1 to 8. The answer to this question is printed under number 8: (a) 2940, (b) 27440, (c) \"as time increases rate increases\", all correct."
+          }
+        ]
+      }
+    }
+  ]
+}

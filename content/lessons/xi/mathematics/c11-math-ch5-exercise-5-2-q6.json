@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH5-EXERCISE-5-2-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch5",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch5/u-exercise-5-2-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 92,
+          "pdf_to": 92,
+          "note": "Exercise 5.2, Question 6: book p.87 (PDF 92). Answer key PDF 304 (Ex 5.2 labels printed 1, 2, 3, 6, 7, 3; only Q1, Q3, Q5 have answers). Solution book PDF 394-411 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. Resolve into partial fractions: \\(\\frac{8x^2}{(x^2 + 1)^2(1 - x^2)}\\).",
+            "explanation": "A proper fraction with two linear factors (from \\(1 - x^2\\)) and a repeated irreducible quadratic \\((x^2 + 1)^2\\): Case IV.\nWe must find six constants.\nPlan: factorise, put \\(x = \\pm 1\\), compare coefficients, recombine to check. (Only even powers of \\(x\\) appear, so the \\(x\\)-parts \\(C\\) and \\(E\\) will turn out 0.)",
+            "steps": [
+              "Given: \\(\\frac{8x^2}{(x^2 + 1)^2(1 - x^2)}\\).\nTo find: its partial fractions.\nMethod: Degree 2 < degree 6, so it is proper. Factorise \\(1 - x^2 = (1 - x)(1 + x)\\); \\(x^2 + 1\\) is irreducible and repeated (Case IV). Put \\(x = \\pm 1\\) for \\(A\\) and \\(B\\), compare coefficients for \\(C, D, E, F\\).",
+              "Factorise and write the partial fractions\n\\[1 - x^2 = (1 - x)(1 + x)\\]\n\\[\\dfrac{8x^2}{(x^2 + 1)^2(1 - x)(1 + x)}\\]\n\\[= \\dfrac{A}{1 - x} + \\dfrac{B}{1 + x}\\]\n\\[+ \\dfrac{Cx + D}{x^2 + 1} + \\dfrac{Ex + F}{(x^2 + 1)^2}\\]\nWhy: \\(1 - x^2\\) splits into two linear factors (difference of squares); \\(x^2 + 1\\) is irreducible and repeated, so it needs two fractions with linear tops (Case IV).",
+              "Clear the denominators: the identity\n\\[8x^2 = A(1 + x)(x^2 + 1)^2\\]\n\\[+ B(1 - x)(x^2 + 1)^2\\]\n\\[+ (Cx + D)(1 - x^2)(x^2 + 1)\\]\n\\[+ (Ex + F)(1 - x^2) \\quad \\text{(i)}\\]\nWhy: Multiply both sides by \\((x^2 + 1)^2(1 - x)(1 + x)\\); each top keeps the factors not under it.",
+              "Put \\(x = 1\\) and \\(x = -1\\) in (i)\n\\[x = 1:\\ 8 = A(2)(2)^2 = 8A\\]\n\\[A = 1\\]\n\\[x = -1:\\ 8 = B(2)(2)^2 = 8B\\]\n\\[B = 1\\]\nWhy: \\(x = 1\\) makes \\(1 - x = 0\\) and \\(1 - x^2 = 0\\), so only the \\(A\\) term is left; \\(x = -1\\) leaves only the \\(B\\) term.",
+              "Expand each part of (i)\n\\[(x^2 + 1)^2 = x^4 + 2x^2 + 1\\]\n\\[A(1 + x)(x^4 + 2x^2 + 1)\\]\n\\[= Ax^5 + Ax^4 + 2Ax^3\\]\n\\[+ 2Ax^2 + Ax + A\\]\n\\[B(1 - x)(x^4 + 2x^2 + 1)\\]\n\\[= -Bx^5 + Bx^4 - 2Bx^3\\]\n\\[+ 2Bx^2 - Bx + B\\]\n\\[(Cx + D)(1 - x^4)\\]\n\\[= -Cx^5 - Dx^4 + Cx + D\\]\n\\[(Ex + F)(1 - x^2)\\]\n\\[= -Ex^3 - Fx^2 + Ex + F\\]\nWhy: \\((1 - x^2)(x^2 + 1) = 1 - x^4\\) shortens the third product. Everything is multiplied out so that equal powers can be collected.",
+              "Group by powers of \\(x\\)\n\\[x^5:\\ A - B - C\\]\n\\[x^4:\\ A + B - D\\]\n\\[x^3:\\ 2A - 2B - E\\]\n\\[x^2:\\ 2A + 2B - F\\]\n\\[x:\\ A - B + C + E\\]\n\\[\\text{const}:\\ A + B + D + F\\]\nWhy: These are the coefficients of the right side of (i). The left side \\(8x^2\\) has coefficient 8 for \\(x^2\\) and 0 for every other power.",
+              "Compare coefficients\n\\[x^5:\\ 0 = A - B - C \\Rightarrow C = 0\\]\n\\[x^4:\\ 0 = A + B - D \\Rightarrow D = 2\\]\n\\[x^3:\\ 0 = 2A - 2B - E \\Rightarrow E = 0\\]\n\\[x^2:\\ 8 = 2A + 2B - F\\]\n\\[F = 4 - 8 = -4\\]\nWhy: Put in \\(A = B = 1\\). \\(C\\) and \\(E\\) come out 0 because only even powers of \\(x\\) appear in the question.",
+              "Test with the unused coefficients\n\\[x:\\ A - B + C + E = 0 \\;\\checkmark\\]\n\\[\\text{const}:\\ 1 + 1 + 2 - 4 = 0 \\;\\checkmark\\]\nWhy: Both unused equations give 0, as the left side \\(8x^2\\) requires.",
+              "Write the partial fractions\n\\[\\dfrac{1}{1 - x} + \\dfrac{1}{1 + x} + \\dfrac{2}{x^2 + 1}\\]\n\\[- \\dfrac{4}{(x^2 + 1)^2}\\]\nWhy: Put \\(A = 1, B = 1, C = 0, D = 2, E = 0, F = -4\\) into the form.",
+              "Check: recombine\nCombine in pairs, then over \\((1 - x^2)(x^2 + 1)^2\\):\n\\[\\dfrac{1}{1 - x} + \\dfrac{1}{1 + x} = \\dfrac{2}{1 - x^2}\\]\n\\[\\dfrac{2}{x^2 + 1} - \\dfrac{4}{(x^2 + 1)^2} = \\dfrac{2x^2 - 2}{(x^2 + 1)^2}\\]\n\\[\\text{Top} = 2(x^2 + 1)^2 - 2(1 - x^2)^2\\]\n\\[= 2(2x^2)(2) = 8x^2 \\;\\checkmark\\]\nWhy: Over \\((1 - x^2)(x^2 + 1)^2\\) the top is \\(2[(x^2 + 1)^2 - (1 - x^2)^2]\\); difference of squares gives \\(2 \\cdot 2x^2 \\cdot 2 = 8x^2\\), the given numerator."
+            ],
+            "final_answer": "\\(\\frac{8x^2}{(x^2 + 1)^2(1 - x^2)} = \\frac{1}{1 - x} + \\frac{1}{1 + x} + \\frac{2}{x^2 + 1} - \\frac{4}{(x^2 + 1)^2}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key gives no answer for Question 6. The key's entry labelled \"7\", \\(\\frac{1}{4(x - 1)} - \\frac{x + 1}{4(x^2 + 1)} + \\frac{x + 1}{2(x^2 + 1)^2}\\), adds up to \\(\\frac{x^2}{(x^2 + 1)^2(x - 1)}\\), which is not this question. The answer worked out and checked above is \\(\\frac{1}{1 - x} + \\frac{1}{1 + x} + \\frac{2}{x^2 + 1} - \\frac{4}{(x^2 + 1)^2}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

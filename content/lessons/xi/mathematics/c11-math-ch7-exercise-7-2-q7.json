@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-2-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-2-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 134,
+          "pdf_to": 134,
+          "note": "Exercise 7.2, Question 7: book p.129 (PDF 134). Answer key PDF 306 (book p.301). Solution book PDF 633-657 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(a)",
+            "prompt": "7 (a) There are 8 men. Find the number of ways of arranging them in a row if: Two old men are at left side.",
+            "explanation": "8 different men in 8 places in a row, with a condition on the two left places.\nWe must count the arrangements.\nPlan: fill the two left places with the two old men first, then arrange the other 6 men.",
+            "steps": [
+              "Given: 8 men; the 2 old men must occupy the two places at the left end.\nTo find: the number of arrangements.\nMethod: Deal with the restricted places first (the condition), then the free places, and multiply (fundamental principle of counting).",
+              "Arrange the two old men at the left\n\\[\\text{Ways} = 2! = 2\\]\nWhy: The two left places are reserved for the 2 old men; they can swap places, so \\(2!\\) ways.",
+              "Arrange the remaining 6 men\n\\[\\text{Ways} = 6! = 720\\]\nWhy: 6 men are left for the other 6 places, with no condition.",
+              "Multiply\n\\[2! \\times 6! = 2 \\times 720 = 1440\\]\nWhy: Each order of the old men goes with each order of the others.",
+              "Check\nBox method: places 1 and 2 have 2 and 1 choices; places 3 to 8 have 6, 5, 4, 3, 2, 1.\n\\[2 \\cdot 1 \\cdot 720 = 1440 \\;\\checkmark\\]\nWhy: Same count, place by place."
+            ],
+            "final_answer": "1440 ways"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(b)",
+            "prompt": "7 (b) There are 8 men. Find the number of ways of arranging them in a row if: The youngest man is not at the right side.",
+            "explanation": "8 men in a row, but the youngest man must not stand at the right end.\nWe must count the arrangements.\nPlan: \"not\" questions are easiest as total minus the arrangements where the youngest IS at the right end.",
+            "steps": [
+              "Given: 8 men; the youngest must not be in the rightmost place.\nTo find: the number of arrangements.\nMethod: Required = total arrangements \\(-\\) arrangements with the youngest at the right end.",
+              "Total arrangements\n\\[8! = 40320\\]\nWhy: 8 different men in 8 places with no condition.",
+              "Youngest at the right end\n\\[7! = 5040\\]\nWhy: Fix the youngest in the right place (1 way); the other 7 men fill 7 places in \\(7!\\) ways.",
+              "Subtract\n\\[8! - 7! = 40320 - 5040 = 35280\\]\nWhy: Removing the unwanted arrangements leaves exactly those where the youngest is not at the right end.",
+              "Check (direct method)\nRight place: any of the 7 other men (7 ways). Remaining 7 places: \\(7!\\) ways.\n\\[7 \\times 7! = 7 \\times 5040 = 35280 \\;\\checkmark\\]\nWhy: Filling the restricted place first gives the same answer."
+            ],
+            "final_answer": "35,280 ways"
+          }
+        ]
+      }
+    }
+  ]
+}

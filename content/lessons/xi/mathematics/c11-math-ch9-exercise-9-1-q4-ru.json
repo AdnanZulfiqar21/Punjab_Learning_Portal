@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-EXERCISE-9-1-Q4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/u-exercise-9-1-q4",
+      "title": "Question 4 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 179,
+          "pdf_to": 179,
+          "note": "Exercise 9.1, Question 4: book page 174 (PDF 179); answer key book page 302 (PDF 307); verified with sympy and the solution book"
+        }
+      ],
+      "variant_of": "C11-MATH-CH9-EXERCISE-9-1-Q4",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) Use synthetic division to show that \\(x\\) is the zero of the polynomial and use the result to factorize the polynomial completely: \\(x^{3} - 7x + 6\\), \\(x = 2\\).",
+            "explanation": "Zero (ya root) of a polynomial ka matlab hai woh value jo \\(x\\) ki jagah rakhne se polynomial ki value 0 kar de.\nAgar synthetic division ka remainder 0 aaye to woh value zero hai aur \\(x - a\\) factor hai (factor theorem).\nFind kya karna hai? Pehle dikhana ke \\(x = 2\\) zero hai, phir polynomial ko poora factorize karna, yani aise factors mein todna jo mazeed na toot sakein.\nPlan: synthetic division, quotient parhna, quotient (quadratic) ko middle term tod kar factorize karna, aur saare factors ek saath likhna.",
+            "steps": [
+              "Diya gaya hai: \\(f(x) = x^{3} - 7x + 6\\), \\(x = 2\\).\nHumein: dikhana hai ke yeh value zero hai, aur \\(f(x)\\) ko poora factorize karna hai.\nTareeqa: \\(x - a\\) se synthetic division. Remainder 0 aaye to \\(a\\) zero hai aur \\(x - a\\) factor hai (factor theorem). Neeche wali line quotient deti hai; quotient ki degree ek kam hoti hai, is liye har division ke baad kaam chhota hota jata hai.",
+              "\\(x^{3} - 7x + 6\\) ko \\(x - 2\\) se synthetic division (\\(a = 2\\))\n\\[\\begin{array}{r|rrrr} 2 & 1 & 0 & -7 & 6 \\\\  &  & 2 & 4 & -6 \\\\ \\hline & 1 & 2 & -3 & \\boxed{0} \\end{array}\\]\n\\[1 \\times 2 = 2,\\ 0 + 2 = 2\\]\n\\[2 \\times 2 = 4,\\ -7 + 4 = -3\\]\n\\[-3 \\times 2 = -6,\\ 6 + (-6) = 0\\]\nKyun: Synthetic division ka tareeqa: upar wali line mein coefficients (missing power ke liye 0) aur baayen taraf \\(a\\). Pehla coefficient seedha neeche utarta hai; phir har neeche wale number ko \\(a\\) se multiply kar ke agle column mein likhte hain aur us column ko jama karte hain (diagonal: multiply, vertical: add). Yahan divisor \\(x - 2\\) pehle se \\(x - a\\) ki shakal mein hai, is liye \\(a = 2\\). Is polynomial mein \\(x^{2}\\) wali term nahi, is liye us ki jagah 0 likha; warna columns khisak jate.",
+              "Nateeja parhein\n\\[\\text{Remainder} = 0\\]\nIs liye \\(x = 2\\) zero hai aur \\(x - 2\\) factor hai.\n\\[\\text{Quotient} = x^{2} + 2x - 3\\]\nKyun: Box wala aakhri number remainder hai aur woh 0 hai, yani division poori hui; factor theorem ke mutabiq \\(x - 2\\) factor hai. Baqi neeche wale numbers quotient ke coefficients hain; quotient ki degree pichhle polynomial se ek kam hai.",
+              "\\(f(x)\\) ko mile hue factors se likhein\n\\[f(x) = (x - 2)(x^{2} + 2x - 3)\\]\nKyun: Remainder zero hai, is liye Dividend = Divisor × Quotient. Lekin quotient abhi quadratic hai aur mazeed toot sakta hai, is liye kaam abhi poora nahi hua; sawal \"completely\" factorize karne ko kehta hai.",
+              "Quadratic quotient ko factorize karein\n\\[x^{2} + 2x - 3\\]\n\\[= x^{2} + 3x - x - 3\\]\n\\[= x(x + 3) - 1(x + 3)\\]\n\\[= (x + 3)(x - 1)\\]\nKyun: Middle term todne ka tareeqa: aise do numbers dhoondein jin ka product \\(-3\\) ho (pehle aur aakhri coefficient ka product) aur jama \\(2\\) ho (beech wala coefficient). Woh \\(3\\) aur \\(-1\\) hain. Middle term ko in do hisson mein tod kar do do terms ke group banaye aur har group se common nikala; dono groups mein ek hi bracket aa gaya, woh common nikal liya.\nDhyan dein: Product aur jama dono ke signs check karein; sirf numbers sahi hon aur signs ulte hon to factors ghalat ban jate hain.",
+              "Poora factorization likhein\n\\[x^{3} - 7x + 6\\]\n\\[= (x - 2)(x - 1)(x + 3)\\]\nKyun: Ab har factor linear hai (degree 1), aur linear factor mazeed nahi toot-ta, is liye factorization mukammal hai. Factors ki tadad polynomial ki degree ke barabar hai, yeh bhi ek achhi nishani hai.",
+              "Tasdeeq: dono shaklon mein \\(x = 0\\) rakhein\n\\[f(0) = 6\\]\n\\[(-2)(-1)(3) = 6 \\;\\checkmark\\]\nKyun: Asal polynomial aur us ki factorized shakal ek hi cheez hain, is liye kisi bhi \\(x\\) par dono ki value barabar honi chahiye. \\(x = 0\\) sab se aasaan value hai: polynomial mein sirf constant term bachti hai aur factors mein sirf un ke constants ka product. Dono barabar aaye."
+            ],
+            "final_answer": "\\(x^{3} - 7x + 6 = (x - 2)(x - 1)(x + 3)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) Use synthetic division to show that \\(x\\) is the zero of the polynomial and use the result to factorize the polynomial completely: \\(x^{3} - 28x - 48\\), \\(x = -4\\).",
+            "explanation": "Zero (ya root) of a polynomial ka matlab hai woh value jo \\(x\\) ki jagah rakhne se polynomial ki value 0 kar de.\nAgar synthetic division ka remainder 0 aaye to woh value zero hai aur \\(x - a\\) factor hai (factor theorem).\nFind kya karna hai? Pehle dikhana ke \\(x = -4\\) zero hai, phir polynomial ko poora factorize karna, yani aise factors mein todna jo mazeed na toot sakein.\nPlan: synthetic division, quotient parhna, quotient (quadratic) ko middle term tod kar factorize karna, aur saare factors ek saath likhna.",
+            "steps": [
+              "Diya gaya hai: \\(f(x) = x^{3} - 28x - 48\\), \\(x = -4\\).\nHumein: dikhana hai ke yeh value zero hai, aur \\(f(x)\\) ko poora factorize karna hai.\nTareeqa: \\(x - a\\) se synthetic division. Remainder 0 aaye to \\(a\\) zero hai aur \\(x - a\\) factor hai (factor theorem). Neeche wali line quotient deti hai; quotient ki degree ek kam hoti hai, is liye har division ke baad kaam chhota hota jata hai.",
+              "\\(x^{3} - 28x - 48\\) ko \\(x + 4\\) se synthetic division (\\(a = -4\\))\n\\[\\begin{array}{r|rrrr} -4 & 1 & 0 & -28 & -48 \\\\  &  & -4 & 16 & 48 \\\\ \\hline & 1 & -4 & -12 & \\boxed{0} \\end{array}\\]\n\\[1 \\times (-4) = -4,\\ 0 + (-4) = -4\\]\n\\[-4 \\times (-4) = 16,\\ -28 + 16 = -12\\]\n\\[-12 \\times (-4) = 48,\\ -48 + 48 = 0\\]\nKyun: Synthetic division ka tareeqa: upar wali line mein coefficients (missing power ke liye 0) aur baayen taraf \\(a\\). Pehla coefficient seedha neeche utarta hai; phir har neeche wale number ko \\(a\\) se multiply kar ke agle column mein likhte hain aur us column ko jama karte hain (diagonal: multiply, vertical: add). Yahan \\(a = -4\\) hai kyunke \\(x + 4 = x - (-4)\\); plus wale divisor mein \\(a\\) negative hota hai. Is polynomial mein \\(x^{2}\\) wali term nahi, is liye us ki jagah 0 likha; warna columns khisak jate.",
+              "Nateeja parhein\n\\[\\text{Remainder} = 0\\]\nIs liye \\(x = -4\\) zero hai aur \\(x + 4\\) factor hai.\n\\[\\text{Quotient} = x^{2} - 4x - 12\\]\nKyun: Box wala aakhri number remainder hai aur woh 0 hai, yani division poori hui; factor theorem ke mutabiq \\(x + 4\\) factor hai. Baqi neeche wale numbers quotient ke coefficients hain; quotient ki degree pichhle polynomial se ek kam hai.",
+              "\\(f(x)\\) ko mile hue factors se likhein\n\\[f(x) = (x + 4)(x^{2} - 4x - 12)\\]\nKyun: Remainder zero hai, is liye Dividend = Divisor × Quotient. Lekin quotient abhi quadratic hai aur mazeed toot sakta hai, is liye kaam abhi poora nahi hua; sawal \"completely\" factorize karne ko kehta hai.",
+              "Quadratic quotient ko factorize karein\n\\[x^{2} - 4x - 12\\]\n\\[= x^{2} - 6x + 2x - 12\\]\n\\[= x(x - 6) + 2(x - 6)\\]\n\\[= (x - 6)(x + 2)\\]\nKyun: Middle term todne ka tareeqa: aise do numbers dhoondein jin ka product \\(-12\\) ho (pehle aur aakhri coefficient ka product) aur jama \\(-4\\) ho (beech wala coefficient). Woh \\(-6\\) aur \\(2\\) hain. Middle term ko in do hisson mein tod kar do do terms ke group banaye aur har group se common nikala; dono groups mein ek hi bracket aa gaya, woh common nikal liya.\nDhyan dein: Product aur jama dono ke signs check karein; sirf numbers sahi hon aur signs ulte hon to factors ghalat ban jate hain.",
+              "Poora factorization likhein\n\\[x^{3} - 28x - 48\\]\n\\[= (x + 4)(x - 6)(x + 2)\\]\nKyun: Ab har factor linear hai (degree 1), aur linear factor mazeed nahi toot-ta, is liye factorization mukammal hai. Factors ki tadad polynomial ki degree ke barabar hai, yeh bhi ek achhi nishani hai.",
+              "Tasdeeq: dono shaklon mein \\(x = 0\\) rakhein\n\\[f(0) = -48\\]\n\\[(4)(-6)(2) = -48 \\;\\checkmark\\]\nKyun: Asal polynomial aur us ki factorized shakal ek hi cheez hain, is liye kisi bhi \\(x\\) par dono ki value barabar honi chahiye. \\(x = 0\\) sab se aasaan value hai: polynomial mein sirf constant term bachti hai aur factors mein sirf un ke constants ka product. Dono barabar aaye."
+            ],
+            "final_answer": "\\(x^{3} - 28x - 48 = (x + 4)(x - 6)(x + 2)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iii)",
+            "prompt": "4 (iii) Use synthetic division to show that \\(x\\) is the zero of the polynomial and use the result to factorize the polynomial completely: \\(2x^{4} + 7x^{3} - 4x^{2} - 27x - 18\\), \\(x = 2, x = -3\\).",
+            "explanation": "Zero (ya root) of a polynomial ka matlab hai woh value jo \\(x\\) ki jagah rakhne se polynomial ki value 0 kar de.\nAgar synthetic division ka remainder 0 aaye to woh value zero hai aur \\(x - a\\) factor hai (factor theorem).\nFind kya karna hai? Pehle dikhana ke \\(x = 2, x = -3\\) zero hain, phir polynomial ko poora factorize karna, yani aise factors mein todna jo mazeed na toot sakein.\nPlan: synthetic division, quotient parhna, quotient (quadratic) ko middle term tod kar factorize karna, aur saare factors ek saath likhna.",
+            "steps": [
+              "Diya gaya hai: \\(f(x) = 2x^{4} + 7x^{3} - 4x^{2} - 27x - 18\\), \\(x = 2, x = -3\\).\nHumein: dikhana hai ke yeh values zeros hain, aur \\(f(x)\\) ko poora factorize karna hai.\nTareeqa: \\(x - a\\) se synthetic division. Remainder 0 aaye to \\(a\\) zero hai aur \\(x - a\\) factor hai (factor theorem). Neeche wali line quotient deti hai; quotient ki degree ek kam hoti hai, is liye har division ke baad kaam chhota hota jata hai.",
+              "\\(2x^{4} + 7x^{3} - 4x^{2} - 27x - 18\\) ko \\(x - 2\\) se synthetic division (\\(a = 2\\))\n\\[\\begin{array}{r|rrrrr} 2 & 2 & 7 & -4 & -27 & -18 \\\\  &  & 4 & 22 & 36 & 18 \\\\ \\hline & 2 & 11 & 18 & 9 & \\boxed{0} \\end{array}\\]\n\\[2 \\times 2 = 4,\\ 7 + 4 = 11\\]\n\\[11 \\times 2 = 22,\\ -4 + 22 = 18\\]\n\\[18 \\times 2 = 36,\\ -27 + 36 = 9\\]\n\\[9 \\times 2 = 18,\\ -18 + 18 = 0\\]\nKyun: Synthetic division ka tareeqa: upar wali line mein coefficients (missing power ke liye 0) aur baayen taraf \\(a\\). Pehla coefficient seedha neeche utarta hai; phir har neeche wale number ko \\(a\\) se multiply kar ke agle column mein likhte hain aur us column ko jama karte hain (diagonal: multiply, vertical: add). Yahan divisor \\(x - 2\\) pehle se \\(x - a\\) ki shakal mein hai, is liye \\(a = 2\\).",
+              "Nateeja parhein\n\\[\\text{Remainder} = 0\\]\nIs liye \\(x = 2\\) zero hai aur \\(x - 2\\) factor hai.\n\\[\\text{Quotient} = 2x^{3} + 11x^{2} + 18x + 9\\]\nKyun: Box wala aakhri number remainder hai aur woh 0 hai, yani division poori hui; factor theorem ke mutabiq \\(x - 2\\) factor hai. Baqi neeche wale numbers quotient ke coefficients hain; quotient ki degree pichhle polynomial se ek kam hai.",
+              "pichhla quotient \\(2x^{3} + 11x^{2} + 18x + 9\\) ko \\(x + 3\\) se synthetic division (\\(a = -3\\))\n\\[\\begin{array}{r|rrrr} -3 & 2 & 11 & 18 & 9 \\\\  &  & -6 & -15 & -9 \\\\ \\hline & 2 & 5 & 3 & \\boxed{0} \\end{array}\\]\n\\[2 \\times (-3) = -6,\\ 11 + (-6) = 5\\]\n\\[5 \\times (-3) = -15,\\ 18 + (-15) = 3\\]\n\\[3 \\times (-3) = -9,\\ 9 + (-9) = 0\\]\nKyun: Synthetic division ka tareeqa: upar wali line mein coefficients (missing power ke liye 0) aur baayen taraf \\(a\\). Pehla coefficient seedha neeche utarta hai; phir har neeche wale number ko \\(a\\) se multiply kar ke agle column mein likhte hain aur us column ko jama karte hain (diagonal: multiply, vertical: add). Yahan \\(a = -3\\) hai kyunke \\(x + 3 = x - (-3)\\); plus wale divisor mein \\(a\\) negative hota hai.",
+              "Nateeja parhein\n\\[\\text{Remainder} = 0\\]\nIs liye \\(x = -3\\) zero hai aur \\(x + 3\\) factor hai.\n\\[\\text{Quotient} = 2x^{2} + 5x + 3\\]\nKyun: Box wala aakhri number remainder hai aur woh 0 hai, yani division poori hui; factor theorem ke mutabiq \\(x + 3\\) factor hai. Baqi neeche wale numbers quotient ke coefficients hain; quotient ki degree pichhle polynomial se ek kam hai.",
+              "\\(f(x)\\) ko mile hue factors se likhein\n\\[f(x) = (x - 2)(x + 3)(2x^{2} + 5x + 3)\\]\nKyun: Remainder zero hai, is liye Dividend = Divisor × Quotient. Lekin quotient abhi quadratic hai aur mazeed toot sakta hai, is liye kaam abhi poora nahi hua; sawal \"completely\" factorize karne ko kehta hai.",
+              "Quadratic quotient ko factorize karein\n\\[2x^{2} + 5x + 3\\]\n\\[= 2x^{2} + 2x + 3x + 3\\]\n\\[= 2x(x + 1) + 3(x + 1)\\]\n\\[= (x + 1)(2x + 3)\\]\nKyun: Middle term todne ka tareeqa: aise do numbers dhoondein jin ka product \\(6\\) ho (pehle aur aakhri coefficient ka product) aur jama \\(5\\) ho (beech wala coefficient). Woh \\(2\\) aur \\(3\\) hain. Middle term ko in do hisson mein tod kar do do terms ke group banaye aur har group se common nikala; dono groups mein ek hi bracket aa gaya, woh common nikal liya.\nDhyan dein: Product aur jama dono ke signs check karein; sirf numbers sahi hon aur signs ulte hon to factors ghalat ban jate hain.",
+              "Poora factorization likhein\n\\[2x^{4} + 7x^{3} - 4x^{2} - 27x - 18\\]\n\\[= (x - 2)(x + 3)(x + 1)(2x + 3)\\]\nKyun: Ab har factor linear hai (degree 1), aur linear factor mazeed nahi toot-ta, is liye factorization mukammal hai. Factors ki tadad polynomial ki degree ke barabar hai, yeh bhi ek achhi nishani hai.",
+              "Tasdeeq: dono shaklon mein \\(x = 0\\) rakhein\n\\[f(0) = -18\\]\n\\[(-2)(3)(1)(3) = -18 \\;\\checkmark\\]\nKyun: Asal polynomial aur us ki factorized shakal ek hi cheez hain, is liye kisi bhi \\(x\\) par dono ki value barabar honi chahiye. \\(x = 0\\) sab se aasaan value hai: polynomial mein sirf constant term bachti hai aur factors mein sirf un ke constants ka product. Dono barabar aaye."
+            ],
+            "final_answer": "\\(2x^{4} + 7x^{3} - 4x^{2} - 27x - 18 = (x - 2)(x + 3)(x + 1)(2x + 3)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

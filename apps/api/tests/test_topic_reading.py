@@ -246,6 +246,16 @@ def test_the_topic_kind_rule_is_the_catalogue_key() -> None:
     }
 
 
+def test_numbered_mathematics_exercises_are_read_in_learn() -> None:
+    # MATHS-11-01 (owner, 2026-11-05): "Exercise 1.1" … "Exercise 1.5" of a Mathematics unit and their questions are
+    # read in Learn, question by question; only a chapter's single `…/u-exercise` is practised in Practice.
+    unit = "pk-punjab/xi/biology/c11-bio/ch1"
+    kinds = {
+        key: Topic(natural_key=f"{unit}/{key}").kind for key in ("u-exercise", "u-exercise-1-1", "u-exercise-1-1-q3")
+    }
+    assert kinds == {"u-exercise": "exercise", "u-exercise-1-1": "topic", "u-exercise-1-1-q3": "topic"}
+
+
 PAPERS = (("u-paper-pattern", "Paper Pattern"), ("u-model-paper", "Model Paper"))
 
 

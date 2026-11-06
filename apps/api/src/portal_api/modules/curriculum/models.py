@@ -36,6 +36,10 @@ EXERCISE_KEY_SUFFIX = "/u-exercise"
 PAPER_KEY_SUFFIXES = ("/u-paper-pattern", "/u-model-paper")
 # A printed heading number in a natural key fragment ("1.1.1.1", or "1.1.1.1~2" for the book's second 1.1.1.1).
 PRINTED_NUMBER = re.compile(r"^(\d+(?:\.\d+)+[A-Za-z]?)(?:~\d+)?$")
+# A heading the index keys by its title because the book numbers it in another chapter's sequence, e.g. Biology 11
+# chapter 6 "Photosynthesis (printed as 5.1)" → "u-photosynthesis-printed-as-5-1"; Biology 12 keys go on
+# after the number ("…-printed-as-14-1-2-numbe", "…-printed-as-a-second-22-3-numbering-error").
+PRINTED_AS = re.compile(r"-printed-as-(?:a-second-)?(\d+(?:-\d+)+)(?=-|~|$)")
 
 
 class Region(Base):
@@ -192,6 +196,8 @@ class Topic(Base):
     depth: Mapped[int] = mapped_column(SmallInteger)
     pdf_page: Mapped[int | None] = mapped_column(Integer)
     points: Mapped[list[str]] = mapped_column(JSONB, default=list)
+    # BOOK-NUMBER-02: the number the book prints, where the index records it ("1.2", or "missing" for none).
+    printed_number: Mapped[str | None] = mapped_column(String(20))
     retired_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     chapter: Mapped[Chapter] = relationship(back_populates="topics")
@@ -219,8 +225,13 @@ class Topic(Base):
         """BOOK-NUMBER-01: the heading number printed in the book, when the topic shows another one. Where the book
         misprints a number (Computer Science 11: 1.1.1.1 Requirement Gathering sits at 1.2.2.1), students see the
         number in sequence and, beside it, the book's own to find the page. The natural key keeps the printed number."""
-        m = PRINTED_NUMBER.match(self.natural_key.rsplit("/", 1)[-1])
+        if self.printed_number:  # BOOK-NUMBER-02: the index's record of the printed number comes first
+            return self.printed_number if self.printed_number != self.number else None
+        frag = self.natural_key.rsplit("/", 1)[-1]
+        m = PRINTED_NUMBER.match(frag)
         printed = m.group(1) if m else None
+        if printed is None and (a := PRINTED_AS.search(frag)):
+            printed = a.group(1).replace("-", ".")
         return printed if printed and printed != self.number else None
 
 

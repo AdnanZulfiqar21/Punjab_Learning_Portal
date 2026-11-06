@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-2-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-2-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 195,
+          "pdf_to": 195,
+          "note": "Exercise 10.2 Q4, book p.190 (PDF 195); proof (no answer-key entry). Checked with sympy; solution book PDF 904-906 agrees."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. Show that: \\(\\cos(\\alpha + \\beta)\\cos(\\alpha - \\beta) = \\cos^2\\alpha - \\sin^2\\beta = \\cos^2\\beta - \\sin^2\\alpha\\)",
+            "explanation": "A double equality: we must show the product equals two different expressions.\nExpand the product, then replace squares using \\(\\sin^2 + \\cos^2 = 1\\) in two different ways.\nPlan: expand, multiply (difference of squares), then convert.",
+            "steps": [
+              "Given: the statement.\nTo show: \\(\\cos(\\alpha + \\beta)\\cos(\\alpha - \\beta) = \\cos^2\\alpha - \\sin^2\\beta\\) and also \\(= \\cos^2\\beta - \\sin^2\\alpha\\).\nMethod: \\(\\cos(\\alpha \\pm \\beta)\\) formulas, \\((x - y)(x + y) = x^2 - y^2\\), and \\(\\sin^2 x + \\cos^2 x = 1\\).",
+              "Expand both factors\n\\[\\text{L.H.S.} = (\\cos\\alpha\\cos\\beta - \\sin\\alpha\\sin\\beta)\\]\n\\[\\times(\\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta)\\]\nWhy: Sum and difference formulas for cosine.",
+              "Difference of squares\n\\[= \\cos^2\\alpha\\cos^2\\beta - \\sin^2\\alpha\\sin^2\\beta\\]\nWhy: \\((x - y)(x + y) = x^2 - y^2\\) with \\(x = \\cos\\alpha\\cos\\beta\\), \\(y = \\sin\\alpha\\sin\\beta\\).",
+              "First form: replace \\(\\cos^2\\beta\\) and \\(\\sin^2\\alpha\\)\n\\[= \\cos^2\\alpha(1 - \\sin^2\\beta) - (1 - \\cos^2\\alpha)\\sin^2\\beta\\]\n\\[= \\cos^2\\alpha - \\cos^2\\alpha\\sin^2\\beta\\]\n\\[- \\sin^2\\beta + \\cos^2\\alpha\\sin^2\\beta\\]\n\\[= \\cos^2\\alpha - \\sin^2\\beta\\]\nWhy: \\(\\cos^2\\beta = 1 - \\sin^2\\beta\\), \\(\\sin^2\\alpha = 1 - \\cos^2\\alpha\\); the mixed terms cancel.",
+              "Second form: replace \\(\\cos^2\\alpha\\) and \\(\\sin^2\\beta\\)\n\\[= (1 - \\sin^2\\alpha)\\cos^2\\beta - \\sin^2\\alpha(1 - \\cos^2\\beta)\\]\n\\[= \\cos^2\\beta - \\sin^2\\alpha\\cos^2\\beta\\]\n\\[- \\sin^2\\alpha + \\sin^2\\alpha\\cos^2\\beta\\]\n\\[= \\cos^2\\beta - \\sin^2\\alpha\\]\nWhy: Start again from the step 3 result and replace the other pair; the mixed terms cancel again.",
+              "Check with \\(\\alpha = 60^{\\circ}\\), \\(\\beta = 30^{\\circ}\\)\n\\[\\cos 90^{\\circ}\\cos 30^{\\circ} = 0\\]\n\\[\\cos^2 60^{\\circ} - \\sin^2 30^{\\circ} = \\dfrac{1}{4} - \\dfrac{1}{4} = 0\\]\n\\[\\cos^2 30^{\\circ} - \\sin^2 60^{\\circ} = \\dfrac{3}{4} - \\dfrac{3}{4} = 0 \\;\\checkmark\\]\nWhy: All three expressions agree."
+            ],
+            "final_answer": "Hence proved: \\(\\cos(\\alpha + \\beta)\\cos(\\alpha - \\beta) = \\cos^2\\alpha - \\sin^2\\beta = \\cos^2\\beta - \\sin^2\\alpha\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

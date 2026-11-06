@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-3-Q3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-3-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 200,
+          "pdf_to": 200,
+          "note": "Exercise 10.3, Question 3: book page 195 (PDF 200); printed left side 2cos2θ is a misprint for 2cosθ, boxed; no answer key entry; checked with sympy and the solution book (PDF 951-952)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH10-EXERCISE-10-3-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. Show that: \\(2\\cos 2\\theta = \\sqrt{2 + \\sqrt{2 + 2\\cos 4\\theta}}\\) [as printed; the left side should be \\(2\\cos\\theta\\), see the correction below]",
+            "explanation": "Yahan square root ke andar square root hai (nested root). Aise sawal hamesha andar se bahar ki taraf hal hote hain.\nDiya kya hai? Right side \\(\\sqrt{2 + \\sqrt{2 + 2\\cos 4\\theta}}\\). Find kya karna hai? Yeh asal mein kis ke barabar hai.\nRule kaunsa? \\(1 + \\cos 2x = 2\\cos^2 x\\), do dafa: pehle \\(x = 2\\theta\\), phir \\(x = \\theta\\).\nPlan: andar wala root khatam, phir bahar wala. Aap dekhenge ke jawab \\(2\\cos\\theta\\) aata hai, jo kitab ke chhape hue left side se mukhtalif hai.",
+            "steps": [
+              "Diya gaya hai: R.H.S. \\(= \\sqrt{2 + \\sqrt{2 + 2\\cos 4\\theta}}\\).\nHumein dikhana hai: R.H.S. \\(= 2\\cos\\theta\\) (kitab ka left side \\(2\\cos 2\\theta\\) chhapai ki ghalti hai).\nTareeqa: \\(1 + \\cos 2x = 2\\cos^2 x\\) wali identity \\(2 + 2\\cos(\\ldots)\\) ko poora square bana deti hai, aur square ka square root asaani se nikal aata hai. Hum \\(0 \\le \\theta \\le \\frac{\\pi}{4}\\) lete hain taake \\(\\cos\\theta\\) aur \\(\\cos 2\\theta\\) negative na hon aur root seedha cos hi de.",
+              "Andar wala root hal karein\n\\[2 + 2\\cos 4\\theta = 2(1 + \\cos 4\\theta)\\]\n\\[= 2(2\\cos^2 2\\theta) = 4\\cos^2 2\\theta\\]\n\\[\\sqrt{2 + 2\\cos 4\\theta} = 2\\cos 2\\theta\\]\nKyun: 2 common nikala. Phir \\(1 + \\cos 2x = 2\\cos^2 x\\) mein \\(x = 2\\theta\\) rakha, kyunke \\(4\\theta = 2(2\\theta)\\). Is tarah \\(4\\cos^2 2\\theta\\) bana, jo \\((2\\cos 2\\theta)^2\\) hai, aur us ka root \\(2\\cos 2\\theta\\).",
+              "Bahar wala root hal karein\n\\[2 + 2\\cos 2\\theta = 2(1 + \\cos 2\\theta)\\]\n\\[= 2(2\\cos^2\\theta) = 4\\cos^2\\theta\\]\n\\[\\sqrt{4\\cos^2\\theta} = 2\\cos\\theta\\]\nKyun: Ab bahar ke root ke andar \\(2 + 2\\cos 2\\theta\\) hai. Wohi identity, is dafa \\(x = \\theta\\) ke saath. \\((2\\cos\\theta)^2\\) ka root \\(2\\cos\\theta\\).",
+              "Natija\n\\[\\sqrt{2 + \\sqrt{2 + 2\\cos 4\\theta}} = 2\\cos\\theta\\]\nKyun: Har root angle ko aadha karta hai: \\(4\\theta \\to 2\\theta \\to \\theta\\). Do roots hain, is liye aakhir mein \\(\\theta\\) bachta hai, \\(2\\theta\\) nahi. Isi liye kitab ka left side ghalat chhapa hai.",
+              "Tasdeeq: \\(\\theta = 30^{\\circ}\\) rakh kar\n\\[\\sqrt{2 + \\sqrt{2 + 2\\cos 120^{\\circ}}} = \\sqrt{2 + 1}\\]\n\\[= \\sqrt{3} = 2\\cos 30^{\\circ} \\;\\checkmark\\]\n\\[2\\cos 60^{\\circ} = 1 \\neq \\sqrt{3}\\]\nKyun: \\(\\cos 120^{\\circ} = -\\frac{1}{2}\\), is liye \\(2 + 2(-\\frac{1}{2}) = 1\\), us ka root 1, phir \\(\\sqrt{2 + 1} = \\sqrt{3}\\). Yeh \\(2\\cos 30^{\\circ}\\) ke barabar hai magar \\(2\\cos 60^{\\circ} = 1\\) ke nahi. Ek misaal se ghalti pakki ho gayi."
+            ],
+            "final_answer": "\\(\\sqrt{2 + \\sqrt{2 + 2\\cos 4\\theta}} = 2\\cos\\theta\\) (jab \\(0 \\le \\theta \\le \\frac{\\pi}{4}\\)). Saabit ho gaya, left side ko \\(2\\cos\\theta\\) theek kar ke."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein \\(2\\cos 2\\theta = \\sqrt{2 + \\sqrt{2 + 2\\cos 4\\theta}}\\) chhapa hai, jo ghalat hai. Har square root angle ko aadha karta hai (\\(4\\theta \\to 2\\theta \\to \\theta\\)), is liye right side \\(2\\cos\\theta\\) banta hai. \\(\\theta = 30^{\\circ}\\) par chhapa hua left side 1 hai magar right side \\(\\sqrt{3}\\). Sahi sawal: \\(2\\cos\\theta = \\sqrt{2 + \\sqrt{2 + 2\\cos 4\\theta}}\\) (jab \\(0 \\le \\theta \\le \\frac{\\pi}{4}\\)). Exam mein yeh sawal aaye to sahi shakal prove karein aur ek line mein ghalti ki nishandahi kar dein."
+          }
+        ]
+      }
+    }
+  ]
+}

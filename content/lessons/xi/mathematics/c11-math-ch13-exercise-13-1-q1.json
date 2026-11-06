@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-1-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-1-q1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 253,
+          "pdf_to": 253,
+          "note": "Exercise 13.1, Question 1 (book page 248, PDF 253); answer key PDF 310-311."
+        }
+      ],
+      "title": "Question 1",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Find by definition, the derivatives w.r.t. '\\(x\\)' of the following functions defined as: \\(2x^2 + 1\\).",
+            "explanation": "A polynomial differentiated by definition (first principles).\nWe must find \\(f'(x)\\) for \\(f(x) = 2x^2 + 1\\).\nPlan: the four steps: \\(f(x + \\delta x)\\), subtract, divide by \\(\\delta x\\), then the limit.",
+            "steps": [
+              "Given: \\(f(x) = 2x^2 + 1\\).\nTo find: \\(f'(x)\\) by definition.\nMethod: derivative by definition (first principles): \\(f'(x) = \\lim_{\\delta x \\to 0} \\frac{f(x + \\delta x) - f(x)}{\\delta x}\\). Four steps: (I) write \\(f(x + \\delta x)\\); (II) subtract \\(f(x)\\); (III) divide by \\(\\delta x\\); (IV) let \\(\\delta x \\to 0\\).",
+              "Step I: find \\(f(x + \\delta x)\\)\n\\[f(x + \\delta x) = 2(x + \\delta x)^2 + 1\\]\n\\[= 2\\big(x^2 + 2x\\,\\delta x + (\\delta x)^2\\big) + 1\\]\n\\[= 2x^2 + 4x\\,\\delta x + 2(\\delta x)^2 + 1\\]\nWhy: Replace every \\(x\\) by \\(x + \\delta x\\); then \\((a + b)^2 = a^2 + 2ab + b^2\\).",
+              "Step II: subtract \\(f(x)\\)\n\\[f(x + \\delta x) - f(x)\\]\n\\[= 2x^2 + 4x\\,\\delta x + 2(\\delta x)^2 + 1 - 2x^2 - 1\\]\n\\[= 4x\\,\\delta x + 2(\\delta x)^2\\]\nWhy: This gives the change in \\(f\\); \\(2x^2\\) and \\(1\\) cancel.",
+              "Step III: divide by \\(\\delta x\\)\n\\[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x}\\]\n\\[= \\dfrac{4x\\,\\delta x + 2(\\delta x)^2}{\\delta x}\\]\n\\[= 4x + 2\\,\\delta x\\]\nWhy: \\(\\delta x \\neq 0\\) while it is only approaching \\(0\\), so we may cancel it.",
+              "Step IV: take the limit \\(\\delta x \\to 0\\)\n\\[f'(x) = \\lim_{\\delta x \\to 0} (4x + 2\\,\\delta x)\\]\n\\[= 4x + 2(0)\\]\n\\[= 4x\\]\nWhy: Now no \\(\\delta x\\) is in a denominator, so we can put \\(\\delta x = 0\\).",
+              "Check with the power rule of Section 13.6 (used here only to confirm, not as the method)\n\\[\\dfrac{d}{dx}(2x^2 + 1) = 2(2x) + 0 = 4x \\;\\checkmark\\]\nWhy: Same answer by the rule, so the limit work is right."
+            ],
+            "final_answer": "\\(\\dfrac{d}{dx}(2x^2 + 1) = 4x\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Find by definition, the derivatives w.r.t. '\\(x\\)' of the following functions defined as: \\(2 - \\sqrt{x}\\).",
+            "explanation": "A square root differentiated by definition.\nWe must find \\(f'(x)\\) for \\(f(x) = 2 - \\sqrt{x}\\).\nPlan: the four steps; the root difference needs rationalising before \\(\\delta x\\) can cancel.",
+            "steps": [
+              "Given: \\(f(x) = 2 - \\sqrt{x}\\), \\(x > 0\\).\nTo find: \\(f'(x)\\) by definition.\nMethod: derivative by definition (first principles): \\(f'(x) = \\lim_{\\delta x \\to 0} \\frac{f(x + \\delta x) - f(x)}{\\delta x}\\). Four steps: (I) write \\(f(x + \\delta x)\\); (II) subtract \\(f(x)\\); (III) divide by \\(\\delta x\\); (IV) let \\(\\delta x \\to 0\\).",
+              "Steps I and II: \\(f(x + \\delta x)\\) and the difference\n\\[f(x + \\delta x) = 2 - \\sqrt{x + \\delta x}\\]\n\\[f(x + \\delta x) - f(x)\\]\n\\[= 2 - \\sqrt{x + \\delta x} - 2 + \\sqrt{x}\\]\n\\[= -\\big(\\sqrt{x + \\delta x} - \\sqrt{x}\\big)\\]\nWhy: Put \\(x + \\delta x\\) for \\(x\\); the \\(2\\)s cancel. Take the minus sign outside.",
+              "Rationalise the top\n\\[\\sqrt{x + \\delta x} - \\sqrt{x}\\]\n\\[= \\dfrac{(\\sqrt{x + \\delta x} - \\sqrt{x})(\\sqrt{x + \\delta x} + \\sqrt{x})}{\\sqrt{x + \\delta x} + \\sqrt{x}}\\]\n\\[= \\dfrac{(x + \\delta x) - x}{\\sqrt{x + \\delta x} + \\sqrt{x}}\\]\n\\[= \\dfrac{\\delta x}{\\sqrt{x + \\delta x} + \\sqrt{x}}\\]\nWhy: \\((A - B)(A + B) = A^2 - B^2\\) removes the roots and frees \\(\\delta x\\).",
+              "Step III: divide by \\(\\delta x\\)\n\\[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x}\\]\n\\[= \\dfrac{-\\delta x}{\\delta x\\,(\\sqrt{x + \\delta x} + \\sqrt{x})}\\]\n\\[= \\dfrac{-1}{\\sqrt{x + \\delta x} + \\sqrt{x}}\\]\nWhy: \\(\\delta x \\neq 0\\) yet, so it cancels.",
+              "Step IV: take the limit\n\\[f'(x) = \\lim_{\\delta x \\to 0} \\dfrac{-1}{\\sqrt{x + \\delta x} + \\sqrt{x}}\\]\n\\[= \\dfrac{-1}{\\sqrt{x} + \\sqrt{x}}\\]\n\\[= \\dfrac{-1}{2\\sqrt{x}}\\]\nWhy: The bottom does not become \\(0\\), so put \\(\\delta x = 0\\).",
+              "Check with the power rule of Section 13.6 (used here only to confirm, not as the method)\n\\[\\dfrac{d}{dx}\\big(2 - x^{1/2}\\big) = 0 - \\tfrac{1}{2}x^{-1/2}\\]\n\\[= \\dfrac{-1}{2\\sqrt{x}} \\;\\checkmark\\]\nWhy: \\(\\sqrt{x} = x^{1/2}\\); the rule gives the same result."
+            ],
+            "final_answer": "\\(\\dfrac{d}{dx}(2 - \\sqrt{x}) = \\dfrac{-1}{2\\sqrt{x}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Find by definition, the derivatives w.r.t. '\\(x\\)' of the following functions defined as: \\(\\dfrac{1}{\\sqrt{x}}\\).",
+            "explanation": "A reciprocal of a square root, by definition.\nWe must find \\(f'(x)\\) for \\(f(x) = \\frac{1}{\\sqrt{x}}\\).\nPlan: subtract the fractions over a common denominator, rationalise the top, cancel \\(\\delta x\\), take the limit.",
+            "steps": [
+              "Given: \\(f(x) = \\frac{1}{\\sqrt{x}}\\), \\(x > 0\\).\nTo find: \\(f'(x)\\) by definition.\nMethod: derivative by definition (first principles): \\(f'(x) = \\lim_{\\delta x \\to 0} \\frac{f(x + \\delta x) - f(x)}{\\delta x}\\). Four steps: (I) write \\(f(x + \\delta x)\\); (II) subtract \\(f(x)\\); (III) divide by \\(\\delta x\\); (IV) let \\(\\delta x \\to 0\\).",
+              "Steps I and II: one fraction\n\\[f(x + \\delta x) - f(x)\\]\n\\[= \\dfrac{1}{\\sqrt{x + \\delta x}} - \\dfrac{1}{\\sqrt{x}}\\]\n\\[= \\dfrac{\\sqrt{x} - \\sqrt{x + \\delta x}}{\\sqrt{x}\\,\\sqrt{x + \\delta x}}\\]\nWhy: Common denominator \\(\\sqrt{x}\\,\\sqrt{x + \\delta x}\\).",
+              "Rationalise the top\n\\[(\\sqrt{x} - \\sqrt{x + \\delta x})(\\sqrt{x} + \\sqrt{x + \\delta x})\\]\n\\[= x - (x + \\delta x)\\]\n\\[= -\\delta x\\]\n\\[f(x + \\delta x) - f(x) = \\dfrac{-\\delta x}{\\sqrt{x}\\sqrt{x + \\delta x}\\,(\\sqrt{x} + \\sqrt{x + \\delta x})}\\]\nWhy: Multiply top and bottom by \\(\\sqrt{x} + \\sqrt{x + \\delta x}\\); \\((A - B)(A + B) = A^2 - B^2\\).",
+              "Step III: divide by \\(\\delta x\\)\n\\[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x}\\]\n\\[= \\dfrac{-1}{\\sqrt{x}\\sqrt{x + \\delta x}\\,(\\sqrt{x} + \\sqrt{x + \\delta x})}\\]\nWhy: \\(\\delta x \\neq 0\\) yet, so it cancels.",
+              "Step IV: take the limit\n\\[f'(x) = \\dfrac{-1}{\\sqrt{x}\\,\\sqrt{x}\\,(\\sqrt{x} + \\sqrt{x})}\\]\n\\[= \\dfrac{-1}{x \\cdot 2\\sqrt{x}}\\]\n\\[= -\\dfrac{1}{2x^{3/2}} = -\\dfrac{1}{2}x^{-3/2}\\]\nWhy: Put \\(\\delta x = 0\\); \\(\\sqrt{x}\\sqrt{x} = x\\) and \\(x\\sqrt{x} = x^{3/2}\\).",
+              "Check with the power rule of Section 13.6 (used here only to confirm, not as the method)\n\\[\\dfrac{d}{dx}\\,x^{-1/2} = -\\tfrac{1}{2}x^{-3/2} \\;\\checkmark\\]\nWhy: \\(\\frac{1}{\\sqrt{x}} = x^{-1/2}\\); new power \\(-\\frac{1}{2} - 1 = -\\frac{3}{2}\\)."
+            ],
+            "final_answer": "\\(\\dfrac{d}{dx}\\left(\\dfrac{1}{\\sqrt{x}}\\right) = -\\dfrac{1}{2}x^{-3/2} = -\\dfrac{1}{2x\\sqrt{x}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Find by definition, the derivatives w.r.t. '\\(x\\)' of the following functions defined as: \\(x(x - 3)\\).",
+            "explanation": "A product that is really a polynomial, by definition.\nWe must find \\(f'(x)\\) for \\(f(x) = x(x - 3)\\).\nPlan: open the bracket first, \\(f(x) = x^2 - 3x\\), then the four steps.",
+            "steps": [
+              "Given: \\(f(x) = x(x - 3) = x^2 - 3x\\).\nTo find: \\(f'(x)\\) by definition.\nMethod: derivative by definition (first principles): \\(f'(x) = \\lim_{\\delta x \\to 0} \\frac{f(x + \\delta x) - f(x)}{\\delta x}\\). Four steps: (I) write \\(f(x + \\delta x)\\); (II) subtract \\(f(x)\\); (III) divide by \\(\\delta x\\); (IV) let \\(\\delta x \\to 0\\).",
+              "Step I: find \\(f(x + \\delta x)\\)\n\\[f(x + \\delta x) = (x + \\delta x)^2 - 3(x + \\delta x)\\]\n\\[= x^2 + 2x\\,\\delta x + (\\delta x)^2 - 3x - 3\\,\\delta x\\]\nWhy: Replace \\(x\\) by \\(x + \\delta x\\) and expand.",
+              "Step II: subtract \\(f(x)\\)\n\\[f(x + \\delta x) - f(x)\\]\n\\[= 2x\\,\\delta x + (\\delta x)^2 - 3\\,\\delta x\\]\nWhy: \\(x^2\\) and \\(-3x\\) cancel.",
+              "Step III: divide by \\(\\delta x\\)\n\\[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x}\\]\n\\[= 2x + \\delta x - 3\\]\nWhy: Each term has a factor \\(\\delta x\\); \\(\\delta x \\neq 0\\) yet.",
+              "Step IV: take the limit\n\\[f'(x) = \\lim_{\\delta x \\to 0} (2x + \\delta x - 3)\\]\n\\[= 2x - 3\\]\nWhy: Put \\(\\delta x = 0\\).",
+              "Check with the power rule of Section 13.6 (used here only to confirm, not as the method)\n\\[\\dfrac{d}{dx}(x^2 - 3x) = 2x - 3 \\;\\checkmark\\]\nWhy: The rule gives the same result."
+            ],
+            "final_answer": "\\(\\dfrac{d}{dx}\\big[x(x - 3)\\big] = 2x - 3\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

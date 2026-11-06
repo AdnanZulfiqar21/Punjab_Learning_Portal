@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.2",
+      "title": "8.2 Binomial Theorem",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 155,
+          "pdf_to": 158,
+          "note": "Book p. 150-153: 8.2 Binomial Theorem, expansion (A), proof by induction (B)-(D), Note on binomial coefficients, points (i)-(vi), general term, Examples 10-12"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "An algebraic expression consisting of two terms such as \\(a + x\\), \\(x - 2y\\), \\(ax + b\\) etc., is called a binomial or a binomial expression.",
+            "bold": [
+              "binomial",
+              "binomial expression"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\"Bi\" means two: a binomial has exactly two terms joined by \\(+\\) or \\(-\\). \\(a + x\\) and \\(2x - 3\\) are binomials; \\(a + b + c\\) (three terms) is not. In this section we learn a quick rule to open (expand) any power of a binomial, such as \\((a + x)^{7}\\), without multiplying the bracket by itself seven times."
+          },
+          {
+            "type": "paragraph",
+            "text": "We know by actual multiplication that\n\\[(a + x)^{2} = a^{2} + 2ax + x^{2} \\quad \\text{(i)}\\]\n\\[(a + x)^{3} = a^{3} + 3a^{2}x + 3ax^{2} + x^{3}\\]\n\\[\\text{(ii)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "The right sides of (i) and (ii) are called binomial expansions of the binomial \\(a + x\\) for the indices 2 and 3 respectively.",
+            "bold": [
+              "binomial expansions"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Index means the power. Look at the coefficients: for power 2 they are 1, 2, 1 and for power 3 they are 1, 3, 3, 1. The power of \\(a\\) goes down by one each time and the power of \\(x\\) goes up by one. The binomial theorem below turns this pattern into a formula for every positive whole-number power \\(n\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "In general, the rule or formula for expansion of a binomial raised to any positive integral power \\(n\\) is called the binomial theorem for positive integral index \\(n\\). For any positive integer \\(n\\),",
+            "bold": [
+              "binomial theorem for positive integral index"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[(a + x)^{n} = \\binom{n}{0}a^{n} + \\binom{n}{1}a^{n-1}x\\]\n\\[+ \\binom{n}{2}a^{n-2}x^{2} + \\dots\\]\n\\[+ \\binom{n}{r-1}a^{n-(r-1)}x^{r-1}\\]\n\\[+ \\binom{n}{r}a^{n-r}x^{r} + \\dots\\]\n\\[+ \\binom{n}{n-1} a x^{n-4} + \\binom{n}{n} x^{n} \\quad \\text{(A)}\\]",
+            "book_errors": [
+              "\\[+ \\binom{n}{n-1} a x^{n-4} + \\binom{n}{n} x^{n} \\quad \\text{(A)}\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the second-last term of (A) the book prints the power of \\(x\\) as \\(n-4\\) (\\(\\binom{n}{n-1} a x^{n-4}\\)). Correct: \\(\\binom{n}{n-1} a x^{n-1}\\). In every term the powers of \\(a\\) and \\(x\\) add up to \\(n\\), and here the power of \\(a\\) is 1."
+          },
+          {
+            "type": "paragraph",
+            "text": "or briefly\n\\[(a + x)^{n} = \\sum_{r=0}^{n}\\binom{n}{r}a^{n-r}x^{r}\\]\nwhere \\(a\\) and \\(x\\) are real numbers."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What do the symbols mean?\n\\(\\binom{n}{r}\\) is the number of combinations \\({}^{n}C_{r}\\) from Unit 7:\n\\[\\binom{n}{r} = \\dfrac{n!}{r!\\,(n-r)!}\\]\nFor example \\(\\binom{4}{2} = \\dfrac{4!}{2!\\,2!} = 6\\).\n\\(\\sum_{r=0}^{n}\\) means \"add the terms for \\(r = 0, 1, 2, \\dots, n\\)\". So the short form says exactly the same thing as the long form (A).\nWhy combinations? In \\((a + x)(a + x)\\cdots(a + x)\\) (\\(n\\) brackets) a term \\(a^{n-r}x^{r}\\) is made by choosing \\(x\\) from \\(r\\) of the brackets and \\(a\\) from the rest. There are \\(\\binom{n}{r}\\) ways to choose those \\(r\\) brackets."
+          },
+          {
+            "type": "paragraph",
+            "text": "The rule of expansion given above is called the binomial theorem and it also holds if \\(a\\) or \\(x\\) is complex.",
+            "bold": [
+              "binomial theorem"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Now we prove the Binomial theorem for any positive integer \\(n\\), using the principle of mathematical induction."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Plan of the proof (the same three steps as in 8.1):\n1. Base case: check the formula for \\(n = 1\\).\n2. Induction hypothesis: assume it is true for \\(n = k\\), that is (B).\n3. Show that then it is true for \\(n = k + 1\\), that is (C). We get there by multiplying (B) by \\((a + x)\\) and collecting like terms; Pascal's rule \\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k+1}{r}\\) does the rest."
+          },
+          {
+            "type": "paragraph",
+            "text": "Proof: Let \\(S(n)\\) be the statement given above as (A).",
+            "bold": [
+              "Proof:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Base Case: If \\(n = 1\\), we obtain\n\\[S(1):\\ (a + x)^{1} = \\binom{1}{0}a^{1} + \\binom{1}{1}a^{1-1}x\\]\n\\[= a + x\\]\nwhich is true. The base case is satisfied.",
+            "bold": [
+              "Base Case:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Induction of Hypothesis: Let us assume that the statement is true for any \\(n = k \\in \\mathbb{N}\\), then\n\\[S(k):\\ (a + x)^{k} = \\binom{k}{0}a^{k} + \\binom{k}{1}a^{k-1}x\\]\n\\[+ \\binom{k}{2}a^{k-2}x^{2} + \\dots\\]\n\\[+ \\binom{k}{r-1}a^{k-(r-1)}x^{r-1}\\]\n\\[+ \\binom{k}{r}a^{k-r}x^{r} + \\dots\\]\n\\[+ \\binom{k}{k-1}ax^{k-1} + \\binom{k}{k}x^{k} \\quad \\text{(B)}\\]",
+            "bold": [
+              "Induction of Hypothesis:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "We have to show that the statement is then true for \\(n = k + 1\\):\n\\[S(k+1):\\ (a + x)^{k+1} = \\binom{k+1}{0}a^{k+1}\\]\n\\[+ \\binom{k+1}{1}a^{k}x + \\binom{k+1}{2}a^{k-1}x^{2} + \\dots\\]\n\\[+ \\binom{k+1}{r-1}a^{k-r+2}x^{r-1}\\]\n\\[+ \\binom{k+1}{r}a^{k-r+1}x^{r} + \\dots\\]\n\\[+ \\binom{k+1}{k}ax^{k} + \\binom{k+1}{k+1}x^{k+1} \\quad \\text{(C)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Multiplying both sides of equation (B) by \\((a + x)\\), we have\n\\[(a + x)(a + x)^{k} = a(a + x)^{k} + x(a + x)^{k}\\]\nMultiplying every term of (B) by \\(a\\) gives\n\\[\\binom{k}{0}a^{k+1} + \\binom{k}{1}a^{k}x\\]\n\\[+ \\binom{k}{2}a^{k-1}x^{2} + \\dots\\]\n\\[+ \\binom{k}{r}a^{k-r+1}x^{r} + \\dots\\]\n\\[+ \\binom{k}{k}ax^{k}\\]\nand multiplying every term of (B) by \\(x\\) gives\n\\[\\binom{k}{0}a^{k}x + \\binom{k}{1}a^{k-1}x^{2} + \\dots\\]\n\\[+ \\binom{k}{r-1}a^{k-r+1}x^{r} + \\dots\\]\n\\[+ \\binom{k}{k-1}ax^{k} + \\binom{k}{k}x^{k+1}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Adding the two lines and collecting the terms with the same powers:\n\\[(a + x)^{k+1} = \\binom{k}{0}a^{k+1}\\]\n\\[+ \\left[\\binom{k}{1} + \\binom{k}{0}\\right]a^{k}x\\]\n\\[+ \\left[\\binom{k}{2} + \\binom{k}{1}\\right]a^{k-1}x^{2} + \\dots\\]\n\\[+ \\left[\\binom{k}{r} + \\binom{k}{r-1}\\right]a^{k-r+1}x^{r}\\]\n\\[+ \\dots + \\left[\\binom{k}{k} + \\binom{k}{k-1}\\right]ax^{k}\\]\n\\[+ \\binom{k}{k}x^{k+1}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "As \\(\\binom{k}{0} = \\binom{k+1}{0}\\), \\(\\binom{k}{k} = \\binom{k+1}{k+1}\\) and \\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k+1}{r}\\) for \\(0 \\le r \\le k\\),\n\\(\\therefore\\ (a + x)^{k-1}\\)\n\\[= \\binom{k+1}{0}a^{k+1} + \\binom{k+1}{1}a^{k}x\\]\n\\[+ \\binom{k+1}{2}a^{k-1}x^{2} + \\dots\\]\n\\[+ \\binom{k+1}{r}a^{k-r+1}x^{r} + \\dots\\]\n\\[+ \\binom{k+1}{k}ax^{k} + \\binom{k+1}{k+1}x^{k+1}\\]\n\\[\\text{...(D)}\\]",
+            "book_errors": [
+              "\\(\\therefore\\ (a + x)^{k-1}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The left side of (D) is printed as \\((a + x)^{k-1}\\). Correct: \\((a + x)^{k+1}\\), because we multiplied \\((a + x)^{k}\\) by \\((a + x)\\). In the same lines the scan also blurs the power of \\(a\\) in the \\(x^{2}\\) term; it is \\(a^{k-1}x^{2}\\) (the powers must add up to \\(k + 1\\)). The last coefficient in (C) should read \\(\\binom{k+1}{k+1}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is \\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k+1}{r}\\) (Pascal's rule)? Write both with factorials and take the common denominator \\(r!\\,(k-r+1)!\\):\n\\[\\dfrac{k!\\,(k-r+1)}{r!\\,(k-r+1)!} + \\dfrac{k!\\,r}{r!\\,(k-r+1)!}\\]\n\\[= \\dfrac{k!\\,(k+1)}{r!\\,(k+1-r)!}\\]\n\\[= \\dfrac{(k+1)!}{r!\\,(k+1-r)!} = \\binom{k+1}{r}\\]\nQuick check: \\(\\binom{4}{2} + \\binom{4}{1} = 6 + 4 = 10 = \\binom{5}{2}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "We find that if the statement is true for \\(n = k\\), then it is also true for \\(n = k + 1\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Conclusion: Hence, we conclude that the statement is true for all positive integral values of \\(n\\).",
+            "bold": [
+              "Conclusion:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "\\(\\binom{n}{0}, \\binom{n}{1}, \\binom{n}{2}, \\dots, \\binom{n}{n}\\) are called the binomial coefficients."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "The following points can be observed in the expansion of (a + x)^n"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) The number of terms in the expansion is one greater than its index.",
+              "(ii) The sum of exponents of \\(a\\) and \\(x\\) in each term of the expansion is equal to its index.",
+              "(iii) The exponent of \\(a\\) decreases from index to zero.",
+              "(iv) The exponent of \\(x\\) increases from zero to index.",
+              "(v) The coefficients of the terms equidistant from beginning and end of the expansion are equal as \\(\\binom{n}{r} = \\binom{n}{n-r}\\).",
+              "(vi) The \\((r + 1)\\)th term in the expansion is \\(\\binom{n}{r}a^{n-r}x^{r}\\) and we denote it as \\(T_{r+1}\\), i.e.,"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "T_{r+1} = \\binom{n}{r}a^{n-r}x^{r}",
+            "text_alt": "T sub r plus 1 equals n choose r, times a to the power n minus r, times x to the power r"
+          },
+          {
+            "type": "paragraph",
+            "text": "As all the terms of the expansion can be found from it by putting \\(r = 0, 1, 2, \\dots, n\\), so we call it as the general term of the expansion.",
+            "bold": [
+              "general term"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why \"\\(r + 1\\)\" and not \"\\(r\\)\"? Counting starts at \\(r = 0\\): \\(r = 0\\) gives the 1st term \\(T_{1} = \\binom{n}{0}a^{n}\\), \\(r = 1\\) gives the 2nd term, and so on. So the term number is always one more than \\(r\\).\nExample: in \\((a + x)^{3}\\), \\(r = 2\\) gives \\(T_{3} = \\binom{3}{2}a^{1}x^{2} = 3ax^{2}\\), the third term of (ii) above.\nWhen the binomial has a minus sign, such as \\((a - x)^{n}\\), write it as \\((a + (-x))^{n}\\); then \\(T_{r+1} = (-1)^{r}\\binom{n}{r}a^{n-r}x^{r}\\), so the signs alternate."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "For questions such as \"find the term involving \\(x^{5}\\)\" or \"find the term independent of \\(x\\)\", do not expand fully. Write \\(T_{r+1}\\), simplify the power of \\(x\\) to one expression in \\(r\\), set it equal to the required power and solve for \\(r\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "Expand \\(\\left(\\frac{a}{2} - \\frac{2}{a}\\right)^{6}\\) and also find its general term.",
+            "steps": [
+              "Given: the binomial \\(\\frac{a}{2} - \\frac{2}{a}\\) with index \\(n = 6\\).\nTo find: (1) the full expansion; (2) the general term \\(T_{r+1}\\).\nMethod: binomial theorem (A) with first term \\(\\frac{a}{2}\\) and second term \\(-\\frac{2}{a}\\) (the minus sign stays with the second term). There are \\(6 + 1 = 7\\) terms.",
+              "Step 1: Write the binomial as a sum\n\\[\\left(\\dfrac{a}{2} - \\dfrac{2}{a}\\right)^{6} = \\left(\\dfrac{a}{2} + \\left(\\dfrac{-2}{a}\\right)\\right)^{6}\\]\nWhy: the theorem is written for \\((a + x)^{n}\\); treating \\(-\\frac{2}{a}\\) as the second term makes the signs come out automatically.",
+              "Step 2: Apply the theorem, \\(r = 0\\) to \\(6\\)\n\\[= \\left(\\dfrac{a}{2}\\right)^{6} + \\binom{6}{1}\\left(\\dfrac{a}{2}\\right)^{5}\\left(-\\dfrac{2}{a}\\right)\\]\n\\[+ \\binom{6}{2}\\left(\\dfrac{a}{2}\\right)^{4}\\left(-\\dfrac{2}{a}\\right)^{2}\\]\n\\[+ \\binom{6}{3}\\left(\\dfrac{a}{2}\\right)^{3}\\left(-\\dfrac{2}{a}\\right)^{3}\\]\n\\[+ \\binom{6}{4}\\left(\\dfrac{a}{2}\\right)^{2}\\left(-\\dfrac{2}{a}\\right)^{4}\\]\n\\[+ \\binom{6}{5}\\left(\\dfrac{a}{2}\\right)\\left(-\\dfrac{2}{a}\\right)^{5} + \\left(-\\dfrac{2}{a}\\right)^{6}\\]\nWhy: the power of \\(\\frac{a}{2}\\) falls from 6 to 0 while the power of \\(-\\frac{2}{a}\\) rises from 0 to 6; in each term the two powers add up to 6.",
+              "Step 3: The coefficients\n\\[\\binom{6}{1} = 6,\\quad \\binom{6}{2} = \\dfrac{6 \\cdot 5}{2 \\cdot 1} = 15\\]\n\\[\\binom{6}{3} = \\dfrac{6 \\cdot 5 \\cdot 4}{3 \\cdot 2 \\cdot 1} = 20\\]\n\\[\\binom{6}{4} = 15,\\quad \\binom{6}{5} = 6\\]\nWhy: \\(\\binom{6}{4} = \\binom{6}{2}\\) and \\(\\binom{6}{5} = \\binom{6}{1}\\) by point (v), so only three need working out.",
+              "Step 4: Simplify each term\n\\[\\dfrac{a^{6}}{64},\\quad 6 \\cdot \\dfrac{a^{5}}{32}\\cdot\\left(-\\dfrac{2}{a}\\right) = -\\dfrac{3}{8}a^{4}\\]\n\\[15 \\cdot \\dfrac{a^{4}}{16}\\cdot\\dfrac{4}{a^{2}} = \\dfrac{15}{4}a^{2}\\]\n\\[20 \\cdot \\dfrac{a^{3}}{8}\\cdot\\left(-\\dfrac{8}{a^{3}}\\right) = -20\\]\n\\[15 \\cdot \\dfrac{a^{2}}{4}\\cdot\\dfrac{16}{a^{4}} = \\dfrac{60}{a^{2}}\\]\n\\[6 \\cdot \\dfrac{a}{2}\\cdot\\left(-\\dfrac{32}{a^{5}}\\right) = -\\dfrac{96}{a^{4}}\\]\n\\[\\left(-\\dfrac{2}{a}\\right)^{6} = \\dfrac{64}{a^{6}}\\]\nWhy: an even power of \\(-\\frac{2}{a}\\) is positive and an odd power is negative, so the signs alternate \\(+, -, +, -, \\dots\\)",
+              "Step 5: Write the expansion\n\\[= \\dfrac{a^{6}}{64} - \\dfrac{3}{8}a^{4} + \\dfrac{15}{4}a^{2} - 20\\]\n\\[+ \\dfrac{60}{a^{2}} - \\dfrac{96}{a^{4}} + \\dfrac{64}{a^{6}}\\]\nWhy: this collects the seven simplified terms in order.",
+              "Step 6: The general term\n\\[T_{r+1} = \\binom{6}{r}\\left(\\dfrac{a}{2}\\right)^{6-r}\\left(-\\dfrac{2}{a}\\right)^{r}\\]\n\\[= \\binom{6}{r}\\dfrac{a^{6-r}}{2^{6-r}}(-1)^{r}\\dfrac{2^{r}}{a^{r}}\\]\n\\[= (-1)^{r}\\binom{6}{r}\\dfrac{a^{6-r}\\cdot a^{-r}}{2^{6-r}\\cdot 2^{-r}}\\]\n\\[= (-1)^{r}\\binom{6}{r}\\dfrac{a^{6-2r}}{2^{6-2r}}\\]\n\\[= (-1)^{r}\\binom{6}{r}\\left(\\dfrac{a}{2}\\right)^{6-2r}\\]\nWhy: \\(\\frac{2^{r}}{a^{r}}\\) is moved up as \\(a^{-r}\\) and \\(2^{-r}\\); then the laws of exponents add the powers: \\(a^{6-r}a^{-r} = a^{6-2r}\\).",
+              "Check:\nPut \\(r = 3\\) in the general term: \\((-1)^{3}\\cdot 20\\cdot\\left(\\frac{a}{2}\\right)^{0} = -20\\), the same as the 4th term of the expansion. Also put \\(a = 2\\): the left side is \\((1 - 1)^{6} = 0\\), and the right side is \\(1 - 6 + 15 - 20 + 15 - 6 + 1 = 0\\)."
+            ],
+            "answer": "\\(\\left(\\frac{a}{2} - \\frac{2}{a}\\right)^{6} = \\frac{a^{6}}{64} - \\frac{3}{8}a^{4} + \\frac{15}{4}a^{2} - 20 + \\frac{60}{a^{2}} - \\frac{96}{a^{4}} + \\frac{64}{a^{6}}\\); general term \\(T_{r+1} = (-1)^{r}\\binom{6}{r}\\left(\\frac{a}{2}\\right)^{6-2r}\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "Evaluate \\((9.9)^{5}\\) using binomial theorem.",
+            "steps": [
+              "Given: \\((9.9)^{5}\\).\nTo find: its value without a calculator.\nMethod: write \\(9.9\\) as \\(10 - 0.1\\). Powers of 10 and of 0.1 are easy to work out, so the binomial theorem with \\(a = 10\\), \\(x = -0.1\\), \\(n = 5\\) gives the value quickly.",
+              "Step 1: Split the number\n\\[(9.9)^{5} = (10 - 0.1)^{5}\\]\nWhy: 10 is the nearest easy number; the small part \\(-0.1\\) makes each new term much smaller than the one before.",
+              "Step 2: Expand (coefficients 1, 5, 10, 10, 5, 1)\n\\[= (10)^{5} + 5(10)^{4}(-0.1)\\]\n\\[+ 10(10)^{3}(-0.1)^{2} + 10(10)^{2}(-0.1)^{3}\\]\n\\[+ 5(10)(-0.1)^{4} + (-0.1)^{5}\\]\nWhy: \\(\\binom{5}{0}, \\dots, \\binom{5}{5} = 1, 5, 10, 10, 5, 1\\), and the power of 10 falls from 5 to 0 as the power of \\(-0.1\\) rises.",
+              "Step 3: Work out each term\n\\[= 100000 - 5000 + 100 - 1\\]\n\\[+ 0.005 - 0.00001\\]\nWhy: \\(5 \\times 10000 \\times 0.1 = 5000\\), \\(10 \\times 1000 \\times 0.01 = 100\\), \\(10 \\times 100 \\times 0.001 = 1\\), \\(5 \\times 10 \\times 0.0001 = 0.005\\) and \\((0.1)^{5} = 0.00001\\); odd powers of \\(-0.1\\) are negative.",
+              "Step 4: The same line in the book\nThe book prints this line as\n\\[= 100000 - 5000 + 100 - 1 + 0.005 - .000001\\]\nThe last term is \\((-0.1)^{5} = -0.00001\\) (five decimal places), not \\(-0.000001\\).\nWhy: we show the printed line so that you can match it with your book; the next step uses the correct value, which is also what the book uses in its next line.",
+              "Step 5: Add the positive and the negative parts\n\\[= 100100.005 - 5001.00001\\]\n\\[= 95099.00499\\]\nWhy: grouping the positive terms \\((100000 + 100 + 0.005)\\) and the negative terms \\((5000 + 1 + 0.00001)\\) makes the subtraction easier and safer.",
+              "Check:\n\\(9.9^{2} = 98.01\\), \\(9.9^{4} = 98.01^{2} = 9605.9601\\), and \\(9.9^{5} = 9605.9601 \\times 9.9 = 95099.00499\\). The two answers agree."
+            ],
+            "answer": "\\((9.9)^{5} = 95099.00499\\)",
+            "book_errors": [
+              "\\[= 100000 - 5000 + 100 - 1 + 0.005 - .000001\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 11: the book prints the last term as \\(-.000001\\). Correct: \\((-0.1)^{5} = -0.00001\\). The book's next line and its final answer \\(95099.00499\\) already use the correct value."
+          },
+          {
+            "type": "example",
+            "title": "Example 12",
+            "problem": "Find the specified term in the expansion of \\(\\left(\\frac{3}{2}x - \\frac{1}{3x}\\right)^{11}\\):\n(i) the term involving \\(x^{5}\\)\n(ii) the fifth term\n(iii) the sixth term from the end\n(iv) coefficient of the term involving \\(x^{-1}\\)",
+            "steps": [
+              "Given: \\(\\left(\\frac{3}{2}x - \\frac{1}{3x}\\right)^{11}\\), so \\(n = 11\\), first term \\(\\frac{3}{2}x\\), second term \\(-\\frac{1}{3x}\\). There are 12 terms.\nTo find: four particular terms (or a coefficient).\nMethod: write the general term \\(T_{r+1}\\) once, simplify it, and then choose \\(r\\) for each part. This is much faster than writing all 12 terms.",
+              "Step 1: General term\n\\[T_{r+1} = \\binom{11}{r}\\left(\\dfrac{3}{2}x\\right)^{11-r}\\left(-\\dfrac{1}{3x}\\right)^{r}\\]\n\\[= \\binom{11}{r}\\dfrac{3^{11-r}}{2^{11-r}}x^{11-r}(-1)^{r}3^{-r}x^{-r}\\]\n\\[= (-1)^{r}\\binom{11}{r}\\dfrac{3^{11-2r}}{2^{11-r}}x^{11-2r}\\]\nWhy: \\(\\left(-\\frac{1}{3x}\\right)^{r} = (-1)^{r}3^{-r}x^{-r}\\); then the powers of 3 combine to \\(3^{11-2r}\\) and the powers of \\(x\\) to \\(x^{11-2r}\\).",
+              "Step 2: (i) Find \\(r\\) for \\(x^{5}\\)\n\\[11 - 2r = 5 \\Rightarrow -2r = 5 - 11\\]\n\\[\\Rightarrow r = 3\\]\nThus \\(T_{4}\\) involves \\(x^{5}\\).\nWhy: the power of \\(x\\) in \\(T_{r+1}\\) is \\(11 - 2r\\); it must equal 5.",
+              "Step 3: (i) Compute \\(T_{4}\\)\n\\[T_{4} = (-1)^{3}\\binom{11}{3}\\dfrac{3^{11-6}}{2^{11-3}}x^{11-6}\\]\n\\[= (-1)\\dfrac{11 \\cdot 10 \\cdot 9}{3 \\cdot 2 \\cdot 1}\\cdot\\dfrac{3^{5}}{2^{8}}x^{5}\\]\n\\[= -\\dfrac{165 \\times 243}{256}x^{5}\\]\n\\[= -\\dfrac{40095}{256}x^{5}\\]\nWhy: \\(\\binom{11}{3} = 165\\), \\(3^{5} = 243\\), \\(2^{8} = 256\\); \\(r = 3\\) is odd, so the term is negative.",
+              "Step 4: (ii) The fifth term, \\(r = 4\\)\n\\[T_{5} = (-1)^{4}\\binom{11}{4}\\dfrac{3^{11-8}}{2^{11-4}}x^{11-8}\\]\n\\[= \\dfrac{11 \\cdot 10 \\cdot 9 \\cdot 8}{4 \\cdot 3 \\cdot 2 \\cdot 1}\\cdot\\dfrac{3^{3}}{2^{7}}x^{3}\\]\n\\[= \\dfrac{330 \\times 27}{128}x^{3} = \\dfrac{165 \\times 27}{64}x^{3}\\]\n\\[= \\dfrac{4455}{64}x^{3}\\]\nWhy: the 5th term is \\(T_{r+1}\\) with \\(r + 1 = 5\\). \\(\\binom{11}{4} = 330\\), and \\(330/128 = 165/64\\).",
+              "Step 5: (iii) Which term is 6th from the end?\nThere are \\(11 + 1 = 12\\) terms. The 6th term from the end has \\(12 - 6 = 6\\) terms before it, so it is the \\((6 + 1)\\)th = 7th term from the beginning, i.e. \\(r = 6\\).\nWhy: in general, the \\(m\\)th term from the end of \\(N\\) terms is the \\((N - m + 1)\\)th term from the start.",
+              "Step 6: (iii) Compute \\(T_{7}\\)\n\\[T_{7} = (-1)^{6}\\binom{11}{6}\\dfrac{3^{11-12}}{2^{11-6}}x^{11-12}\\]\n\\[= \\dfrac{11 \\cdot 10 \\cdot 9 \\cdot 8 \\cdot 7}{5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}\\cdot\\dfrac{3^{-1}}{2^{5}}x^{-1}\\]\n\\[= \\dfrac{462}{3 \\times 32}\\cdot\\dfrac{1}{x}\\]\n\\[= \\dfrac{77}{16x}\\]\nWhy: \\(\\binom{11}{6} = \\binom{11}{5} = 462\\); \\(3^{-1} = \\frac{1}{3}\\) and \\(x^{-1} = \\frac{1}{x}\\); \\(462/96 = 77/16\\).",
+              "Step 7: (iv) The term involving \\(x^{-1}\\)\n\\[11 - 2r = -1 \\Rightarrow r = 6\\]\nSo it is the same term \\(T_{7} = \\frac{77}{16}x^{-1}\\), and its coefficient is \\(\\frac{77}{16}\\).\nWhy: the coefficient is the number in front of \\(x^{-1}\\), without the \\(x\\).",
+              "Check:\nIn each answer the power of \\(x\\) agrees with \\(11 - 2r\\): \\(r = 3\\) gives 5, \\(r = 4\\) gives 3, \\(r = 6\\) gives \\(-1\\). The signs agree with \\((-1)^{r}\\): negative for \\(r = 3\\), positive for \\(r = 4\\) and \\(r = 6\\). (A full expansion by computer algebra gives the same coefficients \\(-\\frac{40095}{256}\\), \\(\\frac{4455}{64}\\), \\(\\frac{77}{16}\\).)"
+            ],
+            "answer": "(i) \\(T_{4} = -\\frac{40095}{256}x^{5}\\); (ii) \\(T_{5} = \\frac{4455}{64}x^{3}\\); (iii) \\(T_{7} = \\frac{77}{16x}\\); (iv) coefficient of \\(x^{-1}\\) is \\(\\frac{77}{16}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\((a + x)^{n} = \\sum_{r=0}^{n}\\binom{n}{r}a^{n-r}x^{r}\\) for every positive integer \\(n\\); it has \\(n + 1\\) terms.\n2. The powers of \\(a\\) and \\(x\\) in every term add up to \\(n\\).\n3. \\(\\binom{n}{r} = \\binom{n}{n-r}\\): coefficients at equal distance from both ends are equal.\n4. General term: \\(T_{r+1} = \\binom{n}{r}a^{n-r}x^{r}\\). For \\((a - x)^{n}\\) multiply by \\((-1)^{r}\\).\n5. The \\(m\\)th term from the end is the \\((n - m + 2)\\)th term from the beginning.\n6. The theorem is proved by mathematical induction using Pascal's rule \\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k+1}{r}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Taking \\(T_{r}\\) instead of \\(T_{r+1}\\): the 5th term needs \\(r = 4\\), not \\(r = 5\\).\n2. Dropping the minus sign of the second term: in \\(\\left(\\frac{a}{2} - \\frac{2}{a}\\right)^{6}\\) the second term is \\(-\\frac{2}{a}\\), so the signs alternate.\n3. Raising only part of a term to the power: \\(\\left(\\frac{3}{2}x\\right)^{2} = \\frac{9}{4}x^{2}\\), not \\(\\frac{3}{2}x^{2}\\).\n4. Forgetting that the number of terms is \\(n + 1\\) when counting from the end."
+          }
+        ]
+      }
+    }
+  ]
+}

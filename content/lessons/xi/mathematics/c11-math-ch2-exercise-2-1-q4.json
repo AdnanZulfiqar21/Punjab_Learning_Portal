@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH2-EXERCISE-2-1-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch2",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch2/u-exercise-2-1-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 32,
+          "pdf_to": 32,
+          "note": "Exercise 2.1, Question 4: Exercise 2.1, book pages 26-27: Q1-Q11 (33 parts)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) Find the domain and the range of the function \\(g\\) defined below: \\(g(x) = 5 - x\\).",
+            "explanation": "Domain: all inputs we may use. Range: all outputs that actually come out.\n\\(g(x) = 5 - x\\) is a straight line with no root and no fraction.\nPlan: check what could go wrong for the domain; solve \\(y = 5 - x\\) for \\(x\\) for the range.",
+            "steps": [
+              "Given: \\(g(x) = 5 - x\\).\nTo find: domain and range.\nMethod: Only a square root of a negative number or division by zero can restrict the domain. For the range, check that every \\(y\\) is reached.",
+              "Domain\n\\[\\text{Domain } g = (-\\infty, \\infty)\\]\nWhy: \\(5 - x\\) can be worked out for every real \\(x\\).",
+              "Range\n\\[y = 5 - x \\Rightarrow x = 5 - y\\]\nWhy: For any real \\(y\\), the input \\(x = 5 - y\\) is real and gives \\(g(5 - y) = 5 - (5 - y) = y\\). So every real \\(y\\) is an output.",
+              "Check\n\\[y = 100:\\; x = -95,\\ g(-95) = 100 \\;\\checkmark\\]\nWhy: Any chosen output really comes out."
+            ],
+            "final_answer": "Domain \\(g = (-\\infty, \\infty)\\), Range \\(g = (-\\infty, \\infty)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) Find the domain and the range of the function \\(g\\) defined below: \\(g(x) = \\sqrt{x + 2}\\).",
+            "explanation": "A square-root function: the number under the root must not be negative.\nWe must find the allowed inputs and the outputs.\nPlan: solve \\(x + 2 \\ge 0\\); then use \"a square root is never negative\".",
+            "steps": [
+              "Given: \\(g(x) = \\sqrt{x + 2}\\).\nTo find: domain and range.\nMethod: Domain from \\(x + 2 \\ge 0\\). Range: \\(\\sqrt{\\ }\\) gives \\(0\\) or positive values only.",
+              "Domain\n\\[x + 2 \\ge 0 \\Rightarrow x \\ge -2\\]\n\\[\\text{Domain } g = [-2, \\infty)\\]\nWhy: The root of a negative number is not real. \\(x = -2\\) is allowed (\\(\\sqrt{0} = 0\\)), so the bracket is square.",
+              "Range\n\\[g(-2) = 0,\\ g(2) = 2,\\ g(98) = 10\\]\n\\[\\text{Range } g = [0, \\infty)\\]\nWhy: The smallest output is \\(0\\) at \\(x = -2\\); outputs grow without limit. Any \\(y \\ge 0\\) comes from \\(x = y^2 - 2 \\ge -2\\).",
+              "Check\n\\[y = 3:\\; x = 7,\\ \\sqrt{9} = 3 \\;\\checkmark\\]\nWhy: A chosen output is really produced, and no negative output is possible."
+            ],
+            "final_answer": "Domain \\(g = [-2, \\infty)\\), Range \\(g = [0, \\infty)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iii)",
+            "prompt": "4 (iii) [printed as (iv); the book skips the label (iii)] Find the domain and the range of the function \\(g\\) defined below: \\(g(x) = \\begin{cases} 6x + 7, & x \\le -2 \\\\ 4 - 3x, & x > -2 \\end{cases}\\).",
+            "explanation": "A piecewise function: one rule for \\(x \\le -2\\), another for \\(x > -2\\).\nWe must find the domain and the range.\nPlan: find the outputs of each piece on its own interval (watch the endpoint), then take the union.",
+            "steps": [
+              "Given: \\(g(x) = 6x + 7\\) for \\(x \\le -2\\); \\(g(x) = 4 - 3x\\) for \\(x > -2\\).\nTo find: domain and range.\nMethod: Domain: every \\(x\\) belongs to one piece. Range: union of the outputs of the two pieces.",
+              "Domain\n\\[(-\\infty, -2] \\cup (-2, \\infty) = (-\\infty, \\infty)\\]\nWhy: Every real number is either \\(\\le -2\\) or \\(> -2\\), and both rules are lines (no roots, no fractions).",
+              "Outputs of piece 1 (\\(x \\le -2\\))\n\\[g(-2) = 6(-2) + 7 = -5\\]\n\\[\\text{outputs } (-\\infty, -5]\\]\nWhy: Slope 6 is positive, so the largest output is at the largest allowed \\(x = -2\\), which is included. Going left, outputs fall without limit.",
+              "Outputs of piece 2 (\\(x > -2\\))\n\\[4 - 3(-2) = 10 \\text{ (not reached)}\\]\n\\[\\text{outputs } (-\\infty, 10)\\]\nWhy: Slope \\(-3\\) is negative, so outputs are largest just to the right of \\(-2\\): close to 10 but never 10, because \\(x = -2\\) is not in this piece. Going right, outputs fall without limit.",
+              "Union of the pieces\n\\[(-\\infty, -5] \\cup (-\\infty, 10) = (-\\infty, 10)\\]\nWhy: \\((-\\infty, -5]\\) lies inside \\((-\\infty, 10)\\). No input gives 10 or more.",
+              "Check\n\\[x = -1.9:\\; g = 4 + 5.7 = 9.7\\]\n\\[x = -3:\\; g = -18 + 7 = -11\\]\nWhy: Outputs come close to 10 but stay below it; see the graph. An output like 12 would need \\(4 - 3x = 12\\), \\(x = -\\frac{8}{3}\\), which is not \\(> -2\\)."
+            ],
+            "final_answer": "Domain \\(g = (-\\infty, \\infty)\\), Range \\(g = (-\\infty, 10)\\)",
+            "answer_figure": {
+              "$asset": "c11-math-ch2-fig-ex2-1-q4-piecewise",
+              "alt": "Graph of the piecewise function g on axes from x = -4 to 4. For x up to -2 it is the steep rising line y = 6x + 7, ending in a filled dot at (-2, -5). For x greater than -2 it is the falling line y = 4 - 3x, starting at an open circle at (-2, 10) and going down to the right through (0, 4) and crossing the x-axis at 4/3. A dashed horizontal line at y = 10 shows the height that is never reached.",
+              "caption": "Exercise 2.1 Q4 (printed (iv)): the two pieces of g; outputs fill everything below 10 (original drawing)"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints five answers, (i) to (v), for a question with four printed parts, and its (iv) gives Range \\(g = (-\\infty, \\infty)\\) for this piecewise function. That is wrong: no input gives an output of 10 or more. The correct range is \\((-\\infty, 10)\\); the domain \\((-\\infty, \\infty)\\) is right."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iv)",
+            "prompt": "4 (iv) [printed as (v); the book skips the label (iii)] Find the domain and the range of the function \\(g\\) defined below: \\(g(x) = |x - 5|\\).",
+            "explanation": "An absolute-value function: \\(|\\ |\\) gives the size of a number without its sign.\nWe must find the domain and the range.\nPlan: every real number has an absolute value; an absolute value is never negative.",
+            "steps": [
+              "Given: \\(g(x) = |x - 5|\\).\nTo find: domain and range.\nMethod: Domain: nothing can go wrong. Range: \\(|x - 5| \\ge 0\\), with \\(0\\) at \\(x = 5\\).",
+              "Domain\n\\[\\text{Domain } g = (-\\infty, \\infty)\\]\nWhy: \\(x - 5\\) and its absolute value exist for every real \\(x\\).",
+              "Range\n\\[g(5) = 0,\\ g(8) = 3,\\ g(2) = 3\\]\n\\[\\text{Range } g = [0, \\infty)\\]\nWhy: The smallest output is 0 (at \\(x = 5\\)). Any \\(y \\ge 0\\) comes from \\(x = 5 + y\\). Negative outputs are impossible.",
+              "Check\n\\[y = 7:\\; x = 12,\\ |12 - 5| = 7 \\;\\checkmark\\]\nWhy: A chosen output is produced; \\(g(x) = -1\\) has no solution."
+            ],
+            "final_answer": "Domain \\(g = (-\\infty, \\infty)\\), Range \\(g = [0, \\infty)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key's (v) prints Range \\(g = (-\\infty, 2) \\cup [7, \\infty)\\) for \\(g(x) = |x - 5|\\). That is wrong: an absolute value is never negative, and every \\(y \\ge 0\\) is reached. The correct answer is Domain \\((-\\infty, \\infty)\\), Range \\([0, \\infty)\\). (The key's extra \"(iii)\" line, Domain \\((-\\infty, \\infty)\\), Range \\([0, \\infty)\\), is in fact this answer.)"
+          }
+        ]
+      }
+    }
+  ]
+}

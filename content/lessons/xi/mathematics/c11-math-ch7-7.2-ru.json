@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-7.2-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/7.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 131,
+          "pdf_to": 133,
+          "note": "Book p. 126-128: 7.2 definition, nPr side box, books and WORD, Challenge, Do you know (Rubik's Cube), theorem and proof, Examples 4-6, Reason for 0! = 1, Try yourself. Teaching notes, Key points, Common mistakes are ours."
+        }
+      ],
+      "title": "7.2 Permutation (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH7-7.2",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Pichle sabaq mein hum ne Fundamental Principle of Counting seekha: kaam stages mein ho to har stage ke options zarb kar do. Aaj usi usool ka sab se ahem istemal dekhenge: cheezon ko ek khaas tarteeb (order) mein lagane ke kitne tareeqe hain. Isi ko permutation kehte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ke alfaz mein: fundamental principle of counting ka ek ahem istemal yeh maloom karna hai ke objects ko tarteeb se kitne tareeqon se lagaya ja sakta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ek roz-marra ki misaal se shuru karte hain. Aap ke ghar mein teen bhai behan hain: Ahmad, Sana aur Hamza. Dastarkhwan par teen kursiyan hain. Agar Ahmad pehli kursi par, Sana doosri par aur Hamza teesri par baithe, to yeh ek tarteeb hai. Agar Sana pehli kursi par aa jaye to tarteeb badal gayi, halan ke log wahi hain. Permutation isi farq ko ginti hai: log (ya cheezein) wahi, magar jagahein badalne se nayi tarteeb."
+          },
+          {
+            "type": "paragraph",
+            "text": "Definition: kisi set ke tamam ya kuch objects ko ek khaas order (tarteeb) mein lagana permutation kehlata hai. \\(n\\) objects ke set mein se \\(r\\ (\\le n)\\) objects le kar banne wali permutations ki tadaad ko \\({}^{n}P_{r}\\) ya \\(P(n, r)\\) likhte hain.",
+            "bold": [
+              "Definition:"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "{}^{n}P_{r} = \\dfrac{n!}{(n-r)!}, \\quad r \\le n",
+            "text_alt": "n P r equals n factorial over (n minus r) factorial, when r is at most n"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "\\(n\\) = kul cheezon/objects ki tadaad\n\\(r\\) = chuni gayi (lagayi jane wali) cheezon ki tadaad"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\({}^{n}P_{r}\\) ko \"n P r\" parhte hain. Matlab: \\(n\\) mukhtalif cheezon mein se \\(r\\) cheezein le kar unhein tarteeb se lagane ke tareeqe, aur koi cheez do dafa istemal nahin hoti.\nSab se ahem lafz hai order (tarteeb). AB aur BA do alag permutations hain, jaise roll number 12 aur 21 alag hain. Agar order ki parwah na ho (sirf yeh dekhna ho ke kaun chuna gaya) to woh combination hai, jo 7.4 mein aayega.\nShart \\(r \\le n\\) kyun? Kyun ke 5 kitaabon se 7 jagahein nahin bhari ja saktin jab koi kitab dobara na aaye."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab fundamental principle of counting ke mutabiq do misaalein dekhte hain:"
+          },
+          {
+            "type": "paragraph",
+            "text": "(i) Grade 1, 2 aur 3 ki mathematics ki teen kitaabein (agar kitaabein mukhtalif hon) ek qatar mein, sab ek saath le kar, itne tareeqon se lagayi ja sakti hain:\n\\[{}^{n}P_{r} = {}^{3}P_{3} \\quad (\\because n = r)\\]\n\\[= \\dfrac{3!}{(3-3)!} = \\dfrac{3!}{0!} \\quad (\\because 0! = 1)\\]\n\\[= 3! = 3 \\cdot 2 \\cdot 1 = 6 \\text{ ways}\\]\nYahan \\(n = r = 3\\) hai kyun ke teeno kitaabein lagani hain. Neeche figure mein yeh chhe tarteebein ek ek kar ke dikhayi gayi hain; khud gin kar tasdeeq kijiye."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch7-fig-three-books",
+            "alt": "Teen kitaabon 1, 2, 3 ki chhe qataarein: 123, 132, 213, 231, 321, 312.",
+            "caption": "Figure: teen kitaabon ki chhe tarteebein, 3P3 = 6 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "(ii) Lafz WORD ke huroof (letters) ko sab ek saath le kar likhne ke tareeqe:\n\\[{}^{n}P_{r} = {}^{4}P_{4} \\quad (\\because n = r)\\]\n\\[= \\dfrac{4!}{(4-4)!} = \\dfrac{4!}{0!} \\quad (\\because 0! = 1)\\]\n\\[= 4! = 4 \\cdot 3 \\cdot 2 \\cdot 1 = 24 \\text{ ways}\\]\nWORD ke chaaron huroof mukhtalif hain, is liye yeh seedhi permutation hai. (Agar koi harf dohraya hota, jaise BITTER mein T, to 7.3 wala formula lagta.)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Kya aap \"WORD\" ki kul permutations tasveer (pictorially) bana kar dikha sakte hain?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Tasveer ka tareeqa: ek tree banaiye. Pehle harf ke liye 4 shaakhein (W, O, R, D); har ek se doosre harf ke liye 3 shaakhein; phir 2; phir 1. Kul siray: \\(4 \\times 3 \\times 2 \\times 1 = 24\\).\nW se shuru hone wale 6 lafz: WORD, WODR, WROD, WRDO, WDOR, WDRO. Isi tarah O, R aur D se bhi 6, 6 lafz bante hain, is liye \\(4 \\times 6 = 24\\).\nKyun yeh tareeqa achha hai: is se aap ko yaqeen ho jata hai ke formula koi jaadu nahin, balke wahi ginti hai jo aap haath se karte."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Do you know!",
+            "text": "1974 mein Erno Rubik ne ek mashhoor puzzle ijaad kiya; is puzzle ka har ghumao (turn) mukhtalif rangon ki ek permutation dikhata hai. Is puzzle ka naam \"Rubik's Cube\" hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Theorem"
+          },
+          {
+            "type": "paragraph",
+            "text": "Saabit kijiye ke \\({}^{n}P_{r} = n(n-1)(n-2)\\cdots(n-r+1) = \\dfrac{n!}{(n-r)!}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Theorem ka matlab hai ek aisa bayan jo saboot (proof) se saabit kiya jaye. Yahan humein dikhana hai ke permutation ke tareeqe do shaklon mein likhe ja sakte hain: ek lamba product, aur ek factorial wala fraction. Saboot mein koi naya idea nahin, bas wahi kursiyon wali soch hai jo factorial mein dekhi thi, sirf yeh farq hai ke ab saari jagahein nahin, sirf \\(r\\) jagahein bharni hain."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Proof"
+          },
+          {
+            "type": "paragraph",
+            "text": "Sab se pehle soorat-e-haal samajhte hain: humare paas \\(n\\) mukhtalif objects hain aur \\(r\\) jagahein bharni hain. Pehli jagah \\(n\\) tareeqon se bhari ja sakti hai (koi bhi object). Repetition (dobara istemal) ki ijazat nahin, is liye ek object lagane ke baad \\((n-1)\\) objects bachte hain, aur doosri jagah \\((n-1)\\) tareeqon se bharti hai. Isi tarah teesri jagah \\((n-2)\\) tareeqon se, aur yeh silsila \\(r\\)-veen jagah tak chalta hai, jo \\(n-(r-1) = n-r+1\\) tareeqon se bharti hai. Is liye Fundamental Principle of Counting se, \\(n\\) mukhtalif objects \\(r\\) jagahein \\(n(n-1)(n-2)\\cdots(n-r+1)\\) tareeqon se bhar sakte hain.",
+            "bold": [
+              "Fundamental Principle of Counting"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[{}^{n}P_{r} = n(n-1)(n-2)\\cdots(n-r+1)\\]\n\\[= \\dfrac{n(n-1)\\cdots(n-r+1)\\,(n-r)!}{(n-r)!}\\]\n\\[{}^{n}P_{r} = \\dfrac{n!}{(n-r)!}\\]\nDoosri line mein upar aur neeche \\((n-r)!\\) se zarb kiya gaya hai; is se value nahin badalti, magar upar ka product 1 tak poora ho kar \\(n!\\) ban jata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(r\\)-veen jagah ke liye \\(n - r + 1\\) kyun? Kyun ke \\(r\\)-veen jagah se pehle \\(r - 1\\) jagahein bhar chuki hain, yani \\(r - 1\\) objects istemal ho chuke. Bache: \\(n - (r - 1) = n - r + 1\\). Misal: 10 objects aur teesri jagah (\\(r = 3\\)): pehle 2 lag chuke, bache \\(10 - 2 = 8\\).\nEk misaal se dono formulas milaiye: \\({}^{5}P_{2} = 5 \\times 4 = 20\\) (do factors, 5 se shuru). Aur \\(\\frac{5!}{3!} = \\frac{120}{6} = 20\\). Dono barabar!\nYaad rakhne ka tareeqa: product wali shakal mein bilkul \\(r\\) factors hote hain, \\(n\\) se shuru ho kar neeche ki taraf. Chhote numbers mein yeh shakal factorial wale fraction se tez hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki misaalein. Har misaal mein pehle poochiye: kya order ahem hai? Kya koi cheez dobara aa sakti hai? Kya koi group ikattha rehna chahiye?"
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "How many different 4-digit numbers can be formed out of the digits 1, 2, 3, 4, 5, 6, when no digit is repeated?",
+            "steps": [
+              "Given: 6 mukhtalif digits; har number mein 4 digits, koi digit dobara nahin.\nTo find: kitne mukhtalif 4-digit numbers ban sakte hain.\nMethod: sab se pehle dekhte hain ke order ahem hai ya nahin. 1234 aur 4321 do alag numbers hain, yani order ahem hai, aur digit dohraya nahin ja sakta. Is liye yeh \\({}^{6}P_{4}\\) hai.",
+              "Step 1: n aur r pehchanein\n\\[n = 6,\\quad r = 4\\]\nKyun: n woh hai jitne digits humare paas mojood hain (6), aur r woh jitni jagahein bharni hain (har number ke 4 digits).",
+              "Step 2: Formula lagayein\n\\[{}^{6}P_{4} = \\dfrac{6!}{(6-4)!} = \\dfrac{6!}{2!}\\]\n\\[= \\dfrac{6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}{2 \\cdot 1}\\]\n\\[= 6 \\cdot 5 \\cdot 4 \\cdot 3 = 360\\]\nKyun: \\(2!\\) cancel ho jata hai aur 6 se shuru hone wale 4 factors bachte hain, bilkul jaise product wala formula \\(n(n-1)\\cdots(n-r+1)\\) kehta hai.\nDhyan dein: neeche \\((n-r)! = 2!\\) aata hai, \\(4!\\) nahin.",
+              "Tasdeeq: jagah ba jagah\n\\[6 \\times 5 \\times 4 \\times 3 = 360\\]\nHazaar wali jagah ke 6 options, phir sau wali ke 5 (ek digit istemal ho chuka), das wali ke 4 aur ikaai wali ke 3. Wahi jawab aaya."
+            ],
+            "answer": "360 mukhtalif 4-digit numbers ban sakte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Agar isi sawal mein digits dohraye ja sakte (repetition allowed), to jawab kya hota?\nAb har jagah ke liye poore 6 options hain, kyun ke istemal shuda digit dobara aa sakta hai: \\(6 \\times 6 \\times 6 \\times 6 = 6^{4} = 1296\\).\nKyun farq hai: \\({}^{n}P_{r}\\) sirf tab lagta hai jab repetition na ho. Repetition ho to har stage ke options kam nahin hote, aur seedha fundamental principle se \\(n^{r}\\) aata hai.\nEk aur sawal: in 360 numbers mein se kitne 6 se shuru hote hain? Pehli jagah fix (6), baqi 3 jagahon ke liye 5 digits: \\({}^{5}P_{3} = 5 \\times 4 \\times 3 = 60\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Reason for defining 0! = 1",
+            "text": "Agar \\(n = r\\) ho to\n\\[{}^{n}P_{n} = \\dfrac{n!}{(n-n)!} = \\dfrac{n!}{0!}\\]\nLekin tamam \\(n\\) objects ko lagane ke tareeqe \\(n(n-1)\\cdots 3 \\cdot 2 \\cdot 1 = n!\\) hain, is liye\n\\[n! = \\dfrac{n!}{0!} \\Rightarrow 0! = 1\\]\nYani \\(0! = 1\\) koi zabardasti ka rule nahin; yeh is liye rakha gaya ke formula \\(r = n\\) par bhi sahi kaam kare."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab ek mushkil qisam ka sawal aata hai jis mein pabandiyan (restrictions) hain. Aise sawalon mein ghabrane ki zaroorat nahin. Har pabandi ko alag part mein dekha jata hai: pehle baghair pabandi ke kul tareeqe, phir \"ikattha rakho\" wali sharat. Shelf ko ek lambi qatar samjhiye jis mein 9 khaane hain; har khaane mein ek kitab aani hai. Jab kitab kehti hai \"same subject together\", to matlab hai ke maslan chaaron M kitaabein lagataar khaanon mein hon, beech mein koi aur kitab na ho. Figure mein yeh teeno soortein dikhayi gayi hain; har part parhte waqt figure ko saath dekhte rahiye."
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "In how many ways can a set of 4 different mathematics books, 3 different physics books and 2 different chemistry books be placed on a shelf with a space for 9 books, if: (a) all the books are kept without any restriction; (b) all the books of the same subject are kept together; (c) only the mathematics books are kept together?",
+            "steps": [
+              "Given: 4 mathematics (M), 3 physics (P) aur 2 chemistry (C) kitaabein, sab mukhtalif; shelf par 9 jagahein.\nTo find: (a), (b) aur (c) teeno soorton mein tarteebon ki tadaad.\nMethod: qatar mein lagana permutation hai. Jo group ikattha rehna chahiye use ek unit (block, yani ek gathri) samjhiye; pehle units ko arrange kijiye, phir har block ke andar kitaabon ko, aur sab ko zarb kijiye (Fundamental Principle of Counting).",
+              "Step 1: (a) Koi pabandi nahin\n\\[\\text{Total books} = 4 + 3 + 2 = 9\\]\n\\[{}^{9}P_{9} = 9! = 9 \\cdot 8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1\\]\n\\[= 362880 \\text{ ways}\\]\nKyun: 9 mukhtalif kitaabein 9 jagahon mein; sab istemal hoti hain, is liye n = r = 9.",
+              "Step 2: (b) Har subject ki kitaabein ikatthi\n\\[{}^{4}P_{4} \\cdot {}^{3}P_{3} \\cdot {}^{2}P_{2} \\cdot {}^{3}P_{3} = 4! \\cdot 3! \\cdot 2! \\cdot 3!\\]\n\\[= 24 \\cdot 6 \\cdot 2 \\cdot 6\\]\n\\[= 1728 \\text{ ways}\\]\nKyun: \\(4!\\) se M block ke andar kitaabein, \\(3!\\) se P block ke andar, \\(2!\\) se C block ke andar, aur aakhri \\(3!\\) se teen blocks (M, P, C) khud shelf par aage peeche hote hain. Socheiye: pehle teen gathriyan shelf par rakhni hain (3! tareeqe), phir har gathri ko khol kar andar tarteeb deni hai.",
+              "Step 3: (b) Kitab ki chhapai ka masla\nKitab beech wali line \\(= 3! \\cdot 24 \\cdot 6 \\cdot 2 \\cdot 6\\) chhapti hai, jis mein shuru ka \\(3!\\) faltu hai.\n\\[4! \\cdot 3! \\cdot 2! \\cdot 3! = 24 \\cdot 6 \\cdot 2 \\cdot 6 = 1728\\]\nKyun: \\(4! = 24\\), \\(3! = 6\\), \\(2! = 2\\), \\(3! = 6\\); chaar factorials ke chaar numbers. Faltu \\(3!\\) lagayein to \\(10368\\) banta. Kitab ka aakhri jawab 1728 durust hai.",
+              "Step 4: (c) Sirf mathematics ki kitaabein ikatthi\n\\[{}^{4}P_{4} \\cdot {}^{6}P_{6} = 4! \\cdot 6!\\]\n\\[= 24 \\cdot 720\\]\n\\[= 17280 \\text{ ways}\\]\nKyun: 4 M kitaabein 1 unit; baqi 5 kitaabein alag alag units; kul 6 units, jo \\(6!\\) tareeqon se lagte hain. M unit ke andar \\(4!\\) tarteebein. Baqi kitaabon par koi pabandi nahin, woh kahin bhi aa sakti hain, M block ke dono taraf bhi.",
+              "Tasdeeq:\nComputer se 9 kitaabon ki tamam 362880 tarteebein gini gayin: un mein 1728 aisi hain jin mein har subject ikattha hai, aur 17280 aisi jin mein M kitaabein ikatthi hain. Jawab pakke hain."
+            ],
+            "answer": "(a) 362880 ways (b) 1728 ways (c) 17280 ways"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 5(b): kitab \"\\(= 3! \\cdot 24 \\cdot 6 \\cdot 2 \\cdot 6\\)\" chhapti hai; shuru ka \\(3!\\) chhapai ki ghalti hai. Sahi: \\(4! \\cdot 3! \\cdot 2! \\cdot 3! = 24 \\cdot 6 \\cdot 2 \\cdot 6 = 1728\\) ways.\nExample 5(a) ki figure mein chemistry ki sirf ek kitab bani hai (kul 8). Chemistry ki 2 kitaabein hain, kul 9; humari figure mein naun kitaabein hain."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch7-fig-ex5-shelf",
+            "alt": "Three shelf drawings of 4 M, 3 P and 2 C books. (a) all nine books in a row, 9! ways. (b) the M, P and C blocks, 4!, 3! and 2! ways inside the blocks and 3! ways for the blocks. (c) the four M books as unit 1, the other five books as units 2 to 6; 4! ways inside the unit, 6! ways for the six units.",
+            "caption": "Figure: Example 5 (a), (b), (c) ki shelf tarteebein (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Agar sirf physics ki kitaabein ikatthi rakhi jayein to kitne tareeqe hain?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Bilkul (c) ki tarah sochiye. 3 physics kitaabein 1 unit; baqi 6 kitaabein (4 M + 2 C) alag units; kul 7 units: \\(7!\\) tareeqe. Unit ke andar: \\(3!\\) tareeqe.\n\\[7! \\cdot 3! = 5040 \\cdot 6 = 30240 \\text{ ways}\\]\nGhor karein: (c) mein block bara tha (4 kitaabein), is liye units kam the (6). Yahan block chhota hai (3), is liye units zyada hain (7)."
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "In how many ways 5 people are to be seated on a bench if: (a) there are no restrictions; (b) two people can sit next to each other; (c) two people cannot sit next to each other.",
+            "steps": [
+              "Given: 5 mukhtalif log aur bench par 5 jagahein.\nTo find: (a) baghair pabandi, (b) jab do khaas log (maslan A aur B) saath baithein, (c) jab woh do saath na baithein, to baithne ke kitne tareeqe.\nMethod: (a) seedhi permutation hai; (b) mein dono ko \"chipka kar\" ek unit bana lein; (c) mein kul tareeqon se (b) wale tareeqe minus kar dein.",
+              "Step 1: (a) Koi pabandi nahin\n\\[\\text{Number of ways} = {}^{5}P_{5} = 5! = 120\\]\nKyun: 5 mukhtalif log 5 jagahon par; sab baithte hain, is liye n = r = 5.",
+              "Step 2: (b) Do khaas log (A aur B) saath\n\\[= {}^{4}P_{4} \\cdot {}^{2}P_{2}\\]\n\\[= 4! \\cdot 2! = 24 \\cdot 2\\]\n\\[= 48 \\text{ ways}\\]\nKyun: A aur B ek unit, phir C, D, E; kul 4 units, \\(4!\\) tareeqe. Unit ke andar A aur B ya to AB baithein ya BA: \\(2!\\) tareeqe.\nDhyan dein: sawal ke alfaz \"two people can sit next to each other\" ka matlab yahan yeh hai ke do khaas log zaroor saath baithte hain.",
+              "Step 3: (c) Woh do saath nahin\n\\[= {}^{5}P_{5} - [\\text{2 can sit next to each other}]\\]\n\\[= 5! - 48 = 120 - 48\\]\n\\[= 72 \\text{ ways}\\]\nKyun: har tarteeb mein ya to A aur B saath hain ya nahin; teesri koi soorat nahin. Is liye \"saath nahin\" = kul - \"saath\". Isay complement (baqi hissa) ka tareeqa kehte hain, aur aage bohat kaam aayega.",
+              "Tasdeeq:\n\\[48 + 72 = 120 = 5!\\]\nDono soortein mil kar tamam tarteebein poori karti hain. Computer se 120 tarteebein gin kar bhi 48 aur 72 hi aate hain."
+            ],
+            "answer": "(a) 120 ways (b) 48 ways (c) 72 ways"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "Example 5 aur Example 6 mein ek hi tareeqa do dafa istemal hua hai, ise naam de dete hain: \"gathri ka tareeqa\" (block method).\nQadam 1: jo log ya cheezein saath rehni hain, unhein ek gathri (unit) mein baandh dein.\nQadam 2: gathri ko ek cheez gin kar kul units ki tarteeb nikaalein.\nQadam 3: gathri ko khol kar andar ki tarteeb nikaalein.\nQadam 4: dono ko zarb kar dein.\nAur jab sawal \"saath nahin\" kahe to gathri wala jawab kul tareeqon mein se minus kar dein. Exam mein yeh dono tareeqe baar baar aate hain, is liye in ki practice zaroor kijiye."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 6(c): kitab \"= 5! 48 = 120 48 = 72 way\" chhapti hai; minus ke nishan ghayab hain. Sahi: \\(5! - 48 = 120 - 48 = 72\\) ways.\nExample 6 ki figures: (a) mein 5 logon ke liye sirf chaar kursiyan (A, B, C, D) bani hain, aur (b) mein kursiyon par C, D, D likha hai; aakhri E honi chahiye. Humari figure mein paanch jagahein A, B, C, D, E hain."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch7-fig-ex6-bench",
+            "alt": "(a) five seats A, B, C, D, E in a row, 5! ways. (b) A and B joined as one unit (2! ways inside), then C, D, E numbered 2, 3, 4; 4 units give 4! ways, total 4! times 2! = 48.",
+            "caption": "Figure: Example 6 (a) aur (b) mein bench par baithna (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Try yourself",
+            "text": "Agar 6 logon ko table par bithana ho aur un mein se 3 saath na baith sakte hon to kitne tareeqe hain?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Ishara (6 log ek qatar mein): Example 6(c) wala tareeqa lagaiye.\nKul tarteebein: \\(6! = 720\\). Teeno saath: 1 unit + 3 baqi = 4 units, \\(4! \\cdot 3! = 24 \\cdot 6 = 144\\). Teeno saath nahin: \\(720 - 144 = 576\\) tareeqe.\nAgar sharat yeh ho ke un 3 mein se koi do bhi saath na baithein: pehle baqi 3 ko bithaiye (\\(3! = 6\\)); un ke darmiyan aur kinaron par 4 khaali jagahein (gaps) banti hain; 3 log in mein se 3 gaps \\({}^{4}P_{3} = 24\\) tareeqon se lete hain: \\(6 \\times 24 = 144\\).\nGol (round) table par baithna circular permutation hai, jo 7.3 mein aayega."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh bhi hamari practice hai. Lafz PAKISTAN ke bajaye ek aasan lafz lete hain jis ke tamam huroof mukhtalif hon: LAHORE (6 huroof, sab alag).\n(1) Tamam huroof ki tarteebein: \\(6! = 720\\).\n(2) Jin mein vowels A, O, E ikatthe hon: vowels ki gathri + L, H, R = 4 units, \\(4! = 24\\); gathri ke andar \\(3! = 6\\); kul \\(24 \times 6 = 144\\).\n(3) Jin mein vowels ikatthe na hon (teeno ek saath nahin): \\(720 - 144 = 576\\).\nDekhiye, yeh bilkul Try yourself wala hi hisaab hai: 6 cheezein, 3 ki gathri. Sawal ki kahani badalti hai, tareeqa wahi rehta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahin. Class ke 8 bachon mein se ek captain, ek vice-captain aur ek monitor chunna hai (teeno alag ohde). Kitne tareeqe?\nOhde alag hain, is liye order ahem hai: Ali captain aur Sara vice-captain, ulat se alag hai. \\({}^{8}P_{3} = 8 \\times 7 \\times 6 = 336\\) tareeqe.\nTasdeeq: \\(\\frac{8!}{5!} = \\frac{40320}{120} = 336\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Permutation = tarteeb jahan order ahem hai; \\({}^{n}P_{r} = \\frac{n!}{(n-r)!} = n(n-1)\\cdots(n-r+1)\\), yani \\(r\\) factors.\n2. Tamam \\(n\\) cheezein lagani hon to \\({}^{n}P_{n} = n!\\); isi wajah se \\(0! = 1\\).\n3. Jo cheezein saath rehni hon: unhein ek unit banaiye, units arrange kijiye, phir unit ke andar ki tarteebein zarb kijiye.\n4. \"Saath nahin\" = kul - \"saath\".\n5. Har sawal se pehle teen sawal poochiye: order ahem hai? repetition allowed hai? koi group saath hai?"
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Jab repetition allowed ho tab bhi \\({}^{n}P_{r}\\) laga dena: yeh formula sirf tab hai jab koi cheez dobara na aaye.\n2. Block ke andar ki tarteeb bhool jana (Example 6(b) mein AB aur BA wala 2!).\n3. Example 5(b) mein blocks ki apni tarteeb wala 3! bhool jana.\n4. \\({}^{6}P_{4} = \\frac{6!}{4!}\\) likh dena: neeche \\((n - r)! = 2!\\) aata hai.\n5. Example 5(c) mein yeh sochna ke M block shelf ke shuru mein hi hoga: block 6 units mein se kisi bhi jagah aa sakta hai."
+          }
+        ]
+      }
+    }
+  ]
+}

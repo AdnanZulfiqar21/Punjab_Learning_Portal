@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-4-Q8",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-4-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 143,
+          "pdf_to": 143,
+          "note": "Exercise 7.4, Question 8: book p.138 (PDF 143). Answer key PDF 306 (book p.301). Solution book PDF 675-704 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(i)(a)",
+            "prompt": "8 (i)(a) How many (a) diagonals and (b) triangles can be formed by joining the vertices of the polygon having: (i) 5 sides? Part (a): diagonals.",
+            "explanation": "A pentagon has 5 vertices. Any two vertices joined give a line segment; those segments are either sides or diagonals.\nWe must count the diagonals.\nPlan: count all pairs \\({}^{5}C_{2}\\), then subtract the 5 sides.",
+            "steps": [
+              "Given: a polygon with 5 sides, so 5 vertices (no three in a line).\nTo find: the number of diagonals.\nMethod: A segment is fixed by its two end points, and AB is the same as BA, so segments are combinations of 2 vertices. Then remove the sides.",
+              "Count all segments\n\\[{}^{5}C_{2} = \\dfrac{5 \\cdot 4}{2} = 10\\]\nWhy: Each pair of vertices gives exactly one segment.",
+              "Subtract the sides\n\\[10 - 5 = 5\\]\nWhy: 5 of these segments are sides of the polygon, not diagonals.",
+              "Check with the formula\n\\[\\dfrac{n(n-3)}{2} = \\dfrac{5 \\times 2}{2}\\]\n\\[= 5 \\;\\checkmark\\]\nWhy: From each vertex, diagonals go to the \\(n - 3\\) vertices that are not itself or its two neighbours; each diagonal is counted from both ends, so divide by 2."
+            ],
+            "final_answer": "5 diagonals"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The question asks for (a) diagonals and (b) triangles for each of the 3 polygons, so 6 answers. The answer key prints only 3: i) 10, ii) 20, iii) 54. 20 and 54 are the diagonals of the 8-sided and 12-sided polygons, but a pentagon has 5 diagonals, not 10 (10 is its number of triangles). Correct: diagonals 5, 20, 54; triangles 10, 56, 220."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(i)(b)",
+            "prompt": "8 (i)(b) How many (a) diagonals and (b) triangles can be formed by joining the vertices of the polygon having: (i) 5 sides? Part (b): triangles.",
+            "explanation": "Any 3 vertices of the pentagon (no three in a line) make one triangle.\nWe must count the triangles.\nPlan: \\({}^{5}C_{3}\\).",
+            "steps": [
+              "Given: 5 vertices.\nTo find: the number of triangles with vertices at these points.\nMethod: A triangle is fixed by its 3 corners; ABC, BCA, ... are the same triangle, so use combinations of 3.",
+              "Choose 3 vertices\n\\[{}^{5}C_{3} = \\dfrac{5 \\cdot 4 \\cdot 3}{6} = 10\\]\nWhy: 3 factors counting down from 5, divided by \\(3! = 6\\).",
+              "Check\n\\[{}^{5}P_{3} \\div 3! = 60 \\div 6 = 10 \\;\\checkmark\\]\nWhy: Ordered triples count each triangle \\(3! = 6\\) times."
+            ],
+            "final_answer": "10 triangles"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(ii)(a)",
+            "prompt": "8 (ii)(a) How many (a) diagonals and (b) triangles can be formed by joining the vertices of the polygon having: (ii) 8 sides? Part (a): diagonals.",
+            "explanation": "A octagon has 8 vertices. Any two vertices joined give a line segment; those segments are either sides or diagonals.\nWe must count the diagonals.\nPlan: count all pairs \\({}^{8}C_{2}\\), then subtract the 8 sides.",
+            "steps": [
+              "Given: a polygon with 8 sides, so 8 vertices (no three in a line).\nTo find: the number of diagonals.\nMethod: A segment is fixed by its two end points, and AB is the same as BA, so segments are combinations of 2 vertices. Then remove the sides.",
+              "Count all segments\n\\[{}^{8}C_{2} = \\dfrac{8 \\cdot 7}{2} = 28\\]\nWhy: Each pair of vertices gives exactly one segment.",
+              "Subtract the sides\n\\[28 - 8 = 20\\]\nWhy: 8 of these segments are sides of the polygon, not diagonals.",
+              "Check with the formula\n\\[\\dfrac{n(n-3)}{2} = \\dfrac{8 \\times 5}{2}\\]\n\\[= 20 \\;\\checkmark\\]\nWhy: From each vertex, diagonals go to the \\(n - 3\\) vertices that are not itself or its two neighbours; each diagonal is counted from both ends, so divide by 2."
+            ],
+            "final_answer": "20 diagonals"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(ii)(b)",
+            "prompt": "8 (ii)(b) How many (a) diagonals and (b) triangles can be formed by joining the vertices of the polygon having: (ii) 8 sides? Part (b): triangles.",
+            "explanation": "Any 3 vertices of the octagon (no three in a line) make one triangle.\nWe must count the triangles.\nPlan: \\({}^{8}C_{3}\\).",
+            "steps": [
+              "Given: 8 vertices.\nTo find: the number of triangles with vertices at these points.\nMethod: A triangle is fixed by its 3 corners; ABC, BCA, ... are the same triangle, so use combinations of 3.",
+              "Choose 3 vertices\n\\[{}^{8}C_{3} = \\dfrac{8 \\cdot 7 \\cdot 6}{6} = 56\\]\nWhy: 3 factors counting down from 8, divided by \\(3! = 6\\).",
+              "Check\n\\[{}^{8}P_{3} \\div 3! = 336 \\div 6 = 56 \\;\\checkmark\\]\nWhy: Ordered triples count each triangle \\(3! = 6\\) times."
+            ],
+            "final_answer": "56 triangles"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(iii)(a)",
+            "prompt": "8 (iii)(a) How many (a) diagonals and (b) triangles can be formed by joining the vertices of the polygon having: (iii) 12 sides? Part (a): diagonals.",
+            "explanation": "A 12-sided polygon has 12 vertices. Any two vertices joined give a line segment; those segments are either sides or diagonals.\nWe must count the diagonals.\nPlan: count all pairs \\({}^{12}C_{2}\\), then subtract the 12 sides.",
+            "steps": [
+              "Given: a polygon with 12 sides, so 12 vertices (no three in a line).\nTo find: the number of diagonals.\nMethod: A segment is fixed by its two end points, and AB is the same as BA, so segments are combinations of 2 vertices. Then remove the sides.",
+              "Count all segments\n\\[{}^{12}C_{2} = \\dfrac{12 \\cdot 11}{2} = 66\\]\nWhy: Each pair of vertices gives exactly one segment.",
+              "Subtract the sides\n\\[66 - 12 = 54\\]\nWhy: 12 of these segments are sides of the polygon, not diagonals.",
+              "Check with the formula\n\\[\\dfrac{n(n-3)}{2} = \\dfrac{12 \\times 9}{2}\\]\n\\[= 54 \\;\\checkmark\\]\nWhy: From each vertex, diagonals go to the \\(n - 3\\) vertices that are not itself or its two neighbours; each diagonal is counted from both ends, so divide by 2."
+            ],
+            "final_answer": "54 diagonals"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(iii)(b)",
+            "prompt": "8 (iii)(b) How many (a) diagonals and (b) triangles can be formed by joining the vertices of the polygon having: (iii) 12 sides? Part (b): triangles.",
+            "explanation": "Any 3 vertices of the 12-sided polygon (no three in a line) make one triangle.\nWe must count the triangles.\nPlan: \\({}^{12}C_{3}\\).",
+            "steps": [
+              "Given: 12 vertices.\nTo find: the number of triangles with vertices at these points.\nMethod: A triangle is fixed by its 3 corners; ABC, BCA, ... are the same triangle, so use combinations of 3.",
+              "Choose 3 vertices\n\\[{}^{12}C_{3} = \\dfrac{12 \\cdot 11 \\cdot 10}{6} = 220\\]\nWhy: 3 factors counting down from 12, divided by \\(3! = 6\\).",
+              "Check\n\\[{}^{12}P_{3} \\div 3! = 1320 \\div 6 = 220 \\;\\checkmark\\]\nWhy: Ordered triples count each triangle \\(3! = 6\\) times."
+            ],
+            "final_answer": "220 triangles"
+          }
+        ]
+      }
+    }
+  ]
+}

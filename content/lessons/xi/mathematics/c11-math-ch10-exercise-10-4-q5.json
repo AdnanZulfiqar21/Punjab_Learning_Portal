@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-4-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-4-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 204,
+          "pdf_to": 204,
+          "note": "Exercise 10.4, Question 5 (3 parts): book page 199 (PDF 204). No answer key (proofs). Verified with sympy and the solution book."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(i)",
+            "prompt": "5 (i) Prove that: \\(\\cos 20^{\\circ}\\cos 40^{\\circ}\\cos 60^{\\circ}\\cos 80^{\\circ} = \\dfrac{1}{16}\\)",
+            "explanation": "A product of four cosines equal to a number, to be proved without tables.\nOne factor, \\(\\cos 60^{\\circ} = \\frac{1}{2}\\), is known; the other three must be reduced step by step.\nPlan: take out \\(\\cos 60^{\\circ}\\); turn \\(\\cos 40^{\\circ}\\cos 20^{\\circ}\\) into a sum; multiply by \\(\\cos 80^{\\circ}\\) and use the product formula again; finally \\(\\cos 100^{\\circ} = -\\cos 80^{\\circ}\\) cancels a term.",
+            "steps": [
+              "Given: L.H.S. \\(= \\cos 20^{\\circ}\\cos 40^{\\circ}\\cos 60^{\\circ}\\cos 80^{\\circ}\\).\nTo prove: L.H.S. \\(= \\frac{1}{16}\\).\nMethod: \\(2\\cos\\alpha\\cos\\beta = \\cos(\\alpha + \\beta) + \\cos(\\alpha - \\beta)\\), used twice, and \\(\\cos(180^{\\circ} - \\theta) = -\\cos\\theta\\). The book proves \\(\\cos 20^{\\circ}\\cos 40^{\\circ}\\cos 80^{\\circ} = \\frac{1}{8}\\) just before this exercise; we redo it here.",
+              "Take out the known factor\n\\[\\text{L.H.S.} = \\dfrac{1}{2}\\cos 20^{\\circ}\\cos 40^{\\circ}\\cos 80^{\\circ}\\]\nWhy: \\(\\cos 60^{\\circ} = \\frac{1}{2}\\).",
+              "Make \"2 cos cos\" from the first two factors\n\\[= \\dfrac{1}{4}(2\\cos 40^{\\circ}\\cos 20^{\\circ})\\cos 80^{\\circ}\\]\n\\[= \\dfrac{1}{4}(\\cos 60^{\\circ} + \\cos 20^{\\circ})\\cos 80^{\\circ}\\]\nWhy: Multiply and divide by 2: \\(\\frac{1}{2}\\cdot\\frac{1}{2} = \\frac{1}{4}\\). Then \\(40^{\\circ} \\pm 20^{\\circ} = 60^{\\circ}, 20^{\\circ}\\).",
+              "Open the bracket\n\\[= \\dfrac{1}{4}\\left(\\dfrac{1}{2}\\cos 80^{\\circ} + \\cos 80^{\\circ}\\cos 20^{\\circ}\\right)\\]\n\\[= \\dfrac{1}{8}\\cos 80^{\\circ} + \\dfrac{1}{8}(2\\cos 80^{\\circ}\\cos 20^{\\circ})\\]\nWhy: \\(\\cos 60^{\\circ} = \\frac{1}{2}\\); in the second term we again make a factor 2 (\\(\\frac{1}{4} = \\frac{1}{8}\\cdot 2\\)).",
+              "Product formula again\n\\[2\\cos 80^{\\circ}\\cos 20^{\\circ} = \\cos 100^{\\circ} + \\cos 60^{\\circ}\\]\n\\[\\text{L.H.S.} = \\dfrac{1}{8}\\left(\\cos 80^{\\circ} + \\cos 100^{\\circ} + \\dfrac{1}{2}\\right)\\]\nWhy: \\(80^{\\circ} + 20^{\\circ} = 100^{\\circ}\\), \\(80^{\\circ} - 20^{\\circ} = 60^{\\circ}\\).",
+              "Use an allied angle\n\\[\\cos 100^{\\circ} = \\cos(180^{\\circ} - 80^{\\circ}) = -\\cos 80^{\\circ}\\]\n\\[\\text{L.H.S.} = \\dfrac{1}{8}\\cdot\\dfrac{1}{2} = \\dfrac{1}{16} = \\text{R.H.S.}\\]\nWhy: Cosine is negative in the second quadrant, so \\(\\cos 80^{\\circ}\\) and \\(\\cos 100^{\\circ}\\) cancel.",
+              "Check with a calculator\n\\[0.9397 \\times 0.7660 \\times 0.5 \\times 0.1736\\]\n\\[\\approx 0.0625 = \\dfrac{1}{16} \\;\\checkmark\\]\nWhy: \\(\\frac{1}{16} = 0.0625\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\cos 20^{\\circ}\\cos 40^{\\circ}\\cos 60^{\\circ}\\cos 80^{\\circ} = \\frac{1}{16}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(ii)",
+            "prompt": "5 (ii) Prove that: \\(\\sin\\dfrac{\\pi}{9}\\sin\\dfrac{2\\pi}{9}\\sin\\dfrac{\\pi}{3}\\sin\\dfrac{4\\pi}{9} = \\dfrac{3}{16}\\)",
+            "explanation": "The angles are in radians: \\(\\frac{\\pi}{9} = 20^{\\circ}\\), \\(\\frac{2\\pi}{9} = 40^{\\circ}\\), \\(\\frac{\\pi}{3} = 60^{\\circ}\\), \\(\\frac{4\\pi}{9} = 80^{\\circ}\\). So it is the sine version of part (i).\nWe must show the product is \\(\\frac{3}{16}\\).\nPlan: change to degrees, take out \\(\\sin 60^{\\circ} = \\frac{\\sqrt{3}}{2}\\), and reduce \\(\\sin 20^{\\circ}\\sin 40^{\\circ}\\sin 80^{\\circ}\\) with the product formulas.",
+            "steps": [
+              "Given: L.H.S. \\(= \\sin\\frac{\\pi}{9}\\sin\\frac{2\\pi}{9}\\sin\\frac{\\pi}{3}\\sin\\frac{4\\pi}{9}\\).\nTo prove: L.H.S. \\(= \\frac{3}{16}\\).\nMethod: \\(2\\sin\\alpha\\sin\\beta = \\cos(\\alpha - \\beta) - \\cos(\\alpha + \\beta)\\) and \\(2\\sin\\alpha\\cos\\beta = \\sin(\\alpha + \\beta) + \\sin(\\alpha - \\beta)\\).",
+              "Change to degrees and take out \\(\\sin 60^{\\circ}\\)\n\\[\\text{L.H.S.} = \\sin 20^{\\circ}\\sin 40^{\\circ}\\sin 60^{\\circ}\\sin 80^{\\circ}\\]\n\\[= \\dfrac{\\sqrt{3}}{2}\\sin 20^{\\circ}\\sin 40^{\\circ}\\sin 80^{\\circ}\\]\nWhy: \\(\\pi\\) radians \\(= 180^{\\circ}\\), so \\(\\frac{\\pi}{9} = 20^{\\circ}\\), etc.; \\(\\sin 60^{\\circ} = \\frac{\\sqrt{3}}{2}\\).",
+              "Make \"2 sin sin\" from \\(\\sin 40^{\\circ}\\sin 20^{\\circ}\\)\n\\[= \\dfrac{\\sqrt{3}}{4}(2\\sin 40^{\\circ}\\sin 20^{\\circ})\\sin 80^{\\circ}\\]\n\\[= \\dfrac{\\sqrt{3}}{4}(\\cos 20^{\\circ} - \\cos 60^{\\circ})\\sin 80^{\\circ}\\]\nWhy: Multiply and divide by 2; then difference \\(20^{\\circ}\\) first, sum \\(60^{\\circ}\\) second.",
+              "Open the bracket\n\\[= \\dfrac{\\sqrt{3}}{4}\\left(\\sin 80^{\\circ}\\cos 20^{\\circ} - \\dfrac{1}{2}\\sin 80^{\\circ}\\right)\\]\n\\[= \\dfrac{\\sqrt{3}}{8}\\left(2\\sin 80^{\\circ}\\cos 20^{\\circ} - \\sin 80^{\\circ}\\right)\\]\nWhy: \\(\\cos 60^{\\circ} = \\frac{1}{2}\\); we took \\(\\frac{1}{2}\\) outside so that \"2 sin cos\" appears.",
+              "Product formula again\n\\[2\\sin 80^{\\circ}\\cos 20^{\\circ} = \\sin 100^{\\circ} + \\sin 60^{\\circ}\\]\n\\[\\text{L.H.S.} = \\dfrac{\\sqrt{3}}{8}\\;\\times\\]\n\\[\\left(\\sin 100^{\\circ} + \\dfrac{\\sqrt{3}}{2} - \\sin 80^{\\circ}\\right)\\]\nWhy: \\(80^{\\circ} \\pm 20^{\\circ} = 100^{\\circ}, 60^{\\circ}\\).",
+              "Use an allied angle\n\\[\\sin 100^{\\circ} = \\sin(180^{\\circ} - 80^{\\circ}) = \\sin 80^{\\circ}\\]\n\\[\\text{L.H.S.} = \\dfrac{\\sqrt{3}}{8}\\cdot\\dfrac{\\sqrt{3}}{2}\\]\n\\[= \\dfrac{3}{16} = \\text{R.H.S.}\\]\nWhy: Sine is positive in the second quadrant, so \\(\\sin 100^{\\circ}\\) and \\(-\\sin 80^{\\circ}\\) cancel; \\(\\sqrt{3}\\cdot\\sqrt{3} = 3\\).",
+              "Check with a calculator\n\\[0.3420 \\times 0.6428 \\times 0.8660 \\times 0.9848\\]\n\\[\\approx 0.1875 = \\dfrac{3}{16} \\;\\checkmark\\]\nWhy: \\(\\frac{3}{16} = 0.1875\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\sin\\frac{\\pi}{9}\\sin\\frac{2\\pi}{9}\\sin\\frac{\\pi}{3}\\sin\\frac{4\\pi}{9} = \\frac{3}{16}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(iii)",
+            "prompt": "5 (iii) Prove that: \\(\\sin 10^{\\circ}\\sin 30^{\\circ}\\sin 50^{\\circ}\\sin 70^{\\circ} = \\dfrac{1}{16}\\)",
+            "explanation": "Another product of four sines with one known value, \\(\\sin 30^{\\circ} = \\frac{1}{2}\\).\nWe must show the product is \\(\\frac{1}{16}\\).\nPlan: take out \\(\\sin 30^{\\circ}\\); turn \\(\\sin 50^{\\circ}\\sin 10^{\\circ}\\) into a difference of cosines; multiply by \\(\\sin 70^{\\circ}\\); use \\(\\sin 110^{\\circ} = \\sin 70^{\\circ}\\).",
+            "steps": [
+              "Given: L.H.S. \\(= \\sin 10^{\\circ}\\sin 30^{\\circ}\\sin 50^{\\circ}\\sin 70^{\\circ}\\).\nTo prove: L.H.S. \\(= \\frac{1}{16}\\).\nMethod: \\(2\\sin\\alpha\\sin\\beta = \\cos(\\alpha - \\beta) - \\cos(\\alpha + \\beta)\\) and \\(2\\sin\\alpha\\cos\\beta = \\sin(\\alpha + \\beta) + \\sin(\\alpha - \\beta)\\). (The book prints the degree marks as small primes.)",
+              "Take out the known factor\n\\[\\text{L.H.S.} = \\dfrac{1}{2}\\sin 10^{\\circ}\\sin 50^{\\circ}\\sin 70^{\\circ}\\]\nWhy: \\(\\sin 30^{\\circ} = \\frac{1}{2}\\).",
+              "Make \"2 sin sin\" from \\(\\sin 50^{\\circ}\\sin 10^{\\circ}\\)\n\\[= \\dfrac{1}{4}(2\\sin 50^{\\circ}\\sin 10^{\\circ})\\sin 70^{\\circ}\\]\n\\[= \\dfrac{1}{4}(\\cos 40^{\\circ} - \\cos 60^{\\circ})\\sin 70^{\\circ}\\]\nWhy: \\(50^{\\circ} - 10^{\\circ} = 40^{\\circ}\\) first, \\(50^{\\circ} + 10^{\\circ} = 60^{\\circ}\\) second.",
+              "Open the bracket\n\\[= \\dfrac{1}{4}\\left(\\sin 70^{\\circ}\\cos 40^{\\circ} - \\dfrac{1}{2}\\sin 70^{\\circ}\\right)\\]\n\\[= \\dfrac{1}{8}\\left(2\\sin 70^{\\circ}\\cos 40^{\\circ} - \\sin 70^{\\circ}\\right)\\]\nWhy: \\(\\cos 60^{\\circ} = \\frac{1}{2}\\); taking \\(\\frac{1}{2}\\) out creates \"2 sin cos\".",
+              "Product formula again\n\\[2\\sin 70^{\\circ}\\cos 40^{\\circ} = \\sin 110^{\\circ} + \\sin 30^{\\circ}\\]\n\\[\\text{L.H.S.} = \\dfrac{1}{8}\\left(\\sin 110^{\\circ} + \\dfrac{1}{2} - \\sin 70^{\\circ}\\right)\\]\nWhy: \\(70^{\\circ} \\pm 40^{\\circ} = 110^{\\circ}, 30^{\\circ}\\).",
+              "Use an allied angle\n\\[\\sin 110^{\\circ} = \\sin(180^{\\circ} - 70^{\\circ}) = \\sin 70^{\\circ}\\]\n\\[\\text{L.H.S.} = \\dfrac{1}{8}\\cdot\\dfrac{1}{2} = \\dfrac{1}{16} = \\text{R.H.S.}\\]\nWhy: \\(\\sin 110^{\\circ}\\) and \\(-\\sin 70^{\\circ}\\) cancel.",
+              "Check with a calculator\n\\[0.1736 \\times 0.5 \\times 0.7660 \\times 0.9397\\]\n\\[\\approx 0.0625 = \\dfrac{1}{16} \\;\\checkmark\\]\nWhy: \\(\\frac{1}{16} = 0.0625\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\sin 10^{\\circ}\\sin 30^{\\circ}\\sin 50^{\\circ}\\sin 70^{\\circ} = \\frac{1}{16}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

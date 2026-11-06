@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-7-Q4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-7-q4",
+      "title": "Question 4 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 110,
+          "pdf_to": 110,
+          "note": "Exercise 6.7, Question 4: book pages 105-106 (PDF 110-111): Q1, Q2, Q3(i)-(ii), Q4(i)-(ii), Q5, Q6 (8 parts); answer key book page 300 (PDF 305)"
+        }
+      ],
+      "variant_of": "C11-MATH-CH6-EXERCISE-6-7-Q4",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) Sum to \\(n\\) terms the series: \\(1 + (a - b) + (a^{2} + ab + b^{2}) + (a^{3} + a^{2}b + ab^{2} + b^{3}) + \\cdots\\)",
+            "explanation": "Is series ka har bracket khud ek chhoti G.P. hai. (Doosra term kitab mein \\((a - b)\\) chhapa hai; pattern aur answer key ke mutabiq yeh \\((a + b)\\) hai, neeche \"Kitab ki ghalti\" dekhein.)\nPlan: \\(k\\)th term ko ek fraction \\(\\frac{a^{k} - b^{k}}{a - b}\\) banayenge, phir series ko do G.P. mein tod kar dono ka sum lenge (\\(a \\neq b\\), \\(a \\neq 1\\), \\(b \\neq 1\\) maan kar).",
+            "steps": [
+              "Diya gaya hai: \\(1 + (a + b) + (a^{2} + ab + b^{2}) + \\cdots\\), \\(n\\) terms tak.\nHumein find karna hai: \\(S_n\\).\nTareeqa: General term identity (pehchaan) \\(a^{k} - b^{k} = (a - b)(a^{k-1} + a^{k-2}b + \\cdots + b^{k-1})\\) se ek fraction banega. Seedha jama karna mushkil hai kyunke har bracket mein terms ki tadaad badhti jati hai.",
+              "\\(k\\)th term nikalein\n\\[T_k = a^{k-1} + a^{k-2}b + \\cdots + b^{k-1}\\]\n\\[= \\dfrac{a^{k} - b^{k}}{a - b}\\]\nKyun: Brackets ko ghaur se dekhein: doosre mein powers 1 tak, teesre mein 2 tak, chauthe mein 3 tak. \\(k\\)th bracket \\(a^{k-1}\\) se shuru hota hai, phir \\(a\\) ki power ek ek kam aur \\(b\\) ki ek ek zyada hoti hai. Chhoti misaal: \\(a^{2} - b^{2} = (a - b)(a + b)\\) aur \\(a^{3} - b^{3} = (a - b)(a^{2} + ab + b^{2})\\).",
+              "Pehle terms par formula check karein\n\\[T_1 = \\dfrac{a - b}{a - b} = 1\\]\n\\[T_2 = \\dfrac{a^{2} - b^{2}}{a - b} = a + b\\]\nKyun: General term ko series ke asal terms dene chahiye; dono match kar gaye, to formula theek hai.",
+              "\\(n\\) terms jama karein\n\\[S_n = \\dfrac{1}{a - b}\\left[(a + a^{2} + \\cdots + a^{n}) - (b + b^{2} + \\cdots + b^{n})\\right]\\]\nKyun: Har term ka denominator \\(a - b\\) ek hi hai, is liye use bahar nikal liya. Andar \\(a\\) ki saari powers ek group mein aur \\(b\\) ki saari powers doosre group mein.",
+              "Dono G.P. ka sum\n\\[a + \\cdots + a^{n} = \\dfrac{a(1 - a^{n})}{1 - a}\\]\n\\[b + \\cdots + b^{n} = \\dfrac{b(1 - b^{n})}{1 - b}\\]\nKyun: Pehli G.P. ka pehla term \\(a\\), ratio \\(a\\), \\(n\\) terms. Doosri ka pehla term \\(b\\), ratio \\(b\\), \\(n\\) terms. Formula \\(\\frac{a_1(1 - r^{n})}{1 - r}\\) dono par laga.",
+              "Ek fraction mein jorein\n\\[S_n = \\dfrac{1}{a - b}\\left[\\dfrac{a(1 - a^{n})}{1 - a} - \\dfrac{b(1 - b^{n})}{1 - b}\\right]\\]\n\\[= \\dfrac{a(1 - b)(1 - a^{n}) - b(1 - a)(1 - b^{n})}{(a - b)(1 - a)(1 - b)}\\]\nKyun: Do fractions ghatane ke liye common denominator \\((1 - a)(1 - b)\\) liya: pehli fraction ko upar neeche \\((1 - b)\\) se aur doosri ko \\((1 - a)\\) se multiply kiya.\nDhyan dein: Bracket ke bahar wala \\(\\frac{1}{a - b}\\) bhool na jayein; woh neeche ja kar \\((a - b)\\) banta hai.",
+              "Tasdeeq: \\(n = 2\\)\n\\[\\text{top} = a(1 - b)(1 - a^{2}) - b(1 - a)(1 - b^{2})\\]\n\\[= (1 - a)(1 - b)(a - b)(1 + a + b)\\]\nKyun: \\(1 - a^{2} = (1 - a)(1 + a)\\) aur \\(1 - b^{2} = (1 - b)(1 + b)\\); \\((1 - a)(1 - b)\\) common nikalne par andar \\(a + a^{2} - b - b^{2} = (a - b)(1 + a + b)\\) bachta hai. Neeche wale se divide karein to \\(1 + (a + b)\\) bacha, jo pehle do terms ka sum hai."
+            ],
+            "final_answer": "\\(S_n = \\frac{a(1 - b)(1 - a^{n}) - b(1 - a)(1 - b^{n})}{(a - b)(1 - a)(1 - b)}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein doosra term \\((a - b)\\) chhapa hai. Series ke pattern (\\(k\\)th term \\(a^{k-1} + a^{k-2}b + \\cdots + b^{k-1}\\)) aur answer key ke mutabiq yeh \\((a + b)\\) hona chahiye: series \\(1 + (a + b) + (a^{2} + ab + b^{2}) + \\cdots\\) hai. Upar ka hal \\((a + b)\\) le kar kiya gaya hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) Sum to \\(n\\) terms the series: \\(r + (1 + k)r^{2} + (1 + k + k^{2})r^{3} + \\cdots\\)",
+            "explanation": "Yahan \\(r\\) ki har power ke aage jo bracket hai, woh \\(k\\) mein ek chhoti G.P. hai.\nPlan: \\(n\\)th term ko \\(\\frac{1 - k^{n}}{1 - k}r^{n}\\) likhenge, series ko do G.P. (ek \\(r\\) mein, ek \\(kr\\) mein) mein todenge aur dono ka sum lenge (\\(k \\neq 1\\), \\(r \\neq 1\\), \\(kr \\neq 1\\) maan kar).",
+            "steps": [
+              "Diya gaya hai: \\(r + (1 + k)r^{2} + (1 + k + k^{2})r^{3} + \\cdots\\), \\(n\\) terms tak.\nHumein find karna hai: \\(S_n\\).\nTareeqa: Pehle bracket ko \\(k\\) ki G.P. samajh kar us ka sum likhenge, phir poori series ko do saaf G.P. mein tod denge. Yeh (i) wala hi tareeqa hai.",
+              "\\(n\\)th term nikalein\n\\[T_n = (1 + k + \\cdots + k^{n-1})r^{n}\\]\n\\[= \\dfrac{1 - k^{n}}{1 - k}\\,r^{n}\\]\nKyun: Pehle term mein bracket 1 hai, doosre mein \\(1 + k\\), teesre mein \\(1 + k + k^{2}\\). To \\(n\\)th term ke bracket mein \\(n\\) terms hain: G.P. jis ka pehla term 1 aur ratio \\(k\\) hai. Us ka sum \\(\\frac{1 - k^{n}}{1 - k}\\).\nDhyan dein: Bracket \\(k^{n-1}\\) par khatam hota hai, \\(k^{n}\\) par nahi; is liye terms ki tadaad \\(n\\) hai.",
+              "Term ko simplify karein\n\\[T_n = \\dfrac{1}{1 - k}\\left[r^{n} - (kr)^{n}\\right]\\]\nKyun: \\(r^{n}\\) ko upar multiply kiya: \\(r^{n} - k^{n}r^{n}\\), aur \\(k^{n}r^{n} = (kr)^{n}\\). Ab har term do saaf powers ka farq hai.",
+              "\\(n\\) terms jama karein\n\\[S_n = \\dfrac{1}{1 - k}\\left[(r + \\cdots + r^{n}) - (kr + \\cdots + (kr)^{n})\\right]\\]\nKyun: Har term ke aage \\(\\frac{1}{1 - k}\\) hai, use bahar nikala. \\(r\\) ki powers ek group mein aur \\(kr\\) ki powers doosre mein.",
+              "Dono G.P. ka sum\n\\[r + \\cdots + r^{n} = \\dfrac{r(1 - r^{n})}{1 - r}\\]\n\\[kr + \\cdots + (kr)^{n} = \\dfrac{kr(1 - k^{n}r^{n})}{1 - kr}\\]\nKyun: Pehli G.P.: pehla term \\(r\\), ratio \\(r\\). Doosri: pehla term \\(kr\\), ratio \\(kr\\). Dono mein \\(n\\) terms. \\((kr)^{n} = k^{n}r^{n}\\).",
+              "Sab jorein\n\\[S_n = \\dfrac{1}{1 - k}\\left[\\dfrac{r(1 - r^{n})}{1 - r} - \\dfrac{kr(1 - k^{n}r^{n})}{1 - kr}\\right]\\]\n\\[= \\dfrac{r}{1 - k}\\left[\\dfrac{1 - r^{n}}{1 - r} - \\dfrac{k(1 - k^{n}r^{n})}{1 - kr}\\right]\\]\nKyun: Dono fractions ke upar \\(r\\) hai, use bahar nikal diya taake jawab saaf ho aur answer key wali shakal ban jaye.",
+              "Tasdeeq: \\(n = 1\\)\n\\[\\dfrac{r}{1 - k}\\left[1 - k\\right] = r\\]\nKyun: \\(n = 1\\) par \\(\\frac{1 - r}{1 - r} = 1\\) aur \\(\\frac{k(1 - kr)}{1 - kr} = k\\), to bracket \\(1 - k\\) bana aur \\(\\frac{1}{1 - k}\\) se cancel ho gaya. Jawab \\(r\\) aaya, jo series ka pehla term hai."
+            ],
+            "final_answer": "\\(S_n = \\frac{r}{1 - k}\\left[\\frac{1 - r^{n}}{1 - r} - \\frac{k(1 - k^{n}r^{n})}{1 - kr}\\right]\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

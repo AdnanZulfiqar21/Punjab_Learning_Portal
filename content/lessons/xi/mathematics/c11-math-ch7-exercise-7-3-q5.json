@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-3-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-3-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 137,
+          "pdf_to": 137,
+          "note": "Exercise 7.3, Question 5: book page 132 (PDF 137); answer key book page 301 (PDF 306): 180 (agrees)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5. How many arrangements of the letters of the word ATTACKED can be made if each arrangement begins with C and ends with K?",
+            "explanation": "The first and last places are fixed (C and K); only the middle letters move.\nPlan: remove C and K, count the remaining letters and their repeats, then use the formula for objects not all different.",
+            "steps": [
+              "Given: ATTACKED; every arrangement starts with C and ends with K.\nTo find: the number of such arrangements.\nMethod: \\(\\dfrac{n!}{n_1!\\,n_2! \\cdots}\\) applied to the letters that are free to move.",
+              "Fix C and K\n\\[\\text{C}\\ \\_\\ \\_\\ \\_\\ \\_\\ \\_\\ \\_\\ \\text{K}\\]\nWhy: A fixed letter has only one possible position, so it adds no choices (1 way each).",
+              "List the middle letters\nA, T, T, A, E, D\n\\[n = 6,\\quad \\text{A} = 2,\\ \\text{T} = 2\\]\nWhy: ATTACKED has 8 letters; removing C and K leaves 6, with A twice and T twice.",
+              "Apply the formula\n\\[\\dfrac{6!}{2!\\,2!} = \\dfrac{720}{4} = 180\\]\nWhy: Swapping the two A's or the two T's does not change the word.",
+              "Check\n\\[\\dfrac{8!}{2!\\,2!} = 10080 \\text{ (no condition)}\\]\nWhy: Without the condition there are 10080 words, and 180 is much smaller, as it should be; a full computer listing of words beginning with C and ending with K also gives 180."
+            ],
+            "final_answer": "\\(180\\) arrangements"
+          }
+        ]
+      }
+    }
+  ]
+}

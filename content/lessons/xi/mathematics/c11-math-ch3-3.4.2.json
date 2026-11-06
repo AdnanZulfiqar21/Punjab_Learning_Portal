@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH3-3.4.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch3",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch3/3.4.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 46,
+          "pdf_to": 46,
+          "note": "Book p. 41: 3.4.2 Radical Equations Reducible to the Quadratic Equation, definition, extraneous roots and Example 8"
+        }
+      ],
+      "title": "3.4.2 Radical Equations Reducible to the Quadratic Equation",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Equations involving radical expressions of the variable are called radical equations. To solve a radical equation, we first obtain an equation free from radicals."
+          },
+          {
+            "type": "paragraph",
+            "text": "Every solution of a radical equation is also a solution of the radical-free equation, but the new equation may have solutions that are not solutions of the original radical equation. Such extra solutions (roots) are called extraneous roots."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does squaring create extra roots? If \\(p = q\\), then certainly \\(p^{2} = q^{2}\\). But \\(p^{2} = q^{2}\\) only tells us \\(p = q\\) OR \\(p = -q\\). Squaring cannot tell the two cases apart.\nA tiny example: \\(x = 3\\) has one solution. Square it: \\(x^{2} = 9\\) has two solutions, \\(3\\) and \\(-3\\). The \\(-3\\) is an extraneous root of the squared equation.\nThis is why the last step of every radical equation is a check in the ORIGINAL equation."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Method for a radical equation:\n1. Note the conditions: every expression under a square root must be \\(\\ge 0\\).\n2. Isolate one radical on one side (if possible).\n3. Square both sides. If a radical remains, isolate it and square again.\n4. Simplify to \\(ax^{2} + bx + c = 0\\) and solve.\n5. Substitute each value in the original equation; reject the ones that do not satisfy it (extraneous roots)."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Solve \\(\\sqrt{x+8} + \\sqrt{x+3} = \\sqrt{12x+13}\\).",
+            "steps": [
+              "Given: \\(\\sqrt{x+8} + \\sqrt{x+3} = \\sqrt{12x+13}\\).\nTo find: the solution set.\nMethod: this is a radical equation. Square both sides to remove the radicals; one radical term remains, so isolate it and square again. The result is a quadratic. Because squaring can create extraneous roots, every candidate must be checked in the original equation.",
+              "Step 1: Note the conditions\nEach expression under a square root must be \\(\\ge 0\\):\n\\[x + 8 \\ge 0,\\ \\ x + 3 \\ge 0\\]\n\\[12x + 13 \\ge 0\\]\nWhy: a square root of a negative number is not a real number. These conditions tell us which values can possibly be solutions.",
+              "Step 2: Square both sides\nOn the left use \\((p + q)^{2} = p^{2} + 2pq + q^{2}\\) with \\(p = \\sqrt{x+8}\\), \\(q = \\sqrt{x+3}\\):\n\\[x + 8 + x + 3 + 2\\sqrt{x+8}\\sqrt{x+3}\\]\n\\[= 12x + 13\\]\nWhy: \\((\\sqrt{x+8})^{2} = x + 8\\) and \\((\\sqrt{12x+13})^{2} = 12x + 13\\). The middle term \\(2pq\\) keeps a radical, so we are not finished yet.",
+              "Step 3: Isolate the radical term\n\\[2x + 11 + 2\\sqrt{x+8}\\sqrt{x+3} = 12x + 13\\]\n\\[2\\sqrt{x+8}\\sqrt{x+3} = 10x + 2\\]\nDivide by 2 and join the roots:\n\\[\\sqrt{(x+8)(x+3)} = 5x + 1\\]\nWhy: before squaring again, the radical must stand alone on one side; otherwise squaring would bring a radical back. \\(\\sqrt{a}\\sqrt{b} = \\sqrt{ab}\\) holds because \\(a, b \\ge 0\\) here.",
+              "Step 4: Square again\n\\[(x+8)(x+3) = (5x+1)^{2}\\]\n\\[x^{2} + 11x + 24 = 25x^{2} + 10x + 1\\]\nWhy: now the equation is free of radicals. \\((x+8)(x+3) = x^{2} + 3x + 8x + 24\\) and \\((5x+1)^{2} = 25x^{2} + 10x + 1\\).",
+              "Step 5: Standard form\n\\[25x^{2} - x^{2} + 10x - 11x + 1 - 24 = 0\\]\n\\[24x^{2} - x - 23 = 0\\]\nWhy: move everything to the side with the larger \\(x^{2}\\) term so that \\(a\\) is positive.",
+              "Step 6: Factorise\n\\(ac = 24 \\times (-23) = -552\\); the numbers \\(-24\\) and \\(23\\) multiply to \\(-552\\) and add to \\(-1\\):\n\\[24x^{2} - 24x + 23x - 23 = 0\\]\n\\[24x(x - 1) + 23(x - 1) = 0\\]\n\\[(24x + 23)(x - 1) = 0\\]\n\\[x = -\\dfrac{23}{24} \\ \\text{or}\\ x = 1\\]\nWhy: splitting the middle term lets us take out a common factor \\((x - 1)\\). These are only candidates until they are checked.",
+              "Check: substitute both candidates in the original equation\nFor \\(x = 1\\):\n\\[\\sqrt{9} + \\sqrt{4} = 3 + 2 = 5\\]\n\\[\\sqrt{12 + 13} = \\sqrt{25} = 5\\]\nBoth sides are 5, so \\(x = 1\\) is a solution.\nFor \\(x = -\\frac{23}{24}\\): \\(x + 8 = \\frac{169}{24}\\), \\(x + 3 = \\frac{49}{24}\\), \\(12x + 13 = \\frac{3}{2}\\).\n\\[\\text{LHS} = \\dfrac{13}{\\sqrt{24}} + \\dfrac{7}{\\sqrt{24}} \\approx 4.08\\]\n\\[\\text{RHS} = \\sqrt{\\dfrac{3}{2}} \\approx 1.22\\]\nThe sides are not equal, so \\(x = -\\frac{23}{24}\\) is an extraneous root.\nWhy it appeared: in Step 3 the left side \\(\\sqrt{(x+8)(x+3)}\\) is never negative, but for \\(x = -\\frac{23}{24}\\) the right side is \\(5x + 1 = -\\frac{91}{24} < 0\\). Squaring hid this sign difference."
+            ],
+            "answer": "\\(-\\frac{23}{24}\\) is an extraneous root. Solution set \\(= \\{1\\}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our own short illustration (not from the book): solve \\(\\sqrt{x+2} = x\\).\nSquaring: \\(x + 2 = x^{2}\\), so \\(x^{2} - x - 2 = 0\\), \\((x - 2)(x + 1) = 0\\), giving \\(x = 2\\) or \\(x = -1\\).\nCheck \\(x = 2\\): \\(\\sqrt{4} = 2\\). Correct.\nCheck \\(x = -1\\): \\(\\sqrt{1} = 1 \\ne -1\\). Extraneous.\nSolution set \\(= \\{2\\}\\).\nQuick test: in \\(\\sqrt{\\ \\ } = \\) (expression), the expression on the right must be \\(\\ge 0\\) for a true solution."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Always show the check of every candidate in the original equation and write a sentence such as \"\\(-\\frac{23}{24}\\) is an extraneous root\". Marks are given for the check; an answer that keeps an extraneous root is wrong."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A radical equation has the variable under a root sign.\n2. Remove the radicals by isolating and squaring (sometimes twice).\n3. Squaring may create extraneous roots: values of the squared equation that do not satisfy the original one.\n4. Check every candidate in the original equation; keep only those that work."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing \\((\\sqrt{a} + \\sqrt{b})^{2} = a + b\\): the middle term \\(2\\sqrt{a}\\sqrt{b}\\) is missing.\n2. Squaring before isolating the radical, so the radical comes back.\n3. Not checking the candidates and giving an extraneous root as an answer.\n4. Checking in the squared equation instead of the original one: the squared equation is satisfied by both candidates."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,290 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.1.4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.1.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 224,
+          "pdf_to": 225,
+          "note": "Book p. 219-220: 12.1.4 (i) polygons in a unit circle, Figures 1-3; (ii) numerical approach, table of x^3 near 2. Book errors: heading says 'Circumscribing' (polygons are inscribed); f(1.999) printed 7.8806 (correct 7.988). Teaching notes ours."
+        }
+      ],
+      "title": "12.1.4 Concept of Limit of a Function (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH12-12.1.4",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab tak humne teen jumlon ka matlab samjha. Aaj hum dekhenge ke \"limit\" ka khayal amal mein kaise kaam karta hai. Kitab do tareeqe dikhati hai: (i) ek geometry wali misaal, daire (circle) ka area, aur (ii) ek numbers wali misaal, \\(x^{3}\\) ki table. Dono mein ek hi baat chhupi hai: koi cheez kisi value ke qareeb se qareeb tar jaati hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(i) By Finding the Area of Inscribed Regular Polygon"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ki heading \"Circumscribing Regular Polygon\" kehti hai, lekin text aur Figures 1-3 mein polygons daire ke andar bane hain (inscribed), yani daira polygon ko gher raha hai. Is liye hum ne heading sahi likhi hai: \"Inscribed Regular Polygon\"."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab kehti hai: unit radius (radius 1) wala ek daira lijiye jo ek square (4 sides wala regular polygon) ko gher leta hai (circumscribes), jaisa Figure 1 mein dikhaya gaya hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Square ki side \\(\\sqrt{2}\\) hai aur us ka area 2 square unit hai. Saaf hai ke andar bane 4-sided polygon ka area daire (circum-circle) ke area \\(\\pi = 3.142\\) se kam hai \\((\\pi r^{2} = \\pi(1)^{2} = \\pi = 3.142)\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch12-fig-1-square",
+            "alt": "A circle of radius 1 with a square inscribed in it. Both diagonals of the square are drawn and meet at the centre. The two lower half-diagonals are marked 1 and the bottom side of the square is marked root 2.",
+            "caption": "Figure 1: 4-sided polygon (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch12-fig-2-octagon",
+            "alt": "The same circle of radius 1 with a regular 8-sided polygon inscribed in it. Lines from the centre to all 8 vertices divide it into 8 equal triangles.",
+            "caption": "Figure 2: 8-sided polygon (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch12-fig-3-16-gon",
+            "alt": "The same circle of radius 1 with a regular 16-sided polygon inscribed in it. Lines from the centre to all 16 vertices divide it into 16 equal triangles; the polygon is now very close to the circle.",
+            "caption": "Figure 3: 16-sided polygon (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Side \\(\\sqrt{2}\\) kyun hai? Figure 1 mein jo do aadhe diagonals par \\(1\\) likha hai, woh daire ke radius hain. Square ke diagonals ek doosre ko right angle (90 degree) par kaatte hain. To har side ek right triangle ka hypotenuse hai jis ki dono legs \\(1\\) hain:\n\\[\\text{side} = \\sqrt{1^{2} + 1^{2}} = \\sqrt{2}\\]\n\\[\\text{area} = (\\sqrt{2})^{2} = 2\\]\nKyun: Pythagoras theorem se hypotenuse nikalta hai, aur square ka area side ka square hota hai.\nInscribed ka matlab: polygon daire ke andar bana ho aur us ke saare vertices (kone) daire par hon. Tab daira us polygon ka circum-circle (gherne wala daira) kehlata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab aage kehti hai: square ke vertices ke darmiyan wali arcs (daire ke tukron) ko aadha aadha karne se ek andar bana 8-sided regular polygon milta hai, Figure 2. Is ka area \\(2\\sqrt{2} = 2.828\\) square unit hai, jo daire ke area ke aur qareeb hai. Phir isi tarah arcs ko aadha karne se 16-sided regular polygon milta hai, Figure 3, jis ka area \\(3.061\\) square unit hai, jo daire ke area ke mazeed qareeb hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(2\\sqrt{2}\\) aur \\(3.061\\) kahan se aaye? Centre se vertices tak lines kheenchne se regular \\(n\\)-sided polygon \\(n\\) barabar triangles mein bat jata hai. Har triangle ki do sides \\(1\\) hain (radius) aur un ke beech angle \\(\\frac{360^{\\circ}}{n}\\) hai. Triangle ka area \\(\\frac{1}{2}ab\\sin C\\) hota hai, to har triangle ka area \\(\\frac{1}{2}(1)(1)\\sin\\frac{360^{\\circ}}{n}\\). Is liye\n\\[A_{n} = \\frac{n}{2}\\sin\\frac{360^{\\circ}}{n}\\]\n\\[A_{8} = 4\\sin 45^{\\circ} = 2\\sqrt{2}\\]\n\\[A_{16} = 8\\sin 22.5^{\\circ} \\approx 3.061\\]\nKyun: \\(\\sin 45^{\\circ} = \\frac{1}{\\sqrt{2}}\\), to \\(4 \\cdot \\frac{1}{\\sqrt{2}} = 2\\sqrt{2}\\). Yeh formula kitab mein nahin, lekin is se kitab ke numbers ki tasdeeq ho jaati hai."
+          },
+          {
+            "type": "table",
+            "header": [
+              "sides \\(n\\)",
+              "area \\(A_{n}\\)",
+              "decimal"
+            ],
+            "rows": [
+              [
+                "4",
+                "\\(2\\)",
+                "2"
+              ],
+              [
+                "8",
+                "\\(2\\sqrt{2}\\)",
+                "2.828"
+              ],
+              [
+                "16",
+                "\\(8\\sin 22.5^{\\circ}\\)",
+                "3.061"
+              ],
+              [
+                "32",
+                "\\(16\\sin 11.25^{\\circ}\\)",
+                "3.121"
+              ],
+              [
+                "64",
+                "\\(32\\sin 5.625^{\\circ}\\)",
+                "3.137"
+              ],
+              [
+                "128",
+                "\\(64\\sin 2.8125^{\\circ}\\)",
+                "3.140"
+              ]
+            ],
+            "caption": "Hamari table (kitab mein nahin): radius 1 wale daire mein bane regular polygons ke areas; yeh pi = 3.14159... ki taraf jaate hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "Har dafa arcs aadhi karne se area barhta kyun hai? Square ki har side aur daire ke beech ek khaali tukra (segment) bachta hai. Jab hum us arc ke beech mein naya vertex daire par lagate hain, to us khaali tukre ka ek bara hissa naye triangle se bhar jata hai. Yani har qadam par polygon pehle wale ko poora apne andar rakhta hai aur kuch mazeed jagah bhi gher leta hai.\nLekin polygon kabhi daire se bahar nahin ja sakta, kyun ke us ke saare vertices daire par hain. To area barhta bhi hai aur \\(\\pi\\) se kam bhi rehta hai. Barhti hui cheez jo ek hadd se aage na jaye, us hadd ki taraf hi jaati hai; yahan woh hadd \\(\\pi\\) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Table ke aakhri column ko dekhiye: \\(2\\), \\(2.828\\), \\(3.061\\), \\(3.121\\), \\(3.137\\), \\(3.140\\). Pehle bari chhalang (0.828), phir chhoti (0.233), phir aur chhoti (0.060, 0.016, 0.003). Farq har qadam par taqreeban chauthai reh jata hai. Jab farq itni tezi se ghate aur values ek hi number ke gird jama hon, to wahi number limit hota hai. \\(\\pi = 3.14159\\ldots\\) se muqabla kijiye, baat saaf ho jayegi."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is ka nateeja yeh hai ke jaise jaise \"\\(n\\)\", yani andar bane polygon ki sides ki tadaad, barhti hai, polygon ka area barhta hai aur \\(3.142\\) ke qareeb hota jata hai, jo radius 1 wale daire ka area hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is surat-e-haal ko hum yun kehte hain ke jab \\(n\\) infinity ki taraf jaye to andar bane polygon ke area ki limiting value (aakhri hadd) daire ka area hai, yani\nArea of inscribed polygon \\(\\to\\) Area of circle as \\(n \\to \\infty\\)\nChunanche radius 1 wale daire ka area \\(= \\pi = 3.142\\) (taqreeban)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "Limit ka pattern pehchaniye: koi bhi polygon, chahe us ki hazaar sides hon, ka area bilkul \\(\\pi\\) nahin hota, kyun ke har polygon daire ke kinaron par patli patli pattiyan khaali chhor deta hai. Phir bhi areas \\(\\pi\\) ke jitna chahein qareeb aa jaate hain. Isi tareeqe se Archimedes ne 96 sides tak ke polygons le kar daire ka area aur \\(\\pi\\) ki value nikali thi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Formula \\(A_{n} = \\frac{n}{2}\\sin\\frac{360^{\\circ}}{n}\\) se 6-sided polygon (hexagon) ka area nikaliye. Kya yeh 4-sided aur 8-sided ke darmiyan hai?\nJawab: \\(A_{6} = 3\\sin 60^{\\circ} = 3 \\cdot \\frac{\\sqrt{3}}{2} \\approx 2.598\\). Haan, \\(2\\) aur \\(2.828\\) ke darmiyan hai: jitni zyada sides, utna zyada area."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(ii) Numerical Approach"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab doosra tareeqa, numbers wala. Kitab kehti hai: function \\(f(x) = x^{3}\\) lijiye.\n\\(f(x)\\) ka domain tamaam real numbers ka set hai.\nAaiye \\(f(x) = x^{3}\\) ki limit nikalein jab \\(x\\), 2 ki taraf jaye."
+          },
+          {
+            "type": "paragraph",
+            "text": "Neeche \\(f(x)\\) ki values ki table hai jab \\(x\\) baayein aur daayein dono taraf se 2 ke qareeb aata hai:"
+          },
+          {
+            "type": "table",
+            "header": [
+              "\\(x\\)",
+              "\\(f(x) = x^{3}\\)",
+              "kis taraf se"
+            ],
+            "rows": [
+              [
+                "1",
+                "1",
+                "2 ke baayein se →"
+              ],
+              [
+                "1.5",
+                "3.375",
+                "2 ke baayein se →"
+              ],
+              [
+                "1.8",
+                "5.832",
+                "2 ke baayein se →"
+              ],
+              [
+                "1.9",
+                "6.859",
+                "2 ke baayein se →"
+              ],
+              [
+                "1.99",
+                "7.8806",
+                "2 ke baayein se →"
+              ],
+              [
+                "1.999",
+                "7.988",
+                "2 ke baayein se →"
+              ],
+              [
+                "1.9999",
+                "7.9988",
+                "2 ke baayein se →"
+              ],
+              [
+                "2.0001",
+                "8.0012",
+                "← 2 ke daayein se"
+              ],
+              [
+                "2.001",
+                "8.012",
+                "← 2 ke daayein se"
+              ],
+              [
+                "2.01",
+                "8.1206",
+                "← 2 ke daayein se"
+              ],
+              [
+                "2.1",
+                "9.261",
+                "← 2 ke daayein se"
+              ],
+              [
+                "2.2",
+                "10.648",
+                "← 2 ke daayein se"
+              ],
+              [
+                "2.5",
+                "15.625",
+                "← 2 ke daayein se"
+              ],
+              [
+                "3",
+                "27",
+                "← 2 ke daayein se"
+              ]
+            ],
+            "caption": "x ke 2 ke qareeb aane par f(x) = x³ ki values, baayein aur daayein dono taraf se (kitab yeh table safhe ke aar paar ek line mein chhaapti hai)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab \\(x = 1.999\\) ke saamne \\(f(x) = 7.8806\\) chhaapti hai, jo bilkul wahi value hai jo \\(x = 1.99\\) ki hai. Sahi value \\(1.999^{3} = 7.988006 \\approx 7.988\\) hai. Hum ne table mein sahi value likhi hai. Pehchaan ka tareeqa: values ko lagataar 8 ki taraf barhna chahiye; jo value peeche reh jaye, woh shak wali hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Table batati hai ke jaise jaise \\(x\\), 2 ke qareeb se qareeb tar hota hai (kaafi qareeb), dono taraf se, \\(f(x)\\) bhi 8 ke qareeb se qareeb tar hota jata hai.\nHum kehte hain ke jab \\(x\\), 2 ki taraf jaye to \\(f(x)\\) ki limit 8 hai, aur likhte hain:\n\\[f(x) \\to 8 \\text{ as } x \\to 2\\]\nor\n\\[\\lim_{x \\to 2} x^{3} = 8\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Table ko dono kinaron se beech ki taraf parhiye. Baayein se: \\(6.859, 7.8806, 7.988, 7.9988\\); 8 se faasla taqreeban \\(1.1, 0.12, 0.012, 0.0012\\). Daayein se: \\(9.261, 8.1206, 8.012, 8.0012\\); faasla taqreeban \\(1.3, 0.12, 0.012, 0.0012\\).\nDekha? Jab bhi \\(x\\), 2 se das guna qareeb hota hai, \\(f(x)\\) bhi 8 se taqreeban das guna qareeb ho jata hai. Dono taraf se ek hi manzil, 8.\nEk aur baat: table mein \\(x = 2\\) kahin istemal nahin hua. Yahan \\(f(2) = 8\\) ittefaq se limit ke barabar hai, lekin limit sirf 2 ke qareeb wali values se nikali gayi hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yahi tareeqa \\(g(x) = x^{2}\\) par aazmaiye jab \\(x \\to 3\\):\n\\(2.9^{2} = 8.41\\), \\(2.99^{2} = 8.9401\\), \\(2.999^{2} = 8.994001\\)\n\\(3.1^{2} = 9.61\\), \\(3.01^{2} = 9.0601\\), \\(3.001^{2} = 9.006001\\)\nDono taraf se values \\(9\\) ki taraf ja rahi hain, is liye \\(\\lim_{x \\to 3} x^{2} = 9\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Kisi limit ko numerically dikhana ho to point ke dono taraf values lein (jaise \\(1.9, 1.99, 1.999\\) aur \\(2.1, 2.01, 2.001\\)), har ek ka \\(f(x)\\) nikalein, aur woh mushtarka (common) value likhein jis ki taraf dono jaate hain. Sirf ek taraf ki values kaafi nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Radius 1 wale daire mein bane regular polygons ke areas \\(2, 2.828, 3.061, \\ldots\\) hain, aur sides \\(n \\to \\infty\\) hone par yeh \\(\\pi \\approx 3.142\\) ki taraf jaate hain.\n2. Polygon ke area ki limiting value daire ka area hai, halan ke koi polygon us tak pohanchta nahin.\n3. Numbers se: \\(x \\to 2\\) par dono taraf se \\(x^{3}\\) ki values 8 ki taraf jaati hain: \\(\\lim_{x \\to 2} x^{3} = 8\\).\n4. Limit point ke qareeb ki values se nikalti hai, point par ki value se nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Table mein sirf ek taraf ki values lena.\n2. Table ki ghalat value nakal kar lena. Check kijiye ke values lagataar limit ki taraf ja rahi hain; jo value ulti chhalang lagaye (jaise kitab mein \\(1.999\\) par chhapi \\(7.8806\\)), woh ghalti ki nishani hai.\n3. Inscribed (polygon andar, vertices daire par) aur circumscribed (polygon bahar, sides daire ko chhooti hui) ko gaddmadd karna."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.8",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.8",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 70,
+          "pdf_to": 70,
+          "note": "Book p. 65: system (i), consistent and inconsistent systems, the three methods"
+        }
+      ],
+      "title": "4.8 System of Non-Homogeneous Linear Equations",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Three linear equations in three variables such as:\n\\[a_1x + b_1y + c_1z = d_1\\]\n\\[a_2x + b_2y + c_2z = d_2\\]\n\\[a_3x + b_3y + c_3z = d_3 \\quad \\text{...(i)}\\]\nis called a system of non-homogeneous linear equations in the three variables \\(x\\), \\(y\\) and \\(z\\), if constant terms \\(d_1\\), \\(d_2\\) and \\(d_3\\) are not all zero.",
+            "bold": [
+              "non-homogeneous linear equations"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\"Non-homogeneous\" only means that at least one right-hand side is not zero. If \\(d_1 = d_2 = d_3 = 0\\) the system is homogeneous; that case comes in Section 4.9.\nIn matrix language system (i) is \\(AX = B\\) with\n\\[A = \\begin{bmatrix}a_1 & b_1 & c_1 \\\\ a_2 & b_2 & c_2 \\\\ a_3 & b_3 & c_3\\end{bmatrix}\\]\n\\[X = \\begin{bmatrix}x \\\\ y \\\\ z\\end{bmatrix},\\quad B = \\begin{bmatrix}d_1 \\\\ d_2 \\\\ d_3\\end{bmatrix}\\]\n\\(A\\) is the coefficient matrix. \\(A\\) with the column \\(B\\) attached is the augmented matrix. Non-homogeneous means \\(B \\ne O\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Consistent: A system of linear equations is said to be consistent if the system has a unique solution or it has infinitely many solutions.",
+            "bold": [
+              "Consistent"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Inconsistent: A system of linear equations is said to be inconsistent if the system has no solution.",
+            "bold": [
+              "Inconsistent"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Three possibilities, seen with two variables (each equation is a straight line):\n\\(x + y = 2\\), \\(x - y = 0\\): the lines cross at one point, \\((1, 1)\\). Unique solution, consistent.\n\\(x + y = 2\\), \\(2x + 2y = 4\\): the second equation is the first one doubled, the lines coincide. Infinitely many solutions, consistent.\n\\(x + y = 2\\), \\(x + y = 3\\): parallel lines, they never meet. No solution, inconsistent.\nA linear system never has exactly two or three solutions: it is always one, infinitely many, or none."
+          },
+          {
+            "type": "paragraph",
+            "text": "Now we will solve the system of non-homogeneous linear equations with the help of the following methods:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) Using reduced echelon form",
+              "(ii) Using matrix inversion method",
+              "(iii) Using Cramer's rule"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Which method when?\nReduced echelon form works for every system: unique, infinitely many or no solution. It also tells us which case we are in.\nMatrix inversion and Cramer's rule need \\(|A| \\ne 0\\); then the solution is unique. They are quick for \\(3 \\times 3\\) systems with a non-zero determinant.\nEach method has its own page: 4.8.1, 4.8.2 and 4.8.3."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Non-homogeneous system: \\(AX = B\\) with the constants \\(d_1, d_2, d_3\\) not all zero.\n2. Consistent: a unique solution or infinitely many solutions.\n3. Inconsistent: no solution.\n4. Three methods: reduced echelon form, matrix inversion, Cramer's rule."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Thinking \"consistent\" means \"unique solution\". Infinitely many solutions is also consistent.\n2. Calling a system homogeneous because one constant is zero. It is homogeneous only when all constants are zero.\n3. Using matrix inversion or Cramer's rule when \\(|A| = 0\\). Then use the echelon method."
+          }
+        ]
+      }
+    }
+  ]
+}

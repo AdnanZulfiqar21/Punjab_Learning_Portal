@@ -135,6 +135,25 @@ class _Marked(_Block):
         return self
 
 
+# BOOK-BOLD-01: the terms the book prints in bold inside running text (owner, 2026-11-02: "jasa sb book ma hy wasa kr
+# do"). Clients draw every occurrence of each term in bold. Each term must occur in the block's own text.
+Bold = Annotated[list[Short] | None, Field(max_length=40)]
+
+
+class _Emphasised(_Marked):
+    """A block of running text that can carry the book's bold terms (BOOK-BOLD-01)."""
+
+    bold: Bold = None  # absent, not empty, so stored bodies stay as authored
+
+    @model_validator(mode="after")
+    def _bold_in_text(self) -> _Emphasised:
+        texts = self._texts()
+        for term in self.bold or []:
+            if not any(term in t for t in texts):
+                raise ValueError(f"bold term {term!r} does not occur in the block's text")
+        return self
+
+
 class Heading(_Marked):
     type: Literal["heading"]
     # 2 a section, 3 a heading inside it, 4 a numbered sub-heading under that (owner, 2026-10-29).
@@ -145,7 +164,7 @@ class Heading(_Marked):
         return [self.text]
 
 
-class Paragraph(_Marked):
+class Paragraph(_Emphasised):
     type: Literal["paragraph"]
     text: Text
 
@@ -153,22 +172,28 @@ class Paragraph(_Marked):
         return [self.text]
 
 
-class ListBlock(_Marked):
+class ListBlock(_Emphasised):
     type: Literal["list"]
     ordered: bool = False
+    # BOOK-LAYOUT-01: a numbered list the book interrupts (a figure or box printed between two steps) continues from
+    # this number, so the steps keep the book's numbers (owner, 2026-11-03).
+    start: Annotated[int, Field(ge=1, le=999)] | None = None
     items: list[Annotated[str, Field(min_length=1, max_length=1000)]] = Field(min_length=1, max_length=50)
 
     def _texts(self) -> list[str]:
         return list(self.items)
 
 
-class Callout(_Marked):
+class Callout(_Emphasised):
     type: Literal["callout"]
     # `correction`: the right version of a book error marked in the block before it (BOOK-CORRECTION-01). A printed
     # box (Do You Know, For Your Information) may itself carry marks; a correction box never does.
     tone: Literal["definition", "note", "tip", "warning", "correction"] = "note"
     title: Short | None = None
     text: Text
+    # BOOK-LAYOUT-02: a printed box the book prints across the full page width; it is never drawn at the side of the
+    # text, however short (owner, 2026-11-04). Absent means the reader decides from the box's length.
+    wide: bool | None = None
 
     def _texts(self) -> list[str]:
         if self.tone == "correction" and self.book_errors:
@@ -176,7 +201,7 @@ class Callout(_Marked):
         return [*([self.title] if self.title else []), self.text]
 
 
-class Table(_Marked):
+class Table(_Emphasised):
     type: Literal["table"]
     caption: Short
     header: list[Annotated[str, Field(max_length=200)]] = Field(min_length=1, max_length=12)
@@ -254,6 +279,13 @@ class Checkpoint(_Block):
     options: list[CheckpointOption] = Field(default_factory=list, max_length=6)
     answer_id: str | None = None
     explanation: Text
+    # SOLVED-QUESTION-01 (owner, 2026-11-05, Mathematics): a book exercise question solved step by step. `ref` is the
+    # printed question number ("3(ii)"), the same in both languages, so a language switch and the question's video
+    # solution find the same question; `steps` are the numbered working shown with the revealed answer, and
+    # `final_answer` is set apart from them. `explanation` then says how to think about the question.
+    ref: Annotated[str, Field(min_length=1, max_length=40)] | None = None
+    steps: list[Annotated[str, Field(min_length=1, max_length=2000)]] | None = Field(default=None, max_length=30)
+    final_answer: Text | None = None
     answer_figure: AnswerFigure | None = None
     answer_table: AnswerTable | None = None
 
@@ -309,6 +341,9 @@ class Diagram(_Block):
     alt: Annotated[str, Field(min_length=3, max_length=500)]
     caption: Short
     long_description: Text | None = None
+    # BOOK-LAYOUT-01: printed beside the text rather than across the page; on a wide screen it sits at the side of the
+    # paragraph it is printed with, as in the book (owner, 2026-11-03). Absent means across the page.
+    side: bool | None = None
 
 
 class Handout(_Block):
@@ -442,6 +477,7 @@ def text_of(block_list: list[AnyBlock]) -> str:
             "explanation",
             "problem",
             "answer",
+            "final_answer",
             "alt",
         ):
             v = getattr(b, attr, None)

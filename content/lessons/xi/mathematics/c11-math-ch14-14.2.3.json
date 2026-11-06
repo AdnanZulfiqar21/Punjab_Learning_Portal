@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-14.2.3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/14.2.3",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 274,
+          "pdf_to": 275,
+          "note": "Book p. 269-270: 14.2.3 projection OM = |v| cos theta with the right-triangle figure, geometric meaning of u.v, projection formulas u.v/|u| and u.v/|v|. Book error: theta printed as 0 in 'Let 0 be the angle ... 0 <= 0 <= pi'."
+        }
+      ],
+      "title": "14.2.3 Projection of a Vector along Another Vector",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "In many physical applications, it is required to know \"how much\" of a vector is applied along a given direction. For this purpose, we find the projection of one vector along the other vector."
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(\\overrightarrow{OA} = \\underline{u}\\) and \\(\\overrightarrow{OB} = \\underline{v}\\).\nLet \\(0\\) be the angle between them, such that \\(0 \\le 0 \\le \\pi\\).",
+            "book_errors": [
+              "Let \\(0\\) be the angle between them, such that \\(0 \\le 0 \\le \\pi\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \"Let 0 be the angle between them, such that 0 ≤ 0 ≤ π\": the letter θ has come out as the digit 0. It should read: let \\(\\theta\\) be the angle between them, such that \\(0 \\le \\theta \\le \\pi\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Draw \\(\\overline{BM} \\perp \\overline{OA}\\). Then \\(\\overline{OM}\\) is called the projection of \\(\\underline{v}\\) along \\(\\underline{u}\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch14-fig-projection",
+            "alt": "Vector u along the horizontal line from O to A and vector v from O to B making angle theta with OA. A dashed perpendicular drops from B to the point M on OA, with a right-angle mark at M. Below, the length OM is marked as the magnitude of v times cos theta.",
+            "caption": "Figure: OM = |v| cos θ is the projection of v along u (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "From the figure:\n\\[\\dfrac{\\overline{OM}}{\\overline{OB}} = \\cos\\theta\\]\nthat is,\n\\[\\overline{OM} = |\\overline{OB}|\\cos\\theta\\]\n\\[= |\\underline{v}|\\cos\\theta \\quad \\text{...(1)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Now,\n\\[\\underline{u} \\cdot \\underline{v} = |\\underline{u}||\\underline{v}|\\cos\\theta\\]\n\\[= |\\underline{u}|(|\\underline{v}|\\cos\\theta)\\]\n\\[= |\\underline{u}|(\\overline{OM})\\]\n= (magnitude of \\(\\underline{u}\\)) (projection of \\(\\underline{v}\\) along \\(\\underline{u}\\))"
+          },
+          {
+            "type": "paragraph",
+            "text": "Thus, geometrically, the dot product of two vectors represents the product of the magnitude of one vector and the projection of the other vector onto it. In other words, the dot product of two vectors shows how much one vector extends in the direction of another.",
+            "bold": [
+              "geometrically"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Think of the projection as the shadow of \\(\\underline{v}\\) on the line of \\(\\underline{u}\\) when light falls straight down (perpendicular to \\(\\underline{u}\\)). In the right triangle \\(OMB\\), \\(\\overline{OB} = |\\underline{v}|\\) is the hypotenuse and \\(\\overline{OM}\\) is the side next to \\(\\theta\\), so \\(\\overline{OM} = |\\underline{v}|\\cos\\theta\\) (adjacent = hypotenuse \\(\\times\\) cos).\nSo \\(\\underline{u} \\cdot \\underline{v}\\) = (length of \\(\\underline{u}\\)) \\(\\times\\) (shadow of \\(\\underline{v}\\) on \\(\\underline{u}\\))."
+          },
+          {
+            "type": "paragraph",
+            "text": "Now, by definition,\n\\[\\cos\\theta = \\dfrac{\\underline{u} \\cdot \\underline{v}}{|\\underline{u}||\\underline{v}|} \\quad \\text{...(2)}\\]\nFrom (1) and (2),\n\\[\\overline{OM} = |\\underline{v}| \\cdot \\dfrac{\\underline{u} \\cdot \\underline{v}}{|\\underline{u}||\\underline{v}|}\\]\n\\[= \\dfrac{\\underline{u} \\cdot \\underline{v}}{|\\underline{u}|}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(\\therefore\\)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Projection of } \\underline{v} \\text{ along } \\underline{u} = \\dfrac{\\underline{u} \\cdot \\underline{v}}{|\\underline{u}|}",
+            "text_alt": "projection of v along u equals u dot v over the magnitude of u"
+          },
+          {
+            "type": "paragraph",
+            "text": "Similarly,"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Projection of } \\underline{u} \\text{ along } \\underline{v} = \\dfrac{\\underline{u} \\cdot \\underline{v}}{|\\underline{v}|}",
+            "text_alt": "projection of u along v equals u dot v over the magnitude of v"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to remember the formulas: the projection of a vector along another is the dot product divided by the length of the vector you project onto (the one written after \"along\").\nThe projection is a scalar (a signed length). If \\(\\theta\\) is obtuse, \\(\\cos\\theta < 0\\): the foot \\(M\\) falls on the other side of \\(O\\) and the projection is negative. If \\(\\underline{u} \\perp \\underline{v}\\), the projection is \\(0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "A worked example of ours: \\(\\underline{u} = 2\\underline{i} - \\underline{j} + 2\\underline{k}\\), \\(\\underline{v} = \\underline{i} + \\underline{j} + \\underline{k}\\).\n\\[\\underline{u} \\cdot \\underline{v} = 2 - 1 + 2 = 3\\]\n\\[|\\underline{u}| = \\sqrt{4 + 1 + 4} = 3,\\quad |\\underline{v}| = \\sqrt{3}\\]\n\\[\\text{proj. of } \\underline{v} \\text{ along } \\underline{u} = \\tfrac{3}{3} = 1\\]\n\\[\\text{proj. of } \\underline{u} \\text{ along } \\underline{v} = \\tfrac{3}{\\sqrt{3}} = \\sqrt{3}\\]\nThe two projections are different numbers, so read carefully which vector is projected along which."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Projection of \\(\\underline{v}\\) along \\(\\underline{u}\\) \\(= |\\underline{v}|\\cos\\theta = \\frac{\\underline{u} \\cdot \\underline{v}}{|\\underline{u}|}\\).\n2. Projection of \\(\\underline{u}\\) along \\(\\underline{v}\\) \\(= |\\underline{u}|\\cos\\theta = \\frac{\\underline{u} \\cdot \\underline{v}}{|\\underline{v}|}\\).\n3. Geometric meaning: \\(\\underline{u} \\cdot \\underline{v} = |\\underline{u}| \\times\\) (projection of \\(\\underline{v}\\) along \\(\\underline{u}\\)).\n4. The projection is a number; it is negative for an obtuse angle and zero for perpendicular vectors."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Dividing by the wrong magnitude: for the projection of \\(\\underline{v}\\) along \\(\\underline{u}\\) divide by \\(|\\underline{u}|\\), not \\(|\\underline{v}|\\).\n2. Dividing by \\(|\\underline{u}|^{2}\\) and writing a vector: \\(\\frac{\\underline{u} \\cdot \\underline{v}}{|\\underline{u}|^{2}}\\underline{u}\\) is the vector projection, which this book does not define; the book's projection is the number \\(\\frac{\\underline{u} \\cdot \\underline{v}}{|\\underline{u}|}\\).\n3. Dropping a negative sign: a negative projection is a correct answer when the angle is obtuse."
+          }
+        ]
+      }
+    }
+  ]
+}

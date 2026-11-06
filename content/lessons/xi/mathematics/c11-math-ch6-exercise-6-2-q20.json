@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-2-Q20",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-2-q20",
+      "title": "Question 20",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 99,
+          "pdf_to": 99,
+          "note": "Exercise 6.2, Question 20: book page 94 (PDF 99); no answer-key entry (proof)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "20",
+            "prompt": "20. If \\(a_1, a_2, a_3, \\ldots, a_n\\) are positive and in A.P., prove that \\(\\frac{1}{\\sqrt{a_1} + \\sqrt{a_2}} + \\frac{1}{\\sqrt{a_2} + \\sqrt{a_3}} + \\cdots + \\frac{1}{\\sqrt{a_{n-1}} + \\sqrt{a_n}} = \\frac{n - 1}{\\sqrt{a_1} + \\sqrt{a_n}}\\).",
+            "explanation": "A proof with a long sum. Each fraction has a sum of two square roots at the bottom.\nRationalising each fraction makes its bottom equal to \\(d\\), and then the sum collapses (telescopes).\nPlan: rationalise one general term, add all of them, then rewrite the result.",
+            "steps": [
+              "Given: \\(a_1, \\ldots, a_n\\) positive, in A.P. with common difference \\(d\\)\nTo prove: L.H.S. \\(= \\dfrac{n - 1}{\\sqrt{a_1} + \\sqrt{a_n}}\\).\nMethod: Rationalise; use \\(a_{r+1} - a_r = d\\) and \\(a_n - a_1 = (n - 1)d\\). First take \\(d \\ne 0\\).",
+              "Rationalise a general term\n\\[\\dfrac{1}{\\sqrt{a_r} + \\sqrt{a_{r+1}}}\\]\n\\[= \\dfrac{\\sqrt{a_{r+1}} - \\sqrt{a_r}}{a_{r+1} - a_r}\\]\n\\[= \\dfrac{\\sqrt{a_{r+1}} - \\sqrt{a_r}}{d}\\]\nWhy: Multiply top and bottom by \\(\\sqrt{a_{r+1}} - \\sqrt{a_r}\\); the bottom becomes \\((\\sqrt{a_{r+1}})^2 - (\\sqrt{a_r})^2\\) because \\((x + y)(y - x) = y^2 - x^2\\), and neighbouring terms of an A.P. differ by \\(d\\).",
+              "Add all the terms\n\\[\\text{L.H.S.} = \\dfrac{1}{d}\\big[(\\sqrt{a_2} - \\sqrt{a_1}) + (\\sqrt{a_3} - \\sqrt{a_2})\\]\n\\[+ \\cdots + (\\sqrt{a_n} - \\sqrt{a_{n-1}})\\big]\\]\n\\[= \\dfrac{\\sqrt{a_n} - \\sqrt{a_1}}{d}\\]\nWhy: Every middle root appears once with + and once with -, so only the first and last survive.",
+              "Rationalise again\n\\[= \\dfrac{a_n - a_1}{d(\\sqrt{a_1} + \\sqrt{a_n})}\\]\nWhy: The answer has \\(\\sqrt{a_1} + \\sqrt{a_n}\\) at the bottom, so multiply top and bottom by it; the top becomes \\((\\sqrt{a_n})^2 - (\\sqrt{a_1})^2 = a_n - a_1\\).",
+              "Use \\(a_n - a_1 = (n - 1)d\\)\n\\[= \\dfrac{(n - 1)d}{d(\\sqrt{a_1} + \\sqrt{a_n})}\\]\n\\[= \\dfrac{n - 1}{\\sqrt{a_1} + \\sqrt{a_n}} = \\text{R.H.S.}\\]\nWhy: \\(a_n = a_1 + (n - 1)d\\); then \\(d\\) cancels.",
+              "The case \\(d = 0\\)\n\\[\\text{L.H.S.} = (n - 1) \\cdot \\dfrac{1}{2\\sqrt{a_1}} = \\text{R.H.S.}\\]\nWhy: If \\(d = 0\\) all terms are equal; there are \\(n - 1\\) equal fractions and the right side is also \\(\\frac{n - 1}{2\\sqrt{a_1}}\\). So the result holds in every case."
+            ],
+            "final_answer": "Hence proved: the sum equals \\(\\frac{n - 1}{\\sqrt{a_1} + \\sqrt{a_n}}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

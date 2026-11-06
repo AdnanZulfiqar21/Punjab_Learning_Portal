@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.4.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.4.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 59,
+          "pdf_to": 59,
+          "note": "Book p. 54: 4.4.1 Minor and Cofactor of an Element, the deleted row/column figure for M_12, the cofactor A_12; callouts marked Teaching note / Key points / Common mistake are ours."
+        }
+      ],
+      "title": "4.4.1 Minor and Cofactor of an Element of a Matrix or its Determinant",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A determinant of order 3 is worked out by breaking it into smaller determinants of order 2. The minor and the cofactor are the names of these smaller pieces. Learn them well: they are used for every determinant of order 3 (4.4.2) and again for the adjoint and inverse (4.5)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Minor of an Element"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let us consider a square matrix \\(A\\) of order \\(n\\), then the minor of an element \\(a_{ij}\\), denoted by \\(M_{ij}\\), is the determinant formed by deleting the \\(i\\)th row and the \\(j\\)th column of \\(A\\) (or \\(|A|\\))."
+          },
+          {
+            "type": "paragraph",
+            "text": "For example, consider a square matrix \\(A\\) of order 3,"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[A = \\begin{bmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "To find the minor of the element \\(a_{12}\\), delete the first row and second column of \\(A\\); that is"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch4-fig-minor-m12",
+            "alt": "A 3 by 3 matrix with entries a11 to a33. A dashed line strikes out the first row and another dashed line strikes out the second column. The four entries left, a21, a23, a31, a33, form the 2 by 2 determinant M12.",
+            "caption": "Figure: deleting row 1 and column 2 of A leaves the minor M₁₂ (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[M_{12} = \\begin{vmatrix} a_{21} & a_{23} \\\\ a_{31} & a_{33} \\end{vmatrix}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to read \\(a_{ij}\\): the first subscript \\(i\\) is the row, the second \\(j\\) is the column. So \\(a_{12}\\) sits in row 1, column 2, and to find \\(M_{12}\\) we cover row 1 and column 2.\nWhy delete exactly that row and column? Because they are the row and column that pass through the element itself. What is left is always a square block one size smaller: for order 3 every minor is a determinant of order 2, so a matrix of order 3 has 9 minors, one for each element."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Cofactor of an Element"
+          },
+          {
+            "type": "paragraph",
+            "text": "The cofactor of an element \\(a_{ij}\\) of a square matrix \\(A\\), denoted by \\(A_{ij}\\), is defined by"
+          },
+          {
+            "type": "equation",
+            "latex": "A_{ij} = (-1)^{i+j} M_{ij}",
+            "text_alt": "A sub i j equals minus one to the power i plus j, times M sub i j"
+          },
+          {
+            "type": "paragraph",
+            "text": "For example,"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[A_{12} = (-1)^{1+2} M_{12}\\]\n\\[= (-1)^{3} \\begin{vmatrix} a_{21} & a_{23} \\\\ a_{31} & a_{33} \\end{vmatrix}\\]\n\\[= -\\begin{vmatrix} a_{21} & a_{23} \\\\ a_{31} & a_{33} \\end{vmatrix}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The factor \\((-1)^{i+j}\\) only decides a sign:\nif \\(i + j\\) is even, \\((-1)^{i+j} = +1\\) and the cofactor equals the minor;\nif \\(i + j\\) is odd, \\((-1)^{i+j} = -1\\) and the cofactor is the minor with its sign changed.\nFor order 3 the signs form a chessboard pattern, starting with \\(+\\) at the top left:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\begin{bmatrix} + & - & + \\\\ - & + & - \\\\ + & - & + \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "So \\(A_{11} = +M_{11}\\), \\(A_{12} = -M_{12}\\), \\(A_{13} = +M_{13}\\), \\(A_{21} = -M_{21}\\), \\(A_{22} = +M_{22}\\), and so on."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our own worked example (not from the book). Take\n\\[B = \\begin{bmatrix} 2 & 1 & 3 \\\\ 0 & 4 & 5 \\\\ 1 & 0 & 6 \\end{bmatrix}\\]\nFind the minors and cofactors of the elements of row 1.\n\\(M_{11}\\): delete row 1 and column 1:\n\\[M_{11} = \\begin{vmatrix} 4 & 5 \\\\ 0 & 6 \\end{vmatrix} = 24 - 0 = 24\\]\n\\(M_{12}\\): delete row 1 and column 2:\n\\[M_{12} = \\begin{vmatrix} 0 & 5 \\\\ 1 & 6 \\end{vmatrix} = 0 - 5 = -5\\]\n\\(M_{13}\\): delete row 1 and column 3:\n\\[M_{13} = \\begin{vmatrix} 0 & 4 \\\\ 1 & 0 \\end{vmatrix} = 0 - 4 = -4\\]\nCofactors (signs \\(+, -, +\\)):\n\\[B_{11} = (+1)(24) = 24\\]\n\\[B_{12} = (-1)(-5) = 5\\]\n\\[B_{13} = (+1)(-4) = -4\\]\nThese are used again in 4.4.2, where this determinant is found to be 41."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Minor \\(M_{ij}\\): the determinant left after deleting row \\(i\\) and column \\(j\\).\n2. Cofactor \\(A_{ij} = (-1)^{i+j} M_{ij}\\): the minor with a sign.\n3. \\(i + j\\) even: cofactor = minor; \\(i + j\\) odd: cofactor = \\(-\\)minor.\n4. Order 3 sign pattern: \\(+ - +\\), \\(- + -\\), \\(+ - +\\).\n5. A matrix of order 3 has 9 minors and 9 cofactors, each a determinant of order 2 (with a sign)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Mixing up rows and columns: in \\(a_{32}\\) the row is 3 and the column is 2.\n2. Giving the minor the sign: the minor has no extra sign; only the cofactor carries \\((-1)^{i+j}\\).\n3. Double negatives: if \\(M_{12} = -5\\), then \\(A_{12} = -(-5) = 5\\), not \\(-5\\).\n4. Using the same letter carelessly: \\(a_{12}\\) (small \\(a\\)) is an element, \\(A_{12}\\) (capital) is its cofactor."
+          }
+        ]
+      }
+    }
+  ]
+}

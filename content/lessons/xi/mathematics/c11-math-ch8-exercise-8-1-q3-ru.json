@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 154,
+          "pdf_to": 154,
+          "note": "Exercise 8.1, Question 3: book page 149 (PDF 154); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-1-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. Prove that \\(\\sum_{k=0}^{n} r^k = \\frac{r^{n+1} - 1}{r - 1}\\), whenever \\(n\\) is a positive integer. [printed with the lower limit \\(k = 1\\), which makes the statement false; \\(r \\ne 1\\) is also needed]",
+            "explanation": "\\(\\sum\\) (sigma) ka nishan \"jama karo\" ke liye hai: \\(\\sum_{k=0}^{n} r^k\\) ka matlab hai \\(k = 0\\) se \\(k = n\\) tak \\(r^k\\) jama karo, yani \\(1 + r + r^2 + \\cdots + r^n\\). Yeh G.P. ka sum hai jis mein \\(n + 1\\) terms hain.\nKitab ne neeche wali limit \\(k = 1\\) chhapi hai, jis se statement ghalat ho jati hai (neeche \"Kitab ki ghalti\" dekhiye). Hum sahi statement, \\(k = 0\\) se, saabit karenge, aur \\(r \\ne 1\\) ki shart bhi zaroori hai.\nPlan: sum ko poora likh kar \\(n = 1\\) check karna, phir agli term \\(r^{m+1}\\) jama kar ke ek fraction banana.",
+            "steps": [
+              "Diya gaya hai: \\(S(n): 1 + r + r^2 + \\cdots + r^n = \\frac{r^{n+1} - 1}{r - 1}\\), \\(r \\ne 1\\).\nSaabit karna hai: \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nTareeqa: Mathematical induction. Ek ahem baat: sum ke andar \\(k\\) pehle se istemal ho raha hai, is liye induction wali value ko \\(m\\) kahenge, taake do cheezon ka ek naam na ho aur confusion na bane. \\(r^m\\) ke baad agli term \\(r^{m+1}\\) hai.",
+              "Base case: \\(n = 1\\) rakhein\n\\[\\text{L.H.S.} = r^0 + r^1 = 1 + r\\]\n\\[\\text{R.H.S.} = \\dfrac{r^2 - 1}{r - 1}\\]\n\\[= \\dfrac{(r - 1)(r + 1)}{r - 1} = r + 1\\]\nDono barabar, is liye \\(S(1)\\) sahi hai.\nKyun: \\(r^2 - 1\\) difference of squares hai: \\((r - 1)(r + 1)\\). \\(r \\ne 1\\) hai, is liye \\(r - 1\\) zero nahi, aur usay cancel kar sakte hain.",
+              "Induction hypothesis: \\(S(m)\\) ko sahi maan lein\n\\[1 + r + \\cdots + r^m = \\dfrac{r^{m+1} - 1}{r - 1} \\quad (A)\\]\nKyun: Kisi positive integer \\(m\\) par formula ko sahi farz kiya.",
+              "Target \\(S(m + 1)\\) likhein\n\\[1 + r + \\cdots + r^m + r^{m+1}\\]\n\\[= \\dfrac{r^{m+2} - 1}{r - 1}\\]\nKyun: \\(n = m + 1\\) rakha: left mein ek term barh gayi aur right mein power \\(m + 2\\) ho gayi.",
+              "Inductive step: (A) istemal karein\n\\[\\text{L.H.S.} = \\dfrac{r^{m+1} - 1}{r - 1} + r^{m+1}\\]\n\\[= \\dfrac{r^{m+1} - 1 + r^{m+1}(r - 1)}{r - 1}\\]\n\\[= \\dfrac{r^{m+1} - 1 + r^{m+2} - r^{m+1}}{r - 1}\\]\n\\[= \\dfrac{r^{m+2} - 1}{r - 1} = \\text{R.H.S.}\\]\nKyun: \\(r^m\\) tak ki saari terms ki jagah (A) rakha. Phir \\(r^{m+1}\\) ko \\(r - 1\\) ke denominator par laane ke liye upar \\((r - 1)\\) se multiply kiya. \\(r^{m+1} \\times r = r^{m+2}\\) (powers jama). Aakhir mein \\(+r^{m+1}\\) aur \\(-r^{m+1}\\) cancel ho gaye aur seedha target mil gaya.\nDhyan dein: Bracket \\(r^{m+1}(r - 1)\\) kholte waqt \\(-r^{m+1}\\) wali term ka sign zaroor likhein; isi se cancellation hoti hai.",
+              "Conclusion\n\\(S(1)\\) sahi hai aur \\(S(m)\\) se \\(S(m + 1)\\) sahi hota hai. Principle of mathematical induction se \\(\\sum_{k=0}^{n} r^k = \\frac{r^{n+1} - 1}{r - 1}\\) har positive integer \\(n\\) ke liye sahi hai \\((r \\ne 1)\\).\nKyun: Induction ki dono sharten poori ho gayin.",
+              "Tasdeeq: \\(r = 3,\\ n = 2\\)\n\\[1 + 3 + 9 = 13\\]\n\\[\\dfrac{3^3 - 1}{3 - 1} = \\dfrac{26}{2} = 13 \\;\\checkmark\\]\nKyun: Dono taraf 13 aaya. Agar \\(k = 1\\) se shuru karte to left side \\(3 + 9 = 12\\) hota, jo 13 ke barabar nahi; yahi kitab ki ghalti ka saboot hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\sum_{k=0}^{n} r^k = 1 + r + \\cdots + r^n = \\frac{r^{n+1} - 1}{r - 1}\\) har positive integer \\(n\\) ke liye \\((r \\ne 1)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein sum ki neeche wali limit \\(k = 1\\) chhapi hai: \\(\\sum_{k=1}^{n} r^k = \\frac{r^{n+1} - 1}{r - 1}\\). Yeh statement ghalat hai: \\(n = 1\\) par left side \\(r\\) hai jabke right side \\(\\frac{r^2 - 1}{r - 1} = r + 1\\) banta hai. Formula tab sahi hai jab sum \\(k = 0\\) se shuru ho, jaisa upar saabit kiya. (Agar \\(k = 1\\) se shuru karna ho to sahi jawab \\(\\frac{r^{n+1} - r}{r - 1}\\) hai.) Saath mein \\(r \\ne 1\\) ki shart bhi zaroori hai, kyunke \\(r - 1\\) denominator mein hai."
+          }
+        ]
+      }
+    }
+  ]
+}

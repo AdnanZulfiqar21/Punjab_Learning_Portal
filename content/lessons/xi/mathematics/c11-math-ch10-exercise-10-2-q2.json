@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-2-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-2-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 194,
+          "pdf_to": 194,
+          "note": "Exercise 10.2 Q2 (i)-(ii), book p.189 (PDF 194); proofs (no answer-key entry). Checked with sympy; solution book PDF 898-900 agrees."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Prove that: \\(\\sin(45^{\\circ} + \\alpha) = \\dfrac{1}{\\sqrt{2}}(\\sin\\alpha + \\cos\\alpha)\\)",
+            "explanation": "A proof: start from the left side and reach the right side.\nThe left side is the sine of a sum, so expand it.\nPlan: \\(\\sin(\\alpha + \\beta)\\) formula, put \\(\\sin 45^{\\circ} = \\cos 45^{\\circ} = 1/\\sqrt{2}\\), take the common factor.",
+            "steps": [
+              "Given: the identity to prove.\nTo prove: L.H.S. \\(= \\sin(45^{\\circ} + \\alpha)\\) equals R.H.S. \\(= \\frac{1}{\\sqrt{2}}(\\sin\\alpha + \\cos\\alpha)\\).\nMethod: Expand the L.H.S. with\n\\[\\sin(A + B) = \\sin A\\cos B + \\cos A\\sin B\\]",
+              "Expand the left side\n\\[\\text{L.H.S.} = \\sin(45^{\\circ} + \\alpha)\\]\n\\[= \\sin 45^{\\circ}\\cos\\alpha + \\cos 45^{\\circ}\\sin\\alpha\\]\nWhy: \\(A = 45^{\\circ}\\), \\(B = \\alpha\\).",
+              "Put in the special values\n\\[= \\dfrac{1}{\\sqrt{2}}\\cos\\alpha + \\dfrac{1}{\\sqrt{2}}\\sin\\alpha\\]\nWhy: \\(\\sin 45^{\\circ} = \\cos 45^{\\circ} = \\dfrac{1}{\\sqrt{2}}\\).",
+              "Take out the common factor\n\\[= \\dfrac{1}{\\sqrt{2}}(\\sin\\alpha + \\cos\\alpha) = \\text{R.H.S.}\\]\nWhy: Both terms have \\(\\frac{1}{\\sqrt{2}}\\); order inside the bracket does not matter.",
+              "Check with \\(\\alpha = 45^{\\circ}\\)\n\\[\\text{L.H.S.} = \\sin 90^{\\circ} = 1\\]\n\\[\\text{R.H.S.} = \\dfrac{1}{\\sqrt{2}}\\left(\\dfrac{2}{\\sqrt{2}}\\right) = 1 \\;\\checkmark\\]\nWhy: A quick numerical test confirms the identity."
+            ],
+            "final_answer": "Hence proved: \\(\\sin(45^{\\circ} + \\alpha) = \\dfrac{1}{\\sqrt{2}}(\\sin\\alpha + \\cos\\alpha)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Prove that: \\(\\cos(\\alpha + 45^{\\circ}) = \\dfrac{1}{\\sqrt{2}}(\\cos\\alpha - \\sin\\alpha)\\)",
+            "explanation": "A proof with the cosine of a sum.\nExpand the left side and use the values at \\(45^{\\circ}\\).\nPlan: \\(\\cos(A + B)\\) formula, then take out \\(1/\\sqrt{2}\\).",
+            "steps": [
+              "Given: the identity to prove.\nTo prove: \\(\\cos(\\alpha + 45^{\\circ}) = \\frac{1}{\\sqrt{2}}(\\cos\\alpha - \\sin\\alpha)\\).\nMethod: Expand the L.H.S. with\n\\[\\cos(A + B) = \\cos A\\cos B - \\sin A\\sin B\\]",
+              "Expand the left side\n\\[\\text{L.H.S.} = \\cos(\\alpha + 45^{\\circ})\\]\n\\[= \\cos\\alpha\\cos 45^{\\circ} - \\sin\\alpha\\sin 45^{\\circ}\\]\nWhy: \\(A = \\alpha\\), \\(B = 45^{\\circ}\\); for cosine a plus in the angle gives a minus.",
+              "Put in the special values\n\\[= \\dfrac{1}{\\sqrt{2}}\\cos\\alpha - \\dfrac{1}{\\sqrt{2}}\\sin\\alpha\\]\nWhy: \\(\\cos 45^{\\circ} = \\sin 45^{\\circ} = \\dfrac{1}{\\sqrt{2}}\\).",
+              "Take out the common factor\n\\[= \\dfrac{1}{\\sqrt{2}}(\\cos\\alpha - \\sin\\alpha) = \\text{R.H.S.}\\]\nWhy: \\(\\frac{1}{\\sqrt{2}}\\) is common to both terms.",
+              "Check with \\(\\alpha = 45^{\\circ}\\)\n\\[\\text{L.H.S.} = \\cos 90^{\\circ} = 0\\]\n\\[\\text{R.H.S.} = \\dfrac{1}{\\sqrt{2}}(0) = 0 \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\cos(\\alpha + 45^{\\circ}) = \\dfrac{1}{\\sqrt{2}}(\\cos\\alpha - \\sin\\alpha)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

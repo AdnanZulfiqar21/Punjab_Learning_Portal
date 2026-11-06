@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.10",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.10",
+      "title": "4.10 Applications of Matrices in Real World",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 79,
+          "pdf_to": 81,
+          "note": "Book p. 74-76: 4.10 applications paragraph, reflection matrices, Example 16, Coding, Example 17 (before Exercise 4.3)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Matrices play a crucial role in solving real-world problems across various fields. In graphic design, they help manipulate images through transformations like scaling, rotation and reflection. Data encryption and cryptography use matrices for secure communication by encoding and decoding messages. In seismic analysis, engineers use matrices to model and predict earthquake wave behaviour. Geometric transformations, such as translation and dilation, rely on matrices to modify shapes in computer graphics. Additionally, social network analysis uses matrices to represent and analyse relationships between individuals, identifying key influencers and connections in a network."
+          },
+          {
+            "type": "paragraph",
+            "text": "Transformation or Reflection Matrix is a mathematical tool that represents the reflection of a point or object across a mirror line in a coordinate plane. It is a matrix representation of a reflection transformation. In two dimensions, this typically means reflecting across the \\(x\\)-axis, \\(y\\)-axis or a line such as \\(y = x\\).",
+            "bold": [
+              "Transformation or Reflection Matrix"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "To reflect a matrix over the \\(x\\)-axis, we multiply it by\n\\[\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix}\\]\nTo reflect a matrix over the \\(y\\)-axis, we multiply it by\n\\[\\begin{bmatrix}-1 & 0 \\\\ 0 & 1\\end{bmatrix}\\]\nTo reflect a matrix over the line \\(y = x\\), we multiply it by\n\\[\\begin{bmatrix}0 & 1 \\\\ 1 & 0\\end{bmatrix}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why these matrices? Multiply each by a general point \\((x, y)\\) written as a column:\n\\[\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix}\\begin{bmatrix}x \\\\ y\\end{bmatrix} = \\begin{bmatrix}x \\\\ -y\\end{bmatrix}\\]\n\\[\\begin{bmatrix}-1 & 0 \\\\ 0 & 1\\end{bmatrix}\\begin{bmatrix}x \\\\ y\\end{bmatrix} = \\begin{bmatrix}-x \\\\ y\\end{bmatrix}\\]\n\\[\\begin{bmatrix}0 & 1 \\\\ 1 & 0\\end{bmatrix}\\begin{bmatrix}x \\\\ y\\end{bmatrix} = \\begin{bmatrix}y \\\\ x\\end{bmatrix}\\]\nSo the \\(x\\)-axis matrix keeps \\(x\\) and changes the sign of \\(y\\) (the point goes to the other side of the \\(x\\)-axis, same distance). The \\(y\\)-axis matrix changes the sign of \\(x\\). The \\(y = x\\) matrix swaps the two coordinates.\nFor example, \\((2, 3)\\) becomes \\((2, -3)\\), \\((-2, 3)\\) and \\((3, 2)\\) respectively."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Write the point as a column \\((2 \\times 1)\\) and put the transformation matrix on the LEFT. The order \\(2 \\times 2\\) times \\(2 \\times 1\\) is defined; a column times a \\(2 \\times 2\\) matrix is not."
+          },
+          {
+            "type": "example",
+            "title": "Example 16",
+            "problem": "A triangle has the vertices \\(A(2, 3)\\), \\(B(-1, 4)\\) and \\(C(3, -2)\\). Find the vertices of the reflected triangle over the \\(x\\)-axis by using transformation matrix.",
+            "steps": [
+              "Given: the vertices \\(A(2, 3)\\), \\(B(-1, 4)\\), \\(C(3, -2)\\).\nTo find: the vertices \\(A', B', C'\\) of the triangle reflected in the \\(x\\)-axis.\nMethod: to reflect a point across a certain axis or line, we multiply the point, written as a column vector, by the corresponding transformation matrix. For the \\(x\\)-axis this is\n\\[\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix}\\]",
+              "Step 1: Write the points as column matrices\n\\[A = \\begin{bmatrix}2 \\\\ 3\\end{bmatrix},\\quad B = \\begin{bmatrix}-1 \\\\ 4\\end{bmatrix}\\]\n\\[C = \\begin{bmatrix}3 \\\\ -2\\end{bmatrix}\\]\nWhy: a \\(2 \\times 2\\) matrix can multiply a \\(2 \\times 1\\) column; the product is again a \\(2 \\times 1\\) column, i.e. a point.",
+              "Step 2: The vertex \\(A'\\)\n\\[\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix}\\begin{bmatrix}2 \\\\ 3\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}2 + 0 \\\\ 0 - 3\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}2 \\\\ -3\\end{bmatrix}\\]\n\\(A' = (2, -3)\\).\nWhy: row 1 of the matrix times the column gives \\(1(2) + 0(3) = 2\\); row 2 gives \\(0(2) + (-1)(3) = -3\\).",
+              "Step 3: The vertex \\(B'\\)\n\\[\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix}\\begin{bmatrix}-1 \\\\ 4\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}-1 + 0 \\\\ 0 - 4\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}-1 \\\\ -4\\end{bmatrix}\\]\n\\(B' = (-1, -4)\\).\nWhy: the same row-by-column multiplication: \\(1(-1) + 0(4) = -1\\) and \\(0(-1) + (-1)(4) = -4\\).",
+              "Step 4: The vertex \\(C'\\)\n\\[\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix}\\begin{bmatrix}3 \\\\ -2\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}3 - 0 \\\\ 0 + 2\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}3 \\\\ 2\\end{bmatrix}\\]\n\\(C' = (3, 2)\\).\nWhy: \\(0(3) + (-1)(-2) = +2\\): minus times minus is plus.",
+              "Step 5: State the reflected triangle\nThe book's last line prints \\(A'(2, 3)\\), \\(B'(1, 4)\\) and \\(C'(3, 2)\\), without the minus signs. From Steps 2 to 4 the vertices are \\(A'(2, -3)\\), \\(B'(-1, -4)\\) and \\(C'(3, 2)\\).\nWhy: the conclusion must repeat the values just computed.",
+              "Check:\nReflection in the \\(x\\)-axis keeps \\(x\\) and changes the sign of \\(y\\): \\((x, y) \\to (x, -y)\\).\n\\((2, 3) \\to (2, -3)\\), \\((-1, 4) \\to (-1, -4)\\), \\((3, -2) \\to (3, 2)\\). All agree. Reflecting twice must give back the original point:\n\\[\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix}\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix} = \\begin{bmatrix}1 & 0 \\\\ 0 & 1\\end{bmatrix}\\]"
+            ],
+            "answer": "The reflected triangle has vertices \\(A'(2, -3)\\), \\(B'(-1, -4)\\) and \\(C'(3, 2)\\).",
+            "book_errors": [
+              "\\(A'(2, 3)\\), \\(B'(1, 4)\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the conclusion of Example 16 the book prints \\(A'(2, 3)\\), \\(B'(1, 4)\\) and \\(C'(3, 2)\\): the minus signs of \\(A'\\) and \\(B'\\) are missing.\nThe correct vertices, as the book's own working lines show, are \\(A'(2, -3)\\), \\(B'(-1, -4)\\) and \\(C'(3, 2)\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Coding is the process of converting a message into a specific format using a code. A code is a system of symbols, words or signals used to represent other words or meanings. It is often used to hide the actual meaning of a message.",
+            "bold": [
+              "Coding"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "To decode a message, we multiply coded matrix by the inverse of the given matrix."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why the inverse? If a message column \\(X\\) is coded as \\(Y = AX\\), then multiplying on the left by \\(A^{-1}\\) gives\n\\[A^{-1}Y = A^{-1}AX = IX = X\\]\nso the original numbers come back. This works only if \\(A^{-1}\\) exists, i.e. \\(|A| \\ne 0\\). A matrix with \\(|A| = 0\\) can never be used as a code matrix, because the message could not be recovered."
+          },
+          {
+            "type": "paragraph",
+            "text": "The letters and their numbers used in Example 17 are:"
+          },
+          {
+            "type": "table",
+            "caption": "Letters A to Z and their numbers (the book's table in Example 17)",
+            "header": [
+              "Letter",
+              "Number",
+              "Letter",
+              "Number"
+            ],
+            "rows": [
+              [
+                "A",
+                "1",
+                "N",
+                "14"
+              ],
+              [
+                "B",
+                "2",
+                "O",
+                "15"
+              ],
+              [
+                "C",
+                "3",
+                "P",
+                "16"
+              ],
+              [
+                "D",
+                "4",
+                "Q",
+                "17"
+              ],
+              [
+                "E",
+                "5",
+                "R",
+                "18"
+              ],
+              [
+                "F",
+                "6",
+                "S",
+                "19"
+              ],
+              [
+                "G",
+                "7",
+                "T",
+                "20"
+              ],
+              [
+                "H",
+                "8",
+                "U",
+                "21"
+              ],
+              [
+                "I",
+                "9",
+                "V",
+                "22"
+              ],
+              [
+                "J",
+                "10",
+                "W",
+                "23"
+              ],
+              [
+                "K",
+                "11",
+                "X",
+                "24"
+              ],
+              [
+                "L",
+                "12",
+                "Y",
+                "25"
+              ],
+              [
+                "M",
+                "13",
+                "Z",
+                "26"
+              ]
+            ]
+          },
+          {
+            "type": "example",
+            "title": "Example 17",
+            "problem": "Use matrix\n\\[A = \\begin{bmatrix}1 & 2 \\\\ 3 & 1\\end{bmatrix}\\]\nto encode the message: ATTACK, where letters \\(A\\) to \\(Z\\) are corresponding to the numbers 1 to 26.",
+            "steps": [
+              "Given: the matrix \\(A\\), the message ATTACK and the code \\(A = 1, B = 2, \\ldots, Z = 26\\) (table above).\nTo find: the coded message.\nMethod: change the letters to numbers, divide them into groups of two, write each group as a \\(2 \\times 1\\) matrix, and multiply each one on the left by \\(A\\).",
+              "Step 1: Divide the letters of the message into groups of two\nAT  TA  CK\nWhy: \\(A\\) is \\(2 \\times 2\\), so it can multiply only \\(2 \\times 1\\) columns: two letters at a time.",
+              "Step 2: Assign the numbers and form \\(2 \\times 1\\) matrices\nFrom the table, A = 1, T = 20, C = 3, K = 11:\n\\[\\begin{bmatrix}A \\\\ T\\end{bmatrix} = \\begin{bmatrix}1 \\\\ 20\\end{bmatrix},\\quad \\begin{bmatrix}T \\\\ A\\end{bmatrix} = \\begin{bmatrix}20 \\\\ 1\\end{bmatrix}\\]\n\\[\\begin{bmatrix}C \\\\ K\\end{bmatrix} = \\begin{bmatrix}3 \\\\ 11\\end{bmatrix}\\]\nSo, the message in \\(2 \\times 1\\) matrices is\n\\[\\begin{bmatrix}1 \\\\ 20\\end{bmatrix}\\begin{bmatrix}20 \\\\ 1\\end{bmatrix}\\begin{bmatrix}3 \\\\ 11\\end{bmatrix}\\]\nWhy: matrices work with numbers, not letters.",
+              "Step 3: Encode the first group\n\\[\\begin{bmatrix}1 & 2 \\\\ 3 & 1\\end{bmatrix}\\begin{bmatrix}1 \\\\ 20\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}1 + 40 \\\\ 3 + 20\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}41 \\\\ 23\\end{bmatrix}\\]\nWhy: row 1: \\(1(1) + 2(20) = 41\\); row 2: \\(3(1) + 1(20) = 23\\).",
+              "Step 4: Encode the second group\n\\[\\begin{bmatrix}1 & 2 \\\\ 3 & 1\\end{bmatrix}\\begin{bmatrix}20 \\\\ 1\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}20 + 2 \\\\ 60 + 1\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}22 \\\\ 61\\end{bmatrix}\\]\nWhy: row 1: \\(1(20) + 2(1) = 22\\); row 2: \\(3(20) + 1(1) = 61\\).",
+              "Step 5: Encode the third group\n\\[\\begin{bmatrix}1 & 2 \\\\ 3 & 1\\end{bmatrix}\\begin{bmatrix}3 \\\\ 11\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}3 + 22 \\\\ 9 + 11\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}25 \\\\ 20\\end{bmatrix}\\]\nWhy: row 1: \\(1(3) + 2(11) = 25\\); row 2: \\(3(3) + 1(11) = 20\\).",
+              "Step 6: Write the coded message\n\\[\\begin{bmatrix}41 \\\\ 23\\end{bmatrix}\\begin{bmatrix}22 \\\\ 61\\end{bmatrix}\\begin{bmatrix}25 \\\\ 20\\end{bmatrix}\\]\ni.e. the numbers 41, 23, 22, 61, 25, 20 are sent.\nWhy: the receiver sees only these numbers; without \\(A\\) they hide the word.",
+              "Check:\nDecode with \\(A^{-1}\\). First\n\\[|A| = 1(1) - 2(3) = -5 \\ne 0\\]\n\\[A^{-1} = \\dfrac{1}{-5}\\begin{bmatrix}1 & -2 \\\\ -3 & 1\\end{bmatrix}\\]\nThen for the first group:\n\\[A^{-1}\\begin{bmatrix}41 \\\\ 23\\end{bmatrix} = \\dfrac{1}{-5}\\begin{bmatrix}41 - 46 \\\\ -123 + 23\\end{bmatrix}\\]\n\\[= \\dfrac{1}{-5}\\begin{bmatrix}-5 \\\\ -100\\end{bmatrix} = \\begin{bmatrix}1 \\\\ 20\\end{bmatrix}\\]\nwhich is A, T. In the same way \\(A^{-1}\\) turns \\(\\begin{bmatrix} 22 \\\\ 61 \\end{bmatrix}\\) into \\(\\begin{bmatrix} 20 \\\\ 1 \\end{bmatrix}\\) (T, A) and \\(\\begin{bmatrix} 25 \\\\ 20 \\end{bmatrix}\\) into \\(\\begin{bmatrix} 3 \\\\ 11 \\end{bmatrix}\\) (C, K)."
+            ],
+            "answer": "The coded message is \\(\\begin{bmatrix} 41 \\\\ 23 \\end{bmatrix} \\begin{bmatrix} 22 \\\\ 61 \\end{bmatrix} \\begin{bmatrix} 25 \\\\ 20 \\end{bmatrix}\\), i.e. 41, 23, 22, 61, 25, 20."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Reflection in the \\(x\\)-axis: \\(\\begin{bmatrix} 1 & 0 \\\\ 0 & -1 \\end{bmatrix}\\), \\((x, y) \\to (x, -y)\\).\n2. Reflection in the \\(y\\)-axis: \\(\\begin{bmatrix} -1 & 0 \\\\ 0 & 1 \\end{bmatrix}\\), \\((x, y) \\to (-x, y)\\).\n3. Reflection in \\(y = x\\): \\(\\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}\\), \\((x, y) \\to (y, x)\\).\n4. Points are written as columns and multiplied on the left by the matrix.\n5. Encoding: \\(Y = AX\\) for each \\(2 \\times 1\\) group; decoding: \\(X = A^{-1}Y\\), which needs \\(|A| \\ne 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing the point as a row and multiplying in the wrong order: the column goes on the right.\n2. Losing the minus sign in the answer, as the book does in Example 16: \\((2, 3)\\) reflected in the \\(x\\)-axis is \\((2, -3)\\).\n3. Mixing up the \\(x\\)-axis and \\(y\\)-axis matrices: reflecting in the \\(x\\)-axis changes \\(y\\), not \\(x\\).\n4. Decoding by multiplying by \\(A\\) again instead of \\(A^{-1}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

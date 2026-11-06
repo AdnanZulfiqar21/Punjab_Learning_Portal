@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-8-Q10-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-8-q10",
+      "title": "Question 10 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 115,
+          "pdf_to": 115,
+          "note": "Exercise 6.8, Question 10: book p.110 (PDF 115). Answer key PDF 305 (answers for 1-5, 8, 9, 11; 6, 7 and 10 are proofs). Solution book PDF 531-552 used as a reference only."
+        }
+      ],
+      "variant_of": "C11-MATH-CH6-EXERCISE-6-8-Q10",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10. Prove that: \\(1 + 2\\left(1 + \\frac{1}{n}\\right) + 3\\left(1 + \\frac{1}{n}\\right)^{2} + \\cdots\\) to \\(n\\) terms \\(= n^{2}\\)",
+            "explanation": "Yeh proof hai: left side ki series ka sum nikal kar dikhana hai ke woh \\(n^2\\) ke barabar hai.\nSeries A.G.P. hai: aage wale numbers \\(1, 2, 3, \\ldots\\) A.P. aur \\((1 + \\frac1n)\\) ki powers G.P.\nRatio ko \\(y = 1 + \\frac1n\\) ka naam do. Faida yeh ke \\(1 - y = -\\frac1n\\) bohat saaf nikalta hai, aur \\(\\frac{1}{1 - y} = -n\\).\nPlan: multiply by \\(y\\), shift, minus, G.P. ka sum, aur simplify kar ke \\(n^2\\).",
+            "steps": [
+              "Diya gaya hai: \\(1 + 2y + 3y^{2} + \\cdots + n\\,y^{n-1}\\), jahan \\(y = 1 + \\frac1n\\)\nHumein find karna hai: saabit karna hai ke sum \\(n^2\\) hai.\nTareeqa: Wahi tareeqa jo 6.8.1 mein seekha: pehle \\(S_n\\) likho, phir poori series ko G.P. ke ratio \\(r\\) se multiply kar ke \\(rS_n\\) ek jagah right shift kar ke neeche likho, phir minus karo. Beech mein ek seedhi G.P. ban jati hai jis ka sum hum formula se nikal lete hain. A.G.P. ke sum ka koi ratta formula yaad karne ki zaroorat nahi, sirf yeh tareeqa yaad rakhein. Yahan \\(\\frac{1}{1 - y} = -n\\) bohat kaam aayega.",
+              "\\(y\\) rakhein\n\\[y = 1 + \\dfrac{1}{n}\\]\n\\[1 - y = -\\dfrac{1}{n}\\]\n\\[\\dfrac{1}{1 - y} = -n\\]\nKyun: \\(1 - (1 + \\frac1n) = -\\frac1n\\), aur isay ulta karne par \\(-n\\). Series ka \\(k\\)th term \\(k\\,y^{k-1}\\) hai, is liye \\(n\\) terms ka aakhri term \\(n\\,y^{n-1}\\) hai.\nDhyan dein: pehla term 1 bhi \\(1 \\cdot y^0\\) hai, pattern mein shamil.",
+              "\\(S\\) aur \\(yS\\) likhein\n\\[S = 1 + 2y + 3y^{2} + \\cdots + n\\,y^{n-1}\\]\n\\[yS = y + 2y^{2} + \\cdots\\]\n\\[\\quad + (n - 1)y^{n-1} + n\\,y^{n}\\]\nKyun: \\(y\\) se multiply kar ke ek jagah shift kiya taake \\(y\\) ke neeche \\(y\\), \\(y^2\\) ke neeche \\(y^2\\) aaye.",
+              "Minus karein\n\\[(1 - y)S = 1 + y + y^{2} + \\cdots\\]\n\\[\\quad + y^{n-1} - n\\,y^{n}\\]\nKyun: Yahan A.P. ka \\(d = 1\\) hai, is liye har jore se sirf power bachti hai: \\((2 - 1)y = y\\), \\((3 - 2)y^2 = y^2\\). Aakhri term \\(ny^n\\) minus hua.",
+              "G.P. ka sum aur simplify\n\\[1 + y + \\cdots + y^{n-1} = \\dfrac{1 - y^{n}}{1 - y}\\]\n\\[= -n(1 - y^{n})\\]\n\\[(1 - y)S = -n + n\\,y^{n} - n\\,y^{n}\\]\n\\[= -n\\]\nKyun: G.P. ke \\(n\\) terms (powers 0 se \\(n - 1\\)), pehla term 1, ratio \\(y\\). \\(\\frac{1}{1 - y}\\) ki jagah \\(-n\\) rakha. Bracket kholne par \\(+ny^n\\) aur \\(-ny^n\\) cancel ho gaye, sirf \\(-n\\) bacha. Dekhiye, \\(y^n\\) ki asal value nikalni hi nahi pari!",
+              "\\(S\\) nikalein\n\\[S = \\dfrac{-n}{1 - y} = (-n)(-n)\\]\n\\[= n^{2}\\]\nKyun: Dono taraf \\(1 - y\\) se divide kiya, yani \\(-n\\) se multiply. Minus times minus plus: \\(n^2\\). Yahi right side hai.",
+              "\\(n = 2\\) se tasdeeq\n\\[y = \\tfrac{3}{2}:\\ 1 + 2 \\cdot \\tfrac{3}{2} = 4 = 2^{2} \\;\\checkmark\\]\nKyun: \\(n = 2\\) par \\(y = \\frac32\\), do terms \\(1 + 3 = 4 = 2^2\\). \\(n = 3\\) par \\(y = \\frac43\\): \\(1 + \\frac83 + \\frac{48}{9} = 9 = 3^2\\). Natija sahi hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(n\\) terms ka sum \\(n^{2}\\) hai."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-6.8.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/6.8.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 111,
+          "pdf_to": 111,
+          "note": "Book p. 106: 6.8.1 A.G. series; blue heading 'Sum of nth Terms of Arithmetico-Geometric Series' with the derivation by subtracting rS_n, ending in formula (iii)"
+        }
+      ],
+      "title": "6.8.1 Arithmetico-Geometric Series",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Sum of the terms of arithmetico-geometric sequence is called arithmetico-geometric series. Thus, arithmetico-geometric series has the form\n\\[ab + (a + d)br + (a + 2d)br^{2}\\]\n\\[+ \\cdots + \\{a + (n - 1)d\\}br^{n-1}\\]"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Sum of nth Terms of Arithmetico-Geometric Series"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let\n\\[S_n = ab + (a + d)br + (a + 2d)br^{2}\\]\n\\[+ \\cdots + [a + (n - 1)d]br^{n-1} \\quad \\text{(i)}\\]\nThen\n\\[rS_n = abr + (a + d)br^{2} + \\cdots\\]\n\\[+ [a + (n - 2)d]br^{n-1}\\]\n\\[+ [a + (n - 1)d]br^{n} \\quad \\text{(ii)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why multiply by \\(r\\)? Multiplying by the common ratio of the G.P. part raises every power by one. Written one place to the right, each term of (ii) sits under the term of (i) with the same power of \\(r\\). Then subtracting pairs up like powers."
+          },
+          {
+            "type": "paragraph",
+            "text": "Subtracting (ii) from (i), we get\n\\[(1 - r)S_n = ab\\]\n\\[+ [dbr + dbr^{2} + \\cdots + dbr^{n-1}]\\]\n\\[- [a + (n - 1)d]br^{n}\\]\n\\[= ab + \\dfrac{dbr(1 - r^{n-1})}{1 - r}\\]\n\\[\\quad - [a + (n - 1)d]br^{n}\\]\n\\[= ab + \\dfrac{dbr}{1 - r} - \\dfrac{dbr^{n}}{1 - r}\\]\n\\[\\quad - [a + (n - 1)d]br^{n}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What happened in the subtraction? Terms with the same power differ only in their A.P. parts, and those differ by \\(d\\):\n\\[(a + d)br - abr = dbr\\]\n\\[(a + 2d)br^{2} - (a + d)br^{2} = dbr^{2}\\]\nSo the bracket \\(dbr + dbr^{2} + \\cdots + dbr^{n-1}\\) is a G.P. with first term \\(dbr\\), ratio \\(r\\) and \\(n - 1\\) terms; by 6.7 its sum is \\(\\frac{dbr(1 - r^{n-1})}{1 - r}\\). The first term \\(ab\\) of (i) and the last term of (ii) are left over."
+          },
+          {
+            "type": "paragraph",
+            "text": "Dividing both sides by \\(1 - r\\):"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}S_n &= \\dfrac{ab}{1 - r} + \\dfrac{dbr}{(1 - r)^{2}} \\\\ &\\quad - \\dfrac{dbr^{n}}{(1 - r)^{2}} - \\dfrac{[a + (n - 1)d]br^{n}}{1 - r}\\quad \\text{(iii)}\\end{aligned}",
+            "text_alt": "S n equals a b over 1 minus r, plus d b r over 1 minus r squared, minus d b r to the power n over 1 minus r squared, minus a plus n minus 1 times d, times b r to the power n, over 1 minus r. Equation (iii)"
+          },
+          {
+            "type": "paragraph",
+            "text": "which is the required sum of the n terms of arithmetico-geometric series."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Check the formula (ours) with \\(1 + 2\\cdot 2 + 3\\cdot 4 + 4\\cdot 8\\), where \\(a = 1, d = 1, b = 1, r = 2, n = 4\\). Directly: \\(1 + 4 + 12 + 32 = 49\\). From (iii):\n\\[\\tfrac{1}{-1} + \\tfrac{2}{1} - \\tfrac{16}{1} - \\tfrac{4 \\cdot 16}{-1}\\]\n\\[= -1 + 2 - 16 + 64 = 49\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "You need not memorise (iii). In examples and exercises the book repeats the method: write \\(S_n\\), multiply by \\(r\\), subtract, sum the G.P. in the middle, and solve for \\(S_n\\). Learn the method; it works for every A.G.P."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Arithmetico-geometric series: the sum of the terms of an A.G.P.\n2. Method: write \\(S_n\\) (i) and \\(rS_n\\) (ii) shifted one place; subtract.\n3. The middle becomes a G.P. \\(dbr + dbr^{2} + \\cdots + dbr^{n-1}\\) of \\(n - 1\\) terms.\n4. Formula (iii) gives \\(S_n\\); \\(r \\ne 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Not shifting (ii): subtract only terms with the same power of \\(r\\).\n2. Forgetting the last term \\(-[a + (n - 1)d]br^{n}\\) of (ii).\n3. Counting \\(n\\) terms in the middle G.P.; it has \\(n - 1\\) terms.\n4. Dividing only part of the right side by \\(1 - r\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 58,
+          "pdf_to": 59,
+          "note": "Book p. 53-54: 4.4 Determinants, the opening lines before 4.4.1 (pattern for order n >= 3, |A| of a 3 x 3 matrix); callouts marked Teaching note / Key points / Common mistake are ours."
+        }
+      ],
+      "title": "4.4 Determinants (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH4-4.4",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Assalam o Alaikum! Ab tak hum ne matrices ko table ki tarah dekha: unhein jama kiya, tafreeq kiya, multiply kiya. Aaj hum ek nayi cheez seekhenge jo har square matrix ke saath judi hoti hai: us ka determinant. Yeh sabaq chhota hai, lekin aage ke teen sabaq (minor aur cofactor, order 3 ka determinant, properties) aur inverse sab isi par khare hain, is liye ise dhyan se samajhiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Determinant hai kya? Har square matrix ke saath ek khaas number juda hota hai, use determinant kehte hain. Matrix \\(A\\) ka determinant \\(|A|\\) ya \\(\\det A\\) likhte hain. Farq yaad rakhiye: matrix numbers ka poora table hai, jab ke determinant us table se nikla hua sirf ek number hai. Bilkul aise jaise poori class ke marks ek table hain, lekin un ka average sirf ek number hai jo poori class ke baare mein kuch batata hai.\nIs ki zaroorat kyun hai? Is unit mein determinant batata hai ke matrix ka inverse (ulta matrix) mumkin hai ya nahin (4.5 mein): agar \\(|A| \\ne 0\\) ho to inverse milta hai, agar \\(|A| = 0\\) ho to nahin milta. Aage chal kar linear equations ka system hal karne (Cramer's rule) mein bhi yahi determinant kaam aata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Pehle order 2 ka determinant yaad kar lein, jo aap pichli classes mein parh chuke hain:\n\\[\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc\\]\nTareeqa: leading diagonal (upar baen se neeche daen) ke numbers multiply karein, phir doosre diagonal ke numbers ka product us mein se minus kar dein. Misaal:\n\\[\\begin{vmatrix} 3 & 5 \\\\ 2 & 4 \\end{vmatrix} = 3(4) - 5(2) = 2\\]\nYeh rule itna pakka hona chahiye ke aap bina soche laga sakein, kyun ke order 3 ka har determinant aakhir mein order 2 ke determinants mein hi tabdeel hota hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki baat. Order \\(n \\ge 3\\) (yani 3 ya us se bare) ke square matrices ke determinants bhi isi pattern par likhe jate hain. Misaal ke taur par agar \\(n = 3\\) ho aur"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[A = \\begin{bmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "to \\(A\\) ka determinant yeh hai:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = \\begin{vmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{vmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Dekhiye, entries bilkul wahi hain, sirf square brackets ki jagah seedhi lakeerein (vertical bars) aa gayi hain. Yeh lakeerein batati hain ke ab hum table ki nahin balke us se nikalne wale ek number ki baat kar rahe hain. Kitab kehti hai: ab hamara maqsad mukhtalif orders ke matrices ke determinants nikalna (compute karna) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Brackets ka farq zehan mein bitha lein. Square brackets \\([\\;\\,]\\) ka matlab matrix (table). Seedhi lakeerein \\(|\\;\\,|\\) ka matlab determinant (ek number). Is liye \\(A\\) matrix hai, lekin \\(|A|\\) number hai.\nDeterminant sirf square matrix ka hota hai, yani jis mein rows aur columns barabar hon (\\(2 \\times 2\\), \\(3 \\times 3\\) waghera). \\(2 \\times 3\\) matrix ka koi determinant nahin hota, kyun ke us ka pattern poora ban hi nahin sakta."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(\\begin{vmatrix} 5 & 2 \\\\ 7 & 3 \\end{vmatrix}\\) kitna hai? Pehle khud nikaliye, phir dekhiye.\nJawab: \\(5(3) - 2(7) = 15 - 14 = 1\\).\nAur \\(\\begin{vmatrix} 2 & 4 \\\\ 1 & 2 \\end{vmatrix}\\)? \\(2(2) - 4(1) = 0\\). Ghor karein: is matrix ki doosri row pehli row ka bilkul aadha hai. Aisi soorat mein determinant zero aata hai; yeh baat 4.4.3 ki properties mein dobara milegi."
+          },
+          {
+            "type": "paragraph",
+            "text": "Order 3 ka determinant nikalne ke liye humein do naye tool chahiye: kisi element ka minor aur cofactor (4.4.1). In ki madad se 4.4.2 mein order 3 ka determinant khola (expand kiya) jayega, 4.4.3 mein determinant ki properties aayengi, aur 4.5 mein yahi cofactors matrix ka inverse nikalne mein dobara kaam aayenge. Yani yeh sab ek hi zanjeer ki kariyan hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Determinant ek number hai jo sirf square matrix ka hota hai; likhte hain \\(|A|\\) ya \\(\\det A\\).\n2. Order 2: \\(\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc\\) (leading diagonal minus doosra diagonal).\n3. Order 3 aur us se bare determinants isi pattern par chalte hain aur minors aur cofactors se nikalte hain.\n4. \\(|A| \\ne 0\\) hi faisla karta hai ke \\(A\\) ka inverse hai ya nahin (4.5)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(|A|\\) ko absolute value (mutlaq qeemat) samajh lena. Determinant negative bhi ho sakta hai: \\(\\begin{vmatrix} 1 & 2 \\\\ 3 & 4 \\end{vmatrix} = 4 - 6 = -2\\). Is ko \\(2\\) likhna ghalat hai.\n2. Order 2 mein \\(ad + bc\\) ya \\(bc - ad\\) likh dena. Hamesha (leading diagonal) minus (doosra diagonal), yani \\(ad - bc\\).\n3. Determinant ke liye square brackets, ya matrix ke liye seedhi lakeerein likh dena: dono ka matlab bilkul alag hai, exam mein marks kat sakte hain.\n4. Non-square matrix ka determinant nikalne ki koshish karna."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH11-11.5-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch11",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch11/11.5",
+      "title": "11.5 Maximum and Minimum Values of Given Functions of the Type a + b sin theta, a + b cos theta, a + b sin(c theta + d), a + b cos(c theta + d) and reciprocals (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 216,
+          "pdf_to": 218,
+          "note": "Book p. 211-213: 11.5 heading with its five types, sinusoidal functions, vertical shift, amplitude, period, phase shift, graph of 1 + 3 sin 2 theta, M = a + |b|, m = a - |b|, Note on amplitude, Example 2"
+        }
+      ],
+      "variant_of": "C11-MATH-CH11-11.5",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Aaj ka sabaq bohat kaam ka hai. Ab tak aap ne sine aur cosine ke graphs banaye aur un ka period dekha. Ab sawal yeh hai: agar sine ke saath kuch numbers jor diye jayein, jaise \\(2 + 3\\sin x\\), to is function ki sab se bari value (maximum) kitni hogi aur sab se chhoti value (minimum) kitni? Aur asal zindagi mein, jaise jhoole (Ferris wheel) par baithe shakhs ki unchai ya darya ke paani ki satah, yeh sawal kaise kaam aata hai? Is sabaq ke aakhir tak aap yeh sab ek do lines mein hal kar sakenge."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki heading in functions ki qismen batati hai jin ki hum maximum aur minimum values nikalenge:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "\\(a + b\\sin\\theta\\)",
+              "\\(a + b\\cos\\theta\\)",
+              "\\(a + b\\sin(c\\theta + d)\\)",
+              "\\(a + b\\cos(c\\theta + d)\\)",
+              "Upar wale sab functions ke reciprocals (ulte, yani \\(\\frac{1}{\\ldots}\\)), jahan \\(a\\), \\(b\\), \\(c\\) aur \\(d\\) real numbers hain."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Sine aur cosine periodic functions (baar baar dohraane wale functions) hain, kyun ke in ki values ek muqarrara faasle ke baad bilkul wahi dobara aati hain. Isi khoobi ki wajah se yeh mathematics mein bunyadi functions hain aur asal zindagi ki bohat si cheezon ka model banane mein kaam aate hain: radio waves, roshni ki waves, aur ghar ki bijli ka alternating current (AC), jo har second mein kai baar upar neeche hota hai. Inhein sinusoidal functions ki ek khaas qisam bhi kaha jata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Aage barhne se pehle do baatein zehan mein taaza kar lein, kyun ke poora sabaq inhi par khara hai:\n1. Har angle ke liye \\(-1 \\le \\sin\\theta \\le 1\\) aur \\(-1 \\le \\cos\\theta \\le 1\\). Yani sine aur cosine kabhi 1 se bare aur \\(-1\\) se chhote nahin hote.\n2. \\(\\sin\\theta\\) aur \\(\\cos\\theta\\) har \\(2\\pi\\) ke baad apne aap ko dohraate hain.\n\"Sinusoidal\" ka matlab sirf itna hai: \"sine wave jaisi shakal wala\". Lehron (waves) jaisa upar neeche hota hua graph."
+          },
+          {
+            "type": "paragraph",
+            "text": "Neeche diye gaye functions sab se aam sinusoidal functions hain. Ghor karein ke sab mein ek hi dhaancha hai: ek number \\(a\\) jo alag se jura hai, aur ek number \\(b\\) jo sine ya cosine se multiply hai:\n\\[f(\\theta) = a + b\\sin\\theta\\]\n\\[g(\\theta) = a + b\\cos\\theta\\]\n\\[f_{1}(\\theta) = a + b\\sin(c\\theta + d)\\]\n\\[g_{1}(\\theta) = a + b\\cos(c\\theta + d)\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab sinusoidal function ki general shakal (aam form) ko ghor se dekhte hain, kyun ke is ke har number ka ek alag kaam hai:\n\\[f_{1}(\\theta) = a + b\\sin(c\\theta + d) \\quad \\text{...(i)}\\]"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Vertical shift \\(a\\) (upar neeche sarakna): yeh poore graph ko upar ya neeche khiska deta hai. Isay vertical displacement bhi kehte hain. Graph ki shakal aur period wahi rehte hain, sirf \\(y\\)-axis ke saath us ki jagah badalti hai. Line \\(y = a\\) lehar ki darmiyani line (midline) hai, jis ke upar neeche lehar jhoolti hai.",
+              "Amplitude \\(b\\) (lehar ki unchai): midline se lehar ki choti (peak) tak ka faasla. Amplitude hamesha positive hota hai, is liye asal mein yeh \\(|b|\\) hai.",
+              "Period: (i) ka period \\(\\frac{2\\pi}{c}\\) hai, yani itne faasle ke baad lehar apne aap ko dohraati hai.",
+              "Phase shift \\(d\\) (daayen baayen sarakna): yeh graph ko \\(x\\)-axis ke saath left ya right khiskata hai. Kitab ke mutabiq positive \\(d\\) graph ko left, aur negative \\(d\\) right le jata hai. Is se lehar ka shuru hone ka nuqta badalta hai, shakal ya period nahin."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Period \\(\\frac{2\\pi}{c}\\) kyun hai? Sine tab dohrata hai jab us ka angle \\(2\\pi\\) barh jaye. Yahan angle \\(c\\theta + d\\) hai. Yeh angle \\(2\\pi\\) tab barhega jab \\(\\theta\\) sirf \\(\\frac{2\\pi}{c}\\) barhe, kyun ke \\(c \\times \\frac{2\\pi}{c} = 2\\pi\\). Misal: \\(\\sin 2\\theta\\) mein \\(c = 2\\), to lehar do guna tez chalti hai aur period aadha, yani \\(\\pi\\), reh jata hai. (Agar \\(c\\) negative ho to period \\(\\frac{2\\pi}{|c|}\\) likhte hain.)\nPhase shift ke baare mein ek baarik baat: \\(c\\theta + d = c\\left(\\theta + \\frac{d}{c}\\right)\\). Is liye graph asal mein \\(\\frac{d}{c}\\) faasla khiskta hai (positive ho to left). Jab \\(c = 1\\) ho to yeh faasla bilkul \\(d\\) hai, jaisa kitab kehti hai.\nSab se zaroori baat: \\(c\\) aur \\(d\\) maximum ya minimum ko bilkul nahin badalte. Yeh lehar ko sirf daayen baayen kheenchte ya khiskaate hain; unchai wahi rehti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ek misaal se samajhte hain: \\(f(\\theta) = 1 + 3\\sin(2\\theta)\\). Yahan \\(a = 1\\) vertical shift hai (midline \\(y = 1\\)), amplitude \\(|b| = |3| = 3\\) hai, aur period \\(\\frac{2\\pi}{2} = \\pi\\) hai. Neeche graph mein teeno cheezen dekhiye: lehar \\(y = 1\\) ke gird jhool rahi hai, us se 3 upar (yani 4) tak jati hai aur 3 neeche (yani \\(-2\\)) tak aati hai, aur har \\(\\pi\\) ke baad dohraati hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch11-fig-sinusoid-1-plus-3sin2theta",
+            "alt": "Graph of f of theta equals 1 plus 3 sin 2 theta for theta from 0 to a little beyond 2 pi. The dashed midline is y = 1. The curve starts at (0, 1), reaches the maximum 4 at pi over 4 and 5 pi over 4 and the minimum minus 2 at 3 pi over 4 and 7 pi over 4. The amplitude 3 is marked from the midline to a peak, the period pi between two peaks, and the vertical shift 1 between the theta-axis and the midline.",
+            "caption": "Figure: f(θ) = 1 + 3 sin 2θ with its amplitude, period and vertical shift (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke graph par \\(\\frac{3\\pi}{2}\\) aur \\(2\\pi\\) ke darmiyan wale nishaan (tick) par \\(\\frac{3\\pi}{4}\\) chhapa hai. Sahi label \\(\\frac{7\\pi}{4}\\) hai, aur wahin doosra minimum \\(-2\\) aata hai. Hamara graph \\(f(\\theta) = 1 + 3\\sin 2\\theta\\) se bilkul hisaab laga kar banaya gaya hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab asal sawal: \\(f(\\theta) = a + b\\sin(c\\theta + d)\\) aur \\(g(\\theta) = a + b\\cos(c\\theta + d)\\) ki maximum aur minimum values nikalna mushkil kaam nahin. Hum jaante hain ke sine aur cosine ki sab se bari absolute value 1 hai. Is liye \\(b\\sin\\theta\\) zyada se zyada \\(|b|\\) ho sakta hai, aur kam se kam \\(-|b|\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is liye function ki maximum value \\(M = a + |b|\\) hai, aur minimum value \\(m = a - |b|\\) hai. Lekin yeh values kab aati hain, is mein dhyan chahiye: agar \\(b > 0\\) ho to maximum tab aata hai jab \\(\\sin\\theta = 1\\) (ya \\(\\cos\\theta = 1\\)), aur minimum jab yeh \\(-1\\) ho. Agar \\(b < 0\\) ho to ulta: maximum tab jab sine/cosine \\(-1\\) ho, aur minimum jab \\(1\\) ho."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab likhti hai ke \\(M = a + |b|\\) \"jab \\(\\sin\\theta = 1\\) ya \\(\\cos\\theta = 1\\)\" aur \\(m = a - |b|\\) \"jab \\(\\sin\\theta = -1\\) ya \\(\\cos\\theta = -1\\)\". Values \\(M\\) aur \\(m\\) bilkul sahi hain, magar yeh shart sirf \\(b > 0\\) ke liye sach hai. Jab \\(b\\) negative ho to jagahen badal jati hain. Misal: \\(5 - 2\\cos 3x\\) sab se bara tab hota hai jab \\(\\cos 3x = -1\\) ho (Example 2(ii) dekhiye). Hum ne upar sahi baat likh di hai."
+          },
+          {
+            "type": "equation",
+            "latex": "M = a + |b|",
+            "text_alt": "Maximum value M equals a plus the absolute value of b"
+          },
+          {
+            "type": "equation",
+            "latex": "m = a - |b|",
+            "text_alt": "Minimum value m equals a minus the absolute value of b"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh formulas kyun sahi hain? Seedhi si dalil hai. Hum jaante hain \\(-1 \\le \\sin\\theta \\le 1\\). Is ko \\(|b|\\) se multiply karein to \\(b\\sin\\theta\\) bhi \\(-|b|\\) aur \\(|b|\\) ke darmiyan rehta hai (\\(b\\) ka sign sirf yeh tay karta hai ke kaun sa sira kab aayega). Ab har hisse mein \\(a\\) jama karein:\n\\[a - |b| \\le a + b\\sin\\theta \\le a + |b|\\]\nAur dono sire waqai milte hain, kyun ke sine sach mein \\(1\\) aur \\(-1\\) ki values leta hai. Yahi baat cosine aur \\(\\sin(c\\theta + d)\\), \\(\\cos(c\\theta + d)\\) par bhi lagti hai: andar ka angle badalta hai, magar values phir bhi poore \\(-1\\) se \\(1\\) tak ghoomti hain.\nEk aasan misaal: socho ek jhoola 1 meter ki unchai par bandha hai aur 3 meter upar neeche jata hai. To sab se upar \\(1 + 3 = 4\\) aur sab se neeche \\(1 - 3 = -2\\). Bas yahi \\(a \\pm |b|\\) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Ek sawal jo aksar students poochte hain: \"Agar sine ki jagah cosine ho to kya farq parta hai?\" Maximum aur minimum ke liye koi farq nahin. Dono ki values \\(-1\\) se \\(1\\) tak hi jati hain; farq sirf itna hai ke cosine ki lehar \\(\\frac{\\pi}{2}\\) pehle shuru hoti hai, yani dono ki choti alag waqt par aati hai. Isi liye kitab ne sine aur cosine dono qismon ke liye ek hi formula diya hai.\nAur doosra sawal: \"Agar \\(a\\) negative ho to?\" Koi masla nahin. Misal ke tor par \\(-3 + 2\\sin x\\) ka maximum \\(-3 + 2 = -1\\) aur minimum \\(-3 - 2 = -5\\) hai. Formula har real \\(a\\) ke liye chalta hai; graph bas \\(x\\)-axis se neeche khisak jata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "\\(b\\) ki absolute value ko \\(f(\\theta) = a + b\\sin\\theta\\) ka amplitude kehte hain. Amplitude is formula se bhi nikal sakta hai:\n\\[\\text{Amplitude} = \\dfrac{\\text{Maximum value} - \\text{Minimum value}}{2}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is Note ko upar ke formulas se check kar lein: \\(\\dfrac{M - m}{2} = \\dfrac{(a + |b|) - (a - |b|)}{2} = \\dfrac{2|b|}{2} = |b|\\). Yani maximum aur minimum ka farq poori lehar ki unchai hai, aur amplitude us ka aadha.\nIsi tarah midline dono ka average hai: \\(\\dfrac{M + m}{2} = a\\).\nYeh do baatein bohat kaam ki hain: agar sawal mein sirf sab se upar aur sab se neeche ki value di ho (jaise Ferris wheel mein), to in se \\(a\\) aur \\(b\\) foran mil jate hain. Agle sabaq 11.5.1 mein hum yahi karenge.\nKhud sochiye: agar kisi lehar ka maximum 10 aur minimum 2 ho to amplitude aur midline kya honge? (Jawab: amplitude 4, midline 6.)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki misaal mein teeno qisam ke sawal dekhte hain: ek seedha sine wala, ek jis mein \\(b\\) negative hai, aur ek reciprocal."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Find the maximum and minimum values of the following functions:\n(i) \\(2 + 3\\sin x\\)  (ii) \\(5 - 2\\cos 3x\\)  (iii) reciprocal of (ii)",
+            "steps": [
+              "Given: (i) \\(2 + 3\\sin x\\), (ii) \\(5 - 2\\cos 3x\\), (iii) \\(\\dfrac{1}{5 - 2\\cos 3x}\\).\nTo find: har function ki maximum value \\(M\\) aur minimum value \\(m\\).\nMethod: sab se pehle pehchaanein ke function kis shakal ka hai. (i) aur (ii) bilkul \\(a + b\\sin(\\ldots)\\) ya \\(a + b\\cos(\\ldots)\\) ki shakal mein hain, is liye seedha \\(M = a + |b|\\) aur \\(m = a - |b|\\) lagega. (iii) reciprocal hai; us ke liye pehle (ii) ki values chahiye, phir unhein ulta karna hai, kyun ke denominator jitna bara ho fraction utna chhota hota hai.",
+              "Step 1: (i) \\(a\\) aur \\(b\\) pehchaanein\nMaan lein \\(f(x) = 2 + 3\\sin x\\).\n\\[a = 2,\\quad b = 3\\]\nKyun: \\(a + b\\sin x\\) se milaane par alag se jura number \\(a = 2\\) hai aur sine ke saath multiply number \\(b = 3\\) hai. \\(b\\) positive hai, is liye maximum tab aayega jab \\(\\sin x = 1\\), aur minimum jab \\(\\sin x = -1\\).",
+              "Step 2: (i) maximum aur minimum\n\\[M = a + |b| = 2 + 3 = 5\\]\n\\[m = a - |b| = 2 - 3 = -1\\]\nKyun: \\(\\sin x\\) ki values \\(-1\\) se \\(1\\) tak hain. Teen se multiply karein to \\(3\\sin x\\) ki values \\(-3\\) se \\(3\\) tak, aur 2 jama karein to \\(-1\\) se \\(5\\) tak. Formula yahi kaam ek line mein kar deta hai.\nTasdeeq: \\(\\sin x = 1\\) rakhein to \\(2 + 3 = 5\\); \\(\\sin x = -1\\) rakhein to \\(2 - 3 = -1\\). Dono sahi.",
+              "Step 3: (ii) \\(a\\) aur \\(b\\) pehchaanein\nMaan lein \\(f(x) = 5 - 2\\cos 3x\\).\n\\[a = 5,\\quad b = -2\\]\nDhyan dein: yahan \\(b\\) negative hai, is liye \\(-2\\cos 3x\\) tab sab se bara hoga jab \\(\\cos 3x\\) sab se chhota ho, yani \\(\\cos 3x = -1\\). Aur minimum tab aayega jab \\(\\cos 3x = 1\\).\nKyun: negative number se multiply karne par tarteeb ulat jati hai. Misal: \\(-2 \\times 1 = -2\\) chhota hai, magar \\(-2 \\times (-1) = 2\\) bara hai. (Kitab yahan ulta likhti hai; neeche \"Kitab ki ghalti\" dekhiye.)",
+              "Step 4: (ii) maximum aur minimum\n\\[M = a + |b| = 5 + |-2|\\]\n\\[= 5 + 2 = 7\\]\n\\[m = a - |b| = 5 - |-2|\\]\n\\[= 5 - 2 = 3\\]\nKyun: formula mein \\(|b| = 2\\) aata hai, is liye \\(b\\) ka minus sign values ko nahin badalta, sirf yeh badalta hai ke woh kahan aati hain. Andar wala \\(3x\\) sirf period badalta hai (ab period \\(\\frac{2\\pi}{3}\\) hai), maximum ya minimum nahin.\nTasdeeq: \\(\\cos 3x = -1\\) par \\(5 - 2(-1) = 5 + 2 = 7\\); \\(\\cos 3x = 1\\) par \\(5 - 2(1) = 3\\). Bilkul sahi.",
+              "Step 5: (iii) reciprocal likhein\n\\[g(x) = \\dfrac{1}{5 - 2\\cos 3x}\\]\nPehle \\(5 - 2\\cos 3x\\) ki maximum aur minimum values chahiye; woh hum part (ii) mein nikaal chuke: 7 aur 3.\nKyun: \\(g\\) poora ka poora part (ii) se bana hai, is liye us ki har value seedha \\(5 - 2\\cos 3x\\) ki value par depend karti hai. Pehle andar wale ka range, phir reciprocal.",
+              "Step 6: (iii) values ko ulta karein\n\\[\\text{Max of } g(x) = \\dfrac{1}{m} = \\dfrac{1}{3} \\approx 0.33\\]\n\\[\\text{Min of } g(x) = \\dfrac{1}{M} = \\dfrac{1}{7} \\approx 0.14\\]\nKyun: denominator hamesha 3 aur 7 ke darmiyan hai, yani hamesha positive. Positive numbers mein jo sab se chhota ho us ka reciprocal sab se bara hota hai. Roz ki misaal: ek roti 3 logon mein baantein to har ek ko \\(\\frac{1}{3}\\) milti hai, 7 mein baantein to sirf \\(\\frac{1}{7}\\). Zyada log, chhota hissa.\nTasdeeq: \\(\\frac{1}{3} > \\frac{1}{7}\\), aur dono values waqai milti hain (\\(\\cos 3x = 1\\) par \\(\\frac{1}{3}\\), \\(\\cos 3x = -1\\) par \\(\\frac{1}{7}\\))."
+            ],
+            "answer": "(i) Maximum 5, minimum \\(-1\\).\n(ii) Maximum 7 (jab \\(\\cos 3x = -1\\)), minimum 3 (jab \\(\\cos 3x = 1\\)).\n(iii) Maximum \\(\\frac{1}{3} \\approx 0.33\\), minimum \\(\\frac{1}{7} \\approx 0.14\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 2(ii) mein kitab likhti hai ke maximum tab aata hai jab \\(\\cos 3x = 1\\), aur minimum jab \\(\\cos 3x = -1\\). Kyun ke \\(b = -2\\) negative hai, asal mein ulta hai: maximum 7 tab aata hai jab \\(\\cos 3x = -1\\), aur minimum 3 jab \\(\\cos 3x = 1\\). Kitab ki final values 7 aur 3 bilkul sahi hain."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Dhyan dein",
+            "text": "Reciprocal mein maximum aur minimum ko waise ka waisa copy na karein; dono ki jagah badal jati hai. Aur yeh \"ulta\" wala rule sirf tab chalta hai jab denominator kabhi zero ya negative na ho. Yahan \\(5 - 2\\cos 3x\\) kam se kam 3 hai, is liye koi masla nahin. Agar kisi sawal mein denominator zero ho sakta ho to function ki koi maximum value hi nahin hogi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahin: \\(h(x) = 4 - \\sin\\left(2x + \\frac{\\pi}{3}\\right)\\).\n\\(a = 4\\), \\(b = -1\\), \\(|b| = 1\\).\n\\(M = 4 + 1 = 5\\) (jab sine \\(-1\\) ho, kyun ke \\(b\\) negative hai), \\(m = 4 - 1 = 3\\) (jab sine \\(1\\) ho).\nAndar ka \\(2x + \\frac{\\pi}{3}\\) jawab par koi asar nahin daalta.\nAur reciprocal \\(\\frac{1}{h(x)}\\) ka maximum \\(\\frac{1}{3}\\), minimum \\(\\frac{1}{5}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "1. \\(7 + 2\\sin 5x\\) ka maximum aur minimum kya hai? (Jawab: 9 aur 5.)\n2. \\(3 - 4\\cos x\\) ka amplitude kya hai, aur minimum kab aata hai? (Jawab: amplitude 4; minimum \\(-1\\) tab jab \\(\\cos x = 1\\).)\nPehle khud hal karein, phir jawab se milaayein."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Is section ke har sawal mein sab se pehle teen cheezen likh lein: \\(a\\), \\(b\\) aur \\(|b|\\). Phir \\(M = a + |b|\\), \\(m = a - |b|\\). Bracket ke andar wale \\(c\\) aur \\(d\\) se ghabraiye mat; yeh kabhi \\(M\\) aur \\(m\\) nahin badalte, sirf period aur lehar ki jagah badalte hain. Examiner aksar \\(b\\) negative de kar dekhta hai ke aap \\(|b|\\) lagate hain ya nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(a + b\\sin(c\\theta + d)\\) aur \\(a + b\\cos(c\\theta + d)\\) mein: midline (vertical shift) \\(a\\), amplitude \\(|b|\\), period \\(\\frac{2\\pi}{c}\\), aur \\(d\\) se lehar daayen baayen khiskti hai.\n2. \\(M = a + |b|\\), \\(m = a - |b|\\).\n3. \\(b > 0\\) ho to maximum wahan jahan sine/cosine \\(1\\) ho; \\(b < 0\\) ho to wahan jahan sine/cosine \\(-1\\) ho.\n4. Amplitude \\(= \\frac{M - m}{2}\\), midline \\(a = \\frac{M + m}{2}\\).\n5. Positive reciprocal ka maximum \\(\\frac{1}{m}\\) aur minimum \\(\\frac{1}{M}\\) hota hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Negative \\(b\\) ke saath \\(M = a + b\\) likh dena: \\(5 - 2\\cos 3x\\) mein is se 3 aata hai, jo asal mein minimum hai. Hamesha \\(|b|\\) lagayein.\n2. Yeh samajhna ke \\(c\\) maximum badal deta hai: \\(\\sin 3x\\) aur \\(\\sin x\\) dono \\(-1\\) se \\(1\\) tak hi jate hain.\n3. Reciprocal lete waqt maximum aur minimum ki jagah na badalna.\n4. Amplitude ko poori lehar ki unchai samajhna: amplitude \\(M - m\\) ka aadha hai, poora nahin.\n5. \"Maximum kab aata hai\" likhte waqt \\(b\\) ka sign na dekhna; kitab ne khud Example 2(ii) mein yahi ghalti ki hai."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-7.4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/7.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 138,
+          "pdf_to": 138,
+          "note": "Book p. 133: 7.4 Combination: team example and table, Definition, Theorem nCr = n!/(r!(n-r)!) with proof, Corollary nCn = nC0 = 1, Need to know! box"
+        }
+      ],
+      "title": "7.4 Combination (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH7-7.4",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum! Pichle sections mein humne permutation parha, jahan tarteeb (order) bohat ahem thi: \\(AB\\) aur \\(BA\\) do alag arrangements thin. Aaj hum aik naya sawal karte hain: agar humein sirf yeh jaanna ho ke kaun kaun chuna gaya, aur kis tarteeb mein likha gaya is se koi farq na pare, to kitne tareeqe hain? Isi ko combination (intikhab / chunao) kehte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab aik misaal deti hai. Aik teacher likhne ke muqable (writing competition) ke liye team banata hai: Ahmad, Sana, Hamza aur Danish. Ab agar yahi naam is tarteeb mein likh diye jayein: Hamza, Ahmad, Danish, Sana, to kya team badal gayi? Bilkul nahin. Wohi chaar students hain, sirf naamon ki tarteeb badli hai. Is liye dono listen aik hi combination hain."
+          },
+          {
+            "type": "table",
+            "caption": "Aik hi team, do mukhtalif tarteebon mein (kitab ki tarah)",
+            "header": [
+              "Ahmad",
+              "Sana",
+              "Hamza",
+              "Danish"
+            ],
+            "rows": [
+              [
+                "Hamza",
+                "Ahmad",
+                "Danish",
+                "Sana"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Yani combination mein humein team ki membership (kaun kaun shaamil hai) se matlab hai, is baat se nahin ke naam kis tarteeb mein likhe (arrange kiye) gaye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Permutation aur combination ka sab se bara farq yahi hai, is ko achhi tarah samajh lein. Permutation mein order matter karta hai, combination mein sirf group matter karta hai.\nAik chhoti si misaal dekhte hain: teen letters \\(A, B, C\\) mein se do lene hain.\nPermutations (order zaroori): \\(AB, BA, AC, CA, BC, CB\\), yani 6.\nCombinations (order zaroori nahin): \\(\\{A,B\\}, \\{A,C\\}, \\{B,C\\}\\), yani sirf 3.\nGhor karein: har group permutation wali list mein do dafa aaya hai, kyun ke do cheezon ki \\(2! = 2\\) tarteebein hoti hain. Is liye combinations, permutations ka aadha hain. Yahi idea aage theorem ke proof mein aayega, is liye ise yaad rakhiye."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Definition"
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Definition",
+            "text": "\\(n\\) objects mein se \\(r\\) objects ka combination, \\(n\\) objects ke set ka aik aisa subset (zimni set) hai jis mein \\(r\\) objects hon."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(n\\) mukhtalif objects mein se aik waqt mein \\(r\\) lene ke combinations ki tadaad ko \\({}^{n}C_{r}\\) ya \\(C(n, r)\\) ya \\(\\binom{n}{r}\\) se likhte hain, aur yeh is formula se milti hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "{}^{n}C_{r} = \\dfrac{n!}{r!\\,(n-r)!}",
+            "text_alt": "n C r equals n factorial over r factorial times (n minus r) factorial"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\({}^{n}C_{r}\\) ko \"\\(n\\) C \\(r\\)\" ya \"\\(n\\) choose \\(r\\)\" parhte hain, matlab \\(n\\) mukhtalif cheezon mein se \\(r\\) chun lo. \\(n\\) kul cheezein hain aur \\(r\\) woh jo hum chun rahe hain, is liye hamesha \\(0 \\le r \\le n\\) hota hai. Aap 5 cheezon mein se 7 nahin chun sakte.\nDefinition mein asal lafz \"subset\" hai. Set mein tarteeb nahin hoti: \\(\\{A, B\\} = \\{B, A\\}\\). Isi liye combination aik subset hai, arrangement nahin. Jab bhi aap ko lafz subset ya group dikhe, dimagh mein combination ki ghanti bajni chahiye."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Theorem"
+          },
+          {
+            "type": "paragraph",
+            "text": "Saabit karein ke \\({}^{n}C_{r} = \\dfrac{n!}{r!\\,(n-r)!}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Proof: \\(n\\) objects ke set mein se \\(r\\) objects ka jo bhi subset hum chunein, us ke \\(r\\) elements aapas mein \\(r!\\) tareeqon se arrange ho sakte hain. Yani har aik combination se \\(r!\\) permutations banti hain. Is tarah \\(n\\) mukhtalif objects mein se \\(r\\) ki kul permutations \\({}^{n}C_{r} \\times r!\\) hongi, yani:\n\\[{}^{n}C_{r} \\times r! = {}^{n}P_{r}\\]\n\\[\\Rightarrow {}^{n}C_{r} \\times r! = \\dfrac{n!}{(n-r)!}\\]\n\\[\\therefore {}^{n}C_{r} = \\dfrac{n!}{r!\\,(n-r)!}\\]\nAur proof mukammal ho gaya."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Proof ko do qadmon mein samjhein:\n1. Permutation banane ka matlab hai pehle \\(r\\) cheezein chunna aur phir unhein qatar mein lagana. Chunne ke \\({}^{n}C_{r}\\) tareeqe hain, aur har chunao ke baad lagane ke \\(r!\\) tareeqe. Fundamental principle of counting (ginti ka bunyadi usool) kehta hai ke kaam ek ke baad ek hon to tareeqe zarb hote hain, is liye \\({}^{n}C_{r} \\times r! = {}^{n}P_{r}\\).\n2. Ab dono taraf \\(r!\\) se taqseem karein aur Section 7.2 wala \\({}^{n}P_{r} = \\frac{n!}{(n-r)!}\\) rakh dein. Bas, formula mil gaya.\nUpar wali \\(A, B, C\\) misaal se tasdeeq: \\({}^{3}C_{2} \\times 2! = 3 \\times 2 = 6 = {}^{3}P_{2}\\). Bilkul wohi jo humne list bana kar dekha tha.\nIs liye aik aasan shakal yaad rakhiye: \\({}^{n}C_{r} = \\dfrac{{}^{n}P_{r}}{r!}\\). \\(r!\\) se taqseem karna un tarteebon ko hata deta hai jo combination mein ginni hi nahin."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Corollary"
+          },
+          {
+            "type": "paragraph",
+            "text": "Corollary (theorem se seedha nikalne wala nateeja):\n(i) Agar \\(r = n\\) ho, to\n\\[{}^{n}C_{n} = \\dfrac{n!}{n!\\,(n-n)!}\\]\n\\[= \\dfrac{n!}{n!\\;0!} = 1\\]\n(ii) Agar \\(r = 0\\) ho, to\n\\[{}^{n}C_{0} = \\dfrac{n!}{0!\\,(n-0)!}\\]\n\\[= \\dfrac{n!}{0!\\;n!} = 1\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Dono jagah \\(0! = 1\\) istemal hua hai (Section 7.2 mein yeh definition parhi thi). Aur dono nateeje aam samajh se bhi theek hain:\n\\({}^{n}C_{n} = 1\\): sab \\(n\\) cheezein chunne ka sirf aik tareeqa hai, sab utha lo.\n\\({}^{n}C_{0} = 1\\): kuch bhi na chunne ka bhi sirf aik tareeqa hai, sab chhor do.\nJaise class ke 5 students mein se saare 5 chunne hon to aik hi team banti hai: \\({}^{5}C_{5} = 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Need to know!",
+            "text": "\\({}^{n}P_{r}\\) aur \\({}^{n}C_{r}\\) ko counting formulae (ginti ke formulae) bhi kaha jata hai, kyun ke in se hum mumkin tareeqon ki tadaad gin lete hain, saare tareeqe list kiye baghair."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari taraf se practice hai, kitab ka sawal nahin. \\({}^{7}C_{3}\\) nikalein.\n\\[{}^{7}C_{3} = \\dfrac{7!}{3!\\,4!}\\]\n\\[= \\dfrac{7 \\times 6 \\times 5 \\times 4!}{3 \\times 2 \\times 1 \\times 4!}\\]\n\\[= \\dfrac{210}{6} = 35\\]\nKyun: \\(7!\\) ko poora (5040) multiply karne ki zaroorat nahin. Neeche wale bare factorial \\(4!\\) tak \\(7!\\) ko khol kar likhein aur kaat dein. Aasan usool: upar \\(n\\) se neeche ki taraf \\(r\\) numbers zarb karein, neeche \\(r!\\) likhein. Is tarah \\({}^{7}C_{3} = \\frac{7 \\cdot 6 \\cdot 5}{3 \\cdot 2 \\cdot 1}\\).\nAik aur: \\({}^{10}C_{2} = \\frac{10 \\cdot 9}{2 \\cdot 1} = 45\\). Yani 10 doston mein se 2 ki jori 45 tareeqon se ban sakti hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh bhi hamari taraf se hai. Aik party mein 5 dost hain aur har dost har doosre dost se sirf aik dafa haath milata hai (handshake). Kul kitne handshakes honge?\nPehle sochiye ke order matter karta hai ya nahin. Ahmad ka Sana se haath milana aur Sana ka Ahmad se haath milana aik hi handshake hai. Yani order matter nahin karta, aur har handshake 5 mein se 2 logon ka aik chunao hai. Is liye\n\\[{}^{5}C_{2} = \\dfrac{5 \\times 4}{2 \\times 1} = 10\\]\nTasdeeq ke liye list bana kar dekh lein: har dost 4 se haath milata hai, \\(5 \\times 4 = 20\\), lekin is mein har handshake do dafa gina gaya (aik dafa har dost ki taraf se), is liye \\(20 \\div 2 = 10\\). Dekha aap ne, \\(2!\\) se taqseem karna bilkul yahi kaam karta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Dhyan dein",
+            "text": "Formula sirf tab theek hai jab saari \\(n\\) cheezein mukhtalif (different) hon aur har cheez zyada se zyada aik dafa chuni ja sake. Aik hi student team mein do dafa nahin aa sakta. Agar sawal mein repetition ki ijazat ho (jaise password), to wahan yeh formula nahin, balke fundamental principle of counting lagta hai. Is ki misaal aap 7.4.2 mein Example 12 mein dekhenge."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "1. \\({}^{6}C_{2}\\) kitna hai? (Jawab: \\(\\frac{6 \\cdot 5}{2} = 15\\).)\n2. \\({}^{4}P_{2}\\) aur \\({}^{4}C_{2}\\) mein kya rishta hai? (Jawab: \\({}^{4}P_{2} = 12\\), \\({}^{4}C_{2} = 6\\), aur \\(12 = 6 \\times 2!\\).)\n3. \\({}^{9}C_{9}\\) aur \\({}^{9}C_{0}\\) kitne hain? (Jawab: dono 1.)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Formula lagane se pehle khud se aik sawal poochein: \"Agar main tarteeb badal doon to kya naya jawab banta hai?\"\nHaan (arrange, qatar, seating, password, number, position): permutation \\({}^{n}P_{r}\\).\nNahin (choose, select, team, committee, group, handshake): combination \\({}^{n}C_{r}\\).\nMisaal: 10 mein se 3 students ki committee: \\({}^{10}C_{3}\\). Lekin 10 mein se President, Secretary aur Treasurer chunna: \\({}^{10}P_{3}\\), kyun ke yahan har aik ka ohda (position) alag hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Combination matlab chunao (subset); is mein order matter nahin karta.\n2. \\({}^{n}C_{r} = \\dfrac{n!}{r!\\,(n-r)!}\\); ise \\(C(n, r)\\) ya \\(\\binom{n}{r}\\) bhi likhte hain.\n3. \\({}^{n}C_{r} \\times r! = {}^{n}P_{r}\\): har chunao se \\(r!\\) arrangements banti hain.\n4. \\({}^{n}C_{n} = 1\\) aur \\({}^{n}C_{0} = 1\\).\n5. \\({}^{n}P_{r}\\) aur \\({}^{n}C_{r}\\) counting formulae kehlate hain."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Team ya committee jaise chunao par \\({}^{n}P_{r}\\) laga dena. Is se har group \\(r!\\) dafa gina jata hai aur jawab bohat bara aa jata hai. Bachne ka tareeqa: shuru mein hi likh lein \"order matter karta hai ya nahin\".\n2. Denominator mein aik factorial bhool jana: \\(\\frac{n!}{(n-r)!}\\) to \\({}^{n}P_{r}\\) hai. Combination mein neeche \\(r!\\) bhi zaroor aata hai.\n3. \\(0! = 0\\) samajhna. \\(0! = 1\\) hai; warna \\({}^{n}C_{n}\\) mein zero se taqseem ho jati.\n4. Bare factorials ko poora multiply karna. Waqt bhi zaya hota hai aur ghalti ka khatra bhi; pehle kaatein, phir zarb karein."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH5-EXERCISE-5-1-Q11",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch5",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch5/u-exercise-5-1-q11",
+      "title": "Question 11",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 90,
+          "pdf_to": 90,
+          "note": "Exercise 5.1, Question 11: book page 85 (PDF 90); answer key book page 299 (PDF 304)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11. Resolve into partial fractions: \\(\\frac{2x^4}{(x - 3)(x + 2)^2}\\)",
+            "explanation": "Top degree 4, bottom degree 3: improper. The bottom has \\((x - 3)\\) once and \\((x + 2)\\) twice.\nWe divide first, then use Cases I and II for the remainder.\nPlan: expand the bottom, long division, identity, put \\(x = 3\\) and \\(x = -2\\), compare coefficients, recombine.",
+            "steps": [
+              "Given: \\(\\frac{2x^4}{(x - 3)(x + 2)^2}\\)\nTo find: its partial fractions.\nMethod: Improper, so divide: fraction = quotient + remainder/denominator. Then resolve the proper part with one fraction for \\((x - 3)\\) and two for \\((x + 2)^2\\).",
+              "Expand the denominator\n\\[(x + 2)^2 = x^2 + 4x + 4\\]\n\\[(x - 3)(x^2 + 4x + 4)\\]\n\\[= x^3 + x^2 - 8x - 12\\]\nWhy: Long division needs the divisor as a polynomial.",
+              "Long division of \\(2x^4\\) by \\(x^3 + x^2 - 8x - 12\\)\n\\[2x^4 \\div x^3 = 2x\\]\n\\[2x(\\ldots) = 2x^4 + 2x^3 - 16x^2 - 24x\\]\nSubtract: \\(-2x^3 + 16x^2 + 24x\\)\n\\[-2x^3 \\div x^3 = -2\\]\n\\[-2(\\ldots) = -2x^3 - 2x^2 + 16x + 24\\]\nSubtract: \\(18x^2 + 8x - 24\\)\nWhy: Stop when the remainder (degree 2) is below the divisor (degree 3). Quotient \\(2x - 2\\).",
+              "Write the form and the identity\n\\[\\dfrac{18x^2 + 8x - 24}{(x - 3)(x + 2)^2}\\]\n\\[= \\dfrac{A}{x - 3} + \\dfrac{B}{x + 2} + \\dfrac{C}{(x + 2)^2}\\]\n\\[18x^2 + 8x - 24 = A(x + 2)^2\\]\n\\[+ B(x - 3)(x + 2) + C(x - 3) \\quad (i)\\]\nWhy: Multiply both sides by \\((x - 3)(x + 2)^2\\).",
+              "Find \\(A\\): put \\(x = 3\\) in (i)\n\\[162 + 24 - 24 = A(25)\\]\n\\[A = \\tfrac{162}{25}\\]\nWhy: \\(x - 3 = 0\\) kills the \\(B\\) and \\(C\\) terms.",
+              "Find \\(C\\): put \\(x = -2\\) in (i)\n\\[72 - 16 - 24 = C(-5)\\]\n\\[32 = -5C\\]\n\\[C = -\\tfrac{32}{5}\\]\nWhy: \\(x + 2 = 0\\) kills the \\(A\\) and \\(B\\) terms.",
+              "Compare coefficients for \\(B\\)\n\\[x^2:\\ A + B = 18\\]\n\\[B = \\tfrac{450}{25} - \\tfrac{162}{25} = \\tfrac{288}{25}\\]\nCheck the constant: \\(4A - 6B - 3C\\)\n\\[= \\tfrac{648}{25} - \\tfrac{1728}{25} + \\tfrac{480}{25}\\]\n\\[= -\\tfrac{600}{25} = -24 \\;\\checkmark\\]\nWhy: \\(x^2\\) terms on the right come from \\(A(x + 2)^2\\) and \\(B(x - 3)(x + 2)\\).",
+              "Write the answer\n\\[= 2x - 2 + \\dfrac{162}{25(x - 3)}\\]\n\\[+ \\dfrac{288}{25(x + 2)} - \\dfrac{32}{5(x + 2)^2}\\]\nWhy: Quotient plus the three partial fractions.",
+              "Check: recombine the fractions\nOver \\(25(x - 3)(x + 2)^2\\) the numerator of the proper part is\n\\[162(x^2 + 4x + 4) + 288(x^2 - x - 6)\\]\n\\[- 160(x - 3)\\]\n\\[= 450x^2 + 200x - 600\\]\n\\[= 25(18x^2 + 8x - 24) \\;\\checkmark\\]\nAnd \\((2x - 2)(x^3 + x^2 - 8x - 12)\\)\n\\[+ 18x^2 + 8x - 24 = 2x^4 \\;\\checkmark\\]\nWhy: \\(\\tfrac{32}{5} = \\tfrac{160}{25}\\). Quotient times divisor plus remainder gives \\(2x^4\\)."
+            ],
+            "final_answer": "\\(\\dfrac{2x^4}{(x - 3)(x + 2)^2} = 2x - 2 + \\dfrac{162}{25(x - 3)} + \\dfrac{288}{25(x + 2)} - \\dfrac{32}{5(x + 2)^2}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

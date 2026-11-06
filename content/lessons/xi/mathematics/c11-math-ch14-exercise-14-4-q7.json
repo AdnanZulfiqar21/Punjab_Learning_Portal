@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-4-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-4-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 295,
+          "pdf_to": 295,
+          "note": "Exercise 14.4 Q7 (i)-(ii), book p.290 (PDF 295). Answer key PDF 312: 8/3 and 2/3 cubic units, both correct (sympy). Solution book PDF 1279-1281 agrees."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(i)",
+            "prompt": "7 (i) Find volume of tetrahedron with the vertices \\((0, 1, 2)\\), \\((3, 2, 1)\\), \\((1, 2, 1)\\) and \\((5, 5, 6)\\).",
+            "explanation": "A tetrahedron (triangular pyramid) volume from four corner points.\nWe must find its volume.\nPlan: take three edge vectors from one vertex; volume \\(= \\frac{1}{6}|\\)triple product\\(|\\) (14.4.3).",
+            "steps": [
+              "Given: vertices \\((0, 1, 2)\\), \\((3, 2, 1)\\), \\((1, 2, 1)\\) and \\((5, 5, 6)\\).\nTo find: the volume \\(V\\) of the tetrahedron.\nMethod: with \\(A = (0, 1, 2)\\), \\(V = \\dfrac{1}{6}\\left|[\\overrightarrow{AB}\\ \\overrightarrow{AC}\\ \\overrightarrow{AD}]\\right|\\).",
+              "Edge vectors from \\(A\\)\n\\[\\overrightarrow{AB} = 3\\underline{i} + \\underline{j} - \\underline{k}\\]\n\\[\\overrightarrow{AC} = \\underline{i} + \\underline{j} - \\underline{k}\\]\n\\[\\overrightarrow{AD} = 5\\underline{i} + 4\\underline{j} + 4\\underline{k}\\]\nWhy: Subtract \\(A\\) from each point: \\((3 - 0, 2 - 1, 1 - 2)\\), \\((1, 1, -1)\\), \\((5, 4, 4)\\).",
+              "Triple product\n\\[\\begin{vmatrix} 3 & 1 & -1 \\\\ 1 & 1 & -1 \\\\ 5 & 4 & 4 \\end{vmatrix}\\]\n\\[= 3(4 + 4) - 1(4 + 5) - 1(4 - 5)\\]\n\\[= 24 - 9 + 1 = 16\\]\nWhy: Expand along row 1 with signs \\(+, -, +\\).",
+              "Volume\n\\[V = \\dfrac{1}{6}|16| = \\dfrac{16}{6} = \\dfrac{8}{3}\\]\nWhy: A tetrahedron is one sixth of the parallelepiped on the same three edges (a pyramid is \\(\\frac{1}{3}\\) base \\(\\times\\) height, and its triangular base is half the parallelogram).",
+              "Check: expand down column 3\n\\[-1(4 - 5) + 1(12 - 5) + 4(3 - 1)\\]\n\\[= 1 + 7 + 8 = 16 \\;\\checkmark\\]\nWhy: Column 3 has signs \\(+, -, +\\); the entry \\(-1\\) in row 2 with sign \\(-\\) gives \\(+1 \\times\\) its minor \\(12 - 5\\)."
+            ],
+            "final_answer": "\\(V = \\dfrac{16}{6} = \\dfrac{8}{3}\\) cubic units"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(ii)",
+            "prompt": "7 (ii) Find volume of tetrahedron with the vertices \\((2, 1, 8)\\), \\((3, 2, 9)\\), \\((2, 1, 4)\\) and \\((3, 3, 10)\\).",
+            "explanation": "A tetrahedron (triangular pyramid) volume from four corner points.\nWe must find its volume.\nPlan: take three edge vectors from one vertex; volume \\(= \\frac{1}{6}|\\)triple product\\(|\\) (14.4.3).",
+            "steps": [
+              "Given: vertices \\((2, 1, 8)\\), \\((3, 2, 9)\\), \\((2, 1, 4)\\) and \\((3, 3, 10)\\).\nTo find: the volume \\(V\\) of the tetrahedron.\nMethod: with \\(A = (2, 1, 8)\\), \\(V = \\dfrac{1}{6}\\left|[\\overrightarrow{AB}\\ \\overrightarrow{AC}\\ \\overrightarrow{AD}]\\right|\\).",
+              "Edge vectors from \\(A\\)\n\\[\\overrightarrow{AB} = \\underline{i} + \\underline{j} + \\underline{k}\\]\n\\[\\overrightarrow{AC} = -4\\underline{k}\\]\n\\[\\overrightarrow{AD} = \\underline{i} + 2\\underline{j} + 2\\underline{k}\\]\nWhy: \\((3 - 2, 2 - 1, 9 - 8)\\), \\((0, 0, 4 - 8)\\), \\((3 - 2, 3 - 1, 10 - 8)\\).",
+              "Triple product\n\\[\\begin{vmatrix} 1 & 1 & 1 \\\\ 0 & 0 & -4 \\\\ 1 & 2 & 2 \\end{vmatrix}\\]\n\\[= 1(0 + 8) - 1(0 + 4) + 1(0 - 0)\\]\n\\[= 8 - 4 + 0 = 4\\]\nWhy: Expand along row 1 with signs \\(+, -, +\\).",
+              "Volume\n\\[V = \\dfrac{1}{6}|4| = \\dfrac{4}{6} = \\dfrac{2}{3}\\]\nWhy: A tetrahedron is one sixth of the parallelepiped on the same three edges (a pyramid is \\(\\frac{1}{3}\\) base \\(\\times\\) height, and its triangular base is half the parallelogram).",
+              "Check: expand along row 2\n\\[-(-4)\\begin{vmatrix} 1 & 1 \\\\ 1 & 2 \\end{vmatrix} = 4(2 - 1) = 4 \\;\\checkmark\\]\nWhy: Row 2 has only one non-zero entry, \\(-4\\), in position (2, 3) whose sign is \\(-\\)."
+            ],
+            "final_answer": "\\(V = \\dfrac{4}{6} = \\dfrac{2}{3}\\) cubic units"
+          }
+        ]
+      }
+    }
+  ]
+}

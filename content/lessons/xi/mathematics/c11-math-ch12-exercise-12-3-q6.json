@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-3-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-3-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 241,
+          "pdf_to": 241,
+          "note": "Exercise 12.3, Question 6: continuity of a piecewise cost function at x = 100 (book p.236). Answer key PDF 310: yes."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6 The factory's cost function is given as: \\[C(x) = \\begin{cases} 10x + 500, & x \\le 100 \\\\ 12x + 300, & x > 100 \\end{cases}\\]Is the cost function continuous at \\(x = 100\\)?",
+            "explanation": "A continuity question for a two-piece cost function.\nWe must check whether the two cost formulas give the same cost at \\(x = 100\\).\nPlan: find \\(C(100)\\), the LHL and the RHL, then test the three conditions.",
+            "steps": [
+              "Given: \\(C(x) = 10x + 500\\) for \\(x \\le 100\\), \\(12x + 300\\) for \\(x > 100\\).\nTo find: whether \\(C\\) is continuous at \\(x = 100\\).\nMethod: \\(C\\) is continuous at \\(x = c\\) when (i) \\(C(c)\\) is defined, (ii) \\(\\lim_{x \\to c} C(x)\\) exists (LHL = RHL), (iii) \\(\\lim_{x \\to c} C(x) = C(c)\\).",
+              "Condition (i): find \\(C(100)\\)\n\\[C(100) = 10(100) + 500\\]\n\\[= 1000 + 500 = 1500\\]\nWhy: \\(x \\le 100\\) includes 100, so the first formula is used.",
+              "Left hand limit\n\\[\\lim_{x \\to 100^-} C(x) = \\lim_{x \\to 100^-} (10x + 500)\\]\n\\[= 1500\\]\nWhy: Below 100 units the first formula applies.",
+              "Right hand limit\n\\[\\lim_{x \\to 100^+} C(x) = \\lim_{x \\to 100^+} (12x + 300)\\]\n\\[= 1200 + 300 = 1500\\]\nWhy: Above 100 units the second formula applies.",
+              "Conditions (ii) and (iii)\n\\[\\text{LHL} = \\text{RHL} = 1500 = C(100)\\]\nWhy: All three conditions hold, so \\(C\\) is continuous at \\(x = 100\\): the cost does not jump when production passes 100 units.",
+              "Check\n\\[C(99) = 990 + 500 = 1490\\]\n\\[C(101) = 1212 + 300 = 1512\\]\nWhy: Costs just below and just above 100 units are both close to 1500."
+            ],
+            "final_answer": "Yes. \\(C\\) is continuous at \\(x = 100\\) (LHL \\(=\\) RHL \\(= C(100) = 1500\\))"
+          }
+        ]
+      }
+    }
+  ]
+}

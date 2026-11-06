@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-9.1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/9.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 175,
+          "pdf_to": 176,
+          "note": "Book p. 170-171: Unit 9 Introduction, 9.1 definition of a polynomial (i) and degree, Examples 1-2 (long-division boxes). Teaching notes, Key points, Common mistakes and the RU practice item are ours."
+        }
+      ],
+      "title": "9.1 Polynomial Function (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH9-9.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum! Aaj hum Unit 9 shuru kar rahe hain: Division of Polynomials, yani ek polynomial ko doosre polynomial se taqseem (divide) karna. Aap ne numbers ki lambi taqseem (long division) bachpan mein seekhi thi, jaise \\(17 \\div 5\\). Yahan bilkul wohi tareeqa hai, bas numbers ki jagah polynomials hain. Is page par hum polynomial ki pehchaan karenge aur kitab ki do misaalon mein long division qadam ba qadam karenge. Agle pages par isi division se do bohat taaqatwar shortcuts niklenge: remainder theorem aur factor theorem."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Introduction"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ka introduction yeh kehta hai: polynomials algebra ki buniyad hain aur engineering, data science aur digital communication mein har jagah istemal hote hain. Is unit mein hum polynomial division se quotient (haasil-e-taqseem) aur remainder (baqi) nikalna seekhenge. Remainder theorem polynomial ki value jaldi nikalne ka ek taaqatwar auzaar (tool) hai, aur factor theorem se cubic polynomials ke factors nikalte hain. Yeh cheezein sirf kitabi nahin: polynomial regression, signal processing aur coding theory mein inka amli istemal hota hai. Inhein achhi tarah seekh kar aap polynomials ko aur real-world masail mein unki ahmiyat ko behtar samjhenge."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is unit ka naqsha (road map), taa ke aap ko pata rahe hum kahan ja rahe hain:\n1. 9.1 Polynomials ki long division (yeh page).\n2. 9.1.1 Remainder theorem: \\(x - a\\) se divide karne par remainder seedha \\(f(a)\\) hota hai, division ki zaroorat hi nahin.\n3. 9.1.2 Factor theorem: \\(x - a\\) factor tabhi hai jab \\(f(a) = 0\\) ho.\n4. 9.1.3 Synthetic division: \\(x - a\\) se divide karne ka chhota aur tez tareeqa.\n5. 9.2 Rozmarra zindagi mein istemal.\nKitab ke pages ke upar (running head) is unit ka naam \"Remainder and Factor Theorem\" likha hai; ghabraiye mat, yeh wohi unit hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "9.1 Polynomial Function"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab polynomial ki definition yun deti hai: \\(x\\) mein polynomial aisi expression hai jis ki shakal yeh ho"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned} &a_{n}x^{n} + a_{n-1}x^{n-1} + a_{n-2}x^{n-2} \\\\ &+ \\ldots + a_{2}x^{2} + a_{1}x + a_{0} \\quad \\text{(i)} \\end{aligned}",
+            "text_alt": "a sub n x to the power n, plus a sub n minus 1 x to the power n minus 1, plus a sub n minus 2 x to the power n minus 2, plus and so on, plus a sub 2 x squared, plus a sub 1 x, plus a sub 0, expression (i)"
+          },
+          {
+            "type": "paragraph",
+            "text": "jahan \\(n\\) koi non-negative integer (yani 0, 1, 2, 3, ... mein se koi poora number) hai aur coefficients \\(a_{n}, a_{n-1}, a_{n-2}, \\ldots, a_{1}\\) aur \\(a_{0}\\) real numbers hain. Ise \\(x\\) ka polynomial function bhi keh sakte hain. Polynomial mein \\(x\\) ki sab se bari power ko polynomial ki degree (darja) kehte hain. Expression (i) mein agar \\(a_{n} \\ne 0\\) ho to yeh degree \\(n\\) ka polynomial hai. Masalan \\(x^{2} - 2x + 3\\) ki degree 2 hai aur \\(3x^{3} + 2x^{2} - 5x + 4\\) ki degree 3.",
+            "bold": [
+              "degree"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Pehle chand alfaaz pakke kar lein, kyun ke poori unit mein yahi bolenge. Misaal \\(3x^{3} + 2x^{2} - 5x + 4\\) lete hain:\n1. Terms (hissay): \\(3x^{3}\\), \\(2x^{2}\\), \\(-5x\\), \\(4\\).\n2. Coefficients (zarb dene wale numbers): har power ke aage wala number: 3, 2, \\(-5\\) aur 4. Dhyan dein ke \\(-5x\\) ka coefficient \\(-5\\) hai, sign samait.\n3. Leading term: sab se bari power wali term, \\(3x^{3}\\); is ka coefficient 3 leading coefficient kehlata hai.\n4. Constant term: jis mein \\(x\\) na ho, yahan 4 (yahi \\(a_{0}\\) hai).\n5. Degree: sab se bari power, yahan 3.\n\"Non-negative integer\" ki shart ka matlab hai ke powers sirf \\(0, 1, 2, 3, \\ldots\\) ho sakti hain. Is liye \\(x^{-1} + 2\\) (negative power) aur \\(\\sqrt{x} + 1\\) (power \\(\\frac{1}{2}\\)) polynomials nahin hain.\nPolynomial hamesha descending powers (bari power pehle) mein likhte hain. Jo power gayab ho us ka coefficient 0 samjhein: \\(x^{3} - 7x + 6 = x^{3} + 0x^{2} - 7x + 6\\). Yeh 0 division mein bohat kaam aata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "1. \\(5x^{4} - x + 7\\) ki degree kya hai, aur constant term kaun si? (Jawab: degree 4, constant term 7.)\n2. Kya \\(x^{2} + \\frac{1}{x}\\) polynomial hai? (Jawab: nahin, kyun ke \\(\\frac{1}{x} = x^{-1}\\) mein power negative hai.)\n3. \\(2x^{3} - 9\\) ko saari powers ke saath likhiye. (Jawab: \\(2x^{3} + 0x^{2} + 0x - 9\\).)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Dividing a polynomial by a polynomial"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab asal kaam: ek polynomial ko doosre se divide karna. Pehle numbers yaad karein. \\(17 \\div 5\\) mein quotient 3 aur remainder 2 aata hai, aur \\(17 = 5 \\times 3 + 2\\). Remainder 2 hamesha divisor 5 se chhota hota hai, warna hum ek baar aur divide kar sakte the. Polynomials mein \"chhota\" ka matlab hai kam degree wala. Yani:"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Division ka bunyadi rishta (division algorithm):\n\\[\\text{Dividend} = \\text{Divisor} \\times \\text{Quotient} + \\text{Remainder}\\]\nAur hum tab rukte hain jab remainder ki degree divisor ki degree se kam ho jaye.\nHar round mein yeh paanch kaam dohrane hain:\n1. Dono polynomials descending powers mein likhein; gayab power ki jagah 0 likhein.\n2. Dividend ki leading term ko divisor ki leading term se divide karein: yeh quotient ki agli term hai.\n3. Is term se poore divisor ko multiply karein.\n4. Subtract karein (product ki har term ka sign badal kar jama karein).\n5. Agli term neeche utaarein aur phir se shuru karein.\nKyun leading terms? Kyun ke hum chahte hain ke subtract karte hi sab se bari power khatam ho jaye; har round mein degree kam hoti jati hai, aur aakhir mein remainder bachta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki pehli misaal. Is mein cubic (degree 3) polynomial ko linear (degree 1) polynomial se divide karna hai. Har round ke baad dividend ki degree ek kam hoti jayegi: 3, phir 2, phir 1, aur aakhir mein 0 par remainder bachega. Is liye teen round lagenge aur quotient mein teen terms aayengi. Kaam shuru karne se pehle yeh andaza laga lena achhi aadat hai, kyun ke is se pata rehta hai ke kab rukna hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Divide the cubic polynomial \\(3x^{3} - 10x^{2} + 13x - 6\\) by the linear polynomial \\(x - 2\\). Also find quotient and remainder.",
+            "steps": [
+              "Given: dividend \\(3x^{3} - 10x^{2} + 13x - 6\\) (degree 3), divisor \\(x - 2\\) (degree 1).\nTo find: quotient aur remainder.\nMethod: sab se pehle dekhte hain ke divisor ki degree 1 hai, is liye remainder ki degree 0 honi chahiye, yani sirf ek number (constant). Plan: long division ke round tab tak chalayein jab tak sirf constant na bach jaye.",
+              "Step 1: Quotient ki pehli term\n\\[\\dfrac{3x^{3}}{x} = 3x^{2}\\]\n\\[3x^{2}(x - 2) = 3x^{3} - 6x^{2}\\]\n\\[(3x^{3} - 10x^{2}) - (3x^{3} - 6x^{2}) = -4x^{2}\\]\nAb \\(+13x\\) neeche utaarein: naya dividend \\(-4x^{2} + 13x\\).\nKyun: leading terms ko divide karne se aisi term milti hai jo subtract karte hi \\(3x^{3}\\) ko khatam kar de. Dekhiye, \\(-10x^{2} - (-6x^{2}) = -10x^{2} + 6x^{2} = -4x^{2}\\). Minus ke peeche minus plus ban jata hai.",
+              "Step 2: Quotient ki doosri term\n\\[\\dfrac{-4x^{2}}{x} = -4x\\]\n\\[-4x(x - 2) = -4x^{2} + 8x\\]\n\\[(-4x^{2} + 13x) - (-4x^{2} + 8x) = 5x\\]\nAb \\(-6\\) neeche utaarein: naya dividend \\(5x - 6\\).\nKyun: wohi routine dobara. Is baar leading term \\(-4x^{2}\\) hai, is liye quotient ki term bhi negative aayi. \\(-4x \\times (-2) = +8x\\) ka sign khaas dhyan se dekhiye.",
+              "Step 3: Quotient ki teesri term\n\\[\\dfrac{5x}{x} = 5\\]\n\\[5(x - 2) = 5x - 10\\]\n\\[(5x - 6) - (5x - 10) = 4\\]\nKyun: \\(-6 - (-10) = -6 + 10 = 4\\). Ab 4 sirf ek number hai (degree 0), jo divisor ki degree 1 se kam hai. Isliye division yahin ruk jati hai; 4 hamara remainder hai.",
+              "Step 4: Poora kaam ek layout mein\n\\[\\begin{array}{r} 3x^{2}-4x+5 \\\\ x-2\\,\\overline{\\smash{)}\\,3x^{3}-10x^{2}+13x-6} \\\\ \\underline{-(3x^{3}-6x^{2})}\\phantom{+13x-6} \\\\ -4x^{2}+13x\\phantom{-6} \\\\ \\underline{-(-4x^{2}+8x)}\\phantom{-6} \\\\ 5x-6 \\\\ \\underline{-(5x-10)} \\\\ 4 \\end{array}\\]\nKyun: yeh kitab wala long-division box hai. Kitab product wali line ke har term ke neeche chhota sa ulta sign likh kar jama karti hai; hum ne \\(-(\\ldots)\\) likha hai. Dono ka matlab bilkul ek hai: poori line ko minus karna.",
+              "Step 5: Natija rishte ki shakal mein\n\\[3x^{3} - 10x^{2} + 13x - 6\\]\n\\[= (x - 2)(3x^{2} - 4x + 5) + 4\\]\nYani quotient \\(= 3x^{2} - 4x + 5\\) aur remainder \\(= 4\\).\nKyun: Dividend = Divisor × Quotient + Remainder. Is shakal mein likhna exam mein bhi achha lagta hai aur check karna bhi aasan ho jata hai.",
+              "Tasdeeq:\n\\[(x - 2)(3x^{2} - 4x + 5)\\]\n\\[= 3x^{3} - 4x^{2} + 5x - 6x^{2} + 8x - 10\\]\n\\[= 3x^{3} - 10x^{2} + 13x - 10\\]\nIs mein remainder 4 jama karein to \\(3x^{3} - 10x^{2} + 13x - 6\\) mil gaya, yani dividend. Jawab sahi hai."
+            ],
+            "answer": "Quotient \\(= 3x^{2} - 4x + 5\\) and remainder \\(= 4\\), i.e. \\(3x^{3} - 10x^{2} + 13x - 6 = (x - 2)(3x^{2} - 4x + 5) + 4\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Ek dilchasp baat note kijiye. Divisor \\(x - 2\\) kis value par zero hota hai? \\(x = 2\\) par. Ab dividend mein \\(x = 2\\) rakh kar dekhein:\n\\[f(2) = 24 - 40 + 26 - 6 = 4\\]\nBilkul wohi remainder! Yeh ittefaq nahin hai. Yahi 9.1.1 ka remainder theorem hai, jo agle page par saabit karenge. Yani agar sirf remainder chahiye to poori division ki zaroorat nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "Long division mein sab se zyada ghaltiyan subtraction mein hoti hain. Product wali line ki har term ka sign badalna hai, sirf pehli ka nahin. Achha tareeqa: product ko bracket mein likhein, \\(-(5x - 10)\\), phir bracket kholein: \\(-5x + 10\\). Is se sign kabhi nahin bhoolega."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab ek mushkil misaal: is baar divisor quadratic (degree 2) hai. Tareeqa wohi rahega, sirf rukne ki jagah badlegi."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Divide the polynomial \\(x^{4} - 3x^{3} + 5x^{2} - 7x + 2\\) by \\(x^{2} - x + 1\\). Also find quotient and remainder.",
+            "steps": [
+              "Given: dividend \\(x^{4} - 3x^{3} + 5x^{2} - 7x + 2\\) (degree 4), divisor \\(x^{2} - x + 1\\) (degree 2).\nTo find: quotient aur remainder.\nMethod: long division. Divisor ki degree 2 hai, is liye hum tab rukenge jab remainder ki degree 1 ya 0 ho jaye. Yani is baar remainder mein \\(x\\) wali term bhi reh sakti hai.",
+              "Step 1: Quotient ki pehli term\n\\[\\dfrac{x^{4}}{x^{2}} = x^{2}\\]\n\\[x^{2}(x^{2} - x + 1) = x^{4} - x^{3} + x^{2}\\]\nIse \\(x^{4} - 3x^{3} + 5x^{2}\\) se subtract karein:\n\\[-3x^{3} - (-x^{3}) = -2x^{3}\\]\n\\[5x^{2} - x^{2} = 4x^{2}\\]\n\\(-7x\\) neeche utaarein: naya dividend \\(-2x^{3} + 4x^{2} - 7x\\).\nKyun: divisor ki teen terms hain, is liye product ki bhi teen terms bani. Subtract hamesha same power wali terms ka aapas mein hota hai, jaise column mein ikaiyan ikaiyon ke neeche.",
+              "Step 2: Quotient ki doosri term\n\\[\\dfrac{-2x^{3}}{x^{2}} = -2x\\]\n\\[-2x(x^{2} - x + 1) = -2x^{3} + 2x^{2} - 2x\\]\n\\[(-2x^{3} + 4x^{2} - 7x) - (-2x^{3} + 2x^{2} - 2x)\\]\n\\[= 2x^{2} - 5x\\]\n\\(+2\\) neeche utaarein: naya dividend \\(2x^{2} - 5x + 2\\).\nKyun: \\(4x^{2} - 2x^{2} = 2x^{2}\\) aur \\(-7x - (-2x) = -7x + 2x = -5x\\). Minus ke saath minus milne par plus ban jata hai.",
+              "Step 3: Quotient ki teesri term\n\\[\\dfrac{2x^{2}}{x^{2}} = 2\\]\n\\[2(x^{2} - x + 1) = 2x^{2} - 2x + 2\\]\n\\[(2x^{2} - 5x + 2) - (2x^{2} - 2x + 2) = -3x\\]\nKyun: \\(-5x - (-2x) = -3x\\) aur \\(2 - 2 = 0\\). Ab \\(-3x\\) ki degree 1 hai, jo divisor ki degree 2 se kam hai. Isliye ruk jayein; \\(-3x\\) remainder hai. Haan, remainder mein \\(x\\) ho sakta hai jab divisor quadratic ho.",
+              "Step 4: Poora kaam ek layout mein\n\\[\\begin{array}{r} x^{2}-2x+2 \\\\ x^{2}-x+1\\,\\overline{\\smash{)}\\,x^{4}-3x^{3}+5x^{2}-7x+2} \\\\ \\underline{-(x^{4}-x^{3}+x^{2})}\\phantom{-7x+2} \\\\ -2x^{3}+4x^{2}-7x\\phantom{+2} \\\\ \\underline{-(-2x^{3}+2x^{2}-2x)}\\phantom{+2} \\\\ 2x^{2}-5x+2 \\\\ \\underline{-(2x^{2}-2x+2)} \\\\ -3x \\end{array}\\]\nKyun: yeh kitab wala box hai, subtraction ko \\(-(\\ldots)\\) ki shakal mein likha gaya hai.",
+              "Tasdeeq:\n\\[(x^{2} - x + 1)(x^{2} - 2x + 2)\\]\n\\[= x^{4} - 2x^{3} + 2x^{2} - x^{3} + 2x^{2}\\]\n\\[\\quad - 2x + x^{2} - 2x + 2\\]\n\\[= x^{4} - 3x^{3} + 5x^{2} - 4x + 2\\]\nIs mein remainder \\(-3x\\) jama karein: \\(x^{4} - 3x^{3} + 5x^{2} - 7x + 2\\). Yahi dividend tha, jawab sahi hai."
+            ],
+            "answer": "Quotient \\(= x^{2} - 2x + 2\\) and remainder \\(= -3x\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Example 2 mein remainder \\(-3x\\) aaya. Kya \\(x - a\\) jaise linear divisor se divide karne par remainder mein kabhi \\(x\\) aa sakta hai? (Jawab: nahin. Linear divisor ki degree 1 hai, is liye remainder ki degree 0 hi hogi, yani sirf ek number. Isi liye remainder theorem sirf \\(x - a\\) ki shakal ke divisor ke liye bana hai.)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahin. \\(x^{3} - 1\\) ko \\(x - 1\\) se divide kijiye.\nPehle gayab powers ke liye 0 likhein: \\(x^{3} + 0x^{2} + 0x - 1\\).\n\\(x^{3} \\div x = x^{2}\\); \\(x^{2}(x - 1) = x^{3} - x^{2}\\); subtract: \\(x^{2}\\), \\(0x\\) utaarein: \\(x^{2} + 0x\\).\n\\(x^{2} \\div x = x\\); \\(x(x - 1) = x^{2} - x\\); subtract: \\(x\\), \\(-1\\) utaarein: \\(x - 1\\).\n\\(x \\div x = 1\\); \\(1(x - 1) = x - 1\\); subtract: 0.\nJawab: quotient \\(x^{2} + x + 1\\), remainder 0. Yani \\(x^{3} - 1 = (x - 1)(x^{2} + x + 1)\\). Remainder 0 ka matlab hai ke \\(x - 1\\) poora poora taqseem karta hai, yani factor hai. Isi baat ko 9.1.2 mein factor theorem kahenge."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Polynomial mein \\(x\\) ki sirf 0, 1, 2, ... wali powers hoti hain; sab se bari power degree hai.\n2. Dividend = Divisor × Quotient + Remainder.\n3. Har round: leading term ÷ leading term, poore divisor se multiply, subtract, agli term neeche.\n4. Tab rukein jab remainder ki degree divisor ki degree se kam ho jaye.\n5. Linear divisor \\(x - a\\) se remainder hamesha constant hota hai; quadratic divisor se remainder linear bhi ho sakta hai (Example 2).\n6. Aakhir mein hamesha multiply kar ke check karein."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Gayab power ke liye 0 na likhna; phir terms ghalat columns mein chali jati hain. \\(x^{3} - 7x + 6\\) ko pehle \\(x^{3} + 0x^{2} - 7x + 6\\) likhein.\n2. Subtract karte waqt sirf pehli term ka sign badalna. Poori line ka sign badalna hai: Example 1 mein \\(-6 - (-10) = 4\\), \\(-16\\) nahin.\n3. Bohat pehle ya bohat baad mein rukna: theek us waqt rukein jab remainder ki degree divisor se kam ho.\n4. Agli quotient term nikalte waqt poore divisor se divide karna; sirf leading term se divide karna hai."
+          }
+        ]
+      }
+    }
+  ]
+}

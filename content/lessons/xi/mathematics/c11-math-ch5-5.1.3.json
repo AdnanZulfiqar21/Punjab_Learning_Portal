@@ -1,0 +1,340 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH5-5.1.3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch5",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch5/5.1.3",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 85,
+          "pdf_to": 92,
+          "note": "Book p. 80-87: 5.1.3 steps (i)-(v), Cases I-IV, Alternative method, Examples 1-8. Exercise 5.1 (p. 85) and Exercise 5.2 (p. 87), printed inside, are on their own pages."
+        }
+      ],
+      "title": "5.1.3 Resolution of a Rational Fraction P(x)/Q(x) into Partial Fractions",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Following are the main points of resolving a rational fraction \\(\\frac{P(x)}{Q(x)}\\) into partial fractions:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) The degree of \\(P(x)\\) must be less than that of \\(Q(x)\\). If not, divide and work with the remainder theorem.",
+              "(ii) Factor the denominator \\(Q(x)\\) into its irreducible factors, write the rational fraction into partial fractions.",
+              "(iii) Multiply the identity with the denominator of left hand side.",
+              "(iv) Equate the coefficients of like terms (powers of \\(x\\)).",
+              "(v) Solve the resulting equations for the coefficients."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What step (i) means in practice: if the fraction is improper, long division gives\n\\[\\dfrac{P(x)}{Q(x)} = \\text{quotient} + \\dfrac{R(x)}{Q(x)}\\]\nwhere the remainder \\(R(x)\\) has a smaller degree than \\(Q(x)\\). Only the proper fraction \\(\\frac{R(x)}{Q(x)}\\) is resolved; the quotient is kept as it is (see Example 3). The remainder theorem itself is not used here, only the remainder of the division.\nWhy steps (iii)-(v) work: after multiplying by \\(Q(x)\\) we get an identity, true for every value of \\(x\\). By the theorem on equal polynomials (5.1.2), the coefficients of like powers of \\(x\\) on both sides must then be equal. Because it holds for every \\(x\\), we may also put convenient values of \\(x\\) (the zeros of the linear factors) to find the unknowns quickly. The book uses both ways."
+          },
+          {
+            "type": "paragraph",
+            "text": "We now discuss the following cases of partial fractions resolution."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Case I: Resolution of P(x)/Q(x) into partial fractions when Q(x) has only non-repeated linear factors"
+          },
+          {
+            "type": "paragraph",
+            "text": "The polynomial \\(Q(x)\\) may be written as:\n\\[Q(x) = (x - a_1)(x - a_2)\\cdots(x - a_n)\\]\nwhere \\(a_1 \\ne a_2 \\ne \\ldots \\ne a_n\\).\n\\[\\therefore\\ \\dfrac{P(x)}{Q(x)} = \\dfrac{A_1}{x - a_1} + \\dfrac{A_2}{x - a_2}\\]\n\\[+ \\cdots + \\dfrac{A_n}{x - a_n}\\]\nis an identity, where \\(A_1, A_2, \\ldots, A_n\\) are numbers to be found."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "One factor, one fraction: each linear factor \\(x - a\\) gets exactly one fraction \\(\\frac{A}{x - a}\\) with a constant on top. The top is a constant because the bottom has degree 1, and every partial fraction must itself be proper.\nThe number of unknown constants always equals the degree of \\(Q(x)\\): three linear factors, three constants."
+          },
+          {
+            "type": "paragraph",
+            "text": "The method is explained by the following examples:"
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Resolve \\(\\frac{7x + 25}{(x + 3)(x + 4)}\\) into partial fractions.",
+            "steps": [
+              "Given: \\(\\frac{7x + 25}{(x + 3)(x + 4)}\\).\nTo find: its partial fractions.\nMethod: Case I. The numerator has degree 1 and the denominator degree 2, so the fraction is proper. The denominator has two different linear factors, so we write one constant over each factor and find the constants by equating coefficients.",
+              "Step 1: Write the form of the partial fractions\n\\[\\dfrac{7x + 25}{(x + 3)(x + 4)} = \\dfrac{A}{x + 3} + \\dfrac{B}{x + 4}\\]\nWhy: each non-repeated linear factor gets one fraction with an unknown constant on top.",
+              "Step 2: Clear the denominators\nMultiplying both sides by \\((x + 3)(x + 4)\\), we get\n\\[7x + 25 = A(x + 4) + B(x + 3)\\]\nWhy: \\(\\frac{A}{x+3}\\cdot(x+3)(x+4) = A(x+4)\\) and \\(\\frac{B}{x+4}\\cdot(x+3)(x+4) = B(x+3)\\). Now no fractions are left.",
+              "Step 3: Expand and collect like powers of \\(x\\)\n\\[7x + 25 = Ax + 4A + Bx + 3B\\]\n\\[7x + 25 = (A + B)x + 4A + 3B\\]\nThis is an identity in \\(x\\).\nWhy: to compare coefficients, each power of \\(x\\) must be collected in one bracket.",
+              "Step 4: Equate the coefficients of like powers of \\(x\\)\n\\[x:\\quad 7 = A + B \\quad \\text{...(1)}\\]\n\\[x^{0}:\\quad 25 = 4A + 3B \\quad \\text{...(2)}\\]\nWhy: the identity holds for all \\(x\\), so by the theorem on equal polynomials the coefficients of like powers are equal.",
+              "Step 5: Solve the two equations\nFrom (1): \\(B = 7 - A\\). Put it in (2):\n\\[25 = 4A + 3(7 - A)\\]\n\\[25 = A + 21\\]\n\\[A = 4\\]\n\\[B = 7 - 4 = 3\\]\nWhy: two equations in two unknowns; substitution is the quickest way here.",
+              "Step 6: Write the partial fractions\n\\[\\dfrac{7x + 25}{(x + 3)(x + 4)} = \\dfrac{4}{x + 3} + \\dfrac{3}{x + 4}\\]\nWhy: put \\(A = 4\\), \\(B = 3\\) back into the form of Step 1.",
+              "Check:\n\\[\\dfrac{4}{x+3} + \\dfrac{3}{x+4}\\]\n\\[= \\dfrac{4(x+4) + 3(x+3)}{(x+3)(x+4)}\\]\n\\[= \\dfrac{7x + 25}{(x+3)(x+4)}\\]\nAdding the partial fractions gives back the original fraction."
+            ],
+            "answer": "\\(\\frac{7x + 25}{(x + 3)(x + 4)} = \\frac{4}{x + 3} + \\frac{3}{x + 4}\\)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Alternative method"
+          },
+          {
+            "type": "paragraph",
+            "text": "Suppose\n\\[\\dfrac{7x + 25}{(x + 3)(x + 4)} = \\dfrac{A}{x + 3} + \\dfrac{B}{x + 4}\\]\n\\[\\Rightarrow 7x + 25 = A(x + 4) + B(x + 3)\\]\nAs two sides of the identity are equal for all values of \\(x\\), let us put \\(x = -3\\) and \\(x = -4\\) in it."
+          },
+          {
+            "type": "paragraph",
+            "text": "For \\(A\\), putting \\(x + 3 = 0\\), i.e., \\(x = -3\\), we get\n\\[-21 + 25 = A(-3 + 4)\\]\n\\[\\Rightarrow A = 4\\]\nFor \\(B\\), putting \\(x + 4 = 0\\), i.e., \\(x = -4\\), we get\n\\[-28 + 25 = B(-4 + 3)\\]\n\\[-3 = -B \\Rightarrow B = 3\\]\nHence,\n\\[\\dfrac{7x + 25}{(x + 3)(x + 4)} = \\dfrac{4}{x + 3} + \\dfrac{3}{x + 4}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why \\(x = -3\\)? It makes \\(x + 3 = 0\\), so the term \\(B(x + 3)\\) becomes zero and only \\(A\\) is left. Each zero of a linear factor switches off all the other unknowns.\nFor Case I this substitution is the fastest way. Equating coefficients always works, and it is needed when no value of \\(x\\) can isolate an unknown (Cases II-IV)."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Resolve \\(\\frac{x^{2} - 10x + 13}{(x - 1)(x^{2} - 5x + 6)}\\) into Partial Fractions.",
+            "steps": [
+              "Given: \\(\\frac{x^{2} - 10x + 13}{(x - 1)(x^{2} - 5x + 6)}\\).\nTo find: its partial fractions.\nMethod: the fraction is proper (degree 2 < degree 3). First factorize the quadratic in the denominator; then it is Case I with three linear factors, and we find each constant by putting the zero of its factor.",
+              "Step 1: Factorize the denominator\n\\[x^{2} - 5x + 6 = (x - 2)(x - 3)\\]\n\\[\\therefore\\ \\dfrac{x^{2} - 10x + 13}{(x-1)(x^{2}-5x+6)}\\]\n\\[= \\dfrac{x^{2} - 10x + 13}{(x-1)(x-2)(x-3)}\\]\nWhy: we need two numbers with product 6 and sum −5, namely −2 and −3. Partial fractions can be written only after \\(Q(x)\\) is fully factorized.",
+              "Step 2: Write the form and clear the denominators\n\\[\\dfrac{x^{2}-10x+13}{(x-1)(x-2)(x-3)}\\]\n\\[= \\dfrac{A}{x-1} + \\dfrac{B}{x-2} + \\dfrac{C}{x-3}\\]\n\\[\\Rightarrow x^{2} - 10x + 13 = A(x-2)(x-3)\\]\n\\[+ B(x-1)(x-3) + C(x-1)(x-2)\\]\nwhich is an identity in \\(x\\).\nWhy: three different linear factors give three constants. Multiplying by \\((x-1)(x-2)(x-3)\\) cancels each fraction's own denominator and leaves the other two factors.",
+              "Step 3: Find \\(A\\) by putting \\(x = 1\\)\nThe book writes: For \\(A\\), putting \\(x - 3 = 0\\) i.e., \\(x = 1\\), we get\n\\[(1)^{2} - 10(1) + 13\\]\n\\[= A(1-2)(1-3) + B(0) + C(0)\\]\n\\[1 - 10 + 13 = A(-1)(-2)\\]\n\\[4 = 2A \\Rightarrow A = 2\\]\nWhy: \\(x = 1\\) makes \\(x - 1 = 0\\), so the \\(B\\) and \\(C\\) terms, which both contain \\(x - 1\\), vanish.",
+              "Step 4: Find \\(B\\) by putting \\(x - 2 = 0\\), i.e., \\(x = 2\\)\n\\[(2)^{2} - 10(2) + 13 = B(2-1)(2-3)\\]\n\\[4 - 20 + 13 = B(1)(-1)\\]\n\\[-3 = -B \\Rightarrow B = 3\\]\nWhy: at \\(x = 2\\) the \\(A\\) and \\(C\\) terms contain the factor \\(x - 2 = 0\\).",
+              "Step 5: Find \\(C\\) by putting \\(x - 3 = 0\\), i.e., \\(x = 3\\)\n\\[(3)^{2} - 10(3) + 13 = C(3-1)(3-2)\\]\n\\[9 - 30 + 13 = C(2)(1)\\]\n\\[-8 = 2C \\Rightarrow C = -4\\]\nWhy: at \\(x = 3\\) only the \\(C\\) term survives.",
+              "Step 6: Write the partial fractions\n\\[\\dfrac{2}{x-1} + \\dfrac{3}{x-2} - \\dfrac{4}{x-3}\\]\nWhy: \\(C = -4\\) is negative, so \\(+\\frac{-4}{x-3}\\) is written as \\(-\\frac{4}{x-3}\\).",
+              "Check:\nCoefficient of \\(x^{2}\\) on the right: \\(A + B + C = 2 + 3 - 4 = 1\\), as on the left.\nAt \\(x = 0\\): \\(6A + 3B + 2C = 12 + 9 - 8 = 13\\), the constant term on the left."
+            ],
+            "answer": "Partial fractions: \\(\\frac{2}{x-1} + \\frac{3}{x-2} - \\frac{4}{x-3}\\)",
+            "book_errors": [
+              "putting \\(x - 3 = 0\\) i.e., \\(x = 1\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In Example 2 the book prints \"For A, putting \\(x - 3 = 0\\) i.e., \\(x = 1\\)\". It should be \"putting \\(x - 1 = 0\\), i.e., \\(x = 1\\)\": the factor that becomes zero at \\(x = 1\\) is \\(x - 1\\). In the next line, \"For B, putting x 2 = 0\" has lost its minus sign; it is \\(x - 2 = 0\\). The values \\(A = 2\\), \\(B = 3\\), \\(C = -4\\) are correct."
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Resolve \\(\\frac{2x^{3} + x^{2} - x - 3}{x(2x + 3)(x - 1)}\\) into Partial Fractions.",
+            "steps": [
+              "Given: \\(\\frac{2x^{3} + x^{2} - x - 3}{x(2x + 3)(x - 1)}\\).\nTo find: its partial fractions.\nMethod: the numerator has degree 3 and the denominator also has degree 3, so the fraction is improper. By step (i) we first divide to get the mixed form, then resolve the proper fraction by Case I.",
+              "Step 1: Multiply out the denominator\n\\[x(2x + 3)(x - 1) = x(2x^{2} + x - 3)\\]\n\\[= 2x^{3} + x^{2} - 3x\\]\nWhy: to divide, the denominator must be written as a polynomial.",
+              "Step 2: Divide \\(2x^{3} + x^{2} - x - 3\\) by \\(2x^{3} + x^{2} - 3x\\)\n\\(2x^{3} \\div 2x^{3} = 1\\), so the quotient is 1. Subtracting:\n\\[(2x^{3} + x^{2} - x - 3) - (2x^{3} + x^{2} - 3x)\\]\n\\[= 2x - 3\\]\nQuotient \\(= 1\\) and Remainder \\(= 2x - 3\\).\nWhy: the remainder \\(2x - 3\\) has degree 1, less than 3, so the division stops here.",
+              "Step 3: Write the mixed form\n\\[\\dfrac{2x^{3}+x^{2}-x-3}{x(2x+3)(x-1)}\\]\n\\[= 1 + \\dfrac{2x-3}{x(2x+3)(x-1)}\\]\nWhy: dividend ÷ divisor = quotient + remainder ÷ divisor. Only the proper part is resolved.",
+              "Step 4: Form of the partial fractions and the identity\n\\[\\dfrac{2x-3}{x(2x+3)(x-1)}\\]\n\\[= \\dfrac{A}{x} + \\dfrac{B}{2x+3} + \\dfrac{C}{x-1}\\]\n\\[\\Rightarrow 2x - 3 = A(2x+3)(x-1)\\]\n\\[+ Bx(x-1) + Cx(2x+3)\\]\nwhich is an identity in \\(x\\).\nWhy: \\(x\\), \\(2x + 3\\) and \\(x - 1\\) are three different linear factors (\\(2x + 3\\) is linear even though its \\(x\\) has coefficient 2).",
+              "Step 5: Find \\(A\\): put \\(x = 0\\)\n\\[2(0) - 3 = A(3)(-1)\\]\n\\[-3 = -3A \\Rightarrow A = 1\\]\nWhy: \\(x = 0\\) removes the \\(B\\) and \\(C\\) terms, which both contain the factor \\(x\\).",
+              "Step 6: Find \\(B\\): put \\(2x + 3 = 0 \\Rightarrow x = -\\frac{3}{2}\\)\nLeft side: \\(2\\left(-\\frac{3}{2}\\right) - 3 = -6\\).\nRight side: \\(B\\left(-\\frac{3}{2}\\right)\\left(-\\frac{3}{2} - 1\\right) = B\\left(-\\frac{3}{2}\\right)\\left(-\\frac{5}{2}\\right) = \\frac{15}{4}B\\).\n\\[-6 = \\dfrac{15}{4}B\\]\n\\[B = -\\dfrac{24}{15} = -\\dfrac{8}{5}\\]\nWhy: the book only states the result; these are the missing lines.",
+              "Step 7: Find \\(C\\): put \\(x - 1 = 0 \\Rightarrow x = 1\\)\n\\[2(1) - 3 = C(1)(2 + 3)\\]\n\\[-1 = 5C \\Rightarrow C = -\\dfrac{1}{5}\\]\nWhy: at \\(x = 1\\) the \\(A\\) and \\(B\\) terms contain \\(x - 1 = 0\\).",
+              "Step 8: Write the answer\n\\[1 + \\dfrac{1}{x} - \\dfrac{8}{5(2x+3)} - \\dfrac{1}{5(x-1)}\\]\nWhy: \\(\\frac{-8/5}{2x+3} = -\\frac{8}{5(2x+3)}\\) and \\(\\frac{-1/5}{x-1} = -\\frac{1}{5(x-1)}\\). Do not forget the quotient 1 in front.",
+              "Check: put \\(x = 2\\).\nOriginal: \\(\\frac{16 + 4 - 2 - 3}{2 \\cdot 7 \\cdot 1} = \\frac{15}{14}\\).\nAnswer: \\(1 + \\frac{1}{2} - \\frac{8}{35} - \\frac{1}{5} = \\frac{70 + 35 - 16 - 14}{70} = \\frac{75}{70} = \\frac{15}{14}\\). Both agree."
+            ],
+            "answer": "Partial fractions: \\(1 + \\frac{1}{x} - \\frac{8}{5(2x+3)} - \\frac{1}{5(x-1)}\\)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Case II: When Q(x) has repeated linear factors"
+          },
+          {
+            "type": "paragraph",
+            "text": "If the polynomial \\(Q(x)\\) has a repeated linear factor \\((x - a)^{n}\\), \\(n \\ge 2\\) and \\(n\\) is a positive integer, then \\(\\frac{P(x)}{Q(x)}\\) may be written as the following identity:\n\\[\\dfrac{P(x)}{Q(x)} = \\dfrac{A_1}{x - a} + \\dfrac{A_2}{(x - a)^{2}}\\]\n\\[+ \\cdots + \\dfrac{A_n}{(x - a)^{n}}\\]\nwhere \\(A_1, A_2, \\ldots, A_n\\) are numbers to be found.\nThe method is explained by the following examples:"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why every power from 1 to \\(n\\)? A single fraction \\(\\frac{A}{(x-a)^{n}}\\) is not enough. For example \\(\\frac{x+5}{(x-1)^{2}} = \\frac{1}{x-1} + \\frac{6}{(x-1)^{2}}\\): the \\(\\frac{1}{x-1}\\) part cannot be produced by \\(\\frac{B}{(x-1)^{2}}\\) alone.\nPutting \\(x = a\\) gives only the constant over the highest power \\((x - a)^{n}\\). The others come from equating coefficients."
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "Resolve \\(\\frac{x^{2} + x - 1}{(x + 2)^{3}}\\) into partial fractions.",
+            "steps": [
+              "Given: \\(\\frac{x^{2} + x - 1}{(x + 2)^{3}}\\).\nTo find: its partial fractions.\nMethod: the fraction is proper (2 < 3). The factor \\(x + 2\\) is repeated three times (Case II, \\(n = 3\\)), so we need three fractions. \\(x = -2\\) gives \\(C\\); equating coefficients gives \\(A\\) and \\(B\\).",
+              "Step 1: Write the form\n\\[\\dfrac{x^{2}+x-1}{(x+2)^{3}}\\]\n\\[= \\dfrac{A}{x+2} + \\dfrac{B}{(x+2)^{2}} + \\dfrac{C}{(x+2)^{3}}\\]\nWhy: by Case II, one fraction for each power \\((x+2)^{1}\\), \\((x+2)^{2}\\), \\((x+2)^{3}\\).",
+              "Step 2: Clear the denominators\nMultiplying both sides by \\((x+2)^{3}\\):\n\\[x^{2} + x - 1 = A(x+2)^{2} + B(x+2) + C \\quad \\text{(i)}\\]\n\\[x^{2} + x - 1 = A(x^{2}+4x+4) + B(x+2) + C \\quad \\text{(ii)}\\]\nWhy: \\((x+2)^{3}\\) divided by \\((x+2)\\), \\((x+2)^{2}\\), \\((x+2)^{3}\\) leaves \\((x+2)^{2}\\), \\((x+2)\\) and 1.",
+              "Step 3: Find \\(C\\): put \\(x + 2 = 0\\), i.e., \\(x = -2\\), in (i)\n\\[(-2)^{2} + (-2) - 1 = A(0) + B(0) + C\\]\n\\[1 = C\\]\nWhy: \\(x = -2\\) makes both the \\(A\\) and \\(B\\) terms zero.",
+              "Step 4: Find \\(A\\) and \\(B\\) by equating coefficients in (ii)\n\\[x^{2}:\\quad 1 = A \\Rightarrow A = 1\\]\n\\[x:\\quad 1 = 4A + B\\]\n\\[1 = 4 + B \\Rightarrow B = -3\\]\nWhy: no other value of \\(x\\) switches off \\(A\\) or \\(B\\) alone, so we compare coefficients; \\(x^{2}\\) appears only in \\(A(x^{2}+4x+4)\\).",
+              "Step 5: Write the partial fractions\n\\[\\dfrac{1}{x+2} - \\dfrac{3}{(x+2)^{2}} + \\dfrac{1}{(x+2)^{3}}\\]",
+              "Check: constant terms in (ii): \\(4A + 2B + C = 4 - 6 + 1 = -1\\), equal to the \\(-1\\) on the left.\nAnother way: put \\(t = x + 2\\), so \\(x = t - 2\\): \\(x^{2} + x - 1 = t^{2} - 3t + 1\\), and \\(\\frac{t^{2} - 3t + 1}{t^{3}} = \\frac{1}{t} - \\frac{3}{t^{2}} + \\frac{1}{t^{3}}\\)."
+            ],
+            "answer": "Partial fractions: \\(\\frac{1}{x+2} - \\frac{3}{(x+2)^{2}} + \\frac{1}{(x+2)^{3}}\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Resolve \\(\\frac{1}{(x + 1)^{2}(x^{2} - 1)}\\) into partial fractions.",
+            "steps": [
+              "Given: \\(\\frac{1}{(x + 1)^{2}(x^{2} - 1)}\\).\nTo find: its partial fractions.\nMethod: \\(x^{2} - 1\\) still factorizes, so factorize the denominator fully first. It becomes \\((x+1)^{3}(x-1)\\): a non-repeated factor \\(x - 1\\) (Case I) and a repeated factor \\((x+1)^{3}\\) (Case II), so four fractions.",
+              "Step 1: Factorize the denominator\n\\[(x+1)^{2}(x^{2}-1) = (x+1)^{2}(x+1)(x-1)\\]\n\\[= (x+1)^{3}(x-1)\\]\n\\[\\therefore\\ \\dfrac{1}{(x+1)^{2}(x^{2}-1)} = \\dfrac{1}{(x+1)^{3}(x-1)}\\]\nWhy: \\(x^{2} - 1 = (x+1)(x-1)\\) (difference of squares) hides a third factor \\(x + 1\\).",
+              "Step 2: Write the form\n\\[\\dfrac{1}{(x-1)(x+1)^{3}} = \\dfrac{A}{x-1} + \\dfrac{B}{x+1}\\]\n\\[+ \\dfrac{C}{(x+1)^{2}} + \\dfrac{D}{(x+1)^{3}}\\]\nWhy: one constant for \\(x - 1\\), and one for each power of \\(x + 1\\) up to 3. Four unknowns for degree 4.",
+              "Step 3: Clear the denominators and expand\n\\[1 = A(x+1)^{3} + B(x+1)^{2}(x-1)\\]\n\\[+ C(x-1)(x+1) + D(x-1) \\quad \\text{...(i)}\\]\n\\[1 = A(x^{3}+3x^{2}+3x+1)\\]\n\\[+ B(x^{3}+x^{2}-x-1)\\]\n\\[+ C(x^{2}-1) + D(x-1)\\]\n\\[1 = (A+B)x^{3} + (3A+B+C)x^{2}\\]\n\\[+ (3A-B+D)x + (A-B-C-D) \\quad \\text{...(ii)}\\]\nWhy: (i) is used for substitution, (ii) for equating coefficients.",
+              "Step 4: Find \\(A\\): put \\(x - 1 = 0 \\Rightarrow x = 1\\) in (i)\n\\[1 = A(2)^{3} \\Rightarrow A = \\dfrac{1}{8}\\]\nWhy: every other term contains \\(x - 1\\).",
+              "Step 5: Find \\(D\\): put \\(x + 1 = 0 \\Rightarrow x = -1\\) in (i)\n\\[1 = D(-1 - 1) \\Rightarrow D = -\\dfrac{1}{2}\\]\nWhy: the \\(A\\), \\(B\\), \\(C\\) terms all contain \\(x + 1\\).",
+              "Step 6: Find \\(B\\) and \\(C\\): equate coefficients of \\(x^{3}\\) and \\(x^{2}\\) in (ii)\n\\[x^{3}:\\quad 0 = A + B \\Rightarrow B = -A = -\\dfrac{1}{8}\\]\n\\[x^{2}:\\quad 0 = 3A + B + C\\]\n\\[0 = \\dfrac{3}{8} - \\dfrac{1}{8} + C \\Rightarrow C = -\\dfrac{1}{4}\\]\nWhy: the left side is \\(1 = 0x^{3} + 0x^{2} + 0x + 1\\), so its \\(x^{3}\\) and \\(x^{2}\\) coefficients are 0.",
+              "Step 7: Write the partial fractions\n\\[\\dfrac{1/8}{x-1} + \\dfrac{-1/8}{x+1} + \\dfrac{-1/4}{(x+1)^{2}} + \\dfrac{-1/2}{(x+1)^{3}}\\]\n\\[= \\dfrac{1}{8(x-1)} - \\dfrac{1}{8(x+1)}\\]\n\\[- \\dfrac{1}{4(x+1)^{2}} - \\dfrac{1}{2(x+1)^{3}}\\]",
+              "Check with the two unused equations of (ii):\n\\(x\\): \\(3A - B + D = \\frac{3}{8} + \\frac{1}{8} - \\frac{1}{2} = 0\\). Correct.\n\\(x^{0}\\): \\(A - B - C - D = \\frac{1}{8} + \\frac{1}{8} + \\frac{1}{4} + \\frac{1}{2} = 1\\). Correct."
+            ],
+            "answer": "Partial fractions: \\(\\frac{1}{8(x-1)} - \\frac{1}{8(x+1)} - \\frac{1}{4(x+1)^{2}} - \\frac{1}{2(x+1)^{3}}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In the book, Exercise 5.1 is printed at this point. It practises Cases I and II; work through it before moving on to Case III."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Case III: When Q(x) contains non-repeated irreducible quadratic factors"
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Definition",
+            "text": "A quadratic factor is irreducible if it cannot be written as the product of two linear factors with real coefficients. For example, \\(x^{2} + x + 1\\) and \\(x^{2} + 3\\) are irreducible quadratic factors."
+          },
+          {
+            "type": "paragraph",
+            "text": "If the polynomial \\(Q(x)\\) contains non-repeated irreducible quadratic factors then \\(\\frac{P(x)}{Q(x)}\\) may be written as the identity having partial fractions of the form:\n\\[\\dfrac{Ax + B}{ax^{2} + bx + c}\\]\nwhere \\(A\\) and \\(B\\) are the numbers to be found.\nThe method is explained by the following examples:"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to test a quadratic: \\(ax^{2} + bx + c\\) is irreducible when its discriminant \\(b^{2} - 4ac < 0\\) (no real roots). For \\(x^{2} + x + 1\\): \\(1 - 4 = -3 < 0\\); for \\(x^{2} + 3\\): \\(0 - 12 < 0\\).\nWhy \\(Ax + B\\) on top: the bottom has degree 2, so a proper fraction may have a top of degree up to 1. A constant alone would not be enough.\nA quadratic factor has no real zero to substitute, so its constants come from equating coefficients."
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Resolve \\(\\frac{3x - 11}{(x^{2} + 1)(x + 3)}\\) into partial fractions.",
+            "steps": [
+              "Given: \\(\\frac{3x - 11}{(x^{2} + 1)(x + 3)}\\).\nTo find: its partial fractions.\nMethod: proper fraction (1 < 3). \\(x^{2} + 1\\) is irreducible (\\(b^{2} - 4ac = -4 < 0\\)), so it gets \\(\\frac{Ax + B}{x^{2} + 1}\\); the linear factor \\(x + 3\\) gets \\(\\frac{C}{x + 3}\\).",
+              "Step 1: Write the form and clear the denominators\n\\[\\dfrac{3x-11}{(x^{2}+1)(x+3)} = \\dfrac{Ax+B}{x^{2}+1} + \\dfrac{C}{x+3}\\]\n\\[\\Rightarrow 3x - 11 = (Ax+B)(x+3) + C(x^{2}+1) \\quad \\text{(i)}\\]\nWhy: multiplying by \\((x^{2}+1)(x+3)\\) leaves each numerator times the other factor.",
+              "Step 2: Expand and collect\n\\((Ax+B)(x+3) = Ax^{2} + 3Ax + Bx + 3B\\), so\n\\[3x - 11 = (A+C)x^{2} + (3A+B)x + (3B+C) \\quad \\text{(ii)}\\]\nWhy: (ii) is needed to equate coefficients.",
+              "Step 3: Find \\(C\\): put \\(x + 3 = 0 \\Rightarrow x = -3\\) in (i)\n\\[-9 - 11 = C(9 + 1)\\]\n\\[-20 = 10C \\Rightarrow C = -2\\]\nWhy: \\(x = -3\\) makes \\((Ax+B)(x+3)\\) zero, whatever \\(A\\) and \\(B\\) are.",
+              "Step 4: Find \\(A\\) and \\(B\\): equate coefficients of \\(x^{2}\\) and \\(x\\) in (ii)\n\\[x^{2}:\\quad 0 = A + C \\Rightarrow A = -C = 2\\]\n\\[x:\\quad 3 = 3A + B\\]\n\\[B = 3 - 3A = 3 - 6 = -3\\]\nWhy: the left side \\(3x - 11\\) has no \\(x^{2}\\) term, so that coefficient is 0.",
+              "Step 5: Write the partial fractions\n\\[\\dfrac{2x - 3}{x^{2}+1} - \\dfrac{2}{x+3}\\]",
+              "Check: constant terms in (ii): \\(3B + C = -9 - 2 = -11\\), as on the left."
+            ],
+            "answer": "Partial fractions: \\(\\frac{2x - 3}{x^{2}+1} - \\frac{2}{x+3}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the statement of Example 6 the book's minus sign is missing (it shows \"3x  11\" over \\((x^{2} + 1)(x + 3)\\)). The fraction is \\(\\frac{3x - 11}{(x^{2} + 1)(x + 3)}\\), as the book's own solution uses."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Resolve \\(\\frac{4x^{2} + 8x}{x^{4} + 2x^{2} + 9}\\) into partial fractions.",
+            "steps": [
+              "Given: \\(\\frac{4x^{2} + 8x}{x^{4} + 2x^{2} + 9}\\).\nTo find: its partial fractions.\nMethod: proper fraction (2 < 4). Factorize the denominator into two irreducible quadratics, then use Case III: \\(\\frac{Ax + B}{\\ldots} + \\frac{Cx + D}{\\ldots}\\), and find the four constants by equating coefficients.",
+              "Step 1: Factorize the denominator\n\\[x^{4} + 2x^{2} + 9 = (x^{4} + 6x^{2} + 9) - 4x^{2}\\]\n\\[= (x^{2} + 3)^{2} - (2x)^{2}\\]\n\\[= (x^{2}+2x+3)(x^{2}-2x+3)\\]\nWhy: the book states the factors directly. Adding and subtracting \\(4x^{2}\\) makes a perfect square, and then the difference of squares factorizes. Both quadratics have \\(b^{2} - 4ac = 4 - 12 = -8 < 0\\), so they are irreducible.",
+              "Step 2: Write the form\n\\[\\dfrac{4x^{2}+8x}{(x^{2}+2x+3)(x^{2}-2x+3)}\\]\n\\[= \\dfrac{Ax+B}{x^{2}+2x+3} + \\dfrac{Cx+D}{x^{2}-2x+3}\\]\nWhy: each non-repeated irreducible quadratic gets a linear numerator.",
+              "Step 3: Clear the denominators\n\\[4x^{2} + 8x = (Ax+B)(x^{2}-2x+3)\\]\n\\[+ (Cx+D)(x^{2}+2x+3)\\]\nWhy: each numerator is multiplied by the other quadratic.",
+              "Step 4: Expand and collect\n\\((Ax+B)(x^{2}-2x+3) = Ax^{3} + (-2A+B)x^{2} + (3A-2B)x + 3B\\)\n\\((Cx+D)(x^{2}+2x+3) = Cx^{3} + (2C+D)x^{2} + (3C+2D)x + 3D\\)\n\\[4x^{2} + 8x = (A+C)x^{3}\\]\n\\[+ (-2A+B+2C+D)x^{2}\\]\n\\[+ (3A-2B+3C+2D)x + 3B + 3D \\quad \\text{(i)}\\]\nwhich is an identity in \\(x\\).",
+              "Step 5: Equate the coefficients of \\(x^{3}, x^{2}, x, x^{0}\\) in (i)\n\\[0 = A + C \\quad \\text{(ii)}\\]\n\\[4 = -2A + B + 2C + D \\quad \\text{(iii)}\\]\n\\[8 = 3A - 2B + 3C + 2D \\quad \\text{(iv)}\\]\n\\[0 = 3B + 3D \\quad \\text{(v)}\\]\nWhy: the left side \\(4x^{2} + 8x\\) has \\(x^{3}\\) coefficient 0 and constant 0.",
+              "Step 6: Solve (ii)-(v)\nFrom (ii): \\(C = -A\\). From (v): \\(D = -B\\). Put these in (iii) and (iv):\n\\[4 = -2A + B - 2A - B = -4A\\]\n\\[\\Rightarrow A = -1,\\quad C = 1\\]\n\\[8 = 3A - 2B - 3A - 2B = -4B\\]\n\\[\\Rightarrow B = -2,\\quad D = 2\\]\nThe book prints \\(A = 1\\), \\(B = 2\\), \\(C = -1\\) and \\(D = -2\\); all four signs are reversed (see the correction below).\nWhy: replacing \\(C\\) and \\(D\\) leaves one unknown in each equation.",
+              "Step 7: Write the partial fractions\n\\[\\dfrac{-x-2}{x^{2}+2x+3} + \\dfrac{x+2}{x^{2}-2x+3}\\]\nThe book's answer \\(\\frac{x+2}{x^{2}+2x+3} + \\frac{-x-2}{x^{2}-2x+3}\\) comes from the reversed signs.",
+              "Check: put \\(x = 1\\).\nOriginal: \\(\\frac{4 + 8}{1 + 2 + 9} = \\frac{12}{12} = 1\\).\nOur answer: \\(\\frac{-3}{6} + \\frac{3}{2} = -\\frac{1}{2} + \\frac{3}{2} = 1\\). Correct.\nThe book's answer gives \\(\\frac{3}{6} - \\frac{3}{2} = -1\\), so it cannot be right."
+            ],
+            "answer": "Partial fractions: \\(\\frac{-x-2}{x^{2}+2x+3} + \\frac{x+2}{x^{2}-2x+3}\\), i.e. \\(-\\frac{x+2}{x^{2}+2x+3} + \\frac{x+2}{x^{2}-2x+3}\\)",
+            "book_errors": [
+              "\\(A = 1\\), \\(B = 2\\), \\(C = -1\\) and \\(D = -2\\)",
+              "\\(\\frac{x+2}{x^{2}+2x+3} + \\frac{-x-2}{x^{2}-2x+3}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 7: the book prints \\(A = 1\\), \\(B = 2\\), \\(C = -1\\), \\(D = -2\\) and the answer \\(\\frac{x+2}{x^{2}+2x+3} + \\frac{-x-2}{x^{2}-2x+3}\\). Its own equations (ii)-(v) give \\(A = -1\\), \\(B = -2\\), \\(C = 1\\), \\(D = 2\\) (check (iii): \\(-2(1) + 2 + 2(-1) - 2 = -4\\), not 4). The correct answer is \\(\\frac{-x-2}{x^{2}+2x+3} + \\frac{x+2}{x^{2}-2x+3}\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Case IV: When Q(x) has repeated irreducible quadratic factors"
+          },
+          {
+            "type": "paragraph",
+            "text": "If the polynomial \\(Q(x)\\) contains a repeated irreducible quadratic factor \\((ax^{2} + bx + c)^{n}\\), \\(n \\ge 2\\) and \\(n\\) is a positive integer, then \\(\\frac{P(x)}{Q(x)}\\) may be written as the following identity:\n\\[\\dfrac{P(x)}{Q(x)} = \\dfrac{A_1x + B_1}{ax^{2}+bx+c}\\]\n\\[+ \\dfrac{A_2x + B_2}{(ax^{2}+bx+c)^{2}} + \\cdots\\]\n\\[+ \\dfrac{A_nx + B_n}{(ax^{2}+bx+c)^{n}}\\]\nwhere \\(A_1, B_1, A_2, B_2, \\ldots, A_n, B_n\\) are numbers to be found. The method is explained through the following example:"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Case IV combines the two earlier ideas: from Case II, one fraction for every power up to \\(n\\); from Case III, a linear numerator \\(Ax + B\\) over each quadratic power."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Resolve \\(\\frac{4x^{2}}{(x^{2} + 1)^{2}(x - 1)}\\) into partial fractions.",
+            "steps": [
+              "Given: \\(\\frac{4x^{2}}{(x^{2} + 1)^{2}(x - 1)}\\).\nTo find: its partial fractions.\nMethod: proper fraction (2 < 5). \\((x^{2} + 1)^{2}\\) is a repeated irreducible quadratic (Case IV): \\(\\frac{Ax+B}{x^{2}+1} + \\frac{Cx+D}{(x^{2}+1)^{2}}\\). The linear factor \\(x - 1\\) gives \\(\\frac{E}{x-1}\\). Five unknowns for degree 5.",
+              "Step 1: Write the form\n\\[\\dfrac{4x^{2}}{(x^{2}+1)^{2}(x-1)} = \\dfrac{Ax+B}{x^{2}+1}\\]\n\\[+ \\dfrac{Cx+D}{(x^{2}+1)^{2}} + \\dfrac{E}{x-1}\\]",
+              "Step 2: Clear the denominators\n\\[4x^{2} = (Ax+B)(x^{2}+1)(x-1)\\]\n\\[+ (Cx+D)(x-1) + E(x^{2}+1)^{2} \\quad \\text{(i)}\\]\nWhy: multiplying by \\((x^{2}+1)^{2}(x-1)\\) leaves each numerator times the factors missing from its own denominator.",
+              "Step 3: Expand and collect\n\\((x^{2}+1)(x-1) = x^{3} - x^{2} + x - 1\\), so\n\\((Ax+B)(x^{3}-x^{2}+x-1) = Ax^{4} + (-A+B)x^{3} + (A-B)x^{2} + (-A+B)x - B\\)\n\\((Cx+D)(x-1) = Cx^{2} + (-C+D)x - D\\)\n\\(E(x^{2}+1)^{2} = Ex^{4} + 2Ex^{2} + E\\)\n\\[4x^{2} = (A+E)x^{4} + (-A+B)x^{3}\\]\n\\[+ (A-B+C+2E)x^{2}\\]\n\\[+ (-A+B-C+D)x\\]\n\\[+ (-B-D+E) \\quad \\text{(ii)}\\]",
+              "Step 4: Find \\(E\\): put \\(x - 1 = 0 \\Rightarrow x = 1\\) in (i)\n\\[4 = E(1 + 1)^{2} = 4E \\Rightarrow E = 1\\]\nWhy: the first two terms of (i) contain \\(x - 1\\).",
+              "Step 5: Find \\(A\\) and \\(B\\): coefficients of \\(x^{4}\\) and \\(x^{3}\\) in (ii)\n\\[0 = A + E \\Rightarrow A = -E = -1\\]\n\\[0 = -A + B \\Rightarrow B = A = -1\\]",
+              "Step 6: Find \\(C\\): coefficient of \\(x^{2}\\)\n\\[4 = A - B + C + 2E\\]\n\\[C = 4 - A + B - 2E\\]\n\\[= 4 + 1 - 1 - 2 = 2\\]",
+              "Step 7: Find \\(D\\): coefficient of \\(x\\)\n\\[0 = -A + B - C + D\\]\n\\[D = A - B + C = -1 + 1 + 2 = 2\\]",
+              "Step 8: Write the partial fractions\n\\[\\dfrac{-x-1}{x^{2}+1} + \\dfrac{2x+2}{(x^{2}+1)^{2}} + \\dfrac{1}{x-1}\\]",
+              "Check: constant terms in (ii): \\(-B - D + E = 1 - 2 + 1 = 0\\), and the left side \\(4x^{2}\\) has no constant term.\nAlso at \\(x = 0\\): original \\(= 0\\); answer \\(= -1 + 2 - 1 = 0\\)."
+            ],
+            "answer": "Partial fractions: \\(\\frac{-x-1}{x^{2}+1} + \\frac{2x+2}{(x^{2}+1)^{2}} + \\frac{1}{x-1}\\)"
+          },
+          {
+            "type": "table",
+            "header": [
+              "Factor in Q(x)",
+              "Partial fractions it gives"
+            ],
+            "rows": [
+              [
+                "Case I: non-repeated linear \\(x - a\\)",
+                "\\(\\frac{A}{x-a}\\)"
+              ],
+              [
+                "Case II: repeated linear \\((x - a)^{n}\\)",
+                "\\(\\frac{A_1}{x-a} + \\frac{A_2}{(x-a)^{2}} + \\cdots + \\frac{A_n}{(x-a)^{n}}\\)"
+              ],
+              [
+                "Case III: non-repeated irreducible quadratic \\(ax^{2} + bx + c\\)",
+                "\\(\\frac{Ax+B}{ax^{2}+bx+c}\\)"
+              ],
+              [
+                "Case IV: repeated irreducible quadratic \\((ax^{2} + bx + c)^{n}\\)",
+                "\\(\\frac{A_1x+B_1}{ax^{2}+bx+c} + \\cdots + \\frac{A_nx+B_n}{(ax^{2}+bx+c)^{n}}\\)"
+              ]
+            ],
+            "caption": "Summary of the four cases (our table, not printed in the book)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. The fraction must be proper; if not, divide first and resolve only the remainder fraction.\n2. Factorize \\(Q(x)\\) completely before writing any partial fractions.\n3. Linear factor: constant on top. Irreducible quadratic: \\(Ax + B\\) on top.\n4. A repeated factor needs one fraction for every power up to its highest power.\n5. Number of unknowns = degree of \\(Q(x)\\).\n6. Find constants by putting the zeros of linear factors, and the rest by equating coefficients.\n7. Always check by adding back or by putting a value of \\(x\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Resolving an improper fraction without dividing first (Example 3), or forgetting the quotient in the answer.\n2. Writing only \\(\\frac{B}{(x+2)^{3}}\\) for a repeated factor and leaving out the lower powers.\n3. Putting a constant over an irreducible quadratic instead of \\(Ax + B\\).\n4. Not factorizing completely: \\(x^{2} - 1\\) in Example 5 hides another \\(x + 1\\).\n5. Sign slips when the constant is negative: \\(+\\frac{-4}{x-3}\\) is \\(-\\frac{4}{x-3}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

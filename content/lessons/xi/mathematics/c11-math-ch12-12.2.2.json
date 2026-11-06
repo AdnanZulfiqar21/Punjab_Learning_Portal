@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.2.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.2.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 228,
+          "pdf_to": 228,
+          "note": "Book p. 223: 12.2.2 lim (sqrt(x+a) - sqrt(a))/x = 1/(2 sqrt(a)) by rationalizing the numerator; Example 1 (i), (ii)."
+        }
+      ],
+      "title": "12.2.2 Lim_{x->0} (sqrt(x+a) - sqrt(a))/x = 1/(2 sqrt(a)) where n is an integer and a > 0.",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The heading of this section states the result \"\\(\\lim_{x\\to 0}\\frac{\\sqrt{x+a}-\\sqrt{a}}{x} = \\frac{1}{2\\sqrt{a}}\\) where \\(n\\) is an integer and \\(a > 0\\)\".",
+            "book_errors": [
+              "where \\(n\\) is an integer and"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The heading prints \"where \\(n\\) is an integer and \\(a > 0\\)\", but there is no \\(n\\) in this limit (the phrase is carried over from 12.2.1). The only condition is \\(a > 0\\). The arrow under \"Lim\" in the heading is also misprinted; it should read \\(x \\to 0\\)."
+          },
+          {
+            "type": "equation",
+            "latex": "\\lim_{x\\to 0}\\dfrac{\\sqrt{x+a}-\\sqrt{a}}{x} = \\dfrac{1}{2\\sqrt{a}}",
+            "text_alt": "limit as x approaches 0 of (square root of x plus a, minus square root of a) over x equals 1 over 2 times square root of a"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Substituting \\(x = 0\\) gives \\(\\frac{\\sqrt{a}-\\sqrt{a}}{0} = \\frac{0}{0}\\). Here there is no polynomial to factorize: the trouble comes from the square roots. The tool for square roots is rationalization."
+          },
+          {
+            "type": "paragraph",
+            "text": "By substituting \\(x = 0\\), we have \\(\\left(\\frac{0}{0}\\right)\\) form, so rationalizing the numerator:"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Rationalizing means multiplying the numerator and the denominator by the conjugate \\(\\sqrt{x+a}+\\sqrt{a}\\). This is multiplying by 1, so the value does not change. It works because of\n\\[(A-B)(A+B) = A^{2}-B^{2}\\]\n\\[(\\sqrt{x+a}-\\sqrt{a})(\\sqrt{x+a}+\\sqrt{a}) = (x+a) - a = x\\]\nThe square roots disappear from the numerator and an \\(x\\) appears that cancels with the \\(x\\) below."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\lim_{x\\to 0}\\dfrac{\\sqrt{x+a}-\\sqrt{a}}{x}\\]\n\\[= \\lim_{x\\to 0}\\left(\\dfrac{\\sqrt{x+a}-\\sqrt{a}}{x}\\right)\\]\n\\[\\quad \\times \\left(\\dfrac{\\sqrt{x+a}+\\sqrt{a}}{\\sqrt{x+a}+\\sqrt{a}}\\right)\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\lim_{x\\to 0}\\left(\\dfrac{x+a-a}{\\sqrt{x+a}+\\sqrt{a}}\\right)\\]\n\\[= \\lim_{x\\to 0}\\left(\\dfrac{x}{\\sqrt{x+a}+\\sqrt{a}}\\right)\\]",
+            "book_errors": [
+              "\\[\\lim_{x\\to 0}\\left(\\dfrac{x+a-a}{\\sqrt{x+a}+\\sqrt{a}}\\right)\\]",
+              "\\[= \\lim_{x\\to 0}\\left(\\dfrac{x}{\\sqrt{x+a}+\\sqrt{a}}\\right)\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In these two lines the book drops the factor \\(x\\) of the denominator. After multiplying, the denominator is \\(x(\\sqrt{x+a}+\\sqrt{a})\\), so the lines should read:\n\\[\\lim_{x\\to 0}\\dfrac{x+a-a}{x\\left(\\sqrt{x+a}+\\sqrt{a}\\right)}\\]\n\\[= \\lim_{x\\to 0}\\dfrac{x}{x\\left(\\sqrt{x+a}+\\sqrt{a}\\right)}\\]\nCancelling \\(x\\) then gives the book's next line, and the final result \\(\\frac{1}{2\\sqrt{a}}\\) is correct."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[= \\lim_{x\\to 0}\\dfrac{1}{\\sqrt{x+a}+\\sqrt{a}}\\]\n\\[= \\dfrac{1}{\\sqrt{a}+\\sqrt{a}} = \\dfrac{1}{2\\sqrt{a}}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why may we cancel \\(x\\)? Because \\(x \\to 0\\) means \\(x \\ne 0\\).\nAfter cancelling, the denominator \\(\\sqrt{x+a}+\\sqrt{a}\\) equals \\(2\\sqrt{a} \\ne 0\\) at \\(x = 0\\) (since \\(a > 0\\)), so substitution works.\nAn example of our own: \\(\\lim_{x\\to 0}\\frac{\\sqrt{x+4}-2}{x} = \\frac{1}{2\\sqrt{4}} = \\frac{1}{4}\\) (here \\(a = 4\\), \\(\\sqrt{4} = 2\\))."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Evaluate: (i) \\(\\displaystyle\\lim_{x\\to 1}\\frac{x^{2}-1}{x^{2}-x}\\)  (ii) \\(\\displaystyle\\lim_{x\\to 3}\\frac{x-3}{\\sqrt{x}-\\sqrt{3}}\\)",
+            "steps": [
+              "Given: (i) \\(\\frac{x^{2}-1}{x^{2}-x}\\) as \\(x \\to 1\\); (ii) \\(\\frac{x-3}{\\sqrt{x}-\\sqrt{3}}\\) as \\(x \\to 3\\).\nTo find: both limits.\nMethod: substitution gives \\(\\frac{0}{0}\\) in both parts. In (i) we factorize and cancel the common factor \\((x-1)\\). In (ii) we write \\(x - 3\\) as a difference of squares of \\(\\sqrt{x}\\) and \\(\\sqrt{3}\\) and cancel \\((\\sqrt{x}-\\sqrt{3})\\).",
+              "(i) Step 1: Try substitution\n\\[\\dfrac{1^{2}-1}{1^{2}-1} = \\dfrac{0}{0}\\]\nWhy: substitution always comes first. It gives the \\(\\left(\\frac{0}{0}\\right)\\) form, so we must simplify.",
+              "(i) Step 2: Factorize and cancel\n\\[\\lim_{x\\to 1}\\dfrac{x^{2}-1}{x^{2}-x} = \\lim_{x\\to 1}\\dfrac{(x-1)(x+1)}{x(x-1)}\\]\n\\[= \\lim_{x\\to 1}\\dfrac{x+1}{x}\\]\nWhy: \\(x^{2}-1\\) is a difference of squares and \\(x^{2}-x\\) has the common factor \\(x\\). The factor \\((x-1)\\) is zero at \\(x = 1\\); it is the cause of \\(\\frac{0}{0}\\), and it is non-zero while \\(x \\to 1\\), so it may be cancelled.",
+              "(i) Step 3: Substitute\n\\[\\lim_{x\\to 1}\\dfrac{x+1}{x} = \\dfrac{1+1}{1} = \\dfrac{2}{1} = 2\\]\nWhy: after cancelling, the denominator is no longer zero at \\(x = 1\\), so substitution now works.",
+              "(ii) Step 1: Try substitution\n\\[\\dfrac{3-3}{\\sqrt{3}-\\sqrt{3}} = \\dfrac{0}{0}\\]\nWhy: again the \\(\\left(\\frac{0}{0}\\right)\\) form, so we simplify.",
+              "(ii) Step 2: Write \\(x - 3\\) as a difference of squares\n\\[x - 3 = (\\sqrt{x})^{2} - (\\sqrt{3})^{2}\\]\n\\[= (\\sqrt{x}+\\sqrt{3})(\\sqrt{x}-\\sqrt{3})\\]\nWhy: for \\(x > 0\\), \\(x = (\\sqrt{x})^{2}\\) and \\(3 = (\\sqrt{3})^{2}\\), so \\(a^{2}-b^{2} = (a+b)(a-b)\\) applies. This produces the factor in the denominator.",
+              "(ii) Step 3: Cancel and substitute\n\\[\\lim_{x\\to 3}\\dfrac{x-3}{\\sqrt{x}-\\sqrt{3}}\\]\n\\[= \\lim_{x\\to 3}\\dfrac{(\\sqrt{x}+\\sqrt{3})(\\sqrt{x}-\\sqrt{3})}{\\sqrt{x}-\\sqrt{3}}\\]\n\\[= \\lim_{x\\to 3}(\\sqrt{x}+\\sqrt{3})\\]\n\\[= \\sqrt{3}+\\sqrt{3} = 2\\sqrt{3}\\]\nWhy: \\(\\sqrt{x}-\\sqrt{3} \\ne 0\\) while \\(x \\to 3\\) (\\(x \\ne 3\\)), so it cancels; what is left is defined at \\(x = 3\\).",
+              "Check:\n(i) Take \\(x = 1.001\\): \\(\\frac{x+1}{x} = \\frac{2.001}{1.001} \\approx 1.999\\), close to 2.\n(ii) The same answer comes from rationalizing instead: multiply up and down by \\(\\sqrt{x}+\\sqrt{3}\\); the denominator becomes \\(x - 3\\), which cancels, leaving \\(\\sqrt{x}+\\sqrt{3} \\to 2\\sqrt{3}\\)."
+            ],
+            "answer": "(i) \\(\\lim_{x\\to 1}\\frac{x^{2}-1}{x^{2}-x} = 2\\)  (ii) \\(\\lim_{x\\to 3}\\frac{x-3}{\\sqrt{x}-\\sqrt{3}} = 2\\sqrt{3}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "When a square root causes \\(\\frac{0}{0}\\), there are two routes: multiply by the conjugate (rationalize), or, as in Example 1 (ii), write the other factor as a difference of squares. Both give the same answer; choose the shorter one and show every line."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\lim_{x\\to 0}\\frac{\\sqrt{x+a}-\\sqrt{a}}{x} = \\frac{1}{2\\sqrt{a}}\\), \\(a > 0\\).\n2. Square roots causing \\(\\frac{0}{0}\\): rationalize with the conjugate, using \\((A-B)(A+B) = A^{2}-B^{2}\\).\n3. Polynomials causing \\(\\frac{0}{0}\\): factorize and cancel the factor that is zero at the point."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Multiplying only the numerator by the conjugate. Multiply the numerator and the denominator, otherwise the value changes.\n2. Writing \\(\\sqrt{x+a} = \\sqrt{x}+\\sqrt{a}\\). This is false: e.g. \\(\\sqrt{9+16} = 5\\) but \\(\\sqrt{9}+\\sqrt{16} = 7\\).\n3. Losing the \\(x\\) of the denominator after multiplying out, so nothing is left to cancel (as happens in the book's printed lines)."
+          }
+        ]
+      }
+    }
+  ]
+}

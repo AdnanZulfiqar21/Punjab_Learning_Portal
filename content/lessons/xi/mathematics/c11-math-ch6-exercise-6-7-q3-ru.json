@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-7-Q3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-7-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 110,
+          "pdf_to": 110,
+          "note": "Exercise 6.7, Question 3: book pages 105-106 (PDF 110-111): Q1, Q2, Q3(i)-(ii), Q4(i)-(ii), Q5, Q6 (8 parts); answer key book page 300 (PDF 305)"
+        }
+      ],
+      "variant_of": "C11-MATH-CH6-EXERCISE-6-7-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Sum to \\(n\\) terms the series: \\(0.2 + 0.22 + 0.222 + \\cdots\\)",
+            "explanation": "Yeh series G.P. nahi hai: \\(\\frac{0.22}{0.2} = 1.1\\) lekin \\(\\frac{0.222}{0.22} \\approx 1.009\\); ratio barabar nahi.\nTrick: 2 bahar nikalein, phir 9 se multiply aur divide karein; is se har term \"1 minus \\(\\frac{1}{10}\\) ki koi power\" ban jata hai.\nPlan: series ko \"\\(n\\) ones\" minus ek G.P. mein tod kar G.P. ka sum lagayenge.",
+            "steps": [
+              "Diya gaya hai: \\(0.2 + 0.22 + 0.222 + \\cdots\\), \\(n\\) terms tak.\nHumein find karna hai: \\(S_n\\).\nTareeqa: Har term ko aise likhenge ke andar se G.P. nikal aaye, phir \\(S_n = \\frac{a_1(1 - r^{n})}{1 - r}\\) lagayenge. Yeh repeated digits (dohraye hue hindson) wali series ka standard tareeqa hai.",
+              "Common factor 2 bahar nikalein\n\\[S_n = 2(0.1 + 0.11 + 0.111 + \\cdots)\\]\nKyun: Har term mein sirf 2 ka digit dohraya gaya hai: \\(0.2 = 2 \\times 0.1\\), \\(0.22 = 2 \\times 0.11\\). Bahar nikalne se andar sirf 1 wale numbers reh jate hain, jin par kaam karna aasan hai.",
+              "9 se multiply aur divide karein\n\\[S_n = \\dfrac{2}{9}(0.9 + 0.99 + 0.999 + \\cdots)\\]\nKyun: \\(\\frac{9}{9} = 1\\) se multiply karne se qeemat nahi badalti. Faida yeh hai ke \\(9 \\times 0.1 = 0.9\\), \\(9 \\times 0.11 = 0.99\\), \\(9 \\times 0.111 = 0.999\\): ab har term 1 ke bilkul qareeb hai.",
+              "Har term ko \"1 minus chhota number\" likhein\n\\[S_n = \\dfrac{2}{9}\\left[(1 - 0.1) + (1 - 0.01) + \\cdots\\right]\\]\n\\[= \\dfrac{2}{9}\\left[n - (0.1 + 0.01 + \\cdots)\\right]\\]\nKyun: \\(0.9 = 1 - 0.1\\), \\(0.99 = 1 - 0.01\\), \\(0.999 = 1 - 0.001\\). \\(n\\) terms hain, to \\(n\\) dafa 1 jama ho kar \\(n\\) bana, aur chhote numbers alag group ho gaye.\nDhyan dein: Chhote numbers ka group bhi \\(n\\) terms ka hai, \\(n - 1\\) ka nahi.",
+              "Andar wali G.P. ka sum\n\\[0.1 + 0.01 + \\cdots = \\dfrac{\\frac{1}{10}\\left(1 - \\frac{1}{10^{n}}\\right)}{1 - \\frac{1}{10}}\\]\n\\[= \\dfrac{1}{9}\\left(1 - \\dfrac{1}{10^{n}}\\right)\\]\nKyun: Yeh G.P. hai jis ka pehla term \\(\\frac{1}{10}\\) aur ratio \\(\\frac{1}{10}\\) hai (har term pichle ka dasvan hissa). Neeche \\(1 - \\frac{1}{10} = \\frac{9}{10}\\), aur \\(\\frac{1}{10} \\div \\frac{9}{10} = \\frac{1}{9}\\).",
+              "Wapas rakhein\n\\[S_n = \\dfrac{2}{9}\\left[n - \\dfrac{1}{9}\\left(1 - \\dfrac{1}{10^{n}}\\right)\\right]\\]\nKyun: Bracket wali G.P. ki jagah us ka sum rakh diya; yahi answer key wali shakal hai.",
+              "Tasdeeq: \\(n = 2\\)\n\\[\\dfrac{2}{9}\\left[2 - \\dfrac{1}{9} \\cdot \\dfrac{99}{100}\\right] = \\dfrac{2}{9} \\cdot \\dfrac{189}{100}\\]\n\\[= 0.42\\]\nKyun: Pehle do terms ka sum \\(0.2 + 0.22 = 0.42\\) hai. Formula ne bhi 0.42 diya: \\(\\frac{1}{9} \\cdot \\frac{99}{100} = \\frac{11}{100}\\), \\(2 - 0.11 = 1.89\\), aur \\(\\frac{2}{9} \\times 1.89 = 0.42\\)."
+            ],
+            "final_answer": "\\(S_n = \\frac{2}{9}\\left[n - \\frac{1}{9}\\left(1 - \\frac{1}{10^{n}}\\right)\\right]\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Sum to \\(n\\) terms the series: \\(3 + 33 + 333 + \\cdots\\)",
+            "explanation": "Wohi trick jo (i) mein lagayi, bas ab whole numbers hain jin mein ek hi digit dohraya gaya hai.\nPlan: 3 bahar nikalenge, 9 se multiply aur divide karenge taake terms \\(10^{k} - 1\\) ban jayein, phir 10 ki powers wali G.P. ka sum lenge.",
+            "steps": [
+              "Diya gaya hai: \\(3 + 33 + 333 + \\cdots\\), \\(n\\) terms tak.\nHumein find karna hai: \\(S_n\\).\nTareeqa: Yeh series bhi G.P. nahi (\\(\\frac{33}{3} = 11\\), \\(\\frac{333}{33} \\approx 10.09\\)), is liye har term ko aise likhenge ke andar G.P. nazar aaye.",
+              "3 bahar nikalein, phir 9 se multiply aur divide karein\n\\[S_n = 3(1 + 11 + 111 + \\cdots)\\]\n\\[= \\dfrac{1}{3}(9 + 99 + 999 + \\cdots)\\]\nKyun: \\(33 = 3 \\times 11\\), \\(333 = 3 \\times 111\\). Phir 9 se multiply: \\(9 \\times 11 = 99\\), \\(9 \\times 111 = 999\\). Bahar \\(\\frac{3}{9} = \\frac{1}{3}\\) bacha.",
+              "Har term ko \"10 ki power minus 1\" likhein\n\\[S_n = \\dfrac{1}{3}\\left[(10 - 1) + (10^{2} - 1) + \\cdots + (10^{n} - 1)\\right]\\]\n\\[= \\dfrac{1}{3}\\left[(10 + 10^{2} + \\cdots + 10^{n}) - n\\right]\\]\nKyun: \\(9 = 10 - 1\\), \\(99 = 100 - 1 = 10^{2} - 1\\), \\(999 = 10^{3} - 1\\). \\(n\\)th term \\(10^{n} - 1\\) hai. Saari powers ek group mein aur \\(n\\) dafa 1 doosre group mein, jo \\(n\\) banta hai.",
+              "10 ki powers wali G.P. ka sum\n\\[10 + 10^{2} + \\cdots + 10^{n} = \\dfrac{10(10^{n} - 1)}{10 - 1}\\]\n\\[= \\dfrac{10}{9}(10^{n} - 1)\\]\nKyun: Pehla term 10, ratio 10, \\(n\\) terms. Jab \\(r > 1\\) ho to \\(\\frac{a_1(r^{n} - 1)}{r - 1}\\) wali shakal behtar hai kyunke upar neeche dono positive rehte hain; yeh asal mein wohi formula hai, sirf upar neeche \\(-1\\) se multiply kiya hua.\nDhyan dein: Pehla term 10 hai, 1 nahi; isi liye upar \\(10(10^{n} - 1)\\) aaya.",
+              "Wapas rakhein\n\\[S_n = \\dfrac{1}{3}\\left[\\dfrac{10}{9}(10^{n} - 1) - n\\right]\\]\nKyun: Powers ke group ki jagah us ka sum rakh diya.",
+              "Tasdeeq: \\(n = 2\\)\n\\[\\dfrac{1}{3}\\left[\\dfrac{10}{9}(99) - 2\\right] = \\dfrac{1}{3}(110 - 2)\\]\n\\[= 36\\]\nKyun: \\(3 + 33 = 36\\), aur formula bhi 36 deta hai (\\(\\frac{10}{9} \\times 99 = 110\\)). Is liye jawab sahi hai."
+            ],
+            "final_answer": "\\(S_n = \\frac{1}{3}\\left[\\frac{10}{9}(10^{n} - 1) - n\\right]\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

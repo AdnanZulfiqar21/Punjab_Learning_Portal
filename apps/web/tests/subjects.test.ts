@@ -1,17 +1,33 @@
-// The portal teaches four subjects; Mathematics books are indexed but not taught (owner, 2026-10-19).
+// The portal teaches Biology, Chemistry, Physics and Computer Science, and (MATHS-11-01, owner 2026-11-05) the Class 11
+// Mathematics book; the Class 12 Mathematics book stays out of learner pages.
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { taughtBooks, TAUGHT_SUBJECTS, tileGrade } from "../src/lib/subjects.ts";
+import { isTaught, taughtBooks, TAUGHT_SUBJECTS, tileGrade } from "../src/lib/subjects.ts";
 
 describe("taught subjects", () => {
-  it("are the four the portal teaches, in order", () => {
-    assert.deepEqual(TAUGHT_SUBJECTS, ["biology", "chemistry", "physics", "computer_science"]);
+  it("are the five the portal teaches, in order", () => {
+    assert.deepEqual(TAUGHT_SUBJECTS, ["biology", "chemistry", "physics", "computer_science", "mathematics"]);
   });
 
-  it("leaves Mathematics books out and keeps the rest in order", () => {
-    const books = [{ subject: "mathematics" }, { subject: "physics" }, { subject: "biology" }];
-    assert.deepEqual(taughtBooks(books), [{ subject: "physics" }, { subject: "biology" }]);
+  it("teach Mathematics in Class 11 only", () => {
+    assert.equal(isTaught("mathematics", 11), true);
+    assert.equal(isTaught("mathematics", 12), false);
+    assert.equal(isTaught("physics", 12), true);
+  });
+
+  it("keep the Class 11 Mathematics book, leave the Class 12 one out, and keep the rest in order", () => {
+    const books = [
+      { subject: "mathematics", grade: 12 },
+      { subject: "physics", grade: 11 },
+      { subject: "mathematics", grade: 11 },
+      { subject: "biology", grade: 12 },
+    ];
+    assert.deepEqual(taughtBooks(books), [
+      { subject: "physics", grade: 11 },
+      { subject: "mathematics", grade: 11 },
+      { subject: "biology", grade: 12 },
+    ]);
   });
 });
 

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-4-Q11-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-4-q11",
+      "title": "Question 11 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 295,
+          "pdf_to": 295,
+          "note": "Exercise 14.4 Q11, book p.290 (PDF 295). Key PDF 312: 150j - 100k (pound feet), correct (sympy). Solution book PDF 1286-1287 agrees."
+        }
+      ],
+      "variant_of": "C11-MATH-CH14-EXERCISE-14-4-Q11",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11 A mechanic applies a force of 50 pounds along the positive x-axis on a wrench connected to a bolt. The pivot point of the wrench is at the origin \\((0, 0, 0)\\), and the force is applied at the point \\((0 \\text{ ft}, 2 \\text{ ft}, 3 \\text{ ft})\\). Determine the torque produced by this force about the pivot point.",
+            "explanation": "Yeh rozmarra ki zindagi ka sawal hai: mechanic pana (wrench) ghuma kar bolt kas raha hai. Ghumane wale asar ko torque kehte hain.\nDiya kya hai? Force ki miqdaar aur simt, pivot (jahan bolt hai), aur woh point jahan force lagi.\nFind kya karna hai? Torque vector.\nRule kaunsa? \\(\\underline{\\tau} = \\underline{r} \\times \\underline{F}\\), jahan \\(\\underline{r}\\) pivot se force wale point tak ka vector hai.\nPlan: alfaaz ko vectors mein badalna, phir determinant se cross product.",
+            "steps": [
+              "Diya gaya hai: 50 lb force positive \\(x\\)-axis ki simt mein; pivot \\(O(0, 0, 0)\\); force ka point \\(P(0, 2, 3)\\) ft.\nHumein find karna hai: \\(O\\) ke gird torque \\(\\underline{\\tau}\\).\nTareeqa: \\(\\underline{\\tau} = \\underline{r} \\times \\underline{F}\\) (Key Concept, 14.4.6). Kyun cross product? Torque dono par munhasir hai: kitni zor se dhakela (\\(\\underline{F}\\)) aur pivot se kitni door (\\(\\underline{r}\\)); aur sirf woh hissa kaam aata hai jo \\(\\underline{r}\\) ke perpendicular ho, yani \\(|\\underline{r}||\\underline{F}|\\sin\\theta\\). Yahi cross product ki lambai hai. Isi liye lamba pana bolt ko aasaani se kholta hai.",
+              "Vectors likhein\n\\[\\underline{F} = 50\\underline{i} + 0\\underline{j} + 0\\underline{k}\\]\n\\[\\underline{r} = \\overrightarrow{OP} = 0\\underline{i} + 2\\underline{j} + 3\\underline{k}\\]\nKyun: \"50 pounds along the positive x-axis\" ka matlab hai sirf \\(\\underline{i}\\) ki simt mein 50, \\(\\underline{j}\\) aur \\(\\underline{k}\\) mein kuch nahi. Pivot origin par hai, to \\(\\underline{r} = P - O\\) bas \\(P\\) ke coordinates hain.",
+              "Cross product\n\\[\\underline{\\tau} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 0 & 2 & 3 \\\\ 50 & 0 & 0 \\end{vmatrix}\\]\n\\[= (0 - 0)\\underline{i} - (0 - 150)\\underline{j} + (0 - 100)\\underline{k}\\]\n\\[= 150\\underline{j} - 100\\underline{k}\\]\nKyun: \\(\\underline{i}\\) ka minor \\((2)(0) - (3)(0) = 0\\). \\(\\underline{j}\\) ka minor \\((0)(0) - (3)(50) = -150\\), aur \\(\\underline{j}\\) ke saath minus sign se \\(+150\\). \\(\\underline{k}\\) ka minor \\((0)(0) - (2)(50) = -100\\).\nDhyan dein: Tarteeb \\(\\underline{r} \\times \\underline{F}\\) hai: row 2 mein \\(\\underline{r}\\), row 3 mein \\(\\underline{F}\\). Ulti tarteeb \\(\\underline{F} \\times \\underline{r}\\) se torque ka sign ulta aa jata, yani ghumne ki simt ghalat.",
+              "Miqdaar aur tasdeeq\n\\[|\\underline{\\tau}| = \\sqrt{150^2 + 100^2} = 50\\sqrt{13}\\]\n\\[\\approx 180.3 \\text{ lb-ft}\\]\n\\[\\underline{\\tau} \\cdot \\underline{F} = 0,\\quad \\underline{\\tau} \\cdot \\underline{r} = 300 - 300 = 0 \\;\\checkmark\\]\nKyun: \\(22500 + 10000 = 32500 = 2500 \\times 13\\), is liye \\(50\\sqrt{13}\\). Torque \\(\\underline{r}\\) aur \\(\\underline{F}\\) dono ke perpendicular hona chahiye, aur dono dot products 0 aaye. Unit pound \\(\\times\\) foot hai, kyunke force pound mein aur faasla feet mein."
+            ],
+            "final_answer": "\\(\\underline{\\tau} = 150\\underline{j} - 100\\underline{k}\\) pound-feet (miqdaar \\(50\\sqrt{13} \\approx 180.3\\) lb-ft)"
+          }
+        ]
+      }
+    }
+  ]
+}

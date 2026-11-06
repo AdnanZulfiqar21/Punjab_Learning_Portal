@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-3-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-3-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 167,
+          "pdf_to": 167,
+          "note": "Exercise 8.3, Question 5: book page 162 (PDF 167); show-that question, no answer in the key (PDF 307); both results verified true."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(i)",
+            "prompt": "5 (i) If \\(x\\) is so small that its cube and higher power can be neglected, show that \\(\\sqrt{1 - x - 2x^{2}} \\approx 1 - \\frac{1}{2}x - \\frac{9}{8}x^{2}\\)",
+            "explanation": "Cube and higher powers are neglected, so we keep terms up to \\(x^{2}\\).\nThe whole expression under the root, \\(-x - 2x^{2}\\), plays the role of \\(y\\) in \\((1 + y)^{1/2}\\).\nPlan: expand to \\(y^{2}\\), substitute, keep powers up to \\(x^{2}\\).",
+            "steps": [
+              "Given: \\(\\sqrt{1 - x - 2x^{2}}\\), \\(x^{3}\\) and higher powers negligible.\nTo show: \\(\\approx 1 - \\frac{1}{2}x - \\frac{9}{8}x^{2}\\).\nMethod: Since \\(x^{3}\\) and higher powers are neglected, each series is kept up to its \\(x^{2}\\) term, and any product giving \\(x^{3}\\) or more is dropped.",
+              "Set up\n\\[\\sqrt{1 - x - 2x^{2}} = (1 + y)^{1/2}\\]\n\\[y = -x - 2x^{2}\\]\nWhy: The bracket already starts with 1; everything after it is \\(y\\).",
+              "Expand up to \\(y^{2}\\)\n\\[(1 + y)^{1/2} \\approx 1 + \\dfrac{1}{2}y - \\dfrac{1}{8}y^{2}\\]\nWhy: \\(y^{3}\\) contains \\(x^{3}\\) and higher, so it is neglected.",
+              "Work out \\(y^{2}\\)\n\\[y^{2} = (x + 2x^{2})^{2}\\]\n\\[= x^{2} + 4x^{3} + 4x^{4} \\approx x^{2}\\]\nWhy: Only \\(x^{2}\\) survives.",
+              "Substitute\n\\[1 + \\dfrac{1}{2}(-x - 2x^{2}) - \\dfrac{1}{8}x^{2}\\]\n\\[= 1 - \\dfrac{1}{2}x - x^{2} - \\dfrac{1}{8}x^{2}\\]\n\\[= 1 - \\dfrac{1}{2}x - \\dfrac{9}{8}x^{2}\\]\nWhy: \\(-1 - \\tfrac{1}{8} = -\\tfrac{9}{8}\\).",
+              "Check\n\\[x = 0.1:\\ \\sqrt{0.88} = 0.938083\\]\n\\[1 - 0.05 - 0.01125 = 0.93875\\]\nWhy: The difference (about 0.0007) is of the size of the neglected \\(x^{3}\\) terms."
+            ],
+            "final_answer": "\\(\\sqrt{1 - x - 2x^{2}} \\approx 1 - \\frac{1}{2}x - \\frac{9}{8}x^{2}\\). Hence proved."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(ii)",
+            "prompt": "5 (ii) If \\(x\\) is so small that its cube and higher power can be neglected, show that \\(\\sqrt{\\frac{1 + x}{1 - x}} \\approx 1 + x + \\frac{1}{2}x^{2}\\)",
+            "explanation": "Keep terms up to \\(x^{2}\\).\nWrite the left side as \\((1 + x)^{1/2}(1 - x)^{-1/2}\\), expand each to \\(x^{2}\\), multiply.\nPlan: two series of three terms, multiply, keep powers up to \\(x^{2}\\).",
+            "steps": [
+              "Given: \\(\\sqrt{\\frac{1 + x}{1 - x}}\\), \\(x^{3}\\) and higher powers negligible.\nTo show: \\(\\approx 1 + x + \\frac{1}{2}x^{2}\\).\nMethod: Since \\(x^{3}\\) and higher powers are neglected, each series is kept up to its \\(x^{2}\\) term, and any product giving \\(x^{3}\\) or more is dropped.",
+              "Write as a product\n\\[\\sqrt{\\dfrac{1 + x}{1 - x}} = (1 + x)^{1/2}(1 - x)^{-1/2}\\]\nWhy: \\(\\sqrt{\\tfrac{a}{b}} = a^{1/2}b^{-1/2}\\).",
+              "First series\n\\[(1 + x)^{1/2} \\approx 1 + \\dfrac{1}{2}x - \\dfrac{1}{8}x^{2}\\]\nWhy: \\(n = \\tfrac{1}{2}\\): \\(\\tfrac{\\frac{1}{2}(-\\frac{1}{2})}{2} = -\\tfrac{1}{8}\\).",
+              "Second series\n\\[(1 - x)^{-1/2} \\approx 1 + \\dfrac{1}{2}x + \\dfrac{3}{8}x^{2}\\]\nWhy: \\(n = -\\tfrac{1}{2}\\), \\(-x\\) in place of \\(x\\): \\(\\tfrac{(-\\frac{1}{2})(-\\frac{3}{2})}{2} = \\tfrac{3}{8}\\) and \\((-x)^{2} = x^{2}\\).",
+              "Multiply, keeping up to \\(x^{2}\\)\n\\[x: \\dfrac{1}{2} + \\dfrac{1}{2} = 1\\]\n\\[x^{2}: \\dfrac{3}{8} + \\dfrac{1}{4} - \\dfrac{1}{8} = \\dfrac{1}{2}\\]\n\\[\\Rightarrow 1 + x + \\dfrac{1}{2}x^{2}\\]\nWhy: \\(x^{2}\\) comes from \\(1 \\cdot \\tfrac{3}{8}x^{2}\\), \\(\\tfrac{1}{2}x \\cdot \\tfrac{1}{2}x\\) and \\(-\\tfrac{1}{8}x^{2} \\cdot 1\\).",
+              "Check\n\\[x = 0.1:\\ \\sqrt{\\dfrac{1.1}{0.9}} = 1.105542\\]\n\\[1 + 0.1 + 0.005 = 1.105\\]\nWhy: The difference (about 0.0005) is of the size of the neglected \\(x^{3}\\) term."
+            ],
+            "final_answer": "\\(\\sqrt{\\frac{1 + x}{1 - x}} \\approx 1 + x + \\frac{1}{2}x^{2}\\). Hence proved."
+          }
+        ]
+      }
+    }
+  ]
+}

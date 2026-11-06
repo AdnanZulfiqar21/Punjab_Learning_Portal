@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.4.3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.4.3",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 61,
+          "pdf_to": 62,
+          "note": "Book p. 56-57: 4.4.3 Properties of Determinants i-viii, Note on triangular matrices, Example 6; callouts marked Teaching note / Key points / Common mistake are ours."
+        }
+      ],
+      "title": "4.4.3 Properties of Determinants (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH4-4.4.3",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Order 3 ka determinant kholna lamba kaam hai, aur har qadam par sign ki ghalti ka khatra hota hai. Aaj ke sabaq ki properties hamare \"shortcut\" hain: in se hum determinant ko pehle aasan bana sakte hain, balke kai dafa us ki value bina khole hi bata sakte hain. Neeche \\(R_{1}, R_{2}, R_{3}\\) rows ke liye aur \\(C_{1}, C_{2}, C_{3}\\) columns ke liye likhe gaye hain."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "i. Square matrix \\(A\\) ke liye \\(|A| = |A^{t}|\\), yani transpose (rows ko columns bana dena) se determinant nahin badalta.",
+              "ii. Agar square matrix \\(A\\) ki do rows ya do columns aapas mein badal di jayen (interchange), to naye matrix ka determinant \\(-|A|\\) hota hai, yani sirf sign ulta.",
+              "iii. Agar square matrix \\(A\\) ki do rows bilkul ek jaisi (identical) hon, ya do columns ek jaise hon, to \\(|A| = 0\\).",
+              "iv. Agar square matrix \\(A\\) ki kisi row (ya column) ki saari entries zero hon, to \\(|A| = 0\\).",
+              "v. Agar square matrix \\(A\\) ki kisi ek row (ya column) ki entries ko kisi number \\(k \\in \\mathbb{R}\\) se multiply karein, to naye matrix ka determinant \\(k|A|\\) hota hai.",
+              "vi. Agar kisi row (ya column) ki har entry do terms ka jor ho, to determinant ko do determinants ke jor ki shakal mein likha ja sakta hai (neeche dekhiye)."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Property vi ki wazahat: agar"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[B = \\begin{bmatrix} a_{11}+b_{11} & a_{12} & a_{13} \\\\ a_{21}+b_{21} & a_{22} & a_{23} \\\\ a_{31}+b_{31} & a_{32} & a_{33} \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "to"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|B| =\\]\n\\[\\begin{vmatrix} a_{11}+b_{11} & a_{12} & a_{13} \\\\ a_{21}+b_{21} & a_{22} & a_{23} \\\\ a_{31}+b_{31} & a_{32} & a_{33} \\end{vmatrix}\\]\n\\[= \\begin{vmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{vmatrix}\\]\n\\[+ \\begin{vmatrix} b_{11} & a_{12} & a_{13} \\\\ b_{21} & a_{22} & a_{23} \\\\ b_{31} & a_{32} & a_{33} \\end{vmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yani pehle column mein har entry do terms ka jor thi; determinant ko do hisson mein tor diya: ek mein \\(a\\) wale terms, doosre mein \\(b\\) wale, aur baqi columns dono mein wahi rahe."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab property vi wali equation ko do dafa chhapti hai: ek dafa \\(|B| =\\) ke saath, aur phir foran neeche dobara us ke baghair. Doosri line sirf takraar (repetition) hai; equation ek hi dafa kaafi hai, is liye hum ne use ek hi dafa likha hai."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "vii. Agar kisi row (column) ko ek non-zero number \\(k\\) se multiply kar ke natija kisi doosri row (column) ki mutabiq entries mein jama kar dein, to determinant ki value nahin badalti.",
+              "viii. Agar matrix triangular form mein ho, to us ka determinant main diagonal ki entries ka product hota hai."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Triangular matrices ki definition aage ke safhon par aayegi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh properties sach kyun hain? Zyada tar expansion se hi nikalti hain:\niv: zero wali row ke saath kholein to har term mein 0 ka factor aata hai, is liye jawab 0.\niii: do ek jaisi rows ko aapas mein badlein to matrix wahi ka wahi rehta hai, lekin property ii kehti hai sign badal jayega. Yani \\(|A| = -|A|\\), aur aisa sirf tab mumkin hai jab \\(|A| = 0\\) ho. Khoobsurat daleel hai na?\nv: jis row ko \\(k\\) se multiply kiya, usi ke saath kholein; har term mein \\(k\\) aata hai, jo bahar nikal aata hai.\nProperty v ke do faide: kisi row ya column ka common factor determinant ke bahar nikala ja sakta hai; aur agar ek row doosri row ka multiple ho to determinant 0 hai (factor bahar nikaalein, phir do rows identical ho jati hain)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari misaal hai, kitab ki nahin. Matrix lijiye\n\\[P = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 10 \\end{bmatrix}\\]\nRow 1 se kholne par \\(|P| = 1(50 - 48) - 2(40 - 42) + 3(32 - 35) = 2 + 4 - 9 = -3\\). Ab properties ko kaam karta dekhiye:\ni. \\(|P^{t}| = -3\\): transpose se value wahi rahi.\nii. \\(R_{1}\\) aur \\(R_{2}\\) badal dein: value \\(3\\) ho gayi, sirf sign ulta hua.\nv. \\(R_{1}\\) ko 2 se multiply karein: value \\(-6\\), yani 2 guna.\nvii. \\(R_{2} - 4R_{1} \\to R_{2}\\) se rows \\(1, 2, 3\\); \\(0, -3, -6\\); \\(7, 8, 10\\) banti hain, aur value phir bhi \\(-3\\). Yeh property zeros banane ke kaam aati hai.\nviii. Triangular misaal: \\(\\begin{vmatrix} 2 & 5 & 7 \\\\ 0 & 3 & 1 \\\\ 0 & 0 & 4 \\end{vmatrix} = 2 \\times 3 \\times 4 = 24\\); diagonal ke neeche sab zero hain, is liye sirf diagonal ka product."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki misaal. Is mein expansion mana hai, is liye sirf properties ka istemaal hoga. Har step par dekhiye ke kaun si property lagi."
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Without expansion, show that \\(\\begin{vmatrix} x & a+x & b+c \\\\ x & b+x & c+a \\\\ x & c+x & a+b \\end{vmatrix} = 0\\)",
+            "steps": [
+              "Given: determinant\n\\[\\begin{vmatrix} x & a+x & b+c \\\\ x & b+x & c+a \\\\ x & c+x & a+b \\end{vmatrix}\\]\nTo prove: is ki value 0 hai, aur woh bhi khole (expand kiye) baghair.\nMethod: sab se pehle dekhte hain ke \"without expansion\" ka matlab hai: (vii) wala lamba formula nahin lagana, sirf properties se kaam lena hai. Hamara nishana: kisi tarah do columns bilkul ek jaise bana dein, phir property iii foran 0 de degi. Ghor karein ke \\(C_{2}\\) aur \\(C_{3}\\) ko jama karein to har row mein \\(a + b + c + x\\) banta hai. Bas yahi chaabi hai.",
+              "Step 1: \\(C_{3}\\) ki entries \\(C_{2}\\) ki mutabiq entries mein jama karein\n\\[= \\begin{vmatrix} x & a+b+c+x & b+c \\\\ x & a+b+c+x & c+a \\\\ x & a+b+c+x & a+b \\end{vmatrix}\\]\nKyun: \\((a + x) + (b + c)\\), \\((b + x) + (c + a)\\) aur \\((c + x) + (a + b)\\) teeno \\(a + b + c + x\\) ke barabar hain. Property vii (\\(k = 1\\) ke saath) kehti hai ke ek column ko doosre mein jama karne se value nahin badalti. Yani determinant wahi raha, sirf shakal aasan ho gayi.",
+              "Step 2: \\(C_{1}\\) aur \\(C_{2}\\) se common factors bahar nikaalein\n\\[= x(a+b+c+x)\\begin{vmatrix} 1 & 1 & b+c \\\\ 1 & 1 & c+a \\\\ 1 & 1 & a+b \\end{vmatrix}\\]\nKyun: \\(C_{1}\\) ki har entry \\(x\\) hai, aur \\(C_{2}\\) ki har entry \\(a + b + c + x\\). Property v ka ulta istemaal: agar ek column ki har entry mein ek hi factor ho to woh poore determinant ke bahar aa jata hai. Do columns se do factors bahar aaye, is liye dono multiply ho kar bahar likhe.",
+              "Step 3: Do columns ek jaise\n\\[= x(a+b+c+x) \\cdot 0\\]\n\\[= 0\\]\nKyun: ab \\(C_{1}\\) aur \\(C_{2}\\) dono \\(1, 1, 1\\) hain, yani identical. Property iii ke mutabiq aise determinant ki value 0 hai. Aur kisi bhi cheez ko 0 se multiply karein to 0 hi aata hai.",
+              "Tasdeeq:\nAb ek number wali misaal se dekhte hain (yeh sirf tasdeeq hai, sawal ka hissa nahin). \\(x = 1, a = 2, b = 3, c = 4\\) rakhein to rows \\(1, 3, 7\\); \\(1, 4, 6\\); \\(1, 5, 5\\) banti hain:\n\\[1(20 - 30) - 3(5 - 6) + 7(5 - 4)\\]\n\\[= -10 + 3 + 7 = 0\\]\nWaqai 0! Computer algebra se bhi poora expansion har \\(a, b, c, x\\) ke liye 0 aata hai."
+            ],
+            "answer": "Saabit ho gaya: \\(\\begin{vmatrix} x & a+x & b+c \\\\ x & b+x & c+a \\\\ x & c+x & a+b \\end{vmatrix} = 0\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Dhyan dein",
+            "text": "Properties ko istemaal karte waqt har step ke saath likhiye ke kaun si property lagi, jaise kitab ne likha: \"by taking \\(x\\) from \\(C_{1}\\)\" ya \"\\(\\because C_{1}\\) and \\(C_{2}\\) are identical\". \"Without expansion\" wale sawalon mein marks isi wazahat ke milte hain; sirf aakhri jawab 0 likh dena kaafi nahin.\nRow operation likhne ka tareeqa bhi seekh lein: \\(C_{2} + C_{3} \\to C_{2}\\) ka matlab hai \"\\(C_{3}\\) ko \\(C_{2}\\) mein jama karo aur natija \\(C_{2}\\) ki jagah likho\". Teer (arrow) ke baad wali line hi badalti hai; baqi sab lines waisi ki waisi rehti hain.\nAur yaad rakhein: properties sirf square matrices ke determinants ke liye hain, kyun ke determinant hota hi sirf square matrix ka hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Bina khole batayein: \\(\\begin{vmatrix} 1 & 2 & 3 \\\\ 2 & 4 & 6 \\\\ 5 & 7 & 9 \\end{vmatrix}\\) kitna hai?\nJawab: \\(R_{2} = 2R_{1}\\) hai. \\(R_{2}\\) se 2 bahar nikaalein (property v) to \\(R_{1}\\) aur \\(R_{2}\\) identical ho jati hain, is liye value 0 (property iii)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Agar \\(|A| = 5\\) ho aur \\(A\\) ki pehli row ko 3 se multiply kar ke phir row 2 aur row 3 aapas mein badal dein, to naye determinant ki value kya hogi?\nJawab: pehle qadam se value \\(3 \\times 5 = 15\\) (property v), doosre qadam se sign ulta (property ii), yani \\(-15\\). Har qadam ka asar alag alag likhein, phir jor dein."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Transpose: value wahi. Do rows (columns) badlein: sign ulta.\n2. Do identical rows (columns), ya poori zero row (column): value 0.\n3. Ek row (column) ka common factor bahar aata hai: \\(k|A|\\).\n4. Ek row (column) ka \\(k\\) guna doosri mein jama karein: value wahi. Expansion se pehle zeros isi se banaye jate hain.\n5. Triangular matrix: main diagonal ki entries ka product.\n6. \"Without expansion\" ka matlab: properties se do identical rows/columns ya zero row/column tak pahunchein."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(k\\) ko poore matrix se bahar nikaal dena: order 3 ke liye \\(|kA| = k^{3}|A|\\) hai, \\(k|A|\\) nahin. Property v sirf EK row ya column ki baat karti hai.\n2. Do rows badalte waqt minus sign bhool jana.\n3. Ghalat row badal dena: \\(R_{2} + kR_{1} \\to R_{2}\\) mein sirf \\(R_{2}\\) badalti hai, \\(R_{1}\\) waisi hi rehti hai.\n4. Property vi mein ek saath do rows tor dena: ek waqt mein ek hi row ya column torein."
+          }
+        ]
+      }
+    }
+  ]
+}

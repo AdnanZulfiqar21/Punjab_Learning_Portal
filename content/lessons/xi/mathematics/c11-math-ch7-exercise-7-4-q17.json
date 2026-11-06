@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-4-Q17",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-4-q17",
+      "title": "Question 17",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 144,
+          "pdf_to": 144,
+          "note": "Exercise 7.4, Question 17: book p.139 (PDF 144). Answer key PDF 306 (book p.301). Solution book PDF 675-704 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "17(a)",
+            "prompt": "17 (a) An urn contains the first 15 English letters (A-O). Sania is to randomly select 3 letters from the urn. She will win the game if the selected letters are the first three vowel letters. Find the probability of Sania winning the game if: (a) The order of the vowel letters matters",
+            "explanation": "Probability = (winning outcomes) \\(\\div\\) (all outcomes). The first three vowels are A, E, I (all among A-O).\nWhen order matters, outcomes are ordered draws: \\({}^{15}P_{3}\\).\nPlan: count all ordered draws, count the winning one, divide.",
+            "steps": [
+              "Given: 15 letters A to O; 3 letters drawn; win if they are A, E, I.\nTo find: the probability of winning when order matters.\nMethod: \\(P = \\frac{\\text{winning outcomes}}{\\text{all outcomes}}\\), every draw equally likely.",
+              "Count all ordered draws\n\\[{}^{15}P_{3} = 15 \\times 14 \\times 13\\]\n\\[= 2730\\]\nWhy: The first letter can be any of 15, the second any of the remaining 14, the third any of the remaining 13.",
+              "Count the winning draws\n\\[\\text{A, then E, then I: } 1\\]\nWhy: When the order of the vowels matters, only the draw in the order A, E, I wins.",
+              "Divide\n\\[P = \\dfrac{1}{2730}\\]\nWhy: One winning outcome out of 2730 equally likely outcomes.",
+              "Check\n\\[\\dfrac{1}{15} \\times \\dfrac{1}{14} \\times \\dfrac{1}{13} = \\dfrac{1}{2730} \\;\\checkmark\\]\nWhy: Draw by draw: A first (1 of 15), then E (1 of 14), then I (1 of 13)."
+            ],
+            "final_answer": "\\(P = \\frac{1}{2730}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "17(b)",
+            "prompt": "17 (b) An urn contains the first 15 English letters (A-O). Sania is to randomly select 3 letters from the urn. She will win the game if the selected letters are the first three vowel letters. Find the probability of Sania winning the game if: (b) The order of the vowel letters does not matter",
+            "explanation": "Now only the set of 3 letters counts, so outcomes are combinations: \\({}^{15}C_{3}\\).\nPlan: count all selections, count the winning one \\(\\{A, E, I\\}\\), divide.",
+            "steps": [
+              "Given: as in part (a), but the order of drawing does not matter.\nTo find: the probability of winning.\nMethod: \\(P = \\frac{\\text{winning outcomes}}{\\text{all outcomes}}\\) with outcomes as selections.",
+              "Count all selections\n\\[{}^{15}C_{3} = \\dfrac{15 \\cdot 14 \\cdot 13}{3 \\cdot 2 \\cdot 1}\\]\n\\[= \\dfrac{2730}{6} = 455\\]\nWhy: Each set of 3 letters was counted \\(3! = 6\\) times in \\({}^{15}P_{3}\\).",
+              "Count the winning selections\n\\[\\{A, E, I\\}: 1\\]\nWhy: Only one set of three letters is the set of the first three vowels.",
+              "Divide\n\\[P = \\dfrac{1}{455}\\]\nWhy: One winning outcome out of 455 equally likely selections.",
+              "Check\n\\[\\dfrac{3!}{2730} = \\dfrac{6}{2730} = \\dfrac{1}{455} \\;\\checkmark\\]\nWhy: Counting ordered draws instead, any of the \\(3! = 6\\) orders of A, E, I wins; the probability is the same."
+            ],
+            "final_answer": "\\(P = \\frac{1}{455}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

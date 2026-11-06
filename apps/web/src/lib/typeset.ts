@@ -3,6 +3,7 @@ import katex from "katex";
 import "katex/contrib/mhchem";
 import "katex/dist/katex-swap.min.css";
 import { bookErrors, markLatex, paintBookErrors } from "@/lib/book-errors";
+import { mathKey, mathPieces } from "@/lib/inline-math";
 import { KATEX_OPTIONS } from "@/lib/katex-options";
 
 /** P01.S4.T2: typeset a block list's equations on the server, so server-rendered pages ship no KaTeX JavaScript (only
@@ -20,5 +21,27 @@ export function typesetEquations(blocks: readonly { type: string; [key: string]:
       out[i] = null;
     }
   });
+  return out;
+}
+
+/** INLINE-MATH-01: typeset every formula written inside the text of a block list (\( … \), \[ … \]), keyed by
+ * `mathKey`; `null` marks one that can't be typeset, so it shows its LaTeX as written. */
+export function typesetMath(value: unknown, out: Record<string, string | null> = {}): Record<string, string | null> {
+  if (typeof value === "string") {
+    for (const p of mathPieces(value)) {
+      if (p.kind !== "math") continue;
+      const key = mathKey(p.latex, p.display);
+      if (key in out) continue;
+      try {
+        out[key] = katex.renderToString(p.latex, { ...KATEX_OPTIONS, displayMode: p.display });
+      } catch {
+        out[key] = null;
+      }
+    }
+  } else if (Array.isArray(value)) {
+    for (const v of value) typesetMath(v, out);
+  } else if (value && typeof value === "object") {
+    for (const [k, v] of Object.entries(value)) if (k !== "latex") typesetMath(v, out);
+  }
   return out;
 }

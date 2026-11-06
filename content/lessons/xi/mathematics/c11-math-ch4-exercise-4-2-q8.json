@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-2-Q8",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-2-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 65,
+          "pdf_to": 65,
+          "note": "Exercise 4.2, Question 8: Show that |kA| = k^3|A| for a square matrix of order 3 (book page 60)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8. If \\(A\\) is a square matrix of order 3, then show that \\(|kA| = k^{3}|A|\\).",
+            "explanation": "A general proof: it must hold for every \\(3 \\times 3\\) matrix, so we use letters \\(a_{ij}\\).\nMultiplying a matrix by \\(k\\) multiplies every entry, so every row has the factor \\(k\\).\nPlan: write \\(kA\\), take \\(k\\) out of each of the three rows (Property v).",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{bmatrix}\\), a square matrix of order 3, and a number \\(k\\).\nTo prove: \\(|kA| = k^{3}|A|\\)\nMethod: Scalar multiplication, then Property v (a factor common to one row comes outside the determinant once).",
+              "Write \\(|kA|\\)\n\\[|kA| = \\begin{vmatrix} ka_{11} & ka_{12} & ka_{13} \\\\ ka_{21} & ka_{22} & ka_{23} \\\\ ka_{31} & ka_{32} & ka_{33} \\end{vmatrix}\\]\nWhy: In scalar multiplication every entry of \\(A\\) is multiplied by \\(k\\).",
+              "Take \\(k\\) out of row 1\n\\[|kA| = k\\begin{vmatrix} a_{11} & a_{12} & a_{13} \\\\ ka_{21} & ka_{22} & ka_{23} \\\\ ka_{31} & ka_{32} & ka_{33} \\end{vmatrix}\\]\nWhy: Every entry of \\(R_1\\) has the factor \\(k\\) (Property v).",
+              "Take \\(k\\) out of rows 2 and 3\n\\[|kA| = k \\cdot k \\cdot k\\begin{vmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{vmatrix}\\]\n\\[= k^{3}|A|\\]\nWhy: Property v once for \\(R_2\\) and once for \\(R_3\\); the remaining determinant is \\(|A|\\).",
+              "Check with a number\n\\[A = I_3,\\ k = 2:\\ |2I_3| = 2 \\cdot 2 \\cdot 2 = 8\\]\n\\[k^{3}|I_3| = 8 \\times 1 = 8 \\;\\checkmark\\]\nWhy: \\(2I_3\\) is diagonal, so its determinant is the product of the diagonal entries. Note that \\(|kA| \\neq k|A|\\) in general."
+            ],
+            "final_answer": "Hence proved: \\(|kA| = k^{3}|A|\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

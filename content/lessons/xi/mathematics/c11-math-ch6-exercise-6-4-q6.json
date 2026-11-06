@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-4-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-4-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 103,
+          "pdf_to": 103,
+          "note": "Exercise 6.4, Question 6: book p.98 (PDF 103). Answer key PDF 304 (book p.299). Solution book PDF 459-483 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(i)",
+            "prompt": "6 (i) Sum the series \\(3 + 5 - 7 + 9 + 11 - 13 + 15 + 17 - 19 + \\dots\\) to \\(3n\\) terms.",
+            "explanation": "The signs repeat in the pattern \\(+,\\ +,\\ -\\), so the series itself is not an A.P.\nBut \\(3n\\) terms make exactly \\(n\\) groups of three.\nPlan: add each group; the group sums form an A.P. of \\(n\\) terms; sum that A.P.",
+            "steps": [
+              "Given: \\(3 + 5 - 7 + 9 + 11 - 13 + \\dots\\) to \\(3n\\) terms.\nTo find: the sum.\nMethod: Ignoring signs, the numbers 3, 5, 7, 9, ... go up by 2. Group the terms in threes, \\((3 + 5 - 7) + (9 + 11 - 13) + \\dots\\); there are \\(3n \\div 3 = n\\) groups.",
+              "Add each group\n\\[3 + 5 - 7 = 1\\]\n\\[9 + 11 - 13 = 7\\]\n\\[15 + 17 - 19 = 13\\]\nWhy: Working out the first few groups shows the pattern of the group sums.",
+              "The group sums form an A.P.\n\\[1,\\ 7,\\ 13,\\ \\dots\\]\n\\[a_1 = 1,\\quad d = 6,\\quad n \\text{ terms}\\]\nWhy: Each group's numbers are 6 more than the previous group's (three steps of 2), so each group sum is \\(6 + 6 - 6 = 6\\) more.",
+              "Sum the \\(n\\) group sums\n\\[S = \\dfrac{n}{2}[2(1) + (n - 1)6]\\]\n\\[= \\dfrac{n}{2}(6n - 4)\\]\n\\[= n(3n - 2)\\]\nWhy: \\(S_n = \\frac{n}{2}[2a_1 + (n - 1)d]\\); then \\(2 + 6n - 6 = 6n - 4\\) and \\(\\frac{6n - 4}{2} = 3n - 2\\).",
+              "Check with \\(n = 2\\) (6 terms)\n\\[3 + 5 - 7 + 9 + 11 - 13 = 8\\]\n\\[2(3 \\cdot 2 - 2) = 2 \\times 4 = 8 \\;\\checkmark\\]\nWhy: The formula agrees with direct addition."
+            ],
+            "final_answer": "\\(S_{3n} = n(3n - 2)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(ii)",
+            "prompt": "6 (ii) Sum the series \\(1 + 4 - 7 + 10 + 13 - 16 + 19 + 22 - 25 + \\dots\\) to \\(3n\\) terms.",
+            "explanation": "Same idea as part (i): signs \\(+,\\ +,\\ -\\) repeat, so group the terms in threes.\n\\(3n\\) terms give \\(n\\) groups.\nPlan: find the group sums, see that they form an A.P., and add \\(n\\) of them.",
+            "steps": [
+              "Given: \\(1 + 4 - 7 + 10 + 13 - 16 + \\dots\\) to \\(3n\\) terms.\nTo find: the sum.\nMethod: Without signs the numbers 1, 4, 7, 10, ... go up by 3. Group in threes: \\((1 + 4 - 7) + (10 + 13 - 16) + \\dots\\), \\(n\\) groups.",
+              "Add each group\n\\[1 + 4 - 7 = -2\\]\n\\[10 + 13 - 16 = 7\\]\n\\[19 + 22 - 25 = 16\\]\nWhy: The first few group sums reveal the pattern.",
+              "The group sums form an A.P.\n\\[-2,\\ 7,\\ 16,\\ \\dots\\]\n\\[a_1 = -2,\\quad d = 9,\\quad n \\text{ terms}\\]\nWhy: Each group's numbers are 9 more than the previous group's (three steps of 3), so each group sum is \\(9 + 9 - 9 = 9\\) more.",
+              "Sum the \\(n\\) group sums\n\\[S = \\dfrac{n}{2}[2(-2) + (n - 1)9]\\]\n\\[= \\dfrac{n}{2}(-4 + 9n - 9)\\]\n\\[= \\dfrac{n}{2}(9n - 13)\\]\nWhy: \\(S_n = \\frac{n}{2}[2a_1 + (n - 1)d]\\) with \\(a_1 = -2\\), \\(d = 9\\).",
+              "Check with \\(n = 2\\) (6 terms)\n\\[1 + 4 - 7 + 10 + 13 - 16 = 5\\]\n\\[\\dfrac{2}{2}(18 - 13) = 5 \\;\\checkmark\\]\nWhy: The formula agrees with direct addition."
+            ],
+            "final_answer": "\\(S_{3n} = \\frac{n}{2}(9n - 13)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

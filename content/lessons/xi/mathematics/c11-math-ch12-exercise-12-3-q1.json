@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-3-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-3-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 240,
+          "pdf_to": 240,
+          "note": "Exercise 12.3, Question 1: limit of A(t) = A0 e^(-0.1t) as t -> infinity (book p.235). Answer key PDF 310: 0."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1",
+            "prompt": "1 A substance decays exponentially following the formula \\(A(t) = A_0 e^{-0.1t}\\), where \\(A_0\\) is the initial amount. Find the limit of \\(A(t)\\) as \\(t \\to \\infty\\).",
+            "explanation": "A real-world limit at infinity with a decaying exponential.\nWe must find what the amount approaches after a very long time.\nPlan: write \\(e^{-0.1t}\\) as \\(\\frac{1}{e^{0.1t}}\\), see that it tends to 0, multiply by \\(A_0\\).",
+            "steps": [
+              "Given: \\(A(t) = A_0 e^{-0.1t}\\), \\(A_0\\) the initial amount (a positive constant).\nTo find: \\(\\lim_{t \\to \\infty} A(t)\\).\nMethod: A constant factor comes outside the limit; then use \\(e^{-0.1t} \\to 0\\).\nKey fact: for a positive constant \\(k\\), as \\(t \\to \\infty\\), \\(e^{kt} \\to \\infty\\) and \\(e^{-kt} = \\dfrac{1}{e^{kt}} \\to 0\\) (Important Result: \\(\\lim_{x \\to \\infty} e^{x} = \\infty\\), \\(\\lim_{x \\to -\\infty} e^{x} = 0\\)).",
+              "Take the constant outside\n\\[\\lim_{t \\to \\infty} A(t) = A_0 \\lim_{t \\to \\infty} e^{-0.1t}\\]\nWhy: The limit of (constant) \\(\\times\\) (function) is the constant \\(\\times\\) the limit of the function (theorems on limits).",
+              "Find the limit of the exponential\n\\[e^{-0.1t} = \\frac{1}{e^{0.1t}}\\]\n\\[t \\to \\infty \\Rightarrow e^{0.1t} \\to \\infty\\]\n\\[\\lim_{t \\to \\infty} e^{-0.1t} = 0\\]\nWhy: 1 divided by an ever-larger number gets as close to 0 as we like.",
+              "Combine\n\\[\\lim_{t \\to \\infty} A(t) = A_0 \\times 0 = 0\\]\nWhy: Meaning: after a very long time almost none of the substance is left.",
+              "Check\n\\[t = 100:\\ e^{-10} \\approx 0.0000454\\]\n\\[A(100) \\approx 0.0000454\\,A_0\\]\nWhy: Already after 100 years only a tiny fraction of \\(A_0\\) remains, consistent with the limit 0."
+            ],
+            "final_answer": "\\(\\lim_{t \\to \\infty} A(t) = 0\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

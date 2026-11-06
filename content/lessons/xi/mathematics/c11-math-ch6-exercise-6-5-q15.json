@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-5-Q15",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-5-q15",
+      "title": "Question 15",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 107,
+          "pdf_to": 107,
+          "note": "Exercise 6.5, Question 15: Exercise 6.5, book pages 101-102: Q1-Q13, Q15, Q16 as printed (no Q14; 18 parts); answer key PDF 304-305"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15",
+            "prompt": "15. If \\(p\\)th, \\(q\\)th terms of a G.P. are \\(q\\) and \\(p\\) respectively, show that \\((p + q)\\)th term is \\(\\left(q^{p} \\div p^{q}\\right)^{\\frac{1}{p - q}}\\).",
+            "explanation": "A proof with letters: two terms are given, a third must be shown equal to an expression.\nWe need \\(a_{p+q} = a_1 r^{p+q-1}\\).\nPlan: divide the two equations to get \\(r\\); then write \\(a_{p+q} = a_p \\cdot r^{q}\\) and simplify the indices.",
+            "steps": [
+              "Given: \\(a_p = q\\), \\(a_q = p\\) (\\(p \\neq q\\)).\nTo prove: \\(a_{p+q} = (q^p \\div p^q)^{\\frac{1}{p-q}}\\).\nMethod: Find \\(r\\) by dividing; then move \\(q\\) places forward from \\(a_p\\).",
+              "Write the two given terms\n\\[a_1 r^{p-1} = q \\quad (1)\\]\n\\[a_1 r^{q-1} = p \\quad (2)\\]\nWhy: \\(a_n = a_1 r^{n-1}\\) with \\(n = p\\) and \\(n = q\\).",
+              "Divide (1) by (2)\n\\[r^{(p-1)-(q-1)} = \\dfrac{q}{p}\\]\n\\[r^{p-q} = \\dfrac{q}{p}\\]\n\\[r = \\left(\\dfrac{q}{p}\\right)^{\\frac{1}{p-q}}\\]\nWhy: \\(a_1\\) cancels and the indices subtract. Raising both sides to the power \\(\\frac{1}{p-q}\\) leaves \\(r\\).",
+              "Move \\(q\\) places on from \\(a_p\\)\n\\[a_{p+q} = a_1 r^{p+q-1}\\]\n\\[= \\left(a_1 r^{p-1}\\right) r^{q} = q\\, r^{q}\\]\nWhy: \\(p + q - 1 = (p - 1) + q\\), and \\(a_1 r^{p-1} = q\\) from (1).",
+              "Put in \\(r\\)\n\\[q\\, r^{q} = q \\left(\\dfrac{q}{p}\\right)^{\\frac{q}{p-q}}\\]\n\\[= \\dfrac{q^{1 + \\frac{q}{p-q}}}{p^{\\frac{q}{p-q}}}\\]\nWhy: A power of a power multiplies: \\(\\left(x^{1/(p-q)}\\right)^{q} = x^{q/(p-q)}\\).",
+              "Combine the indices of \\(q\\)\n\\[1 + \\dfrac{q}{p - q} = \\dfrac{p - q + q}{p - q}\\]\n\\[= \\dfrac{p}{p - q}\\]\nWhy: Write 1 as \\(\\frac{p-q}{p-q}\\) and add the tops.",
+              "Write in the required form\n\\[a_{p+q} = \\dfrac{q^{\\frac{p}{p-q}}}{p^{\\frac{q}{p-q}}}\\]\n\\[= \\left(\\dfrac{q^{p}}{p^{q}}\\right)^{\\frac{1}{p-q}}\\]\n\\[= \\left(q^{p} \\div p^{q}\\right)^{\\frac{1}{p-q}}\\]\nWhy: Both indices have the factor \\(\\frac{1}{p-q}\\), so take it outside the bracket.",
+              "Check with numbers\n\\[p = 2, q = 1:\\ a_2 = 1,\\ a_1 = 2\\]\n\\[r = \\tfrac{1}{2},\\ a_3 = \\tfrac{1}{2}\\]\n\\[(1^2 \\div 2^1)^{1} = \\tfrac{1}{2}\\ \\checkmark\\]\nWhy: For the G.P. \\(2, 1, \\frac{1}{2}, \\ldots\\) the formula gives the true 3rd term."
+            ],
+            "final_answer": "Hence proved: \\(a_{p+q} = \\left(q^{p} \\div p^{q}\\right)^{\\frac{1}{p-q}}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book's numbering in Exercise 6.5 jumps from 13 to 15: no Question 14 is printed, and the page shows no gap, so nothing appears to be missing. We keep the printed numbers 15 and 16. The question also prints \\\"show tha\\\"; it should read \\\"show that\\\". No answer is given in the key (this is a proof)."
+          }
+        ]
+      }
+    }
+  ]
+}

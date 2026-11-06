@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-3-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-3-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 167,
+          "pdf_to": 167,
+          "note": "Exercise 8.3, Question 6: book page 162 (PDF 167); proof question, no answer in the key (PDF 307)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. If \\(x\\) is very nearly equal 1, then prove that \\(px^{p} - qx^{q} \\approx (p - q)x^{p+q}\\).",
+            "explanation": "\"x very nearly equal to 1\" means \\(x = 1 + h\\) with \\(h\\) very small, so \\(h^{2}\\) and higher powers can be neglected.\nWe must show both sides have the same value up to the \\(h\\) term.\nPlan: expand \\(x^{p}\\), \\(x^{q}\\) and \\(x^{p+q}\\) as \\(1 + nh\\), then compare.",
+            "steps": [
+              "Given: \\(x\\) is very nearly 1.\nTo prove: \\(px^{p} - qx^{q} \\approx (p - q)x^{p+q}\\).\nMethod: Put \\(x = 1 + h\\), \\(h\\) small. By the binomial theorem \\((1 + h)^{n} \\approx 1 + nh\\) when \\(h^{2}\\) is neglected. Expand both sides and show they give the same expression in \\(h\\).",
+              "Left side\n\\[px^{p} - qx^{q} = p(1 + h)^{p} - q(1 + h)^{q}\\]\n\\[\\approx p(1 + ph) - q(1 + qh)\\]\n\\[= (p - q) + (p^{2} - q^{2})h\\]\nWhy: \\((1 + h)^{p} \\approx 1 + ph\\), \\((1 + h)^{q} \\approx 1 + qh\\); then group constants and \\(h\\)-terms.",
+              "Factorise\n\\[= (p - q) + (p - q)(p + q)h\\]\n\\[= (p - q)\\left[1 + (p + q)h\\right]\\]\nWhy: \\(p^{2} - q^{2} = (p - q)(p + q)\\); take out \\(p - q\\).",
+              "Right side\n\\[(p - q)x^{p+q} = (p - q)(1 + h)^{p+q}\\]\n\\[\\approx (p - q)\\left[1 + (p + q)h\\right]\\]\nWhy: \\(1 + nh\\) with \\(n = p + q\\).",
+              "Compare\n\\[px^{p} - qx^{q} \\approx (p - q)x^{p+q}\\]\nWhy: Both sides reduce to the same \\((p - q)[1 + (p + q)h]\\).",
+              "Check: \\(p = 3,\\ q = 1,\\ x = 1.01\\)\n\\[3(1.01)^{3} - 1.01 = 2.080903\\]\n\\[2(1.01)^{4} = 2.081208\\]\nWhy: Equal to the size of \\(h^{2} = 0.0001\\) terms, as expected."
+            ],
+            "final_answer": "\\(px^{p} - qx^{q} \\approx (p - q)x^{p+q}\\) when \\(x\\) is very nearly 1. Hence proved."
+          }
+        ]
+      }
+    }
+  ]
+}

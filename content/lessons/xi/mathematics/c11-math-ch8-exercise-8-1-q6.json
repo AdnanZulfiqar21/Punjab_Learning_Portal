@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 154,
+          "pdf_to": 154,
+          "note": "Exercise 8.1, Question 6: book page 149 (PDF 154); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. [Prove by mathematical induction:] \\(4^n > 3^n + 2^{n-1}\\) for integral values of \\(n \\ge 2\\).",
+            "explanation": "An inequality that starts at \\(n = 2\\), so we use extended induction with base case \\(n = 2\\).\n(For \\(n = 1\\) both sides are 4, so \"\\(>\\)\" fails there.)\nPlan: multiply the hypothesis by 4, then compare each piece with \\(3^{k+1}\\) and \\(2^k\\).",
+            "steps": [
+              "Given: \\(S(n): 4^n > 3^n + 2^{n-1}\\).\nTo prove: \\(S(n)\\) is true for every integer \\(n \\ge 2\\).\nMethod: Extended mathematical induction: check \\(S(2)\\); assume \\(S(k)\\), \\(k \\ge 2\\); prove \\(S(k + 1)\\).",
+              "Base case: put \\(n = 2\\)\n\\[4^2 = 16\\]\n\\[3^2 + 2^1 = 9 + 2 = 11\\]\n\\[16 > 11\\]\nSo \\(S(2)\\) is true.\nWhy: Direct calculation.",
+              "Induction hypothesis: assume \\(S(k)\\), \\(k \\ge 2\\)\n\\[4^k > 3^k + 2^{k-1} \\quad (A)\\]\nWhy: We suppose the inequality holds for some integer \\(k \\ge 2\\).",
+              "Target \\(S(k + 1)\\)\n\\[4^{k+1} > 3^{k+1} + 2^k\\]\nWhy: Put \\(n = k + 1\\): \\(2^{(k+1)-1} = 2^k\\).",
+              "Inductive step: multiply (A) by 4\n\\[4^{k+1} = 4 \\cdot 4^k\\]\n\\[> 4 \\cdot 3^k + 4 \\cdot 2^{k-1}\\]\n\\[= 4 \\cdot 3^k + 2^{k+1}\\]\nWhy: 4 is positive, so the sign \\(>\\) stays. \\(4 \\cdot 2^{k-1} = 2^2 \\cdot 2^{k-1} = 2^{k+1}\\).",
+              "Compare each piece with the target\n\\[4 \\cdot 3^k > 3 \\cdot 3^k = 3^{k+1}\\]\n\\[2^{k+1} = 2 \\cdot 2^k > 2^k\\]\nWhy: Four copies of \\(3^k\\) are more than three copies; double \\(2^k\\) is more than \\(2^k\\).",
+              "Join the results\n\\[4^{k+1} > 4 \\cdot 3^k + 2^{k+1}\\]\n\\[> 3^{k+1} + 2^k\\]\nSo \\(S(k + 1)\\) is true.\nWhy: Adding two bigger pieces gives a bigger total.",
+              "Conclusion\n\\(S(2)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\) for \\(k \\ge 2\\). By the principle of extended mathematical induction, \\(4^n > 3^n + 2^{n-1}\\) for every integer \\(n \\ge 2\\).\nWhy: Both conditions of the principle hold.",
+              "Check: \\(n = 3\\)\n\\[4^3 = 64\\]\n\\[3^3 + 2^2 = 27 + 4 = 31,\\quad 64 > 31 \\;\\checkmark\\]\nWhy: The inequality holds."
+            ],
+            "final_answer": "Hence proved: \\(4^n > 3^n + 2^{n-1}\\) for every integer \\(n \\ge 2\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-2-Q10",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-2-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 134,
+          "pdf_to": 134,
+          "note": "Exercise 7.2, Question 10: book p.129 (PDF 134). Answer key PDF 306 (book p.301). Solution book PDF 633-657 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10(a)",
+            "prompt": "10 (a) In how many ways can a set of 4 different blue pens, 3 different red pens and 6 black pens be placed in a rectangular form rack with a space for 10 pens if: All the pens are placed without any restriction.",
+            "explanation": "Different pens go into places on a rack; order matters.\nThe pens total \\(4 + 3 + 6 = 13\\) but the rack is printed with 10 spaces: see the Book correction below. As in the answer key, we take 13 spaces and all pens different.\nPlan: no condition, so arrange all 13 pens: \\(13!\\).",
+            "steps": [
+              "Given: 4 blue, 3 red, 6 black pens, all treated as different; the rack is taken to have 13 spaces (see the correction).\nTo find: arrangements with no restriction.\nMethod: Arranging all \\(n\\) different objects gives \\(n!\\).",
+              "Count the pens\n\\[4 + 3 + 6 = 13\\]\nWhy: All the pens are to be placed, so we need 13 places.",
+              "Arrange them\n\\[13! = 6227020800\\]\nWhy: 13 different pens in 13 places; \\(13!\\) was worked out in Question 5(i).",
+              "Check\nBox method: 13, 12, 11, ..., 1 choices for the 13 places; the product is \\(13!\\) \\(\\checkmark\\)\nWhy: Each pen is used once."
+            ],
+            "final_answer": "6,227,020,800 ways (rack taken with 13 spaces)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The question prints \"a space for 10 pens\", but there are \\(4 + 3 + 6 = 13\\) pens, so all of them cannot be placed, and parts (b) and (c) need every pen on the rack. The answer key (\\(13!\\), 622,080 and 239,500,800) treats the rack as having 13 spaces and all 13 pens as different, so it should read \"a space for 13 pens\"; the solutions here follow that. If only 10 of the 13 different pens were placed with no restriction, part (a) would be \\({}^{13}P_{10} = 1{,}037{,}836{,}800\\) (Question 5(iii))."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10(b)",
+            "prompt": "10 (b) In how many ways can a set of 4 different blue pens, 3 different red pens and 6 black pens be placed in a rectangular form rack with a space for 10 pens if: All the pens of the same colour are placed together.",
+            "explanation": "Each colour must stay together, so each colour becomes a block.\nWe must count the arrangements.\nPlan: arrange the 3 colour blocks, then the pens inside each block, and multiply.",
+            "steps": [
+              "Given: 4 blue, 3 red, 6 black pens (all different), 13 spaces; pens of the same colour together.\nTo find: number of arrangements.\nMethod: Block method: arrangements of the blocks \\(\\times\\) arrangements inside each block.",
+              "Arrange the 3 blocks\n\\[3! = 6\\]\nWhy: Blue, red and black blocks can be put in any order, e.g. blue-red-black or black-blue-red.",
+              "Arrange inside each block\n\\[\\text{Blue: } 4! = 24\\]\n\\[\\text{Red: } 3! = 6\\]\n\\[\\text{Black: } 6! = 720\\]\nWhy: Inside a block the pens of that colour can change places among themselves.",
+              "Multiply\n\\[3! \\times 4! \\times 3! \\times 6!\\]\n\\[= 6 \\times 24 \\times 6 \\times 720\\]\n\\[= 864 \\times 720 = 622080\\]\nWhy: Fundamental principle of counting: every order of blocks goes with every inside arrangement. \\(6 \\times 24 = 144\\), \\(144 \\times 6 = 864\\).",
+              "Check\n\\[864 \\times 720 = 864 \\times 700 + 864 \\times 20\\]\n\\[= 604800 + 17280 = 622080 \\;\\checkmark\\]\nWhy: Splitting 720 makes the multiplication easy to verify."
+            ],
+            "final_answer": "622,080 ways"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10(c)",
+            "prompt": "10 (c) In how many ways can a set of 4 different blue pens, 3 different red pens and 6 black pens be placed in a rectangular form rack with a space for 10 pens if: Only the red pens are placed together.",
+            "explanation": "Only the 3 red pens must stay together; the other pens are free.\nWe must count the arrangements.\nPlan: make one red block, arrange the block with the 10 loose pens, then arrange inside the block.",
+            "steps": [
+              "Given: 4 blue, 3 red, 6 black pens (all different), 13 spaces; the red pens together.\nTo find: number of arrangements.\nMethod: Block method with one block.",
+              "Count the units\n\\[\\text{Loose pens} = 4 + 6 = 10\\]\n\\[\\text{Units} = 10 + 1 = 11\\]\nWhy: The red block moves as one unit; the blue and black pens are separate units.",
+              "Arrange the 11 units\n\\[11! = 11 \\times 10!\\]\n\\[= 11 \\times 3628800 = 39916800\\]\nWhy: 11 different units in 11 positions; \\(10!\\) is from Question 9(a).",
+              "Arrange inside the red block and multiply\n\\[3! \\times 11! = 6 \\times 39916800\\]\n\\[= 239500800\\]\nWhy: The 3 red pens can be ordered in \\(3!\\) ways inside their block.",
+              "Check\n\\[3! \\times 11! = \\dfrac{13!}{26} = \\dfrac{6227020800}{26}\\]\n\\[= 239500800 \\;\\checkmark\\]\nWhy: \\(\\frac{13!}{3! \\times 11!} = \\frac{13 \\times 12}{6} = 26\\), so dividing \\(13!\\) by 26 must give the same result."
+            ],
+            "final_answer": "239,500,800 ways"
+          }
+        ]
+      }
+    }
+  ]
+}

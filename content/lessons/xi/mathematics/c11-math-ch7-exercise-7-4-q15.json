@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-4-Q15",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-4-q15",
+      "title": "Question 15",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 144,
+          "pdf_to": 144,
+          "note": "Exercise 7.4, Question 15: book p.139 (PDF 144). Answer key PDF 306 (book p.301). Solution book PDF 675-704 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15(a)",
+            "prompt": "15 (a) A locker of a bank is locked with four letters (A-Z). How many different passwords can be generated if: (a) repetition of the alphabets is allowed",
+            "explanation": "A password is an ordered string: ABCD and DCBA are different passwords. Letters may repeat.\nWe must count 4-letter passwords from 26 letters.\nPlan: 4 places, each with 26 choices: \\(26^{4}\\).",
+            "steps": [
+              "Given: 26 letters A to Z; password of 4 letters; repetition allowed.\nTo find: the number of passwords.\nMethod: Fundamental principle of counting: fill 4 places one after another and multiply the choices.",
+              "Count the choices for each place\n\\[26 \\times 26 \\times 26 \\times 26\\]\nWhy: A letter used once can be used again, so every place still has all 26 letters.",
+              "Multiply\n\\[26^{2} = 676\\]\n\\[26^{4} = 676 \\times 676 = 456976\\]\nWhy: \\(26^{4} = (26^{2})^{2}\\).",
+              "Check\n\\[676 \\times 676 = 676 \\times 700 - 676 \\times 24\\]\n\\[= 473200 - 16224 = 456976 \\;\\checkmark\\]\nWhy: A second way of multiplying gives the same number."
+            ],
+            "final_answer": "456,976 passwords"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15(b)",
+            "prompt": "15 (b) A locker of a bank is locked with four letters (A-Z). How many different passwords can be generated if: (b) repetition of the alphabets is not allowed",
+            "explanation": "Again order matters (it is a password), but now all 4 letters must be different.\nWe must count the arrangements of 4 letters out of 26.\nPlan: \\({}^{26}P_{4} = 26 \\times 25 \\times 24 \\times 23\\).",
+            "steps": [
+              "Given: 26 letters; 4-letter password; no letter repeated.\nTo find: the number of passwords.\nMethod: Ordered and without repetition, so this is a permutation \\({}^{n}P_{r}\\) with \\(n = 26\\), \\(r = 4\\).",
+              "Count the choices place by place\n\\[26 \\times 25 \\times 24 \\times 23\\]\nWhy: Each letter used cannot be used again, so each next place has one letter fewer.",
+              "Multiply\n\\[26 \\times 25 = 650\\]\n\\[650 \\times 24 = 15600\\]\n\\[15600 \\times 23 = 358800\\]\nWhy: Multiply two at a time.",
+              "Check\n\\[{}^{26}P_{4} = \\dfrac{26!}{22!} = 26 \\cdot 25 \\cdot 24 \\cdot 23\\]\n\\[358800 < 456976 \\;\\checkmark\\]\nWhy: The formula gives the same product, and forbidding repeats must give fewer passwords than part (a)."
+            ],
+            "final_answer": "358,800 passwords"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints (i) 358,800 and (ii) 14,950. 358,800 is the answer to part (b), not (a); 14,950 \\(= {}^{26}C_{4}\\) is a combination, which is wrong for a password because the order of the letters matters. Correct: (a) \\(26^{4} = 456{,}976\\); (b) \\({}^{26}P_{4} = 358{,}800\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

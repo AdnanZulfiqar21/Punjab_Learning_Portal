@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-2-Q9",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-2-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 65,
+          "pdf_to": 65,
+          "note": "Exercise 4.2, Question 9: Values of lambda for which A and B are singular (book page 60)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9. Find the values of \\(\\lambda\\) if \\(A\\) and \\(B\\) are singular. \\(A = \\begin{bmatrix} 4 & 2 & 3 \\\\ 7 & \\lambda & 6 \\\\ 2 & 3 & 1 \\end{bmatrix}\\), \\(B = \\begin{bmatrix} -2 & 4 & 5 \\\\ 1 & -2 & 1 \\\\ 2 & \\lambda & 0 \\end{bmatrix}\\)",
+            "explanation": "A singular matrix is a square matrix whose determinant is 0.\nSo we set \\(|A| = 0\\) and \\(|B| = 0\\) and solve each for \\(\\lambda\\).\nPlan: expand each determinant (it is linear in \\(\\lambda\\)), equate to 0, solve.",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix} 4 & 2 & 3 \\\\ 7 & \\lambda & 6 \\\\ 2 & 3 & 1 \\end{bmatrix}\\), \\(B = \\begin{bmatrix} -2 & 4 & 5 \\\\ 1 & -2 & 1 \\\\ 2 & \\lambda & 0 \\end{bmatrix}\\), both singular.\nTo find: \\(\\lambda\\) for \\(A\\) and \\(\\lambda\\) for \\(B\\).\nMethod: Singular means \\(|A| = 0\\). Expand along row 1.",
+              "Expand \\(|A|\\) along row 1\n\\[|A| = 4(\\lambda - 18) - 2(7 - 12) + 3(21 - 2\\lambda)\\]\n\\[= 4\\lambda - 72 + 10 + 63 - 6\\lambda\\]\n\\[= 1 - 2\\lambda\\]\nWhy: Minors: \\(\\lambda \\cdot 1 - 6 \\cdot 3\\), \\(7 \\cdot 1 - 6 \\cdot 2\\), \\(7 \\cdot 3 - \\lambda \\cdot 2\\); signs \\(+,\\,-,\\,+\\).",
+              "Solve \\(|A| = 0\\)\n\\[1 - 2\\lambda = 0\\]\n\\[\\lambda = \\dfrac{1}{2}\\]\nWhy: \\(A\\) is singular exactly when its determinant is 0.",
+              "Expand \\(|B|\\) along row 1\n\\[|B| = -2(0 - \\lambda) - 4(0 - 2) + 5(\\lambda + 4)\\]\n\\[= 2\\lambda + 8 + 5\\lambda + 20\\]\n\\[= 7\\lambda + 28\\]\nWhy: Minors: \\((-2)(0) - (1)(\\lambda) = -\\lambda\\), \\((1)(0) - (1)(2) = -2\\), \\((1)(\\lambda) - (-2)(2) = \\lambda + 4\\).",
+              "Solve \\(|B| = 0\\)\n\\[7\\lambda + 28 = 0\\]\n\\[\\lambda = -4\\]\nWhy: \\(B\\) is singular when \\(|B| = 0\\).",
+              "Check\n\\[\\lambda = \\tfrac{1}{2}:\\ |A| = 1 - 1 = 0 \\;\\checkmark\\]\n\\[|B| = 7(-4) + 28 = 0 \\;\\checkmark\\]\nWhy: Substituting back gives a zero determinant in both cases."
+            ],
+            "final_answer": "\\(A\\) is singular for \\(\\lambda = \\frac{1}{2}\\); \\(B\\) is singular for \\(\\lambda = -4\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

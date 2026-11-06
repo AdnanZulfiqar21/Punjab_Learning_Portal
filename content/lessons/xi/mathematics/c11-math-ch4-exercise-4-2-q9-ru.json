@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-2-Q9-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-2-q9",
+      "title": "Question 9 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 65,
+          "pdf_to": 65,
+          "note": "Exercise 4.2, Question 9: Values of lambda for which A and B are singular (book page 60)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH4-EXERCISE-4-2-Q9",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9. Find the values of \\(\\lambda\\) if \\(A\\) and \\(B\\) are singular. \\(A = \\begin{bmatrix} 4 & 2 & 3 \\\\ 7 & \\lambda & 6 \\\\ 2 & 3 & 1 \\end{bmatrix}\\), \\(B = \\begin{bmatrix} -2 & 4 & 5 \\\\ 1 & -2 & 1 \\\\ 2 & \\lambda & 0 \\end{bmatrix}\\)",
+            "explanation": "Singular matrix woh square matrix hai jis ka determinant zero ho (aur is liye us ka inverse nahi hota).\nTo humein \\(|A| = 0\\) aur \\(|B| = 0\\) rakh kar \\(\\lambda\\) nikalna hai.\nPlan: dono determinants expand karein (\\(\\lambda\\) sirf ek dafa aata hai, to linear equation banegi), zero ke barabar rakhein, solve karein.",
+            "steps": [
+              "Diya gaya hai: \\(A = \\begin{bmatrix} 4 & 2 & 3 \\\\ 7 & \\lambda & 6 \\\\ 2 & 3 & 1 \\end{bmatrix}\\), \\(B = \\begin{bmatrix} -2 & 4 & 5 \\\\ 1 & -2 & 1 \\\\ 2 & \\lambda & 0 \\end{bmatrix}\\), dono singular.\nHumein find karna hai: \\(A\\) ke liye \\(\\lambda\\) aur \\(B\\) ke liye \\(\\lambda\\) (dono alag sawal hain).\nTareeqa: Singular ka matlab \\(|A| = 0\\). Row 1 ke along expansion.",
+              "\\(|A|\\) ko row 1 ke along expand karein\n\\[|A| = 4(\\lambda - 18) - 2(7 - 12) + 3(21 - 2\\lambda)\\]\n\\[= 4\\lambda - 72 + 10 + 63 - 6\\lambda\\]\n\\[= 1 - 2\\lambda\\]\nKyun: Minors: \\(\\lambda \\cdot 1 - 6 \\cdot 3 = \\lambda - 18\\), \\(7 \\cdot 1 - 6 \\cdot 2 = -5\\), \\(7 \\cdot 3 - \\lambda \\cdot 2 = 21 - 2\\lambda\\). Signs \\(+,\\,-,\\,+\\): \\(-2(-5) = +10\\). Phir \\(4\\lambda - 6\\lambda = -2\\lambda\\) aur \\(-72 + 10 + 63 = 1\\).",
+              "\\(|A| = 0\\) solve karein\n\\[1 - 2\\lambda = 0\\]\n\\[\\lambda = \\dfrac{1}{2}\\]\nKyun: \\(A\\) singular tabhi hoga jab determinant zero ho.",
+              "\\(|B|\\) ko row 1 ke along expand karein\n\\[|B| = -2(0 - \\lambda) - 4(0 - 2) + 5(\\lambda + 4)\\]\n\\[= 2\\lambda + 8 + 5\\lambda + 20\\]\n\\[= 7\\lambda + 28\\]\nKyun: Minors: \\((-2)(0) - (1)(\\lambda) = -\\lambda\\), \\((1)(0) - (1)(2) = -2\\), \\((1)(\\lambda) - (-2)(2) = \\lambda + 4\\). Entry \\(-2\\) aur minor \\(-\\lambda\\) ka product \\(+2\\lambda\\); \\(-4 \\times (-2) = +8\\).\nDhyan dein: Entry ka sign, position ka sign aur minor ka sign teeno alag hain; har term ko bracket mein likhein.",
+              "\\(|B| = 0\\) solve karein\n\\[7\\lambda + 28 = 0\\]\n\\[\\lambda = -4\\]\nKyun: 28 ko doosri taraf le ja kar 7 se divide kiya.",
+              "Tasdeeq\n\\[\\lambda = \\tfrac{1}{2}:\\ |A| = 1 - 1 = 0 \\;\\checkmark\\]\n\\[|B| = 7(-4) + 28 = 0 \\;\\checkmark\\]\nKyun: Values wapas rakhne se dono determinants zero aaye, yani dono matrices singular hain."
+            ],
+            "final_answer": "\\(A\\) singular hai jab \\(\\lambda = \\frac{1}{2}\\); \\(B\\) singular hai jab \\(\\lambda = -4\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

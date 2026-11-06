@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH1-1.2.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch1",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch1/1.2.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 11,
+          "pdf_to": 12,
+          "note": "Book p. 6-7: 1.2.1 Square Root of a Complex Number, formula (v), Example 5 with its Argand figure"
+        }
+      ],
+      "title": "1.2.1 Square Root of a Complex Number",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The square root of a complex number is another complex number that, when squared, gives the original complex number."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This is the same idea as for real numbers: 3 is a square root of 9 because \\(3^{2} = 9\\). In the same way \\(w\\) is a square root of \\(z\\) when \\(w^{2} = z\\). Every non-zero complex number has exactly two square roots, \\(w\\) and \\(-w\\). Below we derive a formula that gives them directly."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Deriving the formula"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(w = p + qi\\) be a square root of a complex number \\(z = x + iy\\), where \\(p, q, x, y \\in \\mathbb{R}\\). Then \\(w = \\sqrt{z}\\) ...(i). Taking square on both sides, we get"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[w^{2} = z\\]\n\\[(p + iq)^{2} = x + iy\\]\n\\[p^{2} + 2pqi - q^{2} = x + iy\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Equating real and imaginary parts, we have"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[x = p^{2} - q^{2} \\quad \\text{...(ii)}\\]\n\\[y = 2pq \\quad \\text{...(iii)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "We know that\n\\[(p^{2}+q^{2})^{2} = (p^{2}-q^{2})^{2} + 4p^{2}q^{2}\\]\nSubstitute \\(x = p^{2} - q^{2}\\), \\(y = 2pq\\) in the above equation, we get\n\\[(p^{2}+q^{2})^{2} = x^{2} + y^{2}\\]\n\\[\\Rightarrow p^{2} + q^{2} = \\sqrt{x^{2}+y^{2}} \\quad \\text{...(iv)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is the identity true? Expand both sides: \\((p^{2}+q^{2})^{2} = p^{4} + 2p^{2}q^{2} + q^{4}\\) and \\((p^{2}-q^{2})^{2} + 4p^{2}q^{2} = p^{4} - 2p^{2}q^{2} + q^{4} + 4p^{2}q^{2}\\), which is the same.\nWhy only the positive square root in (iv)? \\(p\\) and \\(q\\) are real, so \\(p^{2} + q^{2}\\) can never be negative."
+          },
+          {
+            "type": "paragraph",
+            "text": "From equations (ii) and (iv), we have \\(x = p^{2} - q^{2}\\) and \\(p^{2} + q^{2} = \\sqrt{x^{2}+y^{2}}\\). Adding and subtracting these two equations (the small step the book leaves out):\n\\[2p^{2} = \\sqrt{x^{2}+y^{2}} + x\\]\n\\[2q^{2} = \\sqrt{x^{2}+y^{2}} - x\\]\nSolving for the values \\(p\\) and \\(q\\), we have"
+          },
+          {
+            "type": "equation",
+            "latex": "p = \\pm\\sqrt{\\dfrac{\\sqrt{x^{2}+y^{2}}+x}{2}}",
+            "text_alt": "p equals plus or minus the square root of (square root of x squared plus y squared, plus x) over 2"
+          },
+          {
+            "type": "equation",
+            "latex": "q = \\pm\\sqrt{\\dfrac{\\sqrt{x^{2}+y^{2}}-x}{2}}",
+            "text_alt": "q equals plus or minus the square root of (square root of x squared plus y squared, minus x) over 2"
+          },
+          {
+            "type": "paragraph",
+            "text": "From equation (iii): \\(y = 2pq\\), thus we have"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "\\(y > 0\\), if \\(p\\) and \\(q\\) have the same sign",
+              "\\(y < 0\\), if \\(p\\) and \\(q\\) have opposite sign",
+              "\\(y = 0\\), if \\(p = 0\\) or \\(q = 0\\)"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Therefore, the square root of the complex number \\(z = x + iy\\) is given by"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}\\sqrt{x+iy} &= \\pm\\Big(\\sqrt{\\dfrac{\\sqrt{x^{2}+y^{2}}+x}{2}} \\\\ &\\quad + \\dfrac{iy}{|y|}\\sqrt{\\dfrac{\\sqrt{x^{2}+y^{2}}-x}{2}}\\Big)\\end{aligned}",
+            "text_alt": "square root of x plus i y equals plus or minus, open bracket, square root of (square root of x squared plus y squared, plus x) over 2, plus i y over modulus of y times square root of (square root of x squared plus y squared, minus x) over 2, close bracket"
+          },
+          {
+            "type": "paragraph",
+            "text": "or, writing \\(|z| = \\sqrt{x^{2}+y^{2}} \\ge 0\\) (the modulus of \\(z\\)),"
+          },
+          {
+            "type": "equation",
+            "latex": "\\sqrt{z} = \\pm\\left(\\sqrt{\\dfrac{|z|+x}{2}} + \\dfrac{iy}{|y|}\\sqrt{\\dfrac{|z|-x}{2}}\\right)\\quad \\text{...(v)}",
+            "text_alt": "square root of z equals plus or minus, open bracket, square root of (modulus of z plus x) over 2, plus i y over modulus of y times square root of (modulus of z minus x) over 2, close bracket, equation (v)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Equation (v) is the required formula for the square root of complex numbers."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The factor \\(\\frac{iy}{|y|}\\) is simply \\(i\\) when \\(y > 0\\) and \\(-i\\) when \\(y < 0\\). So:\nif \\(y > 0\\), the real and imaginary parts of the root have the same sign;\nif \\(y < 0\\), they have opposite signs.\nThe formula needs \\(y \\ne 0\\). If \\(y = 0\\), \\(z = x\\) is real: for \\(x > 0\\) the roots are \\(\\pm\\sqrt{x}\\), for \\(x < 0\\) they are \\(\\pm i\\sqrt{-x}\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Find the square root of complex number \\(5 + 12i\\) and also represent the square roots on an Argand diagram.",
+            "steps": [
+              "Given: \\(z = 5 + 12i\\).\nTo find: both square roots of \\(z\\), and plot them on an Argand diagram.\nMethod: use formula (v). It needs \\(x\\), \\(y\\) and \\(|z|\\); the sign of \\(y\\) tells us whether the two parts of the root have the same sign or opposite signs.",
+              "Step 1: Identify \\(x\\) and \\(y\\)\n\\[x + yi = 5 + 12i\\]\n\\[x = 5,\\quad y = 12 > 0\\]\nWhy: formula (v) is written in terms of \\(x\\) and \\(y\\). Since \\(y > 0\\), \\(\\frac{iy}{|y|} = i\\): both parts of the root have the same sign.",
+              "Step 2: Find the modulus\n\\[|z| = |5 + 12i| = \\sqrt{5^{2} + 12^{2}}\\]\n\\[= \\sqrt{25 + 144} = \\sqrt{169}\\]\n\\[|z| = 13\\]\nWhy: \\(|z|\\) appears under both square roots in formula (v).",
+              "Step 3: Real part of the root\n\\[\\sqrt{\\dfrac{|z| + x}{2}} = \\sqrt{\\dfrac{13+5}{2}}\\]\n\\[= \\sqrt{9} = 3\\]\nWhy: this is the first square root in formula (v).",
+              "Step 4: Imaginary part of the root\n\\[\\dfrac{12i}{|12|}\\sqrt{\\dfrac{13-5}{2}}\\]\n\\[= i\\sqrt{4} = 2i\\]\nWhy: \\(\\frac{12}{|12|} = 1\\), so the factor is just \\(i\\); then \\(\\sqrt{(13-5)/2} = \\sqrt{4} = 2\\).",
+              "Step 5: Write the square roots\n\\[\\sqrt{5+12i} = \\pm\\left(\\sqrt{9} + i\\sqrt{4}\\right)\\]\n\\[= \\pm(3 + 2i)\\]\nWhy: the sign \\(\\pm\\) in front gives two square roots, \\(3 + 2i\\) and \\(-3 - 2i\\); each is the negative of the other.",
+              "Step 6: Represent them on an Argand diagram\n\\(3 + 2i\\) is the point \\((3, 2)\\) in the first quadrant; \\(-3 - 2i\\) is the point \\((-3, -2)\\) in the third quadrant (see the figure below).\nWhy: on an Argand diagram the real part is measured along the \\(x\\)-axis and the imaginary part along the \\(y\\)-axis. The two square roots are always opposite each other through the origin \\(O\\).",
+              "Check:\n\\[(3 + 2i)^{2} = 9 + 12i + 4i^{2}\\]\n\\[= 9 + 12i - 4 = 5 + 12i\\]\n\\[(-3 - 2i)^{2} = (3 + 2i)^{2} = 5 + 12i\\]\nBoth squares give the original number."
+            ],
+            "answer": "The square roots of \\(5 + 12i\\) are \\(3 + 2i\\) and \\(-3 - 2i\\), i.e. \\(\\pm(3 + 2i)\\), shown at the points \\((3, 2)\\) and \\((-3, -2)\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch1-fig-ex5-square-roots",
+            "alt": "Argand diagram with axes x prime to x and y prime to y marked from minus 4 to 4. The point 3 + 2i is plotted at (3, 2) in the first quadrant and the point minus 3 minus 2i at (minus 3, minus 2) in the third quadrant.",
+            "caption": "Figure: the square roots 3 + 2i and −3 − 2i of 5 + 12i (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(w\\) is a square root of \\(z\\) if \\(w^{2} = z\\); the two square roots are \\(w\\) and \\(-w\\).\n2. Formula (v): \\(\\sqrt{z} = \\pm\\left(\\sqrt{\\frac{|z|+x}{2}} + \\frac{iy}{|y|}\\sqrt{\\frac{|z|-x}{2}}\\right)\\).\n3. The sign of \\(y\\) decides the signs: same signs for \\(y > 0\\), opposite signs for \\(y < 0\\).\n4. On an Argand diagram the two roots lie opposite each other through the origin.\n5. Always check by squaring the answer."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing only one root: there are always two, \\(\\pm\\).\n2. Ignoring the sign of \\(y\\): for \\(8 - 6i\\) the roots are \\(\\pm(3 - i)\\), not \\(\\pm(3 + i)\\).\n3. Using \\(x^{2} + y^{2}\\) instead of \\(\\sqrt{x^{2}+y^{2}}\\) inside the formula: \\(|z|\\) is a square root."
+          }
+        ]
+      }
+    }
+  ]
+}

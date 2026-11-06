@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-4-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-4-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 294,
+          "pdf_to": 294,
+          "note": "Exercise 14.4 Q2, book p.289 (PDF 294). No answer in the key (verification); all three products = 117 (sympy). Solution book PDF 1269-1270 agrees."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2 Verify that \\(\\underline{a} \\cdot \\underline{b} \\times \\underline{c} = \\underline{b} \\cdot \\underline{c} \\times \\underline{a} = \\underline{c} \\cdot \\underline{a} \\times \\underline{b}\\) if \\(\\underline{a} = 3\\underline{i} - \\underline{j} + 5\\underline{k}\\), \\(\\underline{b} = 4\\underline{i} + 3\\underline{j} - 2\\underline{k}\\) and \\(\\underline{c} = 2\\underline{i} + 5\\underline{j} + \\underline{k}\\).",
+            "explanation": "A verification question about the cyclic property of the scalar triple product.\nWe must compute all three products and see that they are equal.\nPlan: find each cross product first (the cross is always done before the dot), then dot it with the remaining vector.",
+            "steps": [
+              "Given: \\(\\underline{a} = 3\\underline{i} - \\underline{j} + 5\\underline{k}\\), \\(\\underline{b} = 4\\underline{i} + 3\\underline{j} - 2\\underline{k}\\), \\(\\underline{c} = 2\\underline{i} + 5\\underline{j} + \\underline{k}\\).\nTo verify: \\(\\underline{a} \\cdot (\\underline{b} \\times \\underline{c}) = \\underline{b} \\cdot (\\underline{c} \\times \\underline{a}) = \\underline{c} \\cdot (\\underline{a} \\times \\underline{b})\\).\nMethod: \\(\\underline{a} \\cdot \\underline{b} \\times \\underline{c}\\) means \\(\\underline{a} \\cdot (\\underline{b} \\times \\underline{c})\\): a dot of a vector with a scalar has no meaning. Use the determinant formula for each cross product.",
+              "First product: \\(\\underline{b} \\times \\underline{c}\\)\n\\[\\underline{b} \\times \\underline{c} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 4 & 3 & -2 \\\\ 2 & 5 & 1 \\end{vmatrix}\\]\n\\[= (3 + 10)\\underline{i} - (4 + 4)\\underline{j} + (20 - 6)\\underline{k}\\]\n\\[= 13\\underline{i} - 8\\underline{j} + 14\\underline{k}\\]\n\\[\\underline{a} \\cdot (\\underline{b} \\times \\underline{c}) = 39 + 8 + 70 = 117\\]\nWhy: \\((3)(13) + (-1)(-8) + (5)(14) = 39 + 8 + 70\\).",
+              "Second product: \\(\\underline{c} \\times \\underline{a}\\)\n\\[\\underline{c} \\times \\underline{a} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 2 & 5 & 1 \\\\ 3 & -1 & 5 \\end{vmatrix}\\]\n\\[= (25 + 1)\\underline{i} - (10 - 3)\\underline{j} + (-2 - 15)\\underline{k}\\]\n\\[= 26\\underline{i} - 7\\underline{j} - 17\\underline{k}\\]\n\\[\\underline{b} \\cdot (\\underline{c} \\times \\underline{a}) = 104 - 21 + 34 = 117\\]\nWhy: \\((4)(26) + (3)(-7) + (-2)(-17) = 104 - 21 + 34\\).",
+              "Third product: \\(\\underline{a} \\times \\underline{b}\\)\n\\[\\underline{a} \\times \\underline{b} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 3 & -1 & 5 \\\\ 4 & 3 & -2 \\end{vmatrix}\\]\n\\[= (2 - 15)\\underline{i} - (-6 - 20)\\underline{j} + (9 + 4)\\underline{k}\\]\n\\[= -13\\underline{i} + 26\\underline{j} + 13\\underline{k}\\]\n\\[\\underline{c} \\cdot (\\underline{a} \\times \\underline{b}) = -26 + 130 + 13 = 117\\]\nWhy: \\((2)(-13) + (5)(26) + (1)(13) = -26 + 130 + 13\\).",
+              "Compare and check\n\\[117 = 117 = 117 \\;\\checkmark\\]\n\\[\\begin{vmatrix} 3 & -1 & 5 \\\\ 4 & 3 & -2 \\\\ 2 & 5 & 1 \\end{vmatrix} = 117\\]\nWhy: All three are equal, as the cyclic property says. The single determinant \\([\\underline{a}\\ \\underline{b}\\ \\underline{c}]\\) gives the same 117, a further check."
+            ],
+            "final_answer": "Each product equals \\(117\\). Hence verified: \\(\\underline{a} \\cdot \\underline{b} \\times \\underline{c} = \\underline{b} \\cdot \\underline{c} \\times \\underline{a} = \\underline{c} \\cdot \\underline{a} \\times \\underline{b} = 117\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

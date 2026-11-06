@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.2.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.2.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 54,
+          "pdf_to": 55,
+          "note": "Book p. 49-50: 4.2.2 Subtraction of Matrices and Example 1 ((A + B)^t = A^t + B^t), whose solution continues on p. 50. Teaching notes, the extra steps of the example, Key points and Common mistake are ours."
+        }
+      ],
+      "title": "4.2.2 Subtraction of Matrices",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "If \\(A = [a_{ij}]\\) and \\(B = [b_{ij}]\\) are matrices of order \\(m \\times n\\), then we define the subtraction of \\(B\\) from \\(A\\) as"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[A - B = A + (-B)\\]\n\\[= [a_{ij}] + [-b_{ij}]\\]\n\\[= [a_{ij} + (-b_{ij})]\\]\n\\[= [a_{ij} - b_{ij}]\\]\nfor \\(i = 1, 2, 3, \\ldots, m;\\ j = 1, 2, 3, \\ldots, n\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Thus, the matrix \\(A - B\\) is formed by subtracting each entry of \\(B\\) from the corresponding entry of \\(A\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(-B\\) is the matrix whose entries are the negatives of the entries of \\(B\\) (it is \\((-1)B\\), see 4.2.3). So subtraction is just addition of \\(-B\\), and it has the same condition: \\(A\\) and \\(B\\) must have the same order. Order matters in subtraction: \\(B - A = -(A - B)\\), so in general \\(A - B \\ne B - A\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our example (not from the book):\n\\[\\begin{bmatrix}5 & 3 \\\\ 2 & 7\\end{bmatrix} - \\begin{bmatrix}1 & 4 \\\\ -2 & 0\\end{bmatrix}\\]\n\\[= \\begin{bmatrix} 5-1 & 3-4 \\\\ 2-(-2) & 7-0 \\end{bmatrix}\\]\n\\[= \\begin{bmatrix}4 & -1 \\\\ 4 & 7\\end{bmatrix}\\]\nNote \\(2 - (-2) = 4\\): subtracting a negative entry adds."
+          },
+          {
+            "type": "paragraph",
+            "text": "The book's Example 1, printed right after this definition, practises addition and transposes together."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "If \\(A = \\begin{bmatrix}1 & 0 & -1 & 2 \\\\ 3 & 1 & 2 & 5 \\\\ 0 & -2 & 1 & 6\\end{bmatrix}\\) and \\(B = \\begin{bmatrix}2 & -1 & 3 & 1 \\\\ 1 & 3 & -1 & 4 \\\\ 3 & 1 & 2 & -1\\end{bmatrix}\\), then show that \\((A + B)^{t} = A^{t} + B^{t}\\).",
+            "steps": [
+              "Given: \\(A\\) and \\(B\\), both of order \\(3 \\times 4\\).\nTo prove: \\((A + B)^{t} = A^{t} + B^{t}\\).\nMethod: work out each side separately. Left side: add first, then transpose. Right side: transpose each matrix, then add. If the two results are equal matrices, the statement is shown.",
+              "Step 1: Find \\(A + B\\)\n\\[A + B = \\begin{bmatrix}1 & 0 & -1 & 2 \\\\ 3 & 1 & 2 & 5 \\\\ 0 & -2 & 1 & 6\\end{bmatrix}\\]\n\\[+ \\begin{bmatrix}2 & -1 & 3 & 1 \\\\ 1 & 3 & -1 & 4 \\\\ 3 & 1 & 2 & -1\\end{bmatrix}\\]\nRow 1: \\(1+2,\\ 0+(-1),\\ -1+3,\\ 2+1\\)\nRow 2: \\(3+1,\\ 1+3,\\ 2+(-1),\\ 5+4\\)\nRow 3: \\(0+3,\\ -2+1,\\ 1+2,\\ 6+(-1)\\)\n\\[A + B = \\begin{bmatrix}3 & -1 & 2 & 3 \\\\ 4 & 4 & 1 & 9 \\\\ 3 & -1 & 3 & 5\\end{bmatrix}\\]\nWhy: \\(A\\) and \\(B\\) have the same order \\(3 \\times 4\\), so they are conformable for addition; we add the entries in the same positions.",
+              "Step 2: Transpose the sum\n\\[(A + B)^{t} = \\begin{bmatrix}3 & 4 & 3 \\\\ -1 & 4 & -1 \\\\ 2 & 1 & 3 \\\\ 3 & 9 & 5\\end{bmatrix} \\quad \\text{(i)}\\]\nWhy: the 1st row \\(3, -1, 2, 3\\) of \\(A + B\\) becomes the 1st column, the 2nd row the 2nd column, and the 3rd row the 3rd column. The order changes from \\(3 \\times 4\\) to \\(4 \\times 3\\).",
+              "Step 3: Transpose \\(A\\) and \\(B\\)\n\\[A^{t} = \\begin{bmatrix}1 & 3 & 0 \\\\ 0 & 1 & -2 \\\\ -1 & 2 & 1 \\\\ 2 & 5 & 6\\end{bmatrix}\\]\n\\[B^{t} = \\begin{bmatrix}2 & 1 & 3 \\\\ -1 & 3 & 1 \\\\ 3 & -1 & 2 \\\\ 1 & 4 & -1\\end{bmatrix}\\]\nWhy: the right side needs the transposes first; rows of each matrix become its columns.",
+              "Step 4: Add the transposes\nRow 1: \\(1+2,\\ 3+1,\\ 0+3\\)\nRow 2: \\(0+(-1),\\ 1+3,\\ -2+1\\)\nRow 3: \\(-1+3,\\ 2+(-1),\\ 1+2\\)\nRow 4: \\(2+1,\\ 5+4,\\ 6+(-1)\\)\n\\[A^{t} + B^{t} = \\begin{bmatrix}3 & 4 & 3 \\\\ -1 & 4 & -1 \\\\ 2 & 1 & 3 \\\\ 3 & 9 & 5\\end{bmatrix} \\quad \\text{(ii)}\\]\nWhy: \\(A^{t}\\) and \\(B^{t}\\) are both \\(4 \\times 3\\), so they can be added entry by entry.",
+              "Step 5: Compare (i) and (ii)\nThe two matrices have the same order \\(4 \\times 3\\) and every pair of corresponding entries is equal, so\n\\[(A + B)^{t} = A^{t} + B^{t}\\]\nWhy: by the definition of equal matrices (4.1).",
+              "Check: one entry by hand. Row 2, column 3 of \\((A + B)^{t}\\) is the entry in row 3, column 2 of \\(A + B\\), that is \\(-2 + 1 = -1\\). In \\(A^{t} + B^{t}\\) the same place holds \\(-2 + 1 = -1\\). They agree."
+            ],
+            "answer": "From (i) and (ii), \\((A + B)^{t} = A^{t} + B^{t}\\). Hence shown."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 1 shows for these particular matrices a rule that is true for all matrices of the same order: the transpose of a sum is the sum of the transposes. The reason: the entry in row \\(i\\), column \\(j\\) of \\((A + B)^{t}\\) is \\(a_{ji} + b_{ji}\\), and that is exactly the entry in the same place of \\(A^{t} + B^{t}\\). The same is true for a difference: \\((A - B)^{t} = A^{t} - B^{t}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(A - B = A + (-B) = [a_{ij} - b_{ij}]\\); it needs \\(A\\) and \\(B\\) of the same order.\n2. Subtract entry by entry, always \\(A\\)'s entry minus \\(B\\)'s entry.\n3. \\(A - B \\ne B - A\\) in general; \\(B - A = -(A - B)\\).\n4. \\((A + B)^{t} = A^{t} + B^{t}\\) (Example 1)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Subtracting in the wrong order (\\(b_{ij} - a_{ij}\\)), which changes every sign.\n2. Sign slips with negative entries: \\(2 - (-2) = 4\\), not 0.\n3. In Example 1, writing a row of \\(A + B\\) as a row of \\((A + B)^{t}\\) instead of as a column."
+          }
+        ]
+      }
+    }
+  ]
+}

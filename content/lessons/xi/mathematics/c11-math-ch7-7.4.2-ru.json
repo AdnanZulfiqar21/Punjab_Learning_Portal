@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-7.4.2-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/7.4.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 139,
+          "pdf_to": 142,
+          "note": "Book p. 134-137: 7.4.2 theorem nCr = nC(n-r) with proof, Note box (12C10), Example 11, permutation vs combination table, applications: cryptography (Ex 12), lottery (Ex 13), songs (Ex 14)"
+        }
+      ],
+      "title": "7.4.2 Complementary Combinations (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH7-7.4.2",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Is sabaq ka naam hai complementary combinations (aik doosre ko poora karne wale combinations). Pichle sabaq ki Example 9 mein humne dekha tha ke 8 mein se 5 phal chunna aur 8 mein se 3 phal chhorna aik hi jawab (56) deta hai. Aaj hum isi baat ko theorem ki shakal mein saabit karenge, phir dekhenge ke permutation aur combination mein kab kaun sa lagta hai, aur aakhir mein password, lottery aur gaanon wale teen dilchasp sawal hal karenge."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Theorem"
+          },
+          {
+            "type": "paragraph",
+            "text": "Saabit karein: \\({}^{n}C_{r} = {}^{n}C_{n-r}\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Proof: Agar \\(n\\) mukhtalif objects mein se hum \\(r\\) objects chun lein, to \\((n - r)\\) objects bach jate hain. Yani \\(r\\) objects ke har combination ke muqable mein \\((n - r)\\) objects ka aik combination hota hai, aur ulta bhi. Is liye \\(n\\) objects mein se \\(r\\) lene ke combinations ki tadaad, \\(n\\) objects mein se \\((n - r)\\) lene ke combinations ki tadaad ke barabar hai.\n\\[\\therefore {}^{n}C_{r} = {}^{n}C_{n-r}\\]\nFormula se bhi dekh lete hain:\n\\[{}^{n}C_{n-r} = \\dfrac{n!}{(n-r)!\\,(n-n+r)!}\\]\n\\[= \\dfrac{n!}{r!\\,(n-r)!}\\]\n\\[{}^{n}C_{n-r} = {}^{n}C_{r}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Proof ki doosri line mein kitab baayein taraf \\({}^{n}C_{n-,}\\) chhapti hai (subscript toot gaya hai). Sahi \\({}^{n}C_{n-r}\\) hai, jaisa upar likha gaya hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Formula wala qadam kyun theek hai? \\({}^{n}C_{r} = \\frac{n!}{r!\\,(n-r)!}\\) mein \\(r\\) ki jagah \\(n - r\\) rakhein. Neeche ke do factorials ban jate hain \\((n-r)!\\) aur \\((n - (n-r))! = r!\\). Wohi do factorials, bas jagah badal gayi, is liye value bhi wohi.\n    Asal idea lafzon mein: jab aap 11 mein se 8 khilari team mein lete hain, to usi waqt aap yeh bhi tay kar dete hain ke kaun se 3 bahar baithenge. \"Kaun andar\" chunna aur \"kaun bahar\" chunna aik hi faisla hai. Isi liye \\({}^{n}C_{r}\\) aur \\({}^{n}C_{n-r}\\) ko complementary combinations kehte hain: dono mil kar poora \\(n\\) bana dete hain.\nAik ghar ki misaal lein: ammi ne 5 aamon mein se 2 aap ko dene hain. Jaise hi woh 2 aam chunti hain, baqi 3 khud ba khud tay ho jate hain ke woh fridge mein jayenge. Is liye \"2 dene ke tareeqe\" aur \"3 rakhne ke tareeqe\" barabar hain: \\({}^{5}C_{2} = {}^{5}C_{3} = 10\\). Yahi theorem hai, sirf aam ki jagah \\(n\\) objects aur 2 ki jagah \\(r\\) likh dein. Jab bhi koi theorem mushkil lage, use aise chhote numbers par aazma kar dekhiye; samajh khud aa jati hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Yeh nateeja \\({}^{n}C_{r}\\) nikalne mein tab bohat kaam aata hai jab \\(r > \\frac{n}{2}\\) ho. Misaal ke taur par:\n\\[{}^{12}C_{10} = {}^{12}C_{12-10} = {}^{12}C_{2}\\]\n\\[= \\dfrac{(12)(11)}{2} = 6 \\cdot 11 = 66\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari taraf se hai. \\({}^{100}C_{98}\\) dekh kar dar lagta hai, lekin\n\\[{}^{100}C_{98} = {}^{100}C_{2} = \\dfrac{100 \\cdot 99}{2} = 4950\\]\nKyun: \\(r = 98\\) bohat bara hai, us ke liye upar 98 numbers zarb karne parte. \\(n - r = 2\\) bohat chhota hai, sirf do numbers. Usool: \\(r\\) aur \\(n - r\\) mein se jo chhota ho, wohi istemal karein.\nKhud sochiye: \\({}^{20}C_{18}\\) kitna hai? (Jawab: \\({}^{20}C_{2} = 190\\).)"
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "Find the number of the diagonals of a 6-sided figure.",
+            "steps": [
+              "Given: 6 sides wali figure, yani 6 vertices (kone), jin mein se koi teen aik line par nahin.\nTo find: is figure ke diagonals (aamne saamne konon ko milane wali lines) ki tadaad.\nMethod: koi bhi do vertices milayein to aik line segment banta hai, aur \\(PQ\\) wahi segment hai jo \\(QP\\). Yani order matter nahin karta, is liye segments ki tadaad \\({}^{6}C_{2}\\) hai. In segments mein figure ki sides bhi shaamil hain; baqi diagonals hain.",
+              "Step 1: Saare line segments ginein\n\\[{}^{6}C_{2} = \\dfrac{6!}{2!\\,4!}\\]\n\\[= \\dfrac{6 \\times 5}{2 \\times 1} = 15\\]\nKyun: har segment 6 mein se 2 vertices chunne se tay hota hai, aur dono siron ki tarteeb se koi farq nahin parta.",
+              "Step 2: Sides nikaal dein\n\\[\\text{diagonals} = 15 - 6 = 9\\]\nKyun: in 15 segments mein figure ki 6 sides bhi gini gayi hain. Diagonal woh line hai jo do aise vertices ko milaye jo aik doosre ke saath wale (parosi) na hon, is liye sides diagonals nahin hain.",
+              "Tasdeeq:\nHar vertex se \\(6 - 3 = 3\\) diagonals nikalte hain (khud se nahin, aur apne do parosiyon se nahin). \\(6 \\times 3 = 18\\), lekin har diagonal dono siron se do dafa gina gaya, is liye \\(18 \\div 2 = 9\\). Jawab wahi aaya."
+            ],
+            "answer": "6 sides wali figure ke 9 diagonals hain."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Dhyan dein",
+            "text": "Yeh tareeqa tab theek hai jab figure ke koi teen vertices aik seedhi line par na hon; warna teen points se aik hi line banti aur ginti badal jati. Aik aasan tasdeeq bhi kar lein: triangle (3 sides) mein \\({}^{3}C_{2} - 3 = 3 - 3 = 0\\) diagonals, aur yeh sach hai, triangle ka koi diagonal nahin hota. Square (4 sides) mein \\({}^{4}C_{2} - 4 = 6 - 4 = 2\\) diagonals, jo aap kaghaz par bana kar dekh sakte hain. Jab formula chhoti, jaani pehchaani shaklon par sahi jawab de, to bharosa barhta hai ke bari shaklon par bhi sahi dega."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Yahi qadam kisi bhi \\(n\\) sides wali figure ke liye aam usool dete hain:\n\\[\\text{diagonals} = {}^{n}C_{2} - n\\]\n\\[= \\dfrac{n(n-3)}{2}\\]\n\\(n = 6\\) par: \\(\\frac{6 \\cdot 3}{2} = 9\\). Imtihan mein \\({}^{n}C_{2} - n\\) wali soch likh kar dikhayein; seedha \\(\\frac{n(n-3)}{2}\\) sirf tasdeeq ke liye rakhein. Exercise 7.4 ke Question 8 mein yahi kaam 5, 8 aur 12 sides ke liye aayega."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Difference between permutation and combination"
+          },
+          {
+            "type": "table",
+            "caption": "Permutation aur combination mein farq",
+            "header": [
+              "Permutation",
+              "Combination"
+            ],
+            "rows": [
+              [
+                "Order (tarteeb) ahem hai.",
+                "Order ahem nahin."
+              ],
+              [
+                "Misaal: \\(ab\\) aur \\(ba\\) alag hain (kyun ke tarteeb matter karti hai)",
+                "Misaal: \\(ab\\) aur \\(ba\\) aik hi hain (kyun ke tarteeb matter nahin karti)"
+              ],
+              [
+                "Cheezon ko arrange karna (qatar mein lagana)",
+                "Cheezon ko select karna (chunna)"
+              ],
+              [
+                "Misaalein: mukhtalif rangon ki gendein lagana; English alphabet ke letters lagana; logon ko kursiyon par bithana",
+                "Misaalein: rang chunna; team ke members chunna; khane ki cheezein chunna"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is table ka khulasa aik line mein: permutation = lagana (arrangement), combination = chunna (selection). Agar sawal mein pehle chunna aur phir lagana dono hon, to pehle \\({}^{n}C_{r}\\) se chunein aur phir \\(r!\\) se zarb karein; yahi to \\({}^{n}P_{r}\\) hai. Neeche ki teen misaalon mein aap dekhenge ke aik hi sawal ke do hisse, aik permutation aur aik combination, kaise alag jawab dete hain."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Application of Permutations and Combinations in Cryptography"
+          },
+          {
+            "type": "example",
+            "title": "Example 12",
+            "problem": "Zain wants to generate a password for his laptop to secure the data. He can take only 6 characters to generate a password. Each character can either be an upper case letter \\((A - Z)\\) or digits from \\((0 - 9)\\).\nCan you tell how many passwords can be generated by using the above letters and digits:\n(i) If repetition of characters is not allowed\n(ii) If repetition of characters is allowed",
+            "steps": [
+              "Given: password 6 characters ka hai; har character 26 capital letters ya 10 digits mein se koi aik hai.\nTo find: kitne passwords ban sakte hain (i) jab repetition (dobara istemal) ki ijazat na ho, (ii) jab ijazat ho.\nMethod: password mein order matter karta hai: AB12CD aur BA12CD do alag passwords hain. Is liye yeh arrangement hai. Repetition ke baghair \\({}^{n}P_{r}\\); repetition ke saath har jagah par poore 36 options, is liye fundamental principle of counting.",
+              "Step 1: Characters ginein\n\\[\\text{letters} = 26,\\quad \\text{digits} = 10\\]\n\\[n = 26 + 10 = 36\\]\n\\[r = 6\\]\nKyun: \\(n\\) woh kul characters hain jo hum istemal kar sakte hain, aur \\(r\\) password ki lambai hai.",
+              "Step 2 (i): Repetition ki ijazat nahin\n\\[{}^{n}P_{r} = {}^{36}P_{6} = \\dfrac{36!}{(36-6)!} = \\dfrac{36!}{30!}\\]\n\\[= \\dfrac{36 \\cdot 35 \\cdot 34 \\cdot 33 \\cdot 32 \\cdot 31 \\cdot 30!}{30!}\\]\n\\[= 36 \\cdot 35 \\cdot 34 \\cdot 33 \\cdot 32 \\cdot 31\\]\n\\[= 1{,}402{,}410{,}240 \\text{ ways}\\]\nKyun: pehle character ke 36 options hain, doosre ke 35 (aik istemal ho chuka), teesre ke 34, aur isi tarah chhatay ke 31. Yeh bilkul \\({}^{36}P_{6}\\) hai. Bara number dekh kar ghabrayein nahin; \\(30!\\) kaat kar sirf chhe numbers zarb karne hain.",
+              "Step 3 (ii): Repetition ki ijazat hai\nFundamental principle of counting se:\n\\[36 \\times 36 \\times 36 \\times 36 \\times 36 \\times 36\\]\n\\[= 36^{6} = 2{,}176{,}782{,}336\\]\nYani repetition ki ijazat ho to \\(36^{6}\\) passwords ban sakte hain.\nKyun: jab aik character dobara aa sakta hai to chhe ki chhe jagahon par poore 36 options hain, aur yeh options zarb hote hain. Kitab inhein \"possible combinations\" kehti hai, lekin asal mein yeh arrangements hain, kyun ke password mein order matter karta hai.",
+              "Tasdeeq:\nRepetition ki ijazat dene se passwords sirf barh sakte hain, kam nahin ho sakte. Is liye (ii) ka jawab (i) se bara hona chahiye: \\(2{,}176{,}782{,}336 > 1{,}402{,}410{,}240\\). Bilkul theek."
+            ],
+            "answer": "(i) Repetition ke baghair \\(1{,}402{,}410{,}240\\) passwords; (ii) repetition ke saath \\(36^{6} = 2{,}176{,}782{,}336\\) passwords."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari taraf se aik chhoti misaal hai taake farq saaf ho jaye. Letters \\(A, B, C, D, E\\) se 3 letters ka code banana hai.\nRepetition ke baghair: pehli jagah 5, doosri 4, teesri 3 options, yani \\({}^{5}P_{3} = 5 \\times 4 \\times 3 = 60\\) codes.\nRepetition ke saath: har jagah 5 options, yani \\(5^{3} = 125\\) codes.\nKyun: repetition ki ijazat ho to \\(AAB\\), \\(CCC\\) jaise codes bhi ban jate hain jo pehli ginti mein nahin the. \\(125 - 60 = 65\\) aise codes hain jin mein koi letter dohraya gaya hai. Example 12 mein bhi bilkul yahi hua, sirf numbers bare hain.\nIs se aik aur sabaq milta hai: jitne zyada characters aur jitna lamba password, utna hi mehfooz (secure). Isi liye websites kehti hain ke password mein letters aur digits dono rakhein. Cryptography (khufia likhai ka ilm) isi ginti par chalti hai: hamla karne wale ke liye itne zyada tareeqe hon ke woh sab aazma hi na sake."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 12(ii) ke aakhir mein kitab likhti hai \"If repetition of characters is not allowed\". Hissa (ii) to woh case hai jahan repetition ki ijazat hai. Sahi jumla: \\(36^{6}\\) passwords tab bante hain jab repetition ki ijazat ho (allowed)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Application of permutations to estimate the odd of winning the lottery."
+          },
+          {
+            "type": "example",
+            "title": "Example 13",
+            "problem": "A box contains 15 cards from \\((1 - 15)\\). Danish is to select 5 cards. If all the selected cards are the first five multiples of 2 then Danish will win the game. Find Danish's chance of winning the game, when\n(i) Order is important  (ii) Order is not important",
+            "steps": [
+              "Given: box mein 1 se 15 tak 15 cards hain; Danish 5 cards nikalta hai. Woh sirf tab jeetega jab cards 2 ke pehle paanch multiples hon, yani 2, 4, 6, 8, 10.\nTo find: us ke jeetne ka chance (imkaan) (i) jab order ahem ho, (ii) jab order ahem na ho.\nMethod: chance = (jeetne wale nataij) / (kul mumkin nataij). Yahan sirf aik nateeja jeetta hai, is liye chance = 1 / (kul tareeqe). Order ahem ho to tareeqe \\({}^{n}P_{r}\\) se, order ahem na ho to \\({}^{n}C_{r}\\) se.",
+              "Step 1: \\(n\\) aur \\(r\\) pehchaanein\n\\[n = 15,\\quad r = 5\\]\nKyun: box mein 15 cards hain aur 5 nikaalne hain.",
+              "Step 2 (i): Order ahem hai\n\\[{}^{n}P_{r} = {}^{15}P_{5} = \\dfrac{15!}{(15-5)!}\\]\n\\[= \\dfrac{15!}{10!} = 15 \\cdot 14 \\cdot 13 \\cdot 12 \\cdot 11\\]\n\\[= 360{,}360 \\text{ ways}\\]\n\\[\\text{chance} = \\dfrac{1}{360{,}360} \\approx 0.000002775\\]\nKyun: jab order ginti mein ho to 5 cards nikaalne ke 360,360 barabar imkaan wale tareeqe hain, aur kitab in mein se sirf aik khaas tarteeb (2, 4, 6, 8, 10) ko jeet maanti hai.",
+              "Step 3 (ii): Order ahem nahin\n\\[{}^{n}C_{r} = {}^{15}C_{5} = \\dfrac{15!}{5!\\,(15-5)!} = \\dfrac{15!}{5!\\,10!}\\]\n\\[= \\dfrac{15 \\times 14 \\times 13 \\times 12 \\times 11 \\times 10!}{5! \\cdot 10!}\\]\n\\[= \\dfrac{15 \\times 14 \\times 13 \\times 12 \\times 11}{5 \\times 4 \\times 3 \\times 2 \\times 1}\\]\n\\[= 3003 \\text{ ways}\\]\n\\[\\text{chance} = \\dfrac{1}{3003} \\approx 0.00033\\]\nKyun: ab sirf yeh dekha jata hai ke kaun se 5 cards aaye, aur \\(\\{2, 4, 6, 8, 10\\}\\) 3003 mumkin sets mein se sirf aik hai.",
+              "Tasdeeq:\n\\(360{,}360 \\div 3003 = 120 = 5!\\). Har 5 cards ka set \\(5! = 120\\) tarteebon mein nikal sakta hai, yani \\({}^{15}P_{5} = {}^{15}C_{5} \\times 5!\\). Dono jawab aapas mein mel khate hain."
+            ],
+            "answer": "(i) Chance \\(= \\dfrac{1}{360{,}360} \\approx 0.000002775\\)  (ii) Chance \\(= \\dfrac{1}{3003} \\approx 0.00033\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Hissa (i) mein kitab sirf aik tarteeb ko jeet ginti hai. Agar 2, 4, 6, 8, 10 kisi bhi tarteeb mein aa jayein aur jeet maani jaye, to jeetne wale tareeqe \\(5! = 120\\) ho jate, aur chance \\(\\frac{120}{360{,}360} = \\frac{1}{3003}\\) ban jata, bilkul (ii) jaisa. Isi liye asli lotteries, jahan numbers ki tarteeb nahin dekhi jati, combinations se gini jati hain. Sabaq: chance bohat chhota hai, 3003 mein se sirf aik! Lottery par paise lagane se pehle yeh hisaab yaad rakhiye."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Dhyan dein",
+            "text": "Chance (probability) hamesha 0 aur 1 ke darmiyan hota hai. Agar aap ka jawab 1 se bara aa jaye to foran samajh jayein ke kahin fraction ulta likh diya hai: chance \\(= \\frac{1}{3003}\\) hai, \\(3003\\) nahin. Decimal mein badalte waqt bhi ehtiyat karein: \\(\\frac{1}{3003} \\approx 0.00033\\), yani 1 ke baad teen zero nahin balke point ke baad teen zero. Kitab ne jawab qareebi (approximate) decimal mein diye hain; fraction wala jawab bilkul durust hai, is liye imtihan mein pehle fraction likhein phir decimal."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Application of Permutation and Combination to choose different sets of songs for Certain Occasions"
+          },
+          {
+            "type": "example",
+            "title": "Example 14",
+            "problem": "On Independence Day, a DJ has a list of ten different national songs. He wants to select any five national songs for the day. Find how many ways he can select and play the songs:\n(i) If the order of playing the songs matters\n(ii) If the order of playing the songs does not matter.",
+            "steps": [
+              "Given: 10 mukhtalif qaumi naghme (national songs); in mein se 5 chunne hain.\nTo find: kitne tareeqe hain (i) jab bajane ki tarteeb matter kare, (ii) jab matter na kare.\nMethod: tarteeb matter kare to arrangement, \\({}^{n}P_{r}\\); na kare to selection, \\({}^{n}C_{r}\\). Yahan \\(n = 10\\) aur \\(r = 5\\).",
+              "Step 1 (i): Jab tarteeb matter kare\n\\[{}^{n}P_{r} = {}^{10}P_{5} = \\dfrac{10!}{(10-5)!}\\]\n\\[= \\dfrac{10!}{5!} = 10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6\\]\n\\[= 30{,}240 \\text{ ways}\\]\nYani DJ paanch naghme 30,240 mukhtalif tareeqon se baja sakta hai.\nKyun: pehla naghma 10 mein se koi bhi, doosra baqi 9 mein se, aur isi tarah. Wohi paanch naghme alag tarteeb mein bajein to programme alag ban jata hai.",
+              "Step 2 (ii): Jab tarteeb matter na kare\n\\[{}^{n}C_{r} = {}^{10}C_{5} = \\dfrac{10!}{5!\\,(10-5)!}\\]\n\\[= \\dfrac{10!}{5!\\;5!} = \\dfrac{10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6}{5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}\\]\n\\[= 252 \\text{ ways}\\]\nYani 252 mukhtalif tareeqe.\nKyun: ab sirf yeh dekhna hai ke kaun se 5 naghme chune gaye; kis tarteeb mein bajenge, is se farq nahin parta.",
+              "Tasdeeq:\n\\[252 \\times 5! = 252 \\times 120 = 30{,}240\\]\nHar 5 naghmon ka set \\(5!\\) tarteebon mein baj sakta hai, is liye \\({}^{10}P_{5} = {}^{10}C_{5} \\times 5!\\). Dono jawab aapas mein mel khate hain."
+            ],
+            "answer": "(i) 30,240 tareeqe  (ii) 252 tareeqe"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari taraf se hai. Class ke 6 students mein se 3 chunne hain.\nAgar sirf aik committee banani hai to \\({}^{6}C_{3} = 20\\) tareeqe.\nAgar unhein President, Secretary aur Treasurer banana hai to \\({}^{6}P_{3} = 120\\) tareeqe.\nKyun: committee mein sab barabar hain, is liye order matter nahin karta. Ohdon (posts) mein har aik ki jagah alag hai: Ali President aur Sara Secretary, aur Sara President aur Ali Secretary, do alag nataij hain. Rishta dekhiye: \\(120 = 20 \\times 3!\\). Har committee ke 3 log \\(3! = 6\\) tareeqon se teen ohdon par baith sakte hain. Example 14 ke dono hisson mein bhi yahi rishta tha."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "1. 8 sides wali figure ke kitne diagonals hain? (Jawab: \\({}^{8}C_{2} - 8 = 28 - 8 = 20\\).)\n2. 4 digits ka PIN, digits 0 se 9, repetition ki ijazat ke saath: kitne PIN? (Jawab: \\(10^{4} = 10000\\).) Repetition ke baghair? (Jawab: \\({}^{10}P_{4} = 5040\\).)\n3. \\({}^{15}C_{13}\\) kitna hai? (Jawab: \\({}^{15}C_{2} = 105\\).)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\({}^{n}C_{r} = {}^{n}C_{n-r}\\): \\(r\\) chunna yani \\(n - r\\) chhorna. Jab \\(r > \\frac{n}{2}\\) ho to isi se kaam aasan karein.\n2. \\(n\\) sides wali figure ke diagonals: \\({}^{n}C_{2} - n\\).\n3. Permutation = lagana (order ahem); combination = chunna (order ahem nahin).\n4. Repetition ki ijazat ho to fundamental principle of counting (\\(36^{6}\\)), \\({}^{n}P_{r}\\) nahin.\n5. \\({}^{n}P_{r} = {}^{n}C_{r} \\times r!\\): Example 13 aur 14 ke dono jawab isi rishte se jurte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Diagonals ginte waqt sides minus karna bhool jana: 15 segments hain, diagonals nahin.\n2. Repetition ki ijazat ke saath bhi \\({}^{36}P_{6}\\) laga dena. Repetition ho to har jagah poore 36 options: \\(36^{6}\\).\n3. Password ya naghmon ki tarteeb jaise sawalon mein \\({}^{n}C_{r}\\) laga dena, jahan order saaf taur par ahem hai.\n4. \\({}^{12}C_{10} = \\frac{12!}{10!}\\) likh dena: neeche \\(2!\\) reh gaya. Sab se aasan: \\({}^{12}C_{10} = {}^{12}C_{2} = 66\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

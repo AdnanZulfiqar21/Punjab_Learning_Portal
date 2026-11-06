@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-4-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-4-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 294,
+          "pdf_to": 294,
+          "note": "Exercise 14.4 Q1 (i)-(iii), book p.289 (PDF 294). Answer key PDF 312: 25, 14, 10 cubic units, all correct (sympy). Solution book PDF 1266-1268 agrees."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Find the volume of parallelepiped for which the given vectors are three edges: \\(\\underline{u} = 3\\underline{i} + 2\\underline{k}\\), \\(\\underline{v} = \\underline{i} + 2\\underline{j} + \\underline{k}\\), \\(\\underline{w} = -\\underline{j} + 4\\underline{k}\\).",
+            "explanation": "A volume question: the three vectors are the edges of a box (parallelepiped) from one corner.\nWe must find its volume.\nPlan: volume \\(= |[\\underline{u}\\ \\underline{v}\\ \\underline{w}]|\\); write the components as a 3 by 3 determinant and expand it.",
+            "steps": [
+              "Given: \\(\\underline{u} = 3\\underline{i} + 2\\underline{k}\\), \\(\\underline{v} = \\underline{i} + 2\\underline{j} + \\underline{k}\\), \\(\\underline{w} = -\\underline{j} + 4\\underline{k}\\).\nTo find: the volume \\(V\\) of the parallelepiped with edges \\(\\underline{u}, \\underline{v}, \\underline{w}\\).\nMethod: \\(V = |\\underline{u} \\cdot (\\underline{v} \\times \\underline{w})|\\) (14.4.2). In components the scalar triple product is the determinant of the three rows of components (14.4.4).",
+              "Write the components as rows\n\\[[\\underline{u}\\ \\underline{v}\\ \\underline{w}] = \\begin{vmatrix} 3 & 0 & 2 \\\\ 1 & 2 & 1 \\\\ 0 & -1 & 4 \\end{vmatrix}\\]\nWhy: Row 1 is \\(\\underline{u}\\), row 2 is \\(\\underline{v}\\), row 3 is \\(\\underline{w}\\). A missing unit vector means a 0 component.",
+              "Expand along row 1\n\\[= 3\\begin{vmatrix} 2 & 1 \\\\ -1 & 4 \\end{vmatrix}\\]\n\\[\\quad - 0\\begin{vmatrix} 1 & 1 \\\\ 0 & 4 \\end{vmatrix}\\]\n\\[\\quad + 2\\begin{vmatrix} 1 & 2 \\\\ 0 & -1 \\end{vmatrix}\\]\n\\[= 3(8 + 1) - 0 + 2(-1 - 0)\\]\n\\[= 27 - 2 = 25\\]\nWhy: Each entry of row 1 times its minor (the 2 by 2 determinant left after covering its row and column), with signs \\(+, -, +\\).",
+              "Take the absolute value\n\\[V = |25| = 25\\]\nWhy: A volume is never negative; here the triple product is already positive.",
+              "Check: expand down column 1 instead\n\\[3(8 + 1) - 1(0 \\cdot 4 - 2 \\cdot (-1)) + 0\\]\n\\[= 27 - 2 = 25 \\;\\checkmark\\]\nWhy: A determinant has the same value whichever row or column we expand along."
+            ],
+            "final_answer": "\\(V = 25\\) cubic units"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Find the volume of parallelepiped for which the given vectors are three edges: \\(\\underline{u} = \\underline{i} - 4\\underline{j} - \\underline{k}\\), \\(\\underline{v} = \\underline{i} - \\underline{j} - 2\\underline{k}\\), \\(\\underline{w} = 2\\underline{i} - 3\\underline{j} + \\underline{k}\\).",
+            "explanation": "A volume question: the three vectors are the edges of a box (parallelepiped) from one corner.\nWe must find its volume.\nPlan: volume \\(= |[\\underline{u}\\ \\underline{v}\\ \\underline{w}]|\\); write the components as a 3 by 3 determinant and expand it.",
+            "steps": [
+              "Given: \\(\\underline{u} = \\underline{i} - 4\\underline{j} - \\underline{k}\\), \\(\\underline{v} = \\underline{i} - \\underline{j} - 2\\underline{k}\\), \\(\\underline{w} = 2\\underline{i} - 3\\underline{j} + \\underline{k}\\).\nTo find: the volume \\(V\\) of the parallelepiped with edges \\(\\underline{u}, \\underline{v}, \\underline{w}\\).\nMethod: \\(V = |\\underline{u} \\cdot (\\underline{v} \\times \\underline{w})|\\) (14.4.2). In components the scalar triple product is the determinant of the three rows of components (14.4.4).",
+              "Write the components as rows\n\\[[\\underline{u}\\ \\underline{v}\\ \\underline{w}] = \\begin{vmatrix} 1 & -4 & -1 \\\\ 1 & -1 & -2 \\\\ 2 & -3 & 1 \\end{vmatrix}\\]\nWhy: Row 1 is \\(\\underline{u}\\), row 2 is \\(\\underline{v}\\), row 3 is \\(\\underline{w}\\). A missing unit vector means a 0 component.",
+              "Expand along row 1\n\\[= 1\\begin{vmatrix} -1 & -2 \\\\ -3 & 1 \\end{vmatrix}\\]\n\\[\\quad + 4\\begin{vmatrix} 1 & -2 \\\\ 2 & 1 \\end{vmatrix}\\]\n\\[\\quad - 1\\begin{vmatrix} 1 & -1 \\\\ 2 & -3 \\end{vmatrix}\\]\n\\[= 1(-1 - 6) + 4(1 + 4) - 1(-3 + 2)\\]\n\\[= -7 + 20 + 1 = 14\\]\nWhy: Each entry of row 1 times its minor (the 2 by 2 determinant left after covering its row and column), with signs \\(+, -, +\\).",
+              "Take the absolute value\n\\[V = |14| = 14\\]\nWhy: A volume is never negative; here the triple product is already positive.",
+              "Check: find \\(\\underline{v} \\times \\underline{w}\\) first, then dot with \\(\\underline{u}\\)\n\\[\\underline{v} \\times \\underline{w} = -7\\underline{i} - 5\\underline{j} - \\underline{k}\\]\n\\[\\underline{u} \\cdot (\\underline{v} \\times \\underline{w}) = -7 + 20 + 1\\]\n\\[= 14 \\;\\checkmark\\]\nWhy: This is the definition \\(\\underline{u} \\cdot (\\underline{v} \\times \\underline{w})\\) worked the long way; it agrees with the determinant."
+            ],
+            "final_answer": "\\(V = 14\\) cubic units"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Find the volume of parallelepiped for which the given vectors are three edges: \\(\\underline{u} = \\underline{i} - 2\\underline{j} + 3\\underline{k}\\), \\(\\underline{v} = 2\\underline{i} - \\underline{j} - \\underline{k}\\), \\(\\underline{w} = \\underline{j} + \\underline{k}\\).",
+            "explanation": "A volume question: the three vectors are the edges of a box (parallelepiped) from one corner.\nWe must find its volume.\nPlan: volume \\(= |[\\underline{u}\\ \\underline{v}\\ \\underline{w}]|\\); write the components as a 3 by 3 determinant and expand it.",
+            "steps": [
+              "Given: \\(\\underline{u} = \\underline{i} - 2\\underline{j} + 3\\underline{k}\\), \\(\\underline{v} = 2\\underline{i} - \\underline{j} - \\underline{k}\\), \\(\\underline{w} = \\underline{j} + \\underline{k}\\).\nTo find: the volume \\(V\\) of the parallelepiped with edges \\(\\underline{u}, \\underline{v}, \\underline{w}\\).\nMethod: \\(V = |\\underline{u} \\cdot (\\underline{v} \\times \\underline{w})|\\) (14.4.2). In components the scalar triple product is the determinant of the three rows of components (14.4.4).",
+              "Write the components as rows\n\\[[\\underline{u}\\ \\underline{v}\\ \\underline{w}] = \\begin{vmatrix} 1 & -2 & 3 \\\\ 2 & -1 & -1 \\\\ 0 & 1 & 1 \\end{vmatrix}\\]\nWhy: Row 1 is \\(\\underline{u}\\), row 2 is \\(\\underline{v}\\), row 3 is \\(\\underline{w}\\). A missing unit vector means a 0 component.",
+              "Expand along row 1\n\\[= 1\\begin{vmatrix} -1 & -1 \\\\ 1 & 1 \\end{vmatrix}\\]\n\\[\\quad + 2\\begin{vmatrix} 2 & -1 \\\\ 0 & 1 \\end{vmatrix}\\]\n\\[\\quad + 3\\begin{vmatrix} 2 & -1 \\\\ 0 & 1 \\end{vmatrix}\\]\n\\[= 1(-1 + 1) + 2(2 - 0) + 3(2 - 0)\\]\n\\[= 0 + 4 + 6 = 10\\]\nWhy: Each entry of row 1 times its minor (the 2 by 2 determinant left after covering its row and column), with signs \\(+, -, +\\).",
+              "Take the absolute value\n\\[V = |10| = 10\\]\nWhy: A volume is never negative; here the triple product is already positive.",
+              "Check: expand down column 1\n\\[1(-1 + 1) - 2((-2)(1) - 3(1)) + 0\\]\n\\[= 0 - 2(-5) = 10 \\;\\checkmark\\]\nWhy: Column 1 has a 0, so this expansion is short and gives the same value."
+            ],
+            "final_answer": "\\(V = 10\\) cubic units"
+          }
+        ]
+      }
+    }
+  ]
+}

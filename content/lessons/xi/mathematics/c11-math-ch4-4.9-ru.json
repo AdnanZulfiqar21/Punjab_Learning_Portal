@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.9-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.9",
+      "title": "4.9 System of Homogeneous Linear Equations (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 76,
+          "pdf_to": 76,
+          "note": "Book p. 71: 4.9 System of Homogeneous Linear Equations, system (i), trivial and non-trivial solution (text before 4.9.1)"
+        }
+      ],
+      "variant_of": "C11-MATH-CH4-4.9",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Pichle sabaq (4.8) mein humne aisi equations hal ki theen jin ke right-hand side par koi number tha, jaise \\(2x + y = 5\\). Ab hum ek khaas qisam ka system parhenge jis mein har equation ka right-hand side zero hota hai. Is ko homogeneous system (yani \"ek jaisi\" equations, jin mein koi constant term nahin) kehte hain. Yeh sabaq chhota hai lekin bohat ahem hai, kyun ke agle sabaq (4.9.1) aur Exercise 4.3 ke sawal isi idea par khare hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ka diya hua homogeneous linear equations ka system yeh hai:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[a_{11}x_1 + a_{12}x_2 + a_{13}x_3 = 0\\]\n\\[a_{21}x_1 + a_{22}x_2 + a_{23}x_3 = 0\\]\n\\[a_{31}x_1 + a_{32}x_2 + a_{33}x_3 = 0\\]\n\\[\\ldots\\text{(i)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh system \\(x_1 = 0, x_2 = 0\\) aur \\(x_3 = 0\\) se hamesha satisfy ho jata hai, is liye aisa system hamesha consistent hota hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Pehle lafz samajh lein. Homogeneous ka matlab hai ke har equation ke right-hand side par sirf \\(0\\) hai, koi constant term nahin. Matrix ki zabaan mein system (i) ko \\(AX = O\\) likhte hain: \\(A\\) coefficient matrix (yani \\(x_1, x_2, x_3\\) ke saath lage numbers), \\(X\\) unknowns ka column, aur \\(O\\) null column (sab zero):\n\\[A = \\begin{bmatrix}a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33}\\end{bmatrix}\\]\n\\[X = \\begin{bmatrix}x_1 \\\\ x_2 \\\\ x_3\\end{bmatrix},\\quad O = \\begin{bmatrix}0 \\\\ 0 \\\\ 0\\end{bmatrix}\\]\n\\[AX = O\\]\nConsistent ka matlab hai ke system ka kam az kam ek solution (hal) zaroor ho. Ab sochiye: agar hum har unknown ki jagah \\(0\\) rakh dein to har left-hand side \\(0\\) ban jata hai, aur right-hand side bhi \\(0\\) hai. Yani equation khud ba khud sahi ho jati hai. Is liye homogeneous system kabhi inconsistent (be-hal) nahin ho sakta.\nFarq yaad rakhiye: non-homogeneous system \\(AX = B\\), jahan \\(B \\ne O\\), kabhi kabhi inconsistent ho sakta hai (jaise \\(x + y = 1\\) aur \\(x + y = 2\\) ek saath kabhi sach nahin). Lekin homogeneous system ke saath yeh masla kabhi nahin hota."
+          },
+          {
+            "type": "paragraph",
+            "text": "Trivial Solution: Upar wale homogeneous system ka solution \\((0, 0, 0)\\) trivial solution kehlata hai.",
+            "bold": [
+              "Trivial Solution:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Non-Trivial Solution: System (i) ka trivial solution ke ilawa koi bhi aur solution non-trivial solution kehlata hai.",
+            "bold": [
+              "Non-Trivial Solution:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\"Trivial\" ka matlab hai mamooli ya zaahir (obvious). \\((0, 0, 0)\\) ko dhoondne ke liye koi mehnat nahin chahiye, woh to har homogeneous system ka solution hai hi. Is liye asal sawal yeh hota hai: kya \\((0, 0, 0)\\) hi akela solution hai, ya is ke ilawa bhi solutions hain?\nEk khoobsurat baat: agar \\((x_1, x_2, x_3)\\) ek non-trivial solution hai to \\((kx_1, kx_2, kx_3)\\) bhi har number \\(k\\) ke liye solution hai. Kyun? Kyun ke har equation ka left-hand side \\(k\\) guna ho jata hai, aur \\(k \\times 0 = 0\\) hi rehta hai. Is ka nateeja yeh hai ke homogeneous system ke ya to sirf ek solution hota hai (trivial), ya phir infinitely many (be-shumaar) solutions. Bilkul do ya teen solutions kabhi nahin hote.\nKaun sa case hai, yeh coefficient matrix ka determinant batata hai:\nagar \\(|A| \\ne 0\\) ho to \\(A^{-1}\\) maujood hai aur \\(X = A^{-1}O = O\\), yani sirf trivial solution;\nagar \\(|A| = 0\\) ho to non-trivial solutions bhi maujood hain.\nAgle sabaq 4.9.1 mein hum Gaussian elimination se saare solutions nikalna seekhenge, aur wahi test rank ki shakal mein milega."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Do variables wali do chhoti misaalein dekhiye (yeh hamari practice hai, kitab ka sawal nahin):\nPehli: \\(x + y = 0\\) aur \\(2x + 2y = 0\\). Ghor karein, doosri equation pehli ka hi double hai, yani asal mein humare paas sirf ek hi shart hai: \\(y = -x\\). Is liye har jori \\((t, -t)\\) solution hai: \\((1, -1)\\), \\((5, -5)\\), \\((-2, 2)\\). Determinant:\n\\[\\begin{vmatrix} 1 & 1 \\\\ 2 & 2 \\end{vmatrix} = 2 - 2 = 0\\]\nZero aaya, is liye non-trivial solutions mile.\nDoosri: \\(x + y = 0\\) aur \\(x - y = 0\\). Dono ko jama karein to \\(2x = 0\\), yani \\(x = 0\\), aur phir \\(y = 0\\). Determinant:\n\\[\\begin{vmatrix} 1 & 1 \\\\ 1 & -1 \\end{vmatrix} = -1 - 1 = -2\\]\nZero nahin, is liye sirf trivial solution \\((0, 0)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "System \\(x + 2y = 0\\), \\(3x + 6y = 0\\) ke bare mein bina hal kiye bataiye: sirf trivial solution hai ya non-trivial bhi?\nIshara: determinant \\(1 \\times 6 - 2 \\times 3\\) nikaaliye. (Jawab: \\(0\\), is liye non-trivial solutions hain, jaise \\((2, -1)\\). Tasdeeq: \\(2 + 2(-1) = 0\\) aur \\(6 + 6(-1) = 0\\).)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Homogeneous system mein har constant term zero hota hai: \\(AX = O\\).\n2. Yeh hamesha consistent hota hai, kyun ke \\((0, 0, 0)\\) hamesha solution hai.\n3. \\((0, 0, 0)\\) trivial solution hai; baqi har solution non-trivial.\n4. Ya sirf trivial solution, ya infinitely many solutions; beech ka koi case nahin.\n5. \\(|A| \\ne 0\\) to sirf trivial; \\(|A| = 0\\) to non-trivial solutions bhi."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Yeh kehna ke homogeneous system ka \"koi solution nahin\": kam az kam \\((0, 0, 0)\\) to hamesha hai.\n2. \\((0, 0, 0)\\) ko non-trivial kehna: non-trivial woh solution hai jis mein kam az kam ek unknown zero na ho.\n3. \\(x + y = 0,\\ x - y = 4\\) jaise system ko homogeneous samajhna: ek bhi non-zero constant ho to poora system non-homogeneous ban jata hai. Bachne ka tareeqa: pehle har equation ka right-hand side dekh lein."
+          }
+        ]
+      }
+    }
+  ]
+}

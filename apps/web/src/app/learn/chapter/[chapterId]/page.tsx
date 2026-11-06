@@ -6,7 +6,7 @@ import { Suspense } from "react";
 import type { FavouriteTopic, Lesson, ReadingPosition, StudyNote, TopicNode } from "@portal/contracts";
 import { setLessonCompleted } from "@/app/actions/lessons";
 import { LessonBlocks } from "@/components/lesson-blocks";
-import { typesetEquations } from "@/lib/typeset";
+import { typesetEquations, typesetMath } from "@/lib/typeset";
 import { LessonStartBeacon } from "@/components/lesson-start-beacon";
 import { ReadingTracker } from "@/components/reading-tracker";
 import { FavouriteButton, LessonNote, SaveFormulaButton } from "@/components/study-tools";
@@ -114,8 +114,8 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
         {topics.length === 0 ? (
           <p className="text-muted">No topics are recorded for this chapter.</p>
         ) : (
-          <Suspense fallback={<TopicList topics={topics} favourites={null} />}>
-            <Topics topics={topics} />
+          <Suspense fallback={<TopicList topics={topics} favourites={null} fold={subjectKey(bc.subject.code) === "mathematics"} />}>
+            <Topics topics={topics} foldGroups={subjectKey(bc.subject.code) === "mathematics"} />
           </Suspense>
         )}
       </section>
@@ -276,6 +276,7 @@ async function Lessons({ chapterId, topics, hidden, lang }: { chapterId: string;
                 <LessonBlocks
                   blocks={l.body.blocks as { type: string }[]}
                   typeset={typesetEquations(l.body.blocks as { type: string }[])}
+                  math={typesetMath(l.body.blocks)}
                   headingOffset={2}
                   assetUrl={(v) => `/learn/lessons/${l.id}/assets/${v}`}
                   dataSaver={dataSaver}
@@ -308,26 +309,55 @@ async function Lessons({ chapterId, topics, hidden, lang }: { chapterId: string;
 }
 
 /** Topic outline with favourite stars for a signed-in learner (STUDY-TOOLS-01). The outline itself stays public. */
-async function Topics({ topics }: { topics: TopicNode[] }) {
+async function Topics({ topics, foldGroups = false }: { topics: TopicNode[]; foldGroups?: boolean }) {
   const token = await sessionToken();
   const res = token ? await api<FavouriteTopic[]>("/v1/me/favourites", { token }) : null;
-  return <TopicList topics={topics} favourites={res?.ok ? new Set(res.data.map((f) => f.topic_id)) : null} />;
+  return <TopicList topics={topics} favourites={res?.ok ? new Set(res.data.map((f) => f.topic_id)) : null} fold={foldGroups} />;
 }
 
-function TopicList({ topics, favourites }: { topics: TopicNode[]; favourites: Set<string> | null }) {
+function TopicList({ topics, favourites, fold }: { topics: TopicNode[]; favourites: Set<string> | null; fold: boolean }) {
   return (
     <ol className="glass divide-y divide-border overflow-hidden rounded-card">
       {topics.map((t) => (
-        <TopicItem key={t.id} topic={t} favourites={favourites} />
+        <TopicItem key={t.id} topic={t} favourites={favourites} fold={fold} />
       ))}
     </ol>
   );
 }
 
+/** OUTLINE-FOLD-01: a group heading of the Mathematics outline ("Book Examples", "Exercise 1.1") over its pages. */
+function isGroup(topic: TopicNode): boolean {
+  return topic.children.length > 0 && !topic.number && /^(book examples|exercise \d)/i.test(topic.title);
+}
+
 /** Each topic opens its own lesson page. Subtopics are always listed under their topic, indented, as the book's
  * contents show them (owner, 2026-10-28: "baki ka sb topics ... kaha hain"); only bullet points fold under "Outline".
  * The contents stay plain: every number in the text colour (owner, 2026-10-28). */
-function TopicItem({ topic, favourites, depth = 0 }: { topic: TopicNode; favourites: Set<string> | null; depth?: number }) {
+function TopicItem({ topic, favourites, depth = 0, fold = false }: { topic: TopicNode; favourites: Set<string> | null; depth?: number; fold?: boolean }) {
+  // OUTLINE-FOLD-01 (owner, 2026-11-05): the Mathematics contents are long, so each "Book Examples" and "Exercise 1.1"
+  // heading is a button that shows its pages (1.1.1 …, Question 1 …) only when tapped. Other books list everything.
+  if (fold && isGroup(topic)) {
+    const count = topic.children.length;
+    const what = /^exercise/i.test(topic.title) ? (count === 1 ? "question" : "questions") : count === 1 ? "lesson" : "lessons";
+    return (
+      <li className="py-0.5">
+        <details className="group">
+          <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-lg py-1.5 font-medium text-accent hover:text-accent-strong [&::-webkit-details-marker]:hidden">
+            <Icon name="chevron-right" size={16} className="shrink-0 transition-transform duration-200 group-open:rotate-90" />
+            <span>{topic.title}</span>
+            <span className="text-sm font-normal text-muted">
+              · {count} {what}
+            </span>
+          </summary>
+          <ol className="mt-1 ml-3 border-l-2 border-border pl-2 sm:ml-6 sm:pl-3">
+            {topic.children.map((c) => (
+              <TopicItem key={c.id} topic={c} favourites={favourites} depth={depth + 1} fold={fold} />
+            ))}
+          </ol>
+        </details>
+      </li>
+    );
+  }
   const star = favourites && (
     <FavouriteButton topicId={topic.id} label={topic.number ? `${topic.number} ${topic.title}` : topic.title} initial={favourites.has(topic.id)} />
   );
@@ -359,7 +389,7 @@ function TopicItem({ topic, favourites, depth = 0 }: { topic: TopicNode; favouri
       {topic.children.length > 0 && (
         <ol className="mt-1 ml-3 border-l-2 border-border pl-2 sm:ml-15 sm:pl-3">
           {topic.children.map((c) => (
-            <TopicItem key={c.id} topic={c} favourites={favourites} depth={depth + 1} />
+            <TopicItem key={c.id} topic={c} favourites={favourites} depth={depth + 1} fold={fold} />
           ))}
         </ol>
       )}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-2-Q10",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-2-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 162,
+          "pdf_to": 162,
+          "note": "Exercise 8.2, Question 10: book p.157 (PDF 162). Answer key book p.301-302 (PDF 306-307): RHS printed 2^(n-1), correct 2^n - 1; no answer in the key. Solution book PDF 741-770 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10 Show that: \\(\\binom{n}{1} + \\binom{n}{2} + \\binom{n}{3} + \\dots + \\binom{n}{n} = 2^{n-1}\\)",
+            "explanation": "The printed right-hand side \\(2^{n-1}\\) is wrong; the true value is \\(2^n - 1\\) (see the correction below). We prove the correct statement.\nIdea: put \\(x = 1\\) in \\((1 + x)^n\\); then only the coefficients are left.\nPlan: write \\((1 + x)^n\\), put \\(x = 1\\), take away \\(\\binom{n}{0} = 1\\).",
+            "steps": [
+              "Given: the sum \\(\\binom{n}{1} + \\binom{n}{2} + \\dots + \\binom{n}{n}\\).\nTo prove: it equals \\(2^n - 1\\).\nMethod: Binomial expansion of \\((1 + x)^n\\) with the special value \\(x = 1\\).",
+              "Expand \\((1 + x)^n\\)\n\\[(1 + x)^n = \\binom{n}{0} + \\binom{n}{1}x\\]\n\\[+ \\binom{n}{2}x^2 + \\dots + \\binom{n}{n}x^n\\]\nWhy: Binomial theorem with first term 1; every power of 1 is 1, so each term is \\(\\binom{n}{r}x^r\\).",
+              "Put \\(x = 1\\)\n\\[2^n = \\binom{n}{0} + \\binom{n}{1} + \\binom{n}{2}\\]\n\\[+ \\dots + \\binom{n}{n}\\]\nWhy: The expansion is true for every \\(x\\). With \\(x = 1\\), \\(1 + x = 2\\) and every \\(x^r = 1\\). So the sum of all binomial coefficients is \\(2^n\\) (as shown in the book's deduction (iii)).",
+              "Remove the first coefficient\n\\[\\binom{n}{0} = 1\\]\n\\[\\binom{n}{1} + \\binom{n}{2} + \\dots + \\binom{n}{n} = 2^n - 1\\]\nWhy: Subtract \\(\\binom{n}{0} = 1\\) from both sides; the required sum starts from \\(\\binom{n}{1}\\).",
+              "Check with \\(n = 3\\)\n\\[\\binom{3}{1} + \\binom{3}{2} + \\binom{3}{3} = 3 + 3 + 1 = 7\\]\n\\[2^3 - 1 = 7 \\;\\checkmark\\]\n\\[2^{3-1} = 4 \\ne 7\\]\nWhy: A small case confirms \\(2^n - 1\\) and shows that the printed \\(2^{n-1}\\) does not hold."
+            ],
+            "final_answer": "Hence proved: \\(\\binom{n}{1} + \\binom{n}{2} + \\dots + \\binom{n}{n} = 2^n - 1\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the right-hand side as \\(2^{n-1}\\). This is wrong for every \\(n \\ge 2\\): for \\(n = 2\\), \\(\\binom{2}{1} + \\binom{2}{2} = 3\\), but \\(2^{2-1} = 2\\). The correct statement is \\(\\binom{n}{1} + \\binom{n}{2} + \\dots + \\binom{n}{n} = 2^n - 1\\). (The value \\(2^{n-1}\\) belongs to a different sum: \\(\\binom{n}{1} + \\binom{n}{3} + \\binom{n}{5} + \\dots = 2^{n-1}\\), the sum of the odd-placed coefficients.) The answer key gives no answer for this question."
+          }
+        ]
+      }
+    }
+  ]
+}

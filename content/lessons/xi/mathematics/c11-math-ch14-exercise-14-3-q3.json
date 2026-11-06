@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-3-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-3-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 287,
+          "pdf_to": 287,
+          "note": "Exercise 14.3, Question 3 (i)-(ii): area of triangle PQR = (1/2)|PQ x PR| (book p.282). Answer key PDF 312."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Find the area of the triangle, formed by the points \\(P\\), \\(Q\\) and \\(R\\): \\(P(2, 3, 5)\\), \\(Q(1, 2, 0)\\), \\(R(4, 1, 2)\\).",
+            "explanation": "An area question in space.\nWe must find the area of triangle \\(PQR\\).\nPlan: \\(\\underline{PQ}\\), \\(\\underline{PR}\\), their cross product, its length, then half.",
+            "steps": [
+              "Given: \\(P(2, 3, 5)\\), \\(Q(1, 2, 0)\\), \\(R(4, 1, 2)\\).\nTo find: the area of triangle \\(PQR\\).\nMethod: Two sides from the same vertex, \\(\\underline{PQ}\\) and \\(\\underline{PR}\\), span a parallelogram of area \\(|\\underline{PQ} \\times \\underline{PR}|\\); the triangle is half of it (14.3.7 (b)).",
+              "Write two sides from \\(P\\) as vectors\n\\[\\underline{PQ} = (1 - 2)\\underline{i} + (2 - 3)\\underline{j} + (0 - 5)\\underline{k}\\]\n\\[= -\\underline{i} - \\underline{j} - 5\\underline{k}\\]\n\\[\\underline{PR} = (4 - 2)\\underline{i} + (1 - 3)\\underline{j} + (2 - 5)\\underline{k}\\]\n\\[= 2\\underline{i} - 2\\underline{j} - 3\\underline{k}\\]\nWhy: A vector from a point to another is (end point) minus (starting point).",
+              "Write the determinant\n\\[\\underline{PQ} \\times \\underline{PR} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ -1 & -1 & -5 \\\\ 2 & -2 & -3 \\end{vmatrix}\\]\nWhy: Row 1 holds the unit vectors, row 2 the components of the first vector \\(\\underline{PQ}\\), row 3 those of the second \\(\\underline{PR}\\). The order of the rows follows the order of the product.",
+              "Work out the three minors\n\\[\\underline{i}\\text{ minor} = (-1)(-3) - (-5)(-2) = -7\\]\n\\[\\underline{j}\\text{ minor} = (-1)(-3) - (-5)(2) = 13\\]\n\\[\\underline{k}\\text{ minor} = (-1)(-2) - (-1)(2) = 4\\]\nWhy: For each unit vector cover its row and column; the minor is (top-left)(bottom-right) minus (top-right)(bottom-left).",
+              "Attach the signs \\(+, -, +\\)\n\\[\\underline{PQ} \\times \\underline{PR} = \\underline{i}(-7) - \\underline{j}(13) + \\underline{k}(4)\\]\n\\[= -7\\underline{i} - 13\\underline{j} + 4\\underline{k}\\]\nWhy: Expanding a determinant along row 1 uses the sign pattern \\(+, -, +\\); the middle (\\(\\underline{j}\\)) term is subtracted.",
+              "Length of the cross product\n\\[|\\underline{PQ} \\times \\underline{PR}| = \\sqrt{(-7)^2 + (-13)^2 + (4)^2}\\]\n\\[= \\sqrt{234} = 3 \\sqrt{26}\\]\nWhy: This is the area of the parallelogram on \\(\\underline{PQ}\\) and \\(\\underline{PR}\\).",
+              "Halve it\n\\[\\text{Area} = \\dfrac{1}{2}\\,|\\underline{PQ} \\times \\underline{PR}|\\]\n\\[= \\dfrac{3\\sqrt{26}}{2}\\]\nWhy: The diagonal \\(QR\\) cuts the parallelogram into two equal triangles.",
+              "Check\n\\[\\underline{PQ} \\cdot (\\underline{PQ} \\times \\underline{PR}) = (-1)(-7) + (-1)(-13) + (-5)(4)\\]\n\\[= 7 + 13 - 20 = 0\\]\nWhy: The cross product must be perpendicular to \\(\\underline{PQ}\\); the zero dot product confirms the working."
+            ],
+            "final_answer": "Area of triangle \\(PQR = \\dfrac{3\\sqrt{26}}{2}\\) square units"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Find the area of the triangle, formed by the points \\(P\\), \\(Q\\) and \\(R\\): \\(P(0, 0, 1)\\), \\(Q(2, -1, 2)\\), \\(R(-1, 3, 2)\\).",
+            "explanation": "An area question in space.\nWe must find the area of triangle \\(PQR\\).\nPlan: \\(\\underline{PQ}\\), \\(\\underline{PR}\\), their cross product, its length, then half.",
+            "steps": [
+              "Given: \\(P(0, 0, 1)\\), \\(Q(2, -1, 2)\\), \\(R(-1, 3, 2)\\).\nTo find: the area of triangle \\(PQR\\).\nMethod: Two sides from the same vertex, \\(\\underline{PQ}\\) and \\(\\underline{PR}\\), span a parallelogram of area \\(|\\underline{PQ} \\times \\underline{PR}|\\); the triangle is half of it (14.3.7 (b)).",
+              "Write two sides from \\(P\\) as vectors\n\\[\\underline{PQ} = (2 - 0)\\underline{i} + (-1 - 0)\\underline{j} + (2 - 1)\\underline{k}\\]\n\\[= 2\\underline{i} - \\underline{j} + \\underline{k}\\]\n\\[\\underline{PR} = (-1 - 0)\\underline{i} + (3 - 0)\\underline{j} + (2 - 1)\\underline{k}\\]\n\\[= -\\underline{i} + 3\\underline{j} + \\underline{k}\\]\nWhy: A vector from a point to another is (end point) minus (starting point).",
+              "Write the determinant\n\\[\\underline{PQ} \\times \\underline{PR} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 2 & -1 & 1 \\\\ -1 & 3 & 1 \\end{vmatrix}\\]\nWhy: Row 1 holds the unit vectors, row 2 the components of the first vector \\(\\underline{PQ}\\), row 3 those of the second \\(\\underline{PR}\\). The order of the rows follows the order of the product.",
+              "Work out the three minors\n\\[\\underline{i}\\text{ minor} = (-1)(1) - (1)(3) = -4\\]\n\\[\\underline{j}\\text{ minor} = (2)(1) - (1)(-1) = 3\\]\n\\[\\underline{k}\\text{ minor} = (2)(3) - (-1)(-1) = 5\\]\nWhy: For each unit vector cover its row and column; the minor is (top-left)(bottom-right) minus (top-right)(bottom-left).",
+              "Attach the signs \\(+, -, +\\)\n\\[\\underline{PQ} \\times \\underline{PR} = \\underline{i}(-4) - \\underline{j}(3) + \\underline{k}(5)\\]\n\\[= -4\\underline{i} - 3\\underline{j} + 5\\underline{k}\\]\nWhy: Expanding a determinant along row 1 uses the sign pattern \\(+, -, +\\); the middle (\\(\\underline{j}\\)) term is subtracted.",
+              "Length of the cross product\n\\[|\\underline{PQ} \\times \\underline{PR}| = \\sqrt{(-4)^2 + (-3)^2 + (5)^2}\\]\n\\[= \\sqrt{50} = 5 \\sqrt{2}\\]\nWhy: This is the area of the parallelogram on \\(\\underline{PQ}\\) and \\(\\underline{PR}\\).",
+              "Halve it\n\\[\\text{Area} = \\dfrac{1}{2}\\,|\\underline{PQ} \\times \\underline{PR}|\\]\n\\[= \\dfrac{5\\sqrt{2}}{2}\\]\nWhy: The diagonal \\(QR\\) cuts the parallelogram into two equal triangles.",
+              "Check\n\\[\\underline{PQ} \\cdot (\\underline{PQ} \\times \\underline{PR}) = (2)(-4) + (-1)(-3) + (1)(5)\\]\n\\[= -8 + 3 + 5 = 0\\]\nWhy: The cross product must be perpendicular to \\(\\underline{PQ}\\); the zero dot product confirms the working."
+            ],
+            "final_answer": "Area of triangle \\(PQR = \\dfrac{5\\sqrt{2}}{2}\\) square units"
+          }
+        ]
+      }
+    }
+  ]
+}

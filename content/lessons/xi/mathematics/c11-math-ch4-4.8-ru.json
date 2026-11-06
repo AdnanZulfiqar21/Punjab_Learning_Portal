@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.8-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.8",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 70,
+          "pdf_to": 70,
+          "note": "Book p. 65: system (i), consistent and inconsistent systems, the three methods"
+        }
+      ],
+      "title": "4.8 System of Non-Homogeneous Linear Equations (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH4-4.8",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab tak hum ne matrices ke auzaar tayyar kiye: row operations, echelon form, inverse aur rank. Ab in auzaaron ka asal istemaal shuru hota hai: teen variables wali teen equations ka system hal karna. Is page par hum dekhenge ke non-homogeneous system kya hota hai, consistent aur inconsistent ka matlab kya hai, aur system hal karne ke kaun se teen tareeqe hain. Har tareeqa agle pages (4.8.1, 4.8.2, 4.8.3) mein tafseel se aayega."
+          },
+          {
+            "type": "paragraph",
+            "text": "Teen variables mein teen linear equations, jaise:\n\\[a_1x + b_1y + c_1z = d_1\\]\n\\[a_2x + b_2y + c_2z = d_2\\]\n\\[a_3x + b_3y + c_3z = d_3 \\quad \\text{...(i)}\\]\nko variables \\(x\\), \\(y\\) aur \\(z\\) mein non-homogeneous linear equations ka system kehte hain, agar constant terms \\(d_1\\), \\(d_2\\) aur \\(d_3\\) sab ke sab zero na hon.",
+            "bold": [
+              "non-homogeneous linear equations"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\"Non-homogeneous\" ka seedha matlab: kam az kam ek equation ka dayan hissa (constant) zero nahi. Agar \\(d_1 = d_2 = d_3 = 0\\) hon to system homogeneous kehlata hai; woh Section 4.9 mein aayega.\n\"Linear\" ka matlab: har variable ki power sirf 1 hai, koi \\(x^{2}\\) ya \\(xy\\) nahi.\nMatrix ki zabaan mein system (i) yun likha jata hai: \\(AX = B\\), jahan\n\\[A = \\begin{bmatrix}a_1 & b_1 & c_1 \\\\ a_2 & b_2 & c_2 \\\\ a_3 & b_3 & c_3\\end{bmatrix}\\]\n\\[X = \\begin{bmatrix}x \\\\ y \\\\ z\\end{bmatrix},\\quad B = \\begin{bmatrix}d_1 \\\\ d_2 \\\\ d_3\\end{bmatrix}\\]\n\\(A\\) ko coefficient matrix (sirf variables ke saath wale numbers) kehte hain. \\(A\\) ke saath \\(B\\) ka column jor dein to augmented matrix (barhaya hua matrix) banta hai. Non-homogeneous ka matlab hua \\(B \\ne O\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Consistent: Linear equations ka system consistent kehlata hai agar us ka ek hi (unique) solution ho ya beshumar (infinitely many) solutions hon.",
+            "bold": [
+              "Consistent"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Inconsistent: Linear equations ka system inconsistent kehlata hai agar us ka koi solution na ho.",
+            "bold": [
+              "Inconsistent"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Teeno sooraten do variables mein dekhna sab se aasan hai, kyun ke wahan har equation ek seedhi line hai:\n\\(x + y = 2\\) aur \\(x - y = 0\\): dono lines ek point \\((1, 1)\\) par kaat-ti hain. Ek hi solution, consistent.\n\\(x + y = 2\\) aur \\(2x + 2y = 4\\): doosri equation pehli ka do guna hai, yani dono lines ek doosre ke upar hain. Line ka har point solution hai, beshumar solutions, consistent.\n\\(x + y = 2\\) aur \\(x + y = 3\\): parallel lines, kabhi nahi milti. Ek hi cheez \\(x + y\\) do alag values (2 aur 3) ke barabar nahi ho sakti. Koi solution nahi, inconsistent.\nYaad rakhiye: linear system ke kabhi theek do ya teen solutions nahi hote. Ya ek, ya beshumar, ya koi nahi. Teen variables mein bhi yahi teen sooraten hain, bas lines ki jagah planes hote hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "System \\(x + y = 5\\), \\(3x + 3y = 15\\) consistent hai ya inconsistent? Ek solution hai ya beshumar?\nJawab: doosri equation pehli ka teen guna hai, yani asal mein ek hi shart hai. \\((0, 5)\\), \\((1, 4)\\), \\((2, 3)\\) ... sab solutions hain. Beshumar solutions, is liye consistent."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ek aur baat: consistent ya inconsistent hona system ki apni khoobi hai, hal karne ke tareeqe ki nahi. Jo bhi sahi tareeqa lagayein, nateeja wahi aayega."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab hum non-homogeneous linear equations ka system in tareeqon se hal karenge:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) Reduced echelon form se",
+              "(ii) Matrix inversion method se",
+              "(iii) Cramer's rule se"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kaun sa tareeqa kab? Yeh sawal exam mein bhi kaam aata hai.\nReduced echelon form har system par chalta hai: ek solution ho, beshumar ho ya koi na ho. Saath hi yeh bhi bata deta hai ke system kis qism ka hai. Is liye yeh sab se taqatwar tareeqa hai.\nMatrix inversion aur Cramer's rule ke liye \\(|A| \\ne 0\\) zaroori hai; tab solution hamesha ek hi hota hai. \\(3 \\times 3\\) system mein, jab determinant zero na ho, yeh dono tez aur seedhe hain.\nAgar sawal khud tareeqa bata de (jaise \"use Cramer's rule\"), to wahi tareeqa istemal karein, warna number kat sakte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Non-homogeneous system: \\(AX = B\\), jahan constants \\(d_1, d_2, d_3\\) sab zero nahi.\n2. Consistent: ek solution ya beshumar solutions.\n3. Inconsistent: koi solution nahi.\n4. Teen tareeqe: reduced echelon form, matrix inversion, Cramer's rule."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \"Consistent\" ko sirf \"ek solution\" samajhna. Beshumar solutions wala system bhi consistent hai.\n2. Ek constant zero dekh kar system ko homogeneous keh dena. Homogeneous tab hai jab saare constants zero hon.\n3. \\(|A| = 0\\) hone par bhi matrix inversion ya Cramer's rule lagana. Us soorat mein \\(A^{-1}\\) mojood nahi; echelon wala tareeqa istemal karein."
+          }
+        ]
+      }
+    }
+  ]
+}

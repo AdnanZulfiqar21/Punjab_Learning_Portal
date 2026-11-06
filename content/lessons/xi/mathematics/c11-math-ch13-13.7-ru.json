@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-13.7-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/13.7",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 260,
+          "pdf_to": 262,
+          "note": "Book p. 255-257: 13.7 Application of Differentiation; introduction and five run-in headings with Examples 12-16 (marginal profit, particle motion, tank cost, investment, beam stress)"
+        }
+      ],
+      "title": "13.7 Application of Differentiation (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH13-13.7",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Bachon, ab tak hum ne derivative nikalna seekha: definition se bhi, aur rules (formulas 1 se 6) se bhi. Ab sab se dilchasp hissa aata hai: yeh derivative asal zindagi mein kis kaam aata hai? Is sabaq mein hum dekhenge ke ek hi idea (rate of change, yani tabdeeli ki raftaar) business, physics, construction, bank aur engineering ke sawalon ko kaise hal karta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab kehti hai ke hum differentiation ke concepts ko asal duniya ke masail par lagayenge, jaise: diminishing returns (ghat'te hue faide) mein profit, mahauliyati (environmental) factors, financial investments (paisa lagana), aabadi ka barhna (population growth), bimariyon ka phailna, particles ki harkat, transport mein waqt aur raftaar, structural stress (imaarat ya pul par dabao), aur construction mein lagne wala material."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Sab applications ki chaabi ek hi hai: derivative = instantaneous rate of change (bilkul usi lamhe ki tabdeeli ki raftaar). Agar koi miqdaar \\(Q\\) kisi variable \\(x\\) par depend karti hai, to \\(Q'(x)\\) batata hai ke \\(x\\) ek unit barhne par \\(Q\\) us waqt kitni tezi se badal raha hai.\nProfit \\(P(x)\\) \\(\\to\\) \\(P'(x)\\) ko marginal profit kehte hain (ek aur unit banane se kitna izafi profit).\nPosition \\(s(t)\\) \\(\\to\\) \\(s'(t)\\) velocity (raftaar) hai; velocity \\(v(t)\\) \\(\\to\\) \\(v'(t)\\) acceleration (raftaar ki tabdeeli) hai.\nValue \\(V(t)\\) \\(\\to\\) \\(V'(t)\\) batata hai ke paisa saal ba saal kitni tezi se barh raha hai.\nKoi cost \\(C(r)\\) wahan sab se kam hoti hai jahan graph neeche aana band kar ke upar jana shuru kare, yani jahan \\(C'(r) = 0\\).\nDerivative ki unit hamesha: (miqdaar ki unit) per (variable ki unit), jaise m/s, Rs per year, Pa per metre.\nMisaal: motorcycle ka speedometer bhi ek derivative dikhata hai: faasla waqt ke saath kitni tezi se badal raha hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Profits on Diminishing Returns"
+          },
+          {
+            "type": "paragraph",
+            "text": "Pehli misaal business ki hai. Ek factory jitni zyada cheezein banati hai, utna profit badalta hai. Lekin har nayi unit utna hi faida nahin deti: shuru mein zyada, phir kam. Isi ko \\\"diminishing returns\\\" (ghat'ta hua faida) kehte hain. Marginal profit yeh batata hai ke us waqt ek aur unit banane se kitna izafi faida hoga."
+          },
+          {
+            "type": "example",
+            "title": "Example 12",
+            "problem": "A company's profit function is given by \\(P(x) = 100x - 5x^{2}\\), where \\(x\\) is the number of units produced. Determine the marginal profit when \\(x = 8\\) units.",
+            "steps": [
+              "Given: \\(P(x) = 100x - 5x^{2}\\), \\(x = 8\\).\nTo find: \\(x = 8\\) par marginal profit.\nMethod: sab se pehle yeh samajhte hain ke marginal profit kya hai: profit function ka \\(x\\) ke lihaaz se derivative. Plan: pehle \\(P'(x)\\) ka formula nikaalein (formulas 3, 4 aur power rule), phir \\(x = 8\\) rakhein.",
+              "Step 1: Profit function ko differentiate karein\n\\[P'(x) = \\dfrac{d}{dx}(100x - 5x^{2})\\]\n\\[= 100 - 10x\\]\nKyun: \\(\\frac{d}{dx}(100x) = 100\\) (kyun ke \\(x\\) ka derivative 1 hai), aur \\(\\frac{d}{dx}(5x^{2}) = 5 \\cdot 2x = 10x\\). Minus sign apni jagah rehta hai.",
+              "Step 2: \\(x = 8\\) rakhein\n\\[P'(8) = 100 - 10(8)\\]\n\\[= 100 - 80 = 20\\]\nKyun: sawal 8 units par marginal profit poochta hai. Dhyan dein: pehle derivative, phir value. Agar pehle \\(x = 8\\) rakh dein to \\(P(8) = 480\\) milta hai, jo kul profit hai, marginal profit nahin.",
+              "Step 3: Matlab samjhein\n8 units banane par marginal profit 20 hai (di gayi currency mein): yani is level par ek aur unit banane se profit taqreeban 20 barhega.\nKyun: derivative ek rate hai; yahan us ki unit \\\"profit per unit\\\" hai.",
+              "Tasdeeq:\nProfit function se seedha hisaab: \\(\\frac{P(8.01) - P(7.99)}{0.02} = \\frac{480.1995 - 479.7995}{0.02} = \\frac{0.4}{0.02} = 20\\). Bilkul wahi jawab, is liye durust hai."
+            ],
+            "answer": "\\(x = 8\\) par marginal profit: \\(P'(8) = 20\\) (di gayi currency mein)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\\"Diminishing returns\\\" ka matlab is formula mein saaf nazar aata hai: \\(P'(x) = 100 - 10x\\) jaise jaise \\(x\\) barhta hai, chhota hota jata hai. \\(x = 1\\) par 90, \\(x = 8\\) par 20, aur \\(x = 10\\) par 0. Har nayi unit pichhli se kam faida deti hai.\n\\(x = 10\\) par marginal profit zero hai aur profit sab se zyada hai: \\(P(10) = 1000 - 500 = 500\\). Is ke baad \\(P'(x)\\) negative ho jata hai, yani mazeed production profit ko kam karti hai.\nKhud sochiye: \\(x = 12\\) par marginal profit kitna hai, aur is ka matlab kya hai? (Jawab: \\(100 - 120 = -20\\); ek aur unit banane se profit taqreeban 20 ghatega.)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Movement of Particles"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab physics ki taraf chalte hain. Agar kisi cheez ki position waqt ke saath badal rahi ho, to position ka derivative velocity (raftaar) hai, aur velocity ka derivative acceleration (raftaar mein tabdeeli). Yani humein do dafa differentiate karna hoga."
+          },
+          {
+            "type": "example",
+            "title": "Example 13",
+            "problem": "A particle moves along a line according to the position function \\(s(t) = 4t^{3} - 3t^{2} + 2t\\), where \\(s(t)\\) is the position and \\(t\\) is the time in seconds. Find the velocity and acceleration at \\(t = 2\\) seconds.",
+            "steps": [
+              "Given: \\(s(t) = 4t^{3} - 3t^{2} + 2t\\), \\(t = 2\\) s.\nTo find: velocity \\(v(2)\\) aur acceleration \\(a(2)\\).\nMethod: velocity position ka derivative hai, aur acceleration velocity ka derivative. Is liye: pehle \\(s\\) ko differentiate kar ke \\(v(t)\\), phir \\(v\\) ko differentiate kar ke \\(a(t)\\); har dafa \\(t = 2\\) rakhein. Yahan variable \\(t\\) hai, is liye \\(\\frac{d}{dt}\\) likhenge.",
+              "Step 1: Velocity function\n\\[v(t) = \\dfrac{d}{dt}(4t^{3} - 3t^{2} + 2t)\\]\n\\[= 12t^{2} - 6t + 2\\]\nKyun: har term par power rule: \\(4 \\cdot 3t^{2} = 12t^{2}\\), \\(3 \\cdot 2t = 6t\\), \\(2 \\cdot 1 = 2\\). Bilkul \\(x\\) wale rules, sirf variable ka naam \\(t\\) hai.",
+              "Step 2: \\(t = 2\\) rakhein\n\\[v(2) = 12(2)^{2} - 6(2) + 2\\]\n\\[= 48 - 12 + 2 = 38\\]\nYani \\(t = 2\\) par velocity 38 m/s hai.\nKyun: \\((2)^{2} = 4\\), \\(12 \\times 4 = 48\\), aur \\(6 \\times 2 = 12\\). Pehle power, phir multiplication.",
+              "Step 3: Acceleration function\n\\[a(t) = \\dfrac{d}{dt}(12t^{2} - 6t + 2)\\]\n\\[= 24t - 6\\]\nKyun: acceleration velocity ki tabdeeli ka rate hai. \\(12 \\cdot 2t = 24t\\), \\(\\frac{d}{dt}(6t) = 6\\), aur constant 2 ka derivative 0.\nDhyan dein: acceleration ke liye velocity ko differentiate karte hain, position ko dobara nahin.",
+              "Step 4: \\(t = 2\\) rakhein\n\\[a(2) = 24(2) - 6\\]\n\\[= 48 - 6 = 42\\]\nYani \\(t = 2\\) par acceleration \\(42\\ \\text{m/s}^{2}\\) hai.\nKyun: acceleration bhi usi lamhe \\(t = 2\\) par poocha gaya hai. Unit \\(\\text{m/s}^{2}\\) hai: har second mein raftaar kitne m/s barhti hai.",
+              "Tasdeeq:\nPosition function se: \\(\\frac{s(2.001) - s(1.999)}{0.002} \\approx 38.000\\), jo hamari velocity hai. Jawab sahi hai."
+            ],
+            "answer": "Velocity \\(v(2) = 38\\) m/s; acceleration \\(a(2) = 42\\ \\text{m/s}^{2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Kya yeh particle kabhi ruk jata hai? Rukne ka matlab velocity zero: \\(12t^{2} - 6t + 2 = 0\\). Is quadratic ka discriminant \\(b^{2} - 4ac = 36 - 96 = -60\\) negative hai, yani koi real \\(t\\) nahin. Is liye particle kabhi nahin rukta; us ki velocity hamesha positive rehti hai.\nAur velocity sab se kam kab hai? Jab acceleration zero ho: \\(24t - 6 = 0 \\Rightarrow t = \\frac{1}{4}\\) s. Us waqt \\(v = 12 \\cdot \\frac{1}{16} - \\frac{6}{4} + 2 = 0.75 - 1.5 + 2 = 1.25\\) m/s. Is ke baad acceleration positive hai aur raftaar barhti jati hai; isi liye \\(t = 2\\) par velocity 38 m/s tak pahunch gayi.\nSabaq: derivative sirf ek value nahin deta, poori harkat ki kahani sunata hai: kab tez, kab aahista, kab rukna."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Material Required in Construction"
+          },
+          {
+            "type": "paragraph",
+            "text": "Teesri misaal construction ki hai, aur yeh sab se aham hai kyun ke is mein hum minimum (kam se kam) cost dhoondte hain. Socho: ek tanki banani hai. Radius bara rakho to base (farsh) mehnga, radius chhota rakho to deewarein oonchi aur mehngi. Kahin beech mein ek radius aisa hai jahan kul kharcha sab se kam ho. Derivative woh jagah dhoond deta hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 14",
+            "problem": "A cylindrical tank is being constructed. The cost C to build the tank depends on the radius \\(r\\) of the base, and is given by \\(C(r) = 5000\\pi r^{2} + \\frac{100000}{r}\\), where the first term represents the cost of the base and the second term represents the cost of the walls. Find the radius that minimizes the construction cost.",
+            "steps": [
+              "Given: \\(C(r) = 5000\\pi r^{2} + \\frac{100000}{r}\\), \\(r > 0\\).\nTo find: woh radius \\(r\\) jis par cost sab se kam ho.\nMethod: cost ke graph ke sab se neeche wale point par graph ek lamhe ke liye seedha (flat) hota hai, yani wahan rate of change zero hai. Is liye \\(C'(r)\\) nikaal kar \\(C'(r) = 0\\) karein aur \\(r\\) hal karein. \\(\\frac{100000}{r}\\) ko \\(100000r^{-1}\\) likh lein taa ke power rule lag sake.",
+              "Step 1: Cost ko differentiate karein\n\\[C'(r) = \\dfrac{d}{dr}\\left(5000\\pi r^{2} + 100000r^{-1}\\right)\\]\n\\[= 10000\\pi r - \\dfrac{100000}{r^{2}}\\]\nKyun: \\(\\pi\\) ek constant number hai (taqreeban 3.1416), is liye \\(5000\\pi \\cdot 2r = 10000\\pi r\\). Aur \\(100000 \\cdot (-1)r^{-2} = -\\frac{100000}{r^{2}}\\): power \\(-1\\) neeche aayi aur power \\(-2\\) ho gayi.",
+              "Step 2: \\(C'(r) = 0\\) rakhein\n\\[10000\\pi r - \\dfrac{100000}{r^{2}} = 0\\]\nKyun: cost ko minimum karne ke liye woh radius chahiye jahan cost ghatna band kare aur barhna shuru kare.",
+              "Step 3: Dono taraf \\(r^{2}\\) se multiply karein\n\\[10000\\pi r^{3} = 100000\\]\nKyun: fraction khatam karne ke liye. \\(r > 0\\) hai, is liye \\(r^{2} \\ne 0\\) aur multiply karna jaaiz hai. \\(r \\cdot r^{2} = r^{3}\\).",
+              "Step 4: \\(r\\) hal karein\n\\[r^{3} = \\dfrac{100000}{10000\\pi} = \\dfrac{10}{\\pi}\\]\n\\[r = \\left(\\dfrac{10}{\\pi}\\right)^{1/3}\\]\n\\[r \\approx (3.1831)^{1/3} \\approx 1.471\\]\nKyun: dono taraf \\(10000\\pi\\) se divide kiya, phir dono taraf cube root (teesra jazr) liya. \\(r^{3}\\) ka cube root \\(r\\) hai.\nDhyan dein: kitab yahan \\(r^{3} = \\left(\\frac{10}{\\pi}\\right)^{1/3} \\approx 1.336\\) chhaapti hai, jo do tarah se ghalat hai (neeche \\\"Kitab ki ghalti\\\" dekhiye). Sahi jawab \\(r \\approx 1.471\\) hai.",
+              "Step 5: Pakka karein ke yeh minimum hi hai\n\\(r < 1.471\\), maslan \\(r = 1\\): \\(C'(1) = 10000\\pi - 100000 \\approx -68584 < 0\\) (cost ghat rahi hai).\n\\(r > 1.471\\), maslan \\(r = 2\\): \\(C'(2) = 20000\\pi - 25000 \\approx 37832 > 0\\) (cost barh rahi hai).\nKyun: cost pehle ghatti hai phir barhti hai, yani \\(r \\approx 1.471\\) par sab se kam hai. Kitab yeh qadam nahin dikhati, lekin \\(C'(r) = 0\\) wala point maximum bhi ho sakta hai, is liye check zaroori hai.",
+              "Tasdeeq:\n\\(1.471^{3} \\approx 3.183\\), aur \\(\\frac{10}{\\pi} \\approx 3.183\\). Barabar! Kitab ki value check karein: \\(1.336^{3} \\approx 2.385\\), jo 3.183 nahin. Is liye 1.336 ghalat hai aur 1.471 sahi."
+            ],
+            "answer": "Cost sab se kam tab hai jab \\(r = \\left(\\frac{10}{\\pi}\\right)^{1/3} \\approx 1.471\\) units."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "1. Sawal mein \\\"the cost T of the base\\\" chhapa hai; yeh T faltu hai, \\\"the cost of the base\\\" hona chahiye.\n2. Kitab \\(r^{3} - \\frac{100000}{10000\\pi} = \\frac{10}{\\pi}\\) chhaapti hai; pehla nishaan \\\"=\\\" hona chahiye: \\(r^{3} = \\frac{100000}{10000\\pi} = \\frac{10}{\\pi}\\).\n3. Kitab \\(r^{3} = \\left(\\frac{10}{\\pi}\\right)^{1/3} \\approx 1.336\\) chhaapti hai aur radius 1.336 units batati hai. Cube root lene se \\(r\\) milta hai, \\(r^{3}\\) nahin: \\(r = \\left(\\frac{10}{\\pi}\\right)^{1/3} \\approx 1.471\\). Value 1.336 asal mein \\(\\left(\\frac{10}{\\pi}\\right)^{1/4}\\) hai, jo yahan ghalat hai. Sahi minimum radius taqreeban 1.471 units hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is jawab ka ek khoobsurat matlab bhi hai. \\(r \\approx 1.471\\) par base ki cost \\(5000\\pi r^{2} \\approx 33990\\) aur deewaron ki cost \\(\\frac{100000}{r} \\approx 67981\\) hai, yani deewaron ki cost base ki cost ki taqreeban dugni hai. Yeh ittefaq nahin: \\(C'(r) = 0\\) se \\(10000\\pi r^{3} = 100000\\), yani \\(2 \\times 5000\\pi r^{2} = \\frac{100000}{r}\\).\nAmli zindagi mein engineers isi tarah sochte hain: ek cheez sasti karo to doosri mehngi ho jati hai; derivative woh santulan (balance) dhoondta hai jahan kul kharcha sab se kam ho.\nKhud sochiye: agar base ka rate dugna ho jaye (\\(10000\\pi r^{2}\\)), to naya radius bara hoga ya chhota? (Jawab: chhota, kyun ke ab \\(20000\\pi r^{3} = 100000\\), yani \\(r^{3} = \\frac{5}{\\pi}\\) aur \\(r \\approx 1.168\\).)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Financial Investments"
+          },
+          {
+            "type": "paragraph",
+            "text": "Chauthi misaal bank ki hai. Aap ne paisa bank mein rakha, aur us ki value waqt ke saath barh rahi hai. Sawal yeh hai: 10 saal baad paisa kitni tezi se barh raha hoga? Yeh \\\"tezi\\\" hi derivative hai, aur us ki unit rupay per saal hogi."
+          },
+          {
+            "type": "example",
+            "title": "Example 15",
+            "problem": "A bank offers a compound interest rate on an investment, and the value of the investment after \\(t\\) years is given by \\(V(t) = 5000(1 + 0.04t)^{2}\\). Find the rate of change of the investment value after 10 years.",
+            "steps": [
+              "Given: \\(V(t) = 5000(1 + 0.04t)^{2}\\) rupay, \\(t = 10\\) saal.\nTo find: \\(V'(10)\\), yani 10 saal baad value ke badalne ka rate.\nMethod: investment ka rate of change \\(V(t)\\) ka \\(t\\) ke lihaaz se derivative hai. Kitab bracket ke square ko seedha differentiate karti hai; hum saath mein bracket khol kar wala tareeqa bhi dikhayenge jo sirf 13.6 ke rules use karta hai.",
+              "Step 1: Differentiate karein (kitab ka tareeqa)\n\\[V'(t) = \\dfrac{d}{dt}\\left(5000(1 + 0.04t)^{2}\\right)\\]\n\\[= 5000(2)(1 + 0.04t)(0.04)\\]\n\\[= 400(1 + 0.04t)\\]\nKyun: power 2 neeche aayi, bracket ki power 1 reh gayi, aur phir bracket ke andar wale ka derivative \\(\\frac{d}{dt}(1 + 0.04t) = 0.04\\) se multiply kiya. \\(5000 \\times 2 \\times 0.04 = 400\\).\nDhyan dein: yeh \\\"bracket ki power\\\" wala rule abhi tak ke chhe formulas mein nahin aaya; agar shak ho to Step 2 wala tareeqa istemal karein.",
+              "Step 2: Wahi derivative, bracket khol kar\n\\[V(t) = 5000(1 + 0.08t + 0.0016t^{2})\\]\n\\[= 5000 + 400t + 8t^{2}\\]\n\\[V'(t) = 400 + 16t = 400(1 + 0.04t)\\]\nKyun: \\((1 + 0.04t)^{2} = 1 + 2(0.04t) + (0.04t)^{2} = 1 + 0.08t + 0.0016t^{2}\\). Phir formulas 1, 3, 4 aur power rule. Dono tareeqon se ek hi \\(V'(t)\\) aaya, is se kitab ke qadam par bhi bharosa ho gaya.",
+              "Step 3: \\(t = 10\\) rakhein\n\\[V'(10) = 400(1 + 0.04 \\times 10)\\]\n\\[= 400(1 + 0.40) = 400 \\times 1.4\\]\n\\[= 560\\]\nKyun: rate 10 saal baad poocha gaya hai. Unit: rupay per saal.",
+              "Tasdeeq:\n\\(V'(t) = 400 + 16t\\) se: \\(V'(10) = 400 + 160 = 560\\). Aur \\(\\frac{V(10.01) - V(9.99)}{0.02}\\) bhi bilkul 560 deta hai, kyun ke \\(V\\) quadratic hai."
+            ],
+            "answer": "10 saal baad investment Rs. 560 per saal ki raftaar se barh rahi hai (\\(V'(10) = 560\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Rate waqt ke saath barhta kyun hai? \\(V'(t) = 400 + 16t\\) mein \\(t\\) barhne par rate barhta hai: shuru mein Rs. 400 per saal, 10 saal baad Rs. 560 per saal. Yani paisa tez se tez tar barh raha hai, kyun ke barhne wali raqam par bhi munafa lagta hai.\nKhud sochiye: 20 saal baad rate kitna hoga? (Jawab: \\(400 + 16 \\times 20 = 720\\) rupay per saal.)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Structural Stress"
+          },
+          {
+            "type": "paragraph",
+            "text": "Aakhri misaal engineering ki hai. Ek beam (shehteer, jaise pul ya chhat ka sariya-concrete wala hissa) par load ki wajah se dabao (stress) parta hai, jo fixed end se faasle \\(x\\) ke saath badalta hai. Derivative batata hai ke kisi jagah par stress kitni tezi se badal raha hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 16",
+            "problem": "The stress on a beam under a varying load is modeled by \\(S(x) = 500x - 2x^{3}\\), where \\(S(x)\\) is the stress in pascals (Pa) and \\(x\\) is the distance (in meters) from the beam's fixed end. Find the rate of change of stress at \\(x = 5\\) meters.",
+            "steps": [
+              "Given: \\(S(x) = 500x - 2x^{3}\\) Pa, \\(x = 5\\) m.\nTo find: \\(S'(5)\\), yani \\(x = 5\\) m par stress ke badalne ka rate.\nMethod: stress ka rate of change \\(S(x)\\) ka \\(x\\) ke lihaaz se derivative hai. Term by term differentiate karein, phir \\(x = 5\\) rakhein.",
+              "Step 1: Differentiate karein\n\\[S'(x) = \\dfrac{d}{dx}(500x - 2x^{3})\\]\n\\[= 500 - 6x^{2}\\]\nKyun: \\(\\frac{d}{dx}(500x) = 500\\) aur \\(\\frac{d}{dx}(2x^{3}) = 2 \\cdot 3x^{2} = 6x^{2}\\). Variable \\(x\\) hai, is liye \\(\\frac{d}{dx}\\).\nDhyan dein: kitab is line mein \\\"with respect to r\\\", \\(\\frac{d}{dt}\\) aur \\(2x^{2}\\) chhaapti hai; sahi \\(x\\), \\(\\frac{d}{dx}\\) aur \\(2x^{3}\\) hai (neeche \\\"Kitab ki ghalti\\\"). Agar sach mein \\(2x^{2}\\) hota to derivative \\(500 - 4x\\) aata, \\(500 - 6x^{2}\\) nahin.",
+              "Step 2: \\(x = 5\\) rakhein\n\\[S'(5) = 500 - 6(5)^{2}\\]\n\\[= 500 - 6 \\times 25 = 500 - 150\\]\n\\[= 350\\]\nKyun: pehle \\(5^{2} = 25\\), phir \\(6 \\times 25 = 150\\). Agar pehle \\(6 \\times 5 = 30\\) kar ke square karein to \\(900\\) aayega, jo ghalat hai.",
+              "Step 3: Matlab samjhein\nYani \\(x = 5\\) m par stress 350 Pa per meter ki raftaar se barh raha hai.\nKyun: \\(S'(5) > 0\\) hai, is liye us jagah fixed end se aage barhne par stress barhta hai. Agar derivative negative hota to stress ghat raha hota.",
+              "Tasdeeq:\nFunction se seedha: \\(\\frac{S(5.001) - S(4.999)}{0.002} \\approx 350.000\\). Barabar, jawab sahi hai."
+            ],
+            "answer": "\\(S'(5) = 350\\) Pa per meter: \\(x = 5\\) m par stress 350 Pa/m ki raftaar se barh raha hai."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Hal mein kitab likhti hai \\\"the derivative of S(x) with respect to r\\\" aur \\(S'(x) - \\frac{d}{dt}(500x - 2x^{2}) = 500 - 6x^{2}\\) chhaapti hai. Sahi: \\(S(x)\\) ka \\(x\\) ke lihaaz se derivative, \\(S'(x) = \\frac{d}{dx}(500x - 2x^{3}) = 500 - 6x^{2}\\) (\\\"-\\\" ki jagah \\\"=\\\", \\(\\frac{d}{dt}\\) ki jagah \\(\\frac{d}{dx}\\), aur sawal wala \\(2x^{3}\\)). Natija \\(500 - 6x^{2}\\) aur \\(S'(5) = 350\\) sahi hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Stress ka rate har jagah ek jaisa nahin. \\(S'(x) = 500 - 6x^{2}\\) mein \\(x\\) barhne par rate kam hota jata hai: \\(x = 0\\) par 500, \\(x = 5\\) par 350, aur \\(x = \\sqrt{\\frac{500}{6}} \\approx 9.13\\) m par zero.\nIska matlab: taqreeban 9.13 m tak stress barhta hai, wahan sab se zyada hota hai, aur us ke baad ghatne lagta hai. Engineers aisi jagah ko khaas taur par mazboot banate hain, kyun ke wahan beam par sab se zyada dabao hai.\nYahi tareeqa Exercise 13.3 mein bhi kaam aayega: \\\"maximum kahan hai\\\" ka sawal ho to derivative ko zero kar ke hal karo."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Ek ball upar phenki gayi aur us ki oonchai \\(h(t) = 20t - 5t^{2}\\) meter hai (yeh hamara sawal hai, kitab ka nahin). Ball sab se ooncha kab hogi?\n\\(h'(t) = 20 - 10t\\). Sab se oonche point par ball ek lamhe ke liye ruk jati hai, yani velocity zero: \\(20 - 10t = 0 \\Rightarrow t = 2\\) s.\nOonchai: \\(h(2) = 40 - 20 = 20\\) m. Tasdeeq: \\(t = 1\\) par \\(h' = 10 > 0\\) (upar ja rahi), \\(t = 3\\) par \\(h' = -10 < 0\\) (neeche aa rahi). Sahi!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Applications mein derivative ek rate of change hai: marginal profit \\(P'(x)\\), velocity \\(s'(t)\\), acceleration \\(v'(t)\\), paise ke barhne ka rate \\(V'(t)\\), stress ka rate \\(S'(x)\\).\n2. Hamesha function ke apne variable ke lihaaz se differentiate karein: \\(S(x)\\) ke liye \\(\\frac{d}{dx}\\), \\(s(t)\\) ke liye \\(\\frac{d}{dt}\\), \\(C(r)\\) ke liye \\(\\frac{d}{dr}\\).\n3. Pehle derivative ka formula, phir di gayi value rakhein.\n4. Minimum ya maximum wahan hota hai jahan derivative zero ho; dono taraf derivative ka sign check kar ke pakka karein.\n5. Jawab hamesha unit ke saath likhein: m/s, \\(\\text{m/s}^{2}\\), Rs per year, Pa per metre; aur batayein ke miqdaar barh rahi hai (positive) ya ghat rahi hai (negative)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Differentiate karne se pehle value rakh dena: \\(P(8) = 480\\) kul profit hai, marginal profit nahin. Bachne ka tareeqa: pehle \\(P'(x)\\) likhiye, phir number.\n2. Velocity aur acceleration mein uljhan: acceleration velocity ka derivative hai, position ka nahin.\n3. \\(r^{3} = k\\) ko \\(r^{3} = k^{1/3}\\) likh dena (Example 14 mein kitab ki ghalti): cube root se seedha \\(r\\) milta hai.\n4. \\(\\pi\\) ko variable samajh lena: \\(\\pi\\) sirf ek number hai, \\(\\frac{d}{dr}(5000\\pi r^{2}) = 10000\\pi r\\).\n5. Order of operations: \\(6(5)^{2} = 6 \\times 25 = 150\\), \\(30^{2}\\) nahin.\n6. Unit ke baghair jawab likhna, ya yeh na batana ke rate positive hai ya negative."
+          }
+        ]
+      }
+    }
+  ]
+}

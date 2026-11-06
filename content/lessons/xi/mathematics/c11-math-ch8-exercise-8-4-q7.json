@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 7: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7 Find the binomial coefficient \\(\\left({}^{8}C_{3}\\right)\\) using Pascal's triangle.",
+            "explanation": "Pascal's triangle lists the binomial coefficients: row \\(n\\) is \\({}^nC_0, {}^nC_1, \\dots, {}^nC_n\\).\nPlan: build the rows from row 0 to row 8 with Pascal's rule, then read the entry in position 3 (counting from 0).",
+            "steps": [
+              "Given: \\({}^{8}C_{3}\\).\nTo find: its value from Pascal's triangle.\nMethod: Each row starts and ends with 1; every inner number is the sum of the two numbers just above it (Pascal's rule \\({}^{n}C_{r} = {}^{n-1}C_{r-1} + {}^{n-1}C_{r}\\)).",
+              "Rows 0 to 4\n\\[1\\]\n\\[1\\quad 1\\]\n\\[1\\quad 2\\quad 1\\]\n\\[1\\quad 3\\quad 3\\quad 1\\]\n\\[1\\quad 4\\quad 6\\quad 4\\quad 1\\]\nWhy: For example in row 4, \\(6 = 3 + 3\\) and \\(4 = 1 + 3\\).",
+              "Rows 5 to 7\n\\[1\\ \\ 5\\ \\ 10\\ \\ 10\\ \\ 5\\ \\ 1\\]\n\\[1\\ \\ 6\\ \\ 15\\ \\ 20\\ \\ 15\\ \\ 6\\ \\ 1\\]\n\\[1\\ \\ 7\\ \\ 21\\ \\ 35\\ \\ 35\\ \\ 21\\ \\ 7\\ \\ 1\\]\nWhy: Same rule, e.g. \\(20 = 10 + 10\\), \\(35 = 15 + 20\\).",
+              "Row 8\n\\[1\\ \\ 8\\ \\ 28\\ \\ 56\\ \\ 70\\ \\ 56\\ \\ 28\\ \\ 8\\ \\ 1\\]\nWhy: \\(8 = 1 + 7\\), \\(28 = 7 + 21\\), \\(56 = 21 + 35\\), \\(70 = 35 + 35\\).",
+              "Read position 3\n\\[{}^{8}C_0 = 1,\\ {}^{8}C_1 = 8\\]\n\\[{}^{8}C_2 = 28,\\ {}^{8}C_3 = 56\\]\nWhy: Positions are counted from 0, so the 4th number of row 8 is \\({}^{8}C_{3}\\).",
+              "Check:\n\\[{}^{8}C_3 = \\dfrac{8!}{3!\\,5!} = \\dfrac{8 \\cdot 7 \\cdot 6}{3 \\cdot 2 \\cdot 1}\\]\n\\[= \\dfrac{336}{6} = 56\\]\nWhy: The factorial formula gives the same value."
+            ],
+            "final_answer": "\\({}^{8}C_{3} = 56\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

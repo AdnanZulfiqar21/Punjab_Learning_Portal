@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-6.10",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/6.10",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 119,
+          "pdf_to": 121,
+          "note": "Book p. 114-116: 6.10 sigma notation, telescoping sum, Properties of Summation box, formulas for sum k, k^2, k^3, Examples 26-27. Derivation of (ii), table, teaching notes, key points and common mistakes are ours."
+        }
+      ],
+      "title": "6.10 Miscellaneous Series",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The Greek letter \\(\\Sigma\\) (sigma) is used to denote sums of different types. For example, the notation \\(\\sum_{i=m}^{n} a_{i}\\) is used to express the sum \\(a_{m} + a_{m+1} + a_{m+2} + \\dots + a_{n}\\) and the sum expression \\(1 + 3 + 5 + \\dots\\) to \\(n\\) terms is written as \\(\\sum_{k=1}^{n}(2k-1)\\), where \\(2k - 1\\) is the \\(k^{\\text{th}}\\) term of the sum and \\(k\\) is called the index of summation. \"1\" and \\(n\\) are called the lower limit and upper limit of summation respectively."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read \\(\\sum_{k=1}^{n}(2k-1)\\) as: \"put \\(k = 1, 2, 3, \\dots, n\\) into \\(2k - 1\\) one by one, and add the results\". With \\(k = 1, 2, 3\\) we get \\(1, 3, 5\\), so the sum is \\(1 + 3 + 5 + \\dots\\)\nThe index letter does not matter: \\(\\sum_{k=1}^{n} k\\) and \\(\\sum_{i=1}^{n} i\\) are the same sum."
+          },
+          {
+            "type": "paragraph",
+            "text": "The sum of the first \\(n\\) natural numbers, the sum of squares of the first \\(n\\) natural numbers and the sum of the cubes of the first \\(n\\) natural numbers are expressed in sigma notation as:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[1 + 2 + 3 + \\dots + n = \\sum_{k=1}^{n} k\\]\n\\[1^{2} + 2^{2} + \\dots + n^{2} = \\sum_{k=1}^{n} k^{2}\\]\n\\[1^{3} + 2^{3} + \\dots + n^{3} = \\sum_{k=1}^{n} k^{3}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "We evaluate \\(\\sum_{k=1}^{n}[k^{m} - (k-1)^{m}]\\) for any positive integer \\(m\\) and shall use this result to find out formulae for three expressions stated above."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\sum_{k=1}^{n}[k^{m} - (k-1)^{m}]\\]\n\\[= (1^{m} - 0^{m}) + (2^{m} - 1^{m})\\]\n\\[+ (3^{m} - 2^{m}) + \\dots\\]\n\\[+ [(n-1)^{m} - (n-2)^{m}]\\]\n\\[+ [n^{m} - (n-1)^{m}] = n^{m}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This is called a telescoping sum. Each bracket's second part cancels the next bracket's first part: \\(+1^{m}\\) and \\(-1^{m}\\), \\(+2^{m}\\) and \\(-2^{m}\\), and so on, like the parts of a folding telescope sliding into each other. Only \\(n^{m}\\) (from the last bracket) and \\(-0^{m} = 0\\) (from the first) survive."
+          },
+          {
+            "type": "paragraph",
+            "text": "i.e., \\(\\sum_{k=1}^{n}[(k^{m} - (k-1)^{m}] = n^{m}\\)",
+            "book_errors": [
+              "\\(\\sum_{k=1}^{n}[(k^{m} - (k-1)^{m}] = n^{m}\\)"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "If \\(m = 1\\), then \\(\\sum_{k=1}^{n}[(k^{1} - (k-1)^{1}] = n^{1}\\) i.e., \\(\\sum_{k=1}^{n} 1 = n\\)",
+            "book_errors": [
+              "\\(\\sum_{k=1}^{n}[(k^{1} - (k-1)^{1}] = n^{1}\\)"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "If \\(m = 2\\), then \\(\\sum_{k=1}^{n}[k^{2} - (k-1)^{2}] = n^{2}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In these lines (and again in the first line of the working for \\(\\sum k\\) below) the book prints an extra opening bracket, e.g. \\(\\sum_{k=1}^{n}[(k^{m} - (k-1)^{m}]\\). The brackets do not match; it should be \\(\\sum_{k=1}^{n}[k^{m} - (k-1)^{m}] = n^{m}\\). The results are correct."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is \\(\\sum_{k=1}^{n} 1 = n\\)? The term does not depend on \\(k\\), so we simply add \\(1\\) to itself \\(n\\) times: \\(1 + 1 + \\dots + 1 = n\\). In the same way \\(\\sum_{k=1}^{n} c = nc\\) for any constant \\(c\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Properties of Summation",
+            "text": "(i) \\(\\sum_{k=1}^{n}(a_{k} + b_{k}) = \\sum_{k=1}^{n} a_{k} + \\sum_{k=1}^{n} b_{k}\\)\n(ii) \\(\\sum_{k=1}^{n} \\alpha a_{k} = \\alpha \\sum_{k=1}^{n} a_{k}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Property (i): a sum of two kinds of terms can be split into two separate sums (the order of adding does not matter). Property (ii): a constant multiplier \\(\\alpha\\) common to every term can be taken outside the sigma, just as \\(3 + 6 + 9 = 3(1 + 2 + 3)\\). Together they let us break \\(\\sum(8k^{3} - 12k^{2} + 6k - 1)\\) into pieces we know."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "To Find the Formulae for the Sums"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "\\(\\sum_{k=1}^{n} k\\)",
+              "\\(\\sum_{k=1}^{n} k^{2}\\)",
+              "\\(\\sum_{k=1}^{n} k^{3}\\)"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "(i) We know that \\((k-1)^{2} = k^{2} - 2k + 1\\) and this identity can be written as:\n\\[k^{2} - (k-1)^{2} = 2k - 1 \\quad \\text{(A)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Taking summation on both sides of (A) from \\(k = 1\\) to \\(n\\), we have\n\\[\\sum_{k=1}^{n}[(k^{2} - (k-1)^{2}] = \\sum_{k=1}^{n}(2k-1)\\]\ni.e.,\n\\[n^{2} = 2\\sum_{k=1}^{n} k - n \\quad (\\because \\textstyle\\sum_{k=1}^{n} 1 = n)\\]\nor\n\\[2\\sum_{k=1}^{n} k = n^{2} + n\\]\nThus",
+            "book_errors": [
+              "\\[\\sum_{k=1}^{n}[(k^{2} - (k-1)^{2}] = \\sum_{k=1}^{n}(2k-1)\\]"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "\\sum_{k=1}^{n} k = \\dfrac{n(n+1)}{2}",
+            "text_alt": "sum of k from k equals 1 to n equals n times (n plus 1) over 2"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Left side: the telescoping result with \\(m = 2\\) gives \\(n^{2}\\). Right side: by the properties, \\(\\sum(2k - 1) = 2\\sum k - \\sum 1 = 2\\sum k - n\\). Then we solve for \\(\\sum k\\) like an ordinary equation."
+          },
+          {
+            "type": "paragraph",
+            "text": "Similarly, we can prove easily"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{(ii)}\\ \\sum_{k=1}^{n} k^{2} = \\dfrac{n(n+1)(2n+1)}{6}",
+            "text_alt": "(ii) sum of k squared from 1 to n equals n (n plus 1)(2 n plus 1) over 6"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{(iii)}\\ \\sum_{k=1}^{n} k^{3} = \\left[\\dfrac{n(n+1)}{2}\\right]^{2}",
+            "text_alt": "(iii) sum of k cubed from 1 to n equals the square of n (n plus 1) over 2"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How (ii) follows in the same way (our working): take \\(m = 3\\). Since \\(k^{3} - (k-1)^{3} = 3k^{2} - 3k + 1\\),\n\\[n^{3} = 3\\sum k^{2} - 3\\sum k + n\\]\n\\[3\\sum k^{2} = n^{3} - n + \\dfrac{3n(n+1)}{2}\\]\n\\[= \\dfrac{n(n+1)(2n+1)}{2}\\]\nso \\(\\sum k^{2} = \\frac{n(n+1)(2n+1)}{6}\\). For (iii) take \\(m = 4\\) and use \\(k^{4} - (k-1)^{4} = 4k^{3} - 6k^{2} + 4k - 1\\) with (i) and (ii).\nQuick check with \\(n = 3\\): \\(1 + 2 + 3 = 6 = \\frac{3 \\cdot 4}{2}\\); \\(1 + 4 + 9 = 14 = \\frac{3 \\cdot 4 \\cdot 7}{6}\\); \\(1 + 8 + 27 = 36 = 6^{2}\\)."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Sum",
+              "Formula",
+              "\\(n = 10\\)"
+            ],
+            "rows": [
+              [
+                "\\(\\sum k\\)",
+                "\\(\\frac{n(n+1)}{2}\\)",
+                "\\(55\\)"
+              ],
+              [
+                "\\(\\sum k^{2}\\)",
+                "\\(\\frac{n(n+1)(2n+1)}{6}\\)",
+                "\\(385\\)"
+              ],
+              [
+                "\\(\\sum k^{3}\\)",
+                "\\(\\left[\\frac{n(n+1)}{2}\\right]^{2}\\)",
+                "\\(3025\\)"
+              ],
+              [
+                "\\(\\sum 1\\)",
+                "\\(n\\)",
+                "\\(10\\)"
+              ]
+            ],
+            "caption": "Our summary of the basic sums (all from k = 1 to n)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Method for \"sum the series to \\(n\\) terms\":\n1. Find the \\(k^{\\text{th}}\\) term \\(T_{k}\\) (look for A.P.s inside the terms).\n2. Expand \\(T_{k}\\) into powers of \\(k\\).\n3. Split with the properties: \\(S_{n} = \\sum T_{k}\\).\n4. Use the formulas for \\(\\sum k^{3}, \\sum k^{2}, \\sum k, \\sum 1\\).\n5. Simplify and check with \\(n = 1\\) and \\(n = 2\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 26",
+            "problem": "Find the sum of the series \\(1^{3} + 3^{3} + 5^{3} + \\dots\\) to \\(n\\) terms.",
+            "steps": [
+              "Given: the series \\(1^{3} + 3^{3} + 5^{3} + \\dots\\)\nTo find: \\(S_{n}\\), the sum of its first \\(n\\) terms.\nMethod: the bases \\(1, 3, 5, \\dots\\) form an A.P., so we write the \\(k^{\\text{th}}\\) term, expand it, split the sigma and use the three sum formulas.",
+              "Step 1: The \\(k^{\\text{th}}\\) term\n\\[T_{k} = (2k-1)^{3}\\]\n\\(\\because 1 + 2(k-1) = 2k - 1\\)\nWhy: \\(1, 3, 5, \\dots\\) is an A.P. with \\(a_{1} = 1\\), \\(d = 2\\), so its \\(k^{\\text{th}}\\) term is \\(2k - 1\\); each term of the series is its cube.",
+              "Step 2: Expand\n\\[T_{k} = 8k^{3} - 12k^{2} + 6k - 1\\]\nWhy: \\((a - b)^{3} = a^{3} - 3a^{2}b + 3ab^{2} - b^{3}\\) with \\(a = 2k\\), \\(b = 1\\): \\(8k^{3} - 3(4k^{2}) + 3(2k) - 1\\).",
+              "Step 3: Sum and split\n\\[S_{n} = \\sum_{k=1}^{n} T_{k}\\]\n\\[= \\sum_{k=1}^{n}(8k^{3} - 12k^{2} + 6k - 1)\\]\n\\[= 8\\sum k^{3} - 12\\sum k^{2}\\]\n\\[+ 6\\sum k - \\sum 1\\]\nWhy: \\(S_{n}\\) adds \\(T_{1}\\) to \\(T_{n}\\); the properties of summation split the sum and take the constants out.",
+              "Step 4: Use the formulas\n\\[S_{n} = 8\\left[\\dfrac{n(n+1)}{2}\\right]^{2}\\]\n\\[- 12\\left[\\dfrac{n(n+1)(2n+1)}{6}\\right]\\]\n\\[+ 6\\left[\\dfrac{n(n+1)}{2}\\right] - n\\]\nWhy: these are formulas (iii), (ii), (i) and \\(\\sum 1 = n\\).",
+              "Step 5: Cancel the numbers\n\\[= 2n^{2}(n+1)^{2} - 2n(n+1)(2n+1)\\]\n\\[+ 3n(n+1) - n\\]\nWhy: \\(\\frac{8}{4} = 2\\), \\(\\frac{12}{6} = 2\\), \\(\\frac{6}{2} = 3\\).",
+              "Step 6: Open the brackets\n\\[= 2n^{2}(n^{2} + 2n + 1)\\]\n\\[- 2n(2n^{2} + 3n + 1)\\]\n\\[+ n(3n + 3) - n\\]\nWhy: \\((n+1)^{2} = n^{2} + 2n + 1\\) and \\((n+1)(2n+1) = 2n^{2} + 3n + 1\\).",
+              "Step 7: Take out common factors\n\\[= 2n[(n^{3} + 2n^{2} + n)\\]\n\\[- (2n^{2} + 3n + 1)] + n(3n + 3 - 1)\\]\n\\[= 2n(n^{3} - 2n - 1) + n(3n + 2)\\]\nWhy: \\(2n^{2}(\\dots) = 2n \\cdot n(\\dots)\\), so \\(2n\\) is common to the first two parts; \\(n\\) is common to the last two. Inside, \\(2n^{2} - 2n^{2} = 0\\) and \\(n - 3n = -2n\\). (The book prints this line as \\(= 2n[(n^{3} - 2n - 1) + n(3n + 2)\\), with the closing bracket missing.)",
+              "Step 8: Simplify\n\\[= n[2n^{3} - 4n - 2 + 3n + 2]\\]\n\\[= n[2n^{3} - n] = n[n(2n^{2} - 1)]\\]\n\\[= n^{2}(2n^{2} - 1)\\]\nWhy: take \\(n\\) out of everything, collect like terms (\\(-4n + 3n = -n\\), \\(-2 + 2 = 0\\)) and factor once more.",
+              "Check:\n\\(n = 1\\): \\(1^{2}(2 - 1) = 1 = 1^{3}\\). \\(n = 2\\): \\(4(8 - 1) = 28 = 1 + 27\\). \\(n = 3\\): \\(9(18 - 1) = 153 = 1 + 27 + 125\\)."
+            ],
+            "answer": "\\(S_{n} = n^{2}(2n^{2} - 1)\\)",
+            "book_errors": [
+              "\\(= 2n[(n^{3} - 2n - 1) + n(3n + 2)\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the working of Example 26 the book prints \\(= 2n[(n^{3} - 2n - 1) + n(3n + 2)\\), where the square bracket is never closed. It should read \\(= 2n(n^{3} - 2n - 1) + n(3n + 2)\\), as the book's next line shows. The final answer is correct."
+          },
+          {
+            "type": "example",
+            "title": "Example 27",
+            "problem": "Find the sum of \\(n\\) terms of series whose \\(n^{\\text{th}}\\) terms is \\(n^{3} + \\frac{3}{2}n^{2} + \\frac{1}{2}n + 1\\).",
+            "steps": [
+              "Given: \\(T_{n} = n^{3} + \\frac{3}{2}n^{2} + \\frac{1}{2}n + 1\\).\nTo find: \\(S_{n}\\), the sum of the first \\(n\\) terms.\nMethod: the term is already a polynomial in \\(n\\); write it with \\(k\\), split the sigma and use the formulas.",
+              "Step 1: Write the \\(k^{\\text{th}}\\) term\n\\[T_{k} = k^{3} + \\dfrac{3}{2}k^{2} + \\dfrac{1}{2}k + 1\\]\nWhy: \\(n\\) is the number of terms we add, so the running term must use another letter, \\(k\\).",
+              "Step 2: Sum and split\n\\[S_{n} = \\sum_{k=1}^{n}\\left(k^{3} + \\tfrac{3}{2}k^{2} + \\tfrac{1}{2}k + 1\\right)\\]\n\\[= \\sum k^{3} + \\tfrac{3}{2}\\sum k^{2}\\]\n\\[+ \\tfrac{1}{2}\\sum k + \\sum 1\\]\nWhy: properties (i) and (ii) of summation.",
+              "Step 3: Use the formulas\n\\[S_{n} = \\dfrac{n^{2}(n+1)^{2}}{4}\\]\n\\[+ \\dfrac{3}{2} \\times \\dfrac{n(n+1)(2n+1)}{6}\\]\n\\[+ \\dfrac{1}{2} \\times \\dfrac{n(n+1)}{2} + n\\]\nWhy: \\(\\left[\\frac{n(n+1)}{2}\\right]^{2} = \\frac{n^{2}(n+1)^{2}}{4}\\), and the other formulas as before.",
+              "Step 4: Take \\(\\frac{n}{4}\\) common\n\\[= \\dfrac{n}{4}[n(n^{2} + 2n + 1)\\]\n\\[+ (2n^{2} + 3n + 1) + (n + 1) + 4]\\]\nWhy: every part has \\(n\\) and can be written over \\(4\\): \\(\\frac{3}{2} \\cdot \\frac{1}{6} = \\frac{1}{4}\\), \\(\\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}\\), and \\(n = \\frac{n}{4} \\cdot 4\\).",
+              "Step 5: Collect like terms\n\\[= \\dfrac{n}{4}(n^{3} + 2n^{2} + n + 2n^{2}\\]\n\\[+ 3n + 1 + n + 1 + 4)\\]\n\\[= \\dfrac{n}{4}(n^{3} + 4n^{2} + 5n + 6)\\]\nWhy: \\(2n^{2} + 2n^{2} = 4n^{2}\\), \\(n + 3n + n = 5n\\), \\(1 + 1 + 4 = 6\\).",
+              "Check:\n\\(T_{1} = 1 + \\frac{3}{2} + \\frac{1}{2} + 1 = 4\\) and \\(\\frac{1}{4}(1 + 4 + 5 + 6) = 4\\). \\(T_{2} = 8 + 6 + 1 + 1 = 16\\), so \\(S_{2} = 20\\), and \\(\\frac{2}{4}(8 + 16 + 10 + 6) = 20\\)."
+            ],
+            "answer": "\\(S_{n} = \\frac{n}{4}(n^{3} + 4n^{2} + 5n + 6)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\sum_{k=1}^{n} T_{k}\\) means \\(T_{1} + T_{2} + \\dots + T_{n}\\); \\(k\\) is the index, \\(1\\) and \\(n\\) the limits.\n2. \\(\\sum(a_{k} + b_{k}) = \\sum a_{k} + \\sum b_{k}\\) and \\(\\sum \\alpha a_{k} = \\alpha\\sum a_{k}\\).\n3. \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n+1)}{2}\\), \\(\\sum k^{2} = \\frac{n(n+1)(2n+1)}{6}\\), \\(\\sum k^{3} = \\left[\\frac{n(n+1)}{2}\\right]^{2}\\).\n4. To sum a series: find \\(T_{k}\\), expand, split, apply the formulas, simplify, check."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing \\(\\sum 1 = 1\\): it is \\(n\\) (one added \\(n\\) times).\n2. Taking a non-constant outside the sigma: \\(\\sum k \\cdot k \\ne k\\sum k\\). Only numbers (or letters other than \\(k\\)) come out.\n3. \\(\\sum k^{2} \\ne (\\sum k)^{2}\\): for \\(n = 2\\), \\(1 + 4 = 5\\) but \\((1 + 2)^{2} = 9\\). (Only for cubes is \\(\\sum k^{3} = (\\sum k)^{2}\\).)\n4. Using \\(n\\) inside the term while summing over \\(n\\): rename the term with \\(k\\) first."
+          }
+        ]
+      }
+    }
+  ]
+}

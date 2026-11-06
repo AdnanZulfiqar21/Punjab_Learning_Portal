@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-3-Q4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-3-q4",
+      "title": "Question 4 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 200,
+          "pdf_to": 200,
+          "note": "Exercise 10.3, Question 4: book page 195 (PDF 200); answer key PDF 308 value correct but labelled 14., boxed; checked with sympy and the solution book (PDF 952-954)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH10-EXERCISE-10-3-Q4",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. Reduce \\(\\sin^{4}\\theta\\) to an expression involving only function of multiples of \\(\\theta\\), raised to the first power.",
+            "explanation": "Yeh bilkul Example 13 jaisa hai; wahan \\(\\cos^4\\theta\\) tha, yahan \\(\\sin^4\\theta\\) hai.\nDiya kya hai? \\(\\sin^4\\theta\\). Find kya karna hai? Aisi expression jis mein koi power na ho, sirf \\(\\cos 2\\theta\\), \\(\\cos 4\\theta\\) jaise multiple angles pehli power mein.\nRule kaunsa? Power ghatane wale formulas: \\(\\sin^2\\theta = \\frac{1 - \\cos 2\\theta}{2}\\) aur \\(\\cos^2 2\\theta = \\frac{1 + \\cos 4\\theta}{2}\\).\nPlan: \\(\\sin^4\\theta\\) ko \\((\\sin^2\\theta)^2\\) likh kar do dafa power ghatana.",
+            "steps": [
+              "Diya gaya hai: \\(\\sin^4\\theta\\).\nHumein find karna hai: \\(\\cos 2\\theta\\) aur \\(\\cos 4\\theta\\) wali expression, bina kisi square ke.\nTareeqa: \\(\\cos 2\\theta = 1 - 2\\sin^2\\theta\\) aur \\(\\cos 4\\theta = 2\\cos^2 2\\theta - 1\\) ko ulta kar ke power ghatane wale formulas banayenge. Har dafa power aadhi hoti hai aur angle dugna. Aise formulas calculus mein integration ke waqt bohat kaam aate hain.",
+              "\\(\\sin^2\\theta\\) ki power ghatayein\n\\[2\\sin^2\\theta = 1 - \\cos 2\\theta\\]\n\\[\\sin^2\\theta = \\dfrac{1 - \\cos 2\\theta}{2}\\]\nKyun: \\(\\cos 2\\theta = 1 - 2\\sin^2\\theta\\) mein \\(2\\sin^2\\theta\\) ko ek taraf aur \\(\\cos 2\\theta\\) ko doosri taraf le gaye, phir 2 se divide kiya.",
+              "Square karein\n\\[\\sin^4\\theta = \\left(\\dfrac{1 - \\cos 2\\theta}{2}\\right)^2\\]\n\\[= \\dfrac{1 - 2\\cos 2\\theta + \\cos^2 2\\theta}{4}\\]\nKyun: \\(\\sin^4\\theta = (\\sin^2\\theta)^2\\). \\((a - b)^2 = a^2 - 2ab + b^2\\) lagaya, aur neeche \\(2^2 = 4\\).\nDhyan dein: abhi bhi \\(\\cos^2 2\\theta\\) mein square baqi hai; yahan ruk jana adhoora jawab hai.",
+              "\\(\\cos^2 2\\theta\\) ki power ghatayein\n\\[\\cos^2 2\\theta = \\dfrac{1 + \\cos 4\\theta}{2}\\]\n\\[\\sin^4\\theta = \\dfrac{1}{4}\\left[1 - 2\\cos 2\\theta + \\dfrac{1 + \\cos 4\\theta}{2}\\right]\\]\nKyun: \\(\\cos 4\\theta = 2\\cos^2 2\\theta - 1\\) (double angle formula, angle \\(2\\theta\\) ke saath) se \\(\\cos^2 2\\theta\\) nikala aur rakh diya.",
+              "Simplify karein\n\\[= \\dfrac{1}{8}\\left[2 - 4\\cos 2\\theta + 1 + \\cos 4\\theta\\right]\\]\n\\[= \\dfrac{1}{8}\\left[3 - 4\\cos 2\\theta + \\cos 4\\theta\\right]\\]\nKyun: Bracket ke andar ka fraction khatam karne ke liye bracket ko 2 se multiply kiya aur bahar wale \\(\\frac{1}{4}\\) ko \\(\\frac{1}{8}\\) kar diya, taake value na badle. Phir \\(2 + 1 = 3\\).",
+              "Tasdeeq: \\(\\theta = 0\\) aur \\(\\theta = 90^{\\circ}\\)\n\\[\\theta = 0: \\; \\tfrac{1}{8}(3 - 4 + 1) = 0 = \\sin^4 0 \\;\\checkmark\\]\n\\[\\theta = 90^{\\circ}: \\; \\tfrac{1}{8}(3 + 4 + 1) = 1 \\;\\checkmark\\]\nKyun: \\(\\theta = 0\\) par \\(\\cos 0 = 1\\), jawab 0, aur \\(\\sin 0 = 0\\). \\(\\theta = 90^{\\circ}\\) par \\(\\cos 180^{\\circ} = -1\\), \\(\\cos 360^{\\circ} = 1\\), jawab 1, aur \\(\\sin 90^{\\circ} = 1\\). Dono jagah sahi."
+            ],
+            "final_answer": "\\(\\sin^4\\theta = \\frac{1}{8}\\left(3 - 4\\cos 2\\theta + \\cos 4\\theta\\right)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key mein yeh jawab \"4.\" ki bajaye \"14.\" number ke neeche likha hai. Jawab \\(\\frac{3 - 4\\cos 2\\theta + \\cos 4\\theta}{8}\\) sahi hai, sirf number ghalat hai."
+          }
+        ]
+      }
+    }
+  ]
+}

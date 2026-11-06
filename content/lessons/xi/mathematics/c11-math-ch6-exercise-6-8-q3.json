@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-8-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-8-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 115,
+          "pdf_to": 115,
+          "note": "Exercise 6.8, Question 3: book p.110 (PDF 115). Answer key PDF 305 (answers for 1-5, 8, 9, 11; 6, 7 and 10 are proofs). Solution book PDF 531-552 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. Consider the arithmetico-geometric sequence defined by arithmetic part: \\(a_{n+1} = 2n + 5\\) and geometric part: \\(b_{n-2} = \\frac{1}{9}(-3)^{n}\\). Find the \\(n^{\\text{th}}\\) term and the sum of first three terms of the arithmetico-geometric sequence.",
+            "explanation": "The two parts are given with shifted subscripts (\\(a_{n+1}\\), \\(b_{n-2}\\)), not as \\(a_n\\) and \\(b_n\\).\nPlan: shift each formula so the subscript becomes \\(n\\), multiply to get \\(T_n\\), then put \\(n = 1, 2, 3\\) and add.",
+            "steps": [
+              "Given: \\(a_{n+1} = 2n + 5\\), \\(b_{n-2} = \\frac{1}{9}(-3)^{n}\\)\nTo find: \\(T_n\\) and \\(T_1 + T_2 + T_3\\).\nMethod: Replace \\(n\\) so that each subscript becomes \\(n\\); then \\(T_n = a_n b_n\\).",
+              "Get \\(a_n\\)\n\\[a_{(n-1)+1} = 2(n - 1) + 5\\]\n\\[a_n = 2n - 2 + 5\\]\n\\[a_n = 2n + 3\\]\nWhy: Replacing \\(n\\) by \\(n - 1\\) everywhere turns the subscript \\(n + 1\\) into \\(n\\).",
+              "Get \\(b_n\\)\n\\[b_n = \\dfrac{1}{9}(-3)^{n+2}\\]\n\\[= \\dfrac{1}{9}(-3)^{2}(-3)^{n}\\]\n\\[= \\dfrac{1}{9} \\cdot 9 \\cdot (-3)^{n}\\]\n\\[= (-3)^{n}\\]\nWhy: Replace \\(n\\) by \\(n + 2\\) (since \\((n + 2) - 2 = n\\)), split the power and use \\((-3)^2 = 9\\).",
+              "Write \\(T_n\\)\n\\[T_n = a_n b_n\\]\n\\[= (2n + 3)(-3)^{n}\\]\nWhy: The A.G.P. term is the product of the matching terms.",
+              "First three terms\n\\[T_1 = 5(-3) = -15\\]\n\\[T_2 = 7(9) = 63\\]\n\\[T_3 = 9(-27) = -243\\]\nWhy: Put \\(n = 1, 2, 3\\); an odd power of \\(-3\\) is negative, an even power positive.",
+              "Add them\n\\[T_1 + T_2 + T_3\\]\n\\[= -15 + 63 - 243\\]\n\\[= 48 - 243 = -195\\]\nWhy: Add from left to right.",
+              "Check with the given formulas\n\\[a_2 = 2(1) + 5 = 7 \\;\\checkmark\\]\n\\[b_1 = \\tfrac{1}{9}(-3)^{3} = -3 \\;\\checkmark\\]\nWhy: Putting \\(n = 1\\) in \\(a_{n+1}\\) and \\(n = 3\\) in \\(b_{n-2}\\) gives the same values as our \\(a_2 = 7\\) and \\(b_1 = -3\\)."
+            ],
+            "final_answer": "\\(T_n = (2n + 3)(-3)^{n}\\); \\(T_1 + T_2 + T_3 = -195\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

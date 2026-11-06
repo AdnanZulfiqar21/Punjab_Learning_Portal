@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 3: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Find the remainder using binomial theorem when \\((33)^{551}\\) is divided by 17.",
+            "explanation": "A remainder question: write the number as (a multiple of 17) + (a small number).\n33 is next to 34, which is \\(2 \\times 17\\).\nPlan: \\(33 = 34 - 1\\); in \\((34 - 1)^{551}\\) every term except the last is a multiple of 17.",
+            "steps": [
+              "Given: \\((33)^{551}\\), divisor 17.\nTo find: the remainder.\nMethod: Write the base as (multiple of 17) \\(\\pm 1\\). Then by the binomial theorem the power is (multiple of 17) + \\((\\pm 1)^{551}\\).",
+              "Write the base near a multiple of 17\n\\[33 = 34 - 1 = 2(17) - 1\\]\n\\[(33)^{551} = (34 - 1)^{551}\\]\nWhy: 34 is a multiple of 17, and the leftover \\(-1\\) is the simplest possible number to raise to a power.",
+              "Expand\n\\[(34 - 1)^{551} = 34^{551} - {}^{551}C_1\\,34^{550}\\]\n\\[+ \\dots + {}^{551}C_{550}\\,34 + (-1)^{551}\\]\nWhy: Binomial theorem with \\(a = 34\\), \\(x = -1\\), \\(n = 551\\). Every term except the last has a factor 34, hence a factor 17.",
+              "Collect the multiples of 17\n\\[(33)^{551} = 17k + (-1)^{551} = 17k - 1\\]\nWhy: 551 is odd, so \\((-1)^{551} = -1\\).",
+              "Make the remainder positive\n\\[17k - 1 = 17(k - 1) + 16\\]\nWhy: A remainder must lie between 0 and 16, so we borrow one 17: \\(-1 = -17 + 16\\).",
+              "Check:\n\\[33 = 17 + 16,\\quad 33^2 = 1089\\]\n\\[1089 = 17 \\times 64 + 1\\]\nWhy: \\(33 \\equiv -1\\), so even powers leave remainder 1 and odd powers leave 16. 551 is odd, giving 16; a direct computer check also gives 16."
+            ],
+            "final_answer": "The remainder is \\(16\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Find the remainder using binomial theorem when \\((9)^{163}\\) is divided by 41.",
+            "explanation": "Again write the number as (multiple of 41) + (small number).\n9 is not next to a multiple of 41, but \\(9^2 = 81 = 82 - 1\\) and \\(82 = 2 \\times 41\\).\nPlan: keep one 9 aside, write \\(9^{162} = 81^{81}\\), and expand \\((82 - 1)^{81}\\).",
+            "steps": [
+              "Given: \\((9)^{163}\\), divisor 41.\nTo find: the remainder.\nMethod: Find a power of 9 that is next to a multiple of 41: \\(9^2 = 81 = 82 - 1\\). Since 163 is odd, keep one factor 9 outside.",
+              "Split the power\n\\[(9)^{163} = 9 \\cdot 9^{162} = 9\\,(9^2)^{81}\\]\n\\[= 9\\,(81)^{81} = 9\\,(82 - 1)^{81}\\]\nWhy: \\(163 = 1 + 2 \\times 81\\).",
+              "Expand \\((82 - 1)^{81}\\)\n\\[(82 - 1)^{81} = 82^{81} - \\dots\\]\n\\[+ {}^{81}C_{80}\\,82 + (-1)^{81}\\]\n\\[= 41m - 1\\]\nWhy: Every term except the last has a factor 82, hence a factor 41. 81 is odd, so \\((-1)^{81} = -1\\).",
+              "Multiply by 9\n\\[(9)^{163} = 9\\,(41m - 1) = 41(9m) - 9\\]\nWhy: Distribute the 9 over the bracket.",
+              "Make the remainder positive\n\\[41(9m) - 9 = 41(9m - 1) + 32\\]\nWhy: \\(-9 = -41 + 32\\), and a remainder must lie between 0 and 40.",
+              "Check:\n\\[9^3 = 729 = 41 \\times 17 + 32\\]\nWhy: \\(9^3 = 9(82 - 1)^1\\) has the same shape as \\(9^{163} = 9(82 - 1)^{81}\\) (an odd power of \\(82 - 1\\)), so it must leave the same remainder 32, and it does. A direct computer check of \\(9^{163}\\) also gives 32."
+            ],
+            "final_answer": "The remainder is \\(32\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

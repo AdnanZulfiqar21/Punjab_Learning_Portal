@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-1-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-1-q4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 235,
+          "pdf_to": 235,
+          "note": "Exercise 12.1, Question 4 (book page 230): twelve limits, parts (i)-(xii), mostly sin(theta)/theta. Key PDF 310 skips (viii) (correct p^2/q^2); all other key answers agree. Solution book PDF 1067-1079."
+        }
+      ],
+      "title": "Question 4",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) Evaluate the following limits: \\(\\lim\\limits_{x \\to 0} \\frac{\\sin 5x}{x}\\).",
+            "explanation": "At \\(x = 0\\) we get \\(\\sin 0/0 = 0/0\\).\nThe angle inside the sine is \\(5x\\) but the denominator is only \\(x\\); we must make them match.\nPlan: multiply top and bottom by \\(5\\), then use \\(\\lim \\frac{\\sin \\theta}{\\theta} = 1\\).",
+            "steps": [
+              "Given: \\(\\dfrac{\\sin 5x}{x}\\), \\(x \\to 0\\).\nTo find: the limit.\nMethod: The standard limit (12.2.9) \\(\\lim\\limits_{\\theta \\to 0} \\dfrac{\\sin \\theta}{\\theta} = 1\\), \\(\\theta\\) in radians. It works only when the angle inside the sine and the denominator are exactly the same quantity, and that quantity tends to \\(0\\).",
+              "Make the denominator equal to the angle\n\\[\\frac{\\sin 5x}{x} = 5 \\cdot \\frac{\\sin 5x}{5x}\\]\nWhy: Multiplying the top and the bottom by \\(5\\) does not change the value; now the angle \\(5x\\) also stands in the denominator.",
+              "Use the standard limit\n\\[\\lim_{x \\to 0} \\frac{\\sin 5x}{x} = 5 \\lim_{5x \\to 0} \\frac{\\sin 5x}{5x}\\]\n\\[= 5(1) = 5\\]\nWhy: Put \\(\\theta = 5x\\); when \\(x \\to 0\\), \\(\\theta \\to 0\\) too.",
+              "Check\n\\[x = 0.01:\\ \\frac{\\sin 0.05}{0.01} \\approx 4.998\\]\nWhy: Close to \\(5\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 0} \\dfrac{\\sin 5x}{x} = 5\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) Evaluate the following limits: \\(\\lim\\limits_{x \\to 0} \\frac{\\sin x^{\\circ}}{x}\\).",
+            "explanation": "The angle is \\(x\\) degrees, but the standard limit needs radians.\nPlan: change \\(x^{\\circ}\\) to radians (\\(x^{\\circ} = \\frac{\\pi x}{180}\\) rad), make the denominator match, then use \\(\\lim \\frac{\\sin \\theta}{\\theta} = 1\\).",
+            "steps": [
+              "Given: \\(\\dfrac{\\sin x^{\\circ}}{x}\\), \\(x \\to 0\\).\nTo find: the limit.\nMethod: The standard limit (12.2.9) \\(\\lim\\limits_{\\theta \\to 0} \\dfrac{\\sin \\theta}{\\theta} = 1\\), \\(\\theta\\) in radians. It works only when the angle inside the sine and the denominator are exactly the same quantity, and that quantity tends to \\(0\\).",
+              "Change degrees to radians\n\\[x^{\\circ} = \\frac{\\pi x}{180} \\text{ rad}\\]\n\\[\\frac{\\sin x^{\\circ}}{x} = \\frac{\\sin \\dfrac{\\pi x}{180}}{x}\\]\nWhy: \\(180^{\\circ} = \\pi\\) radians, so \\(1^{\\circ} = \\dfrac{\\pi}{180}\\) radians.",
+              "Make the denominator equal to the angle\n\\[= \\frac{\\pi}{180} \\cdot \\frac{\\sin \\dfrac{\\pi x}{180}}{\\dfrac{\\pi x}{180}}\\]\nWhy: Multiply the top and the bottom by \\(\\dfrac{\\pi}{180}\\).",
+              "Use the standard limit\n\\[\\lim_{x \\to 0} \\frac{\\sin x^{\\circ}}{x} = \\frac{\\pi}{180}(1)\\]\n\\[= \\frac{\\pi}{180}\\]\nWhy: \\(\\theta = \\dfrac{\\pi x}{180} \\to 0\\) as \\(x \\to 0\\).",
+              "Check\n\\[x = 0.01:\\ \\frac{\\sin (0.01^{\\circ})}{0.01} \\approx 0.0174533\\]\n\\[\\frac{\\pi}{180} \\approx 0.0174533\\]\nWhy: The values agree."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 0} \\dfrac{\\sin x^{\\circ}}{x} = \\dfrac{\\pi}{180}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iii)",
+            "prompt": "4 (iii) Evaluate the following limits: \\(\\lim\\limits_{\\theta \\to 0} \\frac{1 - \\cos \\theta}{\\sin \\theta}\\).",
+            "explanation": "At \\(\\theta = 0\\): top \\(1 - 1 = 0\\), bottom \\(\\sin 0 = 0\\), so \\(0/0\\).\nPlan: multiply top and bottom by \\(1 + \\cos \\theta\\) (as in Example 9), use \\(1 - \\cos^2 \\theta = \\sin^2 \\theta\\), cancel \\(\\sin \\theta\\), substitute.",
+            "steps": [
+              "Given: \\(\\dfrac{1 - \\cos \\theta}{\\sin \\theta}\\), \\(\\theta \\to 0\\).\nTo find: the limit.\nMethod: Multiply by \\(\\dfrac{1 + \\cos \\theta}{1 + \\cos \\theta}\\) to produce \\(\\sin^2 \\theta\\), then cancel.",
+              "Multiply top and bottom by \\(1 + \\cos \\theta\\)\n\\[\\frac{1 - \\cos \\theta}{\\sin \\theta} \\cdot \\frac{1 + \\cos \\theta}{1 + \\cos \\theta} = \\frac{1 - \\cos^2 \\theta}{\\sin \\theta (1 + \\cos \\theta)}\\]\nWhy: \\((1 - \\cos \\theta)(1 + \\cos \\theta) = 1 - \\cos^2 \\theta\\) (difference of squares).",
+              "Use \\(1 - \\cos^2 \\theta = \\sin^2 \\theta\\) and cancel\n\\[= \\frac{\\sin^2 \\theta}{\\sin \\theta (1 + \\cos \\theta)}\\]\n\\[= \\frac{\\sin \\theta}{1 + \\cos \\theta}\\]\nWhy: Pythagorean identity; \\(\\sin \\theta \\ne 0\\) for \\(\\theta\\) near (but not equal to) \\(0\\).",
+              "Substitute \\(\\theta = 0\\)\n\\[\\lim_{\\theta \\to 0} \\frac{\\sin \\theta}{1 + \\cos \\theta} = \\frac{0}{1 + 1}\\]\n\\[= 0\\]\nWhy: The bottom tends to \\(2 \\ne 0\\), so substitution is allowed.",
+              "Check\n\\[\\theta = 0.01:\\ \\frac{1 - \\cos 0.01}{\\sin 0.01} \\approx 0.005\\]\nWhy: Close to \\(0\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{\\theta \\to 0} \\dfrac{1 - \\cos \\theta}{\\sin \\theta} = 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iv)",
+            "prompt": "4 (iv) Evaluate the following limits: \\(\\lim\\limits_{x \\to \\pi} \\frac{\\sin x}{\\pi - x}\\).",
+            "explanation": "At \\(x = \\pi\\): \\(\\sin \\pi = 0\\) and \\(\\pi - \\pi = 0\\), so \\(0/0\\).\nHere \\(x \\to \\pi\\), not \\(0\\), so we first shift the variable.\nPlan: put \\(t = \\pi - x\\) (then \\(t \\to 0\\)), use \\(\\sin(\\pi - t) = \\sin t\\), then the standard limit.",
+            "steps": [
+              "Given: \\(\\dfrac{\\sin x}{\\pi - x}\\), \\(x \\to \\pi\\).\nTo find: the limit.\nMethod: The standard limit (12.2.9) \\(\\lim\\limits_{\\theta \\to 0} \\dfrac{\\sin \\theta}{\\theta} = 1\\), \\(\\theta\\) in radians. It works only when the angle inside the sine and the denominator are exactly the same quantity, and that quantity tends to \\(0\\).",
+              "Change the variable\n\\[t = \\pi - x \\Rightarrow x = \\pi - t\\]\n\\[x \\to \\pi \\Rightarrow t \\to 0\\]\nWhy: The standard limit needs an angle that tends to \\(0\\); \\(\\pi - x\\) does exactly that.",
+              "Rewrite the sine\n\\[\\sin x = \\sin(\\pi - t) = \\sin t\\]\nWhy: \\(\\pi - t\\) is in quadrant II, where sine is positive, so \\(\\sin(\\pi - t) = \\sin t\\).",
+              "Use the standard limit\n\\[\\lim_{x \\to \\pi} \\frac{\\sin x}{\\pi - x} = \\lim_{t \\to 0} \\frac{\\sin t}{t}\\]\n\\[= 1\\]\nWhy: Now the angle inside the sine and the denominator are the same, \\(t\\), and \\(t \\to 0\\).",
+              "Check\n\\[x = \\pi - 0.01:\\ \\frac{\\sin(\\pi - 0.01)}{0.01} \\approx 0.99998\\]\nWhy: Close to \\(1\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to \\pi} \\dfrac{\\sin x}{\\pi - x} = 1\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(v)",
+            "prompt": "4 (v) Evaluate the following limits: \\(\\lim\\limits_{x \\to 0} \\frac{\\sin ax}{\\sin bx}\\).",
+            "explanation": "At \\(x = 0\\): \\(0/0\\) (here \\(a\\) and \\(b\\) are non-zero constants).\nPlan: divide top and bottom by \\(x\\), make each sine match its own angle, then use the standard limit twice.",
+            "steps": [
+              "Given: \\(\\dfrac{\\sin ax}{\\sin bx}\\), \\(x \\to 0\\), \\(a, b \\ne 0\\).\nTo find: the limit.\nMethod: The standard limit (12.2.9) \\(\\lim\\limits_{\\theta \\to 0} \\dfrac{\\sin \\theta}{\\theta} = 1\\), \\(\\theta\\) in radians. It works only when the angle inside the sine and the denominator are exactly the same quantity, and that quantity tends to \\(0\\).",
+              "Make each sine match its angle\n\\[\\frac{\\sin ax}{\\sin bx} = \\frac{a \\cdot \\dfrac{\\sin ax}{ax}}{b \\cdot \\dfrac{\\sin bx}{bx}}\\]\nWhy: Divide top and bottom by \\(x\\); then \\(\\dfrac{\\sin ax}{x} = a\\dfrac{\\sin ax}{ax}\\) and \\(\\dfrac{\\sin bx}{x} = b\\dfrac{\\sin bx}{bx}\\).",
+              "Use the standard limit twice\n\\[\\lim_{x \\to 0} \\frac{\\sin ax}{\\sin bx} = \\frac{a(1)}{b(1)}\\]\n\\[= \\frac{a}{b}\\]\nWhy: \\(ax \\to 0\\) and \\(bx \\to 0\\); the bottom tends to \\(b \\ne 0\\), so the quotient theorem applies.",
+              "Check with \\(a = 2\\), \\(b = 1\\), \\(x = 0.01\\)\n\\[\\frac{\\sin 0.02}{\\sin 0.01} \\approx 1.9999\\]\nWhy: Close to \\(a/b = 2\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 0} \\dfrac{\\sin ax}{\\sin bx} = \\dfrac{a}{b}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(vi)",
+            "prompt": "4 (vi) Evaluate the following limits: \\(\\lim\\limits_{x \\to 0} \\frac{x}{\\tan x}\\).",
+            "explanation": "At \\(x = 0\\): \\(0/\\tan 0 = 0/0\\).\nPlan: write \\(\\tan x = \\frac{\\sin x}{\\cos x}\\), rearrange so that \\(\\frac{\\sin x}{x}\\) appears, then use the standard limit.",
+            "steps": [
+              "Given: \\(\\dfrac{x}{\\tan x}\\), \\(x \\to 0\\).\nTo find: the limit.\nMethod: The standard limit (12.2.9) \\(\\lim\\limits_{\\theta \\to 0} \\dfrac{\\sin \\theta}{\\theta} = 1\\), \\(\\theta\\) in radians. It works only when the angle inside the sine and the denominator are exactly the same quantity, and that quantity tends to \\(0\\).",
+              "Write tan in terms of sin and cos\n\\[\\frac{x}{\\tan x} = \\frac{x \\cos x}{\\sin x}\\]\n\\[= \\frac{\\cos x}{\\dfrac{\\sin x}{x}}\\]\nWhy: \\(\\tan x = \\dfrac{\\sin x}{\\cos x}\\); dividing by it is multiplying by \\(\\dfrac{\\cos x}{\\sin x}\\). Then divide top and bottom by \\(x\\).",
+              "Take the limit\n\\[\\lim_{x \\to 0} \\frac{x}{\\tan x} = \\frac{\\cos 0}{1}\\]\n\\[= 1\\]\nWhy: \\(\\cos x \\to \\cos 0 = 1\\) and \\(\\dfrac{\\sin x}{x} \\to 1\\); the bottom limit is \\(1 \\ne 0\\).",
+              "Check\n\\[x = 0.01:\\ \\frac{0.01}{\\tan 0.01} \\approx 0.99997\\]\nWhy: Close to \\(1\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 0} \\dfrac{x}{\\tan x} = 1\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(vii)",
+            "prompt": "4 (vii) Evaluate the following limits: \\(\\lim\\limits_{x \\to 0} \\frac{1 - \\cos 2x}{x^2}\\).",
+            "explanation": "At \\(x = 0\\): \\(1 - \\cos 0 = 0\\) on top and \\(0\\) on the bottom, so \\(0/0\\).\nPlan: use the half-angle identity \\(1 - \\cos 2x = 2\\sin^2 x\\), then \\(\\left(\\frac{\\sin x}{x}\\right)^2 \\to 1\\).",
+            "steps": [
+              "Given: \\(\\dfrac{1 - \\cos 2x}{x^2}\\), \\(x \\to 0\\).\nTo find: the limit.\nMethod: The standard limit (12.2.9) \\(\\lim\\limits_{\\theta \\to 0} \\dfrac{\\sin \\theta}{\\theta} = 1\\), \\(\\theta\\) in radians. It works only when the angle inside the sine and the denominator are exactly the same quantity, and that quantity tends to \\(0\\).",
+              "Use the identity\n\\[1 - \\cos 2x = 2\\sin^2 x\\]\n\\[\\frac{1 - \\cos 2x}{x^2} = \\frac{2\\sin^2 x}{x^2}\\]\n\\[= 2\\left(\\frac{\\sin x}{x}\\right)^2\\]\nWhy: \\(\\cos 2x = 1 - 2\\sin^2 x\\) (double-angle formula), so \\(1 - \\cos 2x = 2\\sin^2 x\\).",
+              "Take the limit\n\\[\\lim_{x \\to 0} \\frac{1 - \\cos 2x}{x^2} = 2(1)^2\\]\n\\[= 2\\]\nWhy: Power theorem: the limit of a square is the square of the limit, and \\(\\dfrac{\\sin x}{x} \\to 1\\).",
+              "Check\n\\[x = 0.01:\\ \\frac{1 - \\cos 0.02}{0.0001} \\approx 1.99993\\]\nWhy: Close to \\(2\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 0} \\dfrac{1 - \\cos 2x}{x^2} = 2\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(viii)",
+            "prompt": "4 (viii) Evaluate the following limits: \\(\\lim\\limits_{\\theta \\to 0} \\frac{1 - \\cos p\\theta}{1 - \\cos q\\theta}\\).",
+            "explanation": "At \\(\\theta = 0\\): \\(1 - 1 = 0\\) on top and bottom, so \\(0/0\\) (\\(p, q\\) non-zero constants).\nPlan: \\(1 - \\cos A = 2\\sin^2 \\frac{A}{2}\\) on top and bottom, make each sine match its angle, use the standard limit.",
+            "steps": [
+              "Given: \\(\\dfrac{1 - \\cos p\\theta}{1 - \\cos q\\theta}\\), \\(\\theta \\to 0\\), \\(p, q \\ne 0\\).\nTo find: the limit.\nMethod: The standard limit (12.2.9) \\(\\lim\\limits_{\\theta \\to 0} \\dfrac{\\sin \\theta}{\\theta} = 1\\), \\(\\theta\\) in radians. It works only when the angle inside the sine and the denominator are exactly the same quantity, and that quantity tends to \\(0\\).",
+              "Use \\(1 - \\cos A = 2\\sin^2 \\dfrac{A}{2}\\)\n\\[\\frac{1 - \\cos p\\theta}{1 - \\cos q\\theta} = \\frac{2\\sin^2 \\dfrac{p\\theta}{2}}{2\\sin^2 \\dfrac{q\\theta}{2}}\\]\nWhy: From \\(\\cos A = 1 - 2\\sin^2 \\dfrac{A}{2}\\) with \\(A = p\\theta\\) and \\(A = q\\theta\\).",
+              "Make each sine match its angle\n\\[= \\frac{\\left(\\dfrac{\\sin (p\\theta/2)}{p\\theta/2}\\right)^2 \\dfrac{p^2\\theta^2}{4}}{\\left(\\dfrac{\\sin (q\\theta/2)}{q\\theta/2}\\right)^2 \\dfrac{q^2\\theta^2}{4}}\\]\nWhy: Cancel the \\(2\\)'s; then \\(\\sin^2 \\dfrac{p\\theta}{2} = \\left(\\dfrac{\\sin (p\\theta/2)}{p\\theta/2}\\right)^2 \\cdot \\dfrac{p^2\\theta^2}{4}\\), and the same for \\(q\\).",
+              "Cancel \\(\\dfrac{\\theta^2}{4}\\) and take the limit\n\\[\\lim_{\\theta \\to 0} \\frac{1 - \\cos p\\theta}{1 - \\cos q\\theta} = \\frac{(1)^2 p^2}{(1)^2 q^2}\\]\n\\[= \\frac{p^2}{q^2}\\]\nWhy: \\(\\theta \\ne 0\\), so \\(\\dfrac{\\theta^2}{4}\\) cancels; \\(\\dfrac{p\\theta}{2} \\to 0\\) and \\(\\dfrac{q\\theta}{2} \\to 0\\), so each bracket tends to \\(1\\).",
+              "Check with \\(p = 2\\), \\(q = 1\\), \\(\\theta = 0.01\\)\n\\[\\frac{1 - \\cos 0.02}{1 - \\cos 0.01} \\approx 3.9999\\]\nWhy: Close to \\(p^2/q^2 = 4\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{\\theta \\to 0} \\dfrac{1 - \\cos p\\theta}{1 - \\cos q\\theta} = \\dfrac{p^2}{q^2}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key skips part (viii): it lists (vii) \\(2\\) and then (ix) \\(0\\). The answer to part (viii) is \\(\\frac{p^2}{q^2}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ix)",
+            "prompt": "4 (ix) Evaluate the following limits: \\(\\lim\\limits_{\\theta \\to 0} \\frac{\\sin^2 \\theta}{\\theta}\\).",
+            "explanation": "At \\(\\theta = 0\\): \\(0/0\\).\nThere are two sines on top but only one \\(\\theta\\) below.\nPlan: split \\(\\sin^2 \\theta = \\sin \\theta \\cdot \\sin \\theta\\), pair one sine with \\(\\theta\\), use the product theorem.",
+            "steps": [
+              "Given: \\(\\dfrac{\\sin^2 \\theta}{\\theta}\\), \\(\\theta \\to 0\\).\nTo find: the limit.\nMethod: The standard limit (12.2.9) \\(\\lim\\limits_{\\theta \\to 0} \\dfrac{\\sin \\theta}{\\theta} = 1\\), \\(\\theta\\) in radians. It works only when the angle inside the sine and the denominator are exactly the same quantity, and that quantity tends to \\(0\\).",
+              "Split the top\n\\[\\frac{\\sin^2 \\theta}{\\theta} = \\frac{\\sin \\theta}{\\theta} \\cdot \\sin \\theta\\]\nWhy: \\(\\sin^2 \\theta = \\sin \\theta \\times \\sin \\theta\\); one sine goes over \\(\\theta\\) to make the standard limit.",
+              "Product theorem\n\\[\\lim_{\\theta \\to 0} \\frac{\\sin^2 \\theta}{\\theta} = \\lim_{\\theta \\to 0} \\frac{\\sin \\theta}{\\theta} \\cdot \\lim_{\\theta \\to 0} \\sin \\theta\\]\n\\[= (1)(0) = 0\\]\nWhy: The limit of a product is the product of the limits; \\(\\sin \\theta \\to \\sin 0 = 0\\).",
+              "Check\n\\[\\theta = 0.01:\\ \\frac{\\sin^2 0.01}{0.01} \\approx 0.01\\]\nWhy: Close to \\(0\\), and it shrinks as \\(\\theta\\) shrinks."
+            ],
+            "final_answer": "\\(\\lim\\limits_{\\theta \\to 0} \\dfrac{\\sin^2 \\theta}{\\theta} = 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(x)",
+            "prompt": "4 (x) Evaluate the following limits: \\(\\lim\\limits_{x \\to -\\infty} \\frac{x^2 + 5x + 4}{x^2 + 3x - 4}\\).",
+            "explanation": "A limit at infinity: \\(x\\) becomes a huge negative number.\nTop and bottom both become huge (\\(x^2\\) is positive and large), giving \\(\\infty/\\infty\\).\nPlan: divide every term by \\(x^2\\), then use \\(\\frac{c}{x} \\to 0\\), \\(\\frac{c}{x^2} \\to 0\\) as \\(x \\to -\\infty\\).",
+            "steps": [
+              "Given: \\(\\dfrac{x^2 + 5x + 4}{x^2 + 3x - 4}\\), \\(x \\to -\\infty\\).\nTo find: the limit.\nMethod: Divide the top and the bottom by \\(x^2\\), the highest power in the denominator (12.2.5).",
+              "Divide every term by \\(x^2\\)\n\\[\\frac{x^2 + 5x + 4}{x^2 + 3x - 4} = \\frac{1 + \\dfrac{5}{x} + \\dfrac{4}{x^2}}{1 + \\dfrac{3}{x} - \\dfrac{4}{x^2}}\\]\nWhy: The value is unchanged, and every growing term becomes a constant or a term with \\(x\\) in its denominator.",
+              "Let \\(x \\to -\\infty\\)\n\\[\\lim_{x \\to -\\infty} \\frac{x^2 + 5x + 4}{x^2 + 3x - 4} = \\frac{1 + 0 + 0}{1 + 0 - 0}\\]\n\\[= 1\\]\nWhy: A fixed number divided by a huge (positive or negative) number is tiny, so \\(5/x\\), \\(4/x^2\\), \\(3/x\\) all tend to \\(0\\).",
+              "Check\n\\[x = -1000:\\ \\frac{995004}{996996} \\approx 0.998\\]\nWhy: Close to \\(1\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to -\\infty} \\dfrac{x^2 + 5x + 4}{x^2 + 3x - 4} = 1\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(xi)",
+            "prompt": "4 (xi) Evaluate the following limits: \\(\\lim\\limits_{x \\to 1} \\frac{x^3 - 1}{x^2 - 1}\\).",
+            "explanation": "At \\(x = 1\\): \\(0/0\\), so \\((x - 1)\\) is a common factor.\nPlan: factorise the top (difference of cubes) and the bottom (difference of squares), cancel \\((x - 1)\\), substitute.",
+            "steps": [
+              "Given: \\(\\dfrac{x^3 - 1}{x^2 - 1}\\), \\(x \\to 1\\).\nTo find: the limit.\nMethod: Factorise and cancel the common factor \\((x - 1)\\).",
+              "Try direct substitution\n\\[\\text{Top: } 1 - 1 = 0, \\quad \\text{Bottom: } 1 - 1 = 0\\]\nWhy: \\(0/0\\) is undecided, and \\((x - 1)\\) must be a factor of both.",
+              "Factorise the top and the bottom\n\\[x^3 - 1 = (x - 1)(x^2 + x + 1)\\]\n\\[x^2 - 1 = (x - 1)(x + 1)\\]\nWhy: \\(a^3 - b^3 = (a - b)(a^2 + ab + b^2)\\) and \\(a^2 - b^2 = (a - b)(a + b)\\) with \\(a = x\\), \\(b = 1\\).",
+              "Cancel and substitute\n\\[\\lim_{x \\to 1} \\frac{x^2 + x + 1}{x + 1} = \\frac{1 + 1 + 1}{1 + 1}\\]\n\\[= \\frac{3}{2}\\]\nWhy: \\(x \\ne 1\\), so \\(x - 1 \\ne 0\\) cancels; then the bottom is \\(2 \\ne 0\\).",
+              "Check\n\\[x = 1.01:\\ \\frac{0.030301}{0.0201} \\approx 1.5075\\]\nWhy: Close to \\(3/2\\). The formula of Q3(ix) with \\(n = 3\\), \\(m = 2\\), \\(a = 1\\) also gives \\(\\frac{3}{2}\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 1} \\dfrac{x^3 - 1}{x^2 - 1} = \\dfrac{3}{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(xii)",
+            "prompt": "4 (xii) Evaluate the following limits: \\(\\lim\\limits_{t \\to 0} \\left(\\frac{1}{t\\sqrt{1 + t}} - \\frac{1}{t}\\right)\\).",
+            "explanation": "As \\(t \\to 0\\) both fractions blow up, so we have the undecided form \\(\\infty - \\infty\\).\nPlan: combine into one fraction (\\(0/0\\) form), rationalise the top with \\(1 + \\sqrt{1 + t}\\), cancel \\(t\\), substitute.",
+            "steps": [
+              "Given: \\(\\dfrac{1}{t\\sqrt{1 + t}} - \\dfrac{1}{t}\\), \\(t \\to 0\\).\nTo find: the limit.\nMethod: Take the common denominator, then rationalise the numerator and cancel the common factor \\(t\\).",
+              "Combine into one fraction\n\\[\\frac{1}{t\\sqrt{1 + t}} - \\frac{1}{t} = \\frac{1 - \\sqrt{1 + t}}{t\\sqrt{1 + t}}\\]\nWhy: The common denominator is \\(t\\sqrt{1 + t}\\); the second fraction becomes \\(\\dfrac{\\sqrt{1 + t}}{t\\sqrt{1 + t}}\\). Now at \\(t = 0\\) we get \\(0/0\\).",
+              "Rationalise the numerator\n\\[= \\frac{(1 - \\sqrt{1 + t})(1 + \\sqrt{1 + t})}{t\\sqrt{1 + t}\\,(1 + \\sqrt{1 + t})}\\]\n\\[= \\frac{1 - (1 + t)}{t\\sqrt{1 + t}\\,(1 + \\sqrt{1 + t})}\\]\n\\[= \\frac{-t}{t\\sqrt{1 + t}\\,(1 + \\sqrt{1 + t})}\\]\nWhy: Difference of squares removes the root on top: \\((1)^2 - (\\sqrt{1 + t})^2 = -t\\).",
+              "Cancel \\(t\\) and substitute \\(t = 0\\)\n\\[\\lim_{t \\to 0} \\frac{-1}{\\sqrt{1 + t}\\,(1 + \\sqrt{1 + t})} = \\frac{-1}{1(1 + 1)}\\]\n\\[= -\\frac{1}{2}\\]\nWhy: \\(t \\ne 0\\), so it cancels; the bottom then tends to \\(2 \\ne 0\\). The minus sign stays on top.",
+              "Check\n\\[t = 0.01:\\ \\frac{1}{0.01\\sqrt{1.01}} - 100 \\approx -0.4963\\]\nWhy: Close to \\(-1/2\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{t \\to 0} \\left(\\dfrac{1}{t\\sqrt{1 + t}} - \\dfrac{1}{t}\\right) = -\\dfrac{1}{2}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

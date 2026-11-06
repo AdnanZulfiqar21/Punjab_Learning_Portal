@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-3-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-3-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 81,
+          "pdf_to": 81,
+          "note": "Exercise 4.3, Question 3: book page 76 (PDF 81); answer key PDF 303"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Solve the following system of linear equations by Cramer's rule: \\(2x + y - z = 1\\), \\(x - y + 2z = 3\\), \\(3x + 2y + z = 4\\)",
+            "explanation": "Three equations in three unknowns, to be solved with determinants (Cramer's rule).\nWe must find all three unknowns.\nPlan: find \\(|A|\\); then the three determinants with one column replaced by the constants; divide; check.",
+            "steps": [
+              "Given: \\(2x + y - z = 1\\), \\(x - y + 2z = 3\\), \\(3x + 2y + z = 4\\)\nTo find: \\(x, y, z\\) by Cramer's rule.\nMethod: Write \\(AX = B\\). If \\(|A| \\neq 0\\), then \\(x = \\dfrac{|A_{x}|}{|A|}\\), \\(y = \\dfrac{|A_{y}|}{|A|}\\), \\(z = \\dfrac{|A_{z}|}{|A|}\\), where \\(|A_{x}|\\) is \\(|A|\\) with column 1 replaced by the constants \\(B\\), and so on.",
+              "Write the coefficient matrix and constants\n\\[A = \\begin{bmatrix}2 & 1 & -1 \\\\ 1 & -1 & 2 \\\\ 3 & 2 & 1\\end{bmatrix}\\]\n\\[B = \\begin{bmatrix}1 \\\\ 3 \\\\ 4\\end{bmatrix}\\]\nWhy: Row \\(k\\) of \\(A\\) holds the coefficients of \\(x, y, z\\) in equation \\(k\\); a missing variable has coefficient 0.",
+              "Find \\(|A|\\) (expand along \\(R_1\\))\n\\[|A| = \\begin{vmatrix}2 & 1 & -1 \\\\ 1 & -1 & 2 \\\\ 3 & 2 & 1\\end{vmatrix}\\]\n\\[= 2(-1 - 4) - 1(1 - 6) - 1(2 + 3)\\]\n\\[= -10 + 5 - 5\\]\n\\[= -10\\]\nWhy: \\(|A| \\neq 0\\), so Cramer's rule applies and the solution is unique.",
+              "Find \\(|A_{x}|\\): replace column 1 by \\(B\\)\n\\[|A_{x}| = \\begin{vmatrix}1 & 1 & -1 \\\\ 3 & -1 & 2 \\\\ 4 & 2 & 1\\end{vmatrix}\\]\n\\[= 1(-1 - 4) - 1(3 - 8) - 1(6 + 4)\\]\n\\[= -5 + 5 - 10\\]\n\\[= -10\\]\nWhy: For \\(x\\) the first column (coefficients of \\(x\\)) is replaced by the constants.",
+              "Find \\(|A_{y}|\\): replace column 2 by \\(B\\)\n\\[|A_{y}| = \\begin{vmatrix}2 & 1 & -1 \\\\ 1 & 3 & 2 \\\\ 3 & 4 & 1\\end{vmatrix}\\]\n\\[= 2(3 - 8) - 1(1 - 6) - 1(4 - 9)\\]\n\\[= -10 + 5 + 5\\]\n\\[= 0\\]\nWhy: For \\(y\\) the second column (coefficients of \\(y\\)) is replaced by the constants.",
+              "Find \\(|A_{z}|\\): replace column 3 by \\(B\\)\n\\[|A_{z}| = \\begin{vmatrix}2 & 1 & 1 \\\\ 1 & -1 & 3 \\\\ 3 & 2 & 4\\end{vmatrix}\\]\n\\[= 2(-4 - 6) - 1(4 - 9) + 1(2 + 3)\\]\n\\[= -20 + 5 + 5\\]\n\\[= -10\\]\nWhy: For \\(z\\) the third column (coefficients of \\(z\\)) is replaced by the constants.",
+              "Apply Cramer's rule\n\\[x = \\dfrac{|A_{x}|}{|A|} = \\dfrac{-10}{-10} = 1\\]\n\\[y = \\dfrac{|A_{y}|}{|A|} = \\dfrac{0}{-10} = 0\\]\n\\[z = \\dfrac{|A_{z}|}{|A|} = \\dfrac{-10}{-10} = 1\\]\nWhy: Each unknown is its own determinant divided by \\(|A|\\). Simplify the fraction and keep the sign.",
+              "Check in all three equations\n\\[2(1) + (0) - (1) = 1 \\;\\checkmark\\]\n\\[(1) - (0) + 2(1) = 3 \\;\\checkmark\\]\n\\[3(1) + 2(0) + (1) = 4 \\;\\checkmark\\]\nWhy: The values satisfy every equation, so the solution is correct."
+            ],
+            "final_answer": "Solution set \\(\\{(1, 0, 1)\\}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Solve the following system of linear equations by Cramer's rule: \\(x_1 + 2x_2 - 3x_3 = 0\\), \\(4x_1 - x_2 + x_3 = 5\\), \\(-2x_1 + 3x_2 + 2x_3 = 3\\)",
+            "explanation": "Three equations in three unknowns, to be solved with determinants (Cramer's rule).\nWe must find all three unknowns.\nPlan: find \\(|A|\\); then the three determinants with one column replaced by the constants; divide; check.",
+            "steps": [
+              "Given: \\(x_1 + 2x_2 - 3x_3 = 0\\), \\(4x_1 - x_2 + x_3 = 5\\), \\(-2x_1 + 3x_2 + 2x_3 = 3\\)\nTo find: \\(x_1, x_2, x_3\\) by Cramer's rule.\nMethod: Write \\(AX = B\\). If \\(|A| \\neq 0\\), then \\(x_1 = \\dfrac{|A_{x_1}|}{|A|}\\), \\(x_2 = \\dfrac{|A_{x_2}|}{|A|}\\), \\(x_3 = \\dfrac{|A_{x_3}|}{|A|}\\), where \\(|A_{x_1}|\\) is \\(|A|\\) with column 1 replaced by the constants \\(B\\), and so on.",
+              "Write the coefficient matrix and constants\n\\[A = \\begin{bmatrix}1 & 2 & -3 \\\\ 4 & -1 & 1 \\\\ -2 & 3 & 2\\end{bmatrix}\\]\n\\[B = \\begin{bmatrix}0 \\\\ 5 \\\\ 3\\end{bmatrix}\\]\nWhy: Row \\(k\\) of \\(A\\) holds the coefficients of \\(x_1, x_2, x_3\\) in equation \\(k\\); a missing variable has coefficient 0.",
+              "Find \\(|A|\\) (expand along \\(R_1\\))\n\\[|A| = \\begin{vmatrix}1 & 2 & -3 \\\\ 4 & -1 & 1 \\\\ -2 & 3 & 2\\end{vmatrix}\\]\n\\[= 1(-2 - 3) - 2(8 + 2) - 3(12 - 2)\\]\n\\[= -5 - 20 - 30\\]\n\\[= -55\\]\nWhy: \\(|A| \\neq 0\\), so Cramer's rule applies and the solution is unique.",
+              "Find \\(|A_{x_1}|\\): replace column 1 by \\(B\\)\n\\[|A_{x_1}| = \\begin{vmatrix}0 & 2 & -3 \\\\ 5 & -1 & 1 \\\\ 3 & 3 & 2\\end{vmatrix}\\]\n\\[= 0(-2 - 3) - 2(10 - 3) - 3(15 + 3)\\]\n\\[= 0 - 14 - 54\\]\n\\[= -68\\]\nWhy: For \\(x_1\\) the first column (coefficients of \\(x_1\\)) is replaced by the constants.",
+              "Find \\(|A_{x_2}|\\): replace column 2 by \\(B\\)\n\\[|A_{x_2}| = \\begin{vmatrix}1 & 0 & -3 \\\\ 4 & 5 & 1 \\\\ -2 & 3 & 2\\end{vmatrix}\\]\n\\[= 1(10 - 3) + 0(8 + 2) - 3(12 + 10)\\]\n\\[= 7 + 0 - 66\\]\n\\[= -59\\]\nWhy: For \\(x_2\\) the second column (coefficients of \\(x_2\\)) is replaced by the constants.",
+              "Find \\(|A_{x_3}|\\): replace column 3 by \\(B\\)\n\\[|A_{x_3}| = \\begin{vmatrix}1 & 2 & 0 \\\\ 4 & -1 & 5 \\\\ -2 & 3 & 3\\end{vmatrix}\\]\n\\[= 1(-3 - 15) - 2(12 + 10) + 0(12 - 2)\\]\n\\[= -18 - 44 + 0\\]\n\\[= -62\\]\nWhy: For \\(x_3\\) the third column (coefficients of \\(x_3\\)) is replaced by the constants.",
+              "Apply Cramer's rule\n\\[x_1 = \\dfrac{|A_{x_1}|}{|A|} = \\dfrac{-68}{-55} = \\dfrac{68}{55}\\]\n\\[x_2 = \\dfrac{|A_{x_2}|}{|A|} = \\dfrac{-59}{-55} = \\dfrac{59}{55}\\]\n\\[x_3 = \\dfrac{|A_{x_3}|}{|A|} = \\dfrac{-62}{-55} = \\dfrac{62}{55}\\]\nWhy: Each unknown is its own determinant divided by \\(|A|\\). Simplify the fraction and keep the sign.",
+              "Check in all three equations\n\\[\\left(\\frac{68}{55}\\right) + 2\\left(\\frac{59}{55}\\right) - 3\\left(\\frac{62}{55}\\right) = 0 \\;\\checkmark\\]\n\\[4\\left(\\frac{68}{55}\\right) - \\left(\\frac{59}{55}\\right) + \\left(\\frac{62}{55}\\right) = 5 \\;\\checkmark\\]\n\\[-2\\left(\\frac{68}{55}\\right) + 3\\left(\\frac{59}{55}\\right) + 2\\left(\\frac{62}{55}\\right) = 3 \\;\\checkmark\\]\nWhy: The values satisfy every equation, so the solution is correct."
+            ],
+            "final_answer": "Solution set \\(\\{(\\frac{68}{55}, \\frac{59}{55}, \\frac{62}{55})\\}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) Solve the following system of linear equations by Cramer's rule: \\(2x_1 - x_2 + x_3 = 1\\), \\(x_1 + 2x_2 + 2x_3 = 2\\), \\(x_1 - 2x_2 - x_3 = 1\\)",
+            "explanation": "Three equations in three unknowns, to be solved with determinants (Cramer's rule).\nWe must find all three unknowns.\nPlan: find \\(|A|\\); then the three determinants with one column replaced by the constants; divide; check.",
+            "steps": [
+              "Given: \\(2x_1 - x_2 + x_3 = 1\\), \\(x_1 + 2x_2 + 2x_3 = 2\\), \\(x_1 - 2x_2 - x_3 = 1\\)\nTo find: \\(x_1, x_2, x_3\\) by Cramer's rule.\nMethod: Write \\(AX = B\\). If \\(|A| \\neq 0\\), then \\(x_1 = \\dfrac{|A_{x_1}|}{|A|}\\), \\(x_2 = \\dfrac{|A_{x_2}|}{|A|}\\), \\(x_3 = \\dfrac{|A_{x_3}|}{|A|}\\), where \\(|A_{x_1}|\\) is \\(|A|\\) with column 1 replaced by the constants \\(B\\), and so on.",
+              "Write the coefficient matrix and constants\n\\[A = \\begin{bmatrix}2 & -1 & 1 \\\\ 1 & 2 & 2 \\\\ 1 & -2 & -1\\end{bmatrix}\\]\n\\[B = \\begin{bmatrix}1 \\\\ 2 \\\\ 1\\end{bmatrix}\\]\nWhy: Row \\(k\\) of \\(A\\) holds the coefficients of \\(x_1, x_2, x_3\\) in equation \\(k\\); a missing variable has coefficient 0.",
+              "Find \\(|A|\\) (expand along \\(R_1\\))\n\\[|A| = \\begin{vmatrix}2 & -1 & 1 \\\\ 1 & 2 & 2 \\\\ 1 & -2 & -1\\end{vmatrix}\\]\n\\[= 2(-2 + 4) + 1(-1 - 2) + 1(-2 - 2)\\]\n\\[= 4 - 3 - 4\\]\n\\[= -3\\]\nWhy: \\(|A| \\neq 0\\), so Cramer's rule applies and the solution is unique.",
+              "Find \\(|A_{x_1}|\\): replace column 1 by \\(B\\)\n\\[|A_{x_1}| = \\begin{vmatrix}1 & -1 & 1 \\\\ 2 & 2 & 2 \\\\ 1 & -2 & -1\\end{vmatrix}\\]\n\\[= 1(-2 + 4) + 1(-2 - 2) + 1(-4 - 2)\\]\n\\[= 2 - 4 - 6\\]\n\\[= -8\\]\nWhy: For \\(x_1\\) the first column (coefficients of \\(x_1\\)) is replaced by the constants.",
+              "Find \\(|A_{x_2}|\\): replace column 2 by \\(B\\)\n\\[|A_{x_2}| = \\begin{vmatrix}2 & 1 & 1 \\\\ 1 & 2 & 2 \\\\ 1 & 1 & -1\\end{vmatrix}\\]\n\\[= 2(-2 - 2) - 1(-1 - 2) + 1(1 - 2)\\]\n\\[= -8 + 3 - 1\\]\n\\[= -6\\]\nWhy: For \\(x_2\\) the second column (coefficients of \\(x_2\\)) is replaced by the constants.",
+              "Find \\(|A_{x_3}|\\): replace column 3 by \\(B\\)\n\\[|A_{x_3}| = \\begin{vmatrix}2 & -1 & 1 \\\\ 1 & 2 & 2 \\\\ 1 & -2 & 1\\end{vmatrix}\\]\n\\[= 2(2 + 4) + 1(1 - 2) + 1(-2 - 2)\\]\n\\[= 12 - 1 - 4\\]\n\\[= 7\\]\nWhy: For \\(x_3\\) the third column (coefficients of \\(x_3\\)) is replaced by the constants.",
+              "Apply Cramer's rule\n\\[x_1 = \\dfrac{|A_{x_1}|}{|A|} = \\dfrac{-8}{-3} = \\dfrac{8}{3}\\]\n\\[x_2 = \\dfrac{|A_{x_2}|}{|A|} = \\dfrac{-6}{-3} = 2\\]\n\\[x_3 = \\dfrac{|A_{x_3}|}{|A|} = \\dfrac{7}{-3} = -\\dfrac{7}{3}\\]\nWhy: Each unknown is its own determinant divided by \\(|A|\\). Simplify the fraction and keep the sign.",
+              "Check in all three equations\n\\[2\\left(\\frac{8}{3}\\right) - (2) + \\left(-\\frac{7}{3}\\right) = 1 \\;\\checkmark\\]\n\\[\\left(\\frac{8}{3}\\right) + 2(2) + 2\\left(-\\frac{7}{3}\\right) = 2 \\;\\checkmark\\]\n\\[\\left(\\frac{8}{3}\\right) - 2(2) - \\left(-\\frac{7}{3}\\right) = 1 \\;\\checkmark\\]\nWhy: The values satisfy every equation, so the solution is correct."
+            ],
+            "final_answer": "Solution set \\(\\{(\\frac{8}{3}, 2, -\\frac{7}{3})\\}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

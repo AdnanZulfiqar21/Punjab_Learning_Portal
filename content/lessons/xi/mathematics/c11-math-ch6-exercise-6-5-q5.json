@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-5-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-5-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 107,
+          "pdf_to": 107,
+          "note": "Exercise 6.5, Question 5: Exercise 6.5, book pages 101-102: Q1-Q13, Q15, Q16 as printed (no Q14; 18 parts); answer key PDF 304-305"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5. Find the 12th term of \\(1 + i, 2i, -2 + 2i, \\ldots\\)",
+            "explanation": "The terms are complex numbers; first check that the ratio is constant.\nWe must find \\(a_{12}\\).\nPlan: find \\(r\\) by complex division, then \\(a_{12} = a_1 r^{11}\\), using \\((1 + i)^2 = 2i\\).",
+            "steps": [
+              "Given: \\(1 + i, 2i, -2 + 2i, \\ldots\\)\nTo find: \\(a_{12}\\).\nMethod: \\(a_n = a_1 r^{n-1}\\) works for complex terms too, once \\(r\\) is known.",
+              "Find \\(r\\)\n\\[r = \\dfrac{2i}{1 + i} = \\dfrac{2i(1 - i)}{(1 + i)(1 - i)}\\]\n\\[= \\dfrac{2i - 2i^2}{2} = \\dfrac{2 + 2i}{2}\\]\n\\[= 1 + i\\]\nWhy: To divide by \\(1 + i\\), multiply top and bottom by its conjugate \\(1 - i\\); the bottom becomes \\(1 + 1 = 2\\).",
+              "Check \\(r\\) with the next pair\n\\[(2i)(1 + i) = 2i + 2i^2 = -2 + 2i\\]\nWhy: \\(a_2 \\cdot r\\) gives \\(a_3\\), so the ratio is the same: it is a G.P.",
+              "Write \\(a_{12}\\)\n\\[a_{12} = a_1 r^{11} = (1 + i)(1 + i)^{11}\\]\n\\[= (1 + i)^{12}\\]\nWhy: Here \\(a_1 = r = 1 + i\\), so \\(a_n = (1 + i)^{n}\\).",
+              "Evaluate using the square\n\\[(1 + i)^2 = 1 + 2i + i^2 = 2i\\]\n\\[(1 + i)^{12} = (2i)^{6}\\]\n\\[= 64\\, i^{6} = 64(-1) = -64\\]\nWhy: \\((1 + i)^{12} = \\left[(1 + i)^2\\right]^6\\). \\(2^6 = 64\\) and \\(i^6 = i^4 \\cdot i^2 = -1\\).",
+              "Check: the pattern\n\\[a_2 = (1 + i)^2 = 2i,\\quad a_3 = (2i)(1 + i) = -2 + 2i\\]\nWhy: \\(a_n = (1 + i)^n\\) reproduces the given terms, so it also gives the 12th term correctly."
+            ],
+            "final_answer": "\\(a_{12} = -64\\)"
+          }
+        ]
+      }
+    }
+  ]
+}
