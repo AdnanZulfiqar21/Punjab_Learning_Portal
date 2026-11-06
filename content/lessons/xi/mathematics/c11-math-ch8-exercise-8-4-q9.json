@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q9",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 9: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9 In a supply chain system, a company starts with an initial inventory of 400 items. Every month, they sell 80% of the inventory and restock 50 items. How many items will they have after 8 months? Use mathematical induction to prove the pattern.",
+            "explanation": "Each month two things happen: 80% is sold (20% stays) and 50 items are added.\nSo \\(I_{n+1} = 0.2\\,I_n + 50\\). We find a formula for \\(I_n\\), prove it by induction, then put \\(n = 8\\).\nPlan: compute a few months, find the level the stock settles at, guess the formula, prove it, use it.",
+            "steps": [
+              "Given: \\(I_0 = 400\\) items; each month 80% is sold and 50 items are restocked.\nTo find: \\(I_8\\), and prove the pattern by mathematical induction.\nMethod: Write the monthly rule as a recurrence, spot the pattern, state it as \\(P(n)\\), prove \\(P(0)\\) and \\(P(k) \\Rightarrow P(k+1)\\).",
+              "Monthly rule\n\\[I_{n+1} = 0.2\\,I_n + 50\\]\nWhy: Selling 80% leaves \\(20\\% = 0.2\\) of the stock; then 50 items are added.",
+              "First few months\n\\[I_1 = 0.2(400) + 50 = 130\\]\n\\[I_2 = 0.2(130) + 50 = 76\\]\n\\[I_3 = 0.2(76) + 50 = 65.2\\]\nWhy: Apply the rule again and again. The stock falls towards a fixed level.",
+              "Find the settling level\n\\[L = 0.2L + 50\\]\n\\[0.8L = 50 \\Rightarrow L = 62.5\\]\nWhy: At the settling level the rule gives back the same number.",
+              "Guess the pattern\n\\[I_n - 62.5 = 0.2\\,(I_{n-1} - 62.5)\\]\n\\[I_n = 62.5 + 337.5\\,(0.2)^n\\]\nWhy: Subtracting \\(L = 0.2L + 50\\) from the rule shows that the distance from 62.5 is multiplied by 0.2 each month. At the start the distance is \\(400 - 62.5 = 337.5\\).",
+              "Base case \\(P(0)\\)\n\\[P(n):\\ I_n = 62.5 + 337.5\\,(0.2)^n\\]\n\\[I_0 = 62.5 + 337.5(1) = 400\\ \\checkmark\\]\nWhy: The formula gives the starting stock. (Also \\(n = 1\\): \\(62.5 + 67.5 = 130\\) \\(\\checkmark\\).)",
+              "Induction step\n\\[\\text{Assume } I_k = 62.5 + 337.5(0.2)^k\\]\n\\[I_{k+1} = 0.2\\,I_k + 50\\]\n\\[= 12.5 + 337.5(0.2)^{k+1} + 50\\]\n\\[= 62.5 + 337.5(0.2)^{k+1}\\]\nWhy: Use the monthly rule, put in the hypothesis and multiply out: \\(0.2 \\times 62.5 = 12.5\\) and \\(0.2 \\times (0.2)^k = (0.2)^{k+1}\\). This is \\(P(k + 1)\\).",
+              "Conclusion\n\\(P(0)\\) is true, and \\(P(k)\\) true implies \\(P(k + 1)\\) true, so by mathematical induction \\(P(n)\\) is true for every whole number \\(n\\).\nWhy: This is the principle of mathematical induction.",
+              "Stock after 8 months\n\\[(0.2)^8 = 0.00000256\\]\n\\[I_8 = 62.5 + 337.5(0.00000256)\\]\n\\[= 62.5 + 0.000864 = 62.500864\\]\nWhy: \\(2^8 = 256\\) and \\((0.2)^8\\) has 8 decimal places.",
+              "Check:\n\\[I_4 = 63.04,\\ I_5 = 62.608,\\ I_6 = 62.5216\\]\n\\[I_7 = 62.50432,\\ I_8 = 62.500864\\]\nWhy: Applying the monthly rule step by step gives the same value. Items are whole, and 62.500864 is just above 62.5, so it rounds to 63."
+            ],
+            "final_answer": "\\(I_n = 62.5 + 337.5(0.2)^n\\) (proved by induction). After 8 months: \\(I_8 = 62.500864\\), that is about 63 items."
+          }
+        ]
+      }
+    }
+  ]
+}

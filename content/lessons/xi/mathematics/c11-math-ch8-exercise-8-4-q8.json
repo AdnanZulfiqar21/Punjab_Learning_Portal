@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q8",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 8: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8 A company expects its annual revenue to grow at a fixed rate of 6% per year. The revenue in year 1 is R = Rs. 10,000,000. Estimate the company's revenue after 4 years using the binomial theorem for small growth rates.",
+            "explanation": "A growth question: each year the revenue is multiplied by \\(1 + 0.06\\).\nAfter 4 years it is \\(R(1 + 0.06)^4\\). Since 0.06 is small, the binomial terms shrink fast.\nPlan: expand \\((1 + 0.06)^4\\), keep the first few terms, multiply by R.",
+            "steps": [
+              "Given: \\(R = \\text{Rs. } 10{,}000{,}000\\), growth rate \\(x = 6\\% = 0.06\\) per year, \\(n = 4\\) years.\nTo find: the revenue after 4 years.\nMethod: Growth at a fixed rate means \\(\\text{Revenue} = R(1 + x)^n\\). For small \\(x\\) the binomial theorem gives \\((1 + x)^n \\approx 1 + nx + \\frac{n(n-1)}{2}x^2\\), as in the book's Example 28.",
+              "Write the model\n\\[\\text{Revenue} = R\\,(1 + 0.06)^4\\]\nWhy: Each year multiplies the revenue by 1.06; four years give four such factors, counting from the year-1 revenue.",
+              "Expand \\((1 + 0.06)^4\\)\n\\[= 1 + 4(0.06) + 6(0.06)^2\\]\n\\[+ 4(0.06)^3 + (0.06)^4\\]\n\\[= 1 + 0.24 + 0.0216\\]\n\\[+ 0.000864 + 0.00001296\\]\nWhy: Row 4 of Pascal's triangle is 1, 4, 6, 4, 1. \\((0.06)^2 = 0.0036\\), \\((0.06)^3 = 0.000216\\).",
+              "Estimate with the first three terms\n\\[(1.06)^4 \\approx 1 + 0.24 + 0.0216 = 1.2616\\]\nWhy: For a small growth rate the first three terms carry almost all the value; the rest add less than 0.001.",
+              "Multiply by R\n\\[10{,}000{,}000 \\times 1.2616\\]\n\\[= 12{,}616{,}000\\]\nWhy: Revenue = R times the growth factor.",
+              "Check:\n\\[(1.06)^4 = 1.26247696\\]\n\\[10{,}000{,}000 \\times 1.26247696\\]\n\\[= 12{,}624{,}769.60\\]\nWhy: Using all five terms gives the exact value; the three-term estimate is within about 0.07% of it."
+            ],
+            "final_answer": "Estimated revenue after 4 years \\(\\approx\\) Rs. 12,616,000 (exact value with all terms: Rs. 12,624,769.60)."
+          }
+        ]
+      }
+    }
+  ]
+}

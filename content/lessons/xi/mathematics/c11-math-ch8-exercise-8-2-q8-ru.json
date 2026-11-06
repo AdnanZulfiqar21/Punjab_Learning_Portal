@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-2-Q8-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-2-q8",
+      "title": "Question 8 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 162,
+          "pdf_to": 162,
+          "note": "Exercise 8.2, Question 8: book p.157 (PDF 162). Answer key book p.301-302 (PDF 306-307): third label printed 'iii)'. Solution book PDF 741-770 used as a reference only."
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-2-Q8",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(i)",
+            "prompt": "8 (i) Find the term independent of \\(x\\) in the following expansions. \\(\\left(x - \\frac{2}{x}\\right)^{10}\\)",
+            "explanation": "Bachon, \"independent of \\(x\\)\" ka matlab hai woh term jis mein \\(x\\) bilkul na ho, yani \\(x\\) ki power zero ho (kyunke \\(x^0 = 1\\)). Aise term ko constant term bhi kehte hain.\nPlan: general term likho, \\(x\\) ki ek power banao, use 0 ke barabar rakho, \\(r\\) nikalo, phir number nikalo.",
+            "steps": [
+              "Diya gaya hai: \\(\\left(x - \\frac{2}{x}\\right)^{10}\\).\nHumein find karna hai: \\(x\\) se independent term (constant term).\nTareeqa: \\(T_{r+1}\\), jahan \\(n = 10\\), \\(a = x\\), \\(b = -\\frac{2}{x}\\). Pehle term mein \\(x\\) upar hai aur doosre mein neeche, is liye kisi beech wale term mein yeh cancel ho jayenge.",
+              "General term aur \\(x\\) ki power\n\\[T_{r+1} = \\binom{10}{r}x^{10-r}\\left(-\\dfrac{2}{x}\\right)^r\\]\n\\[= (-1)^r\\binom{10}{r}2^rx^{10-2r}\\]\nKyun: \\(\\left(-\\frac{2}{x}\\right)^r = (-1)^r\\frac{2^r}{x^r}\\). Phir \\(x^{10-r}\\) ko \\(x^r\\) se divide kiya: indices minus, \\(10 - r - r = 10 - 2r\\).",
+              "Power ko 0 rakhein\n\\[10 - 2r = 0 \\Rightarrow r = 5\\]\nKyun: \\(x\\) na ho to power 0. \\(r = 5\\) ka matlab 6th term \\(T_6\\).",
+              "\\(r = 5\\) rakhein\n\\[T_6 = (-1)^5\\binom{10}{5}2^5x^0\\]\n\\[= -252 \\times 32 = -8064\\]\nKyun: \\((-1)^5 = -1\\), \\(\\binom{10}{5} = 252\\), \\(2^5 = 32\\), aur \\(x^0 = 1\\). \\(252 \\times 32 = 8064\\).\nDhyan dein: minus sign na bhoolein; \\(r\\) odd hai is liye term negative hai.",
+              "Tasdeeq\n\\[x^{5} \\cdot x^{-5} = x^0 \\;\\checkmark\\]\nKyun: \\(T_6\\) mein pehle hisse se \\(x^5\\) aur doosre se \\(x^{-5}\\) aata hai; dono ek doosre ko poora cancel kar dete hain."
+            ],
+            "final_answer": "\\(T_6 = -8064\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(ii)",
+            "prompt": "8 (ii) Find the term independent of \\(x\\) in the following expansions. \\(\\left(\\sqrt{x} + \\frac{1}{2x^2}\\right)^{10}\\)",
+            "explanation": "Yahan pehla term square root hai, is liye \\(x\\) ki power mein fraction aayega. Ghabrane ki baat nahi, tareeqa wahi hai.\nPlan: dono hisson ko \\(x\\) ki powers mein likho (\\(\\sqrt{x} = x^{1/2}\\), \\(\\frac{1}{x^2} = x^{-2}\\)), powers jama karo, aur power ko 0 ke barabar rakho.",
+            "steps": [
+              "Diya gaya hai: \\(\\left(\\sqrt{x} + \\frac{1}{2x^2}\\right)^{10}\\).\nHumein find karna hai: \\(x\\) se independent term.\nTareeqa: \\(n = 10\\), \\(a = \\sqrt{x} = x^{1/2}\\), \\(b = \\frac{1}{2x^2} = \\frac{1}{2}x^{-2}\\). Dono hisse positive hain, to har term positive hoga; yahan \\((-1)^r\\) nahi aayega.",
+              "General term aur \\(x\\) ki power\n\\[T_{r+1} = \\binom{10}{r}(x^{1/2})^{10-r}\\left(\\dfrac{1}{2}x^{-2}\\right)^r\\]\n\\[= \\binom{10}{r}\\dfrac{1}{2^r}x^{\\frac{10-r}{2} - 2r}\\]\n\\[= \\binom{10}{r}\\dfrac{1}{2^r}x^{\\frac{10-5r}{2}}\\]\nKyun: \\((x^{1/2})^{10-r} = x^{\\frac{10-r}{2}}\\) aur \\((x^{-2})^r = x^{-2r}\\). Multiply mein indices jama: \\(\\frac{10-r}{2} - 2r\\). Common denominator le kar \\(2r = \\frac{4r}{2}\\), to \\(\\frac{10 - r - 4r}{2} = \\frac{10 - 5r}{2}\\).",
+              "Power ko 0 rakhein\n\\[\\dfrac{10 - 5r}{2} = 0\\]\n\\[10 - 5r = 0 \\Rightarrow r = 2\\]\nKyun: Constant term ki power 0 hai. Fraction 0 tab hota hai jab us ka numerator 0 ho. \\(r = 2\\) se term \\(T_3\\) hai.",
+              "\\(r = 2\\) rakhein\n\\[T_3 = \\binom{10}{2}\\dfrac{1}{2^2}\\]\n\\[= 45 \\times \\dfrac{1}{4} = \\dfrac{45}{4}\\]\nKyun: \\(\\binom{10}{2} = \\frac{10 \\cdot 9}{2 \\cdot 1} = 45\\) aur \\(2^2 = 4\\).",
+              "Tasdeeq\n\\[(\\sqrt{x})^8 = x^4, \\quad \\left(\\dfrac{1}{x^2}\\right)^2 = x^{-4}\\]\n\\[x^4 \\cdot x^{-4} = x^0 \\;\\checkmark\\]\nKyun: \\(T_3\\) mein \\(\\sqrt{x}\\) ki power \\(10 - 2 = 8\\) hai jo \\(x^4\\) deti hai, aur \\(\\frac{1}{x^2}\\) ki power 2 jo \\(x^{-4}\\) deti hai. Cancel ho gaye."
+            ],
+            "final_answer": "\\(T_3 = \\dfrac{45}{4}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(iii)",
+            "prompt": "8 (iii) Find the term independent of \\(x\\) in the following expansions. \\((1 + x^2)^3\\left(1 + \\frac{1}{x^2}\\right)^4\\)",
+            "explanation": "Ab do expansions ka product hai. Constant term tab banta hai jab pehle bracket ka koi term doosre bracket ke kisi aise term se multiply ho jis se \\(x\\) ki powers cancel ho jayein.\nPlan: dono brackets ke general terms likho, dekho kaun se jore power 0 dete hain, aur un sab ke products jama karo.",
+            "steps": [
+              "Diya gaya hai: \\((1 + x^2)^3\\left(1 + \\frac{1}{x^2}\\right)^4\\).\nHumein find karna hai: \\(x\\) se independent term.\nTareeqa: Har bracket ko us ke general term se kholein. Pehle se \\(x^{2k}\\) aur doosre se \\(x^{-2j}\\) ka product tabhi constant hai jab \\(j = k\\). Poori expansion multiply karne ki zaroorat nahi.",
+              "Dono brackets ke general terms\n\\[(1 + x^2)^3: \\; \\binom{3}{k}x^{2k},\\; k = 0, \\dots, 3\\]\n\\[\\left(1 + \\dfrac{1}{x^2}\\right)^4: \\; \\binom{4}{j}x^{-2j},\\; j = 0, \\dots, 4\\]\nKyun: 1 ki har power 1 hai, is liye har term sirf coefficient aur \\(x\\) ki ek power hai. \\((x^2)^k = x^{2k}\\) aur \\(\\left(\\frac{1}{x^2}\\right)^j = x^{-2j}\\).",
+              "Kaun se jore \\(x^0\\) dete hain\n\\[x^{2k} \\cdot x^{-2j} = x^{2k - 2j} = x^0\\]\n\\[\\Rightarrow j = k, \\quad k = 0, 1, 2, 3\\]\nKyun: Powers tabhi cancel hoti hain jab barabar hon. Pehle bracket mein \\(k\\) sirf 3 tak jata hai, is liye doosre bracket ka \\(j = 4\\) wala term kisi se jora nahi bana sakta.",
+              "Products jama karein\n\\[\\binom{3}{0}\\binom{4}{0} + \\binom{3}{1}\\binom{4}{1}\\]\n\\[+ \\binom{3}{2}\\binom{4}{2} + \\binom{3}{3}\\binom{4}{3}\\]\n\\[= 1 \\cdot 1 + 3 \\cdot 4 + 3 \\cdot 6 + 1 \\cdot 4\\]\n\\[= 1 + 12 + 18 + 4 = 35\\]\nKyun: Har jora apne coefficients ka product deta hai, aur constant term in sab ka jama hai.\nDhyan dein: sirf ek jora (jaise \\(1 \\cdot 1\\)) le kar ruk jana aam ghalti hai; saare jore lene zaroori hain.",
+              "Tasdeeq doosre tareeqe se\n\\[\\left(1 + \\dfrac{1}{x^2}\\right)^4 = \\dfrac{(x^2 + 1)^4}{x^8}\\]\n\\[\\text{Product} = \\dfrac{(1 + x^2)^7}{x^8}\\]\n\\[\\text{constant} = \\text{coeff. of } x^8 \\text{ in } (1 + x^2)^7\\]\n\\[= \\binom{7}{4} = 35 \\;\\checkmark\\]\nKyun: \\(1 + \\frac{1}{x^2} = \\frac{x^2 + 1}{x^2}\\), to power 4 lene se neeche \\(x^8\\) aata hai. Ab \\((1 + x^2)^3 (1 + x^2)^4 = (1 + x^2)^7\\). Is mein \\(x^8 = (x^2)^4\\) wala term \\(\\binom{7}{4}x^8\\) hai, jo \\(x^8\\) se divide ho kar 35 rehta hai. Dono tareeqe ek hi jawab dete hain."
+            ],
+            "final_answer": "\\(x\\) se independent term \\(35\\) hai"
+          }
+        ]
+      }
+    }
+  ]
+}

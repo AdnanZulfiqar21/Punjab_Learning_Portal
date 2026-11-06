@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.5.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.5.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 169,
+          "pdf_to": 171,
+          "note": "Book p. 164-166: 8.5.1 unnumbered example (8^100 divided by 7), Examples 23-25, Finding Digits of a Number (Example 26), Divisibility Test (Example 27). Teaching callouts and our own practice items are ours."
+        }
+      ],
+      "title": "8.5.1 Finding the Remainder using Binomial Theorem",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The idea of every example on this page: to divide a large power \\(N^{m}\\) by a number \\(d\\), write \\(N = d \\cdot q + r\\) with a small \\(r\\) (often \\(1\\) or \\(-1\\)). In the binomial expansion of \\((dq + r)^{m}\\) every term except \\(r^{m}\\) contains \\(d\\), so \\(N^{m}\\) and \\(r^{m}\\) leave the same remainder.\nIf \\(r = 1\\), the remainder is 1. If \\(r = -1\\), the last term is \\(+1\\) for an even power and \\(-1\\) for an odd power; a \"remainder\" of \\(-1\\) means \\(d - 1\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example (unnumbered)",
+            "problem": "Find the remainder when \\(8^{100}\\) is divided by 7.",
+            "steps": [
+              "Given: the number \\(8^{100}\\) and the divisor 7.\nTo find: the remainder when \\(8^{100}\\) is divided by 7.\nMethod: \\(8^{100}\\) is far too big to divide directly. We express 8 in terms of a multiple of 7, expand by the binomial theorem, and look for the terms that are not multiples of 7.",
+              "Step 1: Express 8 in terms of a multiple of 7\n\\[8 = 1 + 7\\]\n\\[8^{100} = (1 + 7)^{100}\\]\nWhy: 8 is just one more than 7, so after expanding, almost every term will contain the factor 7.",
+              "Step 2: Expand using the binomial theorem\nTaking 7 as the first term and 1 as the second:\n\\[(1 + 7)^{100} = {}^{100}C_{0}\\,7^{100}1^{0}\\]\n\\[+ {}^{100}C_{1}\\,7^{99}1^{1} + \\dots\\]\n\\[+ {}^{100}C_{99}\\,7^{1}1^{99}\\]\n\\[+ {}^{100}C_{100}\\,7^{0}1^{100}\\]\nWhy: \\((1 + 7)^{100} = (7 + 1)^{100}\\); writing 7 first makes the power of 7 fall from 100 down to 0, so the last term is the only one without 7.",
+              "Step 3: Spot the terms divisible by 7\nAll terms in the sum are divisible by 7 except the last term, \\({}^{100}C_{100}\\,7^{0}1^{100}\\).\nWhy: each of the other terms has \\(7^{1}\\) or a higher power of 7 as a factor, and the coefficients \\({}^{100}C_{r}\\) are whole numbers. A sum of multiples of 7 is a multiple of 7, so it leaves remainder 0.",
+              "Step 4: The remainder comes from the last term\n\\[\\text{Remainder} = {}^{100}C_{100}\\,7^{0}1^{100}\\]\n\\[= 1 \\cdot 1 \\cdot 1 = 1\\]\nWhy: \\(8^{100} = (\\text{multiple of } 7) + 1\\), and \\(1 < 7\\), so 1 is the remainder.",
+              "Check:\nSmall powers show the same pattern: \\(8 = 7 + 1\\), \\(8^{2} = 64 = 63 + 1\\), \\(8^{3} = 512 = 511 + 1\\) with \\(511 = 7 \\times 73\\). Each power of 8 is one more than a multiple of 7. A computer division of \\(8^{100}\\) by 7 also leaves 1."
+            ],
+            "answer": "The remainder is 1."
+          },
+          {
+            "type": "example",
+            "title": "Example 23",
+            "problem": "Find the remainder when \\(2^{100}\\) is divided by 3.",
+            "steps": [
+              "Given: \\(2^{100}\\) and the divisor 3.\nTo find: the remainder when \\(2^{100}\\) is divided by 3.\nMethod: 2 is one less than 3, so write \\(2 = 3 - 1\\), expand \\((3 - 1)^{100}\\), and take 3 common from every term except the last.",
+              "Step 1: Write the base using 3\n\\[2^{100} = (3 - 1)^{100}\\]\nWhy: \\(3 - 1\\) is a multiple of 3 plus a small number (\\(-1\\)); the powers of \\(-1\\) are just \\(\\pm 1\\).",
+              "Step 2: Expand by the binomial theorem\n\\[= \\binom{100}{0}3^{100}(-1)^{0} + \\binom{100}{1}3^{99}(-1)^{1}\\]\n\\[+ \\binom{100}{2}3^{98}(-1)^{2} + \\dots\\]\n\\[+ \\binom{100}{100}3^{0}(-1)^{100}\\]\nWhy: \\(a = 3\\), \\(b = -1\\), \\(n = 100\\). The sign of each term is \\((-1)^{r}\\): plus for even \\(r\\), minus for odd \\(r\\).",
+              "Step 3: Work out the coefficients\n\\[\\binom{100}{1} = 100,\\quad \\binom{100}{2} = \\dfrac{100 \\cdot 99}{2} = 4950\\]\n\\[= 3^{100} - (100)3^{99} + 4950 \\cdot 3^{98}\\]\n\\[- \\dots - (100)(3) + 1\\]\nThe book prints this line as \\(= 3^{100} - (100).3^{99} + 4900.3^{98} - \\dots - (100)(3) + 1\\); the third coefficient is 4950, not 4900.\nWhy: the second-last term is \\(\\binom{100}{99}3^{1}(-1)^{99} = -100 \\cdot 3\\), and the last is \\((-1)^{100} = +1\\) because 100 is even.",
+              "Step 4: Take 3 common from all terms but the last\n\\[= 3[3^{99} - (100)3^{98} + (4950)3^{97}\\]\n\\[- \\dots - 100] + 1\\]\n\\[= 3 \\times \\text{an integer} + 1\\]\nWhy: every term except the last has at least one factor 3; what is inside the bracket is a whole number.",
+              "Step 5: Read off the remainder\nThis shows that \\(2^{100}\\) leaves the remainder 1 when divided by 3.\nWhy: \\(2^{100} = 3 \\times (\\text{integer}) + 1\\) and \\(0 \\le 1 < 3\\).",
+              "Check:\n\\(2^{2} = 4 = 3 + 1\\), so \\(2^{100} = 4^{50} = (3 + 1)^{50}\\), which is also a multiple of 3 plus 1. A computer gives the same remainder, 1."
+            ],
+            "answer": "\\(2^{100}\\) leaves the remainder 1 when divided by 3.",
+            "book_errors": [
+              "\\(= 3^{100} - (100).3^{99} + 4900.3^{98} - \\dots - (100)(3) + 1\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 23: the book prints \\(4900.3^{98}\\) in the expansion and \\((4900)3^{97}\\) in the bracketed line. The coefficient is \\(\\binom{100}{2} = \\frac{100 \\times 99}{2} = 4950\\). The remainder 1 is not affected. (The book also prints \"intiger\" for integer.)"
+          },
+          {
+            "type": "example",
+            "title": "Example 24",
+            "problem": "Find the unit digit of:\n(i) \\((43)^{126}\\) (ii) \\((25)^{272}\\) (iii) \\((74)^{247}\\)",
+            "steps": [
+              "Given: three large powers.\nTo find: the unit digit (last digit) of each.\nMethod: the unit digit of a power depends only on the unit digit of the base. For example \\(43 = 40 + 3\\), and in \\((40 + 3)^{126}\\) every term except \\(3^{126}\\) contains 40, a multiple of 10. So we only need the last digit of \\(3^{126}\\). The last digits of powers repeat in a cycle, so we divide the exponent by 4 and use the remainder.",
+              "Step 1 (i): The cycle of last digits of powers of 3\n\\[3^{1} = 3,\\ 3^{2} = 9,\\ 3^{3} = 27,\\ 3^{4} = 81\\]\nThe last digits are \\(3, 9, 7, 1\\) and then they repeat.\nWhy: \\(3^{4} = 81\\) ends in 1, and \\(81^{m} = (80 + 1)^{m}\\) also ends in 1 (all other terms contain 80). So every fourth power starts the cycle again.",
+              "Step 2 (i): Divide the exponent by 4\nNow 126 can be written as:\n\\[126 = 4 \\times 31 + 2\\]\nSince the remainder is 2:\n\\[3^{2} = 9\\]\nHence the unit place digit of \\((43)^{126}\\) is 9.\nWhy: \\(3^{126} = (3^{4})^{31} \\cdot 3^{2} = 81^{31} \\cdot 9\\); \\(81^{31}\\) ends in 1, and \\(1 \\times 9 = 9\\).",
+              "Step 3 (ii): \\((25)^{272}\\)\nAs the unit place digit is 5, it always remains 5 at the unit place.\n(The book's solution writes this part as \\((25)^{271}\\); the question has \\((25)^{272}\\). The unit digit is 5 for either power.)\nWhy: any number ending in 5 times any number ending in 5 ends in 5 (\\(5 \\times 5 = 25\\)), so every power of 25 ends in 5.",
+              "Step 4 (iii): \\((74)^{247}\\)\n\\(74 = 70 + 4\\), so we need the last digit of \\(4^{247}\\). Powers of 4 end in \\(4, 6, 4, 6, \\dots\\) (\\(4, 16, 64, 256\\)).\nNow 247 can be written as:\n\\[247 = 4 \\times 61 + 3\\]\nSince the remainder is 3:\n\\[4^{3} = 64\\]\nHence the unit place digit of \\((74)^{247}\\) is 4.\nWhy: \\(4^{247} = (4^{4})^{61} \\cdot 4^{3}\\), and \\(4^{4} = 256\\) ends in 6; any power of a number ending in 6 ends in 6, and \\(6 \\times 64\\) ends in 4. (Simpler: an odd power of 4 always ends in 4.)",
+              "Check:\nA computer gives the last digits of \\(43^{126}\\), \\(25^{272}\\) and \\(74^{247}\\) as 9, 5 and 4. Also \\(126 = 124 + 2\\) and \\(247 = 244 + 3\\), with 124 and 244 both multiples of 4."
+            ],
+            "answer": "(i) 9 (ii) 5 (iii) 4",
+            "book_errors": [
+              "\\((25)^{271}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 24(ii): the question is \\((25)^{272}\\) but the solution writes \\((25)^{271}\\). Any power of 25 ends in 5, so the answer 5 is right either way."
+          },
+          {
+            "type": "example",
+            "title": "Example 25",
+            "problem": "If the fractional part of the number \\(\\frac{2}{31}\\) is \\(\\frac{k}{31}\\) then find \\(k\\).",
+            "steps": [
+              "Given: from the book's solution the number is \\(\\dfrac{2^{504}}{31}\\) (the question prints \\(\\frac{2}{31}\\); see the correction below). Its fractional part is \\(\\frac{k}{31}\\).\nTo find: \\(k\\).\nMethod: write the number as (an integer) + (a proper fraction); that proper fraction is the fractional part. To get there, make a power of 2 that is close to 31: \\(2^{5} = 32 = 31 + 1\\).",
+              "Step 1: Split the power of 2\n\\[\\dfrac{2^{504}}{31} = \\dfrac{2^{4} \\cdot 2^{500}}{31}\\]\n\\[= \\dfrac{2^{4} \\cdot (2^{5})^{100}}{31}\\]\n\\[= \\dfrac{16}{31}(32)^{100}\\]\nWhy: \\(504 = 4 + 500\\) and \\(500 = 5 \\times 100\\), so \\(2^{500} = (2^{5})^{100} = 32^{100}\\).",
+              "Step 2: Use \\(32 = 31 + 1\\)\n\\[= \\dfrac{16}{31}(31 + 1)^{100}\\]\n\\[= \\dfrac{16}{31}(31h + 1)\\]\nWhy: in the expansion of \\((31 + 1)^{100}\\) every term except the last contains 31, so their sum is \\(31h\\) for some integer \\(h\\); the last term is \\(1^{100} = 1\\).",
+              "Step 3: Separate the integer part\n\\[= \\dfrac{16 \\cdot 31h}{31} + \\dfrac{16}{31}\\]\n\\[= 16h + \\dfrac{16}{31}\\]\nWhy: multiply out the bracket; the 31 cancels in the first part.",
+              "Step 4: Read the fractional part\nSince \\(16h\\) is an integer and \\(0 < \\frac{16}{31} < 1\\), the fractional part is \\(\\frac{16}{31}\\). The book writes \"8h is an integer\" here; from Step 3 the integer is \\(16h\\).\nSo \\(k = 16\\).\nWhy: the fractional part is what remains after removing the whole-number part, and it must lie between 0 and 1.",
+              "Check:\n\\(2^{5} = 32\\) leaves remainder 1 on division by 31, so \\(2^{500} = (2^{5})^{100}\\) leaves 1, and \\(2^{504} = 16 \\cdot 2^{500}\\) leaves 16. A computer gives \\(2^{504} \\div 31\\) remainder 16, so the fractional part is \\(\\frac{16}{31}\\)."
+            ],
+            "answer": "\\(k = 16\\)",
+            "book_errors": [
+              "\\(\\frac{2}{31}\\)",
+              "8h is an integer"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 25: the question prints the number as \\(\\frac{2}{31}\\); the solution works with \\(\\frac{2^{504}}{31}\\), which is the intended number (\\(\\frac{2}{31}\\) itself is less than 1, so its fractional part would simply be \\(\\frac{2}{31}\\)). The solution also says \"8h is an integer\"; the integer part found is \\(16h\\). The answer \\(k = 16\\) is right."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Finding Digits of a Number"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The last digit of a whole number is its remainder on division by 10; the last two digits are its remainder on division by 100. So \"finding digits\" is the same remainder method with divisor 10 or 100: write the base as a multiple of 10 (or 100) plus a small number."
+          },
+          {
+            "type": "example",
+            "title": "Example 26",
+            "problem": "Find the last two digits of the number \\((11)^{12}\\).",
+            "steps": [
+              "Given: \\((11)^{12}\\).\nTo find: its last two digits.\nMethod: the last two digits of a whole number are its remainder on division by 100. Write the number with a base that is a multiple of 10 plus 1, expand, and drop every term that is a multiple of 100.",
+              "Step 1: Rewrite the base\n\\[(11)^{12} = (11^{2})^{6}\\]\n\\[= (121)^{6} = (120 + 1)^{6}\\]\nWhy: \\(120\\) is a multiple of 10, so \\(120^{2} = 14400\\) is a multiple of 100. Only the last two terms of the expansion will matter.",
+              "Step 2: Expand by the binomial theorem\n\\[= {}^{6}C_{0}(120)^{6} + {}^{6}C_{1}(120)^{5}(1)^{1}\\]\n\\[+ {}^{6}C_{2}(120)^{4}(1)^{2} + {}^{6}C_{3}(120)^{3}(1)^{3}\\]\n\\[+ {}^{6}C_{4}(120)^{2}(1)^{4} + {}^{6}C_{5}(120)^{1}(1)^{5}\\]\n\\[+ {}^{6}C_{6}(1)^{6}\\]\nSince every power of 1 is 1:\n\\[= {}^{6}C_{0}(120)^{6} + \\dots + {}^{6}C_{4}(120)^{2}\\]\n\\[+ {}^{6}C_{5}(120) + 1\\]\nWhy: \\(a = 120\\), \\(b = 1\\), \\(n = 6\\).",
+              "Step 3: Drop the multiples of 100\nThe terms from \\({}^{6}C_{0}(120)^{6}\\) to \\({}^{6}C_{4}(120)^{2}\\) all contain \\((120)^{2} = 14400\\), so their sum is a multiple of 100. What remains:\n\\[{}^{6}C_{5}(120) + 1 = 6(120) + 1\\]\n\\[= 720 + 1 = 721\\]\nWhy: a multiple of 100 ends in 00 and cannot change the last two digits.",
+              "Step 4: The last two digits\n\\[(11)^{12} = \\text{(multiple of 100)} + 721\\]\n\\[= 100k + 21\\]\nThe book prints this line as: A multiple of \\(100 + 6(120) + 1 = 100k + 72\\). The last two digits are 21. Since \\(6(120) + 1 = 721 = 700 + 21\\), the line should end in \\(100k + 21\\).\nWhy: 721 = 700 + 21, and 700 joins the multiple of 100.",
+              "Check:\n\\(11^{12} = 3138428376721\\), which ends in 21."
+            ],
+            "answer": "The last two digits of \\((11)^{12}\\) are 21.",
+            "book_errors": [
+              "\\(100 + 6(120) + 1 = 100k + 72\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 26: the book prints \"A multiple of \\(100 + 6(120) + 1 = 100k + 72\\)\". Since \\(6(120) + 1 = 721\\), it should read \\(100k + 21\\). The stated last two digits, 21, are right."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Divisibility Test"
+          },
+          {
+            "type": "example",
+            "title": "Example 27",
+            "problem": "Show that \\((15)^{13} + (13)^{15}\\) is divisible by 14.",
+            "steps": [
+              "Given: \\((15)^{13} + (13)^{15}\\).\nTo prove: the sum is divisible by 14.\nMethod: 15 and 13 are next to 14: \\(15 = 14 + 1\\) and \\(13 = 14 - 1\\). Expand both powers; all terms except the last ones contain 14, and the two last terms cancel.",
+              "Step 1: Write both bases using 14\n\\[(15)^{13} + (13)^{15} = (14 + 1)^{13} + (14 - 1)^{15}\\]\nWhy: this brings the divisor 14 into every base.",
+              "Step 2: Expand \\((14 + 1)^{13}\\)\n\\[= {}^{13}C_{0}(14)^{13} + {}^{13}C_{1}(14)^{12}\\]\n\\[+ {}^{13}C_{2}(14)^{11} + \\dots\\]\n\\[+ {}^{13}C_{12}(14) + {}^{13}C_{13}\\]\nWhy: \\(a = 14\\), \\(b = 1\\); all powers of 1 are 1. The last term is \\({}^{13}C_{13} = 1\\).",
+              "Step 3: Expand \\((14 - 1)^{15}\\)\n\\[= {}^{15}C_{0}(14)^{15} - {}^{15}C_{1}(14)^{14}\\]\n\\[+ {}^{15}C_{2}(14)^{13} - {}^{15}C_{3}(14)^{12}\\]\n\\[+ \\dots + {}^{15}C_{14}(14) - {}^{15}C_{15}\\]\nWhy: \\(b = -1\\), so the signs alternate. The second-last term has \\((-1)^{14} = +1\\) and the last has \\((-1)^{15} = -1\\), so the last term is \\(-{}^{15}C_{15} = -1\\).",
+              "Step 4: Add; the 1 and the \\(-1\\) cancel\n\\[= {}^{13}C_{0}(14)^{13} + \\dots + {}^{13}C_{12}(14) + 1\\]\n\\[+ {}^{15}C_{0}(14)^{15} - \\dots\\]\n\\[+ {}^{15}C_{14}(14) - 1\\]\nEvery term left contains the factor 14.\nWhy: \\(+1 - 1 = 0\\). This is why the question mixes powers 13 (odd) and 15 (odd): the last terms are \\(+1\\) and \\(-1\\).",
+              "Step 5: Take 14 common\n\\[= 14[{}^{13}C_{0}(14)^{12} + \\dots + {}^{13}C_{12}\\]\n\\[+ {}^{15}C_{0}(14)^{14} - {}^{15}C_{1}(14)^{13}\\]\n\\[+ \\dots + {}^{15}C_{14}]\\]\n\\[= 14k\\]\nwhich is divisible by 14.\nThe book's bracket reads \\(14[{}^{13}C_{0}(14)^{12} + \\dots + 1 + {}^{15}C_{0}(14)^{14} - \\dots]\\): the 1 should not be inside it (it cancelled in Step 4); the first group ends with \\({}^{13}C_{12} = 13\\).\nWhy: after dividing each term by 14, every term inside the bracket is a whole number, so \\(k\\) is an integer.",
+              "Check:\n15 leaves remainder 1 on division by 14, so \\(15^{13}\\) leaves 1; 13 leaves remainder 13 (that is, \\(-1\\)), so \\(13^{15}\\) leaves \\(-1\\), i.e. 13. The total remainder is \\(1 + 13 = 14\\), which is 0. A computer confirms that \\(15^{13} + 13^{15}\\) is divisible by 14."
+            ],
+            "answer": "Hence proved: \\((15)^{13} + (13)^{15} = 14k\\) is divisible by 14.",
+            "book_errors": [
+              "\\(14[{}^{13}C_{0}(14)^{12} + \\dots + 1 + {}^{15}C_{0}(14)^{14} - \\dots]\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 27: in the last two lines of working the book keeps a \"\\(+ \\dots + 1 +\\)\" inside the expansions and inside the bracket after 14. The \\(+1\\) from \\((14 + 1)^{13}\\) and the \\(-1\\) from \\((14 - 1)^{15}\\) cancel, so no 1 remains; the first group should end with \\({}^{13}C_{12}(14)\\), and with \\({}^{13}C_{12}\\) after 14 is taken out. The conclusion is right."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "For any remainder, digit or divisibility question, write these three lines first:\n1. The base as (multiple of the divisor) \\(\\pm\\) (small number).\n2. \"Every term except the last contains the divisor.\"\n3. The last term, with its sign worked out from the power (even or odd).\nThen state the result in one clear sentence, as in the book."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Remainder of \\(N^{m} \\div d\\): write \\(N = (\\text{multiple of } d) \\pm r\\); only \\((\\pm r)^{m}\\) matters.\n2. \\((d + 1)^{m}\\) leaves remainder 1; \\((d - 1)^{m}\\) leaves 1 for even \\(m\\) and \\(d - 1\\) for odd \\(m\\).\n3. Last digit = remainder on division by 10; last two digits = remainder on division by 100.\n4. Last digits of powers repeat in cycles of length 1, 2 or 4; divide the exponent by 4 and use the remainder.\n5. Fractional part: write the number as integer + proper fraction.\n6. Divisibility: show the expression equals \\(d \\times k\\) with \\(k\\) an integer."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Forgetting the sign of the last term in \\((d - 1)^{m}\\): for odd \\(m\\) it is \\(-1\\), and the remainder is \\(d - 1\\), not \\(-1\\).\n2. Taking the remainder as 0 because \"almost all terms\" are divisible: the last term is the whole answer.\n3. In digit questions, reading the first digits of 721 (72) instead of the last two (21).\n4. Dividing the exponent by the wrong cycle length: powers of 3 and 7 repeat every 4, powers of 4 and 9 every 2, powers of 5 and 6 every 1."
+          }
+        ]
+      }
+    }
+  ]
+}

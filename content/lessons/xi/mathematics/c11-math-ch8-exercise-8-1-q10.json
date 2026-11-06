@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q10",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 155,
+          "pdf_to": 155,
+          "note": "Exercise 8.1, Question 10: book page 150 (PDF 155); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10. Prove by mathematical induction that if a loan of Rs. 2,000,000 and pay Rs. 50,000 at the end of each year, the remaining balance after n years is \\(R_n = 2{,}000{,}000 - 50{,}000n\\).",
+            "explanation": "A real-life question: a loan of Rs. 2,000,000 is reduced by Rs. 50,000 every year (no interest is mentioned).\nWe must prove the formula for the balance after \\(n\\) years by induction.\nPlan: rule \\(R_{k+1} = R_k - 50{,}000\\); base case after 1 year; inductive step.",
+            "steps": [
+              "Given: loan Rs. 2,000,000; payment Rs. 50,000 at the end of each year.\nTo prove: \\(S(n): R_n = 2{,}000{,}000 - 50{,}000n\\) for every positive integer \\(n\\) (while the loan is not yet paid off).\nMethod: Find the yearly rule, then mathematical induction.",
+              "Turn the words into a rule\n\\[R_{k+1} = R_k - 50{,}000\\]\nWhy: Each yearly payment makes the remaining balance Rs. 50,000 smaller.",
+              "Base case: \\(n = 1\\)\n\\[R_1 = 2{,}000{,}000 - 50{,}000 = 1{,}950{,}000\\]\n\\[2{,}000{,}000 - 50{,}000(1) = 1{,}950{,}000\\]\nSo \\(S(1)\\) is true.\nWhy: After the first payment the balance is the loan minus one payment.",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[R_k = 2{,}000{,}000 - 50{,}000k \\quad (A)\\]\nWhy: We suppose the formula is right after \\(k\\) years.",
+              "Target \\(S(k + 1)\\)\n\\[R_{k+1} = 2{,}000{,}000 - 50{,}000(k + 1)\\]\nWhy: Put \\(n = k + 1\\).",
+              "Inductive step: use the rule, then (A)\n\\[R_{k+1} = R_k - 50{,}000\\]\n\\[= 2{,}000{,}000 - 50{,}000k - 50{,}000\\]\n\\[= 2{,}000{,}000 - 50{,}000(k + 1)\\]\nWhy: (A) replaces \\(R_k\\); then \\(50{,}000\\) is common in \\(-50{,}000k - 50{,}000\\).",
+              "Conclusion\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, \\(R_n = 2{,}000{,}000 - 50{,}000n\\) for every positive integer \\(n\\), until the loan is cleared.\nWhy: Both conditions of the principle hold.",
+              "Check: when is the loan cleared?\n\\[2{,}000{,}000 - 50{,}000n = 0\\]\n\\[n = 40\\]\nWhy: After 40 payments the balance is 0, so the formula is meaningful for \\(1 \\le n \\le 40\\)."
+            ],
+            "final_answer": "Hence proved: the remaining balance after \\(n\\) years is \\(R_n = 2{,}000{,}000 - 50{,}000n\\) (for \\(n \\le 40\\))."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-2-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-2-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 162,
+          "pdf_to": 162,
+          "note": "Exercise 8.2, Question 7: book p.157 (PDF 162). Answer key book p.301-302 (PDF 306-307): exponent 10 printed faintly; key -15309/8 x^5 confirms 10. Solution book PDF 741-770 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7 Find 6th term in the expansion of \\(\\left(x^2 - \\frac{3}{2x}\\right)^{10}\\).",
+            "explanation": "We want the term at a given position (the 6th), not the term with a given power.\nSince the general term \\(T_{r+1}\\) is the \\((r + 1)\\)th term, the 6th term needs \\(r + 1 = 6\\).\nPlan: \\(r = 5\\), write the general term, put \\(r = 5\\).",
+            "steps": [
+              "Given: \\(\\left(x^2 - \\frac{3}{2x}\\right)^{10}\\).\nTo find: the 6th term, \\(T_6\\).\nMethod: \\(T_{r+1}\\) with \\(n = 10\\), first term \\(x^2\\), second term \\(-\\frac{3}{2x}\\); \\(r + 1 = 6\\) gives \\(r = 5\\).",
+              "General term and its power of \\(x\\)\n\\[T_{r+1} = \\binom{10}{r}(x^2)^{10-r}\\left(-\\dfrac{3}{2x}\\right)^r\\]\n\\[= (-1)^r\\binom{10}{r}\\left(\\dfrac{3}{2}\\right)^r\\dfrac{x^{20-2r}}{x^r}\\]\n\\[= (-1)^r\\binom{10}{r}\\left(\\dfrac{3}{2}\\right)^rx^{20-3r}\\]\nWhy: \\((x^2)^{10-r} = x^{20-2r}\\) (multiply the indices) and \\(\\left(-\\frac{3}{2x}\\right)^r = (-1)^r\\left(\\frac{3}{2}\\right)^r\\frac{1}{x^r}\\). Dividing by \\(x^r\\) subtracts \\(r\\).",
+              "Put \\(r = 5\\)\n\\[T_6 = (-1)^5\\binom{10}{5}\\left(\\dfrac{3}{2}\\right)^5x^{5}\\]\n\\[= -252 \\times \\dfrac{243}{32}x^5\\]\n\\[= -\\dfrac{61236}{32}x^5 = -\\dfrac{15309}{8}x^5\\]\nWhy: \\((-1)^5 = -1\\); \\(\\binom{10}{5} = \\frac{10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6}{5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1} = 252\\); \\(3^5 = 243\\), \\(2^5 = 32\\); \\(252 \\times 243 = 61236\\); divide top and bottom by 4.",
+              "Check\n\\[20 - 3(5) = 5\\]\nWhy: The power of \\(x\\) in \\(T_6\\) is 5, the same term as in Question 6(i), so the number agrees with that coefficient."
+            ],
+            "final_answer": "\\(T_6 = -\\dfrac{15309}{8}x^5\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

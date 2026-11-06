@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 154,
+          "pdf_to": 154,
+          "note": "Exercise 8.1, Question 1: book page 149 (PDF 154); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(1 + 3 + 5 + \\cdots + (2n - 1) = n^2\\) [printed as \\((2n\\ \\ 1)\\): the minus sign is missing]",
+            "explanation": "A sum formula that must hold for every positive integer \\(n\\). We cannot test every \\(n\\) one by one, so we use mathematical induction.\nWe must show two things: the formula is true for \\(n = 1\\), and whenever it is true for \\(n = k\\) it is also true for \\(n = k + 1\\).\nPlan: base case, hypothesis \\(S(k)\\), add the next term \\(2k + 1\\) and simplify to \\((k + 1)^2\\).",
+            "steps": [
+              "Given: \\(S(n): 1 + 3 + 5 + \\cdots + (2n - 1) = n^2\\).\nTo prove: \\(S(n)\\) is true for every positive integer \\(n\\).\nMethod: Principle of mathematical induction: (1) base case \\(S(1)\\); (2) assume \\(S(k)\\) and prove \\(S(k + 1)\\); (3) conclusion. The \\(n\\)th term is \\(2n - 1\\), so the \\((k + 1)\\)th term is \\(2(k + 1) - 1 = 2k + 1\\).",
+              "Base case: put \\(n = 1\\)\n\\[\\text{L.H.S.} = 1\\]\n\\[\\text{R.H.S.} = 1^2 = 1\\]\nSo \\(S(1)\\) is true.\nWhy: For \\(n = 1\\) the left side has only its first term, \\(2(1) - 1 = 1\\).",
+              "Induction hypothesis: assume \\(S(k)\\) is true\n\\[1 + 3 + \\cdots + (2k - 1) = k^2 \\quad (A)\\]\nWhy: We suppose the formula holds for some positive integer \\(k\\). We do not prove (A); we use it in the inductive step.",
+              "Write the target \\(S(k + 1)\\)\n\\[1 + 3 + \\cdots + (2k - 1)\\]\n\\[+\\, (2k + 1) = (k + 1)^2\\]\nWhy: Replace \\(n\\) by \\(k + 1\\) everywhere. The sum gains one more term, \\(2k + 1\\), and the right side becomes \\((k + 1)^2\\).",
+              "Inductive step: use (A)\n\\[\\text{L.H.S.} = k^2 + (2k + 1)\\]\n\\[= k^2 + 2k + 1\\]\n\\[= (k + 1)^2 = \\text{R.H.S.}\\]\nWhy: The first \\(k\\) terms of the target are exactly the left side of (A), so we replace them by \\(k^2\\). Then \\(k^2 + 2k + 1\\) is the perfect square \\((k + 1)^2\\). So \\(S(k)\\) true \\(\\Rightarrow\\) \\(S(k + 1)\\) true.",
+              "Conclusion\n\\(S(1)\\) is true, and \\(S(k)\\) true implies \\(S(k + 1)\\) true. By the principle of mathematical induction, \\(S(n)\\) is true for every positive integer \\(n\\).\nWhy: The first domino falls (base case) and every domino knocks down the next (inductive step), so all of them fall.",
+              "Check: \\(n = 4\\)\n\\[1 + 3 + 5 + 7 = 16\\]\n\\[4^2 = 16 \\;\\checkmark\\]\nWhy: A quick numerical test confirms the formula; it is not a proof, the induction above is."
+            ],
+            "final_answer": "Hence proved: \\(1 + 3 + 5 + \\cdots + (2n - 1) = n^2\\) for every positive integer \\(n\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the last term as \\((2n\\ \\ 1)\\): the minus sign is missing. The correct last term is \\((2n - 1)\\), the \\(n\\)th odd number (for \\(n = 3\\): \\(2(3) - 1 = 5\\))."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(1 + \\frac{1}{2} + \\frac{1}{4} + \\cdots + \\frac{1}{2^{n-1}} = 2\\left[1 - \\frac{1}{2^n}\\right]\\)",
+            "explanation": "A sum of a G.P. with first term 1 and common ratio \\(\\frac{1}{2}\\), to be proved for every positive integer \\(n\\).\nWe must show the base case and that \\(S(k)\\) gives \\(S(k + 1)\\).\nPlan: write the right side as \\(2 - \\frac{1}{2^{n-1}}\\), add the next term \\(\\frac{1}{2^k}\\) and simplify.",
+            "steps": [
+              "Given: \\(S(n): 1 + \\frac{1}{2} + \\cdots + \\frac{1}{2^{n-1}} = 2\\left[1 - \\frac{1}{2^n}\\right]\\).\nTo prove: \\(S(n)\\) is true for every positive integer \\(n\\).\nMethod: Mathematical induction. The \\(n\\)th term is \\(\\frac{1}{2^{n-1}}\\), so the \\((k + 1)\\)th term is \\(\\frac{1}{2^k}\\). It helps to open the bracket: \\(2\\left[1 - \\frac{1}{2^n}\\right] = 2 - \\frac{2}{2^n} = 2 - \\frac{1}{2^{n-1}}\\).",
+              "Base case: put \\(n = 1\\)\n\\[\\text{L.H.S.} = 1\\]\n\\[\\text{R.H.S.} = 2\\left[1 - \\tfrac{1}{2}\\right]\\]\n\\[= 2 \\times \\tfrac{1}{2} = 1\\]\nSo \\(S(1)\\) is true.\nWhy: For \\(n = 1\\) the left side is only the first term \\(\\frac{1}{2^0} = 1\\).",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[1 + \\tfrac{1}{2} + \\cdots + \\tfrac{1}{2^{k-1}}\\]\n\\[= 2 - \\dfrac{1}{2^{k-1}} \\quad (A)\\]\nWhy: This is \\(S(k)\\) with the bracket opened: \\(2\\left[1 - \\frac{1}{2^k}\\right] = 2 - \\frac{2}{2^k} = 2 - \\frac{1}{2^{k-1}}\\).",
+              "Write the target \\(S(k + 1)\\)\n\\[1 + \\tfrac{1}{2} + \\cdots + \\tfrac{1}{2^{k-1}} + \\tfrac{1}{2^k}\\]\n\\[= 2\\left[1 - \\dfrac{1}{2^{k+1}}\\right]\\]\n\\[= 2 - \\dfrac{1}{2^k}\\]\nWhy: Put \\(n = k + 1\\). The new last term is \\(\\frac{1}{2^k}\\); on the right, \\(2 \\cdot \\frac{1}{2^{k+1}} = \\frac{1}{2^k}\\).",
+              "Inductive step: use (A)\n\\[\\text{L.H.S.} = 2 - \\dfrac{1}{2^{k-1}} + \\dfrac{1}{2^k}\\]\n\\[= 2 - \\dfrac{2}{2^k} + \\dfrac{1}{2^k}\\]\n\\[= 2 - \\dfrac{1}{2^k}\\]\n\\[= 2\\left[1 - \\dfrac{1}{2^{k+1}}\\right] = \\text{R.H.S.}\\]\nWhy: The first \\(k\\) terms are replaced by the value from (A). Then \\(\\frac{1}{2^{k-1}} = \\frac{2}{2^k}\\) gives a common denominator, and \\(-2 + 1 = -1\\) in the numerator.",
+              "Conclusion\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, \\(S(n)\\) is true for every positive integer \\(n\\).\nWhy: Both conditions of the principle are satisfied.",
+              "Check: \\(n = 3\\)\n\\[1 + \\tfrac{1}{2} + \\tfrac{1}{4} = \\tfrac{7}{4}\\]\n\\[2\\left[1 - \\tfrac{1}{8}\\right] = 2 \\times \\tfrac{7}{8} = \\tfrac{7}{4} \\;\\checkmark\\]\nWhy: Both sides agree for a small value."
+            ],
+            "final_answer": "Hence proved: \\(1 + \\frac{1}{2} + \\frac{1}{4} + \\cdots + \\frac{1}{2^{n-1}} = 2\\left[1 - \\frac{1}{2^n}\\right]\\) for every positive integer \\(n\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) [printed as (ii); the book repeats the label (ii)] Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(2 + 6 + 18 + \\cdots + 2 \\times 3^{n-1} = 3^n - 1\\)",
+            "explanation": "Another G.P. sum (each term is 3 times the one before), to be proved for every positive integer \\(n\\).\nWe need the base case and the step from \\(S(k)\\) to \\(S(k + 1)\\).\nPlan: add the next term \\(2 \\times 3^k\\) to \\(3^k - 1\\) and collect the powers of 3.",
+            "steps": [
+              "Given: \\(S(n): 2 + 6 + 18 + \\cdots + 2 \\times 3^{n-1} = 3^n - 1\\).\nTo prove: \\(S(n)\\) is true for every positive integer \\(n\\).\nMethod: Mathematical induction. The \\(n\\)th term is \\(2 \\times 3^{n-1}\\), so the \\((k + 1)\\)th term is \\(2 \\times 3^k\\).",
+              "Base case: put \\(n = 1\\)\n\\[\\text{L.H.S.} = 2 \\times 3^0 = 2\\]\n\\[\\text{R.H.S.} = 3^1 - 1 = 2\\]\nSo \\(S(1)\\) is true.\nWhy: For \\(n = 1\\) only the first term is on the left.",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[2 + 6 + \\cdots + 2 \\times 3^{k-1}\\]\n\\[= 3^k - 1 \\quad (A)\\]\nWhy: We suppose the formula holds for some positive integer \\(k\\).",
+              "Write the target \\(S(k + 1)\\)\n\\[2 + 6 + \\cdots + 2 \\times 3^{k-1} + 2 \\times 3^k\\]\n\\[= 3^{k+1} - 1\\]\nWhy: Put \\(n = k + 1\\); one more term \\(2 \\times 3^k\\) appears.",
+              "Inductive step: use (A)\n\\[\\text{L.H.S.} = (3^k - 1) + 2 \\times 3^k\\]\n\\[= 3^k + 2 \\times 3^k - 1\\]\n\\[= 3 \\times 3^k - 1\\]\n\\[= 3^{k+1} - 1 = \\text{R.H.S.}\\]\nWhy: The first \\(k\\) terms are replaced by \\(3^k - 1\\) from (A). One \\(3^k\\) plus two \\(3^k\\) is three \\(3^k\\), and \\(3 \\times 3^k = 3^{k+1}\\) (add the indices).",
+              "Conclusion\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, \\(S(n)\\) is true for every positive integer \\(n\\).\nWhy: Both conditions of the principle hold.",
+              "Check: \\(n = 3\\)\n\\[2 + 6 + 18 = 26\\]\n\\[3^3 - 1 = 27 - 1 = 26 \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(2 + 6 + 18 + \\cdots + 2 \\times 3^{n-1} = 3^n - 1\\) for every positive integer \\(n\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(1 \\times 3 + 2 \\times 5 + 3 \\times 7 + \\cdots + n \\times (2n + 1) = \\frac{n(n + 1)(4n + 5)}{6}\\)",
+            "explanation": "A sum whose terms are (counting number) \\(\\times\\) (odd number); prove it for every positive integer \\(n\\).\nWe need the base case and the step \\(S(k) \\Rightarrow S(k + 1)\\).\nPlan: add the next term \\((k + 1)(2k + 3)\\), take \\((k + 1)\\) common, and factorise the bracket.",
+            "steps": [
+              "Given: \\(S(n): 1 \\times 3 + 2 \\times 5 + \\cdots + n(2n + 1) = \\frac{n(n + 1)(4n + 5)}{6}\\).\nTo prove: \\(S(n)\\) is true for every positive integer \\(n\\).\nMethod: Mathematical induction. The \\(n\\)th term is \\(n(2n + 1)\\), so the \\((k + 1)\\)th term is \\((k + 1)(2k + 3)\\).",
+              "Base case: put \\(n = 1\\)\n\\[\\text{L.H.S.} = 1 \\times 3 = 3\\]\n\\[\\text{R.H.S.} = \\dfrac{1 \\times 2 \\times 9}{6} = 3\\]\nSo \\(S(1)\\) is true.\nWhy: For \\(n = 1\\): \\(4n + 5 = 9\\) and \\(n + 1 = 2\\).",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[1 \\times 3 + \\cdots + k(2k + 1)\\]\n\\[= \\dfrac{k(k + 1)(4k + 5)}{6} \\quad (A)\\]\nWhy: We suppose the formula holds for some positive integer \\(k\\).",
+              "Write the target \\(S(k + 1)\\)\n\\[1 \\times 3 + \\cdots + (k + 1)(2k + 3)\\]\n\\[= \\dfrac{(k + 1)(k + 2)(4k + 9)}{6}\\]\nWhy: Put \\(n = k + 1\\): \\(n + 1 = k + 2\\) and \\(4n + 5 = 4k + 9\\).",
+              "Inductive step: use (A)\n\\[\\text{L.H.S.} = \\dfrac{k(k + 1)(4k + 5)}{6}\\]\n\\[+\\, (k + 1)(2k + 3)\\]\n\\[= \\dfrac{(k + 1)[k(4k + 5) + 6(2k + 3)]}{6}\\]\nWhy: The first \\(k\\) terms are replaced by (A). Both parts contain \\((k + 1)\\), so we take it common over the denominator 6 (the second part is multiplied by \\(\\frac{6}{6}\\)).",
+              "Simplify the bracket\n\\[k(4k + 5) + 6(2k + 3)\\]\n\\[= 4k^2 + 5k + 12k + 18\\]\n\\[= 4k^2 + 17k + 18\\]\n\\[= (k + 2)(4k + 9)\\]\nWhy: To factorise, split \\(17k = 8k + 9k\\) (since \\(8 \\times 9 = 4 \\times 18 = 72\\)): \\(4k^2 + 8k + 9k + 18 = 4k(k + 2) + 9(k + 2)\\).",
+              "Reach the target\n\\[\\text{L.H.S.} = \\dfrac{(k + 1)(k + 2)(4k + 9)}{6}\\]\n\\[= \\text{R.H.S.}\\]\nWhy: This is exactly the right side of \\(S(k + 1)\\), so \\(S(k)\\) true \\(\\Rightarrow\\) \\(S(k + 1)\\) true.",
+              "Conclusion\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, \\(S(n)\\) is true for every positive integer \\(n\\).\nWhy: Both conditions of the principle hold.",
+              "Check: \\(n = 2\\)\n\\[1 \\times 3 + 2 \\times 5 = 13\\]\n\\[\\dfrac{2 \\times 3 \\times 13}{6} = 13 \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(1 \\times 3 + 2 \\times 5 + \\cdots + n(2n + 1) = \\frac{n(n + 1)(4n + 5)}{6}\\) for every positive integer \\(n\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(v)",
+            "prompt": "1 (v) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(\\frac{1}{1 \\times 2} + \\frac{1}{2 \\times 3} + \\frac{1}{3 \\times 4} + \\cdots + \\frac{1}{n(n + 1)} = 1 - \\frac{1}{n + 1}\\)",
+            "explanation": "A sum of fractions, to be proved for every positive integer \\(n\\).\nWe need the base case and the step \\(S(k) \\Rightarrow S(k + 1)\\).\nPlan: write the right side as \\(\\frac{n}{n + 1}\\), add the next term \\(\\frac{1}{(k + 1)(k + 2)}\\) and simplify with a common denominator.",
+            "steps": [
+              "Given: \\(S(n): \\frac{1}{1 \\times 2} + \\cdots + \\frac{1}{n(n + 1)} = 1 - \\frac{1}{n + 1}\\).\nTo prove: \\(S(n)\\) is true for every positive integer \\(n\\).\nMethod: Mathematical induction. Note \\(1 - \\frac{1}{n + 1} = \\frac{n}{n + 1}\\). The \\((k + 1)\\)th term is \\(\\frac{1}{(k + 1)(k + 2)}\\).",
+              "Base case: put \\(n = 1\\)\n\\[\\text{L.H.S.} = \\dfrac{1}{1 \\times 2} = \\dfrac{1}{2}\\]\n\\[\\text{R.H.S.} = 1 - \\dfrac{1}{2} = \\dfrac{1}{2}\\]\nSo \\(S(1)\\) is true.\nWhy: For \\(n = 1\\) only the first term is on the left.",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[\\dfrac{1}{1 \\times 2} + \\cdots + \\dfrac{1}{k(k + 1)}\\]\n\\[= \\dfrac{k}{k + 1} \\quad (A)\\]\nWhy: \\(1 - \\frac{1}{k + 1} = \\frac{k + 1 - 1}{k + 1} = \\frac{k}{k + 1}\\).",
+              "Write the target \\(S(k + 1)\\)\n\\[\\dfrac{1}{1 \\times 2} + \\cdots + \\dfrac{1}{(k + 1)(k + 2)}\\]\n\\[= 1 - \\dfrac{1}{k + 2} = \\dfrac{k + 1}{k + 2}\\]\nWhy: Put \\(n = k + 1\\).",
+              "Inductive step: use (A)\n\\[\\text{L.H.S.} = \\dfrac{k}{k + 1} + \\dfrac{1}{(k + 1)(k + 2)}\\]\n\\[= \\dfrac{k(k + 2) + 1}{(k + 1)(k + 2)}\\]\n\\[= \\dfrac{k^2 + 2k + 1}{(k + 1)(k + 2)}\\]\nWhy: The first \\(k\\) terms are replaced by (A). The common denominator is \\((k + 1)(k + 2)\\), so the first numerator is multiplied by \\(k + 2\\).",
+              "Factorise and cancel\n\\[= \\dfrac{(k + 1)^2}{(k + 1)(k + 2)}\\]\n\\[= \\dfrac{k + 1}{k + 2}\\]\n\\[= 1 - \\dfrac{1}{k + 2} = \\text{R.H.S.}\\]\nWhy: \\(k^2 + 2k + 1 = (k + 1)^2\\); one factor \\((k + 1)\\) cancels (it is not zero).",
+              "Conclusion\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, \\(S(n)\\) is true for every positive integer \\(n\\).\nWhy: Both conditions of the principle hold.",
+              "Check: \\(n = 3\\)\n\\[\\tfrac{1}{2} + \\tfrac{1}{6} + \\tfrac{1}{12} = \\tfrac{6 + 2 + 1}{12} = \\tfrac{3}{4}\\]\n\\[1 - \\tfrac{1}{4} = \\tfrac{3}{4} \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\frac{1}{1 \\times 2} + \\frac{1}{2 \\times 3} + \\cdots + \\frac{1}{n(n + 1)} = 1 - \\frac{1}{n + 1}\\) for every positive integer \\(n\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(vi)",
+            "prompt": "1 (vi) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(r + r^2 + r^3 + \\cdots + r^n = \\frac{r(1 - r^n)}{1 - r},\\ (r \\ne 1)\\)",
+            "explanation": "The sum of the first \\(n\\) terms of a G.P. with first term \\(r\\) and common ratio \\(r\\); prove it for every positive integer \\(n\\).\nThe condition \\(r \\ne 1\\) keeps the denominator \\(1 - r\\) from being zero.\nPlan: add the next term \\(r^{k+1}\\), write it over \\(1 - r\\), and let the middle powers cancel.",
+            "steps": [
+              "Given: \\(S(n): r + r^2 + \\cdots + r^n = \\frac{r(1 - r^n)}{1 - r}\\), \\(r \\ne 1\\).\nTo prove: \\(S(n)\\) is true for every positive integer \\(n\\).\nMethod: Mathematical induction. The \\(n\\)th term is \\(r^n\\), so the \\((k + 1)\\)th term is \\(r^{k+1}\\).",
+              "Base case: put \\(n = 1\\)\n\\[\\text{L.H.S.} = r\\]\n\\[\\text{R.H.S.} = \\dfrac{r(1 - r)}{1 - r} = r\\]\nSo \\(S(1)\\) is true.\nWhy: \\(1 - r \\ne 0\\) because \\(r \\ne 1\\), so it may be cancelled.",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[r + r^2 + \\cdots + r^k = \\dfrac{r(1 - r^k)}{1 - r} \\quad (A)\\]\nWhy: We suppose the formula holds for some positive integer \\(k\\).",
+              "Write the target \\(S(k + 1)\\)\n\\[r + r^2 + \\cdots + r^k + r^{k+1}\\]\n\\[= \\dfrac{r(1 - r^{k+1})}{1 - r}\\]\nWhy: Put \\(n = k + 1\\).",
+              "Inductive step: use (A)\n\\[\\text{L.H.S.} = \\dfrac{r(1 - r^k)}{1 - r} + r^{k+1}\\]\n\\[= \\dfrac{r - r^{k+1} + r^{k+1}(1 - r)}{1 - r}\\]\n\\[= \\dfrac{r - r^{k+1} + r^{k+1} - r^{k+2}}{1 - r}\\]\nWhy: The first \\(k\\) terms are replaced by (A). To add, \\(r^{k+1}\\) is written over \\(1 - r\\) by multiplying its top by \\(1 - r\\). Also \\(r \\cdot r^k = r^{k+1}\\) and \\(r^{k+1} \\cdot r = r^{k+2}\\).",
+              "Cancel and take \\(r\\) common\n\\[= \\dfrac{r - r^{k+2}}{1 - r}\\]\n\\[= \\dfrac{r(1 - r^{k+1})}{1 - r} = \\text{R.H.S.}\\]\nWhy: \\(-r^{k+1}\\) and \\(+r^{k+1}\\) cancel; then \\(r^{k+2} = r \\cdot r^{k+1}\\), so \\(r\\) comes out as a common factor.",
+              "Conclusion\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, \\(S(n)\\) is true for every positive integer \\(n\\) (and every real \\(r \\ne 1\\)).\nWhy: Both conditions of the principle hold.",
+              "Check: \\(r = 2,\\ n = 3\\)\n\\[2 + 4 + 8 = 14\\]\n\\[\\dfrac{2(1 - 8)}{1 - 2} = \\dfrac{-14}{-1} = 14 \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(r + r^2 + \\cdots + r^n = \\frac{r(1 - r^n)}{1 - r}\\) for every positive integer \\(n\\) \\((r \\ne 1)\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(vii)",
+            "prompt": "1 (vii) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(a + (a + d) + (a + 2d) + \\cdots + [a + (n - 1)d] = \\frac{n}{2}[2a + (n - 1)d]\\)",
+            "explanation": "This is the formula for the sum of \\(n\\) terms of an A.P. with first term \\(a\\) and common difference \\(d\\).\nWe prove it for every positive integer \\(n\\) by induction.\nPlan: add the next term \\(a + kd\\), put everything over 2, and group the \\(a\\) terms and the \\(d\\) terms.",
+            "steps": [
+              "Given: \\(S(n): a + (a + d) + \\cdots + [a + (n - 1)d] = \\frac{n}{2}[2a + (n - 1)d]\\).\nTo prove: \\(S(n)\\) is true for every positive integer \\(n\\).\nMethod: Mathematical induction. The \\(n\\)th term is \\(a + (n - 1)d\\), so the \\((k + 1)\\)th term is \\(a + kd\\).",
+              "Base case: put \\(n = 1\\)\n\\[\\text{L.H.S.} = a\\]\n\\[\\text{R.H.S.} = \\tfrac{1}{2}[2a + 0] = a\\]\nSo \\(S(1)\\) is true.\nWhy: For \\(n = 1\\): \\((n - 1)d = 0\\).",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[a + (a + d) + \\cdots + [a + (k - 1)d]\\]\n\\[= \\dfrac{k}{2}[2a + (k - 1)d] \\quad (A)\\]\nWhy: We suppose the formula holds for some positive integer \\(k\\).",
+              "Write the target \\(S(k + 1)\\)\n\\[a + \\cdots + [a + (k - 1)d] + (a + kd)\\]\n\\[= \\dfrac{k + 1}{2}[2a + kd]\\]\nWhy: Put \\(n = k + 1\\): \\((n - 1)d\\) becomes \\(kd\\).",
+              "Inductive step: use (A)\n\\[\\text{L.H.S.} = \\dfrac{k}{2}[2a + (k - 1)d] + a + kd\\]\n\\[= \\dfrac{2ak + k(k - 1)d + 2a + 2kd}{2}\\]\nWhy: Replace the first \\(k\\) terms by (A); write \\(a + kd\\) over 2 as \\(\\frac{2a + 2kd}{2}\\).",
+              "Group the \\(a\\) terms and the \\(d\\) terms\n\\[= \\dfrac{2a(k + 1) + d(k^2 - k + 2k)}{2}\\]\n\\[= \\dfrac{2a(k + 1) + d\\,k(k + 1)}{2}\\]\n\\[= \\dfrac{k + 1}{2}[2a + kd] = \\text{R.H.S.}\\]\nWhy: \\(2ak + 2a = 2a(k + 1)\\) and \\(k^2 - k + 2k = k^2 + k = k(k + 1)\\); then \\((k + 1)\\) is a common factor.",
+              "Conclusion\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, \\(S(n)\\) is true for every positive integer \\(n\\).\nWhy: Both conditions of the principle hold.",
+              "Check: \\(a = 2,\\ d = 3,\\ n = 4\\)\n\\[2 + 5 + 8 + 11 = 26\\]\n\\[\\tfrac{4}{2}[4 + 9] = 2 \\times 13 = 26 \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(a + (a + d) + \\cdots + [a + (n - 1)d] = \\frac{n}{2}[2a + (n - 1)d]\\) for every positive integer \\(n\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(viii)",
+            "prompt": "1 (viii) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(a_n = a_1 + (n - 1)d\\) when \\(a_1,\\ a_1 + d,\\ a_1 + 2d, \\ldots\\) form an A.P.",
+            "explanation": "Here the left side is not a sum: it is the \\(n\\)th term of an A.P.\nThe only fact we use is the rule of an A.P.: each term is the previous term plus \\(d\\), that is \\(a_{k+1} = a_k + d\\).\nPlan: base case, assume \\(a_k = a_1 + (k - 1)d\\), then apply the rule once.",
+            "steps": [
+              "Given: an A.P. \\(a_1,\\ a_1 + d,\\ a_1 + 2d, \\ldots\\), so \\(a_{m+1} = a_m + d\\) for every \\(m\\).\nTo prove: \\(S(n): a_n = a_1 + (n - 1)d\\) for every positive integer \\(n\\).\nMethod: Mathematical induction, using the A.P. rule in the inductive step.",
+              "Base case: put \\(n = 1\\)\n\\[\\text{R.H.S.} = a_1 + (1 - 1)d = a_1\\]\n\\[= \\text{L.H.S.}\\]\nSo \\(S(1)\\) is true.\nWhy: \\((1 - 1)d = 0\\).",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[a_k = a_1 + (k - 1)d \\quad (A)\\]\nWhy: We suppose the formula holds for some positive integer \\(k\\).",
+              "Write the target \\(S(k + 1)\\)\n\\[a_{k+1} = a_1 + kd\\]\nWhy: Put \\(n = k + 1\\): \\((k + 1 - 1)d = kd\\).",
+              "Inductive step: use the A.P. rule and (A)\n\\[a_{k+1} = a_k + d\\]\n\\[= a_1 + (k - 1)d + d\\]\n\\[= a_1 + kd = \\text{R.H.S.}\\]\nWhy: In an A.P. the next term is the previous term plus \\(d\\). Then (A) replaces \\(a_k\\), and \\((k - 1)d + d = kd\\).",
+              "Conclusion\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, \\(a_n = a_1 + (n - 1)d\\) for every positive integer \\(n\\).\nWhy: Both conditions of the principle hold.",
+              "Check: A.P. \\(5, 8, 11, 14, \\ldots\\)\n\\[a_4 = 5 + 3 \\times 3 = 14 \\;\\checkmark\\]\nWhy: The fourth term of the list is 14."
+            ],
+            "final_answer": "Hence proved: \\(a_n = a_1 + (n - 1)d\\) for every positive integer \\(n\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ix)",
+            "prompt": "1 (ix) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(a_n = a_1 r^{n-1}\\) when \\(a_1,\\ a_1 r,\\ a_1 r^2, \\ldots\\) form a G.P.",
+            "explanation": "Like part (viii), but for a G.P.: the left side is the \\(n\\)th term.\nThe rule of a G.P.: each term is the previous term multiplied by \\(r\\), that is \\(a_{k+1} = a_k r\\).\nPlan: base case, assume \\(a_k = a_1 r^{k-1}\\), then apply the rule once.",
+            "steps": [
+              "Given: a G.P. \\(a_1,\\ a_1 r,\\ a_1 r^2, \\ldots\\), so \\(a_{m+1} = a_m r\\) for every \\(m\\).\nTo prove: \\(S(n): a_n = a_1 r^{n-1}\\) for every positive integer \\(n\\).\nMethod: Mathematical induction, using the G.P. rule in the inductive step.",
+              "Base case: put \\(n = 1\\)\n\\[\\text{R.H.S.} = a_1 r^0 = a_1\\]\n\\[= \\text{L.H.S.}\\]\nSo \\(S(1)\\) is true.\nWhy: \\(r^0 = 1\\) for \\(r \\ne 0\\) (in a G.P. \\(r \\ne 0\\)).",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[a_k = a_1 r^{k-1} \\quad (A)\\]\nWhy: We suppose the formula holds for some positive integer \\(k\\).",
+              "Write the target \\(S(k + 1)\\)\n\\[a_{k+1} = a_1 r^k\\]\nWhy: Put \\(n = k + 1\\): \\(r^{(k+1)-1} = r^k\\).",
+              "Inductive step: use the G.P. rule and (A)\n\\[a_{k+1} = a_k \\cdot r\\]\n\\[= a_1 r^{k-1} \\cdot r\\]\n\\[= a_1 r^k = \\text{R.H.S.}\\]\nWhy: In a G.P. the next term is the previous term times \\(r\\). (A) replaces \\(a_k\\), and \\(r^{k-1} \\cdot r = r^k\\) (add the indices).",
+              "Conclusion\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, \\(a_n = a_1 r^{n-1}\\) for every positive integer \\(n\\).\nWhy: Both conditions of the principle hold.",
+              "Check: G.P. \\(3, 6, 12, 24, \\ldots\\)\n\\[a_4 = 3 \\times 2^3 = 24 \\;\\checkmark\\]\nWhy: The fourth term of the list is 24."
+            ],
+            "final_answer": "Hence proved: \\(a_n = a_1 r^{n-1}\\) for every positive integer \\(n\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(x)",
+            "prompt": "1 (x) Use mathematical induction to prove the following formulae for every positive integer \\(n\\): \\(\\binom{3}{3} + \\binom{4}{3} + \\binom{5}{3} + \\cdots + \\binom{n + 2}{3} = \\binom{n + 3}{4}\\)",
+            "explanation": "The terms are combinations: the top number goes \\(3, 4, 5, \\ldots, n + 2\\) while the bottom stays 3.\nWe prove the formula for every positive integer \\(n\\) by induction.\nPlan: add the next term \\(\\binom{k + 3}{3}\\) and join the two combinations with Pascal's rule \\(\\binom{m}{r} + \\binom{m}{r - 1} = \\binom{m + 1}{r}\\).",
+            "steps": [
+              "Given: \\(S(n): \\binom{3}{3} + \\binom{4}{3} + \\cdots + \\binom{n + 2}{3} = \\binom{n + 3}{4}\\).\nTo prove: \\(S(n)\\) is true for every positive integer \\(n\\).\nMethod: Mathematical induction. The \\(n\\)th term is \\(\\binom{n + 2}{3}\\), so the \\((k + 1)\\)th term is \\(\\binom{k + 3}{3}\\). In the step we use Pascal's rule.",
+              "Base case: put \\(n = 1\\)\n\\[\\text{L.H.S.} = \\tbinom{3}{3} = 1\\]\n\\[\\text{R.H.S.} = \\tbinom{4}{4} = 1\\]\nSo \\(S(1)\\) is true.\nWhy: \\(\\binom{m}{m} = 1\\): there is only one way to choose all \\(m\\) objects.",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[\\tbinom{3}{3} + \\cdots + \\tbinom{k + 2}{3} = \\tbinom{k + 3}{4} \\quad (A)\\]\nWhy: We suppose the formula holds for some positive integer \\(k\\).",
+              "Write the target \\(S(k + 1)\\)\n\\[\\tbinom{3}{3} + \\cdots + \\tbinom{k + 2}{3} + \\tbinom{k + 3}{3}\\]\n\\[= \\tbinom{k + 4}{4}\\]\nWhy: Put \\(n = k + 1\\): \\(n + 2 = k + 3\\) and \\(n + 3 = k + 4\\).",
+              "Inductive step: use (A), then Pascal's rule\n\\[\\text{L.H.S.} = \\tbinom{k + 3}{4} + \\tbinom{k + 3}{3}\\]\n\\[= \\tbinom{k + 4}{4} = \\text{R.H.S.}\\]\nWhy: The first \\(k\\) terms are replaced by (A). Pascal's rule \\(\\binom{m}{r} + \\binom{m}{r - 1} = \\binom{m + 1}{r}\\) with \\(m = k + 3\\), \\(r = 4\\) joins the two combinations.",
+              "Check the Pascal step with factorials\n\\[\\tbinom{k + 3}{4} + \\tbinom{k + 3}{3}\\]\n\\[= \\dfrac{(k + 3)!}{4!\\,(k - 1)!} + \\dfrac{(k + 3)!}{3!\\,k!}\\]\n\\[= \\dfrac{(k + 3)!}{4!\\,k!}[k + 4]\\]\n\\[= \\dfrac{(k + 4)!}{4!\\,k!} = \\tbinom{k + 4}{4}\\]\nWhy: Common denominator \\(4!\\,k!\\): the first fraction is multiplied by \\(\\frac{k}{k}\\) (since \\(k! = k(k - 1)!\\)), the second by \\(\\frac{4}{4}\\) (since \\(4! = 4 \\cdot 3!\\)). Then \\((k + 4)(k + 3)! = (k + 4)!\\).",
+              "Conclusion\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, \\(S(n)\\) is true for every positive integer \\(n\\).\nWhy: Both conditions of the principle hold.",
+              "Check: \\(n = 3\\)\n\\[\\tbinom{3}{3} + \\tbinom{4}{3} + \\tbinom{5}{3} = 1 + 4 + 10 = 15\\]\n\\[\\tbinom{6}{4} = 15 \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\binom{3}{3} + \\binom{4}{3} + \\cdots + \\binom{n + 2}{3} = \\binom{n + 3}{4}\\) for every positive integer \\(n\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.2.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.2.1",
+      "title": "8.2.1 The Middle Term in the Expansion of (a + x)^n",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 159,
+          "pdf_to": 160,
+          "note": "Book p. 154-155: 8.2.1 The Middle Term in the Expansion of (a + x)^n, Case I (n even), Case II (n odd), Example 13 (term independent of x, middle term)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "In the expansion of \\((a + x)^{n}\\), the total number of terms is \\(n + 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The middle term is the term with the same number of terms before it and after it. Whether there is one middle term or two depends on whether the number of terms, \\(n + 1\\), is odd or even. For example \\((a + x)^{4}\\) has 5 terms (one middle term, the 3rd), while \\((a + x)^{3}\\) has 4 terms (two middle terms, the 2nd and 3rd)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Case I: (\\(n\\) is even) If \\(n\\) is even then \\(n + 1\\) is odd, so \\(\\left(\\frac{n}{2} + 1\\right)\\)th term will be the only one middle term in the expansion.",
+            "bold": [
+              "Case I:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Case II: (\\(n\\) is odd) If \\(n\\) is odd then \\(n + 1\\) is even so \\(\\left(\\frac{n+1}{2}\\right)\\)th and \\(\\left(\\frac{n+3}{2}\\right)\\)th terms of the expansion will be the two middle terms.",
+            "bold": [
+              "Case II:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Where do these numbers come from?\nCase I: with \\(n + 1\\) terms (odd), the middle one has \\(\\frac{n}{2}\\) terms on each side, so it is term number \\(\\frac{n}{2} + 1\\). For \\(n = 4\\): \\(\\frac{4}{2} + 1 = 3\\), the 3rd of 5 terms.\nCase II: with \\(n + 1\\) terms (even), the two centre terms are numbers \\(\\frac{n+1}{2}\\) and \\(\\frac{n+1}{2} + 1 = \\frac{n+3}{2}\\). For \\(n = 3\\): the 2nd and 3rd of 4 terms.\nTo use the general term \\(T_{r+1}\\), remember \\(r\\) = term number \\(- 1\\): Case I needs \\(r = \\frac{n}{2}\\); Case II needs \\(r = \\frac{n-1}{2}\\) and \\(r = \\frac{n+1}{2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "\"Term independent of \\(x\\)\" means the term with \\(x^{0}\\), i.e. the constant term. Find it by setting the power of \\(x\\) in \\(T_{r+1}\\) equal to 0. If the equation gives an \\(r\\) that is not a whole number from 0 to \\(n\\), there is no such term."
+          },
+          {
+            "type": "example",
+            "title": "Example 13",
+            "problem": "Find the following in the expansion of \\(\\left(\\frac{x}{2} + \\frac{2}{x^{2}}\\right)^{12}\\):\ni) the term independent of \\(x\\).\nii) the middle term",
+            "steps": [
+              "Given: \\(\\left(\\frac{x}{2} + \\frac{2}{x^{2}}\\right)^{12}\\), so \\(n = 12\\), first term \\(\\frac{x}{2}\\), second term \\(\\frac{2}{x^{2}}\\).\nTo find: (i) the term without \\(x\\); (ii) the middle term.\nMethod: write the general term \\(T_{r+1}\\) and simplify the power of \\(x\\). For (i) set that power equal to 0. For (ii) \\(n = 12\\) is even, so Case I gives one middle term.",
+              "Step 1: General term\n\\[T_{r+1} = \\binom{12}{r}\\left(\\dfrac{x}{2}\\right)^{12-r}\\left(\\dfrac{2}{x^{2}}\\right)^{r}\\]\n\\[= \\binom{12}{r}\\dfrac{x^{12-r}}{2^{12-r}}\\cdot 2^{r}x^{-2r}\\]\n\\[= \\binom{12}{r}2^{2r-12}x^{12-3r}\\]\nWhy: \\(\\left(\\frac{2}{x^{2}}\\right)^{r} = 2^{r}x^{-2r}\\). Powers of 2: \\(2^{r}\\cdot 2^{-(12-r)} = 2^{2r-12}\\). Powers of \\(x\\): \\(x^{12-r}\\cdot x^{-2r} = x^{12-3r}\\).",
+              "Step 2: (i) Make the power of \\(x\\) zero\nAs the term is independent of \\(x\\), so exponent of \\(x\\) will be zero:\n\\[12 - 3r = 0 \\Rightarrow r = 4\\]\nWhy: a term independent of \\(x\\) contains \\(x^{0} = 1\\). \\(r = 4\\) is a whole number between 0 and 12, so the term exists; it is \\(T_{5}\\).",
+              "Step 3: (i) Compute \\(T_{5}\\)\n\\[T_{5} = \\binom{12}{4}2^{8-12}x^{12-12}\\]\n\\[= \\dfrac{12 \\times 11 \\times 10 \\times 9}{4 \\times 3 \\times 2 \\times 1}\\cdot 2^{-4}x^{0}\\]\n\\[= \\dfrac{11 \\times 45}{2^{4}} = \\dfrac{495}{16}\\]\nWhy: \\(\\binom{12}{4} = 495 = 11 \\times 45\\), \\(2^{-4} = \\frac{1}{16}\\) and \\(x^{0} = 1\\).",
+              "Step 4: (ii) Which term is the middle one?\nIn this case, \\(n = 12\\) which is even, so \\(\\left(\\frac{12}{2} + 1\\right)\\)th = 7th term is the middle term. Hence \\(r = 6\\).\nWhy: 13 terms; the 7th has 6 terms before it and 6 after it (Case I).",
+              "Step 5: (ii) Compute \\(T_{7}\\)\n\\[T_{7} = \\binom{12}{6}\\left(\\dfrac{x}{2}\\right)^{12-6}\\cdot\\left(\\dfrac{2}{x^{2}}\\right)^{6}\\]\n\\[= \\binom{12}{6}\\dfrac{x^{6}}{2^{6}}\\cdot\\dfrac{2^{6}}{x^{12}}\\]\n\\[= \\dfrac{12 \\times 11 \\times 10 \\times 9 \\times 8 \\times 7}{6 \\times 5 \\times 4 \\times 3 \\times 2 \\times 1}\\cdot x^{6-12}\\]\n\\[= \\dfrac{12 \\times 11 \\times 7}{x^{6}} = \\dfrac{924}{x^{6}}\\]\nWhy: \\(2^{6}\\) cancels with \\(2^{6}\\); \\(\\binom{12}{6} = 924\\); \\(x^{6}/x^{12} = x^{-6}\\). The general term gives the same: \\(r = 6\\) makes \\(2^{2r-12} = 2^{0} = 1\\) and \\(x^{12-3r} = x^{-6}\\).",
+              "Check:\nIn the full expansion (computer algebra) the constant term is \\(\\frac{495}{16}\\) and the 7th term is \\(924x^{-6}\\). Also \\(T_{5}\\) and \\(T_{7}\\) agree with the general term \\(\\binom{12}{r}2^{2r-12}x^{12-3r}\\) at \\(r = 4\\) and \\(r = 6\\)."
+            ],
+            "answer": "(i) The term independent of \\(x\\) is \\(T_{5} = \\frac{495}{16}\\). (ii) The middle term is \\(T_{7} = \\frac{924}{x^{6}}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\((a + x)^{n}\\) has \\(n + 1\\) terms.\n2. \\(n\\) even: one middle term, the \\(\\left(\\frac{n}{2} + 1\\right)\\)th, with \\(r = \\frac{n}{2}\\).\n3. \\(n\\) odd: two middle terms, the \\(\\left(\\frac{n+1}{2}\\right)\\)th and \\(\\left(\\frac{n+3}{2}\\right)\\)th.\n4. Term independent of \\(x\\): set the power of \\(x\\) in \\(T_{r+1}\\) equal to 0 and solve for \\(r\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Using \\(n\\) instead of \\(n + 1\\) as the number of terms: \\((a + x)^{12}\\) has 13 terms, so its middle term is the 7th, not the 6th.\n2. Putting the term number in place of \\(r\\): the 7th term needs \\(r = 6\\).\n3. In \\(\\left(\\frac{2}{x^{2}}\\right)^{r}\\) forgetting that the power of \\(x\\) is \\(-2r\\), not \\(-r\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 5: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5 Show that \\((15)^{13} + (13)^{15}\\) is divisible by 14.",
+            "explanation": "This is the book's Example 27 repeated word for word; it is a divisibility proof.\n15 is one more than 14 and 13 is one less than 14.\nPlan: expand \\((14 + 1)^{13}\\) and \\((14 - 1)^{15}\\); the last terms are \\(+1\\) and \\(-1\\), which cancel.",
+            "steps": [
+              "Given: \\((15)^{13} + (13)^{15}\\).\nTo prove: it is divisible by 14.\nMethod: Write \\(15 = 14 + 1\\) and \\(13 = 14 - 1\\). In each binomial expansion every term except the last has a factor 14. The two last terms are \\(1^{13} = 1\\) and \\((-1)^{15} = -1\\).",
+              "Rewrite the bases\n\\[(15)^{13} + (13)^{15}\\]\n\\[= (14 + 1)^{13} + (14 - 1)^{15}\\]\nWhy: Both bases are next to the divisor 14.",
+              "Expand the first power\n\\[(14 + 1)^{13} = 14^{13} + {}^{13}C_1\\,14^{12}\\]\n\\[+ \\dots + {}^{13}C_{12}\\,14 + 1\\]\n\\[= 14A + 1\\]\nWhy: Every term except the last contains at least one factor 14, so their sum is \\(14A\\) for an integer \\(A\\).",
+              "Expand the second power\n\\[(14 - 1)^{15} = 14^{15} - {}^{15}C_1\\,14^{14}\\]\n\\[+ \\dots + {}^{15}C_{14}\\,14 - 1\\]\n\\[= 14B - 1\\]\nWhy: Signs alternate because \\(x = -1\\); the last term is \\((-1)^{15} = -1\\) because 15 is odd.",
+              "Add\n\\[(15)^{13} + (13)^{15} = 14A + 1 + 14B - 1\\]\n\\[= 14(A + B)\\]\nWhy: The \\(+1\\) and \\(-1\\) cancel, and 14 is a common factor of what is left.",
+              "Check:\n\\[15 + 13^3 = 15 + 2197 = 2212\\]\n\\[2212 = 14 \\times 158\\]\nWhy: The same reasoning works for any odd power of 13 and any power of 15; this small case shows it in numbers."
+            ],
+            "final_answer": "Hence proved: \\((15)^{13} + (13)^{15} = 14(A + B)\\), which is divisible by 14."
+          }
+        ]
+      }
+    }
+  ]
+}

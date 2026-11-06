@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q9-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q9",
+      "title": "Question 9 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 9: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-4-Q9",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9 In a supply chain system, a company starts with an initial inventory of 400 items. Every month, they sell 80% of the inventory and restock 50 items. How many items will they have after 8 months? Use mathematical induction to prove the pattern.",
+            "explanation": "Har mahine do kaam hote hain: stock ka 80% bik jata hai (yani 20% bachta hai) aur phir 50 items naye aate hain.\nIs liye \\(I_{n+1} = 0.2\\,I_n + 50\\). Humein \\(I_n\\) ka formula dhoondna hai, usay induction se saabit karna hai, aur phir \\(n = 8\\) rakhna hai.\nPlan: pehle chand mahine hisaab, stock kis level par tik jata hai woh dhoondna, formula ka andaza, induction se saboot, aur aakhir mein \\(I_8\\).",
+            "steps": [
+              "Diya gaya hai: \\(I_0 = 400\\) items; har mahine 80% bikta hai aur 50 items restock hote hain.\nHumein find karna hai: \\(I_8\\), aur pattern ko mathematical induction se saabit karna hai.\nTareeqa: Mahine ka rule ek recurrence (pichle mahine se agla mahina nikaalne wala qaida) ki shakal mein likhenge, pattern pehchaanenge, usay statement \\(P(n)\\) banayenge, aur base case aur induction step saabit karenge.",
+              "Mahine ka rule\n\\[I_{n+1} = 0.2\\,I_n + 50\\]\nKyun: 80% bik gaya to \\(100\\% - 80\\% = 20\\% = 0.2\\) hissa bacha; us ke baad 50 items jama hue.\nDhyan dein: \\(0.8\\,I_n\\) likhna aam ghalti hai; 0.8 bikne wala hissa hai, bachne wala nahi.",
+              "Pehle chand mahine\n\\[I_1 = 0.2(400) + 50 = 130\\]\n\\[I_2 = 0.2(130) + 50 = 76\\]\n\\[I_3 = 0.2(76) + 50 = 65.2\\]\nKyun: Rule baar baar lagaya. Dekhiye stock har mahine kam ho raha hai lekin girne ki raftaar bhi kam ho rahi hai, jaise koi cheez kisi khaas level par aa kar tik jana chahti ho.",
+              "Tikne wala level dhoondein\n\\[L = 0.2L + 50\\]\n\\[0.8L = 50 \\Rightarrow L = 62.5\\]\nKyun: Jis level par stock tik jaye, wahan rule lagane se wohi number wapas aata hai: jitna bikta hai utna hi aa jata hai. \\(62.5\\) ka 80% = 50, aur 50 hi restock hote hain.",
+              "Pattern ka andaza\n\\[I_n - 62.5 = 0.2\\,(I_{n-1} - 62.5)\\]\n\\[I_n = 62.5 + 337.5\\,(0.2)^n\\]\nKyun: Rule mein se \\(L = 0.2L + 50\\) minus karein to 50 cancel ho jata hai, aur pata chalta hai ke 62.5 se faasla har mahine 0.2 guna reh jata hai. Shuru mein faasla \\(400 - 62.5 = 337.5\\) tha, to \\(n\\) mahine baad \\(337.5(0.2)^n\\).",
+              "Base case \\(P(0)\\)\n\\[P(n):\\ I_n = 62.5 + 337.5\\,(0.2)^n\\]\n\\[I_0 = 62.5 + 337.5(1) = 400\\ \\checkmark\\]\nKyun: \\((0.2)^0 = 1\\), to formula shuru ka stock 400 deta hai. Mazeed tasalli ke liye \\(n = 1\\): \\(62.5 + 67.5 = 130\\), jo upar wale hisaab se milta hai.",
+              "Induction step\n\\[\\text{Assume } I_k = 62.5 + 337.5(0.2)^k\\]\n\\[I_{k+1} = 0.2\\,I_k + 50\\]\n\\[= 12.5 + 337.5(0.2)^{k+1} + 50\\]\n\\[= 62.5 + 337.5(0.2)^{k+1}\\]\nKyun: Hum farz karte hain ke formula kisi mahine \\(k\\) par sahi hai (induction hypothesis). Phir mahine ka rule lagaya aur hypothesis andar rakhi: \\(0.2 \\times 62.5 = 12.5\\) aur \\(0.2 \\times (0.2)^k = (0.2)^{k+1}\\). \\(12.5 + 50 = 62.5\\), to bilkul wohi formula \\(n = k + 1\\) ke liye aa gaya, yani \\(P(k + 1)\\).",
+              "Nateeja\n\\(P(0)\\) sahi hai, aur \\(P(k)\\) sahi hone se \\(P(k + 1)\\) sahi hota hai, is liye mathematical induction ke principle se \\(P(n)\\) har whole number \\(n\\) ke liye sahi hai.\nKyun: Pehli seedhi par qadam rakh diya aur har seedhi se agli par jana saabit kar diya, to poori seedhi chadh sakte hain; yehi induction hai.",
+              "8 mahine baad stock\n\\[(0.2)^8 = 0.00000256\\]\n\\[I_8 = 62.5 + 337.5(0.00000256)\\]\n\\[= 62.5 + 0.000864 = 62.500864\\]\nKyun: \\(2^8 = 256\\), aur \\((0.2)^8\\) mein 8 decimal places hote hain. Itna chhota hissa batata hai ke 8 mahine mein stock taqreeban apne tikne wale level par pohanch chuka hai.",
+              "Tasdeeq\n\\[I_4 = 63.04,\\ I_5 = 62.608,\\ I_6 = 62.5216\\]\n\\[I_7 = 62.50432,\\ I_8 = 62.500864\\]\nKyun: Rule ko mahina ba mahina chala kar bhi bilkul wohi value aayi. Items poore hote hain, aur 62.500864 thora sa 62.5 se upar hai, is liye qareeb tareen whole number 63 hai."
+            ],
+            "final_answer": "\\(I_n = 62.5 + 337.5(0.2)^n\\) (induction se saabit). 8 mahine baad \\(I_8 = 62.500864\\), yani taqreeban 63 items."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-3-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-3-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 167,
+          "pdf_to": 167,
+          "note": "Exercise 8.3, Question 2: book page 162 (PDF 167); answer key book page 302 (PDF 307): 9.950, 1.010, 0.331, 0.935 (all agree)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Using Binomial theorem find the value of the following to three places of decimals: \\(\\sqrt{99}\\)",
+            "explanation": "We need \\(\\sqrt{99}\\) without a calculator.\n99 is close to the perfect square 100, so \\(99 = 100(1 - 0.01)\\) and the binomial series in the small number 0.01 does the work.\nPlan: take out 100, expand with \\(n = \\tfrac{1}{2}\\), add a few terms, round to three decimals.",
+            "steps": [
+              "Given: \\(\\sqrt{99}\\).\nTo find: its value correct to three decimal places.\nMethod: Write 99 as a perfect square times \\((1 + y)\\) with \\(y\\) small, then use \\((1 + y)^{1/2} = 1 + \\tfrac{1}{2}y - \\tfrac{1}{8}y^{2} + \\tfrac{1}{16}y^{3} + \\dots\\). The smaller \\(y\\), the fewer terms we need.",
+              "Write 99 near 100\n\\[\\sqrt{99} = (100 - 1)^{1/2}\\]\n\\[= 100^{1/2}\\left(1 - \\dfrac{1}{100}\\right)^{1/2}\\]\n\\[= 10(1 - 0.01)^{1/2}\\]\nWhy: 100 is the nearest perfect square, and \\(100^{1/2} = 10\\).",
+              "Expand with \\(y = -0.01\\)\n\\[(1 - 0.01)^{1/2} = 1 + \\dfrac{1}{2}(-0.01)\\]\n\\[- \\dfrac{1}{8}(-0.01)^{2} + \\dfrac{1}{16}(-0.01)^{3}\\]\nWhy: Coefficients for \\(n = \\tfrac{1}{2}\\); \\(|y| = 0.01 < 1\\), so the series is valid.",
+              "Work out each term\n\\[= 1 - 0.005 - 0.0000125\\]\n\\[- 0.0000000625\\]\n\\[= 0.9949874\\dots\\]\nWhy: \\((-0.01)^{2} = 0.0001\\), \\(\\tfrac{0.0001}{8} = 0.0000125\\); \\((-0.01)^{3} = -0.000001\\), \\(\\tfrac{-0.000001}{16} = -0.0000000625\\). The terms shrink fast.",
+              "Multiply by 10 and round\n\\[\\sqrt{99} \\approx 10 \\times 0.9949874\\]\n\\[= 9.949874 \\approx 9.950\\]\nWhy: The fourth decimal is 9, so the third decimal 9 rounds up and carries: 9.949 becomes 9.950.",
+              "Check\n\\[9.95^{2} = 99.0025\\]\nWhy: Very close to 99 (slightly above, as 9.950 is a rounded-up value)."
+            ],
+            "final_answer": "\\(\\sqrt{99} \\approx 9.950\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Using Binomial theorem find the value of the following to three places of decimals: \\((1.03)^{1/3}\\)",
+            "explanation": "1.03 is already of the form \\(1 + y\\) with small \\(y = 0.03\\).\nWe must find the cube root to three decimals.\nPlan: use \\(n = \\tfrac{1}{3}\\), add terms until they no longer affect the third decimal, then round.",
+            "steps": [
+              "Given: \\((1.03)^{1/3}\\).\nTo find: its value correct to three decimal places.\nMethod: \\((1.03)^{1/3} = (1 + 0.03)^{1/3}\\); expand with \\(n = \\tfrac{1}{3}\\), \\(y = 0.03\\) (valid since \\(|y| < 1\\)).",
+              "Coefficients for \\(n = \\tfrac{1}{3}\\)\n\\[n = \\dfrac{1}{3}\\]\n\\[\\dfrac{n(n - 1)}{2!} = \\dfrac{\\frac{1}{3}(-\\frac{2}{3})}{2} = -\\dfrac{1}{9}\\]\n\\[\\dfrac{n(n - 1)(n - 2)}{3!} = \\dfrac{\\frac{1}{3}(-\\frac{2}{3})(-\\frac{5}{3})}{6} = \\dfrac{5}{81}\\]\nWhy: \\(n - 1 = -\\tfrac{2}{3}\\), \\(n - 2 = -\\tfrac{5}{3}\\); \\(\\tfrac{10}{27} \\div 6 = \\tfrac{10}{162} = \\tfrac{5}{81}\\).",
+              "Put \\(y = 0.03\\)\n\\[(1.03)^{1/3} = 1 + \\dfrac{1}{3}(0.03)\\]\n\\[- \\dfrac{1}{9}(0.0009) + \\dfrac{5}{81}(0.000027)\\]\n\\[= 1 + 0.01 - 0.0001 + 0.0000017\\]\nWhy: \\(0.03^{2} = 0.0009\\), \\(0.03^{3} = 0.000027\\); \\(\\tfrac{0.0009}{9} = 0.0001\\).",
+              "Add and round\n\\[= 1.0099017\\dots \\approx 1.010\\]\nWhy: The fourth decimal is 9, so 1.009 rounds up to 1.010.",
+              "Check\n\\[1.01^{3} = 1.030301\\]\nWhy: Very close to 1.03."
+            ],
+            "final_answer": "\\((1.03)^{1/3} \\approx 1.010\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) Using Binomial theorem find the value of the following to three places of decimals: \\(\\frac{1}{\\sqrt[5]{252}}\\)",
+            "explanation": "\\(\\frac{1}{\\sqrt[5]{252}} = 252^{-1/5}\\). We need a fifth power close to 252.\n\\(3^{5} = 243\\), and \\(252 = 243 + 9 = 243(1 + \\tfrac{1}{27})\\).\nPlan: take out 243, expand \\((1 + \\tfrac{1}{27})^{-1/5}\\), divide by 3, round.",
+            "steps": [
+              "Given: \\(\\frac{1}{\\sqrt[5]{252}}\\).\nTo find: its value to three decimal places.\nMethod: Write it as a power, take out the nearest fifth power so that the bracket becomes \\(1 + y\\) with small \\(y\\), then use the series with \\(n = -\\tfrac{1}{5}\\).",
+              "Write as a power and take out 243\n\\[\\dfrac{1}{\\sqrt[5]{252}} = 252^{-1/5}\\]\n\\[= 243^{-1/5}\\left(1 + \\dfrac{9}{243}\\right)^{-1/5}\\]\n\\[= \\dfrac{1}{3}\\left(1 + \\dfrac{1}{27}\\right)^{-1/5}\\]\nWhy: \\(243 = 3^{5}\\), so \\(243^{-1/5} = 3^{-1} = \\tfrac{1}{3}\\); \\(\\tfrac{9}{243} = \\tfrac{1}{27}\\).",
+              "Coefficients for \\(n = -\\tfrac{1}{5}\\)\n\\[n = -\\dfrac{1}{5}\\]\n\\[\\dfrac{n(n - 1)}{2!} = \\dfrac{(-\\frac{1}{5})(-\\frac{6}{5})}{2} = \\dfrac{3}{25}\\]\n\\[\\dfrac{n(n - 1)(n - 2)}{3!} = \\dfrac{(-\\frac{1}{5})(-\\frac{6}{5})(-\\frac{11}{5})}{6}\\]\n\\[= -\\dfrac{11}{125}\\]\nWhy: \\(n - 1 = -\\tfrac{6}{5}\\), \\(n - 2 = -\\tfrac{11}{5}\\); \\(\\tfrac{66}{125} \\div 6 = \\tfrac{11}{125}\\).",
+              "Put \\(y = \\tfrac{1}{27}\\)\n\\[1 - \\dfrac{1}{135} + \\dfrac{3}{18225} - \\dfrac{11}{2460375}\\]\n\\[= 1 - 0.0074074 + 0.0001646\\]\n\\[- 0.0000045 = 0.9927527\\]\nWhy: \\(\\tfrac{1}{5} \\cdot \\tfrac{1}{27} = \\tfrac{1}{135}\\), \\(\\tfrac{3}{25} \\cdot \\tfrac{1}{729} = \\tfrac{3}{18225}\\), \\(\\tfrac{11}{125} \\cdot \\tfrac{1}{19683} = \\tfrac{11}{2460375}\\).",
+              "Divide by 3 and round\n\\[\\dfrac{0.9927527}{3} = 0.3309176 \\approx 0.331\\]\nWhy: The fourth decimal is 9, so 0.330 rounds up to 0.331.",
+              "Check\n\\[0.331^{5} \\times 252 \\approx 1.0012\\]\nWhy: So \\(0.331 \\approx 252^{-1/5}\\); the tiny excess is from rounding up."
+            ],
+            "final_answer": "\\(\\frac{1}{\\sqrt[5]{252}} \\approx 0.331\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iv)",
+            "prompt": "2 (iv) Using Binomial theorem find the value of the following to three places of decimals: \\(\\frac{\\sqrt{7}}{\\sqrt{8}}\\)",
+            "explanation": "\\(\\frac{\\sqrt{7}}{\\sqrt{8}} = \\sqrt{\\tfrac{7}{8}} = (1 - \\tfrac{1}{8})^{1/2}\\), already of the form \\((1 + y)^{n}\\).\n\\(y = -\\tfrac{1}{8}\\) is not very small, so we keep enough terms to fix the third decimal.\nPlan: expand with \\(n = \\tfrac{1}{2}\\), add four terms, check the size of the next term, round.",
+            "steps": [
+              "Given: \\(\\frac{\\sqrt{7}}{\\sqrt{8}}\\).\nTo find: its value to three decimal places.\nMethod: Combine into one root, write it as \\((1 + y)^{1/2}\\) with \\(y = -\\tfrac{1}{8}\\), and use \\(1 + \\tfrac{1}{2}y - \\tfrac{1}{8}y^{2} + \\tfrac{1}{16}y^{3} + \\dots\\)",
+              "One root\n\\[\\dfrac{\\sqrt{7}}{\\sqrt{8}} = \\sqrt{\\dfrac{7}{8}}\\]\n\\[= \\left(1 - \\dfrac{1}{8}\\right)^{1/2}\\]\nWhy: \\(\\tfrac{\\sqrt{a}}{\\sqrt{b}} = \\sqrt{\\tfrac{a}{b}}\\) and \\(\\tfrac{7}{8} = 1 - \\tfrac{1}{8}\\).",
+              "Expand with \\(y = -0.125\\)\n\\[1 + \\dfrac{1}{2}(-0.125) - \\dfrac{1}{8}(0.015625)\\]\n\\[+ \\dfrac{1}{16}(-0.001953125)\\]\n\\[= 1 - 0.0625 - 0.0019531 - 0.0001221\\]\nWhy: \\(y^{2} = 0.015625\\), \\(y^{3} = -0.001953125\\); \\(|y| < 1\\) so the series is valid.",
+              "Add\n\\[= 0.9354248\\]\nWhy: Four terms.",
+              "Is that enough?\n\\[\\text{next term} = -\\dfrac{5}{128}y^{4} \\approx -0.0000095\\]\nWhy: With only three terms the sum is 0.93555, which would round to 0.936 (wrong). The fourth term fixes it, and the fifth term changes only the fifth decimal.",
+              "Round\n\\[0.9354248 \\approx 0.935\\]\nWhy: The fourth decimal is 4, so the third decimal stays 5.",
+              "Check\n\\[0.935^{2} = 0.874225\\]\n\\[\\dfrac{7}{8} = 0.875\\]\nWhy: Close; the true value is 0.935414..."
+            ],
+            "final_answer": "\\(\\frac{\\sqrt{7}}{\\sqrt{8}} \\approx 0.935\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

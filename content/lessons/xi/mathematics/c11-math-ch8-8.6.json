@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.6",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 171,
+          "pdf_to": 173,
+          "note": "Book p. 166-168: 8.6 introduction; Supply Chains (Ex 28), Domino Effect (Ex 29), Compound Interest (Ex 30), Variable Subletting (Ex 31). Month-by-month table, corrected Ex 31 formula and teaching callouts are ours."
+        }
+      ],
+      "title": "8.6 Real Life Application of Binomial Theorem and Mathematical Induction",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Here are some examples applying the concepts of mathematical induction and the binomial theorem to real-world problems such as puzzles, the domino effect, Pascal's Triangle, economic forecasting, rankings and variable subletting."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Two tools are used on this page. The binomial theorem gives quick, accurate values of expressions like \\((1 + x)^{n}\\) when \\(x\\) is small (costs, interest, growth). Mathematical induction proves that a step-by-step process (dominoes, monthly stock) follows a pattern for every step.\nIn each example, first translate the words into mathematics: what is the starting value, and what happens at each step?"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Estimating Costs in Supply Chains (Binomial Theorem)"
+          },
+          {
+            "type": "example",
+            "title": "Example 28",
+            "problem": "A company wants to estimate the total cost of producing and delivering a product using a supply chain. Each stage of the chain (production, packaging, shipping) involves additional costs due to inefficiencies. If the base cost of production is \\(C\\), and each stage adds inefficiency costs, modeled by \\((1 + x)^{n}\\) where \\(x\\) is the inefficiency rate per stage and \\(n\\) is the number of stages, estimate the cost for small values of \\(x\\).",
+            "steps": [
+              "Given: base cost \\(C\\), inefficiency rate \\(x\\) per stage, \\(n\\) stages; total cost \\(= C(1 + x)^{n}\\). The book's values: \\(C = \\text{Rs. } 100{,}000\\), \\(x = 0.05\\) (5%), \\(n = 3\\) stages (production, packaging, shipping).\nTo find: an estimate of the total cost.\nMethod: when \\(x\\) is small, the binomial theorem allows us to expand \\((1 + x)^{n}\\) and keep only the first few terms, giving a manageable approximation.",
+              "Step 1: The binomial approximation\n\\[(1 + x)^{n} = 1 + nx + \\dfrac{n(n-1)}{2!}x^{2} + \\dots\\]\nFor small \\(x\\), we can approximate the total cost by only taking the first few terms of the expansion.\nWhy: for \\(x = 0.05\\), \\(x^{2} = 0.0025\\) and \\(x^{3} = 0.000125\\); each further power is about twenty times smaller, so the later terms hardly change the result.",
+              "Step 2: Set up the cost\nThe total cost is\n\\[\\text{Cost} = C \\times (1 + x)^{n}\\]\n\\[= 100{,}000 \\times (1 + 0.05)^{3}\\]\nThe book prints this line as \\(\\text{Cost} = C \\times (1 + x)^{n} = 100 \\times (1 + 0.05)^{3}\\); the base cost is Rs. 100,000, not 100.\nWhy: each stage multiplies the cost by \\(1 + x\\), and there are 3 stages.",
+              "Step 3: Expand using the binomial theorem\n\\[(1 + 0.05)^{3} \\approx 1 + 3(0.05) + \\dfrac{3(3-1)}{2}(0.05)^{2}\\]\n\\[= 1 + 0.15 + 3(0.0025)\\]\n\\[= 1 + 0.15 + 0.0075\\]\n\\[= 1.1575\\]\nWhy: \\(n = 3\\), so \\(nx = 0.15\\) and \\(\\frac{n(n-1)}{2} = 3\\). We stop after the \\(x^{2}\\) term.",
+              "Step 4: The approximate total cost\n\\[\\text{Cost} \\approx 100{,}000 \\times 1.1575\\]\n\\[= 115{,}750\\]\nThe book prints \\(\\text{Cost} = 100{,}000 \\times 1.1575 = 1157500\\) and \"the total cost is Rs. 1,157,500, which includes inefficiencies\". The product is 115,750.\nWhy: multiplying by 1.1575 adds about 16% to the base cost; it cannot make the cost more than eleven times larger.",
+              "Check:\nExact value: \\((1.05)^{3} = 1.157625\\), so the exact cost is \\(100{,}000 \\times 1.157625 = 115{,}762.50\\). The approximation is only Rs. 12.50 less. Rough sense check: 5% extra at each of 3 stages is a little more than 15% extra, i.e. a little more than Rs. 115,000."
+            ],
+            "answer": "The total cost is approximately Rs. 115,750 (exactly Rs. 115,762.50), including inefficiencies.",
+            "book_errors": [
+              "\\(\\text{Cost} = C \\times (1 + x)^{n} = 100 \\times (1 + 0.05)^{3}\\)",
+              "\\(\\text{Cost} = 100{,}000 \\times 1.1575 = 1157500\\)",
+              "Rs. 1,157,500"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 28: the book prints \"\\(\\text{Cost} = C \\times (1 + x)^{n} = 100 \\times (1 + 0.05)^{3}\\)\"; the base cost is \\(C = \\text{Rs. } 100{,}000\\). It then prints \\(100{,}000 \\times 1.1575 = 1157500\\) and \"Rs. 1,157,500\". Correct: \\(100{,}000 \\times 1.1575 = 115{,}750\\), so the total cost is about Rs. 115,750."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Mathematical Induction: Domino Effect"
+          },
+          {
+            "type": "example",
+            "title": "Example 29",
+            "problem": "A line of 100 dominoes is set up so that when the first domino falls, it causes the second domino to fall, and so on. Prove that if the first domino falls, all 100 dominoes will fall.",
+            "steps": [
+              "Given: 100 dominoes in a line, set up so that each falling domino makes the next one fall.\nTo prove: if the first domino falls, all 100 dominoes fall.\nMethod: mathematical induction. Let \\(S(n)\\) be the statement \"the \\(n\\)-th domino falls\", for \\(n = 1, 2, \\dots, 100\\).",
+              "Step 1: Base Case (\\(n = 1\\))\nFor 1 domino, if it falls, it's true that it has fallen: the first domino is pushed and falls, so \\(S(1)\\) is true.\nWhy: induction needs a true starting point; here it is given in the question.",
+              "Step 2: Induction of Hypothesis\nAssume \\(S(k)\\) is true for some \\(k\\) with \\(1 \\le k < 100\\): the \\(k\\)-th domino falls (so the first \\(k\\) dominoes have fallen).\nThe book words this as: \"Assume that for n = k, if the first k dominoes fall, then the kth domino will also fall\". The domino that must be shown to fall next is the \\((k + 1)\\)-th.\nWhy: this is the assumption we use to reach the next domino.",
+              "Step 3: Show \\(S(k + 1)\\) is true\nThe dominoes are set up so that when one falls it causes the next one to fall. Since the \\(k\\)-th domino falls, the \\((k + 1)\\)-th domino also falls. So \\(S(k + 1)\\) is true.\nWhy: this is the \"chain\" property given in the question; it links each statement to the next one.",
+              "Step 4: Conclusion\n\\(S(1)\\) is true, and \\(S(k)\\) true implies \\(S(k + 1)\\) true for \\(k = 1, 2, \\dots, 99\\). Thus, by mathematical induction, if the first domino falls, all 100 dominoes will fall.\nWhy: the first domino starts the chain, and the step carries it from each domino to the next, all the way to the 100th.",
+              "Check:\nBoth parts are really needed. If the first domino is not pushed (no base case), nothing falls. If one domino is placed too far from the next (the step fails at that point), the chain stops there. With both conditions true, no domino can stay standing."
+            ],
+            "answer": "Hence proved: if the first domino falls, all 100 dominoes will fall.",
+            "book_errors": [
+              "then the kth domino will also fall"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 29: the book's Induction of Hypothesis reads \"if the first k dominoes fall, then the kth domino will also fall\". What has to be shown is that the \\((k + 1)\\)-th domino falls; the next paragraph of the book says this correctly."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Economic Forecasting with Compound Interest"
+          },
+          {
+            "type": "example",
+            "title": "Example 30",
+            "problem": "A bank offers a compound interest rate of 5% per year. Sumaira invests Rs. 100,000 for 3 years. How much will her investment be worth at the end of 3 years?",
+            "steps": [
+              "Given: principal \\(P = 100{,}000\\), rate \\(r = 5\\% = 0.05\\) per year, compounding once per year (\\(n = 1\\)), time \\(t = 3\\) years.\nTo find: the amount \\(A\\) after 3 years.\nMethod: the compound interest formula; the power \\((1.05)^{3}\\) is expanded by the binomial theorem.",
+              "Step 1: The compound interest formula\nUsing the compound interest formula, the future value \\(A\\) of the investment is given by:\n\\[A = P\\left(1 + \\dfrac{r}{n}\\right)^{nt}\\]\nwhere \\(P = 100{,}000\\) (the principal), \\(r = 0.05\\) (the interest rate), \\(n = 1\\) (compounding once per year), \\(t = 3\\) (the time in years).\nWhy: with compound interest each year's interest is added to the amount, so the amount is multiplied by \\(1 + r\\) every year.",
+              "Step 2: Substitute the values\n\\[A = 100{,}000 \\times (1 + 0.05)^{1 \\times 3}\\]\n\\[= 100{,}000 \\times (1.05)^{3}\\]\nThe book prints this line as \\(A = 100{,}000 \\times (1 + 0.05)^{1 \\times 3}\\) \\(= 1000 \\times (1.05)^{3}\\); the factor must stay 100,000.\nWhy: \\(\\frac{r}{n} = \\frac{0.05}{1} = 0.05\\) and \\(nt = 1 \\times 3 = 3\\).",
+              "Step 3: Binomial expansion of \\((1.05)^{3}\\)\n\\[(1 + 0.05)^{3} = 1 + 3 \\times 0.05\\]\n\\[+ 3 \\times (0.05)^{2} + (0.05)^{3}\\]\n\\[= 1 + 0.15 + 0.0075 + 0.000125\\]\n\\[= 1.157625\\]\nThe book prints the second line as \\(= 1 + 0.15 + 0.0075 - 0.000125 = 1.157625\\); the last term is \\(+0.000125\\) (its total 1.157625 is right).\nWhy: the coefficients of \\((a + b)^{3}\\) are row 3 of Pascal's triangle, \\(1, 3, 3, 1\\); here all four terms are kept, so the result is exact.",
+              "Step 4: The future value\n\\[A = 100{,}000 \\times 1.157625\\]\n\\[= 115{,}762.5\\]\nSo, after 3 years, the investment will be worth Rs. 115,762.50.\nWhy: multiply the principal by the growth factor.",
+              "Check:\nYear by year: \\(100{,}000 \\times 1.05 = 105{,}000\\); \\(105{,}000 \\times 1.05 = 110{,}250\\); \\(110{,}250 \\times 1.05 = 115{,}762.50\\). Same result."
+            ],
+            "answer": "After 3 years the investment will be worth Rs. 115,762.50.",
+            "book_errors": [
+              "\\(= 1000 \\times (1.05)^{3}\\)",
+              "\\(= 1 + 0.15 + 0.0075 - 0.000125 = 1.157625\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 30: the book prints \\(A = 100{,}000 \\times (1 + 0.05)^{1 \\times 3} = 1000 \\times (1.05)^{3}\\); the factor stays 100,000. It also prints \"\\(1 + 0.15 + 0.0075 - 0.000125\\)\"; the last term is \\(+0.000125\\). Both totals in the book (1.157625 and Rs. 115,762.5) are right."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Compare Examples 28 and 30: both compute \\(100{,}000 \\times (1.05)^{3}\\). Example 28 keeps three terms of the expansion and gets the estimate 115,750; Example 30 keeps all four terms and gets the exact 115,762.50. The difference, Rs. 12.50, is the dropped term \\(100{,}000 \\times (0.05)^{3}\\). This is why the approximation is good when \\(x\\) is small."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Variable Subletting and Growth in Supply Chain"
+          },
+          {
+            "type": "example",
+            "title": "Example 31",
+            "problem": "In a supply chain system, a company starts with an initial inventory of 500 items. Every month, they sell 60% of the inventory and restock 100 items. How many items will they have after 6 months? Use mathematical induction to prove the pattern.",
+            "steps": [
+              "Given: initial inventory 500 items; each month 60% of the inventory is sold (40% remains) and then 100 items are restocked.\nTo find: the inventory after 6 months, with the pattern proved by mathematical induction.\nMethod: let \\(I_{n}\\) be the inventory after \\(n\\) months. Write the month-to-month rule (a recurrence relation), find a formula for \\(I_{n}\\), prove it by induction, then put \\(n = 6\\).",
+              "Step 1: The recurrence relation\n\\[I_{n+1} = 0.4\\,I_{n} + 100,\\quad I_{0} = 500\\]\nWhy: after selling 60%, 40% of \\(I_{n}\\) is left, that is \\(0.4\\,I_{n}\\); then 100 items are added.",
+              "Step 2: The first few months\n\\[I_{1} = 0.4(500) + 100 = 300\\]\n\\[I_{2} = 0.4(300) + 100 = 220\\]\n\\[I_{3} = 0.4(220) + 100 = 188\\]\nWhy: these values let us test any formula before we try to prove it.",
+              "Step 3: Find the formula\nThe book takes the formula \\(I_{n} = 250 + 250 \\times (0.4)^{n}\\). It gives \\(I_{0} = 500\\) but \\(I_{1} = 250 + 100 = 350\\), not 300, so it does not fit the recurrence.\nFind the level \\(L\\) that would not change: \\(L = 0.4L + 100\\), so \\(0.6L = 100\\) and \\(L = \\frac{500}{3}\\). Each month the distance from \\(L\\) is multiplied by 0.4, so \\(I_{n} = \\frac{500}{3} + c(0.4)^{n}\\). From \\(I_{0} = 500\\): \\(c = 500 - \\frac{500}{3} = \\frac{1000}{3}\\).\n\\[I_{n} = \\dfrac{500}{3} + \\dfrac{1000}{3}(0.4)^{n}\\]\nWhy: subtracting \\(L = 0.4L + 100\\) from \\(I_{n+1} = 0.4I_{n} + 100\\) gives \\(I_{n+1} - L = 0.4(I_{n} - L)\\).",
+              "Step 4: Base Case (\\(n = 0\\))\n\\[I_{0} = \\dfrac{500}{3} + \\dfrac{1000}{3}(0.4)^{0}\\]\n\\[= \\dfrac{1500}{3} = 500\\]\nThis is the initial inventory, so the formula holds for \\(n = 0\\).\nWhy: induction starts at the first value of \\(n\\), here month 0.",
+              "Step 5: Inductive Hypothesis\nAssume the formula holds for some \\(n = k \\ge 0\\):\n\\[I_{k} = \\dfrac{500}{3} + \\dfrac{1000}{3}(0.4)^{k}\\]\nWe need to show that it also holds for \\(n = k + 1\\).\nWhy: this is the assumption the inductive step uses.",
+              "Step 6: Inductive step\nStart with the recurrence relation and substitute the hypothesis:\n\\[I_{k+1} = 0.4\\,I_{k} + 100\\]\n\\[= 0.4\\left(\\dfrac{500}{3} + \\dfrac{1000}{3}(0.4)^{k}\\right) + 100\\]\nDistribute 0.4 across the terms:\n\\[= \\dfrac{200}{3} + \\dfrac{1000}{3}(0.4)^{k+1} + 100\\]\n\\[= \\dfrac{200}{3} + \\dfrac{300}{3} + \\dfrac{1000}{3}(0.4)^{k+1}\\]\n\\[= \\dfrac{500}{3} + \\dfrac{1000}{3}(0.4)^{k+1}\\]\nThus, the formula holds for \\(n = k + 1\\).\nIn the book the same working reaches \\(I_{k+1} = 200 + 100 \\times (0.4)^{k}\\) and then writes \\(I_{k+1} = 250 - 50 + 100 \\times (0.4)^{k+1}\\), which is not equal to it; the step does not prove the book's formula.\nWhy: \\(0.4 \\times (0.4)^{k} = (0.4)^{k+1}\\), and \\(100 = \\frac{300}{3}\\).",
+              "Step 7: Conclusion\nBy the principle of mathematical induction, since the base case holds and the inductive step has been proven, the formula\n\\[I_{n} = \\dfrac{500}{3} + \\dfrac{1000}{3}(0.4)^{n}\\]\nis valid for all \\(n \\ge 0\\).",
+              "Step 8: Inventory after 6 months\n\\[(0.4)^{6} = 0.004096\\]\n\\[I_{6} = \\dfrac{500}{3} + \\dfrac{1000}{3}(0.004096)\\]\n\\[= 166.667 + 1.365 = 168.032\\]\nSo, after 6 months, the inventory is approximately 168 items. The book's formula gives \\(I_{6} = 250 + 250 \\times 0.004096 = 251.024\\), about 251 items.\nWhy: substitute \\(n = 6\\) in the proved formula.",
+              "Check:\nContinue Step 2 month by month: \\(I_{4} = 0.4(188) + 100 = 175.2\\), \\(I_{5} = 0.4(175.2) + 100 = 170.08\\), \\(I_{6} = 0.4(170.08) + 100 = 168.032\\). The same 168.032 (see the table below)."
+            ],
+            "answer": "After 6 months the inventory is about 168 items (\\(I_{6} = 168.032\\)); \\(I_{n} = \\frac{500}{3} + \\frac{1000}{3}(0.4)^{n}\\).",
+            "book_errors": [
+              "\\(I_{n} = 250 + 250 \\times (0.4)^{n}\\)",
+              "\\(I_{k+1} = 250 - 50 + 100 \\times (0.4)^{k+1}\\)",
+              "\\(I_{6} = 250 + 250 \\times 0.004096 = 251.024\\)"
+            ]
+          },
+          {
+            "type": "table",
+            "header": [
+              "Month \\(n\\)",
+              "\\(I_{n}\\) from the recurrence",
+              "Our formula",
+              "Book's formula \\(250 + 250(0.4)^{n}\\)"
+            ],
+            "rows": [
+              [
+                "0",
+                "500",
+                "500",
+                "500"
+              ],
+              [
+                "1",
+                "300",
+                "300",
+                "350"
+              ],
+              [
+                "2",
+                "220",
+                "220",
+                "290"
+              ],
+              [
+                "3",
+                "188",
+                "188",
+                "266"
+              ],
+              [
+                "4",
+                "175.2",
+                "175.2",
+                "256.4"
+              ],
+              [
+                "5",
+                "170.08",
+                "170.08",
+                "252.56"
+              ],
+              [
+                "6",
+                "168.032",
+                "168.032",
+                "251.024"
+              ]
+            ],
+            "caption": "Our table: inventory month by month for Example 31; the book's formula drifts away from the true values after month 0"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 31: the book's formula \\(I_{n} = 250 + 250 \\times (0.4)^{n}\\) is wrong: it gives \\(I_{1} = 350\\), while the recurrence gives \\(I_{1} = 0.4(500) + 100 = 300\\). The book's inductive step reaches \\(200 + 100(0.4)^{k}\\) and then rewrites it as \\(250 - 50 + 100(0.4)^{k+1}\\), which is a different number, so nothing is proved. It also prints \\(I_{k-1}\\) for \\(I_{k+1}\\) and \\(I_{n} = 500\\) for \\(I_{0} = 500\\).\nCorrect: \\(I_{n} = \\frac{500}{3} + \\frac{1000}{3}(0.4)^{n}\\), \\(I_{6} = 168.032\\), about 168 items (the book says about 251)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. For small \\(x\\): \\((1 + x)^{n} \\approx 1 + nx + \\frac{n(n-1)}{2}x^{2}\\); the dropped terms are tiny.\n2. Compound interest: \\(A = P\\left(1 + \\frac{r}{n}\\right)^{nt}\\); \\((1 + r)^{t}\\) can be expanded by the binomial theorem.\n3. Induction proofs need a true base case and a step from \\(k\\) to \\(k + 1\\); both are necessary (dominoes).\n4. For a process \\(I_{n+1} = aI_{n} + b\\): find the fixed level \\(L = \\frac{b}{1 - a}\\); then \\(I_{n} = L + (I_{0} - L)a^{n}\\), and prove it by induction.\n5. Always test a formula on the first few values before proving it."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Dropping zeros: \\(100{,}000 \\times 1.1575\\) is 115,750. Estimate first: about 16% more than 100,000.\n2. Proving the wrong statement: in the inductive step the target is \\(S(k + 1)\\), not \\(S(k)\\) again.\n3. \"Proving\" a formula without checking it: \\(250 + 250(0.4)^{n}\\) fails already at \\(n = 1\\). An inductive step that only works by rewriting numbers incorrectly proves nothing.\n4. Mixing up approximate and exact values: say \"approximately\" when terms of the expansion are left out."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-3-Q3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-3-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 167,
+          "pdf_to": 167,
+          "note": "Exercise 8.3, Question 3: book page 162 (PDF 167); answer key book page 302 (PDF 307): (i) (-1)^n x 2n, (ii) 4n (agree; both hold for n >= 1)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-3-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Find the coefficient of \\(x^{n}\\) in the expansion of \\(\\frac{1 + x^{2}}{(1 + x)^{2}}\\).",
+            "explanation": "Is sawal mein chand terms nahi, balke ek general formula chahiye: \\(x^{n}\\) ka coefficient \\(n\\) ki shakal mein.\nExpression ko \\((1 + x^{2})(1 + x)^{-2}\\) likh sakte hain. Upar wale \\(1 + x^{2}\\) ki wajah se \\(x^{n}\\) tak pohanchne ke do raaste hain.\nRule kaunsa? \\((1 + x)^{-2}\\) ki general term.\nPlan: general term nikalna, phir dono raaston ke coefficients jama karna.",
+            "steps": [
+              "Diya gaya hai: \\(\\frac{1 + x^{2}}{(1 + x)^{2}}\\).\nHumein find karna hai: \\(x^{n}\\) ka coefficient.\nTareeqa: \\(\\frac{1 + x^{2}}{(1 + x)^{2}} = (1 + x^{2})(1 + x)^{-2}\\). Pehle \\((1 + x)^{-2}\\) ki general term (r-wi term ka formula) nikalenge. Phir \\(x^{n}\\) do tarah banta hai: 1 ko \\(x^{n}\\) wali term se multiply karein, ya \\(x^{2}\\) ko \\(x^{n-2}\\) wali term se. Dono ka jama jawab hai. (Series \\(|x| < 1\\) par valid hai.)",
+              "\\((1 + x)^{-2}\\) ki general term\n\\[T_{r+1} = \\dfrac{(-2)(-3)\\cdots(-2 - r + 1)}{r!}x^{r}\\]\n\\[= \\dfrac{(-1)^{r}\\,2 \\cdot 3 \\cdots (r + 1)}{r!}x^{r}\\]\n\\[= (-1)^{r}(r + 1)x^{r}\\]\nKyun: General term ke upar \\(r\\) factors hain: \\(-2, -3, \\dots, -(r + 1)\\). Har ek mein minus hai, to \\(r\\) minus mil kar \\((-1)^{r}\\) bante hain. Baqi \\(2 \\cdot 3 \\cdots (r + 1)\\) asal mein \\((r + 1)!\\) hai, aur \\(\\tfrac{(r + 1)!}{r!} = r + 1\\), kyunke upar neeche \\(1 \\cdot 2 \\cdots r\\) cancel ho jata hai.",
+              "Yani series yeh hai\n\\[(1 + x)^{-2} = 1 - 2x + 3x^{2} - 4x^{3} + \\dots\\]\nKyun: Formula ki tasdeeq: \\(r = 0, 1, 2, 3\\) rakhein to coefficients \\(1, -2, 3, -4\\) aate hain, bilkul jaise part 1(iii) mein mile the.",
+              "Pehla raasta: 1 \\(\\times\\) \\(x^{n}\\) wali term\n\\[r = n:\\ (-1)^{n}(n + 1)\\]\nKyun: Upar wala 1 kisi power ko nahi badalta, is liye series ki \\(x^{n}\\) wali term seedhi \\(x^{n}\\) deti hai. General term mein \\(r = n\\) rakh diya.",
+              "Doosra raasta: \\(x^{2} \\times\\) \\(x^{n-2}\\) wali term\n\\[r = n - 2:\\ (-1)^{n-2}(n - 1)\\]\n\\[= (-1)^{n}(n - 1)\\]\nKyun: \\(x^{2}\\) ko \\(x^{n-2}\\) se multiply karein to powers jama ho kar \\(x^{n}\\) banta hai. Is liye \\(r = n - 2\\) rakha: \\((n - 2) + 1 = n - 1\\). Aur \\((-1)^{n-2} = (-1)^{n}\\), kyunke \\((-1)^{2} = 1\\) se divide karne se kuch nahi badalta.\nDhyan dein: yeh doosra raasta bhool jana sab se aam ghalti hai. Upar \\(x^{2}\\) hai to us ka hissa bhi ginna zaroori hai.",
+              "Dono ko jama karein\n\\[(-1)^{n}(n + 1) + (-1)^{n}(n - 1)\\]\n\\[= (-1)^{n}(2n)\\]\nKyun: Dono mein \\((-1)^{n}\\) common hai. Bracket mein \\(n + 1 + n - 1 = 2n\\); +1 aur -1 cancel ho gaye.",
+              "Tasdeeq\n\\[n = 2:\\ 3 + 1 = 4 = (-1)^{2}(4)\\]\n\\[n = 3:\\ -4 - 2 = -6 = (-1)^{3}(6)\\]\n\\[n = 1:\\ -2 = (-1)^{1}(2)\\]\nKyun: Seedha multiply kar ke dekha to formula se wohi number aaye. \\(n = 1\\) par \\(x^{-1}\\) wali term nahi hoti, phir bhi formula \\(-2\\) deta hai jo sahi hai. Sirf constant term (\\(n = 0\\)) ke liye coefficient 1 hai, is liye formula \\(n \\ge 1\\) ke liye hai."
+            ],
+            "final_answer": "\\(x^{n}\\) ka coefficient \\(= (-1)^{n} \\cdot 2n\\) (jab \\(n \\ge 1\\))"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Find the coefficient of \\(x^{n}\\) in the expansion of \\(\\frac{(1 + x)^{2}}{(1 - x)^{2}}\\).",
+            "explanation": "Bilkul part (i) wala tareeqa, bas is dafa upar \\((1 + x)^{2} = 1 + 2x + x^{2}\\) hai jis mein teen terms hain. Is liye \\(x^{n}\\) tak pohanchne ke teen raaste banenge.\nFind kya karna hai? \\(x^{n}\\) ka coefficient.\nPlan: \\((1 - x)^{-2}\\) ki general term, phir teeno raaston ka jama.",
+            "steps": [
+              "Diya gaya hai: \\(\\frac{(1 + x)^{2}}{(1 - x)^{2}}\\).\nHumein find karna hai: \\(x^{n}\\) ka coefficient.\nTareeqa: Upar wala square khol kar aur neeche wali bracket upar la kar \\((1 + 2x + x^{2})(1 - x)^{-2}\\) likhenge. \\(x^{n}\\) teen tarah banta hai: \\(1 \\times x^{n}\\), \\(2x \\times x^{n-1}\\), aur \\(x^{2} \\times x^{n-2}\\). (Series \\(|x| < 1\\) par valid hai.)",
+              "\\((1 - x)^{-2}\\) ki general term\n\\[T_{r+1} = (-1)^{r}(r + 1)(-x)^{r}\\]\n\\[= (r + 1)x^{r}\\]\nKyun: Part (i) mein \\((1 + x)^{-2}\\) ki general term \\((-1)^{r}(r + 1)x^{r}\\) thi. Ab \\(x\\) ki jagah \\(-x\\) hai, to ek aur \\((-1)^{r}\\) aata hai. \\((-1)^{r}(-1)^{r} = (-1)^{2r} = 1\\), is liye saare coefficients positive ho gaye.",
+              "Yani series yeh hai\n\\[(1 - x)^{-2} = 1 + 2x + 3x^{2} + 4x^{3} + \\dots\\]\nKyun: \\(r = 0, 1, 2, 3\\) rakh kar dekh liya: 1, 2, 3, 4. Yeh series bhi yaad rakhne layak hai.",
+              "Teeno raaston ke hisse\n\\[1 \\times (n + 1)\\]\n\\[2 \\times n\\]\n\\[1 \\times (n - 1)\\]\nKyun: Pehla: \\(r = n\\) se \\(n + 1\\). Doosra: \\(2x\\) ko \\(x^{n-1}\\) chahiye, yani \\(r = n - 1\\) jis ka coefficient \\(n\\) hai, aur saath 2 bhi multiply hoga. Teesra: \\(x^{2}\\) ko \\(x^{n-2}\\) chahiye, yani \\(r = n - 2\\), coefficient \\(n - 1\\).\nDhyan dein: beech wali term \\(2x\\) ka 2 multiply karna na bhoolein; is ke baghair jawab \\(3n\\) aa jayega jo ghalat hai.",
+              "Jama karein\n\\[(n + 1) + 2n + (n - 1) = 4n\\]\nKyun: \\(n + 2n + n = 4n\\), aur \\(+1 - 1 = 0\\).",
+              "Tasdeeq\n\\[n = 1:\\ 2 + 2 = 4\\]\n\\[n = 2:\\ 3 + 4 + 1 = 8\\]\nKyun: Choti values par seedha multiply kar ke wohi 4 aur 8 aaye jo \\(4n\\) deta hai. Sirf constant term (\\(n = 0\\)) 1 hai, is liye formula \\(n \\ge 1\\) ke liye hai."
+            ],
+            "final_answer": "\\(x^{n}\\) ka coefficient \\(= 4n\\) (jab \\(n \\ge 1\\))"
+          }
+        ]
+      }
+    }
+  ]
+}

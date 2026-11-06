@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q2-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q2",
+      "title": "Question 2 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 2: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-4-Q2",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Find the last two digits of the number: \\((17)^{12}\\)",
+            "explanation": "Kisi number ke aakhri do digits woh remainder hain jo 100 se divide karne par bachta hai.\nIs liye hum number ko (100 ka multiple) + (chhota number) ki shakal mein laana chahte hain.\nRule kaunsa? Binomial theorem, aisa base chun kar jo 10 ke multiple ke bilkul paas ho, kyunke us ka square 100 ka multiple hota hai.\nPlan: \\(17^{12} = 289^6\\), \\(289 = 290 - 1\\); \\((290 - 1)^6\\) mein sirf aakhri do terms kaam ke hain.",
+            "steps": [
+              "Diya gaya hai: \\((17)^{12}\\).\nHumein find karna hai: is ke aakhri do digits.\nTareeqa: Base ko aisi shakal dein ke woh 10 ke kisi multiple ke paas ho. Phir binomial expansion mein jin terms mein us multiple ka square ya bari power hai, woh sab 100 ke multiple hain aur aakhri do digits par asar nahi daalte. Sirf aakhri do terms bachte hain.",
+              "Munasib base banayein\n\\[(17)^{12} = (17^2)^{6} = (289)^{6}\\]\n\\[= (290 - 1)^{6}\\]\nKyun: \\(12 = 2 \\times 6\\), aur \\(17^2 = 289\\) hai jo 290 se sirf 1 kam hai. 290 ka square \\(84100\\) hai, jo 100 ka multiple hai. Yahi wajah hai ke yeh base humara kaam aasaan karta hai.",
+              "Binomial theorem se expand karein\n\\[(290 - 1)^6 = 290^6 - 6(290)^5 + \\dots\\]\n\\[+ 15(290)^2 - 6(290) + 1\\]\nKyun: \\((a - x)^n\\) mein signs baari baari plus aur minus hote hain. Coefficients Pascal's triangle ki row 6 se: 1, 6, 15, 20, 15, 6, 1. Aakhri term \\((-1)^6 = +1\\) hai kyunke 6 even hai.",
+              "Sirf aakhri do terms rakhein\n\\[(290 - 1)^6 = 100k - 1740 + 1\\]\n\\[= 100k - 1739\\]\nKyun: Jis term mein \\(290^2\\) ya us se bari power ho, woh 100 ka multiple hai; un sab ko \\(100k\\) likh diya. Bache \\(-6 \\times 290 = -1740\\) aur \\(+1\\).",
+              "Remainder ko positive banayein\n\\[100k - 1739 = 100(k - 18) + 61\\]\nKyun: Aakhri do digits hamesha 0 se 99 ke darmiyan positive number hote hain. \\(-1739\\) ko \\(-1800 + 61\\) likha, yani 100 ke 18 multiples udhaar le liye. Ab remainder 61 saaf nazar aa raha hai.\nDhyan dein: \\(-1739\\) dekh kar jawab '39' likh dena aam ghalti hai. Negative remainder ko hamesha positive mein badlein.",
+              "Tasdeeq\n\\[17^2 = 289 \\to 89,\\quad 89^2 = 7921 \\to 21\\]\n\\[17^8 \\to 21^2 = 441 \\to 41\\]\n\\[17^{12} \\to 41 \\times 21 = 861 \\to 61\\]\nKyun: Har multiplication ke baad sirf aakhri do digits rakhe: \\(17^4\\) ke 21, \\(17^8\\) ke 41, aur \\(17^{12} = 17^8 \\cdot 17^4\\) ke \\(41 \\times 21 = 861\\), yani 61. Asal number \\(582622237229761\\) bhi 61 par khatam hota hai."
+            ],
+            "final_answer": "\\((17)^{12}\\) ke aakhri do digits \\(61\\) hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Find the last two digits of the number: \\((43)^{7}\\)",
+            "explanation": "Humein \\(43^7\\) ko 100 se divide karne par bachne wala remainder chahiye.\nPower 7 odd hai, is liye ek 43 alag rakh denge aur baqi ko \\((43^2)^3\\) likhenge.\nRule kaunsa? Binomial theorem, kyunke \\(43^2 = 1849\\) bilkul 1850 ke paas hai.\nPlan: \\((1850 - 1)^3\\) expand karein, kaam ke terms rakhein, phir 43 se multiply karein.",
+            "steps": [
+              "Diya gaya hai: \\((43)^{7}\\).\nHumein find karna hai: is ke aakhri do digits.\nTareeqa: Ek 43 bahar nikal kar baqi ko \\(43^2 = 1849\\) ki power banayenge. 1849 = 1850 - 1, aur 1850 ka square 100 ka multiple hai. Expansion mein sirf aakhri do terms bachenge; aakhir mein bahar wale 43 se multiply karna nahi bhoolna.",
+              "Power ko torein\n\\[(43)^7 = 43 \\cdot (43^2)^3\\]\n\\[= 43\\,(1849)^3 = 43\\,(1850 - 1)^3\\]\nKyun: \\(7 = 1 + 2 \\times 3\\). 7 odd hai, is liye seedha kisi square ki power nahi ban sakta; ek 43 alag karna para.",
+              "Cube ko expand karein\n\\[(1850 - 1)^3 = 1850^3 - 3(1850)^2\\]\n\\[+ 3(1850) - 1\\]\nKyun: \\((a - x)^3 = a^3 - 3a^2x + 3ax^2 - x^3\\) formula, jahan \\(a = 1850\\) aur \\(x = 1\\). Aakhri term \\((-1)^3 = -1\\) hai kyunke 3 odd hai.",
+              "Kaam ke terms rakhein\n\\[(1850 - 1)^3 = 100k + 5550 - 1\\]\n\\[= 100k + 5549 = 100m + 49\\]\nKyun: \\(1850^2 = 3422500\\) aur \\(1850^3\\) dono 100 ke multiple hain, un ko \\(100k\\) mein daal diya. \\(3 \\times 1850 = 5550\\), aur \\(5550 - 1 = 5549 = 5500 + 49\\). 5500 bhi 100 ka multiple hai, to bacha 49.",
+              "Bahar wale 43 se multiply karein\n\\[43\\,(100m + 49) = 4300m + 2107\\]\n\\[= 100(43m + 21) + 7\\]\nKyun: \\(43 \\times 49 = 2107\\). \\(2107 = 2100 + 7\\), aur 2100 bhi 100 ka multiple hai. Remainder 7 bacha, yani aakhri do digits 0 aur 7.\nDhyan dein: Jawab '7' nahi, '07' likhein; sawal do digits maang raha hai, aur tens ka digit 0 hai.",
+              "Tasdeeq\n\\[43^7 = 271818611107\\]\nKyun: Calculator se poora number nikaal kar dekha, woh waqai 07 par khatam ho raha hai. Bahar wale 43 ko bhool jate to jawab 49 aata, jo ghalat hota."
+            ],
+            "final_answer": "\\((43)^{7}\\) ke aakhri do digits \\(07\\) hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) Find the last two digits of the number: \\((9)^{16}\\)",
+            "explanation": "Humein \\(9^{16}\\) ka 100 se divide karne par remainder chahiye.\n\\(9^2 = 81 = 80 + 1\\), aur 80 ka square 6400 hai jo 100 ka multiple hai.\nRule kaunsa? Binomial theorem \\((80 + 1)^8\\) par.\nPlan: power ko 81 ki power banayein, expand karein, sirf aakhri do terms rakhein.",
+            "steps": [
+              "Diya gaya hai: \\((9)^{16}\\).\nHumein find karna hai: is ke aakhri do digits.\nTareeqa: \\(9^{16} = 81^8 = (80 + 1)^8\\). Expansion mein jis term mein \\(80^2 = 6400\\) ya bari power ho, woh 100 ka multiple hai. Is liye sirf \\(8 \\times 80\\) aur \\(1\\) wale terms dekhne hain.",
+              "Power ko nayi shakal dein\n\\[(9)^{16} = (9^2)^8 = 81^8 = (80 + 1)^8\\]\nKyun: \\(16 = 2 \\times 8\\) aur \\(9^2 = 81\\). 81 bilkul 80 ke saath wala number hai, aur 80 jaisa base humein chahiye kyunke us ka square 100 ka multiple hai.",
+              "Binomial theorem se expand karein\n\\[(80 + 1)^8 = 80^8 + \\dots + {}^{8}C_{6}\\,80^2\\]\n\\[+ {}^{8}C_{7}\\,80 + 1\\]\nKyun: \\((a + x)^n\\) mein \\(a = 80\\), \\(x = 1\\), \\(n = 8\\). \\({}^{8}C_{7} = 8\\). Har term mein 1 ki power hai jo 1 hi rehti hai, is liye likhne ki zaroorat nahi.",
+              "Aakhri do terms rakhein\n\\[(80 + 1)^8 = 100k + 8(80) + 1\\]\n\\[= 100k + 641 = 100(k + 6) + 41\\]\nKyun: \\(80^2 = 6400\\) se shuru hone wale sab terms 100 ke multiple hain, woh \\(100k\\) mein chale gaye. \\(8 \\times 80 = 640\\), plus 1 = 641. 641 mein 600 bhi 100 ka multiple hai, to remainder 41 bacha.",
+              "Tasdeeq\n\\[9^2 = 81,\\ 9^4 \\to 81^2 = 6561 \\to 61\\]\n\\[9^8 \\to 61^2 = 3721 \\to 21\\]\n\\[9^{16} \\to 21^2 = 441 \\to 41\\]\nKyun: Baar baar square kiya aur har dafa sirf aakhri do digits rakhe, phir bhi 41 aaya. Poora number \\(1853020188851841\\) bhi 41 par khatam hota hai."
+            ],
+            "final_answer": "\\((9)^{16}\\) ke aakhri do digits \\(41\\) hain."
+          }
+        ]
+      }
+    }
+  ]
+}

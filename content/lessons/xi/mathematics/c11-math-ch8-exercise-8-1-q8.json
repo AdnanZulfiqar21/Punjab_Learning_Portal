@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q8",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 154,
+          "pdf_to": 154,
+          "note": "Exercise 8.1, Question 8: book page 149 (PDF 154); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8. Aliza invests Rs. 1,000,000 in a business that promises a 6% return compounded annually. Prove by mathematical induction that the amount of money after \\(n\\) years is \\(1{,}000{,}000(1.06)^n\\).",
+            "explanation": "A real-life induction question. First turn the words into a rule, then prove the formula by induction.\n\"6% compounded annually\" means each year the money is multiplied by \\(1.06\\).\nPlan: rule \\(A_{k+1} = 1.06\\,A_k\\); base case after 1 year; inductive step with the rule and the hypothesis.",
+            "steps": [
+              "Given: principal Rs. 1,000,000; return 6% per year, compounded annually.\nTo prove: \\(S(n)\\): amount after \\(n\\) years \\(A_n = 1{,}000{,}000(1.06)^n\\), for every positive integer \\(n\\).\nMethod: Find the yearly rule, then mathematical induction.",
+              "Turn the words into a rule\n\\[A_{k+1} = A_k + 0.06\\,A_k\\]\n\\[= 1.06\\,A_k\\]\nWhy: Each year she earns 6% of the money she has at the start of that year, and it is added to her money (compounding).",
+              "Base case: \\(n = 1\\)\n\\[A_1 = 1{,}000{,}000 + 60{,}000\\]\n\\[= 1{,}060{,}000\\]\n\\[1{,}000{,}000(1.06)^1 = 1{,}060{,}000\\]\nSo \\(S(1)\\) is true.\nWhy: 6% of 1,000,000 is 60,000.",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[A_k = 1{,}000{,}000(1.06)^k \\quad (A)\\]\nWhy: We suppose the formula is right after \\(k\\) years.",
+              "Target \\(S(k + 1)\\)\n\\[A_{k+1} = 1{,}000{,}000(1.06)^{k+1}\\]\nWhy: Put \\(n = k + 1\\).",
+              "Inductive step: use the rule, then (A)\n\\[A_{k+1} = 1.06\\,A_k\\]\n\\[= 1.06 \\times 1{,}000{,}000(1.06)^k\\]\n\\[= 1{,}000{,}000(1.06)^{k+1}\\]\nWhy: The yearly rule gives the next amount; (A) replaces \\(A_k\\); \\(1.06 \\times 1.06^k = 1.06^{k+1}\\).",
+              "Conclusion\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, the amount after \\(n\\) years is Rs. \\(1{,}000{,}000(1.06)^n\\) for every positive integer \\(n\\).\nWhy: Both conditions of the principle hold.",
+              "Check: \\(n = 2\\)\n\\[1{,}060{,}000 + 63{,}600 = 1{,}123{,}600\\]\n\\[1{,}000{,}000(1.06)^2 = 1{,}123{,}600 \\;\\checkmark\\]\nWhy: In year 2 she earns 6% of 1,060,000, which is 63,600."
+            ],
+            "final_answer": "Hence proved: the amount after \\(n\\) years is Rs. \\(1{,}000{,}000(1.06)^n\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

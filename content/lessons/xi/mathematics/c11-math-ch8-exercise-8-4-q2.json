@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 2: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Find the last two digits of the number: \\((17)^{12}\\)",
+            "explanation": "The last two digits of a number are its remainder on division by 100.\nSo we write the number as (a multiple of 100) + (something small).\nPlan: \\(17^{12} = 289^6\\), and \\(289 = 290 - 1\\); in \\((290 - 1)^6\\) all terms with \\(290^2\\) or higher are multiples of 100.",
+            "steps": [
+              "Given: \\((17)^{12}\\).\nTo find: its last two digits.\nMethod: Make the base close to a multiple of 10 whose square is a multiple of 100. Then in the binomial expansion only the last two terms matter.",
+              "Make a convenient base\n\\[(17)^{12} = (17^2)^{6} = (289)^{6}\\]\n\\[= (290 - 1)^{6}\\]\nWhy: \\(17^2 = 289\\) is just 1 less than 290, and \\(290^2 = 84100\\) is a multiple of 100.",
+              "Expand by the binomial theorem\n\\[(290 - 1)^6 = 290^6 - 6(290)^5 + \\dots\\]\n\\[+ 15(290)^2 - 6(290) + 1\\]\nWhy: \\((a - x)^n\\) has alternating signs; the coefficients of row 6 are 1, 6, 15, 20, 15, 6, 1.",
+              "Keep only the last two terms\n\\[(290 - 1)^6 = 100k - 1740 + 1\\]\n\\[= 100k - 1739\\]\nWhy: Every term containing \\(290^2\\) or a higher power is a multiple of 100, so it does not affect the last two digits. \\(6 \\times 290 = 1740\\).",
+              "Make the remainder positive\n\\[100k - 1739 = 100(k - 18) + 61\\]\nWhy: \\(-1739 = -1800 + 61\\). The last two digits must be read from a positive remainder between 0 and 99.",
+              "Check:\n\\[17^2 = 289 \\to 89,\\quad 89^2 = 7921 \\to 21\\]\n\\[17^8 \\to 21^2 = 441 \\to 41\\]\n\\[17^{12} \\to 41 \\times 21 = 861 \\to 61\\]\nWhy: Keeping only the last two digits at each multiplication gives 61 again (in fact \\(17^{12} = 582622237229761\\))."
+            ],
+            "final_answer": "The last two digits of \\((17)^{12}\\) are \\(61\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Find the last two digits of the number: \\((43)^{7}\\)",
+            "explanation": "We need the remainder of \\(43^7\\) on division by 100.\nThe power 7 is odd, so we keep one 43 aside and write the rest as \\((43^2)^3\\).\nPlan: \\(43^2 = 1849 = 1850 - 1\\); expand \\((1850 - 1)^3\\), then multiply by 43.",
+            "steps": [
+              "Given: \\((43)^{7}\\).\nTo find: its last two digits.\nMethod: Split off one factor 43 so that the rest is a power of \\(43^2 = 1849\\), which is next to 1850. Then use the binomial theorem and keep the terms that are not multiples of 100.",
+              "Split the power\n\\[(43)^7 = 43 \\cdot (43^2)^3\\]\n\\[= 43\\,(1849)^3 = 43\\,(1850 - 1)^3\\]\nWhy: \\(7 = 1 + 2 \\times 3\\) and \\(43^2 = 1849\\).",
+              "Expand the cube\n\\[(1850 - 1)^3 = 1850^3 - 3(1850)^2\\]\n\\[+ 3(1850) - 1\\]\nWhy: \\((a - x)^3 = a^3 - 3a^2x + 3ax^2 - x^3\\) with \\(a = 1850\\), \\(x = 1\\).",
+              "Keep the useful terms\n\\[(1850 - 1)^3 = 100k + 5550 - 1\\]\n\\[= 100k + 5549 = 100m + 49\\]\nWhy: \\(1850^2 = 3422500\\) is a multiple of 100, and so is \\(1850^3\\). \\(3 \\times 1850 = 5550\\), and \\(5549 = 5500 + 49\\).",
+              "Multiply by 43\n\\[43\\,(100m + 49) = 4300m + 2107\\]\n\\[= 100(43m + 21) + 7\\]\nWhy: \\(43 \\times 49 = 2107\\), and \\(2107 = 2100 + 7\\). The remainder is 7, so the last two digits are 0 and 7.",
+              "Check:\n\\[43^7 = 271818611107\\]\nWhy: The number really ends in 07. Note that the tens digit 0 must be written: the last two digits are 07, not 7."
+            ],
+            "final_answer": "The last two digits of \\((43)^{7}\\) are \\(07\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) Find the last two digits of the number: \\((9)^{16}\\)",
+            "explanation": "We need the remainder of \\(9^{16}\\) on division by 100.\nSince \\(9^2 = 81 = 80 + 1\\), the power becomes \\((80 + 1)^8\\).\nPlan: expand and keep only the terms that are not multiples of 100.",
+            "steps": [
+              "Given: \\((9)^{16}\\).\nTo find: its last two digits.\nMethod: Write \\(9^{16} = 81^8 = (80 + 1)^8\\). Every term with \\(80^2 = 6400\\) or a higher power is a multiple of 100.",
+              "Rewrite the power\n\\[(9)^{16} = (9^2)^8 = 81^8 = (80 + 1)^8\\]\nWhy: \\(16 = 2 \\times 8\\), and 81 is 1 more than 80.",
+              "Expand by the binomial theorem\n\\[(80 + 1)^8 = 80^8 + \\dots + {}^{8}C_{6}\\,80^2\\]\n\\[+ {}^{8}C_{7}\\,80 + 1\\]\nWhy: \\((a + x)^n\\) with \\(a = 80\\), \\(x = 1\\), \\(n = 8\\); \\({}^{8}C_{7} = 8\\).",
+              "Keep the last two terms\n\\[(80 + 1)^8 = 100k + 8(80) + 1\\]\n\\[= 100k + 641 = 100(k + 6) + 41\\]\nWhy: \\(80^2 = 6400\\) is a multiple of 100, so all earlier terms drop out. \\(8 \\times 80 = 640\\).",
+              "Check:\n\\[9^2 = 81,\\ 9^4 \\to 81^2 = 6561 \\to 61\\]\n\\[9^8 \\to 61^2 = 3721 \\to 21\\]\n\\[9^{16} \\to 21^2 = 441 \\to 41\\]\nWhy: Squaring step by step and keeping only the last two digits gives 41 again (\\(9^{16} = 1853020188851841\\))."
+            ],
+            "final_answer": "The last two digits of \\((9)^{16}\\) are \\(41\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

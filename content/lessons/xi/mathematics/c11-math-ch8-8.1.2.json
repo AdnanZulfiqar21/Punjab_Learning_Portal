@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.1.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.1.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 152,
+          "pdf_to": 153,
+          "note": "Book p. 147-148: 8.1.2 introduction, Example 9 (savings, with Justification and Communication), then the second printed Example 8 (push-ups) and Example 9 (calories). Teaching notes, Key points, Common mistakes are ours."
+        }
+      ],
+      "title": "8.1.2 Real Life Application of Mathematical Induction",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Mathematical induction is a powerful method used to prove statements that are formulated for natural numbers. It is often used in mathematics to justify conclusions about sequences, series, and other constructs that involve integer values."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In real life many quantities change by a fixed amount at each step: money saved every month, push-ups added every day, calories cut every week. The value after \\(n\\) steps is a formula in \\(n\\), and induction proves that formula for every \\(n\\): it is true after the first step, and if it is true after step \\(k\\), one more step keeps it true."
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "Mr. Faris starts a savings plan where she deposits Rs. 1,000 rupees into his bank account every month. Using mathematical induction, prove that the total amount saved after \\(n\\) months is given by: \\(S(n) = 1000 \\times n\\) rupees, where \\(n\\) is a positive integer representing the number of months.",
+            "steps": [
+              "Given: Rs. 1000 is deposited every month. Statement \\(S(n)\\): the total saved after \\(n\\) months is \\(1000 \\times n\\) rupees.\nTo prove: \\(S(n)\\) for every positive integer \\(n\\).\nMethod: induction on the number of months \\(n\\).",
+              "Step 1: Base case (n = 1)\nAfter the first month, Faris saves Rs. 1000. Therefore, the total savings after one month is\n\\[1000 \\times 1 = 1000 \\text{ rupees}\\]\nThe base case \\(S(1)\\) holds true.\nWhy: after one month exactly one deposit has been made.",
+              "Step 2: Induction hypothesis\nAssume the statement is true for some positive integer \\(k\\), i.e., after \\(k\\) months the total savings is\n\\[S(k) = 1000 \\times k \\text{ rupees}\\]",
+              "Step 3: Prove it for k + 1 months\nAfter \\(k + 1\\) months, one more deposit of Rs. 1000 is made, so the total savings becomes\n\\[S(k + 1) = 1000 \\times k + 1000\\]\n\\[= 1000 \\times (k + 1) \\text{ rupees}\\]\nThus, if the statement holds for \\(k\\), it also holds for \\(k + 1\\).\nWhy: month \\(k + 1\\) adds exactly one deposit to the total of \\(k\\) months; taking 1000 common gives the formula with \\(n = k + 1\\).",
+              "Step 4: Justification and Communication\nUsing mathematical induction, we prove that saving Rs. 1000 monthly for \\(n\\) months totals \\(1000 \\times n\\) rupees. The base case (\\(n = 1\\)) holds, and assuming it is true for \\(k\\) months, we show it for \\(k + 1\\). Thus, the statement is valid for all natural numbers \\(n\\), making it reliable for real-life applications.\nWhy: in a real-life problem the conclusion is also stated in words, so that someone who is not a mathematician understands what has been proved.",
+              "Check:\nAfter 12 months: \\(1000 \\times 12 = 12000\\) rupees, which is 12 deposits of Rs. 1000. Correct."
+            ],
+            "answer": "Hence proved: the total saved after \\(n\\) months is \\(S(n) = 1000 \\times n\\) rupees for every positive integer \\(n\\).",
+            "book_errors": [
+              "where she deposits"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 9 mixes pronouns: \"Mr. Faris ... where she deposits ... into his bank account\". Mr. Faris is a man, so it should read \"he deposits ... into his bank account\". The solution also switches to \"you would save\"; it means Faris. The mathematics is not affected."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \"Example 8\" and \"Example 9\" a second time here (after Example 9 above), so these two numbers each appear twice in the unit. In sequence they would be the 10th and 11th examples; we keep the printed numbers and label them \"[printed again]\"."
+          },
+          {
+            "type": "example",
+            "title": "Example 8 [printed again]",
+            "problem": "Imagine Ali starts a daily exercise routine where each day he increases the number of push-ups he does by 2. On the first day, he does 10 push-ups. Prove that on the \\(n^{\\text{th}}\\) day, the total number of push-ups Ali has done is \\(n^{2} + 9n\\).",
+            "steps": [
+              "Given: day 1: 10 push-ups; each day 2 more than the day before. So on day \\(d\\) Ali does \\(10 + 2(d - 1)\\) push-ups.\nTo prove: \\(S(n)\\): the total after \\(n\\) days is \\(n^{2} + 9n\\), for every positive integer \\(n\\).\nMethod: induction on the number of days.",
+              "Step 1: Base case (n = 1)\nOn the first day, Ali does 10 push-ups. The book writes: Total push-ups \\(= 10 \\times 1 - 10\\) (a misprint; see the Book correction). Correctly,\n\\[\\text{Total} = 10 = 1^{2} + 9(1)\\]\nThe base case \\(S(1)\\) holds true.",
+              "Step 2: Induction hypothesis\nAssume the statement is true for some positive integer \\(k\\), i.e., the total number of push-ups after \\(k\\) days is\n\\[S(k) = k^{2} + 9k\\]",
+              "Step 3: Push-ups on day k + 1\nOn the \\((k + 1)\\)th day, Ali does \\(10 + 2 \\times k\\) push-ups.\nWhy: day 1 has 10, and each of the next \\(k\\) days adds 2: \\(10 + 2[(k + 1) - 1] = 10 + 2k\\).",
+              "Step 4: Total after k + 1 days\n\\[k^{2} + 9k + (10 + 2k)\\]\n\\[= k^{2} + 2k + 1 + 9k + 9\\]\n\\[= (k + 1)^{2} + 9(k + 1)\\]\nThe formula holds for \\(S(k + 1)\\).\nWhy: we split \\(k^{2} + 11k + 10\\) as \\((k^{2} + 2k + 1) + (9k + 9)\\), because \\((k + 1)^{2} = k^{2} + 2k + 1\\) and \\(9(k + 1) = 9k + 9\\). This is \\(n^{2} + 9n\\) with \\(n = k + 1\\).",
+              "Step 5: Conclusion\nBy mathematical induction, the total number of push-ups after \\(n\\) days is \\(n^{2} + 9n\\).",
+              "Check:\nDays 1 to 3: \\(10 + 12 + 14 = 36\\), and \\(3^{2} + 9(3) = 9 + 27 = 36\\). Correct."
+            ],
+            "answer": "Hence proved: after \\(n\\) days Ali has done \\(n^{2} + 9n\\) push-ups in total.",
+            "book_errors": [
+              "\\(= 10 \\times 1 - 10\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 8 [printed again], base case: the book prints \"Total push-ups \\(= 10 \\times 1 - 10\\)\". It should read: Total push-ups \\(= 10 = 1^{2} + 9(1)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The push-ups 10, 12, 14, ... form an arithmetic progression with \\(a = 10\\), \\(d = 2\\). The sum formula \\(S_{n} = \\frac{n}{2}[2a + (n - 1)d]\\) gives \\(\\frac{n}{2}(20 + 2n - 2) = n(n + 9) = n^{2} + 9n\\), the same answer. Induction proves it without using the A.P. formula."
+          },
+          {
+            "type": "example",
+            "title": "Example 9 [printed again]",
+            "problem": "Suppose you aim to lose weight by reducing your calorie intake by 50 calories each week. If you start at 2500 calories, prove that after \\(n\\) weeks, your daily intake is \\(2500 - 50n\\) calories.",
+            "steps": [
+              "Given: starting daily intake 2500 calories; each week it is reduced by 50 calories.\nTo prove: \\(S(n)\\): after \\(n\\) weeks the daily intake is \\(2500 - 50n\\) calories, for every positive integer \\(n\\).\nMethod: induction on the number of weeks.",
+              "Step 1: Base case (n = 1)\nAfter 1 week, your intake is\n\\[2500 - 50 = 2450 \\text{ calories}\\]\nand \\(2500 - 50(1) = 2450\\). The base case \\(S(1)\\) holds true.",
+              "Step 2: Induction hypothesis\nAssume the statement is true for some positive integer \\(k\\), i.e., after \\(k\\) weeks your intake is\n\\[S(k): 2500 - 50k \\text{ calories}\\]",
+              "Step 3: Prove it for k + 1 weeks\nAfter \\(k + 1\\) weeks, your intake will be\n\\[2500 - 50k - 50\\]\n\\[= 2500 - 50(k + 1) \\text{ calories}\\]\nThe formula holds for \\(k + 1\\).\nWhy: one more week means 50 calories less than after \\(k\\) weeks; taking \\(-50\\) common gives the formula with \\(n = k + 1\\).",
+              "Step 4: Conclusion\nBy mathematical induction, your daily intake after \\(n\\) weeks is \\(2500 - 50n\\) calories.",
+              "Check:\nAfter 4 weeks: \\(2500 - 200 = 2300\\) calories, which is \\(2450 \\to 2400 \\to 2350 \\to 2300\\) week by week. Correct."
+            ],
+            "answer": "Hence proved: after \\(n\\) weeks the daily intake is \\(2500 - 50n\\) calories."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A real-life rule that adds (or removes) a fixed amount each step gives a formula in \\(n\\); induction proves it for every \\(n\\).\n2. Base case: the situation after the first step. Hypothesis: the formula after \\(k\\) steps. Step: add what happens in step \\(k + 1\\) and rewrite in the form of the formula with \\(n = k + 1\\).\n3. In applications, state the conclusion in words as well (Justification and Communication)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistakes",
+            "text": "1. Taking the amount on day \\(k + 1\\) as \\(10 + 2(k + 1)\\) instead of \\(10 + 2k\\): day 1 already has 10, so only \\(k\\) increases of 2 have happened by day \\(k + 1\\).\n2. Mixing up the amount in one step (push-ups on day \\(n\\)) with the total up to that step (all push-ups in \\(n\\) days). The push-ups example is about the total; the calorie example is about the intake in one week.\n3. Stopping at \\(k^{2} + 11k + 10\\) without showing it equals \\((k + 1)^{2} + 9(k + 1)\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

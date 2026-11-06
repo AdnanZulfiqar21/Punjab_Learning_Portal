@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-3-Q6-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-3-q6",
+      "title": "Question 6 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 167,
+          "pdf_to": 167,
+          "note": "Exercise 8.3, Question 6: book page 162 (PDF 167); proof question, no answer in the key (PDF 307)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-3-Q6",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. If \\(x\\) is very nearly equal 1, then prove that \\(px^{p} - qx^{q} \\approx (p - q)x^{p+q}\\).",
+            "explanation": "\"\\(x\\) taqreeban 1 ke barabar hai\" ka matlab hai \\(x = 1 + h\\), jahan \\(h\\) bahut chhota hai. Is liye \\(h^{2}\\) aur us se bari powers chhor sakte hain.\nSaabit kya karna hai? Ke dono sides \\(h\\) wali term tak barabar hain.\nRule kaunsa? \\((1 + h)^{n} \\approx 1 + nh\\).\nPlan: \\(x^{p}\\), \\(x^{q}\\) aur \\(x^{p+q}\\) ko \\(1 + nh\\) ki shakal mein khol kar dono sides ka muqabla.",
+            "steps": [
+              "Diya gaya hai: \\(x\\) taqreeban 1 hai.\nSaabit karna hai: \\(px^{p} - qx^{q} \\approx (p - q)x^{p+q}\\).\nTareeqa: \\(x = 1 + h\\) rakhenge jahan \\(h\\) bahut chhota hai. Binomial theorem se \\((1 + h)^{n} \\approx 1 + nh\\), jab \\(h^{2}\\) chhor diya jaye. Dono sides ko \\(h\\) mein khol kar dikhayenge ke ek hi cheez banti hai. Yeh tareeqa isliye zaroori hai ke binomial series ko chhota number chahiye; \\(x\\) khud chhota nahi, lekin \\(x - 1 = h\\) chhota hai.",
+              "Left side\n\\[px^{p} - qx^{q} = p(1 + h)^{p} - q(1 + h)^{q}\\]\n\\[\\approx p(1 + ph) - q(1 + qh)\\]\n\\[= (p - q) + (p^{2} - q^{2})h\\]\nKyun: Dono powers ko \\(1 + nh\\) se khola. Phir constants alag jama kiye (\\(p - q\\)) aur \\(h\\) wali terms alag (\\(p^{2}h - q^{2}h\\)).",
+              "Factor banayein\n\\[= (p - q) + (p - q)(p + q)h\\]\n\\[= (p - q)\\left[1 + (p + q)h\\right]\\]\nKyun: \\(p^{2} - q^{2}\\) do squares ka farq hai, jo \\((p - q)(p + q)\\) banta hai. Ab dono terms mein \\(p - q\\) common hai, usay bahar nikala.\nDhyan dein: yahi factor nikalna is sawal ki chaabi hai; is ke baghair right side se milana mushkil lagta hai.",
+              "Right side\n\\[(p - q)x^{p+q} = (p - q)(1 + h)^{p+q}\\]\n\\[\\approx (p - q)\\left[1 + (p + q)h\\right]\\]\nKyun: Yahan power \\(p + q\\) hai, to \\(1 + nh\\) mein \\(n = p + q\\) rakha.",
+              "Muqabla\n\\[px^{p} - qx^{q} \\approx (p - q)x^{p+q}\\]\nKyun: Dono sides bilkul ek hi expression \\((p - q)[1 + (p + q)h]\\) ban gayin, is liye taqreeban barabar hain.",
+              "Tasdeeq: \\(p = 3,\\ q = 1,\\ x = 1.01\\)\n\\[3(1.01)^{3} - 1.01 = 2.080903\\]\n\\[2(1.01)^{4} = 2.081208\\]\nKyun: Ek misaal le kar dekha: dono values bahut qareeb hain. Farq \\(h^{2} = 0.0001\\) jitni terms ka hai, jo humne chhori thin."
+            ],
+            "final_answer": "Jab \\(x\\) taqreeban 1 ho to \\(px^{p} - qx^{q} \\approx (p - q)x^{p+q}\\). Saabit ho gaya."
+          }
+        ]
+      }
+    }
+  ]
+}

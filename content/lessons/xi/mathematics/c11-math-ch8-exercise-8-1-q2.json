@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 154,
+          "pdf_to": 154,
+          "note": "Exercise 8.1, Question 2: book page 149 (PDF 154); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Prove by mathematical induction that for all positive integral values of \\(n\\): \\(n^2 + n\\) is divisible by 2",
+            "explanation": "A divisibility statement: \"divisible by 2\" means \"equal to \\(2 \\times\\) (an integer)\".\nWe prove it for every positive integer \\(n\\) by induction.\nPlan: expand \\((k + 1)^2 + (k + 1)\\), find the old expression \\(k^2 + k\\) inside it, replace it by \\(2m\\), and take 2 common.",
+            "steps": [
+              "Given: \\(S(n): n^2 + n\\) is divisible by 2.\nTo prove: \\(S(n)\\) is true for every positive integer \\(n\\).\nMethod: Mathematical induction, writing \"divisible by 2\" as \\(n^2 + n = 2m\\) for some integer \\(m\\).",
+              "Base case: put \\(n = 1\\)\n\\[1^2 + 1 = 2 = 2 \\times 1\\]\nSo \\(S(1)\\) is true.\nWhy: 2 is a multiple of 2.",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[k^2 + k = 2m,\\ m \\in \\mathbb{Z} \\quad (A)\\]\nWhy: \\(S(k)\\) says \\(k^2 + k\\) is divisible by 2, so it equals 2 times some integer \\(m\\).",
+              "Target \\(S(k + 1)\\)\n\\[(k + 1)^2 + (k + 1)\\ \\text{is divisible by 2}\\]\nWhy: Put \\(n = k + 1\\).",
+              "Inductive step: expand and use (A)\n\\[(k + 1)^2 + (k + 1)\\]\n\\[= k^2 + 2k + 1 + k + 1\\]\n\\[= (k^2 + k) + 2k + 2\\]\n\\[= 2m + 2(k + 1)\\]\n\\[= 2(m + k + 1)\\]\nWhy: After expanding we group \\(k^2 + k\\), which (A) says is \\(2m\\). The rest, \\(2k + 2\\), is also a multiple of 2, so 2 is a common factor.",
+              "Read the result\n\\(m + k + 1\\) is an integer, so \\((k + 1)^2 + (k + 1)\\) is divisible by 2. Thus \\(S(k + 1)\\) is true.\nWhy: The sum of integers is an integer.",
+              "Conclusion\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, \\(n^2 + n\\) is divisible by 2 for every positive integer \\(n\\).\nWhy: Both conditions of the principle hold.",
+              "Check: \\(n = 5\\)\n\\[5^2 + 5 = 30 = 2 \\times 15 \\;\\checkmark\\]\nWhy: \\(n^2 + n = n(n + 1)\\) is a product of two consecutive integers, and one of them is always even."
+            ],
+            "final_answer": "Hence proved: \\(n^2 + n\\) is divisible by 2 for every positive integer \\(n\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Prove by mathematical induction that for all positive integral values of \\(n\\): \\(5^n - 2^n\\) is divisible by 3",
+            "explanation": "A divisibility statement with powers: we must show \\(5^n - 2^n = 3 \\times\\) (an integer).\nWe prove it for every positive integer \\(n\\) by induction.\nPlan: from the hypothesis write \\(5^k = 2^k + 3m\\); split \\(5^{k+1} = 5 \\cdot 5^k\\), substitute, and take 3 common.",
+            "steps": [
+              "Given: \\(S(n): 5^n - 2^n\\) is divisible by 3.\nTo prove: \\(S(n)\\) is true for every positive integer \\(n\\).\nMethod: Mathematical induction, with \"divisible by 3\" written as \\(5^n - 2^n = 3m\\), \\(m\\) an integer.",
+              "Base case: put \\(n = 1\\)\n\\[5^1 - 2^1 = 3 = 3 \\times 1\\]\nSo \\(S(1)\\) is true.\nWhy: 3 is a multiple of 3.",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[5^k - 2^k = 3m,\\ m \\in \\mathbb{Z}\\]\n\\[5^k = 2^k + 3m \\quad (A)\\]\nWhy: We solve for the bigger power \\(5^k\\) so that it can be replaced later.",
+              "Target \\(S(k + 1)\\)\n\\[5^{k+1} - 2^{k+1}\\ \\text{is divisible by 3}\\]\nWhy: Put \\(n = k + 1\\).",
+              "Inductive step: split the powers and use (A)\n\\[5^{k+1} - 2^{k+1} = 5 \\cdot 5^k - 2 \\cdot 2^k\\]\n\\[= 5(2^k + 3m) - 2 \\cdot 2^k\\]\n\\[= 5 \\cdot 2^k + 15m - 2 \\cdot 2^k\\]\n\\[= 3 \\cdot 2^k + 15m\\]\n\\[= 3(2^k + 5m)\\]\nWhy: \\(5^{k+1} = 5 \\cdot 5^k\\) and \\(2^{k+1} = 2 \\cdot 2^k\\) (laws of indices). Then (A) replaces \\(5^k\\); five \\(2^k\\) minus two \\(2^k\\) is three \\(2^k\\); 3 is common.",
+              "Read the result\n\\(2^k + 5m\\) is an integer, so \\(5^{k+1} - 2^{k+1}\\) is divisible by 3. Thus \\(S(k + 1)\\) is true.\nWhy: \\(2^k\\) and \\(5m\\) are integers.",
+              "Conclusion\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, \\(5^n - 2^n\\) is divisible by 3 for every positive integer \\(n\\).\nWhy: Both conditions of the principle hold.",
+              "Check: \\(n = 3\\)\n\\[125 - 8 = 117 = 3 \\times 39 \\;\\checkmark\\]\nWhy: 117 is a multiple of 3."
+            ],
+            "final_answer": "Hence proved: \\(5^n - 2^n\\) is divisible by 3 for every positive integer \\(n\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) Prove by mathematical induction that for all positive integral values of \\(n\\): \\(8 \\times 10^n - 2\\) is divisible by 6",
+            "explanation": "A divisibility statement: show \\(8 \\times 10^n - 2 = 6 \\times\\) (an integer).\nWe prove it for every positive integer \\(n\\) by induction.\nPlan: from the hypothesis write \\(8 \\times 10^k = 6m + 2\\); split \\(10^{k+1} = 10 \\cdot 10^k\\), substitute, and take 6 common.",
+            "steps": [
+              "Given: \\(S(n): 8 \\times 10^n - 2\\) is divisible by 6.\nTo prove: \\(S(n)\\) is true for every positive integer \\(n\\).\nMethod: Mathematical induction, with \"divisible by 6\" written as \\(8 \\times 10^n - 2 = 6m\\), \\(m\\) an integer.",
+              "Base case: put \\(n = 1\\)\n\\[8 \\times 10 - 2 = 78 = 6 \\times 13\\]\nSo \\(S(1)\\) is true.\nWhy: 78 is a multiple of 6.",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[8 \\times 10^k - 2 = 6m,\\ m \\in \\mathbb{Z}\\]\n\\[8 \\times 10^k = 6m + 2 \\quad (A)\\]\nWhy: We solve for the group \\(8 \\times 10^k\\) so that it can be replaced later.",
+              "Target \\(S(k + 1)\\)\n\\[8 \\times 10^{k+1} - 2\\ \\text{is divisible by 6}\\]\nWhy: Put \\(n = k + 1\\).",
+              "Inductive step: split off one 10 and use (A)\n\\[8 \\times 10^{k+1} - 2 = 10(8 \\times 10^k) - 2\\]\n\\[= 10(6m + 2) - 2\\]\n\\[= 60m + 20 - 2\\]\n\\[= 60m + 18\\]\n\\[= 6(10m + 3)\\]\nWhy: \\(10^{k+1} = 10 \\cdot 10^k\\), so the group \\(8 \\times 10^k\\) appears and (A) replaces it. Then \\(60 = 6 \\times 10\\) and \\(18 = 6 \\times 3\\).",
+              "Read the result\n\\(10m + 3\\) is an integer, so \\(8 \\times 10^{k+1} - 2\\) is divisible by 6. Thus \\(S(k + 1)\\) is true.\nWhy: \\(m\\) is an integer.",
+              "Conclusion\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, \\(8 \\times 10^n - 2\\) is divisible by 6 for every positive integer \\(n\\).\nWhy: Both conditions of the principle hold.",
+              "Check: \\(n = 2\\)\n\\[800 - 2 = 798 = 6 \\times 133 \\;\\checkmark\\]\nWhy: 798 is a multiple of 6."
+            ],
+            "final_answer": "Hence proved: \\(8 \\times 10^n - 2\\) is divisible by 6 for every positive integer \\(n\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

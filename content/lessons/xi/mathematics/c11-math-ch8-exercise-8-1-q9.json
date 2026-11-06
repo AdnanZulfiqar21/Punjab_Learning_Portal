@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q9",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 154,
+          "pdf_to": 154,
+          "note": "Exercise 8.1, Question 9: book page 149 (PDF 154); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9. Sikander starts saving Rs. 500 in the first month and plans to increase his savings [printed as 'plan to increase your savings'] by Rs. 500 each month thereafter. He wants to determine if he will have saved at least Rs. 12,000 by the end of 24 months. Use mathematical induction to justify whether his savings plan will meet this goal.",
+            "explanation": "A real-life question: first find a formula for the total saved after \\(n\\) months, prove it by induction, then use it for \\(n = 24\\).\nMonth 1 he saves 500, month 2 he saves 1000, month 3 he saves 1500: in month \\(m\\) he saves \\(500m\\).\nPlan: total \\(T(n) = 500(1 + 2 + \\cdots + n) = 250n(n + 1)\\); prove it; compute \\(T(24)\\) and compare with 12,000.",
+            "steps": [
+              "Given: saving in month 1 = Rs. 500; each month's saving is Rs. 500 more than the month before.\nTo find: whether the total after 24 months is at least Rs. 12,000.\nMethod: Find \\(T(n)\\), the total after \\(n\\) months; prove it by mathematical induction; then put \\(n = 24\\).",
+              "Find the formula\n\\[T(n) = 500 + 1000 + \\cdots + 500n\\]\n\\[= 500(1 + 2 + \\cdots + n)\\]\n\\[= 500 \\cdot \\dfrac{n(n + 1)}{2}\\]\n\\[= 250n(n + 1)\\]\nWhy: Month \\(m\\) saving is \\(500m\\). The sum of the first \\(n\\) counting numbers is \\(\\frac{n(n + 1)}{2}\\).",
+              "Statement and monthly rule\n\\[S(n): T(n) = 250n(n + 1)\\]\n\\[T(k + 1) = T(k) + 500(k + 1)\\]\nWhy: The total after month \\(k + 1\\) is the total after month \\(k\\) plus the saving of month \\(k + 1\\).",
+              "Base case: \\(n = 1\\)\n\\[T(1) = 500\\]\n\\[250 \\times 1 \\times 2 = 500\\]\nSo \\(S(1)\\) is true.\nWhy: After the first month he has saved Rs. 500.",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[T(k) = 250k(k + 1) \\quad (A)\\]\nWhy: We suppose the formula is right after \\(k\\) months.",
+              "Inductive step: use the rule, then (A)\n\\[T(k + 1) = 250k(k + 1) + 500(k + 1)\\]\n\\[= 250(k + 1)(k + 2)\\]\n\\[= 250(k + 1)[(k + 1) + 1]\\]\nSo \\(S(k + 1)\\) is true.\nWhy: (A) replaces \\(T(k)\\); \\(250(k + 1)\\) is common: \\(250(k + 1)[k + 2]\\). This is the formula with \\(n = k + 1\\).",
+              "Conclusion of the proof\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, \\(T(n) = 250n(n + 1)\\) for every positive integer \\(n\\).\nWhy: Both conditions of the principle hold.",
+              "Answer the real question: \\(n = 24\\)\n\\[T(24) = 250 \\times 24 \\times 25\\]\n\\[= 150{,}000\\]\n\\[150{,}000 \\ge 12{,}000\\]\nWhy: \"By the end of 24 months\" means \\(n = 24\\). The total is far above the goal.",
+              "Check with a table\n\\[T(1) = 500,\\ T(2) = 1500,\\ T(3) = 3000\\]\n\\[250 \\times 3 \\times 4 = 3000 \\;\\checkmark\\]\nWhy: \\(500 + 1000 + 1500 = 3000\\) agrees with the formula."
+            ],
+            "final_answer": "Yes. By induction the total after \\(n\\) months is \\(T(n) = 250n(n + 1)\\), so after 24 months he has saved Rs. 150,000, which is more than Rs. 12,000. The plan meets the goal."
+          }
+        ]
+      }
+    }
+  ]
+}

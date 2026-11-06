@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-2-Q10-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-2-q10",
+      "title": "Question 10 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 162,
+          "pdf_to": 162,
+          "note": "Exercise 8.2, Question 10: book p.157 (PDF 162). Answer key book p.301-302 (PDF 306-307): RHS printed 2^(n-1), correct 2^n - 1; no answer in the key. Solution book PDF 741-770 used as a reference only."
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-2-Q10",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10 Show that: \\(\\binom{n}{1} + \\binom{n}{2} + \\binom{n}{3} + \\dots + \\binom{n}{n} = 2^{n-1}\\)",
+            "explanation": "Bachon, pehle ek zaroori baat: kitab mein right side \\(2^{n-1}\\) chhapi hai jo ghalat hai; sahi value \\(2^n - 1\\) hai (neeche \"Kitab ki ghalti\" dekhein). Hum sahi statement saabit karenge.\nChaal: \\((1 + x)^n\\) mein \\(x = 1\\) rakh do; har \\(x\\) ki power 1 ban jayegi aur sirf coefficients bachenge.\nPlan: \\((1 + x)^n\\) likho, \\(x = 1\\) rakho, phir \\(\\binom{n}{0} = 1\\) nikaal do.\nYeh sawal 'Show that' wala hai, yani humein koi number nahi nikalna balke ek baat saabit karni hai. Saabit karte waqt har qadam ki wajah likhna zaroori hai.",
+            "steps": [
+              "Diya gaya hai: jama \\(\\binom{n}{1} + \\binom{n}{2} + \\dots + \\binom{n}{n}\\).\nSaabit karna hai: yeh \\(2^n - 1\\) ke barabar hai.\nTareeqa: \\((1 + x)^n\\) ki binomial expansion, khaas value \\(x = 1\\) ke saath. Binomial coefficients ke jama wale sawalon mein \\(x = 1\\) ya \\(x = -1\\) rakhna aam aur taqatwar chaal hai.",
+              "\\((1 + x)^n\\) kholein\n\\[(1 + x)^n = \\binom{n}{0} + \\binom{n}{1}x\\]\n\\[+ \\binom{n}{2}x^2 + \\dots + \\binom{n}{n}x^n\\]\nKyun: Binomial theorem jahan pehla term 1 hai; 1 ki har power 1 hai, is liye har term sirf \\(\\binom{n}{r}x^r\\) reh jata hai.\nMisaal: \\(n = 2\\) par \\((1 + x)^2 = 1 + 2x + x^2\\), yani coefficients 1, 2, 1 hain.",
+              "\\(x = 1\\) rakhein\n\\[2^n = \\binom{n}{0} + \\binom{n}{1} + \\binom{n}{2}\\]\n\\[+ \\dots + \\binom{n}{n}\\]\nKyun: Yeh expansion har \\(x\\) ke liye sach hai, is liye \\(x = 1\\) bhi rakh sakte hain. Left side \\((1 + 1)^n = 2^n\\) aur right side par har \\(x^r = 1\\). Matlab saare binomial coefficients ka jama \\(2^n\\) hai (kitab ke deduction (iii) mein bhi yahi hai).\nMisaal: \\(n = 2\\) par \\(1 + 2 + 1 = 4 = 2^2\\). Dekha, coefficients ka jama waqai \\(2^n\\) hai.",
+              "Pehla coefficient hata dein\n\\[\\binom{n}{0} = 1\\]\n\\[\\binom{n}{1} + \\binom{n}{2} + \\dots + \\binom{n}{n} = 2^n - 1\\]\nKyun: Hamara jama \\(\\binom{n}{1}\\) se shuru hota hai, \\(\\binom{n}{0}\\) se nahi. Is liye dono taraf se \\(\\binom{n}{0} = 1\\) minus kiya.\nDhyan dein: \\(2^n - 1\\) aur \\(2^{n-1}\\) bilkul alag hain: pehle mein poore \\(2^n\\) mein se 1 minus hota hai, doosre mein power mein se.",
+              "Tasdeeq: \\(n = 3\\)\n\\[\\binom{3}{1} + \\binom{3}{2} + \\binom{3}{3} = 3 + 3 + 1 = 7\\]\n\\[2^3 - 1 = 7 \\;\\checkmark\\]\n\\[2^{3-1} = 4 \\ne 7\\]\nKyun: Chhoti value par \\(2^n - 1\\) sahi nikla, aur saath hi saaf ho gaya ke kitab wala \\(2^{n-1}\\) sahi nahi.\nTasdeeq hamesha kisi chhoti value se kar lein; yeh do minute ka kaam hai magar ghalat formula ko foran pakad leta hai, chahe woh kitab mein hi kyun na chhapa ho."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\binom{n}{1} + \\binom{n}{2} + \\dots + \\binom{n}{n} = 2^n - 1\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab right side \\(2^{n-1}\\) print karti hai. Yeh \\(n \\ge 2\\) ke liye ghalat hai: misaal \\(n = 2\\) par \\(\\binom{2}{1} + \\binom{2}{2} = 3\\), jabke \\(2^{2-1} = 2\\). Sahi statement: \\(\\binom{n}{1} + \\binom{n}{2} + \\dots + \\binom{n}{n} = 2^n - 1\\). (\\(2^{n-1}\\) asal mein ek aur jama ka jawab hai: \\(\\binom{n}{1} + \\binom{n}{3} + \\binom{n}{5} + \\dots = 2^{n-1}\\), yani odd jagah wale coefficients ka jama.) Answer key mein is sawal ka jawab nahi diya gaya."
+          }
+        ]
+      }
+    }
+  ]
+}

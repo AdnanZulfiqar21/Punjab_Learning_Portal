@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 154,
+          "pdf_to": 154,
+          "note": "Exercise 8.1, Question 4: book page 149 (PDF 154); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. [Prove by mathematical induction, for every positive integer \\(n\\):] \\(x - y\\) is a factor of \\(x^n - y^n\\); \\((x \\ne y)\\)",
+            "explanation": "\"\\(x - y\\) is a factor of \\(x^n - y^n\\)\" means \\(x^n - y^n = (x - y) \\times\\) (a polynomial).\nThis is a divisibility proof with algebra instead of numbers.\nPlan: in \\(x^{k+1} - y^{k+1}\\) subtract and add \\(xy^k\\) so that \\(x^k - y^k\\) appears; then use the hypothesis and take \\(x - y\\) common.",
+            "steps": [
+              "Given: \\(S(n): x - y\\) is a factor of \\(x^n - y^n\\), \\(x \\ne y\\).\nTo prove: \\(S(n)\\) is true for every positive integer \\(n\\).\nMethod: Mathematical induction, writing \\(x^n - y^n = (x - y)P_n\\) where \\(P_n\\) is a polynomial in \\(x\\) and \\(y\\).",
+              "Base case: put \\(n = 1\\)\n\\[x^1 - y^1 = (x - y) \\times 1\\]\nSo \\(S(1)\\) is true.\nWhy: Every expression is a factor of itself.",
+              "Induction hypothesis: assume \\(S(k)\\)\n\\[x^k - y^k = (x - y)P_k \\quad (A)\\]\nWhy: \\(S(k)\\) says \\(x - y\\) divides \\(x^k - y^k\\), so the quotient \\(P_k\\) is a polynomial.",
+              "Target \\(S(k + 1)\\)\n\\[x - y\\ \\text{is a factor of}\\ x^{k+1} - y^{k+1}\\]\nWhy: Put \\(n = k + 1\\).",
+              "Subtract and add \\(xy^k\\)\n\\[x^{k+1} - y^{k+1}\\]\n\\[= x^{k+1} - xy^k + xy^k - y^{k+1}\\]\n\\[= x(x^k - y^k) + y^k(x - y)\\]\nWhy: Adding and subtracting the same term does not change the value. Then \\(x\\) is common in the first pair and \\(y^k\\) in the second pair (\\(y^{k+1} = y^k \\cdot y\\)).",
+              "Inductive step: use (A) and take \\(x - y\\) common\n\\[= x(x - y)P_k + y^k(x - y)\\]\n\\[= (x - y)[xP_k + y^k]\\]\nWhy: (A) replaces \\(x^k - y^k\\). Both parts now contain \\(x - y\\).",
+              "Read the result\n\\(xP_k + y^k\\) is a polynomial, so \\(x - y\\) is a factor of \\(x^{k+1} - y^{k+1}\\). Thus \\(S(k + 1)\\) is true.\nWhy: Products and sums of polynomials are polynomials.",
+              "Conclusion\n\\(S(1)\\) is true and \\(S(k) \\Rightarrow S(k + 1)\\). By the principle of mathematical induction, \\(x - y\\) is a factor of \\(x^n - y^n\\) for every positive integer \\(n\\).\nWhy: Both conditions of the principle hold.",
+              "Check: \\(n = 3\\)\n\\[x^3 - y^3 = (x - y)(x^2 + xy + y^2) \\;\\checkmark\\]\nWhy: This is the well-known difference of cubes formula."
+            ],
+            "final_answer": "Hence proved: \\(x - y\\) is a factor of \\(x^n - y^n\\) for every positive integer \\(n\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

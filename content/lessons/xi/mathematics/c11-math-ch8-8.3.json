@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.3",
+      "title": "8.3 The Binomial Theorem When the Index n is a Negative Integer or a Fraction",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 162,
+          "pdf_to": 163,
+          "note": "Book p. 157-158: 8.3 Binomial Theorem when n is a negative integer or a fraction, binomial series (|x| < 1), Note box, Example 15, box of particular cases (i)-(vi) for n < 0"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "When \\(n\\) is a negative integer or a fraction, then\n\\[(1 + x)^{n} = 1 + nx + \\dfrac{n(n-1)}{2!}x^{2}\\]\n\\[+ \\dfrac{n(n-1)(n-2)}{3!}x^{3} + \\dots\\]\n\\[+ \\dfrac{n(n-1)(n-2)\\cdots(n-r+1)}{r!}x^{r} + \\dots\\]\nprovided \\(|x| < 1\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The series of the type \\(1 + nx + \\frac{n(n-1)}{2!}x^{2} + \\frac{n(n-1)(n-2)}{3!}x^{3} + \\dots\\) is called the binomial series.",
+            "bold": [
+              "binomial series"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What is new here?\n1. The series never ends. For a positive integer \\(n\\) the factor \\((n - n) = 0\\) appears in the \\((n+2)\\)th coefficient and all later terms vanish, leaving \\(n + 1\\) terms. For \\(n = -1\\) or \\(n = \\frac{1}{2}\\) no factor is ever zero, so there are infinitely many terms.\n2. The condition \\(|x| < 1\\) is essential. Only then do the terms get smaller and smaller so that the sum settles to a fixed value. Example: \\((1 + x)^{-1} = \\frac{1}{1 + x}\\). For \\(x = 0.1\\), \\(1 - 0.1 + 0.01 - 0.001 + \\dots \\approx 0.909\\), and \\(\\frac{1}{1.1} = 0.909\\dots\\). For \\(x = 2\\), the series \\(1 - 2 + 4 - 8 + \\dots\\) never settles, although \\(\\frac{1}{3}\\) exists.\n3. The first term must be 1. The form is \\((1 + x)^{n}\\); an expression such as \\((4 - 3x)^{1/2}\\) is first written as \\(4^{1/2}\\left(1 - \\frac{3x}{4}\\right)^{1/2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "The proof of this theorem is beyond the scope of this book.\nSymbols \\(\\binom{n}{0}, \\binom{n}{1}, \\binom{n}{2}\\) etc are meaningless when \\(n\\) is a negative integer or a fraction.\nThe general term in the expansion is\n\\[T_{r+1} = \\dfrac{n(n-1)(n-2)\\cdots(n-r+1)}{r!}x^{r}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why are the symbols meaningless? \\(\\binom{n}{r} = \\frac{n!}{r!\\,(n-r)!}\\) uses \\(n!\\), and \\((-3)!\\) or \\(\\left(\\frac{1}{2}\\right)!\\) is not defined in this course. The product form \\(\\frac{n(n-1)\\cdots(n-r+1)}{r!}\\) (from 8.2.2) needs only multiplication, so it works for any \\(n\\). That is why the general term is written in this form."
+          },
+          {
+            "type": "example",
+            "title": "Example 15",
+            "problem": "Find the general term in the expansion of \\((1 + x)^{-3}\\) when \\(|x| < 1\\).",
+            "steps": [
+              "Given: \\((1 + x)^{-3}\\) with \\(|x| < 1\\), so \\(n = -3\\).\nTo find: \\(T_{r+1}\\), the general term.\nMethod: put \\(n = -3\\) in \\(T_{r+1} = \\frac{n(n-1)\\cdots(n-r+1)}{r!}x^{r}\\), take the minus signs out, and write the product with factorials so that it cancels.",
+              "Step 1: Substitute \\(n = -3\\)\n\\[T_{r+1} = \\dfrac{(-3)(-4)(-5)\\cdots(-3-r+1)}{r!}x^{r}\\]\nWhy: the factors go down by 1 from \\(n = -3\\); the last one is \\(n - r + 1 = -3 - r + 1 = -(r + 2)\\). There are \\(r\\) factors.",
+              "Step 2: Take out the minus signs\n\\[= \\dfrac{(-1)^{r}\\cdot 3 \\cdot 4 \\cdot 5\\cdots(r+2)}{r!}x^{r}\\]\nWhy: each of the \\(r\\) factors is negative, so they give \\((-1)^{r}\\) times \\(3 \\cdot 4 \\cdot 5 \\cdots (r+2)\\).",
+              "Step 3: Complete the factorial\n\\[= (-1)^{r}\\dfrac{1 \\cdot 2 \\cdot 3 \\cdot 4 \\cdot 5\\cdots(r+2)}{1 \\cdot 2 \\cdot r!}x^{r}\\]\n\\[= (-1)^{r}\\dfrac{r!\\,(r+1)(r+2)}{2 \\cdot r!}x^{r}\\]\nWhy: multiplying top and bottom by \\(1 \\cdot 2\\) turns the top into \\((r+2)! = r!\\,(r+1)(r+2)\\).",
+              "Step 4: Cancel \\(r!\\)\n\\[T_{r+1} = (-1)^{r}\\dfrac{(r+1)(r+2)}{2}x^{r}\\]\nWhy: \\(r!\\) appears in the numerator and the denominator.",
+              "Check:\n\\(r = 0\\): \\(1\\); \\(r = 1\\): \\(-\\frac{2 \\cdot 3}{2}x = -3x\\); \\(r = 2\\): \\(\\frac{3 \\cdot 4}{2}x^{2} = 6x^{2}\\); \\(r = 3\\): \\(-10x^{3}\\). So \\((1 + x)^{-3} = 1 - 3x + 6x^{2} - 10x^{3} + \\dots\\), which agrees with the series given by computer algebra (and with case (iii) in the box below)."
+            ],
+            "answer": "\\(T_{r+1} = (-1)^{r}\\frac{(r+1)(r+2)}{2}x^{r}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Some particular cases of the expansion of (1 + x)^n, n < 0",
+            "text": "(i) \\((1 + x)^{-1} = 1 - x + x^{2} - x^{3} + \\dots + (-1)^{r}x^{r} + \\dots\\)\n(ii) \\((1 + x)^{-2} = 1 - 2x + 3x^{2} - 4x^{3} + \\dots + (-1)^{r}(r+1)x^{r} + \\dots\\)\n(iii) \\((1 + x)^{-3} = 1 - 3x + 6x^{2} - 10x^{3} + \\dots + (-1)^{r}\\frac{(r+1)(r+2)}{2}x^{r} + \\dots\\)\n(iv) \\((1 - x)^{-1} = 1 + x + x^{2} + x^{3} + \\dots + x^{r} + \\dots\\)\n(v) \\((1 - x)^{-2} = 1 + 2x + 3x^{2} + 4x^{3} + \\dots + (r+1)x^{r} + \\dots\\)\n(vi) \\((1 - x)^{-3} = 1 + 3x + 6x^{2} + 10x^{3} + \\dots + \\frac{(r+1)(r+2)}{2}x^{r} + \\dots\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Cases (iv), (v), (vi) come from (i), (ii), (iii) by replacing \\(x\\) with \\(-x\\): all the signs become \\(+\\). Case (iv) is the infinite geometric series with common ratio \\(x\\), whose sum is \\(\\frac{1}{1 - x}\\) (Unit 6). Learn these six; they are used again and again in 8.3.1 and in Exercise 8.3."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. For a negative or fractional \\(n\\): \\((1 + x)^{n} = 1 + nx + \\frac{n(n-1)}{2!}x^{2} + \\dots\\), an infinite series, valid only for \\(|x| < 1\\).\n2. The first term inside the bracket must be 1.\n3. General term: \\(T_{r+1} = \\frac{n(n-1)\\cdots(n-r+1)}{r!}x^{r}\\); do not use \\(\\binom{n}{r}\\) here.\n4. \\((1 + x)^{-3}\\) has general term \\((-1)^{r}\\frac{(r+1)(r+2)}{2}x^{r}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Stopping the series after \\(n + 1\\) terms: for \\(n = -2\\) there are infinitely many terms, not \"\\(-1\\)\" terms.\n2. Forgetting the condition \\(|x| < 1\\) (or \\(|2x| < 1\\), etc.).\n3. Using \\(\\binom{-3}{r}\\) with factorials: \\((-3)!\\) has no meaning.\n4. Losing the minus signs: \\(n(n-1)\\) for \\(n = -3\\) is \\((-3)(-4) = 12\\), positive."
+          }
+        ]
+      }
+    }
+  ]
+}

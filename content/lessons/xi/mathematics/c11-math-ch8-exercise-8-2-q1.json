@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-2-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-2-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 161,
+          "pdf_to": 161,
+          "note": "Exercise 8.2, Question 1: book p.156 (PDF 161). Answer key book p.301-302 (PDF 306-307): key 1(i) constant term sign wrong; key labels 1(iii) as (ii). Solution book PDF 741-770 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Using binomial theorem, expand the following: \\(\\left(\\frac{x}{2} - \\frac{2}{x^2}\\right)^6\\).",
+            "explanation": "We must write out the whole expansion of a binomial raised to the power 6.\nThe second term is negative, so the signs will alternate.\nPlan: find \\(n\\), the first and second terms, write the general term, simplify its powers, then put \\(r = 0, 1, \\dots, 6\\).",
+            "steps": [
+              "Given: \\(\\left(\\frac{x}{2} - \\frac{2}{x^2}\\right)^6\\).\nTo find: its full expansion.\nMethod: Binomial theorem \\((a + b)^n = \\sum_{r=0}^{n} \\binom{n}{r} a^{n-r} b^r\\) with \\(n = 6\\), \\(a = \\frac{x}{2}\\), \\(b = -\\frac{2}{x^2}\\). Seven terms (\\(n + 1\\)). A general term simplified once saves us repeating the same work seven times.",
+              "Write the general term\n\\[T_{r+1} = \\binom{6}{r}\\left(\\dfrac{x}{2}\\right)^{6-r}\\left(-\\dfrac{2}{x^2}\\right)^r\\]\nWhy: This is the \\((r + 1)\\)th term of \\((a + b)^n\\). The minus sign belongs to the second term, so it is raised to the power \\(r\\) too.",
+              "Separate the sign, the numbers and the powers of \\(x\\)\n\\[\\left(\\dfrac{x}{2}\\right)^{6-r} = \\dfrac{x^{6-r}}{2^{6-r}}\\]\n\\[\\left(-\\dfrac{2}{x^2}\\right)^r = (-1)^r\\,\\dfrac{2^r}{x^{2r}}\\]\n\\[T_{r+1} = (-1)^r\\binom{6}{r}\\,2^{2r-6}\\,x^{6-3r}\\]\nWhy: A power of a quotient is the quotient of the powers. Then \\(2^r \\div 2^{6-r} = 2^{2r-6}\\) and \\(x^{6-r} \\div x^{2r} = x^{6-3r}\\) (subtract the indices).",
+              "Binomial coefficients for \\(n = 6\\)\n\\[\\binom{6}{r}: \\; 1,\\ 6,\\ 15,\\ 20,\\ 15,\\ 6,\\ 1\\]\nWhy: Row 6 of Pascal's triangle; e.g. \\(\\binom{6}{2} = \\frac{6 \\cdot 5}{2 \\cdot 1} = 15\\), \\(\\binom{6}{3} = \\frac{6 \\cdot 5 \\cdot 4}{3 \\cdot 2 \\cdot 1} = 20\\).",
+              "Terms for \\(r = 0, 1, 2, 3\\)\n\\[r = 0: \\; 1 \\cdot 2^{-6}x^6 = \\dfrac{x^6}{64}\\]\n\\[r = 1: \\; -6 \\cdot 2^{-4}x^3 = -\\dfrac{3}{8}x^3\\]\n\\[r = 2: \\; 15 \\cdot 2^{-2}x^0 = \\dfrac{15}{4}\\]\n\\[r = 3: \\; -20 \\cdot 2^{0}x^{-3} = -\\dfrac{20}{x^3}\\]\nWhy: Put each \\(r\\) in \\((-1)^r\\binom{6}{r}2^{2r-6}x^{6-3r}\\). \\((-1)^r\\) is \\(+\\) for even \\(r\\) and \\(-\\) for odd \\(r\\); \\(2^{-4} = \\frac{1}{16}\\), so \\(-\\frac{6}{16} = -\\frac{3}{8}\\).",
+              "Terms for \\(r = 4, 5, 6\\)\n\\[r = 4: \\; 15 \\cdot 2^{2}x^{-6} = \\dfrac{60}{x^6}\\]\n\\[r = 5: \\; -6 \\cdot 2^{4}x^{-9} = -\\dfrac{96}{x^9}\\]\n\\[r = 6: \\; 1 \\cdot 2^{6}x^{-12} = \\dfrac{64}{x^{12}}\\]\nWhy: Same rule. A negative index puts the power of \\(x\\) in the denominator: \\(x^{-9} = \\frac{1}{x^9}\\).",
+              "Write the expansion\n\\[\\dfrac{x^6}{64} - \\dfrac{3}{8}x^3 + \\dfrac{15}{4}\\]\n\\[- \\dfrac{20}{x^3} + \\dfrac{60}{x^6}\\]\n\\[- \\dfrac{96}{x^9} + \\dfrac{64}{x^{12}}\\]\nWhy: The terms are written in order \\(r = 0\\) to \\(6\\); signs alternate \\(+, -, +, \\dots\\) because \\(b\\) is negative.",
+              "Check: put \\(x = 2\\)\n\\[\\left(1 - \\tfrac{1}{2}\\right)^6 = \\dfrac{1}{64}\\]\n\\[1 - 3 + \\tfrac{15}{4} - \\tfrac{5}{2} + \\tfrac{15}{16} - \\tfrac{3}{16} + \\tfrac{1}{64}\\]\n\\[= \\dfrac{64 - 192 + 240 - 160 + 60 - 12 + 1}{64} = \\dfrac{1}{64} \\;\\checkmark\\]\nWhy: The expansion is an identity, so it must agree with the original bracket for any value of \\(x\\)."
+            ],
+            "final_answer": "\\(\\dfrac{x^6}{64} - \\dfrac{3}{8}x^3 + \\dfrac{15}{4}\\) \\(- \\dfrac{20}{x^3} + \\dfrac{60}{x^6}\\) \\(- \\dfrac{96}{x^9} + \\dfrac{64}{x^{12}}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints the middle (constant) term as \\(-\\frac{15}{4}\\). It should be \\(+\\frac{15}{4}\\): for \\(r = 2\\) the sign is \\((-1)^2 = +1\\), so \\(T_3 = 15 \\cdot \\frac{1}{4} = +\\frac{15}{4}\\). All other terms in the key are correct."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Using binomial theorem, expand the following: \\(\\left(2a - \\frac{x}{a}\\right)^7\\).",
+            "explanation": "Again a full expansion, now with power 7, so there are 8 terms.\nBoth terms contain \\(a\\), and \\(x\\) appears only in the second term.\nPlan: general term, collect the powers of \\(a\\), then \\(r = 0\\) to \\(7\\).",
+            "steps": [
+              "Given: \\(\\left(2a - \\frac{x}{a}\\right)^7\\).\nTo find: the full expansion.\nMethod: Binomial theorem with \\(n = 7\\), first term \\(2a\\), second term \\(-\\frac{x}{a}\\). Eight terms with alternating signs.",
+              "General term\n\\[T_{r+1} = \\binom{7}{r}(2a)^{7-r}\\left(-\\dfrac{x}{a}\\right)^r\\]\n\\[= (-1)^r\\binom{7}{r}\\,2^{7-r}\\,a^{7-r}\\,\\dfrac{x^r}{a^r}\\]\n\\[= (-1)^r\\binom{7}{r}\\,2^{7-r}\\,a^{7-2r}x^r\\]\nWhy: \\((2a)^{7-r} = 2^{7-r}a^{7-r}\\) because every factor gets the power. Dividing by \\(a^r\\) subtracts \\(r\\) from the index of \\(a\\).",
+              "Binomial coefficients for \\(n = 7\\)\n\\[\\binom{7}{r}: \\; 1,\\ 7,\\ 21,\\ 35,\\ 35,\\ 21,\\ 7,\\ 1\\]\nWhy: Row 7 of Pascal's triangle; e.g. \\(\\binom{7}{3} = \\frac{7 \\cdot 6 \\cdot 5}{3 \\cdot 2 \\cdot 1} = 35\\).",
+              "Terms for \\(r = 0\\) to \\(3\\)\n\\[r = 0: \\; 2^7a^7 = 128a^7\\]\n\\[r = 1: \\; -7 \\cdot 2^6a^5x = -448a^5x\\]\n\\[r = 2: \\; 21 \\cdot 2^5a^3x^2 = 672a^3x^2\\]\n\\[r = 3: \\; -35 \\cdot 2^4ax^3 = -560ax^3\\]\nWhy: \\(7 \\times 64 = 448\\), \\(21 \\times 32 = 672\\), \\(35 \\times 16 = 560\\); the index of \\(a\\) is \\(7 - 2r\\).",
+              "Terms for \\(r = 4\\) to \\(7\\)\n\\[r = 4: \\; 35 \\cdot 2^3a^{-1}x^4 = \\dfrac{280x^4}{a}\\]\n\\[r = 5: \\; -21 \\cdot 2^2a^{-3}x^5 = -\\dfrac{84x^5}{a^3}\\]\n\\[r = 6: \\; 7 \\cdot 2a^{-5}x^6 = \\dfrac{14x^6}{a^5}\\]\n\\[r = 7: \\; -a^{-7}x^7 = -\\dfrac{x^7}{a^7}\\]\nWhy: From \\(r = 4\\) the index \\(7 - 2r\\) of \\(a\\) is negative, so \\(a\\) goes to the denominator. \\(2^0 = 1\\) in the last term.",
+              "Write the expansion\n\\[128a^7 - 448a^5x + 672a^3x^2\\]\n\\[- 560ax^3 + \\dfrac{280x^4}{a}\\]\n\\[- \\dfrac{84x^5}{a^3} + \\dfrac{14x^6}{a^5} - \\dfrac{x^7}{a^7}\\]\nWhy: All eight terms in order, signs alternating.",
+              "Check: put \\(a = 1,\\ x = 1\\)\n\\[(2 - 1)^7 = 1\\]\n\\[128 - 448 + 672 - 560 + 280 - 84 + 14 - 1 = 1 \\;\\checkmark\\]\nWhy: With \\(a = x = 1\\) every term becomes its signed coefficient, and their sum must equal the bracket's value."
+            ],
+            "final_answer": "\\(128a^7 - 448a^5x + 672a^3x^2\\) \\(- 560ax^3 + \\dfrac{280x^4}{a}\\) \\(- \\dfrac{84x^5}{a^3} + \\dfrac{14x^6}{a^5} - \\dfrac{x^7}{a^7}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Using binomial theorem, expand the following: \\(\\left(\\sqrt{\\frac{a}{x}} - \\sqrt{\\frac{x}{a}}\\right)^6\\).",
+            "explanation": "The two terms are square roots of a fraction and its reciprocal.\nWe must expand to the power 6 (7 terms).\nPlan: call \\(u = \\sqrt{a/x}\\); then the second term is \\(1/u\\), and the general term becomes very simple.",
+            "steps": [
+              "Given: \\(\\left(\\sqrt{\\frac{a}{x}} - \\sqrt{\\frac{x}{a}}\\right)^6\\).\nTo find: the full expansion.\nMethod: Binomial theorem with \\(n = 6\\). Since \\(\\sqrt{\\frac{x}{a}} = \\frac{1}{\\sqrt{a/x}}\\), write \\(u = \\sqrt{\\frac{a}{x}}\\) so the bracket is \\(\\left(u - \\frac{1}{u}\\right)^6\\).",
+              "General term in \\(u\\)\n\\[T_{r+1} = \\binom{6}{r}u^{6-r}\\left(-\\dfrac{1}{u}\\right)^r\\]\n\\[= (-1)^r\\binom{6}{r}u^{6-2r}\\]\nWhy: \\(\\left(\\frac{1}{u}\\right)^r = u^{-r}\\), and \\(u^{6-r} \\cdot u^{-r} = u^{6-2r}\\).",
+              "Back to \\(a\\) and \\(x\\)\n\\[u^2 = \\dfrac{a}{x}\\]\n\\[u^{6-2r} = (u^2)^{3-r} = \\left(\\dfrac{a}{x}\\right)^{3-r}\\]\n\\[T_{r+1} = (-1)^r\\binom{6}{r}\\left(\\dfrac{a}{x}\\right)^{3-r}\\]\nWhy: \\(6 - 2r\\) is always even, so every power of \\(u\\) is a whole power of \\(u^2 = \\frac{a}{x}\\); no square roots remain.",
+              "Put \\(r = 0\\) to \\(6\\) (coefficients 1, 6, 15, 20, 15, 6, 1)\n\\[r = 0: \\; \\dfrac{a^3}{x^3}, \\quad r = 1: \\; -\\dfrac{6a^2}{x^2}\\]\n\\[r = 2: \\; \\dfrac{15a}{x}, \\quad r = 3: \\; -20\\]\n\\[r = 4: \\; 15\\left(\\dfrac{a}{x}\\right)^{-1} = \\dfrac{15x}{a}\\]\n\\[r = 5: \\; -\\dfrac{6x^2}{a^2}, \\quad r = 6: \\; \\dfrac{x^3}{a^3}\\]\nWhy: A negative power flips the fraction: \\(\\left(\\frac{a}{x}\\right)^{-2} = \\frac{x^2}{a^2}\\). The middle term (\\(r = 3\\)) has power 0, so it is just \\(-20\\).",
+              "Write the expansion\n\\[\\dfrac{a^3}{x^3} - \\dfrac{6a^2}{x^2} + \\dfrac{15a}{x} - 20\\]\n\\[+ \\dfrac{15x}{a} - \\dfrac{6x^2}{a^2} + \\dfrac{x^3}{a^3}\\]\nWhy: Seven terms in order of \\(r\\).",
+              "Check: put \\(a = x\\)\n\\[(1 - 1)^6 = 0\\]\n\\[1 - 6 + 15 - 20 + 15 - 6 + 1 = 0 \\;\\checkmark\\]\nWhy: With \\(a = x\\) every fraction is 1, so the sum of the signed coefficients must be 0."
+            ],
+            "final_answer": "\\(\\dfrac{a^3}{x^3} - \\dfrac{6a^2}{x^2} + \\dfrac{15a}{x}\\) \\(- 20 + \\dfrac{15x}{a}\\) \\(- \\dfrac{6x^2}{a^2} + \\dfrac{x^3}{a^3}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the answer key this answer is labelled \"(ii)\" a second time; it is the answer to part (iii). The expansion printed there is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

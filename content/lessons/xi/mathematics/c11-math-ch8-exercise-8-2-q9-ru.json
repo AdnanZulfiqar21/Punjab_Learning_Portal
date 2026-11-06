@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-2-Q9-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-2-q9",
+      "title": "Question 9 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 162,
+          "pdf_to": 162,
+          "note": "Exercise 8.2, Question 9: book p.157 (PDF 162). Answer key book p.301-302 (PDF 306-307): no answers printed in the key for Q9. Solution book PDF 741-770 used as a reference only."
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-2-Q9",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9(i)",
+            "prompt": "9 (i) Determine the middle term in the following expansions: \\(\\left(\\frac{1}{x} - \\frac{x^2}{2}\\right)^{12}\\)",
+            "explanation": "Bachon, power \\(n\\) wali expansion mein \\(n + 1\\) terms hote hain. Agar \\(n\\) even ho to beech mein sirf ek term hota hai: \\(\\left(\\frac{n}{2} + 1\\right)\\)th.\nYahan \\(n = 12\\): 13 terms, middle term \\(T_7\\), yani \\(r = 6\\).\nPlan: general term likho, \\(r = 6\\) rakho, simplify karo.\nYaad rakhne ki baat: middle term ka matlab woh term hai jis ke dono taraf barabar terms hon; is liye pehle terms ki ginti \\(n + 1\\) zaroor dekh lein.",
+            "steps": [
+              "Diya gaya hai: \\(\\left(\\frac{1}{x} - \\frac{x^2}{2}\\right)^{12}\\).\nHumein find karna hai: middle term.\nTareeqa: \\(n = 12\\) even hai, to middle term \\(T_{\\frac{12}{2} + 1} = T_7\\) hai: is se pehle 6 terms aur baad mein bhi 6. \\(T_{r+1}\\) mein \\(r = 6\\).\nEk aasaan misaal: \\((a + b)^2 = a^2 + 2ab + b^2\\) mein 3 terms hain aur beech wala \\(2ab\\) doosra term hai, yani \\(\\frac{2}{2} + 1 = 2\\). Yahi rule power 12 par bhi lagta hai.",
+              "General term\n\\[T_{r+1} = \\binom{12}{r}\\left(\\dfrac{1}{x}\\right)^{12-r}\\left(-\\dfrac{x^2}{2}\\right)^r\\]\n\\[= (-1)^r\\binom{12}{r}\\dfrac{1}{2^r}x^{-(12-r)}x^{2r}\\]\n\\[= (-1)^r\\binom{12}{r}\\dfrac{1}{2^r}x^{3r-12}\\]\nKyun: \\(\\left(\\frac{1}{x}\\right)^{12-r} = x^{-(12-r)}\\) aur \\((x^2)^r = x^{2r}\\). Indices jama: \\(-12 + r + 2r = 3r - 12\\).\nDhyan dein: \\(\\frac{1}{x}\\) ko pehle hi \\(x^{-1}\\) likh lena faidemand hai, warna fraction ke andar fraction ban kar hisaab ulajh jata hai.",
+              "\\(r = 6\\) rakhein\n\\[T_7 = (+1)\\binom{12}{6}\\dfrac{1}{2^6}x^{6}\\]\n\\[= 924 \\times \\dfrac{1}{64}x^6\\]\n\\[= \\dfrac{924}{64}x^6 = \\dfrac{231}{16}x^6\\]\nKyun: \\((-1)^6 = +1\\). \\(\\binom{12}{6} = \\frac{12 \\cdot 11 \\cdot 10 \\cdot 9 \\cdot 8 \\cdot 7}{6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1} = 924\\). \\(x\\) ki power \\(3(6) - 12 = 6\\). 924 aur 64 dono ko 4 se divide kiya.\nDhyan dein: middle term ke liye \\(r = 7\\) le lena aam ghalti hai; \\(T_7\\) ke liye \\(r = 6\\) hai.",
+              "Tasdeeq\n\\[\\left(\\dfrac{1}{x}\\right)^6\\left(\\dfrac{x^2}{2}\\right)^6 = \\dfrac{x^{12}}{64x^6} = \\dfrac{x^6}{64}\\]\n\\[924 \\times \\dfrac{x^6}{64} = \\dfrac{231}{16}x^6 \\;\\checkmark\\]\nKyun: \\(T_7\\) ko us ke do hisson se seedha bana kar dekha, wahi term aaya."
+            ],
+            "final_answer": "Middle term \\(T_7 = \\dfrac{231}{16}x^6\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9(ii)",
+            "prompt": "9 (ii) Determine the middle term in the following expansions: \\(\\left(\\frac{3}{2}x - \\frac{1}{3x}\\right)^{11}\\)",
+            "explanation": "Yahan \\(n = 11\\) odd hai, is liye 12 terms hain aur beech mein do terms aate hain: 6th aur 7th.\nPlan: general term banao, phir \\(r = 5\\) (\\(T_6\\) ke liye) aur \\(r = 6\\) (\\(T_7\\) ke liye) rakho.\nEk misaal se samjhein: \\((a + b)^3\\) mein 4 terms hain, \\(a^3, 3a^2b, 3ab^2, b^3\\); beech mein do terms hain, 2nd aur 3rd. Odd power par hamesha aisa hi hota hai.",
+            "steps": [
+              "Diya gaya hai: \\(\\left(\\frac{3}{2}x - \\frac{1}{3x}\\right)^{11}\\).\nHumein find karna hai: middle terms.\nTareeqa: Odd \\(n\\) ke liye middle terms \\(T_{\\frac{n+1}{2}}\\) aur \\(T_{\\frac{n+3}{2}}\\) hain, yani \\(T_6\\) aur \\(T_7\\). \\(T_6\\) se pehle 5 terms hain aur \\(T_7\\) ke baad bhi 5; is liye yeh dono beech mein hain.",
+              "General term\n\\[T_{r+1} = \\binom{11}{r}\\left(\\dfrac{3x}{2}\\right)^{11-r}\\left(-\\dfrac{1}{3x}\\right)^r\\]\n\\[= (-1)^r\\binom{11}{r}\\dfrac{3^{11-r}}{2^{11-r}\\,3^r}x^{11-r}x^{-r}\\]\n\\[= (-1)^r\\binom{11}{r}\\dfrac{3^{11-2r}}{2^{11-r}}x^{11-2r}\\]\nKyun: Har factor ko power lagti hai. 3 ki powers ikatthi ki: \\(3^{11-r} \\div 3^r = 3^{11-2r}\\). Isi tarah \\(x^{11-r} \\div x^r = x^{11-2r}\\). 2 sirf pehle hisse mein hai, to \\(2^{11-r}\\) neeche raha.",
+              "Pehla middle term: \\(r = 5\\)\n\\[T_6 = (-1)^5\\binom{11}{5}\\dfrac{3^{1}}{2^{6}}x^{1}\\]\n\\[= -462 \\times \\dfrac{3}{64}x\\]\n\\[= -\\dfrac{1386}{64}x = -\\dfrac{693}{32}x\\]\nKyun: \\((-1)^5 = -1\\). \\(\\binom{11}{5} = \\frac{11 \\cdot 10 \\cdot 9 \\cdot 8 \\cdot 7}{120} = 462\\). \\(3^{11-10} = 3\\), \\(2^{11-5} = 2^6 = 64\\), \\(x^{11-10} = x\\). Aakhir mein 2 se divide.\nDhyan dein: \\(3^{11-2r}\\) mein \\(r = 5\\) rakhne se \\(3^1\\) aata hai; yeh 3 upar (numerator mein) rehta hai.",
+              "Doosra middle term: \\(r = 6\\)\n\\[T_7 = (+1)\\binom{11}{6}\\dfrac{3^{-1}}{2^{5}}x^{-1}\\]\n\\[= 462 \\times \\dfrac{1}{3 \\times 32} \\times \\dfrac{1}{x}\\]\n\\[= \\dfrac{462}{96x} = \\dfrac{77}{16x}\\]\nKyun: \\((-1)^6 = +1\\). \\(\\binom{11}{6} = \\binom{11}{5} = 462\\). \\(3^{11-12} = 3^{-1} = \\frac{1}{3}\\), \\(2^{11-6} = 32\\), \\(x^{-1} = \\frac{1}{x}\\). 462 aur 96 ko 6 se divide kiya.\nDhyan dein: odd power mein sirf ek middle term likh dena aam ghalti hai; do terms dono likhne hain.\nGhaur karein ke yahan 3 ki power negative ho gayi, is liye 3 neeche chala gaya; aur \\(x\\) bhi neeche chala gaya. Isi liye doosra middle term \\(\\frac{1}{x}\\) wala hai.",
+              "Tasdeeq\n\\[\\dfrac{693}{32} \\div \\dfrac{77}{16} = \\dfrac{693}{154} = \\dfrac{9}{2}\\]\nKyun: Dono middle terms ka ratio (size mein) \\(\\frac{\\binom{11}{5}}{\\binom{11}{6}} \\cdot \\frac{3x/2}{1/(3x)} = \\frac{9}{2}x^2\\) hona chahiye. Hamare numbers ka ratio bhi \\(\\frac{9}{2}\\) aata hai \\(\\checkmark\\)."
+            ],
+            "final_answer": "Middle terms: \\(T_6 = -\\dfrac{693}{32}x\\) aur \\(T_7 = \\dfrac{77}{16x}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9(iii)",
+            "prompt": "9 (iii) Determine the middle term in the following expansions: \\(\\left(2x - \\frac{1}{2x}\\right)^{2m+1}\\)",
+            "explanation": "Power \\(2m + 1\\) hamesha odd hoti hai (even number jama 1), is liye do middle terms honge.\nJawab mein \\(m\\) aayega, number nahi.\nPlan: odd \\(n\\) wale rule se positions nikalo, phir general term mein \\(r = m\\) aur \\(r = m + 1\\) rakho.\nYeh sawal pichhle do parts ka general roop hai: agar \\(m = 5\\) rakhein to power 11 ho jati hai, bilkul 9(ii) jaisi soorat.",
+            "steps": [
+              "Diya gaya hai: \\(\\left(2x - \\frac{1}{2x}\\right)^{2m+1}\\).\nHumein find karna hai: middle terms.\nTareeqa: \\(n = 2m + 1\\) ke saath middle terms \\(T_{\\frac{n+1}{2}} = T_{\\frac{2m+2}{2}} = T_{m+1}\\) (\\(r = m\\)) aur \\(T_{\\frac{n+3}{2}} = T_{m+2}\\) (\\(r = m + 1\\)).",
+              "General term\n\\[T_{r+1} = \\binom{2m+1}{r}(2x)^{2m+1-r}\\left(-\\dfrac{1}{2x}\\right)^r\\]\n\\[= (-1)^r\\binom{2m+1}{r}(2x)^{2m+1-r}(2x)^{-r}\\]\n\\[= (-1)^r\\binom{2m+1}{r}(2x)^{2m+1-2r}\\]\nKyun: \\(\\frac{1}{2x} = (2x)^{-1}\\), yani dono hisse ek hi base \\(2x\\) ki powers hain. Base ek ho to indices seedha jama ho jate hain: \\(2m + 1 - r - r = 2m + 1 - 2r\\). Yeh chaal hisaab ko bohat chhota kar deti hai.",
+              "Pehla middle term: \\(r = m\\)\n\\[T_{m+1} = (-1)^m\\binom{2m+1}{m}(2x)^{1}\\]\n\\[= (-1)^m\\binom{2m+1}{m}\\,2x\\]\nKyun: \\(2m + 1 - 2m = 1\\), to \\((2x)^1 = 2x\\).\nGhaur karein: pehle middle term mein \\(x\\) upar hai (\\(2x\\)) aur doosre mein neeche (\\(\\frac{1}{2x}\\)); dono ki power sirf 1 hai, chahe \\(m\\) kitna bhi bara ho.",
+              "Doosra middle term: \\(r = m + 1\\)\n\\[T_{m+2} = (-1)^{m+1}\\binom{2m+1}{m+1}(2x)^{-1}\\]\n\\[= (-1)^{m+1}\\binom{2m+1}{m+1}\\dfrac{1}{2x}\\]\nKyun: \\(2m + 1 - 2(m + 1) = 2m + 1 - 2m - 2 = -1\\), aur \\((2x)^{-1} = \\frac{1}{2x}\\).\nDhyan dein: sign \\((-1)^{m+1}\\) hai, jo \\((-1)^m\\) ka ulta hai; is liye dono middle terms ke signs hamesha mukhtalif hote hain.",
+              "Coefficients factorials mein\n\\[\\binom{2m+1}{m} = \\binom{2m+1}{m+1} = \\dfrac{(2m+1)!}{m!\\,(m+1)!}\\]\nKyun: \\(\\binom{n}{r} = \\binom{n}{n-r}\\), aur \\((2m + 1) - m = m + 1\\). Is liye dono middle terms ke numerical coefficients barabar hain, bas sign ulta hai.",
+              "Tasdeeq: \\(m = 1\\)\n\\[\\left(2x - \\dfrac{1}{2x}\\right)^3 = 8x^3 - 6x + \\dfrac{3}{2x} - \\dfrac{1}{8x^3}\\]\n\\[T_2 = (-1)^1\\binom{3}{1}2x = -6x \\;\\checkmark\\]\n\\[T_3 = (-1)^2\\binom{3}{2}\\dfrac{1}{2x} = \\dfrac{3}{2x} \\;\\checkmark\\]\nKyun: \\(m = 1\\) par power 3 hai; coefficients 1, 3, 3, 1 se seedha khola to beech ke do terms \\(-6x\\) aur \\(\\frac{3}{2x}\\) aaye, jo hamare formula se bilkul milte hain."
+            ],
+            "final_answer": "\\(T_{m+1} = (-1)^m\\dfrac{(2m+1)!}{m!\\,(m+1)!}\\,2x\\) aur \\(T_{m+2} = (-1)^{m+1}\\dfrac{(2m+1)!}{m!\\,(m+1)!}\\cdot\\dfrac{1}{2x}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}
