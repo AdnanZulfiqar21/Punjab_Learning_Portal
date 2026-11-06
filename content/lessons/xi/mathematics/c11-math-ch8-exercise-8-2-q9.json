@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-2-Q9",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-2-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 162,
+          "pdf_to": 162,
+          "note": "Exercise 8.2, Question 9: book p.157 (PDF 162). Answer key book p.301-302 (PDF 306-307): no answers printed in the key for Q9. Solution book PDF 741-770 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9(i)",
+            "prompt": "9 (i) Determine the middle term in the following expansions: \\(\\left(\\frac{1}{x} - \\frac{x^2}{2}\\right)^{12}\\)",
+            "explanation": "An expansion with power \\(n\\) has \\(n + 1\\) terms. If \\(n\\) is even there is one middle term, the \\(\\left(\\frac{n}{2} + 1\\right)\\)th.\nHere \\(n = 12\\): 13 terms, middle term \\(T_7\\), so \\(r = 6\\).\nPlan: general term, put \\(r = 6\\), simplify.",
+            "steps": [
+              "Given: \\(\\left(\\frac{1}{x} - \\frac{x^2}{2}\\right)^{12}\\).\nTo find: the middle term.\nMethod: \\(n = 12\\) is even, so the middle term is \\(T_{\\frac{12}{2} + 1} = T_7\\) (6 terms before it and 6 after it). Use \\(T_{r+1}\\) with \\(r = 6\\).",
+              "General term\n\\[T_{r+1} = \\binom{12}{r}\\left(\\dfrac{1}{x}\\right)^{12-r}\\left(-\\dfrac{x^2}{2}\\right)^r\\]\n\\[= (-1)^r\\binom{12}{r}\\dfrac{1}{2^r}x^{-(12-r)}x^{2r}\\]\n\\[= (-1)^r\\binom{12}{r}\\dfrac{1}{2^r}x^{3r-12}\\]\nWhy: \\(\\left(\\frac{1}{x}\\right)^{12-r} = x^{-(12-r)}\\) and \\((x^2)^r = x^{2r}\\); add the indices: \\(-12 + r + 2r = 3r - 12\\).",
+              "Put \\(r = 6\\)\n\\[T_7 = (+1)\\binom{12}{6}\\dfrac{1}{2^6}x^{6}\\]\n\\[= 924 \\times \\dfrac{1}{64}x^6\\]\n\\[= \\dfrac{924}{64}x^6 = \\dfrac{231}{16}x^6\\]\nWhy: \\((-1)^6 = 1\\); \\(\\binom{12}{6} = \\frac{12 \\cdot 11 \\cdot 10 \\cdot 9 \\cdot 8 \\cdot 7}{6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1} = 924\\); \\(3(6) - 12 = 6\\); divide 924 and 64 by 4.",
+              "Check\n\\[\\left(\\dfrac{1}{x}\\right)^6\\left(\\dfrac{x^2}{2}\\right)^6 = \\dfrac{x^{12}}{64x^6} = \\dfrac{x^6}{64}\\]\n\\[924 \\times \\dfrac{x^6}{64} = \\dfrac{231}{16}x^6 \\;\\checkmark\\]\nWhy: Working out \\(T_7\\) directly from its two parts gives the same term."
+            ],
+            "final_answer": "Middle term \\(T_7 = \\dfrac{231}{16}x^6\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9(ii)",
+            "prompt": "9 (ii) Determine the middle term in the following expansions: \\(\\left(\\frac{3}{2}x - \\frac{1}{3x}\\right)^{11}\\)",
+            "explanation": "Here \\(n = 11\\) is odd, so there are 12 terms and two middle terms: the 6th and the 7th.\nPlan: general term, then put \\(r = 5\\) (for \\(T_6\\)) and \\(r = 6\\) (for \\(T_7\\)).",
+            "steps": [
+              "Given: \\(\\left(\\frac{3}{2}x - \\frac{1}{3x}\\right)^{11}\\).\nTo find: the middle terms.\nMethod: For odd \\(n\\) the middle terms are \\(T_{\\frac{n+1}{2}}\\) and \\(T_{\\frac{n+3}{2}}\\): here \\(T_6\\) and \\(T_7\\), with 5 terms before \\(T_6\\) and 5 after \\(T_7\\).",
+              "General term\n\\[T_{r+1} = \\binom{11}{r}\\left(\\dfrac{3x}{2}\\right)^{11-r}\\left(-\\dfrac{1}{3x}\\right)^r\\]\n\\[= (-1)^r\\binom{11}{r}\\dfrac{3^{11-r}}{2^{11-r}\\,3^r}x^{11-r}x^{-r}\\]\n\\[= (-1)^r\\binom{11}{r}\\dfrac{3^{11-2r}}{2^{11-r}}x^{11-2r}\\]\nWhy: Every factor gets the power; \\(3^{11-r} \\div 3^r = 3^{11-2r}\\) and \\(x^{11-r} \\div x^r = x^{11-2r}\\).",
+              "First middle term: \\(r = 5\\)\n\\[T_6 = (-1)^5\\binom{11}{5}\\dfrac{3^{1}}{2^{6}}x^{1}\\]\n\\[= -462 \\times \\dfrac{3}{64}x\\]\n\\[= -\\dfrac{1386}{64}x = -\\dfrac{693}{32}x\\]\nWhy: \\((-1)^5 = -1\\); \\(\\binom{11}{5} = 462\\); \\(3^{11-10} = 3\\), \\(2^{11-5} = 64\\), \\(x^{11-10} = x\\); divide by 2.",
+              "Second middle term: \\(r = 6\\)\n\\[T_7 = (+1)\\binom{11}{6}\\dfrac{3^{-1}}{2^{5}}x^{-1}\\]\n\\[= 462 \\times \\dfrac{1}{3 \\times 32} \\times \\dfrac{1}{x}\\]\n\\[= \\dfrac{462}{96x} = \\dfrac{77}{16x}\\]\nWhy: \\((-1)^6 = 1\\); \\(\\binom{11}{6} = \\binom{11}{5} = 462\\); \\(3^{11-12} = \\frac{1}{3}\\), \\(2^{11-6} = 32\\), \\(x^{-1} = \\frac{1}{x}\\); divide 462 and 96 by 6.",
+              "Check\n\\[\\dfrac{693}{32} \\div \\dfrac{77}{16} = \\dfrac{693}{154} = \\dfrac{9}{2}\\]\nWhy: The ratio \\(\\frac{T_6}{T_7}\\) (in size) should be \\(\\frac{\\binom{11}{5}}{\\binom{11}{6}} \\cdot \\frac{3x/2}{1/(3x)} = \\frac{9}{2}x^2\\); our two terms give the same numerical ratio \\(\\frac{9}{2}\\) \\(\\checkmark\\)."
+            ],
+            "final_answer": "Middle terms: \\(T_6 = -\\dfrac{693}{32}x\\) and \\(T_7 = \\dfrac{77}{16x}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9(iii)",
+            "prompt": "9 (iii) Determine the middle term in the following expansions: \\(\\left(2x - \\frac{1}{2x}\\right)^{2m+1}\\)",
+            "explanation": "The power \\(2m + 1\\) is always odd (an even number plus 1), so there are two middle terms.\nThe answer will contain \\(m\\).\nPlan: positions from the odd-\\(n\\) rule, then the general term with \\(r = m\\) and \\(r = m + 1\\).",
+            "steps": [
+              "Given: \\(\\left(2x - \\frac{1}{2x}\\right)^{2m+1}\\).\nTo find: the middle terms.\nMethod: With \\(n = 2m + 1\\), the middle terms are \\(T_{\\frac{n+1}{2}} = T_{m+1}\\) (\\(r = m\\)) and \\(T_{\\frac{n+3}{2}} = T_{m+2}\\) (\\(r = m + 1\\)).",
+              "General term\n\\[T_{r+1} = \\binom{2m+1}{r}(2x)^{2m+1-r}\\left(-\\dfrac{1}{2x}\\right)^r\\]\n\\[= (-1)^r\\binom{2m+1}{r}(2x)^{2m+1-r}(2x)^{-r}\\]\n\\[= (-1)^r\\binom{2m+1}{r}(2x)^{2m+1-2r}\\]\nWhy: \\(\\frac{1}{2x} = (2x)^{-1}\\), so both parts are powers of the same base \\(2x\\); add the indices.",
+              "First middle term: \\(r = m\\)\n\\[T_{m+1} = (-1)^m\\binom{2m+1}{m}(2x)^{1}\\]\n\\[= (-1)^m\\binom{2m+1}{m}\\,2x\\]\nWhy: \\(2m + 1 - 2m = 1\\).",
+              "Second middle term: \\(r = m + 1\\)\n\\[T_{m+2} = (-1)^{m+1}\\binom{2m+1}{m+1}(2x)^{-1}\\]\n\\[= (-1)^{m+1}\\binom{2m+1}{m+1}\\dfrac{1}{2x}\\]\nWhy: \\(2m + 1 - 2(m + 1) = -1\\).",
+              "Write the coefficients with factorials\n\\[\\binom{2m+1}{m} = \\binom{2m+1}{m+1} = \\dfrac{(2m+1)!}{m!\\,(m+1)!}\\]\nWhy: \\(\\binom{n}{r} = \\binom{n}{n-r}\\) and \\((2m + 1) - m = m + 1\\). So the two middle terms have equal numerical coefficients and opposite signs.",
+              "Check with \\(m = 1\\)\n\\[\\left(2x - \\dfrac{1}{2x}\\right)^3 = 8x^3 - 6x + \\dfrac{3}{2x} - \\dfrac{1}{8x^3}\\]\n\\[T_2 = (-1)^1\\binom{3}{1}2x = -6x \\;\\checkmark\\]\n\\[T_3 = (-1)^2\\binom{3}{2}\\dfrac{1}{2x} = \\dfrac{3}{2x} \\;\\checkmark\\]\nWhy: Direct expansion with coefficients 1, 3, 3, 1 gives the same two middle terms."
+            ],
+            "final_answer": "\\(T_{m+1} = (-1)^m\\dfrac{(2m+1)!}{m!\\,(m+1)!}\\,2x\\) and \\(T_{m+2} = (-1)^{m+1}\\dfrac{(2m+1)!}{m!\\,(m+1)!}\\cdot\\dfrac{1}{2x}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

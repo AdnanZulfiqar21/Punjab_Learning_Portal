@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q6-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q6",
+      "title": "Question 6 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 154,
+          "pdf_to": 154,
+          "note": "Exercise 8.1, Question 6: book page 149 (PDF 154); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-1-Q6",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. [Prove by mathematical induction:] \\(4^n > 3^n + 2^{n-1}\\) for integral values of \\(n \\ge 2\\).",
+            "explanation": "Yeh bhi inequality hai jo \\(n = 2\\) se shuru hoti hai, is liye extended induction lagayenge jis ka base case \\(n = 2\\) hai.\n\\(n = 1\\) par dono taraf 4 aata hai (\\(4 = 3 + 1\\)), is liye wahan \"\\(>\\)\" nahi chalta; isi wajah se sawal \\(n \\ge 2\\) kehta hai.\nPlan: hypothesis ko 4 se multiply karna, phir har tukre ka muqabla target ke \\(3^{k+1}\\) aur \\(2^k\\) se karna.",
+            "steps": [
+              "Diya gaya hai: \\(S(n): 4^n > 3^n + 2^{n-1}\\).\nSaabit karna hai: \\(S(n)\\) har integer \\(n \\ge 2\\) ke liye sahi hai.\nTareeqa: Extended mathematical induction: \\(S(2)\\) check karna; kisi \\(k \\ge 2\\) par \\(S(k)\\) maanna; \\(S(k + 1)\\) saabit karna.",
+              "Base case: \\(n = 2\\) rakhein\n\\[4^2 = 16\\]\n\\[3^2 + 2^1 = 9 + 2 = 11\\]\n\\[16 > 11\\]\nIs liye \\(S(2)\\) sahi hai.\nKyun: Seedha hisaab: \\(2^{n-1}\\) mein \\(n = 2\\) rakhne se \\(2^1 = 2\\).",
+              "Induction hypothesis: \\(S(k)\\) ko sahi maan lein, \\(k \\ge 2\\)\n\\[4^k > 3^k + 2^{k-1} \\quad (A)\\]\nKyun: Kisi integer \\(k \\ge 2\\) par inequality ko sahi farz kiya.",
+              "Target \\(S(k + 1)\\)\n\\[4^{k+1} > 3^{k+1} + 2^k\\]\nKyun: \\(n = k + 1\\) rakha: \\(2^{(k+1)-1} = 2^k\\).",
+              "Inductive step: (A) ko 4 se multiply karein\n\\[4^{k+1} = 4 \\cdot 4^k\\]\n\\[> 4 \\cdot 3^k + 4 \\cdot 2^{k-1}\\]\n\\[= 4 \\cdot 3^k + 2^{k+1}\\]\nKyun: \\(4^{k+1} = 4 \\times 4^k\\), is liye left side ko \\(4^{k+1}\\) banane ke liye (A) ko 4 se multiply kiya. 4 positive hai, nishan \\(>\\) wahi raha. Phir \\(4 = 2^2\\), to \\(4 \\cdot 2^{k-1} = 2^{2 + k - 1} = 2^{k+1}\\).",
+              "Har tukre ka target se muqabla\n\\[4 \\cdot 3^k > 3 \\cdot 3^k = 3^{k+1}\\]\n\\[2^{k+1} = 2 \\cdot 2^k > 2^k\\]\nKyun: \\(3^k\\) ke chaar hisse teen hisson se zyada hain, aur \\(3 \\cdot 3^k = 3^{k+1}\\). Isi tarah \\(2^{k+1}\\), \\(2^k\\) ka dugna hai, is liye us se bara hai.\nDhyan dein: Inequality mein humein barabar nahi chahiye, bas itna dikhana hai ke hamara expression target se bara hai. Is liye kuch \"chhor dena\" jaiz hai, jab tak nishan sahi rahe.",
+              "Nateeje jorein\n\\[4^{k+1} > 4 \\cdot 3^k + 2^{k+1}\\]\n\\[> 3^{k+1} + 2^k\\]\nIs liye \\(S(k + 1)\\) sahi hai.\nKyun: Do bari cheezon ka jama, do chhoti cheezon ke jama se bara hota hai. Pehli kari (A) se aayi, doosri pichhle qadam se.",
+              "Conclusion\n\\(S(2)\\) sahi hai aur har \\(k \\ge 2\\) par \\(S(k)\\) se \\(S(k + 1)\\) sahi hota hai. Principle of extended mathematical induction se \\(4^n > 3^n + 2^{n-1}\\) har integer \\(n \\ge 2\\) ke liye sahi hai.\nKyun: Induction ki dono sharten poori ho gayin.",
+              "Tasdeeq: \\(n = 3\\)\n\\[4^3 = 64\\]\n\\[3^3 + 2^2 = 27 + 4 = 31,\\quad 64 > 31 \\;\\checkmark\\]\nKyun: Inequality sahi hai, aur \\(4^n\\) baaqi dono se tez barhta hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(4^n > 3^n + 2^{n-1}\\) har integer \\(n \\ge 2\\) ke liye."
+          }
+        ]
+      }
+    }
+  ]
+}

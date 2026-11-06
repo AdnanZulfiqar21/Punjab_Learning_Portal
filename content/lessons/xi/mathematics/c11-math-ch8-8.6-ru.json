@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.6-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.6",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 171,
+          "pdf_to": 173,
+          "note": "Book p. 166-168: 8.6 introduction; Supply Chains (Ex 28), Domino Effect (Ex 29), Compound Interest (Ex 30), Variable Subletting (Ex 31). Month-by-month table, corrected Ex 31 formula and teaching callouts are ours."
+        }
+      ],
+      "title": "8.6 Real Life Application of Binomial Theorem and Mathematical Induction (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH8-8.6",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab tak hum ne mathematical induction aur binomial theorem ko kitabi sawalon mein dekha. Is aakhri section mein dekhenge ke yeh dono auzaar asal zindagi mein kahan kaam aate hain: karobar ki laagat, bank ka munafa, dominoes ki zanjeer aur godaam ka maal. Kitab kehti hai ke yahan aisi misaalein hain jin mein in dono tasawwurat ko puzzles, domino effect, Pascal's Triangle, economic forecasting, rankings aur variable subletting jaise asal masail par lagaya gaya hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is page par do auzaar hain. Binomial theorem \\((1 + x)^{n}\\) jaisi expressions ki tez aur durust value deta hai jab \\(x\\) chhota ho (cost, interest, growth). Mathematical induction yeh saabit karta hai ke koi qadam ba qadam chalne wala amal (dominoes, har mahine ka stock) har qadam par ek hi pattern par chalta hai.\nHar misaal mein sab se pehle lafzon ko mathematics mein badlein: shuru ki value kya hai, aur har qadam par kya hota hai? Jab yeh do sawal saaf ho jayein to aadha kaam ho gaya. Is page ki kitabi misaalon mein hisaab ki kai ghaltiyan bhi hain; hum har ek ko \"Kitab ki ghalti\" box mein dikhayenge, taa ke aap sahi tareeqa bhi seekhein aur yeh bhi ke apna jawab kaise parakhna hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Estimating Costs in Supply Chains (Binomial Theorem)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Supply chain kya hai? Koi bhi cheez, maslan biscuit ka packet, factory se aap tak kai marahil (stages) se guzar kar pahunchti hai: banana (production), pack karna (packaging) aur bhejna (shipping). Har stage par kuch na kuch zaya hota hai: maal toot jata hai, waqt lagta hai, bijli kharch hoti hai. Isi zaya hone wali laagat ko inefficiency kehte hain. Agar har stage par cost 5% barhe to teen stages ke baad cost \\((1.05)^{3}\\) guna ho jati hai. Yahan binomial theorem humein bina calculator ke achha andaza de deta hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 28",
+            "problem": "A company wants to estimate the total cost of producing and delivering a product using a supply chain. Each stage of the chain (production, packaging, shipping) involves additional costs due to inefficiencies. If the base cost of production is \\(C\\), and each stage adds inefficiency costs, modeled by \\((1 + x)^{n}\\) where \\(x\\) is the inefficiency rate per stage and \\(n\\) is the number of stages, estimate the cost for small values of \\(x\\).",
+            "steps": [
+              "Given: base cost \\(C\\), har stage par inefficiency (zaya hone wali laagat) ki rate \\(x\\), aur \\(n\\) stages; kul cost \\(= C(1 + x)^{n}\\). Kitab ki values: \\(C = \\text{Rs. } 100{,}000\\), \\(x = 0.05\\) (5%), \\(n = 3\\) stages (production, packaging, shipping).\nTo find: kul cost ka andaza (estimate).\nMethod: sab se pehle samajhte hain ke \\((1 + x)^{n}\\) kyun aaya: har stage cost ko \\(1 + x\\) se multiply karti hai, yani 5% barhati hai. Jab \\(x\\) chhota ho to binomial theorem se \\((1 + x)^{n}\\) ko kholte hain aur sirf shuru ke do teen terms rakhte hain. Is se hisaab aasan ho jata hai aur jawab kaafi qareeb rehta hai.",
+              "Step 1: Binomial approximation\n\\[(1 + x)^{n} = 1 + nx + \\dfrac{n(n-1)}{2!}x^{2} + \\dots\\]\nChhote \\(x\\) ke liye kul cost ka andaza sirf pehle chand terms se lagate hain.\nKyun: \\(x = 0.05\\) ho to \\(x^{2} = 0.0025\\) aur \\(x^{3} = 0.000125\\); har agli power taqreeban bees guna chhoti hai. Jaise kisi bari raqam mein chand paise: jawab par asar na hone ke barabar.",
+              "Step 2: Cost ka formula lagayein\n\\[\\text{Cost} = C \\times (1 + x)^{n}\\]\n\\[= 100{,}000 \\times (1 + 0.05)^{3}\\]\nKyun: teen stages hain aur har stage par cost \\(1.05\\) guna hoti hai, is liye \\((1.05)^{3}\\). Base cost Rs. 100,000 hai, 100 nahin (kitab yahan 100 chhaap deti hai).",
+              "Step 3: Binomial theorem se expand karein\n\\[(1 + 0.05)^{3} \\approx 1 + 3(0.05) + \\dfrac{3(3-1)}{2}(0.05)^{2}\\]\n\\[= 1 + 0.15 + 3(0.0025)\\]\n\\[= 1 + 0.15 + 0.0075\\]\n\\[= 1.1575\\]\nKyun: \\(n = 3\\) hai, is liye \\(nx = 3 \\times 0.05 = 0.15\\) aur \\(\\frac{n(n-1)}{2} = \\frac{3 \\times 2}{2} = 3\\). \\(x^{2}\\) wale term ke baad hum ruk jate hain, yahi \"approximation\" hai.",
+              "Step 4: Kul cost ka andaza\n\\[\\text{Cost} \\approx 100{,}000 \\times 1.1575\\]\n\\[= 115{,}750\\]\nKyun: 1.1575 se multiply karne ka matlab hai cost mein taqreeban 16% izafa. Is liye jawab 100,000 se thora zyada hona chahiye. Kitab 1,157,500 likhti hai jo asal se das guna hai; aisa jawab dekh kar foran shak hona chahiye.\nDhyan dein: decimal wale number se multiply karte waqt jawab ka andaza pehle zehan mein laga lein; is se zero ki ghalti foran pakri jati hai.",
+              "Tasdeeq:\nPoori value: \\((1.05)^{3} = 1.157625\\), is liye asal cost \\(100{,}000 \\times 1.157625 = 115{,}762.50\\). Hamara andaza sirf Rs. 12.50 kam hai, yani approximation bohat achha hai. Mote taur par bhi: teen stages par 5% 5% izafa 15% se thora zyada banta hai, yani Rs. 115,000 se thora oopar."
+            ],
+            "answer": "Kul cost taqreeban Rs. 115,750 hai (poori value Rs. 115,762.50), inefficiencies samait."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 28 mein kitab \"\\(\\text{Cost} = C \\times (1 + x)^{n} = 100 \\times (1 + 0.05)^{3}\\)\" chhaapti hai; base cost \\(C = \\text{Rs. } 100{,}000\\) hai. Phir \\(100{,}000 \\times 1.1575 = 1157500\\) aur \"Rs. 1,157,500\" likhti hai. Sahi: \\(100{,}000 \\times 1.1575 = 115{,}750\\), yani kul cost taqreeban Rs. 115,750."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Example 28 mein agar stages 3 ki bajaye 4 hon (maslan storage bhi shaamil ho), to \\((1.05)^{4}\\) ka andaza kya hoga?\nJawab: \\(1 + 4(0.05) + \\frac{4 \\times 3}{2}(0.05)^{2} = 1 + 0.2 + 0.015 = 1.215\\). Exact value \\(1.21550625\\) hai, to cost taqreeban Rs. 121,500 hogi (exact Rs. 121,550.63)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Mathematical Induction: Domino Effect"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Mathematical induction ko 8.1 se yaad kar lein. Is ke teen hisse hain: (1) Base case: statement pehli value par sach hai. (2) Induction hypothesis: maan lo statement kisi \\(k\\) par sach hai. (3) Inductive step: is farz se dikhao ke statement \\(k + 1\\) par bhi sach hai. Teeno ho jayein to statement har value par sach hai. Domino isi ka jeeta jaagta namoona hai: pehla girta hai (base case), aur har girne wala agle ko girata hai (inductive step)."
+          },
+          {
+            "type": "example",
+            "title": "Example 29",
+            "problem": "A line of 100 dominoes is set up so that when the first domino falls, it causes the second domino to fall, and so on. Prove that if the first domino falls, all 100 dominoes will fall.",
+            "steps": [
+              "Given: ek line mein 100 dominoes, is tarah rakhe gaye ke har girne wala domino agle ko gira deta hai.\nTo prove: agar pehla domino gire to saare 100 dominoes gir jayenge.\nMethod: mathematical induction. Domino asal mein induction ki sab se mashhoor misaal hai: pehla qadam (base case) aur \"har ek agle ko girata hai\" (inductive step). Maan lijiye \\(S(n)\\) yeh statement hai: \"\\(n\\)-wan domino girta hai\", jahan \\(n = 1, 2, \\dots, 100\\).",
+              "Step 1: Base Case (\\(n = 1\\))\nPehle domino ko dhakka diya gaya aur woh gir gaya, is liye \\(S(1)\\) sach hai.\nKyun: induction ko ek sachi shuruaat chahiye. Yahan woh sawal mein hi di hui hai: \"if the first domino falls\".",
+              "Step 2: Induction of Hypothesis\nMaan lein ke kisi \\(k\\) ke liye (\\(1 \\le k < 100\\)) \\(S(k)\\) sach hai: \\(k\\)-wan domino gir gaya (yani pehle \\(k\\) dominoes gir chuke).\nKyun: yeh woh farz (assumption) hai jis ki madad se hum agle domino tak pahunchenge. Ghor karein: humein \\(k\\)-wan nahin balke \\((k + 1)\\)-wan domino girta hua dikhana hai; kitab yahan \"kth\" likh deti hai.",
+              "Step 3: \\(S(k + 1)\\) saabit karein\nDominoes is tarah rakhe hain ke har girne wala domino agle ko gira deta hai. \\(k\\)-wan domino gir gaya, is liye \\((k + 1)\\)-wan domino bhi girega. Yani \\(S(k + 1)\\) sach hai.\nDhyan dein: yahan koi hisaab nahin, sirf mantiq (logic) hai; is liye har jumla saaf aur poora likhein. Examiner dekhta hai ke aap ne hypothesis se agle domino tak ka rishta wazeh kiya ya nahin.\nKyun: yeh sawal mein di gayi \"zanjeer\" (chain) wali khoobi hai, jo har statement ko agle se jorti hai. Jaise seerhi: agar aap kisi bhi seerhi par khare hon aur agli par chadh sakte hon, aur pehli par pahunch sakte hon, to aap har seerhi tak pahunch jayenge.",
+              "Step 4: Conclusion\n\\(S(1)\\) sach hai, aur \\(k = 1, 2, \\dots, 99\\) ke liye \\(S(k)\\) se \\(S(k + 1)\\) nikalta hai. Is liye mathematical induction se: agar pehla domino gire to saare 100 dominoes gir jayenge.\nKyun: pehla domino zanjeer shuru karta hai aur inductive step use har domino se agle tak, 100-wen tak le jata hai.",
+              "Tasdeeq:\nDono hisse zaroori hain, aur yeh misaal is ko khoob dikhati hai. Agar pehle ko dhakka hi na diya jaye (base case nahin) to koi nahin girta. Agar beech mein ek domino agle se bohat door rakha ho (wahan step fail) to zanjeer wahin ruk jati hai. Dono shartein poori hon to koi domino khara nahin reh sakta."
+            ],
+            "answer": "Saabit ho gaya: agar pehla domino gire to saare 100 dominoes gir jayenge."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 29 mein kitab ka Induction of Hypothesis kehta hai: \"if the first k dominoes fall, then the kth domino will also fall\". Dikhana yeh hai ke \\((k + 1)\\)-wan domino girta hai; kitab ka agla paragraph yeh baat sahi kehta hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Economic Forecasting with Compound Interest"
+          },
+          {
+            "type": "paragraph",
+            "text": "Simple aur compound interest ka farq ek chhoti misaal se samjhein. Aap bank mein Rs. 1000 rakhte hain, 10% saalana. Simple interest mein har saal sirf 1000 par Rs. 100 milte hain: do saal baad Rs. 1200. Compound interest mein doosre saal munafa 1100 par milta hai, yani Rs. 110: do saal baad Rs. 1210. Yeh \"munafe par munafa\" hi raqam ko \\((1 + r)\\) guna, phir \\((1 + r)^{2}\\) guna karta hai. Isi liye compound interest ke sawalon mein \\((1 + r)^{t}\\) aata hai, aur binomial theorem use kholne ka aasan raasta hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 30",
+            "problem": "A bank offers a compound interest rate of 5% per year. Sumaira invests Rs. 100,000 for 3 years. How much will her investment be worth at the end of 3 years?",
+            "steps": [
+              "Given: principal (asal raqam) \\(P = 100{,}000\\), rate \\(r = 5\\% = 0.05\\) saalana, saal mein ek dafa compounding (\\(n = 1\\)), waqt \\(t = 3\\) saal.\nTo find: 3 saal baad raqam \\(A\\).\nMethod: compound interest (sood dar sood) ka formula lagayenge, aur \\((1.05)^{3}\\) ko binomial theorem se kholenge.",
+              "Step 1: Compound interest ka formula\n\\[A = P\\left(1 + \\dfrac{r}{n}\\right)^{nt}\\]\njahan \\(P = 100{,}000\\) (principal), \\(r = 0.05\\) (interest rate), \\(n = 1\\) (saal mein ek dafa compounding), \\(t = 3\\) (saal).\nKyun: compound interest mein har saal ka munafa (interest) asal raqam mein jur jata hai, aur agle saal us par bhi munafa milta hai. Is liye har saal raqam \\(1 + r\\) guna ho jati hai. Simple interest mein aisa nahin hota; wahan har saal sirf asal raqam par munafa milta hai.",
+              "Step 2: Values rakhein\n\\[A = 100{,}000 \\times (1 + 0.05)^{1 \\times 3}\\]\n\\[= 100{,}000 \\times (1.05)^{3}\\]\nKyun: \\(\\frac{r}{n} = \\frac{0.05}{1} = 0.05\\) aur \\(nt = 1 \\times 3 = 3\\). Principal 100,000 hi rehta hai; kitab yahan 1000 chhaap deti hai, jo ghalat hai.",
+              "Step 3: \\((1.05)^{3}\\) ki binomial expansion\n\\[(1 + 0.05)^{3} = 1 + 3 \\times 0.05\\]\n\\[+ 3 \\times (0.05)^{2} + (0.05)^{3}\\]\n\\[= 1 + 0.15 + 0.0075 + 0.000125\\]\n\\[= 1.157625\\]\nKyun: \\((a + b)^{3}\\) ke coefficients Pascal's triangle ki row 3 hain: \\(1, 3, 3, 1\\). Yahan humne chaaron terms rakhe, is liye jawab bilkul exact hai, andaza nahin. Sab terms plus hain kyun ke \\(0.05\\) positive hai.\nDhyan dein: decimals ki powers mein zero ginna aasan nahin. \\((0.05)^{2} = 0.0025\\) (do decimal digits ka square, chaar decimal places), aur \\((0.05)^{3} = 0.000125\\) (chhe decimal places). Shak ho to \\(\\frac{5}{100}\\) likh kar square karein: \\(\\frac{25}{10000}\\). Kitab yahan aakhri term se pehle minus chhaap deti hai, magar total sahi likhti hai; aap plus hi likhein.",
+              "Step 4: Future value\n\\[A = 100{,}000 \\times 1.157625\\]\n\\[= 115{,}762.5\\]\nIs liye 3 saal baad Sumaira ki raqam Rs. 115,762.50 ho jayegi.\nKyun: principal ko growth factor se multiply kiya. Kul munafa Rs. 15,762.50 hai.",
+              "Tasdeeq:\nSaal ba saal hisaab: \\(100{,}000 \\times 1.05 = 105{,}000\\); \\(105{,}000 \\times 1.05 = 110{,}250\\); \\(110{,}250 \\times 1.05 = 115{,}762.50\\). Bilkul wahi jawab."
+            ],
+            "answer": "3 saal baad investment Rs. 115,762.50 ki ho jayegi."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 30 mein kitab \\(A = 100{,}000 \\times (1 + 0.05)^{1 \\times 3} = 1000 \\times (1.05)^{3}\\) chhaapti hai; factor 100,000 hi rehna chahiye. \"\\(1 + 0.15 + 0.0075 - 0.000125\\)\" mein aakhri term \\(+0.000125\\) hai. Kitab ke dono totals (1.157625 aur Rs. 115,762.5) durust hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 28 aur 30 ko saath rakh kar dekhiye: dono mein \\(100{,}000 \\times (1.05)^{3}\\) hi nikala gaya hai! Example 28 ne expansion ke teen terms rakhe aur andaza 115,750 aaya; Example 30 ne chaaron terms rakhe aur exact 115,762.50 aaya. Farq sirf Rs. 12.50 hai, jo chhoda hua term \\(100{,}000 \\times (0.05)^{3}\\) hai. Isi liye kehte hain ke chhote \\(x\\) ke liye approximation bohat achha kaam karta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice ki misaal hai: kisi cheez ki qeemat har saal 2% barhti hai. 4 saal mein qeemat kitne guna hogi? Yani \\((1.02)^{4}\\).\nApproximation: \\(1 + 4(0.02) + \\frac{4 \\times 3}{2}(0.02)^{2} = 1 + 0.08 + 0.0024 = 1.0824\\).\nExact value \\(1.08243216\\) hai; farq sirf \\(0.00003216\\). Matlab qeemat taqreeban 8.24% barh jayegi."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Variable Subletting and Growth in Supply Chain"
+          },
+          {
+            "type": "paragraph",
+            "text": "Agli misaal ko ek paani ki tanki se samjhiye. Har mahine tanki ka 60% paani nikal jata hai aur phir 100 litre daal diye jate hain. Shuru mein tanki mein 500 litre hain. Har mahine kuch nikalta hai aur kuch aata hai, to aakhir paani kis level par tikega? Godaam ka maal (inventory) bilkul isi tarah chalta hai. Aise \"pichle se agla\" wale rule ko recurrence relation kehte hain. Kitab is misaal mein induction se formula saabit karti hai; hum dekhenge ke kitab ka formula kahan ghalat hai aur sahi formula kaise milta hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 31",
+            "problem": "In a supply chain system, a company starts with an initial inventory of 500 items. Every month, they sell 60% of the inventory and restock 100 items. How many items will they have after 6 months? Use mathematical induction to prove the pattern.",
+            "steps": [
+              "Given: shuru mein 500 items; har mahine inventory (godaam ka maal) ka 60% bik jata hai (40% bachta hai), phir 100 items naye aa jate hain.\nTo find: 6 mahine baad inventory, aur pattern ko mathematical induction se saabit karna.\nMethod: \\(I_{n}\\) ko \\(n\\) mahine baad ki inventory maan lein. Pehle mahine se agle mahine ka rule (recurrence relation) likhenge, phir \\(I_{n}\\) ka seedha formula dhoondenge, use induction se saabit karenge, aur aakhir mein \\(n = 6\\) rakhenge.",
+              "Step 1: Recurrence relation\n\\[I_{n+1} = 0.4\\,I_{n} + 100,\\quad I_{0} = 500\\]\nKyun: 60% bikne ke baad \\(I_{n}\\) ka 40% yani \\(0.4\\,I_{n}\\) bachta hai; phir 100 items jur jate hain. Recurrence relation ka matlab hai \"agla number pichle number se kaise banta hai\".",
+              "Step 2: Pehle chand mahine\n\\[I_{1} = 0.4(500) + 100 = 300\\]\n\\[I_{2} = 0.4(300) + 100 = 220\\]\n\\[I_{3} = 0.4(220) + 100 = 188\\]\nKyun: yeh values haath mein hon to kisi bhi formula ko saboot se pehle parakh sakte hain. Achha mathematician pehle choti values se check karta hai, phir saboot ki mehnat karta hai.",
+              "Step 3: Formula dhoondein\nWoh level \\(L\\) dhoondein jo badle nahin: \\(L = 0.4L + 100\\), yani \\(0.6L = 100\\) aur \\(L = \\frac{500}{3}\\) (taqreeban 166.67). Har mahine inventory ka \\(L\\) se faasla 0.4 guna ho jata hai, is liye \\(I_{n} = \\frac{500}{3} + c(0.4)^{n}\\). \\(I_{0} = 500\\) se: \\(c = 500 - \\frac{500}{3} = \\frac{1000}{3}\\).\n\\[I_{n} = \\dfrac{500}{3} + \\dfrac{1000}{3}(0.4)^{n}\\]\nKyun: \\(I_{n+1} = 0.4I_{n} + 100\\) mein se \\(L = 0.4L + 100\\) tafreeq karein to \\(I_{n+1} - L = 0.4(I_{n} - L)\\) milta hai. Yani faasla har mahine 40% reh jata hai, aur inventory ahista ahista 166.67 ki taraf barhti hai.\nDhyan dein: kitab \\(I_{n} = 250 + 250(0.4)^{n}\\) leti hai; yeh \\(I_{0} = 500\\) to deta hai magar \\(I_{1} = 350\\) deta hai, jab ke asal \\(I_{1} = 300\\). Is liye woh formula ghalat hai.",
+              "Step 4: Base Case (\\(n = 0\\))\n\\[I_{0} = \\dfrac{500}{3} + \\dfrac{1000}{3}(0.4)^{0}\\]\n\\[= \\dfrac{1500}{3} = 500\\]\nYeh shuru wali inventory hai, is liye formula \\(n = 0\\) par sahi hai.\nKyun: induction pehli value se shuru hoti hai; yahan pehli value mahina 0 hai. \\((0.4)^{0} = 1\\).",
+              "Step 5: Inductive Hypothesis\nMaan lein ke kisi \\(n = k \\ge 0\\) ke liye formula sahi hai:\n\\[I_{k} = \\dfrac{500}{3} + \\dfrac{1000}{3}(0.4)^{k}\\]\nAb dikhana hai ke yeh \\(n = k + 1\\) ke liye bhi sahi hai.\nKyun: inductive step isi farz ko istemal karta hai.",
+              "Step 6: Inductive step\nRecurrence relation se shuru kar ke hypothesis rakhein:\n\\[I_{k+1} = 0.4\\,I_{k} + 100\\]\n\\[= 0.4\\left(\\dfrac{500}{3} + \\dfrac{1000}{3}(0.4)^{k}\\right) + 100\\]\n0.4 ko dono terms par taqseem (distribute) karein:\n\\[= \\dfrac{200}{3} + \\dfrac{1000}{3}(0.4)^{k+1} + 100\\]\n\\[= \\dfrac{200}{3} + \\dfrac{300}{3} + \\dfrac{1000}{3}(0.4)^{k+1}\\]\n\\[= \\dfrac{500}{3} + \\dfrac{1000}{3}(0.4)^{k+1}\\]\nIs liye formula \\(n = k + 1\\) par bhi sahi hai.\nKyun: \\(0.4 \\times (0.4)^{k} = (0.4)^{k+1}\\), aur 100 ko \\(\\frac{300}{3}\\) likh kar \\(\\frac{200}{3}\\) ke saath jor diya. Aakhri line bilkul wahi shakal hai jo humein chahiye thi, sirf \\(k\\) ki jagah \\(k + 1\\).\nDhyan dein: inductive step mein manzil pehle se likh lein (yahan \\(\\frac{500}{3} + \\frac{1000}{3}(0.4)^{k+1}\\)) aur phir hisaab ko usi taraf le jayein. Kitab ka hisaab \\(200 + 100(0.4)^{k}\\) par pahuncha, jo uski manzil \\(250 + 250(0.4)^{k+1}\\) se mukhtalif tha; wahan rukna chahiye tha aur formula par dobara ghor karna chahiye tha, numbers ko zabardasti badalna nahin. Induction kabhi ghalat formula ko saabit nahin karti; agar step na bane to formula hi ghalat hai.",
+              "Step 7: Conclusion\nBase case sahi hai aur inductive step saabit ho gaya, is liye mathematical induction ke usool se formula\n\\[I_{n} = \\dfrac{500}{3} + \\dfrac{1000}{3}(0.4)^{n}\\]\nhar \\(n \\ge 0\\) ke liye sahi hai.",
+              "Step 8: 6 mahine baad inventory\n\\[(0.4)^{6} = 0.004096\\]\n\\[I_{6} = \\dfrac{500}{3} + \\dfrac{1000}{3}(0.004096)\\]\n\\[= 166.667 + 1.365 = 168.032\\]\nIs liye 6 mahine baad inventory taqreeban 168 items hai.\nKyun: saabit shuda formula mein \\(n = 6\\) rakha. Items poore number hote hain, is liye 168.032 ko taqreeban 168 kehte hain.",
+              "Tasdeeq:\nStep 2 ko mahina ba mahina aage barhayein: \\(I_{4} = 0.4(188) + 100 = 175.2\\), \\(I_{5} = 0.4(175.2) + 100 = 170.08\\), \\(I_{6} = 0.4(170.08) + 100 = 168.032\\). Wahi 168.032 (neeche table dekhiye)."
+            ],
+            "answer": "6 mahine baad inventory taqreeban 168 items hai (\\(I_{6} = 168.032\\)); \\(I_{n} = \\frac{500}{3} + \\frac{1000}{3}(0.4)^{n}\\)."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Mahina \\(n\\)",
+              "Recurrence se \\(I_{n}\\)",
+              "Hamara formula",
+              "Kitab ka formula \\(250 + 250(0.4)^{n}\\)"
+            ],
+            "rows": [
+              [
+                "0",
+                "500",
+                "500",
+                "500"
+              ],
+              [
+                "1",
+                "300",
+                "300",
+                "350"
+              ],
+              [
+                "2",
+                "220",
+                "220",
+                "290"
+              ],
+              [
+                "3",
+                "188",
+                "188",
+                "266"
+              ],
+              [
+                "4",
+                "175.2",
+                "175.2",
+                "256.4"
+              ],
+              [
+                "5",
+                "170.08",
+                "170.08",
+                "252.56"
+              ],
+              [
+                "6",
+                "168.032",
+                "168.032",
+                "251.024"
+              ]
+            ],
+            "caption": "Hamari table: Example 31 ki inventory mahina ba mahina; kitab ka formula mahina 0 ke baad asal values se hat jata hai"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 31 mein kitab ka formula \\(I_{n} = 250 + 250 \\times (0.4)^{n}\\) ghalat hai: is se \\(I_{1} = 350\\) aata hai jab ke recurrence se \\(I_{1} = 0.4(500) + 100 = 300\\). Kitab ka inductive step \\(200 + 100(0.4)^{k}\\) tak pahunch kar use \\(250 - 50 + 100(0.4)^{k+1}\\) likh deta hai, jo ek mukhtalif number hai; is liye kuch saabit nahin hota. Kitab \\(I_{k+1}\\) ki jagah \\(I_{k-1}\\) aur \\(I_{0} = 500\\) ki jagah \\(I_{n} = 500\\) bhi chhaapti hai.\nSahi: \\(I_{n} = \\frac{500}{3} + \\frac{1000}{3}(0.4)^{n}\\), \\(I_{6} = 168.032\\), yani taqreeban 168 items (kitab 251 kehti hai)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Agar yehi silsila bohat lamba chale (bohat se mahine), to inventory kis number ke qareeb pahunchegi?\nJawab: \\((0.4)^{n}\\) chhota hote hote taqreeban 0 ho jata hai, is liye \\(I_{n}\\) qareeban \\(\\frac{500}{3} \\approx 166.67\\) tak aa jati hai. Yahi woh \"na badalne wala level\" \\(L\\) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(I_{n+1} = aI_{n} + b\\) jaise kisi bhi rule ka formula nikalne ka aam tareeqa:\n1. Fixed level dhoondo: \\(L = aL + b\\), yani \\(L = \\frac{b}{1 - a}\\).\n2. Formula \\(I_{n} = L + (I_{0} - L)a^{n}\\) likho.\n3. Pehli do teen values se check karo, phir induction se saabit karo.\nMisaal (hamari): \\(I_{n+1} = 0.5I_{n} + 10\\), \\(I_{0} = 100\\). \\(L = \\frac{10}{0.5} = 20\\), is liye \\(I_{n} = 20 + 80(0.5)^{n}\\). Check: \\(I_{1} = 0.5(100) + 10 = 60\\), aur formula \\(20 + 40 = 60\\). Sahi!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Induction ki ek aur practice: Example 30 wali investment mein saabit karein ke \\(t\\) saal baad raqam \\(A_{t} = 100{,}000(1.05)^{t}\\) hai.\nBase case \\(t = 0\\): \\(A_{0} = 100{,}000(1.05)^{0} = 100{,}000\\), jo shuru ki raqam hai.\nHypothesis: maan lein \\(A_{k} = 100{,}000(1.05)^{k}\\).\nStep: agle saal 5% munafa jurta hai, yani \\(A_{k+1} = 1.05A_{k} = 1.05 \\times 100{,}000(1.05)^{k} = 100{,}000(1.05)^{k+1}\\). Formula \\(k + 1\\) par bhi sahi.\nNatija: induction se formula har \\(t\\) ke liye sahi hai; \\(t = 3\\) par yehi 115,762.50 deta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Chhote \\(x\\) ke liye: \\((1 + x)^{n} \\approx 1 + nx + \\frac{n(n-1)}{2}x^{2}\\); chhode gaye terms bohat chhote hote hain.\n2. Compound interest: \\(A = P\\left(1 + \\frac{r}{n}\\right)^{nt}\\); \\((1 + r)^{t}\\) ko binomial theorem se khol sakte hain.\n3. Induction mein sacha base case aur \\(k\\) se \\(k + 1\\) ka qadam, dono zaroori (dominoes yaad karein).\n4. \\(I_{n+1} = aI_{n} + b\\) jaisa amal: pehle fixed level \\(L = \\frac{b}{1 - a}\\), phir \\(I_{n} = L + (I_{0} - L)a^{n}\\), aur induction se saboot.\n5. Saboot se pehle formula ko pehli chand values par zaroor check karein."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Zero ki ghalti: \\(100{,}000 \\times 1.1575 = 115{,}750\\) hai. Pehle andaza lagayein: 100,000 se taqreeban 16% zyada.\n2. Ghalat statement saabit karna: inductive step mein manzil \\(S(k + 1)\\) hai, dobara \\(S(k)\\) nahin.\n3. Formula check kiye baghair \"saabit\" karna: \\(250 + 250(0.4)^{n}\\) to \\(n = 1\\) par hi fail ho jata hai. Jo inductive step numbers ko ghalat likh kar hi chalta ho, woh kuch saabit nahin karta.\n4. Andaze aur exact value ko mila dena: jab expansion ke kuch terms chhode hon to \"approximately (taqreeban)\" zaroor likhein."
+          },
+          {
+            "type": "paragraph",
+            "text": "Khulasa: is section ne dikhaya ke jo mathematics hum ne is unit mein seekhi woh roz ki zindagi mein kaam aati hai. Binomial theorem se cost aur munafe ke tez andaze lagte hain, aur induction se kisi qadam ba qadam amal ka pattern pakka saabit hota hai. Saath hi yeh bhi seekha ke kitab ka har formula aankh band kar ke na maanein: pehli chand values par check karna ek achhe student ki pehchaan hai. Ab Exercise 8.4 mein yehi sab khud kar ke dekhiye."
+          }
+        ]
+      }
+    }
+  ]
+}

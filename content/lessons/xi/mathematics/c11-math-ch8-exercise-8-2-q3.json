@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-2-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-2-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 162,
+          "pdf_to": 162,
+          "note": "Exercise 8.2, Question 3: book p.157 (PDF 162). Answer key book p.301-302 (PDF 306-307): key 3(i) prints 20a^2x^2, correct 24a^2x^2. Solution book PDF 741-770 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Expand and simplify the following: \\((a + \\sqrt{2}\\,x)^4 + (a - \\sqrt{2}\\,x)^4\\).",
+            "explanation": "Two expansions are added; they differ only in the sign of the second term.\nKey idea: in the sum, the odd-power terms cancel and the even-power terms double.\nPlan: expand \\((a + b)^4\\) once, change the sign of \\(b\\), add, then put \\(b = \\sqrt{2}\\,x\\).",
+            "steps": [
+              "Given: \\((a + \\sqrt{2}\\,x)^4 + (a - \\sqrt{2}\\,x)^4\\).\nTo find: the simplified sum.\nMethod: Let \\(b = \\sqrt{2}\\,x\\). Expand \\((a + b)^4\\) and \\((a - b)^4\\) by the binomial theorem and add.",
+              "Expand both brackets\n\\[(a + b)^4 = a^4 + 4a^3b + 6a^2b^2\\]\n\\[+ 4ab^3 + b^4\\]\n\\[(a - b)^4 = a^4 - 4a^3b + 6a^2b^2\\]\n\\[- 4ab^3 + b^4\\]\nWhy: Coefficients 1, 4, 6, 4, 1. Replacing \\(b\\) by \\(-b\\) changes the sign of the odd powers of \\(b\\) only.",
+              "Add\n\\[(a + b)^4 + (a - b)^4\\]\n\\[= 2\\left(a^4 + 6a^2b^2 + b^4\\right)\\]\nWhy: \\(4a^3b\\) and \\(4ab^3\\) cancel with their negatives; the other terms appear twice.",
+              "Put \\(b = \\sqrt{2}\\,x\\)\n\\[b^2 = (\\sqrt{2})^2x^2 = 2x^2\\]\n\\[b^4 = (b^2)^2 = 4x^4\\]\n\\[2\\left(a^4 + 6a^2 \\cdot 2x^2 + 4x^4\\right)\\]\n\\[= 2\\left(a^4 + 12a^2x^2 + 4x^4\\right)\\]\nWhy: Only even powers of \\(b\\) are left, so all square roots disappear.",
+              "Simplify\n\\[= 2a^4 + 24a^2x^2 + 8x^4\\]\nWhy: Multiply each term by 2.",
+              "Check: put \\(a = 1,\\ x = 1\\)\n\\[(1 + \\sqrt{2})^2 = 3 + 2\\sqrt{2}\\]\n\\[(1 + \\sqrt{2})^4 = (3 + 2\\sqrt{2})^2 = 17 + 12\\sqrt{2}\\]\n\\[(1 - \\sqrt{2})^4 = 17 - 12\\sqrt{2}\\]\n\\[\\text{Sum} = 34\\]\n\\[2 + 24 + 8 = 34 \\;\\checkmark\\]\nWhy: \\((3 + 2\\sqrt{2})^2 = 9 + 12\\sqrt{2} + 8\\). The original sum and our answer agree."
+            ],
+            "final_answer": "\\(2a^4 + 24a^2x^2 + 8x^4\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(2a^4 + 20a^2x^2 + 8x^4\\). The middle coefficient should be 24: \\(2 \\times 6a^2(\\sqrt{2}\\,x)^2 = 2 \\times 6a^2 \\cdot 2x^2 = 24a^2x^2\\). (Check with \\(a = x = 1\\): the sum is 34, and \\(2 + 24 + 8 = 34\\), while \\(2 + 20 + 8 = 30\\).)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Expand and simplify the following: \\((2 + \\sqrt{3})^5 + (2 - \\sqrt{3})^5\\).",
+            "explanation": "Same idea as part (i), now with numbers and power 5.\nThe odd powers of \\(\\sqrt{3}\\) cancel; the even powers give whole numbers.\nPlan: write the general sum with \\(a = 2\\), \\(b = \\sqrt{3}\\), keep only even powers of \\(b\\), double them.",
+            "steps": [
+              "Given: \\((2 + \\sqrt{3})^5 + (2 - \\sqrt{3})^5\\).\nTo find: its value.\nMethod: \\((a + b)^5 + (a - b)^5 = 2\\left[a^5 + \\binom{5}{2}a^3b^2 + \\binom{5}{4}ab^4\\right]\\) with \\(a = 2\\), \\(b = \\sqrt{3}\\).",
+              "Why only even powers remain\n\\[(a + b)^5 = a^5 + 5a^4b + 10a^3b^2\\]\n\\[+ 10a^2b^3 + 5ab^4 + b^5\\]\n\\[(a - b)^5 = a^5 - 5a^4b + 10a^3b^2\\]\n\\[- 10a^2b^3 + 5ab^4 - b^5\\]\n\\[\\text{Sum} = 2\\left(a^5 + 10a^3b^2 + 5ab^4\\right)\\]\nWhy: Coefficients 1, 5, 10, 10, 5, 1. Terms with \\(b, b^3, b^5\\) change sign and cancel.",
+              "Put \\(a = 2\\), \\(b = \\sqrt{3}\\)\n\\[a^5 = 32\\]\n\\[10a^3b^2 = 10 \\cdot 8 \\cdot 3 = 240\\]\n\\[5ab^4 = 5 \\cdot 2 \\cdot 9 = 90\\]\nWhy: \\(b^2 = 3\\) and \\(b^4 = 9\\), so no roots remain.",
+              "Add and double\n\\[2(32 + 240 + 90) = 2 \\times 362\\]\n\\[= 724\\]\nWhy: The sum of the two expansions is twice the even-power terms.",
+              "Check with decimals\n\\[2 + \\sqrt{3} \\approx 3.7320508\\]\n\\[3.7320508^5 \\approx 723.99862\\]\n\\[(2 - \\sqrt{3})^5 \\approx 0.00138\\]\n\\[723.99862 + 0.00138 = 724 \\;\\checkmark\\]\nWhy: A calculator value of the original sum agrees with 724."
+            ],
+            "final_answer": "\\((2 + \\sqrt{3})^5 + (2 - \\sqrt{3})^5 = 724\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

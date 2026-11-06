@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q7-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q7",
+      "title": "Question 7 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 154,
+          "pdf_to": 154,
+          "note": "Exercise 8.1, Question 7: book page 149 (PDF 154); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-1-Q7",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7. [Prove by mathematical induction:] \\(1 + nx \\le (1 + x)^n\\) for \\(n \\ge 2\\) and \\(x > -1\\).",
+            "explanation": "Yeh ek inequality hai jis mein \\(x\\) bhi hai; induction \\(n\\) par lagegi aur \\(n = 2\\) se shuru hogi (extended induction). Isay Bernoulli's inequality kehte hain.\nShart \\(x > -1\\) kyun? Is se \\(1 + x\\) positive rehta hai, aur positive number se multiply karne par inequality ka nishan nahi badalta.\nPlan: base case mein \\((1 + x)^2\\) expand karna; hypothesis ko \\(1 + x\\) se multiply karna; aur extra term \\(kx^2\\) ko, jo kabhi negative nahi hoti, chhor dena.",
+            "steps": [
+              "Diya gaya hai: \\(S(n): (1 + x)^n \\ge 1 + nx\\), jahan \\(x > -1\\) fix hai.\nSaabit karna hai: \\(S(n)\\) har integer \\(n \\ge 2\\) ke liye sahi hai.\nTareeqa: \\(n\\) par extended mathematical induction. \\(x > -1\\) ke dono taraf 1 jama karein to \\(1 + x > 0\\); yeh baat inductive step mein kaam aayegi.",
+              "Base case: \\(n = 2\\) rakhein\n\\[(1 + x)^2 = 1 + 2x + x^2\\]\n\\[\\ge 1 + 2x\\]\nIs liye \\(S(2)\\) sahi hai.\nKyun: Kisi bhi real number ka square kabhi negative nahi hota, \\(x^2 \\ge 0\\). Is liye \\(1 + 2x + x^2\\) kam az kam \\(1 + 2x\\) ke barabar hai.",
+              "Induction hypothesis: \\(S(k)\\) ko sahi maan lein, \\(k \\ge 2\\)\n\\[(1 + x)^k \\ge 1 + kx \\quad (A)\\]\nKyun: Kisi integer \\(k \\ge 2\\) par inequality ko sahi farz kiya.",
+              "Target \\(S(k + 1)\\)\n\\[(1 + x)^{k+1} \\ge 1 + (k + 1)x\\]\nKyun: \\(n = k + 1\\) rakha.",
+              "Inductive step: (A) ko \\(1 + x\\) se multiply karein\n\\[(1 + x)^{k+1} = (1 + x)^k(1 + x)\\]\n\\[\\ge (1 + kx)(1 + x)\\]\nKyun: \\((1 + x)^{k+1}\\) banane ke liye ek aur \\((1 + x)\\) chahiye tha. \\(1 + x > 0\\) hai, is liye (A) ke dono taraf is se multiply karne par nishan \\(\\ge\\) wahi raha.\nDhyan dein: Agar \\(x < -1\\) hota to \\(1 + x\\) negative hota aur nishan ulat jata; isi liye shart \\(x > -1\\) zaroori hai.",
+              "Expand kar ke extra term chhorein\n\\[(1 + kx)(1 + x) = 1 + x + kx + kx^2\\]\n\\[= 1 + (k + 1)x + kx^2\\]\n\\[\\ge 1 + (k + 1)x\\]\nKyun: Term by term multiply kiya aur \\(x + kx = (k + 1)x\\) likha. \\(k\\) positive hai aur \\(x^2 \\ge 0\\), is liye \\(kx^2 \\ge 0\\). Ek non-negative term hata dene se baaqi cheez chhoti ya barabar rehti hai, is liye \"\\(\\ge\\)\".",
+              "Nateeje jorein\n\\[(1 + x)^{k+1} \\ge 1 + (k + 1)x\\]\nIs liye \\(S(k + 1)\\) sahi hai.\nKyun: Pichhle do qadam ek chain bana dete hain: \\((1 + x)^{k+1} \\ge (1 + kx)(1 + x) \\ge 1 + (k + 1)x\\).",
+              "Conclusion\n\\(S(2)\\) sahi hai aur har \\(k \\ge 2\\) par \\(S(k)\\) se \\(S(k + 1)\\) sahi hota hai. Principle of extended mathematical induction se \\(1 + nx \\le (1 + x)^n\\) har integer \\(n \\ge 2\\) aur har \\(x > -1\\) ke liye sahi hai.\nKyun: Induction ki dono sharten poori ho gayin.",
+              "Tasdeeq: \\(n = 3,\\ x = -\\tfrac{1}{2}\\)\n\\[(1 - \\tfrac{1}{2})^3 = \\tfrac{1}{8}\\]\n\\[1 + 3(-\\tfrac{1}{2}) = -\\tfrac{1}{2} \\le \\tfrac{1}{8} \\;\\checkmark\\]\nKyun: Negative \\(x\\) (jo \\(-1\\) se bara ho) par bhi inequality chalti hai. Yeh check is liye chuna ke students aksar sirf positive \\(x\\) par aazmate hain."
+            ],
+            "final_answer": "Saabit ho gaya: \\(1 + nx \\le (1 + x)^n\\) har integer \\(n \\ge 2\\) aur \\(x > -1\\) ke liye."
+          }
+        ]
+      }
+    }
+  ]
+}

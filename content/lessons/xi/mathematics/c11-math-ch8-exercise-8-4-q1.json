@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 1: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Find unit place digits in: \\((25)^{315}\\)",
+            "explanation": "The unit place digit is the last digit of a number; \\((25)^{315}\\) is far too big to work out.\nThe binomial theorem shows that only the last digit of the base matters.\nPlan: write 25 as 20 + 5, expand, drop the terms that end in 0, then study powers of 5.",
+            "steps": [
+              "Given: \\((25)^{315}\\).\nTo find: its unit place digit.\nMethod: Split the base into a multiple of 10 plus its last digit and expand by the binomial theorem. Every term that contains the multiple of 10 ends in 0, so it cannot change the last digit.",
+              "Split the base\n\\[(25)^{315} = (20 + 5)^{315}\\]\nWhy: 20 is a multiple of 10 and 5 is the last digit of 25.",
+              "Expand by the binomial theorem\n\\[(20 + 5)^{315} = 20^{315}\\]\n\\[+ {}^{315}C_{1}\\,20^{314}\\cdot 5 + \\dots\\]\n\\[+ {}^{315}C_{314}\\,20\\cdot 5^{314} + 5^{315}\\]\nWhy: \\((a + x)^n = a^n + {}^nC_1 a^{n-1}x + \\dots + x^n\\) with \\(a = 20\\), \\(x = 5\\), \\(n = 315\\). Every term except the last has at least one factor 20.",
+              "Drop the terms that end in 0\n\\[(25)^{315} = 10k + 5^{315}\\]\nWhy: A number with a factor 20 is a multiple of 10, so it ends in 0. Adding such numbers does not change the unit digit, so only \\(5^{315}\\) decides it.",
+              "Unit digit of a power of 5\n\\[5^1 = 5,\\quad 5^2 = 25\\]\n\\[5^3 = 125,\\quad 5^4 = 625\\]\nWhy: A number ending in 5 times 5 ends in the last digit of \\(5 \\times 5 = 25\\), that is 5 again. So every power of 5 ends in 5.",
+              "Check:\n\\[25^2 = 625,\\quad 25^3 = 15625\\]\nWhy: The small powers of 25 already end in 5, exactly as the method predicts (the book's Example 24(ii) uses the same fact)."
+            ],
+            "final_answer": "The unit place digit of \\((25)^{315}\\) is \\(5\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Find unit place digits in: \\((74)^{45}\\)",
+            "explanation": "Again only the last digit of the base, 4, decides the unit digit.\nPowers of 4 end in 4 or 6, so we must find which one.\nPlan: reduce to \\(4^{45}\\), write it as \\(4 \\cdot 16^{22}\\) and use \\(16 = 10 + 6\\).",
+            "steps": [
+              "Given: \\((74)^{45}\\).\nTo find: its unit place digit.\nMethod: Write \\(74 = 70 + 4\\); after the binomial expansion only \\(4^{45}\\) affects the last digit. Then turn \\(4^{45}\\) into a power of 16, whose last digit is easy to follow.",
+              "Reduce to a power of the last digit\n\\[(74)^{45} = (70 + 4)^{45}\\]\n\\[= 10k + 4^{45}\\]\nWhy: In the expansion every term except \\(4^{45}\\) contains a factor 70, a multiple of 10, so it ends in 0.",
+              "Write the power with 16\n\\[4^{45} = 4 \\cdot 4^{44}\\]\n\\[= 4 \\cdot (4^2)^{22} = 4 \\cdot 16^{22}\\]\nWhy: \\(45 = 1 + 44\\) and \\(44 = 2 \\times 22\\). Using \\(a^{m+n} = a^m a^n\\) and \\(a^{mn} = (a^m)^n\\).",
+              "Unit digit of \\(16^{22}\\)\n\\[16^{22} = (10 + 6)^{22}\\]\n\\[= 10h + 6^{22}\\]\nWhy: Same idea again: only \\(6^{22}\\) matters. Every power of 6 ends in 6, because \\(6 \\times 6 = 36\\) ends in 6. So \\(16^{22}\\) ends in 6.",
+              "Multiply by 4\n\\[4 \\times 6 = 24\\]\nWhy: \\(4^{45} = 4 \\times (\\text{a number ending in } 6)\\); its last digit is the last digit of \\(4 \\times 6 = 24\\), which is 4.",
+              "Check:\n\\[4^1 = 4,\\ 4^2 = 16,\\ 4^3 = 64,\\ 4^4 = 256\\]\nWhy: Odd powers of 4 end in 4 and even powers end in 6. The power 45 is odd, so the last digit is 4, which agrees."
+            ],
+            "final_answer": "The unit place digit of \\((74)^{45}\\) is \\(4\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Find unit place digits in: \\((573)^{87}\\)",
+            "explanation": "Only the last digit 3 of the base matters, so we need the last digit of \\(3^{87}\\).\nPowers of 3 do not keep one last digit, so we bring in \\(3^4 = 81\\), which ends in 1.\nPlan: reduce to \\(3^{87}\\), split off a power of 81 and use \\(81 = 80 + 1\\).",
+            "steps": [
+              "Given: \\((573)^{87}\\).\nTo find: its unit place digit.\nMethod: Write \\(573 = 570 + 3\\), so only \\(3^{87}\\) affects the unit digit. Since \\(3^4 = 81\\) ends in 1, every power of 81 ends in 1, which makes the rest easy.",
+              "Reduce to a power of the last digit\n\\[(573)^{87} = (570 + 3)^{87}\\]\n\\[= 10k + 3^{87}\\]\nWhy: Every term except \\(3^{87}\\) contains the factor 570, a multiple of 10.",
+              "Split the power using 4\n\\[87 = 4 \\times 21 + 3\\]\n\\[3^{87} = 3^{3}\\cdot (3^4)^{21}\\]\n\\[= 27 \\cdot 81^{21}\\]\nWhy: Dividing the power by 4 leaves remainder 3; the block \\((3^4)^{21}\\) is a power of 81.",
+              "Unit digit of \\(81^{21}\\)\n\\[81^{21} = (80 + 1)^{21}\\]\n\\[= 10h + 1^{21} = 10h + 1\\]\nWhy: Every term except the last contains 80, a multiple of 10, and \\(1^{21} = 1\\). So \\(81^{21}\\) ends in 1.",
+              "Multiply by 27\n\\[27 \\times (10h + 1) = 270h + 27\\]\nWhy: \\(270h\\) ends in 0, so the unit digit is the unit digit of 27, which is 7.",
+              "Check:\n\\[3^1 = 3,\\ 3^2 = 9,\\ 3^3 = 27,\\ 3^4 = 81\\]\nWhy: The last digits repeat in the cycle 3, 9, 7, 1 (length 4). Since \\(87 = 4 \\times 21 + 3\\), we take the 3rd digit of the cycle, 7. This agrees."
+            ],
+            "final_answer": "The unit place digit of \\((573)^{87}\\) is \\(7\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

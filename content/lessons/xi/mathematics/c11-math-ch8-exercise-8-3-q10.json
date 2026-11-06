@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-3-Q10",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-3-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 167,
+          "pdf_to": 167,
+          "note": "Exercise 8.3, Question 10: book page 162 (PDF 167); proof question, no answer in the key (PDF 307)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10. If \\(2y = \\frac{1}{2^{2}} + \\frac{1 \\cdot 3}{2!} \\cdot \\frac{1}{2^{4}} + \\frac{1 \\cdot 3 \\cdot 5}{3!} \\cdot \\frac{1}{2^{6}} + \\dots\\), prove that \\(4y^{2} + 4y - 1 = 0\\)",
+            "explanation": "As in Question 9, the series for \\(2y\\) lacks the leading 1, so \\(1 + 2y\\) is a full binomial series.\nWe must find its sum, then prove \\(4y^{2} + 4y - 1 = 0\\).\nPlan: Compare the second and third terms with \\(nx\\) and \\(\\dfrac{n(n - 1)}{2!}x^{2}\\): two equations give \\(n\\) and \\(x\\). Then sum and substitute.",
+            "steps": [
+              "Given: \\(2y = \\frac{1}{2^{2}} + \\frac{1 \\cdot 3}{2!} \\cdot \\frac{1}{2^{4}} + \\frac{1 \\cdot 3 \\cdot 5}{3!} \\cdot \\frac{1}{2^{6}} + \\dots\\)\nTo prove: \\(4y^{2} + 4y - 1 = 0\\).\nMethod: Add 1; \\(1 + 2y = (1 + x)^{n}\\). Compare the second and third terms with \\(nx\\) and \\(\\dfrac{n(n - 1)}{2!}x^{2}\\): two equations give \\(n\\) and \\(x\\).",
+              "Add 1\n\\[1 + 2y = 1 + \\dfrac{1}{4} + \\dfrac{1 \\cdot 3}{2!} \\cdot \\dfrac{1}{16} + \\dots\\]\nWhy: \\(2^{2} = 4\\), \\(2^{4} = 16\\).",
+              "Two equations\n\\[nx = \\dfrac{1}{4} \\quad (1)\\]\n\\[\\dfrac{n(n - 1)}{2}x^{2} = \\dfrac{3}{2} \\cdot \\dfrac{1}{16} = \\dfrac{3}{32} \\quad (2)\\]\nWhy: Match the second and third terms.",
+              "Find \\(n\\) and \\(x\\)\n\\[\\dfrac{n(n - 1)x^{2}}{(nx)^{2}} = \\dfrac{3/16}{1/16} = 3\\]\n\\[n = -\\dfrac{1}{2},\\quad x = \\dfrac{1/4}{-1/2} = -\\dfrac{1}{2}\\]\nWhy: Same equations as in Question 8.",
+              "Check the fourth term\n\\[\\dfrac{(-\\frac{1}{2})(-\\frac{3}{2})(-\\frac{5}{2})}{6}\\left(-\\dfrac{1}{2}\\right)^{3} = \\dfrac{5}{128}\\]\n\\[\\dfrac{1 \\cdot 3 \\cdot 5}{3!} \\cdot \\dfrac{1}{64} = \\dfrac{15}{384} = \\dfrac{5}{128}\\ \\checkmark\\]\nWhy: Confirmed.",
+              "Sum\n\\[1 + 2y = \\left(1 - \\dfrac{1}{2}\\right)^{-1/2} = \\sqrt{2}\\]\n\\[2y = \\sqrt{2} - 1\\]\nWhy: \\(|x| = \\tfrac{1}{2} < 1\\); \\((\\tfrac{1}{2})^{-1/2} = \\sqrt{2}\\).",
+              "Prove the equation\n\\[2y + 1 = \\sqrt{2}\\]\n\\[(2y + 1)^{2} = 2\\]\n\\[4y^{2} + 4y + 1 = 2\\]\n\\[4y^{2} + 4y - 1 = 0\\]\nWhy: Square both sides: \\((2y + 1)^{2} = 4y^{2} + 4y + 1\\)."
+            ],
+            "final_answer": "\\(1 + 2y = \\left(1 - \\frac{1}{2}\\right)^{-1/2} = \\sqrt{2}\\), so \\(4y^{2} + 4y - 1 = 0\\). Hence proved."
+          }
+        ]
+      }
+    }
+  ]
+}

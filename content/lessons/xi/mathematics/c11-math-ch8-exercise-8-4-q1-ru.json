@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q1",
+      "title": "Question 1 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 1: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-4-Q1",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Find unit place digits in: \\((25)^{315}\\)",
+            "explanation": "Unit place digit (ikaai ka hindsa) kisi number ka sab se aakhri digit hota hai. \\((25)^{315}\\) itna bara number hai ke isay poora likhna mumkin hi nahi, is liye hum shortcut dhoondte hain.\nDiya kya hai? \\((25)^{315}\\). Find kya karna hai? Sirf aakhri digit.\nRule kaunsa? Binomial theorem: base ko (10 ka multiple) + (aakhri digit) likh kar expand karein to pata chalta hai ke aakhri digit sirf base ke aakhri digit par depend karta hai.\nPlan: 25 = 20 + 5, expand, 0 par khatam hone wale terms chhor dein, phir 5 ki powers ka pattern dekhein.",
+            "steps": [
+              "Diya gaya hai: \\((25)^{315}\\).\nHumein find karna hai: is ka unit place digit.\nTareeqa: Base ko (10 ka koi multiple) + (us ka aakhri digit) mein torenge aur binomial theorem se expand karenge. Jis term mein 10 ka multiple hoga woh 0 par khatam hoga, aur 0 wala number jama karne se aakhri digit nahi badalta. Yun poora sawal ek chhoti si power par aa jata hai.",
+              "Base ko do hisson mein torein\n\\[(25)^{315} = (20 + 5)^{315}\\]\nKyun: 20 ko 10 se poora divide kiya ja sakta hai, aur 5 hi 25 ka aakhri digit hai. Hum chahte hain ke ek hissa '0 par khatam' ho aur doosra hissa chhota sa digit ho, kyunke sara khel isi chhote digit ka hai.",
+              "Binomial theorem se expand karein\n\\[(20 + 5)^{315} = 20^{315}\\]\n\\[+ {}^{315}C_{1}\\,20^{314}\\cdot 5 + \\dots\\]\n\\[+ {}^{315}C_{314}\\,20\\cdot 5^{314} + 5^{315}\\]\nKyun: Formula \\((a + x)^n = a^n + {}^nC_1 a^{n-1}x + \\dots + x^n\\) mein \\(a = 20\\), \\(x = 5\\), \\(n = 315\\) rakha. Ghaur se dekhiye: aakhri term \\(5^{315}\\) ke ilawa har term mein kam az kam ek dafa 20 zaroor aata hai. Poori expansion likhne ki zaroorat nahi, sirf yeh pattern samajhna kaafi hai.",
+              "0 par khatam hone wale terms hata dein\n\\[(25)^{315} = 10k + 5^{315}\\]\nKyun: Jis number mein 20 ka factor ho woh 10 ka multiple hai, yani us ka aakhri digit 0 hai. Aise sab terms ko jama kar ke \\(10k\\) likh diya. Ab socho: kisi number mein 10, 20, 1000 jama karne se us ka aakhri digit badalta hai? Nahi. Is liye unit digit sirf \\(5^{315}\\) se tay hoga.\nDhyan dein: Yeh \\(10k\\) wala hissa bohat bara hai, lekin aakhri digit ke liye bilkul be-asar hai; size se ghabrayein nahi.",
+              "5 ki powers ka aakhri digit\n\\[5^1 = 5,\\quad 5^2 = 25\\]\n\\[5^3 = 125,\\quad 5^4 = 625\\]\nKyun: Jo number 5 par khatam ho, usay 5 se multiply karein to naya aakhri digit \\(5 \\times 5 = 25\\) ka aakhri digit hota hai, yani phir 5. Yeh silsila kabhi nahi tootta, is liye 5 ki har power 5 par hi khatam hoti hai, chahe power 315 ho ya 3 lakh.",
+              "Tasdeeq\n\\[25^2 = 625,\\quad 25^3 = 15625\\]\nKyun: 25 ki chhoti powers khud hisaab kar ke dekh lein, dono 5 par khatam ho rahi hain, bilkul jaise humare tareeqe ne bataya tha. Kitab ki Example 24(ii) mein bhi yehi baat use hui hai."
+            ],
+            "final_answer": "\\((25)^{315}\\) ka unit place digit \\(5\\) hai.\nYaad rakhiye: 5 (ya 6, 0, 1) par khatam hone wale number ki har power ka aakhri digit wohi rehta hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Find unit place digits in: \\((74)^{45}\\)",
+            "explanation": "Pichle part ki tarah yahan bhi sirf base ka aakhri digit, yani 4, faisla karega.\nLekin 4 ki powers kabhi 4 par khatam hoti hain aur kabhi 6 par, is liye humein dekhna hai ke 45 wali power kis taraf jati hai.\nRule kaunsa? Binomial theorem do dafa: pehle 74 = 70 + 4, phir 16 = 10 + 6.\nPlan: \\(4^{45}\\) tak pohanchein, usay \\(4 \\cdot 16^{22}\\) likhein, aur 16 ki power ka aakhri digit dekhein.",
+            "steps": [
+              "Diya gaya hai: \\((74)^{45}\\).\nHumein find karna hai: is ka unit place digit.\nTareeqa: \\(74 = 70 + 4\\) likhne se expansion ke baad sirf \\(4^{45}\\) aakhri digit par asar daalta hai. Phir \\(4^{45}\\) ko 16 ki power mein badlenge, kyunke 16 ka aakhri digit 6 hai aur 6 ki har power 6 par khatam hoti hai, jis se kaam bohat aasaan ho jata hai.",
+              "Aakhri digit ki power tak pohanchein\n\\[(74)^{45} = (70 + 4)^{45}\\]\n\\[= 10k + 4^{45}\\]\nKyun: Expansion mein \\(4^{45}\\) ke ilawa har term mein 70 ka factor hai, aur 70 ka multiple hamesha 0 par khatam hota hai. To woh sab terms milkar \\(10k\\) ban gaye, jo aakhri digit nahi badalte.",
+              "Power ko 16 ki madad se likhein\n\\[4^{45} = 4 \\cdot 4^{44}\\]\n\\[= 4 \\cdot (4^2)^{22} = 4 \\cdot 16^{22}\\]\nKyun: 45 odd hai, is liye pehle ek 4 alag kar diya: \\(45 = 1 + 44\\). Phir \\(44 = 2 \\times 22\\), aur laws of indices \\(a^{m+n} = a^m a^n\\) aur \\(a^{mn} = (a^m)^n\\) se \\(4^{44} = (4^2)^{22} = 16^{22}\\) bana. Maqsad yeh tha ke koi aisa base mil jaye jis ka aakhri digit power lene se na badle.",
+              "\\(16^{22}\\) ka aakhri digit\n\\[16^{22} = (10 + 6)^{22}\\]\n\\[= 10h + 6^{22}\\]\nKyun: Wohi purani chaal: 10 wale sab terms 0 par khatam, sirf \\(6^{22}\\) bacha. Ab \\(6 \\times 6 = 36\\) ka aakhri digit phir 6 hai, is liye 6 ki har power 6 par khatam hoti hai (6, 36, 216, 1296, ...). Matlab \\(16^{22}\\) ka aakhri digit 6 hai.",
+              "4 se multiply karein\n\\[4 \\times 6 = 24\\]\nKyun: \\(4^{45} = 4 \\times (\\text{6 par khatam hone wala number})\\). Do numbers ke product ka aakhri digit sirf un ke aakhri digits ke product se aata hai: \\(4 \\times 6 = 24\\), yani aakhri digit 4.\nDhyan dein: 24 poora jawab nahi; unit place digit sirf ek digit hota hai, yani 4.",
+              "Tasdeeq\n\\[4^1 = 4,\\ 4^2 = 16,\\ 4^3 = 64,\\ 4^4 = 256\\]\nKyun: 4 ki powers ke aakhri digits 4, 6, 4, 6 ... baari baari aate hain: odd power par 4, even power par 6. 45 odd hai, to jawab 4 hona chahiye, aur humara jawab bhi 4 hai. Do alag raaston se ek hi jawab aaye to yaqeen pakka ho jata hai."
+            ],
+            "final_answer": "\\((74)^{45}\\) ka unit place digit \\(4\\) hai.\nYaad rakhiye: 4 ki odd power ka aakhri digit 4 aur even power ka 6 hota hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Find unit place digits in: \\((573)^{87}\\)",
+            "explanation": "Yahan base ka aakhri digit 3 hai, to humein \\(3^{87}\\) ka aakhri digit chahiye.\n3 ki powers ka aakhri digit ek jaisa nahi rehta (3, 9, 7, 1 ...), is liye hum \\(3^4 = 81\\) ki madad lenge, jo 1 par khatam hota hai.\nRule kaunsa? Binomial theorem, pehle 573 = 570 + 3 aur phir 81 = 80 + 1.\nPlan: \\(3^{87}\\) tak aayein, 81 ki power alag karein, aur phir bacha hua hissa multiply karein.",
+            "steps": [
+              "Diya gaya hai: \\((573)^{87}\\).\nHumein find karna hai: is ka unit place digit.\nTareeqa: \\(573 = 570 + 3\\) likhne se sirf \\(3^{87}\\) aakhri digit par asar daalta hai. \\(3^4 = 81\\) ka aakhri digit 1 hai, aur 1 par khatam hone wale number ki har power bhi 1 par khatam hoti hai. Is liye 87 mein se 4 ke jitne poore blocks nikal sakein, woh sab 1 ban jayenge.",
+              "Aakhri digit ki power tak pohanchein\n\\[(573)^{87} = (570 + 3)^{87}\\]\n\\[= 10k + 3^{87}\\]\nKyun: \\(3^{87}\\) ke ilawa har term mein 570 ka factor hai, jo 10 ka multiple hai. Yeh sab terms 0 par khatam hote hain aur aakhri digit ko nahi chherte.",
+              "Power ko 4 ke blocks mein torein\n\\[87 = 4 \\times 21 + 3\\]\n\\[3^{87} = 3^{3}\\cdot (3^4)^{21}\\]\n\\[= 27 \\cdot 81^{21}\\]\nKyun: 87 ko 4 se divide kiya: quotient 21, remainder 3. To \\(3^{87}\\) mein 4-4 ke 21 block hain aur 3 power bach jati hai. Har block \\(3^4 = 81\\) hai, is liye \\((3^4)^{21} = 81^{21}\\).",
+              "\\(81^{21}\\) ka aakhri digit\n\\[81^{21} = (80 + 1)^{21}\\]\n\\[= 10h + 1^{21} = 10h + 1\\]\nKyun: Expansion mein aakhri term ke ilawa har term mein 80 hai, jo 0 par khatam hota hai. Aakhri term \\(1^{21} = 1\\) hai, kyunke 1 ko kitni dafa bhi multiply karein, 1 hi rehta hai. Is liye \\(81^{21}\\) ka aakhri digit 1 hai.",
+              "27 se multiply karein\n\\[27 \\times (10h + 1) = 270h + 27\\]\nKyun: \\(270h\\) 0 par khatam hota hai, to aakhri digit sirf 27 ka aakhri digit hai, yani 7.\nDhyan dein: Remainder 3 ko bhool kar sirf \\(81^{21}\\) dekh lena aam ghalti hai; tab jawab 1 aa jata hai jo ghalat hai.",
+              "Tasdeeq\n\\[3^1 = 3,\\ 3^2 = 9,\\ 3^3 = 27,\\ 3^4 = 81\\]\nKyun: 3 ki powers ke aakhri digits 3, 9, 7, 1 ka chakkar lagate hain, jis ki lambai 4 hai. \\(87 = 4 \\times 21 + 3\\), yani 21 poore chakkar ke baad chakkar ka teesra digit aata hai, jo 7 hai. Kitab ki Example 24 bhi yehi remainder wala tareeqa use karti hai, aur jawab wohi 7 hai."
+            ],
+            "final_answer": "\\((573)^{87}\\) ka unit place digit \\(7\\) hai.\nYaad rakhiye: 3 ki powers ke aakhri digits ka chakkar 3, 9, 7, 1 hai."
+          }
+        ]
+      }
+    }
+  ]
+}

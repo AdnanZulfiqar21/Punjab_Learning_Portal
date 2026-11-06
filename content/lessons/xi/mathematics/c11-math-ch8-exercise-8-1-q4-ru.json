@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q4",
+      "title": "Question 4 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 154,
+          "pdf_to": 154,
+          "note": "Exercise 8.1, Question 4: book page 149 (PDF 154); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-1-Q4",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. [Prove by mathematical induction, for every positive integer \\(n\\):] \\(x - y\\) is a factor of \\(x^n - y^n\\); \\((x \\ne y)\\)",
+            "explanation": "\"\\(x - y\\) factor hai \\(x^n - y^n\\) ka\" ka matlab hai: \\(x^n - y^n = (x - y) \\times\\) (koi polynomial). Polynomial yani \\(x\\) aur \\(y\\) ki powers se bani terms ka jama.\nYeh numbers ki jagah algebra wala divisibility proof hai.\nPlan: \\(x^{k+1} - y^{k+1}\\) mein \\(xy^k\\) ko ek dafa minus aur ek dafa plus karna, taake purana expression \\(x^k - y^k\\) saamne aa jaye; phir hypothesis lagana aur \\(x - y\\) common nikalna.",
+            "steps": [
+              "Diya gaya hai: \\(S(n): x - y\\), \\(x^n - y^n\\) ka factor hai, \\(x \\ne y\\).\nSaabit karna hai: \\(S(n)\\) har positive integer \\(n\\) ke liye sahi hai.\nTareeqa: Mathematical induction. Statement ko equation bana lein: \\(x^n - y^n = (x - y)P_n\\), jahan \\(P_n\\) koi polynomial hai.",
+              "Base case: \\(n = 1\\) rakhein\n\\[x^1 - y^1 = (x - y) \\times 1\\]\nIs liye \\(S(1)\\) sahi hai.\nKyun: Har expression apna factor khud hota hai (1 se multiply). Yani \\(n = 1\\) par \\(x^1 - y^1\\) bilkul \\(x - y\\) hi hai, is ko \\(x - y\\) se divide karein to 1 aata hai aur koi baqi nahi bachta.",
+              "Induction hypothesis: \\(S(k)\\) ko sahi maan lein\n\\[x^k - y^k = (x - y)P_k \\quad (A)\\]\nKyun: \\(S(k)\\) kehta hai ke \\(x - y\\), \\(x^k - y^k\\) ko poora divide karta hai, is liye quotient \\(P_k\\) ek polynomial hai.",
+              "Target \\(S(k + 1)\\)\n\\[x - y\\ \\text{is a factor of}\\ x^{k+1} - y^{k+1}\\]\nKyun: \\(n = k + 1\\) rakha.",
+              "\\(xy^k\\) ko minus aur plus karein\n\\[x^{k+1} - y^{k+1}\\]\n\\[= x^{k+1} - xy^k + xy^k - y^{k+1}\\]\n\\[= x(x^k - y^k) + y^k(x - y)\\]\nKyun: Ek hi term ko minus aur plus karne se value nahi badalti (jaise \\(-5 + 5 = 0\\)), lekin is se purana expression nikal aata hai. Pehle jore mein \\(x\\) common: \\(x^{k+1} - xy^k = x(x^k - y^k)\\). Doosre jore mein \\(y^k\\) common: \\(xy^k - y^{k+1} = y^k(x - y)\\), kyunke \\(y^{k+1} = y^k \\cdot y\\).\nDhyan dein: Yeh \"add and subtract\" wali chaal yaad rakhiye; aisi bohat si proofs isi se khulti hain.",
+              "Inductive step: (A) lagayein aur \\(x - y\\) common nikalein\n\\[= x(x - y)P_k + y^k(x - y)\\]\n\\[= (x - y)[xP_k + y^k]\\]\nKyun: (A) se \\(x^k - y^k\\) ki jagah \\((x - y)P_k\\) rakha. Ab dono hisson mein \\(x - y\\) maujood hai, usay bahar nikala.",
+              "Nateeja parhein\n\\(xP_k + y^k\\) ek polynomial hai, is liye \\(x - y\\), \\(x^{k+1} - y^{k+1}\\) ka factor hai. Yani \\(S(k + 1)\\) sahi hai.\nKyun: \\(P_k\\) polynomial hai, \\(x\\) aur \\(y^k\\) bhi polynomials hain; polynomials ka product aur jama bhi polynomial hi hota hai. Is liye bracket koi aam sa algebraic expression hai, aur \\(x - y\\) us ka factor ban kar bahar khara hai.",
+              "Conclusion\n\\(S(1)\\) sahi hai aur \\(S(k)\\) se \\(S(k + 1)\\) sahi hota hai. Principle of mathematical induction se \\(x - y\\) har positive integer \\(n\\) ke liye \\(x^n - y^n\\) ka factor hai.\nKyun: Induction ki dono sharten poori ho gayin.",
+              "Tasdeeq: \\(n = 3\\)\n\\[x^3 - y^3 = (x - y)(x^2 + xy + y^2) \\;\\checkmark\\]\nKyun: Yeh difference of cubes ka jaana pehchana formula hai, jis mein \\(x - y\\) factor saaf nazar aata hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(x - y\\) har positive integer \\(n\\) ke liye \\(x^n - y^n\\) ka factor hai."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q5-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q5",
+      "title": "Question 5 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 154,
+          "pdf_to": 154,
+          "note": "Exercise 8.1, Question 5: book page 149 (PDF 154); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-1-Q5",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5. [Prove by mathematical induction:] \\(n! > 2^n - 1\\) for integral values of \\(n \\ge 4\\).",
+            "explanation": "Yeh inequality (ghair-barabari) hai jo \\(n = 4\\) se shuru hoti hai, 1 se nahi. Is liye extended induction (barhaya hua induction) lagayenge, jis ka base case \\(n = 4\\) hai.\n\\(n = 1, 2, 3\\) par yeh ghalat hai: \\(1 > 1\\), \\(2 > 3\\), \\(6 > 7\\) teeno nahi chalte. Isi liye sawal \\(n \\ge 4\\) kehta hai.\nPlan: hypothesis ko \\(k + 1\\) se multiply karna, phir \\(k + 1 \\ge 5\\) ka faida utha kar \\(2^{k+1} - 1\\) tak pohanchna. Inequality mein barabar wala hisaab nahi hota; humein bas dikhana hota hai ke ek cheez doosri se bari hai.",
+            "steps": [
+              "Diya gaya hai: \\(S(n): n! > 2^n - 1\\).\nSaabit karna hai: \\(S(n)\\) har integer \\(n \\ge 4\\) ke liye sahi hai.\nTareeqa: Extended mathematical induction: \\(S(4)\\) check karna; kisi \\(k \\ge 4\\) par \\(S(k)\\) ko sahi maanna; phir \\(S(k + 1)\\) saabit karna.",
+              "Base case: \\(n = 4\\) rakhein\n\\[4! = 24\\]\n\\[2^4 - 1 = 15\\]\n\\[24 > 15\\]\nIs liye \\(S(4)\\) sahi hai.\nKyun: \\(4! = 4 \\times 3 \\times 2 \\times 1 = 24\\) aur \\(2^4 = 16\\). Pehla domino yahan \\(n = 4\\) hai.",
+              "Induction hypothesis: \\(S(k)\\) ko sahi maan lein, \\(k \\ge 4\\)\n\\[k! > 2^k - 1 \\quad (A)\\]\nKyun: Kisi integer \\(k \\ge 4\\) par inequality ko sahi farz kiya.",
+              "Target \\(S(k + 1)\\)\n\\[(k + 1)! > 2^{k+1} - 1\\]\nKyun: \\(n = k + 1\\) rakha.",
+              "Inductive step: (A) ko \\(k + 1\\) se multiply karein\n\\[(k + 1)! = (k + 1)\\,k!\\]\n\\[> (k + 1)(2^k - 1)\\]\nKyun: Factorial ki tareef se \\((k + 1)! = (k + 1) \\times k!\\). Inequality ke dono taraf positive number \\(k + 1\\) se multiply karne se nishan \\(>\\) wahi rehta hai. Yahan hypothesis istemal hui.\nDhyan dein: Negative number se multiply karte to nishan ulta ho jata; yahan \\(k + 1\\) positive hai, is liye fikr nahi.",
+              "\\(k + 1 \\ge 5\\) ka faida uthayein\n\\[(k + 1)(2^k - 1) \\ge 5(2^k - 1)\\]\n\\[= 5 \\cdot 2^k - 5\\]\n\\[= 2^{k+1} - 1 + (3 \\cdot 2^k - 4)\\]\nKyun: \\(k \\ge 4\\) hai, to \\(k + 1 \\ge 5\\), aur \\(2^k - 1\\) positive hai; is liye \\(k + 1\\) ki jagah 5 rakhne se value chhoti ya barabar hogi. Phir \\(5 \\cdot 2^k\\) ko \\(2 \\cdot 2^k + 3 \\cdot 2^k = 2^{k+1} + 3 \\cdot 2^k\\) mein tora, aur \\(-5 = -1 - 4\\) likha, taake target \\(2^{k+1} - 1\\) alag nazar aaye.",
+              "Nateeje jorein\n\\[3 \\cdot 2^k - 4 \\ge 3 \\cdot 16 - 4 = 44 > 0\\]\n\\[(k + 1)! > 2^{k+1} - 1\\]\nIs liye \\(S(k + 1)\\) sahi hai.\nKyun: \\(k \\ge 4\\) par \\(2^k \\ge 16\\), is liye extra hissa \\(3 \\cdot 2^k - 4\\) positive hai. Ek chain bani: \\((k + 1)! > (k + 1)(2^k - 1) \\ge 2^{k+1} - 1 + \\text{(positive)} > 2^{k+1} - 1\\).",
+              "Conclusion\n\\(S(4)\\) sahi hai aur har \\(k \\ge 4\\) ke liye \\(S(k)\\) se \\(S(k + 1)\\) sahi hota hai. Principle of extended mathematical induction se \\(n! > 2^n - 1\\) har integer \\(n \\ge 4\\) ke liye sahi hai.\nKyun: Pehla domino \\(n = 4\\) wala gira, aur har domino agle ko girata hai, to 4 se aage sab girenge.",
+              "Tasdeeq: \\(n = 5\\)\n\\[5! = 120\\]\n\\[2^5 - 1 = 31,\\quad 120 > 31 \\;\\checkmark\\]\nKyun: Inequality sahi hai, aur factorial power of 2 se bahut tezi se barhta hai, is liye farq barhta hi jata hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(n! > 2^n - 1\\) har integer \\(n \\ge 4\\) ke liye."
+          }
+        ]
+      }
+    }
+  ]
+}

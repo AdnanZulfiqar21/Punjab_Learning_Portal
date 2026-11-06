@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-1-Q8-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-1-q8",
+      "title": "Question 8 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 154,
+          "pdf_to": 154,
+          "note": "Exercise 8.1, Question 8: book page 149 (PDF 154); the Answers have no Exercise 8.1 block (proofs), checked against the solution book"
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-1-Q8",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8. Aliza invests Rs. 1,000,000 in a business that promises a 6% return compounded annually. Prove by mathematical induction that the amount of money after \\(n\\) years is \\(1{,}000{,}000(1.06)^n\\).",
+            "explanation": "Yeh rozmarra zindagi ka induction wala sawal hai. Pehle alfaaz ko ek rule (formula) mein badalna hai, phir us formula ko induction se saabit karna hai.\n\"6% compounded annually\" ka matlab: har saal us waqt ki poori raqam par 6% munafa milta hai aur woh raqam mein jur jata hai; yani har saal raqam \\(1.06\\) se multiply hoti hai.\nPlan: rule \\(A_{k+1} = 1.06\\,A_k\\); pehle saal ka base case; phir rule aur hypothesis se inductive step.",
+            "steps": [
+              "Diya gaya hai: asal raqam (principal) Rs. 1,000,000; munafa 6% salana, compounded annually.\nSaabit karna hai: \\(S(n)\\): \\(n\\) saal baad raqam \\(A_n = 1{,}000{,}000(1.06)^n\\), har positive integer \\(n\\) ke liye.\nTareeqa: Pehle saal-ba-saal ka rule nikalein, phir mathematical induction.",
+              "Alfaaz ko rule mein badlein\n\\[A_{k+1} = A_k + 0.06\\,A_k\\]\n\\[= 1.06\\,A_k\\]\nKyun: Har saal ke shuru mein jo raqam \\(A_k\\) hai, us ka 6% yani \\(0.06\\,A_k\\) munafa milta hai, aur woh raqam mein jama ho jata hai. \\(A_k\\) common nikala: \\(A_k(1 + 0.06) = 1.06\\,A_k\\). Compound ka matlab yahi hai ke agle saal ka munafa bari raqam par lagta hai.",
+              "Base case: \\(n = 1\\)\n\\[A_1 = 1{,}000{,}000 + 60{,}000\\]\n\\[= 1{,}060{,}000\\]\n\\[1{,}000{,}000(1.06)^1 = 1{,}060{,}000\\]\nIs liye \\(S(1)\\) sahi hai.\nKyun: 1,000,000 ka 6% = 60,000. Pehle saal ke baad raqam formula se bhi wahi aati hai.",
+              "Induction hypothesis: \\(S(k)\\) ko sahi maan lein\n\\[A_k = 1{,}000{,}000(1.06)^k \\quad (A)\\]\nKyun: Farz kiya ke \\(k\\) saal baad formula sahi raqam deta hai.",
+              "Target \\(S(k + 1)\\)\n\\[A_{k+1} = 1{,}000{,}000(1.06)^{k+1}\\]\nKyun: \\(n = k + 1\\) rakha.",
+              "Inductive step: pehle rule, phir (A)\n\\[A_{k+1} = 1.06\\,A_k\\]\n\\[= 1.06 \\times 1{,}000{,}000(1.06)^k\\]\n\\[= 1{,}000{,}000(1.06)^{k+1}\\]\nKyun: Saalana rule agli raqam deta hai; (A) se \\(A_k\\) ki jagah formula rakha; aur \\(1.06^1 \\times 1.06^k = 1.06^{k+1}\\), kyunke same base par powers jama hoti hain.\nDhyan dein: Simple interest ki tarah har saal sirf 60,000 jama karna ghalat hai; compound mein munafa har saal barhta hai.",
+              "Conclusion\n\\(S(1)\\) sahi hai aur \\(S(k)\\) se \\(S(k + 1)\\) sahi hota hai. Principle of mathematical induction se \\(n\\) saal baad raqam Rs. \\(1{,}000{,}000(1.06)^n\\) hai, har positive integer \\(n\\) ke liye.\nKyun: Induction ki dono sharten poori ho gayin.",
+              "Tasdeeq: \\(n = 2\\)\n\\[1{,}060{,}000 + 63{,}600 = 1{,}123{,}600\\]\n\\[1{,}000{,}000(1.06)^2 = 1{,}123{,}600 \\;\\checkmark\\]\nKyun: Doosre saal 1,060,000 ka 6% yani 63,600 munafa mila (pehle saal se 3,600 zyada, yahi compounding ka asar hai). Dono tareeqon se ek hi jawab aaya."
+            ],
+            "final_answer": "Saabit ho gaya: \\(n\\) saal baad raqam Rs. \\(1{,}000{,}000(1.06)^n\\) hai."
+          }
+        ]
+      }
+    }
+  ]
+}

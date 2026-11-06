@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.1.1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.1.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 151,
+          "pdf_to": 152,
+          "note": "Book p. 146-147: 8.1.1 statement (conditions 1-3), Example 7 and the first printed Example 8 (4^n > 3^n + 4). Teaching notes, Key points, Common mistakes are ours."
+        }
+      ],
+      "title": "8.1.1 Principle of Extended Mathematical Induction (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH8-8.1.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum! 8.1 mein har statement \\(n = 1\\) (ya \\(n = 0\\)) se shuru hoti thi. Lekin kuch baatein aisi hoti hain jo chhote numbers par sach nahin hotin, aur kisi khaas number ke baad hamesha sach hoti hain. Kuch statements negative number se bhi shuru hoti hain. Aisi statements ke liye induction ka tareeqa wahi hai, bas base case us pehle integer \\(i\\) par check kiya jata hai jahan se statement shuru hoti hai. Isi ko Principle of Extended Mathematical Induction (phaila hua ya wasee induction) kehte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Maan lijiye \\(i\\) koi integer hai. Agar koi formula, identity ya statement \\(S(n)\\), jo \\(n \\ge i\\) ke liye hai, aisi ho ke"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Base Case: \\(S(i)\\) sach ho, aur",
+              "Induction of Hypothesis: jab bhi kisi integer \\(k \\ge i\\) ke liye \\(S(k)\\) sach ho, to \\(S(k + 1)\\) bhi sach ho,",
+              "Conclusion: to \\(S(n)\\) tamam integers \\(n \\ge i\\) ke liye sach hai."
+            ],
+            "bold": [
+              "Base Case:",
+              "Induction of Hypothesis:",
+              "Conclusion:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Doosri sharat mein kitab \"for any integer \\(n \\ge i\\)\" chhapti hai. Hypothesis mein letter \\(k\\) hai, is liye sahi \"for any integer \\(k \\ge i\\)\" hai, jaisa upar likha gaya hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Dominoes wali misaal yaad kijiye. Ab zanjeer pehle domino se nahin, domino number \\(i\\) se shuru hoti hai:\n\\[S(i) \\Rightarrow S(i + 1) \\Rightarrow S(i + 2) \\Rightarrow \\cdots\\]\nIs ki zaroorat kyun? Kuch baatein chhoti values par ghalat hoti hain. Misal: \\(4^{n} > 3^{n} + 4\\) \\(n = 1\\) par ghalat hai (\\(4 > 7\\) ghalat hai), lekin \\(n = 2\\) se aage har \\(n\\) par sach hai. Agar hum \\(n = 1\\) se induction shuru karte to base case hi fail ho jata. Is liye hum \\(i = 2\\) se shuru karte hain.\nAgar \\(i = 1\\) ho to yeh bilkul 8.1 wala usool hi hai. Yani extended induction koi nayi cheez nahin, sirf shuruaat ki jagah badal gayi hai.\nDhyan dein: \\(n \\ge -2\\) ka matlab hai \\(n = -2, -1, 0, 1, 2, \\ldots\\) Negative integers bhi shamil hain, is liye yahan \\(n \\in \\mathbb{N}\\) nahin balke \\(n \\in \\mathbb{Z}\\) (integers) likhte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki do misaalein dekhte hain. Pehli misaal negative number se shuru hoti hai aur doosri ek inequality (ghair barabari) hai, jo induction mein pehli dafa aa rahi hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Show that \\(1 + 3 + 5 + \\ldots + (2n + 5) = (n + 3)^{2}\\) for integral values of \\(n \\ge -2\\).",
+            "steps": [
+              "Given: \\(S(n): 1 + 3 + 5 + \\ldots + (2n + 5) = (n + 3)^{2}\\), integers \\(n \\ge -2\\) ke liye.\nTo prove: har integer \\(n \\ge -2\\) ke liye \\(S(n)\\) sach hai.\nMethod: sab se pehle dekhte hain ke statement \\(n = -2\\) se shuru hai. Is liye extended induction lagayenge, \\(i = -2\\): pehle \\(S(-2)\\) check, phir \\(S(k) \\Rightarrow S(k + 1)\\).",
+              "Step 1: Base case (n = -2)\n\\(n = -2\\) par aakhri term \\(2(-2) + 5 = 1\\) hai, yani left side sirf 1 hai:\n\\[2(-2) + 5 = (-2 + 3)^{2}\\]\n\\[1 = (1)^{2}\\]\nYeh sach hai, is liye \\(S(-2)\\) sach hai, base case poora.\nKyun: series 1, 3, 5, ... jo \\(2n + 5\\) tak jati hai, us mein \\(n + 3\\) terms hain. \\(n = -2\\) par sirf ek term (1) hai. Shuru mein yeh ajeeb lagta hai ke negative \\(n\\) par sum kaise, magar dekhiye: \\(n\\) sirf yeh batata hai ke series kahan rukti hai.",
+              "Step 2: Induction hypothesis\nFarz karein ke kisi integer \\(n = k \\ge -2\\) ke liye equation sach hai:\n\\[1 + 3 + 5 + \\ldots + (2k + 5) = (k + 3)^{2} \\quad (A)\\]",
+              "Step 3: S(k + 1) likhein (hamari manzil)\n\\(2k + 5\\) ke baad agla odd number \\(2(k + 1) + 5 = 2k + 7\\) hai:\n\\[1 + 3 + \\ldots + (2k + 5) + (2k + 7)\\]\n\\[= (k + 1 + 3)^{2} = (k + 4)^{2} \\quad (B)\\]\nKyun: aakhri term \\(2n + 5\\) aur right side \\((n + 3)^{2}\\) dono mein \\(n = k + 1\\) rakha. Har agla odd number pichle se 2 zyada hota hai: \\((2k + 5) + 2 = 2k + 7\\).",
+              "Step 4: (A) ke dono taraf (2k + 7) jama karein\n\\[1 + 3 + \\ldots + (2k + 5) + (2k + 7)\\]\n\\[= (k + 3)^{2} + (2k + 7)\\]\n\\[= k^{2} + 6k + 9 + 2k + 7\\]\n\\[= k^{2} + 8k + 16 = (k + 4)^{2}\\]\nFormula \\(k + 1\\) ke liye bhi sach hai.\nKyun: \\((k + 3)^{2} = k^{2} + 6k + 9\\) (identity \\((a + b)^{2} = a^{2} + 2ab + b^{2}\\)). Jama karne ke baad \\(k^{2} + 8k + 16\\) bana, jo perfect square \\((k + 4)^{2}\\) hai, kyun ke \\(2 \\times k \\times 4 = 8k\\) aur \\(4^{2} = 16\\). Yahi (B) ki right side hai.",
+              "Step 5: Conclusion\nDono sharatein poori hain, is liye equation tamam integers \\(n \\ge -2\\) ke liye sach hai.",
+              "Tasdeeq:\n\\(n = 0\\): aakhri term \\(2(0) + 5 = 5\\), to \\(1 + 3 + 5 = 9 = (0 + 3)^{2}\\). \\(n = 1\\): \\(1 + 3 + 5 + 7 = 16 = 4^{2}\\). Sahi."
+            ],
+            "answer": "Saabit ho gaya: \\(1 + 3 + 5 + \\ldots + (2n + 5) = (n + 3)^{2}\\) tamam integers \\(n \\ge -2\\) ke liye."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 7 ki statement kitab mein \\(1 + 3 + 5 + \\ldots (2n + 5) = (n + 3)^{2}\\) chhapi hai; aakhri term se pehle jama (+) ka nishan reh gaya hai. Sahi: \\(1 + 3 + 5 + \\ldots + (2n + 5) = (n + 3)^{2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "1. Example 7 mein \\(n = -1\\) par kya hota hai? (Jawab: aakhri term \\(2(-1) + 5 = 3\\), to \\(1 + 3 = 4 = (-1 + 3)^{2}\\). Sahi.)\n2. Kya \\(n = -3\\) par bhi formula chalega? (Jawab: aakhri term \\(-1\\) ban jata hai, jo series 1, 3, 5, ... ka term hi nahin. Isi liye statement \\(n \\ge -2\\) se shuru ki gayi hai.)\n3. Example 7 aur 8.1 ki intro wali statement \\(1 + 3 + \\ldots + (2n - 1) = n^{2}\\) mein kya rishta hai? (Jawab: dono ek hi baat hain; \\(n + 3\\) terms ka sum \\((n + 3)^{2}\\) hai. Sirf ginti ka tareeqa badla hai.)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab ek inequality. Inequality mein \"barabar\" nahin balke \"bara\" (\\(>\\)) ka nishan hota hai, is liye step ka tareeqa thora mukhtalif hai. Do qaide yaad rakhiye: (1) inequality ke dono taraf kisi positive number se zarb karne se nishan nahin badalta; (2) agar \\(a > b + c\\) ho aur \\(c\\) positive ho, to \\(a > b\\) bhi sach hai, kyun ke \\(b\\) to \\(b + c\\) se bhi chhota hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Show that the inequality \\(4^{n} > 3^{n} + 4\\) is true, for integral values of \\(n \\ge 2\\).",
+            "steps": [
+              "Given: \\(S(n): 4^{n} > 3^{n} + 4\\), integers \\(n \\ge 2\\) ke liye.\nTo prove: har integer \\(n \\ge 2\\) ke liye \\(S(n)\\) sach hai.\nMethod: extended induction, \\(i = 2\\). Inequality mein hum farz ko kisi positive number se zarb karte hain aur phir muqabla karte hain.",
+              "Step 1: Base case (n = 2)\n\\[S(2): 4^{2} > 3^{2} + 4\\]\n\\[\\text{i.e., } 16 > 13\\]\nYeh sach hai, is liye \\(S(2)\\) sach hai, base case poora.\nKyun: statement \\(n = 2\\) se shuru hai. \\(n = 1\\) par yeh \\(4 > 7\\) kehti, jo ghalat hai; isi liye kitab 2 se shuru karti hai.",
+              "Step 2: Induction hypothesis\nFarz karein ke kisi integer \\(n = k \\ge 2\\) ke liye statement sach hai:\n\\[4^{k} > 3^{k} + 4 \\quad (A)\\]",
+              "Step 3: (A) ke dono taraf 4 se zarb karein\n\\[4 \\cdot 4^{k} > 4(3^{k} + 4)\\]\n\\[\\text{or}\\quad 4^{k + 1} > (3 + 1)3^{k} + 16\\]\nKyun: humein \\(S(k + 1)\\) ki left side \\(4^{k + 1}\\) chahiye, aur \\(4 \\cdot 4^{k} = 4^{k + 1}\\). 4 positive hai, is liye \\(>\\) ka nishan wahi rehta hai. 4 ko \\(3 + 1\\) likhne ki chaal agle qadam mein \\(3^{k + 1}\\) nikaalne ke liye hai.",
+              "Step 4: Right side ko todein\n\\[(3 + 1)3^{k} + 16 = 3^{k + 1} + 3^{k} + 16\\]\n\\[4^{k + 1} > 3^{k + 1} + 4 + 3^{k} + 12\\]\nKyun: \\(3 \\cdot 3^{k} = 3^{k + 1}\\) (same base, powers jama: \\(3^{1} \\cdot 3^{k} = 3^{k + 1}\\)). Phir 16 ko \\(4 + 12\\) mein toda taa ke \\(3^{k + 1} + 4\\), yani \\(S(k + 1)\\) ki right side, saaf nazar aaye.",
+              "Step 5: Positive hissa hata dein\n\\[4^{k + 1} > 3^{k + 1} + 4 \\quad (B)\\]\nKyun \\(3^{k} + 12 > 0\\) hai. Inequality (B) dikhati hai ke statement \\(k + 1\\) ke liye bhi sach hai.\nKyun: \\(4^{k + 1}\\) to \\(3^{k + 1} + 4 + (3^{k} + 12)\\) se bhi bara hai; agar chhoti taraf se positive hissa \\(3^{k} + 12\\) hata dein to woh aur chhoti ho jati hai, is liye \\(4^{k + 1}\\) us se zaroor bara rahega.",
+              "Step 6: Conclusion\nDono sharatein poori hain, is liye extended mathematical induction ke usool se di gayi inequality tamam integers \\(n \\ge 2\\) ke liye sach hai.",
+              "Tasdeeq:\n\\(n = 3\\): \\(4^{3} = 64\\) aur \\(3^{3} + 4 = 31\\); \\(64 > 31\\). \\(n = 4\\): \\(256 > 85\\). Sach."
+            ],
+            "answer": "Saabit ho gaya: \\(4^{n} > 3^{n} + 4\\) tamam integers \\(n \\ge 2\\) ke liye."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 8 ki teesri line kitab mein \\(4^{k+1} > 3^{k-1} + 4 + 3^{k} + 12\\) chhapi hai; sahi \\(4^{k+1} > 3^{k+1} + 4 + 3^{k} + 12\\) hai, kyun ke \\(3 \\cdot 3^{k} = 3^{k+1}\\).\nWajah \\((\\because 3k + 12 > 0)\\) chhapi hai; sahi \\((\\because 3^{k} + 12 > 0)\\) hai, kyun ke jo hissa hataya gaya woh \\(3^{k} + 12\\) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "Inequality wale induction mein sab se aam ghalti yeh hoti hai ke bachay galat taraf se cheez hata dete hain. Qaida yaad rakhiye: bari taraf (\\(>\\) ke baayein) ko hamesha waisa hi rehne dein. Chhoti taraf (\\(>\\) ke daayein) se koi positive cheez hata sakte hain, kyun ke chhoti cheez aur chhoti ho jaye to bari phir bhi bari rehti hai.\nMisal: agar Ali ki umar Sara ki umar + 5 saal se zyada hai, to Ali ki umar Sara ki umar se to zaroor zyada hai. Yahan 5 saal woh positive hissa hai jo hum ne hataya."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahin. Saabit kijiye ke \\(n! > 2^{n}\\) tamam integers \\(n \\ge 4\\) ke liye.\nPehle dekhiye ke \\(n = 3\\) par yeh ghalat hai: \\(3! = 6\\) aur \\(2^{3} = 8\\). Isi liye \\(i = 4\\) se shuru karna parega.\nBase case (\\(n = 4\\)): \\(4! = 24 > 16 = 2^{4}\\). Sach.\nHypothesis: farz karein \\(k! > 2^{k}\\), jahan \\(k \\ge 4\\).\nStep: dono taraf \\((k + 1)\\) se zarb (positive hai): \\((k + 1)! > (k + 1)2^{k}\\). Ab \\(k + 1 \\ge 5 > 2\\), is liye \\((k + 1)2^{k} > 2 \\cdot 2^{k} = 2^{k + 1}\\). Dono ko mila kar \\((k + 1)! > 2^{k + 1}\\).\nConclusion: extended induction se \\(n! > 2^{n}\\) tamam \\(n \\ge 4\\) ke liye sach hai. Dekhiye, yahan bhi Example 8 wali do chaalein hain: positive number se zarb, aur phir muqabla."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Extended induction tamam integers \\(n \\ge i\\) ke liye \\(S(n)\\) saabit karta hai; \\(i\\) koi bhi integer ho sakta hai (0, negative, ya 1 se bara).\n2. Base case \\(S(i)\\) hai, yani statement ki pehli value; step \\(S(k) \\Rightarrow S(k + 1)\\) \\(k \\ge i\\) ke liye saabit hota hai.\n3. Inequality mein: farz ko positive number se zarb kar ke \\(S(k + 1)\\) ki left side banaein, phir right side ko is tarah todein ke \\(S(k + 1)\\) ki right side + koi positive hissa aaye, aur woh positive hissa hata dein.\n4. Chhoti values par statement ghalat ho sakti hai; isi liye pehle check kijiye ke statement kis value se shuru ho rahi hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Statement kisi aur value se shuru ho (Example 7 mein \\(-2\\), Example 8 mein 2) aur base case phir bhi \\(n = 1\\) par lagana. Bachne ka tareeqa: sawal mein \"\\(n \\ge \\ldots\\)\" dhoondiye; wahi number base case hai.\n2. Inequality ko negative number se zarb kar ke nishan na palatna. Induction ke saboot mein sirf positive numbers se zarb kijiye.\n3. Bari taraf se koi hissa hata dena. Positive hissa sirf chhoti taraf se hataya ja sakta hai: \\(a > b + c\\) aur \\(c > 0\\) ho to \\(a > b\\).\n4. \\(3 \\cdot 3^{k} = 9^{k}\\) likh dena. Sahi \\(3 \\cdot 3^{k} = 3^{k + 1}\\) hai; base wahi rehta hai, sirf power ek barhti hai."
+          }
+        ]
+      }
+    }
+  ]
+}

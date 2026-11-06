@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q6-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q6",
+      "title": "Question 6 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 6: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-4-Q6",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(i)",
+            "prompt": "6 (i) Approximate the following: \\((1 - 0.02)^{50}\\)",
+            "explanation": "Yahan \\(x = -0.02\\) chhota hai, lekin \\(n = 50\\) bara hai, is liye \\(nx = -1\\) chhota nahi.\nMatlab sirf do teen terms le kar ruk nahi sakte; terms tab tak jama karne hain jab tak woh bohat chhote na ho jayein.\nRule kaunsa? General term \\(T_{r+1} = {}^{50}C_r(-0.02)^r\\).\nPlan: terms ek ek kar ke nikaalein, phir jama karein, aur 4 decimal tak jawab dein.",
+            "steps": [
+              "Diya gaya hai: \\((1 - 0.02)^{50}\\).\nHumein find karna hai: is ki taqreeban (approximate) value.\nTareeqa: \\((1 + x)^n\\) ki binomial expansion, jahan \\(x = -0.02\\) aur \\(n = 50\\). Har term \\({}^{50}C_r(0.02)^r\\) hai, sign \\((-1)^r\\) ke mutabiq. Hum tab rukenge jab agla term 4th decimal ko na chhere.",
+              "General term\n\\[T_{r+1} = {}^{50}C_r\\,(-0.02)^r\\]\nKyun: \\((1 + x)^n\\) ka general term \\({}^nC_r x^r\\) hai. Jab \\(r\\) odd ho to \\((-0.02)^r\\) negative hota hai, is liye terms ke signs baari baari badalte hain.",
+              "Pehle terms\n\\[T_1 = 1,\\quad T_2 = -50(0.02) = -1\\]\n\\[T_3 = 1225(0.0004) = 0.49\\]\n\\[T_4 = -19600(0.000008)\\]\n\\[= -0.1568\\]\nKyun: \\({}^{50}C_2 = \\frac{50 \\cdot 49}{2} = 1225\\) aur \\({}^{50}C_3 = \\frac{50 \\cdot 49 \\cdot 48}{6} = 19600\\). \\((0.02)^r\\) se multiply karna asal mein \\(2^r\\) se multiply kar ke decimal \\(2r\\) jagah left le jana hai.\nDhyan dein: Pehle do terms \\(1 - 1 = 0\\) ho gaye; is se ghabrayein nahi, asal value baad wale terms se banti hai. Isi liye 'sirf do terms' wala shortcut yahan bilkul ghalat jawab deta.",
+              "Agle terms\n\\[T_5 = 230300(0.02)^4 = 0.036848\\]\n\\[T_6 = -0.006780\\]\n\\[T_7 = 0.001017\\]\n\\[T_8 = -0.000128\\]\n\\[T_9 = 0.000014,\\ T_{10} = -0.000001\\]\nKyun: Coefficients \\({}^{50}C_4 = 230300\\), \\({}^{50}C_5 = 2118760\\), \\({}^{50}C_6 = 15890700\\), \\({}^{50}C_7 = 99884400\\), \\({}^{50}C_8 = 536878650\\). Coefficient barhta hai lekin \\((0.02)^r\\) us se kahin tez chhota hota hai, is liye terms ab tezi se chhote ho rahe hain.",
+              "Terms jama karein\n\\[1 - 1 + 0.49 - 0.1568 = 0.3332\\]\n\\[+ 0.036848 - 0.006780 = 0.363268\\]\n\\[+ 0.001017 - 0.000128 = 0.364157\\]\n\\[+ 0.000014 - 0.000001 = 0.364170\\]\nKyun: Do do terms ke jore bana kar jama karne se hisaab saaf rehta hai aur ghalti ka chance kam hota hai. Is ke baad wale terms 0.0000002 se bhi chhote hain, 4th decimal ko nahi chhoo sakte.",
+              "Tasdeeq\n\\[(0.98)^{50} = 0.36417\\ldots\\]\nKyun: Calculator 0.3641697 deta hai, jo humare jawab se paanch decimal tak milta hai. Matlab binomial wala hisaab bilkul theek hai."
+            ],
+            "final_answer": "\\((1 - 0.02)^{50} \\approx 0.3642\\)\nSabaq: jab \\(nx\\) chhota na ho to bohat se terms lene parte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key mein \\(0.3679\\) (approximately) likha hai. Yeh asal mein \\(e^{-1}\\) ki value hai, jo sirf ek mota sa andaza hai. Binomial expansion (aur calculator) se sahi jawab \\((0.98)^{50} = 0.3642\\) (4 decimal tak) hai; exam mein yehi likhiye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(ii)",
+            "prompt": "6 (ii) Approximate the following: \\((1 - 0.01)^{1000}\\)",
+            "explanation": "Yahan \\(nx = 1000 \\times 0.01 = 10\\) hai, yani expansion ke shuru ke terms pehle bohat bare hote hain (49.95, 166 ...) aur phir kahin ja kar chhote hote hain.\nSeedha expansion karein to darjanon bare bare terms jama karne parenge, jo na mumkin ki had tak lamba kaam hai.\nRule kaunsa? Laws of indices se power ko torna: \\((0.99)^{1000} = [(0.99)^{100}]^{10}\\), phir binomial theorem sirf power 100 par.\nPlan: \\((1 - 0.01)^{100}\\) ki value nikaalein, phir usay baar baar square kar ke 10th power tak le jayein.",
+            "steps": [
+              "Diya gaya hai: \\((1 - 0.01)^{1000}\\).\nHumein find karna hai: is ki approximate value.\nTareeqa: \\(1000 = 100 \\times 10\\). \\((1 - 0.01)^{100}\\) mein \\(nx = 1\\) hai aur terms das ke qareeb terms ke baad bohat chhote ho jate hain. Phir jo value aaye usay square aur multiply kar ke 10th power tak le jayenge.",
+              "Power ko torein\n\\[(0.99)^{1000} = \\left[(0.99)^{100}\\right]^{10}\\]\nKyun: Law of indices \\(a^{mn} = (a^m)^n\\). Bari power ko do chhoti powers mein todna bara bojh do halke bojh banane jaisa hai.",
+              "\\((1 - 0.01)^{100}\\) ke terms\n\\[1 - 1 + 0.495 - 0.1617\\]\n\\[+ 0.039212 - 0.007529\\]\n\\[+ 0.001192 - 0.000160\\]\n\\[+ 0.000019 - 0.000002\\]\nKyun: \\(T_{r+1} = {}^{100}C_r(-0.01)^r\\). Misaal ke taur par \\({}^{100}C_2 = 4950\\) se \\(4950 \\times 0.0001 = 0.495\\), aur \\({}^{100}C_3 = 161700\\) se \\(-0.1617\\). \\((0.01)^r\\) se multiply karna sirf decimal ko \\(2r\\) jagah left khiskana hai.",
+              "Jama karein\n\\[(0.99)^{100} \\approx 0.366032\\]\nKyun: Running sum: 0, 0.495, 0.3333, 0.372512, 0.364983, 0.366176, 0.366016, 0.366035, 0.366032. Is ke baad terms 0.0000002 se chhote hain, to hum ruk gaye.",
+              "10th power tak le jayein\n\\[a = 0.366032,\\quad a^2 \\approx 0.133979\\]\n\\[a^4 = (a^2)^2 \\approx 0.017950\\]\n\\[a^5 = a^4 \\cdot a \\approx 0.006570\\]\n\\[a^{10} = (a^5)^2 \\approx 0.0000432\\]\nKyun: \\(a\\) ko das dafa multiply karne ke bajaye chaar multiplications kaafi hain: square se \\(a^2\\), phir square se \\(a^4\\), ek \\(a\\) aur se \\(a^5\\), aur aakhir mein square se \\(a^{10}\\). Is tarah ghalti ka chance bhi kam hai.\nDhyan dein: Decimal ki jagah ka khaas khayal rakhein: \\(0.0000432\\) mein point ke baad chaar zero hain.",
+              "Tasdeeq\n\\[(0.99)^{1000} = 0.00004317\\ldots\\]\nKyun: Calculator \\(4.317 \\times 10^{-5}\\) deta hai, jo humare jawab ke bilkul barabar hai."
+            ],
+            "final_answer": "\\((1 - 0.01)^{1000} \\approx 0.0000432 = 4.32 \\times 10^{-5}\\)\nSabaq: bari power ho to pehle laws of indices se usay chhoti powers mein toriye."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key mein \\(0.000045\\) likha hai. Yeh \\(e^{-10} \\approx 0.0000454\\) hai, sirf ek mota andaza. Binomial hisaab (aur calculator) se sahi jawab \\((0.99)^{1000} \\approx 0.0000432\\) hai."
+          }
+        ]
+      }
+    }
+  ]
+}

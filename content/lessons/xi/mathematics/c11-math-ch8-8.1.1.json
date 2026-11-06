@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.1.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.1.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 151,
+          "pdf_to": 152,
+          "note": "Book p. 146-147: 8.1.1 statement (conditions 1-3), Example 7 and the first printed Example 8 (4^n > 3^n + 4). Teaching notes, Key points, Common mistakes are ours."
+        }
+      ],
+      "title": "8.1.1 Principle of Extended Mathematical Induction",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Let \\(i\\) be an integer. A formula or identity or statement \\(S(n)\\) for \\(n \\ge i\\) is such that"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Base Case: \\(S(i)\\) is true and",
+              "Induction of Hypothesis: \\(S(k + 1)\\) is true whenever \\(S(k)\\) is true for any integer \\(n \\ge i\\).",
+              "Conclusion: \\(S(n)\\) is true for all integers \\(n \\ge i\\)."
+            ],
+            "bold": [
+              "Base Case:",
+              "Induction of Hypothesis:",
+              "Conclusion:"
+            ],
+            "book_errors": [
+              "for any integer \\(n \\ge i\\)."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In condition 2 the book prints \"for any integer \\(n \\ge i\\)\". The letter in the hypothesis is \\(k\\): \\(S(k + 1)\\) is true whenever \\(S(k)\\) is true for any integer \\(k \\ge i\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The chain of dominoes now starts at domino number \\(i\\) instead of domino number 1:\n\\[S(i) \\Rightarrow S(i + 1) \\Rightarrow S(i + 2) \\Rightarrow \\cdots\\]\nWhy is this needed? Some statements are false for small values. For example \\(4^{n} > 3^{n} + 4\\) is false for \\(n = 1\\) (\\(4 > 7\\) is false) but true for every \\(n \\ge 2\\). Ordinary induction from \\(n = 1\\) would fail at the base case, so we start at \\(i = 2\\).\nWhen \\(i = 1\\) this is exactly the principle of 8.1."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Show that \\(1 + 3 + 5 + \\ldots (2n + 5) = (n + 3)^{2}\\) for integral values of \\(n \\ge -2\\).",
+            "steps": [
+              "Given: \\(S(n): 1 + 3 + 5 + \\ldots + (2n + 5) = (n + 3)^{2}\\), for integers \\(n \\ge -2\\).\nTo prove: \\(S(n)\\) for every integer \\(n \\ge -2\\).\nMethod: extended induction with \\(i = -2\\): check \\(S(-2)\\), then show \\(S(k) \\Rightarrow S(k + 1)\\) for \\(k \\ge -2\\).",
+              "Step 1: Base case (n = -2)\nFor \\(n = -2\\) the last term is \\(2(-2) + 5 = 1\\), so the left side is just 1:\n\\[2(-2) + 5 = (-2 + 3)^{2}\\]\n\\[1 = (1)^{2}\\]\nwhich is true. Thus \\(S(-2)\\) is true, i.e., the base case is satisfied.\nWhy: the statement starts at \\(n = -2\\), so that is where the chain must begin. The series 1, 3, 5, ... up to \\(2n + 5\\) has \\(n + 3\\) terms; at \\(n = -2\\) that is one term.",
+              "Step 2: Induction hypothesis\nLet the equation be true for any \\(n = k \\in \\mathbb{Z}\\), \\(k \\ge -2\\), so that\n\\[1 + 3 + 5 + \\ldots + (2k + 5) = (k + 3)^{2} \\quad (A)\\]",
+              "Step 3: Write S(k + 1) (our target)\nThe next odd number after \\(2k + 5\\) is \\(2(k + 1) + 5 = 2k + 7\\):\n\\[1 + 3 + \\ldots + (2k + 5) + (2k + 7)\\]\n\\[= (k + 1 + 3)^{2} = (k + 4)^{2} \\quad (B)\\]\nWhy: put \\(n = k + 1\\) in the last term \\(2n + 5\\) and in \\((n + 3)^{2}\\).",
+              "Step 4: Add (2k + 7) on both sides of (A)\n\\[1 + 3 + \\ldots + (2k + 5) + (2k + 7)\\]\n\\[= (k + 3)^{2} + (2k + 7)\\]\n\\[= k^{2} + 6k + 9 + 2k + 7\\]\n\\[= k^{2} + 8k + 16 = (k + 4)^{2}\\]\nThe formula holds for \\(k + 1\\).\nWhy: \\((k + 3)^{2} = k^{2} + 6k + 9\\); after adding, \\(k^{2} + 8k + 16\\) is a perfect square, \\((k + 4)^{2}\\), which is the right side of (B).",
+              "Step 5: Conclusion\nAs both the conditions are satisfied, we conclude that the equation is true for all integers \\(n \\ge -2\\).",
+              "Check:\n\\(n = 0\\): last term \\(2(0) + 5 = 5\\), so \\(1 + 3 + 5 = 9 = (0 + 3)^{2}\\). \\(n = 1\\): \\(1 + 3 + 5 + 7 = 16 = 4^{2}\\). Correct."
+            ],
+            "answer": "Hence proved: \\(1 + 3 + 5 + \\ldots + (2n + 5) = (n + 3)^{2}\\) for all integers \\(n \\ge -2\\).",
+            "book_errors": [
+              "\\(1 + 3 + 5 + \\ldots (2n + 5) = (n + 3)^{2}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 7: the statement is printed \\(1 + 3 + 5 + \\ldots (2n + 5) = (n + 3)^{2}\\); a plus sign is missing before the last term. It should be \\(1 + 3 + 5 + \\ldots + (2n + 5) = (n + 3)^{2}\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Show that the inequality \\(4^{n} > 3^{n} + 4\\) is true, for integral values of \\(n \\ge 2\\).",
+            "steps": [
+              "Given: \\(S(n): 4^{n} > 3^{n} + 4\\) for integral values of \\(n \\ge 2\\).\nTo prove: \\(S(n)\\) for every integer \\(n \\ge 2\\).\nMethod: extended induction with \\(i = 2\\). For an inequality we multiply the hypothesis by a positive number and then compare.",
+              "Step 1: Base case (n = 2)\n\\[S(2): 4^{2} > 3^{2} + 4\\]\n\\[\\text{i.e., } 16 > 13\\]\nwhich is true. Thus \\(S(2)\\) is true, i.e., the base case is satisfied.\nWhy: the statement starts at \\(n = 2\\). (At \\(n = 1\\) it would say \\(4 > 7\\), which is false; that is why the book starts at 2.)",
+              "Step 2: Induction hypothesis\nLet the statement be true for any \\(n = k\\ (\\ge 2) \\in \\mathbb{Z}\\), that is,\n\\[4^{k} > 3^{k} + 4 \\quad (A)\\]",
+              "Step 3: Multiply both sides of (A) by 4\n\\[4 \\cdot 4^{k} > 4(3^{k} + 4)\\]\n\\[\\text{or}\\quad 4^{k + 1} > (3 + 1)3^{k} + 16\\]\nWhy: \\(4 \\cdot 4^{k} = 4^{k + 1}\\) is the left side of \\(S(k + 1)\\). Multiplying an inequality by a positive number keeps its direction. Writing 4 as \\(3 + 1\\) will bring out \\(3^{k + 1}\\).",
+              "Step 4: Split the right side\nThe book prints this line as\n\\[4^{k + 1} > 3^{k - 1} + 4 + 3^{k} + 12\\]\n(the first power is a misprint; see the Book correction). Correctly,\n\\[(3 + 1)3^{k} + 16 = 3^{k + 1} + 3^{k} + 16\\]\n\\[4^{k + 1} > 3^{k + 1} + 4 + 3^{k} + 12\\]\nWhy: \\(3 \\cdot 3^{k} = 3^{k + 1}\\), and we split 16 as \\(4 + 12\\) so that \\(3^{k + 1} + 4\\), the right side of \\(S(k + 1)\\), appears.",
+              "Step 5: Drop the positive part\n\\[4^{k + 1} > 3^{k + 1} + 4 \\quad (B)\\]\nThe book gives the reason as \\((\\because 3k + 12 > 0)\\); the positive quantity dropped is \\(3^{k} + 12\\).\nThe inequality (B) shows that the statement holds for \\(k + 1\\).\nWhy: if \\(a > b + c\\) and \\(c > 0\\), then \\(a > b\\). Here \\(c = 3^{k} + 12\\), which is positive.",
+              "Step 6: Conclusion\nSince both the conditions are satisfied, therefore, by the principle of extended mathematical induction, the given inequality is true for all integers \\(n \\ge 2\\).",
+              "Check:\n\\(n = 3\\): \\(4^{3} = 64\\) and \\(3^{3} + 4 = 31\\); \\(64 > 31\\). \\(n = 4\\): \\(256 > 85\\). True."
+            ],
+            "answer": "Hence proved: \\(4^{n} > 3^{n} + 4\\) for all integers \\(n \\ge 2\\).",
+            "book_errors": [
+              "\\[4^{k + 1} > 3^{k - 1} + 4 + 3^{k} + 12\\]",
+              "\\((\\because 3k + 12 > 0)\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 8: the third line is printed \\(4^{k+1} > 3^{k-1} + 4 + 3^{k} + 12\\); it should be \\(4^{k+1} > 3^{k+1} + 4 + 3^{k} + 12\\) (since \\(3 \\cdot 3^{k} = 3^{k+1}\\)).\nThe reason is printed \\((\\because 3k + 12 > 0)\\); it should be \\((\\because 3^{k} + 12 > 0)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Extended induction proves \\(S(n)\\) for all integers \\(n \\ge i\\), where \\(i\\) is any integer (it may be 0, negative, or greater than 1).\n2. The base case is \\(S(i)\\), the first value in the statement; the step \\(S(k) \\Rightarrow S(k + 1)\\) is proved for \\(k \\ge i\\).\n3. For an inequality: multiply the hypothesis by a positive number to reach the left side of \\(S(k + 1)\\), then split the right side so that the right side of \\(S(k + 1)\\) appears plus something positive, and drop the positive part."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistakes",
+            "text": "1. Starting the base case at \\(n = 1\\) when the statement begins at another value (\\(n = -2\\) in Example 7, \\(n = 2\\) in Example 8).\n2. Multiplying an inequality by a negative number without reversing it; in induction proofs multiply only by positive numbers.\n3. Dropping a term from the bigger side of an inequality. We may drop a positive part only from the smaller side: \\(a > b + c\\) with \\(c > 0\\) gives \\(a > b\\).\n4. Writing \\(3 \\cdot 3^{k} = 9^{k}\\). Correct: \\(3 \\cdot 3^{k} = 3^{k + 1}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

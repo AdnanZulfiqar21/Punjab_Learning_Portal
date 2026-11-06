@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 3: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-4-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Find the remainder using binomial theorem when \\((33)^{551}\\) is divided by 17.",
+            "explanation": "Yeh remainder ka sawal hai: number ko (17 ka multiple) + (chhota number) ki shakal mein laana hai.\n33 ke bilkul saath 34 hai, aur \\(34 = 2 \\times 17\\).\nRule kaunsa? Binomial theorem \\((34 - 1)^{551}\\) par: aakhri term ke ilawa sab 17 ke multiple honge.\nPlan: base ko \\(34 - 1\\) likhein, expand karein, aakhri term \\((-1)^{551}\\) dekhein, remainder positive banayein.",
+            "steps": [
+              "Diya gaya hai: \\((33)^{551}\\), divisor 17.\nHumein find karna hai: remainder.\nTareeqa: Base ko (17 ka multiple) \\(\\pm 1\\) likhenge. Binomial theorem se power = (17 ka multiple) + \\((\\pm 1)^{551}\\) ban jayegi. \\(\\pm 1\\) ki power lena sab se aasaan kaam hai: sirf yeh dekhna hai ke power odd hai ya even.",
+              "Base ko 17 ke multiple ke paas likhein\n\\[33 = 34 - 1 = 2(17) - 1\\]\n\\[(33)^{551} = (34 - 1)^{551}\\]\nKyun: 34 ko 17 poora divide karta hai, aur bachne wala \\(-1\\) aisa number hai jis ki koi bhi power ya to 1 hoti hai ya \\(-1\\). Isi liye yeh chunaav sab se behtar hai.",
+              "Expand karein\n\\[(34 - 1)^{551} = 34^{551} - {}^{551}C_1\\,34^{550}\\]\n\\[+ \\dots + {}^{551}C_{550}\\,34 + (-1)^{551}\\]\nKyun: Binomial theorem mein \\(a = 34\\), \\(x = -1\\), \\(n = 551\\). Aakhri term ke ilawa har term mein 34 hai, aur 34 mein 17 hai; is liye woh sab 17 ke multiple hain. Coefficients kitne bhi bare hon, farq nahi parta, kyunke 17 ka factor phir bhi maujood hai.",
+              "17 ke multiples ikatthe karein\n\\[(33)^{551} = 17k + (-1)^{551} = 17k - 1\\]\nKyun: 551 odd hai, aur \\(-1\\) ki odd power \\(-1\\) hoti hai.",
+              "Remainder ko positive banayein\n\\[17k - 1 = 17(k - 1) + 16\\]\nKyun: Remainder hamesha 0 se 16 ke darmiyan hona chahiye. \\(-1\\) ko \\(-17 + 16\\) likha, yani ek 17 udhaar liya. Ab 17 ka multiple \\(17(k - 1)\\) hai aur remainder 16.\nDhyan dein: Jawab '\\(-1\\)' likh dena aam ghalti hai; remainder kabhi negative nahi hota.",
+              "Tasdeeq\n\\[33 = 17 + 16,\\quad 33^2 = 1089\\]\n\\[1089 = 17 \\times 64 + 1\\]\nKyun: 33 ko 17 se divide karein to 16 bachta hai (yani \\(-1\\) jaisa), aur \\(33^2\\) par 1 bachta hai. Matlab odd power par 16 aur even power par 1. 551 odd hai, is liye 16. Computer se seedha check karne par bhi 16 hi aata hai."
+            ],
+            "final_answer": "Remainder \\(16\\) hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Find the remainder using binomial theorem when \\((9)^{163}\\) is divided by 41.",
+            "explanation": "Yahan bhi number ko (41 ka multiple) + (chhota number) banana hai.\n9 khud 41 ke kisi multiple ke paas nahi, lekin \\(9^2 = 81 = 82 - 1\\) aur \\(82 = 2 \\times 41\\).\nRule kaunsa? Binomial theorem \\((82 - 1)^{81}\\) par.\nPlan: ek 9 alag karein, \\(9^{162} = 81^{81}\\) likhein, expand karein, phir 9 se multiply kar ke remainder positive karein.",
+            "steps": [
+              "Diya gaya hai: \\((9)^{163}\\), divisor 41.\nHumein find karna hai: remainder.\nTareeqa: 9 ki koi aisi power dhoondo jo 41 ke multiple ke bilkul saath ho: \\(9^2 = 81 = 82 - 1\\). 163 odd hai, is liye ek 9 bahar rakhna parega aur baqi 162 ko \\(2 \\times 81\\) likhenge.",
+              "Power ko torein\n\\[(9)^{163} = 9 \\cdot 9^{162} = 9\\,(9^2)^{81}\\]\n\\[= 9\\,(81)^{81} = 9\\,(82 - 1)^{81}\\]\nKyun: \\(163 = 1 + 2 \\times 81\\). Laws of indices se \\(9^{162} = (9^2)^{81}\\).",
+              "\\((82 - 1)^{81}\\) expand karein\n\\[(82 - 1)^{81} = 82^{81} - \\dots\\]\n\\[+ {}^{81}C_{80}\\,82 + (-1)^{81}\\]\n\\[= 41m - 1\\]\nKyun: Aakhri term ke ilawa har term mein 82 hai, aur \\(82 = 2 \\times 41\\), to woh sab 41 ke multiple hain. 81 odd hai, is liye \\((-1)^{81} = -1\\).",
+              "9 se multiply karein\n\\[(9)^{163} = 9\\,(41m - 1) = 41(9m) - 9\\]\nKyun: Bahar wala 9 bracket ke dono hisson se multiply hota hai. \\(9 \\times 41m\\) ab bhi 41 ka multiple hai.",
+              "Remainder ko positive banayein\n\\[41(9m) - 9 = 41(9m - 1) + 32\\]\nKyun: \\(-9 = -41 + 32\\). Remainder 0 se 40 ke darmiyan hona chahiye, is liye ek 41 udhaar liya.\nDhyan dein: Bahar wala 9 bhool kar jawab 40 (yani \\(-1\\)) likh dena aam ghalti hai.",
+              "Tasdeeq\n\\[9^3 = 729 = 41 \\times 17 + 32\\]\nKyun: \\(9^3 = 9(82 - 1)^1\\) bilkul \\(9^{163} = 9(82 - 1)^{81}\\) jaisi shakal hai (\\(82 - 1\\) ki odd power), is liye us ka remainder bhi 32 hona chahiye, aur waqai 32 hai. Computer se \\(9^{163}\\) ka seedha remainder bhi 32 aata hai."
+            ],
+            "final_answer": "Remainder \\(32\\) hai."
+          }
+        ]
+      }
+    }
+  ]
+}

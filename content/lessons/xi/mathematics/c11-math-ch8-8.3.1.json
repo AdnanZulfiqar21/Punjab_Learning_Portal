@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.3.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.3.1",
+      "title": "8.3.1 Application of the Binomial Theorem",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 163,
+          "pdf_to": 166,
+          "note": "Book p. 158-161: 8.3.1 Application of the Binomial Theorem: Approximations, Summation of infinite series, Examples 16-20 (Example 16 with its alternative method)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Approximations: We have seen in the particular cases of the expansion of \\((1 + x)^{n}\\) that the power of \\(x\\) goes on increasing in each expansion. Since \\(|x| < 1\\), so\n\\[|x|^{r} < |x| \\quad \\text{for } r = 2, 3, 4, \\dots\\]\nThis fact shows that terms in each expansion go on decreasing numerically if \\(|x| < 1\\). Thus, some initial terms of the binomial series are enough for determining the approximate values of binomial expansions having indices as negative integers or fractions.",
+            "bold": [
+              "Approximations:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why do a few terms suffice? If \\(x = 0.1\\), then \\(x^{2} = 0.01\\), \\(x^{3} = 0.001\\), \\(x^{4} = 0.0001\\): each power is ten times smaller. After three or four terms the rest change only the 4th or 5th decimal place. So for an answer \"correct to three decimal places\" we keep terms until they become smaller than about 0.0005.\nStrategy for a root or power of a number: write the number as (a nice number) \\(\\times\\) (\\(1 \\pm\\) a small number), take the nice number out of the bracket, then expand. Examples 16 and 17 show this."
+          },
+          {
+            "type": "paragraph",
+            "text": "Summation of infinite series: The binomial series are conveniently used for summation of infinite series. The series (whose sum is required) is compared with\n\\[1 + nx + \\dfrac{n(n-1)}{2!}x^{2}\\]\n\\[+ \\dfrac{n(n-1)(n-2)}{3!}x^{3} + \\dots\\]\nto find out the values of \\(n\\) and \\(x\\). Then the sum is calculated by putting the values of \\(n\\) and \\(x\\) in \\((1 + x)^{n}\\).",
+            "bold": [
+              "Summation of infinite series:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This is the reverse use of the theorem: instead of expanding \\((1 + x)^{n}\\), we are given an expansion and must recognise which \\((1 + x)^{n}\\) it came from. Comparing the second term gives \\(nx\\); comparing the third gives \\(\\frac{n(n-1)}{2!}x^{2}\\); these two equations give \\(n\\) and \\(x\\). Example 20 shows this."
+          },
+          {
+            "type": "example",
+            "title": "Example 16",
+            "problem": "Expand \\((1 - 2x)^{1/3}\\) to four terms and apply it to evaluate \\((.8)^{1/3}\\) correct to three places of decimal.",
+            "steps": [
+              "Given: \\((1 - 2x)^{1/3}\\), so \\(n = \\frac{1}{3}\\) and the \"\\(x\\)\" of the formula is \\(-2x\\).\nTo find: (1) the first four terms; (2) \\((.8)^{1/3}\\) to three decimal places.\nMethod: binomial series for a fractional index. For (2), \\(1 - 2x = .8\\) when \\(x = .1\\), so we put \\(x = .1\\) in the four terms.",
+              "Step 1: Condition of validity\nThis expansion is valid only if \\(|2x| < 1\\) or \\(2|x| < 1\\) or \\(|x| < \\frac{1}{2}\\).\nWhy: the binomial series needs \\(|\\text{second term}| < 1\\), and here the second term is \\(-2x\\).",
+              "Step 2: Write the first four terms\n\\[(1 - 2x)^{1/3} = 1 + \\dfrac{1}{3}(-2x)\\]\n\\[+ \\dfrac{\\frac{1}{3}\\left(\\frac{1}{3} - 1\\right)}{2!}(-2x)^{2}\\]\n\\[+ \\dfrac{\\frac{1}{3}\\left(\\frac{1}{3} - 1\\right)\\left(\\frac{1}{3} - 2\\right)}{3!}(-2x)^{3} + \\dots\\]\nWhy: this is \\(1 + nx + \\frac{n(n-1)}{2!}x^{2} + \\frac{n(n-1)(n-2)}{3!}x^{3}\\) with \\(n = \\frac{1}{3}\\) and \\(-2x\\) in place of \\(x\\).",
+              "Step 3: Simplify\n\\[= 1 - \\dfrac{2}{3}x\\]\n\\[+ \\dfrac{\\frac{1}{3}\\left(-\\frac{2}{3}\\right)}{2 \\cdot 1}(4x^{2})\\]\n\\[+ \\dfrac{\\frac{1}{3}\\left(-\\frac{2}{3}\\right)\\left(-\\frac{5}{3}\\right)}{3 \\cdot 2 \\cdot 1}(-8x^{3}) + \\dots\\]\n\\[= 1 - \\dfrac{2}{3}x - \\dfrac{4}{9}x^{2}\\]\n\\[- \\dfrac{1 \\cdot 2 \\cdot 5}{3 \\cdot 3 \\cdot 3}\\cdot\\dfrac{1}{3 \\cdot 2 \\cdot 1}(8x^{3}) - \\dots\\]\n\\[= 1 - \\dfrac{2}{3}x - \\dfrac{4}{9}x^{2} - \\dfrac{40}{81}x^{3} - \\dots\\]\nWhy: \\(\\frac{1}{3} - 1 = -\\frac{2}{3}\\), \\(\\frac{1}{3} - 2 = -\\frac{5}{3}\\); \\((-2x)^{2} = 4x^{2}\\), \\((-2x)^{3} = -8x^{3}\\). Third term: \\(\\frac{-2/9}{2}\\cdot 4 = -\\frac{4}{9}\\). Fourth term: \\(\\frac{10/27}{6}\\cdot(-8) = -\\frac{40}{81}\\).",
+              "Step 4: Put \\(x = .1\\)\nPutting \\(x = .1\\) in the above expansion we have\n\\[(1 - 2(.1))^{1/3}\\]\n\\[= 1 - \\dfrac{2}{3}(.1) - \\dfrac{4}{9}(.1)^{2}\\]\n\\[- \\dfrac{40}{81}(.1)^{3} - \\dots\\]\n\\[= 1 - \\dfrac{.2}{3} - \\dfrac{.04}{9} - \\dfrac{.04}{81} - \\dots\\]\n\\[\\approx 1 - .06666 - .00444 - .00049\\]\n\\[= 1 - .07159 = .92841\\]\nWhy: \\(1 - 2(.1) = .8\\), the number we want; \\(x = .1\\) satisfies \\(|x| < \\frac{1}{2}\\). Also \\(40 \\times .001 = .04\\).",
+              "Step 5: Round\nThus \\((.8)^{1/3} \\approx .928\\)\nWhy: the next term is \\(-\\frac{160}{243}x^{4}\\), about \\(-0.00007\\) at \\(x = .1\\); it cannot change the third decimal place.",
+              "Alternative method (the book leaves it for you; here it is worked out)\n\\[(.8)^{1/3} = (1 - .2)^{1/3}\\]\n\\[= 1 - \\dfrac{.2}{3}\\]\n\\[+ \\dfrac{\\frac{1}{3}\\left(\\frac{1}{3} - 1\\right)}{2!}(-.2)^{2}\\]\n\\[+ \\dfrac{\\frac{1}{3}\\left(\\frac{1}{3} - 1\\right)\\left(\\frac{1}{3} - 2\\right)}{3!}(-.2)^{3} + \\dots\\]\n\\[= 1 - \\dfrac{.2}{3} - \\dfrac{1}{9}(.04)\\]\n\\[- \\dfrac{5}{81}(.008) - \\dots\\]\n\\[\\approx 1 - .06667 - .00444 - .00049\\]\n\\[= .92840 \\approx .928\\]\nWhy: here we expand \\((1 - .2)^{1/3}\\) directly with \\(n = \\frac{1}{3}\\) and \\(x = -.2\\). The coefficients are \\(\\frac{1}{3}\\), \\(-\\frac{1}{9}\\), \\(\\frac{5}{81}\\); \\((-.2)^{2} = .04\\), \\((-.2)^{3} = -.008\\).",
+              "Check:\n\\(.928^{3} = .7992\\dots\\), which is very close to .8. A calculator gives \\((.8)^{1/3} = .92832\\dots\\), i.e. .928 to three decimal places."
+            ],
+            "answer": "\\((1 - 2x)^{1/3} = 1 - \\frac{2}{3}x - \\frac{4}{9}x^{2} - \\frac{40}{81}x^{3} - \\dots\\) for \\(|x| < \\frac{1}{2}\\); \\((.8)^{1/3} \\approx .928\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 17",
+            "problem": "Evaluate \\(\\sqrt[3]{30}\\) correct to three places of decimal.",
+            "steps": [
+              "Given: \\(\\sqrt[3]{30} = (30)^{1/3}\\).\nTo find: its value to three decimal places.\nMethod: 27 is the nearest perfect cube to 30. Write \\(30 = 27 + 3 = 27\\left(1 + \\frac{1}{9}\\right)\\), take \\(27^{1/3} = 3\\) outside, and expand \\(\\left(1 + \\frac{1}{9}\\right)^{1/3}\\), where \\(x = \\frac{1}{9} < 1\\).",
+              "Step 1: Take out the perfect cube\n\\[\\sqrt[3]{30} = (30)^{1/3} = (27 + 3)^{1/3}\\]\n\\[= \\left[27\\left(1 + \\dfrac{3}{27}\\right)\\right]^{1/3}\\]\n\\[= (27)^{1/3}\\left(1 + \\dfrac{1}{9}\\right)^{1/3}\\]\n\\[= 3\\left(1 + \\dfrac{1}{9}\\right)^{1/3}\\]\nWhy: the binomial series needs the form \\((1 + x)^{n}\\) with a small \\(x\\); \\(\\frac{3}{27} = \\frac{1}{9}\\) is small.",
+              "Step 2: Expand\n\\[= 3\\left[1 + \\dfrac{1}{3}\\cdot\\dfrac{1}{9}\\right.\\]\n\\[+ \\dfrac{\\frac{1}{3}\\left(-\\frac{2}{3}\\right)}{2!}\\left(\\dfrac{1}{9}\\right)^{2}\\]\n\\[\\left. + \\dfrac{\\frac{1}{3}\\left(-\\frac{2}{3}\\right)\\left(-\\frac{5}{3}\\right)}{3!}\\left(\\dfrac{1}{9}\\right)^{3} + \\dots\\right]\\]\n\\[= 3\\left[1 + \\dfrac{1}{3}\\cdot\\dfrac{1}{9} - \\dfrac{1}{9}\\left(\\dfrac{1}{9}\\right)^{2}\\right.\\]\n\\[\\left. + \\dfrac{5}{81}\\left(\\dfrac{1}{9}\\right)^{3} + \\dots\\right]\\]\n\\[= 3\\left[1 + \\dfrac{1}{27} - \\left(\\dfrac{1}{27}\\right)^{2} + \\dots\\right]\\]\nWhy: with \\(n = \\frac{1}{3}\\): \\(nx = \\frac{1}{3}\\cdot\\frac{1}{9}\\); \\(\\frac{n(n-1)}{2!} = \\frac{\\frac{1}{3}\\left(-\\frac{2}{3}\\right)}{2} = -\\frac{1}{9}\\); \\(\\frac{n(n-1)(n-2)}{3!} = \\frac{5}{81}\\). Also \\(\\frac{1}{9}\\cdot\\frac{1}{81} = \\frac{1}{729} = \\left(\\frac{1}{27}\\right)^{2}\\).",
+              "Step 3: Decimals\n\\[\\approx 3[1 + .03704 - .001372]\\]\n\\[= 3[1.035668] = 3.107004\\]\nWhy: \\(\\frac{1}{27} = .037037\\dots \\approx .03704\\) and \\(\\frac{1}{729} \\approx .001372\\). The fourth term, \\(3 \\cdot \\frac{5}{81}\\cdot\\frac{1}{729} \\approx .00025\\), does not change the third decimal place.",
+              "Step 4: Round\nThus \\(\\sqrt[3]{30} \\approx 3.107\\)\nWhy: the question asks for three decimal places.",
+              "Check:\n\\(3.107^{3} = 29.993\\dots\\), very close to 30; a calculator gives \\(\\sqrt[3]{30} = 3.10723\\dots\\)."
+            ],
+            "answer": "\\(\\sqrt[3]{30} \\approx 3.107\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 18",
+            "problem": "Find the coefficient of \\(x^{n}\\) in the expansion of \\(\\frac{1-x}{(1+x)^{2}}\\).",
+            "steps": [
+              "Given: \\(\\frac{1 - x}{(1 + x)^{2}}\\) (we take \\(|x| < 1\\)).\nTo find: the coefficient of \\(x^{n}\\).\nMethod: write it as \\((1 - x)(1 + x)^{-2}\\). Expand \\((1 + x)^{-2}\\) (case (ii): general term \\((-1)^{r}(r + 1)x^{r}\\)). An \\(x^{n}\\) term in the product comes from two places: \\(1 \\times\\) (the \\(x^{n}\\) term) and \\(-x \\times\\) (the \\(x^{n-1}\\) term).",
+              "Step 1: Write as a product\n\\[\\dfrac{1 - x}{(1 + x)^{2}} = (1 - x)(1 + x)^{-2}\\]\nWhy: dividing by \\((1 + x)^{2}\\) is multiplying by \\((1 + x)^{-2}\\), which we can expand.",
+              "Step 2: Expand \\((1 + x)^{-2}\\)\n\\[= (1 - x)\\left[1 + (-2)x + \\dfrac{(-2)(-3)}{2!}x^{2} + \\dots\\right.\\]\n\\[\\left. + \\dfrac{(-2)(-3)\\cdots(-2 - r + 1)}{r!}x^{r} + \\dots\\right]\\]\n\\[= (1 - x)[1 + (-1)2x + (-1)^{2}3x^{2} + \\dots\\]\n\\[+ (-1)^{r}(r + 1)x^{r} + \\dots]\\]\nWhy: with \\(n = -2\\), \\(\\frac{(-2)(-3)\\cdots(-(r+1))}{r!} = (-1)^{r}\\frac{(r+1)!}{r!} = (-1)^{r}(r + 1)\\).",
+              "Step 3: The same line in the book\nThe book prints the first line of this expansion as\n\\[= (-x + 1)[1 + -2x + (-2)x + \\dots\\]\nwith the term in \\(x\\) written twice, and in the next two lines several minus signs have not printed. The correct bracket begins \\([1 + (-2)x + \\dots]\\), as in Step 2.\nWhy: we show the printed line so that you can match it with your book; all the working here uses the correct expansion.",
+              "Step 4: Show the terms in \\(x^{n-1}\\) and \\(x^{n}\\)\n\\[= (1 - x)[1 + (-1)2x + (-1)^{2}3x^{2} + \\dots\\]\n\\[+ (-1)^{n-1}nx^{n-1} + (-1)^{n}(n + 1)x^{n} + \\dots]\\]\nWhy: putting \\(r = n - 1\\) and \\(r = n\\) in \\((-1)^{r}(r + 1)x^{r}\\) gives these two terms.",
+              "Step 5: Collect the coefficient of \\(x^{n}\\)\n\\[\\text{Coefficient of } x^{n}\\]\n\\[= (-1)(-1)^{n-1}n + (-1)^{n}(n + 1)\\]\n\\[= (-1)^{n}n + (-1)^{n}(n + 1)\\]\n\\[= (-1)^{n}[n + (n + 1)]\\]\n\\[= (-1)^{n}(2n + 1)\\]\nWhy: \\(1 \\times (-1)^{n}(n + 1)x^{n}\\) and \\((-x)\\times(-1)^{n-1}nx^{n-1} = (-1)^{n}nx^{n}\\); \\((-1)(-1)^{n-1} = (-1)^{n}\\).",
+              "Check:\n\\(n = 2\\): \\((-1)^{2}(5) = 5\\). Directly: \\((1 - x)(1 - 2x + 3x^{2} - \\dots)\\) has \\(x^{2}\\) coefficient \\(3 + 2 = 5\\). Computer algebra gives \\(1 - 3x + 5x^{2} - 7x^{3} + 9x^{4} - \\dots\\), i.e. \\((-1)^{n}(2n + 1)\\)."
+            ],
+            "answer": "Coefficient of \\(x^{n}\\) \\(= (-1)^{n}(2n + 1)\\)",
+            "book_errors": [
+              "\\[= (-x + 1)[1 + -2x + (-2)x + \\dots\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 18: the book's first expansion line reads \"\\([1 + -2x + (-2)x + \\dots\\)\", writing the \\(x\\) term twice; the correct bracket is \\([1 + (-2)x + \\frac{(-2)(-3)}{2!}x^{2} + \\dots]\\). In the next two lines the minus signs in \\((-1)\\), \\((-1)^{2}\\), \\((-1)^{r}\\) and in \\((-x + 1)\\) have not printed. The final answer \\((-1)^{n}(2n + 1)\\) is right."
+          },
+          {
+            "type": "example",
+            "title": "Example 19",
+            "problem": "If \\(x\\) is so small that its cube and higher power can be neglected, show that \\(\\sqrt{\\frac{1-x}{1+x}} \\approx 1 - x + \\frac{1}{2}x^{2}\\).",
+            "steps": [
+              "Given: \\(\\sqrt{\\frac{1-x}{1+x}}\\), with \\(x^{3}\\) and higher powers negligible.\nTo show: it is approximately \\(1 - x + \\frac{1}{2}x^{2}\\).\nMethod: write the root as \\((1 - x)^{1/2}(1 + x)^{-1/2}\\), expand each bracket up to \\(x^{2}\\), multiply, and keep only the terms up to \\(x^{2}\\).",
+              "Step 1: Write with powers\n\\[\\sqrt{\\dfrac{1 - x}{1 + x}} = (1 - x)^{1/2}(1 + x)^{-1/2}\\]\nWhy: \\(\\sqrt{\\ }\\) is the power \\(\\frac{1}{2}\\), and dividing by \\((1 + x)^{1/2}\\) is multiplying by \\((1 + x)^{-1/2}\\).",
+              "Step 2: Expand each bracket up to \\(x^{2}\\)\n\\[(1 - x)^{1/2} = 1 + \\dfrac{1}{2}(-x)\\]\n\\[+ \\dfrac{\\frac{1}{2}\\left(\\frac{1}{2} - 1\\right)}{2!}(-x)^{2} + \\dots\\]\n\\[= 1 - \\dfrac{1}{2}x - \\dfrac{1}{8}x^{2} + \\dots\\]\n\\[(1 + x)^{-1/2} = 1 + \\left(-\\dfrac{1}{2}\\right)x\\]\n\\[+ \\dfrac{\\left(-\\frac{1}{2}\\right)\\left(-\\frac{1}{2} - 1\\right)}{2!}x^{2} + \\dots\\]\n\\[= 1 - \\dfrac{1}{2}x + \\dfrac{3}{8}x^{2} + \\dots\\]\nWhy: \\(\\frac{\\frac{1}{2}\\left(-\\frac{1}{2}\\right)}{2} = -\\frac{1}{8}\\) and \\(\\frac{\\left(-\\frac{1}{2}\\right)\\left(-\\frac{3}{2}\\right)}{2} = \\frac{3}{8}\\). Terms in \\(x^{3}\\) are not needed.",
+              "Step 3: Multiply and keep up to \\(x^{2}\\)\n\\[\\left[1 - \\dfrac{1}{2}x - \\dfrac{1}{8}x^{2} + \\dots\\right]\\]\n\\[\\times\\left[1 - \\dfrac{1}{2}x + \\dfrac{3}{8}x^{2} + \\dots\\right]\\]\n\\[= \\left(1 - \\dfrac{1}{2}x + \\dfrac{3}{8}x^{2}\\right)\\]\n\\[+ \\left(-\\dfrac{1}{2}x + \\dfrac{1}{4}x^{2}\\right) - \\dfrac{1}{8}x^{2} + \\dots\\]\n\\[= 1 - \\left(\\dfrac{1}{2} + \\dfrac{1}{2}\\right)x\\]\n\\[+ \\left(\\dfrac{3}{8} + \\dfrac{1}{4} - \\dfrac{1}{8}\\right)x^{2} + \\dots\\]\n\\[\\approx 1 - x + \\dfrac{1}{2}x^{2}\\]\nWhy: the first bracket's three terms \\(1\\), \\(-\\frac{1}{2}x\\), \\(-\\frac{1}{8}x^{2}\\) each multiply the second bracket; products giving \\(x^{3}\\) or higher are dropped. Then \\(\\frac{3}{8} + \\frac{2}{8} - \\frac{1}{8} = \\frac{4}{8} = \\frac{1}{2}\\).",
+              "Step 4: The book's last line\nAfter the result the book prints one more line,\n\\[= \\sqrt{3}\\]\nwhich does not belong to this example (there is no \\(\\sqrt{3}\\) anywhere in it).\nWhy: the result \\(1 - x + \\frac{1}{2}x^{2}\\) is already complete; the extra line should be ignored.",
+              "Check:\n\\(x = 0.01\\): \\(\\sqrt{\\frac{0.99}{1.01}} = 0.990050\\dots\\) and \\(1 - 0.01 + 0.00005 = 0.99005\\). Computer algebra also gives \\(1 - x + \\frac{x^{2}}{2} + \\dots\\)"
+            ],
+            "answer": "\\(\\sqrt{\\frac{1-x}{1+x}} \\approx 1 - x + \\frac{1}{2}x^{2}\\) (hence shown).",
+            "book_errors": [
+              "\\[= \\sqrt{3}\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 19: after the final result the book prints a stray line \"\\(= \\sqrt{3}\\)\". It is a misprint and should be deleted; the result is \\(\\sqrt{\\frac{1-x}{1+x}} \\approx 1 - x + \\frac{1}{2}x^{2}\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 20",
+            "problem": "For \\(y = \\frac{1}{2}\\left(\\frac{4}{9}\\right) + \\frac{1 \\cdot 3}{2^{2}\\,2!}\\left(\\frac{4}{9}\\right)^{2} + \\frac{1 \\cdot 3 \\cdot 5}{2^{3}\\,3!}\\left(\\frac{4}{9}\\right)^{3} + \\dots\\)\nshow that \\(5y^{2} + 10y - 4 = 0\\)",
+            "steps": [
+              "Given: the infinite series \\(y\\).\nTo show: \\(5y^{2} + 10y - 4 = 0\\).\nMethod: summation of an infinite series. Add 1 to make the series start with 1, compare it with \\(1 + nx + \\frac{n(n-1)}{2!}x^{2} + \\dots\\) to find \\(n\\) and \\(x\\), then \\(1 + y = (1 + x)^{n}\\). Squaring removes the root.",
+              "Step 1: Write the series and add 1\n\\[y = \\dfrac{1}{2}\\left(\\dfrac{4}{9}\\right) + \\dfrac{1 \\cdot 3}{4 \\cdot 2!}\\left(\\dfrac{4}{9}\\right)^{2}\\]\n\\[+ \\dfrac{1 \\cdot 3 \\cdot 5}{8 \\cdot 3!}\\left(\\dfrac{4}{9}\\right)^{3} + \\dots \\quad \\text{(A)}\\]\n\\[1 + y = 1 + \\dfrac{1}{2}\\left(\\dfrac{4}{9}\\right)\\]\n\\[+ \\dfrac{1 \\cdot 3}{4 \\cdot 2!}\\left(\\dfrac{4}{9}\\right)^{2}\\]\n\\[+ \\dfrac{1 \\cdot 3 \\cdot 5}{8 \\cdot 3!}\\left(\\dfrac{4}{9}\\right)^{3} + \\dots \\quad \\text{(B)}\\]\nWhy: a binomial series always starts with 1; \\(2^{2} = 4\\) and \\(2^{3} = 8\\).",
+              "Step 2: Compare with the binomial series\nLet the series on the right side of (B) be identical with\n\\[1 + nx + \\dfrac{n(n-1)}{2!}x^{2}\\]\n\\[+ \\dfrac{n(n-1)(n-2)}{3!}x^{3} + \\dots\\]\nwhich is the expansion of \\((1 + x)^{n}\\) for \\(|x| < 1\\) and \\(n\\) is not a positive integer.\nWhy: if the two series are the same, their second terms and their third terms must be equal.",
+              "Step 3: Two equations\nOn comparing terms of both the series, we get\n\\[nx = \\dfrac{1}{2}\\cdot\\left(\\dfrac{4}{9}\\right) \\quad \\text{(i)}\\]\n\\[\\dfrac{n(n-1)}{2!}x^{2} = \\dfrac{1 \\cdot 3}{4 \\cdot 2!}\\left(\\dfrac{4}{9}\\right)^{2} \\quad \\text{(ii)}\\]\n\\[\\text{From (i): } x = \\dfrac{2}{9n} \\quad \\text{(iii)}\\]\nWhy: (i) compares the second terms and (ii) the third terms; from (i), \\(nx = \\frac{2}{9}\\).",
+              "Step 4: Find \\(n\\)\nSubstituting \\(x = \\frac{2}{9n}\\) in (ii), we get\n\\[\\dfrac{n(n-1)}{2}\\cdot\\left(\\dfrac{2}{9n}\\right)^{2} = \\dfrac{3}{8}\\cdot\\dfrac{16}{81}\\]\n\\[\\dfrac{n(n-1)}{2}\\cdot\\dfrac{4}{81n^{2}} = \\dfrac{3}{8}\\cdot\\dfrac{16}{81}\\]\n\\[\\dfrac{2(n-1)}{81n} = \\dfrac{6}{81}\\]\n\\[2(n - 1) = 6n\\]\n\\[n - 1 = 3n \\Rightarrow n = -\\dfrac{1}{2}\\]\nWhy: \\(\\frac{1 \\cdot 3}{4 \\cdot 2!} = \\frac{3}{8}\\) and \\(\\frac{3}{8}\\cdot\\frac{16}{81} = \\frac{6}{81}\\); multiply both sides by \\(\\frac{81n}{2}\\) to get \\(n - 1 = 3n\\).",
+              "Step 5: Find \\(x\\)\nPutting \\(n = -\\frac{1}{2}\\) in (iii), we get\n\\[x = \\dfrac{2}{9\\left(-\\frac{1}{2}\\right)} = -\\dfrac{4}{9}\\]\nWhy: \\(9 \\times \\left(-\\frac{1}{2}\\right) = -\\frac{9}{2}\\) and \\(2 \\div \\left(-\\frac{9}{2}\\right) = -\\frac{4}{9}\\). Note \\(|x| = \\frac{4}{9} < 1\\), so the series is valid.",
+              "Step 6: Sum the series\n\\[1 + y = \\left(1 - \\dfrac{4}{9}\\right)^{-1/2} = \\left(\\dfrac{5}{9}\\right)^{-1/2}\\]\n\\[= \\left(\\dfrac{9}{5}\\right)^{1/2} = \\dfrac{3}{\\sqrt{5}}\\]\n\\[\\sqrt{5}(1 + y) = 3 \\quad \\text{(iv)}\\]\nWhy: \\(1 + y = (1 + x)^{n}\\) with \\(x = -\\frac{4}{9}\\), \\(n = -\\frac{1}{2}\\); a negative power turns the fraction upside down.",
+              "Step 7: Square both sides of (iv)\n\\[5(1 + 2y + y^{2}) = 9\\]\n\\[5 + 10y + 5y^{2} = 9\\]\n\\[5y^{2} + 10y - 4 = 0\\]\nWhy: squaring removes \\(\\sqrt{5}\\): \\(5(1 + y)^{2} = 9\\). Then subtract 9.",
+              "Check:\nThe fourth term predicted by \\(n = -\\frac{1}{2}\\), \\(x = -\\frac{4}{9}\\) is \\(\\frac{n(n-1)(n-2)}{3!}x^{3} = \\frac{20}{729}\\), and the given fourth term is \\(\\frac{1 \\cdot 3 \\cdot 5}{8 \\cdot 6}\\cdot\\frac{64}{729} = \\frac{20}{729}\\): they agree. Also \\(y = \\frac{3}{\\sqrt{5}} - 1 \\approx 0.3416\\) satisfies \\(5y^{2} + 10y - 4 = 0\\) (\\(0.5836 + 3.4164 - 4 = 0\\))."
+            ],
+            "answer": "Hence proved: \\(1 + y = \\frac{3}{\\sqrt{5}}\\), so \\(5y^{2} + 10y - 4 = 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. For \\(|x| < 1\\) the terms of the binomial series get smaller and smaller, so a few terms give a good approximation.\n2. For a root of a number, take out the nearest perfect power: \\(\\sqrt[3]{30} = 3\\left(1 + \\frac{1}{9}\\right)^{1/3}\\).\n3. Always state the condition of validity, such as \\(|2x| < 1\\).\n4. For \"coefficient of \\(x^{n}\\)\" in a product \\((1 - x)(1 + x)^{-2}\\), collect the \\(x^{n}\\) term from each part.\n5. To sum a series, make it start with 1, compare its 2nd and 3rd terms with \\(nx\\) and \\(\\frac{n(n-1)}{2!}x^{2}\\), then the sum is \\((1 + x)^{n}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Expanding \\((27 + 3)^{1/3}\\) directly: the bracket must start with 1, so take 27 out first.\n2. Forgetting that \\((-2x)^{3} = -8x^{3}\\) (an odd power keeps the minus sign).\n3. In products like Example 19, keeping \\(x^{3}\\) terms that the question says to neglect, or missing one of the \\(x^{2}\\) products.\n4. In Example 20, forgetting to add 1 to both sides before comparing."
+          }
+        ]
+      }
+    }
+  ]
+}

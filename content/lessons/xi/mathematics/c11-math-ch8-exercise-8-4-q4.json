@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 4: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4 Show that \\(a^2 + (a + 2)^2 + (a + 4)^2 + 1\\) is divisible by 12, whenever \\(a\\) is an odd integer.",
+            "explanation": "A 'show that' question: we must prove the result for every odd integer, not test a few values.\nPlan: expand the squares (binomial theorem with \\(n = 2\\)), collect terms, then use \\(a = 2m + 1\\) to pull out a factor 12.",
+            "steps": [
+              "Given: \\(a\\) is an odd integer.\nTo prove: \\(a^2 + (a + 2)^2 + (a + 4)^2 + 1\\) is divisible by 12.\nMethod: Expand and simplify to \\(3a^2 + 12a + 21\\). The part \\(12a\\) is already a multiple of 12, so we only need \\(3(a^2 + 7)\\) to be a multiple of 12, that is \\(a^2 + 7\\) a multiple of 4.",
+              "Expand the squares\n\\[(a + 2)^2 = a^2 + 4a + 4\\]\n\\[(a + 4)^2 = a^2 + 8a + 16\\]\nWhy: \\((a + x)^2 = a^2 + 2ax + x^2\\), the binomial expansion for \\(n = 2\\).",
+              "Add everything\n\\[E = a^2 + (a^2 + 4a + 4) + (a^2 + 8a + 16) + 1\\]\n\\[= 3a^2 + 12a + 21\\]\nWhy: \\(a^2\\) terms: 3 of them; \\(a\\) terms: \\(4a + 8a = 12a\\); numbers: \\(4 + 16 + 1 = 21\\).",
+              "Separate the multiple of 12\n\\[E = 12a + 3(a^2 + 7)\\]\nWhy: \\(3a^2 + 21 = 3(a^2 + 7)\\). The term \\(12a\\) is clearly divisible by 12.",
+              "Use that \\(a\\) is odd\n\\[a = 2m + 1,\\quad m \\in \\mathbb{Z}\\]\n\\[a^2 = 4m^2 + 4m + 1\\]\n\\[a^2 + 7 = 4(m^2 + m + 2)\\]\nWhy: Every odd integer is one more than an even number. Squaring by the binomial theorem gives \\(4m^2 + 4m + 1\\); adding 7 gives \\(4m^2 + 4m + 8\\).",
+              "Conclude\n\\[3(a^2 + 7) = 12(m^2 + m + 2)\\]\n\\[E = 12\\,(a + m^2 + m + 2)\\]\nWhy: Both parts are multiples of 12, and \\(a + m^2 + m + 2\\) is an integer, so \\(E\\) is a multiple of 12.",
+              "Check:\n\\[a = 1:\\ 1 + 9 + 25 + 1 = 36 = 12 \\times 3\\]\n\\[a = 3:\\ 9 + 25 + 49 + 1 = 84 = 12 \\times 7\\]\nWhy: The formula gives \\(a + m^2 + m + 2 = 1 + 0 + 0 + 2 = 3\\) for \\(a = 1\\) and \\(3 + 1 + 1 + 2 = 7\\) for \\(a = 3\\), matching."
+            ],
+            "final_answer": "Hence proved: \\(a^2 + (a + 2)^2 + (a + 4)^2 + 1 = 12(a + m^2 + m + 2)\\) with \\(a = 2m + 1\\), which is divisible by 12 for every odd integer \\(a\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

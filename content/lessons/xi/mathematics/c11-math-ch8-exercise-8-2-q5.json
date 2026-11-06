@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-2-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-2-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 162,
+          "pdf_to": 162,
+          "note": "Exercise 8.2, Question 5: book p.157 (PDF 162). Answer key book p.301-302 (PDF 306-307): key 5(iv) prints 462x^5y, correct 462x^5y^3. Solution book PDF 741-770 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(i)",
+            "prompt": "5 (i) Find the term involving: \\(x^4\\) in the expansion of \\((3 - 2x)^7\\).",
+            "explanation": "We want only one term of a long expansion, so we do not write the whole expansion.\nPlan: write the general term \\(T_{r+1}\\), find the power of \\(x\\) in it, set it equal to 4, solve for \\(r\\), then put \\(r\\) back.",
+            "steps": [
+              "Given: \\((3 - 2x)^7\\).\nTo find: the term containing \\(x^4\\).\nMethod: General term \\(T_{r+1} = \\binom{n}{r}a^{n-r}b^r\\) with \\(n = 7\\), \\(a = 3\\), \\(b = -2x\\).",
+              "General term\n\\[T_{r+1} = \\binom{7}{r}3^{7-r}(-2x)^r\\]\n\\[= (-1)^r\\binom{7}{r}3^{7-r}2^rx^r\\]\nWhy: The power \\(r\\) goes on every factor of \\(-2x\\): \\((-2x)^r = (-1)^r2^rx^r\\).",
+              "Choose \\(r\\)\n\\[x^r = x^4 \\Rightarrow r = 4\\]\nWhy: The power of \\(x\\) in \\(T_{r+1}\\) is \\(r\\). So the required term is \\(T_5\\).",
+              "Put \\(r = 4\\)\n\\[T_5 = (+1)\\binom{7}{4}3^{3}2^{4}x^4\\]\n\\[= 35 \\times 27 \\times 16\\,x^4\\]\n\\[= 945 \\times 16\\,x^4 = 15120x^4\\]\nWhy: \\((-1)^4 = 1\\); \\(\\binom{7}{4} = \\binom{7}{3} = \\frac{7 \\cdot 6 \\cdot 5}{3 \\cdot 2 \\cdot 1} = 35\\); \\(3^3 = 27\\), \\(2^4 = 16\\).",
+              "Check\n\\[35 \\times 432 = 15120 \\;\\checkmark\\]\nWhy: Multiplying in another order (\\(27 \\times 16 = 432\\) first) gives the same number."
+            ],
+            "final_answer": "\\(T_5 = 15120x^4\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(ii)",
+            "prompt": "5 (ii) Find the term involving: \\(x^{-2}\\) in the expansion of \\(\\left(x - \\frac{2}{x^2}\\right)^{13}\\).",
+            "explanation": "Here \\(x\\) is in both terms, so we must first combine the powers of \\(x\\) in the general term.\nPlan: general term, one power of \\(x\\), set it equal to \\(-2\\), solve for \\(r\\).",
+            "steps": [
+              "Given: \\(\\left(x - \\frac{2}{x^2}\\right)^{13}\\).\nTo find: the term containing \\(x^{-2}\\).\nMethod: \\(T_{r+1}\\) with \\(n = 13\\), \\(a = x\\), \\(b = -\\frac{2}{x^2}\\).",
+              "General term and its power of \\(x\\)\n\\[T_{r+1} = \\binom{13}{r}x^{13-r}\\left(-\\dfrac{2}{x^2}\\right)^r\\]\n\\[= (-1)^r\\binom{13}{r}2^r\\dfrac{x^{13-r}}{x^{2r}}\\]\n\\[= (-1)^r\\binom{13}{r}2^rx^{13-3r}\\]\nWhy: \\((x^2)^r = x^{2r}\\); dividing subtracts the indices: \\(13 - r - 2r = 13 - 3r\\).",
+              "Choose \\(r\\)\n\\[13 - 3r = -2\\]\n\\[-3r = -15 \\Rightarrow r = 5\\]\nWhy: The power must be \\(-2\\). \\(r = 5\\) is a whole number from 0 to 13, so such a term exists: \\(T_6\\).",
+              "Put \\(r = 5\\)\n\\[T_6 = (-1)^5\\binom{13}{5}2^5x^{-2}\\]\n\\[= -1287 \\times 32\\,x^{-2}\\]\n\\[= -41184x^{-2}\\]\nWhy: \\((-1)^5 = -1\\); \\(\\binom{13}{5} = \\frac{13 \\cdot 12 \\cdot 11 \\cdot 10 \\cdot 9}{5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1} = 1287\\); \\(2^5 = 32\\).",
+              "Check\n\\[13 - 3(5) = -2 \\;\\checkmark\\]\n\\[1287 \\times 32 = 41184 \\;\\checkmark\\]\nWhy: The power and the number are both confirmed."
+            ],
+            "final_answer": "\\(T_6 = -41184x^{-2} = -\\dfrac{41184}{x^2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(iii)",
+            "prompt": "5 (iii) Find the term involving: \\(a^4\\) in the expansion of \\(\\left(\\frac{2}{x} - a\\right)^9\\).",
+            "explanation": "The letter we want is \\(a\\), and it appears only in the second term.\nCareful: \\(a\\) is part of the question, so we do not use \\(a\\) as the name of the first term.\nPlan: general term, power of \\(a\\) is \\(r\\), so \\(r = 4\\).",
+            "steps": [
+              "Given: \\(\\left(\\frac{2}{x} - a\\right)^9\\).\nTo find: the term containing \\(a^4\\).\nMethod: \\(n = 9\\), first term \\(\\frac{2}{x}\\), second term \\(-a\\).",
+              "General term\n\\[T_{r+1} = \\binom{9}{r}\\left(\\dfrac{2}{x}\\right)^{9-r}(-a)^r\\]\n\\[= (-1)^r\\binom{9}{r}\\dfrac{2^{9-r}}{x^{9-r}}a^r\\]\nWhy: \\(\\left(\\frac{2}{x}\\right)^{9-r} = \\frac{2^{9-r}}{x^{9-r}}\\) and \\((-a)^r = (-1)^ra^r\\).",
+              "Choose \\(r\\)\n\\[a^r = a^4 \\Rightarrow r = 4\\]\nWhy: The power of \\(a\\) is \\(r\\). The term is \\(T_5\\).",
+              "Put \\(r = 4\\)\n\\[T_5 = (+1)\\binom{9}{4}\\dfrac{2^5}{x^5}a^4\\]\n\\[= 126 \\times \\dfrac{32}{x^5}a^4\\]\n\\[= \\dfrac{4032a^4}{x^5}\\]\nWhy: \\(\\binom{9}{4} = \\frac{9 \\cdot 8 \\cdot 7 \\cdot 6}{4 \\cdot 3 \\cdot 2 \\cdot 1} = 126\\); \\(2^{9-4} = 32\\); \\(126 \\times 32 = 4032\\).",
+              "Check\n\\[\\text{powers: } (9 - 4) + 4 = 9 \\;\\checkmark\\]\nWhy: In every term the powers of the two parts add up to \\(n = 9\\)."
+            ],
+            "final_answer": "\\(T_5 = \\dfrac{4032a^4}{x^5}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(iv)",
+            "prompt": "5 (iv) Find the term involving: \\(y^3\\) in the expansion of \\((x - \\sqrt{y})^{11}\\).",
+            "explanation": "The second term has a square root, so write it as a power: \\(\\sqrt{y} = y^{1/2}\\).\nPlan: general term, power of \\(y\\) is \\(\\frac{r}{2}\\), set it equal to 3.",
+            "steps": [
+              "Given: \\((x - \\sqrt{y})^{11}\\).\nTo find: the term containing \\(y^3\\).\nMethod: \\(n = 11\\), \\(a = x\\), \\(b = -\\sqrt{y} = -y^{1/2}\\).",
+              "General term\n\\[T_{r+1} = \\binom{11}{r}x^{11-r}(-\\sqrt{y})^r\\]\n\\[= (-1)^r\\binom{11}{r}x^{11-r}y^{r/2}\\]\nWhy: \\((y^{1/2})^r = y^{r/2}\\) (power of a power: multiply the indices).",
+              "Choose \\(r\\)\n\\[\\dfrac{r}{2} = 3 \\Rightarrow r = 6\\]\nWhy: The power of \\(y\\) must be 3. The term is \\(T_7\\).",
+              "Put \\(r = 6\\)\n\\[T_7 = (+1)\\binom{11}{6}x^{5}y^{3}\\]\n\\[= 462x^5y^3\\]\nWhy: \\((-1)^6 = 1\\); \\(\\binom{11}{6} = \\binom{11}{5} = \\frac{11 \\cdot 10 \\cdot 9 \\cdot 8 \\cdot 7}{5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1} = 462\\); \\(x^{11-6} = x^5\\).",
+              "Check\n\\[(\\sqrt{y})^6 = y^3 \\;\\checkmark\\]\nWhy: Six factors of \\(\\sqrt{y}\\) give \\(y^3\\), and the sign is \\(+\\) because 6 is even."
+            ],
+            "final_answer": "\\(T_7 = 462x^5y^3\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(462x^5y\\). The power of \\(y\\) is missing: the term is \\(462x^5y^3\\) (the question asks for the term in \\(y^3\\), and \\((\\sqrt{y})^6 = y^3\\))."
+          }
+        ]
+      }
+    }
+  ]
+}

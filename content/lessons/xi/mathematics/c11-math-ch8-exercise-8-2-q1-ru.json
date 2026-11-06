@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-2-Q1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-2-q1",
+      "title": "Question 1 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 161,
+          "pdf_to": 161,
+          "note": "Exercise 8.2, Question 1: book p.156 (PDF 161). Answer key book p.301-302 (PDF 306-307): key 1(i) constant term sign wrong; key labels 1(iii) as (ii). Solution book PDF 741-770 used as a reference only."
+        }
+      ],
+      "variant_of": "C11-MATH-CH8-EXERCISE-8-2-Q1",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Using binomial theorem, expand the following: \\(\\left(\\frac{x}{2} - \\frac{2}{x^2}\\right)^6\\).",
+            "explanation": "Bachon, yeh seedha expansion ka sawal hai: ek bracket hai jis ki power 6 hai, aur humein uske saare terms likhne hain.\nDiya kya hai? \\(\\left(\\frac{x}{2} - \\frac{2}{x^2}\\right)^6\\). Find kya karna hai? Poori expansion, yani 7 terms.\nRule kaunsa? Binomial theorem ka general term \\(T_{r+1}\\). Pehle general term ko ek dafa simplify kar lenge, phir \\(r = 0\\) se 6 tak values daal denge.\nDhyan dein: second term negative hai, is liye signs baari baari \\(+, -, +, -\\) aayenge.",
+            "steps": [
+              "Diya gaya hai: \\(\\left(\\frac{x}{2} - \\frac{2}{x^2}\\right)^6\\).\nHumein find karna hai: is ki poori expansion.\nTareeqa: Binomial theorem \\((a + b)^n = \\sum_{r=0}^{n} \\binom{n}{r} a^{n-r} b^r\\), jahan \\(n = 6\\), \\(a = \\frac{x}{2}\\) aur \\(b = -\\frac{2}{x^2}\\). Power 6 hai to terms \\(n + 1 = 7\\) honge. Saat dafa alag alag hisaab karne ke bajaye hum ek general term bana kar simplify karenge; phir har term sirf ek line ka kaam rahega.",
+              "General term likhein\n\\[T_{r+1} = \\binom{6}{r}\\left(\\dfrac{x}{2}\\right)^{6-r}\\left(-\\dfrac{2}{x^2}\\right)^r\\]\nKyun: Yeh \\((a + b)^n\\) ka \\((r + 1)\\)th term hai. Minus sign second term ka hissa hai, is liye woh bhi power \\(r\\) mein jata hai. Agar minus ko bahar chhor dein to aadhe terms ka sign ghalat ho jayega.",
+              "Sign, numbers aur \\(x\\) ki powers alag karein\n\\[\\left(\\dfrac{x}{2}\\right)^{6-r} = \\dfrac{x^{6-r}}{2^{6-r}}\\]\n\\[\\left(-\\dfrac{2}{x^2}\\right)^r = (-1)^r\\,\\dfrac{2^r}{x^{2r}}\\]\n\\[T_{r+1} = (-1)^r\\binom{6}{r}\\,2^{2r-6}\\,x^{6-3r}\\]\nKyun: Fraction ki power upar aur neeche dono ko lagti hai. Phir 2 ki powers ikatthi ki: \\(2^r \\div 2^{6-r} = 2^{r-(6-r)} = 2^{2r-6}\\). Isi tarah \\(x^{6-r} \\div x^{2r} = x^{6-3r}\\), kyunke divide karte waqt indices minus hote hain.\nDhyan dein: \\((x^2)^r = x^{2r}\\) hota hai, \\(x^{2+r}\\) nahi; power of a power mein indices multiply hote hain.",
+              "\\(n = 6\\) ke binomial coefficients\n\\[\\binom{6}{r}: \\; 1,\\ 6,\\ 15,\\ 20,\\ 15,\\ 6,\\ 1\\]\nKyun: Yeh Pascal's triangle ki row 6 hai. Khud bhi nikal sakte hain: \\(\\binom{6}{2} = \\frac{6 \\cdot 5}{2 \\cdot 1} = 15\\) aur \\(\\binom{6}{3} = \\frac{6 \\cdot 5 \\cdot 4}{3 \\cdot 2 \\cdot 1} = 20\\). Yeh coefficients donon kinaron se ek jaise hote hain, is se check bhi ho jata hai.",
+              "\\(r = 0, 1, 2, 3\\) ke terms\n\\[r = 0: \\; 1 \\cdot 2^{-6}x^6 = \\dfrac{x^6}{64}\\]\n\\[r = 1: \\; -6 \\cdot 2^{-4}x^3 = -\\dfrac{3}{8}x^3\\]\n\\[r = 2: \\; 15 \\cdot 2^{-2}x^0 = \\dfrac{15}{4}\\]\n\\[r = 3: \\; -20 \\cdot 2^{0}x^{-3} = -\\dfrac{20}{x^3}\\]\nKyun: Har \\(r\\) ko formula \\((-1)^r\\binom{6}{r}2^{2r-6}x^{6-3r}\\) mein daala. \\(r\\) even ho to \\((-1)^r = +1\\), odd ho to \\(-1\\). \\(2^{-4} = \\frac{1}{16}\\) hai, to \\(-\\frac{6}{16}\\) ko simplify kar ke \\(-\\frac{3}{8}\\) likha. \\(r = 2\\) par \\(x\\) ki power zero hai, is liye yeh term sirf number hai.",
+              "\\(r = 4, 5, 6\\) ke terms\n\\[r = 4: \\; 15 \\cdot 2^{2}x^{-6} = \\dfrac{60}{x^6}\\]\n\\[r = 5: \\; -6 \\cdot 2^{4}x^{-9} = -\\dfrac{96}{x^9}\\]\n\\[r = 6: \\; 1 \\cdot 2^{6}x^{-12} = \\dfrac{64}{x^{12}}\\]\nKyun: Wahi formula. Ab \\(x\\) ki power negative hai, aur negative index ka matlab hai ke \\(x\\) denominator mein chala jata hai: \\(x^{-9} = \\frac{1}{x^9}\\).",
+              "Expansion likhein\n\\[\\dfrac{x^6}{64} - \\dfrac{3}{8}x^3 + \\dfrac{15}{4}\\]\n\\[- \\dfrac{20}{x^3} + \\dfrac{60}{x^6}\\]\n\\[- \\dfrac{96}{x^9} + \\dfrac{64}{x^{12}}\\]\nKyun: Saare terms \\(r = 0\\) se 6 tak tarteeb se likhe. Signs baari baari badal rahe hain, jaisa negative second term se umeed thi.",
+              "Tasdeeq: \\(x = 2\\) rakhein\n\\[\\left(1 - \\tfrac{1}{2}\\right)^6 = \\dfrac{1}{64}\\]\n\\[1 - 3 + \\tfrac{15}{4} - \\tfrac{5}{2} + \\tfrac{15}{16} - \\tfrac{3}{16} + \\tfrac{1}{64}\\]\n\\[= \\dfrac{64 - 192 + 240 - 160 + 60 - 12 + 1}{64} = \\dfrac{1}{64} \\;\\checkmark\\]\nKyun: Expansion ek identity hai, yani har \\(x\\) ke liye bracket ke barabar honi chahiye. \\(x = 2\\) par bracket \\(\\frac{1}{2}\\) ki power 6 hai, aur hamari expansion bhi wahi deti hai. Agar kisi ek term ka sign ghalat hota to yeh barabri na aati."
+            ],
+            "final_answer": "\\(\\dfrac{x^6}{64} - \\dfrac{3}{8}x^3 + \\dfrac{15}{4}\\) \\(- \\dfrac{20}{x^3} + \\dfrac{60}{x^6}\\) \\(- \\dfrac{96}{x^9} + \\dfrac{64}{x^{12}}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key beech wala (constant) term \\(-\\frac{15}{4}\\) print karti hai. Sahi \\(+\\frac{15}{4}\\) hai: \\(r = 2\\) par sign \\((-1)^2 = +1\\) hai, is liye \\(T_3 = 15 \\cdot \\frac{1}{4} = +\\frac{15}{4}\\). Upar wali tasdeeq (\\(x = 2\\)) bhi sirf \\(+\\frac{15}{4}\\) ke saath sahi aati hai. Baqi saare terms key mein theek hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Using binomial theorem, expand the following: \\(\\left(2a - \\frac{x}{a}\\right)^7\\).",
+            "explanation": "Yeh bhi poori expansion ka sawal hai, lekin power 7 hai, to 8 terms aayenge.\nDhyan se dekhein: \\(a\\) dono terms mein hai (pehle mein multiply, doosre mein divide), jabke \\(x\\) sirf doosre term mein hai.\nPlan: general term bana kar \\(a\\) ki powers ikatthi karenge, phir \\(r = 0\\) se 7 tak values daalenge.",
+            "steps": [
+              "Diya gaya hai: \\(\\left(2a - \\frac{x}{a}\\right)^7\\).\nHumein find karna hai: poori expansion.\nTareeqa: Binomial theorem, \\(n = 7\\), pehla term \\(2a\\), doosra term \\(-\\frac{x}{a}\\). Doosra term negative hai, is liye signs alternate karenge. Kul 8 terms.",
+              "General term\n\\[T_{r+1} = \\binom{7}{r}(2a)^{7-r}\\left(-\\dfrac{x}{a}\\right)^r\\]\n\\[= (-1)^r\\binom{7}{r}\\,2^{7-r}\\,a^{7-r}\\,\\dfrac{x^r}{a^r}\\]\n\\[= (-1)^r\\binom{7}{r}\\,2^{7-r}\\,a^{7-2r}x^r\\]\nKyun: \\((2a)^{7-r}\\) mein power 2 ko bhi lagti hai aur \\(a\\) ko bhi: \\(2^{7-r}a^{7-r}\\). Phir \\(a^r\\) se divide karne par index mein se \\(r\\) minus hota hai, to \\(a^{7-2r}\\) bacha.\nDhyan dein: bohat se students \\((2a)^{7-r}\\) ko \\(2a^{7-r}\\) likh dete hain, yani 2 ki power bhool jate hain. Is se saare coefficients ghalat ho jate hain.",
+              "\\(n = 7\\) ke binomial coefficients\n\\[\\binom{7}{r}: \\; 1,\\ 7,\\ 21,\\ 35,\\ 35,\\ 21,\\ 7,\\ 1\\]\nKyun: Pascal's triangle ki row 7. Misaal: \\(\\binom{7}{2} = \\frac{7 \\cdot 6}{2} = 21\\), \\(\\binom{7}{3} = \\frac{7 \\cdot 6 \\cdot 5}{6} = 35\\).",
+              "\\(r = 0\\) se 3 tak terms\n\\[r = 0: \\; 2^7a^7 = 128a^7\\]\n\\[r = 1: \\; -7 \\cdot 2^6a^5x = -448a^5x\\]\n\\[r = 2: \\; 21 \\cdot 2^5a^3x^2 = 672a^3x^2\\]\n\\[r = 3: \\; -35 \\cdot 2^4ax^3 = -560ax^3\\]\nKyun: Har term mein teen cheezein: sign \\((-1)^r\\), number \\(\\binom{7}{r}2^{7-r}\\), aur powers \\(a^{7-2r}x^r\\). Hisaab: \\(7 \\times 64 = 448\\), \\(21 \\times 32 = 672\\), \\(35 \\times 16 = 560\\).",
+              "\\(r = 4\\) se 7 tak terms\n\\[r = 4: \\; 35 \\cdot 2^3a^{-1}x^4 = \\dfrac{280x^4}{a}\\]\n\\[r = 5: \\; -21 \\cdot 2^2a^{-3}x^5 = -\\dfrac{84x^5}{a^3}\\]\n\\[r = 6: \\; 7 \\cdot 2a^{-5}x^6 = \\dfrac{14x^6}{a^5}\\]\n\\[r = 7: \\; -a^{-7}x^7 = -\\dfrac{x^7}{a^7}\\]\nKyun: \\(r = 4\\) se \\(a\\) ka index \\(7 - 2r\\) negative ho jata hai, is liye \\(a\\) denominator mein chala gaya. Aakhri term mein \\(2^0 = 1\\) hai, is liye sirf \\(-\\frac{x^7}{a^7}\\) bacha.",
+              "Expansion likhein\n\\[128a^7 - 448a^5x + 672a^3x^2\\]\n\\[- 560ax^3 + \\dfrac{280x^4}{a}\\]\n\\[- \\dfrac{84x^5}{a^3} + \\dfrac{14x^6}{a^5} - \\dfrac{x^7}{a^7}\\]\nKyun: Aathon terms tarteeb se; \\(a\\) ki power har qadam par 2 kam ho rahi hai aur \\(x\\) ki 1 barh rahi hai. Yeh pattern dekh kar bhi ghalti pakdi ja sakti hai.",
+              "Tasdeeq: \\(a = 1,\\ x = 1\\) rakhein\n\\[(2 - 1)^7 = 1\\]\n\\[128 - 448 + 672 - 560 + 280 - 84 + 14 - 1 = 1 \\;\\checkmark\\]\nKyun: \\(a = x = 1\\) par har term sirf apna sign wala coefficient reh jata hai, aur un ka jama bracket ki value \\(1^7 = 1\\) ke barabar hona chahiye. Barabar aa gaya, to coefficients aur signs dono sahi hain."
+            ],
+            "final_answer": "\\(128a^7 - 448a^5x + 672a^3x^2\\) \\(- 560ax^3 + \\dfrac{280x^4}{a}\\) \\(- \\dfrac{84x^5}{a^3} + \\dfrac{14x^6}{a^5} - \\dfrac{x^7}{a^7}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Using binomial theorem, expand the following: \\(\\left(\\sqrt{\\frac{a}{x}} - \\sqrt{\\frac{x}{a}}\\right)^6\\).",
+            "explanation": "Is bracket mein do square roots hain, aur ghaur karein: \\(\\sqrt{x/a}\\) asal mein \\(\\sqrt{a/x}\\) ka ulta (reciprocal) hai.\nFind kya karna hai? Power 6 ki poori expansion, 7 terms.\nPlan: \\(u = \\sqrt{a/x}\\) rakh lein; bracket \\(\\left(u - \\frac{1}{u}\\right)^6\\) ban jayega aur general term bohat saaf ho jayega. Aakhir mein \\(u\\) ko wapas \\(a\\) aur \\(x\\) mein badlenge.",
+            "steps": [
+              "Diya gaya hai: \\(\\left(\\sqrt{\\frac{a}{x}} - \\sqrt{\\frac{x}{a}}\\right)^6\\).\nHumein find karna hai: poori expansion.\nTareeqa: Binomial theorem, \\(n = 6\\). Kyunke \\(\\sqrt{\\frac{x}{a}} = \\frac{1}{\\sqrt{a/x}}\\), hum \\(u = \\sqrt{\\frac{a}{x}}\\) likhte hain; bracket \\(\\left(u - \\frac{1}{u}\\right)^6\\) ho jata hai. Naya variable rakhne se square roots ka jhanjhat aakhir tak taal jata hai.",
+              "\\(u\\) mein general term\n\\[T_{r+1} = \\binom{6}{r}u^{6-r}\\left(-\\dfrac{1}{u}\\right)^r\\]\n\\[= (-1)^r\\binom{6}{r}u^{6-2r}\\]\nKyun: \\(\\left(\\frac{1}{u}\\right)^r = u^{-r}\\), aur multiply karte waqt indices jama hote hain: \\(u^{6-r} \\cdot u^{-r} = u^{6-2r}\\). Minus sign ki wajah se \\((-1)^r\\) aaya.",
+              "Wapas \\(a\\) aur \\(x\\) mein\n\\[u^2 = \\dfrac{a}{x}\\]\n\\[u^{6-2r} = (u^2)^{3-r} = \\left(\\dfrac{a}{x}\\right)^{3-r}\\]\n\\[T_{r+1} = (-1)^r\\binom{6}{r}\\left(\\dfrac{a}{x}\\right)^{3-r}\\]\nKyun: \\(6 - 2r\\) hamesha even hai, is liye \\(u\\) ki har power \\(u^2\\) ki poori power ban jati hai. Aur \\(u^2 = \\frac{a}{x}\\), to answer mein koi square root nahi bachta. Yeh is sawal ki khoobsurti hai.",
+              "\\(r = 0\\) se 6 tak (coefficients 1, 6, 15, 20, 15, 6, 1)\n\\[r = 0: \\; \\dfrac{a^3}{x^3}, \\quad r = 1: \\; -\\dfrac{6a^2}{x^2}\\]\n\\[r = 2: \\; \\dfrac{15a}{x}, \\quad r = 3: \\; -20\\]\n\\[r = 4: \\; 15\\left(\\dfrac{a}{x}\\right)^{-1} = \\dfrac{15x}{a}\\]\n\\[r = 5: \\; -\\dfrac{6x^2}{a^2}, \\quad r = 6: \\; \\dfrac{x^3}{a^3}\\]\nKyun: Negative power fraction ko ulat deti hai: \\(\\left(\\frac{a}{x}\\right)^{-2} = \\frac{x^2}{a^2}\\). Beech wale term (\\(r = 3\\)) mein power zero hai, is liye woh sirf \\(-20\\) hai.\nDhyan dein: \\((-1)^3 = -1\\), is liye beech wala term \\(-20\\) hai, \\(+20\\) nahi.",
+              "Expansion likhein\n\\[\\dfrac{a^3}{x^3} - \\dfrac{6a^2}{x^2} + \\dfrac{15a}{x} - 20\\]\n\\[+ \\dfrac{15x}{a} - \\dfrac{6x^2}{a^2} + \\dfrac{x^3}{a^3}\\]\nKyun: Saaton terms \\(r\\) ki tarteeb mein. Ghaur karein ke expansion dono taraf se \"mirror\" jaisi hai: \\(\\frac{a}{x}\\) ki jagah \\(\\frac{x}{a}\\).",
+              "Tasdeeq: \\(a = x\\) rakhein\n\\[(1 - 1)^6 = 0\\]\n\\[1 - 6 + 15 - 20 + 15 - 6 + 1 = 0 \\;\\checkmark\\]\nKyun: \\(a = x\\) par har fraction 1 ban jata hai, to expansion sirf sign wale coefficients ka jama reh jati hai, jo bracket ki value \\(0^6 = 0\\) ke barabar honi chahiye. Barabar hai."
+            ],
+            "final_answer": "\\(\\dfrac{a^3}{x^3} - \\dfrac{6a^2}{x^2} + \\dfrac{15a}{x}\\) \\(- 20 + \\dfrac{15x}{a}\\) \\(- \\dfrac{6x^2}{a^2} + \\dfrac{x^3}{a^3}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key mein is jawab par label dobara \"(ii)\" chhapa hai; asal mein yeh part (iii) ka jawab hai. Wahan di gayi expansion bilkul sahi hai, sirf label ghalat hai."
+          }
+        ]
+      }
+    }
+  ]
+}

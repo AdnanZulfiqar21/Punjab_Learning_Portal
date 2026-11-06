@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q11",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q11",
+      "title": "Question 11",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 11: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11 Zaid is organizing a sports competition with 8 teams. Every team plays against every other team exactly once. How many matches will be played in total? Use Pascal's triangle to solve this.",
+            "explanation": "Each match is decided by choosing 2 teams out of 8; the order of the two teams does not matter.\nSo the number of matches is \\({}^{8}C_{2}\\), which we read from row 8 of Pascal's triangle.\nPlan: build (or recall) row 8, read position 2.",
+            "steps": [
+              "Given: 8 teams; every pair of teams plays exactly once.\nTo find: the total number of matches.\nMethod: A match is a selection of 2 teams from 8 (a combination), so the count is \\({}^{8}C_{2}\\). Pascal's triangle gives the binomial coefficients without factorials.",
+              "Why a combination\n\\[\\text{matches} = {}^{8}C_{2}\\]\nWhy: 'Team A vs team B' is the same match as 'team B vs team A', so order does not count.",
+              "Row 8 of Pascal's triangle\n\\[1\\ \\ 8\\ \\ 28\\ \\ 56\\ \\ 70\\ \\ 56\\ \\ 28\\ \\ 8\\ \\ 1\\]\nWhy: Built from row 7 (1, 7, 21, 35, 35, 21, 7, 1) by adding neighbours: \\(1 + 7 = 8\\), \\(7 + 21 = 28\\), and so on (see Question 7).",
+              "Read position 2\n\\[{}^{8}C_{2} = 28\\]\nWhy: Counting from 0: position 0 is 1, position 1 is 8, position 2 is 28.",
+              "Check:\n\\[7 + 6 + 5 + 4 + 3 + 2 + 1 = 28\\]\n\\[\\dfrac{8 \\times 7}{2} = 28\\]\nWhy: The first team plays 7 new opponents, the second 6 new ones, and so on; and \\({}^{8}C_2 = \\frac{8 \\cdot 7}{2}\\)."
+            ],
+            "final_answer": "28 matches will be played in total."
+          }
+        ]
+      }
+    }
+  ]
+}

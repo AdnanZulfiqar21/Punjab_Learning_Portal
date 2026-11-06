@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-3-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-3-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 167,
+          "pdf_to": 167,
+          "note": "Exercise 8.3, Question 4: book page 162 (PDF 167); no answer in key (PDF 307). Misprints: (i) denominator should be sqrt(1+x); (iii) 17/284 should be 17/384."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) If \\(x\\) is so small that its square and higher powers can be neglected, then show that \\(\\frac{1 - x}{\\sqrt{1 - x}} \\approx 1 - \\frac{3}{2}x\\)",
+            "explanation": "An approximation with \\(x^{2}\\) neglected: keep only \\(1 + nx\\) of every series.\nBut first look at the printed left side: \\(\\frac{1 - x}{\\sqrt{1 - x}}\\) simplifies exactly to \\(\\sqrt{1 - x}\\).\nPlan: expand the printed expression honestly, then show the stated result for the intended expression \\(\\frac{1 - x}{\\sqrt{1 + x}}\\) (see the correction below).",
+            "steps": [
+              "Given: \\(\\frac{1 - x}{\\sqrt{1 - x}}\\), \\(x^{2}\\) and higher powers negligible.\nTo show (as printed): \\(\\approx 1 - \\frac{3}{2}x\\).\nMethod: Since \\(x^{2}, x^{3}, \\dots\\) are neglected, each bracket is expanded only as far as \\(1 + nx\\), and any product of two \\(x\\)-terms is dropped.",
+              "Simplify the printed left side\n\\[\\dfrac{1 - x}{\\sqrt{1 - x}} = (1 - x)^{1 - \\frac{1}{2}}\\]\n\\[= (1 - x)^{1/2}\\]\nWhy: \\(\\tfrac{a}{a^{1/2}} = a^{1/2}\\).",
+              "Expand to the \\(x\\) term\n\\[(1 - x)^{1/2} \\approx 1 + \\dfrac{1}{2}(-x)\\]\n\\[= 1 - \\dfrac{1}{2}x\\]\nWhy: \\(1 + nx\\) with \\(n = \\tfrac{1}{2}\\) and \\(-x\\) in place of \\(x\\).",
+              "Compare with the printed result\n\\[1 - \\dfrac{1}{2}x \\ne 1 - \\dfrac{3}{2}x\\]\nWhy: So the printed statement cannot be shown; the denominator is a misprint. With \\(\\sqrt{1 + x}\\) in the denominator it works:",
+              "Intended expression as a product\n\\[\\dfrac{1 - x}{\\sqrt{1 + x}} = (1 - x)(1 + x)^{-1/2}\\]\nWhy: \\(\\tfrac{1}{\\sqrt{a}} = a^{-1/2}\\).",
+              "Expand \\((1 + x)^{-1/2}\\)\n\\[(1 + x)^{-1/2} \\approx 1 - \\dfrac{1}{2}x\\]\nWhy: \\(1 + nx\\) with \\(n = -\\tfrac{1}{2}\\).",
+              "Multiply and neglect \\(x^{2}\\)\n\\[(1 - x)\\left(1 - \\dfrac{1}{2}x\\right)\\]\n\\[= 1 - \\dfrac{1}{2}x - x + \\dfrac{1}{2}x^{2}\\]\n\\[\\approx 1 - \\dfrac{3}{2}x\\]\nWhy: The \\(\\tfrac{1}{2}x^{2}\\) term is neglected; \\(-\\tfrac{1}{2}x - x = -\\tfrac{3}{2}x\\).",
+              "Check\n\\[x = 0.01:\\ \\dfrac{0.99}{\\sqrt{1.01}} = 0.985087\\]\n\\[1 - 0.015 = 0.985\\]\nWhy: Agrees to the size of the neglected \\(x^{2}\\) term (about 0.0001)."
+            ],
+            "final_answer": "As printed: \\(\\frac{1 - x}{\\sqrt{1 - x}} = \\sqrt{1 - x} \\approx 1 - \\frac{1}{2}x\\). The stated result holds for \\(\\frac{1 - x}{\\sqrt{1 + x}} \\approx 1 - \\frac{3}{2}x\\). Hence proved (with the corrected denominator)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the left side as \\(\\frac{1 - x}{\\sqrt{1 - x}}\\). That expression equals \\(\\sqrt{1 - x} \\approx 1 - \\frac{1}{2}x\\), so it cannot be \\(\\approx 1 - \\frac{3}{2}x\\). The printed result is correct for \\(\\frac{1 - x}{\\sqrt{1 + x}}\\), which is what we proved."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) If \\(x\\) is so small that its square and higher powers can be neglected, then show that \\(\\frac{\\sqrt{1 + 2x}}{\\sqrt{1 - x}} \\approx 1 + \\frac{3}{2}x\\)",
+            "explanation": "An approximation with \\(x^{2}\\) neglected.\nWrite the left side as \\((1 + 2x)^{1/2}(1 - x)^{-1/2}\\) and keep only \\(1 + nx\\) of each.\nPlan: expand both, multiply, drop the \\(x^{2}\\) term, compare.",
+            "steps": [
+              "Given: \\(\\frac{\\sqrt{1 + 2x}}{\\sqrt{1 - x}}\\), \\(x^{2}\\) and higher powers negligible.\nTo show: \\(\\approx 1 + \\frac{3}{2}x\\).\nMethod: Since \\(x^{2}, x^{3}, \\dots\\) are neglected, each bracket is expanded only as far as \\(1 + nx\\), and any product of two \\(x\\)-terms is dropped.",
+              "Write as a product\n\\[\\dfrac{\\sqrt{1 + 2x}}{\\sqrt{1 - x}} = (1 + 2x)^{1/2}(1 - x)^{-1/2}\\]\nWhy: Roots are powers \\(\\tfrac{1}{2}\\); the denominator moves up with power \\(-\\tfrac{1}{2}\\).",
+              "Expand each bracket\n\\[(1 + 2x)^{1/2} \\approx 1 + \\dfrac{1}{2}(2x) = 1 + x\\]\n\\[(1 - x)^{-1/2} \\approx 1 + \\left(-\\dfrac{1}{2}\\right)(-x)\\]\n\\[= 1 + \\dfrac{1}{2}x\\]\nWhy: \\(1 + nx\\) with the whole second term (\\(2x\\) or \\(-x\\)) in place of \\(x\\).",
+              "Multiply and neglect \\(x^{2}\\)\n\\[(1 + x)\\left(1 + \\dfrac{1}{2}x\\right)\\]\n\\[= 1 + \\dfrac{1}{2}x + x + \\dfrac{1}{2}x^{2}\\]\n\\[\\approx 1 + \\dfrac{3}{2}x\\]\nWhy: Drop \\(\\tfrac{1}{2}x^{2}\\); \\(x + \\tfrac{1}{2}x = \\tfrac{3}{2}x\\).",
+              "Check\n\\[x = 0.01:\\ \\sqrt{\\dfrac{1.02}{0.99}} = 1.015038\\]\n\\[1 + 0.015 = 1.015\\]\nWhy: The difference is of the size of \\(x^{2}\\)."
+            ],
+            "final_answer": "\\(\\frac{\\sqrt{1 + 2x}}{\\sqrt{1 - x}} \\approx 1 + \\frac{3}{2}x\\). Hence proved."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iii)",
+            "prompt": "4 (iii) If \\(x\\) is so small that its square and higher powers can be neglected, then show that \\(\\frac{(9 + 7x)^{1/2} - (16 + 3x)^{1/4}}{4 + 5x} \\approx \\frac{1}{4} - \\frac{17}{284}x\\)",
+            "explanation": "Three brackets, none starting with 1: take out \\(9\\), \\(16\\) and \\(4\\) first.\nKeep only \\(1 + nx\\) of each series, then multiply the numerator by \\((4 + 5x)^{-1}\\).\nPlan: numerator, denominator, product, compare (the printed 284 is a misprint for 384; see the correction).",
+            "steps": [
+              "Given: \\(\\frac{(9 + 7x)^{1/2} - (16 + 3x)^{1/4}}{4 + 5x}\\), \\(x^{2}\\) and higher powers negligible.\nTo show: \\(\\approx \\frac{1}{4} - \\frac{17}{284}x\\) (as printed).\nMethod: Make every bracket start with 1 by taking a number outside; then since \\(x^{2}, x^{3}, \\dots\\) are neglected, each bracket is expanded only as far as \\(1 + nx\\), and any product of two \\(x\\)-terms is dropped.",
+              "First bracket\n\\[(9 + 7x)^{1/2} = 3\\left(1 + \\dfrac{7x}{9}\\right)^{1/2}\\]\n\\[\\approx 3\\left(1 + \\dfrac{7x}{18}\\right) = 3 + \\dfrac{7}{6}x\\]\nWhy: \\(9^{1/2} = 3\\); \\(\\tfrac{1}{2} \\cdot \\tfrac{7x}{9} = \\tfrac{7x}{18}\\); \\(3 \\cdot \\tfrac{7}{18} = \\tfrac{7}{6}\\).",
+              "Second bracket\n\\[(16 + 3x)^{1/4} = 2\\left(1 + \\dfrac{3x}{16}\\right)^{1/4}\\]\n\\[\\approx 2\\left(1 + \\dfrac{3x}{64}\\right) = 2 + \\dfrac{3}{32}x\\]\nWhy: \\(16^{1/4} = 2\\); \\(\\tfrac{1}{4} \\cdot \\tfrac{3x}{16} = \\tfrac{3x}{64}\\).",
+              "Numerator\n\\[\\left(3 + \\dfrac{7}{6}x\\right) - \\left(2 + \\dfrac{3}{32}x\\right)\\]\n\\[= 1 + \\left(\\dfrac{112}{96} - \\dfrac{9}{96}\\right)x\\]\n\\[= 1 + \\dfrac{103}{96}x\\]\nWhy: LCM of 6 and 32 is 96.",
+              "Denominator\n\\[(4 + 5x)^{-1} = \\dfrac{1}{4}\\left(1 + \\dfrac{5x}{4}\\right)^{-1}\\]\n\\[\\approx \\dfrac{1}{4}\\left(1 - \\dfrac{5}{4}x\\right)\\]\nWhy: \\(4^{-1} = \\tfrac{1}{4}\\); \\(1 + nx\\) with \\(n = -1\\).",
+              "Multiply and neglect \\(x^{2}\\)\n\\[\\dfrac{1}{4}\\left(1 + \\dfrac{103}{96}x\\right)\\left(1 - \\dfrac{120}{96}x\\right)\\]\n\\[\\approx \\dfrac{1}{4}\\left(1 - \\dfrac{17}{96}x\\right)\\]\n\\[= \\dfrac{1}{4} - \\dfrac{17}{384}x\\]\nWhy: \\(\\tfrac{5}{4} = \\tfrac{120}{96}\\); \\(103 - 120 = -17\\); \\(4 \\times 96 = 384\\).",
+              "Check\n\\[x = 0.01:\\ \\text{L.H.S.} = 0.2495573\\]\n\\[\\dfrac{1}{4} - \\dfrac{17}{384}(0.01) = 0.2495573\\]\nWhy: Agrees to seven decimals; with 284 the value would be 0.2494014, clearly worse."
+            ],
+            "final_answer": "\\(\\frac{(9 + 7x)^{1/2} - (16 + 3x)^{1/4}}{4 + 5x} \\approx \\frac{1}{4} - \\frac{17}{384}x\\). Hence proved (the book prints 284 for 384)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the right side as \\(\\frac{1}{4} - \\frac{17}{284}x\\). The correct result is \\(\\frac{1}{4} - \\frac{17}{384}x\\), since \\(\\frac{1}{4} \\times \\frac{17}{96} = \\frac{17}{384}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iv)",
+            "prompt": "4 (iv) If \\(x\\) is so small that its square and higher powers can be neglected, then show that \\(\\frac{\\sqrt{4 + x}}{(1 - x)^{3}} \\approx 2 + \\frac{25}{4}x\\)",
+            "explanation": "An approximation with \\(x^{2}\\) neglected: \\((4 + x)^{1/2}(1 - x)^{-3}\\).\nTake 4 outside the first bracket, keep \\(1 + nx\\) of each.\nPlan: expand both, multiply, drop \\(x^{2}\\), compare.",
+            "steps": [
+              "Given: \\(\\frac{\\sqrt{4 + x}}{(1 - x)^{3}}\\), \\(x^{2}\\) and higher powers negligible.\nTo show: \\(\\approx 2 + \\frac{25}{4}x\\).\nMethod: Since \\(x^{2}, x^{3}, \\dots\\) are neglected, each bracket is expanded only as far as \\(1 + nx\\), and any product of two \\(x\\)-terms is dropped.",
+              "Write as a product\n\\[\\dfrac{\\sqrt{4 + x}}{(1 - x)^{3}} = (4 + x)^{1/2}(1 - x)^{-3}\\]\nWhy: Root = power \\(\\tfrac{1}{2}\\); denominator up with power \\(-3\\).",
+              "Expand each bracket\n\\[(4 + x)^{1/2} = 2\\left(1 + \\dfrac{x}{4}\\right)^{1/2} \\approx 2\\left(1 + \\dfrac{x}{8}\\right)\\]\n\\[(1 - x)^{-3} \\approx 1 + (-3)(-x) = 1 + 3x\\]\nWhy: \\(4^{1/2} = 2\\); \\(\\tfrac{1}{2} \\cdot \\tfrac{x}{4} = \\tfrac{x}{8}\\); for the second, \\(n = -3\\) and \\(-x\\) in place of \\(x\\).",
+              "Multiply and neglect \\(x^{2}\\)\n\\[2\\left(1 + \\dfrac{x}{8}\\right)(1 + 3x)\\]\n\\[\\approx 2\\left(1 + \\dfrac{x}{8} + 3x\\right)\\]\n\\[= 2\\left(1 + \\dfrac{25}{8}x\\right) = 2 + \\dfrac{25}{4}x\\]\nWhy: \\(\\tfrac{1}{8} + 3 = \\tfrac{25}{8}\\); then \\(2 \\cdot \\tfrac{25}{8} = \\tfrac{25}{4}\\).",
+              "Check\n\\[x = 0.01:\\ \\dfrac{\\sqrt{4.01}}{0.99^{3}} = 2.063795\\]\n\\[2 + 0.0625 = 2.0625\\]\nWhy: The difference (about 0.0013) is of the size of the neglected \\(x^{2}\\) terms, whose coefficient here is about 12.7."
+            ],
+            "final_answer": "\\(\\frac{\\sqrt{4 + x}}{(1 - x)^{3}} \\approx 2 + \\frac{25}{4}x\\). Hence proved."
+          }
+        ]
+      }
+    }
+  ]
+}

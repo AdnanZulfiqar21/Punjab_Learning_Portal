@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 168,
+          "pdf_to": 169,
+          "note": "Book p. 163-164: 8.4 binomial coefficient formula, construction rules 1-3, Pascal's Triangle figure (rows 0-7, redrawn), Pascal's Rule, row n = 4, Examples 21-22. Proof of Pascal's Rule and teaching callouts are ours."
+        }
+      ],
+      "title": "8.4 Binomial Coefficients Using Pascal's Triangle (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH8-8.4",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum! 8.2 mein aap ne binomial theorem se \\((a + b)^{n}\\) ki expansion likhna seekha tha. Wahan har coefficient \\({}^{n}C_{r}\\) factorial ke formula se nikalna parta tha, jo choti powers ke liye bhi thoda lamba kaam hai. Aaj hum ek khoobsurat shortcut seekhenge: Pascal's triangle (Pascal ka tikona). Is mein saare binomial coefficients sirf jama (addition) se ban jate hain, factorial ki zaroorat hi nahin rehti."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki baat: binomial coefficients woh numbers hain jo kisi binomial expression, maslan \\((x + y)^{n}\\), ki powers ki expansion mein aate hain. Inhein is tarah likha jata hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\binom{n}{r} = \\dfrac{n!}{r!\\,(n-r)!}, \\quad 0 \\le r \\le n",
+            "text_alt": "n over r equals n factorial divided by r factorial times n minus r factorial, where r is from 0 to n"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Ghabraiye mat: \\(\\binom{n}{r}\\) koi naya number nahin, yeh wahi \\({}^{n}C_{r}\\) hai jo 8.2 mein tha, bas likhne ka andaaz mukhtalif hai (bracket mein ooper \\(n\\), neeche \\(r\\)). Misaal: \\(\\binom{4}{2} = \\frac{4!}{2!\\,2!} = \\frac{24}{4} = 6\\).\nMasla yeh hai ke \\(n\\) bara ho to factorials bohat bare ho jate hain, aur calculator ke baghair hisaab mushkil. Pascal's triangle wahi numbers sirf jama se deta hai, is liye choti powers ke liye yeh tez bhi hai aur ghalti ka imkaan bhi kam."
+          },
+          {
+            "type": "paragraph",
+            "text": "Pascal's Triangle ek combinatorial (ginti wala) tareeqa hai jo binomial coefficients ko factorials istemal kiye baghair nikal deta hai. Ise banane ke teen rule hain:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Pehli row (jo \\(n = 0\\) ke liye hai) mein sirf ek entry hai: 1.",
+              "Har agli row 1 se shuru hoti hai aur 1 par khatam hoti hai.",
+              "Har andar wali (interior) entry pichli row mein us ke bilkul ooper wali do entries ka jor hoti hai."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch8-fig-pascal-triangle",
+            "alt": "Pascal's triangle with rows 0 to 7 numbered down the left side and columns 0 to 7 along the bottom. Row 0: 1. Row 1: 1 1. Row 2: 1 2 1. Row 3: 1 3 3 1. Row 4: 1 4 6 4 1. Row 5: 1 5 10 10 5 1. Row 6: 1 6 15 20 15 6 1. Row 7: 1 7 21 35 35 21 7 1. Small arrows go from each pair of neighbouring entries to the entry between them in the next row, and a dashed triangle surrounds the numbers.",
+            "caption": "Figure: Pascal's Triangle, rows 0 to 7 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Triangle parhne ka tareeqa: rows aur columns dono 0 se gine jate hain. Row \\(n\\) aur column \\(k\\) wali entry \\(\\binom{n}{k}\\) hai. Misaal: row 6, column 2 par 15 hai, aur \\(\\binom{6}{2} = \\frac{6 \\cdot 5}{2} = 15\\). Dekha? Bilkul wahi.\nAgli row banane ka tareeqa: shuru mein 1 likhein, phir pichli row ke har do saath wale numbers ka jor likhte jayein, aur aakhir mein 1. Is ko aise samjhein jaise eenton ki deewar: har eent apne neeche ki do eenton par tiki hoti hai, yahan har number apne ooper ke do numbers se banta hai.\nDo patterns zaroor dekhiye: har row dono taraf se ek jaisi parhi jati hai (\\(\\binom{n}{k} = \\binom{n}{n-k}\\)), aur row \\(n\\) ke numbers ka jor \\(2^{n}\\) hota hai (row 4: \\(1+4+6+4+1 = 16 = 2^{4}\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Row 7 hai: 1 7 21 35 35 21 7 1. Is se row 8 khud banaiye, phir neeche wale jawab se milaiye.\nJawab: 1, 8, 28, 56, 70, 56, 28, 8, 1. (Misaal ke taur par \\(7 + 21 = 28\\), \\(21 + 35 = 56\\), \\(35 + 35 = 70\\).) Jor check karein: \\(256 = 2^{8}\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Pascal's Rule"
+          },
+          {
+            "type": "paragraph",
+            "text": "Rule 3 ko mathematics ki zabaan mein Pascal's Rule kehte hain:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\binom{n}{k} = \\binom{n-1}{k-1} + \\binom{n-1}{k}, \\quad 0 < k < n",
+            "text_alt": "Pascal's rule: n over k equals n minus 1 over k minus 1 plus n minus 1 over k, for k between 0 and n"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh rule sahi kyun hai? Kitab is ka saboot nahin deti, magar yeh chhota sa hai aur samajhne se rule pakka yaad ho jata hai. Dono fractions ka common denominator \\(k!\\,(n-k)!\\) banayein (pehle fraction ko ooper neeche \\(k\\) se aur doosre ko \\(n-k\\) se multiply kar ke):\n\\[\\binom{n-1}{k-1} + \\binom{n-1}{k}\\]\n\\[= \\dfrac{(n-1)!\\,k}{k!\\,(n-k)!} + \\dfrac{(n-1)!\\,(n-k)}{k!\\,(n-k)!}\\]\n\\[= \\dfrac{(n-1)!\\,(k + n - k)}{k!\\,(n-k)!}\\]\n\\[= \\dfrac{n!}{k!\\,(n-k)!} = \\binom{n}{k}\\]\nAakhri qadam mein \\((n-1)! \\times n = n!\\) use hua. Triangle mein yehi rule 3 hai: \\(\\binom{5}{2} = \\binom{4}{1} + \\binom{4}{2} = 4 + 6 = 10\\). Row 5 mein 10 bilkul 4 aur 6 ke neeche hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Pascal's Triangle ki \\(n\\)-th row ke entries binomial coefficients \\(\\binom{n}{0}, \\binom{n}{1}, \\dots, \\binom{n}{n}\\) hote hain. Yani row \\(n\\) seedha \\((a + b)^{n}\\) ke saare coefficients de deti hai, aur un ki tadaad \\(n + 1\\) hoti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal ke taur par \\(n = 4\\) ke binomial coefficients:\n\\[\\binom{4}{0} = 1,\\ \\binom{4}{1} = 4,\\]\n\\[\\binom{4}{2} = 6,\\ \\binom{4}{3} = 4,\\]\n\\[\\binom{4}{4} = 1\\]\nYeh row 4 ke numbers \"1 4 6 4 1\" hi hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki do misaalein dekhte hain: pehli mein dono terms plus hain, doosri mein minus sign aata hai, jahan asal imtihan hota hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 21",
+            "problem": "Expand \\((x + y)^{4}\\) using Pascal's triangle.",
+            "steps": [
+              "Given: binomial \\(x + y\\) aur power \\(n = 4\\).\nTo find: \\((x + y)^{4}\\) ki poori expansion.\nMethod: sab se pehle yeh samajhte hain ke expansion mein mehnat ka asal kaam coefficients nikalna hai. \\((x + y)^{n}\\) ke coefficients Pascal's triangle ki row \\(n\\) mein tayyar likhe hote hain. Is liye factorial wala formula \\({}^{4}C_{r}\\) chalane ki bajaye hum seedha row 4 parh lenge. Powers ka pattern hum pehle se jaante hain.",
+              "Step 1: Pascal's triangle ki row 4 parhein\n\\((x + y)^{4}\\) ke binomial coefficients row \\(n = 4\\) ke entries hain:\n\\[1 \\quad 4 \\quad 6 \\quad 4 \\quad 1\\]\nKyun: row \\(n\\) mein bilkul yehi numbers hote hain: \\(\\binom{n}{0}, \\binom{n}{1}, \\dots, \\binom{n}{n}\\). \\(n = 4\\) ke liye yeh \\(1, 4, 6, 4, 1\\) hain. Ghor karein ke terms \\(n + 1 = 5\\) hain, power 4 hai magar terms 5; yeh baat bohat se students bhool jate hain.\nDhyan dein: rows 0 se ginni hain. Sab se ooper wala akela 1 row 0 hai, is liye \"1 4 6 4 1\" paanchwin line par nazar aati hai magar us ka number 4 hai.",
+              "Step 2: \\(x\\) aur \\(y\\) ki powers lagayein\n\\(x\\) ki power \\(4, 3, 2, 1, 0\\) ki taraf ghatti hai aur \\(y\\) ki power \\(0, 1, 2, 3, 4\\) ki taraf barhti hai:\n\\[(x + y)^{4} = 1x^{4} + 4x^{3}y + 6x^{2}y^{2}\\]\n\\[\\qquad + 4xy^{3} + 1y^{4}\\]\nKyun: har term mein dono powers ka jor hamesha \\(n = 4\\) hota hai (\\(4+0, 3+1, 2+2, \\dots\\)). Yeh binomial theorem ka wahi pattern hai jo aap ne 8.2 mein parha. Ise aise sochiye jaise ek tarazu: \\(x\\) ki taraf se ek power kam hoti hai to \\(y\\) ki taraf ek barh jati hai.",
+              "Step 3: Coefficient 1 hata dein\n\\[(x + y)^{4} = x^{4} + 4x^{3}y + 6x^{2}y^{2}\\]\n\\[\\qquad + 4xy^{3} + y^{4}\\]\nKyun: \\(1x^{4}\\) ka matlab sirf \\(x^{4}\\) hai; final jawab mein 1 likhne ki zaroorat nahin.",
+              "Tasdeeq:\nEk aasan tareeqa: \\(x = y = 1\\) rakh dein. Left side \\((1 + 1)^{4} = 16\\). Right side coefficients ka jor: \\(1 + 4 + 6 + 4 + 1 = 16\\). Dono barabar, is liye coefficients sahi hain. (Yaad rakhiye: row \\(n\\) ka jor hamesha \\(2^{n}\\) hota hai.)"
+            ],
+            "answer": "\\((x + y)^{4} = x^{4} + 4x^{3}y + 6x^{2}y^{2} + 4xy^{3} + y^{4}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 21 mein kitab pehli line \\((x + y)^{4} - 1x^{4} + \\dots\\) chhaapti hai; \\((x + y)^{4}\\) ke baad barabar ka nishan \\(=\\) hona chahiye, minus nahin. Upar hum ne sahi likha hai. Jumla \"for the expansion of correspond\" mein \\((x + y)^{4}\\) chhoot gaya hai (Example 22 mein \\((x - 2)^{5}\\) isi tarah chhoota hai)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Agli misaal se pehle ek sawal: agar binomial mein minus ho, jaise \\((x - 2)^{5}\\), to kya Pascal's triangle kaam karega? Bilkul karega! Coefficients wahi row 5 se aate hain; minus sign ko hum doosre term ke andar rakh dete hain (\\(b = -2\\)), aur us ki powers khud signs bana deti hain. Yani triangle sirf \"kitne\" batata hai, sign \"kaun sa\" doosre term ki power batati hai. Kitab is misaal ko do tareeqon se hal karti hai, taa ke aap dekh sakein ke dono ka jawab ek hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 22",
+            "problem": "Expand \\((x - 2)^{5}\\) use the Binomial Theorem and using Pascal triangle.",
+            "steps": [
+              "Given: binomial \\(x - 2\\) aur power \\(n = 5\\).\nTo find: \\((x - 2)^{5}\\) ki expansion, pehle binomial theorem se, phir Pascal's triangle se.\nMethod: is sawal mein asal cheez minus sign hai. Hum \\(x - 2\\) ko \\(a + b\\) ki shakal mein likhte hain: \\(a = x\\) aur \\(b = -2\\). Yani minus sign ko \\(b\\) ke andar hi rehne dete hain. Phir \\((-2)\\) ki powers khud signs tay kar dengi; humein alag se signs yaad nahin karne parenge.",
+              "Step 1: \\(n = 5\\) ke liye binomial theorem likhein\n\\[(a + b)^{5} = {}^{5}C_{0}a^{5}b^{0} + {}^{5}C_{1}a^{4}b^{1}\\]\n\\[+ {}^{5}C_{2}a^{3}b^{2} + {}^{5}C_{3}a^{2}b^{3}\\]\n\\[+ {}^{5}C_{4}a^{1}b^{4} + {}^{5}C_{5}a^{0}b^{5}\\]\nKyun: yeh 8.2 wali expansion hai jis mein chhe (6) terms hain; \\(a\\) ki power 5 se 0 tak ghatti hai aur \\(b\\) ki power 0 se 5 tak barhti hai. Pehle general shakal likh lena achhi aadat hai, is se koi term chhoot-ta nahin.",
+              "Step 2: \\(a = x\\), \\(b = -2\\) rakhein (binomial theorem)\n\\[(x - 2)^{5} = {}^{5}C_{0}x^{5}(-2)^{0} + {}^{5}C_{1}x^{5-1}(-2)^{1}\\]\n\\[+ {}^{5}C_{2}x^{5-2}(-2)^{2} + {}^{5}C_{3}x^{5-3}(-2)^{3}\\]\n\\[+ {}^{5}C_{4}x^{5-4}(-2)^{4} + {}^{5}C_{5}x^{5-5}(-2)^{5}\\]\nKyun: har jagah \\(a\\) aur \\(b\\) ki jagah un ki values rakh di hain. \\((-2)\\) ko bracket mein rakhna zaroori hai, kyun ke \\(-2^{2} = -4\\) hai jab ke \\((-2)^{2} = +4\\).\nDhyan dein: even power (2, 4) par \\(-2\\) positive ban jata hai aur odd power (1, 3, 5) par negative rehta hai.",
+              "Step 3: Har term ki value nikaalein\n\\[{}^{5}C_{0}x^{5}(-2)^{0} = 1 \\cdot x^{5} \\cdot 1 = x^{5}\\]\n\\[{}^{5}C_{1}x^{4}(-2)^{1} = 5x^{4}(-2) = -10x^{4}\\]\n\\[{}^{5}C_{2}x^{3}(-2)^{2} = 10x^{3}(4) = 40x^{3}\\]\n\\[{}^{5}C_{3}x^{2}(-2)^{3} = 10x^{2}(-8)\\]\n\\[= -80x^{2}\\]\n\\[{}^{5}C_{4}x(-2)^{4} = 5x(16) = 80x\\]\n\\[{}^{5}C_{5}(-2)^{5} = 1(-32) = -32\\]\nKyun: \\({}^{5}C_{0} = 1\\), \\({}^{5}C_{1} = 5\\), \\({}^{5}C_{2} = {}^{5}C_{3} = 10\\), \\({}^{5}C_{4} = 5\\), \\({}^{5}C_{5} = 1\\). Aur \\((-2)\\) ki powers: \\(-2, 4, -8, 16, -32\\). Har term mein teen cheezein multiply hoti hain: coefficient, \\(x\\) ki power aur \\((-2)\\) ki power. Ek ek kar ke multiply karein, ek saath sab karne ki koshish mein ghalti hoti hai.",
+              "Step 4: Sab terms jor dein\n\\[(x - 2)^{5} = x^{5} - 10x^{4} + 40x^{3}\\]\n\\[\\qquad - 80x^{2} + 80x - 32\\]\nKyun: signs baari baari \\(+, -, +, -, +, -\\) aate hain kyun ke \\(-2\\) ki powers ka sign baari baari badalta hai. Jab bhi binomial mein minus ho, jawab mein signs isi tarah alternate karte hain; yeh khud ek achha check hai.",
+              "Step 5: Yehi expansion Pascal's triangle se\n\\((x - 2)^{5}\\) ke coefficients row \\(n = 5\\) ke entries hain:\n\\[1 \\quad 5 \\quad 10 \\quad 10 \\quad 5 \\quad 1\\]\nInhein \\({}^{5}C_{r}\\) ki jagah rakhein, \\(a = x\\), \\(b = -2\\):\n\\[(x - 2)^{5} = x^{5}(-2)^{0} + 5x^{4}(-2)^{1}\\]\n\\[+ 10x^{3}(-2)^{2} + 10x^{2}(-2)^{3}\\]\n\\[+ 5x(-2)^{4} + (-2)^{5}\\]\n\\[= x^{5} - 10x^{4} + 40x^{3} - 80x^{2}\\]\n\\[\\qquad + 80x - 32\\]\nKyun: row 5 humein \\({}^{5}C_{0}, \\dots, {}^{5}C_{5}\\) seedha de deti hai, factorial ka hisaab nahin karna parta. Baqi kaam bilkul wahi hai. Dono tareeqon ka jawab ek hi aana chahiye, aur aaya bhi.",
+              "Tasdeeq:\n\\(x = 1\\) rakhein: left side \\((1 - 2)^{5} = (-1)^{5} = -1\\); right side \\(1 - 10 + 40 - 80 + 80 - 32 = -1\\). Ek aur value \\(x = 2\\): left side \\(0^{5} = 0\\); right side \\(32 - 160 + 320 - 320 + 160 - 32 = 0\\). Dono jagah barabar, is liye expansion durust hai."
+            ],
+            "answer": "\\((x - 2)^{5} = x^{5} - 10x^{4} + 40x^{3} - 80x^{2} + 80x - 32\\) (dono tareeqon se yehi jawab)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 22 mein sawal \\((x - 2)^{5}\\) ka hai, magar kitab ke dono hal \\((x + 2)^{5}\\) se shuru hote hain aur jawab \\(x^{5} - 10x^{4}y + 40x^{3}y^{2} - \\dots - 32y^{5}\\) likhte hain, jis mein \\(y\\) aa gaya hai jo sawal mein hai hi nahin. Hal khud \\(b = -2\\) use karta hai, is liye sahi jawab yeh hai: \\((x - 2)^{5} = x^{5} - 10x^{4} + 40x^{3} - 80x^{2} + 80x - 32\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh kitab ka sawal nahin, practice ke liye hamari misaal hai: \\((1 + x)^{6}\\) expand karein.\nRow 6: 1, 6, 15, 20, 15, 6, 1. Pehla term 1 hai, us ki har power 1 hi rehti hai, is liye sirf \\(x\\) ki powers barhti hain:\n\\((1 + x)^{6} = 1 + 6x + 15x^{2} + 20x^{3} + 15x^{4} + 6x^{5} + x^{6}\\).\nTasdeeq: \\(x = 1\\) rakhein to \\(2^{6} = 64\\), aur \\(1 + 6 + 15 + 20 + 15 + 6 + 1 = 64\\). Sahi!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\((a - b)^{5}\\) ki expansion mein kaun se terms minus honge? Pehle khud sochiye, phir jawab dekhiye.\nJawab: jin terms mein \\(b\\) ki power odd hai (1, 3, 5): \\(-5a^{4}b\\), \\(-10a^{2}b^{3}\\), \\(-b^{5}\\). Poori expansion: \\(a^{5} - 5a^{4}b + 10a^{3}b^{2} - 10a^{2}b^{3} + 5ab^{4} - b^{5}\\). Yeh row 5 ke numbers hi hain, bas signs baari baari."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(\\binom{n}{r} = {}^{n}C_{r} = \\frac{n!}{r!\\,(n-r)!}\\), jahan \\(0 \\le r \\le n\\).\n2. Pascal's triangle: row 0 mein sirf 1; har row 1 se shuru aur 1 par khatam; andar ka har number ooper ke do numbers ka jor.\n3. Pascal's Rule: \\(\\binom{n}{k} = \\binom{n-1}{k-1} + \\binom{n-1}{k}\\), \\(0 < k < n\\).\n4. Row \\(n\\) se \\((a + b)^{n}\\) ke \\(n + 1\\) coefficients milte hain.\n5. \\((a - b)^{n}\\) mein wahi row, magar signs baari baari \\(+, -, +, \\dots\\)\n6. Har expansion ko letters ki jagah 1 rakh kar check karein: row \\(n\\) ka jor \\(2^{n}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Rows 1 se ginna: sab se ooper wala 1 row 0 hai, is liye \\((a + b)^{4}\\) ke liye paanchwin line \"1 4 6 4 1\" leni hai. Bachao: har row ke saath us ka number likh lein.\n2. \\((x - 2)^{n}\\) mein sign kho dena: \\(b = -2\\) likh kar bracket mein rakhein; \\((-2)^{2} = 4\\) magar \\(-2^{2} = -4\\).\n3. Coefficient ko doosre term ki power se multiply karna bhool jana: \\(10x^{3}(-2)^{2} = 40x^{3}\\) hai, \\(10x^{3}\\) nahin.\n4. Variables mila dena: binomial mein sirf \\(x\\) ho to jawab mein \\(y\\) nahin aa sakta, jaisa kitab ke Example 22 mein ho gaya."
+          }
+        ]
+      }
+    }
+  ]
+}

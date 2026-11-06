@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-EXERCISE-8-4-Q13",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-exercise-8-4-q13",
+      "title": "Question 13",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 174,
+          "pdf_to": 174,
+          "note": "Exercise 8.4, Question 13: book page 169 (PDF 174); answer key PDF 307 (answers for Q6-Q11 and Q13 only)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13",
+            "prompt": "13 A company starts with an initial inventory of 1,000 items. Each month, the company restocks 100 items and expects inventory costs to grow at 2% per month due to inflation. Use the binomial theorem to estimate the inventory cost after 6 months.",
+            "explanation": "Two things change: the number of items (+100 per month) and the cost of each item (\\(\\times 1.02\\) per month).\nThe question gives no price per item, so the answer is the cost as a multiple of today's price \\(c\\) of one item.\nPlan: items after 6 months; growth factor \\((1.02)^6\\) by the binomial theorem; multiply.",
+            "steps": [
+              "Given: 1000 items at the start; +100 items each month; cost grows 2% = 0.02 per month; time 6 months.\nTo find: the estimated inventory cost after 6 months.\nMethod: Let \\(c\\) be today's cost of one item. After 6 months the cost of one item is \\(c(1 + 0.02)^6\\); estimate \\((1.02)^6\\) by the binomial theorem. Then cost = (number of items) \\(\\times\\) (new cost of one item).",
+              "Number of items after 6 months\n\\[1000 + 6 \\times 100 = 1600 \\text{ items}\\]\nWhy: 100 items are added in each of the 6 months.",
+              "Growth factor of the cost\n\\[(1 + 0.02)^6 = 1 + 6(0.02) + 15(0.02)^2\\]\n\\[+ 20(0.02)^3 + \\dots\\]\nWhy: 2% growth per month multiplies the cost by 1.02 each month. Row 6 of Pascal's triangle: 1, 6, 15, 20, 15, 6, 1.",
+              "Evaluate the terms\n\\[= 1 + 0.12 + 0.006 + 0.00016 + \\dots\\]\n\\[\\approx 1.126\\]\nWhy: \\((0.02)^2 = 0.0004\\), \\((0.02)^3 = 0.000008\\). The next term, \\(15(0.02)^4 = 0.0000024\\), is too small to matter.",
+              "Estimate the cost\n\\[\\text{Cost} \\approx 1600 \\times 1.126\\,c\\]\n\\[= 1801.6\\,c\\]\nWhy: Each of the 1600 items now costs about \\(1.126c\\). (We value the whole stock at the month-6 price, as the question asks for the cost after 6 months.)",
+              "Check:\n\\[(1.02)^6 = 1.126162\\ldots\\]\n\\[1600 \\times 1.126162 = 1801.86\\]\nWhy: The exact factor differs from our estimate only in the 4th decimal place."
+            ],
+            "final_answer": "After 6 months there are 1600 items and the cost is about \\(1.126\\) times today's cost of 1600 items, that is \\(\\approx 1801.6\\,c\\) (\\(c\\) = today's cost of one item). For example, at Rs. 100 per item today this is about Rs. 180,160."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \"180,160 items\". The stock after 6 months is 1600 items, not 180,160. The figure \\(180{,}160 = 1600 \\times 1.126 \\times 100\\) is a cost in rupees, and only if one item costs Rs. 100 today, which the question does not state."
+          }
+        ]
+      }
+    }
+  ]
+}

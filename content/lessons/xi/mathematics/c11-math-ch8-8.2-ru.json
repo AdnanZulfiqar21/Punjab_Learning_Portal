@@ -1,0 +1,315 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-8.2-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/8.2",
+      "title": "8.2 Binomial Theorem (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH8-8.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 155,
+          "pdf_to": 158,
+          "note": "Book p. 150-153: 8.2 Binomial Theorem, expansion (A), proof by induction (B)-(D), Note on binomial coefficients, points (i)-(vi), general term, Examples 10-12"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum! Pichle hisse (8.1) mein aap ne mathematical induction seekha. Ab hum is unit ke doosre bare topic par aate hain: binomial theorem. Yeh woh formula hai jo kisi bhi do-term wale expression ki power ko ek hi baar mein khol (expand kar) deta hai. Is sabaq ke baad aap \\((a + x)^{7}\\) jaisi cheez ko bracket baar baar multiply kiye baghair likh sakenge, aur kisi khaas term (jaise \\(x^{5}\\) wali term) ko seedha dhoond sakenge."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki definition: do terms wala algebraic expression, jaise \\(a + x\\), \\(x - 2y\\), \\(ax + b\\) waghaira, binomial ya binomial expression kehlata hai.",
+            "bold": [
+              "binomial",
+              "binomial expression"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\"Bi\" ka matlab hai do (jaise bicycle ke do pahiye). Binomial mein bilkul do terms hoti hain jo \\(+\\) ya \\(-\\) se juri hon. \\(a + x\\) aur \\(2x - 3\\) binomials hain; \\(a + b + c\\) mein teen terms hain, is liye yeh binomial nahin (yeh trinomial hai).\nSochiye agar \\((a + x)^{7}\\) nikalna ho: bracket ko saat dafa khud se multiply karna parega, bohat lamba aur ghalti ka khatra bhi. Binomial theorem yahi kaam ek pattern se seconds mein kar deta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Seedhi multiplication se hum jaante hain ke\n\\[(a + x)^{2} = a^{2} + 2ax + x^{2} \\quad \\text{(i)}\\]\n\\[(a + x)^{3} = a^{3} + 3a^{2}x + 3ax^{2} + x^{3}\\]\n\\[\\text{(ii)}\\]\n(ii) ko khud check kijiye: \\((a + x)^{3} = (a + x)(a^{2} + 2ax + x^{2})\\); multiply kar ke like terms jama karein to yahi milta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "(i) aur (ii) ke right sides ko binomial \\(a + x\\) ki binomial expansions kaha jata hai, index (power) 2 aur 3 ke liye.",
+            "bold": [
+              "binomial expansions"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Index ka matlab hai power. Ab ghor se pattern dekhiye, kyun ke poora theorem isi pattern ka naam hai:\npower 2 ke coefficients: 1, 2, 1\npower 3 ke coefficients: 1, 3, 3, 1\nHar agli term mein \\(a\\) ki power ek kam hoti jati hai aur \\(x\\) ki power ek barhti jati hai. Aur har term mein dono powers ka jor (sum) hamesha index ke barabar rehta hai: \\(3a^{2}x\\) mein \\(2 + 1 = 3\\).\nKhud sochiye: \\((a + x)^{4}\\) mein kitni terms hongi aur pehli aur aakhri term kya hogi? (Jawab: 5 terms, pehli \\(a^{4}\\), aakhri \\(x^{4}\\).)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Aam taur par, kisi binomial ko kisi bhi positive integral (musbat poore number wali) power \\(n\\) tak le jane ka rule ya formula binomial theorem for positive integral index \\(n\\) kehlata hai. Har positive integer \\(n\\) ke liye:",
+            "bold": [
+              "binomial theorem for positive integral index"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[(a + x)^{n} = \\binom{n}{0}a^{n} + \\binom{n}{1}a^{n-1}x\\]\n\\[+ \\binom{n}{2}a^{n-2}x^{2} + \\dots\\]\n\\[+ \\binom{n}{r-1}a^{n-(r-1)}x^{r-1}\\]\n\\[+ \\binom{n}{r}a^{n-r}x^{r} + \\dots\\]\n\\[+ \\binom{n}{n-1}ax^{n-1} + \\binom{n}{n}x^{n} \\quad \\text{(A)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein (A) ki aakhri se pehli term mein \\(x\\) ki power \\(n-4\\) chhapi hai (\\(\\binom{n}{n-1}ax^{n-4}\\)). Sahi term \\(\\binom{n}{n-1}ax^{n-1}\\) hai. Wajah: har term mein \\(a\\) aur \\(x\\) ki powers ka jor \\(n\\) hona chahiye; yahan \\(a\\) ki power 1 hai, to \\(x\\) ki power \\(n - 1\\) hi ho sakti hai. Upar humne sahi likha hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ya mukhtasar (short) shakal mein:\n\\[(a + x)^{n} = \\sum_{r=0}^{n}\\binom{n}{r}a^{n-r}x^{r}\\]\njahan \\(a\\) aur \\(x\\) real numbers hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In nishanon (symbols) se ghabraiye mat, yeh pehle se aap ke jaane pehchane hain.\n\\(\\binom{n}{r}\\) wahi combination hai jo aap ne Unit 7 mein \\({}^{n}C_{r}\\) ke naam se parha:\n\\[\\binom{n}{r} = \\dfrac{n!}{r!\\,(n-r)!}\\]\nMisal: \\(\\binom{4}{2} = \\dfrac{4!}{2!\\,2!} = \\dfrac{24}{4} = 6\\).\n\\(\\sum_{r=0}^{n}\\) (sigma) ka matlab hai \"\\(r = 0, 1, 2, \\dots, n\\) rakh kar sari terms jama karo\". Yani short form aur lambi form (A) bilkul ek hi baat hai.\nCombination yahan kyun aata hai? \\((a + x)^{n}\\) asal mein \\(n\\) brackets ka product hai. Term \\(a^{n-r}x^{r}\\) tab banti hai jab \\(r\\) brackets se \\(x\\) chunein aur baqi se \\(a\\). \\(n\\) brackets mein se \\(r\\) chunne ke tareeqe \\(\\binom{n}{r}\\) hain, isi liye yahi us term ka coefficient hai. Yani coefficient sirf ginti hai ke woh term kitni dafa banti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Upar diya gaya expansion ka rule binomial theorem kehlata hai, aur yeh tab bhi sahi rehta hai jab \\(a\\) ya \\(x\\) complex number ho (Unit 1 wale numbers).",
+            "bold": [
+              "binomial theorem"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab hum har positive integer \\(n\\) ke liye binomial theorem ko mathematical induction ke principle se saabit (prove) karte hain. Yeh 8.1 wala tareeqa hi hai, bas statement thori lambi hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Proof ka naqsha pehle zehan mein bitha lein, phir lambi lines dar nahin lagayengi:\n1. Base case: \\(n = 1\\) par formula check karo.\n2. Induction hypothesis: maan lo ke \\(n = k\\) par sach hai, yani (B).\n3. Saabit karo ke phir \\(n = k + 1\\) par bhi sach hai, yani (C). Is ke liye (B) ko \\((a + x)\\) se multiply karte hain, milti julti terms (like terms) ikatthi karte hain, aur Pascal ka rule \\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k+1}{r}\\) baqi kaam kar deta hai.\nBas yeh teen qadam yaad rakhiye; neeche ki har line inhi mein se kisi ek ka hissa hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Proof: Maan lijiye \\(S(n)\\) woh statement hai jo upar (A) mein di gayi hai.",
+            "bold": [
+              "Proof:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Base Case: \\(n = 1\\) rakhne se\n\\[S(1):\\ (a + x)^{1} = \\binom{1}{0}a^{1} + \\binom{1}{1}a^{1-1}x\\]\n\\[= a + x\\]\njo bilkul sahi hai, kyun ke \\(\\binom{1}{0} = \\binom{1}{1} = 1\\) aur \\(a^{0} = 1\\). Base case poora ho gaya.",
+            "bold": [
+              "Base Case:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Induction of Hypothesis: Maan lijiye statement kisi \\(n = k \\in \\mathbb{N}\\) ke liye sach hai, yani\n\\[S(k):\\ (a + x)^{k} = \\binom{k}{0}a^{k} + \\binom{k}{1}a^{k-1}x\\]\n\\[+ \\binom{k}{2}a^{k-2}x^{2} + \\dots\\]\n\\[+ \\binom{k}{r-1}a^{k-(r-1)}x^{r-1}\\]\n\\[+ \\binom{k}{r}a^{k-r}x^{r} + \\dots\\]\n\\[+ \\binom{k}{k-1}ax^{k-1} + \\binom{k}{k}x^{k} \\quad \\text{(B)}\\]\nYeh sirf (A) hai jis mein \\(n\\) ki jagah \\(k\\) likha hai.",
+            "bold": [
+              "Induction of Hypothesis:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab humein dikhana hai ke phir \\(n = k + 1\\) ke liye bhi statement sach hai. Yani yeh banana hai:\n\\[S(k+1):\\ (a + x)^{k+1} = \\binom{k+1}{0}a^{k+1}\\]\n\\[+ \\binom{k+1}{1}a^{k}x + \\binom{k+1}{2}a^{k-1}x^{2} + \\dots\\]\n\\[+ \\binom{k+1}{r-1}a^{k-r+2}x^{r-1}\\]\n\\[+ \\binom{k+1}{r}a^{k-r+1}x^{r} + \\dots\\]\n\\[+ \\binom{k+1}{k}ax^{k} + \\binom{k+1}{k+1}x^{k+1} \\quad \\text{(C)}\\]\nYeh hamari manzil hai; ab dekhte hain (B) se yahan tak kaise pohanchein."
+          },
+          {
+            "type": "paragraph",
+            "text": "(B) ki dono sides ko \\((a + x)\\) se multiply karte hain, kyun ke \\((a + x)(a + x)^{k} = (a + x)^{k+1}\\), yani bilkul wahi cheez jo humein chahiye:\n\\[(a + x)(a + x)^{k} = a(a + x)^{k} + x(a + x)^{k}\\]\n(B) ki har term ko \\(a\\) se multiply karein to \\(a\\) ki har power ek barh jati hai:\n\\[\\binom{k}{0}a^{k+1} + \\binom{k}{1}a^{k}x\\]\n\\[+ \\binom{k}{2}a^{k-1}x^{2} + \\dots\\]\n\\[+ \\binom{k}{r}a^{k-r+1}x^{r} + \\dots\\]\n\\[+ \\binom{k}{k}ax^{k}\\]\naur (B) ki har term ko \\(x\\) se multiply karein to \\(x\\) ki har power ek barh jati hai:\n\\[\\binom{k}{0}a^{k}x + \\binom{k}{1}a^{k-1}x^{2} + \\dots\\]\n\\[+ \\binom{k}{r-1}a^{k-r+1}x^{r} + \\dots\\]\n\\[+ \\binom{k}{k-1}ax^{k} + \\binom{k}{k}x^{k+1}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab dono lines ko jama karte hain aur ek jaisi powers wali terms ko ikattha karte hain (jaise \\(a^{k}x\\) wali do terms ek bracket mein):\n\\[(a + x)^{k+1} = \\binom{k}{0}a^{k+1}\\]\n\\[+ \\left[\\binom{k}{1} + \\binom{k}{0}\\right]a^{k}x\\]\n\\[+ \\left[\\binom{k}{2} + \\binom{k}{1}\\right]a^{k-1}x^{2} + \\dots\\]\n\\[+ \\left[\\binom{k}{r} + \\binom{k}{r-1}\\right]a^{k-r+1}x^{r}\\]\n\\[+ \\dots + \\left[\\binom{k}{k} + \\binom{k}{k-1}\\right]ax^{k}\\]\n\\[+ \\binom{k}{k}x^{k+1}\\]\nDhyan dein: har bracket mein do coefficients hain jin ke neeche wale numbers mein sirf 1 ka farq hai. Yahi Pascal ke rule ki shakal hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kyun ke \\(\\binom{k}{0} = \\binom{k+1}{0}\\) (dono 1 hain), \\(\\binom{k}{k} = \\binom{k+1}{k+1}\\) (dono 1 hain) aur \\(0 \\le r \\le k\\) ke liye \\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k+1}{r}\\), is liye\n\\[\\therefore\\ (a + x)^{k+1} = \\binom{k+1}{0}a^{k+1}\\]\n\\[+ \\binom{k+1}{1}a^{k}x + \\binom{k+1}{2}a^{k-1}x^{2} + \\dots\\]\n\\[+ \\binom{k+1}{r}a^{k-r+1}x^{r} + \\dots\\]\n\\[+ \\binom{k+1}{k}ax^{k} + \\binom{k+1}{k+1}x^{k+1}\\]\n\\[\\text{...(D)}\\]\nAur (D) bilkul (C) hi hai!"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein (D) ka left side \\((a + x)^{k-1}\\) chhapa hai. Sahi \\((a + x)^{k+1}\\) hai, kyun ke humne \\((a + x)^{k}\\) ko \\((a + x)\\) se multiply kiya tha, aur powers jama hoti hain: \\(k + 1\\). Inhi lines mein scan mein \\(x^{2}\\) wali term ke saath \\(a\\) ki power bhi saaf nahin; sahi \\(a^{k-1}x^{2}\\) hai (powers ka jor \\(k + 1\\)). (C) ka aakhri coefficient \\(\\binom{k+1}{k+1}\\) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Pascal ka rule \\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k+1}{r}\\) sahi kyun hai? Dono ko factorial mein likhiye aur common denominator \\(r!\\,(k-r+1)!\\) banaiye:\n\\[\\dfrac{k!\\,(k-r+1)}{r!\\,(k-r+1)!} + \\dfrac{k!\\,r}{r!\\,(k-r+1)!}\\]\n\\[= \\dfrac{k!\\,(k+1)}{r!\\,(k+1-r)!}\\]\n\\[= \\dfrac{(k+1)!}{r!\\,(k+1-r)!} = \\binom{k+1}{r}\\]\nNumerator mein \\((k - r + 1) + r = k + 1\\) ban jata hai, aur \\(k!\\,(k+1) = (k+1)!\\).\nHamari taraf se misaal: \\(\\binom{4}{2} + \\binom{4}{1} = 6 + 4 = 10\\), aur \\(\\binom{5}{2} = 10\\). Bilkul barabar! Yahi rule 8.4 mein Pascal's triangle banata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is tarah humne dekha ke agar statement \\(n = k\\) ke liye sach ho to \\(n = k + 1\\) ke liye bhi sach hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ek dafa poore proof ko aam alfaaz mein dohra lete hain, taa ke lambi lines ke peeche chhupa idea saaf ho jaye. Humne yeh nahin kaha ke formula har \\(n\\) ke liye alag alag check karo; yeh namumkin hai kyun ke \\(n\\) ki values be-shumar hain. Humne sirf do baatein dikhayin: (1) formula \\(n = 1\\) par sahi hai; (2) agar kisi bhi power \\(k\\) par sahi ho to agli power \\(k + 1\\) par bhi sahi hoga, kyun ke \\((a + x)^{k}\\) ko ek dafa \\((a + x)\\) se multiply karne par coefficients bilkul Pascal ke rule ke mutabiq jur jate hain. In do baaton se seedhi ka har dandaa (step) khud ba khud mil jata hai: 1 se 2, 2 se 3, aur isi tarah aage. Exam mein yeh proof aaye to teen headings (Base Case, Induction of Hypothesis, Conclusion) zaroor likhiye; examiner sab se pehle inhi ko dekhta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Conclusion: Lihaza (domino ki tarah: pehla gira, aur har girne wala agle ko girata hai) statement \\(n\\) ki tamam positive integral values ke liye sach hai.",
+            "bold": [
+              "Conclusion:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "\\(\\binom{n}{0}, \\binom{n}{1}, \\binom{n}{2}, \\dots, \\binom{n}{n}\\) binomial coefficients kehlate hain."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "The following points can be observed in the expansion of (a + x)^n"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\((a + x)^{n}\\) ki expansion mein yeh baatein nazar aati hain. In ko ratta mat lagaiye; \\((a + x)^{3} = a^{3} + 3a^{2}x + 3ax^{2} + x^{3}\\) saamne rakh kar har point khud check kijiye:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) Expansion mein terms ki ginti index se ek zyada hoti hai (power 3, terms 4).",
+              "(ii) Har term mein \\(a\\) aur \\(x\\) ki powers ka jor index ke barabar hota hai.",
+              "(iii) \\(a\\) ki power index se ghatte ghatte zero tak aati hai.",
+              "(iv) \\(x\\) ki power zero se barhte barhte index tak jati hai.",
+              "(v) Shuru aur aakhir se barabar faasle wali terms ke coefficients barabar hote hain, kyun ke \\(\\binom{n}{r} = \\binom{n}{n-r}\\) (1, 3, 3, 1 dono taraf se ek jaisa).",
+              "(vi) Expansion ki \\((r + 1)\\)th term \\(\\binom{n}{r}a^{n-r}x^{r}\\) hai aur ise \\(T_{r+1}\\) likhte hain, yani"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "T_{r+1} = \\binom{n}{r}a^{n-r}x^{r}",
+            "text_alt": "T sub r plus 1 equals n choose r, times a to the power n minus r, times x to the power r"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kyun ke \\(r = 0, 1, 2, \\dots, n\\) rakhne se expansion ki har term isi se mil jati hai, is liye ise expansion ki general term (aam term) kehte hain. Yeh is chapter ka sab se kaam ka formula hai; zyadatar exam sawal isi se hal hote hain.",
+            "bold": [
+              "general term"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Formula ko ek chhoti misaal par chala kar dekhte hain: \\((2 + x)^{4}\\). Yahan pehli term \\(2\\), doosri term \\(x\\), aur \\(n = 4\\), to terms 5 hongi aur coefficients \\(\\binom{4}{0}, \\dots, \\binom{4}{4} = 1, 4, 6, 4, 1\\).\n\\[(2 + x)^{4} = 2^{4} + 4 \\cdot 2^{3}x + 6 \\cdot 2^{2}x^{2}\\]\n\\[+ 4 \\cdot 2x^{3} + x^{4}\\]\n\\[= 16 + 32x + 24x^{2} + 8x^{3} + x^{4}\\]\nAb points check kijiye: 5 terms (point i); har term mein 2 ki power aur \\(x\\) ki power ka jor 4 (point ii); 2 ki power 4 se 0 tak ghati (point iii) aur \\(x\\) ki 0 se 4 tak barhi (point iv); coefficients 1, 4, 6, 4, 1 dono taraf se ek jaise (point v). Tasdeeq ke liye \\(x = 1\\) rakhein: left side \\(3^{4} = 81\\), right side \\(16 + 32 + 24 + 8 + 1 = 81\\). Bilkul barabar!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yahan \"\\(r + 1\\)\" kyun, sirf \"\\(r\\)\" kyun nahin? Kyun ke ginti \\(r = 0\\) se shuru hoti hai: \\(r = 0\\) se pehli term \\(T_{1} = \\binom{n}{0}a^{n}\\), \\(r = 1\\) se doosri term, waghaira. Is liye term ka number hamesha \\(r\\) se ek zyada hota hai.\nHamari taraf se misaal: \\((a + x)^{3}\\) mein \\(r = 2\\) rakhein: \\(T_{3} = \\binom{3}{2}a^{1}x^{2} = 3ax^{2}\\), jo waqai (ii) ki teesri term hai.\nAgar binomial mein minus ho, jaise \\((a - x)^{n}\\), to use \\((a + (-x))^{n}\\) samjhein. Phir \\(T_{r+1} = (-1)^{r}\\binom{n}{r}a^{n-r}x^{r}\\), yani signs baari baari \\(+, -, +, -\\) aate hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Jab sawal ho \"\\(x^{5}\\) wali term nikalo\" ya \"\\(x\\) se azad (independent) term nikalo\", to poori expansion mat likhiye, waqt zaya hoga. Seedha \\(T_{r+1}\\) likhiye, \\(x\\) ki power ko \\(r\\) ki ek expression mein simplify kijiye, use required power ke barabar rakhiye aur \\(r\\) nikaal lijiye. Neeche Example 12 aur 13 mein yahi tareeqa hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki misaalein qadam ba qadam hal karte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Har misaal mein hum ek hi tareeqa follow karenge, jo aap ko exam mein bhi apnana hai: pehle \"Given\" (kya diya hai), phir \"To find\" (kya dhoondna hai), phir \"Method\" (kaun sa formula aur kyun). Phir har step ke saath \"Kyun\" likha hai, yani woh qadam kis wajah se uthaya gaya. Aakhir mein \"Tasdeeq\", yani jawab ko kisi doosre tareeqe se check karna. Shuru mein yeh lamba lagega, lekin isi aadat se ghaltiyan khatam hoti hain."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "Expand \\(\\left(\\frac{a}{2} - \\frac{2}{a}\\right)^{6}\\) and also find its general term.",
+            "steps": [
+              "Given: binomial \\(\\frac{a}{2} - \\frac{2}{a}\\), index \\(n = 6\\).\nTo find: (1) poori expansion; (2) general term \\(T_{r+1}\\).\nMethod: sab se pehle pehchaan lein ke pehli term \\(\\frac{a}{2}\\) hai aur doosri term \\(-\\frac{2}{a}\\) (minus sign doosri term ke saath rehta hai). Phir formula (A) lagayenge. Index 6 hai, to terms \\(6 + 1 = 7\\) hongi; yeh ginti aakhir mein check karne ke kaam aayegi.",
+              "Step 1: Binomial ko jama (sum) ki shakal mein likhein\n\\[\\left(\\dfrac{a}{2} - \\dfrac{2}{a}\\right)^{6} = \\left(\\dfrac{a}{2} + \\left(\\dfrac{-2}{a}\\right)\\right)^{6}\\]\nKyun: theorem \\((a + x)^{n}\\) ke liye likha hai. Agar \\(-\\frac{2}{a}\\) ko poori doosri term maan lein to signs khud ba khud sahi aate hain; alag se minus yaad rakhne ki zaroorat nahin rehti.",
+              "Step 2: Theorem lagayein, \\(r = 0\\) se \\(6\\) tak\n\\[= \\left(\\dfrac{a}{2}\\right)^{6} + \\binom{6}{1}\\left(\\dfrac{a}{2}\\right)^{5}\\left(-\\dfrac{2}{a}\\right)\\]\n\\[+ \\binom{6}{2}\\left(\\dfrac{a}{2}\\right)^{4}\\left(-\\dfrac{2}{a}\\right)^{2}\\]\n\\[+ \\binom{6}{3}\\left(\\dfrac{a}{2}\\right)^{3}\\left(-\\dfrac{2}{a}\\right)^{3}\\]\n\\[+ \\binom{6}{4}\\left(\\dfrac{a}{2}\\right)^{2}\\left(-\\dfrac{2}{a}\\right)^{4}\\]\n\\[+ \\binom{6}{5}\\left(\\dfrac{a}{2}\\right)\\left(-\\dfrac{2}{a}\\right)^{5} + \\left(-\\dfrac{2}{a}\\right)^{6}\\]\nKyun: \\(\\frac{a}{2}\\) ki power 6 se 0 tak ghatti hai aur \\(-\\frac{2}{a}\\) ki power 0 se 6 tak barhti hai. Har term mein dono powers ka jor 6 hai; isi se pata chalta hai ke koi term chhooti nahin.",
+              "Step 3: Coefficients nikaalein\n\\[\\binom{6}{1} = 6,\\quad \\binom{6}{2} = \\dfrac{6 \\cdot 5}{2 \\cdot 1} = 15\\]\n\\[\\binom{6}{3} = \\dfrac{6 \\cdot 5 \\cdot 4}{3 \\cdot 2 \\cdot 1} = 20\\]\n\\[\\binom{6}{4} = 15,\\quad \\binom{6}{5} = 6\\]\nKyun: point (v) ke mutabiq \\(\\binom{6}{4} = \\binom{6}{2}\\) aur \\(\\binom{6}{5} = \\binom{6}{1}\\). Is liye sirf teen coefficients hisaab karne parte hain; 1, 6, 15, 20, 15, 6, 1 dono taraf se ek jaisa pattern hai.",
+              "Step 4: Har term simplify karein\n\\[\\dfrac{a^{6}}{64},\\quad 6 \\cdot \\dfrac{a^{5}}{32}\\cdot\\left(-\\dfrac{2}{a}\\right) = -\\dfrac{3}{8}a^{4}\\]\n\\[15 \\cdot \\dfrac{a^{4}}{16}\\cdot\\dfrac{4}{a^{2}} = \\dfrac{15}{4}a^{2}\\]\n\\[20 \\cdot \\dfrac{a^{3}}{8}\\cdot\\left(-\\dfrac{8}{a^{3}}\\right) = -20\\]\n\\[15 \\cdot \\dfrac{a^{2}}{4}\\cdot\\dfrac{16}{a^{4}} = \\dfrac{60}{a^{2}}\\]\n\\[6 \\cdot \\dfrac{a}{2}\\cdot\\left(-\\dfrac{32}{a^{5}}\\right) = -\\dfrac{96}{a^{4}}\\]\n\\[\\left(-\\dfrac{2}{a}\\right)^{6} = \\dfrac{64}{a^{6}}\\]\nKyun: negative number ki even power positive aur odd power negative hoti hai, is liye signs baari baari \\(+, -, +, -\\) aate hain. Misal ke taur par \\(6 \\cdot \\frac{a^{5}}{32}\\cdot\\frac{2}{a} = \\frac{12a^{4}}{32} = \\frac{3a^{4}}{8}\\), aur sign minus.\nDhyan dein: \\(\\left(\\frac{a}{2}\\right)^{5} = \\frac{a^{5}}{32}\\); power numerator aur denominator dono par lagti hai.",
+              "Step 5: Expansion likhein\n\\[= \\dfrac{a^{6}}{64} - \\dfrac{3}{8}a^{4} + \\dfrac{15}{4}a^{2} - 20\\]\n\\[+ \\dfrac{60}{a^{2}} - \\dfrac{96}{a^{4}} + \\dfrac{64}{a^{6}}\\]\nKyun: saaton simplified terms ko unki tarteeb mein jor diya. Ginti kijiye: 7 terms, jaisa shuru mein socha tha.",
+              "Step 6: General term\n\\[T_{r+1} = \\binom{6}{r}\\left(\\dfrac{a}{2}\\right)^{6-r}\\left(-\\dfrac{2}{a}\\right)^{r}\\]\n\\[= \\binom{6}{r}\\dfrac{a^{6-r}}{2^{6-r}}(-1)^{r}\\dfrac{2^{r}}{a^{r}}\\]\n\\[= (-1)^{r}\\binom{6}{r}\\dfrac{a^{6-r}\\cdot a^{-r}}{2^{6-r}\\cdot 2^{-r}}\\]\n\\[= (-1)^{r}\\binom{6}{r}\\dfrac{a^{6-2r}}{2^{6-2r}}\\]\n\\[= (-1)^{r}\\binom{6}{r}\\left(\\dfrac{a}{2}\\right)^{6-2r}\\]\nKyun: \\(\\frac{2^{r}}{a^{r}}\\) mein \\(a^{r}\\) neeche hai, use upar le jayein to \\(a^{-r}\\) ban jata hai; isi tarah \\(2^{r}\\) upar hai to neeche \\(2^{-r}\\). Phir exponents ke qanoon se powers jama hoti hain: \\(a^{6-r}\\cdot a^{-r} = a^{6-2r}\\). Aakhir mein dono ki power ek jaisi \\((6 - 2r)\\) hai, is liye \\(\\left(\\frac{a}{2}\\right)^{6-2r}\\) likh diya.",
+              "Tasdeeq:\nGeneral term mein \\(r = 3\\) rakhein: \\((-1)^{3}\\cdot 20\\cdot\\left(\\frac{a}{2}\\right)^{0} = -20\\), jo expansion ki chauthi term hai. Ek aur aasan check: \\(a = 2\\) rakhein. Left side \\((1 - 1)^{6} = 0\\), aur right side \\(1 - 6 + 15 - 20 + 15 - 6 + 1 = 0\\). Dono barabar, jawab sahi hai."
+            ],
+            "answer": "\\(\\left(\\frac{a}{2} - \\frac{2}{a}\\right)^{6} = \\frac{a^{6}}{64} - \\frac{3}{8}a^{4} + \\frac{15}{4}a^{2} - 20 + \\frac{60}{a^{2}} - \\frac{96}{a^{4}} + \\frac{64}{a^{6}}\\); general term \\(T_{r+1} = (-1)^{r}\\binom{6}{r}\\left(\\frac{a}{2}\\right)^{6-2r}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example 10 se humne seekha ke minus wali binomial mein signs khud ba khud baari baari badalte hain, aur general term ek hi formula mein saari terms samet leti hai. Ab agla Example 11 dikhata hai ke binomial theorem sirf algebra ka khel nahin; is se mushkil numbers ki powers bhi zabani nikal sakte hain. Idea yeh hai ke mushkil number ko kisi aasan number (jaise 10, 100, 1) ke qareeb likh do: \\(9.9 = 10 - 0.1\\), \\(1.02 = 1 + 0.02\\), \\(99 = 100 - 1\\). Phir aasan number ki powers foran nikal aati hain aur chhote hisse ki powers tezi se chhoti hoti jati hain."
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "Evaluate \\((9.9)^{5}\\) using binomial theorem.",
+            "steps": [
+              "Given: \\((9.9)^{5}\\).\nTo find: is ki qeemat, calculator ke baghair.\nMethod: \\(9.9\\) ko \\(10 - 0.1\\) likhenge. 10 aur 0.1 ki powers zabani nikal aati hain (sirf zero aur decimal khiskana hai). Phir binomial theorem \\(a = 10\\), \\(x = -0.1\\), \\(n = 5\\) ke saath lagayenge.",
+              "Step 1: Number ko todein\n\\[(9.9)^{5} = (10 - 0.1)^{5}\\]\nKyun: 10 sab se qareeb aasan number hai. Chhota hissa \\(-0.1\\) har agli term ko pichli se bohat chhota kar deta hai, is liye hisaab saaf rehta hai.",
+              "Step 2: Expand karein (coefficients 1, 5, 10, 10, 5, 1)\n\\[= (10)^{5} + 5(10)^{4}(-0.1)\\]\n\\[+ 10(10)^{3}(-0.1)^{2} + 10(10)^{2}(-0.1)^{3}\\]\n\\[+ 5(10)(-0.1)^{4} + (-0.1)^{5}\\]\nKyun: \\(\\binom{5}{0}\\) se \\(\\binom{5}{5}\\) tak coefficients 1, 5, 10, 10, 5, 1 hain. 10 ki power 5 se 0 tak ghatti hai aur \\(-0.1\\) ki power barhti hai.",
+              "Step 3: Har term ka hisaab\n\\[= 100000 - 5000 + 100 - 1\\]\n\\[+ 0.005 - 0.00001\\]\nKyun: \\(5 \\times 10000 \\times 0.1 = 5000\\), \\(10 \\times 1000 \\times 0.01 = 100\\), \\(10 \\times 100 \\times 0.001 = 1\\), \\(5 \\times 10 \\times 0.0001 = 0.005\\), aur \\((0.1)^{5} = 0.00001\\). \\(-0.1\\) ki odd powers negative hain, is liye doosri, chauthi aur chhati term minus hain.\nDhyan dein: \\((0.1)^{5}\\) mein decimal ke baad paanch jagah hain: \\(0.00001\\). Kitab yahan ek zero zyada likh gayi hai (neeche \"Kitab ki ghalti\" dekhiye).",
+              "Step 4: Positive aur negative hisse alag jama karein\n\\[= 100100.005 - 5001.00001\\]\n\\[= 95099.00499\\]\nKyun: positive terms \\((100000 + 100 + 0.005)\\) aur negative terms \\((5000 + 1 + 0.00001)\\) ko alag jor kar aakhir mein ek hi tafreeq (subtraction) karna aasan aur mehfooz hai; baar baar plus minus karne se ghalti ka imkaan barhta hai.",
+              "Tasdeeq:\n\\(9.9^{2} = 98.01\\), \\(9.9^{4} = 98.01^{2} = 9605.9601\\), aur \\(9.9^{5} = 9605.9601 \\times 9.9 = 95099.00499\\). Dono tareeqon se ek hi jawab aaya."
+            ],
+            "answer": "\\((9.9)^{5} = 95099.00499\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 11 mein kitab aakhri term \\(-.000001\\) chhapti hai. Sahi \\((-0.1)^{5} = -0.00001\\) hai. Kitab ki agli line aur us ka final jawab \\(95099.00499\\) pehle hi sahi value use karte hain, is liye jawab theek hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Khaas term dhoondne ka chaar qadam wala nuskha (yaad kar lijiye, yeh Exercise 8.2 ke kai sawalon mein kaam aayega):\n1. General term \\(T_{r+1}\\) likhiye.\n2. Numbers aur \\(x\\) ko alag kar ke \\(x\\) ki power ko \\(r\\) ki ek expression bana lijiye (jaise \\(11 - 2r\\)).\n3. Is expression ko required power ke barabar rakh kar \\(r\\) nikaaliye. Agar \\(r\\) poora number (0 se \\(n\\) tak) na aaye to aisi term mojood hi nahin.\n4. Wahi \\(r\\) wapas \\(T_{r+1}\\) mein rakh kar term ka hisaab kijiye.\n\"Paanchvi term\" jaise sawal mein step 2 aur 3 ki zaroorat nahin, seedha \\(r = 4\\) rakhiye."
+          },
+          {
+            "type": "example",
+            "title": "Example 12",
+            "problem": "Find the specified term in the expansion of \\(\\left(\\frac{3}{2}x - \\frac{1}{3x}\\right)^{11}\\):\n(i) the term involving \\(x^{5}\\)\n(ii) the fifth term\n(iii) the sixth term from the end\n(iv) coefficient of the term involving \\(x^{-1}\\)",
+            "steps": [
+              "Given: \\(\\left(\\frac{3}{2}x - \\frac{1}{3x}\\right)^{11}\\); yani \\(n = 11\\), pehli term \\(\\frac{3}{2}x\\), doosri term \\(-\\frac{1}{3x}\\). Kul terms 12.\nTo find: chaar khaas terms (ya un ka coefficient).\nMethod: 12 terms likhna bekaar mehnat hai. Hum sirf ek dafa general term \\(T_{r+1}\\) likh kar simplify karenge, phir har hisse ke liye munasib \\(r\\) chunenge. Yeh tareeqa har aise sawal mein chalta hai.",
+              "Step 1: General term\n\\[T_{r+1} = \\binom{11}{r}\\left(\\dfrac{3}{2}x\\right)^{11-r}\\left(-\\dfrac{1}{3x}\\right)^{r}\\]\n\\[= \\binom{11}{r}\\dfrac{3^{11-r}}{2^{11-r}}x^{11-r}(-1)^{r}3^{-r}x^{-r}\\]\n\\[= (-1)^{r}\\binom{11}{r}\\dfrac{3^{11-2r}}{2^{11-r}}x^{11-2r}\\]\nKyun: \\(\\left(-\\frac{1}{3x}\\right)^{r} = (-1)^{r}\\cdot 3^{-r}\\cdot x^{-r}\\). Ab 3 ki powers jama: \\(3^{11-r}\\cdot 3^{-r} = 3^{11-2r}\\), aur \\(x\\) ki powers jama: \\(x^{11-r}\\cdot x^{-r} = x^{11-2r}\\). Is simplified shakal ka faida yeh hai ke \\(x\\) ki power ab sirf \\(11 - 2r\\) hai, jis se \\(r\\) dhoondna aasan ho jata hai.",
+              "Step 2: (i) \\(x^{5}\\) ke liye \\(r\\)\n\\[11 - 2r = 5 \\Rightarrow -2r = 5 - 11\\]\n\\[\\Rightarrow r = 3\\]\nYani \\(T_{4}\\) mein \\(x^{5}\\) hai.\nKyun: \\(T_{r+1}\\) mein \\(x\\) ki power \\(11 - 2r\\) hai; humein power 5 chahiye, to dono ko barabar rakh diya. \\(r = 3\\) ka matlab hai term number \\(3 + 1 = 4\\).",
+              "Step 3: (i) \\(T_{4}\\) ka hisaab\n\\[T_{4} = (-1)^{3}\\binom{11}{3}\\dfrac{3^{11-6}}{2^{11-3}}x^{11-6}\\]\n\\[= (-1)\\dfrac{11 \\cdot 10 \\cdot 9}{3 \\cdot 2 \\cdot 1}\\cdot\\dfrac{3^{5}}{2^{8}}x^{5}\\]\n\\[= -\\dfrac{165 \\times 243}{256}x^{5}\\]\n\\[= -\\dfrac{40095}{256}x^{5}\\]\nKyun: \\(\\binom{11}{3} = 165\\), \\(3^{5} = 243\\), \\(2^{8} = 256\\). \\(r = 3\\) odd hai, is liye \\((-1)^{3} = -1\\) aur term negative.",
+              "Step 4: (ii) Paanchvi term, \\(r = 4\\)\n\\[T_{5} = (-1)^{4}\\binom{11}{4}\\dfrac{3^{11-8}}{2^{11-4}}x^{11-8}\\]\n\\[= \\dfrac{11 \\cdot 10 \\cdot 9 \\cdot 8}{4 \\cdot 3 \\cdot 2 \\cdot 1}\\cdot\\dfrac{3^{3}}{2^{7}}x^{3}\\]\n\\[= \\dfrac{330 \\times 27}{128}x^{3} = \\dfrac{165 \\times 27}{64}x^{3}\\]\n\\[= \\dfrac{4455}{64}x^{3}\\]\nKyun: paanchvi term \\(T_{r+1}\\) hai jahan \\(r + 1 = 5\\), yani \\(r = 4\\), na ke \\(r = 5\\). \\(\\binom{11}{4} = 330\\), aur \\(330/128\\) ko 2 se kaat kar \\(165/64\\).\nDhyan dein: yahi jagah hai jahan sab se zyada ghalti hoti hai; term number se hamesha 1 ghata kar \\(r\\) lein.",
+              "Step 5: (iii) Aakhir se chhati term kaun si hai?\nKul terms \\(11 + 1 = 12\\). Aakhir se chhati term se pehle \\(12 - 6 = 6\\) terms hain, is liye yeh shuru se \\((6 + 1)\\) = 7vin term hai, yani \\(r = 6\\).\nKyun: \\(N\\) terms mein aakhir se \\(m\\)vin term shuru se \\((N - m + 1)\\)vin hoti hai. Hamari taraf se misaal: 5 logon ki line mein aakhir se doosra shakhs shuru se \\(5 - 2 + 1 = 4\\)tha hai.",
+              "Step 6: (iii) \\(T_{7}\\) ka hisaab\n\\[T_{7} = (-1)^{6}\\binom{11}{6}\\dfrac{3^{11-12}}{2^{11-6}}x^{11-12}\\]\n\\[= \\dfrac{11 \\cdot 10 \\cdot 9 \\cdot 8 \\cdot 7}{5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}\\cdot\\dfrac{3^{-1}}{2^{5}}x^{-1}\\]\n\\[= \\dfrac{462}{3 \\times 32}\\cdot\\dfrac{1}{x}\\]\n\\[= \\dfrac{77}{16x}\\]\nKyun: \\(\\binom{11}{6} = \\binom{11}{5} = 462\\) (point v). \\(3^{-1} = \\frac{1}{3}\\) aur \\(x^{-1} = \\frac{1}{x}\\). \\(462/96\\) ko 6 se kaatein to \\(77/16\\).",
+              "Step 7: (iv) \\(x^{-1}\\) wali term\n\\[11 - 2r = -1 \\Rightarrow r = 6\\]\nYani yeh wahi \\(T_{7} = \\frac{77}{16}x^{-1}\\) hai, aur is ka coefficient \\(\\frac{77}{16}\\) hai.\nKyun: coefficient sirf woh number hai jo \\(x^{-1}\\) ke aage likha hai, \\(x\\) ke baghair. Sawal \"coefficient\" maange to \\(x\\) mat likhiye.",
+              "Tasdeeq:\nHar jawab mein \\(x\\) ki power \\(11 - 2r\\) se milti hai: \\(r = 3\\) par 5, \\(r = 4\\) par 3, \\(r = 6\\) par \\(-1\\). Signs bhi \\((-1)^{r}\\) se milte hain: \\(r = 3\\) par negative, \\(r = 4\\) aur \\(r = 6\\) par positive. (Computer algebra se poori expansion karne par bhi yahi coefficients \\(-\\frac{40095}{256}\\), \\(\\frac{4455}{64}\\), \\(\\frac{77}{16}\\) aate hain.)"
+            ],
+            "answer": "(i) \\(T_{4} = -\\frac{40095}{256}x^{5}\\); (ii) \\(T_{5} = \\frac{4455}{64}x^{3}\\); (iii) \\(T_{7} = \\frac{77}{16x}\\); (iv) \\(x^{-1}\\) ka coefficient \\(\\frac{77}{16}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\((a + x)^{8}\\) mein beech wali term kaun si hogi aur kitni terms hongi? (Ishara: 9 terms, beech wali 5vin.) Is ka poora jawab agle sabaq 8.2.1 mein hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\((a + x)^{n} = \\sum_{r=0}^{n}\\binom{n}{r}a^{n-r}x^{r}\\), har positive integer \\(n\\) ke liye; is mein \\(n + 1\\) terms hoti hain.\n2. Har term mein \\(a\\) aur \\(x\\) ki powers ka jor \\(n\\) hota hai.\n3. \\(\\binom{n}{r} = \\binom{n}{n-r}\\): dono siron se barabar faasle wale coefficients barabar.\n4. General term: \\(T_{r+1} = \\binom{n}{r}a^{n-r}x^{r}\\). \\((a - x)^{n}\\) ke liye \\((-1)^{r}\\) se multiply karein.\n5. Aakhir se \\(m\\)vin term shuru se \\((n - m + 2)\\)vin term hoti hai.\n6. Theorem mathematical induction aur Pascal ke rule \\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k+1}{r}\\) se saabit hota hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(T_{r+1}\\) ki jagah \\(T_{r}\\) le lena: paanchvi term ke liye \\(r = 4\\) hai, \\(r = 5\\) nahin.\n2. Doosri term ka minus bhool jana: \\(\\left(\\frac{a}{2} - \\frac{2}{a}\\right)^{6}\\) mein doosri term \\(-\\frac{2}{a}\\) hai, is liye signs baari baari badalte hain.\n3. Power sirf aadhi term par lagana: \\(\\left(\\frac{3}{2}x\\right)^{2} = \\frac{9}{4}x^{2}\\) hai, \\(\\frac{3}{2}x^{2}\\) nahin.\n4. Aakhir se ginte waqt bhool jana ke kul terms \\(n + 1\\) hain, \\(n\\) nahin."
+          }
+        ]
+      }
+    }
+  ]
+}
