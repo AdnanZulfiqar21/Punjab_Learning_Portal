@@ -9,7 +9,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 
-from portal_api import errors, observability
+from portal_api import admission, errors, observability
 from portal_api.config import get_settings
 from portal_api.modules.access import trial_devices
 from portal_api.modules.access.products import router as products_router
@@ -56,6 +56,12 @@ from portal_api.modules.written.router import router as written_router
 async def _lifespan(app: FastAPI) -> AsyncIterator[None]:
     # W09.S1.T3 (WORKLOAD-GUARD-01): a served process publishes its MCQ save health for the written workload guard.
     guard.start_sampler(get_settings().health_sample_s)
+    # ADMISSION-01: the worker-thread pool stays at least twice the admission slots, so a request holding a pooled
+    # connection always finds a thread to finish on.
+    import anyio.to_thread
+
+    limiter = anyio.to_thread.current_default_thread_limiter()
+    limiter.total_tokens = max(int(limiter.total_tokens), 2 * app.state.admission.total)
     yield
 
 
@@ -114,6 +120,21 @@ def create_app() -> FastAPI:
                     {**refused, "code_reason": "UPDATE_REQUIRED"},
                 )
         return await call_next(request)
+
+    # ADMISSION-01: outside the native-client check (which takes a worker thread and a connection), inside the security
+    # headers so a refusal carries them.
+    app.state.admission = admission.Admission(
+        settings.api_admission_slots or admission.default_slots(settings.db_pool_size)
+    )
+
+    def _busy(request: Request) -> Response:
+        response = errors._problem(
+            request, 503, "SERVICE_BUSY", "The service is busy right now. Please retry in a few seconds."
+        )
+        response.headers["Retry-After"] = "5"
+        return response
+
+    app.middleware("http")(admission.middleware(app.state.admission, settings.api_admission_wait_s, _busy))
 
     @app.middleware("http")
     async def security_headers(request: Request, call_next: Callable[[Request], Awaitable[Response]]) -> Response:
