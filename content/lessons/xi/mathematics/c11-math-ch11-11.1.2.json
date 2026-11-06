@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH11-11.1.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch11",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch11/11.1.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 206,
+          "pdf_to": 207,
+          "note": "Book p. 201-202: 11.1.2 domain and range of secant from Figure 11.1. Excluded-angle list printed jumbled (written correctly); range step prints 0 <= x <= 1 and -1 <= x <= 0 although x is not 0. Figure 11.1 repeated; teaching notes ours."
+        }
+      ],
+      "title": "11.1.2 Domains and Ranges of Secant Function",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "From the Figure 11.1"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch11-fig-11-1-unit-circle",
+            "alt": "Unit circle with centre O at the origin, axes X prime X and Y prime Y. It meets the axes at A(1, 0), B(0, 1), C(minus 1, 0) and D(0, minus 1). The terminal side OP makes angle theta with OX; P(x, y) is on the circle, M is the foot of the perpendicular from P on OX, OM = x and MP = y.",
+            "caption": "Figure 11.1 (repeated from 11.1): unit circle with P(x, y) on the terminal side of θ (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\sec\\theta = \\frac{1}{x},\\quad x \\ne 0\\]\n\\(\\Rightarrow\\) terminal side \\(\\overrightarrow{OP}\\) should not coincide with \\(OY\\) or \\(OY'\\) (the \\(Y\\)-axis)\n\\[\\Rightarrow \\theta \\ne \\pm\\frac{\\pi}{2}, \\pm\\frac{3\\pi}{2}, \\pm\\frac{5\\pi}{2}, \\ldots\\]\n\\[\\Rightarrow \\theta \\ne (2n+1)\\frac{\\pi}{2},\\ \\text{where } n \\in \\mathbb{Z}\\]\nDomain of secant function \\(= \\mathbb{R} - \\{x \\mid x = (2n+1)\\frac{\\pi}{2},\\ n \\in \\mathbb{Z}\\}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "As in 11.1.1, the line of excluded angles is printed jumbled in the book (\\(\\frac{3\\pi}{2}\\) and \\(\\frac{5\\pi}{2}\\) overlap). It should read \\(\\theta \\ne \\pm\\frac{\\pi}{2}, \\pm\\frac{3\\pi}{2}, \\pm\\frac{5\\pi}{2}, \\ldots\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Secant has the same denominator as tangent: \\(\\sec\\theta = \\frac{1}{x} = \\frac{1}{\\cos\\theta}\\) and \\(\\tan\\theta = \\frac{y}{x}\\). Both fail exactly when \\(x = \\cos\\theta = 0\\), i.e. on the \\(Y\\)-axis. So secant and tangent have the same domain."
+          },
+          {
+            "type": "paragraph",
+            "text": "As \\(0 \\le x \\le 1\\) so, \\(\\frac{1}{x} \\ge 1\\), \\(\\sec\\theta \\ge 1\\) and \\(-1 \\le x \\le 0\\) so, \\(\\frac{1}{x} \\le -1\\), \\(\\sec\\theta \\le -1\\)\nAs \\(\\sec\\theta\\) attains all real values except those between \\(-1\\) and \\(1\\),\nRange of secant function \\(= \\mathbb{R} - \\{x \\mid -1 < x < 1\\}\\)",
+            "book_errors": [
+              "\\(0 \\le x \\le 1\\)",
+              "\\(-1 \\le x \\le 0\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book writes \\(0 \\le x \\le 1\\) and \\(-1 \\le x \\le 0\\), but \\(x = 0\\) is not allowed (\\(\\frac{1}{0}\\) has no value; we have just excluded it). The correct statements are:\n\\[0 < x \\le 1 \\Rightarrow \\frac{1}{x} \\ge 1\\]\n\\[-1 \\le x < 0 \\Rightarrow \\frac{1}{x} \\le -1\\]\nThe conclusion (the range) is not affected."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does taking the reciprocal push the value outside \\((-1, 1)\\)? Dividing \\(1\\) by a positive number that is at most \\(1\\) gives at least \\(1\\): \\(\\frac{1}{1} = 1\\), \\(\\frac{1}{0.5} = 2\\), \\(\\frac{1}{0.1} = 10\\). The smaller the positive \\(x\\), the larger \\(\\frac{1}{x}\\). For negative \\(x\\) the same happens with a minus sign: \\(\\frac{1}{-0.25} = -4\\).\nSo \\(\\sec\\theta\\) can never be, for example, \\(\\frac{1}{2}\\): that would need \\(\\cos\\theta = 2\\), which is outside the range of cosine.\nIn interval notation the range is \\((-\\infty, -1] \\cup [1, \\infty)\\). The values \\(1\\) and \\(-1\\) are included: \\(\\sec 0 = 1\\) and \\(\\sec\\pi = -1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Remember the shape of the answer: \\(|\\sec\\theta| \\ge 1\\) for every \\(\\theta\\) in the domain. Any question such as \"Is \\(\\sec\\theta = 0.7\\) possible?\" has the answer no."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\sec\\theta = \\frac{1}{x}\\) needs \\(x \\ne 0\\): domain \\(\\mathbb{R} - \\{(2n+1)\\frac{\\pi}{2} : n \\in \\mathbb{Z}\\}\\), the same as tangent.\n2. Range: \\(\\mathbb{R} - (-1, 1) = (-\\infty, -1] \\cup [1, \\infty)\\), i.e. \\(\\sec\\theta \\le -1\\) or \\(\\sec\\theta \\ge 1\\).\n3. \\(\\sec\\theta = 1\\) at \\(\\theta = 0\\) and \\(\\sec\\theta = -1\\) at \\(\\theta = \\pi\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing the range of secant as \\([-1, 1]\\): that is the range of cosine. Secant is its reciprocal, so it lies outside that interval.\n2. Excluding \\(-1\\) and \\(1\\) from the range. Only the numbers strictly between them are missing.\n3. Allowing \\(x = 0\\) in the working: never write \\(\\frac{1}{0}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}
