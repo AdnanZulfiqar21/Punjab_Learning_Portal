@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-EXERCISE-9-2-Q8-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/u-exercise-9-2-q8",
+      "title": "Question 8 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 181,
+          "pdf_to": 181,
+          "note": "Exercise 9.2, Question 8: book page 176 (PDF 181); its answer is key entry 9 on PDF 307 (not error-free); key entry 10 matches no printed question; checked with sympy and the solution book (PDF 865-866)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH9-EXERCISE-9-2-Q8",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8. A received message polynomial is \\(P(x) = x^5 + x^3 + x + 1\\) and a known error-detecting polynomial is \\(g(x) = x + 1\\). Find whether the received message is error-free using the remainder theorem.",
+            "explanation": "Error detection mein message ko is tarah bheja jata hai ke us ka polynomial \\(g(x)\\) se poora poora divide ho. Pohanchne par dobara divide karte hain: remainder 0 ho to koi ghalti nahi mili, warna message mein ghalti hai.\nFind kya karna hai? Message error-free hai ya nahi.\nPlan: \\(x + 1 = x - (-1)\\) likhein, remainder \\(P(-1)\\) nikalein; 0 ho to error-free, warna nahi.\nYeh coding theory ka idea hai jo kitab ne 9.2 mein bataya: mobile aur internet par data isi tarah check hota hai ke raste mein kharab to nahi hua.",
+            "steps": [
+              "Diya gaya hai: received message \\(P(x) = x^5 + x^3 + x + 1\\), error-detecting polynomial \\(g(x) = x + 1\\).\nHumein find karna hai: kya message error-free hai?\nTareeqa: Remainder Theorem: \\(P(x)\\) ko \\(x - a\\) se divide karne par remainder \\(P(a)\\) hai. Remainder zero ho to message error-free. Misaal ke taur par jaise dukaan wala note ginta hai: poore bundle ho jayein to theek, kuch bach jaye to hisaab mein ghalti hai.",
+              "Value dhoondein\n\\[x + 1 = x - (-1)\\]\n\\[\\Rightarrow a = -1\\]\nKyun: Theorem \\(x - a\\) ki shakal mein hai; \\(x + 1 = 0\\) se \\(x = -1\\) milta hai, is liye \\(a = -1\\).\nDhyan dein: \\(P(1)\\) mat nikaliye; \\(x + 1\\) ke liye test \\(x = -1\\) par hota hai.",
+              "\\(P(-1)\\) nikalein\n\\[P(-1) = (-1)^5 + (-1)^3 + (-1) + 1\\]\n\\[= -1 - 1 - 1 + 1\\]\n\\[= -2\\]\nKyun: Yahan saari powers (5, 3 aur 1) odd hain, aur \\(-1\\) ki har odd power \\(-1\\) hoti hai. Sirf constant \\(+1\\) positive rehta hai. To \\(-1 - 1 - 1 = -3\\) aur \\(-3 + 1 = -2\\).",
+              "Natija nikalein\n\\[\\text{Remainder} = -2 \\neq 0\\]\nKyun: \\(g(x) = x + 1\\) received message ko poora poora divide nahi karta, kuch bach jata hai. Iska matlab bhejne ke dauran message mein kuch badal gaya, yani message error-free nahi hai.\nDhyan dein: remainder \\(-2\\) ka sign maayne nahi rakhta; asal baat yeh hai ke woh zero nahi. Koi bhi non-zero remainder ghalti ki nishani hai.",
+              "Synthetic division se tasdeeq (\\(a = -1\\))\nCoefficients \\(1,\\ 0,\\ 1,\\ 0,\\ 1,\\ 1\\) (\\(x^4\\) aur \\(x^2\\) maujood nahi, un ki jagah 0):\n\\(1\\); \\(0 - 1 = -1\\); \\(1 + 1 = 2\\); \\(0 - 2 = -2\\); \\(1 + 2 = 3\\); \\(1 - 3 = -2\\).\n\\[\\text{Remainder} = -2 \\;\\checkmark\\]\nKyun: Jo power gayab ho us ka coefficient 0 likhna zaroori hai, warna columns khisak jate hain aur jawab ghalat aata hai. Division bhi wahi \\(-2\\) deti hai."
+            ],
+            "final_answer": "Message error-free nahi hai: remainder \\(P(-1) = -2 \\neq 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key (PDF 307) mein is sawal ka jawab number 9 par hai: \"Received message is not error-free, because remainder is non-zero\", jo hamare hal se milta hai. Key ka number 10 (\"Code word is not valid, because \\(x - 1\\) is not a factor of \\(C(x)\\)\") kisi chhape hue sawal ka nahi; is exercise mein \\(C(x)\\) kahin nahi hai."
+          }
+        ]
+      }
+    }
+  ]
+}

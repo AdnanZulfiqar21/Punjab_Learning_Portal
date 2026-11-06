@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-EXERCISE-9-1-Q6-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/u-exercise-9-1-q6",
+      "title": "Question 6 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 179,
+          "pdf_to": 179,
+          "note": "Exercise 9.1, Question 6: book page 174 (PDF 179); answer key book page 302 (PDF 307); verified with sympy and the solution book"
+        }
+      ],
+      "variant_of": "C11-MATH-CH9-EXERCISE-9-1-Q6",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. If \\(x + 1\\) and \\(x - 2\\) are factors of \\(x^{3} - px^{2} + qx + 2\\). Using of synthetic division find the values of \\(p\\) and \\(q\\).",
+            "explanation": "Is sawal mein do unknowns hain, \\(p\\) aur \\(q\\); do unknowns ke liye humein do equations chahiye. Khush qismati se do factors diye gaye hain, aur har factor ek equation dega.\nFactor ka matlab hai remainder zero. Is liye har synthetic division ka remainder (jo \\(p\\) aur \\(q\\) mein hoga) zero ke barabar rakhenge.\nPlan: \\(x + 1\\) aur \\(x - 2\\) se synthetic division, dono remainders = 0, phir do equations hal karna, aur aakhir mein check.",
+            "steps": [
+              "Diya gaya hai: \\(f(x) = x^{3} - px^{2} + qx + 2\\); \\(x + 1\\) aur \\(x - 2\\) is ke factors hain.\nHumein find karna hai: \\(p\\) aur \\(q\\).\nTareeqa: Synthetic division, jis mein \\(p\\) aur \\(q\\) ko letters hi rehne dete hain. Factor ka remainder 0 hota hai, is liye har division se ek equation milegi, aur do equations se do unknowns nikal aayenge.",
+              "Coefficients likhein\n\\[1,\\ -p,\\ q,\\ 2\\]\nKyun: Table mein letters bilkul numbers ki tarah chalte hain; bas un ko jorte waqt like terms (sirf \\(p\\) wali, sirf \\(q\\) wali, sirf numbers) alag alag jama karte hain.\nDhyan dein: \\(x^{2}\\) ka coefficient \\(-p\\) hai, \\(p\\) nahi; polynomial mein \\(-px^{2}\\) likha hai.",
+              "\\(x + 1\\) se divide karein (\\(a = -1\\))\n\\[\\begin{array}{r|rrrr} -1 & 1 & -p & q & 2 \\\\ & & -1 & p + 1 & -p - q - 1 \\\\ \\hline & 1 & -p - 1 & q + p + 1 & \\boxed{1 - p - q} \\end{array}\\]\n\\[1 \\times (-1) = -1,\\ -p - 1\\]\n\\[(-p - 1)(-1) = p + 1,\\ q + p + 1\\]\n\\[(q + p + 1)(-1) = -p - q - 1\\]\n\\[2 - p - q - 1 = 1 - p - q\\]\nKyun: \\(x + 1 = x - (-1)\\), is liye \\(a = -1\\). Synthetic division ka tareeqa: upar wali line mein coefficients (missing power ke liye 0) aur baayen taraf \\(a\\). Pehla coefficient seedha neeche utarta hai; phir har neeche wale number ko \\(a\\) se multiply kar ke agle column mein likhte hain aur us column ko jama karte hain (diagonal: multiply, vertical: add). \\(-1\\) se multiply karne ka matlab hai har term ka sign badal dena, jaise \\((-p - 1)(-1) = p + 1\\).",
+              "Pehli equation\n\\[1 - p - q = 0\\]\n\\[p + q = 1 \\quad (1)\\]\nKyun: \\(x + 1\\) factor hai, is liye remainder zero hona chahiye. Remainder \\(1 - p - q\\) ko zero rakha aur \\(p\\), \\(q\\) ko doosri taraf le gaye.",
+              "\\(x - 2\\) se divide karein (\\(a = 2\\))\n\\[\\begin{array}{r|rrrr} 2 & 1 & -p & q & 2 \\\\ & & 2 & 4 - 2p & 2q + 8 - 4p \\\\ \\hline & 1 & 2 - p & q + 4 - 2p & \\boxed{10 - 4p + 2q} \\end{array}\\]\n\\[1 \\times 2 = 2,\\ 2 - p\\]\n\\[2(2 - p) = 4 - 2p,\\ q + 4 - 2p\\]\n\\[2(q + 4 - 2p) = 2q + 8 - 4p\\]\n\\[2 + 2q + 8 - 4p = 10 - 4p + 2q\\]\nKyun: Wohi tareeqa, bas ab \\(a = 2\\) hai: neeche wale number ko 2 se multiply kar ke agle column mein jama karna. Asal polynomial ke coefficients hi istemal kiye hain, pichhla quotient nahi, taake dono equations seedhi asal polynomial se aayein.",
+              "Doosri equation\n\\[10 - 4p + 2q = 0\\]\n\\[4p - 2q = 10\\]\n\\[2p - q = 5 \\quad (2)\\]\nKyun: \\(x - 2\\) bhi factor hai, is liye yeh remainder bhi zero hai. Poori equation ko 2 se divide kiya taake numbers chhote aur hisaab aasaan ho jaye.",
+              "(1) aur (2) ko jama karein\n\\[(p + q) + (2p - q) = 1 + 5\\]\n\\[3p = 6\\]\n\\[p = 2\\]\nKyun: Ek equation mein \\(+q\\) aur doosri mein \\(-q\\) hai; jama karne se \\(q\\) khatam ho jata hai aur sirf \\(p\\) bachta hai. Yeh elimination ka tareeqa hai.",
+              "(1) se \\(q\\) nikalein\n\\[2 + q = 1\\]\n\\[q = -1\\]\nKyun: \\(p = 2\\) ko aasaan wali equation (1) mein rakha, phir 2 ko doosri taraf le gaye to \\(q = 1 - 2 = -1\\).",
+              "Tasdeeq\n\\[f(x) = x^{3} - 2x^{2} - x + 2\\]\n\\[f(-1) = -1 - 2 + 1 + 2 = 0 \\;\\checkmark\\]\n\\[f(2) = 8 - 8 - 2 + 2 = 0 \\;\\checkmark\\]\nKyun: \\(p = 2\\), \\(q = -1\\) rakhne se polynomial \\(x^{3} - 2x^{2} - x + 2\\) bana. Factor theorem ke mutabiq \\(f(-1)\\) aur \\(f(2)\\) dono zero hone chahiye, aur dono zero aaye. Is liye values sahi hain."
+            ],
+            "final_answer": "\\(p = 2,\\ q = -1\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

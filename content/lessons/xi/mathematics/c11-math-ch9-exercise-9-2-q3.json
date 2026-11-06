@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-EXERCISE-9-2-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/u-exercise-9-2-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 181,
+          "pdf_to": 181,
+          "note": "Exercise 9.2, Question 3: book page 176 (PDF 181); its answer is key entry 4 on PDF 307 (x + 1 is not a factor); checked with sympy and the solution book (PDF 861)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. Designing a low pass filter to remove high frequency noise from an audio signal, the filter is represented by the polynomial \\(P(x) = x^3 + x^2 + 2x + 4\\). Find whether \\(x + 1\\) is a factor.",
+            "explanation": "The audio-filter story only tells us where the polynomial comes from; the maths is a Factor Theorem test.\nWe must decide whether \\(x + 1\\) is a factor of \\(P(x)\\).\nPlan: write \\(x + 1 = x - (-1)\\), work out \\(P(-1)\\); zero means factor, non-zero means not a factor.",
+            "steps": [
+              "Given: \\(P(x) = x^3 + x^2 + 2x + 4\\), the divisor \\(x + 1\\).\nTo find: whether \\(x + 1\\) is a factor.\nMethod: Factor Theorem. It is stated for \\(x - a\\), so first write the divisor in that form.",
+              "Find the value to test\n\\[x + 1 = x - (-1)\\]\n\\[\\Rightarrow a = -1\\]\nWhy: The Factor Theorem uses \\(x - a\\). Matching \\(x + 1\\) with \\(x - a\\) gives \\(a = -1\\), not \\(+1\\).",
+              "Work out \\(P(-1)\\)\n\\[P(-1) = (-1)^3 + (-1)^2 + 2(-1) + 4\\]\n\\[= -1 + 1 - 2 + 4\\]\n\\[= 2\\]\nWhy: An odd power of \\(-1\\) is \\(-1\\), an even power is \\(+1\\). By the Remainder Theorem this 2 is the remainder on dividing by \\(x + 1\\).",
+              "Draw the conclusion\n\\[P(-1) = 2 \\neq 0\\]\nWhy: The remainder is not zero, so \\(x + 1\\) does not divide \\(P(x)\\) exactly; by the Factor Theorem it is not a factor.",
+              "Check by synthetic division by \\(x + 1\\) (\\(a = -1\\))\nCoefficients \\(1,\\ 1,\\ 2,\\ 4\\):\nbring down 1; \\(1 \\times (-1) = -1\\), \\(1 - 1 = 0\\);\n\\(0 \\times (-1) = 0\\), \\(2 + 0 = 2\\);\n\\(2 \\times (-1) = -2\\), \\(4 - 2 = 2\\).\n\\[\\text{Quotient} = x^2 + 2\\]\n\\[\\text{Remainder} = 2 \\;\\checkmark\\]\nWhy: The division gives the same remainder 2, and indeed \\((x + 1)(x^2 + 2) + 2 = x^3 + x^2 + 2x + 4\\)."
+            ],
+            "final_answer": "No. \\(P(-1) = 2 \\neq 0\\), so \\(x + 1\\) is not a factor of \\(P(x)\\) (remainder 2)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the answer key (PDF 307) this question's answer is printed as entry 4, \"\\(x + 1\\) is not a factor of \\(p(x)\\)\", not as entry 3. It agrees with our working. The key's numbers are shifted because it has 10 entries for 7 printed questions."
+          }
+        ]
+      }
+    }
+  ]
+}

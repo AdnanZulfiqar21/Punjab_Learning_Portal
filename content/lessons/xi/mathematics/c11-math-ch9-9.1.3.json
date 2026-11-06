@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-9.1.3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/9.1.3",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 178,
+          "pdf_to": 178,
+          "note": "Book p. 173: 9.1.3 Synthetic Division, layout figure, Out Line of the Method (i)-(iii) with patterns, Example 7 table. Book errors: 'Vertical patter'; quotient x^2 + 0x + 9 for x^2 + 0x - 9. Teaching notes, Key points, Common mistakes are ours."
+        }
+      ],
+      "title": "9.1.3 Synthetic Division",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "There is a nice shortcut method for long division of a polynomial \\(f(x)\\) by a polynomial of the form \\(x - a\\). This process of division is called Synthetic Division.",
+            "bold": [
+              "Synthetic Division"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Synthetic division gives the same quotient and remainder as long division, but we write only the coefficients, never the powers of \\(x\\), and we add instead of subtracting. It works only for a divisor of the form \\(x - a\\). For \\(x + 2\\) write \\(x - (-2)\\) and use \\(a = -2\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "To divide the polynomial \\(px^{3} + qx^{2} + cx + d\\) by \\(x - a\\):"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch9-fig-synthetic-layout",
+            "alt": "Synthetic division layout. First line: a, a vertical bar, then p, q, c, d. Second line: boxes under q, c, d, the first holding ap. Third line, below a horizontal line: p and boxes under q, c, d. Vertical arrows mean add down a column; diagonal arrows mean multiply by a and write in the next column. The first numbers of the third line are the quotient coefficients; the last box is the remainder.",
+            "caption": "Figure: layout of synthetic division of px³ + qx² + cx + d by x − a (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Out Line of the Method"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Write down the coefficients of the dividend \\(f(x)\\) from left to right in decreasing order of powers of \\(x\\). Insert 0 for any missing term.",
+              "To the left of the first line, write \\(a\\) of the divisor \\((x - a)\\).",
+              "Use the following patterns to write the second and third lines:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Vertical patter (↓): Add terms\nDiagonal pattern (↗): Multiply by \\(a\\).",
+            "book_errors": [
+              "Vertical patter"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \"Vertical patter\"; it should read \"Vertical pattern\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The rhythm, column by column:\n1. Bring the first coefficient straight down to the third line.\n2. Multiply it by \\(a\\) and write the product in the second line under the next coefficient (diagonal).\n3. Add that column (vertical) and write the sum in the third line.\n4. Repeat steps 2 and 3 to the last column.\nThe last number of the third line is the remainder; the numbers before it are the coefficients of the quotient, whose degree is one less than the dividend's.\nExample 1 of 9.1 done this way (\\(3x^{3} - 10x^{2} + 13x - 6\\) divided by \\(x - 2\\)):\n\\[\\begin{array}{r|rrrr} 2 & 3 & -10 & 13 & -6 \\\\ & & 6 & -8 & 10 \\\\ \\hline & 3 & -4 & 5 & \\boxed{4} \\end{array}\\]\nQuotient \\(3x^{2} - 4x + 5\\), remainder 4, the same as by long division."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "If \\((x - 2)\\) and \\((x + 2)\\) are factors of \\(x^{4} - 13x^{2} + 36\\). Using synthetic division, find the other two factors.",
+            "steps": [
+              "Given: \\(f(x) = x^{4} - 13x^{2} + 36\\) with factors \\(x - 2\\) and \\(x + 2\\).\nTo find: the other two factors.\nMethod: divide \\(f(x)\\) by \\(x - 2\\) synthetically, then divide the quotient by \\(x + 2\\). What is left is a quadratic, which we factorize.",
+              "Step 1: Write all the coefficients\n\\[f(x) = x^{4} + 0x^{3} - 13x^{2} + 0x + 36\\]\nCoefficients: \\(1, 0, -13, 0, 36\\).\n\\[x - a = x - 2 \\Rightarrow a = 2\\]\n\\[x - a = x + 2 = x - (-2) \\Rightarrow a = -2\\]\nWhy: the \\(x^{3}\\) and \\(x\\) terms are missing, so we write 0 for them; otherwise the columns go wrong. (The book writes \\(-0x\\); \\(-0x\\) and \\(+0x\\) are the same.)",
+              "Step 2: Divide by \\(x - 2\\) (\\(a = 2\\))\n\\[\\begin{array}{r|rrrrr} 2 & 1 & 0 & -13 & 0 & 36 \\\\ & & 2 & 4 & -18 & -36 \\\\ \\hline & 1 & 2 & -9 & -18 & \\boxed{0} \\end{array}\\]\nBring down 1; \\(1 \\times 2 = 2\\), \\(0 + 2 = 2\\); \\(2 \\times 2 = 4\\), \\(-13 + 4 = -9\\); \\(-9 \\times 2 = -18\\), \\(0 - 18 = -18\\); \\(-18 \\times 2 = -36\\), \\(36 - 36 = 0\\).\nWhy: remainder 0 confirms that \\(x - 2\\) is a factor. The quotient is \\(x^{3} + 2x^{2} - 9x - 18\\).",
+              "Step 3: Divide the quotient by \\(x + 2\\) (\\(a = -2\\))\n\\[\\begin{array}{r|rrrr} -2 & 1 & 2 & -9 & -18 \\\\ & & -2 & 0 & 18 \\\\ \\hline & 1 & 0 & -9 & \\boxed{0} \\end{array}\\]\nBring down 1; \\(1 \\times (-2) = -2\\), \\(2 - 2 = 0\\); \\(0 \\times (-2) = 0\\), \\(-9 + 0 = -9\\); \\(-9 \\times (-2) = 18\\), \\(-18 + 18 = 0\\).\nWhy: remainder 0 again, so \\(x + 2\\) is a factor. The new quotient has coefficients \\(1, 0, -9\\).",
+              "Step 4: Both divisions in one table (as in the book)\n\\[\\begin{array}{r|rrrrr} 2 & 1 & 0 & -13 & 0 & 36 \\\\ & & 2 & 4 & -18 & -36 \\\\ \\hline -2 & 1 & 2 & -9 & -18 & \\boxed{0} \\\\ & & -2 & 0 & 18 & \\\\ \\hline & 1 & 0 & -9 & \\boxed{0} & \\end{array}\\]\nWhy: the book continues the second division directly from the third line of the first one. Both boxed zeros are remainders.",
+              "Step 5: Write and factorize the quotient\nThe book prints \\(x^{2} + 0x + 9\\) here; from the last line \\(1, 0, -9\\) the quotient is\n\\[x^{2} + 0x - 9 = x^{2} - 9\\]\n\\[= (x + 3)(x - 3)\\]\nWhy: \\(x^{2} - 9\\) is a difference of squares, \\(x^{2} - 3^{2}\\).",
+              "Check:\n\\[(x - 2)(x + 2)(x + 3)(x - 3)\\]\n\\[= (x^{2} - 4)(x^{2} - 9)\\]\n\\[= x^{4} - 13x^{2} + 36\\]\nwhich is \\(f(x)\\)."
+            ],
+            "answer": "The other two factors are \\((x + 3)\\) and \\((x - 3)\\); \\(x^{4} - 13x^{2} + 36 = (x - 2)(x + 2)(x + 3)(x - 3)\\).",
+            "book_errors": [
+              "\\(x^{2} + 0x + 9\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In Example 7 the book prints Quotient \\(= x^{2} + 0x + 9 = x^{2} - 9\\). The last line of the table is \\(1, 0, -9\\), so the quotient is \\(x^{2} + 0x - 9 = x^{2} - 9\\); the \"+9\" is a misprint for \"\\(-9\\)\". The final factors \\((x + 3)\\) and \\((x - 3)\\) are correct."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Synthetic division is a shortcut for dividing by \\(x - a\\) only.\n2. Write all coefficients in decreasing powers, with 0 for missing terms; write \\(a\\) on the left.\n3. Vertical pattern: add; diagonal pattern: multiply by \\(a\\).\n4. Last number = remainder; the others = coefficients of the quotient (degree one less).\n5. Remainder 0 means \\(x - a\\) is a factor; the quotient can then be divided again by another factor."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistakes",
+            "text": "1. Leaving out the 0 for a missing power (in Example 7, both \\(0x^{3}\\) and \\(0x\\)).\n2. Using \\(a = 2\\) for the divisor \\(x + 2\\); it must be \\(a = -2\\).\n3. Subtracting in the columns as in long division; in synthetic division we always add.\n4. Reading the quotient with the wrong degree: from \\(1, 0, -9\\) after dividing a degree-3 polynomial, the quotient is \\(x^{2} + 0x - 9\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

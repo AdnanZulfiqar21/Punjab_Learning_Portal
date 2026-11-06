@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-EXERCISE-9-2-Q3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/u-exercise-9-2-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 181,
+          "pdf_to": 181,
+          "note": "Exercise 9.2, Question 3: book page 176 (PDF 181); its answer is key entry 4 on PDF 307 (x + 1 is not a factor); checked with sympy and the solution book (PDF 861)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH9-EXERCISE-9-2-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. Designing a low pass filter to remove high frequency noise from an audio signal, the filter is represented by the polynomial \\(P(x) = x^3 + x^2 + 2x + 4\\). Find whether \\(x + 1\\) is a factor.",
+            "explanation": "Low pass filter aur audio signal ki kahani sirf yeh batati hai ke polynomial kahan se aaya; asal sawal Factor Theorem ka test hai.\nFind kya karna hai? Kya \\(x + 1\\), \\(P(x) = x^3 + x^2 + 2x + 4\\) ka factor hai?\nPlan: \\(x + 1\\) ko \\(x - (-1)\\) likhein, \\(P(-1)\\) nikalein; zero aaye to factor, warna factor nahi.\nAchhi baat yeh hai ke kahani jitni bhi lambi ho, maths sirf do lines ki hai: \\(a\\) dhoondo aur value nikalo.",
+            "steps": [
+              "Diya gaya hai: \\(P(x) = x^3 + x^2 + 2x + 4\\) aur divisor \\(x + 1\\).\nHumein find karna hai: kya \\(x + 1\\) factor hai?\nTareeqa: Factor Theorem. Yeh theorem \\(x - a\\) ki shakal mein likha hota hai, is liye pehle divisor ko isi shakal mein laate hain.",
+              "Test karne wali value dhoondein\n\\[x + 1 = x - (-1)\\]\n\\[\\Rightarrow a = -1\\]\nKyun: \\(x + 1\\) ko \\(x - a\\) se milayein to \\(a = -1\\) banta hai, \\(+1\\) nahi. Asaan tareeqa: factor ko zero ke barabar rakhein, \\(x + 1 = 0 \\Rightarrow x = -1\\).\nDhyan dein: sab se aam ghalti yahi hai ke bachche \\(x + 1\\) dekh kar \\(P(1)\\) nikal lete hain. \\(P(1) = 8\\) aata hai, jo ghalat test hai.",
+              "\\(P(-1)\\) nikalein\n\\[P(-1) = (-1)^3 + (-1)^2 + 2(-1) + 4\\]\n\\[= -1 + 1 - 2 + 4\\]\n\\[= 2\\]\nKyun: \\(-1\\) ki odd power (1, 3, 5, ...) hamesha \\(-1\\) aur even power (2, 4, ...) hamesha \\(+1\\) hoti hai. Is liye \\((-1)^3 = -1\\) aur \\((-1)^2 = +1\\). Phir \\(2 \\times (-1) = -2\\). Jama: \\(-1 + 1 = 0\\), \\(0 - 2 = -2\\), \\(-2 + 4 = 2\\). Remainder Theorem ke mutabiq yahi 2, \\(x + 1\\) se divide karne par remainder hai.",
+              "Natija nikalein\n\\[P(-1) = 2 \\neq 0\\]\nKyun: Remainder zero nahi, matlab \\(x + 1\\) poora poora divide nahi karta. Factor sirf woh hota hai jo bina kuch bache divide kare, is liye \\(x + 1\\) factor nahi hai.",
+              "Synthetic division se tasdeeq (\\(a = -1\\))\nCoefficients \\(1,\\ 1,\\ 2,\\ 4\\):\n1 neeche utarein; \\(1 \\times (-1) = -1\\), \\(1 - 1 = 0\\);\n\\(0 \\times (-1) = 0\\), \\(2 + 0 = 2\\);\n\\(2 \\times (-1) = -2\\), \\(4 - 2 = 2\\).\n\\[\\text{Quotient} = x^2 + 2\\]\n\\[\\text{Remainder} = 2 \\;\\checkmark\\]\nKyun: Division bhi wahi remainder 2 deti hai. Aur ulta check: \\((x + 1)(x^2 + 2) + 2 = x^3 + 2x + x^2 + 2 + 2 = x^3 + x^2 + 2x + 4\\), bilkul \\(P(x)\\).\nDhyan dein: quotient \\(x^2 + 2\\) mein \\(x\\) wala term zero aaya, is liye woh likha nahi gaya. Agar remainder 0 hota to \\(P(x) = (x + 1)(x^2 + 2)\\) likh sakte, lekin yahan 2 bacha, to aisa likhna ghalat hoga."
+            ],
+            "final_answer": "Nahi. \\(P(-1) = 2 \\neq 0\\), is liye \\(x + 1\\), \\(P(x)\\) ka factor nahi hai (remainder 2)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key (PDF 307) mein is sawal ka jawab number 4 par hai: \"\\(x + 1\\) is not a factor of \\(p(x)\\)\", number 3 par nahi. Yeh hamare hal se milta hai. Key ke number is liye khisak gaye hain ke us mein 10 jawab hain aur sawal sirf 7."
+          }
+        ]
+      }
+    }
+  ]
+}

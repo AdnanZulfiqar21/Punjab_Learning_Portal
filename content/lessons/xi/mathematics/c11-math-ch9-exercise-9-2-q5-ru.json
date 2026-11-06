@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-EXERCISE-9-2-Q5-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/u-exercise-9-2-q5",
+      "title": "Question 5 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 181,
+          "pdf_to": 181,
+          "note": "Exercise 9.2, Question 5: book page 176 (PDF 181); printed numbering jumps 3 to 5 (no Q4); answer is key entry 6 on PDF 307 (minus signs faint in the scan); checked with sympy and the solution book (PDF 862-863)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH9-EXERCISE-9-2-Q5",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(i)",
+            "prompt": "5 (i) Consider a signal processing system represented by the polynomial \\(S(x) = 2x^3 - 5x^2 + 4x - 3\\), where \\(x\\) is the input to the system. If the input to the system is \\(x = 2\\), find the remainder.",
+            "explanation": "Input \\(x = 2\\) par \"remainder find karo\" ka matlab Remainder Theorem hai: \\(S(x)\\) ko \\(x - 2\\) se divide karein to remainder \\(S(2)\\) hota hai.\nDiya kya hai? \\(S(x) = 2x^3 - 5x^2 + 4x - 3\\) aur input \\(x = 2\\).\nFind kya karna hai? Sirf ek number, remainder.\nPlan: \\(x = 2\\) rakh kar \\(S(2)\\) nikalein, phir synthetic division se tasdeeq.\nNote karein: kitab mein is exercise ka Sawal 4 hai hi nahi; numbering 3 ke baad seedha 5 par chali jati hai. Is liye yeh hamara chautha sawal hai, lekin naam wahi \"Question 5\" rakha hai jo kitab mein chhapa hai, taake kitab se milana aasaan rahe.",
+            "steps": [
+              "Diya gaya hai: \\(S(x) = 2x^3 - 5x^2 + 4x - 3\\), input \\(x = 2\\).\nHumein find karna hai: remainder.\nTareeqa: Remainder Theorem: \\(S(x)\\) ko \\(x - a\\) se divide karein to remainder \\(S(a)\\) hota hai. Yahan \\(a = 2\\). Is ka faida yeh hai ke poori division kiye baghair remainder mil jata hai.",
+              "\\(S(2)\\) nikalein\n\\[S(2) = 2(2)^3 - 5(2)^2 + 4(2) - 3\\]\n\\[= 2(8) - 5(4) + 8 - 3\\]\n\\[= 16 - 20 + 8 - 3\\]\n\\[= 1\\]\nKyun: Pehle powers: \\(2^3 = 8\\), \\(2^2 = 4\\). Phir coefficients se multiply: \\(2 \\times 8 = 16\\), \\(5 \\times 4 = 20\\), \\(4 \\times 2 = 8\\). Phir baen se daen: \\(16 - 20 = -4\\), \\(-4 + 8 = 4\\), \\(4 - 3 = 1\\).\nDhyan dein: \\(2(2)^3\\) ko \\((2 \\times 2)^3 = 64\\) mat banaiye; power sirf andar wale 2 par hai.\nSignal processing ki zabaan mein \\(S(2) = 1\\) ka matlab hai ke input 2 dene par system ka output 1 hai. Yahi remainder kehlata hai.",
+              "Synthetic division se tasdeeq (\\(x - 2\\) se)\nCoefficients \\(2,\\ -5,\\ 4,\\ -3\\), \\(a = 2\\):\n2 neeche utarein; \\(2 \\times 2 = 4\\), \\(-5 + 4 = -1\\);\n\\(-1 \\times 2 = -2\\), \\(4 - 2 = 2\\);\n\\(2 \\times 2 = 4\\), \\(-3 + 4 = 1\\).\n\\[\\text{Quotient} = 2x^2 - x + 2\\]\n\\[\\text{Remainder} = 1 \\;\\checkmark\\]\nKyun: Seedhi division bhi wahi remainder 1 deti hai. Dono tareeqe ek hi jawab dein to ghalti ka imkaan bahut kam reh jata hai."
+            ],
+            "final_answer": "Remainder \\(= S(2) = 1\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(ii)",
+            "prompt": "5 (ii) For the same system \\(S(x) = 2x^3 - 5x^2 + 4x - 3\\), determine whether the system has a specific characteristic such that when \\(x = 1\\), the system response becomes zero. If so, identify the factor.",
+            "explanation": "\"\\(x = 1\\) par response zero ho jaye\" ka matlab \\(S(1) = 0\\). Factor Theorem ke mutabiq aisa tab hi hota hai jab \\(x - 1\\) factor ho.\nFind kya karna hai? Haan ya na; agar haan to factor ka naam.\nPlan: \\(S(1)\\) nikalein; zero aaye to factor \\(x - 1\\), warna aisa koi factor nahi.\nPart (i) mein humne value nikali thi; yahan humein faisla karna hai ke value zero hai ya nahi. Dono parts mein tool ek hi hai, bas sawal ka rukh badla hai.",
+            "steps": [
+              "Diya gaya hai: wahi \\(S(x) = 2x^3 - 5x^2 + 4x - 3\\), ab input \\(x = 1\\).\nHumein find karna hai: kya \\(S(1) = 0\\)? Agar haan to factor batana hai.\nTareeqa: \\(x = 1\\) par system ka response \\(S(1)\\) hai. Factor Theorem: \\(x - 1\\) factor hai agar aur sirf agar \\(S(1) = 0\\).",
+              "\\(S(1)\\) nikalein\n\\[S(1) = 2(1)^3 - 5(1)^2 + 4(1) - 3\\]\n\\[= 2 - 5 + 4 - 3\\]\n\\[= -2\\]\nKyun: 1 ki har power 1 hi hoti hai (\\(1^3 = 1\\), \\(1^2 = 1\\)), is liye har term sirf apna coefficient reh jata hai. Yaad rakhein: \\(P(1)\\) hamesha coefficients ka jama hota hai. Phir \\(2 - 5 = -3\\), \\(-3 + 4 = 1\\), \\(1 - 3 = -2\\).",
+              "Natija nikalein\n\\[S(1) = -2 \\neq 0\\]\nKyun: \\(x = 1\\) par response \\(-2\\) hai, zero nahi. Is liye system mein yeh khaas characteristic nahi hai, aur Factor Theorem ke mutabiq \\(x - 1\\) factor nahi. Sawal kehta hai \"if so, identify the factor\"; chunke jawab \"na\" hai, koi factor batana nahi.\nDhyan dein: sirf is liye ke sawal factor poochh raha hai, zabardasti \\(x - 1\\) ko factor mat likhiye. Pehle test, phir faisla.\nHamari taraf se misaal: agar polynomial \\(2x^3 - 5x^2 + 4x - 1\\) hota to \\(S(1) = 2 - 5 + 4 - 1 = 0\\) aata, aur tab hum keh sakte ke \\(x - 1\\) factor hai.",
+              "Synthetic division se tasdeeq (\\(a = 1\\))\nCoefficients \\(2,\\ -5,\\ 4,\\ -3\\):\n2 neeche utarein; \\(2 - 5 = -3\\); \\(-3 + 4 = 1\\); \\(1 - 3 = -2\\).\n\\[\\text{Quotient} = 2x^2 - 3x + 1\\]\n\\[\\text{Remainder} = -2 \\;\\checkmark\\]\nKyun: \\(a = 1\\) ho to har multiplication number ko wahi ka wahi rehne deti hai, is liye division bahut jaldi ho jati hai aur wahi remainder \\(-2\\) deti hai."
+            ],
+            "final_answer": "Nahi. \\(S(1) = -2 \\neq 0\\), is liye \\(x = 1\\) par response zero nahi aur \\(x - 1\\) factor nahi hai."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Numbering: kitab is exercise ke sawal 1, 2, 3, 5, 6, 7, 8 chhapti hai; Sawal 4 maujood hi nahi, is liye yeh exercise ka chautha sawal hai. Answer key (PDF 307) mein is ke jawab number 6 par hain: \"(i) Remainder = 1 (ii) System response in not zero when \\(x = 1\\)\" (\"in\" asal mein \"is\" hona chahiye). Dono hamare hal se milte hain. Key ka number 5, \"CRC = 20\", kisi chhape hue sawal ka nahi."
+          }
+        ]
+      }
+    }
+  ]
+}

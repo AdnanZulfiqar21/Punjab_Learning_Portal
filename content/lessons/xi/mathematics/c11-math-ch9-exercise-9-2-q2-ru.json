@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-EXERCISE-9-2-Q2-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/u-exercise-9-2-q2",
+      "title": "Question 2 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 181,
+          "pdf_to": 181,
+          "note": "Exercise 9.2, Question 2: book page 176 (PDF 181); its answer is key entry 3 on PDF 307 (x = 2 lies on the curve), not entry 2; checked with sympy and the solution book (PDF 860-861)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH9-EXERCISE-9-2-Q2",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2. A dataset is modeled by the polynomial \\(P(x) = x^3 - 4x^2 + 5x - 2\\). Find whether the point \\(x = 2\\) lies on the curve.",
+            "explanation": "Yeh asal mein Factor Theorem ka sawal hai, bas lafz kahani wale hain. Is exercise mein \"point \\(x = 2\\) curve par hai\" ka matlab hai ke model wahan zero deta hai, yani \\(P(2) = 0\\); graph wahan \\(x\\)-axis ko chhoota hai.\nFind kya karna hai? Haan ya na: \\(x = 2\\) curve par hai ya nahi.\nPlan: \\(P(2)\\) nikalein; zero aaye to jawab haan, aur \\(x - 2\\) factor hai; aakhir mein synthetic division se tasdeeq.\nYaad rakhein: is exercise mein \"curve par hona\", \"response zero hona\", \"error-free hona\" aur \"factor hona\", sab ka matlab ek hi hai: value zero aani chahiye.",
+            "steps": [
+              "Diya gaya hai: \\(P(x) = x^3 - 4x^2 + 5x - 2\\) aur point \\(x = 2\\).\nHumein find karna hai: kya \\(x = 2\\) curve par hai, yani kya \\(P(2) = 0\\)?\nTareeqa: Factor Theorem kehta hai: \\(x - a\\) tab hi factor hai jab \\(P(a) = 0\\) ho. Yahan \\(a = 2\\), is liye sirf ek value \\(P(2)\\) nikalni hai. Lambi division ki zaroorat nahi.\nBook ki Example 10 bhi isi tarah ek value nikal kar faisla karti hai.",
+              "\\(P(2)\\) nikalein\n\\[P(2) = 2^3 - 4(2)^2 + 5(2) - 2\\]\n\\[= 8 - 4(4) + 10 - 2\\]\n\\[= 8 - 16 + 10 - 2\\]\n\\[= 0\\]\nKyun: \\(x = 2\\) rakhne se woh remainder milta hai jo \\(x - 2\\) se divide karne par aata (Remainder Theorem). Pehle powers: \\(2^3 = 8\\), \\(2^2 = 4\\). Phir multiply: \\(4 \\times 4 = 16\\), \\(5 \\times 2 = 10\\). Phir baen se daen jama aur minus: \\(8 - 16 = -8\\), \\(-8 + 10 = 2\\), \\(2 - 2 = 0\\).\nDhyan dein: \\(-4(2)^2\\) mein minus sign 4 ke saath hai; \\(2^2 = 4\\) pehle karein, phir \\(-4 \\times 4 = -16\\).",
+              "Natija nikalein\n\\[P(2) = 0\\]\n\\[\\Rightarrow (x - 2) \\text{ is a factor}\\]\nKyun: Value zero ka matlab remainder zero. Factor Theorem ke mutabiq \\(x - 2\\) poora poora divide karta hai, aur \\(x = 2\\) is polynomial ka root hai. Is liye point \\(x = 2\\) curve par hai (\\(x\\)-axis wali jagah par).",
+              "Synthetic division se tasdeeq (\\(x - 2\\) se)\nCoefficients \\(1,\\ -4,\\ 5,\\ -2\\) aur \\(a = 2\\):\n1 neeche utarein; \\(1 \\times 2 = 2\\), \\(-4 + 2 = -2\\);\n\\(-2 \\times 2 = -4\\), \\(5 - 4 = 1\\);\n\\(1 \\times 2 = 2\\), \\(-2 + 2 = 0\\).\n\\[\\text{Quotient} = x^2 - 2x + 1\\]\n\\[\\text{Remainder} = 0 \\;\\checkmark\\]\n\\[P(x) = (x - 2)(x - 1)^2\\]\nKyun: Section 9.1.3 wali synthetic division bhi wahi remainder 0 deti hai, to jawab pakka hua. Bonus: quotient \\(x^2 - 2x + 1 = (x - 1)^2\\) hai, yani poori factorization bhi mil gayi.\nKhud sochiye: kya \\(x = 1\\) bhi is curve par hai? (\\(P(1) = 1 - 4 + 5 - 2 = 0\\), haan.)\nNatija yaad rakhne ka asaan tareeqa: value zero to factor, value non-zero to factor nahi. Yeh ek line poori exercise ki chaabi hai."
+            ],
+            "final_answer": "Haan. \\(P(2) = 0\\), is liye \\(x = 2\\) curve par hai (aur \\(x - 2\\) factor hai: \\(P(x) = (x - 2)(x - 1)^2\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key (PDF 307) mein is sawal ka jawab number 3 par chhapa hai: \"\\(x = 2\\) lies on the curve\", jo hamare hal se milta hai. Key ka number 2 (\"\\(x = -1\\) is a valid point\") is sawal ka nahi hai; key mein 10 jawab hain jabke sawal sirf 7 chhape hain."
+          }
+        ]
+      }
+    }
+  ]
+}

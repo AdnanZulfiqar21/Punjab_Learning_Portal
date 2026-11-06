@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-EXERCISE-9-2-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/u-exercise-9-2-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 181,
+          "pdf_to": 181,
+          "note": "Exercise 9.2, Question 1: book page 176 (PDF 181); answer key PDF 307 entry 1 (26.25%) matches; checked with sympy and the solution book (PDF 858-859)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1",
+            "prompt": "1. Consider a data set at monthly sales figures. A polynomial regression model \\(P(x) = x^3 + 2x^2 + x - 3\\) is fitted to this data. If the observed sales in the \\(5^{\\text{th}}\\) month are 240 units, find the percentage error.",
+            "explanation": "A regression model predicts a value; we compare the prediction with what really happened.\nWe must find the percentage error of the model in month 5.\nPlan: predicted value \\(= P(5)\\) (the remainder on dividing by \\(x - 5\\)), then error \\(=\\) observed \\(-\\) predicted, then divide by the observed value and multiply by 100.",
+            "steps": [
+              "Given: \\(P(x) = x^3 + 2x^2 + x - 3\\); month \\(x = 5\\); observed sales \\(= 240\\) units.\nTo find: the percentage error.\nMethod: As in Example 8, Error \\(=\\) Observed \\(-\\) Predicted, and\n\\[\\text{\\% error} = \\left|\\dfrac{\\text{Error}}{\\text{Observed}}\\right| \\times 100\\]\nThe predicted value is \\(P(5)\\), which by the Remainder Theorem is also the remainder when \\(P(x)\\) is divided by \\(x - 5\\).",
+              "Turn the words into numbers\n\\[x = 5\\]\n\\[\\text{Observed} = 240\\]\n\\[\\text{Predicted} = P(5)\\]\nWhy: \"5th month\" is the input of the model, so \\(x = 5\\). The 240 units actually sold are the observed value.",
+              "Find the predicted value \\(P(5)\\)\n\\[P(5) = 5^3 + 2(5)^2 + 5 - 3\\]\n\\[= 125 + 2(25) + 5 - 3\\]\n\\[= 125 + 50 + 5 - 3\\]\n\\[= 177\\]\nWhy: The model's prediction for month 5 is its value at \\(x = 5\\). Powers first (\\(5^3 = 125\\), \\(5^2 = 25\\)), then multiply, then add and subtract.",
+              "Find the error\n\\[\\text{Error} = 240 - 177\\]\n\\[= 63\\]\nWhy: Error is how far the real value is from the prediction: observed minus predicted. It is positive here, so the model predicted too few units.",
+              "Find the percentage error\n\\[\\text{\\% error} = \\dfrac{|63|}{240} \\times 100\\]\n\\[= \\dfrac{6300}{240}\\]\n\\[= 26.25\\]\nWhy: We compare the error with the observed (actual) value, exactly as Example 8 divides by the observed 40. The modulus keeps the percentage positive.",
+              "Check\n\\[26.25\\% \\text{ of } 240 = 0.2625 \\times 240\\]\n\\[= 63 \\;\\checkmark\\]\n\\[177 + 63 = 240 \\;\\checkmark\\]\nWhy: Taking the percentage of 240 gives back the error, and prediction plus error gives back the observed sales."
+            ],
+            "final_answer": "Percentage error \\(= 26.25\\%\\) (the model predicts \\(P(5) = 177\\) units, 63 below the observed 240)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key for Exercise 9.2 (book page 302, PDF 307) has 10 entries, but only 7 questions are printed (1, 2, 3, 5, 6, 7, 8), so its numbers do not line up with the questions. Key entry 1, \\(26.25\\%\\), is this question's answer and agrees with our working. Key entries 2 (\"\\(x = -1\\) is a valid point\"), 5 (\"CRC = 20\") and 10 (\"Code word is not valid, because \\(x - 1\\) is not a factor of \\(C(x)\\)\") answer no printed question."
+          }
+        ]
+      }
+    }
+  ]
+}
