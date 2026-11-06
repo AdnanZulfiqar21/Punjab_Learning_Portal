@@ -1,0 +1,592 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH1-REVISION",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch1",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch1/u-unit-1-revision",
+      "title": "Unit 1 Revision",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 6,
+          "pdf_to": 26,
+          "note": "Book p. 1-21: Unit 1 Complex Numbers (portal-made revision summary of the whole unit)"
+        },
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 297,
+          "pdf_to": 298,
+          "note": "Answer key, Exercises 1.1-1.5 (used for the list of book corrections)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "About this page",
+            "text": "This page is the portal's revision summary of Unit 1, Complex Numbers. It is not a page of the textbook: it collects the unit's definitions, formulas, rules, common mistakes and question types in one place. For the full explanations, the worked examples and the solved exercises, go back to the topic and exercise pages of this unit."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Important definitions"
+          },
+          {
+            "type": "list",
+            "items": [
+              "Imaginary unit (iota): \\(i = \\sqrt{-1}\\), so \\(i^{2} = -1\\).",
+              "Complex number: \\(z = a + ib\\) with \\(a, b \\in \\mathbb{R}\\). The set of all complex numbers is \\(C\\).",
+              "Real part and imaginary part: \\(\\operatorname{Re}(z) = a\\), \\(\\operatorname{Im}(z) = b\\). Both are real numbers (\\(\\operatorname{Im}(3+4i) = 4\\), not \\(4i\\)).",
+              "Every real number \\(a = a + 0i\\) is a complex number. A number \\(ib\\) with \\(b \\ne 0\\) is (purely) imaginary.",
+              "Conjugate: \\(\\overline{z} = a - ib\\); only the sign of the imaginary part changes. A real number is self-conjugate.",
+              "Ordered pair form: \\((a, b)\\) means \\(a + ib\\).",
+              "Argand diagram: a plane whose \\(x\\)-axis is the real axis and \\(y\\)-axis the imaginary axis; \\(z = x + iy\\) is the point \\((x, y)\\).",
+              "Modulus: \\(|z| = \\sqrt{x^{2}+y^{2}}\\), the distance of \\(z\\) from the origin; it is never negative.",
+              "Square root of \\(z\\): a number \\(w\\) with \\(w^{2} = z\\). A non-zero \\(z\\) has exactly two, \\(w\\) and \\(-w\\).",
+              "Complex polynomial: \\(P(z) = a_{n}z^{n} + \\dots + a_{1}z + a_{0}\\) with complex coefficients and \\(a_{n} \\ne 0\\); \\(n\\) is the degree and \\(a_{n}\\) the leading coefficient. The values of \\(z\\) with \\(P(z) = 0\\) are the zeros of \\(P\\) and the roots of \\(P(z) = 0\\).",
+              "Cube roots of unity: the roots of \\(x^{3} = 1\\), namely \\(1, \\omega, \\omega^{2}\\). Fourth roots of unity: the roots of \\(x^{4} = 1\\), namely \\(1, -1, i, -i\\).",
+              "Polar coordinates \\((r, \\theta)\\): directed distance \\(r\\) from the pole \\(O\\) and angle \\(\\theta\\) from the polar axis, measured counter-clockwise.",
+              "Polar form: \\(z = r(\\cos\\theta + i\\sin\\theta) = r\\operatorname{cis}\\theta\\), with \\(r = |z|\\); \\(\\theta\\) is an argument of \\(z\\). The principal argument \\(\\arg z\\) is the one in \\((-\\pi, \\pi]\\).",
+              "Impedance: \\(Z = R + iX\\), where \\(R\\) is the resistance and \\(X = X_{L} - X_{C}\\) the reactance.",
+              "Cryptography: changing a readable message (plaintext) into a secret code (ciphertext) with a key (encryption), and back (decryption)."
+            ],
+            "ordered": false
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Key formulas"
+          },
+          {
+            "type": "paragraph",
+            "text": "Throughout, \\(a, b, c, d, k, x, y\\) are real numbers and \\(i^{2} = -1\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Algebra of complex numbers"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}(a+ib)+(c+id)\\\\=(a+c)+i(b+d)\\end{aligned}",
+            "text_alt": "a plus i b, plus c plus i d, equals a plus c, plus i times b plus d"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}(a+ib)-(c+id)\\\\=(a-c)+i(b-d)\\end{aligned}",
+            "text_alt": "a plus i b, minus c plus i d, equals a minus c, plus i times b minus d"
+          },
+          {
+            "type": "equation",
+            "latex": "k(a+ib) = ka + ikb",
+            "text_alt": "k times a plus i b equals k a plus i k b"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}(a+ib)(c+id)\\\\=(ac-bd)+i(ad+bc)\\end{aligned}",
+            "text_alt": "a plus i b times c plus i d equals a c minus b d, plus i times a d plus b c"
+          },
+          {
+            "type": "equation",
+            "latex": "(a,b)(c,d) = (ac-bd,\\ ad+bc)",
+            "text_alt": "ordered pair a b times ordered pair c d equals a c minus b d, a d plus b c"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{a+ib}{c+id} = \\dfrac{(ac+bd)+i(bc-ad)}{c^{2}+d^{2}}",
+            "text_alt": "a plus i b over c plus i d equals a c plus b d, plus i times b c minus a d, all over c squared plus d squared"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{1}{a+ib} = \\dfrac{a-ib}{a^{2}+b^{2}}",
+            "text_alt": "the multiplicative inverse of a plus i b is a minus i b over a squared plus b squared"
+          },
+          {
+            "type": "paragraph",
+            "text": "In ordered pairs: \\((a, b)^{-1} = \\left(\\frac{a}{a^{2}+b^{2}}, \\frac{-b}{a^{2}+b^{2}}\\right)\\) for \\((a, b) \\ne (0, 0)\\). The additive identity is \\((0, 0)\\), the multiplicative identity is \\((1, 0)\\) and the additive inverse of \\((a, b)\\) is \\((-a, -b)\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Conjugate and modulus"
+          },
+          {
+            "type": "equation",
+            "latex": "z = a+ib \\;\\Rightarrow\\; \\overline{z} = a-ib",
+            "text_alt": "if z equals a plus i b then z bar equals a minus i b"
+          },
+          {
+            "type": "equation",
+            "latex": "|z| = |a+ib| = \\sqrt{a^{2}+b^{2}}",
+            "text_alt": "modulus of a plus i b equals the square root of a squared plus b squared"
+          },
+          {
+            "type": "equation",
+            "latex": "z\\,\\overline{z} = a^{2}+b^{2} = |z|^{2}",
+            "text_alt": "z times z bar equals a squared plus b squared equals modulus of z squared"
+          },
+          {
+            "type": "equation",
+            "latex": "\\operatorname{Re}(z) = \\dfrac{z+\\overline{z}}{2}",
+            "text_alt": "real part of z equals z plus z bar over 2"
+          },
+          {
+            "type": "equation",
+            "latex": "\\operatorname{Im}(z) = \\dfrac{z-\\overline{z}}{2i}",
+            "text_alt": "imaginary part of z equals z minus z bar over 2 i"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{1}{z} = \\dfrac{\\overline{z}}{|z|^{2}}\\quad (z \\ne 0)",
+            "text_alt": "1 over z equals z bar over modulus z squared, for z not zero"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Square root of a complex number"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}\\sqrt{x+iy} = \\pm\\Big(&\\sqrt{\\dfrac{|z|+x}{2}}\\\\ &+ \\dfrac{iy}{|y|}\\sqrt{\\dfrac{|z|-x}{2}}\\Big)\\end{aligned}",
+            "text_alt": "square root of x plus i y equals plus or minus: square root of modulus z plus x over 2, plus i y over modulus y times square root of modulus z minus x over 2; here modulus z is the square root of x squared plus y squared and y is not zero"
+          },
+          {
+            "type": "paragraph",
+            "text": "Here \\(|z| = \\sqrt{x^{2}+y^{2}}\\) and \\(y \\ne 0\\). The factor \\(\\frac{iy}{|y|}\\) is \\(i\\) when \\(y > 0\\) and \\(-i\\) when \\(y < 0\\). Example: \\(\\sqrt{5+12i} = \\pm(3+2i)\\) and \\(\\sqrt{8-6i} = \\pm(3-i)\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Roots of unity"
+          },
+          {
+            "type": "equation",
+            "latex": "x^{3} = 1 \\;\\Rightarrow\\; x = 1,\\ \\omega,\\ \\omega^{2}",
+            "text_alt": "the cube roots of unity are 1, omega and omega squared"
+          },
+          {
+            "type": "equation",
+            "latex": "\\omega = \\dfrac{-1+\\sqrt{3}\\,i}{2},\\quad \\omega^{2} = \\dfrac{-1-\\sqrt{3}\\,i}{2}",
+            "text_alt": "omega equals minus 1 plus root 3 i over 2, omega squared equals minus 1 minus root 3 i over 2"
+          },
+          {
+            "type": "equation",
+            "latex": "1+\\omega+\\omega^{2} = 0,\\quad \\omega^{3} = 1",
+            "text_alt": "1 plus omega plus omega squared equals 0, and omega cubed equals 1"
+          },
+          {
+            "type": "equation",
+            "latex": "x^{3} = a^{3} \\;\\Rightarrow\\; x = a,\\ a\\omega,\\ a\\omega^{2}",
+            "text_alt": "the three cube roots of a cubed are a, a omega and a omega squared"
+          },
+          {
+            "type": "equation",
+            "latex": "x^{4} = 1 \\;\\Rightarrow\\; x = 1,\\ -1,\\ i,\\ -i",
+            "text_alt": "the four fourth roots of unity are 1, minus 1, i and minus i"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}x^{3}+y^{3}\\\\=(x+y)(x+\\omega y)(x+\\omega^{2}y)\\end{aligned}",
+            "text_alt": "x cubed plus y cubed equals x plus y, times x plus omega y, times x plus omega squared y"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Polar form and operations"
+          },
+          {
+            "type": "equation",
+            "latex": "x = r\\cos\\theta,\\quad y = r\\sin\\theta",
+            "text_alt": "x equals r cos theta and y equals r sin theta"
+          },
+          {
+            "type": "equation",
+            "latex": "r = |z| = \\sqrt{x^{2}+y^{2}}",
+            "text_alt": "r equals modulus z equals square root of x squared plus y squared"
+          },
+          {
+            "type": "equation",
+            "latex": "\\tan\\theta = \\dfrac{y}{x}\\quad (x \\ne 0)",
+            "text_alt": "tan theta equals y over x, for x not zero; choose theta in the correct quadrant"
+          },
+          {
+            "type": "equation",
+            "latex": "z = r(\\cos\\theta + i\\sin\\theta) = r\\operatorname{cis}\\theta",
+            "text_alt": "z equals r times cos theta plus i sin theta, also written r cis theta"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}z_{1}z_{2} = r_{1}r_{2}\\big[&\\cos(\\theta_{1}+\\theta_{2})\\\\ &+ i\\sin(\\theta_{1}+\\theta_{2})\\big]\\end{aligned}",
+            "text_alt": "z1 times z2 equals r1 r2 times cos of theta1 plus theta2 plus i sin of theta1 plus theta2"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}\\dfrac{z_{1}}{z_{2}} = \\dfrac{r_{1}}{r_{2}}\\big[&\\cos(\\theta_{1}-\\theta_{2})\\\\ &+ i\\sin(\\theta_{1}-\\theta_{2})\\big]\\end{aligned}",
+            "text_alt": "z1 over z2 equals r1 over r2 times cos of theta1 minus theta2 plus i sin of theta1 minus theta2"
+          },
+          {
+            "type": "paragraph",
+            "text": "So \\(|z_{1}z_{2}| = |z_{1}||z_{2}|\\), \\(\\arg(z_{1}z_{2}) = \\arg z_{1} + \\arg z_{2}\\) and \\(\\arg\\frac{z_{1}}{z_{2}} = \\arg z_{1} - \\arg z_{2}\\) (up to a multiple of \\(2\\pi\\)). Addition and subtraction have no short polar rule: \\(z_{1} \\pm z_{2} = r_{1}(\\cos\\theta_{1} + i\\sin\\theta_{1}) \\pm r_{2}(\\cos\\theta_{2} + i\\sin\\theta_{2})\\), so first change both numbers to \\(x + iy\\) form."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "AC circuits"
+          },
+          {
+            "type": "equation",
+            "latex": "V = IR",
+            "text_alt": "Ohm's law: voltage equals current times resistance"
+          },
+          {
+            "type": "equation",
+            "latex": "Z = R + iX,\\quad X = X_{L} - X_{C}",
+            "text_alt": "impedance Z equals R plus i X, where the reactance X equals X L minus X C"
+          },
+          {
+            "type": "equation",
+            "latex": "V = IZ \\;\\Rightarrow\\; I = \\dfrac{V}{Z}",
+            "text_alt": "V equals I Z, so the current I equals V over Z"
+          },
+          {
+            "type": "paragraph",
+            "text": "Cryptography (Example 18, Exercise 1.5 Q17-Q19): a letter is a number \\(z\\) (A = 1, ..., Z = 26). With a multiplying key \\(k\\): encrypted \\(= z \\times k\\), decrypted \\(= \\text{encrypted} \\div k\\) (multiply by \\(k^{-1}\\)). With an adding key: encrypted \\(= z + k\\), decrypted \\(= \\text{encrypted} - k\\)."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fundamental rules"
+          },
+          {
+            "type": "list",
+            "items": [
+              "Powers of \\(i\\): \\(i^{4n} = 1\\), \\(i^{4n+1} = i\\), \\(i^{4n+2} = -1\\), \\(i^{4n+3} = -i\\). Divide the exponent by 4 and keep the remainder; for example \\(i^{17} = i\\). Also \\(\\frac{1}{i} = -i\\).",
+              "Equality: \\(a + ib = c + id\\) if and only if \\(a = c\\) and \\(b = d\\). One complex equation gives two real equations.",
+              "\\(C\\) satisfies all the field axioms but has no order: \\(z_{1} > z_{2}\\) has no meaning (moduli, which are real, can be compared).",
+              "Conjugate properties: \\(\\overline{\\overline{z}} = z\\); \\(\\overline{z_{1} \\pm z_{2}} = \\overline{z_{1}} \\pm \\overline{z_{2}}\\); \\(\\overline{z_{1}z_{2}} = \\overline{z_{1}}\\,\\overline{z_{2}}\\); \\(\\overline{z_{1}/z_{2}} = \\overline{z_{1}}/\\overline{z_{2}}\\); \\(\\overline{z} = z\\) if and only if \\(z\\) is real.",
+              "Modulus properties: \\(|z| = |\\overline{z}| = |-z|\\); \\(|z_{1}z_{2}| = |z_{1}||z_{2}|\\); \\(|z_{1}/z_{2}| = |z_{1}|/|z_{2}|\\); \\(|z^{n}| = |z|^{n}\\).",
+              "Square root sign rule: \\(y > 0\\): the real and imaginary parts of the root have the same sign; \\(y < 0\\): opposite signs.",
+              "\\(\\omega\\) facts: either complex cube root may be called \\(\\omega\\), the other is then \\(\\omega^{2}\\); \\(\\omega\\) and \\(\\omega^{2}\\) are conjugates; \\(\\omega^{3} = 1\\), so reduce a power of \\(\\omega\\) by dividing the exponent by 3 (\\(\\omega^{28} = \\omega\\)); \\(\\omega + \\omega^{2} = -1\\), \\(1 + \\omega = -\\omega^{2}\\), \\(1 + \\omega^{2} = -\\omega\\); \\(\\omega\\) is a root of \\(x^{2} + x + 1 = 0\\).",
+              "Fourth roots of unity: their sum is \\(0\\) and their product is \\(-1\\); \\(1\\) and \\(-1\\) are additive inverses; \\(i\\) and \\(-i\\) are conjugates.",
+              "Fundamental theorem of algebra: a polynomial of degree \\(n \\ge 1\\) has exactly \\(n\\) roots in \\(C\\) (a repeated root is counted as often as it repeats, e.g. \\(z^{2} - 2iz - 1 = (z - i)^{2}\\)).",
+              "Corollary: \\(P(z) = a(z - z_{1})(z - z_{2})\\cdots(z - z_{n})\\), where \\(a\\) is the leading coefficient and \\(z_{1}, \\dots, z_{n}\\) are the roots.",
+              "Factor theorem (used in Example 9): \\(P(r) = 0\\) exactly when \\(z - r\\) is a factor of \\(P(z)\\); divide (synthetic division) to get the other factor.",
+              "Rational root theorem: if \\(P(x)\\) has integer coefficients, every rational root \\(\\frac{p}{q}\\) in lowest terms has \\(p\\) a factor of \\(a_{0}\\) and \\(q\\) a factor of \\(a_{n}\\).",
+              "With real coefficients, non-real roots come in conjugate pairs (\\(2 \\pm i\\), \\(1 \\pm i\\), \\(\\pm 2i\\)).",
+              "Completing the square: divide by the coefficient of \\(z^{2}\\), move the constant to the right, add (half the coefficient of \\(z\\))\\(^{2}\\) to both sides, then take square roots with \\(\\pm\\).",
+              "Polar coordinates: for \\(r < 0\\) the point lies \\(|r|\\) units in the direction \\(\\theta + \\pi\\); \\((-5, \\frac{\\pi}{4})\\) and \\((5, \\frac{5\\pi}{4})\\) are the same point.",
+              "Principal argument: decide the quadrant from the signs of \\(x\\) and \\(y\\) first (table below). On the axes: \\(\\arg z = 0\\) (positive real), \\(\\pi\\) (negative real), \\(\\frac{\\pi}{2}\\) (positive imaginary), \\(-\\frac{\\pi}{2}\\) (negative imaginary); \\(z = 0\\) has no argument."
+            ],
+            "ordered": false
+          },
+          {
+            "type": "table",
+            "header": [
+              "Where z lies",
+              "Principal argument"
+            ],
+            "rows": [
+              [
+                "Quadrant I (\\(x > 0, y > 0\\))",
+                "\\(\\theta = \\alpha\\)"
+              ],
+              [
+                "Quadrant II (\\(x < 0, y > 0\\))",
+                "\\(\\theta = \\pi - \\alpha\\)"
+              ],
+              [
+                "Quadrant III (\\(x < 0, y < 0\\))",
+                "\\(\\theta = -(\\pi - \\alpha)\\)"
+              ],
+              [
+                "Quadrant IV (\\(x > 0, y < 0\\))",
+                "\\(\\theta = -\\alpha\\)"
+              ]
+            ],
+            "caption": "Principal argument in \\((-\\pi, \\pi]\\), with the acute angle \\(\\alpha = \\tan^{-1}\\left|\\frac{y}{x}\\right|\\)"
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Common mistakes"
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Sign slips with \\(i^{2} = -1\\). \\((3 - i)(3 + i) = 9 - i^{2} = 9 + 1 = 10\\), not \\(8\\). In a product, the term \\(i^{2}bd\\) is real and equals \\(-bd\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Changing both signs for the conjugate. \\(\\overline{3 + 4i} = 3 - 4i\\), not \\(-3 - 4i\\). And \\(\\operatorname{Im}(3 + 4i) = 4\\), not \\(4i\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Putting \\(i\\) inside the modulus formula. \\(|3 + 4i| = \\sqrt{3^{2} + 4^{2}} = 5\\), not \\(\\sqrt{9 + (4i)^{2}}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Square roots: the signs of the two parts must follow the sign of \\(y\\). \\(\\sqrt{8 - 6i} = \\pm(3 - i)\\), not \\(\\pm(3 + i)\\), because \\(y = -6 < 0\\). Always give both roots (\\(\\pm\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "\\(\\sqrt{a}\\sqrt{b} = \\sqrt{ab}\\) is not true when \\(a\\) and \\(b\\) are both negative: \\(\\sqrt{-4}\\sqrt{-9} = (2i)(3i) = -6\\), not \\(\\sqrt{36} = 6\\). Write \\(\\sqrt{-a} = i\\sqrt{a}\\) first."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Fractional powers of \\(-1\\): take the square root first and then the power, as the book does: \\((-1)^{-21/2} = (\\sqrt{-1})^{-21} = i^{-21} = -i\\). Taking the power \\(-21\\) first gives \\(((-1)^{-21})^{1/2} = \\sqrt{-1} = i\\), a different value. Also \\(\\frac{1}{i} = -i\\), not \\(i\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Forgetting the leading coefficient when factorising: \\(2z^{2} - 22z + 65 = 2\\left(z - \\frac{11-3i}{2}\\right)\\left(z - \\frac{11+3i}{2}\\right)\\); without the 2 the product is only half of the polynomial."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Wrong quadrant from \\(\\tan^{-1}\\) alone. For \\(z = -1 - i\\), \\(\\tan^{-1}\\frac{-1}{-1} = \\tan^{-1}1 = \\frac{\\pi}{4}\\), but the point is in Quadrant III, so \\(\\arg z = -\\frac{3\\pi}{4}\\). Sketch the point first."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Swapping \\(x\\) and \\(y\\) in \\(\\tan\\theta = \\frac{y}{x}\\): for \\(4 + 3i\\), \\(\\theta = \\tan^{-1}\\frac{3}{4} \\approx 36.87^{\\circ}\\), not \\(53.13^{\\circ}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Plotting a polar point with \\(r < 0\\) in the direction \\(\\theta\\). It goes the opposite way, in the direction \\(\\theta + \\pi\\). Do not mix degrees and radians."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Powers of \\(\\omega\\): divide the exponent by 3 (not 2 or 4). Do not confuse the sum \\(1 + \\omega + \\omega^{2} = 0\\) with the product \\(1 \\cdot \\omega \\cdot \\omega^{2} = 1\\). The product of the fourth roots of unity is \\(-1\\), not \\(1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Adding complex numbers in polar form by adding the moduli. Only multiplication and division have the short rules; for \\(z_{1} + z_{2}\\) change both to \\(x + iy\\) form first."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Important question types"
+          },
+          {
+            "type": "table",
+            "header": [
+              "Question type",
+              "Method",
+              "Where practised"
+            ],
+            "rows": [
+              [
+                "Simplify powers of \\(i\\)",
+                "Divide the exponent by 4, keep the remainder; remove \\(i\\) from a denominator",
+                "Ex 1.1 Q1"
+              ],
+              [
+                "Prove a conjugate or modulus property",
+                "Write \\(z = a + ib\\) and work out both sides",
+                "Ex 1.1 Q2, Q3; Ex 1.2 Q6"
+              ],
+              [
+                "Multiplicative inverse",
+                "\\((a,b)^{-1} = \\left(\\frac{a}{a^2+b^2}, \\frac{-b}{a^2+b^2}\\right)\\)",
+                "Ex 1.1 Q4"
+              ],
+              [
+                "Divide; write in \\(a + ib\\) form",
+                "Multiply top and bottom by the conjugate of the denominator",
+                "Ex 1.1 Q5, Q6; Ex 1.2 Q3(iii); Example 2"
+              ],
+              [
+                "Modulus of an expression",
+                "Simplify to \\(x + iy\\) first, then \\(\\sqrt{x^2+y^2}\\)",
+                "Ex 1.1 Q7; Example 3"
+              ],
+              [
+                "Find real \\(x, y\\) from a complex equation",
+                "Expand, use \\(i^2 = -1\\), equate real and imaginary parts",
+                "Ex 1.2 Q1, Q2, Q5, Q9, Q10; Example 4"
+              ],
+              [
+                "Find a parameter from a Re or Im condition",
+                "Multiply out, take the required part, solve",
+                "Ex 1.2 Q4, Q12"
+              ],
+              [
+                "\\((x+iy)^2 = \\) given number; square roots",
+                "Equate parts, or use the square root formula with the sign rule",
+                "Ex 1.2 Q3(i), Q3(ii), Q7, Q8, Q11; Example 5"
+              ],
+              [
+                "Factorise a sum of two squares",
+                "\\(a^2 + b^2 = (a + ib)(a - ib)\\)",
+                "Ex 1.3 Q1(i)-(iv)"
+              ],
+              [
+                "Factorise into linear factors",
+                "Find the roots (formula, grouping, rational root theorem); \\(P(z) = a(z - z_1)\\cdots(z - z_n)\\)",
+                "Ex 1.3 Q1(v)-(viii), Q2, Q3; Examples 6-9"
+              ],
+              [
+                "Solve by completing the square",
+                "Make the \\(z^2\\) coefficient 1, add (half the coefficient of \\(z\\))\\(^2\\)",
+                "Ex 1.3 Q4; Example 10"
+              ],
+              [
+                "Solve a polynomial equation",
+                "Take out common factors, group, or put \\(u = z^2\\)",
+                "Ex 1.3 Q5"
+              ],
+              [
+                "Build a polynomial from its zeros",
+                "\\(P(z) = a(z - z_1)\\cdots(z - z_n)\\); find \\(a\\) from the given value",
+                "Ex 1.3 Q6, Q7, Q8"
+              ],
+              [
+                "Cube roots of a number",
+                "\\(x^3 = a^3 \\Rightarrow x = a, a\\omega, a\\omega^2\\)",
+                "Ex 1.4 Q1"
+              ],
+              [
+                "Evaluate expressions in \\(\\omega\\)",
+                "Use \\(\\omega^3 = 1\\), \\(1 + \\omega + \\omega^2 = 0\\); write \\(\\frac{-1 \\pm \\sqrt{-3}}{2}\\) as \\(\\omega, \\omega^2\\)",
+                "Ex 1.4 Q2, Q5"
+              ],
+              [
+                "Prove identities with \\(\\omega\\)",
+                "Multiply out, then replace \\(\\omega^3\\) by 1 and \\(\\omega + \\omega^2\\) by \\(-1\\)",
+                "Ex 1.4 Q3; Example 11"
+              ],
+              [
+                "Equation with given roots involving \\(\\omega\\)",
+                "\\(x^2 - (\\text{sum})x + \\text{product} = 0\\)",
+                "Ex 1.4 Q4, Q6"
+              ],
+              [
+                "Plot points in polar coordinates",
+                "Turn \\(\\theta\\) from the polar axis; for \\(r < 0\\) go the opposite way (\\(\\theta + \\pi\\))",
+                "Ex 1.5 Q1"
+              ],
+              [
+                "Rectangular to polar form",
+                "\\(r = \\sqrt{x^2+y^2}\\); \\(\\theta\\) from \\(\\tan^{-1}\\left|\\frac{y}{x}\\right|\\) and the quadrant",
+                "Ex 1.5 Q2, Q8; Example 12"
+              ],
+              [
+                "Polar to rectangular form",
+                "\\(x = r\\cos\\theta\\), \\(y = r\\sin\\theta\\)",
+                "Ex 1.5 Q3"
+              ],
+              [
+                "Operations in polar form",
+                "Multiply: multiply moduli, add arguments; divide: divide moduli, subtract arguments; add or subtract in \\(x + iy\\) form",
+                "Ex 1.5 Q4-Q7; Examples 13, 14"
+              ],
+              [
+                "Equation in \\(|z|\\) or \\(\\arg z\\) to an \\(x, y\\) equation",
+                "Put \\(z = x + iy\\); square the moduli, or use \\(\\tan(\\arg)\\) = Im/Re",
+                "Ex 1.5 Q9-Q14; Examples 15, 16"
+              ],
+              [
+                "Current in an AC circuit",
+                "\\(I = \\frac{V}{Z}\\): divide in polar form or multiply by the conjugate",
+                "Ex 1.5 Q15, Q16; Example 17"
+              ],
+              [
+                "Encrypt and decrypt a word",
+                "Letter number \\(\\times k\\) (or \\(+ k\\)); undo with \\(\\div k\\) (or \\(- k\\))",
+                "Ex 1.5 Q17-Q19; Example 18"
+              ]
+            ],
+            "caption": "Main question types of Unit 1 (Ex = Exercise, Q = question)"
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Book corrections in this unit"
+          },
+          {
+            "type": "paragraph",
+            "text": "The textbook has some misprints that matter when you revise. Each one is explained in a Book correction box on the page named in brackets. The most important are:"
+          },
+          {
+            "type": "list",
+            "items": [
+              "Section numbers: the headings 1.2 (Complex Polynomials), 1.4 (Polar Coordinates System), 1.4.1 (Polar Coordinate System of a Complex Number), 1.3.3 (Operations in Polar Form) and 1.5 (Complex Numbers in the Real World) repeat numbers already used. Only the numbering is wrong.",
+              "Conjugate (1.1.1): the book prints that \\(5 - 4i\\) is the conjugate of \\(5 - 4i\\); the conjugate of \\(5 - 4i\\) is \\(5 + 4i\\).",
+              "Example 1 (1.1.3): the difference of \\((8, 9)\\) and \\((5, -6)\\) is \\((3, 15)\\), not \\((5, 15)\\).",
+              "Example 9: the roots of \\(z^{2} - 4z + 5 = 0\\) are \\(z = 2 \\pm i\\), not \\(2 \\pm 2i\\) (the book's final factorisation is correct).",
+              "Cube roots of unity (1.4): the middle step should be \\(\\frac{-1 \\pm \\sqrt{3}\\,i}{2}\\); the book drops the minus sign of \\(-1\\) once.",
+              "Example 12: the second equation is \\(r\\sin\\theta = \\sqrt{3}\\), not \\(r\\cos\\theta = \\sqrt{3}\\).",
+              "Example 17: the current is about \\(2.05 - 0.97i\\) (the book's rounded working gives \\(2.04 - 0.95i\\)); the final line \\(6 - 4.21i\\) is wrong.",
+              "Exercise 1.2 answer key: Q3(i) is \\(x = \\pm 3\\sqrt{5}, y = \\pm 2\\sqrt{5}\\) (same signs), Q3(ii) is \\(x = \\pm 6\\sqrt{2}, y = \\pm 2\\sqrt{2}\\), Q7(iii) is \\(\\pm(2\\sqrt{3} - 3\\sqrt{3}\\,i)\\); in Q4 the intended number is \\(z_{2} = 1 - \\alpha i\\).",
+              "Exercise 1.3 answer key: Q1(viii) needs the leading factor 2; Q4(ii) is \\(3 \\pm i\\sqrt{21}\\), Q4(iii) is \\(3 \\pm \\frac{\\sqrt{69}}{3}i\\), Q4(vi) is \\(\\frac{5 \\pm i\\sqrt{59}}{6}\\); the key's answers labelled 5, 6, 7 belong to Q6, Q7, Q8.",
+              "Exercise 1.4: Q1(ii) should be \\(-8\\) (the key gives its cube roots); Q2(i) should be \\((1 + \\omega - \\omega^{2})^{8} = 256\\omega\\); Q5: the complex cube roots of \\(-1\\) are \\(\\frac{1 \\pm \\sqrt{3}\\,i}{2}\\), and \\((-1 + \\sqrt{-3})^{4} + (-1 - \\sqrt{-3})^{4} = -16\\), not \\(16\\).",
+              "Exercise 1.5 answer key: many answers are wrong, for example Q2(i) is \\(5\\operatorname{cis}36.87^{\\circ}\\), Q3(i) is \\(2 - 2\\sqrt{3}\\,i\\), Q5(iv) is \\(-\\frac{7}{11}\\), Q12 is the line \\(y = -x\\), Q14 is the line \\(x + y = \\frac{1}{3}\\) and Q16 is \\(I = 2 + 14i\\). Check every answer on the Exercise 1.5 page."
+            ],
+            "ordered": false
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Short revision notes"
+          },
+          {
+            "type": "list",
+            "items": [
+              "\\(i^{2} = -1\\) is the only new rule; everything else is ordinary algebra with \\(i\\) treated like a letter.",
+              "Always bring an answer to the form \\(a + ib\\) before reading off real and imaginary parts.",
+              "To divide, multiply by the conjugate of the denominator: \\((c + id)(c - id) = c^{2} + d^{2}\\) is real.",
+              "\\(z\\overline{z} = |z|^{2}\\) links the conjugate and the modulus; it gives \\(\\frac{1}{z} = \\frac{\\overline{z}}{|z|^{2}}\\).",
+              "One complex equation = two real equations (real parts, imaginary parts).",
+              "Square roots come in a pair \\(\\pm w\\); the sign of \\(y\\) fixes the signs inside \\(w\\).",
+              "Degree \\(n\\) means \\(n\\) roots and \\(n\\) linear factors; keep the leading coefficient in front.",
+              "Try \\(\\pm\\) factors of \\(a_{0}\\) (over factors of \\(a_{n}\\)) to find a first root of a cubic.",
+              "\\(\\omega^{3} = 1\\) and \\(1 + \\omega + \\omega^{2} = 0\\) solve almost every \\(\\omega\\) question.",
+              "Polar form: multiply moduli and add arguments; divide moduli and subtract arguments.",
+              "Find the quadrant before the argument; the principal argument lies in \\((-\\pi, \\pi]\\).",
+              "In AC circuits, \\(V = IZ\\) is Ohm's law with the impedance \\(Z = R + iX\\).",
+              "Check answers by substituting back or multiplying out; the textbook's answer key has several errors in this unit."
+            ],
+            "ordered": false
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Unit summary"
+          },
+          {
+            "type": "paragraph",
+            "text": "Unit 1 extends the real numbers to the complex numbers \\(z = a + ib\\), where \\(i = \\sqrt{-1}\\). You learned to recognise real and imaginary parts, to write the conjugate, to add, subtract, multiply and divide complex numbers (also as ordered pairs), and to show them as points on the Argand diagram, where the modulus is the distance from the origin. Equating real and imaginary parts lets you solve complex equations and find square roots. With the fundamental theorem of algebra every polynomial of degree \\(n\\) splits into \\(n\\) linear factors over \\(C\\), which you found by grouping, the quadratic formula, the rational root theorem and completing the square."
+          },
+          {
+            "type": "paragraph",
+            "text": "The cube roots of unity \\(1, \\omega, \\omega^{2}\\) and the fourth roots \\(1, -1, i, -i\\) have simple properties (\\(\\omega^{3} = 1\\), \\(1 + \\omega + \\omega^{2} = 0\\)) that make long expressions short. The polar form \\(z = r(\\cos\\theta + i\\sin\\theta)\\) describes a complex number by its distance and direction; in this form multiplication and division become easy, and equations in \\(|z|\\) and \\(\\arg z\\) become lines and circles in the plane. Finally, complex numbers model AC circuits through \\(V = IZ\\) and can be used for simple encryption."
+          }
+        ]
+      }
+    }
+  ]
+}

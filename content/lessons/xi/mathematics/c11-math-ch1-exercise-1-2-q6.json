@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH1-EXERCISE-1-2-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch1",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch1/u-exercise-1-2-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 12,
+          "pdf_to": 13,
+          "note": "Exercise 1.2, Question 6: Exercise 1.2, book pages 7-8: Q1-Q12 (20 parts)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6 Show that \\(\\forall\\, z_1, z_2 \\in C\\), \\(\\overline{z_1 z_2} = \\overline{z_1}\\,\\overline{z_2}\\).",
+            "explanation": "This is a proof: it must hold for every pair of complex numbers, so we use letters, not particular numbers.\nWe must show that the conjugate of a product equals the product of the conjugates.\nPlan: write \\(z_1 = a + ib\\), \\(z_2 = c + id\\), work out each side separately, and show that they are the same.",
+            "steps": [
+              "Given: \\(z_1, z_2\\) are any complex numbers.\nTo find: prove \\(\\overline{z_1 z_2} = \\overline{z_1}\\,\\overline{z_2}\\).\nMethod: Write \\(z_1 = a + ib\\), \\(z_2 = c + id\\) with \\(a, b, c, d\\) real. Find the left side (multiply, then conjugate) and the right side (conjugate, then multiply), and compare.",
+              "Multiply \\(z_1\\) and \\(z_2\\)\n\\[z_1 z_2 = (a + ib)(c + id)\\]\n\\[= ac + iad + ibc + i^2 bd\\]\n\\[= (ac - bd) + i(ad + bc)\\]\nWhy: Multiply term by term, use \\(i^2 = -1\\), and group the real and imaginary parts.",
+              "Left side: conjugate of the product\n\\[\\overline{z_1 z_2} = (ac - bd) - i(ad + bc)\\]\nWhy: Taking the conjugate changes only the sign of the imaginary part.",
+              "Right side: product of the conjugates\n\\[\\overline{z_1} = a - ib, \\quad \\overline{z_2} = c - id\\]\n\\[\\overline{z_1}\\,\\overline{z_2} = (a - ib)(c - id)\\]\n\\[= ac - iad - ibc + i^2 bd\\]\n\\[= (ac - bd) - i(ad + bc)\\]\nWhy: \\((-ib)(-id) = i^2 bd = -bd\\); the rest is the same grouping as before.",
+              "Compare the two sides\n\\[\\overline{z_1 z_2} = (ac - bd) - i(ad + bc)\\]\n\\[\\overline{z_1}\\,\\overline{z_2} = (ac - bd) - i(ad + bc)\\]\nWhy: Both sides have the same real part and the same imaginary part, so they are equal. Since \\(a, b, c, d\\) were arbitrary, this holds for all \\(z_1, z_2\\).",
+              "Check with numbers\n\\[z_1 = 1 + 2i,\\; z_2 = 3 - i\\]\n\\[z_1 z_2 = 5 + 5i\\]\n\\[\\overline{z_1 z_2} = 5 - 5i\\]\n\\[(1 - 2i)(3 + i) = 5 - 5i \\;\\checkmark\\]\nWhy: A numerical example agrees (an example alone is not a proof, but it confirms our algebra)."
+            ],
+            "final_answer": "Hence proved: \\(\\overline{z_1 z_2} = \\overline{z_1}\\,\\overline{z_2}\\) for all \\(z_1, z_2 \\in C\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH1-EXERCISE-1-5-Q19",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch1",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch1/u-exercise-1-5-q19",
+      "title": "Question 19",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 25,
+          "pdf_to": 26,
+          "note": "Exercise 1.5, Question 19: Exercise 1.5, all 19 questions (book pages 20-21), solved step by step; answers checked against the answer key (PDF 297-298) and recomputed independently."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "19",
+            "prompt": "19. Encrypt the word \"CLASS\" by adding the complex encryption key \\(k = -3 + 4i\\). Then decrypt it back to the original word.",
+            "explanation": "This time the key is added, not multiplied.\nEncrypt: \\(z + k\\). Decrypt: subtract \\(k\\), i.e. add its additive inverse \\(-k\\).",
+            "steps": [
+              "Given: the word CLASS, key \\(k = -3 + 4i\\), A = 1, ..., Z = 26.\nTo find: the encrypted numbers, then the word back again.\nMethod: encrypted \\(= z + k\\); decrypted \\(= (z + k) - k = (z + k) + (3 - 4i)\\).",
+              "Step 1: Letters to complex numbers\n\\[C = 3 + 0i, \\quad L = 12 + 0i\\]\n\\[A = 1 + 0i, \\quad S = 19 + 0i\\]\nWhy: C is the 3rd letter, L the 12th, A the 1st, S the 19th (S appears twice).",
+              "Step 2: Encrypt (add k)\n\\[3 + (-3 + 4i) = 0 + 4i\\]\n\\[12 + (-3 + 4i) = 9 + 4i\\]\n\\[1 + (-3 + 4i) = -2 + 4i\\]\n\\[19 + (-3 + 4i) = 16 + 4i\\]\nWhy: add real parts and imaginary parts separately. The message is \\(4i,\\ 9 + 4i,\\ -2 + 4i,\\ 16 + 4i,\\ 16 + 4i\\).",
+              "Step 3: The decryption key\n\\[-k = -(-3 + 4i) = 3 - 4i\\]\nWhy: \\(k + (-k) = 0\\), so adding \\(-k\\) undoes adding \\(k\\).",
+              "Step 4: Decrypt (add 3 − 4i)\n\\[(0 + 4i) + (3 - 4i) = 3 \\Rightarrow C\\]\n\\[(9 + 4i) + (3 - 4i) = 12 \\Rightarrow L\\]\n\\[(-2 + 4i) + (3 - 4i) = 1 \\Rightarrow A\\]\n\\[(16 + 4i) + (3 - 4i) = 19 \\Rightarrow S\\]\nWhy: the \\(4i\\) and \\(-4i\\) cancel, leaving each letter's value. The last S is the same as the fourth.",
+              "Check: \\(k + (-k) = (-3 + 4i) + (3 - 4i) = 0\\) ✓. Note: equal letters (S, S) give equal codes, so an addition key hides less than one might hope."
+            ],
+            "final_answer": "Encrypted: \\(4i,\\ 9 + 4i,\\ -2 + 4i,\\ 16 + 4i,\\ 16 + 4i\\). Decrypted: \\(3, 12, 1, 19, 19\\) = CLASS.",
+            "answer_table": {
+              "header": [
+                "Letter and z",
+                "Encrypted: z + k",
+                "Decrypted: (z + k) − k",
+                "Letter"
+              ],
+              "rows": [
+                [
+                  "C: 3 + 0i",
+                  "3 + (−3 + 4i) = 0 + 4i",
+                  "(0 + 4i) + (3 − 4i) = 3",
+                  "C"
+                ],
+                [
+                  "L: 12 + 0i",
+                  "12 + (−3 + 4i) = 9 + 4i",
+                  "(9 + 4i) + (3 − 4i) = 12",
+                  "L"
+                ],
+                [
+                  "A: 1 + 0i",
+                  "1 + (−3 + 4i) = −2 + 4i",
+                  "(−2 + 4i) + (3 − 4i) = 1",
+                  "A"
+                ],
+                [
+                  "S: 19 + 0i",
+                  "19 + (−3 + 4i) = 16 + 4i",
+                  "(16 + 4i) + (3 − 4i) = 19",
+                  "S"
+                ],
+                [
+                  "S: 19 + 0i",
+                  "19 + (−3 + 4i) = 16 + 4i",
+                  "(16 + 4i) + (3 − 4i) = 19",
+                  "S"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

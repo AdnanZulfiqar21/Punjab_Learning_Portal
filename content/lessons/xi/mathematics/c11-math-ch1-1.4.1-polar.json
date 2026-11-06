@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH1-1.4.1-POLAR",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch1",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch1/1.4.1~2",
+      "title": "1.6.1 Polar Coordinate System of a Complex Number",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 20,
+          "pdf_to": 21,
+          "note": "Book pp. 15-16: printed heading \"1.4.1 Polar Coordinate System of a Complex Number\" (number repeated), figure, polar form, cis Note, Example 12, Note on x = 0, Principal Argument"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "1.4.1 Polar Coordinate System of a Complex Number",
+            "book_errors": [
+              "1.4.1"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints this heading as 1.4.1, a number it already used for “Properties of Cube Roots of Unity” (book page 12). We keep the printed number so you can find it in your textbook; only the numbering is wrong."
+          },
+          {
+            "type": "paragraph",
+            "text": "Consider the adjoining diagram. The complex number \\(z = x + iy\\) is shown as the point \\(A\\) in the Argand plane. Join \\(O\\) to \\(A\\) and drop the perpendicular \\(AM\\) on the \\(x\\)-axis. In the right triangle \\(OMA\\) the hypotenuse is \\(OA = r\\) and the angle at \\(O\\) is \\(\\theta\\), so\n\\[\\cos\\theta = \\dfrac{x}{r},\\quad \\sin\\theta = \\dfrac{y}{r}\\]\nFrom the diagram, therefore,\n\\[x = r\\cos\\theta \\quad\\text{and}\\quad y = r\\sin\\theta\\]\nwhere \\(r = |z|\\) is the modulus and \\(\\theta\\) is called an argument of \\(z\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch1-fig-polar-form-z",
+            "alt": "Argand plane with origin O. The point A(r, theta) represents z = x + iy. The segment OA has length r = |z| = square root of (x squared + y squared) and makes angle theta with the x-axis. AM is perpendicular to the x-axis, with OM = x = r cos theta and AM = y = r sin theta.",
+            "caption": "Figure: the complex number z = x + iy as the point A(r, θ); x = r cos θ and y = r sin θ (original drawing after the textbook's figure)",
+            "side": true
+          },
+          {
+            "type": "paragraph",
+            "text": "Hence\n\\[x + iy = r\\cos\\theta + i\\,r\\sin\\theta \\quad \\text{(i)}\\]\nthat is, \\(z = r(\\cos\\theta + i\\sin\\theta)\\), where\n\\[r = |z| = \\sqrt{x^2 + y^2}\\]\n\\[\\theta = \\tan^{-1}\\dfrac{y}{x}\\quad (x \\ne 0)\\]\nEquation (i) is called the polar form of the complex number \\(z\\).",
+            "bold": [
+              "polar form"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "z = r(\\cos\\theta + i\\sin\\theta)",
+            "text_alt": "z equals r times open bracket cos theta plus i sin theta close bracket"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why use the polar form? The rectangular form \\(x + iy\\) tells you \"how far across and how far up\". The polar form tells you \"how far from O and in which direction\". In 1.3.3 you will see that multiplying and dividing complex numbers is much easier in polar form: multiply the distances and add the angles.\nConverting:\n• polar to rectangular: \\(x = r\\cos\\theta\\), \\(y = r\\sin\\theta\\).\n• rectangular to polar: \\(r = \\sqrt{x^2 + y^2}\\), and \\(\\theta\\) from \\(\\tan\\theta = y/x\\) with the correct quadrant (see Principal Argument below)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "We can write \\(\\cos\\theta + i\\sin\\theta = \\operatorname{cis}\\theta\\), so the polar form is also written \\(z = r\\operatorname{cis}\\theta\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 12",
+            "problem": "Express the complex number \\(1 + i\\sqrt{3}\\) in polar form.",
+            "steps": [
+              "Given: \\(z = 1 + i\\sqrt{3}\\), so \\(x = 1\\) and \\(y = \\sqrt{3}\\).\nTo find: \\(r\\) and \\(\\theta\\) such that \\(z = r(\\cos\\theta + i\\sin\\theta)\\).\nMethod: the real part equals \\(r\\cos\\theta\\) and the imaginary part equals \\(r\\sin\\theta\\). Squaring and adding gives \\(r\\); dividing gives \\(\\tan\\theta\\); the signs of \\(x\\) and \\(y\\) fix the quadrant.",
+              "Step I: match the real and imaginary parts\nThe book prints: Put \\(r\\cos\\theta = 1\\) and \\(r\\cos\\theta = \\sqrt{3}\\). The second equation must use sine (see the Book correction below):\n\\[r\\cos\\theta = 1 \\quad \\text{(1)}\\]\n\\[r\\sin\\theta = \\sqrt{3} \\quad \\text{(2)}\\]\nWhy: \\(r(\\cos\\theta + i\\sin\\theta) = r\\cos\\theta + i\\,r\\sin\\theta\\); two complex numbers are equal when their real parts are equal and their imaginary parts are equal.",
+              "Step II: find r\nSquare (1) and (2) and add:\n\\[r^2\\cos^2\\theta + r^2\\sin^2\\theta = 1 + 3\\]\n\\[r^2(\\cos^2\\theta + \\sin^2\\theta) = 4\\]\n\\[r^2 = 4\\]\n\\[r = 2\\]\nWhy: \\(\\cos^2\\theta + \\sin^2\\theta = 1\\) removes \\(\\theta\\). We take \\(r = 2\\), not \\(-2\\), because \\(r = |z|\\) is a distance. (The book writes this directly as \\(r^2 = 1^2 + (\\sqrt{3})^2\\).)",
+              "Step III: find θ\nDivide (2) by (1):\n\\[\\tan\\theta = \\dfrac{\\sqrt{3}}{1} = \\sqrt{3}\\]\n\\[\\theta = \\tan^{-1}\\sqrt{3} = 60^{\\circ}\\]\nWhy: \\(x = 1 > 0\\) and \\(y = \\sqrt{3} > 0\\), so the point is in the first quadrant, where \\(\\tan^{-1}\\) gives the right angle directly. \\(60^{\\circ} = \\pi/3\\).",
+              "Step IV: write the polar form\n\\[1 + i\\sqrt{3} = 2\\cos 60^{\\circ} + i\\,2\\sin 60^{\\circ}\\]\n\\[= 2(\\cos 60^{\\circ} + i\\sin 60^{\\circ})\\]\n\\[= 2\\operatorname{cis}\\dfrac{\\pi}{3}\\]\nWhy: put \\(r = 2\\) and \\(\\theta = 60^{\\circ}\\) into \\(z = r(\\cos\\theta + i\\sin\\theta)\\).",
+              "Check:\n\\[2\\cos 60^{\\circ} = 2 \\cdot \\tfrac{1}{2} = 1\\]\n\\[2\\sin 60^{\\circ} = 2 \\cdot \\tfrac{\\sqrt{3}}{2} = \\sqrt{3}\\]\nSo \\(2(\\cos 60^{\\circ} + i\\sin 60^{\\circ}) = 1 + i\\sqrt{3}\\). Correct."
+            ],
+            "answer": "\\(1 + i\\sqrt{3} = 2(\\cos 60^{\\circ} + i\\sin 60^{\\circ}) = 2\\left(\\cos\\frac{\\pi}{3} + i\\sin\\frac{\\pi}{3}\\right)\\)",
+            "book_errors": [
+              "\\(r\\cos\\theta = \\sqrt{3}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In Example 12, Step I, the book prints “Put \\(r\\cos\\theta = 1\\) and \\(r\\cos\\theta = \\sqrt{3}\\)”. The second equation should be \\(r\\sin\\theta = \\sqrt{3}\\), because the imaginary part of \\(r(\\cos\\theta + i\\sin\\theta)\\) is \\(r\\sin\\theta\\). The rest of the book's solution (\\(r = 2\\), \\(\\theta = 60^{\\circ}\\)) is correct."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "• If \\(x = 0,\\ y > 0\\) then \\(\\theta = \\dfrac{\\pi}{2}\\).\n• If \\(x = 0,\\ y < 0\\) then \\(\\theta = -\\dfrac{\\pi}{2}\\).\n• If \\(x = 0,\\ y = 0\\) then \\(\\theta\\) is undefined."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why this Note? When \\(x = 0\\) the formula \\(\\tan^{-1}(y/x)\\) cannot be used, because we cannot divide by zero. So we read the angle from the picture: a point on the positive imaginary axis (for example \\(2i\\)) points straight up, angle \\(\\pi/2\\); a point on the negative imaginary axis (for example \\(-3i\\)) points straight down, angle \\(-\\pi/2\\). The number \\(0\\) is the pole itself: it has no direction, so it has no argument."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Principal Argument"
+          },
+          {
+            "type": "paragraph",
+            "text": "Principal Argument: the principal argument \\(\\theta\\) of a complex number \\(z = a + bi\\) is the angle between the positive real axis and the line joining \\((a, b)\\) to the origin in the Argand plane. The book writes it as\n\\[\\arg z = \\theta = \\tan^{-1}\\left(\\dfrac{b}{a}\\right)\\]\nIt is denoted by \\(\\arg\\). It is a single, specific value of the argument, chosen in the standard range\n\\[\\arg z \\in (-\\pi, \\pi]\\]",
+            "bold": [
+              "Principal Argument"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "\\(\\tan^{-1}(b/a)\\) alone can give the wrong angle. A calculator's \\(\\tan^{-1}\\) only returns angles between \\(-\\pi/2\\) and \\(\\pi/2\\), so it is correct only when \\(a > 0\\) (the point is to the right of the imaginary axis).\nFor \\(z = -1 - i\\): \\(b/a = 1\\) and \\(\\tan^{-1} 1 = \\pi/4\\). But \\(-1 - i\\) is in the third quadrant, while \\(\\pi/4\\) points into the first quadrant. The true principal argument is \\(-3\\pi/4\\).\nThe reason: \\(\\dfrac{-1}{-1}\\) and \\(\\dfrac{1}{1}\\) are the same number, so \\(b/a\\) \"forgets\" the signs of \\(a\\) and \\(b\\). Always look at the signs to find the quadrant first."
+          },
+          {
+            "type": "paragraph",
+            "text": "How to find the principal argument correctly (our method):\n1. Look at the signs of \\(a\\) and \\(b\\) and decide the quadrant (or axis) of \\(z\\). A quick sketch helps.\n2. Find the reference angle \\(\\alpha = \\tan^{-1}\\left|\\dfrac{b}{a}\\right|\\), an acute angle between \\(0\\) and \\(\\pi/2\\).\n3. Use the table below to get \\(\\theta\\) in \\((-\\pi, \\pi]\\)."
+          },
+          {
+            "type": "table",
+            "caption": "Teaching table (ours): the principal argument of z = a + bi, with α = tan⁻¹|b/a|",
+            "header": [
+              "Where z lies",
+              "Signs",
+              "Principal argument"
+            ],
+            "rows": [
+              [
+                "Quadrant I",
+                "\\(a > 0,\\ b > 0\\)",
+                "\\(\\theta = \\alpha\\)"
+              ],
+              [
+                "Quadrant II",
+                "\\(a < 0,\\ b > 0\\)",
+                "\\(\\theta = \\pi - \\alpha\\)"
+              ],
+              [
+                "Quadrant III",
+                "\\(a < 0,\\ b < 0\\)",
+                "\\(\\theta = -(\\pi - \\alpha)\\)"
+              ],
+              [
+                "Quadrant IV",
+                "\\(a > 0,\\ b < 0\\)",
+                "\\(\\theta = -\\alpha\\)"
+              ],
+              [
+                "Positive real axis",
+                "\\(a > 0,\\ b = 0\\)",
+                "\\(\\theta = 0\\)"
+              ],
+              [
+                "Negative real axis",
+                "\\(a < 0,\\ b = 0\\)",
+                "\\(\\theta = \\pi\\)"
+              ],
+              [
+                "Positive imaginary axis",
+                "\\(a = 0,\\ b > 0\\)",
+                "\\(\\theta = \\pi/2\\)"
+              ],
+              [
+                "Negative imaginary axis",
+                "\\(a = 0,\\ b < 0\\)",
+                "\\(\\theta = -\\pi/2\\)"
+              ],
+              [
+                "Origin",
+                "\\(a = 0,\\ b = 0\\)",
+                "undefined"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Practice with the table (our illustrations, not textbook examples):\n• \\(z = -1 + i\\): Quadrant II, \\(\\alpha = \\pi/4\\), so \\(\\arg z = \\pi - \\pi/4 = 3\\pi/4\\).\n• \\(z = -1 - i\\): Quadrant III, \\(\\alpha = \\pi/4\\), so \\(\\arg z = -(\\pi - \\pi/4) = -3\\pi/4\\).\n• \\(z = 1 - i\\): Quadrant IV, \\(\\alpha = \\pi/4\\), so \\(\\arg z = -\\pi/4\\).\n• \\(z = -\\sqrt{3} - i\\): Quadrant III, \\(\\alpha = \\tan^{-1}(1/\\sqrt{3}) = \\pi/6\\), so \\(\\arg z = -5\\pi/6\\).\n• \\(z = -4\\): negative real axis, \\(\\arg z = \\pi\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Remember",
+            "text": "Why the range \\((-\\pi, \\pi]\\)? Any argument can be changed by a full turn \\(2\\pi\\) without moving the point, so \\(z\\) has infinitely many arguments \\(\\theta + 2k\\pi\\) (\\(k\\) an integer). Choosing the range \\((-\\pi, \\pi]\\) picks exactly one of them. \\(\\pi\\) is included (it is the direction of the negative real axis) and \\(-\\pi\\) is left out, so the negative real axis gets only one value.\nAngles above the real axis get positive principal arguments (\\(0\\) to \\(\\pi\\)); angles below it get negative ones (\\(0\\) to \\(-\\pi\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "• \\(x = r\\cos\\theta\\), \\(y = r\\sin\\theta\\), so \\(z = x + iy = r(\\cos\\theta + i\\sin\\theta) = r\\operatorname{cis}\\theta\\).\n• \\(r = |z| = \\sqrt{x^2 + y^2}\\) is the modulus; \\(\\theta\\) is an argument of \\(z\\).\n• On the imaginary axis: \\(\\theta = \\pi/2\\) (above) or \\(-\\pi/2\\) (below); \\(z = 0\\) has no argument.\n• The principal argument \\(\\arg z\\) is the one argument in \\((-\\pi, \\pi]\\).\n• Find the quadrant first, then use \\(\\alpha = \\tan^{-1}|b/a|\\) and the table."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "• Writing \\(r\\cos\\theta\\) for the imaginary part (the slip printed in Example 12). The imaginary part is \\(r\\sin\\theta\\).\n• Taking \\(r\\) negative. The modulus \\(r = |z|\\) is never negative.\n• Using \\(\\tan^{-1}(b/a)\\) without checking the quadrant when \\(a < 0\\).\n• Giving a principal argument outside \\((-\\pi, \\pi]\\), for example \\(5\\pi/3\\) instead of \\(-\\pi/3\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

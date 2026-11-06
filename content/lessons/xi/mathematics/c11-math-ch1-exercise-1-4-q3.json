@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH1-EXERCISE-1-4-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch1",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch1/u-exercise-1-4-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 18,
+          "pdf_to": 18,
+          "note": "Exercise 1.4, Question 3: Exercise 1.4, book page 13"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 Show that: (i) \\(x^{3}-y^{3}=(x-y)(x-\\omega y)(x-\\omega^{2}y)\\).",
+            "explanation": "An identity: a statement true for all values of the letters. We must show the left-hand side (L.H.S.) equals the right-hand side (R.H.S.). Plan: start from the more complicated side (the one with \\(\\omega\\)), multiply out, and remove \\(\\omega\\) using \\(\\omega+\\omega^{2}=-1\\) and \\(\\omega^{3}=1\\).",
+            "steps": [
+              "Step 1: Multiply the two omega brackets of the R.H.S.\n\\[(x-\\omega y)(x-\\omega^{2}y)\\]\n\\[=x^{2}-\\omega^{2}xy-\\omega xy\\]\n\\[\\quad+\\omega^{3}y^{2}\\]\nWhy: Every term of one bracket times every term of the other; \\(\\omega\\cdot\\omega^{2}=\\omega^{3}\\).",
+              "Step 2: Remove omega\n\\[=x^{2}-(\\omega+\\omega^{2})xy+\\omega^{3}y^{2}\\]\n\\[=x^{2}+xy+y^{2}\\]\nWhy: Take \\(xy\\) common from the middle terms; \\(\\omega+\\omega^{2}=-1\\) and \\(\\omega^{3}=1\\).",
+              "Step 3: Multiply by the first bracket\n\\[(x-y)(x^{2}+xy+y^{2})\\]\n\\[=x^{3}+x^{2}y+xy^{2}\\]\n\\[\\quad-x^{2}y-xy^{2}-y^{3}\\]\n\\[=x^{3}-y^{3}\\]\nWhy: Multiply \\(x\\) into the bracket, then \\(-y\\); the middle terms cancel in pairs.",
+              "Check: put x = 2, y = 1\n\\[\\text{L.H.S.}=8-1=7\\]\n\\[(2-\\omega)(2-\\omega^{2})\\]\n\\[=4-2(\\omega+\\omega^{2})+\\omega^{3}\\]\n\\[=4+2+1=7\\]\nWhy: With \\(x-y=1\\), the R.H.S. is the product of the last two brackets; both sides give 7."
+            ],
+            "final_answer": "Hence proved: \\(x^{3}-y^{3}=(x-y)(x-\\omega y)(x-\\omega^{2}y)\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Show that \\(x^{3}+y^{3}+z^{3}-3xyz\\) \\(=(x+y+z)(x+\\omega y+\\omega^{2}z)(x+\\omega^{2}y+\\omega z)\\).",
+            "explanation": "An identity: a statement true for all values of the letters. We must show the left-hand side (L.H.S.) equals the right-hand side (R.H.S.). Plan: start from the more complicated side (the one with \\(\\omega\\)), multiply out, and remove \\(\\omega\\) using \\(\\omega+\\omega^{2}=-1\\) and \\(\\omega^{3}=1\\).",
+            "steps": [
+              "Step 1: Multiply the two omega brackets, row by row\n\\[x(\\ldots)=x^{2}+\\omega^{2}xy+\\omega xz\\]\n\\[\\omega y(\\ldots)=\\omega xy+\\omega^{3}y^{2}+\\omega^{2}yz\\]\n\\[\\omega^{2}z(\\ldots)=\\omega^{2}xz+\\omega^{4}yz+\\omega^{3}z^{2}\\]\nWhy: Each term of \\((x+\\omega y+\\omega^{2}z)\\) multiplies the whole bracket \\((x+\\omega^{2}y+\\omega z)\\); nine products in all.",
+              "Step 2: Collect terms and remove omega\n\\[x^{2}+y^{2}+z^{2}\\]\n\\[+(\\omega+\\omega^{2})xy\\]\n\\[+(\\omega^{2}+\\omega)yz\\]\n\\[+(\\omega+\\omega^{2})zx\\]\n\\[=x^{2}+y^{2}+z^{2}-xy-yz-zx\\]\nWhy: \\(\\omega^{3}=1\\) and \\(\\omega^{4}=\\omega\\); each pair of like terms then has the coefficient \\(\\omega+\\omega^{2}=-1\\).",
+              "Step 3: Multiply by (x + y + z)\n\\[x(\\ldots)=x^{3}+xy^{2}+xz^{2}\\]\n\\[\\quad-x^{2}y-xyz-x^{2}z\\]\n\\[y(\\ldots)=x^{2}y+y^{3}+yz^{2}\\]\n\\[\\quad-xy^{2}-y^{2}z-xyz\\]\n\\[z(\\ldots)=x^{2}z+y^{2}z+z^{3}\\]\n\\[\\quad-xyz-yz^{2}-xz^{2}\\]\nWhy: Multiply \\(x\\), \\(y\\) and \\(z\\) one at a time into \\(x^{2}+y^{2}+z^{2}-xy-yz-zx\\).",
+              "Step 4: Add the three lines\n\\[=x^{3}+y^{3}+z^{3}-3xyz\\]\n\\[=\\text{L.H.S.}\\]\nWhy: Every term like \\(xy^{2}\\) appears once with + and once with -, so it cancels; only the cubes and three \\(-xyz\\) remain.",
+              "Check: put x = 1, y = 0, z = 0\n\\[\\text{L.H.S.}=1\\]\n\\[\\text{R.H.S.}=(1)(1)(1)=1\\]\nWhy: Both sides agree; with \\(x=y=z=1\\) both sides are 0, since the R.H.S. then contains \\(1+\\omega+\\omega^{2}=0\\)."
+            ],
+            "final_answer": "Hence proved: \\(x^{3}+y^{3}+z^{3}-3xyz=(x+y+z)(x+\\omega y+\\omega^{2}z)(x+\\omega^{2}y+\\omega z)\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) Show that \\((1+\\omega)(1+\\omega^{2})(1+\\omega^{4})(1+\\omega^{8})\\ldots\\) to \\(2n\\) factors \\(=1\\).",
+            "explanation": "A long product to be shown equal to 1. Plan: reduce each power of \\(\\omega\\), notice that the factors repeat as \\((1+\\omega)\\) and \\((1+\\omega^{2})\\), find the value of one pair, then count the pairs.",
+            "steps": [
+              "Step 1: Reduce the powers\n\\[\\omega^{4}=\\omega^{3}\\cdot\\omega=\\omega\\]\n\\[\\omega^{8}=\\omega^{6}\\cdot\\omega^{2}=\\omega^{2}\\]\n\\[\\omega^{16}=\\omega^{15}\\cdot\\omega=\\omega\\]\nWhy: The powers 1, 2, 4, 8, 16, ... double each time. Squaring \\(\\omega\\) gives \\(\\omega^{2}\\) and squaring \\(\\omega^{2}\\) gives \\(\\omega^{4}=\\omega\\), so the reduced powers alternate \\(\\omega,\\ \\omega^{2},\\ \\omega,\\ \\omega^{2},\\ldots\\)",
+              "Step 2: Rewrite the product\n\\[(1+\\omega)(1+\\omega^{2})\\cdot(1+\\omega)(1+\\omega^{2})\\cdots\\]\nWhy: The factors come in identical pairs.",
+              "Step 3: Value of one pair\n\\[(1+\\omega)(1+\\omega^{2})=(-\\omega^{2})(-\\omega)\\]\n\\[=\\omega^{3}=1\\]\nWhy: \\(1+\\omega=-\\omega^{2}\\) and \\(1+\\omega^{2}=-\\omega\\); minus times minus is plus.",
+              "Step 4: Count the pairs\n\\[2n\\text{ factors}=n\\text{ pairs}\\]\n\\[\\text{Product}=1^{n}=1\\]\nWhy: Each of the \\(n\\) pairs equals 1.",
+              "Check: n = 1 directly\n\\[(1+\\omega)(1+\\omega^{2})=1+\\omega+\\omega^{2}+\\omega^{3}\\]\n\\[=0+1=1\\]\nWhy: Expanding the first pair without the shortcut gives the same 1."
+            ],
+            "final_answer": "Hence proved: the product of \\(2n\\) factors is \\(1\\)."
+          }
+        ]
+      }
+    }
+  ]
+}
