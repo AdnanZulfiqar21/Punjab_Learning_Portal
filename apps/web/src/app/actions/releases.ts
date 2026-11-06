@@ -2,9 +2,10 @@
 
 // P06.S3.T2 (CONTENT-RELEASE-01): publish several approved items together, or none of them, and roll a release back as a
 // whole. The API checks the publisher's scope, MFA and independence and today's publication gate for every item.
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import type { Problem } from "@portal/contracts";
+import { PUBLIC_CATALOGUE_TAG } from "@/lib/api";
 import { api, sessionToken } from "@/lib/session";
 
 export type ReleaseProblem = { item_id: string; title: string; errors: string[] };
@@ -23,6 +24,7 @@ export async function publishRelease(itemIds: string[], label: string, reason: s
     token: t,
     body: JSON.stringify({ item_ids: itemIds, label, reason }),
   });
+  updateTag(PUBLIC_CATALOGUE_TAG); // PUBLIC-CACHE-01: published counts change now, not up to a minute later
   revalidatePath("/studio/releases");
   return res.ok ? { ok: true } : refused(res.status, res.problem);
 }
@@ -35,6 +37,7 @@ export async function rollBackRelease(id: string, reason: string): Promise<Relea
     token: t,
     body: JSON.stringify({ reason }),
   });
+  updateTag(PUBLIC_CATALOGUE_TAG); // PUBLIC-CACHE-01: published counts change now, not up to a minute later
   revalidatePath("/studio/releases");
   return res.ok ? { ok: true } : refused(res.status, res.problem);
 }
