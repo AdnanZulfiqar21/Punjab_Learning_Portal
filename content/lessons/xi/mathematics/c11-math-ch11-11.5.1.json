@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH11-11.5.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch11",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch11/11.5.1",
+      "title": "11.5.1 Applications",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 218,
+          "pdf_to": 221,
+          "note": "Book p. 213-216: 11.5.1 Applications, Ferris Wheel Problems, Example 3 (Ferris wheel model, wheel and graph figure), Example 4 (tidal river), Example 5 (peak and its image in a lake, with figure)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In this section the formulas of 11.5 meet real life. Every problem follows the same plan:\n1. Read the largest value \\(M\\) and the smallest value \\(m\\) of the quantity (height, water level, ...) and the time for one full cycle.\n2. Amplitude \\(b = \\frac{M - m}{2}\\), midline \\(a = \\frac{M + m}{2}\\), and \\(c\\) from period \\(= \\frac{2\\pi}{c}\\).\n3. Choose sine or cosine according to where the motion starts.\n4. Substitute the given time and simplify."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Ferris Wheel Problems"
+          },
+          {
+            "type": "paragraph",
+            "text": "The first Ferris wheel was invented by George W. Ferris, who built it for the 1893 World's Fair. A Ferris wheel is an important example of periodic motion that can be described by trigonometric functions, specifically sinusoidal functions. When we model the height of a rider on a Ferris wheel over time, these functions capture the periodic nature of the motion. The motion of a Ferris wheel can be modelled by\n\\[f(t) = a + b\\sin(ct + d)\\]\nor\n\\[f(t) = a + b\\cos(ct + d)\\]\n(The book shows a photograph of a Ferris wheel here.)"
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "A Ferris wheel with a radius of 45 feet has its lowest point located 5 feet above the ground. It completes one full revolution every 60 seconds in the counter-clockwise direction. Model an equation that describes the height of a rider on the Ferris wheel as a function of time \\(t\\). How high is the rider from the ground after 40 seconds? Also graph the model equation.",
+            "steps": [
+              "Given: radius 45 ft, lowest point 5 ft above the ground, one revolution in 60 s, the rider starts at the lowest point.\nTo find: a model \\(h(t)\\) for the height, the height at \\(t = 40\\) s, and the graph.\nMethod: use \\(h(t) = a + b\\cos(ct)\\) type model: the period gives \\(c\\), the radius gives the amplitude \\(b\\), the height of the centre gives the vertical shift \\(a\\).",
+              "Step 1: Find \\(c\\) from the period\nOne full revolution (one cycle) takes 60 seconds, so period \\(= 60\\).\n\\[\\dfrac{2\\pi}{c} = 60\\]\n\\[c = \\dfrac{2\\pi}{60} = \\dfrac{\\pi}{30}\\]\nWhy: the period of \\(a + b\\cos(ct)\\) is \\(\\frac{2\\pi}{c}\\), and after one revolution the rider is back at the same height.",
+              "Step 2: Amplitude and vertical shift\nThe amplitude \\(b\\) equals the radius of the wheel: \\(b = 45\\).\nThe vertical shift \\(a\\) is the height of the centre above the ground. The lowest point is 5 ft above the ground, so\n\\[a = 5 + b = 5 + 45 = 50\\]\nWhy: the rider goes 45 ft above and 45 ft below the centre. Check with 11.5: highest point \\(M = 5 + 90 = 95\\), lowest \\(m = 5\\), so \\(a = \\frac{95 + 5}{2} = 50\\) and \\(b = \\frac{95 - 5}{2} = 45\\).",
+              "Step 3: Choose sine or cosine\nWe can model the height with sine or cosine, because both show the periodic nature of the motion. We usually choose a cosine function if the rider starts at the maximum height, or a sine function if the rider starts at the midpoint. Since the rider starts at the lowest point and goes up, we model the height as a negative cosine function:\n\\[h(t) = -b\\cos(ct) + a\\]\nwhere \\(t\\) is time and \\(h\\) is height.\nWhy: \\(\\cos 0 = 1\\), so \\(-\\cos(ct)\\) starts at its lowest value \\(-1\\) at \\(t = 0\\) and then increases, exactly like the rider.",
+              "Step 4: Write the model\n\\[h(t) = -45\\cos\\left(\\dfrac{\\pi}{30}t\\right) + 50\\]\nThis is the required equation of the Ferris wheel.\nWhy: substitute \\(b = 45\\), \\(c = \\frac{\\pi}{30}\\), \\(a = 50\\).\nCheck: \\(h(0) = -45 + 50 = 5\\) (lowest point) and \\(h(30) = -45\\cos\\pi + 50 = 95\\) (top, after half a revolution).",
+              "Step 5: Height after 40 seconds\n\\[h(40) = -45\\cos\\left(\\dfrac{\\pi}{30} \\cdot 40\\right) + 50\\]\n\\[= -45\\cos\\dfrac{4\\pi}{3} + 50\\]\n\\[= -45\\left(-\\dfrac{1}{2}\\right) + 50\\]\n\\[= 22.5 + 50 = 72.5\\]\nWhy: \\(\\frac{4\\pi}{3} = 240^{\\circ}\\) lies in quadrant III, where cosine is negative, and \\(\\cos 240^{\\circ} = -\\cos 60^{\\circ} = -\\frac{1}{2}\\).",
+              "Step 6: Graph the model\nPlot \\(h(t)\\) for \\(0 \\le t \\le 60\\): it starts at \\((0, 5)\\), crosses the midline \\(h = 50\\) at \\(t = 15\\), reaches the top \\((30, 95)\\), crosses the midline again at \\(t = 45\\) and is back at \\((60, 5)\\). The point \\((40, 72.5)\\) is marked (see the figure).\nWhy: these five points (start, midline, top, midline, end) are a quarter period (15 s) apart and fix the whole wave.",
+              "Check:\n\\(72.5\\) lies between the lowest height 5 and the highest height 95, and after 40 s the rider has passed the top (at 30 s) and is coming down, so a value between 50 and 95 is expected. The answer fits."
+            ],
+            "answer": "Model: \\(h(t) = -45\\cos\\left(\\frac{\\pi}{30}t\\right) + 50\\). After 40 seconds the rider is 72.5 feet above the ground."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch11-fig-ex3-ferris-wheel",
+            "alt": "Left: a Ferris wheel of radius 45 ft, centre 50 ft and top 95 ft above the ground, lowest point 5 ft up; the rider after 40 s is on the upper left. Right: graph of h(t) = -45 cos(pi t / 30) + 50 for t from 0 to about 62 s: 5 at t = 0, 95 at t = 30, 5 at t = 60, midline 50, point (40, 72.5) marked.",
+            "caption": "Figure: the Ferris wheel of Example 3 and the graph of h(t) = −45 cos(πt/30) + 50 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Choosing the starting function:\nstart at the top: \\(a + b\\cos(ct)\\);\nstart at the bottom: \\(a - b\\cos(ct)\\);\nstart at the midline going up: \\(a + b\\sin(ct)\\).\nAlways test your model at \\(t = 0\\): it must give the starting height."
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "The water level \\(L\\) in feet of a tidal river varies throughout the day. Suppose the level of the tidal river can be modelled by the equation \\(L(t) = 8 + 4\\sin\\left(\\frac{\\pi}{6}t\\right)\\), where \\(t\\) denotes the time in hours. The water level oscillates 4 feet above and below an average level of 8 feet.\n(a) Find the water level at \\(t = 3\\) hours.\n(b) What is the minimum water level?",
+            "steps": [
+              "Given: \\(L(t) = 8 + 4\\sin\\left(\\frac{\\pi}{6}t\\right)\\), \\(t\\) in hours.\nTo find: (a) \\(L(3)\\); (b) the minimum value of \\(L(t)\\).\nMethod: (a) substitute \\(t = 3\\). (b) the minimum of \\(a + b\\sin(\\ldots)\\) with \\(b > 0\\) occurs when the sine equals \\(-1\\): \\(m = a - |b|\\).",
+              "Step 1: (a) substitute \\(t = 3\\)\n\\[L(3) = 8 + 4\\sin\\left(\\dfrac{\\pi}{6} \\cdot 3\\right)\\]\n\\[= 8 + 4\\sin\\dfrac{\\pi}{2}\\]\nWhy: the model gives the level for any time; we only replace \\(t\\) by 3.",
+              "Step 2: (a) simplify\n\\[L(3) = 8 + 4(1) = 12\\]\nWhy: \\(\\sin\\frac{\\pi}{2} = \\sin 90^{\\circ} = 1\\).\nSo the water level at \\(t = 3\\) hours is 12 feet; this is in fact the highest level \\(8 + 4\\).",
+              "Step 3: (b) when is the level smallest?\nTo find the minimum water level we need the minimum value of the sine function, which is \\(-1\\). Substitute \\(\\sin\\left(\\frac{\\pi}{6}t\\right) = -1\\):\n\\[L(t) = 8 + 4(-1)\\]\n\\[= 8 - 4 = 4\\]\nWhy: \\(b = 4 > 0\\), so \\(L\\) is smallest when the sine is smallest. By the formula, \\(m = a - |b| = 8 - 4 = 4\\).",
+              "Check:\nThe sine equals \\(-1\\) when \\(\\frac{\\pi}{6}t = \\frac{3\\pi}{2}\\), i.e. \\(t = 9\\) hours: \\(L(9) = 8 + 4\\sin\\frac{3\\pi}{2} = 8 - 4 = 4\\). Also the level \"4 feet above and below 8 feet\" runs from 4 to 12, which matches both answers."
+            ],
+            "answer": "(a) The water level at \\(t = 3\\) hours is 12 feet. (b) The minimum water level is 4 feet (first reached at \\(t = 9\\) hours)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In Example 4 the period is \\(\\frac{2\\pi}{\\pi/6} = 12\\) hours: the river rises and falls once every 12 hours, like real tides, which come roughly twice a day."
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "From a point 100 m above the surface of a lake, the angle of elevation of a peak of a cliff is found to be \\(15^{\\circ}\\) and the angle of depression of the image of the peak is \\(30^{\\circ}\\). Find the height of the peak.",
+            "steps": [
+              "Given: the observer \\(P\\) is 100 m above the lake; elevation of the peak \\(= 15^{\\circ}\\); depression of its image in the water \\(= 30^{\\circ}\\).\nTo find: the height \\(h\\) of the peak above the lake.\nMethod: the image in the water is as far below the surface as the peak is above it. Two right triangles with the same horizontal side \\(PQ\\) give two equations with \\(\\tan\\); dividing removes the unknown distance.",
+              "Step 1: Name the points (see the figure)\nLet \\(A\\) be the top of the peak \\(\\overline{AM}\\) and \\(\\overline{MB}\\) its image. Let \\(P\\) be the point of observation and \\(L\\) the point just below \\(P\\) on the surface of the lake. From \\(P\\), draw \\(\\overline{PQ} \\perp \\overline{AM}\\).\nLet \\(m\\overline{PQ} = y\\) metres and \\(m\\overline{AM} = h\\) metres.\nWhy: a reflection in still water is as deep below the surface as the object is high above it, so \\(m\\overline{MB} = h\\) too.",
+              "Step 2: Lengths \\(AQ\\) and \\(BQ\\)\n\\[m\\overline{AQ} = h - m\\overline{QM}\\]\n\\[= h - m\\overline{PL} = h - 100\\]\n\\[m\\overline{BQ} = m\\overline{QM} + m\\overline{MB}\\]\n\\[= 100 + h\\]\nWhy: \\(PQ\\) is horizontal and \\(PL\\) vertical, so \\(QM = PL = 100\\) m.",
+              "Step 3: Two tangent equations\n\\[\\tan 15^{\\circ} = \\dfrac{AQ}{PQ} = \\dfrac{h - 100}{y}\\]\n\\[\\tan 30^{\\circ} = \\dfrac{BQ}{PQ} = \\dfrac{100 + h}{y}\\]\nWhy: in the right triangles \\(PQA\\) and \\(PQB\\), tan = opposite / adjacent, and both have the adjacent side \\(PQ = y\\).",
+              "Step 4: Divide to remove \\(y\\)\n\\[\\dfrac{\\tan 15^{\\circ}}{\\tan 30^{\\circ}} = \\dfrac{h - 100}{h + 100}\\]\nWhy: \\(y\\) is unknown and not asked; dividing the two equations cancels it.",
+              "Step 5: Componendo and dividendo\n\\[\\dfrac{\\tan 15^{\\circ} + \\tan 30^{\\circ}}{\\tan 15^{\\circ} - \\tan 30^{\\circ}}\\]\n\\[= \\dfrac{(h - 100) + (h + 100)}{(h - 100) - (h + 100)}\\]\n\\[= \\dfrac{2h}{-200} = \\dfrac{h}{-100}\\]\nWhy: componendo and dividendo: if \\(\\frac{p}{q} = \\frac{r}{s}\\) then \\(\\frac{p + q}{p - q} = \\frac{r + s}{r - s}\\). It is used because the 100's cancel and \\(h\\) is left alone.",
+              "Step 6: Solve for \\(h\\)\n\\[h = \\dfrac{\\tan 30^{\\circ} + \\tan 15^{\\circ}}{\\tan 30^{\\circ} - \\tan 15^{\\circ}} \\times 100\\]\n\\[= \\dfrac{0.5774 + 0.2679}{0.5774 - 0.2679} \\times 100\\]\n\\[h = 273.1179\\]\nWhy: multiply both sides by \\(-100\\); the minus sign is absorbed by reversing the order in the denominator. The tangent values are taken to four decimal places.",
+              "Check:\nExact value: \\(\\dfrac{\\tan 30^{\\circ} + \\tan 15^{\\circ}}{\\tan 30^{\\circ} - \\tan 15^{\\circ}} = \\dfrac{\\sin 45^{\\circ}}{\\sin 15^{\\circ}} = \\sqrt{3} + 1\\), so \\(h = 100(\\sqrt{3} + 1) \\approx 273.2\\) m.\nThen \\(y = \\frac{100 + h}{\\tan 30^{\\circ}} \\approx 646.4\\) m, and \\(\\frac{h - 100}{y} \\approx \\frac{173.2}{646.4} \\approx 0.2679 = \\tan 15^{\\circ}\\). Both equations hold."
+            ],
+            "answer": "Height of the peak \\(\\approx 273\\) m (exactly \\(100(\\sqrt{3} + 1) \\approx 273.2\\) m)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch11-fig-ex5-peak-image-lake",
+            "alt": "P is 100 m above the point L on the lake surface. A horizontal line PQ meets the vertical line through the peak at Q. AM is the peak, M on the lake surface, and MB is its image below the surface, equal to AM. The angle of elevation of A from P is 15 degrees and the angle of depression of B from P is 30 degrees.",
+            "caption": "Figure: Example 5, the peak AM and its image MB in the lake (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The book's \\(h = 273.1179\\) comes from rounding \\(\\tan 30^{\\circ}\\) and \\(\\tan 15^{\\circ}\\) to four decimal places. With exact values \\(h = 100(\\sqrt{3} + 1) = 273.205\\ldots\\) m. Both round to the book's final answer, 273 m."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Model from data: amplitude \\(b = \\frac{M - m}{2}\\), midline \\(a = \\frac{M + m}{2}\\), period \\(= \\frac{2\\pi}{c}\\).\n2. Ferris wheel: amplitude = radius, midline = height of the centre, period = time of one revolution.\n3. Start at the bottom: \\(h = a - b\\cos(ct)\\); at the top: \\(a + b\\cos(ct)\\); at the midline going up: \\(a + b\\sin(ct)\\).\n4. Test every model at \\(t = 0\\) and at half a period.\n5. Reflection problems: the image is as far below the water surface as the object is above it."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Taking the amplitude as the diameter (90) instead of the radius (45).\n2. Taking the vertical shift as 5 (the lowest point) instead of the height of the centre (50).\n3. Using \\(+45\\cos\\) for a rider who starts at the bottom: \\(h(0)\\) would be 95, the top.\n4. Calculator in degree mode with \\(\\frac{\\pi}{30} \\cdot 40\\): the angle is in radians (\\(\\frac{4\\pi}{3} = 240^{\\circ}\\)).\n5. In Example 5, taking \\(BQ = h\\) instead of \\(100 + h\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH11-EXERCISE-11-3-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch11",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch11/u-exercise-11-3-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 222,
+          "pdf_to": 222,
+          "note": "Exercise 11.3, Question 7: carnival wheel, diameter 40 ft, centre 28 ft, 120 s per turn; three unlabelled asks, labelled (a)-(c) as in the answer key PDF 309."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(a)",
+            "prompt": "7 (a) [not labelled in print; the answer key calls it (a)] A carnival ride consists of a vertical wheel with a diameter of 40 feet. The centre of the wheel is 28 feet above the ground. The wheel rotates at a constant speed and takes 120 seconds to make one complete revolution. Model an equation that describes the height \\(h(t)\\) of a rider on the wheel as a function of time \\(t\\).",
+            "explanation": "Same kind of model as Question 5, but now the centre height is given directly.\nPlan: radius \\(=\\) half the diameter; \\(c = \\frac{2\\pi}{120}\\); start at the bottom.",
+            "steps": [
+              "Given: diameter 40 ft, centre 28 ft above the ground, one revolution in 120 s.\nTo find: a formula for \\(h(t)\\).\nMethod: \\(h = \\text{centre} - \\text{radius} \\times \\cos(ct)\\), taking \\(t = 0\\) when the rider is at the lowest point (the question does not say; the key uses this start).",
+              "Radius (amplitude)\n\\[r = \\tfrac{40}{2} = 20 \\text{ ft}\\]\nWhy: Half the diameter.",
+              "Centre (midline)\n\\[a = 28 \\text{ ft}\\]\nWhy: Given directly. Lowest point \\(28 - 20 = 8\\) ft, highest \\(28 + 20 = 48\\) ft.",
+              "Angular speed\n\\[c = \\dfrac{2\\pi}{120} = \\dfrac{\\pi}{60}\\]\nWhy: One turn (\\(2\\pi\\)) takes 120 s.",
+              "Write the model\n\\[h(t) = 28 - 20\\cos\\left(\\tfrac{\\pi}{60}t\\right)\\]\nWhy: \\(-\\cos\\) starts at its lowest value, so \\(h(0) = 8\\) ft, the bottom of the wheel.",
+              "Check\n\\[h(0) = 8,\\; h(60) = 48,\\; h(120) = 8 \\;\\checkmark\\]\nWhy: Bottom, top after half a turn, bottom again after a full turn."
+            ],
+            "final_answer": "\\(h(t) = 28 - 20\\cos\\left(\\tfrac{\\pi}{60}t\\right)\\) (rider at the lowest point at \\(t = 0\\))",
+            "answer_figure": {
+              "$asset": "c11-math-ch11-fig-ex11-3-q7-wheel",
+              "alt": "Graph of h(t) = 28 minus 20 cos(pi t over 60) for t from 0 to 120 seconds. The curve starts at (0, 8), peaks at (60, 48) and passes (90, 28) on the centre line. A horizontal line h = 36 cuts the curve at t about 37.86 s and t about 82.14 s.",
+              "caption": "Exercise 11.3 Q7: rider height over one revolution, with the 36 ft line (plotted from the model; original drawing)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(b)",
+            "prompt": "7 (b) [not labelled in print] A carnival ride consists of a vertical wheel with a diameter of 40 feet. The centre of the wheel is 28 feet above the ground. The wheel rotates at a constant speed and takes 120 seconds to make one complete revolution. How high is the rider from the ground after 90 seconds?",
+            "explanation": "Substitution: put \\(t = 90\\) in the model.\nPlan: angle \\(\\frac{90\\pi}{60} = \\frac{3\\pi}{2}\\), whose cosine is 0.",
+            "steps": [
+              "Given: \\(h(t) = 28 - 20\\cos\\left(\\tfrac{\\pi}{60}t\\right)\\), \\(t = 90\\).\nTo find: \\(h(90)\\).\nMethod: Substitute and use \\(\\cos\\frac{3\\pi}{2} = 0\\).",
+              "Work out the angle\n\\[\\tfrac{\\pi}{60}(90) = \\tfrac{3\\pi}{2} = 270^{\\circ}\\]\nWhy: \\(\\frac{90}{60} = \\frac{3}{2}\\).",
+              "Find \\(h\\)\n\\[h(90) = 28 - 20\\cos\\tfrac{3\\pi}{2}\\]\n\\[= 28 - 20(0) = 28 \\text{ ft}\\]\nWhy: \\(\\cos 270^{\\circ} = 0\\).",
+              "Check\nWhy: 90 s is three-quarters of a turn: the rider has passed the top (60 s) and is level with the centre on the way down, which is 28 ft."
+            ],
+            "final_answer": "\\(h(90) = 28\\) feet"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(c)",
+            "prompt": "7 (c) [not labelled in print] A carnival ride consists of a vertical wheel with a diameter of 40 feet. The centre of the wheel is 28 feet above the ground. The wheel rotates at a constant speed and takes 120 seconds to make one complete revolution. At what times will the rider be 36 feet above the ground?",
+            "explanation": "Solve \\(h(t) = 36\\); in one turn there are two answers (going up and coming down).\nPlan: isolate the cosine, find both angles in \\([0, 2\\pi)\\), convert to times.",
+            "steps": [
+              "Given: \\(h(t) = 28 - 20\\cos\\left(\\tfrac{\\pi}{60}t\\right)\\), \\(h = 36\\).\nTo find: all \\(t\\) with \\(h(t) = 36\\).\nMethod: Isolate \\(\\cos\\); cosine is negative in Quadrants II and III, giving two angles per turn.",
+              "Get the cosine alone\n\\[28 - 20\\cos\\left(\\tfrac{\\pi}{60}t\\right) = 36\\]\n\\[-20\\cos\\left(\\tfrac{\\pi}{60}t\\right) = 8\\]\n\\[\\cos\\left(\\tfrac{\\pi}{60}t\\right) = -0.4\\]\nWhy: Subtract 28, divide by \\(-20\\).",
+              "Both angles in one turn\n\\[\\cos^{-1}(0.4) = 66.42^{\\circ}\\]\n\\[\\tfrac{\\pi}{60}t = 113.58^{\\circ} \\text{ or } 246.42^{\\circ}\\]\nWhy: Reference angle \\(66.42^{\\circ}\\); Quadrant II: \\(180^{\\circ} - 66.42^{\\circ}\\); Quadrant III: \\(180^{\\circ} + 66.42^{\\circ}\\).",
+              "Change to times\n\\[\\tfrac{\\pi}{60}t = 3t \\text{ degrees}\\]\n\\[t_1 = \\tfrac{113.58}{3} \\approx 37.86 \\text{ s}\\]\n\\[t_2 = \\tfrac{246.42}{3} \\approx 82.14 \\text{ s}\\]\nWhy: \\(\\frac{\\pi}{60}\\) rad \\(= 3^{\\circ}\\), so the angle in degrees is \\(3t\\).",
+              "Check\n\\[t_1 + t_2 = 120 \\;\\checkmark\\]\n\\[28 - 20\\cos(113.58^{\\circ}) = 28 + 8 = 36 \\;\\checkmark\\]\nWhy: The two times are symmetric about the top (60 s). The key's 37.87 s and 82.13 s come from rounding the angle to \\(113.6^{\\circ}\\); the same answer to one decimal place. The pattern repeats every 120 s."
+            ],
+            "final_answer": "\\(t \\approx 37.86\\) s and \\(t \\approx 82.14\\) s (then every 120 s later)"
+          }
+        ]
+      }
+    }
+  ]
+}

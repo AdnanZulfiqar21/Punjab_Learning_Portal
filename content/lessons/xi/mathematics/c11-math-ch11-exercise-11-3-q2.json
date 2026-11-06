@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH11-EXERCISE-11-3-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch11",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch11/u-exercise-11-3-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 221,
+          "pdf_to": 221,
+          "note": "Exercise 11.3, Question 2 (a)-(b): temperature model T(t) = (13/2) sin(pi t/6 - pi/9) + 15; maximum, minimum and T(9). Answer key PDF 309."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(a)",
+            "prompt": "2 (a) The temperature T in a certain city varies throughout the day according to the equation \\(T(t) = \\frac{13}{2}\\sin\\left(\\frac{\\pi}{6}t - \\frac{\\pi}{9}\\right) + 15\\), where \\(t\\) is the time in hours, with \\(t = 0\\) corresponding to midnight. Find the maximum and minimum temperature during the day.",
+            "explanation": "The temperature is a sine wave: \\(a + b\\sin(\\ldots)\\) with \\(a = 15\\), \\(b = \\frac{13}{2}\\).\nWe need its highest and lowest values.\nPlan: use \\(-1 \\le \\sin \\le 1\\), then check that both extremes happen during the day.",
+            "steps": [
+              "Given: \\(T(t) = \\tfrac{13}{2}\\sin\\left(\\tfrac{\\pi}{6}t - \\tfrac{\\pi}{9}\\right) + 15\\), \\(0 \\le t < 24\\).\nTo find: the maximum and minimum of \\(T\\).\nMethod: Sine of any angle lies between \\(-1\\) and \\(1\\). Multiply by \\(\\frac{13}{2}\\) and add 15.",
+              "Start from the range of sine\n\\[-1 \\le \\sin\\left(\\tfrac{\\pi}{6}t - \\tfrac{\\pi}{9}\\right) \\le 1\\]\nWhy: Whatever the angle, sine stays between \\(-1\\) and \\(1\\).",
+              "Multiply by \\(\\frac{13}{2}\\)\n\\[-\\tfrac{13}{2} \\le \\tfrac{13}{2}\\sin(\\ldots) \\le \\tfrac{13}{2}\\]\nWhy: \\(\\frac{13}{2} = 6.5\\) is positive, so the signs stay. 6.5 is the amplitude: the temperature swings 6.5 degrees above and below the average.",
+              "Add 15\n\\[15 - 6.5 \\le T \\le 15 + 6.5\\]\n\\[8.5 \\le T \\le 21.5\\]\nWhy: 15 is the average (middle) temperature.",
+              "Check that both happen during the day\n\\[\\tfrac{\\pi}{6}t - \\tfrac{\\pi}{9} = \\tfrac{\\pi}{2} \\Rightarrow t = \\tfrac{11}{3}\\]\n\\[\\tfrac{\\pi}{6}t - \\tfrac{\\pi}{9} = \\tfrac{3\\pi}{2} \\Rightarrow t = \\tfrac{29}{3}\\]\nWhy: Sine is 1 at \\(\\frac{\\pi}{2}\\) and \\(-1\\) at \\(\\frac{3\\pi}{2}\\). \\(t = \\frac{11}{3}\\) h (3:40 a.m.) and \\(t = \\frac{29}{3}\\) h (9:40 a.m.) are inside the day, so both values are really reached."
+            ],
+            "final_answer": "Maximum temperature \\(= 21.5^{\\circ}\\), minimum temperature \\(= 8.5^{\\circ}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(b)",
+            "prompt": "2 (b) The temperature T in a certain city varies throughout the day according to the equation \\(T(t) = \\frac{13}{2}\\sin\\left(\\frac{\\pi}{6}t - \\frac{\\pi}{9}\\right) + 15\\), where \\(t\\) is the time in hours, with \\(t = 0\\) corresponding to midnight. Find the temperature at \\(t = 9\\) hours (9:00 a.m.).",
+            "explanation": "A substitution question: put \\(t = 9\\) into the formula.\nThe angle must be worked out carefully (in radians or degrees).\nPlan: find the angle, its sine, then \\(T\\).",
+            "steps": [
+              "Given: \\(T(t) = \\tfrac{13}{2}\\sin\\left(\\tfrac{\\pi}{6}t - \\tfrac{\\pi}{9}\\right) + 15\\), \\(t = 9\\).\nTo find: \\(T(9)\\).\nMethod: Substitute \\(t = 9\\); simplify the angle; use \\(\\sin(270^{\\circ} - 20^{\\circ}) = -\\cos 20^{\\circ}\\).",
+              "Work out the angle\n\\[\\tfrac{\\pi}{6}(9) - \\tfrac{\\pi}{9} = \\tfrac{3\\pi}{2} - \\tfrac{\\pi}{9}\\]\n\\[= 270^{\\circ} - 20^{\\circ} = 250^{\\circ}\\]\nWhy: \\(\\pi\\) rad \\(= 180^{\\circ}\\), so \\(\\frac{3\\pi}{2} = 270^{\\circ}\\) and \\(\\frac{\\pi}{9} = 20^{\\circ}\\).",
+              "Find the sine\n\\[\\sin 250^{\\circ} = \\sin(270^{\\circ} - 20^{\\circ})\\]\n\\[= -\\cos 20^{\\circ} \\approx -0.9397\\]\nWhy: \\(250^{\\circ}\\) is in Quadrant III, where sine is negative; \\(\\sin(270^{\\circ} - \\theta) = -\\cos\\theta\\).",
+              "Find \\(T\\)\n\\[T(9) = 6.5(-0.9397) + 15\\]\n\\[= -6.108 + 15 = 8.892\\]\nWhy: Multiply by the amplitude, then add the average.",
+              "Check\n\\[8.5 \\le 8.89 \\le 21.5 \\;\\checkmark\\]\nWhy: The answer lies in the range from part (a), and is close to the minimum, which comes at 9:40 a.m."
+            ],
+            "final_answer": "\\(T(9) \\approx 8.89^{\\circ}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}
