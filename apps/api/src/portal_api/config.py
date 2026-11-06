@@ -55,6 +55,8 @@ class Settings(BaseSettings):
     # W09.S1.T3 (WORKLOAD-GUARD-01): each API process publishes its MCQ save health this often (seconds); 0 = off.
     health_sample_s: float = 20.0
     db_statement_timeout_ms: int = 5000
+    # READING-PLACE-CACHE-01: seconds a process keeps a topic's catalogue place and neighbours (0 = off).
+    reading_place_cache_s: float = Field(default=60.0, ge=0)
     # ADMISSION-01: requests admitted at once per API process (0 = twice the pool) and how long one may wait for a slot
     # before a 503 SERVICE_BUSY. The worker-thread pool is kept at least twice the slots.
     api_admission_slots: int = Field(default=0, ge=0)
