@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH2-2.1.4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch2",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch2/2.1.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 30,
+          "pdf_to": 30,
+          "note": "Book p. 25: 2.1.4 Types of Function: (i) one-to-one, (ii) onto, (iii) bijective, Piecewise Function with its graph."
+        },
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 31,
+          "pdf_to": 31,
+          "note": "Book p. 26: Examples 5-6 with the graph of f(x) = x^2 - 2. Teaching notes, Exam tips, Key points and Common mistake are ours."
+        }
+      ],
+      "title": "2.1.4 Types of Function",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(i) One-to-One (Injective) Function"
+          },
+          {
+            "type": "paragraph",
+            "text": "A function \\(f\\) is one-to-one if different inputs produce different outputs, i.e., if \\(f(x_{1}) = f(x_{2})\\) implies \\(x_{1} = x_{2}\\). This means that no two different elements of the domain map to the same element of the co-domain."
+          },
+          {
+            "type": "paragraph",
+            "text": "For example, \\(f(x) = 5x + 7\\) is one-to-one because \\(5x_{1} + 7 = 5x_{2} + 7\\) implies \\(x_{1} = x_{2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The missing small steps in the book's example: subtract \\(7\\) from both sides, then divide by \\(5\\):\n\\[5x_{1} + 7 = 5x_{2} + 7\\]\n\\[5x_{1} = 5x_{2}\\]\n\\[x_{1} = x_{2}\\]\nMethod to prove one-to-one: assume \\(f(x_{1}) = f(x_{2})\\) and show by algebra that \\(x_{1} = x_{2}\\).\nMethod to disprove: find two different inputs with the same output (one counter-example is enough)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "On a graph, one-to-one can be checked with a horizontal line: a function is one-to-one if no horizontal line meets its graph more than once. (Compare the vertical line test of 2.1.3, which checks whether a graph is a function at all.)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(ii) Onto (Surjective) Function"
+          },
+          {
+            "type": "paragraph",
+            "text": "A function \\(f : X \\to Y\\) is called an onto (or surjective) function if every element in the co-domain \\(Y\\) has at least one pre-image in the domain \\(X\\). In other words, for every \\(y\\) in \\(Y\\), there exists an \\(x\\) in \\(X\\) such that \\(f(x) = y\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "For example, \\(f(x) = 2x + 3\\), where the domain and co-domain are both the real numbers. Here\n\\[y = 2x + 3\\]\n\\[\\Rightarrow x = \\dfrac{y - 3}{2}\\]\n\\[f\\left(\\dfrac{y - 3}{2}\\right) = 2\\left(\\dfrac{y - 3}{2}\\right) + 3 = y\\]\nFor each \\(y\\) in \\(\\mathbb{R}\\) there exists \\(\\frac{y - 3}{2}\\) in \\(\\mathbb{R}\\) such that \\(f\\left(\\frac{y - 3}{2}\\right) = y\\). Hence \\(f\\) is an onto function."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A pre-image of \\(y\\) is an input \\(x\\) whose output is \\(y\\). Onto means: range = co-domain (no element of the co-domain is left unused).\nMethod to prove onto: take any \\(y\\) in the co-domain, solve \\(y = f(x)\\) for \\(x\\), check that this \\(x\\) is in the domain, and verify \\(f(x) = y\\).\nOnto depends on the co-domain chosen: \\(f(x) = x^{2}\\) from \\(\\mathbb{R}\\) to \\(\\mathbb{R}\\) is not onto (\\(-1\\) has no pre-image), but from \\(\\mathbb{R}\\) to \\([0, \\infty)\\) it is onto."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(iii) Bijective Function"
+          },
+          {
+            "type": "paragraph",
+            "text": "A function \\(f : X \\to Y\\) is called bijective if it is both one-to-one and onto."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Bijective means a perfect pairing: every element of \\(Y\\) is the output of exactly one element of \\(X\\) (onto gives \"at least one\", one-to-one gives \"at most one\"). To prove bijective, prove both parts separately. The functions \\(5x + 7\\) and \\(2x + 3\\) above are both bijective from \\(\\mathbb{R}\\) to \\(\\mathbb{R}\\)."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Type",
+              "Condition",
+              "Book's example"
+            ],
+            "rows": [
+              [
+                "One-to-one (injective)",
+                "\\(f(x_{1}) = f(x_{2}) \\Rightarrow x_{1} = x_{2}\\)",
+                "\\(f(x) = 5x + 7\\)"
+              ],
+              [
+                "Onto (surjective)",
+                "every \\(y \\in Y\\) has a pre-image",
+                "\\(f(x) = 2x + 3\\)"
+              ],
+              [
+                "Bijective",
+                "one-to-one and onto",
+                "\\(f(x) = x + 1\\) (Example 5)"
+              ]
+            ],
+            "caption": "Our summary of the three types"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Piecewise Function"
+          },
+          {
+            "type": "paragraph",
+            "text": "A piecewise function is a function that is defined by different expressions (or \"pieces\") over different intervals of its domain. Each piece applies to a specific part of the domain."
+          },
+          {
+            "type": "paragraph",
+            "text": "For example,"
+          },
+          {
+            "type": "equation",
+            "latex": "f(x) = \\begin{cases} 2x + 1 & \\text{if } x < 0 \\\\ x^{2} - 1 & \\text{if } x \\ge 0 \\end{cases}",
+            "text_alt": "f of x equals 2 x plus 1 if x is less than 0, and x squared minus 1 if x is greater than or equal to 0"
+          },
+          {
+            "type": "paragraph",
+            "text": "For \\(x < 0\\), the function behaves like \\(2x + 1\\) and for \\(x \\ge 0\\), it behaves like \\(x^{2} - 1\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch2-fig-piecewise",
+            "alt": "Graph on a grid from minus 4 to 4 on the x-axis and minus 3 to 3 on the y-axis. For x less than 0 a straight line y = 2x + 1 rises from (minus 2, minus 3) to an open circle at (0, 1). For x greater than or equal to 0 the curve y = x squared minus 1 starts at a filled dot (0, minus 1), crosses the x-axis at (1, 0) and rises to (2, 3).",
+            "caption": "Figure: the piecewise function f(x) = 2x + 1 for x < 0 and x² − 1 for x ≥ 0 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "To evaluate a piecewise function, first decide which piece the input belongs to, then use only that piece:\n\\(f(-2)\\): \\(-2 < 0\\), so \\(f(-2) = 2(-2) + 1 = -3\\).\n\\(f(0)\\): \\(0 \\ge 0\\), so \\(f(0) = 0^{2} - 1 = -1\\).\n\\(f(2)\\): \\(2 \\ge 0\\), so \\(f(2) = 2^{2} - 1 = 3\\).\nOn the graph, the line stops just before \\(x = 0\\): the open circle at \\((0, 1)\\) shows that point is not on the graph; the filled dot at \\((0, -1)\\) shows that \\(f(0) = -1\\). Each input still has only one output, so a piecewise function is a genuine function."
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Show that the function \\(f(x) = x + 1\\), where the domain and co-domain are all real numbers, is bijective.",
+            "steps": [
+              "Given: \\(f(x) = x + 1\\), \\(f : \\mathbb{R} \\to \\mathbb{R}\\).\nTo prove: \\(f\\) is bijective.\nMethod: a function is bijective if it is both one-to-one and onto, so prove the two parts separately.",
+              "Part 1: one-to-one\nA function is one-to-one if \\(f(x_{1}) = f(x_{2}) \\Rightarrow x_{1} = x_{2}\\). Suppose\n\\[f(x_{1}) = f(x_{2})\\]\n\\[x_{1} + 1 = x_{2} + 1\\]\n\\[\\Rightarrow x_{1} = x_{2}\\]\nSo the given function is one-to-one.\nWhy: subtracting \\(1\\) from both sides leaves \\(x_{1} = x_{2}\\): equal outputs can only come from equal inputs.",
+              "Part 2: onto\nTake any real number \\(y\\). Solve \\(y = x + 1\\): \\(x = y - 1\\), which is a real number.\n\\[f(y - 1) = y - 1 + 1 = y\\]\nWhy: every \\(y\\) in the co-domain has the pre-image \\(y - 1\\) in the domain, which is exactly the definition of onto.",
+              "Conclusion\n\\(f\\) is one-to-one and onto, therefore \\(f(x)\\) is bijective.",
+              "Check:\nTry \\(y = 7\\): the pre-image is \\(7 - 1 = 6\\), and \\(f(6) = 7\\). Two different inputs, e.g. \\(2\\) and \\(5\\), give \\(3\\) and \\(6\\), which are different, as one-to-one requires."
+            ],
+            "answer": "Hence proved: \\(f(x) = x + 1\\) is one-to-one and onto, so it is bijective."
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Show that the function \\(f(x) = x^{2} - 2\\), where the domain and co-domain are all real numbers, is neither one-to-one nor onto.",
+            "steps": [
+              "Given: \\(f(x) = x^{2} - 2\\), \\(f : \\mathbb{R} \\to \\mathbb{R}\\).\nTo prove: \\(f\\) is not one-to-one and not onto.\nMethod: to show a property fails, one counter-example is enough. Find two inputs with the same output, and one element of the co-domain with no pre-image.",
+              "Try the one-to-one condition\n\\[f(x_{1}) = f(x_{2})\\]\n\\[x_{1}^{2} - 2 = x_{2}^{2} - 2\\]\n\\[x_{1}^{2} = x_{2}^{2}\\]\nTaking square root, we get \\(x_{1} = x_{2}\\) or \\(x_{1} = -x_{2}\\).\nWhy: two numbers have the same square when they are equal or negatives of each other, so equal outputs do not force equal inputs.",
+              "Counter-example: not one-to-one\n\\(x_{1} = 2\\), \\(x_{2} = -2\\), so \\(x_{1} \\ne x_{2}\\), and\n\\[f(2) = 4 - 2 = 2\\]\n\\[f(-2) = 4 - 2 = 2\\]\nThus \\(f\\) is not one-to-one.\nWhy: two different inputs give the same output \\(2\\) (see the dashed line at height 2 in the figure).",
+              "Not onto\n\\(x^{2} \\ge 0\\), so \\(f(x) = x^{2} - 2 \\ge -2\\). The smallest value \\(f\\) can attain is \\(-2\\), and only when \\(x = 0\\).\nAny number less than \\(-2\\) in the co-domain \\(\\mathbb{R}\\) is not the image of any real \\(x\\). For example, \\(f(x) = -3\\):\n\\[x^{2} - 2 = -3\\]\n\\[x^{2} = -1\\]\nwhich has no real root.\nWhy: the co-domain is all of \\(\\mathbb{R}\\), but the range is only \\([-2, \\infty)\\); the element \\(-3\\) has no pre-image.",
+              "Check:\nFrom the graph: the horizontal line \\(y = 2\\) meets the parabola twice (not one-to-one), and the parabola never goes below its lowest point \\((0, -2)\\) (not onto)."
+            ],
+            "answer": "Hence proved: \\(f(x) = x^{2} - 2\\) is not one-to-one (\\(f(2) = f(-2) = 2\\)) and not onto (\\(-3\\) has no pre-image)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch2-fig-ex6-parabola",
+            "alt": "Graph of the parabola y = x squared minus 2 with lowest point (0, minus 2). The points (minus 2, 2) and (2, 2) are marked and joined by a dashed horizontal line at height 2, with dashed vertical lines down to x = minus 2 and x = 2. Labels: f(minus 2) = 2 and f(2) = 2.",
+            "caption": "Figure: f(x) = x² − 2 takes the same value 2 at x = −2 and x = 2 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. One-to-one: \\(f(x_{1}) = f(x_{2}) \\Rightarrow x_{1} = x_{2}\\) (different inputs, different outputs).\n2. Onto: every element of the co-domain has at least one pre-image; range = co-domain.\n3. Bijective: one-to-one and onto.\n4. To prove a property, use general \\(x_{1}, x_{2}\\) or a general \\(y\\); to disprove, one counter-example is enough.\n5. A piecewise function uses different formulas on different parts of the domain; pick the piece first."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Proving one-to-one with numbers (\"\\(f(1) \\ne f(2)\\)\"). A few examples never prove it; use general \\(x_{1}, x_{2}\\).\n2. Forgetting to check that the pre-image lies in the domain when proving onto.\n3. Saying a function is onto without looking at the co-domain: \\(x^{2}\\) is onto \\([0, \\infty)\\) but not onto \\(\\mathbb{R}\\).\n4. In a piecewise function, using both pieces for one input, or the wrong piece at the boundary \\(x = 0\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

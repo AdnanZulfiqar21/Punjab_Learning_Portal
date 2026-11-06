@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH2-EXERCISE-2-1-Q9",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch2",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch2/u-exercise-2-1-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 32,
+          "pdf_to": 32,
+          "note": "Exercise 2.1, Question 9: Exercise 2.1, book pages 26-27: Q1-Q11 (33 parts)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9(i)",
+            "prompt": "9 (i) Let \\(f: \\mathbb{R} \\to \\mathbb{R}\\) be defined by \\(f(x) = \\frac{2x - 3}{x + 1}\\). Find the domain and range of \\(f(x)\\).",
+            "explanation": "A fraction with \\(x\\) in the bottom, like Question 6.\nWe must find the allowed inputs and the outputs.\nPlan: remove the zero of the bottom; solve \\(y = f(x)\\) for \\(x\\) to find the excluded output.",
+            "steps": [
+              "Given: \\(f(x) = \\frac{2x - 3}{x + 1}\\).\nTo find: domain and range.\nMethod: Domain: \\(x + 1 \\ne 0\\). Range: express \\(x\\) in terms of \\(y\\) and find the \\(y\\) that is not allowed.",
+              "Domain\n\\[x + 1 = 0 \\Rightarrow x = -1\\]\n\\[\\text{Domain } f = \\mathbb{R} - \\{-1\\}\\]\nWhy: Division by zero is not defined.",
+              "Solve \\(y = f(x)\\) for \\(x\\)\n\\[y(x + 1) = 2x - 3\\]\n\\[xy + y = 2x - 3\\]\n\\[xy - 2x = -3 - y\\]\n\\[x(y - 2) = -(y + 3)\\]\n\\[x = \\dfrac{y + 3}{2 - y}\\]\nWhy: Clear the fraction, gather the \\(x\\)-terms, take \\(x\\) common, divide; multiplying top and bottom by \\(-1\\) tidies the signs.",
+              "The excluded output\n\\[2 - y = 0 \\Rightarrow y = 2\\]\n\\[\\text{Range } f = \\mathbb{R} - \\{2\\}\\]\nWhy: Every \\(y \\ne 2\\) gives a real \\(x\\) (never \\(-1\\), since \\(x = -1\\) would need \\(y + 3 = y - 2\\)).",
+              "Check that 2 never comes out\n\\[\\dfrac{2x - 3}{x + 1} = 2\\]\n\\[2x - 3 = 2x + 2 \\Rightarrow -3 = 2\\]\nWhy: A false statement: no input gives 2."
+            ],
+            "final_answer": "Domain \\(f = \\mathbb{R} - \\{-1\\}\\), Range \\(f = \\mathbb{R} - \\{2\\}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The question writes \\(f: \\mathbb{R} \\to \\mathbb{R}\\), but \\(f(-1) = \\frac{-5}{0}\\) is not defined, so \\(f\\) cannot have all of \\(\\mathbb{R}\\) as its domain (the book's own answer gives Domain \\(\\mathbb{R} - \\{-1\\}\\)). It should read \\(f: \\mathbb{R} - \\{-1\\} \\to \\mathbb{R}\\). All three parts are answered with this domain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9(ii)",
+            "prompt": "9 (ii) Let \\(f: \\mathbb{R} \\to \\mathbb{R}\\) be defined by \\(f(x) = \\frac{2x - 3}{x + 1}\\). Determine whether \\(f(x)\\) is onto.",
+            "explanation": "Onto means the range equals the whole co-domain.\nThe co-domain is \\(\\mathbb{R}\\); the range was found in (i).\nPlan: compare the range with the co-domain and point to a missing value.",
+            "steps": [
+              "Given: co-domain \\(\\mathbb{R}\\), Range \\(f = \\mathbb{R} - \\{2\\}\\) (from part (i)).\nTo find: whether \\(f\\) is onto.\nMethod: Onto \\(\\iff\\) every element of the co-domain has a pre-image.",
+              "Compare\n\\[\\text{Range } f = \\mathbb{R} - \\{2\\} \\ne \\mathbb{R}\\]\nWhy: The number 2 is in the co-domain, but part (i) showed no \\(x\\) gives \\(f(x) = 2\\).",
+              "Conclusion\nWhy: 2 has no pre-image, so \\(f\\) is not onto \\(\\mathbb{R}\\). (It would be onto if the co-domain were \\(\\mathbb{R} - \\{2\\}\\).)"
+            ],
+            "final_answer": "\\(f\\) is not onto \\(\\mathbb{R}\\), because \\(2 \\in \\mathbb{R}\\) has no pre-image (Range \\(f = \\mathbb{R} - \\{2\\}\\))."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9(iii)",
+            "prompt": "9 (iii) Let \\(f: \\mathbb{R} \\to \\mathbb{R}\\) be defined by \\(f(x) = \\frac{2x - 3}{x + 1}\\). Prove that \\(f(x)\\) is one-to-one.",
+            "explanation": "A proof of one-to-one: equal outputs must force equal inputs.\nTake two inputs from the domain (both \\(\\ne -1\\)).\nPlan: set \\(f(x_1) = f(x_2)\\), cross-multiply, expand, and reach \\(x_1 = x_2\\).",
+            "steps": [
+              "Given: \\(f(x) = \\frac{2x - 3}{x + 1}\\), \\(x_1, x_2 \\ne -1\\).\nTo prove: \\(f(x_1) = f(x_2) \\Rightarrow x_1 = x_2\\).\nMethod: Cross-multiplication is allowed because neither bottom is zero.",
+              "Start with equal outputs\n\\[\\dfrac{2x_1 - 3}{x_1 + 1} = \\dfrac{2x_2 - 3}{x_2 + 1}\\]\n\\[(2x_1 - 3)(x_2 + 1) = (2x_2 - 3)(x_1 + 1)\\]\nWhy: \\(\\frac{p}{q} = \\frac{r}{s} \\Rightarrow ps = rq\\) when \\(q, s \\ne 0\\).",
+              "Expand both sides\n\\[2x_1x_2 + 2x_1 - 3x_2 - 3\\]\n\\[= 2x_1x_2 + 2x_2 - 3x_1 - 3\\]\nWhy: Multiply each term of one bracket by each term of the other.",
+              "Cancel and collect\n\\[2x_1 - 3x_2 = 2x_2 - 3x_1\\]\n\\[5x_1 = 5x_2\\]\n\\[x_1 = x_2\\]\nWhy: \\(2x_1x_2\\) and \\(-3\\) are on both sides; add \\(3x_1 + 3x_2\\) to both sides; divide by 5.",
+              "Conclusion and check\n\\[f(0) = -3,\\quad f(1) = -\\tfrac{1}{2}\\]\nWhy: Equal outputs gave equal inputs, so \\(f\\) is one-to-one. Sample inputs indeed give different outputs."
+            ],
+            "final_answer": "Hence proved: \\(f(x_1) = f(x_2) \\Rightarrow x_1 = x_2\\), so \\(f\\) is one-to-one."
+          }
+        ]
+      }
+    }
+  ]
+}

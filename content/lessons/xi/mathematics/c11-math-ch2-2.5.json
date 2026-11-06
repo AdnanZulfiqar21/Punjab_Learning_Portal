@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH2-2.5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch2",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch2/2.5",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 36,
+          "pdf_to": 37,
+          "note": "Book p. 31-32: 2.5 Real Life Applications, Growth and Decay in Finance (Predicting Long-Term Stock Prices), Examples 12-13"
+        }
+      ],
+      "title": "2.5 Real Life Applications",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Growth and Decay in Finance (Predicting Long-Term Stock Prices)"
+          },
+          {
+            "type": "paragraph",
+            "text": "When something increases in quantity or size over time, it is called growth. For example, money in a bank account earning interest (it grows larger), a population of rabbits is increasing over months.",
+            "bold": [
+              "growth"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "When something decreases in quantity or size over time, it is called decay. For example, a radioactive substance is losing its strength over years, a cup of hot coffee is cooling down over time."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Exponential growth: \\(P(t) = P_{0}e^{rt}\\), with \\(r > 0\\). Here \\(P_{0}\\) is the starting value (at \\(t = 0\\), \\(e^{0} = 1\\)), \\(r\\) is the rate as a decimal (5% = 0.05) and \\(e \\approx 2.71828\\). The value grows faster and faster because each year's growth is a percentage of a bigger amount.\nTo find a time that sits in the exponent, take the natural logarithm \\(\\ln\\), which undoes \\(e\\): if \\(e^{k} = a\\) then \\(k = \\ln a\\).\nDecay is the opposite: the quantity goes down over time, as in Example 13."
+          },
+          {
+            "type": "example",
+            "title": "Example 12",
+            "problem": "The value of a stock follows the exponential growth model \\(P(t) = P_{0}e^{rt}\\), where \\(P_{0}\\) is the initial stock price, \\(r\\) is the growth rate per year and \\(t\\) is the time in years. Suppose a stock is currently valued at Rs. 5,000, and it is expected to grow at a rate of 5% per year.\n(i) Find the value of the stock after 10 years.\n(ii) After how many years will the stock double in value?",
+            "steps": [
+              "Given: \\(P(t) = P_{0}e^{rt}\\) with \\(P_{0} = 5{,}000\\), \\(r = 0.05\\) (5% growth rate).\nTo find: (i) \\(P(10)\\); (ii) the time \\(t\\) at which \\(P(t) = 2P_{0}\\).\nMethod: (i) substitute the values into the formula; (ii) set \\(P(t) = 2P_{0}\\) and solve for \\(t\\) by taking the natural logarithm, because \\(t\\) is in the exponent.",
+              "Step 1: (i) Substitute \\(t = 10\\)\nThe formula for the exponential growth is \\(P(t) = P_{0}e^{rt}\\). Given \\(P_{0} = 5{,}000\\), \\(r = 0.05\\) and \\(t = 10\\) years.\nThe book prints: \\(P(10) = 5.000\\, e^{0.05 \\times 10}\\) \\(= 5{,}000\\, e^{0.5}\\).\nWorking it out:\n\\[P(10) = 5{,}000\\, e^{0.05 \\times 10}\\]\n\\[= 5{,}000\\, e^{0.5}\\]\nWhy: a rate of 5% is \\(r = \\frac{5}{100} = 0.05\\); and \\(0.05 \\times 10 = 0.5\\).",
+              "Step 2: (i) Evaluate\nUsing \\(e^{0.5} \\approx 1.6487\\):\n\\[P(10) = 5{,}000 \\times 1.6487\\]\n\\[\\approx 8244\\]\nWhy: \\(e \\approx 2.71828\\) is the base of natural growth; a calculator gives \\(e^{0.5} \\approx 1.6487\\). (Exactly, \\(5{,}000 \\times 1.648721\\ldots = 8243.6\\), which rounds to Rs. 8244.)",
+              "Step 3: (ii) Write the doubling condition\nWe want to find \\(t\\) when the stock doubles, i.e., when \\(P(t) = 2P_{0}\\). Using the equation:\n\\[2P_{0} = P_{0}e^{rt}\\]\nDividing both sides by \\(P_{0}\\), we have\n\\[2 = e^{rt}\\]\nWhy: \"double in value\" means twice the starting price. \\(P_{0}\\) cancels, so the doubling time does not depend on the starting price.",
+              "Step 4: (ii) Take the natural logarithm\n\\[\\ln 2 = rt\\]\nWhy: \\(\\ln\\) undoes \\(e\\): \\(\\ln(e^{rt}) = rt\\). This brings \\(t\\) down from the exponent.",
+              "Step 5: (ii) Solve for \\(t\\)\nThe book prints: \\(t = \\ln 2 / r = 0.69310.05 = 13.86\\)\nWorking it out:\n\\[t = \\dfrac{\\ln 2}{r} = \\dfrac{0.6931}{0.05}\\]\n\\[t \\approx 13.86\\]\nWhy: \\(\\ln 2 \\approx 0.6931\\); dividing by \\(0.05\\) is the same as multiplying by 20.",
+              "Check:\n(i) \\(\\ln(8244 / 5000) = \\ln 1.6488 \\approx 0.5 = 0.05 \\times 10\\).\n(ii) \\(e^{0.05 \\times 13.86} = e^{0.693} \\approx 2.00\\), so after 13.86 years the value is twice the start."
+            ],
+            "answer": "(i) After 10 years the stock is worth approximately Rs. 8244.\n(ii) The stock will double in value in approximately 13.86 years.",
+            "book_errors": [
+              "\\(P(10) = 5.000\\, e^{0.05 \\times 10}\\)",
+              "\\(t = \\ln 2 / r = 0.69310.05 = 13.86\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Two misprints in the solution of Example 12:\n(i) the book prints \\(P(10) = 5.000\\, e^{0.05 \\times 10}\\) with a decimal point; it should be \\(5{,}000\\, e^{0.05 \\times 10}\\) (five thousand), as the next expression shows.\n(ii) the book prints \\(t = \\ln 2 / r = 0.69310.05 = 13.86\\) with the division sign missing; it should be \\(t = \\ln 2 / r = 0.6931 / 0.05 = 13.86\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 13",
+            "problem": "The concentration of a pollutant in a lake, in parts per million (ppm), decays over time according to the function\n\\[C(t) = \\dfrac{100}{\\sqrt{t + 1}}\\]\nwhere \\(t\\) is the time in days since the pollutant was introduced.\n(i) What is the concentration of the pollutant after 4 days?\n(ii) After how many days will the concentration drop below 10 ppm?",
+            "steps": [
+              "Given: \\(C(t) = \\dfrac{100}{\\sqrt{t + 1}}\\), \\(t\\) in days.\nTo find: (i) \\(C(4)\\); (ii) the time after which \\(C(t) < 10\\).\nMethod: (i) substitute \\(t = 4\\); (ii) find when \\(C(t) = 10\\) (the book sets \\(C(t) = 10\\)), then use the fact that \\(C\\) decreases as \\(t\\) grows.",
+              "Step 1: (i) Concentration after 4 days\nThe pollutant concentration function is \\(C(t) = \\frac{100}{\\sqrt{t + 1}}\\), where \\(t\\) is the time in days.\n\\[C(4) = \\dfrac{100}{\\sqrt{4 + 1}} = \\dfrac{100}{\\sqrt{5}}\\]\n\\[\\approx 44.72 \\text{ ppm}\\]\nWhy: \\(\\sqrt{5} \\approx 2.2361\\) and \\(100 / 2.2361 \\approx 44.72\\).",
+              "Step 2: (ii) Set \\(C(t) = 10\\)\n\\[10 = \\dfrac{100}{\\sqrt{t + 1}}\\]\n\\[\\Rightarrow \\sqrt{t + 1} = 10\\]\nWhy: multiply both sides by \\(\\sqrt{t + 1}\\) and divide by 10: \\(\\sqrt{t + 1} = 100 / 10\\).",
+              "Step 3: (ii) Square and solve\n\\[t + 1 = 100\\]\n\\[\\Rightarrow t = 99\\]\nWhy: squaring removes the square root; both sides are positive, so no extra solution appears.",
+              "Step 4: (ii) Interpret\nAt \\(t = 99\\) the concentration is exactly 10 ppm. As \\(t\\) increases, \\(\\sqrt{t + 1}\\) increases, so \\(C(t)\\) decreases; therefore after 99 days the concentration is below 10 ppm.\nWhy: the question asks \"below 10\", so we need the direction in which \\(C\\) changes, not only the moment it equals 10.",
+              "Check:\n\\[C(99) = \\dfrac{100}{\\sqrt{100}} = 10\\]\n\\[C(120) = \\dfrac{100}{11} \\approx 9.09 < 10\\]\nAlso \\(C(4) = 44.72\\) is between \\(C(0) = 100\\) and \\(C(99) = 10\\), as expected for a decreasing function."
+            ],
+            "answer": "(i) After 4 days the concentration is about 44.72 ppm.\n(ii) After 99 days the concentration will drop below 10 ppm (it is exactly 10 ppm at \\(t = 99\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Growth: the quantity increases with time; decay: it decreases.\n2. Exponential growth \\(P(t) = P_{0}e^{rt}\\): write the rate as a decimal; \\(P(0) = P_{0}\\).\n3. Doubling time: \\(t = \\frac{\\ln 2}{r} \\approx \\frac{0.6931}{r}\\), whatever the starting value.\n4. To solve for a variable in the exponent, take \\(\\ln\\) of both sides.\n5. For \"drop below\" questions, solve the equality, then use whether the function is increasing or decreasing."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Using \\(r = 5\\) instead of \\(r = 0.05\\).\n2. Writing \\(\\ln(e^{rt}) = e^{rt}\\) or forgetting to divide by \\(r\\).\n3. In Example 13, writing \\(C(4) = 100/\\sqrt{4} + 1\\): the \\(+1\\) is inside the square root, \\(\\sqrt{4 + 1} = \\sqrt{5}\\).\n4. Rounding too early: keep four decimal places of \\(e^{0.5}\\) and \\(\\ln 2\\) until the last step."
+          }
+        ]
+      }
+    }
+  ]
+}
