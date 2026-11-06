@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-7.4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/7.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 138,
+          "pdf_to": 138,
+          "note": "Book p. 133: 7.4 Combination: team example and table, Definition, Theorem nCr = n!/(r!(n-r)!) with proof, Corollary nCn = nC0 = 1, Need to know! box"
+        }
+      ],
+      "title": "7.4 Combination",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Suppose a teacher uses the names of a few students, such as Ahmad, Sana, Hamza and Danish, to make a team for a writing competition. As a combination of team members, (Ahmad, Sana, Hamza and Danish) is equivalent to (Hamza, Ahmad, Danish and Sana), because the same students are in the combination. Consequently, you have the same team, because the order of the names of the students does not matter."
+          },
+          {
+            "type": "table",
+            "caption": "The same team listed in two different orders (as in the book)",
+            "header": [
+              "Ahmad",
+              "Sana",
+              "Hamza",
+              "Danish"
+            ],
+            "rows": [
+              [
+                "Hamza",
+                "Ahmad",
+                "Danish",
+                "Sana"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "So, we are interested in the membership of the team and not in the ways the students are listed (arranged)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This is the one big difference from the last two sections. In a permutation the order matters: \\(AB\\) and \\(BA\\) are two different arrangements. In a combination only the group matters: \\(\\{A, B\\}\\) and \\(\\{B, A\\}\\) are the same group.\nA small picture: from the three letters \\(A, B, C\\) take two.\nPermutations (order matters): \\(AB, BA, AC, CA, BC, CB\\), that is 6.\nCombinations (order does not matter): \\(\\{A,B\\}, \\{A,C\\}, \\{B,C\\}\\), that is 3.\nEach group of 2 appears twice in the permutation list, once for each of its \\(2! = 2\\) orders. Keep this picture in mind; it is exactly the idea of the proof below."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Definition"
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Definition",
+            "text": "A combination of \\(r\\) objects taken out of \\(n\\) objects is a subset of \\(r\\) objects of a set of \\(n\\) objects."
+          },
+          {
+            "type": "paragraph",
+            "text": "The number of combinations of \\(n\\) different objects taken \\(r\\) at a time is denoted by \\({}^{n}C_{r}\\) or \\(C(n, r)\\) or \\(\\binom{n}{r}\\) and is given by"
+          },
+          {
+            "type": "equation",
+            "latex": "{}^{n}C_{r} = \\dfrac{n!}{r!\\,(n-r)!}",
+            "text_alt": "n C r equals n factorial over r factorial times (n minus r) factorial"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read \\({}^{n}C_{r}\\) as \"\\(n\\) C \\(r\\)\" or \"\\(n\\) choose \\(r\\)\": out of \\(n\\) different things, choose \\(r\\). Here \\(n\\) is the total number of objects and \\(r\\) is how many we select, so \\(0 \\le r \\le n\\).\n\"Subset\" is the key word in the definition. A set has no order: \\(\\{A, B\\} = \\{B, A\\}\\). That is why a combination is a subset and not an arrangement."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Theorem"
+          },
+          {
+            "type": "paragraph",
+            "text": "Prove that \\({}^{n}C_{r} = \\dfrac{n!}{r!\\,(n-r)!}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Proof: Elements of a subset of \\(r\\) objects of a set of \\(n\\) objects can be arranged among themselves in \\(r!\\) ways. So, each combination will give rise to \\(r!\\) permutations. Thus, there will be \\({}^{n}C_{r} \\times r!\\) permutations of \\(n\\) different objects taken \\(r\\) at a time, that is:\n\\[{}^{n}C_{r} \\times r! = {}^{n}P_{r}\\]\n\\[\\Rightarrow {}^{n}C_{r} \\times r! = \\dfrac{n!}{(n-r)!}\\]\n\\[\\therefore {}^{n}C_{r} = \\dfrac{n!}{r!\\,(n-r)!}\\]\nWhich completes the proof."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The proof in two steps:\n1. Choosing \\(r\\) objects and then arranging them in a row is the same as making a permutation. Choosing can be done in \\({}^{n}C_{r}\\) ways; for each choice, arranging can be done in \\(r!\\) ways. By the fundamental principle of counting, \\({}^{n}C_{r} \\times r! = {}^{n}P_{r}\\).\n2. Divide both sides by \\(r!\\) and use \\({}^{n}P_{r} = \\frac{n!}{(n-r)!}\\) from Section 7.2.\nCheck with the letters \\(A, B, C\\) and \\(r = 2\\): \\({}^{3}C_{2} \\times 2! = 3 \\times 2 = 6 = {}^{3}P_{2}\\). This matches the lists in the teaching note above.\nSo you can always remember: \\({}^{n}C_{r} = \\dfrac{{}^{n}P_{r}}{r!}\\). Dividing by \\(r!\\) removes the orders we do not want to count."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Corollary"
+          },
+          {
+            "type": "paragraph",
+            "text": "(i) If \\(r = n\\), then\n\\[{}^{n}C_{n} = \\dfrac{n!}{n!\\,(n-n)!}\\]\n\\[= \\dfrac{n!}{n!\\;0!} = 1\\]\n(ii) If \\(r = 0\\), then\n\\[{}^{n}C_{0} = \\dfrac{n!}{0!\\,(n-0)!}\\]\n\\[= \\dfrac{n!}{0!\\;n!} = 1\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Both results use \\(0! = 1\\) (Section 7.2), and both make sense without any formula:\n\\({}^{n}C_{n} = 1\\): there is only one way to choose all \\(n\\) objects, take all of them.\n\\({}^{n}C_{0} = 1\\): there is only one way to choose nothing, leave all of them.\nFor example, \\({}^{5}C_{5} = 1\\) and \\({}^{5}C_{0} = 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Need to know!",
+            "text": "The formulae \\({}^{n}P_{r}\\) and \\({}^{n}C_{r}\\) are also known as counting formulae, because they are used to count the possible number of ways without listing them all."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to work out \\({}^{n}C_{r}\\) quickly: never multiply out the big factorials. Write the larger factorial in the denominator inside \\(n!\\) and cancel it.\n\\[{}^{7}C_{3} = \\dfrac{7!}{3!\\,4!}\\]\n\\[= \\dfrac{7 \\times 6 \\times 5 \\times 4!}{3 \\times 2 \\times 1 \\times 4!}\\]\n\\[= \\dfrac{210}{6} = 35\\]\nShort rule: on top, multiply \\(r\\) numbers going down from \\(n\\); at the bottom, write \\(r!\\). So \\({}^{7}C_{3} = \\frac{7 \\cdot 6 \\cdot 5}{3 \\cdot 2 \\cdot 1}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Before using a formula, ask one question: \"If I change the order, do I get a new answer?\"\nYes (arrange, line up, seat, password, number, ranking): use permutation \\({}^{n}P_{r}\\).\nNo (choose, select, team, committee, group, handshake): use combination \\({}^{n}C_{r}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A combination is a selection (a subset); order does not matter.\n2. \\({}^{n}C_{r} = \\dfrac{n!}{r!\\,(n-r)!}\\), also written \\(C(n, r)\\) or \\(\\binom{n}{r}\\).\n3. \\({}^{n}C_{r} \\times r! = {}^{n}P_{r}\\): each selection of \\(r\\) objects gives \\(r!\\) arrangements.\n4. \\({}^{n}C_{n} = 1\\) and \\({}^{n}C_{0} = 1\\).\n5. \\({}^{n}P_{r}\\) and \\({}^{n}C_{r}\\) are called counting formulae."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Using \\({}^{n}P_{r}\\) for a selection (a team, a committee). This counts every group \\(r!\\) times. Ask whether order matters before you start.\n2. Forgetting one factorial in the denominator: \\({}^{n}C_{r} = \\frac{n!}{(n-r)!}\\) is wrong; that is \\({}^{n}P_{r}\\). The \\(r!\\) must be there.\n3. Writing \\(0! = 0\\). It is \\(0! = 1\\); otherwise \\({}^{n}C_{n}\\) would be undefined."
+          }
+        ]
+      }
+    }
+  ]
+}

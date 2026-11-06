@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-7.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/7.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 131,
+          "pdf_to": 133,
+          "note": "Book p. 126-128: 7.2 definition, nPr side box, books and WORD, Challenge, Do you know (Rubik's Cube), theorem and proof, Examples 4-6, Reason for 0! = 1, Try yourself. Teaching notes, Key points, Common mistakes are ours."
+        }
+      ],
+      "title": "7.2 Permutation",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "One important application of the fundamental principle of counting is to determine the number of ways that objects can be arranged in order."
+          },
+          {
+            "type": "paragraph",
+            "text": "Definition: An arrangement of all or part of a set of objects in a specific order is called a permutation. The number of permutations of \\(r\\ (\\le n)\\) objects taken from a set of \\(n\\) objects is written as \\({}^{n}P_{r}\\) or \\(P(n, r)\\).",
+            "bold": [
+              "Definition:"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "{}^{n}P_{r} = \\dfrac{n!}{(n-r)!}, \\quad r \\le n",
+            "text_alt": "n P r equals n factorial over (n minus r) factorial, when r is at most n"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "\\(n\\) = total number of things/objects\n\\(r\\) = the number of selected things/objects"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read \\({}^{n}P_{r}\\) as \"n P r\": the number of ordered arrangements of \\(r\\) objects chosen from \\(n\\) different objects, no object used twice.\nThe key word is order: AB and BA are two different permutations. If order did not matter we would be counting combinations (7.4)."
+          },
+          {
+            "type": "paragraph",
+            "text": "According to the fundamental principle of counting:"
+          },
+          {
+            "type": "paragraph",
+            "text": "(i) Three books of mathematics for grades 1, 2 and 3 can be arranged in a row, taken all at a time (if the books are distinct), in\n\\[{}^{n}P_{r} = {}^{3}P_{3} \\quad (\\because n = r)\\]\n\\[= \\dfrac{3!}{(3-3)!} = \\dfrac{3!}{0!} \\quad (\\because 0! = 1)\\]\n\\[= 3! = 3 \\cdot 2 \\cdot 1 = 6 \\text{ ways}\\]"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch7-fig-three-books",
+            "alt": "Six rows of three books numbered 1, 2, 3 in the orders 123, 132, 213, 231, 321, 312.",
+            "caption": "Figure: the six arrangements of three books, 3P3 = 6 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "(ii) The number of ways of writing the letters of the word WORD taken all at a time is\n\\[{}^{n}P_{r} = {}^{4}P_{4} \\quad (\\because n = r)\\]\n\\[= \\dfrac{4!}{(4-4)!} = \\dfrac{4!}{0!} \\quad (\\because 0! = 1)\\]\n\\[= 4! = 4 \\cdot 3 \\cdot 2 \\cdot 1 = 24 \\text{ ways}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Can you make the total number of permutations for the \"WORD\" pictorially?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Pictorially: draw a tree. The first letter has 4 branches (W, O, R, D); from each, 3 branches for the second letter; then 2; then 1. That gives \\(4 \\times 3 \\times 2 \\times 1 = 24\\) end points.\nThe 6 words that begin with W are: WORD, WODR, WROD, WRDO, WDOR, WDRO. Each of the 4 letters can start a word in the same 6 ways, so \\(4 \\times 6 = 24\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Do you know!",
+            "text": "In 1974, Erno Rubik invented a popular puzzle; each turn of the puzzle shows a permutation of the different colours. The name of this puzzle is \"Rubik's Cube\"."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Theorem"
+          },
+          {
+            "type": "paragraph",
+            "text": "Prove that \\({}^{n}P_{r} = n(n-1)(n-2)\\cdots(n-r+1) = \\dfrac{n!}{(n-r)!}\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Proof"
+          },
+          {
+            "type": "paragraph",
+            "text": "There are \\(n\\) different objects to fill up \\(r\\) places. So the first place can be filled in \\(n\\) ways. Since repetitions are not allowed, after placing one object we are left with \\((n-1)\\) objects, so the second place can be filled in \\((n-1)\\) ways. Similarly the third place can be filled in \\((n-2)\\) ways, and so on. This continues until the \\(r\\)th place, which can be filled in \\(n-(r-1) = n-r+1\\) ways. Therefore, by the Fundamental Principle of Counting, \\(r\\) places can be filled by \\(n\\) different objects in \\(n(n-1)(n-2)\\cdots(n-r+1)\\) ways.",
+            "bold": [
+              "Fundamental Principle of Counting"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[{}^{n}P_{r} = n(n-1)(n-2)\\cdots(n-r+1)\\]\n\\[= \\dfrac{n(n-1)\\cdots(n-r+1)\\,(n-r)!}{(n-r)!}\\]\n\\[{}^{n}P_{r} = \\dfrac{n!}{(n-r)!}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why \\(n - r + 1\\) for the \\(r\\)th place? Before the \\(r\\)th place, \\(r - 1\\) objects have already been used, so \\(n - (r - 1)\\) are left.\nWhy multiply and divide by \\((n-r)!\\)? The product \\(n(n-1)\\cdots(n-r+1)\\) stops early; multiplying by \\((n-r)!\\) completes it down to 1, which makes \\(n!\\) on top.\nExample: \\({}^{5}P_{2} = 5 \\times 4 = 20\\) (two factors, starting at 5), and \\(\\frac{5!}{3!} = \\frac{120}{6} = 20\\). The product form has exactly \\(r\\) factors."
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "How many different 4-digit numbers can be formed out of the digits 1, 2, 3, 4, 5, 6, when no digit is repeated?",
+            "steps": [
+              "Given: 6 different digits; each number uses 4 of them, with no repetition.\nTo find: how many different 4-digit numbers can be formed.\nMethod: the order of the digits matters (1234 and 4321 are different numbers) and no digit repeats, so this is \\({}^{6}P_{4}\\).",
+              "Step 1: Identify n and r\n\\[n = 6,\\quad r = 4\\]\nWhy: n is the number of digits available; r is the number of places (digits) in each number.",
+              "Step 2: Apply the formula\n\\[{}^{6}P_{4} = \\dfrac{6!}{(6-4)!} = \\dfrac{6!}{2!}\\]\n\\[= \\dfrac{6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}{2 \\cdot 1}\\]\n\\[= 6 \\cdot 5 \\cdot 4 \\cdot 3 = 360\\]\nWhy: \\(2!\\) cancels, leaving 4 factors starting at 6, as the product form \\(n(n-1)\\cdots(n-r+1)\\) predicts.",
+              "Check: by places\n\\[6 \\times 5 \\times 4 \\times 3 = 360\\]\nThe thousands place has 6 choices, then 5, 4 and 3 for the remaining places."
+            ],
+            "answer": "360 different 4-digit numbers."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Reason for defining 0! = 1",
+            "text": "If \\(n = r\\), then\n\\[{}^{n}P_{n} = \\dfrac{n!}{(n-n)!} = \\dfrac{n!}{0!}\\]\nBut arranging all \\(n\\) objects gives \\(n(n-1)\\cdots 3 \\cdot 2 \\cdot 1 = n!\\) ways, so\n\\[n! = \\dfrac{n!}{0!} \\Rightarrow 0! = 1\\]"
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "In how many ways can a set of 4 different mathematics books, 3 different physics books and 2 different chemistry books be placed on a shelf with a space for 9 books, if: (a) all the books are kept without any restriction; (b) all the books of the same subject are kept together; (c) only the mathematics books are kept together?",
+            "steps": [
+              "Given: 4 mathematics (M), 3 physics (P) and 2 chemistry (C) books, all different; 9 places on the shelf.\nTo find: the number of arrangements in cases (a), (b) and (c).\nMethod: arrangements in a row are permutations. A group that must stay together is treated as one unit (block); then we also arrange the books inside each block and multiply (Fundamental Principle of Counting).",
+              "Step 1: (a) No restriction\n\\[\\text{Total books} = 4 + 3 + 2 = 9\\]\n\\[{}^{9}P_{9} = 9! = 9 \\cdot 8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1\\]\n\\[= 362880 \\text{ ways}\\]\nWhy: 9 different books fill 9 places; all are used, so n = r = 9.",
+              "Step 2: (b) Books of the same subject together, as printed\n\\[{}^{4}P_{4} \\cdot {}^{3}P_{3} \\cdot {}^{2}P_{2} \\cdot {}^{3}P_{3} = 4! \\cdot 3! \\cdot 2! \\cdot 3!\\]\n\\[= 3! \\cdot 24 \\cdot 6 \\cdot 2 \\cdot 6\\]\n\\[= 1728 \\text{ ways}\\]\nWhy: \\(4!\\) arranges the M books inside their block, \\(3!\\) the P books, \\(2!\\) the C books, and the last \\(3!\\) arranges the three blocks (M, P, C) on the shelf.",
+              "Step 3: (b) The correct middle line\n\\[4! \\cdot 3! \\cdot 2! \\cdot 3! = 24 \\cdot 6 \\cdot 2 \\cdot 6\\]\n\\[= 1728 \\text{ ways}\\]\nWhy: \\(4! = 24\\), \\(3! = 6\\), \\(2! = 2\\), \\(3! = 6\\). The extra \\(3!\\) printed in front would make \\(10368\\); the book's final answer 1728 is right.",
+              "Step 4: (c) Only the mathematics books together\n\\[{}^{4}P_{4} \\cdot {}^{6}P_{6} = 4! \\cdot 6!\\]\n\\[= 24 \\cdot 720\\]\n\\[= 17280 \\text{ ways}\\]\nWhy: the 4 M books form 1 unit; with the other 5 books there are 6 units, arranged in \\(6!\\) ways. Inside the unit the M books can be arranged in \\(4!\\) ways.",
+              "Check:\nA computer count of all 362880 orders of the 9 books gives 1728 orders with every subject together and 17280 with the mathematics books together."
+            ],
+            "answer": "(a) 362880 ways (b) 1728 ways (c) 17280 ways",
+            "book_errors": [
+              "\\[= 3! \\cdot 24 \\cdot 6 \\cdot 2 \\cdot 6\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 5(b): the book prints \"\\(= 3! \\cdot 24 \\cdot 6 \\cdot 2 \\cdot 6\\)\"; the \\(3!\\) in front is a misprint. Correct: \\(4! \\cdot 3! \\cdot 2! \\cdot 3! = 24 \\cdot 6 \\cdot 2 \\cdot 6 = 1728\\) ways.\nExample 5(a), figure: the printed shelf shows only one chemistry book (8 books). There are 2 chemistry books, 9 books in all; our figure shows all nine."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch7-fig-ex5-shelf",
+            "alt": "Three shelf drawings of 4 M, 3 P and 2 C books. (a) all nine books in a row, 9! ways. (b) the M, P and C blocks, 4!, 3! and 2! ways inside the blocks and 3! ways for the blocks. (c) the four M books as unit 1, the other five books as units 2 to 6; 4! ways inside the unit, 6! ways for the six units.",
+            "caption": "Figure: shelf arrangements for Example 5 (a), (b), (c) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Find the number of ways if only physics books are kept together."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Treat the 3 physics books as 1 unit. With the other 6 books there are 7 units: \\(7!\\) ways. Inside the unit: \\(3!\\) ways.\n\\[7! \\cdot 3! = 5040 \\cdot 6 = 30240 \\text{ ways}\\]"
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "In how many ways 5 people are to be seated on a bench if: (a) there are no restrictions; (b) two people can sit next to each other; (c) two people cannot sit next to each other.",
+            "steps": [
+              "Given: 5 different people and 5 places on a bench.\nTo find: the number of seatings (a) with no restriction, (b) when two particular people sit next to each other, (c) when those two do not sit next to each other.\nMethod: (a) is a plain permutation; for (b) glue the two people into one unit; for (c) subtract the answer of (b) from the total.",
+              "Step 1: (a) No restriction\n\\[\\text{Number of ways} = {}^{5}P_{5} = 5! = 120\\]\nWhy: 5 different people fill 5 places.",
+              "Step 2: (b) Two particular people (say A and B) next to each other\n\\[= {}^{4}P_{4} \\cdot {}^{2}P_{2}\\]\n\\[= 4! \\cdot 2! = 24 \\cdot 2\\]\n\\[= 48 \\text{ ways}\\]\nWhy: A and B as one unit plus C, D, E make 4 units: \\(4!\\) ways. Inside the unit A and B can sit as AB or BA: \\(2!\\) ways.",
+              "Step 3: (c) The two people not next to each other\n\\[= {}^{5}P_{5} - [\\text{2 can sit next to each other}]\\]\n\\[= 5! - 48 = 120 - 48\\]\n\\[= 72 \\text{ ways}\\]\nThe book prints this line as \"= 5! 48 = 120 48 = 72 way\" (the minus signs have not printed).\nWhy: every seating either has A and B together or not. So 'not together' = all seatings minus 'together'.",
+              "Check:\n\\[48 + 72 = 120 = 5!\\]\nThe two cases (together, not together) cover all seatings exactly once. A computer count of the 120 seatings also gives 48 and 72."
+            ],
+            "answer": "(a) 120 ways (b) 48 ways (c) 72 ways",
+            "book_errors": [
+              "= 5! 48 = 120 48 = 72 way"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 6(c): the book prints \"= 5! 48 = 120 48 = 72 way\"; the minus signs are missing. Correct: \\(5! - 48 = 120 - 48 = 72\\) ways.\nExample 6, figures: in (a) only four chairs (A, B, C, D) are drawn for 5 people, and in (b) the chairs are labelled C, D, D; the last should be E. Our figure shows five seats A, B, C, D, E."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch7-fig-ex6-bench",
+            "alt": "(a) five seats A, B, C, D, E in a row, 5! ways. (b) A and B joined as one unit (2! ways inside), then C, D, E numbered 2, 3, 4; 4 units give 4! ways, total 4! times 2! = 48.",
+            "caption": "Figure: seating on a bench for Example 6 (a) and (b) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Try yourself",
+            "text": "In how many ways 6 people are to be seated on a table if 3 cannot sit next to each other?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Hint, for 6 people in a row: use the method of Example 6(c).\nAll seatings: \\(6! = 720\\). The 3 people all together: 1 unit + 3 others = 4 units, \\(4! \\cdot 3! = 144\\). So the 3 are not all together in \\(720 - 144 = 576\\) ways.\nIf no two of the 3 may sit side by side: seat the other 3 first (\\(3! = 6\\)); this leaves 4 gaps, and the 3 people take 3 of them in \\({}^{4}P_{3} = 24\\) ways: \\(6 \\times 24 = 144\\) ways.\nSeating round a table is circular permutation, studied in 7.3."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A permutation is an arrangement in a definite order; \\({}^{n}P_{r} = \\frac{n!}{(n-r)!} = n(n-1)\\cdots(n-r+1)\\), \\(r\\) factors.\n2. All \\(n\\) objects arranged: \\({}^{n}P_{n} = n!\\), which is why \\(0! = 1\\).\n3. Objects that must stay together: make them one unit, arrange the units, then multiply by the arrangements inside the unit.\n4. 'Not together' = total - 'together'."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistakes",
+            "text": "1. Using \\({}^{n}P_{r}\\) when repetition is allowed: \\({}^{n}P_{r}\\) assumes no object is used twice.\n2. Forgetting the arrangements inside a block (the 2! for AB and BA in Example 6(b)).\n3. In Example 5(b), forgetting the 3! that arranges the subject blocks themselves.\n4. Writing \\({}^{6}P_{4} = \\frac{6!}{4!}\\): the bottom is \\((n - r)! = 2!\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

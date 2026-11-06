@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-3-Q8",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-3-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 137,
+          "pdf_to": 137,
+          "note": "Exercise 7.3, Question 8: book page 132 (PDF 137); answer key book page 301 (PDF 306): 725,760 (agrees)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8. The D.C.Os of 11 districts meet to discuss the law-and-order situation in their districts. In how many ways can they be seated at a round table, when two particular D.C.Os insist on sitting together?",
+            "explanation": "11 people at a round table, but two of them must sit side by side.\nPlan: tie the two together as one unit, seat the units in a circle, then let the two swap places inside their unit.",
+            "steps": [
+              "Given: 11 D.C.Os, round table; two particular D.C.Os must sit together.\nTo find: the number of seatings.\nMethod: Treat the pair as one unit: \\(11 - 2 + 1 = 10\\) units in a circle, \\((10 - 1)!\\) ways. The pair can sit in \\(2!\\) orders. Multiply.",
+              "Count the units\n\\[9 \\text{ others} + 1 \\text{ pair} = 10 \\text{ units}\\]\nWhy: Gluing the two together makes sure they are always side by side.",
+              "Seat the 10 units round the table\n\\[(10 - 1)! = 9! = 362880\\]\nWhy: A circular arrangement of 10 units (Case-I, a meeting table).",
+              "Arrange the pair inside its unit\n\\[2! = 2\\]\nWhy: The two can sit as (P, Q) or (Q, P); these are different seatings.",
+              "Multiply\n\\[9! \\times 2! = 362880 \\times 2 = 725760\\]\nWhy: Fundamental Principle of Counting.",
+              "Check\n\\[\\text{all seatings} = 10! = 3628800\\]\n\\[\\dfrac{725760}{3628800} = \\dfrac{1}{5}\\]\nWhy: Without the condition there are \\(10!\\) seatings. A given person has 2 neighbours out of 10 others, so the chance that P sits next to Q is \\(2/10 = 1/5\\). It matches."
+            ],
+            "final_answer": "\\(725760\\) ways"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-2-Q3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-2-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 134,
+          "pdf_to": 134,
+          "note": "Exercise 7.2, Question 3: book p.129 (PDF 134). Answer key PDF 306 (book p.301), Q3 is a proof (no key). Solution book PDF 633-657 used as a reference only."
+        }
+      ],
+      "variant_of": "C11-MATH-CH7-EXERCISE-7-2-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Prove from the first principle that: \\({}^{n}P_{r} = n \\cdot {}^{n-1}P_{r-1}\\).",
+            "explanation": "Yeh hisaab ka nahi, proof (saboot) ka sawal hai.\nHumein dikhana hai ke dono sides har \\(1 \\le r \\le n\\) ke liye barabar hain.\nPlan: \"first principle\" ka matlab hai bunyadi formula \\({}^{n}P_{r} = \\frac{n!}{(n-r)!}\\) se shuru karna. Right side ko simplify karte karte left side bana denge, aur aakhir mein ginti (counting) wali wajah bhi samjhenge.",
+            "steps": [
+              "Diya gaya hai: \\(n\\) alag alag cheezein, \\(1 \\le r \\le n\\).\nSaabit karna hai: \\({}^{n}P_{r} = n \\cdot {}^{n-1}P_{r-1}\\).\nTareeqa: Bunyadi formula \\({}^{n}P_{r} = \\frac{n!}{(n-r)!}\\). Proof mein hamesha us side se shuru karein jis mein zyada cheezein hon, yahan right side (R.H.S.), kyunke usay simplify karna aasaan hai.",
+              "\\({}^{n-1}P_{r-1}\\) ko formula se likhein\n\\[{}^{n-1}P_{r-1} = \\dfrac{(n-1)!}{[(n-1)-(r-1)]!}\\]\n\\[= \\dfrac{(n-1)!}{(n-r)!}\\]\nKyun: Formula mein \\(n\\) ki jagah \\(n - 1\\) aur \\(r\\) ki jagah \\(r - 1\\) rakha. Bracket ko dhyan se kholein: \\((n-1)-(r-1) = n - 1 - r + 1 = n - r\\).\nDhyan dein: Minus ke baad bracket kholte waqt \\(-(r-1)\\) ko \\(-r + 1\\) likhna hai; sign ki ghalti yahan sab se zyada hoti hai.",
+              "\\(n\\) se multiply karein\n\\[\\text{R.H.S.} = n \\cdot \\dfrac{(n-1)!}{(n-r)!}\\]\n\\[= \\dfrac{n(n-1)!}{(n-r)!}\\]\n\\[= \\dfrac{n!}{(n-r)!}\\]\nKyun: Factorial ki definition se \\(n \\cdot (n-1)! = n!\\). Misaal: \\(5 \\cdot 4! = 5 \\cdot 24 = 120 = 5!\\).",
+              "Left side tak pahunchein\n\\[\\dfrac{n!}{(n-r)!} = {}^{n}P_{r} = \\text{L.H.S.}\\]\nKyun: Yeh bilkul \\({}^{n}P_{r}\\) ka formula hai, to R.H.S. = L.H.S. ho gaya.",
+              "Ginti wali wajah (yeh sach kyun hai)\nSocho \\(n\\) cheezon mein se \\(r\\) ko tarteeb se rakhna hai. Pehli jagah \\(n\\) tareeqon se bhar sakte hain. Ab \\(r - 1\\) jagahein bachi aur \\(n - 1\\) cheezein bachi, jinhein \\({}^{n-1}P_{r-1}\\) tareeqon se rakh sakte hain. Fundamental principle of counting se kul \\(n \\cdot {}^{n-1}P_{r-1}\\).\nKyun: Dono tareeqe ek hi arrangements gin rahe hain, is liye jawab barabar aana hi tha. Yeh wajah samajh li to formula kabhi nahi bhoolega.",
+              "Numbers se tasdeeq\n\\(n = 5\\), \\(r = 3\\):\n\\[{}^{5}P_{3} = 60\\]\n\\[5 \\cdot {}^{4}P_{2} = 5 \\times 12 = 60 \\;\\checkmark\\]\nKyun: Kisi bhi identity ko chhote numbers rakh kar check kar lena achhi aadat hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\({}^{n}P_{r} = n \\cdot {}^{n-1}P_{r-1}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Prove from the first principle that: \\({}^{n}P_{r} = {}^{n-1}P_{r} + r \\cdot {}^{n-1}P_{r-1}\\).",
+            "explanation": "Yeh bhi proof hai; is baar right side do permutations ka jama (sum) hai.\nHumein dikhana hai ke yeh \\({}^{n}P_{r}\\) ke barabar hai (\\(1 \\le r \\le n - 1\\), taake \\({}^{n-1}P_{r}\\) ka matlab bane).\nPlan: dono terms formula se likhenge, denominators barabar karke jama karenge, common factor nikaal kar simplify karenge; phir ginti wali wajah dekhenge.",
+            "steps": [
+              "Diya gaya hai: \\(n\\) alag cheezein, \\(1 \\le r \\le n - 1\\).\nSaabit karna hai: \\({}^{n}P_{r} = {}^{n-1}P_{r} + r \\cdot {}^{n-1}P_{r-1}\\).\nTareeqa: Har term ko \\(\\frac{n!}{(n-r)!}\\) wale formula se likhna, aur \\((n-r)! = (n-r)(n-r-1)!\\) laga kar dono fractions ka denominator ek jaisa karna.",
+              "Dono terms formula se likhein\n\\[{}^{n-1}P_{r} = \\dfrac{(n-1)!}{(n-1-r)!}\\]\n\\[{}^{n-1}P_{r-1} = \\dfrac{(n-1)!}{(n-r)!}\\]\nKyun: Pehli term mein sirf \\(n\\) ki jagah \\(n - 1\\) aaya. Doosri mein \\((n-1)-(r-1) = n - r\\), jaisa part (i) mein dekha.",
+              "Denominators barabar karein\n\\[\\dfrac{(n-1)!}{(n-r-1)!} = \\dfrac{(n-1)!\\,(n-r)}{(n-r)!}\\]\nKyun: \\((n-r)! = (n-r)(n-r-1)!\\) hota hai (jaise \\(5! = 5 \\cdot 4!\\)). Is liye upar neeche \\((n - r)\\) se multiply kiya; value nahi badli, sirf shakal badli.\nDhyan dein: Fractions ko jama karne se pehle denominator ek jaisa karna zaroori hai, bilkul aam fractions ki tarah.",
+              "Dono terms jama karein\n\\[\\text{R.H.S.} = \\dfrac{(n-1)!\\,(n-r)}{(n-r)!} + \\dfrac{r\\,(n-1)!}{(n-r)!}\\]\n\\[= \\dfrac{(n-1)!\\,[(n-r) + r]}{(n-r)!}\\]\nKyun: Ab denominator ek hai, to upar wale hisse jama kiye aur \\((n-1)!\\) ko common nikaal liya.",
+              "Simplify karein\n\\[= \\dfrac{(n-1)! \\cdot n}{(n-r)!}\\]\n\\[= \\dfrac{n!}{(n-r)!} = {}^{n}P_{r}\\]\nKyun: Bracket mein \\((n - r) + r = n\\), \\(r\\) cancel ho gaya. Phir \\(n \\cdot (n-1)! = n!\\). Yeh L.H.S. hai.",
+              "Ginti wali wajah (yeh sach kyun hai)\nEk khaas cheez chun lo, maslan \\(A\\). Har arrangement mein ya to \\(A\\) shamil nahi, ya shamil hai.\n\\(A\\) ke baghair: baqi \\(n - 1\\) cheezon mein se \\(r\\) rakhni hain: \\({}^{n-1}P_{r}\\) tareeqe.\n\\(A\\) ke saath: \\(A\\) \\(r\\) jagahon mein se kisi ek par baith sakta hai (\\(r\\) tareeqe), aur baqi \\(r - 1\\) jagahein \\(n - 1\\) cheezon se bharni hain: \\({}^{n-1}P_{r-1}\\) tareeqe; kul \\(r \\cdot {}^{n-1}P_{r-1}\\).\nKyun: Dono cases mein koi arrangement do dafa nahi gina gaya aur koi chhoota bhi nahi, is liye inhein jama karte hain.",
+              "Numbers se tasdeeq\n\\(n = 5\\), \\(r = 3\\):\n\\[{}^{4}P_{3} + 3 \\cdot {}^{4}P_{2} = 24 + 36\\]\n\\[= 60 = {}^{5}P_{3} \\;\\checkmark\\]\nKyun: \\({}^{4}P_{3} = 24\\), \\({}^{4}P_{2} = 12\\); dono sides 60 aaye."
+            ],
+            "final_answer": "Saabit ho gaya: \\({}^{n}P_{r} = {}^{n-1}P_{r} + r \\cdot {}^{n-1}P_{r-1}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

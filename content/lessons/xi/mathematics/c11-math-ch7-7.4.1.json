@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-7.4.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/7.4.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 139,
+          "pdf_to": 139,
+          "note": "Book p. 134: 7.4.1 Applications of Combination in Real Life: Example 9 (fruit chart), Example 10 (12 girls, 8 boys; (iii) printed 36960, correct 6160), Challenge! box (pizza flavours)"
+        }
+      ],
+      "title": "7.4.1 Applications of Combination in Real Life",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In everyday life we often choose a few things from many and do not care about the order: fruits for a chart, players for a team, questions to attempt in an exam, toppings for a pizza. Each of these is a combination, so we count it with \\({}^{n}C_{r} = \\dfrac{n!}{r!\\,(n-r)!}\\). The two examples below show how."
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "Zain has 8 different fruits. He wants to select 5 fruits out of 8 fruits to make a fruit chart. How many combinations of fruits he can select?",
+            "steps": [
+              "Given: 8 different fruits; 5 are to be selected.\nTo find: the number of different selections of 5 fruits.\nMethod: a fruit chart needs only which fruits are chosen, not their order, so this is a combination with \\(n = 8\\) and \\(r = 5\\).",
+              "Step 1: Write the formula and put the values\n\\[{}^{n}C_{r} = \\dfrac{n!}{r!\\,(n-r)!}\\]\n\\[{}^{8}C_{5} = \\dfrac{8!}{5!\\,(8-5)!} = \\dfrac{8!}{5!\\,3!}\\]\nWhy: \\(n = 8\\) fruits in all, \\(r = 5\\) are chosen.",
+              "Step 2: Open \\(8!\\) down to \\(5!\\) and cancel\n\\[= \\dfrac{8 \\times 7 \\times 6 \\times 5!}{5!\\;3!}\\]\n\\[= \\dfrac{8 \\times 7 \\times 6}{3 \\times 2 \\times 1}\\]\nWhy: \\(8! = 8 \\times 7 \\times 6 \\times 5!\\), so the \\(5!\\) on top and bottom cancel; \\(3! = 3 \\times 2 \\times 1\\).",
+              "Step 3: Simplify\n\\[= 8 \\times 7 = 56 \\text{ ways}\\]\nWhy: \\(3 \\times 2 = 6\\) cancels the 6 on top.",
+              "Check:\nChoosing 5 fruits to put in is the same as choosing 3 fruits to leave out: \\({}^{8}C_{3} = \\frac{8 \\cdot 7 \\cdot 6}{3 \\cdot 2 \\cdot 1} = 56\\). The same answer."
+            ],
+            "answer": "Zain has 56 different ways to select 5 different fruits to make a fruit chart."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "In a school, a class consists of 12 girls and 8 boys. The teacher wants to select 5 students for an activity. In how many ways can the students be selected including? (i) 2 girls (ii) 5 boys (iii) 2 boys",
+            "steps": [
+              "Given: 12 girls and 8 boys; 5 students are to be selected.\nTo find: the number of selections with (i) exactly 2 girls, (ii) exactly 5 boys, (iii) exactly 2 boys.\nMethod: a group for an activity is a selection, so we use combinations. When the group has girls and boys, choose the girls and the boys separately and multiply (fundamental principle of counting).",
+              "Step 1 (i): Exactly 2 girls\n5 students with 2 girls means 2 girls and 3 boys.\n\\[({}^{12}C_{2})({}^{8}C_{3}) = \\dfrac{12!}{2!\\,10!} \\cdot \\dfrac{8!}{3!\\,5!}\\]\n\\[= \\dfrac{12 \\cdot 11 \\cdot 10!}{2 \\cdot 10!} \\cdot \\dfrac{8 \\cdot 7 \\cdot 6 \\cdot 5!}{3 \\cdot 2 \\cdot 1 \\cdot 5!}\\]\n\\[= 66 \\times 56 = 3696\\]\nWhy: the 2 girls come from 12 girls (\\({}^{12}C_{2} = 66\\) ways) and the other 3 places must go to boys, chosen from 8 (\\({}^{8}C_{3} = 56\\) ways). Each choice of girls can go with each choice of boys, so we multiply.",
+              "Step 2 (ii): Exactly 5 boys\nAll 5 students are boys, chosen from 8 boys.\n\\[{}^{8}C_{5} = \\dfrac{8!}{5!\\,(8-5)!} = \\dfrac{8!}{5!\\,3!}\\]\n\\[= \\dfrac{8 \\cdot 7 \\cdot 6 \\cdot 5!}{5! \\cdot 3 \\cdot 2 \\cdot 1} = 56\\]\nWhy: no girl is selected, and \\({}^{12}C_{0} = 1\\), so only the boys' choice counts.",
+              "Step 3 (iii): Exactly 2 boys\n5 students with 2 boys means 2 boys and 3 girls. The book's working is\n\\[({}^{8}C_{2})({}^{12}C_{3}) = \\dfrac{8!}{2!\\,6!} \\cdot \\dfrac{12!}{3!\\,9!}\\]\n\\[= \\dfrac{8 \\cdot 7 \\cdot 6!}{2 \\cdot 6!} \\cdot \\dfrac{12 \\cdot 11 \\cdot 10 \\cdot 9!}{3 \\cdot 2 \\cdot 1 \\cdot 9!}\\]\nand the book ends with \\(({}^{8}C_{2})({}^{12}C_{3}) = 36960\\). Simplifying each factor correctly:\n\\[{}^{8}C_{2} = \\dfrac{8 \\cdot 7}{2} = 28\\]\n\\[{}^{12}C_{3} = \\dfrac{12 \\cdot 11 \\cdot 10}{6} = 220\\]\n\\[28 \\times 220 = 6160\\]\nWhy: 2 boys from 8 and 3 girls from 12, multiplied. The printed 36960 is 6 times too big: the \\(3! = 6\\) in the denominator was not divided out.",
+              "Check:\n(i) and (iii) can be checked by a second route. In (i) the boys' part \\({}^{8}C_{3} = 56\\) equals \\({}^{8}C_{5}\\), which is the answer of (ii). In (iii) \\(28 \\times 220\\) also equals \\(28 \\times {}^{12}C_{9}\\) because \\({}^{12}C_{3} = {}^{12}C_{9} = 220\\). A computer count of all 5-student groups of the class gives exactly 3696 groups with 2 girls and 6160 groups with 2 boys."
+            ],
+            "answer": "(i) 3696 ways  (ii) 56 ways  (iii) 6160 ways (the book prints 36960; see the correction below).",
+            "book_errors": [
+              "\\(({}^{8}C_{2})({}^{12}C_{3}) = 36960\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 10(iii): the book prints \\(({}^{8}C_{2})({}^{12}C_{3}) = 36960\\). The correct value is \\({}^{8}C_{2} \\times {}^{12}C_{3} = 28 \\times 220 = 6160\\). (36960 is \\(6 \\times 6160\\): the \\(3!\\) in \\(\\frac{12!}{3!\\,9!}\\) was not divided.)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "A restaurant offers 6 flavours of pizza. How many ways are there to select 2 flavours of pizza?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "For the Challenge: choosing 2 flavours is a selection (chicken-fajita with tikka is the same as tikka with chicken-fajita), so\n\\[{}^{6}C_{2} = \\dfrac{6 \\times 5}{2 \\times 1} = 15\\]\nThere are 15 ways."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Words like \"including 2 girls\" in this book mean exactly 2 girls (and the rest boys). Write the split first, for example \"2 girls + 3 boys\", then write one \\({}^{n}C_{r}\\) for each part and multiply. The numbers on top add up to the class (\\(12 + 8 = 20\\)) and the numbers below add up to the group (\\(2 + 3 = 5\\)): a quick way to see that nothing is missing."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Selecting a group from a larger set, with order not mattering, is \\({}^{n}C_{r}\\).\n2. For a group made of two kinds (girls and boys), choose each kind separately and multiply.\n3. \\({}^{n}C_{r} = {}^{n}C_{n-r}\\): choosing 5 to keep is the same as choosing 3 to leave.\n4. Cancel the larger factorial before multiplying."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Adding instead of multiplying: \\({}^{12}C_{2} + {}^{8}C_{3}\\) is wrong. Girls AND boys are chosen together, so multiply.\n2. Forgetting the other kind: for \"2 girls\" in a group of 5, the remaining 3 places must still be filled with boys.\n3. Not cancelling the whole \\(r!\\): this is exactly the slip that turns 6160 into 36960."
+          }
+        ]
+      }
+    }
+  ]
+}

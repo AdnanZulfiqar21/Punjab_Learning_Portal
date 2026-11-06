@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-3-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-3-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 137,
+          "pdf_to": 137,
+          "note": "Exercise 7.3, Question 6: book page 132 (PDF 137); answer key book page 301 (PDF 306): prints 360; correct 90 = 6!/(2!2!2!) (key divides by only one 2!)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. How many 6-digit numbers can be formed from the digits 7, 7, 8, 8, 9, 9?",
+            "explanation": "All six digits are used in every number; three digits each appear twice.\nPlan: treat the digits like letters of a word with repeats and use the formula for objects not all different.",
+            "steps": [
+              "Given: the digits 7, 7, 8, 8, 9, 9.\nTo find: how many 6-digit numbers use all of them.\nMethod: \\(\\dfrac{n!}{n_1!\\,n_2!\\,n_3!}\\) with \\(n = 6\\) and \\(n_1 = n_2 = n_3 = 2\\).",
+              "Count the repeats\n\\[n = 6,\\quad 7 \\to 2,\\ 8 \\to 2,\\ 9 \\to 2\\]\nWhy: Each of 7, 8 and 9 appears twice.",
+              "Apply the formula\n\\[\\dfrac{6!}{2!\\,2!\\,2!} = \\dfrac{720}{8} = 90\\]\nWhy: Swapping the two 7s, the two 8s or the two 9s gives the same number, so each number was counted 2 x 2 x 2 = 8 times. No digit is 0, so every arrangement is a genuine 6-digit number.",
+              "Check\n\\[\\text{first digit 7: } \\dfrac{5!}{1!\\,2!\\,2!} = 30\\]\n\\[30 \\times 3 = 90 \\;\\checkmark\\]\nWhy: By symmetry 30 numbers start with each of 7, 8 and 9. A computer listing also gives 90."
+            ],
+            "final_answer": "\\(90\\) numbers"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(360\\). That is \\(\\dfrac{6!}{2!}\\), which divides by only one \\(2!\\). All three digits 7, 8 and 9 are repeated twice, so the correct answer is \\(\\dfrac{6!}{2!\\,2!\\,2!} = 90\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

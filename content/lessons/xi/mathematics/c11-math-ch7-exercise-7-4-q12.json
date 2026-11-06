@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-4-Q12",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-4-q12",
+      "title": "Question 12",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 143,
+          "pdf_to": 143,
+          "note": "Exercise 7.4, Question 12: book p.138 (PDF 143). Answer key PDF 306 (book p.301). Solution book PDF 675-704 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12",
+            "prompt": "12 Show that: \\({}^{20}C_{7} + {}^{20}C_{6} = {}^{21}C_{7}\\).",
+            "explanation": "A \"show that\" question: both sides must come out equal.\nPlan: write both terms on the left with factorials, take a common factor, and simplify to \\({}^{21}C_{7}\\). A numerical check follows.",
+            "steps": [
+              "Given: \\({}^{20}C_{7} + {}^{20}C_{6}\\).\nTo show: it equals \\({}^{21}C_{7}\\).\nMethod: \\({}^{n}C_{r} = \\frac{n!}{r!\\,(n-r)!}\\); make the denominators the same, then add.",
+              "Write with factorials\n\\[{}^{20}C_{7} = \\dfrac{20!}{7!\\,13!}\\]\n\\[{}^{20}C_{6} = \\dfrac{20!}{6!\\,14!}\\]\nWhy: \\(20 - 7 = 13\\) and \\(20 - 6 = 14\\).",
+              "Make the denominators equal\n\\[\\dfrac{20!}{7!\\,13!} = \\dfrac{20! \\cdot 14}{7!\\,14!}\\]\n\\[\\dfrac{20!}{6!\\,14!} = \\dfrac{20! \\cdot 7}{7!\\,14!}\\]\nWhy: \\(14! = 14 \\cdot 13!\\) and \\(7! = 7 \\cdot 6!\\), so we multiply top and bottom by 14 and by 7.",
+              "Add\n\\[\\text{L.H.S.} = \\dfrac{20!\\,(14 + 7)}{7!\\,14!}\\]\n\\[= \\dfrac{20! \\cdot 21}{7!\\,14!}\\]\n\\[= \\dfrac{21!}{7!\\,14!}\\]\nWhy: \\(20!\\) is common; \\(21 \\cdot 20! = 21!\\).",
+              "Recognise the result\n\\[\\dfrac{21!}{7!\\,(21-7)!} = {}^{21}C_{7} = \\text{R.H.S.}\\]\nWhy: This is exactly the formula with \\(n = 21\\), \\(r = 7\\).",
+              "Check with numbers\n\\[{}^{20}C_{7} = 77520,\\quad {}^{20}C_{6} = 38760\\]\n\\[77520 + 38760 = 116280\\]\n\\[{}^{21}C_{7} = 116280 \\;\\checkmark\\]\nWhy: Both sides are the same number. (This is Pascal's rule of Question 14 with \\(n = 20\\), \\(r = 7\\).)"
+            ],
+            "final_answer": "Hence proved: \\({}^{20}C_{7} + {}^{20}C_{6} = {}^{21}C_{7}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

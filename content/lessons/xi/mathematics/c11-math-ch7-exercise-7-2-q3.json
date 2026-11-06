@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-2-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-2-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 134,
+          "pdf_to": 134,
+          "note": "Exercise 7.2, Question 3: book p.129 (PDF 134). Answer key PDF 306 (book p.301), Q3 is a proof (no key). Solution book PDF 633-657 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Prove from the first principle that: \\({}^{n}P_{r} = n \\cdot {}^{n-1}P_{r-1}\\).",
+            "explanation": "This is a proof, not a calculation.\nWe must show both sides are equal for all \\(1 \\le r \\le n\\).\nPlan: start from the basic formula \\({}^{n}P_{r} = \\frac{n!}{(n-r)!}\\), simplify the right side until it becomes the left side, then give the counting reason.",
+            "steps": [
+              "Given: \\(n\\) different objects, \\(1 \\le r \\le n\\).\nTo prove: \\({}^{n}P_{r} = n \\cdot {}^{n-1}P_{r-1}\\).\nMethod: First principle = the basic formula \\({}^{n}P_{r} = \\frac{n!}{(n-r)!}\\). Start with the right side because it has more parts to simplify.",
+              "Write \\({}^{n-1}P_{r-1}\\) by the formula\n\\[{}^{n-1}P_{r-1} = \\dfrac{(n-1)!}{[(n-1)-(r-1)]!}\\]\n\\[= \\dfrac{(n-1)!}{(n-r)!}\\]\nWhy: Put \\(n - 1\\) for \\(n\\) and \\(r - 1\\) for \\(r\\). In the bracket, \\((n-1)-(r-1) = n - 1 - r + 1 = n - r\\).",
+              "Multiply by \\(n\\)\n\\[\\text{R.H.S.} = n \\cdot \\dfrac{(n-1)!}{(n-r)!}\\]\n\\[= \\dfrac{n(n-1)!}{(n-r)!}\\]\n\\[= \\dfrac{n!}{(n-r)!}\\]\nWhy: \\(n \\cdot (n-1)! = n!\\), by the definition of factorial (e.g. \\(5 \\cdot 4! = 5!\\)).",
+              "Reach the left side\n\\[\\dfrac{n!}{(n-r)!} = {}^{n}P_{r} = \\text{L.H.S.}\\]\nWhy: This is exactly the formula for \\({}^{n}P_{r}\\).",
+              "Counting reason (why it is true)\nTo arrange \\(r\\) of the \\(n\\) objects, fill the first place in \\(n\\) ways. Then \\(r - 1\\) places remain and \\(n - 1\\) objects are left, which can be arranged in \\({}^{n-1}P_{r-1}\\) ways. By the fundamental principle of counting the total is \\(n \\cdot {}^{n-1}P_{r-1}\\).\nWhy: Both methods count the same arrangements, so they agree.",
+              "Check with numbers\n\\(n = 5\\), \\(r = 3\\):\n\\[{}^{5}P_{3} = 60\\]\n\\[5 \\cdot {}^{4}P_{2} = 5 \\times 12 = 60 \\;\\checkmark\\]\nWhy: A numerical test confirms the identity."
+            ],
+            "final_answer": "Hence proved: \\({}^{n}P_{r} = n \\cdot {}^{n-1}P_{r-1}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Prove from the first principle that: \\({}^{n}P_{r} = {}^{n-1}P_{r} + r \\cdot {}^{n-1}P_{r-1}\\).",
+            "explanation": "Another proof: the right side is a sum of two permutations.\nWe must show it equals \\({}^{n}P_{r}\\) (for \\(1 \\le r \\le n - 1\\), so that \\({}^{n-1}P_{r}\\) has meaning).\nPlan: write both terms by the formula, take the common factor \\(\\frac{(n-1)!}{(n-r)!}\\), and simplify; then give the counting reason.",
+            "steps": [
+              "Given: \\(n\\) different objects, \\(1 \\le r \\le n - 1\\).\nTo prove: \\({}^{n}P_{r} = {}^{n-1}P_{r} + r \\cdot {}^{n-1}P_{r-1}\\).\nMethod: Use \\({}^{n}P_{r} = \\frac{n!}{(n-r)!}\\) for each term and add the two fractions using \\((n-r)! = (n-r)(n-r-1)!\\).",
+              "Write both terms by the formula\n\\[{}^{n-1}P_{r} = \\dfrac{(n-1)!}{(n-1-r)!}\\]\n\\[{}^{n-1}P_{r-1} = \\dfrac{(n-1)!}{(n-r)!}\\]\nWhy: In the first, \\(n - 1\\) replaces \\(n\\). In the second, \\((n-1)-(r-1) = n - r\\).",
+              "Make the denominators the same\n\\[\\dfrac{(n-1)!}{(n-r-1)!} = \\dfrac{(n-1)!\\,(n-r)}{(n-r)!}\\]\nWhy: \\((n-r)! = (n-r)(n-r-1)!\\), so multiply top and bottom by \\((n - r)\\).",
+              "Add the two terms\n\\[\\text{R.H.S.} = \\dfrac{(n-1)!\\,(n-r)}{(n-r)!} + \\dfrac{r\\,(n-1)!}{(n-r)!}\\]\n\\[= \\dfrac{(n-1)!\\,[(n-r) + r]}{(n-r)!}\\]\nWhy: Same denominator, so add the tops; \\((n-1)!\\) is a common factor.",
+              "Simplify\n\\[= \\dfrac{(n-1)! \\cdot n}{(n-r)!}\\]\n\\[= \\dfrac{n!}{(n-r)!} = {}^{n}P_{r}\\]\nWhy: \\((n - r) + r = n\\), and \\(n \\cdot (n-1)! = n!\\).",
+              "Counting reason (why it is true)\nFix one particular object, say \\(A\\). Every arrangement of \\(r\\) objects either leaves \\(A\\) out or uses \\(A\\).\nWithout \\(A\\): arrange \\(r\\) of the other \\(n - 1\\) objects: \\({}^{n-1}P_{r}\\) ways.\nWith \\(A\\): \\(A\\) takes one of the \\(r\\) places (\\(r\\) ways), and the other \\(r - 1\\) places are filled from \\(n - 1\\) objects: \\({}^{n-1}P_{r-1}\\) ways, so \\(r \\cdot {}^{n-1}P_{r-1}\\).\nWhy: The two cases do not overlap and together cover every arrangement, so we add them.",
+              "Check with numbers\n\\(n = 5\\), \\(r = 3\\):\n\\[{}^{4}P_{3} + 3 \\cdot {}^{4}P_{2} = 24 + 36\\]\n\\[= 60 = {}^{5}P_{3} \\;\\checkmark\\]\nWhy: Both sides give 60."
+            ],
+            "final_answer": "Hence proved: \\({}^{n}P_{r} = {}^{n-1}P_{r} + r \\cdot {}^{n-1}P_{r-1}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

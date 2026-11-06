@@ -1,0 +1,307 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-7.1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/7.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 128,
+          "pdf_to": 130,
+          "note": "Book p. 123-125: Unit 7 Introduction and History box, 7.1 statement and proof, tree diagram, Try yourself, Factorial with History and Challenge boxes, Examples 1-3. Teaching notes, Key points, Common mistakes are ours."
+        }
+      ],
+      "title": "7.1 Fundamental Principle of Counting (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH7-7.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Introduction"
+          },
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum bachon! Aaj hum ek naya unit shuru kar rahe hain: Permutation and Combination. Is unit ka asal kaam hai ginti karna, magar aisi ginti jis mein har cheez ki list banane ki zaroorat na pare. Socheiye, class ke 40 bachon ko qatar mein kitne tareeqon se khara kiya ja sakta hai? Yeh number itna bara hai ke list banana namumkin hai. Is liye humein ginti ke chhote aur pakke tareeqe chahiye, aur yahi tareeqe hum is unit mein seekhenge."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab batati hai ke rozmarra zindagi mein permutation (tarteeb) aur combination (intikhab, yani chunna) cheezon ki arrangements aur selections ke tamam mumkin tareeqe ginne mein bohat ahem kirdar ada karte hain, aur science ke kai shobon mein in ka istemal hota hai. Misal ke taur par:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Probability theory (ehtimal ka ilm) mein in se yeh hisaab lagaya jata hai ke koi event mukhtalif soorat-e-haal mein kitni dafa ho sakta hai, aur lottery jeetne ke chances ka andaza lagaya jata hai.",
+              "Biology mein in se DNA sequences (jeenon ki tarteeb) ki kul mumkin tadaad maloom ki jati hai.",
+              "Computer science mein kisi khaas lambai aur khaas sharaait wale passwords ki kul mumkin tadaad gini jati hai.",
+              "Is ke ilawa yeh bohat se encryption algorithms (data ko khufia code mein badalne ke tareeqon) ka ahem hissa hain jo data ki privacy aur hifazat yaqeeni banate hain."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "History",
+            "text": "Augustin Louis Cauchy (1789-1857) ko permutation ka baani (father) kaha jata hai.\nBlaise Pascal aur Pierre de Fermat (1607-1665) ne objects ke combinations banane ka idea diya.\nPascal aur Leibniz modern combinatorics (ginti ke jadeed ilm) ke baani hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is poore unit mein do lafz baar baar aayenge, inhein abhi se alag alag samajh lijiye:\nArrangement (tarteeb), jahan order ahem hai: kaun pehle baithe, kaun sa digit pehle aaye. Yeh permutation hai. Misal: 1, 2, 3 aur 3, 2, 1 do alag numbers hain.\nSelection (chunna), jahan order ahem nahin: hum ne 2 pizza flavours chune, chahe pehle koi bhi uthaya ho. Yeh combination hai.\nAur in sab ki buniyad ek hi seedha sa rule hai: Fundamental Principle of Counting (ginti ka bunyadi usool). Isi se hum shuru karte hain. Yeh rule samajh aa gaya to poora unit aasan ho jayega."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "7.1 Fundamental Principle of Counting"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ek misaal se shuru karti hai. Danish 5 mukhtalif rangon (red, blue, green, orange aur yellow) mein invitation cards banana chahta hai, aur har card ki shape 3 mein se koi bhi ho sakti hai (circle, square aur rectangle). Sawal: Danish kitne mukhtalif cards bana sakta hai?"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Tree diagram bana kar maloom kijiye ke Danish kitne cards bana sakta hai?"
+          },
+          {
+            "type": "paragraph",
+            "text": "Asal masla yeh hai ke Danish jitne tareeqon se card bana sakta hai unhein gina jaye. Is ka ek tareeqa tree diagram (darakht jaisa khaka) banana hai, jis mein har faisle par shaakhein (branches) nikalti hain. Ab ek aur soorat-e-haal dekhte hain: Danish ke abbu ek table khareedna chahte hain aur unhon ne faisle mein beta se madad maangi hai. Unhon ne apne options mehdood kar liye: manufacturer, material ki qisam (wood, plastic, glass aur marble, yani lakri, plastic, sheesha aur marmar) aur shape ki qisam (circle, square aur rectangle). In options se table ke kul kitne choices bante hain?"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan bhi masla wahi hai: un tamam tareeqon ko ginna jin se Danish ke abbu ek table chun sakte hain. Kitab do tareeqe dikhati hai; dono ko dhyan se dekhiye kyun ke doosra tareeqa hi aage ka asal hathiyar hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "1st Way: By making tree diagram"
+          },
+          {
+            "type": "paragraph",
+            "text": "Pehle tareeqe mein hum har mumkin choice ko ek shaakh ki shakal mein likhte hain. Pehle material chunna hai (4 shaakhein), phir har material ke baad shape chunni hai (har material se 3 shaakhein). Neeche figure mein dekhiye:"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch7-fig-table-tree",
+            "alt": "Tree diagram. Table se chaar shaakhein Wood, Plastic, Marble aur Glass ki taraf jati hain. Har material se teen shaakhein Square, Rectangle aur Circle ki taraf jati hain; kul 12 choices, number 1 se 12 tak.",
+            "caption": "Figure: table ke choices ka tree diagram, 4 materials aur 3 shapes se 12 choices (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Tree diagram se saaf nazar aata hai ke Danish ke abbu ke paas ek qisam ke material aur ek qisam ki shape wali table khareedne ke 12 choices hain. Har aakhri shaakh (Choice wala column) ek mukammal faisla hai, jaise \"Marble, Circle\"."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "2nd Way: By multiplying"
+          },
+          {
+            "type": "paragraph",
+            "text": "Doosre tareeqe mein list banane ki zaroorat hi nahin. Danish ke abbu sirf zarb (multiply) kar ke kul choices maloom kar sakte hain:\n\\[\\text{Total choices} = \\text{materials} \\times \\text{shapes}\\]\n\\[= 4 \\times 3 = 12 \\text{ choices}\\]\nDekhiye, jawab wahi 12 aaya jo tree diagram ne diya, magar mehnat kitni kam hui!"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab in misaalon se yeh nateeja nikalti hai: jab koi faisla kai marahil (stages) ya qismon (categories) mein ho, to har stage ke options ki tadaad ko aapas mein zarb dene se kul nataij (outcomes) mil jate hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Sawal: jama (add) kyun nahin, zarb (multiply) kyun? Kyun ke har material har shape ke saath jor ban sakta hai. Wood ke saath 3 shapes, Plastic ke saath phir 3, Marble ke saath 3, Glass ke saath 3. Yani \\(3 + 3 + 3 + 3\\), aur yeh hi \\(4 \\times 3 = 12\\) hai. Zarb dar-asal baar baar jama karne ka chhota tareeqa hai.\nAb Danish ke cards wala Challenge hal karte hain: 5 rang hain aur har rang 3 shapes mein se kisi ke saath bhi aa sakta hai. Is liye kul cards \\(5 \\times 3 = 15\\). Tree diagram mein: pehle 5 rang ki shaakhein, har ek se 3 shape ki shaakhein, kul 15 siron wala darakht.\nYaad rakhiye: tree diagram chhote sawalon ko check karne ke liye behtareen hai, lekin jab numbers bare hon to zarb hi kaam aata hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Statement"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab is usool ko pakki zabaan mein likhte hain. Farz karein A aur B do events (waqiaat) hain. Event A, m mukhtalif tareeqon se ho sakta hai aur event B, n mukhtalif tareeqon se. To dono events ke ek saath hone ke kul tareeqe m aur n ka hasil-e-zarb (product) hain:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Total number of ways} = mn",
+            "text_alt": "Total number of ways equals m times n"
+          },
+          {
+            "type": "paragraph",
+            "text": "Table ki misaal mein event A tha \"material chunna\" (m = 4) aur event B tha \"shape chunna\" (n = 3). Is liye mn = 12."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "Yeh usool tab lagta hai jab pehle kaam ke har tareeqe ke baad doosra kaam utne hi tareeqon se ho sakta ho. Table mein har material ke saath teeno shapes milti hain, is liye seedha zarb kar diya.\nAgar kisi ek choice se doosre kaam ke options badal jayein (jaise kursiyon wali misaal mein, jahan baithne wala student agli kursi ke liye kam ho jata hai), to bhi hum zarb hi karte hain, magar har stage par jitne options us waqt bache hon, utne ginte hain. Yahi factorial ka raasta hai jo abhi aage aa raha hai.\nEk aur baat: \"aur\" (dono kaam karne hain) par zarb hota hai. Agar sawal kahe \"ya to yeh ya woh\" (sirf ek kaam karna hai), to wahan options jama hote hain. Misal: 3 bus aur 2 train mein se sirf ek sawari chunni ho to \\(3 + 2 = 5\\) tareeqe."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Proof"
+          },
+          {
+            "type": "paragraph",
+            "text": "Saboot sets ki madad se diya gaya hai. Maan lijiye \\(A = \\{a_{1}, a_{2}, a_{3}, \\ldots, a_{m}\\}\\) (event A ke m tareeqe) aur \\(B = \\{b_{1}, b_{2}, b_{3}, \\ldots, b_{n}\\}\\) (event B ke n tareeqe). Maan lein \\(P\\) woh event hai jis mein A aur B dono ek saath hote hain. To\n\\[P = \\{(a_{i}, b_{j}) : a_{i} \\in A,\\ b_{j} \\in B\\}\\]\n\\[1 \\le i \\le m,\\quad 1 \\le j \\le n\\]\n\\[P = A \\times B\\]\nIs liye A aur B dono ke ek saath hone ke tareeqon ki tadaad \\(A \\times B\\) ke elements ki tadaad hai, jo \\(mn\\) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(A \\times B\\) ko Cartesian product kehte hain: yeh un tamam ordered pairs (tarteeb wale joron) ka set hai jin ka pehla hissa \\(A\\) se aur doosra hissa \\(B\\) se aaye. Ise ek table ki tarah sochiye: \\(m\\) rows (har \\(a_{i}\\) ki ek row) aur \\(n\\) columns (har \\(b_{j}\\) ka ek column). Har khaana ek pair hai, aur khaanon ki tadaad rows \\(\\times\\) columns \\(= mn\\).\nTable wali misaal mein \\(A = \\{\\text{wood, plastic, marble, glass}\\}\\) aur \\(B = \\{\\text{square, rectangle, circle}\\}\\). \\(A \\times B\\) mein \\(4 \\times 3 = 12\\) pairs hain, jo bilkul tree ke 12 siron ke barabar hain. Yani tree diagram aur Cartesian product ek hi cheez ko do tarah dikhate hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh usool teen ya us se zyada events par bhi lagta hai. Misal ke taur par, agar event A, m tareeqon se, event B, n tareeqon se aur event C, k tareeqon se ho sakta ho, to teeno events ke ek saath hone ke tareeqe m, n aur k ka hasil-e-zarb hain:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Total number of ways} = m \\times n \\times k",
+            "text_alt": "Total number of ways equals m times n times k"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Try yourself",
+            "text": "Agar teen dice (paase) ek saath phenke jayein to kul kitne tareeqe (outcomes) mumkin hain?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Pehle khud koshish kijiye, phir yeh hal dekhiye.\nHar paasa 6 mein se koi bhi face dikha sakta hai, aur ek paase ka nateeja doosre par asar nahin dalta. Yani teen stages, har stage mein 6 options:\n\\[6 \\times 6 \\times 6 = 216 \\text{ ways}\\]\nDhyan dein: paason ko rangon wala samjhiye (laal, hara, neela), taa ke (1, 2, 5) aur (2, 1, 5) do alag nataij gine jayein. Yahi soch fundamental principle ke peeche hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Factorial (!)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab ek bohat kaam ka nishan seekhte hain. Farz karein chaar kursiyan hain jin par chaar students ne baithna hai, aur hum woh tamam tareeqe ginna chahte hain jin se students baith sakte hain. Pehli kursi ke liye 4 options hain (koi bhi student). Doosri kursi ke liye sirf 3 students bache, is liye 3 options. Isi tarah teesri aur chauthi kursi ke liye 2 aur 1 options hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Yani humein chaar aise kaam karne hain jin ke options 4, 3, 2 aur 1 hain. Fundamental Principle of Counting ke mutabiq tamam kursiyan bharne ke kul tareeqe:\n\\[4 \\cdot 3 \\cdot 2 \\cdot 1 = 24\\]\nHar stage par ek option kam kyun hota ja raha hai? Kyun ke jo student baith gaya woh dobara nahin baith sakta. Yeh \"repetition allowed nahin\" wali soorat hai, aur aage permutation mein yahi baat aayegi.",
+            "bold": [
+              "Fundamental Principle of Counting"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Aise sawal rozmarra zindagi mein bohat aate hain jahan pehle \\(n\\) natural numbers \\(1, 2, 3, \\ldots, n\\) ko aapas mein zarb dena parta hai. Is hasil-e-zarb ko \\(n\\) ka factorial kehte hain, aur ise \\(n!\\) (parhiye \"n factorial\") ya \\(\\underline{|n}\\) se likhte hain. Yani kisi natural number \\(n\\) ke liye:"
+          },
+          {
+            "type": "equation",
+            "latex": "n! = n(n-1)(n-2)\\cdots 3 \\cdot 2 \\cdot 1",
+            "text_alt": "n factorial equals n times (n minus 1) times (n minus 2) and so on down to 3 times 2 times 1"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kuch wajah se hum \\(0! = 1\\) bhi define karte hain (yeh wajah 7.2 mein ek box mein aayegi: is ke baghair permutation ka formula \\(r = n\\) par toot jata hai). Aam taur par agar \\(n\\) ek non-negative integer (sifar ya musbat poora number) ho to us ka factorial yun define hota hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "n! = \\begin{cases} 1 & n = 0 \\\\ n(n-1)\\cdots 2 \\cdot 1 & n \\ge 1 \\end{cases}",
+            "text_alt": "n factorial equals 1 if n equals 0, and n times (n minus 1) and so on down to 2 times 1 if n is at least 1"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "History",
+            "text": "Factorial ka nishan (!) Christian Kramp (1760-1826) ne 1808 mein mutaarif karwaya. Yeh nishan permutation aur combination ke sawal hal karne mein bohat istemal hota hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kuch misaalein:\n\\[1! = 1\\]\n\\[2! = 2 \\cdot 1 = 2\\]\n\\[3! = 3 \\cdot 2 \\cdot 1 = 6\\]\n\\[4! = 4 \\cdot 3 \\cdot 2 \\cdot 1 = 24\\]\n\\[5! = 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1 = 120\\]\n\\[6! = 6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1 = 720\\]\nIn values ko zabani yaad kar lijiye, aage har sawal mein kaam aayengi. Ghor kijiye ke har agla factorial pichle se kitna bara hai: 6 se 24, phir 120, phir 720. Yeh tezi se barhna hi factorial ki pehchaan hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "1. \\(7!\\) kitna hai? Ishara: \\(7! = 7 \times 6!\\), aur \\(6! = 720\\). (Jawab: 5040)\n2. Kya \\(3! + 2! = 5!\\)? Hisaab lagaiye: \\(6 + 2 = 8\\), jab ke \\(5! = 120\\). Yani nahin! Factorials ko jama ya zarb kar ke andar wale numbers ko jama nahin kiya ja sakta.\n3. Kursiyon wali misaal mein agar 5 students aur 5 kursiyan hon to kitne tareeqe? Pehli kursi ke 5 options, phir 4, 3, 2, 1, yani \\(5! = 120\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "In misaalon se aasani se dikhta hai ke\n\\[n! = n(n-1)! \\quad \\text{for } n \\ge 1\\]\nMisal: \\(5! = 5 \\times 4! = 5 \\times 24 = 120\\). Yani har factorial pichle factorial ko agle number se zarb dene se banta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Kya aap \\(\\frac{8!}{3!}\\) maloom kar sakte hain?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Rule \\(n! = n(n-1)!\\) ka sab se bara faida yeh hai ke hum factorial ko jahan chahein rok sakte hain: \\(8! = 8 \\cdot 7!\\), ya \\(8 \\cdot 7 \\cdot 6!\\), ya \\(8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3!\\). Factorial wale har fraction ki chaabi yahi hai: poora multiply mat kijiye, pehle cancel kijiye.\nChallenge ka hal: \\(8!\\) ko \\(3!\\) par rokein:\n\\[\\frac{8!}{3!} = \\frac{8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3!}{3!}\\]\n\\[= 8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4 = 6720\\]\nKyun zaroori hai: factorials bohat tezi se barhte hain. \\(10! = 3628800\\) hai. Agar har dafa poora multiply karein to ghalti ka khatra bhi barhta hai aur waqt bhi zaya hota hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki teen misaalein dekhte hain. Har misaal mein pehle sochiye ke kaun sa factorial kahan rokna hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Evaluate \\(\\frac{8!}{6!}\\).",
+            "steps": [
+              "Given: fraction \\(\\frac{8!}{6!}\\).\nTo find: is ki value.\nMethod: sab se pehle dekhte hain ke upar aur neeche dono factorials hain, aur \\(8!\\) ke andar \\(6!\\) chhupa hua hai. Is liye expand kar ke common factors cancel karenge.",
+              "Step 1: Dono factorials khol kar likhein\n\\[\\frac{8!}{6!} = \\frac{8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}{6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}\\]\nKyun: kitab yahi karti hai, taa ke upar aur neeche ke common factors saamne nazar aayein. Shuru mein yeh tareeqa samajhne ke liye achha hai.",
+              "Step 2: Common factors cancel karein\n\\[= 8 \\cdot 7 = 56\\]\nKyun: \\(6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1\\) yani \\(6!\\) upar bhi hai aur neeche bhi, is liye kat jata hai. Chhota raasta: \\(8! = 8 \\cdot 7 \\cdot 6!\\) likhein, to \\(6!\\) seedha cancel ho jata hai aur \\(8 \\cdot 7\\) bachta hai.",
+              "Tasdeeq:\n\\[8! = 40320,\\quad 6! = 720\\]\n\\[40320 \\div 720 = 56\\]\nJawab durust hai."
+            ],
+            "answer": "\\(\\frac{8!}{6!} = 56\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Write \\(8 \\cdot 7 \\cdot 6 \\cdot 5\\) in the factorial form.",
+            "steps": [
+              "Given: hasil-e-zarb \\(8 \\cdot 7 \\cdot 6 \\cdot 5\\), jis mein lagataar (consecutive) numbers hain.\nTo find: isi number ko factorials ki shakal mein likhna.\nMethod: lagataar numbers ka product kisi factorial ka upar wala hissa hota hai. Hum ise 1 tak poora kar ke \\(8!\\) banayenge, aur jo extra lagaya us se divide kar denge.",
+              "Step 1: Product ko 1 tak poora karein\n\\[8 \\cdot 7 \\cdot 6 \\cdot 5 = \\frac{8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}{4 \\cdot 3 \\cdot 2 \\cdot 1}\\]\nKyun: upar aur neeche ek hi cheez \\(4 \\cdot 3 \\cdot 2 \\cdot 1\\) se zarb aur taqseem karne se value nahin badalti, bilkul jaise \\(\\frac{5}{5} = 1\\) se zarb dena.",
+              "Step 2: Factorials pehchanein\n\\[= \\frac{8!}{4!}\\]\nKyun: upar \\(8!\\) ban gaya aur neeche \\(4!\\). Ghor karein: neeche wala factorial aakhri factor se ek kam number ka hota hai (aakhri factor 5, to \\(5 - 1 = 4\\), yani \\(4!\\)). Yeh shortcut yaad rakhiye.",
+              "Tasdeeq:\n\\[8 \\cdot 7 \\cdot 6 \\cdot 5 = 1680\\]\n\\[\\frac{8!}{4!} = \\frac{40320}{24} = 1680\\]\nDono barabar hain."
+            ],
+            "answer": "\\(8 \\cdot 7 \\cdot 6 \\cdot 5 = \\frac{8!}{4!}\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Evaluate \\(\\frac{9!}{6!\\,3!}\\).",
+            "steps": [
+              "Given: \\(\\frac{9!}{6!\\,3!}\\).\nTo find: is ki value.\nMethod: neeche do factorials hain. Sab se aasan yeh hai ke bara wala (\\(6!\\)) \\(9!\\) ke saath cancel karein, phir bache hue ko \\(3!\\) se divide karein. Kitab teen barabar tareeqe dikhati hai.",
+              "Step 1 (pehla tareeqa): 9! ko 6! par rokein\n\\[\\frac{9!}{6!\\,3!} = \\frac{(9 \\cdot 8 \\cdot 7)\\,6!}{6!\\,(3 \\cdot 2 \\cdot 1)}\\]\n\\[= \\frac{504}{6} = 84\\]\nKyun: \\(9! = 9 \\cdot 8 \\cdot 7 \\cdot 6!\\), is liye \\(6!\\) foran kat jata hai aur sirf \\(\\frac{9 \\cdot 8 \\cdot 7}{6}\\) bachta hai. Yeh sab se tez tareeqa hai.",
+              "Step 2 (doosra tareeqa): 9! ko 3! par rokein\n\\[\\frac{9!}{6!\\,3!} = \\frac{9 \\cdot 8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3!}{6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1 \\cdot 3!}\\]\n\\[= 84\\]\nKyun: is dafa \\(3!\\) cancel hota hai, aur \\(6 \\cdot 5 \\cdot 4\\) upar neeche dono jagah hai, woh bhi kat jata hai. Phir \\(\\frac{9 \\cdot 8 \\cdot 7}{3 \\cdot 2 \\cdot 1} = 84\\) bachta hai, yani wahi kaam.",
+              "Step 3 (teesra tareeqa): Sab kuch khol dein\n\\[\\frac{9 \\cdot 8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}{6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1 \\cdot 3 \\cdot 2 \\cdot 1} = 84\\]\nKyun: yeh sab se lamba raasta hai, lekin is se pata chalta hai ke teeno tareeqe asal mein ek hi factors cancel karte hain. Exam mein pehla tareeqa istemal kijiye.",
+              "Tasdeeq:\n\\[9! = 362880,\\quad 6!\\,3! = 720 \\times 6 = 4320\\]\n\\[362880 \\div 4320 = 84\\]\nJawab sahi hai."
+            ],
+            "answer": "\\(\\frac{9!}{6!\\,3!} = 84\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahin. Ek naashte ki dukaan par 3 qisam ke paratha (aloo, gobhi, saada), 2 qisam ki chai (doodh patti, sabz chai) aur 2 qisam ka sweet (kheer, halwa) milte hain. Ek naashta = ek paratha + ek chai + ek sweet. Kitne mukhtalif naashte ban sakte hain?\nTeen stages, options 3, 2 aur 2. Fundamental principle se: \\(3 \\times 2 \\times 2 = 12\\) naashte.\nAur ek factorial wala: \\(\\frac{7!}{5!}\\). \\(7! = 7 \\cdot 6 \\cdot 5!\\), is liye jawab \\(7 \\cdot 6 = 42\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Fundamental Principle of Counting: ek kaam \\(m\\) tareeqon se aur doosra \\(n\\) tareeqon se ho sake to dono ek saath \\(mn\\) tareeqon se hote hain; teen kaam ho to \\(mnk\\).\n2. Tree diagram har nateeja likh kar dikhata hai; zarb list banaye baghair gin deta hai.\n3. \\(n! = n(n-1)(n-2)\\cdots 3 \\cdot 2 \\cdot 1\\), aur \\(0! = 1\\).\n4. \\(n! = n(n-1)!\\): factorial ko wahan rokiye jahan cancel karna aasan ho.\n5. Lagataar numbers ka product \\(a(a-1)\\cdots b = \\frac{a!}{(b-1)!}\\).\n6. Yaad karne layak values: \\(3! = 6\\), \\(4! = 24\\), \\(5! = 120\\), \\(6! = 720\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Stages ke options ko jama kar dena: 4 materials aur 3 shapes se \\(4 \\times 3 = 12\\) choices bante hain, \\(4 + 3 = 7\\) nahin. Bachne ka tareeqa: poochiye \"kya har option doosre har option ke saath jor ban sakta hai?\" Agar haan, to zarb.\n2. Factorials ko aam numbers ki tarah cancel karna: \\(\\frac{8!}{4!} \\ne 2!\\). Pehle kholiye: \\(\\frac{8!}{4!} = 8 \\cdot 7 \\cdot 6 \\cdot 5 = 1680\\).\n3. \\(0! = 0\\) samajhna. Definition se \\(0! = 1\\) hai.\n4. \\((2 \\cdot 3)! = 2! \\cdot 3!\\) likh dena: \\(6! = 720\\) hai jab ke \\(2! \\cdot 3! = 12\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

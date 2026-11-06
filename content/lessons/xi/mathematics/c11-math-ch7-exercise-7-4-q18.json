@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-4-Q18",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-4-q18",
+      "title": "Question 18",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 144,
+          "pdf_to": 144,
+          "note": "Exercise 7.4, Question 18: book p.139 (PDF 144). Answer key PDF 306 (book p.301). Solution book PDF 675-704 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "18(i)",
+            "prompt": "18 (i) On Defense Day, Teacher I prepares a list of 10 national songs, and Teacher II also prepares a separate list of 10 different national songs. The principal wants to select 3 songs from Teacher I's list and 3 songs from Teacher II's list. In how many ways can the songs be selected if: (i) The sequence of the selected songs matters",
+            "explanation": "Two separate choices: 3 songs from list I and 3 from list II. \"Sequence matters\" (as in the book's answer) means the order of the 3 songs taken from each list counts.\nPlan: \\({}^{10}P_{3} \\times {}^{10}P_{3}\\).",
+            "steps": [
+              "Given: two lists of 10 different songs; 3 songs from each list; order matters.\nTo find: the number of ways.\nMethod: Ordered choice without repetition from each list is \\({}^{10}P_{3}\\); both choices are made together, so multiply.",
+              "Ordered choices from one list\n\\[{}^{10}P_{3} = 10 \\times 9 \\times 8\\]\n\\[= 720\\]\nWhy: First song 10 choices, second 9, third 8.",
+              "Multiply for the two lists\n\\[720 \\times 720 = 518400\\]\nWhy: Each ordered choice from list I goes with each ordered choice from list II.",
+              "Check\n\\[{}^{10}P_{3} = {}^{10}C_{3} \\times 3! = 120 \\times 6 = 720\\]\n\\[720^{2} = 518400 \\;\\checkmark\\]\nWhy: Each group of 3 songs can be ordered in \\(3!\\) ways."
+            ],
+            "final_answer": "518,400 ways"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "18(ii)",
+            "prompt": "18 (ii) On Defense Day, Teacher I prepares a list of 10 national songs, and Teacher II also prepares a separate list of 10 different national songs. The principal wants to select 3 songs from Teacher I's list and 3 songs from Teacher II's list. In how many ways can the songs be selected if: (ii) The sequence of the selected songs does not matter.",
+            "explanation": "Now only which songs are picked counts.\nPlan: \\({}^{10}C_{3} \\times {}^{10}C_{3}\\).",
+            "steps": [
+              "Given: two lists of 10 songs; 3 from each; order does not matter.\nTo find: the number of ways.\nMethod: A selection from each list is \\({}^{10}C_{3}\\); multiply for the two lists.",
+              "Selections from one list\n\\[{}^{10}C_{3} = \\dfrac{10 \\cdot 9 \\cdot 8}{3 \\cdot 2 \\cdot 1}\\]\n\\[= \\dfrac{720}{6} = 120\\]\nWhy: Each group of 3 songs was counted \\(3! = 6\\) times in \\({}^{10}P_{3}\\).",
+              "Multiply for the two lists\n\\[120 \\times 120 = 14400\\]\nWhy: Each selection from list I goes with each selection from list II.",
+              "Check\n\\[\\dfrac{518400}{6 \\times 6} = \\dfrac{518400}{36} = 14400 \\;\\checkmark\\]\nWhy: Removing the \\(3!\\) orders from each list in part (i) gives this part."
+            ],
+            "final_answer": "14,400 ways"
+          }
+        ]
+      }
+    }
+  ]
+}

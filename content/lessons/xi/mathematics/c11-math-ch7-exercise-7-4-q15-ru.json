@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-4-Q15-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-4-q15",
+      "title": "Question 15 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 144,
+          "pdf_to": 144,
+          "note": "Exercise 7.4, Question 15: book p.139 (PDF 144). Answer key PDF 306 (book p.301). Solution book PDF 675-704 used as a reference only."
+        }
+      ],
+      "variant_of": "C11-MATH-CH7-EXERCISE-7-4-Q15",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15(a)",
+            "prompt": "15 (a) A locker of a bank is locked with four letters (A-Z). How many different passwords can be generated if: (a) repetition of the alphabets is allowed",
+            "explanation": "Password ek tarteeb wali string hai: ABCD aur DCBA do alag passwords hain, is liye order ki ahmiyat hai. Letters dobara aa sakte hain.\nFind kya karna hai? 26 letters se 4-letter passwords ki tadaad.\nPlan: 4 khaane, har khaane mein 26 choices: \\(26^{4}\\).",
+            "steps": [
+              "Diya gaya hai: 26 letters (A se Z); 4 letters ka password; repetition (dohrana) allowed.\nHumein find karna hai: passwords ki tadaad.\nTareeqa: Fundamental principle of counting: 4 khaane ek ke baad ek bharein aur har khaane ki choices multiply karein. Yahan combination nahi lagta kyunke password mein tarteeb badalne se password badal jata hai.",
+              "Har khaane ki choices\n\\[26 \\times 26 \\times 26 \\times 26\\]\nKyun: Repetition allowed hai, yani A pehle khaane mein aa gaya to bhi doosre khaane mein A phir aa sakta hai. Is liye har khaane mein poore 26 letters available hain. Jaise AAAA bhi ek jaiz password hai.",
+              "Multiply karein\n\\[26^{2} = 676\\]\n\\[26^{4} = 676 \\times 676 = 456976\\]\nKyun: \\(26^{4} = (26^{2})^{2}\\), is tarah do qadmon mein hisaab aasaan ho gaya.\nDhyan dein: \\(26 \\times 4 = 104\\) likhna ghalat hai; har khaane ki choices zarb hoti hain, jama nahi.",
+              "Tasdeeq\n\\[676 \\times 676 = 676 \\times 700 - 676 \\times 24\\]\n\\[= 473200 - 16224 = 456976 \\;\\checkmark\\]\nKyun: Doosre tareeqe se multiply karne par bhi wahi number aaya."
+            ],
+            "final_answer": "456,976 passwords"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15(b)",
+            "prompt": "15 (b) A locker of a bank is locked with four letters (A-Z). How many different passwords can be generated if: (b) repetition of the alphabets is not allowed",
+            "explanation": "Password hai, is liye order ki ahmiyat ab bhi hai, lekin ab charon letters mukhtalif hone chahiye.\nFind kya karna hai? 26 letters mein se 4 ki tarteeb (arrangements).\nPlan: \\({}^{26}P_{4} = 26 \\times 25 \\times 24 \\times 23\\).",
+            "steps": [
+              "Diya gaya hai: 26 letters; 4-letter password; koi letter dobara nahi.\nHumein find karna hai: passwords ki tadaad.\nTareeqa: Tarteeb ahem hai aur repetition nahi, is liye yeh permutation \\({}^{n}P_{r}\\) hai, \\(n = 26\\), \\(r = 4\\). Combination nahi kyunke ABCD aur BACD alag locker kholte hain.",
+              "Khaana ba khaana choices\n\\[26 \\times 25 \\times 24 \\times 23\\]\nKyun: Pehle khaane mein 26 letters. Jo letter use ho gaya woh dobara nahi aa sakta, is liye doosre khaane mein 25, teesre mein 24, chauthe mein 23.",
+              "Multiply karein\n\\[26 \\times 25 = 650\\]\n\\[650 \\times 24 = 15600\\]\n\\[15600 \\times 23 = 358800\\]\nKyun: Do do numbers multiply kiye taake har qadam check ho sake.",
+              "Tasdeeq\n\\[{}^{26}P_{4} = \\dfrac{26!}{22!} = 26 \\cdot 25 \\cdot 24 \\cdot 23\\]\n\\[358800 < 456976 \\;\\checkmark\\]\nKyun: Formula se bhi wahi product banta hai. Aur repetition band karne se passwords kam hone chahiye the, aur kam hi hue (part (a) se chhota number).\nDhyan dein: \\({}^{26}C_{4} = 14950\\) yahan ghalat hai; woh letters ka sirf group ginta hai, un ki tarteeb nahi."
+            ],
+            "final_answer": "358,800 passwords"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key (i) 358,800 aur (ii) 14,950 likhti hai. 358,800 part (b) ka jawab hai, (a) ka nahi; 14,950 \\(= {}^{26}C_{4}\\) combination hai, jo password ke liye ghalat hai kyunke letters ki tarteeb ahem hai. Sahi jawab: (a) \\(26^{4} = 456{,}976\\); (b) \\({}^{26}P_{4} = 358{,}800\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

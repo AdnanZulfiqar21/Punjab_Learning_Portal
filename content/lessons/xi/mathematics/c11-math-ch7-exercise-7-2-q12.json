@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-2-Q12",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-2-q12",
+      "title": "Question 12",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 134,
+          "pdf_to": 134,
+          "note": "Exercise 7.2, Question 12: book p.129 (PDF 134). Answer key PDF 306 (book p.301). Solution book PDF 633-657 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12",
+            "prompt": "12 In how many ways can 8 books including 2 on English be arranged on a shelf in such a way that the English books are never together?",
+            "explanation": "8 different books on a shelf; the 2 English books must not stand side by side.\nWe must count the arrangements.\nPlan: never together = total \\(-\\) together; count \"together\" with a block.",
+            "steps": [
+              "Given: 8 different books, 2 of them English.\nTo find: arrangements with the English books never together.\nMethod: Never together = total \\(-\\) together. For \"together\", tie the 2 English books into one block.",
+              "Total arrangements\n\\[8! = 40320\\]\nWhy: 8 different books in 8 places.",
+              "English books together\n\\[\\text{Units} = 1 + 6 = 7\\]\n\\[7! \\times 2! = 5040 \\times 2 = 10080\\]\nWhy: The English block and the 6 other books are 7 units (\\(7!\\) ways); inside the block the 2 English books can swap (\\(2!\\) ways).",
+              "Subtract\n\\[8! - 7! \\times 2!\\]\n\\[= 40320 - 10080 = 30240\\]\nWhy: Removing the \"together\" cases leaves the \"never together\" ones.",
+              "Check (gap method)\nArrange the 6 other books: \\(6! = 720\\). They make 7 gaps (including both ends). Put the 2 English books in 2 different gaps: \\({}^{7}P_{2} = 42\\).\n\\[720 \\times 42 = 30240 \\;\\checkmark\\]\nWhy: Books in different gaps can never be next to each other."
+            ],
+            "final_answer": "30,240 ways"
+          }
+        ]
+      }
+    }
+  ]
+}

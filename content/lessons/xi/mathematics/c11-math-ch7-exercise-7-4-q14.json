@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-4-Q14",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-4-q14",
+      "title": "Question 14",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 143,
+          "pdf_to": 143,
+          "note": "Exercise 7.4, Question 14: book p.138 (PDF 143). Answer key PDF 306 (book p.301). Solution book PDF 675-704 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "14",
+            "prompt": "14 Prove that \\({}^{n}C_{r} + {}^{n}C_{r-1} = {}^{n+1}C_{r}\\).",
+            "explanation": "A proof in general letters (Pascal's rule).\nPlan: write both terms on the left with factorials, make the denominators the same, add, and recognise \\({}^{n+1}C_{r}\\).",
+            "steps": [
+              "Given: \\({}^{n}C_{r} + {}^{n}C_{r-1}\\), with \\(1 \\le r \\le n\\).\nTo prove: it equals \\({}^{n+1}C_{r}\\).\nMethod: \\({}^{n}C_{r} = \\frac{n!}{r!\\,(n-r)!}\\), then the rule for adding fractions.",
+              "Write with factorials\n\\[{}^{n}C_{r} = \\dfrac{n!}{r!\\,(n-r)!}\\]\n\\[{}^{n}C_{r-1} = \\dfrac{n!}{(r-1)!\\,(n-r+1)!}\\]\nWhy: For \\({}^{n}C_{r-1}\\), the bottom is \\((r-1)!\\) and \\((n-(r-1))! = (n-r+1)!\\).",
+              "Make the denominators equal\n\\[\\dfrac{n!}{r!\\,(n-r)!} = \\dfrac{n!\\,(n-r+1)}{r!\\,(n-r+1)!}\\]\n\\[\\dfrac{n!}{(r-1)!\\,(n-r+1)!} = \\dfrac{n!\\,r}{r!\\,(n-r+1)!}\\]\nWhy: \\((n-r+1)! = (n-r+1)\\,(n-r)!\\) and \\(r! = r\\,(r-1)!\\).",
+              "Add the fractions\n\\[\\text{L.H.S.} = \\dfrac{n!\\,[(n-r+1) + r]}{r!\\,(n-r+1)!}\\]\n\\[= \\dfrac{n!\\,(n+1)}{r!\\,(n-r+1)!}\\]\nWhy: Same denominator, so add the tops; \\(n!\\) is common and \\(-r + r = 0\\).",
+              "Recognise \\({}^{n+1}C_{r}\\)\n\\[= \\dfrac{(n+1)!}{r!\\,(n+1-r)!}\\]\n\\[= {}^{n+1}C_{r} = \\text{R.H.S.}\\]\nWhy: \\((n+1)\\,n! = (n+1)!\\) and \\(n - r + 1 = (n+1) - r\\).",
+              "Check with numbers (\\(n = 5\\), \\(r = 2\\))\n\\[{}^{5}C_{2} + {}^{5}C_{1} = 10 + 5 = 15\\]\n\\[{}^{6}C_{2} = 15 \\;\\checkmark\\]\nWhy: A small case agrees with the identity. Meaning: choose \\(r\\) from \\(n+1\\) people; groups without one fixed person give \\({}^{n}C_{r}\\), groups with him give \\({}^{n}C_{r-1}\\)."
+            ],
+            "final_answer": "Hence proved: \\({}^{n}C_{r} + {}^{n}C_{r-1} = {}^{n+1}C_{r}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-4-Q10",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-4-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 143,
+          "pdf_to": 143,
+          "note": "Exercise 7.4, Question 10: book p.138 (PDF 143). Answer key PDF 306 (book p.301). Solution book PDF 675-704 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10 How many committees of 5 members can be chosen from a group of 8 persons when each committee must include 2 particular persons?",
+            "explanation": "A committee is a selection with a condition: 2 particular persons are always in it.\nWe must count the committees.\nPlan: put the 2 persons in first, then choose the remaining \\(5 - 2 = 3\\) members from the remaining \\(8 - 2 = 6\\) persons.",
+            "steps": [
+              "Given: 8 persons; committee of 5; 2 particular persons must be included.\nTo find: the number of such committees.\nMethod: Fixed members need no choice (1 way). Only the free places are filled, by \\({}^{n}C_{r}\\).",
+              "Fix the 2 particular persons\n\\[\\text{places left} = 5 - 2 = 3\\]\n\\[\\text{persons left} = 8 - 2 = 6\\]\nWhy: The 2 persons are already in, so they can neither be chosen again nor left out.",
+              "Choose the other 3 members\n\\[{}^{6}C_{3} = \\dfrac{6 \\cdot 5 \\cdot 4}{3 \\cdot 2 \\cdot 1}\\]\n\\[= \\dfrac{120}{6} = 20\\]\nWhy: 3 places from 6 persons, order not important.",
+              "Check by counting the opposite way\n\\[{}^{8}C_{5} = 56 \\text{ committees in all}\\]\n\\[\\text{with both: } 20,\\ \\text{at most one: } 36\\]\n\\[\\text{at most one} = {}^{6}C_{5} + 2 \\cdot {}^{6}C_{4} = 6 + 30 = 36 \\;\\checkmark\\]\nWhy: Committees with neither of the two (\\({}^{6}C_{5}\\)) or with exactly one (\\(2 \\times {}^{6}C_{4}\\)) make up the rest of the 56."
+            ],
+            "final_answer": "20 committees"
+          }
+        ]
+      }
+    }
+  ]
+}

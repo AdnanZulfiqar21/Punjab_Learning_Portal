@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-7.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/7.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 128,
+          "pdf_to": 130,
+          "note": "Book p. 123-125: Unit 7 Introduction and History box, 7.1 statement and proof, tree diagram, Try yourself, Factorial with History and Challenge boxes, Examples 1-3. Teaching notes, Key points, Common mistakes are ours."
+        }
+      ],
+      "title": "7.1 Fundamental Principle of Counting",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Introduction"
+          },
+          {
+            "type": "paragraph",
+            "text": "In daily life, permutation and combination play a vital role in counting the total number of possibilities in arrangements and selections of objects or things. They are used in many fields of science. For example:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "In probability theory, permutation and combination are used to compute how many times an event occurs in various scenarios, and to estimate the odds of winning a lottery.",
+              "In biology, they are used to find the total number of possible DNA sequences.",
+              "In computer science, they are used to count the possible number of passwords of a given length with some specific characteristics.",
+              "Moreover, they are important parts of many encryption algorithms that ensure the privacy and integrity of a data set."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "History",
+            "text": "Augustin Louis Cauchy (1789-1857) is the father of permutation.\nBlaise Pascal and Pierre de Fermat (1607-1665) gave an idea to generate the combinations of objects.\nPascal and Leibniz are the founders of modern combinatorics."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This unit is about counting without listing. Two words will follow us through the whole unit:\nan arrangement, where order matters (who sits first, which digit comes first): this is a permutation;\na selection, where order does not matter (which 2 pizza flavours we pick): this is a combination.\nEverything rests on one simple rule, the Fundamental Principle of Counting, which we learn first."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "7.1 Fundamental Principle of Counting"
+          },
+          {
+            "type": "paragraph",
+            "text": "Danish wants to prepare invitation cards of 5 different colours (red, blue, green, orange and yellow) by changing any of 3 shapes (circle, square and rectangle). How many cards can Danish make?"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Make a tree diagram and find how many cards Danish can make?"
+          },
+          {
+            "type": "paragraph",
+            "text": "The problem is to count the total number of ways in which Danish can make cards. One way to find the solution is by making a tree diagram. Let us discuss another scenario: Danish's father wants to buy a table and has asked his son to help him decide. He narrowed down his options for manufacturer, types of material (wood, plastic, glass and marble) and types of shape (circle, square and rectangle). Find the total number of table choices from the above options."
+          },
+          {
+            "type": "paragraph",
+            "text": "Again the problem is to count the total number of ways in which Danish's father can choose a table."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "1st Way: By making tree diagram"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch7-fig-table-tree",
+            "alt": "Tree diagram. From Table, four branches go to Wood, Plastic, Marble and Glass. From each material three branches go to Square, Rectangle and Circle, giving 12 choices numbered 1 to 12, from Wood, Square to Glass, Circle.",
+            "caption": "Figure: tree diagram of the table choices, 4 materials and 3 shapes give 12 choices (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "From the tree diagram it is clear that there are 12 choices for Danish's father to buy a table with one type of material and one type of shape."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "2nd Way: By multiplying"
+          },
+          {
+            "type": "paragraph",
+            "text": "By multiplying, Danish's father can find the total number of table choices to buy a table with one kind of material and shape.\n\\[\\text{Total choices} = \\text{materials} \\times \\text{shapes}\\]\n\\[= 4 \\times 3 = 12 \\text{ choices}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "These examples show that when making a choice involving multiple stages or categories, we can find the total number of outcomes by multiplying the number of options at each stage."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why multiply and not add? Each of the 4 materials can be paired with each of the 3 shapes. So the 3 shapes are repeated 4 times: \\(3 + 3 + 3 + 3 = 4 \\times 3 = 12\\). Multiplication is just quick repeated addition.\nDanish's cards (the Challenge): 5 colours, and each colour can go with any of 3 shapes, so \\(5 \\times 3 = 15\\) cards. In a tree diagram: 5 colour branches, each splitting into 3 shape branches, 15 ends.\nA tree diagram is good for checking small cases; multiplication is what we use when the numbers grow."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Statement"
+          },
+          {
+            "type": "paragraph",
+            "text": "Suppose A and B are two events. The event A occurs in m different ways and the event B occurs in n different ways; then the total number of ways that the two events together can occur is the product of m and n."
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Total number of ways} = mn",
+            "text_alt": "Total number of ways equals m times n"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Proof"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(A = \\{a_{1}, a_{2}, a_{3}, \\ldots, a_{m}\\}\\) and \\(B = \\{b_{1}, b_{2}, b_{3}, \\ldots, b_{n}\\}\\). Let \\(P\\) denote the event that both events A and B occur together. Then\n\\[P = \\{(a_{i}, b_{j}) : a_{i} \\in A,\\ b_{j} \\in B\\}\\]\n\\[1 \\le i \\le m,\\quad 1 \\le j \\le n\\]\n\\[P = A \\times B\\]\nHence the number of ways in which both events A and B can occur is the number of elements in \\(A \\times B\\), which is \\(mn\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(A \\times B\\) (the Cartesian product) is the set of all ordered pairs whose first entry comes from \\(A\\) and second entry from \\(B\\). For each of the \\(m\\) choices of \\(a_{i}\\) there are \\(n\\) choices of \\(b_{j}\\), so there are \\(m\\) rows of \\(n\\) pairs: \\(mn\\) pairs in all.\nTable example: \\(A = \\{\\text{wood, plastic, marble, glass}\\}\\), \\(B = \\{\\text{square, rectangle, circle}\\}\\); \\(A \\times B\\) has \\(4 \\times 3 = 12\\) pairs, exactly the 12 ends of the tree."
+          },
+          {
+            "type": "paragraph",
+            "text": "This principle can be extended to three or more events. For instance, if event A can occur in m ways, event B can occur in n ways and event C can occur in k ways, the number of ways that the three events can occur all together is the product of m, n and k."
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Total number of ways} = m \\times n \\times k",
+            "text_alt": "Total number of ways equals m times n times k"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Try yourself",
+            "text": "If three dice are rolled together, how many total numbers of ways occur?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Each die can show any of 6 faces, whatever the other dice show. Three stages with 6 options each:\n\\[6 \\times 6 \\times 6 = 216 \\text{ ways}\\]\nThink of the dice as coloured (red, green, blue), so that (1, 2, 5) and (2, 1, 5) are different outcomes."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Factorial (!)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Suppose there are four chairs to be occupied by four students and we are interested in counting all the possible ways the students can be seated. To occupy the first chair there are 4 options. For the second chair only 3 students remain, so there are 3 options. Similarly, for the third and fourth chairs there are 2 and 1 options respectively."
+          },
+          {
+            "type": "paragraph",
+            "text": "In this way we have to perform four independent events with 4, 3, 2 and 1 options respectively. By the Fundamental Principle of Counting, the total number of ways to occupy all the chairs is\n\\[4 \\cdot 3 \\cdot 2 \\cdot 1 = 24\\]",
+            "bold": [
+              "Fundamental Principle of Counting"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Such problems frequently occur in daily life, where we have to multiply the first \\(n\\) natural numbers: \\(1, 2, 3, \\ldots, n\\). We call this product the factorial of \\(n\\) and denote it by \\(n!\\) or \\(\\underline{|n}\\). Thus for a natural number \\(n\\):"
+          },
+          {
+            "type": "equation",
+            "latex": "n! = n(n-1)(n-2)\\cdots 3 \\cdot 2 \\cdot 1",
+            "text_alt": "n factorial equals n times (n minus 1) times (n minus 2) and so on down to 3 times 2 times 1"
+          },
+          {
+            "type": "paragraph",
+            "text": "For some reason we also define \\(0! = 1\\) (the reason is given in 7.2). In general, if \\(n\\) is a non-negative integer, then its factorial is denoted and defined as"
+          },
+          {
+            "type": "equation",
+            "latex": "n! = \\begin{cases} 1 & n = 0 \\\\ n(n-1)\\cdots 2 \\cdot 1 & n \\ge 1 \\end{cases}",
+            "text_alt": "n factorial equals 1 if n equals 0, and n times (n minus 1) and so on down to 2 times 1 if n is at least 1"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "History",
+            "text": "The factorial notation (!) was introduced by Christian Kramp (1760-1826) in 1808. This notation is frequently used to solve permutation and combination."
+          },
+          {
+            "type": "paragraph",
+            "text": "For example,\n\\[1! = 1\\]\n\\[2! = 2 \\cdot 1 = 2\\]\n\\[3! = 3 \\cdot 2 \\cdot 1 = 6\\]\n\\[4! = 4 \\cdot 3 \\cdot 2 \\cdot 1 = 24\\]\n\\[5! = 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1 = 120\\]\n\\[6! = 6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1 = 720\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "It can be easily observed that\n\\[n! = n(n-1)! \\quad \\text{for } n \\ge 1\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Can you find out \\(\\frac{8!}{3!}\\)?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The rule \\(n! = n(n-1)!\\) lets us stop a factorial wherever we like: \\(8! = 8 \\cdot 7! = 8 \\cdot 7 \\cdot 6!\\), and so on. This is the key to every factorial fraction: never multiply everything out, cancel first.\nChallenge: write \\(8! = 8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3!\\). Then\n\\[\\frac{8!}{3!} = 8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4 = 6720\\]\nFactorials grow very fast: \\(10! = 3628800\\) already. That is why cancelling saves so much work."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Evaluate \\(\\frac{8!}{6!}\\).",
+            "steps": [
+              "Given: the fraction \\(\\frac{8!}{6!}\\).\nTo find: its value.\nMethod: both top and bottom are factorials; \\(8!\\) contains \\(6!\\) inside it, so expand and cancel.",
+              "Step 1: Expand both factorials\n\\[\\frac{8!}{6!} = \\frac{8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}{6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}\\]\nWhy: this is the book's way: write every factor so that the common ones are visible.",
+              "Step 2: Cancel the common factors\n\\[= 8 \\cdot 7 = 56\\]\nWhy: \\(6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1 = 6!\\) appears on top and bottom. Shorter: \\(8! = 8 \\cdot 7 \\cdot 6!\\), so \\(\\frac{8!}{6!} = 8 \\cdot 7\\).",
+              "Check:\n\\[8! = 40320,\\quad 6! = 720\\]\n\\[40320 \\div 720 = 56\\]"
+            ],
+            "answer": "\\(\\frac{8!}{6!} = 56\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Write \\(8 \\cdot 7 \\cdot 6 \\cdot 5\\) in the factorial form.",
+            "steps": [
+              "Given: the product \\(8 \\cdot 7 \\cdot 6 \\cdot 5\\) of consecutive numbers.\nTo find: the same number written with factorials.\nMethod: a product of consecutive numbers is the top part of a factorial. Complete it to \\(8!\\) and divide by what we added.",
+              "Step 1: Complete the product down to 1\n\\[8 \\cdot 7 \\cdot 6 \\cdot 5 = \\frac{8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}{4 \\cdot 3 \\cdot 2 \\cdot 1}\\]\nWhy: multiplying and dividing by the same \\(4 \\cdot 3 \\cdot 2 \\cdot 1\\) does not change the value.",
+              "Step 2: Recognise the factorials\n\\[= \\frac{8!}{4!}\\]\nWhy: the top is \\(8!\\) and the bottom is \\(4!\\). Notice the bottom is the factorial of the number just below the last factor (5 - 1 = 4).",
+              "Check:\n\\[8 \\cdot 7 \\cdot 6 \\cdot 5 = 1680\\]\n\\[\\frac{8!}{4!} = \\frac{40320}{24} = 1680\\]"
+            ],
+            "answer": "\\(8 \\cdot 7 \\cdot 6 \\cdot 5 = \\frac{8!}{4!}\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Evaluate \\(\\frac{9!}{6!\\,3!}\\).",
+            "steps": [
+              "Given: \\(\\frac{9!}{6!\\,3!}\\).\nTo find: its value.\nMethod: cancel the larger factorial in the bottom (\\(6!\\)) against \\(9!\\), then divide by \\(3!\\). The book shows three equivalent ways.",
+              "Step 1 (first way): Stop 9! at 6!\n\\[\\frac{9!}{6!\\,3!} = \\frac{(9 \\cdot 8 \\cdot 7)\\,6!}{6!\\,(3 \\cdot 2 \\cdot 1)}\\]\n\\[= \\frac{504}{6} = 84\\]\nWhy: \\(9! = 9 \\cdot 8 \\cdot 7 \\cdot 6!\\), so the \\(6!\\) cancels at once.",
+              "Step 2 (second way): Stop 9! at 3!\n\\[\\frac{9!}{6!\\,3!} = \\frac{9 \\cdot 8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3!}{6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1 \\cdot 3!}\\]\n\\[= 84\\]\nWhy: now \\(3!\\) cancels, and \\(6 \\cdot 5 \\cdot 4\\) cancels from top and bottom, leaving \\(\\frac{9 \\cdot 8 \\cdot 7}{3 \\cdot 2 \\cdot 1} = 84\\).",
+              "Step 3 (third way): Expand everything\n\\[\\frac{9 \\cdot 8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}{6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1 \\cdot 3 \\cdot 2 \\cdot 1} = 84\\]\nWhy: the longest way, but it shows that all three ways cancel the same factors. The first way is the quickest.",
+              "Check:\n\\[9! = 362880,\\quad 6!\\,3! = 720 \\times 6 = 4320\\]\n\\[362880 \\div 4320 = 84\\]"
+            ],
+            "answer": "\\(\\frac{9!}{6!\\,3!} = 84\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Fundamental Principle of Counting: if one event can happen in \\(m\\) ways and another in \\(n\\) ways, both together can happen in \\(mn\\) ways (and \\(mnk\\) ways for three events).\n2. A tree diagram lists every outcome; multiplying counts them without listing.\n3. \\(n! = n(n-1)(n-2)\\cdots 3 \\cdot 2 \\cdot 1\\) and \\(0! = 1\\).\n4. \\(n! = n(n-1)!\\): stop a factorial where it helps you cancel.\n5. A product of consecutive numbers \\(a(a-1)\\cdots b\\) equals \\(\\frac{a!}{(b-1)!}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistakes",
+            "text": "1. Adding the options of the stages instead of multiplying: 4 materials and 3 shapes give \\(4 \\times 3 = 12\\) choices, not \\(4 + 3 = 7\\).\n2. Cancelling factorials like ordinary numbers: \\(\\frac{8!}{4!} \\ne 2!\\). Expand first: \\(\\frac{8!}{4!} = 8 \\cdot 7 \\cdot 6 \\cdot 5\\).\n3. Thinking \\(0! = 0\\). By definition \\(0! = 1\\).\n4. Writing \\((2 \\cdot 3)! = 2! \\cdot 3!\\): \\(6! = 720\\) but \\(2! \\cdot 3! = 12\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

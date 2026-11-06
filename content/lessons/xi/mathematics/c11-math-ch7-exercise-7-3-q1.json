@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-3-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-3-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 137,
+          "pdf_to": 137,
+          "note": "Exercise 7.3, Question 1: book page 132 (PDF 137); answer key book page 301 (PDF 306): i) 151,200 ii) 479,001,600 iii) 9,979,200 (agree); key also prints iv) 10810800, which matches no part of the question"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) How many arrangements of the letters of the following word, taken all together, can be made? CURRICULUM",
+            "explanation": "We arrange all the letters of a word; some letters repeat.\nPlan: count the letters, count each repeated letter, then use the formula for objects not all different.",
+            "steps": [
+              "Given: the word CURRICULUM.\nTo find: the number of arrangements of all its letters.\nMethod: \\(n\\) objects of which \\(n_1\\) are alike, \\(n_2\\) are alike, ... can be arranged in \\(\\dfrac{n!}{n_1!\\,n_2! \\cdots}\\) ways.",
+              "Count the letters\nC, U, R, R, I, C, U, L, U, M\n\\[n = 10\\]\n\\[\\text{C} = 2,\\ \\text{U} = 3,\\ \\text{R} = 2\\]\nWhy: I, L and M appear once each and need no division (1! = 1).",
+              "Apply the formula\n\\[\\dfrac{10!}{2!\\,3!\\,2!} = \\dfrac{3628800}{2 \\cdot 6 \\cdot 2}\\]\n\\[= \\dfrac{3628800}{24} = 151200\\]\nWhy: Swapping the two C's, the three U's or the two R's among themselves gives the same word, so each word was counted 2! 3! 2! = 24 times.",
+              "Check the letter count\n\\[2 + 3 + 2 + 1 + 1 + 1 = 10 \\;\\checkmark\\]\nWhy: The group sizes (C, U, R, I, L, M) must add up to the total number of letters."
+            ],
+            "final_answer": "\\(151200\\) arrangements"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) How many arrangements of the letters of the following word, taken all together, can be made? ADSORPTIVELY",
+            "explanation": "Count the letters and look for repeats. Plan: if no letter repeats, the answer is simply \\(n!\\).",
+            "steps": [
+              "Given: the word ADSORPTIVELY.\nTo find: the number of arrangements of all its letters.\nMethod: \\(n\\) objects of which \\(n_1\\) are alike, \\(n_2\\) are alike, ... can be arranged in \\(\\dfrac{n!}{n_1!\\,n_2! \\cdots}\\) ways.",
+              "Count the letters\nA, D, S, O, R, P, T, I, V, E, L, Y\n\\[n = 12\\]\nWhy: Checking letter by letter, no letter appears twice.",
+              "All letters different\n\\[12! = 479001600\\]\nWhy: With no alike letters there is nothing to divide by; the arrangements are \\({}^{12}P_{12} = 12!\\).",
+              "Check\n\\[12! = 12 \\cdot 11 \\cdot 10 \\cdot 9!\\]\n\\[= 1320 \\times 362880 = 479001600 \\;\\checkmark\\]\nWhy: \\(9! = 362880\\)."
+            ],
+            "final_answer": "\\(479001600\\) arrangements"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) How many arrangements of the letters of the following word, taken all together, can be made? PROBABILITY",
+            "explanation": "Same type as (i). Plan: count letters, find repeats, apply the formula.",
+            "steps": [
+              "Given: the word PROBABILITY.\nTo find: the number of arrangements of all its letters.\nMethod: \\(n\\) objects of which \\(n_1\\) are alike, \\(n_2\\) are alike, ... can be arranged in \\(\\dfrac{n!}{n_1!\\,n_2! \\cdots}\\) ways.",
+              "Count the letters\nP, R, O, B, A, B, I, L, I, T, Y\n\\[n = 11\\]\n\\[\\text{B} = 2,\\ \\text{I} = 2\\]\nWhy: All other letters appear once.",
+              "Apply the formula\n\\[\\dfrac{11!}{2!\\,2!} = \\dfrac{39916800}{4}\\]\n\\[= 9979200\\]\nWhy: \\(11! = 39916800\\); the two B's and the two I's can each be swapped without making a new word.",
+              "Check the letter count\n\\[2 + 2 + 7 \\times 1 = 11 \\;\\checkmark\\]\nWhy: B, I and the seven single letters P, R, O, A, L, T, Y make 11."
+            ],
+            "final_answer": "\\(9979200\\) arrangements"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints a fourth answer, iv) 10810800, but Question 1 has only three words (i)-(iii). This entry matches no part of the question and should be ignored."
+          }
+        ]
+      }
+    }
+  ]
+}
