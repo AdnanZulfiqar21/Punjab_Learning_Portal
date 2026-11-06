@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.1.5-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.1.5",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 225,
+          "pdf_to": 225,
+          "note": "Book p. 220: 12.1.5 definition of the limit of a function and why theorems are needed instead of tables. No book errors. Our examples (x^2-1)/(x-1) near 1 and |x|/x near 0, teaching notes, Key points and Common mistakes are ours."
+        }
+      ],
+      "title": "12.1.5 Limit of a Function (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH12-12.1.5",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab tak humne limit ko misaalon se mehsoos kiya. Aaj hum use ek baqaida definition (tareef) dete hain. Definition ka har lafz soch samajh kar rakha gaya hai, is liye hum har hisse ko alag alag kholenge. Pichle sabaq ki \\(x^{3}\\) wali table yaad rakhiye; yeh definition usi table wali baat ko baqaida alfaaz mein bayan karti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab kehti hai: farz karein function \\(f(x)\\) number \"\\(a\\)\" ke qareeb ek open interval mein defined hai (\\(a\\) par hona zaroori nahin). Agar jab \\(x\\), \"\\(a\\)\" ke baayein aur daayein dono taraf se \"\\(a\\)\" ki taraf jaye, \\(f(x)\\) ek khaas number \"\\(L\\)\" ki taraf jaye, to \"\\(L\\)\" ko \\(f(x)\\) ki limit kehte hain jab \\(x\\), \\(a\\) ki taraf jaye. Symbol mein ise yun likhte hain:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\lim_{x \\to a} f(x) = L",
+            "text_alt": "limit of f of x as x approaches a equals L"
+          },
+          {
+            "type": "paragraph",
+            "text": "aur parhte hain \"limit of \\(f(x)\\) as \\(x \\to a\\), is \\(L\\)\", yani \"jab \\(x\\), \\(a\\) ki taraf jaye to \\(f(x)\\) ki limit \\(L\\) hai\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Definition ke chaar hisse hain. Har ek ko check kijiye:\n1. \\(f\\), \\(a\\) ke gird ek open interval mein defined ho, jaise \\((a - h, a + h)\\) kisi \\(h > 0\\) ke liye; sirf \\(a\\) par na ho to koi baat nahin. Open interval ka matlab hai kinaare shaamil nahin.\n2. \\(x\\), \\(a\\) ki taraf jaye (baayein se bhi, daayein se bhi, kabhi \\(a\\) ke barabar nahin).\n3. \\(f(x)\\) ki values ek khaas number \\(L\\) ki taraf jaayein.\n4. Dono taraf se wahi \\(L\\) aaye.\nAlfaaz \"\\(a\\) par hona zaroori nahin\" bohat ahem hain. Kyun? Kyun ke limit point ke qareeb ka bartao hai; \\(f(a)\\) ki value is mein koi kirdar ada nahin karti. \\(f(a)\\), \\(L\\) se mukhtalif ho sakti hai, ya maujood hi na ho."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "\"\\(a\\) ke qareeb open interval\" ko ek misaal se samjhiye. Agar \\(a = 2\\) aur \\(h = 0.5\\) ho to interval \\((1.5, 2.5)\\) hai: \\(1.5\\) aur \\(2.5\\) ke darmiyan saare numbers, kinaaron ke baghair. Definition sirf itna maangti hai ke is jaisi kisi patti mein, \\(2\\) ke ird gird, function ki value banti ho. \\(2\\) par khud value ho ya na ho, farq nahin parta.\nKyun yeh sharat zaroori hai? Agar function \\(a\\) ke qareeb defined hi na ho to \\(x\\) ko \\(a\\) ki taraf le jaate waqt \\(f(x)\\) ki values hi nahin milengi, aur jab values hi na hon to un ka kisi number ki taraf jaana bhi bemaani hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "\\(g(x) =\\frac{x^{2} - 1}{x - 1}\\) lijiye. \\(x = 1\\) par yeh \\(\\frac{0}{0}\\) deta hai, yani defined nahin. Lekin \\(1\\) ke qareeb har jagah defined hai. \\(x \\ne 1\\) ke liye:\n\\[g(x) = \\frac{(x - 1)(x + 1)}{x - 1} = x + 1\\]\nKyun: \\(x^{2} - 1\\) do squares ka farq hai, \\((x - 1)(x + 1)\\). Aur \\(x \\ne 1\\) hai, to \\(x - 1 \\ne 0\\), is liye cancel karna jaayez hai.\nTo \\(1\\) ke qareeb values \\(2\\) ki taraf jaati hain (neeche table dekhiye). Is liye \\(\\lim_{x \\to 1} g(x) = 2\\), halan ke \\(g(1)\\) maujood hi nahin. Yahi \"\\(a\\) par hona zaroori nahin\" ka matlab hai."
+          },
+          {
+            "type": "table",
+            "header": [
+              "\\(x\\)",
+              "\\(g(x) = \\frac{x^{2} - 1}{x - 1}\\)"
+            ],
+            "rows": [
+              [
+                "0.9",
+                "1.9"
+              ],
+              [
+                "0.99",
+                "1.99"
+              ],
+              [
+                "0.999",
+                "1.999"
+              ],
+              [
+                "1",
+                "defined nahin"
+              ],
+              [
+                "1.001",
+                "2.001"
+              ],
+              [
+                "1.01",
+                "2.01"
+              ],
+              [
+                "1.1",
+                "2.1"
+              ]
+            ],
+            "caption": "Hamari table (kitab mein nahin): 1 ke dono taraf g(x) ki values 2 ki taraf jaati hain, jab ke g(1) defined nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Limit kab maujood nahin hoti? Jab dono taraf ka jawab ek na ho. \\(h(x) = \\frac{|x|}{x}\\) ko \\(0\\) ke qareeb dekhiye:\n\\(x > 0\\) ho to \\(|x| = x\\), is liye \\(h(x) = \\frac{x}{x} = 1\\);\n\\(x < 0\\) ho to \\(|x| = -x\\), is liye \\(h(x) = \\frac{-x}{x} = -1\\).\nDaayein se values \\(1\\) ki taraf, baayein se \\(-1\\) ki taraf. Koi ek number \\(L\\) nahin, is liye \\(\\lim_{x \\to 0} \\frac{|x|}{x}\\) maujood nahin. Aisi ek-tarfa (one-sided) limits aap 12.3 mein parhenge."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab aage kehti hai: kisi function ki limit numerical tareeqe (table) se nikalna na munasib hai na qabil-e-amal (practicable). Humein limit kisi mechanical (seedhe qaidon wale) tareeqe se nikalni aani chahiye. Limits ke theorems yahi kaam karenge. In ke proofs agli jamaaton mein parhaye jayenge."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Table kaafi kyun nahin? Table sirf chand values dikhati hai; yeh saabit nahin karti ke \\(a\\) ke qareeb har \\(x\\) par kya hota hai. Is mein waqt bhi bohat lagta hai, aur rounding ya chhapai ki ghalti dhoka de sakti hai, jaisa 12.1.4 ki table mein \\(1.999\\) wali ghalti ne dikhaya. 12.1.6 ke theorems se hum chhoti si algebra se limit nikal lenge."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Function \\(f(x) = 2x + 1\\) ke liye batayein: \\(\\lim_{x \\to 3} f(x)\\) kya hai? Kya yahan \\(f(3)\\) aur limit barabar hain?\nJawab: \\(x\\) jab \\(3\\) ke qareeb hota hai (\\(2.99\\), \\(3.01\\)) to \\(2x + 1\\) taqreeban \\(6.98\\), \\(7.02\\) hota hai, yani \\(7\\) ke qareeb. Limit \\(7\\) hai, aur \\(f(3) = 7\\) bhi hai. Seedhi lakeer (straight line) mein koi chhalang nahin hoti, is liye dono barabar hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Definition is tarteeb se yaad kijiye: (1) \\(f\\), \\(a\\) ke qareeb defined, \\(a\\) par zaroori nahin; (2) \\(x \\to a\\) dono taraf se; (3) \\(f(x) \\to L\\); (4) tab \\(\\lim_{x \\to a} f(x) = L\\). Symbol likhte waqt \"lim\" ke neeche \\(x \\to a\\) zaroor likhiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(\\lim_{x \\to a} f(x) = L\\) ka matlab: jab \\(x\\) dono taraf se \\(a\\) ki taraf jaye to \\(f(x)\\), \\(L\\) ki taraf jaye.\n2. \\(f\\) ka \\(a\\) par defined hona zaroori nahin; \\(f(a)\\) limit ka faisla nahin karti.\n3. Baayein aur daayein se alag number aayein to limit maujood nahin.\n4. Table sirf andaaza deti hai; limit nikalne ke liye 12.1.6 ke theorems istemal hote hain."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Kehna \"limit maujood nahin kyun ke \\(f(a)\\) defined nahin\". \\(f(a)\\) na ho tab bhi limit ho sakti hai, jaise \\(\\lim_{x \\to 1} \\frac{x^{2} - 1}{x - 1} = 2\\).\n2. \"lim\" ke neeche \\(x \\to a\\) na likhna. Limit is par munhasir hai ke kis point ki taraf ja rahe hain; \\(x \\to 1\\) aur \\(x \\to 2\\) ke jawab alag hote hain.\n3. Sirf ek taraf check karna. Dono taraf ka jawab ek hona chahiye."
+          }
+        ]
+      }
+    }
+  ]
+}

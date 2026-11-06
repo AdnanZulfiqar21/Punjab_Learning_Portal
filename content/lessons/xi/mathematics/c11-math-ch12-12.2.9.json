@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.2.9",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.2.9",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 233,
+          "pdf_to": 234,
+          "note": "Book p. 228-229: 12.2.9 proof with the unit-circle sector figure, areas (i)-(iii), Sandwich step, Note (-pi/2 < theta < 0), Examples 8-9"
+        }
+      ],
+      "title": "12.2.9 If theta is measured in radian, then Lim_{theta->0} sin(theta)/theta = 1.",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This is the most important limit of trigonometry. Substituting \\(\\theta = 0\\) gives \\(\\frac{0}{0}\\), and no algebra can cancel the \\(\\theta\\), so the book proves it with a figure and the Sandwich Theorem (12.2.8).\n\"Measured in radian\" matters: in radians the arc of a unit circle equals the angle, which is why \\(\\sin\\theta\\) and \\(\\theta\\) become almost equal for small angles. In degrees the limit would be \\(\\frac{\\pi}{180}\\), not 1."
+          },
+          {
+            "type": "table",
+            "header": [
+              "\\(\\theta\\) (radian)",
+              "\\(\\dfrac{\\sin\\theta}{\\theta}\\)"
+            ],
+            "rows": [
+              [
+                "0.5",
+                "0.958851"
+              ],
+              [
+                "0.1",
+                "0.998334"
+              ],
+              [
+                "0.01",
+                "0.999983"
+              ]
+            ],
+            "caption": "Our table (not in the book): the ratio approaches 1 as the angle shrinks"
+          },
+          {
+            "type": "paragraph",
+            "text": "Proof: To evaluate this limit, we apply a new technique. Take \\(\\theta\\) be positive acute central angle of a circle with radius \\(r = 1\\). As shown in the figure, \\(OAB\\) represents a sector of a circle. Join \\(A\\) and \\(B\\) and extend \\(OB\\) to \\(D\\) such that \\(OA \\perp AD\\). Also draw \\(BC \\perp OC\\) on \\(OA\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch12-fig-sector-sin-theta",
+            "alt": "Unit circle sector OAB with centre O, radius OA = OB = 1 and angle theta at O. B is joined to A, BC is perpendicular to OA with foot C, and OB is extended to D so that AD is perpendicular to OA. BC has length sin theta and AD has length tan theta.",
+            "caption": "Figure: sector OAB of the unit circle with triangles OAB and OAD (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Given \\(|OA| = |OB| = 1\\) (radii of unit circle).\nIn the right \\(\\Delta OCB\\),\n\\[\\sin\\theta = \\dfrac{|BC|}{|OB|} = |BC|\\]\nIn the right \\(\\Delta OAD\\),\n\\[\\tan\\theta = \\dfrac{|AD|}{|OA|} = |AD|\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why these two lengths? In a unit circle the hypotenuse \\(OB\\) and the side \\(OA\\) are both 1, so the opposite sides are exactly \\(\\sin\\theta = |BC|\\) and \\(\\tan\\theta = |AD|\\). The figure turns the three numbers \\(\\sin\\theta\\), \\(\\theta\\) and \\(\\tan\\theta\\) into three areas."
+          },
+          {
+            "type": "paragraph",
+            "text": "(i) Area of \\(\\Delta OAB\\)\n\\[= \\dfrac{1}{2}|OA||BC| = \\dfrac{1}{2}(1)(\\sin\\theta)\\]\n\\[= \\dfrac{1}{2}\\sin\\theta\\]\n(ii) Area of sector \\(OAB\\)\n\\[= \\dfrac{1}{2}r^{2}\\theta = \\dfrac{1}{2}(1)(\\theta) = \\dfrac{1}{2}\\theta\\]\nand\n(iii) Area of \\(\\Delta OAD\\)\n\\[= \\dfrac{1}{2}|OA||AD| = \\dfrac{1}{2}(1)(\\tan\\theta)\\]\n\\[= \\dfrac{1}{2}\\tan\\theta\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Area (ii) uses the sector formula \\(\\frac{1}{2}r^{2}\\theta\\), which is valid only when \\(\\theta\\) is in radians. Triangle \\(OAB\\) has base \\(OA = 1\\) and height \\(BC = \\sin\\theta\\); triangle \\(OAD\\) has base \\(OA = 1\\) and height \\(AD = \\tan\\theta\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "From the figure we see that\nArea of \\(\\Delta OAB\\) < Area of sector \\(OAB\\) < Area of \\(\\Delta OAD\\)\n\\[\\Rightarrow \\dfrac{1}{2}\\sin\\theta < \\dfrac{\\theta}{2} < \\dfrac{1}{2}\\tan\\theta\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why this order? Triangle \\(OAB\\) lies inside the sector (the chord \\(AB\\) is inside the arc), and the sector lies inside triangle \\(OAD\\). A region inside another has a smaller area."
+          },
+          {
+            "type": "paragraph",
+            "text": "As \\(\\sin\\theta\\) is positive, so on division by \\(\\frac{1}{2}\\sin\\theta\\), we get\n\\[1 < \\dfrac{\\theta}{\\sin\\theta} < \\dfrac{1}{\\cos\\theta} \\quad \\left(0 < \\theta < \\dfrac{n}{2}\\right)\\]",
+            "book_errors": [
+              "\\[1 < \\dfrac{\\theta}{\\sin\\theta} < \\dfrac{1}{\\cos\\theta} \\quad \\left(0 < \\theta < \\dfrac{n}{2}\\right)\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The range of \\(\\theta\\) is printed as \\(0 < \\theta < \\frac{n}{2}\\). It should be\n\\[0 < \\theta < \\dfrac{\\pi}{2}\\]\n(\\(\\theta\\) is a positive acute angle)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Dividing each part by the positive number \\(\\frac{1}{2}\\sin\\theta\\) keeps the signs \\(<\\):\n\\[\\dfrac{\\frac{1}{2}\\tan\\theta}{\\frac{1}{2}\\sin\\theta} = \\dfrac{\\sin\\theta/\\cos\\theta}{\\sin\\theta} = \\dfrac{1}{\\cos\\theta}\\]\nThen taking reciprocals of positive numbers reverses each sign, which gives the next line."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\text{i.e., } 1 > \\dfrac{\\sin\\theta}{\\theta} > \\cos\\theta\\]\n\\[\\text{or } \\cos\\theta < \\dfrac{\\sin\\theta}{\\theta} < 1\\]\nWhen \\(\\theta \\to 0\\), \\(\\cos\\theta \\to 1\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Since \\(\\frac{\\sin\\theta}{\\theta}\\) is sandwiched between 1 and a quantity approaching 1 itself. So, by the sandwich theorem, it must also approach 1, that is,\n\\[\\lim_{\\theta \\to 0}\\dfrac{\\sin\\theta}{\\theta} = 1\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "The same result holds for \\(-\\frac{\\pi}{2} < \\theta < 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does the Note hold? \\(\\frac{\\sin(-\\theta)}{-\\theta} = \\frac{-\\sin\\theta}{-\\theta} = \\frac{\\sin\\theta}{\\theta}\\), so the ratio has the same values for negative angles. Hence both one-sided limits are 1, and the limit is 1."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Evaluate \\(\\lim_{\\theta \\to 0}\\frac{\\sin 7\\theta}{\\theta}\\)",
+            "steps": [
+              "Given: \\(\\frac{\\sin 7\\theta}{\\theta}\\) as \\(\\theta \\to 0\\).\nTo find: the limit.\nMethod: substituting \\(\\theta = 0\\) gives \\(\\frac{0}{0}\\). The expression looks like \\(\\frac{\\sin x}{x}\\), but the angle is \\(7\\theta\\) while the denominator is \\(\\theta\\). Change the variable so that the angle and the denominator match, then use \\(\\lim_{x \\to 0}\\frac{\\sin x}{x} = 1\\).",
+              "Step 1: Change the variable\n\\[\\text{Let } x = 7\\theta, \\text{ so that } \\theta = \\dfrac{x}{7}\\]\nWhen \\(\\theta \\to 0\\), we have \\(x \\to 0\\).\nWhy: the standard result needs the same quantity inside the sine and in the denominator. Calling the angle \\(x\\) makes this possible, and since \\(x = 7\\theta\\), \\(x\\) also goes to 0.",
+              "Step 2: Rewrite the limit\n\\[\\lim_{\\theta \\to 0}\\dfrac{\\sin 7\\theta}{\\theta} = \\lim_{x \\to 0}\\dfrac{\\sin x}{\\frac{x}{7}}\\]\n\\[= 7\\lim_{x \\to 0}\\dfrac{\\sin x}{x}\\]\nWhy: dividing by \\(\\frac{x}{7}\\) is the same as multiplying by \\(\\frac{7}{x}\\); the constant 7 comes outside the limit (Theorem on limits: limit of a constant times a function).",
+              "Step 3: Use the standard limit\n\\[= (7)(1) = 7\\]\nWhy: \\(\\lim_{x \\to 0}\\frac{\\sin x}{x} = 1\\) (12.2.9).",
+              "Check:\nTake a small angle \\(\\theta = 0.01\\) radian: \\(\\frac{\\sin 0.07}{0.01} = \\frac{0.069943}{0.01} \\approx 6.994\\), very close to 7."
+            ],
+            "answer": "\\(\\lim_{\\theta \\to 0}\\frac{\\sin 7\\theta}{\\theta} = 7\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "Evaluate \\(\\lim_{\\theta \\to 0}\\frac{1-\\cos\\theta}{\\theta}\\)",
+            "steps": [
+              "Given: \\(\\frac{1-\\cos\\theta}{\\theta}\\) as \\(\\theta \\to 0\\).\nTo find: the limit.\nMethod: substituting gives \\(\\frac{1-1}{0} = \\frac{0}{0}\\). Multiply top and bottom by the conjugate \\(1 + \\cos\\theta\\) to turn \\(1 - \\cos\\theta\\) into \\(\\sin^{2}\\theta\\), so that \\(\\frac{\\sin\\theta}{\\theta}\\) appears.",
+              "Step 1: Multiply by the conjugate\n\\[\\dfrac{1-\\cos\\theta}{\\theta} = \\dfrac{1-\\cos\\theta}{\\theta}\\cdot\\dfrac{1+\\cos\\theta}{1+\\cos\\theta}\\]\n\\[= \\dfrac{1-\\cos^{2}\\theta}{\\theta(1+\\cos\\theta)}\\]\nWhy: \\((1-\\cos\\theta)(1+\\cos\\theta) = 1 - \\cos^{2}\\theta\\) (difference of squares). Multiplying by \\(\\frac{1+\\cos\\theta}{1+\\cos\\theta} = 1\\) does not change the value.",
+              "Step 2: Use \\(\\sin^{2}\\theta + \\cos^{2}\\theta = 1\\)\n\\[= \\dfrac{\\sin^{2}\\theta}{\\theta(1+\\cos\\theta)}\\]\n\\[= \\sin\\theta\\left(\\dfrac{\\sin\\theta}{\\theta}\\right)\\left(\\dfrac{1}{1+\\cos\\theta}\\right)\\]\nWhy: \\(1 - \\cos^{2}\\theta = \\sin^{2}\\theta\\). Splitting \\(\\sin^{2}\\theta = \\sin\\theta \\cdot \\sin\\theta\\) lets one \\(\\sin\\theta\\) pair with \\(\\theta\\) to make the standard ratio.",
+              "Step 3: Take the limit of each factor\n\\[\\lim_{\\theta \\to 0}\\left(\\dfrac{1-\\cos\\theta}{\\theta}\\right)\\]\n\\[= \\lim_{\\theta \\to 0}\\sin\\theta\\cdot\\lim_{\\theta \\to 0}\\dfrac{\\sin\\theta}{\\theta}\\cdot\\lim_{\\theta \\to 0}\\dfrac{1}{1+\\cos\\theta}\\]\n\\[= (0)(1)\\left(\\dfrac{1}{1+1}\\right) = 0\\]\nWhy: the limit of a product is the product of the limits (all three exist). \\(\\sin 0 = 0\\), \\(\\frac{\\sin\\theta}{\\theta} \\to 1\\), and \\(\\cos 0 = 1\\), so the last factor is \\(\\frac{1}{2}\\).",
+              "Check:\nTake \\(\\theta = 0.01\\): \\(\\frac{1 - \\cos 0.01}{0.01} = \\frac{0.0000500}{0.01} = 0.005\\), which is close to 0 and gets smaller as \\(\\theta\\) gets smaller."
+            ],
+            "answer": "\\(\\lim_{\\theta \\to 0}\\frac{1-\\cos\\theta}{\\theta} = 0\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\lim_{\\theta \\to 0}\\frac{\\sin\\theta}{\\theta} = 1\\) (\\(\\theta\\) in radians).\n2. Proof: area of \\(\\Delta OAB\\) < area of sector < area of \\(\\Delta OAD\\), i.e. \\(\\sin\\theta < \\theta < \\tan\\theta\\), then the Sandwich Theorem.\n3. General form: \\(\\lim_{\\theta \\to 0}\\frac{\\sin k\\theta}{\\theta} = k\\) (make the denominator match the angle).\n4. For \\(1 - \\cos\\theta\\), multiply by \\(1 + \\cos\\theta\\) to get \\(\\sin^{2}\\theta\\).\n5. \\(\\lim_{\\theta \\to 0}\\frac{1-\\cos\\theta}{\\theta} = 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Cancelling: \\(\\frac{\\sin 7\\theta}{\\theta} = \\sin 7\\). \"sin\" is not a number multiplying \\(\\theta\\); it cannot be cancelled.\n2. Writing \\(\\lim_{\\theta \\to 0}\\frac{\\sin 7\\theta}{\\theta} = 1\\). The angle and the denominator must be the same before the result gives 1.\n3. Using degrees: the result \\(\\frac{\\sin\\theta}{\\theta} \\to 1\\) is true only for radians."
+          }
+        ]
+      }
+    }
+  ]
+}

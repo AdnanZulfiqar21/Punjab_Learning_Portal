@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-3-Q6-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-3-q6",
+      "title": "Question 6 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 241,
+          "pdf_to": 241,
+          "note": "Exercise 12.3, Question 6: continuity of a piecewise cost function at x = 100 (book p.236). Answer key PDF 310: yes."
+        }
+      ],
+      "variant_of": "C11-MATH-CH12-EXERCISE-12-3-Q6",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6 The factory's cost function is given as: \\[C(x) = \\begin{cases} 10x + 500, & x \\le 100 \\\\ 12x + 300, & x > 100 \\end{cases}\\]Is the cost function continuous at \\(x = 100\\)?",
+            "explanation": "Yeh factory ki cost ka sawal hai jo do formulas mein di gayi hai: 100 units tak ek formula, 100 se zyada par doosra.\nHumein dekhna hai ke \\(x = 100\\) par dono formulas ek hi cost dete hain ya cost achanak uchhal jati hai.\nPlan: \\(C(100)\\), LHL aur RHL nikalein aur teeno shartein check karein.",
+            "steps": [
+              "Diya gaya hai: \\(x \\le 100\\) ke liye \\(C(x) = 10x + 500\\), aur \\(x > 100\\) ke liye \\(C(x) = 12x + 300\\).\nHumein find karna hai: kya \\(C\\) point \\(x = 100\\) par continuous hai?\nTareeqa: \\(C\\) point \\(x = c\\) par continuous tab hai jab (i) \\(C(c)\\) defined ho, (ii) \\(\\lim_{x \\to c} C(x)\\) exist kare yani LHL = RHL, (iii) yeh limit \\(C(c)\\) ke barabar ho. Business ki zubaan mein: \\(c\\) par cost achanak uchhalti (jump) nahi.",
+              "Shart (i): \\(C(100)\\) nikalein\n\\[C(100) = 10(100) + 500\\]\n\\[= 1000 + 500 = 1500\\]\nKyun: Pehle formula ke saath \\(x \\le 100\\) hai, is liye 100 units pehle formula mein aate hain.",
+              "Left hand limit nikalein\n\\[\\lim_{x \\to 100^-} C(x) = \\lim_{x \\to 100^-} (10x + 500)\\]\n\\[= 1500\\]\nKyun: 100 se kam units (99, 99.9) par pehla formula chalta hai.",
+              "Right hand limit nikalein\n\\[\\lim_{x \\to 100^+} C(x) = \\lim_{x \\to 100^+} (12x + 300)\\]\n\\[= 1200 + 300 = 1500\\]\nKyun: 100 se zyada units par doosra formula chalta hai. \\(12 \\times 100 = 1200\\), phir 300 jama.",
+              "Shart (ii) aur (iii)\n\\[\\text{LHL} = \\text{RHL} = 1500 = C(100)\\]\nKyun: Teeno shartein poori hain, is liye \\(C\\) point \\(x = 100\\) par continuous hai. Matlab: 100 units ki hadd paar karte waqt cost mein koi achanak chhalaang nahi aati; sirf barhne ki raftaar (10 se 12 per unit) badalti hai.\nDhyan dein: Formula badal jane ka matlab discontinuity nahi. Faisla hamesha values milaa kar karein.",
+              "Tasdeeq\n\\[C(99) = 990 + 500 = 1490\\]\n\\[C(101) = 1212 + 300 = 1512\\]\nKyun: 100 se zara kam aur zara zyada units par cost 1500 ke qareeb hi hai. Koi bara jump nahi."
+            ],
+            "final_answer": "Haan. \\(C\\) point \\(x = 100\\) par continuous hai (LHL \\(=\\) RHL \\(= C(100) = 1500\\))"
+          }
+        ]
+      }
+    }
+  ]
+}

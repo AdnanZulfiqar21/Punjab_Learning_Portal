@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.2.4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.2.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 229,
+          "pdf_to": 230,
+          "note": "Book p. 224-225: 12.2.4 Limit of a Sequence: sequence, limit, convergence (epsilon-N definition), diverge; Example 2, Example 3 (solution ends p. 225); 'Divergent Sequences' with two bullets (p. 225)."
+        }
+      ],
+      "title": "12.2.4 Limit of a Sequence",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "A sequence is a list of numbers arranged in a specific order, typically indexed by natural numbers \\(1, 2, 3, \\dots\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(\\{a_{n}\\}\\) be a sequence, where each term of the sequence is denoted by \\(a_{n}\\) and \\(n\\) is a positive integer representing the position in the sequence. The limit of a sequence \\(\\{a_{n}\\}\\) is the value that the terms of the sequence approach as \\(n \\to \\infty\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example of our own: \\(a_{n} = \\frac{1}{n}\\) gives \\(a_{1} = 1\\), \\(a_{2} = \\frac{1}{2}\\), \\(a_{3} = \\frac{1}{3}\\), ... Here \\(n\\) is the position (1st, 2nd, 3rd term) and \\(a_{n}\\) is the term at that position.\nA sequence is a function whose inputs are only the positive integers. So \"\\(n \\to \\infty\\)\" means \\(n = 1, 2, 3, \\dots\\) going on for ever, and the limit of a sequence is a limit at infinity, as in 12.2.3."
+          },
+          {
+            "type": "paragraph",
+            "text": "We say that a sequence \\(\\{a_{n}\\}\\) converges to a limit \\(L\\) if, for any arbitrarily small positive number \\(\\varepsilon\\) (epsilon), there exists a positive integer \\(N\\) such that for all \\(n > N\\) the difference between \\(a_{n}\\) and \\(L\\) is smaller than \\(\\varepsilon\\). Mathematically, this is written as:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(\\lim_{n\\to \\infty} a_{n} = L\\) if \\(\\forall \\in > 0 m \\exists N \\in \\mathbb{N}\\) such that \\(|a_{n} - L| < \\in\\) for all \\(n > N\\)",
+            "book_errors": [
+              "\\(\\forall \\in > 0 m \\exists N \\in \\mathbb{N}\\)",
+              "\\(|a_{n} - L| < \\in\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the symbol \\(\\in\\) (\"belongs to\") where it means the Greek letter \\(\\varepsilon\\) (epsilon), and a stray \"m\" after \"\\(> 0\\)\". The definition should read:\n\\[\\lim_{n\\to \\infty} a_{n} = L \\ \\text{ if } \\ \\forall\\, \\varepsilon > 0\\]\n\\[\\exists\\, N \\in \\mathbb{N} \\ \\text{ such that}\\]\n\\[|a_{n} - L| < \\varepsilon \\ \\text{ for all } n > N\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read the definition as a challenge game. Someone names a tolerance \\(\\varepsilon\\), as small as they like (say 0.01). We must answer with a position \\(N\\) such that every term after the \\(N\\)-th lies within \\(\\varepsilon\\) of \\(L\\). If we can always answer, whatever \\(\\varepsilon\\) is named, then \\(L\\) is the limit.\nThe symbols: \\(\\forall\\) \"for every\", \\(\\exists\\) \"there exists\", \\(\\mathbb{N}\\) the natural numbers, \\(|a_{n} - L|\\) the distance between \\(a_{n}\\) and \\(L\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "If such an \\(L\\) exists, the sequence is said to converge to \\(L\\). If no such \\(L\\) exists, the sequence is said to diverge."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Consider the sequence \\(\\left\\{a_{n} = \\frac{1}{n}\\right\\}\\): As \\(n \\to \\infty\\), \\(\\frac{1}{n} \\to 0\\)",
+            "steps": [
+              "Given: the sequence \\(a_{n} = \\frac{1}{n}\\): \\(1, \\frac{1}{2}, \\frac{1}{3}, \\frac{1}{4}, \\dots\\)\nTo prove: the sequence converges to \\(L = 0\\), i.e. \\(\\lim_{n\\to\\infty}\\frac{1}{n} = 0\\).\nMethod: use the definition of convergence. For every \\(\\varepsilon > 0\\) we must find a position \\(N\\) after which every term is within \\(\\varepsilon\\) of 0.",
+              "Step 1: Write what must be shown\n\\[|a_{n} - 0| = \\left|\\dfrac{1}{n}\\right| = \\dfrac{1}{n}\\]\nWe need \\(\\frac{1}{n} < \\varepsilon\\) for all \\(n > N\\).\nWhy: \\(n\\) is a positive integer, so \\(\\frac{1}{n} > 0\\) and the absolute value bars can be dropped.",
+              "Step 2: Choose \\(N\\)\nThe book writes: \"For any \\(\\in > 0\\), we can choose \\(N = \\frac{1}{n}\\), for \\(n > N\\), \\(|a_{n} - 0| = \\frac{1}{n} \\in\\)\".\nThe correct choice is a positive integer \\(N\\) with\n\\[N \\ge \\dfrac{1}{\\varepsilon}\\]\nWhy: \\(N\\) must depend only on \\(\\varepsilon\\), not on \\(n\\). Solving \\(\\frac{1}{n} < \\varepsilon\\) gives \\(n > \\frac{1}{\\varepsilon}\\), so any whole number \\(N \\ge \\frac{1}{\\varepsilon}\\) works.",
+              "Step 3: Show every term after position \\(N\\) is close enough\nFor \\(n > N\\):\n\\[|a_{n} - 0| = \\dfrac{1}{n} < \\dfrac{1}{N} \\le \\varepsilon\\]\nWhy: \\(n > N\\) makes \\(\\frac{1}{n} < \\frac{1}{N}\\) (a bigger denominator gives a smaller fraction), and \\(N \\ge \\frac{1}{\\varepsilon}\\) gives \\(\\frac{1}{N} \\le \\varepsilon\\).",
+              "Step 4: Conclude\nSo the sequence converges to 0. Thus,\n\\[\\lim_{n\\to\\infty}\\dfrac{1}{n} = 0\\]\nWhy: Steps 2-3 work for every \\(\\varepsilon > 0\\), which is exactly the definition.",
+              "Check:\nTake \\(\\varepsilon = 0.01\\): \\(N = 100\\). For \\(n = 101\\), \\(\\frac{1}{101} \\approx 0.0099 < 0.01\\), and later terms are even smaller."
+            ],
+            "answer": "The sequence \\(\\left\\{\\frac{1}{n}\\right\\}\\) converges to 0: \\(\\lim_{n\\to\\infty}\\frac{1}{n} = 0\\).",
+            "book_errors": [
+              "\\(N = \\frac{1}{n}\\)",
+              "\\(|a_{n} - 0| = \\frac{1}{n} \\in\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book's solution prints \"choose \\(N = \\frac{1}{n}\\)\" and \"\\(|a_{n} - 0| = \\frac{1}{n} \\in\\)\". \\(N\\) must not depend on \\(n\\): the correct choice is a positive integer \\(N \\ge \\frac{1}{\\varepsilon}\\). The second expression has lost its \"\\(<\\)\" sign and uses \\(\\in\\) for \\(\\varepsilon\\); it should read \\(|a_{n} - 0| = \\frac{1}{n} < \\varepsilon\\). The conclusion \\(\\lim_{n\\to\\infty}\\frac{1}{n} = 0\\) is correct."
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Find the limit of the sequence \\(a_{n} = \\frac{2n+3}{n+1}\\).",
+            "steps": [
+              "Given: \\(a_{n} = \\frac{2n+3}{n+1}\\).\nTo find: \\(\\lim_{n\\to\\infty} a_{n}\\).\nMethod: as \\(n \\to \\infty\\) both \\(2n+3\\) and \\(n+1\\) grow without bound (\\(\\frac{\\infty}{\\infty}\\) type). Take \\(n\\), the highest power in the denominator, common from the numerator and the denominator and cancel it; then use \\(\\frac{1}{n} \\to 0\\) (12.2.3).",
+              "Step 1: Take \\(n\\) common and simplify\nThe book writes \\(a_{n} = \\frac{2n+3}{n+1} = \\dfrac{n\\left(2+\\frac{2}{n}\\right)}{n\\left(1+\\frac{1}{n}\\right)}\\); the correct factorization is\n\\[a_{n} = \\dfrac{2n+3}{n+1} = \\dfrac{n\\left(2+\\frac{3}{n}\\right)}{n\\left(1+\\frac{1}{n}\\right)}\\]\n\\[= \\dfrac{2+\\frac{3}{n}}{1+\\frac{1}{n}}\\]\nWhy: \\(n \\cdot \\frac{3}{n} = 3\\), so \\(2n + 3 = n\\left(2 + \\frac{3}{n}\\right)\\); \\(n \\ne 0\\) cancels.",
+              "Step 2: Let \\(n \\to \\infty\\)\nAs \\(n \\to \\infty\\), \\(\\frac{3}{n} \\to 0\\) and \\(\\frac{1}{n} \\to 0\\), so we are left with:\n\\[\\lim_{n\\to\\infty} a_{n} = \\dfrac{2+0}{1+0} = 2\\]\nWhy: a fixed number over a number growing without bound tends to 0 (12.2.3).",
+              "Step 3: Conclusion\n\\[\\lim_{n\\to\\infty}\\dfrac{2n+3}{n+1} = 2\\]\nWhy: the terms settle down near 2, so the sequence converges to 2.",
+              "Check:\n\\(a_{100} = \\frac{203}{101} \\approx 2.0099\\) and \\(a_{1000} = \\frac{2003}{1001} \\approx 2.0010\\): the terms come closer and closer to 2."
+            ],
+            "answer": "\\(\\lim_{n\\to\\infty}\\frac{2n+3}{n+1} = 2\\)",
+            "book_errors": [
+              "\\(a_{n} = \\frac{2n+3}{n+1} = \\dfrac{n\\left(2+\\frac{2}{n}\\right)}{n\\left(1+\\frac{1}{n}\\right)}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the solution the book prints the numerator as \\(n\\left(2+\\frac{2}{n}\\right)\\), which equals \\(2n + 2\\), not \\(2n + 3\\). It should be \\(n\\left(2+\\frac{3}{n}\\right)\\), as the book's next line (\"\\(\\frac{3}{n} \\to 0\\)\") also shows. The answer 2 is correct."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Divergent Sequences"
+          },
+          {
+            "type": "paragraph",
+            "text": "A sequence is divergent if it does not approach a finite value. Divergence can occur in the following ways:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "The sequence may increase or decrease without bound (e.g., \\(a_{n} = n^{2}\\) diverges to infinity).",
+              "The sequence may oscillate between different values and not settle near any one value (e.g., \\(a_{n} = (-1)^{n}\\) oscillates between \\(-1\\) and 1, so it does not converge)."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Write out a few terms to see it:\n\\(a_{n} = n^{2}\\): \\(1, 4, 9, 16, 25, \\dots\\) The terms grow without bound and never settle, so there is no finite limit.\n\\(a_{n} = (-1)^{n}\\): \\(-1, 1, -1, 1, \\dots\\) The terms keep jumping between two values. For \\(\\varepsilon = \\frac{1}{2}\\), no number \\(L\\) has all later terms within \\(\\frac{1}{2}\\) of it, because \\(-1\\) and 1 are 2 apart."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "For a sequence given by a fraction, such as \\(\\frac{2n+3}{n+1}\\), use the method of 12.2.5: divide (or take common) the highest power of \\(n\\) in the denominator, then use \\(\\frac{a}{n^{p}} \\to 0\\). Use the \\(\\varepsilon\\)-\\(N\\) definition only when the question asks you to prove convergence from the definition."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A sequence \\(\\{a_{n}\\}\\) is a function on the positive integers; \\(a_{n}\\) is the \\(n\\)-th term.\n2. \\(\\{a_{n}\\}\\) converges to \\(L\\) if for every \\(\\varepsilon > 0\\) there is \\(N\\) with \\(|a_{n} - L| < \\varepsilon\\) for all \\(n > N\\).\n3. \\(N\\) depends on \\(\\varepsilon\\), never on \\(n\\).\n4. A sequence diverges if it grows without bound or oscillates without settling."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Choosing \\(N\\) in terms of \\(n\\) (as the book's Example 2 prints). \\(N\\) is a fixed position found from \\(\\varepsilon\\).\n2. Thinking a sequence converges because its terms stay bounded: \\((-1)^{n}\\) stays between \\(-1\\) and 1 but diverges.\n3. Taking the wrong number out as common: always check by multiplying back, e.g. \\(n\\left(2 + \\frac{3}{n}\\right) = 2n + 3\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

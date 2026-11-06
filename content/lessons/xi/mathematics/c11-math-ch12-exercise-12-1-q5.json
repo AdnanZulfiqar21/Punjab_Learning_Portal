@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-1-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-1-q5",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 235,
+          "pdf_to": 235,
+          "note": "Exercise 12.1, Question 5 (book page 230): eleven limits in terms of e, parts (i)-(xi). (x) denominator printed e^(1/x) - 1 (limit 1); key -1 fits e^(1/x) + 1 as in (xi). Other key answers agree. Solution book PDF 1079-1087."
+        }
+      ],
+      "title": "Question 5",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(i)",
+            "prompt": "5 (i) Express each limit in terms of \\(e\\). \\(\\lim\\limits_{n \\to -\\infty} \\left(1 + \\frac{1}{n}\\right)^{2n}\\).",
+            "explanation": "A \\(1^{\\infty}\\) form: the inside tends to \\(1\\), the power \\(2n\\) becomes huge (here \\(n \\to -\\infty\\)).\nThe book's Note (12.2.6) says \\(\\left(1 + \\frac{1}{n}\\right)^n \\to e\\) also as \\(n \\to -\\infty\\).\nPlan: write the power \\(2n\\) as \\(n \\times 2\\) and take the limit.",
+            "steps": [
+              "Given: \\(\\left(1 + \\dfrac{1}{n}\\right)^{2n}\\), \\(n \\to -\\infty\\).\nTo find: the limit in terms of \\(e\\).\nMethod: Standard limits (12.2.6): \\(\\lim\\limits_{n \\to \\pm\\infty} \\left(1 + \\dfrac{1}{n}\\right)^n = e\\) and \\(\\lim\\limits_{x \\to 0} (1 + x)^{\\frac{1}{x}} = e\\). The quantity added to \\(1\\) and the power must be exact reciprocals; any extra factor in the power is taken outside with \\(a^{mn} = (a^m)^n\\).",
+              "Why this is not simply \\(1\\): the inside tends to \\(1\\) while the power grows without bound. This \\(1^{\\infty}\\) form is undecided, so we must use the standard limit of \\(e\\).",
+              "Split the power\n\\[\\left(1 + \\frac{1}{n}\\right)^{2n} = \\left[\\left(1 + \\frac{1}{n}\\right)^{n}\\right]^{2}\\]\nWhy: Law of indices \\(a^{mn} = (a^m)^n\\); now the inner bracket has the standard form (added \\(\\frac{1}{n}\\), power \\(n\\)).",
+              "Take the limit\n\\[\\lim_{n \\to -\\infty} \\left(1 + \\frac{1}{n}\\right)^{2n} = \\left[\\lim_{n \\to -\\infty} \\left(1 + \\frac{1}{n}\\right)^{n}\\right]^{2}\\]\n\\[= e^{2}\\]\nWhy: Power theorem (limit of a square = square of the limit) and the Note: the inner limit is \\(e\\) for \\(n \\to -\\infty\\) as well.",
+              "Check\n\\[n = -1000:\\ (0.999)^{-2000} \\approx 7.396\\]\n\\[e^2 \\approx 7.389\\]\nWhy: The values agree closely."
+            ],
+            "final_answer": "\\(\\lim\\limits_{n \\to -\\infty} \\left(1 + \\dfrac{1}{n}\\right)^{2n} = e^{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(ii)",
+            "prompt": "5 (ii) Express each limit in terms of \\(e\\). \\(\\lim\\limits_{n \\to +\\infty} \\left(1 + \\frac{1}{n}\\right)^{\\frac{n}{2}}\\).",
+            "explanation": "A \\(1^{\\infty}\\) form with the standard inside \\(1 + \\frac{1}{n}\\) and power \\(\\frac{n}{2}\\).\nPlan: write \\(\\frac{n}{2} = n \\times \\frac{1}{2}\\), take the limit of the inner bracket.",
+            "steps": [
+              "Given: \\(\\left(1 + \\dfrac{1}{n}\\right)^{\\frac{n}{2}}\\), \\(n \\to +\\infty\\).\nTo find: the limit in terms of \\(e\\).\nMethod: Standard limits (12.2.6): \\(\\lim\\limits_{n \\to \\pm\\infty} \\left(1 + \\dfrac{1}{n}\\right)^n = e\\) and \\(\\lim\\limits_{x \\to 0} (1 + x)^{\\frac{1}{x}} = e\\). The quantity added to \\(1\\) and the power must be exact reciprocals; any extra factor in the power is taken outside with \\(a^{mn} = (a^m)^n\\).",
+              "Split the power\n\\[\\left(1 + \\frac{1}{n}\\right)^{\\frac{n}{2}} = \\left[\\left(1 + \\frac{1}{n}\\right)^{n}\\right]^{\\frac{1}{2}}\\]\nWhy: \\(a^{mn} = (a^m)^n\\) with \\(\\frac{n}{2} = n \\cdot \\frac{1}{2}\\).",
+              "Take the limit\n\\[\\lim_{n \\to +\\infty} \\left(1 + \\frac{1}{n}\\right)^{\\frac{n}{2}} = e^{\\frac{1}{2}}\\]\n\\[= \\sqrt{e}\\]\nWhy: The inner limit is \\(e\\); the limit of a root is the root of the limit.",
+              "Check\n\\[n = 1000:\\ (1.001)^{500} \\approx 1.6483\\]\n\\[\\sqrt{e} \\approx 1.6487\\]\nWhy: The values agree closely."
+            ],
+            "final_answer": "\\(\\lim\\limits_{n \\to +\\infty} \\left(1 + \\dfrac{1}{n}\\right)^{\\frac{n}{2}} = \\sqrt{e}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(iii)",
+            "prompt": "5 (iii) Express each limit in terms of \\(e\\). \\(\\lim\\limits_{n \\to +\\infty} \\left(1 - \\frac{1}{n}\\right)^{n}\\).",
+            "explanation": "A \\(1^{\\infty}\\) form, but with a minus sign: \\(1 - \\frac{1}{n}\\).\nPlan: put \\(m = -n\\) (so \\(m \\to -\\infty\\)); then the inside becomes \\(1 + \\frac{1}{m}\\) and the power \\(-m\\).",
+            "steps": [
+              "Given: \\(\\left(1 - \\dfrac{1}{n}\\right)^{n}\\), \\(n \\to +\\infty\\).\nTo find: the limit in terms of \\(e\\).\nMethod: Standard limits (12.2.6): \\(\\lim\\limits_{n \\to \\pm\\infty} \\left(1 + \\dfrac{1}{n}\\right)^n = e\\) and \\(\\lim\\limits_{x \\to 0} (1 + x)^{\\frac{1}{x}} = e\\). The quantity added to \\(1\\) and the power must be exact reciprocals; any extra factor in the power is taken outside with \\(a^{mn} = (a^m)^n\\).",
+              "Change the variable\n\\[m = -n \\Rightarrow n = -m\\]\n\\[n \\to +\\infty \\Rightarrow m \\to -\\infty\\]\n\\[\\left(1 - \\frac{1}{n}\\right)^{n} = \\left(1 + \\frac{1}{m}\\right)^{-m}\\]\nWhy: \\(-\\dfrac{1}{n} = \\dfrac{1}{-n} = \\dfrac{1}{m}\\); this makes the inside a \"1 plus\" form.",
+              "Split the power\n\\[\\left(1 + \\frac{1}{m}\\right)^{-m} = \\left[\\left(1 + \\frac{1}{m}\\right)^{m}\\right]^{-1}\\]\nWhy: \\(a^{mn} = (a^m)^n\\) with \\(-m = m \\times (-1)\\).",
+              "Take the limit\n\\[\\lim_{n \\to +\\infty} \\left(1 - \\frac{1}{n}\\right)^{n} = e^{-1}\\]\n\\[= \\frac{1}{e}\\]\nWhy: By the Note in 12.2.6, \\(\\left(1 + \\frac{1}{m}\\right)^m \\to e\\) as \\(m \\to -\\infty\\).",
+              "Check\n\\[n = 1000:\\ (0.999)^{1000} \\approx 0.3677\\]\n\\[\\frac{1}{e} \\approx 0.3679\\]\nWhy: The values agree."
+            ],
+            "final_answer": "\\(\\lim\\limits_{n \\to +\\infty} \\left(1 - \\dfrac{1}{n}\\right)^{n} = \\dfrac{1}{e}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(iv)",
+            "prompt": "5 (iv) Express each limit in terms of \\(e\\). \\(\\lim\\limits_{n \\to +\\infty} \\left(1 + \\frac{1}{3n}\\right)^{n}\\).",
+            "explanation": "A \\(1^{\\infty}\\) form; the added part is \\(\\frac{1}{3n}\\), so the power we need is \\(3n\\), not \\(n\\).\nPlan: write \\(n = 3n \\times \\frac{1}{3}\\) and take the extra \\(\\frac{1}{3}\\) outside.",
+            "steps": [
+              "Given: \\(\\left(1 + \\dfrac{1}{3n}\\right)^{n}\\), \\(n \\to +\\infty\\).\nTo find: the limit in terms of \\(e\\).\nMethod: Standard limits (12.2.6): \\(\\lim\\limits_{n \\to \\pm\\infty} \\left(1 + \\dfrac{1}{n}\\right)^n = e\\) and \\(\\lim\\limits_{x \\to 0} (1 + x)^{\\frac{1}{x}} = e\\). The quantity added to \\(1\\) and the power must be exact reciprocals; any extra factor in the power is taken outside with \\(a^{mn} = (a^m)^n\\).",
+              "Make the power match the added part\n\\[\\left(1 + \\frac{1}{3n}\\right)^{n} = \\left[\\left(1 + \\frac{1}{3n}\\right)^{3n}\\right]^{\\frac{1}{3}}\\]\nWhy: \\(3n \\times \\frac{1}{3} = n\\), so the value is unchanged; inside, the power \\(3n\\) is the reciprocal of \\(\\frac{1}{3n}\\).",
+              "Take the limit\n\\[\\lim_{n \\to +\\infty} \\left(1 + \\frac{1}{3n}\\right)^{n} = e^{\\frac{1}{3}}\\]\nWhy: Put \\(m = 3n\\); as \\(n \\to +\\infty\\), \\(m \\to +\\infty\\), so the inner bracket \\(\\left(1 + \\frac{1}{m}\\right)^m \\to e\\).",
+              "Check\n\\[n = 1000:\\ \\left(1 + \\frac{1}{3000}\\right)^{1000} \\approx 1.39553\\]\n\\[e^{\\frac{1}{3}} \\approx 1.39561\\]\nWhy: The values agree."
+            ],
+            "final_answer": "\\(\\lim\\limits_{n \\to +\\infty} \\left(1 + \\dfrac{1}{3n}\\right)^{n} = e^{\\frac{1}{3}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(v)",
+            "prompt": "5 (v) Express each limit in terms of \\(e\\). \\(\\lim\\limits_{n \\to +\\infty} \\left(1 + \\frac{4}{n}\\right)^{n}\\).",
+            "explanation": "A \\(1^{\\infty}\\) form; the added part is \\(\\frac{4}{n} = \\frac{1}{n/4}\\), so the power we need is \\(\\frac{n}{4}\\).\nPlan: write \\(n = \\frac{n}{4} \\times 4\\) and take the extra \\(4\\) outside.",
+            "steps": [
+              "Given: \\(\\left(1 + \\dfrac{4}{n}\\right)^{n}\\), \\(n \\to +\\infty\\).\nTo find: the limit in terms of \\(e\\).\nMethod: Standard limits (12.2.6): \\(\\lim\\limits_{n \\to \\pm\\infty} \\left(1 + \\dfrac{1}{n}\\right)^n = e\\) and \\(\\lim\\limits_{x \\to 0} (1 + x)^{\\frac{1}{x}} = e\\). The quantity added to \\(1\\) and the power must be exact reciprocals; any extra factor in the power is taken outside with \\(a^{mn} = (a^m)^n\\).",
+              "Make the power match the added part\n\\[\\left(1 + \\frac{4}{n}\\right)^{n} = \\left[\\left(1 + \\frac{4}{n}\\right)^{\\frac{n}{4}}\\right]^{4}\\]\nWhy: \\(\\frac{n}{4} \\times 4 = n\\); inside, \\(\\frac{n}{4}\\) is the reciprocal of \\(\\frac{4}{n}\\).",
+              "Take the limit\n\\[\\lim_{n \\to +\\infty} \\left(1 + \\frac{4}{n}\\right)^{n} = e^{4}\\]\nWhy: Put \\(m = \\frac{n}{4}\\); then \\(\\frac{4}{n} = \\frac{1}{m}\\) and \\(m \\to +\\infty\\), so the inner bracket tends to \\(e\\).",
+              "Check\n\\[n = 100000:\\ (1.00004)^{100000} \\approx 54.594\\]\n\\[e^4 \\approx 54.598\\]\nWhy: The values agree."
+            ],
+            "final_answer": "\\(\\lim\\limits_{n \\to +\\infty} \\left(1 + \\dfrac{4}{n}\\right)^{n} = e^{4}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(vi)",
+            "prompt": "5 (vi) Express each limit in terms of \\(e\\). \\(\\lim\\limits_{x \\to 0} (1 + 3x)^{\\frac{2}{x}}\\).",
+            "explanation": "A \\(1^{\\infty}\\) form as \\(x \\to 0\\): the inside \\(1 + 3x \\to 1\\), the power \\(\\frac{2}{x}\\) becomes huge.\nWe use \\(\\lim\\limits_{h \\to 0} (1 + h)^{1/h} = e\\) with \\(h = 3x\\); the power must be \\(\\frac{1}{3x}\\).\nPlan: write \\(\\frac{2}{x} = \\frac{1}{3x} \\times 6\\).",
+            "steps": [
+              "Given: \\((1 + 3x)^{\\frac{2}{x}}\\), \\(x \\to 0\\).\nTo find: the limit in terms of \\(e\\).\nMethod: Standard limits (12.2.6): \\(\\lim\\limits_{n \\to \\pm\\infty} \\left(1 + \\dfrac{1}{n}\\right)^n = e\\) and \\(\\lim\\limits_{x \\to 0} (1 + x)^{\\frac{1}{x}} = e\\). The quantity added to \\(1\\) and the power must be exact reciprocals; any extra factor in the power is taken outside with \\(a^{mn} = (a^m)^n\\).",
+              "Make the power match the added part\n\\[(1 + 3x)^{\\frac{2}{x}} = \\left[(1 + 3x)^{\\frac{1}{3x}}\\right]^{6}\\]\nWhy: \\(\\frac{1}{3x} \\times 6 = \\frac{6}{3x} = \\frac{2}{x}\\); inside, the power \\(\\frac{1}{3x}\\) is the reciprocal of \\(3x\\).",
+              "Take the limit\n\\[\\lim_{x \\to 0} (1 + 3x)^{\\frac{2}{x}} = e^{6}\\]\nWhy: Put \\(h = 3x\\); as \\(x \\to 0\\), \\(h \\to 0\\), so \\((1 + h)^{1/h} \\to e\\).",
+              "Check\n\\[x = 0.001:\\ (1.003)^{2000} \\approx 399.8\\]\n\\[e^6 \\approx 403.4\\]\nWhy: Close, and closer for smaller \\(x\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 0} (1 + 3x)^{\\frac{2}{x}} = e^{6}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(vii)",
+            "prompt": "5 (vii) Express each limit in terms of \\(e\\). \\(\\lim\\limits_{x \\to 0} (1 + 2x^2)^{\\frac{1}{x^2}}\\).",
+            "explanation": "A \\(1^{\\infty}\\) form as \\(x \\to 0\\): the added part is \\(2x^2\\), so the power we need is \\(\\frac{1}{2x^2}\\).\nPlan: write \\(\\frac{1}{x^2} = \\frac{1}{2x^2} \\times 2\\).",
+            "steps": [
+              "Given: \\((1 + 2x^2)^{\\frac{1}{x^2}}\\), \\(x \\to 0\\).\nTo find: the limit in terms of \\(e\\).\nMethod: Standard limits (12.2.6): \\(\\lim\\limits_{n \\to \\pm\\infty} \\left(1 + \\dfrac{1}{n}\\right)^n = e\\) and \\(\\lim\\limits_{x \\to 0} (1 + x)^{\\frac{1}{x}} = e\\). The quantity added to \\(1\\) and the power must be exact reciprocals; any extra factor in the power is taken outside with \\(a^{mn} = (a^m)^n\\).",
+              "Make the power match the added part\n\\[(1 + 2x^2)^{\\frac{1}{x^2}} = \\left[(1 + 2x^2)^{\\frac{1}{2x^2}}\\right]^{2}\\]\nWhy: \\(\\frac{1}{2x^2} \\times 2 = \\frac{1}{x^2}\\).",
+              "Take the limit\n\\[\\lim_{x \\to 0} (1 + 2x^2)^{\\frac{1}{x^2}} = e^{2}\\]\nWhy: Put \\(h = 2x^2\\); as \\(x \\to 0\\), \\(h \\to 0\\) (from the positive side), so \\((1 + h)^{1/h} \\to e\\).",
+              "Check\n\\[x = 0.01:\\ (1.0002)^{10000} \\approx 7.3876\\]\n\\[e^2 \\approx 7.3891\\]\nWhy: The values agree."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 0} (1 + 2x^2)^{\\frac{1}{x^2}} = e^{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(viii)",
+            "prompt": "5 (viii) Express each limit in terms of \\(e\\). \\(\\lim\\limits_{h \\to 0} (1 - 2h)^{\\frac{1}{h}}\\).",
+            "explanation": "A \\(1^{\\infty}\\) form as \\(h \\to 0\\); the added part is \\(-2h\\), so the power we need is \\(\\frac{1}{-2h}\\).\nPlan: write \\(\\frac{1}{h} = \\frac{1}{-2h} \\times (-2)\\).",
+            "steps": [
+              "Given: \\((1 - 2h)^{\\frac{1}{h}}\\), \\(h \\to 0\\).\nTo find: the limit in terms of \\(e\\).\nMethod: Standard limits (12.2.6): \\(\\lim\\limits_{n \\to \\pm\\infty} \\left(1 + \\dfrac{1}{n}\\right)^n = e\\) and \\(\\lim\\limits_{x \\to 0} (1 + x)^{\\frac{1}{x}} = e\\). The quantity added to \\(1\\) and the power must be exact reciprocals; any extra factor in the power is taken outside with \\(a^{mn} = (a^m)^n\\).",
+              "Make the power match the added part\n\\[(1 - 2h)^{\\frac{1}{h}} = \\left[\\big(1 + (-2h)\\big)^{\\frac{1}{-2h}}\\right]^{-2}\\]\nWhy: \\(\\frac{1}{-2h} \\times (-2) = \\frac{1}{h}\\); inside, \\(-2h\\) and \\(\\frac{1}{-2h}\\) are reciprocals.",
+              "Take the limit\n\\[\\lim_{h \\to 0} (1 - 2h)^{\\frac{1}{h}} = e^{-2}\\]\n\\[= \\frac{1}{e^{2}}\\]\nWhy: Put \\(u = -2h\\); as \\(h \\to 0\\), \\(u \\to 0\\), so \\((1 + u)^{1/u} \\to e\\).",
+              "Check\n\\[h = 0.001:\\ (0.998)^{1000} \\approx 0.13506\\]\n\\[e^{-2} \\approx 0.13534\\]\nWhy: The values agree."
+            ],
+            "final_answer": "\\(\\lim\\limits_{h \\to 0} (1 - 2h)^{\\frac{1}{h}} = \\dfrac{1}{e^{2}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(ix)",
+            "prompt": "5 (ix) Express each limit in terms of \\(e\\). \\(\\lim\\limits_{x \\to \\infty} \\left(\\frac{x}{1 + x}\\right)^{x}\\).",
+            "explanation": "For huge \\(x\\), \\(\\frac{x}{1 + x}\\) is close to \\(1\\) and the power \\(x\\) is huge: a \\(1^{\\infty}\\) form.\nThe bracket is not yet \"1 plus something\"; turning the fraction upside down makes \\(1 + \\frac{1}{x}\\) appear.\nPlan: write \\(\\frac{x}{1 + x} = \\frac{1}{1 + \\frac{1}{x}}\\), then use the standard limit in the denominator.",
+            "steps": [
+              "Given: \\(\\left(\\dfrac{x}{1 + x}\\right)^{x}\\), \\(x \\to \\infty\\).\nTo find: the limit in terms of \\(e\\).\nMethod: Standard limits (12.2.6): \\(\\lim\\limits_{n \\to \\pm\\infty} \\left(1 + \\dfrac{1}{n}\\right)^n = e\\) and \\(\\lim\\limits_{x \\to 0} (1 + x)^{\\frac{1}{x}} = e\\). The quantity added to \\(1\\) and the power must be exact reciprocals; any extra factor in the power is taken outside with \\(a^{mn} = (a^m)^n\\).",
+              "Turn the fraction upside down\n\\[\\frac{x}{1 + x} = \\frac{1}{\\dfrac{1 + x}{x}}\\]\n\\[= \\frac{1}{1 + \\dfrac{1}{x}}\\]\nWhy: Any fraction equals \\(1\\) divided by its reciprocal, and \\(\\dfrac{1 + x}{x} = \\dfrac{1}{x} + 1\\).",
+              "Apply the power\n\\[\\left(\\frac{x}{1 + x}\\right)^{x} = \\frac{1}{\\left(1 + \\dfrac{1}{x}\\right)^{x}}\\]\nWhy: \\(\\left(\\dfrac{1}{A}\\right)^x = \\dfrac{1^x}{A^x} = \\dfrac{1}{A^x}\\).",
+              "Take the limit\n\\[\\lim_{x \\to \\infty} \\left(\\frac{x}{1 + x}\\right)^{x} = \\frac{1}{e}\\]\nWhy: Quotient theorem: the bottom tends to \\(e \\ne 0\\) by the standard limit.",
+              "Check\n\\[x = 1000:\\ \\left(\\frac{1000}{1001}\\right)^{1000} \\approx 0.3681\\]\n\\[\\frac{1}{e} \\approx 0.3679\\]\nWhy: The values agree."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to \\infty} \\left(\\dfrac{x}{1 + x}\\right)^{x} = \\dfrac{1}{e}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(x)",
+            "prompt": "5 (x) Express each limit in terms of \\(e\\). \\(\\lim\\limits_{x \\to 0} \\frac{e^{\\frac{1}{x}} - 1}{e^{\\frac{1}{x}} - 1},\\ x < 0\\).",
+            "explanation": "As printed, the top and the bottom are the same, so the fraction equals \\(1\\) for every \\(x \\ne 0\\) and the limit is \\(1\\).\nPart (xi) and the answer key (\\(-1\\)) show that the intended denominator is \\(e^{1/x} + 1\\).\nPlan: see what \\(e^{1/x}\\) does as \\(x \\to 0\\) through negative values, then substitute into the intended fraction.",
+            "steps": [
+              "Given (as printed): \\(\\dfrac{e^{1/x} - 1}{e^{1/x} - 1}\\), \\(x \\to 0\\), \\(x < 0\\).\nTo find: the limit.\nMethod: Important results (12.2.7): \\(e^{t} \\to 0\\) as \\(t \\to -\\infty\\) and \\(e^{t} \\to \\infty\\) as \\(t \\to +\\infty\\).",
+              "The question as printed\n\\[\\frac{e^{1/x} - 1}{e^{1/x} - 1} = 1 \\quad (x \\ne 0)\\]\n\\[\\lim_{x \\to 0^-} 1 = 1\\]\nWhy: \\(e^{1/x} \\ne 1\\) for \\(x < 0\\), so the top and the bottom are equal and non-zero; the limit of a constant is the constant.",
+              "The intended question: what \\(\\dfrac{1}{x}\\) does\n\\[\\lim_{x \\to 0^-} \\frac{e^{1/x} - 1}{e^{1/x} + 1}\\]\n\\[x \\to 0^- \\Rightarrow \\frac{1}{x} \\to -\\infty\\]\nWhy: \\(x < 0\\) and tiny, e.g. \\(x = -0.001\\) gives \\(\\frac{1}{x} = -1000\\).",
+              "What \\(e^{1/x}\\) does\n\\[e^{1/x} \\to 0\\]\nWhy: A large negative power of \\(e\\) is tiny: \\(e^{-1000} = \\dfrac{1}{e^{1000}}\\).",
+              "Substitute\n\\[\\lim_{x \\to 0^-} \\frac{e^{1/x} - 1}{e^{1/x} + 1} = \\frac{0 - 1}{0 + 1}\\]\n\\[= -1\\]\nWhy: The bottom tends to \\(1 \\ne 0\\), so the quotient theorem applies.",
+              "Check\n\\[x = -0.01:\\ \\frac{e^{-100} - 1}{e^{-100} + 1} \\approx -1\\]\nWhy: \\(e^{-100}\\) is practically \\(0\\)."
+            ],
+            "final_answer": "As printed: \\(1\\). Intended question \\(\\lim\\limits_{x \\to 0} \\dfrac{e^{1/x} - 1}{e^{1/x} + 1} = -1\\) for \\(x < 0\\) (the key's answer)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the denominator of part (x) as \\(e^{1/x} - 1\\), the same as the numerator, so the fraction is \\(1\\) everywhere and the limit is \\(1\\). Comparing with part (xi) and the answer key (\\(-1\\)), the intended denominator is \\(e^{1/x} + 1\\), which gives \\(-1\\) as \\(x \\to 0\\) through negative values."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(xi)",
+            "prompt": "5 (xi) Express each limit in terms of \\(e\\). \\(\\lim\\limits_{x \\to 0} \\frac{e^{\\frac{1}{x}} - 1}{e^{\\frac{1}{x}} + 1},\\ x > 0\\).",
+            "explanation": "Now \\(x \\to 0\\) through positive values, so \\(\\frac{1}{x} \\to +\\infty\\) and \\(e^{1/x}\\) becomes huge: \\(\\infty/\\infty\\).\nPlan: divide the top and the bottom by \\(e^{1/x}\\), so that \\(e^{-1/x} \\to 0\\) appears.",
+            "steps": [
+              "Given: \\(\\dfrac{e^{1/x} - 1}{e^{1/x} + 1}\\), \\(x \\to 0\\), \\(x > 0\\).\nTo find: the limit.\nMethod: Important results (12.2.7): \\(e^{t} \\to \\infty\\) as \\(t \\to +\\infty\\) and \\(e^{t} \\to 0\\) as \\(t \\to -\\infty\\).",
+              "What \\(\\dfrac{1}{x}\\) and \\(e^{1/x}\\) do\n\\[x \\to 0^+ \\Rightarrow \\frac{1}{x} \\to +\\infty\\]\n\\[e^{1/x} \\to \\infty\\]\nWhy: A tiny positive \\(x\\) gives a huge positive \\(\\frac{1}{x}\\), and a huge power of \\(e\\) is huge. So we have \\(\\infty/\\infty\\).",
+              "Divide the top and the bottom by \\(e^{1/x}\\)\n\\[\\frac{e^{1/x} - 1}{e^{1/x} + 1} = \\frac{1 - e^{-1/x}}{1 + e^{-1/x}}\\]\nWhy: \\(\\dfrac{1}{e^{1/x}} = e^{-1/x}\\); dividing top and bottom by the same non-zero number keeps the value.",
+              "Take the limit\n\\[\\lim_{x \\to 0^+} \\frac{1 - e^{-1/x}}{1 + e^{-1/x}} = \\frac{1 - 0}{1 + 0}\\]\n\\[= 1\\]\nWhy: \\(-\\frac{1}{x} \\to -\\infty\\), so \\(e^{-1/x} \\to 0\\); the bottom tends to \\(1 \\ne 0\\).",
+              "Check\n\\[x = 0.01:\\ \\frac{e^{100} - 1}{e^{100} + 1} \\approx 1\\]\nWhy: Subtracting or adding \\(1\\) to the huge number \\(e^{100}\\) makes almost no difference."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 0} \\dfrac{e^{1/x} - 1}{e^{1/x} + 1} = 1\\) for \\(x > 0\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

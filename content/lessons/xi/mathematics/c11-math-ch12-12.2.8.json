@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.2.8",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.2.8",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 233,
+          "pdf_to": 233,
+          "note": "Book p. 228: 12.2.8 statement of the Sandwich Theorem and the two sentences leading into 12.2.9"
+        }
+      ],
+      "title": "12.2.8 The Sandwich Theorem",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Sometimes we cannot find a limit by substituting, factorising or dividing. The Sandwich Theorem (also called the Squeeze Theorem) gives another way: trap the difficult function between two easy functions that have the same limit."
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(f\\), \\(g\\) and \\(h\\) be functions such that \\(f(x) \\le g(x) \\le h(x)\\) for all numbers \\(x\\) in some open interval containing \"\\(c\\)\", except possibly at \\(c\\) itself."
+          },
+          {
+            "type": "paragraph",
+            "text": "If \\(\\lim_{x \\to c} f(x) = L\\) and \\(\\lim_{x \\to c} h(x) = L\\), then\n\\[\\lim_{x \\to c} g(x) = L\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read the theorem as a picture. Near \\(c\\), the graph of \\(g\\) lies between the graph of \\(f\\) (below) and the graph of \\(h\\) (above). If the lower and upper graphs both head to the same height \\(L\\) as \\(x \\to c\\), the middle graph has nowhere else to go: it is squeezed to \\(L\\) as well. Think of a slice of filling between two pieces of bread that are pressed together.\nThree conditions must all hold:\n1. \\(f(x) \\le g(x) \\le h(x)\\) for every \\(x\\) near \\(c\\) (the value at \\(c\\) itself does not matter);\n2. \\(\\lim_{x \\to c} f(x) = L\\);\n3. \\(\\lim_{x \\to c} h(x) = L\\), the SAME number \\(L\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Many limit problems arise that cannot be directly evaluated by algebraic techniques. They require geometric arguments, so we evaluate an important theorem."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our illustration (not in the book): find \\(\\lim_{x \\to 0} x^{2}\\sin\\frac{1}{x}\\).\nWe cannot substitute \\(x = 0\\), because \\(\\sin\\frac{1}{x}\\) is not defined there and keeps swinging between \\(-1\\) and \\(1\\). But \\(-1 \\le \\sin\\frac{1}{x} \\le 1\\), and \\(x^{2} \\ge 0\\), so\n\\[-x^{2} \\le x^{2}\\sin\\dfrac{1}{x} \\le x^{2}\\]\nBoth \\(-x^{2}\\) and \\(x^{2}\\) tend to 0 as \\(x \\to 0\\). By the Sandwich Theorem the limit is 0.\nThe next heading, 12.2.9, uses exactly this theorem to prove the most important trigonometric limit."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. If \\(f(x) \\le g(x) \\le h(x)\\) near \\(c\\) and \\(f(x) \\to L\\), \\(h(x) \\to L\\) as \\(x \\to c\\), then \\(g(x) \\to L\\).\n2. The two outer limits must be equal.\n3. The inequality is only needed near \\(c\\), not at \\(c\\).\n4. Use it when algebra fails, especially for functions with \\(\\sin\\) or \\(\\cos\\), which always lie between \\(-1\\) and \\(1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Using two bounds with different limits (for example \\(0 \\le g(x) \\le 1\\)): this only tells us the limit, if it exists, is between 0 and 1. It does not give the limit.\n2. Writing the inequality the wrong way round, or forgetting that multiplying an inequality by a negative number reverses it.\n3. Writing \\(\\lim_{x \\to 0} x^{2}\\sin\\frac{1}{x} = 0 \\cdot \\lim_{x \\to 0}\\sin\\frac{1}{x}\\): the second limit does not exist, so the product rule cannot be used."
+          }
+        ]
+      }
+    }
+  ]
+}

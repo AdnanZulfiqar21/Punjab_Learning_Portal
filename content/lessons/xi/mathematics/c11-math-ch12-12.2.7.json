@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.2.7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.2.7",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 232,
+          "pdf_to": 233,
+          "note": "Book p. 227-228: 12.2.7 proof, Deduction lim (e^x - 1)/x = 1, Important Result to Remember (i)-(ii), Example 7 (i)-(ii)"
+        }
+      ],
+      "title": "12.2.7 Lim_{x->0} (a^x - 1)/x = log_e a",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This result is the key to every limit of the form \\(\\frac{a^{x}-1}{x}\\). Notice that putting \\(x = 0\\) gives \\(\\frac{a^{0}-1}{0} = \\frac{0}{0}\\), which has no meaning, so the limit has to be found by a trick. The trick is to change the variable so that the limit of 12.2.6, \\(\\lim_{y \\to 0}(1+y)^{\\frac{1}{y}} = e\\), appears.\nHere \\(a > 0\\) and \\(a \\ne 1\\) (so that \\(\\log_{a}\\) makes sense)."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\text{Put } a^{x} - 1 = y \\quad \\text{...(i)}\\]\n\\[\\text{then } a^{x} = 1 + y\\]\n\\[\\text{So, } x = \\log_{a}(1+y)\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "From (i), when \\(x \\to 0\\), \\(y \\to 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does \\(y \\to 0\\)? As \\(x \\to 0\\), \\(a^{x} \\to a^{0} = 1\\), so \\(y = a^{x} - 1 \\to 0\\). The third line uses the definition of a logarithm: \\(a^{x} = N\\) means \\(x = \\log_{a} N\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\therefore \\lim_{x \\to 0}\\dfrac{a^{x}-1}{x} = \\lim_{y \\to 0}\\dfrac{y}{\\log_{a}(1+y)}\\]\n\\[= \\lim_{y \\to 0}\\dfrac{1}{\\frac{1}{y}\\log_{a}(1+y)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[= \\lim_{y \\to 0}\\dfrac{1}{\\log_{a}(1+y)^{\\frac{1}{y}}}\\]\n\\[= \\dfrac{1}{\\log_{a} e} = \\log_{e}^{a}\\]\n(\\(\\because \\lim_{y \\to 0}(1+y)^{\\frac{1}{y}} = e\\))",
+            "book_errors": [
+              "\\[= \\dfrac{1}{\\log_{a} e} = \\log_{e}^{a}\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the last value as \\(\\log_{e}^{a}\\) (the \\(a\\) raised like a power), and writes \\(\\log_{e}^{e}\\) in the same way in the Deduction below. The correct notation is the logarithm of \\(a\\) to base \\(e\\):\n\\[= \\dfrac{1}{\\log_{a} e} = \\log_{e} a\\]\n\\[\\lim_{x \\to 0}\\left(\\dfrac{e^{x}-1}{x}\\right) = \\log_{e} e = 1\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Two small steps are hidden here.\n1. \\(\\frac{1}{y}\\log_{a}(1+y) = \\log_{a}(1+y)^{\\frac{1}{y}}\\), by the log law \\(k\\log N = \\log N^{k}\\).\n2. \\(\\frac{1}{\\log_{a} e} = \\log_{e} a\\), by the change of base rule \\(\\log_{a} e = \\frac{\\log_{e} e}{\\log_{e} a} = \\frac{1}{\\log_{e} a}\\)."
+          },
+          {
+            "type": "equation",
+            "latex": "\\lim_{x \\to 0}\\dfrac{a^{x}-1}{x} = \\log_{e} a",
+            "text_alt": "the limit as x tends to 0 of (a to the power x minus 1) over x equals log of a to the base e"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Deduction: \\(\\lim_{x \\to 0}\\left(\\dfrac{e^{x}-1}{x}\\right) = \\log_{e} e = 1\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "We know that\n\\[\\lim_{x \\to 0}\\left(\\dfrac{a^{x}-1}{x}\\right) = \\log_{e} a \\quad \\text{...(i)}\\]\nPut \\(a = e\\) in (i), we know\n\\[\\lim_{x \\to 0}\\left(\\dfrac{e^{x}-1}{x}\\right) = \\log_{e}^{e} = 1\\]",
+            "book_errors": [
+              "\\[\\lim_{x \\to 0}\\left(\\dfrac{e^{x}-1}{x}\\right) = \\log_{e}^{e} = 1\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "As above, the book prints \\(\\log_{e}^{e}\\); it should read\n\\[\\lim_{x \\to 0}\\left(\\dfrac{e^{x}-1}{x}\\right) = \\log_{e} e = 1\\]"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Important Result to Remember"
+          },
+          {
+            "type": "paragraph",
+            "text": "(i) \\(\\lim_{x \\to \\infty} e^{x} = \\infty\\)\n(ii) \\(\\lim_{x \\to -\\infty} e^{x} = \\lim_{x \\to \\infty}\\left(\\frac{1}{e^{x}}\\right) = 0\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why? \\(e > 1\\), so its powers grow without bound: \\(e^{10} \\approx 22026\\). For negative powers, \\(e^{-x} = \\frac{1}{e^{x}}\\) is 1 divided by a huge number, so it gets close to 0. The graph of \\(y = e^{x}\\) rises steeply to the right and flattens towards the \\(x\\)-axis to the left."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Express each limit in terms of \\(e\\).\n(i) \\(\\lim_{n \\to +\\infty}\\left(1+\\frac{3}{n}\\right)^{2n}\\)\n(ii) \\(\\lim_{n \\to 0}(1+2n)^{\\frac{1}{n}}\\)",
+            "steps": [
+              "Given: (i) \\(\\left(1+\\frac{3}{n}\\right)^{2n}\\) with \\(n \\to +\\infty\\); (ii) \\((1+2n)^{\\frac{1}{n}}\\) with \\(n \\to 0\\).\nTo find: each limit as a power of \\(e\\).\nMethod: both have the shape \"1 + small quantity\" raised to a large power. Rewrite each one so that it contains exactly \\(\\left(1+\\frac{1}{m}\\right)^{m}\\) (for \\(m \\to \\infty\\)) or \\((1+m)^{\\frac{1}{m}}\\) (for \\(m \\to 0\\)), whose limit is \\(e\\).",
+              "Part (i), Step 1: Compare with the standard limit\nObserve the resemblance of the limit with \\(\\lim_{n \\to \\infty}\\left(1+\\frac{1}{n}\\right)^{n} = e\\).\nWhy: the standard form has 1 over the variable inside and the same variable as the power. Here we have \\(\\frac{3}{n}\\) inside and \\(2n\\) as the power, so we must adjust both.",
+              "Part (i), Step 2: Make the inside match\n\\[\\dfrac{3}{n} = \\dfrac{1}{\\;n/3\\;}\\]\nWhy: we want 1 over something; \\(\\frac{3}{n}\\) is the same as 1 divided by \\(\\frac{n}{3}\\). So the \"something\" is \\(\\frac{n}{3}\\), and the power should be \\(\\frac{n}{3}\\) too.",
+              "Part (i), Step 3: Make the power match\n\\[\\left(1+\\dfrac{3}{n}\\right)^{2n} = \\left[\\left(1+\\dfrac{3}{n}\\right)^{\\frac{n}{3}}\\right]^{6}\\]\n\\[= \\left[\\left(1+\\dfrac{1}{\\frac{n}{3}}\\right)^{\\frac{n}{3}}\\right]^{6}\\]\nWhy: by the law \\((a^{p})^{q} = a^{pq}\\), \\(\\frac{n}{3} \\times 6 = 2n\\), so nothing has changed; we have only split the power into \\(\\frac{n}{3}\\) (the matching part) and 6 (the extra part).",
+              "Part (i), Step 4: Take the limit\nPut \\(m = \\frac{n}{3}\\). When \\(n \\to +\\infty\\), \\(m \\to +\\infty\\).\n\\[\\lim_{n \\to +\\infty}\\left(1+\\dfrac{3}{n}\\right)^{2n} = \\lim_{m \\to +\\infty}\\left[\\left(1+\\dfrac{1}{m}\\right)^{m}\\right]^{6}\\]\n\\[= e^{6}\\]\nWhy: the bracket tends to \\(e\\) (12.2.6), and the limit of a power is the power of the limit (Theorem on limits), so the answer is \\(e^{6}\\).",
+              "Part (ii), Step 1: Compare with the standard limit\nObserve the resemblance of the limit with \\(\\lim_{x \\to 0}(1+x)^{\\frac{1}{x}} = e\\) (the Deduction in 12.2.6).\nWhy: here the variable goes to 0, so we use the zero form. Inside we have \\(2n\\), so the power should be \\(\\frac{1}{2n}\\), but we have \\(\\frac{1}{n}\\).",
+              "Part (ii), Step 2: Make the power match\n\\[\\lim_{n \\to 0}(1+2n)^{\\frac{1}{n}} = \\lim_{n \\to 0}\\left[(1+2n)^{\\frac{1}{2n}}\\right]^{2}\\]\nWhy: \\(\\frac{1}{2n} \\times 2 = \\frac{1}{n}\\), so the expression is unchanged.",
+              "Part (ii), Step 3: Substitute and take the limit\nPut \\(m = 2n\\); when \\(n \\to 0\\), \\(m \\to 0\\).\n\\[\\lim_{n \\to 0}(1+2n)^{\\frac{1}{n}} = \\lim_{m \\to 0}\\left[(1+m)^{\\frac{1}{m}}\\right]^{2}\\]\n\\[= e^{2}\\]\nWhy: \\((1+m)^{\\frac{1}{m}} \\to e\\) as \\(m \\to 0\\), so its square tends to \\(e^{2}\\).",
+              "Check:\nFor (i), a large value \\(n = 3000\\) gives \\((1.001)^{6000} \\approx 402.2\\), and \\(e^{6} \\approx 403.4\\).\nFor (ii), a small value \\(n = 0.001\\) gives \\((1.002)^{1000} \\approx 7.374\\), and \\(e^{2} \\approx 7.389\\). The values agree more closely as \\(n\\) gets nearer its limit."
+            ],
+            "answer": "(i) \\(e^{6}\\)  (ii) \\(e^{2}\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "In the book, part (ii) begins: \"Observe the resemblance of the limit with\n\\[\\lim_{n \\to 0}(1+2n)^{\\frac{1}{n}} = e\\]\"\nand its last line reads\n\\[= \\lim_{m \\to 0}\\left[(1+m)^{m}\\right]^{2} = e^{2}\\]",
+            "book_errors": [
+              "\\[\\lim_{n \\to 0}(1+2n)^{\\frac{1}{n}} = e\\]",
+              "\\[= \\lim_{m \\to 0}\\left[(1+m)^{m}\\right]^{2} = e^{2}\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "1. The book says to compare with \\(\\lim_{n \\to 0}(1+2n)^{\\frac{1}{n}} = e\\). That statement is false (this limit is \\(e^{2}\\), the answer of the example). The standard limit to compare with is\n\\[\\lim_{m \\to 0}(1+m)^{\\frac{1}{m}} = e\\]\n2. In the last line the book prints the power of \\((1+m)\\) as \\(m\\); it must be \\(\\frac{1}{m}\\):\n\\[\\lim_{m \\to 0}\\left[(1+m)^{\\frac{1}{m}}\\right]^{2} = e^{2}\\]\nThe final answer \\(e^{2}\\) is correct."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\lim_{x \\to 0}\\frac{a^{x}-1}{x} = \\log_{e} a\\) for \\(a > 0\\), \\(a \\ne 1\\).\n2. Special case \\(a = e\\): \\(\\lim_{x \\to 0}\\frac{e^{x}-1}{x} = 1\\).\n3. \\(e^{x} \\to \\infty\\) as \\(x \\to \\infty\\) and \\(e^{x} \\to 0\\) as \\(x \\to -\\infty\\).\n4. For limits like \\(\\left(1+\\frac{k}{n}\\right)^{pn}\\): split the power so that the standard form \\(\\left(1+\\frac{1}{m}\\right)^{m}\\) appears; the answer is \\(e^{kp}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing \\(\\lim_{x \\to 0}\\frac{a^{x}-1}{x} = \\log_{a} e\\). The base and the number are the other way round: the answer is \\(\\log_{e} a\\).\n2. Changing the power without balancing it: \\(\\left(1+\\frac{3}{n}\\right)^{2n}\\) is \\(\\left[\\left(1+\\frac{3}{n}\\right)^{\\frac{n}{3}}\\right]^{6}\\), not \\(\\left[\\left(1+\\frac{3}{n}\\right)^{\\frac{n}{3}}\\right]^{2}\\). Always check that the two powers multiply back to the original power.\n3. Forgetting to change the limit when changing the variable (\\(n \\to \\infty\\) becomes \\(m \\to \\infty\\); \\(n \\to 0\\) becomes \\(m \\to 0\\))."
+          }
+        ]
+      }
+    }
+  ]
+}

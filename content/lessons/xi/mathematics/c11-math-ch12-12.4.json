@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 239,
+          "pdf_to": 240,
+          "note": "Book p. 234-235: 12.4 Application of Transcendental Functions to Limits and Continuity on Real World Problems: two opening paragraphs; Examples 15-18 (radioactive decay, compound interest, demand, star brightness)."
+        }
+      ],
+      "title": "12.4 Application of Transcendental Functions to Limits and Continuity on Real World Problems",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Limit and continuity of transcendental functions are fundamental concepts in calculus with numerous real-world applications.\nThese concepts help us model, analyze and solve problems in various fields such as growth and decay, finance, economics, surveying and predicting long-term stock prices."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Transcendental functions are functions that are not algebraic, such as exponential functions (\\(e^{x}\\)), logarithmic functions and trigonometric functions.\nIn the examples below the question is always \"what happens in the long run?\", i.e. a limit as the variable \\(\\to \\infty\\). Three facts from 12.2 do all the work:\n1. \\(e^{x} \\to \\infty\\) as \\(x \\to \\infty\\).\n2. \\(e^{x} \\to 0\\) as \\(x \\to -\\infty\\); so \\(e^{-kt} \\to 0\\) as \\(t \\to \\infty\\) when \\(k > 0\\).\n3. \\(\\frac{c}{x^{n}} \\to 0\\) as \\(x \\to \\infty\\) for a constant \\(c\\) and \\(n > 0\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 15",
+            "problem": "Growth and Decay (Radioactive Decay)\nThe radioactive decay of a substance is given by the function \\(A(t) = A_{0}e^{-kt}\\), where \\(A_{0}\\) is the initial amount of substance, \\(k\\) is the decay constant, and \\(t\\) is the time in years. Find the limit of the amount of substance as \\(t \\to \\infty\\).",
+            "steps": [
+              "Given: \\(A(t) = A_{0}e^{-kt}\\) with \\(A_{0} > 0\\) (initial amount) and \\(k > 0\\) (decay constant).\nTo find: \\(\\lim_{t \\to \\infty} A(t)\\).\nMethod: write \\(e^{-kt}\\) as \\(e^{x}\\) with \\(x = -kt\\); as \\(t \\to \\infty\\), \\(x \\to -\\infty\\), and from 12.2.7 we know \\(e^{x} \\to 0\\) as \\(x \\to -\\infty\\).",
+              "Step 1: Set up the limit\nThe book prints this line as\n\\[\\lim_{t \\to \\infty} A(t) = \\lim_{t \\to \\infty} A_{0}e^{-ky}\\]\nThe exponent must be \\(-kt\\) (see the correction below):\n\\[\\lim_{t \\to \\infty} A(t) = \\lim_{t \\to \\infty} A_{0}e^{-kt}\\]\nWhy: we only replace \\(A(t)\\) by its formula.",
+              "Step 2: Behaviour of \\(e^{-kt}\\)\n\\[e^{-kt} = \\dfrac{1}{e^{kt}}\\]\nAs \\(t \\to \\infty\\), \\(e^{kt} \\to \\infty\\), so\n\\[e^{-kt} \\to 0\\]\nWhy: \\(k > 0\\), so \\(kt\\) grows without bound; 1 divided by a number that grows without bound tends to 0.",
+              "Step 3: The limit\n\\[\\lim_{t \\to \\infty} A_{0}e^{-kt} = A_{0} \\times 0 = 0\\]\nWhy: \\(A_{0}\\) is a constant, and the limit of a constant times a function is the constant times the limit (Theorem 1).",
+              "Check: with \\(A_{0} = 100\\) g and \\(k = 0.1\\): \\(A(10) = 100e^{-1} \\approx 36.8\\) g, \\(A(50) = 100e^{-5} \\approx 0.67\\) g, \\(A(100) = 100e^{-10} \\approx 0.0045\\) g. The amount keeps shrinking towards 0 but never becomes negative."
+            ],
+            "answer": "\\(\\lim_{t \\to \\infty} A(t) = 0\\): the amount of radioactive substance approaches 0 as time increases indefinitely.",
+            "book_errors": [
+              "\\[\\lim_{t \\to \\infty} A(t) = \\lim_{t \\to \\infty} A_{0}e^{-ky}\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the first line of the solution of Example 15 the book prints the exponent as \\(-ky\\): \\(\\lim_{t \\to \\infty} A_{0}e^{-ky}\\). There is no \\(y\\) in the problem; the exponent must be \\(-kt\\), as in the given function \\(A(t) = A_{0}e^{-kt}\\) and in the book's next line. The answer 0 is correct."
+          },
+          {
+            "type": "example",
+            "title": "Example 16",
+            "problem": "Finance (Compound Interest)\nThe value of an investment grows according to the formula for continuous compounding \\(A(t) = Pe^{rt}\\), where \\(P\\) is the initial principal, \\(r\\) is the annual interest rate, and \\(t\\) is the time in years. What happens to the value of the investment as \\(t \\to \\infty\\)?",
+            "steps": [
+              "Given: \\(A(t) = Pe^{rt}\\) with \\(P > 0\\) (principal) and \\(r > 0\\) (annual rate).\nTo find: \\(\\lim_{t \\to \\infty} A(t)\\).\nMethod: from 12.2.7, \\(e^{x} \\to \\infty\\) as \\(x \\to \\infty\\); here \\(x = rt \\to \\infty\\).",
+              "Step 1: Set up the limit\n\\[\\lim_{t \\to \\infty} A(t) = \\lim_{t \\to \\infty} Pe^{rt}\\]\nWhy: replace \\(A(t)\\) by its formula.",
+              "Step 2: Behaviour of \\(e^{rt}\\)\nSince \\(e^{rt} \\to \\infty\\) as \\(t \\to \\infty\\) for any positive \\(r\\), the value grows without bound:\n\\[\\lim_{t \\to \\infty} Pe^{rt} = \\infty\\]\nWhy: \\(rt \\to \\infty\\) because \\(r > 0\\); multiplying a quantity that grows without bound by a fixed positive number \\(P\\) keeps it growing without bound.",
+              "Check: with \\(P = \\text{Rs } 1000\\) and \\(r = 0.1\\): \\(A(10) = 1000e \\approx 2718\\), \\(A(50) = 1000e^{5} \\approx 148413\\), \\(A(100) = 1000e^{10} \\approx 22026466\\). The values keep increasing with no upper limit."
+            ],
+            "answer": "\\(\\lim_{t \\to \\infty} Pe^{rt} = \\infty\\): the value of the investment increases indefinitely as time approaches infinity."
+          },
+          {
+            "type": "example",
+            "title": "Example 17",
+            "problem": "Economics (Supply and Demand)\nIn economics, the demand function \\(D(p)\\) decreases as the price \\(p\\) increases. Suppose the demand function is given by \\(D(p) = \\frac{100}{p+t}\\), where \\(p\\) is the price in dollars. Find the limit of the demand as the price becomes very large, i.e., \\(\\lim_{p \\to \\infty} D(p)\\).",
+            "steps": [
+              "Given: the demand function. The book's solution uses \\(D(p) = \\dfrac{100}{p+1}\\) (the statement prints \\(p + t\\); see the correction below).\nTo find: \\(\\lim_{p \\to \\infty} D(p)\\).\nMethod: a fixed numerator divided by a denominator that grows without bound tends to 0 (12.2.3).",
+              "Step 1: Set up the limit\n\\[\\lim_{p \\to \\infty} D(p) = \\lim_{p \\to \\infty} \\dfrac{100}{p+1}\\]\nWhy: replace \\(D(p)\\) by its formula.",
+              "Step 2: Evaluate\nAs \\(p \\to \\infty\\), the denominator \\(p + 1\\) becomes very large, so\n\\[\\lim_{p \\to \\infty} \\dfrac{100}{p+1} = 0\\]\nWhy: dividing numerator and denominator by \\(p\\): \\(\\dfrac{100/p}{1 + 1/p} \\to \\dfrac{0}{1 + 0} = 0\\).",
+              "Check: \\(D(99) = 1\\), \\(D(999) = 0.1\\), \\(D(9999) = 0.01\\): the demand keeps falling towards 0."
+            ],
+            "answer": "\\(\\lim_{p \\to \\infty} D(p) = 0\\): as the price becomes very large, the demand approaches 0.",
+            "book_errors": [
+              "\\(D(p) = \\frac{100}{p+t}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The statement of Example 17 prints \\(D(p) = \\frac{100}{p+t}\\), but the solution uses \\(D(p) = \\frac{100}{p+1}\\); \\(t\\) is not defined in the problem. The intended function is \\(D(p) = \\frac{100}{p+1}\\). (The limit is 0 in either case, since \\(t\\) would only be a constant.)"
+          },
+          {
+            "type": "example",
+            "title": "Example 18",
+            "problem": "Astronomy (Apparent Brightness of Stars)\nThe apparent brightness \\(B(d)\\) of a star decreases as the distance from Earth increases following the inverse square law \\(B(d) = \\frac{L}{d^{2}}\\), where \\(L\\) is the star's luminosity. Find the limit of the brightness as \\(d \\to \\infty\\).",
+            "steps": [
+              "Given: \\(B(d) = \\dfrac{L}{d^{2}}\\), where \\(L > 0\\) is a fixed luminosity.\nTo find: \\(\\lim_{d \\to \\infty} B(d)\\).\nMethod: fixed numerator, denominator \\(d^{2}\\) growing without bound, so the fraction tends to 0.",
+              "Step 1: Set up the limit\n\\[\\lim_{d \\to \\infty} B(d) = \\lim_{d \\to \\infty} \\dfrac{L}{d^{2}}\\]\nWhy: replace \\(B(d)\\) by its formula.",
+              "Step 2: Evaluate\nAs \\(d \\to \\infty\\) the denominator becomes very large, so:\n\\[\\lim_{d \\to \\infty} \\dfrac{L}{d^{2}} = 0\\]\nWhy: \\(L\\) is a constant and \\(\\frac{1}{d^{2}} \\to 0\\) as \\(d \\to \\infty\\) (12.2.3).",
+              "Check: doubling the distance divides the brightness by 4: \\(B(2d) = \\dfrac{L}{4d^{2}} = \\dfrac{1}{4}B(d)\\); at ten times the distance it is \\(\\frac{1}{100}\\) as bright, and so on towards 0."
+            ],
+            "answer": "\\(\\lim_{d \\to \\infty} B(d) = 0\\): as the distance increases indefinitely, the apparent brightness of the star approaches 0."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read the answer back in the language of the problem. A limit of 0 for decay, demand or brightness means \"it fades away but never becomes negative\"; a limit of \\(\\infty\\) for an investment means \"it grows beyond any amount you name\". Real situations have limits too (no one waits forever), but the model tells us the long-term trend."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Long-term behaviour of a model = its limit as time (or price, or distance) \\(\\to \\infty\\).\n2. Exponential decay \\(A_{0}e^{-kt}\\) (\\(k > 0\\)) \\(\\to 0\\); exponential growth \\(Pe^{rt}\\) (\\(r > 0\\)) \\(\\to \\infty\\).\n3. A constant divided by a quantity that grows without bound tends to 0 (Examples 17 and 18)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Forgetting the sign of the exponent: \\(e^{-kt} \\to 0\\) but \\(e^{kt} \\to \\infty\\).\n2. Writing \\(\\infty\\) as if it were a number, e.g. \\(\\frac{100}{\\infty + 1}\\); write the reason in words: \"the denominator becomes very large\".\n3. Ignoring the conditions \\(k > 0\\), \\(r > 0\\): the conclusions depend on them."
+          }
+        ]
+      }
+    }
+  ]
+}

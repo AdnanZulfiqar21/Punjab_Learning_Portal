@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.2.5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.2.5",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 230,
+          "pdf_to": 231,
+          "note": "Book p. 225-226: 12.2.5 Methods for Evaluating the Limits at Infinity (divide by the highest power of x in the denominator); Examples 4, 5 and 6 (Example 6 (ii) on p. 226)."
+        }
+      ],
+      "title": "12.2.5 Methods for Evaluating the Limits at Infinity",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "In this case we first divide each term of both the numerator and the denominator by the highest power of \\(x\\) that appears in the denominator and then use the theorems on limit."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why this method? As \\(x \\to \\pm\\infty\\), a polynomial grows without bound, so a fraction of two polynomials looks like \\(\\frac{\\infty}{\\infty}\\), which tells us nothing. After dividing by the highest power in the denominator:\n1. the denominator tends to a finite non-zero number (its leading coefficient);\n2. every other term has the form \\(\\frac{a}{x^{p}}\\) and tends to 0 by the theorem of 12.2.3.\nThen the limit can be read off directly."
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "Evaluate \\(\\displaystyle\\lim_{x\\to +\\infty}\\frac{5x^{4}-10x^{2}+1}{-3x^{3}+10x^{2}+50}\\)",
+            "steps": [
+              "Given: \\(\\frac{5x^{4}-10x^{2}+1}{-3x^{3}+10x^{2}+50}\\) as \\(x \\to +\\infty\\).\nTo find: the limit.\nMethod: substitution is impossible (\\(\\infty\\) is not a number) and both parts grow without bound. The highest power of \\(x\\) in the denominator is \\(x^{3}\\), so we divide every term of the numerator and the denominator by \\(x^{3}\\) and use \\(\\lim \\frac{a}{x^{p}} = 0\\) (12.2.3).",
+              "Step 1: Divide each term by \\(x^{3}\\)\nNumerator: \\(\\frac{5x^{4}}{x^{3}} - \\frac{10x^{2}}{x^{3}} + \\frac{1}{x^{3}} = 5x - \\frac{10}{x} + \\frac{1}{x^{3}}\\)\nDenominator: \\(\\frac{-3x^{3}}{x^{3}} + \\frac{10x^{2}}{x^{3}} + \\frac{50}{x^{3}} = -3 + \\frac{10}{x} + \\frac{50}{x^{3}}\\)\n\\[\\lim_{x\\to +\\infty}\\dfrac{5x^{4}-10x^{2}+1}{-3x^{3}+10x^{2}+50}\\]\n\\[= \\lim_{x\\to +\\infty}\\dfrac{5x - \\frac{10}{x} + \\frac{1}{x^{3}}}{-3 + \\frac{10}{x} + \\frac{50}{x^{3}}}\\]\nWhy: dividing the numerator and the denominator by the same non-zero quantity does not change the fraction. Dividing by the highest power of the denominator makes the denominator tend to a finite non-zero number.",
+              "Step 2: Let \\(x \\to +\\infty\\)\n\\[= \\dfrac{\\infty - 0 + 0}{-3 + 0 + 0} = -\\infty\\]\n\\[\\because \\lim_{x\\to\\infty}\\dfrac{a}{x^{p}} = 0\\]\nWhy: \\(\\frac{10}{x}, \\frac{1}{x^{3}}, \\frac{10}{x}, \\frac{50}{x^{3}} \\to 0\\). The term \\(5x\\) grows without bound while the denominator tends to \\(-3\\); a very large positive number divided by \\(-3\\) is a very large negative number.",
+              "Step 3: Interpret the answer\nThe fraction decreases without bound, so the limit is \\(-\\infty\\): it does not tend to any finite number.\nWhy: the degree of the numerator (4) is greater than the degree of the denominator (3), so the numerator wins.",
+              "Check:\nAt \\(x = 1000\\): numerator \\(= 5 \\times 10^{12} - 10^{7} + 1 \\approx 4.99999 \\times 10^{12}\\), denominator \\(= -3 \\times 10^{9} + 10^{7} + 50 \\approx -2.99 \\times 10^{9}\\). The value is about \\(-1672\\); at \\(x = 10^{4}\\) it is about \\(-16672\\). It keeps going down, as \\(-\\infty\\) says."
+            ],
+            "answer": "\\(\\lim_{x\\to +\\infty}\\frac{5x^{4}-10x^{2}+1}{-3x^{3}+10x^{2}+50} = -\\infty\\) (the fraction decreases without bound)"
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Evaluate \\(\\displaystyle\\lim_{x\\to -\\infty}\\frac{4x^{4}-5x^{3}}{-3x^{5}+2x^{2}+1}\\)",
+            "steps": [
+              "Given: \\(\\frac{4x^{4}-5x^{3}}{-3x^{5}+2x^{2}+1}\\) as \\(x \\to -\\infty\\).\nTo find: the limit.\nMethod: the highest power of \\(x\\) in the denominator is \\(x^{5}\\). Divide every term by \\(x^{5}\\) and use \\(\\lim_{x\\to -\\infty}\\frac{a}{x^{p}} = 0\\) (12.2.3); integer powers are defined for negative \\(x\\).",
+              "Step 1: Divide each term by \\(x^{5}\\)\n\\[\\lim_{x\\to -\\infty}\\dfrac{4x^{4}-5x^{3}}{-3x^{5}+2x^{2}+1}\\]\n\\[= \\lim_{x\\to -\\infty}\\dfrac{\\frac{4}{x} - \\frac{5}{x^{2}}}{-3 + \\frac{2}{x^{3}} + \\frac{1}{x^{5}}}\\]\nWhy: \\(\\frac{4x^{4}}{x^{5}} = \\frac{4}{x}\\), \\(\\frac{5x^{3}}{x^{5}} = \\frac{5}{x^{2}}\\), \\(\\frac{-3x^{5}}{x^{5}} = -3\\), \\(\\frac{2x^{2}}{x^{5}} = \\frac{2}{x^{3}}\\), \\(\\frac{1}{x^{5}}\\) stays.",
+              "Step 2: Let \\(x \\to -\\infty\\)\n\\[= \\dfrac{0 - 0}{-3 + 0 + 0} = \\dfrac{0}{-3} = 0\\]\nWhy: every term of the form \\(\\frac{a}{x^{p}}\\) tends to 0. The denominator tends to \\(-3 \\ne 0\\), so the quotient is \\(\\frac{0}{-3} = 0\\). (This is not the \\(\\frac{0}{0}\\) form: only the numerator is 0.)",
+              "Check:\nAt \\(x = -100\\): numerator \\(= 4 \\times 10^{8} + 5 \\times 10^{6} = 4.05 \\times 10^{8}\\), denominator \\(= 3 \\times 10^{10} + 20001\\). The value is about 0.0135, close to 0. The degree of the numerator (4) is less than that of the denominator (5), so the denominator wins and the limit is 0."
+            ],
+            "answer": "\\(\\lim_{x\\to -\\infty}\\frac{4x^{4}-5x^{3}}{-3x^{5}+2x^{2}+1} = 0\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Examples 4 and 5 show a pattern for \\(\\lim_{x\\to\\pm\\infty}\\) of (polynomial)/(polynomial). Compare the degrees (highest powers):\n1. degree of numerator < degree of denominator: limit 0 (Example 5);\n2. degrees equal: limit = ratio of the leading coefficients, e.g. \\(\\lim_{x\\to\\infty}\\frac{3x^{2}+1}{x^{2}-5} = 3\\);\n3. degree of numerator > degree of denominator: the fraction grows without bound, limit \\(+\\infty\\) or \\(-\\infty\\) (Example 4).\nUse this only to check your answer; in the exam show the division."
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Evaluate: (i) \\(\\displaystyle\\lim_{x\\to -\\infty}\\frac{2-3x}{\\sqrt{3+4x^{2}}}\\)  (ii) \\(\\displaystyle\\lim_{x\\to +\\infty}\\frac{2-3x}{\\sqrt{3+4x^{2}}}\\)",
+            "steps": [
+              "Given: \\(\\frac{2-3x}{\\sqrt{3+4x^{2}}}\\), (i) as \\(x \\to -\\infty\\), (ii) as \\(x \\to +\\infty\\).\nTo find: both limits.\nMethod: under the root the highest power is \\(x^{2}\\), so the denominator behaves like \\(\\sqrt{x^{2}}\\). We divide up and down by \\(\\sqrt{x^{2}} = |x|\\). Since \\(|x| = -x\\) for \\(x < 0\\) and \\(|x| = x\\) for \\(x > 0\\), we divide by \\(-x\\) in (i) and by \\(x\\) in (ii).",
+              "(i) Step 1: Find \\(\\sqrt{x^{2}}\\) for negative \\(x\\)\nHere \\(\\sqrt{x^{2}} = |x| = -x\\) as \\(x < 0\\).\nWhy: a square root is never negative. For \\(x = -5\\), \\(\\sqrt{(-5)^{2}} = 5 = -(-5)\\).",
+              "(i) Step 2: Divide up and down by \\(-x\\)\nNumerator: \\(\\frac{2-3x}{-x} = -\\frac{2}{x} + 3\\)\nDenominator: \\(\\frac{\\sqrt{3+4x^{2}}}{-x} = \\frac{\\sqrt{3+4x^{2}}}{\\sqrt{x^{2}}} = \\sqrt{\\frac{3}{x^{2}} + 4}\\)\n\\[\\lim_{x\\to -\\infty}\\dfrac{2-3x}{\\sqrt{3+4x^{2}}} = \\lim_{x\\to -\\infty}\\dfrac{-\\frac{2}{x}+3}{\\sqrt{\\frac{3}{x^{2}}+4}}\\]\nWhy: \\(-x\\) is positive here, and \\(-x = \\sqrt{x^{2}}\\), so it can go inside the root as \\(x^{2}\\).",
+              "(i) Step 3: Let \\(x \\to -\\infty\\)\nThe book writes \\(\\dfrac{0+3}{0+4} = \\dfrac{3}{2}\\); the square root of the denominator must be kept:\n\\[= \\dfrac{0+3}{\\sqrt{0+4}} = \\dfrac{3}{2}\\]\nWhy: \\(\\frac{2}{x} \\to 0\\) and \\(\\frac{3}{x^{2}} \\to 0\\), and \\(\\sqrt{4} = 2\\).",
+              "(ii) Step 1: Find \\(\\sqrt{x^{2}}\\) for positive \\(x\\)\nHere \\(\\sqrt{x^{2}} = |x| = x\\) as \\(x > 0\\). Therefore we divide up and down by \\(x\\).\nWhy: for positive \\(x\\), \\(|x| = x\\).",
+              "(ii) Step 2: Divide up and down by \\(x\\)\n\\[\\lim_{x\\to +\\infty}\\dfrac{2-3x}{\\sqrt{3+4x^{2}}} = \\lim_{x\\to +\\infty}\\dfrac{\\frac{2}{x}-3}{\\sqrt{\\frac{3}{x^{2}}+4}}\\]\nWhy: \\(\\frac{2-3x}{x} = \\frac{2}{x} - 3\\) and \\(\\frac{\\sqrt{3+4x^{2}}}{x} = \\sqrt{\\frac{3+4x^{2}}{x^{2}}} = \\sqrt{\\frac{3}{x^{2}}+4}\\).",
+              "(ii) Step 3: Let \\(x \\to +\\infty\\)\nThe book writes \\(\\dfrac{0-3}{0+4} = \\dfrac{-3}{2}\\); again the root must be kept:\n\\[= \\dfrac{0-3}{\\sqrt{0+4}} = \\dfrac{-3}{2}\\]\nWhy: the same terms tend to 0 as in (i); only the sign of the numerator changes.",
+              "Check:\nAt \\(x = -1000\\): \\(\\frac{3002}{\\sqrt{4000003}} \\approx 1.5010\\), close to \\(\\frac{3}{2}\\).\nAt \\(x = 1000\\): \\(\\frac{-2998}{\\sqrt{4000003}} \\approx -1.4990\\), close to \\(-\\frac{3}{2}\\).\nThe signs make sense: for large negative \\(x\\), \\(2 - 3x\\) is positive; for large positive \\(x\\) it is negative, while the denominator is always positive."
+            ],
+            "answer": "(i) \\(\\lim_{x\\to -\\infty}\\frac{2-3x}{\\sqrt{3+4x^{2}}} = \\frac{3}{2}\\)  (ii) \\(\\lim_{x\\to +\\infty}\\frac{2-3x}{\\sqrt{3+4x^{2}}} = -\\frac{3}{2}\\)",
+            "book_errors": [
+              "\\(\\dfrac{0+3}{0+4} = \\dfrac{3}{2}\\)",
+              "\\(\\dfrac{0-3}{0+4} = \\dfrac{-3}{2}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In both parts the book drops the square root in the denominator of the last fraction: it prints \\(\\frac{0+3}{0+4} = \\frac{3}{2}\\) and \\(\\frac{0-3}{0+4} = \\frac{-3}{2}\\), although \\(\\frac{3}{4} \\ne \\frac{3}{2}\\). The denominator is \\(\\sqrt{\\frac{3}{x^{2}}+4} \\to \\sqrt{0+4} = 2\\), so the lines should read \\(\\frac{0+3}{\\sqrt{0+4}} = \\frac{3}{2}\\) and \\(\\frac{0-3}{\\sqrt{0+4}} = -\\frac{3}{2}\\). The final answers are correct."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "When \\(x \\to -\\infty\\) and there is a square root of an even power, write the line \"\\(\\sqrt{x^{2}} = |x| = -x\\) as \\(x < 0\\)\" before dividing, as the book does. This one line decides the sign of the answer and examiners look for it."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. For \\(x \\to \\pm\\infty\\): divide every term of the numerator and the denominator by the highest power of \\(x\\) in the denominator.\n2. Then use \\(\\lim_{x\\to\\pm\\infty}\\frac{a}{x^{p}} = 0\\).\n3. \\(\\sqrt{x^{2}} = |x|\\): it is \\(x\\) for \\(x > 0\\) and \\(-x\\) for \\(x < 0\\).\n4. The answer may be a number, 0, or \\(\\pm\\infty\\) (no finite limit)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Dividing by the highest power of the numerator instead of the denominator; the denominator may then tend to 0 and the method fails.\n2. Writing \\(\\sqrt{x^{2}} = x\\) when \\(x \\to -\\infty\\); this gives the wrong sign (in Example 6 (i) it would give \\(-\\frac{3}{2}\\) instead of \\(\\frac{3}{2}\\)).\n3. Forgetting the square root when substituting, as in the book's printed line \\(\\frac{0+3}{0+4}\\).\n4. Dividing only some of the terms; every term, up and down, must be divided."
+          }
+        ]
+      }
+    }
+  ]
+}
