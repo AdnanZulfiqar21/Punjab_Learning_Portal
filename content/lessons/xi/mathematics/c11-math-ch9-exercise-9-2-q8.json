@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-EXERCISE-9-2-Q8",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/u-exercise-9-2-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 181,
+          "pdf_to": 181,
+          "note": "Exercise 9.2, Question 8: book page 176 (PDF 181); its answer is key entry 9 on PDF 307 (not error-free); key entry 10 matches no printed question; checked with sympy and the solution book (PDF 865-866)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8. A received message polynomial is \\(P(x) = x^5 + x^3 + x + 1\\) and a known error-detecting polynomial is \\(g(x) = x + 1\\). Find whether the received message is error-free using the remainder theorem.",
+            "explanation": "In error detection a message is sent so that its polynomial divides exactly by \\(g(x)\\); remainder 0 on arrival means no error was found.\nWe must decide: error-free or not.\nPlan: write \\(x + 1 = x - (-1)\\), find the remainder \\(P(-1)\\); 0 means error-free, non-zero means an error.",
+            "steps": [
+              "Given: received message \\(P(x) = x^5 + x^3 + x + 1\\), error-detecting polynomial \\(g(x) = x + 1\\).\nTo find: whether the message is error-free.\nMethod: Remainder Theorem: the remainder on dividing \\(P(x)\\) by \\(x - a\\) is \\(P(a)\\). The message is error-free when this remainder is 0.",
+              "Find the value to use\n\\[x + 1 = x - (-1)\\]\n\\[\\Rightarrow a = -1\\]\nWhy: The theorem is stated for \\(x - a\\), so \\(x + 1\\) gives \\(a = -1\\).",
+              "Work out \\(P(-1)\\)\n\\[P(-1) = (-1)^5 + (-1)^3 + (-1) + 1\\]\n\\[= -1 - 1 - 1 + 1\\]\n\\[= -2\\]\nWhy: All the powers here (5, 3 and 1) are odd, so each gives \\(-1\\); only the constant \\(+1\\) stays positive.",
+              "Draw the conclusion\n\\[\\text{Remainder} = -2 \\neq 0\\]\nWhy: \\(g(x) = x + 1\\) does not divide the received message exactly, so the message is not error-free: something changed during sending.",
+              "Check by synthetic division by \\(x + 1\\) (\\(a = -1\\))\nCoefficients \\(1,\\ 0,\\ 1,\\ 0,\\ 1,\\ 1\\) (zeros for the missing \\(x^4\\) and \\(x^2\\)):\n\\(1\\); \\(0 - 1 = -1\\); \\(1 + 1 = 2\\); \\(0 - 2 = -2\\); \\(1 + 2 = 3\\); \\(1 - 3 = -2\\).\n\\[\\text{Remainder} = -2 \\;\\checkmark\\]\nWhy: Missing powers must get a 0 coefficient, otherwise the columns shift. The division gives the same remainder \\(-2\\)."
+            ],
+            "final_answer": "Not error-free: the remainder is \\(P(-1) = -2 \\neq 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the answer key (PDF 307) this question's answer is printed as entry 9, \"Received message is not error-free, because remainder is non-zero\", which agrees with our working. Entry 10 (\"Code word is not valid, because \\(x - 1\\) is not a factor of \\(C(x)\\)\") belongs to no printed question: there is no \\(C(x)\\) in this exercise."
+          }
+        ]
+      }
+    }
+  ]
+}

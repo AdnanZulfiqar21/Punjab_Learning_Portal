@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-9.2-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/9.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 179,
+          "pdf_to": 180,
+          "note": "Book p. 174-175: 9.2 introduction (polynomial regression, signal processing, coding theory), Polynomial Regression with Examples 8-9, Digital Signal Processing (DSP) with Example 10. Teaching notes, Key points, Common mistakes are ours."
+        }
+      ],
+      "title": "9.2 Real Life Applications of Remainder and Factor Theorems (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH9-9.2",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab tak humne remainder theorem aur factor theorem seekhe. Students aksar poochte hain: \"Sir, yeh asal zindagi mein kahan kaam aate hain?\" Yeh page isi sawal ka jawab hai. Hum dekhenge ke data ka model banane (polynomial regression) aur digital signals (sound, tasweer) ke kaam mein yahi do theorems kaise istemal hote hain. Achhi baat yeh hai ke hisaab bilkul wohi hai: kisi value par polynomial nikalna."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab kehti hai: is hisse mein hum dikhayenge ke remainder aur factor theorems mukhtalif shobon mein kaise lagte hain, jaise polynomial regression (statistical modeling mein), signal processing (filtering aur ghalti pakarne mein) aur coding theory (communication systems mein data encryption aur ghalti theek karne mein). Yeh misaalein dikhati hain ke polynomials ki ahmiyat sirf kitabi maths tak mehdood nahin.",
+            "bold": [
+              "polynomial regression",
+              "signal processing",
+              "coding theory"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Teeno applications mein sirf do baatein chahiye, jo aap 9.1.1 aur 9.1.2 mein seekh chuke hain:\n1. Remainder theorem: \\(P(a)\\) wohi hai jo \\(P(x)\\) ko \\(x - a\\) se divide karne par remainder aata hai. Yani model ki kisi input par value nikalna aur remainder nikalna ek hi kaam hai.\n2. Factor theorem: \\(P(a) = 0\\) tab hota hai jab \\(x - a\\) factor ho, yani \\(a\\) root ho.\nNeeche \"predicted value\" ya \"system response\" ka matlab sirf \\(P(a)\\) hai. Naye alfaaz se ghabraiye mat; andar wohi purana hisaab hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Polynomial Regression"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki definition: yeh regression analysis ki ek qisam hai jis mein independent variable (jise hum chunte hain, jaise mahina) aur dependent variable (jo us par munhasir hai, jaise sales) ka rishta \\(n^{\\text{th}}\\)-degree polynomial se dikhaya jata hai. Yeh tab istemal hota hai jab data seedhi line ke bajaye ghoomta hua (curved, non-linear) rishta dikhaye, lekin hum phir bhi ek smooth aur lagataar (continuous) function fit karna chahte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Aasan lafzon mein: hamare paas data hai, misaal ke taur par har mahine ki dukaan ki sales. Hum ek polynomial \\(P(x)\\) chunte hain jis ka graph in points ke qareeb se guzre. Phir \\(P(x)\\) mahine \\(x\\) ke liye model ki predicted (andaza lagayi hui) value hai. Asal mein jo hua woh observed value hai. In dono ka farq:\n\\[\\text{Error} = \\text{Observed} - \\text{Predicted}\\]\nError chhota ho to model us point par achha fit hai. Misaal: mausam ka andaza 30 darje tha aur asal mein 32 hua, to error \\(32 - 30 = 2\\) darje."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Consider a data set of monthly sales figures. A polynomial regression model \\(P(x) = x^{3} + x^{2} + 2x + 1\\) is fitted to this data. If the observed sales in the \\(3^{\\text{rd}}\\) month are 40 units, find the percentage error.",
+            "steps": [
+              "Given: \\(P(x) = x^{3} + x^{2} + 2x + 1\\); teesre mahine ki observed sales \\(= 40\\) units.\nTo find: \\(x = 3\\) par percentage error.\nMethod: pehle samjhein ke model teesre mahine ke liye kya kehta hai: \\(P(3)\\). Remainder theorem ke mutabiq yeh \\(P(x)\\) ko \\(x - 3\\) se divide karne ka remainder hai. Phir Error = Observed − Predicted, aur percentage error batata hai ke yeh ghalti observed value ke muqable mein kitni bari hai.",
+              "Step 1: Predicted sales\n\\[P(3) = 3^{3} + 3^{2} + 2(3) + 1\\]\n\\[= 27 + 9 + 6 + 1 = 43\\]\nKyun: model ka teesre mahine ka andaza us ki \\(x = 3\\) par value hai. Har term alag nikal kar jama karein: \\(27 + 9 = 36\\), \\(36 + 6 = 42\\), \\(42 + 1 = 43\\).",
+              "Step 2: Error\n\\[\\text{Error} = 40 - P(3) = 40 - 43 = -3\\]\nKyun: Error = Observed − Predicted. Minus sign ka matlab hai ke model ne asal se 3 units zyada sales ka andaza lagaya tha.",
+              "Step 3: Percentage error\n\\[\\left|\\dfrac{-3}{40}\\right| \\times 100 = 7.5\\%\\]\nKyun: kitab ghalti ka size (absolute value, yani sign hata kar) observed value se divide kar ke 100 se multiply karti hai. Percentage mein sign nahin rakhte; sirf yeh dekhna hai ke ghalti kitni bari hai.",
+              "Tasdeeq:\n40 ka \\(7.5\\%\\) hai \\(0.075 \\times 40 = 3\\), jo ghalti ka size hai. Jawab sahi hai."
+            ],
+            "answer": "Error \\(= -3\\) units; percentage error \\(= 7.5\\%\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "Percentage error mein kis cheez se divide karna hai, is par alag kitabein alag tareeqa likhti hain: koi observed value se, koi predicted value se. Hamari kitab Example 8 mein observed value (40) se divide karti hai, is liye exam mein yahi tareeqa likhein aur formula pehle likh dein taa ke examiner ko pata ho ke aap ne kya kiya. Aur yaad rakhein ke percentage error hamesha positive likhte hain, kyun ke yeh sirf ghalti ka size batata hai, simt (direction) nahin."
+          },
+          {
+            "type": "paragraph",
+            "text": "Agli misaal mein sawal ulta hai: model ka ek coefficient \\(a\\) maloom nahin, aur humein bataya gaya hai ke model ek khaas point par \"accurately fitted\" hai. Kitab is ka matlab factor theorem wala leti hai: us point par polynomial zero hai. Isi se \\(a\\) ki equation banegi, bilkul 9.1.2 ki Example 6 ki tarah."
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "A quadratic regression model is \\(P(x) = x^{2} + ax + 12\\). If regression model fitted accurately at \\(x = -3\\), then find the value of \\(a\\).",
+            "steps": [
+              "Given: \\(P(x) = x^{2} + ax + 12\\), jo \\(x = -3\\) par \"accurately fitted\" hai.\nTo find: \\(a\\).\nMethod: kitab \"fitted accurately at \\(x = -3\\)\" ka matlab yeh leti hai ke \\(x = -3\\) root hai, yani \\(P(-3) = 0\\). Factor theorem se iska matlab yeh bhi hai ke \\(x + 3\\) factor hai. Is ek shart se \\(a\\) ki equation banegi.",
+              "Step 1: \\(P(-3) = 0\\) likhein\n\\[(-3)^{2} + a(-3) + 12 = 0\\]\n\\[9 - 3a + 12 = 0\\]\nKyun: \\(x = -3\\) rakha; \\((-3)^{2} = +9\\) (even power) aur \\(a \\times (-3) = -3a\\).",
+              "Step 2: \\(a\\) hal karein\n\\[21 - 3a = 0\\]\n\\[a = 7\\]\nKyun: \\(9 + 12 = 21\\); phir \\(3a = 21\\), dono taraf 3 se divide kiya to \\(a = 7\\).",
+              "Tasdeeq:\n\\[P(x) = x^{2} + 7x + 12 = (x + 3)(x + 4)\\]\n\\[P(-3) = 9 - 21 + 12 = 0\\]\n\\(x + 3\\) waqai factor hai."
+            ],
+            "answer": "\\(a = 7\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Digital Signal Processing (DSP)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki definition: DSP computers aur digital devices mein signals, jaise awaaz, tasaveer ya sensor ka data, ko samajhne, badalne ya behtar banane ke liye istemal hota hai. Remainder theorem DSP mein ek taaqatwar auzaar hai jo system ke response, stability (thehraao) ki jaanch aur frequency analysis ko aasan banata hai. Agar remainder zero ho to iska matlab hai ke us input par system mein koi error nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Misaal ke taur par aap ke phone ka mic awaaz ko numbers mein badalta hai, aur software in numbers par polynomial jaise formulas chala kar shor (noise) kam karta hai. Kisi khaas input par formula ki value (response) dekhni ho to remainder theorem se seedha \\(P(a)\\) nikal lete hain, poori division ki zaroorat nahin."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "A digital signal processing system is represented by the polynomial \\(P(z) = z^{4} - 3z^{3} + 2z^{2} + z - 5\\). Find the system response at \\(z = -1\\) using the remainder theorem.",
+            "steps": [
+              "Given: \\(P(z) = z^{4} - 3z^{3} + 2z^{2} + z - 5\\).\nTo find: \\(z = -1\\) par system ka response.\nMethod: remainder theorem se response \\(P(-1)\\) hai, yani \\(P(z)\\) ko \\(z + 1\\) se divide karne ka remainder. Agar yeh zero aaya to us input par system mein error nahin. Variable \\(x\\) ki jagah \\(z\\) hai, lekin qaida wohi hai.",
+              "Step 1: \\(z = -1\\) par har term alag nikalein\n\\[(-1)^{4} = 1,\\quad -3(-1)^{3} = 3\\]\n\\[2(-1)^{2} = 2,\\quad (-1) = -1\\]\nKyun: \\(-1\\) ki even power 1 aur odd power \\(-1\\) hoti hai. \\(-3 \\times (-1) = +3\\). Term ba term chalne se sign ki ghalti nahin hoti.",
+              "Step 2: Jama karein\n\\[\\text{Remainder} = P(-1)\\]\n\\[= 1 + 3 + 2 - 1 - 5 = 0\\]\nKyun: constant \\(-5\\) waisa hi jama hota hai. \\(1 + 3 + 2 = 6\\), \\(6 - 1 = 5\\), \\(5 - 5 = 0\\).",
+              "Step 3: Matlab samjhein\n\\(P(-1) = 0\\) hai, is liye \\(z = -1\\) par system mein koi error nahin.\nKyun: kitab ka DSP wala qaida: remainder zero yani error nahin. Factor theorem se \\(z + 1\\) bhi \\(P(z)\\) ka factor hai.",
+              "Tasdeeq (synthetic division, \\(a = -1\\)):\n\\[\\begin{array}{r|rrrrr} -1 & 1 & -3 & 2 & 1 & -5 \\\\ & & -1 & 4 & -6 & 5 \\\\ \\hline & 1 & -4 & 6 & -5 & \\boxed{0} \\end{array}\\]\n1 neeche; \\(1 \\times (-1) = -1\\), \\(-3 - 1 = -4\\); \\(-4 \\times (-1) = 4\\), \\(2 + 4 = 6\\); \\(6 \\times (-1) = -6\\), \\(1 - 6 = -5\\); \\(-5 \\times (-1) = 5\\), \\(-5 + 5 = 0\\). Remainder 0, bilkul wohi."
+            ],
+            "answer": "\\(P(-1) = 0\\): the system response at \\(z = -1\\) is 0, so the system has no error at \\(z = -1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahin. Ek model \\(P(x) = x^{2} + 2x + 5\\) hai aur doosre mahine (\\(x = 2\\)) ki observed sales 15 units hain. Percentage error?\nHal: \\(P(2) = 4 + 4 + 5 = 13\\); Error \\(= 15 - 13 = 2\\); percentage error \\(= \\left|\\frac{2}{15}\\right| \\times 100 \\approx 13.3\\%\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Example 10 ke system ka response \\(z = 1\\) par kya hai, aur kya wahan error hai? (Jawab: \\(P(1) = 1 - 3 + 2 + 1 - 5 = -4 \\ne 0\\), is liye \\(z = 1\\) par error hai.)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Kisi input \\(a\\) par predicted value ya system response \\(P(a)\\) hai, jo \\(x - a\\) se divide karne ka remainder hai.\n2. Error = Observed − Predicted; percentage error (kitab ke mutabiq) \\(= \\left|\\frac{\\text{Error}}{\\text{Observed}}\\right| \\times 100\\).\n3. Kitab \"fitted accurately at \\(a\\)\" (Example 9) aur \"no error at \\(a\\)\" (Example 10) dono ka matlab \\(P(a) = 0\\) leti hai.\n4. Naye shobe, purana hisaab: har sawal mein bas \\(P(a)\\) nikalna hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Error = Predicted − Observed likh dena; kitab Observed − Predicted leti hai.\n2. Percentage error mein minus sign rakh dena; absolute value lein.\n3. \\(-3(-1)^{3}\\) mein sign ki ghalti: yeh \\(+3\\) hai, \\(-3\\) nahin.\n4. \\(z\\) dekh kar ghabra jana: variable ka naam badalne se qaida nahin badalta."
+          }
+        ]
+      }
+    }
+  ]
+}

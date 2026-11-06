@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-9.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/9.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 175,
+          "pdf_to": 176,
+          "note": "Book p. 170-171: Unit 9 Introduction, 9.1 definition of a polynomial (i) and degree, Examples 1-2 (long-division boxes). Teaching notes, Key points, Common mistakes and the RU practice item are ours."
+        }
+      ],
+      "title": "9.1 Polynomial Function",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Introduction"
+          },
+          {
+            "type": "paragraph",
+            "text": "Polynomials play a basic role in algebra and are used widely in engineering, data science and digital communication. This unit studies the division of one polynomial by another to find the quotient and the remainder. The remainder theorem is introduced as a quick tool for evaluating polynomials, and the factor theorem is used to factorize cubic polynomials. These ideas are also applied in polynomial regression, signal processing and coding theory. By mastering them, students understand polynomials and their use in real-world problems better."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Road map of this unit:\n1. 9.1 Long division of polynomials (this page).\n2. 9.1.1 Remainder theorem: the remainder on dividing by \\(x - a\\) is \\(f(a)\\), so we can find it without dividing.\n3. 9.1.2 Factor theorem: \\(x - a\\) is a factor exactly when \\(f(a) = 0\\).\n4. 9.1.3 Synthetic division: a short way of dividing by \\(x - a\\).\n5. 9.2 Real-life applications.\nThe running head of the book's pages calls this unit \"Remainder and Factor Theorem\"; it is the same unit."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "9.1 Polynomial Function"
+          },
+          {
+            "type": "paragraph",
+            "text": "A polynomial in \\(x\\) is an expression of the form"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned} &a_{n}x^{n} + a_{n-1}x^{n-1} + a_{n-2}x^{n-2} \\\\ &+ \\ldots + a_{2}x^{2} + a_{1}x + a_{0} \\quad \\text{(i)} \\end{aligned}",
+            "text_alt": "a sub n x to the power n, plus a sub n minus 1 x to the power n minus 1, plus a sub n minus 2 x to the power n minus 2, plus and so on, plus a sub 2 x squared, plus a sub 1 x, plus a sub 0, expression (i)"
+          },
+          {
+            "type": "paragraph",
+            "text": "where \\(n\\) is a non-negative integer and the coefficients \\(a_{n}, a_{n-1}, a_{n-2}, \\ldots, a_{1}\\) and \\(a_{0}\\) are real numbers. It can be considered as a polynomial function of \\(x\\). The highest power of \\(x\\) in a polynomial is called the degree of the polynomial. In the expression (i), if \\(a_{n} \\ne 0\\), then it is a polynomial of degree \\(n\\). The polynomials \\(x^{2} - 2x + 3\\) and \\(3x^{3} + 2x^{2} - 5x + 4\\) are of degree 2 and 3 respectively.",
+            "bold": [
+              "degree"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Words we will use all through the unit, shown on \\(3x^{3} + 2x^{2} - 5x + 4\\):\n1. Terms: \\(3x^{3}\\), \\(2x^{2}\\), \\(-5x\\), \\(4\\).\n2. Coefficients: the numbers in front of the powers: 3, 2, \\(-5\\) and 4.\n3. Leading term: the term with the highest power, \\(3x^{3}\\); its coefficient 3 is the leading coefficient.\n4. Constant term: the term without \\(x\\), here 4 (it is \\(a_{0}\\)).\n5. Degree: the highest power, here 3.\n\"Non-negative integer\" means the powers can only be \\(0, 1, 2, 3, \\ldots\\). So \\(x^{-1} + 2\\) and \\(\\sqrt{x} + 1\\) are not polynomials.\nA polynomial is written in descending powers (highest power first). A missing power has coefficient 0, e.g. \\(x^{3} - 7x + 6 = x^{3} + 0x^{2} - 7x + 6\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Dividing a polynomial by a polynomial"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Polynomial division works exactly like long division of numbers. For numbers, \\(17 \\div 5\\) gives quotient 3 and remainder 2, and \\(17 = 5 \\times 3 + 2\\) with the remainder smaller than the divisor. For polynomials:\n\\[\\text{Dividend} = \\text{Divisor} \\times \\text{Quotient} + \\text{Remainder}\\]\nand we stop when the degree of the remainder is less than the degree of the divisor.\nThe routine, repeated until we stop:\n1. Write both polynomials in descending powers; write 0 for any missing power.\n2. Divide the leading term of the dividend by the leading term of the divisor: this is the next term of the quotient.\n3. Multiply the whole divisor by this term.\n4. Subtract (change every sign of the product and add).\n5. Bring down the next term and repeat."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Divide the cubic polynomial \\(3x^{3} - 10x^{2} + 13x - 6\\) by the linear polynomial \\(x - 2\\). Also find quotient and remainder.",
+            "steps": [
+              "Given: dividend \\(3x^{3} - 10x^{2} + 13x - 6\\) (degree 3), divisor \\(x - 2\\) (degree 1).\nTo find: the quotient and the remainder.\nMethod: long division. The divisor has degree 1, so we stop when the remainder is a constant (degree 0).",
+              "Step 1: First term of the quotient\n\\[\\dfrac{3x^{3}}{x} = 3x^{2}\\]\n\\[3x^{2}(x - 2) = 3x^{3} - 6x^{2}\\]\n\\[(3x^{3} - 10x^{2}) - (3x^{3} - 6x^{2}) = -4x^{2}\\]\nBring down \\(+13x\\): the new dividend is \\(-4x^{2} + 13x\\).\nWhy: dividing the leading terms gives the term that makes the highest power cancel when we subtract.",
+              "Step 2: Second term of the quotient\n\\[\\dfrac{-4x^{2}}{x} = -4x\\]\n\\[-4x(x - 2) = -4x^{2} + 8x\\]\n\\[(-4x^{2} + 13x) - (-4x^{2} + 8x) = 5x\\]\nBring down \\(-6\\): the new dividend is \\(5x - 6\\).\nWhy: the same routine; now the leading term is \\(-4x^{2}\\). Note \\(13x - 8x = 5x\\).",
+              "Step 3: Third term of the quotient\n\\[\\dfrac{5x}{x} = 5\\]\n\\[5(x - 2) = 5x - 10\\]\n\\[(5x - 6) - (5x - 10) = 4\\]\nWhy: \\(-6 - (-10) = -6 + 10 = 4\\). The remainder 4 has degree 0, less than the degree 1 of the divisor, so the division stops.",
+              "Step 4: The complete working in one layout\n\\[\\begin{array}{r} 3x^{2}-4x+5 \\\\ x-2\\,\\overline{\\smash{)}\\,3x^{3}-10x^{2}+13x-6} \\\\ \\underline{-(3x^{3}-6x^{2})}\\phantom{+13x-6} \\\\ -4x^{2}+13x\\phantom{-6} \\\\ \\underline{-(-4x^{2}+8x)}\\phantom{-6} \\\\ 5x-6 \\\\ \\underline{-(5x-10)} \\\\ 4 \\end{array}\\]\nWhy: this is the book's long-division box. The book writes the product rows with their signs changed (small signs under the terms) and then adds; writing \\(-(\\ldots)\\) as here means the same thing.",
+              "Step 5: Write the result\n\\[3x^{3} - 10x^{2} + 13x - 6\\]\n\\[= (x - 2)(3x^{2} - 4x + 5) + 4\\]\nSo, quotient \\(= 3x^{2} - 4x + 5\\) and remainder \\(= 4\\).\nWhy: Dividend = Divisor × Quotient + Remainder.",
+              "Check:\n\\[(x - 2)(3x^{2} - 4x + 5)\\]\n\\[= 3x^{3} - 4x^{2} + 5x - 6x^{2} + 8x - 10\\]\n\\[= 3x^{3} - 10x^{2} + 13x - 10\\]\nAdding the remainder 4 gives \\(3x^{3} - 10x^{2} + 13x - 6\\), the dividend."
+            ],
+            "answer": "Quotient \\(= 3x^{2} - 4x + 5\\) and remainder \\(= 4\\), i.e. \\(3x^{3} - 10x^{2} + 13x - 6 = (x - 2)(3x^{2} - 4x + 5) + 4\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Look at the value of the dividend at \\(x = 2\\) (the number that makes the divisor \\(x - 2\\) zero):\n\\[f(2) = 24 - 40 + 26 - 6 = 4\\]\nThis is exactly the remainder. This is not a coincidence: it is the remainder theorem of 9.1.1."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Divide the polynomial \\(x^{4} - 3x^{3} + 5x^{2} - 7x + 2\\) by \\(x^{2} - x + 1\\). Also find quotient and remainder.",
+            "steps": [
+              "Given: dividend \\(x^{4} - 3x^{3} + 5x^{2} - 7x + 2\\) (degree 4), divisor \\(x^{2} - x + 1\\) (degree 2).\nTo find: the quotient and the remainder.\nMethod: long division. The divisor has degree 2, so we stop when the remainder has degree 1 or 0.",
+              "Step 1: First term of the quotient\n\\[\\dfrac{x^{4}}{x^{2}} = x^{2}\\]\n\\[x^{2}(x^{2} - x + 1) = x^{4} - x^{3} + x^{2}\\]\nSubtract from \\(x^{4} - 3x^{3} + 5x^{2}\\):\n\\[-3x^{3} - (-x^{3}) = -2x^{3}\\]\n\\[5x^{2} - x^{2} = 4x^{2}\\]\nBring down \\(-7x\\): the new dividend is \\(-2x^{3} + 4x^{2} - 7x\\).\nWhy: the divisor has three terms, so each product has three terms and we subtract term by term in matching powers.",
+              "Step 2: Second term of the quotient\n\\[\\dfrac{-2x^{3}}{x^{2}} = -2x\\]\n\\[-2x(x^{2} - x + 1) = -2x^{3} + 2x^{2} - 2x\\]\n\\[(-2x^{3} + 4x^{2} - 7x) - (-2x^{3} + 2x^{2} - 2x)\\]\n\\[= 2x^{2} - 5x\\]\nBring down \\(+2\\): the new dividend is \\(2x^{2} - 5x + 2\\).\nWhy: \\(-7x - (-2x) = -5x\\); a minus times a minus is a plus.",
+              "Step 3: Third term of the quotient\n\\[\\dfrac{2x^{2}}{x^{2}} = 2\\]\n\\[2(x^{2} - x + 1) = 2x^{2} - 2x + 2\\]\n\\[(2x^{2} - 5x + 2) - (2x^{2} - 2x + 2) = -3x\\]\nWhy: \\(-3x\\) has degree 1, less than the degree 2 of the divisor, so we stop. With a quadratic divisor the remainder may contain an \\(x\\)-term.",
+              "Step 4: The complete working in one layout\n\\[\\begin{array}{r} x^{2}-2x+2 \\\\ x^{2}-x+1\\,\\overline{\\smash{)}\\,x^{4}-3x^{3}+5x^{2}-7x+2} \\\\ \\underline{-(x^{4}-x^{3}+x^{2})}\\phantom{-7x+2} \\\\ -2x^{3}+4x^{2}-7x\\phantom{+2} \\\\ \\underline{-(-2x^{3}+2x^{2}-2x)}\\phantom{+2} \\\\ 2x^{2}-5x+2 \\\\ \\underline{-(2x^{2}-2x+2)} \\\\ -3x \\end{array}\\]\nWhy: this is the book's long-division box, with the subtractions written as \\(-(\\ldots)\\).",
+              "Check:\n\\[(x^{2} - x + 1)(x^{2} - 2x + 2)\\]\n\\[= x^{4} - 2x^{3} + 2x^{2} - x^{3} + 2x^{2}\\]\n\\[\\quad - 2x + x^{2} - 2x + 2\\]\n\\[= x^{4} - 3x^{3} + 5x^{2} - 4x + 2\\]\nAdding the remainder \\(-3x\\) gives \\(x^{4} - 3x^{3} + 5x^{2} - 7x + 2\\), the dividend."
+            ],
+            "answer": "Quotient \\(= x^{2} - 2x + 2\\) and remainder \\(= -3x\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A polynomial has only non-negative whole-number powers of \\(x\\); its degree is the highest power.\n2. Dividend = Divisor × Quotient + Remainder.\n3. Stop dividing when the degree of the remainder is less than the degree of the divisor.\n4. Dividing by a linear divisor \\(x - a\\) leaves a constant remainder; a quadratic divisor can leave a linear remainder (Example 2).\n5. Always check by multiplying back: Divisor × Quotient + Remainder must give the dividend."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistakes",
+            "text": "1. Forgetting a 0 for a missing power, which puts terms in the wrong columns. Write \\(x^{3} - 7x + 6\\) as \\(x^{3} + 0x^{2} - 7x + 6\\) before dividing.\n2. Subtracting wrongly: change the sign of every term of the product, not only the first one. In Example 1, \\(-6 - (-10) = 4\\), not \\(-16\\).\n3. Stopping too early or too late: stop exactly when the remainder's degree is less than the divisor's degree.\n4. Dividing by the whole divisor instead of its leading term when finding the next quotient term."
+          }
+        ]
+      }
+    }
+  ]
+}

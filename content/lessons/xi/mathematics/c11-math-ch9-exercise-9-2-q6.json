@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-EXERCISE-9-2-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/u-exercise-9-2-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 181,
+          "pdf_to": 181,
+          "note": "Exercise 9.2, Question 6: book page 176 (PDF 181); constant of S(t) overprinted (+5 / -6); key entry 7 on PDF 307 gives 45, which needs +5; checked with sympy and the solution book (PDF 863-864)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. Consider a signal represented by the polynomial \\(S(t) = 3t^2 - 2t + 5\\) [the last term is overprinted in the book; \\(+5\\) is the reading the answer key implies]. If the input to the system is \\(t = 4\\), find the remainder by using remainder theorem.",
+            "explanation": "This is the Remainder Theorem with the letter \\(t\\) instead of \\(x\\): the remainder on dividing \\(S(t)\\) by \\(t - 4\\) is \\(S(4)\\).\nWe must find one number. The constant term is unclear in print; we use \\(+5\\), the reading that gives the key's answer (see the box below).\nPlan: substitute \\(t = 4\\); check by division.",
+            "steps": [
+              "Given: \\(S(t) = 3t^2 - 2t + 5\\) (constant read as \\(+5\\)), input \\(t = 4\\).\nTo find: the remainder on dividing \\(S(t)\\) by \\(t - 4\\).\nMethod: Remainder Theorem: the remainder is \\(S(4)\\). The variable's name does not matter; \\(t\\) works exactly like \\(x\\).",
+              "Work out \\(S(4)\\)\n\\[S(4) = 3(4)^2 - 2(4) + 5\\]\n\\[= 3(16) - 8 + 5\\]\n\\[= 48 - 8 + 5\\]\n\\[= 45\\]\nWhy: Power first (\\(4^2 = 16\\)), then multiply (\\(3 \\times 16 = 48\\), \\(2 \\times 4 = 8\\)), then \\(48 - 8 = 40\\), \\(40 + 5 = 45\\).",
+              "Check by synthetic division by \\(t - 4\\)\nCoefficients \\(3,\\ -2,\\ 5\\), \\(a = 4\\):\nbring down 3; \\(3 \\times 4 = 12\\), \\(-2 + 12 = 10\\);\n\\(10 \\times 4 = 40\\), \\(5 + 40 = 45\\).\n\\[\\text{Quotient} = 3t + 10\\]\n\\[\\text{Remainder} = 45 \\;\\checkmark\\]\nWhy: The division gives the same remainder; also \\((t - 4)(3t + 10) + 45 = 3t^2 - 2t + 5\\).",
+              "If the constant were \\(-6\\) instead\n\\[S(4) = 48 - 8 - 6 = 34\\]\nWhy: The method is the same whatever the constant is; only the last number changes. Since the answer key gives 45, the intended term is \\(+5\\)."
+            ],
+            "final_answer": "Remainder \\(= S(4) = 45\\) (with \\(S(t) = 3t^2 - 2t + 5\\), the reading the answer key implies)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The last term of \\(S(t) = 3t^2 - 2t \\ldots\\) is overprinted in the book: two characters lie on top of each other, and it can be read as \\(+5\\) or as \\(-6\\). We cannot tell from the print alone. The answer key (PDF 307) gives this question's answer as entry 7, \"45\", and \\(S(4) = 45\\) only when the constant is \\(+5\\) (with \\(-6\\) it would be 34). So we solved with \\(+5\\), the reading the key implies."
+          }
+        ]
+      }
+    }
+  ]
+}
