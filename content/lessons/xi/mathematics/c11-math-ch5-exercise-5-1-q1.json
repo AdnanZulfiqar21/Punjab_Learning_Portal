@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH5-EXERCISE-5-1-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch5",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch5/u-exercise-5-1-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 90,
+          "pdf_to": 90,
+          "note": "Exercise 5.1, Question 1: book page 85 (PDF 90); answer key book page 298 (PDF 303)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1",
+            "prompt": "1. Resolve into partial fractions: \\(\\frac{1}{x^2 - 1}\\)",
+            "explanation": "A proper fraction whose denominator splits into two different linear factors: Case I.\nWe must write it as a sum of two simple fractions.\nPlan: factorise \\(x^2 - 1\\), set up the identity, find \\(A\\) and \\(B\\) by putting zeros of the factors, then check.",
+            "steps": [
+              "Given: \\(\\frac{1}{x^2 - 1}\\)\nTo find: its partial fractions.\nMethod: Case I (non-repeated linear factors). Each linear factor gets one fraction with an unknown constant on top. The constants are found from an identity, which is true for every value of \\(x\\).",
+              "Check that the fraction is proper\nNumerator degree 0, denominator degree 2.\nWhy: Partial fractions are written directly only for a proper fraction (degree of top less than degree of bottom). \\(0 < 2\\), so no division is needed.",
+              "Factorise the denominator\n\\[x^2 - 1 = (x - 1)(x + 1)\\]\nWhy: Difference of squares, \\(a^2 - b^2 = (a - b)(a + b)\\).",
+              "Write the form of the partial fractions\n\\[\\dfrac{1}{(x - 1)(x + 1)} = \\dfrac{A}{x - 1} + \\dfrac{B}{x + 1}\\]\nWhy: Two different linear factors, so two fractions, each with a constant on top.",
+              "Remove the denominators to get the identity\nMultiply both sides by \\((x - 1)(x + 1)\\):\n\\[1 = A(x + 1) + B(x - 1) \\quad (i)\\]\nWhy: Under \\(A\\) the factor \\((x - 1)\\) cancels and \\((x + 1)\\) is left; under \\(B\\) the factor \\((x + 1)\\) cancels and \\((x - 1)\\) is left.",
+              "Find \\(A\\): put \\(x = 1\\) in (i)\n\\[1 = A(1 + 1) + B(0)\\]\n\\[1 = 2A\\]\n\\[A = \\tfrac{1}{2}\\]\nWhy: \\(x = 1\\) makes \\(x - 1 = 0\\), so the \\(B\\) term vanishes and only \\(A\\) is left.",
+              "Find \\(B\\): put \\(x = -1\\) in (i)\n\\[1 = A(0) + B(-1 - 1)\\]\n\\[1 = -2B\\]\n\\[B = -\\tfrac{1}{2}\\]\nWhy: \\(x = -1\\) makes \\(x + 1 = 0\\), so the \\(A\\) term vanishes.",
+              "Compare coefficients (a second check on \\(A\\) and \\(B\\))\nExpand (i): \\(1 = (A + B)x + (A - B)\\).\n\\[x:\\ A + B = 0\\]\n\\[\\tfrac{1}{2} - \\tfrac{1}{2} = 0 \\;\\checkmark\\]\n\\[\\text{const}:\\ A - B = 1\\]\n\\[\\tfrac{1}{2} + \\tfrac{1}{2} = 1 \\;\\checkmark\\]\nWhy: (i) is an identity, so the coefficients of equal powers of \\(x\\) on both sides must be equal (theorem on equal polynomials). The left side has no \\(x\\) term.",
+              "Write the answer\n\\[\\dfrac{1}{x^2 - 1} = \\dfrac{1}{2(x - 1)} - \\dfrac{1}{2(x + 1)}\\]\nWhy: Put \\(A = \\tfrac{1}{2}\\) and \\(B = -\\tfrac{1}{2}\\) in the form; \\(\\tfrac{1}{2}\\) on top is the same as 2 in the bottom.",
+              "Check: recombine the fractions\n\\[\\dfrac{1}{2(x - 1)} - \\dfrac{1}{2(x + 1)}\\]\n\\[= \\dfrac{(x + 1) - (x - 1)}{2(x - 1)(x + 1)}\\]\n\\[= \\dfrac{2}{2(x^2 - 1)}\\]\n\\[= \\dfrac{1}{x^2 - 1} \\;\\checkmark\\]\nWhy: Adding the partial fractions back over the common denominator must give the original fraction."
+            ],
+            "final_answer": "\\(\\dfrac{1}{x^2 - 1} = \\dfrac{1}{2(x - 1)} - \\dfrac{1}{2(x + 1)}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

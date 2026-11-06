@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH5-EXERCISE-5-1-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch5",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch5/u-exercise-5-1-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 90,
+          "pdf_to": 90,
+          "note": "Exercise 5.1, Question 5: book page 85 (PDF 90); answer key book page 298 (PDF 303)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5. Resolve into partial fractions: \\(\\frac{6x^3 + 5x^2 - 7}{2x^2 - x - 1}\\) [printed as \\(5x2\\) in the numerator]",
+            "explanation": "The top has degree 3 and the bottom degree 2: improper.\nWe must divide first, then split the remainder over \\((x - 1)(2x + 1)\\) (Case I).\nPlan: long division, factorise, identity, find \\(A\\), \\(B\\), check.",
+            "steps": [
+              "Given: \\(\\frac{6x^3 + 5x^2 - 7}{2x^2 - x - 1}\\) (the book prints \\(5x2\\); it means \\(5x^2\\))\nTo find: its partial fractions.\nMethod: Improper fraction, so: fraction = quotient + remainder/denominator. Then resolve the proper part by Case I.",
+              "Long division\n\\[6x^3 \\div 2x^2 = 3x\\]\n\\[3x(2x^2 - x - 1) = 6x^3 - 3x^2 - 3x\\]\nSubtract: \\(8x^2 + 3x - 7\\)\n\\[8x^2 \\div 2x^2 = 4\\]\n\\[4(2x^2 - x - 1) = 8x^2 - 4x - 4\\]\nSubtract: \\(7x - 3\\)\nWhy: Divide the leading terms, multiply back, subtract, and repeat until the remainder's degree (1) is less than the divisor's (2).",
+              "Write the result of the division\n\\[= 3x + 4 + \\dfrac{7x - 3}{2x^2 - x - 1}\\]\nWhy: Quotient \\(3x + 4\\), remainder \\(7x - 3\\).",
+              "Factorise the denominator\n\\[2x^2 - x - 1 = 2x^2 - 2x + x - 1\\]\n\\[= (x - 1)(2x + 1)\\]\nWhy: Split the middle term: product \\(2 \\times (-1) = -2\\), sum \\(-1\\), so \\(-2x + x\\).",
+              "Write the form and the identity\n\\[\\dfrac{7x - 3}{(x - 1)(2x + 1)} = \\dfrac{A}{x - 1} + \\dfrac{B}{2x + 1}\\]\n\\[7x - 3 = A(2x + 1) + B(x - 1) \\quad (i)\\]\nWhy: Two different linear factors; multiply by \\((x - 1)(2x + 1)\\) to clear the fractions.",
+              "Find \\(A\\): put \\(x = 1\\) in (i)\n\\[7 - 3 = A(3)\\]\n\\[A = \\tfrac{4}{3}\\]\nWhy: \\(x - 1 = 0\\), so the \\(B\\) term vanishes.",
+              "Find \\(B\\): put \\(x = -\\tfrac{1}{2}\\) in (i)\n\\[-\\tfrac{7}{2} - 3 = B\\left(-\\tfrac{3}{2}\\right)\\]\n\\[-\\tfrac{13}{2} = -\\tfrac{3}{2}B\\]\n\\[B = \\tfrac{13}{3}\\]\nWhy: \\(2x + 1 = 0\\) gives \\(x = -\\tfrac{1}{2}\\); then the \\(A\\) term vanishes.",
+              "Compare coefficients\n\\[x:\\ 2A + B = \\tfrac{8}{3} + \\tfrac{13}{3} = 7 \\;\\checkmark\\]\n\\[\\text{const}:\\ A - B = \\tfrac{4}{3} - \\tfrac{13}{3} = -3 \\;\\checkmark\\]\nWhy: Expanding (i) gives \\((2A + B)x + (A - B)\\), which must equal \\(7x - 3\\).",
+              "Write the answer\n\\[= 3x + 4 + \\dfrac{4}{3(x - 1)} + \\dfrac{13}{3(2x + 1)}\\]\nWhy: Quotient plus the partial fractions of the remainder.",
+              "Check: recombine the fractions\n\\[\\dfrac{4}{3(x - 1)} + \\dfrac{13}{3(2x + 1)}\\]\n\\[= \\dfrac{4(2x + 1) + 13(x - 1)}{3(x - 1)(2x + 1)}\\]\n\\[= \\dfrac{21x - 9}{3(2x^2 - x - 1)} = \\dfrac{7x - 3}{2x^2 - x - 1}\\]\nThen \\((3x + 4)(2x^2 - x - 1) + 7x - 3\\)\n\\[= 6x^3 + 5x^2 - 7x - 4 + 7x - 3\\]\n\\[= 6x^3 + 5x^2 - 7 \\;\\checkmark\\]\nWhy: Quotient times divisor plus remainder must give back the numerator."
+            ],
+            "final_answer": "\\(\\dfrac{6x^3 + 5x^2 - 7}{2x^2 - x - 1} = 3x + 4 + \\dfrac{4}{3(x - 1)} + \\dfrac{13}{3(2x + 1)}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The question prints the numerator as \\(6x^3 + 5x2 - 7\\): the power 2 has dropped to the line. It is \\(6x^3 + 5x^2 - 7\\), as the answer key \\(3x + 4 + \\frac{4}{3(x - 1)} + \\frac{13}{3(2x + 1)}\\) confirms."
+          }
+        ]
+      }
+    }
+  ]
+}

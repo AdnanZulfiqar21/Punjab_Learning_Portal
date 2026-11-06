@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH5-EXERCISE-5-1-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch5",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch5/u-exercise-5-1-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 90,
+          "pdf_to": 90,
+          "note": "Exercise 5.1, Question 3: book page 85 (PDF 90); answer key book page 298 (PDF 303)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. Resolve into partial fractions: \\(\\frac{2x + 1}{(x - 1)(x + 2)(x + 3)}\\)",
+            "explanation": "A proper fraction with three different linear factors in the bottom: Case I.\nWe need three fractions with constants \\(A\\), \\(B\\), \\(C\\).\nPlan: identity, put \\(x = 1, -2, -3\\), confirm by comparing coefficients, recombine.",
+            "steps": [
+              "Given: \\(\\frac{2x + 1}{(x - 1)(x + 2)(x + 3)}\\)\nTo find: its partial fractions.\nMethod: Case I. Each of the three different linear factors gets one fraction with a constant on top. Putting the zero of each factor in the identity gives each constant directly.",
+              "Check that the fraction is proper\nNumerator degree 1, denominator degree 3.\nWhy: \\(1 < 3\\), so the fraction is proper and no division is needed.",
+              "Write the form\n\\[\\dfrac{2x + 1}{(x - 1)(x + 2)(x + 3)}\\]\n\\[= \\dfrac{A}{x - 1} + \\dfrac{B}{x + 2} + \\dfrac{C}{x + 3}\\]\nWhy: One fraction for each different linear factor.",
+              "Remove the denominators to get the identity\n\\[2x + 1 = A(x + 2)(x + 3)\\]\n\\[+ B(x - 1)(x + 3)\\]\n\\[+ C(x - 1)(x + 2) \\quad (i)\\]\nWhy: Multiply both sides by \\((x - 1)(x + 2)(x + 3)\\); each constant is left with the two factors its own fraction did not have.",
+              "Find \\(A\\): put \\(x = 1\\) in (i)\n\\[2(1) + 1 = A(3)(4)\\]\n\\[3 = 12A\\]\n\\[A = \\tfrac{1}{4}\\]\nWhy: \\(x = 1\\) makes \\(x - 1 = 0\\), so the \\(B\\) and \\(C\\) terms vanish.",
+              "Find \\(B\\): put \\(x = -2\\) in (i)\n\\[2(-2) + 1 = B(-3)(1)\\]\n\\[-3 = -3B\\]\n\\[B = 1\\]\nWhy: \\(x = -2\\) makes \\(x + 2 = 0\\), so the \\(A\\) and \\(C\\) terms vanish.",
+              "Find \\(C\\): put \\(x = -3\\) in (i)\n\\[2(-3) + 1 = C(-4)(-1)\\]\n\\[-5 = 4C\\]\n\\[C = -\\tfrac{5}{4}\\]\nWhy: \\(x = -3\\) makes \\(x + 3 = 0\\), so the \\(A\\) and \\(B\\) terms vanish.",
+              "Compare coefficients\nExpanding (i):\n\\[x^2:\\ A + B + C = 0\\]\n\\[\\tfrac{1}{4} + 1 - \\tfrac{5}{4} = 0 \\;\\checkmark\\]\n\\[\\text{const}:\\ 6A - 3B - 2C = 1\\]\n\\[\\tfrac{6}{4} - 3 + \\tfrac{10}{4} = 1 \\;\\checkmark\\]\nWhy: The left side \\(2x + 1\\) has no \\(x^2\\) term, so the \\(x^2\\) coefficients on the right must add to 0. The constants come from \\(2 \\cdot 3\\), \\((-1)(3)\\) and \\((-1)(2)\\).",
+              "Write the answer\n\\[= \\dfrac{1}{4(x - 1)} + \\dfrac{1}{x + 2} - \\dfrac{5}{4(x + 3)}\\]\nWhy: Put \\(A = \\tfrac{1}{4}\\), \\(B = 1\\), \\(C = -\\tfrac{5}{4}\\) in the form.",
+              "Check: recombine the fractions\nOver the common denominator \\(4(x - 1)(x + 2)(x + 3)\\) the numerator is\n\\[(x + 2)(x + 3) + 4(x - 1)(x + 3)\\]\n\\[- 5(x - 1)(x + 2)\\]\n\\[= (x^2 + 5x + 6) + (4x^2 + 8x - 12)\\]\n\\[- (5x^2 + 5x - 10)\\]\n\\[= 8x + 4 = 4(2x + 1)\\]\nSo the sum is \\(\\dfrac{2x + 1}{(x - 1)(x + 2)(x + 3)}\\) \\(\\checkmark\\)\nWhy: The 4 cancels and the original fraction comes back."
+            ],
+            "final_answer": "\\(\\dfrac{2x + 1}{(x - 1)(x + 2)(x + 3)} = \\dfrac{1}{4(x - 1)} + \\dfrac{1}{x + 2} - \\dfrac{5}{4(x + 3)}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

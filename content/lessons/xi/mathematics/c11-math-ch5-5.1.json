@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH5-5.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch5",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch5/5.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 83,
+          "pdf_to": 84,
+          "note": "Book p. 78-79: Unit 5 INTRODUCTION (sums (i), (ii), Partial Fractions, conditional equation, identity, Note box) and 5.1 Rational Fraction up to 5.1.1. About this unit, Teaching notes, Key points, Common mistakes are ours."
+        }
+      ],
+      "title": "5.1 Rational Fraction",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Introduction"
+          },
+          {
+            "type": "paragraph",
+            "text": "We have learnt in the previous classes how to add two or more rational fractions into a single rational fraction. For example,"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\text{(i)}\\quad \\dfrac{1}{x-1} + \\dfrac{2}{x+2}\\]\n\\[= \\dfrac{3x}{(x-1)(x+2)}\\]\nand\n\\[\\text{(ii)}\\quad \\dfrac{2}{x+1} + \\dfrac{1}{(x+1)^{2}} + \\dfrac{3}{x-2}\\]\n\\[= \\dfrac{5x^{2}+5x-3}{(x+1)^{2}(x-2)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How was (i) added? Exactly as with ordinary fractions: take the common denominator \\((x-1)(x+2)\\) and multiply each numerator by the factor its own denominator is missing:\n\\[1(x+2) + 2(x-1)\\]\n\\[= x + 2 + 2x - 2 = 3x\\]\nIn (ii) the common denominator is \\((x+1)^{2}(x-2)\\), and the numerator is\n\\[2(x+1)(x-2) + (x-2) + 3(x+1)^{2}\\]\n\\[= 5x^{2} + 5x - 3\\]\nAdding fractions is easy. The question of this unit is the opposite one: given only the right-hand side, how do we find the pieces on the left?"
+          },
+          {
+            "type": "paragraph",
+            "text": "In this unit we shall learn how to reverse the order in (i) and (ii), that is to express a single rational function as a sum of two or more single rational functions which are called Partial Fractions.",
+            "bold": [
+              "Partial Fractions"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Expressing a rational function as a sum of partial fractions is called Partial Fraction Resolution. It is an extremely valuable tool in the study of calculus to decompose a complex rational function into a sum of simpler fractions.",
+            "bold": [
+              "Partial Fraction Resolution"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Think of arithmetic: \\(\\frac{1}{2} + \\frac{1}{3} = \\frac{5}{6}\\). Adding is going forward. Partial fractions is going backward: starting from \\(\\frac{5}{6}\\) and finding \\(\\frac{1}{2}\\) and \\(\\frac{1}{3}\\).\nWhy go backward? A single complicated fraction such as \\(\\frac{3x}{(x-1)(x+2)}\\) is hard to work with, but its pieces \\(\\frac{1}{x-1}\\) and \\(\\frac{2}{x+2}\\) are simple. In calculus (integration) and in sums of series you will handle each simple piece separately, which is far easier."
+          },
+          {
+            "type": "paragraph",
+            "text": "An open sentence formed by using the sign of equality '=' is called an equation. The equations can be divided into the following two kinds:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Conditional equation: It is an equation in which two algebraic expressions are equal for particular values of the variable e.g.,",
+            "bold": [
+              "Conditional equation:"
+            ]
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(a) \\(2x = 3\\) is a conditional equation and it is true only if \\(x = \\frac{3}{2}\\).",
+              "(b) \\(x^{2} + x - 6 = 0\\) is a conditional equation and it is true for \\(x = 2, -3\\) only."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "For simplicity, a conditional equation is called an equation."
+          },
+          {
+            "type": "paragraph",
+            "text": "Identity: It is an equation which holds good for all values of the variable e.g.,",
+            "bold": [
+              "Identity:"
+            ]
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(a) \\((a + b)x \\equiv ax + bx\\) is an identity and its two sides are equal for all values of \\(x\\).",
+              "(b) \\((x + 3)(x + 4) \\equiv x^{2} + 7x + 12\\) is also an identity which is true for all values of \\(x\\)."
+            ],
+            "bold": [
+              "identity"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "For convenience, the symbol \"=\" shall be used both for equation and identity."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The sign \\(\\equiv\\) is read \"is identically equal to\".\nHow to tell the two kinds apart: put a few values of \\(x\\).\nIn (b) of the conditional equations, \\(x = 0\\) gives \\(0 + 0 - 6 = -6 \\ne 0\\): the equation is false there, so it is only conditional.\nIn identity (b), \\(x = 0\\) gives \\(12 = 12\\) and \\(x = 1\\) gives \\(4 \\times 5 = 20 = 1 + 7 + 12\\): true every time, because multiplying out the left side gives exactly the right side.\nWhy this matters for the whole unit: a rational fraction and its partial fractions are equal as an identity, so we are allowed to put any convenient value of \\(x\\) into it. That freedom is how the unknown numerators are found in 5.1.3."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "5.1 Rational Fraction"
+          },
+          {
+            "type": "paragraph",
+            "text": "An expression of the form \\(\\frac{P(x)}{Q(x)}\\), where \\(P(x)\\) and \\(Q(x)\\) are polynomials in \\(x\\) with real coefficients and \\(Q(x) \\ne 0\\), is called a rational fraction. A rational fraction is of two types."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A polynomial in \\(x\\) is a sum of terms like \\(5x^{3}\\), \\(-2x\\), \\(7\\), where the powers of \\(x\\) are whole numbers \\(0, 1, 2, \\ldots\\). Its degree is the highest power of \\(x\\) in it: \\(2x^{3} - x + 4\\) has degree 3, \\(x - 2\\) has degree 1, and a non-zero constant such as \\(7\\) has degree 0.\nSo \\(\\frac{x+1}{x^{2}-4}\\) is a rational fraction, but \\(\\frac{\\sqrt{x}+1}{x-4}\\) is not, because \\(\\sqrt{x} = x^{1/2}\\) is not a whole-number power.\n\\(Q(x) \\ne 0\\) because division by zero has no meaning.\nThe two types are named exactly like fractions of arithmetic: \\(\\frac{3}{4}\\) is proper (top smaller than bottom) and \\(\\frac{7}{4}\\) is improper. For rational fractions \"smaller\" means smaller degree. They are the next two pages: 5.1.1 and 5.1.2."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "About this unit",
+            "text": "Route through Unit 5: 5.1.1 proper and 5.1.2 improper rational fractions (with the theorem on equal polynomials), then 5.1.3 the method of resolution in four cases: non-repeated linear factors, repeated linear factors (Exercise 5.1), non-repeated irreducible quadratic factors and repeated irreducible quadratic factors (Exercise 5.2).\nSkills you need from earlier classes: factorizing polynomials, long division of polynomials, and solving simple simultaneous equations."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Partial fractions reverse the addition of rational fractions: one fraction is written as a sum of simpler ones.\n2. Writing a rational function as a sum of partial fractions is called partial fraction resolution.\n3. A conditional equation is true only for particular values of the variable; an identity (\\(\\equiv\\)) is true for all values.\n4. A rational fraction is \\(\\frac{P(x)}{Q(x)}\\) with polynomials \\(P(x)\\), \\(Q(x)\\) and \\(Q(x) \\ne 0\\); it is proper or improper."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistakes",
+            "text": "1. Thinking that an identity is \"solved\" for \\(x\\): an identity has no particular solution, every \\(x\\) works.\n2. Calling any fraction with \\(x\\) in it a rational fraction: the numerator and denominator must be polynomials (no \\(\\sqrt{x}\\), no \\(\\frac{1}{x}\\) inside them).\n3. Adding \\(\\frac{1}{x-1} + \\frac{2}{x+2}\\) as \\(\\frac{3}{2x+1}\\): numerators and denominators are never added separately; always use the common denominator."
+          }
+        ]
+      }
+    }
+  ]
+}
