@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-1-Q4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-1-q4",
+      "title": "Question 4 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 190,
+          "pdf_to": 190,
+          "note": "Exercise 10.1, Question 4: book page 185 (PDF 190); no answer key entry (proof); checked with sympy and the solution book (PDF 885-889)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH10-EXERCISE-10-1-Q4",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) Prove that: \\(\\dfrac{\\tan(180^{\\circ} + \\alpha)\\cot(90^{\\circ} - \\alpha)}{\\sin(360^{\\circ} - \\alpha)\\cos(270^{\\circ} + \\alpha)} = -\\sec^{2}\\alpha\\)",
+            "explanation": "Yahan ek fraction hai jis mein chaar allied angle wale ratios hain.\nDiya kya hai? Left side ka fraction. Prove kya karna hai? Ke yeh \\(-\\sec^2\\alpha\\) ke barabar hai.\nPlan: pehle har ratio ko allied angle ke rule se chhota karenge, phir sab ko sin aur cos mein badal kar cancel karenge. Jab ratios mixed hon to sin aur cos mein badalna sab se mehfooz rasta hai.",
+            "steps": [
+              "Diya gaya hai: left side wala fraction.\nHumein prove karna hai: yeh \\(-\\sec^2\\alpha\\) hai.\nTareeqa: Har factor par allied angle ka rule: \\(90^{\\circ}\\) ka odd multiple ho to co-ratio, even ho to wohi ratio; sign asal angle ke quadrant se. Phir simplify.",
+              "Numerator (upar wala hissa) chhota karein\n\\[\\tan(180^{\\circ} + \\alpha) = \\tan\\alpha\\]\n\\[\\cot(90^{\\circ} - \\alpha) = \\tan\\alpha\\]\nKyun: \\(180^{\\circ} + \\alpha\\) quadrant III mein hai jahan tan positive hai, aur \\(180^{\\circ}\\) even multiple hai. \\(90^{\\circ} - \\alpha\\) mein \\(90^{\\circ}\\) odd multiple hai, is liye cot badal kar tan; quadrant I mein sab positive.",
+              "Denominator (neeche wala hissa) chhota karein\n\\[\\sin(360^{\\circ} - \\alpha) = -\\sin\\alpha\\]\n\\[\\cos(270^{\\circ} + \\alpha) = \\sin\\alpha\\]\nKyun: \\(360^{\\circ} - \\alpha\\) quadrant IV mein hai jahan sin negative hai. \\(270^{\\circ}\\) odd multiple hai, is liye cos badal kar sin ban gaya; \\(270^{\\circ} + \\alpha\\) bhi quadrant IV mein hai jahan cos positive hai, is liye plus.\nDhyan dein: sign asal ratio (cos) ka dekhna hai, naye ratio (sin) ka nahi. Quadrant IV mein sin negative hai magar cos positive, is liye yahan plus aata hai.",
+              "Simplify karein\n\\[\\text{L.H.S.} = \\dfrac{\\tan^2\\alpha}{-\\sin^2\\alpha}\\]\n\\[= -\\dfrac{\\sin^2\\alpha}{\\cos^2\\alpha} \\cdot \\dfrac{1}{\\sin^2\\alpha}\\]\n\\[= -\\dfrac{1}{\\cos^2\\alpha} = -\\sec^2\\alpha\\]\nKyun: Upar \\(\\tan\\alpha \\cdot \\tan\\alpha = \\tan^2\\alpha\\), neeche \\((-\\sin\\alpha)(\\sin\\alpha) = -\\sin^2\\alpha\\). \\(\\tan\\alpha = \\frac{\\sin\\alpha}{\\cos\\alpha}\\) likhne se \\(\\sin^2\\alpha\\) upar neeche cancel ho gaya. Bacha \\(-\\frac{1}{\\cos^2\\alpha}\\), aur cos ka ulta sec hai."
+            ],
+            "final_answer": "Saabit ho gaya: fraction \\(-\\sec^2\\alpha\\) ke barabar hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) Prove that: \\(\\dfrac{\\sin^{2}(\\pi + \\theta)\\tan\\left(\\frac{3\\pi}{2} + \\theta\\right)}{\\cot^{2}\\left(\\frac{3\\pi}{2} - \\theta\\right)\\cos^{2}(\\pi - \\theta)\\operatorname{cosec}(2\\pi - \\theta)} = \\cos\\theta\\)",
+            "explanation": "Is part mein angles radians mein hain. Ghabrayein nahi: \\(\\pi = 180^{\\circ}\\), \\(\\frac{3\\pi}{2} = 270^{\\circ}\\), \\(2\\pi = 360^{\\circ}\\); rules bilkul wohi hain.\nDiya kya hai? Paanch factors wala fraction. Prove kya karna hai? Ke yeh \\(\\cos\\theta\\) hai.\nPlan: har factor chhota karna, signs milana, phir \\(\\tan^2\\theta\\cos^2\\theta = \\sin^2\\theta\\) se cancel karna.",
+            "steps": [
+              "Diya gaya hai: left side wala fraction.\nHumein prove karna hai: yeh \\(\\cos\\theta\\) hai.\nTareeqa: Radians mein bhi allied angle ke rules wohi hain. \\(\\pi\\) aur \\(2\\pi\\), \\(\\frac{\\pi}{2}\\) ke even multiples hain (ratio wohi); \\(\\frac{3\\pi}{2}\\) odd multiple hai (co-ratio).",
+              "Numerator chhota karein\n\\[\\sin^2(\\pi + \\theta) = (-\\sin\\theta)^2 = \\sin^2\\theta\\]\n\\[\\tan\\left(\\tfrac{3\\pi}{2} + \\theta\\right) = -\\cot\\theta\\]\nKyun: \\(\\pi + \\theta\\) quadrant III mein hai jahan sin negative hai, lekin square karne se minus khatam ho jata hai. \\(\\frac{3\\pi}{2}\\) odd multiple hai, is liye tan badal kar cot; \\(\\frac{3\\pi}{2} + \\theta\\) quadrant IV mein hai jahan tan negative hai, is liye minus.",
+              "Denominator chhota karein\n\\[\\cot^2\\left(\\tfrac{3\\pi}{2} - \\theta\\right) = \\tan^2\\theta\\]\n\\[\\cos^2(\\pi - \\theta) = \\cos^2\\theta\\]\n\\[\\operatorname{cosec}(2\\pi - \\theta) = -\\operatorname{cosec}\\theta\\]\nKyun: Pehle mein odd multiple ki wajah se cot badal kar tan bana, aur square ki wajah se sign ka sawal hi khatam. Doosre mein \\(\\cos(\\pi - \\theta) = -\\cos\\theta\\), square se plus. Teesre mein \\(2\\pi - \\theta\\) quadrant IV mein hai jahan sin, aur us ke saath cosec, negative hai.\nDhyan dein: squared ratios mein sign ki fikr nahi karni padti; is se kaam aadha ho jata hai.",
+              "Simplify karein\n\\[\\text{Top} = -\\sin^2\\theta\\cot\\theta\\]\n\\[\\text{Bottom} = -\\tan^2\\theta\\cos^2\\theta\\operatorname{cosec}\\theta\\]\n\\[= -\\sin^2\\theta\\operatorname{cosec}\\theta\\]\n\\[\\text{L.H.S.} = \\dfrac{-\\sin^2\\theta\\cot\\theta}{-\\sin^2\\theta\\operatorname{cosec}\\theta}\\]\n\\[= \\dfrac{\\sin^2\\theta\\cot\\theta}{\\sin^2\\theta\\operatorname{cosec}\\theta}\\]\nKyun: Upar aur neeche ek ek minus hai; dono cancel. \\(\\tan^2\\theta\\cos^2\\theta = \\frac{\\sin^2\\theta}{\\cos^2\\theta} \\times \\cos^2\\theta = \\sin^2\\theta\\), kyunke \\(\\cos^2\\theta\\) cancel ho jata hai.",
+              "Aakhri qadam\n\\[= \\dfrac{\\cot\\theta}{\\operatorname{cosec}\\theta}\\]\n\\[= \\dfrac{\\cos\\theta}{\\sin\\theta} \\cdot \\sin\\theta = \\cos\\theta\\]\nKyun: \\(\\sin^2\\theta\\) upar neeche cancel. \\(\\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta}\\), aur \\(\\operatorname{cosec}\\theta\\) se divide karna \\(\\sin\\theta\\) se multiply karne ke barabar hai. \\(\\sin\\theta\\) cancel ho kar sirf \\(\\cos\\theta\\) bacha."
+            ],
+            "final_answer": "Saabit ho gaya: fraction \\(\\cos\\theta\\) ke barabar hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iii)",
+            "prompt": "4 (iii) Prove that: \\(\\dfrac{\\cos(90^{\\circ} + \\theta)\\sec(-\\theta)\\tan(180^{\\circ} - \\theta)}{\\sec(360^{\\circ} - \\theta)\\sin(180^{\\circ} + \\theta)\\cot(90^{\\circ} - \\theta)} = -1\\)",
+            "explanation": "Is fraction mein chhe (6) factors hain, lekin ghabrane ki baat nahi: har ek ko alag chhota karenge.\nDiya kya hai? Left side ka fraction. Prove kya karna hai? Ke yeh \\(-1\\) hai.\nPlan: har factor chhota karenge; aakhir mein upar aur neeche ek hi product bachega, bas sign ka farq hoga.",
+            "steps": [
+              "Diya gaya hai: left side wala fraction.\nHumein prove karna hai: yeh \\(-1\\) hai.\nTareeqa: Allied angle ke rules, aur \\(\\sec(-\\theta)\\) ke liye even/odd rule. Signs ko alag gin lena sab se aasaan tareeqa hai.",
+              "Numerator chhota karein\n\\[\\cos(90^{\\circ} + \\theta) = -\\sin\\theta\\]\n\\[\\sec(-\\theta) = \\sec\\theta\\]\n\\[\\tan(180^{\\circ} - \\theta) = -\\tan\\theta\\]\nKyun: \\(90^{\\circ}\\) odd multiple hai, cos badal kar sin; \\(90^{\\circ} + \\theta\\) quadrant II mein hai jahan cos negative. Sec, cos ki tarah even hai, is liye minus hat gaya. \\(180^{\\circ} - \\theta\\) quadrant II mein hai jahan tan negative.",
+              "Denominator chhota karein\n\\[\\sec(360^{\\circ} - \\theta) = \\sec\\theta\\]\n\\[\\sin(180^{\\circ} + \\theta) = -\\sin\\theta\\]\n\\[\\cot(90^{\\circ} - \\theta) = \\tan\\theta\\]\nKyun: \\(360^{\\circ} - \\theta\\) quadrant IV mein hai jahan cos (aur sec) positive. \\(180^{\\circ} + \\theta\\) quadrant III mein hai jahan sin negative. \\(90^{\\circ} - \\theta\\) mein odd multiple ki wajah se cot badal kar tan, aur quadrant I mein positive.",
+              "Simplify karein\n\\[\\text{L.H.S.} = \\dfrac{(-\\sin\\theta)(\\sec\\theta)(-\\tan\\theta)}{(\\sec\\theta)(-\\sin\\theta)(\\tan\\theta)}\\]\n\\[= \\dfrac{\\sin\\theta\\sec\\theta\\tan\\theta}{-\\sin\\theta\\sec\\theta\\tan\\theta} = -1\\]\nKyun: Upar do minus signs hain jo milkar plus ban jate hain; neeche sirf ek minus hai. Baqi product \\(\\sin\\theta\\sec\\theta\\tan\\theta\\) upar neeche bilkul ek jaisa hai, is liye cancel ho kar sirf \\(\\frac{+1}{-1} = -1\\) bacha.\nDhyan dein: signs ginne ka aasaan tareeqa: upar kitne minus, neeche kitne minus. Kul teen minus, yani odd, is liye jawab negative."
+            ],
+            "final_answer": "Saabit ho gaya: fraction \\(-1\\) ke barabar hai."
+          }
+        ]
+      }
+    }
+  ]
+}

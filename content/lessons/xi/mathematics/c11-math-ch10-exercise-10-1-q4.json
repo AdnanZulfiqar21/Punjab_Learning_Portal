@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-1-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-1-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 190,
+          "pdf_to": 190,
+          "note": "Exercise 10.1, Question 4: book page 185 (PDF 190); no answer key entry (proof); checked with sympy and the solution book (PDF 885-889)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) Prove that: \\(\\dfrac{\\tan(180^{\\circ} + \\alpha)\\cot(90^{\\circ} - \\alpha)}{\\sin(360^{\\circ} - \\alpha)\\cos(270^{\\circ} + \\alpha)} = -\\sec^{2}\\alpha\\)",
+            "explanation": "A fraction with four allied-angle ratios.\nWe must reduce it to \\(-\\sec^2\\alpha\\).\nPlan: reduce each ratio, then change everything to sin and cos and cancel.",
+            "steps": [
+              "Given: the fraction on the left.\nTo prove: it equals \\(-\\sec^2\\alpha\\).\nMethod: Allied-angle rules for each factor (odd multiple of \\(90^{\\circ}\\): co-ratio; even multiple: same ratio; sign from the quadrant), then simplify.",
+              "Reduce the numerator\n\\[\\tan(180^{\\circ} + \\alpha) = \\tan\\alpha\\]\n\\[\\cot(90^{\\circ} - \\alpha) = \\tan\\alpha\\]\nWhy: \\(180^{\\circ} + \\alpha\\) is in quadrant III (tan positive). \\(90^{\\circ}\\) is an odd multiple, so cot changes to tan; quadrant I is positive.",
+              "Reduce the denominator\n\\[\\sin(360^{\\circ} - \\alpha) = -\\sin\\alpha\\]\n\\[\\cos(270^{\\circ} + \\alpha) = \\sin\\alpha\\]\nWhy: \\(360^{\\circ} - \\alpha\\) is in quadrant IV (sin negative). \\(270^{\\circ}\\) is an odd multiple, so cos changes to sin; \\(270^{\\circ} + \\alpha\\) is in quadrant IV, where cos is positive.",
+              "Simplify\n\\[\\text{L.H.S.} = \\dfrac{\\tan^2\\alpha}{-\\sin^2\\alpha}\\]\n\\[= -\\dfrac{\\sin^2\\alpha}{\\cos^2\\alpha} \\cdot \\dfrac{1}{\\sin^2\\alpha}\\]\n\\[= -\\dfrac{1}{\\cos^2\\alpha} = -\\sec^2\\alpha\\]\nWhy: \\(\\tan\\alpha = \\frac{\\sin\\alpha}{\\cos\\alpha}\\); then \\(\\sin^2\\alpha\\) cancels, and \\(\\frac{1}{\\cos\\alpha} = \\sec\\alpha\\)."
+            ],
+            "final_answer": "Hence proved: the fraction equals \\(-\\sec^2\\alpha\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) Prove that: \\(\\dfrac{\\sin^{2}(\\pi + \\theta)\\tan\\left(\\frac{3\\pi}{2} + \\theta\\right)}{\\cot^{2}\\left(\\frac{3\\pi}{2} - \\theta\\right)\\cos^{2}(\\pi - \\theta)\\operatorname{cosec}(2\\pi - \\theta)} = \\cos\\theta\\)",
+            "explanation": "The angles are in radians: \\(\\pi = 180^{\\circ}\\), \\(\\frac{3\\pi}{2} = 270^{\\circ}\\), \\(2\\pi = 360^{\\circ}\\).\nWe must reduce the fraction to \\(\\cos\\theta\\).\nPlan: reduce each factor, then simplify using \\(\\tan^2\\theta\\cos^2\\theta = \\sin^2\\theta\\).",
+            "steps": [
+              "Given: the fraction on the left.\nTo prove: it equals \\(\\cos\\theta\\).\nMethod: The same allied-angle rules work in radians. \\(\\pi\\) and \\(2\\pi\\) are even multiples of \\(\\frac{\\pi}{2}\\); \\(\\frac{3\\pi}{2}\\) is an odd multiple.",
+              "Reduce the numerator\n\\[\\sin^2(\\pi + \\theta) = (-\\sin\\theta)^2 = \\sin^2\\theta\\]\n\\[\\tan\\left(\\tfrac{3\\pi}{2} + \\theta\\right) = -\\cot\\theta\\]\nWhy: \\(\\pi + \\theta\\) is in quadrant III (sin negative, but squaring removes the sign). \\(\\frac{3\\pi}{2}\\) is odd, so tan changes to cot; \\(\\frac{3\\pi}{2} + \\theta\\) is in quadrant IV, where tan is negative.",
+              "Reduce the denominator\n\\[\\cot^2\\left(\\tfrac{3\\pi}{2} - \\theta\\right) = \\tan^2\\theta\\]\n\\[\\cos^2(\\pi - \\theta) = \\cos^2\\theta\\]\n\\[\\operatorname{cosec}(2\\pi - \\theta) = -\\operatorname{cosec}\\theta\\]\nWhy: Odd multiple, so cot changes to tan (the square makes the sign positive). Squares remove the sign of \\(-\\cos\\theta\\). \\(2\\pi - \\theta\\) is in quadrant IV, where cosec (like sin) is negative.",
+              "Simplify\n\\[\\text{Top} = -\\sin^2\\theta\\cot\\theta\\]\n\\[\\text{Bottom} = -\\tan^2\\theta\\cos^2\\theta\\operatorname{cosec}\\theta\\]\n\\[= -\\sin^2\\theta\\operatorname{cosec}\\theta\\]\n\\[\\text{L.H.S.} = \\dfrac{-\\sin^2\\theta\\cot\\theta}{-\\sin^2\\theta\\operatorname{cosec}\\theta}\\]\n\\[= \\dfrac{\\sin^2\\theta\\cot\\theta}{\\sin^2\\theta\\operatorname{cosec}\\theta}\\]\nWhy: The two minus signs cancel, and \\(\\tan^2\\theta\\cos^2\\theta = \\frac{\\sin^2\\theta}{\\cos^2\\theta}\\cos^2\\theta = \\sin^2\\theta\\).",
+              "Finish\n\\[= \\dfrac{\\cot\\theta}{\\operatorname{cosec}\\theta}\\]\n\\[= \\dfrac{\\cos\\theta}{\\sin\\theta} \\cdot \\sin\\theta = \\cos\\theta\\]\nWhy: \\(\\sin^2\\theta\\) cancels; \\(\\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta}\\) and \\(\\frac{1}{\\operatorname{cosec}\\theta} = \\sin\\theta\\)."
+            ],
+            "final_answer": "Hence proved: the fraction equals \\(\\cos\\theta\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iii)",
+            "prompt": "4 (iii) Prove that: \\(\\dfrac{\\cos(90^{\\circ} + \\theta)\\sec(-\\theta)\\tan(180^{\\circ} - \\theta)}{\\sec(360^{\\circ} - \\theta)\\sin(180^{\\circ} + \\theta)\\cot(90^{\\circ} - \\theta)} = -1\\)",
+            "explanation": "Six allied-angle factors in one fraction.\nWe must show the fraction equals \\(-1\\).\nPlan: reduce every factor; the top and bottom become the same product with opposite signs.",
+            "steps": [
+              "Given: the fraction on the left.\nTo prove: it equals \\(-1\\).\nMethod: Allied-angle rules and the even/odd rule for \\(\\sec(-\\theta)\\).",
+              "Reduce the numerator\n\\[\\cos(90^{\\circ} + \\theta) = -\\sin\\theta\\]\n\\[\\sec(-\\theta) = \\sec\\theta\\]\n\\[\\tan(180^{\\circ} - \\theta) = -\\tan\\theta\\]\nWhy: Odd multiple, cos changes to sin, quadrant II makes cos negative. Secant is even like cosine. \\(180^{\\circ} - \\theta\\) is in quadrant II, where tan is negative.",
+              "Reduce the denominator\n\\[\\sec(360^{\\circ} - \\theta) = \\sec\\theta\\]\n\\[\\sin(180^{\\circ} + \\theta) = -\\sin\\theta\\]\n\\[\\cot(90^{\\circ} - \\theta) = \\tan\\theta\\]\nWhy: Quadrant IV keeps sec positive; quadrant III makes sin negative; odd multiple changes cot to tan, quadrant I positive.",
+              "Simplify\n\\[\\text{L.H.S.} = \\dfrac{(-\\sin\\theta)(\\sec\\theta)(-\\tan\\theta)}{(\\sec\\theta)(-\\sin\\theta)(\\tan\\theta)}\\]\n\\[= \\dfrac{\\sin\\theta\\sec\\theta\\tan\\theta}{-\\sin\\theta\\sec\\theta\\tan\\theta} = -1\\]\nWhy: The top has two minus signs (positive); the bottom has one (negative). The same product cancels."
+            ],
+            "final_answer": "Hence proved: the fraction equals \\(-1\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

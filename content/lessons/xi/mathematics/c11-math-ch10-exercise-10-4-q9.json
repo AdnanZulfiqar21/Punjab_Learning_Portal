@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-4-Q9",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-4-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 204,
+          "pdf_to": 204,
+          "note": "Exercise 10.4, Question 9: book page 199 (PDF 204). No answer key (proof). Verified with sympy and the solution book."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9 Prove that: \\(\\dfrac{\\sin^{2}\\alpha - \\sin^{2}\\beta}{\\sin\\alpha\\cos\\alpha - \\sin\\beta\\cos\\beta} = \\tan(\\alpha + \\beta)\\)",
+            "explanation": "A fraction with squares on top and \"sin cos\" products below.\nWe must show it equals \\(\\tan(\\alpha + \\beta)\\).\nPlan: top: \\(a^2 - b^2 = (a - b)(a + b)\\), then sum-to-product, giving \\(\\sin(\\alpha + \\beta)\\sin(\\alpha - \\beta)\\). Bottom: \\(\\sin\\theta\\cos\\theta = \\frac{1}{2}\\sin 2\\theta\\), then sum-to-product, giving \\(\\cos(\\alpha + \\beta)\\sin(\\alpha - \\beta)\\).",
+            "steps": [
+              "Given: L.H.S. \\(= \\dfrac{\\sin^{2}\\alpha - \\sin^{2}\\beta}{\\sin\\alpha\\cos\\alpha - \\sin\\beta\\cos\\beta}\\).\nTo prove: L.H.S. \\(= \\tan(\\alpha + \\beta)\\).\nMethod: Factorise, sum-to-product formulas and the double-angle formula \\(2\\sin u\\cos u = \\sin 2u\\).",
+              "Numerator: difference of squares\n\\[\\sin^{2}\\alpha - \\sin^{2}\\beta\\]\n\\[= (\\sin\\alpha + \\sin\\beta)(\\sin\\alpha - \\sin\\beta)\\]\nWhy: \\(a^2 - b^2 = (a + b)(a - b)\\).",
+              "Each bracket as a product\n\\[\\sin\\alpha + \\sin\\beta = 2\\sin\\tfrac{\\alpha + \\beta}{2}\\cos\\tfrac{\\alpha - \\beta}{2}\\]\n\\[\\sin\\alpha - \\sin\\beta = 2\\cos\\tfrac{\\alpha + \\beta}{2}\\sin\\tfrac{\\alpha - \\beta}{2}\\]\nWhy: The \\(\\sin P \\pm \\sin Q\\) formulas.",
+              "Regroup into double angles\n\\[\\text{Num.} = \\left(2\\sin\\tfrac{\\alpha + \\beta}{2}\\cos\\tfrac{\\alpha + \\beta}{2}\\right)\\times\\]\n\\[\\left(2\\sin\\tfrac{\\alpha - \\beta}{2}\\cos\\tfrac{\\alpha - \\beta}{2}\\right)\\]\n\\[= \\sin(\\alpha + \\beta)\\sin(\\alpha - \\beta)\\]\nWhy: \\(2\\sin u\\cos u = \\sin 2u\\), once with \\(u = \\frac{\\alpha + \\beta}{2}\\) and once with \\(u = \\frac{\\alpha - \\beta}{2}\\).",
+              "Denominator\n\\[\\sin\\alpha\\cos\\alpha - \\sin\\beta\\cos\\beta\\]\n\\[= \\dfrac{1}{2}(\\sin 2\\alpha - \\sin 2\\beta)\\]\n\\[= \\dfrac{1}{2}\\cdot 2\\cos(\\alpha + \\beta)\\sin(\\alpha - \\beta)\\]\n\\[= \\cos(\\alpha + \\beta)\\sin(\\alpha - \\beta)\\]\nWhy: \\(\\sin u\\cos u = \\frac{1}{2}\\sin 2u\\); then \\(\\sin P - \\sin Q\\) with half-sum \\(\\alpha + \\beta\\) and half-difference \\(\\alpha - \\beta\\).",
+              "Divide and cancel\n\\[\\text{L.H.S.} = \\dfrac{\\sin(\\alpha + \\beta)\\sin(\\alpha - \\beta)}{\\cos(\\alpha + \\beta)\\sin(\\alpha - \\beta)}\\]\n\\[= \\tan(\\alpha + \\beta) = \\text{R.H.S.}\\]\nWhy: \\(\\sin(\\alpha - \\beta)\\) cancels (assumed non-zero), and \\(\\frac{\\sin}{\\cos} = \\tan\\).",
+              "Check: \\(\\alpha = 50^{\\circ}\\), \\(\\beta = 20^{\\circ}\\)\n\\[\\text{L.H.S.} \\approx \\dfrac{0.5868 - 0.1170}{0.4924 - 0.3214} \\approx 2.7475\\]\n\\[\\tan 70^{\\circ} \\approx 2.7475 \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\dfrac{\\sin^{2}\\alpha - \\sin^{2}\\beta}{\\sin\\alpha\\cos\\alpha - \\sin\\beta\\cos\\beta} = \\tan(\\alpha + \\beta)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

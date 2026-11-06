@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-2-Q6-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-2-q6",
+      "title": "Question 6 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 195,
+          "pdf_to": 195,
+          "note": "Exercise 10.2 Q6 (i)-(iii), book p.190 (PDF 195); proofs (no key entry). The '+' in (i) cot(a + b) is faint in the scan. Checked with sympy; solution book PDF 907-910 agrees."
+        }
+      ],
+      "variant_of": "C11-MATH-CH10-EXERCISE-10-2-Q6",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(i)",
+            "prompt": "6 (i) Show that: \\(\\cot(\\alpha + \\beta) = \\dfrac{\\cot\\alpha\\cot\\beta - 1}{\\cot\\alpha + \\cot\\beta}\\)",
+            "explanation": "Humein \\(\\cot(\\alpha + \\beta)\\) ko \\(\\cot\\alpha\\) aur \\(\\cot\\beta\\) mein likhna hai.\nCot ka apna seedha formula yaad nahi to ghabrane ki baat nahi: \\(\\cot = \\cos/\\sin\\) likh kar sine aur cosine ke formulas se bana lete hain.\nPlan: cos-sum over sin-sum, phir har term ko \\(\\sin\\alpha\\sin\\beta\\) se divide.",
+            "steps": [
+              "Diya gaya hai: ek identity.\nSaabit karna hai: \\(\\cot(\\alpha + \\beta) = \\dfrac{\\cot\\alpha\\cot\\beta - 1}{\\cot\\alpha + \\cot\\beta}\\).\nTareeqa: \\(\\cot x = \\frac{\\cos x}{\\sin x}\\), sum ke formulas, aur \\(\\sin\\alpha\\sin\\beta\\) se divide. Cotangent banane ke liye cos ko sin par chahiye, is liye neeche \\(\\sin\\alpha\\sin\\beta\\) se divide karte hain (tangent ke liye \\(\\cos\\alpha\\cos\\beta\\) se karte the).",
+              "Cot ko cos/sin mein likhein\n\\[\\cot(\\alpha + \\beta) = \\dfrac{\\cos(\\alpha + \\beta)}{\\sin(\\alpha + \\beta)}\\]\n\\[= \\dfrac{\\cos\\alpha\\cos\\beta - \\sin\\alpha\\sin\\beta}{\\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta}\\]\nKyun: Upar cosine of sum (beech mein minus), neeche sine of sum (beech mein plus).",
+              "Har term ko \\(\\sin\\alpha\\sin\\beta\\) se divide karein\n\\[= \\dfrac{\\dfrac{\\cos\\alpha\\cos\\beta}{\\sin\\alpha\\sin\\beta} - 1}{\\dfrac{\\cos\\beta}{\\sin\\beta} + \\dfrac{\\cos\\alpha}{\\sin\\alpha}}\\]\nKyun: Numerator aur denominator ko ek hi (non-zero) cheez se divide karne se value nahi badalti. \\(\\frac{\\sin\\alpha\\sin\\beta}{\\sin\\alpha\\sin\\beta} = 1\\); \\(\\frac{\\sin\\alpha\\cos\\beta}{\\sin\\alpha\\sin\\beta} = \\frac{\\cos\\beta}{\\sin\\beta}\\), kyunke \\(\\sin\\alpha\\) cancel ho jata hai.\nDhyan dein: Har term ko divide karna hai, sirf pehle ko nahi.",
+              "Cotangents mein likhein\n\\[= \\dfrac{\\cot\\alpha\\cot\\beta - 1}{\\cot\\beta + \\cot\\alpha}\\]\n\\[= \\dfrac{\\cot\\alpha\\cot\\beta - 1}{\\cot\\alpha + \\cot\\beta} = \\text{R.H.S.}\\]\nKyun: \\(\\frac{\\cos x}{\\sin x} = \\cot x\\). Jama mein tarteeb badalne se farq nahi parta.",
+              "Tasdeeq, \\(\\alpha = \\beta = 45^{\\circ}\\)\n\\[\\cot 90^{\\circ} = 0\\]\n\\[\\dfrac{1 \\cdot 1 - 1}{1 + 1} = 0 \\;\\checkmark\\]\nKyun: \\(\\cot 45^{\\circ} = 1\\) aur \\(\\cot 90^{\\circ} = 0\\); dono sides zero."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\cot(\\alpha + \\beta) = \\dfrac{\\cot\\alpha\\cot\\beta - 1}{\\cot\\alpha + \\cot\\beta}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(ii)",
+            "prompt": "6 (ii) Show that: \\(\\cot(\\alpha - \\beta) = \\dfrac{\\cot\\alpha\\cot\\beta + 1}{\\cot\\beta - \\cot\\alpha}\\)",
+            "explanation": "Ab \\(\\cot(\\alpha - \\beta)\\) ko cotangents mein likhna hai.\nTareeqa bilkul sum wala hai, bas difference ke formulas lagenge aur signs badal jayenge.\nPlan: cos-difference over sin-difference, phir har term ko \\(\\sin\\alpha\\sin\\beta\\) se divide.",
+            "steps": [
+              "Diya gaya hai: ek identity.\nSaabit karna hai: \\(\\cot(\\alpha - \\beta) = \\dfrac{\\cot\\alpha\\cot\\beta + 1}{\\cot\\beta - \\cot\\alpha}\\).\nTareeqa: \\(\\cot x = \\frac{\\cos x}{\\sin x}\\), difference ke formulas, phir \\(\\sin\\alpha\\sin\\beta\\) se divide taake cotangents ban jayen.",
+              "Cot ko cos/sin mein likhein\n\\[\\cot(\\alpha - \\beta) = \\dfrac{\\cos(\\alpha - \\beta)}{\\sin(\\alpha - \\beta)}\\]\n\\[= \\dfrac{\\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta}{\\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta}\\]\nKyun: Cosine of difference mein beech mein plus aata hai (sign ulta), aur sine of difference mein minus (sign wahi).",
+              "Har term ko \\(\\sin\\alpha\\sin\\beta\\) se divide karein\n\\[= \\dfrac{\\dfrac{\\cos\\alpha\\cos\\beta}{\\sin\\alpha\\sin\\beta} + 1}{\\dfrac{\\cos\\beta}{\\sin\\beta} - \\dfrac{\\cos\\alpha}{\\sin\\alpha}}\\]\nKyun: Upar neeche ek hi cheez se divide, value wahi. Neeche pehle term mein \\(\\sin\\alpha\\) cancel ho kar \\(\\frac{\\cos\\beta}{\\sin\\beta}\\) bacha, doosre mein \\(\\sin\\beta\\) cancel ho kar \\(\\frac{\\cos\\alpha}{\\sin\\alpha}\\).",
+              "Cotangents mein likhein\n\\[= \\dfrac{\\cot\\alpha\\cot\\beta + 1}{\\cot\\beta - \\cot\\alpha} = \\text{R.H.S.}\\]\nKyun: \\(\\frac{\\cos x}{\\sin x} = \\cot x\\).\nDhyan dein: Denominator mein tarteeb \\(\\cot\\beta - \\cot\\alpha\\) hai, \\(\\cot\\alpha - \\cot\\beta\\) nahi. Minus mein jagah badalne se sign badal jata hai, is liye yeh tarteeb khud nikal kar dekhein, ratta na lagayen.",
+              "Tasdeeq, \\(\\alpha = 60^{\\circ}\\), \\(\\beta = 30^{\\circ}\\)\n\\[\\cot 30^{\\circ} = \\sqrt{3}\\]\n\\[\\dfrac{\\frac{1}{\\sqrt{3}}\\cdot\\sqrt{3} + 1}{\\sqrt{3} - \\frac{1}{\\sqrt{3}}} = \\dfrac{2}{\\frac{2}{\\sqrt{3}}} = \\sqrt{3} \\;\\checkmark\\]\nKyun: \\(\\cot 60^{\\circ} = \\frac{1}{\\sqrt{3}}\\), \\(\\cot 30^{\\circ} = \\sqrt{3}\\); right side bhi \\(\\sqrt{3}\\) aaya, jo \\(\\cot 30^{\\circ}\\) hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\cot(\\alpha - \\beta) = \\dfrac{\\cot\\alpha\\cot\\beta + 1}{\\cot\\beta - \\cot\\alpha}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(iii)",
+            "prompt": "6 (iii) Show that: \\(\\dfrac{\\tan\\alpha + \\tan\\beta}{\\tan\\alpha - \\tan\\beta} = \\dfrac{\\sin(\\alpha + \\beta)}{\\sin(\\alpha - \\beta)}\\)",
+            "explanation": "Left side par tangents hain aur right side par sum aur difference ke sines.\nRight side ko khol kar \\(\\cos\\alpha\\cos\\beta\\) se divide karein to tangents ban jate hain.\nPlan: dono sines expand, phir har term ko \\(\\cos\\alpha\\cos\\beta\\) se divide.",
+            "steps": [
+              "Diya gaya hai: ek identity.\nSaabit karna hai: \\(\\dfrac{\\tan\\alpha + \\tan\\beta}{\\tan\\alpha - \\tan\\beta} = \\dfrac{\\sin(\\alpha + \\beta)}{\\sin(\\alpha - \\beta)}\\).\nTareeqa: R.H.S. se shuru, \\(\\sin(\\alpha \\pm \\beta)\\) ke formulas, phir \\(\\cos\\alpha\\cos\\beta\\) se divide. Tangent banana ho to cosines se divide karte hain, kyunke tan = sin/cos.",
+              "Right side kholein\n\\[\\text{R.H.S.} = \\dfrac{\\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta}{\\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta}\\]\nKyun: Upar sine of sum, neeche sine of difference. Sine mein beech ka sign wahi hota hai jo angle mein.",
+              "Har term ko \\(\\cos\\alpha\\cos\\beta\\) se divide karein\n\\[= \\dfrac{\\dfrac{\\sin\\alpha}{\\cos\\alpha} + \\dfrac{\\sin\\beta}{\\cos\\beta}}{\\dfrac{\\sin\\alpha}{\\cos\\alpha} - \\dfrac{\\sin\\beta}{\\cos\\beta}}\\]\nKyun: \\(\\frac{\\sin\\alpha\\cos\\beta}{\\cos\\alpha\\cos\\beta}\\) mein \\(\\cos\\beta\\) cancel ho kar \\(\\frac{\\sin\\alpha}{\\cos\\alpha}\\) bachta hai; isi tarah doosre term mein \\(\\cos\\alpha\\) cancel ho jata hai. Upar neeche ek hi divisor hai, is liye value wahi rehti hai.",
+              "Tangents mein likhein\n\\[= \\dfrac{\\tan\\alpha + \\tan\\beta}{\\tan\\alpha - \\tan\\beta} = \\text{L.H.S.}\\]\nKyun: \\(\\frac{\\sin x}{\\cos x} = \\tan x\\). R.H.S. se chal kar L.H.S. tak pohanch gaye, proof mukammal.",
+              "Tasdeeq, \\(\\alpha = 60^{\\circ}\\), \\(\\beta = 30^{\\circ}\\)\n\\[\\text{L.H.S.} = \\dfrac{\\sqrt{3} + \\frac{1}{\\sqrt{3}}}{\\sqrt{3} - \\frac{1}{\\sqrt{3}}} = \\dfrac{4}{2} = 2\\]\n\\[\\text{R.H.S.} = \\dfrac{\\sin 90^{\\circ}}{\\sin 30^{\\circ}} = \\dfrac{1}{\\frac{1}{2}} = 2 \\;\\checkmark\\]\nKyun: Upar neeche \\(\\sqrt{3}\\) se multiply karne par \\(\\frac{3 + 1}{3 - 1} = 2\\) aata hai; dono sides 2."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\dfrac{\\tan\\alpha + \\tan\\beta}{\\tan\\alpha - \\tan\\beta} = \\dfrac{\\sin(\\alpha + \\beta)}{\\sin(\\alpha - \\beta)}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-4-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-4-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 204,
+          "pdf_to": 204,
+          "note": "Exercise 10.4, Question 6: book page 199 (PDF 204). Not in the answer key; deduced sin 15 = (sqrt3 - 1)/(2 sqrt2). Verified with sympy and the solution book."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6 Prove that: \\(\\dfrac{\\sin 3\\theta}{1 + 2\\cos 2\\theta} = \\sin\\theta\\); deduce the value of \\(\\sin 15^{\\circ}\\).",
+            "explanation": "Two tasks: prove an identity, then use it for one special angle.\nThe key idea: \\(\\sin 3\\theta\\) can be split as \\(\\sin\\theta + (\\sin 3\\theta - \\sin\\theta)\\), and the bracket is a \"sin − sin\" that gives \\(2\\cos 2\\theta\\sin\\theta\\).\nPlan: show \\(\\sin 3\\theta = \\sin\\theta(1 + 2\\cos 2\\theta)\\), divide, then put \\(\\theta = 15^{\\circ}\\) and rationalise.",
+            "steps": [
+              "Given: L.H.S. \\(= \\dfrac{\\sin 3\\theta}{1 + 2\\cos 2\\theta}\\).\nTo prove: L.H.S. \\(= \\sin\\theta\\); then find \\(\\sin 15^{\\circ}\\).\nMethod: \\(\\sin P - \\sin Q = 2\\cos\\frac{P + Q}{2}\\sin\\frac{P - Q}{2}\\) to factorise the numerator.",
+              "Split the numerator\n\\[\\sin 3\\theta = \\sin\\theta + (\\sin 3\\theta - \\sin\\theta)\\]\nWhy: Adding and subtracting \\(\\sin\\theta\\) changes nothing, but creates a difference of sines.",
+              "Change the bracket into a product\n\\[\\sin 3\\theta - \\sin\\theta = 2\\cos 2\\theta\\sin\\theta\\]\nWhy: Half-sum \\(\\frac{4\\theta}{2} = 2\\theta\\), half-difference \\(\\frac{2\\theta}{2} = \\theta\\).",
+              "Factorise\n\\[\\sin 3\\theta = \\sin\\theta + 2\\cos 2\\theta\\sin\\theta\\]\n\\[= \\sin\\theta(1 + 2\\cos 2\\theta)\\]\nWhy: \\(\\sin\\theta\\) is common to both terms.",
+              "Divide\n\\[\\text{L.H.S.} = \\dfrac{\\sin\\theta(1 + 2\\cos 2\\theta)}{1 + 2\\cos 2\\theta}\\]\n\\[= \\sin\\theta = \\text{R.H.S.}\\]\nWhy: The bracket cancels (we need \\(1 + 2\\cos 2\\theta \\ne 0\\)).",
+              "Deduction: put \\(\\theta = 15^{\\circ}\\)\n\\[\\sin 15^{\\circ} = \\dfrac{\\sin 45^{\\circ}}{1 + 2\\cos 30^{\\circ}}\\]\n\\[= \\dfrac{\\frac{1}{\\sqrt{2}}}{1 + 2\\cdot\\frac{\\sqrt{3}}{2}}\\]\n\\[= \\dfrac{1}{\\sqrt{2}(1 + \\sqrt{3})}\\]\nWhy: \\(3\\theta = 45^{\\circ}\\) and \\(2\\theta = 30^{\\circ}\\) are angles whose values we know.",
+              "Rationalise the denominator\n\\[\\sin 15^{\\circ} = \\dfrac{\\sqrt{3} - 1}{\\sqrt{2}(\\sqrt{3} + 1)(\\sqrt{3} - 1)}\\]\n\\[= \\dfrac{\\sqrt{3} - 1}{\\sqrt{2}(3 - 1)}\\]\n\\[= \\dfrac{\\sqrt{3} - 1}{2\\sqrt{2}}\\]\nWhy: Multiply top and bottom by \\(\\sqrt{3} - 1\\); \\((a + b)(a - b) = a^2 - b^2\\) removes the surd.",
+              "Check\n\\[\\dfrac{1.7321 - 1}{2.8284} \\approx 0.2588\\]\n\\[\\sin 15^{\\circ} \\approx 0.2588 \\;\\checkmark\\]\nWhy: This also agrees with \\(\\sin 15^{\\circ} = \\sin(45^{\\circ} - 30^{\\circ})\\) from Exercise 10.2."
+            ],
+            "final_answer": "Hence proved: \\(\\dfrac{\\sin 3\\theta}{1 + 2\\cos 2\\theta} = \\sin\\theta\\), and \\(\\sin 15^{\\circ} = \\dfrac{\\sqrt{3} - 1}{2\\sqrt{2}}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

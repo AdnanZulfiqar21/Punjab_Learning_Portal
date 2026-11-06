@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-2-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-2-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 195,
+          "pdf_to": 195,
+          "note": "Exercise 10.2 Q7, book p.190 (PDF 195): labels printed (i),(ii),(ii),(iii),(iv); refs 7(i)-7(v) in order; last three repeat Q6 (ii),(iii),(i). Proofs; checked with sympy; solution book PDF 910-913 agrees."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(i)",
+            "prompt": "7 (i) Show that: \\(\\cos(\\alpha - \\beta) = \\dfrac{1 + \\tan\\alpha\\tan\\beta}{\\sec\\alpha\\sec\\beta}\\)",
+            "explanation": "Cosine of a difference on the left; tangents and secants on the right.\nWrite everything on the right in sines and cosines.\nPlan: change tan and sec, simplify the compound fraction, recognise \\(\\cos(\\alpha - \\beta)\\).",
+            "steps": [
+              "Given: the identity.\nTo show: \\(\\cos(\\alpha - \\beta) = \\dfrac{1 + \\tan\\alpha\\tan\\beta}{\\sec\\alpha\\sec\\beta}\\).\nMethod: Start from the R.H.S. with \\(\\tan x = \\dfrac{\\sin x}{\\cos x}\\), \\(\\sec x = \\dfrac{1}{\\cos x}\\).",
+              "Change to sines and cosines\n\\[\\text{R.H.S.} = \\dfrac{1 + \\dfrac{\\sin\\alpha\\sin\\beta}{\\cos\\alpha\\cos\\beta}}{\\dfrac{1}{\\cos\\alpha\\cos\\beta}}\\]\nWhy: \\(\\tan\\alpha\\tan\\beta = \\dfrac{\\sin\\alpha\\sin\\beta}{\\cos\\alpha\\cos\\beta}\\) and \\(\\sec\\alpha\\sec\\beta = \\dfrac{1}{\\cos\\alpha\\cos\\beta}\\).",
+              "Multiply top and bottom by \\(\\cos\\alpha\\cos\\beta\\)\n\\[= \\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta\\]\nWhy: The bottom becomes 1 and the top loses its fraction.",
+              "Recognise the formula\n\\[= \\cos(\\alpha - \\beta) = \\text{L.H.S.}\\]\nWhy: \\(\\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta\\) is the fundamental law.",
+              "Check with \\(\\alpha = \\beta = 45^{\\circ}\\)\n\\[\\cos 0^{\\circ} = 1\\]\n\\[\\dfrac{1 + 1}{\\sqrt{2}\\cdot\\sqrt{2}} = \\dfrac{2}{2} = 1 \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\cos(\\alpha - \\beta) = \\dfrac{1 + \\tan\\alpha\\tan\\beta}{\\sec\\alpha\\sec\\beta}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(ii)",
+            "prompt": "7 (ii) Show that: \\(\\sin(\\alpha + \\beta) = \\dfrac{1 + \\cot\\alpha\\tan\\beta}{\\operatorname{cosec}\\alpha\\sec\\beta}\\)",
+            "explanation": "Sine of a sum on the left; cot, tan, cosec, sec on the right.\nChange the right side into sines and cosines.\nPlan: change the ratios, multiply top and bottom by \\(\\sin\\alpha\\cos\\beta\\), recognise \\(\\sin(\\alpha + \\beta)\\).",
+            "steps": [
+              "Given: the identity.\nTo show: \\(\\sin(\\alpha + \\beta) = \\dfrac{1 + \\cot\\alpha\\tan\\beta}{\\operatorname{cosec}\\alpha\\sec\\beta}\\).\nMethod: \\(\\cot\\alpha = \\dfrac{\\cos\\alpha}{\\sin\\alpha}\\), \\(\\tan\\beta = \\dfrac{\\sin\\beta}{\\cos\\beta}\\), \\(\\operatorname{cosec}\\alpha\\sec\\beta = \\dfrac{1}{\\sin\\alpha\\cos\\beta}\\).",
+              "Change to sines and cosines\n\\[\\text{R.H.S.} = \\dfrac{1 + \\dfrac{\\cos\\alpha\\sin\\beta}{\\sin\\alpha\\cos\\beta}}{\\dfrac{1}{\\sin\\alpha\\cos\\beta}}\\]\nWhy: Product of the given ratios.",
+              "Multiply top and bottom by \\(\\sin\\alpha\\cos\\beta\\)\n\\[= \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta\\]\nWhy: The bottom becomes 1; the small fraction disappears.",
+              "Recognise the formula\n\\[= \\sin(\\alpha + \\beta) = \\text{L.H.S.}\\]\nWhy: Sine of a sum.",
+              "Check with \\(\\alpha = \\beta = 45^{\\circ}\\)\n\\[\\sin 90^{\\circ} = 1\\]\n\\[\\dfrac{1 + 1\\cdot 1}{\\sqrt{2}\\cdot\\sqrt{2}} = 1 \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\sin(\\alpha + \\beta) = \\dfrac{1 + \\cot\\alpha\\tan\\beta}{\\operatorname{cosec}\\alpha\\sec\\beta}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(iii)",
+            "prompt": "7 (iii) [printed as (ii)] Show that: \\(\\cot(\\alpha - \\beta) = \\dfrac{\\cot\\alpha\\cot\\beta + 1}{\\cot\\beta - \\cot\\alpha}\\)",
+            "explanation": "This part is printed as (ii) and repeats Question 6(ii) word for word; the working is the same.\nWe need \\(\\cot\\) of a difference in terms of \\(\\cot\\alpha\\) and \\(\\cot\\beta\\).\nSame method as for the sum, using the difference formulas.\nPlan: cos-difference over sin-difference, divide every term by \\(\\sin\\alpha\\sin\\beta\\).",
+            "steps": [
+              "Given: the identity.\nTo show: \\(\\cot(\\alpha - \\beta) = \\dfrac{\\cot\\alpha\\cot\\beta + 1}{\\cot\\beta - \\cot\\alpha}\\).\nMethod: \\(\\cot x = \\dfrac{\\cos x}{\\sin x}\\), the difference formulas, then divide by \\(\\sin\\alpha\\sin\\beta\\).",
+              "Write cot as cos over sin\n\\[\\cot(\\alpha - \\beta) = \\dfrac{\\cos(\\alpha - \\beta)}{\\sin(\\alpha - \\beta)}\\]\n\\[= \\dfrac{\\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta}{\\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta}\\]\nWhy: Cosine and sine of a difference.",
+              "Divide every term by \\(\\sin\\alpha\\sin\\beta\\)\n\\[= \\dfrac{\\dfrac{\\cos\\alpha\\cos\\beta}{\\sin\\alpha\\sin\\beta} + 1}{\\dfrac{\\cos\\beta}{\\sin\\beta} - \\dfrac{\\cos\\alpha}{\\sin\\alpha}}\\]\nWhy: Same non-zero divisor top and bottom; each piece becomes a cotangent or 1.",
+              "Write as cotangents\n\\[= \\dfrac{\\cot\\alpha\\cot\\beta + 1}{\\cot\\beta - \\cot\\alpha} = \\text{R.H.S.}\\]\nWhy: \\(\\dfrac{\\cos x}{\\sin x} = \\cot x\\). Note the order \\(\\cot\\beta - \\cot\\alpha\\) in the denominator.",
+              "Check with \\(\\alpha = 60^{\\circ}\\), \\(\\beta = 30^{\\circ}\\)\n\\[\\cot 30^{\\circ} = \\sqrt{3}\\]\n\\[\\dfrac{\\frac{1}{\\sqrt{3}}\\cdot\\sqrt{3} + 1}{\\sqrt{3} - \\frac{1}{\\sqrt{3}}} = \\dfrac{2}{\\frac{2}{\\sqrt{3}}} = \\sqrt{3} \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\cot(\\alpha - \\beta) = \\dfrac{\\cot\\alpha\\cot\\beta + 1}{\\cot\\beta - \\cot\\alpha}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(iv)",
+            "prompt": "7 (iv) [printed as (iii)] Show that: \\(\\dfrac{\\tan\\alpha + \\tan\\beta}{\\tan\\alpha - \\tan\\beta} = \\dfrac{\\sin(\\alpha + \\beta)}{\\sin(\\alpha - \\beta)}\\)",
+            "explanation": "This part is printed as (iii) and repeats Question 6(iii) word for word; the working is the same.\nTangents on the left, sines of a sum and a difference on the right.\nStart from the right side and divide by \\(\\cos\\alpha\\cos\\beta\\).\nPlan: expand both sines, divide every term by \\(\\cos\\alpha\\cos\\beta\\).",
+            "steps": [
+              "Given: the identity.\nTo show: \\(\\dfrac{\\tan\\alpha + \\tan\\beta}{\\tan\\alpha - \\tan\\beta} = \\dfrac{\\sin(\\alpha + \\beta)}{\\sin(\\alpha - \\beta)}\\).\nMethod: Start from the R.H.S., use \\(\\sin(\\alpha \\pm \\beta)\\), then divide by \\(\\cos\\alpha\\cos\\beta\\).",
+              "Expand the right side\n\\[\\text{R.H.S.} = \\dfrac{\\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta}{\\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta}\\]\nWhy: Sine of a sum on top, sine of a difference below.",
+              "Divide every term by \\(\\cos\\alpha\\cos\\beta\\)\n\\[= \\dfrac{\\dfrac{\\sin\\alpha}{\\cos\\alpha} + \\dfrac{\\sin\\beta}{\\cos\\beta}}{\\dfrac{\\sin\\alpha}{\\cos\\alpha} - \\dfrac{\\sin\\beta}{\\cos\\beta}}\\]\nWhy: In each term one cosine cancels, leaving sin over cos.",
+              "Write as tangents\n\\[= \\dfrac{\\tan\\alpha + \\tan\\beta}{\\tan\\alpha - \\tan\\beta} = \\text{L.H.S.}\\]\nWhy: \\(\\dfrac{\\sin x}{\\cos x} = \\tan x\\).",
+              "Check with \\(\\alpha = 60^{\\circ}\\), \\(\\beta = 30^{\\circ}\\)\n\\[\\text{L.H.S.} = \\dfrac{\\sqrt{3} + \\frac{1}{\\sqrt{3}}}{\\sqrt{3} - \\frac{1}{\\sqrt{3}}} = \\dfrac{4}{2} = 2\\]\n\\[\\text{R.H.S.} = \\dfrac{\\sin 90^{\\circ}}{\\sin 30^{\\circ}} = \\dfrac{1}{\\frac{1}{2}} = 2 \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\dfrac{\\tan\\alpha + \\tan\\beta}{\\tan\\alpha - \\tan\\beta} = \\dfrac{\\sin(\\alpha + \\beta)}{\\sin(\\alpha - \\beta)}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(v)",
+            "prompt": "7 (v) [printed as (iv)] Show that: \\(\\cot(\\alpha + \\beta) = \\dfrac{\\cot\\alpha\\cot\\beta - 1}{\\cot\\alpha + \\cot\\beta}\\)",
+            "explanation": "This part is printed as (iv) and repeats Question 6(i) word for word; the working is the same.\nWe need \\(\\cot\\) of a sum in terms of \\(\\cot\\alpha\\) and \\(\\cot\\beta\\).\nWrite \\(\\cot = \\cos/\\sin\\), expand, then divide by \\(\\sin\\alpha\\sin\\beta\\).\nPlan: cos-sum over sin-sum, divide every term by \\(\\sin\\alpha\\sin\\beta\\).",
+            "steps": [
+              "Given: the identity.\nTo show: \\(\\cot(\\alpha + \\beta) = \\dfrac{\\cot\\alpha\\cot\\beta - 1}{\\cot\\alpha + \\cot\\beta}\\).\nMethod: \\(\\cot x = \\dfrac{\\cos x}{\\sin x}\\), the sum formulas, and division by \\(\\sin\\alpha\\sin\\beta\\) to create cotangents.",
+              "Write cot as cos over sin\n\\[\\cot(\\alpha + \\beta) = \\dfrac{\\cos(\\alpha + \\beta)}{\\sin(\\alpha + \\beta)}\\]\n\\[= \\dfrac{\\cos\\alpha\\cos\\beta - \\sin\\alpha\\sin\\beta}{\\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta}\\]\nWhy: Cosine and sine of a sum.",
+              "Divide every term by \\(\\sin\\alpha\\sin\\beta\\)\n\\[= \\dfrac{\\dfrac{\\cos\\alpha\\cos\\beta}{\\sin\\alpha\\sin\\beta} - 1}{\\dfrac{\\cos\\beta}{\\sin\\beta} + \\dfrac{\\cos\\alpha}{\\sin\\alpha}}\\]\nWhy: Dividing top and bottom by the same non-zero quantity keeps the value; each piece becomes a cotangent or 1.",
+              "Write as cotangents\n\\[= \\dfrac{\\cot\\alpha\\cot\\beta - 1}{\\cot\\beta + \\cot\\alpha}\\]\n\\[= \\dfrac{\\cot\\alpha\\cot\\beta - 1}{\\cot\\alpha + \\cot\\beta} = \\text{R.H.S.}\\]\nWhy: \\(\\dfrac{\\cos x}{\\sin x} = \\cot x\\).",
+              "Check with \\(\\alpha = \\beta = 45^{\\circ}\\)\n\\[\\cot 90^{\\circ} = 0\\]\n\\[\\dfrac{1 \\cdot 1 - 1}{1 + 1} = 0 \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\cot(\\alpha + \\beta) = \\dfrac{\\cot\\alpha\\cot\\beta - 1}{\\cot\\alpha + \\cot\\beta}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the labels of Question 7 as (i), (ii), (ii), (iii), (iv): the label (ii) is used twice. We number the five parts (i) to (v) in order. The last three parts, printed as (ii), (iii), (iv), repeat Question 6 (ii), (iii) and (i) exactly."
+          }
+        ]
+      }
+    }
+  ]
+}

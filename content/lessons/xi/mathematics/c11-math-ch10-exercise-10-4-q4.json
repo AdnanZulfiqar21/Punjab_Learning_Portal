@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-4-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-4-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 203,
+          "pdf_to": 204,
+          "note": "Exercise 10.4, Question 4 (5 parts): book pages 198-199 (PDF 203-204). No answer key (proofs). Verified with sympy and the solution book."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) Prove that: \\(\\cos 15^{\\circ} + \\cos 105^{\\circ} + \\cos 195^{\\circ} + \\cos 285^{\\circ} = 0\\)",
+            "explanation": "Four cosines added; we must show the total is 0.\nThe trick is to pair them well. Angles that differ by \\(180^{\\circ}\\) pair perfectly: their half-difference is \\(90^{\\circ}\\) and \\(\\cos 90^{\\circ} = 0\\).\nPlan: pair \\(15^{\\circ}\\) with \\(195^{\\circ}\\) and \\(105^{\\circ}\\) with \\(285^{\\circ}\\), using \\(\\cos P + \\cos Q\\).",
+            "steps": [
+              "Given: L.H.S. \\(= \\cos 15^{\\circ} + \\cos 105^{\\circ} + \\cos 195^{\\circ} + \\cos 285^{\\circ}\\).\nTo prove: L.H.S. \\(= 0\\).\nMethod: Regroup into two pairs and use\n\\[\\cos P + \\cos Q\\]\n\\[= 2\\cos\\dfrac{P + Q}{2}\\cos\\dfrac{P - Q}{2}\\]",
+              "Regroup\n\\[\\text{L.H.S.} = (\\cos 195^{\\circ} + \\cos 15^{\\circ})\\]\n\\[+ (\\cos 285^{\\circ} + \\cos 105^{\\circ})\\]\nWhy: Addition can be done in any order. In each pair the angles differ by \\(180^{\\circ}\\).",
+              "First pair (\\(P = 195^{\\circ}\\), \\(Q = 15^{\\circ}\\))\n\\[\\cos 195^{\\circ} + \\cos 15^{\\circ}\\]\n\\[= 2\\cos 105^{\\circ}\\cos 90^{\\circ} = 0\\]\nWhy: \\(\\frac{210^{\\circ}}{2} = 105^{\\circ}\\), \\(\\frac{180^{\\circ}}{2} = 90^{\\circ}\\), and \\(\\cos 90^{\\circ} = 0\\).",
+              "Second pair (\\(P = 285^{\\circ}\\), \\(Q = 105^{\\circ}\\))\n\\[\\cos 285^{\\circ} + \\cos 105^{\\circ}\\]\n\\[= 2\\cos 195^{\\circ}\\cos 90^{\\circ} = 0\\]\nWhy: \\(\\frac{390^{\\circ}}{2} = 195^{\\circ}\\), \\(\\frac{180^{\\circ}}{2} = 90^{\\circ}\\).",
+              "Add the pairs\n\\[\\text{L.H.S.} = 0 + 0 = 0 = \\text{R.H.S.}\\]\nWhy: Both brackets are zero.",
+              "Check with allied angles\n\\[\\cos 195^{\\circ} = -\\cos 15^{\\circ}\\]\n\\[\\cos 285^{\\circ} = \\cos 75^{\\circ} = \\sin 15^{\\circ}\\]\n\\[\\cos 105^{\\circ} = -\\sin 15^{\\circ}\\]\nWhy: The sum is then \\(\\cos 15^{\\circ} - \\sin 15^{\\circ} - \\cos 15^{\\circ} + \\sin 15^{\\circ} = 0\\) \\(\\checkmark\\). (Pairing \\(15^{\\circ}\\) with \\(105^{\\circ}\\) also works, but needs \\(\\cos 240^{\\circ} = -\\tfrac{1}{2}\\).)"
+            ],
+            "final_answer": "Hence proved: \\(\\cos 15^{\\circ} + \\cos 105^{\\circ} + \\cos 195^{\\circ} + \\cos 285^{\\circ} = 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) Prove that: \\(\\dfrac{\\sin 2\\theta + \\sin 4\\theta + \\sin 6\\theta + \\sin 8\\theta}{\\cos 2\\theta + \\cos 4\\theta + \\cos 6\\theta + \\cos 8\\theta} = \\tan 5\\theta\\)",
+            "explanation": "Four sines on top, four cosines below, with the same angles.\nWe must show the fraction is \\(\\tan 5\\theta\\).\nPlan: pair the outer angles (\\(8\\theta, 2\\theta\\)) and the inner angles (\\(6\\theta, 4\\theta\\)); both pairs have half-sum \\(5\\theta\\), so \\(\\sin 5\\theta\\) and \\(\\cos 5\\theta\\) come out as common factors.",
+            "steps": [
+              "Given: L.H.S. \\(= \\dfrac{\\sin 2\\theta + \\sin 4\\theta + \\sin 6\\theta + \\sin 8\\theta}{\\cos 2\\theta + \\cos 4\\theta + \\cos 6\\theta + \\cos 8\\theta}\\).\nTo prove: L.H.S. \\(= \\tan 5\\theta\\).\nMethod: \\(\\sin P + \\sin Q\\) and \\(\\cos P + \\cos Q\\) on pairs chosen so that the half-sums are equal.",
+              "Numerator in pairs\n\\[\\sin 8\\theta + \\sin 2\\theta = 2\\sin 5\\theta\\cos 3\\theta\\]\n\\[\\sin 6\\theta + \\sin 4\\theta = 2\\sin 5\\theta\\cos\\theta\\]\nWhy: \\(\\frac{8\\theta + 2\\theta}{2} = \\frac{6\\theta + 4\\theta}{2} = 5\\theta\\); the half-differences are \\(3\\theta\\) and \\(\\theta\\).",
+              "Take out the common factor\n\\[\\text{Num.} = 2\\sin 5\\theta(\\cos 3\\theta + \\cos\\theta)\\]\nWhy: \\(2\\sin 5\\theta\\) is in both terms.",
+              "Denominator in the same pairs\n\\[\\cos 8\\theta + \\cos 2\\theta = 2\\cos 5\\theta\\cos 3\\theta\\]\n\\[\\cos 6\\theta + \\cos 4\\theta = 2\\cos 5\\theta\\cos\\theta\\]\n\\[\\text{Den.} = 2\\cos 5\\theta(\\cos 3\\theta + \\cos\\theta)\\]\nWhy: Same angles, now with the \\(\\cos P + \\cos Q\\) formula.",
+              "Divide and cancel\n\\[\\text{L.H.S.} = \\dfrac{2\\sin 5\\theta(\\cos 3\\theta + \\cos\\theta)}{2\\cos 5\\theta(\\cos 3\\theta + \\cos\\theta)}\\]\n\\[= \\dfrac{\\sin 5\\theta}{\\cos 5\\theta}\\]\n\\[= \\tan 5\\theta = \\text{R.H.S.}\\]\nWhy: The factor \\(2(\\cos 3\\theta + \\cos\\theta)\\) cancels (assumed non-zero).",
+              "Check: \\(\\theta = 10^{\\circ}\\)\n\\[\\text{Num.} \\approx 2.8356, \\quad \\text{Den.} \\approx 2.3794\\]\n\\[\\dfrac{2.8356}{2.3794} \\approx 1.1918\\]\n\\[\\tan 50^{\\circ} \\approx 1.1918 \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\dfrac{\\sin 2\\theta + \\sin 4\\theta + \\sin 6\\theta + \\sin 8\\theta}{\\cos 2\\theta + \\cos 4\\theta + \\cos 6\\theta + \\cos 8\\theta} = \\tan 5\\theta\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iii)",
+            "prompt": "4 (iii) Prove that: \\(\\cos^{2}\\left(\\dfrac{\\pi}{4} - \\dfrac{\\alpha}{2}\\right) - \\cos^{2}\\left(\\dfrac{\\pi}{4} + \\dfrac{\\alpha}{2}\\right) = \\sin\\alpha\\)",
+            "explanation": "A difference of two squares of cosines.\nWe must show it equals \\(\\sin\\alpha\\).\nPlan: factorise \\(a^2 - b^2 = (a - b)(a + b)\\), turn each bracket into a product with the sum-to-product formulas, then use \\(2\\sin u\\cos u = \\sin 2u\\).",
+            "steps": [
+              "Given: L.H.S. \\(= \\cos^{2}A - \\cos^{2}B\\), where \\(A = \\frac{\\pi}{4} - \\frac{\\alpha}{2}\\), \\(B = \\frac{\\pi}{4} + \\frac{\\alpha}{2}\\).\nTo prove: L.H.S. \\(= \\sin\\alpha\\).\nMethod: \\(\\cos^{2}A - \\cos^{2}B = (\\cos A - \\cos B)(\\cos A + \\cos B)\\), then sum-to-product.",
+              "Half-sum and half-difference of \\(A\\) and \\(B\\)\n\\[\\dfrac{A + B}{2} = \\dfrac{\\pi}{4}\\]\n\\[\\dfrac{A - B}{2} = -\\dfrac{\\alpha}{2}\\]\nWhy: \\(A + B = \\frac{\\pi}{2}\\) (the \\(\\frac{\\alpha}{2}\\)'s cancel) and \\(A - B = -\\alpha\\) (the \\(\\frac{\\pi}{4}\\)'s cancel).",
+              "The sum bracket\n\\[\\cos A + \\cos B\\]\n\\[= 2\\cos\\dfrac{\\pi}{4}\\cos\\left(-\\dfrac{\\alpha}{2}\\right)\\]\n\\[= 2\\cos\\dfrac{\\pi}{4}\\cos\\dfrac{\\alpha}{2}\\]\nWhy: \\(\\cos(-u) = \\cos u\\) (cosine is even).",
+              "The difference bracket\n\\[\\cos A - \\cos B\\]\n\\[= -2\\sin\\dfrac{\\pi}{4}\\sin\\left(-\\dfrac{\\alpha}{2}\\right)\\]\n\\[= 2\\sin\\dfrac{\\pi}{4}\\sin\\dfrac{\\alpha}{2}\\]\nWhy: \\(\\sin(-u) = -\\sin u\\), so the two minus signs cancel.",
+              "Multiply the brackets\n\\[\\text{L.H.S.} = \\left(2\\sin\\dfrac{\\pi}{4}\\cos\\dfrac{\\pi}{4}\\right)\\times\\]\n\\[\\left(2\\sin\\dfrac{\\alpha}{2}\\cos\\dfrac{\\alpha}{2}\\right)\\]\nWhy: We rearranged the four factors (and the \\(2 \\times 2\\)) into two double-angle groups.",
+              "Use the double-angle formula\n\\[= \\sin\\dfrac{\\pi}{2}\\cdot\\sin\\alpha\\]\n\\[= 1\\cdot\\sin\\alpha = \\sin\\alpha = \\text{R.H.S.}\\]\nWhy: \\(2\\sin u\\cos u = \\sin 2u\\), and \\(\\sin\\frac{\\pi}{2} = 1\\).",
+              "Check: \\(\\alpha = 60^{\\circ}\\)\n\\[\\cos^{2}15^{\\circ} - \\cos^{2}75^{\\circ} \\approx 0.9330 - 0.0670\\]\n\\[= 0.8660 = \\sin 60^{\\circ} \\;\\checkmark\\]\nWhy: \\(\\frac{\\pi}{4} \\mp \\frac{\\alpha}{2} = 45^{\\circ} \\mp 30^{\\circ}\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\cos^{2}\\left(\\frac{\\pi}{4} - \\frac{\\alpha}{2}\\right) - \\cos^{2}\\left(\\frac{\\pi}{4} + \\frac{\\alpha}{2}\\right) = \\sin\\alpha\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iv)",
+            "prompt": "4 (iv) Prove that: \\(\\sin\\left(\\dfrac{\\pi}{4} - \\theta\\right)\\sin\\left(\\dfrac{\\pi}{4} + \\theta\\right) = \\dfrac{1}{2}\\cos 2\\theta\\)",
+            "explanation": "A product of two sines whose angles are \\(\\frac{\\pi}{4} \\pm \\theta\\).\nWe must show it equals \\(\\frac{1}{2}\\cos 2\\theta\\).\nPlan: make a factor 2 and use \\(2\\sin\\alpha\\sin\\beta = \\cos(\\alpha - \\beta) - \\cos(\\alpha + \\beta)\\); then \\(\\cos\\frac{\\pi}{2} = 0\\).",
+            "steps": [
+              "Given: L.H.S. \\(= \\sin\\left(\\frac{\\pi}{4} - \\theta\\right)\\sin\\left(\\frac{\\pi}{4} + \\theta\\right)\\).\nTo prove: L.H.S. \\(= \\frac{1}{2}\\cos 2\\theta\\).\nMethod: Product formula\n\\[2\\sin\\alpha\\sin\\beta\\]\n\\[= \\cos(\\alpha - \\beta) - \\cos(\\alpha + \\beta)\\]\nwith \\(\\alpha = \\frac{\\pi}{4} + \\theta\\), \\(\\beta = \\frac{\\pi}{4} - \\theta\\).",
+              "Create the factor 2 and order the factors\n\\[\\text{L.H.S.} = \\dfrac{1}{2}\\left[2\\sin\\left(\\dfrac{\\pi}{4} + \\theta\\right)\\sin\\left(\\dfrac{\\pi}{4} - \\theta\\right)\\right]\\]\nWhy: Multiplying by 2 and by \\(\\frac{1}{2}\\) changes nothing; putting the bigger angle first keeps \\(\\alpha - \\beta\\) positive.",
+              "Find the new angles\n\\[\\alpha - \\beta = 2\\theta\\]\n\\[\\alpha + \\beta = \\dfrac{\\pi}{2}\\]\nWhy: In \\(\\alpha - \\beta\\) the \\(\\frac{\\pi}{4}\\)'s cancel; in \\(\\alpha + \\beta\\) the \\(\\theta\\)'s cancel.",
+              "Use the formula and simplify\n\\[\\text{L.H.S.} = \\dfrac{1}{2}\\left[\\cos 2\\theta - \\cos\\dfrac{\\pi}{2}\\right]\\]\n\\[= \\dfrac{1}{2}[\\cos 2\\theta - 0]\\]\n\\[= \\dfrac{1}{2}\\cos 2\\theta = \\text{R.H.S.}\\]\nWhy: \\(\\cos\\frac{\\pi}{2} = \\cos 90^{\\circ} = 0\\).",
+              "Check: \\(\\theta = 15^{\\circ}\\)\n\\[\\sin 30^{\\circ}\\sin 60^{\\circ} = \\dfrac{\\sqrt{3}}{4}\\]\n\\[\\dfrac{1}{2}\\cos 30^{\\circ} = \\dfrac{\\sqrt{3}}{4} \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\sin\\left(\\frac{\\pi}{4} - \\theta\\right)\\sin\\left(\\frac{\\pi}{4} + \\theta\\right) = \\frac{1}{2}\\cos 2\\theta\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(v)",
+            "prompt": "4 (v) Prove that: \\(\\dfrac{\\sin\\theta + \\sin 3\\theta + \\sin 5\\theta + \\sin 7\\theta}{\\cos\\theta + \\cos 3\\theta + \\cos 5\\theta + \\cos 7\\theta} = \\tan 4\\theta\\)",
+            "explanation": "The same pattern as part (ii), with odd multiples of \\(\\theta\\).\nWe must show the fraction is \\(\\tan 4\\theta\\).\nPlan: pair \\(7\\theta\\) with \\(\\theta\\) and \\(5\\theta\\) with \\(3\\theta\\); both half-sums are \\(4\\theta\\).",
+            "steps": [
+              "Given: L.H.S. \\(= \\dfrac{\\sin\\theta + \\sin 3\\theta + \\sin 5\\theta + \\sin 7\\theta}{\\cos\\theta + \\cos 3\\theta + \\cos 5\\theta + \\cos 7\\theta}\\).\nTo prove: L.H.S. \\(= \\tan 4\\theta\\).\nMethod: \\(\\sin P + \\sin Q\\) and \\(\\cos P + \\cos Q\\) on the pairs \\((7\\theta, \\theta)\\) and \\((5\\theta, 3\\theta)\\).",
+              "Numerator in pairs\n\\[\\sin 7\\theta + \\sin\\theta = 2\\sin 4\\theta\\cos 3\\theta\\]\n\\[\\sin 5\\theta + \\sin 3\\theta = 2\\sin 4\\theta\\cos\\theta\\]\n\\[\\text{Num.} = 2\\sin 4\\theta(\\cos 3\\theta + \\cos\\theta)\\]\nWhy: Half-sums are both \\(4\\theta\\); half-differences are \\(3\\theta\\) and \\(\\theta\\).",
+              "Denominator in the same pairs\n\\[\\cos 7\\theta + \\cos\\theta = 2\\cos 4\\theta\\cos 3\\theta\\]\n\\[\\cos 5\\theta + \\cos 3\\theta = 2\\cos 4\\theta\\cos\\theta\\]\n\\[\\text{Den.} = 2\\cos 4\\theta(\\cos 3\\theta + \\cos\\theta)\\]\nWhy: Same angles with the \\(\\cos P + \\cos Q\\) formula.",
+              "Divide and cancel\n\\[\\text{L.H.S.} = \\dfrac{2\\sin 4\\theta(\\cos 3\\theta + \\cos\\theta)}{2\\cos 4\\theta(\\cos 3\\theta + \\cos\\theta)}\\]\n\\[= \\tan 4\\theta = \\text{R.H.S.}\\]\nWhy: The common factor cancels (assumed non-zero), and \\(\\frac{\\sin}{\\cos} = \\tan\\).",
+              "Check: \\(\\theta = 10^{\\circ}\\)\n\\[\\text{Num.} \\approx 2.3794, \\quad \\text{Den.} \\approx 2.8356\\]\n\\[\\dfrac{2.3794}{2.8356} \\approx 0.8391\\]\n\\[\\tan 40^{\\circ} \\approx 0.8391 \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\dfrac{\\sin\\theta + \\sin 3\\theta + \\sin 5\\theta + \\sin 7\\theta}{\\cos\\theta + \\cos 3\\theta + \\cos 5\\theta + \\cos 7\\theta} = \\tan 4\\theta\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

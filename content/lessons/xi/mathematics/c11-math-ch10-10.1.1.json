@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-10.1.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/10.1.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 182,
+          "pdf_to": 183,
+          "note": "Book p. 177-178: 10.1.1 statement, proof with unit-circle figure, Note, Example 2. Example 2 uses sin(a+b), only deduced in 10.1.2 (v): a Teaching note says so. Teaching notes, Key points, Common mistakes are ours."
+        }
+      ],
+      "title": "10.1.1 Fundamental Law of Trigonometry",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Let \\(\\alpha\\) and \\(\\beta\\) be any two angles (real numbers), then"
+          },
+          {
+            "type": "equation",
+            "latex": "\\cos(\\alpha - \\beta) = \\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta",
+            "text_alt": "cos of (alpha minus beta) equals cos alpha cos beta plus sin alpha sin beta"
+          },
+          {
+            "type": "paragraph",
+            "text": "which is called the Fundamental Law of Trigonometry.",
+            "bold": [
+              "Fundamental Law of Trigonometry"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In words: the cosine of a difference of two angles equals (cos times cos) plus (sin times sin). Notice the sign: a minus inside the bracket gives a plus on the right.\nIt is called fundamental because the other formulas of this unit, for \\(\\cos(\\alpha + \\beta)\\), \\(\\sin(\\alpha \\pm \\beta)\\), \\(\\tan(\\alpha \\pm \\beta)\\) and the allied angles of 10.2, are all deduced from this one law (see 10.1.2)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Proof"
+          },
+          {
+            "type": "paragraph",
+            "text": "For our convenience, let us assume that \\(\\alpha > \\beta > 0\\). Consider a unit circle with centre at origin \\(O\\). Let the terminal sides of angles \\(\\alpha\\) and \\(\\beta\\) cut the unit circle at \\(A\\) and \\(B\\) respectively. Evidently \\(m\\angle AOB = \\alpha - \\beta\\). Take a point \\(C\\) on the unit circle such that \\(m\\angle XOC = m\\angle AOB = \\alpha - \\beta\\). Join \\(A, B\\) and \\(C, D\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch10-fig-unit-circle-proof",
+            "alt": "Unit circle with centre O on the axes X prime X and Y. Terminal sides of angles alpha and beta meet the circle at A(cos alpha, sin alpha) and B(cos beta, sin beta). Point C(cos(alpha minus beta), sin(alpha minus beta)) is on the circle so that angle XOC equals angle AOB equals alpha minus beta; D is (1, 0). Chords AB and CD are drawn.",
+            "caption": "Figure: unit circle for the proof of the fundamental law (original drawing after the textbook's figure)",
+            "side": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A unit circle has radius 1. If the terminal side of an angle \\(\\theta\\) in standard position meets it at the point \\((x, y)\\), then \\(\\cos\\theta = \\frac{x}{1} = x\\) and \\(\\sin\\theta = \\frac{y}{1} = y\\). So every point of the unit circle can be written as \\((\\cos\\theta, \\sin\\theta)\\). \\(D\\) is the point where the circle meets the positive \\(x\\)-axis, the terminal side of the angle \\(0\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Now angles \\(\\alpha\\), \\(\\beta\\) and \\(\\alpha - \\beta\\) are in standard position. Therefore\nthe coordinates of \\(A\\) are \\((\\cos\\alpha, \\sin\\alpha)\\),\nthe coordinates of \\(B\\) are \\((\\cos\\beta, \\sin\\beta)\\),\nthe coordinates of \\(C\\) are \\((\\cos(\\alpha - \\beta), \\sin(\\alpha - \\beta))\\),\nand the coordinates of \\(D\\) are \\((1, 0)\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Now \\(\\triangle AOB\\) and \\(\\triangle COD\\) are congruent [(SAS) theorem]. Therefore\n\\[|\\overline{AB}| = |\\overline{CD}|\\]\n\\[\\Rightarrow |\\overline{AB}|^{2} = |\\overline{CD}|^{2}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why are the triangles congruent? \\(OA = OC = 1\\) and \\(OB = OD = 1\\) (all are radii), and the angles between them are equal: \\(m\\angle AOB = m\\angle COD = \\alpha - \\beta\\). Two sides and the included angle are equal, which is the SAS rule. Congruent triangles have equal third sides, so the chords AB and CD are equal. We square both lengths so that the distance formula can be used without square roots."
+          },
+          {
+            "type": "paragraph",
+            "text": "Using the distance formula, we have\n\\[(\\cos\\alpha - \\cos\\beta)^{2} + (\\sin\\alpha - \\sin\\beta)^{2}\\]\n\\[= [\\cos(\\alpha-\\beta) - 1]^{2} + [\\sin(\\alpha-\\beta) - 0]^{2}\\]\n\\[\\Rightarrow \\cos^{2}\\alpha + \\cos^{2}\\beta - 2\\cos\\alpha\\cos\\beta\\]\n\\[\\quad + \\sin^{2}\\alpha + \\sin^{2}\\beta - 2\\sin\\alpha\\sin\\beta\\]\n\\[= \\cos^{2}(\\alpha-\\beta) + 1 - 2\\cos(\\alpha-\\beta)\\]\n\\[\\quad + \\sin^{2}(\\alpha-\\beta)\\]\n\\[\\Rightarrow 2 - 2(\\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta)\\]\n\\[= 2 - 2\\cos(\\alpha - \\beta)\\]\nHence\n\\[\\cos(\\alpha - \\beta) = \\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The step after the first \\(\\Rightarrow\\) uses \\(\\sin^{2}\\theta + \\cos^{2}\\theta = 1\\) three times: \\(\\cos^{2}\\alpha + \\sin^{2}\\alpha = 1\\), \\(\\cos^{2}\\beta + \\sin^{2}\\beta = 1\\) and \\(\\cos^{2}(\\alpha-\\beta) + \\sin^{2}(\\alpha-\\beta) = 1\\). That is why each side becomes \\(2 - 2(\\dots)\\). Then we subtract 2 from both sides and divide by \\(-2\\) to get the law."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Although we have proved this law for \\(\\alpha > \\beta > 0\\), it is true for all values of \\(\\alpha\\) and \\(\\beta\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Suppose we know the values of sin and cos of two angles \\(\\alpha\\) and \\(\\beta\\); we can find \\(\\cos(\\alpha - \\beta)\\) using this law, as explained in the following example:"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 2 asks for a sine, and the book's solution uses \\(\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta\\), which is deduced on the next page (10.1.2, result (v)). We follow the book's solution and, in the Check step, get the same value from the fundamental law itself."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Find the value of \\(\\sin\\frac{5\\pi}{12}\\).",
+            "steps": [
+              "Given: the angle \\(\\frac{5\\pi}{12}\\) (in radians).\nTo find: the exact value of \\(\\sin\\frac{5\\pi}{12}\\) without tables or a calculator.\nMethod: \\(\\frac{5\\pi}{12}\\) is not a standard angle, so we split it into two standard angles, \\(\\frac{\\pi}{4}\\) and \\(\\frac{\\pi}{6}\\), whose sines and cosines we know, and expand with the sum formula for sine.",
+              "Step 1: Write the angle as a sum of standard angles\n\\[\\frac{5\\pi}{12} = \\frac{5 \\times 180^{\\circ}}{12} = 75^{\\circ}\\]\n\\[75^{\\circ} = 45^{\\circ} + 30^{\\circ} = \\frac{\\pi}{4} + \\frac{\\pi}{6}\\]\nWhy: \\(\\pi\\) radians \\(= 180^{\\circ}\\). \\(75^{\\circ}\\) is not in our table of standard angles, but \\(45^{\\circ}\\) and \\(30^{\\circ}\\) are.",
+              "Step 2: Apply the sum formula\n\\[\\sin\\frac{5\\pi}{12} = \\sin\\left(\\frac{\\pi}{4} + \\frac{\\pi}{6}\\right)\\]\n\\[= \\sin\\frac{\\pi}{4}\\cos\\frac{\\pi}{6} + \\cos\\frac{\\pi}{4}\\sin\\frac{\\pi}{6}\\]\nWhy: \\(\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta\\) with \\(\\alpha = \\frac{\\pi}{4}\\) and \\(\\beta = \\frac{\\pi}{6}\\).",
+              "Step 3: Substitute the standard values\n\\[\\sin\\frac{\\pi}{4} = \\cos\\frac{\\pi}{4} = \\frac{1}{\\sqrt{2}}\\]\n\\[\\cos\\frac{\\pi}{6} = \\frac{\\sqrt{3}}{2},\\ \\sin\\frac{\\pi}{6} = \\frac{1}{2}\\]\n\\[\\sin\\frac{5\\pi}{12} = \\frac{1}{\\sqrt{2}}\\cdot\\frac{\\sqrt{3}}{2} + \\frac{1}{\\sqrt{2}}\\cdot\\frac{1}{2}\\]\nWhy: these are the known values for \\(45^{\\circ}\\) and \\(30^{\\circ}\\).",
+              "Step 4: Add the fractions\n\\[= \\frac{\\sqrt{3}}{2\\sqrt{2}} + \\frac{1}{2\\sqrt{2}}\\]\n\\[= \\frac{\\sqrt{3}+1}{2\\sqrt{2}}\\]\nWhy: both fractions have the same denominator \\(2\\sqrt{2}\\), so we add the numerators. Multiplying top and bottom by \\(\\sqrt{2}\\) gives the rationalised form \\(\\frac{\\sqrt{6}+\\sqrt{2}}{4}\\).",
+              "Check: get the value again from the fundamental law\n\\[\\sin 75^{\\circ} = \\cos 15^{\\circ} = \\cos(45^{\\circ} - 30^{\\circ})\\]\n\\[= \\cos 45^{\\circ}\\cos 30^{\\circ} + \\sin 45^{\\circ}\\sin 30^{\\circ}\\]\n\\[= \\frac{1}{\\sqrt{2}}\\cdot\\frac{\\sqrt{3}}{2} + \\frac{1}{\\sqrt{2}}\\cdot\\frac{1}{2} = \\frac{\\sqrt{3}+1}{2\\sqrt{2}}\\]\nSame value. (Here \\(\\sin 75^{\\circ} = \\cos 15^{\\circ}\\) because \\(\\sin\\theta = \\cos(90^{\\circ} - \\theta)\\), result (i) of 10.1.2.) Numerically \\(\\frac{\\sqrt{3}+1}{2\\sqrt{2}} \\approx 0.9659\\), which is \\(\\sin 75^{\\circ}\\)."
+            ],
+            "answer": "\\(\\sin\\frac{5\\pi}{12} = \\frac{\\sqrt{3}+1}{2\\sqrt{2}}\\) (rationalised: \\(\\frac{\\sqrt{6}+\\sqrt{2}}{4}\\))"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Fundamental law: \\(\\cos(\\alpha - \\beta) = \\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta\\), true for all angles \\(\\alpha, \\beta\\).\n2. Proof idea: on the unit circle, chord \\(AB\\) (angle \\(\\alpha - \\beta\\) between \\(A\\) and \\(B\\)) equals chord \\(CD\\) (angle \\(\\alpha - \\beta\\) from \\(D(1, 0)\\)); square both lengths with the distance formula and use \\(\\sin^{2}\\theta + \\cos^{2}\\theta = 1\\).\n3. A point of the unit circle on the terminal side of \\(\\theta\\) is \\((\\cos\\theta, \\sin\\theta)\\).\n4. To find the ratios of a non-standard angle, write it as a sum or difference of standard angles (\\(75^{\\circ} = 45^{\\circ} + 30^{\\circ}\\), \\(15^{\\circ} = 45^{\\circ} - 30^{\\circ}\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing \\(\\cos(\\alpha - \\beta) = \\cos\\alpha - \\cos\\beta\\). Test it: \\(\\cos(90^{\\circ} - 30^{\\circ}) = \\cos 60^{\\circ} = \\frac{1}{2}\\), but \\(\\cos 90^{\\circ} - \\cos 30^{\\circ} = -\\frac{\\sqrt{3}}{2}\\).\n2. Putting a minus sign in the law: for \\(\\cos(\\alpha - \\beta)\\) the middle sign is plus.\n3. Pairing the wrong ratios: it is \\(\\cos\\alpha\\cos\\beta\\) and \\(\\sin\\alpha\\sin\\beta\\), never \\(\\sin\\alpha\\cos\\beta\\) in this law."
+          }
+        ]
+      }
+    }
+  ]
+}
