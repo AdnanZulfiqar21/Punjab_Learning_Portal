@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-6.10-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/6.10",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 119,
+          "pdf_to": 121,
+          "note": "Book p. 114-116: 6.10 sigma notation, telescoping sum, Properties of Summation box, formulas for sum k, k^2, k^3, Examples 26-27. Derivation of (ii), table, teaching notes, key points and common mistakes are ours."
+        }
+      ],
+      "title": "6.10 Miscellaneous Series (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH6-6.10",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab tak hum ne A.P., G.P., A.G.P. aur H.P. jaisi khaas series ke sums nikaale jin ke apne formulas the. Lekin bohat si series in mein se kisi khaane mein fit nahin hotin, jaise \\(1^{3} + 3^{3} + 5^{3} + \\dots\\). Aisi 'mili juli' series ko Miscellaneous Series kehte hain. In ka sum nikaalne ke liye humein do auzaar chahiye: sigma notation (sum likhne ka chhota tareeqa), aur teen buniyaadi formulas: \\(\\sum k\\), \\(\\sum k^{2}\\) aur \\(\\sum k^{3}\\). Aaj yeh dono auzaar banayenge aur phir kitab ki do misaalon mein istemaal karenge."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ke mutabiq: Greek letter \\(\\Sigma\\) (sigma) mukhtalif qism ke sums ko zahir karne ke liye istemaal hota hai. Misaal ke taur par notation \\(\\sum_{i=m}^{n} a_{i}\\) se murad sum \\(a_{m} + a_{m+1} + a_{m+2} + \\dots + a_{n}\\) hai, aur \\(1 + 3 + 5 + \\dots\\) (\\(n\\) terms tak) ko \\(\\sum_{k=1}^{n}(2k-1)\\) likhte hain. Yahan \\(2k - 1\\) sum ki \\(k^{\\text{th}}\\) term hai, aur \\(k\\) ko index of summation (ginti wala variable) kehte hain. \"1\" aur \\(n\\) ko summation ki lower limit (shuru) aur upper limit (aakhir) kehte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(\\sum_{k=1}^{n}(2k-1)\\) ko yun parhein: \"\\(k\\) ki jagah \\(1, 2, 3, \\dots, n\\) baari baari rakho, har dafa \\(2k - 1\\) nikaalo, aur sab ko jama kar do\". \\(k = 1, 2, 3\\) se \\(1, 3, 5\\) milte hain, to yeh \\(1 + 3 + 5 + \\dots\\) hi hai.\nIndex ka letter koi bhi ho sakta hai: \\(\\sum_{k=1}^{n} k\\) aur \\(\\sum_{i=1}^{n} i\\) bilkul ek hi sum hain. Jaise class mein roll number ko \"k\" kahein ya \"i\", bachay wahi rehte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Pehle \\(n\\) natural numbers ka sum, un ke squares ka sum, aur un ke cubes ka sum sigma notation mein yun likhe jate hain:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[1 + 2 + 3 + \\dots + n = \\sum_{k=1}^{n} k\\]\n\\[1^{2} + 2^{2} + \\dots + n^{2} = \\sum_{k=1}^{n} k^{2}\\]\n\\[1^{3} + 2^{3} + \\dots + n^{3} = \\sum_{k=1}^{n} k^{3}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "In teenon ke formulas banane ke liye kitab ek chalaak tareeqa istemaal karti hai: pehle kisi bhi positive integer \\(m\\) ke liye \\(\\sum_{k=1}^{n}[k^{m} - (k-1)^{m}]\\) ki value nikaalte hain, phir \\(m = 2\\) waghera rakh kar formulas paate hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\sum_{k=1}^{n}[k^{m} - (k-1)^{m}]\\]\n\\[= (1^{m} - 0^{m}) + (2^{m} - 1^{m})\\]\n\\[+ (3^{m} - 2^{m}) + \\dots\\]\n\\[+ [(n-1)^{m} - (n-2)^{m}]\\]\n\\[+ [n^{m} - (n-1)^{m}] = n^{m}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is ko telescoping sum kehte hain. Ghor se dekhiye: har bracket ka doosra hissa agle bracket ke pehle hisse ko kaat deta hai: \\(+1^{m}\\) aur \\(-1^{m}\\), \\(+2^{m}\\) aur \\(-2^{m}\\), isi tarah aakhir tak. Bilkul purani doorbeen (telescope) ki tarah jis ke tukde ek doosre ke andar sama jate hain. Aakhir mein sirf aakhri bracket ka \\(n^{m}\\) aur pehle bracket ka \\(-0^{m} = 0\\) bachta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Yani \\(\\sum_{k=1}^{n}[k^{m} - (k-1)^{m}] = n^{m}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar \\(m = 1\\) ho, to \\(\\sum_{k=1}^{n}[k^{1} - (k-1)^{1}] = n^{1}\\), yani \\(\\sum_{k=1}^{n} 1 = n\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar \\(m = 2\\) ho, to \\(\\sum_{k=1}^{n}[k^{2} - (k-1)^{2}] = n^{2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "In lines mein (aur neeche \\(\\sum k\\) wali working ki pehli line mein bhi) kitab ne ek faltu opening bracket chhapa hai, jaise \\(\\sum_{k=1}^{n}[(k^{m} - (k-1)^{m}]\\). Brackets ka jora poora nahin hota. Sahi likhai \\(\\sum_{k=1}^{n}[k^{m} - (k-1)^{m}] = n^{m}\\) hai. Results par koi asar nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(\\sum_{k=1}^{n} 1 = n\\) kyun? Term mein \\(k\\) hai hi nahin, to har baari \\(1\\) hi jama hota hai, \\(n\\) dafa: \\(1 + 1 + \\dots + 1 = n\\). Isi tarah koi bhi constant \\(c\\) ho to \\(\\sum_{k=1}^{n} c = nc\\). Misaal: \\(\\sum_{k=1}^{10} 5 = 50\\). Dhyan dein: bohat se students yahan \\(1\\) likh dete hain, jo ghalat hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Properties of Summation",
+            "text": "(i) \\(\\sum_{k=1}^{n}(a_{k} + b_{k}) = \\sum_{k=1}^{n} a_{k} + \\sum_{k=1}^{n} b_{k}\\)\n(ii) \\(\\sum_{k=1}^{n} \\alpha a_{k} = \\alpha \\sum_{k=1}^{n} a_{k}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Property (i): agar har term do hisson ka jama ho to poore sum ko do alag sums mein tod sakte hain, kyun ke jama karne ki tarteeb se fark nahin parta. Property (ii): jo constant \\(\\alpha\\) har term mein multiply ho raha ho, use sigma ke bahar nikaal sakte hain, bilkul jaise \\(3 + 6 + 9 = 3(1 + 2 + 3)\\). Yahi do properties humein \\(\\sum(8k^{3} - 12k^{2} + 6k - 1)\\) jaise lambe sum ko jaane pehchaane tukdon mein todne deti hain."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "To Find the Formulae for the Sums"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "\\(\\sum_{k=1}^{n} k\\)",
+              "\\(\\sum_{k=1}^{n} k^{2}\\)",
+              "\\(\\sum_{k=1}^{n} k^{3}\\)"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "(i) Hum jaante hain ke \\((k-1)^{2} = k^{2} - 2k + 1\\), aur is identity ko yun likh sakte hain:\n\\[k^{2} - (k-1)^{2} = 2k - 1 \\quad \\text{(A)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "(A) ke dono taraf \\(k = 1\\) se \\(n\\) tak summation lene se:\n\\[\\sum_{k=1}^{n}[k^{2} - (k-1)^{2}] = \\sum_{k=1}^{n}(2k-1)\\]\nyani\n\\[n^{2} = 2\\sum_{k=1}^{n} k - n \\quad (\\because \\textstyle\\sum_{k=1}^{n} 1 = n)\\]\nya\n\\[2\\sum_{k=1}^{n} k = n^{2} + n\\]\nIs liye"
+          },
+          {
+            "type": "equation",
+            "latex": "\\sum_{k=1}^{n} k = \\dfrac{n(n+1)}{2}",
+            "text_alt": "sum of k from k equals 1 to n equals n times (n plus 1) over 2"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Baayen taraf (left side) telescoping wala result \\(m = 2\\) ke saath hai, jo \\(n^{2}\\) deta hai. Daayen taraf (right side) properties lagayein: \\(\\sum(2k - 1) = 2\\sum k - \\sum 1 = 2\\sum k - n\\). Ab \\(\\sum k\\) ko ek aam unknown samajh kar equation hal kar lein, jaise \\(2x = n^{2} + n\\) se \\(x = \\frac{n(n+1)}{2}\\). Mashhoor kahani hai ke mathematician Gauss ne bachpan mein \\(1 + 2 + \\dots + 100\\) foran \\(5050\\) bata diya tha; yahi formula \\(\\frac{100 \\times 101}{2}\\) hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Isi tarah aasani se saabit kar sakte hain:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{(ii)}\\ \\sum_{k=1}^{n} k^{2} = \\dfrac{n(n+1)(2n+1)}{6}",
+            "text_alt": "(ii) sum of k squared from 1 to n equals n (n plus 1)(2 n plus 1) over 6"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{(iii)}\\ \\sum_{k=1}^{n} k^{3} = \\left[\\dfrac{n(n+1)}{2}\\right]^{2}",
+            "text_alt": "(iii) sum of k cubed from 1 to n equals the square of n (n plus 1) over 2"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "(ii) isi tarah kaise nikalta hai (yeh working hamari taraf se hai): \\(m = 3\\) lein. Kyun ke \\(k^{3} - (k-1)^{3} = 3k^{2} - 3k + 1\\), is liye\n\\[n^{3} = 3\\sum k^{2} - 3\\sum k + n\\]\n\\[3\\sum k^{2} = n^{3} - n + \\dfrac{3n(n+1)}{2}\\]\n\\[= \\dfrac{n(n+1)(2n+1)}{2}\\]\nto \\(\\sum k^{2} = \\frac{n(n+1)(2n+1)}{6}\\). (iii) ke liye \\(m = 4\\) lein aur \\(k^{4} - (k-1)^{4} = 4k^{3} - 6k^{2} + 4k - 1\\) ke saath (i) aur (ii) istemaal karein.\nForan check \\(n = 3\\) se: \\(1 + 2 + 3 = 6 = \\frac{3 \\cdot 4}{2}\\); \\(1 + 4 + 9 = 14 = \\frac{3 \\cdot 4 \\cdot 7}{6}\\); \\(1 + 8 + 27 = 36 = 6^{2}\\). Dilchasp baat: cubes ka sum hamesha \\(\\sum k\\) ka square hota hai."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Sum",
+              "Formula",
+              "\\(n = 10\\)"
+            ],
+            "rows": [
+              [
+                "\\(\\sum k\\)",
+                "\\(\\frac{n(n+1)}{2}\\)",
+                "\\(55\\)"
+              ],
+              [
+                "\\(\\sum k^{2}\\)",
+                "\\(\\frac{n(n+1)(2n+1)}{6}\\)",
+                "\\(385\\)"
+              ],
+              [
+                "\\(\\sum k^{3}\\)",
+                "\\(\\left[\\frac{n(n+1)}{2}\\right]^{2}\\)",
+                "\\(3025\\)"
+              ],
+              [
+                "\\(\\sum 1\\)",
+                "\\(n\\)",
+                "\\(10\\)"
+              ]
+            ],
+            "caption": "Buniyaadi sums ka hamara khulasa (sab k = 1 se n tak)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "\"Sum the series to \\(n\\) terms\" wale har sawal ka tareeqa:\n1. \\(k^{\\text{th}}\\) term \\(T_{k}\\) dhoondo (terms ke andar chhupi A.P. pehchaano).\n2. \\(T_{k}\\) ko \\(k\\) ki powers mein khol do (expand).\n3. Properties se todo: \\(S_{n} = \\sum T_{k}\\).\n4. \\(\\sum k^{3}, \\sum k^{2}, \\sum k, \\sum 1\\) ke formulas lagao.\n5. Simplify karo aur \\(n = 1\\), \\(n = 2\\) se check karo."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki do misaalon mein yeh paanch qadam chala kar dekhte hain."
+          },
+          {
+            "type": "example",
+            "title": "Example 26",
+            "problem": "Find the sum of the series \\(1^{3} + 3^{3} + 5^{3} + \\dots\\) to \\(n\\) terms.",
+            "steps": [
+              "Given: series \\(1^{3} + 3^{3} + 5^{3} + \\dots\\)\nTo find: \\(S_{n}\\), yani pehli \\(n\\) terms ka sum.\nMethod: sab se pehle dekhte hain ke cube kis cheez ka ho raha hai: \\(1, 3, 5, \\dots\\) jo A.P. hai. To \\(k^{\\text{th}}\\) term likhenge, use khol kar \\(k\\) ki powers banayenge, sigma ko todenge aur teenon formulas lagayenge.",
+              "Step 1: \\(k^{\\text{th}}\\) term\n\\[T_{k} = (2k-1)^{3}\\]\n\\(\\because 1 + 2(k-1) = 2k - 1\\)\nKyun: \\(1, 3, 5, \\dots\\) A.P. hai jis mein \\(a_{1} = 1\\), \\(d = 2\\); is ki \\(k^{\\text{th}}\\) term \\(2k - 1\\) hai. Series ki har term isi ka cube hai. Tasdeeq: \\(k = 2\\) se \\(3^{3}\\) aata hai, theek.",
+              "Step 2: Expand karein\n\\[T_{k} = 8k^{3} - 12k^{2} + 6k - 1\\]\nKyun: \\((a - b)^{3} = a^{3} - 3a^{2}b + 3ab^{2} - b^{3}\\) mein \\(a = 2k\\), \\(b = 1\\): \\(8k^{3} - 3(4k^{2}) + 3(2k) - 1\\). Formulas sirf \\(k, k^{2}, k^{3}\\) ke liye hain, is liye bracket kholna zaroori hai.",
+              "Step 3: Sum le kar todein\n\\[S_{n} = \\sum_{k=1}^{n} T_{k}\\]\n\\[= \\sum_{k=1}^{n}(8k^{3} - 12k^{2} + 6k - 1)\\]\n\\[= 8\\sum k^{3} - 12\\sum k^{2}\\]\n\\[+ 6\\sum k - \\sum 1\\]\nKyun: \\(S_{n}\\) yani \\(T_{1}\\) se \\(T_{n}\\) tak sab ka jama. Property (i) ne sum ko chaar hisson mein toda, property (ii) ne \\(8, 12, 6\\) ko bahar nikaala.",
+              "Step 4: Formulas lagayein\n\\[S_{n} = 8\\left[\\dfrac{n(n+1)}{2}\\right]^{2}\\]\n\\[- 12\\left[\\dfrac{n(n+1)(2n+1)}{6}\\right]\\]\n\\[+ 6\\left[\\dfrac{n(n+1)}{2}\\right] - n\\]\nKyun: yeh formulas (iii), (ii), (i) aur \\(\\sum 1 = n\\) hain. Dhyan dein: aakhri term \\(-n\\) hai, \\(-1\\) nahin.",
+              "Step 5: Numbers cancel karein\n\\[= 2n^{2}(n+1)^{2} - 2n(n+1)(2n+1)\\]\n\\[+ 3n(n+1) - n\\]\nKyun: \\(\\frac{8}{4} = 2\\) (kyun ke \\(2^{2} = 4\\) neeche hai), \\(\\frac{12}{6} = 2\\), \\(\\frac{6}{2} = 3\\).",
+              "Step 6: Brackets kholein\n\\[= 2n^{2}(n^{2} + 2n + 1)\\]\n\\[- 2n(2n^{2} + 3n + 1)\\]\n\\[+ n(3n + 3) - n\\]\nKyun: \\((n+1)^{2} = n^{2} + 2n + 1\\) aur \\((n+1)(2n+1) = 2n^{2} + 3n + 1\\); \\(3n(n+1) = n(3n+3)\\).",
+              "Step 7: Common factors nikaalein\n\\[= 2n[(n^{3} + 2n^{2} + n)\\]\n\\[- (2n^{2} + 3n + 1)] + n(3n + 3 - 1)\\]\n\\[= 2n(n^{3} - 2n - 1) + n(3n + 2)\\]\nKyun: \\(2n^{2}(\\dots) = 2n \\cdot n(\\dots)\\), is liye pehle do hisson mein \\(2n\\) common hai; aakhri do mein \\(n\\). Andar \\(2n^{2} - 2n^{2} = 0\\) aur \\(n - 3n = -2n\\). Minus wali bracket kholte waqt har sign badalna mat bhooliye.",
+              "Step 8: Simplify\n\\[= n[2n^{3} - 4n - 2 + 3n + 2]\\]\n\\[= n[2n^{3} - n] = n[n(2n^{2} - 1)]\\]\n\\[= n^{2}(2n^{2} - 1)\\]\nKyun: poore expression se \\(n\\) bahar nikaala, milti julti terms jama kin (\\(-4n + 3n = -n\\), \\(-2 + 2 = 0\\)), aur ek baar phir \\(n\\) common nikaala.",
+              "Tasdeeq:\n\\(n = 1\\): \\(1^{2}(2 - 1) = 1 = 1^{3}\\). \\(n = 2\\): \\(4(8 - 1) = 28 = 1 + 27\\). \\(n = 3\\): \\(9(18 - 1) = 153 = 1 + 27 + 125\\). Teeno durust, is liye formula sahi hai."
+            ],
+            "answer": "\\(S_{n} = n^{2}(2n^{2} - 1)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 26 ki working mein kitab ne \\(= 2n[(n^{3} - 2n - 1) + n(3n + 2)\\) chhapa hai, jahan square bracket band hi nahin hua. Sahi line \\(= 2n(n^{3} - 2n - 1) + n(3n + 2)\\) hai, jaisa kitab ki agli line bhi dikhati hai. Aakhri jawab sahi hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 27",
+            "problem": "Find the sum of \\(n\\) terms of series whose \\(n^{\\text{th}}\\) terms is \\(n^{3} + \\frac{3}{2}n^{2} + \\frac{1}{2}n + 1\\).",
+            "steps": [
+              "Given: \\(T_{n} = n^{3} + \\frac{3}{2}n^{2} + \\frac{1}{2}n + 1\\).\nTo find: \\(S_{n}\\), pehli \\(n\\) terms ka sum.\nMethod: yahan kaam aadha ho chuka hai, kyun ke term pehle se \\(n\\) ki powers mein khula hua hai. Bas \\(n\\) ki jagah \\(k\\) likhenge, sigma todenge aur formulas lagayenge.",
+              "Step 1: \\(k^{\\text{th}}\\) term likhein\n\\[T_{k} = k^{3} + \\dfrac{3}{2}k^{2} + \\dfrac{1}{2}k + 1\\]\nKyun: \\(n\\) to terms ki ginti hai (kitni terms jama karni hain). Chalti hui term ke liye alag letter \\(k\\) chahiye, warna \\(n\\) do kaam ek saath karega aur ulajh jayega.",
+              "Step 2: Sum le kar todein\n\\[S_{n} = \\sum_{k=1}^{n}\\left(k^{3} + \\tfrac{3}{2}k^{2} + \\tfrac{1}{2}k + 1\\right)\\]\n\\[= \\sum k^{3} + \\tfrac{3}{2}\\sum k^{2}\\]\n\\[+ \\tfrac{1}{2}\\sum k + \\sum 1\\]\nKyun: summation ki properties (i) aur (ii); \\(\\frac{3}{2}\\) aur \\(\\frac{1}{2}\\) constants hain, bahar aa gaye.",
+              "Step 3: Formulas lagayein\n\\[S_{n} = \\dfrac{n^{2}(n+1)^{2}}{4}\\]\n\\[+ \\dfrac{3}{2} \\times \\dfrac{n(n+1)(2n+1)}{6}\\]\n\\[+ \\dfrac{1}{2} \\times \\dfrac{n(n+1)}{2} + n\\]\nKyun: \\(\\left[\\frac{n(n+1)}{2}\\right]^{2} = \\frac{n^{2}(n+1)^{2}}{4}\\), baaqi formulas pehle jaise.",
+              "Step 4: \\(\\frac{n}{4}\\) common lein\n\\[= \\dfrac{n}{4}[n(n^{2} + 2n + 1)\\]\n\\[+ (2n^{2} + 3n + 1) + (n + 1) + 4]\\]\nKyun: har hisse mein \\(n\\) hai aur sab ko \\(4\\) par likh sakte hain: \\(\\frac{3}{2} \\cdot \\frac{1}{6} = \\frac{1}{4}\\), \\(\\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}\\), aur \\(n = \\frac{n}{4} \\cdot 4\\). Common factor nikaalne se fractions ka jhanjhat khatam ho jata hai.",
+              "Step 5: Milti julti terms jama karein\n\\[= \\dfrac{n}{4}(n^{3} + 2n^{2} + n + 2n^{2}\\]\n\\[+ 3n + 1 + n + 1 + 4)\\]\n\\[= \\dfrac{n}{4}(n^{3} + 4n^{2} + 5n + 6)\\]\nKyun: \\(2n^{2} + 2n^{2} = 4n^{2}\\), \\(n + 3n + n = 5n\\), \\(1 + 1 + 4 = 6\\).",
+              "Tasdeeq:\n\\(T_{1} = 1 + \\frac{3}{2} + \\frac{1}{2} + 1 = 4\\), aur formula \\(\\frac{1}{4}(1 + 4 + 5 + 6) = 4\\). \\(T_{2} = 8 + 6 + 1 + 1 = 16\\), to \\(S_{2} = 20\\), aur formula \\(\\frac{2}{4}(8 + 16 + 10 + 6) = 20\\). Dono match!"
+            ],
+            "answer": "\\(S_{n} = \\frac{n}{4}(n^{3} + 4n^{2} + 5n + 6)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Dhyan dein",
+            "text": "Dono misaalon mein sab se zyada ghaltiyan algebra mein hoti hain, sigma mein nahin. Teen jagah khaas tor par hoshiyar rahiye: (1) \\((2k-1)^{3}\\) kholte waqt beech wali terms ke signs (minus, plus, minus); (2) minus wali bracket kholte waqt har term ka sign badalna; (3) common factor nikaalte waqt koi hissa chhoot na jaye. Is liye har lambe sawal ke aakhir mein \\(n = 1\\) aur \\(n = 2\\) wala check lazmi karein: agar yeh do values sahi aa gayin to jawab ke ghalat hone ka imkaan bohat kam reh jata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ek baat aur samajh lein: Example 26 aur 27 mein farq sirf pehle qadam ka hai. Example 26 mein humein khud \\(T_{k}\\) dhoondna para (terms mein chhupi A.P. pehchaan kar), jab ke Example 27 mein \\(n^{\\text{th}}\\) term pehle se diya hua tha. Exercise 6.10 mein dono qism ke sawal milenge. Jahan terms do ya teen hisson ka product hon, jaise \\(1 \\times 4 + 2 \\times 7 + \\dots\\), wahan har hisse ki A.P. alag pehchaan kar un ki \\(k^{\\text{th}}\\) terms ko multiply karein, phir wahi paanch qadam."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahin: \\(3 + 5 + 7 + \\dots\\) (\\(n\\) terms) ka sum sigma se nikaalein.\n\\(T_{k} = 2k + 1\\), to \\(S_{n} = 2\\sum k + \\sum 1 = n(n+1) + n = n(n+2)\\).\nTasdeeq: \\(n = 2\\) se \\(3 + 5 = 8 = 2 \\times 4\\). Sahi!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(1 + 2 + \\dots + 100\\) kitna hai? Aur \\(1^{3} + 2^{3} + \\dots + 10^{3}\\)? (Jawab: \\(5050\\) aur \\(55^{2} = 3025\\).) Ab sochiye: kya \\(1^{2} + 2^{2} + 3^{2}\\) ko \\((1 + 2 + 3)^{2}\\) likh sakte hain? \\(14\\) aur \\(36\\) barabar nahin, to bilkul nahin!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(\\sum_{k=1}^{n} T_{k}\\) ka matlab \\(T_{1} + T_{2} + \\dots + T_{n}\\); \\(k\\) index hai, \\(1\\) aur \\(n\\) limits.\n2. \\(\\sum(a_{k} + b_{k}) = \\sum a_{k} + \\sum b_{k}\\) aur \\(\\sum \\alpha a_{k} = \\alpha\\sum a_{k}\\).\n3. \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n+1)}{2}\\), \\(\\sum k^{2} = \\frac{n(n+1)(2n+1)}{6}\\), \\(\\sum k^{3} = \\left[\\frac{n(n+1)}{2}\\right]^{2}\\).\n4. Series ka sum: \\(T_{k}\\) dhoondo, kholo, todo, formulas lagao, simplify karo, check karo."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(\\sum 1 = 1\\) likh dena: yeh \\(n\\) hai (\\(1\\) ko \\(n\\) dafa jama kiya).\n2. \\(k\\) wali cheez ko sigma se bahar nikaal dena: \\(\\sum k \\cdot k \\ne k\\sum k\\). Sirf numbers (ya \\(k\\) ke ilawa letters) bahar aate hain.\n3. \\(\\sum k^{2} = (\\sum k)^{2}\\) samajhna: \\(n = 2\\) par \\(1 + 4 = 5\\) magar \\((1 + 2)^{2} = 9\\). (Yeh sirf cubes ke liye sach hai: \\(\\sum k^{3} = (\\sum k)^{2}\\).)\n4. Term mein \\(n\\) rehne dena jab sum bhi \\(n\\) tak ho: pehle term ko \\(k\\) mein likhein."
+          }
+        ]
+      }
+    }
+  ]
+}

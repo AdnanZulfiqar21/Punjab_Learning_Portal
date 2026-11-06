@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-11-Q7-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-11-q7",
+      "title": "Question 7 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 126,
+          "pdf_to": 126,
+          "note": "Exercise 6.11, Question 7: book p.121-122 (PDF 126-127); Q14 is cut off on PDF 127 (rest of page blank). Answer key PDF 305-306. Solution book PDF 596-616 used as a reference only."
+        }
+      ],
+      "variant_of": "C11-MATH-CH6-EXERCISE-6-11-Q7",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(a)",
+            "prompt": "7 (a) At a toll booth, the number of vehicles passing through during the first minute is 100. Due to road congestion, each minute only 80% of the vehicles from the previous minute manage to pass. Represent the number of vehicles passing each minute as a sequence.",
+            "explanation": "\"80% of the previous minute\" ka matlab hai ke har minute ki ginti pichhle minute ki ginti ka 0.8 guna hai. Har qadam par ek hi number se zarb ho to list G.P. banti hai: \\(a_1 = 100\\), \\(r = 0.8\\).\nIs hisse mein sequence likhni hai: pehle chand terms aur general term.\nPlan: \\(r\\) nikalenge, terms banayenge, aur \\(a_n = a_1 r^{n - 1}\\) likhenge.",
+            "steps": [
+              "Diya gaya hai: Pehle minute 100 gaariyan; har minute pichhle minute ka 80%.\nHumein find karna hai: har minute ki gaariyon ki sequence.\nTareeqa: G.P.: har minute \\(r\\) se multiply; \\(a_n = a_1 r^{n - 1}\\).",
+              "Common ratio nikalein\n\\[r = \\dfrac{80}{100} = 0.8,\\quad a_1 = 100\\]\nKyun: Kisi number ka 80% us ka 0.8 guna hota hai. To har minute ki ginti pichhli ka 0.8 guna, yani \\(r = 0.8\\), aur pehla term 100.",
+              "Terms likhein\n\\[100 \\times 0.8 = 80\\]\n\\[80 \\times 0.8 = 64\\]\n\\[64 \\times 0.8 = 51.2\\]\n\\[51.2 \\times 0.8 = 40.96\\]\nKyun: Har agla term pichhle ko 0.8 se multiply kar ke milta hai: 2nd minute 80, 3rd 64, 4th 51.2, 5th 40.96.",
+              "General term likhein\n\\[100,\\ 80,\\ 64,\\ 51.2,\\ \\ldots\\]\n\\[a_n = 100(0.8)^{n - 1}\\]\nKyun: G.P. ka \\(n\\)th term \\(a_1 r^{n - 1}\\) hota hai, kyunke pehle term par koi ratio nahi lagta; \\(n\\)th term tak \\(n - 1\\) dafa lagta hai. Tasdeeq: \\(n = 3\\) par \\(100(0.8)^2 = 64\\), sahi.\nDhyan dein: 51.2 jaisa decimal sirf model ki wajah se hai; asal gaariyan poori ginti mein hoti hain."
+            ],
+            "final_answer": "\\(100,\\ 80,\\ 64,\\ 51.2,\\ \\ldots\\), \\(a_n = 100(0.8)^{n - 1}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(b)",
+            "prompt": "7 (b) At a toll booth, the number of vehicles passing through during the first minute is 100. Due to road congestion, each minute only 80% of the vehicles from the previous minute manage to pass. Find the total number of vehicles that pass through in 15 minutes.",
+            "explanation": "\"80% of the previous minute\" ka matlab hai ke har minute ki ginti pichhle minute ki ginti ka 0.8 guna hai. Har qadam par ek hi number se zarb ho to list G.P. banti hai: \\(a_1 = 100\\), \\(r = 0.8\\).\n\"Total in 15 minutes\" ka matlab pehle 15 terms ka jama, \\(S_{15}\\).\nPlan: \\(r < 1\\) hai, is liye \\(S_n = \\frac{a_1(1 - r^n)}{1 - r}\\) wali form lagayenge taake numbers positive rahein.",
+            "steps": [
+              "Diya gaya hai: Pehle minute 100 gaariyan; har minute pichhle minute ka 80%.\nHumein find karna hai: \\(S_{15}\\), 15 minute mein kul gaariyan.\nTareeqa: G.P. sum \\(S_n = \\frac{a_1(1 - r^n)}{1 - r}\\), \\(r = 0.8 < 1\\).",
+              "Common ratio nikalein\n\\[r = \\dfrac{80}{100} = 0.8,\\quad a_1 = 100\\]\nKyun: Kisi number ka 80% us ka 0.8 guna hota hai. To har minute ki ginti pichhli ka 0.8 guna, yani \\(r = 0.8\\), aur pehla term 100.",
+              "15 terms ka jama likhein\n\\[S_{15} = \\dfrac{100[1 - (0.8)^{15}]}{1 - 0.8}\\]\n\\[= 500[1 - (0.8)^{15}]\\]\nKyun: Neeche \\(1 - 0.8 = 0.2\\) aaya, aur \\(100 \\div 0.2 = 500\\) (0.2 se divide karna 5 se multiply karna hai).",
+              "\\((0.8)^{15}\\) nikalein\n\\[(0.8)^2 = 0.64\\]\n\\[(0.8)^4 = 0.4096\\]\n\\[(0.8)^8 \\approx 0.16777216\\]\n\\[(0.8)^{15} \\approx 0.0351844\\]\nKyun: Squaring se 2, 4, 8 ki powers banayi. Phir \\(15 = 8 + 4 + 2 + 1\\) hai, is liye in chaaron ko (aur ek 0.8 ko) multiply kiya. Calculator se seedha bhi nikal sakte hain.",
+              "Kul nikalein\n\\[S_{15} \\approx 500(1 - 0.0351844)\\]\n\\[\\approx 500(0.9648156)\\]\n\\[\\approx 482.4\\]\nKyun: Power wapas rakhi to taqreeban 482.4. Gaariyan poori hoti hain, is liye amli tor par taqreeban 482 gaariyan.\nTasdeeq: 15 minute baad ek minute mein sirf 4 ke qareeb gaariyan guzarti hain, to jama 500 se thoda kam hona chahiye; 482.4 theek hai."
+            ],
+            "final_answer": "\\(S_{15} \\approx 482.4\\), taqreeban 482 gaariyan"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(c)",
+            "prompt": "7 (c) At a toll booth, the number of vehicles passing through during the first minute is 100. Due to road congestion, each minute only 80% of the vehicles from the previous minute manage to pass. What is the maximum number of vehicles that can pass in the long run (as time \\(t \\to \\infty\\))",
+            "explanation": "\"80% of the previous minute\" ka matlab hai ke har minute ki ginti pichhle minute ki ginti ka 0.8 guna hai. Har qadam par ek hi number se zarb ho to list G.P. banti hai: \\(a_1 = 100\\), \\(r = 0.8\\).\n\"Long run\" ka matlab hai terms ko hamesha ke liye jama karte rehna. Kyunke \\(r = 0.8\\) ek se chhota hai, har term pichhle se chhota hota jata hai aur zero ki taraf jata hai, is liye jama ek had (limit) par ruk jata hai.\nPlan: part (b) ke \\(S_n = 500[1 - (0.8)^n]\\) mein \\(n\\) ko bohat bara karenge.",
+            "steps": [
+              "Diya gaya hai: Pehle minute 100 gaariyan; har minute pichhle minute ka 80%.\nHumein find karna hai: \\(n \\to \\infty\\) par \\(S_n\\) ki had.\nTareeqa: \\(S_n = 500[1 - (0.8)^n]\\), aur \\((0.8)^n \\to 0\\).",
+              "Common ratio nikalein\n\\[r = \\dfrac{80}{100} = 0.8,\\quad a_1 = 100\\]\nKyun: Kisi number ka 80% us ka 0.8 guna hota hai. To har minute ki ginti pichhli ka 0.8 guna, yani \\(r = 0.8\\), aur pehla term 100.",
+              "Kisi bhi \\(n\\) ke liye \\(S_n\\)\n\\[S_n = \\dfrac{100[1 - (0.8)^n]}{0.2}\\]\n\\[= 500[1 - (0.8)^n]\\]\nKyun: Part (b) wala hi formula, bas \\(n\\) ki jagah koi number nahi rakha.",
+              "\\(n \\to \\infty\\) karein\n\\[(0.8)^n \\to 0\\]\n\\[S_n \\to 500(1 - 0) = 500\\]\nKyun: 0 aur 1 ke darmiyan number ki powers chhoti hoti jaati hain: 0.8, 0.64, 0.512, ... aur aakhir zero ke qareeb. Is liye \\(1 - (0.8)^n\\) ek ke qareeb aur \\(S_n\\) 500 ke qareeb pahunchta hai. Yahi infinite G.P. ka jama \\(S_\\infty = \\frac{a_1}{1 - r} = \\frac{100}{0.2} = 500\\) hai; yeh formula is unit mein chhapa nahi, lekin \\(S_n\\) se seedha nikalta hai.\nDhyan dein: 500 kabhi poora nahi hota, jama sirf us ke qareeb jata hai; is liye \"maximum\" 500 hai."
+            ],
+            "final_answer": "500 gaariyan"
+          }
+        ]
+      }
+    }
+  ]
+}

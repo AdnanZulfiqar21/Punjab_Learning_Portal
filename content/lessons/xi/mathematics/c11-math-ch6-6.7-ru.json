@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-6.7-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/6.7",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 109,
+          "pdf_to": 110,
+          "note": "Book p. 104-105: 6.7 Geometric Series, e-mail forwarding tree (original SVG), S_n = a1(1 - r^n)/(1 - r) derived by subtracting rS_n, Note r = 1, Example 18"
+        }
+      ],
+      "title": "6.7 Geometric Series (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH6-6.7",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab tak humne G.P. ki terms nikaalna seekha. Lekin aksar sawal yeh hota hai ke itni saari terms ka jama (sum) kitna hai? Masalan bank mein har saal barhne wali raqam ka kul, ya kisi khabar ka phailna. Is hisse mein hum G.P. ki terms ko jama karne ka shortcut formula banayenge, aur kitab ki ek pyari si misaal se shuru karenge."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki misaal: maan lijiye aap Monday ko ek Islamic quote teen doston ko e-mail karte hain. Har dost Tuesday ko use apne teen doston ko bhejta hai. Tuesday ko jis ko bhi quote mila, woh Wednesday ko teen aur logon ko bhejta hai, aur yeh silsila aise hi chalta rehta hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch6-fig-email-tree",
+            "alt": "Tree diagram of e-mail forwarding. You at the top send the quote to 3 people on Monday; each of them sends it to 3 people on Tuesday (9 people); each of those sends it to 3 people on Wednesday (27 people). Counts 1, 3, 9, 27 are shown at the right.",
+            "caption": "Figure: e-mail forwarding tree, 1, 3, 9, 27 readers (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ghor kijiye ke har din quote parhne walon ki tadaad pichle din ki teen guna hai. Sunday tak, aap ko mila kar, quote parhne walon ki kul tadaad \\(1 + 3 + 9 + 27 + 81 + 243 + 729 + 2187\\), yani \\(3280\\) hai. Numbers \\(1, 3, 9, 27, 81, 243, 729\\) aur \\(2187\\) ek geometric sequence banate hain jis mein \\(a_1 = 1\\) aur \\(r = 3\\). In numbers ke jama ki shakal, \\(1 + 3 + 9 + 27 + 81 + 243 + 729 + 2187\\), ko geometric series kehte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Sequence aur series mein farq zaroor samajh lein: sequence sirf list hai, \\(1, 3, 9, 27, \\ldots\\) (commas ke saath). Series us list ka jama hai, \\(1 + 3 + 9 + 27 + \\cdots\\) (plus ke saath). Neeche table dekhiye ke har term teen guna hone se kul kitni tezi se barhta hai: sirf ek hafte mein 3280 log!"
+          },
+          {
+            "type": "table",
+            "caption": "Har din quote parhne wale log",
+            "header": [
+              "Din",
+              "Naye log",
+              "Ab tak kul"
+            ],
+            "rows": [
+              [
+                "Aap (shuru)",
+                "1",
+                "1"
+              ],
+              [
+                "Monday",
+                "3",
+                "4"
+              ],
+              [
+                "Tuesday",
+                "9",
+                "13"
+              ],
+              [
+                "Wednesday",
+                "27",
+                "40"
+              ],
+              [
+                "Thursday",
+                "81",
+                "121"
+              ],
+              [
+                "Friday",
+                "243",
+                "364"
+              ],
+              [
+                "Saturday",
+                "729",
+                "1093"
+              ],
+              [
+                "Sunday",
+                "2187",
+                "3280"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Kyun",
+            "text": "Yeh misaal kyun di gayi? Taa ke aap mehsoos karein ke G.P. ki terms ko ek ek kar ke jama karna kitna lamba kaam hai. 8 terms to theek, lekin agar 30 din ka hisaab chahiye ho to? Is liye humein ek formula chahiye jo seedha jawab de de."
+          },
+          {
+            "type": "paragraph",
+            "text": "Geometric progression ka jama yun likha ja sakta hai:\n\\[S_n = \\dfrac{a_1(1 - r^{n})}{1 - r},\\ r \\ne 1\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab dekhte hain yeh formula aaya kahan se. Kisi bhi geometric series ka formula banane ke liye yeh likhiye:\n\\[S_n = a_1 + a_1r + a_1r^{2} + \\cdots\\]\n\\[\\quad + a_1r^{n-3} + a_1r^{n-2}\\]\n\\[\\quad + a_1r^{n-1} \\quad \\text{(i)}\\]\n\\[rS_n = a_1r + a_1r^{2} + \\cdots\\]\n\\[\\quad + a_1r^{n-3} + a_1r^{n-2}\\]\n\\[\\quad + a_1r^{n-1} + a_1r^{n} \\quad \\text{(ii)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Kyun",
+            "text": "(ii) kahan se aayi? (i) ke dono taraf \\(r\\) se zarb kiya. Har term ki power ek barh gayi: \\(a_1\\) ban gaya \\(a_1r\\), \\(a_1r\\) ban gaya \\(a_1r^{2}\\), aur aakhri term \\(a_1r^{n-1}\\) ban gayi \\(a_1r^{n}\\). Hum ne (ii) ki terms ko ek jagah aage khiska kar likha hai taa ke same power wali terms ek doosre ke neeche aa jayein."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab (ii) ko (i) mein se tafreeq (subtract) karein. Beech ki saari terms \\(a_1r, a_1r^{2}, \\ldots, a_1r^{n-1}\\) dono mein hain, is liye cut ho jati hain; sirf (i) ki pehli term aur (ii) ki aakhri term bachti hai:\n\\[S_n - rS_n = a_1 - a_1r^{n}\\]\n\\[S_n(1 - r) = a_1(1 - r^{n})\\]\n\\[S_n = \\dfrac{a_1(1 - r^{n})}{1 - r},\\ r \\ne 1\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab is line ko \\(S_n - rS_n = a_1 - ar^{n}\\) chhaapti hai, yani \\(a_1\\) ki jagah sirf \\(a\\). Sahi line \\(S_n - rS_n = a_1 - a_1r^{n}\\) hai, kyun ke (ii) ki aakhri term \\(a_1r^{n}\\) hai. Kitab ki agli line \\(S_n(1 - r) = a_1(1 - r^{n})\\) phir se \\(a_1\\) use karti hai, is liye aakhri formula bilkul sahi hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Agar \\(r = 1\\) ho, to \\(S_n = na_1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(r \\ne 1\\) ki shart kyun? Kyun ke aakhri qadam mein hum \\(1 - r\\) se divide karte hain, aur \\(r = 1\\) par \\(1 - r = 0\\) ho jata hai; zero se divide karna mumkin nahin. Lekin \\(r = 1\\) wali series to bohat aasan hai: har term \\(a_1\\) hi hai (jaise \\(5 + 5 + 5 + 5\\)), to \\(n\\) terms ka jama \\(na_1\\). Yahi note box keh raha hai.\nEk aur kaam ki baat: upar neeche dono ko \\(-1\\) se zarb karein to wahi formula yun ban jata hai: \\(S_n = \\frac{a_1(r^{n} - 1)}{r - 1}\\). Jab \\(r > 1\\) ho (jaise 3), to yeh shakal behtar hai kyun ke dono brackets positive rehti hain aur minus signs ki ulajhan nahin hoti."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Formula ki tasdeeq e-mail wali series se: \\(a_1 = 1\\), \\(r = 3\\), \\(n = 8\\) (aap se Sunday tak 8 terms).\n\\[S_8 = \\dfrac{1(3^{8} - 1)}{3 - 1} = \\dfrac{6561 - 1}{2}\\]\n\\[S_8 = 3280\\]\nBilkul wahi jawab jo ek ek kar ke jama karne se aaya tha, magar ek line mein!"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki misaal dekhte hain jis mein \\(a_1\\) aur \\(r\\) chhupe hue hain; pehle unhein dhoondna hoga."
+          },
+          {
+            "type": "example",
+            "title": "Example 18",
+            "problem": "Find the sum of \\(n\\) terms of the geometric series if \\(a_n = (-3)\\left(\\frac{2}{5}\\right)^{n}\\).",
+            "steps": [
+              "Given: geometric series ki general term \\(a_n = (-3)\\left(\\frac{2}{5}\\right)^{n}\\).\nTo find: \\(S_n\\), yani pehli \\(n\\) terms ka jama.\nMethod: sab se pehle sochte hain ke sum ka formula kya maangta hai: \\(a_1\\) (pehli term) aur \\(r\\) (common ratio). Sawal mein yeh seedhe nahin diye, sirf \\(a_n\\) diya hai. Is liye plan yeh hai: \\(a_n\\) ko standard shakal \\(a_1r^{n-1}\\) mein likhein, wahan se \\(a_1\\) aur \\(r\\) parh lein, phir \\(S_n = \\frac{a_1(1 - r^{n})}{1 - r}\\) lagayein.",
+              "Step 1: \\(a_n\\) ko power \\(n - 1\\) wali shakal mein likhein\n\\[(-3)\\left(\\tfrac{2}{5}\\right)^{n} = -3\\left(\\tfrac{2}{5}\\right)\\left(\\tfrac{2}{5}\\right)^{n-1}\\]\n\\[= \\left(-\\tfrac{6}{5}\\right)\\left(\\tfrac{2}{5}\\right)^{n-1}\\]\n\\[a_n = \\left(-\\tfrac{6}{5}\\right)\\left(\\tfrac{2}{5}\\right)^{n-1}\\]\nKyun: indices ka rule hai \\(x^{n} = x \\cdot x^{n-1}\\) (jaise \\(2^{5} = 2 \\times 2^{4}\\)). Ek \\(\\frac{2}{5}\\) bahar nikaalne se power \\(n - 1\\) ho jati hai jo standard form mein hoti hai, aur bahar wala \\(\\frac{2}{5}\\) \\(-3\\) se zarb ho kar \\(-\\frac{6}{5}\\) ban jata hai.",
+              "Step 2: \\(a_1\\) aur \\(r\\) pehchaanein\n\\(\\left(-\\frac{6}{5}\\right)\\left(\\frac{2}{5}\\right)^{n-1}\\) ko \\(a_1r^{n-1}\\) se milaayein:\n\\[a_1 = -\\tfrac{6}{5},\\quad r = \\tfrac{2}{5}\\]\nKyun: \\(a_1r^{n-1}\\) mein aage wala number pehli term hai aur power ka base common ratio hai.\nDhyan dein: chhoti si tasdeeq kar lein. Diye hue \\(a_n\\) mein \\(n = 1\\) rakhein: \\((-3)\\frac{2}{5} = -\\frac{6}{5}\\). Haan, pehli term yahi hai, \\(-3\\) nahin.",
+              "Step 3: Sum ka formula lagayein\n\\[S_n = \\dfrac{a_1(1 - r^{n})}{1 - r}\\]\n\\[= \\dfrac{-\\frac{6}{5}\\left[1 - \\left(\\frac{2}{5}\\right)^{n}\\right]}{1 - \\frac{2}{5}}\\]\nKyun: \\(r = \\frac{2}{5}\\) hai jo 1 nahin, is liye formula lag sakta hai. Aur \\(r\\) 1 se chhota hai, is liye \\(1 - r\\) wali shakal behtar hai: neeche positive number aata hai aur hisaab saaf rehta hai.",
+              "Step 4: Simplify karein\n\\[1 - \\tfrac{2}{5} = \\tfrac{3}{5}\\]\n\\[S_n = \\left(-\\tfrac{6}{5}\\right)\\left(\\tfrac{5}{3}\\right)\\left[1 - \\left(\\tfrac{2}{5}\\right)^{n}\\right]\\]\n\\[S_n = (-2)\\left[1 - \\left(\\tfrac{2}{5}\\right)^{n}\\right]\\]\nKyun: kisi fraction se divide karna us ke ulte (reciprocal) se zarb dene ke barabar hai, is liye \\(\\frac{3}{5}\\) se divide = \\(\\frac{5}{3}\\) se zarb. Phir \\(-\\frac{6}{5}\\times\\frac{5}{3}\\) mein 5 cut ho jata hai aur \\(-\\frac{6}{3} = -2\\) bachta hai.",
+              "Tasdeeq:\nAb dekhte hain ke formula sach mein sahi jama deta hai ya nahin.\n\\(n = 1\\): \\(-2\\left(1 - \\frac{2}{5}\\right) = -2 \\times \\frac{3}{5} = -\\frac{6}{5}\\), jo pehli term hi hai.\n\\(n = 2\\): seedha jama \\(a_1 + a_2 = -\\frac{6}{5} + (-3)\\frac{4}{25} = -\\frac{30}{25} - \\frac{12}{25} = -\\frac{42}{25}\\). Formula se: \\(-2\\left(1 - \\frac{4}{25}\\right) = -2 \\times \\frac{21}{25} = -\\frac{42}{25}\\). Dono barabar, jawab durust hai."
+            ],
+            "answer": "\\(S_n = (-2)\\left[1 - \\left(\\frac{2}{5}\\right)^{n}\\right]\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Series \\(2 + 6 + 18 + \\cdots\\) ki pehli 5 terms ka jama nikaaliye. Yahan \\(a_1 = 2\\), \\(r = \\frac{6}{2} = 3\\), \\(n = 5\\). \\(r > 1\\) hai, is liye doosri shakal lein:\n\\[S_5 = \\dfrac{2(3^{5} - 1)}{3 - 1} = \\dfrac{2 \\times 242}{2} = 242\\]\nTasdeeq: \\(2 + 6 + 18 + 54 + 162 = 242\\). Sahi!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "1. \\(1 + \\frac{1}{2} + \\frac{1}{4} + \\cdots\\) ki pehli 5 terms ka jama formula se nikaaliye. (Jawab \\(\\frac{31}{16}\\) aana chahiye.)\n2. \\(4 + 4 + 4 + \\cdots\\) (10 terms) ka jama kya hai? Kaunsa formula lagega?\n3. Agar \\(a_n = 5 \\cdot 2^{n}\\) ho to \\(a_1\\) aur \\(r\\) kya honge?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. G.P. ki terms ka jama geometric series kehlata hai.\n2. \\(S_n = \\frac{a_1(1 - r^{n})}{1 - r} = \\frac{a_1(r^{n} - 1)}{r - 1}\\), jab \\(r \\ne 1\\).\n3. \\(r = 1\\) ho to \\(S_n = na_1\\).\n4. Formula ka tareeqa: \\(S_n\\) likho, \\(rS_n\\) likho, tafreeq karo; beech ki terms cut.\n5. Sirf \\(a_n\\) diya ho to use \\(a_1r^{n-1}\\) ki shakal mein likh kar \\(a_1\\) aur \\(r\\) nikaalo."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(a_n = (-3)\\left(\\frac{2}{5}\\right)^{n}\\) dekh kar foran \\(a_1 = -3\\) likh dena: power \\(n\\) hai, \\(n - 1\\) nahin, is liye \\(a_1 = -\\frac{6}{5}\\). Bachne ka tareeqa: hamesha \\(n = 1\\) rakh kar pehli term check karein.\n2. Sum ke formula mein \\(r^{n}\\) ki jagah \\(r^{n-1}\\) likh dena: \\(r^{n-1}\\) general term mein aata hai, sum mein \\(r^{n}\\).\n3. \\(r = 1\\) par bhi formula laga dena, jis se zero se division ho jata hai.\n4. Fraction se divide karte waqt ulta (reciprocal) karna bhool jana."
+          }
+        ]
+      }
+    }
+  ]
+}

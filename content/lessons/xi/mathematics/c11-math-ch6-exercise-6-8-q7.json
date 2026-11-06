@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-8-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-8-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 115,
+          "pdf_to": 115,
+          "note": "Exercise 6.8, Question 7: book p.110 (PDF 115). Answer key PDF 305 (answers for 1-5, 8, 9, 11; 6, 7 and 10 are proofs). Solution book PDF 531-552 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7. Show that \\(\\sqrt{4} \\cdot \\sqrt[4]{16} \\cdot \\sqrt[8]{64} \\cdot \\sqrt[16]{256} \\cdots \\infty = 16\\)",
+            "explanation": "Same idea as Question 6: a root is a fractional power, \\(\\sqrt[k]{x} = x^{1/k}\\).\nWriting 16, 64, 256 as powers of 4 turns the product into \\(4^S\\), with the same infinite A.G.P. \\(S\\).\nPlan: roots to powers, everything as a power of 4, find \\(S\\), work out \\(4^S\\).",
+            "steps": [
+              "Given: \\(\\sqrt{4} \\cdot \\sqrt[4]{16} \\cdot \\sqrt[8]{64} \\cdot \\sqrt[16]{256} \\cdots\\)\nTo find: show that the product equals 16.\nMethod: \\(\\sqrt[k]{x} = x^{\\frac1k}\\), laws of indices, and the A.G.P. method for the sum of the powers.",
+              "Change roots into powers\n\\[\\text{L.H.S.} = 4^{\\frac12} \\cdot 16^{\\frac14} \\cdot 64^{\\frac18} \\cdot 256^{\\frac{1}{16}} \\cdots\\]\nWhy: The \\(k\\)th root is the power \\(\\frac1k\\).",
+              "Write every base as a power of 4\n\\[16 = 4^{2},\\ 64 = 4^{3},\\ 256 = 4^{4}\\]\n\\[= 4^{\\frac12} (4^{2})^{\\frac14}\\]\n\\[\\quad \\times (4^{3})^{\\frac18} (4^{4})^{\\frac{1}{16}} \\cdots\\]\n\\[= 4^{\\frac12 + \\frac24 + \\frac38 + \\frac{4}{16} + \\cdots}\\]\n\\[= 4^{S}\\]\nWhy: Power of a power multiplies; same base: add the powers.",
+              "Sum the powers (an infinite A.G.P.)\n\\[S = \\dfrac{1}{2} + \\dfrac{2}{4} + \\dfrac{3}{8} + \\dfrac{4}{16} + \\cdots\\]\n\\[\\tfrac{1}{2}S = \\dfrac{1}{4} + \\dfrac{2}{8} + \\dfrac{3}{16} + \\cdots\\]\n\\[\\tfrac{1}{2}S = \\dfrac{1}{2} + \\dfrac{1}{4} + \\dfrac{1}{8} + \\cdots\\]\n\\[= \\dfrac{\\frac{1}{2}}{1 - \\frac{1}{2}} = 1\\]\n\\[S = 2\\]\nWhy: The powers \\(\\frac{1}{2}, \\frac{2}{4}, \\frac{3}{8}, \\ldots\\) have tops \\(1, 2, 3, \\ldots\\) (A.P.) and bottoms \\(2, 4, 8, \\ldots\\) (G.P., \\(r = \\frac12\\)). Multiply by \\(\\frac12\\), shift and subtract; each pair leaves 1 on top. The result is an infinite G.P. with first term \\(\\frac12\\), ratio \\(\\frac12\\), sum 1; so \\(S = 2\\).",
+              "Work out the product\n\\[\\text{L.H.S.} = 4^{S} = 4^{2} = 16 = \\text{R.H.S.}\\]\nWhy: Put \\(S = 2\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\sqrt{4} \\cdot \\sqrt[4]{16} \\cdot \\sqrt[8]{64} \\cdots = 4^{2} = 16\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

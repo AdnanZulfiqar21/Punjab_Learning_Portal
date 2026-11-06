@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-6.4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/6.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 100,
+          "pdf_to": 103,
+          "note": "Book p. 95-98: 6.4 Series, partial sums, derivation of S_n (forward + backward sums), Key Concept box, Examples 7-11 (Ex 7 Method-1/Method-2, Ex 11 Step-I/II/III); Exercise 6.4 not included"
+        }
+      ],
+      "title": "6.4 Series (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH6-6.4",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Is sabaq mein hum sequence se aik qadam aage barhte hain. Ab tak hum terms ko aik list ki tarah likhte the; ab hum un terms ko jama (add) karna seekhenge, aur woh bhi aise tareeqe se ke 100 ya 1000 terms ka sum bhi aik do line mein nikal aaye. Pichle sabaq (6.2) ka formula \\(a_n = a_1 + (n-1)d\\) yahan bohat kaam aayega, is liye use zehan mein taaza rakhiye."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki definition: kisi sequence ki terms ka sum (majmooa) us sequence ki series kehlata hai. Misaal ke taur par \\(1 + 2 + 3 + \\cdots + n\\) pehle \\(n\\) natural numbers ki finite series (khatam hone wali series) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Sequence aur series mein farq aik line mein: sequence list hai, series sum hai.\nSequence \\(1, 2, 3, \\ldots, n\\) mein numbers commas ke saath aik ke baad aik likhe jate hain, bilkul class ke roll numbers ki list ki tarah.\nSeries \\(1 + 2 + 3 + \\cdots + n\\) mein wahi numbers plus ke nishan se jore jate hain, yani hum un ka total maang rahe hain.\nSocho dukaan mein roz ki sale ki list sequence hai, aur poore mahine ki kul sale series hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Pehle \\(n\\) terms ke sum ko \\(S_n\\) likhte hain (S yani sum). Hum likhte hain:\n\\[S_n = a_1 + a_2 + \\cdots + a_n\\]\nYahan,\n\\[S_1 = a_1\\]\n\\[S_2 = a_1 + a_2\\]\n\\[S_3 = a_1 + a_2 + a_3\\]\n\\[S_n = a_1 + a_2 + a_3 + \\cdots + a_n\\]\n\\(S_n\\) ko \\(n^{\\text{th}}\\) partial sum (adhoora ya hissa-waar sum) kehte hain, kyun ke yeh poori series ka nahin balke sirf pehli \\(n\\) terms ka sum hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Aik choti misaal se partial sums dekhiye. A.P. \\(3, 7, 11, 15, \\ldots\\) lein:\n\\(S_1 = 3\\), \\(S_2 = 3 + 7 = 10\\), \\(S_3 = 10 + 11 = 21\\), \\(S_4 = 21 + 15 = 36\\).\nGhor karein: har naya partial sum pichle sum mein agli term jorne se banta hai, yani \\(S_n = S_{n-1} + a_n\\). Is ko ulta karein to aik bohat kaam ki baat milti hai:\n\\[a_n = S_n - S_{n-1},\\quad n \\ge 2\\]\nYani agar do lagataar sums maloom hon to un ka farq woh term hai jo beech mein judi thi. Exercises mein yeh rishta kaafi dafa kaam aata hai.\nKhud sochiye: \\(S_4 - S_3\\) kitna hai? Haan, \\(36 - 21 = 15 = a_4\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Arithmetic sequence (A.P.) ki terms ke sum ko arithmetic series kehte hain. Ab hamara asal kaam yeh hai ke kisi bhi arithmetic series ka sum nikalne ka seedha formula banayein."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Deriving the sum formula"
+          },
+          {
+            "type": "paragraph",
+            "text": "Sab se pehle dekhte hain ke humein kya maloom hai: pehli term \\(a_1\\), common difference \\(d\\), aur terms ki tadaad \\(n\\). Aakhri term ko \\(\\ell\\) kehte hain, yani \\(a_n = \\ell\\). Ab sum ko seedha (aage ki taraf) likhiye; har term pichli se \\(d\\) zyada hai:\n\\[S_n = a_1 + (a_1 + d) + (a_1 + 2d)\\]\n\\[+ \\cdots + (\\ell - 2d) + (\\ell - d) + \\ell\\]\nAakhir ki taraf se dekhein to \\(\\ell\\) se pehle wali term \\(\\ell - d\\) hai, us se pehle \\(\\ell - 2d\\), kyun ke peechhe jaate hue har dafa \\(d\\) kam hota hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab yahi sum ulta (aakhir se shuru kar ke) likhiye; is dafa har term pichli se \\(d\\) kam hai:\n\\[S_n = \\ell + (\\ell - d) + (\\ell - 2d)\\]\n\\[+ \\cdots + (a_1 + 2d) + (a_1 + d) + a_1\\]\nSum wahi hai, sirf terms ki tarteeb ulat di hai; jama karne mein tarteeb se farq nahin parta."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab is ulti line mein teesri term \\((\\ell + 2d)\\) chhapti hai. Yeh sahi nahin: peechhe jaate hue har term \\(d\\) kam hoti hai, is liye \\(\\ell\\) aur \\(\\ell - d\\) ke baad \\((\\ell - 2d)\\) aati hai. Sahi line:\n\\[S_n = \\ell + (\\ell - d) + (\\ell - 2d) + \\cdots\\]\nSirf \\(\\ell - 2d\\) hi upar wali \\(a_1 + 2d\\) ke saath mil kar \\(a_1 + \\ell\\) banati hai, jo agle qadam ke liye zaroori hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab dono lines ko upar neeche rakh kar term by term jama kariye (pehli ke saath pehli, doosri ke saath doosri, waghaira). Dekhiye kamaal: har jori ka total aik jaisa hai:\n\\[a_1 + \\ell,\\quad (a_1 + d) + (\\ell - d) = a_1 + \\ell,\\ \\ldots\\]\nTo\n\\[2S_n = (a_1 + \\ell) + (a_1 + \\ell)\\]\n\\[+ \\cdots + (a_1 + \\ell)\\]\n\\[= n(a_1 + \\ell)\\]\nKyun ke har line mein \\(n\\) terms thin, is liye jorian bhi \\(n\\) hain, aur har jori \\((a_1 + \\ell)\\) hai. Baayen taraf \\(S_n\\) do dafa aaya, is liye \\(2S_n\\). Dono taraf 2 se divide karein:"
+          },
+          {
+            "type": "equation",
+            "latex": "S_n = \\dfrac{n}{2}(a_1 + \\ell)",
+            "text_alt": "S n equals n over 2 times, a 1 plus l"
+          },
+          {
+            "type": "paragraph",
+            "text": "Lekin aakhri term bhi to \\(n^{\\text{th}}\\) term hi hai, aur us ka formula hum jaante hain: \\(\\ell = a_1 + (n-1)d\\). Ise \\(S_n\\) mein rakh dein (yani \\(\\ell\\) ki jagah substitute karein):\n\\[S_n = \\dfrac{n}{2}[a_1 + a_1 + (n-1)d]\\]\nTo"
+          },
+          {
+            "type": "equation",
+            "latex": "S_n = \\dfrac{n}{2}[2a_1 + (n-1)d]",
+            "text_alt": "S n equals n over 2 times, 2 a 1 plus (n minus 1) d"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Har jori ka total aik jaisa kyun rehta hai? Jab hum aik qadam daayen chalte hain to upar wali (seedhi) term \\(d\\) barh jati hai aur neeche wali (ulti) term \\(d\\) ghat jati hai. Jitna aik taraf barha utna doosri taraf ghata, is liye jori ka total kabhi nahin badalta. Yahi is formula ka raaz hai.\nAik aur aasan nazariya: \\(\\frac{a_1 + \\ell}{2}\\) pehli aur aakhri term ki average (ausat) hai, aur A.P. mein yahi tamaam terms ki average bhi hoti hai. Is liye\nsum = (terms ki tadaad) \\(\\times\\) (ausat term).\nJaise class ke 40 bachon ki ausat age 16 saal ho to un ki ages ka kul jor \\(40 \\times 16 = 640\\) hoga; yahan bhi wahi baat hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Key Concept",
+            "text": "Arithmetic series ki pehli \\(n\\) terms ka sum \\(S_n\\) yeh hai:\n\\[S_n = \\dfrac{n}{2}[2a_1 + (n-1)d]\\]\nya\n\\[S_n = \\dfrac{n}{2}(a_1 + a_n)\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Kaun sa formula kab lagayein? Yeh sawal har student ke zehan mein aata hai.\nAgar aakhri term \\(a_n\\) di gayi ho to \\(S_n = \\frac{n}{2}(a_1 + a_n)\\) lagayein; yeh chhota hai.\nAgar common difference \\(d\\) di gayi ho aur aakhri term nahin, to \\(S_n = \\frac{n}{2}[2a_1 + (n-1)d]\\) lagayein.\nDono ka jawab aik hi aata hai, jaisa Example 7 mein dekhenge. Yaad rakhiye: in formulas mein paanch cheezein hain, \\(a_1, d, n, a_n, S_n\\). In mein se koi teen maloom hon to baaqi do nikal sakti hain. Har sawal mein pehle likh lein ke kaun si teen di gayi hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki misaalon mein yeh formulas chala kar dekhte hain. Har misaal mein pehle given aur required alag likhenge, phir formula chunenge."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Find the sum of the first 100 positive integers.",
+            "steps": [
+              "Given: series \\(1 + 2 + 3 + \\cdots + 100\\).\nTo find: \\(S_{100}\\).\nMethod: sab se pehle dekhte hain ke yeh kis qism ki series hai. Har term pichli se 1 zyada hai, yani yeh arithmetic series hai: \\(a_1 = 1\\), \\(a_n = 100\\), \\(d = 1\\), \\(n = 100\\). Aakhri term aur \\(d\\) dono maloom hain, is liye dono formule chal sakte hain. Kitab dono tareeqe dikhati hai (Method-1 aur Method-2), hum bhi dono karenge.",
+              "Method-1: pehli aur aakhri term wala formula\n\\[S_n = \\dfrac{n}{2}(a_1 + a_n)\\]\n\\[S_{100} = \\dfrac{100}{2}(1 + 100)\\]\n\\[S_{100} = 50(101)\\]\n\\[S_{100} = 5050\\]\nKyun: aakhri term \\(a_{100} = 100\\) maloom hai, is liye is formule ko \\(d\\) ki zaroorat hi nahin. \\(\\frac{100}{2} = 50\\) pehle kar lene se hisaab aasan ho jata hai.",
+              "Method-2: \\(a_1\\) aur \\(d\\) wala formula\n\\[S_n = \\dfrac{n}{2}[2a_1 + (n-1)d]\\]\n\\[S_{100} = \\dfrac{100}{2}[2(1) + (100-1)1]\\]\n\\[S_{100} = 50(101)\\]\n\\[S_{100} = 5050\\]\nKyun: bracket ke andar \\(2 + 99 = 101\\) aaya, bilkul wahi jo Method-1 mein tha. Jab aakhri term na di gayi ho to yahi formula kaam aata hai.\nDhyan dein: \\((n-1)\\) yani 99, 100 nahin.",
+              "Tasdeeq:\nAb jawab ko aik aur tareeqe se parakhte hain. Pehli aur aakhri ko jori banayein: \\(1 + 100 = 101\\), \\(2 + 99 = 101\\), ..., \\(50 + 51 = 101\\). Aisi 50 jorian hain, to sum \\(50 \\times 101 = 5050\\). Yahi to hamari derivation ka idea tha! Jawab durust hai."
+            ],
+            "answer": "\\(S_{100} = 5050\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Find the \\(19^{\\text{th}}\\) term and the partial sum of 19 terms of the arithmetic series:\n\\[2 + \\dfrac{7}{2} + 5 + \\dfrac{13}{2} + \\cdots\\]",
+            "steps": [
+              "Given: arithmetic series \\(2 + \\frac{7}{2} + 5 + \\frac{13}{2} + \\cdots\\)\nTo find: \\(a_{19}\\) aur \\(S_{19}\\).\nMethod: pehle \\(a_1\\) aur \\(d\\) nikalenge, phir \\(a_n = a_1 + (n-1)d\\) se 19vin term, aur jab aakhri term mil jaye to chhota formula \\(S_n = \\frac{n}{2}(a_1 + a_n)\\) lagayenge. Fractions se ghabraiye mat; tareeqa wahi hai.",
+              "Step 1: \\(a_1\\) aur \\(d\\) pehchaanein\n\\[a_1 = 2\\]\n\\[d = a_2 - a_1 = \\dfrac{7}{2} - 2 = \\dfrac{3}{2}\\]\nKyun: A.P. mein kisi bhi do lagataar terms ka farq \\(d\\) hota hai. Tasalli ke liye agli jori bhi dekh lein: \\(5 - \\frac{7}{2} = \\frac{3}{2}\\). Haan, wahi.",
+              "Step 2: 19vin term\n\\[a_n = a_1 + (n-1)d\\]\n\\[a_{19} = 2 + (19-1)\\dfrac{3}{2}\\]\n\\[= 2 + 18\\left(\\dfrac{3}{2}\\right)\\]\n\\[= 2 + 27 = 29\\]\nKyun: pehli term se 19vin term tak pahunchne ke liye \\(d\\) atharah (18) dafa jorna parta hai, 19 dafa nahin. \\(18 \\times \\frac{3}{2} = 9 \\times 3 = 27\\).",
+              "Step 3: 19 terms ka partial sum\n\\[S_n = \\dfrac{n}{2}(a_1 + a_n)\\]\n\\[S_{19} = \\dfrac{19}{2}(2 + 29)\\]\n\\[= \\dfrac{19}{2}(31) = \\dfrac{589}{2}\\]\nKyun: ab aakhri term \\(a_{19} = 29\\) maloom hai, is liye pehli-aur-aakhri wala formula sab se chhota rasta hai. \\(19 \\times 31 = 589\\).",
+              "Tasdeeq:\nDoosre formule se dobara karte hain: \\(S_{19} = \\frac{19}{2}\\left[2(2) + 18\\left(\\frac{3}{2}\\right)\\right] = \\frac{19}{2}(4 + 27) = \\frac{19}{2}(31) = \\frac{589}{2}\\). Dono tareeqon se aik hi jawab, is liye jawab sahi hai."
+            ],
+            "answer": "\\(a_{19} = 29\\) aur \\(S_{19} = \\frac{589}{2}\\) (yani 294.5)."
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "Find the arithmetic series if its fifth term is 19 and \\(S_4 = a_9 + 1\\).",
+            "steps": [
+              "Given: \\(a_5 = 19\\) aur \\(S_4 = a_9 + 1\\).\nTo find: poori series, yani \\(a_1\\) aur \\(d\\).\nMethod: yahan do shartein (conditions) di gayi hain aur do hi unknowns hain, \\(a_1\\) aur \\(d\\). To har shart ko \\(a_1\\) aur \\(d\\) ki zabaan mein likhenge (formula \\(a_n = a_1 + (n-1)d\\) aur \\(S_n = \\frac{n}{2}[2a_1 + (n-1)d]\\) se), aur phir do equations ko saath hal (simultaneous solve) karenge.",
+              "Step 1: Pehli shart\n\\[a_5 = 19\\]\n\\[a_1 + 4d = 19 \\quad \\text{(i)}\\]\nKyun: \\(a_5 = a_1 + (5-1)d = a_1 + 4d\\).",
+              "Step 2: Doosri shart\n\\[S_4 = \\dfrac{4}{2}[2a_1 + (4-1)d] = a_9 + 1\\]\n\\[4a_1 + 6d = a_1 + 8d + 1\\]\n\\[3a_1 - 1 = 2d\\]\nKyun: \\(S_4 = 2(2a_1 + 3d) = 4a_1 + 6d\\), aur \\(a_9 = a_1 + 8d\\). Ab \\(a_1\\) wali terms baayen aur \\(d\\) wali daayen le jayein: \\(4a_1 - a_1 - 1 = 8d - 6d\\), yani \\(3a_1 - 1 = 2d\\).\nDhyan dein: \\(S_4\\) aur \\(a_9\\) do alag cheezein hain; aik sum hai, doosri sirf aik term.",
+              "Step 3: (i) mein substitute karein\n\\(a_1 + 4d\\) ko \\(a_1 + 2(2d)\\) likh sakte hain. Ab \\(2d = 3a_1 - 1\\) rakh dein:\n\\[a_1 + 2(3a_1 - 1) = 19\\]\n\\[7a_1 - 2 = 19\\]\n\\[7a_1 = 21 \\Rightarrow a_1 = 3\\]\nKyun: \\(2d\\) ki jagah \\(a_1\\) wali expression rakhne se aik hi unknown bachta hai, aur aik unknown wali equation seedhi hal ho jati hai.",
+              "Step 4: \\(d\\) nikaalein\n(i) se:\n\\[4d = 19 - a_1 = 19 - 3 = 16\\]\n\\[d = 4\\]\nKyun: \\(a_1\\) maloom hone ke baad koi bhi equation \\(d\\) de deti hai; (i) sab se seedhi hai.",
+              "Step 5: Series likhein\n3 se shuru kar ke har dafa 4 jortay jayein:\n\\[3 + 7 + 11 + 15 + 19 + \\cdots\\]\nKyun: arithmetic series sirf do cheezon se poori tarah tay hoti hai: pehli term aur common difference.",
+              "Tasdeeq:\nAb dono shartein check karte hain. \\(a_5 = 3 + 4(4) = 19\\). Sahi. \\(S_4 = 3 + 7 + 11 + 15 = 36\\), aur \\(a_9 + 1 = (3 + 8 \\cdot 4) + 1 = 35 + 1 = 36\\). Yeh bhi sahi. Dono shartein poori hain, is liye jawab durust hai."
+            ],
+            "answer": "Series \\(3 + 7 + 11 + 15 + 19 + \\cdots\\) hai (\\(a_1 = 3\\), \\(d = 4\\))."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "How many terms of the series \\(-9 - 6 - 3 + 0 + \\cdots\\) amounts to 66?",
+            "steps": [
+              "Given: series \\(-9 - 6 - 3 + 0 + \\cdots\\), yani terms \\(-9, -6, -3, 0, \\ldots\\), aur \\(S_n = 66\\).\nTo find: \\(n\\), yani kitni terms jorein to 66 bane.\nMethod: is dafa unknown \\(n\\) hai. Jo cheezein maloom hain (\\(a_1\\), \\(d\\), \\(S_n\\)) unhein \\(S_n = \\frac{n}{2}[2a_1 + (n-1)d]\\) mein rakhenge. \\(n\\) bahar bhi hai aur bracket ke andar bhi, is liye quadratic equation (darja do wali equation) banegi.",
+              "Step 1: \\(a_1\\) aur \\(d\\) pehchaanein\n\\[a_1 = -9\\]\n\\[d = -6 - (-9) = 3\\]\nKyun: \\(d\\) = koi term minus us se pichli term. \\(-6 - (-9) = -6 + 9 = 3\\). Terms barh rahi hain, is liye \\(d\\) positive hai.\nDhyan dein: yahan bohat se students \\(-6 - 9 = -15\\) likh dete hain; minus ke andar minus ko plus banana na bhoolein.",
+              "Step 2: Sum ka formula lagayein\n\\(S_n = 66\\) rakhein:\n\\[66 = \\dfrac{n}{2}[2(-9) + (n-1)3]\\]\n\\[132 = n[3n - 21]\\]\n\\[44 = n(n - 7)\\]\nKyun: dono taraf 2 se multiply kiya taa ke fraction khatam ho. Bracket mein \\(-18 + 3n - 3 = 3n - 21 = 3(n - 7)\\). Phir dono taraf 3 se divide kiya: \\(132 \\div 3 = 44\\).",
+              "Step 3: Quadratic hal karein\n\\[n^{2} - 7n - 44 = 0\\]\n\\[n = \\dfrac{7 \\pm \\sqrt{49 + 176}}{2}\\]\n\\[= \\dfrac{7 \\pm \\sqrt{225}}{2} = \\dfrac{7 \\pm 15}{2}\\]\n\\[n = 11,\\ -4\\]\nKyun: quadratic formula mein \\(a = 1\\), \\(b = -7\\), \\(c = -44\\); \\(b^{2} - 4ac = 49 + 176 = 225\\), jis ka root 15 hai. Factorization se bhi ho jata hai: \\((n - 11)(n + 4) = 0\\), kyun ke \\(-11 \\times 4 = -44\\) aur \\(-11 + 4 = -7\\).",
+              "Step 4: Sahi root chunein\n\\(n\\) terms ki ginti hai, aur ginti kabhi negative nahin hoti. Is liye \\(n = -4\\) rad (reject); \\(n = 11\\).\nKyun: algebra do jawab deta hai, magar har jawab sawal ke matlab par poora nahin utarta. Hamesha dekhiye ke unknown asal mein kya hai.",
+              "Tasdeeq:\n\\(a_{11} = -9 + 10(3) = 21\\), to \\(S_{11} = \\frac{11}{2}(-9 + 21) = \\frac{11}{2}(12) = 66\\). Bilkul sahi."
+            ],
+            "answer": "\\(n = 11\\): gyarah (11) terms ka sum 66 banta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Aap soch rahe honge: series to negative numbers se shuru hoti hai, phir sum 66 tak kaise pahuncha? Dekhiye: \\(-9, -6, -3\\) sum ko neeche le jate hain (\\(-18\\) tak), 0 kuch nahin jorta, phir \\(3, 6, 9\\) bilkul unhein cancel kar dete hain, yani \\(S_7 = 0\\). Us ke baad har term positive hai: \\(12 + 15 + 18 + 21 = 66\\). To \\(S_{11} = 66\\), bilkul wahi jo formula ne bataya. Formula ne yeh saari ginti aik line mein kar di."
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "Find the first three terms of an arithmetic series in which \\(a_1 = 9\\), \\(a_n = 105\\) and \\(S_n = 741\\).",
+            "steps": [
+              "Given: \\(a_1 = 9\\), \\(a_n = 105\\), \\(S_n = 741\\).\nTo find: pehli teen terms \\(a_1, a_2, a_3\\).\nMethod: \\(a_1\\) to pehle se maloom hai; \\(a_2, a_3\\) ke liye \\(d\\) chahiye. Lekin \\(d\\) nikalne ke liye pehle \\(n\\) chahiye. Is liye kitab teen qadam leti hai: Step-I mein \\(S_n = \\frac{n}{2}(a_1 + a_n)\\) se \\(n\\) (is formule mein sirf \\(n\\) unknown hai), Step-II mein \\(a_n = a_1 + (n-1)d\\) se \\(d\\), aur Step-III mein \\(d\\) jor kar terms.",
+              "Step-I: \\(n\\) nikaalein\nHum \\(a_1\\), \\(a_n\\) aur \\(S_n\\) jaante hain, is liye \\(S_n = \\frac{n}{2}(a_1 + a_n)\\):\n\\[741 = \\dfrac{n}{2}(9 + 105)\\]\n\\[741 = 57n\\]\n\\[13 = n\\]\nKyun: \\(9 + 105 = 114\\), aur \\(\\frac{114}{2} = 57\\). Phir \\(741 \\div 57 = 13\\). Yani series mein 13 terms hain.",
+              "Step-II: \\(d\\) nikaalein\n\\[a_n = a_1 + (n-1)d\\]\n\\[105 = 9 + (13-1)d\\]\n\\[96 = 12d\\]\n\\[8 = d\\]\nKyun: ab \\(n = 13\\) maloom hai, to \\(n^{\\text{th}}\\) term ke formule mein sirf \\(d\\) unknown bacha. \\(105 - 9 = 96\\) aur \\(96 \\div 12 = 8\\).",
+              "Step-III: \\(d\\) se \\(a_2\\) aur \\(a_3\\)\n\\[a_2 = 9 + 8 = 17\\]\n\\[a_3 = 17 + 8 = 25\\]\nKyun: A.P. mein har term pichli term plus \\(d\\) hoti hai.",
+              "Tasdeeq:\n\\(S_{13} = \\frac{13}{2}[2(9) + 12(8)] = \\frac{13}{2}(18 + 96) = \\frac{13}{2}(114) = 741\\), aur \\(a_{13} = 9 + 12(8) = 105\\). Teeno di hui cheezein wapas mil gayin."
+            ],
+            "answer": "Pehli teen terms 9, 17 aur 25 hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Ab aik choti si practice (yeh kitab ka sawal nahin, hamari taraf se hai): series \\(4 + 7 + 10 + \\cdots + 31\\) ka sum nikaaliye.\nPehle \\(n\\) chahiye: \\(31 = 4 + (n-1)3 \\Rightarrow 27 = 3(n-1) \\Rightarrow n = 10\\).\nAakhri term maloom hai, is liye chhota formula: \\(S_{10} = \\frac{10}{2}(4 + 31) = 5 \\times 35 = 175\\).\nKhud sochiye: agar aakhri term na di hoti aur sirf \"10 terms\" kaha hota to aap kaun sa formula lagate? Jawab: \\(S_{10} = \\frac{10}{2}[2(4) + 9(3)] = 5 \\times 35 = 175\\). Wahi jawab."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Series = sequence ki terms ka sum; \\(S_n\\) = pehli \\(n\\) terms ka sum (\\(n^{\\text{th}}\\) partial sum).\n2. Arithmetic series: \\(S_n = \\frac{n}{2}(a_1 + a_n)\\) ya \\(S_n = \\frac{n}{2}[2a_1 + (n-1)d]\\).\n3. Formula ka raaz: sum ko seedha aur ulta likh kar jama karo, har jori \\(a_1 + a_n\\) banti hai.\n4. Aakhri term maloom ho to pehla formula, \\(d\\) maloom ho to doosra.\n5. \\(a_1, d, n, a_n, S_n\\) mein se teen maloom hon to baaqi do nikal aati hain.\n6. \\(n\\) unknown ho to quadratic banti hai; sirf positive poora (whole) number wala root rakhein.\n7. \\(a_n = S_n - S_{n-1}\\) jab \\(n \\ge 2\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(S_n = n[2a_1 + (n-1)d]\\) likh dena: aage \\(\\frac{n}{2}\\) hai, \\(n\\) nahin. Bachne ka tareeqa: yaad rakhein ke derivation mein \\(2S_n\\) aaya tha.\n2. Bracket mein \\((n-1)d\\) ki jagah \\(nd\\) likhna. Pehli term se \\(n\\)vin term tak \\(d\\) sirf \\(n - 1\\) dafa judta hai.\n3. \\(d\\) ulta nikaalna: \\(d = a_2 - a_1\\), \\(a_1 - a_2\\) nahin. Example 10 mein \\(d = -6 - (-9) = +3\\).\n4. \\(n\\) ki negative ya fraction wali value rakh lena: terms ki ginti hamesha positive poora number hoti hai.\n5. \\(a_n\\) (aik term) aur \\(S_n\\) (\\(n\\) terms ka sum) ko gadmad karna, jaise Example 9 mein \\(S_4\\) aur \\(a_9\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

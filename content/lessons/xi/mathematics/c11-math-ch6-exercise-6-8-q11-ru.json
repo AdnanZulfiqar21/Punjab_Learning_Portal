@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-8-Q11-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-8-q11",
+      "title": "Question 11 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 115,
+          "pdf_to": 115,
+          "note": "Exercise 6.8, Question 11: book p.110 (PDF 115). Answer key PDF 305 (answers for 1-5, 8, 9, 11; 6, 7 and 10 are proofs). Solution book PDF 531-552 used as a reference only."
+        }
+      ],
+      "variant_of": "C11-MATH-CH6-EXERCISE-6-8-Q11",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11. Sum the series to \\(n\\) terms \\(2 + 5x + 8x^{2} + 11x^{3} + \\cdots\\) and deduce the sum to infinity if \\(|x| < 1\\).",
+            "explanation": "Is sawal ke do hisse hain. Pehle \\(n\\) terms ka sum \\(S_n\\), phir \"deduce\" (natija nikalna) karna hai ke \\(|x| < 1\\) ho to infinity tak ka sum kya hoga.\nSeries A.G.P. hai: upar wale numbers \\(2, 5, 8, 11, \\ldots\\) A.P. (\\(d = 3\\)) aur \\(1, x, x^2, \\ldots\\) G.P.\nPlan: multiply-by-\\(x\\)-and-subtract se \\(S_n\\); phir \\(n\\) ko bohat bara karo: \\(|x| < 1\\) ho to \\(x^n\\) zero ki taraf jata hai, aur jo bachta hai woh \\(S_\\infty\\) hai.",
+            "steps": [
+              "Diya gaya hai: \\(2 + 5x + 8x^{2} + 11x^{3} + \\cdots\\); A.P. \\(a = 2, d = 3\\); G.P. \\(b = 1, r = x\\)\nHumein find karna hai: \\(S_n\\), aur \\(|x| < 1\\) par \\(S_\\infty\\).\nTareeqa: Wahi tareeqa jo 6.8.1 mein seekha: pehle \\(S_n\\) likho, phir poori series ko G.P. ke ratio \\(r\\) se multiply kar ke \\(rS_n\\) ek jagah right shift kar ke neeche likho, phir minus karo. Beech mein ek seedhi G.P. ban jati hai jis ka sum hum formula se nikal lete hain. A.G.P. ke sum ka koi ratta formula yaad karne ki zaroorat nahi, sirf yeh tareeqa yaad rakhein. \\(S_\\infty\\) ke liye: \\(|x| < 1\\) ho to \\(n\\) barhne par \\(x^n\\) aur \\(nx^n\\) dono zero ki taraf jate hain.",
+              "\\(n\\)th term\n\\[T_n = (3n - 1)x^{n-1}\\]\nKyun: \\(2 + 3(n - 1) = 3n - 1\\). Check: \\(n = 4\\) par \\(11\\), jo chautha number hai. G.P. ka \\(n\\)th term \\(x^{n-1}\\).",
+              "\\(S_n\\) aur \\(xS_n\\) likhein\n\\[S_n = 2 + 5x + 8x^{2} + \\cdots + (3n - 1)x^{n-1}\\]\n\\[xS_n = 2x + 5x^{2} + \\cdots\\]\n\\[\\quad + (3n - 4)x^{n-1} + (3n - 1)x^{n}\\]\nKyun: \\(x\\) se multiply kar ke ek jagah shift kiya. \\(S_n\\) ka second-last term \\((3n - 4)x^{n-2}\\) tha (kyunke \\(3(n - 1) - 1 = 3n - 4\\)); \\(x\\) se multiply ho kar \\((3n - 4)x^{n-1}\\) bana.",
+              "Minus karein\n\\[(1 - x)S_n = 2 + 3x + 3x^{2} + \\cdots\\]\n\\[\\quad + 3x^{n-1} - (3n - 1)x^{n}\\]\n\\[= 2 + 3(x + x^{2} + \\cdots + x^{n-1})\\]\n\\[\\quad - (3n - 1)x^{n}\\]\nKyun: Har jore se \\(3\\) times power bachta hai: \\((5 - 2)x = 3x\\). Lekin pehla term 2 is pattern mein nahi (woh \\(3x^0\\) nahi), is liye alag rakha aur sirf baqi terms se 3 common liya. Aakhri term \\((3n - 1)x^n\\) minus hua.\nDhyan dein: 2 ko bhi bracket mein daal dena aam ghalti hai.",
+              "G.P. ka sum aur \\(1 - x\\) se divide\n\\[x + \\cdots + x^{n-1} = \\dfrac{x(1 - x^{n-1})}{1 - x}\\]\n\\[S_n = \\dfrac{2}{1 - x} + \\dfrac{3x(1 - x^{n-1})}{(1 - x)^{2}}\\]\n\\[\\quad - \\dfrac{(3n - 1)x^{n}}{1 - x}\\]\nKyun: Bracket ki G.P. mein pehla term \\(x\\), ratio \\(x\\), aur \\(n - 1\\) terms (powers 1 se \\(n - 1\\)). Phir har term ko \\(1 - x\\) se divide kiya; G.P. wale term ka denominator \\((1 - x)^2\\) ho gaya. Yahi answer key wali shakal hai.",
+              "\\(n = 1\\) aur \\(n = 2\\) se tasdeeq\n\\[n = 1:\\ \\dfrac{2}{1 - x} - \\dfrac{2x}{1 - x} = 2 \\;\\checkmark\\]\n\\[n = 2:\\ \\dfrac{2 + 3x - 5x^{2}}{1 - x}\\]\n\\[= \\dfrac{(1 - x)(2 + 5x)}{1 - x} = 2 + 5x \\;\\checkmark\\]\nKyun: \\(n = 1\\) par beech wala term zero hai kyunke \\(1 - x^0 = 0\\); baqi \\(\\frac{2 - 2x}{1 - x} = 2\\). \\(n = 2\\) par \\(2 + 3x - 5x^2 = (1 - x)(2 + 5x)\\), jawab pehle do terms ka jama.",
+              "Infinity tak ka sum\n\\[|x| < 1:\\ x^{n-1} \\to 0,\\ (3n - 1)x^{n} \\to 0\\]\n\\[S_\\infty = \\dfrac{2}{1 - x} + \\dfrac{3x}{(1 - x)^{2}}\\]\n\\[= \\dfrac{2(1 - x) + 3x}{(1 - x)^{2}}\\]\n\\[= \\dfrac{2 + x}{(1 - x)^{2}}\\]\nKyun: \\(|x| < 1\\) ho to \\(x\\) ki barhti powers zero ki taraf jati hain (jaise \\(0.5, 0.25, 0.125, \\ldots\\)), aur yeh \\(n\\) ke barhne se zyada tez chhoti hoti hain, is liye \\((3n - 1)x^n\\) bhi zero ho jata hai. Bache do terms ko common denominator \\((1 - x)^2\\) par jama kiya: \\(2 - 2x + 3x = 2 + x\\).",
+              "Formula se tasdeeq\n\\[S_\\infty = \\dfrac{ab}{1 - r} + \\dfrac{dbr}{(1 - r)^{2}}\\]\n\\[= \\dfrac{2}{1 - x} + \\dfrac{3x}{(1 - x)^{2}} \\;\\checkmark\\]\nKyun: 6.8.2 ke formula mein \\(a = 2, d = 3, b = 1, r = x\\) rakhne se bilkul wahi do terms aate hain. Misaal: \\(x = \\frac12\\) par \\(S_\\infty = \\frac{2.5}{0.25} = 10\\)."
+            ],
+            "final_answer": "\\(S_n = \\frac{2}{1 - x} + \\frac{3x(1 - x^{n-1})}{(1 - x)^{2}} - \\frac{(3n - 1)x^{n}}{1 - x}\\); \\(|x| < 1\\) par \\(S_\\infty = \\frac{2 + x}{(1 - x)^{2}}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

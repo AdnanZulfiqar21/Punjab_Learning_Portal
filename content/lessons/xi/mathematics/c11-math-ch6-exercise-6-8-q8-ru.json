@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-8-Q8-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-8-q8",
+      "title": "Question 8 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 115,
+          "pdf_to": 305,
+          "note": "Exercise 6.8, Question 8: book p.110 (PDF 115). Answer key PDF 305 (answers for 1-5, 8, 9, 11; 6, 7 and 10 are proofs). Solution book PDF 531-552 used as a reference only."
+        }
+      ],
+      "variant_of": "C11-MATH-CH6-EXERCISE-6-8-Q8",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8. Sum to \\(n\\) terms the series \\(2 + 4x + 6x^{2} + 8x^{3} + \\cdots\\) where \\(x \\ne 1\\)",
+            "explanation": "Yeh A.G.P. hai, bas ratio number ki jagah letter \\(x\\) hai. Upar wale numbers \\(2, 4, 6, 8, \\ldots\\) A.P. hain aur \\(1, x, x^2, x^3, \\ldots\\) G.P. hai jis ka ratio \\(x\\) hai.\n\\(x \\ne 1\\) is liye diya hai ke aakhir mein hum \\(1 - x\\) se divide karenge, aur zero se divide nahi ho sakta.\nPlan: \\(T_n\\) likho, \\(xS_n\\) shift kar ke neeche likho, minus karo, G.P. ka sum lagao, \\(1 - x\\) se divide karo, aur ek fraction banao.",
+            "steps": [
+              "Diya gaya hai: \\(2 + 4x + 6x^2 + \\cdots\\); A.P. \\(a = 2, d = 2\\); G.P. \\(b = 1, r = x\\); \\(x \\ne 1\\)\nHumein find karna hai: \\(S_n\\).\nTareeqa: Wahi tareeqa jo 6.8.1 mein seekha: pehle \\(S_n\\) likho, phir poori series ko G.P. ke ratio \\(r\\) se multiply kar ke \\(rS_n\\) ek jagah right shift kar ke neeche likho, phir minus karo. Beech mein ek seedhi G.P. ban jati hai jis ka sum hum formula se nikal lete hain. A.G.P. ke sum ka koi ratta formula yaad karne ki zaroorat nahi, sirf yeh tareeqa yaad rakhein.",
+              "\\(n\\)th term\n\\[T_n = 2n\\,x^{n-1}\\]\nKyun: A.P. ka \\(n\\)th term \\(2n\\) aur G.P. ka \\(x^{n-1}\\). Pehle term 2 ke saath \\(x^0 = 1\\) chhupa hua hai, isi liye power \\(n - 1\\) hai.",
+              "\\(S_n\\) aur \\(xS_n\\) likhein\n\\[S_n = 2 + 4x + 6x^{2} + \\cdots + 2n\\,x^{n-1}\\]\n\\[xS_n = 2x + 4x^{2} + \\cdots\\]\n\\[\\quad + 2(n - 1)x^{n-1} + 2n\\,x^{n}\\]\nKyun: \\(x\\) se multiply karne par har power ek barh gayi. Shift kar ke likha taake \\(x\\) ke neeche \\(x\\), \\(x^2\\) ke neeche \\(x^2\\) aaye. \\(S_n\\) ka second-last term \\(2(n - 1)x^{n-2}\\) tha, jo \\(2(n - 1)x^{n-1}\\) ban gaya.",
+              "Minus karein\n\\[(1 - x)S_n = 2 + 2x + 2x^{2} + \\cdots\\]\n\\[\\quad + 2x^{n-1} - 2n\\,x^{n}\\]\nKyun: Left side par \\(S_n\\) common: \\(S_n - xS_n = (1 - x)S_n\\). Right side par har jore se \\(2\\) times power bachta hai: \\((4 - 2)x = 2x\\), \\((6 - 4)x^2 = 2x^2\\). Pehla term 2 bhi isi pattern mein hai (\\(2 = 2x^0\\)). Aakhri term \\(2nx^n\\) minus hua.",
+              "G.P. ka sum\n\\[2 + 2x + \\cdots + 2x^{n-1} = \\dfrac{2(1 - x^{n})}{1 - x}\\]\n\\[(1 - x)S_n = \\dfrac{2(1 - x^{n})}{1 - x} - 2n\\,x^{n}\\]\nKyun: Is G.P. mein powers 0 se \\(n - 1\\) tak hain, is liye poore \\(n\\) terms hain. Pehla term 2, ratio \\(x\\). Formula \\(\\frac{a(1 - r^n)}{1 - r}\\).",
+              "\\(1 - x\\) se divide kar ke ek fraction\n\\[S_n = \\dfrac{2(1 - x^{n})}{(1 - x)^{2}}\\]\n\\[\\quad - \\dfrac{2n\\,x^{n}}{1 - x}\\]\n\\[= \\dfrac{2(1 - x^{n}) - 2n\\,x^{n}(1 - x)}{(1 - x)^{2}}\\]\n\\[= \\dfrac{2 - 2x^{n} - 2nx^{n} + 2nx^{n+1}}{(1 - x)^{2}}\\]\n\\[= \\dfrac{2[1 - (n + 1)x^{n} + n\\,x^{n+1}]}{(1 - x)^{2}}\\]\nKyun: \\(1 - x\\) se HAR term divide hua; pehle fraction ka denominator \\((1 - x)^2\\) ban gaya. Ek fraction banane ke liye doosre fraction ko upar neeche \\((1 - x)\\) se multiply kiya. Phir \\(x^n\\) wale terms ikatthe kiye: \\(-2x^n - 2nx^n = -2(n + 1)x^n\\), aur 2 common liya.",
+              "\\(n = 1\\) aur \\(n = 2\\) se tasdeeq\n\\[n = 1:\\ \\dfrac{2(1 - 2x + x^{2})}{(1 - x)^{2}} = 2 \\;\\checkmark\\]\n\\[n = 2:\\ \\dfrac{2(1 - 3x^{2} + 2x^{3})}{(1 - x)^{2}}\\]\n\\[= 2(1 + 2x) = 2 + 4x \\;\\checkmark\\]\nKyun: \\(n = 1\\) par upar \\((1 - x)^2\\) ban jata hai jo neeche se cancel ho kar 2 deta hai, yani pehla term. \\(n = 2\\) par \\(1 - 3x^2 + 2x^3 = (1 - x)^2(1 + 2x)\\), jawab \\(2 + 4x\\), yani pehle do terms ka jama."
+            ],
+            "final_answer": "\\(S_n = \\frac{2[1 - (n + 1)x^{n} + n\\,x^{n+1}]}{(1 - x)^{2}}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key (PDF 305) mein \\(S_n = \\frac{2 - (n + 1)x^{n} + 2nx^{n+1}}{(1 - x)^{2}}\\) chhapa hai. Is mein \\((n + 1)x^n\\) wale term ke saath 2 ka factor ghayab hai. Test: \\(n = 1\\), \\(x = 2\\) rakhein to key wala formula 6 deta hai, jab ke pehla term sirf 2 hai. Sahi jawab: \\(S_n = \\frac{2[1 - (n + 1)x^{n} + nx^{n+1}]}{(1 - x)^{2}}\\). Exam mein sahi wala likhein aur \\(n = 1\\) se khud check kar lein."
+          }
+        ]
+      }
+    }
+  ]
+}

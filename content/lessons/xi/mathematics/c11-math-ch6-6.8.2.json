@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-6.8.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/6.8.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 112,
+          "pdf_to": 114,
+          "note": "Book p. 107-109: 6.8.2 S_inf = ab/(1-r) + dbr/(1-r)^2 for |r| < 1; Examples 19-22 (Ex 19 and Ex 20 have printed sign and (n+1)/(n+2) errors, marked)"
+        }
+      ],
+      "title": "6.8.2 Sum to Infinity of Arithmetico-Geometric Series",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "If \\(|r| < 1\\), then \\(r^{n} \\to 0\\) and \\(nr^{n} \\to 0\\) as \\(n \\to \\infty\\).\nTherefore, (iii) reduces to"
+          },
+          {
+            "type": "equation",
+            "latex": "S_{\\infty} = \\dfrac{ab}{1 - r} + \\dfrac{dbr}{(1 - r)^{2}}",
+            "text_alt": "S infinity equals a b over 1 minus r, plus d b r over 1 minus r squared"
+          },
+          {
+            "type": "paragraph",
+            "text": "which is the required sum to infinity of arithmetico-geometric series."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why do the last two terms of (iii) vanish? They contain \\(r^{n}\\) and \\(nr^{n}\\) (because \\([a + (n - 1)d]br^{n} = (a - d)br^{n} + d\\,b\\,nr^{n}\\)). When \\(|r| < 1\\), \\(r^{n}\\) shrinks so fast that even \\(nr^{n}\\) goes to 0: for \\(r = \\frac{1}{2}\\), \\(10 \\times \\frac{1}{2^{10}} = \\frac{10}{1024} \\approx 0.0098\\).\nIf \\(|r| \\ge 1\\) the terms do not shrink and the series has no sum to infinity."
+          },
+          {
+            "type": "example",
+            "title": "Example 19",
+            "problem": "Sum the series upto \\(n\\) terms: \\(2\\cdot 1 + 3\\cdot 2 + 4\\cdot 4 + 5\\cdot 8 - \\ldots\\)",
+            "steps": [
+              "Given: the series \\(2\\cdot 1 + 3\\cdot 2 + 4\\cdot 4 + 5\\cdot 8 + \\ldots\\)\nTo find: \\(S_n\\), the sum of the first \\(n\\) terms.\nMethod: the first factors \\(2, 3, 4, 5, \\ldots\\) form an A.P. and the second factors \\(1, 2, 4, 8, \\ldots\\) form a G.P. with \\(r = 2\\), so this is an arithmetico-geometric series. Find the \\(n\\)th term, multiply \\(S_n\\) by \\(r = 2\\), subtract, and sum the G.P. that appears.",
+              "Step 1: \\(n\\)th term of the A.P. \\(2, 3, 4, 5, \\ldots\\)\n\\[a_1 + (n - 1)d = 2 + (n - 1)(1)\\]\n\\[= 2 + n - 1 = n + 1\\]\nWhy: here \\(a_1 = 2\\) and \\(d = 1\\); this is the general term of an A.P.",
+              "Step 2: \\(n\\)th term of the G.P. \\(1, 2, 2^{2}, 2^{3}, \\ldots\\)\n\\[a_1r^{n-1} = 1\\cdot 2^{n-1} = 2^{n-1}\\]\nWhy: first term 1, ratio 2. So the \\(n\\)th term of the series is \\((n + 1)2^{n-1}\\).",
+              "Step 3: Write \\(S_n\\)\n\\[S_n = 2\\cdot 1 + 3\\cdot 2 + 4\\cdot 2^{2} + 5\\cdot 2^{3}\\]\n\\[+ \\cdots + (n + 1)2^{n-1} \\quad \\text{(i)}\\]\nWhy: the last term is the \\(n\\)th term from Steps 1 and 2.",
+              "Step 4: Multiply both sides by the common ratio 2 of the G.P.\nThe book prints: \\(2S_n = 2\\cdot 2 + 3\\cdot 2^{2} + 4\\cdot 2^{3} + 5\\cdot 2^{4} + \\ldots - (n)2^{n-1} + (n+1)2^{n}\\)\nWith the correct sign:\n\\[2S_n = 2\\cdot 2 + 3\\cdot 2^{2} + 4\\cdot 2^{3} + 5\\cdot 2^{4}\\]\n\\[+ \\cdots + n\\cdot 2^{n-1} + (n + 1)2^{n} \\quad \\text{(ii)}\\]\nWhy: multiplying by 2 raises every power by one; each term is written under the term of (i) with the same power. The term with \\(2^{n-1}\\) is \\(+\\,n\\cdot 2^{n-1}\\) (2 times the \\((n - 1)\\)th term \\(n\\cdot 2^{n-2}\\)); see the Book correction below.",
+              "Step 5: Subtract (ii) from (i)\n\\[S_n - 2S_n = 2\\cdot 1 + (3 - 2)\\cdot 2\\]\n\\[+ (4 - 3)\\cdot 2^{2} + (5 - 4)\\cdot 2^{3}\\]\n\\[+ \\cdots + (n + 1 - n)2^{n-1}\\]\n\\[- (n + 1)2^{n}\\]\n\\[-S_n = 2\\cdot 1 + 1\\cdot 2 + 1\\cdot 2^{2}\\]\n\\[+ 1\\cdot 2^{3} + \\cdots + 1\\cdot 2^{n-1}\\]\n\\[- (n + 1)2^{n}\\]\nWhy: terms with the same power differ only in their A.P. parts, and those differ by \\(d = 1\\). The first term of (i) and the last term of (ii) have no partner.",
+              "Step 6: Sum the G.P. in the braces\n\\[-S_n = 2 + \\{2 + 2^{2} + 2^{3} + \\cdots + 2^{n-1}\\}\\]\n\\[\\quad - (n + 1)2^{n}\\]\n\\[-S_n = 2 + \\dfrac{2(2^{n-1} - 1)}{2 - 1}\\]\n\\[\\quad - (n + 1)\\cdot 2^{n}\\]\nWhy: \\(2 + 2^{2} + \\cdots + 2^{n-1}\\) is a G.P. with first term 2, ratio 2 and \\(n - 1\\) terms; since \\(r > 1\\) we use \\(\\frac{a_1(r^{m} - 1)}{r - 1}\\) with \\(m = n - 1\\).",
+              "Step 7: Simplify and solve for \\(S_n\\)\n\\[-S_n = 2 + 2^{n} - 2\\]\n\\[\\quad - n\\cdot 2^{n} - 2^{n}\\]\n\\[-S_n = -n\\cdot 2^{n}\\]\n\\[S_n = n\\cdot 2^{n}\\]\nWhy: \\(2\\cdot 2^{n-1} = 2^{n}\\) and \\((n + 1)2^{n} = n\\cdot 2^{n} + 2^{n}\\); then \\(2 - 2\\) and \\(2^{n} - 2^{n}\\) cancel. Multiply both sides by \\(-1\\).",
+              "Check:\n\\(n = 1\\): \\(1\\cdot 2 = 2 = 2\\cdot 1\\).\n\\(n = 2\\): \\(2\\cdot 4 = 8 = 2 + 6\\).\n\\(n = 3\\): \\(3\\cdot 8 = 24 = 2 + 6 + 16\\).\nAll agree."
+            ],
+            "answer": "\\(S_n = n\\cdot 2^{n}\\)",
+            "book_errors": [
+              "\\(2\\cdot 1 + 3\\cdot 2 + 4\\cdot 4 + 5\\cdot 8 - \\ldots\\)",
+              "\\(2S_n = 2\\cdot 2 + 3\\cdot 2^{2} + 4\\cdot 2^{3} + 5\\cdot 2^{4} + \\ldots - (n)2^{n-1} + (n+1)2^{n}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "1. The question prints the series as \\(2\\cdot 1 + 3\\cdot 2 + 4\\cdot 4 + 5\\cdot 8 - \\ldots\\); the last sign should be \\(+\\) (the solution itself uses \\(+\\)).\n2. Line (ii) prints \\(\\ldots - (n)2^{n-1} + (n+1)2^{n}\\); the term with \\(2^{n-1}\\) is \\(+\\,n\\cdot 2^{n-1}\\), as the next line \\((n + 1 - n)2^{n-1}\\) shows.\nThe final answer \\(S_n = n\\cdot 2^{n}\\) is correct."
+          },
+          {
+            "type": "example",
+            "title": "Example 20",
+            "problem": "Sum the series upto \\(n\\) terms: \\(3\\cdot 1 + 4\\cdot 2 + 5\\cdot 2^{2} + 6\\cdot 2^{3} + \\ldots\\)",
+            "steps": [
+              "Given: the series \\(3\\cdot 1 + 4\\cdot 2 + 5\\cdot 2^{2} + 6\\cdot 2^{3} + \\ldots\\)\nTo find: \\(S_n\\), the sum of the first \\(n\\) terms.\nMethod: as in Example 19: the A.P. part is \\(3, 4, 5, 6, \\ldots\\) and the G.P. part is \\(1, 2, 2^{2}, \\ldots\\) with \\(r = 2\\). Find the \\(n\\)th term, multiply by 2, subtract, sum the G.P. Several printed lines of this example have errors; they are shown and corrected below.",
+              "Step 1: \\(n\\)th terms of the A.P. and the G.P.\n\\[3 + (n - 1)(1) = 3 + n - 1 = n + 2\\]\n\\[a_1r^{n-1} = 1(2)^{n-1} = 2^{n-1}\\]\nWhy: A.P.: \\(a_1 = 3\\), \\(d = 1\\); G.P.: first term 1, ratio 2. So the \\(n\\)th term of the series is \\((n + 2)2^{n-1}\\).",
+              "Step 2: Write \\(S_n\\)\nThe book prints the first line as \\(S_n = 3\\cdot 1 + 4\\cdot 2 + 5\\cdot 2^{2} - 6\\cdot 2^{3}, \\ldots\\) and line (i) as \\(S_n = 3\\cdot 1 + 4\\cdot 2 + 5\\cdot 2^{2} + 6\\cdot 2^{3} + \\ldots + (n+1)2^{n-1}\\).\nCorrect line (i):\n\\[S_n = 3\\cdot 1 + 4\\cdot 2 + 5\\cdot 2^{2} + 6\\cdot 2^{3}\\]\n\\[+ \\cdots + (n + 2)2^{n-1} \\quad \\text{(i)}\\]\nWhy: the \\(n\\)th term is \\((n + 2)2^{n-1}\\) (Step 1), and all signs are \\(+\\). Check with \\(n = 1\\): \\(3\\cdot 2^{0} = 3\\cdot 1\\).",
+              "Step 3: Multiply both sides by the common ratio 2\nThe book prints: \\(2S_n = 3\\cdot 2 + 4\\cdot 2^{2} + 5\\cdot 2^{3} + \\ldots + (n+1)2^{n-1} + (n+1)2^{n}\\)\nCorrect line (ii):\n\\[2S_n = 3\\cdot 2 + 4\\cdot 2^{2} + 5\\cdot 2^{3} + \\cdots\\]\n\\[+ (n + 1)2^{n-1} + (n + 2)2^{n} \\quad \\text{(ii)}\\]\nWhy: each power rises by one. The second last term is 2 times the \\((n - 1)\\)th term \\((n + 1)2^{n-2}\\), and the last term is 2 times \\((n + 2)2^{n-1}\\).",
+              "Step 4: Subtract (ii) from (i)\nThe book prints the first term as \\(S_n - 2S_n = 3\\cdot 2 + (4 - 3)\\cdot 2 + (5 - 4)\\cdot 2^{2} + \\ldots\\). The first term of (i) is \\(3\\cdot 1\\):\n\\[S_n - 2S_n = 3\\cdot 1 + (4 - 3)\\cdot 2\\]\n\\[+ (5 - 4)\\cdot 2^{2} + (6 - 5)\\cdot 2^{3}\\]\n\\[+ \\cdots + (n + 2 - n - 1)2^{n-1}\\]\n\\[- (n + 2)2^{n}\\]\n\\[-S_n = 3\\cdot 1 + 1\\cdot 2 + 1\\cdot 2^{2} + 1\\cdot 2^{3}\\]\n\\[+ \\cdots + 1\\cdot 2^{n-1} - (n + 2)2^{n}\\]\nWhy: terms with the same power differ by \\(d = 1\\) in their A.P. parts, including \\((n + 2) - (n + 1) = 1\\). The first term of (i) and the last term of (ii) have no partner.",
+              "Step 5: Sum the G.P. in the braces\nThe book prints this line as \\(S_n = 3 + \\{2 - 2^{2} + .2^{3} + \\ldots + 2^{n-1}\\}\\ (n+1)2^{n}\\). The correct line and the next step:\n\\[-S_n = 3 + \\{2 + 2^{2} + 2^{3} + \\cdots + 2^{n-1}\\}\\]\n\\[\\quad - (n + 2)2^{n}\\]\n\\[-S_n = 3 + \\dfrac{2(2^{n-1} - 1)}{2 - 1}\\]\n\\[\\quad - (n + 2)2^{n}\\]\nWhy: the left side is \\(-S_n\\), all signs in the braces are \\(+\\), and the last term is \\((n + 2)2^{n}\\). The braces hold a G.P. with first term 2, ratio 2 and \\(n - 1\\) terms.",
+              "Step 6: Simplify and solve for \\(S_n\\)\n\\[-S_n = 3 + 2^{n} - 2\\]\n\\[\\quad - n\\cdot 2^{n} - 2\\cdot 2^{n}\\]\n\\[-S_n = 1 + 2^{n} - n\\cdot 2^{n} - 2\\cdot 2^{n}\\]\n\\[= 1 + (1 - n - 2)2^{n}\\]\n\\[-S_n = 1 + (-n - 1)2^{n}\\]\n\\[S_n = -1 + (n + 1)2^{n}\\]\nWhy: \\(2\\cdot 2^{n-1} = 2^{n}\\) and \\((n + 2)2^{n} = n\\cdot 2^{n} + 2\\cdot 2^{n}\\); \\(3 - 2 = 1\\); take \\(2^{n}\\) common; multiply by \\(-1\\).",
+              "Check:\n\\(n = 1\\): \\(-1 + 2\\cdot 2 = 3\\).\n\\(n = 2\\): \\(-1 + 3\\cdot 4 = 11 = 3 + 8\\).\n\\(n = 3\\): \\(-1 + 4\\cdot 8 = 31 = 3 + 8 + 20\\).\nAll agree; the book's final answer is correct."
+            ],
+            "answer": "\\(S_n = -1 + (n + 1)2^{n}\\)",
+            "book_errors": [
+              "\\(S_n = 3\\cdot 1 + 4\\cdot 2 + 5\\cdot 2^{2} - 6\\cdot 2^{3}, \\ldots\\)",
+              "\\(S_n = 3\\cdot 1 + 4\\cdot 2 + 5\\cdot 2^{2} + 6\\cdot 2^{3} + \\ldots + (n+1)2^{n-1}\\)",
+              "\\(2S_n = 3\\cdot 2 + 4\\cdot 2^{2} + 5\\cdot 2^{3} + \\ldots + (n+1)2^{n-1} + (n+1)2^{n}\\)",
+              "\\(S_n - 2S_n = 3\\cdot 2 + (4 - 3)\\cdot 2 + (5 - 4)\\cdot 2^{2} + \\ldots\\)",
+              "\\(S_n = 3 + \\{2 - 2^{2} + .2^{3} + \\ldots + 2^{n-1}\\}\\ (n+1)2^{n}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The \\(n\\)th term is \\((n + 2)2^{n-1}\\), but several printed lines use \\((n + 1)\\) or wrong signs:\n1. 'Let' line: \\(5\\cdot 2^{2} - 6\\cdot 2^{3}, \\ldots\\) should be \\(5\\cdot 2^{2} + 6\\cdot 2^{3} + \\ldots\\)\n2. Line (i) ends \\((n+1)2^{n-1}\\); it should end \\((n + 2)2^{n-1}\\).\n3. Line (ii) ends \\((n+1)2^{n-1} + (n+1)2^{n}\\); it should end \\((n + 1)2^{n-1} + (n + 2)2^{n}\\).\n4. The subtraction starts \\(3\\cdot 2\\); it should start \\(3\\cdot 1\\).\n5. The third line prints \\(S_n = 3 + \\{2 - 2^{2} + .2^{3} + \\ldots + 2^{n-1}\\}\\ (n+1)2^{n}\\); it should be \\(-S_n = 3 + \\{2 + 2^{2} + 2^{3} + \\cdots + 2^{n-1}\\} - (n + 2)2^{n}\\).\nThe later lines use \\((n + 2)\\) correctly and the final answer \\(S_n = -1 + (n + 1)2^{n}\\) is correct."
+          },
+          {
+            "type": "example",
+            "title": "Example 21",
+            "problem": "Sum the series upto \\(n\\) terms: \\(2 + \\frac{4}{3} + \\frac{6}{9} + \\frac{8}{27} + \\ldots\\)",
+            "steps": [
+              "Given: the series \\(2 + \\frac{4}{3} + \\frac{6}{9} + \\frac{8}{27} + \\ldots\\)\nTo find: \\(S_n\\), the sum of the first \\(n\\) terms.\nMethod: each term is (A.P. term) \\(\\times\\) (G.P. term): numerators \\(2, 4, 6, 8, \\ldots\\) form an A.P., and \\(1, \\frac{1}{3}, \\frac{1}{9}, \\frac{1}{27}, \\ldots\\) form a G.P. with \\(r = \\frac{1}{3}\\). Multiply \\(S_n\\) by \\(\\frac{1}{3}\\), subtract, and sum the G.P.",
+              "Step 1: \\(n\\)th terms of the A.P. and the G.P.\n\\[2 + (n - 1)(2) = 2 + 2n - 2 = 2n\\]\n\\[(1)\\left(\\tfrac{1}{3}\\right)^{n-1} = \\tfrac{1}{3^{n-1}}\\]\nWhy: A.P.: \\(a_1 = 2\\), \\(d = 2\\); G.P.: first term 1, ratio \\(\\frac{1}{3}\\). The \\(n\\)th term is \\(\\frac{2n}{3^{n-1}}\\).",
+              "Step 2: Write \\(S_n\\) and \\(\\frac{1}{3}S_n\\)\n\\[S_n = 2 + \\tfrac{4}{3} + \\tfrac{6}{9} + \\tfrac{8}{27}\\]\n\\[+ \\cdots + \\tfrac{2n}{3^{n-1}} \\quad \\text{(i)}\\]\n\\[\\tfrac{1}{3}S_n = \\tfrac{2}{3} + \\tfrac{4}{9} + \\tfrac{6}{27} + \\cdots\\]\n\\[+ \\tfrac{2n - 2}{3^{n-1}} + \\tfrac{2n}{3^{n}} \\quad \\text{(ii)}\\]\nWhy: multiplying by \\(\\frac{1}{3}\\) raises each power of 3 in the denominators by one; terms with the same denominator are written under each other. The second last term of (ii) is \\(\\frac{1}{3}\\) of the \\((n - 1)\\)th term \\(\\frac{2(n - 1)}{3^{n-2}}\\).",
+              "Step 3: Subtract (ii) from (i)\n\\[\\left(1 - \\tfrac{1}{3}\\right)S_n = 2 + \\tfrac{4 - 2}{3} + \\tfrac{6 - 4}{9}\\]\n\\[+ \\tfrac{8 - 6}{27} + \\cdots\\]\n\\[+ \\tfrac{2n - 2n + 2}{3^{n-1}} - \\tfrac{2n}{3^{n}}\\]\n\\[\\tfrac{2}{3}S_n = 2 + \\left[\\tfrac{2}{3} + \\tfrac{2}{9} + \\tfrac{2}{27}\\right.\\]\n\\[\\left. + \\cdots + \\tfrac{2}{3^{n-1}}\\right]\\]\n\\[\\quad - \\tfrac{2n}{3^{n}}\\]\nWhy: numerators over the same denominator differ by \\(d = 2\\); and \\(1 - \\frac{1}{3} = \\frac{2}{3}\\).",
+              "Step 4: Sum the G.P. in the brackets\n\\[\\tfrac{2}{3}S_n = 2 + \\dfrac{\\frac{2}{3}\\left\\{1 - \\left(\\frac{1}{3}\\right)^{n-1}\\right\\}}{1 - \\frac{1}{3}}\\]\n\\[\\quad - \\dfrac{2n}{3^{n}}\\]\n\\[= 2 + \\dfrac{\\frac{2}{3}\\left\\{1 - \\left(\\frac{1}{3}\\right)^{n-1}\\right\\}}{\\frac{2}{3}}\\]\n\\[\\quad - \\dfrac{2n}{3^{n}}\\]\n\\[= 2 + 1 - \\left(\\tfrac{1}{3}\\right)^{n-1} - 2n\\left(\\tfrac{1}{3}\\right)^{n}\\]\nWhy: the brackets hold a G.P. with first term \\(\\frac{2}{3}\\), ratio \\(\\frac{1}{3}\\) and \\(n - 1\\) terms; \\(r < 1\\), so we use \\(\\frac{a_1(1 - r^{m})}{1 - r}\\). The \\(\\frac{2}{3}\\) cancels, and \\(\\frac{2n}{3^{n}} = 2n\\left(\\frac{1}{3}\\right)^{n}\\).",
+              "Step 5: Solve for \\(S_n\\)\n\\[\\tfrac{2}{3}S_n = 3 - \\left(\\tfrac{1}{3}\\right)^{n-1} - 2n\\left(\\tfrac{1}{3}\\right)^{n}\\]\n\\[S_n = \\tfrac{9}{2} - \\tfrac{3}{2}\\left(\\tfrac{1}{3}\\right)^{n-1} - 3n\\left(\\tfrac{1}{3}\\right)^{n}\\]\nWhy: \\(2 + 1 = 3\\); multiply every term by \\(\\frac{3}{2}\\): \\(3\\cdot\\frac{3}{2} = \\frac{9}{2}\\) and \\(2n\\cdot\\frac{3}{2} = 3n\\).",
+              "Check:\n\\(n = 1\\): \\(\\frac{9}{2} - \\frac{3}{2} - 3\\cdot\\frac{1}{3} = 2\\).\n\\(n = 2\\): \\(\\frac{9}{2} - \\frac{1}{2} - \\frac{6}{9} = 4 - \\frac{2}{3} = \\frac{10}{3} = 2 + \\frac{4}{3}\\).\nBoth agree."
+            ],
+            "answer": "\\(S_n = \\frac{9}{2} - \\frac{3}{2}\\left(\\frac{1}{3}\\right)^{n-1} - 3n\\left(\\frac{1}{3}\\right)^{n}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Link with \\(S_{\\infty}\\): here \\(|r| = \\frac{1}{3} < 1\\), so as \\(n \\to \\infty\\) the answer tends to \\(\\frac{9}{2}\\). The formula gives the same with \\(a = 2, d = 2, b = 1, r = \\frac{1}{3}\\):\n\\[S_{\\infty} = \\dfrac{2}{\\frac{2}{3}} + \\dfrac{2\\cdot\\frac{1}{3}}{\\left(\\frac{2}{3}\\right)^{2}} = 3 + \\tfrac{3}{2} = \\tfrac{9}{2}\\]"
+          },
+          {
+            "type": "example",
+            "title": "Example 22",
+            "problem": "Find the sum to \\(n\\) terms of the series: \\(1 + 2x + 3x^{2} + 4x^{3} + \\ldots\\) where \\(x \\ne 1\\). If \\(|x| < 1\\), sum the series to infinity.",
+            "steps": [
+              "Given: the series \\(1 + 2x + 3x^{2} + 4x^{3} + \\ldots\\), \\(x \\ne 1\\).\nTo find: (a) \\(S_n\\); (b) \\(S_{\\infty}\\) when \\(|x| < 1\\).\nMethod: the coefficients \\(1, 2, 3, 4, \\ldots\\) form an A.P. (\\(d = 1\\)) and \\(1, x, x^{2}, \\ldots\\) a G.P. with ratio \\(x\\). Multiply by \\(x\\), subtract, sum the G.P.; then let \\(n \\to \\infty\\).",
+              "Step 1: Write \\(S_n\\) and \\(xS_n\\)\n\\[S_n = 1 + 2x + 3x^{2} + 4x^{3} + \\cdots\\]\n\\[+ nx^{n-1} \\quad \\text{...(i)}\\]\n\\[xS_n = x + 2x^{2} + 3x^{3} + \\cdots\\]\n\\[+ (n - 1)x^{n-1} + nx^{n} \\quad \\text{...(ii)}\\]\nWhy: the \\(n\\)th term is \\(n\\cdot x^{n-1}\\) (A.P. part \\(n\\), G.P. part \\(x^{n-1}\\)). Multiplying by \\(x\\) raises every power by one; like powers are written under each other.",
+              "Step 2: Subtract (ii) from (i) and sum the G.P.\n\\[(1 - x)S_n = 1 + x + x^{2} + x^{3}\\]\n\\[+ \\cdots + x^{n-1} - nx^{n}\\]\n\\[= \\dfrac{1(1 - x^{n})}{1 - x} - nx^{n}\\]\nWhy: coefficients of like powers differ by 1. \\(1 + x + \\cdots + x^{n-1}\\) is a G.P. with first term 1, ratio \\(x\\) and \\(n\\) terms (powers 0 to \\(n - 1\\)); \\(x \\ne 1\\), so the formula applies.",
+              "Step 3: Combine into one fraction and solve for \\(S_n\\)\n\\[= \\dfrac{1 - x^{n} - n(1 - x)x^{n}}{1 - x}\\]\n\\[= \\dfrac{1 - x^{n} - nx^{n} + nx^{n+1}}{1 - x}\\]\n\\[(1 - x)S_n = \\dfrac{1 - (n + 1)x^{n} + nx^{n+1}}{1 - x}\\]\n\\[S_n = \\dfrac{1 - (n + 1)x^{n} + nx^{n+1}}{(1 - x)^{2}}\\]\nWhy: write \\(nx^{n} = \\frac{n(1 - x)x^{n}}{1 - x}\\) to get a common denominator; \\(-n(1 - x)x^{n} = -nx^{n} + nx^{n+1}\\) and \\(-x^{n} - nx^{n} = -(n + 1)x^{n}\\). Dividing by \\(1 - x\\) gives \\((1 - x)^{2}\\).",
+              "Step 4: Sum to infinity when \\(|x| < 1\\)\nIf \\(|x| < 1\\), then \\(x^{n} \\to 0\\) as \\(n \\to \\infty\\).\n\\[S_{\\infty} = \\dfrac{1}{(1 - x)^{2}}\\]\nWhy: both \\((n + 1)x^{n}\\) and \\(nx^{n+1}\\) tend to 0, because for \\(|x| < 1\\) not only \\(x^{n} \\to 0\\) but also \\(nx^{n} \\to 0\\) (stated at the start of 6.8.2). Only 1 is left in the numerator.",
+              "Check:\n\\(n = 2\\): \\(1 - 3x^{2} + 2x^{3} = (1 - x)^{2}(1 + 2x)\\), so \\(S_2 = 1 + 2x\\).\nBy the \\(S_{\\infty}\\) formula with \\(a = 1, d = 1, b = 1, r = x\\): \\(\\frac{1}{1 - x} + \\frac{x}{(1 - x)^{2}} = \\frac{1}{(1 - x)^{2}}\\). Same result."
+            ],
+            "answer": "\\(S_n = \\frac{1 - (n + 1)x^{n} + nx^{n+1}}{(1 - x)^{2}}\\); for \\(|x| < 1\\), \\(S_{\\infty} = \\frac{1}{(1 - x)^{2}}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. If \\(|r| < 1\\): \\(S_{\\infty} = \\frac{ab}{1 - r} + \\frac{dbr}{(1 - r)^{2}}\\).\n2. Method for any A.G.P.: \\(n\\)th term, \\(S_n\\), multiply by \\(r\\), subtract, sum the middle G.P. (\\(n - 1\\) or \\(n\\) terms: count them).\n3. The left side after subtracting is \\((1 - r)S_n\\): \\(-S_n\\) for \\(r = 2\\), \\(\\frac{2}{3}S_n\\) for \\(r = \\frac{1}{3}\\).\n4. Always check the answer with \\(n = 1\\) and \\(n = 2\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Using \\(S_{\\infty}\\) when \\(|r| \\ge 1\\) (Examples 19 and 20 have \\(r = 2\\): no sum to infinity).\n2. Forgetting the minus sign on the last term after subtracting.\n3. Wrong number of terms in the middle G.P.: \\(2 + \\cdots + 2^{n-1}\\) has \\(n - 1\\) terms; \\(1 + x + \\cdots + x^{n-1}\\) has \\(n\\).\n4. Leaving \\(-S_n\\) on the left and forgetting to multiply by \\(-1\\) at the end."
+          }
+        ]
+      }
+    }
+  ]
+}

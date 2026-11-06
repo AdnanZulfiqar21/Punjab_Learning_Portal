@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-8-Q8",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-8-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 115,
+          "pdf_to": 305,
+          "note": "Exercise 6.8, Question 8: book p.110 (PDF 115). Answer key PDF 305 (answers for 1-5, 8, 9, 11; 6, 7 and 10 are proofs). Solution book PDF 531-552 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8. Sum to \\(n\\) terms the series \\(2 + 4x + 6x^{2} + 8x^{3} + \\cdots\\) where \\(x \\ne 1\\)",
+            "explanation": "An A.G.P. with a letter: A.P. part \\(2, 4, 6, 8, \\ldots\\), G.P. part \\(1, x, x^2, \\ldots\\) (ratio \\(x\\)).\nWe divide by \\(1 - x\\) at the end, which is why \\(x \\ne 1\\) is given.\nPlan: \\(T_n\\), write \\(S_n\\) and \\(xS_n\\) shifted, subtract, sum the G.P., divide by \\(1 - x\\), write as one fraction.",
+            "steps": [
+              "Given: \\(2 + 4x + 6x^2 + \\cdots\\); A.P. \\(a = 2, d = 2\\); G.P. \\(b = 1, r = x\\); \\(x \\ne 1\\)\nTo find: \\(S_n\\).\nMethod: Multiply-by-\\(r\\)-and-subtract (the method of 6.8.1): write \\(S_n\\), write \\(rS_n\\) one place to the right, subtract; the middle becomes a G.P. that we can sum.",
+              "The \\(n\\)th term\n\\[T_n = 2n\\,x^{n-1}\\]\nWhy: A.P. \\(n\\)th term \\(2n\\); G.P. \\(n\\)th term \\(x^{n-1}\\) (the first term has \\(x^0 = 1\\)).",
+              "Write \\(S_n\\) and \\(xS_n\\)\n\\[S_n = 2 + 4x + 6x^{2} + \\cdots + 2n\\,x^{n-1}\\]\n\\[xS_n = 2x + 4x^{2} + \\cdots\\]\n\\[\\quad + 2(n - 1)x^{n-1} + 2n\\,x^{n}\\]\nWhy: Multiplying by \\(x\\) raises each power by one; shift so equal powers line up.",
+              "Subtract\n\\[(1 - x)S_n = 2 + 2x + 2x^{2} + \\cdots\\]\n\\[\\quad + 2x^{n-1} - 2n\\,x^{n}\\]\nWhy: \\(S_n - xS_n = (1 - x)S_n\\); each pair leaves \\(d = 2\\) times the power, e.g. \\((4 - 2)x = 2x\\); the last term \\(2nx^n\\) is subtracted.",
+              "Sum the G.P.\n\\[2 + 2x + \\cdots + 2x^{n-1} = \\dfrac{2(1 - x^{n})}{1 - x}\\]\n\\[(1 - x)S_n = \\dfrac{2(1 - x^{n})}{1 - x} - 2n\\,x^{n}\\]\nWhy: First term 2, ratio \\(x\\), \\(n\\) terms (powers 0 to \\(n - 1\\)).",
+              "Divide by \\(1 - x\\) and combine\n\\[S_n = \\dfrac{2(1 - x^{n})}{(1 - x)^{2}}\\]\n\\[\\quad - \\dfrac{2n\\,x^{n}}{1 - x}\\]\n\\[= \\dfrac{2(1 - x^{n}) - 2n\\,x^{n}(1 - x)}{(1 - x)^{2}}\\]\n\\[= \\dfrac{2 - 2x^{n} - 2nx^{n} + 2nx^{n+1}}{(1 - x)^{2}}\\]\n\\[= \\dfrac{2[1 - (n + 1)x^{n} + n\\,x^{n+1}]}{(1 - x)^{2}}\\]\nWhy: Common denominator \\((1 - x)^2\\); collect the \\(x^n\\) terms: \\(-2x^n - 2nx^n = -2(n + 1)x^n\\); take 2 common.",
+              "Check with \\(n = 1\\) and \\(n = 2\\)\n\\[n = 1:\\ \\dfrac{2(1 - 2x + x^{2})}{(1 - x)^{2}} = 2 \\;\\checkmark\\]\n\\[n = 2:\\ \\dfrac{2(1 - 3x^{2} + 2x^{3})}{(1 - x)^{2}}\\]\n\\[= 2(1 + 2x) = 2 + 4x \\;\\checkmark\\]\nWhy: \\(1 - 2x + x^2 = (1 - x)^2\\) and \\(1 - 3x^2 + 2x^3 = (1 - x)^2(1 + 2x)\\)."
+            ],
+            "final_answer": "\\(S_n = \\frac{2[1 - (n + 1)x^{n} + n\\,x^{n+1}]}{(1 - x)^{2}}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key (PDF 305) prints \\(S_n = \\frac{2 - (n + 1)x^{n} + 2nx^{n+1}}{(1 - x)^{2}}\\): the factor 2 is missing on the \\((n + 1)x^n\\) term. With \\(n = 1\\), \\(x = 2\\) it gives 6 instead of the first term 2. Correct: \\(S_n = \\frac{2[1 - (n + 1)x^{n} + nx^{n+1}]}{(1 - x)^{2}}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}
