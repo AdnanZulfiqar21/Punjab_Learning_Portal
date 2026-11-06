@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-13.2.1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/13.2.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 244,
+          "pdf_to": 246,
+          "note": "Book p. 239-241: 13.2.1 v_avg (i), s(t) = t^2 + t tables and three graphs, v_inst limit, (ii), Example 2. Book errors: 'scent line', 'x = 3' for t = 3, 'Provide the limit exist', 'For convenient', Ex 2 wording/unit. Teaching notes and lists are ours."
+        }
+      ],
+      "title": "13.2.1 Derivative as the rate of change of velocity (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH13-13.2.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab tak humne derivative ko graph ki zabaan mein dekha: tangent ka slope. Is subtopic mein wahi derivative ek jaani pehchani cheez ki shakal mein saamne aata hai: raftaar, yani velocity. Physics mein aap ne velocity parhi hai; ab aap dekhenge ke velocity asal mein ek derivative hai. Is sabaq ka safar yun hai: pehle average velocity (secant ka slope), phir chhote se chhote waqfe le kar ek lamhe ki velocity ka andaza, aur aakhir mein limit se bilkul theek jawab. Yahi teen qadam 13.1 mein tangent ke liye bhi the, is liye aap ko sab kuch jaana pehchana lagega. Har table ke numbers khud calculator ya kaghaz par nikaal kar dekhte jaiye."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab kehti hai ke rate of change (tabdeeli ki raftaar) seedhi line mein chalne wali kisi cheez ki harkat (motion) ko bayan karne ka bunyadi tasawwur hai. Physics mein is ka mutaala position (maqaam), velocity (raftaar, simt ke saath) aur acceleration (raftaar mein tabdeeli) ke zariye hota hai, aur yeh teenon derivatives (rates of change) ke zariye aapas mein jude hue hain.\nPosition versus time graph (waqt ke muqable mein maqaam ka graph) kisi diye gaye waqfe (time interval) par average velocity ka aasaan matlab samjhata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Heading ke baare mein ek baat. Heading mein \"rate of change of velocity\" likha hai, lekin yeh section asal mein yeh dikhata hai ke velocity position ka rate of change hai: velocity, position function \\(s(t)\\) ka derivative hai. Velocity ka apna rate of change acceleration kehlata hai, jo aap physics mein parhte hain.\nAasaan alfaaz mein: \\(s(t)\\) batata hai ke waqt \\(t\\) par cheez kahan hai; velocity batati hai ke yeh \"kahan\" kitni tezi se badal raha hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Farz karein ek zarra (particle) seedhi line mein chal raha hai aur waqt \\(t\\) par us ki position function \\(s(t)\\) se di gayi hai. \\(t\\) se \\(t_{1}\\) tak ke waqfe par average velocity, jise \\(v_{\\text{avg}}\\) likhte hain, yun define hoti hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "v_{\\text{avg}} = \\dfrac{s(t_{1}) - s(t)}{t_{1} - t} \\quad \\text{...(i)}",
+            "text_alt": "v average equals s of t 1 minus s of t, over t 1 minus t; equation (i)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Equation (i) points \\((t, s(t))\\) aur \\((t_{1}, s(t_{1}))\\) se guzarne wali secant line ka slope bhi hai. Agar waqfa \\(t_{1} - t\\) chhota na ho, to yeh average velocity waqt \\(t\\) par asal rate of change ko theek theek zahir nahin karti."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab yahan \"scent line\" likhti hai. Sahi lafz \"secant line\" hai: position graph ke do points \\((t, s(t))\\) aur \\((t_{1}, s(t_{1}))\\) se guzarne wali line."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is baat ko samjhane ke liye ek zarra lete hain jis ki position waqt \\(t\\) (seconds mein) par \\(s(t) = t^{2} + t\\) metres hai. \\(t = 3\\) seconds se shuru hone wale mukhtalif waqfon par average rate of change neeche table mein hai:"
+          },
+          {
+            "type": "table",
+            "header": [
+              "Interval",
+              "Average velocity"
+            ],
+            "rows": [
+              [
+                "\\(t = 3\\) secs to \\(t = 5\\) secs",
+                "\\(\\frac{s(5) - s(3)}{5 - 3} = \\frac{30 - 12}{2} = 9\\)"
+              ],
+              [
+                "\\(t = 3\\) secs to \\(t = 4\\) secs",
+                "\\(\\frac{s(4) - s(3)}{4 - 3} = \\frac{20 - 12}{1} = 8\\)"
+              ],
+              [
+                "\\(t = 3\\) secs to \\(t = 3.5\\) secs",
+                "\\(\\frac{s(3.5) - s(3)}{3.5 - 3} = \\frac{\\frac{63}{4} - 12}{0.5} = 7.5\\)"
+              ]
+            ],
+            "caption": "s(t) = t² + t wale zarre ki average velocity, t = 3 se shuru hone wale teen intervals par"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh numbers kahan se aaye? Har ek ko khud nikaal kar dekhiye:\n\\(s(3) = 3^{2} + 3 = 9 + 3 = 12\\)\n\\(s(4) = 16 + 4 = 20\\), \\(s(5) = 25 + 5 = 30\\)\n\\(s(3.5) = 12.25 + 3.5 = 15.75 = \\frac{63}{4}\\)\nHar average velocity position graph par ek secant ka slope hai: upar kitna gaye (position mein tabdeeli) ÷ aage kitna gaye (waqt mein tabdeeli). Neeche teen graphs mein yeh secants laal (red) right triangles ki shakal mein dikhaye gaye hain. Ghor karein: jaise jaise triangle chhota hota hai, secant curve se zyada chipakti jaati hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch13-fig-st-3-to-5",
+            "alt": "Graph of s(t) = t squared plus t for t from 0 to about 6.7, with t marked 1 to 6 and s from 10 to 50. A red right triangle starts at the point (3, 12): its horizontal side goes to t = 5 (5 − 3 = 2) and its vertical side rises to the point (5, 30) on the curve (30 − 12 = 18). A dashed green secant joins (3, 12) and (5, 30).",
+            "caption": "Graph 1 of 3: s(t) = t² + t from t = 3 to t = 5, slope of the secant = 18 ÷ 2 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch13-fig-st-3-to-4",
+            "alt": "Graph of s(t) = t squared plus t for t from 0 to about 6.7, with t marked 1 to 6 and s from 10 to 50. A red right triangle starts at the point (3, 12): its horizontal side goes to t = 4 (4 − 3 = 1) and its vertical side rises to the point (4, 20) on the curve (20 − 12 = 8). A dashed green secant joins (3, 12) and (4, 20).",
+            "caption": "Graph 2 of 3: s(t) = t² + t from t = 3 to t = 4, slope of the secant = 8 ÷ 1 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch13-fig-st-3-to-3-5",
+            "alt": "Graph of s(t) = t squared plus t for t from 0 to about 6.7, with t marked 1 to 6 and s from 10 to 50. A red right triangle starts at the point (3, 12): its horizontal side goes to t = 3.5 (3.5 − 3 = 0.5) and its vertical side rises to the point (3.5, 15.75) on the curve (15.75 − 12 = 3.75). A dashed green secant joins (3, 12) and (3.5, 15.75).",
+            "caption": "Graph 3 of 3: s(t) = t² + t from t = 3 to t = 3.5, slope of the secant = 3.75 ÷ 0.5 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Hum dekhte hain ke yeh values theek 3 seconds par zarre ki velocity ke bohat qareeb nahin hain (9, 8, 7.5 abhi bhi badal rahi hain). \\(t = 3\\) par velocity ka behtar andaza lagane ke liye hum aur chhote waqfe lete hain:"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab yahan \"velocity at \\(x = 3\\)\" likhti hai. Yahan variable waqt \\(t\\) hai, \\(x\\) nahin, is liye sahi hai \"velocity at \\(t = 3\\)\"."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Interval",
+              "Average velocity"
+            ],
+            "rows": [
+              [
+                "\\(t = 3\\) secs to \\(t = 3.1\\) secs",
+                "\\(\\frac{\\{(3.1)^{2} + 3.1\\} - 12}{3.1 - 3} = \\frac{0.71}{0.1} = 7.1\\)"
+              ],
+              [
+                "\\(t = 3\\) secs to \\(t = 3.01\\) secs",
+                "\\(\\frac{\\{(3.01)^{2} + 3.01\\} - 12}{3.01 - 3} = \\frac{0.0701}{0.01} = 7.01\\)"
+              ],
+              [
+                "\\(t = 3\\) secs to \\(t = 3.001\\) secs",
+                "\\(\\frac{\\{(3.001)^{2} + 3.001\\} - 12}{3.001 - 3} = \\frac{0.007001}{0.001} = 7.001\\)"
+              ]
+            ],
+            "caption": "t = 3 se shuru hone wale chhote intervals par average velocity"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Table ki doosri row mein \\(0.0701\\) kahan se aaya? Khud nikaal kar dekhiye.\nJawab: \\((3.01)^{2} = 9.0601\\). Is mein \\(3.01\\) jama karein to \\(12.0701\\). Ab \\(s(3) = 12\\) minus karein to \\(0.0701\\). Denominator \\(3.01 - 3 = 0.01\\) hai. To \\(0.0701 \\div 0.01 = 7.01\\). \\(0.01\\) se divide karna yani decimal ko do jagah daayein khiskana, calculator ki zaroorat bhi nahin."
+          },
+          {
+            "type": "paragraph",
+            "text": "Hum dekhte hain ke jaise jaise waqfa chhota hota hai, average velocity \\(t = 3\\) par instantaneous velocity ke qareeb aati jaati hai. Is rujhan (trend) se andaza hota hai ke instantaneous velocity taqreeban 7 m/sec hai.\nYani kaafi chhote waqfe mein velocity na hone ke barabar badalti hai. Agar \\(t_{1}\\) \\(t\\) ke bohat qareeb ho to \\(t_{1} - t\\) par average velocity, waqt \\(t\\) par instantaneous velocity ka achha andaza hoti hai. Jab \\(t_{1}\\) \\(t\\) ke qareeb jata hai, to average velocity hi instantaneous velocity ban jaati hai.\nYeh bilkul waisa hai jaise 13.1 mein secant ke slope se tangent ka slope nikala tha. Riyazi (mathematical) taur par instantaneous velocity \\(v_{\\text{inst}}\\) yeh limit hai:\n\\[v_{\\text{inst}} = \\lim_{t_{1} \\to t} \\dfrac{s(t_{1}) - s(t)}{t_{1} - t}\\]\nbasharte ke limit maujood ho (provided the limit exists)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Aasaani ke liye (for convenience) \\(t_{1} = t + \\delta t\\) likhte hain. Phir \\(t_{1} \\to t \\Rightarrow \\delta t \\to 0\\), aur upar wali equation yeh ban jaati hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "v_{\\text{inst}} = \\lim_{\\delta t \\to 0} \\dfrac{s(t+\\delta t) - s(t)}{\\delta t} \\quad \\text{...(ii)}",
+            "text_alt": "v instantaneous equals the limit, as delta t tends to 0, of s of t plus delta t minus s of t, over delta t; equation (ii)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein do chhoti zabaan ki ghaltiyan hain: \"(Provide the limit exist)\" ki jagah \"(provided the limit exists)\" hona chahiye, aur \"For convenient\" ki jagah \"For convenience\". Upar hum ne sahi likha hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Doosre lafzon mein, instantaneous velocity waqt ke lehaaz se position function \\(s(t)\\) ka derivative hai. Yeh is subtopic ka sab se ahem jumla hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Table se humein sirf andaza mila: \"taqreeban 7\". Limit (ii) bilkul theek jawab deti hai:\n\\[s(3+\\delta t) - s(3) = (3+\\delta t)^{2} + (3+\\delta t) - 12\\]\n\\[= 7\\delta t + \\delta t^{2}\\]\n\\[\\dfrac{7\\delta t + \\delta t^{2}}{\\delta t} = 7 + \\delta t \\to 7\\]\nTo \\(t = 3\\) par instantaneous velocity bilkul \\(7\\) m/sec hai. Isi se table bhi samajh aata hai: \\(3\\) se \\(3 + \\delta t\\) tak average velocity theek \\(7 + \\delta t\\) hai. \\(\\delta t = 0.1\\) par \\(7.1\\), \\(\\delta t = 0.01\\) par \\(7.01\\), \\(\\delta t = 0.001\\) par \\(7.001\\). Kamaal ka pattern, hai na?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Isi zarre (\\(s(t) = t^{2} + t\\)) ki \\(t = 2\\) par instantaneous velocity kya hogi?\nJawab: \\(s(2+\\delta t) - s(2) = (2+\\delta t)^{2} + (2+\\delta t) - 6 = 5\\delta t + \\delta t^{2}\\). \\(\\delta t\\) se divide karein: \\(5 + \\delta t \\to 5\\). To \\(5\\) m/sec. \\(t = 3\\) par \\(7\\) thi, matlab zarra waqt ke saath tez ho raha hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "A particle moves along a line such that its position after \\(t\\) hours is given by \\(s(t) = 4t^{2} + 2t + 1\\) (in miles).\n(a) Find the average velocity over the interval \\([2, 5]\\).\n(b) Find the instantaneous velocity at \\(t = 3\\).",
+            "steps": [
+              "Given: \\(t\\) ghante baad zarre (particle) ki position \\(s(t) = 4t^{2} + 2t + 1\\) miles hai.\nTo find: (a) \\(2 \\le t \\le 5\\) par average velocity; (b) \\(t = 3\\) par instantaneous velocity.\nMethod: sab se pehle dekhte hain ke dono hisse kya maang rahe hain. (a) poore interval ki average hai, is liye formula (i) \\(v_{\\text{avg}} = \\frac{s(t_{1}) - s(t)}{t_{1} - t}\\) lagega, \\(t = 2\\) aur \\(t_{1} = 5\\) ke saath. (b) ek lamhe ki velocity hai, is liye limit (ii) lagegi, \\(t = 3\\) ke saath.",
+              "Step 1: (a) Interval ke dono siron par position\n\\[s(5) = 4(5)^{2} + 2(5) + 1\\]\n\\[= 100 + 10 + 1 = 111\\]\n\\[s(2) = 4(2)^{2} + 2(2) + 1\\]\n\\[= 16 + 4 + 1 = 21\\]\nKyun: formula (i) ko interval ke shuru (\\(t = 2\\)) aur aakhir (\\(t = 5\\)) ki position chahiye. Yani 2 ghante baad zarra 21 miles par tha aur 5 ghante baad 111 miles par.\nDhyan dein: \\(4(5)^{2}\\) mein pehle square, phir 4 se zarb: \\(4 \\times 25 = 100\\), \\((4 \\times 5)^{2} = 400\\) nahin.",
+              "Step 2: (a) Average velocity\n\\[v_{\\text{avg}} = \\dfrac{s(5) - s(2)}{5 - 2}\\]\n\\[= \\dfrac{111 - 21}{3} = \\dfrac{90}{3}\\]\n\\[= 30 \\text{ miles/hour}\\]\nKyun: average velocity = position mein tabdeeli ÷ lagne wala waqt. 3 ghanton mein zarra 90 miles chala, to ausatan 30 miles har ghante. Position miles mein aur waqt ghanton mein hai, is liye unit miles/hour hai.",
+              "Step 3: (b) t = 3 par limit (ii) likhein\n\\[v_{\\text{inst}} = \\lim_{\\delta t \\to 0} \\dfrac{s(3+\\delta t) - s(3)}{\\delta t}\\]\nKyun: ek lamhe ki velocity seedhi nahin nikalti, kyun ke ek lamhe mein na faasla tay hota hai na waqt guzarta hai (\\(\\frac{0}{0}\\)). Is liye hum \\(3\\) se \\(3 + \\delta t\\) tak ke chhote se chhote waqfe ki average velocity lete hain aur dekhte hain ke woh kis value ki taraf ja rahi hai.",
+              "Step 4: (b) s(3 + δt) nikaalein\n\\[s(3+\\delta t) = 4(3+\\delta t)^{2} + 2(3+\\delta t) + 1\\]\n\\[= 4(9 + 6\\delta t + \\delta t^{2}) + 6 + 2\\delta t + 1\\]\n\\[= 36 + 24\\delta t + 4\\delta t^{2} + 6 + 2\\delta t + 1\\]\n\\[= 43 + 26\\delta t + 4\\delta t^{2}\\]\nKyun: har jagah \\(t\\) ki jagah \\((3 + \\delta t)\\) rakha. \\((3 + \\delta t)^{2} = 9 + 6\\delta t + \\delta t^{2}\\) formula \\((a+b)^{2}\\) se. Phir 4 ko bracket ke har term se zarb diya aur milte julte terms (like terms) jama kiye: \\(36 + 6 + 1 = 43\\) aur \\(24\\delta t + 2\\delta t = 26\\delta t\\).",
+              "Step 5: (b) s(3) nikaal kar minus karein\n\\[s(3) = 4(9) + 6 + 1 = 43\\]\n\\[s(3+\\delta t) - s(3) = 26\\delta t + 4\\delta t^{2}\\]\nKyun: constant \\(43\\) cancel ho gaya. Yeh hamesha hona chahiye, kyun ke \\(\\delta t = 0\\) par yeh farq zero hota hai. Agar constant na kate to wapas ja kar hisaab check karein.",
+              "Step 6: (b) δt cancel karein aur limit lein\n\\[\\dfrac{26\\delta t + 4\\delta t^{2}}{\\delta t} = \\dfrac{\\delta t(26 + 4\\delta t)}{\\delta t}\\]\n\\[= 26 + 4\\delta t\\]\n\\[v_{\\text{inst}} = \\lim_{\\delta t \\to 0}(26 + 4\\delta t) = 26\\]\nKyun: \\(\\delta t\\) zero ki taraf jata hai magar zero nahin hota, is liye cancel karna jaaiz hai. Cancel ke baad \\(\\delta t = 0\\) rakhne mein koi rukawat nahin. To \\(t = 3\\) par velocity 26 miles/hour hai.",
+              "Tasdeeq:\n\\(t = 3\\) se shuru hone wale chhote waqfon ki average velocities:\n\\[\\dfrac{s(3.1) - s(3)}{0.1} = \\dfrac{45.64 - 43}{0.1} = 26.4\\]\n\\[\\dfrac{s(3.01) - s(3)}{0.01} = \\dfrac{43.2604 - 43}{0.01} = 26.04\\]\nYeh \\(26\\) ki taraf ja rahi hain, bilkul jaise humne nikala. (a) bhi maqool hai: \\(30\\) interval ke dono siron ki velocities ke darmiyan hai, jo isi tareeqe se \\(t = 2\\) par \\(18\\) aur \\(t = 5\\) par \\(42\\) aati hain."
+            ],
+            "answer": "(a) \\([2, 5]\\) par average velocity = 30 miles/hour. (b) \\(t = 3\\) par instantaneous velocity = 26 miles/hour."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke chhape hue hal mein chhoti ghaltiyan: \"give position function\" ki jagah \"given position function\", aur unit \"30 miles/hours\" ki jagah \"30 miles/hour\" hona chahiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Rozmarra ki misaal: aap motorcycle par Lahore se nikle aur 2 ghante mein 100 km door pohanche. Average velocity \\(= \\frac{100}{2} = 50\\) km/h. Lekin raaste ke kisi khaas lamhe par speedometer 70 bhi dikha sakta tha aur 20 bhi. Speedometer jo dikhata hai, woh instantaneous velocity hai, yani position ka derivative. Average ek poore safar ki kahani hai; derivative ek lamhe ki tasveer."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Physics ki ek misaal: ek pathar oonchai se chhoda jaye to \\(t\\) seconds mein woh taqreeban \\(s(t) = 4.9t^{2}\\) metres neeche girta hai. \\(t = 2\\) par us ki velocity kya hai?\n\\[s(2+\\delta t) - s(2) = 4.9\\big((2+\\delta t)^{2} - 4\\big)\\]\n\\[= 4.9(4\\delta t + \\delta t^{2})\\]\n\\[\\dfrac{4.9(4\\delta t + \\delta t^{2})}{\\delta t} = 19.6 + 4.9\\delta t\\]\n\\(\\delta t \\to 0\\) par velocity \\(= 19.6\\) m/sec. Yahi jawab physics ka formula \\(v = gt = 9.8 \\times 2\\) bhi deta hai. Dekha? Physics ke formule bhi asal mein derivatives hi hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "Unit hamesha sawal se lein. Kitab ki table mein position metres aur waqt seconds mein hai, is liye velocity m/sec hai. Example 2 mein position miles aur waqt ghanton mein hai, is liye velocity miles/hour hai. Ek hi sawal mein units ko mix na karein."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\([t, t_{1}]\\) par average velocity: \\(v_{\\text{avg}} = \\frac{s(t_{1}) - s(t)}{t_{1} - t}\\) ...(i). Yeh position graph par secant ka slope hai.\n2. Instantaneous velocity: \\(v_{\\text{inst}} = \\lim_{\\delta t \\to 0} \\frac{s(t+\\delta t) - s(t)}{\\delta t}\\) ...(ii). Yeh tangent ka slope hai.\n3. Instantaneous velocity waqt ke lehaaz se position function ka derivative hai.\n4. Waqfa jitna chhota, average velocity instantaneous velocity ke utna qareeb.\n5. Unit: (position ki unit) per (waqt ki unit), jaise m/sec, miles/hour."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Average velocity ko \\(\\frac{s(5)}{5}\\) ya \\(\\frac{s(5) + s(2)}{2}\\) samajhna. Sahi hai: position mein tabdeeli ÷ waqt mein tabdeeli, \\(\\frac{s(5) - s(2)}{5 - 2}\\).\n2. \\(4(3 + \\delta t)^{2}\\) ko \\((12 + 4\\delta t)^{2}\\) bana dena. Pehle square, phir 4 se zarb.\n3. Cancel se pehle \\(\\delta t = 0\\) rakh dena; is se \\(\\frac{0}{0}\\) aata hai.\n4. Aakhri jawab mein velocity ki unit na likhna. Unit ke baghair jawab adhoora hai.\n5. Table dekh kar \"taqreeban 7\" ko hi aakhri jawab samajhna; asal jawab limit se nikalta hai."
+          }
+        ]
+      }
+    }
+  ]
+}

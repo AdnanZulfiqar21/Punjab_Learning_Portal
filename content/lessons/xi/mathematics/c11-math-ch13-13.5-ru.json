@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-13.5-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/13.5",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 252,
+          "pdf_to": 252,
+          "note": "Book p. 247: 13.5 differentiability implies continuity, not conversely; f(x) = |x| at x = 0 with one-sided limits 1 and -1; Figure 13.3 (redrawn as original SVG)"
+        }
+      ],
+      "title": "13.5 Connection Between Derivatives and Continuity (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH13-13.5",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Bachon, ab tak humne do bari cheezen parhi hain: continuity (Unit 12) aur derivative (is unit mein). Aaj ka sawal yeh hai ke in dono ka aapas mein kya rishta hai. Kya har continuous function ka derivative hota hai? Aur kya jis function ka derivative ho woh zaroor continuous hota hai? Yaad kijiye, 13.1 mein derivative ko tangent ke slope ki tarah dekha tha; aaj hum dekhenge ke kahan tangent ban hi nahin sakti. Kitab shuru mein kehti hai: calculus mathematics ki ek taaqatwar shaakh hai jo tabdeeli aur harkat (change and motion) ka mutala karti hai. Is ke do buniyadi tasawwurat, continuity aur derivatives, gehre taur par jure hue hain. Dono ki apni definition aur apna istemal hai, lekin un ka rishta samajhna asal zindagi ke masail hal karne ke liye zaroori hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Jaisa pichle units mein parha, koi function kisi point par continuous hota hai agar wahan us ke graph mein koi toot (break), chhalaang (jump) ya sooraakh (hole) na ho. Yani graph ko qalam uthaye baghair bana sakein. Doosri taraf, kisi point par derivative us lamhe ka rate of change naapta hai, ya yun kahein ke us point par tangent line ka slope. Lekin yeh definition tab hi kaam karti hai jab function us point ke aas paas \"achhe rawaiye wala\" (well-behaved) ho. Is se ek mashhoor natija nikalta hai:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar function kisi point par differentiable ho, to wahan continuous bhi zaroor hoga. Yani differentiability se continuity laazmi aati hai, lekin ulta zaroori nahin. Misaal: function \\(f(x) = |x|\\) lijiye. Yeh \\(x = 0\\) par saaf taur par continuous hai (neeche Figure 13.3 dekhiye). Ab dekhte hain ke kya yeh \\(x = 0\\) par differentiable bhi hai."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab yahan \"Figure 1.1\" dekhne ko kehti hai. Is page par \\(f(x) = |x|\\) ka graph Figure 13.3 hai, jo neeche diya gaya hai. Hum ne sahi number likha hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch13-fig-13-3-abs-x",
+            "alt": "Graph of f(x) = |x| on x and y axes marked from -6 to 6: two straight rays meeting at the origin O, the left ray y = -x rising to the left with slope -1 and the right ray y = x rising to the right with slope 1. The point O is marked as a sharp corner where there is no tangent.",
+            "caption": "Figure 13.3: graph of f(x) = |x|, continuous at x = 0 but with a corner there (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Differentiable hone se continuous hona kyun laazmi hai? Ek chhota sa saboot (hamari taraf se, kitab mein nahin). Maan lijiye \\(f'(a)\\) maujood hai. \\(\\delta x \\ne 0\\) ke liye:\n\\[f(a+\\delta x) - f(a)\\]\n\\[= \\dfrac{f(a+\\delta x) - f(a)}{\\delta x}\\cdot\\delta x\\]\nKyun: humne bas \\(\\delta x\\) se divide aur multiply kiya, value wohi rahi. Ab \\(\\delta x \\to 0\\) karein: fraction \\(f'(a)\\) ki taraf jata hai (kyun ke derivative maujood hai), aur \\(\\delta x\\) zero ki taraf. To right side \\(f'(a)\\cdot 0 = 0\\) ki taraf jati hai. Matlab \\(f(a+\\delta x) \\to f(a)\\), aur yahi to continuity ki definition hai!"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab \\(|x|\\) ko \\(x = 0\\) par check karte hain. Wahi chaar qadam, bas point \\(x = 0\\) par:\n\\[f(x) = |x|\\]\n\\[f(0) = |0| = 0\\]\nand,\n\\[f(0 + \\delta x) = |0 + \\delta x| = |\\delta x|\\]\nso\n\\[f(0 + \\delta x) - f(0) = |\\delta x| - 0\\]\nand\n\\[\\dfrac{f(0+\\delta x) - f(0)}{\\delta x} = \\dfrac{|\\delta x|}{\\delta x}\\]\nKyun: \\(|0| = 0\\), aur \\(0 + \\delta x = \\delta x\\), is liye \\(f(0 + \\delta x) = |\\delta x|\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is liye\n\\[f'(0) = \\lim_{\\delta x \\to 0}\\dfrac{|\\delta x|}{\\delta x}\\]\nYahan kitab ghalti se \\(f'(x)\\) likhti hai; hum point \\(x = 0\\) par derivative dekh rahe hain, is liye \\(f'(0)\\) hona chahiye."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab masla yeh hai ke \\(|\\delta x|\\) ki value \\(\\delta x\\) ke sign par munhasir hai: \\(\\delta x > 0\\) ho to \\(|\\delta x| = \\delta x\\), aur \\(\\delta x < 0\\) ho to \\(|\\delta x| = -\\delta x\\). Is liye hum dono taraf ki limits alag alag (one-sided limits) lete hain:\n\\[\\lim_{\\delta x \\to 0^{+}}\\dfrac{|\\delta x|}{\\delta x}\\]\n\\[= \\lim_{\\delta x \\to 0^{+}}\\dfrac{\\delta x}{\\delta x} = 1\\]\naur\n\\[\\lim_{\\delta x \\to 0^{-}}\\dfrac{|\\delta x|}{\\delta x}\\]\n\\[= \\lim_{\\delta x \\to 0^{-}}\\dfrac{-\\delta x}{\\delta x} = -1\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "1. Kitab \\(f'(x) = \\lim\\limits_{\\delta x \\to 0}\\frac{|\\delta x|}{\\delta x}\\) likhti hai; sahi \\(f'(0)\\) hai, kyun ke derivative \\(x = 0\\) par check ho raha hai.\n2. Right-hand limit mein kitab \\(\\lim\\limits_{\\delta x \\to 0^{-}}\\frac{\\delta x}{\\delta x} = 1\\) chhaapti hai. Sahi \\(\\delta x \\to 0^{+}\\) hai: \\(|\\delta x| = \\delta x\\) sirf tab hota hai jab \\(\\delta x > 0\\), yani jab \\(\\delta x\\) daayen (right) taraf se zero ki taraf aaye. Jawab \\(1\\) aur \\(-1\\) sahi hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Numbers se dekhiye. \\(\\delta x = 0.01\\) lein: \\(\\frac{|0.01|}{0.01} = 1\\). \\(\\delta x = -0.01\\) lein: \\(\\frac{|-0.01|}{-0.01} = \\frac{0.01}{-0.01} = -1\\). Ab \\(\\delta x = 0.000001\\) ya \\(-0.000001\\) lein, phir bhi jawab \\(1\\) aur \\(-1\\). \\(\\delta x\\) jitna bhi chhota kar lein, daayen taraf se hamesha \\(1\\) aur baayen taraf se hamesha \\(-1\\). Quotient kabhi ek value par tikta hi nahin."
+          },
+          {
+            "type": "paragraph",
+            "text": "Right hand aur left hand limits barabar nahin, is liye \\(\\lim\\limits_{\\delta x \\to 0}\\frac{|\\delta x|}{\\delta x}\\) maujood (exist) nahin karti."
+          },
+          {
+            "type": "paragraph",
+            "text": "Matlab \\(x = 0\\) par \\(f\\) ka derivative maujood nahin, aur is liye graph ki is point par koi tangent line nahin (Figure 13.3). Lekin baqi har point par derivative maujood hai: daayen taraf \\(1\\) aur baayen taraf \\(-1\\). Natija: koi function kisi point par continuous ho sakta hai magar zaroori nahin ke wahan differentiable bhi ho."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Figure 13.3 ko ghor se dekhiye. \\(O\\) ke daayen graph line \\(y = x\\) hai (slope \\(1\\)), baayen \\(y = -x\\) (slope \\(-1\\)). \\(O\\) par dono hisse ek nokeela kona (sharp corner) banate hain. Tangent ki ek pakki slope honi chahiye, lekin yahan slope achanak \\(-1\\) se \\(1\\) par chhalaang lagata hai, is liye koi ek line tangent nahin ban sakti. Phir bhi graph qalam uthaye baghair banta hai, is liye function \\(0\\) par continuous hai.\nEk misaal: socho aap ek pahaari raaste par chal rahe hain jahan ek jagah raasta \"V\" ki shakal mein mur jata hai. Aap gire baghair guzar sakte hain (raasta toota nahin, continuous), lekin us kone par aap nahin bata sakte ke charhai kis taraf hai (koi ek slope nahin, not differentiable)."
+          },
+          {
+            "type": "table",
+            "header": [
+              "x = a par surat-e-haal",
+              "Continuous?",
+              "Differentiable?"
+            ],
+            "rows": [
+              [
+                "Hamwar (smooth) curve, jaise \\(x^{2}\\) at \\(0\\)",
+                "Haan",
+                "Haan"
+              ],
+              [
+                "Nokeela kona, jaise \\(|x|\\) at \\(0\\)",
+                "Haan",
+                "Nahin"
+              ],
+              [
+                "Graph mein toot ya chhalaang",
+                "Nahin",
+                "Nahin"
+              ]
+            ],
+            "caption": "Hamara khulasa (kitab mein nahin): kisi point par continuity aur differentiability"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Muqable ke liye ek hamwar function dekhiye: \\(f(x) = x^{2}\\) at \\(x = 0\\).\n\\[\\dfrac{f(0+\\delta x) - f(0)}{\\delta x} = \\dfrac{(\\delta x)^{2}}{\\delta x} = \\delta x\\]\nAb \\(\\delta x\\) daayen se zero ki taraf jaye ya baayen se, \\(\\delta x\\) khud zero ki taraf jata hai. Dono one-sided limits \\(0\\) hain, barabar hain, is liye \\(f'(0) = 0\\) maujood hai. Graph par \\(y = x^{2}\\) ka neeche wala hissa (vertex) gol aur hamwar hai, nokeela nahin, aur wahan tangent x-axis hi hai. Farq saaf hai: gol mor par tangent hoti hai, nokeele kone par nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "Kitab ne kaha tha ke derivative ki definition tab kaam karti hai jab function point ke aas paas \"well-behaved\" ho. Is ka seedha matlab yeh hai ke difference quotient ki daayen aur baayen dono taraf ki limits maujood hon aur barabar hon. Teen surat-e-haal mein yeh nahin hota: (1) graph mein toot ya chhalaang ho, (2) nokeela kona ho jaise \\(|x|\\), (3) graph kisi point par bilkul khara (vertical) ho jaye. Pehli surat mein function continuous bhi nahin; doosri aur teesri mein continuous hai magar differentiable nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Ek function jis ka graph \\(x = 1\\) par chhalaang lagata ho (baayen taraf \\(y = 0\\), daayen taraf \\(y = 2\\)), kya \\(x = 1\\) par differentiable ho sakta hai?\nJawab: nahin. Wahan graph toota hua hai, yani function continuous hi nahin. Aur hum ne saabit kiya ke differentiable function continuous hota hai; to jo continuous nahin woh differentiable bhi nahin ho sakta."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Kya \\(f(x) = |x - 2|\\) point \\(x = 2\\) par differentiable hai?\nJawab: nahin. Graph \\(|x|\\) wala hi \"V\" hai, bas 2 units daayen khiska hua; kona ab \\(x = 2\\) par hai. Wahan right-hand limit \\(1\\) aur left-hand limit \\(-1\\) hai. Lekin function wahan continuous zaroor hai. Khud kar ke dekhiye: \\(\\frac{f(2+\\delta x) - f(2)}{\\delta x} = \\frac{|\\delta x|}{\\delta x}\\), bilkul wahi quotient jo kitab ne \\(|x|\\) ke liye nikala, is liye jawab bhi wahi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Is natije ki ulti shakal bhi bohat kaam ki hai: agar function kisi point par continuous nahin, to wahan differentiable ho hi nahin sakta. Lekin \"continuous hai\" se \"differentiable hai\" kabhi saabit nahin hota; \\(|x|\\) at \\(0\\) is ki mashhoor misaal (counter-example) hai. Derivative ka na hona dikhane ke liye difference quotient ki right-hand aur left-hand limits nikal kar dikhaiye ke woh mukhtalif hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Kisi point par differentiable \\(\\Rightarrow\\) wahan continuous.\n2. Continuous hone se differentiable hona laazmi nahin.\n3. \\(f(x) = |x|\\), \\(x = 0\\) par continuous hai, lekin \\(\\lim\\limits_{\\delta x \\to 0^{+}}\\frac{|\\delta x|}{\\delta x} = 1\\) aur \\(\\lim\\limits_{\\delta x \\to 0^{-}}\\frac{|\\delta x|}{\\delta x} = -1\\), is liye \\(f'(0)\\) maujood nahin.\n4. Nokeele kone par tangent nahin hoti; baqi jagah \\(|x|\\) ka derivative \\(1\\) (\\(x > 0\\)) aur \\(-1\\) (\\(x < 0\\)) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Yeh samajhna ke jis graph mein toot na ho us ka har jagah derivative hoga. Ek kona hi derivative khatam karne ke liye kaafi hai.\n2. \\(\\frac{|\\delta x|}{\\delta x}\\) ko har \\(\\delta x\\) ke liye \\(1\\) likh dena. Yeh sirf \\(\\delta x > 0\\) par sahi hai.\n3. One-sided limits ulat dena: \\(0^{+}\\) ka matlab daayen se (\\(\\delta x > 0\\)), \\(0^{-}\\) ka matlab baayen se (\\(\\delta x < 0\\)). Kitab mein bhi yahan ghalti chhapi hai, is liye khayal rakhiye."
+          }
+        ]
+      }
+    }
+  ]
+}

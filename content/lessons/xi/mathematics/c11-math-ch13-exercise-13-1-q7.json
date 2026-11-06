@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-1-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-1-q7",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 253,
+          "pdf_to": 253,
+          "note": "Exercise 13.1, Question 7 (book page 248, PDF 253); answer key PDF 310-311. Key's 1, y = -5x - 8 is wrong; correct point (1, 0), y = x - 1."
+        }
+      ],
+      "title": "Question 7",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7 Find the coordinates of the point of tangency and the equation of the tangent line for \\(f(x) = x^3 - 2x + 1\\) at \\(x = 1\\).",
+            "explanation": "Same type as Question 6: the point \\((1, f(1))\\), the slope \\(f'(1)\\), then the line.\nPlan: \\(f'(x)\\) by definition, then the point-slope form.",
+            "steps": [
+              "Given: \\(f(x) = x^3 - 2x + 1\\), \\(x_1 = 1\\).\nTo find: the point of tangency and the tangent line.\nMethod: derivative by definition (first principles): \\(f'(x) = \\lim_{\\delta x \\to 0} \\frac{f(x + \\delta x) - f(x)}{\\delta x}\\). Four steps: (I) write \\(f(x + \\delta x)\\); (II) subtract \\(f(x)\\); (III) divide by \\(\\delta x\\); (IV) let \\(\\delta x \\to 0\\). The gradient (slope) of the tangent at \\(x = x_1\\) is \\(m = f'(x_1)\\); the tangent is \\(y - y_1 = m(x - x_1)\\) with \\(y_1 = f(x_1)\\).",
+              "Steps I and II: \\(f(x + \\delta x) - f(x)\\)\n\\[f(x + \\delta x) = (x + \\delta x)^3 - 2(x + \\delta x) + 1\\]\n\\[= x^3 + 3x^2\\delta x + 3x(\\delta x)^2 + (\\delta x)^3 - 2x - 2\\,\\delta x + 1\\]\n\\[f(x + \\delta x) - f(x)\\]\n\\[= 3x^2\\delta x + 3x(\\delta x)^2 + (\\delta x)^3 - 2\\,\\delta x\\]\nWhy: Cube formula; \\(x^3\\), \\(-2x\\), \\(1\\) cancel.",
+              "Steps III and IV: divide and take the limit\n\\[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x} = 3x^2 + 3x\\,\\delta x + (\\delta x)^2 - 2\\]\n\\[f'(x) = 3x^2 - 2\\]\nWhy: \\(\\delta x\\) cancels; put \\(\\delta x = 0\\).",
+              "Point of tangency\n\\[f(1) = 1 - 2 + 1 = 0\\]\n\\[(x_1, y_1) = (1, 0)\\]\nWhy: Use \\(f\\), not \\(f'\\).",
+              "Gradient at \\(x = 1\\)\n\\[m = f'(1) = 3(1)^2 - 2 = 1\\]\nWhy: Slope of the tangent \\(= f'(1)\\).",
+              "Equation of the tangent\n\\[y - 0 = 1(x - 1)\\]\n\\[y = x - 1\\]\nWhy: Point-slope form.",
+              "Check\n\\[x = 1:\\ y = 1 - 1 = 0 \\;\\checkmark\\]\nWhy: The line passes through \\((1, 0)\\) with slope \\(1\\)."
+            ],
+            "final_answer": "Point of tangency \\((1, 0)\\); gradient \\(1\\); tangent: \\(y = x - 1\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints (run together with Question 6) \\(1,\\ y = -5x - 8\\). The gradient \\(1\\) is right, but the line is wrong (it repeats the key's line for Question 6; at \\(x = 1\\) it gives \\(-13\\), not \\(0\\)), and the point of tangency is missing. Correct: point \\((1, 0)\\), tangent \\(y = x - 1\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-13.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/13.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 242,
+          "pdf_to": 243,
+          "note": "Book p. 237-238: unit introduction, 13.1 secant (1) with Figure 13.1, successive secants (Figure 13.2), tangent slope (2), Example 1 with its graph. Book errors: 'scent line' (x2), Leibniz's name. Road map, teaching notes, Key points, mistakes are ours."
+        }
+      ],
+      "title": "13.1 Tangent to a Curve at a Point",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Introduction"
+          },
+          {
+            "type": "paragraph",
+            "text": "The ancient Greeks knew the concepts of area, volume, centroids etc., which are related to integral calculus. Later on, in the seventeenth century, Sir Isaac Newton, an English mathematician (1642 – 1727), and Gottfried Whilhe G. W. Leibniz, a German mathematician (1646 – 1716), considered the problem of instantaneous rates of change. They reached the invention of differential calculus independently. After the development of calculus, mathematics became a powerful tool for dealing with rates of change and describing the physical universe.",
+            "book_errors": [
+              "Gottfried Whilhe G. W. Leibniz"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the German mathematician's name as \"Gottfried Whilhe G. W. Leibniz\". His name is Gottfried Wilhelm Leibniz (G. W. Leibniz)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What is differential calculus about? One question: how fast is something changing at one instant? A speedometer shows the speed of a car at this very moment, not the average speed of the whole journey. A doctor watching how fast a fever rises, a shopkeeper watching how fast profit grows when he sells one more item, an engineer watching how fast stress builds in a beam: all of them ask about an instantaneous rate of change.\nGeometrically the same question is: how steep is a curve at one point? The answer is the slope of the tangent line at that point. This first section builds that idea, and 13.2 gives it its name, the derivative.\nYou need Unit 12 (limits) for this unit: every derivative is a limit."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Part of the unit",
+              "What you will learn"
+            ],
+            "rows": [
+              [
+                "13.1 Tangent to a Curve at a Point",
+                "secant line, tangent line, slope of the tangent as a limit"
+              ],
+              [
+                "13.2 Derivative as the Limit of a Difference Quotient",
+                "average and instantaneous rate of change, the definition of \\(f'(x)\\), velocity as a derivative"
+              ],
+              [
+                "13.3 Process of Finding Derivative by Definition",
+                "notations \\(f'(x)\\), \\(\\frac{dy}{dx}\\), \\(y'\\); the four steps of differentiation from first principles"
+              ],
+              [
+                "13.4 Derivative of \\(x^{n}\\)",
+                "the power rule"
+              ],
+              [
+                "13.5 Derivatives and Continuity",
+                "a differentiable function is continuous; \\(|x|\\) at \\(0\\)"
+              ],
+              [
+                "13.6 Theorems on Differentiation",
+                "constant, constant multiple, sum, difference, product and quotient rules"
+              ],
+              [
+                "13.7 Application of Differentiation",
+                "profit, motion, construction, investment and stress problems"
+              ]
+            ],
+            "caption": "Our road map of Unit 13 (not in the book)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "The secant line PQ"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(P(x, f(x))\\) and \\(Q(x + \\delta x, f(x + \\delta x))\\) be two points on the arc \\(AB\\) of the graph of \\(f\\) defined by the equation \\(y = f(x)\\), as shown in Figure 13.1.\nHere \\(\\delta x\\) is the increment in the value of \\(x\\) (read as \"delta \\(x\\)\")."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch13-fig-13-1-secant",
+            "alt": "Graph of a curve y = f(x) from A to B with two points P(x, f(x)) and Q(x + delta x, f(x + delta x)) on it. The green secant line through P and Q meets the x-axis at S. Perpendiculars PM and QN drop to the x-axis; the horizontal line from P meets QN at R, so PR = delta x and RQ = f(x + delta x) - f(x).",
+            "caption": "Figure 13.1: the secant line PQ of the curve y = f(x) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "The line \\(PQ\\) is a secant of the curve, and the slope of scent line passing through \\(P(x, f(x))\\) and \\(Q(x + \\delta x, f(x + \\delta x))\\) is:\n\\[m_{\\text{sec}} = \\dfrac{RQ}{PR}\\]\n\\[= \\dfrac{f(x+\\delta x) - f(x)}{\\delta x} \\quad \\text{...(1)}\\]\nwhere \\(m_{\\text{sec}}\\) is the slope of the scent line.",
+            "book_errors": [
+              "slope of scent line",
+              "slope of the scent line"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \"scent line\" twice here. The correct word is \"secant line\" (a line that cuts a curve in two points)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is the slope \\(\\frac{RQ}{PR}\\)? Slope is \"rise over run\". In Figure 13.1:\nrun: \\(PR = MN = ON - OM = (x + \\delta x) - x = \\delta x\\)\nrise: \\(RQ = NQ - NR = NQ - MP = f(x + \\delta x) - f(x)\\)\nSo equation (1) is nothing new: it is the old slope formula \\(\\frac{y_{2} - y_{1}}{x_{2} - x_{1}}\\) for the two points \\(P\\) and \\(Q\\).\nThe word \"secant\" comes from the Latin \"secare\", to cut: a secant cuts the curve at two points."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "From secant to tangent"
+          },
+          {
+            "type": "paragraph",
+            "text": "Revolving the secant line \\(PQ\\) towards \\(P\\), some of its successive positions \\(PQ_{1}, PQ_{2}, PQ_{3}, \\ldots\\) are shown in Figure 13.2. The points \\(Q_{i}\\) \\((i = 1, 2, 3, \\ldots)\\) are getting closer and closer to the point \\(P\\), and \\(PR_{i}\\), i.e., \\(\\delta x_{i}\\) \\((i = 1, 2, 3, \\ldots)\\), are approaching zero."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch13-fig-13-2-successive-secants",
+            "alt": "The same curve with the point P fixed and points Q, Q3, Q2, Q1 on the curve getting closer to P. Dashed secant lines PQ, PQ3, PQ2, PQ1 turn about P, and the green tangent line PT touches the curve at P and meets the x-axis at T, to the left of O.",
+            "caption": "Figure 13.2: successive secants PQ1, PQ2, PQ3 turning into the tangent PT at P (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "In other words, as \\(\\delta x \\to 0\\), the point \\(Q\\) approaches \\(P\\), and the secant line becomes the tangent line. The revolving secant line becomes the tangent line \\(PT\\) at \\(P\\) while \\(\\delta x\\) approaches zero, that is,"
+          },
+          {
+            "type": "equation",
+            "latex": "m_{\\text{tan}} = \\lim_{\\delta x \\to 0} \\dfrac{f(x+\\delta x) - f(x)}{\\delta x} \\quad \\text{...(2)}",
+            "text_alt": "m tan equals the limit, as delta x tends to 0, of f of x plus delta x minus f of x, over delta x; equation (2)"
+          },
+          {
+            "type": "paragraph",
+            "text": "where \\(m_{\\text{tan}}\\) denotes the slope of the tangent line. We see that \\(m_{\\text{tan}}\\) is the limit of \\(m_{\\text{sec}}\\) as \\(Q\\) approaches \\(P\\) along the curve \\(y = f(x)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why do we need a limit? To find the slope of a line we need two points, but a tangent touches the curve at only one point, \\(P\\). If we simply put \\(\\delta x = 0\\) in (1), \\(Q\\) falls on \\(P\\) and we get \\(\\frac{f(x) - f(x)}{0} = \\frac{0}{0}\\), which has no meaning.\nSo we do the next best thing: we take \\(Q\\) closer and closer to \\(P\\) and watch where the secant slopes are heading. That target value is the slope of the tangent. This is exactly the idea of a limit from Unit 12."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "\"Gradient\" and \"slope\" mean the same thing. To find the equation of a tangent you always need two things:\n1. the slope \\(m\\), from (2) (later from the rules of differentiation);\n2. the point of contact \\((x_{1}, y_{1})\\).\nThen use the point-slope form \\(y - y_{1} = m(x - x_{1})\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Find the gradient and an equation of tangent line to the graph of \\(f(x) = x^{2} - 2\\) at the point \\(P(-1, -1)\\).",
+            "steps": [
+              "Given: \\(f(x) = x^{2} - 2\\) and the point \\(P(-1, -1)\\) on its graph.\nTo find: (a) the gradient (slope) of the tangent line at \\(P\\); (b) the equation of that tangent line.\nMethod: the slope of the tangent at a point is given by the limit (2). We put \\(x = -1\\) in (2). Once the slope is known, a line through a known point with a known slope is written with the point-slope form \\(y - y_{1} = m(x - x_{1})\\).",
+              "Step 1: Make sure P is on the curve\n\\[f(-1) = (-1)^{2} - 2\\]\n\\[= 1 - 2 = -1\\]\nWhy: a tangent at \\(P\\) only makes sense if \\(P\\) lies on the graph. Since \\(f(-1) = -1\\), the point \\((-1, -1)\\) is on the curve.",
+              "Step 2: Put x = -1 in equation (2)\n\\[m_{\\text{tan}} = \\lim_{\\delta x \\to 0} \\dfrac{f(-1+\\delta x) - f(-1)}{\\delta x}\\]\nWhy: formula (2) gives the slope of the tangent at any \\(x\\); here \\(x = -1\\).",
+              "Step 3: Write both function values\n\\[f(-1+\\delta x) = (-1+\\delta x)^{2} - 2\\]\n\\[f(-1) = (-1)^{2} - 2\\]\nSo\n\\[m_{\\text{tan}} = \\lim_{\\delta x \\to 0} \\dfrac{(-1+\\delta x)^{2} - 2 - \\big((-1)^{2} - 2\\big)}{\\delta x}\\]\nWhy: to find \\(f(\\text{anything})\\) we replace \\(x\\) by that thing in \\(x^{2} - 2\\). The bracket around \\(f(-1)\\) keeps its minus sign on every term.",
+              "Step 4: Expand and simplify the numerator\n\\[(-1+\\delta x)^{2} = 1 - 2\\delta x + \\delta x^{2}\\]\nNumerator:\n\\[1 - 2\\delta x + \\delta x^{2} - 2 - (1 - 2)\\]\n\\[= 1 - 2\\delta x + \\delta x^{2} - 2 + 1\\]\n\\[= -2\\delta x + \\delta x^{2}\\]\nWhy: \\((a + b)^{2} = a^{2} + 2ab + b^{2}\\) with \\(a = -1\\), \\(b = \\delta x\\). Then \\(1 - 2 + 1 = 0\\): the constant terms always cancel, because at \\(\\delta x = 0\\) the numerator \\(f(-1) - f(-1)\\) is zero.",
+              "Step 5: Take out the common factor and cancel\n\\[\\dfrac{-2\\delta x + \\delta x^{2}}{\\delta x} = \\dfrac{\\delta x(-2 + \\delta x)}{\\delta x}\\]\n\\[= -2 + \\delta x\\]\nWhy: \\(\\delta x\\) tends to \\(0\\) but is never equal to \\(0\\), so dividing by \\(\\delta x\\) is allowed. Without this cancelling we would get the meaningless form \\(\\frac{0}{0}\\).",
+              "Step 6: Let δx tend to 0\n\\[m_{\\text{tan}} = \\lim_{\\delta x \\to 0} (-2 + \\delta x) = -2\\]\nWhy: after cancelling, the expression is a simple polynomial in \\(\\delta x\\), so we may put \\(\\delta x = 0\\).",
+              "Step 7: Equation of the tangent line\nPoint \\((x_{1}, y_{1}) = (-1, -1)\\), slope \\(m = -2\\):\n\\[y - (-1) = -2\\big(x - (-1)\\big)\\]\n\\[y + 1 = -2x - 2\\]\n\\[y = -2x - 3\\]\nWhy: the point-slope form needs exactly what we now have: one point of the line and its slope.",
+              "Check:\nThe point \\(P\\) is on the line: \\(-2(-1) - 3 = 2 - 3 = -1\\).\nWhere does the line meet the parabola?\n\\[x^{2} - 2 = -2x - 3\\]\n\\[x^{2} + 2x + 1 = 0\\]\n\\[(x + 1)^{2} = 0\\]\nOnly \\(x = -1\\) (a repeated root): the line touches the curve at \\(P\\) and does not cut it again, exactly as a tangent should."
+            ],
+            "answer": "Gradient of the tangent at \\(P(-1, -1)\\): \\(m_{\\text{tan}} = -2\\). Equation of the tangent line: \\(y = -2x - 3\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The graph of \\(f\\) and the tangent line are shown in the figure below."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch13-fig-ex1-tangent",
+            "alt": "Grid with x from -4 to 4 and y from -4 to 5. The parabola y = x squared minus 2 has its lowest point at (0, -2) and cuts the x-axis near -1.41 and 1.41. The green straight line y = -2x - 3 touches the parabola only at the red point P(-1, -1) and cuts the y-axis at -3.",
+            "caption": "Example 1: the graph of f(x) = x² − 2 and its tangent line y = −2x − 3 at P(−1, −1) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A secant cuts a curve at two points; its slope is \\(m_{\\text{sec}} = \\frac{f(x+\\delta x) - f(x)}{\\delta x}\\) ...(1).\n2. When \\(Q\\) slides along the curve to \\(P\\) (\\(\\delta x \\to 0\\)), the secant turns into the tangent at \\(P\\).\n3. Slope of the tangent: \\(m_{\\text{tan}} = \\lim_{\\delta x \\to 0} \\frac{f(x+\\delta x) - f(x)}{\\delta x}\\) ...(2).\n4. Working pattern: substitute, expand, cancel the common factor \\(\\delta x\\), then let \\(\\delta x \\to 0\\).\n5. Equation of the tangent: \\(y - y_{1} = m(x - x_{1})\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Putting \\(\\delta x = 0\\) before cancelling. That gives \\(\\frac{0}{0}\\). Always cancel \\(\\delta x\\) first, then take the limit.\n2. Reading \\(\\delta x\\) as \"\\(\\delta\\) times \\(x\\)\". \\(\\delta x\\) is one symbol: a small change in \\(x\\).\n3. Writing \\(f(-1 + \\delta x) - f(-1)\\) without a bracket around \\(f(-1)\\), so the minus sign reaches only its first term.\n4. Writing \\(x - (-1)\\) as \\(x - 1\\) in the point-slope form."
+          }
+        ]
+      }
+    }
+  ]
+}

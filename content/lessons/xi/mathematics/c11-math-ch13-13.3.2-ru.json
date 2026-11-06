@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-13.3.2-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/13.3.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 247,
+          "pdf_to": 250,
+          "note": "Book p. 242-245: 13.3.2 four steps (Step I-IV), ab-initio / first principles; Example 3 (c, x^2), Example 4 (sqrt x at x = a, with alternate method), Example 5 (1/x^2 at x = -1) and Note box"
+        }
+      ],
+      "title": "13.3.2 Finding f'(x) by Definition of Derivative (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH13-13.3.2",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Bachon, 13.3.1 mein humne derivative ke naam aur nishaan seekhe. Ab asal kaam: kisi diye hue function ka derivative khud nikalna. Yeh woh hunar hai jis ke baghair aage ka calculus samajh nahin aata, kyun ke saare shortcut formulas (power rule, product rule waghera) isi tareeqe se saabit kiye jaate hain. Is liye is page ko jaldi mein nahin, aaraam se, qalam kaghaz le kar parhiye. Kitab kehti hai: agar function \\(f\\) diya ho to \\(f'(x)\\), agar woh exist karta ho (maujood ho), in chaar qadmon se nikal sakta hai:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Step I: \\(f(x + \\delta x)\\) nikalo.",
+              "Step II: \\(f(x + \\delta x) - f(x)\\) ko simplify karo.",
+              "Step III: \\(f(x + \\delta x) - f(x)\\) ko \\(\\delta x\\) se divide karo, yani \\(\\frac{f(x+\\delta x)-f(x)}{\\delta x}\\) banao, aur simplify karo.",
+              "Step IV: \\(\\lim\\limits_{\\delta x \\to 0}\\frac{f(x+\\delta x)-f(x)}{\\delta x}\\) nikalo."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Is tareeqe se derivative nikalne ko differentiation by definition, ya ab-initio, ya from first principles kehte hain. Teeno naam ek hi tareeqe ke hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Har qadam kyun?\nStep I: humein hilaye hue point \\(x + \\delta x\\) par function ki value chahiye. Formula mein har \\(x\\) ki jagah \\(x + \\delta x\\) bracket ke saath rakh do.\nStep II: minus karne se sirf function ki tabdeeli (\\(\\delta y\\)) bachti hai. Purani value ka kya karna, humein farq chahiye.\nStep III: \\(x\\) ki tabdeeli se divide karne se average rate of change milta hai. Is qadam ka asal kaam hai itna simplify karna ke \\(\\delta x\\) ka ek factor cancel ho jaye.\nStep IV: \\(\\delta x \\to 0\\) karne se average rate \"is lamhe\" ka rate ban jata hai, yani derivative.\nEk misaal se yaad rakhiye: Step I-II \"kitna badla\", Step III \"har unit par kitna badla\", Step IV \"bilkul is point par kitna badla\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\"Agar exist karta ho\" kyun likha? Kuch functions ke liye Step IV wali limit kisi point par maujood nahin hoti; wahan function differentiable nahin hota. Is ki misaal aap 13.5 mein dekhenge: \\(f(x) = |x|\\) ka \\(x = 0\\) par koi derivative nahin.\n\"Ab-initio\" Latin ka lafz hai, matlab \"shuru se\". Yani hum koi banaya banaya formula nahin, seedha definition se kaam kar rahe hain."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Function ki qisam",
+              "Step II-III mein kya algebra lagayein"
+            ],
+            "rows": [
+              [
+                "Polynomial (\\(x^{2}\\), \\(x^{3}\\), ...)",
+                "\\((x+\\delta x)^{n}\\) kholo, cancel karo, \\(\\delta x\\) bahar nikalo"
+              ],
+              [
+                "Square root (\\(\\sqrt{x}\\), ...)",
+                "Numerator ko rationalize karo"
+              ],
+              [
+                "Fraction (\\(\\frac{1}{x^{2}}\\), ...)",
+                "Common denominator lo, phir factorize karo"
+              ]
+            ],
+            "caption": "Hamara khulasa (kitab mein nahin): kis function mein delta x kaise cancel hota hai"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "Step III mein simplify karne se pehle \\(\\delta x = 0\\) rakh dena sab se aam ghalti hai. Is se \\(\\frac{0}{0}\\) aata hai jis ki koi value nahin. Hamesha pehle simplify, phir \\(\\delta x\\) cancel, aur limit sab se aakhir mein."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab pehli misaal. Example 3 mein do functions hain: ek constant \\(c\\) aur ek \\(x^{2}\\). Yeh sab se aasaan functions hain, is liye chaar qadmon ki mashq ke liye behtareen hain. Har qadam ko is tarah likhiye jaise kitab ne (i), (ii), (iii), (iv) se likha hai; exam mein bhi yahi tarteeb chahiye. Pehle khud koshish kijiye, phir neeche hal se milaiye."
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Find the derivative of the following functions by definition\n(a) \\(f(x) = c\\)\n(b) \\(f(x) = x^{2}\\)",
+            "steps": [
+              "Given: (a) \\(f(x) = c\\), yani constant function (har input par ek hi output); (b) \\(f(x) = x^{2}\\).\nTo find: dono ka \\(f'(x)\\), definition se.\nMethod: 13.3.2 ke chaar qadam. Step I: \\(f(x+\\delta x)\\); Step II: \\(f(x+\\delta x) - f(x)\\); Step III: \\(\\delta x\\) se divide; Step IV: \\(\\delta x \\to 0\\) par limit. Sawal mein \"by definition\" likha hai, is liye shortcut nahin, poore chaar qadam dikhane hain.",
+              "(a) Step I: \\(f(x + \\delta x)\\) nikalna\n\\[f(x + \\delta x) = c\\]\nKyun: constant function ko aap koi bhi input dein, jawab \\(c\\) hi aata hai. Jaise ek dukaan jahan har cheez 100 rupay ki ho: kuch bhi uthayein, qeemat 100. Is liye \\(x + \\delta x\\) par bhi output \\(c\\) hai.",
+              "(a) Step II: function mein tabdeeli\n\\[f(x + \\delta x) - f(x) = c - c\\]\n\\[= 0\\]\nKyun: output badla hi nahin, to tabdeeli zero hai.",
+              "(a) Step III: \\(\\delta x\\) se divide\n\\[\\dfrac{f(x+\\delta x)-f(x)}{\\delta x} = \\dfrac{0}{\\delta x}\\]\n\\[= 0\\]\nKyun: \\(\\delta x \\ne 0\\) hai, aur zero ko kisi bhi non-zero number se divide karein to zero hi aata hai.",
+              "(a) Step IV: limit lena\n\\[\\lim_{\\delta x \\to 0}\\dfrac{f(x+\\delta x)-f(x)}{\\delta x}\\]\n\\[= \\lim_{\\delta x \\to 0}(0) = 0\\]\nYani \\(f'(x) = 0\\), ya\n\\[\\dfrac{d}{dx}(c) = 0\\]\nKyun: constant ki limit wohi constant hoti hai. Graph par socho: \\(y = c\\) ek ufuqi (horizontal) seedhi line hai, aur ufuqi line ka slope har jagah zero hota hai. Na charhai, na utraai.",
+              "(b) Step I: \\(f(x + \\delta x)\\) nikalna\n\\[f(x + \\delta x) = (x + \\delta x)^{2}\\]\nKyun: formula \\(x^{2}\\) mein har \\(x\\) ki jagah \\(x + \\delta x\\) rakhna hai, aur bracket zaroor lagana hai, warna square sirf \\(\\delta x\\) par lagega.",
+              "(b) Step II: function mein tabdeeli\n\\[f(x+\\delta x) - f(x) = (x + \\delta x)^{2} - x^{2}\\]\n\\[= x^{2} + 2x\\,\\delta x + (\\delta x)^{2} - x^{2}\\]\n\\[= 2x\\,\\delta x + (\\delta x)^{2}\\]\n\\[= (2x + \\delta x)\\,\\delta x\\]\nKyun: \\((a+b)^{2} = a^{2} + 2ab + b^{2}\\) se kholte hain. \\(x^{2}\\) aur \\(-x^{2}\\) aapas mein khatam ho jaate hain; yeh har dafa hota hai, kyun ke \\(f(x)\\) ko minus karne ka maqsad hi yahi hai. Jo bacha us mein \\(\\delta x\\) common hai, use bahar nikal lete hain taa ke agle qadam mein cancel ho sake.",
+              "(b) Step III: \\(\\delta x\\) se divide\n\\[\\dfrac{f(x+\\delta x)-f(x)}{\\delta x} = \\dfrac{(2x+\\delta x)\\,\\delta x}{\\delta x}\\]\n\\[= 2x + \\delta x,\\quad (\\delta x \\ne 0)\\]\nKyun: \\(\\delta x\\) cancel karna sirf is liye jaaiz hai ke \\(\\delta x \\ne 0\\). Yahi cancel karna \\(\\frac{0}{0}\\) wali mushkil ko khatam karta hai; is ke baghair limit nahin nikal sakti.",
+              "(b) Step IV: limit lena\n\\[\\lim_{\\delta x \\to 0}\\dfrac{f(x+\\delta x)-f(x)}{\\delta x}\\]\n\\[= \\lim_{\\delta x \\to 0}(2x + \\delta x) = 2x\\]\nYani \\(f'(x) = 2x\\).\nKyun: ab neeche koi \\(\\delta x\\) nahin, is liye seedha \\(\\delta x\\) ko zero ki taraf le ja sakte hain: \\(2x + \\delta x\\) ban jata hai \\(2x\\).",
+              "Tasdeeq:\n(b) ke liye \\(x = 3\\) lein: \\(\\frac{(3.01)^{2} - 9}{0.01} = \\frac{0.0601}{0.01} = 6.01\\), jo \\(2(3) = 6\\) ke bohat qareeb hai, aur \\(\\delta x\\) aur chhota karein to aur qareeb aata hai.\n(a) ke liye: \\(y = c\\) ufuqi line hai jis ka slope har point par \\(0\\) hai. Dono jawab sahi."
+            ],
+            "answer": "(a) \\(f'(x) = 0\\), yani \\(\\frac{d}{dx}(c) = 0\\).\n(b) \\(f'(x) = 2x\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 3 mein kitab (a)(i) mein \\(f(x + \\delta) = c\\), (b)(i) mein \\(f(x + \\delta) = (x + \\delta x)^{2}\\) aur (b)(ii) mein \\(f(x + \\delta) - f(x)\\) chhaapti hai. Har jagah \\(f(x + \\delta x)\\) hona chahiye: akela \\(\\delta\\) koi miqdaar nahin, tabdeeli \\(\\delta x\\) hai. Hum ne upar sahi likha hai. Baqi working aur jawab (\\(0\\) aur \\(2x\\)) bilkul sahi hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Isi tareeqe se \\(f(x) = x^{3}\\) ka derivative (yeh kitab ki misaal nahin, mashq ke liye hai):\nStep I-II:\n\\[(x+\\delta x)^{3} - x^{3}\\]\n\\[= 3x^{2}\\,\\delta x + 3x(\\delta x)^{2} + (\\delta x)^{3}\\]\n\\[= \\delta x\\,(3x^{2} + 3x\\,\\delta x + (\\delta x)^{2})\\]\nStep III: \\(\\delta x\\) se divide karein to \\(3x^{2} + 3x\\,\\delta x + (\\delta x)^{2}\\) bachta hai.\nStep IV: \\(\\delta x \\to 0\\) par \\(3x\\,\\delta x\\) aur \\((\\delta x)^{2}\\) dono zero ho jaate hain, to \\(f'(x) = 3x^{2}\\).\nKyun: \\((a+b)^{3} = a^{3} + 3a^{2}b + 3ab^{2} + b^{3}\\) se kholte hain; \\(x^{3}\\) cancel ho jata hai aur baqi har term mein kam az kam ek \\(\\delta x\\) hai. Ghor kijiye: \\(x^{2}\\) ka derivative \\(2x\\), \\(x^{3}\\) ka \\(3x^{2}\\). Koi pattern nazar aaya? Yahi pattern 13.4 mein power rule ban kar saabit hoga."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "Example 3(b) mein ek baat ghor se dekhiye. Step III ke baad humare paas \\(2x + \\delta x\\) tha. Yeh asal mein secant line ka slope hai, jo point \\(x\\) aur point \\(x + \\delta x\\) ko jorti hai. Jab \\(\\delta x\\) chhota hota hai to \\(\\delta x\\) wala hissa bhi chhota hota jata hai, aur aakhir mein sirf \\(2x\\) bachta hai, jo tangent ka slope hai. Yani har \"by definition\" sawal mein aap asal mein secant ko ghuma kar tangent bana rahe hote hain, bilkul waise jaise 13.1 mein Figure 13.2 mein dikhaya gaya tha. Is tasveer ko zehan mein rakhenge to qadam ratne ki zaroorat nahin padegi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhiye",
+            "text": "Yeh dono natije zabani yaad kar lijiye: \\(\\frac{d}{dx}(c) = 0\\) (kisi bhi constant ka derivative zero) aur \\(\\frac{d}{dx}(x^{2}) = 2x\\). Aage har section mein yeh baar baar istemal honge."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Chaar qadmon se \\(f(x) = 2x + 1\\) ka derivative nikaliye.\nJawab: \\(f(x+\\delta x) - f(x) = 2(x+\\delta x) + 1 - 2x - 1 = 2\\,\\delta x\\). \\(\\delta x\\) se divide karein to \\(2\\), aur limit bhi \\(2\\). Samajh mein aata hai: \\(y = 2x + 1\\) seedhi line hai jis ka slope \\(2\\) hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example 4 mein function \\(\\sqrt{x}\\) hai. Yahan ek nayi mushkil aati hai: Step II mein \\(\\sqrt{x+\\delta x} - \\sqrt{x}\\) bachta hai jis mein \\(\\delta x\\) square root ke andar chhupa hai, bahar factor ki tarah nahin. Ise bahar nikalne ka tareeqa hai rationalization, jo aap ne surds (jazri numbers) mein pehle parha hai: \\((\\sqrt{p}-\\sqrt{q})(\\sqrt{p}+\\sqrt{q}) = p - q\\). Bas yahi ek trick poora sawal hal kar deti hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "Find the derivative of \\(\\sqrt{x}\\) at \\(x = a\\) from first principles.",
+            "steps": [
+              "Given: \\(f(x) = \\sqrt{x}\\) (jo \\(x \\ge 0\\) ke liye defined hai).\nTo find: \\(f'(a)\\), yani \\(x = a\\) par derivative, first principles se.\nMethod: pehle chaar qadam se \\(f'(x)\\) nikalenge, phir \\(x = a\\) rakhenge. Square root wale function mein asal chaabi (key) hai numerator ko rationalize karna. Kitab ek alternate method bhi dikhati hai jis mein \\(\\lim\\limits_{x \\to a}\\frac{f(x)-f(a)}{x-a}\\) wali shakal istemal hoti hai; hum dono karenge.",
+              "Step I: \\(f(x + \\delta x)\\) nikalna\n\\[f(x+\\delta x) = \\sqrt{x+\\delta x}\\]\nKyun: \\(\\sqrt{x}\\) mein \\(x\\) ki jagah \\(x + \\delta x\\). Dhyan dein: \\(\\sqrt{x+\\delta x}\\) ko \\(\\sqrt{x} + \\sqrt{\\delta x}\\) nahin tor sakte.",
+              "Step II: tabdeeli, aur numerator ko rationalize karna\n\\[f(x+\\delta x) - f(x) = \\sqrt{x+\\delta x} - \\sqrt{x}\\]\n\\[= \\dfrac{(\\sqrt{x+\\delta x}-\\sqrt{x})(\\sqrt{x+\\delta x}+\\sqrt{x})}{\\sqrt{x+\\delta x}+\\sqrt{x}}\\]\n\\[= \\dfrac{x + \\delta x - x}{\\sqrt{x+\\delta x}+\\sqrt{x}}\\]\nyani\n\\[f(x+\\delta x) - f(x) = \\dfrac{\\delta x}{\\sqrt{x+\\delta x}+\\sqrt{x}}\\]\n\\[\\text{(1)}\\]\nKyun: oopar neeche ek hi cheez \\(\\sqrt{x+\\delta x}+\\sqrt{x}\\) se multiply kiya, to value nahin badli (jaise kisi number ko \\(\\frac{5}{5}\\) se multiply karna). Oopar \\((p-q)(p+q) = p^{2} - q^{2}\\) ka formula lagta hai, jo square roots ko khatam kar deta hai aur sirf \\(\\delta x\\) bachta hai. Yahi \\(\\delta x\\) humein agle qadam mein cancel karna hai.",
+              "Step III: (1) ki dono sides ko \\(\\delta x\\) se divide\n\\[\\dfrac{f(x+\\delta x)-f(x)}{\\delta x} = \\dfrac{\\delta x}{\\delta x(\\sqrt{x+\\delta x}+\\sqrt{x})}\\]\n\\[= \\dfrac{1}{\\sqrt{x+\\delta x}+\\sqrt{x}},\\ (\\delta x \\ne 0)\\]\nKyun: \\(\\delta x \\ne 0\\), is liye cancel ho gaya. Ghor karein: rationalize karne se pehle \\(\\delta x \\to 0\\) rakhte to \\(\\frac{0}{0}\\) aata. Ab neeche \\(\\sqrt{x} + \\sqrt{x}\\) bachega, jo zero nahin (agar \\(x > 0\\)).",
+              "Step IV: \\(\\delta x \\to 0\\) par limit\n\\[\\lim_{\\delta x \\to 0}\\dfrac{f(x+\\delta x)-f(x)}{\\delta x}\\]\n\\[= \\lim_{\\delta x \\to 0}\\left(\\dfrac{1}{\\sqrt{x+\\delta x}+\\sqrt{x}}\\right)\\]\nyani\n\\[f'(x) = \\dfrac{1}{\\sqrt{x}+\\sqrt{x}} = \\dfrac{1}{2\\sqrt{x}},\\ (x > 0)\\]\naur\n\\[f'(a) = \\dfrac{1}{2\\sqrt{a}}\\]\nKyun: \\(\\delta x \\to 0\\) par \\(\\sqrt{x+\\delta x} \\to \\sqrt{x}\\). Sharat \\(x > 0\\) is liye ke \\(x = 0\\) par neeche \\(2\\sqrt{0} = 0\\) ho jata hai aur fraction bemaani ho jata hai. Aakhir mein \\(x = a\\) rakh diya (jahan \\(a > 0\\)).",
+              "Alternate method: doosri shakal se shuru\n\\(f(x) = \\sqrt{x}\\) mein \\(x = a\\) rakhein to \\(f(a) = \\sqrt{a}\\). To\n\\[f(x) - f(a) = \\sqrt{x} - \\sqrt{a}\\]\nDefinition ki doosri shakal se:\n\\[\\dfrac{f(x)-f(a)}{x-a} = \\dfrac{\\sqrt{x}-\\sqrt{a}}{x-a}\\]\nKyun: 13.3.1 wali shakal \\(\\lim\\limits_{x \\to a}\\frac{f(x)-f(a)}{x-a}\\) seedha fixed point \\(a\\) par derivative deti hai, pehle \\(f'(x)\\) nikalne ki zaroorat nahin.",
+              "Numerator ko rationalize karna\n\\[= \\dfrac{(\\sqrt{x}-\\sqrt{a})(\\sqrt{x}+\\sqrt{a})}{(x-a)(\\sqrt{x}+\\sqrt{a})}\\]\n\\[= \\dfrac{x-a}{(x-a)(\\sqrt{x}+\\sqrt{a})}\\]\n\\[= \\dfrac{1}{\\sqrt{x}+\\sqrt{a}},\\ (x \\ne a)\\]\n\\[\\text{(2)}\\]\nKyun: \\((\\sqrt{x}-\\sqrt{a})(\\sqrt{x}+\\sqrt{a}) = x - a\\) ban jata hai, jo neeche wale \\(x - a\\) se cancel hota hai, kyun ke \\(x \\ne a\\) (\\(x\\) sirf \\(a\\) ke qareeb hai, barabar nahin).",
+              "(2) ki dono sides ki limit, \\(x \\to a\\)\n\\[\\lim_{x \\to a}\\dfrac{f(x)-f(a)}{x-a} = \\lim_{x \\to a}\\dfrac{1}{\\sqrt{x}+\\sqrt{a}}\\]\n\\[= \\dfrac{1}{\\sqrt{a}+\\sqrt{a}}\\]\nyani\n\\[f'(a) = \\dfrac{1}{2\\sqrt{a}}\\]\nYeh \\(x = a\\) par \\(f\\) ka gradient hai.\nKyun: cancel karne ke baad expression \\(x = a\\) par theek defined hai, is liye seedha \\(x = a\\) rakh sakte hain.",
+              "Tasdeeq:\n\\(a = 4\\) lein: formula se \\(f'(4) = \\frac{1}{2\\sqrt{4}} = \\frac{1}{4} = 0.25\\).\nNumbers se: \\(\\frac{\\sqrt{4.01}-\\sqrt{4}}{0.01} \\approx \\frac{2.002498 - 2}{0.01} \\approx 0.2498\\), jo \\(0.25\\) ke bilkul qareeb hai.\nAur dono tareeqon se ek hi jawab aaya, to hum mutmain hain."
+            ],
+            "answer": "\\(f'(x) = \\dfrac{1}{2\\sqrt{x}}\\) (\\(x > 0\\)), is liye \\(x = a\\) par derivative (gradient) \\(f'(a) = \\dfrac{1}{2\\sqrt{a}}\\), \\(a > 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Jab bhi difference quotient ke numerator mein square root ho, numerator ko rationalize kijiye: oopar neeche wohi root wala expression darmiyan ke ulte sign ke saath multiply karein. \\(\\delta x\\) (ya \\(x - a\\)) ko bahar nikalne ka yahi rasta hai. Examiner yeh line dekhta hai, is liye \"rationalizing the numerator\" likh bhi dein."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "Example 4 mein sharat \\(x > 0\\) (ya \\(a > 0\\)) bohat ahem hai. \\(\\sqrt{x}\\) negative \\(x\\) ke liye real number hi nahin, aur \\(x = 0\\) par \\(\\frac{1}{2\\sqrt{x}}\\) mein neeche zero aa jata hai. Graph par \\(x = 0\\) ke paas \\(y = \\sqrt{x}\\) ki curve bilkul khari (vertical) hoti jati hai, is liye wahan gradient ki koi finite value nahin. Jawab likhte waqt sharat zaroor likhiye."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab Example 5. Yahan function fraction ki shakal mein hai, \\(\\frac{1}{x^{2}}\\), aur sawal ek khaas point \\(x = -1\\) par derivative maangta hai. Tareeqa wohi chaar qadam, bas kitab \\(f\\) ki jagah \\(y\\) aur \\(\\delta y\\) likhti hai. Do fractions ka farq lena padega, is liye common denominator aur phir difference of squares, dono aap ke aazmaye hue auzaar (tools) kaam aayenge. Pehle poora \\(\\frac{dy}{dx}\\) nikalenge, aakhir mein \\(x = -1\\) rakhenge."
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "If \\(y = \\frac{1}{x^{2}}\\), then find \\(\\frac{dy}{dx}\\) at \\(x = -1\\) by ab-initio method.",
+            "steps": [
+              "Given: \\(y = \\frac{1}{x^{2}}\\), jahan \\(x \\ne 0\\).\nTo find: \\(\\frac{dy}{dx}\\) aur us ki value \\(x = -1\\) par, ab-initio (shuru se, yani definition se).\nMethod: wahi chaar qadam, bas \\(f\\) ki jagah \\(y\\) aur \\(\\delta y\\) likhenge: \\(y + \\delta y\\) likho, minus kar ke \\(\\delta y\\) nikalo, \\(\\delta x\\) se divide karo, limit lo. Fraction wale function mein chaabi hai common denominator (mushtarka nasab numa) lena.",
+              "Step I: \\(y\\) aur \\(y + \\delta y\\) likhna\n\\[y = \\dfrac{1}{x^{2}} \\quad \\text{(i)}\\]\n\\[y + \\delta y = \\dfrac{1}{(x+\\delta x)^{2}} \\quad \\text{(ii)}\\]\nKyun: jab \\(x\\) badal kar \\(x + \\delta x\\) hota hai to \\(y\\) badal kar \\(y + \\delta y\\) hota hai. Tabdeeli \\(x\\) mein ki gayi hai, is liye bracket mein \\(x + \\delta x\\) aayega (kitab yahan ghalti se \\(\\delta y\\) chhaapti hai; tafseel neeche box mein).",
+              "Step II: (ii) mein se (i) minus karna\n\\[\\delta y = \\dfrac{1}{(x+\\delta x)^{2}} - \\dfrac{1}{x^{2}}\\]\n\\[= \\dfrac{x^{2}-(x+\\delta x)^{2}}{x^{2}(x+\\delta x)^{2}}\\]\nKyun: minus karne se sirf tabdeeli \\(\\delta y\\) bachti hai. Do fractions ko minus karne ke liye common denominator \\(x^{2}(x+\\delta x)^{2}\\) lete hain, bilkul jaise \\(\\frac{1}{4} - \\frac{1}{9} = \\frac{9-4}{36}\\).",
+              "Numerator ko factorize karna (difference of squares)\n\\[x^{2}-(x+\\delta x)^{2}\\]\n\\[= \\{x + (x+\\delta x)\\}\\{x - (x+\\delta x)\\}\\]\n\\[= (2x+\\delta x)(-\\delta x)\\]\nTo\n\\[\\delta y = \\dfrac{-\\delta x(2x+\\delta x)}{x^{2}(x+\\delta x)^{2}} \\quad \\text{(iii)}\\]\nKyun: \\(p^{2} - q^{2} = (p+q)(p-q)\\), jahan \\(p = x\\) aur \\(q = x + \\delta x\\). Is se \\(\\delta x\\) ka factor bahar aa jata hai, jo humein cancel karna hai. Dhyan dein: \\(x - (x + \\delta x) = -\\delta x\\); minus bracket ke andar har term par lagta hai.",
+              "Step III: (iii) ki dono sides ko \\(\\delta x\\) se divide\n\\[\\dfrac{\\delta y}{\\delta x} = \\dfrac{-\\delta x(2x+\\delta x)}{x^{2}(x+\\delta x)^{2}\\cdot\\delta x}\\]\n\\[= \\dfrac{-(2x+\\delta x)}{x^{2}(x+\\delta x)^{2}},\\ (\\delta x \\ne 0)\\]\nKyun: \\(\\delta x \\ne 0\\), is liye oopar neeche se cancel. (Kitab yahan sharat \\((\\delta \\ne 0)\\) likhti hai; murad \\(\\delta x \\ne 0\\) hai.)",
+              "Step IV: \\(\\delta x \\to 0\\) par limit\n\\[\\lim_{\\delta x \\to 0}\\dfrac{\\delta y}{\\delta x} = \\lim_{\\delta x \\to 0}\\dfrac{-(2x+\\delta x)}{x^{2}(x+\\delta x)^{2}}\\]\n\\[= \\dfrac{-(2x)}{x^{2}(x^{2})}\\]\n(quotient theorem of limits se)\n\\[\\dfrac{dy}{dx} = \\dfrac{-2}{x^{3}}\\]\nKyun: fraction ki limit = oopar ki limit taqseem neeche ki limit, bashart-e-ke neeche ki limit (\\(x^{4}\\)) zero na ho; \\(x \\ne 0\\) hai, is liye theek. Phir \\(\\frac{-2x}{x^{4}}\\) mein ek \\(x\\) cancel kar ke \\(\\frac{-2}{x^{3}}\\).",
+              "\\(x = -1\\) par value\n\\[\\left.\\dfrac{dy}{dx}\\right|_{x=-1} = \\dfrac{-2}{(-1)^{3}}\\]\n\\[= \\dfrac{-2}{-1} = 2\\]\n\\(x = -1\\) par gradient \\(m = 2\\) hai.\nKyun: \\((-1)^{3} = -1\\), kyun ke odd (taaq) power minus sign ko qaim rakhti hai. Phir minus taqseem minus = plus.",
+              "Tasdeeq:\n\\(x = -1\\) aur \\(\\delta x = 0.01\\) le kar numbers se:\n\\[\\dfrac{\\delta y}{\\delta x} = \\dfrac{\\frac{1}{(-0.99)^{2}} - 1}{0.01}\\]\n\\[\\approx \\dfrac{1.020304 - 1}{0.01} \\approx 2.03\\]\njo \\(2\\) ke qareeb hai. Graph se bhi samajh aata hai: \\(x = -2\\) se \\(0\\) ki taraf chalein to \\(y = \\frac{1}{x^{2}}\\) ooper charhta hai (\\(\\frac{1}{4}\\) se \\(1\\) tak), is liye \\(x = -1\\) par gradient positive hona chahiye."
+            ],
+            "answer": "\\(\\dfrac{dy}{dx} = \\dfrac{-2}{x^{3}}\\) aur \\(\\left.\\dfrac{dy}{dx}\\right|_{x=-1} = 2\\): \\(x = -1\\) par gradient \\(m = 2\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 5 mein kitab (ii) ko \\(y + \\delta y = \\frac{1}{(x+\\delta y)^{2}}\\) chhaapti hai. Sahi \\(y + \\delta y = \\frac{1}{(x+\\delta x)^{2}}\\) hai: \\(y\\) is liye badla ke \\(x\\) badla, to naya input \\(x + \\delta x\\) hai. Kitab ki agli line khud \\((x+\\delta x)^{2}\\) istemal karti hai.\n\\(\\delta x\\) se divide karne ke baad sharat \\((\\delta \\ne 0)\\) chhapi hai; sahi \\((\\delta x \\ne 0)\\) hai. Jawab \\(\\frac{dy}{dx} = \\frac{-2}{x^{3}}\\) aur \\(m = 2\\) sahi hain."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Kitab ka note: \\(x = -1\\) par \\(\\frac{dy}{dx}\\) ki value ko \\(\\left.\\frac{dy}{dx}\\right|_{x=-1}\\) likhte hain. Yeh khari line (vertical bar) ka matlab hai \"is value par\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Example 5 ka nateeja dekhein: \\(\\frac{dy}{dx} = \\frac{-2}{x^{3}}\\). Ab \\(x = 1\\) par value \\(\\frac{-2}{1} = -2\\) hai, aur \\(x = -1\\) par \\(2\\). Graph \\(y = \\frac{1}{x^{2}}\\) y-axis ke dono taraf aaina (mirror) jaisa hai: baayen taraf charhai hai, daayen taraf bilkul utni hi utraai. Is liye gradient ek jagah \\(+2\\) aur doosri jagah \\(-2\\). Formula aur graph dono ek hi kahani suna rahe hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Chaar qadmon se \\(y = \\frac{1}{x}\\) ka derivative nikaliye, phir \\(x = 2\\) par value.\nHal ka ishara: \\(\\delta y = \\frac{1}{x+\\delta x} - \\frac{1}{x} = \\frac{-\\delta x}{x(x+\\delta x)}\\). \\(\\delta x\\) se divide aur limit: \\(\\frac{dy}{dx} = \\frac{-1}{x^{2}}\\), aur \\(x = 2\\) par \\(-\\frac{1}{4}\\).\nKyun negative? \\(y = \\frac{1}{x}\\) mein \\(x\\) barhe to \\(y\\) ghat-ta hai (jaise 1 roti ko zyada logon mein baantein to har ek ka hissa kam), is liye slope manfi (negative) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "\"By definition\" wale sawal ka jawab exam mein is tarteeb se likhiye, taa ke har qadam ke number mil sakein:\n1. Sab se pehle function likhiye: \"Let \\(y = f(x) = \\ldots\\)\".\n2. Step I mein \\(f(x+\\delta x)\\) ya \\(y + \\delta y\\) likhiye; bracket na bhooliye.\n3. Step II mein minus kar ke simplify kijiye, aur saaf dikhaiye ke \\(\\delta x\\) ka factor kaise bahar aaya (expand, rationalize ya common denominator).\n4. Step III mein \\(\\delta x\\) se divide kar ke cancel kijiye, aur saath \\((\\delta x \\ne 0)\\) likhiye; yeh chhoti si sharat examiner ko batati hai ke aap jaante hain cancel karna kyun jaaiz hai.\n5. Step IV mein \"\\(\\lim\\limits_{\\delta x \\to 0}\\)\" likh kar limit lijiye aur aakhir mein jawab ko box kar dijiye: \"\\(f'(x) = \\ldots\\)\".\nAgar kisi point par value maangi ho to aakhri line mein \\(\\left.\\frac{dy}{dx}\\right|_{x=a}\\) likh kar number nikaliye. Yaad rakhiye, aksar ek hi line chhorne par poore sawal ke number kat jaate hain, is liye koi qadam zabani na kijiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Chaar qadam: \\(f(x+\\delta x)\\); \\(f(x+\\delta x)-f(x)\\); \\(\\delta x\\) se divide aur simplify; \\(\\delta x \\to 0\\) par limit.\n2. Is ka naam: differentiation by definition (ab-initio, first principles).\n3. \\(\\delta x\\) simplify karne ke baad cancel karo; limit sab se aakhir mein.\n4. Natije: \\(\\frac{d}{dx}(c) = 0\\), \\(\\frac{d}{dx}(x^{2}) = 2x\\), \\(\\frac{d}{dx}(\\sqrt{x}) = \\frac{1}{2\\sqrt{x}}\\) (\\(x > 0\\)), \\(\\frac{d}{dx}\\left(\\frac{1}{x^{2}}\\right) = \\frac{-2}{x^{3}}\\).\n5. Kisi point par derivative: pehle \\(f'(x)\\), phir value rakho; likhte hain \\(\\left.\\frac{dy}{dx}\\right|_{x=a}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(f(x + \\delta x) = f(x) + \\delta x\\) likh dena. \\(f(x) = x^{2}\\) ho to \\(f(x+\\delta x) = (x+\\delta x)^{2}\\) hai, \\(x^{2} + \\delta x\\) nahin.\n2. Darmiyani term bhool jana: \\((x+\\delta x)^{2} = x^{2} + 2x\\,\\delta x + (\\delta x)^{2}\\), sirf \\(x^{2} + (\\delta x)^{2}\\) nahin.\n3. Fractions mein sign ki ghalti: \\(\\frac{1}{(x+\\delta x)^{2}} - \\frac{1}{x^{2}}\\) ka numerator \\(x^{2} - (x+\\delta x)^{2}\\) hai, ulta nahin.\n4. \\(\\sqrt{x+\\delta x}\\) ko \\(\\sqrt{x} + \\sqrt{\\delta x}\\) likh dena. Square root jama par is tarah nahin batta.\n5. Sawal \"by definition\" kahe aur aap shortcut rule laga dein: number nahin milenge, chaar qadam dikhane zaroori hain."
+          }
+        ]
+      }
+    }
+  ]
+}

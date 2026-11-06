@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-3-Q8",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-3-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 263,
+          "pdf_to": 263,
+          "note": "Exercise 13.3, Question 8 (a)-(c): minimum cost radius, minimum cost and C'(4) for C(r) = 8000 pi r^2 + 150000/r (book p.258). Key (PDF 311) prints it as number 14; (b) and (c) values corrected."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(a)",
+            "prompt": "8 (a) The cost \\(C(r)\\) to construct a cylindrical tank depends on the radius of the base, and is given by \\(C(r) = 8000\\pi r^2 + \\dfrac{150000}{r}\\), where the first term represents the cost of the base and the second term represents the cost of the walls. Find the radius that minimizes the construction cost.",
+            "explanation": "A minimum question.\nWe must find \\(r\\) that makes \\(C(r)\\) smallest.\nPlan: find \\(C'(r)\\), set it to 0, solve for \\(r\\), check the sign of \\(C'\\).",
+            "steps": [
+              "Given: \\(C(r) = 8000\\pi r^2 + 150000r^{-1}\\), \\(r > 0\\).\nTo find: the radius of minimum cost.\nMethod: At a lowest point the slope is zero: \\(C'(r) = 0\\); confirm with the sign of \\(C'\\).",
+              "Differentiate\n\\[C'(r) = 16000\\pi r - \\dfrac{150000}{r^2}\\]\nWhy: Power rule: \\(8000\\pi \\cdot 2r\\) and \\(150000 \\cdot (-1)r^{-2}\\).",
+              "Solve \\(C'(r) = 0\\)\n\\[16000\\pi r^3 = 150000\\]\n\\[r^3 = \\dfrac{150000}{16000\\pi} = \\dfrac{75}{8\\pi} \\approx 2.984\\]\n\\[r \\approx 1.44\\ \\text{m}\\]\nWhy: Multiply both sides by \\(r^2\\); then take the cube root.",
+              "Confirm a minimum\n\\[C'(1) \\approx -99735 < 0\\]\n\\[C'(2) \\approx 63031 > 0\\]\nWhy: The cost falls before \\(r \\approx 1.44\\) and rises after it, so this is a minimum."
+            ],
+            "final_answer": "\\(r = \\sqrt[3]{\\frac{75}{8\\pi}} \\approx 1.44\\ \\text{m}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(b)",
+            "prompt": "8 (b) The cost \\(C(r)\\) to construct a cylindrical tank depends on the radius of the base, and is given by \\(C(r) = 8000\\pi r^2 + \\dfrac{150000}{r}\\), where the first term represents the cost of the base and the second term represents the cost of the walls. Calculate the minimum cost.",
+            "explanation": "We must find \\(C\\) at the minimising radius.\nPlan: use the condition from part (a) to simplify \\(C\\), then substitute \\(r \\approx 1.4397\\).",
+            "steps": [
+              "Given: \\(C(r) = 8000\\pi r^2 + \\dfrac{150000}{r}\\); at the minimum \\(16000\\pi r^3 = 150000\\).\nTo find: \\(C_{\\min}\\).\nMethod: Substitute the exact radius; use enough decimal places, since rounding \\(r\\) changes the answer.",
+              "Simplify with the condition\n\\[8000\\pi r^2 = \\dfrac{8000\\pi r^3}{r} = \\dfrac{75000}{r}\\]\n\\[C_{\\min} = \\dfrac{75000}{r} + \\dfrac{150000}{r} = \\dfrac{225000}{r}\\]\nWhy: From part (a), \\(8000\\pi r^3 = 75000\\) (half of 150000).",
+              "Substitute \\(r \\approx 1.43971\\)\n\\[C_{\\min} \\approx \\dfrac{225000}{1.43971} \\approx 156281.9\\]\nWhy: Term by term: base \\(\\approx 52094\\), walls \\(\\approx 104188\\)."
+            ],
+            "final_answer": "Minimum cost \\(\\approx\\) Rs. 156,281.9"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key gives the minimum cost as Rs. 156250.57. This is not accurate: with \\(r = \\sqrt[3]{75/(8\\pi)} \\approx 1.4397\\) m the minimum cost is about Rs. 156,281.9 (even \\(r = 1.44\\) gives Rs. 156,281.9; only \\(\\pi \\approx 3.14\\) with \\(r = 1.44\\) gives about Rs. 156,255). The key's figure comes from rounding."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(c)",
+            "prompt": "8 (c) The cost \\(C(r)\\) to construct a cylindrical tank depends on the radius of the base, and is given by \\(C(r) = 8000\\pi r^2 + \\dfrac{150000}{r}\\), where the first term represents the cost of the base and the second term represents the cost of the walls. Determine the rate of change of the cost at \\(r = 4\\) meters.",
+            "explanation": "A rate-of-change question.\nWe must find \\(C'(4)\\).\nPlan: substitute \\(r = 4\\) into \\(C'(r)\\) from part (a).",
+            "steps": [
+              "Given: \\(C'(r) = 16000\\pi r - \\dfrac{150000}{r^2}\\).\nTo find: \\(C'(4)\\).\nMethod: Substitute \\(r = 4\\).",
+              "Substitute \\(r = 4\\)\n\\[C'(4) = 64000\\pi - \\dfrac{150000}{16}\\]\n\\[\\approx 201061.93 - 9375 = 191686.93\\]\nWhy: \\(16000 \\times 4 = 64000\\), \\(4^2 = 16\\). Positive: at \\(r = 4\\) m the cost rises by about Rs. 191,687 per metre of radius."
+            ],
+            "final_answer": "\\(C'(4) = 64000\\pi - 9375 \\approx 191686.9\\) rupees per metre"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key numbers the answers of Exercise 13.3 as 4, 5, 6, 8, 11, 12, 13, 14 instead of 1 to 8. The answer to this question is printed under number 14: (a) \\(r = 1.44\\) m (correct), (b) Rs. 156250.57 (see the correction above), (c) 191686.6 units/m. The value for (c) should be \\(64000\\pi - 9375 \\approx 191686.9\\) (rupees per metre); the key's 191686.6 is a small rounding error."
+          }
+        ]
+      }
+    }
+  ]
+}

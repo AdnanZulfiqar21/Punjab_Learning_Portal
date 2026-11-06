@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-3-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-3-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 263,
+          "pdf_to": 263,
+          "note": "Exercise 13.3, Question 6 (a)-(c): velocity, acceleration and time of maximum velocity for x(t) = 30t^2 - 4t^3 (book p.258). Answer key (PDF 311) prints it as number 12."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(a)",
+            "prompt": "6 (a) The position of a car traveling along a straight highway is given by \\(x(t) = 30t^2 - 4t^3\\), where \\(x(t)\\) is the distance traveled in kilometers and \\(t\\) is the time in hours. Find the car's velocity at \\(t = 3\\) hours.",
+            "explanation": "Velocity is the derivative of position.\nWe must find \\(v(3)\\).\nPlan: differentiate \\(x(t)\\), substitute \\(t = 3\\).",
+            "steps": [
+              "Given: \\(x(t) = 30t^2 - 4t^3\\) (km, hours).\nTo find: \\(v(3)\\).\nMethod: \\(v(t) = x'(t)\\).",
+              "Differentiate\n\\[v(t) = 60t - 12t^2\\]\nWhy: Power rule: \\(30 \\cdot 2t = 60t\\), \\(4 \\cdot 3t^2 = 12t^2\\).",
+              "Substitute \\(t = 3\\)\n\\[v(3) = 180 - 108 = 72\\]\nWhy: \\(12 \\times 9 = 108\\). Units: km per hour.",
+              "Check\n\\[\\frac{x(3.001) - x(2.999)}{0.002} \\approx 72.0\\]\nWhy: The average velocity over a tiny interval agrees."
+            ],
+            "final_answer": "\\(v(3) = 72\\ \\text{km/h}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(b)",
+            "prompt": "6 (b) The position of a car traveling along a straight highway is given by \\(x(t) = 30t^2 - 4t^3\\), where \\(x(t)\\) is the distance traveled in kilometers and \\(t\\) is the time in hours. Determine the car's acceleration at \\(t = 3\\) hours.",
+            "explanation": "Acceleration is the derivative of velocity.\nWe must find \\(a(3)\\).\nPlan: differentiate \\(v(t)\\), substitute \\(t = 3\\).",
+            "steps": [
+              "Given: \\(v(t) = 60t - 12t^2\\) (part (a)).\nTo find: \\(a(3)\\).\nMethod: \\(a(t) = v'(t)\\).",
+              "Differentiate the velocity\n\\[a(t) = 60 - 24t\\]\nWhy: Power rule.",
+              "Substitute \\(t = 3\\)\n\\[a(3) = 60 - 72 = -12\\]\nWhy: A negative acceleration means the car is slowing down at \\(t = 3\\)."
+            ],
+            "final_answer": "\\(a(3) = -12\\ \\text{km/h}^2\\) (the car is slowing down)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(c)",
+            "prompt": "6 (c) The position of a car traveling along a straight highway is given by \\(x(t) = 30t^2 - 4t^3\\), where \\(x(t)\\) is the distance traveled in kilometers and \\(t\\) is the time in hours. After how many hours does the car reach its maximum velocity?",
+            "explanation": "A maximum question for the velocity.\nWe must find when \\(v(t)\\) is greatest.\nPlan: set \\(v'(t) = a(t) = 0\\) and check the sign of \\(a(t)\\).",
+            "steps": [
+              "Given: \\(v(t) = 60t - 12t^2\\), \\(a(t) = 60 - 24t\\).\nTo find: the time of maximum velocity.\nMethod: At the maximum of \\(v\\), its rate of change \\(a(t)\\) is zero.",
+              "Solve \\(a(t) = 0\\)\n\\[60 - 24t = 0\\]\n\\[t = \\dfrac{60}{24} = 2.5\\]\nWhy: The highest point of the velocity graph has slope zero.",
+              "Confirm a maximum\n\\[t < 2.5:\\ a(t) > 0\\]\n\\[t > 2.5:\\ a(t) < 0\\]\nWhy: The car speeds up before 2.5 h and slows down after it.",
+              "Maximum velocity\n\\[v(2.5) = 150 - 75 = 75\\ \\text{km/h}\\]\nWhy: \\(60 \\times 2.5 = 150\\), \\(12 \\times 6.25 = 75\\); this is more than \\(v(3) = 72\\), as expected."
+            ],
+            "final_answer": "After \\(t = 2.5\\) hours (maximum velocity \\(75\\ \\text{km/h}\\))"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key numbers the answers of Exercise 13.3 as 4, 5, 6, 8, 11, 12, 13, 14 instead of 1 to 8. The answer to this question is printed under number 12: (a) 72 km/h, (b) \\(-12\\) km/h\\(^2\\), (c) 2.5 hrs, all correct."
+          }
+        ]
+      }
+    }
+  ]
+}
