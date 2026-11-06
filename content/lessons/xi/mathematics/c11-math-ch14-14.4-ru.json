@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-14.4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/14.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 289,
+          "pdf_to": 289,
+          "note": "Book p. 284: heading 14.4 Scalar Triple Product, printed with no text of its own before 14.4.1. Page content (overview, road map, revision of dot and cross product and determinants) is ours."
+        }
+      ],
+      "title": "14.4 Scalar Triple Product (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH14-14.4",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Assalam-o-alaikum bachon! Aaj hum Unit 14 ke aakhri hisse, 14.4 Scalar Triple Product, mein dakhil ho rahe hain. Yeh is kitab ka bhi aakhri topic hai, is liye thori himmat aur, phir poori kitab mukammal! Kitab is heading ke foran baad 14.4.1 shuru kar deti hai, yahan apni taraf se kuch nahin likhti. Is liye yeh poora page hamari taraf se ek tayyari (introduction) hai: hum dekhenge ke aage kya aa raha hai aur us ke liye pichli kaun si cheezein zehan mein taaza honi chahiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Zara pichhe mud kar dekhiye. 14.2 mein humne do vectors ko dot product se multiply kiya to jawab ek number (scalar) aaya. 14.3 mein do vectors ka cross product liya to jawab ek vector aaya jo dono par perpendicular (amood, 90 degree par khara) tha. Ab 14.4 mein hum in dono ko jor dete hain: teen vectors \\(\\underline{u}, \\underline{v}, \\underline{w}\\) lijiye, pehle \\(\\underline{v}\\times \\underline{w}\\) nikaliye (yeh vector hai), phir us ka \\(\\underline{u}\\) ke saath dot product lijiye. Aakhir mein jo milta hai woh sirf ek number hai, isi liye is ko scalar triple product kehte hain: \"triple\" kyun ke teen vectors hain, aur \"scalar\" kyun ke jawab number hai.\nYeh seekhna kyun zaroori hai? Yeh ek number do bare kaam ke sawalon ka jawab deta hai. Pehla: teen vectors par bana hua dabba (parallelepiped, yani tirchha brick) ya tetrahedron (teen-konay wala pyramid) kitni jagah gherta hai, yani us ka volume (hajm) kitna hai. Doosra: kya teen vectors (ya chaar points) ek hi plane (sateh, jaise mez ki upper sateh) mein parre hain ya nahin. Engineering, physics aur computer graphics mein yeh dono sawal baar baar aate hain."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Part of 14.4",
+              "What you will learn"
+            ],
+            "rows": [
+              [
+                "14.4.1 Scalar Triple Product of Vectors",
+                "the definition \\(\\underline{u}\\cdot(\\underline{v}\\times \\underline{w})\\) and the notation \\([\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\)"
+              ],
+              [
+                "14.4.2 The Volume of the Parallelepiped",
+                "why \\((\\underline{u}\\times \\underline{v})\\cdot \\underline{w}\\) is the volume of the box with edges \\(\\underline{u}, \\underline{v}, \\underline{w}\\)"
+              ],
+              [
+                "14.4.3 The Volume of the Tetrahedron",
+                "the volume of a tetrahedron is \\(\\frac{1}{6}[\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\)"
+              ],
+              [
+                "14.4.4 Scalar Triple Product of Vectors in Terms of Components",
+                "the determinant formula; Examples 23-26"
+              ],
+              [
+                "14.4.5 Coplanar Vectors and Condition for Coplanarity of Three Vectors",
+                "three vectors lie in one plane exactly when \\([\\underline{u}\\ \\underline{v}\\ \\underline{w}] = 0\\); Examples 27-28"
+              ],
+              [
+                "14.4.6 Applications of Vectors in Real World",
+                "torque, the magnitude of a force, total revenue; Examples 29-31"
+              ]
+            ],
+            "caption": "Our road map of 14.4 (not in the book)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Upar wali table ko ek naqsha samajhiye. Pehle definition aayegi (14.4.1), phir us ka geometric matlab, yani volume (14.4.2 aur 14.4.3). Phir components ki madad se ise determinant ke zariye aasani se nikalna seekhenge (14.4.4); asal calculation wahin hogi. Phir coplanarity (ek plane mein hona) ka test (14.4.5), aur aakhir mein rozmarra zindagi ke kuch sawal (14.4.6). Har hissa pichle par khara hai, is liye tarteeb se parhiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Remember",
+            "text": "Aage barhne se pehle yeh teen auzaar (tools) taaza kar lijiye, kyun ke poora 14.4 inhi par chalta hai:\n1. Dot product (14.2): agar \\(\\underline{u} = a_1\\underline{i} + b_1\\underline{j} + c_1\\underline{k}\\) aur \\(\\underline{v} = a_2\\underline{i} + b_2\\underline{j} + c_2\\underline{k}\\) hon to \\(\\underline{u}\\cdot \\underline{v} = a_1a_2 + b_1b_2 + c_1c_2\\). Yani milte julte components ko zarb do aur jama kar do; jawab number hai. Saath hi \\(\\underline{u}\\cdot \\underline{v} = |\\underline{u}||\\underline{v}|\\cos\\theta\\), aur agar \\(\\underline{u} \\perp \\underline{v}\\) (perpendicular) hon to \\(\\underline{u}\\cdot \\underline{v} = 0\\), kyun ke \\(\\cos 90^{\\circ} = 0\\).\n2. Cross product (14.3): \\(\\underline{v}\\times \\underline{w}\\) ek vector hai jo \\(\\underline{v}\\) aur \\(\\underline{w}\\) dono par perpendicular hota hai, aur us ki lambai \\(|\\underline{v}\\times \\underline{w}|\\) us parallelogram ka area hai jis ki do saath wali sides \\(\\underline{v}\\) aur \\(\\underline{w}\\) hon. Ise determinant formula se nikalte hain.\n3. \\(3\\times 3\\) determinant: pehli row ke saath expand karte hain aur signs ki tarteeb \\(+, -, +\\) hoti hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}\\begin{vmatrix} p_1 & q_1 & r_1 \\\\ p_2 & q_2 & r_2 \\\\ p_3 & q_3 & r_3 \\end{vmatrix} &= p_1(q_2r_3 - q_3r_2) \\\\ &\\quad - q_1(p_2r_3 - p_3r_2) \\\\ &\\quad + r_1(p_2q_3 - p_3q_2)\\end{aligned}",
+            "text_alt": "The 3 by 3 determinant with rows p1 q1 r1, p2 q2 r2, p3 q3 r3 equals p1 times (q2 r3 minus q3 r2), minus q1 times (p2 r3 minus p3 r2), plus r1 times (p2 q3 minus p3 q2)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Is formula ko ratne ki zaroorat nahin, tareeqa yaad rakhiye: pehli row ka har element lijiye, us ki row aur column ko dimagh mein kaat dijiye, jo \\(2\\times 2\\) bachta hai us ki value (cross multiply kar ke minus) nikaliye, aur signs \\(+, -, +\\) lagaiye. Beech wale element ke saath minus sab se zyada bhoola jata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Determinant ki thori practice kar lete hain (yeh hamara sawal hai, kitab ka nahin):\n\\[\\begin{vmatrix} 2 & 1 & 0 \\\\ 0 & 3 & 1 \\\\ 1 & 0 & 4 \\end{vmatrix}\\]\nPehla element 2: bacha hua \\(2\\times 2\\) hai \\(3\\cdot 4 - 1\\cdot 0 = 12\\), to \\(+2(12) = 24\\).\nDoosra element 1 (sign minus): bacha hua hai \\(0\\cdot 4 - 1\\cdot 1 = -1\\), to \\(-1(-1) = +1\\).\nTeesra element 0: \\(+0(\\dots) = 0\\).\nJawab: \\(24 + 1 + 0 = 25\\). Dekha, minus aur minus mil kar plus ban gaye; isi liye har step par sign dhyan se likhiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Agar \\(\\underline{u}\\cdot \\underline{v}\\) ek number hai aur \\(\\underline{w}\\) ek vector, to kya \\((\\underline{u}\\cdot \\underline{v})\\times \\underline{w}\\) ka koi matlab hai? Ruk kar sochiye, phir aage parhiye.\nJawab: nahin! Cross product sirf do vectors ka hota hai, number aur vector ka nahin. Isi liye scalar triple product mein hamesha pehle cross product aur phir dot product hota hai. Yeh baat 14.4.1 mein phir aayegi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Triple product teen vectors ko jorta hai; scalar triple product \\(\\underline{u}\\cdot(\\underline{v}\\times \\underline{w})\\) ka jawab ek number hota hai.\n2. Yeh number teen vectors par bane parallelepiped aur tetrahedron ka volume batata hai.\n3. Teen vectors coplanar (ek plane mein) hon to yeh number zero hota hai, aur zero ho to woh coplanar hote hain.\n4. Is ke liye sirf teen cheezein chahiye: dot product, cross product aur \\(3\\times 3\\) determinant.\n5. Determinant ki pehli row par signs \\(+, -, +\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Yeh samajhna ke teen vectors ka product zaroor vector hoga. Scalar triple product ka jawab number hai; naam hi \"scalar\" hai.\n2. Determinant mein beech wale term ka minus bhool jana. Bachne ka tareeqa: expansion shuru karne se pehle \\(+\\;-\\;+\\) likh lijiye.\n3. \\(\\underline{u}\\cdot \\underline{v}\\) (number) aur \\(\\underline{u}\\times \\underline{v}\\) (vector) ko aapas mein mila dena. Agar yeh farq abhi saaf nahin to 14.2 aur 14.3 ek dafa dohra lijiye; aage sab kuch inhi par khara hai."
+          }
+        ]
+      }
+    }
+  ]
+}

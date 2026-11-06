@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-3-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-3-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 287,
+          "pdf_to": 287,
+          "note": "Exercise 14.3, Question 1 (i)-(iv): a x b and b x a by the determinant formula, checked by dot products (book p.282). Answer key PDF 312."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Compute the cross product \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\). Check your answer by showing that each \\(\\underline{a}\\) and \\(\\underline{b}\\) are perpendicular to \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\). \\(\\underline{a} = 2\\underline{i} + \\underline{j} - \\underline{k}\\), \\(\\underline{b} = \\underline{i} - \\underline{j} + \\underline{k}\\).",
+            "explanation": "A cross-product computation.\nWe must find \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\) and check them.\nPlan: determinant for \\(\\underline{a} \\times \\underline{b}\\), change all signs for \\(\\underline{b} \\times \\underline{a}\\), then two dot products.",
+            "steps": [
+              "Given: \\(\\underline{a} = 2\\underline{i} + \\underline{j} - \\underline{k}\\), \\(\\underline{b} = \\underline{i} - \\underline{j} + \\underline{k}\\).\nTo find: \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\), then check perpendicularity.\nMethod: The determinant formula of 14.3.5 gives \\(\\underline{a} \\times \\underline{b}\\) from the components; \\(\\underline{b} \\times \\underline{a} = -(\\underline{a} \\times \\underline{b})\\); a dot product of 0 shows perpendicularity.",
+              "Write the determinant\n\\[\\underline{a} \\times \\underline{b} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 2 & 1 & -1 \\\\ 1 & -1 & 1 \\end{vmatrix}\\]\nWhy: Row 1 holds the unit vectors, row 2 the components of the first vector \\(\\underline{a}\\), row 3 those of the second \\(\\underline{b}\\). The order of the rows follows the order of the product.",
+              "Work out the three minors\n\\[\\underline{i}\\text{ minor} = (1)(1) - (-1)(-1) = 0\\]\n\\[\\underline{j}\\text{ minor} = (2)(1) - (-1)(1) = 3\\]\n\\[\\underline{k}\\text{ minor} = (2)(-1) - (1)(1) = -3\\]\nWhy: For each unit vector cover its row and column; the minor is (top-left)(bottom-right) minus (top-right)(bottom-left).",
+              "Attach the signs \\(+, -, +\\)\n\\[\\underline{a} \\times \\underline{b} = \\underline{i}(0) - \\underline{j}(3) + \\underline{k}(-3)\\]\n\\[= -3\\underline{j} - 3\\underline{k}\\]\nWhy: Expanding a determinant along row 1 uses the sign pattern \\(+, -, +\\); the middle (\\(\\underline{j}\\)) term is subtracted.",
+              "Find \\(\\underline{b} \\times \\underline{a}\\)\n\\[\\underline{b} \\times \\underline{a} = -(\\underline{a} \\times \\underline{b})\\]\n\\[= 3\\underline{j} + 3\\underline{k}\\]\nWhy: Swapping the two vectors swaps rows 2 and 3 of the determinant, and swapping two rows changes the sign. So the cross product is not commutative: \\(\\underline{b} \\times \\underline{a} = -(\\underline{a} \\times \\underline{b})\\).",
+              "Check: \\(\\underline{a}\\) and \\(\\underline{b}\\) are perpendicular to \\(\\underline{a} \\times \\underline{b}\\)\n\\[\\underline{a} \\cdot (\\underline{a} \\times \\underline{b}) = (2)(0) + (1)(-3) + (-1)(-3)\\]\n\\[= 0 - 3 + 3 = 0\\]\n\\[\\underline{b} \\cdot (\\underline{a} \\times \\underline{b}) = (1)(0) + (-1)(-3) + (1)(-3)\\]\n\\[= 0 + 3 - 3 = 0\\]\nWhy: Two non-zero vectors are perpendicular exactly when their dot product is 0. Both are 0, so the cross product is correct.",
+              "Check with \\(\\underline{b} \\times \\underline{a}\\)\n\\[\\underline{a} \\cdot (\\underline{b} \\times \\underline{a}) = -\\,\\underline{a} \\cdot (\\underline{a} \\times \\underline{b}) = 0\\]\n\\[\\underline{b} \\cdot (\\underline{b} \\times \\underline{a}) = -\\,\\underline{b} \\cdot (\\underline{a} \\times \\underline{b}) = 0\\]\nWhy: \\(\\underline{b} \\times \\underline{a}\\) is just \\(-(\\underline{a} \\times \\underline{b})\\); a minus sign does not change a zero dot product. So both vectors are perpendicular to \\(\\underline{b} \\times \\underline{a}\\) as well."
+            ],
+            "final_answer": "\\(\\underline{a} \\times \\underline{b} = -3\\underline{j} - 3\\underline{k}\\), \\(\\underline{b} \\times \\underline{a} = 3\\underline{j} + 3\\underline{k}\\); both dot products are 0, so \\(\\underline{a}\\) and \\(\\underline{b}\\) are perpendicular to both."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Compute the cross product \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\). Check your answer by showing that each \\(\\underline{a}\\) and \\(\\underline{b}\\) are perpendicular to \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\). \\(\\underline{a} = \\underline{i} + 3\\underline{j} + 2\\underline{k}\\), \\(\\underline{b} = 2\\underline{i} - \\underline{j} + \\underline{k}\\).",
+            "explanation": "A cross-product computation.\nWe must find \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\) and check them.\nPlan: determinant for \\(\\underline{a} \\times \\underline{b}\\), change all signs for \\(\\underline{b} \\times \\underline{a}\\), then two dot products.",
+            "steps": [
+              "Given: \\(\\underline{a} = \\underline{i} + 3\\underline{j} + 2\\underline{k}\\), \\(\\underline{b} = 2\\underline{i} - \\underline{j} + \\underline{k}\\).\nTo find: \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\), then check perpendicularity.\nMethod: The determinant formula of 14.3.5 gives \\(\\underline{a} \\times \\underline{b}\\) from the components; \\(\\underline{b} \\times \\underline{a} = -(\\underline{a} \\times \\underline{b})\\); a dot product of 0 shows perpendicularity.",
+              "Write the determinant\n\\[\\underline{a} \\times \\underline{b} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 1 & 3 & 2 \\\\ 2 & -1 & 1 \\end{vmatrix}\\]\nWhy: Row 1 holds the unit vectors, row 2 the components of the first vector \\(\\underline{a}\\), row 3 those of the second \\(\\underline{b}\\). The order of the rows follows the order of the product.",
+              "Work out the three minors\n\\[\\underline{i}\\text{ minor} = (3)(1) - (2)(-1) = 5\\]\n\\[\\underline{j}\\text{ minor} = (1)(1) - (2)(2) = -3\\]\n\\[\\underline{k}\\text{ minor} = (1)(-1) - (3)(2) = -7\\]\nWhy: For each unit vector cover its row and column; the minor is (top-left)(bottom-right) minus (top-right)(bottom-left).",
+              "Attach the signs \\(+, -, +\\)\n\\[\\underline{a} \\times \\underline{b} = \\underline{i}(5) - \\underline{j}(-3) + \\underline{k}(-7)\\]\n\\[= 5\\underline{i} + 3\\underline{j} - 7\\underline{k}\\]\nWhy: Expanding a determinant along row 1 uses the sign pattern \\(+, -, +\\); the middle (\\(\\underline{j}\\)) term is subtracted.",
+              "Find \\(\\underline{b} \\times \\underline{a}\\)\n\\[\\underline{b} \\times \\underline{a} = -(\\underline{a} \\times \\underline{b})\\]\n\\[= -5\\underline{i} - 3\\underline{j} + 7\\underline{k}\\]\nWhy: Swapping the two vectors swaps rows 2 and 3 of the determinant, and swapping two rows changes the sign. So the cross product is not commutative: \\(\\underline{b} \\times \\underline{a} = -(\\underline{a} \\times \\underline{b})\\).",
+              "Check: \\(\\underline{a}\\) and \\(\\underline{b}\\) are perpendicular to \\(\\underline{a} \\times \\underline{b}\\)\n\\[\\underline{a} \\cdot (\\underline{a} \\times \\underline{b}) = (1)(5) + (3)(3) + (2)(-7)\\]\n\\[= 5 + 9 - 14 = 0\\]\n\\[\\underline{b} \\cdot (\\underline{a} \\times \\underline{b}) = (2)(5) + (-1)(3) + (1)(-7)\\]\n\\[= 10 - 3 - 7 = 0\\]\nWhy: Two non-zero vectors are perpendicular exactly when their dot product is 0. Both are 0, so the cross product is correct.",
+              "Check with \\(\\underline{b} \\times \\underline{a}\\)\n\\[\\underline{a} \\cdot (\\underline{b} \\times \\underline{a}) = -\\,\\underline{a} \\cdot (\\underline{a} \\times \\underline{b}) = 0\\]\n\\[\\underline{b} \\cdot (\\underline{b} \\times \\underline{a}) = -\\,\\underline{b} \\cdot (\\underline{a} \\times \\underline{b}) = 0\\]\nWhy: \\(\\underline{b} \\times \\underline{a}\\) is just \\(-(\\underline{a} \\times \\underline{b})\\); a minus sign does not change a zero dot product. So both vectors are perpendicular to \\(\\underline{b} \\times \\underline{a}\\) as well."
+            ],
+            "final_answer": "\\(\\underline{a} \\times \\underline{b} = 5\\underline{i} + 3\\underline{j} - 7\\underline{k}\\), \\(\\underline{b} \\times \\underline{a} = -5\\underline{i} - 3\\underline{j} + 7\\underline{k}\\); both dot products are 0, so \\(\\underline{a}\\) and \\(\\underline{b}\\) are perpendicular to both."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Compute the cross product \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\). Check your answer by showing that each \\(\\underline{a}\\) and \\(\\underline{b}\\) are perpendicular to \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\). \\(\\underline{a} = 2\\underline{i} - 2\\underline{j} + \\underline{k}\\), \\(\\underline{b} = -\\underline{i} + \\underline{j} + 3\\underline{k}\\).",
+            "explanation": "A cross-product computation.\nWe must find \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\) and check them.\nPlan: determinant for \\(\\underline{a} \\times \\underline{b}\\), change all signs for \\(\\underline{b} \\times \\underline{a}\\), then two dot products.",
+            "steps": [
+              "Given: \\(\\underline{a} = 2\\underline{i} - 2\\underline{j} + \\underline{k}\\), \\(\\underline{b} = -\\underline{i} + \\underline{j} + 3\\underline{k}\\).\nTo find: \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\), then check perpendicularity.\nMethod: The determinant formula of 14.3.5 gives \\(\\underline{a} \\times \\underline{b}\\) from the components; \\(\\underline{b} \\times \\underline{a} = -(\\underline{a} \\times \\underline{b})\\); a dot product of 0 shows perpendicularity.",
+              "Write the determinant\n\\[\\underline{a} \\times \\underline{b} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 2 & -2 & 1 \\\\ -1 & 1 & 3 \\end{vmatrix}\\]\nWhy: Row 1 holds the unit vectors, row 2 the components of the first vector \\(\\underline{a}\\), row 3 those of the second \\(\\underline{b}\\). The order of the rows follows the order of the product.",
+              "Work out the three minors\n\\[\\underline{i}\\text{ minor} = (-2)(3) - (1)(1) = -7\\]\n\\[\\underline{j}\\text{ minor} = (2)(3) - (1)(-1) = 7\\]\n\\[\\underline{k}\\text{ minor} = (2)(1) - (-2)(-1) = 0\\]\nWhy: For each unit vector cover its row and column; the minor is (top-left)(bottom-right) minus (top-right)(bottom-left).",
+              "Attach the signs \\(+, -, +\\)\n\\[\\underline{a} \\times \\underline{b} = \\underline{i}(-7) - \\underline{j}(7) + \\underline{k}(0)\\]\n\\[= -7\\underline{i} - 7\\underline{j}\\]\nWhy: Expanding a determinant along row 1 uses the sign pattern \\(+, -, +\\); the middle (\\(\\underline{j}\\)) term is subtracted.",
+              "Find \\(\\underline{b} \\times \\underline{a}\\)\n\\[\\underline{b} \\times \\underline{a} = -(\\underline{a} \\times \\underline{b})\\]\n\\[= 7\\underline{i} + 7\\underline{j}\\]\nWhy: Swapping the two vectors swaps rows 2 and 3 of the determinant, and swapping two rows changes the sign. So the cross product is not commutative: \\(\\underline{b} \\times \\underline{a} = -(\\underline{a} \\times \\underline{b})\\).",
+              "Check: \\(\\underline{a}\\) and \\(\\underline{b}\\) are perpendicular to \\(\\underline{a} \\times \\underline{b}\\)\n\\[\\underline{a} \\cdot (\\underline{a} \\times \\underline{b}) = (2)(-7) + (-2)(-7) + (1)(0)\\]\n\\[= -14 + 14 + 0 = 0\\]\n\\[\\underline{b} \\cdot (\\underline{a} \\times \\underline{b}) = (-1)(-7) + (1)(-7) + (3)(0)\\]\n\\[= 7 - 7 + 0 = 0\\]\nWhy: Two non-zero vectors are perpendicular exactly when their dot product is 0. Both are 0, so the cross product is correct.",
+              "Check with \\(\\underline{b} \\times \\underline{a}\\)\n\\[\\underline{a} \\cdot (\\underline{b} \\times \\underline{a}) = -\\,\\underline{a} \\cdot (\\underline{a} \\times \\underline{b}) = 0\\]\n\\[\\underline{b} \\cdot (\\underline{b} \\times \\underline{a}) = -\\,\\underline{b} \\cdot (\\underline{a} \\times \\underline{b}) = 0\\]\nWhy: \\(\\underline{b} \\times \\underline{a}\\) is just \\(-(\\underline{a} \\times \\underline{b})\\); a minus sign does not change a zero dot product. So both vectors are perpendicular to \\(\\underline{b} \\times \\underline{a}\\) as well."
+            ],
+            "final_answer": "\\(\\underline{a} \\times \\underline{b} = -7\\underline{i} - 7\\underline{j}\\), \\(\\underline{b} \\times \\underline{a} = 7\\underline{i} + 7\\underline{j}\\); both dot products are 0, so \\(\\underline{a}\\) and \\(\\underline{b}\\) are perpendicular to both."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Compute the cross product \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\). Check your answer by showing that each \\(\\underline{a}\\) and \\(\\underline{b}\\) are perpendicular to \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\). \\(\\underline{a} = -4\\underline{i} + \\underline{j} - 2\\underline{k}\\), \\(\\underline{b} = 2\\underline{i} + \\underline{j} + \\underline{k}\\).",
+            "explanation": "A cross-product computation.\nWe must find \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\) and check them.\nPlan: determinant for \\(\\underline{a} \\times \\underline{b}\\), change all signs for \\(\\underline{b} \\times \\underline{a}\\), then two dot products.",
+            "steps": [
+              "Given: \\(\\underline{a} = -4\\underline{i} + \\underline{j} - 2\\underline{k}\\), \\(\\underline{b} = 2\\underline{i} + \\underline{j} + \\underline{k}\\).\nTo find: \\(\\underline{a} \\times \\underline{b}\\) and \\(\\underline{b} \\times \\underline{a}\\), then check perpendicularity.\nMethod: The determinant formula of 14.3.5 gives \\(\\underline{a} \\times \\underline{b}\\) from the components; \\(\\underline{b} \\times \\underline{a} = -(\\underline{a} \\times \\underline{b})\\); a dot product of 0 shows perpendicularity.",
+              "Write the determinant\n\\[\\underline{a} \\times \\underline{b} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ -4 & 1 & -2 \\\\ 2 & 1 & 1 \\end{vmatrix}\\]\nWhy: Row 1 holds the unit vectors, row 2 the components of the first vector \\(\\underline{a}\\), row 3 those of the second \\(\\underline{b}\\). The order of the rows follows the order of the product.",
+              "Work out the three minors\n\\[\\underline{i}\\text{ minor} = (1)(1) - (-2)(1) = 3\\]\n\\[\\underline{j}\\text{ minor} = (-4)(1) - (-2)(2) = 0\\]\n\\[\\underline{k}\\text{ minor} = (-4)(1) - (1)(2) = -6\\]\nWhy: For each unit vector cover its row and column; the minor is (top-left)(bottom-right) minus (top-right)(bottom-left).",
+              "Attach the signs \\(+, -, +\\)\n\\[\\underline{a} \\times \\underline{b} = \\underline{i}(3) - \\underline{j}(0) + \\underline{k}(-6)\\]\n\\[= 3\\underline{i} - 6\\underline{k}\\]\nWhy: Expanding a determinant along row 1 uses the sign pattern \\(+, -, +\\); the middle (\\(\\underline{j}\\)) term is subtracted.",
+              "Find \\(\\underline{b} \\times \\underline{a}\\)\n\\[\\underline{b} \\times \\underline{a} = -(\\underline{a} \\times \\underline{b})\\]\n\\[= -3\\underline{i} + 6\\underline{k}\\]\nWhy: Swapping the two vectors swaps rows 2 and 3 of the determinant, and swapping two rows changes the sign. So the cross product is not commutative: \\(\\underline{b} \\times \\underline{a} = -(\\underline{a} \\times \\underline{b})\\).",
+              "Check: \\(\\underline{a}\\) and \\(\\underline{b}\\) are perpendicular to \\(\\underline{a} \\times \\underline{b}\\)\n\\[\\underline{a} \\cdot (\\underline{a} \\times \\underline{b}) = (-4)(3) + (1)(0) + (-2)(-6)\\]\n\\[= -12 + 0 + 12 = 0\\]\n\\[\\underline{b} \\cdot (\\underline{a} \\times \\underline{b}) = (2)(3) + (1)(0) + (1)(-6)\\]\n\\[= 6 + 0 - 6 = 0\\]\nWhy: Two non-zero vectors are perpendicular exactly when their dot product is 0. Both are 0, so the cross product is correct.",
+              "Check with \\(\\underline{b} \\times \\underline{a}\\)\n\\[\\underline{a} \\cdot (\\underline{b} \\times \\underline{a}) = -\\,\\underline{a} \\cdot (\\underline{a} \\times \\underline{b}) = 0\\]\n\\[\\underline{b} \\cdot (\\underline{b} \\times \\underline{a}) = -\\,\\underline{b} \\cdot (\\underline{a} \\times \\underline{b}) = 0\\]\nWhy: \\(\\underline{b} \\times \\underline{a}\\) is just \\(-(\\underline{a} \\times \\underline{b})\\); a minus sign does not change a zero dot product. So both vectors are perpendicular to \\(\\underline{b} \\times \\underline{a}\\) as well."
+            ],
+            "final_answer": "\\(\\underline{a} \\times \\underline{b} = 3\\underline{i} - 6\\underline{k}\\), \\(\\underline{b} \\times \\underline{a} = -3\\underline{i} + 6\\underline{k}\\); both dot products are 0, so \\(\\underline{a}\\) and \\(\\underline{b}\\) are perpendicular to both."
+          }
+        ]
+      }
+    }
+  ]
+}

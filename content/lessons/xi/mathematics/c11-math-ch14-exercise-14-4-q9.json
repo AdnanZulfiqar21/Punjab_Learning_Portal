@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-4-Q9",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-4-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 295,
+          "pdf_to": 295,
+          "note": "Exercise 14.4 Q9, book p.290 (PDF 295). No key answer (proof); identity checked symbolically with sympy. Printed 'vector' for 'vectors'. Solution book PDF 1283-1284 agrees."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9 Prove that for any three non-zero vectors \\(\\underline{u}\\), \\(\\underline{v}\\) and \\(\\underline{w}\\): \\((\\underline{u} + \\underline{v}) \\cdot [(\\underline{v} + \\underline{w}) \\times (\\underline{w} + \\underline{u})] = 2[\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\).",
+            "explanation": "A proof by expanding products of sums.\nWe must show the left side reduces to \\(2[\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\).\nPlan: expand the cross product, drop the zero terms, then expand the dot product and use: a triple product with a repeated vector is 0, and the cyclic property.",
+            "steps": [
+              "Given: any vectors \\(\\underline{u}, \\underline{v}, \\underline{w}\\).\nTo prove: \\((\\underline{u} + \\underline{v}) \\cdot [(\\underline{v} + \\underline{w}) \\times (\\underline{w} + \\underline{u})] = 2[\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\).\nMethod: distributive laws for \\(\\times\\) and \\(\\cdot\\); \\(\\underline{w} \\times \\underline{w} = \\underline{0}\\); \\([\\underline{a}\\ \\underline{a}\\ \\underline{b}] = 0\\); cyclic property.",
+              "Expand the cross product\n\\[(\\underline{v} + \\underline{w}) \\times (\\underline{w} + \\underline{u})\\]\n\\[= \\underline{v} \\times \\underline{w} + \\underline{v} \\times \\underline{u} + \\underline{w} \\times \\underline{w} + \\underline{w} \\times \\underline{u}\\]\n\\[= \\underline{v} \\times \\underline{w} + \\underline{v} \\times \\underline{u} + \\underline{w} \\times \\underline{u}\\]\nWhy: The cross product distributes over addition (keep the order in each term). \\(\\underline{w} \\times \\underline{w} = \\underline{0}\\) because a vector is parallel to itself.",
+              "Dot with \\(\\underline{u}\\)\n\\[\\underline{u} \\cdot (\\underline{v} \\times \\underline{w}) + \\underline{u} \\cdot (\\underline{v} \\times \\underline{u}) + \\underline{u} \\cdot (\\underline{w} \\times \\underline{u})\\]\n\\[= [\\underline{u}\\ \\underline{v}\\ \\underline{w}] + 0 + 0\\]\nWhy: \\(\\underline{v} \\times \\underline{u}\\) and \\(\\underline{w} \\times \\underline{u}\\) are perpendicular to \\(\\underline{u}\\), so their dot with \\(\\underline{u}\\) is 0 (a repeated vector).",
+              "Dot with \\(\\underline{v}\\)\n\\[\\underline{v} \\cdot (\\underline{v} \\times \\underline{w}) + \\underline{v} \\cdot (\\underline{v} \\times \\underline{u}) + \\underline{v} \\cdot (\\underline{w} \\times \\underline{u})\\]\n\\[= 0 + 0 + [\\underline{v}\\ \\underline{w}\\ \\underline{u}]\\]\nWhy: The first two contain \\(\\underline{v}\\) twice, so they are 0.",
+              "Add the two parts\n\\[\\text{L.H.S.} = [\\underline{u}\\ \\underline{v}\\ \\underline{w}] + [\\underline{v}\\ \\underline{w}\\ \\underline{u}]\\]\n\\[= [\\underline{u}\\ \\underline{v}\\ \\underline{w}] + [\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\]\n\\[= 2[\\underline{u}\\ \\underline{v}\\ \\underline{w}] = \\text{R.H.S.}\\]\nWhy: \\([\\underline{v}\\ \\underline{w}\\ \\underline{u}] = [\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\) by the cyclic property.",
+              "Check with numbers\n\\[\\underline{u} = \\underline{i},\\ \\underline{v} = \\underline{j},\\ \\underline{w} = \\underline{k}:\\]\n\\[(\\underline{i} + \\underline{j}) \\cdot [(\\underline{j} + \\underline{k}) \\times (\\underline{k} + \\underline{i})]\\]\n\\[(\\underline{j} + \\underline{k}) \\times (\\underline{k} + \\underline{i}) = \\underline{i} + \\underline{j} - \\underline{k}\\]\n\\[(\\underline{i} + \\underline{j}) \\cdot (\\underline{i} + \\underline{j} - \\underline{k}) = 2 = 2[\\underline{i}\\ \\underline{j}\\ \\underline{k}] \\;\\checkmark\\]\nWhy: A quick example agrees with the identity."
+            ],
+            "final_answer": "Hence proved: \\((\\underline{u} + \\underline{v}) \\cdot [(\\underline{v} + \\underline{w}) \\times (\\underline{w} + \\underline{u})] = 2[\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \"for any three non-zero vector\"; it should read \"vectors\". The identity itself is correct (it even holds for zero vectors)."
+          }
+        ]
+      }
+    }
+  ]
+}

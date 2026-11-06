@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-14.3.6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/14.3.6",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 283,
+          "pdf_to": 285,
+          "note": "Book p. 278-280: 14.3.6 sin theta = |a x b|/(|a||b|), Example 16, Example 17 (sin(a+b)) with figure, Example 18 (Law of Sines) with figure, Example 19."
+        }
+      ],
+      "title": "14.3.6 Angle Between Two Vectors (Cross Product)",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The angle between two vectors \\(\\underline{a}\\) and \\(\\underline{b}\\) is determined from the definition of cross product."
+          },
+          {
+            "type": "paragraph",
+            "text": "If \\(\\theta\\) is the angle between \\(\\underline{a}\\) and \\(\\underline{b}\\), then \\(|\\underline{a} \\times \\underline{b}| = |\\underline{a}||\\underline{b}|\\sin\\theta\\)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\Rightarrow\\; \\sin\\theta = \\dfrac{|\\underline{a} \\times \\underline{b}|}{|\\underline{a}||\\underline{b}|}",
+            "text_alt": "sine theta equals the magnitude of a cross b divided by the product of the magnitudes of a and b"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why it works: taking the magnitude of \\(\\underline{a} \\times \\underline{b} = (|\\underline{a}||\\underline{b}|\\sin\\theta)\\underline{n}\\) removes \\(\\underline{n}\\) because \\(|\\underline{n}| = 1\\), and \\(\\sin\\theta \\ge 0\\) for \\(0 \\le \\theta \\le \\pi\\).\nBe careful: \\(\\sin\\theta\\) alone does not fix \\(\\theta\\), since \\(\\theta\\) and \\(180^{\\circ} - \\theta\\) have the same sine. If the angle itself is needed, use \\(\\cos\\theta = \\underline{a} \\cdot \\underline{b}/(|\\underline{a}||\\underline{b}|)\\) from 14.2, or check the sign of \\(\\underline{a} \\cdot \\underline{b}\\): positive means acute, negative means obtuse."
+          },
+          {
+            "type": "example",
+            "title": "Example 16",
+            "problem": "If \\(\\underline{a} = 4\\underline{i} + 3\\underline{j} + \\underline{k}\\) and \\(\\underline{b} = 2\\underline{i} - \\underline{j} + 2\\underline{k}\\). Find a unit vector perpendicular to both \\(\\underline{a}\\) and \\(\\underline{b}\\). Also find the sine of the angle between the vectors \\(\\underline{a}\\) and \\(\\underline{b}\\).",
+            "steps": [
+              "Given: \\(\\underline{a} = 4\\underline{i} + 3\\underline{j} + \\underline{k}\\) and \\(\\underline{b} = 2\\underline{i} - \\underline{j} + 2\\underline{k}\\).\nTo find: (1) a unit vector perpendicular to both \\(\\underline{a}\\) and \\(\\underline{b}\\); (2) the sine of the angle between \\(\\underline{a}\\) and \\(\\underline{b}\\).\nMethod: \\(\\underline{a} \\times \\underline{b}\\) is perpendicular to both; dividing it by its own length gives a unit vector. Then \\(\\sin\\theta = |\\underline{a} \\times \\underline{b}| / (|\\underline{a}||\\underline{b}|)\\). Both parts need \\(\\underline{a} \\times \\underline{b}\\) and its magnitude, so we find those first.",
+              "Step 1: \\(\\underline{a} \\times \\underline{b}\\) by the determinant formula\n\\[\\underline{a} \\times \\underline{b} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 4 & 3 & 1 \\\\ 2 & -1 & 2 \\end{vmatrix}\\]\n\\[= (6 + 1)\\underline{i} - (8 - 2)\\underline{j} + (-4 - 6)\\underline{k}\\]\n\\[= 7\\underline{i} - 6\\underline{j} - 10\\underline{k}\\]\nWhy: \\(\\underline{i}\\): \\(3 \\cdot 2 - 1 \\cdot (-1) = 7\\); \\(\\underline{j}\\): \\(-(4 \\cdot 2 - 1 \\cdot 2) = -6\\); \\(\\underline{k}\\): \\(4 \\cdot (-1) - 3 \\cdot 2 = -10\\).",
+              "Step 2: Its magnitude\n\\[|\\underline{a} \\times \\underline{b}| = \\sqrt{7^{2} + (-6)^{2} + (-10)^{2}}\\]\n\\[= \\sqrt{49 + 36 + 100} = \\sqrt{185}\\]\nWhy: magnitude of \\(x\\underline{i} + y\\underline{j} + z\\underline{k}\\) is \\(\\sqrt{x^{2}+y^{2}+z^{2}}\\).",
+              "Step 3: The unit vector\nA unit vector perpendicular to \\(\\underline{a}\\) and \\(\\underline{b}\\):\n\\[\\dfrac{\\underline{a} \\times \\underline{b}}{|\\underline{a} \\times \\underline{b}|}\\]\n\\[= \\dfrac{7\\underline{i} - b\\underline{j} - 10\\underline{k}}{\\sqrt{185}}\\]\nWhy: dividing a vector by its own length keeps its direction and makes its length 1. (The book prints \\(b\\underline{j}\\) in the numerator; it must be \\(6\\underline{j}\\): see the correction below.)",
+              "Step 4: Magnitudes of \\(\\underline{a}\\) and \\(\\underline{b}\\)\n\\[|\\underline{a}| = \\sqrt{4^{2} + 3^{2} + 1^{2}} = \\sqrt{26}\\]\n\\[|\\underline{b}| = \\sqrt{2^{2} + (-1)^{2} + 2^{2}} = 3\\]\nWhy: the sine formula needs both lengths in the denominator.",
+              "Step 5: The sine of the angle\n\\[\\sin\\theta = \\dfrac{|\\underline{a} \\times \\underline{b}|}{|\\underline{a}||\\underline{b}|}\\]\n\\[= \\dfrac{\\sqrt{185}}{3\\sqrt{26}}\\]\nWhy: solve \\(|\\underline{a} \\times \\underline{b}| = |\\underline{a}||\\underline{b}|\\sin\\theta\\) for \\(\\sin\\theta\\). Numerically \\(\\sin\\theta \\approx 0.889\\), between 0 and 1 as it must be.",
+              "Check:\n\\[\\underline{a} \\cdot (7\\underline{i} - 6\\underline{j} - 10\\underline{k}) = 28 - 18 - 10 = 0\\]\n\\[\\underline{b} \\cdot (7\\underline{i} - 6\\underline{j} - 10\\underline{k}) = 14 + 6 - 20 = 0\\]\nBoth are zero, so the vector is perpendicular to both. Also \\(\\cos\\theta = \\underline{a} \\cdot \\underline{b}/(|\\underline{a}||\\underline{b}|) = 7/(3\\sqrt{26})\\) and \\(\\sin^{2}\\theta + \\cos^{2}\\theta = (185 + 49)/234 = 1\\)."
+            ],
+            "answer": "Unit vector: \\(\\frac{7\\underline{i} - 6\\underline{j} - 10\\underline{k}}{\\sqrt{185}}\\); \\(\\sin\\theta = \\frac{\\sqrt{185}}{3\\sqrt{26}}\\) (about \\(0.889\\)).",
+            "book_errors": [
+              "\\[= \\dfrac{7\\underline{i} - b\\underline{j} - 10\\underline{k}}{\\sqrt{185}}\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In Example 16 the book prints the unit vector as \\(\\frac{7\\underline{i} - b\\underline{j} - 10\\underline{k}}{\\sqrt{185}}\\). The middle term must be \\(-6\\underline{j}\\), from \\(\\underline{a} \\times \\underline{b} = 7\\underline{i} - 6\\underline{j} - 10\\underline{k}\\): the correct unit vector is \\(\\frac{7\\underline{i} - 6\\underline{j} - 10\\underline{k}}{\\sqrt{185}}\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 17",
+            "problem": "Prove that \\(\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta\\).",
+            "steps": [
+              "Given: unit vectors \\(\\overrightarrow{OA}\\) and \\(\\overrightarrow{OB}\\) in the \\(xy\\)-plane making angles \\(\\alpha\\) and \\(-\\beta\\) with the positive \\(x\\)-axis.\nTo prove: \\(\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta\\).\nMethod: compute \\(\\overrightarrow{OB} \\times \\overrightarrow{OA}\\) in two ways: by the definition (gives \\(\\sin(\\alpha + \\beta)\\)) and by the determinant formula (gives the right-hand side). Equate the two.",
+              "Step 1: The angle between them\n\\[m\\angle AOB = \\alpha + \\beta\\]\nWhy: \\(\\overrightarrow{OA}\\) is \\(\\alpha\\) above the \\(x\\)-axis and \\(\\overrightarrow{OB}\\) is \\(\\beta\\) below it.",
+              "Step 2: Write the vectors in components\n\\[\\overrightarrow{OA} = \\cos\\alpha\\,\\underline{i} + \\sin\\alpha\\,\\underline{j}\\]\n\\[\\overrightarrow{OB} = \\cos(-\\beta)\\,\\underline{i} + \\sin(-\\beta)\\,\\underline{j}\\]\n\\[= \\cos\\beta\\,\\underline{i} - \\sin\\beta\\,\\underline{j}\\]\nWhy: a unit vector at angle \\(\\phi\\) to the \\(x\\)-axis is \\(\\cos\\phi\\,\\underline{i} + \\sin\\phi\\,\\underline{j}\\); and \\(\\cos(-\\beta) = \\cos\\beta\\), \\(\\sin(-\\beta) = -\\sin\\beta\\).",
+              "Step 3: Set up the cross product\n\\[\\overrightarrow{OB} \\times \\overrightarrow{OA}\\]\n\\[= (\\cos\\beta\\,\\underline{i} - \\sin\\beta\\,\\underline{j}) \\times (\\cos\\alpha\\,\\underline{i} + \\sin\\alpha\\,\\underline{i})\\]\nWhy: substitute the components from Step 2. (The book prints \\(\\sin\\alpha\\,\\underline{i}\\) in the second bracket; it must be \\(\\sin\\alpha\\,\\underline{j}\\), as in Step 2.)",
+              "Step 4: Definition on the left, determinant on the right\n\\[|\\overrightarrow{OB}||\\overrightarrow{OA}|\\sin(\\alpha + \\beta)\\,\\underline{k}\\]\n\\[= \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ \\cos\\beta & -\\sin\\beta & 0 \\\\ \\cos\\alpha & \\sin\\alpha & 0 \\end{vmatrix}\\]\nWhy: both vectors lie in the \\(xy\\)-plane, so the cross product is along the \\(z\\)-axis; turning from \\(\\overrightarrow{OB}\\) to \\(\\overrightarrow{OA}\\) is anticlockwise, so by the right hand rule \\(\\underline{n} = \\underline{k}\\).",
+              "Step 5: Expand the determinant\n\\[\\sin(\\alpha + \\beta)\\,\\underline{k}\\]\n\\[= (\\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta)\\underline{k}\\]\nWhy: \\(|\\overrightarrow{OB}| = |\\overrightarrow{OA}| = 1\\); the \\(\\underline{i}\\)- and \\(\\underline{j}\\)-parts vanish because of the zeros; the \\(\\underline{k}\\)-part is \\(\\cos\\beta\\sin\\alpha - (-\\sin\\beta)\\cos\\alpha\\).",
+              "Step 6: Compare the coefficients of \\(\\underline{k}\\)\n\\[\\therefore\\; \\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta\\]\nWhy: equal vectors have equal components.",
+              "Check:\n\\(\\alpha = \\beta = 45^{\\circ}\\): left side \\(\\sin 90^{\\circ} = 1\\); right side \\(\\tfrac{\\sqrt2}{2}\\cdot\\tfrac{\\sqrt2}{2} + \\tfrac{\\sqrt2}{2}\\cdot\\tfrac{\\sqrt2}{2} = 1\\)."
+            ],
+            "answer": "Hence proved: \\(\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta\\).",
+            "book_errors": [
+              "\\[= (\\cos\\beta\\,\\underline{i} - \\sin\\beta\\,\\underline{j}) \\times (\\cos\\alpha\\,\\underline{i} + \\sin\\alpha\\,\\underline{i})\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In Example 17 the second bracket is printed \\((\\cos\\alpha\\,\\underline{i} + \\sin\\alpha\\,\\underline{i})\\); the second unit vector must be \\(\\underline{j}\\): \\(\\overrightarrow{OA} = \\cos\\alpha\\,\\underline{i} + \\sin\\alpha\\,\\underline{j}\\). The determinant that follows uses the correct components."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch14-fig-ex17-unit-vectors",
+            "alt": "x- and y-axes with origin O. Unit vector OA makes angle alpha above the positive x-axis; unit vector OB makes angle minus beta below it.",
+            "caption": "Figure: unit vectors OA at angle α and OB at angle −β with the positive x-axis, Example 17 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Proof-type examples like 17 and 18 show how vectors prove results of trigonometry. In the exam, write every line with its reason (components, right hand rule, \\(|\\underline{n}| = 1\\)), exactly as in the steps above."
+          },
+          {
+            "type": "example",
+            "title": "Example 18",
+            "problem": "In any triangle \\(ABC\\), prove that \\(\\dfrac{a}{\\sin A} = \\dfrac{b}{\\sin B} = \\dfrac{c}{\\sin C}\\) (Law of Sines).",
+            "steps": [
+              "Given: triangle \\(ABC\\) with vectors \\(\\underline{a}, \\underline{b}, \\underline{c}\\) along the sides \\(BC, CA, AB\\).\nTo prove: \\(\\dfrac{a}{\\sin A} = \\dfrac{b}{\\sin B} = \\dfrac{c}{\\sin C}\\) (Law of Sines).\nMethod: the three vectors go round the triangle, so their sum is \\(\\underline{0}\\). Taking cross products gives equal cross products; equating their magnitudes brings in the sines.",
+              "Step 1: Sum of the side vectors\n\\[\\underline{a} + \\underline{b} + \\underline{c} = \\underline{0}\\]\n\\[\\Rightarrow \\underline{b} + \\underline{c} = -\\underline{a} \\quad \\text{(i)}\\]\nWhy: going \\(B \\to C \\to A \\to B\\) returns to the start, so the total displacement is zero.",
+              "Step 2: Cross product of (i) with \\(\\underline{c}\\)\n\\[\\underline{b} \\times \\underline{c} + \\underline{c} \\times \\underline{c} = -\\underline{a} \\times \\underline{c}\\]\n\\[\\underline{b} \\times \\underline{c} = \\underline{c} \\times \\underline{a} \\quad (\\because\\, \\underline{c} \\times \\underline{c} = \\underline{0})\\]\nWhy: \\(\\underline{c} \\times \\underline{c} = \\underline{0}\\), and \\(-\\underline{a} \\times \\underline{c} = \\underline{c} \\times \\underline{a}\\) because reversing the order changes the sign.",
+              "Step 3: Equate the magnitudes\n\\[|\\underline{b} \\times \\underline{c}| = |\\underline{c} \\times \\underline{a}|\\]\n\\[|\\underline{b}||\\underline{c}|\\sin(\\pi - A) = |\\underline{c}||\\underline{a}|\\sin(\\pi - B)\\]\nWhy: placed tail to tail, \\(\\underline{b}\\) and \\(\\underline{c}\\) make the exterior angle \\(\\pi - A\\), not \\(A\\) (see the figure); similarly \\(\\underline{c}\\) and \\(\\underline{a}\\) make \\(\\pi - B\\).",
+              "Step 4: Simplify\n\\[bc\\sin A = ca\\sin B\\]\n\\[\\Rightarrow b\\sin A = a\\sin B\\]\n\\[\\therefore\\; \\dfrac{b}{\\sin B} = \\dfrac{a}{\\sin A} \\quad \\text{(ii)}\\]\nWhy: \\(\\sin(\\pi - x) = \\sin x\\), \\(|\\underline{a}| = a\\) etc.; divide by \\(c\\), then by \\(\\sin A\\sin B\\).",
+              "Step 5: Similarly, with \\(\\underline{b}\\)\n\\[\\underline{a} \\times \\underline{b} + \\underline{c} \\times \\underline{b} = \\underline{0}\\]\n\\[\\Rightarrow \\underline{a} \\times \\underline{b} = \\underline{b} \\times \\underline{c}\\]\n\\[ab\\sin(\\pi - C) = bc\\sin(\\pi - A)\\]\n\\[\\Rightarrow \\dfrac{a}{\\sin A} = \\dfrac{c}{\\sin C} \\quad \\text{(iii)}\\]\nWhy: cross (\\(\\underline{a} + \\underline{b} + \\underline{c} = \\underline{0}\\)) with \\(\\underline{b}\\), using \\(\\underline{b} \\times \\underline{b} = \\underline{0}\\); the book says only 'Similarly', so these lines are filled in by us.",
+              "Step 6: Combine (ii) and (iii)\n\\[\\dfrac{a}{\\sin A} = \\dfrac{b}{\\sin B} = \\dfrac{c}{\\sin C}\\]\nWhy: both equations contain \\(a/\\sin A\\).",
+              "Check:\nIn the right triangle with sides \\(3, 4, 5\\): \\(5/\\sin 90^{\\circ} = 5\\), \\(3/(3/5) = 5\\), \\(4/(4/5) = 5\\)."
+            ],
+            "answer": "Hence proved: \\(\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C}\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch14-fig-ex18-law-of-sines",
+            "alt": "Triangle ABC. Vector a runs along BC from B to C, vector b along CA from C to A, vector c along AB from A to B. Each side is extended past its end, showing the exterior angles pi minus A at A, pi minus B at B and pi minus C at C.",
+            "caption": "Figure: vectors a, b, c along the sides of triangle ABC with exterior angles π − A, π − B, π − C, Example 18 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "example",
+            "title": "Example 19",
+            "problem": "If \\(\\underline{u} = 2\\underline{i} - \\underline{j} + \\underline{k}\\) and \\(\\underline{v} = 4\\underline{i} + 2\\underline{j} - \\underline{k}\\), find by determinant formula (i) \\(\\underline{u} \\times \\underline{u}\\) (ii) \\(\\underline{u} \\times \\underline{v}\\) (iii) \\(\\underline{v} \\times \\underline{u}\\).",
+            "steps": [
+              "Given: \\(\\underline{u} = 2\\underline{i} - \\underline{j} + \\underline{k}\\), \\(\\underline{v} = 4\\underline{i} + 2\\underline{j} - \\underline{k}\\).\nTo find: (i) \\(\\underline{u} \\times \\underline{u}\\), (ii) \\(\\underline{u} \\times \\underline{v}\\), (iii) \\(\\underline{v} \\times \\underline{u}\\) by the determinant formula.\nMethod: row 2 = first vector, row 3 = second vector in each part; the answers can be checked against the properties.",
+              "(i) \\(\\underline{u} \\times \\underline{u}\\)\n\\[\\underline{u} \\times \\underline{u} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 2 & -1 & 1 \\\\ 2 & -1 & 1 \\end{vmatrix} = \\underline{0}\\]\nWhy: two identical rows make the determinant zero (the book: 'Two rows are same'); this is the property \\(\\underline{u} \\times \\underline{u} = \\underline{0}\\).",
+              "(ii) \\(\\underline{u} \\times \\underline{v}\\)\n\\[\\underline{u} \\times \\underline{v} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 2 & -1 & 1 \\\\ 4 & 2 & -1 \\end{vmatrix}\\]\n\\[= (1 - 2)\\underline{i} - (-2 - 4)\\underline{j} + (4 + 4)\\underline{k}\\]\n\\[= -\\underline{i} + 6\\underline{j} + 8\\underline{k}\\]\nWhy: \\(\\underline{i}\\): \\((-1)(-1) - (1)(2)\\); \\(\\underline{j}\\): \\(-[(2)(-1) - (1)(4)]\\); \\(\\underline{k}\\): \\((2)(2) - (-1)(4)\\). (Same vectors as Example 15.)",
+              "(iii) \\(\\underline{v} \\times \\underline{u}\\)\n\\[\\underline{v} \\times \\underline{u} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 4 & 2 & -1 \\\\ 2 & -1 & 1 \\end{vmatrix}\\]\n\\[= (2 - 1)\\underline{i} - (4 + 2)\\underline{j} + (-4 - 4)\\underline{k}\\]\n\\[= \\underline{i} - 6\\underline{j} - 8\\underline{k}\\]\nWhy: now \\(\\underline{v}\\) comes first, so it goes in row 2.",
+              "Check:\n\\[\\underline{v} \\times \\underline{u} = -(\\underline{u} \\times \\underline{v})\\]\n\\(\\underline{i} - 6\\underline{j} - 8\\underline{k} = -(-\\underline{i} + 6\\underline{j} + 8\\underline{k})\\), as the property \\(\\underline{u} \\times \\underline{v} = -\\underline{v} \\times \\underline{u}\\) says."
+            ],
+            "answer": "(i) \\(\\underline{u} \\times \\underline{u} = \\underline{0}\\); (ii) \\(\\underline{u} \\times \\underline{v} = -\\underline{i} + 6\\underline{j} + 8\\underline{k}\\); (iii) \\(\\underline{v} \\times \\underline{u} = \\underline{i} - 6\\underline{j} - 8\\underline{k}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\sin\\theta = \\frac{|\\underline{a} \\times \\underline{b}|}{|\\underline{a}||\\underline{b}|}\\); compare \\(\\cos\\theta = \\frac{\\underline{a} \\cdot \\underline{b}}{|\\underline{a}||\\underline{b}|}\\).\n2. A unit vector perpendicular to \\(\\underline{a}\\) and \\(\\underline{b}\\) is \\(\\pm\\frac{\\underline{a} \\times \\underline{b}}{|\\underline{a} \\times \\underline{b}|}\\).\n3. Vectors along the sides of a triangle add to \\(\\underline{0}\\); the angle between two such vectors is an exterior angle \\(\\pi - A\\).\n4. \\(\\underline{v} \\times \\underline{u} = -(\\underline{u} \\times \\underline{v})\\) and \\(\\underline{u} \\times \\underline{u} = \\underline{0}\\), as Example 19 shows."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Dividing by \\(|\\underline{a} \\times \\underline{b}|\\) instead of \\(|\\underline{a}||\\underline{b}|\\) in the sine formula.\n2. Taking \\(\\theta\\) from the sine alone when the angle may be obtuse.\n3. In Example 18, using the interior angle \\(A\\) instead of \\(\\pi - A\\) between \\(\\underline{b}\\) and \\(\\underline{c}\\) (the result is the same only because \\(\\sin(\\pi - A) = \\sin A\\)).\n4. Forgetting that only one of the two unit normals is asked; \\(-\\frac{\\underline{a} \\times \\underline{b}}{|\\underline{a} \\times \\underline{b}|}\\) is equally correct."
+          }
+        ]
+      }
+    }
+  ]
+}

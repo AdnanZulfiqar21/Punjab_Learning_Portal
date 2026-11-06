@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-4-Q9-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-4-q9",
+      "title": "Question 9 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 295,
+          "pdf_to": 295,
+          "note": "Exercise 14.4 Q9, book p.290 (PDF 295). No key answer (proof); identity checked symbolically with sympy. Printed 'vector' for 'vectors'. Solution book PDF 1283-1284 agrees."
+        }
+      ],
+      "variant_of": "C11-MATH-CH14-EXERCISE-14-4-Q9",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9 Prove that for any three non-zero vectors \\(\\underline{u}\\), \\(\\underline{v}\\) and \\(\\underline{w}\\): \\((\\underline{u} + \\underline{v}) \\cdot [(\\underline{v} + \\underline{w}) \\times (\\underline{w} + \\underline{u})] = 2[\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\).",
+            "explanation": "Yeh proof hai jis mein vectors ke jama (sums) ka cross aur dot khol kar simplify karna hai.\nDiya kya hai? Koi bhi teen vectors.\nSaabit kya karna hai? Left side aakhir mein \\(2[\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\) ban jata hai.\nRule kaunsa? Teen baatein: (1) cross product brackets par phailta hai (distributive), (2) jis triple product mein koi vector do dafa ho woh 0 hai, (3) cyclic property.\nPlan: pehle cross product kholna, phir dot product kholna, phir zero wale terms kaatna.",
+            "steps": [
+              "Diya gaya hai: koi bhi vectors \\(\\underline{u}, \\underline{v}, \\underline{w}\\).\nHumein saabit karna hai: \\((\\underline{u} + \\underline{v}) \\cdot [(\\underline{v} + \\underline{w}) \\times (\\underline{w} + \\underline{u})] = 2[\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\).\nTareeqa: Bilkul algebra ki tarah \\((a + b)(c + d)\\) kholte hain, bas har term mein vectors ki tarteeb nahi badalni, kyunke cross product mein tarteeb badalne se sign badal jata hai. Phir \\(\\underline{w} \\times \\underline{w} = \\underline{0}\\) aur \\([\\underline{a}\\ \\underline{a}\\ \\underline{b}] = 0\\) se kaafi terms gayab ho jayenge.",
+              "Cross product kholein\n\\[(\\underline{v} + \\underline{w}) \\times (\\underline{w} + \\underline{u})\\]\n\\[= \\underline{v} \\times \\underline{w} + \\underline{v} \\times \\underline{u} + \\underline{w} \\times \\underline{w} + \\underline{w} \\times \\underline{u}\\]\n\\[= \\underline{v} \\times \\underline{w} + \\underline{v} \\times \\underline{u} + \\underline{w} \\times \\underline{u}\\]\nKyun: Pehle bracket ki har term ko doosre bracket ki har term se cross kiya, chaar terms baneen. \\(\\underline{w} \\times \\underline{w} = \\underline{0}\\), kyunke koi vector apne aap ke parallel hai aur parallel vectors ka cross product zero vector hota hai (\\(\\sin 0 = 0\\)).\nDhyan dein: \\(\\underline{v} \\times \\underline{u}\\) ko \\(\\underline{u} \\times \\underline{v}\\) mat likhein; woh \\(-\\underline{u} \\times \\underline{v}\\) hai.",
+              "\\(\\underline{u}\\) ke saath dot\n\\[\\underline{u} \\cdot (\\underline{v} \\times \\underline{w}) + \\underline{u} \\cdot (\\underline{v} \\times \\underline{u}) + \\underline{u} \\cdot (\\underline{w} \\times \\underline{u})\\]\n\\[= [\\underline{u}\\ \\underline{v}\\ \\underline{w}] + 0 + 0\\]\nKyun: \\(\\underline{v} \\times \\underline{u}\\) apne dono vectors ke perpendicular hai, \\(\\underline{u}\\) ke bhi. Perpendicular vectors ka dot product 0. Yani jis triple product mein \\(\\underline{u}\\) do dafa aaye woh 0 hai. \\(\\underline{w} \\times \\underline{u}\\) ka bhi yahi haal.",
+              "\\(\\underline{v}\\) ke saath dot\n\\[\\underline{v} \\cdot (\\underline{v} \\times \\underline{w}) + \\underline{v} \\cdot (\\underline{v} \\times \\underline{u}) + \\underline{v} \\cdot (\\underline{w} \\times \\underline{u})\\]\n\\[= 0 + 0 + [\\underline{v}\\ \\underline{w}\\ \\underline{u}]\\]\nKyun: Pehle do terms mein \\(\\underline{v}\\) do dafa hai, is liye dono 0. Sirf aakhri term bachi jis mein teeno alag vectors hain.",
+              "Dono hisse jama karein\n\\[\\text{L.H.S.} = [\\underline{u}\\ \\underline{v}\\ \\underline{w}] + [\\underline{v}\\ \\underline{w}\\ \\underline{u}]\\]\n\\[= [\\underline{u}\\ \\underline{v}\\ \\underline{w}] + [\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\]\n\\[= 2[\\underline{u}\\ \\underline{v}\\ \\underline{w}] = \\text{R.H.S.}\\]\nKyun: Cyclic property se \\([\\underline{v}\\ \\underline{w}\\ \\underline{u}] = [\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\), kyunke \\(\\underline{v}, \\underline{w}, \\underline{u}\\) daire \\(\\underline{u} \\to \\underline{v} \\to \\underline{w} \\to \\underline{u}\\) ki seedhi tarteeb hai. Chhe terms mein se sirf do bache aur dono barabar nikle.",
+              "Numbers se tasdeeq\n\\[\\underline{u} = \\underline{i},\\ \\underline{v} = \\underline{j},\\ \\underline{w} = \\underline{k}:\\]\n\\[(\\underline{i} + \\underline{j}) \\cdot [(\\underline{j} + \\underline{k}) \\times (\\underline{k} + \\underline{i})]\\]\n\\[(\\underline{j} + \\underline{k}) \\times (\\underline{k} + \\underline{i}) = \\underline{i} + \\underline{j} - \\underline{k}\\]\n\\[(\\underline{i} + \\underline{j}) \\cdot (\\underline{i} + \\underline{j} - \\underline{k}) = 2 = 2[\\underline{i}\\ \\underline{j}\\ \\underline{k}] \\;\\checkmark\\]\nKyun: \\(\\underline{j} \\times \\underline{k} = \\underline{i}\\), \\(\\underline{j} \\times \\underline{i} = -\\underline{k}\\), \\(\\underline{k} \\times \\underline{k} = \\underline{0}\\), \\(\\underline{k} \\times \\underline{i} = \\underline{j}\\); jama \\(\\underline{i} + \\underline{j} - \\underline{k}\\). Phir dot \\(1 + 1 + 0 = 2\\). Misaal identity ke mutabiq hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\((\\underline{u} + \\underline{v}) \\cdot [(\\underline{v} + \\underline{w}) \\times (\\underline{w} + \\underline{u})] = 2[\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein \"non-zero vector\" chhapa hai; durust lafz \"vectors\" hai (jama). Sawal ki identity bilkul sahi hai."
+          }
+        ]
+      }
+    }
+  ]
+}

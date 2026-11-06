@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-14.2.5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/14.2.5",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 275,
+          "pdf_to": 276,
+          "note": "Book p. 270-271: 14.2.5 derivation of u.v = a1a2 + b1b2 + c1c2, Example 6, Example 7 (cosine and projection laws, two triangle figures), Example 8 (cos(a - b), unit-vector figure). Book error: u = a1 i + b1 i + c1 k (and v), j printed as i."
+        }
+      ],
+      "title": "14.2.5 Dot Product of Vectors in terms of their components",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Let \\(\\underline{u} = a_{1}\\underline{i} + b_{1}\\underline{i} + c_{1}\\underline{k}\\) and \\(\\underline{v} = a_{2}\\underline{i} + b_{2}\\underline{i} + c_{2}\\underline{k}\\) be two non-zero vectors.",
+            "book_errors": [
+              "\\(\\underline{u} = a_{1}\\underline{i} + b_{1}\\underline{i} + c_{1}\\underline{k}\\)",
+              "\\(\\underline{v} = a_{2}\\underline{i} + b_{2}\\underline{i} + c_{2}\\underline{k}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \\(b_{1}\\underline{i}\\) and \\(b_{2}\\underline{i}\\) as the middle terms. They should be \\(b_{1}\\underline{j}\\) and \\(b_{2}\\underline{j}\\):\n\\[\\underline{u} = a_{1}\\underline{i} + b_{1}\\underline{j} + c_{1}\\underline{k}\\]\n\\[\\underline{v} = a_{2}\\underline{i} + b_{2}\\underline{j} + c_{2}\\underline{k}\\]\nThe working that follows uses \\(\\underline{j}\\), as it should."
+          },
+          {
+            "type": "paragraph",
+            "text": "From distributive law we can write:\n\\[\\underline{u} \\cdot \\underline{v} = (a_{1}\\underline{i} + b_{1}\\underline{j} + c_{1}\\underline{k})\\]\n\\[\\cdot\\ (a_{2}\\underline{i} + b_{2}\\underline{j} + c_{2}\\underline{k})\\]\n\\[= a_{1}a_{2}(\\underline{i} \\cdot \\underline{i}) + a_{1}b_{2}(\\underline{i} \\cdot \\underline{j})\\]\n\\[+ a_{1}c_{2}(\\underline{i} \\cdot \\underline{k}) + b_{1}a_{2}(\\underline{j} \\cdot \\underline{i})\\]\n\\[+ b_{1}b_{2}(\\underline{j} \\cdot \\underline{j}) + b_{1}c_{2}(\\underline{j} \\cdot \\underline{k})\\]\n\\[+ c_{1}a_{2}(\\underline{k} \\cdot \\underline{i}) + c_{1}b_{2}(\\underline{k} \\cdot \\underline{j})\\]\n\\[+ c_{1}c_{2}(\\underline{k} \\cdot \\underline{k})\\]\n\n\\[\\Rightarrow \\underline{u} \\cdot \\underline{v} = a_{1}a_{2} + b_{1}b_{2} + c_{1}c_{2}\\]\nbecause\n\\[\\underline{i} \\cdot \\underline{i} = \\underline{j} \\cdot \\underline{j} = \\underline{k} \\cdot \\underline{k} = 1\\]\n\\[\\underline{i} \\cdot \\underline{j} = \\underline{j} \\cdot \\underline{k} = \\underline{k} \\cdot \\underline{i} = 0\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Hence the dot product of two vectors is the sum of the product of their corresponding components."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Expanding the brackets gives \\(3 \\times 3 = 9\\) terms. By 14.2.2, the six terms with two different unit vectors are \\(0\\) and the three terms with the same unit vector twice keep their coefficient. That is why only \\(a_{1}a_{2}\\), \\(b_{1}b_{2}\\), \\(c_{1}c_{2}\\) remain.\nQuick example of ours: \\((2\\underline{i} - \\underline{j} + 3\\underline{k}) \\cdot (\\underline{i} + 4\\underline{j} + 2\\underline{k}) = 2 - 4 + 6 = 4\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Show that the components of a vector are the projections of that vector along \\(\\underline{i}\\), \\(\\underline{j}\\) and \\(\\underline{k}\\) respectively.",
+            "steps": [
+              "Given: a vector \\(\\underline{v} = a\\underline{i} + b\\underline{j} + c\\underline{k}\\).\nTo prove: its projections along \\(\\underline{i}\\), \\(\\underline{j}\\), \\(\\underline{k}\\) are \\(a\\), \\(b\\), \\(c\\).\nMethod: use the projection formula of 14.2.3: projection of \\(\\underline{v}\\) along \\(\\underline{u}\\) is \\(\\frac{\\underline{u} \\cdot \\underline{v}}{|\\underline{u}|}\\), here with \\(\\underline{u} = \\underline{i}, \\underline{j}, \\underline{k}\\), whose magnitudes are \\(1\\).",
+              "Step 1: Projection along \\(\\underline{i}\\)\n\\[\\dfrac{\\underline{v} \\cdot \\underline{i}}{|\\underline{i}|} = (a\\underline{i} + b\\underline{j} + c\\underline{k}) \\cdot \\underline{i}\\]\n\\[= a(1) + b(0) + c(0) = a\\]\nWhy: \\(|\\underline{i}| = 1\\), and by 14.2.2, \\(\\underline{i} \\cdot \\underline{i} = 1\\), \\(\\underline{j} \\cdot \\underline{i} = 0\\), \\(\\underline{k} \\cdot \\underline{i} = 0\\).",
+              "Step 2: Projection along \\(\\underline{j}\\)\n\\[\\dfrac{\\underline{v} \\cdot \\underline{j}}{|\\underline{j}|} = (a\\underline{i} + b\\underline{j} + c\\underline{k}) \\cdot \\underline{j} = b\\]\nWhy: only \\(\\underline{j} \\cdot \\underline{j} = 1\\) survives; the other two products are \\(0\\).",
+              "Step 3: Projection along \\(\\underline{k}\\)\n\\[\\dfrac{\\underline{v} \\cdot \\underline{k}}{|\\underline{k}|} = (a\\underline{i} + b\\underline{j} + c\\underline{k}) \\cdot \\underline{k} = c\\]\nWhy: only \\(\\underline{k} \\cdot \\underline{k} = 1\\) survives.",
+              "Check:\nTake \\(\\underline{v} = 2\\underline{i} - 3\\underline{j} + 5\\underline{k}\\): \\(\\underline{v} \\cdot \\underline{i} = 2\\), \\(\\underline{v} \\cdot \\underline{j} = -3\\), \\(\\underline{v} \\cdot \\underline{k} = 5\\), exactly its components."
+            ],
+            "answer": "Hence the components \\(a\\), \\(b\\) and \\(c\\) of \\(\\underline{v} = a\\underline{i} + b\\underline{j} + c\\underline{k}\\) are the projections of \\(\\underline{v}\\) along \\(\\underline{i}\\), \\(\\underline{j}\\) and \\(\\underline{k}\\) respectively."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 6 shows the meaning of the components: \\(a\\) is how far \\(\\underline{v}\\) reaches along the \\(x\\)-axis, \\(b\\) along the \\(y\\)-axis and \\(c\\) along the \\(z\\)-axis."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Prove that in any triangle \\(ABC\\)\n(i) \\(a^{2} = b^{2} + c^{2} - 2bc\\cos A\\) (Cosine Law)\n(ii) \\(a = b\\cos C + c\\cos B\\) (Projection Law)",
+            "steps": [
+              "Given: triangle \\(ABC\\) with side lengths \\(a = BC\\), \\(b = CA\\), \\(c = AB\\).\nTo prove: (i) the cosine law, (ii) the projection law.\nMethod: take vectors \\(\\underline{a}\\), \\(\\underline{b}\\), \\(\\underline{c}\\) along \\(BC\\), \\(CA\\), \\(AB\\) (head to tail round the triangle, as in the figures). Then \\(\\underline{a} + \\underline{b} + \\underline{c} = \\underline{0}\\). Dot this equation with suitable vectors and use \\(\\underline{u} \\cdot \\underline{v} = |\\underline{u}||\\underline{v}|\\cos\\theta\\).",
+              "Step 1: The vectors close the triangle\n\\[\\underline{a} + \\underline{b} + \\underline{c} = \\underline{0}\\]\nWhy: going from \\(B\\) to \\(C\\), then \\(C\\) to \\(A\\), then \\(A\\) to \\(B\\) brings us back to the start, so the total displacement is zero.",
+              "(i) Step 2: Make \\(\\underline{a}\\) the subject\n\\[\\underline{a} = -(\\underline{b} + \\underline{c})\\]\nWhy: we want \\(a^{2} = \\underline{a} \\cdot \\underline{a}\\) in terms of \\(b\\) and \\(c\\).",
+              "(i) Step 3: Dot each side with itself\n\\[\\underline{a} \\cdot \\underline{a} = (\\underline{b} + \\underline{c}) \\cdot (\\underline{b} + \\underline{c})\\]\n\\[= \\underline{b} \\cdot \\underline{b} + \\underline{b} \\cdot \\underline{c} + \\underline{c} \\cdot \\underline{b} + \\underline{c} \\cdot \\underline{c}\\]\nWhy: \\((-1)(-1) = 1\\), and the distributive property opens the brackets like algebra.",
+              "(i) Step 4: Use \\(\\underline{u} \\cdot \\underline{u} = |\\underline{u}|^{2}\\) and commutativity\n\\[a^{2} = b^{2} + 2\\underline{b} \\cdot \\underline{c} + c^{2}\\]\nWhy: \\(\\underline{b} \\cdot \\underline{c} = \\underline{c} \\cdot \\underline{b}\\), so the two middle terms add up.",
+              "(i) Step 5: The angle between \\(\\underline{b}\\) and \\(\\underline{c}\\)\n\\[\\underline{b} \\cdot \\underline{c} = bc\\cos(\\pi - A)\\]\n\\[a^{2} = b^{2} + c^{2} + 2bc\\cos(\\pi - A)\\]\nWhy: \\(\\underline{b}\\) points from \\(C\\) towards \\(A\\) and \\(\\underline{c}\\) starts at \\(A\\). Placed tail to tail at \\(A\\), \\(\\underline{c}\\) makes the exterior angle \\(\\pi - A\\) with the extension of \\(CA\\) (first figure).",
+              "(i) Step 6: Use \\(\\cos(\\pi - A) = -\\cos A\\)\n\\[a^{2} = b^{2} + c^{2} - 2bc\\cos A\\]\nWhy: this is the allied-angle identity: cosine is negative in the second quadrant.",
+              "(ii) Step 7: Write \\(\\underline{a}\\) another way\n\\[\\underline{a} = -\\underline{b} - \\underline{c}\\]\nWhy: the same closing equation; now we dot with \\(\\underline{a}\\) (not with itself on the right) to bring in \\(\\cos B\\) and \\(\\cos C\\).",
+              "(ii) Step 8: Take dot product with \\(\\underline{a}\\)\n\\[\\underline{a} \\cdot \\underline{a} = -\\underline{a} \\cdot \\underline{b} - \\underline{a} \\cdot \\underline{c}\\]\nWhy: dotting both sides with the same vector keeps the equation true.",
+              "(ii) Step 9: Find the angles\n\\[= -ab\\cos(\\pi - C) - ac\\cos(\\pi - B)\\]\nWhy: \\(\\underline{a}\\) ends at \\(C\\) and \\(\\underline{b}\\) starts at \\(C\\); tail to tail they make the exterior angle \\(\\pi - C\\). Similarly \\(\\underline{c}\\) ends at \\(B\\) and \\(\\underline{a}\\) starts at \\(B\\), making \\(\\pi - B\\) (second figure).",
+              "(ii) Step 10: Simplify the signs\n\\[= -ab(-\\cos C) - ac(-\\cos B)\\]\n\\[a^{2} = ab\\cos C + ac\\cos B\\]\nWhy: \\(\\cos(\\pi - x) = -\\cos x\\), and two minus signs make a plus.",
+              "(ii) Step 11: Divide by \\(a\\)\n\\[a = b\\cos C + c\\cos B\\]\nWhy: \\(a\\) is a side length, so \\(a \\ne 0\\).",
+              "Check:\nRight triangle with \\(a = 5\\), \\(b = 4\\), \\(c = 3\\) (right angle at \\(A\\)): \\(\\cos A = 0\\), \\(\\cos B = \\frac{3}{5}\\), \\(\\cos C = \\frac{4}{5}\\).\n\\[b^{2} + c^{2} - 2bc\\cos A = 16 + 9 - 0 = 25 = a^{2}\\]\n\\[b\\cos C + c\\cos B = \\tfrac{16}{5} + \\tfrac{9}{5} = 5 = a\\]"
+            ],
+            "answer": "(i) \\(a^{2} = b^{2} + c^{2} - 2bc\\cos A\\) and (ii) \\(a = b\\cos C + c\\cos B\\), proved by the dot product."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch14-fig-ex7-cosine-law",
+            "alt": "Triangle ABC with A at the top. Vector a runs along BC from B to C, vector b along CA from C to A, and vector c along AB from A to B. The side CA is extended beyond A as a dashed line, and the angle between this extension and AB is marked pi minus A.",
+            "caption": "Figure: Example 7(i), the vectors a, b, c along the sides and the angle π − A between b and c (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch14-fig-ex7-projection-law",
+            "alt": "Triangle ABC with vectors a from B to C, b from C to A and c from A to B. Side AB is extended beyond B and side BC is extended beyond C as dashed lines; the angle at B between the extension and BC is marked pi minus B, and the angle at C between the extension and CA is marked pi minus C.",
+            "caption": "Figure: Example 7(ii), the angles π − B and π − C (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The key idea in Example 7 is the angle between two vectors that follow each other round the triangle. The angle between two vectors is measured tail to tail. When one vector ends at a vertex and the next one starts there, we extend the first one beyond the vertex; the angle between them is then the exterior angle \\(\\pi - (\\text{interior angle})\\). That is where every \\(\\pi - A\\), \\(\\pi - B\\), \\(\\pi - C\\) comes from."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Prove that: \\(\\cos(\\alpha - \\beta) = \\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta\\)",
+            "steps": [
+              "Given: angles \\(\\alpha\\) and \\(\\beta\\) (take \\(\\alpha > \\beta\\)).\nTo prove: \\(\\cos(\\alpha - \\beta) = \\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta\\).\nMethod: take two unit vectors at angles \\(\\alpha\\) and \\(\\beta\\) with the \\(x\\)-axis and compute their dot product in two ways: by the angle and by components.",
+              "Step 1: The two unit vectors\nLet \\(\\overrightarrow{OA}\\) and \\(\\overrightarrow{OB}\\) be unit vectors in the \\(xy\\)-plane making angles \\(\\alpha\\) and \\(\\beta\\) with the positive \\(x\\)-axis, so that \\(\\angle AOB = \\alpha - \\beta\\).\n\\[\\overrightarrow{OA} = \\cos\\alpha\\,\\underline{i} + \\sin\\alpha\\,\\underline{j}\\]\n\\[\\overrightarrow{OB} = \\cos\\beta\\,\\underline{i} + \\sin\\beta\\,\\underline{j}\\]\nWhy: a vector of length \\(1\\) at angle \\(\\alpha\\) has \\(x\\)-component \\(\\cos\\alpha\\) and \\(y\\)-component \\(\\sin\\alpha\\) (definitions of cosine and sine).",
+              "Step 2: Dot product by components\n\\[\\overrightarrow{OA} \\cdot \\overrightarrow{OB}\\]\n\\[= (\\cos\\alpha\\,\\underline{i} + \\sin\\alpha\\,\\underline{j}) \\cdot (\\cos\\beta\\,\\underline{i} + \\sin\\beta\\,\\underline{j})\\]\n\\[= \\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta\\]\nWhy: multiply matching components and add (14.2.5).",
+              "Step 3: Dot product by the angle\n\\[\\overrightarrow{OA} \\cdot \\overrightarrow{OB} = |\\overrightarrow{OA}||\\overrightarrow{OB}|\\cos(\\alpha - \\beta)\\]\n\\[= \\cos(\\alpha - \\beta)\\]\nWhy: the angle between the vectors is \\(\\alpha - \\beta\\), and \\(|\\overrightarrow{OA}| = |\\overrightarrow{OB}| = 1\\).",
+              "Step 4: Equate\n\\[\\cos(\\alpha - \\beta) = \\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta\\]\nWhy: both expressions are the same dot product.",
+              "Check:\n\\(\\alpha = 60^{\\circ}\\), \\(\\beta = 30^{\\circ}\\):\n\\[\\cos 30^{\\circ} = \\tfrac{\\sqrt{3}}{2}\\]\n\\[\\cos 60^{\\circ}\\cos 30^{\\circ} + \\sin 60^{\\circ}\\sin 30^{\\circ} = \\tfrac{\\sqrt{3}}{4} + \\tfrac{\\sqrt{3}}{4} = \\tfrac{\\sqrt{3}}{2}\\]"
+            ],
+            "answer": "\\(\\cos(\\alpha - \\beta) = \\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta\\), proved."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch14-fig-ex8-unit-vectors",
+            "alt": "x and y axes with origin O. Two unit vectors OA and OB start at O; OA makes the larger angle alpha and OB the smaller angle beta with the positive x-axis. The angle between them is marked alpha minus beta.",
+            "caption": "Figure: Example 8, unit vectors OA and OB with ∠AOB = α − β (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\underline{u} \\cdot \\underline{v} = a_{1}a_{2} + b_{1}b_{2} + c_{1}c_{2}\\): multiply matching components and add.\n2. The components of a vector are its projections along \\(\\underline{i}\\), \\(\\underline{j}\\), \\(\\underline{k}\\) (Example 6).\n3. The dot product proves the cosine law, the projection law (Example 7) and \\(\\cos(\\alpha - \\beta)\\) (Example 8).\n4. For vectors following each other round a triangle, the angle between them is the exterior angle."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Multiplying non-matching components (\\(a_{1}b_{2}\\) etc.); those terms vanish because \\(\\underline{i} \\cdot \\underline{j} = 0\\).\n2. Using the interior angle \\(A\\) instead of \\(\\pi - A\\) for vectors placed head to tail; this gives \\(+2bc\\cos A\\), the wrong sign.\n3. Forgetting that \\(\\cos(\\pi - x) = -\\cos x\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

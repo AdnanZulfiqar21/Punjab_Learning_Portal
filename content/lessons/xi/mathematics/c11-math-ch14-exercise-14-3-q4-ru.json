@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-3-Q4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-3-q4",
+      "title": "Question 4 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 288,
+          "pdf_to": 288,
+          "note": "Exercise 14.3, Question 4 (i)-(iii): area of a parallelogram from four vertices (opposite vertex found first) (book p.283). (iii) C printed without its minus sign. Answer key PDF 312."
+        }
+      ],
+      "variant_of": "C11-MATH-CH14-EXERCISE-14-3-Q4",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) Find the area of a parallelogram, whose vertices are: \\(A(0, 0, 0)\\), \\(B(1, 2, 3)\\), \\(C(2, -1, 1)\\), \\(D(-1, 3, 2)\\).",
+            "explanation": "Yeh parallelogram ka area nikalne ka sawal hai, chaar kone diye hain.\nHumein area chahiye, jo do adjacent sides ke cross product ki lambai hai.\nPlan: pehle \\(A\\) ke saamne wala kona pehchanein, phir \\(A\\) se do sides, cross product aur us ki lambai.",
+            "steps": [
+              "Diya gaya hai: \\(A(0, 0, 0)\\), \\(B(1, 2, 3)\\), \\(C(2, -1, 1)\\), \\(D(-1, 3, 2)\\).\nHumein find karna hai: parallelogram ka area.\nTareeqa: Parallelogram ka area \\(= |\\underline{u} \\times \\underline{v}|\\), jahan \\(\\underline{u}\\) aur \\(\\underline{v}\\) ek hi kone se nikalne wali do saath wali (adjacent) sides hain (14.3.7 (a)). Lekin pehle yeh pakka karna zaroori hai ke kaun sa kona \\(A\\) ke saamne (opposite) hai, kyunke diagonal ko side samajh lein to jawab ghalat aayega. Parallelogram ki diagonals ek doosre ko beech se kaat-ti hain (bisect karti hain), is liye opposite konon ke coordinates ka jama barabar hota hai.",
+              "\\(A\\) ke saamne wala kona dhoondein\n\\[A + B = (1, 2, 3)\\]\n\\[C + D = (1, 2, 3)\\]\nKyun: Dono jama barabar hain, yani \\(AB\\) aur \\(CD\\) ka midpoint (beech ka point) ek hi hai; is ka matlab yeh dono diagonals hain. To \\(A\\) aur \\(B\\) aamne saamne hain aur ghoom kar kone \\(A, C, B, D\\) ki tarteeb mein aate hain. \\(A\\) se nikalne wali sides \\(C\\) aur \\(D\\) ki taraf jati hain.\nDhyan dein: Is sawal mein kone \\(A, B, C, D\\) tarteeb se nahi diye gaye. Agar aap seedha \\(\\underline{AB}\\) aur \\(\\underline{AD}\\) le lete to \\(\\underline{AB}\\) to diagonal hai! Is liye pehle yeh check zaroor karein.",
+              "Do adjacent sides vectors ki shakal mein\n\\[\\underline{AC} = (2 - 0)\\underline{i} + (-1 - 0)\\underline{j} + (1 - 0)\\underline{k}\\]\n\\[= 2\\underline{i} - \\underline{j} + \\underline{k}\\]\n\\[\\underline{AD} = (-1 - 0)\\underline{i} + (3 - 0)\\underline{j} + (2 - 0)\\underline{k}\\]\n\\[= -\\underline{i} + 3\\underline{j} + 2\\underline{k}\\]\nKyun: Vector = (aakhri point) minus (shuru wala point); dono sides \\(A\\) se shuru ho rahi hain.",
+              "Determinant likhein\n\\[\\underline{AC} \\times \\underline{AD} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 2 & -1 & 1 \\\\ -1 & 3 & 2 \\end{vmatrix}\\]\nKyun: Pehli row mein unit vectors \\(\\underline{i}, \\underline{j}, \\underline{k}\\), doosri row mein pehle vector ke components \\(\\underline{AC}\\), teesri row mein doosre vector ke components \\(\\underline{AD}\\). Rows ki tarteeb wohi honi chahiye jo product ki tarteeb hai, warna jawab ka sign ulta ho jayega.",
+              "Teenon minors nikalein\n\\[\\underline{i}\\text{ minor} = (-1)(2) - (1)(3) = -5\\]\n\\[\\underline{j}\\text{ minor} = (2)(2) - (1)(-1) = 5\\]\n\\[\\underline{k}\\text{ minor} = (2)(3) - (-1)(-1) = 5\\]\nKyun: Har unit vector ki row aur column ko dhak dein (cover kar dein); jo 2 by 2 bachta hai us ka (upar baayan)(neeche daayan) minus (upar daayan)(neeche baayan) minor hai. Har product ko bracket mein likhne se negative signs ki ghalti nahi hoti.",
+              "Signs \\(+, -, +\\) lagayein\n\\[\\underline{AC} \\times \\underline{AD} = \\underline{i}(-5) - \\underline{j}(5) + \\underline{k}(5)\\]\n\\[= -5\\underline{i} - 5\\underline{j} + 5\\underline{k}\\]\nKyun: Determinant ko pehli row ke saath kholte waqt signs ka pattern \\(+, -, +\\) hota hai, yani beech wala \\(\\underline{j}\\) ka term minus ho kar aata hai.\nDhyan dein: Sab se zyada ghalti isi beech wale minus mein hoti hai; \\(-\\underline{j}(\\text{minor})\\) mein minor khud negative ho to jawab plus ban jata hai.",
+              "Area = cross product ki lambai\n\\[|\\underline{AC} \\times \\underline{AD}| = \\sqrt{(-5)^2 + (-5)^2 + (5)^2}\\]\n\\[= \\sqrt{75} = 5 \\sqrt{3}\\]\nKyun: \\(|\\underline{u} \\times \\underline{v}| = |\\underline{u}||\\underline{v}|\\sin\\theta\\); yahan \\(|\\underline{u}|\\) base hai aur \\(|\\underline{v}|\\sin\\theta\\) height, to yeh base \\(\\times\\) height hi hai. Parallelogram mein aadha nahi karna.",
+              "Diagonals se tasdeeq\n\\[\\text{Area} = \\dfrac{1}{2}\\,|\\underline{AB} \\times \\underline{CD}|\\]\n\\[= 5\\sqrt{3}\\]\nKyun: Parallelogram ka area us ki dono diagonals ke cross product ki aadhi lambai bhi hota hai. Yeh doosra rasta wohi jawab deta hai, to hamara jawab pakka hai."
+            ],
+            "final_answer": "Area \\(= 5\\sqrt{3}\\) square units"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) Find the area of a parallelogram, whose vertices are: \\(A(1, 1, 1)\\), \\(B(4, 2, 3)\\), \\(C(5, 6, 7)\\), \\(D(2, 5, 5)\\).",
+            "explanation": "Yeh parallelogram ka area nikalne ka sawal hai, chaar kone diye hain.\nHumein area chahiye, jo do adjacent sides ke cross product ki lambai hai.\nPlan: pehle \\(A\\) ke saamne wala kona pehchanein, phir \\(A\\) se do sides, cross product aur us ki lambai.",
+            "steps": [
+              "Diya gaya hai: \\(A(1, 1, 1)\\), \\(B(4, 2, 3)\\), \\(C(5, 6, 7)\\), \\(D(2, 5, 5)\\).\nHumein find karna hai: parallelogram ka area.\nTareeqa: Parallelogram ka area \\(= |\\underline{u} \\times \\underline{v}|\\), jahan \\(\\underline{u}\\) aur \\(\\underline{v}\\) ek hi kone se nikalne wali do saath wali (adjacent) sides hain (14.3.7 (a)). Lekin pehle yeh pakka karna zaroori hai ke kaun sa kona \\(A\\) ke saamne (opposite) hai, kyunke diagonal ko side samajh lein to jawab ghalat aayega. Parallelogram ki diagonals ek doosre ko beech se kaat-ti hain (bisect karti hain), is liye opposite konon ke coordinates ka jama barabar hota hai.",
+              "\\(A\\) ke saamne wala kona dhoondein\n\\[A + C = (6, 7, 8)\\]\n\\[B + D = (6, 7, 8)\\]\nKyun: Dono jama barabar hain, yani \\(AC\\) aur \\(BD\\) ka midpoint (beech ka point) ek hi hai; is ka matlab yeh dono diagonals hain. To \\(A\\) aur \\(C\\) aamne saamne hain aur ghoom kar kone \\(A, B, C, D\\) ki tarteeb mein aate hain. \\(A\\) se nikalne wali sides \\(B\\) aur \\(D\\) ki taraf jati hain.\nDhyan dein: Yeh check har dafa karein; kitab hamesha kone tarteeb se nahi deti.",
+              "Do adjacent sides vectors ki shakal mein\n\\[\\underline{AB} = (4 - 1)\\underline{i} + (2 - 1)\\underline{j} + (3 - 1)\\underline{k}\\]\n\\[= 3\\underline{i} + \\underline{j} + 2\\underline{k}\\]\n\\[\\underline{AD} = (2 - 1)\\underline{i} + (5 - 1)\\underline{j} + (5 - 1)\\underline{k}\\]\n\\[= \\underline{i} + 4\\underline{j} + 4\\underline{k}\\]\nKyun: Vector = (aakhri point) minus (shuru wala point); dono sides \\(A\\) se shuru ho rahi hain.",
+              "Determinant likhein\n\\[\\underline{AB} \\times \\underline{AD} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 3 & 1 & 2 \\\\ 1 & 4 & 4 \\end{vmatrix}\\]\nKyun: Pehli row mein unit vectors \\(\\underline{i}, \\underline{j}, \\underline{k}\\), doosri row mein pehle vector ke components \\(\\underline{AB}\\), teesri row mein doosre vector ke components \\(\\underline{AD}\\). Rows ki tarteeb wohi honi chahiye jo product ki tarteeb hai, warna jawab ka sign ulta ho jayega.",
+              "Teenon minors nikalein\n\\[\\underline{i}\\text{ minor} = (1)(4) - (2)(4) = -4\\]\n\\[\\underline{j}\\text{ minor} = (3)(4) - (2)(1) = 10\\]\n\\[\\underline{k}\\text{ minor} = (3)(4) - (1)(1) = 11\\]\nKyun: Har unit vector ki row aur column ko dhak dein (cover kar dein); jo 2 by 2 bachta hai us ka (upar baayan)(neeche daayan) minus (upar daayan)(neeche baayan) minor hai. Har product ko bracket mein likhne se negative signs ki ghalti nahi hoti.",
+              "Signs \\(+, -, +\\) lagayein\n\\[\\underline{AB} \\times \\underline{AD} = \\underline{i}(-4) - \\underline{j}(10) + \\underline{k}(11)\\]\n\\[= -4\\underline{i} - 10\\underline{j} + 11\\underline{k}\\]\nKyun: Determinant ko pehli row ke saath kholte waqt signs ka pattern \\(+, -, +\\) hota hai, yani beech wala \\(\\underline{j}\\) ka term minus ho kar aata hai.\nDhyan dein: Sab se zyada ghalti isi beech wale minus mein hoti hai; \\(-\\underline{j}(\\text{minor})\\) mein minor khud negative ho to jawab plus ban jata hai.",
+              "Area = cross product ki lambai\n\\[|\\underline{AB} \\times \\underline{AD}| = \\sqrt{(-4)^2 + (-10)^2 + (11)^2}\\]\n\\[= \\sqrt{237}\\]\nKyun: \\(|\\underline{u} \\times \\underline{v}| = |\\underline{u}||\\underline{v}|\\sin\\theta\\); yahan \\(|\\underline{u}|\\) base hai aur \\(|\\underline{v}|\\sin\\theta\\) height, to yeh base \\(\\times\\) height hi hai. Parallelogram mein aadha nahi karna.",
+              "Diagonals se tasdeeq\n\\[\\text{Area} = \\dfrac{1}{2}\\,|\\underline{AC} \\times \\underline{BD}|\\]\n\\[= \\sqrt{237}\\]\nKyun: Parallelogram ka area us ki dono diagonals ke cross product ki aadhi lambai bhi hota hai. Yeh doosra rasta wohi jawab deta hai, to hamara jawab pakka hai."
+            ],
+            "final_answer": "Area \\(= \\sqrt{237}\\) square units"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iii)",
+            "prompt": "4 (iii) Find the area of a parallelogram, whose vertices are: \\(A(4, 5, 6)\\), \\(B(1, 3, 2)\\), \\(C(-2, 0, 1)\\) [printed as \\(C(\\ 2, 0, 1)\\)], \\(D(1, 2, 5)\\).",
+            "explanation": "Yeh parallelogram ka area nikalne ka sawal hai, chaar kone diye hain.\nHumein area chahiye, jo do adjacent sides ke cross product ki lambai hai.\nPlan: pehle \\(A\\) ke saamne wala kona pehchanein, phir \\(A\\) se do sides, cross product aur us ki lambai.",
+            "steps": [
+              "Diya gaya hai: \\(A(4, 5, 6)\\), \\(B(1, 3, 2)\\), \\(C(-2, 0, 1)\\), \\(D(1, 2, 5)\\).\nHumein find karna hai: parallelogram ka area.\nTareeqa: Parallelogram ka area \\(= |\\underline{u} \\times \\underline{v}|\\), jahan \\(\\underline{u}\\) aur \\(\\underline{v}\\) ek hi kone se nikalne wali do saath wali (adjacent) sides hain (14.3.7 (a)). Lekin pehle yeh pakka karna zaroori hai ke kaun sa kona \\(A\\) ke saamne (opposite) hai, kyunke diagonal ko side samajh lein to jawab ghalat aayega. Parallelogram ki diagonals ek doosre ko beech se kaat-ti hain (bisect karti hain), is liye opposite konon ke coordinates ka jama barabar hota hai.",
+              "\\(A\\) ke saamne wala kona dhoondein\n\\[A + C = (2, 5, 7)\\]\n\\[B + D = (2, 5, 7)\\]\nKyun: Dono jama barabar hain, yani \\(AC\\) aur \\(BD\\) ka midpoint (beech ka point) ek hi hai; is ka matlab yeh dono diagonals hain. To \\(A\\) aur \\(C\\) aamne saamne hain aur ghoom kar kone \\(A, B, C, D\\) ki tarteeb mein aate hain. \\(A\\) se nikalne wali sides \\(B\\) aur \\(D\\) ki taraf jati hain.\nDhyan dein: Yeh check har dafa karein; kitab hamesha kone tarteeb se nahi deti.",
+              "Do adjacent sides vectors ki shakal mein\n\\[\\underline{AB} = (1 - 4)\\underline{i} + (3 - 5)\\underline{j} + (2 - 6)\\underline{k}\\]\n\\[= -3\\underline{i} - 2\\underline{j} - 4\\underline{k}\\]\n\\[\\underline{AD} = (1 - 4)\\underline{i} + (2 - 5)\\underline{j} + (5 - 6)\\underline{k}\\]\n\\[= -3\\underline{i} - 3\\underline{j} - \\underline{k}\\]\nKyun: Vector = (aakhri point) minus (shuru wala point); dono sides \\(A\\) se shuru ho rahi hain.",
+              "Determinant likhein\n\\[\\underline{AB} \\times \\underline{AD} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ -3 & -2 & -4 \\\\ -3 & -3 & -1 \\end{vmatrix}\\]\nKyun: Pehli row mein unit vectors \\(\\underline{i}, \\underline{j}, \\underline{k}\\), doosri row mein pehle vector ke components \\(\\underline{AB}\\), teesri row mein doosre vector ke components \\(\\underline{AD}\\). Rows ki tarteeb wohi honi chahiye jo product ki tarteeb hai, warna jawab ka sign ulta ho jayega.",
+              "Teenon minors nikalein\n\\[\\underline{i}\\text{ minor} = (-2)(-1) - (-4)(-3) = -10\\]\n\\[\\underline{j}\\text{ minor} = (-3)(-1) - (-4)(-3) = -9\\]\n\\[\\underline{k}\\text{ minor} = (-3)(-3) - (-2)(-3) = 3\\]\nKyun: Har unit vector ki row aur column ko dhak dein (cover kar dein); jo 2 by 2 bachta hai us ka (upar baayan)(neeche daayan) minus (upar daayan)(neeche baayan) minor hai. Har product ko bracket mein likhne se negative signs ki ghalti nahi hoti.",
+              "Signs \\(+, -, +\\) lagayein\n\\[\\underline{AB} \\times \\underline{AD} = \\underline{i}(-10) - \\underline{j}(-9) + \\underline{k}(3)\\]\n\\[= -10\\underline{i} + 9\\underline{j} + 3\\underline{k}\\]\nKyun: Determinant ko pehli row ke saath kholte waqt signs ka pattern \\(+, -, +\\) hota hai, yani beech wala \\(\\underline{j}\\) ka term minus ho kar aata hai.\nDhyan dein: Sab se zyada ghalti isi beech wale minus mein hoti hai; \\(-\\underline{j}(\\text{minor})\\) mein minor khud negative ho to jawab plus ban jata hai.",
+              "Area = cross product ki lambai\n\\[|\\underline{AB} \\times \\underline{AD}| = \\sqrt{(-10)^2 + (9)^2 + (3)^2}\\]\n\\[= \\sqrt{190}\\]\nKyun: \\(|\\underline{u} \\times \\underline{v}| = |\\underline{u}||\\underline{v}|\\sin\\theta\\); yahan \\(|\\underline{u}|\\) base hai aur \\(|\\underline{v}|\\sin\\theta\\) height, to yeh base \\(\\times\\) height hi hai. Parallelogram mein aadha nahi karna.",
+              "Diagonals se tasdeeq\n\\[\\text{Area} = \\dfrac{1}{2}\\,|\\underline{AC} \\times \\underline{BD}|\\]\n\\[= \\sqrt{190}\\]\nKyun: Parallelogram ka area us ki dono diagonals ke cross product ki aadhi lambai bhi hota hai. Yeh doosra rasta wohi jawab deta hai, to hamara jawab pakka hai."
+            ],
+            "final_answer": "Area \\(= \\sqrt{190}\\) square units"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein teesra kona \\(C(\\ 2, 0, 1)\\) chhapa hai, pehle coordinate ka minus sign ghayab hai. Agar \\(C(2, 0, 1)\\) lein to yeh chaar points parallelogram nahi banate (kisi bhi jore ka jama baaqi do ke jama ke barabar nahi aata). Sahi kona \\(C(-2, 0, 1)\\) hai: tab \\(A + C = B + D = (2, 5, 7)\\) aur area \\(\\sqrt{190}\\) aata hai, jo answer key mein bhi hai."
+          }
+        ]
+      }
+    }
+  ]
+}

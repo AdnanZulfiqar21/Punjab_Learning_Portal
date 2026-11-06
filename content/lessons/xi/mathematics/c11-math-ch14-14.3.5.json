@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-14.3.5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/14.3.5",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 282,
+          "pdf_to": 283,
+          "note": "Book p. 277-278: 14.3.5 derivation of u x v in components, equation (i), determinant formula (ii) (row printed a2 b2 c3), the Note box, Example 15 with Verification."
+        }
+      ],
+      "title": "14.3.5 Analytical Expressions of u x v (Determinant formula for u x v)",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Let \\(\\underline{u} = a_1\\underline{i} + b_1\\underline{j} + c_1\\underline{k}\\) and \\(\\underline{v} = a_2\\underline{i} + b_2\\underline{j} + c_2\\underline{k}\\), then"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\underline{u} \\times \\underline{v}\\]\n\\[= (a_1\\underline{i} + b_1\\underline{j} + c_1\\underline{k})\\]\n\\[\\quad \\times (a_2\\underline{i} + b_2\\underline{j} + c_2\\underline{k})\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "by distributive property,\n\\[= a_1a_2(\\underline{i} \\times \\underline{i}) + a_1b_2(\\underline{i} \\times \\underline{j})\\]\n\\[+ a_1c_2(\\underline{i} \\times \\underline{k}) + b_1a_2(\\underline{j} \\times \\underline{i})\\]\n\\[+ b_1b_2(\\underline{j} \\times \\underline{j}) + b_1c_2(\\underline{j} \\times \\underline{k})\\]\n\\[+ c_1a_2(\\underline{k} \\times \\underline{i}) + c_1b_2(\\underline{k} \\times \\underline{j})\\]\n\\[+ c_1c_2(\\underline{k} \\times \\underline{k})\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Since\n\\[\\underline{i} \\times \\underline{j} = \\underline{k} = -\\underline{j} \\times \\underline{i}\\]\n\\[\\underline{j} \\times \\underline{k} = \\underline{i} = -\\underline{k} \\times \\underline{j}\\]\n\\[\\underline{k} \\times \\underline{i} = \\underline{j} = -\\underline{i} \\times \\underline{k}\\]\n\\[\\underline{i} \\times \\underline{i} = \\underline{j} \\times \\underline{j} = \\underline{k} \\times \\underline{k} = \\underline{0}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "we get\n\\[= a_1b_2\\underline{k} - a_1c_2\\underline{j} - b_1a_2\\underline{k}\\]\n\\[\\quad + b_1c_2\\underline{i} + c_1a_2\\underline{j} - c_1b_2\\underline{i}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\Rightarrow \\underline{u} \\times \\underline{v} = (b_1c_2 - c_1b_2)\\underline{i}\\]\n\\[\\quad - (a_1c_2 - c_1a_2)\\underline{j}\\]\n\\[\\quad + (a_1b_2 - b_1a_2)\\underline{k} \\quad \\text{(i)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How the nine terms became six: the three terms with \\(\\underline{i} \\times \\underline{i}\\), \\(\\underline{j} \\times \\underline{j}\\), \\(\\underline{k} \\times \\underline{k}\\) vanish. Each remaining product is replaced from the cyclic pattern, with a minus sign when the order is against the cycle (e.g. \\(\\underline{i} \\times \\underline{k} = -\\underline{j}\\)).\nThen like terms are grouped: the \\(\\underline{i}\\)-terms \\(b_1c_2\\underline{i} - c_1b_2\\underline{i}\\), the \\(\\underline{j}\\)-terms \\(-a_1c_2\\underline{j} + c_1a_2\\underline{j} = -(a_1c_2 - c_1a_2)\\underline{j}\\), and the \\(\\underline{k}\\)-terms \\(a_1b_2\\underline{k} - b_1a_2\\underline{k}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The expression of \\(3 \\times 3\\) determinant\n\\[\\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ a_1 & b_1 & c_1 \\\\ a_2 & b_2 & c_3 \\end{vmatrix}\\]\n\\[= (b_1c_2 - c_1b_2)\\underline{i}\\]\n\\[\\quad - (a_1c_2 - c_1a_2)\\underline{j}\\]\n\\[\\quad + (a_1b_2 - b_1a_2)\\underline{k}\\]",
+            "book_errors": [
+              "\\[\\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ a_1 & b_1 & c_1 \\\\ a_2 & b_2 & c_3 \\end{vmatrix}\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In this determinant the last entry of the third row is printed as \\(c_3\\). It must be \\(c_2\\), the \\(z\\)-component of \\(\\underline{v}\\); the book prints it correctly in equation (ii) below."
+          },
+          {
+            "type": "paragraph",
+            "text": "The terms on R.H.S of equation (i) are the same as the terms in the expansion of the above determinant. Hence"
+          },
+          {
+            "type": "equation",
+            "latex": "\\underline{u} \\times \\underline{v} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ a_1 & b_1 & c_1 \\\\ a_2 & b_2 & c_2 \\end{vmatrix} \\quad \\text{(ii)}",
+            "text_alt": "u cross v equals the determinant with first row i, j, k, second row a1, b1, c1 and third row a2, b2, c2, equation (ii)"
+          },
+          {
+            "type": "paragraph",
+            "text": "which is known as determinant formula for \\(\\underline{u} \\times \\underline{v}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "The expression on R.H.S. of equation (ii) is not an actual determinant, since its entries are not all scalars. It is simply a way of remembering the complicated expression on R.H.S of equation (i)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to use the determinant formula:\n1. Row 1: \\(\\underline{i}, \\underline{j}, \\underline{k}\\). Row 2: components of the FIRST vector. Row 3: components of the SECOND vector.\n2. \\(\\underline{i}\\)-component: hide the \\(\\underline{i}\\) column and cross-multiply what is left.\n3. \\(\\underline{j}\\)-component: hide the \\(\\underline{j}\\) column, cross-multiply, and put a MINUS sign in front.\n4. \\(\\underline{k}\\)-component: hide the \\(\\underline{k}\\) column and cross-multiply.\nSwapping rows 2 and 3 changes the sign of a determinant, which matches \\(\\underline{v} \\times \\underline{u} = -\\underline{u} \\times \\underline{v}\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 15",
+            "problem": "Find a vector perpendicular to each of the vectors \\(\\underline{a} = 2\\underline{i} - \\underline{j} + \\underline{k}\\) and \\(\\underline{b} = 4\\underline{i} + 2\\underline{j} - \\underline{k}\\).",
+            "steps": [
+              "Given: \\(\\underline{a} = 2\\underline{i} - \\underline{j} + \\underline{k}\\) and \\(\\underline{b} = 4\\underline{i} + 2\\underline{j} - \\underline{k}\\).\nTo find: a vector perpendicular to both \\(\\underline{a}\\) and \\(\\underline{b}\\).\nMethod: by definition, \\(\\underline{a} \\times \\underline{b}\\) is perpendicular to both \\(\\underline{a}\\) and \\(\\underline{b}\\). So we compute \\(\\underline{a} \\times \\underline{b}\\) with the determinant formula (ii), then verify with the dot product.",
+              "Step 1: Write the determinant\n\\[\\underline{a} \\times \\underline{b} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 2 & -1 & 1 \\\\ 4 & 2 & -1 \\end{vmatrix}\\]\nWhy: row 2 holds the components of the first vector \\(\\underline{a}\\), row 3 those of the second vector \\(\\underline{b}\\). The order of the rows matters.",
+              "Step 2: The \\(\\underline{i}\\)-component (cover the \\(\\underline{i}\\) column)\n\\[(-1)(-1) - (1)(2) = 1 - 2 = -1\\]\nWhy: cross-multiply the \\(2 \\times 2\\) block left after hiding the first column.",
+              "Step 3: The \\(\\underline{j}\\)-component (cover the \\(\\underline{j}\\) column; minus sign)\n\\[-\\big[(2)(-1) - (1)(4)\\big]\\]\n\\[= -(-2 - 4) = 6\\]\nWhy: the middle term of a determinant expansion always carries a minus sign.",
+              "Step 4: The \\(\\underline{k}\\)-component (cover the \\(\\underline{k}\\) column)\n\\[(2)(2) - (-1)(4) = 4 + 4 = 8\\]\nWhy: the last \\(2 \\times 2\\) block uses the first two columns.",
+              "Step 5: Collect the components\n\\[\\underline{a} \\times \\underline{b} = -\\underline{i} + 6\\underline{j} + 8\\underline{k}\\]\nWhy: this is the vector the book obtains.",
+              "Verification (as in the book): dot product with \\(\\underline{a}\\)\n\\[\\underline{a} \\cdot (\\underline{a} \\times \\underline{b})\\]\n\\[= (2\\underline{i} - \\underline{j} + \\underline{k}) \\cdot (-\\underline{i} + 6\\underline{j} + 8\\underline{k})\\]\n\\[= (2)(-1) + (-1)(6) + (1)(8)\\]\n\\[= -2 - 6 + 8 = 0\\]\nWhy: a zero dot product means the two vectors are perpendicular.",
+              "Check: dot product with \\(\\underline{b}\\)\n\\[\\underline{b} \\cdot (\\underline{a} \\times \\underline{b})\\]\n\\[= (4\\underline{i} + 2\\underline{j} - \\underline{k}) \\cdot (-\\underline{i} + 6\\underline{j} + 8\\underline{k})\\]\n\\[= (4)(-1) + (2)(6) + (-1)(8)\\]\n\\[= -4 + 12 - 8 = 0\\]\nHence \\(\\underline{a} \\times \\underline{b}\\) is perpendicular to both the vectors \\(\\underline{a}\\) and \\(\\underline{b}\\)."
+            ],
+            "answer": "\\(\\underline{a} \\times \\underline{b} = -\\underline{i} + 6\\underline{j} + 8\\underline{k}\\) is perpendicular to both \\(\\underline{a}\\) and \\(\\underline{b}\\) (any non-zero multiple of it, e.g. \\(\\underline{i} - 6\\underline{j} - 8\\underline{k}\\), is also perpendicular to both)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\underline{u} \\times \\underline{v} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ a_1 & b_1 & c_1 \\\\ a_2 & b_2 & c_2 \\end{vmatrix}\\), first vector in row 2.\n2. Expanded: \\((b_1c_2 - c_1b_2)\\underline{i} - (a_1c_2 - c_1a_2)\\underline{j} + (a_1b_2 - b_1a_2)\\underline{k}\\).\n3. The answer is perpendicular to both vectors: check by two dot products equal to zero."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Forgetting the minus sign in front of the \\(\\underline{j}\\)-component.\n2. Putting the second vector in row 2: this reverses the sign of the whole answer.\n3. Sign slips with negative entries, e.g. \\((-1)(-1) = +1\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

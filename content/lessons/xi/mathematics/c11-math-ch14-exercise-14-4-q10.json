@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-4-Q10",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-4-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 295,
+          "pdf_to": 295,
+          "note": "Exercise 14.4 Q10, book p.290 (PDF 295). Key PDF 312: 301/sqrt(1630), correct (sympy, about 7.46). Printed 'the vector', 'define by'. Solution book PDF 1284-1286 agrees."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10 Consider a parallelepiped determined by the vectors \\(\\underline{u} = 2\\underline{i} + 4\\underline{j} - 3\\underline{k}\\), \\(\\underline{v} = 5\\underline{i} - 3\\underline{j} + 6\\underline{k}\\) and \\(\\underline{w} = 4\\underline{i} - 7\\underline{j} - 2\\underline{k}\\). If the base of the parallelepiped is defined by the vectors \\(\\underline{u}\\) and \\(\\underline{v}\\), then find the height of the parallelepiped.",
+            "explanation": "A height question: volume \\(=\\) (area of base) \\(\\times\\) height.\nWe must find the height above the base made by \\(\\underline{u}\\) and \\(\\underline{v}\\).\nPlan: base area \\(= |\\underline{u} \\times \\underline{v}|\\), volume \\(= |\\underline{w} \\cdot (\\underline{u} \\times \\underline{v})|\\), height \\(=\\) volume \\(\\div\\) base area.",
+            "steps": [
+              "Given: \\(\\underline{u} = 2\\underline{i} + 4\\underline{j} - 3\\underline{k}\\), \\(\\underline{v} = 5\\underline{i} - 3\\underline{j} + 6\\underline{k}\\), \\(\\underline{w} = 4\\underline{i} - 7\\underline{j} - 2\\underline{k}\\); base on \\(\\underline{u}, \\underline{v}\\).\nTo find: the height \\(h\\).\nMethod: \\(h = \\dfrac{|\\underline{w} \\cdot (\\underline{u} \\times \\underline{v})|}{|\\underline{u} \\times \\underline{v}|}\\): the component of \\(\\underline{w}\\) along the normal \\(\\underline{u} \\times \\underline{v}\\) of the base (14.4.2).",
+              "Find \\(\\underline{u} \\times \\underline{v}\\)\n\\[\\underline{u} \\times \\underline{v} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 2 & 4 & -3 \\\\ 5 & -3 & 6 \\end{vmatrix}\\]\n\\[= (24 - 9)\\underline{i} - (12 + 15)\\underline{j} + (-6 - 20)\\underline{k}\\]\n\\[= 15\\underline{i} - 27\\underline{j} - 26\\underline{k}\\]\nWhy: Determinant formula for the cross product, signs \\(+, -, +\\).",
+              "Area of the base\n\\[|\\underline{u} \\times \\underline{v}| = \\sqrt{15^2 + 27^2 + 26^2}\\]\n\\[= \\sqrt{225 + 729 + 676} = \\sqrt{1630}\\]\nWhy: The parallelogram on \\(\\underline{u}\\) and \\(\\underline{v}\\) has area \\(|\\underline{u} \\times \\underline{v}|\\).",
+              "Volume\n\\[\\underline{w} \\cdot (\\underline{u} \\times \\underline{v}) = 60 + 189 + 52 = 301\\]\nWhy: \\((4)(15) + (-7)(-27) + (-2)(-26)\\); the volume is \\(|301| = 301\\) cubic units.",
+              "Height\n\\[h = \\dfrac{301}{\\sqrt{1630}} = \\dfrac{301\\sqrt{1630}}{1630}\\]\n\\[\\approx 7.46 \\text{ units}\\]\nWhy: Volume \\(=\\) base area \\(\\times\\) height, so height \\(=\\) volume \\(\\div\\) base area.",
+              "Check\n\\[\\underline{u} \\cdot (\\underline{u} \\times \\underline{v}) = 30 - 108 + 78 = 0 \\;\\checkmark\\]\n\\[\\sqrt{1630} \\approx 40.37,\\ 40.37 \\times 7.46 \\approx 301 \\;\\checkmark\\]\nWhy: \\(\\underline{u} \\times \\underline{v}\\) is perpendicular to \\(\\underline{u}\\) (so the cross product is right), and base \\(\\times\\) height gives back the volume."
+            ],
+            "final_answer": "\\(h = \\frac{301}{\\sqrt{1630}} \\approx 7.46\\) units"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \"a parallelepiped determined by the vector\" and \"If the base of the parallelepiped is define by the vectors\". It should read \"determined by the vectors\" and \"is defined by the vectors\". The data and the answer are not affected."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-4-Q7-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-4-q7",
+      "title": "Question 7 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 295,
+          "pdf_to": 295,
+          "note": "Exercise 14.4 Q7 (i)-(ii), book p.290 (PDF 295). Answer key PDF 312: 8/3 and 2/3 cubic units, both correct (sympy). Solution book PDF 1279-1281 agrees."
+        }
+      ],
+      "variant_of": "C11-MATH-CH14-EXERCISE-14-4-Q7",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(i)",
+            "prompt": "7 (i) Find volume of tetrahedron with the vertices \\((0, 1, 2)\\), \\((3, 2, 1)\\), \\((1, 2, 1)\\) and \\((5, 5, 6)\\).",
+            "explanation": "Tetrahedron ek aisa pyramid hai jis ke chaaron chehre triangles hain. Chaar corners (vertices) diye hain.\nDiya kya hai? Chaar points.\nFind kya karna hai? Tetrahedron ka volume.\nRule kaunsa? Ek corner se baqi teeno tak vectors banao; volume \\(= \\frac{1}{6}|\\)triple product\\(|\\) (14.4.3).\nPlan: teen edge vectors, un ka determinant, phir 6 se divide.",
+            "steps": [
+              "Diya gaya hai: vertices \\((0, 1, 2)\\), \\((3, 2, 1)\\), \\((1, 2, 1)\\) and \\((5, 5, 6)\\).\nHumein find karna hai: tetrahedron ka volume \\(V\\).\nTareeqa: \\(A = (0, 1, 2)\\) lete hue \\(V = \\dfrac{1}{6}\\left|[\\overrightarrow{AB}\\ \\overrightarrow{AC}\\ \\overrightarrow{AD}]\\right|\\). Kyun \\(\\frac{1}{6}\\)? Pyramid ka volume \\(\\frac{1}{3} \\times\\) base \\(\\times\\) height hota hai, aur is ka triangle wala base parallelogram ka aadha hai: \\(\\frac{1}{3} \\times \\frac{1}{2} = \\frac{1}{6}\\). Yani tetrahedron usi dabbe ka chhata hissa hai.",
+              "\\(A\\) se edge vectors\n\\[\\overrightarrow{AB} = 3\\underline{i} + \\underline{j} - \\underline{k}\\]\n\\[\\overrightarrow{AC} = \\underline{i} + \\underline{j} - \\underline{k}\\]\n\\[\\overrightarrow{AD} = 5\\underline{i} + 4\\underline{j} + 4\\underline{k}\\]\nKyun: Har point mein se \\(A\\) minus kiya (\"aakhri minus pehla\"): \\((3 - 0, 2 - 1, 1 - 2) = (3, 1, -1)\\); \\((1 - 0, 2 - 1, 1 - 2) = (1, 1, -1)\\); \\((5 - 0, 5 - 1, 6 - 2) = (5, 4, 4)\\).",
+              "Triple product\n\\[\\begin{vmatrix} 3 & 1 & -1 \\\\ 1 & 1 & -1 \\\\ 5 & 4 & 4 \\end{vmatrix}\\]\n\\[= 3(4 + 4) - 1(4 + 5) - 1(4 - 5)\\]\n\\[= 24 - 9 + 1 = 16\\]\nKyun: Row 1 se expand kiya, signs \\(+, -, +\\). Har entry ko us ka minor (row aur column dhaanp kar bacha 2 by 2 determinant) se multiply kiya.",
+              "Volume\n\\[V = \\dfrac{1}{6}|16| = \\dfrac{16}{6} = \\dfrac{8}{3}\\]\nKyun: Triple product parallelepiped ka volume hai; tetrahedron us ka chhata hissa. Absolute value is liye ke volume negative nahi ho sakta.\nDhyan dein: \\(\\frac{1}{6}\\) ke bajaye \\(\\frac{1}{3}\\) lagana aam ghalti hai (kitab ke 14.4.3 mein bhi ek line par aisi chhapai ki ghalti hai).",
+              "Tasdeeq: column 3 se expand karein\n\\[-1(4 - 5) + 1(12 - 5) + 4(3 - 1)\\]\n\\[= 1 + 7 + 8 = 16 \\;\\checkmark\\]\nKyun: Column 3 ke signs bhi \\(+, -, +\\) hain. Row 2 ki entry \\(-1\\) hai aur sign minus, to \\(+1\\) us ke minor \\((3)(4) - (1)(5) = 7\\) se. Doosre raste se bhi 16 aaya, is liye volume \\(\\frac{8}{3}\\) pakka hai."
+            ],
+            "final_answer": "\\(V = \\dfrac{16}{6} = \\dfrac{8}{3}\\) cubic units"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(ii)",
+            "prompt": "7 (ii) Find volume of tetrahedron with the vertices \\((2, 1, 8)\\), \\((3, 2, 9)\\), \\((2, 1, 4)\\) and \\((3, 3, 10)\\).",
+            "explanation": "Tetrahedron ek aisa pyramid hai jis ke chaaron chehre triangles hain. Chaar corners (vertices) diye hain.\nDiya kya hai? Chaar points.\nFind kya karna hai? Tetrahedron ka volume.\nRule kaunsa? Ek corner se baqi teeno tak vectors banao; volume \\(= \\frac{1}{6}|\\)triple product\\(|\\) (14.4.3).\nPlan: teen edge vectors, un ka determinant, phir 6 se divide.",
+            "steps": [
+              "Diya gaya hai: vertices \\((2, 1, 8)\\), \\((3, 2, 9)\\), \\((2, 1, 4)\\) and \\((3, 3, 10)\\).\nHumein find karna hai: tetrahedron ka volume \\(V\\).\nTareeqa: \\(A = (2, 1, 8)\\) lete hue \\(V = \\dfrac{1}{6}\\left|[\\overrightarrow{AB}\\ \\overrightarrow{AC}\\ \\overrightarrow{AD}]\\right|\\). Kyun \\(\\frac{1}{6}\\)? Pyramid ka volume \\(\\frac{1}{3} \\times\\) base \\(\\times\\) height hota hai, aur is ka triangle wala base parallelogram ka aadha hai: \\(\\frac{1}{3} \\times \\frac{1}{2} = \\frac{1}{6}\\). Yani tetrahedron usi dabbe ka chhata hissa hai.",
+              "\\(A\\) se edge vectors\n\\[\\overrightarrow{AB} = \\underline{i} + \\underline{j} + \\underline{k}\\]\n\\[\\overrightarrow{AC} = -4\\underline{k}\\]\n\\[\\overrightarrow{AD} = \\underline{i} + 2\\underline{j} + 2\\underline{k}\\]\nKyun: \\(A\\) har point se minus kiya: \\((3 - 2, 2 - 1, 9 - 8) = (1, 1, 1)\\); \\((2 - 2, 1 - 1, 4 - 8) = (0, 0, -4)\\); \\((3 - 2, 3 - 1, 10 - 8) = (1, 2, 2)\\). \\(\\overrightarrow{AC}\\) mein \\(\\underline{i}\\) aur \\(\\underline{j}\\) ke components 0 hain.",
+              "Triple product\n\\[\\begin{vmatrix} 1 & 1 & 1 \\\\ 0 & 0 & -4 \\\\ 1 & 2 & 2 \\end{vmatrix}\\]\n\\[= 1(0 + 8) - 1(0 + 4) + 1(0 - 0)\\]\n\\[= 8 - 4 + 0 = 4\\]\nKyun: Row 1 se expand kiya, signs \\(+, -, +\\). Har entry ko us ka minor (row aur column dhaanp kar bacha 2 by 2 determinant) se multiply kiya.",
+              "Volume\n\\[V = \\dfrac{1}{6}|4| = \\dfrac{4}{6} = \\dfrac{2}{3}\\]\nKyun: Triple product parallelepiped ka volume hai; tetrahedron us ka chhata hissa. Absolute value is liye ke volume negative nahi ho sakta.\nDhyan dein: \\(\\frac{1}{6}\\) ke bajaye \\(\\frac{1}{3}\\) lagana aam ghalti hai (kitab ke 14.4.3 mein bhi ek line par aisi chhapai ki ghalti hai).",
+              "Tasdeeq: row 2 se expand karein\n\\[-(-4)\\begin{vmatrix} 1 & 1 \\\\ 1 & 2 \\end{vmatrix} = 4(2 - 1) = 4 \\;\\checkmark\\]\nKyun: Row 2 mein do zeros hain, sirf \\(-4\\) bacha jo position (2, 3) par hai; wahan sign minus hai, to \\(-(-4) = +4\\). Zeros wali row se expand karna sab se tez rasta hai; exam mein aisi row dhoond kar kaam chhota karein."
+            ],
+            "final_answer": "\\(V = \\dfrac{4}{6} = \\dfrac{2}{3}\\) cubic units"
+          }
+        ]
+      }
+    }
+  ]
+}

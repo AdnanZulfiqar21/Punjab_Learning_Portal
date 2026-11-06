@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-14.4.3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/14.4.3",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 290,
+          "pdf_to": 290,
+          "note": "Book p. 285: 14.4.3 volume of the tetrahedron ABCD = (1/6)[u v w], derivation, figure, Note (ignore negative sign). Book errors: 'place' for plane; middle line 1/3 for 1/6. Teaching notes, Key points, mistakes are ours."
+        }
+      ],
+      "title": "14.4.3 The Volume of the Tetrahedron",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch14-fig-tetrahedron",
+            "alt": "A tetrahedron ABCD. From the vertex A three vectors are drawn: u along AB, v along AC and w along AD. The base triangle ABC is hatched. A dashed vertical line h drops from D to the plane of ABC and meets it at a right angle.",
+            "caption": "Figure: tetrahedron ABCD with u = AB, v = AC, w = AD and height h of D above the plane ABC (original drawing after the textbook's figure)",
+            "side": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A tetrahedron is a solid with four triangular faces, four vertices and six edges: a pyramid whose base is a triangle. Here the three edges from the vertex \\(A\\) are the vectors \\(\\underline{u} = \\underline{AB}\\), \\(\\underline{v} = \\underline{AC}\\) and \\(\\underline{w} = \\underline{AD}\\), and the triangle \\(ABC\\) is taken as the base."
+          },
+          {
+            "type": "paragraph",
+            "text": "Volume of the tetrahedron \\(ABCD = \\frac{1}{3}\\) (area of \\(\\Delta ABC\\))(height of \\(D\\) above the place \\(ABC\\))",
+            "book_errors": [
+              "above the place"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \"height of D above the place ABC\". It should read \"above the plane ABC\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Two facts are used here. (1) The volume of any pyramid is \\(\\frac{1}{3}\\times\\) area of base \\(\\times\\) height (you met this in earlier classes: three equal pyramids fill a prism with the same base and height). (2) The triangle \\(ABC\\) is half of the parallelogram with sides \\(AB\\) and \\(AC\\), and that parallelogram has area \\(|\\underline{u}\\times \\underline{v}|\\) (14.3). So area of \\(\\Delta ABC = \\frac{1}{2}|\\underline{u}\\times \\underline{v}|\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[= \\dfrac{1}{3}\\times\\dfrac{1}{2}\\,|\\underline{u}\\times \\underline{v}|\\,(h)\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(= \\frac{1}{6}\\) (Area of parallelogram with \\(AB\\) and \\(AC\\) as adjacent sides) \\((h)\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(= \\frac{1}{3}\\) (Volume of the parallelepiped with \\(\\underline{u}\\), \\(\\underline{v}\\), \\(\\underline{w}\\) as edges)",
+            "book_errors": [
+              "\\(= \\frac{1}{3}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \\(\\frac{1}{3}\\) in this line. It should be \\(\\frac{1}{6}\\): the parallelogram area times \\(h\\) is the volume of the parallelepiped (14.4.2), so the line reads \\(= \\frac{1}{6}\\) (Volume of the parallelepiped with \\(\\underline{u}\\), \\(\\underline{v}\\), \\(\\underline{w}\\) as edges), which agrees with the result below."
+          },
+          {
+            "type": "paragraph",
+            "text": "Thus,"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Volume} = \\dfrac{1}{6}(\\underline{u}\\times \\underline{v})\\cdot \\underline{w} = \\dfrac{1}{6}[\\underline{u}\\ \\underline{v}\\ \\underline{w}]",
+            "text_alt": "Volume equals one sixth of (u cross v) dot w, which is one sixth of the box product u v w"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "As volume is always positive, so ignore negative sign if \\((\\underline{u}\\times \\underline{v})\\cdot \\underline{w}\\) is negative."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "So a tetrahedron takes exactly one sixth of the parallelepiped built on the same three edges. In practice, for a tetrahedron with vertices \\(A, B, C, D\\):\n\\[V = \\dfrac{1}{6}\\left|[\\underline{AB}\\ \\underline{AC}\\ \\underline{AD}]\\right|\\]\nAll three vectors must start from the same vertex. Any vertex can be chosen; the answer is the same. Example 26 uses this formula."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Quick check with a corner of a box: \\(O(0,0,0)\\), \\(A(1,0,0)\\), \\(B(0,2,0)\\), \\(C(0,0,3)\\). The edges from \\(O\\) are \\(\\underline{i}, 2\\underline{j}, 3\\underline{k}\\) and \\([\\underline{i}\\ \\ 2\\underline{j}\\ \\ 3\\underline{k}] = 6\\), so \\(V = \\frac{1}{6}(6) = 1\\). Directly: the base \\(OAB\\) is a right triangle of area \\(\\frac{1}{2}(1)(2) = 1\\), the height is \\(3\\), and \\(\\frac{1}{3}(1)(3) = 1\\). Same answer."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Volume of a tetrahedron \\(= \\frac{1}{3}\\) (area of base)(height).\n2. Area of \\(\\Delta ABC = \\frac{1}{2}|\\underline{u}\\times \\underline{v}|\\).\n3. Volume \\(= \\frac{1}{6}[\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\): one sixth of the parallelepiped on the same edges.\n4. If the triple product is negative, ignore the sign: volume is positive."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Using \\(\\frac{1}{3}\\) (as the book's misprinted line does) or \\(\\frac{1}{2}\\) instead of \\(\\frac{1}{6}\\).\n2. Taking vectors that do not start from one vertex, e.g. \\(\\underline{AB}\\), \\(\\underline{BC}\\), \\(\\underline{CD}\\) mixed carelessly; use \\(\\underline{AB}, \\underline{AC}, \\underline{AD}\\).\n3. Writing a negative volume."
+          }
+        ]
+      }
+    }
+  ]
+}
