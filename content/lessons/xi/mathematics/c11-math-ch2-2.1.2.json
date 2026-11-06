@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH2-2.1.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch2",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch2/2.1.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 28,
+          "pdf_to": 28,
+          "note": "Book p. 23: 2.1.2 Notation and Value of a Function, computing-machine figure, Examples 1-2."
+        },
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 29,
+          "pdf_to": 29,
+          "note": "Book p. 24: Examples 3-4 and the green Remember! box (open and closed intervals). Teaching notes, Exam tips, Key points and Common mistake are ours."
+        }
+      ],
+      "title": "2.1.2 Notation and Value of a Function",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "If a variable \\(y\\) depends on a variable \\(x\\) in such a way that each value of \\(x\\) determines exactly one value of \\(y\\), then we say that \"\\(y\\) is a function of \\(x\\)\"."
+          },
+          {
+            "type": "paragraph",
+            "text": "The Swiss mathematician Euler (1707-1783) invented a symbolic way to write the statement \"\\(y\\) is a function of \\(x\\)\" as \\(y = f(x)\\), which is read as \"\\(y\\) is equal to \\(f\\) of \\(x\\)\"."
+          },
+          {
+            "type": "paragraph",
+            "text": "A function can be thought of as a computing machine \\(f\\) that takes an input \\(x\\), operates on it in some way and produces exactly one output \\(f(x)\\). This output \\(f(x)\\) is called the value of \\(f\\) at \\(x\\) or the image of \\(x\\) under \\(f\\). The output \\(f(x)\\) is denoted by a single letter, say \\(y\\), and we write \\(y = f(x)\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch2-fig-function-machine",
+            "alt": "A box labelled Function f between two arrows. The arrow entering from the left is labelled Input x; the arrow leaving on the right is labelled Output f(x). Below the box: Computing Machine.",
+            "caption": "Figure: a function as a computing machine (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "The variable \\(x\\) is called the independent variable of \\(f\\) and the variable \\(y\\) is called the dependent variable of \\(f\\). From now on we shall only consider functions in which the variables are real numbers, and we say that \\(f\\) is a real valued function of real numbers.",
+            "bold": [
+              "independent variable",
+              "dependent variable",
+              "real valued function of real numbers"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(f(x)\\) does NOT mean \\(f\\) times \\(x\\). It is a name: \"the output of \\(f\\) when the input is \\(x\\)\".\nTo find a value, replace every \\(x\\) in the rule by the given input, in brackets. For \\(f(x) = 3x + 2\\):\n\\[f(4) = 3(4) + 2 = 14\\]\nso the image of \\(4\\) under \\(f\\) is \\(14\\).\nThe input can also be an expression: \\(f(a + 1) = 3(a + 1) + 2 = 3a + 5\\).\n\\(x\\) is \"independent\" because we choose it; \\(y\\) is \"dependent\" because it is decided by \\(x\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Given \\(f(x) = x^{3}\\ \\ 2x^{2} + 4x\\ \\ 1\\), find: (i) \\(f(0)\\) (ii) \\(f(1)\\) (iii) \\(f(-2)\\) (iv) \\(f(1 + x)\\) (v) \\(f\\left(\\frac{1}{x}\\right)\\), \\(x \\ne 0\\)",
+            "steps": [
+              "Given: \\(f(x) = x^{3} - 2x^{2} + 4x - 1\\) (the minus signs are missing in the printed question; see the Book correction below).\nTo find: the values of \\(f\\) at \\(0\\), \\(1\\), \\(-2\\), \\(1 + x\\) and \\(\\frac{1}{x}\\).\nMethod: substitution. Replace every \\(x\\) in the rule by the input, keep the input in brackets, then simplify.",
+              "(i) Find \\(f(0)\\)\n\\[f(0) = 0^{3} - 2(0)^{2} + 4(0) - 1\\]\n\\[= 0 - 0 + 0 - 1\\]\n\\[f(0) = -1\\]\nWhy: every term containing \\(x\\) becomes \\(0\\); only the constant \\(-1\\) remains.",
+              "(ii) Find \\(f(1)\\)\n\\[f(1) = (1)^{3} - 2(1)^{2} + 4(1) - 1\\]\n\\[= 1 - 2 + 4 - 1\\]\n\\[f(1) = 2\\]\nWhy: every power of \\(1\\) is \\(1\\), so each term is just its coefficient.",
+              "(iii) Find \\(f(-2)\\)\n\\[f(-2) = (-2)^{3} - 2(-2)^{2} + 4(-2) - 1\\]\n\\[= -8 - 2(4) - 8 - 1\\]\n\\[= -8 - 8 - 8 - 1\\]\n\\[f(-2) = -25\\]\nWhy: the brackets keep the sign with the number: \\((-2)^{3} = -8\\) (odd power, negative) and \\((-2)^{2} = 4\\) (even power, positive).",
+              "(iv) Substitute \\(1 + x\\)\n\\[f(1 + x) = (1 + x)^{3} - 2(1 + x)^{2}\\]\n\\[\\quad + 4(1 + x) - 1\\]\nWhy: the whole input \\(1 + x\\) takes the place of \\(x\\), so it must stay in brackets.",
+              "(iv) Expand each bracket\n\\[(1 + x)^{3} = 1 + 3x + 3x^{2} + x^{3}\\]\n\\[-2(1 + x)^{2} = -2 - 4x - 2x^{2}\\]\n\\[4(1 + x) = 4 + 4x\\]\nWhy: \\((a + b)^{3} = a^{3} + 3a^{2}b + 3ab^{2} + b^{3}\\) and \\((1 + x)^{2} = 1 + 2x + x^{2}\\); the \\(-2\\) multiplies every term of the square.",
+              "(iv) Collect like terms\n\\[= 1 + 3x + 3x^{2} + x^{3} - 2 - 4x\\]\n\\[\\quad - 2x^{2} + 4 + 4x - 1\\]\n\\[f(1 + x) = x^{3} + x^{2} + 3x + 2\\]\nWhy: \\(x^{3}\\): one term; \\(x^{2}\\): \\(3 - 2 = 1\\); \\(x\\): \\(3 - 4 + 4 = 3\\); constants: \\(1 - 2 + 4 - 1 = 2\\).",
+              "(v) Find \\(f\\left(\\frac{1}{x}\\right)\\), \\(x \\ne 0\\)\n\\[f\\left(\\tfrac{1}{x}\\right) = \\left(\\tfrac{1}{x}\\right)^{3} - 2\\left(\\tfrac{1}{x}\\right)^{2}\\]\n\\[\\quad + 4\\left(\\tfrac{1}{x}\\right) - 1\\]\n\\[= \\dfrac{1}{x^{3}} - \\dfrac{2}{x^{2}} + \\dfrac{4}{x} - 1\\]\nWhy: \\(\\left(\\frac{1}{x}\\right)^{n} = \\frac{1}{x^{n}}\\). The condition \\(x \\ne 0\\) is needed because \\(\\frac{1}{0}\\) is not defined. (The book labels this part (iv) a second time.)",
+              "Check:\nPut \\(x = 0\\) in the answer of (iv): \\(0 + 0 + 0 + 2 = 2\\), which must equal \\(f(1 + 0) = f(1) = 2\\). Correct.\nPut \\(x = 1\\) in the answer of (v): \\(1 - 2 + 4 - 1 = 2\\), which must equal \\(f(1) = 2\\). Correct."
+            ],
+            "answer": "(i) \\(f(0) = -1\\) (ii) \\(f(1) = 2\\) (iii) \\(f(-2) = -25\\) (iv) \\(f(1 + x) = x^{3} + x^{2} + 3x + 2\\) (v) \\(f\\left(\\frac{1}{x}\\right) = \\frac{1}{x^{3}} - \\frac{2}{x^{2}} + \\frac{4}{x} - 1\\), \\(x \\ne 0\\)",
+            "book_errors": [
+              "\\(f(x) = x^{3}\\ \\ 2x^{2} + 4x\\ \\ 1\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the function in Example 1 without its minus signs, as \\(x^{3}\\ \\ 2x^{2} + 4x\\ \\ 1\\). The book's own solution uses \\(f(x) = x^{3} - 2x^{2} + 4x - 1\\), which is the correct function. Also, the book's solution labels the last part \"(iv)\" a second time; it is part (v), \\(f\\left(\\frac{1}{x}\\right)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to find the domain of a real function given by a formula: start with all real numbers and remove the values of \\(x\\) that make the formula meaningless.\n1. A denominator can never be \\(0\\).\n2. An even root (square root) needs a quantity \\(\\ge 0\\) under it.\nHow to find the range: ask \"which outputs \\(y\\) can actually occur?\". A good method is to write \\(y = f(x)\\), solve for \\(x\\) in terms of \\(y\\), and see for which \\(y\\) this \\(x\\) is a real number in the domain."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Find the domain and range of \\(f(x) = x^{2}\\).",
+            "steps": [
+              "Given: \\(f(x) = x^{2}\\).\nTo find: the domain (allowed inputs) and the range (outputs that occur).\nMethod: check whether any real \\(x\\) must be removed; then see which values \\(x^{2}\\) can take.",
+              "Domain\nEvery real number can be squared; there is no denominator and no root.\n\\[\\text{Domain } f = \\mathbb{R}\\]\nWhy: nothing in the formula fails for any real \\(x\\).",
+              "Range\nFor every real \\(x\\), \\(x^{2} \\ge 0\\).\nAnd every \\(y \\ge 0\\) is reached: take \\(x = \\sqrt{y}\\), then \\(f(\\sqrt{y}) = y\\).\n\\[\\text{Range } f = [0, \\infty)\\]\nWhy: a square is never negative, so negative numbers are not outputs; every non-negative number is the square of its own square root.",
+              "Check:\n\\(f(-3) = 9 \\ge 0\\), \\(f(0) = 0\\), \\(f(\\sqrt{5}) = 5\\). No real \\(x\\) gives \\(x^{2} = -1\\)."
+            ],
+            "answer": "Domain \\(f\\) = set of all real numbers; Range \\(f\\) = set of all non-negative real numbers \\(= [0, \\infty)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Remember!",
+            "text": "There are two types of intervals, known as open interval and closed interval. In an open interval \\((a, b)\\) the endpoints are not included. In a closed interval \\([a, b]\\) the endpoints are included."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Interval notation used in these examples:\n\\((2, 5)\\): \\(2 < x < 5\\) (ends left out); \\([2, 5]\\): \\(2 \\le x \\le 5\\) (ends included).\n\\([0, \\infty)\\): \\(x \\ge 0\\). The symbol \\(\\infty\\) is not a number, so it always gets a round bracket.\n\\((-\\infty, \\infty) = \\mathbb{R}\\), all real numbers.\n\\(\\cup\\) (union) joins two intervals: \\((-\\infty, -3] \\cup [3, \\infty)\\) means \\(x \\le -3\\) or \\(x \\ge 3\\).\n\\(\\mathbb{R} - \\{-2, 2\\}\\) means all real numbers except \\(-2\\) and \\(2\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Find the domain and range of \\(f(x) = \\dfrac{x}{x^{2} - 4}\\).",
+            "steps": [
+              "Given: \\(f(x) = \\dfrac{x}{x^{2} - 4}\\).\nTo find: the domain and the range.\nMethod: for the domain, remove the \\(x\\) that make the denominator zero. For the range, put \\(y = f(x)\\), solve for \\(x\\) and see which \\(y\\) give a real \\(x\\).",
+              "Domain: where is the denominator zero?\n\\[x^{2} - 4 = 0\\]\n\\[x = 2 \\text{ or } x = -2\\]\nAt \\(x = 2\\) and \\(x = -2\\), \\(f(x)\\) is not defined. So\n\\[\\text{Domain } f = \\mathbb{R} - \\{-2, 2\\}\\]\nWhy: division by zero is not defined; every other real \\(x\\) gives a real value.",
+              "Range: write \\(y = f(x)\\) and clear the fraction\n\\[y = \\dfrac{x}{x^{2} - 4}\\]\n\\[y(x^{2} - 4) = x\\]\n\\[x^{2}y - 4y = x\\]\n\\[x^{2}y - x - 4y = 0\\]\nWhy: we want \\(x\\) in terms of \\(y\\). Cross-multiplying gives an equation that is quadratic in \\(x\\).",
+              "Solve the quadratic in \\(x\\)\nHere \\(a = y\\), \\(b = -1\\), \\(c = -4y\\):\n\\[x = \\dfrac{-b \\pm \\sqrt{b^{2} - 4ac}}{2a}\\]\n\\[b^{2} - 4ac = (-1)^{2} - 4(y)(-4y)\\]\n\\[= 1 + 16y^{2}\\]\n\\[x = \\dfrac{1 \\pm \\sqrt{1 + 16y^{2}}}{2y},\\ y \\ne 0\\]\nWhy: the quadratic formula needs \\(a \\ne 0\\), i.e. \\(y \\ne 0\\); that case is treated separately.",
+              "Every \\(y \\ne 0\\) gives a real \\(x\\)\n\\(1 + 16y^{2} > 0\\) for every real \\(y\\), so the square root is real and \\(x\\) is defined for all \\(y \\ne 0\\).\nThis \\(x\\) is never \\(\\pm 2\\): if \\(x = \\pm 2\\), the equation \\(y(x^{2} - 4) = x\\) would read \\(0 = \\pm 2\\), which is false.\nWhy: \\(16y^{2} \\ge 0\\), so \\(1 + 16y^{2} \\ge 1\\). And the \\(x\\) we found must lie in the domain, which it does.",
+              "The case \\(y = 0\\)\n\\[0 = \\dfrac{x}{x^{2} - 4} \\Rightarrow x = 0\\]\n\\[f(0) = 0\\]\nWhy: a fraction is zero only when its numerator is zero. So \\(0\\) is also an output.",
+              "Conclusion\nEvery real number \\(y\\) is an output.\n\\[\\text{Range } f = (-\\infty, \\infty)\\]",
+              "Check:\nTake \\(y = \\frac{1}{3}\\): the equation \\(x^{2}y - x - 4y = 0\\) becomes \\(x^{2} - 3x - 4 = 0\\), so \\(x = 4\\) or \\(x = -1\\).\n\\(f(4) = \\frac{4}{16 - 4} = \\frac{1}{3}\\) and \\(f(-1) = \\frac{-1}{1 - 4} = \\frac{1}{3}\\). Correct."
+            ],
+            "answer": "Domain \\(f = \\mathbb{R} - \\{-2, 2\\}\\) (all real numbers except \\(-2\\) and \\(2\\)); Range \\(f\\) = set of all real numbers \\(= (-\\infty, \\infty)\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "Find the domain and range of \\(f(x) = \\sqrt{x^{2} - 9}\\).",
+            "steps": [
+              "Given: \\(f(x) = \\sqrt{x^{2} - 9}\\).\nTo find: the domain and the range.\nMethod: a square root is real only when the quantity under it is \\(\\ge 0\\). Solve that inequality using critical points and test values.",
+              "Condition for a real square root\n\\[x^{2} - 9 \\ge 0 \\quad \\text{...(i)}\\]\nWhy: the square root of a negative number is not a real number, and \\(f\\) is a real valued function.",
+              "Critical points\n\\[x^{2} - 9 = 0\\]\n\\[x = \\pm 3\\]\nThese points divide the number line into three regions: \\(x < -3\\), \\(-3 < x < 3\\), \\(x > 3\\).\nWhy: \\(x^{2} - 9\\) can change sign only where it is zero, so its sign is the same throughout each region.",
+              "Test one value in each region\nPut \\(x = -4\\) in (i): \\(16 - 9 \\ge 0\\) (True)\nPut \\(x = 0\\) in (i): \\(0 - 9 \\ge 0\\) (False)\nPut \\(x = 4\\) in (i): \\(16 - 9 \\ge 0\\) (True)\nWhy: one test value tells us the sign for the whole region.",
+              "Domain\nThe outer regions work, and \\(x = \\pm 3\\) give \\(0 \\ge 0\\) (True), so they are included.\n\\[\\text{Domain } f = (-\\infty, -3] \\cup [3, \\infty)\\]\nWhy: square brackets at \\(\\pm 3\\) because those endpoints satisfy \\(\\ge\\).",
+              "Range\nThe smallest value of \\(x^{2} - 9\\) on the domain is \\(0\\) (when \\(x = \\pm 3\\)):\n\\[y = \\sqrt{0} = 0\\]\nAs \\(|x|\\) increases beyond 3, \\(x^{2} - 9\\) grows to \\(+\\infty\\), so \\(y\\) grows to \\(+\\infty\\).\n\\[\\text{Range } f = [0, \\infty)\\]\nWhy: the symbol \\(\\sqrt{\\ }\\) always gives the non-negative root, so \\(y \\ge 0\\); and every \\(y \\ge 0\\) is reached because \\(x^{2} - 9\\) takes every value from \\(0\\) upwards.",
+              "Check:\n\\(f(5) = \\sqrt{25 - 9} = 4\\) and \\(f(-5) = 4\\): inputs from the domain give non-negative outputs.\n\\(f(0) = \\sqrt{-9}\\) is not real, so \\(0\\) is rightly left out of the domain."
+            ],
+            "answer": "Domain \\(f = (-\\infty, -3] \\cup [3, \\infty)\\); Range \\(f = [0, \\infty)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "In domain and range questions always write the final answer in set or interval notation, and say why points are removed (\"denominator zero at \\(x = \\pm 2\\)\", \"square root of a negative number is not real\"). Check the endpoints: square bracket if included, round bracket if not."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(y = f(x)\\) is read \"\\(y\\) equals \\(f\\) of \\(x\\)\" (Euler's notation); \\(f(x)\\) is the value or image of \\(x\\).\n2. \\(x\\) is the independent variable, \\(y\\) the dependent variable.\n3. To find \\(f(a)\\), replace every \\(x\\) by \\((a)\\) in brackets.\n4. Domain: remove \\(x\\) that make a denominator zero or put a negative number under a square root.\n5. Range: solve \\(y = f(x)\\) for \\(x\\) and see which \\(y\\) give a real \\(x\\) in the domain.\n6. Open interval \\((a, b)\\): ends excluded; closed \\([a, b]\\): ends included."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Reading \\(f(x)\\) as \\(f \\times x\\).\n2. Dropping brackets on substitution: \\(f(-2)\\) for \\(x^{2}\\) is \\((-2)^{2} = 4\\), not \\(-2^{2} = -4\\).\n3. In \\(f(1 + x)\\), expanding \\(-2(1 + x)^{2}\\) as \\(-2 + 2x + x^{2}\\): the \\(-2\\) multiplies every term.\n4. Giving the domain of \\(\\sqrt{x^{2} - 9}\\) as \\(x \\ge 3\\) only: the region \\(x \\le -3\\) also works.\n5. Using a square bracket at \\(\\infty\\)."
+          }
+        ]
+      }
+    }
+  ]
+}
