@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-2-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-2-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 194,
+          "pdf_to": 194,
+          "note": "Exercise 10.2 Q1 (6 parts), book p.189 (PDF 194), hint box 15=45-30, 105=60+45. Key PDF 308 (labelled '2.') matches all parts. Checked with sympy; solution book PDF 893-898 agrees."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Without using table find the value of \\(\\sin 15^{\\circ}\\).",
+            "explanation": "A value-without-table question: 15° is not a special angle.\nWe must find \\(\\sin 15^{\\circ}\\) exactly (in surds).\nPlan: write \\(15^{\\circ} = 45^{\\circ} - 30^{\\circ}\\) (the hint) and use the formula for \\(\\sin(\\alpha - \\beta)\\).",
+            "steps": [
+              "Given: the angle \\(15^{\\circ}\\).\nTo find: \\(\\sin 15^{\\circ}\\) without tables.\nMethod: Split \\(15^{\\circ} = 45^{\\circ} - 30^{\\circ}\\) (hint box) and use\n\\[\\sin(\\alpha - \\beta) = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta\\]\nIt fits because we know sine and cosine of \\(45^{\\circ}\\) and \\(30^{\\circ}\\) exactly.",
+              "Values we need\n\\[\\sin 45^{\\circ} = \\cos 45^{\\circ} = \\dfrac{1}{\\sqrt{2}}\\]\n\\[\\sin 30^{\\circ} = \\dfrac{1}{2},\\ \\cos 30^{\\circ} = \\dfrac{\\sqrt{3}}{2}\\]\nWhy: These come from the special triangles, so no table is needed.",
+              "Apply the difference formula\n\\[\\sin 15^{\\circ} = \\sin(45^{\\circ} - 30^{\\circ})\\]\n\\[= \\sin 45^{\\circ}\\cos 30^{\\circ} - \\cos 45^{\\circ}\\sin 30^{\\circ}\\]\nWhy: \\(\\alpha = 45^{\\circ}\\), \\(\\beta = 30^{\\circ}\\) in the formula for \\(\\sin(\\alpha - \\beta)\\).",
+              "Put in the values\n\\[= \\dfrac{1}{\\sqrt{2}}\\cdot\\dfrac{\\sqrt{3}}{2} - \\dfrac{1}{\\sqrt{2}}\\cdot\\dfrac{1}{2}\\]\n\\[= \\dfrac{\\sqrt{3}}{2\\sqrt{2}} - \\dfrac{1}{2\\sqrt{2}}\\]\n\\[= \\dfrac{\\sqrt{3} - 1}{2\\sqrt{2}}\\]\nWhy: Both fractions have the same denominator \\(2\\sqrt{2}\\), so we subtract the numerators.",
+              "Check\n\\[\\dfrac{\\sqrt{3} - 1}{2\\sqrt{2}} \\approx \\dfrac{0.732}{2.828} \\approx 0.2588\\]\nWhy: A calculator gives \\(\\sin 15^{\\circ} \\approx 0.2588\\); the value is also small and positive, as it should be for a small acute angle."
+            ],
+            "final_answer": "\\(\\sin 15^{\\circ} = \\dfrac{\\sqrt{3} - 1}{2\\sqrt{2}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Without using table find the value of \\(\\cos 15^{\\circ}\\).",
+            "explanation": "Same idea as part (i), now for cosine.\nWe must find \\(\\cos 15^{\\circ}\\) exactly.\nPlan: \\(15^{\\circ} = 45^{\\circ} - 30^{\\circ}\\) and the formula for \\(\\cos(\\alpha - \\beta)\\).",
+            "steps": [
+              "Given: the angle \\(15^{\\circ}\\).\nTo find: \\(\\cos 15^{\\circ}\\).\nMethod: Use \\(15^{\\circ} = 45^{\\circ} - 30^{\\circ}\\) and\n\\[\\cos(\\alpha - \\beta) = \\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta\\]\n(the fundamental law of trigonometry).",
+              "Values we need\n\\[\\sin 45^{\\circ} = \\cos 45^{\\circ} = \\dfrac{1}{\\sqrt{2}}\\]\n\\[\\sin 30^{\\circ} = \\dfrac{1}{2},\\ \\cos 30^{\\circ} = \\dfrac{\\sqrt{3}}{2}\\]\nWhy: These come from the special triangles, so no table is needed.",
+              "Apply the formula\n\\[\\cos 15^{\\circ} = \\cos(45^{\\circ} - 30^{\\circ})\\]\n\\[= \\cos 45^{\\circ}\\cos 30^{\\circ} + \\sin 45^{\\circ}\\sin 30^{\\circ}\\]\nWhy: For cosine, a minus in the angle gives a plus between the products.",
+              "Put in the values\n\\[= \\dfrac{1}{\\sqrt{2}}\\cdot\\dfrac{\\sqrt{3}}{2} + \\dfrac{1}{\\sqrt{2}}\\cdot\\dfrac{1}{2}\\]\n\\[= \\dfrac{\\sqrt{3} + 1}{2\\sqrt{2}}\\]\nWhy: Same denominator \\(2\\sqrt{2}\\), so add the numerators.",
+              "Check\n\\[\\sin^2 15^{\\circ} + \\cos^2 15^{\\circ} = \\dfrac{(\\sqrt{3} - 1)^2 + (\\sqrt{3} + 1)^2}{8}\\]\n\\[= \\dfrac{(4 - 2\\sqrt{3}) + (4 + 2\\sqrt{3})}{8} = 1 \\;\\checkmark\\]\nWhy: With part (i), the identity \\(\\sin^2 + \\cos^2 = 1\\) holds."
+            ],
+            "final_answer": "\\(\\cos 15^{\\circ} = \\dfrac{\\sqrt{3} + 1}{2\\sqrt{2}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Without using table find the value of \\(\\tan 15^{\\circ}\\).",
+            "explanation": "Tangent of a non-special angle.\nWe must find \\(\\tan 15^{\\circ}\\) exactly.\nPlan: use \\(\\tan(\\alpha - \\beta)\\) with \\(45^{\\circ}\\) and \\(30^{\\circ}\\) (or divide part (i) by part (ii)).",
+            "steps": [
+              "Given: the angle \\(15^{\\circ}\\).\nTo find: \\(\\tan 15^{\\circ}\\).\nMethod:\n\\[\\tan(\\alpha - \\beta) = \\dfrac{\\tan\\alpha - \\tan\\beta}{1 + \\tan\\alpha\\tan\\beta}\\]\nwith \\(\\tan 45^{\\circ} = 1\\) and \\(\\tan 30^{\\circ} = \\dfrac{1}{\\sqrt{3}}\\).",
+              "Apply the formula\n\\[\\tan 15^{\\circ} = \\dfrac{\\tan 45^{\\circ} - \\tan 30^{\\circ}}{1 + \\tan 45^{\\circ}\\tan 30^{\\circ}}\\]\n\\[= \\dfrac{1 - \\frac{1}{\\sqrt{3}}}{1 + \\frac{1}{\\sqrt{3}}}\\]\nWhy: \\(\\alpha = 45^{\\circ}\\), \\(\\beta = 30^{\\circ}\\).",
+              "Clear the small fractions\n\\[= \\dfrac{\\sqrt{3} - 1}{\\sqrt{3} + 1}\\]\nWhy: Multiply top and bottom by \\(\\sqrt{3}\\); the value does not change.",
+              "Simplify further (optional)\n\\[= \\dfrac{(\\sqrt{3} - 1)^2}{(\\sqrt{3} + 1)(\\sqrt{3} - 1)}\\]\n\\[= \\dfrac{4 - 2\\sqrt{3}}{2} = 2 - \\sqrt{3}\\]\nWhy: Rationalising the denominator gives the simplest surd form.",
+              "Check\n\\[\\dfrac{\\sin 15^{\\circ}}{\\cos 15^{\\circ}} = \\dfrac{\\sqrt{3} - 1}{2\\sqrt{2}} \\div \\dfrac{\\sqrt{3} + 1}{2\\sqrt{2}}\\]\n\\[= \\dfrac{\\sqrt{3} - 1}{\\sqrt{3} + 1} \\;\\checkmark\\]\nWhy: \\(\\tan = \\sin/\\cos\\) with parts (i) and (ii); also \\(2 - \\sqrt{3} \\approx 0.268\\)."
+            ],
+            "final_answer": "\\(\\tan 15^{\\circ} = \\dfrac{\\sqrt{3} - 1}{\\sqrt{3} + 1} = 2 - \\sqrt{3}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Without using table find the value of \\(\\sin 105^{\\circ}\\).",
+            "explanation": "105° is not a special angle, but \\(105^{\\circ} = 60^{\\circ} + 45^{\\circ}\\) (hint).\nWe must find \\(\\sin 105^{\\circ}\\) exactly.\nPlan: use the formula for \\(\\sin(\\alpha + \\beta)\\).",
+            "steps": [
+              "Given: the angle \\(105^{\\circ}\\).\nTo find: \\(\\sin 105^{\\circ}\\).\nMethod: \\(105^{\\circ} = 60^{\\circ} + 45^{\\circ}\\) and\n\\[\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta\\]",
+              "Values we need\n\\[\\sin 60^{\\circ} = \\dfrac{\\sqrt{3}}{2},\\ \\cos 60^{\\circ} = \\dfrac{1}{2}\\]\n\\[\\sin 45^{\\circ} = \\cos 45^{\\circ} = \\dfrac{1}{\\sqrt{2}}\\]\nWhy: Known values of the special angles.",
+              "Apply the formula\n\\[\\sin 105^{\\circ} = \\sin(60^{\\circ} + 45^{\\circ})\\]\n\\[= \\sin 60^{\\circ}\\cos 45^{\\circ} + \\cos 60^{\\circ}\\sin 45^{\\circ}\\]\nWhy: \\(\\alpha = 60^{\\circ}\\), \\(\\beta = 45^{\\circ}\\).",
+              "Put in the values\n\\[= \\dfrac{\\sqrt{3}}{2}\\cdot\\dfrac{1}{\\sqrt{2}} + \\dfrac{1}{2}\\cdot\\dfrac{1}{\\sqrt{2}}\\]\n\\[= \\dfrac{\\sqrt{3} + 1}{2\\sqrt{2}}\\]\nWhy: Common denominator \\(2\\sqrt{2}\\).",
+              "Check\n\\[\\sin 105^{\\circ} = \\sin(180^{\\circ} - 75^{\\circ})\\]\n\\[= \\sin 75^{\\circ} = \\cos 15^{\\circ}\\]\nWhy: This equals the answer of part (ii), \\(\\dfrac{\\sqrt{3} + 1}{2\\sqrt{2}} \\approx 0.9659\\) \\(\\checkmark\\)."
+            ],
+            "final_answer": "\\(\\sin 105^{\\circ} = \\dfrac{\\sqrt{3} + 1}{2\\sqrt{2}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(v)",
+            "prompt": "1 (v) Without using table find the value of \\(\\cos 105^{\\circ}\\).",
+            "explanation": "Cosine of \\(105^{\\circ} = 60^{\\circ} + 45^{\\circ}\\).\nWe must find \\(\\cos 105^{\\circ}\\) exactly; it lies in quadrant II, so expect a negative value.\nPlan: formula for \\(\\cos(\\alpha + \\beta)\\).",
+            "steps": [
+              "Given: the angle \\(105^{\\circ}\\).\nTo find: \\(\\cos 105^{\\circ}\\).\nMethod:\n\\[\\cos(\\alpha + \\beta) = \\cos\\alpha\\cos\\beta - \\sin\\alpha\\sin\\beta\\]\nwith \\(\\alpha = 60^{\\circ}\\), \\(\\beta = 45^{\\circ}\\).",
+              "Values we need\n\\[\\sin 60^{\\circ} = \\dfrac{\\sqrt{3}}{2},\\ \\cos 60^{\\circ} = \\dfrac{1}{2}\\]\n\\[\\sin 45^{\\circ} = \\cos 45^{\\circ} = \\dfrac{1}{\\sqrt{2}}\\]\nWhy: Known values of the special angles.",
+              "Apply the formula\n\\[\\cos 105^{\\circ} = \\cos 60^{\\circ}\\cos 45^{\\circ} - \\sin 60^{\\circ}\\sin 45^{\\circ}\\]\nWhy: For cosine, a plus in the angle gives a minus between the products.",
+              "Put in the values\n\\[= \\dfrac{1}{2}\\cdot\\dfrac{1}{\\sqrt{2}} - \\dfrac{\\sqrt{3}}{2}\\cdot\\dfrac{1}{\\sqrt{2}}\\]\n\\[= \\dfrac{1 - \\sqrt{3}}{2\\sqrt{2}}\\]\nWhy: Common denominator \\(2\\sqrt{2}\\).",
+              "Check\n\\[1 - \\sqrt{3} < 0\\]\n\\[\\cos 105^{\\circ} \\approx \\dfrac{-0.732}{2.828} \\approx -0.2588\\]\nWhy: The value is negative, as it must be in quadrant II, and it equals \\(-\\sin 15^{\\circ}\\) because \\(\\cos(90^{\\circ} + 15^{\\circ}) = -\\sin 15^{\\circ}\\)."
+            ],
+            "final_answer": "\\(\\cos 105^{\\circ} = \\dfrac{1 - \\sqrt{3}}{2\\sqrt{2}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(vi)",
+            "prompt": "1 (vi) Without using table find the value of \\(\\tan 105^{\\circ}\\).",
+            "explanation": "Tangent of \\(105^{\\circ}\\), an angle in quadrant II (tangent negative there).\nWe must find \\(\\tan 105^{\\circ}\\) exactly.\nPlan: formula for \\(\\tan(\\alpha + \\beta)\\) with \\(60^{\\circ}\\) and \\(45^{\\circ}\\).",
+            "steps": [
+              "Given: the angle \\(105^{\\circ}\\).\nTo find: \\(\\tan 105^{\\circ}\\).\nMethod:\n\\[\\tan(\\alpha + \\beta) = \\dfrac{\\tan\\alpha + \\tan\\beta}{1 - \\tan\\alpha\\tan\\beta}\\]\nwith \\(\\tan 60^{\\circ} = \\sqrt{3}\\), \\(\\tan 45^{\\circ} = 1\\).",
+              "Apply the formula\n\\[\\tan 105^{\\circ} = \\dfrac{\\tan 60^{\\circ} + \\tan 45^{\\circ}}{1 - \\tan 60^{\\circ}\\tan 45^{\\circ}}\\]\n\\[= \\dfrac{\\sqrt{3} + 1}{1 - \\sqrt{3}}\\]\nWhy: \\(\\alpha = 60^{\\circ}\\), \\(\\beta = 45^{\\circ}\\); \\(\\sqrt{3} \\times 1 = \\sqrt{3}\\).",
+              "Simplify further (optional)\n\\[= \\dfrac{(\\sqrt{3} + 1)(1 + \\sqrt{3})}{(1 - \\sqrt{3})(1 + \\sqrt{3})}\\]\n\\[= \\dfrac{4 + 2\\sqrt{3}}{-2} = -(2 + \\sqrt{3})\\]\nWhy: Rationalise the denominator; \\(1 - 3 = -2\\).",
+              "Check\n\\[\\dfrac{\\sin 105^{\\circ}}{\\cos 105^{\\circ}} = \\dfrac{\\sqrt{3} + 1}{2\\sqrt{2}} \\div \\dfrac{1 - \\sqrt{3}}{2\\sqrt{2}}\\]\n\\[= \\dfrac{\\sqrt{3} + 1}{1 - \\sqrt{3}} \\;\\checkmark\\]\nWhy: Parts (iv) and (v) give the same value; it is negative (\\(\\approx -3.732\\)), as in quadrant II."
+            ],
+            "final_answer": "\\(\\tan 105^{\\circ} = \\dfrac{1 + \\sqrt{3}}{1 - \\sqrt{3}} = -(2 + \\sqrt{3})\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

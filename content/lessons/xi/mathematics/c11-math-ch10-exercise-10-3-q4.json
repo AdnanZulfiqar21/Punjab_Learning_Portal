@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-3-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-3-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 200,
+          "pdf_to": 200,
+          "note": "Exercise 10.3, Question 4: book page 195 (PDF 200); answer key PDF 308 value correct but labelled 14., boxed; checked with sympy and the solution book (PDF 952-954)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. Reduce \\(\\sin^{4}\\theta\\) to an expression involving only function of multiples of \\(\\theta\\), raised to the first power.",
+            "explanation": "This is Example 13 again, but for \\(\\sin^4\\theta\\) instead of \\(\\cos^4\\theta\\).\nWe must remove every power: the answer may contain \\(\\cos 2\\theta\\), \\(\\cos 4\\theta\\) but no squares.\nPlan: use \\(\\sin^2\\theta = \\frac{1 - \\cos 2\\theta}{2}\\), square, then use \\(\\cos^2 2\\theta = \\frac{1 + \\cos 4\\theta}{2}\\).",
+            "steps": [
+              "Given: \\(\\sin^4\\theta\\).\nTo find: an equal expression in \\(\\cos 2\\theta\\), \\(\\cos 4\\theta\\) (first powers only).\nMethod: The power-reducing forms of \\(\\cos 2\\theta = 1 - 2\\sin^2\\theta\\) and \\(\\cos 4\\theta = 2\\cos^2 2\\theta - 1\\).",
+              "Reduce \\(\\sin^2\\theta\\)\n\\[2\\sin^2\\theta = 1 - \\cos 2\\theta\\]\n\\[\\sin^2\\theta = \\dfrac{1 - \\cos 2\\theta}{2}\\]\nWhy: From \\(\\cos 2\\theta = 1 - 2\\sin^2\\theta\\).",
+              "Square it\n\\[\\sin^4\\theta = \\left(\\dfrac{1 - \\cos 2\\theta}{2}\\right)^2\\]\n\\[= \\dfrac{1 - 2\\cos 2\\theta + \\cos^2 2\\theta}{4}\\]\nWhy: \\((a - b)^2 = a^2 - 2ab + b^2\\).",
+              "Reduce \\(\\cos^2 2\\theta\\)\n\\[\\cos^2 2\\theta = \\dfrac{1 + \\cos 4\\theta}{2}\\]\n\\[\\sin^4\\theta = \\dfrac{1}{4}\\left[1 - 2\\cos 2\\theta + \\dfrac{1 + \\cos 4\\theta}{2}\\right]\\]\nWhy: From \\(\\cos 4\\theta = 2\\cos^2 2\\theta - 1\\), the double-angle formula with angle \\(2\\theta\\).",
+              "Simplify\n\\[= \\dfrac{1}{8}\\left[2 - 4\\cos 2\\theta + 1 + \\cos 4\\theta\\right]\\]\n\\[= \\dfrac{1}{8}\\left[3 - 4\\cos 2\\theta + \\cos 4\\theta\\right]\\]\nWhy: Multiply the bracket by 2 and the \\(\\frac{1}{4}\\) outside by \\(\\frac{1}{2}\\).",
+              "Check with \\(\\theta = 0\\) and \\(\\theta = 90^{\\circ}\\)\n\\[\\theta = 0: \\; \\tfrac{1}{8}(3 - 4 + 1) = 0 = \\sin^4 0 \\;\\checkmark\\]\n\\[\\theta = 90^{\\circ}: \\; \\tfrac{1}{8}(3 + 4 + 1) = 1 \\;\\checkmark\\]\nWhy: \\(\\cos 180^{\\circ} = -1\\), \\(\\cos 360^{\\circ} = 1\\), and \\(\\sin^4 90^{\\circ} = 1\\)."
+            ],
+            "final_answer": "\\(\\sin^4\\theta = \\frac{1}{8}\\left(3 - 4\\cos 2\\theta + \\cos 4\\theta\\right)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints this answer under the number \"14.\" instead of \"4.\". The value \\(\\frac{3 - 4\\cos 2\\theta + \\cos 4\\theta}{8}\\) is correct; only the label is wrong."
+          }
+        ]
+      }
+    }
+  ]
+}

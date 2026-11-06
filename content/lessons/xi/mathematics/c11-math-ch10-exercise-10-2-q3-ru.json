@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-2-Q3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-2-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 194,
+          "pdf_to": 194,
+          "note": "Exercise 10.2 Q3 (i)-(v), book p.189 (PDF 194); proofs (no answer-key entry). Checked with sympy; solution book PDF 900-904 agrees."
+        }
+      ],
+      "variant_of": "C11-MATH-CH10-EXERCISE-10-2-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Prove that: \\(\\tan(45^{\\circ} + A)\\tan(45^{\\circ} - A) = 1\\)",
+            "explanation": "Do tangents ka product 1 saabit karna hai.\nHar tangent ko sum ya difference wale formula se kholenge; \\(\\tan 45^{\\circ} = 1\\) hone se dono bohat saaf ho jate hain.\nPlan: dono ko expand karein, multiply karein, aur cancel hone dein.",
+            "steps": [
+              "Diya gaya hai: ek identity.\nSaabit karna hai: \\(\\tan(45^{\\circ} + A)\\tan(45^{\\circ} - A) = 1\\).\nTareeqa:\n\\[\\tan(\\alpha \\pm \\beta) = \\dfrac{\\tan\\alpha \\pm \\tan\\beta}{1 \\mp \\tan\\alpha\\tan\\beta}\\]\njahan \\(\\tan 45^{\\circ} = 1\\). Yaad rakhein: upar wahi sign jo angle mein hai, neeche ulta sign.",
+              "Pehla factor kholein\n\\[\\tan(45^{\\circ} + A) = \\dfrac{1 + \\tan A}{1 - \\tan A}\\]\nKyun: Formula se \\(\\dfrac{\\tan 45^{\\circ} + \\tan A}{1 - \\tan 45^{\\circ}\\tan A}\\) aata hai, aur \\(\\tan 45^{\\circ}\\) ki jagah 1 rakh diya.",
+              "Doosra factor kholein\n\\[\\tan(45^{\\circ} - A) = \\dfrac{1 - \\tan A}{1 + \\tan A}\\]\nKyun: Difference formula: upar minus, neeche plus. Notice karein ke yeh pehle factor ka bilkul ulta (reciprocal) hai.",
+              "Multiply karein\n\\[\\text{L.H.S.} = \\dfrac{1 + \\tan A}{1 - \\tan A}\\cdot\\dfrac{1 - \\tan A}{1 + \\tan A}\\]\n\\[= 1 = \\text{R.H.S.}\\]\nKyun: Kisi bhi number ko us ke reciprocal se multiply karein to 1 aata hai. Yahan pehle ka numerator doosre ka denominator hai, is liye sab cancel ho gaya.",
+              "Tasdeeq, \\(A = 0^{\\circ}\\) rakh kar\n\\[\\tan 45^{\\circ}\\tan 45^{\\circ} = 1 \\times 1 = 1 \\;\\checkmark\\]\nKyun: Ek aasaan angle rakh kar dekha; jawab 1 hi aaya."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\tan(45^{\\circ} + A)\\tan(45^{\\circ} - A) = 1\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Prove that: \\(\\tan\\left(\\dfrac{\\pi}{4} - \\theta\\right) + \\tan\\left(\\dfrac{3\\pi}{4} + \\theta\\right) = 0\\)",
+            "explanation": "Do tangents ka jama zero saabit karna hai.\nDono ko tangent formulas se kholenge; \\(\\tan\\frac{\\pi}{4} = 1\\) aur \\(\\tan\\frac{3\\pi}{4} = -1\\) kaam aayenge.\nPlan: expand kar ke dikhana ke doosra fraction pehle ka bilkul negative hai.",
+            "steps": [
+              "Diya gaya hai: ek identity.\nSaabit karna hai: \\(\\tan\\left(\\frac{\\pi}{4} - \\theta\\right) + \\tan\\left(\\frac{3\\pi}{4} + \\theta\\right) = 0\\).\nTareeqa: tangent ke difference aur sum formulas, aur yeh values:\n\\[\\tan\\dfrac{\\pi}{4} = 1,\\quad \\tan\\dfrac{3\\pi}{4} = -1\\]\nAngles radians mein hain: \\(\\frac{\\pi}{4} = 45^{\\circ}\\) aur \\(\\frac{3\\pi}{4} = 135^{\\circ}\\).",
+              "\\(\\tan\\frac{3\\pi}{4}\\) ki value\n\\[\\tan\\dfrac{3\\pi}{4} = \\tan\\left(\\pi - \\dfrac{\\pi}{4}\\right)\\]\n\\[= -\\tan\\dfrac{\\pi}{4} = -1\\]\nKyun: 135 degree quadrant II mein hai, jahan sirf sine (aur cosec) positive hote hain; tangent negative. Allied angle ka rule \\(\\tan(\\pi - t) = -\\tan t\\) lagaya.",
+              "Pehla term kholein\n\\[\\tan\\left(\\dfrac{\\pi}{4} - \\theta\\right) = \\dfrac{1 - \\tan\\theta}{1 + \\tan\\theta}\\]\nKyun: Difference formula: upar minus, neeche plus, aur \\(\\tan\\frac{\\pi}{4} = 1\\).",
+              "Doosra term kholein\n\\[\\tan\\left(\\dfrac{3\\pi}{4} + \\theta\\right) = \\dfrac{-1 + \\tan\\theta}{1 - (-1)\\tan\\theta}\\]\n\\[= \\dfrac{-(1 - \\tan\\theta)}{1 + \\tan\\theta}\\]\nKyun: Sum formula mein \\(\\tan\\frac{3\\pi}{4} = -1\\) rakha. Neeche \\(1 - (-1)\\tan\\theta = 1 + \\tan\\theta\\), kyunke minus minus plus hota hai. Upar se minus bahar nikala taake pehle term se mawazna aasaan ho.\nDhyan dein: \\(-1\\) ko bracket mein rakh kar likhein, warna sign ki ghalti pakki hai.",
+              "Jama karein\n\\[\\text{L.H.S.} = \\dfrac{1 - \\tan\\theta}{1 + \\tan\\theta} - \\dfrac{1 - \\tan\\theta}{1 + \\tan\\theta}\\]\n\\[= 0 = \\text{R.H.S.}\\]\nKyun: Doosra fraction pehle ka bilkul negative nikla, aur kisi cheez mein us ka negative jama karein to zero bachta hai.",
+              "Tasdeeq, \\(\\theta = 0\\) rakh kar\n\\[\\tan 45^{\\circ} + \\tan 135^{\\circ} = 1 + (-1) = 0 \\;\\checkmark\\]\nKyun: Seedhi values rakh kar bhi zero aaya."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\tan\\left(\\dfrac{\\pi}{4} - \\theta\\right) + \\tan\\left(\\dfrac{3\\pi}{4} + \\theta\\right) = 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) Prove that: \\(\\sin\\left(\\theta + \\dfrac{\\pi}{6}\\right) + \\cos\\left(\\theta + \\dfrac{\\pi}{3}\\right) = \\cos\\theta\\)",
+            "explanation": "Ek sine of sum aur ek cosine of sum ka jama \\(\\cos\\theta\\) saabit karna hai.\nDono ko kholenge aur \\(\\frac{\\pi}{6} = 30^{\\circ}\\), \\(\\frac{\\pi}{3} = 60^{\\circ}\\) ki values rakhenge.\nPlan: expand, values, phir milte julte (like) terms ikatthe.",
+            "steps": [
+              "Diya gaya hai: ek identity.\nSaabit karna hai: \\(\\sin\\left(\\theta + \\frac{\\pi}{6}\\right) + \\cos\\left(\\theta + \\frac{\\pi}{3}\\right) = \\cos\\theta\\).\nTareeqa: \\(\\sin(A + B)\\) aur \\(\\cos(A + B)\\) ke formulas, aur yeh values:\n\\[\\sin\\dfrac{\\pi}{6} = \\cos\\dfrac{\\pi}{3} = \\dfrac{1}{2}\\]\n\\[\\cos\\dfrac{\\pi}{6} = \\sin\\dfrac{\\pi}{3} = \\dfrac{\\sqrt{3}}{2}\\]\n30 aur 60 complementary angles hain, is liye ek ka sine doosre ka cosine hota hai; yahi is sawal ka raaz hai.",
+              "Sine wala term kholein\n\\[\\sin\\left(\\theta + \\dfrac{\\pi}{6}\\right) = \\sin\\theta\\cos\\dfrac{\\pi}{6} + \\cos\\theta\\sin\\dfrac{\\pi}{6}\\]\n\\[= \\dfrac{\\sqrt{3}}{2}\\sin\\theta + \\dfrac{1}{2}\\cos\\theta\\]\nKyun: Sine of a sum ka formula aur upar wali values.",
+              "Cosine wala term kholein\n\\[\\cos\\left(\\theta + \\dfrac{\\pi}{3}\\right) = \\cos\\theta\\cos\\dfrac{\\pi}{3} - \\sin\\theta\\sin\\dfrac{\\pi}{3}\\]\n\\[= \\dfrac{1}{2}\\cos\\theta - \\dfrac{\\sqrt{3}}{2}\\sin\\theta\\]\nKyun: Cosine of a sum mein beech mein minus aata hai.\nDhyan dein: Yahi minus \\(\\sin\\theta\\) wale terms ko cancel karega; agar plus likh diya to proof kabhi poora nahi hoga.",
+              "Dono jama karein\n\\[\\text{L.H.S.} = \\dfrac{\\sqrt{3}}{2}\\sin\\theta - \\dfrac{\\sqrt{3}}{2}\\sin\\theta\\]\n\\[+ \\dfrac{1}{2}\\cos\\theta + \\dfrac{1}{2}\\cos\\theta\\]\n\\[= \\cos\\theta = \\text{R.H.S.}\\]\nKyun: \\(\\sin\\theta\\) wale terms barabar aur ulte sign ke hain, cancel ho gaye. Do aadhe \\(\\cos\\theta\\) mil kar ek poora \\(\\cos\\theta\\) ban gaye.",
+              "Tasdeeq, \\(\\theta = 0\\) rakh kar\n\\[\\sin 30^{\\circ} + \\cos 60^{\\circ} = \\dfrac{1}{2} + \\dfrac{1}{2} = 1 = \\cos 0 \\;\\checkmark\\]\nKyun: Dono sides 1 aayin."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\sin\\left(\\theta + \\dfrac{\\pi}{6}\\right) + \\cos\\left(\\theta + \\dfrac{\\pi}{3}\\right) = \\cos\\theta\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iv)",
+            "prompt": "3 (iv) Prove that: \\(\\dfrac{\\sin\\theta - \\cos\\theta\\tan\\frac{\\theta}{2}}{\\cos\\theta + \\sin\\theta\\tan\\frac{\\theta}{2}} = \\tan\\dfrac{\\theta}{2}\\)",
+            "explanation": "Yahan ek fraction hai jis ke andar \\(\\tan\\frac{\\theta}{2}\\) hai, aur saabit karna hai ke poora fraction \\(\\tan\\frac{\\theta}{2}\\) ke barabar hai.\nAasaan raasta: tan ko sin/cos mein badlein aur chhoti fractions khatam karein.\nPlan: upar neeche \\(\\cos\\frac{\\theta}{2}\\) se multiply, phir \\(\\sin(\\theta - \\frac{\\theta}{2})\\) aur \\(\\cos(\\theta - \\frac{\\theta}{2})\\) pehchanna.",
+            "steps": [
+              "Diya gaya hai: ek identity.\nSaabit karna hai: L.H.S. \\(= \\tan\\frac{\\theta}{2}\\).\nTareeqa: tan ko sin/cos mein likhenge, fractions saaf karenge, phir yeh formulas pehchanenge:\n\\[\\sin(A - B) = \\sin A\\cos B - \\cos A\\sin B\\]\n\\[\\cos(A - B) = \\cos A\\cos B + \\sin A\\sin B\\]\njahan \\(A = \\theta\\), \\(B = \\frac{\\theta}{2}\\). Jab bhi expression mein tan aur sin/cos mile hue hon, sab ko sin/cos mein le aana aksar raasta khol deta hai.",
+              "Tan ko sin/cos mein likhein\n\\[\\text{L.H.S.} = \\dfrac{\\sin\\theta - \\cos\\theta\\,\\dfrac{\\sin\\frac{\\theta}{2}}{\\cos\\frac{\\theta}{2}}}{\\cos\\theta + \\sin\\theta\\,\\dfrac{\\sin\\frac{\\theta}{2}}{\\cos\\frac{\\theta}{2}}}\\]\nKyun: \\(\\tan x = \\frac{\\sin x}{\\cos x}\\). Ab sab kuch sin aur cos mein hai.",
+              "Upar neeche \\(\\cos\\frac{\\theta}{2}\\) se multiply karein\n\\[= \\dfrac{\\sin\\theta\\cos\\frac{\\theta}{2} - \\cos\\theta\\sin\\frac{\\theta}{2}}{\\cos\\theta\\cos\\frac{\\theta}{2} + \\sin\\theta\\sin\\frac{\\theta}{2}}\\]\nKyun: Numerator aur denominator dono ko ek hi cheez se multiply karne se value nahi badalti, lekin andar wali chhoti fraction ka denominator khatam ho jata hai.",
+              "Formulas pehchanein\n\\[\\text{Upar} = \\sin\\left(\\theta - \\dfrac{\\theta}{2}\\right) = \\sin\\dfrac{\\theta}{2}\\]\n\\[\\text{Neeche} = \\cos\\left(\\theta - \\dfrac{\\theta}{2}\\right) = \\cos\\dfrac{\\theta}{2}\\]\nKyun: Upar ka pattern \\\"sin cos minus cos sin\\\" bilkul \\(\\sin(A - B)\\) hai, aur neeche ka \\\"cos cos plus sin sin\\\" bilkul \\(\\cos(A - B)\\) hai. Aur \\(\\theta - \\frac{\\theta}{2} = \\frac{\\theta}{2}\\).\nDhyan dein: Formulas ko ulta pehchanna (expanded shakal dekh kar wapas compact shakal likhna) is unit ki ahem mahaarat hai.",
+              "Aakhri qadam\n\\[\\text{L.H.S.} = \\dfrac{\\sin\\frac{\\theta}{2}}{\\cos\\frac{\\theta}{2}} = \\tan\\dfrac{\\theta}{2} = \\text{R.H.S.}\\]\nKyun: Sine divided by cosine tangent hota hai.",
+              "Tasdeeq, \\(\\theta = 90^{\\circ}\\) rakh kar\n\\[\\dfrac{1 - 0}{0 + 1\\cdot\\tan 45^{\\circ}} = \\dfrac{1}{1} = 1 = \\tan 45^{\\circ} \\;\\checkmark\\]\nKyun: \\(\\sin 90^{\\circ} = 1\\), \\(\\cos 90^{\\circ} = 0\\), \\(\\tan 45^{\\circ} = 1\\); dono sides 1."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\dfrac{\\sin\\theta - \\cos\\theta\\tan\\frac{\\theta}{2}}{\\cos\\theta + \\sin\\theta\\tan\\frac{\\theta}{2}} = \\tan\\dfrac{\\theta}{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(v)",
+            "prompt": "3 (v) Prove that: \\(\\dfrac{1 - \\tan\\theta\\tan\\phi}{1 + \\tan\\theta\\tan\\phi} = \\dfrac{\\cos(\\theta + \\phi)}{\\cos(\\theta - \\phi)}\\)",
+            "explanation": "Ek side par tangents hain aur doosri par sum aur difference ke cosines.\nRight side ko khol kar \\(\\cos\\theta\\cos\\phi\\) se divide karna sab se seedha raasta hai.\nPlan: dono cosines expand, phir har term ko \\(\\cos\\theta\\cos\\phi\\) se divide.",
+            "steps": [
+              "Diya gaya hai: ek identity.\nSaabit karna hai: \\(\\dfrac{1 - \\tan\\theta\\tan\\phi}{1 + \\tan\\theta\\tan\\phi} = \\dfrac{\\cos(\\theta + \\phi)}{\\cos(\\theta - \\phi)}\\).\nTareeqa: R.H.S. se shuru karenge, kyunke us ke brackets khul sakte hain:\n\\[\\cos(\\theta \\pm \\phi) = \\cos\\theta\\cos\\phi \\mp \\sin\\theta\\sin\\phi\\]",
+              "Right side kholein\n\\[\\text{R.H.S.} = \\dfrac{\\cos\\theta\\cos\\phi - \\sin\\theta\\sin\\phi}{\\cos\\theta\\cos\\phi + \\sin\\theta\\sin\\phi}\\]\nKyun: Upar sum ka formula (minus), neeche difference ka formula (plus). Cosine mein sign ulat jata hai.",
+              "Upar neeche \\(\\cos\\theta\\cos\\phi\\) se divide karein\n\\[= \\dfrac{1 - \\dfrac{\\sin\\theta\\sin\\phi}{\\cos\\theta\\cos\\phi}}{1 + \\dfrac{\\sin\\theta\\sin\\phi}{\\cos\\theta\\cos\\phi}}\\]\nKyun: L.H.S. mein \\\"1\\\" aur tangents hain. \\(\\cos\\theta\\cos\\phi\\) se divide karne par pehla term 1 ban jata hai aur doosre mein sin/cos ke jore ban jate hain. Numerator aur denominator dono ko ek hi cheez se divide karne se value nahi badalti.",
+              "Tangents mein likhein\n\\[= \\dfrac{1 - \\tan\\theta\\tan\\phi}{1 + \\tan\\theta\\tan\\phi} = \\text{L.H.S.}\\]\nKyun: \\(\\frac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta\\) aur \\(\\frac{\\sin\\phi}{\\cos\\phi} = \\tan\\phi\\).",
+              "Tasdeeq, \\(\\theta = \\phi = 30^{\\circ}\\) rakh kar\n\\[\\text{L.H.S.} = \\dfrac{1 - \\frac{1}{3}}{1 + \\frac{1}{3}} = \\dfrac{1}{2}\\]\n\\[\\text{R.H.S.} = \\dfrac{\\cos 60^{\\circ}}{\\cos 0^{\\circ}} = \\dfrac{1}{2} \\;\\checkmark\\]\nKyun: \\(\\tan 30^{\\circ} = \\frac{1}{\\sqrt{3}}\\), is liye \\(\\tan^2 30^{\\circ} = \\frac{1}{3}\\). Dono sides aadha."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\dfrac{1 - \\tan\\theta\\tan\\phi}{1 + \\tan\\theta\\tan\\phi} = \\dfrac{\\cos(\\theta + \\phi)}{\\cos(\\theta - \\phi)}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

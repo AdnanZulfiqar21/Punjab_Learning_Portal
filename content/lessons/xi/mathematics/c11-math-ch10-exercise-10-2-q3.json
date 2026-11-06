@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-2-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-2-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 194,
+          "pdf_to": 194,
+          "note": "Exercise 10.2 Q3 (i)-(v), book p.189 (PDF 194); proofs (no answer-key entry). Checked with sympy; solution book PDF 900-904 agrees."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Prove that: \\(\\tan(45^{\\circ} + A)\\tan(45^{\\circ} - A) = 1\\)",
+            "explanation": "A product of two tangents must equal 1.\nExpand each tangent with the sum/difference formula; \\(\\tan 45^{\\circ} = 1\\) makes them simple.\nPlan: expand, multiply, cancel.",
+            "steps": [
+              "Given: the identity.\nTo prove: \\(\\tan(45^{\\circ} + A)\\tan(45^{\\circ} - A) = 1\\).\nMethod:\n\\[\\tan(\\alpha \\pm \\beta) = \\dfrac{\\tan\\alpha \\pm \\tan\\beta}{1 \\mp \\tan\\alpha\\tan\\beta}\\]\nwith \\(\\tan 45^{\\circ} = 1\\).",
+              "Expand the first factor\n\\[\\tan(45^{\\circ} + A) = \\dfrac{1 + \\tan A}{1 - \\tan A}\\]\nWhy: \\(\\dfrac{\\tan 45^{\\circ} + \\tan A}{1 - \\tan 45^{\\circ}\\tan A}\\) with \\(\\tan 45^{\\circ} = 1\\).",
+              "Expand the second factor\n\\[\\tan(45^{\\circ} - A) = \\dfrac{1 - \\tan A}{1 + \\tan A}\\]\nWhy: Difference formula: minus on top, plus below.",
+              "Multiply\n\\[\\text{L.H.S.} = \\dfrac{1 + \\tan A}{1 - \\tan A}\\cdot\\dfrac{1 - \\tan A}{1 + \\tan A}\\]\n\\[= 1 = \\text{R.H.S.}\\]\nWhy: The two fractions are reciprocals, so everything cancels.",
+              "Check with \\(A = 0^{\\circ}\\)\n\\[\\tan 45^{\\circ}\\tan 45^{\\circ} = 1 \\times 1 = 1 \\;\\checkmark\\]\nWhy: A quick test agrees."
+            ],
+            "final_answer": "Hence proved: \\(\\tan(45^{\\circ} + A)\\tan(45^{\\circ} - A) = 1\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Prove that: \\(\\tan\\left(\\dfrac{\\pi}{4} - \\theta\\right) + \\tan\\left(\\dfrac{3\\pi}{4} + \\theta\\right) = 0\\)",
+            "explanation": "A sum of two tangents must be zero.\nExpand both with the tangent formulas; \\(\\tan\\frac{\\pi}{4} = 1\\) and \\(\\tan\\frac{3\\pi}{4} = -1\\).\nPlan: expand, then show the two fractions are negatives of each other.",
+            "steps": [
+              "Given: the identity.\nTo prove: \\(\\tan\\left(\\frac{\\pi}{4} - \\theta\\right) + \\tan\\left(\\frac{3\\pi}{4} + \\theta\\right) = 0\\).\nMethod: tangent difference and sum formulas with\n\\[\\tan\\dfrac{\\pi}{4} = 1,\\quad \\tan\\dfrac{3\\pi}{4} = -1\\]",
+              "Value of \\(\\tan\\frac{3\\pi}{4}\\)\n\\[\\tan\\dfrac{3\\pi}{4} = \\tan\\left(\\pi - \\dfrac{\\pi}{4}\\right)\\]\n\\[= -\\tan\\dfrac{\\pi}{4} = -1\\]\nWhy: \\(\\frac{3\\pi}{4} = 135^{\\circ}\\) is in quadrant II, where tangent is negative.",
+              "Expand the first term\n\\[\\tan\\left(\\dfrac{\\pi}{4} - \\theta\\right) = \\dfrac{1 - \\tan\\theta}{1 + \\tan\\theta}\\]\nWhy: Difference formula with \\(\\tan\\frac{\\pi}{4} = 1\\).",
+              "Expand the second term\n\\[\\tan\\left(\\dfrac{3\\pi}{4} + \\theta\\right) = \\dfrac{-1 + \\tan\\theta}{1 - (-1)\\tan\\theta}\\]\n\\[= \\dfrac{-(1 - \\tan\\theta)}{1 + \\tan\\theta}\\]\nWhy: Sum formula; minus times minus is plus in the denominator.",
+              "Add\n\\[\\text{L.H.S.} = \\dfrac{1 - \\tan\\theta}{1 + \\tan\\theta} - \\dfrac{1 - \\tan\\theta}{1 + \\tan\\theta}\\]\n\\[= 0 = \\text{R.H.S.}\\]\nWhy: The second fraction is the negative of the first.",
+              "Check with \\(\\theta = 0\\)\n\\[\\tan 45^{\\circ} + \\tan 135^{\\circ} = 1 + (-1) = 0 \\;\\checkmark\\]\nWhy: A quick test agrees."
+            ],
+            "final_answer": "Hence proved: \\(\\tan\\left(\\dfrac{\\pi}{4} - \\theta\\right) + \\tan\\left(\\dfrac{3\\pi}{4} + \\theta\\right) = 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) Prove that: \\(\\sin\\left(\\theta + \\dfrac{\\pi}{6}\\right) + \\cos\\left(\\theta + \\dfrac{\\pi}{3}\\right) = \\cos\\theta\\)",
+            "explanation": "A sine of a sum plus a cosine of a sum must give \\(\\cos\\theta\\).\nExpand both and use \\(\\frac{\\pi}{6} = 30^{\\circ}\\), \\(\\frac{\\pi}{3} = 60^{\\circ}\\).\nPlan: expand, put values, collect like terms.",
+            "steps": [
+              "Given: the identity.\nTo prove: \\(\\sin\\left(\\theta + \\frac{\\pi}{6}\\right) + \\cos\\left(\\theta + \\frac{\\pi}{3}\\right) = \\cos\\theta\\).\nMethod: \\(\\sin(A + B)\\) and \\(\\cos(A + B)\\) formulas with\n\\[\\sin\\dfrac{\\pi}{6} = \\cos\\dfrac{\\pi}{3} = \\dfrac{1}{2}\\]\n\\[\\cos\\dfrac{\\pi}{6} = \\sin\\dfrac{\\pi}{3} = \\dfrac{\\sqrt{3}}{2}\\]",
+              "Expand the sine term\n\\[\\sin\\left(\\theta + \\dfrac{\\pi}{6}\\right) = \\sin\\theta\\cos\\dfrac{\\pi}{6} + \\cos\\theta\\sin\\dfrac{\\pi}{6}\\]\n\\[= \\dfrac{\\sqrt{3}}{2}\\sin\\theta + \\dfrac{1}{2}\\cos\\theta\\]\nWhy: Sine of a sum.",
+              "Expand the cosine term\n\\[\\cos\\left(\\theta + \\dfrac{\\pi}{3}\\right) = \\cos\\theta\\cos\\dfrac{\\pi}{3} - \\sin\\theta\\sin\\dfrac{\\pi}{3}\\]\n\\[= \\dfrac{1}{2}\\cos\\theta - \\dfrac{\\sqrt{3}}{2}\\sin\\theta\\]\nWhy: Cosine of a sum (minus between the products).",
+              "Add\n\\[\\text{L.H.S.} = \\dfrac{\\sqrt{3}}{2}\\sin\\theta - \\dfrac{\\sqrt{3}}{2}\\sin\\theta\\]\n\\[+ \\dfrac{1}{2}\\cos\\theta + \\dfrac{1}{2}\\cos\\theta\\]\n\\[= \\cos\\theta = \\text{R.H.S.}\\]\nWhy: The \\(\\sin\\theta\\) terms cancel and the two halves of \\(\\cos\\theta\\) make one.",
+              "Check with \\(\\theta = 0\\)\n\\[\\sin 30^{\\circ} + \\cos 60^{\\circ} = \\dfrac{1}{2} + \\dfrac{1}{2} = 1 = \\cos 0 \\;\\checkmark\\]\nWhy: A quick test agrees."
+            ],
+            "final_answer": "Hence proved: \\(\\sin\\left(\\theta + \\dfrac{\\pi}{6}\\right) + \\cos\\left(\\theta + \\dfrac{\\pi}{3}\\right) = \\cos\\theta\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iv)",
+            "prompt": "3 (iv) Prove that: \\(\\dfrac{\\sin\\theta - \\cos\\theta\\tan\\frac{\\theta}{2}}{\\cos\\theta + \\sin\\theta\\tan\\frac{\\theta}{2}} = \\tan\\dfrac{\\theta}{2}\\)",
+            "explanation": "A fraction containing \\(\\tan\\frac{\\theta}{2}\\) must simplify to \\(\\tan\\frac{\\theta}{2}\\).\nWrite \\(\\tan\\frac{\\theta}{2} = \\sin\\frac{\\theta}{2} / \\cos\\frac{\\theta}{2}\\) and clear the small fractions.\nPlan: multiply top and bottom by \\(\\cos\\frac{\\theta}{2}\\), then recognise \\(\\sin(\\theta - \\frac{\\theta}{2})\\) and \\(\\cos(\\theta - \\frac{\\theta}{2})\\).",
+            "steps": [
+              "Given: the identity.\nTo prove: L.H.S. \\(= \\tan\\frac{\\theta}{2}\\).\nMethod: Change tan into sin/cos, clear fractions, then use\n\\[\\sin(A - B) = \\sin A\\cos B - \\cos A\\sin B\\]\n\\[\\cos(A - B) = \\cos A\\cos B + \\sin A\\sin B\\]\nwith \\(A = \\theta\\), \\(B = \\frac{\\theta}{2}\\).",
+              "Write tan as sin over cos\n\\[\\text{L.H.S.} = \\dfrac{\\sin\\theta - \\cos\\theta\\,\\dfrac{\\sin\\frac{\\theta}{2}}{\\cos\\frac{\\theta}{2}}}{\\cos\\theta + \\sin\\theta\\,\\dfrac{\\sin\\frac{\\theta}{2}}{\\cos\\frac{\\theta}{2}}}\\]\nWhy: \\(\\tan x = \\dfrac{\\sin x}{\\cos x}\\).",
+              "Multiply top and bottom by \\(\\cos\\frac{\\theta}{2}\\)\n\\[= \\dfrac{\\sin\\theta\\cos\\frac{\\theta}{2} - \\cos\\theta\\sin\\frac{\\theta}{2}}{\\cos\\theta\\cos\\frac{\\theta}{2} + \\sin\\theta\\sin\\frac{\\theta}{2}}\\]\nWhy: This clears the small fractions without changing the value.",
+              "Recognise the formulas\n\\[\\text{Top} = \\sin\\left(\\theta - \\dfrac{\\theta}{2}\\right) = \\sin\\dfrac{\\theta}{2}\\]\n\\[\\text{Bottom} = \\cos\\left(\\theta - \\dfrac{\\theta}{2}\\right) = \\cos\\dfrac{\\theta}{2}\\]\nWhy: The top is \\(\\sin(A - B)\\), the bottom is \\(\\cos(A - B)\\), and \\(\\theta - \\frac{\\theta}{2} = \\frac{\\theta}{2}\\).",
+              "Finish\n\\[\\text{L.H.S.} = \\dfrac{\\sin\\frac{\\theta}{2}}{\\cos\\frac{\\theta}{2}} = \\tan\\dfrac{\\theta}{2} = \\text{R.H.S.}\\]\nWhy: sin over cos is tan.",
+              "Check with \\(\\theta = 90^{\\circ}\\)\n\\[\\dfrac{1 - 0}{0 + 1\\cdot\\tan 45^{\\circ}} = \\dfrac{1}{1} = 1 = \\tan 45^{\\circ} \\;\\checkmark\\]\nWhy: A quick test agrees."
+            ],
+            "final_answer": "Hence proved: \\(\\dfrac{\\sin\\theta - \\cos\\theta\\tan\\frac{\\theta}{2}}{\\cos\\theta + \\sin\\theta\\tan\\frac{\\theta}{2}} = \\tan\\dfrac{\\theta}{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(v)",
+            "prompt": "3 (v) Prove that: \\(\\dfrac{1 - \\tan\\theta\\tan\\phi}{1 + \\tan\\theta\\tan\\phi} = \\dfrac{\\cos(\\theta + \\phi)}{\\cos(\\theta - \\phi)}\\)",
+            "explanation": "One side has tangents, the other has cosines of a sum and a difference.\nStart from the right side, expand, and divide by \\(\\cos\\theta\\cos\\phi\\).\nPlan: expand both cosines, then divide every term by \\(\\cos\\theta\\cos\\phi\\).",
+            "steps": [
+              "Given: the identity.\nTo prove: \\(\\dfrac{1 - \\tan\\theta\\tan\\phi}{1 + \\tan\\theta\\tan\\phi} = \\dfrac{\\cos(\\theta + \\phi)}{\\cos(\\theta - \\phi)}\\).\nMethod: Start with the R.H.S. and use\n\\[\\cos(\\theta \\pm \\phi) = \\cos\\theta\\cos\\phi \\mp \\sin\\theta\\sin\\phi\\]",
+              "Expand the right side\n\\[\\text{R.H.S.} = \\dfrac{\\cos\\theta\\cos\\phi - \\sin\\theta\\sin\\phi}{\\cos\\theta\\cos\\phi + \\sin\\theta\\sin\\phi}\\]\nWhy: Sum formula on top, difference formula below.",
+              "Divide top and bottom by \\(\\cos\\theta\\cos\\phi\\)\n\\[= \\dfrac{1 - \\dfrac{\\sin\\theta\\sin\\phi}{\\cos\\theta\\cos\\phi}}{1 + \\dfrac{\\sin\\theta\\sin\\phi}{\\cos\\theta\\cos\\phi}}\\]\nWhy: This turns sin/cos pairs into tangents; the value does not change.",
+              "Write as tangents\n\\[= \\dfrac{1 - \\tan\\theta\\tan\\phi}{1 + \\tan\\theta\\tan\\phi} = \\text{L.H.S.}\\]\nWhy: \\(\\dfrac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta\\) and \\(\\dfrac{\\sin\\phi}{\\cos\\phi} = \\tan\\phi\\).",
+              "Check with \\(\\theta = \\phi = 30^{\\circ}\\)\n\\[\\text{L.H.S.} = \\dfrac{1 - \\frac{1}{3}}{1 + \\frac{1}{3}} = \\dfrac{1}{2}\\]\n\\[\\text{R.H.S.} = \\dfrac{\\cos 60^{\\circ}}{\\cos 0^{\\circ}} = \\dfrac{1}{2} \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\dfrac{1 - \\tan\\theta\\tan\\phi}{1 + \\tan\\theta\\tan\\phi} = \\dfrac{\\cos(\\theta + \\phi)}{\\cos(\\theta - \\phi)}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

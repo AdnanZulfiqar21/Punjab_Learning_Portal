@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-4-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-4-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 203,
+          "pdf_to": 203,
+          "note": "Exercise 10.4, Question 3 (4 parts): book page 198 (PDF 203). Parts printed (i), (ii), (ii), (iv): the third part is used as 3(iii). No answer key (proofs). Verified with sympy and the solution book."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Prove the following identities: \\(\\dfrac{\\sin 3x - \\sin x}{\\cos x - \\cos 3x} = \\cot 2x\\)",
+            "explanation": "A fraction whose top and bottom are each a difference of two trig ratios.\nWe must show the L.H.S. equals \\(\\cot 2x\\).\nPlan: change the top and the bottom into products, cancel the common factors, and recognise \\(\\frac{\\cos}{\\sin} = \\cot\\).",
+            "steps": [
+              "Given: L.H.S. \\(= \\dfrac{\\sin 3x - \\sin x}{\\cos x - \\cos 3x}\\).\nTo prove: L.H.S. \\(= \\cot 2x\\).\nMethod: Sum-to-product formulas\n\\[\\sin P - \\sin Q = 2\\cos\\tfrac{P + Q}{2}\\sin\\tfrac{P - Q}{2}\\]\n\\[\\cos P - \\cos Q = -2\\sin\\tfrac{P + Q}{2}\\sin\\tfrac{P - Q}{2}\\]",
+              "Numerator as a product (\\(P = 3x\\), \\(Q = x\\))\n\\[\\sin 3x - \\sin x\\]\n\\[= 2\\cos 2x\\sin x\\]\nWhy: Half-sum \\(\\frac{4x}{2} = 2x\\), half-difference \\(\\frac{2x}{2} = x\\).",
+              "Denominator as a product (\\(P = x\\), \\(Q = 3x\\))\n\\[\\cos x - \\cos 3x\\]\n\\[= -2\\sin 2x\\sin(-x)\\]\n\\[= 2\\sin 2x\\sin x\\]\nWhy: The half-difference is \\(\\frac{x - 3x}{2} = -x\\), and \\(\\sin(-x) = -\\sin x\\), so the two minus signs make a plus.",
+              "Divide and cancel\n\\[\\text{L.H.S.} = \\dfrac{2\\cos 2x\\sin x}{2\\sin 2x\\sin x}\\]\n\\[= \\dfrac{\\cos 2x}{\\sin 2x}\\]\n\\[= \\cot 2x = \\text{R.H.S.}\\]\nWhy: \\(2\\sin x\\) is a common factor of the top and the bottom (we assume \\(\\sin x \\ne 0\\)), and \\(\\frac{\\cos}{\\sin} = \\cot\\).",
+              "Check: \\(x = 15^{\\circ}\\)\n\\[\\dfrac{\\sin 45^{\\circ} - \\sin 15^{\\circ}}{\\cos 15^{\\circ} - \\cos 45^{\\circ}}\\]\n\\[\\approx \\dfrac{0.4483}{0.2588}\\]\n\\[\\approx 1.732 = \\cot 30^{\\circ} \\;\\checkmark\\]\nWhy: \\(\\cot 30^{\\circ} = \\sqrt{3} \\approx 1.732\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\dfrac{\\sin 3x - \\sin x}{\\cos x - \\cos 3x} = \\cot 2x\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Prove the following identities: \\(\\dfrac{\\sin 8x + \\sin 2x}{\\cos 8x + \\cos 2x} = \\tan 5x\\)",
+            "explanation": "Top: sum of sines; bottom: sum of cosines, with the same two angles.\nWe must show the fraction is \\(\\tan 5x\\).\nPlan: write both as products; the factor \\(\\cos 3x\\) appears in both and cancels.",
+            "steps": [
+              "Given: L.H.S. \\(= \\dfrac{\\sin 8x + \\sin 2x}{\\cos 8x + \\cos 2x}\\).\nTo prove: L.H.S. \\(= \\tan 5x\\).\nMethod: Sum-to-product\n\\[\\sin P + \\sin Q = 2\\sin\\tfrac{P + Q}{2}\\cos\\tfrac{P - Q}{2}\\]\n\\[\\cos P + \\cos Q = 2\\cos\\tfrac{P + Q}{2}\\cos\\tfrac{P - Q}{2}\\]",
+              "Find the new angles (\\(P = 8x\\), \\(Q = 2x\\))\n\\[\\dfrac{P + Q}{2} = 5x\\]\n\\[\\dfrac{P - Q}{2} = 3x\\]\nWhy: Both top and bottom use the same \\(P\\) and \\(Q\\), so the angles are the same.",
+              "Write both as products\n\\[\\sin 8x + \\sin 2x = 2\\sin 5x\\cos 3x\\]\n\\[\\cos 8x + \\cos 2x = 2\\cos 5x\\cos 3x\\]\nWhy: The two formulas above with these angles.",
+              "Divide and cancel\n\\[\\text{L.H.S.} = \\dfrac{2\\sin 5x\\cos 3x}{2\\cos 5x\\cos 3x}\\]\n\\[= \\dfrac{\\sin 5x}{\\cos 5x}\\]\n\\[= \\tan 5x = \\text{R.H.S.}\\]\nWhy: \\(2\\cos 3x\\) cancels (we assume it is not zero), and \\(\\frac{\\sin}{\\cos} = \\tan\\).",
+              "Check: \\(x = 10^{\\circ}\\)\n\\[\\dfrac{\\sin 80^{\\circ} + \\sin 20^{\\circ}}{\\cos 80^{\\circ} + \\cos 20^{\\circ}}\\]\n\\[\\approx \\dfrac{1.3268}{1.1133}\\]\n\\[\\approx 1.1918 = \\tan 50^{\\circ} \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\dfrac{\\sin 8x + \\sin 2x}{\\cos 8x + \\cos 2x} = \\tan 5x\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) [printed as (ii)] Prove the following identities: \\(\\dfrac{\\sin A - \\sin B}{\\sin A + \\sin B} = \\tan\\dfrac{A - B}{2}\\cot\\dfrac{A + B}{2}\\)",
+            "explanation": "The same idea with general angles \\(A\\) and \\(B\\): top is a difference, bottom a sum, of sines.\nWe must reach \\(\\tan\\frac{A - B}{2}\\cot\\frac{A + B}{2}\\).\nPlan: write both as products, then group a \\(\\frac{\\sin}{\\cos}\\) and a \\(\\frac{\\cos}{\\sin}\\).",
+            "steps": [
+              "Given: L.H.S. \\(= \\dfrac{\\sin A - \\sin B}{\\sin A + \\sin B}\\).\nTo prove: L.H.S. \\(= \\tan\\frac{A - B}{2}\\cot\\frac{A + B}{2}\\).\nMethod: Sum-to-product\n\\[\\sin A - \\sin B = 2\\cos\\tfrac{A + B}{2}\\sin\\tfrac{A - B}{2}\\]\n\\[\\sin A + \\sin B = 2\\sin\\tfrac{A + B}{2}\\cos\\tfrac{A - B}{2}\\]",
+              "Put the products in the fraction\n\\[\\text{L.H.S.} = \\dfrac{2\\cos\\frac{A + B}{2}\\sin\\frac{A - B}{2}}{2\\sin\\frac{A + B}{2}\\cos\\frac{A - B}{2}}\\]\nWhy: These are exactly the two formulas with \\(P = A\\), \\(Q = B\\).",
+              "Cancel the 2 and regroup\n\\[= \\dfrac{\\sin\\frac{A - B}{2}}{\\cos\\frac{A - B}{2}}\\cdot\\dfrac{\\cos\\frac{A + B}{2}}{\\sin\\frac{A + B}{2}}\\]\nWhy: Put the two ratios with angle \\(\\frac{A - B}{2}\\) together and the two with \\(\\frac{A + B}{2}\\) together.",
+              "Recognise tan and cot\n\\[= \\tan\\dfrac{A - B}{2}\\cot\\dfrac{A + B}{2}\\]\n\\[= \\text{R.H.S.}\\]\nWhy: \\(\\frac{\\sin}{\\cos} = \\tan\\) and \\(\\frac{\\cos}{\\sin} = \\cot\\).",
+              "Check: \\(A = 90^{\\circ}\\), \\(B = 30^{\\circ}\\)\n\\[\\dfrac{1 - \\tfrac{1}{2}}{1 + \\tfrac{1}{2}} = \\dfrac{1}{3}\\]\n\\[\\tan 30^{\\circ}\\cot 60^{\\circ}\\]\n\\[= \\dfrac{1}{\\sqrt{3}}\\cdot\\dfrac{1}{\\sqrt{3}} = \\dfrac{1}{3} \\;\\checkmark\\]\nWhy: Both sides equal \\(\\frac{1}{3}\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\dfrac{\\sin A - \\sin B}{\\sin A + \\sin B} = \\tan\\dfrac{A - B}{2}\\cot\\dfrac{A + B}{2}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book labels this third part \"(ii)\" a second time and has no part (iii); the parts read (i), (ii), (ii), (iv). It is part (iii) here. The identity itself is printed correctly."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iv)",
+            "prompt": "3 (iv) Prove the following identities: \\(\\dfrac{\\sin 80^{\\circ} + \\sin 40^{\\circ}}{\\cos 80^{\\circ} + \\cos 40^{\\circ}} = \\sqrt{3}\\)",
+            "explanation": "A fraction of fixed angles, like part (ii) but with numbers.\nWe must show it equals \\(\\sqrt{3}\\).\nPlan: write top and bottom as products; \\(\\cos 20^{\\circ}\\) cancels and \\(\\tan 60^{\\circ} = \\sqrt{3}\\) is left.",
+            "steps": [
+              "Given: L.H.S. \\(= \\dfrac{\\sin 80^{\\circ} + \\sin 40^{\\circ}}{\\cos 80^{\\circ} + \\cos 40^{\\circ}}\\).\nTo prove: L.H.S. \\(= \\sqrt{3}\\).\nMethod: \\(\\sin P + \\sin Q\\) and \\(\\cos P + \\cos Q\\) formulas with \\(P = 80^{\\circ}\\), \\(Q = 40^{\\circ}\\). (The book prints the degree marks as small primes.)",
+              "Find the new angles\n\\[\\dfrac{P + Q}{2} = \\dfrac{120^{\\circ}}{2} = 60^{\\circ}\\]\n\\[\\dfrac{P - Q}{2} = \\dfrac{40^{\\circ}}{2} = 20^{\\circ}\\]\nWhy: Half-sum and half-difference.",
+              "Write both as products\n\\[\\sin 80^{\\circ} + \\sin 40^{\\circ} = 2\\sin 60^{\\circ}\\cos 20^{\\circ}\\]\n\\[\\cos 80^{\\circ} + \\cos 40^{\\circ} = 2\\cos 60^{\\circ}\\cos 20^{\\circ}\\]\nWhy: Sum-to-product formulas.",
+              "Divide and cancel\n\\[\\text{L.H.S.} = \\dfrac{2\\sin 60^{\\circ}\\cos 20^{\\circ}}{2\\cos 60^{\\circ}\\cos 20^{\\circ}}\\]\n\\[= \\tan 60^{\\circ}\\]\n\\[= \\sqrt{3} = \\text{R.H.S.}\\]\nWhy: \\(2\\cos 20^{\\circ} \\ne 0\\) cancels; \\(\\frac{\\sin 60^{\\circ}}{\\cos 60^{\\circ}} = \\tan 60^{\\circ} = \\sqrt{3}\\).",
+              "Check with a calculator\n\\[\\dfrac{0.9848 + 0.6428}{0.1736 + 0.7660} = \\dfrac{1.6276}{0.9397}\\]\n\\[\\approx 1.732 = \\sqrt{3} \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\dfrac{\\sin 80^{\\circ} + \\sin 40^{\\circ}}{\\cos 80^{\\circ} + \\cos 40^{\\circ}} = \\sqrt{3}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

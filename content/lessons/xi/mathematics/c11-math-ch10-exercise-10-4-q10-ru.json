@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-4-Q10-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-4-q10",
+      "title": "Question 10 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 204,
+          "pdf_to": 204,
+          "note": "Exercise 10.4, Question 10: book page 199 (PDF 204). No answer key (proof). Verified with sympy and the solution book."
+        }
+      ],
+      "variant_of": "C11-MATH-CH10-EXERCISE-10-4-Q10",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10 Prove that: \\(\\sin\\alpha + \\sin\\beta + \\sin\\gamma - \\sin(\\alpha + \\beta + \\gamma) = 4\\sin\\left(\\dfrac{\\alpha + \\beta}{2}\\right)\\sin\\left(\\dfrac{\\beta + \\gamma}{2}\\right)\\sin\\left(\\dfrac{\\gamma + \\alpha}{2}\\right)\\)",
+            "explanation": "Yeh is exercise ka sab se lamba sawal hai, lekin naya kuch nahi: wohi formulas, bas do dafa aur ehtiyaat se.\nTeen sines ke jama mein se un ke total angle ka sine minus karna hai, aur dikhana hai ke yeh teen sines ka product ban jata hai.\nPlan: \\(\\sin\\alpha + \\sin\\beta\\) ek jora, \\(\\sin\\gamma - \\sin(\\alpha + \\beta + \\gamma)\\) doosra jora. Dono se \\(\\sin\\frac{\\alpha + \\beta}{2}\\) nikalta hai; usay common le kar bache hue cosines ke farq ko product banayein.",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\sin\\alpha + \\sin\\beta + \\sin\\gamma - \\sin(\\alpha + \\beta + \\gamma)\\).\nSaabit karna hai: L.H.S. \\(= 4\\sin\\frac{\\alpha + \\beta}{2}\\sin\\frac{\\beta + \\gamma}{2}\\sin\\frac{\\gamma + \\alpha}{2}\\).\nTareeqa: \\(\\sin P \\pm \\sin Q\\) aur \\(\\cos P - \\cos Q\\) formulas.",
+              "Pehla jora\n\\[\\sin\\alpha + \\sin\\beta = 2\\sin\\tfrac{\\alpha + \\beta}{2}\\cos\\tfrac{\\alpha - \\beta}{2}\\]\nKyun: Seedha \\(\\sin P + \\sin Q\\) formula. Right side mein \\(\\frac{\\alpha + \\beta}{2}\\) nazar aa raha hai; R.H.S. mein bhi yahi hai, to sahi raaste par hain.",
+              "Doosra jora (\\(P = \\gamma\\), \\(Q = \\alpha + \\beta + \\gamma\\))\n\\[\\dfrac{P + Q}{2} = \\dfrac{\\alpha + \\beta + 2\\gamma}{2}\\]\n\\[\\dfrac{P - Q}{2} = -\\dfrac{\\alpha + \\beta}{2}\\]\n\\[\\sin\\gamma - \\sin(\\alpha + \\beta + \\gamma)\\]\n\\[= -2\\cos\\tfrac{\\alpha + \\beta + 2\\gamma}{2}\\sin\\tfrac{\\alpha + \\beta}{2}\\]\nKyun: \"sin − sin\" formula. Aadha farq mein \\(\\gamma\\) cancel ho kar \\(-\\frac{\\alpha + \\beta}{2}\\) bacha, aur \\(\\sin(-u) = -\\sin u\\) se minus bahar aa gaya. Phir se \\(\\sin\\frac{\\alpha + \\beta}{2}\\) mil gaya.",
+              "Common factor bahar nikalein\n\\[\\text{L.H.S.} = 2\\sin\\tfrac{\\alpha + \\beta}{2}\\;\\times\\]\n\\[\\left[\\cos\\tfrac{\\alpha - \\beta}{2} - \\cos\\tfrac{\\alpha + \\beta + 2\\gamma}{2}\\right]\\]\nKyun: Dono joron mein \\(2\\sin\\frac{\\alpha + \\beta}{2}\\) hai. Bracket mein ab do cosines ka farq hai, jis ke liye bhi formula hai.",
+              "Bracket: \\(\\cos P - \\cos Q\\), jahan \\(P = \\frac{\\alpha - \\beta}{2}\\), \\(Q = \\frac{\\alpha + \\beta + 2\\gamma}{2}\\)\n\\[\\dfrac{P + Q}{2} = \\dfrac{2\\alpha + 2\\gamma}{4} = \\dfrac{\\gamma + \\alpha}{2}\\]\n\\[\\dfrac{P - Q}{2} = \\dfrac{-2\\beta - 2\\gamma}{4} = -\\dfrac{\\beta + \\gamma}{2}\\]\nKyun: \\(P + Q = \\frac{\\alpha - \\beta + \\alpha + \\beta + 2\\gamma}{2} = \\frac{2\\alpha + 2\\gamma}{2}\\); phir aadha. Isi tarah \\(P - Q = \\frac{-2\\beta - 2\\gamma}{2}\\). Yahan jaldi na karein, har term ka sign dekh kar likhein.",
+              "Bracket ko product banayein\n\\[\\cos P - \\cos Q\\]\n\\[= -2\\sin\\tfrac{\\gamma + \\alpha}{2}\\sin\\left(-\\tfrac{\\beta + \\gamma}{2}\\right)\\]\n\\[= 2\\sin\\tfrac{\\gamma + \\alpha}{2}\\sin\\tfrac{\\beta + \\gamma}{2}\\]\nKyun: Formula ka minus aur \\(\\sin(-u) = -\\sin u\\) wala minus mil kar plus ban gaye.\nDhyan dein: Is sawal mein teen jagah minus sign aata hai; har ek ko alag likh kar sambhalein.",
+              "Wapas rakh dein\n\\[\\text{L.H.S.} = 2\\sin\\tfrac{\\alpha + \\beta}{2}\\;\\times\\]\n\\[2\\sin\\tfrac{\\gamma + \\alpha}{2}\\sin\\tfrac{\\beta + \\gamma}{2}\\]\n\\[= 4\\sin\\tfrac{\\alpha + \\beta}{2}\\sin\\tfrac{\\beta + \\gamma}{2}\\sin\\tfrac{\\gamma + \\alpha}{2}\\]\n\\[= \\text{R.H.S.}\\]\nKyun: \\(2 \\times 2 = 4\\), aur factors ka order R.H.S. jaisa kar diya; zarb mein order se farq nahi parta.",
+              "Tasdeeq: \\(\\alpha = 30^{\\circ}\\), \\(\\beta = 40^{\\circ}\\), \\(\\gamma = 50^{\\circ}\\)\n\\[\\sin 30^{\\circ} + \\sin 40^{\\circ} + \\sin 50^{\\circ}\\]\n\\[- \\sin 120^{\\circ} \\approx 1.0428\\]\n\\[4\\sin 35^{\\circ}\\sin 45^{\\circ}\\sin 40^{\\circ} \\approx 1.0428 \\;\\checkmark\\]\nKyun: \\(\\frac{\\alpha + \\beta}{2} = 35^{\\circ}\\), \\(\\frac{\\beta + \\gamma}{2} = 45^{\\circ}\\), \\(\\frac{\\gamma + \\alpha}{2} = 40^{\\circ}\\); dono sides barabar."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\sin\\alpha + \\sin\\beta + \\sin\\gamma - \\sin(\\alpha + \\beta + \\gamma) = 4\\sin\\frac{\\alpha + \\beta}{2}\\sin\\frac{\\beta + \\gamma}{2}\\sin\\frac{\\gamma + \\alpha}{2}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-3-Q5-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-3-q5",
+      "title": "Question 5 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 200,
+          "pdf_to": 200,
+          "note": "Exercise 10.3, Question 5 (+ unlabelled Hence part as 5(v)): book page 195 (PDF 200); answer key PDF 308 values right, labels (15., ii-iv) wrong, boxed; checked with sympy and the solution book (PDF 954-959)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH10-EXERCISE-10-3-Q5",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(i)",
+            "prompt": "5 (i) Find the values of \\(\\sin\\theta\\) and \\(\\cos\\theta\\) without using table or calculator, when \\(\\theta\\) is: \\(18^{\\circ}\\)",
+            "explanation": "\\(18^{\\circ}\\) table ka angle nahi, lekin is ki ek khaas baat hai: \\(5 \\times 18^{\\circ} = 90^{\\circ}\\). Isi se raasta nikalta hai.\nDiya kya hai? \\(\\theta = 18^{\\circ}\\). Find kya karna hai? \\(\\sin 18^{\\circ}\\) aur \\(\\cos 18^{\\circ}\\) ki exact values, bina table ya calculator.\nPlan (kitab ka hint): \\(5\\theta = 90^{\\circ}\\) ko \\(3\\theta = 90^{\\circ} - 2\\theta\\) likhna, dono taraf sin lena, aur \\(\\sin\\theta\\) ki equation hal karna.",
+            "steps": [
+              "Diya gaya hai: \\(\\theta = 18^{\\circ}\\).\nHumein find karna hai: \\(\\sin 18^{\\circ}\\) aur \\(\\cos 18^{\\circ}\\).\nTareeqa: \\(5\\theta = 90^{\\circ}\\) ko do hisson mein torein: \\(3\\theta + 2\\theta = 90^{\\circ}\\), yani \\(3\\theta = 90^{\\circ} - 2\\theta\\). Dono taraf sin lene se triple angle aur double angle ke formulas aa jayenge, aur sab kuch \\(\\sin\\theta\\) mein badal jayega.",
+              "Equation banayein\n\\[\\sin 3\\theta = \\sin(90^{\\circ} - 2\\theta)\\]\n\\[\\sin 3\\theta = \\cos 2\\theta\\]\nKyun: Barabar angles ke sin barabar hote hain. Phir \\(\\sin(90^{\\circ} - x) = \\cos x\\) (complementary angles) lagaya.",
+              "Sab ko \\(s = \\sin\\theta\\) mein likhein\n\\[3s - 4s^3 = 1 - 2s^2\\]\n\\[4s^3 - 2s^2 - 3s + 1 = 0\\]\nKyun: \\(\\sin 3\\theta = 3\\sin\\theta - 4\\sin^3\\theta\\) (Section 10.6) aur \\(\\cos 2\\theta = 1 - 2\\sin^2\\theta\\) (Section 10.4). Humne \\(\\cos 2\\theta\\) ki woh shakal chuni jis mein sirf sin hai, taake ek hi variable rahe. Phir sab terms ek taraf le gaye.",
+              "Factor karein\n\\[(s - 1)(4s^2 + 2s - 1) = 0\\]\nKyun: \\(s = 1\\) rakhne se \\(4 - 2 - 3 + 1 = 0\\) aata hai, is liye Factor Theorem se \\(s - 1\\) ek factor hai (Unit 9 yaad karein). Baqi quadratic synthetic division se milta hai. Lekin \\(\\sin 18^{\\circ}\\) 1 nahi ho sakta (\\(\\sin 90^{\\circ} = 1\\) hai), is liye \\(4s^2 + 2s - 1 = 0\\).",
+              "Quadratic hal karein\n\\[s = \\dfrac{-2 \\pm \\sqrt{4 + 16}}{8}\\]\n\\[= \\dfrac{-1 \\pm \\sqrt{5}}{4}\\]\n\\[\\sin 18^{\\circ} = \\dfrac{\\sqrt{5} - 1}{4}\\]\nKyun: Quadratic formula, \\(a = 4\\), \\(b = 2\\), \\(c = -1\\): \\(b^2 - 4ac = 4 + 16 = 20\\), aur \\(\\sqrt{20} = 2\\sqrt{5}\\). Upar neeche 2 se cancel kiya. Do jawab aaye; \\(18^{\\circ}\\) quadrant I mein hai, sin positive, is liye \\(\\frac{-1 + \\sqrt{5}}{4}\\) rakha aur negative wala chhor diya.",
+              "\\(\\cos 18^{\\circ}\\) nikalein\n\\[\\sin^2 18^{\\circ} = \\dfrac{6 - 2\\sqrt{5}}{16}\\]\n\\[\\cos^2 18^{\\circ} = \\dfrac{10 + 2\\sqrt{5}}{16}\\]\n\\[\\cos 18^{\\circ} = \\dfrac{\\sqrt{10 + 2\\sqrt{5}}}{4}\\]\nKyun: \\((\\sqrt{5} - 1)^2 = 5 - 2\\sqrt{5} + 1 = 6 - 2\\sqrt{5}\\). Phir \\(\\cos^2 = 1 - \\sin^2 = \\frac{16 - 6 + 2\\sqrt{5}}{16}\\). Quadrant I mein cos positive, is liye positive root; \\(\\sqrt{16} = 4\\) bahar aa gaya.",
+              "Tasdeeq (andaze se)\n\\[\\dfrac{\\sqrt{5} - 1}{4} \\approx \\dfrac{1.236}{4} = 0.309\\]\nKyun: \\(18^{\\circ}\\) \\(0^{\\circ}\\) aur \\(30^{\\circ}\\) ke darmiyan hai, is liye \\(\\sin 18^{\\circ}\\) 0 aur 0.5 ke darmiyan hona chahiye; 0.309 bilkul munasib hai."
+            ],
+            "final_answer": "\\(\\sin 18^{\\circ} = \\frac{\\sqrt{5} - 1}{4}\\), \\(\\cos 18^{\\circ} = \\frac{\\sqrt{10 + 2\\sqrt{5}}}{4}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(ii)",
+            "prompt": "5 (ii) Find the values of \\(\\sin\\theta\\) and \\(\\cos\\theta\\) without using table or calculator, when \\(\\theta\\) is: \\(36^{\\circ}\\)",
+            "explanation": "Is dafa \\(5 \\times 36^{\\circ} = 180^{\\circ}\\); kitab ke hint ka doosra hissa yahi hai.\nDiya kya hai? \\(\\theta = 36^{\\circ}\\). Find kya karna hai? \\(\\sin 36^{\\circ}\\) aur \\(\\cos 36^{\\circ}\\).\nPlan: \\(3\\theta = 180^{\\circ} - 2\\theta\\) se \\(\\sin 3\\theta = \\sin 2\\theta\\), phir \\(\\cos\\theta\\) ki quadratic equation.",
+            "steps": [
+              "Diya gaya hai: \\(\\theta = 36^{\\circ}\\).\nHumein find karna hai: \\(\\sin 36^{\\circ}\\) aur \\(\\cos 36^{\\circ}\\).\nTareeqa: \\(5\\theta = 180^{\\circ}\\) ko \\(3\\theta = 180^{\\circ} - 2\\theta\\) likhenge. \\(\\sin(180^{\\circ} - x) = \\sin x\\) hai, is liye \\(\\sin 3\\theta = \\sin 2\\theta\\). Is dafa \\(\\cos\\theta\\) ki equation banegi.",
+              "\\(s = \\sin\\theta\\), \\(c = \\cos\\theta\\) mein likhein\n\\[3s - 4s^3 = 2sc\\]\n\\[3 - 4s^2 = 2c\\]\nKyun: Left side triple angle formula, right side \\(\\sin 2\\theta = 2\\sin\\theta\\cos\\theta\\). Dono taraf \\(s\\) hai, aur \\(\\sin 36^{\\circ}\\) zero nahi, is liye \\(s\\) se divide kar diya.\nDhyan dein: kisi cheez se divide karne se pehle yaqeen kar lein ke woh zero nahi; warna jawab kho sakta hai.",
+              "Sirf \\(c\\) mein badlein\n\\[3 - 4(1 - c^2) = 2c\\]\n\\[4c^2 - 2c - 1 = 0\\]\nKyun: \\(s^2 = 1 - c^2\\) rakha. \\(3 - 4 + 4c^2 = 2c\\), sab ek taraf le gaye to quadratic bani.",
+              "Quadratic hal karein\n\\[c = \\dfrac{2 \\pm \\sqrt{4 + 16}}{8} = \\dfrac{1 \\pm \\sqrt{5}}{4}\\]\n\\[\\cos 36^{\\circ} = \\dfrac{1 + \\sqrt{5}}{4}\\]\nKyun: \\(a = 4\\), \\(b = -2\\), \\(c = -1\\) ke saath quadratic formula. \\(\\frac{1 - \\sqrt{5}}{4}\\) negative hai, lekin \\(36^{\\circ}\\) quadrant I mein hai jahan cos positive, is liye woh chhor diya. (Woh doosra jawab asal mein \\(\\cos 108^{\\circ}\\) hai, jo Hence wale hisse mein kaam aayega.)",
+              "\\(\\sin 36^{\\circ}\\) nikalein\n\\[\\cos^2 36^{\\circ} = \\dfrac{6 + 2\\sqrt{5}}{16}\\]\n\\[\\sin^2 36^{\\circ} = \\dfrac{10 - 2\\sqrt{5}}{16}\\]\n\\[\\sin 36^{\\circ} = \\dfrac{\\sqrt{10 - 2\\sqrt{5}}}{4}\\]\nKyun: \\((1 + \\sqrt{5})^2 = 1 + 2\\sqrt{5} + 5 = 6 + 2\\sqrt{5}\\). \\(\\sin^2 = 1 - \\cos^2 = \\frac{16 - 6 - 2\\sqrt{5}}{16}\\). Positive root, kyunke quadrant I.",
+              "Tasdeeq: part (i) se\n\\[\\cos 36^{\\circ} = 1 - 2\\sin^2 18^{\\circ}\\]\n\\[= 1 - \\dfrac{6 - 2\\sqrt{5}}{8} = \\dfrac{2 + 2\\sqrt{5}}{8}\\]\n\\[= \\dfrac{1 + \\sqrt{5}}{4} \\;\\checkmark\\]\nKyun: \\(36^{\\circ} = 2 \\times 18^{\\circ}\\), is liye double angle formula se bhi \\(\\cos 36^{\\circ}\\) nikal sakte hain. Bilkul wohi jawab aaya; dono parts ek doosre ki tasdeeq karte hain."
+            ],
+            "final_answer": "\\(\\sin 36^{\\circ} = \\frac{\\sqrt{10 - 2\\sqrt{5}}}{4}\\), \\(\\cos 36^{\\circ} = \\frac{\\sqrt{5} + 1}{4}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(iii)",
+            "prompt": "5 (iii) Find the values of \\(\\sin\\theta\\) and \\(\\cos\\theta\\) without using table or calculator, when \\(\\theta\\) is: \\(54^{\\circ}\\)",
+            "explanation": "\\(54^{\\circ}\\) aur \\(36^{\\circ}\\) ka jama \\(90^{\\circ}\\) hai, yani yeh complementary angles hain. Naya hisaab lagane ki zaroorat nahi.\nDiya kya hai? \\(\\theta = 54^{\\circ}\\). Find kya karna hai? \\(\\sin 54^{\\circ}\\) aur \\(\\cos 54^{\\circ}\\).\nPlan: \\(54^{\\circ} = 90^{\\circ} - 36^{\\circ}\\) likh kar part (ii) ke jawab istemal karna.",
+            "steps": [
+              "Diya gaya hai: \\(\\theta = 54^{\\circ}\\).\nHumein find karna hai: \\(\\sin 54^{\\circ}\\), \\(\\cos 54^{\\circ}\\).\nTareeqa: Complementary angles ka rule: \\(\\sin(90^{\\circ} - x) = \\cos x\\) aur \\(\\cos(90^{\\circ} - x) = \\sin x\\). Ek angle ka sin doosre ka cos hota hai.",
+              "\\(54^{\\circ} = 90^{\\circ} - 36^{\\circ}\\) istemal karein\n\\[\\sin 54^{\\circ} = \\cos 36^{\\circ} = \\dfrac{\\sqrt{5} + 1}{4}\\]\n\\[\\cos 54^{\\circ} = \\sin 36^{\\circ} = \\dfrac{\\sqrt{10 - 2\\sqrt{5}}}{4}\\]\nKyun: \\(90^{\\circ}\\) odd multiple hai, is liye sin aur cos aapas mein jagah badal lete hain; quadrant I mein dono positive. Values part (ii) se seedhi utha li.\nDhyan dein: \\(\\sin 54^{\\circ}\\) aur \\(\\cos 36^{\\circ}\\) ek hi number hain; exam mein yeh rishta dikha dena kaafi hai.",
+              "Tasdeeq\n\\[\\sin^2 54^{\\circ} + \\cos^2 54^{\\circ}\\]\n\\[= \\dfrac{6 + 2\\sqrt{5} + 10 - 2\\sqrt{5}}{16} = 1 \\;\\checkmark\\]\nKyun: Dono squares jama karne se \\(\\sqrt{5}\\) wale terms cancel ho gaye aur \\(\\frac{16}{16} = 1\\) bacha, jaisa har angle ke liye hona chahiye."
+            ],
+            "final_answer": "\\(\\sin 54^{\\circ} = \\frac{\\sqrt{5} + 1}{4}\\), \\(\\cos 54^{\\circ} = \\frac{\\sqrt{10 - 2\\sqrt{5}}}{4}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(iv)",
+            "prompt": "5 (iv) Find the values of \\(\\sin\\theta\\) and \\(\\cos\\theta\\) without using table or calculator, when \\(\\theta\\) is: \\(72^{\\circ}\\)",
+            "explanation": "\\(72^{\\circ} + 18^{\\circ} = 90^{\\circ}\\), is liye yeh bhi complementary jora hai.\nDiya kya hai? \\(\\theta = 72^{\\circ}\\). Find kya karna hai? \\(\\sin 72^{\\circ}\\) aur \\(\\cos 72^{\\circ}\\).\nPlan: \\(72^{\\circ} = 90^{\\circ} - 18^{\\circ}\\) aur part (i) ke jawab.",
+            "steps": [
+              "Diya gaya hai: \\(\\theta = 72^{\\circ}\\).\nHumein find karna hai: \\(\\sin 72^{\\circ}\\), \\(\\cos 72^{\\circ}\\).\nTareeqa: Complementary angles ka rule, bilkul part (iii) ki tarah, lekin is dafa \\(18^{\\circ}\\) ke saath.",
+              "\\(72^{\\circ} = 90^{\\circ} - 18^{\\circ}\\) istemal karein\n\\[\\sin 72^{\\circ} = \\cos 18^{\\circ} = \\dfrac{\\sqrt{10 + 2\\sqrt{5}}}{4}\\]\n\\[\\cos 72^{\\circ} = \\sin 18^{\\circ} = \\dfrac{\\sqrt{5} - 1}{4}\\]\nKyun: \\(90^{\\circ} - x\\) mein sin aur cos jagah badalte hain, aur quadrant I mein dono positive rehte hain. Values part (i) se.",
+              "Tasdeeq: double angle se\n\\[\\cos 72^{\\circ} = 2\\cos^2 36^{\\circ} - 1\\]\n\\[= \\dfrac{6 + 2\\sqrt{5}}{8} - 1 = \\dfrac{\\sqrt{5} - 1}{4} \\;\\checkmark\\]\nKyun: \\(72^{\\circ} = 2 \\times 36^{\\circ}\\), is liye \\(\\cos 2x = 2\\cos^2 x - 1\\) se bhi nikal sakte hain. \\(\\frac{6 + 2\\sqrt{5} - 8}{8} = \\frac{2\\sqrt{5} - 2}{8} = \\frac{\\sqrt{5} - 1}{4}\\). Wohi jawab; is ka matlab hai saare parts ek doosre se mel khate hain."
+            ],
+            "final_answer": "\\(\\sin 72^{\\circ} = \\frac{\\sqrt{10 + 2\\sqrt{5}}}{4}\\), \\(\\cos 72^{\\circ} = \\frac{\\sqrt{5} - 1}{4}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(v)",
+            "prompt": "5 (v) [printed without a label] Hence prove that: \\(\\cos 36^{\\circ}\\cos 72^{\\circ}\\cos 108^{\\circ}\\cos 144^{\\circ} = \\frac{1}{16}\\)",
+            "explanation": "Yeh hissa kitab mein bina number ke \"Hence\" se shuru hota hai; hum ne usay (v) ka label diya hai. \"Hence\" ka matlab: abhi jo values nikali hain unhi se prove karo.\nDiya kya hai? Chaar cosines ka product. Prove kya karna hai? Ke yeh \\(\\frac{1}{16}\\) hai.\nPlan: \\(108^{\\circ}\\) aur \\(144^{\\circ}\\) ko allied angles se \\(72^{\\circ}\\) aur \\(36^{\\circ}\\) mein badalna, phir values rakh kar multiply.",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\cos 36^{\\circ}\\cos 72^{\\circ}\\cos 108^{\\circ}\\cos 144^{\\circ}\\).\nHumein prove karna hai: L.H.S. \\(= \\frac{1}{16}\\).\nTareeqa: \\(108^{\\circ} = 180^{\\circ} - 72^{\\circ}\\) aur \\(144^{\\circ} = 180^{\\circ} - 36^{\\circ}\\). Is tarah sirf do angles bachenge jin ki values parts (ii) aur (iv) mein mil chuki hain.",
+              "Bare angles chhote karein\n\\[\\cos 108^{\\circ} = -\\cos 72^{\\circ}\\]\n\\[\\cos 144^{\\circ} = -\\cos 36^{\\circ}\\]\nKyun: \\(180^{\\circ}\\) even multiple, cos cos hi raha. \\(108^{\\circ}\\) aur \\(144^{\\circ}\\) dono quadrant II mein hain jahan cos negative hai, is liye dono ke saath minus.",
+              "Product ikattha karein\n\\[\\text{L.H.S.} = \\cos 36^{\\circ}\\cos 72^{\\circ}\\]\n\\[\\quad \\times (-\\cos 72^{\\circ})(-\\cos 36^{\\circ})\\]\n\\[= (\\cos 36^{\\circ}\\cos 72^{\\circ})^2\\]\nKyun: Do minus signs milkar plus. Har cos do dafa aaya, is liye poora product \\(\\cos 36^{\\circ}\\cos 72^{\\circ}\\) ka square ban gaya. Is se hisaab aadha ho jata hai.",
+              "Values rakhein\n\\[\\cos 36^{\\circ}\\cos 72^{\\circ} = \\dfrac{(\\sqrt{5} + 1)(\\sqrt{5} - 1)}{16}\\]\n\\[= \\dfrac{5 - 1}{16} = \\dfrac{1}{4}\\]\nKyun: \\(\\cos 36^{\\circ} = \\frac{\\sqrt{5} + 1}{4}\\) aur \\(\\cos 72^{\\circ} = \\frac{\\sqrt{5} - 1}{4}\\). Upar \\((a + b)(a - b) = a^2 - b^2\\) se \\(5 - 1 = 4\\), neeche \\(4 \\times 4 = 16\\). Square roots khud hi khatam ho gaye.",
+              "Square karein\n\\[\\text{L.H.S.} = \\left(\\dfrac{1}{4}\\right)^2 = \\dfrac{1}{16} = \\text{R.H.S.}\\]\nKyun: Pichhle qadam ka \\(\\frac{1}{4}\\) square kiya to \\(\\frac{1}{16}\\). Right side mil gaya.\nDhyan dein: \\(\\cos 108^{\\circ}\\) aur \\(\\cos 144^{\\circ}\\) ke minus signs bhool jayein to bhi jawab yahan sahi aa jata hai (kyunke do hain), lekin method ghalat hoga; signs hamesha likhein."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\cos 36^{\\circ}\\cos 72^{\\circ}\\cos 108^{\\circ}\\cos 144^{\\circ} = \\frac{1}{16}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key mein yeh sawal \"5.\" ki bajaye \"15.\" ke number par hai, aur jawab printed parts ke hisaab se nahi balke ratios ke hisaab se lage hain: us ka (i) \\(\\sin 18^{\\circ} = \\cos 72^{\\circ}\\), (ii) \\(\\sin 54^{\\circ} = \\cos 36^{\\circ}\\), (iii) \\(\\cos 18^{\\circ} = \\sin 72^{\\circ}\\), (iv) \\(\\cos 54^{\\circ} = \\sin 36^{\\circ}\\). Values sahi hain, magar labels (ii)-(iv) chhape hue parts ((ii) \\(36^{\\circ}\\), (iii) \\(54^{\\circ}\\), (iv) \\(72^{\\circ}\\)) se nahi milte. Upar diye gaye jawab part ba part istemal karein."
+          }
+        ]
+      }
+    }
+  ]
+}

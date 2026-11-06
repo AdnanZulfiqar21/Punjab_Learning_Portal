@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-3-Q2-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-3-q2",
+      "title": "Question 2 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 199,
+          "pdf_to": 200,
+          "note": "Exercise 10.3, Question 2: book pages 194-195 (PDF 199-200); no answer key entry (proofs); (v) holds only where its right side is positive, boxed; checked with sympy and the solution book (PDF 936-951)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH10-EXERCISE-10-3-Q2",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Prove the following identity: \\(\\cot\\alpha - \\tan\\alpha = 2\\cot 2\\alpha\\)",
+            "explanation": "Left side par cot aur tan ka farq hai, right side par double angle ka cot. Matlab angle dugna karna hai.\nPlan: dono ko sin aur cos mein likh kar ek denominator banana; phir upar \\(\\cos 2\\alpha\\) aur neeche \\(\\frac{1}{2}\\sin 2\\alpha\\) pehchanna.",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\cot\\alpha - \\tan\\alpha\\).\nHumein prove karna hai: L.H.S. \\(= 2\\cot 2\\alpha\\).\nTareeqa: Sab kuch sin aur cos mein; phir \\(\\cos 2\\alpha = \\cos^2\\alpha - \\sin^2\\alpha\\) aur \\(\\sin 2\\alpha = 2\\sin\\alpha\\cos\\alpha\\). Identity prove karne ka sab se mehfooz tareeqa yahi hai ke mushkil side (aksar left) ko sin/cos mein le aayein.",
+              "Ek denominator banayein\n\\[\\text{L.H.S.} = \\dfrac{\\cos\\alpha}{\\sin\\alpha} - \\dfrac{\\sin\\alpha}{\\cos\\alpha}\\]\n\\[= \\dfrac{\\cos^2\\alpha - \\sin^2\\alpha}{\\sin\\alpha\\cos\\alpha}\\]\nKyun: \\(\\cot\\alpha = \\frac{\\cos\\alpha}{\\sin\\alpha}\\), \\(\\tan\\alpha = \\frac{\\sin\\alpha}{\\cos\\alpha}\\). Dono fractions ka common denominator \\(\\sin\\alpha\\cos\\alpha\\) hai; cross multiply se upar \\(\\cos^2\\alpha - \\sin^2\\alpha\\).",
+              "Double angle formulas lagayein\n\\[= \\dfrac{\\cos 2\\alpha}{\\tfrac{1}{2}\\sin 2\\alpha}\\]\n\\[= \\dfrac{2\\cos 2\\alpha}{\\sin 2\\alpha} = 2\\cot 2\\alpha\\]\nKyun: Upar \\(\\cos^2\\alpha - \\sin^2\\alpha\\) bilkul \\(\\cos 2\\alpha\\) hai. Neeche \\(\\sin 2\\alpha = 2\\sin\\alpha\\cos\\alpha\\) hai, is liye \\(\\sin\\alpha\\cos\\alpha\\) us ka aadha. Aadhe se divide karna 2 se multiply karna hai. \\(\\frac{\\cos 2\\alpha}{\\sin 2\\alpha} = \\cot 2\\alpha\\).\nDhyan dein: 2 ka factor kahan se aaya, yeh exam mein zaroor likhein."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\cot\\alpha - \\tan\\alpha = 2\\cot 2\\alpha\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Prove the following identity: \\(\\frac{\\sin 2\\alpha}{1 + \\cos 2\\alpha} = \\tan\\alpha\\)",
+            "explanation": "Left side par double angles hain, right side par single angle. Is liye double angles ko kholna hai.\nPlan: \\(\\sin 2\\alpha\\) ko kholna aur \\(1 + \\cos 2\\alpha\\) ko \\(2\\cos^2\\alpha\\) likhna; phir cancel.",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\frac{\\sin 2\\alpha}{1 + \\cos 2\\alpha}\\).\nHumein prove karna hai: L.H.S. \\(= \\tan\\alpha\\).\nTareeqa: \\(\\sin 2\\alpha = 2\\sin\\alpha\\cos\\alpha\\) aur \\(1 + \\cos 2\\alpha = 2\\cos^2\\alpha\\), jo \\(\\cos 2\\alpha = 2\\cos^2\\alpha - 1\\) se aata hai.",
+              "Dono double angles kholein\n\\[\\text{L.H.S.} = \\dfrac{2\\sin\\alpha\\cos\\alpha}{2\\cos^2\\alpha}\\]\nKyun: \\(\\cos 2\\alpha\\) ki teen shakalon mein se \\(2\\cos^2\\alpha - 1\\) chuni, kyunke denominator mein pehle se \\(+1\\) hai; dono 1 cancel ho jate hain aur sirf \\(2\\cos^2\\alpha\\) bachta hai. Sahi shakal chunna hi aadha kaam hai.",
+              "Cancel karein\n\\[= \\dfrac{\\sin\\alpha}{\\cos\\alpha} = \\tan\\alpha\\]\nKyun: Upar neeche 2 aur ek \\(\\cos\\alpha\\) common hai; cancel karne se \\(\\frac{\\sin\\alpha}{\\cos\\alpha}\\) bacha, jo \\(\\tan\\alpha\\) hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\frac{\\sin 2\\alpha}{1 + \\cos 2\\alpha} = \\tan\\alpha\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) Prove the following identity: \\(\\frac{1 - \\cos\\alpha}{\\sin\\alpha} = \\tan\\frac{\\alpha}{2}\\)",
+            "explanation": "Right side par aadha angle \\(\\frac{\\alpha}{2}\\) hai. Is ka ishara yeh hai ke \\(\\alpha\\) ko \\(\\frac{\\alpha}{2}\\) ka double samjhein.\nPlan: \\(1 - \\cos\\alpha\\) aur \\(\\sin\\alpha\\) dono ko \\(\\frac{\\alpha}{2}\\) mein likhna, phir cancel.",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\frac{1 - \\cos\\alpha}{\\sin\\alpha}\\).\nHumein prove karna hai: L.H.S. \\(= \\tan\\frac{\\alpha}{2}\\).\nTareeqa: Double angle formulas, angle \\(\\frac{\\alpha}{2}\\) ke saath: \\(\\cos\\alpha = 1 - 2\\sin^2\\frac{\\alpha}{2}\\) aur \\(\\sin\\alpha = 2\\sin\\frac{\\alpha}{2}\\cos\\frac{\\alpha}{2}\\). Jo formula \\(2\\theta\\) aur \\(\\theta\\) ke liye hai, wohi \\(\\alpha\\) aur \\(\\frac{\\alpha}{2}\\) ke liye bhi hai.",
+              "Sab kuch \\(\\frac{\\alpha}{2}\\) mein likhein\n\\[\\text{L.H.S.} = \\dfrac{2\\sin^2\\frac{\\alpha}{2}}{2\\sin\\frac{\\alpha}{2}\\cos\\frac{\\alpha}{2}}\\]\nKyun: \\(\\cos\\alpha = 1 - 2\\sin^2\\frac{\\alpha}{2}\\) se \\(1 - \\cos\\alpha = 2\\sin^2\\frac{\\alpha}{2}\\); is shakal mein 1 cancel ho jata hai, isi liye yeh chuni. Neeche \\(\\sin\\alpha\\) ka double angle formula.",
+              "Cancel karein\n\\[= \\dfrac{\\sin\\frac{\\alpha}{2}}{\\cos\\frac{\\alpha}{2}} = \\tan\\dfrac{\\alpha}{2}\\]\nKyun: Upar neeche \\(2\\sin\\frac{\\alpha}{2}\\) common tha. Bacha hua sin bata cos, yani tan."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\frac{1 - \\cos\\alpha}{\\sin\\alpha} = \\tan\\frac{\\alpha}{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iv)",
+            "prompt": "2 (iv) Prove the following identity: \\(\\frac{\\cos\\alpha - \\sin\\alpha}{\\cos\\alpha + \\sin\\alpha} = \\sec 2\\alpha - \\tan 2\\alpha\\)",
+            "explanation": "Right side par double angles (\\(2\\alpha\\)) hain aur left side par single. Hamein left side mein \\(\\cos 2\\alpha\\) paida karna hai.\nPlan: left side ko upar neeche \\(\\cos\\alpha - \\sin\\alpha\\) se multiply karna, taake neeche difference of squares ban kar \\(\\cos 2\\alpha\\) aa jaye.",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\frac{\\cos\\alpha - \\sin\\alpha}{\\cos\\alpha + \\sin\\alpha}\\).\nHumein prove karna hai: L.H.S. \\(= \\sec 2\\alpha - \\tan 2\\alpha\\).\nTareeqa: \\((\\cos\\alpha - \\sin\\alpha)^2 = 1 - \\sin 2\\alpha\\) aur \\((\\cos\\alpha - \\sin\\alpha)(\\cos\\alpha + \\sin\\alpha) = \\cos 2\\alpha\\). Yeh wohi chaal hai jo surds ko rationalise karte waqt lagate hain.",
+              "Upar neeche \\(\\cos\\alpha - \\sin\\alpha\\) se multiply karein\n\\[\\text{L.H.S.} = \\dfrac{(\\cos\\alpha - \\sin\\alpha)^2}{\\cos^2\\alpha - \\sin^2\\alpha}\\]\nKyun: Upar neeche ek hi cheez se multiply karne se value nahi badalti. Neeche \\((a - b)(a + b) = a^2 - b^2\\) ban gaya.",
+              "Upar aur neeche simplify karein\n\\[(\\cos\\alpha - \\sin\\alpha)^2 = 1 - 2\\sin\\alpha\\cos\\alpha\\]\n\\[= 1 - \\sin 2\\alpha\\]\n\\[\\text{L.H.S.} = \\dfrac{1 - \\sin 2\\alpha}{\\cos 2\\alpha}\\]\nKyun: Square kholne se \\(\\cos^2\\alpha + \\sin^2\\alpha - 2\\sin\\alpha\\cos\\alpha\\) aaya; pehle do milkar 1, aur \\(2\\sin\\alpha\\cos\\alpha = \\sin 2\\alpha\\). Neeche \\(\\cos^2\\alpha - \\sin^2\\alpha = \\cos 2\\alpha\\).",
+              "Fraction ko do hisson mein torein\n\\[= \\dfrac{1}{\\cos 2\\alpha} - \\dfrac{\\sin 2\\alpha}{\\cos 2\\alpha}\\]\n\\[= \\sec 2\\alpha - \\tan 2\\alpha\\]\nKyun: Ek denominator wale fraction ko har term par alag divide kar sakte hain. \\(\\frac{1}{\\cos} = \\sec\\) aur \\(\\frac{\\sin}{\\cos} = \\tan\\). Right side mil gaya.\nDhyan dein: ulta raasta (right side se shuru kar ke left tak) bhi bilkul sahi proof hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\frac{\\cos\\alpha - \\sin\\alpha}{\\cos\\alpha + \\sin\\alpha} = \\sec 2\\alpha - \\tan 2\\alpha\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(v)",
+            "prompt": "2 (v) Prove the following identity: \\(\\sqrt{\\frac{1 + \\sin\\alpha}{1 - \\sin\\alpha}} = \\frac{\\sin\\frac{\\alpha}{2} + \\cos\\frac{\\alpha}{2}}{\\sin\\frac{\\alpha}{2} - \\cos\\frac{\\alpha}{2}}\\)",
+            "explanation": "Right side par \\(\\frac{\\alpha}{2}\\) hai, is liye \\(1 + \\sin\\alpha\\) aur \\(1 - \\sin\\alpha\\) ko \\(\\frac{\\alpha}{2}\\) ke poore squares (perfect squares) mein likhna hai.\nPlan: 1 ko \\(\\sin^2\\frac{\\alpha}{2} + \\cos^2\\frac{\\alpha}{2}\\) likhna aur \\(\\sin\\alpha = 2\\sin\\frac{\\alpha}{2}\\cos\\frac{\\alpha}{2}\\); phir square root.",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\sqrt{\\frac{1 + \\sin\\alpha}{1 - \\sin\\alpha}}\\).\nHumein prove karna hai: L.H.S. \\(= \\frac{\\sin\\frac{\\alpha}{2} + \\cos\\frac{\\alpha}{2}}{\\sin\\frac{\\alpha}{2} - \\cos\\frac{\\alpha}{2}}\\).\nTareeqa: Chhoti likhai ke liye \\(s = \\sin\\frac{\\alpha}{2}\\), \\(c = \\cos\\frac{\\alpha}{2}\\). Phir \\(1 + \\sin\\alpha = (s + c)^2\\) aur \\(1 - \\sin\\alpha = (s - c)^2\\). Square root ke andar squares hon to root aasani se khulta hai.",
+              "\\(1 + \\sin\\alpha\\) ko poora square banayein\n\\[1 + \\sin\\alpha = s^2 + c^2 + 2sc\\]\n\\[= (s + c)^2\\]\nKyun: \\(\\sin^2 + \\cos^2 = 1\\) kisi bhi angle ke liye, \\(\\frac{\\alpha}{2}\\) ke liye bhi. Aur \\(2sc = 2\\sin\\frac{\\alpha}{2}\\cos\\frac{\\alpha}{2} = \\sin\\alpha\\). Teeno terms milkar \\((s + c)^2\\) ka pattern \\(a^2 + b^2 + 2ab\\) banate hain.",
+              "\\(1 - \\sin\\alpha\\) ko poora square banayein\n\\[1 - \\sin\\alpha = s^2 + c^2 - 2sc\\]\n\\[= (s - c)^2\\]\nKyun: Wohi tareeqa, bas beech mein minus: \\(a^2 + b^2 - 2ab = (a - b)^2\\).",
+              "Square root lein\n\\[\\text{L.H.S.} = \\sqrt{\\dfrac{(s + c)^2}{(s - c)^2}}\\]\n\\[= \\dfrac{s + c}{s - c}\\]\nKyun: Square ka square root wohi quantity wapas deta hai, bashart-e-ke woh positive ho. Yahi kitab ka right side hai.\nDhyan dein: square root kabhi negative nahi hota. Agar \\(\\frac{s + c}{s - c}\\) negative ho (jaise \\(\\alpha = 0\\) par) to barabari toot jati hai; neeche wala box dekhein."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\sqrt{\\frac{1 + \\sin\\alpha}{1 - \\sin\\alpha}} = \\frac{\\sin\\frac{\\alpha}{2} + \\cos\\frac{\\alpha}{2}}{\\sin\\frac{\\alpha}{2} - \\cos\\frac{\\alpha}{2}}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ki shakal mein yeh identity sirf tab sahi hai jab right side positive ho, maslan \\(\\frac{\\pi}{2} < \\alpha < \\frac{3\\pi}{2}\\). Acute \\(\\alpha\\) ke liye yeh ghalat hai: \\(\\alpha = 0\\) par left side 1 hai magar right side \\(\\frac{0 + 1}{0 - 1} = -1\\). Asal mein left side \\(\\left|\\frac{\\sin\\frac{\\alpha}{2} + \\cos\\frac{\\alpha}{2}}{\\sin\\frac{\\alpha}{2} - \\cos\\frac{\\alpha}{2}}\\right|\\) ke barabar hai; \\(-\\frac{\\pi}{2} < \\alpha < \\frac{\\pi}{2}\\) ke liye sahi right side \\(\\frac{\\cos\\frac{\\alpha}{2} + \\sin\\frac{\\alpha}{2}}{\\cos\\frac{\\alpha}{2} - \\sin\\frac{\\alpha}{2}}\\) hai. Exam mein upar wala proof likhein aur yeh shart ek line mein bata dein."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(vi)",
+            "prompt": "2 (vi) Prove the following identity: \\(\\frac{\\operatorname{cosec}\\theta + 2\\operatorname{cosec} 2\\theta}{\\sec\\theta} = \\cot\\frac{\\theta}{2}\\)",
+            "explanation": "Left side par reciprocal ratios hain (\\(\\operatorname{cosec}\\), \\(\\sec\\)) aur angles \\(\\theta\\), \\(2\\theta\\); right side par aadha angle.\nPlan: pehle sab sin/cos mein, phir \\(\\frac{1 + \\cos\\theta}{\\sin\\theta}\\) tak simplify, aur aakhir mein \\(\\frac{\\theta}{2}\\) wale formulas.",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\frac{\\operatorname{cosec}\\theta + 2\\operatorname{cosec} 2\\theta}{\\sec\\theta}\\).\nHumein prove karna hai: L.H.S. \\(= \\cot\\frac{\\theta}{2}\\).\nTareeqa: \\(\\operatorname{cosec} 2\\theta = \\frac{1}{\\sin 2\\theta} = \\frac{1}{2\\sin\\theta\\cos\\theta}\\). Phir \\(1 + \\cos\\theta = 2\\cos^2\\frac{\\theta}{2}\\) aur \\(\\sin\\theta = 2\\sin\\frac{\\theta}{2}\\cos\\frac{\\theta}{2}\\).",
+              "Sin aur cos mein badlein\n\\[\\text{L.H.S.} = \\cos\\theta\\left[\\dfrac{1}{\\sin\\theta} + \\dfrac{2}{2\\sin\\theta\\cos\\theta}\\right]\\]\nKyun: \\(\\sec\\theta\\) se divide karna \\(\\cos\\theta\\) se multiply karne ke barabar hai, kyunke \\(\\sec\\theta = \\frac{1}{\\cos\\theta}\\). \\(\\operatorname{cosec}\\theta = \\frac{1}{\\sin\\theta}\\) aur \\(\\operatorname{cosec} 2\\theta = \\frac{1}{2\\sin\\theta\\cos\\theta}\\).",
+              "Multiply karein\n\\[= \\dfrac{\\cos\\theta}{\\sin\\theta} + \\dfrac{1}{\\sin\\theta}\\]\n\\[= \\dfrac{1 + \\cos\\theta}{\\sin\\theta}\\]\nKyun: Pehli term mein seedha \\(\\frac{\\cos\\theta}{\\sin\\theta}\\). Doosri mein \\(\\cos\\theta \\times \\frac{2}{2\\sin\\theta\\cos\\theta}\\): 2 aur \\(\\cos\\theta\\) cancel, bacha \\(\\frac{1}{\\sin\\theta}\\). Dono ka denominator ek, to jama.",
+              "Aadhe angle ke formulas lagayein\n\\[= \\dfrac{2\\cos^2\\frac{\\theta}{2}}{2\\sin\\frac{\\theta}{2}\\cos\\frac{\\theta}{2}}\\]\n\\[= \\dfrac{\\cos\\frac{\\theta}{2}}{\\sin\\frac{\\theta}{2}} = \\cot\\dfrac{\\theta}{2}\\]\nKyun: \\(\\cos\\theta = 2\\cos^2\\frac{\\theta}{2} - 1\\) se \\(1 + \\cos\\theta = 2\\cos^2\\frac{\\theta}{2}\\). Neeche \\(\\sin\\theta\\) ka double angle formula. \\(2\\cos\\frac{\\theta}{2}\\) cancel ho gaya aur cos bata sin, yani cot bacha.\nDhyan dein: part (iii) mein \\(1 - \\cos\\) tha jo \\(2\\sin^2\\) banta hai; yahan \\(1 + \\cos\\) hai jo \\(2\\cos^2\\) banta hai. Yeh jora yaad rakhein."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\frac{\\operatorname{cosec}\\theta + 2\\operatorname{cosec} 2\\theta}{\\sec\\theta} = \\cot\\frac{\\theta}{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(vii)",
+            "prompt": "2 (vii) Prove the following identity: \\(1 + \\tan\\alpha\\tan 2\\alpha = \\sec 2\\alpha\\)",
+            "explanation": "Yahan ek khoobsurat chaal hai: sin/cos mein likhne ke baad upar \\(\\cos(2\\alpha - \\alpha)\\) ka formula ban jata hai.\nPlan: common denominator, phir fundamental law \\(\\cos(a - b) = \\cos a\\cos b + \\sin a\\sin b\\) ulta lagana.",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= 1 + \\tan\\alpha\\tan 2\\alpha\\).\nHumein prove karna hai: L.H.S. \\(= \\sec 2\\alpha\\).\nTareeqa: Sin aur cos mein likh kar \\(\\cos 2\\alpha\\cos\\alpha + \\sin 2\\alpha\\sin\\alpha = \\cos(2\\alpha - \\alpha)\\) pehchanna. Double angle kholne ki zaroorat hi nahi padegi.",
+              "Common denominator banayein\n\\[\\text{L.H.S.} = 1 + \\dfrac{\\sin\\alpha\\sin 2\\alpha}{\\cos\\alpha\\cos 2\\alpha}\\]\n\\[= \\dfrac{\\cos\\alpha\\cos 2\\alpha + \\sin\\alpha\\sin 2\\alpha}{\\cos\\alpha\\cos 2\\alpha}\\]\nKyun: \\(\\tan = \\frac{\\sin}{\\cos}\\) dono angles ke liye. 1 ko \\(\\frac{\\cos\\alpha\\cos 2\\alpha}{\\cos\\alpha\\cos 2\\alpha}\\) likh kar jama kiya.",
+              "Fundamental law pehchanein\n\\[= \\dfrac{\\cos(2\\alpha - \\alpha)}{\\cos\\alpha\\cos 2\\alpha}\\]\n\\[= \\dfrac{\\cos\\alpha}{\\cos\\alpha\\cos 2\\alpha}\\]\nKyun: Upar \\(\\cos a\\cos b + \\sin a\\sin b\\) ka pattern hai, jo \\(\\cos(a - b)\\) hai (Section 10.1.1 ka fundamental law), \\(a = 2\\alpha\\), \\(b = \\alpha\\) ke saath. \\(2\\alpha - \\alpha = \\alpha\\).\nDhyan dein: plus sign wale pattern ka matlab minus angle hai: \\(\\cos\\cos + \\sin\\sin = \\cos(a - b)\\).",
+              "Cancel karein\n\\[= \\dfrac{1}{\\cos 2\\alpha} = \\sec 2\\alpha\\]\nKyun: \\(\\cos\\alpha\\) upar neeche cancel. \\(\\frac{1}{\\cos 2\\alpha}\\) ko sec kehte hain."
+            ],
+            "final_answer": "Saabit ho gaya: \\(1 + \\tan\\alpha\\tan 2\\alpha = \\sec 2\\alpha\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(viii)",
+            "prompt": "2 (viii) Prove the following identity: \\(\\frac{2\\sin\\theta\\sin 2\\theta}{\\cos\\theta + \\cos 3\\theta} = \\tan 2\\theta\\tan\\theta\\)",
+            "explanation": "Neeche \\(\\cos 3\\theta\\) hai. Triple angle formula usay \\(\\cos\\theta\\) ki powers mein badal deta hai, aur phir \\(\\cos 2\\theta\\) nikal aata hai.\nPlan: dikhana ke \\(\\cos\\theta + \\cos 3\\theta = 2\\cos\\theta\\cos 2\\theta\\), phir divide.",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\frac{2\\sin\\theta\\sin 2\\theta}{\\cos\\theta + \\cos 3\\theta}\\).\nHumein prove karna hai: L.H.S. \\(= \\tan 2\\theta\\tan\\theta\\).\nTareeqa: \\(\\cos 3\\theta = 4\\cos^3\\theta - 3\\cos\\theta\\) (Section 10.6) aur \\(2\\cos^2\\theta - 1 = \\cos 2\\theta\\). (Exercise 10.4 mein sum-to-product formula se bhi yahi milta hai.)",
+              "Denominator simplify karein\n\\[\\cos\\theta + \\cos 3\\theta = \\cos\\theta + 4\\cos^3\\theta - 3\\cos\\theta\\]\n\\[= 4\\cos^3\\theta - 2\\cos\\theta\\]\n\\[= 2\\cos\\theta(2\\cos^2\\theta - 1)\\]\n\\[= 2\\cos\\theta\\cos 2\\theta\\]\nKyun: \\(\\cos 3\\theta\\) ki jagah triple angle formula rakha. \\(\\cos\\theta - 3\\cos\\theta = -2\\cos\\theta\\). Phir \\(2\\cos\\theta\\) common nikala, aur bracket \\(2\\cos^2\\theta - 1\\) bilkul \\(\\cos 2\\theta\\) hai.",
+              "Divide karein\n\\[\\text{L.H.S.} = \\dfrac{2\\sin\\theta\\sin 2\\theta}{2\\cos\\theta\\cos 2\\theta}\\]\n\\[= \\dfrac{\\sin\\theta}{\\cos\\theta} \\cdot \\dfrac{\\sin 2\\theta}{\\cos 2\\theta}\\]\n\\[= \\tan\\theta\\tan 2\\theta\\]\nKyun: 2 cancel. Phir har angle ka sin usi angle ke cos ke saath jor diya: \\(\\frac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta\\) aur \\(\\frac{\\sin 2\\theta}{\\cos 2\\theta} = \\tan 2\\theta\\). Multiplication mein tarteeb se farq nahi parta, is liye yeh \\(\\tan 2\\theta\\tan\\theta\\) hi hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\frac{2\\sin\\theta\\sin 2\\theta}{\\cos\\theta + \\cos 3\\theta} = \\tan 2\\theta\\tan\\theta\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ix)",
+            "prompt": "2 (ix) Prove the following identity: \\(\\frac{\\sin 3\\theta}{\\sin\\theta} - \\frac{\\cos 3\\theta}{\\cos\\theta} = 2\\)",
+            "explanation": "Har fraction triple angle formula se bohat saaf ho jata hai, kyunke \\(\\sin 3\\theta\\) ki har term mein \\(\\sin\\theta\\) aur \\(\\cos 3\\theta\\) ki har term mein \\(\\cos\\theta\\) hai.\nPlan: dono fractions alag simplify karna, phir minus.",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\frac{\\sin 3\\theta}{\\sin\\theta} - \\frac{\\cos 3\\theta}{\\cos\\theta}\\).\nHumein prove karna hai: L.H.S. \\(= 2\\).\nTareeqa: \\(\\sin 3\\theta = 3\\sin\\theta - 4\\sin^3\\theta\\) aur \\(\\cos 3\\theta = 4\\cos^3\\theta - 3\\cos\\theta\\).",
+              "Har fraction simplify karein\n\\[\\dfrac{\\sin 3\\theta}{\\sin\\theta} = 3 - 4\\sin^2\\theta\\]\n\\[\\dfrac{\\cos 3\\theta}{\\cos\\theta} = 4\\cos^2\\theta - 3\\]\nKyun: \\(\\frac{3\\sin\\theta - 4\\sin^3\\theta}{\\sin\\theta}\\) mein har term ko \\(\\sin\\theta\\) se divide kiya; isi tarah cos wale ko \\(\\cos\\theta\\) se.",
+              "Minus karein\n\\[\\text{L.H.S.} = 3 - 4\\sin^2\\theta - 4\\cos^2\\theta + 3\\]\n\\[= 6 - 4(\\sin^2\\theta + \\cos^2\\theta)\\]\n\\[= 6 - 4 = 2\\]\nKyun: Doosre fraction ko minus karte waqt us ki dono terms ka sign badla: \\(-(4\\cos^2\\theta - 3) = -4\\cos^2\\theta + 3\\). Phir \\(-4\\) common nikala aur \\(\\sin^2 + \\cos^2 = 1\\).\nDhyan dein: bracket ke aage minus ho to andar ki har term ka sign badalta hai; \\(+3\\) ko \\(-3\\) likhna aam ghalti hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\frac{\\sin 3\\theta}{\\sin\\theta} - \\frac{\\cos 3\\theta}{\\cos\\theta} = 2\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(x)",
+            "prompt": "2 (x) Prove the following identity: \\(\\frac{\\cos 3\\theta}{\\cos\\theta} + \\frac{\\sin 3\\theta}{\\sin\\theta} = 4\\cos 2\\theta\\)",
+            "explanation": "Yeh part (ix) wale hi do fractions hain, lekin is dafa jama.\nPlan: dono ko triple angle formulas se simplify karna, jama karna, phir \\(\\cos^2\\theta - \\sin^2\\theta = \\cos 2\\theta\\).",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\frac{\\cos 3\\theta}{\\cos\\theta} + \\frac{\\sin 3\\theta}{\\sin\\theta}\\).\nHumein prove karna hai: L.H.S. \\(= 4\\cos 2\\theta\\).\nTareeqa: \\(\\sin 3\\theta\\) aur \\(\\cos 3\\theta\\) ke triple angle formulas. Part (ix) se tulna karein: wahan minus tha to \\(\\sin^2 + \\cos^2\\) bana, yahan plus hai to \\(\\cos^2 - \\sin^2\\) banega.",
+              "Har fraction simplify karein\n\\[\\dfrac{\\cos 3\\theta}{\\cos\\theta} = 4\\cos^2\\theta - 3\\]\n\\[\\dfrac{\\sin 3\\theta}{\\sin\\theta} = 3 - 4\\sin^2\\theta\\]\nKyun: Har term ko \\(\\cos\\theta\\) ya \\(\\sin\\theta\\) se divide kiya, bilkul part (ix) ki tarah.",
+              "Jama karein\n\\[\\text{L.H.S.} = 4\\cos^2\\theta - 3 + 3 - 4\\sin^2\\theta\\]\n\\[= 4(\\cos^2\\theta - \\sin^2\\theta)\\]\n\\[= 4\\cos 2\\theta\\]\nKyun: \\(-3\\) aur \\(+3\\) cancel. 4 common nikala, aur \\(\\cos^2\\theta - \\sin^2\\theta\\) \\(\\cos 2\\theta\\) ki pehli shakal hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\frac{\\cos 3\\theta}{\\cos\\theta} + \\frac{\\sin 3\\theta}{\\sin\\theta} = 4\\cos 2\\theta\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(xi)",
+            "prompt": "2 (xi) Prove the following identity: \\(\\frac{\\tan\\frac{\\theta}{2} + \\cot\\frac{\\theta}{2}}{\\cot\\frac{\\theta}{2} - \\tan\\frac{\\theta}{2}} = \\sec\\theta\\)",
+            "explanation": "Left side par aadhe angles (\\(\\frac{\\theta}{2}\\)) aur right side par poora angle \\(\\theta\\).\nPlan: chhoti likhai ke liye \\(s = \\sin\\frac{\\theta}{2}\\), \\(c = \\cos\\frac{\\theta}{2}\\); upar aur neeche alag alag simplify karna.",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\frac{\\tan\\frac{\\theta}{2} + \\cot\\frac{\\theta}{2}}{\\cot\\frac{\\theta}{2} - \\tan\\frac{\\theta}{2}}\\).\nHumein prove karna hai: L.H.S. \\(= \\sec\\theta\\).\nTareeqa: \\(s, c\\) mein: \\(\\tan\\frac{\\theta}{2} = \\frac{s}{c}\\), \\(\\cot\\frac{\\theta}{2} = \\frac{c}{s}\\). Phir \\(s^2 + c^2 = 1\\) aur \\(c^2 - s^2 = \\cos\\theta\\) (double angle, angle \\(\\frac{\\theta}{2}\\)). Lambi expressions mein letters rakhne se ghaltiyan kam hoti hain.",
+              "Numerator simplify karein\n\\[\\dfrac{s}{c} + \\dfrac{c}{s} = \\dfrac{s^2 + c^2}{sc} = \\dfrac{1}{sc}\\]\nKyun: Common denominator \\(sc\\). Upar \\(\\sin^2 + \\cos^2\\) ek hi angle ka hai, is liye 1.",
+              "Denominator simplify karein\n\\[\\dfrac{c}{s} - \\dfrac{s}{c} = \\dfrac{c^2 - s^2}{sc} = \\dfrac{\\cos\\theta}{sc}\\]\nKyun: Wohi common denominator. Upar \\(\\cos^2\\frac{\\theta}{2} - \\sin^2\\frac{\\theta}{2}\\) hai, jo double angle formula se \\(\\cos\\theta\\) hai (kyunke \\(2 \\times \\frac{\\theta}{2} = \\theta\\)).",
+              "Divide karein\n\\[\\text{L.H.S.} = \\dfrac{1/(sc)}{\\cos\\theta/(sc)}\\]\n\\[= \\dfrac{1}{\\cos\\theta} = \\sec\\theta\\]\nKyun: Upar neeche dono ka denominator \\(sc\\) hai; fraction ko fraction se divide karte waqt yeh cancel ho jata hai. \\(\\frac{1}{\\cos\\theta} = \\sec\\theta\\).\nDhyan dein: tan aur cot ka jama \\(\\frac{1}{sc}\\) hota hai, yeh chhota sa nateeja bohat se sawalon mein kaam aata hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\frac{\\tan\\frac{\\theta}{2} + \\cot\\frac{\\theta}{2}}{\\cot\\frac{\\theta}{2} - \\tan\\frac{\\theta}{2}} = \\sec\\theta\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(xii)",
+            "prompt": "2 (xii) Prove the following identity: \\(\\frac{\\sin 3\\theta}{\\cos\\theta} + \\frac{\\cos 3\\theta}{\\sin\\theta} = 2\\cot 2\\theta\\)",
+            "explanation": "Yahan parts (ix)-(x) ki tarah \\(\\sin 3\\theta\\) ke neeche \\(\\sin\\theta\\) nahi, balke \\(\\cos\\theta\\) hai; denominators ulte hain. Is liye triple angle formula ki jagah common denominator behtar hai.\nPlan: common denominator; upar \\(\\cos(3\\theta - \\theta)\\) aur neeche \\(\\frac{1}{2}\\sin 2\\theta\\) pehchanna.",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\frac{\\sin 3\\theta}{\\cos\\theta} + \\frac{\\cos 3\\theta}{\\sin\\theta}\\).\nHumein prove karna hai: L.H.S. \\(= 2\\cot 2\\theta\\).\nTareeqa: \\(\\cos 3\\theta\\cos\\theta + \\sin 3\\theta\\sin\\theta = \\cos(3\\theta - \\theta)\\) (fundamental law) aur \\(\\sin\\theta\\cos\\theta = \\frac{1}{2}\\sin 2\\theta\\).",
+              "Common denominator banayein\n\\[\\text{L.H.S.} = \\dfrac{\\sin 3\\theta\\sin\\theta + \\cos 3\\theta\\cos\\theta}{\\sin\\theta\\cos\\theta}\\]\nKyun: Pehle fraction ko upar neeche \\(\\sin\\theta\\) se aur doosre ko \\(\\cos\\theta\\) se multiply kiya taake denominator \\(\\sin\\theta\\cos\\theta\\) ho jaye.",
+              "Fundamental law aur double angle lagayein\n\\[= \\dfrac{\\cos(3\\theta - \\theta)}{\\tfrac{1}{2}\\sin 2\\theta}\\]\n\\[= \\dfrac{2\\cos 2\\theta}{\\sin 2\\theta} = 2\\cot 2\\theta\\]\nKyun: Upar \\(\\cos a\\cos b + \\sin a\\sin b\\) ka pattern hai, \\(a = 3\\theta\\), \\(b = \\theta\\), jo \\(\\cos 2\\theta\\) deta hai. Neeche \\(\\sin\\theta\\cos\\theta\\) \\(\\sin 2\\theta\\) ka aadha hai; aadhe se divide yani 2 se multiply.\nDhyan dein: pehle triple angle formula lagane ki koshish karte to kaafi lamba hisaab banta; sahi raasta pehchanna waqt bachata hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\frac{\\sin 3\\theta}{\\cos\\theta} + \\frac{\\cos 3\\theta}{\\sin\\theta} = 2\\cot 2\\theta\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(xiii)",
+            "prompt": "2 (xiii) Prove the following identity: \\(\\frac{3 + \\cos 4\\theta}{1 - \\cos 4\\theta} = \\frac{1}{2}\\left(\\tan^{2}\\theta + \\cot^{2}\\theta\\right)\\)",
+            "explanation": "Is part mein dono sides ko ek hi cheez \\(\\sin^2 2\\theta\\) mein likh sakte hain. Jab ek side se doosri tak seedha raasta na dikhe to dono ko ek teesri shakal tak le jana bhi poora proof hai.\nPlan: left side mein \\(\\cos 4\\theta = 1 - 2\\sin^2 2\\theta\\); right side mein \\(\\sin^4\\theta + \\cos^4\\theta = 1 - \\frac{1}{2}\\sin^2 2\\theta\\).",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\frac{3 + \\cos 4\\theta}{1 - \\cos 4\\theta}\\).\nHumein prove karna hai: L.H.S. \\(= \\frac{1}{2}\\left(\\tan^{2}\\theta + \\cot^{2}\\theta\\right)\\).\nTareeqa: \\(u = \\sin^2 2\\theta\\) maan lein. Dikhana hai ke dono sides \\(\\frac{2 - u}{u}\\) ke barabar hain. Letter \\(u\\) rakhne se lambi likhai bach jati hai.",
+              "Left side\n\\[\\cos 4\\theta = 1 - 2\\sin^2 2\\theta = 1 - 2u\\]\n\\[\\text{L.H.S.} = \\dfrac{3 + 1 - 2u}{1 - 1 + 2u}\\]\n\\[= \\dfrac{4 - 2u}{2u} = \\dfrac{2 - u}{u}\\]\nKyun: \\(\\cos 2x = 1 - 2\\sin^2 x\\) mein \\(x = 2\\theta\\) rakha, kyunke \\(4\\theta = 2(2\\theta)\\). Neeche \\(1 - (1 - 2u) = 2u\\). Phir upar neeche 2 cancel.",
+              "Right side: common denominator\n\\[\\tan^2\\theta + \\cot^2\\theta = \\dfrac{\\sin^4\\theta + \\cos^4\\theta}{\\sin^2\\theta\\cos^2\\theta}\\]\nKyun: \\(\\frac{\\sin^2\\theta}{\\cos^2\\theta} + \\frac{\\cos^2\\theta}{\\sin^2\\theta}\\) ka common denominator \\(\\sin^2\\theta\\cos^2\\theta\\); upar \\(\\sin^4 + \\cos^4\\).",
+              "Right side ko \\(u\\) mein likhein\n\\[\\sin^4\\theta + \\cos^4\\theta\\]\n\\[= (\\sin^2\\theta + \\cos^2\\theta)^2\\]\n\\[\\quad - 2\\sin^2\\theta\\cos^2\\theta\\]\n\\[= 1 - \\tfrac{1}{2}u\\]\n\\[\\sin^2\\theta\\cos^2\\theta = \\tfrac{1}{4}u\\]\nKyun: \\(a^2 + b^2 = (a + b)^2 - 2ab\\), jahan \\(a = \\sin^2\\theta\\), \\(b = \\cos^2\\theta\\); \\(a + b = 1\\). Aur \\(\\sin\\theta\\cos\\theta = \\frac{1}{2}\\sin 2\\theta\\), is ka square \\(\\frac{1}{4}\\sin^2 2\\theta = \\frac{1}{4}u\\). Is liye \\(2\\sin^2\\theta\\cos^2\\theta = \\frac{1}{2}u\\).",
+              "Right side mukammal karein\n\\[\\text{R.H.S.} = \\dfrac{1}{2} \\cdot \\dfrac{1 - \\frac{1}{2}u}{\\frac{1}{4}u}\\]\n\\[= \\dfrac{2(1 - \\frac{1}{2}u)}{u} = \\dfrac{2 - u}{u}\\]\nKyun: \\(\\frac{1}{2}\\) ko \\(\\frac{1}{4}\\) se divide karna 2 deta hai. Dono sides \\(\\frac{2 - u}{u}\\) ban gayin, is liye barabar hain.\nDhyan dein: \\(\\sin^4 + \\cos^4\\) ko 1 likh dena bohat aam ghalti hai; 1 sirf \\(\\sin^2 + \\cos^2\\) hota hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\frac{3 + \\cos 4\\theta}{1 - \\cos 4\\theta} = \\frac{1}{2}\\left(\\tan^{2}\\theta + \\cot^{2}\\theta\\right)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(xiv)",
+            "prompt": "2 (xiv) Prove the following identity: \\(\\frac{1 + \\sin 2\\theta}{1 - \\sin 2\\theta} = \\tan^{2}\\left(\\frac{\\pi}{4} + \\theta\\right)\\)",
+            "explanation": "\\(1 + \\sin 2\\theta\\) aur \\(1 - \\sin 2\\theta\\) dono poore squares hain, aur \\(\\frac{1 + \\tan\\theta}{1 - \\tan\\theta}\\) asal mein \\(\\tan(\\frac{\\pi}{4} + \\theta)\\) hai.\nPlan: poore squares banana, \\(\\cos\\theta\\) se divide kar ke tan laana, phir \\(\\tan(a + b)\\) ka formula.",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\frac{1 + \\sin 2\\theta}{1 - \\sin 2\\theta}\\).\nHumein prove karna hai: L.H.S. \\(= \\tan^{2}\\left(\\frac{\\pi}{4} + \\theta\\right)\\).\nTareeqa: \\(1 \\pm \\sin 2\\theta = (\\cos\\theta \\pm \\sin\\theta)^2\\) aur \\(\\tan(a + b) = \\frac{\\tan a + \\tan b}{1 - \\tan a\\tan b}\\), jahan \\(\\tan\\frac{\\pi}{4} = 1\\). Is sawal mein teen alag ideas ek saath aate hain.",
+              "Poore squares banayein\n\\[1 + \\sin 2\\theta = (\\cos\\theta + \\sin\\theta)^2\\]\n\\[1 - \\sin 2\\theta = (\\cos\\theta - \\sin\\theta)^2\\]\nKyun: 1 ko \\(\\cos^2\\theta + \\sin^2\\theta\\) aur \\(\\sin 2\\theta\\) ko \\(2\\sin\\theta\\cos\\theta\\) likha; \\(a^2 + b^2 \\pm 2ab = (a \\pm b)^2\\). Yeh wohi chaal hai jo part (v) mein thi.",
+              "Upar neeche \\(\\cos\\theta\\) se divide karein\n\\[\\text{L.H.S.} = \\left(\\dfrac{\\cos\\theta + \\sin\\theta}{\\cos\\theta - \\sin\\theta}\\right)^2\\]\n\\[= \\left(\\dfrac{1 + \\tan\\theta}{1 - \\tan\\theta}\\right)^2\\]\nKyun: Squares ka fraction, fraction ka square hai. Bracket ke andar har term ko \\(\\cos\\theta\\) se divide kiya: \\(\\frac{\\cos\\theta}{\\cos\\theta} = 1\\), \\(\\frac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta\\). Is se value nahi badli.",
+              "\\(\\tan(\\frac{\\pi}{4} + \\theta)\\) pehchanein\n\\[\\dfrac{1 + \\tan\\theta}{1 - \\tan\\theta} = \\dfrac{\\tan\\frac{\\pi}{4} + \\tan\\theta}{1 - \\tan\\frac{\\pi}{4}\\tan\\theta}\\]\n\\[= \\tan\\left(\\tfrac{\\pi}{4} + \\theta\\right)\\]\n\\[\\text{L.H.S.} = \\tan^2\\left(\\tfrac{\\pi}{4} + \\theta\\right)\\]\nKyun: 1 ko \\(\\tan\\frac{\\pi}{4}\\) likha (kyunke \\(\\tan 45^{\\circ} = 1\\)). Ab yeh bilkul \\(\\tan(a + b)\\) ka formula hai, \\(a = \\frac{\\pi}{4}\\), \\(b = \\theta\\). Square bahar tha, wohi rehta hai.\nDhyan dein: \"1 ko \\(\\tan 45^{\\circ}\\) likhna\" ek mashhoor chaal hai; jab bhi \\(\\frac{1 \\pm \\tan}{1 \\mp \\tan}\\) dikhe to yahi socha karein."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\frac{1 + \\sin 2\\theta}{1 - \\sin 2\\theta} = \\tan^{2}\\left(\\frac{\\pi}{4} + \\theta\\right)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(xv)",
+            "prompt": "2 (xv) Prove the following identity: \\(\\cos^{2}\\frac{\\pi}{8} + \\cos^{2}\\frac{3\\pi}{8} + \\cos^{2}\\frac{5\\pi}{8} + \\cos^{2}\\frac{7\\pi}{8} = 2\\)",
+            "explanation": "Chaar angles hain jo jore banate hain: \\(\\frac{7\\pi}{8} = \\pi - \\frac{\\pi}{8}\\), \\(\\frac{5\\pi}{8} = \\pi - \\frac{3\\pi}{8}\\), aur \\(\\frac{3\\pi}{8} = \\frac{\\pi}{2} - \\frac{\\pi}{8}\\). (\\(\\frac{\\pi}{8} = 22.5^{\\circ}\\).)\nPlan: sab ko \\(\\frac{\\pi}{8}\\) mein badalna, phir \\(\\sin^2 + \\cos^2 = 1\\). Kisi angle ki value nikalne ki zaroorat nahi.",
+            "steps": [
+              "Diya gaya hai: L.H.S. \\(= \\cos^{2}\\frac{\\pi}{8} + \\cos^{2}\\frac{3\\pi}{8} + \\cos^{2}\\frac{5\\pi}{8} + \\cos^{2}\\frac{7\\pi}{8}\\).\nHumein prove karna hai: L.H.S. \\(= 2\\).\nTareeqa: Allied angles: \\(\\cos(\\pi - x) = -\\cos x\\) (square se minus khatam) aur \\(\\cos(\\frac{\\pi}{2} - x) = \\sin x\\).",
+              "Aakhri do ko pehle do ke saath jorein\n\\[\\cos^2\\tfrac{7\\pi}{8} = \\cos^2\\left(\\pi - \\tfrac{\\pi}{8}\\right) = \\cos^2\\tfrac{\\pi}{8}\\]\n\\[\\cos^2\\tfrac{5\\pi}{8} = \\cos^2\\left(\\pi - \\tfrac{3\\pi}{8}\\right) = \\cos^2\\tfrac{3\\pi}{8}\\]\nKyun: \\(\\pi - x\\) quadrant II mein hai jahan cos negative hai, magar square karne se minus khatam. Is liye \\(\\cos^2(\\pi - x) = \\cos^2 x\\).",
+              "Ikattha karein\n\\[\\text{L.H.S.} = 2\\cos^2\\tfrac{\\pi}{8} + 2\\cos^2\\tfrac{3\\pi}{8}\\]\nKyun: Ab har square do dafa aa raha hai.",
+              "Co-ratio lagayein\n\\[\\cos\\tfrac{3\\pi}{8} = \\cos\\left(\\tfrac{\\pi}{2} - \\tfrac{\\pi}{8}\\right) = \\sin\\tfrac{\\pi}{8}\\]\n\\[\\text{L.H.S.} = 2\\left(\\cos^2\\tfrac{\\pi}{8} + \\sin^2\\tfrac{\\pi}{8}\\right)\\]\n\\[= 2(1) = 2\\]\nKyun: \\(\\frac{\\pi}{2}\\) odd multiple hai, is liye cos badal kar sin; \\(\\frac{3\\pi}{8}\\) quadrant I mein hai, positive. Phir 2 common nikala aur ek hi angle ka \\(\\sin^2 + \\cos^2 = 1\\).\nDhyan dein: \\(\\cos^2\\frac{\\pi}{8}\\) aur \\(\\sin^2\\frac{\\pi}{8}\\) ki alag values nikalne ki koshish na karein; pehchan lena ke yeh 1 banate hain, yahi sawal ki jaan hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\cos^{2}\\frac{\\pi}{8} + \\cos^{2}\\frac{3\\pi}{8} + \\cos^{2}\\frac{5\\pi}{8} + \\cos^{2}\\frac{7\\pi}{8} = 2\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-EXERCISE-10-2-Q13",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-exercise-10-2-q13",
+      "title": "Question 13",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 196,
+          "pdf_to": 196,
+          "note": "Exercise 10.2 Q13, book p.191 (PDF 196); proof (no key entry). Checked numerically with sympy; solution book PDF 924-925 agrees."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13",
+            "prompt": "13. If \\(\\alpha, \\beta, \\gamma\\) are the angles of a triangle \\(ABC\\), show that \\(\\cot\\dfrac{\\alpha}{2} + \\cot\\dfrac{\\beta}{2} + \\cot\\dfrac{\\gamma}{2} = \\cot\\dfrac{\\alpha}{2}\\cot\\dfrac{\\beta}{2}\\cot\\dfrac{\\gamma}{2}\\)",
+            "explanation": "The only information is that the three angles make a triangle: \\(\\alpha + \\beta + \\gamma = 180^{\\circ}\\).\nHalving gives \\(\\frac{\\alpha}{2} + \\frac{\\beta}{2} = 90^{\\circ} - \\frac{\\gamma}{2}\\).\nPlan: take cot of both sides, use the cot-sum formula (Q6(i)) and a co-ratio, then rearrange.",
+            "steps": [
+              "Given: \\(\\alpha + \\beta + \\gamma = 180^{\\circ}\\).\nTo show: \\(\\cot\\frac{\\alpha}{2} + \\cot\\frac{\\beta}{2} + \\cot\\frac{\\gamma}{2} = \\cot\\frac{\\alpha}{2}\\cot\\frac{\\beta}{2}\\cot\\frac{\\gamma}{2}\\).\nMethod:\n\\[\\cot(A + B) = \\dfrac{\\cot A\\cot B - 1}{\\cot A + \\cot B}\\]\n(Question 6(i)) and \\(\\cot(90^{\\circ} - x) = \\tan x = \\dfrac{1}{\\cot x}\\).",
+              "Halve the angle sum\n\\[\\dfrac{\\alpha}{2} + \\dfrac{\\beta}{2} = 90^{\\circ} - \\dfrac{\\gamma}{2}\\]\nWhy: Divide \\(\\alpha + \\beta + \\gamma = 180^{\\circ}\\) by 2 and move \\(\\frac{\\gamma}{2}\\) across.",
+              "Take cot of both sides\n\\[\\cot\\left(\\dfrac{\\alpha}{2} + \\dfrac{\\beta}{2}\\right) = \\cot\\left(90^{\\circ} - \\dfrac{\\gamma}{2}\\right)\\]\n\\[= \\tan\\dfrac{\\gamma}{2} = \\dfrac{1}{\\cot\\frac{\\gamma}{2}}\\]\nWhy: Equal angles have equal cotangents; \\(90^{\\circ} - x\\) changes cot into its co-ratio tan.",
+              "Expand the left side\n\\[\\dfrac{\\cot\\frac{\\alpha}{2}\\cot\\frac{\\beta}{2} - 1}{\\cot\\frac{\\alpha}{2} + \\cot\\frac{\\beta}{2}} = \\dfrac{1}{\\cot\\frac{\\gamma}{2}}\\]\nWhy: Cot-sum formula with \\(A = \\frac{\\alpha}{2}\\), \\(B = \\frac{\\beta}{2}\\).",
+              "Cross-multiply\n\\[\\cot\\tfrac{\\alpha}{2}\\cot\\tfrac{\\beta}{2}\\cot\\tfrac{\\gamma}{2} - \\cot\\tfrac{\\gamma}{2}\\]\n\\[= \\cot\\tfrac{\\alpha}{2} + \\cot\\tfrac{\\beta}{2}\\]\nWhy: Multiply both sides by \\(\\cot\\frac{\\gamma}{2}\\) and by the denominator on the left.",
+              "Rearrange\n\\[\\cot\\tfrac{\\alpha}{2} + \\cot\\tfrac{\\beta}{2} + \\cot\\tfrac{\\gamma}{2}\\]\n\\[= \\cot\\tfrac{\\alpha}{2}\\cot\\tfrac{\\beta}{2}\\cot\\tfrac{\\gamma}{2}\\]\nWhy: Add \\(\\cot\\frac{\\gamma}{2}\\) to both sides.",
+              "Check with an equilateral triangle (\\(60^{\\circ}\\) each)\n\\[3\\cot 30^{\\circ} = 3\\sqrt{3}\\]\n\\[(\\cot 30^{\\circ})^3 = (\\sqrt{3})^3 = 3\\sqrt{3} \\;\\checkmark\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\cot\\dfrac{\\alpha}{2} + \\cot\\dfrac{\\beta}{2} + \\cot\\dfrac{\\gamma}{2} = \\cot\\dfrac{\\alpha}{2}\\cot\\dfrac{\\beta}{2}\\cot\\dfrac{\\gamma}{2}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}
