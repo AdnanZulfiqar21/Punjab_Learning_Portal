@@ -55,6 +55,8 @@ class Settings(BaseSettings):
     # W09.S1.T3 (WORKLOAD-GUARD-01): each API process publishes its MCQ save health this often (seconds); 0 = off.
     health_sample_s: float = 20.0
     db_statement_timeout_ms: int = 5000
+    # READING-PLACE-CACHE-01: seconds a process keeps a topic's catalogue place and neighbours (0 = off).
+    reading_place_cache_s: float = Field(default=60.0, ge=0)
 
     # Identity (P04). Production trusts exactly one managed OIDC issuer (Cognito proposed; BLOCKERS B04).
     oidc_issuer: str | None = None
