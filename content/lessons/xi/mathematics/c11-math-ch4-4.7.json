@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.7",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 67,
+          "pdf_to": 69,
+          "note": "Book p. 62-64: leading entry, echelon form (i)-(iii), reduced echelon form, Example 8, inverse by row operations, Example 9, rank, Example 10"
+        }
+      ],
+      "title": "4.7 Echelon and Reduced Echelon Forms of Matrices",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "In any non-zero row of a matrix, the first non-zero entry is called the leading entry of that row.",
+            "bold": [
+              "leading entry"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read each row from left to right and stop at the first number that is not zero: that is the leading entry. In\n\\[\\begin{bmatrix}0 & 3 & 5 \\\\ 2 & 0 & 1 \\\\ 0 & 0 & 0\\end{bmatrix}\\]\nthe leading entry of \\(R_1\\) is 3, of \\(R_2\\) is 2, and \\(R_3\\) is a zero row, so it has no leading entry."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Echelon Form of a Matrix"
+          },
+          {
+            "type": "paragraph",
+            "text": "An \\(m \\times n\\) matrix \\(A\\) is called in echelon form if:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) The number of zeros before the leading entry is greater than the number zeros in the preceding row.",
+              "(ii) Every non-zero row in \\(A\\) precedes every zero row (if any).",
+              "(iii) The first non-zero entry (or leading entry) in each row is 1."
+            ],
+            "book_errors": [
+              "the number zeros"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \"greater than the number zeros in the preceding row\". It should read \"greater than the number of zeros in the preceding row\"."
+          },
+          {
+            "type": "paragraph",
+            "text": "The matrices\n\\[\\begin{bmatrix}0 & 1 & -2 & 4 \\\\ 0 & 0 & 1 & 2 \\\\ 0 & 0 & 0 & 0\\end{bmatrix}\\]\nand\n\\[\\begin{bmatrix}1 & 2 & -3 & 4 \\\\ 0 & 0 & 1 & 2 \\\\ 0 & 0 & 0 & 1\\end{bmatrix}\\]\nare in echelon form"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Picture a staircase: each leading 1 stands to the right of the leading 1 above it, and zero rows sit at the bottom.\nCheck the first matrix: the zeros before the leading entries are 1, 2 in \\(R_1\\), \\(R_2\\) (more zeros each row), the zero row \\(R_3\\) is last, and both leading entries are 1.\nA matrix that is not in echelon form:\n\\[\\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix}\\]\nboth rows start with no zeros, so condition (i) fails."
+          },
+          {
+            "type": "paragraph",
+            "text": "Reduced Echelon Form of a Matrix: An \\(m \\times n\\) matrix \\(A\\) is said to be in reduced (row) echelon form if the first non-zero entry (or leading entry) in \\(R_i\\) lies in \\(C_j\\), then all other entries of \\(C_j\\) are zero.",
+            "bold": [
+              "Reduced Echelon Form of a Matrix:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "The matrices\n\\[\\begin{bmatrix}0 & 1 & 0 & 4 \\\\ 0 & 0 & 1 & 2 \\\\ 0 & 0 & 0 & 0\\end{bmatrix}\\]\nand\n\\[\\begin{bmatrix}1 & 2 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & 1\\end{bmatrix}\\]\nare in (row) reduced echelon form."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In full: a matrix is in reduced echelon form when it is in echelon form and, in addition, each leading 1 is the only non-zero entry of its column (\\(C_j\\) means the \\(j\\)th column).\nIn the second matrix above, the leading 1s are in columns 1, 3 and 4, and those columns contain nothing else. Column 2 has a 2, but column 2 has no leading 1, so that is allowed.\nEchelon form is enough to find a rank; reduced echelon form lets us read off solutions of equations directly."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Reduce\n\\[\\begin{bmatrix}2 & 3 & -1 & 9 \\\\ 1 & -1 & 2 & -3 \\\\ 3 & 1 & 3 & 2\\end{bmatrix}\\]\nto (row) echelon and reduced (row) echelon form.",
+            "steps": [
+              "Given: the \\(3 \\times 4\\) matrix\n\\[\\begin{bmatrix}2 & 3 & -1 & 9 \\\\ 1 & -1 & 2 & -3 \\\\ 3 & 1 & 3 & 2\\end{bmatrix}\\]\nTo find: its (row) echelon form and its reduced (row) echelon form.\nMethod: use elementary row operations column by column: make a leading 1, then zeros below it (echelon form); then zeros above every leading 1 as well (reduced echelon form).",
+              "Step 1: Get a 1 in the top-left corner\n\\(R_1 \\leftrightarrow R_2\\)\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 2 & 3 & -1 & 9 \\\\ 3 & 1 & 3 & 2\\end{bmatrix}\\]\nWhy: the leading entry of \\(R_1\\) must be 1. \\(R_2\\) already starts with 1, so swapping is easier than dividing \\(R_1\\) by 2 (that would bring fractions). The book writes this step as \\(R_1 \\sim R_2\\); it is the interchange \\(R_1 \\leftrightarrow R_2\\).",
+              "Step 2: Make the entries below the leading 1 zero\n\\(R_2 + (-2)R_1 \\to R_2'\\)\n\\[(2,\\ 3,\\ -1,\\ 9)\\]\n\\[+(-2)(1,\\ -1,\\ 2,\\ -3)\\]\n\\[= (0,\\ 5,\\ -5,\\ 15)\\]\n\\(R_3 + (-3)R_1 \\to R_3'\\)\n\\[(3,\\ 1,\\ 3,\\ 2)\\]\n\\[+(-3)(1,\\ -1,\\ 2,\\ -3)\\]\n\\[= (0,\\ 4,\\ -3,\\ 11)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 0 & 5 & -5 & 15 \\\\ 0 & 4 & -3 & 11\\end{bmatrix}\\]\nWhy: to subtract \\(2\\) from the first entry of \\(R_2\\) we add \\((-2)R_1\\); to remove the \\(3\\) in \\(R_3\\) we add \\((-3)R_1\\). Now column 1 has its 1 on top and zeros below it.",
+              "Step 3: Make the leading entry of \\(R_2\\) equal to 1\n\\(\\frac{1}{5}R_2 \\to R_2'\\)\n\\[\\frac{1}{5}(0,\\ 5,\\ -5,\\ 15)\\]\n\\[= (0,\\ 1,\\ -1,\\ 3)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 0 & 1 & -1 & 3 \\\\ 0 & 4 & -3 & 11\\end{bmatrix}\\]\nWhy: the leading entry of \\(R_2\\) is 5; multiplying by \\(\\frac{1}{5}\\) turns it into 1. All entries of \\(R_2\\) are divisible by 5, so no fractions appear.",
+              "Step 4: Make the entry below the leading 1 of \\(R_2\\) zero\n\\(R_3 + (-4)R_2 \\to R_3'\\)\n\\[(0,\\ 4,\\ -3,\\ 11)\\]\n\\[+(-4)(0,\\ 1,\\ -1,\\ 3)\\]\n\\[= (0,\\ 0,\\ 1,\\ -1)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 0 & 1 & -1 & 3 \\\\ 0 & 0 & 1 & -1\\end{bmatrix}\\]\nWhy: \\(R_3\\) has 4 under the leading 1 of \\(R_2\\); adding \\((-4)R_2\\) removes it. The leading entry of \\(R_3\\) is now 1. This matrix satisfies conditions (i)-(iii): it is the echelon form.",
+              "Step 5: Begin the reduced form: clear column 2 above the leading 1\n\\(R_1 + 1\\cdot R_2 \\to R_1'\\)\n\\[(1,\\ -1,\\ 2,\\ -3)\\]\n\\[+(0,\\ 1,\\ -1,\\ 3)\\]\n\\[= (1,\\ 0,\\ 1,\\ 0)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & 0 & 1 & 0 \\\\ 0 & 1 & -1 & 3 \\\\ 0 & 0 & 1 & -1\\end{bmatrix}\\]\nWhy: for reduced echelon form the column of every leading 1 must have zeros elsewhere. Column 2 has \\(-1\\) in \\(R_1\\), so we add \\(1\\cdot R_2\\).",
+              "Step 6: Clear column 3 above the leading 1 of \\(R_3\\)\n\\(R_1 + (-1)R_3 \\to R_1'\\)\n\\[(1,\\ 0,\\ 1,\\ 0)\\]\n\\[+(-1)(0,\\ 0,\\ 1,\\ -1)\\]\n\\[= (1,\\ 0,\\ 0,\\ 1)\\]\n\\(R_2 + 1\\cdot R_3 \\to R_2'\\)\n\\[(0,\\ 1,\\ -1,\\ 3)\\]\n\\[+(0,\\ 0,\\ 1,\\ -1)\\]\n\\[= (0,\\ 1,\\ 0,\\ 2)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & 0 & 0 & 1 \\\\ 0 & 1 & 0 & 2 \\\\ 0 & 0 & 1 & -1\\end{bmatrix}\\]\nWhy: column 3 still has 1 in \\(R_1\\) and \\(-1\\) in \\(R_2\\). Adding \\((-1)R_3\\) to \\(R_1\\) and \\(1\\cdot R_3\\) to \\(R_2\\) makes both zero. We work upward from the last leading 1, so the zeros made earlier are not disturbed.",
+              "Check:\nRead the reduced matrix as the system \\(2x + 3y - z = 9\\), \\(x - y + 2z = -3\\), \\(3x + y + 3z = 2\\): it says \\(x = 1\\), \\(y = 2\\), \\(z = -1\\). Substitute in the original rows:\n\\[2(1) + 3(2) - (-1) = 9\\]\n\\[1 - 2 + 2(-1) = -3\\]\n\\[3(1) + 2 + 3(-1) = 2\\]\nAll three hold, so the row operations were done correctly."
+            ],
+            "answer": "Echelon form:\n\\[\\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 0 & 1 & -1 & 3 \\\\ 0 & 0 & 1 & -1\\end{bmatrix}\\]\nReduced echelon form:\n\\[\\begin{bmatrix}1 & 0 & 0 & 1 \\\\ 0 & 1 & 0 & 2 \\\\ 0 & 0 & 1 & -1\\end{bmatrix}\\]",
+            "book_errors": [
+              "\\(R_1 \\sim R_2\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the first step of the solution the book prints \\(R_1 \\sim R_2\\). The operation performed is the interchange of the first two rows, written \\(R_1 \\leftrightarrow R_2\\) in the notation of Section 4.6."
+          },
+          {
+            "type": "paragraph",
+            "text": "Inverse of a Matrix: Let \\(A\\) be a non-singular matrix. If the application of elementary row operations on \\(A \\vdots I\\) in succession reduces \\(A\\) to \\(I\\), then the resulting matrix is \\(I \\vdots A^{-1}\\).",
+            "bold": [
+              "Inverse of a Matrix:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does this work? Finding \\(A^{-1}\\) means finding a matrix \\(X\\) with \\(AX = I\\). Each column of \\(X\\) solves a system whose right side is a column of \\(I\\). Writing all three right sides next to \\(A\\) and reducing \\(A\\) to \\(I\\) solves the three systems at once, so the right half becomes \\(X = A^{-1}\\).\nIf \\(A\\) is singular (\\(|A| = 0\\)), a zero row appears on the left and \\(A\\) can never be reduced to \\(I\\): there is no inverse.\nA quick \\(2 \\times 2\\) case: for \\(\\begin{bmatrix}2 & 1 \\\\ 5 & 3\\end{bmatrix}\\) the method gives \\(\\begin{bmatrix}3 & -1 \\\\ -5 & 2\\end{bmatrix}\\), the same as the adjoint formula of Section 4.5."
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "Find the inverse of the matrix\n\\[A = \\begin{bmatrix}2 & 5 & -1 \\\\ 3 & 4 & 2 \\\\ 1 & 2 & -2\\end{bmatrix}\\]",
+            "steps": [
+              "Given:\n\\[A = \\begin{bmatrix}2 & 5 & -1 \\\\ 3 & 4 & 2 \\\\ 1 & 2 & -2\\end{bmatrix}\\]\nTo find: \\(A^{-1}\\).\nMethod: first check \\(|A| \\ne 0\\) (otherwise no inverse exists). Then write \\(A \\vdots I_3\\) and apply row operations until the left half becomes \\(I_3\\); the right half is then \\(A^{-1}\\).",
+              "Step 1: Check that \\(A\\) is non-singular\nExpand along \\(R_1\\):\n\\[|A| = 2(-8-4) - 5(-6-2)\\]\n\\[\\quad - 1(6-4)\\]\n\\[= -24 + 40 - 2\\]\n\\[= 14\\]\nWhy: as \\(|A| \\ne 0\\), \\(A\\) is non-singular and \\(A^{-1}\\) exists. The minors are \\(4(-2) - 2(2) = -12\\), \\(3(-2) - 2(1) = -8\\) and \\(3(2) - 4(1) = 2\\), with the signs \\(+, -, +\\).",
+              "Step 2: Append \\(I_3\\) on the right of \\(A\\)\n\\[\\left[\\begin{array}{ccc|ccc}2 & 5 & -1 & 1 & 0 & 0 \\\\ 3 & 4 & 2 & 0 & 1 & 0 \\\\ 1 & 2 & -2 & 0 & 0 & 1\\end{array}\\right]\\]\nWhy: every row operation we apply to \\(A\\) is applied to \\(I_3\\) as well; when \\(A\\) turns into \\(I_3\\), the same operations have turned \\(I_3\\) into \\(A^{-1}\\).",
+              "Step 3: Get a 1 in the top-left corner\n\\(R_1 \\leftrightarrow R_3\\)\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|ccc}1 & 2 & -2 & 0 & 0 & 1 \\\\ 3 & 4 & 2 & 0 & 1 & 0 \\\\ 2 & 5 & -1 & 1 & 0 & 0\\end{array}\\right]\\]\nWhy: \\(R_3\\) starts with 1, so interchanging \\(R_1\\) and \\(R_3\\) gives a leading 1 without fractions. The right half moves with its row.",
+              "Step 4: Zeros below the first leading 1\n\\(R_2 + (-3)R_1 \\to R_2'\\)\n\\[(3,\\ 4,\\ 2 \\mid 0,\\ 1,\\ 0)\\]\n\\[+(-3)(1,\\ 2,\\ -2 \\mid 0,\\ 0,\\ 1)\\]\n\\[= (0,\\ -2,\\ 8 \\mid 0,\\ 1,\\ -3)\\]\n\\(R_3 + (-2)R_1 \\to R_3'\\)\n\\[(2,\\ 5,\\ -1 \\mid 1,\\ 0,\\ 0)\\]\n\\[+(-2)(1,\\ 2,\\ -2 \\mid 0,\\ 0,\\ 1)\\]\n\\[= (0,\\ 1,\\ 3 \\mid 1,\\ 0,\\ -2)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|ccc}1 & 2 & -2 & 0 & 0 & 1 \\\\ 0 & -2 & 8 & 0 & 1 & -3 \\\\ 0 & 1 & 3 & 1 & 0 & -2\\end{array}\\right]\\]\nWhy: adding \\((-3)R_1\\) removes the 3 in \\(R_2\\) and adding \\((-2)R_1\\) removes the 2 in \\(R_3\\). Every operation is applied to the whole row, right half included.",
+              "Step 5: Leading 1 in \\(R_2\\)\n\\(-\\frac{1}{2}R_2 \\to R_2'\\)\n\\[-\\frac{1}{2}(0,\\ -2,\\ 8 \\mid 0,\\ 1,\\ -3)\\]\n\\[= (0,\\ 1,\\ -4 \\mid 0,\\ -\\frac{1}{2},\\ \\frac{3}{2})\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|ccc}1 & 2 & -2 & 0 & 0 & 1 \\\\ 0 & 1 & -4 & 0 & -\\frac{1}{2} & \\frac{3}{2} \\\\ 0 & 1 & 3 & 1 & 0 & -2\\end{array}\\right]\\]\nWhy: the leading entry of \\(R_2\\) is \\(-2\\); multiplying by \\(-\\frac{1}{2}\\) makes it 1.",
+              "Step 6: Clear column 2 below and above\n\\(R_3 + (-1)R_2 \\to R_3'\\)\n\\[(0,\\ 1,\\ 3 \\mid 1,\\ 0,\\ -2)\\]\n\\[+(-1)(0,\\ 1,\\ -4 \\mid 0,\\ -\\frac{1}{2},\\ \\frac{3}{2})\\]\n\\[= (0,\\ 0,\\ 7 \\mid 1,\\ \\frac{1}{2},\\ -\\frac{7}{2})\\]\n\\(R_1 + (-2)R_2 \\to R_1'\\)\n\\[(1,\\ 2,\\ -2 \\mid 0,\\ 0,\\ 1)\\]\n\\[+(-2)(0,\\ 1,\\ -4 \\mid 0,\\ -\\frac{1}{2},\\ \\frac{3}{2})\\]\n\\[= (1,\\ 0,\\ 6 \\mid 0,\\ 1,\\ -2)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|ccc}1 & 0 & 6 & 0 & 1 & -2 \\\\ 0 & 1 & -4 & 0 & -\\frac{1}{2} & \\frac{3}{2} \\\\ 0 & 0 & 7 & 1 & \\frac{1}{2} & -\\frac{7}{2}\\end{array}\\right]\\]\nWhy: \\(R_3\\) has 1 and \\(R_1\\) has 2 in column 2; adding \\((-1)R_2\\) and \\((-2)R_2\\) makes them zero.",
+              "Step 7: Leading 1 in \\(R_3\\)\n\\(\\frac{1}{7}R_3 \\to R_3'\\)\n\\[\\frac{1}{7}(0,\\ 0,\\ 7 \\mid 1,\\ \\frac{1}{2},\\ -\\frac{7}{2})\\]\n\\[= (0,\\ 0,\\ 1 \\mid \\frac{1}{7},\\ \\frac{1}{14},\\ -\\frac{1}{2})\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|ccc}1 & 0 & 6 & 0 & 1 & -2 \\\\ 0 & 1 & -4 & 0 & -\\frac{1}{2} & \\frac{3}{2} \\\\ 0 & 0 & 1 & \\frac{1}{7} & \\frac{1}{14} & -\\frac{1}{2}\\end{array}\\right]\\]\nWhy: the entry 7 in column 3 must become 1, so we multiply \\(R_3\\) by \\(\\frac{1}{7}\\).",
+              "Step 8: Clear column 3 above the last leading 1\n\\(R_1 + (-6)R_3 \\to R_1'\\)\n\\[(1,\\ 0,\\ 6 \\mid 0,\\ 1,\\ -2)\\]\n\\[+(-6)(0,\\ 0,\\ 1 \\mid \\frac{1}{7},\\ \\frac{1}{14},\\ -\\frac{1}{2})\\]\n\\[= (1,\\ 0,\\ 0 \\mid -\\frac{6}{7},\\ \\frac{4}{7},\\ 1)\\]\n\\(R_2 + 4R_3 \\to R_2'\\)\n\\[(0,\\ 1,\\ -4 \\mid 0,\\ -\\frac{1}{2},\\ \\frac{3}{2})\\]\n\\[+4(0,\\ 0,\\ 1 \\mid \\frac{1}{7},\\ \\frac{1}{14},\\ -\\frac{1}{2})\\]\n\\[= (0,\\ 1,\\ 0 \\mid \\frac{4}{7},\\ -\\frac{3}{14},\\ -\\frac{1}{2})\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|ccc}1 & 0 & 0 & -\\frac{6}{7} & \\frac{4}{7} & 1 \\\\ 0 & 1 & 0 & \\frac{4}{7} & -\\frac{3}{14} & -\\frac{1}{2} \\\\ 0 & 0 & 1 & \\frac{1}{7} & \\frac{1}{14} & -\\frac{1}{2}\\end{array}\\right]\\]\nWhy: \\(R_1\\) has 6 and \\(R_2\\) has \\(-4\\) in column 3; adding \\((-6)R_3\\) and \\(4R_3\\) removes them. The left half is now \\(I_3\\).",
+              "Step 9: Read off the inverse\n\\[A^{-1} = \\begin{bmatrix}-\\frac{6}{7} & \\frac{4}{7} & 1 \\\\ \\frac{4}{7} & -\\frac{3}{14} & -\\frac{1}{2} \\\\ \\frac{1}{7} & \\frac{1}{14} & -\\frac{1}{2}\\end{bmatrix}\\]\nWhy: the left half is \\(I_3\\), so the right half is \\(A^{-1}\\).",
+              "Check: multiply \\(A\\) by \\(A^{-1}\\). Taking out \\(\\frac{1}{14}\\):\n\\[14A^{-1} = \\begin{bmatrix}-12 & 8 & 14 \\\\ 8 & -3 & -7 \\\\ 2 & 1 & -7\\end{bmatrix}\\]\n\\(R_1\\) of \\(A\\) times the columns: \\(-24 + 40 - 2 = 14\\), \\(16 - 15 - 1 = 0\\), \\(28 - 35 + 7 = 0\\).\n\\(R_2\\): \\(-36 + 32 + 4 = 0\\), \\(24 - 12 + 2 = 14\\), \\(42 - 28 - 14 = 0\\).\n\\(R_3\\): \\(-12 + 16 - 4 = 0\\), \\(8 - 6 - 2 = 0\\), \\(14 - 14 + 14 = 14\\).\nSo \\(A(14A^{-1}) = 14I_3\\), i.e. \\(AA^{-1} = I_3\\)."
+            ],
+            "answer": "\\[A^{-1} = \\begin{bmatrix}-\\frac{6}{7} & \\frac{4}{7} & 1 \\\\ \\frac{4}{7} & -\\frac{3}{14} & -\\frac{1}{2} \\\\ \\frac{1}{7} & \\frac{1}{14} & -\\frac{1}{2}\\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Rank of a Matrix: Let \\(A\\) be a non-zero matrix. If \\(r\\) is the number of non-zero rows when it is reduced to the echelon form, then \\(r\\) is called the rank of the matrix \\(A\\).",
+            "bold": [
+              "Rank of a Matrix:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The rank counts how many rows carry genuinely new information. A row that is a combination of other rows becomes a zero row during reduction.\nFor example, in \\(\\begin{bmatrix}1 & 2 \\\\ 2 & 4\\end{bmatrix}\\) the second row is twice the first; \\(R_2 + (-2)R_1\\) gives a zero row, so the rank is 1.\nThe rank of an \\(m \\times n\\) matrix is never more than the smaller of \\(m\\) and \\(n\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "Find the rank of the matrix\n\\[\\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 2 & 0 & 7 & -7 \\\\ 3 & 1 & 12 & -11\\end{bmatrix}\\]",
+            "steps": [
+              "Given:\n\\[A = \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 2 & 0 & 7 & -7 \\\\ 3 & 1 & 12 & -11\\end{bmatrix}\\]\nTo find: the rank of \\(A\\).\nMethod: reduce \\(A\\) to echelon form and count the non-zero rows.",
+              "Step 1: Zeros below the leading 1 of \\(R_1\\)\n\\(R_2 + (-2)R_1 \\to R_2'\\)\n\\[(2,\\ 0,\\ 7,\\ -7)\\]\n\\[+(-2)(1,\\ -1,\\ 2,\\ -3)\\]\n\\[= (0,\\ 2,\\ 3,\\ -1)\\]\n\\(R_3 + (-3)R_1 \\to R_3'\\)\n\\[(3,\\ 1,\\ 12,\\ -11)\\]\n\\[+(-3)(1,\\ -1,\\ 2,\\ -3)\\]\n\\[= (0,\\ 4,\\ 6,\\ -2)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 0 & 2 & 3 & -1 \\\\ 0 & 4 & 6 & -2\\end{bmatrix}\\]\nWhy: \\(R_1\\) already starts with 1; adding \\((-2)R_1\\) and \\((-3)R_1\\) clears column 1.",
+              "Step 2: Leading 1 in \\(R_2\\)\n\\(\\frac{1}{2}R_2 \\to R_2'\\)\n\\[\\frac{1}{2}(0,\\ 2,\\ 3,\\ -1)\\]\n\\[= (0,\\ 1,\\ \\frac{3}{2},\\ -\\frac{1}{2})\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 0 & 1 & \\frac{3}{2} & -\\frac{1}{2} \\\\ 0 & 4 & 6 & -2\\end{bmatrix}\\]\nWhy: the leading entry of \\(R_2\\) is 2; multiplying by \\(\\frac{1}{2}\\) makes it 1, as condition (iii) of echelon form requires.",
+              "Step 3: Zero below the leading 1 of \\(R_2\\)\n\\(R_3 + (-4)R_2 \\to R_3'\\)\n\\[(0,\\ 4,\\ 6,\\ -2)\\]\n\\[+(-4)(0,\\ 1,\\ \\frac{3}{2},\\ -\\frac{1}{2})\\]\n\\[= (0,\\ 0,\\ 0,\\ 0)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\begin{bmatrix}1 & -1 & 2 & -3 \\\\ 0 & 1 & \\frac{3}{2} & -\\frac{1}{2} \\\\ 0 & 0 & 0 & 0\\end{bmatrix}\\]\nWhy: \\(R_3\\) has 4 in column 2; adding \\((-4)R_2\\) removes it, and the whole row becomes zero. The matrix is now in echelon form.",
+              "Step 4: Count the non-zero rows\n\\(R_1\\) and \\(R_2\\) are non-zero, \\(R_3\\) is zero, so \\(r = 2\\).\nWhy: by definition the rank is the number of non-zero rows in the echelon form.",
+              "Check: the original \\(R_3\\) is a combination of the other two rows:\n\\[2R_2 - R_1 = (4,\\ 0,\\ 14,\\ -14)\\]\n\\[\\quad - (1,\\ -1,\\ 2,\\ -3)\\]\n\\[= (3,\\ 1,\\ 12,\\ -11) = R_3\\]\nSo only two rows are independent, which agrees with rank 2."
+            ],
+            "answer": "The rank of the given matrix is 2."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Leading entry: the first non-zero entry of a non-zero row.\n2. Echelon form: each leading entry is 1, lies to the right of the one above, and zero rows come last.\n3. Reduced echelon form: echelon form with zeros above and below every leading 1.\n4. Inverse by row operations: reduce \\(A \\vdots I\\) to \\(I \\vdots A^{-1}\\); first check \\(|A| \\ne 0\\).\n5. Rank: the number of non-zero rows in an echelon form."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Applying a row operation to the left half only. In \\(A \\vdots I\\) every operation acts on the whole row.\n2. Changing two rows with one operation such as \\(R_1 + R_2\\) written into both rows. Only the row on the left of \\(\\to\\) changes.\n3. Counting rows of the original matrix as the rank. Count only after reducing to echelon form.\n4. Stopping at echelon form when the question asks for the reduced form: clear the entries above every leading 1 too.\n5. Sign slips when the multiplier is negative: \\(R_3 + (-4)R_2\\) subtracts four times \\(R_2\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

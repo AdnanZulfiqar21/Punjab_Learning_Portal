@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.8.3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.8.3",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 74,
+          "pdf_to": 76,
+          "note": "Book p. 69-71: derivation of Cramer's rule, results (iii)-(v), Example 13"
+        }
+      ],
+      "title": "4.8.3 Cramer's Rule (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH4-4.8.3",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Teesra tareeqa: Cramer's rule. Yeh matrix inversion method hi ka ek chhota raasta hai: inverse aur adjoint poore likhne ke bajaye sirf chaar determinants nikalte hain aur har variable seedha mil jata hai. Pehle hum dekhenge ke yeh rule kahan se aata hai, phir kitab ki misaal hal karenge."
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh system lijiye:\n\\[a_{11}x_1 + a_{12}x_2 + a_{13}x_3 = b_1\\]\n\\[a_{21}x_1 + a_{22}x_2 + a_{23}x_3 = b_2\\]\n\\[a_{31}x_1 + a_{32}x_2 + a_{33}x_3 = b_3\\]\n\\[\\quad \\text{...(i)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab is system ko bhi \"...(ii)\" number deti hai aur neeche matrix equation \\(AX = B\\) ko bhi \"...(ii)\". Phir aage \"matrix equation (2)\" likhti hai. Sahi yeh hai: system (i) hai aur matrix equation \\(AX = B\\) (ii) hai. Neeche hum ne sahi numbering di hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh teen variables \\(x_1, x_2, x_3\\) mein teen linear equations hain, jin ke coefficients aur constants real numbers (\\(\\mathbb{R}\\)) hain. Is system ko matrix form mein yun likhte hain:\n\\[AX = B \\quad \\text{...(ii)}\\]\njahan\n\\[A = [a_{ij}]_{3\\times 3},\\ X = \\begin{bmatrix}x_1 \\\\ x_2 \\\\ x_3\\end{bmatrix}\\]\n\\[B = \\begin{bmatrix}b_1 \\\\ b_2 \\\\ b_3\\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Hum jaante hain (Section 4.8.2) ke matrix equation (ii) ko yun likh sakte hain: \\(X = A^{-1}B\\) (agar \\(A^{-1}\\) mojood ho, yani \\(|A| \\ne 0\\))."
+          },
+          {
+            "type": "paragraph",
+            "text": "Hum pehle saabit kar chuke hain ke \\(A^{-1} = \\frac{1}{|A|}\\operatorname{adj} A\\), aur\n\\[\\operatorname{adj} A = [A'_{ij}]_{3\\times 3}\\]\n\\[= \\begin{bmatrix}A_{11} & A_{21} & A_{31} \\\\ A_{12} & A_{22} & A_{32} \\\\ A_{13} & A_{23} & A_{33}\\end{bmatrix}\\]\n\\[(\\because A'_{ij} = A_{ji})\\]\nIs liye\n\\[\\begin{bmatrix}x_1 \\\\ x_2 \\\\ x_3\\end{bmatrix} = \\frac{1}{|A|}\\begin{bmatrix}A_{11} & A_{21} & A_{31} \\\\ A_{12} & A_{22} & A_{32} \\\\ A_{13} & A_{23} & A_{33}\\end{bmatrix}\\begin{bmatrix}b_1 \\\\ b_2 \\\\ b_3\\end{bmatrix}\\]\n\\[= \\frac{1}{|A|}\\begin{bmatrix}A_{11}b_1 + A_{21}b_2 + A_{31}b_3 \\\\ A_{12}b_1 + A_{22}b_2 + A_{32}b_3 \\\\ A_{13}b_1 + A_{23}b_2 + A_{33}b_3\\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "yani,\n\\[x_1 = \\frac{A_{11}b_1 + A_{21}b_2 + A_{31}b_3}{|A|}\\]\n\\[x_2 = \\frac{A_{12}b_1 + A_{22}b_2 + A_{32}b_3}{|A|}\\]\n\\[x_3 = \\frac{A_{13}b_1 + A_{23}b_2 + A_{33}b_3}{|A|}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Lehaza\n\\[x_1 = \\frac{b_1A_{11} + b_2A_{21} + b_3A_{31}}{|A|}\\]\n\\[= \\dfrac{\\begin{vmatrix}b_1 & a_{12} & a_{13} \\\\ b_2 & a_{22} & a_{23} \\\\ b_3 & a_{32} & a_{33}\\end{vmatrix}}{|A|} \\quad \\text{(iii)}\\]\n\\[x_2 = \\frac{b_1A_{12} + b_2A_{22} + b_3A_{32}}{|A|}\\]\n\\[= \\dfrac{\\begin{vmatrix}a_{11} & b_1 & a_{13} \\\\ a_{21} & b_2 & a_{23} \\\\ a_{31} & b_3 & a_{33}\\end{vmatrix}}{|A|} \\quad \\text{(iv)}\\]\n\\[x_3 = \\frac{b_1A_{13} + b_2A_{23} + b_3A_{33}}{|A|}\\]\n\\[= \\dfrac{\\begin{vmatrix}a_{11} & a_{12} & b_1 \\\\ a_{21} & a_{22} & b_2 \\\\ a_{31} & a_{32} & b_3\\end{vmatrix}}{|A|} \\quad \\text{(v)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(b_1A_{11} + b_2A_{21} + b_3A_{31}\\) hi (iii) wala determinant kyun hai? \\(A_{11}, A_{21}, A_{31}\\) matrix \\(A\\) ke pehle column ke cofactors hain, aur yeh pehle column par munhasir nahi (minor banate waqt woh column kaat diya jata hai). Kisi determinant ko pehle column ke saath expand karein to \"entry zarb cofactor, sab jama\" milta hai. To agar pehle column ki jagah \\(b_1, b_2, b_3\\) rakh dein, expansion bilkul \\(b_1A_{11} + b_2A_{21} + b_3A_{31}\\) banta hai.\nAsaan alfaaz mein rule: \\(x_k\\) = (\\(A\\) ka determinant jis mein column \\(k\\) ki jagah constants rakh diye gaye) taqseem \\(|A|\\). \\(D = |A|\\) aur in determinants ko \\(D_1, D_2, D_3\\) likhein to: \\(x_1 = \\frac{D_1}{D}\\), \\(x_2 = \\frac{D_2}{D}\\), \\(x_3 = \\frac{D_3}{D}\\). Shart: \\(D \\ne 0\\).\nYaad rakhne ka tareeqa: jis variable ko dhoond rahe ho, usi ka column \"constants\" se badal do."
+          },
+          {
+            "type": "paragraph",
+            "text": "Results (iii), (iv) aur (v) ki madad se system hal karne ke is tareeqe ko Cramer's Rule kehte hain.",
+            "bold": [
+              "Cramer's Rule"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Cramer's rule ka faida yeh hai ke har variable doosre variables ke baghair, akela nikal aata hai. Agar sawal sirf \\(x_2\\) maange, to sirf \\(|A|\\) aur \\(D_2\\) nikalna kaafi hai. Lekin yaad rakhein ke \\(3 \times 3\\) system mein chaar determinants nikalne parte hain, is liye hisaab saaf aur tartib se likhna zaroori hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki Example 13 mein yeh rule chalate hain. Kaam ki tarteeb: pehle \\(|A|\\), phir har variable ke liye ek naya determinant, aur aakhir mein taqseem."
+          },
+          {
+            "type": "example",
+            "title": "Example 13",
+            "problem": "Use Cramer's rule to solve the system.\n\\[3x_1 + x_2 - x_3 = -4\\]\n\\[x_1 + x_2 - 2x_3 = -4\\]\n\\[-x_1 + 2x_2 - x_3 = 1\\]",
+            "steps": [
+              "Given: the system above, \\(AX = B\\) with\n\\[A = \\begin{bmatrix}3 & 1 & -1 \\\\ 1 & 1 & -2 \\\\ -1 & 2 & -1\\end{bmatrix}\\]\n\\[B = \\begin{bmatrix}-4 \\\\ -4 \\\\ 1\\end{bmatrix}\\]\nTo find: \\(x_1, x_2, x_3\\).\nMethod: Cramer's rule: \\(x_k = \\frac{D_k}{|A|}\\), jahan \\(D_k\\) woh determinant hai jis mein \\(|A|\\) ka column \\(k\\) constants \\(B\\) se badal diya gaya. Sab se pehle \\(|A| \\ne 0\\) dekhna hai, warna rule lag hi nahi sakta.",
+              "Step 1: \\(|A|\\) nikalein (\\(R_1\\) ke saath expand)\n\\[|A| = \\begin{vmatrix}3 & 1 & -1 \\\\ 1 & 1 & -2 \\\\ -1 & 2 & -1\\end{vmatrix}\\]\n\\[= 3(-1+4) - 1\\cdot(-1-2)\\]\n\\[\\quad - 1\\cdot(2+1)\\]\n\\[= 9 + 3 - 3 = 9\\]\nKyun: \\(|A| = 9 \\ne 0\\), is liye system ka ek hi solution hai aur Cramer's rule lag sakta hai. Beech wale term mein \\(-1 \\cdot (-3) = +3\\) hota hai; sign par nazar rakhein.",
+              "Step 2: \\(x_1\\): column 1 ki jagah \\(B\\)\n\\[x_1 = \\frac{1}{9}\\begin{vmatrix}-4 & 1 & -1 \\\\ -4 & 1 & -2 \\\\ 1 & 2 & -1\\end{vmatrix}\\]\n\\[= \\frac{-4(-1+4) - 1(4+2) - 1(-8-1)}{9}\\]\n\\[= \\frac{-12 - 6 + 9}{9} = \\frac{-9}{9} = -1\\]\nKyun: pehle column mein \\(x_1\\) ke coefficients hain; unhein constants se badalne par (iii) ka numerator banta hai.",
+              "Step 3: \\(x_2\\): column 2 ki jagah \\(B\\)\n\\[x_2 = \\frac{1}{9}\\begin{vmatrix}3 & -4 & -1 \\\\ 1 & -4 & -2 \\\\ -1 & 1 & -1\\end{vmatrix}\\]\n\\[= \\frac{3(4+2) + 4(-1-2) - 1(1-4)}{9}\\]\n\\[= \\frac{18 - 12 + 3}{9} = \\frac{9}{9} = 1\\]\nKyun: yeh result (iv) hai. Beech wala term \\(-(-4)(\\ldots) = +4(\\ldots)\\) banta hai; do minus mil kar plus.",
+              "Step 4: \\(x_3\\): column 3 ki jagah \\(B\\)\n\\[x_3 = \\frac{1}{9}\\begin{vmatrix}3 & 1 & -4 \\\\ 1 & 1 & -4 \\\\ -1 & 2 & 1\\end{vmatrix}\\]\n\\[= \\frac{3(1+8) - 1(1-4) - 4(2+1)}{9}\\]\n\\[= \\frac{27 + 3 - 12}{9} = \\frac{18}{9} = 2\\]\nKyun: yeh result (v) hai. Ab teeno values mil gayin.",
+              "Tasdeeq: \\(x_1 = -1, x_2 = 1, x_3 = 2\\) asal equations mein rakhein:\n\\[3(-1) + 1 - 2 = -4\\]\n\\[-1 + 1 - 4 = -4\\]\n\\[1 + 2 - 2 = 1\\]\nTeeno sahi. Cramer's rule mein ek determinant bhi ghalat ho to jawab ghalat aata hai, is liye yeh tasdeeq zaroor karein."
+            ],
+            "answer": "\\(x_1 = -1,\\ x_2 = 1,\\ x_3 = 2\\); solution set \\(\\{(x_1, x_2, x_3)\\} = \\{(-1, 1, 2)\\}\\) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Example 13 mein \\(|A| = 9\\) aaya. Agar \\(|A| = 0\\) hota to kya karte? Sochiye.\nJawab: \\(\\frac{D_k}{0}\\) bana hi nahi sakte, is liye Cramer's rule nahi lagta. Us soorat mein system ke ya to beshumar solutions hain ya koi nahi; faisla echelon form (4.8.1) se karte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahi. \\(2x + 3y = 8\\), \\(x - y = -1\\).\n\\[D = \\begin{vmatrix}2 & 3 \\\\ 1 & -1\\end{vmatrix} = -2 - 3 = -5\\]\n\\[D_x = \\begin{vmatrix}8 & 3 \\\\ -1 & -1\\end{vmatrix} = -8 + 3 = -5\\]\n\\[D_y = \\begin{vmatrix}2 & 8 \\\\ 1 & -1\\end{vmatrix} = -2 - 8 = -10\\]\n\\(x = \\frac{-5}{-5} = 1\\), \\(y = \\frac{-10}{-5} = 2\\). Tasdeeq: \\(2 + 6 = 8\\), \\(1 - 2 = -1\\). Sahi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Cramer's rule: \\(x_k = \\frac{D_k}{|A|}\\); \\(D_k\\) mein \\(|A|\\) ka column \\(k\\) constants se badla jata hai.\n2. Sirf \\(|A| \\ne 0\\) par lagta hai (tab solution ek hi hota hai).\n3. Yeh \\(X = A^{-1}B = \\frac{1}{|A|}(\\operatorname{adj} A)B\\) se nikalta hai.\n4. Jawab hamesha asal equations mein rakh kar check karo."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Column ki jagah row ko constants se badal dena. Yaad rakhein: column = ek variable ke coefficients.\n2. Ghalat column badalna: \\(x_2\\) ke liye doosra column.\n3. Expansion mein sign ki ghalti: beech wale term ke aage minus hota hai.\n4. \\(|A| = 0\\) par bhi Cramer's rule lagana."
+          }
+        ]
+      }
+    }
+  ]
+}

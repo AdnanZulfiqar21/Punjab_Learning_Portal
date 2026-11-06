@@ -1,0 +1,520 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 49,
+          "pdf_to": 53,
+          "note": "Book p. 44-48: Unit 4 INTRODUCTION and 4.1 Matrix up to 4.2 (history, definition, order, a_ij notation, Note: real matrix, row/column/rectangular/square matrices, principal and secondary diagonals with the 4x4 figure, diagonal, scalar, identity, null (with Note), equal matrices, transpose)...."
+        }
+      ],
+      "title": "4.1 Matrix (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH4-4.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Introduction"
+          },
+          {
+            "type": "paragraph",
+            "text": "Assalam-o-alaikum bachon! Aaj se hum Unit 4 shuru kar rahe hain: Matrices & Determinants. Yeh unit shuru mein naya lagta hai, lekin asal mein yeh numbers ko tarteeb se rakhne aur un par hisaab lagane ka ek saaf suthra tareeqa hai. Agar aap pehle din ke alfaaz (vocabulary) achhi tarah samajh lein, to baqi poori unit aasan ho jati hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ka introduction batata hai ke is unit mein kya kya hai: matrices ke bunyadi concepts aur operations, yani addition, subtraction aur multiplication, real aur complex entries ke saath. Phir determinants ki properties, aur \\(3 \\times 3\\) matrix ka determinant cofactors aur properties ki madad se nikalna. Row operations se matrix ka inverse aur rank nikalna, aur consistent (jis ka hal mojood ho) aur inconsistent (jis ka koi hal na ho) systems mein farq pehchanna. Phir linear equations ke systems, homogeneous aur non-homogeneous dono, matrix inversion, Cramer's Rule aur Gaussian elimination se hal karna. Aakhir mein matrices ke asal zindagi ke istemal: graphic design, cryptography (khufia code), data encryption aur geometric transformations."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "About this unit",
+            "text": "Matrix asal mein numbers ka ek table hai jo rows aur columns mein rakha hota hai. Aap roz aise tables dekhte hain: school ka timetable, result card, cricket ka scorecard. Socho ek dukaan ka hisaab: rows mein din (Monday, Tuesday) aur columns mein cheezein (doodh, chai, cheeni). Har khane (cell) mein ek number hai. Bas yahi matrix hai!\nMatrices aise tables ko chhota sa naam aur jama, tafreeq, zarb (multiply) ke rules dete hain. Inhi rules ki madad se hum ek saath kai equations hal kar sakte hain. Yeh pehla page poori unit ki zubaan sikhata hai: order, entries, rows, columns aur matrices ki khaas qisam. In alfaaz ko dhyan se yaad kijiye, kyun ke aage har topic inhi par chalta hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "4.1 Matrix"
+          },
+          {
+            "type": "paragraph",
+            "text": "Pehle thori si tareekh (history), kyun ke is se pata chalta hai ke matrix ki zaroorat kyun pari. Linear equations ke systems hal karte waqt likhai bohat zyada ho jati thi, is liye ek nayi notation (likhne ka tareeqa) banayi gayi taa ke kam likhna pare. Is notation ke liye lafz \"matrix\" sab se pehle English mathematician James Sylvester (1814 - 1897) ne istemal kiya. Arthur Cayley (1821 - 1895) ne matrices ki theory banayi aur unhein linear transformations mein istemal kiya. Aaj kal matrices tez raftaar computers aur bohat se doosre shobon (fields) mein kaam aate hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Determinants ka concept Chinese aur Japanese mathematicians istemal karte thay, lekin determinants ki ijaad ka sehra Japanese mathematician Seki Kowa (1642 - 1708) aur German mathematician Gottfried Wilhelm Leibniz (1646 - 1716) ke sar hai. G. Cramer (1704 - 1752) ne determinants ko linear equations ke systems hal karne ke liye kamyabi se istemal kiya. Unhi ke naam par Cramer's Rule hai jo aap isi unit mein aage parhenge."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab definition. Numbers ki ek rectangular (mustateel, chaukor shakal ki) tarteeb jo brackets ke ek jore mein band ho, matrix kehlati hai. Jaise:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\begin{bmatrix}2 & -1 & 3 \\\\ -5 & 4 & 7\\end{bmatrix} \\quad \\text{(i)}\\]\n\\[\\begin{bmatrix}2 & 3 & 0 \\\\ 1 & -1 & 4 \\\\ 3 & 2 & 6 \\\\ 4 & 1 & -1\\end{bmatrix} \\quad \\text{(ii)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Numbers ki horizontal (aari, baayen se daayen) lakeeron ko rows kehte hain aur vertical (khari, upar se neeche) lakeeron ko columns. Rows aur columns mein jo numbers likhe hain unhein matrix ki entries ya elements kehte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab ginti kijiye. Matrix (i) mein do rows aur teen columns hain, jab ke matrix (ii) mein chaar rows aur teen columns hain. Matrix (ii) mein kitne elements hain? \\(4 \\times 3 = 12\\). Khud gin kar dekhiye, 12 hi niklenge."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yaad rakhne ka aasan tareeqa: rows aari chalti hain, jaise hall mein kursiyon ki qataarein. Columns khari hoti hain, jaise building ke sutoon (pillars). Rows hamesha upar se gini jati hain aur columns baayen se.\nMatrix (i) mein pehli row \\(2,\\ -1,\\ 3\\) hai aur doosra column \\(-1,\\ 4\\) hai. Khud dekhiye: teesra column kya hai? Jawab: \\(3,\\ 7\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab matrix ki aam (general) definition dekhte hain, jo har size ki matrix par lagti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Aam tor par, \\(m \\cdot n\\) elements \\(a_{ij}\\ (i = 1, 2, 3, \\ldots, m;\\ j = 1, 2, 3, \\ldots, n)\\) ki bracket mein band rectangular tarteeb, jo \\(m\\) rows aur \\(n\\) columns mein rakhi ho, jaise"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\begin{bmatrix} a_{11} & a_{12} & \\cdots & a_{1n} \\\\ a_{21} & a_{22} & \\cdots & a_{2n} \\\\ \\vdots & \\vdots & & \\vdots \\\\ a_{m1} & a_{m2} & \\cdots & a_{mn} \\end{bmatrix} \\quad \\text{(iii)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab yahan subscripts ki range \\(a_{ij}\\,(1, 2, 3, \\ldots, m;\\ j = 1, 2, 3, \\ldots, n)\\) chhapti hai, yani pehli list se pehle \"\\(i =\\)\" ghayab hai. Sahi yeh hai: \\(a_{ij}\\ (i = 1, 2, 3, \\ldots, m;\\ j = 1, 2, 3, \\ldots, n)\\). Pehla subscript \\(i\\) rows ginta hai (1 se \\(m\\) tak) aur doosra subscript \\(j\\) columns ginta hai (1 se \\(n\\) tak). Hum ne upar sahi shakal likhi hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "aisi matrix ko \\(m\\) by \\(n\\) matrix kehte hain (likhte hain \\(m \\times n\\) matrix), aur \\(m \\times n\\) ko matrix (iii) ka order kehte hain. Matrices ko aam tor par capital letters se dikhate hain, jaise \\(A, B, C, X, Y\\), aur entries ke liye chhote letters istemal hote hain, jaise \\(a, b, c, l, m, n\\) ya \\(a_{11}, a_{12}, a_{13}, \\ldots\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Order hamesha pehle rows, phir columns: \\(m \\times n\\) ka matlab \\(m\\) rows aur \\(n\\) columns. Ise \"m by n\" parhte hain. Dhyan dein: yeh zarb (multiplication) karne ke liye nahin likha jata. \\(2 \\times 3\\) aur \\(3 \\times 2\\) dono mein 6 entries hain, lekin dono ki shakal bilkul alag hai: ek letti hui, doosri khari. Is liye order ko \"6\" likh dena ghalat hai, aur \\(2 \\times 3\\) ki jagah \\(3 \\times 2\\) likhna bhi ghalat hai. Haan, \\(m \\cdot n\\) ka hasil sirf yeh batata hai ke entries kitni hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab maan lijiye matrix (iii) ka naam \\(A\\) hai. Neeche \\(A\\) ki tabular shakal mein \\(i\\)th row aur \\(j\\)th column dikhaye gaye hain: jis row mein \\(a_{i1}\\) hai woh \\(i\\)th row hai, aur jis column mein \\(a_{1j}\\) hai woh \\(j\\)th column hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[A = \\begin{bmatrix} a_{11} & \\cdots & a_{1j} & \\cdots & a_{1n} \\\\ \\vdots & & \\vdots & & \\vdots \\\\ a_{i1} & \\cdots & a_{ij} & \\cdots & a_{in} \\\\ \\vdots & & \\vdots & & \\vdots \\\\ a_{m1} & \\cdots & a_{mj} & \\cdots & a_{mn} \\end{bmatrix} \\quad \\text{(iv)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(A\\) ki \\(i\\)th row ke elements \\(a_{i1}, a_{i2}, a_{i3}, \\ldots, a_{ij}, \\ldots, a_{in}\\) hain, aur \\(j\\)th column ke elements \\(a_{1j}, a_{2j}, a_{3j}, \\ldots, a_{ij}, \\ldots, a_{mj}\\) hain. Ghor kijiye: row ke elements mein pehla subscript \\(i\\) har jagah same rehta hai, sirf doosra badalta hai. Column ke elements mein doosra subscript \\(j\\) same rehta hai. Aur \\(a_{ij}\\) woh element hai jo \\(i\\)th row aur \\(j\\)th column ke milap (crossing) par baitha hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Double subscripts (do chhote number) har element ka pata (address) bata dete hain, bilkul jaise cinema ki seat \"Row C, Seat 5\". Misaal ke tor par, matrix \\(\\begin{bmatrix}2 & -1 & 3 \\\\ -5 & 4 & 7\\end{bmatrix}\\) mein element 7, \\(a_{23}\\) ki position par hai: row 2, column 3."
+          },
+          {
+            "type": "paragraph",
+            "text": "Aasani ke liye hum matrix \\(A\\) ko yun likhenge:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[A = [a_{ij}]_{m \\times n}\\]\n\\[\\text{ya } A = [a_{ij}]\\]\njahan \\(i = 1, 2, 3, \\ldots, m;\\ j = 1, 2, 3, \\ldots, n\\), aur \\(a_{ij}\\) \\(A\\) ki \\(i\\)th row aur \\(j\\)th column wala element hai. Yeh chhoti si likhai poori matrix ko ek lafz mein samet leti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Matrices ki entries hamesha numbers hon yeh zaroori nahin (woh functions ya kuch aur bhi ho sakti hain), lekin hum apni parhai mein entries sirf \\(\\mathbb{R}\\) (real numbers) ya \\(\\mathbb{C}\\) (complex numbers) se lenge. Complex numbers aap Unit 1 mein parh chuke hain."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Matrix \\(A\\) ko real matrix kehte hain agar us ke tamam elements real hon."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is note ka matlab samjhiye: agar matrix ki koi ek entry bhi complex ho, jaise \\(2 + 3i\\), to woh real matrix nahin rehti; use complex matrix kahenge. Kitab ne introduction mein kaha tha ke hum real aur complex dono entries ke saath kaam karenge. Lekin is unit ki zyada tar misalon mein entries real hi hongi, is liye pehle real matrices par haath saaf kijiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari misaal hai, kitab ki nahin. Matrix \\(\\begin{bmatrix}1 & 2 & 3 \\\\ 4 & 5 & 6\\end{bmatrix}\\) lijiye.\nOrder: 2 rows, 3 columns, is liye \\(2 \\times 3\\).\n\\(a_{23}\\) = row 2, column 3 = 6.\n\\(a_{12}\\) = row 1, column 2 = 2.\n\\(a_{21}\\) = row 2, column 1 = 4.\nDhyan dein: \\(a_{23}\\) ko \"a do teen\" parhiye, \"a teyees\" nahin. Yeh do alag numbers hain: row number aur column number."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Matrix (ii) mein \\(a_{32}\\) kya hai, aur \\(a_{41}\\) kya hai?\nJawab: \\(a_{32}\\) = row 3, column 2 = 2. \\(a_{41}\\) = row 4, column 1 = 4."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Row Matrix or Row Vector"
+          },
+          {
+            "type": "paragraph",
+            "text": "Woh matrix jis mein sirf ek row ho, yani \\(1 \\times n\\) order ki matrix, jaise \\([a_{i1}\\ \\ a_{i2}\\ \\ a_{i3}\\ \\ \\ldots\\ \\ a_{in}]\\), row matrix ya row vector kehlati hai. Socho ek lambi bench jis par sab ek hi qataar mein bethe hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Row matrix ka order hamesha \\(1 \\times n\\) hota hai: pehla number 1, kyun ke row sirf ek hai. Agar aap ko ek din ke paanch subjects ke marks ek line mein likhne hon, to woh ek row matrix hogi, jaise \\([65\\ \\ 72\\ \\ 80\\ \\ 58\\ \\ 90]\\), order \\(1 \\times 5\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Column Matrix or Column Vector"
+          },
+          {
+            "type": "paragraph",
+            "text": "Woh matrix jis mein sirf ek column ho, yani \\(m \\times 1\\) order ki matrix, jaise"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\begin{bmatrix} a_{1j} \\\\ a_{2j} \\\\ a_{3j} \\\\ \\vdots \\\\ a_{mj} \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "column matrix ya column vector kehlati hai. Yeh ek khari seedhi lakeer hai, jaise ek ke neeche ek rakhi kitabein."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal ke tor par \\([1\\ \\ -1\\ \\ 3\\ \\ 4]\\) ek row matrix hai jis ke 4 columns hain (order \\(1 \\times 4\\)), aur"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\begin{bmatrix}2 \\\\ -1 \\\\ 3\\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "ek column matrix hai jis ki 3 rows hain (order \\(3 \\times 1\\))."
+          },
+          {
+            "type": "paragraph",
+            "text": "Naam mein \"vector\" kyun? Physics mein aap ne vectors parhe hain jin ke components hote hain, jaise \\(2\\hat{i} - \\hat{j} + 3\\hat{k}\\). Un components ko ek row ya ek column mein likh dein to row vector ya column vector ban jata hai. Is liye ek row ya ek column wali matrix ko vector bhi kehte hain. Dhyan dein: order likhte waqt row matrix mein pehla number 1 hota hai aur column matrix mein doosra number 1."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Rectangular Matrix"
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar \\(m \\ne n\\) ho, yani rows ki tadaad columns ki tadaad ke barabar na ho, to matrix ko \\(m \\times n\\) order ki rectangular matrix kehte hain. Misaal:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\begin{bmatrix}2 & 3 & 1 \\\\ -1 & 0 & 4\\end{bmatrix}\\]\n\\[\\text{aur } \\begin{bmatrix}2 & -3 & 0 \\\\ 1 & 2 & 4 \\\\ 3 & -1 & 5 \\\\ 0 & 1 & 2\\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "yeh rectangular matrices hain jin ke orders bil-tarteeb \\(2 \\times 3\\) aur \\(4 \\times 3\\) hain. Pehli mein 2 rows aur 3 columns, doosri mein 4 rows aur 3 columns; dono mein rows aur columns barabar nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Ek matrix mein 6 entries hain aur woh rectangular hai. Us ke order kya kya ho sakte hain?\nJawab: \\(1 \\times 6,\\ 6 \\times 1,\\ 2 \\times 3,\\ 3 \\times 2\\). Yeh chaaron rectangular hain, kyun ke kisi mein bhi rows aur columns barabar nahin. Har ek ki shakal alag hai, halaan ke entries sab mein 6 hain. Isi liye order mein dono number likhna zaroori hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Square Matrix"
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar \\(m = n\\) ho, to \\(m \\times n\\) order ki matrix ko \\(n\\) (ya \\(m\\)) order ki square matrix kehte hain. Yani jis matrix mein rows aur columns ki tadaad barabar ho woh square (murabba) matrix hai, bilkul ludo ke board ki tarah. Misaal:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[[0],\\quad \\begin{bmatrix}2 & 5 \\\\ -1 & 6\\end{bmatrix}\\]\n\\[\\text{aur } \\begin{bmatrix}1 & 1 & 2 \\\\ 2 & -1 & 8 \\\\ 3 & 5 & 4\\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "yeh bil-tarteeb order 1, 2 aur 3 ki square matrices hain. Square matrix ka order aksar sirf ek number se bata dete hain: \"order 3\" ka matlab \\(3 \\times 3\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Ek matrix kai qisamon mein ek saath aa sakti hai. Row matrix \\([1\\ \\ -1\\ \\ 3\\ \\ 4]\\) rectangular bhi hai (order \\(1 \\times 4\\), aur \\(1 \\ne 4\\)). Aur \\([0]\\) square bhi hai aur (aage dekhenge) null bhi.\nEk zaroori baat: diagonal sirf square matrix ka hota hai. Is liye aage aane wali definitions (diagonal, scalar, identity) sab square matrices ke baare mein hain."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Principal and Secondary Diagonals"
+          },
+          {
+            "type": "paragraph",
+            "text": "Maan lijiye \\(A = [a_{ij}]\\) order \\(n\\) ki square matrix hai. To entries \\(a_{11}, a_{22}, a_{33}, \\ldots, a_{nn}\\) matrix \\(A\\) ka principal diagonal (asal tircha) banati hain, aur entries \\(a_{1n}, a_{2\\,n-1}, a_{3\\,n-2}, \\ldots, a_{n-1\\,2}, a_{n1}\\) secondary diagonal banati hain. Misaal ke tor par neeche figure wali order 4 ki matrix mein principal diagonal ki entries \\(a_{11}, a_{22}, a_{33}, a_{44}\\) hain aur secondary diagonal ki entries \\(a_{14}, a_{23}, a_{32}, a_{41}\\) hain."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch4-fig-diagonals",
+            "alt": "A 4 by 4 matrix with entries a11 to a44. A pink band runs from the top-left entry a11 to the bottom-right entry a44 through a22 and a33: the principal diagonal. A blue band runs from the top-right entry a14 to the bottom-left entry a41 through a23 and a32: the secondary diagonal.",
+            "caption": "Figure: principal (pink) and secondary (blue) diagonals of a square matrix of order 4 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Square matrix ke principal diagonal ko leading diagonal ya main diagonal bhi kehte hain. Figure mein pink patti principal diagonal hai: oopar baayen kone se neeche daayen kone tak. Neeli patti secondary diagonal hai: oopar daayen se neeche baayen tak."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Pehchanne ki chaabi subscripts mein hai. Principal diagonal par dono subscripts barabar hote hain (\\(i = j\\)): 11, 22, 33, 44. Secondary diagonal par dono subscripts ka jor \\(n + 1\\) hota hai: figure mein \\(1 + 4 = 2 + 3 = 3 + 2 = 4 + 1 = 5\\).\nJab kitab sirf \"diagonal\" kahe, bina kisi aur lafz ke, to matlab hamesha principal diagonal hota hai.\nDhyan dein: secondary diagonal ka formula \\(a_{1n}, a_{2\\,n-1}, \\ldots\\) dekh kar ghabraiye mat. Iska matlab sirf itna hai ke row number ek ek barhta hai aur column number ek ek ghatta hai: pehli row ka aakhri column, doosri row ka aakhri se pehla column, aur isi tarah. Order 3 ki matrix mein yeh \\(a_{13}, a_{22}, a_{31}\\) hain; ghor kijiye ke \\(a_{22}\\) dono diagonals par hai, kyun ke beech wala element dono lakeeron ke milap par hota hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Diagonal Matrix"
+          },
+          {
+            "type": "paragraph",
+            "text": "Maan lijiye \\(A = [a_{ij}]\\) order \\(n\\) ki square matrix hai. Agar tamam \\(i \\ne j\\) ke liye \\(a_{ij} = 0\\) ho (yani principal diagonal se bahar har entry zero ho) aur \\(i = j\\) ke liye kam az kam ek \\(a_{ij} \\ne 0\\) ho (yani principal diagonal ki kuch entries zero ho sakti hain magar sab nahin), to \\(A\\) ko diagonal matrix kehte hain. Yeh matrices"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[[7],\\quad \\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 5\\end{bmatrix}\\]\n\\[\\text{aur } \\begin{bmatrix}0 & 0 & 0 & 0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 2 & 0 \\\\ 0 & 0 & 0 & 4\\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "diagonal matrices hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Aakhri misaal ko ghor se dekhiye: us ke diagonal ki pehli entry 0 hai, phir bhi woh diagonal matrix hai. Kyun? Kyun ke definition sirf do cheezein maangti hai: diagonal se bahar sab zero, aur diagonal par kam az kam ek entry non-zero. Yahan 1, 2, 4 non-zero hain, is liye shart poori.\nAur \\([7]\\)? Yeh \\(1 \\times 1\\) square matrix hai jis ka akela element hi diagonal hai, aur woh non-zero hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Scalar Matrix"
+          },
+          {
+            "type": "paragraph",
+            "text": "Maan lijiye \\(A = [a_{ij}]\\) order \\(n\\) ki square matrix hai. Agar tamam \\(i \\ne j\\) ke liye \\(a_{ij} = 0\\) ho aur tamam \\(i = j\\) ke liye \\(a_{ij} = k\\) ho (koi ek non-zero scalar, yani aam number), to \\(A\\) ko order \\(n\\) ki scalar matrix kehte hain. Asaan alfaaz mein: diagonal matrix jis ke diagonal par har jagah ek hi number ho. Misaal:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\begin{bmatrix}7 & 0 \\\\ 0 & 7\\end{bmatrix},\\quad \\begin{bmatrix}a & 0 & 0 \\\\ 0 & a & 0 \\\\ 0 & 0 & a\\end{bmatrix}\\]\n\\[(a \\ne 0) \\text{ aur } \\begin{bmatrix}3 & 0 & 0 & 0 \\\\ 0 & 3 & 0 & 0 \\\\ 0 & 0 & 3 & 0 \\\\ 0 & 0 & 0 & 3\\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "yeh bil-tarteeb order 2, 3 aur 4 ki scalar matrices hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Scalar matrix ka naam \"scalar\" kyun hai? Scalar ka matlab hai aam number (jaise 3 ya 7), jo matrix nahin. Aage aap dekhenge ke aisi matrix kisi doosri (usi order ki square) matrix se multiply ho kar bilkul waisa hi asar karti hai jaise woh aam number \\(k\\) karta, yani har entry ko \\(k\\) guna kar deti hai. Is liye yeh \"number jaisi\" matrix scalar matrix kehlati hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Unit Matrix or Identity Matrix"
+          },
+          {
+            "type": "paragraph",
+            "text": "Maan lijiye \\(A = [a_{ij}]\\) order \\(n\\) ki square matrix hai. Agar tamam \\(i \\ne j\\) ke liye \\(a_{ij} = 0\\) aur tamam \\(i = j\\) ke liye \\(a_{ij} = 1\\) ho, to \\(A\\) ko order \\(n\\) ki unit matrix ya identity matrix kehte hain. Ise \\(I_{n}\\) ya sirf \\(I\\) se dikhate hain, aur is ki shakal yeh hai:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[I_{n} = \\begin{bmatrix} 1 & 0 & 0 & \\cdots & 0 \\\\ 0 & 1 & 0 & \\cdots & 0 \\\\ 0 & 0 & 1 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\vdots & & \\vdots \\\\ 0 & 0 & 0 & \\cdots & 1 \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Order 3 ki identity matrix ko \\(I_{3}\\) likhte hain, yani"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[I_{3} = \\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1\\end{bmatrix}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh teeno qisamein ek doosre ke andar hain, jaise dabbe ke andar dabba. Har identity matrix scalar hai (\\(k = 1\\) ke saath), aur har scalar matrix diagonal hai (jis ke diagonal ki sab entries barabar hain). Lekin ulta sach nahin: \\(\\begin{bmatrix} 1 & 0 \\\\ 0 & 5 \\end{bmatrix}\\) diagonal hai magar scalar nahin (1 aur 5 barabar nahin), aur \\(\\begin{bmatrix} 7 & 0 \\\\ 0 & 7 \\end{bmatrix}\\) scalar hai magar identity nahin (7 hai, 1 nahin).\nIdentity matrix ka kaam aage pata chalega: matrices mein yeh wahi kaam karti hai jo numbers mein 1 karta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(\\begin{bmatrix} 0 & 0 \\\\ 0 & 0 \\end{bmatrix}\\) diagonal matrix hai ya nahin?\nJawab: nahin. Diagonal se bahar sab zero to hain, lekin diagonal par kam az kam ek non-zero entry honi chahiye, aur yahan sab zero hain. Yeh null matrix hai (agla heading)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Null Matrix or Zero Matrix"
+          },
+          {
+            "type": "paragraph",
+            "text": "Square ho ya rectangular, jis matrix ka har element zero ho use null ya zero matrix kehte hain. \\(m \\times n\\) order ki aisi matrix jis ke sab elements zero hon, \\(O_{m \\times n}\\) se dikhayi jati hai. Null matrices kisi bhi order ki ho sakti hain. Kuch misalein:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[[0],\\quad [0\\ \\ 0\\ \\ 0],\\quad \\begin{bmatrix}0 & 0 & 0 \\\\ 0 & 0 & 0\\end{bmatrix}\\]\n\\[\\begin{bmatrix}0 & 0 \\\\ 0 & 0\\end{bmatrix},\\quad \\begin{bmatrix}0 \\\\ 0 \\\\ 0\\end{bmatrix}\\]\n\\[\\begin{bmatrix}0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0\\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "yeh bil-tarteeb order \\(1,\\ 1 \\times 3,\\ 2 \\times 3,\\ 2 \\times 2,\\ 3 \\times 1,\\ 3 \\times 4\\) ki null matrices hain."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Agar koi uljhan na ho to kisi bhi order ki null matrix ko sirf \\(O\\) se dikhaya ja sakta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Null matrix matrices ki duniya ka \"zero\" hai: kisi matrix mein usi order ki null matrix jama karein to matrix wahi rehti hai. Yeh baat 4.3 mein property ban kar aayegi. Dhyan dein: null matrix ka order bhi maayne rakhta hai. \\([0\\ \\ 0]\\) aur \\(\\begin{bmatrix} 0 \\\\ 0 \\end{bmatrix}\\) dono null hain, lekin ek doosre ke barabar nahin, kyun ke ek \\(1 \\times 2\\) hai aur doosri \\(2 \\times 1\\). Jab hum sirf \\(O\\) likhte hain to us ka order wahi samjha jata hai jo sawal mein kaam aa raha ho."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Equal Matrices"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ek hi order ki do matrices barabar kehlati hain agar un ki corresponding (aamne saamne wali, same position wali) entries barabar hon. Misaal ke tor par \\(A = [a_{ij}]_{m \\times n}\\) aur \\(B = [b_{ij}]_{m \\times n}\\) barabar hain, yani \\(A = B\\), agar aur sirf agar (iff) \\(a_{ij} = b_{ij}\\) ho, tamam \\(i = 1, 2, 3, \\ldots, m;\\ j = 1, 2, 3, \\ldots, n\\) ke liye. Doosre alfaaz mein \\(A\\) aur \\(B\\) ek hi matrix hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Barabari check karne ke do qadam, isi tarteeb se: (1) kya order same hai? (2) kya har position par entries barabar hain?\n\\(\\begin{bmatrix} 1 & 2 \\end{bmatrix}\\) aur \\(\\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix}\\) mein numbers wahi hain, lekin yeh barabar nahin, kyun ke order \\(1 \\times 2\\) aur \\(2 \\times 1\\) alag hain.\nBarabari se unknowns bhi mil jate hain: agar \\(\\begin{bmatrix} x & 3 \\end{bmatrix} = \\begin{bmatrix} 5 & y \\end{bmatrix}\\) ho, to aamne saamne ki entries barabar rakhne se \\(x = 5\\) aur \\(y = 3\\). Yahi tareeqa exercises mein bohat kaam aata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari misaal hai, kitab ki nahin. Agar\n\\[\\begin{bmatrix} x+1 & 4 \\\\ 0 & 2y \\end{bmatrix} = \\begin{bmatrix}3 & 4 \\\\ 0 & 10\\end{bmatrix}\\]\nto \\(x\\) aur \\(y\\) kya hain?\nPehle order: dono \\(2 \\times 2\\), theek hai. Ab aamne saamne ki entries barabar rakhein: \\(x + 1 = 3\\), is liye \\(x = 2\\); aur \\(2y = 10\\), is liye \\(y = 5\\). Baqi entries (4 = 4, 0 = 0) pehle se barabar hain.\nTasdeeq: \\(x = 2\\) aur \\(y = 5\\) rakhein to baayen wali matrix \\(\\begin{bmatrix} 3 & 4 \\\\ 0 & 10 \\end{bmatrix}\\) ban jati hai, jo daayen wali hi hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Transpose of a Matrix"
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar \\(A\\) order \\(m \\times n\\) ki matrix ho, to \\(A\\) ki rows aur columns ko aapas mein badalne (interchange karne) se jo \\(n \\times m\\) matrix banti hai, use \\(A\\) ka transpose kehte hain. Ise \\(A^{t}\\) se dikhate hain. Agar \\(A = [a_{ij}]_{m \\times n}\\) ho to \\(A\\) ka transpose yun define hota hai:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[A^{t} = [a'_{ij}]_{n \\times m},\\]\n\\[a'_{ij} = a_{ji}\\]\njahan \\(i = 1, 2, 3, \\ldots, n\\) aur \\(j = 1, 2, 3, \\ldots, m\\). Matlab: transpose ki row \\(i\\), column \\(j\\) par woh entry aati hai jo asal matrix ki row \\(j\\), column \\(i\\) par thi. Subscripts ulat jate hain. Misaal ke tor par \\(a'_{12} = a_{21}\\): transpose ki pehli row, doosre column mein woh number baithta hai jo asal matrix ki doosri row, pehle column mein tha. Isi tarah \\(a'_{31} = a_{13}\\). Order bhi isi wajah se ulat jata hai: \\(m \\times n\\) ki jagah \\(n \\times m\\), kyun ke jitni rows thi utne columns ban gaye aur jitne columns thay utni rows."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal ke tor par, agar"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[B = \\begin{bmatrix} b_{11} & b_{12} & b_{13} & b_{14} \\\\ b_{21} & b_{22} & b_{23} & b_{24} \\\\ b_{31} & b_{32} & b_{33} & b_{34} \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "to \\(B^{t} = [b'_{ij}]_{4 \\times 3}\\), jahan \\(b'_{ij} = b_{ji}\\), \\(i = 1, 2, 3, 4\\) aur \\(j = 1, 2, 3\\) ke liye, yani"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[B^{t} = \\begin{bmatrix} b'_{11} & b'_{12} & b'_{13} \\\\ b'_{21} & b'_{22} & b'_{23} \\\\ b'_{31} & b'_{32} & b'_{33} \\\\ b'_{41} & b'_{42} & b'_{43} \\end{bmatrix}\\]\n\\[= \\begin{bmatrix} b_{11} & b_{21} & b_{31} \\\\ b_{12} & b_{22} & b_{32} \\\\ b_{13} & b_{23} & b_{33} \\\\ b_{14} & b_{24} & b_{34} \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ghor kijiye ke \\(B\\) ki doosri row ki entries bil-tarteeb \\(B^{t}\\) ke doosre column jaisi hain, aur \\(B^{t}\\) ki teesri row ki entries \\(B\\) ke teesre column jaisi hain, waghera. \\(B\\) ka order \\(3 \\times 4\\) tha, \\(B^{t}\\) ka \\(4 \\times 3\\) ho gaya."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kitab transpose ko \\(A^{t}\\) likhti hai (kahin kahin \\(A'\\) bhi chhapa hai); dono ka matlab ek hi hai. Transpose banane ka aasan tareeqa: pehli row ko pehla column bana do, doosri row ko doosra column, aur aage isi tarah. Jaise kisi ne table ko ghuma kar khara kar diya ho."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari misaal hai, kitab ki nahin.\n\\[A = \\begin{bmatrix}1 & 2 & 3 \\\\ 4 & 5 & 6\\end{bmatrix}\\]\nPehli row \\(1, 2, 3\\) pehla column banegi, doosri row \\(4, 5, 6\\) doosra column:\n\\[A^{t} = \\begin{bmatrix}1 & 4 \\\\ 2 & 5 \\\\ 3 & 6\\end{bmatrix}\\]\nOrder \\(2 \\times 3\\) se \\(3 \\times 2\\) ho gaya. Ab \\(A^{t}\\) ka phir transpose lein to wapas \\(A\\) mil jata hai: \\((A^{t})^{t} = A\\). Do baar ghumao to cheez wapas apni jagah!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Row matrix \\([1\\ \\ 2\\ \\ 3]\\) ka transpose kya hoga, aur us ka order?\nJawab: column matrix \\(\\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}\\), order \\(3 \\times 1\\). Yani row matrix ka transpose column matrix hota hai aur column matrix ka transpose row matrix.\nAur kisi square matrix ka transpose? Woh square hi rehti hai, aur us ka principal diagonal apni jagah par rehta hai, kyun ke \\(a_{ii}\\) ke subscripts ulat kar bhi wahi rehte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahin. Har matrix ki qisam pehchaniye, aur jitne naam lagte hain sab bataiye.\n(a) \\(\\begin{bmatrix} 4 & 0 \\\\ 0 & 4 \\end{bmatrix}\\): square, diagonal, scalar (\\(k = 4\\)). Identity nahin, kyun ke diagonal par 1 nahin balke 4 hai.\n(b) \\(\\begin{bmatrix} 0 & 0 & 0 \\end{bmatrix}\\): row matrix, rectangular (\\(1 \\times 3\\)) aur null matrix bhi.\n(c) \\(\\begin{bmatrix} 2 & 0 \\\\ 0 & -3 \\end{bmatrix}\\): square aur diagonal; scalar nahin, kyun ke 2 aur \\(-3\\) barabar nahin.\n(d) \\(\\begin{bmatrix} 1 & 2 \\\\ 0 & 1 \\end{bmatrix}\\): sirf square. Diagonal nahin, kyun ke diagonal se bahar wali entry 2 zero nahin hai.\nTareeqa yaad rakhiye: pehle order dekhiye (square hai ya nahin), phir diagonal se bahar ki entries (sab zero?), phir diagonal ki entries (barabar? sab 1?)."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Qisam",
+              "Shart",
+              "Misaal"
+            ],
+            "rows": [
+              [
+                "Row matrix",
+                "sirf ek row, order \\(1 \\times n\\)",
+                "\\([1\\ \\ -1\\ \\ 3\\ \\ 4]\\)"
+              ],
+              [
+                "Column matrix",
+                "sirf ek column, order \\(m \\times 1\\)",
+                "\\(\\begin{bmatrix} 2 \\\\ -1 \\\\ 3 \\end{bmatrix}\\)"
+              ],
+              [
+                "Rectangular",
+                "\\(m \\ne n\\) (rows aur columns barabar nahin)",
+                "order \\(2 \\times 3\\)"
+              ],
+              [
+                "Square",
+                "\\(m = n\\) (rows = columns)",
+                "order \\(2 \\times 2\\)"
+              ],
+              [
+                "Diagonal",
+                "square; diagonal se bahar sab 0, diagonal par sab 0 nahin",
+                "\\(\\begin{bmatrix} 1 & 0 \\\\ 0 & 5 \\end{bmatrix}\\)"
+              ],
+              [
+                "Scalar",
+                "diagonal, aur diagonal ki sab entries barabar \\(k \\ne 0\\)",
+                "\\(\\begin{bmatrix} 7 & 0 \\\\ 0 & 7 \\end{bmatrix}\\)"
+              ],
+              [
+                "Identity",
+                "scalar jis mein \\(k = 1\\)",
+                "\\(I_{2} = \\begin{bmatrix} 1 & 0 \\\\ 0 & 1 \\end{bmatrix}\\)"
+              ],
+              [
+                "Null (zero)",
+                "har entry 0, koi bhi order",
+                "\\(\\begin{bmatrix} 0 & 0 \\end{bmatrix}\\)"
+              ]
+            ],
+            "caption": "Matrices ki qisamein ek nazar mein (upar ki definitions ka hamara khulasa)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Matrix numbers ki rectangular tarteeb hai jo brackets mein band ho; aari lakeerein rows, khari lakeerein columns.\n2. Order \\(m \\times n\\) = \\(m\\) rows aur \\(n\\) columns; hamesha pehle rows.\n3. \\(a_{ij}\\) = row \\(i\\), column \\(j\\) wali entry; matrix ko \\(A = [a_{ij}]_{m \\times n}\\) likhte hain.\n4. Row matrix \\(1 \\times n\\); column matrix \\(m \\times 1\\); rectangular \\(m \\ne n\\); square \\(m = n\\).\n5. Principal diagonal: \\(a_{11}, a_{22}, \\ldots, a_{nn}\\) (subscripts barabar); secondary diagonal: oopar daayen se neeche baayen.\n6. Identity, scalar ke andar hai, aur scalar, diagonal ke andar; teeno square hoti hain.\n7. Null matrix \\(O\\): har entry zero, koi bhi order.\n8. Barabar matrices: same order aur har position par same entry.\n9. Transpose \\(A^{t}\\): rows columns ban jati hain; \\(m \\times n\\) se \\(n \\times m\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Order ulta likhna: 2 rows aur 3 columns wali matrix \\(2 \\times 3\\) hai, \\(3 \\times 2\\) nahin. Bachne ka tareeqa: pehle rows gino, phir columns.\n2. \\(a_{23}\\) ko column 2, row 3 samajhna. Pehla subscript hamesha row hai.\n3. Non-square matrix ko diagonal, scalar ya identity kehna. Yeh teeno sirf square matrices ke naam hain.\n4. Sirf numbers dekh kar matrices ko barabar keh dena. Pehle order check kijiye.\n5. Transpose banate waqt numbers ki tarteeb ulti kar dena (jaise \\(1, 2, 3\\) ko \\(3, 2, 1\\)). Transpose mein rows columns banti hain, numbers ulte nahin hote."
+          }
+        ]
+      }
+    }
+  ]
+}

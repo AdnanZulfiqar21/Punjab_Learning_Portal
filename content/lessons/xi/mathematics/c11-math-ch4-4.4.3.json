@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.4.3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.4.3",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 61,
+          "pdf_to": 62,
+          "note": "Book p. 56-57: 4.4.3 Properties of Determinants i-viii, Note on triangular matrices, Example 6; callouts marked Teaching note / Key points / Common mistake are ours."
+        }
+      ],
+      "title": "4.4.3 Properties of Determinants",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Expanding a determinant of order 3 takes time and invites sign errors. The properties below let us simplify a determinant first, or even find its value without expanding it. In the list, \\(R_{1}, R_{2}, R_{3}\\) stand for rows and \\(C_{1}, C_{2}, C_{3}\\) for columns."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "i. For a square matrix \\(A\\), \\(|A| = |A^{t}|\\).",
+              "ii. If in a square matrix \\(A\\), two rows or two columns are interchanged, the determinant of the resulting matrix is \\(-|A|\\).",
+              "iii. If a square matrix \\(A\\) has two identical rows or two identical columns, then \\(|A| = 0\\).",
+              "iv. If all the entries of a row (or a column) of a square matrix \\(A\\) are zero, then \\(|A| = 0\\).",
+              "v. If the entries of a row (or a column) in a square matrix \\(A\\) are multiplied by a number \\(k \\in \\mathbb{R}\\), then the determinant of the resulting matrix is \\(k|A|\\).",
+              "vi. If each entry of a row (or a column) of a square matrix consists of two terms, then its determinant can be written as the sum of two determinants (see below)."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "For property vi: if"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[B = \\begin{bmatrix} a_{11}+b_{11} & a_{12} & a_{13} \\\\ a_{21}+b_{21} & a_{22} & a_{23} \\\\ a_{31}+b_{31} & a_{32} & a_{33} \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "then"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|B| =\\]\n\\[\\begin{vmatrix} a_{11}+b_{11} & a_{12} & a_{13} \\\\ a_{21}+b_{21} & a_{22} & a_{23} \\\\ a_{31}+b_{31} & a_{32} & a_{33} \\end{vmatrix}\\]\n\\[= \\begin{vmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{vmatrix}\\]\n\\[+ \\begin{vmatrix} b_{11} & a_{12} & a_{13} \\\\ b_{21} & a_{22} & a_{23} \\\\ b_{31} & a_{32} & a_{33} \\end{vmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\begin{vmatrix} a_{11}+b_{11} & a_{12} & a_{13} \\\\ a_{21}+b_{21} & a_{22} & a_{23} \\\\ a_{31}+b_{31} & a_{32} & a_{33} \\end{vmatrix}\\]\n\\[= \\begin{vmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{vmatrix}\\]\n\\[+ \\begin{vmatrix} b_{11} & a_{12} & a_{13} \\\\ b_{21} & a_{22} & a_{23} \\\\ b_{31} & a_{32} & a_{33} \\end{vmatrix}\\]",
+            "book_errors": [
+              "\\[\\begin{vmatrix} a_{11}+b_{11} & a_{12} & a_{13} \\\\ a_{21}+b_{21} & a_{22} & a_{23} \\\\ a_{31}+b_{31} & a_{32} & a_{33} \\end{vmatrix}\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the equation of property vi twice: once with \\(|B| =\\) in front and once more, directly below, without it. The second line is a repetition; the property needs the equation only once."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "vii. If any row (column) of a determinant is multiplied by a non-zero number \\(k\\) and the result is added to the corresponding entries of another row (column), the value of the determinant does not change.",
+              "viii. If a matrix is in triangular form, then the value of its determinant is the product of the entries on its main diagonal."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "We shall define triangular matrices on following pages."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why do these hold? Most follow from expansion. For example, iv: expand along the zero row and every term has a factor 0. iii: interchanging the two identical rows changes nothing, yet by ii it changes the sign, so \\(|A| = -|A|\\), which forces \\(|A| = 0\\). v: expand along the multiplied row and \\(k\\) comes out of every term.\nTwo uses of v: a common factor of a row or column can be taken outside the determinant, and a determinant with one row a multiple of another is 0 (take the factor out, then two rows are identical)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our own illustration (not from the book). For\n\\[P = \\begin{bmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 10 \\end{bmatrix}\\]\nwe get \\(|P| = 1(50 - 48) - 2(40 - 42) + 3(32 - 35) = 2 + 4 - 9 = -3\\). Then:\ni. \\(|P^{t}| = -3\\) (same value).\nii. Interchange \\(R_{1}\\) and \\(R_{2}\\): the value becomes \\(3\\).\nv. Multiply \\(R_{1}\\) by 2: the value becomes \\(-6\\).\nvii. \\(R_{2} - 4R_{1} \\to R_{2}\\) gives rows \\(1, 2, 3\\); \\(0, -3, -6\\); \\(7, 8, 10\\): the value is still \\(-3\\).\nviii. A triangular example: \\(\\begin{vmatrix} 2 & 5 & 7 \\\\ 0 & 3 & 1 \\\\ 0 & 0 & 4 \\end{vmatrix} = 2 \\times 3 \\times 4 = 24\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Without expansion, show that \\(\\begin{vmatrix} x & a+x & b+c \\\\ x & b+x & c+a \\\\ x & c+x & a+b \\end{vmatrix} = 0\\)",
+            "steps": [
+              "Given: the determinant\n\\[\\begin{vmatrix} x & a+x & b+c \\\\ x & b+x & c+a \\\\ x & c+x & a+b \\end{vmatrix}\\]\nTo prove: its value is 0, without expanding it.\nMethod: use the properties. If we can make two columns identical, property iii gives 0 at once. Adding \\(C_{3}\\) to \\(C_{2}\\) (property vii) makes every entry of \\(C_{2}\\) equal to \\(a + b + c + x\\).",
+              "Step 1: Add the entries of \\(C_{3}\\) to the corresponding entries of \\(C_{2}\\)\n\\[= \\begin{vmatrix} x & a+b+c+x & b+c \\\\ x & a+b+c+x & c+a \\\\ x & a+b+c+x & a+b \\end{vmatrix}\\]\nWhy: \\((a + x) + (b + c)\\), \\((b + x) + (c + a)\\) and \\((c + x) + (a + b)\\) all equal \\(a + b + c + x\\). By property vii (with \\(k = 1\\)) this does not change the value.",
+              "Step 2: Take common factors out of \\(C_{1}\\) and \\(C_{2}\\)\n\\[= x(a+b+c+x)\\begin{vmatrix} 1 & 1 & b+c \\\\ 1 & 1 & c+a \\\\ 1 & 1 & a+b \\end{vmatrix}\\]\nWhy: \\(x\\) is common to all of \\(C_{1}\\), and \\(a + b + c + x\\) is common to all of \\(C_{2}\\). By property v a common factor of one column comes outside the determinant.",
+              "Step 3: Two identical columns\n\\[= x(a+b+c+x) \\cdot 0\\]\n\\[= 0\\]\nWhy: now \\(C_{1}\\) and \\(C_{2}\\) are identical (both \\(1, 1, 1\\)), so the determinant is 0 by property iii.",
+              "Check:\nExpanding fully (which the question did not ask for) gives the same: each of the six products of formula (vii) cancels with another, and a computer algebra check gives 0 for all \\(a, b, c, x\\). For example, with \\(x = 1, a = 2, b = 3, c = 4\\) the rows are \\(1, 3, 7\\); \\(1, 4, 6\\); \\(1, 5, 5\\), and\n\\[1(20 - 30) - 3(5 - 6) + 7(5 - 4)\\]\n\\[= -10 + 3 + 7 = 0\\]"
+            ],
+            "answer": "Hence proved: \\(\\begin{vmatrix} x & a+x & b+c \\\\ x & b+x & c+a \\\\ x & c+x & a+b \\end{vmatrix} = 0\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Transposing: value unchanged. Interchanging two rows (columns): sign changes.\n2. Two identical rows (columns), or a zero row (column): value 0.\n3. A common factor of one row (column) comes outside: \\(k|A|\\).\n4. Adding \\(k\\) times one row (column) to another: value unchanged. This is how zeros are created before expanding.\n5. Triangular matrix: product of the main-diagonal entries.\n6. \"Without expansion\" means: use these properties to reach two identical rows/columns or a zero row/column."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Taking \\(k\\) out of the whole matrix: \\(|kA| = k^{3}|A|\\) for order 3, not \\(k|A|\\). Property v is about ONE row or column.\n2. Forgetting the sign change when interchanging two rows.\n3. Changing the row being added to: in \\(R_{2} + kR_{1} \\to R_{2}\\) only \\(R_{2}\\) changes; \\(R_{1}\\) stays as it was.\n4. Splitting a determinant (property vi) in two rows at once: split one row or column at a time."
+          }
+        ]
+      }
+    }
+  ]
+}

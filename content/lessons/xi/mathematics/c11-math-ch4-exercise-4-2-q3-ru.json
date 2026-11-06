@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-2-Q3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-2-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 64,
+          "pdf_to": 65,
+          "note": "Exercise 4.2, Question 3: Show that: ten determinant identities, parts (i)-(x) (book pages 59-60)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH4-EXERCISE-4-2-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Show that: \\(\\begin{vmatrix} 3 & 5 & 0 \\\\ 5 & 25 & 10 \\\\ 7 & 25 & 1 \\end{vmatrix} = 25\\begin{vmatrix} 3 & 1 & 0 \\\\ 1 & 1 & 2 \\\\ 7 & 5 & 1 \\end{vmatrix}\\)",
+            "explanation": "Yahan do number wale determinants ka rishta dikhana hai: left wala right wale ka 25 guna hai.\n25 kahan se aayega? \\(5 \\times 5\\). Column 2 (\\(5, 25, 25\\)) mein 5 common hai, aur us ke baad row 2 mein bhi 5 common ho jata hai.\nPlan: pehle \\(C_2\\) se 5, phir \\(R_2\\) se 5 bahar nikalein.",
+            "steps": [
+              "Diya gaya hai: \\(\\Delta = \\begin{vmatrix} 3 & 5 & 0 \\\\ 5 & 25 & 10 \\\\ 7 & 25 & 1 \\end{vmatrix}\\)\nSaabit karna hai: \\(\\Delta = 25\\begin{vmatrix} 3 & 1 & 0 \\\\ 1 & 1 & 2 \\\\ 7 & 5 & 1 \\end{vmatrix}\\)\nTareeqa: Property v do dafa: row ya column ka common factor determinant ke bahar aa jata hai. Is sawal mein expand karne ki zaroorat hi nahi.",
+              "Column 2 se 5 bahar nikalein\n\\[\\Delta = 5\\begin{vmatrix} 3 & 1 & 0 \\\\ 5 & 5 & 10 \\\\ 7 & 5 & 1 \\end{vmatrix}\\]\nKyun: \\(5 = 5 \\cdot 1\\), \\(25 = 5 \\cdot 5\\), \\(25 = 5 \\cdot 5\\). Is liye column 2 ki entries \\(1, 5, 5\\) ban gayin.",
+              "Row 2 se 5 bahar nikalein\n\\[\\Delta = 5 \\cdot 5\\begin{vmatrix} 3 & 1 & 0 \\\\ 1 & 1 & 2 \\\\ 7 & 5 & 1 \\end{vmatrix}\\]\n\\[= 25\\begin{vmatrix} 3 & 1 & 0 \\\\ 1 & 1 & 2 \\\\ 7 & 5 & 1 \\end{vmatrix}\\]\nKyun: Ab row 2 hai \\(5, 5, 10\\), jis mein 5 common hai: \\(5(1, 1, 2)\\). Do dafa 5 bahar aaya, yani 25, aur bacha hua determinant bilkul right side wala hai.\nDhyan dein: Ek factor ek hi line (row ya column) se nikalta hai. Pehle column se nikala, phir nayi row dekh kar doosra nikala.",
+              "Tasdeeq (dono values nikal kar)\n\\[\\begin{vmatrix} 3 & 1 & 0 \\\\ 1 & 1 & 2 \\\\ 7 & 5 & 1 \\end{vmatrix} = 3(1 - 10) - 1(1 - 14) + 0\\]\n\\[= -27 + 13 = -14\\]\n\\[\\Delta = 3(25 - 250) - 5(5 - 70) + 0 = -675 + 325 = -350\\]\n\\[25 \\times (-14) = -350 \\;\\checkmark\\]\nKyun: Dono taraf row 1 ke along expand kiya; dono ka rishta 25 guna hi nikla."
+            ],
+            "final_answer": "Saabit ho gaya: dono taraf \\(-350\\) hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Show that: \\(\\begin{vmatrix} a+b & a & a \\\\ a & a+b & a \\\\ a & a & a+b \\end{vmatrix} = b^2(3a+b)\\)",
+            "explanation": "Letters wala determinant hai aur jawab \\(b^2(3a+b)\\) dikhana hai.\nHar row ka total dekhein: \\((a+b) + a + a = 3a + b\\). Yeh har row mein same hai, is liye columns jama karne se common factor milega.\nPlan: \\(C_1 + C_2 + C_3 \\to C_1\\), \\(3a+b\\) bahar, zeros banayein, triangular determinant ki diagonal multiply karein.",
+            "steps": [
+              "Diya gaya hai: \\(\\Delta = \\begin{vmatrix} a+b & a & a \\\\ a & a+b & a \\\\ a & a & a+b \\end{vmatrix}\\)\nSaabit karna hai: \\(\\Delta = b^2(3a+b)\\)\nTareeqa: Property vii (columns jama), Property v (factor bahar), Property viii (triangular determinant = diagonal entries ka product). Jawab mein \\((3a + b)\\) ka factor khud ishara de raha hai ke yeh row total hai.",
+              "Teeno columns ko column 1 mein jama karein\n\\[C_1 + C_2 + C_3 \\to C_1\\]\n\\[\\Delta = \\begin{vmatrix} 3a+b & a & a \\\\ 3a+b & a+b & a \\\\ 3a+b & a & a+b \\end{vmatrix}\\]\nKyun: Har row ka total \\(3a + b\\) hai. Property vii se value nahi badli.",
+              "Column 1 se \\(3a+b\\) bahar nikalein\n\\[\\Delta = (3a+b)\\begin{vmatrix} 1 & a & a \\\\ 1 & a+b & a \\\\ 1 & a & a+b \\end{vmatrix}\\]\nKyun: Property v. Ab column 1 mein sirf 1 hain, jo zeros banane ke liye behtareen hain.",
+              "Row 1 ko row 2 aur 3 mein se minus karein\n\\[R_2 - R_1 \\to R_2,\\quad R_3 - R_1 \\to R_3\\]\n\\[\\Delta = (3a+b)\\begin{vmatrix} 1 & a & a \\\\ 0 & b & 0 \\\\ 0 & 0 & b \\end{vmatrix}\\]\nKyun: \\((a+b) - a = b\\) aur \\(a - a = 0\\). Ab diagonal ke neeche sab zero hain; yeh upper triangular shakal hai.",
+              "Diagonal multiply karein\n\\[\\Delta = (3a+b)(1 \\cdot b \\cdot b)\\]\n\\[= b^2(3a+b)\\]\nKyun: Property viii: triangular determinant ki value diagonal entries ka product hoti hai. Chahein to column 1 ke along expand kar ke bhi \\(1(b \\cdot b - 0) = b^2\\) milta hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\Delta = b^2(3a+b)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) Show that: \\(\\begin{vmatrix} 1 & x & yz \\\\ 1 & y & zx \\\\ 1 & z & xy \\end{vmatrix} = \\begin{vmatrix} 1 & x & x^2 \\\\ 1 & y & y^2 \\\\ 1 & z & z^2 \\end{vmatrix}\\)",
+            "explanation": "Do letters wale determinants ki barabari dikhani hai.\nRight side mein \\(x^2\\) hai aur left mein \\(yz\\). Row 1 ko \\(x\\) se multiply karein to \\(x \\to x^2\\) aur \\(yz \\to xyz\\) ban jata hai; row 2 ko \\(y\\) aur row 3 ko \\(z\\) se karein to bhi yahi hota hai.\nPlan: rows ko \\(x, y, z\\) se multiply, \\(C_3\\) se \\(xyz\\) bahar, phir \\(C_3\\) ko aage le aayein.",
+            "steps": [
+              "Diya gaya hai: \\(\\Delta = \\begin{vmatrix} 1 & x & yz \\\\ 1 & y & zx \\\\ 1 & z & xy \\end{vmatrix}\\)\nSaabit karna hai: \\(\\Delta = \\begin{vmatrix} 1 & x & x^2 \\\\ 1 & y & y^2 \\\\ 1 & z & z^2 \\end{vmatrix}\\)\nTareeqa: Property v (rows multiply karna aur factor bahar nikalna) aur Property ii (do columns ka interchange sign badal deta hai). Hum \\(x, y, z \\neq 0\\) maante hain kyunke un se multiply/divide karna hai.",
+              "\\(R_1\\) ko \\(x\\), \\(R_2\\) ko \\(y\\), \\(R_3\\) ko \\(z\\) se multiply karein\n\\[\\Delta = \\dfrac{1}{xyz}\\begin{vmatrix} x & x^2 & xyz \\\\ y & y^2 & xyz \\\\ z & z^2 & xyz \\end{vmatrix}\\]\nKyun: \\(yz \\cdot x = xyz\\), \\(zx \\cdot y = xyz\\), \\(xy \\cdot z = xyz\\). Value \\(xyz\\) guna hui, is liye barabari ke liye bahar \\(\\frac{1}{xyz}\\).",
+              "Column 3 se \\(xyz\\) bahar nikalein\n\\[\\Delta = \\begin{vmatrix} x & x^2 & 1 \\\\ y & y^2 & 1 \\\\ z & z^2 & 1 \\end{vmatrix}\\]\nKyun: Property v; \\(\\frac{xyz}{xyz} = 1\\). Ab sab cheezein right side wali hain, bas column ki tarteeb alag hai.",
+              "Column 3 ko aage le aayein\n\\[C_3 \\leftrightarrow C_2:\\ \\ -\\begin{vmatrix} x & 1 & x^2 \\\\ y & 1 & y^2 \\\\ z & 1 & z^2 \\end{vmatrix}\\]\n\\[C_2 \\leftrightarrow C_1:\\ \\ +\\begin{vmatrix} 1 & x & x^2 \\\\ 1 & y & y^2 \\\\ 1 & z & z^2 \\end{vmatrix}\\]\nKyun: Property ii: har interchange par sign badalta hai. Do interchange hue, to sign do dafa badal kar wapas plus ho gaya.\nDhyan dein: Agar aap \\(C_1\\) aur \\(C_3\\) ko seedha badal dein to \\(1, x^2, x\\) wali ghalat tarteeb banti hai; columns ko ek ek qadam aage peeche karein aur har qadam par sign ginein."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\Delta = \\begin{vmatrix} 1 & x & x^2 \\\\ 1 & y & y^2 \\\\ 1 & z & z^2 \\end{vmatrix}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iv)",
+            "prompt": "3 (iv) Show that: \\(\\begin{vmatrix} m+n & l & l \\\\ m & n+l & m \\\\ n & n & l+m \\end{vmatrix} = 4lmn\\)",
+            "explanation": "Jawab \\(4lmn\\) dikhana hai.\nGhaur karein: column 1 mein \\(m + n,\\ m,\\ n\\) hain. Row 1 mein se row 2 aur row 3 minus karein to pehli entry zero ho jayegi aur baaqi entries bhi simple ban jayengi.\nPlan: \\(R_1 - R_2 - R_3 \\to R_1\\), phir row 1 ke along expand.",
+            "steps": [
+              "Diya gaya hai: \\(\\Delta = \\begin{vmatrix} m+n & l & l \\\\ m & n+l & m \\\\ n & n & l+m \\end{vmatrix}\\)\nSaabit karna hai: \\(\\Delta = 4lmn\\)\nTareeqa: Property vii se ek zero banana, phir expansion. Zero wali row ke along expand karne se ek term khatam ho jati hai.",
+              "Row 1 mein se row 2 aur row 3 minus karein\n\\[R_1 - R_2 - R_3 \\to R_1\\]\n\\[\\Delta = \\begin{vmatrix} 0 & -2n & -2m \\\\ m & n+l & m \\\\ n & n & l+m \\end{vmatrix}\\]\nKyun: Column 1: \\((m+n) - m - n = 0\\); column 2: \\(l - (n+l) - n = -2n\\); column 3: \\(l - m - (l+m) = -2m\\). Property vii se value wohi.\nDhyan dein: Bracket ke saath minus ho to andar ke sab signs badalte hain: \\(-(n+l) = -n - l\\).",
+              "Row 1 ke along expand karein\n\\[\\Delta = 0 - (-2n)\\begin{vmatrix} m & m \\\\ n & l+m \\end{vmatrix} + (-2m)\\begin{vmatrix} m & n+l \\\\ n & n \\end{vmatrix}\\]\nKyun: Signs \\(+,\\,-,\\,+\\). Pehli entry zero hai, us ki term khatam.",
+              "Dono minors nikalein\n\\[\\begin{vmatrix} m & m \\\\ n & l+m \\end{vmatrix} = ml + m^2 - mn\\]\n\\[\\begin{vmatrix} m & n+l \\\\ n & n \\end{vmatrix} = mn - n^2 - nl\\]\nKyun: \\(2 \\times 2\\) rule: \\(m(l+m) - m \\cdot n\\) aur \\(m \\cdot n - n(n+l)\\).",
+              "Multiply kar ke simplify karein\n\\[\\Delta = 2n(ml + m^2 - mn) - 2m(mn - n^2 - nl)\\]\n\\[= 2lmn + 2m^2n - 2mn^2 - 2m^2n + 2mn^2 + 2lmn\\]\n\\[= 4lmn\\]\nKyun: \\(-(-2n) = +2n\\). Phir \\(2m^2n\\) aur \\(-2m^2n\\), \\(-2mn^2\\) aur \\(+2mn^2\\) jore bana kar cancel ho gaye; sirf \\(2lmn + 2lmn\\) bacha.",
+              "Tasdeeq (numbers rakh kar)\n\\[l = m = n = 1:\\ \\begin{vmatrix} 2 & 1 & 1 \\\\ 1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{vmatrix} = 4\\]\n\\[4lmn = 4 \\;\\checkmark\\]\nKyun: Yeh wohi determinant hai jo Sawal 1(vi) mein aaya tha, aur us ki value 4 thi."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\Delta = 4lmn\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(v)",
+            "prompt": "3 (v) Show that: \\(\\begin{vmatrix} y & -1 & x \\\\ x & y & 0 \\\\ 1 & x & y \\end{vmatrix} = x^3 + y^3\\)",
+            "explanation": "Jawab \\(x^3 + y^3\\) dikhana hai.\nYeh chhota sa determinant hai; expansion seedha aur chhota hai, is liye properties ki zaroorat nahi.\nPlan: row 1 ke along expand karein aur simplify.",
+            "steps": [
+              "Diya gaya hai: \\(\\Delta = \\begin{vmatrix} y & -1 & x \\\\ x & y & 0 \\\\ 1 & x & y \\end{vmatrix}\\)\nSaabit karna hai: \\(\\Delta = x^3 + y^3\\)\nTareeqa: Row 1 ke along expansion, signs \\(+,\\,-,\\,+\\). Middle entry khud \\(-1\\) hai, is liye do minus mil kar plus banenge.",
+              "Row 1 ke along expand karein\n\\[\\Delta = y\\begin{vmatrix} y & 0 \\\\ x & y \\end{vmatrix} - (-1)\\begin{vmatrix} x & 0 \\\\ 1 & y \\end{vmatrix} + x\\begin{vmatrix} x & y \\\\ 1 & x \\end{vmatrix}\\]\nKyun: Har entry ko us ke signed minor se multiply kiya.",
+              "Minors nikal kar simplify karein\n\\[= y(y^2 - 0) + 1(xy - 0) + x(x^2 - y)\\]\n\\[= y^3 + xy + x^3 - xy\\]\n\\[= x^3 + y^3\\]\nKyun: Har \\(2 \\times 2\\) mein diagonal product minus doosra diagonal. \\(+xy\\) aur \\(-xy\\) cancel ho gaye.",
+              "Tasdeeq (numbers rakh kar)\n\\[x = 1,\\ y = 2:\\ \\begin{vmatrix} 2 & -1 & 1 \\\\ 1 & 2 & 0 \\\\ 1 & 1 & 2 \\end{vmatrix} = 8 + 2 - 1 = 9\\]\n\\[x^3 + y^3 = 1 + 8 = 9 \\;\\checkmark\\]\nKyun: Row 1 expansion: \\(2(4 - 0) + 1(2 - 0) + 1(1 - 2) = 9\\). Dono barabar."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\Delta = x^3 + y^3\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(vi)",
+            "prompt": "3 (vi) Show that: \\(\\begin{vmatrix} r\\cos\\theta & 1 & -\\sin\\theta \\\\ 0 & 1 & 0 \\\\ r\\sin\\theta & 0 & \\cos\\theta \\end{vmatrix} = r\\)",
+            "explanation": "Jawab \\(r\\) dikhana hai; is mein trigonometry bhi hai.\nRow 2 dekhein: \\(0, 1, 0\\). Sirf ek entry non-zero hai, to usi row ke along expand karna sab se tez hai.\nPlan: row 2 ke along expand, phir \\(\\cos^2\\theta + \\sin^2\\theta = 1\\).",
+            "steps": [
+              "Diya gaya hai: \\(\\Delta = \\begin{vmatrix} r\\cos\\theta & 1 & -\\sin\\theta \\\\ 0 & 1 & 0 \\\\ r\\sin\\theta & 0 & \\cos\\theta \\end{vmatrix}\\)\nSaabit karna hai: \\(\\Delta = r\\)\nTareeqa: Sab se zyada zero wali row (row 2) ke along expansion. Row 2 ke signs \\(-,\\,+,\\,-\\) hain.",
+              "Row 2 ke along expand karein\n\\[\\Delta = (+1)\\begin{vmatrix} r\\cos\\theta & -\\sin\\theta \\\\ r\\sin\\theta & \\cos\\theta \\end{vmatrix}\\]\nKyun: Zero entries kuch nahi deti. 1 position \\((2,2)\\) par hai, sign \\((-1)^{2+2} = +\\). Minor ke liye row 2 aur column 2 chhupaya.",
+              "Minor nikalein\n\\[= r\\cos^2\\theta - (-\\sin\\theta)(r\\sin\\theta)\\]\n\\[= r\\cos^2\\theta + r\\sin^2\\theta\\]\n\\[= r(\\cos^2\\theta + \\sin^2\\theta) = r\\]\nKyun: \\(2 \\times 2\\) rule, phir \\(r\\) common, aur mashhoor identity \\(\\cos^2\\theta + \\sin^2\\theta = 1\\)."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\Delta = r\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(vii)",
+            "prompt": "3 (vii) Show that: \\(\\begin{vmatrix} a & b & c \\\\ b+c & c+a & a+b \\\\ a+b & b+c & c+a \\end{vmatrix} = a^3 + b^3 + c^3 - 3abc\\)",
+            "explanation": "Jawab \\(a^3 + b^3 + c^3 - 3abc\\) dikhana hai. Yeh expression \\((a+b+c)\\) ka factor rakhti hai, is liye pehle yahi factor nikalne ki koshish karenge.\nRow 1 ko row 2 mein jama karein to row 2 ki har entry \\(a + b + c\\) ban jati hai.\nPlan: \\(R_2 + R_1 \\to R_2\\), factor bahar, row 2 mein zeros, expand, aur identity lagayein.",
+            "steps": [
+              "Diya gaya hai: \\(\\Delta = \\begin{vmatrix} a & b & c \\\\ b+c & c+a & a+b \\\\ a+b & b+c & c+a \\end{vmatrix}\\)\nSaabit karna hai: \\(\\Delta = a^3 + b^3 + c^3 - 3abc\\)\nTareeqa: Property vii aur v, phir expansion, aur aakhir mein identity \\(a^3 + b^3 + c^3 - 3abc = (a+b+c)(a^2+b^2+c^2-ab-bc-ca)\\).",
+              "Row 1 ko row 2 mein jama karein\n\\[R_2 + R_1 \\to R_2\\]\n\\[\\Delta = \\begin{vmatrix} a & b & c \\\\ a+b+c & a+b+c & a+b+c \\\\ a+b & b+c & c+a \\end{vmatrix}\\]\nKyun: \\((b+c) + a\\), \\((c+a) + b\\), \\((a+b) + c\\) teeno \\(a + b + c\\) hain. Property vii.",
+              "Row 2 se \\(a+b+c\\) bahar nikalein\n\\[\\Delta = (a+b+c)\\begin{vmatrix} a & b & c \\\\ 1 & 1 & 1 \\\\ a+b & b+c & c+a \\end{vmatrix}\\]\nKyun: Property v.",
+              "Row 2 mein zeros banayein\n\\[C_2 - C_1 \\to C_2,\\quad C_3 - C_1 \\to C_3\\]\n\\[\\Delta = (a+b+c)\\begin{vmatrix} a & b-a & c-a \\\\ 1 & 0 & 0 \\\\ a+b & c-a & c-b \\end{vmatrix}\\]\nKyun: Row 2 mein \\(1 - 1 = 0\\). Row 3: \\((b+c) - (a+b) = c - a\\), \\((c+a) - (a+b) = c - b\\).",
+              "Row 2 ke along expand karein\n\\[\\Delta = (a+b+c)(-1)\\begin{vmatrix} b-a & c-a \\\\ c-a & c-b \\end{vmatrix}\\]\n\\[= (a+b+c)\\,[(c-a)^2 - (b-a)(c-b)]\\]\nKyun: 1 position \\((2,1)\\) par hai, sign minus. Minus lagne se \\(2 \\times 2\\) ka farq ulat jata hai: \\(-(PQ - RS) = RS - PQ\\).",
+              "Bracket simplify karein\n\\[(c-a)^2 = c^2 - 2ca + a^2\\]\n\\[(b-a)(c-b) = bc - b^2 - ac + ab\\]\n\\[\\text{bracket} = a^2 + b^2 + c^2 - ab - bc - ca\\]\nKyun: Doosra product minus ho raha hai, to us ke sab signs badle: \\(-bc + b^2 + ac - ab\\). Phir \\(-2ca + ac = -ca\\).\nDhyan dein: Lambi expressions mein ek ek term ko tick karte jayein taake koi term choot na jaye.",
+              "Identity lagayein\n\\[\\Delta = (a+b+c)(a^2 + b^2 + c^2 - ab - bc - ca)\\]\n\\[= a^3 + b^3 + c^3 - 3abc\\]\nKyun: Yeh mashhoor identity hai: multiply karein to \\(a^2b\\) jaise mixed terms cancel ho jate hain aur \\(-abc\\) teen dafa aata hai.",
+              "Tasdeeq (numbers rakh kar)\n\\[a = 1,\\ b = 2,\\ c = 0:\\ \\begin{vmatrix} 1 & 2 & 0 \\\\ 2 & 1 & 3 \\\\ 3 & 2 & 1 \\end{vmatrix} = -5 + 14 = 9\\]\n\\[1 + 8 + 0 - 0 = 9 \\;\\checkmark\\]\nKyun: Row 1 expansion: \\(1(1 - 6) - 2(2 - 9) + 0 = 9\\). Dono taraf 9."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\Delta = a^3 + b^3 + c^3 - 3abc\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(viii)",
+            "prompt": "3 (viii) Show that: \\(\\begin{vmatrix} a+\\lambda & a & a \\\\ b & b+\\lambda & b \\\\ c & c & c+\\lambda \\end{vmatrix} = \\lambda^2(a+b+c+\\lambda)\\)",
+            "explanation": "Jawab \\(\\lambda^2(a+b+c+\\lambda)\\) dikhana hai.\nHar column ka total dekhein: column 1 mein \\((a + \\lambda) + b + c\\). Teeno columns ka total \\(a + b + c + \\lambda\\) hai, is liye rows jama karenge.\nPlan: \\(R_1 + R_2 + R_3 \\to R_1\\), factor bahar, row 1 mein zeros, triangular shakal.",
+            "steps": [
+              "Diya gaya hai: \\(\\Delta = \\begin{vmatrix} a+\\lambda & a & a \\\\ b & b+\\lambda & b \\\\ c & c & c+\\lambda \\end{vmatrix}\\)\nSaabit karna hai: \\(\\Delta = \\lambda^2(a+b+c+\\lambda)\\)\nTareeqa: Property vii (rows jama), Property v (factor bahar), Property viii (triangular). Yeh 3(ii) jaisa hi hai, bas wahan rows ka total same tha aur yahan columns ka.",
+              "Teeno rows ko row 1 mein jama karein\n\\[R_1 + R_2 + R_3 \\to R_1\\]\n\\[\\Delta = \\begin{vmatrix} s & s & s \\\\ b & b+\\lambda & b \\\\ c & c & c+\\lambda \\end{vmatrix}\\]\n\\[s = a + b + c + \\lambda\\]\nKyun: Har column mein \\(a, b, c\\) ek ek dafa aur \\(\\lambda\\) ek dafa hai, is liye har total \\(s\\) hai. Lambi likhai bachane ke liye \\(s\\) likha.",
+              "Row 1 se \\(s\\) bahar nikalein\n\\[\\Delta = s\\begin{vmatrix} 1 & 1 & 1 \\\\ b & b+\\lambda & b \\\\ c & c & c+\\lambda \\end{vmatrix}\\]\nKyun: Property v.",
+              "Row 1 mein zeros banayein\n\\[C_2 - C_1 \\to C_2,\\quad C_3 - C_1 \\to C_3\\]\n\\[\\Delta = s\\begin{vmatrix} 1 & 0 & 0 \\\\ b & \\lambda & 0 \\\\ c & 0 & \\lambda \\end{vmatrix}\\]\nKyun: \\((b+\\lambda) - b = \\lambda\\), \\(b - b = 0\\), \\(c - c = 0\\), \\((c+\\lambda) - c = \\lambda\\). Ab diagonal ke upar sab zero: lower triangular.",
+              "Diagonal multiply karein\n\\[\\Delta = s(1 \\cdot \\lambda \\cdot \\lambda)\\]\n\\[= \\lambda^2(a + b + c + \\lambda)\\]\nKyun: Property viii: triangular determinant = diagonal ka product."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\Delta = \\lambda^2(a+b+c+\\lambda)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ix)",
+            "prompt": "3 (ix) Show that: \\(\\begin{vmatrix} 1 & x & x^2 \\\\ 1 & y & y^2 \\\\ 1 & z & z^2 \\end{vmatrix} = (x-y)(y-z)(z-x)\\)",
+            "explanation": "Yeh mashhoor determinant hai (Vandermonde determinant); dikhana hai ke yeh \\((x-y)(y-z)(z-x)\\) ke barabar hai.\nColumn 1 mein sab 1 hain, is liye rows minus karne se foran zeros bante hain.\nPlan: \\(R_2 - R_1\\), \\(R_3 - R_1\\), phir \\((y-x)\\) aur \\((z-x)\\) bahar, phir expand.",
+            "steps": [
+              "Diya gaya hai: \\(\\Delta = \\begin{vmatrix} 1 & x & x^2 \\\\ 1 & y & y^2 \\\\ 1 & z & z^2 \\end{vmatrix}\\)\nSaabit karna hai: \\(\\Delta = (x-y)(y-z)(z-x)\\)\nTareeqa: Property vii, difference of squares \\(y^2 - x^2 = (y-x)(y+x)\\), aur Property v.",
+              "Row 1 ko row 2 aur 3 mein se minus karein\n\\[R_2 - R_1 \\to R_2,\\quad R_3 - R_1 \\to R_3\\]\n\\[\\Delta = \\begin{vmatrix} 1 & x & x^2 \\\\ 0 & y-x & y^2-x^2 \\\\ 0 & z-x & z^2-x^2 \\end{vmatrix}\\]\nKyun: Property vii se value nahi badli, aur column 1 mein do zero ban gaye.",
+              "\\(R_2\\) se \\((y-x)\\) aur \\(R_3\\) se \\((z-x)\\) bahar nikalein\n\\[\\Delta = (y-x)(z-x)\\begin{vmatrix} 1 & x & x^2 \\\\ 0 & 1 & y+x \\\\ 0 & 1 & z+x \\end{vmatrix}\\]\nKyun: \\(y^2 - x^2 = (y-x)(y+x)\\) aur \\(z^2 - x^2 = (z-x)(z+x)\\); is liye har row mein ek common bracket mil gaya.",
+              "Column 1 ke along expand karein\n\\[\\Delta = (y-x)(z-x)[(z+x) - (y+x)]\\]\n\\[= (y-x)(z-x)(z-y)\\]\nKyun: Sirf top wala 1 bacha; us ka minor \\(1(z+x) - 1(y+x) = z - y\\).",
+              "Factors ko tarteeb dein\n\\[(y-x)(z-y) = (x-y)(y-z)\\]\n\\[\\Delta = (x-y)(y-z)(z-x)\\]\nKyun: \\(y - x = -(x - y)\\) aur \\(z - y = -(y - z)\\). Do minus mil kar plus, is liye jawab book wali shakal mein aa gaya.\nDhyan dein: Bracket ko ulatne par sign badalta hai; har ulte bracket par ek minus ginein."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\Delta = (x-y)(y-z)(z-x)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(x)",
+            "prompt": "3 (x) Show that: \\(\\begin{vmatrix} y+z & z+x & x+y \\\\ x & y & z \\\\ x^2 & y^2 & z^2 \\end{vmatrix} = (x+y+z)(x-y)(y-z)(z-x)\\)",
+            "explanation": "Jawab \\((x+y+z)(x-y)(y-z)(z-x)\\) dikhana hai: yani part (ix) wala jawab, \\((x+y+z)\\) guna.\nRow 2 ko row 1 mein jama karein to row 1 ki har entry \\(x + y + z\\) ban jati hai.\nPlan: \\(R_1 + R_2 \\to R_1\\), factor bahar, phir part (ix) wala tareeqa columns par.",
+            "steps": [
+              "Diya gaya hai: \\(\\Delta = \\begin{vmatrix} y+z & z+x & x+y \\\\ x & y & z \\\\ x^2 & y^2 & z^2 \\end{vmatrix}\\)\nSaabit karna hai: \\(\\Delta = (x+y+z)(x-y)(y-z)(z-x)\\)\nTareeqa: Property vii aur v, phir part (ix) jaisa kaam. Pichla sawal agle sawal ki chaabi hai.",
+              "Row 2 ko row 1 mein jama karein\n\\[R_1 + R_2 \\to R_1\\]\n\\[\\Delta = (x+y+z)\\begin{vmatrix} 1 & 1 & 1 \\\\ x & y & z \\\\ x^2 & y^2 & z^2 \\end{vmatrix}\\]\nKyun: \\((y+z) + x\\), \\((z+x) + y\\), \\((x+y) + z\\) teeno \\(x + y + z\\) hain; Property v se yeh factor row 1 se bahar aa gaya.",
+              "Column 1 ko column 2 aur 3 mein se minus karein\n\\[C_2 - C_1 \\to C_2,\\quad C_3 - C_1 \\to C_3\\]\n\\[\\Delta = (x+y+z)\\begin{vmatrix} 1 & 0 & 0 \\\\ x & y-x & z-x \\\\ x^2 & y^2-x^2 & z^2-x^2 \\end{vmatrix}\\]\nKyun: Property vii; row 1 mein do zero ban gaye.",
+              "\\(C_2\\) se \\((y-x)\\) aur \\(C_3\\) se \\((z-x)\\) bahar nikalein\n\\[\\Delta = (x+y+z)(y-x)(z-x)\\begin{vmatrix} 1 & 0 & 0 \\\\ x & 1 & 1 \\\\ x^2 & y+x & z+x \\end{vmatrix}\\]\nKyun: Row 3 mein difference of squares, phir Property v.",
+              "Row 1 ke along expand karein\n\\[\\Delta = (x+y+z)(y-x)(z-x)[(z+x) - (y+x)]\\]\n\\[= (x+y+z)(y-x)(z-x)(z-y)\\]\n\\[= (x+y+z)(x-y)(y-z)(z-x)\\]\nKyun: Sirf \\((1,1)\\) wala 1 bacha. Aakhir mein part (ix) ki tarah do brackets ulte, do minus mil kar plus."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\Delta = (x+y+z)(x-y)(y-z)(z-x)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

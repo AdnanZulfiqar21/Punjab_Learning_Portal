@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.8.3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.8.3",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 74,
+          "pdf_to": 76,
+          "note": "Book p. 69-71: derivation of Cramer's rule, results (iii)-(v), Example 13"
+        }
+      ],
+      "title": "4.8.3 Cramer's Rule",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Consider the system of equations,\n\\[a_{11}x_1 + a_{12}x_2 + a_{13}x_3 = b_1\\]\n\\[a_{21}x_1 + a_{22}x_2 + a_{23}x_3 = b_2\\]\n\\[a_{31}x_1 + a_{32}x_2 + a_{33}x_3 = b_3\\]\n\\[\\quad \\text{...(ii)}\\]",
+            "book_errors": [
+              "\\text{...(ii)}"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book numbers this system \"...(ii)\" and gives the same number \"...(ii)\" to the matrix equation \\(AX = B\\) below. The system should be numbered (i); the matrix equation is (ii)."
+          },
+          {
+            "type": "paragraph",
+            "text": "These are three linear equations in three variables \\(x_1, x_2, x_3\\) with coefficients and constant terms in the real field \\(\\mathbb{R}\\). We write the above system of equations in matrix form as:\n\\[AX = B \\quad \\text{...(ii)}\\]\nwhere\n\\[A = [a_{ij}]_{3\\times 3},\\ X = \\begin{bmatrix}x_1 \\\\ x_2 \\\\ x_3\\end{bmatrix}\\]\n\\[B = \\begin{bmatrix}b_1 \\\\ b_2 \\\\ b_3\\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "We know that the matrix equation (2) can be written as: \\(X = A^{-1}B\\) (if \\(A^{-1}\\) exists)",
+            "book_errors": [
+              "matrix equation (2)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book writes \"matrix equation (2)\"; it means the matrix equation \\(AX = B\\) numbered (ii)."
+          },
+          {
+            "type": "paragraph",
+            "text": "We have already proved that \\(A^{-1} = \\frac{1}{|A|}\\operatorname{adj} A\\) and\n\\[\\operatorname{adj} A = [A'_{ij}]_{3\\times 3}\\]\n\\[= \\begin{bmatrix}A_{11} & A_{21} & A_{31} \\\\ A_{12} & A_{22} & A_{32} \\\\ A_{13} & A_{23} & A_{33}\\end{bmatrix}\\]\n\\[(\\because A'_{ij} = A_{ji})\\]\nThus\n\\[\\begin{bmatrix}x_1 \\\\ x_2 \\\\ x_3\\end{bmatrix} = \\frac{1}{|A|}\\begin{bmatrix}A_{11} & A_{21} & A_{31} \\\\ A_{12} & A_{22} & A_{32} \\\\ A_{13} & A_{23} & A_{33}\\end{bmatrix}\\begin{bmatrix}b_1 \\\\ b_2 \\\\ b_3\\end{bmatrix}\\]\n\\[= \\frac{1}{|A|}\\begin{bmatrix}A_{11}b_1 + A_{21}b_2 + A_{31}b_3 \\\\ A_{12}b_1 + A_{22}b_2 + A_{32}b_3 \\\\ A_{13}b_1 + A_{23}b_2 + A_{33}b_3\\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "i.e.,\n\\[x_1 = \\frac{A_{11}b_1 + A_{21}b_2 + A_{31}b_3}{|A|}\\]\n\\[x_2 = \\frac{A_{12}b_1 + A_{22}b_2 + A_{32}b_3}{|A|}\\]\n\\[x_3 = \\frac{A_{13}b_1 + A_{23}b_2 + A_{33}b_3}{|A|}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Hence\n\\[x_1 = \\frac{b_1A_{11} + b_2A_{21} + b_3A_{31}}{|A|}\\]\n\\[= \\dfrac{\\begin{vmatrix}b_1 & a_{12} & a_{13} \\\\ b_2 & a_{22} & a_{23} \\\\ b_3 & a_{32} & a_{33}\\end{vmatrix}}{|A|} \\quad \\text{(iii)}\\]\n\\[x_2 = \\frac{b_1A_{12} + b_2A_{22} + b_3A_{32}}{|A|}\\]\n\\[= \\dfrac{\\begin{vmatrix}a_{11} & b_1 & a_{13} \\\\ a_{21} & b_2 & a_{23} \\\\ a_{31} & b_3 & a_{33}\\end{vmatrix}}{|A|} \\quad \\text{(iv)}\\]\n\\[x_3 = \\frac{b_1A_{13} + b_2A_{23} + b_3A_{33}}{|A|}\\]\n\\[= \\dfrac{\\begin{vmatrix}a_{11} & a_{12} & b_1 \\\\ a_{21} & a_{22} & b_2 \\\\ a_{31} & a_{32} & b_3\\end{vmatrix}}{|A|} \\quad \\text{(v)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is \\(b_1A_{11} + b_2A_{21} + b_3A_{31}\\) the determinant in (iii)? \\(A_{11}, A_{21}, A_{31}\\) are the cofactors of the first column of \\(A\\), and they do not depend on the first column itself (that column is deleted when a minor is formed). Expanding a determinant along its first column gives \"entry times cofactor, added\". So if we put \\(b_1, b_2, b_3\\) in the first column, the expansion is exactly \\(b_1A_{11} + b_2A_{21} + b_3A_{31}\\).\nThe rule in words: \\(x_k\\) = (determinant of \\(A\\) with column \\(k\\) replaced by the constants) divided by \\(|A|\\). Writing \\(D = |A|\\) and \\(D_1, D_2, D_3\\) for these determinants: \\(x_1 = \\frac{D_1}{D}\\), \\(x_2 = \\frac{D_2}{D}\\), \\(x_3 = \\frac{D_3}{D}\\). It needs \\(D \\ne 0\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The method of solving the system with the help of results (iii), (iv) and (v) is often referred to as Cramer's Rule.",
+            "bold": [
+              "Cramer's Rule"
+            ]
+          },
+          {
+            "type": "example",
+            "title": "Example 13",
+            "problem": "Use Cramer's rule to solve the system.\n\\[3x_1 + x_2 - x_3 = -4\\]\n\\[x_1 + x_2 - 2x_3 = -4\\]\n\\[-x_1 + 2x_2 - x_3 = 1\\]",
+            "steps": [
+              "Given: the system above, \\(AX = B\\) with\n\\[A = \\begin{bmatrix}3 & 1 & -1 \\\\ 1 & 1 & -2 \\\\ -1 & 2 & -1\\end{bmatrix}\\]\n\\[B = \\begin{bmatrix}-4 \\\\ -4 \\\\ 1\\end{bmatrix}\\]\nTo find: \\(x_1, x_2, x_3\\).\nMethod: Cramer's rule, \\(x_k = \\frac{D_k}{|A|}\\), where \\(D_k\\) is \\(|A|\\) with column \\(k\\) replaced by \\(B\\). First check \\(|A| \\ne 0\\).",
+              "Step 1: Find \\(|A|\\) (expand along \\(R_1\\))\n\\[|A| = \\begin{vmatrix}3 & 1 & -1 \\\\ 1 & 1 & -2 \\\\ -1 & 2 & -1\\end{vmatrix}\\]\n\\[= 3(-1+4) - 1\\cdot(-1-2)\\]\n\\[\\quad - 1\\cdot(2+1)\\]\n\\[= 9 + 3 - 3 = 9\\]\nWhy: \\(|A| = 9 \\ne 0\\), so the system has a unique solution and Cramer's rule applies.",
+              "Step 2: \\(x_1\\): replace column 1 by \\(B\\)\n\\[x_1 = \\frac{1}{9}\\begin{vmatrix}-4 & 1 & -1 \\\\ -4 & 1 & -2 \\\\ 1 & 2 & -1\\end{vmatrix}\\]\n\\[= \\frac{-4(-1+4) - 1(4+2) - 1(-8-1)}{9}\\]\n\\[= \\frac{-12 - 6 + 9}{9} = \\frac{-9}{9} = -1\\]\nWhy: the first column holds the coefficients of \\(x_1\\); replacing it by the constants gives the numerator of (iii).",
+              "Step 3: \\(x_2\\): replace column 2 by \\(B\\)\n\\[x_2 = \\frac{1}{9}\\begin{vmatrix}3 & -4 & -1 \\\\ 1 & -4 & -2 \\\\ -1 & 1 & -1\\end{vmatrix}\\]\n\\[= \\frac{3(4+2) + 4(-1-2) - 1(1-4)}{9}\\]\n\\[= \\frac{18 - 12 + 3}{9} = \\frac{9}{9} = 1\\]\nWhy: this is result (iv). The middle term is \\(-(-4)(\\ldots) = +4(\\ldots)\\).",
+              "Step 4: \\(x_3\\): replace column 3 by \\(B\\)\n\\[x_3 = \\frac{1}{9}\\begin{vmatrix}3 & 1 & -4 \\\\ 1 & 1 & -4 \\\\ -1 & 2 & 1\\end{vmatrix}\\]\n\\[= \\frac{3(1+8) - 1(1-4) - 4(2+1)}{9}\\]\n\\[= \\frac{27 + 3 - 12}{9} = \\frac{18}{9} = 2\\]\nWhy: this is result (v).",
+              "Check: substitute \\(x_1 = -1, x_2 = 1, x_3 = 2\\):\n\\[3(-1) + 1 - 2 = -4\\]\n\\[-1 + 1 - 4 = -4\\]\n\\[1 + 2 - 2 = 1\\]\nAll three equations hold."
+            ],
+            "answer": "\\(x_1 = -1,\\ x_2 = 1,\\ x_3 = 2\\); the solution set is \\(\\{(x_1, x_2, x_3)\\} = \\{(-1, 1, 2)\\}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Cramer's rule: \\(x_k = \\frac{D_k}{|A|}\\), where \\(D_k\\) is \\(|A|\\) with column \\(k\\) replaced by the constants.\n2. It works only when \\(|A| \\ne 0\\) (then the solution is unique).\n3. It comes from \\(X = A^{-1}B = \\frac{1}{|A|}(\\operatorname{adj} A)B\\).\n4. Always check the answer in the original equations."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Replacing a row instead of a column by the constants.\n2. Replacing the wrong column: for \\(x_2\\) it is the second column.\n3. Sign slips in the expansion: the middle term has a minus in front.\n4. Using Cramer's rule when \\(|A| = 0\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

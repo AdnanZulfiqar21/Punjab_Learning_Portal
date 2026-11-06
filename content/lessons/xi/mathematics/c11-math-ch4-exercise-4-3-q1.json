@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-3-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-3-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 81,
+          "pdf_to": 81,
+          "note": "Exercise 4.3, Question 1: book page 76 (PDF 81); answer key PDF 303"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Find the inverses of the following matrices by using row operations: \\(\\begin{bmatrix}1 & 2 & -3 \\\\ 0 & -2 & 0 \\\\ -2 & 4 & 6\\end{bmatrix}\\)",
+            "explanation": "The matrix must first be non-singular; row operations will show it.\nWe must find \\(A^{-1}\\) or show that it does not exist.\nPlan: reduce \\([A \\mid I_3]\\); watch for a zero row on the left, then confirm with \\(|A|\\).",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix}1 & 2 & -3 \\\\ 0 & -2 & 0 \\\\ -2 & 4 & 6\\end{bmatrix}\\)\nTo find: \\(A^{-1}\\) by row operations.\nMethod: Write \\(A\\) and \\(I_3\\) side by side as \\([A \\mid I_3]\\). Use row operations to turn the left half into \\(I_3\\); the right half then becomes \\(A^{-1}\\). If the left half gets a whole row of zeros, \\(A\\) is singular and has no inverse.",
+              "Append \\(I_3\\) on the right\n\\[\\left[\\begin{array}{ccc|ccc}1 & 2 & -3 & 1 & 0 & 0 \\\\ 0 & -2 & 0 & 0 & 1 & 0 \\\\ -2 & 4 & 6 & 0 & 0 & 1\\end{array}\\right]\\]\nWhy: Every row operation is done on the whole row, both halves together. Column 1 already has a leading 1 in \\(R_1\\) and a 0 in \\(R_2\\).",
+              "Make the \\(-2\\) in column 1 zero\nBy \\(R_3 + 2R_1 \\to R_3'\\)\n\\(R_3'\\): \\(-2 + 2 = 0\\), \\(4 + 4 = 8\\), \\(6 - 6 = 0\\) | \\(0 + 2 = 2\\), \\(0 + 0 = 0\\), \\(1 + 0 = 1\\)\n\\[\\sim \\left[\\begin{array}{ccc|ccc}1 & 2 & -3 & 1 & 0 & 0 \\\\ 0 & -2 & 0 & 0 & 1 & 0 \\\\ 0 & 8 & 0 & 2 & 0 & 1\\end{array}\\right]\\]\nWhy: \\(-2 + 2(1) = 0\\). Adding twice \\(R_1\\) clears column 1 below the leading 1.",
+              "Make the 8 in column 2 zero\nBy \\(R_3 + 4R_2 \\to R_3'\\)\n\\(R_3'\\): \\(0 + 0 = 0\\), \\(8 - 8 = 0\\), \\(0 + 0 = 0\\) | \\(2 + 0 = 2\\), \\(0 + 4 = 4\\), \\(1 + 0 = 1\\)\n\\[\\sim \\left[\\begin{array}{ccc|ccc}1 & 2 & -3 & 1 & 0 & 0 \\\\ 0 & -2 & 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & 2 & 4 & 1\\end{array}\\right]\\]\nWhy: \\(8 + 4(-2) = 0\\). Using \\(R_2\\) (not \\(R_1\\)) keeps column 1 unchanged.",
+              "Read the result: a zero row on the left\nRow 3 of the left half is \\((0, 0, 0)\\). No row operation can now make a leading 1 in that row, so the left half can never become \\(I_3\\).\nWhy: Row operations never change whether a determinant is zero, so a zero row means \\(|A| = 0\\).",
+              "Check with the determinant\n\\[|A| = \\begin{vmatrix}1 & 2 & -3 \\\\ 0 & -2 & 0 \\\\ -2 & 4 & 6\\end{vmatrix}\\]\n\\[= 1(-12 - 0) - 2(0 - 0) - 3(0 - 4)\\]\n\\[= -12 + 0 + 12\\]\n\\[= 0\\]\nWhy: Expanding along \\(R_1\\) confirms \\(|A| = 0\\): \\(A\\) is singular."
+            ],
+            "final_answer": "\\(|A| = 0\\): the matrix as printed is singular, so \\(A^{-1}\\) does not exist."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(\\begin{bmatrix}1 & \\frac{17}{4} & \\frac{1}{2} \\\\ 0 & -\\frac{1}{2} & 0 \\\\ \\frac{1}{3} & \\frac{11}{6} & \\frac{1}{3}\\end{bmatrix}\\) as the inverse for 1(i). The printed matrix has \\(|A| = 0\\), so it has no inverse at all. The key's matrix is in fact the inverse of \\(\\begin{bmatrix}2 & 6 & -3 \\\\ 0 & -2 & 0 \\\\ -2 & 5 & 6\\end{bmatrix}\\), a different matrix (perhaps the one intended; its determinant is \\(-12\\)). For the question as printed the correct answer is: the inverse does not exist."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Find the inverses of the following matrices by using row operations: \\(\\begin{bmatrix}1 & 2 & -1 \\\\ 0 & -2 & 8 \\\\ 1 & 0 & 2\\end{bmatrix}\\)",
+            "explanation": "A \\(3 \\times 3\\) inverse by row operations (Gauss-Jordan).\nWe must find \\(A^{-1}\\).\nPlan: check \\(|A| \\neq 0\\), reduce \\([A \\mid I_3]\\) column by column (pivot 1, zeros above and below), read the right half, check \\(AA^{-1} = I_3\\).",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix}1 & 2 & -1 \\\\ 0 & -2 & 8 \\\\ 1 & 0 & 2\\end{bmatrix}\\)\nTo find: \\(A^{-1}\\) by row operations.\nMethod: First check \\(|A| \\neq 0\\). Then reduce \\([A \\mid I_3]\\) until the left half is \\(I_3\\); the right half is then \\(A^{-1}\\).",
+              "Check that \\(A\\) is non-singular\n\\[|A| = \\begin{vmatrix}1 & 2 & -1 \\\\ 0 & -2 & 8 \\\\ 1 & 0 & 2\\end{vmatrix}\\]\n\\[= 1(-4 - 0) - 2(0 - 8) - 1(0 + 2)\\]\n\\[= -4 + 16 - 2\\]\n\\[= 10\\]\nWhy: \\(|A| \\neq 0\\), so \\(A^{-1}\\) exists.",
+              "Append \\(I_3\\) on the right\n\\[\\left[\\begin{array}{ccc|ccc}1 & 2 & -1 & 1 & 0 & 0 \\\\ 0 & -2 & 8 & 0 & 1 & 0 \\\\ 1 & 0 & 2 & 0 & 0 & 1\\end{array}\\right]\\]\nWhy: Whatever we do to the rows of \\(A\\), we also do to \\(I_3\\).",
+              "Clear column 1\nBy \\(R_3 + (-1)R_1 \\to R_3'\\)\n\\(R_3'\\): \\(1 - 1 = 0\\), \\(0 - 2 = -2\\), \\(2 + 1 = 3\\) | \\(0 - 1 = -1\\), \\(0 + 0 = 0\\), \\(1 + 0 = 1\\)\n\\[\\sim \\left[\\begin{array}{ccc|ccc}1 & 2 & -1 & 1 & 0 & 0 \\\\ 0 & -2 & 8 & 0 & 1 & 0 \\\\ 0 & -2 & 3 & -1 & 0 & 1\\end{array}\\right]\\]\nWhy: \\(1 + (-1)(1) = 0\\). \\(R_2\\) already has 0 in column 1.",
+              "Make the pivot of \\(R_2\\) equal to 1\nBy \\(\\left(-\\frac{1}{2}\\right)R_2 \\to R_2'\\)\n\\(R_2'\\): \\(0\\), \\(1\\), \\(-4\\) | \\(0\\), \\(-\\frac{1}{2}\\), \\(0\\)\n\\[\\sim \\left[\\begin{array}{ccc|ccc}1 & 2 & -1 & 1 & 0 & 0 \\\\ 0 & 1 & -4 & 0 & -\\frac{1}{2} & 0 \\\\ 0 & -2 & 3 & -1 & 0 & 1\\end{array}\\right]\\]\nWhy: Dividing \\(R_2\\) by \\(-2\\) turns \\(-2\\) into the leading 1 of row 2.",
+              "Clear column 2 above and below the pivot\nBy \\(R_1 + (-2)R_2 \\to R_1'\\), \\(R_3 + 2R_2 \\to R_3'\\)\n\\(R_1'\\): \\(1 + 0 = 1\\), \\(2 - 2 = 0\\), \\(-1 + 8 = 7\\) | \\(1 + 0 = 1\\), \\(0 + 1 = 1\\), \\(0 + 0 = 0\\)\n\\(R_3'\\): \\(0 + 0 = 0\\), \\(-2 + 2 = 0\\), \\(3 - 8 = -5\\) | \\(-1 + 0 = -1\\), \\(0 - 1 = -1\\), \\(1 + 0 = 1\\)\n\\[\\sim \\left[\\begin{array}{ccc|ccc}1 & 0 & 7 & 1 & 1 & 0 \\\\ 0 & 1 & -4 & 0 & -\\frac{1}{2} & 0 \\\\ 0 & 0 & -5 & -1 & -1 & 1\\end{array}\\right]\\]\nWhy: \\(2 + (-2)(1) = 0\\) in \\(R_1\\) and \\(-2 + 2(1) = 0\\) in \\(R_3\\). For an inverse we need zeros above the pivots too (reduced echelon form).",
+              "Make the pivot of \\(R_3\\) equal to 1\nBy \\(\\left(-\\frac{1}{5}\\right)R_3 \\to R_3'\\)\n\\(R_3'\\): \\(0\\), \\(0\\), \\(1\\) | \\(\\frac{1}{5}\\), \\(\\frac{1}{5}\\), \\(-\\frac{1}{5}\\)\n\\[\\sim \\left[\\begin{array}{ccc|ccc}1 & 0 & 7 & 1 & 1 & 0 \\\\ 0 & 1 & -4 & 0 & -\\frac{1}{2} & 0 \\\\ 0 & 0 & 1 & \\frac{1}{5} & \\frac{1}{5} & -\\frac{1}{5}\\end{array}\\right]\\]\nWhy: Dividing \\(R_3\\) by \\(-5\\) gives the third leading 1.",
+              "Clear column 3 above the pivot\nBy \\(R_1 + (-7)R_3 \\to R_1'\\), \\(R_2 + 4R_3 \\to R_2'\\)\n\\(R_1'\\): \\(1 + 0 = 1\\), \\(0 + 0 = 0\\), \\(7 - 7 = 0\\) | \\(1 - \\frac{7}{5} = -\\frac{2}{5}\\), \\(1 - \\frac{7}{5} = -\\frac{2}{5}\\), \\(0 + \\frac{7}{5} = \\frac{7}{5}\\)\n\\(R_2'\\): \\(0 + 0 = 0\\), \\(1 + 0 = 1\\), \\(-4 + 4 = 0\\) | \\(0 + \\frac{4}{5} = \\frac{4}{5}\\), \\(-\\frac{1}{2} + \\frac{4}{5} = \\frac{3}{10}\\), \\(0 - \\frac{4}{5} = -\\frac{4}{5}\\)\n\\[\\sim \\left[\\begin{array}{ccc|ccc}1 & 0 & 0 & -\\frac{2}{5} & -\\frac{2}{5} & \\frac{7}{5} \\\\ 0 & 1 & 0 & \\frac{4}{5} & \\frac{3}{10} & -\\frac{4}{5} \\\\ 0 & 0 & 1 & \\frac{1}{5} & \\frac{1}{5} & -\\frac{1}{5}\\end{array}\\right]\\]\nWhy: \\(7 + (-7)(1) = 0\\) and \\(-4 + 4(1) = 0\\). The left half is now \\(I_3\\).",
+              "Read off the inverse\n\\[A^{-1} = \\begin{bmatrix}-\\frac{2}{5} & -\\frac{2}{5} & \\frac{7}{5} \\\\ \\frac{4}{5} & \\frac{3}{10} & -\\frac{4}{5} \\\\ \\frac{1}{5} & \\frac{1}{5} & -\\frac{1}{5}\\end{bmatrix}\\]\nWhy: The left half is \\(I_3\\), so the right half is \\(A^{-1}\\).",
+              "Check: \\(AA^{-1} = I_3\\)\nRow 1 of \\(A\\) times each column of \\(A^{-1}\\): \\((1)\\left(-\\frac{2}{5}\\right) + (2)\\left(\\frac{4}{5}\\right) + (-1)\\left(\\frac{1}{5}\\right) = 1\\), \\((1)\\left(-\\frac{2}{5}\\right) + (2)\\left(\\frac{3}{10}\\right) + (-1)\\left(\\frac{1}{5}\\right) = 0\\), \\((1)\\left(\\frac{7}{5}\\right) + (2)\\left(-\\frac{4}{5}\\right) + (-1)\\left(-\\frac{1}{5}\\right) = 0\\). Rows 2 and 3 give \\((0, 1, 0)\\) and \\((0, 0, 1)\\) in the same way.\n\\[AA^{-1} = I_3 \\;\\checkmark\\]\nWhy: A matrix times its inverse must give the identity matrix."
+            ],
+            "final_answer": "\\(A^{-1} = \\begin{bmatrix}-\\frac{2}{5} & -\\frac{2}{5} & \\frac{7}{5} \\\\ \\frac{4}{5} & \\frac{3}{10} & -\\frac{4}{5} \\\\ \\frac{1}{5} & \\frac{1}{5} & -\\frac{1}{5}\\end{bmatrix}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Find the inverses of the following matrices by using row operations: \\(\\begin{bmatrix}1 & 6 & 2 \\\\ 2 & 13 & 0 \\\\ 0 & -1 & 1\\end{bmatrix}\\)",
+            "explanation": "A \\(3 \\times 3\\) inverse by row operations (Gauss-Jordan).\nWe must find \\(A^{-1}\\).\nPlan: check \\(|A| \\neq 0\\), reduce \\([A \\mid I_3]\\) column by column (pivot 1, zeros above and below), read the right half, check \\(AA^{-1} = I_3\\).",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix}1 & 6 & 2 \\\\ 2 & 13 & 0 \\\\ 0 & -1 & 1\\end{bmatrix}\\)\nTo find: \\(A^{-1}\\) by row operations.\nMethod: First check \\(|A| \\neq 0\\). Then reduce \\([A \\mid I_3]\\) until the left half is \\(I_3\\); the right half is then \\(A^{-1}\\).",
+              "Check that \\(A\\) is non-singular\n\\[|A| = \\begin{vmatrix}1 & 6 & 2 \\\\ 2 & 13 & 0 \\\\ 0 & -1 & 1\\end{vmatrix}\\]\n\\[= 1(13 - 0) - 6(2 - 0) + 2(-2 - 0)\\]\n\\[= 13 - 12 - 4\\]\n\\[= -3\\]\nWhy: \\(|A| \\neq 0\\), so \\(A^{-1}\\) exists.",
+              "Append \\(I_3\\) on the right\n\\[\\left[\\begin{array}{ccc|ccc}1 & 6 & 2 & 1 & 0 & 0 \\\\ 2 & 13 & 0 & 0 & 1 & 0 \\\\ 0 & -1 & 1 & 0 & 0 & 1\\end{array}\\right]\\]\nWhy: Whatever we do to the rows of \\(A\\), we also do to \\(I_3\\).",
+              "Clear column 1\nBy \\(R_2 + (-2)R_1 \\to R_2'\\)\n\\(R_2'\\): \\(2 - 2 = 0\\), \\(13 - 12 = 1\\), \\(0 - 4 = -4\\) | \\(0 - 2 = -2\\), \\(1 + 0 = 1\\), \\(0 + 0 = 0\\)\n\\[\\sim \\left[\\begin{array}{ccc|ccc}1 & 6 & 2 & 1 & 0 & 0 \\\\ 0 & 1 & -4 & -2 & 1 & 0 \\\\ 0 & -1 & 1 & 0 & 0 & 1\\end{array}\\right]\\]\nWhy: \\(2 + (-2)(1) = 0\\). \\(R_3\\) already has 0 in column 1.",
+              "Clear column 2 above and below the pivot\nBy \\(R_1 + (-6)R_2 \\to R_1'\\), \\(R_3 + R_2 \\to R_3'\\)\n\\(R_1'\\): \\(1 + 0 = 1\\), \\(6 - 6 = 0\\), \\(2 + 24 = 26\\) | \\(1 + 12 = 13\\), \\(0 - 6 = -6\\), \\(0 + 0 = 0\\)\n\\(R_3'\\): \\(0 + 0 = 0\\), \\(-1 + 1 = 0\\), \\(1 - 4 = -3\\) | \\(0 - 2 = -2\\), \\(0 + 1 = 1\\), \\(1 + 0 = 1\\)\n\\[\\sim \\left[\\begin{array}{ccc|ccc}1 & 0 & 26 & 13 & -6 & 0 \\\\ 0 & 1 & -4 & -2 & 1 & 0 \\\\ 0 & 0 & -3 & -2 & 1 & 1\\end{array}\\right]\\]\nWhy: The pivot of \\(R_2\\) is already 1. \\(6 + (-6)(1) = 0\\) and \\(-1 + 1 = 0\\).",
+              "Make the pivot of \\(R_3\\) equal to 1\nBy \\(\\left(-\\frac{1}{3}\\right)R_3 \\to R_3'\\)\n\\(R_3'\\): \\(0\\), \\(0\\), \\(1\\) | \\(\\frac{2}{3}\\), \\(-\\frac{1}{3}\\), \\(-\\frac{1}{3}\\)\n\\[\\sim \\left[\\begin{array}{ccc|ccc}1 & 0 & 26 & 13 & -6 & 0 \\\\ 0 & 1 & -4 & -2 & 1 & 0 \\\\ 0 & 0 & 1 & \\frac{2}{3} & -\\frac{1}{3} & -\\frac{1}{3}\\end{array}\\right]\\]\nWhy: Dividing \\(R_3\\) by \\(-3\\) gives the third leading 1.",
+              "Clear column 3 above the pivot\nBy \\(R_1 + (-26)R_3 \\to R_1'\\), \\(R_2 + 4R_3 \\to R_2'\\)\n\\(R_1'\\): \\(1 + 0 = 1\\), \\(0 + 0 = 0\\), \\(26 - 26 = 0\\) | \\(13 - \\frac{52}{3} = -\\frac{13}{3}\\), \\(-6 + \\frac{26}{3} = \\frac{8}{3}\\), \\(0 + \\frac{26}{3} = \\frac{26}{3}\\)\n\\(R_2'\\): \\(0 + 0 = 0\\), \\(1 + 0 = 1\\), \\(-4 + 4 = 0\\) | \\(-2 + \\frac{8}{3} = \\frac{2}{3}\\), \\(1 - \\frac{4}{3} = -\\frac{1}{3}\\), \\(0 - \\frac{4}{3} = -\\frac{4}{3}\\)\n\\[\\sim \\left[\\begin{array}{ccc|ccc}1 & 0 & 0 & -\\frac{13}{3} & \\frac{8}{3} & \\frac{26}{3} \\\\ 0 & 1 & 0 & \\frac{2}{3} & -\\frac{1}{3} & -\\frac{4}{3} \\\\ 0 & 0 & 1 & \\frac{2}{3} & -\\frac{1}{3} & -\\frac{1}{3}\\end{array}\\right]\\]\nWhy: \\(26 + (-26)(1) = 0\\) and \\(-4 + 4(1) = 0\\). The left half is now \\(I_3\\).",
+              "Read off the inverse\n\\[A^{-1} = \\begin{bmatrix}-\\frac{13}{3} & \\frac{8}{3} & \\frac{26}{3} \\\\ \\frac{2}{3} & -\\frac{1}{3} & -\\frac{4}{3} \\\\ \\frac{2}{3} & -\\frac{1}{3} & -\\frac{1}{3}\\end{bmatrix}\\]\nWhy: The left half is \\(I_3\\), so the right half is \\(A^{-1}\\).",
+              "Check: \\(AA^{-1} = I_3\\)\nRow 1 of \\(A\\) times each column of \\(A^{-1}\\): \\((1)\\left(-\\frac{13}{3}\\right) + (6)\\left(\\frac{2}{3}\\right) + (2)\\left(\\frac{2}{3}\\right) = 1\\), \\((1)\\left(\\frac{8}{3}\\right) + (6)\\left(-\\frac{1}{3}\\right) + (2)\\left(-\\frac{1}{3}\\right) = 0\\), \\((1)\\left(\\frac{26}{3}\\right) + (6)\\left(-\\frac{4}{3}\\right) + (2)\\left(-\\frac{1}{3}\\right) = 0\\). Rows 2 and 3 give \\((0, 1, 0)\\) and \\((0, 0, 1)\\) in the same way.\n\\[AA^{-1} = I_3 \\;\\checkmark\\]\nWhy: A matrix times its inverse must give the identity matrix."
+            ],
+            "final_answer": "\\(A^{-1} = \\begin{bmatrix}-\\frac{13}{3} & \\frac{8}{3} & \\frac{26}{3} \\\\ \\frac{2}{3} & -\\frac{1}{3} & -\\frac{4}{3} \\\\ \\frac{2}{3} & -\\frac{1}{3} & -\\frac{1}{3}\\end{bmatrix}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

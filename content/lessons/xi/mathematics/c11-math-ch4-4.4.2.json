@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.4.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.4.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 59,
+          "pdf_to": 60,
+          "note": "Book p. 54-55: 4.4.2 Determinant of a Square Matrix of Order n = 3, expansions (i)-(vii), Examples 4 and 5; callouts marked Teaching note / Key points / Common mistake are ours."
+        }
+      ],
+      "title": "4.4.2 Determinant of a Square Matrix of Order n = 3",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "With minors and cofactors (4.4.1) we can now find any determinant of order 3. The idea: pick one row (or one column), multiply each of its elements by its own cofactor, and add the three products."
+          },
+          {
+            "type": "paragraph",
+            "text": "If \\(A\\) is a matrix of order 3, that is,"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[A = \\begin{bmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "then:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = a_{i1}A_{i1} + a_{i2}A_{i2} + a_{i3}A_{i3}\\]\nfor \\(i = 1, 2, 3\\)\nor\n\\[|A| = a_{1j}A_{1j} + a_{2j}A_{2j} + a_{3j}A_{3j}\\]\nfor \\(j = 1, 2, 3\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "For example, for \\(i = 1\\), \\(j = 1\\) and \\(j = 2\\), we have"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = a_{11}A_{11} + a_{12}A_{12} + a_{13}A_{13} \\quad \\text{(i)}\\]\nor\n\\[|A| = a_{11}A_{11} + a_{21}A_{21} + a_{31}A_{31} \\quad \\text{(ii)}\\]\nor\n\\[|A| = a_{12}A_{12} + a_{22}A_{22}\\]\n\\[\\quad + a_{32}A_{32} \\quad \\text{(iii)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "(iii) can be written as: \\(|A| = a_{12}(-1)^{1+2}M_{12} + a_{22}(-1)^{2+2}M_{22} +\\) \\(a_{32}(-1)^{3-2}M_{32}\\)",
+            "book_errors": [
+              "\\(a_{32}(-1)^{3-2}M_{32}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the last term as \\(a_{32}(-1)^{3-2}M_{32}\\). The exponent must be \\(3 + 2\\), because \\(a_{32}\\) is in row 3, column 2 and the cofactor is \\(A_{32} = (-1)^{3+2}M_{32}\\). (Since \\((-1)^{1} = (-1)^{5} = -1\\), the sign in (iv) below is still right.)"
+          },
+          {
+            "type": "paragraph",
+            "text": "i.e.,"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = -a_{12}M_{12} + a_{22}M_{22}\\]\n\\[\\quad - a_{32}M_{32} \\quad \\text{(iv)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Similarly (i) can be written as"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = a_{11}M_{11} - a_{12}M_{12} + a_{13}M_{13} \\quad \\text{(v)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Putting the values of \\(M_{11}\\), \\(M_{12}\\) and \\(M_{13}\\) in (v), we obtain"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = a_{11}\\begin{vmatrix} a_{22} & a_{23} \\\\ a_{32} & a_{33} \\end{vmatrix}\\]\n\\[\\quad - a_{12}\\begin{vmatrix} a_{21} & a_{23} \\\\ a_{31} & a_{33} \\end{vmatrix}\\]\n\\[\\quad + a_{13}\\begin{vmatrix} a_{21} & a_{22} \\\\ a_{31} & a_{32} \\end{vmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "or"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = a_{11}(a_{22}a_{33} - a_{23}a_{32})\\]\n\\[\\quad - a_{12}(a_{21}a_{33} - a_{23}a_{31})\\]\n\\[\\quad + a_{13}(a_{21}a_{32} - a_{22}a_{31}) \\quad \\text{(vi)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "or"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31}\\]\n\\[\\quad + a_{13}a_{21}a_{32} - a_{11}a_{23}a_{32}\\]\n\\[\\quad - a_{12}a_{21}a_{33} - a_{13}a_{22}a_{31} \\quad \\text{(vii)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Equation (vii) is the required expansion of determinant of square matrix of order 3."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does every row and column give the same answer? Expand (i), (ii) or (iii) fully and you get the same six products of (vii) each time; only the order of the terms changes.\nWhen to use which: to save work, expand along the row or column with the most zeros, because a zero element makes its whole term vanish.\nSigns: in (v) the signs \\(+, -, +\\) come from the cofactor sign pattern of row 1. In (iv) the signs \\(-, +, -\\) come from column 2."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our own example (not from the book), using the matrix \\(B\\) of 4.4.1:\n\\[|B| = \\begin{vmatrix} 2 & 1 & 3 \\\\ 0 & 4 & 5 \\\\ 1 & 0 & 6 \\end{vmatrix}\\]\nRow 1 cofactors were found as 24, 5 and \\(-4\\):\n\\[|B| = 2(24) + 1(5) + 3(-4)\\]\n\\[= 48 + 5 - 12 = 41\\]\nFaster, along column 2 (it has a zero): \\(M_{12} = -5\\), \\(M_{22} = 9\\), \\(M_{32} = 10\\).\n\\[|B| = -1(-5) + 4(9) - 0(10)\\]\n\\[= 5 + 36 - 0 = 41\\]"
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "Evaluate the determinant if \\(A = \\begin{bmatrix} 1 & -2 & 3 \\\\ -2 & 3 & 1 \\\\ 4 & -3 & 2 \\end{bmatrix}\\).",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix} 1 & -2 & 3 \\\\ -2 & 3 & 1 \\\\ 4 & -3 & 2 \\end{bmatrix}\\).\nTo find: \\(|A|\\).\nMethod: expand along the first row with formula (v), \\(|A| = a_{11}M_{11} - a_{12}M_{12} + a_{13}M_{13}\\). Each minor is a determinant of order 2, worked out as \\(ad - bc\\).",
+              "Step 1: Write the determinant and the elements of row 1\n\\[|A| = \\begin{vmatrix} 1 & -2 & 3 \\\\ -2 & 3 & 1 \\\\ 4 & -3 & 2 \\end{vmatrix}\\]\n\\[a_{11} = 1,\\; a_{12} = -2,\\; a_{13} = 3\\]\nWhy: formula (v) uses the three elements of the first row, each multiplied by its own minor.",
+              "Step 2: Put the minors into formula (v)\n\\[|A| = 1\\begin{vmatrix} 3 & 1 \\\\ -3 & 2 \\end{vmatrix}\\]\n\\[\\quad - (-2)\\begin{vmatrix} -2 & 1 \\\\ 4 & 2 \\end{vmatrix}\\]\n\\[\\quad + 3\\begin{vmatrix} -2 & 3 \\\\ 4 & -3 \\end{vmatrix}\\]\nWhy: \\(M_{11}\\) is left after deleting row 1 and column 1, \\(M_{12}\\) after deleting row 1 and column 2, \\(M_{13}\\) after deleting row 1 and column 3. The middle sign of (v) is minus, and \\(a_{12} = -2\\) is itself negative, so we write \\(-(-2)\\).",
+              "Step 3: Evaluate each determinant of order 2\n\\[= 1[6 - 1(-3)] + 2[(-2)(2) - (1)(4)]\\]\n\\[\\quad + 3[(-2)(-3) - 12]\\]\nWhy: \\(\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc\\). Also \\(-(-2) = +2\\).",
+              "Step 4: Simplify\n\\[= (6 + 3) + 2(-4 - 4) + 3(6 - 12)\\]\n\\[= 9 - 16 - 18\\]\n\\[= -25\\]\nWhy: work out each bracket first, then multiply, then add.",
+              "Check:\nExpand by formula (vii) instead:\n\\[(1)(3)(2) + (-2)(1)(4)\\]\n\\[\\quad + (3)(-2)(-3)\\]\n\\[= 6 - 8 + 18 = 16\\]\n\\[(1)(1)(-3) + (-2)(-2)(2)\\]\n\\[\\quad + (3)(3)(4)\\]\n\\[= -3 + 8 + 36 = 41\\]\n\\[|A| = 16 - 41 = -25\\]\nThe same value. (Example 5 finds it a third way, by column 2.)"
+            ],
+            "answer": "\\(|A| = -25\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Find the cofactors \\(A_{12}\\), \\(A_{22}\\) and \\(A_{32}\\) of \\(A = \\begin{bmatrix} 1 & -2 & 3 \\\\ -2 & 3 & 1 \\\\ 4 & -3 & 2 \\end{bmatrix}\\) and find \\(|A|\\).",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix} 1 & -2 & 3 \\\\ -2 & 3 & 1 \\\\ 4 & -3 & 2 \\end{bmatrix}\\) (the same matrix as Example 4).\nTo find: the cofactors \\(A_{12}\\), \\(A_{22}\\), \\(A_{32}\\) and then \\(|A|\\).\nMethod: first the minors \\(M_{12}\\), \\(M_{22}\\), \\(M_{32}\\); then \\(A_{ij} = (-1)^{i+j}M_{ij}\\); then expand along column 2 with formula (iii): \\(|A| = a_{12}A_{12} + a_{22}A_{22} + a_{32}A_{32}\\).",
+              "Step 1: The minors of the column-2 elements\n\\[M_{12} = \\begin{vmatrix} -2 & 1 \\\\ 4 & 2 \\end{vmatrix} = -4 - 4 = -8\\]\n\\[M_{22} = \\begin{vmatrix} 1 & 3 \\\\ 4 & 2 \\end{vmatrix} = 2 - 12 = -10\\]\n\\[M_{32} = \\begin{vmatrix} 1 & 3 \\\\ -2 & 1 \\end{vmatrix} = 1 - (-6) = 7\\]\nWhy: for \\(M_{12}\\) delete row 1 and column 2; for \\(M_{22}\\) delete row 2 and column 2; for \\(M_{32}\\) delete row 3 and column 2. Column 2 is deleted every time.",
+              "Step 2: The cofactors\n\\[A_{12} = (-1)^{1+2}M_{12} = (-1)(-8) = 8\\]\n\\[A_{22} = (-1)^{2+2}M_{22} = 1(-10) = -10\\]\n\\[A_{32} = (-1)^{3+2}M_{32} = (-1)(7) = -7\\]\nWhy: \\(1 + 2 = 3\\) and \\(3 + 2 = 5\\) are odd, so the sign changes; \\(2 + 2 = 4\\) is even, so the cofactor equals the minor.",
+              "Step 3: Expand along column 2\n\\[|A| = a_{12}A_{12} + a_{22}A_{22} + a_{32}A_{32}\\]\n\\[= (-2)8 + 3(-10) + (-3)(-7)\\]\n\\[= -16 - 30 + 21\\]\n\\[= -25\\]\nWhy: a determinant can be expanded along any row or column: multiply each element of that line by its own cofactor and add. The elements of column 2 are \\(-2, 3, -3\\).",
+              "Check:\nExample 4 expanded the same determinant along row 1 and also got \\(-25\\). Different rows or columns must give the same value, so the answer is confirmed."
+            ],
+            "answer": "\\(A_{12} = 8\\), \\(A_{22} = -10\\), \\(A_{32} = -7\\) and \\(|A| = -25\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(|A|\\) = (each element of one row or column) \\(\\times\\) (its cofactor), added.\n2. Row 1: \\(|A| = a_{11}M_{11} - a_{12}M_{12} + a_{13}M_{13}\\).\n3. Any row or column gives the same value; choose the one with most zeros.\n4. With minors the signs follow \\(+ - +\\), \\(- + -\\), \\(+ - +\\); with cofactors the signs are already inside, so just add.\n5. Check your answer by expanding along a second row or column."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Forgetting the middle minus in (v), or the element's own sign: \\(-a_{12}M_{12}\\) with \\(a_{12} = -2\\) is \\(+2M_{12}\\).\n2. Using signs twice: with cofactors write \\(a_{12}A_{12} + \\dots\\) with all plus signs; the signs are already in \\(A_{12}\\).\n3. Multiplying a row element by a minor from a different row.\n4. Errors inside \\(ad - bc\\) with negatives: \\(1 - (-6) = 7\\), not \\(-5\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

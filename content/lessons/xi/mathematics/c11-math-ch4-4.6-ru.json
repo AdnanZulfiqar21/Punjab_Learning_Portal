@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.6-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.6",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 66,
+          "pdf_to": 67,
+          "note": "Book p. 61-62: elementary operations on equations and rows, Note (equivalent matrices), notation, upper/lower/triangular matrices, Remember! box"
+        }
+      ],
+      "title": "4.6 Elementary Row Operations on a Matrix (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH4-4.6",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab tak hum ne matrices ko jama, tafreeq aur zarb karna, aur determinant aur inverse nikalna seekha. Ab hum is unit ke sab se kaam ke hisse ki taraf barh rahe hain: matrices ki madad se linear equations ka system (yani kai equations jo ek saath sach hon) hal karna. Is ke liye pehle humein woh \"auzaar\" chahiye jin se matrix ko qadam ba qadam saada shakal mein laya ja sake. Yeh auzaar elementary row operations kehlate hain. Is sabaq mein hum yeh operations, un ki notation, aur triangular matrices seekhenge."
+          },
+          {
+            "type": "paragraph",
+            "text": "Aam taur par linear equations ke kisi diye gaye system ko kuch elementary operations laga kar ek saada equivalent system (aisa system jis ke solutions bilkul wahi hon) mein badla jata hai. Yeh operations neeche diye gaye hain:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) Do equations ki jagah aapas mein badal dena (interchange).",
+              "(ii) Kisi equation ko kisi non-zero number se multiply karna.",
+              "(iii) Ek equation ka koi multiple doosri equation mein jama kar dena."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh teen operations jaiz (allowed) kyun hain? Kyun ke in mein se koi bhi system ke solutions ko nahi badalta. Ek saada misaal se dekhiye: \\(x + y = 3\\) aur \\(x - y = 1\\). Is ka solution \\(x = 2\\), \\(y = 1\\) hai.\n(i) Dono equations ko upar neeche likh dein to kuch nahi badalta; wahi do shartein hain, bas tarteeb (order) badli hai.\n(ii) \\(x - y = 1\\) ko 2 se multiply karein: \\(2x - 2y = 2\\). Jo jora \\((x, y)\\) pehli shakal ko satisfy karta tha, wahi doosri ko bhi karta hai. Misal: \\(2(2) - 2(1) = 2\\).\n(iii) Pehli equation ko doosri mein jama karein: \\((x + y) + (x - y) = 3 + 1\\), yani \\(2x = 4\\). Ab bhi \\(x = 2\\), \\(y = 1\\) fit hai, aur dekhiye \\(y\\) gaayab ho gaya!\nYani operation (iii) asal kaam karta hai: yeh ek variable ko khatam (eliminate) karta hai. Operations (i) aur (ii) sirf system ko tarteeb dete aur saaf karte hain.\n(ii) mein number non-zero kyun? Agar 0 se multiply karein to equation \\(0 = 0\\) ban jayegi aur us ki saari maloomat zaaya ho jayegi. Phir system wahi nahi rahega."
+          },
+          {
+            "type": "paragraph",
+            "text": "In teen elementary operations ke mutabiq (corresponding), matrices par yeh elementary row operations lagaye jate hain taa ke equivalent matrices hasil hon:",
+            "bold": [
+              "elementary row operations"
+            ]
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) Do rows ki jagah aapas mein badalna",
+              "(ii) Kisi row ko kisi non-zero number se multiply karna",
+              "(iii) Ek row ka koi multiple doosri row mein jama karna."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan samajhne ki baat yeh hai ke matrix ki har row asal mein ek equation hai, bas \\(x, y, z\\) aur \"=\" ka nishan likhna chhor diya gaya hai. Is liye equations par jo kaam hum karte hain, wahi kaam rows par karte hain. Matrix mein likhne ka faida yeh hai ke hisaab saaf rehta hai aur variables bar bar likhne nahi parte."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Matrices \\(A\\) aur \\(B\\) equivalent kehlate hain agar \\(B\\) ko \\(A\\) par ek ke baad ek, mehdood tadaad (finite number) mein row operations laga kar hasil kiya ja sake."
+          },
+          {
+            "type": "paragraph",
+            "text": "Row operations (i) se (iii) ko likhne ke liye yeh notation istemal hoti hai:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "\\(R_i\\) aur \\(R_j\\) ki jagah badalna: \\(R_i \\leftrightarrow R_j\\).",
+              "\\(R_i\\) ko \\(k\\) se multiply karna: \\(kR_i \\to R_i'\\)",
+              "\\(R_j\\) ka \\(k\\) guna \\(R_i\\) mein jama karna: \\(R_i + kR_j \\to R_i'\\)"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "(\\(R_i'\\) woh nayi row hai jo row operation lagane ke baad milti hai; tir ka nishan \"\\(\\to\\)\" batata hai ke nateeja kahan likhna hai.)\nEquivalent matrices \\(A\\) aur \\(B\\) ke liye hum likhte hain \\(A\\ \\underset{\\sim}{R}\\ B\\).\nAgar \\(A\\ \\underset{\\sim}{R}\\ B\\) ho to \\(B\\ \\underset{\\sim}{R}\\ A\\) bhi hota hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(R_1, R_2, R_3, \\ldots\\) ka matlab hai matrix ki pehli, doosri, teesri ... row. Ek chhoti si misaal se teeno operations dekhiye. Maan lijiye \\(A = \\begin{bmatrix}2 & 4 \\\\ 1 & 3\\end{bmatrix}\\).\n\\(R_1 \\leftrightarrow R_2\\) lagayein to rows ki jagah badal jati hai:\n\\[\\begin{bmatrix}1 & 3 \\\\ 2 & 4\\end{bmatrix}\\]\n\\(A\\) par \\(\\frac{1}{2}R_1 \\to R_1'\\) lagayein to pehli row ka har entry aadha ho jata hai:\n\\[\\begin{bmatrix}1 & 2 \\\\ 1 & 3\\end{bmatrix}\\]\n\\(A\\) par \\(R_2 + \\left(-\\frac{1}{2}\\right)R_1 \\to R_2'\\) lagayein:\n\\[\\begin{bmatrix}2 & 4 \\\\ 0 & 1\\end{bmatrix}\\]\nAakhri wale mein hisaab yeh hai: \\((1, 3) - \\frac{1}{2}(2, 4) = (1 - 1, 3 - 2) = (0, 1)\\). Dhyan dein, sirf \\(R_2\\) badli hai; \\(R_1\\), jis ka multiple jama kiya, wesi ki wesi rehti hai.\nAb \\(A\\ \\underset{\\sim}{R}\\ B\\) se \\(B\\ \\underset{\\sim}{R}\\ A\\) kyun? Kyun ke har row operation ko ulta (undo) kiya ja sakta hai: swap ko dobara wahi swap, \\(kR_i\\) ko \\(\\frac{1}{k}R_i\\) (yahan bhi \\(k \\ne 0\\) zaroori hai), aur \\(R_i + kR_j\\) ko \\(R_i - kR_j\\). Jaise kisi raste par ja kar wapas aaya ja sakta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Dhyan dein",
+            "text": "Equivalent matrices ke beech \"\\(=\\)\" ka nishan kabhi na likhein. \\(\\begin{bmatrix}2 & 4 \\\\ 1 & 3\\end{bmatrix}\\) aur \\(\\begin{bmatrix}1 & 3 \\\\ 2 & 4\\end{bmatrix}\\) barabar (equal) nahi hain, kyun ke un ki entries alag hain. Woh sirf equivalent hain, is liye \\(\\underset{\\sim}{R}\\) likhte hain. Exam mein yeh ghalti number katwa deti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Upper Triangular Matrix: Ek square matrix \\(A = [a_{ij}]\\) upper triangular matrix kehlata hai agar principal diagonal (bayen upar se dayen neeche jane wali tirchi line) se neeche ke tamam elements zero hon, yani\n\\[a_{ij} = 0 \\text{ for all } i > j\\]",
+            "bold": [
+              "Upper Triangular Matrix:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Lower Triangular Matrix: Ek square matrix \\(A = [a_{ij}]\\) lower triangular matrix kehlata hai agar principal diagonal se upar ke tamam elements zero hon, yani\n\\[a_{ij} = 0 \\text{ for all } i < j\\]",
+            "bold": [
+              "Lower Triangular Matrix:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(i > j\\) ko kaise samjhein? \\(a_{ij}\\) mein \\(i\\) row number aur \\(j\\) column number hai. Jin entries mein row number column number se bara ho (\\(i > j\\)), woh hamesha diagonal se neeche hoti hain. \\(3 \\times 3\\) matrix mein yeh \\(a_{21}\\), \\(a_{31}\\), \\(a_{32}\\) hain. Is liye \"upper triangular\" ka matlab: yeh teeno zero hon, aur numbers sirf diagonal par aur us se upar hon, jaise ek tikon (triangle) jo upar ki taraf hai.\nIsi tarah \\(i < j\\) wali entries diagonal se upar hain: \\(a_{12}\\), \\(a_{13}\\), \\(a_{23}\\). Lower triangular mein yeh zero hoti hain.\nDiagonal (\\(i = j\\)) par koi bhi number ho sakta hai, zero bhi. Shart sirf diagonal se bahar ke ek hisse par hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Triangular Matrix: Ek square matrix \\(A\\) triangular matrix kehlata hai chahe woh upper triangular ho ya lower triangular. Misaal ke taur par yeh matrices\n\\[\\begin{bmatrix}1 & 2 & 3 \\\\ 0 & 1 & 4 \\\\ 0 & 0 & 6\\end{bmatrix}\\]\naur\n\\[\\begin{bmatrix}1 & 0 & 0 & 0 \\\\ 3 & 2 & 0 & 0 \\\\ 4 & 1 & 5 & 0 \\\\ -1 & 2 & 3 & 1\\end{bmatrix}\\]\nbil tarteeb order 3 aur order 4 ke triangular matrices hain. Pehla upper triangular hai (diagonal se neeche sab zero), jab ke doosra lower triangular hai (diagonal se upar sab zero).",
+            "bold": [
+              "Triangular Matrix:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Remember!",
+            "text": "Diagonal matrices upper triangular bhi hote hain aur lower triangular bhi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Diagonal matrix dono kyun hai? Diagonal matrix mein diagonal ke ilawa har entry zero hoti hai. To diagonal se neeche ki entries bhi zero (is liye upper triangular), aur upar ki entries bhi zero (is liye lower triangular). Yahi baat scalar matrix, unit matrix \\(I\\) aur square null matrix par bhi lagti hai.\nAage kya hoga: agle sabaq mein hum row operations se matrix ko echelon form mein layenge. Square matrix ke liye yeh shakal upper triangular hoti hai, yani diagonal se neeche zero. Aisi shakal mein equations neeche se upar ki taraf asaani se hal ho jati hain: aakhri equation mein ek hi variable bachta hai, phir us ki value upar wali equation mein rakhte jate hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Kya \\(\\begin{bmatrix}5 & 0 \\\\ 0 & 0\\end{bmatrix}\\) upper triangular hai? Lower triangular? Pehle khud sochiye, phir jawab dekhiye.\nJawab: dono. Diagonal se neeche ki entry \\(a_{21} = 0\\) aur upar ki entry \\(a_{12} = 0\\). Diagonal par 0 hona koi masla nahi; shart sirf diagonal se bahar ki entries par hai. Asal mein yeh ek diagonal matrix hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahi. \\(B = \\begin{bmatrix}3 & 6 \\\\ 1 & 5\\end{bmatrix}\\) ko upper triangular banaiye.\nHumein \\(a_{21} = 1\\) ko zero karna hai. \\(R_2 + \\left(-\\frac{1}{3}\\right)R_1 \\to R_2'\\) lagayein:\n\\[(1, 5) - \\tfrac{1}{3}(3, 6) = (0, 3)\\]\nNateeja:\n\\[B\\ \\underset{\\sim}{R}\\ \\begin{bmatrix}3 & 6 \\\\ 0 & 3\\end{bmatrix}\\]\nYeh upper triangular hai. Kyun yeh operation chuna? Kyun ke \\(-\\frac{1}{3}\\) ka multiple lene se \\(R_1\\) ka pehla entry 3, minus 1 ban jata hai jo \\(R_2\\) ke pehle entry 1 ko bilkul khatam kar deta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Teen elementary row operations: do rows ki jagah badalna, kisi row ko non-zero number se multiply karna, aur ek row ka multiple doosri row mein jama karna.\n2. Notation: \\(R_i \\leftrightarrow R_j\\), \\(kR_i \\to R_i'\\), \\(R_i + kR_j \\to R_i'\\).\n3. \\(A\\ \\underset{\\sim}{R}\\ B\\) ka matlab: \\(B\\) ko \\(A\\) se finite row operations laga kar banaya gaya; phir \\(B\\ \\underset{\\sim}{R}\\ A\\) bhi sach hai.\n4. Upper triangular: \\(i > j\\) ke liye \\(a_{ij} = 0\\) (diagonal se neeche zero). Lower triangular: \\(i < j\\) ke liye \\(a_{ij} = 0\\) (diagonal se upar zero).\n5. Triangular matrix hamesha square hota hai; diagonal matrix upper bhi hai aur lower bhi."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Kisi row ko 0 se multiply kar dena. Yeh elementary row operation nahi; multiplier hamesha non-zero ho. Bachne ka tareeqa: \\(kR_i\\) likhte waqt dekh lein ke \\(k \\ne 0\\).\n2. \\(R_i + kR_j \\to R_i'\\) mein \\(R_j\\) ko bhi badal dena. Sirf \\(R_i\\) badalti hai; \\(R_j\\) wesi hi copy hoti hai.\n3. Equivalent matrices ke beech \"\\(=\\)\" likhna. \\(\\underset{\\sim}{R}\\) likhein, kyun ke entries alag hain.\n4. Upper aur lower mein ulajhna. Yaad rakhne ka tareeqa: naam batata hai ke numbers kahan hain; upper triangular mein numbers upar hain aur zero neeche.\n5. Rectangular (non-square) matrix ko triangular kehna. Is definition mein sirf square matrix triangular hota hai."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-1-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-1-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 58,
+          "pdf_to": 58,
+          "note": "Exercise 4.1, Question 1: book page 53 (PDF 58); answer key PDF 302"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) If \\(A = [a_{ij}]_{3 \\times 4}\\), then show that \\(I_3A = A\\).",
+            "explanation": "This is a proof with a general matrix: \\(A\\) has 3 rows and 4 columns, and its entries are letters, not numbers.\nWe must show that multiplying \\(A\\) on the left by the \\(3 \\times 3\\) identity matrix gives \\(A\\) back.\nPlan: write \\(I_3\\) and \\(A\\) in full, check the orders, then multiply row by column and compare every entry.",
+            "steps": [
+              "Given: \\(A = [a_{ij}]_{3 \\times 4}\\) and \\(I_3\\), the identity matrix of order 3.\nTo prove: \\(I_3A = A\\).\nMethod: Row-by-column multiplication. Two matrices are equal when they have the same order and every pair of corresponding entries is equal, so we find each row of \\(I_3A\\) and compare.",
+              "Write both matrices in full\n\\[I_3 = \\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1\\end{bmatrix}\\]\n\\[A = \\begin{bmatrix}a_{11} & a_{12} & a_{13} & a_{14} \\\\ a_{21} & a_{22} & a_{23} & a_{24} \\\\ a_{31} & a_{32} & a_{33} & a_{34}\\end{bmatrix}\\]\nWhy: \\(I_3\\) has 1 on the principal diagonal and 0 everywhere else. \\(a_{ij}\\) is the entry in row \\(i\\), column \\(j\\).",
+              "Check that the product exists and find its order\n\\[(3 \\times 3)(3 \\times 4) \\to 3 \\times 4\\]\nWhy: A product \\(PQ\\) exists only when columns of \\(P\\) = rows of \\(Q\\) (here 3 = 3). The answer takes the outer numbers, \\(3 \\times 4\\), the same order as \\(A\\).",
+              "Row 1 of \\(I_3\\) times column \\(j\\) of \\(A\\)\n\\[(1)a_{1j} + (0)a_{2j} + (0)a_{3j}\\]\n\\[= a_{1j}\\]\nWhy: Row 1 of \\(I_3\\) is \\((1, 0, 0)\\). The 1 picks out the first entry of the column and the zeros remove the others. For \\(j = 1, 2, 3, 4\\) this gives \\(a_{11}, a_{12}, a_{13}, a_{14}\\): row 1 of \\(A\\).",
+              "Row 2 of \\(I_3\\) times column \\(j\\) of \\(A\\)\n\\[(0)a_{1j} + (1)a_{2j} + (0)a_{3j}\\]\n\\[= a_{2j}\\]\nWhy: Row 2 of \\(I_3\\) is \\((0, 1, 0)\\), so it picks out the second entry of each column. Row 2 of the product is \\(a_{21}, a_{22}, a_{23}, a_{24}\\).",
+              "Row 3 of \\(I_3\\) times column \\(j\\) of \\(A\\)\n\\[(0)a_{1j} + (0)a_{2j} + (1)a_{3j}\\]\n\\[= a_{3j}\\]\nWhy: Row 3 of \\(I_3\\) is \\((0, 0, 1)\\), so it picks out the third entry. Row 3 of the product is \\(a_{31}, a_{32}, a_{33}, a_{34}\\).",
+              "Put the rows together\n\\[I_3A = \\begin{bmatrix}a_{11} & a_{12} & a_{13} & a_{14} \\\\ a_{21} & a_{22} & a_{23} & a_{24} \\\\ a_{31} & a_{32} & a_{33} & a_{34}\\end{bmatrix}\\]\n\\[I_3A = A\\]\nWhy: \\(I_3A\\) and \\(A\\) have the same order \\(3 \\times 4\\) and all 12 corresponding entries are equal, so the matrices are equal.",
+              "Check with numbers\n\\[(1, 0, 0)\\cdot(5, -2, 7) = 5\\]\nWhy: Any column, for example \\((5, -2, 7)\\), multiplied by row 1 of \\(I_3\\) gives back its first entry 5, exactly as the general working says."
+            ],
+            "final_answer": "Hence proved: \\(I_3A = A\\) for every \\(3 \\times 4\\) matrix \\(A\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) If \\(A = [a_{ij}]_{3 \\times 4}\\), then show that \\(AI_4 = A\\).",
+            "explanation": "Same idea as part (i), but now the identity matrix is on the right.\nWe must show that \\(A\\) times the \\(4 \\times 4\\) identity matrix gives \\(A\\).\nPlan: check the orders, then multiply a general row of \\(A\\) by each column of \\(I_4\\).",
+            "steps": [
+              "Given: \\(A = [a_{ij}]_{3 \\times 4}\\) and \\(I_4\\), the identity matrix of order 4.\nTo prove: \\(AI_4 = A\\).\nMethod: Row-by-column multiplication, then compare entries. On the right of \\(A\\) the identity must have as many rows as \\(A\\) has columns, so it is \\(I_4\\).",
+              "Write \\(I_4\\) and check the order\n\\[I_4 = \\begin{bmatrix}1 & 0 & 0 & 0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & 1\\end{bmatrix}\\]\n\\[(3 \\times 4)(4 \\times 4) \\to 3 \\times 4\\]\nWhy: The inner numbers 4 and 4 match, so the product exists; its order \\(3 \\times 4\\) is the order of \\(A\\).",
+              "Row \\(i\\) of \\(A\\) times column 1 of \\(I_4\\)\n\\[a_{i1}(1) + a_{i2}(0) + a_{i3}(0) + a_{i4}(0)\\]\n\\[= a_{i1}\\]\nWhy: Column 1 of \\(I_4\\) has 1 in the first place and 0 below it, so only the first entry of the row survives.",
+              "Row \\(i\\) of \\(A\\) times columns 2, 3, 4 of \\(I_4\\)\n\\[\\text{col } 2: \\; a_{i2}\\]\n\\[\\text{col } 3: \\; a_{i3}\\]\n\\[\\text{col } 4: \\; a_{i4}\\]\nWhy: Column \\(j\\) of \\(I_4\\) has its only 1 in place \\(j\\), so it picks out \\(a_{ij}\\) and the zeros remove the other three products.",
+              "Write the product\n\\[AI_4 = \\begin{bmatrix}a_{11} & a_{12} & a_{13} & a_{14} \\\\ a_{21} & a_{22} & a_{23} & a_{24} \\\\ a_{31} & a_{32} & a_{33} & a_{34}\\end{bmatrix}\\]\n\\[AI_4 = A\\]\nWhy: For \\(i = 1, 2, 3\\) row \\(i\\) of \\(AI_4\\) is \\(a_{i1}, a_{i2}, a_{i3}, a_{i4}\\), which is row \\(i\\) of \\(A\\). Same order, all entries equal.",
+              "Check with numbers\n\\[(2, 7, -1, 4)\\cdot(0, 0, 1, 0) = -1\\]\nWhy: A row times column 3 of \\(I_4\\) gives back its third entry \\(-1\\), as the general working says."
+            ],
+            "final_answer": "Hence proved: \\(AI_4 = A\\) for every \\(3 \\times 4\\) matrix \\(A\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.9",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.9",
+      "title": "4.9 System of Homogeneous Linear Equations",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 76,
+          "pdf_to": 76,
+          "note": "Book p. 71: 4.9 System of Homogeneous Linear Equations, system (i), trivial and non-trivial solution (text before 4.9.1)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The system of following homogeneous linear equations:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[a_{11}x_1 + a_{12}x_2 + a_{13}x_3 = 0\\]\n\\[a_{21}x_1 + a_{22}x_2 + a_{23}x_3 = 0\\]\n\\[a_{31}x_1 + a_{32}x_2 + a_{33}x_3 = 0\\]\n\\[\\ldots\\text{(i)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "is always satisfied by \\(x_1 = 0, x_2 = 0\\) and \\(x_3 = 0\\), so such a system is always consistent."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Homogeneous means that every equation has \\(0\\) on the right-hand side: there is no constant term. In matrix form system (i) is \\(AX = O\\), where \\(A\\) is the coefficient matrix, \\(X\\) the column of unknowns and \\(O\\) the null column:\n\\[A = \\begin{bmatrix}a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33}\\end{bmatrix}\\]\n\\[X = \\begin{bmatrix}x_1 \\\\ x_2 \\\\ x_3\\end{bmatrix},\\quad O = \\begin{bmatrix}0 \\\\ 0 \\\\ 0\\end{bmatrix}\\]\n\\[AX = O\\]\nConsistent means the system has at least one solution. Putting \\(x_1 = x_2 = x_3 = 0\\) makes every left-hand side \\(0\\), so a homogeneous system can never be inconsistent. A non-homogeneous system \\(AX = B\\) with \\(B \\ne O\\) (Section 4.8) can be inconsistent; a homogeneous one cannot."
+          },
+          {
+            "type": "paragraph",
+            "text": "Trivial Solution: The solution \\((0, 0, 0)\\) of the above homogeneous system is called the trivial solution.",
+            "bold": [
+              "Trivial Solution:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Non-Trivial Solution: Any other solution of system (i) other than the trivial solution is called a non-trivial solution.",
+            "bold": [
+              "Non-Trivial Solution:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\"Trivial\" means obvious: \\((0, 0, 0)\\) needs no working at all. So for a homogeneous system the real question is: is \\((0, 0, 0)\\) the only solution, or are there others?\nIf \\((x_1, x_2, x_3)\\) is a non-trivial solution, then \\((kx_1, kx_2, kx_3)\\) is also a solution for every number \\(k\\), because each equation just gets multiplied by \\(k\\). So a homogeneous system has either exactly one solution (the trivial one) or infinitely many solutions. It never has exactly two.\nThe determinant of the coefficient matrix decides which case we are in:\nif \\(|A| \\ne 0\\), then \\(A^{-1}\\) exists and \\(X = A^{-1}O = O\\): only the trivial solution;\nif \\(|A| = 0\\), the system has non-trivial solutions.\nSection 4.9.1 shows how to find all the solutions by Gaussian elimination and states the same test in terms of rank."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A small illustration with two variables (our own, not from the book):\n\\(x + y = 0\\) and \\(2x + 2y = 0\\): the second equation is just twice the first. Every pair \\((t, -t)\\) works, e.g. \\((1, -1)\\), \\((5, -5)\\). Here\n\\[\\begin{vmatrix} 1 & 1 \\\\ 2 & 2 \\end{vmatrix} = 2 - 2 = 0\\]\nso there are non-trivial solutions.\n\\(x + y = 0\\) and \\(x - y = 0\\): adding gives \\(2x = 0\\), so \\(x = 0\\) and then \\(y = 0\\). Here\n\\[\\begin{vmatrix} 1 & 1 \\\\ 1 & -1 \\end{vmatrix} = -1 - 1 = -2\\]\nwhich is not zero, so only the trivial solution \\((0, 0)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A homogeneous system has all constant terms zero: \\(AX = O\\).\n2. It is always consistent, because \\((0, 0, 0)\\) always satisfies it.\n3. \\((0, 0, 0)\\) is the trivial solution; any other solution is non-trivial.\n4. Either only the trivial solution, or infinitely many solutions.\n5. \\(|A| \\ne 0\\): only trivial. \\(|A| = 0\\): non-trivial solutions exist."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Saying a homogeneous system \"has no solution\": it always has at least \\((0, 0, 0)\\).\n2. Calling \\((0, 0, 0)\\) a non-trivial solution: non-trivial means a solution with at least one unknown not zero.\n3. Treating a system such as \\(x + y = 0,\\ x - y = 4\\) as homogeneous: one non-zero constant makes the whole system non-homogeneous."
+          }
+        ]
+      }
+    }
+  ]
+}

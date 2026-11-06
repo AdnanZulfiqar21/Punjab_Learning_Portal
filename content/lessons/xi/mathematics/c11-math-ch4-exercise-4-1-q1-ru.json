@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-1-Q1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-1-q1",
+      "title": "Question 1 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 58,
+          "pdf_to": 58,
+          "note": "Exercise 4.1, Question 1: book page 53 (PDF 58); answer key PDF 302"
+        }
+      ],
+      "variant_of": "C11-MATH-CH4-EXERCISE-4-1-Q1",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) If \\(A = [a_{ij}]_{3 \\times 4}\\), then show that \\(I_3A = A\\).",
+            "explanation": "Yeh proof wala sawal hai, aur is mein matrix ki entries numbers nahi balke letters hain: \\(A\\) ki 3 rows aur 4 columns hain.\nDiya kya hai? \\(A = [a_{ij}]_{3 \\times 4}\\) aur identity matrix \\(I_3\\).\nSaabit kya karna hai? Ke \\(A\\) ko baayen (left) taraf se \\(I_3\\) se multiply karein to \\(A\\) hi wapas milta hai.\nRule kaunsa? Row-by-column multiplication aur equal matrices ki definition.\nPlan: dono matrices poori likhenge, order check karenge, phir har row ka hisaab laga kar entries compare karenge.",
+            "steps": [
+              "Diya gaya hai: \\(A = [a_{ij}]_{3 \\times 4}\\) aur \\(I_3\\), yani order 3 ki identity matrix.\nSaabit karna hai: \\(I_3A = A\\).\nTareeqa: Row-by-column multiplication. Do matrices tab equal hoti hain jab un ka order bhi same ho aur har jagah ki entry bhi same ho. Is liye hum \\(I_3A\\) ki har row nikal kar \\(A\\) ki row se milayenge. Letters ka faida yeh hai ke jo saabit hoga woh har \\(3 \\times 4\\) matrix ke liye sach hoga, sirf kisi ek misaal ke liye nahi.",
+              "Dono matrices poori likhein\n\\[I_3 = \\begin{bmatrix}1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1\\end{bmatrix}\\]\n\\[A = \\begin{bmatrix}a_{11} & a_{12} & a_{13} & a_{14} \\\\ a_{21} & a_{22} & a_{23} & a_{24} \\\\ a_{31} & a_{32} & a_{33} & a_{34}\\end{bmatrix}\\]\nKyun: \\(I_3\\) ki principal diagonal (upar baayen se neeche daayen wali tirchi line) par 1 hai aur baaqi har jagah 0. \\(a_{ij}\\) ka matlab hai row \\(i\\) aur column \\(j\\) wali entry; jaise \\(a_{23}\\) doosri row aur teesre column mein baithi hai. Poori matrix saamne ho to multiplication mein ghalti kam hoti hai.",
+              "Pehle dekhein product ban bhi sakta hai ya nahi, aur us ka order\n\\[(3 \\times 3)(3 \\times 4) \\to 3 \\times 4\\]\nKyun: Matrix multiplication \\(PQ\\) tabhi mumkin hai jab \\(P\\) ke columns aur \\(Q\\) ki rows barabar hon; yahan andar wale numbers 3 aur 3 barabar hain. Jawab ka order bahar wale numbers se banta hai, yani \\(3 \\times 4\\), bilkul \\(A\\) jitna. Agar order hi mukhtalif hota to \\(I_3A = A\\) ho hi nahi sakta tha.\nDhyan dein: Yahi wajah hai ke left par \\(I_3\\) lagaya hai, \\(I_4\\) nahi; \\((4 \\times 4)(3 \\times 4)\\) ka product bantaa hi nahi.",
+              "\\(I_3\\) ki row 1 ko \\(A\\) ke column \\(j\\) se multiply karein\n\\[(1)a_{1j} + (0)a_{2j} + (0)a_{3j}\\]\n\\[= a_{1j}\\]\nKyun: \\(I_3\\) ki pehli row \\((1, 0, 0)\\) hai. Row ko column se multiply karne ka matlab hai pehli entry ko pehli se, doosri ko doosri se, teesri ko teesri se zarb de kar jama karna. 1 wali jagah column ki pehli entry ko bacha leti hai aur 0 baaqi dono ko khatam kar dete hain. \\(j = 1, 2, 3, 4\\) rakhein to \\(a_{11}, a_{12}, a_{13}, a_{14}\\) milte hain, yani bilkul \\(A\\) ki pehli row.",
+              "\\(I_3\\) ki row 2 ko column \\(j\\) se multiply karein\n\\[(0)a_{1j} + (1)a_{2j} + (0)a_{3j}\\]\n\\[= a_{2j}\\]\nKyun: Doosri row \\((0, 1, 0)\\) hai, is ka 1 doosri jagah par hai, is liye yeh har column ki doosri entry chun leti hai. Product ki doosri row \\(a_{21}, a_{22}, a_{23}, a_{24}\\) bani, jo \\(A\\) ki doosri row hai.",
+              "\\(I_3\\) ki row 3 ko column \\(j\\) se multiply karein\n\\[(0)a_{1j} + (0)a_{2j} + (1)a_{3j}\\]\n\\[= a_{3j}\\]\nKyun: Teesri row \\((0, 0, 1)\\) har column ki teesri entry chunti hai. Is tarah product ki teesri row \\(a_{31}, a_{32}, a_{33}, a_{34}\\) bani. Socha jaye to identity matrix ki har row ek 'chunne wali' row hai: row \\(i\\) sirf \\(i\\)-th entry uthati hai.",
+              "Saari rows jor kar likhein\n\\[I_3A = \\begin{bmatrix}a_{11} & a_{12} & a_{13} & a_{14} \\\\ a_{21} & a_{22} & a_{23} & a_{24} \\\\ a_{31} & a_{32} & a_{33} & a_{34}\\end{bmatrix}\\]\n\\[I_3A = A\\]\nKyun: Ab \\(I_3A\\) aur \\(A\\) dono ka order \\(3 \\times 4\\) hai aur 12 ki 12 entries jagah ba jagah barabar hain. Equal matrices ki definition yahi maangti hai, is liye \\(I_3A = A\\). Isi liye \\(I\\) ko matrices ki duniya ka '1' kehte hain: jaise \\(1 \\times 7 = 7\\), waise hi \\(I_3A = A\\).",
+              "Tasdeeq: numbers se aazmayein\n\\[(1, 0, 0)\\cdot(5, -2, 7) = 5\\]\nKyun: Koi bhi column le lein, jaise \\((5, -2, 7)\\). \\(I_3\\) ki pehli row se multiply karne par \\(5 + 0 + 0 = 5\\) aata hai, yani pehli entry wapas mil gayi. Yeh wahi baat hai jo upar letters ke saath saabit hui."
+            ],
+            "final_answer": "Saabit ho gaya: har \\(3 \\times 4\\) matrix \\(A\\) ke liye \\(I_3A = A\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) If \\(A = [a_{ij}]_{3 \\times 4}\\), then show that \\(AI_4 = A\\).",
+            "explanation": "Yeh part (i) jaisa hi hai, farq sirf yeh hai ke identity matrix ab \\(A\\) ke daayen (right) taraf hai.\nDiya kya hai? \\(A = [a_{ij}]_{3 \\times 4}\\) aur \\(I_4\\).\nSaabit kya karna hai? \\(AI_4 = A\\).\nRule kaunsa? Row-by-column multiplication aur equal matrices.\nPlan: order check, phir \\(A\\) ki kisi bhi row ko \\(I_4\\) ke har column se multiply kar ke dekhna.",
+            "steps": [
+              "Diya gaya hai: \\(A = [a_{ij}]_{3 \\times 4}\\) aur order 4 ki identity matrix \\(I_4\\).\nSaabit karna hai: \\(AI_4 = A\\).\nTareeqa: Row-by-column multiplication aur phir entries ka muqabla. Sawal yeh bhi hai ke right par \\(I_4\\) kyun aur \\(I_3\\) kyun nahi: right wali matrix ki rows utni honi chahiye jitne \\(A\\) ke columns hain, yani 4. Is liye yahan \\(I_4\\) hi chal sakti hai.",
+              "\\(I_4\\) likhein aur order check karein\n\\[I_4 = \\begin{bmatrix}1 & 0 & 0 & 0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & 1\\end{bmatrix}\\]\n\\[(3 \\times 4)(4 \\times 4) \\to 3 \\times 4\\]\nKyun: Andar wale numbers 4 aur 4 barabar hain, is liye product mumkin hai. Bahar wale numbers jawab ka order dete hain: \\(3 \\times 4\\), jo \\(A\\) ka order hai. Order same hona pehli shart hai, warna barabari ka sawal hi paida nahi hota.\nDhyan dein: \\(AI_3\\) likhna ghalat hai, kyunke \\((3 \\times 4)(3 \\times 3)\\) mein andar wale numbers 4 aur 3 hain; yeh product bantaa hi nahi.",
+              "\\(A\\) ki row \\(i\\) ko \\(I_4\\) ke column 1 se multiply karein\n\\[a_{i1}(1) + a_{i2}(0) + a_{i3}(0) + a_{i4}(0)\\]\n\\[= a_{i1}\\]\nKyun: Yahan row \\(i\\) ka matlab hai koi bhi row, 1, 2 ya 3; ek hi hisaab teenon ke liye kaam karega. \\(I_4\\) ke pehle column mein sirf upar 1 hai aur baaqi 0, is liye chaar products mein se sirf pehla bachta hai aur \\(a_{i1}\\) milta hai.",
+              "Row \\(i\\) ko columns 2, 3, 4 se multiply karein\n\\[\\text{col } 2: \\; a_{i2}\\]\n\\[\\text{col } 3: \\; a_{i3}\\]\n\\[\\text{col } 4: \\; a_{i4}\\]\nKyun: \\(I_4\\) ke column \\(j\\) mein 1 sirf \\(j\\)-th jagah par hai. Is liye woh row ki \\(j\\)-th entry \\(a_{ij}\\) ko chun leta hai aur baaqi teen products zero ban jate hain. Part (i) mein rows 'chunne' ka kaam kar rahi thin; yahan columns yeh kaam kar rahe hain.",
+              "Product likhein\n\\[AI_4 = \\begin{bmatrix}a_{11} & a_{12} & a_{13} & a_{14} \\\\ a_{21} & a_{22} & a_{23} & a_{24} \\\\ a_{31} & a_{32} & a_{33} & a_{34}\\end{bmatrix}\\]\n\\[AI_4 = A\\]\nKyun: Har row \\(i\\) (1, 2, 3) ke liye \\(AI_4\\) ki row \\(a_{i1}, a_{i2}, a_{i3}, a_{i4}\\) bani, jo \\(A\\) ki wohi row hai. Order bhi same aur saari entries bhi same, is liye dono matrices equal hain.",
+              "Tasdeeq: numbers se aazmayein\n\\[(2, 7, -1, 4)\\cdot(0, 0, 1, 0) = -1\\]\nKyun: Ek row \\((2, 7, -1, 4)\\) ko \\(I_4\\) ke teesre column se multiply kiya: \\(0 + 0 - 1 + 0 = -1\\), yani teesri entry wapas mil gayi. Letters wala hisaab yahi keh raha tha."
+            ],
+            "final_answer": "Saabit ho gaya: har \\(3 \\times 4\\) matrix \\(A\\) ke liye \\(AI_4 = A\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

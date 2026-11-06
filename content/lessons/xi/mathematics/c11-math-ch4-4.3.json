@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.3",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 57,
+          "pdf_to": 58,
+          "note": "Book p. 52-53: 4.3 properties (i)-(x), Example 3 (AB and BA) and the pink Note (multiplication not commutative in general), up to Exercise 4.1. Teaching notes, our check of the properties, the extra steps of the example, Key points and Common mistake are ours."
+        }
+      ],
+      "title": "4.3 Properties of Matrix Addition, Scalar Multiplication and Matrix Multiplication",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "If \\(A\\), \\(B\\) and \\(C\\) are conformable for the indicated sum or product of matrices, and \\(c\\) and \\(d\\) are scalars, then the following properties are true:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) Commutative property w.r.t. addition: \\(A + B = B + A\\)",
+              "(ii) Associative property w.r.t. addition: \\((A + B) + C = A + (B + C)\\)",
+              "(iii) Associative property of scalar multiplication: \\((cd)A = c(dA)\\)",
+              "(iv) Existence of additive identity: \\(A + O = O + A = A\\) (\\(O\\) is null matrix and \\(A\\) is a square matrix)",
+              "(v) Existence of multiplicative identity: \\(IA = AI = A\\) (\\(I\\) is unit/identity matrix)",
+              "(vi) Distributive property w.r.t. scalar multiplication: (a) \\(c(A + B) = cA + cB\\)  (b) \\((c + d)A = cA + dA\\)",
+              "(vii) Associative property w.r.t. multiplication: \\(A(BC) = (AB)C\\)",
+              "(viii) Left distributive property: \\(A(B + C) = AB + AC\\)",
+              "(ix) Right distributive property: \\((A + B)C = AC + BC\\)",
+              "(x) \\(c(AB) = (cA)B = A(cB)\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Most of these are the familiar laws of numbers, and they hold because matrix addition and scalar multiplication work entry by entry on ordinary numbers. Two differences from numbers are important:\n1. There is no commutative property for multiplication: \\(AB\\) and \\(BA\\) are usually different (Example 3 below).\n2. Because of that, the left and right distributive properties (viii) and (ix) are listed separately: \\(A\\) stays on the left in (viii) and \\(C\\) stays on the right in (ix)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "About (iv): the book adds \"\\(A\\) is a square matrix\", but \\(A + O = O + A = A\\) is true for a matrix \\(A\\) of any order, provided \\(O\\) is the null matrix of that same order. In (v), \\(I\\) must have the right order: for a square \\(A\\) of order \\(n\\), \\(I = I_{n}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our check of (vii), (viii) and (x) with small matrices (not from the book): \\(E = \\begin{bmatrix}1 & 0 \\\\ 2 & 1\\end{bmatrix}\\), \\(F = \\begin{bmatrix}0 & 1 \\\\ 1 & 0\\end{bmatrix}\\), \\(G = \\begin{bmatrix}2 & 1 \\\\ 0 & 3\\end{bmatrix}\\).\n\\[E(F + G) = \\begin{bmatrix}1 & 0 \\\\ 2 & 1\\end{bmatrix}\\begin{bmatrix}2 & 2 \\\\ 1 & 3\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}2 & 2 \\\\ 5 & 7\\end{bmatrix}\\]\nand \\(EF + EG = \\begin{bmatrix}0 & 1 \\\\ 1 & 2\\end{bmatrix} + \\begin{bmatrix}2 & 1 \\\\ 4 & 5\\end{bmatrix} = \\begin{bmatrix}2 & 2 \\\\ 5 & 7\\end{bmatrix}\\), so (viii) holds here.\nAlso \\((EF)G = \\begin{bmatrix}0 & 3 \\\\ 2 & 7\\end{bmatrix}\\) and \\(E(FG) = \\begin{bmatrix}0 & 3 \\\\ 2 & 7\\end{bmatrix}\\): (vii).\nAnd \\(2(EF) = (2E)F = E(2F) = \\begin{bmatrix}0 & 2 \\\\ 2 & 4\\end{bmatrix}\\): (x)."
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Find \\(AB\\) and \\(BA\\) if \\(A = \\begin{bmatrix}2 & 0 & 1 \\\\ 1 & 4 & 2 \\\\ 3 & 0 & 6\\end{bmatrix}\\) and \\(B = \\begin{bmatrix}1 & -1 & 0 \\\\ 2 & 3 & -1 \\\\ 1 & -2 & 3\\end{bmatrix}\\).",
+            "steps": [
+              "Given: \\(A\\) and \\(B\\), both \\(3 \\times 3\\).\nTo find: \\(AB\\) and \\(BA\\).\nMethod: the row-by-column rule (4.2.4). Both are square of the same order, so \\(AB\\) and \\(BA\\) are both defined and both \\(3 \\times 3\\). At the end we compare them.",
+              "Step 1: First row of \\(AB\\)\n\\[c_{11} = (2)(1) + (0)(2) + (1)(1) = 3\\]\n\\[c_{12} = (2)(-1) + (0)(3) + (1)(-2) = -4\\]\n\\[c_{13} = (2)(0) + (0)(-1) + (1)(3) = 3\\]\nWhy: row 1 of \\(A\\), that is \\(2, 0, 1\\), is matched with each of the three columns of \\(B\\) in turn.",
+              "Step 2: Second row of \\(AB\\)\n\\[c_{21} = (1)(1) + (4)(2) + (2)(1) = 11\\]\n\\[c_{22} = (1)(-1) + (4)(3) + (2)(-2) = 7\\]\n\\[c_{23} = (1)(0) + (4)(-1) + (2)(3) = 2\\]\nWhy: row 2 of \\(A\\), that is \\(1, 4, 2\\), is matched with each of the three columns of \\(B\\) in turn.",
+              "Step 3: Third row of \\(AB\\)\n\\[c_{31} = (3)(1) + (0)(2) + (6)(1) = 9\\]\n\\[c_{32} = (3)(-1) + (0)(3) + (6)(-2) = -15\\]\n\\[c_{33} = (3)(0) + (0)(-1) + (6)(3) = 18\\]\nWhy: row 3 of \\(A\\), that is \\(3, 0, 6\\), is matched with each of the three columns of \\(B\\) in turn.",
+              "Step 4: Write \\(AB\\)\n\\[AB = \\begin{bmatrix}3 & -4 & 3 \\\\ 11 & 7 & 2 \\\\ 9 & -15 & 18\\end{bmatrix} \\quad \\text{(i)}\\]",
+              "Step 5: First row of \\(BA\\)\n\\[d_{11} = (1)(2) + (-1)(1) + (0)(3) = 1\\]\n\\[d_{12} = (1)(0) + (-1)(4) + (0)(0) = -4\\]\n\\[d_{13} = (1)(1) + (-1)(2) + (0)(6) = -1\\]\nWhy: now the order is reversed: row 1 of \\(B\\), that is \\(1, -1, 0\\), is matched with the columns of \\(A\\).",
+              "Step 6: Second row of \\(BA\\)\n\\[d_{21} = (2)(2) + (3)(1) + (-1)(3) = 4\\]\n\\[d_{22} = (2)(0) + (3)(4) + (-1)(0) = 12\\]\n\\[d_{23} = (2)(1) + (3)(2) + (-1)(6) = 2\\]\nWhy: now the order is reversed: row 2 of \\(B\\), that is \\(2, 3, -1\\), is matched with the columns of \\(A\\).",
+              "Step 7: Third row of \\(BA\\)\n\\[d_{31} = (1)(2) + (-2)(1) + (3)(3) = 9\\]\n\\[d_{32} = (1)(0) + (-2)(4) + (3)(0) = -8\\]\n\\[d_{33} = (1)(1) + (-2)(2) + (3)(6) = 15\\]\nWhy: now the order is reversed: row 3 of \\(B\\), that is \\(1, -2, 3\\), is matched with the columns of \\(A\\).",
+              "Step 8: Write \\(BA\\)\n\\[BA = \\begin{bmatrix}1 & -4 & -1 \\\\ 4 & 12 & 2 \\\\ 9 & -8 & 15\\end{bmatrix} \\quad \\text{(ii)}\\]",
+              "Step 9: Compare\nAlready the first entries differ (\\(3 \\ne 1\\)), so \\(AB \\ne BA\\).\nWhy: equal matrices need every pair of corresponding entries equal; one difference is enough.",
+              "Check: the sum of the diagonal entries (the trace) of \\(AB\\) and of \\(BA\\) is always the same, which gives a quick test: \\(3 + 7 + 18 = 28\\) and \\(1 + 12 + 15 = 28\\). They agree, so no large slip is likely."
+            ],
+            "answer": "\\(AB = \\begin{bmatrix}3 & -4 & 3 \\\\ 11 & 7 & 2 \\\\ 9 & -15 & 18\\end{bmatrix}\\), \\(BA = \\begin{bmatrix}1 & -4 & -1 \\\\ 4 & 12 & 2 \\\\ 9 & -8 & 15\\end{bmatrix}\\); thus \\(AB \\ne BA\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Matrix multiplication is not commutative in general."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\"In general\" matters: some pairs do commute. For example \\(AI = IA\\), \\(AO = OA = O\\) (square \\(A\\)), and \\(A \\cdot A^{2} = A^{2} \\cdot A\\). But you may never assume \\(AB = BA\\) without checking."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Addition is commutative and associative; \\(O\\) is the additive identity.\n2. \\(I\\) is the multiplicative identity: \\(IA = AI = A\\).\n3. Multiplication is associative, \\(A(BC) = (AB)C\\), and distributive from the left and from the right.\n4. Scalars can move freely: \\(c(AB) = (cA)B = A(cB)\\).\n5. Multiplication is not commutative in general: \\(AB \\ne BA\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing \\(A(B + C) = BA + CA\\): the factor \\(A\\) must stay on the left.\n2. Assuming \\(AB = BA\\), for example writing \\((A + B)^{2} = A^{2} + 2AB + B^{2}\\) without thought.\n3. Using a property when the orders do not fit: every property assumes the sums and products are defined."
+          }
+        ]
+      }
+    }
+  ]
+}

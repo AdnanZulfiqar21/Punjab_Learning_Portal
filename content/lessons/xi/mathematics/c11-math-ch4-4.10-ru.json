@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.10-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.10",
+      "title": "4.10 Applications of Matrices in Real World (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 79,
+          "pdf_to": 81,
+          "note": "Book p. 74-76: 4.10 applications paragraph, reflection matrices, Example 16, Coding, Example 17 (before Exercise 4.3)"
+        }
+      ],
+      "variant_of": "C11-MATH-CH4-4.10",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab tak humne matrices aur determinants ke qaide seekhe: jama, zarb, inverse, aur equations ka hal. Aksar students poochte hain: \"Sir, yeh sab asal zindagi mein kahan kaam aata hai?\" Is aakhri sabaq mein iska jawab hai. Hum do cheezein dekhenge: matrix se kisi shakal ko aaine ki tarah ulatna (reflection), aur matrix se khufiya message banana (coding). Dono mein sirf matrix multiplication aur inverse chahiye, jo aap pehle hi seekh chuke hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ke mutabiq: matrices bohat se shobon mein asal zindagi ke masail hal karne mein ahem kirdar ada karte hain. Graphic design mein yeh tasweeron ko scaling (chhota bara karna), rotation (ghumana) aur reflection (ulatna) jaisi transformations se badalte hain. Data encryption aur cryptography mein messages ko encode aur decode kar ke mehfooz rabta ke liye matrices istemal hote hain. Seismic analysis mein engineers zalzale ki lehron ka model banane aur andaza lagane ke liye matrices istemal karte hain. Computer graphics mein translation (khiskana) aur dilation (phailana) jaisi geometric transformations bhi matrices par chalti hain. Isi tarah social network analysis mein logon ke aapas ke rishte matrices mein likh kar ahem influencers aur connections pehchaane jaate hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Transformation or Reflection Matrix ek mathematical aala hai jo coordinate plane mein kisi point ya cheez ka kisi aaina-line (mirror line) ke paar reflection dikhata hai. Yeh reflection transformation ko matrix ki shakal mein likhne ka tareeqa hai. Do dimensions mein is ka matlab aam taur par \\(x\\)-axis, \\(y\\)-axis ya \\(y = x\\) jaisi line ke paar reflection hota hai.",
+            "bold": [
+              "Transformation or Reflection Matrix"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Kisi matrix (point) ko \\(x\\)-axis mein reflect karne ke liye use is se multiply karte hain:\n\\[\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix}\\]\n\\(y\\)-axis mein reflect karne ke liye is se multiply karte hain:\n\\[\\begin{bmatrix}-1 & 0 \\\\ 0 & 1\\end{bmatrix}\\]\nLine \\(y = x\\) mein reflect karne ke liye is se multiply karte hain:\n\\[\\begin{bmatrix}0 & 1 \\\\ 1 & 0\\end{bmatrix}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh matrices hi kyun? Har ek ko ek aam point \\((x, y)\\) se, column bana kar, multiply kar ke dekhiye:\n\\[\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix}\\begin{bmatrix}x \\\\ y\\end{bmatrix} = \\begin{bmatrix}x \\\\ -y\\end{bmatrix}\\]\n\\[\\begin{bmatrix}-1 & 0 \\\\ 0 & 1\\end{bmatrix}\\begin{bmatrix}x \\\\ y\\end{bmatrix} = \\begin{bmatrix}-x \\\\ y\\end{bmatrix}\\]\n\\[\\begin{bmatrix}0 & 1 \\\\ 1 & 0\\end{bmatrix}\\begin{bmatrix}x \\\\ y\\end{bmatrix} = \\begin{bmatrix}y \\\\ x\\end{bmatrix}\\]\nMatlab \\(x\\)-axis wala matrix \\(x\\) ko wahi rakhta hai aur \\(y\\) ka sign ulat deta hai: point \\(x\\)-axis ke doosri taraf, utne hi faasle par chala jata hai, jaise paani mein darakht ka aks. \\(y\\)-axis wala matrix \\(x\\) ka sign ulatta hai (daayen se baayen). Aur \\(y = x\\) wala matrix dono coordinates ki jagah badal deta hai.\nMisal: \\((2, 3)\\) teeno se tarteeb se \\((2, -3)\\), \\((-2, 3)\\) aur \\((3, 2)\\) ban jata hai.\nYaad rakhne ka tareeqa: jis axis mein reflect karein, us axis wala coordinate nahin badalta."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Point \\((4, -1)\\) ko \\(y\\)-axis mein reflect karein to kya milega? Aur line \\(y = x\\) mein?\n(Jawab: \\((-4, -1)\\) aur \\((-1, 4)\\). Tasdeeq: \\(y\\)-axis matrix \\(x\\) ka sign badalta hai; \\(y = x\\) wala dono ki jagah badalta hai.)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Point ko hamesha column \\((2 \\times 1)\\) likhein aur transformation matrix ko LEFT side par rakhein. \\(2 \\times 2\\) into \\(2 \\times 1\\) defined hai; column into \\(2 \\times 2\\) defined nahin."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki misaal dekhte hain. Is mein ek poore triangle ko \\(x\\)-axis ke aaine mein ulatna hai. Triangle ke teen kone hain, is liye humein teen dafa wahi multiplication karna hoga. Har dafa pehle row-into-column ka hisaab likhenge, phir jawab, taa ke koi sign na chhoote."
+          },
+          {
+            "type": "example",
+            "title": "Example 16",
+            "problem": "A triangle has the vertices \\(A(2, 3)\\), \\(B(-1, 4)\\) and \\(C(3, -2)\\). Find the vertices of the reflected triangle over the \\(x\\)-axis by using transformation matrix.",
+            "steps": [
+              "Given: triangle ke vertices (kone) \\(A(2, 3)\\), \\(B(-1, 4)\\), \\(C(3, -2)\\).\nTo find: \\(x\\)-axis mein reflect hone ke baad naye vertices \\(A', B', C'\\).\nMethod: sab se pehle samajh lein ke reflection kya hai: \\(x\\)-axis ko aaina (mirror) samjhein; har point aaine ke doosri taraf utne hi faasle par chala jata hai. Matrix ke zariye yeh kaam aise hota hai: point ko column vector likhein aur us ko \\(x\\)-axis wale transformation matrix se left side par multiply karein:\n\\[\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix}\\]",
+              "Step 1: Points ko column matrices likhein\n\\[A = \\begin{bmatrix}2 \\\\ 3\\end{bmatrix},\\quad B = \\begin{bmatrix}-1 \\\\ 4\\end{bmatrix}\\]\n\\[C = \\begin{bmatrix}3 \\\\ -2\\end{bmatrix}\\]\nKyun: \\(2 \\times 2\\) matrix sirf \\(2 \\times 1\\) column se multiply ho sakta hai, aur jawab phir \\(2 \\times 1\\) column aata hai, yani phir ek point. Upar wala number \\(x\\) hai, neeche wala \\(y\\).",
+              "Step 2: Vertex \\(A'\\)\n\\[\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix}\\begin{bmatrix}2 \\\\ 3\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}2 + 0 \\\\ 0 - 3\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}2 \\\\ -3\\end{bmatrix}\\]\n\\(A' = (2, -3)\\).\nKyun: matrix ki pehli row column se: \\(1(2) + 0(3) = 2\\). Doosri row: \\(0(2) + (-1)(3) = -3\\). Yani \\(x\\) wahi raha aur \\(y\\) ka sign ulat gaya.",
+              "Step 3: Vertex \\(B'\\)\n\\[\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix}\\begin{bmatrix}-1 \\\\ 4\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}-1 + 0 \\\\ 0 - 4\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}-1 \\\\ -4\\end{bmatrix}\\]\n\\(B' = (-1, -4)\\).\nKyun: wahi row-into-column multiplication: \\(1(-1) + 0(4) = -1\\) aur \\(0(-1) + (-1)(4) = -4\\).\nDhyan dein: \\(x = -1\\) pehle se negative tha aur negative hi rehta hai; sirf \\(y\\) ka sign badalta hai.",
+              "Step 4: Vertex \\(C'\\)\n\\[\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix}\\begin{bmatrix}3 \\\\ -2\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}3 - 0 \\\\ 0 + 2\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}3 \\\\ 2\\end{bmatrix}\\]\n\\(C' = (3, 2)\\).\nKyun: \\(0(3) + (-1)(-2) = +2\\), kyun ke minus into minus plus hota hai. \\(C\\) aaine ke neeche tha, ab oopar aa gaya.",
+              "Step 5: Reflected triangle likhein\nSteps 2 se 4 ke mutabiq naye vertices \\(A'(2, -3)\\), \\(B'(-1, -4)\\) aur \\(C'(3, 2)\\) hain.\nKyun: aakhri jawab mein wahi values likhni hain jo abhi compute ki hain, signs samet. (Kitab ki aakhri line mein minus signs chhoot gaye hain; neeche \"Kitab ki ghalti\" dekhiye.)",
+              "Tasdeeq:\n\\(x\\)-axis mein reflection ka seedha rule: \\(x\\) wahi rehta hai, \\(y\\) ka sign ulat jata hai: \\((x, y) \\to (x, -y)\\).\n\\((2, 3) \\to (2, -3)\\), \\((-1, 4) \\to (-1, -4)\\), \\((3, -2) \\to (3, 2)\\). Teeno match karte hain. Aur do baar reflect karein to point wapas apni jagah aana chahiye:\n\\[\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix}\\begin{bmatrix}1 & 0 \\\\ 0 & -1\\end{bmatrix} = \\begin{bmatrix}1 & 0 \\\\ 0 & 1\\end{bmatrix}\\]\nYeh identity matrix hai, yani do reflections kuch nahin badaltin. Bilkul aaine wali baat!"
+            ],
+            "answer": "Reflected triangle ke vertices \\(A'(2, -3)\\), \\(B'(-1, -4)\\) aur \\(C'(3, 2)\\) hain."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 16 ke aakhir mein kitab \\(A'(2, 3)\\), \\(B'(1, 4)\\) aur \\(C'(3, 2)\\) chhaapti hai: \\(A'\\) aur \\(B'\\) ke minus signs ghaib hain.\nSahi vertices, jaise kitab ki apni calculation wali lines dikhati hain, \\(A'(2, -3)\\), \\(B'(-1, -4)\\) aur \\(C'(3, 2)\\) hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Coding kisi message ko ek code ke zariye ek khaas shakal mein badalne ka amal hai. Code alamaat (symbols), alfaaz ya signals ka aisa nizaam hai jo doosre alfaaz ya maani ko zahir karta hai. Aksar is ka maqsad message ka asal matlab chhupana hota hai.",
+            "bold": [
+              "Coding"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Message decode karne ke liye coded matrix ko diye gaye matrix ke inverse se multiply karte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Inverse hi kyun? Agar message ka column \\(X\\) code ho kar \\(Y = AX\\) ban gaya, to dono taraf left se \\(A^{-1}\\) multiply karein:\n\\[A^{-1}Y = A^{-1}AX = IX = X\\]\naur asal numbers wapas mil jaate hain. Yani \\(A\\) taala hai aur \\(A^{-1}\\) us ki chaabi.\nLekin yeh tabhi mumkin hai jab \\(A^{-1}\\) maujood ho, yani \\(|A| \\ne 0\\). Jis matrix ka determinant zero ho use code matrix kabhi nahin banate, warna message wapas nikalna na-mumkin ho jata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example 17 mein istemal hone wale letters aur un ke numbers yeh hain:"
+          },
+          {
+            "type": "table",
+            "caption": "Letters A to Z and their numbers (the book's table in Example 17)",
+            "header": [
+              "Letter",
+              "Number",
+              "Letter",
+              "Number"
+            ],
+            "rows": [
+              [
+                "A",
+                "1",
+                "N",
+                "14"
+              ],
+              [
+                "B",
+                "2",
+                "O",
+                "15"
+              ],
+              [
+                "C",
+                "3",
+                "P",
+                "16"
+              ],
+              [
+                "D",
+                "4",
+                "Q",
+                "17"
+              ],
+              [
+                "E",
+                "5",
+                "R",
+                "18"
+              ],
+              [
+                "F",
+                "6",
+                "S",
+                "19"
+              ],
+              [
+                "G",
+                "7",
+                "T",
+                "20"
+              ],
+              [
+                "H",
+                "8",
+                "U",
+                "21"
+              ],
+              [
+                "I",
+                "9",
+                "V",
+                "22"
+              ],
+              [
+                "J",
+                "10",
+                "W",
+                "23"
+              ],
+              [
+                "K",
+                "11",
+                "X",
+                "24"
+              ],
+              [
+                "L",
+                "12",
+                "Y",
+                "25"
+              ],
+              [
+                "M",
+                "13",
+                "Z",
+                "26"
+              ]
+            ]
+          },
+          {
+            "type": "example",
+            "title": "Example 17",
+            "problem": "Use matrix\n\\[A = \\begin{bmatrix}1 & 2 \\\\ 3 & 1\\end{bmatrix}\\]\nto encode the message: ATTACK, where letters \\(A\\) to \\(Z\\) are corresponding to the numbers 1 to 26.",
+            "steps": [
+              "Given: matrix \\(A\\), message ATTACK, aur code \\(A = 1, B = 2, \\ldots, Z = 26\\) (upar wala table).\nTo find: coded (khufiya) message.\nMethod: sab se pehle haroof (letters) ko numbers mein badlein, phir do do ke groups banayein, har group ko \\(2 \\times 1\\) matrix likhein, aur har ek ko left side se \\(A\\) se multiply karein. Jo numbers niklein wahi coded message hai.",
+              "Step 1: Message ke letters ko do do ke groups mein baantein\nAT  TA  CK\nKyun: \\(A\\) ek \\(2 \\times 2\\) matrix hai, is liye woh sirf \\(2 \\times 1\\) column ko multiply kar sakta hai: ek waqt mein do letters. ATTACK mein 6 letters hain, to poore teen groups ban gaye.",
+              "Step 2: Numbers rakhein aur \\(2 \\times 1\\) matrices banayein\nTable se: A = 1, T = 20, C = 3, K = 11:\n\\[\\begin{bmatrix}A \\\\ T\\end{bmatrix} = \\begin{bmatrix}1 \\\\ 20\\end{bmatrix},\\quad \\begin{bmatrix}T \\\\ A\\end{bmatrix} = \\begin{bmatrix}20 \\\\ 1\\end{bmatrix}\\]\n\\[\\begin{bmatrix}C \\\\ K\\end{bmatrix} = \\begin{bmatrix}3 \\\\ 11\\end{bmatrix}\\]\nTo \\(2 \\times 1\\) matrices mein message yeh hai:\n\\[\\begin{bmatrix}1 \\\\ 20\\end{bmatrix}\\begin{bmatrix}20 \\\\ 1\\end{bmatrix}\\begin{bmatrix}3 \\\\ 11\\end{bmatrix}\\]\nKyun: matrix numbers ke saath kaam karta hai, letters ke saath nahin. Is liye pehle har letter ko us ka number diya.",
+              "Step 3: Pehla group encode karein\n\\[\\begin{bmatrix}1 & 2 \\\\ 3 & 1\\end{bmatrix}\\begin{bmatrix}1 \\\\ 20\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}1 + 40 \\\\ 3 + 20\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}41 \\\\ 23\\end{bmatrix}\\]\nKyun: pehli row: \\(1(1) + 2(20) = 41\\); doosri row: \\(3(1) + 1(20) = 23\\). Har row ko column ke saath multiply kar ke jama karte hain.",
+              "Step 4: Doosra group encode karein\n\\[\\begin{bmatrix}1 & 2 \\\\ 3 & 1\\end{bmatrix}\\begin{bmatrix}20 \\\\ 1\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}20 + 2 \\\\ 60 + 1\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}22 \\\\ 61\\end{bmatrix}\\]\nKyun: pehli row: \\(1(20) + 2(1) = 22\\); doosri row: \\(3(20) + 1(1) = 61\\).\nDhyan dein: AT aur TA mein wahi letters hain magar code bilkul mukhtalif nikla (41, 23 aur 22, 61). Isi liye yeh code torna mushkil hai.",
+              "Step 5: Teesra group encode karein\n\\[\\begin{bmatrix}1 & 2 \\\\ 3 & 1\\end{bmatrix}\\begin{bmatrix}3 \\\\ 11\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}3 + 22 \\\\ 9 + 11\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}25 \\\\ 20\\end{bmatrix}\\]\nKyun: pehli row: \\(1(3) + 2(11) = 25\\); doosri row: \\(3(3) + 1(11) = 20\\).",
+              "Step 6: Coded message likhein\n\\[\\begin{bmatrix}41 \\\\ 23\\end{bmatrix}\\begin{bmatrix}22 \\\\ 61\\end{bmatrix}\\begin{bmatrix}25 \\\\ 20\\end{bmatrix}\\]\nyani numbers 41, 23, 22, 61, 25, 20 bheje jayenge.\nKyun: sunne wale ko sirf yeh numbers milte hain. Jis ke paas \\(A\\) nahin, us ke liye yeh be-maani hain.",
+              "Tasdeeq:\n\\(A^{-1}\\) se decode kar ke dekhte hain ke ATTACK wapas aata hai ya nahin. Pehle\n\\[|A| = 1(1) - 2(3) = -5 \\ne 0\\]\n\\[A^{-1} = \\dfrac{1}{-5}\\begin{bmatrix}1 & -2 \\\\ -3 & 1\\end{bmatrix}\\]\n(adjoint mein diagonal ke numbers ki jagah badli aur baqi do ke sign badle.) Ab pehla group:\n\\[A^{-1}\\begin{bmatrix}41 \\\\ 23\\end{bmatrix} = \\dfrac{1}{-5}\\begin{bmatrix}41 - 46 \\\\ -123 + 23\\end{bmatrix}\\]\n\\[= \\dfrac{1}{-5}\\begin{bmatrix}-5 \\\\ -100\\end{bmatrix} = \\begin{bmatrix}1 \\\\ 20\\end{bmatrix}\\]\nyani A, T. Isi tarah \\(\\begin{bmatrix} 22 \\\\ 61 \\end{bmatrix}\\) se \\(\\begin{bmatrix} 20 \\\\ 1 \\end{bmatrix}\\) (T, A) aur \\(\\begin{bmatrix} 25 \\\\ 20 \\end{bmatrix}\\) se \\(\\begin{bmatrix} 3 \\\\ 11 \\end{bmatrix}\\) (C, K) milta hai. Message bilkul wapas aa gaya."
+            ],
+            "answer": "Coded message \\(\\begin{bmatrix} 41 \\\\ 23 \\end{bmatrix} \\begin{bmatrix} 22 \\\\ 61 \\end{bmatrix} \\begin{bmatrix} 25 \\\\ 20 \\end{bmatrix}\\) hai, yani 41, 23, 22, 61, 25, 20."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Agar message mein letters ki tadaad taaq (odd) ho, jaise 'YES' (3 letters), to do do ke groups kaise banenge?\n(Jawab: aakhri group mein ek letter akela reh jata hai. Us ke saath koi filler number jor dete hain, jaise 0 ya kisi khaali jagah ka number, taa ke woh bhi \\(2 \\times 1\\) column ban jaye. Bhejne wala aur sunne wala dono ko yeh filler pehle se maloom hona chahiye. Yeh hamari wazahat hai; kitab yahan filler ka zikr nahin karti.)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Isi matrix \\(A\\) se lafz GO encode karein (yeh hamari practice hai, kitab ka sawal nahin). G = 7, O = 15:\n\\[\\begin{bmatrix}1 & 2 \\\\ 3 & 1\\end{bmatrix}\\begin{bmatrix}7 \\\\ 15\\end{bmatrix} = \\begin{bmatrix}7 + 30 \\\\ 21 + 15\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}37 \\\\ 36\\end{bmatrix}\\]\nTasdeeq: \\(A^{-1}\\begin{bmatrix} 37 \\\\ 36 \\end{bmatrix} = \\frac{1}{-5}\\begin{bmatrix} 37 - 72 \\\\ -111 + 36 \\end{bmatrix} = \\frac{1}{-5}\\begin{bmatrix} -35 \\\\ -75 \\end{bmatrix} = \\begin{bmatrix} 7 \\\\ 15 \\end{bmatrix}\\), yani G, O. Sahi!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(x\\)-axis mein reflection: \\(\\begin{bmatrix} 1 & 0 \\\\ 0 & -1 \\end{bmatrix}\\), \\((x, y) \\to (x, -y)\\).\n2. \\(y\\)-axis mein reflection: \\(\\begin{bmatrix} -1 & 0 \\\\ 0 & 1 \\end{bmatrix}\\), \\((x, y) \\to (-x, y)\\).\n3. \\(y = x\\) mein reflection: \\(\\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}\\), \\((x, y) \\to (y, x)\\).\n4. Point column ki shakal mein, aur matrix left side par.\n5. Encoding: har \\(2 \\times 1\\) group ke liye \\(Y = AX\\); decoding: \\(X = A^{-1}Y\\), jis ke liye \\(|A| \\ne 0\\) zaroori hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Point ko row likh kar ghalat tarteeb mein multiply karna: column hamesha right side par.\n2. Jawab mein minus sign kho dena, jaise kitab ne Example 16 mein kiya: \\((2, 3)\\) ka \\(x\\)-axis mein reflection \\((2, -3)\\) hai. Bachne ka tareeqa: aakhri line likhte waqt upar ki calculation se mila lein.\n3. \\(x\\)-axis aur \\(y\\)-axis ke matrices mein confusion: \\(x\\)-axis mein reflection \\(y\\) ko badalta hai, \\(x\\) ko nahin.\n4. Decode karte waqt dobara \\(A\\) se multiply kar dena: decode hamesha \\(A^{-1}\\) se hota hai."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.8.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.8.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 70,
+          "pdf_to": 72,
+          "note": "Book p. 65-67: steps (i)-(iii), Example 11 (i)-(iii), Note on ranks and consistency"
+        }
+      ],
+      "title": "4.8.1 Reduced Echelon Form",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "There are following steps to solve a system of non-homogeneous linear equations (i):"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) Convert to augmented matrix, i.e. \\[\\left[\\begin{array}{ccc|c}a_1 & b_1 & c_1 & d_1 \\\\ a_2 & b_2 & c_2 & d_2 \\\\ a_3 & b_3 & c_3 & d_3\\end{array}\\right]\\]",
+              "(ii) Convert to reduced echelon form",
+              "(iii) Solve by back substitution"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does this work? Each row of the augmented matrix is one equation: the first three entries are the coefficients of \\(x\\), \\(y\\), \\(z\\) and the entry after the bar is the constant. Row operations are equation operations (Section 4.6), so they never change the solutions. Reduced echelon form makes each equation contain as few variables as possible, so the answer can be read off.\nIf the coefficient part becomes \\(I_3\\), the last column is the solution itself."
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "Solve the following and explain a consistent and inconsistent system:\n(i) \\(2x + 5y - z = 5\\), \\(3x + 4y + 2z = 11\\), \\(x + 2y - 2z = -3\\)\n(ii) \\(x + y + 2z = 1\\), \\(2x - y + 7z = 11\\), \\(3x + 5y + 4z = -3\\)\n(iii) \\(x - y + 2z = 1\\), \\(2x - 6y + 5z = 7\\), \\(3x + 5y + 4z = -3\\)",
+            "steps": [
+              "Given: three systems (i), (ii), (iii) of three equations in \\(x\\), \\(y\\), \\(z\\).\nTo find: the solution(s) of each and whether it is consistent.\nMethod: write the augmented matrix, reduce it to reduced (row) echelon form, then read the equations back. A row \\((0, 0, 0 \\mid 0)\\) gives no condition; a row \\((0, 0, 0 \\mid k)\\) with \\(k \\ne 0\\) means \\(0 = k\\): no solution.",
+              "(i) Step 1: augmented matrix, then a 1 in the top-left corner\nAugmented matrix:\n\\[\\left[\\begin{array}{ccc|c}2 & 5 & -1 & 5 \\\\ 3 & 4 & 2 & 11 \\\\ 1 & 2 & -2 & -3\\end{array}\\right]\\]\n\\(R_1 \\leftrightarrow R_3\\)\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 2 & -2 & -3 \\\\ 3 & 4 & 2 & 11 \\\\ 2 & 5 & -1 & 5\\end{array}\\right]\\]\nWhy: \\(R_3\\) starts with 1, so \\(R_1 \\leftrightarrow R_3\\) gives a leading 1 without fractions.",
+              "(i) Step 2: zero below the leading 1 in \\(R_2\\)\n\\(R_2 + (-3)R_1 \\to R_2'\\)\n\\[(3,\\ 4,\\ 2 \\mid 11)\\]\n\\[+(-3)(1,\\ 2,\\ -2 \\mid -3)\\]\n\\[= (0,\\ -2,\\ 8 \\mid 20)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 2 & -2 & -3 \\\\ 0 & -2 & 8 & 20 \\\\ 2 & 5 & -1 & 5\\end{array}\\right]\\]\nWhy: adding \\((-3)R_1\\) removes the 3 in column 1 of \\(R_2\\).",
+              "(i) Step 3: zero below the leading 1 in \\(R_3\\)\n\\(R_3 + (-2)R_1 \\to R_3'\\)\n\\[(2,\\ 5,\\ -1 \\mid 5)\\]\n\\[+(-2)(1,\\ 2,\\ -2 \\mid -3)\\]\n\\[= (0,\\ 1,\\ 3 \\mid 11)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 2 & -2 & -3 \\\\ 0 & -2 & 8 & 20 \\\\ 0 & 1 & 3 & 11\\end{array}\\right]\\]\nWhy: adding \\((-2)R_1\\) removes the 2 in column 1 of \\(R_3\\).",
+              "(i) Step 4: leading 1 in \\(R_2\\)\n\\(-\\frac{1}{2}R_2 \\to R_2'\\)\n\\[-\\frac{1}{2}(0,\\ -2,\\ 8 \\mid 20)\\]\n\\[= (0,\\ 1,\\ -4 \\mid -10)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 2 & -2 & -3 \\\\ 0 & 1 & -4 & -10 \\\\ 0 & 1 & 3 & 11\\end{array}\\right]\\]\nWhy: multiplying by \\(-\\frac{1}{2}\\) turns \\(-2\\) into 1.",
+              "(i) Step 5: clear column 2\n\\(R_1 + (-2)R_2 \\to R_1'\\)\n\\[(1,\\ 2,\\ -2 \\mid -3)\\]\n\\[+(-2)(0,\\ 1,\\ -4 \\mid -10)\\]\n\\[= (1,\\ 0,\\ 6 \\mid 17)\\]\n\\(R_3 + (-1)R_2 \\to R_3'\\)\n\\[(0,\\ 1,\\ 3 \\mid 11)\\]\n\\[+(-1)(0,\\ 1,\\ -4 \\mid -10)\\]\n\\[= (0,\\ 0,\\ 7 \\mid 21)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 0 & 6 & 17 \\\\ 0 & 1 & -4 & -10 \\\\ 0 & 0 & 7 & 21\\end{array}\\right]\\]\nWhy: \\(R_1\\) has 2 and \\(R_3\\) has 1 in column 2; adding \\((-2)R_2\\) and \\((-1)R_2\\) removes them.",
+              "(i) Step 6: leading 1 in \\(R_3\\)\n\\(\\frac{1}{7}R_3 \\to R_3'\\)\n\\[\\frac{1}{7}(0,\\ 0,\\ 7 \\mid 21)\\]\n\\[= (0,\\ 0,\\ 1 \\mid 3)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 0 & 6 & 17 \\\\ 0 & 1 & -4 & -10 \\\\ 0 & 0 & 1 & 3\\end{array}\\right]\\]\nWhy: multiplying by \\(\\frac{1}{7}\\) turns 7 into 1.",
+              "(i) Step 7: clear column 3\n\\(R_1 + (-6)R_3 \\to R_1'\\)\n\\[(1,\\ 0,\\ 6 \\mid 17)\\]\n\\[+(-6)(0,\\ 0,\\ 1 \\mid 3)\\]\n\\[= (1,\\ 0,\\ 0 \\mid -1)\\]\n\\(R_2 + 4R_3 \\to R_2'\\)\n\\[(0,\\ 1,\\ -4 \\mid -10)\\]\n\\[+4(0,\\ 0,\\ 1 \\mid 3)\\]\n\\[= (0,\\ 1,\\ 0 \\mid 2)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 0 & 0 & -1 \\\\ 0 & 1 & 0 & 2 \\\\ 0 & 0 & 1 & 3\\end{array}\\right]\\]\nWhy: adding \\((-6)R_3\\) and \\(4R_3\\) removes 6 and \\(-4\\). The coefficient part is now \\(I_3\\): the last column gives \\(x = -1\\), \\(y = 2\\), \\(z = 3\\). One solution, so system (i) is consistent.",
+              "(ii) Step 1: augmented matrix, zeros in column 1\nAugmented matrix:\n\\[\\left[\\begin{array}{ccc|c}1 & 1 & 2 & 1 \\\\ 2 & -1 & 7 & 11 \\\\ 3 & 5 & 4 & -3\\end{array}\\right]\\]\n\\(R_2 + (-2)R_1 \\to R_2'\\)\n\\[(2,\\ -1,\\ 7 \\mid 11)\\]\n\\[+(-2)(1,\\ 1,\\ 2 \\mid 1)\\]\n\\[= (0,\\ -3,\\ 3 \\mid 9)\\]\n\\(R_3 + (-3)R_1 \\to R_3'\\)\n\\[(3,\\ 5,\\ 4 \\mid -3)\\]\n\\[+(-3)(1,\\ 1,\\ 2 \\mid 1)\\]\n\\[= (0,\\ 2,\\ -2 \\mid -6)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 1 & 2 & 1 \\\\ 0 & -3 & 3 & 9 \\\\ 0 & 2 & -2 & -6\\end{array}\\right]\\]\nWhy: \\(R_1\\) starts with 1; adding \\((-2)R_1\\) to \\(R_2\\) and \\((-3)R_1\\) to \\(R_3\\) clears column 1.",
+              "(ii) Step 2: leading 1 in \\(R_2\\)\n\\(-\\frac{1}{3}R_2 \\to R_2'\\)\n\\[-\\frac{1}{3}(0,\\ -3,\\ 3 \\mid 9)\\]\n\\[= (0,\\ 1,\\ -1 \\mid -3)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 1 & 2 & 1 \\\\ 0 & 1 & -1 & -3 \\\\ 0 & 2 & -2 & -6\\end{array}\\right]\\]\nWhy: multiplying by \\(-\\frac{1}{3}\\) turns \\(-3\\) into 1.",
+              "(ii) Step 3: clear column 2\n\\(R_1 + (-1)R_2 \\to R_1'\\)\n\\[(1,\\ 1,\\ 2 \\mid 1)\\]\n\\[+(-1)(0,\\ 1,\\ -1 \\mid -3)\\]\n\\[= (1,\\ 0,\\ 3 \\mid 4)\\]\n\\(R_3 + (-2)R_2 \\to R_3'\\)\n\\[(0,\\ 2,\\ -2 \\mid -6)\\]\n\\[+(-2)(0,\\ 1,\\ -1 \\mid -3)\\]\n\\[= (0,\\ 0,\\ 0 \\mid 0)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 0 & 3 & 4 \\\\ 0 & 1 & -1 & -3 \\\\ 0 & 0 & 0 & 0\\end{array}\\right]\\]\nWhy: adding \\((-1)R_2\\) to \\(R_1\\) and \\((-2)R_2\\) to \\(R_3\\). The whole of \\(R_3\\) becomes zero: the third equation gave no new information.",
+              "(ii) Step 4: read the equivalent system\n\\[x + 3z = 4\\]\n\\[y - z = -3\\]\n\\[0z = 0\\]\nThe equation \\(0z = 0\\) is satisfied by any value of \\(z\\). From the first two equations:\n\\[x = -3z + 4 \\quad \\text{(a)}\\]\n\\[y = z - 3 \\quad \\text{(b)}\\]\nWhy: \\(z\\) is arbitrary, so put \\(z = t\\) (any real number): \\(x = 4 - 3t\\), \\(y = t - 3\\), \\(z = t\\). Infinitely many solutions, so system (ii) is consistent.",
+              "(iii) Step 1: augmented matrix, zeros in column 1\nAugmented matrix:\n\\[\\left[\\begin{array}{ccc|c}1 & -1 & 2 & 1 \\\\ 2 & -6 & 5 & 7 \\\\ 3 & 5 & 4 & -3\\end{array}\\right]\\]\n\\(R_2 + (-2)R_1 \\to R_2'\\)\n\\[(2,\\ -6,\\ 5 \\mid 7)\\]\n\\[+(-2)(1,\\ -1,\\ 2 \\mid 1)\\]\n\\[= (0,\\ -4,\\ 1 \\mid 5)\\]\n\\(R_3 + (-3)R_1 \\to R_3'\\)\n\\[(3,\\ 5,\\ 4 \\mid -3)\\]\n\\[+(-3)(1,\\ -1,\\ 2 \\mid 1)\\]\n\\[= (0,\\ 8,\\ -2 \\mid -6)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & -1 & 2 & 1 \\\\ 0 & -4 & 1 & 5 \\\\ 0 & 8 & -2 & -6\\end{array}\\right]\\]\nWhy: adding \\((-2)R_1\\) to \\(R_2\\) and \\((-3)R_1\\) to \\(R_3\\) clears column 1.",
+              "(iii) Step 2: leading 1 in \\(R_2\\)\n\\(-\\frac{1}{4}R_2 \\to R_2'\\)\n\\[-\\frac{1}{4}(0,\\ -4,\\ 1 \\mid 5)\\]\n\\[= (0,\\ 1,\\ -\\frac{1}{4} \\mid -\\frac{5}{4})\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & -1 & 2 & 1 \\\\ 0 & 1 & -\\frac{1}{4} & -\\frac{5}{4} \\\\ 0 & 8 & -2 & -6\\end{array}\\right]\\]\nWhy: multiplying by \\(-\\frac{1}{4}\\) turns \\(-4\\) into 1.",
+              "(iii) Step 3: clear column 2\n\\(R_1 + 1\\cdot R_2 \\to R_1'\\)\n\\[(1,\\ -1,\\ 2 \\mid 1)\\]\n\\[+(0,\\ 1,\\ -\\frac{1}{4} \\mid -\\frac{5}{4})\\]\n\\[= (1,\\ 0,\\ \\frac{7}{4} \\mid -\\frac{1}{4})\\]\n\\(R_3 + (-8)R_2 \\to R_3'\\)\n\\[(0,\\ 8,\\ -2 \\mid -6)\\]\n\\[+(-8)(0,\\ 1,\\ -\\frac{1}{4} \\mid -\\frac{5}{4})\\]\n\\[= (0,\\ 0,\\ 0 \\mid 4)\\]\nNew matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 0 & \\frac{7}{4} & -\\frac{1}{4} \\\\ 0 & 1 & -\\frac{1}{4} & -\\frac{5}{4} \\\\ 0 & 0 & 0 & 4\\end{array}\\right]\\]\nWhy: \\(R_1\\) has \\(-1\\) in column 2, so we ADD \\(1\\cdot R_2\\); \\(R_3\\) has 8, so we add \\((-8)R_2\\). The book prints this operation as \\(R_1 - 1.R_2 \\to R_1'\\), but its resulting row \\((1, 0, \\frac{7}{4} \\mid -\\frac{1}{4})\\) comes from \\(R_1 + 1\\cdot R_2\\).",
+              "(iii) Step 4: read the equivalent system\n\\[x + \\tfrac{7}{4}z = -\\tfrac{1}{4}\\]\n\\[y - \\tfrac{1}{4}z = -\\tfrac{5}{4}\\]\n\\[0z = 4\\]\nWhy: no value of \\(z\\) makes \\(0z = 4\\) true, so the system as a whole has no solution. System (iii) is inconsistent.",
+              "Check:\n(i) \\(x = -1, y = 2, z = 3\\): \\(-2 + 10 - 3 = 5\\), \\(-3 + 8 + 6 = 11\\), \\(-1 + 4 - 6 = -3\\).\n(ii) \\(t = 0\\) gives \\((4, -3, 0)\\): \\(4 - 3 + 0 = 1\\), \\(8 + 3 + 0 = 11\\), \\(12 - 15 + 0 = -3\\). \\(t = 1\\) gives \\((1, -2, 1)\\): \\(1 - 2 + 2 = 1\\), \\(2 + 2 + 7 = 11\\), \\(3 - 10 + 4 = -3\\).\n(iii) From the original equations, \\((E_3 - 3E_1) + 2(E_2 - 2E_1)\\) gives \\(0 = 4\\): the equations contradict each other."
+            ],
+            "answer": "(i) \\(x = -1\\), \\(y = 2\\), \\(z = 3\\): unique solution, consistent.\n(ii) \\(x = 4 - 3t\\), \\(y = t - 3\\), \\(z = t\\) for any real \\(t\\): infinitely many solutions, consistent.\n(iii) No solution: inconsistent.",
+            "book_errors": [
+              "\\(R_1 - 1.R_2 \\to R_1'\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In Example 11(iii) the book prints the operation as \\(R_1 - 1.R_2 \\to R_1'\\). Subtracting would give \\((1, -2, \\frac{9}{4} \\mid \\frac{9}{4})\\). The row the book shows, \\((1, 0, \\frac{7}{4} \\mid -\\frac{1}{4})\\), comes from \\(R_1 + 1\\cdot R_2 \\to R_1'\\), which is the correct operation."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "We see that in the case of the system (i), the (row) rank of the augmented matrix and the coefficient matrix of the system is the same, that is, 3, which is equal to the number of the variables in the system (i). Thus a linear system is consistent and has a unique solution if the rank of the coefficient matrix is the same as that of the augmented matrix and equal to the number of variables.\nIn system (ii), the rank of the coefficient matrix is the same as that of the augmented matrix, but it is 2, which is less than the number of variables. Thus a system is consistent and has infinitely many solutions if the two ranks are equal but less than the number of variables.\nIn system (iii), the rank of the coefficient matrix is not equal to the rank of the augmented matrix. Thus a system is inconsistent if the ranks of the coefficient matrix and the augmented matrix are different.",
+            "wide": true
+          },
+          {
+            "type": "table",
+            "caption": "Our summary of the book's Note (A = coefficient matrix, n = number of variables)",
+            "header": [
+              "Ranks",
+              "Result",
+              "Example 11"
+            ],
+            "rows": [
+              [
+                "\\(\\text{rank } A = \\text{rank } [A \\mid B] = n\\)",
+                "Consistent, unique solution",
+                "(i): 3 = 3 = 3"
+              ],
+              [
+                "\\(\\text{rank } A = \\text{rank } [A \\mid B] < n\\)",
+                "Consistent, infinitely many solutions",
+                "(ii): 2 = 2 < 3"
+              ],
+              [
+                "\\(\\text{rank } A \\ne \\text{rank } [A \\mid B]\\)",
+                "Inconsistent, no solution",
+                "(iii): 2 and 3"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Steps: augmented matrix, reduced echelon form, back substitution.\n2. Coefficient part becomes \\(I_3\\): unique solution, read from the last column.\n3. A zero row \\((0, 0, 0 \\mid 0)\\): a free variable, infinitely many solutions.\n4. A row \\((0, 0, 0 \\mid k)\\), \\(k \\ne 0\\): no solution.\n5. Rank test: equal ranks \\(= n\\) unique; equal ranks \\(< n\\) infinitely many; different ranks inconsistent."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Forgetting to apply the operation to the constant after the bar.\n2. Reading \\(0z = 0\\) as \"\\(z = 0\\)\". It means \\(z\\) can be anything.\n3. Reading \\(0z = 4\\) as \"\\(z = 4\\)\" or \"\\(z = 0\\)\". It is impossible: no solution.\n4. Giving only one solution, e.g. \\((4, -3, 0)\\), for system (ii). Write the general solution with a parameter \\(t\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

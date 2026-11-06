@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-2-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-2-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 65,
+          "pdf_to": 65,
+          "note": "Exercise 4.2, Question 4: Cofactors and determinants of A and B, parts (i)-(ii) (book page 60)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) If \\(A = \\begin{bmatrix} 1 & 2 & -3 \\\\ 0 & -5 & 0 \\\\ -2 & -2 & 7 \\end{bmatrix}\\) and \\(B = \\begin{bmatrix} -5 & -2 & 5 \\\\ -3 & -1 & 4 \\\\ -2 & -1 & 2 \\end{bmatrix}\\), then find: \\(A_{13}, A_{23}, A_{33}\\) and \\(|A|\\).",
+            "explanation": "A cofactor question: \\(A_{ij}\\) is the cofactor of the entry in row \\(i\\), column \\(j\\), not the entry itself.\nAll three asked cofactors belong to column 3, so afterwards we find \\(|A|\\) by expanding along column 3.\nPlan: cover, find the minor, attach the sign \\((-1)^{i+j}\\); then \\(|A| = a_{13}A_{13} + a_{23}A_{23} + a_{33}A_{33}\\).",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix} 1 & 2 & -3 \\\\ 0 & -5 & 0 \\\\ -2 & -2 & 7 \\end{bmatrix}\\)\nTo find: \\(A_{13}, A_{23}, A_{33}\\) and \\(|A|\\).\nMethod: \\(A_{ij} = (-1)^{i+j}M_{ij}\\), where the minor \\(M_{ij}\\) is the \\(2 \\times 2\\) determinant left after deleting row \\(i\\) and column \\(j\\).",
+              "Cofactor \\(A_{13}\\) (delete row 1, column 3)\n\\[A_{13} = (-1)^{1+3}\\begin{vmatrix} 0 & -5 \\\\ -2 & -2 \\end{vmatrix}\\]\n\\[= +[(0)(-2) - (-5)(-2)]\\]\n\\[= 0 - 10 = -10\\]\nWhy: \\(1 + 3 = 4\\) is even, so the sign is \\(+\\).",
+              "Cofactor \\(A_{23}\\) (delete row 2, column 3)\n\\[A_{23} = (-1)^{2+3}\\begin{vmatrix} 1 & 2 \\\\ -2 & -2 \\end{vmatrix}\\]\n\\[= -[(1)(-2) - (2)(-2)]\\]\n\\[= -[-2 + 4] = -2\\]\nWhy: \\(2 + 3 = 5\\) is odd, so the sign is \\(-\\).",
+              "Cofactor \\(A_{33}\\) (delete row 3, column 3)\n\\[A_{33} = (-1)^{3+3}\\begin{vmatrix} 1 & 2 \\\\ 0 & -5 \\end{vmatrix}\\]\n\\[= +[(1)(-5) - (2)(0)] = -5\\]\nWhy: \\(3 + 3 = 6\\) is even.",
+              "\\(|A|\\) by expansion along column 3\n\\[|A| = a_{13}A_{13} + a_{23}A_{23} + a_{33}A_{33}\\]\n\\[= (-3)(-10) + (0)(-2) + (7)(-5)\\]\n\\[= 30 + 0 - 35 = -5\\]\nWhy: A determinant equals the sum of the entries of any column times their own cofactors. The signs are already inside the cofactors.",
+              "Check (expand along row 2)\n\\[|A| = (-5)(+1)\\begin{vmatrix} 1 & -3 \\\\ -2 & 7 \\end{vmatrix}\\]\n\\[= -5(7 - 6) = -5 \\;\\checkmark\\]\nWhy: Row 2 is \\(0, -5, 0\\); only \\(a_{22}\\) counts, with sign \\(+\\)."
+            ],
+            "final_answer": "\\(A_{13} = -10,\\ A_{23} = -2,\\ A_{33} = -5,\\ |A| = -5\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "For part (i) the answer key prints \\(A_{13} = -3,\\ A_{23} = 0,\\ A_{33} = 7\\). These are the entries \\(a_{13}, a_{23}, a_{33}\\) of \\(A\\), not the cofactors. The cofactors are \\(A_{13} = -10,\\ A_{23} = -2,\\ A_{33} = -5\\). The key's \\(|A| = -5\\) is correct."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) If \\(A = \\begin{bmatrix} 1 & 2 & -3 \\\\ 0 & -5 & 0 \\\\ -2 & -2 & 7 \\end{bmatrix}\\) and \\(B = \\begin{bmatrix} -5 & -2 & 5 \\\\ -3 & -1 & 4 \\\\ -2 & -1 & 2 \\end{bmatrix}\\), then find: \\(B_{31}, B_{32}, B_{33}\\) and \\(|B|\\).",
+            "explanation": "Again cofactors: \\(B_{3j}\\) is the cofactor of the entry in row 3, column \\(j\\).\nAll three are in row 3, so afterwards we expand \\(|B|\\) along row 3.\nPlan: three cofactors with signs \\(+,\\,-,\\,+\\), then \\(|B| = b_{31}B_{31} + b_{32}B_{32} + b_{33}B_{33}\\).",
+            "steps": [
+              "Given: \\(B = \\begin{bmatrix} -5 & -2 & 5 \\\\ -3 & -1 & 4 \\\\ -2 & -1 & 2 \\end{bmatrix}\\)\nTo find: \\(B_{31}, B_{32}, B_{33}\\) and \\(|B|\\).\nMethod: \\(B_{ij} = (-1)^{i+j}M_{ij}\\); then expansion along row 3.",
+              "Cofactor \\(B_{31}\\) (delete row 3, column 1)\n\\[B_{31} = (-1)^{3+1}\\begin{vmatrix} -2 & 5 \\\\ -1 & 4 \\end{vmatrix}\\]\n\\[= +[(-2)(4) - (5)(-1)]\\]\n\\[= -8 + 5 = -3\\]\nWhy: \\(3 + 1 = 4\\) is even, sign \\(+\\).",
+              "Cofactor \\(B_{32}\\) (delete row 3, column 2)\n\\[B_{32} = (-1)^{3+2}\\begin{vmatrix} -5 & 5 \\\\ -3 & 4 \\end{vmatrix}\\]\n\\[= -[(-5)(4) - (5)(-3)]\\]\n\\[= -[-20 + 15] = 5\\]\nWhy: \\(3 + 2 = 5\\) is odd, sign \\(-\\).",
+              "Cofactor \\(B_{33}\\) (delete row 3, column 3)\n\\[B_{33} = (-1)^{3+3}\\begin{vmatrix} -5 & -2 \\\\ -3 & -1 \\end{vmatrix}\\]\n\\[= +[(-5)(-1) - (-2)(-3)]\\]\n\\[= 5 - 6 = -1\\]\nWhy: Sign \\(+\\); both products are positive.",
+              "\\(|B|\\) by expansion along row 3\n\\[|B| = b_{31}B_{31} + b_{32}B_{32} + b_{33}B_{33}\\]\n\\[= (-2)(-3) + (-1)(5) + (2)(-1)\\]\n\\[= 6 - 5 - 2 = -1\\]\nWhy: Entries of row 3 times their own cofactors.",
+              "Check (expand along row 1)\n\\[|B| = -5(-2 + 4) + 2(-6 + 8) + 5(3 - 2)\\]\n\\[= -10 + 4 + 5 = -1 \\;\\checkmark\\]\nWhy: Signs \\(+,\\,-,\\,+\\) with entries \\(-5, -2, 5\\); minors \\(2, -2, 1\\)."
+            ],
+            "final_answer": "\\(B_{31} = -3,\\ B_{32} = 5,\\ B_{33} = -1,\\ |B| = -1\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "For part (ii) the answer key prints \\(B_{31} = -2,\\ B_{32} = -1,\\ B_{33} = 2\\). These are the entries \\(b_{31}, b_{32}, b_{33}\\) of \\(B\\), not the cofactors. The cofactors are \\(B_{31} = -3,\\ B_{32} = 5,\\ B_{33} = -1\\). The key's \\(|B| = -1\\) is correct."
+          }
+        ]
+      }
+    }
+  ]
+}
