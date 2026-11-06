@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-2-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-2-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 63,
+          "pdf_to": 63,
+          "note": "Exercise 4.2, Question 1: Evaluate six determinants, parts (i)-(vi) (book page 58)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Evaluate the following determinant: \\(\\begin{vmatrix} 1 & -2 & -4 \\\\ 3 & -1 & -3 \\\\ -2 & 3 & 2 \\end{vmatrix}\\)",
+            "explanation": "A numerical \\(3 \\times 3\\) determinant: we must find one number, its value.\nThere is no zero and no common factor that helps, so we expand along row 1.\nPlan: three minors of row 1, signs \\(+,\\,-,\\,+\\), add.",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} 1 & -2 & -4 \\\\ 3 & -1 & -3 \\\\ -2 & 3 & 2 \\end{vmatrix}\\)\nTo find: the value of \\(\\Delta\\).\nMethod: Expansion along row 1: \\(\\Delta = a_{11}A_{11} + a_{12}A_{12} + a_{13}A_{13}\\), where each cofactor is \\(A_{ij} = (-1)^{i+j}M_{ij}\\). For row 1 the signs are \\(+,\\,-,\\,+\\).",
+              "Minor \\(M_{11}\\) (cover row 1, column 1)\n\\[M_{11} = \\begin{vmatrix} -1 & -3 \\\\ 3 & 2 \\end{vmatrix}\\]\n\\[= (-1)(2) - (-3)(3)\\]\n\\[= -2 + 9 = 7\\]\nWhy: A \\(2 \\times 2\\) determinant is (leading diagonal product) minus (other diagonal product).",
+              "Minor \\(M_{12}\\) (cover row 1, column 2)\n\\[M_{12} = \\begin{vmatrix} 3 & -3 \\\\ -2 & 2 \\end{vmatrix}\\]\n\\[= (3)(2) - (-3)(-2)\\]\n\\[= 6 - 6 = 0\\]\nWhy: \\((-3)(-2) = +6\\), so the two products are equal.",
+              "Minor \\(M_{13}\\) (cover row 1, column 3)\n\\[M_{13} = \\begin{vmatrix} 3 & -1 \\\\ -2 & 3 \\end{vmatrix}\\]\n\\[= (3)(3) - (-1)(-2)\\]\n\\[= 9 - 2 = 7\\]\nWhy: Same \\(2 \\times 2\\) rule; \\((-1)(-2) = +2\\).",
+              "Attach the signs and add\n\\[\\Delta = 1(7) - (-2)(0) + (-4)(7)\\]\n\\[= 7 + 0 - 28\\]\n\\[= -21\\]\nWhy: The cofactors of row 1 are \\(+M_{11},\\ -M_{12},\\ +M_{13}\\); each entry of row 1 is multiplied by its cofactor.",
+              "Check (expand along column 1)\n\\[\\Delta = 1(7) - 3\\begin{vmatrix} -2 & -4 \\\\ 3 & 2 \\end{vmatrix} + (-2)\\begin{vmatrix} -2 & -4 \\\\ -1 & -3 \\end{vmatrix}\\]\n\\[= 7 - 3(8) - 2(2)\\]\n\\[= 7 - 24 - 4 = -21 \\;\\checkmark\\]\nWhy: A determinant has the same value whichever row or column we expand along. Here \\((-2)(2) - (-4)(3) = 8\\) and \\((-2)(-3) - (-4)(-1) = 2\\)."
+            ],
+            "final_answer": "\\(\\Delta = -21\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Evaluate the following determinant: \\(\\begin{vmatrix} 5 & 2 & -3 \\\\ 3 & 10 & -1 \\\\ -2 & 1 & -2 \\end{vmatrix}\\)",
+            "explanation": "A numerical \\(3 \\times 3\\) determinant; we must find its value.\nNo row or column has a zero, so we expand along row 1.\nPlan: minors \\(M_{11}, M_{12}, M_{13}\\), signs \\(+,\\,-,\\,+\\), add.",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} 5 & 2 & -3 \\\\ 3 & 10 & -1 \\\\ -2 & 1 & -2 \\end{vmatrix}\\)\nTo find: the value of \\(\\Delta\\).\nMethod: Expansion along row 1 with signs \\(+,\\,-,\\,+\\): \\(\\Delta = 5M_{11} - 2M_{12} + (-3)M_{13}\\).",
+              "Minor \\(M_{11}\\)\n\\[M_{11} = \\begin{vmatrix} 10 & -1 \\\\ 1 & -2 \\end{vmatrix}\\]\n\\[= (10)(-2) - (-1)(1)\\]\n\\[= -20 + 1 = -19\\]\nWhy: Cover row 1 and column 1; what is left is this \\(2 \\times 2\\) determinant.",
+              "Minor \\(M_{12}\\)\n\\[M_{12} = \\begin{vmatrix} 3 & -1 \\\\ -2 & -2 \\end{vmatrix}\\]\n\\[= (3)(-2) - (-1)(-2)\\]\n\\[= -6 - 2 = -8\\]\nWhy: Cover row 1 and column 2. Note \\((-1)(-2) = +2\\), and we subtract it.",
+              "Minor \\(M_{13}\\)\n\\[M_{13} = \\begin{vmatrix} 3 & 10 \\\\ -2 & 1 \\end{vmatrix}\\]\n\\[= (3)(1) - (10)(-2)\\]\n\\[= 3 + 20 = 23\\]\nWhy: Cover row 1 and column 3; minus a negative is plus.",
+              "Attach the signs and add\n\\[\\Delta = 5(-19) - 2(-8) + (-3)(23)\\]\n\\[= -95 + 16 - 69\\]\n\\[= -148\\]\nWhy: Each entry of row 1 times its signed minor (cofactor).",
+              "Check (expand along column 2)\n\\[\\Delta = -2(-8) + 10\\begin{vmatrix} 5 & -3 \\\\ -2 & -2 \\end{vmatrix} - 1\\begin{vmatrix} 5 & -3 \\\\ 3 & -1 \\end{vmatrix}\\]\n\\[= 16 + 10(-16) - 1(4)\\]\n\\[= 16 - 160 - 4 = -148 \\;\\checkmark\\]\nWhy: Column 2 has signs \\(-,\\,+,\\,-\\). \\((5)(-2) - (-3)(-2) = -16\\) and \\((5)(-1) - (-3)(3) = 4\\)."
+            ],
+            "final_answer": "\\(\\Delta = -148\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Evaluate the following determinant: \\(\\begin{vmatrix} 1 & 2 & -3 \\\\ -1 & 3 & 5 \\\\ -2 & 5 & 6 \\end{vmatrix}\\)",
+            "explanation": "A numerical \\(3 \\times 3\\) determinant; we must find its value.\nRow 1 has small numbers, so we expand along it.\nPlan: three minors, signs \\(+,\\,-,\\,+\\), add.",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} 1 & 2 & -3 \\\\ -1 & 3 & 5 \\\\ -2 & 5 & 6 \\end{vmatrix}\\)\nTo find: the value of \\(\\Delta\\).\nMethod: Expansion along row 1: \\(\\Delta = 1\\cdot M_{11} - 2M_{12} + (-3)M_{13}\\).",
+              "Minor \\(M_{11}\\)\n\\[M_{11} = \\begin{vmatrix} 3 & 5 \\\\ 5 & 6 \\end{vmatrix}\\]\n\\[= 18 - 25 = -7\\]\nWhy: Cover row 1 and column 1; \\(3 \\times 6 = 18\\), \\(5 \\times 5 = 25\\).",
+              "Minor \\(M_{12}\\)\n\\[M_{12} = \\begin{vmatrix} -1 & 5 \\\\ -2 & 6 \\end{vmatrix}\\]\n\\[= (-1)(6) - (5)(-2)\\]\n\\[= -6 + 10 = 4\\]\nWhy: Cover row 1 and column 2; minus a negative is plus.",
+              "Minor \\(M_{13}\\)\n\\[M_{13} = \\begin{vmatrix} -1 & 3 \\\\ -2 & 5 \\end{vmatrix}\\]\n\\[= (-1)(5) - (3)(-2)\\]\n\\[= -5 + 6 = 1\\]\nWhy: Cover row 1 and column 3.",
+              "Attach the signs and add\n\\[\\Delta = 1(-7) - 2(4) + (-3)(1)\\]\n\\[= -7 - 8 - 3\\]\n\\[= -18\\]\nWhy: Row 1 entries times cofactors \\(+M_{11},\\ -M_{12},\\ +M_{13}\\).",
+              "Check (row operations)\n\\[R_2 + R_1 \\to R_2,\\quad R_3 + 2R_1 \\to R_3\\]\n\\[\\Delta = \\begin{vmatrix} 1 & 2 & -3 \\\\ 0 & 5 & 2 \\\\ 0 & 9 & 0 \\end{vmatrix}\\]\n\\[= 1(0 - 18) = -18 \\;\\checkmark\\]\nWhy: Adding a multiple of one row to another does not change a determinant (Property vii). Column 1 then has one non-zero entry, so only \\(1 \\times (5 \\cdot 0 - 2 \\cdot 9)\\) remains."
+            ],
+            "final_answer": "\\(\\Delta = -18\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Evaluate the following determinant: \\(\\begin{vmatrix} a+b & a-b & a \\\\ a & a+b & a-b \\\\ a-b & a & a+b \\end{vmatrix}\\)",
+            "explanation": "A letter determinant; we must simplify its value to a short expression in \\(a\\) and \\(b\\).\nEach row adds up to the same total \\(3a\\), so adding the columns gives a common factor.\nPlan: \\(C_1 + C_2 + C_3 \\to C_1\\), take \\(3a\\) out, make zeros, expand.",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} a+b & a-b & a \\\\ a & a+b & a-b \\\\ a-b & a & a+b \\end{vmatrix}\\)\nTo find: the value of \\(\\Delta\\).\nMethod: Properties of determinants. Adding columns to a column does not change the value (Property vii); a common factor of a column comes outside (Property v). This avoids long bracket products.",
+              "Add all columns into column 1\n\\[C_1 + C_2 + C_3 \\to C_1\\]\n\\[\\Delta = \\begin{vmatrix} 3a & a-b & a \\\\ 3a & a+b & a-b \\\\ 3a & a & a+b \\end{vmatrix}\\]\nWhy: Row 1: \\((a+b) + (a-b) + a = 3a\\); rows 2 and 3 also give \\(3a\\), because \\(+b\\) and \\(-b\\) cancel.",
+              "Take \\(3a\\) out of column 1\n\\[\\Delta = 3a\\begin{vmatrix} 1 & a-b & a \\\\ 1 & a+b & a-b \\\\ 1 & a & a+b \\end{vmatrix}\\]\nWhy: Every entry of column 1 has the factor \\(3a\\) (Property v).",
+              "Make zeros in column 1\n\\[R_2 - R_1 \\to R_2,\\quad R_3 - R_1 \\to R_3\\]\n\\[\\Delta = 3a\\begin{vmatrix} 1 & a-b & a \\\\ 0 & 2b & -b \\\\ 0 & b & b \\end{vmatrix}\\]\nWhy: New \\(R_2\\): \\((a+b) - (a-b) = 2b\\), \\((a-b) - a = -b\\). New \\(R_3\\): \\(a - (a-b) = b\\), \\((a+b) - a = b\\). Subtracting a row does not change the value.",
+              "Expand along column 1\n\\[\\Delta = 3a \\cdot 1 \\cdot \\begin{vmatrix} 2b & -b \\\\ b & b \\end{vmatrix}\\]\n\\[= 3a\\,[2b^2 - (-b^2)]\\]\n\\[= 3a \\cdot 3b^2 = 9ab^2\\]\nWhy: Only the entry 1 in column 1 is non-zero; its position \\((1,1)\\) has sign \\(+\\).",
+              "Check with numbers\n\\[a = 2,\\ b = 3:\\ \\begin{vmatrix} 5 & -1 & 2 \\\\ 2 & 5 & -1 \\\\ -1 & 2 & 5 \\end{vmatrix}\\]\n\\[= 5(27) + 1(9) + 2(9) = 162\\]\n\\[9ab^2 = 9(2)(9) = 162 \\;\\checkmark\\]\nWhy: Row 1 expansion: \\(5(25+2) - (-1)(10-1) + 2(4+5)\\). Both values agree, so the formula is right."
+            ],
+            "final_answer": "\\(\\Delta = 9ab^2\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(9a^2b - b^3\\) for part (iv). This is wrong: for \\(a = 2,\\ b = 3\\) it gives \\(108 - 27 = 81\\), but the determinant equals \\(162\\). The correct value is \\(9ab^2\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(v)",
+            "prompt": "1 (v) Evaluate the following determinant: \\(\\begin{vmatrix} 1 & 20 & -2 \\\\ -1 & -1 & -3 \\\\ 2 & 4 & -1 \\end{vmatrix}\\)",
+            "explanation": "A numerical \\(3 \\times 3\\) determinant; we must find its value.\nMany entries are negative, so we write every product in brackets.\nPlan: expand along row 1 with signs \\(+,\\,-,\\,+\\).",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} 1 & 20 & -2 \\\\ -1 & -1 & -3 \\\\ 2 & 4 & -1 \\end{vmatrix}\\)\nTo find: the value of \\(\\Delta\\).\nMethod: Expansion along row 1: \\(\\Delta = 1\\cdot M_{11} - 20M_{12} + (-2)M_{13}\\).",
+              "Minor \\(M_{11}\\)\n\\[M_{11} = \\begin{vmatrix} -1 & -3 \\\\ 4 & -1 \\end{vmatrix}\\]\n\\[= (-1)(-1) - (-3)(4)\\]\n\\[= 1 + 12 = 13\\]\nWhy: Cover row 1 and column 1; minus \\((-12)\\) is \\(+12\\).",
+              "Minor \\(M_{12}\\)\n\\[M_{12} = \\begin{vmatrix} -1 & -3 \\\\ 2 & -1 \\end{vmatrix}\\]\n\\[= (-1)(-1) - (-3)(2)\\]\n\\[= 1 + 6 = 7\\]\nWhy: Cover row 1 and column 2.",
+              "Minor \\(M_{13}\\)\n\\[M_{13} = \\begin{vmatrix} -1 & -1 \\\\ 2 & 4 \\end{vmatrix}\\]\n\\[= (-1)(4) - (-1)(2)\\]\n\\[= -4 + 2 = -2\\]\nWhy: Cover row 1 and column 3.",
+              "Attach the signs and add\n\\[\\Delta = 1(13) - 20(7) + (-2)(-2)\\]\n\\[= 13 - 140 + 4\\]\n\\[= -123\\]\nWhy: Row 1 entries times \\(+M_{11},\\ -M_{12},\\ +M_{13}\\).",
+              "Check (row operations)\n\\[R_2 + R_1 \\to R_2,\\quad R_3 - 2R_1 \\to R_3\\]\n\\[\\Delta = \\begin{vmatrix} 1 & 20 & -2 \\\\ 0 & 19 & -5 \\\\ 0 & -36 & 3 \\end{vmatrix}\\]\n\\[= 1[(19)(3) - (-5)(-36)]\\]\n\\[= 57 - 180 = -123 \\;\\checkmark\\]\nWhy: Row operations of this type keep the value (Property vii); then column 1 has only one non-zero entry."
+            ],
+            "final_answer": "\\(\\Delta = -123\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(vi)",
+            "prompt": "1 (vi) Evaluate the following determinant: \\(\\begin{vmatrix} 2x & x & x \\\\ y & 2y & y \\\\ z & z & 2z \\end{vmatrix}\\)",
+            "explanation": "A letter determinant; we must simplify it.\nRow 1 has the factor \\(x\\), row 2 the factor \\(y\\), row 3 the factor \\(z\\).\nPlan: take \\(x, y, z\\) out of the rows, then evaluate the number determinant.",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} 2x & x & x \\\\ y & 2y & y \\\\ z & z & 2z \\end{vmatrix}\\)\nTo find: the value of \\(\\Delta\\).\nMethod: Property v: a common factor of a row can be taken outside the determinant. Then only a simple number determinant is left.",
+              "Take the factors out of the rows\n\\[\\Delta = xyz\\begin{vmatrix} 2 & 1 & 1 \\\\ 1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{vmatrix}\\]\nWhy: \\(x\\) from \\(R_1\\), \\(y\\) from \\(R_2\\), \\(z\\) from \\(R_3\\); each comes out once.",
+              "Expand along row 1\n\\[= xyz\\,[2(4 - 1) - 1(2 - 1) + 1(1 - 2)]\\]\n\\[= xyz\\,(6 - 1 - 1)\\]\n\\[= 4xyz\\]\nWhy: Signs \\(+,\\,-,\\,+\\); minors \\(\\begin{vmatrix} 2 & 1 \\\\ 1 & 2 \\end{vmatrix} = 3\\), \\(\\begin{vmatrix} 1 & 1 \\\\ 1 & 2 \\end{vmatrix} = 1\\), \\(\\begin{vmatrix} 1 & 2 \\\\ 1 & 1 \\end{vmatrix} = -1\\).",
+              "Check with numbers\n\\[x = y = z = 1:\\ \\begin{vmatrix} 2 & 1 & 1 \\\\ 1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{vmatrix} = 4\\]\n\\[4xyz = 4 \\;\\checkmark\\]\nWhy: Putting simple values in both sides is a quick test of a letter answer."
+            ],
+            "final_answer": "\\(\\Delta = 4xyz\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

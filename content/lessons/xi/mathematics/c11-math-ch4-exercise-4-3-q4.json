@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-3-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-3-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 81,
+          "pdf_to": 81,
+          "note": "Exercise 4.3, Question 4: book page 76 (PDF 81); answer key PDF 303"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) Solve the following system of linear equations by matrix inversion method: \\(x - 2y + z = -1\\), \\(3x + y - 2z = 4\\), \\(y - z = 1\\)",
+            "explanation": "Three linear equations; the method is fixed: \\(X = A^{-1}B\\).\nWe must find all three unknowns.\nPlan: \\(|A|\\), the nine cofactors, \\(\\operatorname{adj}A\\), \\(A^{-1}\\), then multiply by \\(B\\) and check.",
+            "steps": [
+              "Given: \\(x - 2y + z = -1\\), \\(3x + y - 2z = 4\\), \\(y - z = 1\\)\nTo find: \\(x, y, z\\) by the matrix inversion method.\nMethod: Write the system as \\(AX = B\\). If \\(|A| \\neq 0\\), multiply by \\(A^{-1}\\) on the left: \\(X = A^{-1}B\\), with \\(A^{-1} = \\dfrac{1}{|A|}\\operatorname{adj}A\\).",
+              "Write the system as \\(AX = B\\)\n\\[A = \\begin{bmatrix}1 & -2 & 1 \\\\ 3 & 1 & -2 \\\\ 0 & 1 & -1\\end{bmatrix}\\]\n\\[X = \\begin{bmatrix}x \\\\ y \\\\ z\\end{bmatrix},\\ B = \\begin{bmatrix}-1 \\\\ 4 \\\\ 1\\end{bmatrix}\\]\nWhy: Row \\(k\\) of \\(A\\) holds the coefficients of equation \\(k\\); a missing variable has coefficient 0.",
+              "Find \\(|A|\\)\n\\[|A| = \\begin{vmatrix}1 & -2 & 1 \\\\ 3 & 1 & -2 \\\\ 0 & 1 & -1\\end{vmatrix}\\]\n\\[= 1(-1 + 2) + 2(-3 - 0) + 1(3 - 0)\\]\n\\[= 1 - 6 + 3\\]\n\\[= -2\\]\nWhy: \\(|A| \\neq 0\\), so \\(A^{-1}\\) exists.",
+              "Cofactors of row 1\n\\[A_{11} = +\\begin{vmatrix}1 & -2 \\\\ 1 & -1\\end{vmatrix}\\]\n\\[= (-1 + 2) = 1\\]\n\\[A_{12} = -\\begin{vmatrix}3 & -2 \\\\ 0 & -1\\end{vmatrix}\\]\n\\[= -(-3 - 0) = 3\\]\n\\[A_{13} = +\\begin{vmatrix}3 & 1 \\\\ 0 & 1\\end{vmatrix}\\]\n\\[= (3 - 0) = 3\\]\nWhy: \\(A_{ij} = (-1)^{i+j}M_{ij}\\): delete row \\(i\\) and column \\(j\\), take the \\(2 \\times 2\\) determinant, and use the sign pattern \\(+ - +\\).",
+              "Cofactors of row 2\n\\[A_{21} = -\\begin{vmatrix}-2 & 1 \\\\ 1 & -1\\end{vmatrix}\\]\n\\[= -(2 - 1) = -1\\]\n\\[A_{22} = +\\begin{vmatrix}1 & 1 \\\\ 0 & -1\\end{vmatrix}\\]\n\\[= (-1 - 0) = -1\\]\n\\[A_{23} = -\\begin{vmatrix}1 & -2 \\\\ 0 & 1\\end{vmatrix}\\]\n\\[= -(1 - 0) = -1\\]\nWhy: Row 2 has the sign pattern \\(- + -\\).",
+              "Cofactors of row 3\n\\[A_{31} = +\\begin{vmatrix}-2 & 1 \\\\ 1 & -2\\end{vmatrix}\\]\n\\[= (4 - 1) = 3\\]\n\\[A_{32} = -\\begin{vmatrix}1 & 1 \\\\ 3 & -2\\end{vmatrix}\\]\n\\[= -(-2 - 3) = 5\\]\n\\[A_{33} = +\\begin{vmatrix}1 & -2 \\\\ 3 & 1\\end{vmatrix}\\]\n\\[= (1 + 6) = 7\\]\nWhy: Row 3 has the sign pattern \\(+ - +\\) again.",
+              "Adjoint and inverse\n\\[\\operatorname{adj}A = \\begin{bmatrix}1 & -1 & 3 \\\\ 3 & -1 & 5 \\\\ 3 & -1 & 7\\end{bmatrix}\\]\n\\[A^{-1} = \\dfrac{1}{-2}\\begin{bmatrix}1 & -1 & 3 \\\\ 3 & -1 & 5 \\\\ 3 & -1 & 7\\end{bmatrix}\\]\nWhy: \\(\\operatorname{adj}A\\) is the transpose of the matrix of cofactors: the cofactors of row 1 become column 1, and so on.",
+              "Multiply: \\(X = A^{-1}B\\)\n\\[X = \\dfrac{1}{-2}\\begin{bmatrix}1 & -1 & 3 \\\\ 3 & -1 & 5 \\\\ 3 & -1 & 7\\end{bmatrix}\\begin{bmatrix}-1 \\\\ 4 \\\\ 1\\end{bmatrix}\\]\nRow by column:\n\\[1(-1) + (-1)(4) + 3(1) = -2\\]\n\\[3(-1) + (-1)(4) + 5(1) = -2\\]\n\\[3(-1) + (-1)(4) + 7(1) = 0\\]\n\\[X = \\dfrac{1}{-2}\\begin{bmatrix}-2 \\\\ -2 \\\\ 0\\end{bmatrix} = \\begin{bmatrix}1 \\\\ 1 \\\\ 0\\end{bmatrix}\\]\nWhy: Each entry of \\(\\operatorname{adj}A \\cdot B\\) is a row of \\(\\operatorname{adj}A\\) times the column \\(B\\); then divide every entry by \\(|A|\\).",
+              "Check in all three equations\n\\[(1) - 2(1) + (0) = -1 \\;\\checkmark\\]\n\\[3(1) + (1) - 2(0) = 4 \\;\\checkmark\\]\n\\[(1) - (0) = 1 \\;\\checkmark\\]\nWhy: The values satisfy every equation."
+            ],
+            "final_answer": "Solution set \\(\\{(1, 1, 0)\\}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) Solve the following system of linear equations by matrix inversion method: \\(2x_1 + x_2 + 3x_3 = 3\\), \\(x_1 + 3x_2 - 2x_3 = 0\\), \\(-3x_1 - x_2 + 2x_3 = 4\\)",
+            "explanation": "Three linear equations; the method is fixed: \\(X = A^{-1}B\\).\nWe must find all three unknowns.\nPlan: \\(|A|\\), the nine cofactors, \\(\\operatorname{adj}A\\), \\(A^{-1}\\), then multiply by \\(B\\) and check.",
+            "steps": [
+              "Given: \\(2x_1 + x_2 + 3x_3 = 3\\), \\(x_1 + 3x_2 - 2x_3 = 0\\), \\(-3x_1 - x_2 + 2x_3 = 4\\)\nTo find: \\(x_1, x_2, x_3\\) by the matrix inversion method.\nMethod: Write the system as \\(AX = B\\). If \\(|A| \\neq 0\\), multiply by \\(A^{-1}\\) on the left: \\(X = A^{-1}B\\), with \\(A^{-1} = \\dfrac{1}{|A|}\\operatorname{adj}A\\).",
+              "Write the system as \\(AX = B\\)\n\\[A = \\begin{bmatrix}2 & 1 & 3 \\\\ 1 & 3 & -2 \\\\ -3 & -1 & 2\\end{bmatrix}\\]\n\\[X = \\begin{bmatrix}x_1 \\\\ x_2 \\\\ x_3\\end{bmatrix},\\ B = \\begin{bmatrix}3 \\\\ 0 \\\\ 4\\end{bmatrix}\\]\nWhy: Row \\(k\\) of \\(A\\) holds the coefficients of equation \\(k\\); a missing variable has coefficient 0.",
+              "Find \\(|A|\\)\n\\[|A| = \\begin{vmatrix}2 & 1 & 3 \\\\ 1 & 3 & -2 \\\\ -3 & -1 & 2\\end{vmatrix}\\]\n\\[= 2(6 - 2) - 1(2 - 6) + 3(-1 + 9)\\]\n\\[= 8 + 4 + 24\\]\n\\[= 36\\]\nWhy: \\(|A| \\neq 0\\), so \\(A^{-1}\\) exists.",
+              "Cofactors of row 1\n\\[A_{11} = +\\begin{vmatrix}3 & -2 \\\\ -1 & 2\\end{vmatrix}\\]\n\\[= (6 - 2) = 4\\]\n\\[A_{12} = -\\begin{vmatrix}1 & -2 \\\\ -3 & 2\\end{vmatrix}\\]\n\\[= -(2 - 6) = 4\\]\n\\[A_{13} = +\\begin{vmatrix}1 & 3 \\\\ -3 & -1\\end{vmatrix}\\]\n\\[= (-1 + 9) = 8\\]\nWhy: \\(A_{ij} = (-1)^{i+j}M_{ij}\\): delete row \\(i\\) and column \\(j\\), take the \\(2 \\times 2\\) determinant, and use the sign pattern \\(+ - +\\).",
+              "Cofactors of row 2\n\\[A_{21} = -\\begin{vmatrix}1 & 3 \\\\ -1 & 2\\end{vmatrix}\\]\n\\[= -(2 + 3) = -5\\]\n\\[A_{22} = +\\begin{vmatrix}2 & 3 \\\\ -3 & 2\\end{vmatrix}\\]\n\\[= (4 + 9) = 13\\]\n\\[A_{23} = -\\begin{vmatrix}2 & 1 \\\\ -3 & -1\\end{vmatrix}\\]\n\\[= -(-2 + 3) = -1\\]\nWhy: Row 2 has the sign pattern \\(- + -\\).",
+              "Cofactors of row 3\n\\[A_{31} = +\\begin{vmatrix}1 & 3 \\\\ 3 & -2\\end{vmatrix}\\]\n\\[= (-2 - 9) = -11\\]\n\\[A_{32} = -\\begin{vmatrix}2 & 3 \\\\ 1 & -2\\end{vmatrix}\\]\n\\[= -(-4 - 3) = 7\\]\n\\[A_{33} = +\\begin{vmatrix}2 & 1 \\\\ 1 & 3\\end{vmatrix}\\]\n\\[= (6 - 1) = 5\\]\nWhy: Row 3 has the sign pattern \\(+ - +\\) again.",
+              "Adjoint and inverse\n\\[\\operatorname{adj}A = \\begin{bmatrix}4 & -5 & -11 \\\\ 4 & 13 & 7 \\\\ 8 & -1 & 5\\end{bmatrix}\\]\n\\[A^{-1} = \\dfrac{1}{36}\\begin{bmatrix}4 & -5 & -11 \\\\ 4 & 13 & 7 \\\\ 8 & -1 & 5\\end{bmatrix}\\]\nWhy: \\(\\operatorname{adj}A\\) is the transpose of the matrix of cofactors: the cofactors of row 1 become column 1, and so on.",
+              "Multiply: \\(X = A^{-1}B\\)\n\\[X = \\dfrac{1}{36}\\begin{bmatrix}4 & -5 & -11 \\\\ 4 & 13 & 7 \\\\ 8 & -1 & 5\\end{bmatrix}\\begin{bmatrix}3 \\\\ 0 \\\\ 4\\end{bmatrix}\\]\nRow by column:\n\\[4(3) + (-5)(0) + (-11)(4) = -32\\]\n\\[4(3) + 13(0) + 7(4) = 40\\]\n\\[8(3) + (-1)(0) + 5(4) = 44\\]\n\\[X = \\dfrac{1}{36}\\begin{bmatrix}-32 \\\\ 40 \\\\ 44\\end{bmatrix} = \\begin{bmatrix}-\\frac{8}{9} \\\\ \\frac{10}{9} \\\\ \\frac{11}{9}\\end{bmatrix}\\]\nWhy: Each entry of \\(\\operatorname{adj}A \\cdot B\\) is a row of \\(\\operatorname{adj}A\\) times the column \\(B\\); then divide every entry by \\(|A|\\).",
+              "Check in all three equations\n\\[2\\left(-\\frac{8}{9}\\right) + \\left(\\frac{10}{9}\\right) + 3\\left(\\frac{11}{9}\\right) = 3 \\;\\checkmark\\]\n\\[\\left(-\\frac{8}{9}\\right) + 3\\left(\\frac{10}{9}\\right) - 2\\left(\\frac{11}{9}\\right) = 0 \\;\\checkmark\\]\n\\[-3\\left(-\\frac{8}{9}\\right) - \\left(\\frac{10}{9}\\right) + 2\\left(\\frac{11}{9}\\right) = 4 \\;\\checkmark\\]\nWhy: The values satisfy every equation."
+            ],
+            "final_answer": "Solution set \\(\\{(-\\frac{8}{9}, \\frac{10}{9}, \\frac{11}{9})\\}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iii)",
+            "prompt": "4 (iii) Solve the following system of linear equations by matrix inversion method: \\(x + y = 2\\), \\(2x - z = 1\\), \\(2y - 3z = -1\\)",
+            "explanation": "Three linear equations; the method is fixed: \\(X = A^{-1}B\\).\nWe must find all three unknowns.\nPlan: \\(|A|\\), the nine cofactors, \\(\\operatorname{adj}A\\), \\(A^{-1}\\), then multiply by \\(B\\) and check.",
+            "steps": [
+              "Given: \\(x + y = 2\\), \\(2x - z = 1\\), \\(2y - 3z = -1\\)\nTo find: \\(x, y, z\\) by the matrix inversion method.\nMethod: Write the system as \\(AX = B\\). If \\(|A| \\neq 0\\), multiply by \\(A^{-1}\\) on the left: \\(X = A^{-1}B\\), with \\(A^{-1} = \\dfrac{1}{|A|}\\operatorname{adj}A\\).",
+              "Write the system as \\(AX = B\\)\n\\[A = \\begin{bmatrix}1 & 1 & 0 \\\\ 2 & 0 & -1 \\\\ 0 & 2 & -3\\end{bmatrix}\\]\n\\[X = \\begin{bmatrix}x \\\\ y \\\\ z\\end{bmatrix},\\ B = \\begin{bmatrix}2 \\\\ 1 \\\\ -1\\end{bmatrix}\\]\nWhy: Row \\(k\\) of \\(A\\) holds the coefficients of equation \\(k\\); a missing variable has coefficient 0.",
+              "Find \\(|A|\\)\n\\[|A| = \\begin{vmatrix}1 & 1 & 0 \\\\ 2 & 0 & -1 \\\\ 0 & 2 & -3\\end{vmatrix}\\]\n\\[= 1(0 + 2) - 1(-6 - 0) + 0(4 - 0)\\]\n\\[= 2 + 6 + 0\\]\n\\[= 8\\]\nWhy: \\(|A| \\neq 0\\), so \\(A^{-1}\\) exists.",
+              "Cofactors of row 1\n\\[A_{11} = +\\begin{vmatrix}0 & -1 \\\\ 2 & -3\\end{vmatrix}\\]\n\\[= (0 + 2) = 2\\]\n\\[A_{12} = -\\begin{vmatrix}2 & -1 \\\\ 0 & -3\\end{vmatrix}\\]\n\\[= -(-6 - 0) = 6\\]\n\\[A_{13} = +\\begin{vmatrix}2 & 0 \\\\ 0 & 2\\end{vmatrix}\\]\n\\[= (4 - 0) = 4\\]\nWhy: \\(A_{ij} = (-1)^{i+j}M_{ij}\\): delete row \\(i\\) and column \\(j\\), take the \\(2 \\times 2\\) determinant, and use the sign pattern \\(+ - +\\).",
+              "Cofactors of row 2\n\\[A_{21} = -\\begin{vmatrix}1 & 0 \\\\ 2 & -3\\end{vmatrix}\\]\n\\[= -(-3 - 0) = 3\\]\n\\[A_{22} = +\\begin{vmatrix}1 & 0 \\\\ 0 & -3\\end{vmatrix}\\]\n\\[= (-3 - 0) = -3\\]\n\\[A_{23} = -\\begin{vmatrix}1 & 1 \\\\ 0 & 2\\end{vmatrix}\\]\n\\[= -(2 - 0) = -2\\]\nWhy: Row 2 has the sign pattern \\(- + -\\).",
+              "Cofactors of row 3\n\\[A_{31} = +\\begin{vmatrix}1 & 0 \\\\ 0 & -1\\end{vmatrix}\\]\n\\[= (-1 - 0) = -1\\]\n\\[A_{32} = -\\begin{vmatrix}1 & 0 \\\\ 2 & -1\\end{vmatrix}\\]\n\\[= -(-1 - 0) = 1\\]\n\\[A_{33} = +\\begin{vmatrix}1 & 1 \\\\ 2 & 0\\end{vmatrix}\\]\n\\[= (0 - 2) = -2\\]\nWhy: Row 3 has the sign pattern \\(+ - +\\) again.",
+              "Adjoint and inverse\n\\[\\operatorname{adj}A = \\begin{bmatrix}2 & 3 & -1 \\\\ 6 & -3 & 1 \\\\ 4 & -2 & -2\\end{bmatrix}\\]\n\\[A^{-1} = \\dfrac{1}{8}\\begin{bmatrix}2 & 3 & -1 \\\\ 6 & -3 & 1 \\\\ 4 & -2 & -2\\end{bmatrix}\\]\nWhy: \\(\\operatorname{adj}A\\) is the transpose of the matrix of cofactors: the cofactors of row 1 become column 1, and so on.",
+              "Multiply: \\(X = A^{-1}B\\)\n\\[X = \\dfrac{1}{8}\\begin{bmatrix}2 & 3 & -1 \\\\ 6 & -3 & 1 \\\\ 4 & -2 & -2\\end{bmatrix}\\begin{bmatrix}2 \\\\ 1 \\\\ -1\\end{bmatrix}\\]\nRow by column:\n\\[2(2) + 3(1) + (-1)(-1) = 8\\]\n\\[6(2) + (-3)(1) + 1(-1) = 8\\]\n\\[4(2) + (-2)(1) + (-2)(-1) = 8\\]\n\\[X = \\dfrac{1}{8}\\begin{bmatrix}8 \\\\ 8 \\\\ 8\\end{bmatrix} = \\begin{bmatrix}1 \\\\ 1 \\\\ 1\\end{bmatrix}\\]\nWhy: Each entry of \\(\\operatorname{adj}A \\cdot B\\) is a row of \\(\\operatorname{adj}A\\) times the column \\(B\\); then divide every entry by \\(|A|\\).",
+              "Check in all three equations\n\\[(1) + (1) = 2 \\;\\checkmark\\]\n\\[2(1) - (1) = 1 \\;\\checkmark\\]\n\\[2(1) - 3(1) = -1 \\;\\checkmark\\]\nWhy: The values satisfy every equation."
+            ],
+            "final_answer": "Solution set \\(\\{(1, 1, 1)\\}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

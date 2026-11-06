@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.2.4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.2.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 55,
+          "pdf_to": 56,
+          "note": "Book p. 50-51: 4.2.4 Multiplication of two Matrices: conformability, the 2x3 by 3x2 product with Figure (A), AB (i) and BA (ii), Note 1, Note 2 with its order diagram, Example 2 (A^2 B) and the Note on powers of square matrices. Teaching notes, our worked illustration, the extra steps of the..."
+        }
+      ],
+      "title": "4.2.4 Multiplication of two Matrices",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Two matrices \\(A\\) and \\(B\\) are said to be conformable for the product \\(AB\\) if the number of columns of \\(A\\) is equal to the number of rows of \\(B\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(A = [a_{ij}]\\) be a \\(2 \\times 3\\) matrix and \\(B = [b_{ij}]\\) be a \\(3 \\times 2\\) matrix. Then the product \\(AB\\) is defined to be the \\(2 \\times 2\\) matrix \\(C\\) whose element \\(c_{ij}\\) is the sum of the products of the corresponding elements of the \\(i\\)th row of \\(A\\) with the elements of the \\(j\\)th column of \\(B\\). For example, the element \\(c_{21}\\) of \\(C\\) is shown in figure (A), that is"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch4-fig-row-times-column",
+            "alt": "The second row of A, a21, a22, a23, written across the bottom. Three bent arrows go from a21 to b11, from a22 to b21 and from a23 to b31, the entries of the first column of B written one below the other on the right. Below: c21 = a21 b11 + a22 b21 + a23 b31.",
+            "caption": "Figure (A): the 2nd row of A meets the 1st column of B to give c21 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[c_{21} = a_{21}b_{11} + a_{22}b_{21} + a_{23}b_{31}\\]\nThus"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[AB = \\begin{bmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\end{bmatrix}\\]\n\\[\\begin{bmatrix} b_{11} & b_{12} \\\\ b_{21} & b_{22} \\\\ b_{31} & b_{32} \\end{bmatrix}\\]\nwhere the four entries of \\(AB\\) are\n\\[c_{11} = a_{11}b_{11} + a_{12}b_{21} + a_{13}b_{31}\\]\n\\[c_{12} = a_{11}b_{12} + a_{12}b_{22} + a_{13}b_{32}\\]\n\\[c_{21} = a_{21}b_{11} + a_{22}b_{21} + a_{23}b_{31}\\]\n\\[c_{22} = a_{21}b_{12} + a_{22}b_{22} + a_{23}b_{32}\\]\n\\[AB = \\begin{bmatrix} c_{11} & c_{12} \\\\ c_{21} & c_{22} \\end{bmatrix} \\quad \\text{(i)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why row by column? Each row of \\(A\\) has 3 entries and each column of \\(B\\) has 3 entries, so they can be paired off: first with first, second with second, third with third. Multiply each pair and add. That is why the number of columns of \\(A\\) must equal the number of rows of \\(B\\): otherwise some entry would be left without a partner.\nTo find \\(c_{ij}\\), put one finger on row \\(i\\) of \\(A\\) and another on column \\(j\\) of \\(B\\), and move both together. (In the scan the labels of figure (A) are hard to read; the pairs are \\(a_{21}\\) with \\(b_{11}\\), \\(a_{22}\\) with \\(b_{21}\\), \\(a_{23}\\) with \\(b_{31}\\).)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Similarly"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[BA = \\begin{bmatrix} b_{11} & b_{12} \\\\ b_{21} & b_{22} \\\\ b_{31} & b_{32} \\end{bmatrix}\\]\n\\[\\begin{bmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\end{bmatrix}\\]\nis the \\(3 \\times 3\\) matrix \\([d_{ij}]\\) ...(ii), with\n\\[d_{11} = b_{11}a_{11} + b_{12}a_{21}\\]\n\\[d_{12} = b_{11}a_{12} + b_{12}a_{22}\\]\n\\[d_{13} = b_{11}a_{13} + b_{12}a_{23}\\]\n\\[d_{21} = b_{21}a_{11} + b_{22}a_{21}\\]\n\\[d_{22} = b_{21}a_{12} + b_{22}a_{22}\\]\n\\[d_{23} = b_{21}a_{13} + b_{22}a_{23}\\]\n\\[d_{31} = b_{31}a_{11} + b_{32}a_{21}\\]\n\\[d_{32} = b_{31}a_{12} + b_{32}a_{22}\\]\n\\[d_{33} = b_{31}a_{13} + b_{32}a_{23}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "From (i) and (ii), \\(AB\\) and \\(BA\\) are both calculated; their orders are \\(2 \\times 2\\) and \\(3 \\times 3\\) respectively."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note 1",
+            "text": "In general, \\(AB \\ne BA\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note 2",
+            "text": "If the product \\(AB\\) is defined, then the order of the product can be illustrated as given below: order of \\(A\\) is \\(m \\times n\\), order of \\(B\\) is \\(n \\times p\\), order of \\(AB\\) is \\(m \\times p\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch4-fig-order-rule",
+            "alt": "Three rows: Order of A is m by n, Order of B is n by p, Order of AB is m by p. The two inner n's are circled as equal. Curved arrows carry m from the order of A and p from the order of B down to the order of AB.",
+            "caption": "Figure: Note 2, the order of the product AB (original drawing after the textbook's diagram)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our example (not from the book), with \\(C = \\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix}\\) and \\(D = \\begin{bmatrix}5 & 6 \\\\ 7 & 8\\end{bmatrix}\\):\n\\[c_{11} = (1)(5) + (2)(7) = 19\\]\n\\[c_{12} = (1)(6) + (2)(8) = 22\\]\n\\[c_{21} = (3)(5) + (4)(7) = 43\\]\n\\[c_{22} = (3)(6) + (4)(8) = 50\\]\n\\[CD = \\begin{bmatrix}19 & 22 \\\\ 43 & 50\\end{bmatrix}\\]\nIn the other order\n\\[DC = \\begin{bmatrix}23 & 34 \\\\ 31 & 46\\end{bmatrix}\\]\nBoth products exist, yet \\(CD \\ne DC\\): Note 1 in action. With matrices the order of the factors matters, unlike with numbers."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "If \\(A = \\begin{bmatrix}2 & -1 & 0 \\\\ 1 & 2 & -3 \\\\ 1 & 2 & -2\\end{bmatrix}\\) and \\(B = \\begin{bmatrix}2 & -2 & 3 \\\\ -1 & -4 & 6 \\\\ 0 & -5 & 5\\end{bmatrix}\\), then compute \\(A^{2}B\\).",
+            "steps": [
+              "Given: \\(A\\) and \\(B\\), both \\(3 \\times 3\\).\nTo find: \\(A^{2}B\\).\nMethod: \\(A^{2}\\) means \\(A \\cdot A\\) (not the squares of the entries). First find \\(A^{2} = A \\cdot A\\), then multiply it by \\(B\\). Every entry comes from the row-by-column rule. Orders: \\(3 \\times 3\\) times \\(3 \\times 3\\); the inner 3's match, so each product is defined and is again \\(3 \\times 3\\).",
+              "Step 1: First row of \\(A^{2} = A \\cdot A\\) (\\(p_{ij}\\) = entries of \\(A^{2}\\))\n\\[p_{11} = (2)(2) + (-1)(1) + (0)(1) = 3\\]\n\\[p_{12} = (2)(-1) + (-1)(2) + (0)(2) = -4\\]\n\\[p_{13} = (2)(0) + (-1)(-3) + (0)(-2) = 3\\]\nWhy: row 1 of \\(A\\) is matched with each column of \\(A\\): first entry times first, second times second, third times third, then add.",
+              "Step 2: Second row of \\(A^{2} = A \\cdot A\\) (\\(p_{ij}\\) = entries of \\(A^{2}\\))\n\\[p_{21} = (1)(2) + (2)(1) + (-3)(1) = 1\\]\n\\[p_{22} = (1)(-1) + (2)(2) + (-3)(2) = -3\\]\n\\[p_{23} = (1)(0) + (2)(-3) + (-3)(-2) = 0\\]\nWhy: row 2 of \\(A\\) is matched with each column of \\(A\\): first entry times first, second times second, third times third, then add.",
+              "Step 3: Third row of \\(A^{2} = A \\cdot A\\) (\\(p_{ij}\\) = entries of \\(A^{2}\\))\n\\[p_{31} = (1)(2) + (2)(1) + (-2)(1) = 2\\]\n\\[p_{32} = (1)(-1) + (2)(2) + (-2)(2) = -1\\]\n\\[p_{33} = (1)(0) + (2)(-3) + (-2)(-2) = -2\\]\nWhy: row 3 of \\(A\\) is matched with each column of \\(A\\): first entry times first, second times second, third times third, then add.",
+              "Step 4: Write \\(A^{2}\\)\n\\[A^{2} = \\begin{bmatrix}3 & -4 & 3 \\\\ 1 & -3 & 0 \\\\ 2 & -1 & -2\\end{bmatrix}\\]\nWhy: the nine entries above are placed in their positions.",
+              "Step 5: First row of \\(A^{2}B\\) (\\(q_{ij}\\) = entries of \\(A^{2}B\\))\n\\[q_{11} = (3)(2) + (-4)(-1) + (3)(0) = 10\\]\n\\[q_{12} = (3)(-2) + (-4)(-4) + (3)(-5) = -5\\]\n\\[q_{13} = (3)(3) + (-4)(6) + (3)(5) = 0\\]\nWhy: row 1 of \\(A^{2}\\) is matched with each column of \\(B\\). Negative numbers are kept in brackets to avoid sign slips.",
+              "Step 6: Second row of \\(A^{2}B\\) (\\(q_{ij}\\) = entries of \\(A^{2}B\\))\n\\[q_{21} = (1)(2) + (-3)(-1) + (0)(0) = 5\\]\n\\[q_{22} = (1)(-2) + (-3)(-4) + (0)(-5) = 10\\]\n\\[q_{23} = (1)(3) + (-3)(6) + (0)(5) = -15\\]\nWhy: row 2 of \\(A^{2}\\) is matched with each column of \\(B\\). Negative numbers are kept in brackets to avoid sign slips.",
+              "Step 7: Third row of \\(A^{2}B\\) (\\(q_{ij}\\) = entries of \\(A^{2}B\\))\n\\[q_{31} = (2)(2) + (-1)(-1) + (-2)(0) = 5\\]\n\\[q_{32} = (2)(-2) + (-1)(-4) + (-2)(-5) = 10\\]\n\\[q_{33} = (2)(3) + (-1)(6) + (-2)(5) = -10\\]\nWhy: row 3 of \\(A^{2}\\) is matched with each column of \\(B\\). Negative numbers are kept in brackets to avoid sign slips.",
+              "Step 8: The answer\n\\[A^{2}B = \\begin{bmatrix}10 & -5 & 0 \\\\ 5 & 10 & -15 \\\\ 5 & 10 & -10\\end{bmatrix}\\]",
+              "Check: one entry by another route. \\(A^{2}B\\) also equals \\(A(AB)\\) (associative property, 4.3). The first column of \\(AB\\) is \\(2(2) + (-1)(-1) + 0(0) = 5\\), \\(1(2) + 2(-1) + (-3)(0) = 0\\), \\(1(2) + 2(-1) + (-2)(0) = 0\\). Then the first row of \\(A\\) times this column: \\(2(5) + (-1)(0) + 0(0) = 10\\), which agrees with \\(q_{11} = 10\\)."
+            ],
+            "answer": "\\(A^{2}B = \\begin{bmatrix}10 & -5 & 0 \\\\ 5 & 10 & -15 \\\\ 5 & 10 & -10\\end{bmatrix}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Powers of square matrices are defined as: \\(A^{2} = A \\times A\\), \\(A^{3} = A \\times A \\times A\\), \\(A^{n} = A \\times A \\times A \\times \\cdots\\) to \\(n\\) factors."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Powers exist only for square matrices: for \\(A \\cdot A\\) to be defined, the columns of \\(A\\) must equal the rows of \\(A\\). And \\(A^{2}\\) is never found by squaring each entry: for \\(C = \\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix}\\), \\(C^{2} = \\begin{bmatrix}7 & 10 \\\\ 15 & 22\\end{bmatrix}\\), not \\(\\begin{bmatrix} 1 & 4 \\\\ 9 & 16 \\end{bmatrix}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(AB\\) is defined only when (columns of \\(A\\)) = (rows of \\(B\\)).\n2. \\(c_{ij}\\) = row \\(i\\) of \\(A\\) times column \\(j\\) of \\(B\\): multiply pairs and add.\n3. Order rule: \\((m \\times n)(n \\times p) = m \\times p\\).\n4. In general \\(AB \\ne BA\\); one of them may even be undefined.\n5. \\(A^{n} = A \\cdot A \\cdots A\\) (\\(n\\) factors), only for square \\(A\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Multiplying entry by entry (\\(a_{ij}b_{ij}\\)) as in addition. Matrix multiplication is row by column.\n2. Using a column of \\(A\\) or a row of \\(B\\).\n3. Assuming \\(AB = BA\\) and changing the order of factors.\n4. Writing \\(A^{2}\\) as the squares of the entries.\n5. Sign slips with negative entries: keep them in brackets, \\((-1)(-4) = 4\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

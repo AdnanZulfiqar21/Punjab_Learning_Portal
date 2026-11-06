@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-3-Q9-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-3-q9",
+      "title": "Question 9 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH4-EXERCISE-4-3-Q9",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 82,
+          "pdf_to": 82,
+          "note": "Exercise 4.3, Question 9: book page 77 (PDF 82); answer key PDF 303"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9 Find the equation of the image of the curve with equation \\(y = x^2\\) under the transformation with associated matrix \\(\\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix}\\).",
+            "explanation": "Yahan poora curve transform ho raha hai: har point \\((x, y)\\) naye point \\((x', y')\\) par jata hai.\nHumein woh equation chahiye jo naye points poori karte hain.\nPlan: matrix se \\(x', y'\\); \\(M^{-1}\\) se ulta rishta; \\(y = x^2\\) mein rakhna; simplify; ek point se tasdeeq.\nDhyan dein: sab se aam ghalti yeh hai ke students \\(x' = x + 2y\\) aur \\(y' = 3x + 4y\\) ko seedha \\(y = x^2\\) mein rakh dete hain. Purane curve ki shart purane \\(x, y\\) par hai, is liye purane \\(x, y\\) ko naye \\(x', y'\\) mein likhna parta hai, aur is ke liye \\(M^{-1}\\) chahiye. Aakhir mein ek point (jaise \\((1, 1)\\)) le kar zaroor check karein.",
+            "steps": [
+              "Diya gaya hai: curve \\(y = x^2\\) aur matrix \\(M = \\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix}\\).\nHumein find karna hai: image curve (naye curve) ki equation.\nTareeqa: Har point \\((x, y)\\) naye point \\((x', y')\\) par jata hai: \\(\\begin{bmatrix}x' \\\\ y'\\end{bmatrix} = M\\begin{bmatrix}x \\\\ y\\end{bmatrix}\\) (column vector, Example 16 ki tarah). Purane \\(x, y\\) ko naye \\(x', y'\\) mein \\(M^{-1}\\) se likhenge aur \\(y = x^2\\) mein rakh denge.",
+              "Naye coordinates purane coordinates mein\n\\[\\begin{bmatrix}x' \\\\ y'\\end{bmatrix} = \\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix}\\begin{bmatrix}x \\\\ y\\end{bmatrix}\\]\n\\[x' = x + 2y\\]\n\\[y' = 3x + 4y\\]\nKyun: \\(M\\) ki pehli row ko column se zarb karne par \\(x'\\) aur doosri row se \\(y'\\) milta hai. Lekin humein ulta rishta chahiye, kyunke purane points ki equation maloom hai.",
+              "\\(M\\) ka inverse\n\\[|M| = (1)(4) - (2)(3) = -2\\]\n\\[M^{-1} = \\dfrac{1}{-2}\\begin{bmatrix}4 & -2 \\\\ -3 & 1\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}-2 & 1 \\\\ \\frac{3}{2} & -\\frac{1}{2}\\end{bmatrix}\\]\nKyun: \\(2 \\times 2\\) matrix ka inverse: diagonal ke entries ki jagah badlein, baqi do ke sign badlein, aur determinant se divide karein. \\(|M| \\neq 0\\) hai, is liye inverse maujood hai aur har naye point ka ek hi purana point hai.",
+              "Purane coordinates naye coordinates mein\n\\[\\begin{bmatrix}x \\\\ y\\end{bmatrix} = M^{-1}\\begin{bmatrix}x' \\\\ y'\\end{bmatrix}\\]\n\\[x = -2x' + y'\\]\n\\[y = \\dfrac{3x' - y'}{2}\\]\nTasdeeq: \\(x + 2y = -2x' + y' + 3x' - y' = x'\\) aur \\(3x + 4y = -6x' + 3y' + 6x' - 2y' = y'\\).\nKyun: Dono taraf left se \\(M^{-1}\\) se zarb karne se \\(M\\) ka asar khatam ho jata hai, kyunke \\(M^{-1}M = I\\). Chhota sa check bhi kar liya taa ke aage ghalat formula na lage.",
+              "\\(y = x^2\\) mein rakhein\n\\[\\dfrac{3x' - y'}{2} = (y' - 2x')^2\\]\n\\[3x' - y' = 2(y'^2 - 4x'y' + 4x'^2)\\]\n\\[3x' - y' = 8x'^2 - 8x'y' + 2y'^2\\]\nKyun: Har purana point \\(y = x^2\\) ko poora karta hai. \\(x\\) aur \\(y\\) ki jagah un ki naye coordinates wali expressions rakhne se woh shart milti hai jo naye points poori karte hain. Fraction hatane ke liye dono taraf 2 se zarb kiya aur \\((p - q)^2 = p^2 - 2pq + q^2\\) se expand kiya.",
+              "Sab ek taraf layein aur primes hata dein\n\\[8x^2 - 8xy + 2y^2 - 3x + y = 0\\]\nKyun: Primes sirf yeh yaad dilane ke liye the ke yeh naye points hain. Naye curve ki equation aam \\(x, y\\) mein hi likhi jati hai.",
+              "Tasdeeq: ek point se\n\\((1, 1)\\) curve \\(y = x^2\\) par hai; is ka image \\((1 + 2, 3 + 4) = (3, 7)\\) hai.\n\\[8(9) - 8(21) + 2(49) - 9 + 7\\]\n\\[= 72 - 168 + 98 - 9 + 7 = 0 \\;\\checkmark\\]\nKyun: Purane curve ke kisi point ka image naye curve par hona chahiye. \\((3, 7)\\) hamari equation ko poora karta hai, is liye jawab sahi hai."
+            ],
+            "final_answer": "\\(8x^2 - 8xy + 2y^2 - 3x + y = 0\\), yani \\(2(y - 2x)^2 = 3x - y\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

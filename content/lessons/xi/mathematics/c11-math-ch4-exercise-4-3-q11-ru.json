@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-3-Q11-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-3-q11",
+      "title": "Question 11 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH4-EXERCISE-4-3-Q11",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 82,
+          "pdf_to": 82,
+          "note": "Exercise 4.3, Question 11: book page 77 (PDF 82); answer key PDF 303"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11 Decode the message \\(\\begin{bmatrix}11 \\\\ 20 \\\\ 43\\end{bmatrix}\\begin{bmatrix}25 \\\\ 10 \\\\ 41\\end{bmatrix}\\begin{bmatrix}22 \\\\ 14 \\\\ 41\\end{bmatrix}\\) that was encode using matrix \\(A = \\begin{bmatrix}1 & 1 & -1 \\\\ 1 & 0 & 1 \\\\ 2 & 1 & 1\\end{bmatrix}\\), where the numbers 1 to 26 are corresponding to the letters \\(A\\) to \\(Z\\).",
+            "explanation": "Yeh decoding ka sawal hai: matrix ka asar us ke inverse se khatam karna hai.\nChhupe hue words nikalne hain.\nPlan: \\(|A|\\), cofactors, \\(A^{-1}\\); har coded column ko \\(A^{-1}\\) se zarb; numbers se letters; aur ek column dobara code kar ke tasdeeq.\nDhyan dein: decoding encoding ka ulta hai, is liye \\(A\\) ki jagah \\(A^{-1}\\) se zarb karte hain. Agar decode karne par koi number 0 ya negative ya 26 se bara aaye to pehle apna \\(A^{-1}\\) dobara check karein; yahan 27 ka aana hisaab ki ghalti nahi balki space ka nishan hai, jaisa neeche note mein likha hai. Pehle ek column ko decode kar ke dobara encode karein, is se foran pata chal jata hai ke \\(A^{-1}\\) sahi hai.",
+            "steps": [
+              "Diya gaya hai: coded columns \\(\\begin{bmatrix}11 \\\\ 20 \\\\ 43\\end{bmatrix}\\begin{bmatrix}25 \\\\ 10 \\\\ 41\\end{bmatrix}\\begin{bmatrix}22 \\\\ 14 \\\\ 41\\end{bmatrix}\\) aur \\(A = \\begin{bmatrix}1 & 1 & -1 \\\\ 1 & 0 & 1 \\\\ 2 & 1 & 1\\end{bmatrix}\\); 1 se 26 tak numbers A se Z letters hain.\nHumein find karna hai: asal message.\nTareeqa: Encoding mein \\(AX = \\text{code}\\) hua tha, is liye decoding mein \\(X = A^{-1}(\\text{code})\\). Pehle \\(A^{-1}\\) nikalenge, phir har coded column ko us se zarb karenge, phir numbers ko letters mein badlenge.",
+              "\\(|A|\\) nikalein\n\\[|A| = \\begin{vmatrix}1 & 1 & -1 \\\\ 1 & 0 & 1 \\\\ 2 & 1 & 1\\end{vmatrix}\\]\n\\[= 1(0 - 1) - 1(1 - 2) - 1(1 - 0)\\]\n\\[= -1 + 1 - 1\\]\n\\[= -1\\]\nKyun: \\(|A| \\neq 0\\) hai, is liye \\(A^{-1}\\) maujood hai aur message decode ho sakta hai. Agar determinant zero hota to code wapas khul hi na sakta.",
+              "Cofactors\n\\[A_{11} = +\\begin{vmatrix}0 & 1 \\\\ 1 & 1\\end{vmatrix}\\]\n\\[= (0 - 1) = -1\\]\n\\[A_{12} = -\\begin{vmatrix}1 & 1 \\\\ 2 & 1\\end{vmatrix}\\]\n\\[= -(1 - 2) = 1\\]\n\\[A_{13} = +\\begin{vmatrix}1 & 0 \\\\ 2 & 1\\end{vmatrix}\\]\n\\[= (1 - 0) = 1\\]\n\\[A_{21} = -\\begin{vmatrix}1 & -1 \\\\ 1 & 1\\end{vmatrix}\\]\n\\[= -(1 + 1) = -2\\]\n\\[A_{22} = +\\begin{vmatrix}1 & -1 \\\\ 2 & 1\\end{vmatrix}\\]\n\\[= (1 + 2) = 3\\]\n\\[A_{23} = -\\begin{vmatrix}1 & 1 \\\\ 2 & 1\\end{vmatrix}\\]\n\\[= -(1 - 2) = 1\\]\n\\[A_{31} = +\\begin{vmatrix}1 & -1 \\\\ 0 & 1\\end{vmatrix}\\]\n\\[= (1 - 0) = 1\\]\n\\[A_{32} = -\\begin{vmatrix}1 & -1 \\\\ 1 & 1\\end{vmatrix}\\]\n\\[= -(1 + 1) = -2\\]\n\\[A_{33} = +\\begin{vmatrix}1 & 1 \\\\ 1 & 0\\end{vmatrix}\\]\n\\[= (0 - 1) = -1\\]\nKyun: \\(A_{ij} = (-1)^{i+j}M_{ij}\\): row \\(i\\) aur column \\(j\\) hata kar \\(2 \\times 2\\) determinant, aur signs ka pattern \\(+ - +\\), \\(- + -\\), \\(+ - +\\).",
+              "Adjoint aur inverse\n\\[\\operatorname{adj}A = \\begin{bmatrix}-1 & -2 & 1 \\\\ 1 & 3 & -2 \\\\ 1 & 1 & -1\\end{bmatrix}\\]\n\\[A^{-1} = \\dfrac{1}{-1}\\operatorname{adj}A = \\begin{bmatrix}1 & 2 & -1 \\\\ -1 & -3 & 2 \\\\ -1 & -1 & 1\\end{bmatrix}\\]\nKyun: \\(\\operatorname{adj}A\\) cofactor matrix ka transpose hai. \\(|A| = -1\\) se divide karne ka matlab hai har entry ka sign badal dena.",
+              "Column \\((11, 20, 43)\\) ko decode karein\n\\[A^{-1}\\begin{bmatrix}11 \\\\ 20 \\\\ 43\\end{bmatrix}\\]\n\\[1(11) + 2(20) + (-1)(43) = 8\\]\n\\[(-1)(11) + (-3)(20) + 2(43) = 15\\]\n\\[(-1)(11) + (-1)(20) + 1(43) = 12\\]\n\\[= \\begin{bmatrix}8 \\\\ 15 \\\\ 12\\end{bmatrix}\\]\nKyun: Har entry \\(A^{-1}\\) ki ek row aur coded column ka zarb hai. Signs ka khaas khayal rakhein.",
+              "Column \\((25, 10, 41)\\) ko decode karein\n\\[A^{-1}\\begin{bmatrix}25 \\\\ 10 \\\\ 41\\end{bmatrix}\\]\n\\[1(25) + 2(10) + (-1)(41) = 4\\]\n\\[(-1)(25) + (-3)(10) + 2(41) = 27\\]\n\\[(-1)(25) + (-1)(10) + 1(41) = 6\\]\n\\[= \\begin{bmatrix}4 \\\\ 27 \\\\ 6\\end{bmatrix}\\]\nKyun: Har entry \\(A^{-1}\\) ki ek row aur coded column ka zarb hai. Signs ka khaas khayal rakhein.",
+              "Column \\((22, 14, 41)\\) ko decode karein\n\\[A^{-1}\\begin{bmatrix}22 \\\\ 14 \\\\ 41\\end{bmatrix}\\]\n\\[1(22) + 2(14) + (-1)(41) = 9\\]\n\\[(-1)(22) + (-3)(14) + 2(41) = 18\\]\n\\[(-1)(22) + (-1)(14) + 1(41) = 5\\]\n\\[= \\begin{bmatrix}9 \\\\ 18 \\\\ 5\\end{bmatrix}\\]\nKyun: Har entry \\(A^{-1}\\) ki ek row aur coded column ka zarb hai. Signs ka khaas khayal rakhein.",
+              "Numbers ko letters mein badlein\n8 = H, 15 = O, 12 = L, 4 = D, 27 = (space), 6 = F, 9 = I, 18 = R, 5 = E.\nMessage: HOLD FIRE.\nKyun: 8 alphabet ka aathwan letter H hai, 15 O hai, waghaira. 27 to 1 se 26 ki range se bahar hai; yeh sirf do words ke beech ki khaali jagah (space) ho sakta hai (neeche kitab ki ghalti wala note dekhein).",
+              "Tasdeeq: dobara encode kar ke\n\\[A\\begin{bmatrix}8 \\\\ 15 \\\\ 12\\end{bmatrix} = \\begin{bmatrix}11 \\\\ 20 \\\\ 43\\end{bmatrix} \\;\\checkmark\\]\nKyun: HOL (8, 15, 12) ko \\(A\\) se code karne par wapas pehla coded column (11, 20, 43) mila, is liye decoding sahi hai."
+            ],
+            "final_answer": "Message HOLD FIRE hai."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Decode karne par 8, 15, 12, 4, 27, 6, 9, 18, 5 milte hain. 27 kitab ke table (A se Z ke liye 1 se 26) mein hai hi nahi; answer key ka \"Hold Fire\" 27 ko words ke beech ki space maanta hai, lekin yeh kahin likha nahi. Sawal mein \"was encode\" bhi ghalat hai, sahi \"was encoded\" hai."
+          }
+        ]
+      }
+    }
+  ]
+}

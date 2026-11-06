@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-2-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-2-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 64,
+          "pdf_to": 65,
+          "note": "Exercise 4.2, Question 3: Show that: ten determinant identities, parts (i)-(x) (book pages 59-60)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Show that: \\(\\begin{vmatrix} 3 & 5 & 0 \\\\ 5 & 25 & 10 \\\\ 7 & 25 & 1 \\end{vmatrix} = 25\\begin{vmatrix} 3 & 1 & 0 \\\\ 1 & 1 & 2 \\\\ 7 & 5 & 1 \\end{vmatrix}\\)",
+            "explanation": "We must show two number determinants are related by the factor 25.\nColumn 2 (\\(5, 25, 25\\)) has the factor 5 and row 2 (\\(5, 5, 10\\) after that) has the factor 5.\nPlan: take 5 out of \\(C_2\\), then 5 out of \\(R_2\\).",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} 3 & 5 & 0 \\\\ 5 & 25 & 10 \\\\ 7 & 25 & 1 \\end{vmatrix}\\)\nTo prove: \\(\\Delta = 25\\begin{vmatrix} 3 & 1 & 0 \\\\ 1 & 1 & 2 \\\\ 7 & 5 & 1 \\end{vmatrix}\\)\nMethod: Property v (a common factor of a row or column comes outside), used twice.",
+              "Take 5 out of column 2\n\\[\\Delta = 5\\begin{vmatrix} 3 & 1 & 0 \\\\ 5 & 5 & 10 \\\\ 7 & 5 & 1 \\end{vmatrix}\\]\nWhy: \\(5 = 5 \\cdot 1,\\ 25 = 5 \\cdot 5,\\ 25 = 5 \\cdot 5\\).",
+              "Take 5 out of row 2\n\\[\\Delta = 5 \\cdot 5\\begin{vmatrix} 3 & 1 & 0 \\\\ 1 & 1 & 2 \\\\ 7 & 5 & 1 \\end{vmatrix}\\]\n\\[= 25\\begin{vmatrix} 3 & 1 & 0 \\\\ 1 & 1 & 2 \\\\ 7 & 5 & 1 \\end{vmatrix}\\]\nWhy: Row 2 is now \\(5, 5, 10 = 5(1, 1, 2)\\). This is the right side.",
+              "Check (both values)\n\\[\\begin{vmatrix} 3 & 1 & 0 \\\\ 1 & 1 & 2 \\\\ 7 & 5 & 1 \\end{vmatrix} = 3(1 - 10) - 1(1 - 14) + 0\\]\n\\[= -27 + 13 = -14\\]\n\\[\\Delta = 3(25 - 250) - 5(5 - 70) + 0 = -675 + 325 = -350\\]\n\\[25 \\times (-14) = -350 \\;\\checkmark\\]\nWhy: Expanding both sides along row 1 confirms the result."
+            ],
+            "final_answer": "Hence proved: both sides equal \\(-350\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Show that: \\(\\begin{vmatrix} a+b & a & a \\\\ a & a+b & a \\\\ a & a & a+b \\end{vmatrix} = b^2(3a+b)\\)",
+            "explanation": "We must show the letter determinant equals \\(b^2(3a+b)\\).\nEvery row adds up to \\(3a + b\\), so adding the columns gives a common factor.\nPlan: \\(C_1 + C_2 + C_3 \\to C_1\\), take \\(3a+b\\) out, make zeros, read off the triangular determinant.",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} a+b & a & a \\\\ a & a+b & a \\\\ a & a & a+b \\end{vmatrix}\\)\nTo prove: \\(\\Delta = b^2(3a+b)\\)\nMethod: Property vii (add columns), Property v (factor out), Property viii (a triangular determinant equals the product of its diagonal).",
+              "Add all columns into column 1\n\\[C_1 + C_2 + C_3 \\to C_1\\]\n\\[\\Delta = \\begin{vmatrix} 3a+b & a & a \\\\ 3a+b & a+b & a \\\\ 3a+b & a & a+b \\end{vmatrix}\\]\nWhy: Each row: \\((a+b) + a + a = 3a + b\\). The value does not change.",
+              "Take \\(3a+b\\) out of column 1\n\\[\\Delta = (3a+b)\\begin{vmatrix} 1 & a & a \\\\ 1 & a+b & a \\\\ 1 & a & a+b \\end{vmatrix}\\]\nWhy: Property v.",
+              "Subtract row 1 from rows 2 and 3\n\\[R_2 - R_1 \\to R_2,\\quad R_3 - R_1 \\to R_3\\]\n\\[\\Delta = (3a+b)\\begin{vmatrix} 1 & a & a \\\\ 0 & b & 0 \\\\ 0 & 0 & b \\end{vmatrix}\\]\nWhy: \\((a+b) - a = b\\), \\(a - a = 0\\). Now all entries below the diagonal are zero (upper triangular).",
+              "Multiply the diagonal\n\\[\\Delta = (3a+b)(1 \\cdot b \\cdot b)\\]\n\\[= b^2(3a+b)\\]\nWhy: Property viii (or expand along column 1: \\(1 \\cdot (b \\cdot b - 0)\\))."
+            ],
+            "final_answer": "Hence proved: \\(\\Delta = b^2(3a+b)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) Show that: \\(\\begin{vmatrix} 1 & x & yz \\\\ 1 & y & zx \\\\ 1 & z & xy \\end{vmatrix} = \\begin{vmatrix} 1 & x & x^2 \\\\ 1 & y & y^2 \\\\ 1 & z & z^2 \\end{vmatrix}\\)",
+            "explanation": "We must show two letter determinants are equal.\nMultiplying row 1 by \\(x\\) turns \\(yz\\) into \\(xyz\\) and \\(x\\) into \\(x^2\\); rows 2 and 3 work the same way with \\(y\\) and \\(z\\).\nPlan: multiply rows by \\(x, y, z\\), take \\(xyz\\) out of \\(C_3\\), then move \\(C_3\\) to the front.",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} 1 & x & yz \\\\ 1 & y & zx \\\\ 1 & z & xy \\end{vmatrix}\\)\nTo prove: \\(\\Delta = \\begin{vmatrix} 1 & x & x^2 \\\\ 1 & y & y^2 \\\\ 1 & z & z^2 \\end{vmatrix}\\)\nMethod: Property v (multiply rows; common factor out) and Property ii (each interchange of two columns changes the sign). We take \\(x, y, z \\neq 0\\).",
+              "Multiply \\(R_1\\) by \\(x\\), \\(R_2\\) by \\(y\\), \\(R_3\\) by \\(z\\)\n\\[\\Delta = \\dfrac{1}{xyz}\\begin{vmatrix} x & x^2 & xyz \\\\ y & y^2 & xyz \\\\ z & z^2 & xyz \\end{vmatrix}\\]\nWhy: \\(yz \\cdot x = xyz\\), \\(zx \\cdot y = xyz\\), \\(xy \\cdot z = xyz\\). The value was multiplied by \\(xyz\\), so we divide by \\(xyz\\) outside.",
+              "Take \\(xyz\\) out of column 3\n\\[\\Delta = \\begin{vmatrix} x & x^2 & 1 \\\\ y & y^2 & 1 \\\\ z & z^2 & 1 \\end{vmatrix}\\]\nWhy: Property v; \\(\\frac{xyz}{xyz} = 1\\).",
+              "Move column 3 to the front\n\\[C_3 \\leftrightarrow C_2:\\ \\ -\\begin{vmatrix} x & 1 & x^2 \\\\ y & 1 & y^2 \\\\ z & 1 & z^2 \\end{vmatrix}\\]\n\\[C_2 \\leftrightarrow C_1:\\ \\ +\\begin{vmatrix} 1 & x & x^2 \\\\ 1 & y & y^2 \\\\ 1 & z & z^2 \\end{vmatrix}\\]\nWhy: Each interchange changes the sign (Property ii); two interchanges give back \\(+\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\Delta = \\begin{vmatrix} 1 & x & x^2 \\\\ 1 & y & y^2 \\\\ 1 & z & z^2 \\end{vmatrix}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iv)",
+            "prompt": "3 (iv) Show that: \\(\\begin{vmatrix} m+n & l & l \\\\ m & n+l & m \\\\ n & n & l+m \\end{vmatrix} = 4lmn\\)",
+            "explanation": "We must show the determinant equals \\(4lmn\\).\nRow 1 minus rows 2 and 3 cancels the letters in column 1 and leaves simple entries.\nPlan: \\(R_1 - R_2 - R_3 \\to R_1\\), then expand along row 1.",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} m+n & l & l \\\\ m & n+l & m \\\\ n & n & l+m \\end{vmatrix}\\)\nTo prove: \\(\\Delta = 4lmn\\)\nMethod: Property vii, then expansion along the new row 1, which has a zero.",
+              "Subtract rows 2 and 3 from row 1\n\\[R_1 - R_2 - R_3 \\to R_1\\]\n\\[\\Delta = \\begin{vmatrix} 0 & -2n & -2m \\\\ m & n+l & m \\\\ n & n & l+m \\end{vmatrix}\\]\nWhy: Column 1: \\((m+n) - m - n = 0\\); column 2: \\(l - (n+l) - n = -2n\\); column 3: \\(l - m - (l+m) = -2m\\).",
+              "Expand along row 1\n\\[\\Delta = 0 - (-2n)\\begin{vmatrix} m & m \\\\ n & l+m \\end{vmatrix} + (-2m)\\begin{vmatrix} m & n+l \\\\ n & n \\end{vmatrix}\\]\nWhy: Signs \\(+,\\,-,\\,+\\); the first entry is 0.",
+              "Work out the two minors\n\\[\\begin{vmatrix} m & m \\\\ n & l+m \\end{vmatrix} = ml + m^2 - mn\\]\n\\[\\begin{vmatrix} m & n+l \\\\ n & n \\end{vmatrix} = mn - n^2 - nl\\]\nWhy: \\(2 \\times 2\\) rule: \\(m(l+m) - mn\\) and \\(mn - n(n+l)\\).",
+              "Multiply and simplify\n\\[\\Delta = 2n(ml + m^2 - mn) - 2m(mn - n^2 - nl)\\]\n\\[= 2lmn + 2m^2n - 2mn^2 - 2m^2n + 2mn^2 + 2lmn\\]\n\\[= 4lmn\\]\nWhy: The terms \\(2m^2n\\) and \\(2mn^2\\) cancel in pairs.",
+              "Check with numbers\n\\[l = m = n = 1:\\ \\begin{vmatrix} 2 & 1 & 1 \\\\ 1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{vmatrix} = 4\\]\n\\[4lmn = 4 \\;\\checkmark\\]\nWhy: The same number determinant appeared in Question 1(vi)."
+            ],
+            "final_answer": "Hence proved: \\(\\Delta = 4lmn\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(v)",
+            "prompt": "3 (v) Show that: \\(\\begin{vmatrix} y & -1 & x \\\\ x & y & 0 \\\\ 1 & x & y \\end{vmatrix} = x^3 + y^3\\)",
+            "explanation": "We must show the determinant equals \\(x^3 + y^3\\).\nRow 2 has a zero, but row 1 expansion is also short; we use row 1.\nPlan: expand along row 1 and simplify.",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} y & -1 & x \\\\ x & y & 0 \\\\ 1 & x & y \\end{vmatrix}\\)\nTo prove: \\(\\Delta = x^3 + y^3\\)\nMethod: Expansion along row 1 with signs \\(+,\\,-,\\,+\\).",
+              "Expand along row 1\n\\[\\Delta = y\\begin{vmatrix} y & 0 \\\\ x & y \\end{vmatrix} - (-1)\\begin{vmatrix} x & 0 \\\\ 1 & y \\end{vmatrix} + x\\begin{vmatrix} x & y \\\\ 1 & x \\end{vmatrix}\\]\nWhy: Each entry of row 1 times its signed minor.",
+              "Work out the minors\n\\[= y(y^2 - 0) + 1(xy - 0) + x(x^2 - y)\\]\n\\[= y^3 + xy + x^3 - xy\\]\n\\[= x^3 + y^3\\]\nWhy: \\(2 \\times 2\\) rule in each minor; \\(+xy\\) and \\(-xy\\) cancel.",
+              "Check with numbers\n\\[x = 1,\\ y = 2:\\ \\begin{vmatrix} 2 & -1 & 1 \\\\ 1 & 2 & 0 \\\\ 1 & 1 & 2 \\end{vmatrix} = 8 + 2 - 1 = 9\\]\n\\[x^3 + y^3 = 1 + 8 = 9 \\;\\checkmark\\]\nWhy: Row 1 expansion: \\(2(4) + 1(2) + 1(1 - 2) = 9\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\Delta = x^3 + y^3\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(vi)",
+            "prompt": "3 (vi) Show that: \\(\\begin{vmatrix} r\\cos\\theta & 1 & -\\sin\\theta \\\\ 0 & 1 & 0 \\\\ r\\sin\\theta & 0 & \\cos\\theta \\end{vmatrix} = r\\)",
+            "explanation": "We must show the determinant equals \\(r\\).\nRow 2 is \\(0, 1, 0\\): only one non-zero entry.\nPlan: expand along row 2, then use \\(\\cos^2\\theta + \\sin^2\\theta = 1\\).",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} r\\cos\\theta & 1 & -\\sin\\theta \\\\ 0 & 1 & 0 \\\\ r\\sin\\theta & 0 & \\cos\\theta \\end{vmatrix}\\)\nTo prove: \\(\\Delta = r\\)\nMethod: Expand along the row with most zeros (row 2); its signs are \\(-,\\,+,\\,-\\).",
+              "Expand along row 2\n\\[\\Delta = (+1)\\begin{vmatrix} r\\cos\\theta & -\\sin\\theta \\\\ r\\sin\\theta & \\cos\\theta \\end{vmatrix}\\]\nWhy: The entries 0 contribute nothing; the 1 is at position \\((2,2)\\), sign \\((-1)^{4} = +\\). Its minor comes from covering row 2 and column 2.",
+              "Work out the minor\n\\[= r\\cos^2\\theta - (-\\sin\\theta)(r\\sin\\theta)\\]\n\\[= r\\cos^2\\theta + r\\sin^2\\theta\\]\n\\[= r(\\cos^2\\theta + \\sin^2\\theta) = r\\]\nWhy: \\(2 \\times 2\\) rule, then the identity \\(\\cos^2\\theta + \\sin^2\\theta = 1\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\Delta = r\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(vii)",
+            "prompt": "3 (vii) Show that: \\(\\begin{vmatrix} a & b & c \\\\ b+c & c+a & a+b \\\\ a+b & b+c & c+a \\end{vmatrix} = a^3 + b^3 + c^3 - 3abc\\)",
+            "explanation": "We must show the determinant equals \\(a^3 + b^3 + c^3 - 3abc\\).\nAdding row 1 to row 2 makes every entry of row 2 equal to \\(a + b + c\\).\nPlan: \\(R_2 + R_1 \\to R_2\\), take \\(a+b+c\\) out, make zeros in row 2, expand.",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} a & b & c \\\\ b+c & c+a & a+b \\\\ a+b & b+c & c+a \\end{vmatrix}\\)\nTo prove: \\(\\Delta = a^3 + b^3 + c^3 - 3abc\\)\nMethod: Property vii and v, then expansion; at the end the identity \\(a^3 + b^3 + c^3 - 3abc = (a+b+c)(a^2+b^2+c^2-ab-bc-ca)\\).",
+              "Add row 1 to row 2\n\\[R_2 + R_1 \\to R_2\\]\n\\[\\Delta = \\begin{vmatrix} a & b & c \\\\ a+b+c & a+b+c & a+b+c \\\\ a+b & b+c & c+a \\end{vmatrix}\\]\nWhy: \\((b+c) + a\\), \\((c+a) + b\\), \\((a+b) + c\\) are all \\(a + b + c\\).",
+              "Take \\(a+b+c\\) out of row 2\n\\[\\Delta = (a+b+c)\\begin{vmatrix} a & b & c \\\\ 1 & 1 & 1 \\\\ a+b & b+c & c+a \\end{vmatrix}\\]\nWhy: Property v.",
+              "Make zeros in row 2\n\\[C_2 - C_1 \\to C_2,\\quad C_3 - C_1 \\to C_3\\]\n\\[\\Delta = (a+b+c)\\begin{vmatrix} a & b-a & c-a \\\\ 1 & 0 & 0 \\\\ a+b & c-a & c-b \\end{vmatrix}\\]\nWhy: Row 3: \\((b+c) - (a+b) = c - a\\) and \\((c+a) - (a+b) = c - b\\).",
+              "Expand along row 2\n\\[\\Delta = (a+b+c)(-1)\\begin{vmatrix} b-a & c-a \\\\ c-a & c-b \\end{vmatrix}\\]\n\\[= (a+b+c)\\,[(c-a)^2 - (b-a)(c-b)]\\]\nWhy: The 1 is at position \\((2,1)\\), sign \\(-\\). The minus sign reverses the \\(2 \\times 2\\) difference.",
+              "Simplify the bracket\n\\[(c-a)^2 = c^2 - 2ca + a^2\\]\n\\[(b-a)(c-b) = bc - b^2 - ac + ab\\]\n\\[\\text{bracket} = a^2 + b^2 + c^2 - ab - bc - ca\\]\nWhy: Subtracting changes every sign of the second product; \\(-2ca + ac = -ca\\).",
+              "Use the identity\n\\[\\Delta = (a+b+c)(a^2 + b^2 + c^2 - ab - bc - ca)\\]\n\\[= a^3 + b^3 + c^3 - 3abc\\]\nWhy: Multiplying out, all mixed terms like \\(a^2b\\) cancel and \\(-abc\\) appears three times.",
+              "Check with numbers\n\\[a = 1,\\ b = 2,\\ c = 0:\\ \\begin{vmatrix} 1 & 2 & 0 \\\\ 2 & 1 & 3 \\\\ 3 & 2 & 1 \\end{vmatrix} = -5 + 14 = 9\\]\n\\[1 + 8 + 0 - 0 = 9 \\;\\checkmark\\]\nWhy: Row 1 expansion: \\(1(1 - 6) - 2(2 - 9) + 0 = 9\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\Delta = a^3 + b^3 + c^3 - 3abc\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(viii)",
+            "prompt": "3 (viii) Show that: \\(\\begin{vmatrix} a+\\lambda & a & a \\\\ b & b+\\lambda & b \\\\ c & c & c+\\lambda \\end{vmatrix} = \\lambda^2(a+b+c+\\lambda)\\)",
+            "explanation": "We must show the determinant equals \\(\\lambda^2(a+b+c+\\lambda)\\).\nEach column adds up to \\(a + b + c + \\lambda\\).\nPlan: \\(R_1 + R_2 + R_3 \\to R_1\\), take the factor out, make zeros in row 1, read the triangular form.",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} a+\\lambda & a & a \\\\ b & b+\\lambda & b \\\\ c & c & c+\\lambda \\end{vmatrix}\\)\nTo prove: \\(\\Delta = \\lambda^2(a+b+c+\\lambda)\\)\nMethod: Property vii (add rows), Property v (factor out), Property viii (triangular determinant).",
+              "Add all rows into row 1\n\\[R_1 + R_2 + R_3 \\to R_1\\]\n\\[\\Delta = \\begin{vmatrix} s & s & s \\\\ b & b+\\lambda & b \\\\ c & c & c+\\lambda \\end{vmatrix}\\]\n\\[s = a + b + c + \\lambda\\]\nWhy: Column 1: \\((a+\\lambda) + b + c\\); column 2: \\(a + (b+\\lambda) + c\\); column 3: \\(a + b + (c+\\lambda)\\). All are \\(s\\).",
+              "Take \\(s\\) out of row 1\n\\[\\Delta = s\\begin{vmatrix} 1 & 1 & 1 \\\\ b & b+\\lambda & b \\\\ c & c & c+\\lambda \\end{vmatrix}\\]\nWhy: Property v.",
+              "Make zeros in row 1\n\\[C_2 - C_1 \\to C_2,\\quad C_3 - C_1 \\to C_3\\]\n\\[\\Delta = s\\begin{vmatrix} 1 & 0 & 0 \\\\ b & \\lambda & 0 \\\\ c & 0 & \\lambda \\end{vmatrix}\\]\nWhy: \\((b+\\lambda) - b = \\lambda\\), \\(b - b = 0\\), \\(c - c = 0\\), \\((c+\\lambda) - c = \\lambda\\). Now the determinant is lower triangular.",
+              "Multiply the diagonal\n\\[\\Delta = s(1 \\cdot \\lambda \\cdot \\lambda)\\]\n\\[= \\lambda^2(a + b + c + \\lambda)\\]\nWhy: Property viii."
+            ],
+            "final_answer": "Hence proved: \\(\\Delta = \\lambda^2(a+b+c+\\lambda)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ix)",
+            "prompt": "3 (ix) Show that: \\(\\begin{vmatrix} 1 & x & x^2 \\\\ 1 & y & y^2 \\\\ 1 & z & z^2 \\end{vmatrix} = (x-y)(y-z)(z-x)\\)",
+            "explanation": "We must show this determinant (the Vandermonde determinant) factorises as \\((x-y)(y-z)(z-x)\\).\nColumn 1 is all 1s, so subtracting rows gives zeros at once.\nPlan: \\(R_2 - R_1\\), \\(R_3 - R_1\\), take out \\((y-x)\\) and \\((z-x)\\), expand.",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} 1 & x & x^2 \\\\ 1 & y & y^2 \\\\ 1 & z & z^2 \\end{vmatrix}\\)\nTo prove: \\(\\Delta = (x-y)(y-z)(z-x)\\)\nMethod: Property vii, the factorisation \\(y^2 - x^2 = (y-x)(y+x)\\), and Property v.",
+              "Subtract row 1 from rows 2 and 3\n\\[R_2 - R_1 \\to R_2,\\quad R_3 - R_1 \\to R_3\\]\n\\[\\Delta = \\begin{vmatrix} 1 & x & x^2 \\\\ 0 & y-x & y^2-x^2 \\\\ 0 & z-x & z^2-x^2 \\end{vmatrix}\\]\nWhy: Property vii keeps the value.",
+              "Take \\((y-x)\\) out of \\(R_2\\) and \\((z-x)\\) out of \\(R_3\\)\n\\[\\Delta = (y-x)(z-x)\\begin{vmatrix} 1 & x & x^2 \\\\ 0 & 1 & y+x \\\\ 0 & 1 & z+x \\end{vmatrix}\\]\nWhy: \\(y^2 - x^2 = (y-x)(y+x)\\) and \\(z^2 - x^2 = (z-x)(z+x)\\).",
+              "Expand along column 1\n\\[\\Delta = (y-x)(z-x)[(z+x) - (y+x)]\\]\n\\[= (y-x)(z-x)(z-y)\\]\nWhy: Only the 1 at \\((1,1)\\) counts; its minor is \\(1(z+x) - 1(y+x)\\).",
+              "Arrange the factors\n\\[(y-x)(z-y) = (x-y)(y-z)\\]\n\\[\\Delta = (x-y)(y-z)(z-x)\\]\nWhy: \\(y - x = -(x - y)\\) and \\(z - y = -(y - z)\\); two minus signs make plus."
+            ],
+            "final_answer": "Hence proved: \\(\\Delta = (x-y)(y-z)(z-x)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(x)",
+            "prompt": "3 (x) Show that: \\(\\begin{vmatrix} y+z & z+x & x+y \\\\ x & y & z \\\\ x^2 & y^2 & z^2 \\end{vmatrix} = (x+y+z)(x-y)(y-z)(z-x)\\)",
+            "explanation": "We must show the determinant equals \\((x+y+z)(x-y)(y-z)(z-x)\\).\nAdding row 2 to row 1 gives \\(x + y + z\\) in every column.\nPlan: \\(R_1 + R_2 \\to R_1\\), take \\(x+y+z\\) out, then work as in part (ix) with columns.",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} y+z & z+x & x+y \\\\ x & y & z \\\\ x^2 & y^2 & z^2 \\end{vmatrix}\\)\nTo prove: \\(\\Delta = (x+y+z)(x-y)(y-z)(z-x)\\)\nMethod: Property vii and v, then the method of part (ix).",
+              "Add row 2 to row 1\n\\[R_1 + R_2 \\to R_1\\]\n\\[\\Delta = (x+y+z)\\begin{vmatrix} 1 & 1 & 1 \\\\ x & y & z \\\\ x^2 & y^2 & z^2 \\end{vmatrix}\\]\nWhy: \\((y+z) + x\\), \\((z+x) + y\\), \\((x+y) + z\\) all equal \\(x + y + z\\), which then comes out of row 1 (Property v).",
+              "Subtract column 1 from columns 2 and 3\n\\[C_2 - C_1 \\to C_2,\\quad C_3 - C_1 \\to C_3\\]\n\\[\\Delta = (x+y+z)\\begin{vmatrix} 1 & 0 & 0 \\\\ x & y-x & z-x \\\\ x^2 & y^2-x^2 & z^2-x^2 \\end{vmatrix}\\]\nWhy: Property vii; row 1 now has two zeros.",
+              "Take out \\((y-x)\\) from \\(C_2\\) and \\((z-x)\\) from \\(C_3\\)\n\\[\\Delta = (x+y+z)(y-x)(z-x)\\begin{vmatrix} 1 & 0 & 0 \\\\ x & 1 & 1 \\\\ x^2 & y+x & z+x \\end{vmatrix}\\]\nWhy: Difference of squares in row 3, then Property v.",
+              "Expand along row 1\n\\[\\Delta = (x+y+z)(y-x)(z-x)[(z+x) - (y+x)]\\]\n\\[= (x+y+z)(y-x)(z-x)(z-y)\\]\n\\[= (x+y+z)(x-y)(y-z)(z-x)\\]\nWhy: Only the 1 at \\((1,1)\\) counts. Then \\((y-x)(z-y) = (x-y)(y-z)\\), as in part (ix)."
+            ],
+            "final_answer": "Hence proved: \\(\\Delta = (x+y+z)(x-y)(y-z)(z-x)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

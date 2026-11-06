@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-2-Q10-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-2-q10",
+      "title": "Question 10 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 65,
+          "pdf_to": 65,
+          "note": "Exercise 4.2, Question 10: Inverse of A and A^{-1}A = I_3 (book page 60)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH4-EXERCISE-4-2-Q10",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10. Find the inverse of \\(A = \\begin{bmatrix} 1 & 2 & 1 \\\\ -5 & 0 & 4 \\\\ 5 & 4 & 0 \\end{bmatrix}\\) and show that \\(A^{-1}A = I_3\\).",
+            "explanation": "Humein \\(3 \\times 3\\) matrix ka inverse nikalna hai aur phir tasdeeq karni hai ke woh sahi hai.\nInverse woh matrix hai jo \\(A\\) se multiply ho kar identity \\(I_3\\) de, bilkul jaise \\(5 \\times \\frac{1}{5} = 1\\).\nPlan: naun (9) cofactors, \\(|A|\\), adjoint (cofactors ke matrix ka transpose), \\(A^{-1} = \\frac{1}{|A|}\\operatorname{adj}A\\), aur aakhir mein \\(A^{-1}A\\).",
+            "steps": [
+              "Diya gaya hai: \\(A = \\begin{bmatrix} 1 & 2 & 1 \\\\ -5 & 0 & 4 \\\\ 5 & 4 & 0 \\end{bmatrix}\\)\nHumein find karna hai: \\(A^{-1}\\), aur dikhana hai ke \\(A^{-1}A = I_3\\).\nTareeqa: \\(A^{-1} = \\frac{1}{|A|}\\operatorname{adj}A\\). Yahan \\(\\operatorname{adj}A\\) cofactors ke matrix ka transpose hai. Inverse tabhi mumkin hai jab \\(|A| \\neq 0\\) ho, is liye pehle determinant dekhenge.",
+              "Row 1 ke cofactors\n\\[A_{11} = +(0 \\cdot 0 - 4 \\cdot 4) = -16\\]\n\\[A_{12} = -((-5)(0) - (4)(5)) = 20\\]\n\\[A_{13} = +((-5)(4) - (0)(5)) = -20\\]\nKyun: Har entry ki row aur column chhupa kar minor, phir signs \\(+,\\,-,\\,+\\). \\(A_{12}\\) mein minor \\(-20\\) tha, minus lagne se \\(+20\\).",
+              "Row 2 ke cofactors\n\\[A_{21} = -(2 \\cdot 0 - 1 \\cdot 4) = 4\\]\n\\[A_{22} = +(1 \\cdot 0 - 1 \\cdot 5) = -5\\]\n\\[A_{23} = -(1 \\cdot 4 - 2 \\cdot 5) = 6\\]\nKyun: Row 2 ke signs \\(-,\\,+,\\,-\\) hain. \\(A_{23}\\): minor \\(4 - 10 = -6\\), minus lagne se \\(+6\\).",
+              "Row 3 ke cofactors\n\\[A_{31} = +(2 \\cdot 4 - 1 \\cdot 0) = 8\\]\n\\[A_{32} = -(1 \\cdot 4 - 1 \\cdot (-5)) = -9\\]\n\\[A_{33} = +(1 \\cdot 0 - 2 \\cdot (-5)) = 10\\]\nKyun: Row 3 ke signs \\(+,\\,-,\\,+\\). \\(A_{32}\\): minor \\(4 + 5 = 9\\), minus lagne se \\(-9\\).",
+              "\\(|A|\\) (row 1 ke along)\n\\[|A| = 1(-16) + 2(20) + 1(-20)\\]\n\\[= -16 + 40 - 20 = 4 \\neq 0\\]\nKyun: Row 1 ki entries \\(\\times\\) unhi ke cofactors (jo hum nikal chuke). \\(|A| = 4 \\neq 0\\), is liye \\(A\\) non-singular hai aur inverse maujood hai.",
+              "Adjoint (cofactor matrix ka transpose)\n\\[\\operatorname{adj}A = \\begin{bmatrix} -16 & 4 & 8 \\\\ 20 & -5 & -9 \\\\ -20 & 6 & 10 \\end{bmatrix}\\]\nKyun: Row 1 ke cofactors \\((-16, 20, -20)\\) column 1 ban gaye, row 2 ke column 2, row 3 ke column 3.\\nDhyan dein: Transpose bhool jana sab se aam ghalti hai; cofactors ko seedha likh dein to inverse ghalat aata hai.",
+              "Inverse nikalein\n\\[A^{-1} = \\dfrac{1}{4}\\begin{bmatrix} -16 & 4 & 8 \\\\ 20 & -5 & -9 \\\\ -20 & 6 & 10 \\end{bmatrix}\\]\n\\[= \\begin{bmatrix} -4 & 1 & 2 \\\\ 5 & -\\frac{5}{4} & -\\frac{9}{4} \\\\ -5 & \\frac{3}{2} & \\frac{5}{2} \\end{bmatrix}\\]\nKyun: \\(\\operatorname{adj}A\\) ki har entry ko \\(|A| = 4\\) se divide kiya; \\(-16/4 = -4\\), \\(-5/4\\) fraction hi rehta hai.",
+              "\\(A^{-1}A = I_3\\) dikhayein\n\\[(\\operatorname{adj}A)A = \\begin{bmatrix} 4 & 0 & 0 \\\\ 0 & 4 & 0 \\\\ 0 & 0 & 4 \\end{bmatrix}\\]\nKyun: Adj \\(A\\) ki row 1 ko \\(A\\) ke columns se: \\(-16 - 20 + 40 = 4\\), \\(-32 + 0 + 32 = 0\\), \\(-16 + 16 + 0 = 0\\). Row 2: \\(20 + 25 - 45 = 0\\), \\(40 + 0 - 36 = 4\\), \\(20 - 20 + 0 = 0\\). Row 3: \\(-20 - 30 + 50 = 0\\), \\(-40 + 0 + 40 = 0\\), \\(-20 + 24 + 0 = 4\\). Fractions se bachne ke liye pehle adj \\(A\\) se multiply kiya, phir 4 se divide karenge.",
+              "\\(|A|\\) se divide karein\n\\[A^{-1}A = \\dfrac{1}{4}\\begin{bmatrix} 4 & 0 & 0 \\\\ 0 & 4 & 0 \\\\ 0 & 0 & 4 \\end{bmatrix}\\]\n\\[= \\begin{bmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix} = I_3\\]\nKyun: \\(A^{-1}A = \\frac{1}{4}(\\operatorname{adj}A)A\\); diagonal ke 4 ab 1 ban gaye aur baaqi zero. Yahi identity matrix hai, to hamara inverse sahi hai."
+            ],
+            "final_answer": "\\(A^{-1} = \\frac{1}{4}\\begin{bmatrix} -16 & 4 & 8 \\\\ 20 & -5 & -9 \\\\ -20 & 6 & 10 \\end{bmatrix} = \\begin{bmatrix} -4 & 1 & 2 \\\\ 5 & -\\frac{5}{4} & -\\frac{9}{4} \\\\ -5 & \\frac{3}{2} & \\frac{5}{2} \\end{bmatrix}\\), aur \\(A^{-1}A = I_3\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.9.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.9.1",
+      "title": "4.9.1 Solution of System of Homogeneous Linear Equations by Gaussian Elimination Method",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 76,
+          "pdf_to": 79,
+          "note": "Book p. 71-74: 4.9.1 Gaussian elimination for homogeneous systems, Examples 14 and 15, Rule I and Rule II"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Gaussian Elimination is a systematic method for solving systems of linear equations, named after the German mathematician Carl Friedrich Gauss. It involves performing a series of row operations on the system's augmented matrix to transform it into row-echelon form. Once the matrix is in this simplified form, the solution to the system can be determined through back substitution. This method is widely used due to its efficiency and clarity in solving linear systems."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The row operations are the ones from Section 4.6: interchange two rows \\((R_i \\leftrightarrow R_j)\\), multiply a row by a non-zero number \\((kR_i)\\), and add a multiple of one row to another \\((R_i + kR_j \\to R_i')\\).\nThey do not change the solutions, because each one is the same as doing that operation on the equations themselves.\n\\(\\overset{R}{\\sim}\\) means \"is row equivalent to\": the new matrix came from the old one by row operations.\nBack substitution: in echelon form the last non-zero row has the fewest unknowns, so we solve it first and substitute upwards."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The method in steps:\n1. Write the augmented matrix \\(A_b = [A \\mid O]\\).\n2. Use the leading 1 of row 1 to make zeros below it.\n3. Make the leading entry of row 2 equal to 1 and make zeros below it; continue.\n4. In echelon form, count the non-zero rows: that is the rank of \\(A\\).\n5. Back-substitute. If some variable has no leading entry, it is free: call it \\(t\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 14",
+            "problem": "Solve the following system of equations by Gaussian Elimination method:\n\\[x + 2y + z = 0\\]\n\\[2x + 3y + 4z = 0\\]\n\\[4x + 3y + 2z = 0\\]",
+            "steps": [
+              "Given: a homogeneous system of 3 equations in the 3 variables \\(x, y, z\\).\nTo find: all its solutions \\((x, y, z)\\).\nMethod: Gaussian elimination. Write the augmented matrix, reduce it to row-echelon form with row operations, read the rank, then back-substitute. The last column is all zeros because the system is homogeneous; no row operation can change that.",
+              "Step 1: Write the augmented matrix\n\\[A_b = \\left[\\begin{array}{rrr|r}1 & 2 & 1 & 0 \\\\ 2 & 3 & 4 & 0 \\\\ 4 & 3 & 2 & 0\\end{array}\\right]\\]\nWhy: each row is one equation: the coefficients of \\(x, y, z\\), then (after the bar) the right-hand side \\(0\\).",
+              "Step 2: Make zeros below the leading 1 of the first row\n\\[R_2 + (-2)R_1 \\to R_2'\\]\n\\[R_3 + (-4)R_1 \\to R_3'\\]\n\\[(2, 3, 4, 0) - 2(1, 2, 1, 0)\\]\n\\[= (0, -1, 2, 0)\\]\n\\[(4, 3, 2, 0) - 4(1, 2, 1, 0)\\]\n\\[= (0, -5, -2, 0)\\]\n\\[\\overset{R}{\\sim}\\left[\\begin{array}{rrr|r}1 & 2 & 1 & 0 \\\\ 0 & -1 & 2 & 0 \\\\ 0 & -5 & -2 & 0\\end{array}\\right]\\]\nThe book prints the second operation as \\(R_3 + (-4)R_1 \\to= R_3'\\) (with a stray \"=\").\nWhy: the first row starts with 1, so subtracting 2 times it and 4 times it removes \\(x\\) from the second and third equations.",
+              "Step 3: Make the leading entry of the second row equal to 1\n\\[(-1)R_2 \\to R_2'\\]\n\\[\\overset{R}{\\sim}\\left[\\begin{array}{rrr|r}1 & 2 & 1 & 0 \\\\ 0 & 1 & -2 & 0 \\\\ 0 & -5 & -2 & 0\\end{array}\\right]\\]\nWhy: a leading 1 makes the next elimination easy and is required in the book's row-echelon form.",
+              "Step 4: Make a zero below the leading 1 of the second row\n\\[R_3 + 5R_2 \\to R_3'\\]\n\\[(0, -5, -2, 0) + 5(0, 1, -2, 0)\\]\n\\[= (0, 0, -12, 0)\\]\n\\[\\overset{R}{\\sim}\\left[\\begin{array}{rrr|r}1 & 2 & 1 & 0 \\\\ 0 & 1 & -2 & 0 \\\\ 0 & 0 & -12 & 0\\end{array}\\right]\\]\nWhy: the entry below the leading 1 is \\(-5\\); adding 5 times the second row turns it into \\(0\\), removing \\(y\\) from the third equation.",
+              "Step 5: Make the last leading entry 1 and read the rank\n\\[\\left(\\dfrac{-1}{12}\\right)R_3 \\to R_3'\\]\n\\[\\overset{R}{\\sim}\\left[\\begin{array}{rrr|r}1 & 2 & 1 & 0 \\\\ 0 & 1 & -2 & 0 \\\\ 0 & 0 & 1 & 0\\end{array}\\right]\\]\nThe matrix is in row-echelon form. It has three non-zero rows, so\n\\[\\text{rank of } A = 3\\]\nwhich equals the number of variables.\nWhy: the rank is the number of non-zero rows in echelon form; it tells us how many independent equations we really have.",
+              "Step 6: Back substitution\nFrom the third row:\n\\[z = 0\\]\nFrom the second row:\n\\[y - 2z = 0\\]\n\\[y - 2(0) = 0\\]\n\\[y = 0\\]\nFrom the first row, \\(x + 2y + z = 0\\). The book prints \"substituting \\(y = 0\\) and \\(x = 0\\)\"; we substitute \\(y = 0\\) and \\(z = 0\\):\n\\[x + 2(0) + 0 = 0\\]\n\\[x = 0\\]\nWhy: echelon form is solved from the bottom row upwards; each row gives one new unknown.",
+              "Check:\n\\((0, 0, 0)\\) clearly satisfies all three equations. To confirm that it is the only solution, find the determinant of the coefficient matrix:\n\\[|A| = 1(6 - 12) - 2(4 - 16)\\]\n\\[quad + 1(6 - 12)\\]\n\\[= -6 + 24 - 6 = 12\\]\n\\(|A| \\ne 0\\), so only the trivial solution exists, in agreement with rank 3."
+            ],
+            "answer": "The system has only the trivial solution: \\((x, y, z) = (0, 0, 0)\\).",
+            "book_errors": [
+              "\\(R_3 + (-4)R_1 \\to= R_3'\\)",
+              "substituting \\(y = 0\\) and \\(x = 0\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In Example 14 the book prints the operation as \\(R_3 + (-4)R_1 \\to= R_3'\\); the stray \"=\" should not be there: \\(R_3 + (-4)R_1 \\to R_3'\\).\nIn the back substitution it prints \"substituting y = 0 and x = 0\". We are finding \\(x\\), so it should read \"substituting \\(y = 0\\) and \\(z = 0\\)\". The answer \\((0, 0, 0)\\) is correct."
+          },
+          {
+            "type": "example",
+            "title": "Example 15",
+            "problem": "Solve the following system of equations using Gaussian Elimination Method.\n\\[x_1 + x_2 + x_3 = 0\\]\n\\[x_1 - x_2 + 3x_3 = 0\\]\n\\[x_1 + 3x_2 - x_3 = 0\\]",
+            "steps": [
+              "Given: a homogeneous system of 3 equations in \\(x_1, x_2, x_3\\).\nTo find: all its solutions.\nMethod: Gaussian elimination, as in Example 14. This time a whole row will become zero, and that tells us the system has non-trivial solutions.",
+              "Step 1: Write the augmented matrix\nThe book calls it the \"argumented matrix\"; the correct term is augmented matrix.\n\\[A_b = \\left[\\begin{array}{rrr|r}1 & 1 & 1 & 0 \\\\ 1 & -1 & 3 & 0 \\\\ 1 & 3 & -1 & 0\\end{array}\\right]\\]\nWhy: the coefficients of each equation form one row; the zero right-hand sides form the last column.",
+              "Step 2: Make zeros below the leading 1 of the first row\n\\[R_2 + (-1)R_1 \\to R_2'\\]\n\\[R_3 + (-1)R_1 \\to R_3'\\]\n\\[(1, -1, 3, 0) - (1, 1, 1, 0)\\]\n\\[= (0, -2, 2, 0)\\]\n\\[(1, 3, -1, 0) - (1, 1, 1, 0)\\]\n\\[= (0, 2, -2, 0)\\]\n\\[\\overset{R}{\\sim}\\left[\\begin{array}{rrr|r}1 & 1 & 1 & 0 \\\\ 0 & -2 & 2 & 0 \\\\ 0 & 2 & -2 & 0\\end{array}\\right]\\]\nThe book prints the new third row as \\(\\begin{bmatrix} 0 & -2 & -2 \\end{bmatrix}\\) before the bar; the correct row is \\(\\begin{bmatrix} 0 & 2 & -2 \\end{bmatrix}\\), as \\(3 - 1 = 2\\) (the book's next matrix does use 2).\nWhy: subtracting the first row removes \\(x_1\\) from the second and third equations.",
+              "Step 3: Make the leading entry of the second row equal to 1\n\\[\\left(-\\dfrac{1}{2}\\right)R_2 \\to R_2'\\]\n\\[\\overset{R}{\\sim}\\left[\\begin{array}{rrr|r}1 & 1 & 1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 2 & -2 & 0\\end{array}\\right]\\]\nWhy: dividing \\((0, -2, 2, 0)\\) by \\(-2\\) gives \\((0, 1, -1, 0)\\), a leading 1.",
+              "Step 4: Make a zero below the leading 1 of the second row\n\\[R_3 + (-2)R_2 \\to R_3'\\]\n\\[(0, 2, -2, 0) - 2(0, 1, -1, 0)\\]\n\\[= (0, 0, 0, 0)\\]\n\\[\\overset{R}{\\sim}\\left[\\begin{array}{rrr|r}1 & 1 & 1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 0 & 0 & 0\\end{array}\\right]\\]\nThe matrix is in row-echelon form with two non-zero rows:\n\\[\\text{rank of } A = 2 < 3\\]\nso the rank is less than the number of variables.\nWhy: a whole zero row means the third equation gave no new information. Indeed it is a combination of the other two: \\(2(x_1 + x_2 + x_3) - (x_1 - x_2 + 3x_3) = x_1 + 3x_2 - x_3\\).",
+              "Step 5: Write the equivalent system\n\\[x_1 + x_2 + x_3 = 0 \\quad \\text{(i)}\\]\n\\[x_2 - x_3 = 0 \\quad \\text{(ii)}\\]\n\\[0x_3 = 0\\]\nWhy: \\(0x_3 = 0\\) is true for every value of \\(x_3\\), so \\(x_3\\) is free (arbitrary).",
+              "Step 6: Express the other unknowns through \\(x_3\\)\nFrom (i) and (ii):\n\\[x_1 = -x_2 - x_3 \\quad \\text{(iii)}\\]\n\\[x_2 = x_3\\]\nSubstituting \\(x_2 = x_3\\) in (iii). The book prints \\(x_1 = -x_3 - x_3 = 2x_3\\); the correct working is\n\\[x_1 = -x_3 - x_3\\]\n\\[x_1 = -2x_3 \\quad \\text{(iv)}\\]\nWhy: \\(-x_3 - x_3 = -2x_3\\); the minus sign is kept, as the book's own next line (iv) shows.",
+              "Step 7: The general solution\nLet \\(x_3 = t\\), any number. Then from (ii) and (iv):\n\\[x_1 = -2t,\\quad x_2 = t,\\quad x_3 = t\\]\nWhy: \\(x_3\\) is arbitrary, so we get infinitely many values of \\(x_1\\) and \\(x_2\\); every \\(t \\ne 0\\) gives a non-trivial solution.",
+              "Check:\nSubstitute \\((-2t, t, t)\\) in each equation:\n\\[-2t + t + t = 0\\]\n\\[-2t - t + 3t = 0\\]\n\\[-2t + 3t - t = 0\\]\nAll three hold for every \\(t\\); e.g. \\(t = 1\\) gives the solution \\((-2, 1, 1)\\). Also\n\\[|A| = 1(1 - 9) - 1(-1 - 3)\\]\n\\[quad + 1(3 + 1)\\]\n\\[= -8 + 4 + 4 = 0\\]\nwhich agrees with non-trivial solutions."
+            ],
+            "answer": "Infinitely many solutions: \\(x_1 = -2t,\\ x_2 = t,\\ x_3 = t\\) for any value of \\(t\\) (non-trivial for \\(t \\ne 0\\)).",
+            "book_errors": [
+              "argumented matrix",
+              "\\(\\begin{bmatrix} 0 & -2 & -2 \\end{bmatrix}\\)",
+              "\\(x_1 = -x_3 - x_3 = 2x_3\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "1. The book writes \"argumented matrix\"; the term is augmented matrix.\n2. After \\(R_3 + (-1)R_1 \\to R_3'\\) the book prints the third row as \\(\\begin{bmatrix} 0 & -2 & -2 & 0 \\end{bmatrix}\\). The correct row is \\(\\begin{bmatrix} 0 & 2 & -2 & 0 \\end{bmatrix}\\), and the book's next matrix uses this correct 2.\n3. The book prints \\(x_1 = -x_3 - x_3 = 2x_3\\); the correct value is \\(x_1 = -x_3 - x_3 = -2x_3\\), as the next line (iv) and the final answer \\(x_1 = -2t\\) show.\nThe final answer \\(x_1 = -2t,\\ x_2 = t,\\ x_3 = t\\) is correct."
+          },
+          {
+            "type": "paragraph",
+            "text": "From above examples we observe that:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Rule – I: Homogeneous system of linear equation has only trivial solution if rank of \\(A\\) = number of variables.",
+            "bold": [
+              "Rule – I:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Rule – II: Homogeneous system of linear equation has non-trivial solution if rank of \\(A\\) < number of variables.",
+            "bold": [
+              "Rule – II:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In Example 14 the rank was 3 = number of variables, so only \\((0, 0, 0)\\); there \\(|A| = 12 \\ne 0\\).\nIn Example 15 the rank was 2 < 3, so one variable was free and there were infinitely many solutions; there \\(|A| = 0\\).\nIn general the number of free variables is (number of variables) \\(-\\) (rank). For a square system, rank = number of variables exactly when \\(|A| \\ne 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "When the question says \"find the non-trivial solution\", write the answer with a parameter: \\(x_1 = -2t,\\ x_2 = t,\\ x_3 = t\\). Always state the rank and compare it with the number of variables before solving: it tells you which rule applies."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Gaussian elimination: augmented matrix \\(\\to\\) row-echelon form \\(\\to\\) back substitution.\n2. For a homogeneous system the last column stays zero throughout.\n3. Rank of \\(A\\) = number of non-zero rows in echelon form.\n4. Rank = number of variables: only the trivial solution (Rule I).\n5. Rank < number of variables: non-trivial solutions, with free variables (Rule II).\n6. Check by substituting the general solution back into every equation."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Doing the operation on only part of a row: every entry of the row, including the last column, must change.\n2. Sign slips such as \\(-x_3 - x_3 = 2x_3\\): two negatives added stay negative, \\(-2x_3\\).\n3. Stopping at a zero row and saying \"no solution\": for a homogeneous system a zero row means a free variable and infinitely many solutions.\n4. Giving only one particular solution like \\((-2, 1, 1)\\) when the general solution with \\(t\\) is asked."
+          }
+        ]
+      }
+    }
+  ]
+}

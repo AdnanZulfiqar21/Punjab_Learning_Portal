@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-1-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-1-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 58,
+          "pdf_to": 58,
+          "note": "Exercise 4.1, Question 3: book page 53 (PDF 58); answer key PDF 302"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) If \\(A\\) and \\(B\\) are square matrices of the same order, then explain why in general: \\((A + B)^2 \\neq A^2 + 2AB + B^2\\).",
+            "explanation": "This asks for a reason, not a calculation: why the familiar algebra identity can fail for matrices.\nWe must expand \\((A + B)^2\\) carefully, keeping the order of every product, and see what extra condition the identity needs.\nPlan: expand, compare with \\(A^2 + 2AB + B^2\\), then show one pair of matrices where the two sides differ.",
+            "steps": [
+              "Given: \\(A\\), \\(B\\) square matrices of the same order (so \\(A + B\\), \\(AB\\), \\(BA\\) all exist).\nTo explain: why in general \\((A + B)^2 \\neq A^2 + 2AB + B^2\\).\nMethod: Expand using the distributive law, never swapping the order of a product, because matrix multiplication is not commutative in general.",
+              "Write the square as a product and expand\n\\[(A + B)^2 = (A + B)(A + B)\\]\n\\[= A(A + B) + B(A + B)\\]\n\\[= A^2 + AB + BA + B^2\\]\nWhy: The distributive law holds for matrices. In \\(B(A + B)\\) the \\(B\\) stays on the left, so we get \\(BA\\), not \\(AB\\).",
+              "Compare with the formula\n\\[AB + BA = 2AB \\iff BA = AB\\]\nWhy: The two sides match only when the middle terms match. In numbers \\(ba = ab\\) always, but for matrices \\(BA\\) and \\(AB\\) are in general different.",
+              "Show one example where they differ\n\\[A = \\begin{bmatrix}1 & 0 \\\\ 0 & 0\\end{bmatrix},\\; B = \\begin{bmatrix}0 & 1 \\\\ 0 & 0\\end{bmatrix}\\]\n\\[AB = \\begin{bmatrix}0 & 1 \\\\ 0 & 0\\end{bmatrix},\\; BA = \\begin{bmatrix}0 & 0 \\\\ 0 & 0\\end{bmatrix}\\]\nWhy: Here \\(AB \\neq BA\\), so the identity should fail.",
+              "Work out both sides for this example\n\\[A + B = \\begin{bmatrix}1 & 1 \\\\ 0 & 0\\end{bmatrix}\\]\n\\[(A + B)^2 = \\begin{bmatrix}1 & 1 \\\\ 0 & 0\\end{bmatrix}\\]\n\\[A^2 + 2AB + B^2 = \\begin{bmatrix}1 & 2 \\\\ 0 & 0\\end{bmatrix}\\]\nWhy: \\(A^2 = A\\), \\(B^2 = O\\) and \\(2AB\\) has 2 in place (1, 2). The two results differ in entry (1, 2), so the identity is false here.",
+              "Conclusion\nWhy: The identity is true only for matrices with \\(AB = BA\\) (for example \\(B = I\\) or \\(B = A\\)). Since this is not true in general, \\((A + B)^2 \\neq A^2 + 2AB + B^2\\) in general."
+            ],
+            "final_answer": "\\((A + B)^2 = A^2 + AB + BA + B^2\\), which equals \\(A^2 + 2AB + B^2\\) only when \\(AB = BA\\); since \\(AB \\neq BA\\) in general, the identity fails in general."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) If \\(A\\) and \\(B\\) are square matrices of the same order, then explain why in general: \\((A - B)^2 \\neq A^2 - 2AB + B^2\\).",
+            "explanation": "The same question as (i), now with a minus sign.\nWe must expand \\((A - B)^2\\) keeping the order of products and find the condition the identity needs.\nPlan: expand, compare, then test with the same example as (i).",
+            "steps": [
+              "Given: \\(A\\), \\(B\\) square matrices of the same order.\nTo explain: why in general \\((A - B)^2 \\neq A^2 - 2AB + B^2\\).\nMethod: Expand with the distributive law, keeping every product in its order.",
+              "Expand\n\\[(A - B)^2 = (A - B)(A - B)\\]\n\\[= A(A - B) - B(A - B)\\]\n\\[= A^2 - AB - BA + B^2\\]\nWhy: The minus in front of \\(B(A - B)\\) changes both signs: \\(-BA + B^2\\).",
+              "Compare with the formula\n\\[-AB - BA = -2AB \\iff BA = AB\\]\nWhy: Only the middle terms differ, and they agree only when \\(AB = BA\\).",
+              "Test with the example of part (i)\n\\[A - B = \\begin{bmatrix}1 & -1 \\\\ 0 & 0\\end{bmatrix}\\]\n\\[(A - B)^2 = \\begin{bmatrix}1 & -1 \\\\ 0 & 0\\end{bmatrix}\\]\n\\[A^2 - 2AB + B^2 = \\begin{bmatrix}1 & -2 \\\\ 0 & 0\\end{bmatrix}\\]\nWhy: With \\(A = \\begin{bmatrix}1 & 0 \\\\ 0 & 0\\end{bmatrix}\\), \\(B = \\begin{bmatrix}0 & 1 \\\\ 0 & 0\\end{bmatrix}\\) we have \\(AB \\neq BA\\), and the two sides differ in entry (1, 2).",
+              "Conclusion\nWhy: The identity holds only when \\(AB = BA\\), which is not true in general."
+            ],
+            "final_answer": "\\((A - B)^2 = A^2 - AB - BA + B^2\\), which equals \\(A^2 - 2AB + B^2\\) only when \\(AB = BA\\); so in general the identity fails."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) If \\(A\\) and \\(B\\) are square matrices of the same order, then explain why in general: \\((A + B)(A - B) \\neq A^2 - B^2\\).",
+            "explanation": "The difference-of-squares identity, tested for matrices.\nWe must expand \\((A + B)(A - B)\\) in order and see when the middle terms cancel.\nPlan: expand, compare with \\(A^2 - B^2\\), test with the example from (i).",
+            "steps": [
+              "Given: \\(A\\), \\(B\\) square matrices of the same order.\nTo explain: why in general \\((A + B)(A - B) \\neq A^2 - B^2\\).\nMethod: Distributive law, keeping the order of every product.",
+              "Expand\n\\[(A + B)(A - B)\\]\n\\[= A(A - B) + B(A - B)\\]\n\\[= A^2 - AB + BA - B^2\\]\nWhy: \\(B(A - B) = BA - B^2\\); the \\(B\\) stays on the left.",
+              "Compare with \\(A^2 - B^2\\)\n\\[-AB + BA = O \\iff BA = AB\\]\nWhy: The middle terms cancel (give the zero matrix) only if \\(BA = AB\\).",
+              "Test with the example of part (i)\n\\[(A + B)(A - B) = \\begin{bmatrix}1 & -1 \\\\ 0 & 0\\end{bmatrix}\\]\n\\[A^2 - B^2 = \\begin{bmatrix}1 & 0 \\\\ 0 & 0\\end{bmatrix}\\]\nWhy: With \\(A = \\begin{bmatrix}1 & 0 \\\\ 0 & 0\\end{bmatrix}\\), \\(B = \\begin{bmatrix}0 & 1 \\\\ 0 & 0\\end{bmatrix}\\): \\(A + B = \\begin{bmatrix}1 & 1 \\\\ 0 & 0\\end{bmatrix}\\), \\(A - B = \\begin{bmatrix}1 & -1 \\\\ 0 & 0\\end{bmatrix}\\), \\(A^2 = A\\), \\(B^2 = O\\). Entry (1, 2) is \\(-1\\) on one side and 0 on the other.",
+              "Conclusion\nWhy: The middle terms \\(-AB + BA\\) do not cancel unless \\(AB = BA\\), so in general \\((A + B)(A - B) \\neq A^2 - B^2\\)."
+            ],
+            "final_answer": "\\((A + B)(A - B) = A^2 - AB + BA - B^2\\), which equals \\(A^2 - B^2\\) only when \\(AB = BA\\); so in general the identity fails."
+          }
+        ]
+      }
+    }
+  ]
+}

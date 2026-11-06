@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-1-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-1-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 58,
+          "pdf_to": 58,
+          "note": "Exercise 4.1, Question 5: book page 53 (PDF 58); answer key PDF 302"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(i)",
+            "prompt": "5 (i) Solve the following matrix equation for \\(X\\): \\(2X - 3A = B\\) if\n\\[A = \\begin{bmatrix}2 & 3 & -2 \\\\ -1 & 1 & 5\\end{bmatrix}\\]\nand\n\\[B = \\begin{bmatrix}2 & -3 & 1 \\\\ 5 & 4 & -1\\end{bmatrix}\\]",
+            "explanation": "A matrix equation: the unknown \\(X\\) is a matrix.\nWe solve it like a linear equation in algebra: make \\(X\\) the subject, then calculate.\nPlan: \\(X = \\frac{1}{2}(B + 3A)\\); find \\(3A\\), add \\(B\\), halve, then check in the given equation.",
+            "steps": [
+              "Given: \\(2X - 3A = B\\), with \\(A\\) and \\(B\\) of order \\(2 \\times 3\\).\nTo find: \\(X\\).\nMethod: Matrix addition and scalar multiplication follow the usual rules, so we can move \\(3A\\) across and divide by 2, exactly as in \\(2x - 3a = b\\).",
+              "Make \\(X\\) the subject\n\\[2X = B + 3A\\]\n\\[X = \\dfrac{1}{2}(B + 3A)\\]\nWhy: Add \\(3A\\) to both sides, then multiply both sides by the scalar \\(\\frac{1}{2}\\). \\(X\\) has the same order as \\(B\\), \\(2 \\times 3\\).",
+              "Find \\(3A\\)\n\\[3A = \\begin{bmatrix}6 & 9 & -6 \\\\ -3 & 3 & 15\\end{bmatrix}\\]\nWhy: Scalar multiplication: every entry of \\(A\\) is multiplied by 3.",
+              "Add \\(B\\)\n\\[B + 3A = \\begin{bmatrix}2 + 6 & -3 + 9 & 1 - 6 \\\\ 5 - 3 & 4 + 3 & -1 + 15\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}8 & 6 & -5 \\\\ 2 & 7 & 14\\end{bmatrix}\\]\nWhy: Entries in the same position are added.",
+              "Multiply by \\(\\frac{1}{2}\\)\n\\[X = \\begin{bmatrix}4 & 3 & -\\frac{5}{2} \\\\ 1 & \\frac{7}{2} & 7\\end{bmatrix}\\]\nWhy: Every entry is halved: \\(-5/2 = -2.5\\) and \\(7/2 = 3.5\\).",
+              "Check in the given equation\n\\[2X = \\begin{bmatrix}8 & 6 & -5 \\\\ 2 & 7 & 14\\end{bmatrix}\\]\n\\[2X - 3A = \\begin{bmatrix}2 & -3 & 1 \\\\ 5 & 4 & -1\\end{bmatrix} \\;\\checkmark\\]\nWhy: \\(2X - 3A\\) gives back \\(B\\), e.g. \\(8 - 6 = 2\\), \\(14 - 15 = -1\\)."
+            ],
+            "final_answer": "\\(X = \\begin{bmatrix}4 & 3 & -\\frac{5}{2} \\\\ 1 & \\frac{7}{2} & 7\\end{bmatrix}\\), i.e. \\(X = \\begin{bmatrix}4 & 3 & -2.5 \\\\ 1 & 3.5 & 7\\end{bmatrix}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(ii)",
+            "prompt": "5 (ii) Solve the following matrix equation for \\(X\\): \\(A^2 - 5A + 4I - X = 0\\) if\n\\[A = \\begin{bmatrix}2 & 0 & 1 \\\\ 2 & 1 & 3 \\\\ 1 & -1 & 0\\end{bmatrix}\\]",
+            "explanation": "A matrix equation with \\(A^2\\) in it.\nWe make \\(X\\) the subject: \\(X = A^2 - 5A + 4I\\), then calculate each part.\nPlan: \\(A^2\\) by row-by-column multiplication, then \\(5A\\) and \\(4I\\), combine, and check by factorising.",
+            "steps": [
+              "Given: \\(A^2 - 5A + 4I - X = O\\), \\(A\\) of order \\(3 \\times 3\\), \\(I = I_3\\).\nTo find: \\(X\\).\nMethod: Add \\(X\\) to both sides to get \\(X = A^2 - 5A + 4I\\). \\(A^2\\) means \\(AA\\).",
+              "Make \\(X\\) the subject\n\\[X = A^2 - 5A + 4I\\]\nWhy: Adding \\(X\\) to both sides of \\(A^2 - 5A + 4I - X = O\\) moves it to the right.",
+              "Row 1 of \\(A^2 = AA\\)\n\\[(2)(2) + (0)(2) + (1)(1) = 5\\]\n\\[(2)(0) + (0)(1) + (1)(-1) = -1\\]\n\\[(2)(1) + (0)(3) + (1)(0) = 2\\]\nWhy: Row 1 of \\(A\\), \\((2, 0, 1)\\), times columns 1, 2, 3 of \\(A\\).",
+              "Row 2 of \\(A^2\\)\n\\[(2)(2) + (1)(2) + (3)(1) = 9\\]\n\\[(2)(0) + (1)(1) + (3)(-1) = -2\\]\n\\[(2)(1) + (1)(3) + (3)(0) = 5\\]\nWhy: Row 2 of \\(A\\) is \\((2, 1, 3)\\).",
+              "Row 3 of \\(A^2\\)\n\\[(1)(2) + (-1)(2) + (0)(1) = 0\\]\n\\[(1)(0) + (-1)(1) + (0)(-1) = -1\\]\n\\[(1)(1) + (-1)(3) + (0)(0) = -2\\]\nWhy: Row 3 of \\(A\\) is \\((1, -1, 0)\\).",
+              "Write \\(A^2\\), \\(5A\\) and \\(4I\\)\n\\[A^2 = \\begin{bmatrix}5 & -1 & 2 \\\\ 9 & -2 & 5 \\\\ 0 & -1 & -2\\end{bmatrix}\\]\n\\[5A = \\begin{bmatrix}10 & 0 & 5 \\\\ 10 & 5 & 15 \\\\ 5 & -5 & 0\\end{bmatrix}\\]\n\\[4I = \\begin{bmatrix}4 & 0 & 0 \\\\ 0 & 4 & 0 \\\\ 0 & 0 & 4\\end{bmatrix}\\]\nWhy: \\(5A\\): every entry times 5. \\(4I\\): 4 on the diagonal, 0 elsewhere.",
+              "Combine\n\\[X = \\begin{bmatrix}5 - 10 + 4 & -1 - 0 + 0 & 2 - 5 + 0 \\\\ 9 - 10 + 0 & -2 - 5 + 4 & 5 - 15 + 0 \\\\ 0 - 5 + 0 & -1 + 5 + 0 & -2 - 0 + 4\\end{bmatrix}\\]\n\\[X = \\begin{bmatrix}-1 & -1 & -3 \\\\ -1 & -3 & -10 \\\\ -5 & 4 & 2\\end{bmatrix}\\]\nWhy: Entry by entry: \\(A^2\\) minus \\(5A\\) plus \\(4I\\). The 4 is added only on the diagonal.",
+              "Check by factorising\n\\[X = (A - I)(A - 4I)\\]\n\\[\\text{Row 1: } (1, 0, 1)\\begin{bmatrix}-2 & 0 & 1 \\\\ 2 & -3 & 3 \\\\ 1 & -1 & -4\\end{bmatrix}\\]\n\\[= (-1,\\ -1,\\ -3) \\;\\checkmark\\]\nWhy: \\(A\\) and \\(I\\) commute, so \\(A^2 - 5A + 4I = (A - I)(A - 4I)\\). Row 1 of \\(A - I\\) is \\((1, 0, 1)\\); multiplying by \\(A - 4I\\) gives row 1 of \\(X\\) again."
+            ],
+            "final_answer": "\\(X = \\begin{bmatrix}-1 & -1 & -3 \\\\ -1 & -3 & -10 \\\\ -5 & 4 & 2\\end{bmatrix}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

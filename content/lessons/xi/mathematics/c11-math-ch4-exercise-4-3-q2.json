@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-3-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-3-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 81,
+          "pdf_to": 81,
+          "note": "Exercise 4.3, Question 2: book page 76 (PDF 81); answer key PDF 303"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) [printed as i)] Find the rank of the following matrix: \\(\\begin{bmatrix}1 & -1 & 3 & 1 \\\\ -2 & -6 & 1 & -1 \\\\ 3 & 1 & 4 & -2\\end{bmatrix}\\)",
+            "explanation": "A rank question: rank = number of non-zero rows in echelon form.\nWe must find one number.\nPlan: make leading 1s column by column with zeros below them, push zero rows to the bottom, then count.",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix}1 & -1 & 3 & 1 \\\\ -2 & -6 & 1 & -1 \\\\ 3 & 1 & 4 & -2\\end{bmatrix}\\), a \\(3 \\times 4\\) matrix.\nTo find: rank of \\(A\\).\nMethod: Reduce \\(A\\) to echelon form by row operations; the rank is the number of non-zero rows.",
+              "Clear column 1 below the leading 1\nBy \\(R_2 + 2R_1 \\to R_2'\\), \\(R_3 + (-3)R_1 \\to R_3'\\)\n\\(R_2'\\): \\(-2 + 2 = 0\\), \\(-6 - 2 = -8\\), \\(1 + 6 = 7\\), \\(-1 + 2 = 1\\)\n\\(R_3'\\): \\(3 - 3 = 0\\), \\(1 + 3 = 4\\), \\(4 - 9 = -5\\), \\(-2 - 3 = -5\\)\n\\[\\sim \\begin{bmatrix}1 & -1 & 3 & 1 \\\\ 0 & -8 & 7 & 1 \\\\ 0 & 4 & -5 & -5\\end{bmatrix}\\]\nWhy: \\(-2 + 2(1) = 0\\) and \\(3 + (-3)(1) = 0\\).",
+              "Leading 1 in row 2\nBy \\(\\left(-\\frac{1}{8}\\right)R_2 \\to R_2'\\)\n\\(R_2'\\): \\(0\\), \\(1\\), \\(-\\frac{7}{8}\\), \\(-\\frac{1}{8}\\)\n\\[\\sim \\begin{bmatrix}1 & -1 & 3 & 1 \\\\ 0 & 1 & -\\frac{7}{8} & -\\frac{1}{8} \\\\ 0 & 4 & -5 & -5\\end{bmatrix}\\]\nWhy: Dividing \\(R_2\\) by \\(-8\\) makes its first non-zero entry 1.",
+              "Clear column 2 below the leading 1\nBy \\(R_3 + (-4)R_2 \\to R_3'\\)\n\\(R_3'\\): \\(0 + 0 = 0\\), \\(4 - 4 = 0\\), \\(-5 + \\frac{7}{2} = -\\frac{3}{2}\\), \\(-5 + \\frac{1}{2} = -\\frac{9}{2}\\)\n\\[\\sim \\begin{bmatrix}1 & -1 & 3 & 1 \\\\ 0 & 1 & -\\frac{7}{8} & -\\frac{1}{8} \\\\ 0 & 0 & -\\frac{3}{2} & -\\frac{9}{2}\\end{bmatrix}\\]\nWhy: \\(4 + (-4)(1) = 0\\).",
+              "Leading 1 in row 3\nBy \\(\\left(-\\frac{2}{3}\\right)R_3 \\to R_3'\\)\n\\(R_3'\\): \\(0\\), \\(0\\), \\(1\\), \\(3\\)\n\\[\\sim \\begin{bmatrix}1 & -1 & 3 & 1 \\\\ 0 & 1 & -\\frac{7}{8} & -\\frac{1}{8} \\\\ 0 & 0 & 1 & 3\\end{bmatrix}\\]\nWhy: Multiplying \\(R_3\\) by \\(-\\frac{2}{3}\\) makes \\(-\\frac{3}{2}\\) equal to 1. The matrix is now in echelon form.",
+              "Count the non-zero rows\nThe echelon form has 3 non-zero rows.\n\\[\\text{Rank of } A = 3\\]\nWhy: By definition, rank = number of non-zero rows in echelon form. (A \\(3 \\times 4\\) matrix can have rank at most 3.)"
+            ],
+            "final_answer": "\\(\\text{Rank} = 3\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Find the rank of the following matrix: \\(\\begin{bmatrix}1 & -2 & 3 \\\\ 2 & -4 & 6 \\\\ -1 & 0 & 2 \\\\ 0 & 1 & -1\\end{bmatrix}\\)",
+            "explanation": "A rank question: rank = number of non-zero rows in echelon form.\nWe must find one number.\nPlan: make leading 1s column by column with zeros below them, push zero rows to the bottom, then count.",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix}1 & -2 & 3 \\\\ 2 & -4 & 6 \\\\ -1 & 0 & 2 \\\\ 0 & 1 & -1\\end{bmatrix}\\), a \\(4 \\times 3\\) matrix.\nTo find: rank of \\(A\\).\nMethod: Reduce \\(A\\) to echelon form by row operations; the rank is the number of non-zero rows.",
+              "Clear column 1 below the leading 1\nBy \\(R_2 + (-2)R_1 \\to R_2'\\), \\(R_3 + R_1 \\to R_3'\\)\n\\(R_2'\\): \\(2 - 2 = 0\\), \\(-4 + 4 = 0\\), \\(6 - 6 = 0\\)\n\\(R_3'\\): \\(-1 + 1 = 0\\), \\(0 - 2 = -2\\), \\(2 + 3 = 5\\)\n\\[\\sim \\begin{bmatrix}1 & -2 & 3 \\\\ 0 & 0 & 0 \\\\ 0 & -2 & 5 \\\\ 0 & 1 & -1\\end{bmatrix}\\]\nWhy: \\(2 + (-2)(1) = 0\\) and \\(-1 + 1 = 0\\); \\(R_4\\) already starts with 0. Row 2 became all zeros: it was exactly \\(2R_1\\).",
+              "Move the zero row to the bottom\nBy \\(R_2 \\leftrightarrow R_4\\)\n\\[\\sim \\begin{bmatrix}1 & -2 & 3 \\\\ 0 & 1 & -1 \\\\ 0 & -2 & 5 \\\\ 0 & 0 & 0\\end{bmatrix}\\]\nWhy: In echelon form zero rows stay at the bottom; \\(R_4\\) also has a ready leading 1.",
+              "Clear column 2 below the leading 1\nBy \\(R_3 + 2R_2 \\to R_3'\\)\n\\(R_3'\\): \\(0 + 0 = 0\\), \\(-2 + 2 = 0\\), \\(5 - 2 = 3\\)\n\\[\\sim \\begin{bmatrix}1 & -2 & 3 \\\\ 0 & 1 & -1 \\\\ 0 & 0 & 3 \\\\ 0 & 0 & 0\\end{bmatrix}\\]\nWhy: \\(-2 + 2(1) = 0\\).",
+              "Leading 1 in row 3\nBy \\(\\frac{1}{3}R_3 \\to R_3'\\)\n\\(R_3'\\): \\(0\\), \\(0\\), \\(1\\)\n\\[\\sim \\begin{bmatrix}1 & -2 & 3 \\\\ 0 & 1 & -1 \\\\ 0 & 0 & 1 \\\\ 0 & 0 & 0\\end{bmatrix}\\]\nWhy: Dividing by 3. The matrix is now in echelon form.",
+              "Count the non-zero rows\nThe echelon form has 3 non-zero rows.\n\\[\\text{Rank of } A = 3\\]\nWhy: By definition, rank = number of non-zero rows in echelon form. (A \\(4 \\times 3\\) matrix can have rank at most 3.)"
+            ],
+            "final_answer": "\\(\\text{Rank} = 3\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) Find the rank of the following matrix: \\(\\begin{bmatrix}3 & -1 & 3 & 0 & 1 \\\\ 1 & 2 & -1 & -3 & -2 \\\\ 2 & 3 & 4 & 2 & 1 \\\\ 2 & 5 & -2 & -3 & 3\\end{bmatrix}\\)",
+            "explanation": "A rank question: rank = number of non-zero rows in echelon form.\nWe must find one number.\nPlan: make leading 1s column by column with zeros below them, push zero rows to the bottom, then count.",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix}3 & -1 & 3 & 0 & 1 \\\\ 1 & 2 & -1 & -3 & -2 \\\\ 2 & 3 & 4 & 2 & 1 \\\\ 2 & 5 & -2 & -3 & 3\\end{bmatrix}\\), a \\(4 \\times 5\\) matrix.\nTo find: rank of \\(A\\).\nMethod: Reduce \\(A\\) to echelon form by row operations; the rank is the number of non-zero rows.",
+              "Bring a 1 to the top of column 1\nBy \\(R_1 \\leftrightarrow R_2\\)\n\\[\\sim \\begin{bmatrix}1 & 2 & -1 & -3 & -2 \\\\ 3 & -1 & 3 & 0 & 1 \\\\ 2 & 3 & 4 & 2 & 1 \\\\ 2 & 5 & -2 & -3 & 3\\end{bmatrix}\\]\nWhy: \\(R_2\\) starts with 1, which avoids fractions.",
+              "Clear column 1 below the leading 1\nBy \\(R_2 + (-3)R_1 \\to R_2'\\), \\(R_3 + (-2)R_1 \\to R_3'\\), \\(R_4 + (-2)R_1 \\to R_4'\\)\n\\(R_2'\\): \\(3 - 3 = 0\\), \\(-1 - 6 = -7\\), \\(3 + 3 = 6\\), \\(0 + 9 = 9\\), \\(1 + 6 = 7\\)\n\\(R_3'\\): \\(2 - 2 = 0\\), \\(3 - 4 = -1\\), \\(4 + 2 = 6\\), \\(2 + 6 = 8\\), \\(1 + 4 = 5\\)\n\\(R_4'\\): \\(2 - 2 = 0\\), \\(5 - 4 = 1\\), \\(-2 + 2 = 0\\), \\(-3 + 6 = 3\\), \\(3 + 4 = 7\\)\n\\[\\sim \\begin{bmatrix}1 & 2 & -1 & -3 & -2 \\\\ 0 & -7 & 6 & 9 & 7 \\\\ 0 & -1 & 6 & 8 & 5 \\\\ 0 & 1 & 0 & 3 & 7\\end{bmatrix}\\]\nWhy: \\(3 - 3(1) = 0\\), \\(2 - 2(1) = 0\\), \\(2 - 2(1) = 0\\).",
+              "Bring a 1 into the pivot of row 2\nBy \\(R_2 \\leftrightarrow R_4\\)\n\\[\\sim \\begin{bmatrix}1 & 2 & -1 & -3 & -2 \\\\ 0 & 1 & 0 & 3 & 7 \\\\ 0 & -1 & 6 & 8 & 5 \\\\ 0 & -7 & 6 & 9 & 7\\end{bmatrix}\\]\nWhy: \\(R_4\\) has 1 in column 2, again avoiding fractions.",
+              "Clear column 2 below the leading 1\nBy \\(R_3 + R_2 \\to R_3'\\), \\(R_4 + 7R_2 \\to R_4'\\)\n\\(R_3'\\): \\(0 + 0 = 0\\), \\(-1 + 1 = 0\\), \\(6 + 0 = 6\\), \\(8 + 3 = 11\\), \\(5 + 7 = 12\\)\n\\(R_4'\\): \\(0 + 0 = 0\\), \\(-7 + 7 = 0\\), \\(6 + 0 = 6\\), \\(9 + 21 = 30\\), \\(7 + 49 = 56\\)\n\\[\\sim \\begin{bmatrix}1 & 2 & -1 & -3 & -2 \\\\ 0 & 1 & 0 & 3 & 7 \\\\ 0 & 0 & 6 & 11 & 12 \\\\ 0 & 0 & 6 & 30 & 56\\end{bmatrix}\\]\nWhy: \\(-1 + 1 = 0\\) and \\(-7 + 7(1) = 0\\).",
+              "Clear column 3 below the pivot\nBy \\(R_4 + (-1)R_3 \\to R_4'\\)\n\\(R_4'\\): \\(0 + 0 = 0\\), \\(0 + 0 = 0\\), \\(6 - 6 = 0\\), \\(30 - 11 = 19\\), \\(56 - 12 = 44\\)\n\\[\\sim \\begin{bmatrix}1 & 2 & -1 & -3 & -2 \\\\ 0 & 1 & 0 & 3 & 7 \\\\ 0 & 0 & 6 & 11 & 12 \\\\ 0 & 0 & 0 & 19 & 44\\end{bmatrix}\\]\nWhy: Rows 3 and 4 both start with 6 in column 3, so subtracting removes it.",
+              "Leading 1s in rows 3 and 4\nBy \\(\\frac{1}{6}R_3 \\to R_3'\\), \\(\\frac{1}{19}R_4 \\to R_4'\\)\n\\(R_3'\\): \\(0\\), \\(0\\), \\(1\\), \\(\\frac{11}{6}\\), \\(2\\)\n\\(R_4'\\): \\(0\\), \\(0\\), \\(0\\), \\(1\\), \\(\\frac{44}{19}\\)\n\\[\\sim \\begin{bmatrix}1 & 2 & -1 & -3 & -2 \\\\ 0 & 1 & 0 & 3 & 7 \\\\ 0 & 0 & 1 & \\frac{11}{6} & 2 \\\\ 0 & 0 & 0 & 1 & \\frac{44}{19}\\end{bmatrix}\\]\nWhy: Dividing by 6 and by 19. The matrix is now in echelon form.",
+              "Count the non-zero rows\nThe echelon form has 4 non-zero rows.\n\\[\\text{Rank of } A = 4\\]\nWhy: By definition, rank = number of non-zero rows in echelon form. (A \\(4 \\times 5\\) matrix can have rank at most 4.)"
+            ],
+            "final_answer": "\\(\\text{Rank} = 4\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

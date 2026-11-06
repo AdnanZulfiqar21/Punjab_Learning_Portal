@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.8.1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.8.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 70,
+          "pdf_to": 72,
+          "note": "Book p. 65-67: steps (i)-(iii), Example 11 (i)-(iii), Note on ranks and consistency"
+        }
+      ],
+      "title": "4.8.1 Reduced Echelon Form (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH4-4.8.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Is sabaq mein pehla tareeqa: reduced echelon form se system hal karna. Yeh sab se taqatwar tareeqa hai, kyun ke yeh har qisam ke system par chalta hai aur saath hi bata deta hai ke solution ek hai, beshumar hain ya koi nahi. Pichle sabaq (4.7) mein jo reduce karne ki practice ki thi, ab woh seedhi kaam aayegi."
+          },
+          {
+            "type": "paragraph",
+            "text": "Non-homogeneous linear equations ke system (i) ko hal karne ke qadam yeh hain:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) Augmented matrix banayein, yani \\[\\left[\\begin{array}{ccc|c}a_1 & b_1 & c_1 & d_1 \\\\ a_2 & b_2 & c_2 & d_2 \\\\ a_3 & b_3 & c_3 & d_3\\end{array}\\right]\\]",
+              "(ii) Use reduced echelon form mein layein",
+              "(iii) Back substitution se hal karein (neeche se upar values rakhte hue)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh tareeqa kaam kyun karta hai? Augmented matrix ki har row ek equation hai: pehle teen numbers \\(x\\), \\(y\\), \\(z\\) ke coefficients hain aur line (bar) ke baad wala number constant hai. Row operations asal mein equation operations hain (Section 4.6), is liye solutions nahi badalte. Reduced echelon form har equation mein variables kam se kam kar deti hai, phir jawab seedha parh liya jata hai.\nAgar coefficient wala hissa \\(I_3\\) ban jaye, to aakhri column khud hi solution hai: pehli row \"\\(x = \\ldots\\)\", doosri \"\\(y = \\ldots\\)\", teesri \"\\(z = \\ldots\\)\".\nBar (line) ko \"=\" ka nishan samjhiye. Is ka faida: aap kabhi constant column ko coefficients ke saath nahi milayenge."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki Example 11 dekhte hain. Is mein teen alag systems hain, aur kamaal ki baat yeh hai ke teeno teen mukhtalif nataij dete hain: pehle ka ek solution, doosre ke beshumar, aur teesre ka koi nahi. Yani yeh ek misaal teeno sooraten sikha deti hai. Har step mein row ka poora hisaab likha hai taa ke aap khud mila sakein."
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "Solve the following and explain a consistent and inconsistent system:\n(i) \\(2x + 5y - z = 5\\), \\(3x + 4y + 2z = 11\\), \\(x + 2y - 2z = -3\\)\n(ii) \\(x + y + 2z = 1\\), \\(2x - y + 7z = 11\\), \\(3x + 5y + 4z = -3\\)\n(iii) \\(x - y + 2z = 1\\), \\(2x - 6y + 5z = 7\\), \\(3x + 5y + 4z = -3\\)",
+            "steps": [
+              "Given: teen systems (i), (ii), (iii), har ek mein \\(x\\), \\(y\\), \\(z\\) ki teen equations.\nTo find: har system ka solution aur yeh ke woh consistent hai ya nahi.\nMethod: sab se pehle augmented matrix likhte hain (coefficients aur constants), phir row operations se reduced echelon form, phir rows ko wapas equations ki shakal mein parhte hain. Do ishaare yaad rakhiye: row \\((0, 0, 0 \\mid 0)\\) koi shart nahi deti (beshumar solutions ka ishara); row \\((0, 0, 0 \\mid k)\\), \\(k \\ne 0\\), ka matlab \\(0 = k\\), jo naamumkin hai (koi solution nahi).",
+              "(i) Step 1: augmented matrix, phir bayen upar kone mein 1\nAugmented matrix:\n\\[\\left[\\begin{array}{ccc|c}2 & 5 & -1 & 5 \\\\ 3 & 4 & 2 & 11 \\\\ 1 & 2 & -2 & -3\\end{array}\\right]\\]\n\\(R_1 \\leftrightarrow R_3\\)\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 2 & -2 & -3 \\\\ 3 & 4 & 2 & 11 \\\\ 2 & 5 & -1 & 5\\end{array}\\right]\\]\nKyun: \\(R_3\\) 1 se shuru hoti hai, is liye \\(R_1 \\leftrightarrow R_3\\) se bina fraction ke leading 1 mil jata hai.",
+              "(i) Step 2: \\(R_2\\) mein leading 1 ke neeche zero\n\\(R_2 + (-3)R_1 \\to R_2'\\)\n\\[(3,\\ 4,\\ 2 \\mid 11)\\]\n\\[+(-3)(1,\\ 2,\\ -2 \\mid -3)\\]\n\\[= (0,\\ -2,\\ 8 \\mid 20)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 2 & -2 & -3 \\\\ 0 & -2 & 8 & 20 \\\\ 2 & 5 & -1 & 5\\end{array}\\right]\\]\nKyun: \\(R_2\\) ke column 1 ka 3 khatam karna hai, is liye ulta multiple \\((-3)R_1\\) jama kiya. Dayen taraf ka constant bhi saath badalta hai: \\(11 + (-3)(-3) = 20\\).",
+              "(i) Step 3: \\(R_3\\) mein leading 1 ke neeche zero\n\\(R_3 + (-2)R_1 \\to R_3'\\)\n\\[(2,\\ 5,\\ -1 \\mid 5)\\]\n\\[+(-2)(1,\\ 2,\\ -2 \\mid -3)\\]\n\\[= (0,\\ 1,\\ 3 \\mid 11)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 2 & -2 & -3 \\\\ 0 & -2 & 8 & 20 \\\\ 0 & 1 & 3 & 11\\end{array}\\right]\\]\nKyun: \\(R_3\\) ka 2 khatam karne ke liye \\((-2)R_1\\) jama kiya. Kitab yeh do kaam alag alag matrices mein karti hai; hum bhi wesa hi kar rahe hain.",
+              "(i) Step 4: \\(R_2\\) mein leading 1\n\\(-\\frac{1}{2}R_2 \\to R_2'\\)\n\\[-\\frac{1}{2}(0,\\ -2,\\ 8 \\mid 20)\\]\n\\[= (0,\\ 1,\\ -4 \\mid -10)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 2 & -2 & -3 \\\\ 0 & 1 & -4 & -10 \\\\ 0 & 1 & 3 & 11\\end{array}\\right]\\]\nKyun: \\(-\\frac{1}{2}\\) se multiply karne par \\(-2\\) badal kar 1 ho jata hai; har entry ka sign bhi palat jata hai.",
+              "(i) Step 5: column 2 saaf karein\n\\(R_1 + (-2)R_2 \\to R_1'\\)\n\\[(1,\\ 2,\\ -2 \\mid -3)\\]\n\\[+(-2)(0,\\ 1,\\ -4 \\mid -10)\\]\n\\[= (1,\\ 0,\\ 6 \\mid 17)\\]\n\\(R_3 + (-1)R_2 \\to R_3'\\)\n\\[(0,\\ 1,\\ 3 \\mid 11)\\]\n\\[+(-1)(0,\\ 1,\\ -4 \\mid -10)\\]\n\\[= (0,\\ 0,\\ 7 \\mid 21)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 0 & 6 & 17 \\\\ 0 & 1 & -4 & -10 \\\\ 0 & 0 & 7 & 21\\end{array}\\right]\\]\nKyun: column 2 mein \\(R_1\\) mein 2 aur \\(R_3\\) mein 1 hai; \\((-2)R_2\\) aur \\((-1)R_2\\) jama kar ke dono zero.",
+              "(i) Step 6: \\(R_3\\) mein leading 1\n\\(\\frac{1}{7}R_3 \\to R_3'\\)\n\\[\\frac{1}{7}(0,\\ 0,\\ 7 \\mid 21)\\]\n\\[= (0,\\ 0,\\ 1 \\mid 3)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 0 & 6 & 17 \\\\ 0 & 1 & -4 & -10 \\\\ 0 & 0 & 1 & 3\\end{array}\\right]\\]\nKyun: \\(\\frac{1}{7}\\) se multiply karne par 7 ka 1 ban jata hai, aur \\(21\\) ka 3.",
+              "(i) Step 7: column 3 saaf karein\n\\(R_1 + (-6)R_3 \\to R_1'\\)\n\\[(1,\\ 0,\\ 6 \\mid 17)\\]\n\\[+(-6)(0,\\ 0,\\ 1 \\mid 3)\\]\n\\[= (1,\\ 0,\\ 0 \\mid -1)\\]\n\\(R_2 + 4R_3 \\to R_2'\\)\n\\[(0,\\ 1,\\ -4 \\mid -10)\\]\n\\[+4(0,\\ 0,\\ 1 \\mid 3)\\]\n\\[= (0,\\ 1,\\ 0 \\mid 2)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 0 & 0 & -1 \\\\ 0 & 1 & 0 & 2 \\\\ 0 & 0 & 1 & 3\\end{array}\\right]\\]\nKyun: \\((-6)R_3\\) aur \\(4R_3\\) jama karne se 6 aur \\(-4\\) khatam. Ab bayen hissa \\(I_3\\) hai, is liye aakhri column seedha jawab hai: \\(x = -1\\), \\(y = 2\\), \\(z = 3\\). Ek hi solution, yani system (i) consistent hai.",
+              "(ii) Step 1: augmented matrix, column 1 mein zero\nAugmented matrix:\n\\[\\left[\\begin{array}{ccc|c}1 & 1 & 2 & 1 \\\\ 2 & -1 & 7 & 11 \\\\ 3 & 5 & 4 & -3\\end{array}\\right]\\]\n\\(R_2 + (-2)R_1 \\to R_2'\\)\n\\[(2,\\ -1,\\ 7 \\mid 11)\\]\n\\[+(-2)(1,\\ 1,\\ 2 \\mid 1)\\]\n\\[= (0,\\ -3,\\ 3 \\mid 9)\\]\n\\(R_3 + (-3)R_1 \\to R_3'\\)\n\\[(3,\\ 5,\\ 4 \\mid -3)\\]\n\\[+(-3)(1,\\ 1,\\ 2 \\mid 1)\\]\n\\[= (0,\\ 2,\\ -2 \\mid -6)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 1 & 2 & 1 \\\\ 0 & -3 & 3 & 9 \\\\ 0 & 2 & -2 & -6\\end{array}\\right]\\]\nKyun: \\(R_1\\) pehle hi 1 se shuru hai; \\(R_2\\) mein \\((-2)R_1\\) aur \\(R_3\\) mein \\((-3)R_1\\) jama kar ke column 1 saaf.",
+              "(ii) Step 2: \\(R_2\\) mein leading 1\n\\(-\\frac{1}{3}R_2 \\to R_2'\\)\n\\[-\\frac{1}{3}(0,\\ -3,\\ 3 \\mid 9)\\]\n\\[= (0,\\ 1,\\ -1 \\mid -3)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 1 & 2 & 1 \\\\ 0 & 1 & -1 & -3 \\\\ 0 & 2 & -2 & -6\\end{array}\\right]\\]\nKyun: \\(-\\frac{1}{3}\\) se multiply karne par \\(-3\\) ka 1 ban jata hai.",
+              "(ii) Step 3: column 2 saaf karein\n\\(R_1 + (-1)R_2 \\to R_1'\\)\n\\[(1,\\ 1,\\ 2 \\mid 1)\\]\n\\[+(-1)(0,\\ 1,\\ -1 \\mid -3)\\]\n\\[= (1,\\ 0,\\ 3 \\mid 4)\\]\n\\(R_3 + (-2)R_2 \\to R_3'\\)\n\\[(0,\\ 2,\\ -2 \\mid -6)\\]\n\\[+(-2)(0,\\ 1,\\ -1 \\mid -3)\\]\n\\[= (0,\\ 0,\\ 0 \\mid 0)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 0 & 3 & 4 \\\\ 0 & 1 & -1 & -3 \\\\ 0 & 0 & 0 & 0\\end{array}\\right]\\]\nKyun: \\(R_1\\) mein \\((-1)R_2\\) aur \\(R_3\\) mein \\((-2)R_2\\). Dekhiye, poori \\(R_3\\) zero ho gayi! Matlab teesri equation pehli do se ban sakti thi; us mein koi nayi shart nahi thi.",
+              "(ii) Step 4: equivalent system parhein\n\\[x + 3z = 4\\]\n\\[y - z = -3\\]\n\\[0z = 0\\]\nEquation \\(0z = 0\\) har \\(z\\) ke liye sach hai, yani \\(z\\) par koi pabandi nahi. Pehli do equations se:\n\\[x = -3z + 4 \\quad \\text{(a)}\\]\n\\[y = z - 3 \\quad \\text{(b)}\\]\nKyun: \\(z\\) azaad (arbitrary) hai, is liye \\(z = t\\) rakhein (\\(t\\) koi bhi real number): \\(x = 4 - 3t\\), \\(y = t - 3\\), \\(z = t\\). Har \\(t\\) se naya solution, yani beshumar solutions; system (ii) consistent hai.",
+              "(iii) Step 1: augmented matrix, column 1 mein zero\nAugmented matrix:\n\\[\\left[\\begin{array}{ccc|c}1 & -1 & 2 & 1 \\\\ 2 & -6 & 5 & 7 \\\\ 3 & 5 & 4 & -3\\end{array}\\right]\\]\n\\(R_2 + (-2)R_1 \\to R_2'\\)\n\\[(2,\\ -6,\\ 5 \\mid 7)\\]\n\\[+(-2)(1,\\ -1,\\ 2 \\mid 1)\\]\n\\[= (0,\\ -4,\\ 1 \\mid 5)\\]\n\\(R_3 + (-3)R_1 \\to R_3'\\)\n\\[(3,\\ 5,\\ 4 \\mid -3)\\]\n\\[+(-3)(1,\\ -1,\\ 2 \\mid 1)\\]\n\\[= (0,\\ 8,\\ -2 \\mid -6)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & -1 & 2 & 1 \\\\ 0 & -4 & 1 & 5 \\\\ 0 & 8 & -2 & -6\\end{array}\\right]\\]\nKyun: \\(R_2\\) mein \\((-2)R_1\\) aur \\(R_3\\) mein \\((-3)R_1\\) jama kar ke column 1 saaf.",
+              "(iii) Step 2: \\(R_2\\) mein leading 1\n\\(-\\frac{1}{4}R_2 \\to R_2'\\)\n\\[-\\frac{1}{4}(0,\\ -4,\\ 1 \\mid 5)\\]\n\\[= (0,\\ 1,\\ -\\frac{1}{4} \\mid -\\frac{5}{4})\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & -1 & 2 & 1 \\\\ 0 & 1 & -\\frac{1}{4} & -\\frac{5}{4} \\\\ 0 & 8 & -2 & -6\\end{array}\\right]\\]\nKyun: \\(-\\frac{1}{4}\\) se multiply karne par \\(-4\\) ka 1 ban jata hai.",
+              "(iii) Step 3: column 2 saaf karein\n\\(R_1 + 1\\cdot R_2 \\to R_1'\\)\n\\[(1,\\ -1,\\ 2 \\mid 1)\\]\n\\[+(0,\\ 1,\\ -\\frac{1}{4} \\mid -\\frac{5}{4})\\]\n\\[= (1,\\ 0,\\ \\frac{7}{4} \\mid -\\frac{1}{4})\\]\n\\(R_3 + (-8)R_2 \\to R_3'\\)\n\\[(0,\\ 8,\\ -2 \\mid -6)\\]\n\\[+(-8)(0,\\ 1,\\ -\\frac{1}{4} \\mid -\\frac{5}{4})\\]\n\\[= (0,\\ 0,\\ 0 \\mid 4)\\]\nNaya matrix:\n\\[\\underset{\\sim}{R}\\ \\left[\\begin{array}{ccc|c}1 & 0 & \\frac{7}{4} & -\\frac{1}{4} \\\\ 0 & 1 & -\\frac{1}{4} & -\\frac{5}{4} \\\\ 0 & 0 & 0 & 4\\end{array}\\right]\\]\nKyun: \\(R_1\\) ke column 2 mein \\(-1\\) hai, use zero karne ke liye \\(1\\cdot R_2\\) JAMA karna hai (\\(-1 + 1 = 0\\)); \\(R_3\\) mein 8 hai, is liye \\((-8)R_2\\). Kitab yahan \\(R_1 - 1.R_2\\) chhapti hai, jo ghalat hai (neeche Kitab ki ghalti dekhiye).",
+              "(iii) Step 4: equivalent system parhein\n\\[x + \\tfrac{7}{4}z = -\\tfrac{1}{4}\\]\n\\[y - \\tfrac{1}{4}z = -\\tfrac{5}{4}\\]\n\\[0z = 4\\]\nKyun: \\(z\\) ki koi bhi value \\(0z\\) ko 4 nahi bana sakti (zero ko kisi bhi number se zarb dein, zero hi aata hai). Is liye poore system ka koi solution nahi; system (iii) inconsistent hai.",
+              "Tasdeeq:\n(i) \\(x = -1, y = 2, z = 3\\): \\(-2 + 10 - 3 = 5\\), \\(-3 + 8 + 6 = 11\\), \\(-1 + 4 - 6 = -3\\). Teeno sahi.\n(ii) \\(t = 0\\) se \\((4, -3, 0)\\): \\(4 - 3 + 0 = 1\\), \\(8 + 3 + 0 = 11\\), \\(12 - 15 + 0 = -3\\). \\(t = 1\\) se \\((1, -2, 1)\\): \\(1 - 2 + 2 = 1\\), \\(2 + 2 + 7 = 11\\), \\(3 - 10 + 4 = -3\\). Do alag \\(t\\) aur dono sahi, yani waqai beshumar solutions.\n(iii) Asal equations se \\((E_3 - 3E_1) + 2(E_2 - 2E_1)\\) banayein to bayen taraf sab kuch cancel ho kar \\(0 = 4\\) bachta hai: equations aapas mein takrati hain."
+            ],
+            "answer": "(i) \\(x = -1\\), \\(y = 2\\), \\(z = 3\\): ek hi solution, consistent.\n(ii) \\(x = 4 - 3t\\), \\(y = t - 3\\), \\(z = t\\), har real \\(t\\) ke liye: beshumar solutions, consistent.\n(iii) Koi solution nahi: inconsistent."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 11(iii) mein kitab operation \\(R_1 - 1.R_2 \\to R_1'\\) chhapti hai. Agar waqai ghatayein to \\((1, -2, \\frac{9}{4} \\mid \\frac{9}{4})\\) aata hai. Kitab jo row dikhati hai, \\((1, 0, \\frac{7}{4} \\mid -\\frac{1}{4})\\), woh \\(R_1 + 1\\cdot R_2 \\to R_1'\\) se aati hai, aur yahi sahi operation hai. Upar hum ne sahi operation likha hai. (Isi misaal ke hissa (ii) mein \\(y - z = -3\\) ke minus signs kitab mein bohat halke chhape hain; sahi \\(y - z = -3\\) hai.)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab ek lamha ruk kar teeno hisson ka muqabla kijiye. Khaas taur par systems (ii) aur (iii) ko dekhiye: dono ki teesri equation bilkul ek jaisi hai (\\(3x + 5y + 4z = -3\\)), aur pehli do equations mein sirf kuch coefficients badle hain. Phir bhi ek ke beshumar solutions nikle aur doosre ka ek bhi nahi. Is se sabaq yeh milta hai ke system ko dekh kar andaza nahi lagaya ja sakta; reduce kar ke hi pata chalta hai ke solution ek hai, beshumar hain ya koi nahi. Kitab ka Note isi baat ko rank ki zabaan mein bayan karta hai. Rank ka faida yeh hai ke poora hal kiye baghair bhi, sirf echelon form dekh kar, system ki qisam bataayi ja sakti hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "System (i) mein augmented matrix aur coefficient matrix dono ka (row) rank ek jaisa, yani 3 hai, jo variables ki tadaad ke barabar hai. Is se pata chalta hai: agar coefficient matrix aur augmented matrix ke rank barabar hon aur variables ki tadaad ke barabar bhi hon, to system consistent hai aur us ka ek hi solution hai.\nSystem (ii) mein dono ranks barabar hain magar 2 hain, jo variables (3) se kam hai. Yani: ranks barabar magar variables se kam hon to system consistent hai aur beshumar solutions hain.\nSystem (iii) mein coefficient matrix ka rank augmented matrix ke rank ke barabar nahi. Yani: ranks alag hon to system inconsistent hai.",
+            "wide": true
+          },
+          {
+            "type": "table",
+            "caption": "Kitab ke Note ka hamara khulasa (A = coefficient matrix, n = variables ki tadaad)",
+            "header": [
+              "Ranks",
+              "Nateeja",
+              "Example 11"
+            ],
+            "rows": [
+              [
+                "\\(\\text{rank } A = \\text{rank } [A \\mid B] = n\\)",
+                "Consistent, ek hi solution",
+                "(i): 3 = 3 = 3"
+              ],
+              [
+                "\\(\\text{rank } A = \\text{rank } [A \\mid B] < n\\)",
+                "Consistent, beshumar solutions",
+                "(ii): 2 = 2 < 3"
+              ],
+              [
+                "\\(\\text{rank } A \\ne \\text{rank } [A \\mid B]\\)",
+                "Inconsistent, koi solution nahi",
+                "(iii): 2 aur 3"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Rank wala test kyun sahi hai? Reduce karne ke baad non-zero rows hi asal equations hain.\nAgar augmented matrix mein ek row \\((0, 0, 0 \\mid k)\\), \\(k \\ne 0\\), ho to augmented matrix ka rank coefficient matrix se 1 zyada ho jata hai; yahi woh naamumkin equation \\(0 = k\\) hai.\nAgar ranks barabar hon, to har asal equation ek variable ko \"pakarti\" hai. Rank \\(= n\\) ho to har variable pakra gaya: ek solution. Rank \\(< n\\) ho to \\(n - \\text{rank}\\) variables azaad reh jate hain: beshumar solutions. System (ii) mein \\(3 - 2 = 1\\) azaad variable (\\(z = t\\)) tha."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahi. System \\(x + y = 3\\), \\(2x + 2y = 7\\) ka augmented matrix \\(\\left[\\begin{array}{cc|c}1 & 1 & 3 \\\\ 2 & 2 & 7\\end{array}\\right]\\) hai.\n\\(R_2 + (-2)R_1 \\to R_2'\\): \\((2, 2 \\mid 7) - 2(1, 1 \\mid 3) = (0, 0 \\mid 1)\\).\nRow \\((0, 0 \\mid 1)\\) ka matlab \\(0 = 1\\): koi solution nahi, system inconsistent. Rank se bhi: coefficient matrix ka rank 1, augmented ka 2; alag hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Qadam: augmented matrix, reduced echelon form, back substitution.\n2. Coefficient hissa \\(I_3\\) ban jaye: ek hi solution, aakhri column se parh lein.\n3. Zero row \\((0, 0, 0 \\mid 0)\\): ek azaad variable, beshumar solutions.\n4. Row \\((0, 0, 0 \\mid k)\\), \\(k \\ne 0\\): koi solution nahi.\n5. Rank test: ranks barabar aur \\(= n\\) to ek solution; barabar aur \\(< n\\) to beshumar; alag to inconsistent."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Bar ke baad wale constant par operation lagana bhool jana. Bachne ka tareeqa: har row ke chaaron numbers likh kar hisaab karein.\n2. \\(0z = 0\\) ko \"\\(z = 0\\)\" parhna. Is ka matlab hai \\(z\\) kuch bhi ho sakta hai.\n3. \\(0z = 4\\) ko \"\\(z = 4\\)\" ya \"\\(z = 0\\)\" samajhna. Yeh naamumkin hai: koi solution nahi.\n4. System (ii) ka sirf ek solution, jaise \\((4, -3, 0)\\), likh dena. Poora general solution parameter \\(t\\) ke saath likhein.\n5. Negative multiplier mein sign ulat dena; \\(R_1 + 1\\cdot R_2\\) aur \\(R_1 - 1\\cdot R_2\\) ka farq kitab ki ghalti se hi seekh lein."
+          }
+        ]
+      }
+    }
+  ]
+}

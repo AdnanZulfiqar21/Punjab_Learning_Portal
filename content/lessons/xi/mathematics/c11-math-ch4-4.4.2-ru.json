@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.4.2-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.4.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 59,
+          "pdf_to": 60,
+          "note": "Book p. 54-55: 4.4.2 Determinant of a Square Matrix of Order n = 3, expansions (i)-(vii), Examples 4 and 5; callouts marked Teaching note / Key points / Common mistake are ours."
+        }
+      ],
+      "title": "4.4.2 Determinant of a Square Matrix of Order n = 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH4-4.4.2",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Pichle sabaq mein hum ne minor aur cofactor seekhe. Aaj in dono ko jor kar order 3 ka poora determinant nikalenge. Main idea bohat seedha hai: koi ek row (ya ek column) chun lein, us ke har element ko us ke apne cofactor se multiply karein, aur teeno products jama kar dein. Bas! Baqi sab isi ek idea ki mukhtalif shaklein hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar \\(A\\) order 3 ka matrix ho, yani"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[A = \\begin{bmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "to:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = a_{i1}A_{i1} + a_{i2}A_{i2} + a_{i3}A_{i3}\\]\nfor \\(i = 1, 2, 3\\)\nor\n\\[|A| = a_{1j}A_{1j} + a_{2j}A_{2j} + a_{3j}A_{3j}\\]\nfor \\(j = 1, 2, 3\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Pehli line kehti hai ke koi bhi row \\(i\\) le lein; doosri kehti hai ke koi bhi column \\(j\\) le lein. Misaal ke taur par \\(i = 1\\), \\(j = 1\\) aur \\(j = 2\\) ke liye:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = a_{11}A_{11} + a_{12}A_{12} + a_{13}A_{13} \\quad \\text{(i)}\\]\nor\n\\[|A| = a_{11}A_{11} + a_{21}A_{21} + a_{31}A_{31} \\quad \\text{(ii)}\\]\nor\n\\[|A| = a_{12}A_{12} + a_{22}A_{22}\\]\n\\[\\quad + a_{32}A_{32} \\quad \\text{(iii)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab cofactor ki jagah us ki definition \\(A_{ij} = (-1)^{i+j}M_{ij}\\) rakhte hain. (iii) ko yun likh sakte hain:\n\\[|A| = a_{12}(-1)^{1+2}M_{12}\\]\n\\[\\quad + a_{22}(-1)^{2+2}M_{22}\\]\n\\[\\quad + a_{32}(-1)^{3+2}M_{32}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab is line ke aakhri term ko \\(a_{32}(-1)^{3-2}M_{32}\\) chhapti hai. Sahi \\(a_{32}(-1)^{3+2}M_{32}\\) hai, kyun ke \\(a_{32}\\) row 3, column 2 mein hai aur cofactor ka formula \\((-1)^{i+j}\\) hai, yani \\(3 + 2\\). Khush qismati se \\((-1)^{1}\\) aur \\((-1)^{5}\\) dono \\(-1\\) hain, is liye neeche (iv) ka sign phir bhi sahi hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\((-1)^{3} = -1\\), \\((-1)^{4} = +1\\), \\((-1)^{5} = -1\\) rakhne se:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = -a_{12}M_{12} + a_{22}M_{22}\\]\n\\[\\quad - a_{32}M_{32} \\quad \\text{(iv)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Isi tarah (i) ko yun likh sakte hain:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = a_{11}M_{11} - a_{12}M_{12} + a_{13}M_{13} \\quad \\text{(v)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "(v) mein \\(M_{11}\\), \\(M_{12}\\), \\(M_{13}\\) ki values (yani row 1 mitane ke baad bache order 2 ke determinants) rakhne se:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = a_{11}\\begin{vmatrix} a_{22} & a_{23} \\\\ a_{32} & a_{33} \\end{vmatrix}\\]\n\\[\\quad - a_{12}\\begin{vmatrix} a_{21} & a_{23} \\\\ a_{31} & a_{33} \\end{vmatrix}\\]\n\\[\\quad + a_{13}\\begin{vmatrix} a_{21} & a_{22} \\\\ a_{31} & a_{32} \\end{vmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "ya, har order 2 ka determinant \\(ad - bc\\) se khol kar:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = a_{11}(a_{22}a_{33} - a_{23}a_{32})\\]\n\\[\\quad - a_{12}(a_{21}a_{33} - a_{23}a_{31})\\]\n\\[\\quad + a_{13}(a_{21}a_{32} - a_{22}a_{31}) \\quad \\text{(vi)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "ya, brackets khol kar:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[|A| = a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31}\\]\n\\[\\quad + a_{13}a_{21}a_{32} - a_{11}a_{23}a_{32}\\]\n\\[\\quad - a_{12}a_{21}a_{33} - a_{13}a_{22}a_{31} \\quad \\text{(vii)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Equation (vii) order 3 ke square matrix ke determinant ki required expansion (poora khula hua formula) hai. Isay ratta lagane ki zaroorat nahin; (v) yaad ho to (vii) khud ban jata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Har row aur column se ek hi jawab kyun aata hai? (i), (ii) ya (iii) ko poora kholein to har dafa (vii) wale wahi chhe (6) products milte hain, sirf un ki tarteeb badalti hai. Is liye jawab bhi wahi.\nKaun si row ya column chunein? Jis mein sab se zyada zeros hon. Zero element ka poora term zero ho jata hai, yani ek minor kam nikaalna parta hai. Exam mein yeh waqt bachata hai.\nSigns kahan se aaye? (v) mein \\(+, -, +\\) row 1 ke cofactor sign pattern se aaye. (iv) mein \\(-, +, -\\) column 2 ke pattern se. Yaad hai na chess board wala pattern?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahin. 4.4.1 wala matrix \\(B\\) lijiye:\n\\[|B| = \\begin{vmatrix} 2 & 1 & 3 \\\\ 0 & 4 & 5 \\\\ 1 & 0 & 6 \\end{vmatrix}\\]\nRow 1 ke cofactors pichle sabaq mein 24, 5 aur \\(-4\\) nikle the:\n\\[|B| = 2(24) + 1(5) + 3(-4)\\]\n\\[= 48 + 5 - 12 = 41\\]\nAb column 2 se (is mein ek zero hai, is liye teesra term khud hi khatam): \\(M_{12} = -5\\), \\(M_{22} = 2(6) - 3(1) = 9\\), \\(M_{32} = 2(5) - 3(0) = 10\\). Column 2 ke signs \\(-, +, -\\):\n\\[|B| = -1(-5) + 4(9) - 0(10)\\]\n\\[= 5 + 36 - 0 = 41\\]\nDono tareeqon se 41. Yahi tasdeeq ka sab se achha tareeqa hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki do misaalein dekhte hain. Dono mein matrix ek hi hai: Example 4 row 1 se kholti hai aur Example 5 column 2 se, taa ke aap khud dekh lein ke jawab ek hi aata hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "Evaluate the determinant if \\(A = \\begin{bmatrix} 1 & -2 & 3 \\\\ -2 & 3 & 1 \\\\ 4 & -3 & 2 \\end{bmatrix}\\).",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix} 1 & -2 & 3 \\\\ -2 & 3 & 1 \\\\ 4 & -3 & 2 \\end{bmatrix}\\).\nTo find: \\(|A|\\).\nMethod: sab se pehle dekhte hain ke humein kya chahiye: ek \\(3 \\times 3\\) determinant ki value. Is ke liye pehli row ke saath formula (v) lagayenge: \\(|A| = a_{11}M_{11} - a_{12}M_{12} + a_{13}M_{13}\\). Har minor order 2 ka determinant hai, jo \\(ad - bc\\) se nikalta hai. Plan: row 1 ke elements, phir teen minors, phir jor.",
+              "Step 1: Determinant likhein aur row 1 ke elements pehchaanein\n\\[|A| = \\begin{vmatrix} 1 & -2 & 3 \\\\ -2 & 3 & 1 \\\\ 4 & -3 & 2 \\end{vmatrix}\\]\n\\[a_{11} = 1,\\; a_{12} = -2,\\; a_{13} = 3\\]\nKyun: formula (v) mein pehli row ke teeno elements aate hain, aur har ek apne minor se multiply hota hai. In ke sign shuru mein hi likh lena aage ki ghalti se bachata hai.",
+              "Step 2: Minors formula (v) mein rakhein\n\\[|A| = 1\\begin{vmatrix} 3 & 1 \\\\ -3 & 2 \\end{vmatrix}\\]\n\\[\\quad - (-2)\\begin{vmatrix} -2 & 1 \\\\ 4 & 2 \\end{vmatrix}\\]\n\\[\\quad + 3\\begin{vmatrix} -2 & 3 \\\\ 4 & -3 \\end{vmatrix}\\]\nKyun: \\(M_{11}\\) row 1 aur column 1 mitane se, \\(M_{12}\\) row 1 aur column 2 mitane se, aur \\(M_{13}\\) row 1 aur column 3 mitane se bana. Formula (v) ka beech wala sign minus hai aur \\(a_{12} = -2\\) khud bhi negative hai, is liye \\(-(-2)\\) likha.\nDhyan dein: yahan bohat students sirf \\(-2\\) likh kar sign kho dete hain. Formula ka sign aur element ka sign dono alag alag likhein.",
+              "Step 3: Har order 2 ka determinant nikaalein\n\\[= 1[6 - 1(-3)] + 2[(-2)(2) - (1)(4)]\\]\n\\[\\quad + 3[(-2)(-3) - 12]\\]\nKyun: \\(\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc\\). Pehle minor mein \\(ad = 3 \\times 2 = 6\\) aur \\(bc = 1 \\times (-3)\\). Aur \\(-(-2) = +2\\) ho gaya.",
+              "Step 4: Hal karein\n\\[= (6 + 3) + 2(-4 - 4) + 3(6 - 12)\\]\n\\[= 9 - 16 - 18\\]\n\\[= -25\\]\nKyun: pehle har bracket ke andar ka hisaab, phir multiply, phir jama. Is tarteeb se sign ki ghalti kam hoti hai.",
+              "Tasdeeq:\nAb doosre tareeqe, formula (vii), se dekhte hain ke jawab wahi aata hai ya nahin. Plus wale teen products:\n\\[(1)(3)(2) + (-2)(1)(4)\\]\n\\[\\quad + (3)(-2)(-3)\\]\n\\[= 6 - 8 + 18 = 16\\]\nMinus wale teen products:\n\\[(1)(1)(-3) + (-2)(-2)(2)\\]\n\\[\\quad + (3)(3)(4)\\]\n\\[= -3 + 8 + 36 = 41\\]\n\\[|A| = 16 - 41 = -25\\]\nWahi jawab! (Example 5 mein yahi determinant teesre tareeqe, column 2, se bhi nikalta hai.)"
+            ],
+            "answer": "\\(|A| = -25\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Find the cofactors \\(A_{12}\\), \\(A_{22}\\) and \\(A_{32}\\) of \\(A = \\begin{bmatrix} 1 & -2 & 3 \\\\ -2 & 3 & 1 \\\\ 4 & -3 & 2 \\end{bmatrix}\\) and find \\(|A|\\).",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix} 1 & -2 & 3 \\\\ -2 & 3 & 1 \\\\ 4 & -3 & 2 \\end{bmatrix}\\) (wahi matrix jo Example 4 mein tha).\nTo find: cofactors \\(A_{12}\\), \\(A_{22}\\), \\(A_{32}\\), aur phir \\(|A|\\).\nMethod: sab se pehle dekhte hain ke teeno cofactors column 2 ke elements ke hain. Is liye plan yeh hai: pehle minors \\(M_{12}\\), \\(M_{22}\\), \\(M_{32}\\); phir \\(A_{ij} = (-1)^{i+j}M_{ij}\\) se sign lagayein; phir column 2 ke saath formula (iii): \\(|A| = a_{12}A_{12} + a_{22}A_{22} + a_{32}A_{32}\\).",
+              "Step 1: Column 2 ke elements ke minors\n\\[M_{12} = \\begin{vmatrix} -2 & 1 \\\\ 4 & 2 \\end{vmatrix} = -4 - 4 = -8\\]\n\\[M_{22} = \\begin{vmatrix} 1 & 3 \\\\ 4 & 2 \\end{vmatrix} = 2 - 12 = -10\\]\n\\[M_{32} = \\begin{vmatrix} 1 & 3 \\\\ -2 & 1 \\end{vmatrix} = 1 - (-6) = 7\\]\nKyun: \\(M_{12}\\) ke liye row 1 aur column 2 mitaye, \\(M_{22}\\) ke liye row 2 aur column 2, \\(M_{32}\\) ke liye row 3 aur column 2. Har dafa column 2 hi mit'ta hai, sirf row badalti hai. Teesre minor mein \\(bc = 3 \\times (-2) = -6\\), aur \\(1 - (-6) = 7\\); yahan double minus ka khayal rakhein.",
+              "Step 2: Cofactors\n\\[A_{12} = (-1)^{1+2}M_{12} = (-1)(-8) = 8\\]\n\\[A_{22} = (-1)^{2+2}M_{22} = 1(-10) = -10\\]\n\\[A_{32} = (-1)^{3+2}M_{32} = (-1)(7) = -7\\]\nKyun: \\(1 + 2 = 3\\) aur \\(3 + 2 = 5\\) odd hain, is liye sign ulta hua; \\(2 + 2 = 4\\) even hai, is liye cofactor minor ke barabar raha. Column 2 ka sign pattern \\(-, +, -\\) hai, bilkul wahi jo humein mila.",
+              "Step 3: Column 2 ke saath expand karein\n\\[|A| = a_{12}A_{12} + a_{22}A_{22} + a_{32}A_{32}\\]\n\\[= (-2)8 + 3(-10) + (-3)(-7)\\]\n\\[= -16 - 30 + 21\\]\n\\[= -25\\]\nKyun: determinant kisi bhi row ya column ke saath khola ja sakta hai: us line ke har element ko us ke apne cofactor se multiply karein aur sab jama kar dein. Column 2 ke elements \\(-2, 3, -3\\) hain. Yahan cofactors mein sign pehle hi shamil hai, is liye beech mein sirf plus aata hai.",
+              "Tasdeeq:\nExample 4 mein isi determinant ko row 1 ke saath khola gaya tha aur jawab \\(-25\\) aaya tha. Row ho ya column, jawab ek hi aana chahiye, aur yahan bhi \\(-25\\) aaya. Jawab pakka hai."
+            ],
+            "answer": "\\(A_{12} = 8\\), \\(A_{22} = -10\\), \\(A_{32} = -7\\) aur \\(|A| = -25\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Example 4 wala determinant column 1 se khol kar dekhiye. Column 1 ke elements \\(1, -2, 4\\) aur signs \\(+, -, +\\) hain.\nJawab: \\(M_{11} = 9\\), \\(M_{21} = (-2)(2) - (3)(-3) = 5\\), \\(M_{31} = (-2)(1) - (3)(3) = -11\\).\n\\(|A| = 1(9) - (-2)(5) + 4(-11) = 9 + 10 - 44 = -25\\). Phir wahi jawab!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(|A|\\) = kisi ek row ya column ke har element \\(\\times\\) us ka cofactor, phir sab ka jor.\n2. Row 1: \\(|A| = a_{11}M_{11} - a_{12}M_{12} + a_{13}M_{13}\\).\n3. Har row aur column se ek hi value aati hai; jis mein zyada zeros hon woh chunein.\n4. Minors ke saath signs \\(+ - +\\), \\(- + -\\), \\(+ - +\\) khud lagane hain; cofactors ke saath sign pehle se andar hai, sirf jama karein.\n5. Jawab ko doosri row ya column se khol kar check karein."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. (v) ka beech wala minus, ya element ka apna sign bhool jana: \\(a_{12} = -2\\) ho to \\(-a_{12}M_{12} = +2M_{12}\\).\n2. Sign do dafa laga dena: cofactors ke saath \\(a_{12}A_{12} + \\dots\\) sab plus se likhein; sign pehle hi \\(A_{12}\\) ke andar hai.\n3. Ek row ke element ko kisi doosri row ke minor se multiply kar dena.\n4. \\(ad - bc\\) mein negatives ki ghalti: \\(1 - (-6) = 7\\) hai, \\(-5\\) nahin. Bachne ka tareeqa: \\(bc\\) ko pehle bracket mein likhein."
+          }
+        ]
+      }
+    }
+  ]
+}

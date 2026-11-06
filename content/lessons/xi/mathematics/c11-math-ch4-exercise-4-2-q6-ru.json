@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-2-Q6-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-2-q6",
+      "title": "Question 6 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 65,
+          "pdf_to": 65,
+          "note": "Exercise 4.2, Question 6: Show that the determinant equals (x+4)(x-2)^2 (book page 60)."
+        }
+      ],
+      "variant_of": "C11-MATH-CH4-EXERCISE-4-2-Q6",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. Show that: \\(\\begin{vmatrix} x & 2 & 2 \\\\ 2 & x & 2 \\\\ 2 & 2 & x \\end{vmatrix} = (x+4)(x-2)^2\\).",
+            "explanation": "Dikhana hai ke yeh determinant \\((x+4)(x-2)^2\\) ke barabar hai.\nHar row ka total \\(x + 2 + 2 = x + 4\\) hai: jawab ka pehla factor yahin se aayega.\nPlan: \\(C_1 + C_2 + C_3 \\to C_1\\), \\(x+4\\) bahar, zeros banayein, triangular shakal se jawab.",
+            "steps": [
+              "Diya gaya hai: \\(\\Delta = \\begin{vmatrix} x & 2 & 2 \\\\ 2 & x & 2 \\\\ 2 & 2 & x \\end{vmatrix}\\)\nSaabit karna hai: \\(\\Delta = (x+4)(x-2)^2\\)\nTareeqa: Property vii (columns jama; rows minus), Property v (factor bahar), Property viii (triangular determinant). Expand kar ke cubic ko factorise karna mushkil hota, is liye properties behtar hain.",
+              "Teeno columns ko column 1 mein jama karein\n\\[C_1 + C_2 + C_3 \\to C_1\\]\n\\[\\Delta = \\begin{vmatrix} x+4 & 2 & 2 \\\\ x+4 & x & 2 \\\\ x+4 & 2 & x \\end{vmatrix}\\]\nKyun: Har row mein ek \\(x\\) aur do 2 hain, total \\(x + 4\\). Property vii se value wohi.",
+              "Column 1 se \\(x+4\\) bahar nikalein\n\\[\\Delta = (x+4)\\begin{vmatrix} 1 & 2 & 2 \\\\ 1 & x & 2 \\\\ 1 & 2 & x \\end{vmatrix}\\]\nKyun: Property v: column 1 ki har entry mein \\(x + 4\\) common hai, woh ek dafa bahar aa gaya.",
+              "Row 1 ko row 2 aur 3 mein se minus karein\n\\[R_2 - R_1 \\to R_2,\\quad R_3 - R_1 \\to R_3\\]\n\\[\\Delta = (x+4)\\begin{vmatrix} 1 & 2 & 2 \\\\ 0 & x-2 & 0 \\\\ 0 & 0 & x-2 \\end{vmatrix}\\]\nKyun: \\(1 - 1 = 0\\), \\(x - 2\\), \\(2 - 2 = 0\\). Diagonal ke neeche sab zero: upper triangular.",
+              "Diagonal multiply karein\n\\[\\Delta = (x+4) \\cdot 1 \\cdot (x-2)(x-2)\\]\n\\[= (x+4)(x-2)^2\\]\nKyun: Property viii: triangular determinant = diagonal ka product. \\((x-2)\\) do dafa aaya, is liye square.",
+              "Tasdeeq (number rakh kar)\n\\[x = 0:\\ \\begin{vmatrix} 0 & 2 & 2 \\\\ 2 & 0 & 2 \\\\ 2 & 2 & 0 \\end{vmatrix} = 0 - 2(-4) + 2(4) = 16\\]\n\\[(0+4)(0-2)^2 = 16 \\;\\checkmark\\]\nKyun: \\(x = 0\\) rakh kar row 1 ke along expand kiya: \\(-2(0 - 4) + 2(4 - 0) = 16\\). Formula se bhi 16. Dono barabar."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\Delta = (x+4)(x-2)^2\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

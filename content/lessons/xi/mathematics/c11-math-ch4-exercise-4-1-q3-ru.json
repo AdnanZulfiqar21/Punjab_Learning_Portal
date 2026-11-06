@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-1-Q3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-1-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 58,
+          "pdf_to": 58,
+          "note": "Exercise 4.1, Question 3: book page 53 (PDF 58); answer key PDF 302"
+        }
+      ],
+      "variant_of": "C11-MATH-CH4-EXERCISE-4-1-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) If \\(A\\) and \\(B\\) are square matrices of the same order, then explain why in general: \\((A + B)^2 \\neq A^2 + 2AB + B^2\\).",
+            "explanation": "Yeh hisaab ka nahi, wajah batane ka sawal hai: algebra wala jaana pehchana formula matrices ke liye kyun fail ho jata hai.\nDiya kya hai? \\(A\\) aur \\(B\\), same order ki square matrices.\nFind kya karna hai? Wajah ke \\((A + B)^2\\) aam tor par \\(A^2 + 2AB + B^2\\) ke barabar kyun nahi.\nRule kaunsa? Distributive law, aur yeh haqeeqat ke matrix multiplication aam tor par commutative (order badalne se jawab same) nahi hota.\nPlan: order sambhaal kar expand, formula se muqabla, aur ek chhoti si misaal jahan dono sides alag hon.",
+            "steps": [
+              "Diya gaya hai: \\(A\\), \\(B\\) same order ki square matrices, is liye \\(A + B\\), \\(AB\\) aur \\(BA\\) teeno bante hain.\nWazahat karni hai: aam tor par \\((A + B)^2 \\neq A^2 + 2AB + B^2\\) kyun.\nTareeqa: Distributive law se expand karenge, lekin kisi product ka order nahi badlenge. Numbers mein \\(ab = ba\\) hota hai, isi liye school wala formula chal jata hai; matrices mein \\(AB\\) aur \\(BA\\) aksar alag hote hain. Yahi farq poore sawal ki jaan hai.",
+              "Square ko product likh kar expand karein\n\\[(A + B)^2 = (A + B)(A + B)\\]\n\\[= A(A + B) + B(A + B)\\]\n\\[= A^2 + AB + BA + B^2\\]\nKyun: Square ka matlab hai matrix ko khud se multiply karna. Distributive law matrices par bhi lagta hai, is liye pehle bracket ki har matrix doosre poore bracket se multiply hui. \\(B(A + B)\\) mein \\(B\\) baayen taraf hai, is liye \\(BA\\) bana, \\(AB\\) nahi.\nDhyan dein: \\(BA\\) ko chupke se \\(AB\\) likh dena hi woh ghalti hai jis se ghalat formula paida hota hai.",
+              "Formula se muqabla karein\n\\[AB + BA = 2AB \\iff BA = AB\\]\nKyun: Dono taraf \\(A^2\\) aur \\(B^2\\) to same hain; farq sirf beech wali terms mein hai. Hamare paas \\(AB + BA\\) hai aur formula \\(2AB\\) maangta hai. Yeh tabhi barabar honge jab \\(BA = AB\\) ho. Lekin matrix multiplication aam tor par commutative nahi, is liye yeh shart har dafa poori nahi hoti.",
+              "Ek misaal jahan \\(AB \\neq BA\\)\n\\[A = \\begin{bmatrix}1 & 0 \\\\ 0 & 0\\end{bmatrix},\\; B = \\begin{bmatrix}0 & 1 \\\\ 0 & 0\\end{bmatrix}\\]\n\\[AB = \\begin{bmatrix}0 & 1 \\\\ 0 & 0\\end{bmatrix},\\; BA = \\begin{bmatrix}0 & 0 \\\\ 0 & 0\\end{bmatrix}\\]\nKyun: Wazahat ke saath ek thos misaal de dena jawab ko mazboot karta hai. Yeh do bohat saada \\(2 \\times 2\\) matrices hain. \\(AB\\) ki pehli row \\((1, 0)\\) ko \\(B\\) ke columns se multiply karne par \\((0, 1)\\) aati hai, jabke \\(BA\\) mein har entry 0 aati hai. To yahan \\(AB \\neq BA\\).",
+              "Isi misaal mein dono sides nikalein\n\\[A + B = \\begin{bmatrix}1 & 1 \\\\ 0 & 0\\end{bmatrix}\\]\n\\[(A + B)^2 = \\begin{bmatrix}1 & 1 \\\\ 0 & 0\\end{bmatrix}\\]\n\\[A^2 + 2AB + B^2 = \\begin{bmatrix}1 & 2 \\\\ 0 & 0\\end{bmatrix}\\]\nKyun: \\((A + B)^2\\) ki entry (1, 2): \\((1)(1) + (1)(0) = 1\\). Doosri taraf \\(A^2 = A\\), \\(B^2 = O\\) (zero matrix) aur \\(2AB\\) ki (1, 2) entry 2 hai. Is liye (1, 2) jagah par ek taraf 1 hai aur doosri taraf 2. Dono sides barabar nahi.",
+              "Natija\nKyun: Formula sirf un matrices ke liye sach hai jin mein \\(AB = BA\\) ho, jaise \\(B = I\\) ya \\(B = A\\). Chunke aam tor par aisa nahi hota, is liye 'in general' \\((A + B)^2 \\neq A^2 + 2AB + B^2\\). Yaad rakhiye: 'in general nahi' ka matlab 'kabhi nahi' nahi, balke 'har dafa nahi'."
+            ],
+            "final_answer": "\\((A + B)^2 = A^2 + AB + BA + B^2\\); yeh \\(A^2 + 2AB + B^2\\) sirf tab banta hai jab \\(AB = BA\\) ho. Aam tor par \\(AB \\neq BA\\), is liye formula aam tor par sahi nahi."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) If \\(A\\) and \\(B\\) are square matrices of the same order, then explain why in general: \\((A - B)^2 \\neq A^2 - 2AB + B^2\\).",
+            "explanation": "Yeh part (i) wala hi sawal hai, bas plus ki jagah minus hai.\nDiya kya hai? Same order ki square matrices \\(A\\), \\(B\\).\nFind kya karna hai? Wajah ke \\((A - B)^2\\) aam tor par \\(A^2 - 2AB + B^2\\) kyun nahi.\nRule kaunsa? Distributive law aur non-commutative multiplication.\nPlan: order sambhaal kar expand, muqabla, aur part (i) wali misaal se aazmaish.",
+            "steps": [
+              "Diya gaya hai: \\(A\\), \\(B\\) same order ki square matrices.\nWazahat karni hai: aam tor par \\((A - B)^2 \\neq A^2 - 2AB + B^2\\) kyun.\nTareeqa: Wohi jo part (i) mein kiya: square ko product likhna, distributive law lagana, aur kisi product ka order na badalna. Minus sign ki wajah se signs par zyada dhyan dena hoga.",
+              "Expand karein\n\\[(A - B)^2 = (A - B)(A - B)\\]\n\\[= A(A - B) - B(A - B)\\]\n\\[= A^2 - AB - BA + B^2\\]\nKyun: Pehle bracket ki \\(A\\) ne doosre bracket ko multiply kiya: \\(A^2 - AB\\). Phir \\(-B\\) ne multiply kiya: \\(-BA + B^2\\), kyunke minus times minus plus hota hai. Yahan bhi \\(B\\) baayen taraf hai, is liye \\(BA\\) aaya.\nDhyan dein: \\(-B(A - B)\\) mein aakhri term \\(+B^2\\) hai, \\(-B^2\\) nahi.",
+              "Formula se muqabla karein\n\\[-AB - BA = -2AB \\iff BA = AB\\]\nKyun: \\(A^2\\) aur \\(B^2\\) dono taraf same hain. Beech mein hamare paas \\(-AB - BA\\) hai aur formula \\(-2AB\\) chahta hai. Yeh sirf tab barabar hain jab \\(BA = AB\\), aur matrices mein yeh zaroori nahi.",
+              "Part (i) wali misaal se aazmayein\n\\[A - B = \\begin{bmatrix}1 & -1 \\\\ 0 & 0\\end{bmatrix}\\]\n\\[(A - B)^2 = \\begin{bmatrix}1 & -1 \\\\ 0 & 0\\end{bmatrix}\\]\n\\[A^2 - 2AB + B^2 = \\begin{bmatrix}1 & -2 \\\\ 0 & 0\\end{bmatrix}\\]\nKyun: Wohi \\(A = \\begin{bmatrix}1 & 0 \\\\ 0 & 0\\end{bmatrix}\\), \\(B = \\begin{bmatrix}0 & 1 \\\\ 0 & 0\\end{bmatrix}\\) liye jin mein \\(AB \\neq BA\\). \\((A - B)^2\\) ki (1, 2) entry: \\((1)(-1) + (-1)(0) = -1\\). Doosri taraf \\(A^2 = A\\), \\(B^2 = O\\), aur \\(-2AB\\) ki (1, 2) entry \\(-2\\). Ek taraf \\(-1\\), doosri taraf \\(-2\\): barabar nahi.",
+              "Natija\nKyun: Yeh formula bhi sirf \\(AB = BA\\) wali matrices ke liye sahi hai. Aam tor par \\(AB \\neq BA\\), is liye 'in general' \\((A - B)^2 \\neq A^2 - 2AB + B^2\\)."
+            ],
+            "final_answer": "\\((A - B)^2 = A^2 - AB - BA + B^2\\); yeh \\(A^2 - 2AB + B^2\\) sirf tab hai jab \\(AB = BA\\). Aam tor par yeh shart poori nahi hoti, is liye formula aam tor par fail hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) If \\(A\\) and \\(B\\) are square matrices of the same order, then explain why in general: \\((A + B)(A - B) \\neq A^2 - B^2\\).",
+            "explanation": "Yeh 'difference of squares' wala formula hai, jo numbers mein hamesha chalta hai; dekhna hai matrices mein kyun nahi.\nDiya kya hai? Same order ki square matrices \\(A\\), \\(B\\).\nFind kya karna hai? Wajah ke \\((A + B)(A - B)\\) aam tor par \\(A^2 - B^2\\) kyun nahi.\nRule kaunsa? Distributive law, order ka khayal.\nPlan: expand, beech ki terms dekhna, aur part (i) wali misaal se aazmaish.",
+            "steps": [
+              "Diya gaya hai: \\(A\\), \\(B\\) same order ki square matrices.\nWazahat karni hai: aam tor par \\((A + B)(A - B) \\neq A^2 - B^2\\) kyun.\nTareeqa: Numbers mein \\((a + b)(a - b)\\) ki beech wali terms \\(-ab + ba\\) aapas mein cancel ho jati hain kyunke \\(ab = ba\\). Matrices mein dekhenge ke yeh cancel hoti hain ya nahi.",
+              "Expand karein\n\\[(A + B)(A - B)\\]\n\\[= A(A - B) + B(A - B)\\]\n\\[= A^2 - AB + BA - B^2\\]\nKyun: Pehle bracket ki har matrix ne doosre bracket ko multiply kiya. \\(A(A - B) = A^2 - AB\\) aur \\(B(A - B) = BA - B^2\\). Dono jagah left wali matrix left par hi rahi.",
+              "\\(A^2 - B^2\\) se muqabla karein\n\\[-AB + BA = O \\iff BA = AB\\]\nKyun: Formula sahi hone ke liye beech ki terms \\(-AB + BA\\) ko zero matrix \\(O\\) banna chahiye. Yeh tabhi hoga jab \\(BA = AB\\) ho. Matrices mein yeh aam tor par nahi hota, is liye terms bach jati hain.\nDhyan dein: \\(-AB + BA\\) ko 'cancel' likh dena numbers wali aadat hai; matrices mein yeh ghalti hai.",
+              "Part (i) wali misaal se aazmayein\n\\[(A + B)(A - B) = \\begin{bmatrix}1 & -1 \\\\ 0 & 0\\end{bmatrix}\\]\n\\[A^2 - B^2 = \\begin{bmatrix}1 & 0 \\\\ 0 & 0\\end{bmatrix}\\]\nKyun: \\(A = \\begin{bmatrix}1 & 0 \\\\ 0 & 0\\end{bmatrix}\\), \\(B = \\begin{bmatrix}0 & 1 \\\\ 0 & 0\\end{bmatrix}\\) se \\(A + B = \\begin{bmatrix}1 & 1 \\\\ 0 & 0\\end{bmatrix}\\) aur \\(A - B = \\begin{bmatrix}1 & -1 \\\\ 0 & 0\\end{bmatrix}\\). Product ki (1, 2) entry: \\((1)(-1) + (1)(0) = -1\\). Doosri taraf \\(A^2 = A\\) aur \\(B^2 = O\\), to \\(A^2 - B^2\\) ki (1, 2) entry 0 hai. \\(-1 \\neq 0\\).",
+              "Natija\nKyun: Beech ki terms sirf \\(AB = BA\\) hone par khatam hoti hain. Aam tor par aisa nahi, is liye 'in general' \\((A + B)(A - B) \\neq A^2 - B^2\\). Teeno parts ka ek hi sabaq hai: matrices mein multiplication ka order badalna mana hai."
+            ],
+            "final_answer": "\\((A + B)(A - B) = A^2 - AB + BA - B^2\\); yeh \\(A^2 - B^2\\) sirf tab hai jab \\(AB = BA\\). Aam tor par aisa nahi hota, is liye formula aam tor par sahi nahi."
+          }
+        ]
+      }
+    }
+  ]
+}

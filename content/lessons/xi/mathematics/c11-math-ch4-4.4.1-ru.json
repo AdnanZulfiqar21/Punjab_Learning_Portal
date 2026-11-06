@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.4.1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.4.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 59,
+          "pdf_to": 59,
+          "note": "Book p. 54: 4.4.1 Minor and Cofactor of an Element, the deleted row/column figure for M_12, the cofactor A_12; callouts marked Teaching note / Key points / Common mistake are ours."
+        }
+      ],
+      "title": "4.4.1 Minor and Cofactor of an Element of a Matrix or its Determinant (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH4-4.4.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Pichle sabaq mein hum ne dekha ke order 3 ka determinant bhi ek pattern par likha jata hai, lekin usay nikalein kaise? Is ka raaz yeh hai ke bare determinant ko chhote chhote order 2 ke determinants mein tor diya jaye. In chhote tukron ke naam hain minor aur cofactor. Aaj hum yahi do naam seekhenge. Yeh do lafz is poori unit mein baar baar aayenge, is liye inhein achhi tarah pakka kar lijiye."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Minor of an Element"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki definition: maan lijiye \\(A\\) order \\(n\\) ka square matrix hai. To element \\(a_{ij}\\) ka minor (jise \\(M_{ij}\\) likhte hain) woh determinant hai jo \\(A\\) (ya \\(|A|\\)) ki \\(i\\)th row aur \\(j\\)th column ko mita (delete kar) dene se bachta hai.\nAsaan alfaaz mein: jis element ka minor chahiye, us ki apni row aur apna column dono par lakeer pher dein. Jo numbers bach jayen, un ka determinant hi minor hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal ke taur par order 3 ka square matrix \\(A\\) lijiye:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[A = \\begin{bmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Element \\(a_{12}\\) ka minor nikalne ke liye \\(A\\) ki pehli row aur doosra column mita dein; yani"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch4-fig-minor-m12",
+            "alt": "A 3 by 3 matrix with entries a11 to a33. A dashed line strikes out the first row and another dashed line strikes out the second column. The four entries left, a21, a23, a31, a33, form the 2 by 2 determinant M12.",
+            "caption": "Figure: deleting row 1 and column 2 of A leaves the minor M₁₂ (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[M_{12} = \\begin{vmatrix} a_{21} & a_{23} \\\\ a_{31} & a_{33} \\end{vmatrix}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(a_{ij}\\) ko kaise parhein: pehla subscript \\(i\\) row batata hai aur doosra \\(j\\) column. Is liye \\(a_{12}\\) row 1 aur column 2 mein hai, aur \\(M_{12}\\) ke liye hum row 1 aur column 2 chhupate hain. Yaad rakhne ka tareeqa: \"pehle row, phir column\", bilkul jaise class mein seat ka number \"teesri line, doosri seat\".\nWohi row aur wohi column kyun mitate hain? Kyun ke yahi do lakeerein us element ke upar se guzarti hain. Jo bachta hai woh hamesha ek size chhota square hota hai: order 3 ke matrix ka har minor order 2 ka determinant hai. Aur kyun ke order 3 mein 9 elements hain, is liye minors bhi 9 hain, har element ka apna ek."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Cofactor of an Element"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab cofactor (sign wala minor). Kitab ki definition: square matrix \\(A\\) ke element \\(a_{ij}\\) ka cofactor, jise \\(A_{ij}\\) likhte hain, yeh hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "A_{ij} = (-1)^{i+j} M_{ij}",
+            "text_alt": "A sub i j equals minus one to the power i plus j, times M sub i j"
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal ke taur par:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[A_{12} = (-1)^{1+2} M_{12}\\]\n\\[= (-1)^{3} \\begin{vmatrix} a_{21} & a_{23} \\\\ a_{31} & a_{33} \\end{vmatrix}\\]\n\\[= -\\begin{vmatrix} a_{21} & a_{23} \\\\ a_{31} & a_{33} \\end{vmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan \\(i = 1\\), \\(j = 2\\), is liye \\(i + j = 3\\) jo odd (taaq) hai. \\((-1)^{3} = -1\\), is liye cofactor minor ka ulta sign ban gaya."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\((-1)^{i+j}\\) se ghabraiye mat; is ka kaam sirf sign tay karna hai:\nagar \\(i + j\\) even (juft) ho to \\((-1)^{i+j} = +1\\), yani cofactor = minor;\nagar \\(i + j\\) odd (taaq) ho to \\((-1)^{i+j} = -1\\), yani cofactor = minor ka ulta sign.\nOrder 3 mein yeh signs chess board (shatranj ki bisaat) ki tarah lagte hain, upar baen kone par \\(+\\) se shuru:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\begin{bmatrix} + & - & + \\\\ - & + & - \\\\ + & - & + \\end{bmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yani \\(A_{11} = +M_{11}\\), \\(A_{12} = -M_{12}\\), \\(A_{13} = +M_{13}\\), \\(A_{21} = -M_{21}\\), \\(A_{22} = +M_{22}\\), waghera. Exam mein yeh chhota sa sign table kone mein bana lein to sign ki ghalti ka imkaan khatam ho jata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahin. Matrix lijiye:\n\\[B = \\begin{bmatrix} 2 & 1 & 3 \\\\ 0 & 4 & 5 \\\\ 1 & 0 & 6 \\end{bmatrix}\\]\nRow 1 ke elements ke minors aur cofactors nikaalte hain.\n\\(M_{11}\\): row 1 aur column 1 mitayein. Bache: 4, 5, 0, 6.\n\\[M_{11} = \\begin{vmatrix} 4 & 5 \\\\ 0 & 6 \\end{vmatrix} = 24 - 0 = 24\\]\n\\(M_{12}\\): row 1 aur column 2 mitayein. Bache: 0, 5, 1, 6.\n\\[M_{12} = \\begin{vmatrix} 0 & 5 \\\\ 1 & 6 \\end{vmatrix} = 0 - 5 = -5\\]\n\\(M_{13}\\): row 1 aur column 3 mitayein. Bache: 0, 4, 1, 0.\n\\[M_{13} = \\begin{vmatrix} 0 & 4 \\\\ 1 & 0 \\end{vmatrix} = 0 - 4 = -4\\]\nAb cofactors, signs \\(+, -, +\\) ke saath:\n\\[B_{11} = (+1)(24) = 24\\]\n\\[B_{12} = (-1)(-5) = 5\\]\n\\[B_{13} = (+1)(-4) = -4\\]\nDhyan dein: \\(B_{12}\\) mein minus aur minus mil kar plus ban gaya. Yeh teen cofactors hum 4.4.2 mein dobara use karenge, jahan is matrix ka determinant 41 niklega."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Isi matrix \\(B\\) mein element \\(5\\) (row 2, column 3) ka cofactor kya hoga?\nJawab: row 2 aur column 3 mitayein to 2, 1, 1, 0 bachte hain: \\(M_{23} = 2(0) - 1(1) = -1\\). \\(i + j = 5\\) odd hai, is liye \\(B_{23} = -(-1) = 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Dhyan dein",
+            "text": "Minor nikalte waqt bache hue numbers ki tarteeb (order) mat badlein. Jo number upar baen tha woh upar baen hi rahega, aur jo neeche daen tha woh neeche daen. Agar aap ne bache hue numbers ki jagah badal di to \\(ad - bc\\) ka sign ulta ho sakta hai aur poora jawab ghalat ho jayega.\nEk aur baat: exam mein aksar poocha jata hai \"find the minor and cofactor of \\(a_{23}\\)\". Pehle minor alag likhein, phir cofactor alag. Dono ko ek hi line mein mila dene se examiner ko samajh nahin aata ke aap ne kya kiya, aur sign ki ghalti bhi chhupi reh jati hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Bina hisaab kiye sirf sign batayein: \\(A_{31}\\), \\(A_{22}\\) aur \\(A_{21}\\) minor ke barabar honge ya minor ke ulte?\nJawab: \\(3 + 1 = 4\\) even, is liye \\(A_{31} = M_{31}\\). \\(2 + 2 = 4\\) even, is liye \\(A_{22} = M_{22}\\). \\(2 + 1 = 3\\) odd, is liye \\(A_{21} = -M_{21}\\). Chess board pattern se bhi yahi milta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Minor \\(M_{ij}\\): row \\(i\\) aur column \\(j\\) mitane ke baad bachne wala determinant.\n2. Cofactor \\(A_{ij} = (-1)^{i+j} M_{ij}\\), yani sign wala minor.\n3. \\(i + j\\) even: cofactor = minor; \\(i + j\\) odd: cofactor = minus minor.\n4. Order 3 ka sign pattern: \\(+ - +\\), \\(- + -\\), \\(+ - +\\).\n5. Order 3 ke matrix ke 9 minors aur 9 cofactors hote hain; har ek order 2 ka determinant (sign ke saath) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Row aur column ulat dena: \\(a_{32}\\) mein row 3 aur column 2 hai, ulta nahin.\n2. Minor ko sign de dena: minor ke saath koi extra sign nahin lagta; sign sirf cofactor mein aata hai.\n3. Double minus bhool jana: \\(M_{12} = -5\\) ho to \\(A_{12} = -(-5) = 5\\), \\(-5\\) nahin. Bachne ka tareeqa: pehle minor bracket mein likhein, phir sign lagayein.\n4. Chhota aur bara harf mila dena: \\(a_{12}\\) (chhota \\(a\\)) element hai, \\(A_{12}\\) (bara \\(A\\)) us ka cofactor hai."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-1-Q4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-1-q4",
+      "title": "Question 4 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 58,
+          "pdf_to": 58,
+          "note": "Exercise 4.1, Question 4: book page 53 (PDF 58); answer key PDF 302"
+        }
+      ],
+      "variant_of": "C11-MATH-CH4-EXERCISE-4-1-Q4",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4 If\n\\[A = \\begin{bmatrix}-1 & 2 & 3 & 0 \\\\ 1 & 0 & 2 & -2 \\\\ -3 & 5 & 3 & -1\\end{bmatrix}\\]\nthen find \\(AA^t\\), \\(A^tA\\) and \\((A^t)^t\\).",
+            "explanation": "Is sawal mein teen cheezein maangi gayi hain: \\(A\\) aur us ke transpose ke do products, aur transpose ka transpose.\nDiya kya hai? \\(3 \\times 4\\) matrix \\(A\\).\nFind kya karna hai? \\(AA^t\\), \\(A^tA\\) aur \\((A^t)^t\\).\nRule kaunsa? Transpose (rows ko columns bana dena) aur row-by-column multiplication.\nPlan: pehle \\(A^t\\); phir orders; phir ek shortcut: \\(AA^t\\) ki har entry \\(A\\) ki do rows ka product hai, aur \\(A^tA\\) ki har entry \\(A\\) ke do columns ka product.",
+            "steps": [
+              "Diya gaya hai: \\(A\\), jis ka order \\(3 \\times 4\\) hai.\nHumein find karna hai: \\(AA^t\\), \\(A^tA\\) aur \\((A^t)^t\\).\nTareeqa: Transpose \\(A^t\\) banane ke liye \\(A\\) ki rows ko columns bana dete hain. Phir row-by-column multiplication. Kaam lamba hai, is liye hum har row aur column ko naam de kar hisaab saaf rakhenge.",
+              "Transpose likhein\n\\[A^t = \\begin{bmatrix}-1 & 1 & -3 \\\\ 2 & 0 & 5 \\\\ 3 & 2 & 3 \\\\ 0 & -2 & -1\\end{bmatrix}\\]\nKyun: \\(A\\) ki pehli row \\((-1, 2, 3, 0)\\) \\(A^t\\) ka pehla column ban gayi, doosri row doosra column, teesri row teesra column. \\(A\\) ki 3 rows aur 4 columns thin, is liye \\(A^t\\) ki 4 rows aur 3 columns hain: order \\(4 \\times 3\\).",
+              "Har product ka order nikalein\n\\[AA^t: (3 \\times 4)(4 \\times 3) \\to 3 \\times 3\\]\n\\[A^tA: (4 \\times 3)(3 \\times 4) \\to 4 \\times 4\\]\nKyun: Dono products mein andar wale numbers barabar hain (4 = 4 aur 3 = 3), is liye dono bante hain. Lekin bahar wale numbers alag hain: ek \\(3 \\times 3\\) aur doosra \\(4 \\times 4\\). Yani in dono ka barabar hona mumkin hi nahi; yeh phir dikhata hai ke matrix multiplication mein order se farq parta hai.",
+              "\\(A\\) ki rows ko naam dein\n\\[R_1 = (-1, 2, 3, 0)\\]\n\\[R_2 = (1, 0, 2, -2)\\]\n\\[R_3 = (-3, 5, 3, -1)\\]\nKyun: \\(AA^t\\) ki entry \\((i, j)\\) = \\(A\\) ki row \\(i\\) times \\(A^t\\) ka column \\(j\\). Lekin \\(A^t\\) ka column \\(j\\) asal mein \\(A\\) ki row \\(j\\) hi hai, bas khari kar di gayi hai. Is liye entry \\((i, j) = R_i \\cdot R_j\\): pehli entry pehli se, doosri doosri se, sab zarb de kar jama.",
+              "\\(AA^t\\) ki diagonal entries\n\\[R_1 \\cdot R_1 = 1 + 4 + 9 + 0 = 14\\]\n\\[R_2 \\cdot R_2 = 1 + 0 + 4 + 4 = 9\\]\n\\[R_3 \\cdot R_3 = 9 + 25 + 9 + 1 = 44\\]\nKyun: Row ko usi row se multiply karein to har entry ka square ban jata hai, aur square kabhi negative nahi hota. Is liye diagonal par hamesha positive (ya zero) numbers aate hain; yeh khud ek chhota sa check hai.",
+              "\\(AA^t\\) ki baaqi entries\n\\[R_1 \\cdot R_2 = -1 + 0 + 6 + 0 = 5\\]\n\\[R_1 \\cdot R_3 = 3 + 10 + 9 + 0 = 22\\]\n\\[R_2 \\cdot R_3 = -3 + 0 + 6 + 2 = 5\\]\nKyun: Misaal: \\(R_1 \\cdot R_2 = (-1)(1) + (2)(0) + (3)(2) + (0)(-2) = -1 + 0 + 6 + 0\\). \\(R_2 \\cdot R_3\\) mein aakhri term \\((-2)(-1) = +2\\) hai. Chunke \\(R_1 \\cdot R_2 = R_2 \\cdot R_1\\), is liye nau ki jagah sirf chhe products nikalne parte hain.\nDhyan dein: Negative times negative plus hota hai; \\((-2)(-1)\\) ko \\(-2\\) likhna aam ghalti hai.",
+              "\\(AA^t\\) likhein\n\\[AA^t = \\begin{bmatrix}14 & 5 & 22 \\\\ 5 & 9 & 5 \\\\ 22 & 5 & 44\\end{bmatrix}\\]\nKyun: Har value apni jagah \\((i, j)\\) aur us ki aaine wali jagah \\((j, i)\\) dono mein gayi. Aisi matrix jo principal diagonal ke aar paar aaine jaisi ho, symmetric kehlati hai, aur \\(AA^t\\) hamesha symmetric hoti hai.",
+              "\\(A\\) ke columns ko naam dein\n\\[C_1 = (-1, 1, -3)\\]\n\\[C_2 = (2, 0, 5)\\]\n\\[C_3 = (3, 2, 3)\\]\n\\[C_4 = (0, -2, -1)\\]\nKyun: Ab \\(A^tA\\) ki baari hai. \\(A^t\\) ki row \\(i\\) asal mein \\(A\\) ka column \\(i\\) hai, lita diya gaya. Is liye \\(A^tA\\) ki entry \\((i, j) = C_i \\cdot C_j\\). Columns ko seedha \\(A\\) se parhein: pehla column upar se neeche \\(-1, 1, -3\\).",
+              "\\(A^tA\\) ki diagonal entries\n\\[C_1 \\cdot C_1 = 1 + 1 + 9 = 11\\]\n\\[C_2 \\cdot C_2 = 4 + 0 + 25 = 29\\]\n\\[C_3 \\cdot C_3 = 9 + 4 + 9 = 22\\]\n\\[C_4 \\cdot C_4 = 0 + 4 + 1 = 5\\]\nKyun: Har column ki entries ke squares ka jama. Phir se sab positive aaye, jaise aana chahiye.",
+              "\\(A^tA\\) ki baaqi entries\n\\[C_1 \\cdot C_2 = -2 + 0 - 15 = -17\\]\n\\[C_1 \\cdot C_3 = -3 + 2 - 9 = -10\\]\n\\[C_1 \\cdot C_4 = 0 - 2 + 3 = 1\\]\n\\[C_2 \\cdot C_3 = 6 + 0 + 15 = 21\\]\n\\[C_2 \\cdot C_4 = 0 + 0 - 5 = -5\\]\n\\[C_3 \\cdot C_4 = 0 - 4 - 3 = -7\\]\nKyun: Misaal: \\(C_1 \\cdot C_2 = (-1)(2) + (1)(0) + (-3)(5) = -2 + 0 - 15\\). \\(4 \\times 4\\) matrix ki 16 entries hain, lekin symmetry ki wajah se 4 diagonal aur 6 yeh, kul 10 products kaafi hain. Har value do jagah jayegi.",
+              "\\(A^tA\\) likhein\n\\[A^tA = \\begin{bmatrix}11 & -17 & -10 & 1 \\\\ -17 & 29 & 21 & -5 \\\\ -10 & 21 & 22 & -7 \\\\ 1 & -5 & -7 & 5\\end{bmatrix}\\]\nKyun: Order \\(4 \\times 4\\) aur matrix symmetric, bilkul jaisa hona chahiye tha. Dekhiye, \\(AA^t\\) aur \\(A^tA\\) bilkul mukhtalif matrices hain.",
+              "\\(A^t\\) ka dobara transpose\n\\[(A^t)^t = \\begin{bmatrix}-1 & 2 & 3 & 0 \\\\ 1 & 0 & 2 & -2 \\\\ -3 & 5 & 3 & -1\\end{bmatrix}\\]\n\\[(A^t)^t = A\\]\nKyun: \\(A^t\\) ki rows ko columns banaya to pehla transpose ulat gaya aur \\(A\\) wapas mil gayi. Jaise kisi cheez ko do dafa ulta karein to woh seedhi ho jati hai.",
+              "Tasdeeq\n\\[\\text{tr}(AA^t) = 14 + 9 + 44 = 67\\]\n\\[\\text{tr}(A^tA) = 11 + 29 + 22 + 5 = 67\\]\nKyun: Diagonal ka jama (trace) dono mein \\(A\\) ki saari 12 entries ke squares ka jama hona chahiye, kyunke \\(AA^t\\) mein rows ke squares aur \\(A^tA\\) mein columns ke squares jama hue, aur dono mein wohi 12 numbers hain. Dono 67 aaye, aur dono products symmetric bhi nikle. Hisaab par bharosa hai."
+            ],
+            "final_answer": "\\(AA^t = \\begin{bmatrix}14 & 5 & 22 \\\\ 5 & 9 & 5 \\\\ 22 & 5 & 44\\end{bmatrix}\\)\n\\(A^tA = \\begin{bmatrix}11 & -17 & -10 & 1 \\\\ -17 & 29 & 21 & -5 \\\\ -10 & 21 & 22 & -7 \\\\ 1 & -5 & -7 & 5\\end{bmatrix}\\)\n\\((A^t)^t = \\begin{bmatrix}-1 & 2 & 3 & 0 \\\\ 1 & 0 & 2 & -2 \\\\ -3 & 5 & 3 & -1\\end{bmatrix} = A\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key mein\n\\[AA^t = \\begin{bmatrix}14 & -5 & 8 \\\\ -5 & 9 & -11 \\\\ 8 & -11 & 44\\end{bmatrix}\\]\naur\n\\[A^tA = \\begin{bmatrix}11 & -3 & -6 & 1 \\\\ -3 & 29 & 19 & -5 \\\\ -6 & 19 & 22 & -4 \\\\ 1 & -5 & -4 & 5\\end{bmatrix}\\]\nlikha hai. Yeh kitab mein chhapi matrix \\(A\\) ke jawab nahi; sirf diagonal entries sahi hain. Khud check kijiye: \\(AA^t\\) ki entry (1, 2) \\(= R_1 \\cdot R_2 = -1 + 0 + 6 + 0 = 5\\) hai, \\(-5\\) nahi; aur \\(A^tA\\) ki entry (1, 2) \\(= C_1 \\cdot C_2 = -2 + 0 - 15 = -17\\) hai, \\(-3\\) nahi. Sahi jawab wohi hain jo upar step by step nikale gaye. Key ka teesra jawab \\((A^t)^t = A\\) sahi hai."
+          }
+        ]
+      }
+    }
+  ]
+}

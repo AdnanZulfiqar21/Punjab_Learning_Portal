@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-2-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-2-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 65,
+          "pdf_to": 65,
+          "note": "Exercise 4.2, Question 7: Find |AA^t| and |A^tA|, parts (i)-(ii) (book page 60)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(i)",
+            "prompt": "7 (i) Find \\(|AA^{t}|\\) and \\(|A^{t}A|\\) if \\(A = \\begin{bmatrix} -3 & 2 & -1 \\\\ 2 & 1 & 3 \\end{bmatrix}\\).",
+            "explanation": "\\(A\\) is \\(2 \\times 3\\), so \\(A\\) itself has no determinant; but \\(AA^{t}\\) (\\(2 \\times 2\\)) and \\(A^{t}A\\) (\\(3 \\times 3\\)) are square.\nWe must form both products and find their determinants.\nPlan: write \\(A^{t}\\), multiply (row by column), then evaluate each determinant.",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix} -3 & 2 & -1 \\\\ 2 & 1 & 3 \\end{bmatrix}\\)\nTo find: \\(|AA^{t}|\\) and \\(|A^{t}A|\\).\nMethod: Transpose (rows become columns), matrix multiplication (entry = row of the first \\(\\cdot\\) column of the second), then the determinant rules.",
+              "Write the transpose\n\\[A^{t} = \\begin{bmatrix} -3 & 2 \\\\ 2 & 1 \\\\ -1 & 3 \\end{bmatrix}\\]\nWhy: Row 1 of \\(A\\) becomes column 1 of \\(A^{t}\\), row 2 becomes column 2. \\(A^{t}\\) is \\(3 \\times 2\\).",
+              "Find \\(AA^{t}\\) (\\(2 \\times 3\\) times \\(3 \\times 2\\) gives \\(2 \\times 2\\))\n\\[(1,1):\\ 9 + 4 + 1 = 14\\]\n\\[(1,2):\\ -6 + 2 - 3 = -7\\]\n\\[(2,1):\\ -6 + 2 - 3 = -7\\]\n\\[(2,2):\\ 4 + 1 + 9 = 14\\]\n\\[AA^{t} = \\begin{bmatrix} 14 & -7 \\\\ -7 & 14 \\end{bmatrix}\\]\nWhy: Entry \\((i, j)\\) = row \\(i\\) of \\(A\\) times column \\(j\\) of \\(A^{t}\\) (which is row \\(j\\) of \\(A\\)).",
+              "\\(|AA^{t}|\\)\n\\[|AA^{t}| = (14)(14) - (-7)(-7)\\]\n\\[= 196 - 49 = 147\\]\nWhy: \\(2 \\times 2\\) rule.",
+              "Find \\(A^{t}A\\) (\\(3 \\times 2\\) times \\(2 \\times 3\\) gives \\(3 \\times 3\\))\n\\[A^{t}A = \\begin{bmatrix} 13 & -4 & 9 \\\\ -4 & 5 & 1 \\\\ 9 & 1 & 10 \\end{bmatrix}\\]\nWhy: Entry \\((i, j)\\) = column \\(i\\) of \\(A\\) \\(\\cdot\\) column \\(j\\) of \\(A\\). For example \\((1,1) = 9 + 4 = 13\\), \\((1,2) = -6 + 2 = -4\\), \\((1,3) = 3 + 6 = 9\\), \\((2,2) = 4 + 1 = 5\\), \\((2,3) = -2 + 3 = 1\\), \\((3,3) = 1 + 9 = 10\\).",
+              "\\(|A^{t}A|\\) (expand along row 1)\n\\[= 13(50 - 1) + 4(-40 - 9) + 9(-4 - 45)\\]\n\\[= 637 - 196 - 441\\]\n\\[= 0\\]\nWhy: Signs \\(+,\\,-,\\,+\\); minors \\(49\\), \\(-49\\), \\(-49\\). The middle term is \\(-(-4)(-49) = -196\\).",
+              "Check\n\\[R_1 + R_2 = (9, 1, 10) = R_3\\]\nWhy: One row is the sum of the other two, so \\(R_3 - R_1 - R_2\\) is a zero row: the determinant must be 0. (In general \\(A^{t}A\\) here is made from only two columns of length 2, so it cannot have a non-zero \\(3 \\times 3\\) determinant.)"
+            ],
+            "final_answer": "\\(|AA^{t}| = 147,\\quad |A^{t}A| = 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(ii)",
+            "prompt": "7 (ii) Find \\(|AA^{t}|\\) and \\(|A^{t}A|\\) if \\(A = \\begin{bmatrix} 3 & 1 \\\\ 2 & 2 \\\\ 1 & 3 \\end{bmatrix}\\).",
+            "explanation": "Now \\(A\\) is \\(3 \\times 2\\): \\(AA^{t}\\) is \\(3 \\times 3\\) and \\(A^{t}A\\) is \\(2 \\times 2\\).\nPlan: write \\(A^{t}\\), form both products, evaluate the determinants.",
+            "steps": [
+              "Given: \\(A = \\begin{bmatrix} 3 & 1 \\\\ 2 & 2 \\\\ 1 & 3 \\end{bmatrix}\\)\nTo find: \\(|AA^{t}|\\) and \\(|A^{t}A|\\).\nMethod: Transpose, multiplication, determinants.",
+              "Write the transpose\n\\[A^{t} = \\begin{bmatrix} 3 & 2 & 1 \\\\ 1 & 2 & 3 \\end{bmatrix}\\]\nWhy: Columns of \\(A\\) become rows of \\(A^{t}\\).",
+              "Find \\(AA^{t}\\) (\\(3 \\times 3\\))\n\\[AA^{t} = \\begin{bmatrix} 10 & 8 & 6 \\\\ 8 & 8 & 8 \\\\ 6 & 8 & 10 \\end{bmatrix}\\]\nWhy: Entry \\((i, j)\\) = row \\(i\\) of \\(A\\) \\(\\cdot\\) row \\(j\\) of \\(A\\): \\((1,1) = 9 + 1 = 10\\), \\((1,2) = 6 + 2 = 8\\), \\((1,3) = 3 + 3 = 6\\), \\((2,2) = 4 + 4 = 8\\), \\((2,3) = 2 + 6 = 8\\), \\((3,3) = 1 + 9 = 10\\).",
+              "\\(|AA^{t}|\\) (expand along row 1)\n\\[= 10(80 - 64) - 8(80 - 48) + 6(64 - 48)\\]\n\\[= 160 - 256 + 96 = 0\\]\nWhy: Signs \\(+,\\,-,\\,+\\); minors \\(16, 32, 16\\).",
+              "Find \\(A^{t}A\\) (\\(2 \\times 2\\))\n\\[A^{t}A = \\begin{bmatrix} 9+4+1 & 3+4+3 \\\\ 3+4+3 & 1+4+9 \\end{bmatrix}\\]\n\\[= \\begin{bmatrix} 14 & 10 \\\\ 10 & 14 \\end{bmatrix}\\]\nWhy: Entry \\((i, j)\\) = column \\(i\\) of \\(A\\) \\(\\cdot\\) column \\(j\\) of \\(A\\).",
+              "\\(|A^{t}A|\\)\n\\[= (14)(14) - (10)(10)\\]\n\\[= 196 - 100 = 96\\]\nWhy: \\(2 \\times 2\\) rule.",
+              "Check\n\\[R_1 + R_3 = (16, 16, 16) = 2R_2\\]\nWhy: In \\(AA^{t}\\), \\(R_1 + R_3 - 2R_2\\) is a zero row, so \\(|AA^{t}| = 0\\) as found."
+            ],
+            "final_answer": "\\(|AA^{t}| = 0,\\quad |A^{t}A| = 96\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

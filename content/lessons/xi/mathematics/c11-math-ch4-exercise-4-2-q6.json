@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-2-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-2-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 65,
+          "pdf_to": 65,
+          "note": "Exercise 4.2, Question 6: Show that the determinant equals (x+4)(x-2)^2 (book page 60)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. Show that: \\(\\begin{vmatrix} x & 2 & 2 \\\\ 2 & x & 2 \\\\ 2 & 2 & x \\end{vmatrix} = (x+4)(x-2)^2\\).",
+            "explanation": "We must show the determinant factorises as \\((x+4)(x-2)^2\\).\nEvery row adds up to \\(x + 4\\), so adding the columns gives that factor.\nPlan: \\(C_1 + C_2 + C_3 \\to C_1\\), take \\(x+4\\) out, make zeros, read the triangular form.",
+            "steps": [
+              "Given: \\(\\Delta = \\begin{vmatrix} x & 2 & 2 \\\\ 2 & x & 2 \\\\ 2 & 2 & x \\end{vmatrix}\\)\nTo prove: \\(\\Delta = (x+4)(x-2)^2\\)\nMethod: Property vii (add columns; subtract rows), Property v (factor out), Property viii (triangular determinant).",
+              "Add all columns into column 1\n\\[C_1 + C_2 + C_3 \\to C_1\\]\n\\[\\Delta = \\begin{vmatrix} x+4 & 2 & 2 \\\\ x+4 & x & 2 \\\\ x+4 & 2 & x \\end{vmatrix}\\]\nWhy: Each row: \\(x + 2 + 2 = x + 4\\).",
+              "Take \\(x+4\\) out of column 1\n\\[\\Delta = (x+4)\\begin{vmatrix} 1 & 2 & 2 \\\\ 1 & x & 2 \\\\ 1 & 2 & x \\end{vmatrix}\\]\nWhy: Property v.",
+              "Subtract row 1 from rows 2 and 3\n\\[R_2 - R_1 \\to R_2,\\quad R_3 - R_1 \\to R_3\\]\n\\[\\Delta = (x+4)\\begin{vmatrix} 1 & 2 & 2 \\\\ 0 & x-2 & 0 \\\\ 0 & 0 & x-2 \\end{vmatrix}\\]\nWhy: \\(x - 2\\), \\(2 - 2 = 0\\). Now the determinant is upper triangular.",
+              "Multiply the diagonal\n\\[\\Delta = (x+4) \\cdot 1 \\cdot (x-2)(x-2)\\]\n\\[= (x+4)(x-2)^2\\]\nWhy: Property viii.",
+              "Check with a number\n\\[x = 0:\\ \\begin{vmatrix} 0 & 2 & 2 \\\\ 2 & 0 & 2 \\\\ 2 & 2 & 0 \\end{vmatrix} = 0 - 2(-4) + 2(4) = 16\\]\n\\[(0+4)(0-2)^2 = 16 \\;\\checkmark\\]\nWhy: Expansion along row 1 gives the same value as the formula."
+            ],
+            "final_answer": "Hence proved: \\(\\Delta = (x+4)(x-2)^2\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

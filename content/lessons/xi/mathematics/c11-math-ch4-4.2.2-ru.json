@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-4.2.2-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/4.2.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 54,
+          "pdf_to": 55,
+          "note": "Book p. 49-50: 4.2.2 Subtraction of Matrices and Example 1 ((A + B)^t = A^t + B^t), whose solution continues on p. 50. Teaching notes, the extra steps of the example, Key points and Common mistake are ours."
+        }
+      ],
+      "title": "4.2.2 Subtraction of Matrices (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH4-4.2.2",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Addition ke baad ab subtraction (tafreeq). Achhi khabar yeh hai ke is mein koi naya qaida nahin: subtraction asal mein addition hi hai, bas ek matrix ke sign badal kar."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki definition: agar \\(A = [a_{ij}]\\) aur \\(B = [b_{ij}]\\) dono \\(m \\times n\\) order ki matrices hon, to \\(A\\) mein se \\(B\\) ki tafreeq yun define hoti hai:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[A - B = A + (-B)\\]\n\\[= [a_{ij}] + [-b_{ij}]\\]\n\\[= [a_{ij} + (-b_{ij})]\\]\n\\[= [a_{ij} - b_{ij}]\\]\njahan \\(i = 1, 2, 3, \\ldots, m;\\ j = 1, 2, 3, \\ldots, n\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is tarah matrix \\(A - B\\) yun banti hai ke \\(B\\) ki har entry ko \\(A\\) ki usi position wali entry mein se tafreeq kar diya jaye. Har line ko samjhiye: pehli line kehti hai ke \\(B\\) ko ghatana aur \\(-B\\) ko jama karna ek hi baat hai, bilkul jaise \\(7 - 3 = 7 + (-3)\\). Baqi lines sirf yahi baat entries ki zubaan mein likhti hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(-B\\) woh matrix hai jis ki har entry \\(B\\) ki entry ka negative hai (yeh \\((-1)B\\) hai, 4.2.3 dekhiye). Is liye subtraction mein bhi wahi shart hai jo addition mein: \\(A\\) aur \\(B\\) ka order same ho.\nDhyan dein: subtraction mein tarteeb maayne rakhti hai. \\(B - A = -(A - B)\\), yani \\(B - A\\) mein har entry ka sign \\(A - B\\) se ulta hota hai. Is liye aam tor par \\(A - B \\ne B - A\\), jaise \\(7 - 3 \\ne 3 - 7\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari misaal hai, kitab ki nahin.\n\\[\\begin{bmatrix}5 & 3 \\\\ 2 & 7\\end{bmatrix} - \\begin{bmatrix}1 & 4 \\\\ -2 & 0\\end{bmatrix}\\]\nOrder: dono \\(2 \\times 2\\), theek hai. Ab har position par pehli matrix ki entry minus doosri ki entry:\n\\[= \\begin{bmatrix} 5-1 & 3-4 \\\\ 2-(-2) & 7-0 \\end{bmatrix}\\]\n\\[= \\begin{bmatrix}4 & -1 \\\\ 4 & 7\\end{bmatrix}\\]\nKyun: \\(2 - (-2) = 2 + 2 = 4\\); minus ka minus plus ban jata hai. Yahi jagah hai jahan sab se zyada ghalti hoti hai.\nTasdeeq: jawab mein doosri matrix wapas jama karein: \\(\\begin{bmatrix} 4 & -1 \\\\ 4 & 7 \\end{bmatrix} + \\begin{bmatrix} 1 & 4 \\\\ -2 & 0 \\end{bmatrix} = \\begin{bmatrix} 5 & 3 \\\\ 2 & 7 \\end{bmatrix}\\), jo pehli matrix hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ka Example 1 is definition ke foran baad chhapa hai. Dilchasp baat yeh hai ke heading to subtraction ki hai, lekin example mein addition aur transpose dono ki mashq ek saath hai. Is example se pehle do cheezein dobara yaad kar lijiye: (1) jama sirf same order ki matrices ka hota hai, aur (2) transpose mein rows columns ban jati hain aur order ulat jata hai. Example mein matrices \\(3 \\times 4\\) hain, yani bari hain, is liye har row alag likh kar jama karenge taa ke koi entry chhoot na jaye. Aaiye qadam ba qadam karte hain."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "If \\(A = \\begin{bmatrix}1 & 0 & -1 & 2 \\\\ 3 & 1 & 2 & 5 \\\\ 0 & -2 & 1 & 6\\end{bmatrix}\\) and \\(B = \\begin{bmatrix}2 & -1 & 3 & 1 \\\\ 1 & 3 & -1 & 4 \\\\ 3 & 1 & 2 & -1\\end{bmatrix}\\), then show that \\((A + B)^{t} = A^{t} + B^{t}\\).",
+            "steps": [
+              "Given: \\(A\\) aur \\(B\\), dono \\(3 \\times 4\\) order ki.\nTo prove: \\((A + B)^{t} = A^{t} + B^{t}\\).\nMethod: dono sides alag alag nikalenge. Left side: pehle jama, phir transpose. Right side: pehle har matrix ka transpose, phir jama. Agar dono jawab barabar matrices niklein to baat saabit ho jayegi. Yeh \"dono taraf alag alag hal karo, phir milao\" wala tareeqa proofs mein bohat kaam aata hai.",
+              "Step 1: \\(A + B\\) nikalein\n\\[A + B = \\begin{bmatrix}1 & 0 & -1 & 2 \\\\ 3 & 1 & 2 & 5 \\\\ 0 & -2 & 1 & 6\\end{bmatrix}\\]\n\\[+ \\begin{bmatrix}2 & -1 & 3 & 1 \\\\ 1 & 3 & -1 & 4 \\\\ 3 & 1 & 2 & -1\\end{bmatrix}\\]\nRow 1: \\(1+2,\\ 0+(-1),\\ -1+3,\\ 2+1\\)\nRow 2: \\(3+1,\\ 1+3,\\ 2+(-1),\\ 5+4\\)\nRow 3: \\(0+3,\\ -2+1,\\ 1+2,\\ 6+(-1)\\)\n\\[A + B = \\begin{bmatrix}3 & -1 & 2 & 3 \\\\ 4 & 4 & 1 & 9 \\\\ 3 & -1 & 3 & 5\\end{bmatrix}\\]\nKyun: \\(A\\) aur \\(B\\) dono ka order \\(3 \\times 4\\) hai, is liye yeh addition ke liye conformable hain. Har position par dono entries jama ki hain. Negative entries ko bracket mein rakha, jaise \\(0 + (-1) = -1\\), taa ke sign ghalat na ho.",
+              "Step 2: Jama ka transpose\n\\[(A + B)^{t} = \\begin{bmatrix}3 & 4 & 3 \\\\ -1 & 4 & -1 \\\\ 2 & 1 & 3 \\\\ 3 & 9 & 5\\end{bmatrix} \\quad \\text{(i)}\\]\nKyun: transpose mein rows columns ban jati hain. \\(A + B\\) ki pehli row \\(3, -1, 2, 3\\) pehla column bani, doosri row doosra column, teesri row teesra column. Order \\(3 \\times 4\\) se \\(4 \\times 3\\) ho gaya.",
+              "Step 3: \\(A\\) aur \\(B\\) ke transpose\n\\[A^{t} = \\begin{bmatrix}1 & 3 & 0 \\\\ 0 & 1 & -2 \\\\ -1 & 2 & 1 \\\\ 2 & 5 & 6\\end{bmatrix}\\]\n\\[B^{t} = \\begin{bmatrix}2 & 1 & 3 \\\\ -1 & 3 & 1 \\\\ 3 & -1 & 2 \\\\ 1 & 4 & -1\\end{bmatrix}\\]\nKyun: right side mein pehle transpose chahiye. Har matrix ki rows us ke columns ban gayin. Dhyan dein: transpose likhte waqt row ko upar se neeche column mein likhiye, ulta nahin.",
+              "Step 4: Transposes ko jama karein\nRow 1: \\(1+2,\\ 3+1,\\ 0+3\\)\nRow 2: \\(0+(-1),\\ 1+3,\\ -2+1\\)\nRow 3: \\(-1+3,\\ 2+(-1),\\ 1+2\\)\nRow 4: \\(2+1,\\ 5+4,\\ 6+(-1)\\)\n\\[A^{t} + B^{t} = \\begin{bmatrix}3 & 4 & 3 \\\\ -1 & 4 & -1 \\\\ 2 & 1 & 3 \\\\ 3 & 9 & 5\\end{bmatrix} \\quad \\text{(ii)}\\]\nKyun: \\(A^{t}\\) aur \\(B^{t}\\) dono \\(4 \\times 3\\) hain, is liye khana ba khana jama ho sakti hain.",
+              "Step 5: (i) aur (ii) ka muqabla\nDono matrices ka order \\(4 \\times 3\\) hai aur har position ki entries barabar hain, is liye\n\\[(A + B)^{t} = A^{t} + B^{t}\\]\nKyun: 4.1 mein barabar matrices ki definition yahi thi: same order aur same corresponding entries.",
+              "Tasdeeq: ek entry haath se dekhiye. \\((A + B)^{t}\\) ki row 2, column 3 wali entry asal mein \\(A + B\\) ki row 3, column 2 wali entry hai: \\(-2 + 1 = -1\\). \\(A^{t} + B^{t}\\) mein usi jagah \\(-2 + 1 = -1\\) hai. Dono barabar."
+            ],
+            "answer": "(i) aur (ii) se \\((A + B)^{t} = A^{t} + B^{t}\\). Saabit ho gaya."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 1 ne sirf in do matrices ke liye ek aisa qaida dikhaya jo same order ki har matrices par sach hai: jama ka transpose = transposes ka jama. Wajah: \\((A + B)^{t}\\) ki row \\(i\\), column \\(j\\) wali entry \\(a_{ji} + b_{ji}\\) hai, aur \\(A^{t} + B^{t}\\) mein bhi usi jagah bilkul yahi entry hai. Isi tarah tafreeq ke liye bhi: \\((A - B)^{t} = A^{t} - B^{t}\\). Imtihan mein aisa sawal aaye to Example 1 wala tareeqa hi apnaiye: dono sides alag alag nikaliye, har ek ko (i) aur (ii) ka number dijiye, aur aakhir mein likhiye \"From (i) and (ii)\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Agar \\(A = \\begin{bmatrix} 3 & 1 \\end{bmatrix}\\) aur \\(B = \\begin{bmatrix} 1 & 5 \\end{bmatrix}\\), to \\(A - B\\) aur \\(B - A\\) kya hain?\nJawab: \\(A - B = \\begin{bmatrix} 2 & -4 \\end{bmatrix}\\) aur \\(B - A = \\begin{bmatrix} -2 & 4 \\end{bmatrix}\\). Dekhiye, har entry ka sign ulta hai: \\(B - A = -(A - B)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(A - B = A + (-B) = [a_{ij} - b_{ij}]\\); \\(A\\) aur \\(B\\) ka order same hona chahiye.\n2. Khana ba khana tafreeq: hamesha \\(A\\) ki entry minus \\(B\\) ki entry.\n3. Aam tor par \\(A - B \\ne B - A\\); \\(B - A = -(A - B)\\).\n4. \\((A + B)^{t} = A^{t} + B^{t}\\) (Example 1)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Ulti tarteeb se tafreeq (\\(b_{ij} - a_{ij}\\)), jis se har sign badal jata hai.\n2. Negative entries ke saath sign ki ghalti: \\(2 - (-2) = 4\\) hai, 0 nahin. Bachne ka tareeqa: negative entry ko hamesha bracket mein likhiye.\n3. Example 1 mein \\(A + B\\) ki row ko \\((A + B)^{t}\\) ki row hi likh dena; transpose mein woh column banti hai."
+          }
+        ]
+      }
+    }
+  ]
+}

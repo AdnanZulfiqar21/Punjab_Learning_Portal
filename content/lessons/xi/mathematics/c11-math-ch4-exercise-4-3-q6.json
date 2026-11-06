@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-3-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-3-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 82,
+          "pdf_to": 82,
+          "note": "Exercise 4.3, Question 6: book page 77 (PDF 82); answer key PDF 303"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(i)",
+            "prompt": "6 (i) Solve the following system of homogeneous linear equations by using Gaussian elimination method: \\(x + 4x - 2z = 0\\), \\(2x + y + 5z = 0\\), \\(5x + 2y + 8z = 0\\)",
+            "explanation": "The first equation is printed with a misprint (\\(4x\\) for \\(4y\\)); we solve \\(x + 4y - 2z = 0\\).\nA homogeneous system: all constants are 0.\nWe must decide whether only \\((0, 0, 0)\\) works or infinitely many solutions exist, and find them.\nPlan: echelon form, count the rank, compare with 3, back substitute.",
+            "steps": [
+              "Given (with the misprint corrected, see the Book correction below): \\(x + 4y - 2z = 0\\), \\(2x + y + 5z = 0\\), \\(5x + 2y + 8z = 0\\)\nTo find: all solutions by Gaussian elimination.\nMethod: Reduce the augmented matrix to echelon form. A homogeneous system always has the trivial solution \\((0, 0, 0)\\). If rank of \\(A\\) = 3 (number of variables) that is the only solution; if rank \\(< 3\\) there are infinitely many (non-trivial) solutions.",
+              "Augmented matrix\n\\[\\left[\\begin{array}{ccc|c}1 & 4 & -2 & 0 \\\\ 2 & 1 & 5 & 0 \\\\ 5 & 2 & 8 & 0\\end{array}\\right]\\]\nWhy: The last column is all zeros because every equation equals 0.",
+              "Clear column 1 below the leading 1\nBy \\(R_2 + (-2)R_1 \\to R_2'\\), \\(R_3 + (-5)R_1 \\to R_3'\\)\n\\(R_2'\\): \\(2 - 2 = 0\\), \\(1 - 8 = -7\\), \\(5 + 4 = 9\\) | \\(0 + 0 = 0\\)\n\\(R_3'\\): \\(5 - 5 = 0\\), \\(2 - 20 = -18\\), \\(8 + 10 = 18\\) | \\(0 + 0 = 0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & -2 & 0 \\\\ 0 & -7 & 9 & 0 \\\\ 0 & -18 & 18 & 0\\end{array}\\right]\\]\nWhy: \\(2 + (-2)(1) = 0\\) and \\(5 + (-5)(1) = 0\\). The zero column never changes.",
+              "Simplify row 3\nBy \\(\\left(-\\frac{1}{18}\\right)R_3 \\to R_3'\\)\n\\(R_3'\\): \\(0\\), \\(1\\), \\(-1\\) | \\(0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & -2 & 0 \\\\ 0 & -7 & 9 & 0 \\\\ 0 & 1 & -1 & 0\\end{array}\\right]\\]\nWhy: Row 3 is \\((0, -18, 18)\\); dividing by \\(-18\\) gives \\((0, 1, -1)\\).",
+              "Put the row with leading 1 second\nBy \\(R_2 \\leftrightarrow R_3\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & -2 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & -7 & 9 & 0\\end{array}\\right]\\]\nWhy: Now row 2 has a ready leading 1.",
+              "Clear column 2 below the leading 1\nBy \\(R_3 + 7R_2 \\to R_3'\\)\n\\(R_3'\\): \\(0 + 0 = 0\\), \\(-7 + 7 = 0\\), \\(9 - 7 = 2\\) | \\(0 + 0 = 0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & -2 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 0 & 2 & 0\\end{array}\\right]\\]\nWhy: \\(-7 + 7(1) = 0\\).",
+              "Leading 1 in row 3\nBy \\(\\frac{1}{2}R_3 \\to R_3'\\)\n\\(R_3'\\): \\(0\\), \\(0\\), \\(1\\) | \\(0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & -2 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 0 & 1 & 0\\end{array}\\right]\\]\nWhy: Dividing by 2. Echelon form: three non-zero rows.",
+              "Rank and solution\nRank of \\(A\\) = 3 = number of variables. The echelon form stands for\n\\[x + 4y - 2z = 0\\]\n\\[y - z = 0\\]\n\\[z = 0\\]\nBack substitution: \\(z = 0\\), then \\(y = z = 0\\), then \\(x = -4y + 2z = 0\\).\nWhy: Rule I: when the rank equals the number of variables, a homogeneous system has only the trivial solution.",
+              "Check with the determinant\n\\[|A| = 1(8 - 10) - 4(16 - 25) - 2(4 - 5)\\]\n\\[= -2 + 36 + 2 = 36\\]\nWhy: \\(|A| \\neq 0\\) is the same as rank 3, so only \\((0, 0, 0)\\) works."
+            ],
+            "final_answer": "Solution set \\(\\{(0, 0, 0)\\}\\) (only the trivial solution)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the first equation of 6(i) as \\(x + 4x - 2z = 0\\). It should read \\(x + 4y - 2z = 0\\): each equation of the system has \\(x\\), \\(y\\) and \\(z\\), and the answer key's \\(\\{(0, 0, 0)\\}\\) fits this equation (\\(|A| = 36 \\neq 0\\)). Even taken literally (\\(5x - 2z = 0\\)) the determinant is \\(-8 \\neq 0\\), so the answer, only the trivial solution, is the same."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(ii)",
+            "prompt": "6 (ii) Solve the following system of homogeneous linear equations by using Gaussian elimination method: \\(x_1 + 4x_2 + 2x_3 = 0\\), \\(2x_1 + x_2 - 3x_3 = 0\\), \\(3x_1 + 2x_2 - 4x_3 = 0\\)",
+            "explanation": "A homogeneous system: all constants are 0.\nWe must decide whether only \\((0, 0, 0)\\) works or infinitely many solutions exist, and find them.\nPlan: echelon form, count the rank, compare with 3, back substitute.",
+            "steps": [
+              "Given: \\(x_1 + 4x_2 + 2x_3 = 0\\), \\(2x_1 + x_2 - 3x_3 = 0\\), \\(3x_1 + 2x_2 - 4x_3 = 0\\)\nTo find: all solutions by Gaussian elimination.\nMethod: Reduce the augmented matrix to echelon form. A homogeneous system always has the trivial solution \\((0, 0, 0)\\). If rank of \\(A\\) = 3 (number of variables) that is the only solution; if rank \\(< 3\\) there are infinitely many (non-trivial) solutions.",
+              "Augmented matrix\n\\[\\left[\\begin{array}{ccc|c}1 & 4 & 2 & 0 \\\\ 2 & 1 & -3 & 0 \\\\ 3 & 2 & -4 & 0\\end{array}\\right]\\]\nWhy: The last column is all zeros because every equation equals 0.",
+              "Clear column 1 below the leading 1\nBy \\(R_2 + (-2)R_1 \\to R_2'\\), \\(R_3 + (-3)R_1 \\to R_3'\\)\n\\(R_2'\\): \\(2 - 2 = 0\\), \\(1 - 8 = -7\\), \\(-3 - 4 = -7\\) | \\(0 + 0 = 0\\)\n\\(R_3'\\): \\(3 - 3 = 0\\), \\(2 - 12 = -10\\), \\(-4 - 6 = -10\\) | \\(0 + 0 = 0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & 2 & 0 \\\\ 0 & -7 & -7 & 0 \\\\ 0 & -10 & -10 & 0\\end{array}\\right]\\]\nWhy: \\(2 + (-2)(1) = 0\\) and \\(3 + (-3)(1) = 0\\).",
+              "Leading 1 in row 2\nBy \\(\\left(-\\frac{1}{7}\\right)R_2 \\to R_2'\\)\n\\(R_2'\\): \\(0\\), \\(1\\), \\(1\\) | \\(0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & 2 & 0 \\\\ 0 & 1 & 1 & 0 \\\\ 0 & -10 & -10 & 0\\end{array}\\right]\\]\nWhy: Row 2 is \\((0, -7, -7)\\); dividing by \\(-7\\) gives \\((0, 1, 1)\\).",
+              "Clear column 2 below the leading 1\nBy \\(R_3 + 10R_2 \\to R_3'\\)\n\\(R_3'\\): \\(0 + 0 = 0\\), \\(-10 + 10 = 0\\), \\(-10 + 10 = 0\\) | \\(0 + 0 = 0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & 2 & 0 \\\\ 0 & 1 & 1 & 0 \\\\ 0 & 0 & 0 & 0\\end{array}\\right]\\]\nWhy: \\(-10 + 10(1) = 0\\) and \\(-10 + 10(1) = 0\\): row 3 becomes a zero row.",
+              "Rank and the reduced system\nRank of \\(A\\) = 2 < 3 = number of variables. The echelon form stands for\n\\[x_1 + 4x_2 + 2x_3 = 0\\]\n\\[x_2 + x_3 = 0\\]\n\\[0x_3 = 0\\]\nWhy: Rule II: rank less than the number of variables means infinitely many (non-trivial) solutions; one variable is free.",
+              "Let \\(x_3 = t\\) and back substitute\n\\[x_2 = -t\\]\n\\[x_1 = -4(-t) - 2t\\]\n\\[x_1 = 2t\\]\nWhy: From the second equation \\(x_2 = -t\\); put it in the first equation and solve for \\(x_1\\).",
+              "Check in the original equations\n\\[(2t) + 4(-t) + 2(t) = 0 \\;\\checkmark\\]\n\\[2(2t) + (-t) - 3(t) = 0 \\;\\checkmark\\]\n\\[3(2t) + 2(-t) - 4(t) = 0 \\;\\checkmark\\]\nWhy: The general solution satisfies every equation for any \\(t\\). For example \\(t = 1\\) gives \\((2, -1, 1)\\)."
+            ],
+            "final_answer": "\\(x_1 = 2t,\\ x_2 = -t,\\ x_3 = t\\) for any value of \\(t\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(iii)",
+            "prompt": "6 (iii) Solve the following system of homogeneous linear equations by using Gaussian elimination method: \\(x_1 + 2x_2 - x_3 = 0\\), \\(x_1 - x_2 + 5x_3 = 0\\), \\(2x_1 + x_2 + 4x_3 = 0\\)",
+            "explanation": "A homogeneous system: all constants are 0.\nWe must decide whether only \\((0, 0, 0)\\) works or infinitely many solutions exist, and find them.\nPlan: echelon form, count the rank, compare with 3, back substitute.",
+            "steps": [
+              "Given: \\(x_1 + 2x_2 - x_3 = 0\\), \\(x_1 - x_2 + 5x_3 = 0\\), \\(2x_1 + x_2 + 4x_3 = 0\\)\nTo find: all solutions by Gaussian elimination.\nMethod: Reduce the augmented matrix to echelon form. A homogeneous system always has the trivial solution \\((0, 0, 0)\\). If rank of \\(A\\) = 3 (number of variables) that is the only solution; if rank \\(< 3\\) there are infinitely many (non-trivial) solutions.",
+              "Augmented matrix\n\\[\\left[\\begin{array}{ccc|c}1 & 2 & -1 & 0 \\\\ 1 & -1 & 5 & 0 \\\\ 2 & 1 & 4 & 0\\end{array}\\right]\\]\nWhy: The last column is all zeros because every equation equals 0.",
+              "Clear column 1 below the leading 1\nBy \\(R_2 + (-1)R_1 \\to R_2'\\), \\(R_3 + (-2)R_1 \\to R_3'\\)\n\\(R_2'\\): \\(1 - 1 = 0\\), \\(-1 - 2 = -3\\), \\(5 + 1 = 6\\) | \\(0 + 0 = 0\\)\n\\(R_3'\\): \\(2 - 2 = 0\\), \\(1 - 4 = -3\\), \\(4 + 2 = 6\\) | \\(0 + 0 = 0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 2 & -1 & 0 \\\\ 0 & -3 & 6 & 0 \\\\ 0 & -3 & 6 & 0\\end{array}\\right]\\]\nWhy: \\(1 + (-1)(1) = 0\\) and \\(2 + (-2)(1) = 0\\).",
+              "Leading 1 in row 2\nBy \\(\\left(-\\frac{1}{3}\\right)R_2 \\to R_2'\\)\n\\(R_2'\\): \\(0\\), \\(1\\), \\(-2\\) | \\(0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 2 & -1 & 0 \\\\ 0 & 1 & -2 & 0 \\\\ 0 & -3 & 6 & 0\\end{array}\\right]\\]\nWhy: Row 2 is \\((0, -3, 6)\\); dividing by \\(-3\\) gives \\((0, 1, -2)\\).",
+              "Clear column 2 below the leading 1\nBy \\(R_3 + 3R_2 \\to R_3'\\)\n\\(R_3'\\): \\(0 + 0 = 0\\), \\(-3 + 3 = 0\\), \\(6 - 6 = 0\\) | \\(0 + 0 = 0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 2 & -1 & 0 \\\\ 0 & 1 & -2 & 0 \\\\ 0 & 0 & 0 & 0\\end{array}\\right]\\]\nWhy: \\(-3 + 3(1) = 0\\) and \\(6 + 3(-2) = 0\\): row 3 becomes a zero row.",
+              "Rank and the reduced system\nRank of \\(A\\) = 2 < 3 = number of variables. The echelon form stands for\n\\[x_1 + 2x_2 - x_3 = 0\\]\n\\[x_2 - 2x_3 = 0\\]\n\\[0x_3 = 0\\]\nWhy: Rule II: rank less than the number of variables means infinitely many (non-trivial) solutions; one variable is free.",
+              "Let \\(x_3 = t\\) and back substitute\n\\[x_2 = 2t\\]\n\\[x_1 = -2(2t) + 1t\\]\n\\[x_1 = -3t\\]\nWhy: From the second equation \\(x_2 = 2t\\); put it in the first equation and solve for \\(x_1\\).",
+              "Check in the original equations\n\\[(-3t) + 2(2t) - (t) = 0 \\;\\checkmark\\]\n\\[(-3t) - (2t) + 5(t) = 0 \\;\\checkmark\\]\n\\[2(-3t) + (2t) + 4(t) = 0 \\;\\checkmark\\]\nWhy: The general solution satisfies every equation for any \\(t\\). For example \\(t = 1\\) gives \\((-3, 2, 1)\\)."
+            ],
+            "final_answer": "\\(x_1 = -3t,\\ x_2 = 2t,\\ x_3 = t\\) for any value of \\(t\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

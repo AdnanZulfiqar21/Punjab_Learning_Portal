@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-3-Q6-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-3-q6",
+      "title": "Question 6 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH4-EXERCISE-4-3-Q6",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 82,
+          "pdf_to": 82,
+          "note": "Exercise 4.3, Question 6: book page 77 (PDF 82); answer key PDF 303"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(i)",
+            "prompt": "6 (i) Solve the following system of homogeneous linear equations by using Gaussian elimination method: \\(x + 4x - 2z = 0\\), \\(2x + y + 5z = 0\\), \\(5x + 2y + 8z = 0\\)",
+            "explanation": "Pehli equation mein chhapai ki ghalti hai (\\(4y\\) ki jagah \\(4x\\) chhapa hai); hum \\(x + 4y - 2z = 0\\) hal karenge.\nYeh homogeneous system hai: sab constants 0 hain.\nHumein dekhna hai ke sirf \\((0, 0, 0)\\) hal hai ya beshumar hal hain, aur unhein likhna hai.\nPlan: echelon form, rank ginna, rank ko 3 se compare karna, phir back substitution.\nDhyan dein: homogeneous system ka hal kabhi \"koi hal nahi\" nahi hota, kyunke \\((0, 0, 0)\\) hamesha hal hai. Asal sawal yeh hai ke kya is ke ilawa bhi hal hain. Rule I: rank = variables ki tadaad ho to sirf trivial hal. Rule II: rank kam ho to beshumar hal, aur jawab ek parameter \\(t\\) ke saath likhte hain. Jawab mein \\(t\\) ki jagah koi bhi number rakh kar check kar sakte hain.",
+            "steps": [
+              "Diya gaya hai (kitab ki chhapai ki ghalti theek kar ke, neeche note dekhein): \\(x + 4y - 2z = 0\\), \\(2x + y + 5z = 0\\), \\(5x + 2y + 8z = 0\\)\nHumein find karna hai: Gaussian elimination se system ke saare hal.\nTareeqa: Augmented matrix ko echelon form mein layenge. Homogeneous system (jis mein sab constants zero hon) ka trivial hal \\((0, 0, 0)\\) hamesha hota hai. Agar rank of \\(A\\) = 3 (variables ki tadaad) ho to sirf yahi hal hai (Rule I); agar rank 3 se kam ho to beshumar (non-trivial) hal hain (Rule II).",
+              "Augmented matrix\n\\[\\left[\\begin{array}{ccc|c}1 & 4 & -2 & 0 \\\\ 2 & 1 & 5 & 0 \\\\ 5 & 2 & 8 & 0\\end{array}\\right]\\]\nKyun: Aakhri column poora zero hai kyunke har equation ka right side 0 hai. Yeh column kisi bhi row operation se nahi badlega.",
+              "Column 1 mein leading 1 ke neeche zero\nRow operation: \\(R_2 + (-2)R_1 \\to R_2'\\), \\(R_3 + (-5)R_1 \\to R_3'\\)\n\\(R_2'\\): \\(2 - 2 = 0\\), \\(1 - 8 = -7\\), \\(5 + 4 = 9\\) | \\(0 + 0 = 0\\)\n\\(R_3'\\): \\(5 - 5 = 0\\), \\(2 - 20 = -18\\), \\(8 + 10 = 18\\) | \\(0 + 0 = 0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & -2 & 0 \\\\ 0 & -7 & 9 & 0 \\\\ 0 & -18 & 18 & 0\\end{array}\\right]\\]\nKyun: \\(R_2\\) mein se \\(2R_1\\) aur \\(R_3\\) mein se \\(5R_1\\) minus kiya. Aakhri (zero) column kabhi nahi badalta, kyunke zero ka koi bhi multiple zero hi hai.",
+              "Row 3 ko aasaan karein\nRow operation: \\(\\left(-\\frac{1}{18}\\right)R_3 \\to R_3'\\)\n\\(R_3'\\): \\(0\\), \\(1\\), \\(-1\\) | \\(0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & -2 & 0 \\\\ 0 & -7 & 9 & 0 \\\\ 0 & 1 & -1 & 0\\end{array}\\right]\\]\nKyun: \\(R_3 = (0, -18, 18)\\) ke sab entries \\(-18\\) se divide ho jate hain, aur \\((0, 1, -1)\\) milta hai jis ka pivot pehle se 1 hai.",
+              "Leading 1 wali row ko doosre number par layein\nRow operation: \\(R_2 \\leftrightarrow R_3\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & -2 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & -7 & 9 & 0\\end{array}\\right]\\]\nKyun: Is tarah row 2 mein bana banaya leading 1 aa gaya aur fractions se bach gaye.",
+              "Column 2 mein leading 1 ke neeche zero\nRow operation: \\(R_3 + 7R_2 \\to R_3'\\)\n\\(R_3'\\): \\(0 + 0 = 0\\), \\(-7 + 7 = 0\\), \\(9 - 7 = 2\\) | \\(0 + 0 = 0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & -2 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 0 & 2 & 0\\end{array}\\right]\\]\nKyun: \\(R_3\\) ka column 2 wala entry \\(-7\\) hai; \\(7R_2\\) jama kiya.",
+              "Row 3 mein leading 1\nRow operation: \\(\\frac{1}{2}R_3 \\to R_3'\\)\n\\(R_3'\\): \\(0\\), \\(0\\), \\(1\\) | \\(0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & -2 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 0 & 1 & 0\\end{array}\\right]\\]\nKyun: 2 se divide kiya. Ab echelon form mein teen non-zero rows hain.",
+              "Rank aur hal\nRank of \\(A\\) = 3 = variables ki tadaad. Echelon form ka matlab yeh equations hain\n\\[x + 4y - 2z = 0\\]\n\\[y - z = 0\\]\n\\[z = 0\\]\nBack substitution: \\(z = 0\\), phir \\(y = z = 0\\), phir \\(x = -4y + 2z = 0\\).\nKyun: Rule I: jab rank variables ki tadaad ke barabar ho to homogeneous system ka sirf trivial hal hota hai. Teen independent equations teen unknowns ko poori tarah fix kar deti hain, aur woh sab zero hain.",
+              "Tasdeeq: determinant se\n\\[|A| = 1(8 - 10) - 4(16 - 25) - 2(4 - 5)\\]\n\\[= -2 + 36 + 2 = 36\\]\nKyun: \\(|A| \\neq 0\\) hona aur rank 3 hona ek hi baat hai. Is liye sirf \\((0, 0, 0)\\) hi hal hai, jaisa answer key mein bhi hai."
+            ],
+            "final_answer": "Solution set \\(\\{(0, 0, 0)\\}\\) (sirf trivial hal)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab 6(i) ki pehli equation \\(x + 4x - 2z = 0\\) chhapti hai. Sahi equation \\(x + 4y - 2z = 0\\) hai: system ki har equation mein \\(x\\), \\(y\\) aur \\(z\\) teeno hain, aur answer key ka jawab \\(\\{(0, 0, 0)\\}\\) isi equation se milta hai (\\(|A| = 36 \\neq 0\\)). Agar chhapi hui equation ko waise hi lein (\\(5x - 2z = 0\\)) tab bhi determinant \\(-8 \\neq 0\\) aata hai, is liye jawab wohi rehta hai: sirf trivial hal."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(ii)",
+            "prompt": "6 (ii) Solve the following system of homogeneous linear equations by using Gaussian elimination method: \\(x_1 + 4x_2 + 2x_3 = 0\\), \\(2x_1 + x_2 - 3x_3 = 0\\), \\(3x_1 + 2x_2 - 4x_3 = 0\\)",
+            "explanation": "Yeh homogeneous system hai: sab constants 0 hain.\nHumein dekhna hai ke sirf \\((0, 0, 0)\\) hal hai ya beshumar hal hain, aur unhein likhna hai.\nPlan: echelon form, rank ginna, rank ko 3 se compare karna, phir back substitution.\nDhyan dein: homogeneous system ka hal kabhi \"koi hal nahi\" nahi hota, kyunke \\((0, 0, 0)\\) hamesha hal hai. Asal sawal yeh hai ke kya is ke ilawa bhi hal hain. Rule I: rank = variables ki tadaad ho to sirf trivial hal. Rule II: rank kam ho to beshumar hal, aur jawab ek parameter \\(t\\) ke saath likhte hain. Jawab mein \\(t\\) ki jagah koi bhi number rakh kar check kar sakte hain.",
+            "steps": [
+              "Diya gaya hai: \\(x_1 + 4x_2 + 2x_3 = 0\\), \\(2x_1 + x_2 - 3x_3 = 0\\), \\(3x_1 + 2x_2 - 4x_3 = 0\\)\nHumein find karna hai: Gaussian elimination se system ke saare hal.\nTareeqa: Augmented matrix ko echelon form mein layenge. Homogeneous system (jis mein sab constants zero hon) ka trivial hal \\((0, 0, 0)\\) hamesha hota hai. Agar rank of \\(A\\) = 3 (variables ki tadaad) ho to sirf yahi hal hai (Rule I); agar rank 3 se kam ho to beshumar (non-trivial) hal hain (Rule II).",
+              "Augmented matrix\n\\[\\left[\\begin{array}{ccc|c}1 & 4 & 2 & 0 \\\\ 2 & 1 & -3 & 0 \\\\ 3 & 2 & -4 & 0\\end{array}\\right]\\]\nKyun: Aakhri column poora zero hai kyunke har equation ka right side 0 hai. Yeh column kisi bhi row operation se nahi badlega.",
+              "Column 1 mein leading 1 ke neeche zero\nRow operation: \\(R_2 + (-2)R_1 \\to R_2'\\), \\(R_3 + (-3)R_1 \\to R_3'\\)\n\\(R_2'\\): \\(2 - 2 = 0\\), \\(1 - 8 = -7\\), \\(-3 - 4 = -7\\) | \\(0 + 0 = 0\\)\n\\(R_3'\\): \\(3 - 3 = 0\\), \\(2 - 12 = -10\\), \\(-4 - 6 = -10\\) | \\(0 + 0 = 0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & 2 & 0 \\\\ 0 & -7 & -7 & 0 \\\\ 0 & -10 & -10 & 0\\end{array}\\right]\\]\nKyun: \\(R_2\\) mein se \\(2R_1\\) aur \\(R_3\\) mein se \\(3R_1\\) minus kiya.",
+              "Row 2 mein leading 1\nRow operation: \\(\\left(-\\frac{1}{7}\\right)R_2 \\to R_2'\\)\n\\(R_2'\\): \\(0\\), \\(1\\), \\(1\\) | \\(0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & 2 & 0 \\\\ 0 & 1 & 1 & 0 \\\\ 0 & -10 & -10 & 0\\end{array}\\right]\\]\nKyun: \\(R_2 = (0, -7, -7)\\) ko \\(-7\\) se divide kiya to \\((0, 1, 1)\\) mila.",
+              "Column 2 mein leading 1 ke neeche zero\nRow operation: \\(R_3 + 10R_2 \\to R_3'\\)\n\\(R_3'\\): \\(0 + 0 = 0\\), \\(-10 + 10 = 0\\), \\(-10 + 10 = 0\\) | \\(0 + 0 = 0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 4 & 2 & 0 \\\\ 0 & 1 & 1 & 0 \\\\ 0 & 0 & 0 & 0\\end{array}\\right]\\]\nKyun: \\(R_3 = (0, -10, -10)\\) mein \\(10R_2\\) jama kiya to poori row zero ho gayi. Iska matlab teesri equation pehli do se hi ban rahi thi, koi nayi maloomat nahi de rahi.",
+              "Rank aur bachi hui equations\nRank of \\(A\\) = 2 < 3 = variables ki tadaad. Echelon form ka matlab yeh hai\n\\[x_1 + 4x_2 + 2x_3 = 0\\]\n\\[x_2 + x_3 = 0\\]\n\\[0x_3 = 0\\]\nKyun: Rule II: rank variables se kam ho to beshumar (non-trivial) hal hote hain. Teesri equation \\(0 = 0\\) har value par sach hai, is liye ek variable azad (free) hai: us ki koi bhi value rakh sakte hain.",
+              "\\(x_3 = t\\) rakhein aur back substitution karein\n\\[x_2 = -t\\]\n\\[x_1 = -4(-t) - 2t\\]\n\\[x_1 = 2t\\]\nKyun: Free variable ko ek naam \\(t\\) diya (koi bhi real number). Doosri equation se \\(x_2 = -t\\) mila, phir pehli equation mein rakh kar \\(x_1\\) nikala. Har \\(t\\) ke liye ek naya hal milta hai.",
+              "Tasdeeq: asal equations mein\n\\[(2t) + 4(-t) + 2(t) = 0 \\;\\checkmark\\]\n\\[2(2t) + (-t) - 3(t) = 0 \\;\\checkmark\\]\n\\[3(2t) + 2(-t) - 4(t) = 0 \\;\\checkmark\\]\nKyun: General hal har \\(t\\) ke liye har equation ko poora karta hai. Misaal ke taur par \\(t = 1\\) se \\((2, -1, 1)\\) milta hai, aur \\(t = 0\\) se trivial hal \\((0, 0, 0)\\)."
+            ],
+            "final_answer": "\\(x_1 = 2t,\\ x_2 = -t,\\ x_3 = t\\) (\\(t\\) koi bhi real number)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(iii)",
+            "prompt": "6 (iii) Solve the following system of homogeneous linear equations by using Gaussian elimination method: \\(x_1 + 2x_2 - x_3 = 0\\), \\(x_1 - x_2 + 5x_3 = 0\\), \\(2x_1 + x_2 + 4x_3 = 0\\)",
+            "explanation": "Yeh homogeneous system hai: sab constants 0 hain.\nHumein dekhna hai ke sirf \\((0, 0, 0)\\) hal hai ya beshumar hal hain, aur unhein likhna hai.\nPlan: echelon form, rank ginna, rank ko 3 se compare karna, phir back substitution.\nDhyan dein: homogeneous system ka hal kabhi \"koi hal nahi\" nahi hota, kyunke \\((0, 0, 0)\\) hamesha hal hai. Asal sawal yeh hai ke kya is ke ilawa bhi hal hain. Rule I: rank = variables ki tadaad ho to sirf trivial hal. Rule II: rank kam ho to beshumar hal, aur jawab ek parameter \\(t\\) ke saath likhte hain. Jawab mein \\(t\\) ki jagah koi bhi number rakh kar check kar sakte hain.",
+            "steps": [
+              "Diya gaya hai: \\(x_1 + 2x_2 - x_3 = 0\\), \\(x_1 - x_2 + 5x_3 = 0\\), \\(2x_1 + x_2 + 4x_3 = 0\\)\nHumein find karna hai: Gaussian elimination se system ke saare hal.\nTareeqa: Augmented matrix ko echelon form mein layenge. Homogeneous system (jis mein sab constants zero hon) ka trivial hal \\((0, 0, 0)\\) hamesha hota hai. Agar rank of \\(A\\) = 3 (variables ki tadaad) ho to sirf yahi hal hai (Rule I); agar rank 3 se kam ho to beshumar (non-trivial) hal hain (Rule II).",
+              "Augmented matrix\n\\[\\left[\\begin{array}{ccc|c}1 & 2 & -1 & 0 \\\\ 1 & -1 & 5 & 0 \\\\ 2 & 1 & 4 & 0\\end{array}\\right]\\]\nKyun: Aakhri column poora zero hai kyunke har equation ka right side 0 hai. Yeh column kisi bhi row operation se nahi badlega.",
+              "Column 1 mein leading 1 ke neeche zero\nRow operation: \\(R_2 + (-1)R_1 \\to R_2'\\), \\(R_3 + (-2)R_1 \\to R_3'\\)\n\\(R_2'\\): \\(1 - 1 = 0\\), \\(-1 - 2 = -3\\), \\(5 + 1 = 6\\) | \\(0 + 0 = 0\\)\n\\(R_3'\\): \\(2 - 2 = 0\\), \\(1 - 4 = -3\\), \\(4 + 2 = 6\\) | \\(0 + 0 = 0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 2 & -1 & 0 \\\\ 0 & -3 & 6 & 0 \\\\ 0 & -3 & 6 & 0\\end{array}\\right]\\]\nKyun: \\(R_2\\) mein se \\(R_1\\) aur \\(R_3\\) mein se \\(2R_1\\) minus kiya.",
+              "Row 2 mein leading 1\nRow operation: \\(\\left(-\\frac{1}{3}\\right)R_2 \\to R_2'\\)\n\\(R_2'\\): \\(0\\), \\(1\\), \\(-2\\) | \\(0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 2 & -1 & 0 \\\\ 0 & 1 & -2 & 0 \\\\ 0 & -3 & 6 & 0\\end{array}\\right]\\]\nKyun: \\(R_2 = (0, -3, 6)\\) ko \\(-3\\) se divide kiya to \\((0, 1, -2)\\) mila.",
+              "Column 2 mein leading 1 ke neeche zero\nRow operation: \\(R_3 + 3R_2 \\to R_3'\\)\n\\(R_3'\\): \\(0 + 0 = 0\\), \\(-3 + 3 = 0\\), \\(6 - 6 = 0\\) | \\(0 + 0 = 0\\)\n\\[\\sim \\left[\\begin{array}{ccc|c}1 & 2 & -1 & 0 \\\\ 0 & 1 & -2 & 0 \\\\ 0 & 0 & 0 & 0\\end{array}\\right]\\]\nKyun: \\(R_3 = (0, -3, 6)\\) mein \\(3R_2\\) jama kiya to poori row zero ho gayi. Yani teesri equation pehli do ka nateeja hai.",
+              "Rank aur bachi hui equations\nRank of \\(A\\) = 2 < 3 = variables ki tadaad. Echelon form ka matlab yeh hai\n\\[x_1 + 2x_2 - x_3 = 0\\]\n\\[x_2 - 2x_3 = 0\\]\n\\[0x_3 = 0\\]\nKyun: Rule II: rank variables se kam ho to beshumar (non-trivial) hal hote hain. Teesri equation \\(0 = 0\\) har value par sach hai, is liye ek variable azad (free) hai: us ki koi bhi value rakh sakte hain.",
+              "\\(x_3 = t\\) rakhein aur back substitution karein\n\\[x_2 = 2t\\]\n\\[x_1 = -2(2t) + 1t\\]\n\\[x_1 = -3t\\]\nKyun: Free variable ko ek naam \\(t\\) diya (koi bhi real number). Doosri equation se \\(x_2 = 2t\\) mila, phir pehli equation mein rakh kar \\(x_1\\) nikala. Har \\(t\\) ke liye ek naya hal milta hai.",
+              "Tasdeeq: asal equations mein\n\\[(-3t) + 2(2t) - (t) = 0 \\;\\checkmark\\]\n\\[(-3t) - (2t) + 5(t) = 0 \\;\\checkmark\\]\n\\[2(-3t) + (2t) + 4(t) = 0 \\;\\checkmark\\]\nKyun: General hal har \\(t\\) ke liye har equation ko poora karta hai. Misaal ke taur par \\(t = 1\\) se \\((-3, 2, 1)\\) milta hai, aur \\(t = 0\\) se trivial hal \\((0, 0, 0)\\)."
+            ],
+            "final_answer": "\\(x_1 = -3t,\\ x_2 = 2t,\\ x_3 = t\\) (\\(t\\) koi bhi real number)"
+          }
+        ]
+      }
+    }
+  ]
+}

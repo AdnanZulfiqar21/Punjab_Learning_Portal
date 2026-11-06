@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-EXERCISE-4-3-Q9",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-exercise-4-3-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 82,
+          "pdf_to": 82,
+          "note": "Exercise 4.3, Question 9: book page 77 (PDF 82); answer key PDF 303"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9 Find the equation of the image of the curve with equation \\(y = x^2\\) under the transformation with associated matrix \\(\\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix}\\).",
+            "explanation": "A whole curve is transformed: every point \\((x, y)\\) moves to \\((x', y')\\).\nWe must find the equation the new points satisfy.\nPlan: \\(x', y'\\) from the matrix; reverse with \\(M^{-1}\\); substitute in \\(y = x^2\\); simplify; check with one point.",
+            "steps": [
+              "Given: the curve \\(y = x^2\\) and the matrix \\(M = \\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix}\\).\nTo find: the equation of the image curve.\nMethod: A point \\((x, y)\\) goes to \\((x', y')\\) with \\(\\begin{bmatrix}x' \\\\ y'\\end{bmatrix} = M\\begin{bmatrix}x \\\\ y\\end{bmatrix}\\) (column vector, as in Example 16). Express \\(x, y\\) in terms of \\(x', y'\\) with \\(M^{-1}\\) and substitute in \\(y = x^2\\).",
+              "New coordinates in terms of old\n\\[\\begin{bmatrix}x' \\\\ y'\\end{bmatrix} = \\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix}\\begin{bmatrix}x \\\\ y\\end{bmatrix}\\]\n\\[x' = x + 2y\\]\n\\[y' = 3x + 4y\\]\nWhy: Row 1 of \\(M\\) times the column gives \\(x'\\); row 2 gives \\(y'\\).",
+              "Inverse of \\(M\\)\n\\[|M| = (1)(4) - (2)(3) = -2\\]\n\\[M^{-1} = \\dfrac{1}{-2}\\begin{bmatrix}4 & -2 \\\\ -3 & 1\\end{bmatrix}\\]\n\\[= \\begin{bmatrix}-2 & 1 \\\\ \\frac{3}{2} & -\\frac{1}{2}\\end{bmatrix}\\]\nWhy: For a \\(2 \\times 2\\) matrix: swap the diagonal entries, change the signs of the other two, divide by the determinant.",
+              "Old coordinates in terms of new\n\\[\\begin{bmatrix}x \\\\ y\\end{bmatrix} = M^{-1}\\begin{bmatrix}x' \\\\ y'\\end{bmatrix}\\]\n\\[x = -2x' + y'\\]\n\\[y = \\dfrac{3x' - y'}{2}\\]\nCheck: \\(x + 2y = -2x' + y' + 3x' - y' = x'\\) and \\(3x + 4y = -6x' + 3y' + 6x' - 2y' = y'\\).\nWhy: Multiplying \\(\\begin{bmatrix}x' \\\\ y'\\end{bmatrix} = M\\begin{bmatrix}x \\\\ y\\end{bmatrix}\\) on the left by \\(M^{-1}\\) undoes \\(M\\).",
+              "Substitute into \\(y = x^2\\)\n\\[\\dfrac{3x' - y'}{2} = (y' - 2x')^2\\]\n\\[3x' - y' = 2(y'^2 - 4x'y' + 4x'^2)\\]\n\\[3x' - y' = 8x'^2 - 8x'y' + 2y'^2\\]\nWhy: Every old point obeys \\(y = x^2\\); replacing \\(x\\) and \\(y\\) by their expressions gives the rule the new points obey. Multiply by 2 and expand \\((p - q)^2 = p^2 - 2pq + q^2\\).",
+              "Bring to one side and drop the primes\n\\[8x^2 - 8xy + 2y^2 - 3x + y = 0\\]\nWhy: The primes only marked the new points; the image curve is written in the usual \\(x, y\\).",
+              "Check with a point\n\\((1, 1)\\) lies on \\(y = x^2\\); its image is \\((1 + 2, 3 + 4) = (3, 7)\\).\n\\[8(9) - 8(21) + 2(49) - 9 + 7\\]\n\\[= 72 - 168 + 98 - 9 + 7 = 0 \\;\\checkmark\\]\nWhy: The image of a point of the old curve must lie on the new curve."
+            ],
+            "final_answer": "\\(8x^2 - 8xy + 2y^2 - 3x + y = 0\\), i.e. \\(2(y - 2x)^2 = 3x - y\\)"
+          }
+        ]
+      }
+    }
+  ]
+}
