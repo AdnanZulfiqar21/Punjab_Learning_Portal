@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.5-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.5",
+      "title": "2.5 Derivative of Exponential Functions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH2-2.5",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 44,
+          "note": "Book p. 41-42: 2.5 Derivative of Exponential Functions, Recall! box, derivation of d/dx(a^x), Challenge! box, Example 7"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum bachon! Pichhle topics mein humne trigonometric aur inverse trigonometric functions ke derivatives seekhe. Ab ek naya khandan (family) aata hai: exponential functions. Yeh woh functions hain jin mein variable \\(x\\) power (exponent) mein baitha hota hai. Population ka barhna, bank mein compound interest, radioactive cheezon ka ghatna: yeh sab exponential functions se hi likhe jate hain. Is liye in ka derivative (yani tabdeeli ki raftaar) maloom karna bohat kaam ki cheez hai.\nKitab ki definition: jo function\n\\[f(x) = a^{x},\\]\njahan \\(a > 0\\) aur \\(a \\ne 1\\), se define ho, use exponential function kehte hain.\nAgar \\(a = e \\approx 2.71828\\) ho, to \\(f(x) = e^{x}\\) ko natural exponential function kehte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Sab se pehle farq pehchaniye. \\(x^{3}\\) mein base badalta hai aur power fixed hai: yeh power function hai. \\(3^{x}\\) mein base fixed hai aur power badalti hai: yeh exponential function hai. Dono ke derivative ke rule bilkul alag hain, is liye pehle yeh dekhna zaroori hai ke \\(x\\) neeche (base mein) hai ya oopar (power mein).\nShart \\(a > 0\\) aur \\(a \\ne 1\\) kyun? Agar \\(a = 1\\) ho to \\(1^{x} = 1\\) hamesha, yani sirf ek constant; is mein koi tabdeeli hi nahin. Agar \\(a\\) negative ho, maslan \\(a = -4\\), to \\((-4)^{1/2} = \\sqrt{-4}\\) real number hi nahin. Is liye base positive aur 1 ke ilawa rakha jata hai.\nNumber \\(e \\approx 2.71828\\) khaas kyun hai? Neeche hum dekhenge ke \\(e^{x}\\) ka derivative bilkul \\(e^{x}\\) hi hai. Yani yeh function apni tabdeeli ki raftaar khud hai; yahi khoobi \\(e\\) ko 'natural' (qudrati) base banati hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Recall!",
+            "text": "\\[\\lim_{h \\to 0} \\dfrac{a^{h} - 1}{h} = \\ln a\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh limit poori derivation ki chaabi hai. Kitab ise yaad dihani (Recall) ke taur par de rahi hai, yani hum ise maan kar chalenge. Lekin yaqeen ke liye ek chhota sa numerical tajurba kar lete hain, \\(a = 2\\) aur \\(h = 0.001\\) le kar:\n\\[\\dfrac{2^{0.001} - 1}{0.001} \\approx 0.6934\\]\n\\[\\ln 2 \\approx 0.6931\\]\nDekha? Dono qareeb qareeb barabar hain, aur \\(h\\) jitna chhota karein ge, farq utna hi kam hota jaye ga. Yahi limit ka matlab hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Derivative of \\(a^{x}\\) by definition"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab hum \\(f(x) = a^{x}\\) ka derivative seedha definition se nikalte hain. Definition se kyun? Kyun ke abhi tak hamare paas \\(a^{x}\\) ke liye koi tayyar rule nahin; jab rule na ho to derivative ki asal definition hi raasta hai.\nFarz karein\n\\[f(x) = a^{x} \\quad \\text{...(1)}\\]\nEquation (1) mein \\(x\\) ki jagah \\(x + h\\) rakhne se:\n\\[f(x + h) = a^{x + h} \\quad \\text{...(2)}\\]\nDerivative ki definition:\n\\[f'(x) = \\lim_{h \\to 0} \\dfrac{f(x + h) - f(x)}{h}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab equations (1) aur (2) se \\(f(x)\\) aur \\(f(x + h)\\) ki values definition mein rakhte hain:\n\\[f'(x) = \\lim_{h \\to 0} \\dfrac{a^{x + h} - a^{x}}{h}\\]\n\\[= \\lim_{h \\to 0} \\dfrac{a^{x}(a^{h} - 1)}{h}\\]\n\\[= a^{x} \\lim_{h \\to 0} \\dfrac{a^{h} - 1}{h}\\]\n\\[= a^{x} \\ln a\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Har line mein kya hua, aahista aahista dekhte hain:\n1. Exponents ka qaida \\(a^{x + h} = a^{x} \\cdot a^{h}\\) lagaya. Is se numerator ke dono terms mein \\(a^{x}\\) common nikal aaya.\n2. Limit \\(h \\to 0\\) ki hai, aur \\(a^{x}\\) mein \\(h\\) hai hi nahin. Is liye limit ke liye \\(a^{x}\\) ek constant ki tarah hai aur bahar aa sakta hai, bilkul jaise \\(\\lim 5h = 5 \\lim h\\).\n3. Ab jo limit bachi, woh bilkul Recall! wali limit hai, jis ki value \\(\\ln a\\) hai. Bas kaam mukammal."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Formula \\(\\frac{d}{dx}(a^{x}) = a^{x}\\ln a\\) ko ghaur se dekhiye: derivative wohi function \\(a^{x}\\) hai, bas ek constant \\(\\ln a\\) se zarb. Is ka matlab kya hai?\nJawab: exponential function jitna bara hota hai, utni hi tezi se barhta hai. Jaise bank mein jitni zyada raqam ho, us par munafa bhi utna hi zyada milta hai. Aur \\(a > 1\\) ho to \\(\\ln a > 0\\), is liye slope positive (function barhta hai); \\(0 < a < 1\\) ho to \\(\\ln a < 0\\), is liye slope negative (function ghatta hai)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is tarah humne saabit kar diya ke"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{d}{dx}\\left(a^{x}\\right) = a^{x} \\ln a",
+            "text_alt": "d by d x of a to the power x equals a to the power x times natural log of a"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Saabit kijiye ke \\(\\frac{d}{dx}(e^{x}) = e^{x}\\).\nKya aap jaante hain ke \\(\\ln e = 1\\)?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Challenge ka hal (hamari taraf se). Pehle \\(\\ln e = 1\\) samajhiye: \\(\\ln e\\) ka matlab hai '\\(e\\) ko kis power tak le jayen ke \\(e\\) mile?' Jawab hai 1, kyun ke \\(e^{1} = e\\). Ab upar wale formula mein \\(a = e\\) rakh dein:\n\\[\\dfrac{d}{dx}(e^{x}) = e^{x} \\ln e\\]\n\\[= e^{x} \\cdot 1 = e^{x}\\]\nYani \\(e^{x}\\) ka derivative wohi \\(e^{x}\\) hai. Isi wajah se calculus mein \\(e\\) sab se pasandeeda base hai: is ke saath koi faltu factor nahin aata.\nAb Chain Rule (2.3) ke saath: agar power mein sirf \\(x\\) nahin balke koi function \\(u\\) ho, to:\n\\[\\dfrac{d}{dx}(e^{u}) = e^{u}\\,\\dfrac{du}{dx}\\]\n\\[\\dfrac{d}{dx}(a^{u}) = a^{u} \\ln a\\,\\dfrac{du}{dx}\\]\nYahi do formulas Example 7 aur Exercise 2.2 mein baar baar istemal honge."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(\\frac{d}{dx}(10^{x})\\) kya hoga? Aur \\(\\frac{d}{dx}(x^{10})\\)?\nJawab: \\(10^{x}\\ln 10\\) (exponential rule) aur \\(10x^{9}\\) (power rule). Dono mein 10 aur \\(x\\) hain, lekin rule alag hai, kyun ke ek mein \\(x\\) power mein hai aur doosre mein base mein."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Find \\(\\frac{dy}{dx}\\) if (i) \\(y = e^{\\sin^{2} x}\\) (ii) \\(a^{x^{3}}\\)",
+            "steps": [
+              "Diya gaya: (i) \\(y = e^{\\sin^{2} x}\\); (ii) \\(y = a^{x^{3}}\\).\nMaloom karna: dono parts mein \\(\\frac{dy}{dx}\\).\nTareeqa: dono exponentials hain lekin in ki power mein sirf \\(x\\) nahin, balke \\(x\\) ka function hai (\\(\\sin^{2} x\\) aur \\(x^{3}\\)). Function ke andar function ho to Chain Rule lagta hai: \\(\\frac{d}{dx}(e^{u}) = e^{u}\\frac{du}{dx}\\) aur \\(\\frac{d}{dx}(a^{u}) = a^{u}\\ln a\\,\\frac{du}{dx}\\).",
+              "(i) Step 1: Bahar wale exponential par Chain Rule\n\\[\\dfrac{dy}{dx} = e^{\\sin^{2} x}\\,\\dfrac{d}{dx}(\\sin^{2} x)\\]\nKyun: yahan \\(u = \\sin^{2} x\\) hai. Exponential ko waisa ka waisa copy kiya aur us ki power ke derivative se zarb diya. Base \\(e\\) hai, is liye \\(\\ln e = 1\\) ki wajah se koi extra factor nahin.",
+              "(i) Step 2: \\(\\sin^{2} x = (\\sin x)^{2}\\) ka derivative\n\\[\\dfrac{d}{dx}(\\sin x)^{2} = 2\\sin x\\,\\dfrac{d}{dx}(\\sin x)\\]\n\\[= 2\\sin x \\cos x\\]\nKyun: \\(\\sin^{2} x\\) asal mein \\((\\sin x)^{2}\\) hai: square bahar hai, \\(\\sin x\\) andar. Is liye power rule lagaya (2 neeche aaya, power ek kam hui) aur andar wale \\(\\sin x\\) ka derivative \\(\\cos x\\) (2.2 se) zarb kiya. Yeh Chain Rule ka doosra istemal hai.\nDhyan dein: bohat se bachay yahan \\(\\cos^{2} x\\) likh dete hain. Ghalat! Square ka derivative pehle, phir andar wale ka.",
+              "(i) Step 3: Sab jor dein\n\\[\\dfrac{dy}{dx} = e^{\\sin^{2} x} \\cdot 2\\sin x \\cos x\\]\n\\[= 2\\sin x \\cos x\\, e^{\\sin^{2} x}\\]\nKyun: kitab factors ko exponential se pehle likhti hai, bas tarteeb badli hai. Chahein to \\(2\\sin x\\cos x = \\sin 2x\\) bhi likh sakte hain.",
+              "(ii) Step 1: Base \\(a\\) ke liye Chain Rule\n\\[\\dfrac{dy}{dx} = a^{x^{3}} \\ln a\\,\\dfrac{d}{dx}(x^{3})\\]\nKyun: yahan \\(u = x^{3}\\) hai. Base \\(e\\) nahin balke \\(a\\) hai, is liye formula \\(\\frac{d}{dx}(a^{u}) = a^{u}\\ln a\\,\\frac{du}{dx}\\) ke mutabiq \\(\\ln a\\) ka extra factor aata hai.",
+              "(ii) Step 2: Mukammal karein\n\\[\\dfrac{dy}{dx} = a^{x^{3}} \\ln a\\,(3x^{2})\\]\n\\[= 3x^{2} a^{x^{3}} \\ln a\\]\nKyun: power rule se \\(\\frac{d}{dx}(x^{3}) = 3x^{2}\\). Phir factors ki tarteeb saaf kar di: pehle \\(3x^{2}\\), phir exponential, phir \\(\\ln a\\).",
+              "Tasdeeq:\n(i) \\(x = 0\\) par: \\(\\frac{dy}{dx} = 2(0)(1)e^{0} = 0\\). Yeh theek lagta hai: \\(\\sin^{2} x\\) ki sab se chhoti value 0 hai jo \\(x = 0\\) par aati hai, wahan \\(y\\) minimum par hai aur slope zero hona chahiye.\n(ii) agar \\(a = e\\) rakhein to \\(y = e^{x^{3}}\\) banta hai aur hamara jawab \\(3x^{2}e^{x^{3}}\\) deta hai (kyun ke \\(\\ln e = 1\\)); yahi \\(e^{u}\\) wala rule seedha bhi deta hai. Dono tareeqe mil gaye."
+            ],
+            "answer": "(i) \\(\\frac{dy}{dx} = 2\\sin x \\cos x\\, e^{\\sin^{2} x}\\) (ii) \\(\\frac{dy}{dx} = 3x^{2} a^{x^{3}} \\ln a\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Yaad rakhne ka aasan nuskha: 'copy karo, phir zarb do'. \\(e^{(\\text{kuch bhi})}\\) ka derivative: \\(e^{(\\text{kuch bhi})}\\) ko bilkul waisa copy karo aur 'kuch bhi' ke derivative se zarb do. \\(a^{(\\text{kuch bhi})}\\) ho to \\(\\ln a\\) se bhi zarb do.\nPaper mein rule ka naam (Chain Rule) zaroor likhiye; method ki line par bhi marks milte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "\\(y = 5^{2x}\\) ka derivative nikaaliye.\nYahan \\(a = 5\\) aur \\(u = 2x\\), \\(\\frac{du}{dx} = 2\\):\n\\[\\dfrac{dy}{dx} = 5^{2x} \\ln 5 \\cdot 2\\]\n\\[= 2 \\cdot 5^{2x} \\ln 5\\]\nDekhiye: copy kiya, \\(\\ln 5\\) lagaya, aur power ke derivative 2 se zarb diya. Teen kaam, bas. Har exponential sawal mein yahi teen sawal khud se poochiye: base kya hai, power kya hai, aur power ka derivative kya hai?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Exponential function: \\(f(x) = a^{x}\\), \\(a > 0\\), \\(a \\ne 1\\). Natural exponential: \\(e^{x}\\), jahan \\(e \\approx 2.71828\\).\n2. \\(\\frac{d}{dx}(a^{x}) = a^{x}\\ln a\\). Yeh definition se saabit hua, limit \\(\\lim_{h \\to 0}\\frac{a^{h} - 1}{h} = \\ln a\\) ki madad se.\n3. \\(\\frac{d}{dx}(e^{x}) = e^{x}\\), kyun ke \\(\\ln e = 1\\).\n4. Chain Rule ke saath: \\(\\frac{d}{dx}(e^{u}) = e^{u}u'\\) aur \\(\\frac{d}{dx}(a^{u}) = a^{u}\\ln a\\,u'\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Exponential par power rule laga dena: \\(\\frac{d}{dx}(2^{x}) \\ne x\\,2^{x-1}\\). Sahih jawab \\(2^{x}\\ln 2\\) hai. Power rule sirf tab jab \\(x\\) base mein ho.\n2. Power ka derivative bhool jana: \\(\\frac{d}{dx}(e^{\\sin^{2} x})\\) sirf \\(e^{\\sin^{2} x}\\) nahin; \\(2\\sin x\\cos x\\) se zarb dena zaroori hai.\n3. Base \\(e\\) na ho to \\(\\ln a\\) bhool jana, ya base \\(e\\) ho to bila wajah \\(\\ln e\\) likh kar chhor dena (woh to 1 hai)."
+          }
+        ]
+      }
+    }
+  ]
+}

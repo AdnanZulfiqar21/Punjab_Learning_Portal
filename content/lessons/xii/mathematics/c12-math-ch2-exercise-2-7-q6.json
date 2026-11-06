@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-7-Q6",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-7-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 72,
+          "pdf_to": 72,
+          "note": "Exercise 2.7, Question 6 (book page 70). The book prints no answers for Unit 2; results verified with sympy."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. The perimeter of a triangle is 16 cm. If one side is of length 6 cm, what are the lengths of the other sides for maximum area of the triangle.",
+            "explanation": "A maximum-area problem where the area comes from Heron's formula.\nGiven: perimeter 16 cm, one side 6 cm, so the other two sides add to 10 cm.\nPlan: call them \\(x\\) and \\(10 - x\\), maximize \\(A^{2}\\) (no square root), and keep \\(x\\) inside the triangle-inequality range.",
+            "steps": [
+              "Given: perimeter 16 cm; one side 6 cm.\nTo find: the other two sides for the greatest area.\nMethod: Heron's formula \\(A = \\sqrt{s(s - a)(s - b)(s - c)}\\) with \\(s = \\frac{a + b + c}{2}\\); maximize \\(A^{2}\\) instead of \\(A\\).",
+              "Variables and allowed values\nOther sides: \\(x\\) and \\(10 - x\\) (cm), since \\(16 - 6 = 10\\).\n\\[x < 6 + (10 - x) \\Rightarrow x < 8\\]\n\\[10 - x < 6 + x \\Rightarrow x > 2\\]\nWhy: in a triangle each side is less than the sum of the other two, so \\(2 < x < 8\\).",
+              "Area by Heron's formula\n\\[s = \\dfrac{16}{2} = 8\\]\n\\[A = \\sqrt{8(8 - 6)(8 - x)(8 - (10 - x))}\\]\n\\[A = 4\\sqrt{(8 - x)(x - 2)}\\]\nWhy: \\(8 \\times 2 = 16\\) and \\(\\sqrt{16} = 4\\); also \\(8 - 10 + x = x - 2\\).",
+              "Maximize \\(A^{2}\\)\n\\[f(x) = A^{2} = 16(8 - x)(x - 2)\\]\n\\[= 16(-x^{2} + 10x - 16) \\quad \\text{...(1)}\\]\nWhy: \\(A > 0\\), so \\(A\\) is largest exactly when \\(A^{2}\\) is largest, and \\(A^{2}\\) has no square root.",
+              "Critical point\n\\[f'(x) = 16(-2x + 10) \\quad \\text{...(2)}\\]\n\\[-2x + 10 = 0 \\Rightarrow x = 5\\]\nWhy: \\(x = 5\\) lies in \\(2 < x < 8\\).",
+              "Second derivative test\n\\[f''(x) = -32 < 0\\]\nWhy: negative, so \\(A^{2}\\), and therefore \\(A\\), is maximum at \\(x = 5\\). The other side is \\(10 - 5 = 5\\) cm.",
+              "Maximum area and check\n\\[A = 4\\sqrt{(8 - 5)(5 - 2)} = 4\\sqrt{9} = 12\\text{ cm}^{2}\\]\nCheck: the triangle 5, 5, 6 is isosceles; its height on the 6 cm base is \\(\\sqrt{5^{2} - 3^{2}} = 4\\) cm, so its area is \\(\\frac{1}{2} \\times 6 \\times 4 = 12\\text{ cm}^{2}\\) ✓."
+            ],
+            "final_answer": "The other two sides are both 5 cm (an isosceles triangle with sides 5, 5, 6); the maximum area is \\(12\\text{ cm}^{2}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

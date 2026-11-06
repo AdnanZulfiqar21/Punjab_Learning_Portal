@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-1-Q10",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-1-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 43,
+          "note": "Exercise 2.1, Question 10: differentiate y = sqrt(sin x) + cos sqrt(x); book p. 41. Unit 2 has no printed answers."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10. Differentiate w.r.t. the variable involved: \\(y = \\sqrt{\\sin x} + \\cos\\sqrt{x}\\)",
+            "explanation": "Two composite terms with the layers in opposite order.\n\\(\\sqrt{\\sin x}\\): root outside, \\(\\sin x\\) inside. \\(\\cos\\sqrt{x}\\): cosine outside, \\(\\sqrt{x}\\) inside.\nPlan: chain rule on each term separately, then add.",
+            "steps": [
+              "Given: \\(y = \\sqrt{\\sin x} + \\cos\\sqrt{x}\\), with \\(x > 0\\), \\(\\sin x > 0\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: sum rule, then the chain rule ('derivative of the outer, times derivative of the inner') on each term.",
+              "First term: root of sin x\n\\[\\dfrac{d}{dx}(\\sin x)^{1/2} = \\tfrac{1}{2}(\\sin x)^{-1/2}\\cos x\\]\n\\[= \\dfrac{\\cos x}{2\\sqrt{\\sin x}}\\]\nWhy: outer \\(u^{1/2}\\) with \\(u = \\sin x\\), \\(\\frac{du}{dx} = \\cos x\\).",
+              "Second term: cos of root x\n\\[\\dfrac{d}{dx}\\cos\\sqrt{x} = -\\sin\\sqrt{x} \\cdot \\dfrac{1}{2\\sqrt{x}}\\]\nWhy: outer \\(\\cos w\\) with \\(w = \\sqrt{x}\\), \\(\\frac{dw}{dx} = \\frac{1}{2\\sqrt{x}}\\).",
+              "Add\n\\[\\dfrac{dy}{dx} = \\dfrac{\\cos x}{2\\sqrt{\\sin x}} - \\dfrac{\\sin\\sqrt{x}}{2\\sqrt{x}}\\]\nWhy: sum rule.",
+              "Check at x = pi/2\n\\[\\dfrac{0}{2} - \\dfrac{\\sin\\sqrt{\\pi/2}}{2\\sqrt{\\pi/2}} \\approx -0.379\\]\nWhy: \\(\\sqrt{\\sin x}\\) has its peak at \\(\\frac{\\pi}{2}\\) (slope 0), so only the \\(\\cos\\sqrt{x}\\) part contributes, and \\(\\cos\\sqrt{x}\\) is decreasing there."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = \\frac{\\cos x}{2\\sqrt{\\sin x}} - \\frac{\\sin\\sqrt{x}}{2\\sqrt{x}}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

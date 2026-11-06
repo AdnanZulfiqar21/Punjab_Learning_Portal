@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-7-Q1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-7-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 72,
+          "pdf_to": 72,
+          "note": "Exercise 2.7, Question 1 (book page 70). The book prints no answers for Unit 2; results verified with sympy."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1",
+            "prompt": "1. A window consists of a rectangle surmounted by a semicircular opening. If the total perimeter is 21 meter, find the dimensions that maximize the area.",
+            "explanation": "An optimization (maximum) word problem with a fixed perimeter.\nGiven: the outline of the window is 21 m. To find: the width and height that give the largest area.\nPlan: let the semicircle's radius be \\(r\\) (width \\(2r\\)) and the rectangle's height \\(h\\); use the perimeter to remove \\(h\\), then use the derivative tests.",
+            "steps": [
+              "Given: window = rectangle + semicircle on top; perimeter = 21 m.\nTo find: the dimensions with maximum area.\nMethod: area is a function of two letters; the fixed perimeter removes one. Then \\(\\frac{dA}{dr} = 0\\) and the second derivative test.",
+              "Variables\nLet \\(r\\) = radius of the semicircle (m), so the width of the rectangle is \\(2r\\); let \\(h\\) = height of the rectangle (m).\nWhy: the semicircle sits on the top side, so its diameter equals the width.",
+              "Constraint (perimeter)\n\\[2r + 2h + \\pi r = 21\\]\n\\[h = \\dfrac{21 - 2r - \\pi r}{2} \\quad \\text{...(1)}\\]\nWhy: the outline is the bottom \\(2r\\), the two sides \\(h + h\\), and the arc, half of a circumference: \\(\\frac{1}{2}(2\\pi r) = \\pi r\\). The top side of the rectangle is inside the window, so it is not counted.",
+              "Area in one variable\n\\[A = 2rh + \\dfrac{1}{2}\\pi r^{2} \\quad \\text{...(2)}\\]\n\\[A = r(21 - 2r - \\pi r) + \\dfrac{1}{2}\\pi r^{2}\\]\n\\[A = 21r - 2r^{2} - \\dfrac{1}{2}\\pi r^{2} \\quad \\text{...(3)}\\]\nWhy: rectangle area \\(2r \\times h\\) plus semicircle area \\(\\frac{1}{2}\\pi r^{2}\\); then \\(2rh = r(21 - 2r - \\pi r)\\) from (1), and \\(-\\pi r^{2} + \\frac{1}{2}\\pi r^{2} = -\\frac{1}{2}\\pi r^{2}\\).",
+              "Critical point\n\\[\\dfrac{dA}{dr} = 21 - 4r - \\pi r = 21 - (4 + \\pi)r\\]\n\\[21 - (4 + \\pi)r = 0\\]\n\\[r = \\dfrac{21}{4 + \\pi} \\approx 2.94\\text{ m}\\]\nWhy: at the maximum the slope of \\(A\\) is zero.",
+              "Second derivative test\n\\[\\dfrac{d^{2}A}{dr^{2}} = -(4 + \\pi) < 0\\]\nWhy: negative, so \\(A\\) is maximum at \\(r = \\frac{21}{4 + \\pi}\\).",
+              "Dimensions\n\\[h = \\dfrac{21 - (2 + \\pi)\\frac{21}{4 + \\pi}}{2} = \\dfrac{1}{2}\\cdot\\dfrac{42}{4 + \\pi}\\]\n\\[h = \\dfrac{21}{4 + \\pi} \\approx 2.94\\text{ m}\\]\n\\[2r = \\dfrac{42}{4 + \\pi} \\approx 5.88\\text{ m}\\]\nWhy: put \\(r\\) in (1): \\(21(4 + \\pi) - 21(2 + \\pi) = 42\\). So \\(h = r\\): the rectangle is twice as wide as it is high.",
+              "Maximum area and check\n\\[A_{\\max} = \\dfrac{441}{2(4 + \\pi)} \\approx 30.88\\text{ m}^{2}\\]\n\\[2r + 2h + \\pi r = (4 + \\pi)r = 21\\ \\checkmark\\]\nWhy: from (3), \\(A = r\\left(21 - \\frac{(4 + \\pi)r}{2}\\right) = \\frac{21}{4 + \\pi}\\cdot\\frac{21}{2}\\). With \\(h = r\\) the perimeter is \\((4 + \\pi)r\\), which is 21."
+            ],
+            "final_answer": "Width of the rectangle \\(2r = \\frac{42}{4 + \\pi} \\approx 5.88\\) m, height of the rectangle \\(h = \\frac{21}{4 + \\pi} \\approx 2.94\\) m, radius of the semicircle \\(\\frac{21}{4 + \\pi} \\approx 2.94\\) m; maximum area \\(\\frac{441}{2(4 + \\pi)} \\approx 30.88\\text{ m}^{2}\\).",
+            "answer_figure": {
+              "$asset": "c12-math-ch2-fig-ex2-7-q1-window",
+              "alt": "A window made of a rectangle with a semicircle on top. The rectangle has width 2r, about 5.88 m, and height h equal to r, about 2.94 m; the semicircle has radius r. Perimeter 2r + 2h + pi r = 21 m.",
+              "caption": "Answer sketch for Exercise 2.7 Question 1: the window of largest area, drawn to scale (original drawing; the book has no figure)"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

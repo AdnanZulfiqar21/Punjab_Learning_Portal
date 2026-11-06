@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.3.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.3.1",
+      "title": "2.3.1 Composition of Functions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 38,
+          "pdf_to": 39,
+          "note": "Book p. 36-37: composition of functions, Theorem 1 (The Chain Rule) with Leibniz notation, Critical Thinking box, Example 3"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Let \\(g: X \\to Y\\), and \\(f: Y \\to Z\\), then their composition \\(f \\circ g: X \\to Y\\) is defined as:\n\\[f \\circ g(x) = f(g(x))\\]",
+            "book_errors": [
+              "\\(f \\circ g: X \\to Y\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the composition as \\(f \\circ g: X \\to Y\\). Since \\(g\\) takes \\(X\\) to \\(Y\\) and \\(f\\) then takes \\(Y\\) to \\(Z\\), the composition goes from \\(X\\) to \\(Z\\):\n\\[f \\circ g: X \\to Z\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Think of two machines in a row. \\(x\\) goes into machine \\(g\\); its output \\(g(x)\\) goes into machine \\(f\\); the final output is \\(f(g(x))\\). \\(g\\) is the inner function (it acts first) and \\(f\\) is the outer function.\nOrder matters: \\(f \\circ g\\) means 'first \\(g\\), then \\(f\\)'. In general \\(f \\circ g \\ne g \\circ f\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "For example, consider two real valued functions \\(g(x) = x^{2} - x\\) and \\(f(x) = \\sin x\\), then\n\\[f \\circ g(x) = f(g(x))\\]\n\\[= f(x^{2} - x)\\]\n\\[= \\sin(x^{2} - x)\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our example: with the same \\(f\\) and \\(g\\), the other order gives\n\\[g \\circ f(x) = g(\\sin x)\\]\n\\[= \\sin^{2} x - \\sin x\\]\nwhich is a different function from \\(\\sin(x^{2} - x)\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Theorem 1: (The Chain Rule)"
+          },
+          {
+            "type": "paragraph",
+            "text": "If \\(f(u)\\) is differentiable at the point \\(u = g(x)\\) and \\(g(x)\\) is differentiable at \\(x\\), then the composite function \\(f \\circ g(x) = f(g(x))\\) is differentiable at \\(x\\), an \\(f \\circ g'(x) = f'(g(x)) \\cdot g'(x)\\)",
+            "book_errors": [
+              "an \\(f \\circ g'(x) = f'(g(x)) \\cdot g'(x)\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints 'an \\(f \\circ g'(x) = f'(g(x)) \\cdot g'(x)\\)'. It should read 'and', and the composite function must be in brackets before the dash:\n\\[(f \\circ g)'(x) = f'(g(x)) \\cdot g'(x)\\]\nWithout brackets, \\(f \\circ g'(x)\\) could be read as \\(f(g'(x))\\), which is a different thing."
+          },
+          {
+            "type": "paragraph",
+            "text": "In Leibniz's notation, if \\(y = f(u)\\) and \\(u = g(x)\\), then\n\\[\\dfrac{dy}{dx} = \\dfrac{dy}{du} \\cdot \\dfrac{du}{dx}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why multiply? \\(\\frac{du}{dx}\\) says how fast \\(u\\) changes compared with \\(x\\), and \\(\\frac{dy}{du}\\) how fast \\(y\\) changes compared with \\(u\\). If \\(u\\) changes 3 times as fast as \\(x\\), and \\(y\\) 2 times as fast as \\(u\\), then \\(y\\) changes \\(2 \\times 3 = 6\\) times as fast as \\(x\\), like two gears in a row.\nHow to use it (the outer-inner method):\n1. Spot the inner function and call it \\(u\\). 2. Differentiate the outer function with respect to \\(u\\). 3. Differentiate \\(u\\) with respect to \\(x\\). 4. Multiply, and write \\(u\\) back in terms of \\(x\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Critical Thinking",
+            "text": "Suppose \\(f(x) = x^{2}\\) and \\(g(x) = |x|\\). Then the composition \\((f \\circ g)(x) = x^{2}\\) is differentiable at \\(x = 0\\), although \\(g(x)\\) is not differentiable at \\(x = 0\\). Does this contradict the Chain Rule?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A guide to the Critical Thinking question: there is no contradiction.\n\\(f(g(x)) = |x|^{2} = x^{2}\\), and \\(\\frac{d}{dx}(x^{2}) = 2x\\), which is 0 at \\(x = 0\\). Meanwhile \\(|x|\\) has slope \\(-1\\) to the left of 0 and \\(+1\\) to the right, so it has no derivative at 0.\nThe Chain Rule says: IF g is differentiable at x and f is differentiable at g(x), THEN f o g is differentiable there. It does not say the reverse. Its condition is sufficient, not necessary; when the condition fails, the theorem simply tells us nothing, and the composite may or may not be differentiable."
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Differentiate \\(y = \\sin(x^{2} - x)\\) w.r.t. 'x'.",
+            "steps": [
+              "Given: \\(y = \\sin(x^{2} - x)\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: \\(y\\) is a function of a function: the inner function is \\(x^{2} - x\\) and the outer function is \\(\\sin\\). So we name the inner function \\(u\\) and use the chain rule.",
+              "Step 1: Name the inner function\n\\[u = x^{2} - x \\quad \\ldots(1)\\]\n\\[y = \\sin u\\]\nWhy: substituting \\(u = x^{2} - x\\) into \\(y = \\sin(x^{2} - x)\\) turns \\(y\\) into the simple function \\(\\sin u\\), whose derivative we know.",
+              "Step 2: Differentiate each part\nDifferentiate \\(y = \\sin u\\) with respect to \\(u\\), and \\(u = x^{2} - x\\) with respect to \\(x\\):\n\\[\\dfrac{dy}{du} = \\cos u\\]\n\\[\\dfrac{du}{dx} = 2x - 1\\]\nWhy: \\((\\sin u)' = \\cos u\\) (2.2) and the power rule (2.1).",
+              "Step 3: Multiply (Chain Rule)\n\\[\\dfrac{dy}{dx} = \\dfrac{dy}{du} \\cdot \\dfrac{du}{dx}\\]\n\\[= \\cos u \\cdot (2x - 1)\\]\nWhy: Theorem 1 in Leibniz's notation.",
+              "Step 4: Put u back\n\\[\\dfrac{dy}{dx} = \\cos(x^{2} - x)(2x - 1)\\]\nWhy: by equation (1); the answer must be in terms of \\(x\\) only.",
+              "Check: at \\(x = 0\\) the formula gives \\(\\cos 0 \\cdot (-1) = -1\\). Numerically, \\(y(0.001) = \\sin(-0.000999) \\approx -0.000999\\) and \\(y(-0.001) = \\sin(0.001001) \\approx 0.001001\\), so the slope is about \\(\\frac{-0.002}{0.002} = -1\\)."
+            ],
+            "answer": "\\(\\frac{dy}{dx} = \\cos(x^{2} - x)(2x - 1)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our examples:\n(a) \\(y = (3x^{2} + 1)^{5}\\): inner \\(u = 3x^{2} + 1\\), outer \\(u^{5}\\).\n\\[\\dfrac{dy}{dx} = 5u^{4} \\cdot 6x\\]\n\\[= 30x(3x^{2} + 1)^{4}\\]\n(b) \\(y = \\cos(x^{3})\\): \\(\\frac{dy}{dx} = -\\sin(x^{3}) \\cdot 3x^{2} = -3x^{2}\\sin(x^{3})\\).\n(c) \\(y = \\sin^{2} x = (\\sin x)^{2}\\): \\(\\frac{dy}{dx} = 2\\sin x \\cdot \\cos x\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(f \\circ g(x) = f(g(x))\\): \\(g\\) acts first (inner), \\(f\\) second (outer); \\(f \\circ g: X \\to Z\\).\n2. Chain Rule: \\((f \\circ g)'(x) = f'(g(x)) \\cdot g'(x)\\), or \\(\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}\\).\n3. Method: name the inner function \\(u\\), differentiate outer and inner, multiply, put \\(u\\) back.\n4. The chain rule's conditions are sufficient, not necessary (Critical Thinking)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Forgetting the inner derivative: \\(\\frac{d}{dx}\\sin(x^{2} - x) = \\cos(x^{2} - x)\\) is wrong; the factor \\((2x - 1)\\) is missing.\n2. Changing the inside: the outer derivative keeps the inner function unchanged: \\(\\cos(x^{2} - x)\\), not \\(\\cos(2x - 1)\\).\n3. Leaving \\(u\\) in the final answer: write the answer in terms of \\(x\\).\n4. Mixing up \\(f \\circ g\\) and \\(g \\circ f\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

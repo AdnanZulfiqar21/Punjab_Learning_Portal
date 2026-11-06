@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-2-Q2-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-2-q2",
+      "title": "Question 2 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH2-EXERCISE-2-2-Q2",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 46,
+          "pdf_to": 46,
+          "note": "Exercise 2.2, Question 2 (book p. 44): find dy/dx for six logarithmic functions; no printed answers for Unit 2 (checked with sympy)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Find \\(\\frac{dy}{dx}\\) if: \\(y = \\ln(e^{x} - e^{-x})\\)",
+            "explanation": "Sab se pehle dekhte hain ke yeh kis qisam ka sawal hai: \\(x\\) ke ek expression ka natural log.\nDiya kya hai? \\(y = \\ln(e^{x} - e^{-x})\\). Find kya karna hai? \\(\\frac{dy}{dx}\\).\nKaunsa rule? Log ke andar function ho to \\(\\frac{d}{dx}(\\ln u) = \\frac{1}{u}\\frac{du}{dx}\\), yani 'andar wale ka derivative taqseem andar wala'.\nPlan: pehle domain dekhenge (log ko positive input chahiye), phir \\(u'\\), phir formula. Yaad rakhiye: log ka derivative hamesha ek fraction deta hai jis mein neeche wohi cheez hoti hai jo log ke andar thi.",
+            "steps": [
+              "Diya gaya: \\(y = \\ln(e^{x} - e^{-x})\\).\nMaloom karna: \\(\\frac{dy}{dx}\\).\nTareeqa: \\(\\ln u\\) par Chain Rule, jahan \\(u = e^{x} - e^{-x}\\).",
+              "Domain\n\\[e^{x} - e^{-x} > 0 \\iff e^{2x} > 1 \\iff x > 0\\]\nKyun: log sirf positive number ka hota hai. Dono taraf \\(e^{x}\\) (jo hamesha positive hai) se zarb kiya to \\(e^{2x} > 1\\) bana, jo sirf \\(x > 0\\) par sach hai.",
+              "Andar wale ka derivative\n\\[\\dfrac{du}{dx} = e^{x} - (-e^{-x}) = e^{x} + e^{-x}\\]\nKyun: \\(\\frac{d}{dx}(e^{-x}) = -e^{-x}\\) (power \\(-x\\) ka derivative \\(-1\\)). Minus ka minus plus ban gaya.\nDhyan dein: yahan sign ki ghalti bohat hoti hai; aahista likhiye.",
+              "Chain Rule\n\\[\\dfrac{dy}{dx} = \\dfrac{1}{e^{x} - e^{-x}}\\cdot(e^{x} + e^{-x})\\]\n\\[= \\dfrac{e^{x} + e^{-x}}{e^{x} - e^{-x}}\\]\n\\[= \\dfrac{e^{2x} + 1}{e^{2x} - 1}\\]\nKyun: formula \\(\\frac{u'}{u}\\). Aakhri shakal oopar neeche \\(e^{x}\\) se zarb dene se aati hai; dono shaklein sahih hain.",
+              "Tasdeeq: dilchasp baat, yeh jawab bilkul Question 1 (iv) wala function hai! Yani is ko dobara differentiate karein to \\(-\\frac{4}{(e^{x} - e^{-x})^{2}}\\) milega. Aur \\(x = 1\\) par \\(\\frac{e + e^{-1}}{e - e^{-1}} \\approx \\frac{3.086}{2.350} \\approx 1.313 > 0\\): positive slope, jo theek hai kyun ke \\(x > 0\\) par \\(y\\) barhta hai."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = \\frac{e^{x} + e^{-x}}{e^{x} - e^{-x}} = \\frac{e^{2x} + 1}{e^{2x} - 1}\\), \\(x > 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Find \\(\\frac{dy}{dx}\\) if: \\(y = \\log_{10}\\sqrt{\\frac{1 - x^{2}}{1 + x^{2}}}\\)",
+            "explanation": "Yeh base 10 wala log hai, aur andar ek quotient ka square root hai. Seedha Chain Rule lagayen to kaam bohat lamba ho jaye ga.\nDiya kya hai? \\(y\\). Find kya karna hai? \\(\\frac{dy}{dx}\\).\nKaunsa rule? Pehle log ke qawaid se todna (root = power \\(\\frac{1}{2}\\), taqseem = farq), phir \\(\\frac{d}{dx}(\\log_a u) = \\frac{u'}{u\\ln a}\\), \\(a = 10\\).\nPlan: tod lo, phir har tukra alag se differentiate karo, phir fractions jama karo. Misaal ke taur par, ek bari gathri ko kholne se pehle us ki rassi khol dein to har cheez alag alag aasani se nikal aati hai; log ke qawaid yahi rassi kholne ka kaam karte hain.",
+            "steps": [
+              "Diya gaya: \\(y = \\log_{10}\\sqrt{\\dfrac{1 - x^{2}}{1 + x^{2}}}\\), jo \\(-1 < x < 1\\) ke liye defined hai (wahan \\(1 - x^{2} > 0\\)).\nMaloom karna: \\(\\frac{dy}{dx}\\).\nTareeqa: pehle log ke qawaid se saada karna, phir term by term differentiate karna.",
+              "Pehle saada karein\n\\[y = \\log_{10}\\left(\\dfrac{1 - x^{2}}{1 + x^{2}}\\right)^{1/2}\\]\n\\[= \\dfrac{1}{2}\\log_{10}\\dfrac{1 - x^{2}}{1 + x^{2}}\\]\n\\[= \\dfrac{1}{2}\\left[\\log_{10}(1 - x^{2}) - \\log_{10}(1 + x^{2})\\right]\\]\nKyun: \\(\\sqrt{A} = A^{1/2}\\); power log ke aage aa jati hai (\\(\\log A^{n} = n\\log A\\)); aur taqseem ka log farq ban jata hai (\\(\\log\\frac{A}{B} = \\log A - \\log B\\)).",
+              "Har log ka derivative\n\\[\\dfrac{dy}{dx} = \\dfrac{1}{2}\\left[\\dfrac{-2x}{(1 - x^{2})\\ln 10} - \\dfrac{2x}{(1 + x^{2})\\ln 10}\\right]\\]\n\\[= -\\dfrac{x}{\\ln 10}\\left[\\dfrac{1}{1 - x^{2}} + \\dfrac{1}{1 + x^{2}}\\right]\\]\nKyun: \\(\\frac{d}{dx}(\\log_{10} u) = \\frac{u'}{u\\ln 10}\\). Pehle mein \\(u' = -2x\\), doosre mein \\(2x\\). Phir \\(-\\frac{x}{\\ln 10}\\) common bahar nikala (\\(\\frac{1}{2}\\) aur 2 kat gaye).\nDhyan dein: base 10 hai, is liye \\(\\ln 10\\) bhoolna nahin.",
+              "Fractions jama karein\n\\[\\dfrac{1}{1 - x^{2}} + \\dfrac{1}{1 + x^{2}} = \\dfrac{2}{1 - x^{4}}\\]\n\\[\\dfrac{dy}{dx} = -\\dfrac{2x}{(1 - x^{4})\\ln 10}\\]\nKyun: common denominator \\((1 - x^{2})(1 + x^{2}) = 1 - x^{4}\\) (yeh \\((a - b)(a + b) = a^{2} - b^{2}\\) hai); numerator \\((1 + x^{2}) + (1 - x^{2}) = 2\\).",
+              "Tasdeeq: \\(x = 0\\) par slope 0 aata hai. Yeh theek hai kyun ke \\(y\\) even function hai (\\(y(-x) = y(x)\\)) aur \\(x = 0\\) par us ki sab se bari value \\(\\log_{10} 1 = 0\\) hai; chotti par slope zero hota hai. Sympy bhi yahi derivative deta hai. (\\(\\frac{1}{\\ln 10} = \\log_{10} e\\) likh kar jawab \\(-\\frac{2x\\log_{10} e}{1 - x^{4}}\\) bhi likh sakte hain.)"
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = -\\frac{2x}{(1 - x^{4})\\ln 10}\\), \\(-1 < x < 1\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) Find \\(\\frac{dy}{dx}\\) if: \\(y = \\ln\\left(x - \\sqrt{x^{2} - 1}\\right)\\)",
+            "explanation": "Yahan log ke andar \\(x - \\sqrt{x^{2} - 1}\\) hai, yani andar ek square root bhi chhupa hai.\nDiya kya hai? \\(y\\). Find kya karna hai? \\(\\frac{dy}{dx}\\).\nKaunsa rule? \\(\\frac{d}{dx}(\\ln u) = \\frac{u'}{u}\\); square root ke derivative ke liye bhi Chain Rule.\nPlan: pehle root ka derivative, phir \\(u'\\), phir formula; aakhir mein ek common bracket kat jayega aur jawab bohat chhota ho jaye ga. Lamba expression dekh kar ghabraiye nahin; aise sawalon mein aksar aakhir mein sab kuch saaf ho jata hai.",
+            "steps": [
+              "Diya gaya: \\(y = \\ln\\left(x - \\sqrt{x^{2} - 1}\\right)\\). Root ke liye \\(|x| \\ge 1\\) chahiye, aur log ke liye \\(x - \\sqrt{x^{2} - 1} > 0\\), jo \\(x \\ge 1\\) par sach hai. Derivative \\(x > 1\\) par milta hai.\nMaloom karna: \\(\\frac{dy}{dx}\\).\nTareeqa: Chain Rule, \\(u = x - \\sqrt{x^{2} - 1}\\).",
+              "Square root ka derivative\n\\[\\dfrac{d}{dx}\\sqrt{x^{2} - 1} = \\dfrac{1}{2\\sqrt{x^{2} - 1}}\\cdot 2x\\]\n\\[= \\dfrac{x}{\\sqrt{x^{2} - 1}}\\]\nKyun: \\(\\frac{d}{dx}\\sqrt{w} = \\frac{1}{2\\sqrt{w}}\\frac{dw}{dx}\\), jahan \\(w = x^{2} - 1\\) aur \\(\\frac{dw}{dx} = 2x\\); 2 kat gaya.",
+              "Andar wale ka derivative\n\\[\\dfrac{du}{dx} = 1 - \\dfrac{x}{\\sqrt{x^{2} - 1}}\\]\n\\[= \\dfrac{\\sqrt{x^{2} - 1} - x}{\\sqrt{x^{2} - 1}}\\]\nKyun: \\(x\\) ka derivative 1; phir dono ko common denominator \\(\\sqrt{x^{2} - 1}\\) par le aaye.",
+              "Chain Rule aur katna\n\\[\\dfrac{dy}{dx} = \\dfrac{1}{x - \\sqrt{x^{2} - 1}}\\cdot\\dfrac{-(x - \\sqrt{x^{2} - 1})}{\\sqrt{x^{2} - 1}}\\]\n\\[= -\\dfrac{1}{\\sqrt{x^{2} - 1}}\\]\nKyun: \\(\\sqrt{x^{2} - 1} - x\\) ko \\(-(x - \\sqrt{x^{2} - 1})\\) likha (minus bahar nikala). Ab yeh bracket bilkul \\(u\\) jaisa hai, is liye oopar neeche se kat gaya.\nDhyan dein: minus bahar nikaalna hi is sawal ki chaabi hai; is ke baghair cancellation nazar nahin aati.",
+              "Tasdeeq: \\((x - \\sqrt{x^{2} - 1})(x + \\sqrt{x^{2} - 1}) = x^{2} - (x^{2} - 1) = 1\\), is liye\n\\[y = -\\ln\\left(x + \\sqrt{x^{2} - 1}\\right)\\]\nIs shakal ko differentiate karein to \\(-\\frac{1 + x/\\sqrt{x^{2} - 1}}{x + \\sqrt{x^{2} - 1}} = -\\frac{1}{\\sqrt{x^{2} - 1}}\\). Wohi jawab, doosre raaste se."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = -\\frac{1}{\\sqrt{x^{2} - 1}}\\), \\(x > 1\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iv)",
+            "prompt": "2 (iv) Find \\(\\frac{dy}{dx}\\) if: \\(y = \\ln(1 - \\cos^{2} x)\\)",
+            "explanation": "Log ke andar trigonometric expression hai: \\(1 - \\cos^{2} x\\).\nDiya kya hai? \\(y = \\ln(1 - \\cos^{2} x)\\). Find kya karna hai? \\(\\frac{dy}{dx}\\).\nKaunsa rule? \\(\\frac{d}{dx}(\\ln u) = \\frac{u'}{u}\\), aur aakhir mein identity \\(1 - \\cos^{2} x = \\sin^{2} x\\).\nPlan: \\(u'\\) nikaalo, formula lagao, identity se saada karo. Trigonometry wale sawal mein hamesha pehle yeh dekhiye ke koi mashhoor identity to chhupi hui nahin.",
+            "steps": [
+              "Diya gaya: \\(y = \\ln(1 - \\cos^{2} x)\\), jo wahan defined hai jahan \\(\\sin x \\ne 0\\), yani \\(x \\ne n\\pi\\) (warna \\(\\ln 0\\) banta hai).\nMaloom karna: \\(\\frac{dy}{dx}\\).\nTareeqa: Chain Rule, \\(u = 1 - \\cos^{2} x\\).",
+              "Andar wale ka derivative\n\\[\\dfrac{du}{dx} = -2\\cos x\\cdot\\dfrac{d}{dx}(\\cos x)\\]\n\\[= -2\\cos x(-\\sin x) = 2\\sin x\\cos x\\]\nKyun: \\(\\cos^{2} x = (\\cos x)^{2}\\): pehle power rule (2 neeche, power ek kam), phir andar wale \\(\\cos x\\) ka derivative \\(-\\sin x\\). Do minus mil kar plus.",
+              "Chain Rule\n\\[\\dfrac{dy}{dx} = \\dfrac{2\\sin x\\cos x}{1 - \\cos^{2} x}\\]\n\\[= \\dfrac{2\\sin x\\cos x}{\\sin^{2} x}\\]\n\\[= \\dfrac{2\\cos x}{\\sin x} = 2\\cot x\\]\nKyun: formula \\(\\frac{u'}{u}\\); phir Pythagorean identity \\(1 - \\cos^{2} x = \\sin^{2} x\\); ek \\(\\sin x\\) kat gaya aur \\(\\frac{\\cos x}{\\sin x} = \\cot x\\).\nDhyan dein: tez tareeqa: shuru mein hi \\(y = \\ln(\\sin^{2} x)\\) likh lein; identity pehle dekh lena hamesha faida deta hai.",
+              "Tasdeeq: \\(x = \\frac{\\pi}{2}\\) par \\(y = \\ln 1 = 0\\), jo \\(y\\) ki sab se bari value hai (kyun ke \\(\\sin^{2} x \\le 1\\)). Wahan slope zero hona chahiye, aur waqai \\(2\\cot\\frac{\\pi}{2} = 0\\)."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = 2\\cot x\\), \\(x \\ne n\\pi\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(v)",
+            "prompt": "2 (v) Find \\(\\frac{dy}{dx}\\) if: \\(y = \\frac{\\ln x}{x^{2}}\\)",
+            "explanation": "Yeh quotient hai: oopar \\(\\ln x\\), neeche \\(x^{2}\\); sirf \\(x > 0\\) par defined.\nDiya kya hai? \\(y = \\frac{\\ln x}{x^{2}}\\). Find kya karna hai? \\(\\frac{dy}{dx}\\).\nKaunsa rule? Quotient Rule, \\(u = \\ln x\\), \\(v = x^{2}\\). \\(\\ln x\\) ka derivative \\(\\frac{1}{x}\\) humne 2.6 ke Challenge mein dekha.\nPlan: rule lagao, phir common \\(x\\) kaat do. Yeh seedha sa sawal hai, lekin Quotient Rule ki tarteeb aur aakhir ki simplification mein ehtiyat chahiye.",
+            "steps": [
+              "Diya gaya: \\(y = \\dfrac{\\ln x}{x^{2}}\\), \\(x > 0\\).\nMaloom karna: \\(\\frac{dy}{dx}\\).\nTareeqa: Quotient Rule \\(\\frac{vu' - uv'}{v^{2}}\\), jahan \\(u' = \\frac{1}{x}\\), \\(v' = 2x\\).",
+              "Quotient Rule\n\\[\\dfrac{dy}{dx} = \\dfrac{x^{2}\\cdot\\frac{1}{x} - \\ln x\\cdot 2x}{(x^{2})^{2}}\\]\n\\[= \\dfrac{x - 2x\\ln x}{x^{4}}\\]\nKyun: neeche wala zarb oopar wale ka derivative, minus oopar wala zarb neeche wale ka derivative, sab taqseem neeche wale ka square.\nDhyan dein: tarteeb ulti ki to sign ulta ho jaye ga.",
+              "Saada karein\n\\[= \\dfrac{x(1 - 2\\ln x)}{x^{4}}\\]\n\\[= \\dfrac{1 - 2\\ln x}{x^{3}}\\]\nKyun: numerator se \\(x\\) common nikala aur neeche ke \\(x^{4}\\) se kaat diya (\\(x > 0\\) hai, is liye \\(x \\ne 0\\)).",
+              "Tasdeeq: \\(x = 1\\) par \\(\\frac{1 - 0}{1} = 1\\). \\(x = 1\\) ke qareeb \\(\\ln x \\approx x - 1\\) aur \\(x^{2} \\approx 1\\), to \\(y \\approx x - 1\\), jis ka slope 1 hai. Baat mil gayi."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = \\frac{1 - 2\\ln x}{x^{3}}\\), \\(x > 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(vi)",
+            "prompt": "2 (vi) Find \\(\\frac{dy}{dx}\\) if: \\(y = \\frac{\\sqrt{x^{2} - 1}\\,(2x + 1)}{(x^{3} - 1)^{3/2}}\\)",
+            "explanation": "Yeh is exercise ka sab se lamba sawal hai: kai factors ka zarb aur taqseem, saath mein roots aur powers.\nDiya kya hai? \\(y\\). Find kya karna hai? \\(\\frac{dy}{dx}\\).\nKaunsa rule? Seedha Product aur Quotient Rule bohat lamba hoga. Is liye logarithmic differentiation: dono taraf \\(\\ln\\) lo, log ke qawaid se zarb ko jama aur power ko multiplier bana do, phir differentiate karo.\nPlan: domain, \\(\\ln\\) le kar todna, differentiate, \\(y\\) se zarb, aakhir mein saada karna. Log lene ka faida yeh hai ke zarb jama ban jata hai aur power aage aa kar sirf ek number ban jati hai; yani mushkil kaam aasan tukron mein bat jata hai.",
+            "steps": [
+              "Diya gaya: \\(y = \\dfrac{\\sqrt{x^{2} - 1}\\,(2x + 1)}{(x^{3} - 1)^{3/2}}\\). Neeche \\((x^{3} - 1)^{3/2}\\) ke liye \\(x^{3} - 1 > 0\\), yani \\(x > 1\\); tab har factor positive hai aur \\(y > 0\\).\nMaloom karna: \\(\\frac{dy}{dx}\\).\nTareeqa: logarithmic differentiation.",
+              "\\(\\ln\\) lein aur todein\n\\[\\ln y = \\ln\\sqrt{x^{2} - 1} + \\ln(2x + 1)\\]\n\\[\\quad - \\ln(x^{3} - 1)^{3/2}\\]\n\\[\\ln y = \\tfrac{1}{2}\\ln(x^{2} - 1) + \\ln(2x + 1)\\]\n\\[\\quad - \\tfrac{3}{2}\\ln(x^{3} - 1)\\]\nKyun: \\(\\ln\\frac{AB}{C} = \\ln A + \\ln B - \\ln C\\) aur \\(\\ln A^{n} = n\\ln A\\). Yeh is liye jaiz hai ke \\(x > 1\\) par har factor positive hai (negative ka log nahin hota).",
+              "Dono taraf \\(x\\) ke lihaz se differentiate karein\n\\[\\dfrac{1}{y}\\dfrac{dy}{dx} = \\dfrac{1}{2}\\cdot\\dfrac{2x}{x^{2} - 1} + \\dfrac{2}{2x + 1}\\]\n\\[\\quad - \\dfrac{3}{2}\\cdot\\dfrac{3x^{2}}{x^{3} - 1}\\]\n\\[= \\dfrac{x}{x^{2} - 1} + \\dfrac{2}{2x + 1} - \\dfrac{9x^{2}}{2(x^{3} - 1)}\\]\nKyun: baayen taraf \\(y\\) khud \\(x\\) par munhasir hai, is liye \\(\\frac{d}{dx}(\\ln y) = \\frac{1}{y}\\frac{dy}{dx}\\) (implicit differentiation). Daayen taraf har term par \\(\\frac{u'}{u}\\).\nDhyan dein: \\(\\frac{1}{y}\\frac{dy}{dx}\\) mein \\(\\frac{dy}{dx}\\) lagana mat bhooliye; sirf \\(\\frac{1}{y}\\) likhna aam ghalti hai.",
+              "\\(y\\) se zarb dein\n\\[\\dfrac{dy}{dx} = y\\left[\\dfrac{x}{x^{2} - 1} + \\dfrac{2}{2x + 1} - \\dfrac{9x^{2}}{2(x^{3} - 1)}\\right]\\]\njahan \\(y = \\frac{\\sqrt{x^{2} - 1}\\,(2x + 1)}{(x^{3} - 1)^{3/2}}\\). Yeh shakal bhi bilkul sahih jawab hai; exam mein yahan ruk sakte hain.\nKyun: \\(\\frac{dy}{dx}\\) ko akela karne ke liye dono taraf \\(y\\) se zarb diya.",
+              "Bracket saada karein: common denominator\n\\(x^{2} - 1 = (x - 1)(x + 1)\\) aur \\(x^{3} - 1 = (x - 1)(x^{2} + x + 1)\\), to common denominator \\(2(x^{2} - 1)(2x + 1)(x^{2} + x + 1)\\) hai. Teeno numerators:\n\\[2x(2x + 1)(x^{2} + x + 1)\\]\n\\[= 4x^{4} + 6x^{3} + 6x^{2} + 2x\\]\n\\[4(x^{2} - 1)(x^{2} + x + 1)\\]\n\\[= 4x^{4} + 4x^{3} - 4x - 4\\]\n\\[9x^{2}(x + 1)(2x + 1)\\]\n\\[= 18x^{4} + 27x^{3} + 9x^{2}\\]\nKyun: har fraction ko un factors se zarb diya jo us ke apne denominator mein kam hain (teesre \\(\\frac{9x^{2}}{2(x - 1)(x^{2} + x + 1)}\\) ko \\((x + 1)(2x + 1)\\) chahiye).",
+              "Jama karein (pehla + doosra - teesra)\n\\[(8x^{4} + 10x^{3} + 6x^{2} - 2x - 4)\\]\n\\[\\quad - (18x^{4} + 27x^{3} + 9x^{2})\\]\n\\[= -10x^{4} - 17x^{3} - 3x^{2} - 2x - 4\\]\n\\[[\\dots] = -\\dfrac{10x^{4} + 17x^{3} + 3x^{2} + 2x + 4}{2(x^{2} - 1)(2x + 1)(x^{2} + x + 1)}\\]\nKyun: ek jaisi powers ko jama kiya: \\(8 - 18 = -10\\), \\(10 - 27 = -17\\), \\(6 - 9 = -3\\).",
+              "\\(y\\) se zarb aur katna\n\\[\\dfrac{dy}{dx} = -\\dfrac{10x^{4} + 17x^{3} + 3x^{2} + 2x + 4}{2\\sqrt{x^{2} - 1}\\,(x^{2} + x + 1)(x^{3} - 1)^{3/2}}\\]\nKyun: \\((2x + 1)\\) oopar neeche se kat gaya, aur \\(\\frac{\\sqrt{x^{2} - 1}}{x^{2} - 1} = \\frac{1}{\\sqrt{x^{2} - 1}}\\).",
+              "Tasdeeq \\(x = 2\\) par: \\(y = \\frac{5\\sqrt{3}}{7^{3/2}}\\); bracket \\(\\frac{2}{3} + \\frac{2}{5} - \\frac{36}{14} = -\\frac{158}{105}\\), to \\(\\frac{dy}{dx} = \\frac{5\\sqrt{3}}{7^{3/2}}\\left(-\\frac{158}{105}\\right) \\approx -0.7036\\).\nAakhri formula se: \\(-\\frac{316}{2\\sqrt{3}(7)(7^{3/2})} \\approx -0.7036\\). Dono barabar (sympy ne bhi tasdeeq ki)."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = -\\frac{10x^{4} + 17x^{3} + 3x^{2} + 2x + 4}{2\\sqrt{x^{2} - 1}\\,(x^{2} + x + 1)(x^{3} - 1)^{3/2}}\\), \\(x > 1\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

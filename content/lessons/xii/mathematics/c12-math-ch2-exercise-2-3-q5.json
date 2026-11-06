@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-3-Q5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-3-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 50,
+          "pdf_to": 50,
+          "note": "Exercise 2.3, Question 5: book p. 47-48, Q1-Q11 (Q1-4 tangent and normal lines, Q5-11 higher-order derivatives); no printed answers"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(i)",
+            "prompt": "5 (i) Find \\(y_{2}\\) if \\(y = x^{4} - 3x^{2} + 4x - 5\\).",
+            "explanation": "A polynomial: differentiate term by term twice.\nGiven: \\(y\\). To find: \\(y_{2} = \\frac{d^{2}y}{dx^{2}}\\).\nPlan: power rule for \\(y_{1}\\), then again for \\(y_{2}\\).",
+            "steps": [
+              "Given: \\(y = x^{4} - 3x^{2} + 4x - 5\\).\nTo find: \\(y_{2}\\).\nMethod: power rule \\(\\frac{d}{dx}x^{n} = nx^{n-1}\\), applied twice.",
+              "First derivative\n\\[y_{1} = 4x^{3} - 6x + 4\\]\nWhy: \\(x^{4} \\to 4x^{3}\\), \\(-3x^{2} \\to -6x\\), \\(4x \\to 4\\), \\(-5 \\to 0\\).",
+              "Second derivative\n\\[y_{2} = 12x^{2} - 6\\]\nWhy: differentiate \\(y_{1}\\) again: \\(4x^{3} \\to 12x^{2}\\), \\(-6x \\to -6\\), \\(4 \\to 0\\).",
+              "Check\n\\(y\\) has degree 4, so \\(y_{2}\\) must have degree 2 with leading coefficient \\(4 \\times 3 = 12\\). It does."
+            ],
+            "final_answer": "\\(y_{2} = 12x^{2} - 6\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(ii)",
+            "prompt": "5 (ii) Find \\(y_{2}\\) if \\(y = \\ln(2x + 3)\\).",
+            "explanation": "A logarithm of a linear expression: chain rule each time.\nTo find: \\(y_{2}\\).\nPlan: \\(y_{1} = \\frac{2}{2x+3}\\), write it as \\(2(2x+3)^{-1}\\), differentiate again.",
+            "steps": [
+              "Given: \\(y = \\ln(2x + 3)\\).\nTo find: \\(y_{2}\\).\nMethod: \\(\\frac{d}{dx}\\ln u = \\frac{1}{u}\\frac{du}{dx}\\), then the power rule with the chain rule.",
+              "First derivative\n\\[y_{1} = \\dfrac{1}{2x + 3}\\cdot 2\\]\n\\[= 2(2x + 3)^{-1}\\]\nWhy: \\(u = 2x + 3\\), \\(\\frac{du}{dx} = 2\\). Writing it as a power makes the next step easy.",
+              "Second derivative\n\\[y_{2} = 2(-1)(2x + 3)^{-2}\\cdot 2\\]\n\\[= -\\dfrac{4}{(2x + 3)^{2}}\\]\nWhy: power rule on \\((2x+3)^{-1}\\) and the chain-rule factor 2 again.",
+              "Check\nAt \\(x = -1\\): \\(2x + 3 = 1\\), so \\(y_{1} = 2\\) and \\(y_{2} = -4\\). A log curve bends downward, so a negative \\(y_{2}\\) is expected."
+            ],
+            "final_answer": "\\(y_{2} = -\\frac{4}{(2x + 3)^{2}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(iii)",
+            "prompt": "5 (iii) Find \\(y_{2}\\) if \\(y = x^{3}e^{2x}\\).",
+            "explanation": "A product of two functions: product rule, twice.\nTo find: \\(y_{2}\\).\nPlan: \\(y_{1}\\) by the product rule, factor out \\(e^{2x}\\), then the product rule again.",
+            "steps": [
+              "Given: \\(y = x^{3}e^{2x}\\).\nTo find: \\(y_{2}\\).\nMethod: product rule \\((uv)' = u'v + uv'\\) with \\(\\frac{d}{dx}e^{2x} = 2e^{2x}\\).",
+              "First derivative\n\\[y_{1} = 3x^{2}e^{2x} + x^{3}\\cdot 2e^{2x}\\]\n\\[= e^{2x}(2x^{3} + 3x^{2})\\]\nWhy: \\(u = x^{3}\\), \\(v = e^{2x}\\); taking \\(e^{2x}\\) common keeps the next step short.",
+              "Second derivative\n\\[y_{2} = 2e^{2x}(2x^{3} + 3x^{2}) + e^{2x}(6x^{2} + 6x)\\]\n\\[= e^{2x}(4x^{3} + 12x^{2} + 6x)\\]\n\\[= 2xe^{2x}(2x^{2} + 6x + 3)\\]\nWhy: product rule again with \\(e^{2x}\\) and \\(2x^{3} + 3x^{2}\\); then collect like terms and factor \\(2x\\).",
+              "Check\nLeibniz form: \\(u''v + 2u'v' + uv''\\)\n\\[= 6xe^{2x} + 12x^{2}e^{2x} + 4x^{3}e^{2x}\\]\nThe same three terms."
+            ],
+            "final_answer": "\\(y_{2} = e^{2x}(4x^{3} + 12x^{2} + 6x) = 2xe^{2x}(2x^{2} + 6x + 3)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(iv)",
+            "prompt": "5 (iv) Find \\(y_{2}\\) if \\(x^{2} - y^{2} = 4\\).",
+            "explanation": "An implicit equation: differentiate with \\(y\\) as a function of \\(x\\).\nTo find: \\(y_{2}\\), as simple as possible.\nPlan: \\(y_{1} = \\frac{x}{y}\\), quotient rule, then use \\(x^{2} - y^{2} = 4\\).",
+            "steps": [
+              "Given: \\(x^{2} - y^{2} = 4\\) ...(1).\nTo find: \\(y_{2}\\).\nMethod: implicit differentiation for \\(y_{1}\\); quotient rule for \\(y_{2}\\); finally replace \\(y^{2} - x^{2}\\) by \\(-4\\) from (1).",
+              "First derivative\n\\[2x - 2yy_{1} = 0 \\Rightarrow y_{1} = \\dfrac{x}{y}\\]\nWhy: \\(\\frac{d}{dx}y^{2} = 2yy_{1}\\) by the chain rule.",
+              "Second derivative\n\\[y_{2} = \\dfrac{y\\cdot 1 - x\\,y_{1}}{y^{2}}\\]\n\\[= \\dfrac{y - x\\cdot\\frac{x}{y}}{y^{2}}\\]\n\\[= \\dfrac{y^{2} - x^{2}}{y^{3}}\\]\nWhy: quotient rule on \\(\\frac{x}{y}\\) (the derivative of \\(y\\) is \\(y_{1}\\)); then put \\(y_{1} = \\frac{x}{y}\\) and multiply top and bottom by \\(y\\).",
+              "Use the curve\n\\[y^{2} - x^{2} = -(x^{2} - y^{2}) = -4\\]\n\\[y_{2} = -\\dfrac{4}{y^{3}}\\]\nWhy: from (1).",
+              "Check\nDifferentiate \\(2x - 2yy_{1} = 0\\) once more: \\(2 - 2y_{1}^{2} - 2yy_{2} = 0\\), so \\(y_{2} = \\frac{1 - y_{1}^{2}}{y} = \\frac{y^{2} - x^{2}}{y^{3}}\\). Same result."
+            ],
+            "final_answer": "\\(y_{2} = \\frac{y^{2} - x^{2}}{y^{3}} = -\\frac{4}{y^{3}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(v)",
+            "prompt": "5 (v) Find \\(y_{2}\\) if \\(x^{2} - xy + y^{2} = 7\\).",
+            "explanation": "Implicit again, with an \\(xy\\) term (product rule).\nTo find: \\(y_{2}\\) in a short form.\nPlan: \\(y_{1}\\) as in Question 4, quotient rule, simplify the numerator, use the curve's value 7.",
+            "steps": [
+              "Given: \\(x^{2} - xy + y^{2} = 7\\) ...(1).\nTo find: \\(y_{2}\\).\nMethod: implicit differentiation for \\(y_{1}\\); quotient rule for \\(y_{2}\\); then the curve's own expression \\(x^{2} - xy + y^{2}\\) appears and is replaced by 7.",
+              "First derivative\n\\[2x - (xy_{1} + y) + 2yy_{1} = 0\\]\n\\[y_{1} = \\dfrac{y - 2x}{2y - x} \\quad \\text{...(2)}\\]\nWhy: product rule for \\(xy\\); chain rule for \\(y^{2}\\); collect the \\(y_{1}\\) terms.",
+              "Quotient rule\n\\[y_{2} = \\dfrac{N}{(2y - x)^{2}}, \\text{ where}\\]\n\\[N = (2y - x)(y_{1} - 2)\\]\n\\[\\quad - (y - 2x)(2y_{1} - 1)\\]\nWhy: the top \\(y - 2x\\) has derivative \\(y_{1} - 2\\); the bottom \\(2y - x\\) has derivative \\(2y_{1} - 1\\).",
+              "Simplify the numerator\n\\[(2yy_{1} - 4y - xy_{1} + 2x)\\]\n\\[- (2yy_{1} - y - 4xy_{1} + 2x)\\]\n\\[= 3xy_{1} - 3y = 3(xy_{1} - y)\\]\nWhy: expand both products; \\(2yy_{1}\\) and \\(2x\\) cancel.",
+              "Use (2) and (1)\n\\[xy_{1} - y = \\dfrac{x(y - 2x) - y(2y - x)}{2y - x}\\]\n\\[= \\dfrac{-2(x^{2} - xy + y^{2})}{2y - x}\\]\n\\[= \\dfrac{-14}{2y - x}\\]\nWhy: the top is \\(xy - 2x^{2} - 2y^{2} + xy\\); by (1) the bracket equals 7.",
+              "Result\n\\[y_{2} = \\dfrac{3\\cdot\\frac{-14}{2y - x}}{(2y - x)^{2}}\\]\n\\[= -\\dfrac{42}{(2y - x)^{3}}\\]\nWhy: put the simplified numerator back.",
+              "Check\nAt \\((1, 3)\\) (on the curve: \\(1 - 3 + 9 = 7\\)), \\(y_{1} = \\frac{1}{5}\\). Differentiating (1) twice gives \\(2 - 2y_{1} - xy_{2} + 2y_{1}^{2} + 2yy_{2} = 0\\):\n\\[2 - \\tfrac{2}{5} + \\tfrac{2}{25} + 5y_{2} = 0\\]\n\\[y_{2} = -\\tfrac{42}{125}\\]\nand the formula gives \\(-\\frac{42}{5^{3}} = -\\frac{42}{125}\\)."
+            ],
+            "final_answer": "\\(y_{2} = -\\frac{42}{(2y - x)^{3}}\\), the same as \\(\\frac{42}{(x - 2y)^{3}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(vi)",
+            "prompt": "5 (vi) Find \\(y_{2}\\) if \\(x = a\\cos t\\), \\(y = b\\sin t\\).",
+            "explanation": "Parametric equations: \\(y_{1} = \\frac{dy/dt}{dx/dt}\\), and \\(y_{2} = \\frac{d}{dt}(y_{1})\\cdot\\frac{dt}{dx}\\).\nTo find: \\(y_{2}\\) in terms of \\(t\\).\nPlan: find both \\(t\\)-derivatives, \\(y_{1}\\), then differentiate \\(y_{1}\\) with respect to \\(t\\) and divide by \\(\\frac{dx}{dt}\\).",
+            "steps": [
+              "Given: \\(x = a\\cos t\\), \\(y = b\\sin t\\).\nTo find: \\(y_{2}\\).\nMethod: parametric differentiation twice: \\(y_{2} = \\frac{d}{dt}(y_{1})\\cdot\\frac{dt}{dx}\\).",
+              "Derivatives with respect to \\(t\\)\n\\[\\dfrac{dx}{dt} = -a\\sin t, \\quad \\dfrac{dy}{dt} = b\\cos t\\]\nWhy: \\(\\frac{d}{dt}\\cos t = -\\sin t\\), \\(\\frac{d}{dt}\\sin t = \\cos t\\).",
+              "First derivative\n\\[y_{1} = \\dfrac{b\\cos t}{-a\\sin t} = -\\dfrac{b}{a}\\cot t\\]\nWhy: \\(y_{1} = \\frac{dy/dt}{dx/dt}\\).",
+              "Second derivative\n\\[y_{2} = \\dfrac{d}{dt}\\left(-\\dfrac{b}{a}\\cot t\\right)\\cdot\\dfrac{dt}{dx}\\]\n\\[= \\dfrac{b}{a}\\csc^{2}t\\cdot\\dfrac{1}{-a\\sin t}\\]\n\\[= -\\dfrac{b}{a^{2}\\sin^{3}t}\\]\nWhy: \\(\\frac{d}{dt}\\cot t = -\\csc^{2}t\\); \\(\\frac{dt}{dx} = \\frac{1}{dx/dt}\\); \\(\\csc^{2}t = \\frac{1}{\\sin^{2}t}\\).",
+              "Check\nFor \\(a = b = 1\\) the curve is the circle \\(x^{2} + y^{2} = 1\\), where \\(y_{2} = -\\frac{x^{2} + y^{2}}{y^{3}} = -\\frac{1}{y^{3}}\\). With \\(y = \\sin t\\) this is \\(-\\frac{1}{\\sin^{3}t}\\), as the formula gives."
+            ],
+            "final_answer": "\\(y_{2} = -\\frac{b}{a^{2}\\sin^{3}t} = -\\frac{b}{a^{2}}\\csc^{3}t\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(vii)",
+            "prompt": "5 (vii) Find \\(y_{2}\\) if \\(x = t^{2}\\), \\(y = 2t^{3}\\).",
+            "explanation": "Parametric equations again.\nTo find: \\(y_{2}\\) in terms of \\(t\\).\nPlan: \\(y_{1} = \\frac{dy/dt}{dx/dt}\\), then \\(y_{2} = \\frac{d}{dt}(y_{1})\\div\\frac{dx}{dt}\\).",
+            "steps": [
+              "Given: \\(x = t^{2}\\), \\(y = 2t^{3}\\).\nTo find: \\(y_{2}\\).\nMethod: parametric differentiation twice.",
+              "First derivative\n\\[\\dfrac{dx}{dt} = 2t, \\quad \\dfrac{dy}{dt} = 6t^{2}\\]\n\\[y_{1} = \\dfrac{6t^{2}}{2t} = 3t\\]\nWhy: \\(y_{1} = \\frac{dy/dt}{dx/dt}\\) (for \\(t \\ne 0\\)).",
+              "Second derivative\n\\[y_{2} = \\dfrac{d}{dt}(3t)\\cdot\\dfrac{dt}{dx}\\]\n\\[= 3\\cdot\\dfrac{1}{2t} = \\dfrac{3}{2t}\\]\nWhy: \\(y_{1} = 3t\\) is a function of \\(t\\); multiply its \\(t\\)-derivative by \\(\\frac{dt}{dx} = \\frac{1}{2t}\\).",
+              "Check\nFor \\(t > 0\\): \\(t = \\sqrt{x}\\), so \\(y = 2x^{3/2}\\), \\(y_{1} = 3x^{1/2}\\), \\(y_{2} = \\frac{3}{2}x^{-1/2} = \\frac{3}{2t}\\). Same."
+            ],
+            "final_answer": "\\(y_{2} = \\frac{3}{2t}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

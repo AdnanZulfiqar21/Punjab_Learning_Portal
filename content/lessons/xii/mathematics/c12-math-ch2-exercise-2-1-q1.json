@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-1-Q1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-1-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 43,
+          "note": "Exercise 2.1, Question 1 (a)-(c): derive the derivatives of sec x, csc x, cot x; book p. 41. Unit 2 has no printed answers."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(a)",
+            "prompt": "1 (a) Derive the formula for the derivative of the following function w.r.t. \\(x\\): \\(\\sec x\\)",
+            "explanation": "A derivation: we must obtain the rule for \\(\\frac{d}{dx}(\\sec x)\\), not just quote it.\nWrite \\(\\sec x = \\frac{1}{\\cos x}\\); then only \\((\\cos x)' = -\\sin x\\) is needed.\nPlan: quotient rule (as in the book's Example 1 for \\(\\tan x\\)), then simplify into \\(\\sec x\\tan x\\).",
+            "steps": [
+              "Given: \\(y = \\sec x\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: \\(\\sec x = \\frac{1}{\\cos x}\\) is a quotient \\(\\frac{u}{v}\\) with \\(u = 1\\), \\(v = \\cos x\\), so we use the quotient rule \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\).",
+              "Write sec x as a quotient\n\\[y = \\sec x = \\dfrac{1}{\\cos x}\\]\nWhy: \\(\\sec x\\) is defined as the reciprocal of \\(\\cos x\\), and we already know the derivative of \\(\\cos x\\).",
+              "Apply the quotient rule\n\\[\\dfrac{dy}{dx} = \\dfrac{(1)'\\cos x - 1\\,(\\cos x)'}{\\cos^2 x}\\]\nWhy: \\(u = 1\\), \\(v = \\cos x\\) in \\(\\frac{u'v - uv'}{v^2}\\).",
+              "Put in the known derivatives\n\\[= \\dfrac{0 \\cdot \\cos x - 1\\,(-\\sin x)}{\\cos^2 x}\\]\n\\[= \\dfrac{\\sin x}{\\cos^2 x}\\]\nWhy: the derivative of a constant is 0, and \\((\\cos x)' = -\\sin x\\); the two minus signs give plus.",
+              "Split into sec and tan\n\\[\\dfrac{\\sin x}{\\cos^2 x} = \\dfrac{1}{\\cos x} \\cdot \\dfrac{\\sin x}{\\cos x}\\]\n\\[= \\sec x \\tan x\\]\nWhy: \\(\\cos^2 x = \\cos x \\cdot \\cos x\\); \\(\\frac{1}{\\cos x} = \\sec x\\) and \\(\\frac{\\sin x}{\\cos x} = \\tan x\\). This holds wherever \\(\\cos x \\neq 0\\).",
+              "Another way: from the definition (first principles)\n\\[\\sec(x+h) - \\sec x = \\dfrac{\\cos x - \\cos(x+h)}{\\cos x\\cos(x+h)}\\]\n\\[\\cos x - \\cos(x+h) = 2\\sin\\left(x + \\tfrac{h}{2}\\right)\\sin\\tfrac{h}{2}\\]\n\\[f'(x) = \\lim_{h \\to 0} \\dfrac{\\sin(x + \\frac{h}{2})}{\\cos x\\cos(x+h)} \\cdot \\dfrac{\\sin\\frac{h}{2}}{\\frac{h}{2}}\\]\n\\[= \\dfrac{\\sin x}{\\cos^2 x} \\cdot 1 = \\sec x\\tan x\\]\nWhy: \\(\\cos p - \\cos q = -2\\sin\\frac{p+q}{2}\\sin\\frac{p-q}{2}\\) and \\(\\lim_{\\theta \\to 0}\\frac{\\sin\\theta}{\\theta} = 1\\), exactly as the book proves \\((\\sin x)' = \\cos x\\). Use this if an examiner asks 'by definition'.",
+              "Check at one point\n\\[x = 0:\\ \\sec 0 \\tan 0 = 1 \\cdot 0 = 0\\]\nWhy: \\(\\sec x\\) has its lowest point 1 at \\(x = 0\\) (where \\(\\cos x\\) is largest), so the slope there must be 0. It is."
+            ],
+            "final_answer": "\\(\\frac{d}{dx}(\\sec x) = \\sec x \\tan x\\), for \\(\\cos x \\neq 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(b)",
+            "prompt": "1 (b) Derive the formula for the derivative of the following function w.r.t. \\(x\\): \\(\\csc x\\)",
+            "explanation": "Again a derivation: write \\(\\csc x = \\frac{1}{\\sin x}\\).\nWe know \\((\\sin x)' = \\cos x\\), so the quotient rule gives the result.\nPlan: quotient rule, then split \\(\\frac{\\cos x}{\\sin^2 x}\\) into \\(\\csc x \\cot x\\); watch the minus sign.",
+            "steps": [
+              "Given: \\(y = \\csc x\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: quotient rule with \\(u = 1\\), \\(v = \\sin x\\).",
+              "Write csc x as a quotient\n\\[y = \\csc x = \\dfrac{1}{\\sin x}\\]\nWhy: \\(\\csc x\\) is the reciprocal of \\(\\sin x\\).",
+              "Apply the quotient rule\n\\[\\dfrac{dy}{dx} = \\dfrac{(1)'\\sin x - 1\\,(\\sin x)'}{\\sin^2 x}\\]\n\\[= \\dfrac{0 - \\cos x}{\\sin^2 x} = -\\dfrac{\\cos x}{\\sin^2 x}\\]\nWhy: \\((1)' = 0\\) and \\((\\sin x)' = \\cos x\\).",
+              "Split into csc and cot\n\\[-\\dfrac{\\cos x}{\\sin^2 x} = -\\dfrac{1}{\\sin x} \\cdot \\dfrac{\\cos x}{\\sin x}\\]\n\\[= -\\csc x \\cot x\\]\nWhy: \\(\\frac{1}{\\sin x} = \\csc x\\), \\(\\frac{\\cos x}{\\sin x} = \\cot x\\). Valid wherever \\(\\sin x \\neq 0\\), i.e. \\(x \\neq n\\pi\\).",
+              "Check the sign\n\\[x = \\tfrac{\\pi}{4}:\\ -\\csc\\tfrac{\\pi}{4}\\cot\\tfrac{\\pi}{4} = -\\sqrt{2}\\]\nWhy: on \\(0 < x < \\frac{\\pi}{2}\\), \\(\\sin x\\) increases, so \\(\\csc x = \\frac{1}{\\sin x}\\) decreases: the slope must be negative, and it is."
+            ],
+            "final_answer": "\\(\\frac{d}{dx}(\\csc x) = -\\csc x \\cot x\\), for \\(\\sin x \\neq 0\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The box 'The Derivatives of Six Trigonometric Functions' (book page 36) prints item (vi) as \\(\\frac{d}{dx}(\\csc x) = \\csc x \\cot x\\). The minus sign is missing: the derivation above gives \\(\\frac{d}{dx}(\\csc x) = -\\csc x \\cot x\\). (The book's own Example 2 uses the correct minus sign.)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(c)",
+            "prompt": "1 (c) Derive the formula for the derivative of the following function w.r.t. \\(x\\): \\(\\cot x\\)",
+            "explanation": "Derivation again: \\(\\cot x = \\frac{\\cos x}{\\sin x}\\), a quotient of two functions we can differentiate.\nAfter the quotient rule the top becomes \\(-(\\sin^2 x + \\cos^2 x)\\), which is \\(-1\\).\nPlan: quotient rule, Pythagorean identity, then \\(\\frac{1}{\\sin^2 x} = \\csc^2 x\\).",
+            "steps": [
+              "Given: \\(y = \\cot x\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: quotient rule with \\(u = \\cos x\\), \\(v = \\sin x\\).",
+              "Write cot x as a quotient\n\\[y = \\cot x = \\dfrac{\\cos x}{\\sin x}\\]\nWhy: by definition \\(\\cot x = \\frac{\\cos x}{\\sin x}\\).",
+              "Apply the quotient rule\n\\[\\dfrac{dy}{dx} = \\dfrac{(\\cos x)'\\sin x - \\cos x\\,(\\sin x)'}{\\sin^2 x}\\]\n\\[= \\dfrac{-\\sin x \\sin x - \\cos x \\cos x}{\\sin^2 x}\\]\nWhy: \\((\\cos x)' = -\\sin x\\), \\((\\sin x)' = \\cos x\\).",
+              "Use the identity\n\\[= \\dfrac{-(\\sin^2 x + \\cos^2 x)}{\\sin^2 x}\\]\n\\[= -\\dfrac{1}{\\sin^2 x} = -\\csc^2 x\\]\nWhy: \\(\\sin^2 x + \\cos^2 x = 1\\) and \\(\\frac{1}{\\sin x} = \\csc x\\). Valid for \\(\\sin x \\neq 0\\).",
+              "Check\n\\[\\cot x = \\dfrac{1}{\\tan x}:\\ \\dfrac{-\\sec^2 x}{\\tan^2 x} = -\\dfrac{1}{\\sin^2 x}\\]\nWhy: differentiating \\(\\frac{1}{\\tan x}\\) with the quotient rule and \\((\\tan x)' = \\sec^2 x\\) gives \\(-\\frac{\\sec^2 x}{\\tan^2 x} = -\\frac{1}{\\cos^2 x}\\cdot\\frac{\\cos^2 x}{\\sin^2 x}\\), the same answer."
+            ],
+            "final_answer": "\\(\\frac{d}{dx}(\\cot x) = -\\csc^2 x\\), for \\(\\sin x \\neq 0\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

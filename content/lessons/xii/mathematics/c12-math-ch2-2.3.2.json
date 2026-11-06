@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.3.2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.3.2",
+      "title": "2.3.2 Derivative of a Function Given in the Form of Parametric Equations",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 39,
+          "pdf_to": 40,
+          "note": "Book p. 37-38: derivative of a function given by parametric equations x = f(t), y = g(t) via the chain rule; Example 4"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Let a function be represented by parametric equations\n\\[x = f(t) \\quad \\text{and} \\quad y = g(t)\\]\nFrom \\(x = f(t)\\), we have\n\\[t = f^{-1}(x)\\]\n(Provided \\(f\\) is bijective)\nNow, by Chain Rule applying to \\(y = g(t)\\) and \\(t = f^{-1}(x)\\), we get:\n\\[\\dfrac{dy}{dx} = \\dfrac{dy}{dt} \\cdot \\dfrac{dt}{dx}\\]\n\\[\\dfrac{dy}{dx} = \\dfrac{\\;\\frac{dy}{dt}\\;}{\\frac{dx}{dt}}\\]\n\\(\\left(\\because \\frac{dt}{dx} = \\frac{1}{dx/dt}\\right)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What 'parametric' means: instead of one equation between \\(x\\) and \\(y\\), both are given in terms of a third variable \\(t\\), called the parameter. Think of \\(t\\) as time and \\((x, y)\\) as the position of a moving point: each value of \\(t\\) gives one point of the curve.\nWhy \\(f\\) must be bijective (one-one and onto): then each \\(x\\) comes from exactly one \\(t\\), so \\(t = f^{-1}(x)\\) exists and \\(y\\) really is a function of \\(x\\).\nWhy \\(\\frac{dt}{dx} = \\frac{1}{dx/dt}\\): the rate of \\(t\\) with respect to \\(x\\) is the reciprocal of the rate of \\(x\\) with respect to \\(t\\). This needs \\(\\frac{dx}{dt} \\ne 0\\).\nWhy this is useful: we never need to find \\(f^{-1}\\). We only differentiate \\(x\\) and \\(y\\) with respect to \\(t\\) and divide."
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{dy}{dx} = \\dfrac{dy/dt}{dx/dt}, \\quad \\dfrac{dx}{dt} \\ne 0",
+            "text_alt": "dy by dx equals dy by dt divided by dx by dt, provided dx by dt is not zero"
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "Find \\(\\frac{dy}{dx}\\) if \\(y = a\\cos t\\) and \\(x = a\\sin t\\).",
+            "steps": [
+              "Given: \\(y = a\\cos t\\), \\(x = a\\sin t\\) (parametric equations with parameter \\(t\\)).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: both \\(x\\) and \\(y\\) are given in terms of \\(t\\), so differentiate each with respect to \\(t\\) and divide: \\(\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt}\\).",
+              "Step 1: Differentiate both equations w.r.t. t\n\\[\\dfrac{dy}{dt} = -a\\sin t\\]\n\\[\\dfrac{dx}{dt} = a\\cos t\\]\nWhy: \\(a\\) is a constant; \\((\\cos t)' = -\\sin t\\) and \\((\\sin t)' = \\cos t\\).",
+              "Step 2: Apply the Chain Rule\n\\[\\dfrac{dy}{dx} = \\dfrac{dy/dt}{dx/dt}\\]\n\\[= -\\dfrac{a\\sin t}{a\\cos t}\\]\n\\[= -\\tan t\\]\nWhy: \\(a\\) cancels (\\(a \\ne 0\\)) and \\(\\frac{\\sin t}{\\cos t} = \\tan t\\). We need \\(\\cos t \\ne 0\\).",
+              "Check: eliminate \\(t\\): \\(x^{2} + y^{2} = a^{2}\\sin^{2} t + a^{2}\\cos^{2} t = a^{2}\\), a circle. Differentiating \\(x^{2} + y^{2} = a^{2}\\) implicitly (2.3.3) gives \\(2x + 2y\\frac{dy}{dx} = 0\\), so\n\\[\\dfrac{dy}{dx} = -\\dfrac{x}{y} = -\\dfrac{a\\sin t}{a\\cos t}\\]\n\\[= -\\tan t\\]\nSame answer."
+            ],
+            "answer": "\\(\\frac{dy}{dx} = -\\tan t\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our examples:\n(a) \\(x = t^{2}\\), \\(y = t^{3}\\): \\(\\frac{dy}{dt} = 3t^{2}\\), \\(\\frac{dx}{dt} = 2t\\), so \\(\\frac{dy}{dx} = \\frac{3t^{2}}{2t} = \\frac{3t}{2}\\) (\\(t \\ne 0\\)).\n(b) \\(x = a\\cos t\\), \\(y = b\\sin t\\) (an ellipse): \\(\\frac{dy}{dx} = \\frac{b\\cos t}{-a\\sin t} = -\\frac{b}{a}\\cot t\\) (\\(\\sin t \\ne 0\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Parametric form: \\(x = f(t)\\), \\(y = g(t)\\), with parameter \\(t\\).\n2. \\(\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt}\\), provided \\(\\frac{dx}{dt} \\ne 0\\); it comes from the chain rule.\n3. The answer is usually left in terms of \\(t\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Dividing the wrong way: \\(\\frac{dx/dt}{dy/dt}\\) gives \\(\\frac{dx}{dy}\\), not \\(\\frac{dy}{dx}\\).\n2. Forgetting the minus sign of \\((\\cos t)' = -\\sin t\\).\n3. Ignoring the points where \\(\\frac{dx}{dt} = 0\\) (in Example 4, where \\(\\cos t = 0\\))."
+          }
+        ]
+      }
+    }
+  ]
+}

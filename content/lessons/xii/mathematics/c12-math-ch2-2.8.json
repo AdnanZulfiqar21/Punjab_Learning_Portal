@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.8",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.8",
+      "title": "2.8 Higher-Order Derivatives",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 47,
+          "pdf_to": 49,
+          "note": "Book p. 45-47: 2.8 higher-order derivatives, notation table, Examples 11-14, Challenge! box (y10)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The derivative \\(f'\\) of a function \\(f\\) is itself a function and hence may have a derivative of its own. If \\(f'\\) is differentiable, then its derivative is denoted by \\(f''\\) and is called the second derivative of \\(f\\). As long as the new function remains differentiable, we can continue the process of differentiating to obtain the third, fourth, fifth, and even higher derivatives of \\(f\\). These successive derivatives are called higher-order derivatives."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Think of motion: if \\(s(t)\\) is the position of a car, then \\(s'(t)\\) is its velocity and \\(s''(t)\\) (the derivative of the velocity) is its acceleration. In the same way, \\(f''(x)\\) tells how fast the slope \\(f'(x)\\) itself is changing. Nothing new is needed to find it: just differentiate the derivative, using all the rules you already know."
+          },
+          {
+            "type": "paragraph",
+            "text": "The following are the commonly used notations for higher-order derivatives:"
+          },
+          {
+            "type": "table",
+            "header": [
+              "1st derivative",
+              "2nd derivative",
+              "3rd derivative",
+              "...",
+              "nth derivative"
+            ],
+            "rows": [
+              [
+                "\\(y'\\)",
+                "\\(y''\\)",
+                "\\(y'''\\)",
+                "...",
+                "\\(y^{(n)}\\)"
+              ],
+              [
+                "\\(\\frac{dy}{dx}\\)",
+                "\\(\\frac{d^{2}y}{dx^{2}}\\)",
+                "\\(\\frac{d^{3}y}{dx^{3}}\\)",
+                "...",
+                "\\(\\frac{d^{n}y}{dx^{n}}\\)"
+              ],
+              [
+                "\\(f'(x)\\)",
+                "\\(f''(x)\\)",
+                "\\(f'''(x)\\)",
+                "...",
+                "\\(f^{(n)}(x)\\)"
+              ],
+              [
+                "\\(y_{1}\\)",
+                "\\(y_{2}\\)",
+                "\\(y_{3}\\)",
+                "...",
+                "\\(y_{n}\\)"
+              ],
+              [
+                "\\(Dy\\)",
+                "\\(D^{2}y\\)",
+                "\\(D^{3}y\\)",
+                "...",
+                "\\(D^{n}y\\)"
+              ],
+              [
+                "\\(\\frac{df}{dx}\\)",
+                "\\(\\frac{d^{2}f}{dx^{2}}\\)",
+                "\\(\\frac{d^{3}f}{dx^{3}}\\)",
+                "...",
+                "\\(\\frac{d^{n}f}{dx^{n}}\\)"
+              ]
+            ],
+            "caption": "Commonly used notations for higher-order derivatives (as printed in the book)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read the notation carefully:\n1. \\(y_{1}\\), \\(y_{2}\\), ... are derivatives (\\(y_{1} = \\frac{dy}{dx}\\)), not \\(y\\) multiplied by 1 or 2.\n2. \\(f^{(4)}(x)\\) with brackets is the fourth derivative; \\(f^{4}(x)\\) would usually mean the fourth power. Brackets are used from the fourth derivative on, instead of many dashes.\n3. In \\(\\frac{d^{2}y}{dx^{2}}\\) the 2 on top is with \\(d\\) and below with \\(x\\): it is not \\(\\left(\\frac{dy}{dx}\\right)^{2}\\).\n4. \\(D\\) stands for \\(\\frac{d}{dx}\\), so \\(D^{2}y = \\frac{d^{2}y}{dx^{2}}\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "Find the higher-order derivatives of the function \\(f(x) = \\frac{1}{4}x^{4} - x^{3} + \\frac{1}{2}x^{2} - 3\\).",
+            "steps": [
+              "Given: \\(f(x) = \\frac{1}{4}x^{4} - x^{3} + \\frac{1}{2}x^{2} - 3\\), a polynomial of degree 4.\nTo find: \\(f'(x), f''(x), f'''(x), \\ldots\\), all its higher-order derivatives.\nMethod: differentiate term by term with the power rule \\(\\frac{d}{dx}x^{n} = nx^{n-1}\\), again and again. Each step lowers the degree by 1, so after 5 steps nothing is left.",
+              "First derivative\n\\[f'(x) = \\dfrac{1}{4}\\cdot 4x^{3} - 3x^{2} + \\dfrac{1}{2}\\cdot 2x - 0\\]\n\\[= x^{3} - 3x^{2} + x\\]\nWhy: power rule on each term; the constant \\(-3\\) has derivative 0.",
+              "Second and third derivatives\n\\[f''(x) = 3x^{2} - 6x + 1\\]\n\\[f'''(x) = 6x - 6\\]\nWhy: differentiate the previous line again; the derivative of \\(x\\) is 1 and of a constant is 0.",
+              "Fourth, fifth and all further derivatives\n\\[f^{(4)}(x) = 6\\]\n\\[f^{(5)}(x) = 0\\]\n\\[f^{(n)}(x) = 0 \\quad (n \\ge 5)\\]\nWhy: \\(6x - 6\\) gives 6, a constant; the derivative of a constant is 0, and the derivative of 0 is again 0.",
+              "Check:\nA polynomial of degree 4 has a non-zero constant fourth derivative: \\(4! \\times \\frac{1}{4} = 6\\). It agrees with \\(f^{(4)}(x) = 6\\)."
+            ],
+            "answer": "\\(f'(x) = x^{3} - 3x^{2} + x\\), \\(f''(x) = 3x^{2} - 6x + 1\\), \\(f'''(x) = 6x - 6\\), \\(f^{(4)}(x) = 6\\), and \\(f^{(n)}(x) = 0\\) for \\(n \\ge 5\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A polynomial of degree \\(k\\) becomes 0 after \\(k + 1\\) differentiations. So higher-order derivatives of a polynomial always stop; for functions like \\(e^{ax}\\), \\(\\sin x\\) or \\(\\ln x\\) they go on for ever, and we look for a pattern instead (Examples 13 and 14)."
+          },
+          {
+            "type": "example",
+            "title": "Example 12",
+            "problem": "If \\(x = e^{at}\\) and \\(y = e^{2at}\\), show that \\(x^{2}\\frac{d^{2}y}{dx^{2}} - 2y = 0\\).",
+            "steps": [
+              "Given: \\(x = e^{at}\\) ...(1) and \\(y = e^{2at}\\) ...(2), both in terms of the parameter \\(t\\).\nTo prove: \\(x^{2}\\frac{d^{2}y}{dx^{2}} - 2y = 0\\).\nMethod: parametric differentiation gives \\(\\frac{dy}{dx}\\); writing it in \\(x\\) and \\(y\\) only lets us differentiate it again with respect to \\(x\\) (quotient rule).",
+              "Differentiate (1) and (2) with respect to \\(t\\)\n\\[\\dfrac{dx}{dt} = ae^{at}, \\quad \\dfrac{dy}{dt} = 2ae^{2at}\\]\nUsing (1) and (2):\n\\[\\dfrac{dx}{dt} = ax, \\quad \\dfrac{dy}{dt} = 2ay\\]\nWhy: \\(\\frac{d}{dt}e^{kt} = ke^{kt}\\); then \\(e^{at} = x\\) and \\(e^{2at} = y\\).",
+              "Apply the chain rule\n\\[\\dfrac{dy}{dx} = \\dfrac{dy/dt}{dx/dt} = \\dfrac{2ay}{ax}\\]\n\\[\\dfrac{dy}{dx} = \\dfrac{2y}{x} \\quad \\text{...(3)}\\]\nWhy: \\(\\frac{dy}{dx} = \\frac{dy}{dt}\\div\\frac{dx}{dt}\\) (2.3.2); \\(a\\) cancels.",
+              "Differentiate (3) with respect to \\(x\\)\n\\[\\dfrac{d^{2}y}{dx^{2}} = 2\\cdot\\dfrac{x\\frac{dy}{dx} - y\\cdot 1}{x^{2}}\\]\nWhy: quotient rule on \\(\\frac{y}{x}\\); \\(y\\) is a function of \\(x\\), so its derivative is \\(\\frac{dy}{dx}\\), not 1.",
+              "Use equation (3)\n\\[= 2\\cdot\\dfrac{\\frac{2y}{x}\\cdot x - y}{x^{2}}\\]\n\\[= 2\\cdot\\dfrac{2y - y}{x^{2}} = \\dfrac{2y}{x^{2}}\\]\nWhy: replace \\(\\frac{dy}{dx}\\) by \\(\\frac{2y}{x}\\) so that only \\(x\\) and \\(y\\) remain.",
+              "Rearrange\n\\[x^{2}\\dfrac{d^{2}y}{dx^{2}} = 2y\\]\n\\[\\Rightarrow x^{2}\\dfrac{d^{2}y}{dx^{2}} - 2y = 0\\]\nWhy: multiply both sides by \\(x^{2}\\).",
+              "Check:\n\\(y = e^{2at} = (e^{at})^{2} = x^{2}\\). Then \\(\\frac{d^{2}y}{dx^{2}} = 2\\), and \\(x^{2}\\cdot 2 - 2x^{2} = 0\\). The result holds."
+            ],
+            "answer": "\\(\\frac{dy}{dx} = \\frac{2y}{x}\\) and \\(\\frac{d^{2}y}{dx^{2}} = \\frac{2y}{x^{2}}\\), so \\(x^{2}\\frac{d^{2}y}{dx^{2}} - 2y = 0\\). Hence proved."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note on numbering",
+            "text": "The book uses the number \"Example 12\" twice in this unit: here in 2.8 and again in 2.9.2 (Critical Point). We keep the printed numbers."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "For a parametric curve, \\(\\frac{d^{2}y}{dx^{2}}\\) is NOT \\(\\frac{d^{2}y/dt^{2}}{d^{2}x/dt^{2}}\\). Either write \\(\\frac{dy}{dx}\\) in terms of \\(x\\) and \\(y\\) and differentiate it with respect to \\(x\\) (as in Example 12), or use\n\\[\\dfrac{d^{2}y}{dx^{2}} = \\dfrac{d}{dt}\\left(\\dfrac{dy}{dx}\\right)\\cdot\\dfrac{dt}{dx}\\]"
+          },
+          {
+            "type": "example",
+            "title": "Example 13",
+            "problem": "Find all higher-order derivatives of the function \\(y = e^{ax}\\).",
+            "steps": [
+              "Given: \\(y = e^{ax}\\), where \\(a\\) is a constant.\nTo find: \\(\\frac{dy}{dx}, \\frac{d^{2}y}{dx^{2}}, \\ldots\\) and a formula for \\(\\frac{d^{n}y}{dx^{n}}\\).\nMethod: chain rule \\(\\frac{d}{dx}e^{u} = e^{u}\\frac{du}{dx}\\). Each differentiation multiplies by one more \\(a\\); spot the pattern.",
+              "First derivative\n\\[\\dfrac{dy}{dx} = e^{ax}\\cdot\\dfrac{d}{dx}(ax)\\]\n\\[= e^{ax}\\cdot a = ae^{ax}\\]\nWhy: chain rule with \\(u = ax\\), \\(\\frac{du}{dx} = a\\).",
+              "Second derivative\n\\[\\dfrac{d^{2}y}{dx^{2}} = a(e^{ax}a) = a^{2}e^{ax}\\]\nThe book prints this line as \\(\\frac{d^{2}y}{dx^{2}} = a(a^{ax}a)\\); inside the bracket it must be \\(e^{ax}a\\) (see the Book correction below).\nWhy: \\(a\\) is a constant multiplier; the derivative of \\(e^{ax}\\) is again \\(e^{ax}a\\).",
+              "Third and fourth derivatives\n\\[\\dfrac{d^{3}y}{dx^{3}} = a^{2}(e^{ax}a) = a^{3}e^{ax}\\]\n\\[\\dfrac{d^{4}y}{dx^{4}} = a^{4}e^{ax}\\]\nWhy: same step each time: the power of \\(a\\) goes up by 1.",
+              "General pattern\n\\[\\dfrac{d^{n}y}{dx^{n}} = a^{n}e^{ax} \\quad (n \\ge 1)\\]\n\\[= a^{n}y\\]\nWhy: the \\(n\\)th derivative has been multiplied by \\(a\\) exactly \\(n\\) times, and \\(e^{ax} = y\\).",
+              "Check:\nFor \\(a = 1\\): \\(y = e^{x}\\) and every derivative is \\(e^{x}\\); the formula gives \\(1^{n}e^{x} = e^{x}\\)."
+            ],
+            "answer": "\\(\\frac{d^{n}y}{dx^{n}} = a^{n}e^{ax} = a^{n}y\\) for every \\(n \\ge 1\\).",
+            "book_errors": [
+              "\\(\\frac{d^{2}y}{dx^{2}} = a(a^{ax}a)\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In Example 13 the book prints \\(\\frac{d^{2}y}{dx^{2}} = a(a^{ax}a) = a^{2}e^{ax}\\). The bracket should be \\(e^{ax}a\\), the derivative of \\(e^{ax}\\): \\(\\frac{d^{2}y}{dx^{2}} = a(e^{ax}a) = a^{2}e^{ax}\\). The final result \\(a^{2}e^{ax}\\) is right."
+          },
+          {
+            "type": "example",
+            "title": "Example 14",
+            "problem": "Find \\(y_{4}\\) if \\(y = \\ln\\sqrt{\\frac{2x - 3}{x + 1}}\\).",
+            "steps": [
+              "Given: \\(y = \\ln\\sqrt{\\frac{2x - 3}{x + 1}}\\).\nTo find: \\(y_{4}\\), the fourth derivative.\nMethod: first simplify with the laws of logarithms, so that \\(y\\) becomes a difference of two simple logs. Then write each term as a power, \\((2x-3)^{-1}\\) and \\((x+1)^{-1}\\), and differentiate with the power rule and the chain rule four times.",
+              "Apply properties of logarithm\n\\[y = \\dfrac{1}{2}\\ln\\left(\\dfrac{2x - 3}{x + 1}\\right)\\]\n\\[= \\dfrac{1}{2}\\left[\\ln(2x-3) - \\ln(x+1)\\right]\\]\nWhy: \\(\\sqrt{u} = u^{1/2}\\) and \\(\\ln u^{k} = k\\ln u\\); then \\(\\ln\\frac{p}{q} = \\ln p - \\ln q\\).",
+              "First derivative\n\\[y_{1} = \\dfrac{1}{2}\\left(\\dfrac{2}{2x-3} - \\dfrac{1}{x+1}\\right)\\]\n\\[= \\dfrac{1}{2}\\left(2(2x-3)^{-1} - (x+1)^{-1}\\right)\\]\nWhy: \\(\\frac{d}{dx}\\ln u = \\frac{1}{u}\\frac{du}{dx}\\); the inner derivative of \\(2x - 3\\) is 2, of \\(x + 1\\) is 1.",
+              "Second derivative\n\\[y_{2} = \\dfrac{1}{2}\\left(-4(2x-3)^{-2} + (x+1)^{-2}\\right)\\]\nWhy: \\(\\frac{d}{dx}(2x-3)^{-1} = -(2x-3)^{-2}\\cdot 2\\). With the coefficient 2 already in front: \\(2 \\times (-1) \\times 2 = -4\\). For \\((x+1)^{-1}\\): \\(-1 \\times (-1) = +1\\).",
+              "Third derivative\n\\[y_{3} = \\dfrac{1}{2}\\left(16(2x-3)^{-3} - 2(x+1)^{-3}\\right)\\]\nWhy: \\(-4 \\times (-2) \\times 2 = 16\\); for the second term \\(1 \\times (-2) = -2\\). The inner factor 2 of \\(2x - 3\\) comes in at every step.",
+              "Fourth derivative\n\\[y_{4} = \\dfrac{1}{2}\\left(-96(2x-3)^{-4} + 6(x+1)^{-4}\\right)\\]\n\\[y_{4} = \\dfrac{-48}{(2x-3)^{4}} + \\dfrac{3}{(x+1)^{4}}\\]\nWhy: \\(16 \\times (-3) \\times 2 = -96\\) and \\(-2 \\times (-3) = 6\\); then halve both.",
+              "What the book prints\nFrom \\(y_{2}\\) onwards the book drops the inner factor 2 of \\((2x-3)\\):\n\\(y_{2} = \\frac{1}{2}\\left(-2(2x-3)^{-2} + (x+1)^{-2}\\right)\\),\n\\(y_{3} = \\frac{1}{2}\\left(4(2x-3)^{-3} - 2(x+1)^{-3}\\right)\\),\n\\(y_{4} = \\frac{1}{2}\\left(-12(2x-3)^{-4} + 6(x+1)^{-4}\\right)\\),\n\\(y_{4} = \\frac{-6}{(2x-3)^{4}} + \\frac{3}{(x+1)^{4}}\\).\nThe correct lines are the ones above (see the Book correction below).",
+              "Check:\nThe \\((2x-3)\\) part of \\(y\\) is \\(\\frac{1}{2}\\ln(2x-3)\\). Its \\(n\\)th derivative is \\(\\frac{1}{2}(-1)^{n-1}(n-1)!\\,\\frac{2^{n}}{(2x-3)^{n}}\\). For \\(n = 4\\): \\(\\frac{1}{2}\\times(-1)\\times 6 \\times 16 = -48\\). This matches \\(\\frac{-48}{(2x-3)^{4}}\\)."
+            ],
+            "answer": "\\(y_{4} = -\\frac{48}{(2x-3)^{4}} + \\frac{3}{(x+1)^{4}}\\)",
+            "book_errors": [
+              "\\(y_{2} = \\frac{1}{2}\\left(-2(2x-3)^{-2} + (x+1)^{-2}\\right)\\)",
+              "\\(y_{3} = \\frac{1}{2}\\left(4(2x-3)^{-3} - 2(x+1)^{-3}\\right)\\)",
+              "\\(y_{4} = \\frac{1}{2}\\left(-12(2x-3)^{-4} + 6(x+1)^{-4}\\right)\\)",
+              "\\(y_{4} = \\frac{-6}{(2x-3)^{4}} + \\frac{3}{(x+1)^{4}}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In Example 14 the book forgets the chain-rule factor 2 (the derivative of \\(2x - 3\\)) at every step after \\(y_{1}\\). It prints \\(y_{2} = \\frac{1}{2}\\left(-2(2x-3)^{-2} + (x+1)^{-2}\\right)\\), \\(y_{3} = \\frac{1}{2}\\left(4(2x-3)^{-3} - 2(x+1)^{-3}\\right)\\) and \\(y_{4} = \\frac{-6}{(2x-3)^{4}} + \\frac{3}{(x+1)^{4}}\\). Correct: \\(y_{2} = \\frac{1}{2}\\left(-4(2x-3)^{-2} + (x+1)^{-2}\\right)\\), \\(y_{3} = \\frac{1}{2}\\left(16(2x-3)^{-3} - 2(x+1)^{-3}\\right)\\), and \\(y_{4} = \\frac{-48}{(2x-3)^{4}} + \\frac{3}{(x+1)^{4}}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why use the laws of logarithms first? Differentiating \\(\\ln\\sqrt{\\frac{2x-3}{x+1}}\\) directly needs the chain rule, a square root and the quotient rule all at once, and the result gets messier at every step. After splitting, each term is a simple power that is easy to differentiate again and again."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Find \\(y_{10}\\) in example 16.",
+            "book_errors": [
+              "example 16"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 16 of this unit (in 2.9, about increasing and stationary points) is not a higher-derivative example, so \"\\(y_{10}\\) in example 16\" has no meaning. The box stands beside Example 14, so Example 14 (or Example 13) is most likely meant. For Example 14: \\(y_{10} = -181440\\left[\\frac{1024}{(2x-3)^{10}} - \\frac{1}{(x+1)^{10}}\\right]\\); for Example 13: \\(y_{10} = a^{10}e^{ax}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How do we get \\(y_{10}\\) for Example 14 without ten differentiations? Look at the pattern in \\(y_{1}, \\ldots, y_{4}\\): for \\(\\frac{1}{2}\\ln(2x-3)\\) the coefficients are \\(1, -2, 8, -48\\) times \\(\\frac{1}{(2x-3)^{n}}\\), that is \\(\\frac{1}{2}(-1)^{n-1}(n-1)!\\,2^{n}\\). So\n\\[y_{n} = \\dfrac{(-1)^{n-1}(n-1)!}{2}\\;\\times\\]\n\\[\\left[\\dfrac{2^{n}}{(2x-3)^{n}} - \\dfrac{1}{(x+1)^{n}}\\right]\\]\nFor \\(n = 10\\): \\(\\frac{(-1)^{9}\\,9!}{2} = -181440\\) and \\(2^{10} = 1024\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Higher-order derivatives: differentiate the derivative again; \\(y_{2} = \\frac{d^{2}y}{dx^{2}} = f''(x)\\).\n2. A polynomial of degree \\(k\\) has \\(f^{(n)}(x) = 0\\) for all \\(n > k\\).\n3. \\(\\frac{d^{n}}{dx^{n}}e^{ax} = a^{n}e^{ax}\\).\n4. For parametric equations, write \\(\\frac{dy}{dx}\\) and differentiate it again with respect to \\(x\\), never divide second derivatives.\n5. Simplify logarithms before differentiating many times; keep the inner factor of the chain rule at every step."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Dropping the chain-rule factor: \\(\\frac{d}{dx}(2x-3)^{-1} = -2(2x-3)^{-2}\\), not \\(-(2x-3)^{-2}\\) (the slip in the book's Example 14).\n2. Reading \\(\\frac{d^{2}y}{dx^{2}}\\) as \\(\\left(\\frac{dy}{dx}\\right)^{2}\\).\n3. In implicit or parametric work, treating \\(y\\) as a constant: \\(\\frac{d}{dx}(y) = \\frac{dy}{dx}\\).\n4. Writing \\(f^{4}(x)\\) for the fourth derivative; use \\(f^{(4)}(x)\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.12.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.12.1",
+      "title": "2.12.1 Using dy to Approximate Δy",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 62,
+          "pdf_to": 63,
+          "note": "Book p. 60-61: 2.12.1 Using dy to Approximate Δy, Fig. 2.7 and the box Using Differentials to Approximate"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "When a function \\(y = f(x)\\) is differentiable at a point \\(P(x, y)\\), we can use the differential \\(dy\\) to estimate the actual change \\(\\Delta y\\) in \\(y\\), for small change \\(\\Delta x\\) in \\(x\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The actual change \\(\\Delta y\\) in \\(y\\) is given by:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\Delta y = f(x + \\Delta x) - f(x) \\quad \\text{...(1)}",
+            "text_alt": "delta y equals f of (x plus delta x) minus f of x, equation (1)"
+          },
+          {
+            "type": "paragraph",
+            "text": "But calculating \\(\\Delta y\\) exactly often requires complicated formulas. Instead, we use the differential \\(dy\\), defined as:\n\\[dy = f'(x)\\,dx\\]\nIf we take \\(dx = \\Delta x\\), then:"
+          },
+          {
+            "type": "equation",
+            "latex": "dy = f'(x)\\,\\Delta x \\quad \\text{...(2)}",
+            "text_alt": "d y equals f prime of x times delta x, equation (2)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(Q(x + \\Delta x, f(x + \\Delta x))\\) be a neighboring point of \\(P(x, y)\\) on \\(y = f(x)\\)."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "The slope of the tangent line at \\(P\\) is \\(f'(x)\\)",
+              "The slope of the secant line connecting \\(P\\) and \\(Q\\) is \\(\\frac{\\Delta y}{\\Delta x}\\)"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "As \\(\\Delta x \\to 0\\), the point \\(Q\\) approaches \\(P\\), and secant line \\(PQ\\) approaches the tangent line at \\(P\\). (See Fig. 2.7)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch2-fig-2-12-secant-to-tangent",
+            "alt": "Three graphs of the same rising curve. In each, P is a fixed point on the curve and Q another point on it, Delta x to the right. A green secant line joins P and Q and an orange tangent line touches the curve at P. From left to right Delta x gets smaller, Q moves towards P, and the secant line turns until it almost lies on the tangent line.",
+            "caption": "Figure 2.7: as Δx shrinks, Q moves to P and the secant PQ approaches the tangent at P (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Therefore, for small \\(\\Delta x\\):\nslope of tangent line at \\(P\\) \\(\\approx\\) slope of secant line \\(PQ\\)\n\\[\\Rightarrow f'(x) \\approx \\dfrac{\\Delta y}{\\Delta x}\\]\nSubstitute \\(f'(x) \\approx \\frac{\\Delta y}{\\Delta x}\\) into equation (2):\n\\[dy \\approx \\dfrac{\\Delta y}{\\Delta x} \\times \\Delta x\\]\n\\[dy \\approx \\Delta y \\quad (\\text{for } \\Delta x \\text{ is small})\\]\nThus, for small change \\(\\Delta x\\), the actual change \\(\\Delta y\\) is approximately equal to the differential \\(dy\\), that is:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\Delta y \\approx dy = f'(x)\\,dx",
+            "text_alt": "delta y is approximately equal to d y, which equals f prime of x times d x"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "text": "Since \\(\\Delta y = f(x + \\Delta x) - f(x)\\) and for small change \\(\\Delta x\\): \\(dx = \\Delta x\\) and \\(\\Delta y \\approx dy\\).\n\\(\\Rightarrow dy \\approx f(x + \\Delta x) - f(x)\\)\nand hence: \\(f(x + \\Delta x) \\approx f(x) + dy\\)",
+            "title": "Using Differentials to Approximate:"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "text": "Two different changes, do not mix them up:\n\\(\\Delta y\\) = the real rise of the curve from \\(x\\) to \\(x + \\Delta x\\) (exact, but may be hard to calculate).\n\\(dy\\) = the rise of the tangent line over the same step (easy: slope times step).\nFor a small step the curve and the tangent hardly separate, so \\(\\Delta y \\approx dy\\).",
+            "title": "Teaching note"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "text": "The last line of the box, \\(f(x + \\Delta x) \\approx f(x) + dy = f(x) + f'(x)\\,\\Delta x\\), is the same idea as linearization in 2.11.1: put \\(a = x\\) and \\(x + \\Delta x\\) in place of \\(x\\) in \\(L(x) = f(a) + f'(a)(x - a)\\).\nIt is the working formula for questions like \"use differentials to approximate \\(\\sqrt{24}\\)\": known value \\(f(x)\\) plus the small correction \\(dy\\).",
+            "title": "Teaching note"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "text": "1. Actual change: \\(\\Delta y = f(x + \\Delta x) - f(x)\\).\n2. Differential: \\(dy = f'(x)\\,dx\\), with \\(dx = \\Delta x\\).\n3. As \\(\\Delta x \\to 0\\) the secant \\(PQ\\) approaches the tangent at \\(P\\), so \\(\\Delta y \\approx dy\\) for small \\(\\Delta x\\).\n4. Approximation formula: \\(f(x + \\Delta x) \\approx f(x) + f'(x)\\,\\Delta x\\).",
+            "title": "Key points"
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "text": "1. Writing \\(\\Delta y = dy\\) as exact; it is only \\(\\approx\\).\n2. Using the rule for a large \\(\\Delta x\\): the secant is then far from the tangent and the estimate is poor.\n3. Taking \\(dx\\) with the wrong sign: if \\(x\\) decreases, \\(\\Delta x\\) is negative.",
+            "title": "Common mistake"
+          }
+        ]
+      }
+    }
+  ]
+}

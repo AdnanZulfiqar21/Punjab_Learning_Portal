@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-3-Q11",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-3-q11",
+      "title": "Question 11",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 50,
+          "pdf_to": 50,
+          "note": "Exercise 2.3, Question 11: book p. 47-48, Q1-Q11 (Q1-4 tangent and normal lines, Q5-11 higher-order derivatives); no printed answers"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11. If \\(y = a\\cos(\\ln x) + b\\sin(\\ln x)\\), show that \\(x^{2}y_{2} + xy_{1} + y = 0\\).",
+            "explanation": "Every derivative brings a factor \\(\\frac{1}{x}\\) (chain rule on \\(\\ln x\\)), so we first multiply by \\(x\\).\nPlan: find \\(y_{1}\\), write \\(xy_{1}\\), differentiate that product, multiply by \\(x\\).",
+            "steps": [
+              "Given: \\(y = a\\cos(\\ln x) + b\\sin(\\ln x)\\) ...(1), \\(x > 0\\).\nTo prove: \\(x^{2}y_{2} + xy_{1} + y = 0\\).\nMethod: chain rule with \\(\\frac{d}{dx}\\ln x = \\frac{1}{x}\\); clear the \\(\\frac{1}{x}\\) before differentiating again (product rule on \\(xy_{1}\\)).",
+              "First derivative\n\\[y_{1} = -\\dfrac{a\\sin(\\ln x)}{x} + \\dfrac{b\\cos(\\ln x)}{x}\\]\n\\[xy_{1} = -a\\sin(\\ln x) + b\\cos(\\ln x) \\quad \\text{...(2)}\\]\nWhy: \\(\\frac{d}{dx}\\cos(\\ln x) = -\\sin(\\ln x)\\cdot\\frac{1}{x}\\) and \\(\\frac{d}{dx}\\sin(\\ln x) = \\cos(\\ln x)\\cdot\\frac{1}{x}\\); then multiply by \\(x\\).",
+              "Differentiate (2)\n\\[xy_{2} + y_{1} = -\\dfrac{a\\cos(\\ln x)}{x} - \\dfrac{b\\sin(\\ln x)}{x}\\]\n\\[xy_{2} + y_{1} = -\\dfrac{y}{x}\\]\nWhy: product rule on \\(xy_{1}\\) gives \\(xy_{2} + y_{1}\\); the right side is \\(-\\frac{1}{x}\\) times (1).",
+              "Multiply by \\(x\\)\n\\[x^{2}y_{2} + xy_{1} = -y\\]\n\\[x^{2}y_{2} + xy_{1} + y = 0\\]\nWhy: clear the fraction and bring \\(y\\) to the left.",
+              "Check\nTake \\(a = 1\\), \\(b = 0\\) and \\(x = 1\\): \\(y = 1\\), \\(y_{1} = 0\\), and \\(xy_{2} + y_{1} = -\\frac{y}{x}\\) gives \\(y_{2} = -1\\); then \\(1(-1) + 0 + 1 = 0\\)."
+            ],
+            "final_answer": "Hence proved: \\(x^{2}y_{2} + xy_{1} + y = 0\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

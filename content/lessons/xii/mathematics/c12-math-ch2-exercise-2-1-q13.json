@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-1-Q13",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-1-q13",
+      "title": "Question 13",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 43,
+          "note": "Exercise 2.1, Question 13 (i)-(ii): dy/dx for parametric equations; book p. 41. Unit 2 has no printed answers."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13(i)",
+            "prompt": "13 (i) Find \\(\\frac{dy}{dx}\\) for the following parametric equations: \\(x = \\sin^2 t\\) and \\(y = \\cos 2t\\)",
+            "explanation": "Parametric equations: \\(x\\) and \\(y\\) are both given in terms of a parameter \\(t\\).\nUse \\(\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt}\\) (section 2.3.2).\nPlan: differentiate each w.r.t. \\(t\\), divide, simplify with \\(2\\sin t\\cos t = \\sin 2t\\).",
+            "steps": [
+              "Given: \\(x = \\sin^2 t\\), \\(y = \\cos 2t\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: \\(\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt}\\), provided \\(\\frac{dx}{dt} \\neq 0\\).",
+              "Differentiate x w.r.t. t\n\\[\\dfrac{dx}{dt} = 2\\sin t\\cos t = \\sin 2t\\]\nWhy: chain rule on \\((\\sin t)^2\\); double-angle formula.",
+              "Differentiate y w.r.t. t\n\\[\\dfrac{dy}{dt} = -\\sin 2t \\cdot 2 = -2\\sin 2t\\]\nWhy: chain rule on \\(\\cos(2t)\\).",
+              "Divide\n\\[\\dfrac{dy}{dx} = \\dfrac{-2\\sin 2t}{\\sin 2t} = -2\\]\nWhy: parametric formula; valid where \\(\\sin 2t \\neq 0\\).",
+              "Check by removing t\n\\[\\cos 2t = 1 - 2\\sin^2 t\\]\n\\[y = 1 - 2x\\]\nWhy: the curve is part of a straight line with slope \\(-2\\)."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = -2\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13(ii)",
+            "prompt": "13 (ii) Find \\(\\frac{dy}{dx}\\) for the following parametric equations: \\(x = \\sqrt{1 + \\sec t}\\), and \\(y = \\sqrt{\\tan t}\\)",
+            "explanation": "Parametric again, now with square roots, so each \\(t\\)-derivative needs the chain rule.\nUse \\(\\frac{d}{dt}\\sqrt{w} = \\frac{1}{2\\sqrt{w}}\\cdot\\frac{dw}{dt}\\) for both.\nPlan: find \\(\\frac{dx}{dt}\\) and \\(\\frac{dy}{dt}\\), divide, then simplify using \\(\\frac{\\sec t}{\\tan t} = \\csc t\\).",
+            "steps": [
+              "Given: \\(x = \\sqrt{1 + \\sec t}\\), \\(y = \\sqrt{\\tan t}\\), with \\(0 < t < \\frac{\\pi}{2}\\) (where both roots are real and nonzero).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: \\(\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt}\\).",
+              "dx/dt\n\\[\\dfrac{dx}{dt} = \\dfrac{1}{2\\sqrt{1 + \\sec t}} \\cdot \\sec t\\tan t\\]\nWhy: chain rule, \\(w = 1 + \\sec t\\), \\(\\frac{dw}{dt} = \\sec t\\tan t\\).",
+              "dy/dt\n\\[\\dfrac{dy}{dt} = \\dfrac{1}{2\\sqrt{\\tan t}} \\cdot \\sec^2 t\\]\nWhy: chain rule, \\(w = \\tan t\\), \\(\\frac{dw}{dt} = \\sec^2 t\\).",
+              "Divide\n\\[\\dfrac{dy}{dx} = \\dfrac{dy/dt}{dx/dt}\\]\n\\[= \\dfrac{\\sec^2 t}{2\\sqrt{\\tan t}} \\cdot \\dfrac{2\\sqrt{1 + \\sec t}}{\\sec t\\tan t}\\]\n\\[= \\dfrac{\\sec t\\sqrt{1 + \\sec t}}{\\tan t\\sqrt{\\tan t}}\\]\nWhy: dividing by a fraction is multiplying by its reciprocal; one \\(\\sec t\\) and the 2s cancel.",
+              "A neater form\n\\[\\dfrac{\\sec t}{\\tan t} = \\csc t,\\quad \\dfrac{1 + \\sec t}{\\tan t} = \\dfrac{1 + \\cos t}{\\sin t}\\]\n\\[\\dfrac{dy}{dx} = \\csc t\\sqrt{\\dfrac{1 + \\cos t}{\\sin t}}\\]\nWhy: \\(\\frac{\\sqrt{1 + \\sec t}}{\\sqrt{\\tan t}} = \\sqrt{\\frac{1 + \\sec t}{\\tan t}}\\) (both positive here); multiply top and bottom of \\(\\frac{1 + \\sec t}{\\tan t}\\) by \\(\\cos t\\).",
+              "Check at t = pi/4\n\\[\\sqrt{2}\\sqrt{\\dfrac{1 + 0.7071}{0.7071}} \\approx 2.197\\]\nWhy: both forms give the same number, and a numerical check with sympy agrees."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = \\frac{\\sec t\\sqrt{1 + \\sec t}}{\\tan t\\sqrt{\\tan t}} = \\csc t\\sqrt{\\frac{1 + \\cos t}{\\sin t}}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

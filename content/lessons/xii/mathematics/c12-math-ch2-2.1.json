@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.1",
+      "title": "2.1 Review of Differentiation Basics",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 36,
+          "pdf_to": 37,
+          "note": "Book p. 34-35: Unit 2 introduction, 2.1 definition of the derivative, Recall! box (power, constant, constant multiple, sum and difference, product and quotient rules)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "INTRODUCTION"
+          },
+          {
+            "type": "paragraph",
+            "text": "Differentiation, a fundamental concept in calculus introduced by Newton and Leibniz, allows us to study how quantities change and evolve. In our previous class, we studied the definition of differentiation along with sum, difference, product, and quotient rules, and applied them to find derivatives of polynomials and rational functions. Building on that foundation, we will now explore how to find the derivatives of trigonometric, inverse trigonometric, exponential, and logarithmic functions. We will apply differentiation to identify increasing and decreasing functions and to find equations of tangents and normals to curves at specific points. Higher-order derivatives of algebraic, implicit, parametric, and transcendental functions will also be studied. We will use linear approximations and differentials to estimate function values, changes, and calculate relative and percentage errors in real-life contexts like volumes of geometric shapes. The unit also delves into finding local and global extrema using critical points."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to use this unit: almost everything in it rests on the few rules collected in 2.1. Make sure you can apply each of them without looking before you move on.\nThe order of the unit: first new derivatives (trigonometric 2.2, chain rule 2.3, inverse trigonometric 2.4, exponential 2.5, logarithmic 2.6), then uses of the derivative (tangents and normals, higher derivatives, increasing and decreasing functions, maxima and minima, approximations)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Definition: The derivative of the function \\(y = f(x)\\) is denoted by \\(\\frac{dy}{dx}\\) or \\(f'(x)\\) and is defined as:\n\\[f'(x) = \\lim_{h \\to 0}\\dfrac{f(x+h) - f(x)}{h}\\]\nif the limit exists, or\n\\[\\dfrac{dy}{dx} = \\lim_{\\delta x \\to 0}\\dfrac{\\delta y}{\\delta x}\\]\nif the limit exists.",
+            "bold": [
+              "Definition:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "The derivative gives the instantaneous rate of change of the function at a point."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read the definition in three stages. \\(f(x+h) - f(x)\\) is how much the function changes when \\(x\\) changes by a small amount \\(h\\). Dividing by \\(h\\) gives the average rate of change, which is the slope of the secant line through \\((x, f(x))\\) and \\((x+h, f(x+h))\\). Letting \\(h \\to 0\\) turns the average rate into the instantaneous rate, the slope of the tangent at the point.\nThe second form says the same thing with \\(\\delta x\\) (a small change in \\(x\\)) and \\(\\delta y\\) (the change it causes in \\(y\\)). \\(\\delta x\\) is one symbol, not \\(\\delta\\) times \\(x\\).\nWe may not put \\(h = 0\\) straight away: that gives \\(\\frac{0}{0}\\). We first simplify, cancel \\(h\\) (allowed because \\(h \\ne 0\\) while it approaches 0), and only then take the limit."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our example (first principles): \\(f(x) = x^{2}\\).\n\\[f(x+h) - f(x) = (x+h)^{2} - x^{2}\\]\n\\[= 2xh + h^{2}\\]\n\\[\\dfrac{f(x+h) - f(x)}{h} = 2x + h\\]\n\\[f'(x) = \\lim_{h \\to 0}(2x + h) = 2x\\]\nThis agrees with the power rule below."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Recall!",
+            "text": "Power Rule: \\(\\frac{d}{dx}(x^{n}) = n\\,x^{n-1}\\) where \\(n \\in \\mathbb{R}\\).\nConstant Rule: \\(\\frac{d}{dx}(c) = 0\\), for any \\(c \\in \\mathbb{R}\\).\nIn the following rules \\(u = u(x)\\), \\(v = v(x)\\) are differentiable functions and \\(c\\) is any arbitrary constant.\nConstant Multiple Rule: \\(\\frac{d}{dx}(cu) = c\\frac{du}{dx} = cu'\\).\nSum and Difference Rule: \\(\\frac{d}{dx}(u \\pm v) = \\frac{du}{dx} \\pm \\frac{dv}{dx} = u' \\pm v'\\)\nProduct Rule: This rule helps to differentiate the product of two functions.\n\\[\\dfrac{d}{dx}(uv) = u'v + uv'\\]\nQuotient Rule: This rule is used to differentiate the division of two functions.\n\\[\\dfrac{d}{dx}\\left(\\dfrac{u}{v}\\right) = \\dfrac{u'v - uv'}{v^{2}}\\]\nwhere \\(v(x) \\ne 0\\) for all \\(x\\) in the domain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "When to use which rule:\n1. A single power of \\(x\\), including roots and reciprocals written as powers: power rule. For example \\(\\sqrt{x} = x^{1/2}\\), so \\(\\frac{d}{dx}\\sqrt{x} = \\frac{1}{2}x^{-1/2} = \\frac{1}{2\\sqrt{x}}\\).\n2. A number in front of a function: constant multiple rule (the number simply stays).\n3. Terms joined by + or -: sum and difference rule (differentiate term by term).\n4. Two functions multiplied: product rule. 5. One function divided by another: quotient rule.\nOrder in the quotient rule matters: the numerator is u'v - uv' (derivative of the top first), not uv' - u'v."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our examples:\n(a) \\(\\frac{d}{dx}(3x^{4} - 5x^{2} + 7) = 12x^{3} - 10x\\) (power, constant multiple, sum and constant rules).\n(b) Product: \\(y = (x^{2} + 1)(x^{3} - 2x)\\), \\(u = x^{2} + 1\\), \\(v = x^{3} - 2x\\).\n\\[y' = 2x(x^{3} - 2x) + (x^{2} + 1)(3x^{2} - 2)\\]\n\\[= 5x^{4} - 3x^{2} - 2\\]\n(c) Quotient: \\(y = \\frac{2x + 1}{x - 3}\\), \\(u = 2x + 1\\), \\(v = x - 3\\), \\(x \\ne 3\\).\n\\[y' = \\dfrac{2(x - 3) - (2x + 1)(1)}{(x - 3)^{2}}\\]\n\\[= \\dfrac{-7}{(x - 3)^{2}}\\]"
+          },
+          {
+            "type": "table",
+            "header": [
+              "Rule",
+              "Formula",
+              "Use it when"
+            ],
+            "rows": [
+              [
+                "Power",
+                "\\((x^{n})' = nx^{n-1}\\)",
+                "a power of \\(x\\), roots, \\(\\frac{1}{x^{k}}\\)"
+              ],
+              [
+                "Constant",
+                "\\((c)' = 0\\)",
+                "a term with no x"
+              ],
+              [
+                "Constant multiple",
+                "\\((cu)' = cu'\\)",
+                "a number multiplies a function"
+              ],
+              [
+                "Sum / difference",
+                "\\((u \\pm v)' = u' \\pm v'\\)",
+                "terms joined by + or -"
+              ],
+              [
+                "Product",
+                "\\((uv)' = u'v + uv'\\)",
+                "two functions multiplied"
+              ],
+              [
+                "Quotient",
+                "\\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^{2}}\\)",
+                "one function divided by another"
+              ]
+            ],
+            "caption": "The basic rules and when to use them (our table)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(f'(x) = \\lim_{h \\to 0}\\frac{f(x+h) - f(x)}{h}\\): the derivative is the limit of the average rate of change.\n2. It gives the instantaneous rate of change, that is the slope of the tangent at a point.\n3. \\(\\frac{dy}{dx}\\), \\(f'(x)\\), \\(y'\\) are different names for the same derivative.\n4. The six rules (power, constant, constant multiple, sum/difference, product, quotient) are used in every later section of this unit."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Putting \\(h = 0\\) before simplifying: it gives \\(\\frac{0}{0}\\).\n2. Writing \\((uv)' = u'v'\\): the derivative of a product is not the product of the derivatives.\n3. Swapping the order in the quotient rule (\\(uv' - u'v\\)): this changes the sign of the answer.\n4. Forgetting \\(v(x) \\ne 0\\) in the quotient rule."
+          }
+        ]
+      }
+    }
+  ]
+}

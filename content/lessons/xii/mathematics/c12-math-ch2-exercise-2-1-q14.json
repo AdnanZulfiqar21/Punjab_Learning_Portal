@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-1-Q14",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-1-q14",
+      "title": "Question 14",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 43,
+          "note": "Exercise 2.1, Question 14: x = a sec t, y = b tan t, show dy/dx = -b^2x/(a^2y) (printed sign wrong); book p. 41. No printed answers."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "14",
+            "prompt": "14. If \\(x = a\\sec t\\) and \\(y = b\\tan t\\), show that \\(\\frac{dy}{dx} = \\frac{-b^2x}{a^2y}\\).",
+            "explanation": "Parametric equations again: find \\(\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt}\\), then write it with \\(x\\) and \\(y\\).\nUse \\(\\sec t = \\frac{x}{a}\\) and \\(\\tan t = \\frac{y}{b}\\) to remove \\(t\\).\nPlan: differentiate, divide, substitute, compare with what we were asked to show.",
+            "steps": [
+              "Given: \\(x = a\\sec t\\), \\(y = b\\tan t\\).\nTo show: \\(\\frac{dy}{dx} = \\frac{-b^2x}{a^2y}\\) (as printed).\nMethod: parametric differentiation, then replace \\(\\sec t\\) and \\(\\tan t\\) by \\(\\frac{x}{a}\\) and \\(\\frac{y}{b}\\).",
+              "Differentiate w.r.t. t\n\\[\\dfrac{dx}{dt} = a\\sec t\\tan t\\]\n\\[\\dfrac{dy}{dt} = b\\sec^2 t\\]\nWhy: \\((\\sec t)' = \\sec t\\tan t\\), \\((\\tan t)' = \\sec^2 t\\).",
+              "Divide\n\\[\\dfrac{dy}{dx} = \\dfrac{b\\sec^2 t}{a\\sec t\\tan t} = \\dfrac{b\\sec t}{a\\tan t}\\]\nWhy: \\(\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt}\\); one \\(\\sec t\\) cancels.",
+              "Write in x and y\n\\[\\sec t = \\dfrac{x}{a},\\quad \\tan t = \\dfrac{y}{b}\\]\n\\[\\dfrac{dy}{dx} = \\dfrac{b \\cdot \\frac{x}{a}}{a \\cdot \\frac{y}{b}} = \\dfrac{b^2x}{a^2y}\\]\nWhy: from the given equations; \\(\\frac{bx/a}{ay/b} = \\frac{bx}{a}\\cdot\\frac{b}{ay}\\).",
+              "Check by eliminating t\n\\[\\sec^2 t - \\tan^2 t = 1 \\Rightarrow \\dfrac{x^2}{a^2} - \\dfrac{y^2}{b^2} = 1\\]\n\\[\\dfrac{2x}{a^2} - \\dfrac{2y}{b^2}\\dfrac{dy}{dx} = 0 \\Rightarrow \\dfrac{dy}{dx} = \\dfrac{b^2x}{a^2y}\\]\nWhy: implicit differentiation of the hyperbola gives the same result, with a plus sign.",
+              "Compare with the statement\n\\[\\dfrac{dy}{dx} = +\\dfrac{b^2x}{a^2y} \\neq \\dfrac{-b^2x}{a^2y}\\]\nWhy: the printed result has the wrong sign, so it cannot be shown; see the correction below."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = \\frac{b^2x}{a^2y}\\). The printed result \\(\\frac{-b^2x}{a^2y}\\) has the wrong sign."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book asks to show \\(\\frac{dy}{dx} = \\frac{-b^2x}{a^2y}\\). For \\(x = a\\sec t\\), \\(y = b\\tan t\\) the correct result is \\(\\frac{dy}{dx} = \\frac{b^2x}{a^2y}\\) (plus sign), as both methods above show. The minus sign belongs to the ellipse \\(x = a\\cos t\\), \\(y = b\\sin t\\), where \\(\\frac{dy}{dx} = -\\frac{b\\cos t}{a\\sin t} = -\\frac{b^2x}{a^2y}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

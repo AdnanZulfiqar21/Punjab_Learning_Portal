@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-7-Q4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-7-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 72,
+          "pdf_to": 72,
+          "note": "Exercise 2.7, Question 4 (book page 70). The book prints no answers for Unit 2; results verified with sympy."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. A wire of 20 meters is cut into two pieces. One piece is bent into a square and the other into a circle. How should the wire be cut to maximize the total area enclosed?",
+            "explanation": "A maximum problem on a closed interval: the cut can be anywhere from 0 to 20 m.\nGiven: 20 m of wire, one piece makes a square, the other a circle. To find: where to cut for the largest total area.\nPlan: form \\(A(x)\\), find the critical point, test it; if it is a minimum, compare the end points \\(x = 0\\) and \\(x = 20\\).",
+            "steps": [
+              "Given: wire 20 m; piece \\(x\\) m bent into a square, the rest \\((20 - x)\\) m into a circle, \\(0 \\le x \\le 20\\).\nTo find: the cut that makes the total area greatest.\nMethod: total area as a function of \\(x\\); critical point and second derivative test; on a closed interval also check the end points.",
+              "Area of each shape\nSquare: perimeter \\(4a = x\\), so \\(a = \\frac{x}{4}\\), area \\(\\frac{x^{2}}{16}\\).\nCircle: \\(2\\pi R = 20 - x\\), so \\(R = \\frac{20 - x}{2\\pi}\\), area \\(\\pi R^{2} = \\frac{(20 - x)^{2}}{4\\pi}\\).\n\\[A(x) = \\dfrac{x^{2}}{16} + \\dfrac{(20 - x)^{2}}{4\\pi} \\quad \\text{...(1)}\\]\nWhy: the wire becomes the boundary of each shape.",
+              "Critical point\n\\[\\dfrac{dA}{dx} = \\dfrac{x}{8} - \\dfrac{20 - x}{2\\pi} \\quad \\text{...(2)}\\]\n\\[\\pi x - 4(20 - x) = 0 \\Rightarrow (4 + \\pi)x = 80\\]\n\\[x = \\dfrac{80}{4 + \\pi} \\approx 11.20\\text{ m}\\]\nWhy: chain rule on \\((20 - x)^{2}\\) gives \\(2(20 - x)(-1)\\); multiply the equation by \\(8\\pi\\).",
+              "Second derivative test\n\\[\\dfrac{d^{2}A}{dx^{2}} = \\dfrac{1}{8} + \\dfrac{1}{2\\pi} > 0\\]\nWhy: positive, so this critical point gives the minimum total area, not the maximum. There \\(A_{\\min} = \\frac{100}{4 + \\pi} \\approx 14.00\\text{ m}^{2}\\).",
+              "Compare the end points\n\\[x = 0: \\ A(0) = \\dfrac{400}{4\\pi} = \\dfrac{100}{\\pi} \\approx 31.83\\text{ m}^{2}\\]\n\\[x = 20: \\ A(20) = \\dfrac{400}{16} = 25\\text{ m}^{2}\\]\nWhy: a continuous function on a closed interval takes its greatest value at a critical point or at an end point. The only critical point is a minimum, so the maximum is at an end point (see the graph).",
+              "Interpret\nThe greatest area, \\(\\frac{100}{\\pi} \\approx 31.83\\text{ m}^{2}\\), comes when all the wire is bent into the circle (\\(x = 0\\)).\nWhy: a circle encloses more area than a square of the same perimeter. If the wire must really be cut into two pieces, the square piece should be as short as possible.",
+              "Check\n\\[A(0) = 31.83 > A(20) = 25 > A\\!\\left(\\tfrac{80}{4 + \\pi}\\right) \\approx 14.00\\]\nAt \\(x = \\frac{80}{4 + \\pi}\\): square side \\(\\frac{20}{4 + \\pi}\\), circle radius \\(\\frac{10}{4 + \\pi}\\), and \\(\\frac{400 + 100\\pi}{(4 + \\pi)^{2}} = \\frac{100}{4 + \\pi}\\) ✓."
+            ],
+            "final_answer": "Maximum: use the whole 20 m (or as much as possible) for the circle; the greatest area is \\(\\frac{100}{\\pi} \\approx 31.83\\text{ m}^{2}\\). (Cutting at \\(\\frac{80}{4 + \\pi} \\approx 11.20\\) m for the square and \\(\\frac{20\\pi}{4 + \\pi} \\approx 8.80\\) m for the circle gives the minimum area \\(\\frac{100}{4 + \\pi} \\approx 14.00\\text{ m}^{2}\\).)",
+            "answer_figure": {
+              "$asset": "c12-math-ch2-fig-ex2-7-q4-area-graph",
+              "alt": "Graph of the total area A(x) = x squared over 16 plus (20 minus x) squared over 4 pi for x from 0 to 20. The curve falls from (0, 31.83) to its lowest point (11.20, 14.00) and rises to (20, 25). The highest value is at x = 0, all wire in the circle.",
+              "caption": "Answer sketch for Exercise 2.7 Question 4: total area against the length used for the square; the critical point is the lowest point, the largest value is at the end x = 0 (original drawing)"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The question asks for the cut that maximizes the total area, but the only critical point, \\(x = \\frac{80}{4 + \\pi}\\), gives the minimum area (\\(\\frac{d^{2}A}{dx^{2}} > 0\\)). The maximum is at the end point \\(x = 0\\): no square at all, the whole wire bent into a circle, area \\(\\frac{100}{\\pi} \\approx 31.83\\text{ m}^{2}\\). If the book intended \"minimize the total area\", the answer is: square piece \\(\\frac{80}{4 + \\pi} \\approx 11.20\\) m, circle piece \\(\\frac{20\\pi}{4 + \\pi} \\approx 8.80\\) m, least area \\(\\frac{100}{4 + \\pi} \\approx 14.00\\text{ m}^{2}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}
