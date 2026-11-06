@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH5-EXERCISE-5-1-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch5",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch5/u-exercise-5-1-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 90,
+          "pdf_to": 90,
+          "note": "Exercise 5.1, Question 7: book page 85 (PDF 90); answer key book page 298 (PDF 303)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7. Resolve into partial fractions: \\(\\frac{x^2 + a^2}{(x^2 + b^2)(x^2 + c^2)(x^2 + d^2)}\\) [Hint: Put \\(x^2 = y\\) to make factors of the denominator linear]",
+            "explanation": "Only \\(x^2\\) appears, never \\(x\\) alone. With \\(x^2 = y\\) the bottom becomes three different linear factors in \\(y\\) (Case I in \\(y\\)).\nWe need three constants, which come out in terms of \\(a, b, c, d\\).\nPlan: substitute, identity, put \\(y = -b^2, -c^2, -d^2\\), check, put \\(y = x^2\\) back.",
+            "steps": [
+              "Given: \\(\\frac{x^2 + a^2}{(x^2 + b^2)(x^2 + c^2)(x^2 + d^2)}\\) (\\(b^2, c^2, d^2\\) different)\nTo find: its partial fractions.\nMethod: Follow the hint: put \\(x^2 = y\\). Each factor \\(y + b^2\\) is linear in \\(y\\), so Case I applies. At the end write \\(x^2\\) back for \\(y\\).",
+              "Substitute \\(x^2 = y\\)\n\\[\\dfrac{y + a^2}{(y + b^2)(y + c^2)(y + d^2)}\\]\nWhy: The fraction is proper in \\(y\\) (degree 1 over degree 3), and the factors are different linear factors.",
+              "Write the form and the identity\n\\[= \\dfrac{A}{y + b^2} + \\dfrac{B}{y + c^2} + \\dfrac{C}{y + d^2}\\]\n\\[y + a^2 = A(y + c^2)(y + d^2)\\]\n\\[+ B(y + b^2)(y + d^2)\\]\n\\[+ C(y + b^2)(y + c^2) \\quad (i)\\]\nWhy: Multiply both sides by the whole denominator.",
+              "Find \\(A\\): put \\(y = -b^2\\) in (i)\n\\[a^2 - b^2 = A(c^2 - b^2)(d^2 - b^2)\\]\n\\[A = \\dfrac{a^2 - b^2}{(c^2 - b^2)(d^2 - b^2)}\\]\nWhy: \\(y + b^2 = 0\\), so the \\(B\\) and \\(C\\) terms vanish; \\(-b^2 + c^2 = c^2 - b^2\\).",
+              "Find \\(B\\): put \\(y = -c^2\\) in (i)\n\\[a^2 - c^2 = B(b^2 - c^2)(d^2 - c^2)\\]\n\\[B = \\dfrac{a^2 - c^2}{(b^2 - c^2)(d^2 - c^2)}\\]\nWhy: \\(y + c^2 = 0\\), so only the \\(B\\) term is left.",
+              "Find \\(C\\): put \\(y = -d^2\\) in (i)\n\\[a^2 - d^2 = C(b^2 - d^2)(c^2 - d^2)\\]\n\\[C = \\dfrac{a^2 - d^2}{(b^2 - d^2)(c^2 - d^2)}\\]\nWhy: \\(y + d^2 = 0\\), so only the \\(C\\) term is left.",
+              "Compare coefficients (tested with numbers)\nIn (i) the \\(y^2\\) coefficient must give \\(A + B + C = 0\\). Take \\(a = 4,\\ b = 1,\\ c = 2,\\ d = 3\\):\n\\[A = \\tfrac{15}{24} = \\tfrac{5}{8},\\ B = \\tfrac{12}{-15} = -\\tfrac{4}{5}\\]\n\\[C = \\tfrac{7}{40}\\]\n\\[\\tfrac{25}{40} - \\tfrac{32}{40} + \\tfrac{7}{40} = 0 \\;\\checkmark\\]\nWhy: The left side \\(y + a^2\\) has no \\(y^2\\) term. Testing the general formulas with simple numbers is a quick way to catch a sign slip.",
+              "Put \\(y = x^2\\) back and write the answer\n\\[\\dfrac{a^2 - b^2}{(c^2 - b^2)(d^2 - b^2)(x^2 + b^2)}\\]\n\\[+ \\dfrac{a^2 - c^2}{(b^2 - c^2)(d^2 - c^2)(x^2 + c^2)}\\]\n\\[+ \\dfrac{a^2 - d^2}{(b^2 - d^2)(c^2 - d^2)(x^2 + d^2)}\\]\nWhy: The question is in \\(x\\), so the answer must be in \\(x\\).",
+              "Check: recombine the fractions\nOver the common denominator the numerator \\(N(y)\\) has degree at most 2. At \\(y = -b^2\\) only the first term survives and gives \\(A(c^2 - b^2)(d^2 - b^2) = a^2 - b^2\\); likewise at \\(-c^2\\) and \\(-d^2\\). So \\(N(y)\\) and \\(y + a^2\\) agree at 3 different values, hence \\(N(y) = y + a^2\\) \\(\\checkmark\\)\nNumber test (\\(a = 4, b = 1, c = 2, d = 3, x = 0\\)):\n\\[\\tfrac{5}{8} - \\tfrac{4}{5 \\cdot 4} + \\tfrac{7}{40 \\cdot 9} = \\tfrac{4}{9}\\]\n\\[\\tfrac{16}{1 \\cdot 4 \\cdot 9} = \\tfrac{4}{9} \\;\\checkmark\\]\nWhy: Two polynomials of degree at most 2 that agree at 3 points are identical."
+            ],
+            "final_answer": "\\(\\dfrac{a^2 - b^2}{(c^2 - b^2)(d^2 - b^2)(x^2 + b^2)} + \\dfrac{a^2 - c^2}{(b^2 - c^2)(d^2 - c^2)(x^2 + c^2)} + \\dfrac{a^2 - d^2}{(b^2 - d^2)(c^2 - d^2)(x^2 + d^2)}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the answer key the minus signs inside the denominator brackets do not print (it reads like \\((c^2\\ b^2)(d^2\\ b^2)\\)). They are differences: \\((c^2 - b^2)(d^2 - b^2)\\), \\((b^2 - c^2)(d^2 - c^2)\\) and \\((b^2 - d^2)(c^2 - d^2)\\), as worked out above."
+          }
+        ]
+      }
+    }
+  ]
+}

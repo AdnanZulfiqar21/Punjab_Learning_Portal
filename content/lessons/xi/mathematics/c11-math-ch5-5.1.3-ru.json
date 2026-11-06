@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH5-5.1.3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch5",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch5/5.1.3",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 85,
+          "pdf_to": 92,
+          "note": "Book p. 80-87: 5.1.3 steps (i)-(v), Cases I-IV, Alternative method, Examples 1-8. Exercise 5.1 (p. 85) and Exercise 5.2 (p. 87), printed inside, are on their own pages."
+        }
+      ],
+      "title": "5.1.3 Resolution of a Rational Fraction P(x)/Q(x) into Partial Fractions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH5-5.1.3",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum bachon! Pichle do sabaqon (5.1.1 aur 5.1.2) mein aap ne proper aur improper rational fractions ko pehchanna seekha, aur yeh theorem bhi dekha ke do polynomials har \\(x\\) ke liye barabar hon to un ke like powers ke coefficients barabar hote hain. Aaj ka sabaq is unit ka asal dil hai: ek bari, ulajhi hui fraction ko chhoti chhoti, saada fractions mein todna. Inhi chhoti fractions ko partial fractions (juzvi kasoor) kehte hain.\nYeh kaam ulta jama karne jaisa hai. Jab aap \\(\\frac{4}{x+3} + \\frac{3}{x+4}\\) ko jama karte hain to ek fraction \\(\\frac{7x + 25}{(x+3)(x+4)}\\) banti hai. Aaj hum yeh safar ulti taraf karenge: di hui fraction se wapas woh chhote hisse dhoondenge. Aage chal kar integration (Class XII) aur series mein yahi tareeqa bohat kaam aata hai, is liye ise dil laga kar samjhiye."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab is kaam ke liye paanch bunyaadi qadam batati hai. Pehle inhein parhiye, phir main har qadam ka matlab samjhata hoon:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) \\(P(x)\\) ki degree \\(Q(x)\\) ki degree se kam honi chahiye. Agar nahin, to pehle divide karein aur remainder wali fraction ke saath kaam karein.",
+              "(ii) Denominator \\(Q(x)\\) ko us ke irreducible factors (aise factors jo aage na toot sakein) mein todein, phir fraction ko partial fractions ki shakal mein likhein.",
+              "(iii) Is identity ko left hand side ke denominator se multiply karein.",
+              "(iv) Dono taraf like terms (\\(x\\) ki ek jaisi powers) ke coefficients barabar karein.",
+              "(v) Jo equations banti hain unhein hal kar ke coefficients nikaalein."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Qadam (i) ko gehraai se samajhiye. Agar fraction improper hai (upar ki degree neeche ke barabar ya zyada), to long division se yeh shakal milti hai:\n\\[\\dfrac{P(x)}{Q(x)} = \\text{quotient} + \\dfrac{R(x)}{Q(x)}\\]\nYahan remainder \\(R(x)\\) ki degree \\(Q(x)\\) se kam hoti hai, yani \\(\\frac{R(x)}{Q(x)}\\) proper hai. Partial fractions sirf isi proper hisse ki banti hain; quotient waisa ka waisa jawab mein shaamil rehta hai (Example 3 mein dekhenge). Kitab ne \"remainder theorem\" likha hai, lekin asal mein remainder theorem ki zaroorat nahin; humein sirf division ka remainder chahiye.\nQadam (iii) se (v) kyun kaam karte hain? Multiply karne ke baad jo barabari milti hai woh identity hai, yani har \\(x\\) ke liye sach hai. Pichle sabaq wale theorem ke mutabiq aisi soorat mein dono taraf ke like powers ke coefficients barabar hone chahiyein. Aur kyun ke yeh har \\(x\\) ke liye sach hai, hum apni marzi ki aasan values bhi rakh sakte hain (linear factors ke zeros), jin se kai unknowns ek dum ghaib ho jate hain. Kitab dono tareeqe istemal karti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab hum chaar cases parhenge. Case ka faisla hamesha denominator \\(Q(x)\\) ke factors dekh kar hota hai: factors linear hain ya quadratic, aur dohraaye gaye (repeated) hain ya nahin. Is liye har sawal mein sab se pehla kaam: denominator ko poori tarah factorize karna."
+          },
+          {
+            "type": "paragraph",
+            "text": "Har sawal ka naksha ek hi hai, chahe case koi bhi ho: (1) degrees gin kar dekhein ke fraction proper hai ya nahin; (2) denominator ko aakhri had tak factorize karein; (3) factors dekh kar case pehchanein aur shakal likhein; (4) poore denominator se multiply kar ke identity banayein; (5) pehle aasan values rakh kar jo constants mil sakein woh nikaalein, baaqi coefficients barabar kar ke; (6) aakhir mein tasdeeq. Yeh naksha zehan mein bitha lein, to koi bhi sawal ajnabi nahin lagega."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Case I: Resolution of P(x)/Q(x) into partial fractions when Q(x) has only non-repeated linear factors"
+          },
+          {
+            "type": "paragraph",
+            "text": "Pehla aur sab se aasan case woh hai jab \\(Q(x)\\) ke saare factors linear hon (yani \\(x\\) ki power 1) aur koi factor dobara na aaye. Aisi soorat mein \\(Q(x)\\) ko yun likh sakte hain:\n\\[Q(x) = (x - a_1)(x - a_2)\\cdots(x - a_n)\\]\njahan \\(a_1 \\ne a_2 \\ne \\ldots \\ne a_n\\) (sab alag alag). To yeh identity banti hai:\n\\[\\dfrac{P(x)}{Q(x)} = \\dfrac{A_1}{x - a_1} + \\dfrac{A_2}{x - a_2}\\]\n\\[+ \\cdots + \\dfrac{A_n}{x - a_n}\\]\nyahan \\(A_1, A_2, \\ldots, A_n\\) woh numbers (constants) hain jo humein dhoondne hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Asaan rule yaad kar lijiye: \"ek factor, ek fraction\". Har linear factor \\(x - a\\) ke neeche aata hai aur upar sirf ek constant \\(A\\).\nUpar constant hi kyun? Kyun ke neeche ki degree 1 hai, aur har partial fraction khud bhi proper honi chahiye; degree 1 se kam sirf degree 0 hai, yani constant.\nEk aur kaam ki baat: jitni \\(Q(x)\\) ki degree, utne hi unknown constants. Teen linear factors hain to teen constants \\(A, B, C\\). Yeh ginti aap ko apna setup check karne mein madad degi."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab yeh tareeqa kitab ki misaalon se samajhte hain."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Resolve \\(\\frac{7x + 25}{(x + 3)(x + 4)}\\) into partial fractions.",
+            "steps": [
+              "Given: \\(\\frac{7x + 25}{(x + 3)(x + 4)}\\).\nTo find: is ki partial fractions.\nMethod: sab se pehle check karte hain ke fraction proper hai ya nahin: upar degree 1, neeche degree 2, to proper hai, division ki zaroorat nahin. Denominator mein do alag alag linear factors hain, yani Case I. Har factor ke upar ek constant rakhenge aur constants coefficients barabar kar ke nikaalenge.",
+              "Step 1: Partial fractions ki shakal likhein\n\\[\\dfrac{7x + 25}{(x + 3)(x + 4)} = \\dfrac{A}{x + 3} + \\dfrac{B}{x + 4}\\]\nKyun: har non-repeated linear factor ko ek fraction milti hai jis ke upar ek unknown constant hota hai. Abhi \\(A\\) aur \\(B\\) maloom nahin, unhein aage dhoondna hai.",
+              "Step 2: Denominators khatam karein\nDono taraf \\((x + 3)(x + 4)\\) se multiply karte hain:\n\\[7x + 25 = A(x + 4) + B(x + 3)\\]\nKyun: fractions ke saath kaam mushkil hai. \\(\\frac{A}{x+3}\\) ko \\((x+3)(x+4)\\) se multiply karein to \\((x+3)\\) cut jata hai aur \\(A(x+4)\\) bachta hai; isi tarah \\(\\frac{B}{x+4}\\) se \\(B(x+3)\\) bachta hai.\nDhyan dein: har constant ke saath doosra factor aata hai, apna nahin. Yahan aksar students ulta likh dete hain.",
+              "Step 3: Brackets kholein aur like powers ikatthi karein\n\\[7x + 25 = Ax + 4A + Bx + 3B\\]\n\\[7x + 25 = (A + B)x + 4A + 3B\\]\nYeh \\(x\\) mein ek identity hai.\nKyun: coefficients ka muqabla tab hi ho sakta hai jab har power ka coefficient ek bracket mein saaf nazar aaye.",
+              "Step 4: Like powers ke coefficients barabar karein\n\\[x:\\quad 7 = A + B \\quad \\text{...(1)}\\]\n\\[x^{0}:\\quad 25 = 4A + 3B \\quad \\text{...(2)}\\]\nKyun: identity har \\(x\\) ke liye sach hai, is liye equal polynomials wale theorem se left ka \\(x\\) wala coefficient right ke \\(x\\) wale coefficient ke barabar, aur constant constant ke barabar.",
+              "Step 5: Dono equations hal karein\n(1) se \\(B = 7 - A\\). Ise (2) mein rakhein:\n\\[25 = 4A + 3(7 - A)\\]\n\\[25 = A + 21\\]\n\\[A = 4\\]\n\\[B = 7 - 4 = 3\\]\nKyun: do equations aur do unknowns hain; substitution yahan sab se tez tareeqa hai. Elimination bhi chalega, jawab wahi aayega.",
+              "Step 6: Jawab likhein\n\\[\\dfrac{7x + 25}{(x + 3)(x + 4)} = \\dfrac{4}{x + 3} + \\dfrac{3}{x + 4}\\]\nKyun: \\(A\\) aur \\(B\\) ki values Step 1 wali shakal mein wapas rakh di.",
+              "Tasdeeq:\nAb dekhte hain ke jawab sahi hai ya nahin; partial fractions jama karein to asal fraction wapas aani chahiye.\n\\[\\dfrac{4}{x+3} + \\dfrac{3}{x+4}\\]\n\\[= \\dfrac{4(x+4) + 3(x+3)}{(x+3)(x+4)}\\]\n\\[= \\dfrac{7x + 25}{(x+3)(x+4)}\\]\nBilkul wahi fraction mil gayi, is liye jawab durust hai."
+            ],
+            "answer": "\\(\\frac{7x + 25}{(x + 3)(x + 4)} = \\frac{4}{x + 3} + \\frac{3}{x + 4}\\)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Alternative method"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab yahi sawal ek chhote raaste se karte hain jo kitab ne \"Alternative method\" ke naam se diya hai. Shuru wahi se:\n\\[\\dfrac{7x + 25}{(x + 3)(x + 4)} = \\dfrac{A}{x + 3} + \\dfrac{B}{x + 4}\\]\n\\[\\Rightarrow 7x + 25 = A(x + 4) + B(x + 3)\\]\nYeh identity har \\(x\\) ke liye sach hai, to hum aisi values chun sakte hain jo kaam aasan kar dein: \\(x = -3\\) aur \\(x = -4\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(A\\) ke liye \\(x + 3 = 0\\), yani \\(x = -3\\) rakhein:\n\\[-21 + 25 = A(-3 + 4)\\]\n\\[\\Rightarrow A = 4\\]\n\\(B\\) ke liye \\(x + 4 = 0\\), yani \\(x = -4\\) rakhein:\n\\[-28 + 25 = B(-4 + 3)\\]\n\\[-3 = -B \\Rightarrow B = 3\\]\nIs tarah,\n\\[\\dfrac{7x + 25}{(x + 3)(x + 4)} = \\dfrac{4}{x + 3} + \\dfrac{3}{x + 4}\\]\nDono tareeqon se ek hi jawab aaya, aur aana bhi chahiye tha."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(x = -3\\) hi kyun chuna? Kyun ke is se \\(x + 3 = 0\\) ho jata hai, aur poora \\(B(x + 3)\\) wala term zero ban jata hai. Sirf \\(A\\) bachta hai aur ek line mein mil jata hai. Yani har linear factor ka zero (woh value jis par factor zero ho) baaqi sab unknowns ko \"switch off\" kar deta hai.\nKab kaun sa tareeqa? Case I mein yeh substitution sab se tez hai. Coefficients barabar karne wala tareeqa har case mein chalta hai, aur Cases II-IV mein zaroori bhi hai, kyun ke wahan har unknown ko akela karne wali value nahin milti.\nKhud sochiye: \\(\\frac{x}{(x-2)(x+3)}\\) mein \\(A\\) ke liye kaun si value rakhenge aur \\(B\\) ke liye kaun si? (Jawab: \\(x = 2\\) se \\(A = \\frac{2}{5}\\), aur \\(x = -3\\) se \\(B = \\frac{3}{5}\\).)"
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Resolve \\(\\frac{x^{2} - 10x + 13}{(x - 1)(x^{2} - 5x + 6)}\\) into Partial Fractions.",
+            "steps": [
+              "Given: \\(\\frac{x^{2} - 10x + 13}{(x - 1)(x^{2} - 5x + 6)}\\).\nTo find: is ki partial fractions.\nMethod: pehle degree dekhein: upar 2, neeche 3, to fraction proper hai. Lekin denominator mein \\(x^{2} - 5x + 6\\) abhi toot sakta hai, is liye pehle use factorize karenge. Phir teen linear factors ke saath Case I, aur har constant us ke factor ka zero rakh kar nikaalenge.",
+              "Step 1: Denominator factorize karein\n\\[x^{2} - 5x + 6 = (x - 2)(x - 3)\\]\n\\[\\therefore\\ \\dfrac{x^{2} - 10x + 13}{(x-1)(x^{2}-5x+6)}\\]\n\\[= \\dfrac{x^{2} - 10x + 13}{(x-1)(x-2)(x-3)}\\]\nKyun: aise do numbers chahiyein jin ka product 6 aur sum \\(-5\\) ho: woh \\(-2\\) aur \\(-3\\) hain. Jab tak \\(Q(x)\\) poora factorize na ho, partial fractions ki sahi shakal likhi hi nahin ja sakti.",
+              "Step 2: Shakal likhein aur denominators khatam karein\n\\[\\dfrac{x^{2}-10x+13}{(x-1)(x-2)(x-3)}\\]\n\\[= \\dfrac{A}{x-1} + \\dfrac{B}{x-2} + \\dfrac{C}{x-3}\\]\n\\[\\Rightarrow x^{2} - 10x + 13 = A(x-2)(x-3)\\]\n\\[+ B(x-1)(x-3) + C(x-1)(x-2)\\]\nYeh \\(x\\) mein identity hai.\nKyun: teen alag linear factors, to teen constants. Poore denominator se multiply karne par har fraction ka apna factor cut jata hai aur baaqi do factors us ke constant ke saath reh jate hain.",
+              "Step 3: \\(A\\) nikaalein: \\(x - 1 = 0\\), yani \\(x = 1\\) rakhein\n\\[(1)^{2} - 10(1) + 13\\]\n\\[= A(1-2)(1-3) + B(0) + C(0)\\]\n\\[1 - 10 + 13 = A(-1)(-2)\\]\n\\[4 = 2A \\Rightarrow A = 2\\]\nKyun: \\(x = 1\\) par \\(x - 1 = 0\\), aur \\(B\\) aur \\(C\\) dono ke terms mein \\(x - 1\\) maujood hai, is liye dono zero ho jate hain.\nDhyan dein: kitab yahan \"\\(x - 3 = 0\\)\" likh deti hai, jo ghalat hai (neeche \"Kitab ki ghalti\" dekhiye). \\(x = 1\\) par zero hone wala factor \\(x - 1\\) hai.",
+              "Step 4: \\(B\\) nikaalein: \\(x - 2 = 0\\), yani \\(x = 2\\) rakhein\n\\[(2)^{2} - 10(2) + 13 = B(2-1)(2-3)\\]\n\\[4 - 20 + 13 = B(1)(-1)\\]\n\\[-3 = -B \\Rightarrow B = 3\\]\nKyun: \\(x = 2\\) par \\(A\\) aur \\(C\\) wale terms mein \\(x - 2 = 0\\) aa jata hai.",
+              "Step 5: \\(C\\) nikaalein: \\(x - 3 = 0\\), yani \\(x = 3\\) rakhein\n\\[(3)^{2} - 10(3) + 13 = C(3-1)(3-2)\\]\n\\[9 - 30 + 13 = C(2)(1)\\]\n\\[-8 = 2C \\Rightarrow C = -4\\]\nKyun: \\(x = 3\\) par sirf \\(C\\) wala term bachta hai.",
+              "Step 6: Jawab likhein\n\\[\\dfrac{2}{x-1} + \\dfrac{3}{x-2} - \\dfrac{4}{x-3}\\]\nKyun: \\(C = -4\\) negative hai, is liye \\(+\\frac{-4}{x-3}\\) ko seedha \\(-\\frac{4}{x-3}\\) likhte hain.",
+              "Tasdeeq:\nPura jama karne ke bajaye do chhoti checks karte hain.\n\\(x^{2}\\) ka coefficient right side par: \\(A + B + C = 2 + 3 - 4 = 1\\); left side par bhi 1.\n\\(x = 0\\) par right side: \\(6A + 3B + 2C = 12 + 9 - 8 = 13\\); left side ka constant bhi 13. Dono checks theek, jawab durust hai."
+            ],
+            "answer": "Partial fractions: \\(\\frac{2}{x-1} + \\frac{3}{x-2} - \\frac{4}{x-3}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 2 mein kitab likhti hai \"For A, putting \\(x - 3 = 0\\) i.e., \\(x = 1\\)\". Sahi yeh hai: \\(x - 1 = 0\\), yani \\(x = 1\\), kyun ke \\(x = 1\\) par \\(x - 1\\) hi zero hota hai. Agli line \"For B, putting x 2 = 0\" mein minus ka nishaan chhap nahin saka; sahi \\(x - 2 = 0\\) hai. Values \\(A = 2\\), \\(B = 3\\), \\(C = -4\\) bilkul sahi hain."
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Resolve \\(\\frac{2x^{3} + x^{2} - x - 3}{x(2x + 3)(x - 1)}\\) into Partial Fractions.",
+            "steps": [
+              "Given: \\(\\frac{2x^{3} + x^{2} - x - 3}{x(2x + 3)(x - 1)}\\).\nTo find: is ki partial fractions.\nMethod: yahan pehle degree ginna zaroori hai. Upar degree 3; neeche teen linear factors ka product, yani degree bhi 3. Upar ki degree neeche ke barabar hai, to fraction improper hai. Qadam (i) ke mutabiq pehle divide kar ke mixed form banayenge, phir sirf proper hisse par Case I lagayenge.",
+              "Step 1: Denominator ko multiply kar ke polynomial banayein\n\\[x(2x + 3)(x - 1) = x(2x^{2} + x - 3)\\]\n\\[= 2x^{3} + x^{2} - 3x\\]\nKyun: division ke liye divisor ko polynomial ki shakal mein likhna parta hai.",
+              "Step 2: \\(2x^{3} + x^{2} - x - 3\\) ko \\(2x^{3} + x^{2} - 3x\\) se divide karein\nPehle terms: \\(2x^{3} \\div 2x^{3} = 1\\), to quotient 1 hai. Ab minus karein:\n\\[(2x^{3} + x^{2} - x - 3) - (2x^{3} + x^{2} - 3x)\\]\n\\[= 2x - 3\\]\nQuotient \\(= 1\\) aur Remainder \\(= 2x - 3\\).\nKyun: remainder \\(2x - 3\\) ki degree 1 hai jo 3 se kam hai, is liye division yahin ruk jati hai.\nDhyan dein: minus karte waqt \\(-x - (-3x) = 2x\\) banta hai; sign ki ghalti yahan aam hai.",
+              "Step 3: Mixed form likhein\n\\[\\dfrac{2x^{3}+x^{2}-x-3}{x(2x+3)(x-1)}\\]\n\\[= 1 + \\dfrac{2x-3}{x(2x+3)(x-1)}\\]\nKyun: bilkul numbers ki tarah: \\(\\frac{7}{3} = 2 + \\frac{1}{3}\\). Dividend ÷ divisor = quotient + remainder ÷ divisor. Ab sirf \\(\\frac{2x-3}{x(2x+3)(x-1)}\\) ki partial fractions banani hain.",
+              "Step 4: Shakal aur identity\n\\[\\dfrac{2x-3}{x(2x+3)(x-1)}\\]\n\\[= \\dfrac{A}{x} + \\dfrac{B}{2x+3} + \\dfrac{C}{x-1}\\]\n\\[\\Rightarrow 2x - 3 = A(2x+3)(x-1)\\]\n\\[+ Bx(x-1) + Cx(2x+3)\\]\nKyun: \\(x\\), \\(2x + 3\\) aur \\(x - 1\\) teen alag linear factors hain. \\(2x + 3\\) mein \\(x\\) ka coefficient 2 hai, phir bhi woh linear hi hai (power 1).",
+              "Step 5: \\(A\\) nikaalein: \\(x = 0\\) rakhein\n\\[2(0) - 3 = A(3)(-1)\\]\n\\[-3 = -3A \\Rightarrow A = 1\\]\nKyun: \\(B\\) aur \\(C\\) dono ke terms mein factor \\(x\\) hai, jo \\(x = 0\\) par zero ho jata hai.",
+              "Step 6: \\(B\\) nikaalein: \\(2x + 3 = 0 \\Rightarrow x = -\\frac{3}{2}\\) rakhein\nLeft side: \\(2\\left(-\\frac{3}{2}\\right) - 3 = -6\\).\nRight side: \\(B\\left(-\\frac{3}{2}\\right)\\left(-\\frac{3}{2} - 1\\right) = B\\left(-\\frac{3}{2}\\right)\\left(-\\frac{5}{2}\\right) = \\frac{15}{4}B\\).\n\\[-6 = \\dfrac{15}{4}B\\]\n\\[B = -\\dfrac{24}{15} = -\\dfrac{8}{5}\\]\nKyun: kitab sirf jawab likh deti hai; yeh beech ki lines hain. Fraction wali value se mat ghabraiye, bas har bracket alag alag hal karein. Do negatives ka product positive hota hai.",
+              "Step 7: \\(C\\) nikaalein: \\(x - 1 = 0 \\Rightarrow x = 1\\) rakhein\n\\[2(1) - 3 = C(1)(2 + 3)\\]\n\\[-1 = 5C \\Rightarrow C = -\\dfrac{1}{5}\\]\nKyun: \\(x = 1\\) par \\(A\\) aur \\(B\\) wale terms mein \\(x - 1 = 0\\) hai.",
+              "Step 8: Jawab likhein\n\\[1 + \\dfrac{1}{x} - \\dfrac{8}{5(2x+3)} - \\dfrac{1}{5(x-1)}\\]\nKyun: \\(\\frac{-8/5}{2x+3} = -\\frac{8}{5(2x+3)}\\), yani upar wala 5 neeche chala jata hai. Aur shuru ka quotient 1 hargiz na bhoolein; woh bhi jawab ka hissa hai.",
+              "Tasdeeq: \\(x = 2\\) rakh kar dekhte hain.\nAsal fraction: \\(\\frac{16 + 4 - 2 - 3}{2 \\cdot 7 \\cdot 1} = \\frac{15}{14}\\).\nHamara jawab: \\(1 + \\frac{1}{2} - \\frac{8}{35} - \\frac{1}{5} = \\frac{70 + 35 - 16 - 14}{70} = \\frac{75}{70} = \\frac{15}{14}\\). Dono barabar, jawab sahi hai."
+            ],
+            "answer": "Partial fractions: \\(1 + \\frac{1}{x} - \\frac{8}{5(2x+3)} - \\frac{1}{5(x-1)}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari apni practice hai, kitab ka sawal nahin: \\(\\frac{5x + 1}{(x + 1)(x - 1)}\\).\nShakal: \\(\\frac{A}{x+1} + \\frac{B}{x-1}\\), to \\(5x + 1 = A(x - 1) + B(x + 1)\\).\n\\(x = 1\\): \\(6 = 2B\\), to \\(B = 3\\). \\(x = -1\\): \\(-4 = -2A\\), to \\(A = 2\\).\nJawab: \\(\\frac{2}{x+1} + \\frac{3}{x-1}\\). Tasdeeq: \\(2(x - 1) + 3(x + 1) = 5x + 1\\). Sahi!"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Case II: When Q(x) has repeated linear factors"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab doosra case: jab koi linear factor ek se zyada baar aaye, jaise \\((x + 2)^{3}\\), yani \\((x+2)(x+2)(x+2)\\). Kitab kehti hai: agar \\(Q(x)\\) mein repeated linear factor \\((x - a)^{n}\\) ho, jahan \\(n \\ge 2\\) aur \\(n\\) positive integer hai, to \\(\\frac{P(x)}{Q(x)}\\) ko yun likh sakte hain:\n\\[\\dfrac{P(x)}{Q(x)} = \\dfrac{A_1}{x - a} + \\dfrac{A_2}{(x - a)^{2}}\\]\n\\[+ \\cdots + \\dfrac{A_n}{(x - a)^{n}}\\]\nyahan \\(A_1, A_2, \\ldots, A_n\\) dhoondne wale numbers hain. Yani power 1 se le kar power \\(n\\) tak, har power ki apni fraction."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Har power kyun chahiye, sirf aakhri power kyun nahin? Ek misaal dekhiye: \\(\\frac{x+5}{(x-1)^{2}} = \\frac{1}{x-1} + \\frac{6}{(x-1)^{2}}\\). Agar hum sirf \\(\\frac{B}{(x-1)^{2}}\\) likhte to upar sirf ek constant hota, jab ke asal upar \\(x + 5\\) hai jis mein \\(x\\) bhi hai. Woh \\(x\\) wala hissa \\(\\frac{1}{x-1}\\) se aata hai. Is liye neeche ki har power ki fraction zaroori hai.\nEk aur ahem baat: \\(x = a\\) rakhne se sirf sab se oonchi power \\((x-a)^{n}\\) wala constant milta hai. Baaqi constants ke liye coefficients barabar karne parte hain. Is liye Case II mein dono tareeqe mila kar chalte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Upar wali misaal khud kar ke dekhiye (hamari practice): \\(\\frac{x + 5}{(x - 1)^{2}} = \\frac{A}{x-1} + \\frac{B}{(x-1)^{2}}\\).\nMultiply karein: \\(x + 5 = A(x - 1) + B\\).\n\\(x = 1\\): \\(6 = B\\). \\(x\\) ka coefficient: \\(1 = A\\).\nJawab: \\(\\frac{1}{x-1} + \\frac{6}{(x-1)^{2}}\\). Tasdeeq: \\((x - 1) + 6 = x + 5\\). Sahi!"
+          },
+          {
+            "type": "paragraph",
+            "text": "Case II ke sawalon mein ek naya masla aata hai: \\(x = a\\) rakhne se sirf ek constant milta hai, chahe fractions teen hon ya chaar. Is liye yahan pehle value rakh kar jo mil sake woh lein, phir sab se oonchi power (jaise \\(x^{3}\\) ya \\(x^{2}\\)) ke coefficients se shuru karein, kyun ke un equations mein aam tor par sab se kam unknowns hote hain. Ab kitab ki misaalein dekhte hain."
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "Resolve \\(\\frac{x^{2} + x - 1}{(x + 2)^{3}}\\) into partial fractions.",
+            "steps": [
+              "Given: \\(\\frac{x^{2} + x - 1}{(x + 2)^{3}}\\).\nTo find: is ki partial fractions.\nMethod: upar degree 2, neeche 3, to proper. Neeche ek hi factor \\(x + 2\\) teen baar aaya hai, yani Case II, \\(n = 3\\). Teen fractions banengi. \\(x = -2\\) se \\(C\\) milega, aur \\(A\\), \\(B\\) coefficients barabar kar ke.",
+              "Step 1: Shakal likhein\n\\[\\dfrac{x^{2}+x-1}{(x+2)^{3}}\\]\n\\[= \\dfrac{A}{x+2} + \\dfrac{B}{(x+2)^{2}} + \\dfrac{C}{(x+2)^{3}}\\]\nKyun: Case II ke mutabiq \\((x+2)^{1}\\), \\((x+2)^{2}\\) aur \\((x+2)^{3}\\), har power ki ek fraction. Teen unknowns aur degree bhi 3, ginti theek hai.",
+              "Step 2: Denominators khatam karein\nDono taraf \\((x+2)^{3}\\) se multiply karein:\n\\[x^{2} + x - 1 = A(x+2)^{2} + B(x+2) + C \\quad \\text{(i)}\\]\n\\[x^{2} + x - 1 = A(x^{2}+4x+4) + B(x+2) + C \\quad \\text{(ii)}\\]\nKyun: \\((x+2)^{3}\\) ko \\((x+2)\\) se divide karein to \\((x+2)^{2}\\) bachta hai, \\((x+2)^{2}\\) se divide karein to \\((x+2)\\), aur \\((x+2)^{3}\\) se divide karein to 1. (ii) sirf (i) ka khula hua roop hai.",
+              "Step 3: \\(C\\) nikaalein: \\(x + 2 = 0\\), yani \\(x = -2\\) ko (i) mein rakhein\n\\[(-2)^{2} + (-2) - 1 = A(0) + B(0) + C\\]\n\\[1 = C\\]\nKyun: \\(x = -2\\) par \\(A\\) aur \\(B\\) dono ke terms zero ho jate hain aur \\(C\\) akela bachta hai.\nDhyan dein: \\((-2)^{2} = 4\\) hai, \\(-4\\) nahin.",
+              "Step 4: \\(A\\) aur \\(B\\) nikaalein: (ii) mein coefficients barabar karein\n\\[x^{2}:\\quad 1 = A \\Rightarrow A = 1\\]\n\\[x:\\quad 1 = 4A + B\\]\n\\[1 = 4 + B \\Rightarrow B = -3\\]\nKyun: ab koi aisi value nahin jo sirf \\(A\\) ya sirf \\(B\\) ko akela kar de, is liye coefficients ka tareeqa. \\(x^{2}\\) sirf \\(A(x^{2}+4x+4)\\) mein aata hai, is liye \\(A\\) foran mil jata hai.",
+              "Step 5: Jawab likhein\n\\[\\dfrac{1}{x+2} - \\dfrac{3}{(x+2)^{2}} + \\dfrac{1}{(x+2)^{3}}\\]\nKyun: \\(B = -3\\) negative hai, is liye beech mein minus aaya.",
+              "Tasdeeq: (ii) ke constant terms: \\(4A + 2B + C = 4 - 6 + 1 = -1\\), aur left side ka constant bhi \\(-1\\) hai.\nEk aur khoobsurat tareeqa: \\(t = x + 2\\) rakhein, to \\(x = t - 2\\) aur \\(x^{2} + x - 1 = t^{2} - 3t + 1\\). Ab \\(\\frac{t^{2} - 3t + 1}{t^{3}} = \\frac{1}{t} - \\frac{3}{t^{2}} + \\frac{1}{t^{3}}\\). Wahi jawab!"
+            ],
+            "answer": "Partial fractions: \\(\\frac{1}{x+2} - \\frac{3}{(x+2)^{2}} + \\frac{1}{(x+2)^{3}}\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Resolve \\(\\frac{1}{(x + 1)^{2}(x^{2} - 1)}\\) into partial fractions.",
+            "steps": [
+              "Given: \\(\\frac{1}{(x + 1)^{2}(x^{2} - 1)}\\).\nTo find: is ki partial fractions.\nMethod: is sawal ka raaz denominator mein chhupa hai. \\(x^{2} - 1\\) abhi aur toot sakta hai, is liye pehle poora factorize karenge. Phir \\((x+1)^{3}(x-1)\\) milega: \\(x - 1\\) akela (Case I wala hissa) aur \\((x+1)^{3}\\) repeated (Case II wala hissa). Kul chaar fractions.",
+              "Step 1: Denominator poora factorize karein\n\\[(x+1)^{2}(x^{2}-1) = (x+1)^{2}(x+1)(x-1)\\]\n\\[= (x+1)^{3}(x-1)\\]\n\\[\\therefore\\ \\dfrac{1}{(x+1)^{2}(x^{2}-1)} = \\dfrac{1}{(x+1)^{3}(x-1)}\\]\nKyun: \\(x^{2} - 1 = (x+1)(x-1)\\) (difference of squares). Is mein ek teesra \\(x + 1\\) chhupa tha. Agar yeh step chhor dein to fractions ki shakal hi ghalat ho jayegi.",
+              "Step 2: Shakal likhein\n\\[\\dfrac{1}{(x-1)(x+1)^{3}} = \\dfrac{A}{x-1} + \\dfrac{B}{x+1}\\]\n\\[+ \\dfrac{C}{(x+1)^{2}} + \\dfrac{D}{(x+1)^{3}}\\]\nKyun: \\(x - 1\\) ke liye ek constant, aur \\(x + 1\\) ki har power (1, 2, 3) ke liye ek ek. Chaar unknowns, degree bhi 4.",
+              "Step 3: Denominators khatam karein aur kholein\n\\[1 = A(x+1)^{3} + B(x+1)^{2}(x-1)\\]\n\\[+ C(x-1)(x+1) + D(x-1) \\quad \\text{...(i)}\\]\n\\[1 = A(x^{3}+3x^{2}+3x+1)\\]\n\\[+ B(x^{3}+x^{2}-x-1)\\]\n\\[+ C(x^{2}-1) + D(x-1)\\]\n\\[1 = (A+B)x^{3} + (3A+B+C)x^{2}\\]\n\\[+ (3A-B+D)x + (A-B-C-D) \\quad \\text{...(ii)}\\]\nKyun: (i) values rakhne ke liye aasan hai, aur (ii) coefficients barabar karne ke liye. Dono ko alag naam de dene se aage hawala dena aasan hota hai.",
+              "Step 4: \\(A\\) nikaalein: \\(x - 1 = 0 \\Rightarrow x = 1\\) ko (i) mein rakhein\n\\[1 = A(2)^{3} \\Rightarrow A = \\dfrac{1}{8}\\]\nKyun: baaqi teeno terms mein \\(x - 1\\) hai jo zero ho jata hai.",
+              "Step 5: \\(D\\) nikaalein: \\(x + 1 = 0 \\Rightarrow x = -1\\) ko (i) mein rakhein\n\\[1 = D(-1 - 1) \\Rightarrow D = -\\dfrac{1}{2}\\]\nKyun: \\(A\\), \\(B\\), \\(C\\) teeno ke terms mein \\(x + 1\\) hai. Ghor karein: \\(x = -1\\) se sirf sab se oonchi power wala \\(D\\) mila, \\(B\\) aur \\(C\\) nahin.",
+              "Step 6: \\(B\\) aur \\(C\\) nikaalein: (ii) mein \\(x^{3}\\) aur \\(x^{2}\\) ke coefficients\n\\[x^{3}:\\quad 0 = A + B \\Rightarrow B = -A = -\\dfrac{1}{8}\\]\n\\[x^{2}:\\quad 0 = 3A + B + C\\]\n\\[0 = \\dfrac{3}{8} - \\dfrac{1}{8} + C \\Rightarrow C = -\\dfrac{1}{4}\\]\nKyun: left side sirf 1 hai, yani \\(1 = 0x^{3} + 0x^{2} + 0x + 1\\). Is liye \\(x^{3}\\) aur \\(x^{2}\\) ke coefficients zero hain.\nDhyan dein: \\(\\frac{3}{8} - \\frac{1}{8} = \\frac{2}{8} = \\frac{1}{4}\\), to \\(C = -\\frac{1}{4}\\).",
+              "Step 7: Jawab likhein\n\\[\\dfrac{1/8}{x-1} + \\dfrac{-1/8}{x+1} + \\dfrac{-1/4}{(x+1)^{2}} + \\dfrac{-1/2}{(x+1)^{3}}\\]\n\\[= \\dfrac{1}{8(x-1)} - \\dfrac{1}{8(x+1)}\\]\n\\[- \\dfrac{1}{4(x+1)^{2}} - \\dfrac{1}{2(x+1)^{3}}\\]\nKyun: upar wali fraction ka denominator neeche chala jata hai, aur minus sign bahar aa jata hai; is se jawab saaf dikhta hai.",
+              "Tasdeeq: (ii) ki do equations abhi istemal nahin hui; un se check karte hain.\n\\(x\\): \\(3A - B + D = \\frac{3}{8} + \\frac{1}{8} - \\frac{1}{2} = 0\\). Sahi.\n\\(x^{0}\\): \\(A - B - C - D = \\frac{1}{8} + \\frac{1}{8} + \\frac{1}{4} + \\frac{1}{2} = 1\\). Sahi."
+            ],
+            "answer": "Partial fractions: \\(\\frac{1}{8(x-1)} - \\frac{1}{8(x+1)} - \\frac{1}{4(x+1)^{2}} - \\frac{1}{2(x+1)^{3}}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kitab mein is jagah Exercise 5.1 chhapi hai. Woh Cases I aur II ki practice hai. Case III par jaane se pehle use zaroor hal kijiye, taa ke yeh do cases pakke ho jayein."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Case III: When Q(x) contains non-repeated irreducible quadratic factors"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab hum aise factors ki taraf aate hain jo linear factors mein toot hi nahin sakte. Pehle ek nayi istilah samajh lein."
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Definition",
+            "text": "Ek quadratic factor irreducible (na tootne wala) kehlata hai agar use real coefficients wale do linear factors ke product ki shakal mein na likha ja sake. Misal ke taur par \\(x^{2} + x + 1\\) aur \\(x^{2} + 3\\) irreducible quadratic factors hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar \\(Q(x)\\) mein aise non-repeated irreducible quadratic factors hon, to \\(\\frac{P(x)}{Q(x)}\\) ko aisi identity ki shakal mein likh sakte hain jis mein har aise factor ki partial fraction yeh hoti hai:\n\\[\\dfrac{Ax + B}{ax^{2} + bx + c}\\]\njahan \\(A\\) aur \\(B\\) dhoondne wale numbers hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kaise pehchanein ke quadratic irreducible hai? Discriminant dekhiye: \\(ax^{2} + bx + c\\) ke liye agar \\(b^{2} - 4ac < 0\\) ho to is ke koi real roots nahin, is liye yeh linear factors mein nahin tootega. \\(x^{2} + x + 1\\): \\(1 - 4 = -3 < 0\\). \\(x^{2} + 3\\): \\(0 - 12 = -12 < 0\\). Dono irreducible.\nUpar \\(Ax + B\\) kyun? Neeche degree 2 hai, to proper fraction ke upar degree 1 tak ja sakti hai. Sirf constant rakhein to bohat se jawab pakre hi nahin ja sakenge.\nAur yaad rahe: quadratic factor ka koi real zero nahin, is liye us ke constants hamesha coefficients barabar kar ke milte hain.\nKhud sochiye: \\(x^{2} - 5x + 6\\) irreducible hai ya nahin? (Discriminant \\(25 - 24 = 1 > 0\\), is liye nahin; yeh \\((x-2)(x-3)\\) hai, jaisa Example 2 mein dekha.)"
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Resolve \\(\\frac{3x - 11}{(x^{2} + 1)(x + 3)}\\) into partial fractions.",
+            "steps": [
+              "Given: \\(\\frac{3x - 11}{(x^{2} + 1)(x + 3)}\\).\nTo find: is ki partial fractions.\nMethod: upar degree 1, neeche 3, to proper. \\(x^{2} + 1\\) ka discriminant \\(0 - 4 = -4 < 0\\), yani irreducible; is ko \\(\\frac{Ax + B}{x^{2} + 1}\\) milega. \\(x + 3\\) linear hai, us ko \\(\\frac{C}{x + 3}\\).",
+              "Step 1: Shakal likhein aur denominators khatam karein\n\\[\\dfrac{3x-11}{(x^{2}+1)(x+3)} = \\dfrac{Ax+B}{x^{2}+1} + \\dfrac{C}{x+3}\\]\n\\[\\Rightarrow 3x - 11 = (Ax+B)(x+3) + C(x^{2}+1) \\quad \\text{(i)}\\]\nKyun: poore denominator se multiply karne par har numerator doosre factor se multiply ho kar bachta hai.",
+              "Step 2: Kholein aur ikattha karein\n\\((Ax+B)(x+3) = Ax^{2} + 3Ax + Bx + 3B\\), is liye\n\\[3x - 11 = (A+C)x^{2} + (3A+B)x + (3B+C) \\quad \\text{(ii)}\\]\nKyun: coefficients barabar karne ke liye (ii) chahiye.",
+              "Step 3: \\(C\\) nikaalein: \\(x + 3 = 0 \\Rightarrow x = -3\\) ko (i) mein rakhein\n\\[-9 - 11 = C(9 + 1)\\]\n\\[-20 = 10C \\Rightarrow C = -2\\]\nKyun: \\(x = -3\\) par \\((Ax+B)(x+3)\\) zero ho jata hai, \\(A\\) aur \\(B\\) kuch bhi hon.\nDhyan dein: \\((-3)^{2} + 1 = 10\\) hai.",
+              "Step 4: \\(A\\) aur \\(B\\) nikaalein: (ii) mein \\(x^{2}\\) aur \\(x\\) ke coefficients\n\\[x^{2}:\\quad 0 = A + C \\Rightarrow A = -C = 2\\]\n\\[x:\\quad 3 = 3A + B\\]\n\\[B = 3 - 3A = 3 - 6 = -3\\]\nKyun: left side \\(3x - 11\\) mein \\(x^{2}\\) hai hi nahin, is liye us ka coefficient zero liya.",
+              "Step 5: Jawab likhein\n\\[\\dfrac{2x - 3}{x^{2}+1} - \\dfrac{2}{x+3}\\]",
+              "Tasdeeq: (ii) ke constant terms: \\(3B + C = -9 - 2 = -11\\), jo left side ke \\(-11\\) ke barabar hai. Jawab sahi."
+            ],
+            "answer": "Partial fractions: \\(\\frac{2x - 3}{x^{2}+1} - \\frac{2}{x+3}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 6 ke sawal mein kitab ka minus ka nishaan chhap nahin saka (\"3x  11\" dikhta hai). Sahi fraction \\(\\frac{3x - 11}{(x^{2} + 1)(x + 3)}\\) hai, aur kitab ka apna hal bhi isi ko istemal karta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Agla sawal is sabaq ka sab se lamba hai, magar ghabraane ki baat nahin. Is mein do nayi cheezein hain: pehli, denominator \\(x^{4} + 2x^{2} + 9\\) dekhne mein factorize hota nazar nahin aata, is liye ek chhoti trick lagani parti hai; doosri, chaar unknowns hain jin mein se koi bhi value rakh kar akela nahin hota, kyun ke dono factors quadratic hain. Is liye saara kaam coefficients barabar kar ke hoga. Aaram se, ek ek qadam chaliye."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Resolve \\(\\frac{4x^{2} + 8x}{x^{4} + 2x^{2} + 9}\\) into partial fractions.",
+            "steps": [
+              "Given: \\(\\frac{4x^{2} + 8x}{x^{4} + 2x^{2} + 9}\\).\nTo find: is ki partial fractions.\nMethod: upar degree 2, neeche 4, to proper. Neeche ki quartic (degree 4) ko do irreducible quadratics mein todna hai; phir Case III: \\(\\frac{Ax + B}{\\ldots} + \\frac{Cx + D}{\\ldots}\\). Chaar unknowns, jo coefficients barabar kar ke milenge.",
+              "Step 1: Denominator factorize karein\n\\[x^{4} + 2x^{2} + 9 = (x^{4} + 6x^{2} + 9) - 4x^{2}\\]\n\\[= (x^{2} + 3)^{2} - (2x)^{2}\\]\n\\[= (x^{2}+2x+3)(x^{2}-2x+3)\\]\nKyun: kitab yeh factors seedhe likh deti hai, magar trick yeh hai: \\(4x^{2}\\) jama aur tafreeq karein taa ke perfect square \\((x^{2}+3)^{2}\\) ban jaye, phir difference of squares \\(a^{2} - b^{2} = (a+b)(a-b)\\). Dono quadratics ka discriminant \\(4 - 12 = -8 < 0\\), is liye dono irreducible hain.",
+              "Step 2: Shakal likhein\n\\[\\dfrac{4x^{2}+8x}{(x^{2}+2x+3)(x^{2}-2x+3)}\\]\n\\[= \\dfrac{Ax+B}{x^{2}+2x+3} + \\dfrac{Cx+D}{x^{2}-2x+3}\\]\nKyun: har non-repeated irreducible quadratic ke upar linear numerator.",
+              "Step 3: Denominators khatam karein\n\\[4x^{2} + 8x = (Ax+B)(x^{2}-2x+3)\\]\n\\[+ (Cx+D)(x^{2}+2x+3)\\]\nKyun: \\(Ax + B\\) apne denominator \\(x^{2}+2x+3\\) ke kat jaane ke baad doosre quadratic \\(x^{2}-2x+3\\) se multiply hota hai, aur \\(Cx + D\\) pehle wale se.\nDhyan dein: yahi jori ka dhyan rakhna is sawal ki jaan hai.",
+              "Step 4: Kholein aur ikattha karein\n\\((Ax+B)(x^{2}-2x+3) = Ax^{3} + (-2A+B)x^{2} + (3A-2B)x + 3B\\)\n\\((Cx+D)(x^{2}+2x+3) = Cx^{3} + (2C+D)x^{2} + (3C+2D)x + 3D\\)\n\\[4x^{2} + 8x = (A+C)x^{3}\\]\n\\[+ (-2A+B+2C+D)x^{2}\\]\n\\[+ (3A-2B+3C+2D)x + 3B + 3D \\quad \\text{(i)}\\]\nKyun: har power ke coefficients ek jagah jama kiye, taa ke agla qadam aasan ho.",
+              "Step 5: \\(x^{3}, x^{2}, x, x^{0}\\) ke coefficients barabar karein\n\\[0 = A + C \\quad \\text{(ii)}\\]\n\\[4 = -2A + B + 2C + D \\quad \\text{(iii)}\\]\n\\[8 = 3A - 2B + 3C + 2D \\quad \\text{(iv)}\\]\n\\[0 = 3B + 3D \\quad \\text{(v)}\\]\nKyun: left side \\(4x^{2} + 8x\\) mein \\(x^{3}\\) aur constant nahin, is liye un ke coefficients zero.",
+              "Step 6: Equations (ii)-(v) hal karein\n(ii) se \\(C = -A\\), aur (v) se \\(D = -B\\). Inhein (iii) aur (iv) mein rakhein:\n\\[4 = -2A + B - 2A - B = -4A\\]\n\\[\\Rightarrow A = -1,\\quad C = 1\\]\n\\[8 = 3A - 2B - 3A - 2B = -4B\\]\n\\[\\Rightarrow B = -2,\\quad D = 2\\]\nKyun: \\(C\\) aur \\(D\\) ko \\(A\\) aur \\(B\\) mein badal dene se har equation mein ek hi unknown bachta hai.\nDhyan dein: kitab yahan \\(A = 1, B = 2, C = -1, D = -2\\) likhti hai, yani chaaron signs ulte. Neeche \"Kitab ki ghalti\" dekhiye.",
+              "Step 7: Jawab likhein\n\\[\\dfrac{-x-2}{x^{2}+2x+3} + \\dfrac{x+2}{x^{2}-2x+3}\\]\nyani \\(-\\frac{x+2}{x^{2}+2x+3} + \\frac{x+2}{x^{2}-2x+3}\\).",
+              "Tasdeeq: \\(x = 1\\) rakh kar dekhte hain.\nAsal fraction: \\(\\frac{4 + 8}{1 + 2 + 9} = \\frac{12}{12} = 1\\).\nHamara jawab: \\(\\frac{-3}{6} + \\frac{3}{2} = -\\frac{1}{2} + \\frac{3}{2} = 1\\). Sahi!\nKitab wala jawab is value par \\(\\frac{3}{6} - \\frac{3}{2} = -1\\) deta hai, jo asal fraction ke barabar nahin. Isi se pata chalta hai ke kitab ke signs ulte hain."
+            ],
+            "answer": "Partial fractions: \\(\\frac{-x-2}{x^{2}+2x+3} + \\frac{x+2}{x^{2}-2x+3}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 7 mein kitab \\(A = 1\\), \\(B = 2\\), \\(C = -1\\), \\(D = -2\\) aur jawab \\(\\frac{x+2}{x^{2}+2x+3} + \\frac{-x-2}{x^{2}-2x+3}\\) likhti hai. Kitab ki apni equations (ii)-(v) se \\(A = -1\\), \\(B = -2\\), \\(C = 1\\), \\(D = 2\\) aate hain (misal: kitab ki values (iii) mein rakhein to \\(-2 + 2 - 2 - 2 = -4\\) banta hai, 4 nahin). Sahi jawab: \\(\\frac{-x-2}{x^{2}+2x+3} + \\frac{x+2}{x^{2}-2x+3}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Case III ki ek chhoti practice (hamari, kitab ki nahin): \\(\\frac{x + 3}{(x^{2} + 1)(x + 1)} = \\frac{Ax + B}{x^{2}+1} + \\frac{C}{x+1}\\).\n\\(x + 3 = (Ax + B)(x + 1) + C(x^{2} + 1)\\).\n\\(x = -1\\): \\(2 = 2C\\), to \\(C = 1\\). \\(x^{2}\\): \\(0 = A + C\\), to \\(A = -1\\). Constant: \\(3 = B + C\\), to \\(B = 2\\).\nJawab: \\(\\frac{-x + 2}{x^{2}+1} + \\frac{1}{x+1}\\). Tasdeeq ke liye \\(x = 0\\) rakhein: asal \\(3\\), jawab \\(2 + 1 = 3\\). Sahi!"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Case IV: When Q(x) has repeated irreducible quadratic factors"
+          },
+          {
+            "type": "paragraph",
+            "text": "Aakhri case pichle do cases ka milaap hai. Agar \\(Q(x)\\) mein repeated irreducible quadratic factor \\((ax^{2} + bx + c)^{n}\\) ho, jahan \\(n \\ge 2\\) aur \\(n\\) positive integer hai, to \\(\\frac{P(x)}{Q(x)}\\) ko yun likh sakte hain:\n\\[\\dfrac{P(x)}{Q(x)} = \\dfrac{A_1x + B_1}{ax^{2}+bx+c}\\]\n\\[+ \\dfrac{A_2x + B_2}{(ax^{2}+bx+c)^{2}} + \\cdots\\]\n\\[+ \\dfrac{A_nx + B_n}{(ax^{2}+bx+c)^{n}}\\]\nyahan \\(A_1, B_1, A_2, B_2, \\ldots, A_n, B_n\\) dhoondne wale numbers hain. Kitab is ka tareeqa ek misaal se samjhati hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Case IV ko alag se ratne ki zaroorat nahin. Case II se yeh liya: har power ki apni fraction, 1 se \\(n\\) tak. Case III se yeh liya: quadratic ke upar \\(Ax + B\\). Dono ko mila dein to Case IV ban gaya."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Resolve \\(\\frac{4x^{2}}{(x^{2} + 1)^{2}(x - 1)}\\) into partial fractions.",
+            "steps": [
+              "Given: \\(\\frac{4x^{2}}{(x^{2} + 1)^{2}(x - 1)}\\).\nTo find: is ki partial fractions.\nMethod: upar degree 2, neeche \\(4 + 1 = 5\\), to proper. \\((x^{2} + 1)^{2}\\) repeated irreducible quadratic hai (Case IV): \\(\\frac{Ax+B}{x^{2}+1} + \\frac{Cx+D}{(x^{2}+1)^{2}}\\). \\(x - 1\\) linear hai: \\(\\frac{E}{x-1}\\). Paanch unknowns, degree bhi 5.",
+              "Step 1: Shakal likhein\n\\[\\dfrac{4x^{2}}{(x^{2}+1)^{2}(x-1)} = \\dfrac{Ax+B}{x^{2}+1}\\]\n\\[+ \\dfrac{Cx+D}{(x^{2}+1)^{2}} + \\dfrac{E}{x-1}\\]\nKyun: quadratic ki har power par \\(Ax + B\\) jaisa numerator, aur linear factor par constant.",
+              "Step 2: Denominators khatam karein\n\\[4x^{2} = (Ax+B)(x^{2}+1)(x-1)\\]\n\\[+ (Cx+D)(x-1) + E(x^{2}+1)^{2} \\quad \\text{(i)}\\]\nKyun: \\((x^{2}+1)^{2}(x-1)\\) se multiply karne par har numerator ke saath woh factors bachte hain jo us ke apne denominator mein nahin the.",
+              "Step 3: Kholein aur ikattha karein\n\\((x^{2}+1)(x-1) = x^{3} - x^{2} + x - 1\\), is liye\n\\((Ax+B)(x^{3}-x^{2}+x-1) = Ax^{4} + (-A+B)x^{3} + (A-B)x^{2} + (-A+B)x - B\\)\n\\((Cx+D)(x-1) = Cx^{2} + (-C+D)x - D\\)\n\\(E(x^{2}+1)^{2} = Ex^{4} + 2Ex^{2} + E\\)\n\\[4x^{2} = (A+E)x^{4} + (-A+B)x^{3}\\]\n\\[+ (A-B+C+2E)x^{2}\\]\n\\[+ (-A+B-C+D)x\\]\n\\[+ (-B-D+E) \\quad \\text{(ii)}\\]\nKyun: yeh lamba qadam hai, is liye teeno hisse alag alag khole, phir har power ko ikattha kiya. Jaldi mein yahan ghalti asaan hai, aaram se karein.",
+              "Step 4: \\(E\\) nikaalein: \\(x - 1 = 0 \\Rightarrow x = 1\\) ko (i) mein rakhein\n\\[4 = E(1 + 1)^{2} = 4E \\Rightarrow E = 1\\]\nKyun: (i) ke pehle do terms mein \\(x - 1\\) hai jo zero ho jata hai.",
+              "Step 5: \\(A\\) aur \\(B\\) nikaalein: (ii) mein \\(x^{4}\\) aur \\(x^{3}\\) ke coefficients\n\\[0 = A + E \\Rightarrow A = -E = -1\\]\n\\[0 = -A + B \\Rightarrow B = A = -1\\]\nKyun: left side \\(4x^{2}\\) mein \\(x^{4}\\) aur \\(x^{3}\\) nahin hain, is liye dono coefficients zero.",
+              "Step 6: \\(C\\) nikaalein: \\(x^{2}\\) ka coefficient\n\\[4 = A - B + C + 2E\\]\n\\[C = 4 - A + B - 2E\\]\n\\[= 4 + 1 - 1 - 2 = 2\\]\nKyun: \\(A\\), \\(B\\), \\(E\\) maloom hain, to sirf \\(C\\) bachta hai.",
+              "Step 7: \\(D\\) nikaalein: \\(x\\) ka coefficient\n\\[0 = -A + B - C + D\\]\n\\[D = A - B + C = -1 + 1 + 2 = 2\\]",
+              "Step 8: Jawab likhein\n\\[\\dfrac{-x-1}{x^{2}+1} + \\dfrac{2x+2}{(x^{2}+1)^{2}} + \\dfrac{1}{x-1}\\]",
+              "Tasdeeq: (ii) ka constant term abhi istemal nahin hua: \\(-B - D + E = 1 - 2 + 1 = 0\\), aur left side \\(4x^{2}\\) ka constant bhi 0 hai.\n\\(x = 0\\) par bhi dekhein: asal fraction 0; jawab \\(-1 + 2 - 1 = 0\\). Dono theek."
+            ],
+            "answer": "Partial fractions: \\(\\frac{-x-1}{x^{2}+1} + \\frac{2x+2}{(x^{2}+1)^{2}} + \\frac{1}{x-1}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 8 mein ghor kijiye ke kaam ki tarteeb kitni ahem thi: pehle \\(E\\) (value rakh kar), phir \\(A\\) aur \\(B\\) (sab se oonchi powers se), phir \\(C\\), phir \\(D\\). Har naya constant pichle constants ki madad se nikla. Agar aap ulti tarteeb se chalein, maslan pehle \\(x\\) wali equation lein, to us mein chaar unknowns ek saath hon ge aur kaam bohat lamba ho jayega. Isi liye hamesha woh equation pehle uthaiye jis mein sab se kam unknowns hon.\nDhyan dein: jawab mein \\(\\frac{-x-1}{x^{2}+1}\\) ko \\(-\\frac{x+1}{x^{2}+1}\\) bhi likh sakte hain, aur \\(\\frac{2x+2}{(x^{2}+1)^{2}}\\) ko \\(\\frac{2(x+1)}{(x^{2}+1)^{2}}\\). Dono shaklein sahi hain."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Factor in Q(x)",
+              "Partial fractions it gives"
+            ],
+            "rows": [
+              [
+                "Case I: non-repeated linear \\(x - a\\)",
+                "\\(\\frac{A}{x-a}\\)"
+              ],
+              [
+                "Case II: repeated linear \\((x - a)^{n}\\)",
+                "\\(\\frac{A_1}{x-a} + \\frac{A_2}{(x-a)^{2}} + \\cdots + \\frac{A_n}{(x-a)^{n}}\\)"
+              ],
+              [
+                "Case III: non-repeated irreducible quadratic \\(ax^{2} + bx + c\\)",
+                "\\(\\frac{Ax+B}{ax^{2}+bx+c}\\)"
+              ],
+              [
+                "Case IV: repeated irreducible quadratic \\((ax^{2} + bx + c)^{n}\\)",
+                "\\(\\frac{A_1x+B_1}{ax^{2}+bx+c} + \\cdots + \\frac{A_nx+B_n}{(ax^{2}+bx+c)^{n}}\\)"
+              ]
+            ],
+            "caption": "Chaaron cases ka khulasa (hamari table, kitab mein chhapi nahin)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Neeche diye denominators ke liye sirf shakal likhiye, hal mat kijiye:\n1. \\((x - 2)(x + 5)\\): jawab \\(\\frac{A}{x-2} + \\frac{B}{x+5}\\).\n2. \\(x^{2}(x + 1)\\): yahan \\(x^{2}\\) repeated linear factor hai, to \\(\\frac{A}{x} + \\frac{B}{x^{2}} + \\frac{C}{x+1}\\).\n3. \\((x^{2} + 4)(x - 1)^{2}\\): \\(\\frac{Ax + B}{x^{2}+4} + \\frac{C}{x-1} + \\frac{D}{(x-1)^{2}}\\).\nHar baar unknowns gin kar degree se milaiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Fraction proper honi chahiye; improper ho to pehle divide karein aur sirf remainder wali fraction todein, quotient jawab mein rakhein.\n2. Koi bhi shakal likhne se pehle \\(Q(x)\\) ko poori tarah factorize karein.\n3. Linear factor ke upar constant; irreducible quadratic ke upar \\(Ax + B\\).\n4. Repeated factor ho to har power ki fraction, 1 se le kar sab se oonchi power tak.\n5. Unknowns ki ginti = \\(Q(x)\\) ki degree.\n6. Linear factors ke zeros rakh kar jo constants mil sakein woh pehle nikaalein; baaqi coefficients barabar kar ke.\n7. Aakhir mein hamesha tasdeeq karein: koi value rakh kar ya bachi hui equation se."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Improper fraction ko baghair divide kiye todna, ya divide kar ke quotient jawab mein likhna bhool jana (Example 3). Bachne ka tareeqa: shuru mein hi degrees gin lein.\n2. Repeated factor mein sirf aakhri power likhna, jaise sirf \\(\\frac{B}{(x+2)^{3}}\\). Har power chahiye.\n3. Irreducible quadratic ke upar sirf constant likhna; wahan \\(Ax + B\\) aata hai.\n4. Denominator poora factorize na karna: Example 5 ka \\(x^{2} - 1\\) ek aur \\(x + 1\\) chhupaye hue tha.\n5. Multiply karte waqt constant ke saath apna hi factor likh dena; har constant ke saath doosre factors aate hain.\n6. Negative constant ke sign mein ghalti: \\(+\\frac{-4}{x-3}\\) ko \\(-\\frac{4}{x-3}\\) likhein."
+          }
+        ]
+      }
+    }
+  ]
+}
