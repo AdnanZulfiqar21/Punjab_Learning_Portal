@@ -1,0 +1,479 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH1-1.9-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch1",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch1/1.9",
+      "title": "1.9 Transformation of Graphs of Functions (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 21,
+          "pdf_to": 25,
+          "note": "Book p. 19-23: 1.9 Transformation of Graphs of Functions: shifting and scaling, Figures 1.14-1.18, Examples 13-14"
+        }
+      ],
+      "variant_of": "C12-MATH-CH1-1.9",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Aaj ka sabaq bohat mazedaar hai, kyun ke is mein hum naya graph shuru se nahin banayenge. Hum ek purana, jaana pehchana graph lenge aur use sirf hilayenge, kheenchenge ya dabayenge. Is ko transformation (graph ki shakal ya jagah badalna) kehte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab kehti hai ke basic functions ke graphs ko kai tareeqon se transform kar ke naye graphs banaye ja sakte hain: reflection (aaine mein ulta karna), rotation (ghumana), stretching (kheenchna), compression (dabana) aur shifting (sarkana). Yeh algebra, graphs aur rozmarra zindagi ke masail mein function ki tabdeeli dikhane ke kaam aati hain. In ka ek bara istemal computer graphics mein hai, jahan tasveeron aur shapes ko banaya, badla aur animate (harkat dena) kiya jata hai. Lekin is section mein hum sirf teen buniyadi transformations parhenge: horizontal shift, vertical shift aur scaling, kyun ke functions ke graph samajhne mein yahi sab se zyada kaam aati hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Sochiye aap ke paas \\(y = x^{2}\\) ka graph ek transparent sheet par bana hua hai. Ab aap is sheet ko daayen sarka sakte hain, oopar utha sakte hain, ya rubber ki tarah kheench sakte hain. Graph ki asal shakal wohi rehti hai, sirf jagah ya phailao badalta hai. Yahi transformation hai.\nPoore sabaq mein sirf do sawal yaad rakhiye:\n1. Tabdeeli input \\(x\\) par hui hai (function ke andar) ya output \\(y\\) par (function ke bahar)? Andar wali tabdeeli graph ko horizontal (daayen-baayen) badalti hai, bahar wali vertical (oopar-neeche).\n2. Tabdeeli jama/tafreeq (plus/minus) hai to shift hai; zarb (multiply) hai to scaling hai.\nYeh do sawal har question ki chaabi hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is sabaq ka naqsha: pehle hum shifting parhenge (graph ko bina shakal badle sarkana), phir scaling (graph ko kheenchna ya dabana), aur aakhir mein dekhenge ke kai transformations ek ke baad ek kaise lagti hain. Examples 13 aur 14 aur poori Exercise 1.3 isi aakhri hisse par khari hai.\nYeh sabaq pichle sabaqon se juda hua hai. Section 1.8 mein aap ne dekha tha ke inverse function ka graph line y = x mein reflection (aaine wala aks) hota hai. Wahan bhi hum ne naya graph shuru se nahin banaya tha, purane graph ke har point ko ek qaide se badla tha. Aaj bhi yahi karenge, bas qaide naye hain.\nExam mein is sabaq se do qisam ke sawal aate hain: (1) di gayi transformations ke baad naya function likhna, aur (2) original aur naye function ke graphs ek hi coordinate plane par bana kar compare karna. Dono ke liye neeche wale qaide pakke yaad hone chahiye."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(i) Shifting of Graphs"
+          },
+          {
+            "type": "paragraph",
+            "text": "Shifting ka matlab hai graph ko us ki asal jagah se sarkana, magar us ki shakal aur size bilkul nahin badalta. Shifting mein graph ya to horizontal (daayen-baayen) sarakta hai ya vertical (oopar-neeche). Isay translation bhi kehte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Mathematical modeling mein shifting is liye istemal hoti hai ke input ya output values ki tabdeeli se function mein jo farq aata hai woh dikhaya ja sake. Ek hi basic function, sirf jagah badal kar, mukhtalif soorat-e-haal ko bayan kar sakta hai. Masalan ek hi shakal ka curve agar do ghante baad shuru ho to woh graph par do units daayen chala jayega."
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Horizontal Shift"
+          },
+          {
+            "type": "paragraph",
+            "text": "Jab function \\(y = f(x)\\) mein input variable \\(x\\) ko \\(x - h\\) se badal dein to graph shifted horizontally hota hai, yani daayen ya baayen sarak jata hai. Naya graph is function ka hota hai:",
+            "bold": [
+              "shifted horizontally"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "y = f(x - h)",
+            "text_alt": "y equals f of x minus h"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Agar \\(h > 0\\): graph \\(h\\) units daayen (right) sarakta hai",
+              "Agar \\(h < 0\\): graph \\(|h|\\) units baayen (left) sarakta hai"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yahan bachche sab se zyada ulajhte hain: minus likha hai magar graph daayen kyun jata hai? Aaiye wajah samajhte hain.\nPurane graph par ek point \\((a, f(a))\\) lijiye. Naya function \\(y = f(x - h)\\) wahi height \\(f(a)\\) tab deta hai jab bracket ke andar \\(a\\) aaye, yani \\(x - h = a\\), yani \\(x = a + h\\). Matlab har height ab \\(h\\) units aage (daayen) milti hai.\nMisaal: \\(y = x^{2}\\) ka sab se neecha point \\(x = 0\\) par hai. \\(y = (x - 2)^{2}\\) mein bracket zero tab hota hai jab \\(x = 2\\). To neecha point \\(x = 2\\) par chala gaya: 2 units daayen, halaan ke minus likha hai.\nIsi tarah \\(y = f(x + 3) = f(x - (-3))\\) mein \\(h = -3\\) hai, is liye graph 3 units baayen jayega.\nAasaan misaal: agar aap ki bus roz 8 baje aati hai aur ab 2 ghante late (8 + 2 = 10 baje) aati hai, to time ke graph par sab kuch 2 units aage (daayen) chala jata hai. 'Late' yani 'x mein se kam karna' aur graph aage."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "\\(f(x) = \\sqrt{x}\\) lijiye. Is ka graph \\((0, 0)\\) se shuru hota hai aur \\((1, 1)\\), \\((4, 2)\\), \\((9, 3)\\) se guzarta hai. Ab \\(y = \\sqrt{x - 3}\\) dekhiye: yahan \\(h = 3\\).\nSquare root ke andar negative number nahin aa sakta, is liye \\(x - 3 \\ge 0\\), yani \\(x \\ge 3\\). Graph ab \\((3, 0)\\) se shuru hota hai. Baqi points: \\((4, 1)\\), \\((7, 2)\\), \\((12, 3)\\). Har point ka sirf \\(x\\) 3 barha, \\(y\\) wahi raha.\nYani domain bhi 3 units daayen sarak gaya: pehle \\([0, \\infty[\\), ab \\([3, \\infty[\\). Yeh baat Exercise 1.3 ke Question 4 mein kaam aayegi.\nKhud sochiye: \\(y = \\ln(x + 2)\\) ka vertical asymptote kahan hoga? (Jawab: \\(\\ln x\\) ka asymptote \\(x = 0\\) hai; \\(x + 2\\) ka matlab 2 units baayen, is liye naya asymptote \\(x = -2\\).)"
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Vertical Shift"
+          },
+          {
+            "type": "paragraph",
+            "text": "Jab function \\(y = f(x)\\) mein output variable \\(y\\) ko \\(y - k\\) se badal dein to graph shifted vertically hota hai, yani oopar ya neeche sarakta hai. Naya graph is function ka hota hai:",
+            "bold": [
+              "shifted vertically"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "y = f(x) + k",
+            "text_alt": "y equals f of x plus k"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Agar \\(k > 0\\): graph \\(k\\) units oopar (upward) jata hai",
+              "Agar \\(k < 0\\): graph \\(|k|\\) units neeche (downward) jata hai"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(y\\) ki jagah \\(y - k\\) likhein to \\(y - k = f(x)\\) banta hai, jo bilkul \\(y = f(x) + k\\) hi hai. Yahan sign seedha kaam karta hai: \\(+k\\) har output mein \\(k\\) jama karta hai, to har point \\(k\\) units oopar chala jata hai; \\(-k\\) har point ko neeche le aata hai.\nFarq yaad rakhiye: vertical shift bahar wali tabdeeli hai (seedhi chalti hai), horizontal shift andar wali tabdeeli hai (ulti chalti hai).\nMisaal: kisi building ki har manzil ki height zameen se naapi gayi. Ab poori building 3 meter oonche chabootre par rakh di jaye to har manzil ki height mein 3 jama ho jayega. Yahi +k hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "1. \\(y = |x| + 4\\) ka graph \\(y = |x|\\) se kaise banega, aur us ka kona (vertex) kahan hoga?\n2. \\(y = e^{x} - 1\\) ka horizontal asymptote kahan hoga?\nJawab:\n1. \\(k = 4\\), is liye V-shape poora 4 units oopar; kona \\((0, 0)\\) se \\((0, 4)\\) par chala jata hai.\n2. \\(y = e^{x}\\) ka horizontal asymptote \\(y = 0\\) (yani \\(x\\)-axis) hai. \\(-1\\) har point ko 1 unit neeche le jata hai, to asymptote bhi neeche aa kar \\(y = -1\\) ban jata hai. Graph ab \\((0, 0)\\) se guzarta hai kyun ke \\(e^{0} - 1 = 0\\).\nYaad rakhiye: shift mein graph ke saath us ki har cheez sarakti hai: vertex, intercepts, asymptotes, sab."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Function \\(y = (x - 2)^{2} - 2\\) ka graph banaiye aur dekhiye ke yeh \\(y = x^{2}\\) ke graph se kaise hasil hota hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Horizontal aur vertical shift ko achhi tarah samajhne ke liye hum function \\(y = x^{2}\\) lete hain. Yeh ek parabola hai jis ka vertex (sab se neecha point) \\((0, 0)\\) par hai, jaisa Figure 1.14 mein dikhaya gaya hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab function \\(y = (x - 2)^{2}\\) lijiye. Yeh bhi parabola hai, magar is ka vertex \\((2, 0)\\) par hai (Figure 1.15). Ghor kijiye: Figure 1.15 ka graph seedha Figure 1.14 ke graph ko 2 units horizontally daayen sarkane se mil jata hai. Yani yahan \\(f(x) = x^{2}\\) aur \\(h = 2\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab ek aur function \\(y = x^{2} - 2\\) lijiye. Yeh bhi parabola hai jis ka vertex \\((0, -2)\\) par hai (Figure 1.16). Yeh graph Figure 1.14 ke graph ko 2 units neeche sarkane se mil jata hai. Yahan \\(k = -2\\) hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch1-fig-1-9-fig-1-14-x-squared",
+            "alt": "Upward parabola y = x squared with its vertex at the origin, drawn for x from -3 to 3.",
+            "caption": "Figure 1.14: y = x², vertex (0, 0) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch1-fig-1-9-fig-1-15-x-minus-2-squared",
+            "alt": "Upward parabola y = (x - 2) squared with vertex (2, 0) on the x-axis and y-intercept (0, 4).",
+            "caption": "Figure 1.15: y = (x − 2)², vertex (2, 0) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch1-fig-1-9-fig-1-16-x-squared-minus-2",
+            "alt": "Upward parabola y = x squared minus 2 with vertex (0, -2), cutting the x-axis at minus root 2 and root 2.",
+            "caption": "Figure 1.16: y = x² − 2, vertex (0, −2) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "table",
+            "caption": "Hamari table: teeno graphs par wahi x-values (kitab mein nahin)",
+            "header": [
+              "\\(x\\)",
+              "\\(x^{2}\\)",
+              "\\((x-2)^{2}\\)",
+              "\\(x^{2} - 2\\)"
+            ],
+            "rows": [
+              [
+                "0",
+                "0",
+                "4",
+                "−2"
+              ],
+              [
+                "1",
+                "1",
+                "1",
+                "−1"
+              ],
+              [
+                "2",
+                "4",
+                "0",
+                "2"
+              ],
+              [
+                "3",
+                "9",
+                "1",
+                "7"
+              ],
+              [
+                "4",
+                "16",
+                "4",
+                "14"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Table ko column ki shakal mein oopar se neeche parhiye. \\((x-2)^{2}\\) wale column mein wahi values hain jo \\(x^{2}\\) mein thin, magar 2 qadam baad: jo 0 value \\(x^{2}\\) ko \\(x = 0\\) par milti thi, woh ab \\(x = 2\\) par mil rahi hai. Yahi daayen shift hai.\n\\(x^{2} - 2\\) wala column bilkul \\(x^{2}\\) wala column hai, bas har number mein se 2 kam. \\(x\\) wahi, har \\(y\\) do kam. Yahi neeche shift hai.\nKhud sochiye: \\(y = (x + 1)^{2} + 3\\) ka vertex kahan hoga? (Jawab: \\(h = -1\\), \\(k = 3\\), is liye vertex \\((-1, 3)\\) par, yani 1 baayen aur 3 oopar.)\nChallenge ka jawab: \\(y = (x - 2)^{2} - 2\\) ka matlab hai pehle \\(y = x^{2}\\) ko 2 units daayen (Figure 1.15), phir 2 units neeche. Vertex \\((2, -2)\\) par aa jata hai. \\(y\\)-axis ko \\((0, 2)\\) par kaatta hai kyun ke \\((0 - 2)^{2} - 2 = 4 - 2 = 2\\). \\(x\\)-axis ko wahan kaatta hai jahan \\((x - 2)^{2} = 2\\), yani \\(x = 2 \\pm \\sqrt{2}\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "General Formula for Vertical and Horizontal Shift"
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar function \\(y = f(x)\\) par horizontal aur vertical dono shifts ek saath lagayi jayein, to transformed function ki aam shakal yeh hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "y = f(x - h) + k",
+            "text_alt": "y equals f of x minus h, plus k"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is formula ko aise parhiye: \\(h\\) daayen-baayen ka hisaab rakhta hai (andar, ulta chalta hai) aur \\(k\\) oopar-neeche ka (bahar, seedha chalta hai).\n\\(y = x^{2}\\) ka point \\((0, 0)\\) is formula se \\((h, k)\\) par chala jata hai. Isi liye parabola ki vertex form \\(y = a(x - h)^{2} + k\\) mein vertex seedha \\((h, k)\\) nazar aata hai, jo aap ne Exercise 1.1 ke questions mein bhi dekha.\nHar point ek hi tarah sarakta hai: \\((x, y) \\to (x + h,\\ y + k)\\).\nDo shifts ki tarteeb (order) se farq nahin padta: pehle daayen phir neeche, ya pehle neeche phir daayen, graph ek hi banega. Lekin scaling ke saath order ka farq padta hai, yeh aage dekhenge."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(ii) Scaling of Graphs"
+          },
+          {
+            "type": "paragraph",
+            "text": "Scaling ka matlab hai graph ko kheenchna (stretching) ya dabana (compression), magar us ki aam shakal nahin badalti. Scaling mein graph vertical rukh mein ya horizontal rukh mein bara ya chhota hota hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Scaling se samajh aata hai ke jab function ke input ya output ko kisi positive constant (mustaqil number) se multiply karein to function kaise badalta hai. Jaise tasveer ko mobile par do ungliyon se zoom karte hain: sirf oopar-neeche kheenchein to tasveer lambi ho jati hai, sirf daayen-baayen to chauri."
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Vertical Scaling"
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar function \\(y = f(x)\\) ko ek positive constant \\(a\\) se multiply karein, to naya function \\(y = af(x),\\ a > 0\\) graph \\(y = f(x)\\) ki vertical scaling dikhata hai.",
+            "bold": [
+              "vertical scaling"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "y = af(x), \\quad a > 0",
+            "text_alt": "y equals a times f of x, a greater than 0"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Agar \\(a > 1\\) ho to graph factor \\(a\\) se stretched vertically hota hai (oopar-neeche khinch jata hai).",
+              "Agar \\(0 < a < 1\\) ho to graph factor \\(\\frac{1}{a} > 1\\) se compressed vertically hota hai (oopar-neeche dab jata hai).",
+              "Sirf graph ki \\(y\\)-values badalti hain, \\(x\\)-values wahi rehti hain."
+            ],
+            "bold": [
+              "stretched vertically",
+              "compressed vertically"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Har point \\((x, y)\\) ab \\((x, ay)\\) ban jata hai: \\(x\\)-axis se us ka faasla \\(a\\) guna ho jata hai. Jo points \\(x\\)-axis par hain (jahan \\(y = 0\\)), woh bilkul nahin hilte, kyun ke \\(a \\times 0 = 0\\).\nHamari taraf se misaal: \\(y = 2x^{2}\\) mein \\(y = x^{2}\\) ka point \\((1, 1)\\) ban jata hai \\((1, 2)\\), aur \\((2, 4)\\) ban jata hai \\((2, 8)\\). Parabola lamba aur patla nazar aata hai.\nAur \\(y = \\frac{1}{2}x^{2}\\) mein \\((2, 4)\\) ban jata hai \\((2, 2)\\). Parabola chapta (flat) ho jata hai. Yahan \\(a = \\frac{1}{2}\\), to compression ka factor \\(\\frac{1}{a} = 2\\) hai.\nDhyan dein: kitab compression ka factor \\(\\frac{1}{a}\\) kehti hai, \\(a\\) nahin. 'Factor 2 se compress' ka matlab hai \\(a = \\frac{1}{2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "\\(y = |x|\\) aur \\(y = 3|x|\\) ka muqabla kijiye. \\(|x|\\) ke points \\((-2, 2)\\), \\((0, 0)\\), \\((2, 2)\\) hain. \\(3|x|\\) mein yeh \\((-2, 6)\\), \\((0, 0)\\), \\((2, 6)\\) ban jate hain. Kona \\((0, 0)\\) wahin raha kyun ke us ka \\(y\\) zero hai, magar dono baazu teen guna tez oopar jate hain: V tang (narrow) ho gaya.\nEk aur baat: vertical scaling mein asymptote \\(y = 0\\) wahi rehta hai (zero ko kisi bhi number se zarb dein to zero), lekin agar asymptote \\(y = 1\\) ho aur hum 2 se stretch karein to woh \\(y = 2\\) ban jata hai.\nAsaan yaad: vertical scaling ko aise samjhiye jaise graph ko neeche x-axis se pakar kar oopar ki taraf kheench rahe hain. Jo x-axis par chipka hai woh nahin hilta, jo door hai woh zyada hilta hai."
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Horizontal Scaling"
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar function \\(y = f(x)\\) ko \\(y = f(ax),\\ a > 0\\) mein badal dein, to yeh graph \\(y = f(x)\\) ki horizontal scaling hai.",
+            "bold": [
+              "horizontal scaling"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "y = f(ax), \\quad a > 0",
+            "text_alt": "y equals f of a x, a greater than 0"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Agar \\(a > 1\\) ho to graph factor \\(a\\) se compressed horizontally hota hai (daayen-baayen se dab jata hai)",
+              "Agar \\(0 < a < 1\\) ho to graph factor \\(\\frac{1}{a} > 1\\) se stretched horizontally hota hai (daayen-baayen khinch jata hai).",
+              "Sirf graph ki \\(x\\)-values badalti hain, \\(y\\)-values wahi rehti hain"
+            ],
+            "bold": [
+              "compressed horizontally",
+              "stretched horizontally"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yahan bhi andar wali tabdeeli ulti chalti hai. \\(y = f(3x)\\) mein function ki value \\(f(6)\\) pehle hi \\(x = 2\\) par mil jati hai, kyun ke \\(3 \\times 2 = 6\\). Yani har cheez jaldi aa jati hai, graph \\(y\\)-axis ki taraf sikud jata hai.\nHar point \\((x, y)\\) ab \\(\\left(\\frac{x}{a}, y\\right)\\) par chala jata hai: \\(y\\)-axis se faasla \\(a\\) se divide ho jata hai. \\(y\\)-axis par pare points nahin hilte.\nIs liye \\(x\\) ko 3 se multiply karna = 3 se compression, aur \\(x\\) ko 3 se divide karna (\\(\\frac{x}{3}\\)) = 3 se stretch.\nMisaal: ek gaana 3 guna tez speed par chalayein to woh 3 guna kam waqt mein khatam ho jata hai; time ke graph par woh dab jata hai. Yahi f(3x) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "\\(f(x) = \\sqrt{x}\\) aur \\(y = \\sqrt{4x}\\) lijiye. Yeh \\(f(4x)\\) hai, yani 4 se horizontal compression. \\(\\sqrt{x}\\) ka point \\((4, 2)\\) ab \\((1, 2)\\) par aa jata hai (\\(x\\) ko 4 se divide kiya), aur \\((16, 4)\\) ab \\((4, 4)\\) par.\nDilchasp baat: \\(\\sqrt{4x} = 2\\sqrt{x}\\) bhi hai! Yani is khaas function ke liye 4 se horizontal compression aur 2 se vertical stretch ek hi graph dete hain. Lekin yeh har function ke liye sach nahin, is liye sawal mein jo transformation likhi ho wohi lagaiye.\nKhud sochiye: \\(y = (2x)^{2}\\) aur \\(y = 4x^{2}\\) mein kya farq hai? (Jawab: koi farq nahin, \\((2x)^{2} = 4x^{2}\\). Parabola ke liye bhi 2 se horizontal compression = 4 se vertical stretch.)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Important Note",
+            "text": "Agar \\(a < 0\\) ho to scaling sirf khinchna ya dabna nahin rehti. Is se yeh hota hai:\n\\(y = af(x)\\) mein \\(x\\)-axis ke along reflection (graph oopar se neeche ulat jata hai)\n\\(y = f(ax)\\) mein \\(y\\)-axis ke along reflection (graph daayen se baayen ulat jata hai)\nIs liye is section mein hum sirf \\(a > 0\\) lete hain taa ke sirf scaling par tawajjoh rahe."
+          },
+          {
+            "type": "paragraph",
+            "text": "Scaling ko achhi tarah samajhne ke liye yeh do functions lijiye: \\(y = \\frac{1}{50}(x - 2)^{2}\\) aur \\(y = (3x - 2)^{2}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(y = \\frac{1}{50}(x - 2)^{2}\\) ka graph Figure 1.17 mein hai. Yeh \\(y = (x - 2)^{2}\\) (Figure 1.15) ke graph ko 50 ke factor se vertically compress karne se milta hai. Isi tarah \\(y = (3x - 2)^{2}\\) ka graph \\(y = (x - 2)^{2}\\) ke graph ko 3 ke factor se horizontally compress karne se milta hai (Figure 1.18)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch1-fig-1-9-fig-1-17-vertical-compression",
+            "alt": "Very wide upward parabola y = (1/50)(x - 2) squared with vertex (2, 0), drawn for x from -12 to 16, rising only to 3.92 at both ends.",
+            "caption": "Figure 1.17: y = (1/50)(x − 2)² (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch1-fig-1-9-fig-1-18-horizontal-compression",
+            "alt": "Narrow upward parabola y = (3x - 2) squared through (0, 4) with vertex (2/3, 0).",
+            "caption": "Figure 1.18: y = (3x − 2)² (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Figure 1.17 ko ek point se check kijiye: \\(x = 16\\) par \\((x - 2)^{2} = 14^{2} = 196\\) hai. 50 se divide karein to sirf \\(3.92\\). Yani \\(x = 16\\) tak ja kar bhi curve 4 se neeche hai. Vertex \\((2, 0)\\) nahin hila kyun ke us ka \\(y\\) zero hai. Isi liye parabola itna chapta lagta hai.\nFigure 1.18: \\(f(x) = (x - 2)^{2}\\) lein to \\(f(3x) = (3x - 2)^{2}\\). Vertex \\((2, 0)\\) ka \\(x\\) 3 se divide ho kar \\(\\left(\\frac{2}{3}, 0\\right)\\) ban gaya, aur \\(y\\)-axis wala point \\((0, 4)\\) apni jagah raha. Isi liye graph patla ho gaya.\nKhud sochiye: kya \\((3x - 2)^{2}\\) ko \\(y = x^{2}\\) pehle 3 se compress aur phir 2 daayen kar ke bana sakte hain? Nahin! Woh to \\((3(x - 2))^{2} = (3x - 6)^{2}\\) banega. Tarteeb badlein to jawab badal jata hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "General Formula for Scaling of Graphs"
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar function \\(y = f(x)\\) ko \\(y = a\\,f(bx),\\ a > 0,\\ b > 0\\) mein badla jaye to yeh graph \\(y = f(x)\\) ki vertical aur horizontal dono scaling dikhata hai."
+          },
+          {
+            "type": "equation",
+            "latex": "y = a\\,f(bx), \\quad a > 0,\\ b > 0",
+            "text_alt": "y equals a times f of b x, a and b greater than 0"
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar \\(a > 1\\) ho to graph factor \\(a\\) se vertically stretch hota hai; agar \\(0 < a < 1\\) ho to factor \\(\\frac{1}{a}\\) se vertically compress. Doosri taraf agar \\(b > 1\\) ho to graph factor \\(b\\) se horizontally compress hota hai, aur agar \\(0 < b < 1\\) ho to factor \\(\\frac{1}{b}\\) se horizontally stretch."
+          },
+          {
+            "type": "table",
+            "caption": "Hamari khulasa table: y = f(x) ka point (x, y) kahan jata hai",
+            "header": [
+              "Tabdeeli",
+              "Naya function",
+              "Point jata hai"
+            ],
+            "rows": [
+              [
+                "\\(h\\) units daayen (\\(h > 0\\))",
+                "\\(y = f(x - h)\\)",
+                "\\((x + h,\\ y)\\)"
+              ],
+              [
+                "\\(k\\) units oopar (\\(k > 0\\))",
+                "\\(y = f(x) + k\\)",
+                "\\((x,\\ y + k)\\)"
+              ],
+              [
+                "vertical scaling \\(a\\) se",
+                "\\(y = a f(x)\\)",
+                "\\((x,\\ ay)\\)"
+              ],
+              [
+                "horizontal scaling \\(b\\) se",
+                "\\(y = f(bx)\\)",
+                "\\(\\left(\\frac{x}{b},\\ y\\right)\\)"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kai transformations di gayi tarteeb mein kaise lagayein (Examples 13, 14 aur Exercise 1.3 isi tareeqe se hal honge):\n1. Jo function abhi aap ke paas hai use likhiye aur us ka naam rakhiye (g, s, t...).\n2. Horizontal tabdeeli (shift ya scaling) ho to us function ke har \\(x\\) ko badliye: \\(x \\to x - h\\) ya \\(x \\to bx\\).\n3. Vertical tabdeeli ho to poore function par kaam kijiye: poore ko \\(a\\) se multiply, ya poore mein \\(k\\) jama.\n4. Naye function ka naam rakhiye aur agla qadam usi par lagaiye. Beech mein kabhi asal function par wapas mat jaiye.\nYeh bilkul aise hai jaise kapre par pehle istri, phir tah: har kaam pichle kaam ke nateeje par hota hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Sawal ke alfaaz dhyan se parhiye. 'then', 'in order', 'with the given order', 'after applying in order' jaise alfaaz batate hain ke tarteeb lazmi hai. Tarteeb kab farq dalti hai?\n1. Ek horizontal aur ek vertical tabdeeli (masalan daayen shift aur vertical stretch) ka order badal dein to jawab wahi rehta hai, kyun ke ek \\(x\\) par kaam karti hai aur doosri \\(y\\) par; dono ek doosre ko nahin chhooti.\n2. Do horizontal tabdeeliyan (shift aur horizontal scaling) ya do vertical tabdeeliyan (shift aur vertical scaling) hon to order se jawab badal jata hai. Misaal: \\(x^{2}\\) ko pehle 2 daayen phir 3 se compress: \\((3x - 2)^{2}\\). Pehle 3 se compress phir 2 daayen: \\((3x - 6)^{2}\\). Do alag parabolas!\nIs liye mehfooz tareeqa yahi hai ke hamesha di gayi tarteeb mein, ek ek qadam, har qadam ka naam rakh kar chalein."
+          },
+          {
+            "type": "example",
+            "title": "Example 13",
+            "problem": "Let \\(f(x) = \\ln(x^{2} + 1)\\). Find the function obtained after: (i) a vertical stretch by factor 2 (ii) then a shift 1 unit to the left.",
+            "steps": [
+              "Diya gaya: \\(f(x) = \\ln(x^{2} + 1)\\).\nMaloom karna: (i) factor 2 se vertical stretch aur phir (ii) 1 unit baayen shift ke baad naya function.\nTareeqa: (i) ke liye vertical scaling \\(y = af(x)\\); (ii) ke liye naye function \\(g\\) par horizontal shift \\(y = g(x - h)\\). Tarteeb di gayi hai, is liye (ii) hamesha (i) ke nateeje par lagega.",
+              "Qadam (i): factor 2 se vertical stretch\n\\[y = af(x),\\quad a = 2\\]\n\\[y = 2\\ln(x^{2} + 1)\\]\nKyun: vertical stretch har output ko \\(a = 2\\) se multiply karta hai. Input \\(x\\) ko haath nahin lagaya, is liye poora \\(\\ln(x^{2}+1)\\) 2 se zarb hua.",
+              "Naye function ka naam rakhein\n\\[g(x) = 2\\ln(x^{2} + 1)\\]\nKyun: agla transformation isi function par lagega, asal \\(f\\) par nahin. Naam rakhne se ghalti ka imkaan kam hota hai.",
+              "Qadam (ii): 1 unit baayen shift\n\\[y = g(x - h),\\quad h = -1\\]\n\\[y = g(x - (-1)) = g(x + 1)\\]\nKyun: \\(y = g(x - h)\\) mein \\(h > 0\\) daayen aur \\(h < 0\\) baayen le jata hai. 1 unit baayen ka matlab \\(h = -1\\).\nDhyan dein: baayen jane ke liye \\(x\\) ki jagah \\(x + 1\\) aata hai, \\(x - 1\\) nahin.",
+              "\\(g\\) ke har \\(x\\) ki jagah \\(x + 1\\) rakhein\n\\[g(x + 1) = 2\\ln[(x + 1)^{2} + 1]\\]\n\\[= 2\\ln(x^{2} + 2x + 1 + 1)\\]\n\\[= 2\\ln(x^{2} + 2x + 2)\\]\nKyun: \\((x + 1)^{2} = x^{2} + 2x + 1\\) (square ka formula), phir \\(1 + 1 = 2\\). 2 jo bahar hai woh apni jagah raha, kyun ke shift sirf andar ke \\(x\\) ko badalta hai.",
+              "Tasdeeq:\n\\(f\\) ka sab se neecha point \\((0, 0)\\) hai, kyun ke \\(\\ln 1 = 0\\). Stretch ke baad bhi \\((0, 0)\\) (zero ko 2 se zarb dein to zero), aur 1 baayen shift ke baad \\((-1, 0)\\).\n\\[2\\ln((-1)^{2} - 2 + 2) = 2\\ln 1 = 0\\]\nJawab \\(x = -1\\) par 0 de raha hai, bilkul jaisa hona chahiye."
+            ],
+            "answer": "Transformed function \\(y = 2\\ln(x^{2} + 2x + 2)\\) hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 14",
+            "problem": "Let \\(f(x) = \\frac{x}{x+1}\\). Find the function obtained after applying all the following transformations with the given order: (i) vertical stretch by 2 (ii) horizontal stretch by 3 (iii) shift 2 units to the right (iv) shift 1 unit downward",
+            "steps": [
+              "Diya gaya: \\(f(x) = \\frac{x}{x+1}\\).\nMaloom karna: chaar transformations di gayi tarteeb mein lagane ke baad naya function.\nTareeqa: har qadam ka apna formula: (i) \\(y = af(x)\\), \\(a = 2\\); (ii) \\(y = g(bx)\\), \\(b = \\frac{1}{3}\\); (iii) \\(y = s(x - h)\\), \\(h = 2\\); (iv) \\(y = t(x) + k\\), \\(k = -1\\). Har qadam pichle qadam ke function par lagta hai.",
+              "(i) 2 se vertical stretch\n\\[y = 2\\cdot\\dfrac{x}{x+1}\\]\n\\[= \\dfrac{2x}{x+1}\\]\nHum likhte hain \\(g(x) = \\frac{2x}{x+1}\\).\nKyun: \\(y = af(x)\\) mein \\(a = 2\\) har output ko double karta hai; sirf numerator mein 2 aata hai kyun ke poora fraction 2 se zarb ho raha hai.",
+              "(ii) 3 se horizontal stretch\n\\[y = g(bx),\\quad b = \\tfrac{1}{3}\\]\n\\[y = g\\left(\\dfrac{x}{3}\\right)\\]\n\\[= \\dfrac{2\\cdot\\frac{x}{3}}{\\frac{x}{3} + 1}\\]\n\\[= \\dfrac{2x}{x + 3}\\]\nHum likhte hain \\(s(x) = \\frac{2x}{x+3}\\).\nKyun: \\(y = g(bx)\\) mein \\(0 < b < 1\\) ho to horizontal stretch \\(\\frac{1}{b}\\) se hota hai. 3 se stretch chahiye, to \\(\\frac{1}{b} = 3\\), yani \\(b = \\frac{1}{3}\\). Phir upar aur neeche dono ko 3 se multiply kiya taa ke chhote fractions khatam ho jayein.\nDhyan dein: stretch by 3 ka matlab \\(g(3x)\\) nahin hai; \\(g(3x)\\) to compression hota.",
+              "(iii) 2 units daayen shift\nFormula \\(y = s(x - h)\\) hai, \\(h = 2\\). (Kitab yahan function ka naam \\(s\\) likhna bhool gayi hai; neeche Kitab ki ghalti dekhiye.)\n\\[y = s(x - 2)\\]\n\\[= \\dfrac{2(x - 2)}{(x - 2) + 3}\\]\n\\[= \\dfrac{2x - 4}{x + 1}\\]\nHum likhte hain \\(t(x) = \\frac{2x - 4}{x + 1}\\).\nKyun: daayen shift mein \\(s\\) ke har \\(x\\) ki jagah \\(x - 2\\) aata hai, numerator mein bhi aur denominator mein bhi. Denominator mein \\(-2 + 3 = 1\\) bacha.",
+              "(iv) 1 unit neeche shift\n\\[y = t(x) + k,\\quad k = -1\\]\n\\[y = \\dfrac{2x - 4}{x + 1} - 1\\]\n\\[= \\dfrac{2x - 4 - (x + 1)}{x + 1}\\]\n\\[= \\dfrac{x - 5}{x + 1}\\]\nKyun: neeche jane ke liye har output mein se 1 kam kiya. 1 ko \\(\\frac{x+1}{x+1}\\) likh kar ek fraction banaya.\nDhyan dein: \\(-(x + 1) = -x - 1\\); bracket ka minus dono terms par lagta hai.",
+              "Tasdeeq:\n\\(f\\) ka point \\(\\left(1, \\frac{1}{2}\\right)\\) follow karein: (i) \\((1, 1)\\); (ii) \\((3, 1)\\); (iii) \\((5, 1)\\); (iv) \\((5, 0)\\).\n\\[\\dfrac{5 - 5}{5 + 1} = 0\\]\nJawab \\((5, 0)\\) se guzarta hai. Asymptote \\(x = -1\\) bhi (ii) mein \\(x = -3\\) aur (iii) mein wapas \\(x = -1\\) ban gaya, jo denominator \\(x + 1\\) se milta hai."
+            ],
+            "answer": "Transformed function \\(y = \\frac{x - 5}{x + 1}\\) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Example 13 mein agar tarteeb ulti hoti, yani pehle 1 unit baayen aur phir 2 se vertical stretch, to kya jawab badalta?\nPehle baayen: \\(\\ln((x + 1)^{2} + 1)\\). Phir 2 se stretch: \\(2\\ln((x + 1)^{2} + 1) = 2\\ln(x^{2} + 2x + 2)\\). Bilkul wahi jawab! Wajah: ek tabdeeli horizontal thi aur doosri vertical.\nAb Example 14 mein (iii) aur (iv) ki jagah badal kar dekhiye: pehle 1 neeche, phir 2 daayen. \\(\\frac{2x}{x+3} - 1 = \\frac{x - 3}{x + 3}\\), phir \\(x \\to x - 2\\): \\(\\frac{x - 5}{x + 1}\\). Phir wahi jawab, kyun ke shift neeche (vertical) aur shift daayen (horizontal) aapas mein nahin takratin.\nLekin do vertical tabdeeliyan aapas mein takrati hain. Sirf \\(f\\) par dekhiye: pehle 2 se stretch phir 1 neeche: \\(2f(x) - 1\\). Pehle 1 neeche phir 2 se stretch: \\(2(f(x) - 1) = 2f(x) - 2\\). Ab neeche wala 1 bhi double ho kar 2 ban gaya, is liye (i) aur (iv) ki jagah badalne se jawab badal jata."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 14 ke hissa (iii) mein kitab \\(y = (x - h)\\), \\(h = 2\\) chhapti hai. Is mein function ka naam ghayab hai: sahi \\(y = s(x - h)\\) hai, yani qadam (ii) wala function \\(s(x) = \\frac{2x}{x+3}\\), 2 units daayen. Kitab ki agli line \\(y = s(x - 2)\\) aur us ka nateeja \\(\\frac{2x - 4}{x + 1}\\) bilkul sahi hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "\\(y = f(x - h)\\): \\(h > 0\\) ho to \\(h\\) units daayen, \\(h < 0\\) ho to \\(|h|\\) units baayen.\n\\(y = f(x) + k\\): \\(k > 0\\) ho to \\(k\\) units oopar, \\(k < 0\\) ho to \\(|k|\\) units neeche.\n\\(y = af(x)\\), \\(a > 0\\): \\(a > 1\\) ho to \\(a\\) se vertical stretch; \\(0 < a < 1\\) ho to \\(\\frac{1}{a}\\) se vertical compression. Sirf \\(y\\)-values badalti hain.\n\\(y = f(bx)\\), \\(b > 0\\): \\(b > 1\\) ho to \\(b\\) se horizontal compression; \\(0 < b < 1\\) ho to \\(\\frac{1}{b}\\) se horizontal stretch. Sirf \\(x\\)-values badalti hain.\nAndar (x par) ki tabdeeli horizontal aur ulti chalti hai; bahar (y par) ki tabdeeli vertical aur seedhi chalti hai.\nKai transformations: ek waqt mein ek, di gayi tarteeb mein, har dafa sab se naye function par."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "\\(y = (x - 2)^{2}\\) ko minus dekh kar baayen le jana. Minus ka matlab 2 units daayen hai.\n\\(y = f(3x)\\) ko stretch kehna. \\(x\\) ko 3 se multiply karna graph ko 3 se horizontally dabata hai; 3 se horizontal stretch \\(y = f\\left(\\frac{x}{3}\\right)\\) hai.\nSirf ek \\(x\\) badalna. \\(y = s(x - 2)\\) mein \\(s\\) ka har \\(x\\) badalna hai, numerator mein bhi, denominator mein bhi.\nTarteeb ko nazar-andaz karna. Vertical shift ke baad vertical scaling ho to shift bhi scale hoti hai: \\(\\frac{1}{2}(f(x) - 6) = \\frac{1}{2}f(x) - 3\\), na ke \\(\\frac{1}{2}f(x) - 6\\).\nCompression ka factor ghalat lena: 'factor 2 se vertical compression' ka matlab \\(\\frac{1}{2}f(x)\\) hai, \\(2f(x)\\) nahin."
+          }
+        ]
+      }
+    }
+  ]
+}

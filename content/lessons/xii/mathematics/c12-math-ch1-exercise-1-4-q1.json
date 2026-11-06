@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH1-EXERCISE-1-4-Q1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch1",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch1/u-exercise-1-4-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 30,
+          "pdf_to": 30,
+          "note": "Exercise 1.4, Question 1: book p. 28, Q1 (i)-(vi) exponential and logarithmic equations; answer key book p. 299 (PDF 301)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Solve the equation: \\(\\log(3x - 2) = \\log(x^2 - 5x + 6)\\).",
+            "explanation": "A logarithmic equation with one logarithm on each side, both to base 10.\nPlan: find the domain, equate the arguments (log is one-to-one), solve the quadratic, and keep only the roots inside the domain.",
+            "steps": [
+              "Given: \\(\\log(3x - 2) = \\log(x^2 - 5x + 6)\\).\nTo find: all real solutions \\(x\\).\nMethod: the logarithm is one-to-one, so equal logarithms (same base) have equal arguments. The domain decides which roots survive.",
+              "Domain\n\\[3x - 2 > 0 \\Rightarrow x > \\tfrac{2}{3}\\]\n\\[x^2 - 5x + 6 = (x - 2)(x - 3) > 0\\]\n\\[\\Rightarrow x < 2 \\text{ or } x > 3\\]\n\\[\\text{Domain} = ]\\tfrac{2}{3}, 2[ \\cup ]3, \\infty[\\]\nWhy: each logarithm needs a positive argument, and both conditions must hold together.",
+              "Equate the arguments\n\\[3x - 2 = x^2 - 5x + 6\\]\n\\[x^2 - 8x + 8 = 0\\]\nWhy: \\(\\log u = \\log v \\iff u = v\\).",
+              "Quadratic formula\n\\[x = \\dfrac{8 \\pm \\sqrt{64 - 32}}{2}\\]\n\\[= \\dfrac{8 \\pm 4\\sqrt{2}}{2} = 4 \\pm 2\\sqrt{2}\\]\nWhy: \\(a = 1,\\ b = -8,\\ c = 8\\) and \\(\\sqrt{32} = 4\\sqrt{2}\\).",
+              "Compare with the domain\n\\(4 - 2\\sqrt{2} \\approx 1.17\\) lies in \\(]\\frac{2}{3}, 2[\\): accepted.\n\\(4 + 2\\sqrt{2} \\approx 6.83\\) lies in \\(]3, \\infty[\\): accepted.\nWhy: a root is a solution only if both logarithms exist there.",
+              "Check:\nAt \\(x = 4 - 2\\sqrt{2}\\):\n\\[3x - 2 = 10 - 6\\sqrt{2} \\approx 1.51 > 0\\]\nBoth arguments are equal at each root (that is how the roots were found), so it is enough that one of them is positive."
+            ],
+            "final_answer": "\\(S = \\{4 - 2\\sqrt{2},\\ 4 + 2\\sqrt{2}\\}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Solve the equation: \\(\\ln(x^2 - 1) = \\ln(3x - 2)\\).",
+            "explanation": "The same type as part (i), now with natural logarithms.\nPlan: domain, equate the arguments, solve the quadratic, reject the root outside the domain.",
+            "steps": [
+              "Given: \\(\\ln(x^2 - 1) = \\ln(3x - 2)\\).\nTo find: all real solutions \\(x\\).\nMethod: \\(\\ln\\) is one-to-one, so the arguments are equal; then check the domain.",
+              "Domain\n\\[x^2 - 1 > 0 \\Rightarrow x < -1 \\text{ or } x > 1\\]\n\\[3x - 2 > 0 \\Rightarrow x > \\tfrac{2}{3}\\]\n\\[\\text{Domain} = ]1, \\infty[\\]\nWhy: both arguments must be positive; the common part of the two conditions is \\(x > 1\\).",
+              "Equate the arguments\n\\[x^2 - 1 = 3x - 2\\]\n\\[x^2 - 3x + 1 = 0\\]\nWhy: \\(\\ln u = \\ln v \\iff u = v\\).",
+              "Quadratic formula\n\\[x = \\dfrac{3 \\pm \\sqrt{9 - 4}}{2}\\]\n\\[= \\dfrac{3 \\pm \\sqrt{5}}{2}\\]\nWhy: \\(a = 1,\\ b = -3,\\ c = 1\\).",
+              "Compare with the domain\n\\(\\frac{3 + \\sqrt{5}}{2} \\approx 2.618 > 1\\): accepted.\n\\(\\frac{3 - \\sqrt{5}}{2} \\approx 0.382\\) is not greater than 1: rejected.\nWhy: at \\(x \\approx 0.382\\), \\(3x - 2 \\approx -0.854 < 0\\), so \\(\\ln(3x - 2)\\) does not exist.",
+              "Check:\nAt \\(x = \\frac{3 + \\sqrt{5}}{2}\\), \\(x^2 = 3x - 1\\), so\n\\[x^2 - 1 = 3x - 2 \\approx 5.854 > 0 \\;\\checkmark\\]"
+            ],
+            "final_answer": "\\(S = \\left\\{\\frac{3 + \\sqrt{5}}{2}\\right\\}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Solve the equation: \\(\\log(x) + \\log(x^2 - 5x + 7) = \\log(3)\\).",
+            "explanation": "Two logarithms on the left, one on the right.\nPlan: domain, product law on the left, equate the arguments, solve the cubic by factorising.",
+            "steps": [
+              "Given: \\(\\log(x) + \\log(x^2 - 5x + 7) = \\log(3)\\).\nTo find: all real solutions \\(x\\).\nMethod: join the left side into one logarithm with the product law, then equate arguments (one-to-one).",
+              "Domain\n\\[x > 0\\]\n\\[x^2 - 5x + 7 = \\left(x - \\tfrac{5}{2}\\right)^2 + \\tfrac{3}{4} > 0\\]\n\\[\\text{Domain} = ]0, \\infty[\\]\nWhy: completing the square shows the second argument is always positive, so only \\(x > 0\\) matters.",
+              "Product law and equate arguments\n\\[\\log[x(x^2 - 5x + 7)] = \\log 3\\]\n\\[x^3 - 5x^2 + 7x = 3\\]\n\\[x^3 - 5x^2 + 7x - 3 = 0\\]\nWhy: \\(\\log m + \\log n = \\log(mn)\\), then \\(\\log u = \\log v \\iff u = v\\).",
+              "Factorise the cubic\n\\[x^3 - x^2 - 4x^2 + 4x + 3x - 3\\]\n\\[= (x - 1)(x^2 - 4x + 3)\\]\n\\[= (x - 1)^2(x - 3)\\]\nWhy: the coefficients add to \\(1 - 5 + 7 - 3 = 0\\), so \\(x = 1\\) is a root and \\((x - 1)\\) is a factor.",
+              "Roots and domain\n\\(x = 1\\) (repeated) or \\(x = 3\\). Both are positive, so both are in the domain.",
+              "Check:\n\\(x = 1\\): \\(\\log 1 + \\log 3 = 0 + \\log 3 = \\log 3\\) \\(\\checkmark\\)\n\\(x = 3\\): \\(\\log 3 + \\log 1 = \\log 3\\) \\(\\checkmark\\)"
+            ],
+            "final_answer": "\\(S = \\{1, 3\\}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Solve the equation: \\(3^{(x+1)} - 2 \\cdot 9^x + 9 = 0\\).",
+            "explanation": "An exponential equation with \\(3^{x+1}\\) and \\(9^x\\): both are powers of 3.\nPlan: put \\(y = 3^x\\), solve the quadratic in \\(y\\), reject the negative value, then find \\(x\\).",
+            "steps": [
+              "Given: \\(3^{(x+1)} - 2 \\cdot 9^x + 9 = 0\\).\nTo find: all real solutions \\(x\\).\nMethod: write everything in terms of \\(3^x\\); the substitution \\(y = 3^x\\) turns it into a quadratic.",
+              "Domain\n\\[\\text{Domain} = ]-\\infty, \\infty[\\]\nWhy: exponentials are defined for every real number.",
+              "Write in terms of \\(3^x\\)\n\\[3^{x+1} = 3 \\cdot 3^x\\]\n\\[9^x = (3^2)^x = (3^x)^2\\]\nWhy: \\(a^{m+n} = a^m a^n\\) and \\((a^m)^n = (a^n)^m\\).",
+              "Substitute \\(y = 3^x\\) (\\(y > 0\\))\n\\[3y - 2y^2 + 9 = 0\\]\n\\[2y^2 - 3y - 9 = 0\\]\n\\[(y - 3)(2y + 3) = 0\\]\nWhy: multiplying by \\(-1\\) makes the leading term positive; \\(2y^2 - 6y + 3y - 9\\) splits the middle term.",
+              "Reject the impossible value\n\\(y = -\\frac{3}{2}\\): impossible, because \\(3^x > 0\\) for every \\(x\\).\n\\[3^x = 3 = 3^1 \\Rightarrow x = 1\\]\nWhy: one-to-one property of the exponential function.",
+              "Check:\n\\[3^2 - 2 \\cdot 9^1 + 9 = 9 - 18 + 9 = 0 \\;\\checkmark\\]"
+            ],
+            "final_answer": "\\(S = \\{1\\}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(v)",
+            "prompt": "1 (v) Solve the equation: \\(x\\log_{\\frac{1}{e}} 4 = \\log_{\\frac{1}{e}}(16^3 - 3)\\).",
+            "explanation": "A logarithmic equation to base \\(\\frac{1}{e}\\) with \\(x\\) as a multiplier on the left.\nAs printed (\\(16^3\\)) it does not lead to the key's answer; the intended right side is \\(\\log_{\\frac{1}{e}}(16^x - 3)\\) (see the correction below).\nPlan: power law on the left, equate arguments, then \\(y = 4^x\\) gives a quadratic.",
+            "steps": [
+              "Given (intended form): \\(x\\log_{\\frac{1}{e}} 4 = \\log_{\\frac{1}{e}}(16^x - 3)\\).\nTo find: the real solution \\(x\\).\nMethod: the power law moves \\(x\\) into the exponent, \\(x\\log_a 4 = \\log_a 4^x\\). Then both sides are logarithms to the same base, so the arguments are equal. Since \\(16^x = (4^x)^2\\), the substitution \\(y = 4^x\\) gives a quadratic.",
+              "Domain\n\\[16^x - 3 > 0 \\Rightarrow 16^x > 3\\]\nWhy: the argument of a logarithm must be positive. The base \\(\\frac{1}{e}\\) is positive and not 1, so it is allowed.",
+              "Power law on the left\n\\[\\log_{\\frac{1}{e}}(4^x) = \\log_{\\frac{1}{e}}(16^x - 3)\\]\nWhy: \\(k\\log_a u = \\log_a u^k\\).",
+              "Equate the arguments\n\\[4^x = 16^x - 3\\]\nWhy: a logarithm with any allowed base is one-to-one.",
+              "Substitute \\(y = 4^x\\) (\\(y > 0\\))\n\\[16^x = (4^2)^x = (4^x)^2 = y^2\\]\n\\[y = y^2 - 3\\]\n\\[y^2 - y - 3 = 0\\]\nWhy: \\(16^x\\) and \\(4^x\\) are linked through the same base 4.",
+              "Solve the quadratic\n\\[y = \\dfrac{1 \\pm \\sqrt{1 + 12}}{2}\\]\n\\[= \\dfrac{1 \\pm \\sqrt{13}}{2}\\]\nWhy: \\(a = 1,\\ b = -1,\\ c = -3\\).",
+              "Reject the negative value\n\\(\\frac{1 - \\sqrt{13}}{2} \\approx -1.30 < 0\\): impossible for \\(4^x\\).\n\\(\\frac{1 + \\sqrt{13}}{2} \\approx 2.303\\): accepted.\nWhy: \\(4^x > 0\\) for every real \\(x\\).",
+              "Find \\(x\\)\n\\[4^x = \\dfrac{1 + \\sqrt{13}}{2}\\]\n\\[x = \\log_4\\left(\\dfrac{1 + \\sqrt{13}}{2}\\right)\\]\n\\[= \\dfrac{1}{2}\\log_2\\left(\\dfrac{1 + \\sqrt{13}}{2}\\right)\\]\nWhy: \\(\\log_4 u = \\frac{\\log_2 u}{\\log_2 4} = \\frac{1}{2}\\log_2 u\\) (change of base). Numerically \\(x \\approx 0.6017\\).",
+              "Check:\n\\[16^x = y^2 = y + 3 \\approx 5.303 > 3\\]\nso \\(x\\) is in the domain, and \\(16^x - 3 = y = 4^x\\), so both sides are equal \\(\\checkmark\\)"
+            ],
+            "final_answer": "\\(S = \\left\\{\\frac{1}{2}\\log_2\\left(\\frac{1 + \\sqrt{13}}{2}\\right)\\right\\}\\), \\(x \\approx 0.6017\\) (for the intended equation with \\(16^x\\))"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the right side as \\(\\log_{\\frac{1}{e}}(16^3 - 3)\\). With \\(16^3\\) the equation becomes \\(4^x = 16^3 - 3 = 4093\\), so \\(x = \\log_4 4093 \\approx 5.9995\\), which does not match the answer key. The key's answer \\(\\frac{1}{2}\\log_2\\left(\\frac{1 + \\sqrt{13}}{2}\\right)\\) is the solution of \\(x\\log_{\\frac{1}{e}} 4 = \\log_{\\frac{1}{e}}(16^x - 3)\\), so the exponent 3 is a misprint for \\(x\\). We solved the intended equation."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(vi)",
+            "prompt": "1 (vi) Solve the equation: \\(2^x + 2^{-x} = 5\\).",
+            "explanation": "An exponential equation with \\(2^x\\) and \\(2^{-x} = \\frac{1}{2^x}\\).\nPlan: put \\(y = 2^x\\), clear the fraction, solve the quadratic, then take \\(\\log_2\\).",
+            "steps": [
+              "Given: \\(2^x + 2^{-x} = 5\\).\nTo find: all real solutions \\(x\\).\nMethod: \\(2^{-x} = \\frac{1}{2^x}\\), so with \\(y = 2^x\\) the equation becomes \\(y + \\frac{1}{y} = 5\\), a quadratic after multiplying by \\(y\\).",
+              "Domain\n\\[\\text{Domain} = ]-\\infty, \\infty[\\]\nWhy: exponentials are defined for every real number.",
+              "Substitute \\(y = 2^x\\) (\\(y > 0\\))\n\\[y + \\dfrac{1}{y} = 5\\]\n\\[y^2 + 1 = 5y\\]\n\\[y^2 - 5y + 1 = 0\\]\nWhy: multiplying by \\(y > 0\\) clears the fraction and changes nothing else.",
+              "Quadratic formula\n\\[y = \\dfrac{5 \\pm \\sqrt{25 - 4}}{2}\\]\n\\[= \\dfrac{5 \\pm \\sqrt{21}}{2}\\]\nWhy: \\(a = 1,\\ b = -5,\\ c = 1\\).",
+              "Both values are positive\n\\(\\sqrt{21} \\approx 4.58 < 5\\), so both \\(\\frac{5 \\pm \\sqrt{21}}{2}\\) are positive and both are accepted.\n\\[x = \\log_2\\left(\\dfrac{5 + \\sqrt{21}}{2}\\right) \\approx 2.2604\\]\n\\[x = \\log_2\\left(\\dfrac{5 - \\sqrt{21}}{2}\\right) \\approx -2.2604\\]\nWhy: \\(2^x = c \\iff x = \\log_2 c\\) for \\(c > 0\\).",
+              "Check:\n\\[\\dfrac{5 + \\sqrt{21}}{2} \\cdot \\dfrac{5 - \\sqrt{21}}{2} = \\dfrac{25 - 21}{4} = 1\\]\nso the two roots are negatives of each other, as expected: replacing \\(x\\) by \\(-x\\) does not change \\(2^x + 2^{-x}\\). Also \\(4.791 + 0.209 = 5\\) \\(\\checkmark\\)"
+            ],
+            "final_answer": "\\(S = \\left\\{\\log_2\\left(\\frac{5 + \\sqrt{21}}{2}\\right),\\ \\log_2\\left(\\frac{5 - \\sqrt{21}}{2}\\right)\\right\\}\\), \\(x \\approx \\pm 2.2604\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

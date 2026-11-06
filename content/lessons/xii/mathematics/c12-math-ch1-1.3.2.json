@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH1-1.3.2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch1",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch1/1.3.2",
+      "title": "1.3.2 Non-Fundamental Transcendental Functions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 7,
+          "pdf_to": 7,
+          "note": "Book p. 5: 1.3.2 Non-Fundamental Transcendental Functions, examples, Examples 5 and 6"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Functions formed by combining transcendental functions with algebraic functions, or by applying transformations and composition, are non-fundamental transcendental functions."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(y = \\sin x + \\ln x\\), \\(y = e^{x^{2}}\\), \\(y = x \\sin x\\), \\(y = \\ln 2x\\) are examples of functions which are not fundamental transcendental functions. On the other hand, \\(y = 10^{2x}\\) is a standard transcental function, because, it can be written as \\(y = 100^{x}\\).",
+            "book_errors": [
+              "transcental"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \"standard transcental function\"; the correct word is \"transcendental\": \\(y = 10^{2x}\\) is a standard (fundamental) transcendental function."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is \\(10^{2x}\\) fundamental but \\(e^{x^{2}}\\) not? Use the law \\((a^{m})^{n} = a^{mn}\\):\n\\[10^{2x} = (10^{2})^{x} = 100^{x}\\]\nThis is exactly the form \\(a^{x}\\) with \\(a = 100\\). But \\(e^{x^{2}}\\) cannot be written as \\(a^{x}\\) for any constant \\(a\\), because its exponent is \\(x^{2}\\), not a constant multiple of \\(x\\): it is the composition of \\(e^{u}\\) with \\(u = x^{2}\\).\nHow each example is built: \\(\\sin x + \\ln x\\) (sum of two standard functions), \\(x \\sin x\\) (product with the algebraic function \\(x\\)), \\(e^{x^{2}}\\) (composition), \\(\\ln 2x\\) (composition with \\(2x\\); a transformation of \\(\\ln x\\), since \\(\\ln 2x = \\ln 2 + \\ln x\\) for \\(x > 0\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Before deciding \"non-fundamental\", always try to rewrite the function as one standard function. For example \\(4^{x/2} = (4^{1/2})^{x} = 2^{x}\\) is fundamental. If no rewriting works, name the extra operation (sum, product, composition or added constant) in your answer."
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Given the following functions:\n\\(f(x) = \\sqrt{x+1}\\), \\(g(x) = e^{x}\\), \\(h(x) = \\frac{x+1}{x^{2}-2x+1}\\), \\(q(x) = \\ln 2x\\), \\(r(x) = \\sin x\\).\nClassify each function as algebraic or transcendental.",
+            "steps": [
+              "Given: five functions \\(f, g, h, q, r\\).\nTo find: which are algebraic and which are transcendental.\nMethod: a function is algebraic if it is made from \\(x\\) by finitely many \\(+, -, \\times, \\div\\) and roots (it then satisfies a polynomial equation in \\(y\\)); if \\(x\\) sits inside an exponential, logarithmic or trigonometric function, it is transcendental. We test each function in turn.",
+              "Step 1: \\(f(x) = \\sqrt{x+1}\\)\n\\[y = \\sqrt{x+1}\\]\n\\[y^{2} - (x + 1) = 0\\]\nWhy: only an addition and a square root are used, and squaring gives a polynomial equation in \\(y\\). So \\(f\\) is algebraic.",
+              "Step 2: \\(h(x) = \\frac{x+1}{x^{2}-2x+1}\\)\n\\[(x^{2} - 2x + 1)\\,y - (x + 1) = 0\\]\nWhy: \\(h\\) is a quotient of two polynomials (a rational function), so multiplying by the denominator gives a polynomial equation in \\(y\\). So \\(h\\) is algebraic. (Since \\(x^{2} - 2x + 1 = (x - 1)^{2}\\), \\(h\\) is defined for \\(x \\ne 1\\).)",
+              "Step 3: \\(g(x) = e^{x}\\)\nWhy: the variable \\(x\\) is in the exponent; \\(e^{x}\\) is the natural exponential function. So \\(g\\) is transcendental.",
+              "Step 4: \\(q(x) = \\ln 2x\\)\nWhy: \\(x\\) is inside a logarithm. So \\(q\\) is transcendental.",
+              "Step 5: \\(r(x) = \\sin x\\)\nWhy: \\(x\\) is inside a trigonometric function. So \\(r\\) is transcendental.",
+              "Check: substitute back into the equations of Steps 1 and 2:\n\\[(\\sqrt{x+1})^{2} - (x+1) = 0\\]\n\\[(x^{2}-2x+1)\\cdot\\dfrac{x+1}{x^{2}-2x+1} - (x+1) = 0\\]\nBoth hold, confirming that \\(f\\) and \\(h\\) are algebraic. Five functions: 2 algebraic + 3 transcendental."
+            ],
+            "answer": "Algebraic functions: \\(f(x) = \\sqrt{x+1}\\), \\(h(x) = \\frac{x+1}{x^{2}-2x+1}\\). Transcendental functions: \\(g(x) = e^{x}\\), \\(q(x) = \\ln 2x\\), \\(r(x) = \\sin x\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Given the following functions:\n\\(f(x) = \\cos 2x + 1\\), \\(g(x) = 3^{x}\\), \\(h(x) = \\tan^{-1} x^{2}\\), \\(q(x) = \\ln x + e^{x}\\), \\(r(x) = \\tan x\\).\nClassify each function as fundamental or non-fundamental transcendental functions.",
+            "steps": [
+              "Given: five transcendental functions \\(f, g, h, q, r\\).\nTo find: which are fundamental and which are non-fundamental.\nMethod: a function is fundamental if it is exactly one standard function (\\(a^{x}\\), \\(\\ln x\\), a trigonometric or an inverse trigonometric function of \\(x\\) itself) or can be rewritten as one. If it combines functions, puts an expression other than \\(x\\) inside, or adds a constant, it is non-fundamental.",
+              "Step 1: \\(g(x) = 3^{x}\\)\n\\[g(x) = a^{x},\\quad a = 3\\]\nWhy: it is the standard exponential form with \\(a = 3 > 0\\), \\(a \\ne 1\\). So \\(g\\) is fundamental.",
+              "Step 2: \\(r(x) = \\tan x\\)\nWhy: \\(\\tan x\\) is a standard trigonometric function of \\(x\\) itself, with nothing added or composed. So \\(r\\) is fundamental.",
+              "Step 3: \\(f(x) = \\cos 2x + 1\\)\nWhy: the standard function \\(\\cos\\) is applied to \\(2x\\) (a composition with the algebraic function \\(2x\\)) and then 1 is added (combination with an algebraic function). So \\(f\\) is non-fundamental.",
+              "Step 4: \\(h(x) = \\tan^{-1}(x^{2})\\)\nWhy: the standard function \\(\\tan^{-1}\\) is applied to \\(x^{2}\\), not to \\(x\\): a composition. So \\(h\\) is non-fundamental.",
+              "Step 5: \\(q(x) = \\ln x + e^{x}\\)\nWhy: it is the sum of two different standard transcendental functions, so it is a combination. So \\(q\\) is non-fundamental.",
+              "Check: each fundamental answer matches one row of the standard families (exponential \\(a^{x}\\); trigonometric \\(\\tan x\\)); each non-fundamental one needs an extra operation (\\(+1\\), \\(2x\\) inside, \\(x^{2}\\) inside, a sum) that no single standard function has. Five functions: 2 fundamental + 3 non-fundamental."
+            ],
+            "answer": "Fundamental transcendental functions: \\(g(x) = 3^{x}\\), \\(r(x) = \\tan x\\). Non-fundamental transcendental functions: \\(f(x) = \\cos 2x + 1\\), \\(h(x) = \\tan^{-1}(x^{2})\\), \\(q(x) = \\ln x + e^{x}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Non-fundamental transcendental functions are made from standard ones by combining with algebraic functions (sum, product), by transformations, or by composition.\n2. A function that can be rewritten as a single standard form is fundamental: \\(10^{2x} = 100^{x}\\).\n3. Examples 5 and 6 use two different questions: algebraic vs transcendental (Example 5), then fundamental vs non-fundamental (Example 6)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Calling \\(10^{2x}\\) non-fundamental only because of the \\(2x\\): rewrite it first, \\(10^{2x} = 100^{x}\\).\n2. Calling \\(e^{x^{2}}\\) fundamental: \\(e^{x^{2}} \\ne (e^{x})^{2} = e^{2x}\\); its exponent is \\(x^{2}\\), so it is a composition.\n3. Forgetting the bracket in \\(\\tan^{-1} x^{2}\\): it means \\(\\tan^{-1}(x^{2})\\), not \\((\\tan^{-1} x)^{2}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}
