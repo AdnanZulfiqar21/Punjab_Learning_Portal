@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH1-1.5.3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch1",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch1/1.5.3",
+      "title": "1.5.3 Inverse Hyperbolic Functions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 14,
+          "pdf_to": 14,
+          "note": "Book p. 12: 1.5.3 table of the six inverse hyperbolic functions (formula, domain, range)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The formulae, domains and ranges of all inverse hyperbolic functions are given in the following table."
+          },
+          {
+            "type": "table",
+            "caption": "The six inverse hyperbolic functions (as printed)",
+            "header": [
+              "Function",
+              "Formula",
+              "Domain",
+              "Range"
+            ],
+            "rows": [
+              [
+                "\\(\\sinh^{-1} x\\)",
+                "\\(\\ln\\left(x + \\sqrt{x^{2}+1}\\right)\\)",
+                "\\((-\\infty, \\infty)\\)",
+                "\\((-\\infty, \\infty)\\)"
+              ],
+              [
+                "\\(\\cosh^{-1} x\\)",
+                "\\(\\ln\\left(x + \\sqrt{x^{2}-1}\\right)\\)",
+                "\\([1, \\infty)\\)",
+                "\\([0, \\infty)\\)"
+              ],
+              [
+                "\\(\\tanh^{-1} x\\)",
+                "\\(\\frac{1}{2}\\ln\\left(\\frac{1+x}{1-x}\\right)\\)",
+                "\\((-1, 1)\\)",
+                "\\((-\\infty, \\infty)\\)"
+              ],
+              [
+                "\\(\\coth^{-1} x\\)",
+                "\\(\\frac{1}{2}\\ln\\left(\\frac{x+1}{x-1}\\right)\\)",
+                "\\((-\\infty, -1) \\cup (1, \\infty)\\)",
+                "\\((-\\infty, 0) \\cup (0, \\infty)\\)"
+              ],
+              [
+                "\\(\\operatorname{sech}^{-1} x\\)",
+                "\\(\\ln\\left(\\frac{1+\\sqrt{1-x^{2}}}{x}\\right)\\)",
+                "\\((0, 1]\\)",
+                "\\((0, \\infty[\\)"
+              ],
+              [
+                "\\(\\operatorname{csch}^{-1} x\\)",
+                "\\(\\ln\\left(\\frac{1}{x} + \\sqrt{\\frac{1}{x^{2}}+1}\\right)\\)",
+                "\\((-\\infty, 0) \\cup (0, \\infty)\\)",
+                "\\((-\\infty, 0) \\cup (0, \\infty)\\)"
+              ]
+            ],
+            "book_errors": [
+              "\\((0, \\infty[\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The table prints the range of \\(\\operatorname{sech}^{-1} x\\) as \\((0, \\infty[\\), with mixed brackets that leave out 0. But\n\\[\\operatorname{sech}^{-1} 1 = \\ln\\left(\\dfrac{1 + 0}{1}\\right) = \\ln 1 = 0\\]\nso 0 is a value of the function. The correct range is \\([0, \\infty)\\) (that is, \\([0, \\infty[\\)), the same as the restricted domain of \\(\\operatorname{sech} x\\), just like \\(\\cosh^{-1} x\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does \\(\\ln\\) appear in every formula? Hyperbolic functions are made of \\(e^{x}\\); undoing \\(e^{x}\\) needs its inverse, \\(\\ln x\\) (section 1.6). The first two formulas are derived on page 1.5.4 (Examples 10 and 11) and the other four in Exercise 1.2, Question 8. The method is always the same: put \\(y = f^{-1}(x)\\), so \\(x = f(y)\\); write \\(f(y)\\) with \\(e^{y}\\); solve for \\(e^{y}\\); take \\(\\ln\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to read the domain and range columns: an inverse function swaps them. For example \\(\\tanh x\\) has range \\((-1, 1)\\), so \\(\\tanh^{-1} x\\) has domain \\((-1, 1)\\); \\(\\tanh x\\) has domain \\(\\mathbb{R}\\), so \\(\\tanh^{-1} x\\) has range \\(\\mathbb{R}\\).\n\\(\\cosh x\\) and \\(\\operatorname{sech} x\\) are not one-to-one on \\(\\mathbb{R}\\) (even functions), so we use only \\(x \\ge 0\\) for them. That is why \\(\\cosh^{-1} x\\) and \\(\\operatorname{sech}^{-1} x\\) give only values \\(\\ge 0\\).\nThe domain is also what keeps each formula meaningful: for \\(\\tanh^{-1}\\), \\(\\frac{1+x}{1-x} > 0\\) exactly when \\(-1 < x < 1\\); for \\(\\coth^{-1}\\), \\(\\frac{x+1}{x-1} > 0\\) exactly when \\(|x| > 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Quick checks with easy numbers:\n\\(\\sinh^{-1} 0 = \\ln(0 + 1) = 0\\), because \\(\\sinh 0 = 0\\).\n\\(\\cosh^{-1} 1 = \\ln(1 + 0) = 0\\), because \\(\\cosh 0 = 1\\).\n\\(\\tanh^{-1} 0 = \\frac{1}{2}\\ln 1 = 0\\), because \\(\\tanh 0 = 0\\).\nIf a formula does not pass such a check, it has been copied wrongly."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\sinh^{-1} x = \\ln\\left(x + \\sqrt{x^{2}+1}\\right)\\) for all real \\(x\\).\n2. \\(\\cosh^{-1} x = \\ln\\left(x + \\sqrt{x^{2}-1}\\right)\\) for \\(x \\ge 1\\), with values \\(\\ge 0\\).\n3. \\(\\tanh^{-1} x = \\frac{1}{2}\\ln\\frac{1+x}{1-x}\\) for \\(|x| < 1\\); \\(\\coth^{-1} x = \\frac{1}{2}\\ln\\frac{x+1}{x-1}\\) for \\(|x| > 1\\).\n4. \\(\\operatorname{sech}^{-1} x\\): domain \\((0, 1]\\), range \\([0, \\infty)\\); \\(\\operatorname{csch}^{-1} x\\): domain and range \\(\\mathbb{R}\\setminus\\{0\\}\\).\n5. Domain of an inverse = range of the function; range of an inverse = (restricted) domain of the function."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Reading \\(\\sinh^{-1} x\\) as \\(\\frac{1}{\\sinh x}\\): that is \\(\\operatorname{csch} x\\), a different function.\n2. Using \\(\\cosh^{-1} x\\) for \\(x < 1\\) (for example \\(\\cosh^{-1} 0.5\\)): no real value exists, because \\(\\cosh y \\ge 1\\).\n3. Swapping the fractions of \\(\\tanh^{-1}\\) and \\(\\coth^{-1}\\): \\(\\frac{1+x}{1-x}\\) belongs to \\(\\tanh^{-1}\\) (\\(|x| < 1\\)), \\(\\frac{x+1}{x-1}\\) to \\(\\coth^{-1}\\) (\\(|x| > 1\\)).\n4. Leaving 0 out of the range of \\(\\operatorname{sech}^{-1} x\\): \\(\\operatorname{sech}^{-1} 1 = 0\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

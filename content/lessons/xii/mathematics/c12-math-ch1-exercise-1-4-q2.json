@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH1-EXERCISE-1-4-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch1",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch1/u-exercise-1-4-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 30,
+          "pdf_to": 30,
+          "note": "Exercise 1.4, Question 2: book p. 28, Q2 (i)-(vi) exponential and logarithmic inequalities; answer key book p. 299 (PDF 301)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Solve the inequality (if its solution exists): \\(2^x + 2^{1-x} \\le 3\\).",
+            "explanation": "An exponential inequality with \\(2^x\\) and \\(2^{1-x} = \\frac{2}{2^x}\\).\nPlan: put \\(y = 2^x > 0\\), multiply by \\(y\\) (sign kept), solve the quadratic inequality, then go back to \\(x\\) (base 2 > 1, sign kept).",
+            "steps": [
+              "Given: \\(2^x + 2^{1-x} \\le 3\\).\nTo find: all real \\(x\\) satisfying it.\nMethod: \\(2^{1-x} = \\frac{2}{2^x}\\), so \\(y = 2^x\\) gives \\(y + \\frac{2}{y} \\le 3\\); since \\(y > 0\\), multiplying by \\(y\\) keeps the sign.",
+              "Domain\n\\[\\text{Domain} = ]-\\infty, \\infty[\\]\nWhy: exponentials are defined for every real number.",
+              "Substitute \\(y = 2^x\\) (\\(y > 0\\))\n\\[y + \\dfrac{2}{y} \\le 3\\]\n\\[y^2 + 2 \\le 3y\\]\n\\[y^2 - 3y + 2 \\le 0\\]\n\\[(y - 1)(y - 2) \\le 0\\]\nWhy: \\(y > 0\\), so multiplying by \\(y\\) does not change the sign.",
+              "Solve for \\(y\\)\n\\[1 \\le y \\le 2\\]\nWhy: a product of two factors is \\(\\le 0\\) when \\(y\\) lies between the roots 1 and 2.",
+              "Back to \\(x\\)\n\\[2^0 \\le 2^x \\le 2^1\\]\n\\[0 \\le x \\le 1\\]\nWhy: base \\(2 > 1\\), so \\(2^x\\) is increasing and the signs are kept.",
+              "Check:\n\\(x = 0.5\\): \\(2^{0.5} + 2^{0.5} = 2\\sqrt{2} \\approx 2.83 \\le 3\\) \\(\\checkmark\\)\n\\(x = 2\\): \\(4 + 0.5 = 4.5 > 3\\), outside, as expected.\nEnds: \\(x = 0\\) gives \\(1 + 2 = 3\\), \\(x = 1\\) gives \\(2 + 1 = 3\\), so both ends are included."
+            ],
+            "final_answer": "\\(S = [0, 1]\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Solve the inequality (if its solution exists): \\(2^x \\ge \\log_2(16)\\).",
+            "explanation": "The right side is just a number: \\(\\log_2 16 = 4\\).\nPlan: write 4 as a power of 2 and compare exponents (base 2 > 1, sign kept).",
+            "steps": [
+              "Given: \\(2^x \\ge \\log_2(16)\\).\nTo find: all real \\(x\\) satisfying it.\nMethod: simplify the right side, write it as a power of 2, then use that \\(2^x\\) is increasing.",
+              "Domain\n\\[\\text{Domain} = ]-\\infty, \\infty[\\]\nWhy: \\(2^x\\) is defined for every real number, and \\(\\log_2 16\\) is a fixed number.",
+              "Simplify the right side\n\\[\\log_2 16 = \\log_2 2^4 = 4\\]\n\\[2^x \\ge 4 = 2^2\\]\nWhy: \\(\\log_a a^k = k\\).",
+              "Compare the exponents\n\\[x \\ge 2\\]\nWhy: base \\(2 > 1\\), so the exponential function is increasing and the sign is kept.",
+              "Check:\n\\(x = 3\\): \\(8 \\ge 4\\) \\(\\checkmark\\)\n\\(x = 1\\): \\(2 \\ge 4\\) is false, as expected."
+            ],
+            "final_answer": "\\(S = [2, \\infty[\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(S = [2, \\infty]\\). Since \\(\\infty\\) is not a real number it can never be included, so the bracket at \\(\\infty\\) must be open: \\(S = [2, \\infty[\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) Solve the inequality (if its solution exists): \\(\\log_2(x - 1) \\ge \\log_2(5 - x)\\).",
+            "explanation": "Both sides are logarithms to base 2.\nPlan: find the domain, remove the logarithms (base 2 > 1, sign kept), solve the linear inequality and intersect with the domain.",
+            "steps": [
+              "Given: \\(\\log_2(x - 1) \\ge \\log_2(5 - x)\\).\nTo find: all real \\(x\\) satisfying it.\nMethod: domain first; then \\(\\log_2\\) is increasing, so the arguments keep the same order.",
+              "Domain\n\\[x - 1 > 0 \\Rightarrow x > 1\\]\n\\[5 - x > 0 \\Rightarrow x < 5\\]\n\\[\\text{Domain} = ]1, 5[\\]\nWhy: both logarithms need positive arguments.",
+              "Remove the logarithms\n\\[x - 1 \\ge 5 - x\\]\n\\[2x \\ge 6\\]\n\\[x \\ge 3\\]\nWhy: base \\(2 > 1\\), so the sign is kept.",
+              "Compatibility with the domain\n\\[3 \\le x < 5\\]\nWhy: \\(x \\ge 3\\) together with \\(1 < x < 5\\). The end 5 is open because \\(\\log_2(5 - 5) = \\log_2 0\\) does not exist.",
+              "Check:\n\\(x = 4\\): \\(\\log_2 3 \\approx 1.585 \\ge \\log_2 1 = 0\\) \\(\\checkmark\\)\n\\(x = 2\\): \\(\\log_2 1 = 0 \\ge \\log_2 3\\) is false, as expected."
+            ],
+            "final_answer": "\\(S = [3, 5[\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(S = [3, 5]\\). The value \\(x = 5\\) makes \\(\\log_2(5 - x) = \\log_2 0\\), which is undefined, so 5 must be excluded: \\(S = [3, 5[\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iv)",
+            "prompt": "2 (iv) Solve the inequality (if its solution exists): \\(\\log_{\\frac{1}{3}}(x^2 - 4x + 3) > \\log_{\\frac{1}{3}}(2x - 1)\\).",
+            "explanation": "Both sides are logarithms to base \\(\\frac{1}{3}\\), which is between 0 and 1.\nPlan: find the domain, remove the logarithms with the sign reversed (decreasing function), solve the quadratic inequality, then intersect with each piece of the domain.",
+            "steps": [
+              "Given: \\(\\log_{\\frac{1}{3}}(x^2 - 4x + 3) > \\log_{\\frac{1}{3}}(2x - 1)\\).\nTo find: all real \\(x\\) satisfying it.\nMethod: domain first; since \\(0 < \\frac{1}{3} < 1\\), \\(\\log_{\\frac{1}{3}}\\) is decreasing, so the bigger logarithm belongs to the smaller argument: the sign reverses.",
+              "Domain\n\\[x^2 - 4x + 3 = (x - 1)(x - 3) > 0\\]\n\\[\\Rightarrow x < 1 \\text{ or } x > 3\\]\n\\[2x - 1 > 0 \\Rightarrow x > \\tfrac{1}{2}\\]\n\\[\\text{Domain} = ]\\tfrac{1}{2}, 1[ \\cup ]3, \\infty[\\]\nWhy: both arguments must be positive at the same time.",
+              "Remove the logarithms (sign reversed)\n\\[x^2 - 4x + 3 < 2x - 1\\]\n\\[x^2 - 6x + 4 < 0\\]\nWhy: base \\(\\frac{1}{3}\\) is between 0 and 1, so the function is decreasing.",
+              "Roots of \\(x^2 - 6x + 4 = 0\\)\n\\[x = \\dfrac{6 \\pm \\sqrt{36 - 16}}{2}\\]\n\\[= \\dfrac{6 \\pm 2\\sqrt{5}}{2} = 3 \\pm \\sqrt{5}\\]\nWhy: quadratic formula with \\(a = 1,\\ b = -6,\\ c = 4\\).",
+              "Where the quadratic is negative\n\\[3 - \\sqrt{5} < x < 3 + \\sqrt{5}\\]\n(about \\(0.764 < x < 5.236\\))\nWhy: an upward parabola is negative between its roots.",
+              "Compatibility with the domain\n\\[]\\tfrac{1}{2}, 1[ \\cap ]3 - \\sqrt{5}, 3 + \\sqrt{5}[\\]\n\\[= ]3 - \\sqrt{5}, 1[\\]\n\\[]3, \\infty[ \\cap ]3 - \\sqrt{5}, 3 + \\sqrt{5}[\\]\n\\[= ]3, 3 + \\sqrt{5}[\\]\nWhy: \\(3 - \\sqrt{5} \\approx 0.764\\) is bigger than \\(\\frac{1}{2}\\), so the first piece starts at \\(3 - \\sqrt{5}\\), not at \\(\\frac{1}{2}\\).",
+              "Check with test points (\\(L\\) = left side, \\(R\\) = right side):\n\\(x = 0.6\\): \\(L \\approx 0.037\\), \\(R \\approx 1.465\\): \\(L > R\\) false, so \\(0.6\\) is not a solution.\n\\(x = 0.9\\): \\(L \\approx 1.421\\), \\(R \\approx 0.203\\): true.\n\\(x = 4\\): \\(L = -1\\), \\(R \\approx -1.771\\): true.\n\\(x = 6\\): \\(L \\approx -2.465\\), \\(R \\approx -2.183\\): false."
+            ],
+            "final_answer": "\\(S = ]3 - \\sqrt{5}, 1[ \\cup ]3, 3 + \\sqrt{5}[\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(S = ]\\frac{1}{2}, 1[ \\cup ]3, 3 + \\sqrt{5}[\\). The first interval is wrong: the condition \\(x^2 - 6x + 4 < 0\\) must also hold there, which cuts it down to \\(]3 - \\sqrt{5}, 1[\\). For example \\(x = 0.6\\) is in the key's interval, but \\(\\log_{\\frac{1}{3}} 0.96 \\approx 0.037\\) is not greater than \\(\\log_{\\frac{1}{3}} 0.2 \\approx 1.465\\). Correct: \\(S = ]3 - \\sqrt{5}, 1[ \\cup ]3, 3 + \\sqrt{5}[\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(v)",
+            "prompt": "2 (v) Solve the inequality (if its solution exists): \\(\\log_2(x - 2) + \\log_2(x - 3) \\ge 3\\).",
+            "explanation": "Two logarithms to base 2 on the left and a number on the right.\nPlan: domain, product law, write 3 as \\(\\log_2 8\\), remove the logarithm (sign kept), solve the quadratic inequality, intersect with the domain.",
+            "steps": [
+              "Given: \\(\\log_2(x - 2) + \\log_2(x - 3) \\ge 3\\).\nTo find: all real \\(x\\) satisfying it.\nMethod: join the left side with the product law and write 3 as a logarithm to base 2, so both sides can be compared.",
+              "Domain\n\\[x - 2 > 0 \\text{ and } x - 3 > 0\\]\n\\[\\text{Domain} = ]3, \\infty[\\]\nWhy: each logarithm in the original inequality needs a positive argument.",
+              "Product law and \\(3 = \\log_2 8\\)\n\\[\\log_2[(x - 2)(x - 3)] \\ge \\log_2 8\\]\nWhy: \\(\\log_2 m + \\log_2 n = \\log_2(mn)\\) and \\(\\log_2 2^3 = 3\\).",
+              "Remove the logarithm\n\\[(x - 2)(x - 3) \\ge 8\\]\n\\[x^2 - 5x + 6 - 8 \\ge 0\\]\n\\[x^2 - 5x - 2 \\ge 0\\]\nWhy: base \\(2 > 1\\), so the sign is kept.",
+              "Roots of \\(x^2 - 5x - 2 = 0\\)\n\\[x = \\dfrac{5 \\pm \\sqrt{25 + 8}}{2} = \\dfrac{5 \\pm \\sqrt{33}}{2}\\]\n(about \\(-0.372\\) and \\(5.372\\))\nThe quadratic is \\(\\ge 0\\) outside its roots:\n\\[x \\le \\dfrac{5 - \\sqrt{33}}{2} \\text{ or } x \\ge \\dfrac{5 + \\sqrt{33}}{2}\\]\nWhy: an upward parabola is non-negative outside its roots.",
+              "Compatibility with the domain\n\\(\\frac{5 - \\sqrt{33}}{2}\\) is negative, so that part has no point with \\(x > 3\\). Only \\(x \\ge \\frac{5 + \\sqrt{33}}{2}\\) remains (and \\(5.372 > 3\\)).\nWhy: the answer must also lie in \\(]3, \\infty[\\).",
+              "Check:\n\\(x = 6\\): \\(\\log_2 4 + \\log_2 3 \\approx 2 + 1.585 = 3.585 \\ge 3\\) \\(\\checkmark\\)\n\\(x = 5\\): \\(\\log_2 3 + \\log_2 2 \\approx 2.585 < 3\\), outside, as expected.\nAt \\(x = \\frac{5 + \\sqrt{33}}{2}\\), \\((x - 2)(x - 3) = 8\\), so the left side is exactly 3 and the end point is included."
+            ],
+            "final_answer": "\\(S = [\\frac{5 + \\sqrt{33}}{2}, \\infty[\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(vi)",
+            "prompt": "2 (vi) Solve the inequality (if its solution exists): \\(\\log(x) + \\log(x - 3) \\ge \\log(2x) + \\log(x - 1)\\).",
+            "explanation": "Two logarithms on each side, all to base 10. The question says \"if its solution exists\": here it does not.\nPlan: domain, product law on both sides, remove the logarithms (sign kept), solve, intersect with the domain.",
+            "steps": [
+              "Given: \\(\\log(x) + \\log(x - 3) \\ge \\log(2x) + \\log(x - 1)\\).\nTo find: all real \\(x\\) satisfying it, if any.\nMethod: join each side with the product law, then compare the arguments (base 10 is increasing).",
+              "Domain\n\\[x > 0,\\ x > 3,\\ x > 0,\\ x > 1\\]\n\\[\\text{Domain} = ]3, \\infty[\\]\nWhy: all four arguments \\(x,\\ x - 3,\\ 2x,\\ x - 1\\) must be positive; all four hold together only when \\(x > 3\\).",
+              "Product law on both sides\n\\[\\log[x(x - 3)] \\ge \\log[2x(x - 1)]\\]\nWhy: \\(\\log m + \\log n = \\log(mn)\\).",
+              "Remove the logarithms\n\\[x^2 - 3x \\ge 2x^2 - 2x\\]\n\\[0 \\ge x^2 + x\\]\n\\[x(x + 1) \\le 0\\]\nWhy: base \\(10 > 1\\), so the sign is kept.",
+              "Solve\n\\[-1 \\le x \\le 0\\]\nWhy: the product \\(x(x + 1)\\) is \\(\\le 0\\) between its roots \\(-1\\) and \\(0\\).",
+              "Compatibility with the domain\nNo number satisfies both \\(-1 \\le x \\le 0\\) and \\(x > 3\\), so the inequality has no solution.",
+              "Check:\nFor any \\(x > 3\\): \\(x < 2x\\) and \\(x - 3 < x - 1\\), so \\(x(x - 3) < 2x(x - 1)\\): the left side is always smaller. For example \\(x = 4\\): \\(\\log 4 + \\log 1 \\approx 0.602\\), while \\(\\log 8 + \\log 3 \\approx 1.380\\)."
+            ],
+            "final_answer": "\\(S = \\varnothing\\) (no solution)"
+          }
+        ]
+      }
+    }
+  ]
+}

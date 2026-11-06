@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH1-EXERCISE-1-2-Q8-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch1",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch1/u-exercise-1-2-q8",
+      "title": "Question 8 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH1-EXERCISE-1-2-Q8",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 16,
+          "pdf_to": 17,
+          "note": "Exercise 1.2, Question 8 (book p. 14-15): prove four inverse hyperbolic formulas (i)-(iv); no printed answers"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(i)",
+            "prompt": "8 (i) Prove the following inverse hyperbolic formula: \\(\\tanh^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{1+x}{1-x}\\right),\\ x \\ne 1\\)",
+            "explanation": "Yeh inverse hyperbolic function ka formula saabit karne ka sawal hai, bilkul Examples 10 aur 11 ki tarah.\nDiya kya hai? \\(\\tanh\\) ki definition aur formula jo saabit karna hai.\nDhyan dene wali baat: \\(\\tanh^{-1} x\\) sirf \\(|x| < 1\\) ke liye mojood hai; kitab ki shart \\(x \\ne 1\\) adhoori hai (neeche box).\nPlan: \\(y = \\tanh^{-1} x\\), yani \\(x = \\tanh y\\); exponentials mein likho, \\(e^{2y}\\) nikaalo, \\(\\ln\\) lo.",
+            "steps": [
+              "Diya gaya: \\(\\tanh y = \\frac{e^{y}-e^{-y}}{e^{y}+e^{-y}}\\) \\((-1, 1)\\) ki har value bilkul ek dafa leta hai, is liye \\(\\tanh^{-1} x\\) \\(|x| < 1\\) ke liye mojood hai.\nMaloom karna (prove karna): \\(\\tanh^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{1+x}{1-x}\\right)\\).\nTareeqa: \\(y = \\tanh^{-1} x\\) rakhenge, to \\(x = \\tanh y\\); phir \\(e^{2y}\\) nikaalenge aur \\(\\ln\\) lenge. Yahan quadratic ki zaroorat nahin parti, seedhi linear equation banti hai.",
+              "Inverse ko function mein badliye\n\\[y = \\tanh^{-1} x\\]\n\\[x = \\tanh y = \\dfrac{e^{y} - e^{-y}}{e^{y} + e^{-y}}\\]\nKyun: inverse ki definition (\\(y = \\tanh^{-1} x \\iff x = \\tanh y\\)) aur \\(\\tanh\\) ki definition. \\(\\tanh^{-1}\\) ke saath seedha kaam nahin ho sakta, magar \\(\\tanh\\) ko hum \\(e^{y}\\) mein likhna jaante hain. Is liye mushkil cheez ko jaani pehchani cheez mein badal diya, jaise Examples 10 aur 11 mein kiya tha.",
+              "Upar neeche \\(e^{y}\\) se multiply kijiye\n\\[x = \\dfrac{e^{2y} - 1}{e^{2y} + 1}\\]\nKyun: \\(e^{y} \\cdot e^{y} = e^{2y}\\) aur \\(e^{y} \\cdot e^{-y} = 1\\). Ab sirf ek unknown \\(e^{2y}\\) bacha, jo kaam aasan karta hai.",
+              "\\(e^{2y}\\) nikaaliye\n\\[xe^{2y} + x = e^{2y} - 1\\]\n\\[1 + x = e^{2y} - xe^{2y}\\]\n\\[1 + x = e^{2y}(1 - x)\\]\n\\[e^{2y} = \\dfrac{1+x}{1-x}\\]\nKyun: cross-multiply kiya, \\(e^{2y}\\) wale terms ek taraf aur baqi doosri taraf, phir \\(e^{2y}\\) common nikala aur \\(1 - x\\) se divide kiya (\\(|x| < 1\\) mein \\(1 - x \\ne 0\\)).\nDhyan dein: term doosri taraf le jaate waqt sign badalna mat bhooliye.",
+              "ln lijiye\n\\[2y = \\ln\\left(\\dfrac{1+x}{1-x}\\right)\\]\n\\[y = \\dfrac{1}{2}\\ln\\left(\\dfrac{1+x}{1-x}\\right)\\]\nKyun: \\(\\ln(e^{2y}) = 2y\\). Aur \\(-1 < x < 1\\) ho to \\(1 + x\\) aur \\(1 - x\\) dono positive hain, is liye fraction positive hai aur us ka \\(\\ln\\) mojood hai. Yahi wajah hai ke shart \\(|x| < 1\\) honi chahiye.",
+              "Tasdeeq: hum aisi \\(x\\) lete hain jis ka jawab aasan aaye. \\(x = \\frac{3}{5}\\): \\(\\frac{1+3/5}{1-3/5} = \\frac{8/5}{2/5} = 4\\), to \\(y = \\frac{1}{2}\\ln 4 = \\ln 4^{1/2} = \\ln 2\\).\n\\[\\tanh(\\ln 2) = \\dfrac{2 - \\frac{1}{2}}{2 + \\frac{1}{2}} = \\dfrac{3}{5}\\]\nWahi \\(x\\) wapas aa gaya."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\tanh^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{1+x}{1-x}\\right)\\), \\(|x| < 1\\) ke liye."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab shart \\(x \\ne 1\\) chhapti hai. Yeh kaafi nahin: \\(\\tanh y\\) hamesha \\((-1, 1)\\) mein rehta hai, is liye \\(\\tanh^{-1} x\\) sirf \\(|x| < 1\\) ke liye mojood hai; \\(x > 1\\) ya \\(x \\le -1\\) par fraction \\(\\frac{1+x}{1-x}\\) negative ya zero hoti hai aur us ka \\(\\ln\\) define nahin. Sahi bayan: \\(\\tanh^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{1+x}{1-x}\\right)\\), \\(|x| < 1\\) (jaise 1.5.3 ke table mein)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(ii)",
+            "prompt": "8 (ii) Prove the following inverse hyperbolic formula: \\(\\coth^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{1+x}{1-x}\\right),\\ x \\ne 1\\)",
+            "explanation": "Ghaur se dekhiye: kitab ne yahan jo formula chhapa hai woh asal mein \\(\\tanh^{-1}\\) ka hai aur \\(\\coth^{-1}\\) ke liye sahi ho hi nahin sakta (neeche box). Hum sahi formula saabit karenge.\nDiya kya hai? \\(\\coth\\) ki definition; \\(\\coth^{-1} x\\) sirf \\(|x| > 1\\) ke liye mojood hai.\nPlan: part (i) wala hi: \\(x = \\coth y\\), \\(e^{2y}\\) nikaalo, \\(\\ln\\) lo.",
+            "steps": [
+              "Diya gaya: \\(\\coth y = \\frac{e^{y}+e^{-y}}{e^{y}-e^{-y}}\\) (\\(y \\ne 0\\)) har aisi value bilkul ek dafa leta hai jis ka size 1 se bara ho, is liye \\(\\coth^{-1} x\\) \\(|x| > 1\\) ke liye mojood hai.\nMaloom karna (prove karna): sahi formula \\(\\coth^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{x+1}{x-1}\\right)\\), \\(|x| > 1\\) (neeche kitab ki ghalti ka box dekhiye).\nTareeqa: part (i) wala: \\(x = \\coth y\\), \\(e^{2y}\\) nikaalo, \\(\\ln\\) lo.",
+              "Inverse ko function mein badliye\n\\[y = \\coth^{-1} x\\]\n\\[x = \\coth y = \\dfrac{e^{y} + e^{-y}}{e^{y} - e^{-y}}\\]\n\\[x = \\dfrac{e^{2y} + 1}{e^{2y} - 1}\\]\nKyun: pehle inverse ki definition se \\(x = \\coth y\\) likha, phir \\(\\coth\\) ki definition. Aakhir mein upar neeche \\(e^{y}\\) se multiply kiya taa ke \\(e^{-y}\\) khatam ho aur sirf ek unknown \\(e^{2y}\\) bache. Yeh bilkul part (i) wala qadam hai, bas fraction ulti hai.",
+              "\\(e^{2y}\\) nikaaliye\n\\[xe^{2y} - x = e^{2y} + 1\\]\n\\[xe^{2y} - e^{2y} = x + 1\\]\n\\[e^{2y}(x - 1) = x + 1\\]\n\\[e^{2y} = \\dfrac{x+1}{x-1}\\]\nKyun: cross-multiply, \\(e^{2y}\\) wale terms ek taraf, common nikala, aur \\(x - 1\\) se divide kiya (\\(|x| > 1\\) mein \\(x \\ne 1\\)).\nDhyan dein: yahan fraction \\(\\frac{x+1}{x-1}\\) aati hai, part (i) wali \\(\\frac{1+x}{1-x}\\) nahin. Kitab ne yahi ghalti ki hai.",
+              "ln lijiye\n\\[2y = \\ln\\left(\\dfrac{x+1}{x-1}\\right)\\]\n\\[y = \\dfrac{1}{2}\\ln\\left(\\dfrac{x+1}{x-1}\\right)\\]\nKyun: \\(\\ln(e^{2y}) = 2y\\), phir 2 se divide. \\(x > 1\\) ho to \\(x + 1\\) aur \\(x - 1\\) dono positive; \\(x < -1\\) ho to dono negative. Dono soorton mein fraction positive hai (minus ko minus se divide karo to plus), is liye \\(\\ln\\) mojood hai. Yahi wajah hai ke \\(\\coth^{-1}\\) ki shart \\(|x| > 1\\) hai.",
+              "Tasdeeq: \\(x = \\frac{5}{3}\\): \\(\\frac{8/3}{2/3} = 4\\), to \\(y = \\frac{1}{2}\\ln 4 = \\ln 2\\).\n\\[\\coth(\\ln 2) = \\dfrac{2 + \\frac{1}{2}}{2 - \\frac{1}{2}} = \\dfrac{5}{3}\\]\nWahi \\(x\\) wapas aaya. (Kitab wala formula \\(x = \\frac{5}{3}\\) par \\(\\ln\\left(\\frac{8/3}{-2/3}\\right) = \\ln(-4)\\) maangta, jo mojood hi nahin.)"
+            ],
+            "final_answer": "Saabit ho gaya (sahi formula): \\(\\coth^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{x+1}{x-1}\\right)\\), \\(|x| > 1\\) ke liye."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab \\(\\coth^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{1+x}{1-x}\\right),\\ x \\ne 1\\) chhapti hai, jo asal mein part (i) wala \\(\\tanh^{-1} x\\) ka formula hai. Yeh sahi nahin ho sakta: \\(\\coth^{-1} x\\) sirf \\(|x| > 1\\) ke liye mojood hai, aur aisi har \\(x\\) par fraction \\(\\frac{1+x}{1-x}\\) negative hoti hai, to us ka \\(\\ln\\) define nahin (misaal: \\(x = 2\\) par \\(\\frac{3}{-1} = -3\\)). Sahi formula, jo kitab ke apne 1.5.3 table mein bhi hai: \\(\\coth^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{x+1}{x-1}\\right),\\ |x| > 1\\). Upar yahi saabit kiya gaya hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(iii)",
+            "prompt": "8 (iii) Prove the following inverse hyperbolic formula: \\(\\operatorname{sech}^{-1} x = \\ln\\left(\\frac{1+\\sqrt{1-x^{2}}}{x}\\right),\\ x \\ne 0\\)",
+            "explanation": "Ab \\(\\operatorname{sech}^{-1} x\\) ka formula. \\(\\operatorname{sech}\\) bhi \\(\\cosh\\) ki tarah even hai, is liye us ka inverse \\(y \\ge 0\\) leta hai aur sirf \\(0 < x \\le 1\\) ke liye mojood hai (kitab ki shart \\(x \\ne 0\\) adhoori hai, neeche box).\nDiya kya hai? \\(\\operatorname{sech} y = \\frac{2}{e^{y}+e^{-y}}\\), yani \\(\\frac{1}{\\cosh y}\\).\nFind kya karna hai? Formula \\(\\ln\\left(\\frac{1+\\sqrt{1-x^{2}}}{x}\\right)\\) saabit karna, sahi shart ke saath.\nPlan: \\(e^{y}\\) ki quadratic, phir woh root jo \\(y \\ge 0\\) de.",
+            "steps": [
+              "Diya gaya: \\(\\operatorname{sech} y = \\frac{2}{e^{y}+e^{-y}}\\) even function hai, is liye (\\(\\cosh\\) ki tarah) sirf \\(y \\ge 0\\) lete hain; wahan yeh \\((0, 1]\\) ki har value ek dafa leta hai. To \\(\\operatorname{sech}^{-1} x\\) \\(0 < x \\le 1\\) ke liye mojood hai, aur \\(y \\ge 0\\).\nMaloom karna (prove karna): \\(\\operatorname{sech}^{-1} x = \\ln\\left(\\frac{1+\\sqrt{1-x^{2}}}{x}\\right)\\).\nTareeqa: \\(x = \\operatorname{sech} y\\) se \\(e^{y}\\) ki quadratic banegi; root ka faisla \\(y \\ge 0\\) karega (bilkul Example 11 ki tarah).",
+              "Inverse ko function mein badliye\n\\[y = \\operatorname{sech}^{-1} x,\\quad y \\ge 0\\]\n\\[x = \\operatorname{sech} y = \\dfrac{2}{e^{y} + e^{-y}}\\]\nKyun: restricted domain \\(y \\ge 0\\) par inverse ki definition. \\(\\operatorname{sech}\\) even hai (\\(\\operatorname{sech}(-y) = \\operatorname{sech} y\\)), to agar hum dono taraf ki \\(y\\) lete to ek \\(x\\) ke do jawab ban jate. Isi liye sirf \\(y \\ge 0\\) rakha; yeh baat aage sign chunne mein kaam aayegi.",
+              "\\(e^{y}\\) ki quadratic banaiye\n\\[xe^{y} + xe^{-y} = 2\\]\n\\[xe^{2y} + x = 2e^{y}\\]\n\\[x(e^{y})^{2} - 2e^{y} + x = 0\\]\nKyun: pehle cross-multiply kiya, phir \\(e^{y}\\) se multiply kar ke \\(e^{-y}\\) khatam kiya. Ab yeh quadratic hai jis mein \\(a = x\\), \\(b = -2\\), \\(c = x\\).",
+              "Quadratic formula\n\\[e^{y} = \\dfrac{2 \\pm \\sqrt{4 - 4x^{2}}}{2x}\\]\n\\[= \\dfrac{1 \\pm \\sqrt{1 - x^{2}}}{x}\\]\nKyun: \\(b^{2} - 4ac = (-2)^{2} - 4(x)(x) = 4 - 4x^{2}\\), aur \\(\\sqrt{4 - 4x^{2}} = 2\\sqrt{1 - x^{2}}\\), jo \\(0 < x \\le 1\\) mein real hai. Phir upar neeche 2 cancel kiya.\nDhyan dein: yahan \\(a = x\\) hai, 1 nahin; is liye denominator \\(2a = 2x\\) banta hai.",
+              "Sahi sign chuniye\nDono roots ka product:\n\\[\\dfrac{1 - (1 - x^{2})}{x^{2}} = 1\\]\n\\(0 < x < 1\\) par plus wala root \\(\\frac{1}{x}\\) se bara hai, aur \\(\\frac{1}{x} > 1\\); to minus wala root 0 aur 1 ke darmiyan hai aur \\(y = \\ln(\\text{minus root}) < 0\\) deta. Lekin \\(y \\ge 0\\) chahiye, is liye plus sign. (\\(x = 1\\) par dono roots 1 hain.)\nKyun: bilkul Example 11 wali daleel: product 1 ho to ek root 1 se bara aur doosra 1 se chhota hota hai.",
+              "ln lijiye\n\\[e^{y} = \\dfrac{1 + \\sqrt{1 - x^{2}}}{x}\\]\n\\[\\operatorname{sech}^{-1} x = \\ln\\left(\\dfrac{1+\\sqrt{1-x^{2}}}{x}\\right)\\]\nKyun: \\(\\ln\\) aur \\(e\\) ek doosre ko khatam karte hain: \\(e^{y} = A\\) ho to \\(y = \\ln A\\). Plus wala root positive hai, is liye us ka \\(\\ln\\) bilkul jaiz hai.",
+              "Tasdeeq: \\(x = \\frac{4}{5}\\): \\(\\sqrt{1 - \\frac{16}{25}} = \\frac{3}{5}\\), to \\(\\frac{1 + 3/5}{4/5} = \\frac{8/5}{4/5} = 2\\) aur \\(y = \\ln 2\\).\n\\[\\operatorname{sech}(\\ln 2) = \\dfrac{2}{2 + \\frac{1}{2}} = \\dfrac{4}{5}\\]\nWahi \\(x\\) wapas aaya. Aur \\(x = 1\\) par \\(\\ln 1 = 0\\), jab ke \\(\\operatorname{sech} 0 = 1\\)."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\operatorname{sech}^{-1} x = \\ln\\left(\\frac{1+\\sqrt{1-x^{2}}}{x}\\right)\\), \\(0 < x \\le 1\\) ke liye."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab shart \\(x \\ne 0\\) chhapti hai. Yeh kaafi nahin: \\(\\operatorname{sech} y\\) sirf \\((0, 1]\\) mein values leta hai, is liye \\(\\operatorname{sech}^{-1} x\\) sirf \\(0 < x \\le 1\\) ke liye mojood hai. \\(x > 1\\) par \\(\\sqrt{1-x^{2}}\\) real nahin, aur \\(x < 0\\) par fraction negative hai, to \\(\\ln\\) define nahin. Sahi shart \\(0 < x \\le 1\\) hai (jaise 1.5.3 ke table mein)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(iv)",
+            "prompt": "8 (iv) Prove the following inverse hyperbolic formula: \\(\\operatorname{csch}^{-1} x = \\ln\\left(\\frac{1}{x} + \\sqrt{\\frac{1}{x^{2}}+1}\\right),\\ x \\ne 0\\)",
+            "explanation": "Aakhri formula \\(\\operatorname{csch}^{-1} x\\) ka hai, jo har \\(x \\ne 0\\) ke liye mojood hai; yeh kitab mein sahi chhapa hai.\nDiya kya hai? \\(\\operatorname{csch} y = \\frac{2}{e^{y}-e^{-y}}\\), yani \\(\\frac{1}{\\sinh y}\\).\nFind kya karna hai? Yeh dikhana ke \\(\\operatorname{csch}^{-1} x\\) ka formula sawal wala hi hai.\nPlan: \\(e^{y}\\) ki quadratic banao, aur negative root ko chhor do kyun ke \\(e^{y}\\) hamesha positive hai, bilkul Example 10 ki tarah.",
+            "steps": [
+              "Diya gaya: \\(\\operatorname{csch} y = \\frac{2}{e^{y}-e^{-y}}\\) (\\(y \\ne 0\\)) one-to-one hai aur har non-zero value leta hai, is liye \\(\\operatorname{csch}^{-1} x\\) har \\(x \\ne 0\\) ke liye mojood hai.\nMaloom karna (prove karna): \\(\\operatorname{csch}^{-1} x = \\ln\\left(\\frac{1}{x} + \\sqrt{\\frac{1}{x^{2}}+1}\\right)\\), \\(x \\ne 0\\).\nTareeqa: \\(x = \\operatorname{csch} y\\) se \\(e^{y}\\) ki quadratic; root ka faisla \\(e^{y} > 0\\) karega (bilkul Example 10 ki tarah).",
+              "Inverse ko function mein badliye\n\\[y = \\operatorname{csch}^{-1} x\\]\n\\[x = \\operatorname{csch} y = \\dfrac{2}{e^{y} - e^{-y}}\\]\nKyun: inverse ki definition aur \\(\\operatorname{csch}\\) ki definition. Yahan koi restriction ki zaroorat nahin, kyun ke \\(\\operatorname{csch}\\) odd hai aur pehle hi one-to-one hai, bilkul \\(\\sinh\\) ki tarah.",
+              "\\(e^{y}\\) ki quadratic banaiye\n\\[e^{y} - e^{-y} = \\dfrac{2}{x}\\]\n\\[e^{2y} - 1 = \\dfrac{2}{x}e^{y}\\]\n\\[(e^{y})^{2} - \\dfrac{2}{x}e^{y} - 1 = 0\\]\nKyun: pehle cross-multiply kar ke \\(e^{y} - e^{-y} = \\frac{2}{x}\\) likha, phir poori equation ko \\(e^{y}\\) se multiply kiya taa ke \\(e^{-y}\\) khatam ho. Sab terms ek taraf laane se quadratic bani, jis mein \\(a = 1\\), \\(b = -\\frac{2}{x}\\), \\(c = -1\\).",
+              "Quadratic formula\n\\[e^{y} = \\dfrac{\\frac{2}{x} \\pm \\sqrt{\\frac{4}{x^{2}} + 4}}{2}\\]\n\\[= \\dfrac{1}{x} \\pm \\sqrt{\\dfrac{1}{x^{2}} + 1}\\]\nKyun: \\(b^{2} - 4ac = \\frac{4}{x^{2}} + 4\\), aur \\(\\sqrt{\\frac{4}{x^{2}} + 4} = 2\\sqrt{\\frac{1}{x^{2}} + 1}\\); 2 cancel ho gaya.",
+              "Sahi sign chuniye\n\\[\\sqrt{\\dfrac{1}{x^{2}} + 1} > \\sqrt{\\dfrac{1}{x^{2}}} = \\left|\\dfrac{1}{x}\\right| \\ge \\dfrac{1}{x}\\]\nIs liye minus wala root \\(\\frac{1}{x} - \\sqrt{\\frac{1}{x^{2}}+1}\\) negative hai, jab ke \\(e^{y} > 0\\). Plus sign lijiye.\nKyun: Example 10 wali daleel: kisi number mein se us se bari cheez minus karo to negative aata hai, aur \\(e\\) ki power negative nahin ho sakti.",
+              "ln lijiye\n\\[\\operatorname{csch}^{-1} x = \\ln\\left(\\dfrac{1}{x} + \\sqrt{\\dfrac{1}{x^{2}}+1}\\right)\\]\nKyun: plus wala root hamesha positive hai, is liye har \\(x \\ne 0\\) ke liye \\(\\ln\\) mojood hai.\nDhyan dein: yeh formula \\(x < 0\\) ke liye bhi chalta hai; \\(\\sqrt{\\frac{1}{x^{2}}}\\) ko \\(\\frac{1}{x}\\) likhna sirf \\(x > 0\\) par sahi hai.",
+              "Tasdeeq: \\(x = \\frac{3}{4}\\): \\(\\frac{1}{x} = \\frac{4}{3}\\), \\(\\sqrt{\\frac{16}{9} + 1} = \\frac{5}{3}\\), to \\(y = \\ln 3\\).\n\\[\\operatorname{csch}(\\ln 3) = \\dfrac{2}{3 - \\frac{1}{3}} = \\dfrac{3}{4}\\]\nWahi \\(x\\) wapas aaya. \\(x = -\\frac{3}{4}\\) par: \\(\\ln\\left(-\\frac{4}{3} + \\frac{5}{3}\\right) = \\ln\\frac{1}{3} = -\\ln 3\\), aur \\(\\operatorname{csch}(-\\ln 3) = -\\frac{3}{4}\\)."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\operatorname{csch}^{-1} x = \\ln\\left(\\frac{1}{x} + \\sqrt{\\frac{1}{x^{2}}+1}\\right)\\), \\(x \\ne 0\\) ke liye."
+          }
+        ]
+      }
+    }
+  ]
+}

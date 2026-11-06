@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH1-1.6.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch1",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch1/1.6.1",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 17,
+          "pdf_to": 19,
+          "note": "Book p. 15-17: (i) injectivity, (ii) vertical asymptote with side box, (iii) increasing/decreasing, (iv) intercepts and continuity"
+        }
+      ],
+      "title": "1.6.1 Graphical Behaviour of Logarithmic Functions",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "In this section, we study the graphical behaviour of logarithmic functions in a structured manner. For a logarithmic function \\(y = \\log_a x\\) with domain \\(]0, \\infty[\\) and range \\(]-\\infty, \\infty[\\), we analyze its vertical asymptotic behaviour, and its overall shape for different values of the base \\(a\\). We also examine important graphical features such as intercepts, continuity, injectivity and whether the function is increasing or decreasing. These properties together help us to understand how the logarithmic function behaves as a curve and provide the necessary foundation for sketching and interpreting its graph accurately."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(i) Injectivity of Logarithmic Functions"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(f(x) = \\log_a x\\), where \\(a > 0\\) and \\(a \\ne 1\\), \\(x \\in\\, ]0, \\infty[\\). Let \\(s, t \\in\\, ]0, \\infty[\\) be arbitrary numbers such that,\n\\[f(s) = f(t)\\]\n\\[\\Rightarrow \\log_a s = \\log_a t\\]\n\\[\\Rightarrow a^{\\log_a s} = a^{\\log_a t}\\]\n\\[\\Rightarrow s = t\\]\nHence, the logarithmic function is one to one."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Injective means one-to-one: different inputs never give the same output. The proof starts from equal outputs and shows the inputs must be equal. The step from \\(\\log_a s = \\log_a t\\) to \\(a^{\\log_a s} = a^{\\log_a t}\\) raises the base \\(a\\) to both sides; then the identity \\(a^{\\log_a x} = x\\) (correct form of the fourth identity in 1.6) turns the two sides into \\(s\\) and \\(t\\). On a graph this means every horizontal line meets the curve at most once (the horizontal line test)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(ii) Vertical Asymptote of Logarithmic Functions"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(f(x) = \\log_a x\\), where \\(a > 0\\), \\(a \\ne 1\\) and \\(x > 0\\). Then \\(x = a^{y}\\). We consider the following cases:"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Vertical Asymptote of a Function",
+            "text": "A vertical asymptote is a vertical line \\(x = c\\) such that the function \\(f(x)\\) increases or decreases without bound as \\(x \\to c\\). In limit form, \\(x = c\\) is a vertical asymptote of the function \\(y = f(x)\\) if:\n\\[\\lim_{x \\to c^{+}} f(x) = \\pm\\infty\\]\nor\n\\[\\lim_{x \\to c^{-}} f(x) = \\pm\\infty\\]",
+            "bold": [
+              "vertical asymptote"
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Case-1: \\(a > 1\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Note that \\(x \\to 0^{+}\\)\n\\[\\Rightarrow a^{y} \\to 0^{+}\\]\n\\[\\Rightarrow y \\to -\\infty\\]\n\\[\\Rightarrow \\log_a x \\to -\\infty\\]\nHence,\n\\[\\lim_{x \\to 0^{+}} f(x) = -\\infty\\]"
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Case-2: \\(0 < a < 1\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Note that \\(x \\to 0^{+}\\)\n\\[\\Rightarrow a^{y} \\to 0^{+}\\]\n\\[\\Rightarrow y \\to \\infty\\]\n\\[\\Rightarrow \\log_a x \\to \\infty\\]\nHence\n\\[\\lim_{x \\to 0^{+}} f(x) = \\infty\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "In both cases, we have:\n\\[\\lim_{x \\to 0^{+}} f(x) = \\pm\\infty\\]\nHence, the line \\(x = 0\\) is the vertical asymptote of \\(f(x) = \\log_a x\\). Since, \\(y = \\log_a x\\) is defined for all positive values of \\(x\\), there is no other asymptote except \\(x = 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does \\(x \\to 0^{+}\\) force \\(y\\) to \\(\\pm\\infty\\)? Because \\(x = a^{y}\\), and a power of \\(a\\) gets close to 0 only when the exponent is huge. For \\(a > 1\\) the exponent must be a large negative number (\\(2^{-10} = \\frac{1}{1024}\\)); for \\(0 < a < 1\\) it must be a large positive number (\\((\\frac{1}{2})^{10} = \\frac{1}{1024}\\)).\nSo \\(\\log_2 \\frac{1}{1024} = -10\\) while \\(\\log_{1/2} \\frac{1}{1024} = 10\\) (our numbers). The curve hugs the \\(y\\)-axis but never touches it, because \\(x = 0\\) is not in the domain. Only \\(x \\to 0^{+}\\) (from the right) is discussed, since the function does not exist for \\(x < 0\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(iii) Logarithmic Functions are Strictly Increasing or Strictly Decreasing"
+          },
+          {
+            "type": "paragraph",
+            "text": "Consider the logarithmic function:\n\\[y(x) = f(x) = \\log_a x\\]\n\\((a > 0,\\ a \\ne 1,\\ x > 0)\\)\nLet \\(x_1, x_2 \\in\\, ]0, \\infty[\\) such that \\(x_1 < x_2\\). Then, \\(y_1 = f(x_1) = \\log_a x_1\\) and \\(y_2 = f(x_2) = \\log_a x_2\\).\nSo that: \\(x_1 = a^{y_1}\\) and \\(x_2 = a^{y_2}\\)\nSince, \\(x_1 < x_2\\), we have \\(a^{y_1} < a^{y_2}\\). We consider the following cases:"
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Case-1:"
+          },
+          {
+            "type": "paragraph",
+            "text": "If \\(a > 1\\), then \\(a^{y_1} < a^{y_2} \\Rightarrow y_1 < y_2\\).\nIt follows that:\n\\[x_1 < x_2 \\Rightarrow f(x_1) < f(x_2)\\]\nHence, \\(y = \\log_a x\\) is strictly increasing when \\(a > 1\\)."
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Case-2:"
+          },
+          {
+            "type": "paragraph",
+            "text": "If \\(0 < a < 1\\), then \\(a^{y_1} < a^{y_2} \\Rightarrow y_1 > y_2\\).\nIt follows that:\n\\[x_1 < x_2 \\Rightarrow f(x_1) > f(x_2)\\]\nHence, \\(y = \\log_a x\\) is strictly decreasing when \\(0 < a < 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The key step uses what you proved for \\(a^{x}\\) in 1.4: for \\(a > 1\\) a bigger power gives a bigger value, so a smaller value \\(a^{y_1}\\) must come from a smaller power \\(y_1\\). For \\(0 < a < 1\\) it is the other way round: bigger powers give smaller values (\\((\\frac{1}{2})^{3} < (\\frac{1}{2})^{2}\\)), so a smaller value comes from a bigger power. The table below shows both behaviours side by side."
+          },
+          {
+            "type": "table",
+            "caption": "Teaching note: our value table for one base above 1 and one base below 1 (not printed in the book)",
+            "header": [
+              "\\(x\\)",
+              "\\(\\frac{1}{4}\\)",
+              "\\(\\frac{1}{2}\\)",
+              "\\(1\\)",
+              "\\(2\\)",
+              "\\(4\\)",
+              "\\(8\\)"
+            ],
+            "rows": [
+              [
+                "\\(\\log_2 x\\)",
+                "\\(-2\\)",
+                "\\(-1\\)",
+                "\\(0\\)",
+                "\\(1\\)",
+                "\\(2\\)",
+                "\\(3\\)"
+              ],
+              [
+                "\\(\\log_{1/2} x\\)",
+                "\\(2\\)",
+                "\\(1\\)",
+                "\\(0\\)",
+                "\\(-1\\)",
+                "\\(-2\\)",
+                "\\(-3\\)"
+              ]
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(iv) Intercepts and Continuity of Logarithmic Functions"
+          },
+          {
+            "type": "paragraph",
+            "text": "For the logarithmic function: \\(y = \\log_a x\\) \\((a > 0,\\ a \\ne 1,\\ x > 0)\\)"
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Intercepts:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) The \\(x\\)-intercept is obtained by substituting \\(y = 0\\):\n\\[\\log_a x = 0\\]\n\\[\\Rightarrow x = a^{0} = 1\\]\nHence, the graph of \\(y = \\log_a x\\) intersects \\(x\\)-axis at the point \\((1, 0)\\).",
+              "(ii) Since, the function \\(y = \\log_a x\\) is undefined at \\(x = 0\\), it has no \\(y\\)-intercept."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Continuity:"
+          },
+          {
+            "type": "paragraph",
+            "text": "The function \\(y = \\log_a x\\) is continuous for all \\(x > 0\\). This can be seen from the fact that:\n\\[\\lim_{x \\to c} \\log_a x = \\log_a c\\]\nfor all \\(c > 0\\).\nHence, the function has no breaks or jumps in its domain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The point \\((1, 0)\\) is common to every logarithmic graph, whatever the base, because \\(a^{0} = 1\\) for every base. Compare: every exponential graph passes through \\((0, 1)\\). The two points are mirror images in the line \\(y = x\\). Continuity means you can draw the curve over \\(]0, \\infty[\\) without lifting the pencil."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\log_a x\\) is one-to-one: \\(\\log_a s = \\log_a t \\Rightarrow s = t\\).\n2. Vertical asymptote \\(x = 0\\): \\(\\lim_{x \\to 0^{+}} \\log_a x = -\\infty\\) for \\(a > 1\\) and \\(+\\infty\\) for \\(0 < a < 1\\). No other asymptote.\n3. Strictly increasing for \\(a > 1\\), strictly decreasing for \\(0 < a < 1\\).\n4. \\(x\\)-intercept \\((1, 0)\\); no \\(y\\)-intercept.\n5. Continuous at every \\(x > 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Saying the asymptote of \\(\\log_a x\\) is \\(y = 0\\). That is the asymptote of \\(a^{x}\\); for \\(\\log_a x\\) it is the vertical line \\(x = 0\\).\n2. Looking for a \\(y\\)-intercept: \\(x = 0\\) is outside the domain, so there is none.\n3. Assuming every logarithm increases. With \\(0 < a < 1\\) the function decreases."
+          }
+        ]
+      }
+    }
+  ]
+}

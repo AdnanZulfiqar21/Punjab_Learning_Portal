@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH1-1.5.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch1",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch1/1.5.1",
+      "title": "1.5.1 Hyperbolic Functions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 12,
+          "pdf_to": 12,
+          "note": "Book p. 10: 1.5.1 table of the six hyperbolic functions (definition, domain, range), hyperbola remark, Example 9"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The hyperbolic functions are defined as follows:"
+          },
+          {
+            "type": "table",
+            "caption": "The six hyperbolic functions: definition, domain and range",
+            "header": [
+              "Function",
+              "Definition",
+              "Domain",
+              "Range"
+            ],
+            "rows": [
+              [
+                "\\(\\sinh x\\)",
+                "\\(\\sinh x = \\frac{e^{x}-e^{-x}}{2}\\)",
+                "\\(\\mathbb{R} = (-\\infty, \\infty)\\)",
+                "\\(\\mathbb{R} = (-\\infty, \\infty)\\)"
+              ],
+              [
+                "\\(\\cosh x\\)",
+                "\\(\\cosh x = \\frac{e^{x}+e^{-x}}{2}\\)",
+                "\\(\\mathbb{R} = (-\\infty, \\infty)\\)",
+                "\\([1, \\infty)\\)"
+              ],
+              [
+                "\\(\\tanh x = \\frac{\\sinh x}{\\cosh x}\\)",
+                "\\(\\tanh x = \\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}\\)",
+                "\\(\\mathbb{R} = (-\\infty, \\infty)\\)",
+                "\\((-1, 1)\\)"
+              ],
+              [
+                "\\(\\coth x = \\frac{\\cosh x}{\\sinh x}\\)",
+                "\\(\\coth x = \\frac{e^{x}+e^{-x}}{e^{x}-e^{-x}}\\)",
+                "\\(\\mathbb{R} \\setminus \\{0\\}\\)",
+                "\\((-\\infty, -1) \\cup (1, \\infty)\\)"
+              ],
+              [
+                "\\(\\operatorname{sech} x = \\frac{1}{\\cosh x}\\)",
+                "\\(\\operatorname{sech} x = \\frac{2}{e^{x}+e^{-x}}\\)",
+                "\\(\\mathbb{R} = (-\\infty, \\infty)\\)",
+                "\\((0, 1]\\)"
+              ],
+              [
+                "\\(\\operatorname{csch} x = \\frac{1}{\\sinh x}\\)",
+                "\\(\\operatorname{csch} x = \\frac{2}{e^{x}-e^{-x}}\\)",
+                "\\(\\mathbb{R} \\setminus \\{0\\}\\)",
+                "\\((-\\infty, 0) \\cup (0, \\infty)\\)"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to read this table:\n1. Only two functions are really new, \\(\\sinh x\\) and \\(\\cosh x\\). The other four are made from them exactly as in trigonometry: \\(\\tanh = \\sinh/\\cosh\\), \\(\\coth = \\cosh/\\sinh\\), \\(\\operatorname{sech} = 1/\\cosh\\), \\(\\operatorname{csch} = 1/\\sinh\\).\n2. Domains: \\(e^{x}\\) and \\(e^{-x}\\) exist for every real \\(x\\), so \\(\\sinh\\), \\(\\cosh\\) have domain \\(\\mathbb{R}\\). \\(\\cosh x\\) is never 0 (it is a sum of positive numbers), so \\(\\tanh\\) and \\(\\operatorname{sech}\\) also have domain \\(\\mathbb{R}\\). But \\(\\sinh x = 0\\) only when \\(e^{x} = e^{-x}\\), i.e. \\(x = 0\\); so \\(\\coth\\) and \\(\\operatorname{csch}\\) (which divide by \\(\\sinh x\\)) have domain \\(\\mathbb{R}\\setminus\\{0\\}\\).\n3. Ranges: \\(\\cosh x \\ge 1\\) (shown on page 1.5.2), so \\(\\operatorname{sech} x = 1/\\cosh x\\) lies in \\((0, 1]\\). The numerator of \\(\\tanh x\\) is always smaller in size than its denominator, so \\(-1 < \\tanh x < 1\\); turning it upside down, \\(|\\coth x| > 1\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Hyperbolic functions are so named because the parametric equations \\(x = \\cosh t\\) and \\(y = \\sinh t\\) satisfy the equation of the hyperbola \\(x^{2} - y^{2} = 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Compare with trigonometry: \\(x = \\cos t\\), \\(y = \\sin t\\) satisfy \\(x^{2} + y^{2} = 1\\) (a circle) because \\(\\cos^{2} t + \\sin^{2} t = 1\\). Here \\(x = \\cosh t\\), \\(y = \\sinh t\\) give \\(x^{2} - y^{2} = \\cosh^{2} t - \\sinh^{2} t\\), and Example 9 shows that this is always 1. So the point \\((\\cosh t, \\sinh t)\\) always lies on the hyperbola \\(x^{2} - y^{2} = 1\\) (on its right branch, because \\(\\cosh t \\ge 1\\))."
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "Prove that \\(\\cosh^{2} x - \\sinh^{2} x = 1\\).",
+            "steps": [
+              "Given: \\(\\cosh x = \\frac{e^{x}+e^{-x}}{2}\\) and \\(\\sinh x = \\frac{e^{x}-e^{-x}}{2}\\).\nTo prove: \\(\\cosh^{2} x - \\sinh^{2} x = 1\\).\nMethod: an identity is proved by starting from one side and simplifying it until it becomes the other side. Here we put the definitions into the left side, open the squares with \\((a \\pm b)^{2} = a^{2} \\pm 2ab + b^{2}\\), and use \\(e^{x} \\cdot e^{-x} = 1\\).",
+              "Step 1: Substitute the definitions\n\\[\\cosh^{2} x - \\sinh^{2} x\\]\n\\[= \\left(\\dfrac{e^{x}+e^{-x}}{2}\\right)^{2} - \\left(\\dfrac{e^{x}-e^{-x}}{2}\\right)^{2}\\]\nWhy: \\(\\cosh^{2} x\\) means \\((\\cosh x)^{2}\\), so the whole fraction is squared.",
+              "Step 2: Open the first square\n\\[(e^{x}+e^{-x})^{2} = e^{2x} + 2e^{x}e^{-x} + e^{-2x}\\]\n\\[= e^{2x} + e^{-2x} + 2\\]\nWhy: \\((a+b)^{2} = a^{2} + 2ab + b^{2}\\); \\((e^{x})^{2} = e^{2x}\\) and \\(e^{x}e^{-x} = e^{0} = 1\\). The denominator \\(2^{2} = 4\\).",
+              "Step 3: Open the second square\n\\[(e^{x}-e^{-x})^{2} = e^{2x} - 2 + e^{-2x}\\]\nWhy: \\((a-b)^{2} = a^{2} - 2ab + b^{2}\\); the middle term is \\(-2e^{x}e^{-x} = -2\\).",
+              "Step 4: Subtract over the common denominator 4\n\\[= \\left(\\dfrac{e^{2x}+e^{-2x}+2}{4}\\right) - \\left(\\dfrac{e^{2x}+e^{-2x}-2}{4}\\right)\\]\n\\[= \\dfrac{e^{2x}+e^{-2x}+2-e^{2x}-e^{-2x}+2}{4}\\]\nWhy: the minus sign in front of the second bracket changes the sign of every term inside it, so \\(-2\\) becomes \\(+2\\).",
+              "Step 5: Simplify\n\\[= \\dfrac{4}{4} = 1\\]\nWhy: \\(e^{2x}\\) cancels with \\(-e^{2x}\\) and \\(e^{-2x}\\) with \\(-e^{-2x}\\); only \\(2 + 2 = 4\\) is left. Hence \\(\\cosh^{2} x - \\sinh^{2} x = 1\\).",
+              "Check: take \\(x = 1\\): \\(\\cosh 1 \\approx 1.5431\\), \\(\\sinh 1 \\approx 1.1752\\).\n\\[1.5431^{2} - 1.1752^{2}\\]\n\\[\\approx 2.3811 - 1.3811 = 1\\]\nThe identity holds."
+            ],
+            "answer": "\\(\\cosh^{2} x - \\sinh^{2} x = 1\\) (Hence proved.) It is the hyperbolic partner of \\(\\cos^{2} x + \\sin^{2} x = 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Example 9 is the most used identity of this section. Remember the sign difference:\n\\[\\cos^{2} x + \\sin^{2} x = 1\\]\n\\[\\cosh^{2} x - \\sinh^{2} x = 1\\]\nDividing it by \\(\\cosh^{2} x\\) or by \\(\\sinh^{2} x\\) gives the identities of Exercise 1.2, Question 7."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\sinh x = \\frac{e^{x}-e^{-x}}{2}\\), \\(\\cosh x = \\frac{e^{x}+e^{-x}}{2}\\); the other four are built from these two.\n2. \\(\\sinh\\), \\(\\cosh\\), \\(\\tanh\\), \\(\\operatorname{sech}\\) have domain \\(\\mathbb{R}\\); \\(\\coth\\), \\(\\operatorname{csch}\\) have domain \\(\\mathbb{R}\\setminus\\{0\\}\\).\n3. Ranges: \\(\\sinh\\): \\(\\mathbb{R}\\); \\(\\cosh\\): \\([1, \\infty)\\); \\(\\tanh\\): \\((-1, 1)\\); \\(\\coth\\): \\((-\\infty, -1)\\cup(1, \\infty)\\); \\(\\operatorname{sech}\\): \\((0, 1]\\); \\(\\operatorname{csch}\\): \\(\\mathbb{R}\\setminus\\{0\\}\\).\n4. \\(\\cosh^{2} x - \\sinh^{2} x = 1\\), so \\((\\cosh t, \\sinh t)\\) lies on the hyperbola \\(x^{2} - y^{2} = 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing \\(\\cosh^{2} x + \\sinh^{2} x = 1\\) by copying the trigonometric identity: the hyperbolic one has a minus sign.\n2. Mixing up the signs: \\(\\sinh\\) has the minus (\\(e^{x} - e^{-x}\\)), \\(\\cosh\\) has the plus (\\(e^{x} + e^{-x}\\)).\n3. Forgetting that \\(\\coth x\\) and \\(\\operatorname{csch} x\\) are not defined at \\(x = 0\\).\n4. Squaring only the numerator: \\(\\left(\\frac{e^{x}+e^{-x}}{2}\\right)^{2}\\) has denominator 4, not 2."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH1-EXERCISE-1-2-Q7",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch1",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch1/u-exercise-1-2-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 16,
+          "pdf_to": 16,
+          "note": "Exercise 1.2, Question 7 (book p. 14): prove four hyperbolic identities (i)-(iv); no printed answers"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(i)",
+            "prompt": "7 (i) Prove the following hyperbolic identity: \\(1 - \\tanh^{2} x = \\operatorname{sech}^{2} x\\)",
+            "explanation": "An identity to prove: it must hold for every real \\(x\\).\nWe know \\(\\cosh^{2} x - \\sinh^{2} x = 1\\) (Example 9), and \\(\\tanh = \\sinh/\\cosh\\), \\(\\operatorname{sech} = 1/\\cosh\\).\nPlan: divide Example 9 by \\(\\cosh^{2} x\\), exactly as \\(\\sec^{2} x = 1 + \\tan^{2} x\\) comes from \\(\\cos^{2} x + \\sin^{2} x = 1\\).",
+            "steps": [
+              "Given: \\(\\cosh^{2} x - \\sinh^{2} x = 1\\) (Example 9), \\(\\tanh x = \\frac{\\sinh x}{\\cosh x}\\), \\(\\operatorname{sech} x = \\frac{1}{\\cosh x}\\).\nTo prove: \\(1 - \\tanh^{2} x = \\operatorname{sech}^{2} x\\).\nMethod: divide the basic identity by \\(\\cosh^{2} x\\), which is never zero.",
+              "Start from the basic identity\n\\[\\cosh^{2} x - \\sinh^{2} x = 1\\]\nWhy: proved in Example 9 for every real \\(x\\).",
+              "Divide every term by \\(\\cosh^{2} x\\)\n\\[\\dfrac{\\cosh^{2} x}{\\cosh^{2} x} - \\dfrac{\\sinh^{2} x}{\\cosh^{2} x} = \\dfrac{1}{\\cosh^{2} x}\\]\nWhy: \\(\\cosh x \\ge 1\\), so \\(\\cosh^{2} x \\ne 0\\) and the division is allowed for every \\(x\\).",
+              "Use the definitions\n\\[1 - \\tanh^{2} x = \\operatorname{sech}^{2} x\\]\nWhy: \\(\\frac{\\sinh x}{\\cosh x} = \\tanh x\\) and \\(\\frac{1}{\\cosh x} = \\operatorname{sech} x\\).",
+              "Check: at \\(x = 1\\): \\(\\tanh 1 \\approx 0.76159\\), \\(\\operatorname{sech} 1 \\approx 0.64805\\).\n\\[1 - 0.76159^{2} \\approx 0.41998\\]\n\\[0.64805^{2} \\approx 0.41997\\]\nEqual (up to rounding)."
+            ],
+            "final_answer": "Hence proved: \\(1 - \\tanh^{2} x = \\operatorname{sech}^{2} x\\) for every real \\(x\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(ii)",
+            "prompt": "7 (ii) Prove the following hyperbolic identity: \\(\\operatorname{csch}^{2} x = \\coth^{2} x - 1\\)",
+            "explanation": "Another identity, now with \\(\\coth\\) and \\(\\operatorname{csch}\\), which divide by \\(\\sinh x\\).\nPlan: divide Example 9 by \\(\\sinh^{2} x\\); this needs \\(x \\ne 0\\), where \\(\\coth\\) and \\(\\operatorname{csch}\\) are defined.",
+            "steps": [
+              "Given: \\(\\cosh^{2} x - \\sinh^{2} x = 1\\), \\(\\coth x = \\frac{\\cosh x}{\\sinh x}\\), \\(\\operatorname{csch} x = \\frac{1}{\\sinh x}\\), \\(x \\ne 0\\).\nTo prove: \\(\\operatorname{csch}^{2} x = \\coth^{2} x - 1\\).\nMethod: divide the basic identity by \\(\\sinh^{2} x\\).",
+              "Start from the basic identity\n\\[\\cosh^{2} x - \\sinh^{2} x = 1\\]\nWhy: Example 9.",
+              "Divide every term by \\(\\sinh^{2} x\\)\n\\[\\dfrac{\\cosh^{2} x}{\\sinh^{2} x} - \\dfrac{\\sinh^{2} x}{\\sinh^{2} x} = \\dfrac{1}{\\sinh^{2} x}\\]\nWhy: for \\(x \\ne 0\\), \\(\\sinh x \\ne 0\\). (At \\(x = 0\\) both sides of the identity are undefined anyway.)",
+              "Use the definitions and rearrange\n\\[\\coth^{2} x - 1 = \\operatorname{csch}^{2} x\\]\n\\[\\operatorname{csch}^{2} x = \\coth^{2} x - 1\\]\nWhy: \\(\\frac{\\cosh x}{\\sinh x} = \\coth x\\), \\(\\frac{1}{\\sinh x} = \\operatorname{csch} x\\); then swap the two sides.",
+              "Check: at \\(x = 1\\): \\(\\coth 1 \\approx 1.31304\\), \\(\\operatorname{csch} 1 \\approx 0.85092\\).\n\\[1.31304^{2} - 1 \\approx 0.72407\\]\n\\[0.85092^{2} \\approx 0.72406\\]\nEqual (up to rounding)."
+            ],
+            "final_answer": "Hence proved: \\(\\operatorname{csch}^{2} x = \\coth^{2} x - 1\\) for every \\(x \\ne 0\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(iii)",
+            "prompt": "7 (iii) Prove the following hyperbolic identity: \\(\\sinh 2x = 2 \\sinh x \\cosh x\\)",
+            "explanation": "A double-angle type identity. The left side has \\(2x\\), the right side has \\(x\\).\nPlan: write the right side with exponentials, multiply, and recognise \\(\\sinh 2x\\). The useful product is \\((a - b)(a + b) = a^{2} - b^{2}\\).",
+            "steps": [
+              "Given: \\(\\sinh x = \\frac{e^{x}-e^{-x}}{2}\\), \\(\\cosh x = \\frac{e^{x}+e^{-x}}{2}\\).\nTo prove: \\(\\sinh 2x = 2\\sinh x\\cosh x\\).\nMethod: start with the right side (it can be expanded), and simplify until it becomes \\(\\frac{e^{2x}-e^{-2x}}{2} = \\sinh 2x\\).",
+              "Substitute the definitions\n\\[2\\sinh x\\cosh x\\]\n\\[= 2 \\cdot \\dfrac{e^{x}-e^{-x}}{2} \\cdot \\dfrac{e^{x}+e^{-x}}{2}\\]\nWhy: definitions of \\(\\sinh\\) and \\(\\cosh\\).",
+              "Multiply\n\\[= \\dfrac{(e^{x}-e^{-x})(e^{x}+e^{-x})}{2}\\]\n\\[= \\dfrac{(e^{x})^{2} - (e^{-x})^{2}}{2}\\]\nWhy: \\(2 \\cdot \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{2}\\), and \\((a-b)(a+b) = a^{2} - b^{2}\\).",
+              "Recognise \\(\\sinh 2x\\)\n\\[= \\dfrac{e^{2x} - e^{-2x}}{2} = \\sinh 2x\\]\nWhy: \\((e^{x})^{2} = e^{2x}\\) and \\((e^{-x})^{2} = e^{-2x}\\); this is the definition of \\(\\sinh\\) with \\(2x\\) in place of \\(x\\).",
+              "Check: at \\(x = 1\\): \\(\\sinh 2 \\approx 3.62686\\) and\n\\[2(1.17520)(1.54308) \\approx 3.62686\\]\nEqual."
+            ],
+            "final_answer": "Hence proved: \\(\\sinh 2x = 2\\sinh x\\cosh x\\) for every real \\(x\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(iv)",
+            "prompt": "7 (iv) Prove the following hyperbolic identity: \\(\\cosh 2x = \\cosh^{2} x + \\sinh^{2} x\\)",
+            "explanation": "Another double-angle identity, the partner of \\(\\cos 2x = \\cos^{2} x - \\sin^{2} x\\) (but with a plus sign).\nPlan: expand both squares on the right side as in Example 9, add them, and recognise \\(\\cosh 2x\\).",
+            "steps": [
+              "Given: \\(\\sinh x = \\frac{e^{x}-e^{-x}}{2}\\), \\(\\cosh x = \\frac{e^{x}+e^{-x}}{2}\\).\nTo prove: \\(\\cosh 2x = \\cosh^{2} x + \\sinh^{2} x\\).\nMethod: expand the right side using \\((a \\pm b)^{2}\\) and \\(e^{x}e^{-x} = 1\\), then simplify to \\(\\frac{e^{2x}+e^{-2x}}{2}\\).",
+              "Expand the squares\n\\[\\cosh^{2} x = \\dfrac{e^{2x} + 2 + e^{-2x}}{4}\\]\n\\[\\sinh^{2} x = \\dfrac{e^{2x} - 2 + e^{-2x}}{4}\\]\nWhy: \\((a \\pm b)^{2} = a^{2} \\pm 2ab + b^{2}\\), with \\(2e^{x}e^{-x} = 2\\) (the same working as Example 9).",
+              "Add them\n\\[\\cosh^{2} x + \\sinh^{2} x\\]\n\\[= \\dfrac{2e^{2x} + 2e^{-2x}}{4}\\]\nWhy: \\(+2\\) and \\(-2\\) cancel; \\(e^{2x}\\) and \\(e^{-2x}\\) each appear twice.",
+              "Recognise \\(\\cosh 2x\\)\n\\[= \\dfrac{e^{2x} + e^{-2x}}{2} = \\cosh 2x\\]\nWhy: divide top and bottom by 2; this is the definition of \\(\\cosh\\) with \\(2x\\) in place of \\(x\\).",
+              "Check: at \\(x = 1\\): \\(\\cosh 2 \\approx 3.76220\\) and\n\\[1.54308^{2} + 1.17520^{2}\\]\n\\[\\approx 2.38110 + 1.38110 = 3.76220\\]\nEqual."
+            ],
+            "final_answer": "Hence proved: \\(\\cosh 2x = \\cosh^{2} x + \\sinh^{2} x\\) for every real \\(x\\)."
+          }
+        ]
+      }
+    }
+  ]
+}
