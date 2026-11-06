@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-13.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/13.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 243,
+          "pdf_to": 244,
+          "note": "Book p. 238-239: own text of 13.2 before 13.2.1: difference quotient (i), instantaneous rate of change, (ii), (iii), definition of f'(x), differentiable, differentiation. No book errors here. Teaching notes, tables, Key points, mistakes are ours."
+        }
+      ],
+      "title": "13.2 Derivative as the Limit of a Difference Quotient",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Let \\(f\\) be a real valued function continuous in the interval \\((x, x_{1}) \\subseteq D_{f}\\) (domain of \\(f\\)). Then the difference quotient"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{f(x_{1}) - f(x)}{x_{1} - x} \\quad \\text{...(i)}",
+            "text_alt": "f of x 1 minus f of x, over x 1 minus x; expression (i)"
+          },
+          {
+            "type": "paragraph",
+            "text": "represents the average rate of change in the value of \\(f\\) with respect to the change \\(x_{1} - x\\) in the value of the independent variable \\(x\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read (i) as: change in output divided by change in input. It is the slope of the secant through \\((x, f(x))\\) and \\((x_{1}, f(x_{1}))\\).\nA small example of ours: for \\(f(x) = x^{2}\\), when \\(x\\) goes from \\(1\\) to \\(3\\),\n\\[\\dfrac{f(3) - f(1)}{3 - 1} = \\dfrac{9 - 1}{2} = 4\\]\nSo on average \\(f\\) grows by \\(4\\) units for each unit of \\(x\\) on this interval. It is called \"average\" because \\(f\\) grows more slowly near \\(1\\) and faster near \\(3\\); \\(4\\) is only the overall rate."
+          },
+          {
+            "type": "paragraph",
+            "text": "If \\(x_{1}\\) approaches \\(x\\), then"
+          },
+          {
+            "type": "equation",
+            "latex": "\\lim_{x_{1} \\to x} \\dfrac{f(x_{1}) - f(x)}{x_{1} - x}",
+            "text_alt": "the limit, as x 1 tends to x, of f of x 1 minus f of x, over x 1 minus x"
+          },
+          {
+            "type": "paragraph",
+            "text": "provided this limit exists, is called the instantaneous rate of change of \\(f\\) with respect to \\(x\\) and is written as \\(f'(x)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Average versus instantaneous: a bus covers \\(120\\) km in \\(2\\) hours, so its average speed is \\(60\\) km/h. But at one moment it may be standing at a signal (\\(0\\) km/h) and at another moment doing \\(80\\) km/h. The speed shown on the speedometer at one moment is the instantaneous rate. We get it from average rates over shorter and shorter intervals, which is exactly the limit \\(x_{1} \\to x\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "If \\(x_{1} = x + \\delta x\\), i.e., \\(x_{1} - x = \\delta x\\), then the expression (i) can be expressed as"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{f(x+\\delta x) - f(x)}{\\delta x} \\quad \\text{...(ii)}",
+            "text_alt": "f of x plus delta x minus f of x, over delta x; expression (ii)"
+          },
+          {
+            "type": "paragraph",
+            "text": "and"
+          },
+          {
+            "type": "equation",
+            "latex": "\\lim_{\\delta x \\to 0} \\dfrac{f(x+\\delta x) - f(x)}{\\delta x} \\quad \\text{...(iii)}",
+            "text_alt": "the limit, as delta x tends to 0, of f of x plus delta x minus f of x, over delta x; expression (iii)"
+          },
+          {
+            "type": "paragraph",
+            "text": "provided the limit exists, is defined to be the derivative of \\(f\\) (or differential coefficient of \\(f\\)) with respect to \\(x\\) and is denoted by \\(f'(x)\\) (read as \"\\(f\\) prime of \\(x\\)\"). The domain of \\(f'\\) consists of all \\(x\\) for which the limit exists. If \\(x \\in D_{f}\\) and \\(f'(x)\\) exists, then \\(f\\) is said to be differentiable at \\(x\\). The process of finding \\(f'\\) is called differentiation."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Remember",
+            "text": "Definition of the derivative (our summary of the paragraph above):\n\\[f'(x) = \\lim_{\\delta x \\to 0} \\dfrac{f(x+\\delta x) - f(x)}{\\delta x}\\]\nprovided the limit exists."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why replace \\(x_{1}\\) by \\(x + \\delta x\\)? Then the gap between the two inputs has its own name, \\(\\delta x\\), and \"\\(x_{1}\\) approaches \\(x\\)\" becomes the simpler \"\\(\\delta x\\) approaches \\(0\\)\". Nothing else changes: (i) and (ii) are the same fraction written in two ways.\nCompare (iii) with equation (2) of 13.1: it is the same limit. So the derivative \\(f'(x)\\) is the slope of the tangent to the graph of \\(f\\) at the point \\((x, f(x))\\)."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Point of view",
+              "Name of the same limit",
+              "Meaning"
+            ],
+            "rows": [
+              [
+                "Geometry (13.1)",
+                "slope of the tangent, \\(m_{\\text{tan}}\\)",
+                "how steep the curve is at the point"
+              ],
+              [
+                "Rates (13.2)",
+                "instantaneous rate of change",
+                "how fast \\(f\\) changes at that value of \\(x\\)"
+              ],
+              [
+                "Calculus (13.2)",
+                "derivative \\(f'(x)\\), differential coefficient",
+                "the name and symbol we use from now on"
+              ],
+              [
+                "Motion (13.2.1)",
+                "instantaneous velocity",
+                "the derivative of position with respect to time"
+              ]
+            ],
+            "caption": "One limit, several names (our summary, not in the book)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A first derivative of ours, straight from (iii), for \\(f(x) = x^{2}\\):\n\\[f(x+\\delta x) - f(x) = (x+\\delta x)^{2} - x^{2}\\]\n\\[= 2x\\,\\delta x + \\delta x^{2}\\]\n\\[\\dfrac{2x\\,\\delta x + \\delta x^{2}}{\\delta x} = 2x + \\delta x\\]\n\\[f'(x) = \\lim_{\\delta x \\to 0}(2x + \\delta x) = 2x\\]\nAt \\(x = -1\\) this gives \\(f'(-1) = -2\\), the same slope we found for \\(y = x^{2} - 2\\) in Example 1 (the constant \\(-2\\) does not change the steepness). The full method follows in 13.3."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "When asked to \"define the derivative\", write all of it: the limit (iii), the words \"provided the limit exists\", the symbol \\(f'(x)\\) and the name \"derivative (differential coefficient) of \\(f\\) with respect to \\(x\\)\". Examiners look for the condition \"provided the limit exists\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Difference quotient (i) = average rate of change = slope of a secant.\n2. Its limit as \\(x_{1} \\to x\\) (or \\(\\delta x \\to 0\\)) = instantaneous rate of change = derivative \\(f'(x)\\) = slope of the tangent.\n3. \\(f'(x)\\) is read \"\\(f\\) prime of \\(x\\)\"; another name is the differential coefficient of \\(f\\).\n4. \\(f\\) is differentiable at \\(x\\) when \\(x \\in D_{f}\\) and the limit exists. The domain of \\(f'\\) is the set of all such \\(x\\).\n5. Finding \\(f'\\) is called differentiation."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Reading \\(f'(x)\\) as \"\\(f\\) times \\(x'\\)\". The dash belongs to \\(f\\): \\(f'\\) is a new function, the derivative of \\(f\\).\n2. Forgetting \"provided the limit exists\". The limit does not always exist; in 13.5 you will see \\(f(x) = |x|\\), which has no derivative at \\(x = 0\\).\n3. Confusing the average rate (a fraction over an interval) with the instantaneous rate (a limit at one point)."
+          }
+        ]
+      }
+    }
+  ]
+}

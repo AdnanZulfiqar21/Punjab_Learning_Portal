@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-3-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-3-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 263,
+          "pdf_to": 263,
+          "note": "Exercise 13.3, Question 7 (a)-(c): rate of change and maximum of S(x) = 400x - x^3 (book p.258). Answer key (PDF 311) prints it as number 13."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(a)",
+            "prompt": "7 (a) The stress on a beam under a varying load is given by \\(S(x) = 400x - x^3\\), where \\(S(x)\\) is the stress in pascals (Pa) and \\(x\\) is the distance from the fixed end in meters. Calculate the rate of change of stress at 6 meters.",
+            "explanation": "A rate-of-change question.\nWe must find \\(S'(6)\\).\nPlan: differentiate \\(S(x)\\), substitute \\(x = 6\\).",
+            "steps": [
+              "Given: \\(S(x) = 400x - x^3\\) (Pa, metres).\nTo find: \\(S'(6)\\).\nMethod: Rate of change of stress \\(= S'(x)\\) (as in Example 16).",
+              "Differentiate\n\\[S'(x) = 400 - 3x^2\\]\nWhy: Power rule.",
+              "Substitute \\(x = 6\\)\n\\[S'(6) = 400 - 108 = 292\\]\nWhy: \\(3 \\times 36 = 108\\). Units: Pa per metre."
+            ],
+            "final_answer": "\\(S'(6) = 292\\ \\text{Pa/m}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(b)",
+            "prompt": "7 (b) The stress on a beam under a varying load is given by \\(S(x) = 400x - x^3\\), where \\(S(x)\\) is the stress in pascals (Pa) and \\(x\\) is the distance from the fixed end in meters. Find the distance where the stress is maximized.",
+            "explanation": "A maximum question.\nWe must find \\(x\\) where \\(S(x)\\) is greatest.\nPlan: set \\(S'(x) = 0\\), take the positive root (a distance), check the sign of \\(S'\\).",
+            "steps": [
+              "Given: \\(S'(x) = 400 - 3x^2\\), \\(x \\ge 0\\).\nTo find: the distance of maximum stress.\nMethod: At a maximum \\(S'(x) = 0\\).",
+              "Solve \\(S'(x) = 0\\)\n\\[3x^2 = 400\\]\n\\[x^2 = \\dfrac{400}{3}\\]\n\\[x = \\dfrac{20}{\\sqrt{3}} \\approx 11.55\\]\nWhy: \\(\\sqrt{400} = 20\\). The negative root is rejected because a distance from the fixed end is not negative.",
+              "Confirm a maximum\n\\[x < 11.55:\\ S'(x) > 0\\]\n\\[x > 11.55:\\ S'(x) < 0\\]\nWhy: Stress increases up to \\(x \\approx 11.55\\) m and decreases after it.",
+              "Maximum stress (extra)\n\\[S\\left(\\dfrac{20}{\\sqrt{3}}\\right) = \\dfrac{16000}{3\\sqrt{3}} \\approx 3079.2\\ \\text{Pa}\\]\nWhy: \\(400x - x^3 = x(400 - x^2) = \\frac{20}{\\sqrt{3}} \\cdot \\frac{800}{3}\\)."
+            ],
+            "final_answer": "\\(x = \\frac{20}{\\sqrt{3}} \\approx 11.55\\ \\text{m}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(c)",
+            "prompt": "7 (c) The stress on a beam under a varying load is given by \\(S(x) = 400x - x^3\\), where \\(S(x)\\) is the stress in pascals (Pa) and \\(x\\) is the distance from the fixed end in meters. Is the stress increasing or decreasing at \\(x = 6\\) meters?",
+            "explanation": "Increasing or decreasing is decided by the sign of the derivative.\nWe must look at \\(S'(6)\\).\nPlan: use part (a).",
+            "steps": [
+              "Given: \\(S'(6) = 292\\) (part (a)).\nTo find: whether \\(S\\) is increasing or decreasing at \\(x = 6\\).\nMethod: \\(S' > 0\\) means increasing, \\(S' < 0\\) means decreasing.",
+              "Look at the sign\n\\[S'(6) = 292 > 0\\]\nWhy: A positive slope means the graph rises as \\(x\\) increases. This agrees with part (b): \\(6 < 11.55\\), before the maximum."
+            ],
+            "final_answer": "Increasing at \\(x = 6\\) m (since \\(S'(6) = 292 > 0\\))"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key numbers the answers of Exercise 13.3 as 4, 5, 6, 8, 11, 12, 13, 14 instead of 1 to 8. The answer to this question is printed under number 13: (a) 292 Pa/m, (b) \\(x = 11.55\\) m, (c) increasing, all correct."
+          }
+        ]
+      }
+    }
+  ]
+}

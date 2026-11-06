@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-2-Q2-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-2-q2",
+      "title": "Question 2 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 260,
+          "pdf_to": 260,
+          "note": "Exercise 13.2, Question 2: dy/dx of a quotient that simplifies after a difference of cubes (book p.255). The answer key (PDF 311) gives an equivalent unsimplified form."
+        }
+      ],
+      "variant_of": "C11-MATH-CH13-EXERCISE-13-2-Q2",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2. Find \\(\\frac{dy}{dx}\\) if \\(y = \\dfrac{(\\sqrt{x} + 1)(x^{3/2} - 1)}{x^{1/2} - 1}\\), \\((x \\ne 1)\\).",
+            "explanation": "Dekhne mein yeh lamba quotient hai, lekin is mein chhupa hua factor hai: \\(x^{3/2} - 1\\) asal mein \\(\\sqrt{x}\\) ke cubes ka farq (difference of cubes) hai.\nHumein \\(\\frac{dy}{dx}\\) find karna hai.\nAgar seedha quotient rule lagayein to kaam bohat lamba aur ghalti wala ho jayega.\nPlan: factorise, \\(\\sqrt{x} - 1\\) cancel, multiply, aur phir sirf power rule.",
+            "steps": [
+              "Diya gaya hai: \\(y = \\dfrac{(\\sqrt{x} + 1)(x^{3/2} - 1)}{x^{1/2} - 1}\\), \\(x > 0\\), \\(x \\ne 1\\).\nHumein find karna hai: \\(\\frac{dy}{dx}\\).\nTareeqa: \\(x^{3/2} = (\\sqrt{x})^3\\) hai, is liye formula \\(a^3 - b^3 = (a - b)(a^2 + ab + b^2)\\) lagega, jahan \\(a = \\sqrt{x}\\) aur \\(b = 1\\). Cancel karne ke baad sirf power rule chahiye.",
+              "Cubes ka farq factorise karein\n\\[x^{3/2} - 1 = (\\sqrt{x})^3 - 1^3\\]\n\\[= (\\sqrt{x} - 1)(x + \\sqrt{x} + 1)\\]\nKyun: \\(a^2 = (\\sqrt{x})^2 = x\\), \\(ab = \\sqrt{x} \\cdot 1 = \\sqrt{x}\\), \\(b^2 = 1\\). Aisa factor dhoondna is liye zaroori hai ke neeche bhi \\(\\sqrt{x} - 1\\) hai, aur dono cancel ho sakte hain.",
+              "\\(\\sqrt{x} - 1\\) cancel karein\n\\[y = (\\sqrt{x} + 1)(x + \\sqrt{x} + 1)\\]\nKyun: Neeche \\(x^{1/2} - 1 = \\sqrt{x} - 1\\) hai. Sawal ne \\(x \\ne 1\\) diya hai, is liye yeh factor zero nahi, aur zero na ho to cancel karna jaiz hai. Isi wajah se kitab ne \\((x \\ne 1)\\) likha hai.",
+              "Multiply karein\n\\[y = x\\sqrt{x} + x + \\sqrt{x} + x + \\sqrt{x} + 1\\]\n\\[= x^{3/2} + 2x + 2x^{1/2} + 1\\]\nKyun: Pehli bracket ki har term ko doosri bracket ki har term se guna kiya: \\(\\sqrt{x} \\cdot x = x^{3/2}\\), \\(\\sqrt{x} \\cdot \\sqrt{x} = x\\), waghera. Phir milti julti terms jama kin.",
+              "Differentiate karein\n\\[\\frac{dy}{dx} = \\frac{3}{2}x^{1/2} + 2 + x^{-1/2}\\]\n\\[= \\dfrac{3x + 4\\sqrt{x} + 2}{2\\sqrt{x}}\\]\nKyun: Power rule har term par: \\(x^{3/2} \\to \\frac{3}{2}x^{1/2}\\), \\(2x \\to 2\\), \\(2x^{1/2} \\to 2 \\cdot \\frac{1}{2}x^{-1/2} = x^{-1/2}\\), aur 1 ka derivative zero. Phir common denominator \\(2\\sqrt{x}\\) liya.",
+              "Answer key se muqabla\n\\[(3x + 4\\sqrt{x} + 2)(\\sqrt{x} - 1)^2\\]\n\\[= 3x^2 - 2x^{3/2} - 3x + 2\\]\nKyun: Answer key \\(\\frac{3x^2 - 2x^{3/2} - 3x + 2}{2\\sqrt{x}(\\sqrt{x} - 1)^2}\\) deti hai. Yeh humara hi jawab hai, bas upar neeche \\((\\sqrt{x} - 1)^2\\) se guna kiya hua; seedha quotient rule lagane se yahi shakal aati hai. Dono jawab sahi hain; humara simplified (saada) hai.\nDhyan dein: Exam mein dono shakalein qabool hain, lekin simplified jawab check karna aasaan hota hai.",
+              "Tasdeeq\n\\[\\text{At } x = 4:\\ \\frac{12 + 8 + 2}{4} = 5.5\\]\n\\[\\frac{y(4.001) - y(3.999)}{0.002} \\approx 5.5\\]\nKyun: \\(x = 4\\) par numerical slope bhi 5.5 hai; answer key wali shakal bhi \\(x = 4\\) par \\(\\frac{48 - 16 - 12 + 2}{4} = 5.5\\) deti hai."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = \\frac{3x + 4\\sqrt{x} + 2}{2\\sqrt{x}}\\) (answer key ki shakal \\(\\frac{3x^2 - 2x^{3/2} - 3x + 2}{2\\sqrt{x}(\\sqrt{x} - 1)^2}\\) ke barabar)"
+          }
+        ]
+      }
+    }
+  ]
+}

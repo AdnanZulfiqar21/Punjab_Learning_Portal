@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-1-Q11",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-1-q11",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 253,
+          "pdf_to": 253,
+          "note": "Exercise 13.1, Question 11 (book page 248, PDF 253); answer key PDF 310-311. Key's -2 ft/sec is wrong; correct 0 ft/sec."
+        }
+      ],
+      "title": "Question 11",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11 A stone is thrown upwards and its height after \\(t\\) seconds is given by: \\(s(t) = -16t^2 + 32t + 10\\) (in feet). Find the instantaneous velocity at \\(t = 1\\).",
+            "explanation": "Instantaneous velocity is \\(s'(1)\\).\nPlan: first principles at \\(t = 1\\): expand \\(s(1 + \\delta t)\\), subtract \\(s(1)\\), divide by \\(\\delta t\\), take the limit; then interpret the answer.",
+            "steps": [
+              "Given: \\(s(t) = -16t^2 + 32t + 10\\) ft, \\(t_1 = 1\\) s.\nTo find: \\(v(1) = s'(1)\\).\nMethod: instantaneous velocity at \\(t = t_1\\) is the derivative \\(v(t_1) = \\lim_{\\delta t \\to 0} \\frac{s(t_1 + \\delta t) - s(t_1)}{\\delta t}\\) (Section 13.2.1), found here by first principles.",
+              "Find \\(s(1)\\) and \\(s(1 + \\delta t)\\)\n\\[s(1) = -16 + 32 + 10 = 26\\]\n\\[s(1 + \\delta t) = -16(1 + \\delta t)^2 + 32(1 + \\delta t) + 10\\]\n\\[= -16 - 32\\,\\delta t - 16(\\delta t)^2 + 32 + 32\\,\\delta t + 10\\]\n\\[= 26 - 16(\\delta t)^2\\]\nWhy: \\((1 + \\delta t)^2 = 1 + 2\\,\\delta t + (\\delta t)^2\\); \\(-32\\,\\delta t\\) and \\(+32\\,\\delta t\\) cancel.",
+              "Subtract and divide by \\(\\delta t\\)\n\\[s(1 + \\delta t) - s(1) = -16(\\delta t)^2\\]\n\\[\\dfrac{s(1 + \\delta t) - s(1)}{\\delta t} = -16\\,\\delta t\\]\nWhy: \\(\\delta t \\neq 0\\) yet, so it cancels once.",
+              "Take the limit\n\\[v(1) = \\lim_{\\delta t \\to 0}(-16\\,\\delta t) = 0\\]\nWhy: Put \\(\\delta t = 0\\).",
+              "Meaning of the answer\n\\[v(1) = 0,\\quad s(1) = 26\\ \\text{ft}\\]\nWhy: At \\(t = 1\\) the stone stops for an instant at its highest point, \\(26\\) ft, before falling back.",
+              "Check\n\\[s'(t) = -32t + 32\\]\n\\[s'(1) = -32 + 32 = 0 \\;\\checkmark\\]\nWhy: The general derivative at \\(t = 1\\) also gives \\(0\\)."
+            ],
+            "final_answer": "\\(v(1) = 0\\) ft/sec (the stone is at its highest point, \\(26\\) ft)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(-2\\) ft/sec. This is wrong: \\(s'(t) = -32t + 32\\), so \\(s'(1) = 0\\) ft/sec; the stone is momentarily at rest at its highest point."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,331 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-13.6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/13.6",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 253,
+          "pdf_to": 259,
+          "note": "Book p. 248-254: 13.6 Theorems on Differentiation; rules 1-2, run-in rules 3-6 (constant multiple, sum/difference, product, quotient) with proofs, Note box, Examples 6-11"
+        }
+      ],
+      "title": "13.6 Theorems on Differentiation",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "We have, so, far, proved the following tow formula:",
+            "book_errors": [
+              "tow formula"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \"the following tow formula\". It should read \"the following two formulas\"."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "\\(\\frac{d}{dx}(c) = 0\\), i.e., the derivative of a constant function is zero.",
+              "\\(\\frac{d}{dx}(x^{n}) = nx^{n-1}\\): the power formula (or rule) when \\(n\\) is any real number."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is \\(\\frac{d}{dx}(c) = 0\\)? The graph of \\(y = c\\) is a horizontal line. Its height never changes, so \\(\\delta y = c - c = 0\\) for every \\(\\delta x\\), and the slope is 0 everywhere.\nThe power rule was proved in 13.4 for integer \\(n\\) and stated there for rational \\(n\\). It is true for every real \\(n\\) (for \\(x > 0\\)); the proof for irrational \\(n\\) needs tools from later classes.\nQuick practice of our own: \\(\\frac{d}{dx}(x^{5}) = 5x^{4}\\), \\(\\frac{d}{dx}(x^{-1}) = -x^{-2} = -\\frac{1}{x^{2}}\\), \\(\\frac{d}{dx}(x^{1/2}) = \\frac{1}{2}x^{-1/2} = \\frac{1}{2\\sqrt{x}}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Now we will prove other important formulas (or rules) which are used to determine derivatives of different functions efficiently. Henceforth, in all subsequent discussion, \\(f\\), \\(g\\), \\(h\\) etc. all denote functions differentiable at \\(x\\), unless stated otherwise."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Finding every derivative from the definition (Step I to Step IV of 13.3.2) is long. The rules below are proved once from the definition; after that we simply use them. Each rule is numbered (3, 4, 5, 6), and the book's examples quote these numbers, e.g. \\\"Using formula 3\\\"."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3. Derivative of \\(y = cf(x)\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Proof: Let \\(y = cf(x)\\). Then\n(i) \\(y + \\delta y = cf(x + \\delta x)\\) and\n(ii) \\(y + \\delta y - y = cf(x + \\delta x) - cf(x)\\)\nor \\(\\delta y = c[f(x + \\delta x) - f(x)]\\) (factoring out \\(c\\))\n(iii) Dividing by \\(\\delta x\\):\n\\[\\dfrac{\\delta y}{\\delta x} = c\\left[\\dfrac{f(x+\\delta x) - f(x)}{\\delta x}\\right]\\]\nTaking limit when \\(\\delta x \\to 0\\):\n(iv)\n\\[\\lim_{\\delta x \\to 0}\\dfrac{\\delta y}{\\delta x} = \\lim_{\\delta x \\to 0}\\, c\\cdot\\dfrac{f(x+\\delta x)-f(x)}{\\delta x}\\]\n\\[= c\\lim_{\\delta x \\to 0}\\dfrac{f(x+\\delta x)-f(x)}{\\delta x}\\]\nA constant factor can be taken out from a limit sign."
+          },
+          {
+            "type": "paragraph",
+            "text": "Thus, \\(\\frac{dy}{dx} = cf'(x)\\), that is \\([cf(x)]' = cf'(x)\\) or"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{d}{dx}[cf(x)] = c\\,\\dfrac{d}{dx}[f(x)]",
+            "text_alt": "d by d x of c times f of x equals c times d by d x of f of x"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In words: a constant multiplier simply waits outside while we differentiate the function. If every height of a graph is multiplied by \\(c\\), every rise \\(\\delta y\\) is also multiplied by \\(c\\), so every slope is multiplied by \\(c\\).\nExample of our own: \\(\\frac{d}{dx}(7x^{3}) = 7\\cdot 3x^{2} = 21x^{2}\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Calculate \\(\\frac{d}{dx}\\left(3x^{\\frac{4}{3}}\\right)\\).",
+            "steps": [
+              "Given: \\(y = 3x^{\\frac{4}{3}}\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: the function is a constant (3) times a power of \\(x\\). Formula 3 takes the constant outside, and the power rule (formula 2) differentiates \\(x^{\\frac{4}{3}}\\).",
+              "Step 1: Take the constant outside (Formula 3)\n\\[\\dfrac{d}{dx}\\left(3x^{\\frac{4}{3}}\\right) = 3\\dfrac{d}{dx}\\left(x^{\\frac{4}{3}}\\right)\\]\nWhy: formula 3 with \\(c = 3\\) and \\(f(x) = x^{\\frac{4}{3}}\\).",
+              "Step 2: Apply the power rule\n\\[= 3 \\times \\dfrac{4}{3}x^{\\frac{4}{3}-1}\\]\n\\[= 3 \\times \\dfrac{4}{3}x^{\\frac{1}{3}}\\]\nWhy: the power rule with \\(n = \\frac{4}{3}\\): bring the power down as a multiplier and reduce the power by 1; \\(\\frac{4}{3} - 1 = \\frac{4}{3} - \\frac{3}{3} = \\frac{1}{3}\\).",
+              "Step 3: Simplify\n\\[= 4x^{\\frac{1}{3}}\\]\nWhy: \\(3 \\times \\frac{4}{3} = 4\\).",
+              "Check:\nAt \\(x = 8\\) the answer gives \\(4 \\cdot 8^{1/3} = 4 \\cdot 2 = 8\\).\nThe difference quotient with \\(\\delta x = 0.001\\) is \\(\\frac{3(8.001)^{4/3} - 3(8)^{4/3}}{0.001} \\approx 8.0002\\), which agrees."
+            ],
+            "answer": "\\(\\frac{d}{dx}\\left(3x^{\\frac{4}{3}}\\right) = 4x^{\\frac{1}{3}}\\)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4. Derivative of a sum or a difference of functions"
+          },
+          {
+            "type": "paragraph",
+            "text": "If \\(f\\) and \\(g\\) are differentiable at \\(x\\), then \\(f + g\\) and \\(f - g\\) are also differentiable at \\(x\\) and"
+          },
+          {
+            "type": "equation",
+            "latex": "[f(x)+g(x)]' = f'(x) + g'(x)",
+            "text_alt": "the derivative of f of x plus g of x equals f prime of x plus g prime of x"
+          },
+          {
+            "type": "paragraph",
+            "text": "that is, \\(\\frac{d}{dx}[f(x)+g(x)] = \\frac{d}{dx}[f(x)] + \\frac{d}{dx}[g(x)]\\)."
+          },
+          {
+            "type": "equation",
+            "latex": "[f(x)-g(x)]' = f'(x) - g'(x)",
+            "text_alt": "the derivative of f of x minus g of x equals f prime of x minus g prime of x"
+          },
+          {
+            "type": "paragraph",
+            "text": "Also, that is, \\(\\frac{d}{dx}[f(x)-g(x)] = \\frac{d}{dx}[f(x)] - \\frac{d}{dx}[g(x)]\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Proof: Let \\(\\phi(x) = f(x) + g(x)\\). Then\n(i) \\(\\phi(x + \\delta x) = f(x + \\delta x) + g(x + \\delta x)\\) and\n(ii)\n\\[\\phi(x+\\delta x) - \\phi(x)\\]\n\\[= f(x+\\delta x) + g(x+\\delta x) - [f(x) + g(x)]\\]\n\\[= [f(x+\\delta x) - f(x)] + [g(x+\\delta x) - g(x)]\\]\n(rearranging the terms)\n(iii) Dividing by \\(\\delta x\\):\n\\[\\dfrac{\\phi(x+\\delta x)-\\phi(x)}{\\delta x} = \\dfrac{f(x+\\delta x)-f(x)}{\\delta x} + \\dfrac{g(x+\\delta x)-g(x)}{\\delta x}\\]\nTaking the limit when \\(\\delta x \\to 0\\):\n(iv)\n\\[\\lim_{\\delta x \\to 0}\\dfrac{\\phi(x+\\delta x)-\\phi(x)}{\\delta x}\\]\n\\[= \\lim_{\\delta x \\to 0}\\dfrac{f(x+\\delta x)-f(x)}{\\delta x} + \\lim_{\\delta x \\to 0}\\dfrac{g(x+\\delta x)-g(x)}{\\delta x}\\]\n(The limit of a sum is the sum of the limits)\n\\[\\phi'(x) = f'(x) + g'(x)\\]\nthat is \\([f(x) + g(x)]' = f'(x) + g'(x)\\), or \\(\\frac{d}{dx}[f(x)+g(x)] = \\frac{d}{dx}[f(x)] + \\frac{d}{dx}[g(x)]\\).\nThe proof for the second part is similar."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The second part in short: take \\(\\phi(x) = f(x) - g(x)\\). Then \\(\\phi(x+\\delta x) - \\phi(x) = [f(x+\\delta x) - f(x)] - [g(x+\\delta x) - g(x)]\\). Divide by \\(\\delta x\\) and take the limit (the limit of a difference is the difference of the limits): \\(\\phi'(x) = f'(x) - g'(x)\\).\nIn words: differentiate a long expression term by term, keeping the plus and minus signs."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "The sum or difference formula can be extended to find the derivative of more than two functions."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Find the derivative of \\(y = \\frac{3}{4}x^{4} + \\frac{2}{3}x^{3} + \\frac{1}{2}x^{2} + 2x + 5\\) w.r.t. \\(x\\).",
+            "steps": [
+              "Given: \\(y = \\frac{3}{4}x^{4} + \\frac{2}{3}x^{3} + \\frac{1}{2}x^{2} + 2x + 5\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: \\(y\\) is a sum of five terms. Formula 4 (extended, see the Note) lets us differentiate term by term; formula 3 takes each constant multiplier outside; formula 1 gives the derivative of the constant 5; the power rule does the rest.",
+              "Step 1: Split into terms (Formula 4)\n\\[\\dfrac{dy}{dx} = \\dfrac{d}{dx}\\left(\\dfrac{3}{4}x^{4}\\right) + \\dfrac{d}{dx}\\left(\\dfrac{2}{3}x^{3}\\right)\\]\n\\[+ \\dfrac{d}{dx}\\left(\\dfrac{1}{2}x^{2}\\right) + \\dfrac{d}{dx}(2x) + \\dfrac{d}{dx}(5)\\]\nWhy: the derivative of a sum is the sum of the derivatives.",
+              "Step 2: Constants outside (Formulas 3 and 1)\n\\[= \\dfrac{3}{4}\\dfrac{d}{dx}(x^{4}) + \\dfrac{2}{3}\\dfrac{d}{dx}(x^{3})\\]\n\\[+ \\dfrac{1}{2}\\dfrac{d}{dx}(x^{2}) + 2\\dfrac{d}{dx}(x) + 0\\]\nWhy: formula 3 moves each constant multiplier outside; by formula 1, \\(\\frac{d}{dx}(5) = 0\\).",
+              "Step 3: Power formula\n\\[= \\dfrac{3}{4}(4x^{4-1}) + \\dfrac{2}{3}(3x^{3-1})\\]\n\\[+ \\dfrac{1}{2}(2x^{2-1}) + 2(1\\cdot x^{1-1})\\]\nWhy: \\(\\frac{d}{dx}(x^{n}) = nx^{n-1}\\) for \\(n = 4, 3, 2, 1\\); note \\(x^{0} = 1\\).",
+              "Step 4: Simplify\n\\[= 3x^{3} + 2x^{2} + x + 2\\]\nWhy: \\(\\frac{3}{4}\\cdot 4 = 3\\), \\(\\frac{2}{3}\\cdot 3 = 2\\), \\(\\frac{1}{2}\\cdot 2 = 1\\), \\(2 \\cdot 1 = 2\\).",
+              "Check:\nTerm by term with \\(\\frac{d}{dx}(ax^{n}) = anx^{n-1}\\): \\(\\frac{3}{4}x^{4} \\to 3x^{3}\\), \\(\\frac{2}{3}x^{3} \\to 2x^{2}\\), \\(\\frac{1}{2}x^{2} \\to x\\), \\(2x \\to 2\\), \\(5 \\to 0\\). The fractions were chosen so that every coefficient becomes a whole number."
+            ],
+            "answer": "\\(\\frac{dy}{dx} = 3x^{3} + 2x^{2} + x + 2\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Find the derivative of \\(y = (x^{2} - 5)(x^{3} + 7)\\) with respect to \\(x\\).",
+            "steps": [
+              "Given: \\(y = (x^{2} - 5)(x^{3} + 7)\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: multiply the brackets out first. Then \\(y\\) is a sum of powers of \\(x\\) and formulas 3 and 4 with the power rule finish the job. (The product rule, formula 5, comes later in this section.)",
+              "Step 1: Multiply out the brackets\nThe book prints: \\(y = (x^{2} + 5)(x^{3} + 7) = x^{5} + 5x^{3} + 7x^{2} + 35\\)\nFor the printed question:\n\\[y = (x^{2} - 5)(x^{3} + 7)\\]\n\\[= x^{5} + 7x^{2} - 5x^{3} - 35\\]\n\\[= x^{5} - 5x^{3} + 7x^{2} - 35\\]\nWhy: multiply each term of the first bracket by each term of the second: \\(x^{2}\\cdot x^{3} = x^{5}\\), \\(x^{2}\\cdot 7 = 7x^{2}\\), \\((-5)x^{3} = -5x^{3}\\), \\((-5)(7) = -35\\).",
+              "Step 2: Differentiate term by term (Formulas 3 and 4)\n\\[\\dfrac{dy}{dx} = \\dfrac{d}{dx}(x^{5}) - 5\\dfrac{d}{dx}(x^{3})\\]\n\\[+ 7\\dfrac{d}{dx}(x^{2}) - \\dfrac{d}{dx}(35)\\]\nWhy: formula 4 splits the sum and difference; formula 3 moves the constants 5 and 7 outside.",
+              "Step 3: Power formula\n\\[= 5x^{5-1} - 5 \\times 3x^{3-1} + 7 \\times 2x^{2-1} - 0\\]\n\\[= 5x^{4} - 15x^{2} + 14x\\]\nWhy: the power rule for each power; the derivative of the constant 35 is 0. The book's final line is \\(5x^{4} + 15x^{2} + 14x\\), the derivative of \\((x^{2} + 5)(x^{3} + 7)\\).",
+              "Check:\nUse the product rule (formula 5, proved below): \\(\\frac{d}{dx}(x^{2} - 5) = 2x\\), \\(\\frac{d}{dx}(x^{3} + 7) = 3x^{2}\\), so\n\\[\\dfrac{dy}{dx} = 2x(x^{3} + 7) + (x^{2} - 5)(3x^{2})\\]\n\\[= 2x^{4} + 14x + 3x^{4} - 15x^{2}\\]\n\\[= 5x^{4} - 15x^{2} + 14x\\]\nBoth methods agree."
+            ],
+            "answer": "\\(\\frac{dy}{dx} = 5x^{4} - 15x^{2} + 14x\\)",
+            "book_errors": [
+              "\\(y = (x^{2} + 5)(x^{3} + 7) = x^{5} + 5x^{3} + 7x^{2} + 35\\)",
+              "\\(5x^{4} + 15x^{2} + 14x\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The question prints \\(y = (x^{2} - 5)(x^{3} + 7)\\), but the book's solution expands \\((x^{2} + 5)(x^{3} + 7) = x^{5} + 5x^{3} + 7x^{2} + 35\\) and gets \\(5x^{4} + 15x^{2} + 14x\\). For the printed question the expansion is \\(x^{5} - 5x^{3} + 7x^{2} - 35\\) and the correct derivative is \\(5x^{4} - 15x^{2} + 14x\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "Find the derivative of \\(y = (2\\sqrt{x} + 2)(x - \\sqrt{x})\\).",
+            "steps": [
+              "Given: \\(y = (2\\sqrt{x} + 2)(x - \\sqrt{x})\\), \\(x > 0\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: simplify \\(y\\) into a difference of two powers of \\(x\\) by factorising, then use formulas 3 and 4 and the power rule. Simplifying first avoids a product.",
+              "Step 1: Factorise each bracket\n\\[y = 2(\\sqrt{x} + 1)\\cdot\\sqrt{x}(\\sqrt{x} - 1)\\]\n\\[= 2\\sqrt{x}(\\sqrt{x} + 1)(\\sqrt{x} - 1)\\]\nWhy: \\(2\\sqrt{x} + 2 = 2(\\sqrt{x} + 1)\\), and since \\(x = \\sqrt{x}\\cdot\\sqrt{x}\\), \\(x - \\sqrt{x} = \\sqrt{x}(\\sqrt{x} - 1)\\).",
+              "Step 2: Difference of squares, then powers\n\\[y = 2\\sqrt{x}(x - 1)\\]\n\\[= 2\\left(x^{\\frac{3}{2}} - x^{\\frac{1}{2}}\\right)\\]\nWhy: \\((a + b)(a - b) = a^{2} - b^{2}\\) gives \\((\\sqrt{x} + 1)(\\sqrt{x} - 1) = x - 1\\); and \\(\\sqrt{x}\\cdot x = x^{\\frac{1}{2}}\\cdot x^{1} = x^{\\frac{3}{2}}\\).",
+              "Step 3: Differentiate (Formulas 3 and 4)\n\\[\\dfrac{dy}{dx} = 2\\left[\\dfrac{d}{dx}x^{\\frac{3}{2}} - \\dfrac{d}{dx}x^{\\frac{1}{2}}\\right]\\]\nWhy: the constant 2 stays outside (formula 3) and the difference is differentiated term by term (formula 4).",
+              "Step 4: Power rule\n\\[= 2\\left[\\dfrac{3}{2}x^{\\frac{3}{2}-1} - \\dfrac{1}{2}x^{\\frac{1}{2}-1}\\right]\\]\n\\[= 3x^{\\frac{1}{2}} - x^{-\\frac{1}{2}}\\]\nWhy: \\(n = \\frac{3}{2}\\) and \\(n = \\frac{1}{2}\\); \\(2\\cdot\\frac{3}{2} = 3\\) and \\(2\\cdot\\frac{1}{2} = 1\\).",
+              "Step 5: Write with roots and one denominator\n\\[= 3\\sqrt{x} - \\dfrac{1}{\\sqrt{x}}\\]\n\\[= \\dfrac{3x - 1}{\\sqrt{x}}\\]\nWhy: \\(x^{-\\frac{1}{2}} = \\frac{1}{\\sqrt{x}}\\) and \\(3\\sqrt{x} = \\frac{3\\sqrt{x}\\cdot\\sqrt{x}}{\\sqrt{x}} = \\frac{3x}{\\sqrt{x}}\\).",
+              "Check:\nAt \\(x = 4\\): the answer gives \\(\\frac{12 - 1}{2} = 5.5\\). From the function, \\(\\frac{y(4.001) - y(3.999)}{0.002} \\approx 5.5000\\). Example 10 below differentiates the same function with the product rule and gets the same result."
+            ],
+            "answer": "\\(\\frac{dy}{dx} = 3\\sqrt{x} - \\frac{1}{\\sqrt{x}} = \\frac{3x - 1}{\\sqrt{x}}\\)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "5. Derivative of a Product (The Product Rule)"
+          },
+          {
+            "type": "paragraph",
+            "text": "If \\(f\\) and \\(g\\) are differentiable at \\(x\\), then \\(fg\\) is also differentiable at \\(x\\) and \\([f(x)g(x)]' = f'(x)g(x) + f(x)g'(x)\\), that is"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{d}{dx}[f(x)g(x)] = \\left[\\dfrac{d}{dx}f(x)\\right]g(x) + f(x)\\left[\\dfrac{d}{dx}g(x)\\right]",
+            "text_alt": "d by d x of f of x times g of x equals the derivative of f times g of x plus f of x times the derivative of g"
+          },
+          {
+            "type": "paragraph",
+            "text": "Proof: Let \\(\\phi(x) = f(x)g(x)\\). Then\n(i) \\(\\phi(x + \\delta x) = f(x + \\delta x)\\,g(x + \\delta x)\\) and\n(ii) \\(\\phi(x + \\delta x) - \\phi(x) = f(x + \\delta x)\\,g(x + \\delta x) - f(x)\\,g(x)\\)\nSubtracting and adding \\(f(x)\\,g(x + \\delta x)\\) in step (ii) gives\n\\[\\phi(x+\\delta x) - \\phi(x)\\]\n\\[= f(x+\\delta x)g(x+\\delta x) - f(x)g(x+\\delta x)\\]\n\\[\\quad + f(x)g(x+\\delta x) - f(x)g(x)\\]\n\\[= [f(x+\\delta x) - f(x)]\\,g(x+\\delta x)\\]\n\\[\\quad + f(x)[g(x+\\delta x) - g(x)]\\]\n(iii) Dividing by \\(\\delta x\\):\n\\[\\dfrac{\\phi(x+\\delta x)-\\phi(x)}{\\delta x} = \\left[\\dfrac{f(x+\\delta x)-f(x)}{\\delta x}\\right]g(x+\\delta x) + f(x)\\left[\\dfrac{g(x+\\delta x)-g(x)}{\\delta x}\\right]\\]\nTaking limit when \\(\\delta x \\to 0\\):\n(iv)\n\\[\\lim_{\\delta x \\to 0}\\dfrac{\\phi(x+\\delta x)-\\phi(x)}{\\delta x}\\]\n\\[= \\lim_{\\delta x \\to 0}\\dfrac{f(x+\\delta x)-f(x)}{\\delta x}\\cdot\\lim_{\\delta x \\to 0}g(x+\\delta x)\\]\n\\[\\quad + \\lim_{\\delta x \\to 0}f(x)\\cdot\\lim_{\\delta x \\to 0}\\dfrac{g(x+\\delta x)-g(x)}{\\delta x}\\]\n(Using limit theorems)\nThus \\(\\phi'(x) = f'(x)\\,g(x) + f(x)\\,g'(x)\\), since \\(\\lim_{\\delta x \\to 0} g(x + \\delta x) = g(x)\\),\nor \\(\\frac{d}{dx}[f(x)\\cdot g(x)] = \\frac{d}{dx}[f(x)]\\cdot g(x) + f(x)\\left[\\frac{d}{dx}g(x)\\right]\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Two ideas make this proof work.\n1. The trick of subtracting and adding the same quantity \\(f(x)g(x + \\delta x)\\): it changes nothing in value, but it splits the change of the product into \\\"change of \\(f\\)\\\" and \\\"change of \\(g\\)\\\" pieces.\n2. \\(\\lim_{\\delta x \\to 0} g(x + \\delta x) = g(x)\\) because \\(g\\) is differentiable, and a differentiable function is continuous (13.5).\nMemory line: \\\"first's derivative times second, plus first times second's derivative\\\".\nExample of our own: \\(\\frac{d}{dx}[x^{2}(x + 1)] = 2x(x + 1) + x^{2}(1) = 3x^{2} + 2x\\); multiplying out first, \\(\\frac{d}{dx}(x^{3} + x^{2}) = 3x^{2} + 2x\\) as well."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "Find derivative of \\(y = (2\\sqrt{x} + 2)(x - \\sqrt{x})\\) with respect to \\(x\\).",
+            "steps": [
+              "Given: \\(y = (2\\sqrt{x} + 2)(x - \\sqrt{x})\\), \\(x > 0\\).\nTo find: \\(\\frac{dy}{dx}\\) (the same function as Example 9, now by the product rule).\nMethod: \\(y\\) is a product of two functions, so formula 5 fits. First take the common factor 2 out of the first bracket (formula 3) to keep the numbers small.",
+              "Step 1: Take out the constant\n\\[y = 2(\\sqrt{x} + 1)(x - \\sqrt{x})\\]\n\\[\\dfrac{dy}{dx} = 2\\dfrac{d}{dx}\\left[(\\sqrt{x} + 1)(x - \\sqrt{x})\\right]\\]\nWhy: \\(2\\sqrt{x} + 2 = 2(\\sqrt{x} + 1)\\), and by formula 3 the constant 2 stays outside the derivative.",
+              "Step 2: Apply the product rule\n\\[= 2\\Big[\\Big(\\dfrac{d}{dx}(\\sqrt{x} + 1)\\Big)(x - \\sqrt{x})\\]\n\\[\\quad + (\\sqrt{x} + 1)\\dfrac{d}{dx}(x - \\sqrt{x})\\Big]\\]\nWhy: formula 5 with \\(f(x) = \\sqrt{x} + 1\\) and \\(g(x) = x - \\sqrt{x}\\).",
+              "Step 3: Differentiate the two pieces\n\\[\\dfrac{d}{dx}(\\sqrt{x} + 1) = \\dfrac{1}{2}x^{\\frac{1}{2}-1} + 0 = \\dfrac{1}{2\\sqrt{x}}\\]\n\\[\\dfrac{d}{dx}(x - \\sqrt{x}) = 1 - \\dfrac{1}{2}x^{\\frac{1}{2}-1} = 1 - \\dfrac{1}{2\\sqrt{x}}\\]\nWhy: \\(\\sqrt{x} = x^{\\frac{1}{2}}\\), the power rule gives \\(\\frac{1}{2}x^{-\\frac{1}{2}} = \\frac{1}{2\\sqrt{x}}\\), and the derivative of the constant 1 is 0.",
+              "Step 4: Substitute and make one fraction in the second bracket\n\\[= 2\\Big[\\dfrac{x - \\sqrt{x}}{2\\sqrt{x}} + (\\sqrt{x} + 1)\\Big(\\dfrac{2\\sqrt{x} - 1}{2\\sqrt{x}}\\Big)\\Big]\\]\nThe book prints this line as \\(2\\left[\\frac{x-\\sqrt{x}}{2\\sqrt{x}} + \\sqrt{x}+1)\\left(\\frac{2\\sqrt{x}-1}{2\\sqrt{x}}\\right)\\right]\\) (the opening bracket before \\(\\sqrt{x} + 1\\) is missing).\nWhy: \\(1 - \\frac{1}{2\\sqrt{x}} = \\frac{2\\sqrt{x} - 1}{2\\sqrt{x}}\\).",
+              "Step 5: Take the common denominator outside\n\\[= \\dfrac{1}{\\sqrt{x}}\\left[x - \\sqrt{x} + (\\sqrt{x} + 1)(2\\sqrt{x} - 1)\\right]\\]\n\\[= \\dfrac{1}{\\sqrt{x}}\\left[x - \\sqrt{x} + 2x - \\sqrt{x} + 2\\sqrt{x} - 1\\right]\\]\nWhy: both terms have denominator \\(2\\sqrt{x}\\), and \\(2 \\times \\frac{1}{2\\sqrt{x}} = \\frac{1}{\\sqrt{x}}\\). Then \\((\\sqrt{x} + 1)(2\\sqrt{x} - 1) = 2x - \\sqrt{x} + 2\\sqrt{x} - 1\\).",
+              "Step 6: Collect like terms\n\\[= \\dfrac{3x - 1}{\\sqrt{x}}\\]\nWhy: \\(x + 2x = 3x\\) and \\(-\\sqrt{x} - \\sqrt{x} + 2\\sqrt{x} = 0\\).",
+              "Check:\nExample 9 simplified the same function first and also obtained \\(\\frac{3x - 1}{\\sqrt{x}}\\). Two different methods, one answer."
+            ],
+            "answer": "\\(\\frac{dy}{dx} = \\frac{3x - 1}{\\sqrt{x}}\\)",
+            "book_errors": [
+              "\\(2\\left[\\frac{x-\\sqrt{x}}{2\\sqrt{x}} + \\sqrt{x}+1)\\left(\\frac{2\\sqrt{x}-1}{2\\sqrt{x}}\\right)\\right]\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the fifth line of the solution the book prints \\(2\\left[\\frac{x-\\sqrt{x}}{2\\sqrt{x}} + \\sqrt{x}+1)\\left(\\frac{2\\sqrt{x}-1}{2\\sqrt{x}}\\right)\\right]\\), with one opening bracket missing. It should read \\(2\\left[\\frac{x-\\sqrt{x}}{2\\sqrt{x}} + (\\sqrt{x}+1)\\left(\\frac{2\\sqrt{x}-1}{2\\sqrt{x}}\\right)\\right]\\). The final answer \\(\\frac{3x - 1}{\\sqrt{x}}\\) is correct."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "6. Derivative of a Quotient (The Quotient Rule)"
+          },
+          {
+            "type": "paragraph",
+            "text": "If \\(f\\) and \\(g\\) are differentiable at \\(x\\) and \\(g(x) \\ne 0\\) for any \\(x \\in D(g)\\), then \\(\\frac{f}{g}\\) is differentiable at \\(x\\) and"
+          },
+          {
+            "type": "equation",
+            "latex": "\\left(\\dfrac{f(x)}{g(x)}\\right)' = \\dfrac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^{2}}",
+            "text_alt": "the derivative of f of x over g of x equals f prime of x times g of x minus f of x times g prime of x, all over g of x squared"
+          },
+          {
+            "type": "paragraph",
+            "text": "that is, \\(\\frac{d}{dx}\\left[\\frac{f(x)}{g(x)}\\right] = \\frac{\\left[\\frac{d}{dx}f(x)\\right]g(x) - f(x)\\left[\\frac{d}{dx}g(x)\\right]}{[g(x)]^{2}}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Proof: Let \\(\\phi(x) = \\frac{f(x)}{g(x)}\\). Then\n(i) \\(\\phi(x + \\delta x) = \\frac{f(x + \\delta x)}{g(x + \\delta x)}\\) and\n(ii)\n\\[\\phi(x+\\delta x) - \\phi(x) = \\dfrac{f(x+\\delta x)}{g(x+\\delta x)} - \\dfrac{f(x)}{g(x)}\\]\n\\[= \\dfrac{f(x+\\delta x)g(x) - f(x)g(x+\\delta x)}{g(x)\\,g(x+\\delta x)}\\]\nSubtracting and adding \\(f(x)g(x)\\) in the numerator of step (ii) gives\n\\[\\phi(x+\\delta x) - \\phi(x)\\]\n\\[= \\dfrac{f(x+\\delta x)g(x) - f(x)g(x) - f(x)g(x+\\delta x) + f(x)g(x)}{g(x)\\,g(x+\\delta x)}\\]\n\\[= \\dfrac{1}{g(x)\\,g(x+\\delta x)}\\Big[\\big(f(x+\\delta x) - f(x)\\big)g(x) - f(x)\\big(g(x+\\delta x) - g(x)\\big)\\Big]\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "(iii) Dividing by \\(\\delta x\\):\n\\[\\dfrac{\\phi(x+\\delta x)-\\phi(x)}{\\delta x}\\]\n\\[= \\dfrac{1}{g(x)\\,g(x+\\delta x)}\\Big[\\dfrac{f(x+\\delta x)-f(x)}{\\delta x}\\cdot g(x) - f(x)\\cdot\\dfrac{g(x+\\delta x-g(x)}{\\delta x}\\Big]\\]\nTaking limit when \\(\\delta x \\to 0\\):\n(iv) \\(\\lim_{\\delta x \\to 0}\\frac{\\phi(x+\\delta x)-\\phi(x)}{\\delta x}\\) is the limit of the right side of (iii) (the book repeats the same misplaced bracket in this line).\nUsing limit theorems, we have\n\\[\\phi'(x) = \\dfrac{1}{g(x)\\cdot g(x)}[f'(x)g(x) - f(x)g'(x)]\\]\nsince \\(\\lim_{\\delta x \\to 0} g(x + \\delta x) = g(x)\\).\nThus",
+            "book_errors": [
+              "\\[= \\dfrac{1}{g(x)\\,g(x+\\delta x)}\\Big[\\dfrac{f(x+\\delta x)-f(x)}{\\delta x}\\cdot g(x) - f(x)\\cdot\\dfrac{g(x+\\delta x-g(x)}{\\delta x}\\Big]\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In steps (iii) and (iv) of the proof the book prints the last fraction as \\(\\frac{g(x+\\delta x-g(x)}{\\delta x}\\), with the closing bracket in the wrong place. It should be \\(\\frac{g(x+\\delta x)-g(x)}{\\delta x}\\), the difference quotient of \\(g\\), whose limit is \\(g'(x)\\)."
+          },
+          {
+            "type": "equation",
+            "latex": "\\left(\\dfrac{f(x)}{g(x)}\\right)' = \\dfrac{f'(x)\\,g(x) - f(x)\\,g'(x)}{[g(x)]^{2}}",
+            "text_alt": "the derivative of f over g equals f prime g minus f g prime, over g squared"
+          },
+          {
+            "type": "paragraph",
+            "text": "or \\(\\frac{d}{dx}\\left(\\frac{f(x)}{g(x)}\\right) = \\frac{\\left[\\frac{d}{dx}(f(x))\\right]g(x) - f(x)\\left[\\frac{d}{dx}(g(x))\\right]}{[g(x)]^{2}}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Memory line: \\\"(bottom times derivative of top) minus (top times derivative of bottom), all over bottom squared\\\".\nUnlike the product rule, the ORDER matters here because of the minus sign: \\(f'g\\) comes first.\nExample of our own: \\(\\frac{d}{dx}\\left(\\frac{1}{x}\\right) = \\frac{0\\cdot x - 1\\cdot 1}{x^{2}} = -\\frac{1}{x^{2}}\\), which agrees with the power rule for \\(x^{-1}\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "Differentiate \\(\\frac{2x^{3} - 3x^{2} + 5}{x^{2} + 1}\\) with respect to \\(x\\).",
+            "steps": [
+              "Given: \\(\\phi(x) = \\frac{2x^{3} - 3x^{2} + 5}{x^{2} + 1}\\).\nTo find: \\(\\phi'(x)\\).\nMethod: \\(\\phi\\) is a quotient, so formula 6 fits. The denominator \\(x^{2} + 1 \\ge 1\\) is never zero, so the rule holds for every real \\(x\\).",
+              "Step 1: Name the numerator and denominator\nThe book prints: \\(f(x) = 2x^{2} - 3x^{2} + 5\\)\nThe numerator of the question is\n\\[f(x) = 2x^{3} - 3x^{2} + 5\\]\n\\[g(x) = x^{2} + 1\\]\nWhy: the quotient rule needs \\(f\\), \\(g\\) and their derivatives separately.",
+              "Step 2: Derivative of the numerator\n\\[f'(x) = \\dfrac{d}{dx}[2x^{3} - 3x^{2} + 5]\\]\n\\[= 2(3x^{2}) - 3(2x) + 0 = 6x^{2} - 6x\\]\nWhy: formulas 1, 3 and 4 with the power rule.",
+              "Step 3: Derivative of the denominator\n\\[g'(x) = \\dfrac{d}{dx}[x^{2} + 1] = 2x + 0 = 2x\\]\nWhy: the power rule for \\(x^{2}\\); the constant 1 gives 0.",
+              "Step 4: Apply the quotient formula\n\\[\\phi'(x) = \\dfrac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^{2}}\\]\n\\[= \\dfrac{(6x^{2} - 6x)(x^{2} + 1) - (2x^{3} - 3x^{2} + 5)(2x)}{(x^{2} + 1)^{2}}\\]\nWhy: substitute the four pieces found in Steps 1 to 3, keeping the second product in brackets because of the minus sign.",
+              "Step 5: Multiply out the two products\n\\[(6x^{2} - 6x)(x^{2} + 1) = 6x^{4} - 6x^{3} + 6x^{2} - 6x\\]\n\\[(2x^{3} - 3x^{2} + 5)(2x) = 4x^{4} - 6x^{3} + 10x\\]\n\\[\\phi'(x) = \\dfrac{6x^{4} - 6x^{3} + 6x^{2} - 6x - (4x^{4} - 6x^{3} + 10x)}{(x^{2} + 1)^{2}}\\]\nWhy: each term of the first bracket multiplies each term of the second.",
+              "Step 6: Remove the bracket and collect like terms\n\\[= \\dfrac{6x^{4} - 6x^{3} + 6x^{2} - 6x - 4x^{4} + 6x^{3} - 10x}{(x^{2} + 1)^{2}}\\]\n\\[= \\dfrac{2x^{4} + 6x^{2} - 16x}{(x^{2} + 1)^{2}}\\]\nThe book prints this numerator as \\(6x^{4} - 6x^{3} + 6x^{2} - 6x - 4x^{4} + 6x^{3} - 10x)\\) with a stray closing bracket.\nWhy: the minus sign in front of the bracket changes every sign inside it; then \\(6x^{4} - 4x^{4} = 2x^{4}\\), \\(-6x^{3} + 6x^{3} = 0\\), \\(-6x - 10x = -16x\\).",
+              "Check:\nAt \\(x = 1\\): the answer gives \\(\\frac{2 + 6 - 16}{4} = -2\\). From the function, \\(\\frac{\\phi(1.001) - \\phi(0.999)}{0.002} \\approx -2.0000\\). They agree."
+            ],
+            "answer": "\\(\\frac{d}{dx}\\left[\\frac{2x^{3} - 3x^{2} + 5}{x^{2} + 1}\\right] = \\frac{2x^{4} + 6x^{2} - 16x}{(x^{2} + 1)^{2}}\\)",
+            "book_errors": [
+              "\\(f(x) = 2x^{2} - 3x^{2} + 5\\)",
+              "\\(6x^{4} - 6x^{3} + 6x^{2} - 6x - 4x^{4} + 6x^{3} - 10x)\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The solution prints \\(f(x) = 2x^{2} - 3x^{2} + 5\\); the numerator of the question is \\(f(x) = 2x^{3} - 3x^{2} + 5\\) (the book uses \\(2x^{3}\\) in the rest of the working). In the third line of the working the numerator ends with a stray \\\")\\\" after \\(-10x\\). The final answer \\(\\frac{2x^{4} + 6x^{2} - 16x}{(x^{2} + 1)^{2}}\\) is correct."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\frac{d}{dx}(c) = 0\\) and \\(\\frac{d}{dx}(x^{n}) = nx^{n-1}\\).\n2. Formula 3: \\(\\frac{d}{dx}[cf(x)] = c\\frac{d}{dx}[f(x)]\\): constants wait outside.\n3. Formula 4: \\((f \\pm g)' = f' \\pm g'\\): differentiate term by term, for any number of terms.\n4. Formula 5 (product): \\((fg)' = f'g + fg'\\).\n5. Formula 6 (quotient): \\(\\left(\\frac{f}{g}\\right)' = \\frac{f'g - fg'}{g^{2}}\\), \\(g(x) \\ne 0\\).\n6. Simplifying first (Examples 8, 9) or using the product rule (Example 10) gives the same answer; choose the shorter way.\n7. Write roots as powers before differentiating: \\(\\sqrt{x} = x^{\\frac{1}{2}}\\), \\(\\frac{1}{\\sqrt{x}} = x^{-\\frac{1}{2}}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. \\((fg)' = f'g'\\) is WRONG: e.g. \\(\\frac{d}{dx}(x\\cdot x) = 2x\\), but \\(1 \\cdot 1 = 1\\).\n2. \\(\\left(\\frac{f}{g}\\right)' = \\frac{f'}{g'}\\) is WRONG; also writing \\(fg' - f'g\\) in the numerator flips the sign of the answer.\n3. Forgetting that the derivative of a constant term is 0 (or writing it as the constant itself).\n4. Losing the minus sign in front of the second product in the quotient rule: put that product in brackets first.\n5. Power rule slips with fractions: \\(\\frac{1}{2} - 1 = -\\frac{1}{2}\\), not \\(\\frac{1}{2}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

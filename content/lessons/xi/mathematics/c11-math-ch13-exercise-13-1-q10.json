@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-1-Q10",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-1-q10",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 253,
+          "pdf_to": 253,
+          "note": "Exercise 13.1, Question 10 (book page 248, PDF 253); answer key PDF 310-311. Key's 10(b) 13/3 km/h is wrong; correct 13 km/h."
+        }
+      ],
+      "title": "Question 10",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10(a)",
+            "prompt": "10 (a) The position of a car after \\(t\\) hours is given by: \\(s(t) = 2t^3 - 3t^2 + t\\) (in kilometers). Find the average velocity over the interval \\([1, 4]\\).",
+            "explanation": "Average velocity = change in position divided by change in time.\nPlan: find \\(s(4)\\) and \\(s(1)\\), then \\(\\frac{s(4) - s(1)}{4 - 1}\\). No limit is needed here.",
+            "steps": [
+              "Given: \\(s(t) = 2t^3 - 3t^2 + t\\) km, interval \\(t = 1\\) to \\(t = 4\\) hours.\nTo find: the average velocity.\nMethod: \\(v_{\\text{avg}} = \\frac{s(t_2) - s(t_1)}{t_2 - t_1}\\) (Section 13.2.1), the slope of the secant line.",
+              "Positions at the two ends\n\\[s(4) = 2(64) - 3(16) + 4 = 128 - 48 + 4 = 84\\]\n\\[s(1) = 2 - 3 + 1 = 0\\]\nWhy: Substitute \\(t = 4\\) and \\(t = 1\\) into \\(s(t)\\).",
+              "Average velocity\n\\[v_{\\text{avg}} = \\dfrac{s(4) - s(1)}{4 - 1}\\]\n\\[= \\dfrac{84 - 0}{3} = 28\\]\nWhy: Change in position over change in time; km per hour.",
+              "Check\n\\[28 \\times 3 = 84 \\;\\checkmark\\]\nWhy: At \\(28\\) km/h for \\(3\\) hours the car covers the \\(84\\) km change."
+            ],
+            "final_answer": "\\(v_{\\text{avg}} = 28\\) km/h"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10(b)",
+            "prompt": "10 (b) The position of a car after \\(t\\) hours is given by: \\(s(t) = 2t^3 - 3t^2 + t\\) (in kilometers). Find the instantaneous velocity at \\(t = 2\\).",
+            "explanation": "Instantaneous velocity is the derivative \\(s'(2)\\).\nPlan: first principles at \\(t = 2\\): \\(s(2 + \\delta t) - s(2)\\), divide by \\(\\delta t\\), take the limit.",
+            "steps": [
+              "Given: \\(s(t) = 2t^3 - 3t^2 + t\\), \\(t_1 = 2\\).\nTo find: \\(v(2) = s'(2)\\).\nMethod: instantaneous velocity at \\(t = t_1\\) is the derivative \\(v(t_1) = \\lim_{\\delta t \\to 0} \\frac{s(t_1 + \\delta t) - s(t_1)}{\\delta t}\\) (Section 13.2.1), found here by first principles.",
+              "Find \\(s(2)\\) and \\(s(2 + \\delta t)\\)\n\\[s(2) = 16 - 12 + 2 = 6\\]\n\\[s(2 + \\delta t) = 2(2 + \\delta t)^3 - 3(2 + \\delta t)^2 + (2 + \\delta t)\\]\n\\[= 16 + 24\\,\\delta t + 12(\\delta t)^2 + 2(\\delta t)^3\\]\n\\[\\quad - 12 - 12\\,\\delta t - 3(\\delta t)^2 + 2 + \\delta t\\]\n\\[= 6 + 13\\,\\delta t + 9(\\delta t)^2 + 2(\\delta t)^3\\]\nWhy: \\((2 + \\delta t)^3 = 8 + 12\\,\\delta t + 6(\\delta t)^2 + (\\delta t)^3\\) and \\((2 + \\delta t)^2 = 4 + 4\\,\\delta t + (\\delta t)^2\\).",
+              "Subtract and divide by \\(\\delta t\\)\n\\[s(2 + \\delta t) - s(2) = 13\\,\\delta t + 9(\\delta t)^2 + 2(\\delta t)^3\\]\n\\[\\dfrac{s(2 + \\delta t) - s(2)}{\\delta t} = 13 + 9\\,\\delta t + 2(\\delta t)^2\\]\nWhy: The \\(6\\) cancels; \\(\\delta t \\neq 0\\) yet.",
+              "Take the limit\n\\[v(2) = \\lim_{\\delta t \\to 0}\\big(13 + 9\\,\\delta t + 2(\\delta t)^2\\big)\\]\n\\[= 13\\]\nWhy: Put \\(\\delta t = 0\\).",
+              "Check\n\\[s'(t) = 6t^2 - 6t + 1\\]\n\\[s'(2) = 24 - 12 + 1 = 13 \\;\\checkmark\\]\nWhy: The general derivative (by the same limit) at \\(t = 2\\) gives \\(13\\)."
+            ],
+            "final_answer": "\\(v(2) = 13\\) km/h"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(\\frac{13}{3}\\) km/h for part (b). This is wrong: \\(s'(2) = 6(4) - 6(2) + 1 = 13\\), so the instantaneous velocity is \\(13\\) km/h. (Part (a), \\(28\\) km/h, is right.)"
+          }
+        ]
+      }
+    }
+  ]
+}

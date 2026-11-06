@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-1-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-1-q4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 253,
+          "pdf_to": 253,
+          "note": "Exercise 13.1, Question 4 (book page 248, PDF 253); answer key PDF 310-311."
+        }
+      ],
+      "title": "Question 4",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) Find from first principle, the derivatives of the following expression w.r.t. their respective independent variables: \\((3x - 2)^{-2}\\).",
+            "explanation": "A negative power, by first principles.\nWe must find \\(f'(x)\\) for \\(f(x) = (3x - 2)^{-2} = \\frac{1}{(3x - 2)^2}\\).\nPlan: join the two fractions, factorise the top as a difference of squares, cancel \\(\\delta x\\), take the limit.",
+            "steps": [
+              "Given: \\(f(x) = (3x - 2)^{-2} = \\frac{1}{(3x - 2)^2}\\).\nTo find: \\(f'(x)\\) from first principles.\nMethod: derivative by definition (first principles): \\(f'(x) = \\lim_{\\delta x \\to 0} \\frac{f(x + \\delta x) - f(x)}{\\delta x}\\). Four steps: (I) write \\(f(x + \\delta x)\\); (II) subtract \\(f(x)\\); (III) divide by \\(\\delta x\\); (IV) let \\(\\delta x \\to 0\\).",
+              "Steps I and II: one fraction\n\\[f(x + \\delta x) = \\dfrac{1}{(3x + 3\\,\\delta x - 2)^2}\\]\n\\[f(x + \\delta x) - f(x)\\]\n\\[= \\dfrac{(3x - 2)^2 - (3x + 3\\,\\delta x - 2)^2}{(3x + 3\\,\\delta x - 2)^2\\,(3x - 2)^2}\\]\nWhy: \\(3(x + \\delta x) - 2 = 3x + 3\\,\\delta x - 2\\); common denominator.",
+              "Factorise the top\n\\[A = 3x - 2,\\ B = 3x + 3\\,\\delta x - 2\\]\n\\[A - B = -3\\,\\delta x\\]\n\\[A + B = 6x - 4 + 3\\,\\delta x\\]\n\\[A^2 - B^2 = -3\\,\\delta x\\,(6x - 4 + 3\\,\\delta x)\\]\nWhy: \\(A^2 - B^2 = (A - B)(A + B)\\).",
+              "Step III: divide by \\(\\delta x\\)\n\\[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x}\\]\n\\[= \\dfrac{-3\\,(6x - 4 + 3\\,\\delta x)}{(3x + 3\\,\\delta x - 2)^2\\,(3x - 2)^2}\\]\nWhy: \\(\\delta x \\neq 0\\) yet, so it cancels.",
+              "Step IV: take the limit\n\\[f'(x) = \\dfrac{-3(6x - 4)}{(3x - 2)^2(3x - 2)^2}\\]\n\\[= \\dfrac{-3 \\cdot 2(3x - 2)}{(3x - 2)^4}\\]\n\\[= \\dfrac{-6}{(3x - 2)^3}\\]\nWhy: Put \\(\\delta x = 0\\); \\(6x - 4 = 2(3x - 2)\\); cancel one \\((3x - 2)\\).",
+              "Check with the power rule of Section 13.6 (used here only to confirm, not as the method)\n\\[\\dfrac{d}{dx}(3x - 2)^{-2} = -2(3x - 2)^{-3} \\cdot 3\\]\n\\[= \\dfrac{-6}{(3x - 2)^3} \\;\\checkmark\\]\nWhy: The chain-rule form \\(n(ax + b)^{n-1} \\cdot a\\) gives the same."
+            ],
+            "final_answer": "\\(\\dfrac{d}{dx}(3x - 2)^{-2} = \\dfrac{-6}{(3x - 2)^3}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) Find from first principle, the derivatives of the following expression w.r.t. their respective independent variables: \\((2x + 3)^5\\).",
+            "explanation": "A fifth power, by first principles.\nWe must find \\(f'(x)\\) for \\(f(x) = (2x + 3)^5\\).\nPlan: write \\(u = 2x + 3\\), \\(k = 2\\,\\delta x\\); expand \\((u + k)^5\\) by the binomial theorem, subtract, divide, take the limit.",
+            "steps": [
+              "Given: \\(f(x) = (2x + 3)^5\\).\nTo find: \\(f'(x)\\) from first principles.\nMethod: derivative by definition (first principles): \\(f'(x) = \\lim_{\\delta x \\to 0} \\frac{f(x + \\delta x) - f(x)}{\\delta x}\\). Four steps: (I) write \\(f(x + \\delta x)\\); (II) subtract \\(f(x)\\); (III) divide by \\(\\delta x\\); (IV) let \\(\\delta x \\to 0\\). Binomial theorem: \\((u + k)^n = u^n + n u^{n-1}k + \\binom{n}{2}u^{n-2}k^2 + \\dots + k^n\\); every term after the first has \\(k\\) at least once.",
+              "Step I: find \\(f(x + \\delta x)\\)\n\\[f(x + \\delta x) = (2x + 2\\,\\delta x + 3)^5\\]\n\\[= (u + k)^5,\\quad u = 2x + 3,\\ k = 2\\,\\delta x\\]\nWhy: \\(2(x + \\delta x) + 3 = (2x + 3) + 2\\,\\delta x\\).",
+              "Step II: expand and subtract\n\\[(u + k)^5 = u^5 + 5u^4k + 10u^3k^2 + 10u^2k^3 + 5uk^4 + k^5\\]\n\\[f(x + \\delta x) - f(x) = 5u^4k + 10u^3k^2 + 10u^2k^3 + 5uk^4 + k^5\\]\nWhy: Binomial coefficients for \\(n = 5\\): \\(1, 5, 10, 10, 5, 1\\); \\(u^5 = f(x)\\) cancels.",
+              "Step III: divide by \\(\\delta x\\)\n\\[k = 2\\,\\delta x \\Rightarrow \\dfrac{k}{\\delta x} = 2\\]\n\\[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x} = 2\\big(5u^4 + 10u^3k + 10u^2k^2 + 5uk^3 + k^4\\big)\\]\nWhy: Take one \\(k\\) out of every term; \\(k/\\delta x = 2\\).",
+              "Step IV: take the limit\n\\[\\delta x \\to 0 \\Rightarrow k \\to 0\\]\n\\[f'(x) = 2 \\cdot 5u^4 = 10u^4\\]\n\\[= 10(2x + 3)^4\\]\nWhy: Every term containing \\(k\\) goes to \\(0\\).",
+              "Check with the power rule of Section 13.6 (used here only to confirm, not as the method)\n\\[\\dfrac{d}{dx}(2x + 3)^5 = 5(2x + 3)^4 \\cdot 2 = 10(2x + 3)^4 \\;\\checkmark\\]\nWhy: Same answer; it matches the key."
+            ],
+            "final_answer": "\\(\\dfrac{d}{dx}(2x + 3)^5 = 10(2x + 3)^4\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iii)",
+            "prompt": "4 (iii) Find from first principle, the derivatives of the following expression w.r.t. their respective independent variables: \\((ax + b)^7\\).",
+            "explanation": "A seventh power with letters \\(a\\), \\(b\\) (constants), by first principles.\nPlan: \\(u = ax + b\\), \\(k = a\\,\\delta x\\); binomial theorem, subtract, divide, limit.",
+            "steps": [
+              "Given: \\(f(x) = (ax + b)^7\\), \\(a\\), \\(b\\) constants.\nTo find: \\(f'(x)\\) from first principles.\nMethod: derivative by definition (first principles): \\(f'(x) = \\lim_{\\delta x \\to 0} \\frac{f(x + \\delta x) - f(x)}{\\delta x}\\). Four steps: (I) write \\(f(x + \\delta x)\\); (II) subtract \\(f(x)\\); (III) divide by \\(\\delta x\\); (IV) let \\(\\delta x \\to 0\\). Binomial theorem: \\((u + k)^n = u^n + n u^{n-1}k + \\binom{n}{2}u^{n-2}k^2 + \\dots + k^n\\); every term after the first has \\(k\\) at least once.",
+              "Step I: find \\(f(x + \\delta x)\\)\n\\[f(x + \\delta x) = (ax + a\\,\\delta x + b)^7\\]\n\\[= (u + k)^7,\\quad u = ax + b,\\ k = a\\,\\delta x\\]\nWhy: \\(a(x + \\delta x) + b = (ax + b) + a\\,\\delta x\\).",
+              "Step II: expand and subtract\n\\[(u + k)^7 = u^7 + 7u^6k + 21u^5k^2 + \\dots + k^7\\]\n\\[f(x + \\delta x) - f(x) = 7u^6k + 21u^5k^2 + \\dots + k^7\\]\nWhy: Binomial theorem with \\(n = 7\\); \\(u^7 = f(x)\\) cancels.",
+              "Step III: divide by \\(\\delta x\\)\n\\[\\dfrac{k}{\\delta x} = a\\]\n\\[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x} = a\\big(7u^6 + 21u^5k + \\dots + k^6\\big)\\]\nWhy: Take one \\(k\\) out of every term; \\(k/\\delta x = a\\).",
+              "Step IV: take the limit\n\\[\\delta x \\to 0 \\Rightarrow k \\to 0\\]\n\\[f'(x) = a \\cdot 7u^6 = 7a(ax + b)^6\\]\nWhy: All terms with \\(k\\) vanish.",
+              "Check with the power rule of Section 13.6 (used here only to confirm, not as the method)\n\\[\\dfrac{d}{dx}(ax + b)^7 = 7(ax + b)^6 \\cdot a \\;\\checkmark\\]\nWhy: Same answer; it matches the key."
+            ],
+            "final_answer": "\\(\\dfrac{d}{dx}(ax + b)^7 = 7a(ax + b)^6\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

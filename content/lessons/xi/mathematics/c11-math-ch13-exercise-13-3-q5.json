@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-3-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-3-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 262,
+          "pdf_to": 262,
+          "note": "Exercise 13.3, Question 5 (a)-(c): velocity, acceleration and rest times for s(t) = 5t^3 - 12t^2 + 8t (book p.257). Answer key (PDF 311) prints it as number 11."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(a)",
+            "prompt": "5 (a) The position of a particle moving along a line is given by \\(s(t) = 5t^3 - 12t^2 + 8t\\), where \\(s(t)\\) is the position in meters and \\(t\\) is the time in seconds. Determine the velocity of the particle at \\(t = 4\\) seconds.",
+            "explanation": "Velocity is the derivative of position.\nWe must find \\(v(4)\\).\nPlan: differentiate \\(s(t)\\), substitute \\(t = 4\\).",
+            "steps": [
+              "Given: \\(s(t) = 5t^3 - 12t^2 + 8t\\) (metres, seconds).\nTo find: \\(v(4)\\).\nMethod: \\(v(t) = s'(t)\\) (section 13.2.1, Example 13).",
+              "Differentiate\n\\[v(t) = 15t^2 - 24t + 8\\]\nWhy: Power rule term by term.",
+              "Substitute \\(t = 4\\)\n\\[v(4) = 15(16) - 24(4) + 8\\]\n\\[= 240 - 96 + 8 = 152\\]\nWhy: Square first: \\(4^2 = 16\\).",
+              "Check\n\\[\\frac{s(4.001) - s(3.999)}{0.002} \\approx 152.0\\]\nWhy: The average velocity over a tiny interval around \\(t = 4\\) agrees."
+            ],
+            "final_answer": "\\(v(4) = 152\\ \\text{m/s}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(b)",
+            "prompt": "5 (b) The position of a particle moving along a line is given by \\(s(t) = 5t^3 - 12t^2 + 8t\\), where \\(s(t)\\) is the position in meters and \\(t\\) is the time in seconds. Find the acceleration at \\(t = 4\\) seconds.",
+            "explanation": "Acceleration is the rate of change of velocity.\nWe must find \\(a(4)\\).\nPlan: differentiate \\(v(t)\\), substitute \\(t = 4\\).",
+            "steps": [
+              "Given: \\(v(t) = 15t^2 - 24t + 8\\) (part (a)).\nTo find: \\(a(4)\\).\nMethod: \\(a(t) = v'(t)\\), as in Example 13.",
+              "Differentiate the velocity\n\\[a(t) = 30t - 24\\]\nWhy: Power rule; the constant 8 gives 0.",
+              "Substitute \\(t = 4\\)\n\\[a(4) = 120 - 24 = 96\\]\nWhy: Units are metres per second per second."
+            ],
+            "final_answer": "\\(a(4) = 96\\ \\text{m/s}^2\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(c)",
+            "prompt": "5 (c) The position of a particle moving along a line is given by \\(s(t) = 5t^3 - 12t^2 + 8t\\), where \\(s(t)\\) is the position in meters and \\(t\\) is the time in seconds. When is the particle at rest?",
+            "explanation": "\"At rest\" means the velocity is zero.\nWe must solve \\(v(t) = 0\\).\nPlan: solve the quadratic \\(15t^2 - 24t + 8 = 0\\) by the quadratic formula.",
+            "steps": [
+              "Given: \\(v(t) = 15t^2 - 24t + 8\\).\nTo find: the times when the particle is at rest.\nMethod: At rest \\(\\Leftrightarrow v(t) = 0\\); the quadratic does not factorise, so use \\(t = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}\\).",
+              "Discriminant\n\\[b^2 - 4ac = 576 - 480 = 96\\]\nWhy: \\(a = 15\\), \\(b = -24\\), \\(c = 8\\): \\((-24)^2 = 576\\), \\(4 \\times 15 \\times 8 = 480\\).",
+              "Quadratic formula\n\\[t = \\dfrac{24 \\pm \\sqrt{96}}{30} = \\dfrac{12 \\pm 2\\sqrt{6}}{15}\\]\nWhy: \\(\\sqrt{96} = 4\\sqrt{6}\\); divide top and bottom by 2.",
+              "Decimal values\n\\[t = \\dfrac{12 - 4.899}{15} \\approx 0.47\\ \\text{s}\\]\n\\[t = \\dfrac{12 + 4.899}{15} \\approx 1.13\\ \\text{s}\\]\nWhy: \\(2\\sqrt{6} \\approx 4.899\\); both times are positive, so both are valid.",
+              "Check\n\\[v(0.4734) \\approx 3.36 - 11.36 + 8 \\approx 0\\]\n\\[v(1.1266) \\approx 19.04 - 27.04 + 8 \\approx 0\\]\nWhy: The velocity is (almost) zero at both times."
+            ],
+            "final_answer": "At rest at \\(t = \\frac{12 \\pm 2\\sqrt{6}}{15}\\), i.e. \\(t \\approx 0.47\\ \\text{s}\\) and \\(t \\approx 1.13\\ \\text{s}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key numbers the answers of Exercise 13.3 as 4, 5, 6, 8, 11, 12, 13, 14 instead of 1 to 8. The answer to this question is printed under number 11: (a) 152 m/s, (b) 96 m/s\\(^2\\), (c) \\(t = 0.47\\) sec and \\(t = 1.13\\) sec, all correct."
+          }
+        ]
+      }
+    }
+  ]
+}

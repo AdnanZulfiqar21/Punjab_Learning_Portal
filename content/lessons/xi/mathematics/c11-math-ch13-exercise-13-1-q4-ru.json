@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-1-Q4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-1-q4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 253,
+          "pdf_to": 253,
+          "note": "Exercise 13.1, Question 4 (book page 248, PDF 253); answer key PDF 310-311."
+        }
+      ],
+      "title": "Question 4 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH13-EXERCISE-13-1-Q4",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) Find from first principle, the derivatives of the following expression w.r.t. their respective independent variables: \\((3x - 2)^{-2}\\).",
+            "explanation": "Negative power ka matlab hai \"ek bata\": \\((3x - 2)^{-2} = \\frac{1}{(3x - 2)^2}\\). To asal mein yeh fraction ka sawal hai.\nHumein \\(f'(x)\\) chahiye, first principle se.\nPlan: do fractions ko common denominator se ek karenge. Upar \\(A^2 - B^2\\) ban jayega, jise \\((A - B)(A + B)\\) mein toda ja sakta hai; \\(A - B\\) mein se \\(\\delta x\\) nikal aayega. Phir cancel aur limit.",
+            "steps": [
+              "Diya gaya hai: \\(f(x) = (3x - 2)^{-2} = \\frac{1}{(3x - 2)^2}\\).\nFind karna hai: \\(f'(x)\\), first principles se.\nTareeqa: definition (first principles / ab-initio, yani bilkul shuru se) se derivative: \\(f'(x) = \\lim_{\\delta x \\to 0} \\frac{f(x + \\delta x) - f(x)}{\\delta x}\\). Chaar steps yaad rakhein: (I) \\(f(x + \\delta x)\\) likhein; (II) us mein se \\(f(x)\\) minus karein; (III) \\(\\delta x\\) se divide karein; (IV) \\(\\delta x \\to 0\\) ka limit lein. Yeh tareeqa is liye ke Exercise 13.1 mein sawal khud 'by definition' maangta hai, aur power rule waghera abhi Section 13.6 mein aaenge; is liye shortcut nahi, poora limit ka safar dikhana hai.",
+              "Step I aur II: ek fraction\n\\[f(x + \\delta x) = \\dfrac{1}{(3x + 3\\,\\delta x - 2)^2}\\]\n\\[f(x + \\delta x) - f(x)\\]\n\\[= \\dfrac{(3x - 2)^2 - (3x + 3\\,\\delta x - 2)^2}{(3x + 3\\,\\delta x - 2)^2\\,(3x - 2)^2}\\]\nKyun: \\(x\\) ki jagah \\(x + \\delta x\\) rakha: \\(3(x + \\delta x) - 2 = 3x + 3\\,\\delta x - 2\\). Dhyan dein, \\(3\\) ne \\(\\delta x\\) ko bhi multiply kiya. Phir dono fractions ko common denominator par laaye; upar purana minus naya aata hai.",
+              "Upar ko factorise karein\n\\[A = 3x - 2,\\ B = 3x + 3\\,\\delta x - 2\\]\n\\[A - B = -3\\,\\delta x\\]\n\\[A + B = 6x - 4 + 3\\,\\delta x\\]\n\\[A^2 - B^2 = -3\\,\\delta x\\,(6x - 4 + 3\\,\\delta x)\\]\nKyun: Upar \\(A^2 - B^2\\) ki shakal hai. Poora square kholne ke bajaye \\((A - B)(A + B)\\) use kiya, jo bohat chhota kaam hai. \\(A - B\\) mein \\(3x\\) aur \\(-2\\) cancel ho kar sirf \\(-3\\,\\delta x\\) bachta hai: yehi woh \\(\\delta x\\) hai jo humein cancel karna hai.",
+              "Step III: \\(\\delta x\\) se divide karein\n\\[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x}\\]\n\\[= \\dfrac{-3\\,(6x - 4 + 3\\,\\delta x)}{(3x + 3\\,\\delta x - 2)^2\\,(3x - 2)^2}\\]\nKyun: Upar ka \\(\\delta x\\) divide wale \\(\\delta x\\) se cancel ho gaya. Ab neeche zero banne ka khatra nahi.",
+              "Step IV: limit lein\n\\[f'(x) = \\dfrac{-3(6x - 4)}{(3x - 2)^2(3x - 2)^2}\\]\n\\[= \\dfrac{-3 \\cdot 2(3x - 2)}{(3x - 2)^4}\\]\n\\[= \\dfrac{-6}{(3x - 2)^3}\\]\nKyun: \\(\\delta x = 0\\) rakha. Upar \\(6x - 4 = 2(3x - 2)\\) likha taake neeche wale \\((3x - 2)^4\\) se ek factor cancel ho sake. \\(-3 \\times 2 = -6\\) aur neeche \\((3x - 2)^3\\) bacha.",
+              "Tasdeeq: Section 13.6 ke power rule se (sirf jawab confirm karne ke liye, tareeqa nahi)\n\\[\\dfrac{d}{dx}(3x - 2)^{-2} = -2(3x - 2)^{-3} \\cdot 3\\]\n\\[= \\dfrac{-6}{(3x - 2)^3} \\;\\checkmark\\]\nKyun: \\((ax + b)^n\\) ka derivative \\(n(ax + b)^{n-1} \\cdot a\\) hota hai (yeh baad mein parhenge). Yahan \\(n = -2\\), \\(a = 3\\): wohi jawab."
+            ],
+            "final_answer": "\\(\\dfrac{d}{dx}(3x - 2)^{-2} = \\dfrac{-6}{(3x - 2)^3}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) Find from first principle, the derivatives of the following expression w.r.t. their respective independent variables: \\((2x + 3)^5\\).",
+            "explanation": "Power \\(5\\) hai, is liye bracket ko seedha multiply karna bohat lamba ho jayega. Yahan binomial theorem kaam aata hai.\nHumein \\(f'(x)\\) chahiye jab \\(f(x) = (2x + 3)^5\\).\nPlan: \\(u = 2x + 3\\) aur \\(k = 2\\,\\delta x\\) rakhenge, kyunke \\(2(x + \\delta x) + 3 = u + k\\). Phir \\((u + k)^5\\) ko binomial theorem se kholenge; \\(u^5\\) cancel ho jayega aur baqi har term mein \\(\\delta x\\) hoga.",
+            "steps": [
+              "Diya gaya hai: \\(f(x) = (2x + 3)^5\\).\nFind karna hai: \\(f'(x)\\), first principles se.\nTareeqa: definition (first principles / ab-initio, yani bilkul shuru se) se derivative: \\(f'(x) = \\lim_{\\delta x \\to 0} \\frac{f(x + \\delta x) - f(x)}{\\delta x}\\). Chaar steps yaad rakhein: (I) \\(f(x + \\delta x)\\) likhein; (II) us mein se \\(f(x)\\) minus karein; (III) \\(\\delta x\\) se divide karein; (IV) \\(\\delta x \\to 0\\) ka limit lein. Yeh tareeqa is liye ke Exercise 13.1 mein sawal khud 'by definition' maangta hai, aur power rule waghera abhi Section 13.6 mein aaenge; is liye shortcut nahi, poora limit ka safar dikhana hai. Binomial theorem: \\((u + k)^n = u^n + n u^{n-1}k + \\binom{n}{2}u^{n-2}k^2 + \\dots + k^n\\). Pehli term ke baad har term mein \\(k\\) kam az kam ek dafa hai, aur \\(k\\) mein \\(\\delta x\\) hai; isi liye pehli term cancel hone ke baad har term \\(\\delta x\\) se divide ho sakti hai.",
+              "Step I: \\(f(x + \\delta x)\\) nikalein\n\\[f(x + \\delta x) = (2x + 2\\,\\delta x + 3)^5\\]\n\\[= (u + k)^5,\\quad u = 2x + 3,\\ k = 2\\,\\delta x\\]\nKyun: \\(2(x + \\delta x) + 3\\) ko \\((2x + 3) + 2\\,\\delta x\\) likha. Naye naam \\(u\\) aur \\(k\\) sirf likhai chhoti karne ke liye hain; \\(k\\) chhota hai kyunke us mein \\(\\delta x\\) hai.",
+              "Step II: kholein aur minus karein\n\\[(u + k)^5 = u^5 + 5u^4k + 10u^3k^2 + 10u^2k^3 + 5uk^4 + k^5\\]\n\\[f(x + \\delta x) - f(x) = 5u^4k + 10u^3k^2 + 10u^2k^3 + 5uk^4 + k^5\\]\nKyun: \\(n = 5\\) ke binomial coefficients \\(1, 5, 10, 10, 5, 1\\) hain (Pascal triangle ki chhati line). \\(u^5\\) bilkul \\(f(x)\\) hai, is liye minus karne se cancel. Baqi har term mein \\(k\\) hai.",
+              "Step III: \\(\\delta x\\) se divide karein\n\\[k = 2\\,\\delta x \\Rightarrow \\dfrac{k}{\\delta x} = 2\\]\n\\[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x} = 2\\big(5u^4 + 10u^3k + 10u^2k^2 + 5uk^3 + k^4\\big)\\]\nKyun: Har term se ek \\(k\\) bahar nikala: \\(\\frac{k(\\dots)}{\\delta x} = \\frac{k}{\\delta x}(\\dots) = 2(\\dots)\\). Bracket ke andar ab sirf pehli term \\(5u^4\\) mein \\(k\\) nahi hai.",
+              "Step IV: limit lein\n\\[\\delta x \\to 0 \\Rightarrow k \\to 0\\]\n\\[f'(x) = 2 \\cdot 5u^4 = 10u^4\\]\n\\[= 10(2x + 3)^4\\]\nKyun: \\(\\delta x \\to 0\\) to \\(k = 2\\,\\delta x \\to 0\\), is liye \\(k\\) wali saari terms zero ho jati hain. Sirf \\(2 \\times 5u^4 = 10u^4\\) bachta hai, aur \\(u = 2x + 3\\) wapas rakh diya.",
+              "Tasdeeq: Section 13.6 ke power rule se (sirf jawab confirm karne ke liye, tareeqa nahi)\n\\[\\dfrac{d}{dx}(2x + 3)^5 = 5(2x + 3)^4 \\cdot 2 = 10(2x + 3)^4 \\;\\checkmark\\]\nKyun: \\(n(ax + b)^{n-1}\\cdot a\\) se bhi wohi jawab aur answer key bhi \\(10(2x + 3)^4\\) deti hai."
+            ],
+            "final_answer": "\\(\\dfrac{d}{dx}(2x + 3)^5 = 10(2x + 3)^4\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iii)",
+            "prompt": "4 (iii) Find from first principle, the derivatives of the following expression w.r.t. their respective independent variables: \\((ax + b)^7\\).",
+            "explanation": "Yeh 4(ii) jaisa hi hai, bas numbers ki jagah letters \\(a\\) aur \\(b\\) hain. Yeh dono constants hain; sirf \\(x\\) badalta hai.\nPlan: \\(u = ax + b\\) aur \\(k = a\\,\\delta x\\), kyunke \\(a(x + \\delta x) + b = u + k\\). Phir binomial theorem se \\((u + k)^7\\) kholenge. Saari terms likhne ki zaroorat nahi: pehli do terms aur \"baqi terms jin mein \\(k^2\\) ya zyada hai\" kaafi hai.",
+            "steps": [
+              "Diya gaya hai: \\(f(x) = (ax + b)^7\\), \\(a\\), \\(b\\) constants.\nFind karna hai: \\(f'(x)\\), first principles se.\nTareeqa: definition (first principles / ab-initio, yani bilkul shuru se) se derivative: \\(f'(x) = \\lim_{\\delta x \\to 0} \\frac{f(x + \\delta x) - f(x)}{\\delta x}\\). Chaar steps yaad rakhein: (I) \\(f(x + \\delta x)\\) likhein; (II) us mein se \\(f(x)\\) minus karein; (III) \\(\\delta x\\) se divide karein; (IV) \\(\\delta x \\to 0\\) ka limit lein. Yeh tareeqa is liye ke Exercise 13.1 mein sawal khud 'by definition' maangta hai, aur power rule waghera abhi Section 13.6 mein aaenge; is liye shortcut nahi, poora limit ka safar dikhana hai. Binomial theorem: \\((u + k)^n = u^n + n u^{n-1}k + \\binom{n}{2}u^{n-2}k^2 + \\dots + k^n\\). Pehli term ke baad har term mein \\(k\\) kam az kam ek dafa hai, aur \\(k\\) mein \\(\\delta x\\) hai; isi liye pehli term cancel hone ke baad har term \\(\\delta x\\) se divide ho sakti hai.",
+              "Step I: \\(f(x + \\delta x)\\) nikalein\n\\[f(x + \\delta x) = (ax + a\\,\\delta x + b)^7\\]\n\\[= (u + k)^7,\\quad u = ax + b,\\ k = a\\,\\delta x\\]\nKyun: \\(a\\) ne \\(x\\) aur \\(\\delta x\\) dono ko multiply kiya, is liye chhota hissa \\(k = a\\,\\delta x\\) hai, sirf \\(\\delta x\\) nahi. Yahi wajah hai ke jawab mein aakhir mein \\(a\\) aata hai.",
+              "Step II: kholein aur minus karein\n\\[(u + k)^7 = u^7 + 7u^6k + 21u^5k^2 + \\dots + k^7\\]\n\\[f(x + \\delta x) - f(x) = 7u^6k + 21u^5k^2 + \\dots + k^7\\]\nKyun: \\(n = 7\\) ke liye pehli coefficients \\(1, 7, 21, \\dots\\) hain. \\(u^7\\) hi \\(f(x)\\) hai, is liye cancel. Baqi har term mein kam az kam ek \\(k\\) hai, aur teesri term se aage \\(k^2\\) ya us se zyada.",
+              "Step III: \\(\\delta x\\) se divide karein\n\\[\\dfrac{k}{\\delta x} = a\\]\n\\[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x} = a\\big(7u^6 + 21u^5k + \\dots + k^6\\big)\\]\nKyun: Har term se ek \\(k\\) bahar nikala aur \\(\\frac{k}{\\delta x} = \\frac{a\\,\\delta x}{\\delta x} = a\\). Bracket mein pehli term ke ilawa sab mein abhi bhi \\(k\\) hai.",
+              "Step IV: limit lein\n\\[\\delta x \\to 0 \\Rightarrow k \\to 0\\]\n\\[f'(x) = a \\cdot 7u^6 = 7a(ax + b)^6\\]\nKyun: \\(k \\to 0\\) hone se \\(k\\) wali terms khatam; sirf \\(7u^6\\) bacha, jise \\(a\\) se multiply kiya. \\(u = ax + b\\) wapas rakha.",
+              "Tasdeeq: Section 13.6 ke power rule se (sirf jawab confirm karne ke liye, tareeqa nahi)\n\\[\\dfrac{d}{dx}(ax + b)^7 = 7(ax + b)^6 \\cdot a \\;\\checkmark\\]\nKyun: Rule \\(n(ax + b)^{n-1}\\cdot a\\) se bhi wohi jawab, aur answer key \\(7a(ax + b)^6\\) deti hai."
+            ],
+            "final_answer": "\\(\\dfrac{d}{dx}(ax + b)^7 = 7a(ax + b)^6\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

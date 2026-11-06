@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-13.7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/13.7",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 260,
+          "pdf_to": 262,
+          "note": "Book p. 255-257: 13.7 Application of Differentiation; introduction and five run-in headings with Examples 12-16 (marginal profit, particle motion, tank cost, investment, beam stress)"
+        }
+      ],
+      "title": "13.7 Application of Differentiation",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "We will apply concepts of differentiation to real-world problems such as profits on diminishing returns, environmental factors, financial investments, population growth, spread of diseases, movement of particles, time-speed in transportation, structural stress, and the material required in construction."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Every application below uses one idea: the derivative is the instantaneous rate of change. If a quantity \\(Q\\) depends on \\(x\\), then \\(Q'(x)\\) tells how fast \\(Q\\) changes per unit change of \\(x\\) at that moment.\nProfit \\(P(x)\\) \\(\\to\\) \\(P'(x)\\) is the marginal profit (extra profit per extra unit).\nPosition \\(s(t)\\) \\(\\to\\) \\(s'(t)\\) is velocity; velocity \\(v(t)\\) \\(\\to\\) \\(v'(t)\\) is acceleration.\nValue \\(V(t)\\) \\(\\to\\) \\(V'(t)\\) is the growth rate of the value (e.g. rupees per year).\nA cost \\(C(r)\\) is smallest where its graph turns from falling to rising, i.e. where \\(C'(r) = 0\\).\nThe units of a derivative are (units of the quantity) per (unit of the variable): m/s, Rs per year, Pa per metre."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Profits on Diminishing Returns"
+          },
+          {
+            "type": "example",
+            "title": "Example 12",
+            "problem": "A company's profit function is given by \\(P(x) = 100x - 5x^{2}\\), where \\(x\\) is the number of units produced. Determine the marginal profit when \\(x = 8\\) units.",
+            "steps": [
+              "Given: \\(P(x) = 100x - 5x^{2}\\), \\(x = 8\\).\nTo find: the marginal profit at \\(x = 8\\).\nMethod: the marginal profit is the derivative of the profit function with respect to \\(x\\). Differentiate with formulas 3 and 4 and the power rule, then substitute \\(x = 8\\).",
+              "Step 1: Differentiate the profit function\n\\[P'(x) = \\dfrac{d}{dx}(100x - 5x^{2})\\]\n\\[= 100 - 10x\\]\nWhy: \\(\\frac{d}{dx}(100x) = 100\\) and \\(\\frac{d}{dx}(5x^{2}) = 5 \\cdot 2x = 10x\\) (formulas 3 and 4 with the power rule).",
+              "Step 2: Substitute \\(x = 8\\)\n\\[P'(8) = 100 - 10(8)\\]\n\\[= 100 - 80 = 20\\]\nWhy: the marginal profit is asked at the production level \\(x = 8\\).",
+              "Step 3: Interpret\nSo, the marginal profit when 8 units are produced is 20 (in the given currency): at this level, producing one more unit raises the profit by about 20.\nWhy: a derivative is a rate; here it is profit per unit.",
+              "Check:\nFrom the profit function, \\(\\frac{P(8.01) - P(7.99)}{0.02} = \\frac{480.1995 - 479.7995}{0.02} = 20\\). It agrees."
+            ],
+            "answer": "Marginal profit at \\(x = 8\\): \\(P'(8) = 20\\) (in the given currency)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why \\\"diminishing returns\\\"? The marginal profit \\(P'(x) = 100 - 10x\\) gets smaller as \\(x\\) grows: 90 at \\(x = 1\\), 20 at \\(x = 8\\), 0 at \\(x = 10\\). Each extra unit adds less profit than the one before.\nAt \\(x = 10\\) the marginal profit is zero and the profit is largest (\\(P(10) = 500\\)); beyond 10 units \\(P'(x) < 0\\), and extra production lowers the profit."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Movement of Particles"
+          },
+          {
+            "type": "example",
+            "title": "Example 13",
+            "problem": "A particle moves along a line according to the position function \\(s(t) = 4t^{3} - 3t^{2} + 2t\\), where \\(s(t)\\) is the position and \\(t\\) is the time in seconds. Find the velocity and acceleration at \\(t = 2\\) seconds.",
+            "steps": [
+              "Given: \\(s(t) = 4t^{3} - 3t^{2} + 2t\\), \\(t = 2\\) s.\nTo find: the velocity \\(v(2)\\) and the acceleration \\(a(2)\\).\nMethod: velocity is the derivative of the position function, and acceleration is the derivative of the velocity function. Differentiate twice with respect to \\(t\\), substituting \\(t = 2\\) each time.",
+              "Step 1: Velocity function\n\\[v(t) = \\dfrac{d}{dt}(4t^{3} - 3t^{2} + 2t)\\]\n\\[= 12t^{2} - 6t + 2\\]\nWhy: term by term with the power rule: \\(4 \\cdot 3t^{2} = 12t^{2}\\), \\(3 \\cdot 2t = 6t\\), \\(2 \\cdot 1 = 2\\). The variable is now \\(t\\), so we write \\(\\frac{d}{dt}\\).",
+              "Step 2: Substitute \\(t = 2\\)\n\\[v(2) = 12(2)^{2} - 6(2) + 2\\]\n\\[= 48 - 12 + 2 = 38\\]\nSo, the velocity at \\(t = 2\\) is 38 m/s.\nWhy: \\(12 \\times 4 = 48\\) and \\(6 \\times 2 = 12\\).",
+              "Step 3: Acceleration function\n\\[a(t) = \\dfrac{d}{dt}(12t^{2} - 6t + 2)\\]\n\\[= 24t - 6\\]\nWhy: acceleration is the rate of change of velocity; \\(12 \\cdot 2t = 24t\\), \\(\\frac{d}{dt}(6t) = 6\\), and the constant 2 gives 0.",
+              "Step 4: Substitute \\(t = 2\\)\n\\[a(2) = 24(2) - 6\\]\n\\[= 48 - 6 = 42\\]\nSo, the acceleration at \\(t = 2\\) is \\(42\\ \\text{m/s}^{2}\\).\nWhy: the acceleration is asked at the same moment \\(t = 2\\).",
+              "Check:\nFrom the position function, \\(\\frac{s(2.001) - s(1.999)}{0.002} \\approx 38.000\\), the velocity found above."
+            ],
+            "answer": "Velocity \\(v(2) = 38\\) m/s; acceleration \\(a(2) = 42\\ \\text{m/s}^{2}\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Material Required in Construction"
+          },
+          {
+            "type": "example",
+            "title": "Example 14",
+            "problem": "A cylindrical tank is being constructed. The cost C to build the tank depends on the radius \\(r\\) of the base, and is given by \\(C(r) = 5000\\pi r^{2} + \\frac{100000}{r}\\), where the first term represents the cost T of the base and the second term represents the cost of the walls. Find the radius that minimizes the construction cost.",
+            "steps": [
+              "Given: \\(C(r) = 5000\\pi r^{2} + \\frac{100000}{r}\\), \\(r > 0\\).\nTo find: the radius \\(r\\) that makes the cost smallest.\nMethod: at the lowest point of the cost curve the rate of change of cost is zero. So find \\(C'(r)\\), set \\(C'(r) = 0\\) and solve for \\(r\\). Write \\(\\frac{100000}{r} = 100000r^{-1}\\) to use the power rule.",
+              "Step 1: Differentiate the cost\n\\[C'(r) = \\dfrac{d}{dr}\\left(5000\\pi r^{2} + 100000r^{-1}\\right)\\]\n\\[= 10000\\pi r - \\dfrac{100000}{r^{2}}\\]\nWhy: \\(5000\\pi \\cdot 2r = 10000\\pi r\\) (\\(\\pi\\) is a constant), and \\(100000 \\cdot (-1)r^{-2} = -\\frac{100000}{r^{2}}\\).",
+              "Step 2: Set \\(C'(r) = 0\\)\n\\[10000\\pi r - \\dfrac{100000}{r^{2}} = 0\\]\nWhy: to minimize the cost we look for the radius where the cost stops falling and starts rising.",
+              "Step 3: Multiply through by \\(r^{2}\\)\n\\[10000\\pi r^{3} = 100000\\]\nWhy: this removes the fraction; \\(r^{2} \\ne 0\\) because \\(r > 0\\).",
+              "Step 4: Solve for \\(r\\)\nThe book prints: \\(r^{3} - \\frac{100000}{10000\\pi} = \\frac{10}{\\pi}\\) and \\(r^{3} = \\left(\\frac{10}{\\pi}\\right)^{1/3} \\approx 1.336\\), and concludes that the radius is approximately 1.336 units.\nWorking it out:\n\\[r^{3} = \\dfrac{100000}{10000\\pi} = \\dfrac{10}{\\pi}\\]\n\\[r = \\left(\\dfrac{10}{\\pi}\\right)^{1/3}\\]\n\\[r \\approx (3.1831)^{1/3} \\approx 1.471\\]\nWhy: divide both sides by \\(10000\\pi\\), then take the cube root of both sides. Here \\(\\frac{10}{\\pi} \\approx 3.1831\\).",
+              "Step 5: Confirm it is a minimum\nFor \\(r < 1.471\\), e.g. \\(r = 1\\): \\(C'(1) = 10000\\pi - 100000 < 0\\) (cost falling).\nFor \\(r > 1.471\\), e.g. \\(r = 2\\): \\(C'(2) = 20000\\pi - 25000 > 0\\) (cost rising).\nWhy: the cost falls and then rises, so \\(r \\approx 1.471\\) gives the least cost. (The book does not show this step.)",
+              "Check:\n\\(1.471^{3} \\approx 3.183 \\approx \\frac{10}{\\pi}\\), so \\(r \\approx 1.471\\) satisfies \\(r^{3} = \\frac{10}{\\pi}\\). The book's value fails: \\(1.336^{3} \\approx 2.385\\), not 3.183."
+            ],
+            "answer": "The cost is least when \\(r = \\left(\\frac{10}{\\pi}\\right)^{1/3} \\approx 1.471\\) units.",
+            "book_errors": [
+              "the cost T of the base",
+              "\\(r^{3} - \\frac{100000}{10000\\pi} = \\frac{10}{\\pi}\\)",
+              "\\(r^{3} = \\left(\\frac{10}{\\pi}\\right)^{1/3} \\approx 1.336\\)",
+              "approximately 1.336 units"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "1. The question prints \\\"the cost T of the base\\\": the stray letter T should be deleted.\n2. The book prints \\(r^{3} - \\frac{100000}{10000\\pi} = \\frac{10}{\\pi}\\); the first sign should be \\\"=\\\": \\(r^{3} = \\frac{100000}{10000\\pi} = \\frac{10}{\\pi}\\).\n3. The book prints \\(r^{3} = \\left(\\frac{10}{\\pi}\\right)^{1/3} \\approx 1.336\\). The cube root gives \\(r\\), not \\(r^{3}\\): \\(r = \\left(\\frac{10}{\\pi}\\right)^{1/3} \\approx 1.471\\). The value 1.336 is wrong (it equals \\(\\left(\\frac{10}{\\pi}\\right)^{1/4}\\)), so the minimizing radius is about 1.471 units, not 1.336."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Financial Investments"
+          },
+          {
+            "type": "example",
+            "title": "Example 15",
+            "problem": "A bank offers a compound interest rate on an investment, and the value of the investment after \\(t\\) years is given by \\(V(t) = 5000(1 + 0.04t)^{2}\\). Find the rate of change of the investment value after 10 years.",
+            "steps": [
+              "Given: \\(V(t) = 5000(1 + 0.04t)^{2}\\) rupees, \\(t = 10\\) years.\nTo find: \\(V'(10)\\), the rate of change of the value after 10 years.\nMethod: the rate of change of the investment is the derivative of \\(V(t)\\) with respect to \\(t\\). The book differentiates the square of the bracket directly; we also show the expansion method, which uses only the rules of 13.6.",
+              "Step 1: Differentiate (book's working)\n\\[V'(t) = \\dfrac{d}{dt}\\left(5000(1 + 0.04t)^{2}\\right)\\]\n\\[= 5000(2)(1 + 0.04t)(0.04)\\]\n\\[= 400(1 + 0.04t)\\]\nWhy: the power 2 comes down, the bracket's power drops to 1, and the result is multiplied by the derivative of the bracket, \\(\\frac{d}{dt}(1 + 0.04t) = 0.04\\). Then \\(5000 \\times 2 \\times 0.04 = 400\\).",
+              "Step 2: The same derivative by expanding first\n\\[V(t) = 5000(1 + 0.08t + 0.0016t^{2})\\]\n\\[= 5000 + 400t + 8t^{2}\\]\n\\[V'(t) = 400 + 16t = 400(1 + 0.04t)\\]\nWhy: \\((1 + 0.04t)^{2} = 1 + 2(0.04t) + (0.04t)^{2}\\); then formulas 1, 3, 4 and the power rule. Both ways give the same \\(V'(t)\\).",
+              "Step 3: Substitute \\(t = 10\\)\n\\[V'(10) = 400(1 + 0.04 \\times 10)\\]\n\\[= 400(1 + 0.40) = 400 \\times 1.4\\]\n\\[= 560\\]\nWhy: the rate is asked after 10 years. Units: rupees per year.",
+              "Check:\nWith \\(V'(t) = 400 + 16t\\): \\(V'(10) = 400 + 160 = 560\\). Also \\(\\frac{V(10.01) - V(9.99)}{0.02} = 560\\) exactly, because \\(V\\) is a quadratic in \\(t\\)."
+            ],
+            "answer": "After 10 years the investment is growing at Rs. 560 per year (\\(V'(10) = 560\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Step 1 uses a rule for the power of a bracket, \\(\\frac{d}{dt}[u^{2}] = 2u\\frac{du}{dt}\\), which is not among the six rules of 13.6. If you are unsure of it, expand the bracket first (Step 2) and use only formulas 1 to 4.\nWhy does the rate grow with time? \\(V'(t) = 400 + 16t\\) increases with \\(t\\): the investment grows faster and faster, Rs. 400 per year at the start and Rs. 560 per year after 10 years."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Structural Stress"
+          },
+          {
+            "type": "example",
+            "title": "Example 16",
+            "problem": "The stress on a beam under a varying load is modeled by \\(S(x) = 500x - 2x^{3}\\), where \\(S(x)\\) is the stress in pascals (Pa) and \\(x\\) is the distance (in meters) from the beam's fixed end. Find the rate of change of stress at \\(x = 5\\) meters.",
+            "steps": [
+              "Given: \\(S(x) = 500x - 2x^{3}\\) Pa, \\(x = 5\\) m.\nTo find: \\(S'(5)\\), the rate of change of stress at \\(x = 5\\) m.\nMethod: the rate of change of stress is the derivative of \\(S(x)\\) with respect to \\(x\\). Differentiate term by term and substitute \\(x = 5\\).",
+              "Step 1: Differentiate\nThe book prints: the derivative of S(x) with respect to r and \\(S'(x) - \\frac{d}{dt}(500x - 2x^{2}) = 500 - 6x^{2}\\).\nFor the given function:\n\\[S'(x) = \\dfrac{d}{dx}(500x - 2x^{3})\\]\n\\[= 500 - 6x^{2}\\]\nWhy: \\(\\frac{d}{dx}(500x) = 500\\) and \\(\\frac{d}{dx}(2x^{3}) = 2 \\cdot 3x^{2} = 6x^{2}\\). The variable is \\(x\\), so the derivative is \\(\\frac{d}{dx}\\).",
+              "Step 2: Substitute \\(x = 5\\)\n\\[S'(5) = 500 - 6(5)^{2}\\]\n\\[= 500 - 6 \\times 25 = 500 - 150\\]\n\\[= 350\\]\nWhy: \\(5^{2} = 25\\) is computed first (powers before multiplication).",
+              "Step 3: Interpret\nSo, the stress is increasing at a rate of 350 Pa per meter at \\(x = 5\\) meters.\nWhy: \\(S'(5) > 0\\) means the stress rises as we move further from the fixed end at that point.",
+              "Check:\nFrom the function, \\(\\frac{S(5.001) - S(4.999)}{0.002} \\approx 350.000\\). It agrees."
+            ],
+            "answer": "\\(S'(5) = 350\\) Pa per meter: the stress is increasing at 350 Pa/m at \\(x = 5\\) m.",
+            "book_errors": [
+              "the derivative of S(x) with respect to r",
+              "\\(S'(x) - \\frac{d}{dt}(500x - 2x^{2}) = 500 - 6x^{2}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The solution says \\\"the derivative of S(x) with respect to r\\\" and prints \\(S'(x) - \\frac{d}{dt}(500x - 2x^{2}) = 500 - 6x^{2}\\). It should read: the derivative of \\(S(x)\\) with respect to \\(x\\), \\(S'(x) = \\frac{d}{dx}(500x - 2x^{3}) = 500 - 6x^{2}\\) (\\\"=\\\" instead of \\\"-\\\", \\(\\frac{d}{dx}\\) instead of \\(\\frac{d}{dt}\\), and \\(2x^{3}\\) as in the question). The result \\(500 - 6x^{2}\\) and \\(S'(5) = 350\\) are correct."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. In applications the derivative is a rate of change: marginal profit \\(P'(x)\\), velocity \\(s'(t)\\), acceleration \\(v'(t)\\), growth rate \\(V'(t)\\), stress gradient \\(S'(x)\\).\n2. Differentiate with respect to the variable of the function: \\(\\frac{d}{dx}\\) for \\(S(x)\\), \\(\\frac{d}{dt}\\) for \\(s(t)\\), \\(\\frac{d}{dr}\\) for \\(C(r)\\).\n3. First find the derivative as a formula, then substitute the given value.\n4. A smallest (or largest) value occurs where the derivative is zero; check the sign of the derivative on both sides.\n5. Always state the answer with units: m/s, \\(\\text{m/s}^{2}\\), Rs per year, Pa per metre."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Substituting the value before differentiating: \\(P(8) = 480\\) is the profit, not the marginal profit.\n2. Mixing up velocity and acceleration: acceleration is the derivative of velocity, not of position.\n3. Solving \\(r^{3} = k\\) as \\(r^{3} = k^{1/3}\\): the cube root gives \\(r\\) itself (the book's slip in Example 14).\n4. Forgetting that \\(\\pi\\) is a constant: \\(\\frac{d}{dr}(5000\\pi r^{2}) = 10000\\pi r\\).\n5. Writing the answer without units or without saying whether the quantity is increasing (positive rate) or decreasing (negative rate)."
+          }
+        ]
+      }
+    }
+  ]
+}

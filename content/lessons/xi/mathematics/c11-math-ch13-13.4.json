@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-13.4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/13.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 250,
+          "pdf_to": 251,
+          "note": "Book p. 245-246: 13.4 power rule; part (a) n a positive integer by the binomial theorem (label (a) printed twice), part (b) n = -m negative integer, Note box (power rule, n in R), rational powers example x^(2/3)"
+        }
+      ],
+      "title": "13.4 Derivation of x^n where n in Z",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "(a) We find the derivative of \\(x^{n}\\) when \\(n\\) is positive integer."
+          },
+          {
+            "type": "paragraph",
+            "text": "(a) Let \\(y = x^{n}\\). Then\n\\[y + \\delta y = (x + \\delta x)^{n}\\]\nand\n\\[\\delta y = (x + \\delta x)^{n} - x^{n}\\]",
+            "book_errors": [
+              "(a) Let"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the label \"(a)\" twice in a row: once before \"We find the derivative of \\(x^{n}\\) when \\(n\\) is positive integer\" and again before \"Let \\(y = x^{n}\\)\". Both lines belong to the same part (a); the second label is a repeat. Part (b) (negative integers) follows on the next page."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This is exactly the four-step method of 13.3.2 with a general power \\(n\\): Step I gives \\(y + \\delta y\\), Step II gives \\(\\delta y\\). The only new tool is the binomial theorem, which expands \\((x + \\delta x)^{n}\\) for any positive integer \\(n\\):\n\\[(x+\\delta x)^{n} = x^{n} + nx^{n-1}\\delta x\\]\n\\[+ \\dfrac{n(n-1)}{2!}x^{n-2}(\\delta x)^{2} + \\ldots + (\\delta x)^{n}\\]\nThe book writes \\(2!\\) in the old notation \\(\\underline{|2}\\); both mean \\(2 \\times 1 = 2\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Using the binomial theorem, we have\n\\[\\delta y = \\Big[x^{n} + nx^{n-1}\\cdot\\delta x\\]\n\\[+ \\dfrac{n(n-1)}{2!}x^{n-2}(\\delta x)^{2} + \\ldots\\]\n\\[+ (\\delta x)^{n}\\Big] - x^{n}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "i.e.,\n\\[\\delta y = \\delta x\\Big[nx^{n-1}\\]\n\\[+ \\dfrac{n(n-1)}{2!}x^{n-2}\\cdot\\delta x + \\ldots\\]\n\\[+ (\\delta x)^{n-1}\\Big] \\quad \\text{(i)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How do we get (i)? The first term \\(x^{n}\\) cancels with \\(-x^{n}\\). Every remaining term has at least one factor \\(\\delta x\\), so we take one \\(\\delta x\\) outside the bracket; each power of \\(\\delta x\\) inside drops by one."
+          },
+          {
+            "type": "paragraph",
+            "text": "Dividing both sides of (i) by \\(\\delta x\\), gives\n\\[\\dfrac{\\delta y}{\\delta x} = nx^{n-1} + \\dfrac{n(n-1)}{2!}x^{n-2}\\cdot\\delta x\\]\n\\[+ \\ldots + (\\delta x)^{n-1} \\quad \\text{(ii)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Note that each term on the right hand side of (ii) involves \\(\\delta x\\) except the first term, so taking the limit as \\(\\delta x \\to 0\\), we get\n\\[\\dfrac{dy}{dx} = nx^{n-1}\\]\nAs \\(y = x^{n}\\), so\n\\[\\dfrac{d}{dx}(x^{n}) = n\\cdot x^{n-1}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Check the formula against Section 13.3.2: for \\(n = 2\\) it gives \\(\\frac{d}{dx}(x^{2}) = 2x\\), the answer of Example 3(b). For \\(n = 3\\) it gives \\(3x^{2}\\), and expanding \\((x+\\delta x)^{3}\\) by hand gives the same."
+          },
+          {
+            "type": "paragraph",
+            "text": "(b) Let \\(y = x^{n}\\) where \\(n\\) is negative integer.\nLet \\(n = -m\\) (\\(m\\) is a positive integer). Then\n\\[y = x^{-m} = \\dfrac{1}{x^{m}} \\quad \\text{(i)}\\]\n\\[y + \\delta y = \\dfrac{1}{(x+\\delta x)^{m}} \\quad \\text{(ii)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why put \\(n = -m\\)? The binomial expansion used in (a) works for positive integer powers. Writing \\(x^{n} = \\frac{1}{x^{m}}\\) with \\(m > 0\\) lets us use that expansion again, this time for \\((x+\\delta x)^{m}\\) in the denominator. We need \\(x \\ne 0\\) here."
+          },
+          {
+            "type": "paragraph",
+            "text": "Subtracting (i) from (ii), gives\n\\[\\delta y = \\dfrac{1}{(x+\\delta x)^{m}} - \\dfrac{1}{x^{m}}\\]\n\\[= \\dfrac{x^{m}-(x+\\delta x)^{m}}{x^{m}(x+\\delta x)^{m}}\\]\nExpanding \\((x + \\delta x)^{m}\\) by binomial theorem, the numerator is\n\\[x^{m}-(x+\\delta x)^{m}\\]\n\\[= x^{m} - \\Big[x^{m} + mx^{m-1}\\delta x\\]\n\\[+ \\dfrac{m(m-1)}{2!}x^{m-2}(\\delta x)^{2}\\]\n\\[+ \\ldots + (\\delta x)^{m}\\Big]\\]\n\\[= -\\delta x\\Big[mx^{m-1}\\]\n\\[+ \\dfrac{m(m-1)}{2!}x^{m-2}\\delta x\\]\n\\[+ \\ldots + (\\delta x)^{m-1}\\Big]\\]\nso\n\\[\\delta y = \\dfrac{-\\delta x\\big[mx^{m-1} + \\ldots\\big]}{x^{m}(x+\\delta x)^{m}}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "and\n\\[\\dfrac{\\delta y}{\\delta x} = \\dfrac{-1}{x^{m}(x+\\delta x)^{m}}\\]\n\\[\\cdot\\Big(mx^{m-1} + \\dfrac{m(m-1)}{2!}x^{m-2}\\cdot\\delta x\\]\n\\[+ \\ldots + (\\delta x)^{m-1}\\Big)\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Taking limit when \\(\\delta x \\to 0\\), we get (all terms containing \\(\\delta x\\) vanish)\n\\[\\dfrac{dy}{dx} = \\dfrac{-1}{x^{m}\\cdot x^{m}}\\cdot mx^{m-1}\\]\n\\[= -mx^{m-1}\\cdot x^{-2m}\\]\n\\[= -mx^{(-m)-1}\\]\n\\[= nx^{n-1} \\quad [\\because -m = n]\\]\nor\n\\[\\dfrac{d(x)^{n}}{dx} = nx^{n-1}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The steps after the limit use only the laws of indices:\n\\(\\frac{1}{x^{m}\\cdot x^{m}} = \\frac{1}{x^{2m}} = x^{-2m}\\), and \\(x^{m-1}\\cdot x^{-2m} = x^{m-1-2m} = x^{-m-1}\\).\nFinally \\(-m = n\\), so \\(-mx^{-m-1} = nx^{n-1}\\): the same formula as in part (a)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "\\(\\frac{d}{dx}(x^{n}) = nx^{n-1}\\) is called power rule. Where \\(n \\in \\mathbb{R}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "So, we have proved that \\(\\frac{d}{dx}(x^{n}) = nx^{n-1}\\), if \\(n \\in \\mathbb{Z}\\).\nThe above rule also holds if \\(n \\in \\mathbb{Q} - \\mathbb{Z}\\), i.e. for rational powers.\nFor example,\n\\[\\dfrac{d}{dx}\\left(x^{\\frac{2}{3}}\\right) = \\dfrac{2}{3}x^{\\frac{2}{3}-1}\\]\n\\[= \\dfrac{2}{3x^{\\frac{1}{3}}}\\]\nThe proof of \\(\\frac{d}{dx}(x^{n}) = nx^{n-1}\\) when \\(n \\in \\mathbb{Q} - \\mathbb{Z}\\) is left as an exercise."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What has been proved here? Only integer powers: (a) positive integers, (b) negative integers. The case \\(n = 0\\) is also covered: \\(x^{0} = 1\\) is a constant, and \\(\\frac{d}{dx}(1) = 0 = 0\\cdot x^{-1}\\) (Example 3(a)). For rational and real powers the book only states the rule.\nFor fractional powers the rule is used where \\(x^{n}\\) and \\(x^{n-1}\\) are defined; for example \\(x^{\\frac{1}{2}} = \\sqrt{x}\\) needs \\(x > 0\\) for its derivative."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Using the power rule (our examples, checked against the first-principles results):\n\\[\\dfrac{d}{dx}(x^{5}) = 5x^{4}\\]\n\\[\\dfrac{d}{dx}(x^{-3}) = -3x^{-4} = \\dfrac{-3}{x^{4}}\\]\n\\[\\dfrac{d}{dx}\\left(\\dfrac{1}{x^{2}}\\right) = \\dfrac{d}{dx}(x^{-2}) = \\dfrac{-2}{x^{3}}\\]\n\\[\\dfrac{d}{dx}(\\sqrt{x}) = \\dfrac{d}{dx}\\left(x^{\\frac{1}{2}}\\right) = \\dfrac{1}{2\\sqrt{x}}\\]\nThe last two agree with Examples 5 and 4, which were done by definition."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Before using the power rule, write roots and reciprocals as powers: \\(\\sqrt[3]{x} = x^{\\frac{1}{3}}\\), \\(\\frac{1}{x^{4}} = x^{-4}\\), \\(\\frac{1}{\\sqrt{x}} = x^{-\\frac{1}{2}}\\). Then \"bring the power down and reduce the power by one\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\frac{d}{dx}(x^{n}) = nx^{n-1}\\) (power rule).\n2. For a positive integer \\(n\\) the proof uses the binomial expansion of \\((x+\\delta x)^{n}\\); every term except \\(nx^{n-1}\\) contains \\(\\delta x\\) and vanishes in the limit.\n3. For a negative integer \\(n = -m\\), write \\(y = \\frac{1}{x^{m}}\\) and use the expansion of \\((x+\\delta x)^{m}\\).\n4. The rule also holds for rational powers (proof left as an exercise in the book), e.g. \\(\\frac{d}{dx}(x^{\\frac{2}{3}}) = \\frac{2}{3x^{\\frac{1}{3}}}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Reducing the power by one in the wrong direction for negative powers: \\(\\frac{d}{dx}(x^{-3}) = -3x^{-4}\\), not \\(-3x^{-2}\\). (\\(-3 - 1 = -4\\).)\n2. Forgetting to bring the power down: \\(\\frac{d}{dx}(x^{5}) = 5x^{4}\\), not \\(x^{4}\\).\n3. Applying the rule to \\(\\frac{1}{x^{2}}\\) as if it were \\(x^{2}\\) in the denominator: first rewrite it as \\(x^{-2}\\).\n4. Using the power rule for \\(a^{x}\\) (variable in the power). It works only for \\(x^{n}\\) with a constant power \\(n\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

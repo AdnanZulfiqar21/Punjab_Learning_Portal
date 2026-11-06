@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-3-Q4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-3-q4",
+      "title": "Question 4 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 262,
+          "pdf_to": 262,
+          "note": "Exercise 13.3, Question 4 (a)-(c): rate of change and value of A(t) = 10000(1 + 0.05t)^3 (book p.257). Answer key (PDF 311) prints it as number 8."
+        }
+      ],
+      "variant_of": "C11-MATH-CH13-EXERCISE-13-3-Q4",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(a)",
+            "prompt": "4 (a) An investment grows according to the function \\(A(t) = 10000(1 + 0.05t)^3\\), where \\(A(t)\\) is the value of the investment and \\(t\\) is the time in years. Find the rate of change of the investment after 8 years.",
+            "explanation": "Yeh rate of change ka sawal hai: 8 saal baad investment kitni tezi se barh rahi hai.\nHumein \\(A'(8)\\) find karna hai.\nPlan: \\(A(t)\\) ko powers of \\(t\\) mein kholna, differentiate karna, phir \\(t = 8\\) rakhna.",
+            "steps": [
+              "Diya gaya hai: \\(A(t) = 10000(1 + 0.05t)^3\\).\nHumein find karna hai: \\(A'(8)\\).\nTareeqa: Rate of change \\(= A'(t)\\). Cube khol kar power rule lagayenge.",
+              "Cube ko kholein\n\\[(1 + 0.05t)^3 = 1 + 0.15t + 0.0075t^2 + 0.000125t^3\\]\n\\[A(t) = 10000 + 1500t + 75t^2 + 1.25t^3\\]\nKyun: \\((1 + b)^3 = 1 + 3b + 3b^2 + b^3\\), jahan \\(b = 0.05t\\): \\(3b = 0.15t\\), \\(3b^2 = 3(0.0025t^2) = 0.0075t^2\\), \\(b^3 = 0.000125t^3\\). Phir har term ko 10000 se guna kiya. Ab sirf power rule kaafi hai; kitab ke rules mein bracket ki power ka koi alag qaida nahi, is liye kholna mehfooz rasta hai.",
+              "Differentiate karein\n\\[A'(t) = 1500 + 150t + 3.75t^2\\]\nKyun: Constant 10000 ka derivative zero, \\(1500t \\to 1500\\), \\(75t^2 \\to 150t\\), \\(1.25t^3 \\to 3.75t^2\\).",
+              "\\(t = 8\\) rakhein\n\\[A'(8) = 1500 + 1200 + 240 = 2940\\]\nKyun: \\(150 \\times 8 = 1200\\) aur \\(3.75 \\times 64 = 240\\). Matlab 8 saal ke baad investment taqreeban 2940 fi saal ki raftaar se barh rahi hai.",
+              "Tasdeeq: factorised shakal se\n\\[A'(t) = 1500(1 + 0.05t)^2\\]\n\\[A'(8) = 1500(1.4)^2 = 1500 \\times 1.96 = 2940\\]\nKyun: \\(1500(1 + 0.1t + 0.0025t^2)\\) kholein to wohi \\(1500 + 150t + 3.75t^2\\) aata hai. Dono tareeqon se 2940, to jawab pakka."
+            ],
+            "final_answer": "\\(A'(8) = 2940\\) fi saal"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(b)",
+            "prompt": "4 (b) An investment grows according to the function \\(A(t) = 10000(1 + 0.05t)^3\\), where \\(A(t)\\) is the value of the investment and \\(t\\) is the time in years. What is the investment value after 8 years?",
+            "explanation": "Is part mein derivative ki zaroorat nahi, sirf value nikalni hai.\nHumein \\(A(8)\\) find karna hai, yani 8 saal baad investment ki kul qeemat.\nPlan: \\(t = 8\\) ko \\(A(t)\\) mein rakhna.",
+            "steps": [
+              "Diya gaya hai: \\(A(t) = 10000(1 + 0.05t)^3\\).\nHumein find karna hai: \\(A(8)\\).\nTareeqa: Kisi waqt par value function mein woh waqt rakhne se milti hai.\nDhyan dein: Part (a) rate (\\(A'\\)) poochhta hai aur part (b) value (\\(A\\)); dono ko mila dena aam ghalti hai.",
+              "\\(t = 8\\) rakhein\n\\[A(8) = 10000(1 + 0.4)^3\\]\n\\[= 10000 \\times 2.744 = 27440\\]\nKyun: \\(0.05 \\times 8 = 0.4\\). Phir \\(1.4^2 = 1.96\\) aur \\(1.96 \\times 1.4 = 2.744\\).",
+              "Tasdeeq: kholi hui shakal se\n\\[10000 + 12000 + 4800 + 640 = 27440\\]\nKyun: \\(1500 \\times 8 = 12000\\), \\(75 \\times 64 = 4800\\), \\(1.25 \\times 512 = 640\\); jama wohi 27440."
+            ],
+            "final_answer": "\\(A(8) = 27440\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(c)",
+            "prompt": "4 (c) An investment grows according to the function \\(A(t) = 10000(1 + 0.05t)^3\\), where \\(A(t)\\) is the value of the investment and \\(t\\) is the time in years. Determine the time at which the investment is growing the fastest.",
+            "explanation": "Humein dekhna hai ke growth rate \\(A'(t)\\) kab sab se zyada hota hai.\nYeh \"maximum\" wala sawal hai, lekin is dafa maximum growth rate ka.\nPlan: \\(A'(t)\\) ka apna rate of change dekhna; agar woh hamesha positive ho to \\(A'(t)\\) barhta hi rehta hai.",
+            "steps": [
+              "Diya gaya hai: \\(A'(t) = 1500 + 150t + 3.75t^2 = 1500(1 + 0.05t)^2\\), \\(t \\ge 0\\).\nHumein find karna hai: sab se tez growth ka waqt.\nTareeqa: Growth rate \\(A'(t)\\) hai. Agar yeh hamesha barhta rahe to koi aisa waqt nahi jahan yeh sab se zyada ho; har agla saal pichhle se tez hoga.",
+              "Growth rate ka rate of change\n\\[\\frac{d}{dt}A'(t) = 150 + 7.5t\\]\nKyun: \\(A'(t)\\) par dobara power rule: \\(150t \\to 150\\), \\(3.75t^2 \\to 7.5t\\).",
+              "Is ka sign\n\\[150 + 7.5t > 0 \\text{ for all } t \\ge 0\\]\nKyun: Dono terms positive hain, to yeh kabhi zero ya negative nahi hota. Matlab \\(A'(t)\\) hamesha barh raha hai, aur \\(t \\ge 0\\) mein us ki koi choti nahi.",
+              "Natija\n\\[A'(0) = 1500,\\ A'(8) = 2940,\\ A'(20) = 6000\\]\nKyun: Waqt ke saath growth rate barhta hi ja raha hai. Compound growth ki yahi khoobi hai: jitna zyada waqt, utni tez barhotri. Is liye jawab yeh hai ke koi khaas lamha nahi; waqt barhne ke saath rate barhta hai (answer key bhi yahi kehti hai)."
+            ],
+            "final_answer": "Koi finite waqt nahi: waqt barhne ke saath growth ka rate barhta hai"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key ne Exercise 13.3 ke jawabat ko 1 se 8 ke bajaye 4, 5, 6, 8, 11, 12, 13, 14 number diye hain. Is sawal ka jawab number 8 par chhapa hai: (a) 2940, (b) 27440, (c) \"as time increases rate increases\", sab sahi."
+          }
+        ]
+      }
+    }
+  ]
+}

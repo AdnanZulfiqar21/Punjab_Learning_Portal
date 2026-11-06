@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-EXERCISE-13-1-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-exercise-13-1-q2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 253,
+          "pdf_to": 253,
+          "note": "Exercise 13.1, Question 2 (book page 248, PDF 253); answer key PDF 310-311."
+        }
+      ],
+      "title": "Question 2",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Find \\(\\dfrac{dy}{dx}\\) from first principles and find gradient of the curve at the given point: \\(\\sqrt{x + 2}\\) at \\(x = 6\\).",
+            "explanation": "Two jobs: \\(\\frac{dy}{dx}\\) by first principles, then its value at \\(x = 6\\) (the gradient, i.e. the slope of the tangent there).\nPlan: four steps with rationalising, then put \\(x = 6\\).",
+            "steps": [
+              "Given: \\(y = f(x) = \\sqrt{x + 2}\\), point \\(x = 6\\).\nTo find: \\(\\frac{dy}{dx}\\) and its value at \\(x = 6\\).\nMethod: derivative by definition (first principles): \\(f'(x) = \\lim_{\\delta x \\to 0} \\frac{f(x + \\delta x) - f(x)}{\\delta x}\\). Four steps: (I) write \\(f(x + \\delta x)\\); (II) subtract \\(f(x)\\); (III) divide by \\(\\delta x\\); (IV) let \\(\\delta x \\to 0\\). The gradient at \\(x = 6\\) is \\(f'(6)\\).",
+              "Steps I and II: the difference\n\\[f(x + \\delta x) = \\sqrt{x + \\delta x + 2}\\]\n\\[f(x + \\delta x) - f(x) = \\sqrt{x + \\delta x + 2} - \\sqrt{x + 2}\\]\nWhy: Replace \\(x\\) by \\(x + \\delta x\\) inside the root.",
+              "Rationalise the top\n\\[= \\dfrac{(x + \\delta x + 2) - (x + 2)}{\\sqrt{x + \\delta x + 2} + \\sqrt{x + 2}}\\]\n\\[= \\dfrac{\\delta x}{\\sqrt{x + \\delta x + 2} + \\sqrt{x + 2}}\\]\nWhy: Multiply top and bottom by \\(\\sqrt{x + \\delta x + 2} + \\sqrt{x + 2}\\); \\((A - B)(A + B) = A^2 - B^2\\).",
+              "Steps III and IV: divide and take the limit\n\\[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x} = \\dfrac{1}{\\sqrt{x + \\delta x + 2} + \\sqrt{x + 2}}\\]\n\\[\\dfrac{dy}{dx} = \\dfrac{1}{\\sqrt{x + 2} + \\sqrt{x + 2}}\\]\n\\[= \\dfrac{1}{2\\sqrt{x + 2}}\\]\nWhy: \\(\\delta x\\) cancels; then put \\(\\delta x = 0\\) (the bottom stays non-zero).",
+              "Gradient at \\(x = 6\\)\n\\[f'(6) = \\dfrac{1}{2\\sqrt{6 + 2}}\\]\n\\[= \\dfrac{1}{2\\sqrt{8}} = \\dfrac{1}{2 \\cdot 2\\sqrt{2}}\\]\n\\[= \\dfrac{1}{4\\sqrt{2}} = \\dfrac{\\sqrt{2}}{8}\\]\nWhy: \\(\\sqrt{8} = 2\\sqrt{2}\\).",
+              "Check\n\\[x = 6.01:\\ \\dfrac{\\sqrt{8.01} - \\sqrt{8}}{0.01} \\approx 0.1767\\]\n\\[\\dfrac{1}{4\\sqrt{2}} \\approx 0.1768 \\;\\checkmark\\]\nWhy: A small step from \\(x = 6\\) gives nearly the same slope."
+            ],
+            "final_answer": "\\(\\dfrac{dy}{dx} = \\dfrac{1}{2\\sqrt{x + 2}}\\); gradient at \\(x = 6\\): \\(\\dfrac{1}{4\\sqrt{2}} = \\dfrac{\\sqrt{2}}{8}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Find \\(\\dfrac{dy}{dx}\\) from first principles and find gradient of the curve at the given point: \\(\\dfrac{1}{\\sqrt{x + a}}\\) at \\(x = a\\).",
+            "explanation": "Same two jobs; here \\(a\\) is a constant (a fixed positive number), not a variable.\nPlan: join the fractions, rationalise the top, cancel \\(\\delta x\\), take the limit, then put \\(x = a\\).",
+            "steps": [
+              "Given: \\(y = f(x) = \\frac{1}{\\sqrt{x + a}}\\), \\(a > 0\\) constant, point \\(x = a\\).\nTo find: \\(\\frac{dy}{dx}\\) and its value at \\(x = a\\).\nMethod: derivative by definition (first principles): \\(f'(x) = \\lim_{\\delta x \\to 0} \\frac{f(x + \\delta x) - f(x)}{\\delta x}\\). Four steps: (I) write \\(f(x + \\delta x)\\); (II) subtract \\(f(x)\\); (III) divide by \\(\\delta x\\); (IV) let \\(\\delta x \\to 0\\).",
+              "Steps I and II: one fraction\n\\[f(x + \\delta x) - f(x)\\]\n\\[= \\dfrac{1}{\\sqrt{x + \\delta x + a}} - \\dfrac{1}{\\sqrt{x + a}}\\]\n\\[= \\dfrac{\\sqrt{x + a} - \\sqrt{x + \\delta x + a}}{\\sqrt{x + a}\\,\\sqrt{x + \\delta x + a}}\\]\nWhy: Common denominator.",
+              "Rationalise the top\n\\[(\\sqrt{x + a} - \\sqrt{x + \\delta x + a})(\\sqrt{x + a} + \\sqrt{x + \\delta x + a})\\]\n\\[= (x + a) - (x + \\delta x + a) = -\\delta x\\]\nWhy: Multiply top and bottom by the conjugate; \\((A - B)(A + B) = A^2 - B^2\\).",
+              "Steps III and IV: divide and take the limit\n\\[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x} = \\dfrac{-1}{\\sqrt{x + a}\\sqrt{x + \\delta x + a}\\,(\\sqrt{x + a} + \\sqrt{x + \\delta x + a})}\\]\n\\[\\dfrac{dy}{dx} = \\dfrac{-1}{(x + a) \\cdot 2\\sqrt{x + a}}\\]\n\\[= -\\dfrac{1}{2(x + a)^{3/2}}\\]\nWhy: \\(\\delta x\\) cancels; put \\(\\delta x = 0\\); \\((x + a)\\sqrt{x + a} = (x + a)^{3/2}\\).",
+              "Gradient at \\(x = a\\)\n\\[f'(a) = -\\dfrac{1}{2(2a)^{3/2}}\\]\n\\[(2a)^{3/2} = 2a\\sqrt{2a} = 2\\sqrt{2}\\,a^{3/2}\\]\n\\[f'(a) = -\\dfrac{1}{4\\sqrt{2}\\,a^{3/2}}\\]\nWhy: Put \\(x = a\\): \\(x + a = 2a\\).",
+              "Check with the power rule of Section 13.6 (used here only to confirm, not as the method)\n\\[\\dfrac{d}{dx}(x + a)^{-1/2} = -\\tfrac{1}{2}(x + a)^{-3/2} \\;\\checkmark\\]\nWhy: Same general result."
+            ],
+            "final_answer": "\\(\\dfrac{dy}{dx} = -\\dfrac{1}{2(x + a)^{3/2}}\\); gradient at \\(x = a\\): \\(-\\dfrac{1}{4\\sqrt{2}\\,a^{3/2}}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

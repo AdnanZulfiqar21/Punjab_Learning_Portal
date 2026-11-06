@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-13.4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/13.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 250,
+          "pdf_to": 251,
+          "note": "Book p. 245-246: 13.4 power rule; part (a) n a positive integer by the binomial theorem (label (a) printed twice), part (b) n = -m negative integer, Note box (power rule, n in R), rational powers example x^(2/3)"
+        }
+      ],
+      "title": "13.4 Derivation of x^n where n in Z (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH13-13.4",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Bachon, 13.3.2 mein humne chaar qadmon se \\(x^{2}\\), \\(\\sqrt{x}\\) aur \\(\\frac{1}{x^{2}}\\) ke derivatives nikale. Har dafa poori mehnat! Ab sawal yeh hai: kya har power ke liye alag se itni lambi working karni padegi? Nahin. Is section mein hum ek dafa general power \\(x^{n}\\) ka derivative nikal lenge, aur phir ek seedha formula haath aa jayega jise power rule kehte hain. Yeh calculus ka sab se zyada istemal hone wala formula hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "(a) Pehle hum \\(x^{n}\\) ka derivative nikalte hain jab \\(n\\) positive integer ho (\\(1, 2, 3, \\ldots\\))."
+          },
+          {
+            "type": "paragraph",
+            "text": "Farz karein \\(y = x^{n}\\). To\n\\[y + \\delta y = (x + \\delta x)^{n}\\]\naur\n\\[\\delta y = (x + \\delta x)^{n} - x^{n}\\]\nKyun: bilkul wahi Step I aur Step II jo 13.3.2 mein the: \\(x\\) ko \\(x + \\delta x\\) kiya to \\(y\\) ban gaya \\(y + \\delta y\\); phir purana \\(y = x^{n}\\) minus kar ke sirf tabdeeli \\(\\delta y\\) bachi."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab label \"(a)\" do dafa lagataar chhaapti hai: ek dafa \"We find the derivative of \\(x^{n}\\)...\" se pehle aur phir \"Let \\(y = x^{n}\\)\" se pehle. Dono lines ek hi part (a) ki hain; doosra \"(a)\" bas dohraya gaya hai. Part (b) (negative integers) agle page par hai. Hum ne label ek hi dafa likha hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yahan sirf ek naya auzaar (tool) chahiye: binomial theorem, jo aap ne pichle units mein parha. Yeh \\((x + \\delta x)^{n}\\) ko kholta hai jab \\(n\\) positive integer ho:\n\\[(x+\\delta x)^{n} = x^{n} + nx^{n-1}\\delta x\\]\n\\[+ \\dfrac{n(n-1)}{2!}x^{n-2}(\\delta x)^{2} + \\ldots + (\\delta x)^{n}\\]\nPattern dekhiye: \\(x\\) ki power har term mein ek ghat-ti hai, aur \\(\\delta x\\) ki power ek barhti hai. Kitab \\(2!\\) ko purane andaaz mein \\(\\underline{|2}\\) likhti hai; dono ka matlab \\(2 \\times 1 = 2\\) hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Binomial theorem lagane se:\n\\[\\delta y = \\Big[x^{n} + nx^{n-1}\\cdot\\delta x\\]\n\\[+ \\dfrac{n(n-1)}{2!}x^{n-2}(\\delta x)^{2} + \\ldots\\]\n\\[+ (\\delta x)^{n}\\Big] - x^{n}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "yani\n\\[\\delta y = \\delta x\\Big[nx^{n-1}\\]\n\\[+ \\dfrac{n(n-1)}{2!}x^{n-2}\\cdot\\delta x + \\ldots\\]\n\\[+ (\\delta x)^{n-1}\\Big] \\quad \\text{(i)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "(i) kaise bana? Pehla term \\(x^{n}\\) aur aakhir wala \\(-x^{n}\\) aapas mein khatam. Ab jo terms bache un sab mein kam az kam ek \\(\\delta x\\) hai, to ek \\(\\delta x\\) bracket ke bahar nikal liya. Andar har term mein \\(\\delta x\\) ki power ek kam ho gayi: \\((\\delta x)^{2}\\) ban gaya \\(\\delta x\\), aur \\((\\delta x)^{n}\\) ban gaya \\((\\delta x)^{n-1}\\). Yeh wohi kaam hai jo Example 3(b) mein \\((2x + \\delta x)\\,\\delta x\\) likhte waqt kiya tha."
+          },
+          {
+            "type": "paragraph",
+            "text": "(i) ki dono sides ko \\(\\delta x\\) se divide karne par:\n\\[\\dfrac{\\delta y}{\\delta x} = nx^{n-1} + \\dfrac{n(n-1)}{2!}x^{n-2}\\cdot\\delta x\\]\n\\[+ \\ldots + (\\delta x)^{n-1} \\quad \\text{(ii)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab ghor kijiye: (ii) ki right side par pehle term \\(nx^{n-1}\\) ke ilawa har term mein \\(\\delta x\\) maujood hai. Is liye jab \\(\\delta x \\to 0\\), woh sab zero ho jaate hain aur sirf pehla term bachta hai:\n\\[\\dfrac{dy}{dx} = nx^{n-1}\\]\nKyun ke \\(y = x^{n}\\), is liye\n\\[\\dfrac{d}{dx}(x^{n}) = n\\cdot x^{n-1}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "Limit lete waqt sirf pehla term kyun bacha? Kyun ke baqi har term mein \\(\\delta x\\) ya us ki koi power guna (multiply) ho rahi hai. Agar \\(\\delta x\\) zero ki taraf ja raha hai to zero ke qareeb number ko kisi bhi fixed number se multiply karein, nateeja bhi zero ke qareeb hi rahega. Jab ke \\(nx^{n-1}\\) mein \\(\\delta x\\) hai hi nahin, is liye woh jaisa tha waisa rehta hai. Yahi chhota sa nuqta poore saboot ki jaan hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Formula ko purane natijon se milaiye. \\(n = 2\\): \\(\\frac{d}{dx}(x^{2}) = 2x^{1} = 2x\\), bilkul Example 3(b) wala jawab. \\(n = 3\\): \\(3x^{2}\\), jo hum ne 13.3.2 mein \\((x+\\delta x)^{3}\\) khol kar nikala tha. \\(n = 1\\): \\(\\frac{d}{dx}(x) = 1\\cdot x^{0} = 1\\), aur sach mein \\(y = x\\) line ka slope \\(1\\) hai. Formula har jagah sahi utar raha hai.\nYaad karne ka aasan jumla: \"power ko neeche le aao, aur power mein se ek ghata do.\""
+          },
+          {
+            "type": "paragraph",
+            "text": "(b) Ab farz karein \\(y = x^{n}\\) jahan \\(n\\) negative integer hai (\\(-1, -2, -3, \\ldots\\)).\n\\(n = -m\\) rakhein, jahan \\(m\\) positive integer hai. To\n\\[y = x^{-m} = \\dfrac{1}{x^{m}} \\quad \\text{(i)}\\]\n\\[y + \\delta y = \\dfrac{1}{(x+\\delta x)^{m}} \\quad \\text{(ii)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(n = -m\\) kyun rakha? Part (a) wala binomial expansion sirf positive integer powers ke liye hai. \\(x^{n} = \\frac{1}{x^{m}}\\) likhne se power positive ho gayi (\\(m > 0\\)), bas ab woh denominator mein chali gayi. Phir hum \\((x+\\delta x)^{m}\\) ko wohi binomial se khol sakte hain. Yaad rahe yahan \\(x \\ne 0\\), kyun ke zero se divide nahin hota.\nYeh bilkul Example 5 wala tareeqa hai (wahan \\(m = 2\\) tha), bas ab har \\(m\\) ke liye ek saath."
+          },
+          {
+            "type": "paragraph",
+            "text": "(ii) mein se (i) minus karne par:\n\\[\\delta y = \\dfrac{1}{(x+\\delta x)^{m}} - \\dfrac{1}{x^{m}}\\]\n\\[= \\dfrac{x^{m}-(x+\\delta x)^{m}}{x^{m}(x+\\delta x)^{m}}\\]\n\\((x + \\delta x)^{m}\\) ko binomial theorem se kholein to numerator yeh banta hai:\n\\[x^{m}-(x+\\delta x)^{m}\\]\n\\[= x^{m} - \\Big[x^{m} + mx^{m-1}\\delta x\\]\n\\[+ \\dfrac{m(m-1)}{2!}x^{m-2}(\\delta x)^{2}\\]\n\\[+ \\ldots + (\\delta x)^{m}\\Big]\\]\n\\[= -\\delta x\\Big[mx^{m-1}\\]\n\\[+ \\dfrac{m(m-1)}{2!}x^{m-2}\\delta x\\]\n\\[+ \\ldots + (\\delta x)^{m-1}\\Big]\\]\nIs liye\n\\[\\delta y = \\dfrac{-\\delta x\\big[mx^{m-1} + \\ldots\\big]}{x^{m}(x+\\delta x)^{m}}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yahan kya hua? Numerator mein \\(x^{m}\\) minus \\([x^{m} + \\ldots]\\) hai. \\(x^{m}\\) cancel ho gaya, aur bracket ke aage minus tha, is liye baqi har term minus ho gaya. Phir \\(-\\delta x\\) common nikal liya. Minus sign ka khayal rakhiye; yahi aakhir mein jawab ko negative banata hai, jo theek bhi hai, kyun ke \\(\\frac{1}{x^{m}}\\) jaise functions \\(x > 0\\) par ghat-te hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "aur \\(\\delta x\\) se divide karne par:\n\\[\\dfrac{\\delta y}{\\delta x} = \\dfrac{-1}{x^{m}(x+\\delta x)^{m}}\\]\n\\[\\cdot\\Big(mx^{m-1} + \\dfrac{m(m-1)}{2!}x^{m-2}\\cdot\\delta x\\]\n\\[+ \\ldots + (\\delta x)^{m-1}\\Big)\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(\\delta x \\to 0\\) par limit lene se (\\(\\delta x\\) wale saare terms zero ho jaate hain):\n\\[\\dfrac{dy}{dx} = \\dfrac{-1}{x^{m}\\cdot x^{m}}\\cdot mx^{m-1}\\]\n\\[= -mx^{m-1}\\cdot x^{-2m}\\]\n\\[= -mx^{(-m)-1}\\]\n\\[= nx^{n-1} \\quad [\\because -m = n]\\]\nya\n\\[\\dfrac{d(x)^{n}}{dx} = nx^{n-1}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Limit ke baad ke qadam sirf indices (taaqat) ke qawaneen hain:\n\\(\\frac{1}{x^{m}\\cdot x^{m}} = \\frac{1}{x^{2m}} = x^{-2m}\\) (neeche wali power oopar laayein to sign ulta), aur \\(x^{m-1}\\cdot x^{-2m} = x^{m-1-2m} = x^{-m-1}\\) (same base, powers jama).\nAakhir mein \\(-m = n\\) rakha, to \\(-mx^{-m-1} = nx^{n-1}\\). Wahi formula jo part (a) mein mila! Yani positive ho ya negative integer, rule ek hi hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Kitab ka note: \\(\\frac{d}{dx}(x^{n}) = nx^{n-1}\\) ko power rule kehte hain, jahan \\(n \\in \\mathbb{R}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "To hum ne saabit kar diya ke \\(\\frac{d}{dx}(x^{n}) = nx^{n-1}\\), agar \\(n \\in \\mathbb{Z}\\) (integer). Kitab batati hai ke yeh rule \\(n \\in \\mathbb{Q} - \\mathbb{Z}\\) ke liye bhi sahi hai, yani rational (kasri) powers ke liye jo integer nahin.\nMisaal ke taur par:\n\\[\\dfrac{d}{dx}\\left(x^{\\frac{2}{3}}\\right) = \\dfrac{2}{3}x^{\\frac{2}{3}-1}\\]\n\\[= \\dfrac{2}{3x^{\\frac{1}{3}}}\\]\nKyun: power \\(\\frac{2}{3}\\) neeche aayi, aur power mein se \\(1\\) ghata to \\(\\frac{2}{3} - 1 = -\\frac{1}{3}\\). Negative power ko neeche bhej diya to \\(x^{\\frac{1}{3}}\\) denominator mein chala gaya.\nKitab kehti hai ke \\(n \\in \\mathbb{Q} - \\mathbb{Z}\\) ke liye saboot exercise ke taur par chhora gaya hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Asal mein saabit kya hua? Sirf integer powers: (a) positive integers, (b) negative integers. \\(n = 0\\) bhi shaamil hai: \\(x^{0} = 1\\) constant hai, aur \\(\\frac{d}{dx}(1) = 0 = 0\\cdot x^{-1}\\) (Example 3(a)). Rational aur real powers ke liye kitab sirf rule batati hai, saboot nahin.\nKasri (fractional) powers mein rule wahan lagta hai jahan \\(x^{n}\\) aur \\(x^{n-1}\\) defined hon. Jaise \\(x^{\\frac{1}{2}} = \\sqrt{x}\\) ka derivative \\(\\frac{1}{2\\sqrt{x}}\\) sirf \\(x > 0\\) par hai; yahi sharat Example 4 mein bhi aayi thi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Power rule se kuch derivatives (sab ko pehle power ki shakal mein likhiye):\n\\[\\dfrac{d}{dx}(x^{5}) = 5x^{4}\\]\n\\[\\dfrac{d}{dx}(x^{-3}) = -3x^{-4} = \\dfrac{-3}{x^{4}}\\]\n\\[\\dfrac{d}{dx}\\left(\\dfrac{1}{x^{2}}\\right) = \\dfrac{d}{dx}(x^{-2}) = \\dfrac{-2}{x^{3}}\\]\n\\[\\dfrac{d}{dx}(\\sqrt{x}) = \\dfrac{d}{dx}\\left(x^{\\frac{1}{2}}\\right) = \\dfrac{1}{2\\sqrt{x}}\\]\nDekhiye, aakhri do jawab bilkul wahi hain jo Example 5 aur Example 4 mein lambi working se aaye the. Ab woh ek line mein! Lekin yaad rahe: \"by definition\" wale sawal mein yeh shortcut nahin chalega."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(\\frac{d}{dx}(x^{4})\\) nikaal kar \\(x = \\frac{1}{2}\\) par value bataiye. Aur \\(\\frac{d}{dx}(x^{-2})\\) ki value \\(x = 2\\) par?\nJawab: \\(4x^{3}\\), aur \\(x = \\frac{1}{2}\\) par \\(4 \\cdot \\frac{1}{8} = \\frac{1}{2}\\). Doosra: \\(-2x^{-3} = \\frac{-2}{x^{3}}\\), aur \\(x = 2\\) par \\(\\frac{-2}{8} = -\\frac{1}{4}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Power rule lagane se pehle roots aur reciprocals ko power ki shakal mein badal lijiye: \\(\\sqrt[3]{x} = x^{\\frac{1}{3}}\\), \\(\\frac{1}{x^{4}} = x^{-4}\\), \\(\\frac{1}{\\sqrt{x}} = x^{-\\frac{1}{2}}\\). Phir \"power neeche, power mein se ek kam\". Jawab ko wapas root ya fraction ki shakal mein likh dena acha hota hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Power rule: \\(\\frac{d}{dx}(x^{n}) = nx^{n-1}\\).\n2. Positive integer \\(n\\) ka saboot: \\((x+\\delta x)^{n}\\) ka binomial expansion; \\(nx^{n-1}\\) ke ilawa har term mein \\(\\delta x\\) hai jo limit mein zero ho jata hai.\n3. Negative integer \\(n = -m\\): \\(y = \\frac{1}{x^{m}}\\) likh kar \\((x+\\delta x)^{m}\\) ka expansion.\n4. Rational powers ke liye bhi rule sahi hai (kitab ne saboot exercise ke liye chhora), jaise \\(\\frac{d}{dx}(x^{\\frac{2}{3}}) = \\frac{2}{3x^{\\frac{1}{3}}}\\).\n5. \\(n = 0\\) par bhi theek: constant ka derivative zero."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Negative power mein ulti taraf ghatana: \\(\\frac{d}{dx}(x^{-3}) = -3x^{-4}\\), \\(-3x^{-2}\\) nahin. (\\(-3 - 1 = -4\\); number line par baayen jaate hain.)\n2. Power neeche lana bhool jana: \\(\\frac{d}{dx}(x^{5}) = 5x^{4}\\), sirf \\(x^{4}\\) nahin.\n3. \\(\\frac{1}{x^{2}}\\) ko seedha differentiate kar ke \\(\\frac{1}{2x}\\) likh dena. Pehle \\(x^{-2}\\) banaiye.\n4. \\(a^{x}\\) jaise functions (jahan variable power mein ho) par power rule lagana. Yeh rule sirf \\(x^{n}\\) ke liye hai jahan power \\(n\\) constant ho."
+          }
+        ]
+      }
+    }
+  ]
+}
