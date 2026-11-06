@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH3-3.3.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch3",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch3/3.3.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 42,
+          "pdf_to": 43,
+          "note": "Book p. 37-38: 3.3.1 Absolute Value Quadratic Equations, Example 5 with its two-column Check; callouts marked Teaching note / Key points / Common mistake and the Book correction box are ours."
+        }
+      ],
+      "title": "3.3.1 Absolute Value Quadratic Equations",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "To solve the absolute value quadratic equations, all answers must be substituted back into the original equation to verify whether they are valid or not. Sometimes, \"extraneous\" solutions may appear which are not valid and must be eliminated from the final answer.",
+            "bold": [
+              "extraneous"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The method for \\(|ax^{2} + bx + c| = d\\):\n1. If \\(d < 0\\): no solution (an absolute value is never negative).\n2. If \\(d \\ge 0\\): write \\(ax^{2} + bx + c = d\\) or \\(ax^{2} + bx + c = -d\\).\n3. Solve both quadratic equations (factorize or use the quadratic formula). Keep only real roots.\n4. Substitute every root into the original equation and discard any that fail.\nAn extraneous solution is a number produced by the working that does not satisfy the original equation. It appears especially when the right-hand side contains \\(x\\), as in our example below, because then \"\\(d \\ge 0\\)\" is not automatic."
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Solve \\(|x^{2} - 4| = 5\\).",
+            "steps": [
+              "Given: \\(|x^{2} - 4| = 5\\).\nTo find: all real \\(x\\) that satisfy the equation.\nMethod: an absolute value equals 5 when the expression inside is \\(5\\) or \\(-5\\). This gives two quadratic equations without absolute value bars. Solve both, then substitute every answer back into the original equation.",
+              "Step 1: Remove the absolute value\n\\[|x^{2} - 4| = 5\\]\n\\[x^{2} - 4 = \\pm 5\\]\nWhy: \\(|E| = 5\\) means \\(E\\) is 5 units from 0, so \\(E = 5\\) or \\(E = -5\\).",
+              "Step 2: Write the two cases\n\\[x^{2} - 4 = 5 \\;\\text{ or }\\; x^{2} - 4 = -5\\]\n\\[x^{2} = 9 \\;\\text{ or }\\; x^{2} = -1\\]\nWhy: add 4 to both sides of each equation.",
+              "Step 3: Solve each case\n\\[x = \\pm 3 \\;\\text{ or }\\; x = \\pm\\sqrt{-1}\\]\n\\(\\pm\\sqrt{-1}\\) is imaginary, so it is rejected.\nWhy: \\(x^{2} = 9\\) has the two real roots \\(3\\) and \\(-3\\). \\(x^{2} = -1\\) has no real root: no real number has a negative square. We are solving for real \\(x\\) (the absolute value in 3.3 is defined for real numbers), so \\(\\pm i\\) are not admitted.",
+              "Step 4: Check (as printed: substitute back)\nFor \\(x = 3\\):\n\\[|3^{2} - 4| = 5\\]\n\\[|5| = 5 \\Rightarrow 5 = 5\\]\nFor \\(x = -3\\) the book prints \\(|(-3^{2}) - 4| = 5\\); correctly:\n\\[|(-3)^{2} - 4| = 5\\]\n\\[|5| = 5 \\Rightarrow 5 = 5\\]\nWhy: substituting back catches any extraneous answers; both values satisfy the equation.",
+              "Step 5: Write the solution set\nHence solution set \\(= \\{\\pm 3\\}\\), i.e. \\(\\{-3, 3\\}\\).\nWhy: only the real values that passed the check are kept."
+            ],
+            "answer": "Solution set \\(= \\{\\pm 3\\}\\), i.e. \\(x = -3\\) or \\(x = 3\\).",
+            "book_errors": [
+              "\\(|(-3^{2}) - 4| = 5\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the check for \\(x = -3\\) the book prints \\(|(-3^{2}) - 4| = 5\\). As written, \\(-3^{2} = -9\\) and \\(|-9 - 4| = 13\\), not 5. The bracket must contain \\(-3\\) before squaring: \\(|(-3)^{2} - 4| = |9 - 4| = 5\\). The conclusion, \\(x = -3\\) is a solution, is correct."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A worked case where checking really matters (our example, not from the book): \\(|x^{2} - 4| = 3x\\).\nCase \\(x^{2} - 4 = 3x\\): \\(x^{2} - 3x - 4 = 0\\), \\((x - 4)(x + 1) = 0\\), \\(x = 4\\) or \\(x = -1\\).\nCase \\(x^{2} - 4 = -3x\\): \\(x^{2} + 3x - 4 = 0\\), \\((x + 4)(x - 1) = 0\\), \\(x = -4\\) or \\(x = 1\\).\nCheck: \\(x = 4\\): \\(|12| = 12 = 3(4)\\), valid. \\(x = 1\\): \\(|-3| = 3 = 3(1)\\), valid. \\(x = -1\\): \\(|-3| = 3\\) but \\(3(-1) = -3\\), extraneous. \\(x = -4\\): \\(|12| = 12\\) but \\(3(-4) = -12\\), extraneous.\nSolution set \\(= \\{1, 4\\}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(|E| = d\\) (with \\(d \\ge 0\\)) splits into \\(E = d\\) or \\(E = -d\\).\n2. Each case is an ordinary quadratic equation.\n3. Reject non-real roots; we solve over the real numbers.\n4. Always substitute back into the original equation and remove extraneous solutions.\n5. In the check, put brackets around a negative value before squaring: \\((-3)^{2} = 9\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Solving only \\(E = d\\) and forgetting \\(E = -d\\).\n2. Writing \\(-3^{2}\\) for \\((-3)^{2}\\): \\(-3^{2} = -9\\), but \\((-3)^{2} = 9\\).\n3. Keeping \\(x = \\pm\\sqrt{-1}\\) as a solution of a real equation.\n4. Skipping the check when the right side contains \\(x\\): that is exactly when extraneous solutions appear."
+          }
+        ]
+      }
+    }
+  ]
+}
