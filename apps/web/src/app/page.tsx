@@ -10,7 +10,13 @@ import { PageHero } from "@/components/page-hero";
 import { SectionHeader } from "@/components/section-header";
 import { SubjectTiles } from "@/components/subject-tiles";
 import { Notice, SkeletonCards, SkeletonLines } from "@/components/ui";
-import { getDiscovery } from "@/lib/api";
+import { Marquee } from "@/components/premium/marquee";
+import { NumberTicker } from "@/components/premium/number-ticker";
+import { SpotlightCard } from "@/components/premium/spotlight-card";
+import { TextEffect } from "@/components/premium/text-effect";
+import { getBookFor, getDiscovery } from "@/lib/api";
+import { subjectKey } from "@/lib/learn-context";
+import { taughtBooks } from "@/lib/subjects";
 import { LEARN_COOKIE, parseLearnCookie } from "@/lib/learn-context";
 import { api, currentUser, features } from "@/lib/session";
 
@@ -71,9 +77,16 @@ function Welcome({ d, grade }: { d: Discovery | null; grade?: number }) {
       <PageHero
         eyebrow="Class 11 · Class 12"
         title={
+          // PREMIUM-LOOK-01: the words rise in one by one (CSS only; still for reduced motion), the last line in the
+          // subject accent as a gradient.
           <>
-            Learn your Punjab textbook <br className="hidden sm:inline" />
-            the easy way.
+            <TextEffect text="Learn your Punjab textbook" />
+            <br className="hidden sm:inline" />{" "}
+            <TextEffect
+              text="the easy way."
+              delay={0.35}
+              wordClassName="bg-gradient-to-r from-accent to-accent-strong bg-clip-text pb-1 text-transparent"
+            />
           </>
         }
         lead="Every chapter is organised from the official Punjab textbooks, in English and easy Roman Urdu, with page references back to the book. Class 11 and Class 12 stay separate."
@@ -103,6 +116,12 @@ function Welcome({ d, grade }: { d: Discovery | null; grade?: number }) {
         </Notice>
       )}
 
+      {d && (
+        <Suspense fallback={null}>
+          <Stats d={d} />
+        </Suspense>
+      )}
+
       <SubjectTiles books={d?.books ?? null} grade={grade} />
 
       <section aria-labelledby="features-heading">
@@ -111,14 +130,16 @@ function Welcome({ d, grade }: { d: Discovery | null; grade?: number }) {
         </h2>
         <ul className="grid gap-4 md:grid-cols-3">
           {FEATURES.map((f) => (
-            <GlassCard as="li" key={f.title} className="space-y-1.5">
-              <p className="flex items-center gap-1.5 text-sm text-muted">
-                <Icon name={f.icon} size={16} className="text-accent" />
-                {f.label}
-              </p>
-              <h3 className="font-display text-lg font-semibold">{f.title}</h3>
-              <p className="text-[15px] text-muted">{f.text}</p>
-            </GlassCard>
+            <li key={f.title}>
+              <SpotlightCard className="h-full space-y-1.5 p-[22px]">
+                <p className="flex items-center gap-1.5 text-sm text-muted">
+                  <Icon name={f.icon} size={16} className="text-accent" />
+                  {f.label}
+                </p>
+                <h3 className="font-display text-lg font-semibold">{f.title}</h3>
+                <p className="text-[15px] text-muted">{f.text}</p>
+              </SpotlightCard>
+            </li>
           ))}
         </ul>
       </section>
@@ -192,6 +213,44 @@ function Welcome({ d, grade }: { d: Discovery | null; grade?: number }) {
           </div>
         </GlassCard>
       </div>
+    </div>
+  );
+}
+
+/** PREMIUM-LOOK-01: what the portal holds, counted from the real book outlines (shared public reads, PUBLIC-CACHE-01),
+ * and a slow strip of real chapter names. Published-lesson counts stay in "What is published so far" below. */
+async function Stats({ d }: { d: Discovery }) {
+  const books = taughtBooks(d.books);
+  if (books.length === 0) return null;
+  const outlines = await Promise.all(books.map((b) => getBookFor(b.grade, b.subject).catch(() => null)));
+  const ok = outlines.flatMap((r) => (r && r.ok ? [r.data] : []));
+  const chapters = ok.reduce((n, b) => n + b.chapters.length, 0);
+  const topics = ok.reduce((n, b) => n + b.chapters.reduce((m, c) => m + c.topic_count, 0), 0);
+  const titles = ok.flatMap((b) => b.chapters.slice(0, 4).map((c) => ({ id: c.id, title: c.title, subject: b.breadcrumb.subject.code })));
+  return (
+    <div className="space-y-6">
+      <section aria-label="What is in the portal" className="grid grid-cols-3 gap-3 sm:gap-4">
+        {[
+          { n: books.length, l: "books" },
+          { n: chapters, l: "chapters" },
+          { n: topics, l: "topics" },
+        ].map((x) => (
+          <div key={x.l} className="glass rounded-card px-3 py-5 text-center sm:py-7">
+            <NumberTicker value={x.n} className="block font-display text-3xl font-bold tabular-nums sm:text-5xl" />
+            <span className="text-sm text-muted sm:text-base">{x.l}</span>
+          </div>
+        ))}
+      </section>
+      {titles.length > 0 && (
+        <Marquee label="Some chapters in the portal">
+          {titles.map((c) => (
+            <span key={c.id} data-subject={subjectKey(c.subject)} className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/70 px-4 py-2 text-sm whitespace-nowrap">
+              <span className="size-2 rounded-full bg-accent" aria-hidden />
+              {c.title}
+            </span>
+          ))}
+        </Marquee>
+      )}
     </div>
   );
 }

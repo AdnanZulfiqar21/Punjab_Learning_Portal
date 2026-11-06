@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { getBookFor } from "@/lib/api";
 import { GRADE_LABEL, assessmentSummary, chapterHeading, pageRange, parseGrade } from "@/lib/format";
 import { subjectKey } from "@/lib/learn-context";
-import { GlassCardLink } from "@/components/glass-card";
 import { PageHero } from "@/components/page-hero";
+import { SpotlightCard } from "@/components/premium/spotlight-card";
 import { StatChip } from "@/components/stat-chip";
 import { Badge, Breadcrumbs, Notice, SkeletonCards } from "@/components/ui";
 
@@ -79,33 +81,44 @@ async function BookView({ grade: rawGrade, subject }: { grade: string; subject: 
           const exercises = assessmentSummary(ch.assessment_counts);
           return (
             <li key={ch.id}>
-              <GlassCardLink href={`/learn/chapter/${ch.id}`} padded={false} className="group relative flex h-full gap-4 overflow-hidden p-5">
-                <span aria-hidden className="absolute inset-y-0 left-0 w-1 bg-accent opacity-0 transition group-hover:opacity-100" />
-                <span
-                  aria-hidden
-                  className="flex size-12 shrink-0 items-center justify-center rounded-inner bg-accent-soft font-display text-xl font-bold text-accent ring-1 ring-accent/20"
+              {/* PREMIUM-LOOK-01 (owner, 2026-11-06): two columns; the card lifts with the accent bar and border on
+                  hover, a soft spotlight follows the pointer, and the number badge grows a little. */}
+              <SpotlightCard className="h-full border border-transparent hover:border-accent">
+                <Link
+                  href={`/learn/chapter/${ch.id}`}
+                  className="relative flex h-full gap-4 p-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
-                  {ch.number}
-                </span>
-                <span className="flex min-w-0 flex-1 flex-col gap-2">
-                  <span className="flex items-center justify-between gap-2 text-xs font-semibold uppercase tracking-wide text-muted">
-                    <span>
-                      {chapterHeading(bc.chapter_label, ch)}
-                      {ch.contents_number != null && ch.contents_number !== ch.number && (
-                        <span className="normal-case"> · listed as {ch.contents_number} on the Contents page</span>
+                  <span aria-hidden className="absolute inset-y-0 left-0 w-1 bg-accent opacity-0 transition group-hover:opacity-100" />
+                  <span
+                    aria-hidden
+                    className="flex size-12 shrink-0 items-center justify-center rounded-inner bg-accent-soft font-display text-xl font-bold text-accent ring-1 ring-accent/20 transition group-hover:scale-105"
+                  >
+                    {ch.number}
+                  </span>
+                  <span className="flex min-w-0 flex-1 flex-col gap-2">
+                    <span className="flex items-center justify-between gap-2 text-xs font-semibold uppercase tracking-wide text-muted">
+                      <span>
+                        {chapterHeading(bc.chapter_label, ch)}
+                        {ch.contents_number != null && ch.contents_number !== ch.number && (
+                          <span className="normal-case"> · listed as {ch.contents_number} on the Contents page</span>
+                        )}
+                      </span>
+                      {ch.status !== "complete" ? (
+                        <Badge tone="warn">{ch.status}</Badge>
+                      ) : (
+                        <ArrowUpRight size={18} aria-hidden className="shrink-0 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" />
                       )}
                     </span>
-                    {ch.status !== "complete" && <Badge tone="warn">{ch.status}</Badge>}
+                    <span className="font-display text-lg leading-snug font-semibold group-hover:text-accent">{ch.title}</span>
+                    <span className="mt-auto flex flex-wrap gap-1.5 pt-1 text-xs text-muted">
+                      <span className="rounded-full bg-[var(--track)] px-2 py-0.5">{ch.topic_count} topics</span>
+                      {ch.visual_count > 0 && <span className="rounded-full bg-[var(--track)] px-2 py-0.5">{ch.visual_count} figures</span>}
+                      <span className="rounded-full bg-[var(--track)] px-2 py-0.5">Pages {pageRange(ch.printed_start, ch.printed_end)}</span>
+                      {exercises.length > 0 && <span className="rounded-full bg-[var(--track)] px-2 py-0.5">{exercises.slice(0, 2).join(" · ")}</span>}
+                    </span>
                   </span>
-                  <span className="font-display text-lg leading-snug font-semibold group-hover:text-accent">{ch.title}</span>
-                  <span className="mt-auto flex flex-wrap gap-1.5 pt-1 text-xs text-muted">
-                    <span className="rounded-full bg-[var(--track)] px-2 py-0.5">{ch.topic_count} topics</span>
-                    {ch.visual_count > 0 && <span className="rounded-full bg-[var(--track)] px-2 py-0.5">{ch.visual_count} figures</span>}
-                    <span className="rounded-full bg-[var(--track)] px-2 py-0.5">Pages {pageRange(ch.printed_start, ch.printed_end)}</span>
-                    {exercises.length > 0 && <span className="rounded-full bg-[var(--track)] px-2 py-0.5">{exercises.slice(0, 2).join(" · ")}</span>}
-                  </span>
-                </span>
-              </GlassCardLink>
+                </Link>
+              </SpotlightCard>
             </li>
           );
         })}

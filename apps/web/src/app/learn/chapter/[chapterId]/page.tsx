@@ -17,8 +17,10 @@ import { CONTENT_STATE_TEXT, GRADE_LABEL, assessmentSummary, pageRange } from "@
 import { LANGUAGE_NAME, subjectKey } from "@/lib/learn-context";
 import { ButtonLink, buttonClasses } from "@/components/button";
 import { Icon, SubjectIcon } from "@/components/icons";
-import { StatChip } from "@/components/stat-chip";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
+import { AnimatedTabs } from "@/components/premium/animated-tabs";
+import { CommandSearch, type SearchItem } from "@/components/premium/command-search";
+import { TextEffect } from "@/components/premium/text-effect";
 import { api, currentUser, deviceScope, features, sessionToken } from "@/lib/session";
 import { TIME_ZONE } from "@/lib/dates";
 
@@ -66,34 +68,38 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
             { label: `${bc.chapter_label} ${ch.number}` },
           ]}
         />
-        {/* DESIGN-01: the chapter opens on a glass hero in the subject colour, like its book (BOOK-PAGE-01). Only
-            figures the API gives are shown. */}
-        <header className="glass relative overflow-hidden rounded-card px-6 py-8 sm:px-9 sm:py-10">
-          <span aria-hidden className="pointer-events-none absolute inset-0 bg-accent-soft opacity-60" />
+        {/* PREMIUM-LOOK-01 (owner, 2026-11-06): the chapter opens on a banner in the subject colour, white text, with
+            soft light shapes (darker in dark mode so the text keeps its contrast). Only figures the API gives are shown. */}
+        <header className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-accent to-accent-strong px-6 py-8 text-white shadow-glass sm:px-10 sm:py-11 dark:from-[color-mix(in_oklab,var(--accent)_42%,black)] dark:to-[color-mix(in_oklab,var(--accent-strong)_30%,black)]">
+          <span aria-hidden className="pointer-events-none absolute -top-16 -right-10 size-56 rounded-full bg-white/15 blur-2xl" />
+          <span aria-hidden className="pointer-events-none absolute -bottom-20 left-1/3 size-64 rounded-full bg-white/10 blur-3xl" />
           <span
             aria-hidden
-            className="pointer-events-none absolute -bottom-8 right-4 select-none font-display text-[8rem] leading-none font-bold text-accent opacity-10 sm:text-[10rem]"
+            className="pointer-events-none absolute -bottom-8 right-4 select-none font-display text-[8rem] leading-none font-bold text-white opacity-10 sm:text-[10rem]"
           >
             {ch.number}
           </span>
           <div className="relative space-y-4">
-            <p className="flex items-center gap-3 text-sm font-semibold text-accent">
+            <p className="flex items-center gap-3 text-sm font-semibold text-white/85">
               <SubjectIcon subject={bc.subject.code} size={40} />
               <span>
                 {gradeLabel} · {bc.subject.name} · {bc.chapter_label} {ch.number}
                 {ch.contents_number != null && ch.contents_number !== ch.number && ` (Contents page: ${ch.contents_number})`}
               </span>
             </p>
-            <h1 className="font-display text-[30px] leading-9 font-bold tracking-tight sm:text-[42px] sm:leading-[3.25rem]">{ch.title}</h1>
-            <div aria-hidden className="h-1 w-16 rounded-full bg-accent" />
-            {ch.main_concept && <p className="max-w-3xl text-muted sm:text-lg">{ch.main_concept}</p>}
-            <ul className="flex flex-wrap gap-2 pt-1">
-              <li>
-                <StatChip icon="file-text">Pages {pageRange(ch.source.printed_start, ch.source.printed_end)}</StatChip>
+            <h1 className="font-display text-[30px] leading-9 font-bold tracking-tight text-white sm:text-[42px] sm:leading-[3.25rem]">
+              <TextEffect text={ch.title} />
+            </h1>
+            {ch.main_concept && <p className="max-w-3xl text-white/85 sm:text-lg">{ch.main_concept}</p>}
+            <ul className="flex flex-wrap gap-2 pt-1 text-sm font-medium">
+              <li className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 ring-1 ring-white/25">
+                <Icon name="file-text" size={15} />
+                Pages {pageRange(ch.source.printed_start, ch.source.printed_end)}
               </li>
               {ch.visual_count > 0 && (
-                <li>
-                  <StatChip icon="image">{ch.visual_count} figures and tables</StatChip>
+                <li className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1.5 ring-1 ring-white/25">
+                  <Icon name="image" size={15} />
+                  {ch.visual_count} figures and tables
                 </li>
               )}
             </ul>
@@ -108,9 +114,13 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
       )}
 
       <section aria-labelledby="topics-heading" className="space-y-3">
-        <h2 id="topics-heading" className="font-display text-2xl font-semibold tracking-tight">
-          Topics
-        </h2>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 id="topics-heading" className="font-display text-2xl font-semibold tracking-tight">
+            Topics
+          </h2>
+          {/* PREMIUM-LOOK-01: Ctrl K (or the button) jumps to any page of the chapter; the dialog loads on first use. */}
+          {topics.length > 0 && <CommandSearch items={searchItems(topics)} base="/learn/topic" placeholder="Jump to a topic…" />}
+        </div>
         {topics.length === 0 ? (
           <p className="text-muted">No topics are recorded for this chapter.</p>
         ) : (
@@ -165,6 +175,15 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
   );
 }
 
+function searchItems(nodes: TopicNode[], group = "", out: SearchItem[] = []): SearchItem[] {
+  for (const n of nodes) {
+    const name = n.number ? `${n.number} ${n.title}` : n.title;
+    out.push({ id: n.id, label: name, group: group || name });
+    searchItems(n.children, group || name, out);
+  }
+  return out;
+}
+
 function topicTitles(nodes: TopicNode[], out = new Map<string, string>()): Map<string, string> {
   for (const n of nodes) {
     out.set(n.id, n.number ? `${n.number} ${n.title}` : n.title);
@@ -206,19 +225,11 @@ async function Lessons({ chapterId, topics, hidden, lang }: { chapterId: string;
           Lessons
         </h2>
         {lessons.length > 0 && (
-          <nav aria-label="Lesson language" className="glass inline-flex gap-1 rounded-full p-1 text-sm">
-            {LANGUAGES.map(([k, label]) => (
-              <Link
-                key={k}
-                href={`/learn/chapter/${chapterId}${k === "en" ? "" : `?lang=${k}`}`}
-                aria-current={k === lang ? "true" : undefined}
-                lang={k === "ur" ? "ur" : "en"}
-                className={`inline-flex min-h-11 items-center rounded-full px-4 transition duration-200 ${k === lang ? "bg-foreground font-semibold text-background shadow-glass" : "text-muted hover:bg-surface-muted hover:text-foreground"}`}
-              >
-                {label}
-              </Link>
-            ))}
-          </nav>
+          <AnimatedTabs
+            label="Lesson language"
+            active={lang}
+            items={LANGUAGES.map(([k, label]) => ({ key: k, label, lang: k === "ur" ? "ur" : "en", href: `/learn/chapter/${chapterId}${k === "en" ? "" : `?lang=${k}`}` }))}
+          />
         )}
       </div>
       {place && place.lesson_id !== lessons[0]?.id && (
@@ -341,7 +352,7 @@ function TopicItem({ topic, favourites, depth = 0, fold = false }: { topic: Topi
     const what = /^exercise/i.test(topic.title) ? (count === 1 ? "question" : "questions") : count === 1 ? "lesson" : "lessons";
     return (
       <li className="py-0.5">
-        <details className="group">
+        <details className="outline-fold group">
           <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-lg py-1.5 font-medium text-accent hover:text-accent-strong [&::-webkit-details-marker]:hidden">
             <Icon name="chevron-right" size={16} className="shrink-0 transition-transform duration-200 group-open:rotate-90" />
             <span>{topic.title}</span>
