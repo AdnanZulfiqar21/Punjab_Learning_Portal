@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-8-Q10",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-8-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 115,
+          "pdf_to": 115,
+          "note": "Exercise 6.8, Question 10: book p.110 (PDF 115). Answer key PDF 305 (answers for 1-5, 8, 9, 11; 6, 7 and 10 are proofs). Solution book PDF 531-552 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10. Prove that: \\(1 + 2\\left(1 + \\frac{1}{n}\\right) + 3\\left(1 + \\frac{1}{n}\\right)^{2} + \\cdots\\) to \\(n\\) terms \\(= n^{2}\\)",
+            "explanation": "A proof. The left side is an A.G.P.: A.P. part \\(1, 2, 3, \\ldots\\), G.P. ratio \\(1 + \\frac1n\\).\nCalling the ratio \\(y\\) keeps it short, and \\(1 - y = -\\frac1n\\) is very simple.\nPlan: put \\(y = 1 + \\frac1n\\), multiply by \\(y\\), shift, subtract, sum the G.P., simplify to \\(n^2\\).",
+            "steps": [
+              "Given: \\(1 + 2y + 3y^{2} + \\cdots + n\\,y^{n-1}\\) with \\(y = 1 + \\frac1n\\)\nTo find: prove the sum is \\(n^2\\).\nMethod: Multiply-by-\\(r\\)-and-subtract (the method of 6.8.1): write \\(S_n\\), write \\(rS_n\\) one place to the right, subtract; the middle becomes a G.P. that we can sum. Here \\(\\frac{1}{1 - y} = -n\\).",
+              "Introduce \\(y\\)\n\\[y = 1 + \\dfrac{1}{n}\\]\n\\[1 - y = -\\dfrac{1}{n}\\]\n\\[\\dfrac{1}{1 - y} = -n\\]\nWhy: The \\(k\\)th term is \\(k\\,y^{k-1}\\), so the \\(n\\)th (last) term is \\(n\\,y^{n-1}\\).",
+              "Write \\(S\\) and \\(yS\\)\n\\[S = 1 + 2y + 3y^{2} + \\cdots + n\\,y^{n-1}\\]\n\\[yS = y + 2y^{2} + \\cdots\\]\n\\[\\quad + (n - 1)y^{n-1} + n\\,y^{n}\\]\nWhy: Multiply by \\(y\\) and shift so equal powers line up.",
+              "Subtract\n\\[(1 - y)S = 1 + y + y^{2} + \\cdots\\]\n\\[\\quad + y^{n-1} - n\\,y^{n}\\]\nWhy: Each pair leaves 1 times the power, e.g. \\((2 - 1)y = y\\); the first term 1 stays; the last term \\(ny^n\\) is subtracted.",
+              "Sum the G.P. and simplify\n\\[1 + y + \\cdots + y^{n-1} = \\dfrac{1 - y^{n}}{1 - y}\\]\n\\[= -n(1 - y^{n})\\]\n\\[(1 - y)S = -n + n\\,y^{n} - n\\,y^{n}\\]\n\\[= -n\\]\nWhy: G.P. with first term 1, ratio \\(y\\), \\(n\\) terms; \\(\\frac{1}{1 - y} = -n\\); the \\(y^n\\) terms cancel.",
+              "Find \\(S\\)\n\\[S = \\dfrac{-n}{1 - y} = (-n)(-n)\\]\n\\[= n^{2}\\]\nWhy: Divide by \\(1 - y\\), i.e. multiply by \\(\\frac{1}{1 - y} = -n\\).",
+              "Check with \\(n = 2\\)\n\\[y = \\tfrac{3}{2}:\\ 1 + 2 \\cdot \\tfrac{3}{2} = 4 = 2^{2} \\;\\checkmark\\]\nWhy: Two terms give 4, as the formula says."
+            ],
+            "final_answer": "Hence proved: the sum of \\(n\\) terms is \\(n^{2}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

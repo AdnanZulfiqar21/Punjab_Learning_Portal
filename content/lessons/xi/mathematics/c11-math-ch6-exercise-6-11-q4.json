@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-11-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-11-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 126,
+          "pdf_to": 126,
+          "note": "Exercise 6.11, Question 4: book p.121-122 (PDF 126-127); Q14 is cut off on PDF 127 (rest of page blank). Answer key PDF 305-306. Solution book PDF 596-616 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. Determine the total worth of a yearly Rs. 5000 investment after 20 years if the interest rate is 5% compounded annually.",
+            "explanation": "A new Rs. 5000 is invested every year; each deposit grows at 5% compound interest for a different number of years.\nThe final values of the deposits form a G.P., so the total worth is the SUM of a G.P.\nPlan: take each deposit at the start of a year (this is what the key's answer uses), list what each grows to, add with \\(S_n = \\frac{a_1(r^n - 1)}{r - 1}\\).",
+            "steps": [
+              "Given: Rs. 5000 invested at the start of every year for 20 years, 5% compounded annually.\nTo find: the total worth \\(W\\) after 20 years.\nMethod: Each deposit's final value is \\(5000(1.05)^k\\); these form a G.P., so use \\(S_n = \\frac{a_1(r^n - 1)}{r - 1}\\) (as \\(r > 1\\)).",
+              "Find what each deposit grows to\n\\[\\text{1st}: 5000(1.05)^{20}\\]\n\\[\\text{2nd}: 5000(1.05)^{19}\\]\n\\[\\ldots\\]\n\\[\\text{20th}: 5000(1.05)^{1}\\]\nWhy: A deposit made at the start of year \\(k\\) stays invested \\(21 - k\\) years, gaining one factor 1.05 per year.",
+              "Write the total as a G.P.\n\\[W = 5000(1.05) + 5000(1.05)^2\\]\n\\[+ \\ldots + 5000(1.05)^{20}\\]\n\\[a_1 = 5250,\\ r = 1.05,\\ n = 20\\]\nWhy: Written from smallest to largest, each term is 1.05 times the one before; \\(5000 \\times 1.05 = 5250\\).",
+              "Use the G.P. sum formula\n\\[W = \\dfrac{5250[(1.05)^{20} - 1]}{1.05 - 1}\\]\n\\[= \\dfrac{5250[(1.05)^{20} - 1]}{0.05}\\]\n\\[= 105000[(1.05)^{20} - 1]\\]\nWhy: \\(1.05 - 1 = 0.05\\) and \\(5250 \\div 0.05 = 105000\\).",
+              "Work out \\((1.05)^{20}\\)\n\\[(1.05)^5 = 1.2762815625\\]\n\\[(1.05)^{10} \\approx 1.62889463\\]\n\\[(1.05)^{20} \\approx 2.65329771\\]\nWhy: Start from \\((1.05)^5\\) (as in Question 3), square to get the 10th power, square again for the 20th.",
+              "Find the total worth\n\\[W \\approx 105000 \\times 1.65329771\\]\n\\[\\approx 173596.26\\]\nWhy: Subtract 1, multiply by 105000."
+            ],
+            "final_answer": "\\(W \\approx\\) Rs. 173596"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-6.8.1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/6.8.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 111,
+          "pdf_to": 111,
+          "note": "Book p. 106: 6.8.1 A.G. series; blue heading 'Sum of nth Terms of Arithmetico-Geometric Series' with the derivation by subtracting rS_n, ending in formula (iii)"
+        }
+      ],
+      "title": "6.8.1 Arithmetico-Geometric Series (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH6-6.8.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Pichle hisse mein humne A.G.P. ki terms banana seekha. Ab agla qudrati sawal: in terms ka jama kaise karein? Jaise G.P. ka jama nikaalne ke liye humne '\\(r\\) se zarb karo aur tafreeq karo' wala tareeqa use kiya tha, bilkul wahi tareeqa yahan bhi kaam karega, bas ek qadam zyada hoga."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki definition: arithmetico-geometric sequence ki terms ke jama ko arithmetico-geometric series kehte hain. Yani is series ki shakal yeh hai:\n\\[ab + (a + d)br + (a + 2d)br^{2}\\]\n\\[+ \\cdots + \\{a + (n - 1)d\\}br^{n-1}\\]"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Sum of nth Terms of Arithmetico-Geometric Series"
+          },
+          {
+            "type": "paragraph",
+            "text": "Maan lijiye\n\\[S_n = ab + (a + d)br + (a + 2d)br^{2}\\]\n\\[+ \\cdots + [a + (n - 1)d]br^{n-1} \\quad \\text{(i)}\\]\nTo\n\\[rS_n = abr + (a + d)br^{2} + \\cdots\\]\n\\[+ [a + (n - 2)d]br^{n-1}\\]\n\\[+ [a + (n - 1)d]br^{n} \\quad \\text{(ii)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Kyun",
+            "text": "\\(r\\) se zarb kyun kiya? Kyun ke \\(r\\) G.P. wale hisse ka common ratio hai; zarb dene se har term ki power ek barh jati hai. Hum ne (ii) ki terms ko ek jagah daayen (right) khiska kar likha hai taa ke (ii) ki har term (i) ki usi power wali term ke bilkul neeche aaye. Misal: (i) mein \\((a + d)br\\) hai, aur (ii) mein \\(abr\\); dono mein \\(r\\) ki power 1 hai, is liye yeh ek doosre ke neeche."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab (ii) ko (i) mein se tafreeq karte hain:\n\\[(1 - r)S_n = ab\\]\n\\[+ [dbr + dbr^{2} + \\cdots + dbr^{n-1}]\\]\n\\[- [a + (n - 1)d]br^{n}\\]\n\\[= ab + \\dfrac{dbr(1 - r^{n-1})}{1 - r}\\]\n\\[\\quad - [a + (n - 1)d]br^{n}\\]\n\\[= ab + \\dfrac{dbr}{1 - r} - \\dfrac{dbr^{n}}{1 - r}\\]\n\\[\\quad - [a + (n - 1)d]br^{n}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Kyun",
+            "text": "Tafreeq mein kya hua? Same power wali terms mein G.P. hissa same hai, sirf A.P. hissa alag hai, aur A.P. ki do lagaatar terms mein farq hamesha \\(d\\) hota hai:\n\\[(a + d)br - abr = dbr\\]\n\\[(a + 2d)br^{2} - (a + d)br^{2} = dbr^{2}\\]\nIs tarah bracket \\(dbr + dbr^{2} + \\cdots + dbr^{n-1}\\) ban gaya. Yeh ek G.P. hai: pehli term \\(dbr\\), ratio \\(r\\), aur terms \\(n - 1\\) (powers 1 se \\(n - 1\\) tak). 6.7 ke formula se iska jama \\(\\frac{dbr(1 - r^{n-1})}{1 - r}\\) hai. Baqi bachi (i) ki pehli term \\(ab\\), jis ke neeche kuch nahin tha, aur (ii) ki aakhri term, jis ke upar kuch nahin tha; woh minus ke saath aati hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Kyun",
+            "text": "Teesri line mein fraction ko do hisson mein kyun tora? \\(\\frac{dbr(1 - r^{n-1})}{1 - r} = \\frac{dbr - dbr\\cdot r^{n-1}}{1 - r} = \\frac{dbr}{1 - r} - \\frac{dbr^{n}}{1 - r}\\), kyun ke \\(r \\cdot r^{n-1} = r^{n}\\). Is se aage divide karna aasan ho jata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab dono taraf \\(1 - r\\) se divide karein (har term ko):"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}S_n &= \\dfrac{ab}{1 - r} + \\dfrac{dbr}{(1 - r)^{2}} \\\\ &\\quad - \\dfrac{dbr^{n}}{(1 - r)^{2}} - \\dfrac{[a + (n - 1)d]br^{n}}{1 - r}\\quad \\text{(iii)}\\end{aligned}",
+            "text_alt": "S n equals a b over 1 minus r, plus d b r over 1 minus r squared, minus d b r to the power n over 1 minus r squared, minus a plus n minus 1 times d, times b r to the power n, over 1 minus r. Equation (iii)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahi arithmetico-geometric series ki n terms ka required jama hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Formula ko ek chhoti series par chala kar dekhte hain: \\(1 + 2\\cdot 2 + 3\\cdot 4 + 4\\cdot 8\\). Yahan A.P. \\(1, 2, 3, 4\\) (\\(a = 1, d = 1\\)) aur G.P. \\(1, 2, 4, 8\\) (\\(b = 1, r = 2\\)), \\(n = 4\\).\nSeedha jama: \\(1 + 4 + 12 + 32 = 49\\).\nFormula (iii) se, \\(1 - r = -1\\) aur \\(r^{4} = 16\\):\n\\[\\tfrac{1}{-1} + \\tfrac{2}{1} - \\tfrac{16}{1} - \\tfrac{4 \\cdot 16}{-1}\\]\n\\[= -1 + 2 - 16 + 64 = 49\\]\nDono barabar! Dhyan dein: \\((1 - r)^{2} = (-1)^{2} = 1\\) positive hai, magar \\(1 - r = -1\\) negative; signs ka khayal rakhein."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Formula (iii) lamba hai aur ratta lagane ki zaroorat nahin. Kitab ki saari examples aur exercises mein wahi tareeqa dohraya jata hai: \\(S_n\\) likho, \\(r\\) se zarb karo, tafreeq karo, beech wali G.P. ka jama karo, aur \\(S_n\\) nikaal lo. Tareeqa samajh liya to har A.G.P. hal ho jayegi, aur examiner bhi steps hi dekhta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "1. Agar \\(d = 0\\) ho to A.G.P. kya ban jati hai? Kya formula (iii) tab G.P. ka formula de deta hai?\n2. Beech wali G.P. mein \\(n - 1\\) terms kyun hain, \\(n\\) kyun nahin?\n3. \\(1 + 3\\cdot 3 + 5\\cdot 9\\) ka jama seedha aur formula se nikaal kar milaaiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. A.G.P. ki terms ka jama arithmetico-geometric series hai.\n2. Tareeqa: \\(S_n\\) (i), \\(rS_n\\) (ii) ek jagah khiska kar, phir (i) \\(-\\) (ii).\n3. Beech mein G.P. \\(dbr + \\cdots + dbr^{n-1}\\) banti hai, \\(n - 1\\) terms.\n4. Aakhri term \\(-[a + (n - 1)d]br^{n}\\) kabhi na bhoolein.\n5. Formula (iii), \\(r \\ne 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. (ii) ko khiskaaye baghair tafreeq karna: sirf same power wali terms ko ek doosre se ghatayein.\n2. (ii) ki aakhri term \\(-[a + (n - 1)d]br^{n}\\) chhor dena.\n3. Beech wali G.P. ki terms \\(n\\) gin lena; woh \\(n - 1\\) hain.\n4. \\(1 - r\\) se divide karte waqt sirf ek term ko divide karna, baqi ko bhool jana.\n5. \\(r > 1\\) par \\(1 - r\\) negative hota hai; minus signs ka hisaab ghalat ho jata hai."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-7-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-7-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 111,
+          "pdf_to": 111,
+          "note": "Exercise 6.7, Question 6: book pages 105-106 (PDF 110-111): Q1, Q2, Q3(i)-(ii), Q4(i)-(ii), Q5, Q6 (8 parts); answer key book page 300 (PDF 305)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. Show that the ratio of the sum of first \\(n\\) terms of a G.P. to the sum of terms from \\((n + 1)\\)th to \\((2n)\\)th term is \\(\\frac{1}{r^{n}}\\), where \\(r\\) is the common ratio of G.P.",
+            "explanation": "A proof. The terms from the \\((n+1)\\)th to the \\((2n)\\)th are themselves a G.P. of \\(n\\) terms with the same ratio \\(r\\).\nPlan: write both sums with the G.P. sum formula and divide (assume \\(r \\neq 1\\) and \\(r^{n} \\neq 1\\) so nothing is zero; for \\(r = 1\\) both sums are \\(na_1\\) and the ratio is \\(1 = \\frac{1}{1^{n}}\\)).",
+            "steps": [
+              "Given: a G.P. \\(a_1, a_1 r, a_1 r^{2}, \\ldots\\)\nTo prove: \\(\\dfrac{S_n}{a_{n+1} + \\cdots + a_{2n}} = \\dfrac{1}{r^{n}}\\).\nMethod: Use \\(S_n = \\frac{a_1(1 - r^{n})}{1 - r}\\) for both groups of terms.",
+              "Sum of the first \\(n\\) terms\n\\[S_n = \\dfrac{a_1(1 - r^{n})}{1 - r}\\]\nWhy: The standard G.P. sum formula.",
+              "The second group of terms\n\\[a_{n+1} = a_1 r^{n}\\]\n\\[a_{n+1} + \\cdots + a_{2n} = \\dfrac{a_1 r^{n}(1 - r^{n})}{1 - r}\\]\nWhy: From the \\((n+1)\\)th to the \\((2n)\\)th there are \\(2n - n = n\\) terms, a G.P. with first term \\(a_1 r^{n}\\) and ratio \\(r\\).",
+              "Divide\n\\[\\dfrac{S_n}{a_{n+1} + \\cdots + a_{2n}} = \\dfrac{a_1(1 - r^{n})}{a_1 r^{n}(1 - r^{n})}\\]\n\\[= \\dfrac{1}{r^{n}}\\]\nWhy: The common bottom \\(1 - r\\) cancels, then \\(a_1\\) and \\((1 - r^{n})\\) cancel.",
+              "Check: with numbers\n\\[1, 2, 4, 8:\\ \\ n = 2,\\ r = 2\\]\n\\[\\dfrac{1 + 2}{4 + 8} = \\dfrac{3}{12} = \\dfrac{1}{4} = \\dfrac{1}{2^{2}}\\]\nWhy: The first two terms over the next two terms gives \\(\\frac{1}{r^{n}}\\), as proved."
+            ],
+            "final_answer": "Hence proved: the ratio is \\(\\frac{1}{r^{n}}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-7-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-7-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 110,
+          "pdf_to": 110,
+          "note": "Exercise 6.7, Question 3: book pages 105-106 (PDF 110-111): Q1, Q2, Q3(i)-(ii), Q4(i)-(ii), Q5, Q6 (8 parts); answer key book page 300 (PDF 305)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Sum to \\(n\\) terms the series: \\(0.2 + 0.22 + 0.222 + \\cdots\\)",
+            "explanation": "This series is not a G.P. (\\(\\frac{0.22}{0.2} = 1.1\\) but \\(\\frac{0.222}{0.22} \\approx 1.009\\)).\nTrick: take out 2, multiply and divide by 9, so each term becomes \\(1\\) minus a power of \\(\\frac{1}{10}\\).\nPlan: split into \"\\(n\\) ones\" minus a G.P., and sum that G.P.",
+            "steps": [
+              "Given: \\(0.2 + 0.22 + 0.222 + \\cdots\\) to \\(n\\) terms.\nTo find: \\(S_n\\).\nMethod: Rewrite each term so a G.P. appears, then use \\(S_n = \\frac{a_1(1 - r^{n})}{1 - r}\\).",
+              "Take out the common factor 2\n\\[S_n = 2(0.1 + 0.11 + 0.111 + \\cdots)\\]\nWhy: \\(0.2 = 2 \\times 0.1\\), \\(0.22 = 2 \\times 0.11\\), and so on.",
+              "Multiply and divide by 9\n\\[S_n = \\dfrac{2}{9}(0.9 + 0.99 + 0.999 + \\cdots)\\]\nWhy: \\(\\frac{9}{9} = 1\\) does not change the value, and \\(9 \\times 0.1 = 0.9\\), \\(9 \\times 0.11 = 0.99\\), \\(9 \\times 0.111 = 0.999\\).",
+              "Write each term as 1 minus a small number\n\\[S_n = \\dfrac{2}{9}\\left[(1 - 0.1) + (1 - 0.01) + \\cdots\\right]\\]\n\\[= \\dfrac{2}{9}\\left[n - (0.1 + 0.01 + \\cdots)\\right]\\]\nWhy: \\(0.9 = 1 - 0.1\\), \\(0.99 = 1 - 0.01\\), ... There are \\(n\\) terms, so the ones add up to \\(n\\).",
+              "Sum the G.P. inside\n\\[0.1 + 0.01 + \\cdots = \\dfrac{\\frac{1}{10}\\left(1 - \\frac{1}{10^{n}}\\right)}{1 - \\frac{1}{10}}\\]\n\\[= \\dfrac{1}{9}\\left(1 - \\dfrac{1}{10^{n}}\\right)\\]\nWhy: It is a G.P. with \\(a_1 = \\frac{1}{10}\\), \\(r = \\frac{1}{10}\\), \\(n\\) terms; \\(\\frac{1}{10} \\div \\frac{9}{10} = \\frac{1}{9}\\).",
+              "Put it back\n\\[S_n = \\dfrac{2}{9}\\left[n - \\dfrac{1}{9}\\left(1 - \\dfrac{1}{10^{n}}\\right)\\right]\\]\nWhy: Replace the bracketed G.P. by its sum.",
+              "Check: \\(n = 2\\)\n\\[\\dfrac{2}{9}\\left[2 - \\dfrac{1}{9} \\cdot \\dfrac{99}{100}\\right] = \\dfrac{2}{9} \\cdot \\dfrac{189}{100}\\]\n\\[= 0.42\\]\nWhy: \\(0.2 + 0.22 = 0.42\\). The formula agrees."
+            ],
+            "final_answer": "\\(S_n = \\frac{2}{9}\\left[n - \\frac{1}{9}\\left(1 - \\frac{1}{10^{n}}\\right)\\right]\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Sum to \\(n\\) terms the series: \\(3 + 33 + 333 + \\cdots\\)",
+            "explanation": "The same trick as (i), for whole numbers made of one repeated digit.\nPlan: take out 3, multiply and divide by 9 so the terms become \\(10^{k} - 1\\), then sum the G.P. of powers of 10.",
+            "steps": [
+              "Given: \\(3 + 33 + 333 + \\cdots\\) to \\(n\\) terms.\nTo find: \\(S_n\\).\nMethod: Rewrite each term so that a G.P. appears, then use the G.P. sum.",
+              "Take out 3, multiply and divide by 9\n\\[S_n = 3(1 + 11 + 111 + \\cdots)\\]\n\\[= \\dfrac{1}{3}(9 + 99 + 999 + \\cdots)\\]\nWhy: \\(33 = 3 \\times 11\\), and \\(9 \\times 11 = 99\\); also \\(\\frac{3}{9} = \\frac{1}{3}\\).",
+              "Write each term as a power of 10 minus 1\n\\[S_n = \\dfrac{1}{3}\\left[(10 - 1) + (10^{2} - 1) + \\cdots + (10^{n} - 1)\\right]\\]\n\\[= \\dfrac{1}{3}\\left[(10 + 10^{2} + \\cdots + 10^{n}) - n\\right]\\]\nWhy: \\(9 = 10 - 1\\), \\(99 = 10^{2} - 1\\), \\(999 = 10^{3} - 1\\); the \\(n\\) ones add to \\(n\\).",
+              "Sum the G.P. of powers of 10\n\\[10 + 10^{2} + \\cdots + 10^{n} = \\dfrac{10(10^{n} - 1)}{10 - 1}\\]\n\\[= \\dfrac{10}{9}(10^{n} - 1)\\]\nWhy: First term 10, ratio 10, \\(n\\) terms. For \\(r > 1\\) the form \\(\\frac{a_1(r^{n} - 1)}{r - 1}\\) keeps the signs positive (it is the same formula).",
+              "Put it back\n\\[S_n = \\dfrac{1}{3}\\left[\\dfrac{10}{9}(10^{n} - 1) - n\\right]\\]\nWhy: Replace the powers of 10 by their sum.",
+              "Check: \\(n = 2\\)\n\\[\\dfrac{1}{3}\\left[\\dfrac{10}{9}(99) - 2\\right] = \\dfrac{1}{3}(110 - 2)\\]\n\\[= 36\\]\nWhy: \\(3 + 33 = 36\\). The formula agrees."
+            ],
+            "final_answer": "\\(S_n = \\frac{1}{3}\\left[\\frac{10}{9}(10^{n} - 1) - n\\right]\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

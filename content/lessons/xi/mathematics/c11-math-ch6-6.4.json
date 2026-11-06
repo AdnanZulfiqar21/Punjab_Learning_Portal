@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-6.4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/6.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 100,
+          "pdf_to": 103,
+          "note": "Book p. 95-98: 6.4 Series, partial sums, derivation of S_n (forward + backward sums), Key Concept box, Examples 7-11 (Ex 7 Method-1/Method-2, Ex 11 Step-I/II/III); Exercise 6.4 not included"
+        }
+      ],
+      "title": "6.4 Series",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The sum of the terms of a sequence is called the series of the corresponding sequence. For example, \\(1 + 2 + 3 + \\cdots + n\\) is a finite series of the first \\(n\\) natural numbers."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A sequence is a list; a series is a sum.\nThe sequence \\(1, 2, 3, \\ldots, n\\) writes the numbers one after another, separated by commas.\nThe series \\(1 + 2 + 3 + \\cdots + n\\) adds the same numbers, joined by plus signs.\nIn this section we learn to find the sum of an arithmetic series quickly, without adding the terms one by one."
+          },
+          {
+            "type": "paragraph",
+            "text": "The sum of the first \\(n\\) terms of a series is denoted by \\(S_n\\). We write\n\\[S_n = a_1 + a_2 + \\cdots + a_n\\]\nHere,\n\\[S_1 = a_1\\]\n\\[S_2 = a_1 + a_2\\]\n\\[S_3 = a_1 + a_2 + a_3\\]\n\\[S_n = a_1 + a_2 + a_3 + \\cdots + a_n\\]\n\\(S_n\\) is known as the \\(n^{\\text{th}}\\) partial sum."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Partial sums of the A.P. \\(3, 7, 11, 15, \\ldots\\):\n\\(S_1 = 3\\), \\(S_2 = 3 + 7 = 10\\), \\(S_3 = 10 + 11 = 21\\), \\(S_4 = 21 + 15 = 36\\).\nEach partial sum is the previous one plus the next term: \\(S_n = S_{n-1} + a_n\\). So a term can be recovered from two sums:\n\\[a_n = S_n - S_{n-1},\\quad n \\ge 2\\]\nThis link between terms and sums is often useful in exercises."
+          },
+          {
+            "type": "paragraph",
+            "text": "The sum of the terms of an arithmetic sequence is called an arithmetic series."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Deriving the sum formula"
+          },
+          {
+            "type": "paragraph",
+            "text": "To develop a formula for the sum of any arithmetic series, consider the sum written forwards (each term is \\(d\\) more than the one before), where \\(a_n = \\ell\\) is the last term:\n\\[S_n = a_1 + (a_1 + d) + (a_1 + 2d)\\]\n\\[+ \\cdots + (\\ell - 2d) + (\\ell - d) + \\ell\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Now write the same sum backwards (each term is \\(d\\) less than the one before):\n\\[S_n = \\ell + (\\ell - d) + (\\ell + 2d)\\]\n\\[+ \\cdots + (a_1 + 2d) + (a_1 + d) + a_1\\]",
+            "book_errors": [
+              "\\[S_n = \\ell + (\\ell - d) + (\\ell + 2d)\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the backward sum the book prints the third term as \\((\\ell + 2d)\\). Going backwards every term is \\(d\\) less than the previous one, so after \\(\\ell\\) and \\(\\ell - d\\) comes \\((\\ell - 2d)\\). The correct line is\n\\[S_n = \\ell + (\\ell - d) + (\\ell - 2d) + \\cdots\\]\nOnly with \\(\\ell - 2d\\) does it pair with \\(a_1 + 2d\\) to give \\(a_1 + \\ell\\), as the next step needs."
+          },
+          {
+            "type": "paragraph",
+            "text": "Adding the two lines term by term (first with first, second with second, and so on), every pair gives the same total:\n\\[2S_n = (a_1 + \\ell) + (a_1 + \\ell)\\]\n\\[+ \\cdots + (a_1 + \\ell)\\]\n\\[= n(a_1 + \\ell)\\]\n[We have \\(n\\) terms of \\((a_1 + \\ell)\\).] Therefore"
+          },
+          {
+            "type": "equation",
+            "latex": "S_n = \\dfrac{n}{2}(a_1 + \\ell)",
+            "text_alt": "S n equals n over 2 times, a 1 plus l"
+          },
+          {
+            "type": "paragraph",
+            "text": "But the last term is the \\(n^{\\text{th}}\\) term, \\(\\ell = a_1 + (n-1)d\\). Substituting \\(\\ell\\) in \\(S_n\\):\n\\[S_n = \\dfrac{n}{2}[a_1 + a_1 + (n-1)d]\\]\nThus,"
+          },
+          {
+            "type": "equation",
+            "latex": "S_n = \\dfrac{n}{2}[2a_1 + (n-1)d]",
+            "text_alt": "S n equals n over 2 times, 2 a 1 plus (n minus 1) d"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does every pair give \\(a_1 + \\ell\\)? Moving one place to the right, the forward term grows by \\(d\\) and the backward term falls by \\(d\\); the gain and the loss cancel, so the pair total never changes.\nAnother way to read \\(S_n = \\frac{n}{2}(a_1 + \\ell)\\): \\(\\frac{a_1 + \\ell}{2}\\) is the average of the first and last terms, and in an A.P. it is also the average of all the terms. So\nsum = (number of terms) \\(\\times\\) (average term)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Key Concept",
+            "text": "The sum \\(S_n\\) of the first \\(n\\) terms of an arithmetic series is given by\n\\[S_n = \\dfrac{n}{2}[2a_1 + (n-1)d]\\]\nor\n\\[S_n = \\dfrac{n}{2}(a_1 + a_n)\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Which form to use?\nIf the last term \\(a_n\\) is known, use \\(S_n = \\frac{n}{2}(a_1 + a_n)\\).\nIf the common difference \\(d\\) is known (and not the last term), use \\(S_n = \\frac{n}{2}[2a_1 + (n-1)d]\\).\nEither form gives the same answer, as Example 7 shows. Between them the formulas link five quantities \\(a_1, d, n, a_n, S_n\\): given any three, the other two can be found."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Find the sum of the first 100 positive integers.",
+            "steps": [
+              "Given: the series \\(1 + 2 + 3 + \\cdots + 100\\).\nTo find: \\(S_{100}\\).\nMethod: the terms increase by 1 each time, so this is an arithmetic series with \\(a_1 = 1\\), \\(a_n = 100\\), \\(d = 1\\), \\(n = 100\\). Since both the last term and \\(d\\) are known, either sum formula works; the book shows both (Method-1 and Method-2).",
+              "Method-1: use the first and last terms\n\\[S_n = \\dfrac{n}{2}(a_1 + a_n)\\]\n\\[S_{100} = \\dfrac{100}{2}(1 + 100)\\]\n\\[S_{100} = 50(101)\\]\n\\[S_{100} = 5050\\]\nWhy: we know the last term \\(a_{100} = 100\\), so this form needs no \\(d\\).",
+              "Method-2: use \\(a_1\\) and \\(d\\)\n\\[S_n = \\dfrac{n}{2}[2a_1 + (n-1)d]\\]\n\\[S_{100} = \\dfrac{100}{2}[2(1) + (100-1)1]\\]\n\\[S_{100} = 50(101)\\]\n\\[S_{100} = 5050\\]\nWhy: \\(2(1) + 99(1) = 101\\), the same bracket as in Method-1; this form is the one to use when the last term is not given.",
+              "Check:\nPair the first and last, second and second last, and so on: \\(1 + 100 = 101\\), \\(2 + 99 = 101\\), ..., \\(50 + 51 = 101\\). There are 50 such pairs, so the sum is \\(50 \\times 101 = 5050\\)."
+            ],
+            "answer": "\\(S_{100} = 5050\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Find the \\(19^{\\text{th}}\\) term and the partial sum of 19 terms of the arithmetic series:\n\\[2 + \\dfrac{7}{2} + 5 + \\dfrac{13}{2} + \\cdots\\]",
+            "steps": [
+              "Given: the arithmetic series \\(2 + \\frac{7}{2} + 5 + \\frac{13}{2} + \\cdots\\)\nTo find: \\(a_{19}\\) and \\(S_{19}\\).\nMethod: find \\(a_1\\) and \\(d\\); use \\(a_n = a_1 + (n-1)d\\) for the term; then, since the last term \\(a_{19}\\) is known, use \\(S_n = \\frac{n}{2}(a_1 + a_n)\\).",
+              "Step 1: Read \\(a_1\\) and \\(d\\)\n\\[a_1 = 2\\]\n\\[d = a_2 - a_1 = \\dfrac{7}{2} - 2 = \\dfrac{3}{2}\\]\nWhy: in an A.P. the difference of any two consecutive terms is \\(d\\). (Check with the next pair: \\(5 - \\frac{7}{2} = \\frac{3}{2}\\).)",
+              "Step 2: The 19th term\n\\[a_n = a_1 + (n-1)d\\]\n\\[a_{19} = 2 + (19-1)\\dfrac{3}{2}\\]\n\\[= 2 + 18\\left(\\dfrac{3}{2}\\right)\\]\n\\[= 2 + 27 = 29\\]\nWhy: to reach the 19th term we add \\(d\\) eighteen times to the first term.",
+              "Step 3: The partial sum of 19 terms\n\\[S_n = \\dfrac{n}{2}(a_1 + a_n)\\]\n\\[S_{19} = \\dfrac{19}{2}(2 + 29)\\]\n\\[= \\dfrac{19}{2}(31) = \\dfrac{589}{2}\\]\nWhy: now that \\(a_{19}\\) is known, the first-and-last form is the shortest.",
+              "Check:\nWith the other form: \\(S_{19} = \\frac{19}{2}\\left[2(2) + 18\\left(\\frac{3}{2}\\right)\\right] = \\frac{19}{2}(4 + 27) = \\frac{19}{2}(31) = \\frac{589}{2}\\). Same answer."
+            ],
+            "answer": "\\(a_{19} = 29\\) and \\(S_{19} = \\frac{589}{2}\\) (that is, 294.5)."
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "Find the arithmetic series if its fifth term is 19 and \\(S_4 = a_9 + 1\\).",
+            "steps": [
+              "Given: \\(a_5 = 19\\) and \\(S_4 = a_9 + 1\\).\nTo find: the series, that is \\(a_1\\) and \\(d\\).\nMethod: write each condition in terms of \\(a_1\\) and \\(d\\) (using \\(a_n = a_1 + (n-1)d\\) and \\(S_n = \\frac{n}{2}[2a_1 + (n-1)d]\\)), then solve the two equations simultaneously.",
+              "Step 1: First condition\n\\[a_5 = 19\\]\n\\[a_1 + 4d = 19 \\quad \\text{(i)}\\]\nWhy: \\(a_5 = a_1 + (5-1)d\\).",
+              "Step 2: Second condition\n\\[S_4 = \\dfrac{4}{2}[2a_1 + (4-1)d] = a_9 + 1\\]\n\\[4a_1 + 6d = a_1 + 8d + 1\\]\n\\[3a_1 - 1 = 2d\\]\nWhy: \\(S_4 = 2(2a_1 + 3d) = 4a_1 + 6d\\) and \\(a_9 = a_1 + 8d\\). Moving the \\(a_1\\) terms to the left and the \\(d\\) terms to the right gives \\(3a_1 - 1 = 2d\\).",
+              "Step 3: Substitute in (i)\n\\(a_1 + 4d\\) is \\(a_1 + 2(2d)\\), so substituting \\(2d = 3a_1 - 1\\) in (i):\n\\[a_1 + 2(3a_1 - 1) = 19\\]\n\\[7a_1 - 2 = 19\\]\n\\[7a_1 = 21 \\Rightarrow a_1 = 3\\]\nWhy: replacing \\(2d\\) leaves one equation in \\(a_1\\) only.",
+              "Step 4: Find \\(d\\)\nFrom (i):\n\\[4d = 19 - a_1 = 19 - 3 = 16\\]\n\\[d = 4\\]\nWhy: any one of the equations gives \\(d\\) once \\(a_1\\) is known.",
+              "Step 5: Write the series\nStart at 3 and keep adding 4:\n\\[3 + 7 + 11 + 15 + 19 + \\cdots\\]\nWhy: an arithmetic series is fixed completely by \\(a_1\\) and \\(d\\).",
+              "Check:\n\\(a_5 = 3 + 4(4) = 19\\). \\(S_4 = 3 + 7 + 11 + 15 = 36\\) and \\(a_9 + 1 = (3 + 8 \\cdot 4) + 1 = 35 + 1 = 36\\). Both conditions hold."
+            ],
+            "answer": "The series is \\(3 + 7 + 11 + 15 + 19 + \\cdots\\) (\\(a_1 = 3\\), \\(d = 4\\))."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "How many terms of the series \\(-9 - 6 - 3 + 0 + \\cdots\\) amounts to 66?",
+            "steps": [
+              "Given: the series \\(-9 - 6 - 3 + 0 + \\cdots\\), i.e. the terms \\(-9, -6, -3, 0, \\ldots\\), and \\(S_n = 66\\).\nTo find: \\(n\\), the number of terms.\nMethod: \\(n\\) is the unknown, so put the known \\(a_1\\), \\(d\\) and \\(S_n\\) into \\(S_n = \\frac{n}{2}[2a_1 + (n-1)d]\\); this gives a quadratic equation in \\(n\\).",
+              "Step 1: Read \\(a_1\\) and \\(d\\)\n\\[a_1 = -9\\]\n\\[d = -6 - (-9) = 3\\]\nWhy: \\(d\\) is any term minus the term before it.",
+              "Step 2: Use the sum formula\nLet \\(S_n = 66\\):\n\\[66 = \\dfrac{n}{2}[2(-9) + (n-1)3]\\]\n\\[132 = n[3n - 21]\\]\n\\[44 = n(n - 7)\\]\nWhy: multiply both sides by 2; inside the bracket \\(-18 + 3n - 3 = 3n - 21 = 3(n - 7)\\), and dividing both sides by 3 gives \\(44 = n(n-7)\\).",
+              "Step 3: Solve the quadratic\n\\[n^{2} - 7n - 44 = 0\\]\n\\[n = \\dfrac{7 \\pm \\sqrt{49 + 176}}{2}\\]\n\\[= \\dfrac{7 \\pm \\sqrt{225}}{2} = \\dfrac{7 \\pm 15}{2}\\]\n\\[n = 11,\\ -4\\]\nWhy: quadratic formula with \\(a = 1\\), \\(b = -7\\), \\(c = -44\\): \\(b^{2} - 4ac = 49 + 176 = 225\\). (It also factorizes: \\((n - 11)(n + 4) = 0\\).)",
+              "Step 4: Choose the meaningful root\n\\(n\\) counts terms, so it must be a positive integer. \\(n = -4\\) is rejected; \\(n = 11\\).\nWhy: an algebraic root is not automatically a sensible answer; always test it against the meaning of the unknown.",
+              "Check:\n\\(a_{11} = -9 + 10(3) = 21\\), so \\(S_{11} = \\frac{11}{2}(-9 + 21) = \\frac{11}{2}(12) = 66\\)."
+            ],
+            "answer": "\\(n = 11\\): the sum of eleven terms amounts to 66."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why can a series that starts with negative terms add up to 66? The terms \\(-9, -6, -3\\) pull the total down, 0 adds nothing, and the terms \\(3, 6, 9\\) cancel the negative ones exactly, so \\(S_7 = 0\\). After that every new term is positive: \\(12 + 15 + 18 + 21 = 66\\). So \\(S_{11} = 66\\), exactly what the formula gave."
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "Find the first three terms of an arithmetic series in which \\(a_1 = 9\\), \\(a_n = 105\\) and \\(S_n = 741\\).",
+            "steps": [
+              "Given: \\(a_1 = 9\\), \\(a_n = 105\\), \\(S_n = 741\\).\nTo find: \\(a_1, a_2, a_3\\).\nMethod: (Step-I) the form \\(S_n = \\frac{n}{2}(a_1 + a_n)\\) contains only one unknown, \\(n\\), so it gives \\(n\\); (Step-II) then \\(a_n = a_1 + (n-1)d\\) gives \\(d\\); (Step-III) add \\(d\\) to get the next terms.",
+              "Step-I: Find \\(n\\)\nSince we know \\(a_1\\), \\(a_n\\) and \\(S_n\\), use \\(S_n = \\frac{n}{2}(a_1 + a_n)\\):\n\\[741 = \\dfrac{n}{2}(9 + 105)\\]\n\\[741 = 57n\\]\n\\[13 = n\\]\nWhy: \\(\\frac{114}{2} = 57\\) and \\(741 \\div 57 = 13\\).",
+              "Step-II: Find \\(d\\)\n\\[a_n = a_1 + (n-1)d\\]\n\\[105 = 9 + (13-1)d\\]\n\\[96 = 12d\\]\n\\[8 = d\\]\nWhy: now \\(n\\) is known, so the \\(n^{\\text{th}}\\) term formula has only \\(d\\) unknown.",
+              "Step-III: Use \\(d\\) to determine \\(a_2\\) and \\(a_3\\)\n\\[a_2 = 9 + 8 = 17\\]\n\\[a_3 = 17 + 8 = 25\\]\nWhy: each term of an A.P. is the previous term plus \\(d\\).",
+              "Check:\n\\(S_{13} = \\frac{13}{2}[2(9) + 12(8)] = \\frac{13}{2}(18 + 96) = \\frac{13}{2}(114) = 741\\), and \\(a_{13} = 9 + 12(8) = 105\\)."
+            ],
+            "answer": "The first three terms are 9, 17 and 25."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A series is the sum of the terms of a sequence; \\(S_n\\) is the sum of the first \\(n\\) terms (the \\(n^{\\text{th}}\\) partial sum).\n2. Arithmetic series: \\(S_n = \\frac{n}{2}(a_1 + a_n)\\) or \\(S_n = \\frac{n}{2}[2a_1 + (n-1)d]\\).\n3. The formula comes from writing the sum forwards and backwards and adding: every pair gives \\(a_1 + a_n\\).\n4. Use the first form when the last term is known, the second when \\(d\\) is known.\n5. If \\(n\\) is the unknown, the second form gives a quadratic; keep only a positive whole-number root.\n6. \\(a_n = S_n - S_{n-1}\\) for \\(n \\ge 2\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing \\(S_n = n[2a_1 + (n-1)d]\\): the factor is \\(\\frac{n}{2}\\), not \\(n\\).\n2. Using \\(n\\) instead of \\(n - 1\\) inside the bracket: it is \\((n-1)d\\).\n3. Finding \\(d\\) the wrong way round: \\(d = a_2 - a_1\\), not \\(a_1 - a_2\\). In Example 10, \\(d = -6 - (-9) = +3\\).\n4. Keeping a negative or fractional value of \\(n\\): the number of terms is always a positive integer.\n5. Mixing up \\(a_n\\) (one term) with \\(S_n\\) (the sum of \\(n\\) terms)."
+          }
+        ]
+      }
+    }
+  ]
+}

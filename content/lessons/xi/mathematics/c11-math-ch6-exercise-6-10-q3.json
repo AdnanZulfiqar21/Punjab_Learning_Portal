@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-10-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-10-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 122,
+          "pdf_to": 122,
+          "note": "Exercise 6.10, Question 3: book p.117 (PDF 122; the 'Exercise 6.10' banner is blank in the scan; some + signs are faint, all confirmed by the key). Answer key PDF 305. Solution book PDF 578-595 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Find the sum to \\(n\\) terms of the series whose \\(n\\)th term is: \\(3n^2 + n + 1\\)",
+            "explanation": "The \\(n\\)th term is given, so the general term is known.\nPlan: rename it with \\(k\\) (\\(n\\) now counts the terms), add with the sigma formulas, simplify, check.",
+            "steps": [
+              "Given: \\(n\\)th term \\(= 3n^2 + n + 1\\)\nTo find: \\(S_n\\).\nMethod: Write the \\(k\\)th term \\(T_k\\) as a polynomial in \\(k\\), then add all \\(n\\) terms with \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n + 1)}{2}\\), \\(\\sum k^2 = \\frac{n(n + 1)(2n + 1)}{6}\\), \\(\\sum k^3 = \\left[\\frac{n(n + 1)}{2}\\right]^2\\) (all sums from \\(k = 1\\) to \\(n\\)).",
+              "Write the \\(k\\)th term\n\\[T_k = 3k^2 + k + 1\\]\nWhy: Replace \\(n\\) by \\(k\\); \\(n\\) will now stand for the number of terms we add.",
+              "Add all \\(n\\) terms with the sigma formulas\n\\[S_n = 3\\sum k^2 + \\sum k + \\sum 1\\]\n\\[= \\dfrac{n(n + 1)(2n + 1)}{2} + \\dfrac{n(n + 1)}{2} + n\\]\nWhy: \\(\\frac{3}{6} = \\frac{1}{2}\\); \\(\\sum 1 = n\\).",
+              "Take out the common factor and simplify\n\\[= \\dfrac{n}{2}\\left[(n + 1)(2n + 1) + (n + 1) + 2\\right]\\]\n\\[= \\dfrac{n}{2}(2n^2 + 4n + 4)\\]\n\\[= n(n^2 + 2n + 2)\\]\nWhy: Take out \\(\\frac{n}{2}\\) (the last \\(n\\) leaves 2), add like terms, cancel the 2.",
+              "Check with a small \\(n\\)\n\\[n = 2:\\ 5 + 15 = 20\\]\n\\[2(4 + 4 + 2) = 20 \\;\\checkmark\\]\nWhy: Adding the first terms directly gives the same value as the formula."
+            ],
+            "final_answer": "\\(S_n = n(n^2 + 2n + 2)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Find the sum to \\(n\\) terms of the series whose \\(n\\)th term is: \\(n^2 + 4n + 1\\)",
+            "explanation": "The \\(n\\)th term is given, so the general term is known.\nPlan: rename it with \\(k\\) (\\(n\\) now counts the terms), add with the sigma formulas, simplify, check.",
+            "steps": [
+              "Given: \\(n\\)th term \\(= n^2 + 4n + 1\\)\nTo find: \\(S_n\\).\nMethod: Write the \\(k\\)th term \\(T_k\\) as a polynomial in \\(k\\), then add all \\(n\\) terms with \\(\\sum 1 = n\\), \\(\\sum k = \\frac{n(n + 1)}{2}\\), \\(\\sum k^2 = \\frac{n(n + 1)(2n + 1)}{6}\\), \\(\\sum k^3 = \\left[\\frac{n(n + 1)}{2}\\right]^2\\) (all sums from \\(k = 1\\) to \\(n\\)).",
+              "Write the \\(k\\)th term\n\\[T_k = k^2 + 4k + 1\\]\nWhy: Replace \\(n\\) by \\(k\\); \\(n\\) will now stand for the number of terms we add.",
+              "Add all \\(n\\) terms with the sigma formulas\n\\[S_n = \\sum k^2 + 4\\sum k + \\sum 1\\]\n\\[= \\dfrac{n(n + 1)(2n + 1)}{6} + 2n(n + 1) + n\\]\nWhy: \\(4 \\cdot \\frac{n(n + 1)}{2} = 2n(n + 1)\\).",
+              "Take out the common factor and simplify\n\\[= \\dfrac{n}{6}\\left[(n + 1)(2n + 1) + 12(n + 1) + 6\\right]\\]\n\\[= \\dfrac{n}{6}(2n^2 + 3n + 1 + 12n + 18)\\]\n\\[= \\dfrac{n}{6}(2n^2 + 15n + 19)\\]\nWhy: Take out \\(\\frac{n}{6}\\): \\(2n(n + 1)\\) leaves \\(12(n + 1)\\) and \\(n\\) leaves 6.",
+              "Check with a small \\(n\\)\n\\[n = 2:\\ 6 + 13 = 19\\]\n\\[\\tfrac{2}{6}(8 + 30 + 19) = 19 \\;\\checkmark\\]\nWhy: Adding the first terms directly gives the same value as the formula."
+            ],
+            "final_answer": "\\(S_n = \\frac{n}{6}(2n^2 + 15n + 19)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

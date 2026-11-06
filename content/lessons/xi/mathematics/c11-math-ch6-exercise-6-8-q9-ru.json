@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-8-Q9-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-8-q9",
+      "title": "Question 9 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 115,
+          "pdf_to": 115,
+          "note": "Exercise 6.8, Question 9: book p.110 (PDF 115). Answer key PDF 305 (answers for 1-5, 8, 9, 11; 6, 7 and 10 are proofs). Solution book PDF 531-552 used as a reference only."
+        }
+      ],
+      "variant_of": "C11-MATH-CH6-EXERCISE-6-8-Q9",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9. Find the sum to \\(n\\) terms of the series: \\(\\frac{2n + 1}{2n - 1} + 3\\left(\\frac{2n + 1}{2n - 1}\\right)^{2} + 5\\left(\\frac{2n + 1}{2n - 1}\\right)^{3} + \\cdots\\)",
+            "explanation": "Yeh A.G.P. thoda darawna lagta hai kyunke ratio ek fraction \\(\\frac{2n+1}{2n-1}\\) hai, aur \\(n\\) do kaam kar raha hai: ratio ke andar bhi hai aur terms ki tadaad bhi \\(n\\) hai.\nTeacher ka mashwara: lambi cheez ko ek chhota naam de do. Ratio ko \\(y\\) kehte hain; phir series \\(y + 3y^2 + 5y^3 + \\cdots\\) ban jati hai, jis mein A.P. part \\(1, 3, 5, \\ldots\\) hai.\nPlan: \\(y\\) ke baare mein do kaam ki baatein nikalo, phir multiply, shift, minus, G.P. ka sum, aur aakhir mein \\(y\\) wapas rakho.",
+            "steps": [
+              "Diya gaya hai: \\(y + 3y^{2} + 5y^{3} + \\cdots\\) (\\(n\\) terms), jahan \\(y = \\frac{2n+1}{2n-1}\\); A.P. \\(1, 3, 5, \\ldots\\), G.P. ratio \\(y\\)\nHumein find karna hai: \\(S\\), yani \\(n\\) terms ka sum.\nTareeqa: Wahi tareeqa jo 6.8.1 mein seekha: pehle \\(S_n\\) likho, phir poori series ko G.P. ke ratio \\(r\\) se multiply kar ke \\(rS_n\\) ek jagah right shift kar ke neeche likho, phir minus karo. Beech mein ek seedhi G.P. ban jati hai jis ka sum hum formula se nikal lete hain. A.G.P. ke sum ka koi ratta formula yaad karne ki zaroorat nahi, sirf yeh tareeqa yaad rakhein. \\(n\\) pehle se istemal mein hai, is liye \\(k\\)th term \\((2k - 1)y^k\\) likhte hain; aakhri (\\(n\\)th) term \\((2n - 1)y^n\\) hai.",
+              "Do kaam ki baatein\n\\[1 - y = \\dfrac{(2n - 1) - (2n + 1)}{2n - 1}\\]\n\\[= \\dfrac{-2}{2n - 1}\\]\n\\[\\dfrac{1}{1 - y} = -\\dfrac{2n - 1}{2}\\]\n\\[(2n - 1)y = 2n + 1\\]\nKyun: Aage chal kar humein \\(1 - y\\) se divide karna hai aur \\((2n - 1)y\\) bhi aayega, is liye pehle hi inhein saaf kar liya. Common denominator lene se \\(1 - y\\) sirf \\(\\frac{-2}{2n - 1}\\) ban gaya, aur \\((2n - 1)y\\) mein denominator cancel ho kar \\(2n + 1\\) bachta hai.",
+              "\\(S\\) aur \\(yS\\) likhein\n\\[S = y + 3y^{2} + 5y^{3} + \\cdots + (2n - 1)y^{n}\\]\n\\[yS = y^{2} + 3y^{3} + \\cdots\\]\n\\[\\quad + (2n - 3)y^{n} + (2n - 1)y^{n+1}\\]\nKyun: \\(y\\) se multiply karne par har power ek barh gayi. Ek jagah shift kar ke likha. \\(S\\) ka second-last term \\((2n - 3)y^{n-1}\\) \\(y\\) se multiply ho kar \\((2n - 3)y^n\\) bana.",
+              "Minus karein\n\\[(1 - y)S = y + 2y^{2} + 2y^{3} + \\cdots\\]\n\\[\\quad + 2y^{n} - (2n - 1)y^{n+1}\\]\n\\[= y + 2(y^{2} + \\cdots + y^{n})\\]\n\\[\\quad - (2n - 1)y^{n+1}\\]\nKyun: Har jore ka farq \\(d = 2\\) times power: \\((3 - 1)y^2 = 2y^2\\). Pehla term \\(y\\) akela reh gaya aur \\(yS\\) ka aakhri term \\((2n - 1)y^{n+1}\\) minus hua. 2 common nikala.",
+              "G.P. ka sum aur kaam ki baatein\n\\[2(y^{2} + \\cdots + y^{n}) = \\dfrac{2y^{2}(1 - y^{n-1})}{1 - y}\\]\n\\[= 2y^{2}(1 - y^{n-1})\\left(-\\dfrac{2n - 1}{2}\\right)\\]\n\\[= -(2n - 1)(y^{2} - y^{n+1})\\]\n\\[= (2n - 1)y^{n+1} - (2n - 1)y^{2}\\]\nKyun: Bracket wali G.P. ka pehla term \\(y^2\\), ratio \\(y\\) aur terms \\(n - 1\\) (powers 2 se \\(n\\)). \\(\\frac{1}{1 - y}\\) ki jagah pehli kaam ki baat \\(-\\frac{2n - 1}{2}\\) rakhi; 2 aur 2 cancel. Phir \\(y^2 \\cdot y^{n-1} = y^{n+1}\\) aur minus andar le gaye.",
+              "Wapas rakh kar simplify karein\n\\[(1 - y)S = y + (2n - 1)y^{n+1}\\]\n\\[\\quad - (2n - 1)y^{2} - (2n - 1)y^{n+1}\\]\n\\[= y - (2n - 1)y^{2}\\]\n\\[= y[1 - (2n - 1)y]\\]\n\\[= y[1 - (2n + 1)] = -2n\\,y\\]\nKyun: Kamaal dekhiye: \\(+(2n - 1)y^{n+1}\\) aur \\(-(2n - 1)y^{n+1}\\) ek doosre ko khatam kar dete hain. Bacha \\(y - (2n - 1)y^2\\); \\(y\\) common liya aur doosri kaam ki baat \\((2n - 1)y = 2n + 1\\) lagayi: \\(1 - 2n - 1 = -2n\\).",
+              "\\(1 - y\\) se divide aur \\(y\\) wapas\n\\[S = -2n\\,y \\cdot \\dfrac{1}{1 - y}\\]\n\\[= -2n\\,y\\left(-\\dfrac{2n - 1}{2}\\right)\\]\n\\[= n(2n - 1)y\\]\n\\[= n(2n - 1) \\cdot \\dfrac{2n + 1}{2n - 1}\\]\n\\[= n(2n + 1)\\]\nKyun: \\(1 - y\\) se divide karna \\(\\frac{1}{1 - y} = -\\frac{2n - 1}{2}\\) se multiply karna hai. Do minus mil kar plus, 2 cancel. Phir \\((2n - 1)y = 2n + 1\\) (ya \\(y\\) wapas rakh kar \\(2n - 1\\) cancel) se \\(n(2n + 1)\\).",
+              "\\(n = 1\\) aur \\(n = 2\\) se tasdeeq\n\\[n = 1:\\ y = 3,\\ S = 3 = 1(3) \\;\\checkmark\\]\n\\[n = 2:\\ y = \\tfrac{5}{3},\\ \\tfrac{5}{3} + 3 \\cdot \\tfrac{25}{9} = 10\\]\n\\[2(5) = 10 \\;\\checkmark\\]\nKyun: Yahan \\(n\\) badalne se \\(y\\) bhi badalta hai, is liye har check mein \\(y\\) naya nikalna parta hai. \\(n = 1\\): \\(y = 3\\), ek hi term 3. \\(n = 2\\): \\(y = \\frac53\\), do terms \\(\\frac53 + \\frac{25}{3} = 10\\). Dono match."
+            ],
+            "final_answer": "\\(S = n(2n + 1)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

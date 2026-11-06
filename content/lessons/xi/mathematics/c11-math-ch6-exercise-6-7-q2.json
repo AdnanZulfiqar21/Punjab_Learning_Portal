@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-EXERCISE-6-7-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/u-exercise-6-7-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 110,
+          "pdf_to": 110,
+          "note": "Exercise 6.7, Question 2: book pages 105-106 (PDF 110-111): Q1, Q2, Q3(i)-(ii), Q4(i)-(ii), Q5, Q6 (8 parts); answer key book page 300 (PDF 305)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2. The 3rd term of a G.P. is 16 and the 6th term is \\(-128\\). Find the first term and the sum of the first seven terms.",
+            "explanation": "Two terms of a G.P. are known; we need \\(a_1\\) and \\(S_7\\).\nPlan: write \\(a_3\\) and \\(a_6\\) as equations, divide them to get \\(r\\), find \\(a_1\\), then use \\(S_n = \\frac{a_1(1 - r^{n})}{1 - r}\\) with \\(n = 7\\).",
+            "steps": [
+              "Given: \\(a_3 = 16\\), \\(a_6 = -128\\).\nTo find: \\(a_1\\) and \\(S_7\\).\nMethod: \\(a_n = a_1 r^{n-1}\\) for the two terms; dividing cancels \\(a_1\\).",
+              "Write the two equations\n\\[a_1 r^{2} = 16 \\quad (1)\\]\n\\[a_1 r^{5} = -128 \\quad (2)\\]\nWhy: The 3rd term has power \\(3 - 1 = 2\\), the 6th has power 5.",
+              "Divide (2) by (1)\n\\[r^{3} = \\dfrac{-128}{16} = -8\\]\n\\[r = -2\\]\nWhy: \\(a_1\\) cancels and \\(\\frac{r^{5}}{r^{2}} = r^{3}\\). The real cube root of \\(-8\\) is \\(-2\\), since \\((-2)^{3} = -8\\).",
+              "Find the first term\n\\[a_1(-2)^{2} = 16\\]\n\\[4a_1 = 16 \\Rightarrow a_1 = 4\\]\nWhy: Put \\(r = -2\\) in (1); an even power of a negative number is positive.",
+              "Find \\(S_7\\)\n\\[S_7 = \\dfrac{4\\left[1 - (-2)^{7}\\right]}{1 - (-2)}\\]\n\\[= \\dfrac{4(1 + 128)}{3}\\]\n\\[= \\dfrac{4 \\times 129}{3} = 172\\]\nWhy: An odd power keeps the minus sign: \\((-2)^{7} = -128\\). The bottom is \\(1 + 2 = 3\\).",
+              "Check: add the seven terms\n\\[4, -8, 16, -32, 64, -128, 256\\]\n\\[4 - 8 + 16 - 32 + 64 - 128 + 256 = 172\\]\nWhy: The 3rd term is 16 and the 6th is \\(-128\\), as given, and the sum agrees."
+            ],
+            "final_answer": "\\(a_1 = 4\\), \\(S_7 = 172\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \"2. 4, 1723.(i)\": the space between the answer to Question 2 and the next item \"3.(i)\" is missing, so it reads like \\(1723\\). The correct answers are \\(a_1 = 4\\) and \\(S_7 = 172\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

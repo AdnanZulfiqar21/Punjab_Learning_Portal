@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH6-6.7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch6",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch6/6.7",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 109,
+          "pdf_to": 110,
+          "note": "Book p. 104-105: 6.7 Geometric Series, e-mail forwarding tree (original SVG), S_n = a1(1 - r^n)/(1 - r) derived by subtracting rS_n, Note r = 1, Example 18"
+        }
+      ],
+      "title": "6.7 Geometric Series",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Suppose you e-mail an Islamic quote to three friends on Monday. Each of those friends sends it to three of their friends on Tuesday. Each person who receives the quote on Tuesday sends it to three more people on Wednesday and so on."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch6-fig-email-tree",
+            "alt": "Tree diagram of e-mail forwarding. You at the top send the quote to 3 people on Monday; each of them sends it to 3 people on Tuesday (9 people); each of those sends it to 3 people on Wednesday (27 people). Counts 1, 3, 9, 27 are shown at the right.",
+            "caption": "Figure: e-mail forwarding tree, 1, 3, 9, 27 readers (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Notice that every day, the number of people who read your Islamic quote is three times the number that read it the day before. By Sunday, the number of people, including yourself, who have read the quote is \\(1 + 3 + 9 + 27 + 81 + 243 + 729 + 2187\\) or \\(3280\\). The numbers \\(1, 3, 9, 27, 81, 243, 729\\) and \\(2187\\) form a geometric sequence in which \\(a_1 = 1\\) and \\(r = 3\\). The indicated sum of the numbers in the sequence, \\(1 + 3 + 9 + 27 + 81 + 243 + 729 + 2187\\), is called a geometric series."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Sequence or series? A sequence is the list \\(1, 3, 9, 27, \\ldots\\); a series is the sum \\(1 + 3 + 9 + 27 + \\cdots\\). The table shows how fast the total grows when each term is 3 times the one before."
+          },
+          {
+            "type": "table",
+            "caption": "Readers of the quote day by day",
+            "header": [
+              "Day",
+              "New readers",
+              "Total so far"
+            ],
+            "rows": [
+              [
+                "You (start)",
+                "1",
+                "1"
+              ],
+              [
+                "Monday",
+                "3",
+                "4"
+              ],
+              [
+                "Tuesday",
+                "9",
+                "13"
+              ],
+              [
+                "Wednesday",
+                "27",
+                "40"
+              ],
+              [
+                "Thursday",
+                "81",
+                "121"
+              ],
+              [
+                "Friday",
+                "243",
+                "364"
+              ],
+              [
+                "Saturday",
+                "729",
+                "1093"
+              ],
+              [
+                "Sunday",
+                "2187",
+                "3280"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "The sum of a geometric progression can be written as:\n\\[S_n = \\dfrac{a_1(1 - r^{n})}{1 - r},\\ r \\ne 1\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "To develop a formula for the sum of any geometric series, consider\n\\[S_n = a_1 + a_1r + a_1r^{2} + \\cdots\\]\n\\[\\quad + a_1r^{n-3} + a_1r^{n-2}\\]\n\\[\\quad + a_1r^{n-1} \\quad \\text{(i)}\\]\n\\[rS_n = a_1r + a_1r^{2} + \\cdots\\]\n\\[\\quad + a_1r^{n-3} + a_1r^{n-2}\\]\n\\[\\quad + a_1r^{n-1} + a_1r^{n} \\quad \\text{(ii)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Subtracting (ii) from (i), we get \\(S_n - rS_n = a_1 - ar^{n}\\)\n\\[S_n(1 - r) = a_1(1 - r^{n})\\]\n\\[S_n = \\dfrac{a_1(1 - r^{n})}{1 - r},\\ r \\ne 1\\]",
+            "book_errors": [
+              "\\(S_n - rS_n = a_1 - ar^{n}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \\(S_n - rS_n = a_1 - ar^{n}\\). The last term of (ii) is \\(a_1r^{n}\\), so the line should read \\(S_n - rS_n = a_1 - a_1r^{n}\\). The book's next line, \\(S_n(1 - r) = a_1(1 - r^{n})\\), already uses \\(a_1\\), so the formula is correct."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "If \\(r = 1\\), then \\(S_n = na_1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why subtract? (i) and (ii) have the same terms \\(a_1r, a_1r^{2}, \\ldots, a_1r^{n-1}\\), only shifted by one place. Subtracting cancels all of them and leaves only the first term of (i) and the last term of (ii).\nWhy \\(r \\ne 1\\)? We divide by \\(1 - r\\), which is zero when \\(r = 1\\). Then every term equals \\(a_1\\), so \\(S_n = a_1 + a_1 + \\cdots = na_1\\) (the Note).\nUseful equal form: multiplying top and bottom by \\(-1\\), \\(S_n = \\frac{a_1(r^{n} - 1)}{r - 1}\\). Use it when \\(r > 1\\) so that both brackets stay positive."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Check with the e-mail series: \\(a_1 = 1\\), \\(r = 3\\), \\(n = 8\\):\n\\[S_8 = \\dfrac{1(3^{8} - 1)}{3 - 1} = \\dfrac{6561 - 1}{2}\\]\n\\[S_8 = 3280\\]\nThis matches the book's total by Sunday."
+          },
+          {
+            "type": "example",
+            "title": "Example 18",
+            "problem": "Find the sum of \\(n\\) terms of the geometric series if \\(a_n = (-3)\\left(\\frac{2}{5}\\right)^{n}\\).",
+            "steps": [
+              "Given: the general term \\(a_n = (-3)\\left(\\frac{2}{5}\\right)^{n}\\) of a geometric series.\nTo find: \\(S_n\\), the sum of the first \\(n\\) terms.\nMethod: the sum formula needs \\(a_1\\) and \\(r\\). Rewrite \\(a_n\\) in the standard form \\(a_1r^{n-1}\\) and read them off; then use \\(S_n = \\frac{a_1(1 - r^{n})}{1 - r}\\).",
+              "Step 1: Rewrite \\(a_n\\) with the power \\(n - 1\\)\n\\[(-3)\\left(\\tfrac{2}{5}\\right)^{n} = -3\\left(\\tfrac{2}{5}\\right)\\left(\\tfrac{2}{5}\\right)^{n-1}\\]\n\\[= \\left(-\\tfrac{6}{5}\\right)\\left(\\tfrac{2}{5}\\right)^{n-1}\\]\n\\[a_n = \\left(-\\tfrac{6}{5}\\right)\\left(\\tfrac{2}{5}\\right)^{n-1}\\]\nWhy: \\(x^{n} = x \\cdot x^{n-1}\\). Pulling one factor \\(\\frac{2}{5}\\) out gives the power \\(n - 1\\) that the standard form has; \\(-3 \\times \\frac{2}{5} = -\\frac{6}{5}\\).",
+              "Step 2: Identify \\(a_1\\) and \\(r\\)\nComparing \\(\\left(-\\frac{6}{5}\\right)\\left(\\frac{2}{5}\\right)^{n-1}\\) with \\(a_1r^{n-1}\\):\n\\[a_1 = -\\tfrac{6}{5},\\quad r = \\tfrac{2}{5}\\]\nWhy: in \\(a_1r^{n-1}\\) the number in front is the first term and the base of the power is the common ratio. Quick check: putting \\(n = 1\\) in the given \\(a_n\\) gives \\((-3)\\frac{2}{5} = -\\frac{6}{5}\\).",
+              "Step 3: Apply the sum formula\n\\[S_n = \\dfrac{a_1(1 - r^{n})}{1 - r}\\]\n\\[= \\dfrac{-\\frac{6}{5}\\left[1 - \\left(\\frac{2}{5}\\right)^{n}\\right]}{1 - \\frac{2}{5}}\\]\nWhy: \\(r = \\frac{2}{5} \\ne 1\\), so the formula applies; with \\(r < 1\\) the form \\(1 - r\\) in the denominator keeps it positive.",
+              "Step 4: Simplify\n\\[1 - \\tfrac{2}{5} = \\tfrac{3}{5}\\]\n\\[S_n = \\left(-\\tfrac{6}{5}\\right)\\left(\\tfrac{5}{3}\\right)\\left[1 - \\left(\\tfrac{2}{5}\\right)^{n}\\right]\\]\n\\[S_n = (-2)\\left[1 - \\left(\\tfrac{2}{5}\\right)^{n}\\right]\\]\nWhy: dividing by \\(\\frac{3}{5}\\) is multiplying by \\(\\frac{5}{3}\\), and \\(-\\frac{6}{5}\\times\\frac{5}{3} = -2\\).",
+              "Check:\n\\(n = 1\\): \\(-2\\left(1 - \\frac{2}{5}\\right) = -2 \\times \\frac{3}{5} = -\\frac{6}{5} = a_1\\).\n\\(n = 2\\): \\(a_1 + a_2 = -\\frac{6}{5} + (-3)\\frac{4}{25} = -\\frac{30}{25} - \\frac{12}{25} = -\\frac{42}{25}\\), and the formula gives \\(-2\\left(1 - \\frac{4}{25}\\right) = -\\frac{42}{25}\\). Both agree."
+            ],
+            "answer": "\\(S_n = (-2)\\left[1 - \\left(\\frac{2}{5}\\right)^{n}\\right]\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A geometric series is the sum of the terms of a G.P.\n2. \\(S_n = \\frac{a_1(1 - r^{n})}{1 - r} = \\frac{a_1(r^{n} - 1)}{r - 1}\\), \\(r \\ne 1\\).\n3. If \\(r = 1\\), \\(S_n = na_1\\).\n4. The formula comes from writing \\(S_n\\) and \\(rS_n\\) and subtracting.\n5. If only \\(a_n\\) is given, write it as \\(a_1r^{n-1}\\) to find \\(a_1\\) and \\(r\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Reading \\(a_1 = -3\\) and \\(r = \\frac{2}{5}\\) directly from \\(a_n = (-3)\\left(\\frac{2}{5}\\right)^{n}\\): the power is \\(n\\), not \\(n - 1\\), so \\(a_1 = -\\frac{6}{5}\\).\n2. Writing \\(r^{n-1}\\) instead of \\(r^{n}\\) in the sum formula.\n3. Using the formula when \\(r = 1\\) (division by zero)."
+          }
+        ]
+      }
+    }
+  ]
+}
