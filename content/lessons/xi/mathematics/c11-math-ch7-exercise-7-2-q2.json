@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-2-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-2-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 134,
+          "pdf_to": 134,
+          "note": "Exercise 7.2, Question 2: book p.129 (PDF 134). Answer key PDF 306 (book p.301). Solution book PDF 633-657 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Find the value of \\(n\\) when: \\({}^{n}P_{3} = 504\\).",
+            "explanation": "The value of the permutation is given; \\(n\\) is unknown.\nWe must find the whole number \\(n\\).\nPlan: write \\({}^{n}P_{3}\\) as 3 consecutive factors, then write 504 as a product of 3 consecutive numbers.",
+            "steps": [
+              "Given: \\({}^{n}P_{3} = 504\\).\nTo find: \\(n\\).\nMethod: \\({}^{n}P_{3} = n(n-1)(n-2)\\), the product of 3 consecutive whole numbers with largest \\(n\\). Break 504 into such a product.",
+              "Write the permutation as a product\n\\[{}^{n}P_{3} = \\dfrac{n!}{(n-3)!}\\]\n\\[= n(n-1)(n-2)\\]\nWhy: \\(n! = n(n-1)(n-2)(n-3)!\\); the \\((n-3)!\\) cancels.",
+              "Factorise 504\n\\[504 = 8 \\times 63 = 8 \\times 9 \\times 7\\]\n\\[= 9 \\times 8 \\times 7\\]\nWhy: 504 is even; \\(504 \\div 8 = 63 = 9 \\times 7\\). The three factors 9, 8, 7 are consecutive.",
+              "Compare\n\\[n(n-1)(n-2) = 9 \\cdot 8 \\cdot 7\\]\n\\[n = 9\\]\nWhy: Both sides are products of 3 consecutive whole numbers; the largest factors must match. (For \\(n \\ge 3\\) the product grows with \\(n\\), so there is only one such \\(n\\).)",
+              "Check\n\\[{}^{9}P_{3} = 9 \\cdot 8 \\cdot 7 = 504 \\;\\checkmark\\]\nWhy: Substituting \\(n = 9\\) gives the given value."
+            ],
+            "final_answer": "\\(n = 9\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Find the value of \\(n\\) when: \\({}^{15}P_{n} = 15 \\cdot 14 \\cdot 13 \\cdot 12\\ 11\\).",
+            "explanation": "The right side is a product of factors counting down from 15.\nWe must find \\(n\\).\nPlan: count the factors; \\({}^{15}P_{n}\\) has exactly \\(n\\) factors.",
+            "steps": [
+              "Given: \\({}^{15}P_{n} = 15 \\cdot 14 \\cdot 13 \\cdot 12 \\cdot 11\\) (the dot before 11 is missing in print).\nTo find: \\(n\\).\nMethod: \\({}^{15}P_{n} = 15 \\cdot 14 \\cdot 13 \\cdots\\) with exactly \\(n\\) factors, the last one being \\(15 - n + 1\\).",
+              "Write \\({}^{15}P_{n}\\) as a product\n\\[{}^{15}P_{n} = 15 \\cdot 14 \\cdot 13 \\cdots (16 - n)\\]\nWhy: \\({}^{n}P_{r} = n(n-1)\\cdots(n-r+1)\\); with 15 in place of \\(n\\) and \\(n\\) in place of \\(r\\), the last factor is \\(15 - n + 1 = 16 - n\\).",
+              "Compare the last factor\n\\[16 - n = 11\\]\n\\[n = 5\\]\nWhy: The given product ends with 11. Equivalently, count the factors 15, 14, 13, 12, 11: there are 5.",
+              "Check\n\\[{}^{15}P_{5} = \\dfrac{15!}{10!}\\]\n\\[= 15 \\cdot 14 \\cdot 13 \\cdot 12 \\cdot 11 \\;\\checkmark\\]\nWhy: \\(15! = 15 \\cdot 14 \\cdot 13 \\cdot 12 \\cdot 11 \\cdot 10!\\), and the \\(10!\\) cancels."
+            ],
+            "final_answer": "\\(n = 5\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \\({}^{15}P_{n} = 15.14.13.12\\ 11\\), with the multiplication dot between 12 and 11 missing. It should read \\({}^{15}P_{n} = 15 \\cdot 14 \\cdot 13 \\cdot 12 \\cdot 11\\) (a product of five numbers, not \"12 11\"). The answer \\(n = 5\\) is for this corrected form."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) Find the value of \\(n\\) when: \\({}^{n}P_{5} : {}^{n-2}P_{2} = 540 : 1\\).",
+            "explanation": "A ratio of two permutations is given.\nWe must find \\(n\\).\nPlan: write the ratio as a fraction, expand both permutations, cancel the common factors, then find 3 numbers that fit.",
+            "steps": [
+              "Given: \\({}^{n}P_{5} : {}^{n-2}P_{2} = 540 : 1\\).\nTo find: \\(n\\).\nMethod: A ratio \\(a : b = 540 : 1\\) means \\(\\frac{a}{b} = 540\\). Expand \\({}^{n}P_{5}\\) (5 factors from \\(n\\)) and \\({}^{n-2}P_{2}\\) (2 factors from \\(n-2\\)).",
+              "Write as a fraction\n\\[\\dfrac{{}^{n}P_{5}}{{}^{n-2}P_{2}} = 540\\]\nWhy: \\(a : b = 540 : 1\\) means \\(a = 540\\,b\\).",
+              "Expand both\n\\[{}^{n}P_{5} = n(n-1)(n-2)(n-3)(n-4)\\]\n\\[{}^{n-2}P_{2} = (n-2)(n-3)\\]\nWhy: 5 factors counting down from \\(n\\); 2 factors counting down from \\(n - 2\\).",
+              "Cancel the common factors\n\\[\\dfrac{n(n-1)(n-2)(n-3)(n-4)}{(n-2)(n-3)} = 540\\]\n\\[n(n-1)(n-4) = 540\\]\nWhy: \\((n-2)(n-3)\\) is on top and bottom. It is not zero because \\(n \\ge 5\\).",
+              "Find \\(n\\)\n\\[540 = 10 \\times 54 = 10 \\times 9 \\times 6\\]\n\\[n(n-1)(n-4) = 10 \\cdot 9 \\cdot 6\\]\n\\[n = 10\\]\nWhy: We need three numbers of the form \\(n\\), \\(n - 1\\), \\(n - 4\\). With \\(n = 10\\) they are 10, 9, 6, and \\(10 \\times 9 \\times 6 = 540\\). The left side increases with \\(n\\) (for \\(n \\ge 5\\)), so no other \\(n\\) works.",
+              "Check\n\\[{}^{10}P_{5} = 30240,\\quad {}^{8}P_{2} = 56\\]\n\\[\\dfrac{30240}{56} = 540 \\;\\checkmark\\]\nWhy: \\({}^{10}P_{5}\\) from Question 1(i); \\({}^{8}P_{2} = 8 \\times 7 = 56\\)."
+            ],
+            "final_answer": "\\(n = 10\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

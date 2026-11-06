@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-1-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-1-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 131,
+          "pdf_to": 131,
+          "note": "Exercise 7.1, Question 3: book page 126 (PDF 131); answer key book page 301 (PDF 306): i) 5040 ii) 362,880 iii) 90 iv) 1320 v) 36 vi) 10 vii) 25,200 viii) 110,880 ix) 220 x) 1 xi) 40,320 xii) 1440 (all agree)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Evaluate: \\(7!\\)",
+            "explanation": "A single factorial: multiply all natural numbers from 7 down to 1.\nPlan: multiply in pairs to keep the numbers easy.",
+            "steps": [
+              "Given: \\(7!\\)\nTo find: its value.\nMethod: \\(n! = n(n - 1)(n - 2) \\cdots 3 \\cdot 2 \\cdot 1\\) and \\(0! = 1\\).",
+              "Write the product\n\\[7! = 7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1\\]\nWhy: This is the definition of factorial.",
+              "Multiply step by step\n\\[7 \\cdot 6 = 42,\\quad 42 \\cdot 5 = 210\\]\n\\[210 \\cdot 4 = 840,\\quad 840 \\cdot 3 = 2520\\]\n\\[2520 \\cdot 2 \\cdot 1 = 5040\\]\nWhy: Multiplying one number at a time avoids mistakes.",
+              "Check\n\\[7! = 7 \\times 6! = 7 \\times 720 = 5040 \\;\\checkmark\\]\nWhy: \\(n! = n(n - 1)!\\) and \\(6! = 720\\) (from the book's list)."
+            ],
+            "final_answer": "\\(7! = 5040\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Evaluate: \\(9!\\)",
+            "explanation": "A single factorial, larger than in (i).\nPlan: use \\(7! = 5040\\) from part (i) instead of starting again.",
+            "steps": [
+              "Given: \\(9!\\)\nTo find: its value.\nMethod: \\(n! = n(n - 1)!\\), so \\(9! = 9 \\cdot 8 \\cdot 7!\\).",
+              "Use part (i)\n\\[9! = 9 \\cdot 8 \\cdot 7!\\]\n\\[= 72 \\times 5040\\]\nWhy: The product from 7 down to 1 is already known.",
+              "Multiply\n\\[72 \\times 5040 = 362880\\]\nWhy: \\(70 \\times 5040 = 352800\\) and \\(2 \\times 5040 = 10080\\); together \\(362880\\).",
+              "Check\n\\[8! = 8 \\times 5040 = 40320\\]\n\\[9! = 9 \\times 40320 = 362880 \\;\\checkmark\\]\nWhy: Going up one factorial at a time gives the same value."
+            ],
+            "final_answer": "\\(9! = 362880\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) Evaluate: \\(\\frac{10!}{8!}\\)",
+            "explanation": "A quotient of two factorials.\nPlan: open \\(10!\\) only down to \\(8!\\) and cancel; never work out \\(10!\\) fully.",
+            "steps": [
+              "Given: \\(\\dfrac{10!}{8!}\\)\nTo find: its value.\nMethod: Write the bigger factorial as a product that stops at the smaller one, \\(n! = n(n - 1) \\cdots (r + 1) \\cdot r!\\), and cancel.",
+              "Open \\(10!\\) down to \\(8!\\)\n\\[\\dfrac{10!}{8!} = \\dfrac{10 \\cdot 9 \\cdot 8!}{8!}\\]\nWhy: \\(10! = 10 \\cdot 9 \\cdot (8 \\cdot 7 \\cdots 1) = 10 \\cdot 9 \\cdot 8!\\).",
+              "Cancel and multiply\n\\[= 10 \\cdot 9 = 90\\]\nWhy: \\(8!\\) is a common factor of the top and bottom.",
+              "Check\n\\[\\dfrac{3628800}{40320} = 90 \\;\\checkmark\\]\nWhy: \\(10! = 3628800\\) and \\(8! = 40320\\)."
+            ],
+            "final_answer": "\\(\\frac{10!}{8!} = 90\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iv)",
+            "prompt": "3 (iv) Evaluate: \\(\\frac{12!}{9!}\\)",
+            "explanation": "Same type as (iii).\nPlan: open \\(12!\\) down to \\(9!\\), cancel, multiply the three numbers left.",
+            "steps": [
+              "Given: \\(\\dfrac{12!}{9!}\\)\nTo find: its value.\nMethod: Write the bigger factorial as a product that stops at the smaller one, \\(n! = n(n - 1) \\cdots (r + 1) \\cdot r!\\), and cancel.",
+              "Open \\(12!\\) down to \\(9!\\)\n\\[\\dfrac{12!}{9!} = \\dfrac{12 \\cdot 11 \\cdot 10 \\cdot 9!}{9!}\\]\nWhy: Stop opening as soon as \\(9!\\) appears.",
+              "Cancel and multiply\n\\[= 12 \\cdot 11 \\cdot 10\\]\n\\[= 132 \\cdot 10 = 1320\\]\nWhy: \\(9!\\) cancels, leaving three factors.",
+              "Check\n\\[\\dfrac{479001600}{362880} = 1320 \\;\\checkmark\\]\nWhy: \\(12! = 479001600\\) and \\(9! = 362880\\)."
+            ],
+            "final_answer": "\\(\\frac{12!}{9!} = 1320\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(v)",
+            "prompt": "3 (v) Evaluate: \\(\\frac{9!}{2!\\,7!}\\)",
+            "explanation": "A quotient with two factorials below.\nPlan: open \\(9!\\) down to \\(7!\\) (the larger one below), cancel, then divide by \\(2!\\).",
+            "steps": [
+              "Given: \\(\\dfrac{9!}{2!\\,7!}\\)\nTo find: its value.\nMethod: Write the bigger factorial as a product that stops at the smaller one, \\(n! = n(n - 1) \\cdots (r + 1) \\cdot r!\\), and cancel.",
+              "Open \\(9!\\) down to \\(7!\\)\n\\[\\dfrac{9!}{2!\\,7!} = \\dfrac{9 \\cdot 8 \\cdot 7!}{2!\\,7!}\\]\nWhy: Cancelling the larger factorial below leaves the least work.",
+              "Cancel and divide\n\\[= \\dfrac{9 \\cdot 8}{2 \\cdot 1}\\]\n\\[= \\dfrac{72}{2} = 36\\]\nWhy: \\(2! = 2\\).",
+              "Check\n\\[\\dfrac{362880}{2 \\times 5040} = \\dfrac{362880}{10080} = 36 \\;\\checkmark\\]\nWhy: Working with the full values gives the same result."
+            ],
+            "final_answer": "\\(\\frac{9!}{2!\\,7!} = 36\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(vi)",
+            "prompt": "3 (vi) Evaluate: \\(\\frac{5!}{2!\\,3!\\,1!}\\)",
+            "explanation": "Small factorials: we can open all of them.\nPlan: cancel \\(3!\\) from \\(5!\\), then divide by \\(2!\\,1!\\).",
+            "steps": [
+              "Given: \\(\\dfrac{5!}{2!\\,3!\\,1!}\\)\nTo find: its value.\nMethod: Write the bigger factorial as a product that stops at the smaller one, \\(n! = n(n - 1) \\cdots (r + 1) \\cdot r!\\), and cancel.",
+              "Open \\(5!\\) down to \\(3!\\)\n\\[\\dfrac{5 \\cdot 4 \\cdot 3!}{2!\\,3!\\,1!}\\]\nWhy: \\(3!\\) is the largest factorial below.",
+              "Cancel and divide\n\\[= \\dfrac{5 \\cdot 4}{2 \\cdot 1} = \\dfrac{20}{2} = 10\\]\nWhy: \\(2! = 2\\) and \\(1! = 1\\).",
+              "Check\n\\[\\dfrac{120}{2 \\times 6 \\times 1} = \\dfrac{120}{12} = 10 \\;\\checkmark\\]\nWhy: \\(5! = 120\\), \\(3! = 6\\)."
+            ],
+            "final_answer": "\\(\\frac{5!}{2!\\,3!\\,1!} = 10\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(vii)",
+            "prompt": "3 (vii) Evaluate: \\(\\frac{10!}{3!\\,4!}\\)",
+            "explanation": "Quotient of factorials; note the two below do not add up to 10.\nPlan: open \\(10!\\) down to \\(4!\\), cancel, then divide by \\(3! = 6\\).",
+            "steps": [
+              "Given: \\(\\dfrac{10!}{3!\\,4!}\\)\nTo find: its value.\nMethod: Write the bigger factorial as a product that stops at the smaller one, \\(n! = n(n - 1) \\cdots (r + 1) \\cdot r!\\), and cancel.",
+              "Open \\(10!\\) down to \\(4!\\)\n\\[\\dfrac{10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4!}{3!\\,4!}\\]\nWhy: Cancel the larger factorial below, \\(4!\\).",
+              "Cancel and simplify\n\\[= \\dfrac{10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6 \\cdot 5}{6}\\]\n\\[= 10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 5\\]\nWhy: \\(3! = 6\\) cancels the factor 6 on top.",
+              "Multiply\n\\[10 \\cdot 9 = 90,\\quad 90 \\cdot 8 = 720\\]\n\\[720 \\cdot 7 = 5040,\\quad 5040 \\cdot 5 = 25200\\]\nWhy: One factor at a time.",
+              "Check\n\\[\\dfrac{3628800}{6 \\times 24} = \\dfrac{3628800}{144} = 25200 \\;\\checkmark\\]\nWhy: \\(10! = 3628800\\), \\(3! \\cdot 4! = 144\\)."
+            ],
+            "final_answer": "\\(\\frac{10!}{3!\\,4!} = 25200\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(viii)",
+            "prompt": "3 (viii) Evaluate: \\(\\frac{12!}{3!\\,3!\\,5!}\\)",
+            "explanation": "Quotient with three factorials below.\nPlan: open \\(12!\\) down to \\(5!\\), cancel, then divide by \\(3!\\,3! = 36\\).",
+            "steps": [
+              "Given: \\(\\dfrac{12!}{3!\\,3!\\,5!}\\)\nTo find: its value.\nMethod: Write the bigger factorial as a product that stops at the smaller one, \\(n! = n(n - 1) \\cdots (r + 1) \\cdot r!\\), and cancel.",
+              "Open \\(12!\\) down to \\(5!\\)\n\\[\\dfrac{12 \\cdot 11 \\cdot 10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6 \\cdot 5!}{3!\\,3!\\,5!}\\]\nWhy: \\(5!\\) is the largest factorial below.",
+              "Cancel and divide by 36\n\\[= \\dfrac{12 \\cdot 11 \\cdot 10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6}{36}\\]\n\\[= 12 \\cdot 11 \\cdot 10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6 \\div 36\\]\nWhy: \\(3!\\,3! = 6 \\times 6 = 36\\); use \\(6 \\times 6 = 36\\): cancel the 6 on top and \\(12 \\div 6 = 2\\).",
+              "Multiply what is left\n\\[2 \\cdot 11 \\cdot 10 \\cdot 9 \\cdot 8 \\cdot 7\\]\n\\[= 220 \\cdot 9 \\cdot 56\\]\n\\[= 1980 \\cdot 56 = 110880\\]\nWhy: \\(2 \\cdot 11 \\cdot 10 = 220\\) and \\(8 \\cdot 7 = 56\\).",
+              "Check\n\\[\\dfrac{479001600}{6 \\cdot 6 \\cdot 120} = \\dfrac{479001600}{4320}\\]\n\\[= 110880 \\;\\checkmark\\]\nWhy: Full values give the same result."
+            ],
+            "final_answer": "\\(\\frac{12!}{3!\\,3!\\,5!} = 110880\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ix)",
+            "prompt": "3 (ix) Evaluate: \\(\\frac{12!}{3!(12 - 3)!}\\)",
+            "explanation": "First simplify the bracket: \\(12 - 3 = 9\\).\nPlan: open \\(12!\\) down to \\(9!\\), cancel, divide by \\(3!\\).",
+            "steps": [
+              "Given: \\(\\dfrac{12!}{3!(12 - 3)!}\\)\nTo find: its value.\nMethod: Write the bigger factorial as a product that stops at the smaller one, \\(n! = n(n - 1) \\cdots (r + 1) \\cdot r!\\), and cancel.",
+              "Simplify the bracket\n\\[\\dfrac{12!}{3!(12 - 3)!} = \\dfrac{12!}{3!\\,9!}\\]\nWhy: Work out what is inside the bracket first; \\((12 - 3)! = 9!\\), not \\(12! - 3!\\).",
+              "Open \\(12!\\) down to \\(9!\\) and cancel\n\\[= \\dfrac{12 \\cdot 11 \\cdot 10 \\cdot 9!}{3!\\,9!}\\]\n\\[= \\dfrac{1320}{6} = 220\\]\nWhy: \\(12 \\cdot 11 \\cdot 10 = 1320\\) (part (iv)) and \\(3! = 6\\).",
+              "Check\n\\[\\dfrac{479001600}{6 \\times 362880} = 220 \\;\\checkmark\\]\nWhy: This is \\({}^{12}C_3\\), the number of ways of choosing 3 things from 12."
+            ],
+            "final_answer": "\\(\\frac{12!}{3!(12 - 3)!} = 220\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(x)",
+            "prompt": "3 (x) Evaluate: \\(\\frac{20!}{20!(20 - 20)!}\\)",
+            "explanation": "The bracket gives \\(0!\\).\nPlan: cancel \\(20!\\), then use \\(0! = 1\\).",
+            "steps": [
+              "Given: \\(\\dfrac{20!}{20!(20 - 20)!}\\)\nTo find: its value.\nMethod: \\(n! = n(n - 1)(n - 2) \\cdots 3 \\cdot 2 \\cdot 1\\) and \\(0! = 1\\).",
+              "Simplify the bracket\n\\[\\dfrac{20!}{20!(20 - 20)!} = \\dfrac{20!}{20!\\,0!}\\]\nWhy: \\(20 - 20 = 0\\).",
+              "Cancel and use \\(0! = 1\\)\n\\[= \\dfrac{1}{0!} = \\dfrac{1}{1} = 1\\]\nWhy: \\(0!\\) is defined as 1 (not 0), so the division is allowed.",
+              "Check\n\\[{}^{20}C_{20} = 1 \\;\\checkmark\\]\nWhy: There is only one way to choose all 20 things from 20."
+            ],
+            "final_answer": "\\(\\frac{20!}{20!(20 - 20)!} = 1\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(xi)",
+            "prompt": "3 (xi) Evaluate: \\(\\frac{8!}{0!}\\)",
+            "explanation": "Dividing by \\(0!\\) is dividing by 1. Plan: use \\(0! = 1\\), then work out \\(8!\\).",
+            "steps": [
+              "Given: \\(\\dfrac{8!}{0!}\\)\nTo find: its value.\nMethod: \\(n! = n(n - 1)(n - 2) \\cdots 3 \\cdot 2 \\cdot 1\\) and \\(0! = 1\\).",
+              "Use \\(0! = 1\\)\n\\[\\dfrac{8!}{0!} = \\dfrac{8!}{1} = 8!\\]\nWhy: By definition \\(0! = 1\\).",
+              "Work out \\(8!\\)\n\\[8! = 8 \\times 7! = 8 \\times 5040\\]\n\\[= 40320\\]\nWhy: \\(7! = 5040\\) from part (i).",
+              "Check\n\\[\\dfrac{9!}{9} = \\dfrac{362880}{9} = 40320 \\;\\checkmark\\]\nWhy: \\(9! = 9 \\cdot 8!\\), and part (ii) gave \\(9!\\)."
+            ],
+            "final_answer": "\\(\\frac{8!}{0!} = 40320\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(xii)",
+            "prompt": "3 (xii) Evaluate: \\(6!\\,.\\,0!\\,.\\,2!\\)",
+            "explanation": "A product of factorials (the dots mean multiplication).\nPlan: work out each factorial, then multiply.",
+            "steps": [
+              "Given: \\(6! \\cdot 0! \\cdot 2!\\)\nTo find: its value.\nMethod: \\(n! = n(n - 1)(n - 2) \\cdots 3 \\cdot 2 \\cdot 1\\) and \\(0! = 1\\).",
+              "Work out each factorial\n\\[6! = 720,\\quad 0! = 1,\\quad 2! = 2\\]\nWhy: \\(6! = 6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1 = 720\\); \\(0! = 1\\) by definition.",
+              "Multiply\n\\[6! \\cdot 0! \\cdot 2! = 720 \\times 1 \\times 2\\]\n\\[= 1440\\]\nWhy: Multiplying by 1 changes nothing.",
+              "Check\n\\[720 \\times 2 = 1440 \\;\\checkmark\\]\nWhy: A common slip is \\(0! = 0\\), which would wrongly make the whole product 0."
+            ],
+            "final_answer": "\\(6! \\cdot 0! \\cdot 2! = 1440\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

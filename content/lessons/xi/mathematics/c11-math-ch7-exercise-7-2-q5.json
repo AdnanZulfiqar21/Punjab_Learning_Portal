@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-2-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-2-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 134,
+          "pdf_to": 134,
+          "note": "Exercise 7.2, Question 5: book p.129 (PDF 134). Answer key PDF 306 (book p.301). Solution book PDF 633-657 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(i)",
+            "prompt": "5 (i) From a deck of 13 cards, find in how many ways these are arranging in a rectangular form? Hint (order is matter) All cards.",
+            "explanation": "All 13 different cards are placed in 13 positions; the hint says order matters.\nWe must count the arrangements.\nPlan: arranging all \\(n\\) things gives \\({}^{n}P_{n} = n!\\), so the answer is \\(13!\\).",
+            "steps": [
+              "Given: 13 different cards, all of them placed.\nTo find: number of arrangements.\nMethod: \\({}^{13}P_{13} = \\frac{13!}{0!} = 13!\\).",
+              "Build \\(13!\\) from \\(10!\\)\n\\[10! = 3628800\\]\n\\[11! = 11 \\times 3628800 = 39916800\\]\n\\[12! = 12 \\times 39916800 = 479001600\\]\nWhy: \\(n! = n \\times (n-1)!\\), so each factorial comes from the one before it.",
+              "Finish\n\\[13! = 13 \\times 479001600\\]\n\\[= 6227020800\\]\nWhy: Multiply once more by 13.",
+              "Check\n\\[13 \\times 479001600 = 4790016000 + 1437004800\\]\n\\[= 6227020800 \\;\\checkmark\\]\nWhy: Split 13 as \\(10 + 3\\) and add the two products."
+            ],
+            "final_answer": "\\(13! = 6{,}227{,}020{,}800\\) ways"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(ii)",
+            "prompt": "5 (ii) From a deck of 13 cards, find in how many ways these are arranging in a rectangular form? Hint (order is matter) 8 cards.",
+            "explanation": "Now only 8 of the 13 cards are placed, in order.\nWe must count the arrangements.\nPlan: \\({}^{13}P_{8}\\) = product of 8 numbers from 13 down to 6.",
+            "steps": [
+              "Given: \\(n = 13\\), \\(r = 8\\).\nTo find: \\({}^{13}P_{8}\\).\nMethod: \\({}^{n}P_{r} = \\frac{n!}{(n-r)!}\\).",
+              "Use the formula\n\\[{}^{13}P_{8} = \\dfrac{13!}{(13-8)!} = \\dfrac{13!}{5!}\\]\nWhy: \\(13 - 8 = 5\\).",
+              "Divide\n\\[= \\dfrac{6227020800}{120}\\]\n\\[= 51891840\\]\nWhy: \\(13!\\) is known from part (i) and \\(5! = 120\\).",
+              "Check\n\\[13 \\cdot 12 \\cdot 11 \\cdot 10 = 17160\\]\n\\[9 \\cdot 8 \\cdot 7 \\cdot 6 = 3024\\]\n\\[17160 \\times 3024 = 51891840 \\;\\checkmark\\]\nWhy: The 8 factors 13 down to 6, multiplied in two groups, give the same result."
+            ],
+            "final_answer": "\\({}^{13}P_{8} = 51{,}891{,}840\\) ways"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(iii)",
+            "prompt": "5 (iii) From a deck of 13 cards, find in how many ways these are arranging in a rectangular form? Hint (order is matter) 10 cards.",
+            "explanation": "10 of the 13 cards are placed in order.\nWe must count the arrangements.\nPlan: \\({}^{13}P_{10} = \\frac{13!}{3!}\\).",
+            "steps": [
+              "Given: \\(n = 13\\), \\(r = 10\\).\nTo find: \\({}^{13}P_{10}\\).\nMethod: \\({}^{n}P_{r} = \\frac{n!}{(n-r)!}\\).",
+              "Use the formula\n\\[{}^{13}P_{10} = \\dfrac{13!}{(13-10)!} = \\dfrac{13!}{3!}\\]\nWhy: \\(13 - 10 = 3\\).",
+              "Divide\n\\[= \\dfrac{6227020800}{6}\\]\n\\[= 1037836800\\]\nWhy: \\(3! = 6\\) and \\(13!\\) is from part (i).",
+              "Check\n\\[{}^{13}P_{10} = {}^{13}P_{8} \\times 5 \\times 4\\]\n\\[= 51891840 \\times 20 = 1037836800 \\;\\checkmark\\]\nWhy: \\({}^{13}P_{10}\\) has two more factors (5 and 4) than \\({}^{13}P_{8}\\)."
+            ],
+            "final_answer": "\\({}^{13}P_{10} = 1{,}037{,}836{,}800\\) ways"
+          }
+        ]
+      }
+    }
+  ]
+}

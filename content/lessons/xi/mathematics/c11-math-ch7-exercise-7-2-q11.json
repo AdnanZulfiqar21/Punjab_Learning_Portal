@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-2-Q11",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-2-q11",
+      "title": "Question 11",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 134,
+          "pdf_to": 134,
+          "note": "Exercise 7.2, Question 11: book p.129 (PDF 134). Answer key PDF 306 (book p.301). Solution book PDF 633-657 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11 Hamza wants to distribute 15 pencils among 6 needy children in this way that the youngest gets 4 pencils and others get 2 pencils. Find how many ways, there are of arranging in a row form?",
+            "explanation": "The pencils only tell us who is special; the count asked for is the number of ways the 6 children can stand in a row.\nThe youngest (who gets 4 pencils) has a fixed place, as the answer key takes it; the other 5 children can stand in any order.\nPlan: fix the youngest's place, arrange the other 5: \\(5!\\). (The pencil numbers do not add up: see the Book correction below.)",
+            "steps": [
+              "Given: 6 children; the youngest gets 4 pencils and stands in a fixed place (say first in the row); the other 5 children get 2 pencils each.\nTo find: the number of ways of arranging the children in a row.\nMethod: A fixed object has 1 way; arrange the remaining objects freely with \\({}^{n}P_{n} = n!\\).",
+              "Place the youngest\n\\[\\text{Ways} = 1\\]\nWhy: The youngest is treated differently from the others, so his place is decided (first in the row).",
+              "Arrange the other 5 children\n\\[{}^{5}P_{5} = 5! = 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1 = 120\\]\nWhy: 5 different children for the remaining 5 places.",
+              "Total\n\\[1 \\times 5! = 120\\]\nWhy: Fundamental principle of counting.",
+              "Check\nIf the youngest could stand anywhere, the count would be \\(6! = 720 = 6 \\times 120\\): 6 possible places for him, each with \\(5!\\) orders of the others. Fixing his place leaves \\(\\frac{720}{6} = 120\\) \\(\\checkmark\\)\nWhy: This shows exactly what fixing the youngest's place does to the count."
+            ],
+            "final_answer": "120 ways (youngest in a fixed place)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The question prints \"15 pencils\", but the youngest gets 4 and the other 5 children get 2 each: \\(4 + 5 \\times 2 = 14\\) pencils, not 15. The number of pencils does not change the count of arrangements. The answer key's 120 \\(= 5!\\) keeps the youngest in a fixed place and arranges the other five children; if the youngest's place were not fixed, the answer would be \\(6! = 720\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

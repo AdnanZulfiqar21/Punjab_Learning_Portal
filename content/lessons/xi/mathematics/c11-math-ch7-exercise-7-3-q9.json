@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-3-Q9",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-3-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 137,
+          "pdf_to": 137,
+          "note": "Exercise 7.3, Question 9: book page 132 (PDF 137); answer key book page 301 (PDF 306): 6,227,020,800 (agrees; the Governor is not counted at the table)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9. The Governor of the Punjab calls a meeting of 14 officers. In how many ways can they be seated at a round table?",
+            "explanation": "14 officers at a round table: a plain circular permutation.\nPlan: fix one officer and arrange the other 13 (Case-I).",
+            "steps": [
+              "Given: 14 officers, round table.\nTo find: the number of seatings.\nMethod: \\(n\\) different people round a table can be seated in \\((n - 1)!\\) ways (clockwise and anticlockwise orders are different at a meeting).",
+              "Apply the formula\n\\[(14 - 1)! = 13!\\]\nWhy: Rotating all officers one seat gives the same seating, so one officer is fixed.",
+              "Work out \\(13!\\)\n\\[13! = 13 \\times 12 \\times 11!\\]\n\\[= 156 \\times 39916800\\]\n\\[= 6227020800\\]\nWhy: \\(11! = 39916800\\) (Exercise 7.3, Question 1(iii) used it).",
+              "Check\n\\[14! \\div 14 = \\dfrac{87178291200}{14}\\]\n\\[= 6227020800 \\;\\checkmark\\]\nWhy: Each circular seating appears as 14 rotations among the 14! row seatings. The book's answer counts only the 14 officers; if the Governor also sat at the table there would be 15 people and 14! ways."
+            ],
+            "final_answer": "\\(13! = 6227020800\\) ways"
+          }
+        ]
+      }
+    }
+  ]
+}

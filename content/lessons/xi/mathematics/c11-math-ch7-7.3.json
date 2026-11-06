@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-7.3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/7.3",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 135,
+          "pdf_to": 137,
+          "note": "Book p. 130-132: 7.3 BITTER, Remember box, Example 7, Circular Permutation with Note, Case-I and Case-II, Example 8 with seating figures. Teaching notes, Key points, Common mistakes are ours."
+        }
+      ],
+      "title": "7.3 Permutation of Objects Not All Different",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Suppose we have to find the permutations of the letters of the word BITTER using all the letters in it. If we write the two Ts as \\(T_{1}\\) and \\(T_{2}\\), the word \\(\\text{BIT}_{1}\\text{T}_{2}\\text{ER}\\) consists of 6 different letters, which can be permuted among themselves in \\(6!\\) ways."
+          },
+          {
+            "type": "paragraph",
+            "text": "We can see that all the letters of the word BITTER are not different. It has 2 Ts in it. If we exchange the 2 Ts, we can see there are 2! ways to write the same word."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch7-fig-bitter",
+            "alt": "Two boxes: B I T1 T2 E R and B I T2 T1 E R, joined by arrows labelled 2! ways.",
+            "caption": "Figure: exchanging the two Ts of BITTER gives the same word, 2! ways (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "The replacement of the two Ts by \\(T_{1}\\) and \\(T_{2}\\) in any other permutation will give rise to 2 permutations. Hence the number of permutations of the letters of the word BITTER taken all at a time is\n\\[\\dfrac{6!}{2!} = \\dfrac{6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}{2 \\cdot 1}\\]\n\\[= 360 \\text{ ways}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Remember!",
+            "text": "If there are \\(n_{1}\\) alike objects of one kind, \\(n_{2}\\) alike objects of a second kind and \\(n_{3}\\) alike objects of a third kind, then the number of permutations of \\(n\\) objects taken all at a time is given by\n\\[\\dfrac{n!}{n_{1}!\\,n_{2}!\\,n_{3}!} = \\dbinom{n}{n_{1}, n_{2}, n_{3}}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why divide? If the letters were all different we would get \\(n!\\) arrangements. But swapping alike letters among themselves gives the same word, so every real word has been counted \\(n_{1}!\\,n_{2}!\\,n_{3}!\\) times. Dividing removes these repeats.\nSmall check: AAB has \\(\\frac{3!}{2!} = 3\\) arrangements: AAB, ABA, BAA.\nA letter that appears once contributes \\(1! = 1\\), so it changes nothing. The same rule works for any number of kinds."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "In how many ways can be letters of the word MISSISSIPPI be arranged when all the letters are to be used?",
+            "steps": [
+              "Given: the word MISSISSIPPI, all 11 letters used.\nTo find: the number of different arrangements.\nMethod: the letters are not all different, so use \\(\\frac{n!}{n_{1}!\\,n_{2}!\\,\\cdots}\\): count the letters, then how often each one repeats.",
+              "Step 1: Count the letters\n\\[n = 11\\]\nWhy: M, I, S, S, I, S, S, I, P, P, I: 11 letters.",
+              "Step 2: Count the repeats\nI is repeated 4 times: 4! ways\nS is repeated 4 times: 4! ways\nP is repeated 2 times: 2! ways\nM comes once only: 1! way\nWhy: \\(4 + 4 + 2 + 1 = 11\\), so every letter is counted. Each group of alike letters can be swapped among itself without changing the word.",
+              "Step 3: Apply the formula\n\\[\\dfrac{11!}{4!\\,4!\\,2!\\,1!} = \\dfrac{39916800}{24 \\cdot 24 \\cdot 2 \\cdot 1}\\]\n\\[= \\dfrac{39916800}{1152}\\]\n\\[= 34650 \\text{ ways}\\]\nWhy: divide the arrangements of 11 different letters by the swaps of the alike letters.",
+              "Check: by filling places\nChoose 4 of the 11 places for I, then 4 of the remaining 7 for S, then 2 of the remaining 3 for P; M takes the last place:\n\\[330 \\times 35 \\times 3 \\times 1 = 34650\\]\nHere 330, 35 and 3 are the numbers of ways of choosing those places (combinations, Section 7.4). Same answer."
+            ],
+            "answer": "34650 ways"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Circular Permutation"
+          },
+          {
+            "type": "paragraph",
+            "text": "The permutation in which the objects are arranged in a circular order is known as circular permutation."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "The following circular arrangements are reflections of each other and are considered the same when anticlockwise and clockwise arrangements are considered identical."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch7-fig-reflected-circles",
+            "alt": "Two circles with A at the top. Left: B at lower left, C at lower right; clockwise from A the order is A, C, B. Right: C at lower left, B at lower right; clockwise from A the order is A, B, C. A dashed mirror line separates them.",
+            "caption": "Figure: two circular arrangements of A, B, C that are mirror images of each other (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Circular permutation can occur in two cases:"
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Case-I: When clockwise and anticlockwise arrangements are considered different"
+          },
+          {
+            "type": "paragraph",
+            "text": "In a linear arrangement, changing the order of objects results in a new arrangement. However, in a circular arrangement, rotating the entire circle does not produce a new, distinct arrangement."
+          },
+          {
+            "type": "paragraph",
+            "text": "For example, suppose three people A, B and C are sitting around a round table. The three linear arrangements A - B - C, B - C - A and C - A - B are all considered the same in circular permutations, because each one is simply a rotation of the others."
+          },
+          {
+            "type": "paragraph",
+            "text": "We conclude that:\n3 linear permutations give 1 circular permutation.\n\\[3! \\text{ linear permutations give } \\tfrac{1}{3} \\cdot 3! = \\tfrac{3!}{3} = 2! \\text{ permutations}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Generalising the above idea, if \\(n\\) objects are arranged in a circle, the number of distinct circular permutations is"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{n!}{n} = (n-1)!",
+            "text_alt": "n factorial over n equals (n minus 1) factorial"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why divide by \\(n\\)? Each circular seating can be rotated into \\(n\\) positions, and each rotation reads as a different line. So the \\(n!\\) lines come in groups of \\(n\\) that are the same circle.\nAnother way to see it: fix one person's seat (rotation no longer matters), then arrange the other \\(n - 1\\) people in the remaining seats: \\((n-1)!\\) ways.\nFor A, B, C: fix A; then B and C can sit as (B to A's right, C to A's left) or the opposite: \\(2! = 2\\) seatings."
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Case-II: When clockwise and anticlockwise arrangements are considered identical"
+          },
+          {
+            "type": "paragraph",
+            "text": "In many real-life situations, a circular permutation and its mirror image are not considered different. For example, if three beads, red, blue and black, are arranged in a necklace, then an arrangement and its reflection (as shown in the figure in the Note) are considered the same, because the necklace can be turned over."
+          },
+          {
+            "type": "paragraph",
+            "text": "In such cases we divide the total number of circular permutations by 2 to eliminate the symmetrical duplicates. Thus the number of distinct circular permutations is:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{(n-1)!}{2}",
+            "text_alt": "(n minus 1) factorial over 2"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Which case to use? People round a table: they cannot be turned over, so clockwise and anticlockwise orders are different (Case-I), unless the question says otherwise.\nBeads in a necklace, flowers in a garland, keys on a ring: the object can be flipped over, so an arrangement and its mirror image are the same (Case-II).\nCase-II needs \\(n \\ge 3\\): with 1 or 2 objects an arrangement is its own mirror image, so we do not divide by 2."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "In how many ways can 4 persons be seated at a round table, while: (i) clockwise and anticlockwise orders are different; (ii) clockwise and anticlockwise orders are identical.",
+            "steps": [
+              "Given: 4 persons A, B, C and D at a round table.\nTo find: the number of seatings (i) when clockwise and anticlockwise orders are different, (ii) when they are identical.\nMethod: (i) Case-I, \\((n-1)!\\); (ii) Case-II, \\(\\frac{(n-1)!}{2}\\), with \\(n = 4\\).",
+              "Step 1: (i) According to Case-I\n\\[= (n-1)! \\text{ ways}\\]\n\\[= (4-1)! = 3!\\]\n\\[= 3 \\cdot 2 \\cdot 1 = 6 \\text{ ways}\\]\nWhy: rotations of the same seating are not counted again; mirror images are counted separately. With A fixed at the top, B, C, D fill the other 3 seats in 3! ways (see the first figure below).",
+              "Step 2: (ii) According to Case-II, as printed\nThe possible number of ways are\n\\[= \\dfrac{(n-1)}{2} \\text{ ways}\\]\n\\[= \\dfrac{(4-1)!}{2} = \\dfrac{3!}{2}\\]\n\\[= \\dfrac{3 \\cdot 2}{2} = 3 \\text{ ways}\\]\nWhy: each seating of (i) and its mirror image are now the same, so the 6 seatings pair up into 3. The formula is \\(\\frac{(n-1)!}{2}\\); the printed \\(\\frac{(n-1)}{2}\\) has lost the factorial sign, but the next line uses \\((4-1)!\\) correctly.",
+              "Check:\nThe six seatings of (i), read clockwise from A, are ABCD, ABDC, ACDB, ACBD, ADBC, ADCB. Mirror pairs: ABCD with ADCB, ABDC with ACDB, ACBD with ADBC. That is 3 pairs, so 3 ways in (ii)."
+            ],
+            "answer": "(i) 6 ways (ii) 3 ways",
+            "book_errors": [
+              "\\[= \\dfrac{(n-1)}{2} \\text{ ways}\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 8(ii): the book prints \\(\\frac{(n-1)}{2}\\) ways; correct \\(\\frac{(n-1)!}{2}\\) ways (as in Case-II). The answer 3 ways is right.\nExample 8(i), figure: the fourth circle is labelled C at both sides with D at the bottom, which repeats the third seating. It should be A, C, B, D clockwise (C right, B bottom, D left), as in our figure."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch7-fig-ex8-case1",
+            "alt": "Six circles, each with A at the top. Reading clockwise from A: (1) A, B, C, D (2) A, B, D, C (3) A, C, D, B (4) A, C, B, D (5) A, D, B, C (6) A, D, C, B.",
+            "caption": "Figure: the 6 seatings of Example 8(i), clockwise and anticlockwise different (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch7-fig-ex8-case2",
+            "alt": "Three circles with A at the top: (1) A, B, C, D (2) A, B, D, C (3) A, C, B, D, each the same as its mirror image A, D, C, B; A, C, D, B; A, D, B, C.",
+            "caption": "Figure: the 3 seatings of Example 8(ii), clockwise and anticlockwise identical (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Alike objects: \\(\\frac{n!}{n_{1}!\\,n_{2}!\\,n_{3}!}\\), dividing by the factorial of each group of alike objects.\n2. Circular permutation, clockwise and anticlockwise different: \\((n-1)!\\) (fix one object, arrange the rest).\n3. Circular permutation, clockwise and anticlockwise identical (necklace, garland): \\(\\frac{(n-1)!}{2}\\).\n4. People round a table: Case-I unless the question says otherwise."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistakes",
+            "text": "1. Using \\(n!\\) for alike letters: BITTER has \\(\\frac{6!}{2!} = 360\\) arrangements, not 720.\n2. Adding the repeats instead of taking their factorials: divide by \\(4!\\,4!\\,2!\\), not by \\(4 + 4 + 2\\).\n3. Using \\(n!\\) for a circle: 4 people round a table give \\(3! = 6\\), not \\(4! = 24\\).\n4. Dividing by 2 for people at a table when the question has not said that clockwise and anticlockwise orders are the same."
+          }
+        ]
+      }
+    }
+  ]
+}

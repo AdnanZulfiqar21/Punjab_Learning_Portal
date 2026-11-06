@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-1-Q3-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-1-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 131,
+          "pdf_to": 131,
+          "note": "Exercise 7.1, Question 3: book page 126 (PDF 131); answer key book page 301 (PDF 306): i) 5040 ii) 362,880 iii) 90 iv) 1320 v) 36 vi) 10 vii) 25,200 viii) 110,880 ix) 220 x) 1 xi) 40,320 xii) 1440 (all agree)"
+        }
+      ],
+      "variant_of": "C11-MATH-CH7-EXERCISE-7-1-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Evaluate: \\(7!\\)",
+            "explanation": "Yeh seedha ek factorial hai. Find karna hai \\(7!\\) ki value.\nPlan: 7 se le kar 1 tak sab numbers multiply karne hain, lekin ek waqt mein ek number, taake ghalti na ho.",
+            "steps": [
+              "Diya gaya hai: \\(7!\\)\nHumein find karna hai: is ki value.\nTareeqa: \\(n!\\) (n factorial) ka matlab hai \\(n\\) se le kar 1 tak tamam natural numbers ka product: \\(n! = n(n - 1)(n - 2) \\cdots 2 \\cdot 1\\). Aur yaad rahe \\(0! = 1\\).",
+              "Product likhein\n\\[7! = 7 \\cdot 6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1\\]\nKyun: Factorial ki definition yahi hai: 7 se shuru kar ke har dafa ek kam karte jao jab tak 1 na aa jaye, aur sab ko multiply karo. Book mein dot (.) ka matlab multiply hai.",
+              "Qadam ba qadam multiply karein\n\\[7 \\cdot 6 = 42,\\quad 42 \\cdot 5 = 210\\]\n\\[210 \\cdot 4 = 840,\\quad 840 \\cdot 3 = 2520\\]\n\\[2520 \\cdot 2 \\cdot 1 = 5040\\]\nKyun: Saare numbers ek saath zehan mein multiply karne se ghalti hoti hai. Ek ek kar ke multiply karne se har jawab check ho jata hai. Aakhir mein 1 se multiply karne se kuch nahi badalta.",
+              "Tasdeeq\n\\[7! = 7 \\times 6! = 7 \\times 720 = 5040 \\;\\checkmark\\]\nKyun: Book ne bataya hai \\(n! = n(n - 1)!\\), yani \\(7! = 7 \\times 6!\\). Book ki list mein \\(6! = 720\\) diya hai; 7 se multiply kiya to wohi 5040 aaya."
+            ],
+            "final_answer": "\\(7! = 5040\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Evaluate: \\(9!\\)",
+            "explanation": "Yeh bhi ek factorial hai, bas pehle se bara.\nPlan: shuru se 9 numbers multiply karne ke bajaye part (i) ka jawab \\(7! = 5040\\) istemal karenge. Yeh smart tareeqa hai.",
+            "steps": [
+              "Diya gaya hai: \\(9!\\)\nHumein find karna hai: is ki value.\nTareeqa: \\(n! = n(n - 1)!\\) ko do dafa lagayen: \\(9! = 9 \\cdot 8!\\) aur \\(8! = 8 \\cdot 7!\\), yani \\(9! = 9 \\cdot 8 \\cdot 7!\\).",
+              "Part (i) istemal karein\n\\[9! = 9 \\cdot 8 \\cdot 7!\\]\n\\[= 72 \\times 5040\\]\nKyun: 7 se 1 tak ka product hum pehle hi nikaal chuke hain, us ko dobara nikaalna waqt ka zaya hai. Bas upar ke do numbers 9 aur 8 multiply karne hain, jo 72 bante hain.",
+              "Multiply karein\n\\[72 \\times 5040 = 362880\\]\nKyun: 72 ko 70 aur 2 mein tor lein: \\(70 \\times 5040 = 352800\\) aur \\(2 \\times 5040 = 10080\\). Dono jama karein to \\(362880\\). Toorna (split karna) bari multiplication ko aasaan bana deta hai.",
+              "Tasdeeq\n\\[8! = 8 \\times 5040 = 40320\\]\n\\[9! = 9 \\times 40320 = 362880 \\;\\checkmark\\]\nKyun: Ek ek seedhi chadh kar (pehle 8!, phir 9!) bhi wohi jawab aaya, is liye jawab pakka hai."
+            ],
+            "final_answer": "\\(9! = 362880\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) Evaluate: \\(\\frac{10!}{8!}\\)",
+            "explanation": "Yahan do factorials ka division hai.\nSab se aam ghalti: \\(10!\\) aur \\(8!\\) dono poore nikaal kar divide karna. Itni lambi calculation ki zaroorat nahi.\nPlan: \\(10!\\) ko sirf \\(8!\\) tak kholein aur cancel kar dein.",
+            "steps": [
+              "Diya gaya hai: \\(\\dfrac{10!}{8!}\\)\nHumein find karna hai: is ki value.\nTareeqa: Bare factorial ko poora multiply karne ki zaroorat nahi. Usay itna kholein ke chhota factorial nazar aa jaye, jaise \\(n! = n(n - 1) \\cdots (r + 1) \\cdot r!\\), phir upar neeche se cancel kar dein.",
+              "\\(10!\\) ko \\(8!\\) tak kholein\n\\[\\dfrac{10!}{8!} = \\dfrac{10 \\cdot 9 \\cdot 8!}{8!}\\]\nKyun: \\(10! = 10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdots 1\\), aur \\(8 \\cdot 7 \\cdots 1\\) khud \\(8!\\) hai. Is liye \\(10! = 10 \\cdot 9 \\cdot 8!\\) likh sakte hain. Jaise hi neeche wala factorial nazar aaye, kholna band kar dein.",
+              "Cancel kar ke multiply karein\n\\[= 10 \\cdot 9 = 90\\]\nKyun: \\(8!\\) upar bhi hai aur neeche bhi, is liye cancel ho gaya. Sirf 10 aur 9 bache.\nDhyan dein: \\(\\dfrac{10!}{8!}\\) ko \\(\\left(\\dfrac{10}{8}\\right)!\\) samajhna bilkul ghalat hai; factorials aise divide nahi hote.",
+              "Tasdeeq\n\\[\\dfrac{3628800}{40320} = 90 \\;\\checkmark\\]\nKyun: Poori values \\(10! = 3628800\\) aur \\(8! = 40320\\) se divide kiya to bhi 90 aaya. Lekin dekhiye cancel wala tareeqa kitna chhota tha."
+            ],
+            "final_answer": "\\(\\frac{10!}{8!} = 90\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iv)",
+            "prompt": "3 (iv) Evaluate: \\(\\frac{12!}{9!}\\)",
+            "explanation": "Bilkul part (iii) jaisa sawal hai.\nPlan: \\(12!\\) ko \\(9!\\) tak kholein, cancel karein, aur jo teen numbers bachein unhein multiply karein.",
+            "steps": [
+              "Diya gaya hai: \\(\\dfrac{12!}{9!}\\)\nHumein find karna hai: is ki value.\nTareeqa: Bare factorial ko poora multiply karne ki zaroorat nahi. Usay itna kholein ke chhota factorial nazar aa jaye, jaise \\(n! = n(n - 1) \\cdots (r + 1) \\cdot r!\\), phir upar neeche se cancel kar dein.",
+              "\\(12!\\) ko \\(9!\\) tak kholein\n\\[\\dfrac{12!}{9!} = \\dfrac{12 \\cdot 11 \\cdot 10 \\cdot 9!}{9!}\\]\nKyun: 12 se neeche aate hue 12, 11, 10 ke baad 9 aata hai, aur 9 se 1 tak ka product \\(9!\\) hai. Wahin ruk gaye taake \\(9!\\) cancel ho sake.",
+              "Cancel kar ke multiply karein\n\\[= 12 \\cdot 11 \\cdot 10\\]\n\\[= 132 \\cdot 10 = 1320\\]\nKyun: \\(9!\\) cancel hone ke baad teen factors bache. Ek aasaan pehchaan: upar aur neeche ke numbers ka farq \\(12 - 9 = 3\\) hai, is liye teen hi factors bachte hain.",
+              "Tasdeeq\n\\[\\dfrac{479001600}{362880} = 1320 \\;\\checkmark\\]\nKyun: Poori values \\(12! = 479001600\\) aur \\(9! = 362880\\) bhi yahi jawab deti hain."
+            ],
+            "final_answer": "\\(\\frac{12!}{9!} = 1320\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(v)",
+            "prompt": "3 (v) Evaluate: \\(\\frac{9!}{2!\\,7!}\\)",
+            "explanation": "Is dafa neeche do factorials hain: \\(2!\\) aur \\(7!\\).\nPlan: upar wale \\(9!\\) ko neeche wale bare factorial \\(7!\\) tak kholein, cancel karein, phir \\(2!\\) se divide karein.",
+            "steps": [
+              "Diya gaya hai: \\(\\dfrac{9!}{2!\\,7!}\\)\nHumein find karna hai: is ki value.\nTareeqa: Bare factorial ko poora multiply karne ki zaroorat nahi. Usay itna kholein ke chhota factorial nazar aa jaye, jaise \\(n! = n(n - 1) \\cdots (r + 1) \\cdot r!\\), phir upar neeche se cancel kar dein.",
+              "\\(9!\\) ko \\(7!\\) tak kholein\n\\[\\dfrac{9!}{2!\\,7!} = \\dfrac{9 \\cdot 8 \\cdot 7!}{2!\\,7!}\\]\nKyun: Neeche do factorials mein se bara wala \\(7!\\) cancel karein, kyunke is se sab se zyada kaam bachta hai. Agar \\(2!\\) cancel karne ki koshish karte to \\(9!\\) ko 2 tak kholna parta.",
+              "Cancel kar ke divide karein\n\\[= \\dfrac{9 \\cdot 8}{2 \\cdot 1}\\]\n\\[= \\dfrac{72}{2} = 36\\]\nKyun: \\(7!\\) cancel ho gaya; \\(2! = 2 \\cdot 1 = 2\\), to 72 ko 2 se divide kiya.",
+              "Tasdeeq\n\\[\\dfrac{362880}{2 \\times 5040} = \\dfrac{362880}{10080} = 36 \\;\\checkmark\\]\nKyun: Poori values se bhi 36 aaya. Aage chal kar aap dekhenge ke yeh \\({}^{9}C_2\\) hai, yani 9 cheezon mein se 2 chunne ke tareeqe."
+            ],
+            "final_answer": "\\(\\frac{9!}{2!\\,7!} = 36\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(vi)",
+            "prompt": "3 (vi) Evaluate: \\(\\frac{5!}{2!\\,3!\\,1!}\\)",
+            "explanation": "Chhote factorials hain, phir bhi cancel wala tareeqa hi sab se tez hai.\nPlan: \\(5!\\) ko \\(3!\\) tak kholein, cancel karein, phir \\(2!\\) aur \\(1!\\) se divide karein.",
+            "steps": [
+              "Diya gaya hai: \\(\\dfrac{5!}{2!\\,3!\\,1!}\\)\nHumein find karna hai: is ki value.\nTareeqa: Bare factorial ko poora multiply karne ki zaroorat nahi. Usay itna kholein ke chhota factorial nazar aa jaye, jaise \\(n! = n(n - 1) \\cdots (r + 1) \\cdot r!\\), phir upar neeche se cancel kar dein.",
+              "\\(5!\\) ko \\(3!\\) tak kholein\n\\[\\dfrac{5 \\cdot 4 \\cdot 3!}{2!\\,3!\\,1!}\\]\nKyun: Neeche teen factorials mein \\(3!\\) sab se bara hai, isi ko cancel karna faydemand hai.",
+              "Cancel kar ke divide karein\n\\[= \\dfrac{5 \\cdot 4}{2 \\cdot 1} = \\dfrac{20}{2} = 10\\]\nKyun: \\(2! = 2\\) aur \\(1! = 1\\). 1 se divide karne se kuch nahi badalta, is liye 20 ko sirf 2 se divide kiya.\nDhyan dein: \\(1! = 1\\) hai aur \\(0! = 1\\) bhi; dono ki value 1 hi hai.",
+              "Tasdeeq\n\\[\\dfrac{120}{2 \\times 6 \\times 1} = \\dfrac{120}{12} = 10 \\;\\checkmark\\]\nKyun: \\(5! = 120\\) aur \\(3! = 6\\) rakh kar bhi 10 hi aaya."
+            ],
+            "final_answer": "\\(\\frac{5!}{2!\\,3!\\,1!} = 10\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(vii)",
+            "prompt": "3 (vii) Evaluate: \\(\\frac{10!}{3!\\,4!}\\)",
+            "explanation": "Neeche \\(3!\\) aur \\(4!\\) hain. Ghaur karein: \\(3 + 4 = 7\\) hai, 10 nahi, is liye jawab bara aayega.\nPlan: \\(10!\\) ko \\(4!\\) tak kholein, cancel karein, phir \\(3! = 6\\) se divide karein.",
+            "steps": [
+              "Diya gaya hai: \\(\\dfrac{10!}{3!\\,4!}\\)\nHumein find karna hai: is ki value.\nTareeqa: Bare factorial ko poora multiply karne ki zaroorat nahi. Usay itna kholein ke chhota factorial nazar aa jaye, jaise \\(n! = n(n - 1) \\cdots (r + 1) \\cdot r!\\), phir upar neeche se cancel kar dein.",
+              "\\(10!\\) ko \\(4!\\) tak kholein\n\\[\\dfrac{10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6 \\cdot 5 \\cdot 4!}{3!\\,4!}\\]\nKyun: Neeche wale do factorials mein \\(4!\\) bara hai, is liye \\(10!\\) ko 4 tak khola aur ruk gaye.",
+              "Cancel kar ke simplify karein\n\\[= \\dfrac{10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6 \\cdot 5}{6}\\]\n\\[= 10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 5\\]\nKyun: \\(4!\\) cancel hua. Neeche \\(3! = 6\\) bacha, aur upar bhi ek 6 hai, to woh bhi cancel. Multiply karne se pehle cancel karna hamesha kaam halka karta hai.",
+              "Multiply karein\n\\[10 \\cdot 9 = 90,\\quad 90 \\cdot 8 = 720\\]\n\\[720 \\cdot 7 = 5040,\\quad 5040 \\cdot 5 = 25200\\]\nKyun: Ek waqt mein ek factor multiply kiya taake har qadam check ho sake.",
+              "Tasdeeq\n\\[\\dfrac{3628800}{6 \\times 24} = \\dfrac{3628800}{144} = 25200 \\;\\checkmark\\]\nKyun: \\(3! \\cdot 4! = 6 \\times 24 = 144\\); poori value se divide kiya to bhi 25200."
+            ],
+            "final_answer": "\\(\\frac{10!}{3!\\,4!} = 25200\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(viii)",
+            "prompt": "3 (viii) Evaluate: \\(\\frac{12!}{3!\\,3!\\,5!}\\)",
+            "explanation": "Neeche teen factorials hain: \\(3!\\), \\(3!\\) aur \\(5!\\).\nPlan: \\(12!\\) ko \\(5!\\) tak kholein, cancel karein, phir \\(3!\\,3! = 36\\) ko upar ke numbers se cancel karein.",
+            "steps": [
+              "Diya gaya hai: \\(\\dfrac{12!}{3!\\,3!\\,5!}\\)\nHumein find karna hai: is ki value.\nTareeqa: Bare factorial ko poora multiply karne ki zaroorat nahi. Usay itna kholein ke chhota factorial nazar aa jaye, jaise \\(n! = n(n - 1) \\cdots (r + 1) \\cdot r!\\), phir upar neeche se cancel kar dein.",
+              "\\(12!\\) ko \\(5!\\) tak kholein\n\\[\\dfrac{12 \\cdot 11 \\cdot 10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6 \\cdot 5!}{3!\\,3!\\,5!}\\]\nKyun: Neeche sab se bara factorial \\(5!\\) hai, isay cancel karne ke liye upar 5 tak khola.",
+              "Cancel kar ke 36 se divide karein\n\\[= \\dfrac{12 \\cdot 11 \\cdot 10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6}{36}\\]\n\\[= 12 \\cdot 11 \\cdot 10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6 \\div 36\\]\nKyun: \\(3!\\,3! = 6 \\times 6 = 36\\). 36 ko do 6 samajh lein: ek 6 upar wale 6 se cancel, aur doosra 6 upar wale 12 ko 2 bana deta hai (\\(12 \\div 6 = 2\\)).",
+              "Bache hue numbers multiply karein\n\\[2 \\cdot 11 \\cdot 10 \\cdot 9 \\cdot 8 \\cdot 7\\]\n\\[= 220 \\cdot 9 \\cdot 56\\]\n\\[= 1980 \\cdot 56 = 110880\\]\nKyun: Aasaan jore banaye: \\(2 \\cdot 11 \\cdot 10 = 220\\) aur \\(8 \\cdot 7 = 56\\). Phir \\(220 \\times 9 = 1980\\) aur \\(1980 \\times 56 = 110880\\).",
+              "Tasdeeq\n\\[\\dfrac{479001600}{6 \\cdot 6 \\cdot 120} = \\dfrac{479001600}{4320}\\]\n\\[= 110880 \\;\\checkmark\\]\nKyun: Poori values se divide kar ke bhi wohi jawab mila."
+            ],
+            "final_answer": "\\(\\frac{12!}{3!\\,3!\\,5!} = 110880\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ix)",
+            "prompt": "3 (ix) Evaluate: \\(\\frac{12!}{3!(12 - 3)!}\\)",
+            "explanation": "Pehle bracket ko hal karna hai: \\(12 - 3 = 9\\).\nPlan: bracket simplify kar ke \\(\\dfrac{12!}{3!\\,9!}\\) banayein, phir \\(12!\\) ko \\(9!\\) tak khol kar cancel karein.",
+            "steps": [
+              "Diya gaya hai: \\(\\dfrac{12!}{3!(12 - 3)!}\\)\nHumein find karna hai: is ki value.\nTareeqa: Bare factorial ko poora multiply karne ki zaroorat nahi. Usay itna kholein ke chhota factorial nazar aa jaye, jaise \\(n! = n(n - 1) \\cdots (r + 1) \\cdot r!\\), phir upar neeche se cancel kar dein.",
+              "Bracket simplify karein\n\\[\\dfrac{12!}{3!(12 - 3)!} = \\dfrac{12!}{3!\\,9!}\\]\nKyun: Pehle bracket ke andar ka hisaab: \\(12 - 3 = 9\\), phir us ka factorial \\(9!\\).\nDhyan dein: \\((12 - 3)!\\) ko \\(12! - 3!\\) likhna bohat bari ghalti hai; factorial pehle subtraction ke baad lagta hai.",
+              "\\(12!\\) ko \\(9!\\) tak khol kar cancel karein\n\\[= \\dfrac{12 \\cdot 11 \\cdot 10 \\cdot 9!}{3!\\,9!}\\]\n\\[= \\dfrac{1320}{6} = 220\\]\nKyun: \\(12 \\cdot 11 \\cdot 10 = 1320\\) humein part (iv) mein mil chuka hai, aur \\(3! = 6\\).",
+              "Tasdeeq\n\\[\\dfrac{479001600}{6 \\times 362880} = 220 \\;\\checkmark\\]\nKyun: Poori values se bhi 220. Yeh shakal \\(\\dfrac{n!}{r!(n - r)!}\\) aage combination ka formula hai: \\({}^{12}C_3\\), yani 12 cheezon mein se 3 chunne ke tareeqe."
+            ],
+            "final_answer": "\\(\\frac{12!}{3!(12 - 3)!} = 220\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(x)",
+            "prompt": "3 (x) Evaluate: \\(\\frac{20!}{20!(20 - 20)!}\\)",
+            "explanation": "Bracket mein \\(20 - 20 = 0\\) aata hai, yani \\(0!\\).\nPlan: \\(20!\\) cancel karein aur \\(0! = 1\\) istemal karein.",
+            "steps": [
+              "Diya gaya hai: \\(\\dfrac{20!}{20!(20 - 20)!}\\)\nHumein find karna hai: is ki value.\nTareeqa: \\(n!\\) (n factorial) ka matlab hai \\(n\\) se le kar 1 tak tamam natural numbers ka product: \\(n! = n(n - 1)(n - 2) \\cdots 2 \\cdot 1\\). Aur yaad rahe \\(0! = 1\\).",
+              "Bracket simplify karein\n\\[\\dfrac{20!}{20!(20 - 20)!} = \\dfrac{20!}{20!\\,0!}\\]\nKyun: \\(20 - 20 = 0\\), to \\((20 - 20)! = 0!\\).",
+              "Cancel karein aur \\(0! = 1\\) lagayen\n\\[= \\dfrac{1}{0!} = \\dfrac{1}{1} = 1\\]\nKyun: \\(20!\\) upar neeche cancel ho gaya. \\(0!\\) ki value 1 define ki gayi hai, 0 nahi. Agar \\(0! = 0\\) hota to zero se divide karna parta jo mumkin nahi; isi liye \\(0! = 1\\) define kiya gaya hai.\nDhyan dein: \\(0! = 0\\) likhna exam ki aam ghalti hai.",
+              "Tasdeeq\n\\[{}^{20}C_{20} = 1 \\;\\checkmark\\]\nKyun: 20 cheezon mein se saari 20 chunne ka sirf ek hi tareeqa hai: sab utha lo. Is liye jawab 1 hona hi chahiye."
+            ],
+            "final_answer": "\\(\\frac{20!}{20!(20 - 20)!} = 1\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(xi)",
+            "prompt": "3 (xi) Evaluate: \\(\\frac{8!}{0!}\\)",
+            "explanation": "Neeche \\(0!\\) hai jo 1 ke barabar hai, to yeh asal mein sirf \\(8!\\) hai. Plan: \\(0! = 1\\) lagayen, phir part (i) se \\(8!\\) nikaalein.",
+            "steps": [
+              "Diya gaya hai: \\(\\dfrac{8!}{0!}\\)\nHumein find karna hai: is ki value.\nTareeqa: \\(n!\\) (n factorial) ka matlab hai \\(n\\) se le kar 1 tak tamam natural numbers ka product: \\(n! = n(n - 1)(n - 2) \\cdots 2 \\cdot 1\\). Aur yaad rahe \\(0! = 1\\).",
+              "\\(0! = 1\\) lagayen\n\\[\\dfrac{8!}{0!} = \\dfrac{8!}{1} = 8!\\]\nKyun: Definition se \\(0! = 1\\), aur kisi number ko 1 se divide karne par woh wahi rehta hai.",
+              "\\(8!\\) nikaalein\n\\[8! = 8 \\times 7! = 8 \\times 5040\\]\n\\[= 40320\\]\nKyun: Part (i) mein \\(7! = 5040\\) mila tha; \\(8! = 8 \\times 7!\\).",
+              "Tasdeeq\n\\[\\dfrac{9!}{9} = \\dfrac{362880}{9} = 40320 \\;\\checkmark\\]\nKyun: \\(9! = 9 \\cdot 8!\\) hai, to \\(9!\\) ko 9 se divide karne par \\(8!\\) milna chahiye, aur wohi mila."
+            ],
+            "final_answer": "\\(\\frac{8!}{0!} = 40320\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(xii)",
+            "prompt": "3 (xii) Evaluate: \\(6!\\,.\\,0!\\,.\\,2!\\)",
+            "explanation": "Yahan teen factorials ka product hai; dots ka matlab multiply hai.\nPlan: har factorial alag nikaalein, phir multiply karein.",
+            "steps": [
+              "Diya gaya hai: \\(6! \\cdot 0! \\cdot 2!\\)\nHumein find karna hai: is ki value.\nTareeqa: \\(n!\\) (n factorial) ka matlab hai \\(n\\) se le kar 1 tak tamam natural numbers ka product: \\(n! = n(n - 1)(n - 2) \\cdots 2 \\cdot 1\\). Aur yaad rahe \\(0! = 1\\).",
+              "Har factorial nikaalein\n\\[6! = 720,\\quad 0! = 1,\\quad 2! = 2\\]\nKyun: \\(6! = 6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1 = 720\\); \\(0! = 1\\) definition se; \\(2! = 2 \\cdot 1 = 2\\).",
+              "Multiply karein\n\\[6! \\cdot 0! \\cdot 2! = 720 \\times 1 \\times 2\\]\n\\[= 1440\\]\nKyun: 1 se multiply karne se kuch nahi badalta, to bas 720 ko 2 se multiply karna tha.",
+              "Tasdeeq\n\\[720 \\times 2 = 1440 \\;\\checkmark\\]\nKyun: Dobara hisaab kiya, wohi jawab.\nDhyan dein: Agar koi \\(0! = 0\\) le le to poora product 0 ho jayega, jo ghalat hai. \\(0!\\) hamesha 1 hai."
+            ],
+            "final_answer": "\\(6! \\cdot 0! \\cdot 2! = 1440\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

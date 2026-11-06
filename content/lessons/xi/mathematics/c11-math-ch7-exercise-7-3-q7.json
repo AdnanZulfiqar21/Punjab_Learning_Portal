@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-3-Q7",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-3-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 137,
+          "pdf_to": 137,
+          "note": "Exercise 7.3, Question 7: book page 132 (PDF 137); answer key book page 301 (PDF 306): 12,612,600 (agrees; treats the four committees as different)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7. 15 members of a club form 4 committees of 3, 5, 4, 3 members so that no member is a member of more than one committee. Find the number of committees.",
+            "explanation": "Every member goes into exactly one committee, so all 15 members are shared out into groups of 3, 5, 4 and 3.\nPlan: think of giving each member a committee label; the labels form a 'word' with repeats, so use the formula for objects not all different.",
+            "steps": [
+              "Given: 15 members; committees of sizes 3, 5, 4, 3; no one in two committees.\nTo find: the number of ways to form the committees.\nMethod: Line up the 15 members and give them labels: 3 labels \\(A\\), 5 labels \\(B\\), 4 labels \\(C\\), 3 labels \\(D\\). Each arrangement of these labels is one way to form the committees, so the count is \\(\\dfrac{15!}{3!\\,5!\\,4!\\,3!}\\).",
+              "Check that everyone is used\n\\[3 + 5 + 4 + 3 = 15\\]\nWhy: No member is left out and no one is in two committees.",
+              "Apply the formula\n\\[\\dfrac{15!}{3!\\,5!\\,4!\\,3!} = \\dfrac{1307674368000}{6 \\cdot 120 \\cdot 24 \\cdot 6}\\]\n\\[= \\dfrac{1307674368000}{103680}\\]\n\\[= 12612600\\]\nWhy: Inside one committee the order of its members does not matter, so we divide by the factorial of each committee size.",
+              "Check by choosing committee by committee\n\\[{}^{15}C_3 \\cdot {}^{12}C_5 \\cdot {}^{7}C_4 \\cdot {}^{3}C_3\\]\n\\[= 455 \\cdot 792 \\cdot 35 \\cdot 1\\]\n\\[= 12612600 \\;\\checkmark\\]\nWhy: Choose 3 of 15 for the first committee, 5 of the remaining 12, 4 of the remaining 7, and the last 3 form the fourth committee. This treats the four committees as different committees (as the book's answer does); if the two 3-member committees were not distinguished, we would further divide by 2!."
+            ],
+            "final_answer": "\\(12612600\\) ways"
+          }
+        ]
+      }
+    }
+  ]
+}

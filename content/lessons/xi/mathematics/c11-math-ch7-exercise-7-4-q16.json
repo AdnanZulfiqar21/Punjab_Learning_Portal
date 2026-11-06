@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-4-Q16",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-4-q16",
+      "title": "Question 16",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 144,
+          "pdf_to": 144,
+          "note": "Exercise 7.4, Question 16: book p.139 (PDF 144). Answer key PDF 306 (book p.301). Solution book PDF 675-704 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "16(a)",
+            "prompt": "16 (a) Using a cryptographic system, a password is generated with 8 characters. Each character can either be a lowercase letter (a-f) or a digit (0-5). How many passwords can be generated if each password must contain exactly 5 lowercase letters and 3 digits? (a) With repetition allowed",
+            "explanation": "A password is ordered. There are 6 letters (a-f) and 6 digits (0-5). Three jobs: choose which 5 of the 8 positions hold letters, fill the letter positions, fill the digit positions.\nPlan: \\({}^{8}C_{5} \\times 6^{5} \\times 6^{3}\\).",
+            "steps": [
+              "Given: 8 positions; exactly 5 letters from \\(\\{a, \\dots, f\\}\\) and 3 digits from \\(\\{0, \\dots, 5\\}\\); repetition allowed.\nTo find: the number of passwords.\nMethod: Fundamental principle of counting over the three jobs.",
+              "Choose the letter positions\n\\[{}^{8}C_{5} = {}^{8}C_{3} = 56\\]\nWhy: Choosing positions 1, 3, 4, 7, 8 for letters is one choice whatever order we name them in, so it is a combination; the other 3 positions get digits.",
+              "Fill the positions\n\\[\\text{letters: } 6^{5} = 7776\\]\n\\[\\text{digits: } 6^{3} = 216\\]\nWhy: With repetition, every letter position has 6 choices and every digit position has 6 choices.",
+              "Multiply\n\\[7776 \\times 216 = 1679616\\]\n\\[56 \\times 1679616 = 94058496\\]\nWhy: The three jobs are done together. (\\(7776 \\times 216 = 6^{8}\\).)",
+              "Check\n\\[56 \\times 6^{8} = 56 \\times 1679616\\]\n\\[= 83980800 + 10077696 = 94058496 \\;\\checkmark\\]\nWhy: \\(56 = 50 + 6\\); multiplying each part and adding gives the same total."
+            ],
+            "final_answer": "94,058,496 passwords"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "16(b)",
+            "prompt": "16 (b) Using a cryptographic system, a password is generated with 8 characters. Each character can either be a lowercase letter (a-f) or a digit (0-5). How many passwords can be generated if each password must contain exactly 5 lowercase letters and 3 digits? (b) Without repetition.",
+            "explanation": "Same three jobs as part (a), but now the 5 letters are all different and the 3 digits are all different.\nPlan: \\({}^{8}C_{5} \\times {}^{6}P_{5} \\times {}^{6}P_{3}\\).",
+            "steps": [
+              "Given: as in part (a), but no letter and no digit may repeat.\nTo find: the number of passwords.\nMethod: Positions by \\({}^{8}C_{5}\\); ordered letters without repetition \\({}^{6}P_{5}\\); ordered digits without repetition \\({}^{6}P_{3}\\).",
+              "Choose the letter positions\n\\[{}^{8}C_{5} = 56\\]\nWhy: Exactly as in part (a).",
+              "Fill the positions\n\\[{}^{6}P_{5} = 6 \\cdot 5 \\cdot 4 \\cdot 3 \\cdot 2 = 720\\]\n\\[{}^{6}P_{3} = 6 \\cdot 5 \\cdot 4 = 120\\]\nWhy: The first letter position has 6 choices, the next 5, and so on; the same for digits.",
+              "Multiply\n\\[720 \\times 120 = 86400\\]\n\\[56 \\times 86400 = 4838400\\]\nWhy: The three jobs are done together.",
+              "Check\n\\[86400 \\times 56 = 86400 \\times 50 + 86400 \\times 6\\]\n\\[= 4320000 + 518400 = 4838400 \\;\\checkmark\\]\nWhy: Splitting 56 gives the same product; it is smaller than part (a), as it must be."
+            ],
+            "final_answer": "4,838,400 passwords"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints (i) 86,400 and (ii) 120. 86,400 \\(= {}^{6}P_{5} \\times {}^{6}P_{3}\\) is the no-repetition count with letters and digits in fixed positions: it misses the \\({}^{8}C_{5} = 56\\) ways of placing the letters, and it is listed under 'with repetition'. 120 fits neither part. Correct: (a) 94,058,496; (b) 4,838,400."
+          }
+        ]
+      }
+    }
+  ]
+}

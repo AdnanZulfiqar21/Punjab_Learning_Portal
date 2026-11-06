@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-1-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-1-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 131,
+          "pdf_to": 131,
+          "note": "Exercise 7.1, Question 2: book page 126 (PDF 131); answer key book page 301 (PDF 306): 12 career paths (agrees)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2. Suppose we have 3 universities, and each offers 4 careers. Use a tree diagram to figure out how many possible career paths you can take.",
+            "explanation": "A career path is chosen in two stages: first a university, then a career offered there.\nWe must draw the tree diagram and count its end points.\nPlan: one branch per university, four career branches from each, count the ends, and check by multiplying.",
+            "steps": [
+              "Given: 3 universities, each offering 4 careers.\nTo find: the number of possible career paths, using a tree diagram.\nMethod: A tree diagram shows every choice as a branch. Each end point is one complete path. Name the universities \\(U_1, U_2, U_3\\) and the careers \\(C_1, C_2, C_3, C_4\\).",
+              "Draw the first stage\n\\[\\text{Start} \\to U_1,\\ U_2,\\ U_3\\]\nWhy: From the starting point there are 3 possible universities, so 3 branches.",
+              "Draw the second stage\n\\[U_1 \\to C_1, C_2, C_3, C_4\\]\n\\[U_2 \\to C_1, C_2, C_3, C_4\\]\n\\[U_3 \\to C_1, C_2, C_3, C_4\\]\nWhy: Every university offers the same 4 careers, so 4 branches grow from each university branch (see the figure).",
+              "Count the end points\n\\[4 + 4 + 4 = 12\\]\nWhy: Each end point is one path such as \\(U_2C_3\\) (university 2, career 3). Each university gives 4 ends and there are 3 universities.",
+              "Check with the Fundamental Principle of Counting\n\\[3 \\times 4 = 12 \\;\\checkmark\\]\nWhy: 3 ways to choose a university, then 4 ways to choose a career; the two choices are independent, so we multiply."
+            ],
+            "final_answer": "\\(12\\) possible career paths",
+            "answer_figure": {
+              "$asset": "c11-math-ch7-fig-ex7-1-q2-tree",
+              "alt": "Tree diagram: from Start, three branches go to universities U1, U2 and U3; from each university four branches go to careers C1, C2, C3 and C4, giving 12 end points U1C1 to U3C4.",
+              "caption": "Tree diagram for Question 2: 3 universities, 4 careers each, 12 career paths (original drawing)."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

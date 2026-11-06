@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-3-Q4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-3-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 137,
+          "pdf_to": 137,
+          "note": "Exercise 7.3, Question 4: book page 132 (PDF 137); answer key book page 301 (PDF 306): 2880 (agrees)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. In how many ways can 5 couples sit on a round table if no two women are sitting together?",
+            "explanation": "5 couples = 5 men and 5 women at a round table, with no two women side by side.\nPlan: seat the men first around the table, then put the women in the gaps between the men.",
+            "steps": [
+              "Given: 5 men and 5 women, round table, no two women adjacent.\nTo find: the number of seatings.\nMethod: Seat the men in a circle: \\((5 - 1)!\\) ways (Case-I). The 5 men make 5 gaps; put one woman in each gap: \\(5!\\) ways. Multiply (Fundamental Principle of Counting).",
+              "Seat the men\n\\[(5 - 1)! = 4! = 24\\]\nWhy: The men alone form a circular arrangement; rotating them gives nothing new.",
+              "Seat the women in the gaps\n\\[5! = 120\\]\nWhy: Between 5 men in a circle there are exactly 5 gaps. One woman in each gap keeps every two women apart. Once the men are seated the gaps are fixed (distinguishable), so the women are arranged in a line-like way: 5!.",
+              "Multiply\n\\[4! \\times 5! = 24 \\times 120 = 2880\\]\nWhy: Each seating of the men can be combined with each placing of the women.",
+              "Check\n\\[\\text{seats alternate: } M\\,W\\,M\\,W \\ldots\\]\nWhy: With 5 men and 5 women and no two women together, the seats must alternate man, woman; a computer count of all such circular seatings also gives 2880."
+            ],
+            "final_answer": "\\(2880\\) ways"
+          }
+        ]
+      }
+    }
+  ]
+}

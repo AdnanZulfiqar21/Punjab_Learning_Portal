@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-2-Q9",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-2-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 134,
+          "pdf_to": 134,
+          "note": "Exercise 7.2, Question 9: book p.129 (PDF 134). Answer key PDF 306 (book p.301). Solution book PDF 633-657 used as a reference only."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9(a)",
+            "prompt": "9 (a) Find permutation of 10 people sitting on a bench if: There are no restriction.",
+            "explanation": "10 different people in 10 seats with no condition.\nWe must count the arrangements.\nPlan: all 10 are arranged, so \\(10!\\).",
+            "steps": [
+              "Given: 10 people, 10 seats, no restriction.\nTo find: the number of arrangements.\nMethod: \\({}^{10}P_{10} = 10!\\).",
+              "Work out \\(10!\\)\n\\[10! = 10 \\cdot 9 \\cdot 8!\\]\n\\[= 90 \\times 40320 = 3628800\\]\nWhy: \\(8! = 40320\\) (Question 7(b)); \\(10 \\cdot 9 = 90\\).",
+              "Check\n\\[10! = 10 \\times 9! = 10 \\times 362880\\]\n\\[= 3628800 \\;\\checkmark\\]\nWhy: \\(9! = 362880\\); a different route gives the same value."
+            ],
+            "final_answer": "3,628,800 ways"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9(b)",
+            "prompt": "9 (b) Find permutation of 10 people sitting on a bench if: 3 cannot sit next to each other.",
+            "explanation": "3 particular people must not sit together as a group of three.\nWe must count the arrangements.\nPlan: total \\(-\\) arrangements where the 3 sit together; \"together\" is counted by tying the 3 into one block.",
+            "steps": [
+              "Given: 10 people; 3 particular people must not all sit side by side.\nTo find: the number of arrangements.\nMethod: Not together = total \\(-\\) together. For \"together\", treat the 3 people as one block.\nNote: this is how the book reads the condition (as in Example 6 and the answer key).",
+              "Total\n\\[10! = 3628800\\]\nWhy: From part (a).",
+              "The 3 people together\n\\[\\text{Units} = 1 + 7 = 8\\]\n\\[\\text{Ways} = 8! \\times 3!\\]\n\\[= 40320 \\times 6 = 241920\\]\nWhy: The block and the other 7 people are 8 units, arranged in \\(8!\\) ways; inside the block the 3 people can be arranged in \\(3!\\) ways.",
+              "Subtract\n\\[10! - 8! \\times 3!\\]\n\\[= 3628800 - 241920\\]\n\\[= 3386880\\]\nWhy: Removing the \"together\" arrangements leaves the ones where the 3 are not all together.",
+              "Another reading of the wording\nIf \"no two of the 3 may sit next to each other\" were meant, seat the other 7 first (\\(7!\\) ways); they make 8 gaps (ends included), and the 3 go into 3 different gaps in \\({}^{8}P_{3}\\) ways:\n\\[7! \\times {}^{8}P_{3} = 5040 \\times 336\\]\n\\[= 1693440\\]\nWhy: The answer key uses the first reading (3,386,880), so that is the expected answer.",
+              "Check with a small case\n4 people with 3 not all together:\n\\[4! - 2! \\times 3! = 24 - 12 = 12\\]\nListing the 24 orders of A, B, C, D, exactly 12 have A, B, C in three neighbouring seats, so 12 do not \\(\\checkmark\\)\nWhy: The method works on a case small enough to list."
+            ],
+            "final_answer": "3,386,880 ways"
+          }
+        ]
+      }
+    }
+  ]
+}

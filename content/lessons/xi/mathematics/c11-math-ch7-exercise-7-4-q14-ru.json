@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-EXERCISE-7-4-Q14-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-exercise-7-4-q14",
+      "title": "Question 14 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 143,
+          "pdf_to": 143,
+          "note": "Exercise 7.4, Question 14: book p.138 (PDF 143). Answer key PDF 306 (book p.301). Solution book PDF 675-704 used as a reference only."
+        }
+      ],
+      "variant_of": "C11-MATH-CH7-EXERCISE-7-4-Q14",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "14",
+            "prompt": "14 Prove that \\({}^{n}C_{r} + {}^{n}C_{r-1} = {}^{n+1}C_{r}\\).",
+            "explanation": "Yeh general letters mein proof hai; is identity ko Pascal ka rule kehte hain.\nPlan: left side ke dono terms factorials mein likhein, denominators barabar karein, jama karein, aur aakhir mein \\({}^{n+1}C_{r}\\) pehchanein. Yeh bilkul Question 12 jaisa kaam hai, bas numbers ki jagah letters hain.",
+            "steps": [
+              "Diya gaya hai: \\({}^{n}C_{r} + {}^{n}C_{r-1}\\), jahan \\(1 \\le r \\le n\\).\nSaabit karna hai: yeh \\({}^{n+1}C_{r}\\) ke barabar hai.\nTareeqa: \\({}^{n}C_{r} = \\frac{n!}{r!\\,(n-r)!}\\) lagayenge, phir fractions jama karne ka aam tareeqa: pehle denominators ek jaise.",
+              "Factorials mein likhein\n\\[{}^{n}C_{r} = \\dfrac{n!}{r!\\,(n-r)!}\\]\n\\[{}^{n}C_{r-1} = \\dfrac{n!}{(r-1)!\\,(n-r+1)!}\\]\nKyun: Doosre term mein \\(r\\) ki jagah \\(r - 1\\) rakha. Neeche \\((r-1)!\\) aaya aur \\((n-(r-1))! = (n-r+1)!\\), kyunke minus ke saath bracket kholne par \\(-(-1) = +1\\).\nDhyan dein: \\((n-r-1)!\\) likhna aam ghalti hai; sign dhyan se kholein.",
+              "Denominators barabar karein\n\\[\\dfrac{n!}{r!\\,(n-r)!} = \\dfrac{n!\\,(n-r+1)}{r!\\,(n-r+1)!}\\]\n\\[\\dfrac{n!}{(r-1)!\\,(n-r+1)!} = \\dfrac{n!\\,r}{r!\\,(n-r+1)!}\\]\nKyun: Pehle term mein \\((n-r)!\\) ko \\((n-r+1)!\\) banana hai; \\((n-r+1)! = (n-r+1)(n-r)!\\), is liye upar neeche \\((n-r+1)\\) se zarb. Doosre mein \\((r-1)!\\) ko \\(r!\\) banana hai; \\(r! = r\\,(r-1)!\\), is liye upar neeche \\(r\\) se zarb. Value nahi badli, sirf shakal badli.",
+              "Fractions jama karein\n\\[\\text{L.H.S.} = \\dfrac{n!\\,[(n-r+1) + r]}{r!\\,(n-r+1)!}\\]\n\\[= \\dfrac{n!\\,(n+1)}{r!\\,(n-r+1)!}\\]\nKyun: Denominator ek hai, is liye numerators jama kiye aur \\(n!\\) common nikala. Bracket mein \\(-r\\) aur \\(+r\\) cancel ho kar \\(n + 1\\) bacha.",
+              "\\({}^{n+1}C_{r}\\) pehchanein\n\\[= \\dfrac{(n+1)!}{r!\\,(n+1-r)!}\\]\n\\[= {}^{n+1}C_{r} = \\text{R.H.S.}\\]\nKyun: Factorial ki definition se \\((n+1) \\cdot n! = (n+1)!\\). Aur \\(n - r + 1\\) ko \\((n+1) - r\\) likh sakte hain. Ab yeh bilkul \\(n+1\\) cheezon mein se \\(r\\) chunne ka formula hai.",
+              "Tasdeeq: numbers se (\\(n = 5\\), \\(r = 2\\))\n\\[{}^{5}C_{2} + {}^{5}C_{1} = 10 + 5 = 15\\]\n\\[{}^{6}C_{2} = 15 \\;\\checkmark\\]\nKyun: Chhoti misaal mein identity sahi nikli. Is ka matlab bhi samjhein: \\(n+1\\) logon mein se \\(r\\) chunne hain. Ek khaas shakhs ko dekhein: jin groups mein woh nahi, woh \\({}^{n}C_{r}\\) hain; jin mein woh hai, un mein baqi \\(r - 1\\) log \\(n\\) mein se chune jate hain, yani \\({}^{n}C_{r-1}\\). Dono mil kar saare groups."
+            ],
+            "final_answer": "Saabit ho gaya: \\({}^{n}C_{r} + {}^{n}C_{r-1} = {}^{n+1}C_{r}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

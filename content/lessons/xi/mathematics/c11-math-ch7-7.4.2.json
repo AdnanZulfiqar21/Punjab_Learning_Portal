@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-7.4.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/7.4.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 139,
+          "pdf_to": 142,
+          "note": "Book p. 134-137: 7.4.2 theorem nCr = nC(n-r) with proof, Note box (12C10), Example 11, permutation vs combination table, applications: cryptography (Ex 12), lottery (Ex 13), songs (Ex 14)"
+        }
+      ],
+      "title": "7.4.2 Complementary Combinations",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Theorem"
+          },
+          {
+            "type": "paragraph",
+            "text": "Prove that: \\({}^{n}C_{r} = {}^{n}C_{n-r}\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Proof: If from \\(n\\) different objects, we select \\(r\\) objects then \\((n - r)\\) objects are left. Corresponding to every combination of \\(r\\) objects, there is a combination of \\((n - r)\\) objects and vice versa. Thus, the number of combinations of \\(n\\) objects taken \\(r\\) at a time is equal to the number of combinations of \\(n\\) objects taken \\((n - r)\\) at a time.\n\\[\\therefore {}^{n}C_{r} = {}^{n}C_{n-r}\\]\n\\[{}^{n}C_{n-,} = \\dfrac{n!}{(n-r)!\\,(n-n+r)!}\\]\n\\[= \\dfrac{n!}{r!\\,(n-r)!}\\]\n\\[{}^{n}C_{n-r} = {}^{n}C_{r}\\]",
+            "book_errors": [
+              "\\[{}^{n}C_{n-,} = \\dfrac{n!}{(n-r)!\\,(n-n+r)!}\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the second line of the proof the left side is misprinted as \\({}^{n}C_{n-,}\\) (a broken subscript). It should read\n\\[{}^{n}C_{n-r} = \\dfrac{n!}{(n-r)!\\,(n-n+r)!}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why the formula step works: put \\(n - r\\) in place of \\(r\\) in \\({}^{n}C_{r} = \\frac{n!}{r!\\,(n-r)!}\\). The two factorials below become \\((n-r)!\\) and \\((n - (n-r))! = r!\\). The same two factorials, only in the other order, so the value is the same.\nThe idea in words: every time you pick a team of \\(r\\) players, you also decide the \\(n - r\\) players who are left out. Choosing who is in is the same as choosing who is out. That is why the pair \\({}^{n}C_{r}\\) and \\({}^{n}C_{n-r}\\) are called complementary combinations."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "This result will be found useful in evaluating \\({}^{n}C_{r}\\) when \\(r > \\frac{n}{2}\\). For example,\n\\[{}^{12}C_{10} = {}^{12}C_{12-10} = {}^{12}C_{2}\\]\n\\[= \\dfrac{(12)(11)}{2} = 6 \\cdot 11 = 66\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The saving is large when \\(r\\) is close to \\(n\\). \\({}^{100}C_{98}\\) looks frightening, but \\({}^{100}C_{98} = {}^{100}C_{2} = \\frac{100 \\cdot 99}{2} = 4950\\). Always use the smaller of \\(r\\) and \\(n - r\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "Find the number of the diagonals of a 6-sided figure.",
+            "steps": [
+              "Given: a figure with 6 sides, so it has 6 vertices (corners), no three on one line.\nTo find: the number of its diagonals.\nMethod: any two vertices joined give a line segment, and the segment \\(PQ\\) is the same as \\(QP\\), so the number of segments is a combination \\({}^{6}C_{2}\\). The sides are also among these segments; the rest are diagonals.",
+              "Step 1: Count all line segments\n\\[{}^{6}C_{2} = \\dfrac{6!}{2!\\,4!}\\]\n\\[= \\dfrac{6 \\times 5}{2 \\times 1} = 15\\]\nWhy: each segment is fixed by choosing 2 of the 6 vertices; the order of the two ends does not matter.",
+              "Step 2: Remove the sides\n\\[\\text{diagonals} = 15 - 6 = 9\\]\nWhy: these 15 segments include the 6 sides of the figure. A diagonal joins two vertices that are not next to each other, so the sides are not diagonals.",
+              "Check:\nEach vertex can be joined by a diagonal to \\(6 - 3 = 3\\) vertices (not to itself and not to its two neighbours). That gives \\(6 \\times 3 = 18\\), but every diagonal is counted from both ends, so \\(18 \\div 2 = 9\\). The same answer."
+            ],
+            "answer": "A 6-sided figure has 9 diagonals."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "The same steps give a general rule for an \\(n\\)-sided figure:\n\\[\\text{diagonals} = {}^{n}C_{2} - n\\]\n\\[= \\dfrac{n(n-3)}{2}\\]\nFor \\(n = 6\\): \\(\\frac{6 \\cdot 3}{2} = 9\\). Use the formula only to check; in an answer show the \\({}^{n}C_{2} - n\\) reasoning."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Difference between permutation and combination"
+          },
+          {
+            "type": "table",
+            "caption": "Difference between permutation and combination (as printed)",
+            "header": [
+              "Permutation",
+              "Combination"
+            ],
+            "rows": [
+              [
+                "Order is important.",
+                "Order is not important"
+              ],
+              [
+                "e.g., \\(ab\\) and \\(ba\\) are different (because order of any object is matter)",
+                "e.g., \\(ab\\) and \\(ba\\) are same (because order does not matter)"
+              ],
+              [
+                "Arrangement of objects",
+                "Selection of objects"
+              ],
+              [
+                "e.g. arrangement of: ball of different colours; English alphabet (letters); people while sitting on chairs",
+                "e.g. selection of: different colours; members in a team; food items"
+              ]
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Application of Permutations and Combinations in Cryptography"
+          },
+          {
+            "type": "example",
+            "title": "Example 12",
+            "problem": "Zain wants to generate a password for his laptop to secure the data. He can take only 6 characters to generate a password. Each character can either be an upper case letter \\((A - Z)\\) or digits from \\((0 - 9)\\).\nCan you tell how many passwords can be generated by using the above letters and digits:\n(i) If repetition of characters is not allowed\n(ii) If repetition of characters is allowed",
+            "steps": [
+              "Given: a password of 6 characters; each character is one of 26 capital letters or one of 10 digits.\nTo find: the number of passwords (i) without repetition, (ii) with repetition.\nMethod: in a password the order matters (AB12CD and BA12CD are different passwords), so this is an arrangement. Without repetition it is \\({}^{n}P_{r}\\); with repetition every place has all 36 choices, so we use the fundamental principle of counting.",
+              "Step 1: Count the characters\n\\[\\text{letters} = 26,\\quad \\text{digits} = 10\\]\n\\[n = 26 + 10 = 36\\]\n\\[r = 6\\]\nWhy: \\(n\\) is the total number of characters we can use, \\(r\\) is the length of the password.",
+              "Step 2 (i): Repetition not allowed\n\\[{}^{n}P_{r} = {}^{36}P_{6} = \\dfrac{36!}{(36-6)!} = \\dfrac{36!}{30!}\\]\n\\[= \\dfrac{36 \\cdot 35 \\cdot 34 \\cdot 33 \\cdot 32 \\cdot 31 \\cdot 30!}{30!}\\]\n\\[= 36 \\cdot 35 \\cdot 34 \\cdot 33 \\cdot 32 \\cdot 31\\]\n\\[= 1{,}402{,}410{,}240 \\text{ ways}\\]\nHence, 1,402,410,240 passwords can be generated by using the 26 alphabet and 10 digits (if repetition of the characters is not allowed).\nWhy: the first character has 36 choices, the second 35 (one is used), and so on down to 31 for the sixth: that is exactly \\({}^{36}P_{6}\\).",
+              "Step 3 (ii): Repetition allowed\nUsing the fundamental principle of counting:\n\\[36 \\times 36 \\times 36 \\times 36 \\times 36 \\times 36\\]\n\\[= 36^{6} = 2{,}176{,}782{,}336\\]\nThe book's conclusion: Hence, \\(36^{6}\\) passwords can be generated by using the 26 alphabets and 10 digits, If repetition of characters is not allowed.\nWhy: when a character may be used again, every one of the 6 places has all 36 choices, and the choices are multiplied. (The book calls these \"possible combinations\"; they are really arrangements, because order matters in a password.)",
+              "Check:\nAllowing repetition can only add passwords, so (ii) must be bigger than (i): \\(2{,}176{,}782{,}336 > 1{,}402{,}410{,}240\\). Correct."
+            ],
+            "answer": "(i) \\(1{,}402{,}410{,}240\\) passwords without repetition; (ii) \\(36^{6} = 2{,}176{,}782{,}336\\) passwords with repetition.",
+            "book_errors": [
+              "10 digits, If repetition of characters is not allowed"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 12(ii): the conclusion prints \"If repetition of characters is not allowed\". Part (ii) is the case where repetition is allowed; it should read: Hence, \\(36^{6}\\) passwords can be generated by using the 26 alphabets and 10 digits, if repetition of characters is allowed."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Application of permutations to estimate the odd of winning the lottery."
+          },
+          {
+            "type": "example",
+            "title": "Example 13",
+            "problem": "A box contains 15 cards from \\((1 - 15)\\). Danish is to select 5 cards. If all the selected cards are the first five multiples of 2 then Danish will win the game. Find Danish's chance of winning the game, when\n(i) Order is important  (ii) Order is not important",
+            "steps": [
+              "Given: 15 cards numbered 1 to 15; Danish draws 5 cards. He wins only with the first five multiples of 2, that is 2, 4, 6, 8, 10.\nTo find: his chance of winning (i) when order is important, (ii) when order is not important.\nMethod: chance of winning = (number of winning outcomes) / (total number of possible outcomes). Here only one outcome wins, so the chance is 1 divided by the number of possible ways. Order important: count with \\({}^{n}P_{r}\\); order not important: count with \\({}^{n}C_{r}\\).",
+              "Step 1: Identify \\(n\\) and \\(r\\)\n\\[n = 15,\\quad r = 5\\]\nWhy: 15 cards in the box, 5 are drawn.",
+              "Step 2 (i): Order is important\n\\[{}^{n}P_{r} = {}^{15}P_{5} = \\dfrac{15!}{(15-5)!}\\]\n\\[= \\dfrac{15!}{10!} = 15 \\cdot 14 \\cdot 13 \\cdot 12 \\cdot 11\\]\n\\[= 360{,}360 \\text{ ways}\\]\n\\[\\text{chance} = \\dfrac{1}{360{,}360} \\approx 0.000002775\\]\nWhy: when order counts, drawing 2, 4, 6, 8, 10 in one particular order is one of 360,360 equally likely ordered draws, and the book takes that one order as the winning draw.",
+              "Step 3 (ii): Order is not important\n\\[{}^{n}C_{r} = {}^{15}C_{5} = \\dfrac{15!}{5!\\,(15-5)!} = \\dfrac{15!}{5!\\,10!}\\]\n\\[= \\dfrac{15 \\times 14 \\times 13 \\times 12 \\times 11 \\times 10!}{5! \\cdot 10!}\\]\n\\[= \\dfrac{15 \\times 14 \\times 13 \\times 12 \\times 11}{5 \\times 4 \\times 3 \\times 2 \\times 1}\\]\n\\[= 3003 \\text{ ways}\\]\n\\[\\text{chance} = \\dfrac{1}{3003} \\approx 0.00033\\]\nWhy: now only the set of 5 cards matters, and \\(\\{2, 4, 6, 8, 10\\}\\) is one of 3003 possible sets.",
+              "Check:\n\\(360{,}360 \\div 3003 = 120 = 5!\\). Each set of 5 cards can be drawn in \\(5! = 120\\) orders, which is exactly the link \\({}^{15}P_{5} = {}^{15}C_{5} \\times 5!\\)."
+            ],
+            "answer": "(i) Chance \\(= \\dfrac{1}{360{,}360} \\approx 0.000002775\\)  (ii) Chance \\(= \\dfrac{1}{3003} \\approx 0.00033\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In part (i) the book counts only one ordered draw as a win. If any order of the cards 2, 4, 6, 8, 10 were accepted, there would be \\(5! = 120\\) winning draws and the chance would be \\(\\frac{120}{360{,}360} = \\frac{1}{3003}\\), the same as in (ii). This is why real lotteries where the order does not matter are counted with combinations."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Application of Permutation and Combination to choose different sets of songs for Certain Occasions"
+          },
+          {
+            "type": "example",
+            "title": "Example 14",
+            "problem": "On Independence Day, a DJ has a list of ten different national songs. He wants to select any five national songs for the day. Find how many ways he can select and play the songs:\n(i) If the order of playing the songs matters\n(ii) If the order of playing the songs does not matter.",
+            "steps": [
+              "Given: 10 different national songs; 5 are to be selected.\nTo find: the number of ways (i) when the order of playing matters, (ii) when it does not.\nMethod: order matters means an arrangement, \\({}^{n}P_{r}\\); order does not matter means a selection, \\({}^{n}C_{r}\\). Here \\(n = 10\\) and \\(r = 5\\).",
+              "Step 1 (i): When order matters\n\\[{}^{n}P_{r} = {}^{10}P_{5} = \\dfrac{10!}{(10-5)!}\\]\n\\[= \\dfrac{10!}{5!} = 10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6\\]\n\\[= 30{,}240 \\text{ ways}\\]\nHence, the DJ can play the five national songs in 30,240 different ways.\nWhy: the first song can be any of 10, the second any of the remaining 9, and so on; a playlist played in a different order is a different programme.",
+              "Step 2 (ii): When order does not matter\n\\[{}^{n}C_{r} = {}^{10}C_{5} = \\dfrac{10!}{5!\\,(10-5)!}\\]\n\\[= \\dfrac{10!}{5!\\;5!} = \\dfrac{10 \\cdot 9 \\cdot 8 \\cdot 7 \\cdot 6}{5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1}\\]\n\\[= 252 \\text{ ways}\\]\nHence, the DJ can play the five national songs in 252 different ways.\nWhy: now only which 5 songs are chosen matters.",
+              "Check:\n\\[252 \\times 5! = 252 \\times 120 = 30{,}240\\]\nEach set of 5 songs can be played in \\(5!\\) orders, so \\({}^{10}P_{5} = {}^{10}C_{5} \\times 5!\\). Both answers agree."
+            ],
+            "answer": "(i) 30,240 ways  (ii) 252 ways"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\({}^{n}C_{r} = {}^{n}C_{n-r}\\): choosing \\(r\\) to take is choosing \\(n - r\\) to leave. Use it when \\(r > \\frac{n}{2}\\).\n2. Diagonals of an \\(n\\)-sided figure: \\({}^{n}C_{2} - n\\).\n3. Permutation = arrangement (order matters); combination = selection (order does not matter).\n4. With repetition allowed, use the fundamental principle of counting (\\(36^{6}\\)), not \\({}^{n}P_{r}\\).\n5. \\({}^{n}P_{r} = {}^{n}C_{r} \\times r!\\) links every pair of answers in Examples 13 and 14."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Forgetting to subtract the sides when counting diagonals (15 is the number of segments, not diagonals).\n2. Using \\({}^{36}P_{6}\\) when repetition is allowed. With repetition each place has all 36 choices: \\(36^{6}\\).\n3. Using \\({}^{n}C_{r}\\) for passwords or playing orders, where the order clearly matters.\n4. Writing \\({}^{12}C_{10} = \\frac{12!}{10!}\\): the \\(2!\\) below is missing. Simplest is \\({}^{12}C_{10} = {}^{12}C_{2} = 66\\)."
+          }
+        ]
+      }
+    }
+  ]
+}
