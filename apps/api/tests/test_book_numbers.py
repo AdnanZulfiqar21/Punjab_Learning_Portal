@@ -20,6 +20,16 @@ def test_book_number_is_the_printed_number_only_when_it_differs() -> None:
     assert book_number("ch1/u-exercise", None) is None
 
 
+def test_the_index_can_record_the_printed_number() -> None:
+    # BOOK-NUMBER-02 (owner, 2026-11-05): Mathematics 11 prints "1.2" twice; the second shows as 1.3 with "Book# 1.2".
+    # Where the book prints no number at all, the index records "missing".
+    unit = "pk-punjab/xi/mathematics/c11-math/ch1"
+    key = f"{unit}/u-complex-polynomials-as-a-product-of-linear-factors"
+    assert Topic(natural_key=key, number="1.3", printed_number="1.2").book_number == "1.2"
+    assert Topic(natural_key=f"{unit}/u-some-heading", number="1.8", printed_number="missing").book_number == "missing"
+    assert Topic(natural_key=f"{unit}/1.2", number="1.2", printed_number="1.2").book_number is None
+
+
 def test_a_heading_printed_in_another_chapters_numbers_shows_both() -> None:
     # Biology 11 chapter 6 prints Photosynthesis as 5.1 (owner, 2026-11-04: "book ma numbers hain but hamare application
     # ma nahe hain"): students see 6.1 and, beside it, the book's 5.1.

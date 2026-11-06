@@ -218,6 +218,7 @@ def _build_rows(catalogue: dict[str, Any], registry: dict[str, Any]) -> tuple[li
                         "depth": t["depth"],
                         "pdf_page": t.get("pdf_page"),
                         "points": t.get("points", []),
+                        "printed_number": t.get("book_number"),
                         "retired_at": None,
                     }
                 )

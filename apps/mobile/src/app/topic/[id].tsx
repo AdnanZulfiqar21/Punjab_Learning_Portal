@@ -3,7 +3,7 @@
 // The variants differ in structure (the English lesson carries only the book; Roman Urdu adds our explanations), so a
 // language switch returns to the matching block of the other variant (READER-PLACE-01, lib/variant-place.ts).
 import { Redirect, router, Stack, useLocalSearchParams } from "expo-router";
-import { useEffect, useMemo, useRef, type RefObject } from "react";
+import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
 import { Pressable, ScrollView, View, type NativeScrollEvent, type NativeSyntheticEvent } from "react-native";
 
 import { LectureView } from "@/components/lecture-view";
@@ -19,12 +19,14 @@ import { useAuth } from "@/lib/auth";
 import { continuesInto, headingOnly, headingTone } from "@/lib/book-heading";
 import { premiumBook } from "@/lib/book-style";
 import { useDisplay } from "@/lib/display";
-import { practiceOnly } from "@/lib/exercises";
+import { practiceOnly, revealLabel } from "@/lib/exercises";
+import { plainMath } from "@/lib/inline-math";
+import { solvedLabels } from "@/lib/solved-labels";
 import { usePrefs } from "@/lib/prefs";
 import { missingLanguageNote, READING_LANGUAGES, type ReadingLanguage } from "@/lib/reading-language-core";
 import { mapPlace, placeSignature, type PlaceBlock } from "@/lib/variant-place";
 
-type Segment = ReadingLanguage | "lecture";
+type Segment = ReadingLanguage | "lecture" | "video";
 /** The block the reader was on when switching language, kept by the screen while the other variant loads. */
 type Place = { lessonId: string; index: number; signatures: string[]; target?: number };
 type Shown = TopicReading & { continued?: TopicReading };
@@ -102,6 +104,17 @@ function Reader({
   const blockYs = useRef<number[]>([]);
   const blocks = useMemo(() => (lesson?.body?.blocks ?? []) as PlaceBlock[], [lesson?.body?.blocks]);
   const signatures = useMemo(() => blocks.map(placeSignature), [blocks]);
+  // VIDEO-SOLUTION-01 (owner, 2026-11-05): a Mathematics page has no lecture. Its theory and worked examples have English
+  // and Roman Urdu only; an exercise question's page (solved parts with their printed numbers) adds "Video Solution".
+  const maths = subjectKey(reading.subject_name) === "mathematics";
+  const questions = maths ? (blocks as { type: string; ref?: unknown; prompt?: unknown }[]).filter((b) => b.type === "checkpoint" && typeof b.ref === "string") : [];
+  const [video, setVideo] = useState(false);
+  const shownView: "read" | "lecture" | "video" = maths ? (video && questions.length > 0 ? "video" : "read") : view;
+  const segments: readonly (readonly [Segment, string])[] = maths
+    ? questions.length > 0
+      ? [...READING_LANGUAGES, ["video", "Video Solution"]]
+      : READING_LANGUAGES
+    : SEGMENTS;
 
   // Which block the reader is on, for the language switch (the nearest block that starts above the top of the screen).
   function anchorIndex(): number {
@@ -119,6 +132,12 @@ function Reader({
     onLanguage(next);
   }
   function choose(next: Segment) {
+    if (next === "video") {
+      setVideo(true);
+      scroll.current?.scrollTo({ y: 0, animated: false });
+      return;
+    }
+    setVideo(false);
     if (next === "lecture") {
       onView("lecture");
       scroll.current?.scrollTo({ y: 0, animated: false });
@@ -154,10 +173,15 @@ function Reader({
       contentContainerStyle={{ padding: Space.lg, gap: Space.md }}>
       {lesson?.body && !lesson.locked ? (
         <View style={{ backgroundColor: background, paddingBottom: Space.xs }}>
-          <Segmented label="Read or watch" options={SEGMENTS} value={view === "lecture" ? "lecture" : language} onChange={choose} />
+          <Segmented
+            label={segments.length > READING_LANGUAGES.length ? "Read or watch" : "Explanation language"}
+            options={segments}
+            value={shownView === "read" ? language : shownView}
+            onChange={choose}
+          />
         </View>
       ) : null}
-      {note && view !== "lecture" ? <T variant="small" accessibilityLiveRegion="polite">{note}</T> : null}
+      {note && shownView === "read" ? <T variant="small" accessibilityLiveRegion="polite">{note}</T> : null}
       {reading.chapter_start ? (
         // CHAPTER-OPENING-01 (owner-approved for every book, 2026-10-27): the chapter's first topic opens with
         // the chapter itself, its name large in the subject colour on a tinted panel; the topic's own title follows.
@@ -200,7 +224,23 @@ function Reader({
           <T variant="small">{reading.chapter_title}</T>
         </View>
       )}
-      {view === "lecture" && lesson?.body && !lesson.locked ? (
+      {shownView === "video" ? (
+        <View style={{ gap: Space.sm }}>
+          <Notice title="Video solutions are not available yet">
+            Every part of this question will get its own video solution, explained step by step. Until its video is added, the worked solution is in
+            the English and Roman Urdu views.
+          </Notice>
+          {questions.map((q, i) => (
+            <View key={i} style={{ gap: Space.xs, borderWidth: 1, borderColor: c.border, borderRadius: 12, backgroundColor: c.surface, padding: Space.md }}>
+              <T variant="eyebrow" style={{ color: c.accent }}>{`Question ${String(q.ref)}`}</T>
+              <T>{plainMath(typeof q.prompt === "string" ? q.prompt : "")}</T>
+              <T variant="small" accessibilityLiveRegion="polite">
+                ▶ Video not available yet
+              </T>
+            </View>
+          ))}
+        </View>
+      ) : shownView === "lecture" && lesson?.body && !lesson.locked ? (
         lecture ? <LectureView data={lecture} token={token} /> : <Loading label="Checking for a lecture" />
       ) : reading.availability === "unavailable" || !lesson?.body ? (
         <Notice title="This topic’s lesson isn’t ready yet">The chapter outline lists the topic, but its lesson has not been published.</Notice>
@@ -222,6 +262,8 @@ function Reader({
             onBlockLayout={onBlockLayout}
             premium={premiumBook(subjectKey(reading.subject_name), reading.grade_number)}
             runnable={lesson.language === "roman_ur"}
+            revealLabel={questions.length > 0 ? revealLabel(lesson.language) : undefined}
+            solvedLabels={solvedLabels(lesson.language)}
           />
         </View>
       )}
@@ -247,6 +289,8 @@ function LessonBody({
   onBlockLayout,
   premium,
   runnable,
+  revealLabel: reveal,
+  solvedLabels: labels,
 }: {
   chapterId: string;
   topicId: string;
@@ -257,6 +301,8 @@ function LessonBody({
   onBlockLayout: (index: number, y: number) => void;
   premium: boolean;
   runnable: boolean;
+  revealLabel?: string;
+  solvedLabels?: ReturnType<typeof solvedLabels>;
 }) {
   const { dataSaver } = useDisplay().display;
   useEffect(() => {
@@ -279,6 +325,8 @@ function LessonBody({
         onBlockLayout={onBlockLayout}
         premium={premium}
         runnable={runnable}
+        revealLabel={reveal}
+        solvedLabels={labels}
       />
       {token && !privatePreview ? (
         <View style={{ gap: Space.sm }}>

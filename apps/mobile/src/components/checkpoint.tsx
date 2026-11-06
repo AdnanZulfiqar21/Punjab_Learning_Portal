@@ -5,6 +5,7 @@ import { Pressable, Text, View } from "react-native";
 import { T } from "@/components/ui";
 import { Radius, Space } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
+import { SOLVED_LABELS_EN, type SolvedLabels } from "@/lib/solved-labels";
 
 type Option = { id: string; text: string };
 
@@ -16,6 +17,10 @@ export function Checkpoint({
   explanation,
   answerFigure,
   revealLabel = "Show what a good answer contains",
+  qref,
+  steps,
+  finalAnswer,
+  labels = SOLVED_LABELS_EN,
 }: {
   mode: "question" | "self_check";
   prompt: string;
@@ -26,11 +31,58 @@ export function Checkpoint({
   answerFigure?: ReactNode;
   /** BOOK-EXERCISES-01: the self-check button's words ("Show answer" / "Answer dekhein" on a book exercise). */
   revealLabel?: string;
+  /** SOLVED-QUESTION-01: the printed question number ("3(ii)"). */
+  qref?: string;
+  /** SOLVED-QUESTION-01: the numbered working, shown with the revealed answer. */
+  steps?: string[];
+  /** SOLVED-QUESTION-01: the answer, set apart from the working. */
+  finalAnswer?: string;
+  labels?: SolvedLabels;
 }) {
   const c = useTheme();
   const [chosen, setChosen] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
   const done = mode === "question" ? chosen !== null : revealed;
+  if (mode === "self_check" && (steps?.length || finalAnswer)) {
+    // A book question solved step by step: the question, then (on demand) how to think about it, the numbered
+    // working and the final answer, each set apart.
+    return (
+      <View
+        accessibilityLabel={qref ? `${labels.question} ${qref}` : prompt}
+        style={{ borderWidth: 1, borderColor: c.accent, backgroundColor: c.surface, borderRadius: Radius.sm, overflow: "hidden" }}>
+        <View style={{ gap: Space.sm, backgroundColor: c.accentSoft, padding: Space.md }}>
+          {qref ? <T variant="eyebrow" style={{ color: c.accent }}>{`${labels.question} ${qref}`}</T> : null}
+          <T>{prompt}</T>
+          <Pressable accessibilityRole="button" aria-expanded={revealed} onPress={() => setRevealed((r) => !r)} style={{ minHeight: 44, justifyContent: "center" }}>
+            <Text style={{ color: c.accent, fontWeight: "600" }}>{revealed ? labels.hide : revealLabel}</Text>
+          </Pressable>
+        </View>
+        {revealed ? (
+          <View style={{ gap: Space.md, padding: Space.md }}>
+            {explanation ? (
+              <View style={{ gap: 2, borderWidth: 1, borderColor: c.border, backgroundColor: c.surfaceMuted, borderRadius: Radius.sm, padding: Space.sm }}>
+                <T variant="eyebrow">{labels.think}</T>
+                <T variant="small">{explanation}</T>
+              </View>
+            ) : null}
+            {(steps ?? []).map((s, i) => (
+              <View key={i} style={{ flexDirection: "row", gap: Space.sm }} accessibilityLabel={`${labels.step} ${i + 1}`}>
+                <T style={{ width: 24, textAlign: "right", color: c.accent, fontWeight: "700" }}>{`${i + 1}.`}</T>
+                <T style={{ flex: 1 }}>{s}</T>
+              </View>
+            ))}
+            {answerFigure}
+            {finalAnswer ? (
+              <View style={{ gap: 2, borderWidth: 2, borderColor: c.ok, backgroundColor: c.okSoft, borderRadius: Radius.sm, padding: Space.sm }}>
+                <T variant="eyebrow" style={{ color: c.ok }}>{labels.answer}</T>
+                <T style={{ fontWeight: "700" }}>{finalAnswer}</T>
+              </View>
+            ) : null}
+          </View>
+        ) : null}
+      </View>
+    );
+  }
   return (
     <View accessibilityLabel="Check your understanding" style={{ gap: Space.sm, borderWidth: 1, borderColor: c.accent, backgroundColor: c.accentSoft, borderRadius: Radius.sm, padding: Space.md }}>
       <T style={{ fontWeight: "600" }}>Check your understanding</T>
