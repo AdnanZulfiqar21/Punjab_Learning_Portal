@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-3-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-3-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 240,
+          "pdf_to": 240,
+          "note": "Ex 12.3 Q2: long-term population (book p.235). Key PDF 310 prints '100,00010' (correct 100,000); after Ex 12.3 the key repeats Ex 12.1 Q3-Q4 lines and adds a stray 'EXERCISE 12.4' block (depreciation answers), though the unit has no Exercise 12.4."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2 A town's population is modeled by \\(P(t) = \\dfrac{100{,}000}{1 + 9e^{-0.5t}}\\). What is the long-term population as \\(t \\to \\infty\\)?",
+            "explanation": "A real-world limit at infinity (a logistic population model).\n\"Long-term population\" means \\(\\lim_{t \\to \\infty} P(t)\\).\nPlan: find the limit of the denominator using \\(e^{-0.5t} \\to 0\\), then divide.",
+            "steps": [
+              "Given: \\(P(t) = \\dfrac{100{,}000}{1 + 9e^{-0.5t}}\\).\nTo find: \\(\\lim_{t \\to \\infty} P(t)\\).\nMethod: Limit of a quotient = quotient of the limits (the denominator's limit is not 0).\nKey fact: for a positive constant \\(k\\), as \\(t \\to \\infty\\), \\(e^{kt} \\to \\infty\\) and \\(e^{-kt} = \\dfrac{1}{e^{kt}} \\to 0\\) (Important Result: \\(\\lim_{x \\to \\infty} e^{x} = \\infty\\), \\(\\lim_{x \\to -\\infty} e^{x} = 0\\)).",
+              "Limit of the exponential term\n\\[\\lim_{t \\to \\infty} e^{-0.5t} = 0\\]\n\\[\\lim_{t \\to \\infty} 9e^{-0.5t} = 9 \\times 0 = 0\\]\nWhy: \\(e^{-0.5t} = \\frac{1}{e^{0.5t}}\\) and \\(e^{0.5t} \\to \\infty\\).",
+              "Limit of the denominator\n\\[\\lim_{t \\to \\infty} (1 + 9e^{-0.5t}) = 1 + 0 = 1\\]\nWhy: Limit of a sum = sum of the limits.",
+              "Limit of \\(P(t)\\)\n\\[\\lim_{t \\to \\infty} P(t) = \\frac{100{,}000}{1}\\]\n\\[= 100{,}000\\]\nWhy: The denominator tends to 1, which is not 0, so the quotient rule applies.",
+              "Meaning and check\n\\[P(0) = \\frac{100{,}000}{1 + 9} = 10{,}000\\]\n\\[P(20) = \\frac{100{,}000}{1 + 9e^{-10}} \\approx 99{,}959\\]\nWhy: The town starts at 10,000 people and grows towards 100,000 but never passes it: 100,000 is the long-term (carrying) level."
+            ],
+            "final_answer": "Long-term population \\(= 100{,}000\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \"100,00010\". This is a printing error: the long-term population is \\(100{,}000\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

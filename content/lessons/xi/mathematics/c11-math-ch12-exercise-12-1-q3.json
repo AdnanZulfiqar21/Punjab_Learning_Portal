@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-1-Q3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-1-q3",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 235,
+          "pdf_to": 235,
+          "note": "Exercise 12.1, Question 3 (book page 230): nine 0/0 limits, parts (i)-(ix). (vi) denominator printed x^4 - 4x^2 (limit 0); key 1 fits x^3 - 4x^2. Other key answers agree. Solution book PDF 1058-1067."
+        }
+      ],
+      "title": "Question 3",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Evaluate each limit by using algebraic techniques: \\(\\lim\\limits_{x \\to -1} \\frac{x^3 - x}{x + 1}\\).",
+            "explanation": "A limit of a rational function where substitution gives \\(0/0\\).\nWe must remove the factor that makes both top and bottom zero.\nPlan: factorise the top, cancel \\((x + 1)\\), then substitute \\(x = -1\\).",
+            "steps": [
+              "Given: \\(\\dfrac{x^3 - x}{x + 1}\\), \\(x \\to -1\\).\nTo find: the limit.\nMethod: Factorise and cancel the common factor (algebraic technique for the \\(0/0\\) form, 12.2).",
+              "Try direct substitution\n\\[\\text{Top: } (-1)^3 - (-1) = -1 + 1 = 0\\]\n\\[\\text{Bottom: } -1 + 1 = 0\\]\nWhy: We get \\(\\dfrac{0}{0}\\), which is undecided. A zero top and a zero bottom at \\(x = -1\\) mean that \\((x + 1)\\) is a factor of both (factor theorem), so we factorise and cancel it.",
+              "Factorise the top\n\\[x^3 - x = x(x^2 - 1)\\]\n\\[= x(x - 1)(x + 1)\\]\nWhy: Take out the common factor \\(x\\), then use the difference of squares \\(x^2 - 1 = (x - 1)(x + 1)\\).",
+              "Cancel and substitute\n\\[\\lim_{x \\to -1} \\frac{x(x - 1)(x + 1)}{x + 1} = \\lim_{x \\to -1} x(x - 1)\\]\n\\[= (-1)(-1 - 1) = (-1)(-2) = 2\\]\nWhy: \\(x \\to a\\) means \\(x\\) comes close to \\(a\\) but is never equal to \\(a\\), so the common factor is not zero and may be cancelled. After cancelling, the bottom is no longer \\(0\\), and we substitute.",
+              "Check\n\\[x = -0.99:\\ \\frac{-0.970299 + 0.99}{0.01} = 1.9701\\]\nWhy: Close to \\(2\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to -1} \\dfrac{x^3 - x}{x + 1} = 2\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Evaluate each limit by using algebraic techniques: \\(\\lim\\limits_{x \\to 0} \\left(\\frac{3x^3 + 4x}{x^2 + x}\\right)\\).",
+            "explanation": "Substitution at \\(x = 0\\) gives \\(0/0\\).\nBoth top and bottom have the common factor \\(x\\).\nPlan: take \\(x\\) out of both, cancel it, then substitute \\(x = 0\\).",
+            "steps": [
+              "Given: \\(\\dfrac{3x^3 + 4x}{x^2 + x}\\), \\(x \\to 0\\).\nTo find: the limit.\nMethod: Factorise and cancel the common factor.",
+              "Try direct substitution\n\\[\\text{Top: } 0 + 0 = 0, \\quad \\text{Bottom: } 0 + 0 = 0\\]\nWhy: \\(0/0\\) is undecided, so \\(x\\) (that is, \\(x - 0\\)) is a common factor.",
+              "Factorise the top and the bottom\n\\[\\frac{3x^3 + 4x}{x^2 + x} = \\frac{x(3x^2 + 4)}{x(x + 1)}\\]\nWhy: Every term on top and bottom contains \\(x\\).",
+              "Cancel and substitute\n\\[\\lim_{x \\to 0} \\frac{3x^2 + 4}{x + 1} = \\frac{0 + 4}{0 + 1}\\]\n\\[= 4\\]\nWhy: \\(x \\to a\\) means \\(x\\) comes close to \\(a\\) but is never equal to \\(a\\), so the common factor is not zero and may be cancelled. After cancelling, the bottom is no longer \\(0\\), and we substitute.",
+              "Check\n\\[x = 0.01:\\ \\frac{3(0.000001) + 0.04}{0.0001 + 0.01} \\approx 3.9607\\]\nWhy: Close to \\(4\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 0} \\dfrac{3x^3 + 4x}{x^2 + x} = 4\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) Evaluate each limit by using algebraic techniques: \\(\\lim\\limits_{x \\to 2} \\left(\\frac{x^3 - 8}{x^2 + x - 6}\\right)\\).",
+            "explanation": "Substitution at \\(x = 2\\) gives \\(0/0\\), so \\((x - 2)\\) is a common factor.\nTop: difference of cubes. Bottom: a quadratic trinomial.\nPlan: factorise both, cancel \\((x - 2)\\), substitute.",
+            "steps": [
+              "Given: \\(\\dfrac{x^3 - 8}{x^2 + x - 6}\\), \\(x \\to 2\\).\nTo find: the limit.\nMethod: Factorise and cancel the common factor \\((x - 2)\\).",
+              "Try direct substitution\n\\[\\text{Top: } 8 - 8 = 0\\]\n\\[\\text{Bottom: } 4 + 2 - 6 = 0\\]\nWhy: We get \\(\\dfrac{0}{0}\\), which is undecided. A zero top and a zero bottom at \\(x = 2\\) mean that \\((x - 2)\\) is a factor of both (factor theorem), so we factorise and cancel it.",
+              "Factorise the top\n\\[x^3 - 8 = x^3 - 2^3\\]\n\\[= (x - 2)(x^2 + 2x + 4)\\]\nWhy: Difference of cubes: \\(a^3 - b^3 = (a - b)(a^2 + ab + b^2)\\) with \\(a = x\\), \\(b = 2\\).",
+              "Factorise the bottom\n\\[x^2 + x - 6 = (x - 2)(x + 3)\\]\nWhy: We need two numbers with product \\(-6\\) and sum \\(+1\\): they are \\(3\\) and \\(-2\\).",
+              "Cancel and substitute\n\\[\\lim_{x \\to 2} \\frac{x^2 + 2x + 4}{x + 3} = \\frac{4 + 4 + 4}{2 + 3}\\]\n\\[= \\frac{12}{5}\\]\nWhy: \\(x \\to a\\) means \\(x\\) comes close to \\(a\\) but is never equal to \\(a\\), so the common factor is not zero and may be cancelled. After cancelling, the bottom is no longer \\(0\\), and we substitute.",
+              "Check\n\\[x = 2.01:\\ \\frac{8.120601 - 8}{4.0401 + 2.01 - 6}\\]\n\\[= \\frac{0.120601}{0.0501} \\approx 2.407\\]\nWhy: Close to \\(12/5 = 2.4\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 2} \\dfrac{x^3 - 8}{x^2 + x - 6} = \\dfrac{12}{5}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iv)",
+            "prompt": "3 (iv) Evaluate each limit by using algebraic techniques: \\(\\lim\\limits_{x \\to 1} \\frac{x^3 - 3x^2 + 3x - 1}{x^3 - x}\\).",
+            "explanation": "Substitution at \\(x = 1\\) gives \\(0/0\\), so \\((x - 1)\\) is a common factor.\nThe top is a perfect cube; the bottom factorises with a difference of squares.\nPlan: factorise, cancel \\((x - 1)\\), substitute.",
+            "steps": [
+              "Given: \\(\\dfrac{x^3 - 3x^2 + 3x - 1}{x^3 - x}\\), \\(x \\to 1\\).\nTo find: the limit.\nMethod: Factorise and cancel the common factor \\((x - 1)\\).",
+              "Try direct substitution\n\\[\\text{Top: } 1 - 3 + 3 - 1 = 0\\]\n\\[\\text{Bottom: } 1 - 1 = 0\\]\nWhy: We get \\(\\dfrac{0}{0}\\), which is undecided. A zero top and a zero bottom at \\(x = 1\\) mean that \\((x - 1)\\) is a factor of both (factor theorem), so we factorise and cancel it.",
+              "Factorise the top and the bottom\n\\[x^3 - 3x^2 + 3x - 1 = (x - 1)^3\\]\n\\[x^3 - x = x(x - 1)(x + 1)\\]\nWhy: The top is the expansion \\((a - b)^3 = a^3 - 3a^2b + 3ab^2 - b^3\\) with \\(a = x\\), \\(b = 1\\). On the bottom take out \\(x\\), then use the difference of squares.",
+              "Cancel one factor \\((x - 1)\\)\n\\[\\frac{(x - 1)^3}{x(x - 1)(x + 1)} = \\frac{(x - 1)^2}{x(x + 1)}\\]\nWhy: \\(x \\to a\\) means \\(x\\) comes close to \\(a\\) but is never equal to \\(a\\), so the common factor is not zero and may be cancelled. After cancelling, the bottom is no longer \\(0\\), and we substitute.",
+              "Substitute\n\\[\\lim_{x \\to 1} \\frac{(x - 1)^2}{x(x + 1)} = \\frac{0}{1 \\times 2}\\]\n\\[= 0\\]\nWhy: Now the form is \\(0/2\\), not \\(0/0\\): a zero top with a non-zero bottom gives exactly \\(0\\).",
+              "Check\n\\[x = 1.01:\\ \\frac{(0.01)^2}{1.01 \\times 2.01} \\approx 0.00005\\]\nWhy: Very close to \\(0\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 1} \\dfrac{x^3 - 3x^2 + 3x - 1}{x^3 - x} = 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(v)",
+            "prompt": "3 (v) Evaluate each limit by using algebraic techniques: \\(\\lim\\limits_{x \\to -1} \\left(\\frac{x^3 + x^2}{x^2 - 1}\\right)\\).",
+            "explanation": "Substitution at \\(x = -1\\) gives \\(0/0\\), so \\((x + 1)\\) is a common factor.\nPlan: take \\(x^2\\) out of the top, use the difference of squares on the bottom, cancel \\((x + 1)\\), substitute.",
+            "steps": [
+              "Given: \\(\\dfrac{x^3 + x^2}{x^2 - 1}\\), \\(x \\to -1\\).\nTo find: the limit.\nMethod: Factorise and cancel the common factor \\((x + 1)\\).",
+              "Try direct substitution\n\\[\\text{Top: } (-1)^3 + (-1)^2 = -1 + 1 = 0\\]\n\\[\\text{Bottom: } (-1)^2 - 1 = 1 - 1 = 0\\]\nWhy: We get \\(\\dfrac{0}{0}\\), which is undecided. A zero top and a zero bottom at \\(x = -1\\) mean that \\((x + 1)\\) is a factor of both (factor theorem), so we factorise and cancel it.",
+              "Factorise the top and the bottom\n\\[x^3 + x^2 = x^2(x + 1)\\]\n\\[x^2 - 1 = (x - 1)(x + 1)\\]\nWhy: Common factor \\(x^2\\) on top; difference of squares on the bottom.",
+              "Cancel and substitute\n\\[\\lim_{x \\to -1} \\frac{x^2}{x - 1} = \\frac{(-1)^2}{-1 - 1}\\]\n\\[= \\frac{1}{-2} = -\\frac{1}{2}\\]\nWhy: \\(x \\to a\\) means \\(x\\) comes close to \\(a\\) but is never equal to \\(a\\), so the common factor is not zero and may be cancelled. After cancelling, the bottom is no longer \\(0\\), and we substitute.",
+              "Check\n\\[x = -0.99:\\ \\frac{0.9801}{-1.99} \\approx -0.4925\\]\nWhy: Close to \\(-1/2\\) (after cancelling, the simpler form can be used for the check)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to -1} \\dfrac{x^3 + x^2}{x^2 - 1} = -\\dfrac{1}{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(vi)",
+            "prompt": "3 (vi) Evaluate each limit by using algebraic techniques: \\(\\lim\\limits_{x \\to 4} \\left(\\frac{2x^2 - 32}{x^4 - 4x^2}\\right)\\).",
+            "explanation": "First substitute: as printed, the bottom is not zero at \\(x = 4\\), so the limit is found at once and no algebraic technique is needed.\nThe question is in the \"algebraic techniques\" list and the key gives \\(1\\); this fits the denominator \\(x^3 - 4x^2\\), which gives \\(0/0\\).\nPlan: give the printed answer, then solve the intended version by factorising and cancelling \\((x - 4)\\).",
+            "steps": [
+              "Given (as printed): \\(\\dfrac{2x^2 - 32}{x^4 - 4x^2}\\), \\(x \\to 4\\).\nTo find: the limit.\nMethod: Substitute first. If we get \\(0/0\\), factorise and cancel; if the bottom is non-zero, the quotient theorem gives the answer directly.",
+              "The question as printed\n\\[\\text{Top: } 2(16) - 32 = 0\\]\n\\[\\text{Bottom: } 256 - 64 = 192\\]\n\\[\\lim_{x \\to 4} \\frac{2x^2 - 32}{x^4 - 4x^2} = \\frac{0}{192} = 0\\]\nWhy: The bottom tends to \\(192 \\ne 0\\), so the quotient theorem applies and the limit is \\(0\\).",
+              "The intended question\n\\[\\lim_{x \\to 4} \\frac{2x^2 - 32}{x^3 - 4x^2}\\]\n\\[\\text{Top: } 0, \\quad \\text{Bottom: } 64 - 64 = 0\\]\nWhy: With \\(x^3 - 4x^2\\) we get \\(0/0\\), so \\((x - 4)\\) is a common factor; this version matches the heading and the key.",
+              "Factorise the top and the bottom\n\\[2x^2 - 32 = 2(x^2 - 16)\\]\n\\[= 2(x - 4)(x + 4)\\]\n\\[x^3 - 4x^2 = x^2(x - 4)\\]\nWhy: Take out the common factor \\(2\\), then the difference of squares; on the bottom take out \\(x^2\\).",
+              "Cancel and substitute\n\\[\\lim_{x \\to 4} \\frac{2(x + 4)}{x^2} = \\frac{2(8)}{16}\\]\n\\[= 1\\]\nWhy: \\(x \\to a\\) means \\(x\\) comes close to \\(a\\) but is never equal to \\(a\\), so the common factor is not zero and may be cancelled. After cancelling, the bottom is no longer \\(0\\), and we substitute.",
+              "Check\n\\[x = 4.01:\\ \\frac{2(8.01)}{16.0801} \\approx 0.9963\\]\nWhy: Close to \\(1\\) (using the cancelled form, equal to the original for \\(x \\ne 4\\))."
+            ],
+            "final_answer": "As printed: \\(0\\). Intended question \\(\\lim\\limits_{x \\to 4} \\dfrac{2x^2 - 32}{x^3 - 4x^2} = 1\\) (the key's answer)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the denominator as \\(x^4 - 4x^2\\). As printed the limit is \\(\\frac{0}{192} = 0\\) by direct substitution, which needs no algebraic technique and does not match the answer key (\\(1\\)). The intended denominator is \\(x^3 - 4x^2\\), which gives \\(0/0\\) and the limit \\(1\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(vii)",
+            "prompt": "3 (vii) Evaluate each limit by using algebraic techniques: \\(\\lim\\limits_{x \\to 2} \\frac{\\sqrt{x} - \\sqrt{2}}{x - 2}\\).",
+            "explanation": "Substitution at \\(x = 2\\) gives \\(0/0\\); the top contains square roots.\nPlan: rationalise the numerator (multiply top and bottom by the conjugate \\(\\sqrt{x} + \\sqrt{2}\\)), cancel \\((x - 2)\\), substitute.",
+            "steps": [
+              "Given: \\(\\dfrac{\\sqrt{x} - \\sqrt{2}}{x - 2}\\), \\(x \\to 2\\).\nTo find: the limit.\nMethod: Rationalise the numerator, then cancel the common factor \\((x - 2)\\).",
+              "Try direct substitution\n\\[\\text{Top: } \\sqrt{2} - \\sqrt{2} = 0\\]\n\\[\\text{Bottom: } 2 - 2 = 0\\]\nWhy: \\(0/0\\) is undecided; the roots stop us from factorising directly, so we rationalise.",
+              "Multiply top and bottom by \\(\\sqrt{x} + \\sqrt{2}\\)\n\\[\\frac{\\sqrt{x} - \\sqrt{2}}{x - 2} \\cdot \\frac{\\sqrt{x} + \\sqrt{2}}{\\sqrt{x} + \\sqrt{2}}\\]\n\\[= \\frac{x - 2}{(x - 2)(\\sqrt{x} + \\sqrt{2})}\\]\nWhy: \\((\\sqrt{x} - \\sqrt{2})(\\sqrt{x} + \\sqrt{2}) = x - 2\\) (difference of squares). Multiplying by a fraction equal to \\(1\\) does not change the value.",
+              "Cancel and substitute\n\\[\\lim_{x \\to 2} \\frac{1}{\\sqrt{x} + \\sqrt{2}} = \\frac{1}{\\sqrt{2} + \\sqrt{2}}\\]\n\\[= \\frac{1}{2\\sqrt{2}}\\]\nWhy: \\(x \\to a\\) means \\(x\\) comes close to \\(a\\) but is never equal to \\(a\\), so the common factor is not zero and may be cancelled. After cancelling, the bottom is no longer \\(0\\), and we substitute.",
+              "Check\n\\[x = 2.01:\\ \\frac{1.417745 - 1.414214}{0.01} \\approx 0.3531\\]\n\\[\\frac{1}{2\\sqrt{2}} \\approx 0.3536\\]\nWhy: The values agree closely."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 2} \\dfrac{\\sqrt{x} - \\sqrt{2}}{x - 2} = \\dfrac{1}{2\\sqrt{2}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(viii)",
+            "prompt": "3 (viii) Evaluate each limit by using algebraic techniques: \\(\\lim\\limits_{h \\to 0} \\frac{\\sqrt{x + h} - \\sqrt{x}}{h}\\).",
+            "explanation": "Here the variable is \\(h\\) (\\(x\\) is a fixed positive number). At \\(h = 0\\) we get \\(0/0\\).\nPlan: rationalise the numerator with \\(\\sqrt{x + h} + \\sqrt{x}\\), cancel \\(h\\), then put \\(h = 0\\).",
+            "steps": [
+              "Given: \\(\\dfrac{\\sqrt{x + h} - \\sqrt{x}}{h}\\), \\(h \\to 0\\), with \\(x > 0\\) fixed.\nTo find: the limit.\nMethod: Rationalise the numerator, then cancel the common factor \\(h\\).",
+              "Try direct substitution\n\\[\\text{Top: } \\sqrt{x} - \\sqrt{x} = 0, \\quad \\text{Bottom: } 0\\]\nWhy: \\(0/0\\) is undecided, so we rewrite the expression.",
+              "Multiply top and bottom by \\(\\sqrt{x + h} + \\sqrt{x}\\)\n\\[\\frac{(\\sqrt{x + h})^2 - (\\sqrt{x})^2}{h(\\sqrt{x + h} + \\sqrt{x})}\\]\n\\[= \\frac{x + h - x}{h(\\sqrt{x + h} + \\sqrt{x})}\\]\n\\[= \\frac{h}{h(\\sqrt{x + h} + \\sqrt{x})}\\]\nWhy: Difference of squares removes the roots from the top; \\(x\\) cancels \\(-x\\).",
+              "Cancel \\(h\\) and put \\(h = 0\\)\n\\[\\lim_{h \\to 0} \\frac{1}{\\sqrt{x + h} + \\sqrt{x}} = \\frac{1}{\\sqrt{x} + \\sqrt{x}}\\]\n\\[= \\frac{1}{2\\sqrt{x}}\\]\nWhy: \\(h \\to 0\\) means \\(h \\ne 0\\), so \\(h\\) may be cancelled; then the bottom \\(2\\sqrt{x} \\ne 0\\) (since \\(x > 0\\)).",
+              "Check\n\\[x = 4,\\ h = 0.01:\\ \\frac{\\sqrt{4.01} - 2}{0.01} \\approx 0.2498\\]\n\\[\\frac{1}{2\\sqrt{4}} = 0.25\\]\nWhy: The values agree."
+            ],
+            "final_answer": "\\(\\lim\\limits_{h \\to 0} \\dfrac{\\sqrt{x + h} - \\sqrt{x}}{h} = \\dfrac{1}{2\\sqrt{x}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ix)",
+            "prompt": "3 (ix) Evaluate each limit by using algebraic techniques: \\(\\lim\\limits_{x \\to a} \\frac{x^n - a^n}{x^m - a^m}\\).",
+            "explanation": "At \\(x = a\\) both top and bottom are \\(0\\): a \\(0/0\\) form with general powers \\(n\\) and \\(m\\).\nWe cannot factorise for a general power, but 12.2.1 gives \\(\\lim\\limits_{x \\to a} \\frac{x^n - a^n}{x - a} = na^{n-1}\\).\nPlan: divide top and bottom by \\((x - a)\\) and use this result twice.",
+            "steps": [
+              "Given: \\(\\dfrac{x^n - a^n}{x^m - a^m}\\), \\(x \\to a\\) (\\(a > 0\\); \\(n\\), \\(m\\) non-zero integers, as in 12.2.1).\nTo find: the limit.\nMethod: Standard result (12.2.1): \\(\\lim\\limits_{x \\to a} \\dfrac{x^n - a^n}{x - a} = na^{n-1}\\).",
+              "Divide the top and the bottom by \\(x - a\\)\n\\[\\frac{x^n - a^n}{x^m - a^m} = \\frac{\\dfrac{x^n - a^n}{x - a}}{\\dfrac{x^m - a^m}{x - a}}\\]\nWhy: \\(x \\ne a\\), so \\(x - a \\ne 0\\) and dividing top and bottom by it keeps the value. Now each part has the standard form.",
+              "Use the quotient theorem and the standard result\n\\[\\lim_{x \\to a} \\frac{x^n - a^n}{x^m - a^m} = \\frac{na^{n-1}}{ma^{m-1}}\\]\nWhy: The top tends to \\(na^{n-1}\\) and the bottom to \\(ma^{m-1} \\ne 0\\) (since \\(m \\ne 0\\), \\(a > 0\\)).",
+              "Simplify with the law of indices\n\\[= \\frac{n}{m}\\,a^{(n-1)-(m-1)}\\]\n\\[= \\frac{n}{m}\\,a^{n-m}\\]\nWhy: \\(\\dfrac{a^p}{a^q} = a^{p-q}\\).",
+              "Check with \\(n = 3\\), \\(m = 2\\), \\(a = 1\\)\n\\[\\lim_{x \\to 1} \\frac{x^3 - 1}{x^2 - 1} = \\lim_{x \\to 1} \\frac{x^2 + x + 1}{x + 1}\\]\n\\[= \\frac{3}{2} = \\frac{3}{2}(1)^{1}\\]\nWhy: Factorising gives the same value as the formula (this is Q4(xi))."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to a} \\dfrac{x^n - a^n}{x^m - a^m} = \\dfrac{n}{m}\\,a^{n-m}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

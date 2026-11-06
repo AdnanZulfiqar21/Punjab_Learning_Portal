@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-3-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-3-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 241,
+          "pdf_to": 241,
+          "note": "Exercise 12.3, Question 5 (i)-(ii): stock price P(t) = 50e^(0.05t) (book p.236). Answer key PDF 310: infinity, 82.44."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(i)",
+            "prompt": "5 (i) A stock price grows according to the function \\(P(t) = 50e^{0.05t}\\). Find the limit of \\(P(t)\\) as \\(t \\to \\infty\\).",
+            "explanation": "A limit at infinity with a growing exponential.\nWe must find what happens to the price after a very long time.\nPlan: use \\(e^{0.05t} \\to \\infty\\) and multiply by the positive constant 50.",
+            "steps": [
+              "Given: \\(P(t) = 50e^{0.05t}\\).\nTo find: \\(\\lim_{t \\to \\infty} P(t)\\).\nMethod: The power \\(0.05t\\) is positive and grows without bound.\nKey fact: for a positive constant \\(k\\), as \\(t \\to \\infty\\), \\(e^{kt} \\to \\infty\\) and \\(e^{-kt} = \\dfrac{1}{e^{kt}} \\to 0\\) (Important Result: \\(\\lim_{x \\to \\infty} e^{x} = \\infty\\), \\(\\lim_{x \\to -\\infty} e^{x} = 0\\)).",
+              "Behaviour of the exponential\n\\[t \\to \\infty \\Rightarrow 0.05t \\to \\infty\\]\n\\[e^{0.05t} \\to \\infty\\]\nWhy: A positive power of \\(e\\) (about 2.718) grows without bound.",
+              "Multiply by 50\n\\[\\lim_{t \\to \\infty} 50e^{0.05t} = \\infty\\]\nWhy: A positive constant times a quantity growing without bound also grows without bound. (\\(\\infty\\) is not a number: the limit \"does not exist as a number\", the price increases indefinitely.)",
+              "Check\n\\[P(100) = 50e^{5} \\approx 7420.7\\]\n\\[P(200) = 50e^{10} \\approx 1{,}101{,}323\\]\nWhy: The price keeps growing faster and faster."
+            ],
+            "final_answer": "\\(\\lim_{t \\to \\infty} P(t) = \\infty\\) (the price grows without bound)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(ii)",
+            "prompt": "5 (ii) A stock price grows according to the function \\(P(t) = 50e^{0.05t}\\). Calculate the price after 10 years.",
+            "explanation": "A substitution question: the price at \\(t = 10\\).\nWe must find \\(P(10)\\).\nPlan: put \\(t = 10\\) in the formula and use a calculator for \\(e^{0.5}\\).",
+            "steps": [
+              "Given: \\(P(t) = 50e^{0.05t}\\), \\(t\\) in years.\nTo find: \\(P(10)\\).\nMethod: Substitute \\(t = 10\\).",
+              "Find the power\n\\[0.05 \\times 10 = 0.5\\]\n\\[P(10) = 50e^{0.5}\\]\nWhy: Work out the exponent first.",
+              "Evaluate\n\\[e^{0.5} \\approx 1.64872\\]\n\\[P(10) \\approx 50 \\times 1.64872\\]\n\\[\\approx 82.44\\]\nWhy: \\(e^{0.5}\\) from the calculator (\\(e^x\\) key), then multiply by 50; round to 2 decimal places for money.",
+              "Check\n\\[\\frac{82.44}{50} \\approx 1.6488 \\approx e^{0.5}\\]\nWhy: Dividing back by 50 returns \\(e^{0.5}\\)."
+            ],
+            "final_answer": "\\(P(10) = 50e^{0.5} \\approx 82.44\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

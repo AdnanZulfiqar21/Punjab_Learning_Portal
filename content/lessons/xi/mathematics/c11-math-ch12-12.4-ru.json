@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.4-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 239,
+          "pdf_to": 240,
+          "note": "Book p. 234-235: 12.4 Application of Transcendental Functions to Limits and Continuity on Real World Problems: two opening paragraphs; Examples 15-18 (radioactive decay, compound interest, demand, star brightness)."
+        }
+      ],
+      "title": "12.4 Application of Transcendental Functions to Limits and Continuity on Real World Problems (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH12-12.4",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab tak humne limits aur continuity ko formulas ki shakal mein parha. Is aakhri section mein hum dekhenge ke yeh sab asal zindagi mein kahan kaam aata hai: radioactive maadde ka khatam hona, bank mein paisa barhna, qeemat barhne par demand kam hona, aur door ke sitaron ki chamak. Har jagah sawal ek hi hai: \"lambe arse mein kya hoga?\" Aur iska jawab limit deti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab kehti hai: transcendental functions ki limit aur continuity calculus ke bunyadi concepts hain jin ke asal duniya mein beshumaar istemal hain. Yeh concepts humein mukhtalif shobon (fields) mein masail ka model banane, unka tajziya (analysis) karne aur hal karne mein madad dete hain, jaise growth and decay (barhna aur ghatna), finance, economics, surveying aur lambe arse ki stock prices ka andaaza."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Transcendental functions woh functions hain jo algebraic nahin, yani sirf jama, tafreeq, zarb, taqseem aur roots se nahin bante. Misaal: exponential function (\\(e^{x}\\)), logarithmic function aur trigonometric functions.\nNeeche har example mein sawal \"lambe arse mein kya hoga?\" hai, yani variable \\(\\to \\infty\\) par limit. 12.2 ke teen facts saara kaam kar dete hain, inhein yaad kar lijiye:\n1. \\(x \\to \\infty\\) par \\(e^{x} \\to \\infty\\).\n2. \\(x \\to -\\infty\\) par \\(e^{x} \\to 0\\); is liye \\(k > 0\\) ho to \\(t \\to \\infty\\) par \\(e^{-kt} \\to 0\\).\n3. Constant \\(c\\) aur \\(n > 0\\) ke liye \\(x \\to \\infty\\) par \\(\\frac{c}{x^{n}} \\to 0\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 15",
+            "problem": "Growth and Decay (Radioactive Decay)\nThe radioactive decay of a substance is given by the function \\(A(t) = A_{0}e^{-kt}\\), where \\(A_{0}\\) is the initial amount of substance, \\(k\\) is the decay constant, and \\(t\\) is the time in years. Find the limit of the amount of substance as \\(t \\to \\infty\\).",
+            "steps": [
+              "Given: \\(A(t) = A_{0}e^{-kt}\\), jahan \\(A_{0} > 0\\) (shuru ki miqdaar) aur \\(k > 0\\) (decay constant, yani kami ki raftaar).\nTo find: \\(\\lim_{t \\to \\infty} A(t)\\), yani bohat lambe arse baad kitna maadda bachega.\nMethod: \\(e^{-kt}\\) ko \\(e^{x}\\) samjhiye jahan \\(x = -kt\\). Jab \\(t \\to \\infty\\), to \\(x \\to -\\infty\\), aur 12.2.7 se humein maloom hai ke \\(x \\to -\\infty\\) par \\(e^{x} \\to 0\\).",
+              "Step 1: Limit likhein\n\\[\\lim_{t \\to \\infty} A(t) = \\lim_{t \\to \\infty} A_{0}e^{-kt}\\]\nKyun: humne sirf \\(A(t)\\) ki jagah us ka formula rakha hai. (Kitab is line mein exponent ghalti se \\(-ky\\) chhaapti hai; neeche \"Kitab ki ghalti\" dekhiye.)",
+              "Step 2: \\(e^{-kt}\\) ka rawaiya\n\\[e^{-kt} = \\dfrac{1}{e^{kt}}\\]\nJab \\(t \\to \\infty\\), to \\(e^{kt} \\to \\infty\\), is liye\n\\[e^{-kt} \\to 0\\]\nKyun: \\(k > 0\\) hai, to \\(kt\\) beghair had ke barhta hai, aur \\(e^{kt}\\) bhi. Ab 1 ko ek aise number se divide karein jo barhta hi ja raha ho, to jawab chhota hota hota zero ki taraf jata hai: \\(\\frac{1}{10}, \\frac{1}{100}, \\frac{1}{1000}, \\dots\\)",
+              "Step 3: Limit\n\\[\\lim_{t \\to \\infty} A_{0}e^{-kt} = A_{0} \\times 0 = 0\\]\nKyun: \\(A_{0}\\) ek constant hai, aur Theorem 1 ke mutabiq constant guna function ki limit = constant guna limit.",
+              "Tasdeeq: \\(A_{0} = 100\\) g aur \\(k = 0.1\\) lein: \\(A(10) = 100e^{-1} \\approx 36.8\\) g, \\(A(50) = 100e^{-5} \\approx 0.67\\) g, \\(A(100) = 100e^{-10} \\approx 0.0045\\) g. Miqdaar zero ki taraf ghatti ja rahi hai magar kabhi negative nahin hoti. Bilkul yahi humara jawab hai."
+            ],
+            "answer": "\\(\\lim_{t \\to \\infty} A(t) = 0\\): waqt beghair had guzarta jaye to radioactive maadde ki miqdaar zero ki taraf jati hai."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 15 ke hal ki pehli line mein kitab exponent \\(-ky\\) chhaapti hai: \\(\\lim_{t \\to \\infty} A_{0}e^{-ky}\\). Sawal mein \\(y\\) hai hi nahin; sahi exponent \\(-kt\\) hai, jaisa diye hue function \\(A(t) = A_{0}e^{-kt}\\) aur kitab ki agli line mein hai. Jawab 0 bilkul sahi hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 16",
+            "problem": "Finance (Compound Interest)\nThe value of an investment grows according to the formula for continuous compounding \\(A(t) = Pe^{rt}\\), where \\(P\\) is the initial principal, \\(r\\) is the annual interest rate, and \\(t\\) is the time in years. What happens to the value of the investment as \\(t \\to \\infty\\)?",
+            "steps": [
+              "Given: \\(A(t) = Pe^{rt}\\), jahan \\(P > 0\\) (asal raqam, principal) aur \\(r > 0\\) (saalana sharah, annual rate).\nTo find: \\(\\lim_{t \\to \\infty} A(t)\\), yani bohat lambe arse baad investment ki value.\nMethod: 12.2.7 se humein maloom hai ke \\(x \\to \\infty\\) par \\(e^{x} \\to \\infty\\); yahan \\(x = rt\\) hai jo \\(t\\) ke saath \\(\\infty\\) ki taraf jata hai.",
+              "Step 1: Limit likhein\n\\[\\lim_{t \\to \\infty} A(t) = \\lim_{t \\to \\infty} Pe^{rt}\\]\nKyun: \\(A(t)\\) ki jagah us ka formula rakha.",
+              "Step 2: \\(e^{rt}\\) ka rawaiya\nKisi bhi positive \\(r\\) ke liye \\(t \\to \\infty\\) par \\(e^{rt} \\to \\infty\\), is liye value beghair had ke barhti hai:\n\\[\\lim_{t \\to \\infty} Pe^{rt} = \\infty\\]\nKyun: \\(r > 0\\) hai to \\(rt \\to \\infty\\). Jo cheez beghair had barh rahi ho use ek fixed positive number \\(P\\) se multiply karein to woh bhi beghair had barhti rehti hai. Dhyan dein: \\(\\infty\\) koi number nahin; \"limit \\(= \\infty\\)\" ka matlab hai value kisi bhi bare number se aage nikal jati hai.",
+              "Tasdeeq: \\(P = \\text{Rs } 1000\\) aur \\(r = 0.1\\) lein: \\(A(10) = 1000e \\approx 2718\\), \\(A(50) = 1000e^{5} \\approx 148413\\), \\(A(100) = 1000e^{10} \\approx 22026466\\). Values barhti hi ja rahi hain, koi upar ki had nahin."
+            ],
+            "answer": "\\(\\lim_{t \\to \\infty} Pe^{rt} = \\infty\\): waqt ke saath investment ki value beghair had barhti jati hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Example 15 aur 16 ke formulas mein sirf exponent ke sign ka farq hai: \\(e^{-kt}\\) aur \\(e^{rt}\\). Phir bhi ek ka jawab 0 aur doosre ka \\(\\infty\\) kyun hai? (Ishara: negative exponent ka matlab \"1 bata\" hai: \\(e^{-kt} = \\frac{1}{e^{kt}}\\).)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "Example 16 mein \"continuous compounding\" ka matlab hai ke munafa (interest) saal ke aakhir mein ek dafa nahin, balke har lamha jurta rehta hai, aur jurte hi agle lamhe us par bhi munafa milne lagta hai. Isi liye formula mein \\(e \\approx 2.718\\) aata hai, wahi number jo aap ne 12.2.6 mein \\(\\lim_{n \\to \\infty}\\left(1 + \\frac{1}{n}\\right)^{n} = e\\) ki shakal mein dekha tha. Yaad rakhiye ke \\(e > 1\\) hai, is liye us ki barhti hui power bhi barhti hi jati hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 17 mein demand function ka matlab yeh hai: kisi cheez ki qeemat \\(p\\) dollar ho to log kitni miqdaar khareedna chahte hain. Qeemat barhti hai to khareedne wale kam hote jate hain; yahi \"law of demand\" hai. Hum limit se dekhenge ke qeemat beghair had barhe to demand kahan pohanchti hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 17",
+            "problem": "Economics (Supply and Demand)\nIn economics, the demand function \\(D(p)\\) decreases as the price \\(p\\) increases. Suppose the demand function is given by \\(D(p) = \\frac{100}{p+1}\\), where \\(p\\) is the price in dollars. Find the limit of the demand as the price becomes very large, i.e., \\(\\lim_{p \\to \\infty} D(p)\\).",
+            "steps": [
+              "Given: demand function \\(D(p) = \\dfrac{100}{p+1}\\) (kitab sawal mein \\(p + t\\) chhaapti hai magar hal mein \\(p + 1\\) use karti hai; neeche \"Kitab ki ghalti\" dekhiye).\nTo find: \\(\\lim_{p \\to \\infty} D(p)\\), yani jab qeemat (price) bohat barh jaye to demand kitni rahegi.\nMethod: jab numerator fixed ho aur denominator beghair had barhe, to fraction zero ki taraf jata hai (12.2.3).",
+              "Step 1: Limit likhein\n\\[\\lim_{p \\to \\infty} D(p) = \\lim_{p \\to \\infty} \\dfrac{100}{p+1}\\]\nKyun: \\(D(p)\\) ki jagah us ka formula rakha.",
+              "Step 2: Hisaab\nJab \\(p \\to \\infty\\), denominator \\(p + 1\\) bohat bara ho jata hai, is liye\n\\[\\lim_{p \\to \\infty} \\dfrac{100}{p+1} = 0\\]\nKyun: numerator aur denominator dono ko \\(p\\) se divide karein: \\(\\dfrac{100/p}{1 + 1/p} \\to \\dfrac{0}{1 + 0} = 0\\). Rozmarra ki zabaan mein: 100 roti ko jitne zyada logon mein baantein, har ek ke hisse mein utna kam aata hai.",
+              "Tasdeeq: \\(D(99) = 1\\), \\(D(999) = 0.1\\), \\(D(9999) = 0.01\\): demand zero ki taraf girti ja rahi hai."
+            ],
+            "answer": "\\(\\lim_{p \\to \\infty} D(p) = 0\\): jab qeemat bohat zyada ho jaye to demand zero ki taraf jati hai."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 17 ke sawal mein kitab \\(D(p) = \\frac{100}{p+t}\\) chhaapti hai, lekin hal mein \\(D(p) = \\frac{100}{p+1}\\) use karti hai; sawal mein \\(t\\) ka koi zikr nahin. Sahi function \\(D(p) = \\frac{100}{p+1}\\) hai, aur humne upar yahi likha hai. (Waise dono soorton mein limit 0 hi aati, kyun ke \\(t\\) sirf ek constant hota.)"
+          },
+          {
+            "type": "example",
+            "title": "Example 18",
+            "problem": "Astronomy (Apparent Brightness of Stars)\nThe apparent brightness \\(B(d)\\) of a star decreases as the distance from Earth increases following the inverse square law \\(B(d) = \\frac{L}{d^{2}}\\), where \\(L\\) is the star's luminosity. Find the limit of the brightness as \\(d \\to \\infty\\).",
+            "steps": [
+              "Given: \\(B(d) = \\dfrac{L}{d^{2}}\\), jahan \\(L > 0\\) sitare ki asal roshni (luminosity) hai jo fixed hai.\nTo find: \\(\\lim_{d \\to \\infty} B(d)\\), yani bohat door ke sitare ki nazar aane wali chamak.\nMethod: numerator fixed, denominator \\(d^{2}\\) beghair had barhta hai, is liye fraction zero ki taraf jata hai.",
+              "Step 1: Limit likhein\n\\[\\lim_{d \\to \\infty} B(d) = \\lim_{d \\to \\infty} \\dfrac{L}{d^{2}}\\]\nKyun: \\(B(d)\\) ki jagah us ka formula rakha.",
+              "Step 2: Hisaab\nJab \\(d \\to \\infty\\), denominator bohat bara ho jata hai, is liye:\n\\[\\lim_{d \\to \\infty} \\dfrac{L}{d^{2}} = 0\\]\nKyun: \\(L\\) constant hai aur \\(d \\to \\infty\\) par \\(\\frac{1}{d^{2}} \\to 0\\) (12.2.3). Isi liye bohat door ke sitare, chahe asal mein Sooraj se bhi zyada roshan hon, hamein halki si chamak ki tarah nazar aate hain.",
+              "Tasdeeq: faasla double karein to chamak 4 guna kam: \\(B(2d) = \\dfrac{L}{4d^{2}} = \\dfrac{1}{4}B(d)\\); das guna faasle par \\(\\frac{1}{100}\\) reh jati hai, aur isi tarah zero ki taraf."
+            ],
+            "answer": "\\(\\lim_{d \\to \\infty} B(d) = 0\\): faasla beghair had barhe to sitare ki nazar aane wali chamak zero ki taraf jati hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Jawab ko hamesha sawal ki zabaan mein wapas parhiye. Decay, demand ya brightness ki limit 0 ka matlab hai \"yeh cheez ghatte ghatte mitne ke qareeb pohanch jati hai, magar kabhi negative nahin hoti\". Investment ki limit \\(\\infty\\) ka matlab hai \"yeh har us raqam se aage nikal jati hai jo aap soch sakte hain\". Asal zindagi mein koi hamesha intezaar nahin karta, lekin model humein lambe arse ka rujhaan (trend) bata deta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh kitab ka sawal nahin, practice ke liye hai. Ek dawai jism mein \\(M(t) = 500e^{-0.2t}\\) mg ke hisaab se kam hoti hai (\\(t\\) ghanton mein). Lambe arse baad kitni dawai bachegi?\nSoch: \\(k = 0.2 > 0\\), is liye \\(t \\to \\infty\\) par \\(e^{-0.2t} \\to 0\\), aur \\(\\lim_{t \\to \\infty} M(t) = 500 \\times 0 = 0\\) mg. Yani dawai aakhir kaar jism se nikal jati hai; isi liye doctor dobara khuraak (dose) dene ko kehte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Aise sawalon mein teen cheezein likhiye: (1) limit ka setup, (2) ek line ki wajah (\"as \\(t \\to \\infty\\), \\(e^{-kt} \\to 0\\)\" ya \"the denominator becomes very large\"), (3) aakhri jumla sawal ki zabaan mein (\"the amount approaches 0\"). Teesra hissa aksar log bhool jate hain aur marks kat jate hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Kisi model ka lamba rujhaan = waqt (ya qeemat, ya faasle) \\(\\to \\infty\\) par us ki limit.\n2. Exponential decay \\(A_{0}e^{-kt}\\) (\\(k > 0\\)) \\(\\to 0\\); exponential growth \\(Pe^{rt}\\) (\\(r > 0\\)) \\(\\to \\infty\\).\n3. Constant ko aisi miqdaar se divide karein jo beghair had barh rahi ho to jawab 0 ki taraf jata hai (Examples 17 aur 18)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Exponent ka sign bhool jana: \\(e^{-kt} \\to 0\\) lekin \\(e^{kt} \\to \\infty\\).\n2. \\(\\infty\\) ko number ki tarah likhna, maslan \\(\\frac{100}{\\infty + 1}\\). Is ki jagah wajah alfaaz mein likhiye: \"denominator bohat bara ho jata hai\".\n3. Shartein \\(k > 0\\), \\(r > 0\\) nazar andaaz karna: natije inhi par mabni hain. Agar \\(r\\) negative hota to investment barhne ke bajaye ghatti."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.3.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.3.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 236,
+          "pdf_to": 236,
+          "note": "Book p. 231: 12.3.2 Criterion for Existence of Limit of a Function (limit exists iff left and right hand limits are equal) and Example 10 (a three-piece function at x = 2 and x = 4)."
+        }
+      ],
+      "title": "12.3.2 Criterion for Existence of Limit of a Function",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "equation",
+            "latex": "\\begin{gathered}\\lim_{x \\to c} f(x) = L \\text{ if and only if} \\\\ \\lim_{x \\to c^{-}} f(x) = \\lim_{x \\to c^{+}} f(x) = L\\end{gathered}",
+            "text_alt": "limit of f of x as x tends to c equals L if and only if the left hand limit and the right hand limit at c are both equal to L"
+          },
+          {
+            "type": "paragraph",
+            "text": "In words: the limit of \\(f(x)\\) at \\(c\\) exists and equals \\(L\\) exactly when the left hand limit and the right hand limit both exist and both equal \\(L\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\"If and only if\" works in both directions:\n1. If both one-sided limits exist and are equal (to \\(L\\)), then \\(\\lim_{x \\to c} f(x)\\) exists and equals \\(L\\).\n2. If \\(\\lim_{x \\to c} f(x) = L\\), then both one-sided limits are \\(L\\).\nSo the limit does not exist when the two one-sided limits are different (the graph \"jumps\" at \\(c\\)), or when one of them does not exist.\nWhy this makes sense: a limit is one single number that \\(f(x)\\) approaches from every direction. If the left side heads for 3 and the right side heads for 4, there is no single number for \\(f(x)\\) to approach."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Method for a piecewise function at a joining point \\(c\\):\n1. Find the left hand limit with the formula valid for \\(x < c\\).\n2. Find the right hand limit with the formula valid for \\(x > c\\).\n3. Compare: equal means the limit exists (and equals the common value); different means it does not exist."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "Determine whether \\(\\lim_{x \\to 2} f(x)\\) and \\(\\lim_{x \\to 4} f(x)\\) exist, when\n\\[f(x) = \\begin{cases} 2x + 1 & \\text{if } 0 \\le x \\le 2 \\\\ 7 - x & \\text{if } 2 < x < 4 \\\\ x & \\text{if } 4 \\le x \\le 6 \\end{cases}\\]",
+            "steps": [
+              "Given: the three-piece function \\(f\\) above, defined for \\(0 \\le x \\le 6\\).\nTo find: whether \\(\\lim_{x \\to 2} f(x)\\) and \\(\\lim_{x \\to 4} f(x)\\) exist.\nMethod: \\(x = 2\\) and \\(x = 4\\) are the points where the formula changes, so we find the left hand and right hand limits at each point and use the criterion: the limit exists only if the two are equal.",
+              "(i) Step 1: Left hand limit at \\(x = 2\\)\nFor \\(x\\) close to 2 with \\(x < 2\\), \\(f(x) = 2x + 1\\).\n\\[\\lim_{x \\to 2^{-}} f(x) = \\lim_{x \\to 2^{-}} (2x + 1)\\]\n\\[= 2(2) + 1 = 4 + 1 = 5\\]\nWhy: on the left of 2 (\\(0 \\le x < 2\\)) the first formula applies; \\(2x + 1\\) is a polynomial, so its limit is found by substitution.",
+              "(i) Step 2: Right hand limit at \\(x = 2\\)\nFor \\(x\\) close to 2 with \\(x > 2\\), \\(f(x) = 7 - x\\).\n\\[\\lim_{x \\to 2^{+}} f(x) = \\lim_{x \\to 2^{+}} (7 - x)\\]\n\\[= 7 - 2 = 5\\]\nWhy: on the right of 2 (\\(2 < x < 4\\)) the second formula applies.",
+              "(i) Step 3: Compare\n\\[\\lim_{x \\to 2^{-}} f(x) = \\lim_{x \\to 2^{+}} f(x) = 5\\]\n\\[\\Rightarrow \\lim_{x \\to 2} f(x) \\text{ exists and } = 5\\]\nWhy: by the criterion of 12.3.2, equal one-sided limits mean the limit exists and has the same value.",
+              "(ii) Step 4: Left hand limit at \\(x = 4\\)\nFor \\(x\\) close to 4 with \\(x < 4\\), \\(f(x) = 7 - x\\).\n\\[\\lim_{x \\to 4^{-}} f(x) = \\lim_{x \\to 4^{-}} (7 - x)\\]\n\\[= 7 - 4 = 3\\]\nWhy: on the left of 4 (\\(2 < x < 4\\)) the second formula applies.",
+              "(ii) Step 5: Right hand limit at \\(x = 4\\)\nFor \\(x\\) close to 4 with \\(x > 4\\), \\(f(x) = x\\).\n\\[\\lim_{x \\to 4^{+}} f(x) = \\lim_{x \\to 4^{+}} x = 4\\]\nWhy: on the right of 4 (\\(4 \\le x \\le 6\\)) the third formula applies.",
+              "(ii) Step 6: Compare\n\\[\\lim_{x \\to 4^{-}} f(x) = 3\\]\n\\[\\lim_{x \\to 4^{+}} f(x) = 4\\]\n\\[3 \\ne 4\\]\nTherefore \\(\\lim_{x \\to 4} f(x)\\) does not exist.\nWhy: the two sides approach different numbers, so there is no single limit; the graph jumps from height 3 to height 4 at \\(x = 4\\).",
+              "Check: take values very close to the points.\n\\[f(1.99) = 4.98,\\quad f(2.01) = 4.99\\]\nBoth are close to 5, as found.\n\\[f(3.99) = 3.01,\\quad f(4.01) = 4.01\\]\nThese stay near 3 on the left and near 4 on the right, so there is a jump at \\(x = 4\\)."
+            ],
+            "answer": "\\(\\lim_{x \\to 2} f(x)\\) exists and equals 5; \\(\\lim_{x \\to 4} f(x)\\) does not exist, because the left hand limit is 3 and the right hand limit is 4."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Notice that \\(f(4) = 4\\) is defined (third formula), yet \\(\\lim_{x \\to 4} f(x)\\) does not exist. The value of the function at a point and the limit at that point are different questions; in 12.3.3 continuity compares exactly these two."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\lim_{x \\to c} f(x) = L\\) if and only if \\(\\lim_{x \\to c^{-}} f(x) = \\lim_{x \\to c^{+}} f(x) = L\\).\n2. Different one-sided limits: the limit does not exist.\n3. For a piecewise function, check the limit at every point where the formula changes, using the correct piece on each side."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Stopping after one side: finding only \\(\\lim_{x \\to 4^{-}} f(x) = 3\\) and writing \\(\\lim_{x \\to 4} f(x) = 3\\).\n2. Using the piece that contains the \"=\" sign for both sides: at \\(x = 4\\) the third piece (\\(4 \\le x\\)) is for the right side only.\n3. Concluding that the limit exists because \\(f(c)\\) is defined."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.1.4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.1.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 224,
+          "pdf_to": 225,
+          "note": "Book p. 219-220: 12.1.4 (i) polygons in a unit circle, Figures 1-3; (ii) numerical approach, table of x^3 near 2. Book errors: heading says 'Circumscribing' (polygons are inscribed); f(1.999) printed 7.8806 (correct 7.988). Teaching notes ours."
+        }
+      ],
+      "title": "12.1.4 Concept of Limit of a Function",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(i) By Finding the Area of Circumscribing Regular Polygon",
+            "book_errors": [
+              "Circumscribing"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The heading says \"Circumscribing Regular Polygon\", but the text and Figures 1-3 use regular polygons inscribed in the circle (the circle circumscribes the polygon). The heading should read \"By Finding the Area of an Inscribed Regular Polygon\"."
+          },
+          {
+            "type": "paragraph",
+            "text": "Consider a circle of unit radius which circumscribes a square (4-sided regular polygon) as shown in Figure 1."
+          },
+          {
+            "type": "paragraph",
+            "text": "The side of square is \\(\\sqrt{2}\\) and its area is 2 square unit. It is clear that the area of inscribed 4-sided polygon is less than the area of the circum-circle \\(\\pi = 3.142\\) \\((\\pi r^{2} = \\pi(1)^{2} = \\pi = 3.142)\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch12-fig-1-square",
+            "alt": "A circle of radius 1 with a square inscribed in it. Both diagonals of the square are drawn and meet at the centre. The two lower half-diagonals are marked 1 and the bottom side of the square is marked root 2.",
+            "caption": "Figure 1: 4-sided polygon (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch12-fig-2-octagon",
+            "alt": "The same circle of radius 1 with a regular 8-sided polygon inscribed in it. Lines from the centre to all 8 vertices divide it into 8 equal triangles.",
+            "caption": "Figure 2: 8-sided polygon (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch12-fig-3-16-gon",
+            "alt": "The same circle of radius 1 with a regular 16-sided polygon inscribed in it. Lines from the centre to all 16 vertices divide it into 16 equal triangles; the polygon is now very close to the circle.",
+            "caption": "Figure 3: 16-sided polygon (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is the side \\(\\sqrt{2}\\)? The two half-diagonals marked \\(1\\) are radii of the circle, and the diagonals of a square cut at right angles. So each side is the hypotenuse of a right triangle with legs \\(1\\) and \\(1\\):\n\\[\\text{side} = \\sqrt{1^{2} + 1^{2}} = \\sqrt{2}\\]\n\\[\\text{area} = (\\sqrt{2})^{2} = 2\\]\nInscribed means drawn inside the circle with every vertex on the circle; the circle is then the circum-circle of the polygon."
+          },
+          {
+            "type": "paragraph",
+            "text": "Bisecting the arcs between the vertices of the square, we get an inscribed 8-sided regular polygon as shown in Figure 2. Its area is \\(2\\sqrt{2} = 2.828\\) square unit which is closer to the area of circum-circle. A further similar bisection of the arcs gives an inscribed 16-sided regular polygon as shown in Figure 3 with area \\(3.061\\) square unit which is more closer to the area of circum-circle."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Where do \\(2\\sqrt{2}\\) and \\(3.061\\) come from? The lines from the centre cut a regular \\(n\\)-sided polygon into \\(n\\) equal triangles. Each has two sides \\(1\\) (radii) with angle \\(\\frac{360^{\\circ}}{n}\\) between them, so its area is \\(\\frac{1}{2}(1)(1)\\sin\\frac{360^{\\circ}}{n}\\). Hence\n\\[A_{n} = \\frac{n}{2}\\sin\\frac{360^{\\circ}}{n}\\]\n\\[A_{8} = 4\\sin 45^{\\circ} = 2\\sqrt{2}\\]\n\\[A_{16} = 8\\sin 22.5^{\\circ} \\approx 3.061\\]"
+          },
+          {
+            "type": "table",
+            "header": [
+              "sides \\(n\\)",
+              "area \\(A_{n}\\)",
+              "decimal"
+            ],
+            "rows": [
+              [
+                "4",
+                "\\(2\\)",
+                "2"
+              ],
+              [
+                "8",
+                "\\(2\\sqrt{2}\\)",
+                "2.828"
+              ],
+              [
+                "16",
+                "\\(8\\sin 22.5^{\\circ}\\)",
+                "3.061"
+              ],
+              [
+                "32",
+                "\\(16\\sin 11.25^{\\circ}\\)",
+                "3.121"
+              ],
+              [
+                "64",
+                "\\(32\\sin 5.625^{\\circ}\\)",
+                "3.137"
+              ],
+              [
+                "128",
+                "\\(64\\sin 2.8125^{\\circ}\\)",
+                "3.140"
+              ]
+            ],
+            "caption": "Our table (not in the book): areas of regular n-sided polygons inscribed in a circle of radius 1. They approach pi = 3.14159..."
+          },
+          {
+            "type": "paragraph",
+            "text": "It follows that as \"\\(n\\)\", the number of sides of the inscribed polygon increases, the area of polygon increases and becoming neared to \\(3.142\\) which is the area of circle of unit radius."
+          },
+          {
+            "type": "paragraph",
+            "text": "We express this situation by saying that the limiting value of the area of the inscribed polygon is the area of the circle as \\(n\\) approaches infinity, i.e.,\nArea of inscribed polygon \\(\\to\\) Area of circle as \\(n \\to \\infty\\)\nThus, area of circle of unit radius \\(= \\pi = 3.142\\) (approx.)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Notice the pattern of a limit: no polygon, however many sides it has, has area exactly \\(\\pi\\) (every polygon leaves thin slivers of the circle uncovered), yet the areas get as close to \\(\\pi\\) as we please. This is how the area of a circle was first found, by Archimedes, using polygons of up to 96 sides."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(ii) Numerical Approach"
+          },
+          {
+            "type": "paragraph",
+            "text": "Consider the function \\(f(x) = x^{3}\\)\nThe domain of \\(f(x)\\) is the set of all real numbers.\nLet us find the limit of \\(f(x) = x^{3}\\) as \\(x\\) approaches 2."
+          },
+          {
+            "type": "paragraph",
+            "text": "The table of values of \\(f(x)\\) for different values of \\(x\\) as \\(x\\) approaches 2 from left and right is as follows:"
+          },
+          {
+            "type": "table",
+            "header": [
+              "\\(x\\)",
+              "\\(f(x) = x^{3}\\)",
+              "approach"
+            ],
+            "rows": [
+              [
+                "1",
+                "1",
+                "from left of 2 →"
+              ],
+              [
+                "1.5",
+                "3.375",
+                "from left of 2 →"
+              ],
+              [
+                "1.8",
+                "5.832",
+                "from left of 2 →"
+              ],
+              [
+                "1.9",
+                "6.859",
+                "from left of 2 →"
+              ],
+              [
+                "1.99",
+                "7.8806",
+                "from left of 2 →"
+              ],
+              [
+                "1.999",
+                "\\(7.8806\\)",
+                "from left of 2 →"
+              ],
+              [
+                "1.9999",
+                "7.9988",
+                "from left of 2 →"
+              ],
+              [
+                "2.0001",
+                "8.0012",
+                "← from right of 2"
+              ],
+              [
+                "2.001",
+                "8.012",
+                "← from right of 2"
+              ],
+              [
+                "2.01",
+                "8.1206",
+                "← from right of 2"
+              ],
+              [
+                "2.1",
+                "9.261",
+                "← from right of 2"
+              ],
+              [
+                "2.2",
+                "10.648",
+                "← from right of 2"
+              ],
+              [
+                "2.5",
+                "15.625",
+                "← from right of 2"
+              ],
+              [
+                "3",
+                "27",
+                "← from right of 2"
+              ]
+            ],
+            "caption": "Values of f(x) = x³ as x approaches 2 from the left and from the right (the book prints this table across the page).",
+            "book_errors": [
+              "\\(7.8806\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "For \\(x = 1.999\\) the book prints \\(f(x) = 7.8806\\), the same value as for \\(x = 1.99\\). The correct value is \\(1.999^{3} = 7.988006 \\approx 7.988\\), which fits the pattern: the values rise steadily towards \\(8\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The table shows that, as \\(x\\) gets closer and closer to 2 (sufficiently close to 2), from both sides, \\(f(x)\\) gets closer and closer to 8.\nWe say that 8 is the limit of \\(f(x)\\) when \\(x\\) approaches 2 and is written as:\n\\[f(x) \\to 8 \\text{ as } x \\to 2\\]\nor\n\\[\\lim_{x \\to 2} x^{3} = 8\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read the table from both ends towards the middle. From the left: \\(6.859, 7.8806, 7.988, 7.9988\\) (distance from \\(8\\): about \\(1.1, 0.12, 0.012, 0.0012\\)). From the right: \\(9.261, 8.1206, 8.012, 8.0012\\) (distance about \\(1.3, 0.12, 0.012, 0.0012\\)). Each time \\(x\\) is 10 times closer to \\(2\\), \\(f(x)\\) is about 10 times closer to \\(8\\).\nThe table never uses \\(x = 2\\) itself. Here \\(f(2) = 8\\) happens to equal the limit, but the limit was found only from values near \\(2\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "To show a limit numerically, take values of \\(x\\) on both sides of the point (e.g. \\(1.9, 1.99, 1.999\\) and \\(2.1, 2.01, 2.001\\)), find \\(f(x)\\) for each, and state the common value they approach. One side alone is not enough."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Areas of regular polygons inscribed in a unit circle: \\(2, 2.828, 3.061, \\ldots\\) approach \\(\\pi \\approx 3.142\\) as the number of sides \\(n \\to \\infty\\).\n2. The limiting value of the polygon's area is the area of the circle, although no polygon reaches it.\n3. Numerically, \\(x^{3}\\) approaches \\(8\\) as \\(x \\to 2\\) from both sides: \\(\\lim_{x \\to 2} x^{3} = 8\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Taking values from only one side of the point in a table.\n2. Copying a wrong table entry: check that the values move steadily towards the limit; a value that jumps back (like the printed \\(7.8806\\) at \\(1.999\\)) signals an error.\n3. Confusing inscribed (polygon inside, vertices on the circle) with circumscribed (polygon outside, sides touching the circle)."
+          }
+        ]
+      }
+    }
+  ]
+}

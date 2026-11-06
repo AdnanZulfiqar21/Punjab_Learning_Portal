@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.2.6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.2.6",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 231,
+          "pdf_to": 231,
+          "note": "Book p. 226: 12.2.6 proof by the binomial theorem, value of e, Note (n -> -inf), Deduction lim (1+x)^(1/x) = e"
+        }
+      ],
+      "title": "12.2.6 Lim_{n->+inf} (1 + 1/n)^n = e",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This heading introduces the famous number \\(e\\) (Euler's number), \\(e \\approx 2.718\\). It is the base of the natural logarithm \\(\\log_{e}\\) (also written \\(\\ln\\)), and it appears whenever something grows at a rate proportional to its size: compound interest, population growth, radioactive decay.\nLook at the expression \\(\\left(1+\\frac{1}{n}\\right)^{n}\\). As \\(n\\) grows, the base \\(1+\\frac{1}{n}\\) gets closer to 1 (which pulls the value down) but the power \\(n\\) gets larger (which pushes the value up). These two effects balance, and the value settles at \\(e\\). It does NOT become 1 and it does NOT become infinite."
+          },
+          {
+            "type": "table",
+            "header": [
+              "\\(n\\)",
+              "\\(\\left(1+\\frac{1}{n}\\right)^{n}\\)"
+            ],
+            "rows": [
+              [
+                "1",
+                "2"
+              ],
+              [
+                "2",
+                "2.25"
+              ],
+              [
+                "10",
+                "2.59374"
+              ],
+              [
+                "100",
+                "2.70481"
+              ],
+              [
+                "1000",
+                "2.71692"
+              ]
+            ],
+            "caption": "Our table (not in the book): the values creep up towards e = 2.71828... as n grows"
+          },
+          {
+            "type": "paragraph",
+            "text": "By the binomial theorem, we have"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\left(1+\\dfrac{1}{n}\\right)^{n} = 1 + n\\left(\\dfrac{1}{n}\\right)\\]\n\\[+ \\dfrac{n(n-1)}{2!}\\left(\\dfrac{1}{n}\\right)^{2}\\]\n\\[+ \\dfrac{n(n-1)n-2)}{3!}\\left(\\dfrac{1}{n}\\right)^{3} + \\dots\\]",
+            "book_errors": [
+              "\\[+ \\dfrac{n(n-1)n-2)}{3!}\\left(\\dfrac{1}{n}\\right)^{3} + \\dots\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the fourth term the book prints \\(n(n-1)n-2)\\): a bracket is missing. The numerator is the product \\(n(n-1)(n-2)\\):\n\\[+ \\dfrac{n(n-1)(n-2)}{3!}\\left(\\dfrac{1}{n}\\right)^{3} + \\dots\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[= 1 + 1 + \\dfrac{1}{2!}\\left(1-\\dfrac{1}{n}\\right)\\]\n\\[+ \\dfrac{1}{3!}\\left(1-\\dfrac{1}{n}\\right)\\left(1-\\dfrac{2}{n}\\right) + \\dots\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Where does the second line come from? Divide each factor of the numerator by one \\(n\\):\n\\[\\dfrac{n(n-1)}{2!}\\cdot\\dfrac{1}{n^{2}} = \\dfrac{1}{2!}\\cdot\\dfrac{n}{n}\\cdot\\dfrac{n-1}{n}\\]\n\\[= \\dfrac{1}{2!}\\left(1-\\dfrac{1}{n}\\right)\\]\nIn the same way \\(\\frac{n(n-1)(n-2)}{3!}\\cdot\\frac{1}{n^{3}} = \\frac{1}{3!}\\left(1-\\frac{1}{n}\\right)\\left(1-\\frac{2}{n}\\right)\\). The first two terms are \\(1\\) and \\(n\\cdot\\frac{1}{n} = 1\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "When \\(n \\to +\\infty\\), \\(\\frac{1}{n}, \\frac{2}{n}, \\frac{3}{n}, \\dots\\) all tend to zero, therefore"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\therefore \\lim_{x \\to +\\infty}\\left(1+\\dfrac{1}{n}\\right)^{n}\\]",
+            "book_errors": [
+              "\\[\\therefore \\lim_{x \\to +\\infty}\\left(1+\\dfrac{1}{n}\\right)^{n}\\]"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[= 1 + 1 + \\dfrac{1}{2!} + \\dfrac{1}{3!} + \\dfrac{1}{4!} + \\dots\\]\n\\[= 1 + 1 + 0.5 + 0.166667\\]\n\\[+ 0.0416667 + \\dots\\]\n\\[= 2.718281\\dots\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In this line the book writes the limit as \\(x \\to +\\infty\\). There is no \\(x\\) in the expression; the variable is \\(n\\), so it should read:\n\\[\\therefore \\lim_{n \\to +\\infty}\\left(1+\\dfrac{1}{n}\\right)^{n}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "As approximate value of \\(e\\) is \\(2.718281\\)."
+          },
+          {
+            "type": "equation",
+            "latex": "\\therefore \\lim_{n \\to +\\infty}\\left(1+\\dfrac{1}{n}\\right)^{n} = e",
+            "text_alt": "therefore, the limit as n tends to plus infinity of (1 plus 1 over n) to the power n equals e"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Each bracket \\(\\left(1-\\frac{k}{n}\\right)\\) becomes 1, so the series becomes \\(1 + 1 + \\frac{1}{2!} + \\frac{1}{3!} + \\frac{1}{4!} + \\dots\\). Its terms shrink very fast (\\(\\frac{1}{4!} \\approx 0.04\\), \\(\\frac{1}{5!} \\approx 0.008\\), \\(\\frac{1}{6!} \\approx 0.0014\\)), so adding a few more terms gives \\(e = 2.7182818\\dots\\).\nThe five terms written in the book add up to \\(2.708333\\); the remaining terms (the \"\\(\\dots\\)\") bring the total up to \\(2.718281\\dots\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "We can also show that \\(\\lim_{n \\to -\\infty}\\left(1+\\frac{1}{n}\\right)^{n} = e\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Deduction: \\(\\lim_{x \\to 0}(1+x)^{\\frac{1}{x}} = e\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "We know that\n\\[\\lim_{n \\to \\infty}\\left(1+\\dfrac{1}{n}\\right)^{n} = e \\quad \\text{...(i)}\\]\nPut \\(n = \\frac{1}{x}\\) in (i), then \\(x = \\frac{1}{n}\\).\nWhen \\(x \\to 0\\), \\(n \\to \\infty\\), so\n\\[\\lim_{n \\to +\\infty}\\left(1+\\dfrac{1}{n}\\right)^{n}\\]\n\\[= \\lim_{x \\to 0}(1+x)^{\\frac{1}{x}}\\]\n\\[e = \\lim_{x \\to 0}(1+x)^{\\frac{1}{x}}\\]\nbecause \\(\\lim_{n \\to +\\infty}\\left(1+\\frac{1}{n}\\right)^{n} = e\\)."
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Hence } \\lim_{x \\to 0}(1+x)^{\\frac{1}{x}} = e",
+            "text_alt": "Hence the limit as x tends to 0 of (1 plus x) to the power 1 over x equals e"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does the substitution work? With \\(n = \\frac{1}{x}\\) we have \\(1+\\frac{1}{n} = 1 + x\\) and the power \\(n = \\frac{1}{x}\\), so the two expressions are the same thing written with different letters.\nWhen \\(x \\to 0\\) from the right (\\(x > 0\\)), \\(n = \\frac{1}{x} \\to +\\infty\\); when \\(x \\to 0\\) from the left (\\(x < 0\\)), \\(n \\to -\\infty\\). Both one-sided limits equal \\(e\\) because of the main result and the Note above, so the two-sided limit is \\(e\\).\nSo we now have two forms of the same fact. Use the \\(n \\to \\infty\\) form when the variable runs to infinity, and the \\(x \\to 0\\) form when the variable runs to zero (as in Example 7 below)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\lim_{n \\to \\pm\\infty}\\left(1+\\frac{1}{n}\\right)^{n} = e \\approx 2.718281\\).\n2. Deduction: \\(\\lim_{x \\to 0}(1+x)^{\\frac{1}{x}} = e\\).\n3. The proof uses the binomial expansion; each factor \\(1 - \\frac{k}{n}\\) tends to 1, leaving \\(1 + 1 + \\frac{1}{2!} + \\frac{1}{3!} + \\dots\\)\n4. Shape to recognise: \"1 + (something tending to 0)\" raised to \"1 over that same something\"."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Saying \\(\\left(1+\\frac{1}{n}\\right)^{n} \\to 1^{\\infty} = 1\\). The form \\(1^{\\infty}\\) is not 1; it must be worked out, and here it gives \\(e\\).\n2. Writing \\(\\lim_{x \\to 0}(1+x)^{x} = e\\). The power must be the reciprocal \\(\\frac{1}{x}\\) of the small quantity.\n3. Treating \\(e\\) as exactly \\(2.718\\). It is an irrational number; \\(2.718281\\) is only an approximation."
+          }
+        ]
+      }
+    }
+  ]
+}

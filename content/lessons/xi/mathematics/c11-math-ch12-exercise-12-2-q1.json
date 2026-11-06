@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-2-Q1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-2-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 238,
+          "pdf_to": 238,
+          "note": "Exercise 12.2, Question 1 (i)-(iii): left and right hand limits and the limit as x -> c (book p.233). Answer key PDF 310 agrees."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Determine the left hand limit and the right hand limit and then, find limit of the following functions when \\(x \\to c\\). \\(f(x) = 2x^2 + x - 5,\\ c = 1\\)",
+            "explanation": "A one-sided limits question for a polynomial.\nWe must find the left hand limit (LHL), the right hand limit (RHL) and then the limit at \\(x = 1\\).\nPlan: a polynomial has one formula on both sides, so substitute \\(x = 1\\) for each side and compare.",
+            "steps": [
+              "Given: \\(f(x) = 2x^2 + x - 5\\), \\(c = 1\\).\nTo find: \\(\\lim_{x \\to 1^-} f(x)\\), \\(\\lim_{x \\to 1^+} f(x)\\) and \\(\\lim_{x \\to 1} f(x)\\).\nMethod: For a polynomial, the limit is found by direct substitution (theorems on limits). The limit exists only if LHL = RHL.",
+              "Left hand limit\n\\[\\lim_{x \\to 1^-} f(x) = \\lim_{x \\to 1^-} (2x^2 + x - 5)\\]\n\\[= 2(1)^2 + 1 - 5\\]\n\\[= 2 + 1 - 5 = -2\\]\nWhy: \\(x \\to 1^-\\) means \\(x\\) comes to 1 through values a little less than 1 (0.9, 0.99, ...). The same formula is used there, and a polynomial has no break, so we may substitute \\(x = 1\\).",
+              "Right hand limit\n\\[\\lim_{x \\to 1^+} f(x) = \\lim_{x \\to 1^+} (2x^2 + x - 5)\\]\n\\[= 2(1)^2 + 1 - 5 = -2\\]\nWhy: From the right (1.1, 1.01, ...) the formula is the same, so the value is the same.",
+              "Compare and write the limit\n\\[\\text{LHL} = \\text{RHL} = -2\\]\n\\[\\lim_{x \\to 1} f(x) = -2\\]\nWhy: The limit of a function at a point exists exactly when both one-sided limits exist and are equal.",
+              "Check\n\\[f(0.99) = 1.9602 + 0.99 - 5 = -2.0498\\]\n\\[f(1.01) = 2.0402 + 1.01 - 5 = -1.9498\\]\nWhy: Values just left and just right of 1 are both close to \\(-2\\), as the limit says."
+            ],
+            "final_answer": "LHL \\(= -2\\), RHL \\(= -2\\), so \\(\\lim_{x \\to 1} f(x) = -2\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Determine the left hand limit and the right hand limit and then, find limit of the following functions when \\(x \\to c\\). \\(f(x) = \\frac{x^2 - 9}{x - 3},\\ c = -3\\)",
+            "explanation": "A one-sided limits question for a rational function.\nWe must find the LHL, the RHL and the limit at \\(x = -3\\).\nPlan: simplify the fraction by factorising, then substitute \\(x = -3\\) from each side.",
+            "steps": [
+              "Given: \\(f(x) = \\dfrac{x^2 - 9}{x - 3}\\), \\(c = -3\\).\nTo find: LHL, RHL and \\(\\lim_{x \\to -3} f(x)\\).\nMethod: Factorise \\(x^2 - 9\\) and cancel \\(x - 3\\) (allowed because near \\(x = -3\\) we have \\(x \\ne 3\\)). The simplified form is a polynomial, so substitute.",
+              "Simplify the function\n\\[x^2 - 9 = (x - 3)(x + 3)\\]\n\\[f(x) = \\frac{(x - 3)(x + 3)}{x - 3}\\]\n\\[= x + 3 \\quad (x \\ne 3)\\]\nWhy: Difference of squares, \\(a^2 - b^2 = (a - b)(a + b)\\). Near \\(-3\\) the factor \\(x - 3\\) is about \\(-6\\), never zero, so it may be cancelled.",
+              "Left hand limit\n\\[\\lim_{x \\to -3^-} f(x) = \\lim_{x \\to -3^-} (x + 3)\\]\n\\[= -3 + 3 = 0\\]\nWhy: Just left of \\(-3\\) (like \\(-3.01\\)) the simplified formula \\(x + 3\\) holds; substitute.",
+              "Right hand limit\n\\[\\lim_{x \\to -3^+} f(x) = \\lim_{x \\to -3^+} (x + 3)\\]\n\\[= -3 + 3 = 0\\]\nWhy: Just right of \\(-3\\) (like \\(-2.99\\)) the same formula holds.",
+              "Compare and write the limit\n\\[\\text{LHL} = \\text{RHL} = 0\\]\n\\[\\lim_{x \\to -3} f(x) = 0\\]\nWhy: Equal one-sided limits give the limit.",
+              "Check\n\\[f(-3) = \\frac{9 - 9}{-3 - 3} = \\frac{0}{-6} = 0\\]\nWhy: Here the function is even defined at \\(-3\\), and its value 0 agrees with the limit. (The fraction is undefined only at \\(x = 3\\), which is not our point.)"
+            ],
+            "final_answer": "LHL \\(= 0\\), RHL \\(= 0\\), so \\(\\lim_{x \\to -3} f(x) = 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Determine the left hand limit and the right hand limit and then, find limit of the following functions when \\(x \\to c\\). \\(f(x) = |x - 5|,\\ c = 5\\)",
+            "explanation": "A one-sided limits question with an absolute value.\nWe must find the LHL, the RHL and the limit at \\(x = 5\\).\nPlan: remove the modulus separately on each side of 5, then substitute.",
+            "steps": [
+              "Given: \\(f(x) = |x - 5|\\), \\(c = 5\\).\nTo find: LHL, RHL and \\(\\lim_{x \\to 5} f(x)\\).\nMethod: \\(|a| = a\\) when \\(a \\ge 0\\) and \\(|a| = -a\\) when \\(a < 0\\). The sign of \\(x - 5\\) changes at 5, so each side gets its own formula.",
+              "Write \\(f\\) without the modulus\n\\[f(x) = \\begin{cases} 5 - x, & x < 5 \\\\ x - 5, & x \\ge 5 \\end{cases}\\]\nWhy: For \\(x < 5\\), \\(x - 5\\) is negative, so \\(|x - 5| = -(x - 5) = 5 - x\\). For \\(x \\ge 5\\) it is not negative, so the modulus changes nothing.",
+              "Left hand limit\n\\[\\lim_{x \\to 5^-} f(x) = \\lim_{x \\to 5^-} (5 - x)\\]\n\\[= 5 - 5 = 0\\]\nWhy: Left of 5 (4.9, 4.99, ...) the formula is \\(5 - x\\).",
+              "Right hand limit\n\\[\\lim_{x \\to 5^+} f(x) = \\lim_{x \\to 5^+} (x - 5)\\]\n\\[= 5 - 5 = 0\\]\nWhy: Right of 5 (5.1, 5.01, ...) the formula is \\(x - 5\\).",
+              "Compare and write the limit\n\\[\\text{LHL} = \\text{RHL} = 0\\]\n\\[\\lim_{x \\to 5} f(x) = 0\\]\nWhy: Equal one-sided limits, so the limit exists.",
+              "Check\n\\[f(4.99) = |{-0.01}| = 0.01\\]\n\\[f(5.01) = |0.01| = 0.01\\]\nWhy: Both sides give values close to 0. The graph is a V shape with its corner at \\((5, 0)\\): a corner is not a break."
+            ],
+            "final_answer": "LHL \\(= 0\\), RHL \\(= 0\\), so \\(\\lim_{x \\to 5} f(x) = 0\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

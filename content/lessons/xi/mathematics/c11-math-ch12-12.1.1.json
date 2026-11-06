@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.1.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.1.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 223,
+          "pdf_to": 223,
+          "note": "Book p. 218: 12.1.1, sequence x_n = 1/n^2 tending to 0. Book errors: listed values 1, 1/2, 1/2^2, ..., 1/2^n (should be 1, 1/4, 1/9, ..., 1/n^2); 'x' for x_n; 'as n -> 0' (should be n -> infinity). Teaching notes are ours."
+        }
+      ],
+      "title": "12.1.1 Meaning of the Phrase \"x approaches zero\"",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Suppose a sequence \\(x_{n} = \\frac{1}{n^{2}}\\) assumes a sequence of values as:\n\\[1, \\frac{1}{2}, \\frac{1}{2^{2}}, \\frac{1}{2^{3}}, \\frac{1}{2^{4}}, \\ldots, \\frac{1}{2^{n}}, \\ldots\\]",
+            "book_errors": [
+              "\\[1, \\frac{1}{2}, \\frac{1}{2^{2}}, \\frac{1}{2^{3}}, \\frac{1}{2^{4}}, \\ldots, \\frac{1}{2^{n}}, \\ldots\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book lists the values \\(1, \\frac{1}{2}, \\frac{1}{2^{2}}, \\frac{1}{2^{3}}, \\ldots, \\frac{1}{2^{n}}\\). These are the values of \\(\\frac{1}{2^{n-1}}\\), not of \\(\\frac{1}{n^{2}}\\). Putting \\(n = 1, 2, 3, 4, \\ldots\\) in \\(x_{n} = \\frac{1}{n^{2}}\\) gives\n\\[1, \\frac{1}{4}, \\frac{1}{9}, \\frac{1}{16}, \\ldots, \\frac{1}{n^{2}}, \\ldots\\]\nBoth sequences tend to \\(0\\), so the idea of the topic is not affected."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A sequence is a list of numbers in order: first term, second term, third term, ... The rule \\(x_{n} = \\frac{1}{n^{2}}\\) tells us the \\(n\\)th term. In fact a sequence is a function whose inputs are the natural numbers \\(1, 2, 3, \\ldots\\); that is why it is a good first example of \"approaching\"."
+          },
+          {
+            "type": "paragraph",
+            "text": "We can see that \\(x\\) is becoming smaller and smaller as \\(n\\) increases and can be made as small as we please by taking \"\\(n\\)\" sufficiently larger. We can see that the sequence \\(x_{n} = \\frac{1}{n^{2}}\\) is becoming smaller and smaller as \\(n\\) increases and can be made as small as we please by taking \"\\(n\\)\" sufficiently large. In other words, \\(x_{n} = \\frac{1}{n^{2}}\\) becoming closer and closer to \\(0\\) as \\(n\\) becoming large.\nThis unending decrease of \\(x_{n}\\) is denoted by \\(x_{n} \\to 0\\) and read as \"\\(x_{n}\\) approaches zero\" or \"\\(x_{n}\\) tends to zero as \\(n \\to 0\\)\". That is, the limit of the sequence \\(x_{n}\\) is \\(0\\).",
+            "book_errors": [
+              "We can see that \\(x\\) is becoming",
+              "\\(n \\to 0\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "1. In the first sentence the book writes \\(x\\); it means the terms \\(x_{n}\\) of the sequence.\n2. The book prints \"\\(x_{n}\\) tends to zero as \\(n \\to 0\\)\". It should be \"as \\(n \\to \\infty\\)\": the terms get small because \\(n\\) gets large, not because \\(n\\) gets close to \\(0\\). (For \\(n\\) close to \\(0\\), \\(\\frac{1}{n^{2}}\\) would be huge.)"
+          },
+          {
+            "type": "table",
+            "header": [
+              "\\(n\\)",
+              "\\(x_{n} = \\frac{1}{n^{2}}\\)",
+              "decimal"
+            ],
+            "rows": [
+              [
+                "1",
+                "\\(\\frac{1}{1}\\)",
+                "1"
+              ],
+              [
+                "2",
+                "\\(\\frac{1}{4}\\)",
+                "0.25"
+              ],
+              [
+                "3",
+                "\\(\\frac{1}{9}\\)",
+                "0.111..."
+              ],
+              [
+                "10",
+                "\\(\\frac{1}{100}\\)",
+                "0.01"
+              ],
+              [
+                "100",
+                "\\(\\frac{1}{10000}\\)",
+                "0.0001"
+              ],
+              [
+                "1000",
+                "\\(\\frac{1}{1000000}\\)",
+                "0.000001"
+              ]
+            ],
+            "caption": "Our table (not in the book): the terms of x_n = 1/n^2 shrink towards 0 as n grows."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What does \"as small as we please\" mean? Name any small positive number, and the terms will eventually all be smaller than it.\nExample: we want \\(x_{n} < 0.0001\\).\n\\[\\frac{1}{n^{2}} < \\frac{1}{10000}\\]\n\\[\\Leftrightarrow n^{2} > 10000\\]\n\\[\\Leftrightarrow n > 100\\]\nSo every term after the 100th is smaller than \\(0.0001\\). For \\(0.000001\\) we would need \\(n > 1000\\). However small the target, some \\(n\\) works.\nNotice also: no term is ever exactly \\(0\\), because \\(\\frac{1}{n^{2}} > 0\\) for every \\(n\\). The limit \\(0\\) is the value the terms approach, not a value they reach."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "In a definition question, write the full reading: \"\\(x_{n} \\to 0\\) as \\(n \\to \\infty\\)\", read as \"\\(x_{n}\\) tends to zero as \\(n\\) tends to infinity\". Both arrows matter: one says what the terms do, the other says what \\(n\\) does."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(x_{n} = \\frac{1}{n^{2}}\\) gives \\(1, \\frac{1}{4}, \\frac{1}{9}, \\frac{1}{16}, \\ldots\\): the terms decrease without end.\n2. They can be made smaller than any positive number by taking \\(n\\) large enough, but they are never \\(0\\).\n3. This is written \\(x_{n} \\to 0\\) as \\(n \\to \\infty\\): \"\\(x_{n}\\) approaches zero\"; the limit of the sequence is \\(0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing \"as \\(n \\to 0\\)\" (as the book does by misprint). For a sequence, \\(n\\) always goes to \\(\\infty\\).\n2. Thinking that \"smaller and smaller\" alone means \"tends to zero\". The terms \\(1 + \\frac{1}{n}\\) also get smaller and smaller, but they approach \\(1\\), not \\(0\\). What matters is that the terms get as close to \\(0\\) as we please."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.2.7-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.2.7",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 232,
+          "pdf_to": 233,
+          "note": "Book p. 227-228: 12.2.7 proof, Deduction lim (e^x - 1)/x = 1, Important Result to Remember (i)-(ii), Example 7 (i)-(ii)"
+        }
+      ],
+      "title": "12.2.7 Lim_{x->0} (a^x - 1)/x = log_e a (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH12-12.2.7",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Pichle sabaq mein humne \\(e\\) ko pehchana. Aaj hum ek aur ahem limit dekhenge jo exponential functions (jaise \\(2^{x}\\), \\(10^{x}\\), \\(e^{x}\\)) ke saath kaam aati hai. Yeh nateeja aage differentiation (Unit 13 aur Class XII) mein \\(a^{x}\\) aur \\(e^{x}\\) ke derivative ki bunyaad banta hai, is liye ise dil se samjhiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Pehle masla samjhiye: agar \\(\\frac{a^{x}-1}{x}\\) mein seedha \\(x = 0\\) rakhein to \\(\\frac{a^{0}-1}{0} = \\frac{1-1}{0} = \\frac{0}{0}\\) aata hai. \\(\\frac{0}{0}\\) ka koi matlab nahin; yeh ek indeterminate form (ghair-muayyan shakal) hai. Is liye koi tarkeeb (trick) chahiye.\nTarkeeb yeh hai: variable badal kar expression ko aisi shakal mein le aao jahan 12.2.6 wala nateeja \\(\\lim_{y \\to 0}(1+y)^{\\frac{1}{y}} = e\\) lag sake.\nShart: \\(a > 0\\) aur \\(a \\ne 1\\), warna \\(\\log_{a}\\) ka matlab nahin banta."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\text{Put } a^{x} - 1 = y \\quad \\text{...(i)}\\]\n\\[\\text{then } a^{x} = 1 + y\\]\n\\[\\text{So, } x = \\log_{a}(1+y)\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "(i) se, jab \\(x \\to 0\\) to \\(y \\to 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kyun \\(y \\to 0\\)? Jab \\(x \\to 0\\) to \\(a^{x} \\to a^{0} = 1\\), is liye \\(y = a^{x} - 1 \\to 1 - 1 = 0\\). Teesri line mein logarithm ki definition lagi hai: \\(a^{x} = N\\) ka matlab hai \\(x = \\log_{a} N\\). Yahan \\(N = 1 + y\\). Is tarah humne \\(x\\) ko bhi \\(y\\) ki shakal mein likh liya, aur ab poori limit sirf \\(y\\) mein hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab limit mein \\(a^{x} - 1\\) ki jagah \\(y\\) aur \\(x\\) ki jagah \\(\\log_{a}(1+y)\\) rakhte hain, phir upar neeche \\(y\\) se divide karte hain:\n\\[\\therefore \\lim_{x \\to 0}\\dfrac{a^{x}-1}{x} = \\lim_{y \\to 0}\\dfrac{y}{\\log_{a}(1+y)}\\]\n\\[= \\lim_{y \\to 0}\\dfrac{1}{\\frac{1}{y}\\log_{a}(1+y)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[= \\lim_{y \\to 0}\\dfrac{1}{\\log_{a}(1+y)^{\\frac{1}{y}}}\\]\n\\[= \\dfrac{1}{\\log_{a} e} = \\log_{e} a\\]\n(\\(\\because \\lim_{y \\to 0}(1+y)^{\\frac{1}{y}} = e\\))"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ne aakhri value \\(\\log_{e}^{a}\\) chhapi hai (\\(a\\) ko power ki tarah oopar), aur neeche Deduction mein \\(\\log_{e}^{e}\\) bhi isi tarah. Sahi likhawat yeh hai, yani \\(a\\) ka logarithm base \\(e\\) par:\n\\[= \\dfrac{1}{\\log_{a} e} = \\log_{e} a\\]\n\\[\\lim_{x \\to 0}\\left(\\dfrac{e^{x}-1}{x}\\right) = \\log_{e} e = 1\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yahan do chhote qadam chhupe hue hain jo students aksar miss kar dete hain:\n1. \\(\\frac{1}{y}\\log_{a}(1+y) = \\log_{a}(1+y)^{\\frac{1}{y}}\\). Kyun: log ka qanoon \\(k\\log N = \\log N^{k}\\); aage wala number power ban kar andar chala jata hai. Isi qadam se \\((1+y)^{\\frac{1}{y}}\\) wali jaani pehchaani shakal paida hoti hai.\n2. \\(\\frac{1}{\\log_{a} e} = \\log_{e} a\\). Kyun: change of base rule (base badalne ka qanoon) se \\(\\log_{a} e = \\frac{\\log_{e} e}{\\log_{e} a} = \\frac{1}{\\log_{e} a}\\). Is ka ulta lein to \\(\\log_{e} a\\)."
+          },
+          {
+            "type": "equation",
+            "latex": "\\lim_{x \\to 0}\\dfrac{a^{x}-1}{x} = \\log_{e} a",
+            "text_alt": "the limit as x tends to 0 of (a to the power x minus 1) over x equals log of a to the base e"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Deduction: \\(\\lim_{x \\to 0}\\left(\\dfrac{e^{x}-1}{x}\\right) = \\log_{e} e = 1\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Hum jaante hain ke\n\\[\\lim_{x \\to 0}\\left(\\dfrac{a^{x}-1}{x}\\right) = \\log_{e} a \\quad \\text{...(i)}\\]\n(i) mein \\(a = e\\) rakhein to\n\\[\\lim_{x \\to 0}\\left(\\dfrac{e^{x}-1}{x}\\right) = \\log_{e} e = 1\\]\nKyun 1? Kisi bhi number ka log usi base par 1 hota hai: \\(\\log_{e} e = 1\\), bilkul jaise \\(\\log_{10} 10 = 1\\). Yeh nateeja batata hai ke \\(e\\) ek khaas base hai: is ke liye yeh limit seedha 1 hai, aur isi liye calculus mein \\(e\\) sab se pyara base hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Important Result to Remember"
+          },
+          {
+            "type": "paragraph",
+            "text": "(i) \\(\\lim_{x \\to \\infty} e^{x} = \\infty\\)\n(ii) \\(\\lim_{x \\to -\\infty} e^{x} = \\lim_{x \\to \\infty}\\left(\\frac{1}{e^{x}}\\right) = 0\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kyun? \\(e\\) 1 se bara hai, is liye is ki powers barhti hi chali jati hain: \\(e^{10} \\approx 22026\\). Negative power ka matlab hai ulta: \\(e^{-x} = \\frac{1}{e^{x}}\\), yani 1 ko ek bohat bare number se divide karna, jo zero ke qareeb ho jata hai magar kabhi zero nahin banta. \\(y = e^{x}\\) ka graph daayen taraf tezi se oopar uthta hai aur baayen taraf \\(x\\)-axis ke saath saath leit jata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahin.\n(a) \\(\\lim_{x \\to 0}\\frac{2^{x}-1}{x} = \\log_{e} 2 \\approx 0.693\\). Seedha formula, \\(a = 2\\).\n(b) \\(\\lim_{x \\to 0}\\frac{e^{3x}-1}{x}\\): upar neeche 3 se zarb dein: \\(3\\cdot\\frac{e^{3x}-1}{3x}\\). \\(t = 3x\\) rakhein, \\(t \\to 0\\); andar wali limit 1 hai, to jawab \\(3\\).\nKhud sochiye: \\(\\lim_{x \\to 0}\\frac{10^{x}-1}{x}\\) kya hoga? (Jawab: \\(\\log_{e} 10\\).)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(\\lim_{x \\to \\infty} e^{-x}\\) kya hoga? Aur \\(\\lim_{x \\to -\\infty} e^{-x}\\)? Pehle socho ke power kis taraf ja rahi hai. (Jawab: pehli limit 0, kyun ke power \\(-x \\to -\\infty\\); doosri \\(\\infty\\), kyun ke power \\(-x \\to +\\infty\\).) Yeh do nateeje aage Exercise 12.1 aur continuity wale sawalon mein baar baar kaam aate hain, is liye graph ki tasveer zehan mein bitha lijiye."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki misaal dekhte hain jis mein 12.2.6 wali limit ko istemal kar ke jawab \\(e\\) ki power mein nikaalna hai. Is misaal ka asal sabaq ek tareeqa hai, jo har aisi limit par lagta hai: (1) pehchano ke \\(1^{\\infty}\\) wali shakal hai; (2) andar wale hisse ko \"1 / kuch\" ki shakal do; (3) power ko \"wahi kuch\" aur ek bache hue number mein baanto; (4) standard limit \\(e\\) lagao aur bache hue number ko power bana do. Yeh chaar qadam yaad kar lijiye, phir koi bhi aisi limit mushkil nahin lagegi."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Express each limit in terms of \\(e\\).\n(i) \\(\\lim_{n \\to +\\infty}\\left(1+\\frac{3}{n}\\right)^{2n}\\)\n(ii) \\(\\lim_{n \\to 0}(1+2n)^{\\frac{1}{n}}\\)",
+            "steps": [
+              "Given: (i) \\(\\left(1+\\frac{3}{n}\\right)^{2n}\\), jab \\(n \\to +\\infty\\); (ii) \\((1+2n)^{\\frac{1}{n}}\\), jab \\(n \\to 0\\).\nTo find: dono limits ko \\(e\\) ki power ki shakal mein likhna.\nMethod: sab se pehle dekhte hain ke yeh sawal kis qism ka hai. Dono mein \"1 + chhoti cheez\" ek bari power par hai, yani \\(1^{\\infty}\\) wali shakal. Aisi har limit ka hal ek hi hai: expression ko itna badlo ke us ke andar bilkul standard shakal \\(\\left(1+\\frac{1}{m}\\right)^{m}\\) (jab \\(m \\to \\infty\\)) ya \\((1+m)^{\\frac{1}{m}}\\) (jab \\(m \\to 0\\)) nazar aa jaye, jis ki limit \\(e\\) hai.",
+              "Part (i), Step 1: Standard limit se milaan\nPehle is limit ko \\(\\lim_{n \\to \\infty}\\left(1+\\frac{1}{n}\\right)^{n} = e\\) se milaate hain.\nKyun: standard shakal mein andar \"1 / variable\" hai aur power mein wahi variable. Hamare paas andar \\(\\frac{3}{n}\\) hai aur power \\(2n\\). Yani do cheezein theek karni hain: andar wala hissa aur power. Yeh pehchaan lena hi aadha sawal hal kar deta hai.",
+              "Part (i), Step 2: Andar wala hissa theek karein\n\\[\\dfrac{3}{n} = \\dfrac{1}{\\;n/3\\;}\\]\nKyun: humein \"1 / kuch\" chahiye. \\(\\frac{3}{n}\\) ko upar neeche 3 se divide karein to \\(\\frac{1}{n/3}\\) ban jata hai. Ab woh \"kuch\" \\(\\frac{n}{3}\\) hai, is liye power bhi \\(\\frac{n}{3}\\) honi chahiye.",
+              "Part (i), Step 3: Power theek karein\n\\[\\left(1+\\dfrac{3}{n}\\right)^{2n} = \\left[\\left(1+\\dfrac{3}{n}\\right)^{\\frac{n}{3}}\\right]^{6}\\]\n\\[= \\left[\\left(1+\\dfrac{1}{\\frac{n}{3}}\\right)^{\\frac{n}{3}}\\right]^{6}\\]\nKyun: power ka qanoon \\((a^{p})^{q} = a^{pq}\\) hai. \\(\\frac{n}{3} \\times 6 = 2n\\), to expression bilkul wahi raha; humne sirf power ko do hisson mein baant diya: \\(\\frac{n}{3}\\) (jo standard shakal ke liye chahiye) aur 6 (jo bach gaya).\nDhyan dein: 6 kahan se aaya? Sawal yeh poochiye: \"\\(\\frac{n}{3}\\) ko kis se zarb dein ke \\(2n\\) bane?\" Jawab: \\(2n \\div \\frac{n}{3} = 6\\).",
+              "Part (i), Step 4: Limit lein\n\\(m = \\frac{n}{3}\\) rakhiye. Jab \\(n \\to +\\infty\\) to \\(m \\to +\\infty\\).\n\\[\\lim_{n \\to +\\infty}\\left(1+\\dfrac{3}{n}\\right)^{2n} = \\lim_{m \\to +\\infty}\\left[\\left(1+\\dfrac{1}{m}\\right)^{m}\\right]^{6}\\]\n\\[= e^{6}\\]\nKyun: bracket ke andar wali cheez 12.2.6 ke mutabiq \\(e\\) ki taraf jati hai, aur limit ka theorem kehta hai ke power ki limit = limit ki power. Is liye jawab \\(e^{6}\\).",
+              "Part (ii), Step 1: Standard limit se milaan\nYahan variable zero ki taraf ja raha hai, is liye zero wali shakal \\(\\lim_{x \\to 0}(1+x)^{\\frac{1}{x}} = e\\) (12.2.6 ki Deduction) se milaate hain.\nKyun: andar \\(2n\\) hai, to standard shakal ke liye power \\(\\frac{1}{2n}\\) honi chahiye, lekin hamare paas \\(\\frac{1}{n}\\) hai. Yani sirf power theek karni hai.",
+              "Part (ii), Step 2: Power theek karein\n\\[\\lim_{n \\to 0}(1+2n)^{\\frac{1}{n}} = \\lim_{n \\to 0}\\left[(1+2n)^{\\frac{1}{2n}}\\right]^{2}\\]\nKyun: \\(\\frac{1}{2n} \\times 2 = \\frac{1}{n}\\), to kuch nahin badla. Bas power ke do hisse kar diye.",
+              "Part (ii), Step 3: Variable badlein aur limit lein\n\\(m = 2n\\) rakhiye; jab \\(n \\to 0\\) to \\(m \\to 0\\).\n\\[\\lim_{n \\to 0}(1+2n)^{\\frac{1}{n}} = \\lim_{m \\to 0}\\left[(1+m)^{\\frac{1}{m}}\\right]^{2}\\]\n\\[= e^{2}\\]\nKyun: \\((1+m)^{\\frac{1}{m}} \\to e\\) jab \\(m \\to 0\\), to is ka square \\(e^{2}\\) ki taraf jayega.",
+              "Tasdeeq:\nAb calculator se jawab ko parakhte hain. (i) ke liye bara \\(n = 3000\\) lein: \\((1.001)^{6000} \\approx 402.2\\), aur \\(e^{6} \\approx 403.4\\).\n(ii) ke liye chhota \\(n = 0.001\\) lein: \\((1.002)^{1000} \\approx 7.374\\), aur \\(e^{2} \\approx 7.389\\). Jitna \\(n\\) apni limit ke qareeb jaye, values utni hi qareeb aati hain. Jawab sahi hain."
+            ],
+            "answer": "(i) \\(e^{6}\\)  (ii) \\(e^{2}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "1. Part (ii) mein kitab kehti hai ke limit ko \\(\\lim_{n \\to 0}(1+2n)^{\\frac{1}{n}} = e\\) se milaao. Yeh baat ghalat hai: is limit ki value to \\(e^{2}\\) hai (yahi misaal ka jawab hai). Jis standard limit se milaana hai woh yeh hai:\n\\[\\lim_{m \\to 0}(1+m)^{\\frac{1}{m}} = e\\]\n2. Aakhri line mein kitab ne \\((1+m)\\) ki power \\(m\\) chhapi hai; sahi power \\(\\frac{1}{m}\\) hai:\n\\[\\lim_{m \\to 0}\\left[(1+m)^{\\frac{1}{m}}\\right]^{2} = e^{2}\\]\nAakhri jawab \\(e^{2}\\) sahi hai; humne oopar sab sahi likha hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(\\lim_{x \\to 0}\\frac{a^{x}-1}{x} = \\log_{e} a\\) (\\(a > 0\\), \\(a \\ne 1\\)).\n2. \\(a = e\\) ho to: \\(\\lim_{x \\to 0}\\frac{e^{x}-1}{x} = 1\\).\n3. \\(e^{x} \\to \\infty\\) jab \\(x \\to \\infty\\); \\(e^{x} \\to 0\\) jab \\(x \\to -\\infty\\).\n4. \\(\\left(1+\\frac{k}{n}\\right)^{pn}\\) jaisi limit: power ko is tarah baanto ke \\(\\left(1+\\frac{1}{m}\\right)^{m}\\) nazar aaye; jawab \\(e^{kp}\\).\n5. Variable badalte waqt limit bhi badlo: \\(n \\to \\infty\\) se \\(m \\to \\infty\\), \\(n \\to 0\\) se \\(m \\to 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Jawab \\(\\log_{a} e\\) likh dena. Sahi \\(\\log_{e} a\\) hai. Yaad karne ka tareeqa: \\(a = e\\) rakhne par jawab 1 aana chahiye, aur \\(a = 1\\) rakhne par 0 (kyun ke \\(1^{x} - 1 = 0\\)); \\(\\log_{e} 1 = 0\\) theek baithta hai.\n2. Power ko baantte waqt hisaab na milaana: \\(\\left(1+\\frac{3}{n}\\right)^{2n}\\) ko \\(\\left[\\dots^{\\frac{n}{3}}\\right]^{2}\\) likh dena. Hamesha check karein ke dono powers ka product asal power ke barabar ho: \\(\\frac{n}{3} \\times 6 = 2n\\).\n3. \\(\\lim_{n \\to 0}(1+2n)^{\\frac{1}{n}}\\) ka jawab \\(e\\) likh dena. Andar \\(2n\\) hai, to power \\(\\frac{1}{2n}\\) honi chahiye thi; farq ki wajah se jawab \\(e^{2}\\) hai."
+          }
+        ]
+      }
+    }
+  ]
+}

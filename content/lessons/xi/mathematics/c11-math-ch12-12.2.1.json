@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-12.2.1",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/12.2.1",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 227,
+          "pdf_to": 227,
+          "note": "Book p. 222: 12.2.1 lim (x^n - a^n)/(x - a) = n a^(n-1): Case 1 (n a positive integer, factorization) and Case II (n = -m a negative integer, reduced to Case 1)."
+        }
+      ],
+      "title": "12.2.1 Lim_{x->a} (x^n - a^n)/(x - a) = n a^(n-1) where n is a non-zero integer and a > 0",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "This important limit holds for every non-zero integer \\(n\\) and \\(a > 0\\):"
+          },
+          {
+            "type": "equation",
+            "latex": "\\lim_{x\\to a}\\dfrac{x^{n}-a^{n}}{x-a} = na^{n-1}",
+            "text_alt": "limit as x approaches a of (x to the power n minus a to the power n) over (x minus a) equals n times a to the power n minus 1"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is this limit needed? Substituting \\(x = a\\) gives \\(\\frac{a^{n}-a^{n}}{a-a} = \\frac{0}{0}\\), so it cannot be found directly. The result gives the answer at once, without factorizing every time.\nFor \\(n = 2\\) you can see it yourself: \\(\\frac{x^{2}-a^{2}}{x-a} = x + a\\), which tends to \\(2a = 2a^{2-1}\\).\nThis limit is also the first step towards the derivative of \\(x^{n}\\), which you will meet in the next unit."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Case 1"
+          },
+          {
+            "type": "paragraph",
+            "text": "Suppose \\(n\\) is a positive integer. By substituting \\(x = a\\), we get \\(\\left(\\frac{0}{0}\\right)\\) form, so we make factors as follows:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[x^{n}-a^{n} = (x-a)\\big(x^{n-1} + ax^{n-2}\\]\n\\[\\quad + a^{2}x^{n-3} + \\dots + a^{n-1}\\big)\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Where does this factorization come from? Check small powers:\n\\[x^{2}-a^{2} = (x-a)(x+a)\\]\n\\[x^{3}-a^{3} = (x-a)(x^{2}+ax+a^{2})\\]\nIn general, multiply \\((x-a)\\) by the long bracket: every middle term appears once with \\(+\\) and once with \\(-\\) and cancels. Only \\(x^{n}\\) and \\(-a^{n}\\) are left. In the bracket the powers of \\(x\\) go down by one and the powers of \\(a\\) go up by one, so there are exactly \\(n\\) terms."
+          },
+          {
+            "type": "paragraph",
+            "text": "Therefore, cancelling the common factor \\((x - a)\\) and then substituting \\(x = a\\):"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\lim_{x\\to a}\\dfrac{x^{n}-a^{n}}{x-a}\\]\n\\[= \\lim_{x\\to a}\\dfrac{(x-a)\\big(x^{n-1} + \\dots + a^{n-1}\\big)}{x-a}\\]\n\\[= \\lim_{x\\to a}\\big(x^{n-1} + ax^{n-2} + a^{2}x^{n-3}\\]\n\\[\\quad + \\dots + a^{n-1}\\big)\\]\n\\[= a^{n-1} + a\\,a^{n-2} + a^{2}a^{n-3}\\]\n\\[\\quad + a^{3}a^{n-4} + \\dots + a^{n-1}\\]\n\\[= a^{n-1} + a^{n-1} + a^{n-1} + \\dots + a^{n-1}\\]\n\\[= na^{n-1}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does every term become \\(a^{n-1}\\)? In each term the two powers add up to \\(n-1\\), for example \\(a^{2}\\,a^{n-3} = a^{2+n-3} = a^{n-1}\\). The bracket has \\(n\\) terms, so the sum is \\(n\\) copies of \\(a^{n-1}\\), i.e. \\(na^{n-1}\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Case II"
+          },
+          {
+            "type": "paragraph",
+            "text": "Suppose \\(n\\) is a negative integer (say \\(n = -m\\)) where \\(m\\) is a positive integer. Now,"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\dfrac{x^{n}-a^{n}}{x-a} = \\dfrac{x^{-m}-a^{-m}}{x-a}\\]\n\\[= \\dfrac{\\frac{1}{x^{m}} - \\frac{1}{a^{m}}}{x-a}\\]\n\\[= \\dfrac{\\frac{a^{m}-x^{m}}{x^{m}a^{m}}}{x-a}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why this rearrangement? A negative power is a reciprocal: \\(x^{-m} = \\frac{1}{x^{m}}\\). Taking the L.C.M. gives \\(\\frac{a^{m}-x^{m}}{x^{m}a^{m}}\\). We then write \\(a^{m}-x^{m} = -(x^{m}-a^{m})\\) so that the expression \\(\\frac{x^{m}-a^{m}}{x-a}\\) of Case 1 appears, with the positive integer \\(m\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(\\therefore\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\lim_{x\\to a}\\dfrac{x^{n}-a^{n}}{x-a}\\]\n\\[= \\lim_{x\\to a}\\left(\\dfrac{-1}{x^{m}a^{m}}\\right)\\]\n\\[\\quad \\times \\lim_{x\\to a}\\left(\\dfrac{x^{m}-a^{m}}{x-a}\\right)\\]\n\\[= \\dfrac{-1}{a^{m}a^{m}}\\,(ma^{m-1}) \\quad \\text{(by Case 1)}\\]\n\\[= -ma^{-m-1}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\therefore\\ \\lim_{x\\to a}\\dfrac{x^{n}-a^{n}}{x-a} = na^{n-1}\\]\n\\[\\because\\ n = -m\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Two small steps the book leaves out:\n1. \\(\\dfrac{ma^{m-1}}{a^{m}a^{m}} = ma^{m-1-2m} = ma^{-m-1}\\).\n2. With \\(n = -m\\): \\(na^{n-1} = (-m)a^{-m-1}\\), which is exactly what we found.\nSo the same formula holds for negative integers too. For negative \\(n\\) we need \\(a \\ne 0\\) (we divide by \\(a^{m}\\)); the book takes \\(a > 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Two examples of our own:\n\\[\\lim_{x\\to 2}\\dfrac{x^{3}-8}{x-2} = \\lim_{x\\to 2}\\dfrac{x^{3}-2^{3}}{x-2}\\]\n\\[= 3(2)^{2} = 12\\]\n\\[\\lim_{x\\to 1}\\dfrac{x^{-2}-1}{x-1} = \\lim_{x\\to 1}\\dfrac{x^{-2}-1^{-2}}{x-1}\\]\n\\[= -2(1)^{-3} = -2\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Before using the result, make the question match its shape exactly: the same power \\(n\\) on \\(x\\) and on the constant, and the denominator \\(x - a\\) with the same \\(a\\). Write constants as powers first, e.g. \\(8 = 2^{3}\\), \\(\\frac{1}{4} = 2^{-2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\lim_{x\\to a}\\frac{x^{n}-a^{n}}{x-a} = na^{n-1}\\) for every non-zero integer \\(n\\).\n2. Case 1 (\\(n > 0\\)): factorize \\(x^{n}-a^{n}\\), cancel \\(x - a\\), substitute: \\(n\\) equal terms.\n3. Case II (\\(n = -m < 0\\)): rewrite with positive powers and use Case 1."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing the answer as \\(na^{n}\\) or \\(na^{n+1}\\). The power goes down by one: \\(na^{n-1}\\).\n2. Using the result when the denominator is \\(a - x\\). Since \\(a - x = -(x - a)\\), the answer changes sign.\n3. Forgetting to write the constant as a power with the same exponent, e.g. using \\(a = 8\\) in \\(\\frac{x^{3}-8}{x-2}\\) instead of \\(8 = 2^{3}\\), \\(a = 2\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

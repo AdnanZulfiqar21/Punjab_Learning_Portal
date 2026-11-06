@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-2-Q5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-2-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 239,
+          "pdf_to": 239,
+          "note": "Exercise 12.2, Question 5 (i)-(ii): find m and n for continuity at x = 3 (book p.234); part (ii) has no n. Answer key PDF 310 prints m = 4 for (ii); correct m = 3."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(i)",
+            "prompt": "5 (i) Find the values \\(m\\) and \\(n\\), so that given function \\(f\\) is continuous at \\(x = 3\\): \\[f(x) = \\begin{cases} mx, & x < 3 \\\\ n, & x = 3 \\\\ -2x + 9, & x > 3 \\end{cases}\\]",
+            "explanation": "A \"find the constants\" continuity question.\nContinuity at \\(x = 3\\) needs LHL = RHL = \\(f(3)\\): two unknowns, two equations.\nPlan: find the RHL (a number), then make the LHL and \\(f(3)\\) equal to it.",
+            "steps": [
+              "Given: \\(f(x) = mx\\) for \\(x < 3\\), \\(f(3) = n\\), \\(f(x) = -2x + 9\\) for \\(x > 3\\).\nTo find: \\(m\\) and \\(n\\) so that \\(f\\) is continuous at \\(x = 3\\).\nMethod: Continuity at 3 means \\(\\lim_{x \\to 3^-} f(x) = \\lim_{x \\to 3^+} f(x) = f(3)\\).",
+              "Left hand limit\n\\[\\lim_{x \\to 3^-} f(x) = \\lim_{x \\to 3^-} mx = 3m\\]\nWhy: Left of 3 the first piece \\(mx\\) is used.",
+              "Right hand limit\n\\[\\lim_{x \\to 3^+} f(x) = \\lim_{x \\to 3^+} (-2x + 9)\\]\n\\[= -6 + 9 = 3\\]\nWhy: Right of 3 the third piece is used.",
+              "Value at the point\n\\[f(3) = n\\]\nWhy: The middle line gives the value at \\(x = 3\\).",
+              "Make the three equal\n\\[3m = 3 \\Rightarrow m = 1\\]\n\\[n = 3\\]\nWhy: The LHL must equal the RHL (3), and \\(f(3)\\) must equal the limit (3).",
+              "Check\n\\[m = 1:\\ \\lim_{x \\to 3^-} x = 3\\]\n\\[\\text{LHL} = \\text{RHL} = f(3) = 3\\]\nWhy: All three conditions of continuity hold with \\(m = 1,\\ n = 3\\)."
+            ],
+            "final_answer": "\\(m = 1,\\ n = 3\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(ii)",
+            "prompt": "5 (ii) Find the values \\(m\\) and \\(n\\), so that given function \\(f\\) is continuous at \\(x = 3\\): \\[f(x) = \\begin{cases} mx, & x < 3 \\\\ x^2, & x \\ge 3 \\end{cases}\\]",
+            "explanation": "A \"find the constant\" continuity question; this part has only one unknown, \\(m\\) (there is no \\(n\\) in it).\nContinuity at \\(x = 3\\) needs LHL = RHL = \\(f(3)\\).\nPlan: find \\(f(3)\\) and the RHL from \\(x^2\\), then make the LHL \\(3m\\) equal to them.",
+            "steps": [
+              "Given: \\(f(x) = mx\\) for \\(x < 3\\), \\(f(x) = x^2\\) for \\(x \\ge 3\\).\nTo find: \\(m\\) so that \\(f\\) is continuous at \\(x = 3\\).\nMethod: Continuity at 3 means \\(\\lim_{x \\to 3^-} f(x) = \\lim_{x \\to 3^+} f(x) = f(3)\\).",
+              "Value at the point\n\\[f(3) = 3^2 = 9\\]\nWhy: \\(x \\ge 3\\) includes 3, so the piece \\(x^2\\) gives \\(f(3)\\).",
+              "Right hand limit\n\\[\\lim_{x \\to 3^+} f(x) = \\lim_{x \\to 3^+} x^2 = 9\\]\nWhy: Right of 3 the same piece \\(x^2\\) is used.",
+              "Left hand limit\n\\[\\lim_{x \\to 3^-} f(x) = \\lim_{x \\to 3^-} mx = 3m\\]\nWhy: Left of 3 the piece \\(mx\\) is used.",
+              "Make them equal and solve\n\\[3m = 9\\]\n\\[m = \\frac{9}{3} = 3\\]\nWhy: The LHL must equal the RHL and \\(f(3)\\), which are both 9.",
+              "Check\n\\[m = 3:\\ \\lim_{x \\to 3^-} 3x = 9\\]\n\\[\\text{LHL} = \\text{RHL} = f(3) = 9\\]\nWhy: All three conditions hold with \\(m = 3\\). (With \\(m = 4\\) the LHL would be 12, not 9.)"
+            ],
+            "final_answer": "\\(m = 3\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \"(ii) \\(m = 4\\)\". This is wrong: continuity at \\(x = 3\\) needs \\(3m = 3^2 = 9\\), so \\(m = 3\\). With \\(m = 4\\) the left hand limit is 12, which does not equal \\(f(3) = 9\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

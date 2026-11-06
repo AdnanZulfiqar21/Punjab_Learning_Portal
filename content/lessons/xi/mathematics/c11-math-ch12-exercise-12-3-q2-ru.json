@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-3-Q2-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-3-q2",
+      "title": "Question 2 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 240,
+          "pdf_to": 240,
+          "note": "Ex 12.3 Q2: long-term population (book p.235). Key PDF 310 prints '100,00010' (correct 100,000); after Ex 12.3 the key repeats Ex 12.1 Q3-Q4 lines and adds a stray 'EXERCISE 12.4' block (depreciation answers), though the unit has no Exercise 12.4."
+        }
+      ],
+      "variant_of": "C11-MATH-CH12-EXERCISE-12-3-Q2",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2 A town's population is modeled by \\(P(t) = \\dfrac{100{,}000}{1 + 9e^{-0.5t}}\\). What is the long-term population as \\(t \\to \\infty\\)?",
+            "explanation": "Yeh population (aabaadi) ka model hai aur sawal \"long-term\" yani bohat lambe arse baad ki aabaadi poochh raha hai.\nLong-term ka matlab hai \\(t \\to \\infty\\) par limit.\nIs formula ko logistic model kehte hain: aabaadi barhti hai lekin ek hadd tak.\nPlan: denominator mein \\(e^{-0.5t} \\to 0\\) istemal kar ke us ki limit nikalein, phir divide karein.",
+            "steps": [
+              "Diya gaya hai: \\(P(t) = \\dfrac{100{,}000}{1 + 9e^{-0.5t}}\\).\nHumein find karna hai: \\(\\lim_{t \\to \\infty} P(t)\\).\nTareeqa: Quotient (taqseem) ki limit = upar ki limit / neeche ki limit, basharte neeche ki limit 0 na ho.\nBunyadi baat: agar \\(k\\) positive constant ho to \\(t \\to \\infty\\) par \\(e^{kt} \\to \\infty\\), aur \\(e^{-kt} = \\dfrac{1}{e^{kt}} \\to 0\\). Yeh kitab ka \"Important Result\" hai: \\(\\lim_{x \\to \\infty} e^{x} = \\infty\\) aur \\(\\lim_{x \\to -\\infty} e^{x} = 0\\). Wajah simple hai: \\(e \\approx 2.718\\) ko baar baar khud se multiply karte jayein to number behad bara hota jata hai, aur us ka ulta (1 over) behad chhota.",
+              "Exponential term ki limit\n\\[\\lim_{t \\to \\infty} e^{-0.5t} = 0\\]\n\\[\\lim_{t \\to \\infty} 9e^{-0.5t} = 9 \\times 0 = 0\\]\nKyun: \\(e^{-0.5t} = \\frac{1}{e^{0.5t}}\\), aur \\(e^{0.5t}\\) behad bara hota jata hai, is liye yeh term 0 ki taraf jati hai. 9 se multiply karne se bhi 0 hi rehta hai.",
+              "Denominator ki limit\n\\[\\lim_{t \\to \\infty} (1 + 9e^{-0.5t}) = 1 + 0 = 1\\]\nKyun: Jama (sum) ki limit = har term ki limit ka jama. 1 constant hai, wahi rehta hai.\nDhyan dein: Kuch students \\(e^{-0.5t}\\) ko bara samajh kar denominator ko infinity likh dete hain aur jawab 0 nikaal lete hain. Minus power ka matlab chhota hona hai, bara nahi.",
+              "\\(P(t)\\) ki limit\n\\[\\lim_{t \\to \\infty} P(t) = \\frac{100{,}000}{1}\\]\n\\[= 100{,}000\\]\nKyun: Neeche ki limit 1 hai jo zero nahi, is liye quotient rule lag sakta hai.",
+              "Matlab aur tasdeeq\n\\[P(0) = \\frac{100{,}000}{1 + 9} = 10{,}000\\]\n\\[P(20) = \\frac{100{,}000}{1 + 9e^{-10}} \\approx 99{,}959\\]\nKyun: Shehar 10,000 logon se shuru hota hai aur 100,000 ki taraf barhta hai, lekin us se aage nahi jata. 100,000 is shehar ki \"hadd\" (carrying capacity) hai. 20 saal mein hi aabaadi taqreeban 99,959 ho jati hai."
+            ],
+            "final_answer": "Long-term population \\(= 100{,}000\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key mein \"100,00010\" chhapa hai. Yeh chhapai ki ghalti hai: long-term population \\(100{,}000\\) hai."
+          }
+        ]
+      }
+    }
+  ]
+}

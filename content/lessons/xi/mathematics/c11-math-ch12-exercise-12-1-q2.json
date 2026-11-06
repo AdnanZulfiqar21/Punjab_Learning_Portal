@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-1-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-1-q2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 235,
+          "pdf_to": 235,
+          "note": "Exercise 12.1, Question 2 (book page 230): six limits by the theorems, parts (i)-(vi). Key PDF 310: (iv) prints 0 (correct 2 sqrt 2; faint exponent read as 2), (vi) prints 13/4 (correct 13/2); rest agree. Solution book PDF 1054-1057."
+        }
+      ],
+      "title": "Question 2",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Evaluate each limit by using theorems of limits: \\(\\lim\\limits_{x \\to 3} (2x + 4)\\).",
+            "explanation": "We must find the limit of a simple polynomial as \\(x \\to 3\\).\nNothing can go wrong here (no denominator, no root), so the theorems allow direct substitution.\nPlan: split with the sum and constant-multiple theorems, then put \\(x = 3\\).",
+            "steps": [
+              "Given: \\(f(x) = 2x + 4\\), \\(x \\to 3\\).\nTo find: \\(\\lim\\limits_{x \\to 3} (2x + 4)\\).\nMethod: Theorem 1 on limits (12.1.6): the limit of a sum, difference, constant multiple, product, quotient (bottom limit not zero), power or root is found piece by piece. For a polynomial this means: put \\(x = a\\).",
+              "Split the limit\n\\[\\lim_{x \\to 3} (2x + 4) = 2\\lim_{x \\to 3} x + \\lim_{x \\to 3} 4\\]\nWhy: Limit of a sum = sum of the limits (Theorem 1(a)); a constant factor comes outside (Theorem 1(c)).",
+              "Evaluate each piece\n\\[= 2(3) + 4\\]\n\\[= 10\\]\nWhy: \\(\\lim\\limits_{x \\to a} x = a\\) and the limit of a constant is the constant itself (Theorem 1(g)).",
+              "Check\n\\[x = 2.99:\\ 2(2.99) + 4 = 9.98\\]\nWhy: For \\(x\\) very close to \\(3\\), the value is very close to \\(10\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 3} (2x + 4) = 10\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Evaluate each limit by using theorems of limits: \\(\\lim\\limits_{x \\to 1} (3x^2 - 2x + 4)\\).",
+            "explanation": "Limit of a polynomial as \\(x \\to 1\\).\nThe theorems (sum, difference, constant multiple, power) allow direct substitution.\nPlan: split the limit term by term, then put \\(x = 1\\).",
+            "steps": [
+              "Given: \\(f(x) = 3x^2 - 2x + 4\\), \\(x \\to 1\\).\nTo find: \\(\\lim\\limits_{x \\to 1} (3x^2 - 2x + 4)\\).\nMethod: Theorem 1 on limits (12.1.6): the limit of a sum, difference, constant multiple, product, quotient (bottom limit not zero), power or root is found piece by piece. For a polynomial this means: put \\(x = a\\).",
+              "Split the limit term by term\n\\[\\lim_{x \\to 1} (3x^2 - 2x + 4)\\]\n\\[= 3\\lim_{x \\to 1} x^2 - 2\\lim_{x \\to 1} x + \\lim_{x \\to 1} 4\\]\nWhy: Sum and difference theorems (Theorem 1(a), (b)) and the constant-multiple theorem (Theorem 1(c)).",
+              "Evaluate each piece\n\\[= 3(1)^2 - 2(1) + 4\\]\n\\[= 3 - 2 + 4 = 5\\]\nWhy: \\(\\lim\\limits_{x \\to a} x^p = a^p\\) (Theorem 1(g)) and the limit of a constant is the constant.",
+              "Check\n\\[x = 1.01:\\ 3(1.0201) - 2.02 + 4\\]\n\\[= 5.0403\\]\nWhy: Close to \\(5\\), as expected."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 1} (3x^2 - 2x + 4) = 5\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) Evaluate each limit by using theorems of limits: \\(\\lim\\limits_{x \\to 3} \\sqrt{x^2 + x + 4}\\).",
+            "explanation": "Limit of a square root of a polynomial as \\(x \\to 3\\).\nA square root is fine as long as the number under it is not negative near \\(x = 3\\).\nPlan: check the inside, take the limit inside the root, then substitute.",
+            "steps": [
+              "Given: \\(f(x) = \\sqrt{x^2 + x + 4}\\), \\(x \\to 3\\).\nTo find: \\(\\lim\\limits_{x \\to 3} \\sqrt{x^2 + x + 4}\\).\nMethod: Root theorem (Theorem 1(g) with \\(p = 1/2\\)): \\(\\lim \\sqrt{f(x)} = \\sqrt{\\lim f(x)}\\) when the limit inside is positive.",
+              "Check the inside at \\(x = 3\\)\n\\[3^2 + 3 + 4 = 16 > 0\\]\nWhy: Under a square root the number must not be negative; \\(16\\) is positive, so the root is defined near \\(x = 3\\).",
+              "Take the limit inside the root\n\\[\\lim_{x \\to 3} \\sqrt{x^2 + x + 4} = \\sqrt{\\lim_{x \\to 3} (x^2 + x + 4)}\\]\nWhy: The limit of a root is the root of the limit (Theorem 1(g)).",
+              "Substitute and simplify\n\\[= \\sqrt{9 + 3 + 4}\\]\n\\[= \\sqrt{16} = 4\\]\nWhy: The inside is a polynomial, so we put \\(x = 3\\). \\(\\sqrt{16}\\) means the positive root, \\(4\\).",
+              "Check\n\\[x = 3.01:\\ \\sqrt{16.0701} \\approx 4.009\\]\nWhy: Close to \\(4\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 3} \\sqrt{x^2 + x + 4} = 4\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iv)",
+            "prompt": "2 (iv) Evaluate each limit by using theorems of limits: \\(\\lim\\limits_{x \\to 2} \\sqrt{x^2 + 4}\\).",
+            "explanation": "Limit of a square root as \\(x \\to 2\\); same method as part (iii).\nThe inside \\(x^2 + 4\\) is always positive, so the root never causes trouble.\nPlan: take the limit inside the root, substitute, simplify the surd.",
+            "steps": [
+              "Given: \\(f(x) = \\sqrt{x^2 + 4}\\), \\(x \\to 2\\). (The exponent is faint in print; it is \\(2\\), as in part (iii).)\nTo find: \\(\\lim\\limits_{x \\to 2} \\sqrt{x^2 + 4}\\).\nMethod: Root theorem (Theorem 1(g)): \\(\\lim \\sqrt{f(x)} = \\sqrt{\\lim f(x)}\\).",
+              "Check the inside at \\(x = 2\\)\n\\[2^2 + 4 = 8 > 0\\]\nWhy: The number under the root is positive, so the root is defined and substitution is allowed.",
+              "Take the limit inside and substitute\n\\[\\lim_{x \\to 2} \\sqrt{x^2 + 4} = \\sqrt{\\lim_{x \\to 2} (x^2 + 4)}\\]\n\\[= \\sqrt{4 + 4} = \\sqrt{8}\\]\nWhy: The limit of a root is the root of the limit; the inside is a polynomial.",
+              "Simplify the surd\n\\[\\sqrt{8} = \\sqrt{4 \\times 2}\\]\n\\[= 2\\sqrt{2}\\]\nWhy: Take out the perfect square \\(4\\), since \\(\\sqrt{4} = 2\\).",
+              "Check\n\\[x = 2.01:\\ \\sqrt{8.0401} \\approx 2.8355\\]\n\\[2\\sqrt{2} \\approx 2.8284\\]\nWhy: Very close, so the limit is \\(2\\sqrt{2}\\), not \\(0\\). A root of a number that is at least \\(4\\) can never be \\(0\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 2} \\sqrt{x^2 + 4} = 2\\sqrt{2}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(0\\) for part (iv). This is wrong for the question as printed: \\(\\sqrt{x^2 + 4} \\to \\sqrt{8} = 2\\sqrt{2}\\) as \\(x \\to 2\\). The key's \\(0\\) would fit \\(\\sqrt{x^2 - 4}\\). The correct answer is \\(2\\sqrt{2}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(v)",
+            "prompt": "2 (v) Evaluate each limit by using theorems of limits: \\(\\lim\\limits_{x \\to 2} \\left(\\sqrt{x^3 + 1} - \\sqrt{x^2 + 5}\\right)\\).",
+            "explanation": "Limit of a difference of two square roots as \\(x \\to 2\\).\nBoth insides are positive at \\(x = 2\\), so each root may be found by substitution.\nPlan: difference theorem, then the root theorem for each part.",
+            "steps": [
+              "Given: \\(f(x) = \\sqrt{x^3 + 1} - \\sqrt{x^2 + 5}\\), \\(x \\to 2\\).\nTo find: \\(\\lim\\limits_{x \\to 2} f(x)\\).\nMethod: Difference theorem (Theorem 1(b)) and root theorem (Theorem 1(g)).",
+              "Check both insides at \\(x = 2\\)\n\\[2^3 + 1 = 9 > 0\\]\n\\[2^2 + 5 = 9 > 0\\]\nWhy: Both numbers under the roots are positive, so both roots are defined near \\(x = 2\\).",
+              "Split the limit\n\\[\\lim_{x \\to 2} f(x) = \\sqrt{\\lim_{x \\to 2}(x^3 + 1)} - \\sqrt{\\lim_{x \\to 2}(x^2 + 5)}\\]\nWhy: Limit of a difference = difference of the limits; then limit of a root = root of the limit.",
+              "Substitute and simplify\n\\[= \\sqrt{9} - \\sqrt{9}\\]\n\\[= 3 - 3 = 0\\]\nWhy: Each inside is a polynomial, so we put \\(x = 2\\). This \\(0\\) is a real answer (it comes from \\(3 - 3\\), not from a \\(0/0\\) form).",
+              "Check\n\\[x = 2.01:\\ \\sqrt{9.1206} - \\sqrt{9.0401}\\]\n\\[\\approx 3.0200 - 3.0067 = 0.0133\\]\nWhy: Close to \\(0\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 2} \\left(\\sqrt{x^3 + 1} - \\sqrt{x^2 + 5}\\right) = 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(vi)",
+            "prompt": "2 (vi) Evaluate each limit by using theorems of limits: \\(\\lim\\limits_{x \\to 2} \\frac{2x^3 + 5x}{3x - 2}\\).",
+            "explanation": "Limit of a quotient of two polynomials as \\(x \\to 2\\).\nThe quotient theorem can be used only if the bottom does not tend to \\(0\\).\nPlan: check the bottom, find the limits of the top and the bottom, then divide.",
+            "steps": [
+              "Given: \\(f(x) = \\dfrac{2x^3 + 5x}{3x - 2}\\), \\(x \\to 2\\).\nTo find: \\(\\lim\\limits_{x \\to 2} f(x)\\).\nMethod: Quotient theorem (Theorem 1(f)): \\(\\lim \\dfrac{f}{g} = \\dfrac{\\lim f}{\\lim g}\\), provided \\(\\lim g \\ne 0\\).",
+              "Check the bottom at \\(x = 2\\)\n\\[3(2) - 2 = 4 \\ne 0\\]\nWhy: The quotient theorem needs a non-zero limit in the denominator.",
+              "Limit of the top\n\\[\\lim_{x \\to 2} (2x^3 + 5x) = 2(2)^3 + 5(2)\\]\n\\[= 16 + 10 = 26\\]\nWhy: A polynomial: substitute. Note \\(2^3 = 8\\), so \\(2(8) = 16\\).",
+              "Divide\n\\[\\lim_{x \\to 2} f(x) = \\frac{26}{4}\\]\n\\[= \\frac{13}{2}\\]\nWhy: Quotient theorem; then cancel the common factor \\(2\\).",
+              "Check\n\\[x = 2.01:\\ \\frac{2(8.1206) + 10.05}{4.03}\\]\n\\[= \\frac{26.2912}{4.03} \\approx 6.524\\]\nWhy: This is close to \\(13/2 = 6.5\\), not to \\(13/4 = 3.25\\)."
+            ],
+            "final_answer": "\\(\\lim\\limits_{x \\to 2} \\dfrac{2x^3 + 5x}{3x - 2} = \\dfrac{13}{2}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(\\frac{13}{4}\\) for part (vi). This is wrong: the top tends to \\(26\\) and the bottom to \\(4\\), so the limit is \\(\\frac{26}{4} = \\frac{13}{2}\\). The correct answer is \\(\\frac{13}{2}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

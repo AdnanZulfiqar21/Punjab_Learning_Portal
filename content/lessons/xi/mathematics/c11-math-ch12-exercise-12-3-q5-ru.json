@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-EXERCISE-12-3-Q5-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-exercise-12-3-q5",
+      "title": "Question 5 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 241,
+          "pdf_to": 241,
+          "note": "Exercise 12.3, Question 5 (i)-(ii): stock price P(t) = 50e^(0.05t) (book p.236). Answer key PDF 310: infinity, 82.44."
+        }
+      ],
+      "variant_of": "C11-MATH-CH12-EXERCISE-12-3-Q5",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(i)",
+            "prompt": "5 (i) A stock price grows according to the function \\(P(t) = 50e^{0.05t}\\). Find the limit of \\(P(t)\\) as \\(t \\to \\infty\\).",
+            "explanation": "Yeh limit at infinity ka sawal hai, lekin is dafa exponential barh raha hai (power positive hai).\nHumein dekhna hai ke bohat lambe waqt baad stock ki qeemat ka kya hota hai.\nPlan: \\(e^{0.05t} \\to \\infty\\) istemal karein aur 50 (positive constant) se multiply karein.",
+            "steps": [
+              "Diya gaya hai: \\(P(t) = 50e^{0.05t}\\).\nHumein find karna hai: \\(\\lim_{t \\to \\infty} P(t)\\).\nTareeqa: Power \\(0.05t\\) positive hai aur \\(t\\) ke saath barhti jati hai.\nBunyadi baat: agar \\(k\\) positive constant ho to \\(t \\to \\infty\\) par \\(e^{kt} \\to \\infty\\), aur \\(e^{-kt} = \\dfrac{1}{e^{kt}} \\to 0\\). Yeh kitab ka \"Important Result\" hai: \\(\\lim_{x \\to \\infty} e^{x} = \\infty\\) aur \\(\\lim_{x \\to -\\infty} e^{x} = 0\\). Wajah simple hai: \\(e \\approx 2.718\\) ko baar baar khud se multiply karte jayein to number behad bara hota jata hai, aur us ka ulta (1 over) behad chhota.",
+              "Exponential ka rawayya\n\\[t \\to \\infty \\Rightarrow 0.05t \\to \\infty\\]\n\\[e^{0.05t} \\to \\infty\\]\nKyun: \\(0.05\\) chhota number zaroor hai, lekin \\(t\\) jitna chahein bara ho sakta hai, is liye \\(0.05t\\) bhi behad bara ho jata hai, aur \\(e\\) ki bari positive power behad bari hoti hai.\nDhyan dein: Power ke chhote coefficient (0.05) ko dekh kar yeh na samjhein ke function ruk jayega; sirf raftaar kam hai, rukta nahi.",
+              "50 se multiply karein\n\\[\\lim_{t \\to \\infty} 50e^{0.05t} = \\infty\\]\nKyun: Positive constant ko kisi behad barhte number se multiply karein to woh bhi behad barhta hai. \\(\\infty\\) koi number nahi; is ka matlab hai ke qeemat ki koi hadd nahi, woh barhti hi jayegi.",
+              "Tasdeeq\n\\[P(100) = 50e^{5} \\approx 7420.7\\]\n\\[P(200) = 50e^{10} \\approx 1{,}101{,}323\\]\nKyun: Waqt dugna hone par qeemat kai sau guna ho gayi. Values ki koi hadd nazar nahi aati, jaisa limit ne bataya."
+            ],
+            "final_answer": "\\(\\lim_{t \\to \\infty} P(t) = \\infty\\) (qeemat ki koi hadd nahi, barhti hi jati hai)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(ii)",
+            "prompt": "5 (ii) A stock price grows according to the function \\(P(t) = 50e^{0.05t}\\). Calculate the price after 10 years.",
+            "explanation": "Yeh seedha value nikalne ka sawal hai: 10 saal baad qeemat.\n\"After 10 years\" ka matlab hai \\(t = 10\\).\nPlan: formula mein \\(t = 10\\) rakhein, phir calculator se \\(e^{0.5}\\) nikalein.",
+            "steps": [
+              "Diya gaya hai: \\(P(t) = 50e^{0.05t}\\), \\(t\\) saalon mein.\nHumein find karna hai: \\(P(10)\\).\nTareeqa: \\(t\\) ki jagah 10 rakhenge.",
+              "Power nikalein\n\\[0.05 \\times 10 = 0.5\\]\n\\[P(10) = 50e^{0.5}\\]\nKyun: Pehle power ka hisaab kar lena aasaan rehta hai, phir \\(e\\) ki value.",
+              "Value nikalein\n\\[e^{0.5} \\approx 1.64872\\]\n\\[P(10) \\approx 50 \\times 1.64872\\]\n\\[\\approx 82.44\\]\nKyun: Calculator mein \\(e^x\\) ka button use kar ke 0.5 daalein to 1.64872 aata hai. Phir 50 se multiply. Paise ki baat hai, is liye do decimal tak round kiya.\nDhyan dein: \\(50e^{0.5}\\) ko \\((50e)^{0.5}\\) samajhna ghalti hai; power sirf \\(e\\) par hai, 50 par nahi.",
+              "Tasdeeq\n\\[\\frac{82.44}{50} \\approx 1.6488 \\approx e^{0.5}\\]\nKyun: Jawab ko 50 se divide karne par wapas \\(e^{0.5}\\) mil gaya, is liye hisaab sahi hai."
+            ],
+            "final_answer": "\\(P(10) = 50e^{0.5} \\approx 82.44\\)"
+          }
+        ]
+      }
+    }
+  ]
+}
