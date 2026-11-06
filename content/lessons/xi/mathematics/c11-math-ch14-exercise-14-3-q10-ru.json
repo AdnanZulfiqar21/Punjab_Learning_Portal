@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-3-Q10-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-3-q10",
+      "title": "Question 10 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 288,
+          "pdf_to": 288,
+          "note": "Exercise 14.3, Question 10: sin(a - b) by the cross product of two unit vectors (book p.283). The book prints + instead of - on the right side. Proof, no key answer."
+        }
+      ],
+      "variant_of": "C11-MATH-CH14-EXERCISE-14-3-Q10",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10. Prove that: \\(\\sin(\\alpha - \\beta) = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta\\) [printed with \\(+\\cos\\alpha\\sin\\beta\\)].",
+            "explanation": "Yeh trigonometry ka formula hai jo vectors se saabit karna hai.\nIdea: ek hi cross product do tareeqon se nikalein aur dono ko barabar rakhein.\nPlan: \\(\\alpha\\) aur \\(\\beta\\) angles par do unit vectors; definition se \\(\\sin(\\alpha - \\beta)\\) aayega aur determinant se right side.",
+            "steps": [
+              "Diya gaya hai: angles \\(\\alpha\\) aur \\(\\beta\\) (maan lein \\(\\alpha > \\beta\\)).\nSaabit karna hai: \\(\\sin(\\alpha - \\beta) = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta\\).\nTareeqa: Example 17 jaisa: \\(xy\\)-plane mein do unit vectors \\(\\underline{OA}\\) aur \\(\\underline{OB}\\) banayein jo \\(x\\)-axis ke saath \\(\\alpha\\) aur \\(\\beta\\) angle banate hain. Dono ka aapas mein angle \\(\\alpha - \\beta\\) hai. Cross product ki definition mein \\(\\sin\\) aata hai, isi liye sine ka formula is se nikalta hai.",
+              "Dono unit vectors likhein\n\\[\\underline{OA} = \\cos\\alpha\\,\\underline{i} + \\sin\\alpha\\,\\underline{j}\\]\n\\[\\underline{OB} = \\cos\\beta\\,\\underline{i} + \\sin\\beta\\,\\underline{j}\\]\nKyun: Unit circle (radius 1 wala daira) par angle \\(\\alpha\\) wale point ke coordinates \\((\\cos\\alpha, \\sin\\alpha)\\) hote hain; yahi vector ke components hain. Lambai \\(\\sqrt{\\cos^2\\alpha + \\sin^2\\alpha} = 1\\), is liye yeh unit vector hai.",
+              "Definition se cross product\n\\[\\underline{OB} \\times \\underline{OA} = (1)(1)\\sin(\\alpha - \\beta)\\,\\underline{k}\\]\n\\[= \\sin(\\alpha - \\beta)\\,\\underline{k} \\quad (1)\\]\nKyun: Dono ki lambai 1 hai, \\(\\underline{OB}\\) se \\(\\underline{OA}\\) tak angle \\(\\alpha - \\beta\\) hai. \\(\\underline{OB}\\) se \\(\\underline{OA}\\) ki taraf ghoomna ghari ki sui ke ulat (anticlockwise) hai, is liye right hand rule ka angootha upar, yani \\(+\\underline{k}\\).\nDhyan dein: \\(\\underline{OA} \\times \\underline{OB}\\) lete to rukh \\(-\\underline{k}\\) hota; tarteeb soch samajh kar chunein.",
+              "Wohi cross product determinant se\n\\[\\underline{OB} \\times \\underline{OA} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ \\cos\\beta & \\sin\\beta & 0 \\\\ \\cos\\alpha & \\sin\\alpha & 0 \\end{vmatrix}\\]\n\\[= \\underline{i}(0) - \\underline{j}(0)\\]\n\\[+ \\underline{k}(\\cos\\beta\\sin\\alpha - \\sin\\beta\\cos\\alpha)\\]\n\\[= (\\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta)\\,\\underline{k} \\quad (2)\\]\nKyun: Dono vectors ka \\(\\underline{k}\\) component 0 hai, is liye \\(\\underline{i}\\) aur \\(\\underline{j}\\) ke minors mein har product mein 0 aata hai. Sirf \\(\\underline{k}\\) wala minor bachta hai.",
+              "(1) aur (2) ko compare karein\n\\[\\sin(\\alpha - \\beta) = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta\\]\nKyun: Ek hi vector ko do tareeqon se likha; dono barabar hain, is liye \\(\\underline{k}\\) ke coefficients bhi barabar.",
+              "Numbers se tasdeeq\n\\[\\alpha = 90^{\\circ},\\ \\beta = 30^{\\circ}:\\ \\sin 60^{\\circ} = \\tfrac{\\sqrt{3}}{2}\\]\n\\[(1)\\tfrac{\\sqrt{3}}{2} - (0)\\tfrac{1}{2} = \\tfrac{\\sqrt{3}}{2}\\]\nKyun: Dono taraf \\(\\tfrac{\\sqrt{3}}{2}\\) aaya. Kitab wala \\(+\\) sign lein to \\(\\alpha = \\beta = 45^{\\circ}\\) par left side \\(\\sin 0 = 0\\) aur right side \\(1\\) aata, jo mumkin nahi; is se pata chalta hai ke sahi sign minus hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\sin(\\alpha - \\beta) = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein \\(\\sin(\\alpha - \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta\\) chhapa hai, jo ghalat hai: plus wali right side to \\(\\sin(\\alpha + \\beta)\\) hai. Sahi formula \\(\\sin(\\alpha - \\beta) = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta\\) hai, aur cross product yahi saabit karta hai. Yaad rakhne ka tareeqa: sine ke formula mein beech ka sign wohi hota hai jo angle mein hai."
+          }
+        ]
+      }
+    }
+  ]
+}

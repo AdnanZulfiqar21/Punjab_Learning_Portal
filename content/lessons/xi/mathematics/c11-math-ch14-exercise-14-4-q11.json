@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-4-Q11",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-4-q11",
+      "title": "Question 11",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 295,
+          "pdf_to": 295,
+          "note": "Exercise 14.4 Q11, book p.290 (PDF 295). Key PDF 312: 150j - 100k (pound feet), correct (sympy). Solution book PDF 1286-1287 agrees."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11 A mechanic applies a force of 50 pounds along the positive x-axis on a wrench connected to a bolt. The pivot point of the wrench is at the origin \\((0, 0, 0)\\), and the force is applied at the point \\((0 \\text{ ft}, 2 \\text{ ft}, 3 \\text{ ft})\\). Determine the torque produced by this force about the pivot point.",
+            "explanation": "A real-life cross product question: torque (turning effect) \\(\\underline{\\tau} = \\underline{r} \\times \\underline{F}\\).\nWe must find the torque vector about the origin.\nPlan: write \\(\\underline{F}\\) and \\(\\underline{r}\\) as vectors, then take the determinant for \\(\\underline{r} \\times \\underline{F}\\).",
+            "steps": [
+              "Given: force 50 lb along the positive \\(x\\)-axis; pivot \\(O(0, 0, 0)\\); point of application \\(P(0, 2, 3)\\) ft.\nTo find: the torque \\(\\underline{\\tau}\\) about \\(O\\).\nMethod: \\(\\underline{\\tau} = \\underline{r} \\times \\underline{F}\\), where \\(\\underline{r} = \\overrightarrow{OP}\\) runs from the pivot to the point where the force acts (Key Concept, 14.4.6).",
+              "Write the vectors\n\\[\\underline{F} = 50\\underline{i} + 0\\underline{j} + 0\\underline{k}\\]\n\\[\\underline{r} = \\overrightarrow{OP} = 0\\underline{i} + 2\\underline{j} + 3\\underline{k}\\]\nWhy: \"50 pounds along the positive \\(x\\)-axis\" is 50 in the \\(\\underline{i}\\) direction only. The pivot is the origin, so \\(\\underline{r}\\) is just the coordinates of \\(P\\).",
+              "Cross product\n\\[\\underline{\\tau} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 0 & 2 & 3 \\\\ 50 & 0 & 0 \\end{vmatrix}\\]\n\\[= (0 - 0)\\underline{i} - (0 - 150)\\underline{j} + (0 - 100)\\underline{k}\\]\n\\[= 150\\underline{j} - 100\\underline{k}\\]\nWhy: Minors \\((2)(0) - (3)(0) = 0\\), \\((0)(0) - (3)(50) = -150\\) (with sign \\(-\\) gives \\(+150\\)), \\((0)(0) - (2)(50) = -100\\). The order is \\(\\underline{r}\\) first, then \\(\\underline{F}\\).",
+              "Size and check\n\\[|\\underline{\\tau}| = \\sqrt{150^2 + 100^2} = 50\\sqrt{13}\\]\n\\[\\approx 180.3 \\text{ lb-ft}\\]\n\\[\\underline{\\tau} \\cdot \\underline{F} = 0,\\quad \\underline{\\tau} \\cdot \\underline{r} = 300 - 300 = 0 \\;\\checkmark\\]\nWhy: Torque must be perpendicular to both \\(\\underline{r}\\) and \\(\\underline{F}\\), and it is. The units are pound \\(\\times\\) foot."
+            ],
+            "final_answer": "\\(\\underline{\\tau} = 150\\underline{j} - 100\\underline{k}\\) pound-feet (magnitude \\(50\\sqrt{13} \\approx 180.3\\) lb-ft)"
+          }
+        ]
+      }
+    }
+  ]
+}

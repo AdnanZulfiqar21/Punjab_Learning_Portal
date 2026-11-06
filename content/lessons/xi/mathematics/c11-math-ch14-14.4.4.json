@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-14.4.4",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/14.4.4",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 290,
+          "pdf_to": 292,
+          "note": "Book p. 285-287: 14.4.4 determinant formula for u.(v x w) in components; Example 23 (dot and cross interchange), 24 (i.j x k = 1), 25 (parallelepiped, 48), 26 (tetrahedron, 2/3). Teaching notes, Key points, mistakes are ours."
+        }
+      ],
+      "title": "14.4.4 Scalar Triple Product of Vectors in Terms of Components",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Let \\(\\underline{u} = a_1\\underline{i} + b_1\\underline{j} + c_1\\underline{k}\\), \\(\\underline{v} = a_2\\underline{i} + b_2\\underline{j} + c_2\\underline{k}\\) and \\(\\underline{w} = a_3\\underline{i} + b_3\\underline{j} + c_3\\underline{k}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Now,\n\\[\\underline{v}\\times \\underline{w} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ a_2 & b_2 & c_2 \\\\ a_3 & b_3 & c_3 \\end{vmatrix}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\Rightarrow \\underline{v}\\times \\underline{w} = (b_2c_3 - b_3c_2)\\underline{i}\\]\n\\[- (a_2c_3 - a_3c_2)\\underline{j}\\]\n\\[+ (a_2b_3 - a_3b_2)\\underline{k}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This is the determinant formula for the cross product from 14.3: the \\(\\underline{i}\\) term deletes the first column, the \\(\\underline{j}\\) term (with a minus sign) the second, and the \\(\\underline{k}\\) term the third."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\therefore\\ \\underline{u}\\cdot(\\underline{v}\\times \\underline{w})\\]\n\\[= a_1(b_2c_3 - b_3c_2)\\]\n\\[- b_1(a_2c_3 - a_3c_2)\\]\n\\[+ c_1(a_2b_3 - a_3b_2)\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The dot product multiplies matching components and adds: the \\(\\underline{i}\\)-component of \\(\\underline{v}\\times \\underline{w}\\) is multiplied by \\(a_1\\), the \\(\\underline{j}\\)-component by \\(b_1\\) and the \\(\\underline{k}\\)-component by \\(c_1\\). The result is exactly the expansion of a \\(3\\times 3\\) determinant along its first row, so"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(\\Rightarrow\\)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\underline{u}\\cdot(\\underline{v}\\times \\underline{w}) = \\begin{vmatrix} a_1 & b_1 & c_1 \\\\ a_2 & b_2 & c_2 \\\\ a_3 & b_3 & c_3 \\end{vmatrix}",
+            "text_alt": "u dot (v cross w) equals the determinant with rows a1 b1 c1, a2 b2 c2, a3 b3 c3"
+          },
+          {
+            "type": "paragraph",
+            "text": "Which is called the determinant formula for scalar triple product of \\(\\underline{u}\\), \\(\\underline{v}\\) and \\(\\underline{w}\\) in component form.",
+            "bold": [
+              "determinant formula"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to use the formula: write the components of the three vectors as the three rows, in the same order as in \\([\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\), and expand.\nTwo rules about determinants explain the properties of the triple product:\n1. Interchanging two rows changes the sign. So swapping two vectors changes the sign: \\([\\underline{v}\\ \\underline{u}\\ \\underline{w}] = -[\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\).\n2. A cyclic change \\(\\underline{u}, \\underline{v}, \\underline{w} \\to \\underline{v}, \\underline{w}, \\underline{u}\\) is two interchanges, so the sign does not change. This proves again that \\([\\underline{u}\\ \\underline{v}\\ \\underline{w}] = [\\underline{v}\\ \\underline{w}\\ \\underline{u}] = [\\underline{w}\\ \\underline{u}\\ \\underline{v}]\\).\nAlso, a determinant with two equal rows is \\(0\\) (used in 14.4.5)."
+          },
+          {
+            "type": "example",
+            "title": "Example 23",
+            "problem": "Prove that dot and cross product are inter changeable in scalar triple product.",
+            "steps": [
+              "Given: \\(\\underline{u} = a_1\\underline{i} + b_1\\underline{j} + c_1\\underline{k}\\), \\(\\underline{v} = a_2\\underline{i} + b_2\\underline{j} + c_2\\underline{k}\\), \\(\\underline{w} = a_3\\underline{i} + b_3\\underline{j} + c_3\\underline{k}\\), arbitrary vectors.\nTo prove: \\(\\underline{u}\\cdot(\\underline{v}\\times \\underline{w}) = (\\underline{u}\\times \\underline{v})\\cdot \\underline{w}\\).\nMethod: write the left side with the determinant formula, then rearrange the rows. Interchanging two rows of a determinant changes its sign, so two interchanges bring the sign back.",
+              "Step 1: Write the determinant formula\n\\[\\underline{u}\\cdot(\\underline{v}\\times \\underline{w}) = \\begin{vmatrix} a_1 & b_1 & c_1 \\\\ a_2 & b_2 & c_2 \\\\ a_3 & b_3 & c_3 \\end{vmatrix}\\]\nWhy: this is the determinant formula just derived; its rows are \\(\\underline{u}\\), \\(\\underline{v}\\), \\(\\underline{w}\\) in order.",
+              "Step 2: Interchange \\(R_1\\) and \\(R_2\\)\n\\[= -\\begin{vmatrix} a_2 & b_2 & c_2 \\\\ a_1 & b_1 & c_1 \\\\ a_3 & b_3 & c_3 \\end{vmatrix}\\]\nWhy: one interchange of rows multiplies a determinant by \\(-1\\), so we put a minus sign in front.",
+              "Step 3: Interchange \\(R_1\\) and \\(R_3\\)\n\\[= \\begin{vmatrix} a_3 & b_3 & c_3 \\\\ a_1 & b_1 & c_1 \\\\ a_2 & b_2 & c_2 \\end{vmatrix}\\]\nWhy: a second interchange multiplies by \\(-1\\) again, and \\((-1)(-1) = 1\\), so the minus sign disappears.",
+              "Step 4: Read the new determinant as a triple product\n\\[= \\underline{w}\\cdot(\\underline{u}\\times \\underline{v})\\]\n\\[= (\\underline{u}\\times \\underline{v})\\cdot \\underline{w}\\]\nWhy: the rows are now \\(\\underline{w}\\), \\(\\underline{u}\\), \\(\\underline{v}\\), so by the determinant formula this is \\(\\underline{w}\\cdot(\\underline{u}\\times \\underline{v})\\). The dot product is commutative (\\(\\underline{a}\\cdot \\underline{b} = \\underline{b}\\cdot \\underline{a}\\)), so it equals \\((\\underline{u}\\times \\underline{v})\\cdot \\underline{w}\\).",
+              "Step 5: Conclusion\n\\[\\underline{u}\\cdot(\\underline{v}\\times \\underline{w}) = (\\underline{u}\\times \\underline{v})\\cdot \\underline{w}\\]\nWhy: we started from the left side and reached the right side using only allowed steps. On the left the dot comes first and the cross second; on the right it is the other way round.",
+              "Check: with \\(\\underline{u} = \\underline{i} + \\underline{j}\\), \\(\\underline{v} = \\underline{j} + \\underline{k}\\), \\(\\underline{w} = \\underline{i} + \\underline{k}\\):\n\\(\\underline{v}\\times \\underline{w} = \\underline{i} + \\underline{j} - \\underline{k}\\), so \\(\\underline{u}\\cdot(\\underline{v}\\times \\underline{w}) = 1 + 1 + 0 = 2\\);\n\\(\\underline{u}\\times \\underline{v} = \\underline{i} - \\underline{j} + \\underline{k}\\), so \\((\\underline{u}\\times \\underline{v})\\cdot \\underline{w} = 1 + 0 + 1 = 2\\). Both sides agree."
+            ],
+            "answer": "\\(\\underline{u}\\cdot(\\underline{v}\\times \\underline{w}) = (\\underline{u}\\times \\underline{v})\\cdot \\underline{w}\\): the position of dot and cross can be interchanged in the scalar triple product."
+          },
+          {
+            "type": "example",
+            "title": "Example 24",
+            "problem": "Assuming \\(\\underline{i}\\), \\(\\underline{j}\\) and \\(\\underline{k}\\) are unit vectors in a cartesian coordinate system. Prove that \\(\\underline{i}\\cdot \\underline{j}\\times \\underline{k} = \\underline{j}\\cdot \\underline{k}\\times \\underline{i} = \\underline{k}\\cdot \\underline{i}\\times \\underline{j}\\).",
+            "steps": [
+              "Given: \\(\\underline{i}, \\underline{j}, \\underline{k}\\) are the unit vectors along the \\(x\\), \\(y\\), \\(z\\) axes.\nTo prove: \\(\\underline{i}\\cdot \\underline{j}\\times \\underline{k} = \\underline{j}\\cdot \\underline{k}\\times \\underline{i} = \\underline{k}\\cdot \\underline{i}\\times \\underline{j}\\).\nMethod: write each unit vector in component form and evaluate each scalar triple product with the determinant formula; show all three equal the same number.",
+              "Step 1: Write the unit vectors in component form\n\\[\\underline{i} = \\underline{i} + 0\\underline{j} + 0\\underline{k}\\]\n\\[\\underline{j} = 0\\underline{i} + \\underline{j} + 0\\underline{k}\\]\n\\[\\underline{k} = 0\\underline{i} + 0\\underline{j} + \\underline{k}\\]\nWhy: the determinant formula needs the three components of each vector; a missing component is \\(0\\).",
+              "Step 2: Evaluate \\(\\underline{i}\\cdot \\underline{j}\\times \\underline{k}\\)\n\\[\\underline{i}\\cdot \\underline{j}\\times \\underline{k} = \\begin{vmatrix} 1 & 0 & 0 \\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{vmatrix}\\]\n\\[= 1(1 - 0) - 0(0 - 1) + 0(0 - 0)\\]\n\\[= 1\\]\nWhy: the rows are the components of \\(\\underline{i}\\), \\(\\underline{j}\\), \\(\\underline{k}\\) in that order; we expand along the first row with signs \\(+, -, +\\).",
+              "Step 3: Evaluate \\(\\underline{j}\\cdot \\underline{k}\\times \\underline{i}\\)\n\\[\\underline{j}\\cdot \\underline{k}\\times \\underline{i} = \\begin{vmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 1 & 0 & 0 \\end{vmatrix}\\]\n\\[= 0(0 - 0) - 1(0 - 1) + 0(0 - 0)\\]\n\\[= 1\\]\nWhy: now the rows are \\(\\underline{j}\\), \\(\\underline{k}\\), \\(\\underline{i}\\). Only the middle element of the first row is non-zero, and its sign is minus: \\(-1(0 - 1) = 1\\).",
+              "Step 4: Evaluate \\(\\underline{k}\\cdot \\underline{i}\\times \\underline{j}\\)\n\\[\\underline{k}\\cdot \\underline{i}\\times \\underline{j} = \\begin{vmatrix} 0 & 0 & 1 \\\\ 1 & 0 & 0 \\\\ 0 & 1 & 0 \\end{vmatrix}\\]\n\\[= 0(0 - 0) - 0(0 - 1) + 1(1 - 0)\\]\n\\[= 1\\]\nWhy: the rows are \\(\\underline{k}\\), \\(\\underline{i}\\), \\(\\underline{j}\\); only the last term survives.",
+              "Step 5: Conclusion\n\\[\\underline{i}\\cdot \\underline{j}\\times \\underline{k} = \\underline{j}\\cdot \\underline{k}\\times \\underline{i} = \\underline{k}\\cdot \\underline{i}\\times \\underline{j} = 1\\]\nWhy: all three values are \\(1\\).",
+              "Check: from 14.3, \\(\\underline{j}\\times \\underline{k} = \\underline{i}\\), \\(\\underline{k}\\times \\underline{i} = \\underline{j}\\), \\(\\underline{i}\\times \\underline{j} = \\underline{k}\\). So the products are \\(\\underline{i}\\cdot \\underline{i}\\), \\(\\underline{j}\\cdot \\underline{j}\\), \\(\\underline{k}\\cdot \\underline{k}\\), each equal to \\(1\\). Geometrically this is the volume of the unit cube."
+            ],
+            "answer": "\\(\\underline{i}\\cdot \\underline{j}\\times \\underline{k} = \\underline{j}\\cdot \\underline{k}\\times \\underline{i} = \\underline{k}\\cdot \\underline{i}\\times \\underline{j} = 1\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 25",
+            "problem": "Find the volume of the parallelepiped determined by \\(\\underline{u} = \\underline{i} + 2\\underline{j} - \\underline{k}\\), \\(\\underline{v} = \\underline{i} - 2\\underline{j} + 3\\underline{k}\\), \\(\\underline{w} = \\underline{i} - 7\\underline{j} - 4\\underline{k}\\).",
+            "steps": [
+              "Given: \\(\\underline{u} = \\underline{i} + 2\\underline{j} - \\underline{k}\\), \\(\\underline{v} = \\underline{i} - 2\\underline{j} + 3\\underline{k}\\), \\(\\underline{w} = \\underline{i} - 7\\underline{j} - 4\\underline{k}\\).\nTo find: the volume of the parallelepiped with these three vectors as edges.\nMethod: the volume is the scalar triple product \\(\\underline{u}\\cdot \\underline{v}\\times \\underline{w}\\) (14.4.2), and the determinant formula (14.4.4) computes it from the components.",
+              "Step 1: Set up the determinant\n\\[V = \\underline{u}\\cdot \\underline{v}\\times \\underline{w}\\]\n\\[= \\begin{vmatrix} 1 & 2 & -1 \\\\ 1 & -2 & 3 \\\\ 1 & -7 & -4 \\end{vmatrix}\\]\nWhy: row 1 holds the components of \\(\\underline{u}\\), row 2 of \\(\\underline{v}\\), row 3 of \\(\\underline{w}\\). Each sign goes with its number.",
+              "Step 2: First term (element \\(1\\), sign \\(+\\))\n\\[1\\big[(-2)(-4) - (3)(-7)\\big]\\]\n\\[= 1(8 + 21) = 29\\]\nWhy: delete row 1 and column 1; the \\(2\\times 2\\) left over is \\(\\begin{vmatrix} -2 & 3 \\\\ -7 & -4 \\end{vmatrix}\\).",
+              "Step 3: Second term (element \\(2\\), sign \\(-\\))\n\\[-2\\big[(1)(-4) - (3)(1)\\big]\\]\n\\[= -2(-4 - 3) = 14\\]\nWhy: the middle element of the first row always takes a minus sign; minus times minus gives plus.",
+              "Step 4: Third term (element \\(-1\\), sign \\(+\\))\n\\[+(-1)\\big[(1)(-7) - (-2)(1)\\big]\\]\n\\[= -1(-7 + 2) = 5\\]\nWhy: delete row 1 and column 3; the \\(2\\times 2\\) left over is \\(\\begin{vmatrix} 1 & -2 \\\\ 1 & -7 \\end{vmatrix}\\).",
+              "Step 5: Add the three terms\n\\[V = 29 + 14 + 5 = 48\\]\nWhy: the determinant is the sum of the three terms. The result is positive, so it is the volume itself.",
+              "Check: \\(\\underline{v}\\times \\underline{w} = 29\\underline{i} + 7\\underline{j} - 5\\underline{k}\\) (cross product of \\(\\underline{v}\\) and \\(\\underline{w}\\)). Then \\(\\underline{u}\\cdot(\\underline{v}\\times \\underline{w}) = (1)(29) + (2)(7) + (-1)(-5) = 29 + 14 + 5 = 48\\). Same answer."
+            ],
+            "answer": "Volume of the parallelepiped \\(= 48\\) cubic units."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "In volume questions write the unit: cubic units. If the determinant comes out negative, the volume is its absolute value."
+          },
+          {
+            "type": "example",
+            "title": "Example 26",
+            "problem": "Find the volume of the tetrahedron whose vertices are \\(A(2, 1, 8)\\), \\(B(3, 2, 9)\\), \\(C(2, 1, 4)\\) and \\(D(3, 3, 0)\\).",
+            "steps": [
+              "Given: vertices \\(A(2, 1, 8)\\), \\(B(3, 2, 9)\\), \\(C(2, 1, 4)\\), \\(D(3, 3, 0)\\).\nTo find: the volume of the tetrahedron \\(ABCD\\).\nMethod: take the three edges from one vertex, \\(\\underline{AB}\\), \\(\\underline{AC}\\), \\(\\underline{AD}\\), and use \\(V = \\frac{1}{6}[\\underline{AB}\\ \\underline{AC}\\ \\underline{AD}]\\) (14.4.3).",
+              "Step 1: Edge \\(\\underline{AB}\\)\n\\[\\underline{AB} = \\underline{OB} - \\underline{OA}\\]\n\\[= (3-2)\\underline{i} + (2-1)\\underline{j} + (9-8)\\underline{k}\\]\n\\[= \\underline{i} + \\underline{j} + \\underline{k}\\]\nWhy: a vector from \\(A\\) to \\(B\\) is (position vector of \\(B\\)) \\(-\\) (position vector of \\(A\\)): subtract the coordinates of \\(A\\) from those of \\(B\\).",
+              "Step 2: Edge \\(\\underline{AC}\\)\n\\[\\underline{AC} = \\underline{OC} - \\underline{OA}\\]\n\\[= (2-2)\\underline{i} + (1-1)\\underline{j} + (4-8)\\underline{k}\\]\n\\[= 0\\underline{i} + 0\\underline{j} - 4\\underline{k}\\]\nWhy: same rule, end point minus starting point.",
+              "Step 3: Edge \\(\\underline{AD}\\)\n\\[\\underline{AD} = \\underline{OD} - \\underline{OA}\\]\n\\[= (3-2)\\underline{i} + (3-1)\\underline{j} + (0-8)\\underline{k}\\]\n\\[= \\underline{i} + 2\\underline{j} - 8\\underline{k}\\]\nWhy: same rule. All three edges start at \\(A\\), as the formula requires.",
+              "Step 4: Set up the formula\n\\[V = \\dfrac{1}{6}[\\underline{AB}\\ \\underline{AC}\\ \\underline{AD}]\\]\n\\[= \\dfrac{1}{6}\\begin{vmatrix} 1 & 1 & 1 \\\\ 0 & 0 & -4 \\\\ 1 & 2 & -8 \\end{vmatrix}\\]\nWhy: the rows are the components of \\(\\underline{AB}\\), \\(\\underline{AC}\\), \\(\\underline{AD}\\).",
+              "Step 5: Expand along the first row\n\\[= \\dfrac{1}{6}\\big[1(0 + 8) - 1(0 + 4) + 1(0 - 0)\\big]\\]\n\\[= \\dfrac{1}{6}(8 - 4) = \\dfrac{4}{6} = \\dfrac{2}{3}\\]\nWhy: first term \\(1\\big[(0)(-8) - (-4)(2)\\big] = 8\\); second \\(-1\\big[(0)(-8) - (-4)(1)\\big] = -4\\); third \\(1\\big[(0)(2) - (0)(1)\\big] = 0\\).",
+              "Check: \\(\\underline{AC}\\times \\underline{AD} = 8\\underline{i} - 4\\underline{j} + 0\\underline{k}\\), and \\(\\underline{AB}\\cdot(\\underline{AC}\\times \\underline{AD}) = 8 - 4 + 0 = 4\\), so \\(V = \\frac{4}{6} = \\frac{2}{3}\\). The value is positive, so no sign needs to be dropped."
+            ],
+            "answer": "Volume of the tetrahedron \\(= \\frac{2}{3}\\) cubic units."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\([\\underline{u}\\ \\underline{v}\\ \\underline{w}] = \\begin{vmatrix} a_1 & b_1 & c_1 \\\\ a_2 & b_2 & c_2 \\\\ a_3 & b_3 & c_3 \\end{vmatrix}\\): rows in the order \\(\\underline{u}, \\underline{v}, \\underline{w}\\).\n2. Swapping two rows (vectors) changes the sign; a cyclic change does not.\n3. Dot and cross can be interchanged: \\(\\underline{u}\\cdot(\\underline{v}\\times \\underline{w}) = (\\underline{u}\\times \\underline{v})\\cdot \\underline{w}\\).\n4. \\(\\underline{i}\\cdot \\underline{j}\\times \\underline{k} = 1\\).\n5. Parallelepiped: \\(V = |[\\underline{u}\\ \\underline{v}\\ \\underline{w}]|\\); tetrahedron \\(ABCD\\): \\(V = \\frac{1}{6}|[\\underline{AB}\\ \\underline{AC}\\ \\underline{AD}]|\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Forgetting the minus sign of the middle term when expanding.\n2. Losing a negative sign inside a row, e.g. writing \\(-7\\) as \\(7\\).\n3. In a tetrahedron question, putting the coordinates of the vertices into the determinant instead of the edge vectors \\(\\underline{AB}, \\underline{AC}, \\underline{AD}\\).\n4. Forgetting the factor \\(\\frac{1}{6}\\) for a tetrahedron."
+          }
+        ]
+      }
+    }
+  ]
+}

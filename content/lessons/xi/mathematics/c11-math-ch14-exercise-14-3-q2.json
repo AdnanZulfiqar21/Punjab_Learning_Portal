@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-3-Q2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-3-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 287,
+          "pdf_to": 287,
+          "note": "Exercise 14.3, Question 2 (i)-(iv): unit vector perpendicular to the plane of a and b, and sin of the angle, via a x b (book p.282). Answer key PDF 312 (gives the + unit vector only)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Find a unit vector perpendicular to the plane containing \\(\\underline{a}\\) and \\(\\underline{b}\\). Also find sine of the angle between them: \\(\\underline{a} = \\underline{i} + 6\\underline{j} - 3\\underline{k}\\), \\(\\underline{b} = 2\\underline{i} + \\underline{j} + 3\\underline{k}\\).",
+            "explanation": "A unit normal and angle question.\nWe must find a unit vector perpendicular to both \\(\\underline{a}\\) and \\(\\underline{b}\\), and \\(\\sin\\theta\\).\nPlan: \\(\\underline{a} \\times \\underline{b}\\), divide by its length; then \\(\\sin\\theta = |\\underline{a} \\times \\underline{b}|/(|\\underline{a}||\\underline{b}|)\\).",
+            "steps": [
+              "Given: \\(\\underline{a} = \\underline{i} + 6\\underline{j} - 3\\underline{k}\\), \\(\\underline{b} = 2\\underline{i} + \\underline{j} + 3\\underline{k}\\).\nTo find: a unit vector \\(\\hat{n}\\) perpendicular to the plane of \\(\\underline{a}\\) and \\(\\underline{b}\\), and \\(\\sin\\theta\\).\nMethod: \\(\\underline{a} \\times \\underline{b}\\) is perpendicular to both vectors, so to their plane; dividing it by its length gives a unit vector. From \\(|\\underline{a} \\times \\underline{b}| = |\\underline{a}||\\underline{b}|\\sin\\theta\\) we get \\(\\sin\\theta\\).",
+              "Write the determinant\n\\[\\underline{a} \\times \\underline{b} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 1 & 6 & -3 \\\\ 2 & 1 & 3 \\end{vmatrix}\\]\nWhy: Row 1 holds the unit vectors, row 2 the components of the first vector \\(\\underline{a}\\), row 3 those of the second \\(\\underline{b}\\). The order of the rows follows the order of the product.",
+              "Work out the three minors\n\\[\\underline{i}\\text{ minor} = (6)(3) - (-3)(1) = 21\\]\n\\[\\underline{j}\\text{ minor} = (1)(3) - (-3)(2) = 9\\]\n\\[\\underline{k}\\text{ minor} = (1)(1) - (6)(2) = -11\\]\nWhy: For each unit vector cover its row and column; the minor is (top-left)(bottom-right) minus (top-right)(bottom-left).",
+              "Attach the signs \\(+, -, +\\)\n\\[\\underline{a} \\times \\underline{b} = \\underline{i}(21) - \\underline{j}(9) + \\underline{k}(-11)\\]\n\\[= 21\\underline{i} - 9\\underline{j} - 11\\underline{k}\\]\nWhy: Expanding a determinant along row 1 uses the sign pattern \\(+, -, +\\); the middle (\\(\\underline{j}\\)) term is subtracted.",
+              "Length of \\(\\underline{a} \\times \\underline{b}\\)\n\\[|\\underline{a} \\times \\underline{b}| = \\sqrt{(21)^2 + (-9)^2 + (-11)^2}\\]\n\\[= \\sqrt{643}\\]\nWhy: Length of \\(x\\underline{i} + y\\underline{j} + z\\underline{k}\\) is \\(\\sqrt{x^2 + y^2 + z^2}\\).",
+              "Unit vector perpendicular to the plane\n\\[\\hat{n} = \\pm\\dfrac{\\underline{a} \\times \\underline{b}}{|\\underline{a} \\times \\underline{b}|}\\]\n\\[= \\pm\\dfrac{21\\underline{i} - 9\\underline{j} - 11\\underline{k}}{\\sqrt{643}}\\]\nWhy: Dividing a vector by its own length keeps its direction and makes its length 1. The opposite vector is also perpendicular to the plane, so there are two answers, \\(\\pm\\).",
+              "Lengths of \\(\\underline{a}\\) and \\(\\underline{b}\\)\n\\[|\\underline{a}| = \\sqrt{(1)^2 + (6)^2 + (-3)^2}\\]\n\\[= \\sqrt{46}\\]\n\\[|\\underline{b}| = \\sqrt{(2)^2 + (1)^2 + (3)^2}\\]\n\\[= \\sqrt{14}\\]\nWhy: Needed in the denominator of \\(\\sin\\theta\\).",
+              "Sine of the angle\n\\[\\sin\\theta = \\dfrac{|\\underline{a} \\times \\underline{b}|}{|\\underline{a}|\\,|\\underline{b}|}\\]\n\\[= \\dfrac{\\sqrt{643}}{\\sqrt{46}\\,\\sqrt{14}}\\]\n\\[= \\dfrac{\\sqrt{643}}{\\sqrt{644}}\\]\nWhy: From \\(|\\underline{a} \\times \\underline{b}| = |\\underline{a}||\\underline{b}|\\sin\\theta\\). Since \\(0 \\le \\theta \\le \\pi\\), \\(\\sin\\theta \\ge 0\\), so only the positive value.",
+              "Check: \\(\\hat{n}\\) is perpendicular to \\(\\underline{a}\\)\n\\[\\underline{a} \\cdot (\\underline{a} \\times \\underline{b}) = (1)(21) + (6)(-9) + (-3)(-11)\\]\n\\[= 21 - 54 + 33 = 0\\]\nWhy: A zero dot product confirms the direction (the same works for \\(\\underline{b}\\))."
+            ],
+            "final_answer": "\\(\\hat{n} = \\pm\\dfrac{21\\underline{i} - 9\\underline{j} - 11\\underline{k}}{\\sqrt{643}}\\); \\(\\sin\\theta = \\dfrac{\\sqrt{643}}{\\sqrt{644}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Find a unit vector perpendicular to the plane containing \\(\\underline{a}\\) and \\(\\underline{b}\\). Also find sine of the angle between them: \\(\\underline{a} = -\\underline{i} - \\underline{j} - \\underline{k}\\), \\(\\underline{b} = 2\\underline{i} - 3\\underline{j} + 4\\underline{k}\\).",
+            "explanation": "A unit normal and angle question.\nWe must find a unit vector perpendicular to both \\(\\underline{a}\\) and \\(\\underline{b}\\), and \\(\\sin\\theta\\).\nPlan: \\(\\underline{a} \\times \\underline{b}\\), divide by its length; then \\(\\sin\\theta = |\\underline{a} \\times \\underline{b}|/(|\\underline{a}||\\underline{b}|)\\).",
+            "steps": [
+              "Given: \\(\\underline{a} = -\\underline{i} - \\underline{j} - \\underline{k}\\), \\(\\underline{b} = 2\\underline{i} - 3\\underline{j} + 4\\underline{k}\\).\nTo find: a unit vector \\(\\hat{n}\\) perpendicular to the plane of \\(\\underline{a}\\) and \\(\\underline{b}\\), and \\(\\sin\\theta\\).\nMethod: \\(\\underline{a} \\times \\underline{b}\\) is perpendicular to both vectors, so to their plane; dividing it by its length gives a unit vector. From \\(|\\underline{a} \\times \\underline{b}| = |\\underline{a}||\\underline{b}|\\sin\\theta\\) we get \\(\\sin\\theta\\).",
+              "Write the determinant\n\\[\\underline{a} \\times \\underline{b} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ -1 & -1 & -1 \\\\ 2 & -3 & 4 \\end{vmatrix}\\]\nWhy: Row 1 holds the unit vectors, row 2 the components of the first vector \\(\\underline{a}\\), row 3 those of the second \\(\\underline{b}\\). The order of the rows follows the order of the product.",
+              "Work out the three minors\n\\[\\underline{i}\\text{ minor} = (-1)(4) - (-1)(-3) = -7\\]\n\\[\\underline{j}\\text{ minor} = (-1)(4) - (-1)(2) = -2\\]\n\\[\\underline{k}\\text{ minor} = (-1)(-3) - (-1)(2) = 5\\]\nWhy: For each unit vector cover its row and column; the minor is (top-left)(bottom-right) minus (top-right)(bottom-left).",
+              "Attach the signs \\(+, -, +\\)\n\\[\\underline{a} \\times \\underline{b} = \\underline{i}(-7) - \\underline{j}(-2) + \\underline{k}(5)\\]\n\\[= -7\\underline{i} + 2\\underline{j} + 5\\underline{k}\\]\nWhy: Expanding a determinant along row 1 uses the sign pattern \\(+, -, +\\); the middle (\\(\\underline{j}\\)) term is subtracted.",
+              "Length of \\(\\underline{a} \\times \\underline{b}\\)\n\\[|\\underline{a} \\times \\underline{b}| = \\sqrt{(-7)^2 + (2)^2 + (5)^2}\\]\n\\[= \\sqrt{78}\\]\nWhy: Length of \\(x\\underline{i} + y\\underline{j} + z\\underline{k}\\) is \\(\\sqrt{x^2 + y^2 + z^2}\\).",
+              "Unit vector perpendicular to the plane\n\\[\\hat{n} = \\pm\\dfrac{\\underline{a} \\times \\underline{b}}{|\\underline{a} \\times \\underline{b}|}\\]\n\\[= \\pm\\dfrac{-7\\underline{i} + 2\\underline{j} + 5\\underline{k}}{\\sqrt{78}}\\]\nWhy: Dividing a vector by its own length keeps its direction and makes its length 1. The opposite vector is also perpendicular to the plane, so there are two answers, \\(\\pm\\).",
+              "Lengths of \\(\\underline{a}\\) and \\(\\underline{b}\\)\n\\[|\\underline{a}| = \\sqrt{(-1)^2 + (-1)^2 + (-1)^2}\\]\n\\[= \\sqrt{3}\\]\n\\[|\\underline{b}| = \\sqrt{(2)^2 + (-3)^2 + (4)^2}\\]\n\\[= \\sqrt{29}\\]\nWhy: Needed in the denominator of \\(\\sin\\theta\\).",
+              "Sine of the angle\n\\[\\sin\\theta = \\dfrac{|\\underline{a} \\times \\underline{b}|}{|\\underline{a}|\\,|\\underline{b}|}\\]\n\\[= \\dfrac{\\sqrt{78}}{\\sqrt{3}\\,\\sqrt{29}}\\]\n\\[= \\dfrac{\\sqrt{78}}{\\sqrt{87}}\\]\nWhy: From \\(|\\underline{a} \\times \\underline{b}| = |\\underline{a}||\\underline{b}|\\sin\\theta\\). Since \\(0 \\le \\theta \\le \\pi\\), \\(\\sin\\theta \\ge 0\\), so only the positive value.",
+              "Check: \\(\\hat{n}\\) is perpendicular to \\(\\underline{a}\\)\n\\[\\underline{a} \\cdot (\\underline{a} \\times \\underline{b}) = (-1)(-7) + (-1)(2) + (-1)(5)\\]\n\\[= 7 - 2 - 5 = 0\\]\nWhy: A zero dot product confirms the direction (the same works for \\(\\underline{b}\\))."
+            ],
+            "final_answer": "\\(\\hat{n} = \\pm\\dfrac{-7\\underline{i} + 2\\underline{j} + 5\\underline{k}}{\\sqrt{78}}\\); \\(\\sin\\theta = \\dfrac{\\sqrt{78}}{\\sqrt{87}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) Find a unit vector perpendicular to the plane containing \\(\\underline{a}\\) and \\(\\underline{b}\\). Also find sine of the angle between them: \\(\\underline{a} = \\underline{i} + \\underline{j} + \\underline{k}\\), \\(\\underline{b} = \\underline{i} - \\underline{j} - \\underline{k}\\).",
+            "explanation": "A unit normal and angle question.\nWe must find a unit vector perpendicular to both \\(\\underline{a}\\) and \\(\\underline{b}\\), and \\(\\sin\\theta\\).\nPlan: \\(\\underline{a} \\times \\underline{b}\\), divide by its length; then \\(\\sin\\theta = |\\underline{a} \\times \\underline{b}|/(|\\underline{a}||\\underline{b}|)\\).",
+            "steps": [
+              "Given: \\(\\underline{a} = \\underline{i} + \\underline{j} + \\underline{k}\\), \\(\\underline{b} = \\underline{i} - \\underline{j} - \\underline{k}\\).\nTo find: a unit vector \\(\\hat{n}\\) perpendicular to the plane of \\(\\underline{a}\\) and \\(\\underline{b}\\), and \\(\\sin\\theta\\).\nMethod: \\(\\underline{a} \\times \\underline{b}\\) is perpendicular to both vectors, so to their plane; dividing it by its length gives a unit vector. From \\(|\\underline{a} \\times \\underline{b}| = |\\underline{a}||\\underline{b}|\\sin\\theta\\) we get \\(\\sin\\theta\\).",
+              "Write the determinant\n\\[\\underline{a} \\times \\underline{b} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 1 & 1 & 1 \\\\ 1 & -1 & -1 \\end{vmatrix}\\]\nWhy: Row 1 holds the unit vectors, row 2 the components of the first vector \\(\\underline{a}\\), row 3 those of the second \\(\\underline{b}\\). The order of the rows follows the order of the product.",
+              "Work out the three minors\n\\[\\underline{i}\\text{ minor} = (1)(-1) - (1)(-1) = 0\\]\n\\[\\underline{j}\\text{ minor} = (1)(-1) - (1)(1) = -2\\]\n\\[\\underline{k}\\text{ minor} = (1)(-1) - (1)(1) = -2\\]\nWhy: For each unit vector cover its row and column; the minor is (top-left)(bottom-right) minus (top-right)(bottom-left).",
+              "Attach the signs \\(+, -, +\\)\n\\[\\underline{a} \\times \\underline{b} = \\underline{i}(0) - \\underline{j}(-2) + \\underline{k}(-2)\\]\n\\[= 2\\underline{j} - 2\\underline{k}\\]\nWhy: Expanding a determinant along row 1 uses the sign pattern \\(+, -, +\\); the middle (\\(\\underline{j}\\)) term is subtracted.",
+              "Length of \\(\\underline{a} \\times \\underline{b}\\)\n\\[|\\underline{a} \\times \\underline{b}| = \\sqrt{(0)^2 + (2)^2 + (-2)^2}\\]\n\\[= \\sqrt{8} = 2 \\sqrt{2}\\]\nWhy: Length of \\(x\\underline{i} + y\\underline{j} + z\\underline{k}\\) is \\(\\sqrt{x^2 + y^2 + z^2}\\).",
+              "Unit vector perpendicular to the plane\n\\[\\hat{n} = \\pm\\dfrac{\\underline{a} \\times \\underline{b}}{|\\underline{a} \\times \\underline{b}|}\\]\n\\[= \\pm\\dfrac{2\\underline{j} - 2\\underline{k}}{2\\sqrt{2}} = \\pm\\dfrac{\\underline{j} - \\underline{k}}{\\sqrt{2}}\\]\nWhy: Dividing a vector by its own length keeps its direction and makes its length 1. The opposite vector is also perpendicular to the plane, so there are two answers, \\(\\pm\\).",
+              "Lengths of \\(\\underline{a}\\) and \\(\\underline{b}\\)\n\\[|\\underline{a}| = \\sqrt{(1)^2 + (1)^2 + (1)^2}\\]\n\\[= \\sqrt{3}\\]\n\\[|\\underline{b}| = \\sqrt{(1)^2 + (-1)^2 + (-1)^2}\\]\n\\[= \\sqrt{3}\\]\nWhy: Needed in the denominator of \\(\\sin\\theta\\).",
+              "Sine of the angle\n\\[\\sin\\theta = \\dfrac{|\\underline{a} \\times \\underline{b}|}{|\\underline{a}|\\,|\\underline{b}|}\\]\n\\[= \\dfrac{2 \\sqrt{2}}{\\sqrt{3}\\,\\sqrt{3}}\\]\n\\[= \\dfrac{2\\sqrt{2}}{3}\\]\nWhy: From \\(|\\underline{a} \\times \\underline{b}| = |\\underline{a}||\\underline{b}|\\sin\\theta\\). Since \\(0 \\le \\theta \\le \\pi\\), \\(\\sin\\theta \\ge 0\\), so only the positive value.",
+              "Check: \\(\\hat{n}\\) is perpendicular to \\(\\underline{a}\\)\n\\[\\underline{a} \\cdot (\\underline{a} \\times \\underline{b}) = (1)(0) + (1)(2) + (1)(-2)\\]\n\\[= 0 + 2 - 2 = 0\\]\nWhy: A zero dot product confirms the direction (the same works for \\(\\underline{b}\\))."
+            ],
+            "final_answer": "\\(\\hat{n} = \\pm\\dfrac{\\underline{j} - \\underline{k}}{\\sqrt{2}}\\); \\(\\sin\\theta = \\dfrac{2\\sqrt{2}}{3}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iv)",
+            "prompt": "2 (iv) Find a unit vector perpendicular to the plane containing \\(\\underline{a}\\) and \\(\\underline{b}\\). Also find sine of the angle between them: \\(\\underline{a} = 5\\underline{i} + \\underline{j} - 3\\underline{k}\\), \\(\\underline{b} = -2\\underline{i} + 4\\underline{j} + \\underline{k}\\).",
+            "explanation": "A unit normal and angle question.\nWe must find a unit vector perpendicular to both \\(\\underline{a}\\) and \\(\\underline{b}\\), and \\(\\sin\\theta\\).\nPlan: \\(\\underline{a} \\times \\underline{b}\\), divide by its length; then \\(\\sin\\theta = |\\underline{a} \\times \\underline{b}|/(|\\underline{a}||\\underline{b}|)\\).",
+            "steps": [
+              "Given: \\(\\underline{a} = 5\\underline{i} + \\underline{j} - 3\\underline{k}\\), \\(\\underline{b} = -2\\underline{i} + 4\\underline{j} + \\underline{k}\\).\nTo find: a unit vector \\(\\hat{n}\\) perpendicular to the plane of \\(\\underline{a}\\) and \\(\\underline{b}\\), and \\(\\sin\\theta\\).\nMethod: \\(\\underline{a} \\times \\underline{b}\\) is perpendicular to both vectors, so to their plane; dividing it by its length gives a unit vector. From \\(|\\underline{a} \\times \\underline{b}| = |\\underline{a}||\\underline{b}|\\sin\\theta\\) we get \\(\\sin\\theta\\).",
+              "Write the determinant\n\\[\\underline{a} \\times \\underline{b} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 5 & 1 & -3 \\\\ -2 & 4 & 1 \\end{vmatrix}\\]\nWhy: Row 1 holds the unit vectors, row 2 the components of the first vector \\(\\underline{a}\\), row 3 those of the second \\(\\underline{b}\\). The order of the rows follows the order of the product.",
+              "Work out the three minors\n\\[\\underline{i}\\text{ minor} = (1)(1) - (-3)(4) = 13\\]\n\\[\\underline{j}\\text{ minor} = (5)(1) - (-3)(-2) = -1\\]\n\\[\\underline{k}\\text{ minor} = (5)(4) - (1)(-2) = 22\\]\nWhy: For each unit vector cover its row and column; the minor is (top-left)(bottom-right) minus (top-right)(bottom-left).",
+              "Attach the signs \\(+, -, +\\)\n\\[\\underline{a} \\times \\underline{b} = \\underline{i}(13) - \\underline{j}(-1) + \\underline{k}(22)\\]\n\\[= 13\\underline{i} + \\underline{j} + 22\\underline{k}\\]\nWhy: Expanding a determinant along row 1 uses the sign pattern \\(+, -, +\\); the middle (\\(\\underline{j}\\)) term is subtracted.",
+              "Length of \\(\\underline{a} \\times \\underline{b}\\)\n\\[|\\underline{a} \\times \\underline{b}| = \\sqrt{(13)^2 + (1)^2 + (22)^2}\\]\n\\[= \\sqrt{654}\\]\nWhy: Length of \\(x\\underline{i} + y\\underline{j} + z\\underline{k}\\) is \\(\\sqrt{x^2 + y^2 + z^2}\\).",
+              "Unit vector perpendicular to the plane\n\\[\\hat{n} = \\pm\\dfrac{\\underline{a} \\times \\underline{b}}{|\\underline{a} \\times \\underline{b}|}\\]\n\\[= \\pm\\dfrac{13\\underline{i} + \\underline{j} + 22\\underline{k}}{\\sqrt{654}}\\]\nWhy: Dividing a vector by its own length keeps its direction and makes its length 1. The opposite vector is also perpendicular to the plane, so there are two answers, \\(\\pm\\).",
+              "Lengths of \\(\\underline{a}\\) and \\(\\underline{b}\\)\n\\[|\\underline{a}| = \\sqrt{(5)^2 + (1)^2 + (-3)^2}\\]\n\\[= \\sqrt{35}\\]\n\\[|\\underline{b}| = \\sqrt{(-2)^2 + (4)^2 + (1)^2}\\]\n\\[= \\sqrt{21}\\]\nWhy: Needed in the denominator of \\(\\sin\\theta\\).",
+              "Sine of the angle\n\\[\\sin\\theta = \\dfrac{|\\underline{a} \\times \\underline{b}|}{|\\underline{a}|\\,|\\underline{b}|}\\]\n\\[= \\dfrac{\\sqrt{654}}{\\sqrt{35}\\,\\sqrt{21}}\\]\n\\[= \\dfrac{\\sqrt{654}}{\\sqrt{735}}\\]\nWhy: From \\(|\\underline{a} \\times \\underline{b}| = |\\underline{a}||\\underline{b}|\\sin\\theta\\). Since \\(0 \\le \\theta \\le \\pi\\), \\(\\sin\\theta \\ge 0\\), so only the positive value.",
+              "Check: \\(\\hat{n}\\) is perpendicular to \\(\\underline{a}\\)\n\\[\\underline{a} \\cdot (\\underline{a} \\times \\underline{b}) = (5)(13) + (1)(1) + (-3)(22)\\]\n\\[= 65 + 1 - 66 = 0\\]\nWhy: A zero dot product confirms the direction (the same works for \\(\\underline{b}\\))."
+            ],
+            "final_answer": "\\(\\hat{n} = \\pm\\dfrac{13\\underline{i} + \\underline{j} + 22\\underline{k}}{\\sqrt{654}}\\); \\(\\sin\\theta = \\dfrac{\\sqrt{654}}{\\sqrt{735}}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

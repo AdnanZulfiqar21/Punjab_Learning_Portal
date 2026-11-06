@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-3-Q6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-3-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 288,
+          "pdf_to": 288,
+          "note": "Exercise 14.3, Question 6 (i)-(ii): perpendicular pairs by dot product, parallel pairs by multiples / cross product (book p.283). Answer key PDF 312."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(i)",
+            "prompt": "6 (i) Which vectors, if any, are perpendicular or parallel: \\(\\underline{u} = 5\\underline{i} - \\underline{j} + \\underline{k}\\); \\(\\underline{v} = \\underline{j} - 5\\underline{k}\\); \\(\\underline{w} = -15\\underline{i} + 3\\underline{j} - 3\\underline{k}\\).",
+            "explanation": "A test of perpendicular and parallel pairs.\nWe must check the three pairs \\(\\underline{u}, \\underline{v}\\); \\(\\underline{u}, \\underline{w}\\); \\(\\underline{v}, \\underline{w}\\).\nPlan: dot product 0 means perpendicular; cross product \\(\\underline{0}\\) (one vector a multiple of the other) means parallel.",
+            "steps": [
+              "Given: \\(\\underline{u} = 5\\underline{i} - \\underline{j} + \\underline{k}\\), \\(\\underline{v} = \\underline{j} - 5\\underline{k}\\), \\(\\underline{w} = -15\\underline{i} + 3\\underline{j} - 3\\underline{k}\\).\nTo find: perpendicular pairs and parallel pairs.\nMethod: Non-zero vectors are perpendicular iff their dot product is 0 (14.2.6), and parallel iff their cross product is \\(\\underline{0}\\) (14.3.2), that is, one is a scalar multiple of the other.",
+              "Dot products of the three pairs\n\\[\\underline{u} \\cdot \\underline{v} = (5)(0) + (-1)(1) + (1)(-5)\\]\n\\[= 0 - 1 - 5 = -6\\]\n\\[\\underline{u} \\cdot \\underline{w} = (5)(-15) + (-1)(3) + (1)(-3)\\]\n\\[= -75 - 3 - 3 = -81\\]\n\\[\\underline{v} \\cdot \\underline{w} = (0)(-15) + (1)(3) + (-5)(-3)\\]\n\\[= 0 + 3 + 15 = 18\\]\nWhy: None of them is 0, so no pair is perpendicular. (Note \\(\\underline{v} = 0\\underline{i} + \\underline{j} - 5\\underline{k}\\).)",
+              "Look for a multiple\n\\[\\underline{w} = -15\\underline{i} + 3\\underline{j} - 3\\underline{k}\\]\n\\[= -3(5\\underline{i} - \\underline{j} + \\underline{k}) = -3\\underline{u}\\]\nWhy: Taking out the common factor \\(-3\\) shows \\(\\underline{w}\\) is \\(-3\\) times \\(\\underline{u}\\): same line, opposite direction.",
+              "Write the determinant\n\\[\\underline{u} \\times \\underline{w} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 5 & -1 & 1 \\\\ -15 & 3 & -3 \\end{vmatrix}\\]\nWhy: Row 1 holds the unit vectors, row 2 the components of the first vector \\(\\underline{u}\\), row 3 those of the second \\(\\underline{w}\\). The order of the rows follows the order of the product.",
+              "Work out the three minors\n\\[\\underline{i}\\text{ minor} = (-1)(-3) - (1)(3) = 0\\]\n\\[\\underline{j}\\text{ minor} = (5)(-3) - (1)(-15) = 0\\]\n\\[\\underline{k}\\text{ minor} = (5)(3) - (-1)(-15) = 0\\]\nWhy: For each unit vector cover its row and column; the minor is (top-left)(bottom-right) minus (top-right)(bottom-left).",
+              "Attach the signs \\(+, -, +\\)\n\\[\\underline{u} \\times \\underline{w} = \\underline{i}(0) - \\underline{j}(0) + \\underline{k}(0)\\]\n\\[= \\underline{0}\\]\nWhy: Expanding a determinant along row 1 uses the sign pattern \\(+, -, +\\); the middle (\\(\\underline{j}\\)) term is subtracted.",
+              "The other pairs are not parallel\n\\[\\underline{u}, \\underline{v}:\\ \\text{first components } 5, 0\\]\n\\[\\underline{v}, \\underline{w}:\\ \\text{first components } 0, -15\\]\nWhy: \\(\\underline{v}\\) has first component 0 but \\(\\underline{u}\\) and \\(\\underline{w}\\) do not, so \\(\\underline{v}\\) cannot be a multiple of either (a multiple of 0 is 0, and \\(\\underline{v} \\ne \\underline{0}\\))."
+            ],
+            "final_answer": "Parallel: \\(\\underline{u}\\) and \\(\\underline{w}\\) (\\(\\underline{w} = -3\\underline{u}\\)). Perpendicular: none."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(ii)",
+            "prompt": "6 (ii) Which vectors, if any, are perpendicular or parallel: \\(\\underline{u} = \\underline{i} + 2\\underline{j} - \\underline{k}\\); \\(\\underline{v} = -\\underline{i} + \\underline{j} + \\underline{k}\\); \\(\\underline{w} = -\\dfrac{\\pi}{2}\\underline{i} - \\pi\\underline{j} + \\dfrac{\\pi}{2}\\underline{k}\\).",
+            "explanation": "Same type as part (i).\nWe check the three pairs for dot product 0 (perpendicular) and for being multiples (parallel).\nPlan: three dot products, then look for a common factor.",
+            "steps": [
+              "Given: \\(\\underline{u} = \\underline{i} + 2\\underline{j} - \\underline{k}\\), \\(\\underline{v} = -\\underline{i} + \\underline{j} + \\underline{k}\\), \\(\\underline{w} = -\\tfrac{\\pi}{2}\\underline{i} - \\pi\\underline{j} + \\tfrac{\\pi}{2}\\underline{k}\\).\nTo find: perpendicular pairs and parallel pairs.\nMethod: dot product 0 means perpendicular; a scalar multiple (cross product \\(\\underline{0}\\)) means parallel.",
+              "Dot products of the three pairs\n\\[\\underline{u} \\cdot \\underline{v} = (1)(-1) + (2)(1) + (-1)(1)\\]\n\\[= -1 + 2 - 1 = 0\\]\n\\[\\underline{v} \\cdot \\underline{w} = (-1)\\left(-\\tfrac{\\pi}{2}\\right) + (1)(-\\pi) + (1)\\left(\\tfrac{\\pi}{2}\\right)\\]\n\\[= \\tfrac{\\pi}{2} - \\pi + \\tfrac{\\pi}{2} = 0\\]\n\\[\\underline{u} \\cdot \\underline{w} = (1)\\left(-\\tfrac{\\pi}{2}\\right) + (2)(-\\pi) + (-1)\\left(\\tfrac{\\pi}{2}\\right)\\]\n\\[= -\\tfrac{\\pi}{2} - 2\\pi - \\tfrac{\\pi}{2} = -3\\pi\\]\nWhy: \\(\\underline{u} \\cdot \\underline{v} = 0\\) and \\(\\underline{v} \\cdot \\underline{w} = 0\\): these pairs are perpendicular. \\(\\underline{u} \\cdot \\underline{w} \\ne 0\\).",
+              "Look for a multiple\n\\[\\underline{w} = -\\tfrac{\\pi}{2}\\underline{i} - \\pi\\underline{j} + \\tfrac{\\pi}{2}\\underline{k}\\]\n\\[= -\\tfrac{\\pi}{2}(\\underline{i} + 2\\underline{j} - \\underline{k}) = -\\tfrac{\\pi}{2}\\,\\underline{u}\\]\nWhy: The common factor \\(-\\tfrac{\\pi}{2}\\) leaves exactly \\(\\underline{u}\\), so \\(\\underline{w}\\) is parallel to \\(\\underline{u}\\).",
+              "Confirm with the cross product\n\\[\\underline{u} \\times \\underline{w} = -\\tfrac{\\pi}{2}(\\underline{u} \\times \\underline{u})\\]\n\\[= -\\tfrac{\\pi}{2}\\,\\underline{0} = \\underline{0}\\]\nWhy: A scalar comes out of a cross product, and \\(\\underline{u} \\times \\underline{u} = \\underline{0}\\).",
+              "Check the logic\nWhy: \\(\\underline{v} \\perp \\underline{u}\\) and \\(\\underline{w}\\) lies along \\(\\underline{u}\\), so \\(\\underline{v} \\perp \\underline{w}\\) must also hold; the zero dot product above agrees. \\(\\underline{u}\\) and \\(\\underline{v}\\) are not multiples (\\(\\underline{u} \\cdot \\underline{v} = 0\\) for non-zero vectors rules that out)."
+            ],
+            "final_answer": "Parallel: \\(\\underline{u}\\) and \\(\\underline{w}\\) (\\(\\underline{w} = -\\tfrac{\\pi}{2}\\underline{u}\\)). Perpendicular: \\(\\underline{u}\\) and \\(\\underline{v}\\); \\(\\underline{v}\\) and \\(\\underline{w}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

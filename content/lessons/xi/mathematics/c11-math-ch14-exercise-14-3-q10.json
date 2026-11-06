@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-3-Q10",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-3-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 288,
+          "pdf_to": 288,
+          "note": "Exercise 14.3, Question 10: sin(a - b) by the cross product of two unit vectors (book p.283). The book prints + instead of - on the right side. Proof, no key answer."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10. Prove that: \\(\\sin(\\alpha - \\beta) = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta\\) [printed with \\(+\\cos\\alpha\\sin\\beta\\)].",
+            "explanation": "A trigonometric identity proved with vectors.\nWe must find one cross product in two ways and compare.\nPlan: two unit vectors at angles \\(\\alpha\\) and \\(\\beta\\); the definition gives \\(\\sin(\\alpha - \\beta)\\), the determinant gives the right side.",
+            "steps": [
+              "Given: angles \\(\\alpha\\) and \\(\\beta\\) (take \\(\\alpha > \\beta\\)).\nTo prove: \\(\\sin(\\alpha - \\beta) = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta\\).\nMethod: As in Example 17: in the \\(xy\\)-plane draw unit vectors \\(\\underline{OA}\\) and \\(\\underline{OB}\\) making angles \\(\\alpha\\) and \\(\\beta\\) with the \\(x\\)-axis. The angle between them is \\(\\alpha - \\beta\\).",
+              "Write the two unit vectors\n\\[\\underline{OA} = \\cos\\alpha\\,\\underline{i} + \\sin\\alpha\\,\\underline{j}\\]\n\\[\\underline{OB} = \\cos\\beta\\,\\underline{i} + \\sin\\beta\\,\\underline{j}\\]\nWhy: A unit vector at angle \\(\\alpha\\) to the \\(x\\)-axis has components \\(\\cos\\alpha\\) and \\(\\sin\\alpha\\); its length is \\(\\sqrt{\\cos^2\\alpha + \\sin^2\\alpha} = 1\\).",
+              "Cross product from the definition\n\\[\\underline{OB} \\times \\underline{OA} = (1)(1)\\sin(\\alpha - \\beta)\\,\\underline{k}\\]\n\\[= \\sin(\\alpha - \\beta)\\,\\underline{k} \\quad (1)\\]\nWhy: Both lengths are 1, the angle from \\(\\underline{OB}\\) to \\(\\underline{OA}\\) is \\(\\alpha - \\beta\\), and turning from \\(\\underline{OB}\\) to \\(\\underline{OA}\\) is counter-clockwise, so the right hand rule gives \\(+\\underline{k}\\).",
+              "The same cross product from the determinant\n\\[\\underline{OB} \\times \\underline{OA} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ \\cos\\beta & \\sin\\beta & 0 \\\\ \\cos\\alpha & \\sin\\alpha & 0 \\end{vmatrix}\\]\n\\[= \\underline{i}(0) - \\underline{j}(0)\\]\n\\[+ \\underline{k}(\\cos\\beta\\sin\\alpha - \\sin\\beta\\cos\\alpha)\\]\n\\[= (\\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta)\\,\\underline{k} \\quad (2)\\]\nWhy: Both vectors have \\(\\underline{k}\\)-component 0, so the \\(\\underline{i}\\) and \\(\\underline{j}\\) minors are 0.",
+              "Compare (1) and (2)\n\\[\\sin(\\alpha - \\beta) = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta\\]\nWhy: Two expressions of the same vector are equal, so their \\(\\underline{k}\\)-components are equal.",
+              "Check with numbers\n\\[\\alpha = 90^{\\circ},\\ \\beta = 30^{\\circ}:\\ \\sin 60^{\\circ} = \\tfrac{\\sqrt{3}}{2}\\]\n\\[(1)\\tfrac{\\sqrt{3}}{2} - (0)\\tfrac{1}{2} = \\tfrac{\\sqrt{3}}{2}\\]\nWhy: Both sides give \\(\\tfrac{\\sqrt{3}}{2}\\). With the printed \\(+\\) sign, \\(\\alpha = \\beta = 45^{\\circ}\\) would give \\(\\sin 0 = 1\\), which is false."
+            ],
+            "final_answer": "Hence proved: \\(\\sin(\\alpha - \\beta) = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \\(\\sin(\\alpha - \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta\\). This is wrong: the right side with \\(+\\) is \\(\\sin(\\alpha + \\beta)\\). The correct identity is \\(\\sin(\\alpha - \\beta) = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta\\), which is what the cross product proves."
+          }
+        ]
+      }
+    }
+  ]
+}

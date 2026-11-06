@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-14.4.5",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/14.4.5",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 292,
+          "pdf_to": 293,
+          "note": "Book p. 287-288: 14.4.5 coplanar vectors, figure, u.(v x w) = 0, Properties 1-2 of the triple scalar product, Example 27 (four points coplanar), Example 28 (alpha = 8/5). Book error: 'perpndicular'. Teaching notes are ours."
+        }
+      ],
+      "title": "14.4.5 Coplanar Vectors and Condition for Coplanarity of Three Vectors",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Vectors are coplanar if they lie in the same plane or can be combined in the same plane."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\"Can be combined in the same plane\" means: a vector may be moved parallel to itself without changing it, so vectors are coplanar if, after moving them to start from one point, they all lie in one plane."
+          },
+          {
+            "type": "paragraph",
+            "text": "Consider the three coplanar vectors \\(\\underline{u}\\), \\(\\underline{v}\\) and \\(\\underline{w}\\) in a plane as shown in the figure."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch14-fig-coplanar",
+            "alt": "A grey plane with three vectors u, v and w drawn in it from one point. The vector v x w rises from that point perpendicular to the plane, with a right-angle mark between v x w and v.",
+            "caption": "Figure: coplanar vectors u, v, w; v × w is perpendicular to the plane (original drawing after the textbook's figure)",
+            "side": true
+          },
+          {
+            "type": "paragraph",
+            "text": "The cross product \\(\\underline{v}\\times \\underline{w}\\) gives a vector that is perpendicular to both the vectors \\(\\underline{v}\\) and \\(\\underline{w}\\). As \\(\\underline{u}\\), \\(\\underline{v}\\) and \\(\\underline{w}\\) are coplanar, so \\(\\underline{v}\\times \\underline{w}\\) is also perpendicular to \\(\\underline{u}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Thus, the dot product of \\(\\underline{u}\\) and \\(\\underline{v}\\times \\underline{w}\\) is zero, i.e.,\n\\[\\underline{u}\\cdot(\\underline{v}\\times \\underline{w}) = 0\\]\n\\(\\because\\) If vectors \\(\\underline{a}\\) and \\(\\underline{b}\\) are perpndicular then \\(\\underline{a}\\cdot \\underline{b} = 0\\).",
+            "book_errors": [
+              "perpndicular"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \"perpndicular\". The correct spelling is \"perpendicular\"."
+          },
+          {
+            "type": "paragraph",
+            "text": "Thus, we conclude that if the three vectors \\(\\underline{u}\\), \\(\\underline{v}\\) and \\(\\underline{w}\\) are coplanar then their scalar triple product is zero."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is \\(\\underline{v}\\times \\underline{w}\\) perpendicular to \\(\\underline{u}\\)? \\(\\underline{v}\\times \\underline{w}\\) is perpendicular to the whole plane of \\(\\underline{v}\\) and \\(\\underline{w}\\) (like a flagpole standing on the floor), and \\(\\underline{u}\\) lies in that plane (like a line drawn on the floor). In the language of 14.4.2: a box whose three edges lie in one plane is flat, so its volume is zero."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Properties of triple scalar product"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "If \\(\\underline{u}\\), \\(\\underline{v}\\) and \\(\\underline{w}\\) are coplanar, then the volume of the parallelepiped so formed is zero, that is \\((\\underline{u}\\times \\underline{v})\\cdot \\underline{w} = 0\\), and hence the vectors \\(\\underline{u}\\), \\(\\underline{v}\\), \\(\\underline{w}\\) are coplanar \\(\\Leftrightarrow (\\underline{u}\\times \\underline{v})\\cdot \\underline{w} = 0\\).",
+              "If any two vectors of scalar triple product are equal, then its value is zero, i.e., \\([\\underline{u}\\ \\underline{u}\\ \\underline{w}] = [\\underline{u}\\ \\underline{v}\\ \\underline{v}] = [\\underline{u}\\ \\underline{w}\\ \\underline{w}] = 0\\)."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Property 1 works both ways (\\(\\Leftrightarrow\\)): coplanar vectors give \\(0\\), and a zero triple product means the vectors are coplanar. So to test coplanarity, compute \\([\\underline{u}\\ \\underline{v}\\ \\underline{w}]\\) and see whether it is \\(0\\).\nFor four points \\(A, B, C, D\\): they are coplanar exactly when \\([\\underline{AB}\\ \\underline{AC}\\ \\underline{AD}] = 0\\) (Example 27).\nProperty 2: if two of the vectors are equal, two rows of the determinant are equal and the determinant is \\(0\\); geometrically, two equal vectors together with a third always lie in one plane."
+          },
+          {
+            "type": "example",
+            "title": "Example 27",
+            "problem": "Prove that four points \\(A(-3, 5, -4)\\), \\(B(-1, 1, 1)\\), \\(C(-1, 2, 2)\\) and \\(D(-3, 4, -5)\\) are coplanar.",
+            "steps": [
+              "Given: \\(A(-3, 5, -4)\\), \\(B(-1, 1, 1)\\), \\(C(-1, 2, 2)\\), \\(D(-3, 4, -5)\\).\nTo prove: the four points lie in one plane.\nMethod: the points are coplanar exactly when the three edges \\(\\underline{AB}\\), \\(\\underline{AC}\\), \\(\\underline{AD}\\) from \\(A\\) are coplanar, that is when the parallelepiped on them has volume \\([\\underline{AB}\\ \\underline{AC}\\ \\underline{AD}] = 0\\) (Property 1).",
+              "Step 1: Edge \\(\\underline{AB}\\)\n\\[\\underline{AB} = \\underline{OB} - \\underline{OA}\\]\n\\[= (-1+3)\\underline{i} + (1-5)\\underline{j} + (1+4)\\underline{k}\\]\n\\[= 2\\underline{i} - 4\\underline{j} + 5\\underline{k}\\]\nWhy: end point minus starting point. Subtracting \\(-3\\) means adding \\(3\\), which is why \\(+3\\) appears.",
+              "Step 2: Edge \\(\\underline{AC}\\)\n\\[\\underline{AC} = \\underline{OC} - \\underline{OA}\\]\n\\[= (-1+3)\\underline{i} + (2-5)\\underline{j} + (2+4)\\underline{k}\\]\n\\[= 2\\underline{i} - 3\\underline{j} + 6\\underline{k}\\]\nWhy: same rule.",
+              "Step 3: Edge \\(\\underline{AD}\\)\n\\[\\underline{AD} = \\underline{OD} - \\underline{OA}\\]\n\\[= (-3+3)\\underline{i} + (4-5)\\underline{j} + (-5+4)\\underline{k}\\]\n\\[= 0\\underline{i} - \\underline{j} - \\underline{k}\\]\nWhy: same rule; the \\(\\underline{i}\\)-component is \\(0\\).",
+              "Step 4: Set up the scalar triple product\n\\[[\\underline{AB}\\ \\underline{AC}\\ \\underline{AD}] = \\begin{vmatrix} 2 & -4 & 5 \\\\ 2 & -3 & 6 \\\\ 0 & -1 & -1 \\end{vmatrix}\\]\nWhy: the rows are the components of the three edges.",
+              "Step 5: Expand along the first row\n\\[= 2(3 + 6) + 4(-2 - 0) + 5(-2 - 0)\\]\n\\[= 18 - 8 - 10 = 0\\]\nWhy: first term \\(2\\big[(-3)(-1) - (6)(-1)\\big] = 2(9)\\); second \\(-(-4)\\big[(2)(-1) - (6)(0)\\big] = 4(-2)\\); third \\(5\\big[(2)(-1) - (-3)(0)\\big] = 5(-2)\\).",
+              "Step 6: Conclusion\nThe volume of the parallelepiped formed by \\(\\underline{AB}\\), \\(\\underline{AC}\\), \\(\\underline{AD}\\) is zero, so these vectors are coplanar. They all pass through \\(A\\), so \\(A\\), \\(B\\), \\(C\\), \\(D\\) lie in one plane.\nWhy: a box of zero volume is flat: all its edges lie in one plane.",
+              "Check: \\(\\underline{AC}\\times \\underline{AD} = 9\\underline{i} + 2\\underline{j} - 2\\underline{k}\\), and \\(\\underline{AB}\\cdot(\\underline{AC}\\times \\underline{AD}) = 18 - 8 - 10 = 0\\). Same result."
+            ],
+            "answer": "\\([\\underline{AB}\\ \\underline{AC}\\ \\underline{AD}] = 0\\), so the points \\(A\\), \\(B\\), \\(C\\) and \\(D\\) are coplanar."
+          },
+          {
+            "type": "example",
+            "title": "Example 28",
+            "problem": "Find the value of \\(\\alpha\\), so that \\(\\alpha\\underline{i} + \\underline{j}\\), \\(\\underline{i} + \\underline{j} + 3\\underline{k}\\) and \\(2\\underline{i} + \\underline{j} - 2\\underline{k}\\) are coplanar.",
+            "steps": [
+              "Given: \\(\\underline{u} = \\alpha\\underline{i} + \\underline{j} + 0\\underline{k}\\), \\(\\underline{v} = \\underline{i} + \\underline{j} + 3\\underline{k}\\), \\(\\underline{w} = 2\\underline{i} + \\underline{j} - 2\\underline{k}\\).\nTo find: \\(\\alpha\\) for which the three vectors are coplanar.\nMethod: coplanar \\(\\Leftrightarrow [\\underline{u}\\ \\underline{v}\\ \\underline{w}] = 0\\). Write the triple product in terms of \\(\\alpha\\), set it equal to zero and solve.",
+              "Step 1: Set up the determinant\n\\[[\\underline{u}\\ \\underline{v}\\ \\underline{w}] = \\begin{vmatrix} \\alpha & 1 & 0 \\\\ 1 & 1 & 3 \\\\ 2 & 1 & -2 \\end{vmatrix}\\]\nWhy: \\(\\underline{u}\\) has no \\(\\underline{k}\\) term, so its third component is \\(0\\).",
+              "Step 2: Expand along the first row\n\\[= \\alpha(-2 - 3) - 1(-2 - 6) + 0(1 - 2)\\]\n\\[= -5\\alpha + 8\\]\nWhy: first term \\(\\alpha\\big[(1)(-2) - (3)(1)\\big] = -5\\alpha\\); second \\(-1\\big[(1)(-2) - (3)(2)\\big] = -1(-8) = 8\\); third has the factor \\(0\\).",
+              "Step 3: Apply the coplanarity condition\n\\[-5\\alpha + 8 = 0\\]\n\\[\\alpha = \\dfrac{8}{5}\\]\nWhy: the vectors are coplanar exactly when the scalar triple product is zero.",
+              "Check: with \\(\\alpha = \\frac{8}{5}\\): \\(\\underline{v}\\times \\underline{w} = -5\\underline{i} + 8\\underline{j} - \\underline{k}\\), and \\(\\underline{u}\\cdot(\\underline{v}\\times \\underline{w}) = \\frac{8}{5}(-5) + 1(8) + 0(-1) = -8 + 8 = 0\\). Coplanar."
+            ],
+            "answer": "\\(\\alpha = \\frac{8}{5}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Coplanar vectors lie (or can be moved parallel to themselves to lie) in one plane.\n2. \\(\\underline{u}, \\underline{v}, \\underline{w}\\) coplanar \\(\\Leftrightarrow [\\underline{u}\\ \\underline{v}\\ \\underline{w}] = 0\\).\n3. Four points \\(A, B, C, D\\) are coplanar \\(\\Leftrightarrow [\\underline{AB}\\ \\underline{AC}\\ \\underline{AD}] = 0\\).\n4. A triple product with two equal vectors is \\(0\\).\n5. For an unknown such as \\(\\alpha\\): set the determinant equal to \\(0\\) and solve."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Using the points' coordinates in the determinant instead of the edge vectors \\(\\underline{AB}, \\underline{AC}, \\underline{AD}\\).\n2. Taking the edges from different points, e.g. \\(\\underline{AB}, \\underline{BC}, \\underline{CD}\\) mixed with others; all three must start at the same point.\n3. Sign slips with negative coordinates: \\(-1 - (-3) = -1 + 3 = 2\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

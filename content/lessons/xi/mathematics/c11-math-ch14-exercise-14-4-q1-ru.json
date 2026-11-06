@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-EXERCISE-14-4-Q1-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/u-exercise-14-4-q1",
+      "title": "Question 1 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 294,
+          "pdf_to": 294,
+          "note": "Exercise 14.4 Q1 (i)-(iii), book p.289 (PDF 294). Answer key PDF 312: 25, 14, 10 cubic units, all correct (sympy). Solution book PDF 1266-1268 agrees."
+        }
+      ],
+      "variant_of": "C11-MATH-CH14-EXERCISE-14-4-Q1",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Find the volume of parallelepiped for which the given vectors are three edges: \\(\\underline{u} = 3\\underline{i} + 2\\underline{k}\\), \\(\\underline{v} = \\underline{i} + 2\\underline{j} + \\underline{k}\\), \\(\\underline{w} = -\\underline{j} + 4\\underline{k}\\).",
+            "explanation": "Yeh volume (hajam) ka sawal hai. Teen vectors ek hi kone se nikalne wale kinare (edges) hain, aur in par ek dabba bana hai jise parallelepiped kehte hain, bilkul jaise maachis ki tirchi dibbi.\nDiya kya hai? Teeno edges ke components.\nFind kya karna hai? Is dabbe ka volume.\nRule kaunsa? Volume \\(= |[\\underline{u}\\ \\underline{v}\\ \\underline{w}]|\\), yani scalar triple product ki absolute value.\nPlan: components ko 3 by 3 determinant mein rows bana kar likhenge, row 1 se expand karenge, aur aakhir mein sign hata kar volume likhenge.",
+            "steps": [
+              "Diya gaya hai: \\(\\underline{u} = 3\\underline{i} + 2\\underline{k}\\), \\(\\underline{v} = \\underline{i} + 2\\underline{j} + \\underline{k}\\), \\(\\underline{w} = -\\underline{j} + 4\\underline{k}\\).\nHumein find karna hai: parallelepiped ka volume \\(V\\), jis ke edges \\(\\underline{u}, \\underline{v}, \\underline{w}\\) hain.\nTareeqa: \\(V = |\\underline{u} \\cdot (\\underline{v} \\times \\underline{w})|\\) (14.4.2). Kyun? Base ka area \\(|\\underline{v} \\times \\underline{w}|\\) hai aur height \\(\\underline{u}\\) ka us base ke perpendicular wala hissa hai; dot product yahi dono cheezein ek saath multiply kar deta hai. Components mein yeh product seedha ek determinant ban jata hai (14.4.4), is liye alag alag cross aur dot nikalne ki zaroorat nahi.",
+              "Components ko rows mein likhein\n\\[[\\underline{u}\\ \\underline{v}\\ \\underline{w}] = \\begin{vmatrix} 3 & 0 & 2 \\\\ 1 & 2 & 1 \\\\ 0 & -1 & 4 \\end{vmatrix}\\]\nKyun: Pehli row mein \\(\\underline{u}\\) ke components, doosri mein \\(\\underline{v}\\) ke aur teesri mein \\(\\underline{w}\\) ke. Tarteeb ka khayal rakhein: \\(\\underline{i}\\) ka coefficient pehle column mein, \\(\\underline{j}\\) ka doosre mein, \\(\\underline{k}\\) ka teesre mein.\nDhyan dein: Jo unit vector likha hi nahi hua, us ka component 0 hai. Isay chhor dena aur baqi numbers ko aage khiska dena bohat aam ghalti hai.",
+              "Row 1 se expand karein\n\\[= 3\\begin{vmatrix} 2 & 1 \\\\ -1 & 4 \\end{vmatrix}\\]\n\\[\\quad - 0\\begin{vmatrix} 1 & 1 \\\\ 0 & 4 \\end{vmatrix}\\]\n\\[\\quad + 2\\begin{vmatrix} 1 & 2 \\\\ 0 & -1 \\end{vmatrix}\\]\n\\[= 3(8 + 1) - 0 + 2(-1 - 0)\\]\n\\[= 27 - 2 = 25\\]\nKyun: Row 1 ki har entry ko us ke minor se multiply kiya. Minor woh 2 by 2 determinant hai jo us entry ki row aur column dhaanp dene ke baad bachta hai. Signs ka pattern \\(+, -, +\\) hai, is liye beech wali entry ke saath minus lagta hai. 2 by 2 determinant: seedhi diagonal ka product minus ulti diagonal ka product.\nDhyan dein: Beech wali entry khud negative ho to minus aur minus mil kar plus ban jate hain; sign do dafa check karein.",
+              "Absolute value lein\n\\[V = |25| = 25\\]\nKyun: Volume kabhi negative nahi hota. Agar determinant negative aata to sirf us ka sign hata dete (kitab ka Note bhi yahi kehta hai). Yahan jawab pehle hi positive hai.",
+              "Tasdeeq: column 1 se dobara expand karein\n\\[3(8 + 1) - 1(0 \\cdot 4 - 2 \\cdot (-1)) + 0\\]\n\\[= 27 - 2 = 25 \\;\\checkmark\\]\nKyun: Determinant kisi bhi row ya column se expand karein, value wohi aati hai. Doosre raste se wohi 25 aa gaya, is liye hisaab sahi hai."
+            ],
+            "final_answer": "\\(V = 25\\) cubic units\nYani yeh dabba 25 cubic units jagah gherta hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Find the volume of parallelepiped for which the given vectors are three edges: \\(\\underline{u} = \\underline{i} - 4\\underline{j} - \\underline{k}\\), \\(\\underline{v} = \\underline{i} - \\underline{j} - 2\\underline{k}\\), \\(\\underline{w} = 2\\underline{i} - 3\\underline{j} + \\underline{k}\\).",
+            "explanation": "Yeh volume (hajam) ka sawal hai. Teen vectors ek hi kone se nikalne wale kinare (edges) hain, aur in par ek dabba bana hai jise parallelepiped kehte hain, bilkul jaise maachis ki tirchi dibbi.\nDiya kya hai? Teeno edges ke components.\nFind kya karna hai? Is dabbe ka volume.\nRule kaunsa? Volume \\(= |[\\underline{u}\\ \\underline{v}\\ \\underline{w}]|\\), yani scalar triple product ki absolute value.\nPlan: components ko 3 by 3 determinant mein rows bana kar likhenge, row 1 se expand karenge, aur aakhir mein sign hata kar volume likhenge.",
+            "steps": [
+              "Diya gaya hai: \\(\\underline{u} = \\underline{i} - 4\\underline{j} - \\underline{k}\\), \\(\\underline{v} = \\underline{i} - \\underline{j} - 2\\underline{k}\\), \\(\\underline{w} = 2\\underline{i} - 3\\underline{j} + \\underline{k}\\).\nHumein find karna hai: parallelepiped ka volume \\(V\\), jis ke edges \\(\\underline{u}, \\underline{v}, \\underline{w}\\) hain.\nTareeqa: \\(V = |\\underline{u} \\cdot (\\underline{v} \\times \\underline{w})|\\) (14.4.2). Kyun? Base ka area \\(|\\underline{v} \\times \\underline{w}|\\) hai aur height \\(\\underline{u}\\) ka us base ke perpendicular wala hissa hai; dot product yahi dono cheezein ek saath multiply kar deta hai. Components mein yeh product seedha ek determinant ban jata hai (14.4.4), is liye alag alag cross aur dot nikalne ki zaroorat nahi.",
+              "Components ko rows mein likhein\n\\[[\\underline{u}\\ \\underline{v}\\ \\underline{w}] = \\begin{vmatrix} 1 & -4 & -1 \\\\ 1 & -1 & -2 \\\\ 2 & -3 & 1 \\end{vmatrix}\\]\nKyun: Pehli row mein \\(\\underline{u}\\) ke components, doosri mein \\(\\underline{v}\\) ke aur teesri mein \\(\\underline{w}\\) ke. Tarteeb ka khayal rakhein: \\(\\underline{i}\\) ka coefficient pehle column mein, \\(\\underline{j}\\) ka doosre mein, \\(\\underline{k}\\) ka teesre mein.\nDhyan dein: Jo unit vector likha hi nahi hua, us ka component 0 hai. Isay chhor dena aur baqi numbers ko aage khiska dena bohat aam ghalti hai.",
+              "Row 1 se expand karein\n\\[= 1\\begin{vmatrix} -1 & -2 \\\\ -3 & 1 \\end{vmatrix}\\]\n\\[\\quad + 4\\begin{vmatrix} 1 & -2 \\\\ 2 & 1 \\end{vmatrix}\\]\n\\[\\quad - 1\\begin{vmatrix} 1 & -1 \\\\ 2 & -3 \\end{vmatrix}\\]\n\\[= 1(-1 - 6) + 4(1 + 4) - 1(-3 + 2)\\]\n\\[= -7 + 20 + 1 = 14\\]\nKyun: Row 1 ki har entry ko us ke minor se multiply kiya. Minor woh 2 by 2 determinant hai jo us entry ki row aur column dhaanp dene ke baad bachta hai. Signs ka pattern \\(+, -, +\\) hai, is liye beech wali entry ke saath minus lagta hai. 2 by 2 determinant: seedhi diagonal ka product minus ulti diagonal ka product.\nDhyan dein: Beech wali entry khud negative ho to minus aur minus mil kar plus ban jate hain; sign do dafa check karein.",
+              "Absolute value lein\n\\[V = |14| = 14\\]\nKyun: Volume kabhi negative nahi hota. Agar determinant negative aata to sirf us ka sign hata dete (kitab ka Note bhi yahi kehta hai). Yahan jawab pehle hi positive hai.",
+              "Tasdeeq: pehle \\(\\underline{v} \\times \\underline{w}\\), phir \\(\\underline{u}\\) se dot\n\\[\\underline{v} \\times \\underline{w} = -7\\underline{i} - 5\\underline{j} - \\underline{k}\\]\n\\[\\underline{u} \\cdot (\\underline{v} \\times \\underline{w}) = -7 + 20 + 1\\]\n\\[= 14 \\;\\checkmark\\]\nKyun: Yeh definition wala lamba rasta hai: pehle cross product, phir dot product. Dono raste ek hi jawab dete hain, is liye 14 pakka hai."
+            ],
+            "final_answer": "\\(V = 14\\) cubic units\nYani yeh dabba 14 cubic units jagah gherta hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Find the volume of parallelepiped for which the given vectors are three edges: \\(\\underline{u} = \\underline{i} - 2\\underline{j} + 3\\underline{k}\\), \\(\\underline{v} = 2\\underline{i} - \\underline{j} - \\underline{k}\\), \\(\\underline{w} = \\underline{j} + \\underline{k}\\).",
+            "explanation": "Yeh volume (hajam) ka sawal hai. Teen vectors ek hi kone se nikalne wale kinare (edges) hain, aur in par ek dabba bana hai jise parallelepiped kehte hain, bilkul jaise maachis ki tirchi dibbi.\nDiya kya hai? Teeno edges ke components.\nFind kya karna hai? Is dabbe ka volume.\nRule kaunsa? Volume \\(= |[\\underline{u}\\ \\underline{v}\\ \\underline{w}]|\\), yani scalar triple product ki absolute value.\nPlan: components ko 3 by 3 determinant mein rows bana kar likhenge, row 1 se expand karenge, aur aakhir mein sign hata kar volume likhenge.",
+            "steps": [
+              "Diya gaya hai: \\(\\underline{u} = \\underline{i} - 2\\underline{j} + 3\\underline{k}\\), \\(\\underline{v} = 2\\underline{i} - \\underline{j} - \\underline{k}\\), \\(\\underline{w} = \\underline{j} + \\underline{k}\\).\nHumein find karna hai: parallelepiped ka volume \\(V\\), jis ke edges \\(\\underline{u}, \\underline{v}, \\underline{w}\\) hain.\nTareeqa: \\(V = |\\underline{u} \\cdot (\\underline{v} \\times \\underline{w})|\\) (14.4.2). Kyun? Base ka area \\(|\\underline{v} \\times \\underline{w}|\\) hai aur height \\(\\underline{u}\\) ka us base ke perpendicular wala hissa hai; dot product yahi dono cheezein ek saath multiply kar deta hai. Components mein yeh product seedha ek determinant ban jata hai (14.4.4), is liye alag alag cross aur dot nikalne ki zaroorat nahi.",
+              "Components ko rows mein likhein\n\\[[\\underline{u}\\ \\underline{v}\\ \\underline{w}] = \\begin{vmatrix} 1 & -2 & 3 \\\\ 2 & -1 & -1 \\\\ 0 & 1 & 1 \\end{vmatrix}\\]\nKyun: Pehli row mein \\(\\underline{u}\\) ke components, doosri mein \\(\\underline{v}\\) ke aur teesri mein \\(\\underline{w}\\) ke. Tarteeb ka khayal rakhein: \\(\\underline{i}\\) ka coefficient pehle column mein, \\(\\underline{j}\\) ka doosre mein, \\(\\underline{k}\\) ka teesre mein.\nDhyan dein: Jo unit vector likha hi nahi hua, us ka component 0 hai. Isay chhor dena aur baqi numbers ko aage khiska dena bohat aam ghalti hai.",
+              "Row 1 se expand karein\n\\[= 1\\begin{vmatrix} -1 & -1 \\\\ 1 & 1 \\end{vmatrix}\\]\n\\[\\quad + 2\\begin{vmatrix} 2 & -1 \\\\ 0 & 1 \\end{vmatrix}\\]\n\\[\\quad + 3\\begin{vmatrix} 2 & -1 \\\\ 0 & 1 \\end{vmatrix}\\]\n\\[= 1(-1 + 1) + 2(2 - 0) + 3(2 - 0)\\]\n\\[= 0 + 4 + 6 = 10\\]\nKyun: Row 1 ki har entry ko us ke minor se multiply kiya. Minor woh 2 by 2 determinant hai jo us entry ki row aur column dhaanp dene ke baad bachta hai. Signs ka pattern \\(+, -, +\\) hai, is liye beech wali entry ke saath minus lagta hai. 2 by 2 determinant: seedhi diagonal ka product minus ulti diagonal ka product.\nDhyan dein: Beech wali entry khud negative ho to minus aur minus mil kar plus ban jate hain; sign do dafa check karein.",
+              "Absolute value lein\n\\[V = |10| = 10\\]\nKyun: Volume kabhi negative nahi hota. Agar determinant negative aata to sirf us ka sign hata dete (kitab ka Note bhi yahi kehta hai). Yahan jawab pehle hi positive hai.",
+              "Tasdeeq: column 1 se expand karein\n\\[1(-1 + 1) - 2((-2)(1) - 3(1)) + 0\\]\n\\[= 0 - 2(-5) = 10 \\;\\checkmark\\]\nKyun: Column 1 mein ek 0 hai, is liye yeh expansion chhoti hai, aur jawab phir bhi 10 hi aaya."
+            ],
+            "final_answer": "\\(V = 10\\) cubic units\nYani yeh dabba 10 cubic units jagah gherta hai."
+          }
+        ]
+      }
+    }
+  ]
+}

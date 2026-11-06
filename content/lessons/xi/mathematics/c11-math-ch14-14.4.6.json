@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH14-14.4.6",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch14",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch14/14.4.6",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 293,
+          "pdf_to": 294,
+          "note": "Book p. 288-289: 14.4.6 Example 29 (torque, -36k), Key Concept box tau = r x F with wrench figure, Example 30 (magnitude 5976.59 N), Example 31 (revenue 3,331,200). Book error: 'three product'. Teaching notes are ours."
+        }
+      ],
+      "title": "14.4.6 Applications of Vectors in Real World",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The products of vectors are not only about geometry. This section shows three everyday uses: the cross product gives torque (Example 29), the magnitude of a vector gives the size of a force (Example 30), and the dot product gives total revenue (Example 31)."
+          },
+          {
+            "type": "example",
+            "title": "Example 29",
+            "problem": "A plumber exerts a force of 30 pounds along the negative \\(y\\)-axis on a lever connected to a machine. The pivot point of the lever is at the origin \\((0, 0, 0)\\), and the force is applied at the point \\((1.2\\text{ ft}, 0.5\\text{ ft}, 0\\text{ ft})\\). Determine the torque produced by this force about the pivot point.",
+            "steps": [
+              "Given: force of magnitude 30 pounds along the negative \\(y\\)-axis; pivot at \\(O(0, 0, 0)\\); force applied at \\((1.2, 0.5, 0)\\) (in feet).\nTo find: the torque \\(\\underline{\\tau}\\) about the pivot.\nMethod: torque is \\(\\underline{\\tau} = \\underline{r}\\times \\underline{F}\\) (Key Concept), where \\(\\underline{r}\\) runs from the pivot to the point where the force acts. Compute the cross product with the determinant formula.",
+              "Step 1: Position vector\n\\[\\underline{r} = 1.2\\underline{i} + 0.5\\underline{j} + 0\\underline{k}\\]\nWhy: the pivot is the origin, so \\(\\underline{r}\\) is just the position vector of \\((1.2, 0.5, 0)\\).",
+              "Step 2: Force vector\n\\[\\underline{F} = 0\\underline{i} - 30\\underline{j} + 0\\underline{k}\\]\nWhy: the force has magnitude 30 and points along the negative \\(y\\)-axis (downward), so only the \\(\\underline{j}\\)-component is non-zero and it is negative.",
+              "Step 3: Set up the cross product\n\\[\\underline{\\tau} = \\begin{vmatrix} \\underline{i} & \\underline{j} & \\underline{k} \\\\ 1.2 & 0.5 & 0 \\\\ 0 & -30 & 0 \\end{vmatrix}\\]\nWhy: determinant formula of the cross product: row 1 the unit vectors, row 2 the components of \\(\\underline{r}\\), row 3 those of \\(\\underline{F}\\). The order matters: \\(\\underline{r}\\times \\underline{F}\\), not \\(\\underline{F}\\times \\underline{r}\\).",
+              "Step 4: Expand\n\\[= \\underline{i}\\big[(0.5)(0) - (0)(-30)\\big]\\]\n\\[- \\underline{j}\\big[(1.2)(0) - (0)(0)\\big]\\]\n\\[+ \\underline{k}\\big[(1.2)(-30) - (0.5)(0)\\big]\\]\n\\[= 0\\underline{i} - 0\\underline{j} - 36\\underline{k}\\]\nWhy: each unit vector multiplies the \\(2\\times 2\\) determinant left after deleting its column; the \\(\\underline{j}\\) term has a minus sign.",
+              "Step 5: State the torque\n\\[\\underline{\\tau} = -36\\underline{k}\\ \\text{pound-feet}\\]\nWhy: the torque has magnitude 36 and points along the negative \\(z\\)-axis.",
+              "Check: the force is along the \\(y\\)-axis, so only the part of \\(\\underline{r}\\) across it, \\(1.2\\) ft along \\(x\\), turns the lever: \\(30\\times 1.2 = 36\\). Direction: \\(\\underline{i}\\times(-\\underline{j}) = -\\underline{k}\\), the negative \\(z\\)-direction. Both agree."
+            ],
+            "answer": "\\(\\underline{\\tau} = -36\\underline{k}\\) pound-feet. Thus, the torque is 36 feet-pounds in the negative \\(z\\)-direction."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Key Concept",
+            "text": "Torque measures the turning (rotational) effect of a force applied to an object about a pivot point. It is found by taking the cross product of the position vector \\(\\underline{r}\\) (which runs from the pivot point to the point where the force is applied) and the force vector \\(\\underline{F}\\) itself.\nMathematically, \\(\\underline{\\tau} = \\underline{r}\\times \\underline{F}\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-math-ch14-fig-torque-wrench",
+            "alt": "A wrench turning a hexagonal bolt. The position vector r runs along the handle from the bolt (the pivot) to the end of the handle, where the force F is applied at an angle theta to the extension of r. The torque vector tau points along the axis of the bolt.",
+            "caption": "Figure: torque on a wrench, τ = r × F (original drawing after the textbook's Key Concept figure)",
+            "side": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Torque is what makes things turn: a spanner turning a nut, a door turning on its hinges, a plumber's lever. A larger force, or the same force applied further from the pivot, turns more easily; that is why a long spanner helps. \\(|\\underline{\\tau}| = |\\underline{r}||\\underline{F}|\\sin\\theta\\), so a force pointing straight along the handle (\\(\\theta = 0\\)) does not turn it at all.\nUnits: force in pounds times distance in feet. The book writes \"pound-feet\" in one line and \"feet-pounds\" in the next; both name the same unit (lb·ft)."
+          },
+          {
+            "type": "example",
+            "title": "Example 30",
+            "problem": "During a building construction, a crane exerts a force to pull a concrete block, represented by the vector \\(\\underline{F} = [4500, 3300, 2140]\\) Newton. Each component corresponds to the force exerted along the \\(x\\), \\(y\\), and \\(z\\) axes, respectively. What is the magnitude of this force?",
+            "steps": [
+              "Given: \\(\\underline{F} = [4500, 3300, 2140]\\) N, i.e. \\(\\underline{F} = 4500\\underline{i} + 3300\\underline{j} + 2140\\underline{k}\\).\nTo find: the magnitude \\(|\\underline{F}|\\).\nMethod: the magnitude of a vector in space is \\(\\sqrt{x^{2} + y^{2} + z^{2}}\\) (14.1).",
+              "Step 1: Write the formula\n\\[|\\underline{F}| = \\sqrt{x^{2} + y^{2} + z^{2}}\\]\n\\[= \\sqrt{4500^{2} + 3300^{2} + 2140^{2}}\\]\nWhy: the three components are perpendicular to one another, so the length is found by Pythagoras in three dimensions.",
+              "Step 2: Square each component\n\\[4500^{2} = 20250000\\]\n\\[3300^{2} = 10890000\\]\n\\[2140^{2} = 4579600\\]\nWhy: work out each square separately before adding, to avoid slips with the zeros.",
+              "Step 3: Add and take the square root\n\\[20250000 + 10890000 + 4579600\\]\n\\[= 35719600\\]\n\\[|\\underline{F}| = \\sqrt{35719600}\\]\n\\[\\approx 5976.59\\]\nWhy: the square root of the sum is the magnitude; it is not a perfect square, so we round to two decimal places.",
+              "Check: \\(5976.59^{2} \\approx 35719628\\), very close to \\(35719600\\). Also the magnitude must exceed the largest component \\(4500\\) and be less than the sum \\(9940\\); \\(5976.59\\) does."
+            ],
+            "answer": "The magnitude of the force exerted by the crane is approximately \\(5976.59\\) Newton."
+          },
+          {
+            "type": "example",
+            "title": "Example 31",
+            "problem": "The components of \\(\\underline{u} = 300\\underline{i} + 250\\underline{j} + 180\\underline{k}\\) represent the respective number of jackets, shoes, and handbags sold at a store. The components of \\(\\underline{v} = 3500\\underline{i} + 4200\\underline{j} + 6840\\underline{k}\\) represent the respective prices (in rupees) per unit for each product. Find \\(\\underline{u}\\cdot \\underline{v}\\) and explain what the result tells us in real life.",
+            "steps": [
+              "Given: \\(\\underline{u} = 300\\underline{i} + 250\\underline{j} + 180\\underline{k}\\) (numbers sold of jackets, shoes, handbags) and \\(\\underline{v} = 3500\\underline{i} + 4200\\underline{j} + 6840\\underline{k}\\) (price per item in rupees).\nTo find: \\(\\underline{u}\\cdot \\underline{v}\\) and its meaning.\nMethod: dot product in components: multiply matching components and add (14.2).",
+              "Step 1: Write the dot product\n\\[\\underline{u}\\cdot \\underline{v} = (300\\underline{i} + 250\\underline{j} + 180\\underline{k})\\]\n\\[\\cdot\\,(3500\\underline{i} + 4200\\underline{j} + 6840\\underline{k})\\]\nWhy: the dot product pairs the \\(\\underline{i}\\), \\(\\underline{j}\\) and \\(\\underline{k}\\) components.",
+              "Step 2: Multiply matching components\n\\[(300)(3500) = 1{,}050{,}000\\]\n\\[(250)(4200) = 1{,}050{,}000\\]\n\\[(180)(6840) = 1{,}231{,}200\\]\nWhy: each product is (number sold) \\(\\times\\) (price), i.e. the money earned from one kind of item.",
+              "Step 3: Add\n\\[\\underline{u}\\cdot \\underline{v} = 1{,}050{,}000 + 1{,}050{,}000 + 1{,}231{,}200\\]\n\\[= 3{,}331{,}200\\]\nWhy: the dot product is the sum of the three products.",
+              "Step 4: Meaning in real life\nJackets bring Rs. 1,050,000, shoes Rs. 1,050,000 and handbags Rs. 1,231,200; the dot product adds them, so it is the total revenue (total money received from sales).\nWhy: quantity times price is revenue, and the dot product is exactly 'multiply pairwise and add'.",
+              "Check: rough estimate \\(300\\times 3500 \\approx 1\\) million, \\(250\\times 4200 \\approx 1\\) million, \\(180\\times 6840 \\approx 1.2\\) million; total about \\(3.3\\) million. Matches."
+            ],
+            "answer": "\\(\\underline{u}\\cdot \\underline{v} = 3{,}331{,}200\\). The result tells us that total revenue generated from selling all the three product is Rs. 3,331,200.",
+            "book_errors": [
+              "three product"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \"selling all the three product\". It should read \"selling all the three products\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Torque: \\(\\underline{\\tau} = \\underline{r}\\times \\underline{F}\\), with \\(\\underline{r}\\) from the pivot to the point where the force acts.\n2. Magnitude of \\(\\underline{F} = [x, y, z]\\): \\(|\\underline{F}| = \\sqrt{x^{2} + y^{2} + z^{2}}\\).\n3. Quantities \\(\\cdot\\) prices (dot product) = total revenue.\n4. Always state the units and the direction of a vector answer."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Computing \\(\\underline{F}\\times \\underline{r}\\) instead of \\(\\underline{r}\\times \\underline{F}\\): the sign of the torque reverses.\n2. Writing the force along the negative \\(y\\)-axis as \\(+30\\underline{j}\\).\n3. Answering Example 31 with a vector: a dot product is a number."
+          }
+        ]
+      }
+    }
+  ]
+}
