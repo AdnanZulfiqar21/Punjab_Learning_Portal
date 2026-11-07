@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q13-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q13",
+      "title": "Question 13 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 13: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-3-Q13",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13",
+            "prompt": "13. Evaluate \\(\\int \\dfrac{x}{1 - \\sin x}\\,dx\\).",
+            "explanation": "Denominator \\(1 - \\sin x\\) ko hatane ki chaal: upar neeche \\(1 + \\sin x\\) se zarb karein, kyunke \\((1 - \\sin x)(1 + \\sin x) = 1 - \\sin^2 x = \\cos^2 x\\).\nPhir integrand \\(x(\\sec^2 x + \\sec x\\tan x)\\) ban jata hai.\nBracket ka integral \\(\\tan x + \\sec x\\) hai, is liye \\(x\\) first aur bracket second function.\nPlan: rationalise, parts, phir \\(\\int \\tan x\\) aur \\(\\int \\sec x\\) ke standard results.",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{x}{1 - \\sin x}\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: upar neeche \\(1 + \\sin x\\) se zarb; phir parts, \\(x\\) first aur \\(\\sec^2 x + \\sec x\\tan x\\) second.",
+              "Denominator saaf karein\n\\[\\dfrac{x}{1 - \\sin x}\\cdot\\dfrac{1 + \\sin x}{1 + \\sin x} = \\dfrac{x(1 + \\sin x)}{\\cos^2 x}\\]\n\\[= x(\\sec^2 x + \\sec x\\tan x)\\]\nKyun: \\((a - b)(a + b) = a^2 - b^2\\) se neeche \\(1 - \\sin^2 x = \\cos^2 x\\). Phir \\(\\frac{1}{\\cos^2 x} = \\sec^2 x\\) aur \\(\\frac{\\sin x}{\\cos^2 x} = \\frac{1}{\\cos x}\\cdot\\frac{\\sin x}{\\cos x} = \\sec x\\tan x\\).",
+              "Parts lagayein\n\\[\\int (\\sec^2 x + \\sec x\\tan x)\\,dx = \\tan x + \\sec x\\]\n\\[= x(\\tan x + \\sec x) - \\int (\\tan x + \\sec x)\\,dx\\]\nKyun: \\(\\tan x\\) ka derivative \\(\\sec^2 x\\) aur \\(\\sec x\\) ka derivative \\(\\sec x\\tan x\\); is liye bracket ka integral \\(\\tan x + \\sec x\\). \\(x\\) ka derivative 1.",
+              "Standard integrals\n\\[= x\\tan x + x\\sec x - \\ln|\\sec x|\\]\n\\[\\quad - \\ln|\\sec x + \\tan x| + c\\]\nKyun: \\(\\int \\tan x\\,dx = \\ln|\\sec x|\\) aur \\(\\int \\sec x\\,dx = \\ln|\\sec x + \\tan x|\\), dono minus ke saath.\nDhyan dein: \\(\\int \\sec x\\,dx\\) ko \\(\\sec x\\tan x\\) ya \\(\\tan x\\) likh dena aam ghalti hai; yeh log wala result hai.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}[x(\\tan x + \\sec x)] = \\tan x + \\sec x + x(\\sec^2 x + \\sec x\\tan x)\\]\n\\[\\dfrac{d}{dx}[\\ln|\\sec x| + \\ln|\\sec x + \\tan x|] = \\tan x + \\sec x\\]\nKyun: pehle mein se doosra minus karein to \\(\\tan x + \\sec x\\) cancel ho kar \\(x(\\sec^2 x + \\sec x\\tan x)\\) bachta hai, jo step 1 ke mutabiq \\(\\frac{x}{1 - \\sin x}\\) hai."
+            ],
+            "final_answer": "\\(x\\tan x + x\\sec x - \\ln|\\sec x| - \\ln|\\sec x + \\tan x| + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-7-Q12",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-7-q12",
+      "title": "Question 12",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 124,
+          "pdf_to": 124,
+          "note": "Exercise 3.7, Question 12 (book p. 122); answers printed in the key (book p. 302) under the heading 'Exercise 3.8'."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12(a)",
+            "prompt": "12. A patient receives an IV bolus dose of a drug. The concentration in the blood is modeled by \\(C(t) = 12e^{-0.3t}\\) (mg/L) where \\(t\\) is the time in hours since that dose was taken. The minimum effective concentration (MEC) is 3 mg/L. The drug is considered effective if total AUC in a 24-hour period is at least 150 mg h/L. (a) Find the time \\(T\\) (in hours) when the concentration reaches the MEC.",
+            "explanation": "Solve \\(C(T) = 3\\): an exponential equation, solved with logarithms.",
+            "steps": [
+              "Given: \\(C(t) = 12e^{-0.3t}\\), MEC \\(= 3\\) mg/L.\nTo find: \\(T\\) with \\(C(T) = 3\\).\nMethod: isolate the exponential, then take \\(\\ln\\).",
+              "Solve\n\\[12e^{-0.3T} = 3 \\Rightarrow e^{-0.3T} = \\dfrac{1}{4}\\]\n\\[-0.3T = \\ln\\dfrac{1}{4} = -\\ln 4\\]\n\\[T = \\dfrac{\\ln 4}{0.3} \\approx 4.62\\text{ hours}\\]\nWhy: \\(\\ln\\) undoes \\(e\\); \\(\\ln\\frac{1}{4} = -\\ln 4\\).",
+              "Check\n\\[12e^{-0.3 \\times 4.621} \\approx 12 \\times 0.25 = 3\\;\\checkmark\\]"
+            ],
+            "final_answer": "\\(T = \\dfrac{\\ln 4}{0.3} \\approx 4.62\\) hours (about 4 h 37 min)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12(b)",
+            "prompt": "12. A patient receives an IV bolus dose of a drug. The concentration in the blood is modeled by \\(C(t) = 12e^{-0.3t}\\) (mg/L) where \\(t\\) is the time in hours since that dose was taken. The minimum effective concentration (MEC) is 3 mg/L. The drug is considered effective if total AUC in a 24-hour period is at least 150 mg h/L. (b) Calculate the AUC from \\(t = 0\\) to \\(t = T\\) for a single dose.",
+            "explanation": "AUC is the integral of \\(C(t)\\); use \\(e^{-0.3T} = \\frac{1}{4}\\) from (a) to avoid rounding.",
+            "steps": [
+              "Given: \\(C(t) = 12e^{-0.3t}\\), \\(e^{-0.3T} = \\frac{1}{4}\\).\nTo find: \\(\\int_{0}^{T} C(t)\\,dt\\).\nMethod: \\(\\int e^{kt}\\,dt = \\frac{e^{kt}}{k}\\) with \\(k = -0.3\\).",
+              "Integrate\n\\[\\int_{0}^{T} 12e^{-0.3t}\\,dt = 12\\left[\\dfrac{e^{-0.3t}}{-0.3}\\right]_{0}^{T}\\]\n\\[= -40\\big(e^{-0.3T} - 1\\big) = 40\\big(1 - e^{-0.3T}\\big)\\]\nWhy: \\(\\frac{12}{0.3} = 40\\).",
+              "Use part (a)\n\\[= 40\\left(1 - \\dfrac{1}{4}\\right) = 30\\]",
+              "Check\nThe total AUC of one dose is \\(\\int_0^\\infty = 40\\); 30 is three quarters of it, matching \\(1 - \\frac{1}{4}\\;\\checkmark\\)."
+            ],
+            "final_answer": "\\(\\text{AUC}_{0\\to T} = 30\\) mg h/L"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12(c)",
+            "prompt": "12. A patient receives an IV bolus dose of a drug. The concentration in the blood is modeled by \\(C(t) = 12e^{-0.3t}\\) (mg/L) where \\(t\\) is the time in hours since that dose was taken. The minimum effective concentration (MEC) is 3 mg/L. The drug is considered effective if total AUC in a 24-hour period is at least 150 mg h/L. (c) Determine if one dose provides enough total AUC over 24 hours. If not, how many doses (given at intervals of \\(T\\) hours) are needed in 24 hours to meet the requirement?",
+            "explanation": "First the AUC of one dose over 24 hours; then several doses at \\(t = 0, T, 2T, \\dots\\), whose contributions add.\nPlan: each dose gives at most 40, so at least 4 doses; check that 4 doses really give \\(\\ge 150\\) inside the 24 hours.",
+            "steps": [
+              "Given: \\(C(t) = 12e^{-0.3t}\\) per dose, required AUC over 24 h \\(\\ge 150\\) mg h/L, doses every \\(T\\) hours with \\(e^{0.3T} = 4\\).\nTo find: whether one dose is enough; if not, the number of doses needed.\nMethod: AUC of a dose taken at time \\(\\tau\\), counted up to \\(t = 24\\), is \\(\\int_{0}^{24 - \\tau} 12e^{-0.3u}\\,du = 40\\big(1 - e^{-0.3(24 - \\tau)}\\big)\\).",
+              "One dose\n\\[\\text{AUC}_{0\\to 24} = 40\\big(1 - e^{-7.2}\\big)\\]\n\\[\\approx 40(1 - 0.00075) \\approx 39.97\\]\n\\(39.97 < 150\\): one dose is not enough.\nWhy: \\(0.3 \\times 24 = 7.2\\).",
+              "At least how many doses?\nEach dose gives at most \\(\\int_0^\\infty 12e^{-0.3t}\\,dt = 40\\), so \\(n\\) doses give at most \\(40n\\).\n\\[40n \\ge 150 \\Rightarrow n \\ge 3.75\\]\nSo 3 doses (at most 120) can never be enough; at least 4 are needed.",
+              "Four doses at \\(t = 0, T, 2T, 3T\\)\nThe dose at \\(kT\\) acts for \\(24 - kT\\) hours inside the 24 h:\n\\[40\\big(1 - e^{-0.3(24 - kT)}\\big) = 40\\big(1 - 4^{k}e^{-7.2}\\big)\\]\n\\[\\text{Total} = 160 - 40(1 + 4 + 16 + 64)e^{-7.2}\\]\n\\[= 160 - 3400e^{-7.2} \\approx 157.46\\]\nWhy: \\(e^{0.3kT} = (e^{0.3T})^{k} = 4^{k}\\); the last dose is at \\(3T \\approx 13.86\\) h, inside the 24 hours.",
+              "Conclusion\n\\(157.46 \\ge 150\\), so 4 doses meet the requirement, and 3 cannot.",
+              "Check\nDose by dose: \\(39.97 + 39.88 + 39.52 + 38.09 \\approx 157.46\\;\\checkmark\\). Note: \\(150 \\div 30 = 5\\) is not the answer, because the 30 of part (b) counts each dose only up to time \\(T\\), while the drug keeps acting afterwards."
+            ],
+            "final_answer": "No, one dose gives only about 39.97 mg h/L (\\(< 150\\)). At least 4 doses (at \\(t = 0, T, 2T, 3T \\approx 0, 4.62, 9.24, 13.86\\) h) are needed; they give about 157.5 mg h/L."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key says \"One dose insufficient; 6 doses needed in 24 hours\". The first half is right, but 6 is only the number of doses that fit into 24 hours when one is given every \\(T\\) hours (\\(t = 0, T, \\dots, 5T \\approx 23.1\\) h); six doses give an AUC of about 199 mg h/L, far more than 150. The least number of doses that meets the requirement is 4 (AUC \\(\\approx 157.5\\) mg h/L), as shown above."
+          }
+        ]
+      }
+    }
+  ]
+}

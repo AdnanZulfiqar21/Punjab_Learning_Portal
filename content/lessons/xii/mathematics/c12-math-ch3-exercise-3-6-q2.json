@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-6-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-6-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 116,
+          "pdf_to": 116,
+          "note": "Exercise 3.6 (printed 1, 1, 2-13, 15; numbered 1-15 as in the answer key), Question 2; answers under block 'Exercise 3.7' (PDF 304)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) [printed as a second 1 (i)] Find the total area and the signed area between the graph of \\(y = x^{2} - 4\\) and the \\(x\\)-axis over the interval \\([-3, -1]\\).",
+            "explanation": "Two different quantities are asked. The signed area is just the definite integral (parts below the axis count negative). The total area counts every part as positive, so we must split the interval where the curve crosses the axis.\nPlan: find where \\(x^{2} - 4 = 0\\), integrate over each piece, then combine with signs (signed) and with absolute values (total).",
+            "steps": [
+              "Given: \\(y = x^{2} - 4\\) on \\([-3, -1]\\).\nTo find: the signed area \\(\\int_{-3}^{-1} y\\,dx\\) and the total area \\(\\int_{-3}^{-1} |y|\\,dx\\).\nMethod: split at the root inside the interval (Note 2 of 3.7.1).",
+              "Step 1: Where does the curve cross the axis?\n\\[x^{2} - 4 = 0 \\Rightarrow x = \\pm 2\\]\nOnly \\(x = -2\\) lies in \\([-3, -1]\\). On \\([-3, -2]\\), \\(y \\ge 0\\) (e.g. \\(y(-2.5) = 2.25\\)); on \\([-2, -1]\\), \\(y \\le 0\\) (e.g. \\(y(-1.5) = -1.75\\)).\nWhy: the sign changes only at a root, so one test point per piece decides the sign.",
+              "Step 2: Antiderivative\n\\[F(x) = \\dfrac{x^{3}}{3} - 4x\\]\n\\[F(-3) = -9 + 12 = 3\\]\n\\[F(-2) = -\\dfrac{8}{3} + 8 = \\dfrac{16}{3}\\]\n\\[F(-1) = -\\dfrac{1}{3} + 4 = \\dfrac{11}{3}\\]\nWhy: computing \\(F\\) once at every needed point saves repeated work.",
+              "Step 3: Integral over each piece\n\\[\\int_{-3}^{-2} y\\,dx = \\dfrac{16}{3} - 3 = \\dfrac{7}{3}\\]\n\\[\\int_{-2}^{-1} y\\,dx = \\dfrac{11}{3} - \\dfrac{16}{3} = -\\dfrac{5}{3}\\]\nWhy: the second piece is negative because the curve is below the axis there.",
+              "Step 4: Signed area and total area\n\\[\\text{Signed} = \\dfrac{7}{3} - \\dfrac{5}{3} = \\dfrac{2}{3}\\]\n\\[\\text{Total} = \\dfrac{7}{3} + \\dfrac{5}{3} = 4\\]\nWhy: the signed area keeps the minus sign; the total area adds the sizes of both pieces.",
+              "Check:\nThe signed area also equals \\(F(-1) - F(-3) = \\frac{11}{3} - 3 = \\frac{2}{3}\\) directly, without splitting. It matches."
+            ],
+            "final_answer": "Signed area \\(= \\frac{2}{3}\\); total area \\(= 4\\) square units.",
+            "answer_figure": {
+              "$asset": "c12-math-ch3-fig-ex3-6-q2",
+              "alt": "Graph of the parabola y = x squared minus 4 with x-intercepts (minus 2, 0) and (2, 0) and vertex (0, minus 4). Vertical lines at x = minus 3, x = minus 1 and x = 3. Parts above the axis (from minus 3 to minus 2 and from 2 to 3) are shaded green, the part below the axis (from minus 2 to 2) blue.",
+              "caption": "Figure: y = x² − 4 over [−3, 3] for Question 2 (original drawing)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) [printed as a second 1 (ii)] Find the total area and the signed area between the graph of \\(y = x^{2} - 4\\) and the \\(x\\)-axis over the interval \\([-3, 3]\\).",
+            "explanation": "Same function, wider interval. Now both roots \\(x = -2\\) and \\(x = 2\\) lie inside \\([-3, 3]\\), so for the total area we split into three pieces.\nPlan: use the same antiderivative, integrate piece by piece, then combine.",
+            "steps": [
+              "Given: \\(y = x^{2} - 4\\) on \\([-3, 3]\\).\nTo find: signed area and total area.\nMethod: split at \\(x = -2\\) and \\(x = 2\\); use symmetry (\\(y\\) is an even function).",
+              "Step 1: Signed area\n\\[\\int_{-3}^{3}(x^{2} - 4)\\,dx = \\left[\\dfrac{x^{3}}{3} - 4x\\right]_{-3}^{3}\\]\n\\[= (9 - 12) - (-9 + 12) = -6\\]\nWhy: the signed area is the plain definite integral; no splitting is needed.",
+              "Step 2: The pieces\n\\[\\int_{-3}^{-2} y\\,dx = \\dfrac{7}{3},\\quad \\int_{2}^{3} y\\,dx = \\dfrac{7}{3}\\]\n\\[\\int_{-2}^{2} y\\,dx = \\left(\\dfrac{8}{3} - 8\\right) - \\left(-\\dfrac{8}{3} + 8\\right)\\]\n\\[= -\\dfrac{32}{3}\\]\nWhy: the end pieces are equal by symmetry of \\(y = x^{2} - 4\\) about the \\(y\\)-axis; the middle piece is below the axis so it is negative.",
+              "Step 3: Total area\n\\[\\dfrac{7}{3} + \\dfrac{32}{3} + \\dfrac{7}{3} = \\dfrac{46}{3}\\]\nWhy: each piece is counted as a positive size.",
+              "Check:\nSigned area from the pieces: \\(\\frac{7}{3} - \\frac{32}{3} + \\frac{7}{3} = -\\frac{18}{3} = -6\\). It agrees with Step 1."
+            ],
+            "final_answer": "Signed area \\(= -6\\); total area \\(= \\frac{46}{3}\\) square units."
+          }
+        ]
+      }
+    }
+  ]
+}

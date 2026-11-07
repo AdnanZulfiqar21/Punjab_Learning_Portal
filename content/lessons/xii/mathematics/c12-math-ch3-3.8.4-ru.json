@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.8.4-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.8.4",
+      "title": "3.8.4 Drug Dosage Required by Integrating Concentration (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 122,
+          "pdf_to": 123,
+          "note": "Book p. 120-121: 3.8.4 Core Concept box (drug concentration, MIC, AUC, why integrate) and Example 72 (Basic AUC Calculation)."
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-3.8.4",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Jab doctor aap ko antibiotic deta hai aur kehta hai \"har 8 ghante baad ek goli\", to yeh andaza nahin hota; is ke peechhe hisaab hai. Is sabaq mein hum dekhenge ke integration se kaise pata chalta hai ke jism ko dawai kitni mili, aur kya woh kaafi hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Core Concept: Drug Concentration and Integration"
+          },
+          {
+            "type": "paragraph",
+            "text": "Infection se larai ko dawai aur bacteria ke darmiyan ek battle (jung) samjhiye.",
+            "bold": [
+              "battle"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "text": "Drug Concentration \\(C(t)\\): yeh khoon (bloodstream) mein waqt \\(t\\) par \"sipahiyon ki tadaad\" ki tarah hai. Dose ke foran baad bohat sipahi hote hain; waqt ke saath jism unhein nikalta rehta hai (metabolism, yani hazm aur excretion, yani kharij karna), is liye tadaad kam hoti jati hai.\nMinimum Inhibitory Concentration (MIC): kam se kam itne sipahi chahiyein jo maidan sambhal sakein aur bacteria ko barhne na dein. Agar concentration is se neeche gir jaye to infection dobara jeetne lagta hai.\nArea Under the Curve (AUC): concentration aur waqt ke graph mein curve ke neeche ka area poore waqt ki kul larai (total fighting effort) hai. Thore waqt ke liye zyada sipahi bhi utni hi kul larai de sakte hain jitni lambe waqt ke liye kam sipahi. Bacteria ko khatam karne ke liye yahi kul larai (AUC) aham hai.\nIntegrate kyun? Integration kul \"sipahi-ghante\" (concentration \\(\\times\\) waqt) jama karti hai. Agar \\(C(t)\\) waqt \\(t\\) par concentration ho, to\n\\[\\text{AUC} = \\int_{t_1}^{t_2} C(t)\\,dt\\]\nYeh AUC kul drug exposure (jism ko dawai kitni mili) naapta hai. Doctors tajurbaat se jaante hain: AUC bohat kam ho to dawai theek kaam nahin karti; bohat zyada ho to side effects ka khatra hai. Is liye woh AUC nikal kar sahi dose aur dose ka waqfa (frequency) tay karte hain.",
+            "bold": [
+              "Drug Concentration",
+              "Minimum Inhibitory Concentration (MIC):",
+              "Area Under the Curve (AUC):",
+              "Integrate kyun?",
+              "kul drug exposure"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Ek aam model (jo Example 72 aur Exercise 3.7 mein hai) exponential decay hai: \\(C(t) = C_0e^{-kt}\\). Yahan \\(C_0\\) dose ke foran baad ka concentration hai, aur \\(k > 0\\) batata hai ke jism dawai kitni tezi se nikalta hai (\\(k\\) bara to dawai jaldi khatam).\nIs model ke liye do kaam ke natije:\n\\[\\int_{0}^{T} C_0e^{-kt}\\,dt = \\dfrac{C_0}{k}\\big(1 - e^{-kT}\\big)\\]\n\\[\\int_{0}^{\\infty} C_0e^{-kt}\\,dt = \\dfrac{C_0}{k}\\]\nDoosre integral ki upper limit infinity hai (ise improper integral kehte hain): pehle \\(b\\) tak integrate karte hain, phir \\(b \\to \\infty\\). Kyun ke \\(e^{-kb} \\to 0\\), area mehdood (finite) rehta hai. Yeh ajeeb lagta hai ke lamba se lamba waqt ho phir bhi area mehdood hai, lekin curve itni tezi se zero ki taraf girti hai ke baad wale hisson ka area na hone ke barabar reh jata hai.\nAUC ki unit: (mg/L) \\(\\times\\) ghante \\(=\\) mg hr/L."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal shuru karne se pehle teen sawal apne aap se poochiye: (1) concentration ka formula kya hai aur us mein \\(C_0\\) aur \\(k\\) kitne hain? Yahan \\(C_0 = 8\\) mg/L aur \\(k = 0.15\\) fi ghanta. (2) Kis waqt se kis waqt tak ka exposure chahiye? Yeh integral ki limits banengi. (3) Jawab kis cheez se compare karna hai? Part (c) mein 40 mg hr/L se. Jab yeh teen baatein saaf hon to sawal aadha hal ho jata hai; baqi sirf exponential ka integral hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 72",
+            "problem": "Basic AUC Calculation: A patient is given an intravenous dose of an antibiotic. The concentration in the bloodstream over time is modeled by \\(C(t) = 8e^{-0.15t}\\) (mg/L), where \\(t\\) is in hours.\n(a) Find the total drug exposure (AUC) from \\(t = 0\\) to \\(t = 6\\) hours.\n(b) What is the AUC from \\(t = 0\\) to infinity?\n(c) If the minimum required total exposure over the first 6 hours is 40 mg hr/L, is the drug exposure from this dose sufficient for a 6-hour treatment?",
+            "steps": [
+              "Diya gaya: \\(C(t) = 8e^{-0.15t}\\) mg/L, \\(t\\) ghanton mein; 6 ghante mein zaroori exposure: 40 mg hr/L.\nMaloom karna: (a) \\(\\text{AUC}_{0\\to 6}\\); (b) \\(\\text{AUC}_{0\\to\\infty}\\); (c) kya dose kaafi hai.\nTareeqa: AUC, \\(C(t)\\) ka definite integral hai. \\(\\int e^{kt}\\,dt = \\frac{e^{kt}}{k}\\) lagayenge, jahan \\(k = -0.15\\). Part (b) mein upper limit infinity hai, is liye limit ko barhate jayenge aur \\(e^{-0.15t} \\to 0\\) istemal karenge.",
+              "(a) \\(t = 0\\) se \\(t = 6\\) tak AUC\n\\[\\text{AUC}_{0\\to 6} = \\int_{0}^{6} 8e^{-0.15t}\\,dt\\]\n\\[= 8\\left[\\dfrac{e^{-0.15t}}{-0.15}\\right]_{0}^{6}\\]\n\\[= \\dfrac{8}{-0.15}\\big(e^{-0.15\\times 6} - e^{0}\\big)\\]\nKyun: \\(e^{-0.15t}\\) ka antiderivative \\(\\frac{e^{-0.15t}}{-0.15}\\) hai: exponential ko integrate karte waqt \\(t\\) ke coefficient se divide karte hain. 8 constant hai, bahar aa gaya.\nDhyan dein: \\(-0.15\\) ka minus sign saath rakhiye.",
+              "(a) Simplify karein\n\\[= \\dfrac{8}{0.15}\\big(1 - e^{-0.9}\\big)\\]\n\\[= 53.333 \\times 0.5934\\]\n\\[\\approx 31.65\\text{ mg hr/L}\\]\nKyun: \\(\\frac{8}{-0.15}(e^{-0.9} - 1)\\) mein do minus mil kar plus bante hain: \\(\\frac{8}{0.15}(1 - e^{-0.9})\\). Calculator se \\(e^{-0.9} \\approx 0.4066\\), to \\(1 - e^{-0.9} \\approx 0.5934\\).",
+              "(b) \\(t = 0\\) se infinity tak AUC\n\\[\\text{AUC}_{0\\to\\infty} = \\int_{0}^{\\infty} 8e^{-0.15t}\\,dt\\]\n\\[= 8\\left[\\dfrac{e^{-0.15t}}{-0.15}\\right]_{0}^{\\infty}\\]\n\\[= \\dfrac{8}{0.15}(1 - 0) = 53.33\\text{ mg hr/L}\\]\nKyun: jab \\(t \\to \\infty\\), \\(e^{-0.15t} \\to 0\\) (yani dawai aakhir kaar khatam ho jati hai), to bracket \\(\\frac{0 - 1}{-0.15} = \\frac{1}{0.15}\\) ban jata hai. Darasal \\(\\int_0^\\infty\\) ka matlab hai \\(\\lim_{b\\to\\infty}\\int_0^b\\): pehle \\(b\\) tak integrate karo, phir \\(b\\) ko barhate jao.",
+              "(c) Zaroorat se muqabla\nPehle 6 ghante mein zaroori kul exposure \\(= 40\\) mg hr/L.\n\\(t = 0\\) se \\(t = 6\\) tak asal AUC \\(= 31.65\\) mg hr/L.\n\\[31.65 < 40\\]\nNateeja: Nahin. Is dose se 6 ghante mein milne wala exposure 40 mg hr/L ki kam se kam zaroorat poori nahin karta.\nKyun: 6 ghante ka exposure part (a) wala AUC hai, aur woh zaroorat se kam hai.",
+              "Tasdeeq:\n6 ghante ka AUC infinity tak ke kul AUC se kam hona chahiye: \\(31.65 < 53.33\\), theek. Aur \\(\\frac{31.65}{53.33} \\approx 0.593 = 1 - e^{-0.9}\\): yani pehle 6 ghante mein kul exposure ka taqreeban 59 fi sad mil jata hai."
+            ],
+            "answer": "(a) \\(\\text{AUC}_{0\\to 6} = \\frac{8}{0.15}(1 - e^{-0.9}) \\approx 31.65\\) mg hr/L. (b) \\(\\text{AUC}_{0\\to\\infty} = \\frac{8}{0.15} \\approx 53.33\\) mg hr/L. (c) Nahin: \\(31.65 < 40\\), is liye ek dose 6 ghante ke ilaaj ke liye kaafi nahin."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is natije ka matlab samjhiye: ek dose se jism ko 6 ghante mein taqreeban 31.65 mg hr/L exposure mila, jab ke zaroorat 40 ki thi. Doctor ke paas do raaste hain: ya dose bara kare (\\(C_0\\) barhaye), ya dose jaldi jaldi de (doses ka waqfa kam kare). Dono soorton mein AUC barhta hai. Exercise 3.7 ke sawal 12 aur 13 isi soch ko aage le jate hain, jahan kayi doses ke concentrations jama hote hain."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Part (b) mein kitab \"\\(dt8\\)\" chhapti hai: \\(dt\\) ke baad ek faltu 8 aur barabar (=) ka nishan ghayab. Sahi: \\(\\int_{0}^{\\infty} 8e^{-0.15t}\\,dt = 8\\left[\\frac{e^{-0.15t}}{-0.15}\\right]_{0}^{\\infty}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahin. \\(C(t) = 10e^{-0.2t}\\) mg/L ho to pehle 5 ghante ka AUC?\n\\(\\text{AUC}_{0\\to 5} = \\frac{10}{0.2}(1 - e^{-0.2\\times 5}) = 50(1 - e^{-1}) \\approx 50 \\times 0.632 = 31.6\\) mg hr/L.\nAur kul AUC (infinity tak) \\(= \\frac{10}{0.2} = 50\\) mg hr/L. Yani pehle 5 ghante mein kul exposure ka taqreeban 63 fi sad mil gaya.\nKhud sochiye: agar \\(k\\) double ho jaye (jism dawai do guna tezi se nikale) to kul AUC ka kya hoga? (Aadha: \\(\\frac{C_0}{2k}\\).)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(\\text{AUC} = \\int_{t_1}^{t_2} C(t)\\,dt\\) kul drug exposure naapta hai; unit mg hr/L.\n2. \\(C(t) = C_0e^{-kt}\\) ke liye: \\(\\text{AUC}_{0\\to T} = \\frac{C_0}{k}(1 - e^{-kT})\\) aur \\(\\text{AUC}_{0\\to\\infty} = \\frac{C_0}{k}\\).\n3. Dose tab kaafi hai jab zaroori waqt ka AUC zaroori exposure ke barabar ya zyada ho.\n4. Kayi doses hon to un ke concentrations jama hote hain (har dose apne shuru ke waqt se gina jata hai)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(e^{-0.15t}\\) integrate karte waqt \\(-0.15\\) ki jagah \\(+0.15\\) se divide karna, jis se AUC negative aa jata hai. AUC area hai, kabhi negative nahin hota.\n2. Concentration (mg/L) ka exposure (mg hr/L) se muqabla karna: AUC ka muqabla AUC se kijiye.\n3. Yeh samajhna ke \\(\\int_0^\\infty\\) zaroor infinite hoga: curve itni tezi se girti hai ke area mehdood rehta hai."
+          }
+        ]
+      }
+    }
+  ]
+}

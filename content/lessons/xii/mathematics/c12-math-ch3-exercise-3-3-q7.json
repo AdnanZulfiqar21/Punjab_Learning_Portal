@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q7",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 7: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7. Evaluate \\(\\int x\\tan^2 x\\,dx\\).",
+            "explanation": "\\(\\tan^2 x\\) has no direct integral, but \\(\\tan^2 x = \\sec^2 x - 1\\).\nPlan: split into \\(\\int x\\sec^2 x\\,dx - \\int x\\,dx\\); do the first by parts (as Example 31).",
+            "steps": [
+              "Given: \\(\\int x\\tan^2 x\\,dx\\).\nTo find: the indefinite integral.\nMethod: use \\(\\tan^2 x = \\sec^2 x - 1\\); then integration by parts with \\(x\\) first and \\(\\sec^2 x\\) second.",
+              "Use the identity\n\\[\\int x(\\sec^2 x - 1)\\,dx\\]\n\\[= \\int x\\sec^2 x\\,dx - \\int x\\,dx\\]\nWhy: \\(1 + \\tan^2 x = \\sec^2 x\\).",
+              "Parts on the first integral\n\\[\\int x\\sec^2 x\\,dx = x\\tan x - \\int \\tan x\\,dx\\]\n\\[= x\\tan x - \\ln|\\sec x|\\]\nWhy: \\(\\int \\sec^2 x\\,dx = \\tan x\\), \\(\\int \\tan x\\,dx = \\ln|\\sec x|\\).",
+              "Combine\n\\[= x\\tan x - \\ln|\\sec x| - \\dfrac{x^2}{2} + c\\]\nWhy: \\(\\int x\\,dx = \\frac{x^2}{2}\\).",
+              "Check\n\\[\\dfrac{d}{dx}(\\ldots) = \\tan x + x\\sec^2 x - \\tan x - x\\]\n\\[= x(\\sec^2 x - 1) = x\\tan^2 x\\]\nWhy: \\(\\frac{d}{dx}\\ln|\\sec x| = \\tan x\\)."
+            ],
+            "final_answer": "\\(x\\tan x - \\ln|\\sec x| - \\dfrac{x^2}{2} + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

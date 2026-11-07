@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-7-Q3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-7-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 123,
+          "pdf_to": 123,
+          "note": "Exercise 3.7, Question 3 (book p. 121); answers printed in the key (book p. 302) under the heading 'Exercise 3.8'."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(a)",
+            "prompt": "3. A particle moves along a straight line with acceleration \\(a(t) = 12t - 36\\) (m/s\\(^2\\)) and initial velocity \\(v(0) = 30\\) m/s. (a) Find the velocity function \\(v(t)\\).",
+            "explanation": "Velocity from acceleration: integrate, then fix the constant with \\(v(0) = 30\\).",
+            "steps": [
+              "Given: \\(a(t) = 12t - 36\\), \\(v(0) = 30\\).\nTo find: \\(v(t)\\).\nMethod: \\(v'(t) = a(t)\\), so \\(v\\) is an antiderivative of \\(a\\); the initial velocity fixes the constant.",
+              "Integrate\n\\[v(t) = \\int (12t - 36)\\,dt\\]\n\\[= 12\\cdot\\dfrac{t^{2}}{2} - 36t + c = 6t^{2} - 36t + c\\]\nWhy: power rule, \\(\\int t\\,dt = \\frac{t^{2}}{2}\\).",
+              "Use \\(v(0) = 30\\)\n\\[30 = 6(0)^{2} - 36(0) + c \\Rightarrow c = 30\\]\n\\[v(t) = 6t^{2} - 36t + 30\\]\nWhy: at \\(t = 0\\) only \\(c\\) is left.",
+              "Check\n\\[v'(t) = 12t - 36 = a(t)\\;\\checkmark, \\quad v(0) = 30\\;\\checkmark\\]"
+            ],
+            "final_answer": "\\(v(t) = 6t^{2} - 36t + 30\\) m/s"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(b)",
+            "prompt": "3. A particle moves along a straight line with acceleration \\(a(t) = 12t - 36\\) (m/s\\(^2\\)) and initial velocity \\(v(0) = 30\\) m/s. (b) Find the displacement of the particle during the time period \\(1 \\le t \\le 6\\).",
+            "explanation": "Displacement is the integral of velocity over the interval, signs included.\nPlan: integrate \\(v(t)\\) from 1 to 6.",
+            "steps": [
+              "Given: \\(v(t) = 6t^{2} - 36t + 30\\), interval \\([1, 6]\\).\nTo find: displacement \\(s(6) - s(1)\\).\nMethod: \\(\\int_{1}^{6} v(t)\\,dt = s(6) - s(1)\\) (Fundamental Theorem).",
+              "Integrate\n\\[\\int_{1}^{6}(6t^{2} - 36t + 30)\\,dt\\]\n\\[= \\big[2t^{3} - 18t^{2} + 30t\\big]_{1}^{6}\\]\nWhy: \\(\\int 6t^{2}\\,dt = 2t^{3}\\), \\(\\int 36t\\,dt = 18t^{2}\\).",
+              "Put in the limits\n\\[F(6) = 432 - 648 + 180 = -36\\]\n\\[F(1) = 2 - 18 + 30 = 14\\]\n\\[\\text{Displacement} = -36 - 14 = -50\\]\nWhy: \\(F(t) = 2t^{3} - 18t^{2} + 30t\\); upper value minus lower value.",
+              "Meaning and check\n\\(-50\\) m: the particle ends 50 m to the left of where it was at \\(t = 1\\). The split in part (c) gives \\(-64 + 14 = -50\\;\\checkmark\\)."
+            ],
+            "final_answer": "Displacement \\(= -50\\) m (50 m to the left)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(c)",
+            "prompt": "3. A particle moves along a straight line with acceleration \\(a(t) = 12t - 36\\) (m/s\\(^2\\)) and initial velocity \\(v(0) = 30\\) m/s. (c) Find the distance traveled during this time period.",
+            "explanation": "Distance is \\(\\int |v|\\,dt\\): first find where \\(v\\) changes sign inside \\([1, 6]\\), then split.",
+            "steps": [
+              "Given: \\(v(t) = 6t^{2} - 36t + 30\\) on \\([1, 6]\\).\nTo find: total distance \\(\\int_{1}^{6}|v(t)|\\,dt\\).\nMethod: factorise \\(v\\), find its sign on each part, take \\(-v\\) where \\(v < 0\\).",
+              "Sign of \\(v\\)\n\\[v(t) = 6(t^{2} - 6t + 5) = 6(t - 1)(t - 5)\\]\n\\(v \\le 0\\) on \\([1, 5]\\) and \\(v \\ge 0\\) on \\([5, 6]\\).\nWhy: between the roots 1 and 5, \\((t - 1) > 0\\) and \\((t - 5) < 0\\); after 5 both are positive.",
+              "Split the integral\n\\[\\int_{1}^{6}|v|\\,dt = -\\int_{1}^{5}v\\,dt + \\int_{5}^{6}v\\,dt\\]\n\\[\\int_{1}^{5}v\\,dt = F(5) - F(1) = -50 - 14 = -64\\]\n\\[\\int_{5}^{6}v\\,dt = F(6) - F(5) = -36 - (-50) = 14\\]\nWhy: \\(F(5) = 250 - 450 + 150 = -50\\), with \\(F\\) from part (b).",
+              "Add\n\\[\\text{Distance} = 64 + 14 = 78\\]\nWhy: 64 m to the left, then 14 m to the right.",
+              "Check\nDisplacement \\(= -64 + 14 = -50\\), as in (b); distance \\(78 \\ge 50\\;\\checkmark\\)."
+            ],
+            "final_answer": "Distance traveled \\(= 78\\) m."
+          }
+        ]
+      }
+    }
+  ]
+}

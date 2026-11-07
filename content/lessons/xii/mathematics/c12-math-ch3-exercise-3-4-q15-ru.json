@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q15-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q15",
+      "title": "Question 15 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 15: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-4-Q15",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15",
+            "prompt": "15 Evaluate \\(\\int \\frac{x^2 + 1}{(x^2 - 2x + 2)^2}\\,dx\\).",
+            "explanation": "Denominator \\((x^2 - 2x + 2)^2\\) hai. \\(x^2 - 2x + 2 = (x - 1)^2 + 1\\) kabhi zero nahi hota, yani irreducible, aur square mein hai: Case-IV.\nUpar degree 2, neeche degree 4, is liye proper.\nPehle partial fractions, phir integral ke liye \\(t = x - 1\\) rakhna aasaan rahega, kyunke tab denominator \\(t^2 + 1\\) ban jata hai.\nPlan: coefficients compare, har tukre ka integral, aur squared tukra Example 43 ki tarah \\(\\tan\\theta\\) se.",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{x^2 + 1}{(x^2 - 2x + 2)^2}\\,dx\\).\nMaloom karna: yeh integral.\nTareeqa: partial fractions, Case-IV. \\(x^2 - 2x + 2\\) ka discriminant \\(4 - 8 = -4\\) negative hai, is liye yeh real linear factors mein nahi tootta. Kitab ne is sawal ka jawab answer key mein nahi diya, is liye aakhir mein differentiate kar ke khud tasdeeq karenge.",
+              "Partial fractions likhein\n\\[\\dfrac{x^2 + 1}{(x^2 - 2x + 2)^2} = \\dfrac{Ax + B}{x^2 - 2x + 2} + \\dfrac{Cx + D}{(x^2 - 2x + 2)^2}\\]\n\\[x^2 + 1 = (Ax + B)(x^2 - 2x + 2) + Cx + D\\]\nKyun: Repeated quadratic ki har power ke liye ek linear numerator. Poore denominator se multiply kiya to pehle term ke saath ek \\(x^2 - 2x + 2\\) bacha aur doosre ke saath kuch nahi.",
+              "Coefficients compare karein\n\\[x^3:\\ A = 0\\]\n\\[x^2:\\ B - 2A = 1,\\ B = 1\\]\n\\[x:\\ 2A - 2B + C = 0,\\ C = 2\\]\n\\[\\text{constant}:\\ 2B + D = 1,\\ D = -1\\]\nKyun: \\((Ax + B)(x^2 - 2x + 2) = Ax^3 + (B - 2A)x^2 + (2A - 2B)x + 2B\\), phir \\(Cx + D\\) jama. Left side \\(x^2 + 1\\) mein \\(x^3\\) aur \\(x\\) ke coefficients 0 hain.",
+              "Integrand nayi shakal mein\n\\[= \\dfrac{1}{x^2 - 2x + 2} + \\dfrac{2x - 1}{(x^2 - 2x + 2)^2}\\]\n\\[= \\dfrac{1}{x^2 - 2x + 2} + \\dfrac{2x - 2}{(x^2 - 2x + 2)^2} + \\dfrac{1}{(x^2 - 2x + 2)^2}\\]\nKyun: \\(x^2 - 2x + 2\\) ka derivative \\(2x - 2\\) hai. Is liye \\(2x - 1\\) ko \\((2x - 2) + 1\\) mein toda: pehla hissa seedha power rule se, doosra alag tareeqe se.",
+              "Pehle do tukre\n\\[\\int \\dfrac{dx}{(x - 1)^2 + 1} = \\tan^{-1}(x - 1)\\]\n\\[\\int \\dfrac{2x - 2}{(x^2 - 2x + 2)^2}\\,dx = -\\dfrac{1}{x^2 - 2x + 2}\\]\nKyun: Completing the square: \\(x^2 - 2x + 2 = (x - 1)^2 + 1\\), aur \\(\\int \\frac{du}{u^2 + 1} = \\tan^{-1} u\\). Doosre mein \\(u = x^2 - 2x + 2\\), \\(du = (2x - 2)\\,dx\\), to \\(\\int u^{-2}\\,du = -u^{-1}\\).",
+              "Aakhri tukra (\\(t = x - 1 = \\tan\\theta\\))\n\\[\\int \\dfrac{dx}{\\left((x - 1)^2 + 1\\right)^2} = \\int \\dfrac{dt}{(t^2 + 1)^2}\\]\n\\[= \\dfrac{1}{2}\\left(\\tan^{-1} t + \\dfrac{t}{t^2 + 1}\\right)\\]\n\\[= \\dfrac{1}{2}\\tan^{-1}(x - 1) + \\dfrac{x - 1}{2(x^2 - 2x + 2)}\\]\nKyun: Bilkul Example 43 wala kaam: \\(t = \\tan\\theta\\) se integrand \\(\\cos^2\\theta\\) banta hai, jis ka integral \\(\\frac{1}{2}(\\theta + \\sin\\theta\\cos\\theta)\\) hai, aur \\(\\sin\\theta\\cos\\theta = \\frac{t}{1 + t^2}\\). Phir \\(t = x - 1\\) aur \\(t^2 + 1 = x^2 - 2x + 2\\) wapas rakha.",
+              "Sab tukre jor dein\n\\[\\dfrac{3}{2}\\tan^{-1}(x - 1) - \\dfrac{1}{x^2 - 2x + 2} + \\dfrac{x - 1}{2(x^2 - 2x + 2)}\\]\n\\[= \\dfrac{3}{2}\\tan^{-1}(x - 1) + \\dfrac{x - 3}{2(x^2 - 2x + 2)} + c\\]\nKyun: \\(\\tan^{-1}\\) wale: \\(1 + \\frac{1}{2} = \\frac{3}{2}\\). Fractions ka common denominator \\(2(x^2 - 2x + 2)\\): \\(-2 + (x - 1) = x - 3\\).\nDhyan dein: \\(-\\frac{1}{q}\\) ko \\(-\\frac{2}{2q}\\) likh kar jorna hai; 2 bhool jayein to \\(x - 2\\) aa jata hai jo ghalat hai.",
+              "Tasdeeq: differentiate karein (\\(t = x - 1\\), \\(q = t^2 + 1\\))\n\\[\\dfrac{d}{dt}\\left(\\dfrac{3}{2}\\tan^{-1} t + \\dfrac{t - 2}{2q}\\right) = \\dfrac{3}{2q} + \\dfrac{q - 2t(t - 2)}{2q^2}\\]\n\\[= \\dfrac{3q + q - 2t^2 + 4t}{2q^2} = \\dfrac{t^2 + 2t + 2}{q^2}\\]\nKyun: Quotient rule: \\(q' = 2t\\). \\(4q - 2t^2 + 4t = 4t^2 + 4 - 2t^2 + 4t = 2t^2 + 4t + 4\\), 2 se divide. Aur \\(t^2 + 2t + 2 = (x - 1)^2 + 2(x - 1) + 2 = x^2 + 1\\). Asal integrand wapas mil gaya, is liye jawab sahi hai."
+            ],
+            "final_answer": "\\(\\frac{3}{2}\\tan^{-1}(x - 1) + \\frac{x - 3}{2(x^2 - 2x + 2)} + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke aakhir mein answers (page 301-302, jo ghalti se \"Exercise 3.6\" ki heading ke neeche hain) item (xiv) par khatam ho jate hain; Question 15 ka jawab chhapa hi nahi. Sahi jawab, jo humne differentiate kar ke check kiya, yeh hai: \\(\\frac{3}{2}\\tan^{-1}(x - 1) + \\frac{x - 3}{2(x^2 - 2x + 2)} + c\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

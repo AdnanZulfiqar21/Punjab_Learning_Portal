@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q11",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q11",
+      "title": "Question 11",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 104,
+          "note": "Exercise 3.5, Question 11: show-that using an odd integrand on [-1, 1]; book p. 102. No printed answer (show that)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11 Show that \\(\\int_{-1}^{1} (1 - x)f(1 - x^2)\\,dx = \\int_{-1}^{1} f(1 - x^2)\\,dx\\).",
+            "explanation": "A proof on the symmetric interval \\([-1, 1]\\).\nSplit \\((1 - x)f(1 - x^2)\\) into \\(f(1 - x^2) - x f(1 - x^2)\\); the second piece is odd, so its integral is 0 (Property V).\nWhat is left is the right side.",
+            "steps": [
+              "Given: any continuous \\(f\\).\nTo prove: \\(\\int_{-1}^{1} (1 - x)f(1 - x^2)\\,dx = \\int_{-1}^{1} f(1 - x^2)\\,dx\\).\nMethod: Property IX to split, then Property V (odd function on \\([-a, a]\\)).",
+              "Split the integral\n\\[\\int_{-1}^{1} (1 - x)f(1 - x^2)\\,dx\\]\n\\[= \\int_{-1}^{1} f(1 - x^2)\\,dx - \\int_{-1}^{1} x f(1 - x^2)\\,dx\\]\nWhy: multiply out \\((1 - x)\\) and use Property IX.",
+              "The second integrand is odd\n\\[h(x) = x f(1 - x^2)\\]\n\\[h(-x) = (-x)f\\big(1 - (-x)^2\\big)\\]\n\\[= -x f(1 - x^2) = -h(x)\\]\nWhy: \\((-x)^2 = x^2\\), so \\(f(1 - x^2)\\) does not change, while the factor \\(x\\) changes sign.",
+              "Apply Property V\n\\[\\int_{-1}^{1} x f(1 - x^2)\\,dx = 0\\]\n\\[\\int_{-1}^{1} (1 - x)f(1 - x^2)\\,dx = \\int_{-1}^{1} f(1 - x^2)\\,dx\\]\nWhy: the integral of an odd function over \\([-a, a]\\) is 0.",
+              "Check with an example\n\\[f(u) = u:\\ \\int_{-1}^{1} (1 - x)(1 - x^2)\\,dx = \\dfrac{4}{3}\\]\n\\[\\int_{-1}^{1} (1 - x^2)\\,dx = \\dfrac{4}{3} \\;\\checkmark\\]\nWhy: the extra part \\(-\\int_{-1}^{1} x(1 - x^2)\\,dx\\) is 0 because \\(x - x^3\\) is odd."
+            ],
+            "final_answer": "Hence proved: \\(\\int_{-1}^{1} (1 - x)f(1 - x^2)\\,dx = \\int_{-1}^{1} f(1 - x^2)\\,dx\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q8",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 8: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8 Evaluate \\(\\int \\frac{e^x - 1}{e^x\\left(e^x + 1\\right)}\\,dx\\).",
+            "explanation": "Not a rational function of \\(x\\), but it becomes one after the substitution \\(t = e^x\\).\nThen \\(dx = \\frac{dt}{t}\\), and the new denominator \\(t^2(t + 1)\\) has a repeated factor \\(t\\): Case-II.\nPlan: substitute, split into partial fractions in \\(t\\), integrate, return to \\(x\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{e^x - 1}{e^x(e^x + 1)}\\,dx\\).\nTo find: the integral.\nMethod: substitution \\(t = e^x\\) turns it into a rational function of \\(t\\); then partial fractions (Case-II).",
+              "Substitute \\(t = e^x\\)\n\\[dt = e^x\\,dx \\;\\Rightarrow\\; dx = \\dfrac{dt}{t}\\]\n\\[\\int \\dfrac{t - 1}{t(t + 1)}\\cdot\\dfrac{dt}{t} = \\int \\dfrac{t - 1}{t^2(t + 1)}\\,dt\\]\nWhy: Every \\(e^x\\) becomes \\(t\\), and \\(dx\\) must also be changed.",
+              "Partial fractions in \\(t\\)\n\\[\\dfrac{t - 1}{t^2(t + 1)} = \\dfrac{A}{t} + \\dfrac{B}{t^2} + \\dfrac{C}{t + 1}\\]\n\\[t - 1 = At(t + 1) + B(t + 1) + Ct^2 \\quad (1)\\]\nWhy: \\(t\\) is repeated (power 2), so it gets \\(\\frac{A}{t}\\) and \\(\\frac{B}{t^2}\\); \\(t + 1\\) gets \\(\\frac{C}{t + 1}\\).",
+              "Find the constants\n\\[t = 0:\\ -1 = B\\]\n\\[t = -1:\\ -2 = C\\]\n\\[t^2:\\ 0 = A + C,\\ A = 2\\]\nWhy: The two roots give \\(B\\) and \\(C\\); the \\(t^2\\) coefficient (0 on the left) gives \\(A\\).",
+              "Integrate in \\(t\\)\n\\[\\int \\left(\\dfrac{2}{t} - \\dfrac{1}{t^2} - \\dfrac{2}{t + 1}\\right)dt\\]\n\\[= 2\\ln t + \\dfrac{1}{t} - 2\\ln(t + 1) + c\\]\nWhy: \\(\\int t^{-2}\\,dt = -t^{-1}\\). Since \\(t = e^x > 0\\), no modulus is needed.",
+              "Return to \\(x\\)\n\\[= 2x + e^{-x} - 2\\ln(e^x + 1) + c\\]\n\\[= e^{-x} + 2\\ln\\left(\\dfrac{e^x}{e^x + 1}\\right) + c\\]\nWhy: \\(\\ln e^x = x\\), \\(\\frac{1}{e^x} = e^{-x}\\), and \\(2\\ln e^x - 2\\ln(e^x + 1) = 2\\ln\\frac{e^x}{e^x + 1}\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left(2x + e^{-x} - 2\\ln(e^x + 1)\\right)\\]\n\\[= 2 - e^{-x} - \\dfrac{2e^x}{e^x + 1}\\]\n\\[= \\dfrac{2}{e^x + 1} - \\dfrac{1}{e^x} = \\dfrac{e^x - 1}{e^x(e^x + 1)} \\;\\checkmark\\]\nWhy: \\(2 - \\frac{2e^x}{e^x + 1} = \\frac{2}{e^x + 1}\\); then take the common denominator."
+            ],
+            "final_answer": "\\(e^{-x} + 2\\ln\\left(\\frac{e^x}{e^x + 1}\\right) + c\\), i.e. \\(2x + e^{-x} - 2\\ln(e^x + 1) + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the answers at the end of the book (page 301), the answers of Exercise 3.4 are printed under the wrong heading \"Exercise 3.6\". The answer of this question is item (viii) of that block: \\(e^{-x} + 2\\ln\\left(\\frac{e^x}{e^x + 1}\\right) + c\\). That answer is correct. The block headed \"Exercise 3.4\" (page 301) belongs to a different exercise."
+          }
+        ]
+      }
+    }
+  ]
+}

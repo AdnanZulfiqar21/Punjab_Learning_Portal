@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q17-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q17",
+      "title": "Question 17 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 105,
+          "pdf_to": 105,
+          "note": "Exercise 3.5, Question 17 (i), (ii): derivatives of integrals (First FTC with chain rule); book p. 103. Key on p. 300 under 'Exercise 3.2'."
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-5-Q17",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "17(i)",
+            "prompt": "17 (i) Find the indicated derivative: \\(\\frac{d}{dt}\\int_{\\pi}^{t} \\frac{\\sin y}{1 + \\sqrt{y}}\\,dy\\)",
+            "explanation": "Is sawal mein integral ka derivative chahiye, jis ki upar wali limit variable \\(t\\) hai aur neeche wali constant \\(\\pi\\).\nDiya kya hai? Integrand \\(\\frac{\\sin y}{1 + \\sqrt{y}}\\).\nFind kya karna hai? \\(t\\) ke lihaz se derivative.\nRule kaunsa? First Fundamental Theorem (Theorem 3.2): upar wali limit ke lihaz se derivative bas integrand hai, jis mein \\(y\\) ki jagah \\(t\\) rakh dein.\nIntegrate karne ki koshish na karein; is integrand ka antiderivative aam functions mein hai hi nahi, aur zaroorat bhi nahi.",
+            "steps": [
+              "Diya gaya: \\(F(t) = \\int_{\\pi}^{t} \\frac{\\sin y}{1 + \\sqrt{y}}\\,dy\\).\nMaloom karna: \\(F'(t)\\).\nTareeqa: Theorem 3.2: agar \\(f\\) continuous ho aur \\(F(x) = \\int_a^x f(t)\\,dt\\), to \\(F'(x) = f(x)\\). Derivative aur integral ek doosre ko 'cancel' kar dete hain.",
+              "Shartein check karein\n\\[f(y) = \\dfrac{\\sin y}{1 + \\sqrt{y}}\\ \\text{is continuous for } y \\geq 0\\]\nKyun: \\(1 + \\sqrt{y}\\) kam az kam 1 hai, kabhi zero nahi, aur \\(\\sqrt{y}\\) ke liye \\(y \\geq 0\\) chahiye. \\(\\pi\\) positive hai, to \\(t > 0\\) ke liye theorem lagta hai.",
+              "First FTC lagayein\n\\[\\dfrac{d}{dt}\\int_{\\pi}^{t} \\dfrac{\\sin y}{1 + \\sqrt{y}}\\,dy = \\dfrac{\\sin t}{1 + \\sqrt{t}}\\]\nKyun: upar wali limit ke lihaz se derivative = us limit par integrand. Neeche wali limit \\(\\pi\\) constant hai, us ka koi asar nahi.\nDhyan dein: jawab \\(t\\) mein likhna hai; \\(y\\) sirf integral ke andar ka 'dummy' variable tha.",
+              "Tasdeeq\n\\[\\int_{\\pi}^{t} f(y)\\,dy = G(t) - G(\\pi),\\quad G' = f\\]\n\\[\\dfrac{d}{dt}\\big(G(t) - G(\\pi)\\big) = f(t)\\]\nKyun: \\(G\\) koi bhi antiderivative ho, \\(G(\\pi)\\) ek constant number hai jis ka derivative 0 hai; sirf \\(G'(t) = f(t)\\) bachta hai. Answer key mein bhi \\(\\frac{\\sin t}{1 + \\sqrt{t}}\\) hai."
+            ],
+            "final_answer": "\\(\\frac{\\sin t}{1 + \\sqrt{t}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "17(ii)",
+            "prompt": "17 (ii) Find the indicated derivative: \\(\\frac{d}{dx}\\int_{ax}^{bx} \\frac{1}{1 + t^2}\\,dt\\)",
+            "explanation": "Is dafa dono limits \\(x\\) par depend karti hain: neeche \\(ax\\) aur upar \\(bx\\).\nDiya kya hai? Integrand \\(\\frac{1}{1 + t^2}\\).\nFind kya karna hai? \\(x\\) ke lihaz se derivative.\nRule kaunsa? Pehle 0 par tor kar (Property III aur II) do aise integrals banayenge jin ki sirf upar wali limit variable ho. Phir First FTC ke saath chain rule: har limit ka hissa = 'limit par integrand' times 'limit ka derivative'.\nPlan: torna, har hissa differentiate, minus.",
+            "steps": [
+              "Diya gaya: \\(H(x) = \\int_{ax}^{bx} \\frac{1}{1 + t^2}\\,dt\\).\nMaloom karna: \\(H'(x)\\).\nTareeqa: Property III aur II se \\(H(x) = \\int_0^{bx} f - \\int_0^{ax} f\\); phir Theorem 3.2 chain rule ke saath: \\(\\frac{d}{dx}\\int_0^{u(x)} f(t)\\,dt = f(u(x))\\,u'(x)\\).",
+              "0 par torein\n\\[H(x) = \\int_{0}^{bx} \\dfrac{dt}{1 + t^2} - \\int_{0}^{ax} \\dfrac{dt}{1 + t^2}\\]\nKyun: Property III se \\(\\int_{ax}^{bx} = \\int_{ax}^{0} + \\int_{0}^{bx}\\), aur Property II se \\(\\int_{ax}^{0} = -\\int_{0}^{ax}\\). Ab dono integrals ki neeche wali limit constant (0) hai, jaise First FTC chahti hai.",
+              "Har hissa differentiate karein\n\\[\\dfrac{d}{dx}\\int_{0}^{bx} \\dfrac{dt}{1 + t^2} = \\dfrac{1}{1 + (bx)^2} \\cdot b\\]\n\\[\\dfrac{d}{dx}\\int_{0}^{ax} \\dfrac{dt}{1 + t^2} = \\dfrac{1}{1 + (ax)^2} \\cdot a\\]\nKyun: First FTC se upar wali limit par integrand: \\(t\\) ki jagah \\(bx\\) (ya \\(ax\\)). Lekin upar wali limit khud \\(x\\) ka function hai, is liye chain rule se us ka derivative (\\(b\\) ya \\(a\\)) multiply hota hai.\nDhyan dein: chain rule wala \\(b\\) aur \\(a\\) bhool jana sab se aam ghalti hai.",
+              "Minus karein\n\\[H'(x) = \\dfrac{b}{1 + b^2x^2} - \\dfrac{a}{1 + a^2x^2}\\]\nKyun: farq ka derivative derivatives ka farq hai; \\((bx)^2 = b^2x^2\\).",
+              "Tasdeeq: pehle integrate kar ke\n\\[H(x) = \\tan^{-1}(bx) - \\tan^{-1}(ax)\\]\n\\[H'(x) = \\dfrac{b}{1 + b^2x^2} - \\dfrac{a}{1 + a^2x^2} \\;\\checkmark\\]\nKyun: is integrand ka antiderivative \\(\\tan^{-1} t\\) maloom hai, to seedha \\(H(x)\\) nikal kar chain rule se differentiate kiya; wohi jawab. Answer key mein bhi yahi hai."
+            ],
+            "final_answer": "\\(\\frac{b}{1 + b^2x^2} - \\frac{a}{1 + a^2x^2}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

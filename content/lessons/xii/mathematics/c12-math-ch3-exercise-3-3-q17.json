@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q17",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q17",
+      "title": "Question 17",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 17: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "17",
+            "prompt": "17. Evaluate \\(\\int e^x\\left(\\dfrac{1 - x}{1 + x^2}\\right)^2 dx\\).",
+            "explanation": "Expand the square and look for the form \\(e^x[f(x) + f'(x)]\\).\nPlan: \\((1 - x)^2 = (1 + x^2) - 2x\\) gives \\(f = \\frac{1}{1+x^2}\\), \\(f' = \\frac{-2x}{(1+x^2)^2}\\); then use the Note.",
+            "steps": [
+              "Given: \\(\\int e^x\\left(\\frac{1 - x}{1 + x^2}\\right)^2 dx\\).\nTo find: the indefinite integral.\nMethod: rewrite the integrand as \\(e^x[f(x) + f'(x)]\\) with \\(f(x) = \\frac{1}{1+x^2}\\); then \\(\\int e^x[f + f']\\,dx = e^xf + c\\) (the Note with \\(g(x) = x\\)).",
+              "Expand the square\n\\[\\dfrac{(1 - x)^2}{(1 + x^2)^2} = \\dfrac{(1 + x^2) - 2x}{(1 + x^2)^2}\\]\n\\[= \\dfrac{1}{1 + x^2} - \\dfrac{2x}{(1 + x^2)^2}\\]\nWhy: \\((1 - x)^2 = 1 - 2x + x^2\\).",
+              "Recognise \\(f\\) and \\(f'\\)\n\\[f(x) = \\dfrac{1}{1 + x^2} \\Rightarrow f'(x) = \\dfrac{-2x}{(1 + x^2)^2}\\]\n\\[\\int e^x[f(x) + f'(x)]\\,dx\\]\nWhy: \\(\\frac{d}{dx}(1 + x^2)^{-1} = -(1 + x^2)^{-2}\\cdot 2x\\).",
+              "Why the answer is \\(e^xf\\) (parts)\n\\[\\int e^xf\\,dx = f e^x - \\int e^x f'\\,dx\\]\n\\[\\int e^x(f + f')\\,dx = e^xf + c\\]\nWhy: parts on \\(\\int e^xf\\,dx\\) with \\(f\\) first; the \\(\\int e^xf'\\,dx\\) terms cancel.",
+              "Answer\n\\[= \\dfrac{e^x}{1 + x^2} + c\\]\nWhy: \\(e^xf(x)\\) with \\(f = \\frac{1}{1+x^2}\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left(\\dfrac{e^x}{1 + x^2}\\right) = e^x\\left[\\dfrac{1}{1+x^2} - \\dfrac{2x}{(1+x^2)^2}\\right]\\]\n\\[= \\dfrac{e^x(1 - x)^2}{(1 + x^2)^2}\\]\nWhy: product rule, then step 1 backwards."
+            ],
+            "final_answer": "\\(\\dfrac{e^x}{1 + x^2} + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

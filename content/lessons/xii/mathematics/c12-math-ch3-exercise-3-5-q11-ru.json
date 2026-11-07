@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q11-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q11",
+      "title": "Question 11 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 104,
+          "note": "Exercise 3.5, Question 11: show-that using an odd integrand on [-1, 1]; book p. 102. No printed answer (show that)."
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-5-Q11",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11 Show that \\(\\int_{-1}^{1} (1 - x)f(1 - x^2)\\,dx = \\int_{-1}^{1} f(1 - x^2)\\,dx\\).",
+            "explanation": "Yeh symmetric interval \\([-1, 1]\\) par saboot ka sawal hai, aur \\(f\\) koi bhi function ho sakta hai.\nDiya kya hai? Left side mein extra factor \\((1 - x)\\) hai.\nKya saabit karna hai? Ke yeh extra \\(-x\\) wala hissa koi farq nahi dalta.\nRule kaunsa? \\((1 - x)f(1 - x^2)\\) ko do hisson mein torenge: \\(f(1 - x^2)\\) aur \\(x f(1 - x^2)\\). Doosra hissa odd hai, aur Property V ke mutabiq odd function ka symmetric interval par integral 0 hota hai.\nPlan: torna, odd saabit karna, Property V.",
+            "steps": [
+              "Diya gaya: koi bhi continuous function \\(f\\).\nSaabit karna: \\(\\int_{-1}^{1} (1 - x)f(1 - x^2)\\,dx = \\int_{-1}^{1} f(1 - x^2)\\,dx\\).\nTareeqa: Property IX se torna, phir Property V (\\([-a, a]\\) par odd function). Symmetric limits dekh kar odd/even ka khayal sab se pehle aana chahiye.",
+              "Integral ko torein\n\\[\\int_{-1}^{1} (1 - x)f(1 - x^2)\\,dx\\]\n\\[= \\int_{-1}^{1} f(1 - x^2)\\,dx - \\int_{-1}^{1} x f(1 - x^2)\\,dx\\]\nKyun: \\((1 - x)\\) ko multiply kar ke kholna, phir Property IX: farq ka integral integrals ka farq hai.",
+              "Doosra integrand odd hai\n\\[h(x) = x f(1 - x^2)\\]\n\\[h(-x) = (-x)f\\big(1 - (-x)^2\\big)\\]\n\\[= -x f(1 - x^2) = -h(x)\\]\nKyun: \\((-x)^2 = x^2\\), is liye \\(f(1 - x^2)\\) bilkul nahi badla (yeh even hissa hai), lekin bahar wala \\(x\\) ban gaya \\(-x\\). Even times odd hamesha odd hota hai.\nDhyan dein: \\(f\\) ka formula na hone ke bawajood odd/even ka faisla ho sakta hai, kyunke \\(f\\) ke andar sirf \\(x^2\\) hai.",
+              "Property V lagayein\n\\[\\int_{-1}^{1} x f(1 - x^2)\\,dx = 0\\]\n\\[\\int_{-1}^{1} (1 - x)f(1 - x^2)\\,dx = \\int_{-1}^{1} f(1 - x^2)\\,dx\\]\nKyun: odd function ka \\([-a, a]\\) par integral 0; is liye sirf pehla hissa bacha, jo bilkul right side hai.",
+              "Tasdeeq: ek misaal se\n\\[f(u) = u:\\ \\int_{-1}^{1} (1 - x)(1 - x^2)\\,dx = \\dfrac{4}{3}\\]\n\\[\\int_{-1}^{1} (1 - x^2)\\,dx = \\dfrac{4}{3} \\;\\checkmark\\]\nKyun: \\(f(u) = u\\) lene se extra hissa \\(-\\int_{-1}^{1} (x - x^3)\\,dx\\) banta hai, jo odd hone ki wajah se 0 hai; dono sides \\(\\frac{4}{3}\\)."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\int_{-1}^{1} (1 - x)f(1 - x^2)\\,dx = \\int_{-1}^{1} f(1 - x^2)\\,dx\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

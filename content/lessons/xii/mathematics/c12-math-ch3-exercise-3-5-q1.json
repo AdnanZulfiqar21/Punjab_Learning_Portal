@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 103,
+          "pdf_to": 103,
+          "note": "Exercise 3.5, Question 1 (i)-(ix): evaluate definite integrals; book p. 101. Key (p. 300, block 'Exercise 3.2') prints (i), (ii) only; (iii)-(ix) values appear under other blocks."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Evaluate the following definite integral: \\(\\int_{1}^{2} (x^2 + x)\\,dx\\)",
+            "explanation": "A plain definite integral of a polynomial.\nFind an antiderivative \\(F(x)\\) term by term with the power rule, then use the Second Fundamental Theorem: value \\(= F(2) - F(1)\\).\nNo \\(+c\\) is needed in a definite integral.",
+            "steps": [
+              "Given: \\(\\int_{1}^{2} (x^2 + x)\\,dx\\).\nTo find: its value.\nMethod: power rule \\(\\int x^n\\,dx = \\frac{x^{n+1}}{n+1}\\) for each term, then Theorem 3.3 (Second FTC): \\(\\int_a^b f(x)\\,dx = F(b) - F(a)\\).",
+              "Find an antiderivative\n\\[\\int (x^2 + x)\\,dx = \\dfrac{x^3}{3} + \\dfrac{x^2}{2}\\]\nWhy: raise each power by 1 and divide by the new power. The constant \\(c\\) would cancel in \\(F(b) - F(a)\\), so we leave it out.",
+              "Put in the limits\n\\[\\left[\\dfrac{x^3}{3} + \\dfrac{x^2}{2}\\right]_{1}^{2}\\]\n\\[= \\left(\\dfrac{8}{3} + 2\\right) - \\left(\\dfrac{1}{3} + \\dfrac{1}{2}\\right)\\]\nWhy: upper limit value minus lower limit value.",
+              "Simplify\n\\[= \\dfrac{14}{3} - \\dfrac{5}{6}\\]\n\\[= \\dfrac{28 - 5}{6} = \\dfrac{23}{6}\\]\nWhy: \\(\\frac{8}{3} + 2 = \\frac{14}{3}\\) and \\(\\frac{1}{3} + \\frac{1}{2} = \\frac{5}{6}\\); common denominator 6.",
+              "Check\n\\[f(1) = 2,\\quad f(2) = 6\\]\n\\[2 < \\dfrac{23}{6} \\approx 3.83 < 6 \\;\\checkmark\\]\nWhy: on \\([1, 2]\\) (length 1) the integrand rises from 2 to 6, so the area must lie between 2 and 6. The answer key also prints \\(\\frac{23}{6}\\)."
+            ],
+            "final_answer": "\\(\\frac{23}{6}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Evaluate the following definite integral: \\(\\int_{-2}^{3} (4x^3 + 3x^2 + 2x)\\,dx\\)",
+            "explanation": "A definite integral of a cubic polynomial over \\([-2, 3]\\).\nAntiderivative by the power rule, then \\(F(3) - F(-2)\\).\nThe only danger is the signs when we put in \\(x = -2\\).",
+            "steps": [
+              "Given: \\(\\int_{-2}^{3} (4x^3 + 3x^2 + 2x)\\,dx\\).\nTo find: its value.\nMethod: power rule term by term, then the Second FTC \\(F(3) - F(-2)\\).",
+              "Find an antiderivative\n\\[\\int (4x^3 + 3x^2 + 2x)\\,dx\\]\n\\[= x^4 + x^3 + x^2\\]\nWhy: \\(4 \\cdot \\frac{x^4}{4} = x^4\\), \\(3 \\cdot \\frac{x^3}{3} = x^3\\), \\(2 \\cdot \\frac{x^2}{2} = x^2\\).",
+              "Value at the upper limit\n\\[F(3) = 81 + 27 + 9 = 117\\]\nWhy: \\(3^4 = 81\\), \\(3^3 = 27\\), \\(3^2 = 9\\).",
+              "Value at the lower limit\n\\[F(-2) = (-2)^4 + (-2)^3 + (-2)^2\\]\n\\[= 16 - 8 + 4 = 12\\]\nWhy: an even power of a negative number is positive, an odd power is negative: \\((-2)^3 = -8\\).",
+              "Subtract\n\\[\\int_{-2}^{3} (4x^3 + 3x^2 + 2x)\\,dx\\]\n\\[= 117 - 12 = 105\\]\nWhy: Second FTC, \\(F(b) - F(a)\\).",
+              "Check\n\\[\\dfrac{d}{dx}(x^4 + x^3 + x^2)\\]\n\\[= 4x^3 + 3x^2 + 2x \\;\\checkmark\\]\nWhy: differentiating the antiderivative gives back the integrand, so \\(F\\) is right; the arithmetic \\(117 - 12 = 105\\) was checked term by term."
+            ],
+            "final_answer": "\\(105\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(89\\). The correct value is \\(105\\). The printed 89 comes from taking \\((-2)^3 = +8\\): then \\(F(-2) = 16 + 8 + 4 = 28\\) and \\(117 - 28 = 89\\). In fact \\((-2)^3 = -8\\), so \\(F(-2) = 12\\) and the value is \\(117 - 12 = 105\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Evaluate the following definite integral: \\(\\int_{0}^{\\pi/2} \\sin^2 x\\,dx\\)",
+            "explanation": "There is no direct formula for \\(\\int \\sin^2 x\\,dx\\).\nLower the power with the identity \\(\\sin^2 x = \\frac{1 - \\cos 2x}{2}\\); then each term has a standard integral.\nThen put in the limits \\(0\\) and \\(\\frac{\\pi}{2}\\).",
+            "steps": [
+              "Given: \\(\\int_{0}^{\\pi/2} \\sin^2 x\\,dx\\).\nTo find: its value.\nMethod: half-angle identity \\(\\sin^2 x = \\frac{1 - \\cos 2x}{2}\\), then \\(\\int \\cos 2x\\,dx = \\frac{\\sin 2x}{2}\\), then the Second FTC.",
+              "Lower the power\n\\[\\sin^2 x = \\dfrac{1 - \\cos 2x}{2}\\]\nWhy: from \\(\\cos 2x = 1 - 2\\sin^2 x\\). A square of sine cannot be integrated directly, but \\(\\cos 2x\\) can.",
+              "Integrate\n\\[\\int_{0}^{\\pi/2} \\sin^2 x\\,dx\\]\n\\[= \\dfrac{1}{2}\\left[x - \\dfrac{\\sin 2x}{2}\\right]_{0}^{\\pi/2}\\]\nWhy: \\(\\int 1\\,dx = x\\) and \\(\\int \\cos 2x\\,dx = \\frac{\\sin 2x}{2}\\) (divide by the 2 inside).",
+              "Put in the limits\n\\[= \\dfrac{1}{2}\\left[\\left(\\dfrac{\\pi}{2} - \\dfrac{\\sin \\pi}{2}\\right) - (0 - 0)\\right]\\]\n\\[= \\dfrac{1}{2} \\cdot \\dfrac{\\pi}{2} = \\dfrac{\\pi}{4}\\]\nWhy: \\(\\sin \\pi = 0\\) and \\(\\sin 0 = 0\\).",
+              "Check with Property IV\n\\[I = \\int_{0}^{\\pi/2} \\cos^2 x\\,dx\\]\n\\[2I = \\int_{0}^{\\pi/2} 1\\,dx = \\dfrac{\\pi}{2}\\]\nWhy: replacing \\(x\\) by \\(\\frac{\\pi}{2} - x\\) turns \\(\\sin^2 x\\) into \\(\\cos^2 x\\) without changing \\(I\\); adding the two forms gives \\(\\sin^2 x + \\cos^2 x = 1\\). So \\(I = \\frac{\\pi}{4}\\) again."
+            ],
+            "final_answer": "\\(\\frac{\\pi}{4}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key has no answer for this part under the heading 'Exercise 3.2' (where this exercise's answers are printed). The value \\(\\frac{\\pi}{4}\\) is printed instead in the block headed 'Exercise 3.3' as 2.(viii). Match it by value: our answer \\(\\frac{\\pi}{4}\\) agrees with it."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Evaluate the following definite integral: \\(\\int_{0}^{\\pi/4} \\frac{1}{1 + \\sin x}\\,dx\\)",
+            "explanation": "A trigonometric fraction with \\(1 + \\sin x\\) in the denominator.\nMultiply top and bottom by \\(1 - \\sin x\\): the denominator becomes \\(\\cos^2 x\\) and the fraction splits into \\(\\sec^2 x\\) and \\(\\sec x \\tan x\\), both standard.\nThen put in \\(0\\) and \\(\\frac{\\pi}{4}\\).",
+            "steps": [
+              "Given: \\(\\int_{0}^{\\pi/4} \\frac{1}{1 + \\sin x}\\,dx\\).\nTo find: its value.\nMethod: rationalise with \\(1 - \\sin x\\) (like a conjugate), use \\(1 - \\sin^2 x = \\cos^2 x\\), then \\(\\int \\sec^2 x\\,dx = \\tan x\\) and \\(\\int \\sec x \\tan x\\,dx = \\sec x\\).",
+              "Multiply by \\(1 - \\sin x\\) above and below\n\\[\\dfrac{1}{1 + \\sin x} = \\dfrac{1 - \\sin x}{1 - \\sin^2 x}\\]\n\\[= \\dfrac{1 - \\sin x}{\\cos^2 x}\\]\nWhy: \\((1 + \\sin x)(1 - \\sin x) = 1 - \\sin^2 x = \\cos^2 x\\). This is allowed because \\(1 - \\sin x \\neq 0\\) on \\([0, \\frac{\\pi}{4}]\\).",
+              "Split the fraction\n\\[= \\dfrac{1}{\\cos^2 x} - \\dfrac{\\sin x}{\\cos x} \\cdot \\dfrac{1}{\\cos x}\\]\n\\[= \\sec^2 x - \\sec x \\tan x\\]\nWhy: \\(\\frac{1}{\\cos x} = \\sec x\\) and \\(\\frac{\\sin x}{\\cos x} = \\tan x\\).",
+              "Integrate\n\\[\\int_{0}^{\\pi/4} (\\sec^2 x - \\sec x \\tan x)\\,dx\\]\n\\[= \\Big[\\tan x - \\sec x\\Big]_{0}^{\\pi/4}\\]\nWhy: \\((\\tan x)' = \\sec^2 x\\) and \\((\\sec x)' = \\sec x \\tan x\\).",
+              "Put in the limits\n\\[= (1 - \\sqrt{2}) - (0 - 1)\\]\n\\[= 2 - \\sqrt{2}\\]\nWhy: \\(\\tan\\frac{\\pi}{4} = 1\\), \\(\\sec\\frac{\\pi}{4} = \\sqrt{2}\\), \\(\\tan 0 = 0\\), \\(\\sec 0 = 1\\).",
+              "Check\n\\[2 - \\sqrt{2} \\approx 0.586\\]\n\\[0.46 < 0.586 < 0.79 \\;\\checkmark\\]\nWhy: on \\([0, \\frac{\\pi}{4}]\\) (length about 0.785) the integrand falls from 1 to \\(\\frac{1}{1 + 0.707} \\approx 0.586\\), so the area lies between \\(0.586 \\times 0.785 \\approx 0.46\\) and \\(1 \\times 0.785\\)."
+            ],
+            "final_answer": "\\(2 - \\sqrt{2}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key has no answer for this part under the heading 'Exercise 3.2' (where this exercise's answers are printed). The value \\(2 - \\sqrt{2}\\) is printed instead in the block headed 'Exercise 3.3' as 1.(x). Match it by value: our answer \\(2 - \\sqrt{2}\\) agrees with it."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(v)",
+            "prompt": "1 (v) Evaluate the following definite integral: \\(\\int_{0}^{\\pi/2} \\cos^3\\theta\\,d\\theta\\)",
+            "explanation": "An odd power of cosine.\nKeep one \\(\\cos\\theta\\) for \\(d\\theta\\) and write the rest in sine: \\(\\cos^3\\theta = (1 - \\sin^2\\theta)\\cos\\theta\\). Then \\(u = \\sin\\theta\\) makes it a polynomial.\nChange the limits with the substitution.",
+            "steps": [
+              "Given: \\(\\int_{0}^{\\pi/2} \\cos^3\\theta\\,d\\theta\\).\nTo find: its value.\nMethod: substitution in a definite integral: \\(u = \\sin\\theta\\), \\(du = \\cos\\theta\\,d\\theta\\), and new limits \\(u(0)\\), \\(u(\\frac{\\pi}{2})\\).",
+              "Split off one cosine\n\\[\\cos^3\\theta = \\cos^2\\theta \\cdot \\cos\\theta\\]\n\\[= (1 - \\sin^2\\theta)\\cos\\theta\\]\nWhy: \\(\\cos^2\\theta = 1 - \\sin^2\\theta\\); the spare \\(\\cos\\theta\\,d\\theta\\) will become \\(du\\).",
+              "Substitute and change the limits\n\\[u = \\sin\\theta,\\quad du = \\cos\\theta\\,d\\theta\\]\n\\[\\theta = 0 \\Rightarrow u = 0,\\quad \\theta = \\tfrac{\\pi}{2} \\Rightarrow u = 1\\]\n\\[\\int_{0}^{\\pi/2} \\cos^3\\theta\\,d\\theta = \\int_{0}^{1} (1 - u^2)\\,du\\]\nWhy: substitution in a definite integral: the limits move with the variable, so we never go back to \\(\\theta\\).",
+              "Integrate\n\\[= \\left[u - \\dfrac{u^3}{3}\\right]_{0}^{1}\\]\n\\[= 1 - \\dfrac{1}{3} = \\dfrac{2}{3}\\]\nWhy: power rule; at \\(u = 0\\) both terms are 0.",
+              "Check\n\\[\\dfrac{d}{d\\theta}\\left(\\sin\\theta - \\dfrac{\\sin^3\\theta}{3}\\right)\\]\n\\[= \\cos\\theta - \\sin^2\\theta\\cos\\theta = \\cos^3\\theta \\;\\checkmark\\]\nWhy: the antiderivative in \\(\\theta\\) differentiates back to the integrand, and it gives \\(1 - \\frac{1}{3}\\) at the limits."
+            ],
+            "final_answer": "\\(\\frac{2}{3}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key has no answer for this part under the heading 'Exercise 3.2' (where this exercise's answers are printed). The value \\(\\frac{2}{3}\\) is printed instead in the block headed 'Exercise 3.3' as 1.(xi). Match it by value: our answer \\(\\frac{2}{3}\\) agrees with it."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(vi)",
+            "prompt": "1 (vi) Evaluate the following definite integral: \\(\\int_{0}^{1} \\frac{\\sqrt{x}}{1 + x}\\,dx\\)",
+            "explanation": "The square root \\(\\sqrt{x}\\) is the obstacle.\nPut \\(x = t^2\\) so that \\(\\sqrt{x} = t\\); the integrand becomes a rational function of \\(t\\).\nThen divide (top degree = bottom degree) and integrate; change the limits.",
+            "steps": [
+              "Given: \\(\\int_{0}^{1} \\frac{\\sqrt{x}}{1 + x}\\,dx\\).\nTo find: its value.\nMethod: substitution \\(x = t^2\\), \\(dx = 2t\\,dt\\) (removes the root), then \\(\\frac{t^2}{1 + t^2} = 1 - \\frac{1}{1 + t^2}\\) and \\(\\int \\frac{dt}{1 + t^2} = \\tan^{-1} t\\).",
+              "Substitute and change the limits\n\\[x = t^2,\\quad dx = 2t\\,dt,\\quad \\sqrt{x} = t\\]\n\\[x = 0 \\Rightarrow t = 0,\\quad x = 1 \\Rightarrow t = 1\\]\n\\[I = \\int_{0}^{1} \\dfrac{t}{1 + t^2} \\cdot 2t\\,dt\\]\n\\[= 2\\int_{0}^{1} \\dfrac{t^2}{1 + t^2}\\,dt\\]\nWhy: on \\([0, 1]\\) we take \\(t = \\sqrt{x} \\geq 0\\), so \\(\\sqrt{x} = t\\) exactly.",
+              "Divide the fraction\n\\[\\dfrac{t^2}{1 + t^2} = \\dfrac{(1 + t^2) - 1}{1 + t^2}\\]\n\\[= 1 - \\dfrac{1}{1 + t^2}\\]\nWhy: the top has the same degree as the bottom, so we take out the whole part first.",
+              "Integrate\n\\[I = 2\\Big[t - \\tan^{-1} t\\Big]_{0}^{1}\\]\n\\[= 2\\left(1 - \\dfrac{\\pi}{4}\\right) - 0\\]\n\\[= 2 - \\dfrac{\\pi}{2}\\]\nWhy: \\(\\tan^{-1} 1 = \\frac{\\pi}{4}\\) and \\(\\tan^{-1} 0 = 0\\).",
+              "Check\n\\[\\dfrac{\\sqrt{x}}{2} \\leq \\dfrac{\\sqrt{x}}{1 + x} \\leq \\sqrt{x}\\]\n\\[\\dfrac{1}{3} < 2 - \\dfrac{\\pi}{2} \\approx 0.429 < \\dfrac{2}{3} \\;\\checkmark\\]\nWhy: on \\([0, 1]\\), \\(1 \\leq 1 + x \\leq 2\\), and \\(\\int_0^1 \\sqrt{x}\\,dx = \\frac{2}{3}\\) (Property VIII)."
+            ],
+            "final_answer": "\\(2 - \\frac{\\pi}{2}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key has no answer for this part under the heading 'Exercise 3.2' (where this exercise's answers are printed). The value \\(2 - \\frac{\\pi}{2}\\) is printed instead in the block headed 'Exercise 3.4' as (ix). Match it by value: our answer \\(2 - \\frac{\\pi}{2}\\) agrees with it."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(vii)",
+            "prompt": "1 (vii) Evaluate the following definite integral: \\(\\int_{0}^{1} \\frac{\\ln(1 + x)}{1 + x^2}\\,dx\\)",
+            "explanation": "\\(\\ln(1 + x)\\) over \\(1 + x^2\\) has no elementary antiderivative, so a direct attack fails.\nThe \\(1 + x^2\\) suggests \\(x = \\tan\\theta\\); then Property IV (replace \\(\\theta\\) by \\(\\frac{\\pi}{4} - \\theta\\)) turns the integral into a copy of itself.\nSolve the resulting equation for \\(I\\).",
+            "steps": [
+              "Given: \\(I = \\int_{0}^{1} \\frac{\\ln(1 + x)}{1 + x^2}\\,dx\\).\nTo find: \\(I\\).\nMethod: substitution \\(x = \\tan\\theta\\), then Property IV \\(\\int_a^b f(\\theta)\\,d\\theta = \\int_a^b f(a + b - \\theta)\\,d\\theta\\) with the identity \\(\\tan(\\frac{\\pi}{4} - \\theta) = \\frac{1 - \\tan\\theta}{1 + \\tan\\theta}\\).",
+              "Substitute \\(x = \\tan\\theta\\)\n\\[dx = \\sec^2\\theta\\,d\\theta,\\quad 1 + x^2 = \\sec^2\\theta\\]\n\\[x = 0 \\Rightarrow \\theta = 0,\\quad x = 1 \\Rightarrow \\theta = \\tfrac{\\pi}{4}\\]\n\\[I = \\int_{0}^{\\pi/4} \\ln(1 + \\tan\\theta)\\,d\\theta\\]\nWhy: \\(\\sec^2\\theta\\) cancels top and bottom.",
+              "Apply Property IV\n\\[I = \\int_{0}^{\\pi/4} \\ln\\left(1 + \\tan\\left(\\tfrac{\\pi}{4} - \\theta\\right)\\right)d\\theta\\]\nWhy: \\(a + b = 0 + \\frac{\\pi}{4}\\), so \\(\\theta\\) is replaced by \\(\\frac{\\pi}{4} - \\theta\\).",
+              "Simplify the bracket\n\\[1 + \\dfrac{1 - \\tan\\theta}{1 + \\tan\\theta} = \\dfrac{2}{1 + \\tan\\theta}\\]\n\\[\\ln\\dfrac{2}{1 + \\tan\\theta} = \\ln 2 - \\ln(1 + \\tan\\theta)\\]\nWhy: \\(\\tan(\\frac{\\pi}{4} - \\theta) = \\frac{\\tan\\frac{\\pi}{4} - \\tan\\theta}{1 + \\tan\\frac{\\pi}{4}\\tan\\theta}\\) with \\(\\tan\\frac{\\pi}{4} = 1\\); then \\(\\ln\\frac{p}{q} = \\ln p - \\ln q\\).",
+              "The integral appears again\n\\[I = \\int_{0}^{\\pi/4} \\ln 2\\,d\\theta - I\\]\n\\[2I = \\dfrac{\\pi}{4}\\ln 2\\]\n\\[I = \\dfrac{\\pi}{8}\\ln 2\\]\nWhy: the second part is exactly \\(I\\); \\(\\int_0^{\\pi/4} \\ln 2\\,d\\theta = \\frac{\\pi}{4}\\ln 2\\) because \\(\\ln 2\\) is a constant.",
+              "Check\n\\[\\dfrac{\\pi}{8}\\ln 2 \\approx 0.2722\\]\nWhy: the integrand rises from 0 at \\(x = 0\\) to \\(\\frac{\\ln 2}{2} \\approx 0.35\\) at \\(x = 1\\), so the area over length 1 must lie between 0 and 0.35; a numerical evaluation gives 0.27220, matching."
+            ],
+            "final_answer": "\\(\\frac{\\pi}{8}\\ln 2\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key has no answer for this part under the heading 'Exercise 3.2' (where this exercise's answers are printed). The value \\(\\frac{\\pi}{8}\\ln 2\\) is printed instead in the block headed 'Exercise 3.4' as (xiii). Match it by value: our answer \\(\\frac{\\pi}{8}\\ln 2\\) agrees with it."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(viii)",
+            "prompt": "1 (viii) Evaluate the following definite integral: \\(\\int_{0}^{1} \\tan^{-1} x\\,dx\\)",
+            "explanation": "A single inverse function with nothing to multiply it.\nUse integration by parts with \\(\\tan^{-1} x\\) as the first function and \\(1\\) as the second; its derivative \\(\\frac{1}{1 + x^2}\\) is easy to handle.\nUse the definite-integral form of the parts formula.",
+            "steps": [
+              "Given: \\(\\int_{0}^{1} \\tan^{-1} x\\,dx\\).\nTo find: its value.\nMethod: integration by parts for definite integrals \\(\\int_a^b f g\\,dx = \\left[f \\int g\\,dx\\right]_a^b - \\int_a^b \\left(\\int g\\,dx\\right) f'\\,dx\\), with \\(f = \\tan^{-1} x\\), \\(g = 1\\).",
+              "Apply integration by parts\n\\[\\int_{0}^{1} \\tan^{-1} x \\cdot 1\\,dx\\]\n\\[= \\Big[x\\tan^{-1} x\\Big]_{0}^{1} - \\int_{0}^{1} \\dfrac{x}{1 + x^2}\\,dx\\]\nWhy: \\(\\int 1\\,dx = x\\) and \\((\\tan^{-1} x)' = \\frac{1}{1 + x^2}\\).",
+              "First part\n\\[\\Big[x\\tan^{-1} x\\Big]_{0}^{1} = 1 \\cdot \\dfrac{\\pi}{4} - 0 = \\dfrac{\\pi}{4}\\]\nWhy: \\(\\tan^{-1} 1 = \\frac{\\pi}{4}\\).",
+              "Second part\n\\[\\int_{0}^{1} \\dfrac{x}{1 + x^2}\\,dx = \\dfrac{1}{2}\\Big[\\ln(1 + x^2)\\Big]_{0}^{1}\\]\n\\[= \\dfrac{1}{2}(\\ln 2 - \\ln 1) = \\dfrac{1}{2}\\ln 2\\]\nWhy: the top \\(x\\) is half the derivative of \\(1 + x^2\\), so \\(\\int \\frac{f'}{f} = \\ln f\\) applies; \\(\\ln 1 = 0\\).",
+              "Combine\n\\[\\int_{0}^{1} \\tan^{-1} x\\,dx = \\dfrac{\\pi}{4} - \\dfrac{1}{2}\\ln 2\\]\nWhy: first part minus second part.",
+              "Check\n\\[\\dfrac{\\pi}{4} - \\dfrac{1}{2}\\ln 2 \\approx 0.439\\]\n\\[\\dfrac{\\pi}{8} \\approx 0.393 < 0.439 < \\dfrac{\\pi}{4} \\approx 0.785 \\;\\checkmark\\]\nWhy: on \\([0, 1]\\), \\(\\tan^{-1} x\\) lies below \\(\\frac{\\pi}{4}\\) and above the chord \\(\\frac{\\pi}{4}x\\) (its graph bends downward), whose integral is \\(\\frac{\\pi}{8}\\)."
+            ],
+            "final_answer": "\\(\\frac{\\pi}{4} - \\frac{1}{2}\\ln 2\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key has no answer for this part under the heading 'Exercise 3.2' (where this exercise's answers are printed). The value \\(\\frac{\\pi}{4} - \\frac{1}{2}\\ln 2\\) is printed instead in the block headed 'Exercise 3.5' (which holds the answers of book Exercise 3.3) as (xxii). Match it by value: our answer \\(\\frac{\\pi}{4} - \\frac{1}{2}\\ln 2\\) agrees with it."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ix)",
+            "prompt": "1 (ix) Evaluate the following definite integral: \\(\\int_{0}^{2\\pi} \\frac{\\sin^2 x}{1 + e^{\\cos x}}\\,dx\\)",
+            "explanation": "\\(e^{\\cos x}\\) in the denominator has no usable antiderivative here, so use the properties.\nFirst Property VI (with \\(2\\pi\\)) halves the interval to \\([0, \\pi]\\); then Property IV on \\([0, \\pi]\\) changes \\(\\cos x\\) into \\(-\\cos x\\).\nAdding the two forms uses \\(\\frac{1}{1 + e^{u}} + \\frac{1}{1 + e^{-u}} = 1\\) (as in Example 54).",
+            "steps": [
+              "Given: \\(I = \\int_{0}^{2\\pi} \\frac{\\sin^2 x}{1 + e^{\\cos x}}\\,dx\\).\nTo find: \\(I\\).\nMethod: Property VI \\(\\int_0^{a} f(x)\\,dx = 2\\int_0^{a/2} f(x)\\,dx\\) when \\(f(a - x) = f(x)\\); then Property IV and the identity \\(\\frac{1}{1 + e^{u}} + \\frac{1}{1 + e^{-u}} = 1\\).",
+              "Halve the interval (Property VI, \\(a = 2\\pi\\))\n\\[\\sin^2(2\\pi - x) = \\sin^2 x,\\quad \\cos(2\\pi - x) = \\cos x\\]\n\\[I = 2\\int_{0}^{\\pi} \\dfrac{\\sin^2 x}{1 + e^{\\cos x}}\\,dx = 2J\\]\nWhy: \\(f(2\\pi - x) = f(x)\\), so the two halves of \\([0, 2\\pi]\\) give equal integrals.",
+              "Property IV on \\([0, \\pi]\\)\n\\[\\sin(\\pi - x) = \\sin x,\\quad \\cos(\\pi - x) = -\\cos x\\]\n\\[J = \\int_{0}^{\\pi} \\dfrac{\\sin^2 x}{1 + e^{-\\cos x}}\\,dx\\]\nWhy: replace \\(x\\) by \\(0 + \\pi - x\\); the value of \\(J\\) does not change.",
+              "Add the two forms of \\(J\\)\n\\[2J = \\int_{0}^{\\pi} \\sin^2 x\\left(\\dfrac{1}{1 + e^{\\cos x}} + \\dfrac{1}{1 + e^{-\\cos x}}\\right)dx\\]\n\\[\\dfrac{1}{1 + e^{u}} + \\dfrac{1}{1 + e^{-u}} = \\dfrac{1}{1 + e^{u}} + \\dfrac{e^{u}}{e^{u} + 1} = 1\\]\nWhy: multiply top and bottom of \\(\\frac{1}{1 + e^{-u}}\\) by \\(e^{u}\\); here \\(u = \\cos x\\).",
+              "Finish\n\\[2J = \\int_{0}^{\\pi} \\sin^2 x\\,dx = \\dfrac{\\pi}{2}\\]\n\\[J = \\dfrac{\\pi}{4},\\quad I = 2J = \\dfrac{\\pi}{2}\\]\nWhy: \\(\\int_0^{\\pi} \\sin^2 x\\,dx = \\frac{1}{2}\\left[x - \\frac{\\sin 2x}{2}\\right]_0^{\\pi} = \\frac{\\pi}{2}\\) (as in part (iii)).",
+              "Check\n\\[I = \\dfrac{1}{2}\\int_{0}^{2\\pi} \\sin^2 x\\,dx = \\dfrac{1}{2} \\cdot \\pi\\]\nWhy: the two weights \\(\\frac{1}{1 + e^{\\cos x}}\\) and \\(\\frac{1}{1 + e^{-\\cos x}}\\) always add to 1, so on average the weight is \\(\\frac{1}{2}\\); a numerical evaluation gives 1.570796, which is \\(\\frac{\\pi}{2}\\)."
+            ],
+            "final_answer": "\\(\\frac{\\pi}{2}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key has no answer for this part under the heading 'Exercise 3.2' (where this exercise's answers are printed). The value \\(\\frac{\\pi}{2}\\) is printed instead in the block headed 'Exercise 3.3' as 2.(ix). Match it by value: our answer \\(\\frac{\\pi}{2}\\) agrees with it."
+          }
+        ]
+      }
+    }
+  ]
+}

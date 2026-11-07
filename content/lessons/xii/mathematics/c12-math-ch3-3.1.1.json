@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.1.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.1.1",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 74,
+          "pdf_to": 74,
+          "note": "Book p. 72: 3.1.1 Rule-1 (constant), Rule-2 (sum and difference), Rule-3 (power rule), the General Power Rule, Rule-4 (f'/f) and Rule-5 (linear substitution)."
+        }
+      ],
+      "title": "3.1.1 Basic Rules of Integration",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Every rule below is a differentiation rule read backwards. So each one can be checked in one line: differentiate the right-hand side and you get the integrand back. Learn the rule together with that check; then you never need to memorise blindly."
+          },
+          {
+            "type": "paragraph",
+            "text": "Rule-1: \\(\\int k\\,f(x)\\,dx = k\\int f(x)\\,dx\\) (Integration of function with constant (k)).",
+            "bold": [
+              "Rule-1:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why: \\(\\frac{d}{dx}\\big(k\\,F(x)\\big) = k\\,F'(x)\\). A constant factor stays outside during differentiation, so it stays outside during integration too.\nWhen: the integrand has a number (or a constant letter) multiplied in front.\nOur example: \\(\\int 5x^{2}\\,dx = 5\\int x^{2}\\,dx = 5 \\cdot \\frac{x^{3}}{3} + c = \\frac{5}{3}x^{3} + c\\).\nOnly a constant may be taken out. \\(\\int x \\cdot x\\,dx\\) is not \\(x\\int x\\,dx\\), because \\(x\\) is not a constant."
+          },
+          {
+            "type": "paragraph",
+            "text": "Rule-2: \\(\\int [f(x) \\pm g(x)]\\,dx = \\int f(x)\\,dx \\pm \\int g(x)\\,dx\\) (Sum and Difference Rule).",
+            "bold": [
+              "Rule-2:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why: the derivative of a sum is the sum of the derivatives, so an integral of a sum may be split term by term.\nWhen: the integrand is several terms joined by \\(+\\) or \\(-\\). Integrate each term separately and write one \\(+\\,c\\) at the end (the constants of all terms combine into one).\nOur example: \\(\\int (6x^{2} - \\cos x)\\,dx = 2x^{3} - \\sin x + c\\).\nThere is no such rule for a product: \\(\\int x \\cdot x\\,dx = \\frac{x^{3}}{3} + c\\), but \\(\\int x\\,dx \\cdot \\int x\\,dx\\) would give \\(\\frac{x^{4}}{4}\\). A product must first be multiplied out (or handled by later methods)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Rule-3: \\(\\int x^{n}\\,dx = \\frac{x^{n+1}}{n+1} + c\\), where \\(n \\ne -1\\) (The Power Rule).",
+            "bold": [
+              "Rule-3:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why: differentiate the answer:\n\\[\\dfrac{d}{dx}\\left(\\dfrac{x^{n+1}}{n+1}\\right) = \\dfrac{(n+1)x^{n}}{n+1}\\]\n\\[= x^{n}\\]\nIn words: add 1 to the power, then divide by the new power. It is exactly the reverse of the derivative rule 'multiply by the power, then subtract 1'.\nWhy \\(n \\ne -1\\)? For \\(n = -1\\) the new power is 0 and we would divide by 0. That case, \\(\\int \\frac{1}{x}\\,dx = \\ln|x| + c\\), is in the table of 3.1.2.\nThe rule works for every real \\(n \\ne -1\\): negative and fractional powers too. First write roots and reciprocals as powers.\nOur examples: \\(\\int x^{4}\\,dx = \\frac{x^{5}}{5} + c\\); \\(\\int x^{-3}\\,dx = \\frac{x^{-2}}{-2} + c = -\\frac{1}{2x^{2}} + c\\); \\(\\int \\sqrt{x}\\,dx = \\int x^{1/2}\\,dx = \\frac{x^{3/2}}{3/2} + c = \\frac{2}{3}x^{3/2} + c\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The General Power Rule: \\(\\int [f(x)]^{n} f'(x)\\,dx = \\frac{[f(x)]^{n+1}}{n+1} + c\\), where \\(n \\ne -1\\).",
+            "bold": [
+              "General Power Rule:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why: by the chain rule,\n\\[\\dfrac{d}{dx}\\left(\\dfrac{[f(x)]^{n+1}}{n+1}\\right) = [f(x)]^{n} f'(x)\\]\nWhen: you see a bracket raised to a power, multiplied by the derivative of what is inside the bracket. Treat the whole bracket like \\(x\\) in the power rule.\nOur examples: \\(\\int (x^{2} + 1)^{3}\\,2x\\,dx = \\frac{(x^{2} + 1)^{4}}{4} + c\\), because \\(2x\\) is the derivative of \\(x^{2} + 1\\). Similarly \\(\\int (x^{3} + 5)^{2}\\,3x^{2}\\,dx = \\frac{(x^{3} + 5)^{3}}{3} + c\\).\nIf the derivative of the bracket is missing, the rule cannot be used: \\(\\int (x^{2} + 1)^{3}\\,dx\\) is not \\(\\frac{(x^{2} + 1)^{4}}{4} + c\\) (expand it instead)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Rule-4: \\(\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln|f(x)| + c\\)",
+            "bold": [
+              "Rule-4:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why: by the chain rule \\(\\frac{d}{dx}\\ln|f(x)| = \\frac{f'(x)}{f(x)}\\).\nWhen: the integrand is a fraction whose numerator is the derivative of its denominator. This is the \\(n = -1\\) case of the General Power Rule, which the power rule cannot handle.\nOur example: \\(\\int \\frac{2x}{x^{2} + 5}\\,dx = \\ln|x^{2} + 5| + c = \\ln(x^{2} + 5) + c\\), since \\(x^{2} + 5 > 0\\).\nIf the numerator is the derivative only up to a constant factor, fix the constant with Rule-1: \\(\\int \\frac{x}{x^{2} + 5}\\,dx = \\frac{1}{2}\\int \\frac{2x}{x^{2} + 5}\\,dx = \\frac{1}{2}\\ln(x^{2} + 5) + c\\).\nThe absolute value is needed because \\(\\ln\\) is defined only for positive numbers, while \\(f(x)\\) may be negative."
+          },
+          {
+            "type": "paragraph",
+            "text": "Rule-5: If \\(f'\\) is the derivative of \\(f\\), and \\(\\int f'(x)\\,dx = f(x) + c\\), then for any constants \\(a \\ne 0\\) and \\(b\\), \\(\\int f'(ax+b)\\,dx = \\frac{f(ax+b)}{a} + c\\). (Linear Substitution Rule).",
+            "bold": [
+              "Rule-5:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why: by the chain rule \\(\\frac{d}{dx}f(ax+b) = a\\,f'(ax+b)\\). The derivative brings out an extra factor \\(a\\), so the integral must divide by \\(a\\).\nWhen: a function you already know how to integrate, with \\(x\\) replaced by a linear expression \\(ax + b\\).\nOur examples: \\(\\int \\cos(3x + 2)\\,dx = \\frac{\\sin(3x + 2)}{3} + c\\); \\(\\int (2x + 1)^{5}\\,dx = \\frac{(2x + 1)^{6}}{6 \\cdot 2} + c = \\frac{(2x + 1)^{6}}{12} + c\\); \\(\\int e^{4x - 1}\\,dx = \\frac{e^{4x - 1}}{4} + c\\).\nIt works only for a linear inside \\(ax + b\\). For \\(\\int \\cos(x^{2})\\,dx\\) dividing by the derivative of \\(x^{2}\\) is wrong."
+          },
+          {
+            "type": "table",
+            "caption": "Choosing a rule (our summary, not a table from the book)",
+            "header": [
+              "The integrand looks like",
+              "Use",
+              "Our example"
+            ],
+            "rows": [
+              [
+                "a number times a function",
+                "Rule-1",
+                "\\(\\int 5x^{2}\\,dx = \\frac{5}{3}x^{3} + c\\)"
+              ],
+              [
+                "terms joined by \\(+\\) or \\(-\\)",
+                "Rule-2",
+                "\\(\\int (6x^{2} - \\cos x)\\,dx = 2x^{3} - \\sin x + c\\)"
+              ],
+              [
+                "a power of \\(x\\) (roots and reciprocals too)",
+                "Rule-3",
+                "\\(\\int x^{-3}\\,dx = -\\frac{1}{2x^{2}} + c\\)"
+              ],
+              [
+                "a bracket to a power times the derivative of the bracket",
+                "General Power Rule",
+                "\\(\\int (x^{2}+1)^{3}\\,2x\\,dx = \\frac{(x^{2}+1)^{4}}{4} + c\\)"
+              ],
+              [
+                "a fraction whose top is the derivative of its bottom",
+                "Rule-4",
+                "\\(\\int \\frac{2x}{x^{2}+5}\\,dx = \\ln(x^{2}+5) + c\\)"
+              ],
+              [
+                "a known function of \\(ax + b\\)",
+                "Rule-5",
+                "\\(\\int \\cos(3x+2)\\,dx = \\frac{\\sin(3x+2)}{3} + c\\)"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Rule-1: constants come out of the integral. Rule-2: integrate term by term.\n2. Rule-3 (power rule): \\(\\int x^{n}\\,dx = \\frac{x^{n+1}}{n+1} + c\\), \\(n \\ne -1\\); add 1 to the power, divide by the new power.\n3. General Power Rule: a bracket to a power times the bracket's derivative.\n4. Rule-4: numerator = derivative of denominator gives \\(\\ln|\\text{denominator}| + c\\).\n5. Rule-5: for \\(ax + b\\) inside, integrate as usual and divide by \\(a\\).\n6. Check every answer by differentiating it."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Splitting a product: \\(\\int f(x)g(x)\\,dx \\ne \\int f(x)\\,dx \\cdot \\int g(x)\\,dx\\).\n2. Using the power rule for \\(n = -1\\): \\(\\int x^{-1}\\,dx\\) is \\(\\ln|x| + c\\), never \\(\\frac{x^{0}}{0}\\).\n3. Forgetting to divide by \\(a\\) in Rule-5: \\(\\int (2x+1)^{5}\\,dx \\ne \\frac{(2x+1)^{6}}{6} + c\\).\n4. Using Rule-4 when the top is not the derivative of the bottom: \\(\\int \\frac{1}{x^{2} + 1}\\,dx \\ne \\ln(x^{2} + 1) + c\\) (it is \\(\\tan^{-1}x + c\\), see 3.1.2).\n5. Using the General Power Rule without \\(f'(x)\\) present: \\(\\int (x^{2} + 1)^{3}\\,dx \\ne \\frac{(x^{2} + 1)^{4}}{4} + c\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

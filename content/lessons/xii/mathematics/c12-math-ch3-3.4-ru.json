@@ -1,0 +1,313 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.4-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.4",
+      "title": "3.4 Integration by Parts (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 86,
+          "pdf_to": 91,
+          "note": "Book p. 84-89: 3.4 Integration by Parts, product rule in integral form, Examples 29-39 (Example 30 printed twice), Note!, Special Integral with proof and Challenge!"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-3.4",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab tak hum ne integration ke do bare tareeqe seekhe hain: seedhe formulas (basic rules) aur substitution. Lekin kuch integrals aise hain jahan yeh dono kaam nahi karte, jaise \\(\\int x\\sin x\\,dx\\) ya \\(\\int \\ln x\\,dx\\). Is sabaq mein hum ek naya aur bohat taqatwar tareeqa seekhenge jise integration by parts kehte hain. Is ke baad aap do mukhtalif qisam ke functions ke product (zarb) ka integral asaani se nikal sakenge, aur yeh tareeqa Exercise 3.3 ke har sawal mein kaam aayega."
+          },
+          {
+            "type": "paragraph",
+            "text": "Jis tarah differentiation mein product rule hota hai, usi ke mutabiq integration ka rule integration by parts kehlata hai. Yeh technique aise integrals ko aasaan banati hai jin ki shakal yeh ho:\n\\[\\int f(x)\\,g(x)\\,dx\\]",
+            "bold": [
+              "integration by parts"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Naye tareeqe ki zaroorat kyun pari? Substitution tab chalta hai jab ek factor doosre ka (taqreeban) derivative ho, jaise \\(\\int 2x\\cos(x^2)\\,dx\\) mein \\(2x\\) bilkul \\(x^2\\) ka derivative hai. Lekin \\(\\int x\\sin x\\,dx\\) mein \\(x\\) aur \\(\\sin x\\) ka aapas mein koi aisa rishta nahi. Yahan substitution fail ho jata hai.\nIntegration by parts ka asool yeh hai: ek factor ko differentiate karo taa ke woh aasaan ho jaye, aur doosre ko integrate karo. Is tarah mushkil integral ek aasaan integral mein badal jata hai. Bilkul aise jaise ek bhaari bojh ko do hisson mein baant kar uthaya jaye.\nHamari salah: is sabaq se pehle basic integrals (\\(\\int e^{ax}\\), \\(\\int \\sin bx\\), \\(\\int \\cos bx\\), \\(\\int \\sec^2 x\\)) zabani yaad kar lijiye, warna parts lagate waqt har dafa atak jayenge."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Product Rule in Integral Form"
+          },
+          {
+            "type": "paragraph",
+            "text": "Formula khud banate hain, taa ke ratta na lagana pare. Farz karein \\(f(x)\\) aur \\(h(x)\\) do differentiable functions hain. Product rule kehta hai:\n\\[\\dfrac{d}{dx}[f(x)h(x)]\\]\n\\[= f(x)h'(x) + h(x)f'(x)\\]\nAb dono taraf \\(x\\) ke lihaz se integrate karte hain. Left side par derivative ka integral wapas wohi function de deta hai, kyunke integration aur differentiation ek doosre ke ulat hain:\n\\[f(x)h(x) = \\int [f(x)h'(x) + h(x)f'(x)]\\,dx\\]\nJama ka integral alag alag integrals ka jama hota hai, is liye integral ko do hisson mein tor dete hain:\n\\[f(x)h(x) = \\int f(x)h'(x)\\,dx\\]\n\\[\\quad + \\int h(x)f'(x)\\,dx\\]\nAb doosre integral ko left side par le jate hain (terms ki tarteeb badalte hain):"
+          },
+          {
+            "type": "equation",
+            "latex": "\\int f(x)h'(x)\\,dx = f(x)h(x) - \\int h(x)f'(x)\\,dx \\quad \\text{...(1)}",
+            "text_alt": "integral of f(x) h prime(x) dx equals f(x) h(x) minus integral of h(x) f prime(x) dx, equation 1"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab \\(h'(x) = g(x)\\) rakh dete hain. Is ka matlab hai ke \\(h(x)\\) woh function hai jis ka derivative \\(g(x)\\) hai, yani \\(h(x) = \\int g(x)\\,dx\\).\nYeh (1) mein rakhne se integration by parts ka formula mil jata hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}\\int f(x)g(x)\\,dx &= f(x)\\left(\\int g(x)\\,dx\\right) \\\\ &\\quad - \\int \\left[\\left(\\int g(x)\\,dx\\right) f'(x)\\right] dx \\quad \\text{...(2)}\\end{aligned}",
+            "text_alt": "integral of f(x) g(x) dx equals f(x) times the integral of g(x) dx, minus the integral of (integral of g(x) dx) times f prime(x), dx, equation 2"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Formula (2) ko zabani lafzon mein yaad kijiye: pehla \\(\\times\\) (doosre ka integral) \\(-\\) \\(\\int\\) (doosre ka integral \\(\\times\\) pehle ka derivative) \\(dx\\).\nYahan \\(f\\) ko first function (pehla function, jise hum differentiate karte hain) aur \\(g\\) ko second function (doosra function, jise hum integrate karte hain) kehte hain.\nPehla function kaise chunein? Do baatein dekhein: (1) doosra function aisa ho jis ka integral humein aata ho; (2) pehla function differentiate ho kar aasaan ho jaye, jaise \\(x\\) ka derivative 1 aur \\(\\ln x\\) ka derivative \\(\\frac{1}{x}\\).\nEk mash-hoor yaad karne ka lafz (kitab mein nahi, hamari taraf se) ILATE hai: Inverse trigonometric, Logarithmic, Algebraic, Trigonometric, Exponential. Jo function is list mein pehle aaye, usay first function banayein.\nFormula ke andar \\(\\int g(x)\\,dx\\) likhte waqt constant nahi lagate; sirf aakhir mein ek dafa \\(+ c\\) lagta hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 29",
+            "problem": "Evaluate \\(\\int x\\sin nx\\,dx,\\ n \\ne 0\\).",
+            "steps": [
+              "Diya gaya: \\(\\int x\\sin nx\\,dx\\), aur \\(n \\ne 0\\).\nMaloom karna: yeh indefinite integral.\nTareeqa: yahan algebraic function \\(x\\) aur trigonometric function \\(\\sin nx\\) ka product hai. ILATE ke mutabiq A (algebraic) pehle aata hai T (trigonometric) se, is liye \\(x\\) first function aur \\(\\sin nx\\) second function. Faida yeh ke \\(x\\) differentiate ho kar sirf 1 reh jata hai.",
+              "Doosre ka integral aur pehle ka derivative\n\\[\\int \\sin nx\\,dx = \\dfrac{-\\cos nx}{n}\\]\n\\[\\dfrac{d}{dx}(x) = 1\\]\nKyun: \\(\\cos nx\\) ka derivative \\(-n\\sin nx\\) hai, is liye \\(\\sin nx\\) ka integral nikalte waqt \\(n\\) se divide karna parta hai. Isi liye sawal mein \\(n \\ne 0\\) likha hai, warna zero se divide ho jata.",
+              "Formula (2) lagayein\n\\[= x\\left(\\dfrac{-\\cos nx}{n}\\right)\\]\n\\[\\quad - \\int \\left(\\dfrac{-\\cos nx}{n}\\right)(1)\\,dx\\]\n\\[= \\dfrac{-x\\cos nx}{n} + \\dfrac{1}{n}\\int \\cos nx\\,dx\\]\nKyun: pehla \\(\\times\\) doosre ka integral, minus \\(\\int\\) (doosre ka integral \\(\\times\\) pehle ka derivative). Andar wala integral ab sirf \\(\\cos nx\\) ka hai, jo pehle se aasaan hai. Do minus mil kar plus ban gaye.\nDhyan dein: formula wala minus aur \\(-\\cos nx\\) wala minus dono yaad rakhein; zyada tar bachche yahin sign ghalat kar dete hain.",
+              "Aasaan integral khatam karein\n\\[= \\dfrac{-x\\cos nx}{n} + \\dfrac{1}{n}\\cdot\\dfrac{\\sin nx}{n} + c\\]\n\\[= \\dfrac{-x\\cos nx}{n} + \\dfrac{\\sin nx}{n^2} + c\\]\nKyun: \\(\\int \\cos nx\\,dx = \\frac{\\sin nx}{n}\\), aur \\(\\frac{1}{n}\\cdot\\frac{1}{n} = \\frac{1}{n^2}\\).",
+              "Tasdeeq: jawab ko differentiate karein\n\\[\\dfrac{d}{dx}\\left(\\dfrac{-x\\cos nx}{n}\\right) = \\dfrac{-\\cos nx}{n} + x\\sin nx\\]\n\\[\\dfrac{d}{dx}\\left(\\dfrac{\\sin nx}{n^2}\\right) = \\dfrac{\\cos nx}{n}\\]\nKyun: dono \\(\\frac{\\cos nx}{n}\\) wale terms cancel ho gaye aur sirf \\(x\\sin nx\\) bacha, jo hamara integrand (integral ke andar wala function) hai. Matlab jawab sahi hai."
+            ],
+            "answer": "\\(\\int x\\sin nx\\,dx = \\dfrac{-x\\cos nx}{n} + \\dfrac{\\sin nx}{n^2} + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 30",
+            "problem": "Evaluate \\(\\int x e^{ax}\\,dx\\).",
+            "steps": [
+              "Diya gaya: \\(\\int x e^{ax}\\,dx\\) (\\(a \\ne 0\\)).\nMaloom karna: yeh indefinite integral.\nTareeqa: phir se algebraic aur exponential ka product. ILATE mein A pehle aur E aakhir mein, is liye \\(x\\) first function aur \\(e^{ax}\\) second function. \\(e^{ax}\\) ka integral bohat aasaan hai aur \\(x\\) differentiate ho kar 1 ban jata hai.",
+              "Formula (2) lagayein\n\\[\\int x e^{ax}\\,dx = x\\dfrac{e^{ax}}{a} - \\int \\dfrac{e^{ax}}{a}\\cdot 1\\,dx\\]\nKyun: \\(\\int e^{ax}\\,dx = \\frac{e^{ax}}{a}\\) (chain rule ka ulta, \\(a\\) se divide), aur \\(x\\) ka derivative 1 hai.",
+              "Constant bahar nikaal kar integrate karein\n\\[= x\\dfrac{e^{ax}}{a} - \\dfrac{1}{a}\\int e^{ax}\\,dx\\]\n\\[= x\\dfrac{e^{ax}}{a} - \\dfrac{1}{a}\\cdot\\dfrac{e^{ax}}{a} + c\\]\nKyun: \\(\\frac{1}{a}\\) constant hai, aur constant integral ke bahar aa sakta hai.",
+              "\\(e^{ax}\\) common lein\n\\[= e^{ax}\\left(\\dfrac{x}{a} - \\dfrac{1}{a^2}\\right) + c\\]\n\\[= e^{ax}\\left(\\dfrac{ax - 1}{a^2}\\right) + c\\]\nKyun: dono terms mein \\(e^{ax}\\) hai, use common liya; phir bracket ke andar common denominator \\(a^2\\) banaya. Jawab saaf aur chhota ho gaya.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left[\\dfrac{e^{ax}(ax-1)}{a^2}\\right]\\]\n\\[= \\dfrac{a e^{ax}(ax-1) + a e^{ax}}{a^2}\\]\n\\[= \\dfrac{a^2 x e^{ax}}{a^2} = x e^{ax}\\]\nKyun: \\(e^{ax}(ax-1)\\) par product rule lagaya; \\(-ae^{ax}\\) aur \\(+ae^{ax}\\) cancel ho gaye aur integrand wapas mil gaya."
+            ],
+            "answer": "\\(\\int x e^{ax}\\,dx = e^{ax}\\left(\\dfrac{ax-1}{a^2}\\right) + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 31",
+            "problem": "Evaluate \\(\\int \\dfrac{x}{\\cos^2 x}\\,dx\\).",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{x}{\\cos^2 x}\\,dx\\).\nMaloom karna: yeh indefinite integral.\nTareeqa: \\(\\frac{1}{\\cos^2 x}\\) ko \\(\\sec^2 x\\) likhenge. Phir \\(x\\) first aur \\(\\sec^2 x\\) second function, kyunke \\(\\int \\sec^2 x\\,dx = \\tan x\\) hamara jaana pehchana result hai.",
+              "Integrand ko nayi shakal dein\n\\[\\int \\dfrac{x}{\\cos^2 x}\\,dx = \\int x\\sec^2 x\\,dx\\]\nKyun: \\(\\sec x = \\frac{1}{\\cos x}\\), is liye \\(\\frac{1}{\\cos^2 x} = \\sec^2 x\\).",
+              "Formula (2) lagayein\n\\[= x\\cdot\\tan x - \\int \\tan x\\cdot 1\\,dx\\]\n\\[= x\\tan x - \\int \\dfrac{\\sin x}{\\cos x}\\,dx\\]\nKyun: pehla \\(x\\), doosre ka integral \\(\\tan x\\), pehle ka derivative 1. Phir \\(\\tan x = \\frac{\\sin x}{\\cos x}\\) likha.",
+              "Numerator ko denominator ka derivative banayein\n\\[= x\\tan x + \\int \\dfrac{-\\sin x}{\\cos x}\\,dx\\]\n\\[= x\\tan x + \\ln|\\cos x| + c\\]\nKyun: \\(\\cos x\\) ka derivative \\(-\\sin x\\) hai. Minus ko andar le gaye taa ke upar bilkul neeche wale ka derivative ho; phir rule \\(\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln|f(x)| + c\\) laga.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}(x\\tan x + \\ln|\\cos x|)\\]\n\\[= \\tan x + x\\sec^2 x - \\tan x\\]\n\\[= x\\sec^2 x\\]\nKyun: \\(\\ln|\\cos x|\\) ka derivative \\(\\frac{-\\sin x}{\\cos x} = -\\tan x\\) hai; \\(\\tan x\\) cancel ho gaya aur integrand bacha."
+            ],
+            "answer": "\\(\\int \\dfrac{x}{\\cos^2 x}\\,dx = x\\tan x + \\ln|\\cos x| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Numbering note (ours)",
+            "text": "Kitab mein 'Example 30' do dafa chhapa hai: pehli dafa \\(\\int x e^{ax}\\,dx\\) ke liye aur doosri dafa \\(\\int \\frac{x}{\\cos^2 x}\\,dx\\) ke liye, aur Example 31 kahin nahi chhapa (agla seedha Example 32 hai). Hum ne doosre wale ko Example 31 dikhaya hai taa ke har misaal ka apna number ho."
+          },
+          {
+            "type": "example",
+            "title": "Example 32",
+            "problem": "Evaluate \\(\\int \\ln(\\sin x)\\cdot\\sin 2x\\,dx\\).",
+            "steps": [
+              "Diya gaya: \\(\\int \\ln(\\sin x)\\cdot\\sin 2x\\,dx\\).\nMaloom karna: yeh indefinite integral.\nTareeqa: pehle \\(\\sin 2x = 2\\sin x\\cos x\\) likhenge. Phir \\(u = \\sin x\\) rakhne se integral \\(2\\int u\\ln u\\,du\\) ban jayega, jise parts se karenge aur \\(\\ln u\\) ko first function lenge. Yani yahan do tareeqe mil kar kaam kar rahe hain: pehle substitution, phir parts.",
+              "Double angle formula\n\\[\\int \\ln(\\sin x)\\cdot 2\\sin x\\cos x\\,dx\\]\n\\[= 2\\int \\ln(\\sin x)\\sin x\\cos x\\,dx\\]\nKyun: \\(\\cos x\\,dx\\) bilkul \\(d(\\sin x)\\) hai, yani substitution ke liye sab kuch tayyar hai.",
+              "\\(u = \\sin x\\) rakhein\n\\[\\dfrac{du}{dx} = \\cos x \\Rightarrow du = \\cos x\\,dx\\]\n\\[= 2\\int \\ln u\\cdot u\\,du\\]\nKyun: \\(\\sin x\\) ki jagah \\(u\\) aur \\(\\cos x\\,dx\\) ki jagah \\(du\\) aa gaya. Ab integral sirf \\(u\\) mein hai.",
+              "Parts lagayein (first \\(\\ln u\\), second \\(u\\))\n\\[= 2\\Big[\\ln u\\cdot\\dfrac{u^2}{2}\\]\n\\[\\qquad - \\int \\dfrac{u^2}{2}\\cdot\\dfrac{1}{u}\\,du\\Big]\\]\n\\[= u^2\\ln u - \\int u\\,du\\]\n\\[= u^2\\ln u - \\dfrac{u^2}{2} + c\\]\nKyun: \\(\\ln u\\) ka integral humein seedha nahi aata, lekin us ka derivative \\(\\frac{1}{u}\\) bohat aasaan hai. Is liye ILATE mein L (logarithmic) ko A se pehle rakha hai. \\(\\frac{u^2}{2}\\cdot\\frac{1}{u} = \\frac{u}{2}\\), aur 2 se zarb ho kar \\(u\\) bacha.",
+              "Wapas \\(x\\) mein likhein\n\\[= \\sin^2 x\\ln(\\sin x) - \\dfrac{\\sin^2 x}{2} + c\\]\n\\[= \\sin^2 x\\left[\\ln(\\sin x) - \\dfrac{1}{2}\\right] + c\\]\nKyun: \\(u = \\sin x\\) wapas rakha aur \\(\\sin^2 x\\) common liya.\nDhyan dein: substitution ke baad jawab hamesha asal variable \\(x\\) mein wapas likhna hai; \\(u\\) mein jawab chhor dena adhoora hai.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left[\\sin^2 x\\ln(\\sin x) - \\tfrac{\\sin^2 x}{2}\\right]\\]\n\\[= 2\\sin x\\cos x\\ln(\\sin x)\\]\n\\[\\quad + \\sin x\\cos x - \\sin x\\cos x\\]\n\\[= \\sin 2x\\ln(\\sin x)\\]\nKyun: \\(\\ln(\\sin x)\\) ka derivative \\(\\frac{\\cos x}{\\sin x}\\) hai, jis se \\(\\sin^2 x\\cdot\\frac{\\cos x}{\\sin x} = \\sin x\\cos x\\) bana; yeh doosre term se cancel ho gaya."
+            ],
+            "answer": "\\(\\int \\ln(\\sin x)\\cdot\\sin 2x\\,dx = \\sin^2 x\\left[\\ln(\\sin x) - \\dfrac{1}{2}\\right] + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note!",
+            "text": "\\(\\int e^{g(x)}[f(x)g'(x) + f'(x)]\\,dx = e^{g(x)}f(x) + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh Note sahi kyun hai? \\(e^{g(x)}f(x)\\) ko product rule aur chain rule se differentiate kar ke dekhiye:\n\\[\\dfrac{d}{dx}\\left[e^{g(x)}f(x)\\right]\\]\n\\[= e^{g(x)}g'(x)f(x) + e^{g(x)}f'(x)\\]\n\\[= e^{g(x)}[f(x)g'(x) + f'(x)]\\]\nTo jab bhi integrand \\(e^{g(x)}\\) \\(\\times\\) is shakal ka bracket ho, jawab foran likha ja sakta hai, bina lambi calculation ke. Sab se zyada istemal hone wali soorat \\(g(x) = x\\) hai: \\(\\int e^{x}[f(x) + f'(x)]\\,dx = e^{x}f(x) + c\\). Exam mein yeh pehchan lena aadha sawal hal kar deta hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 33",
+            "problem": "Evaluate \\(\\int e^{x^2}(\\cos x + 2x\\sin x)\\,dx\\).",
+            "steps": [
+              "Diya gaya: \\(\\int e^{x^2}(\\cos x + 2x\\sin x)\\,dx\\).\nMaloom karna: yeh indefinite integral.\nTareeqa: integral ko do hisson mein torenge. Pehle hisse \\(\\int e^{x^2}\\cos x\\,dx\\) par parts lagayenge, \\(e^{x^2}\\) ko first function le kar. Jo naya integral banega woh doosre hisse se cancel ho jayega. Yeh bilkul upar wale Note ki misaal hai.",
+              "Integral ko torein\n\\[= \\int e^{x^2}\\cos x\\,dx + \\int e^{x^2}\\,2x\\sin x\\,dx\\]\nKyun: jama ka integral, integrals ka jama hota hai.",
+              "Pehle integral par parts\n\\[\\int e^{x^2}\\cos x\\,dx\\]\n\\[= e^{x^2}(\\sin x) - \\int (\\sin x)e^{x^2}\\,2x\\,dx\\]\nKyun: second function \\(\\cos x\\) ka integral \\(\\sin x\\); first function \\(e^{x^2}\\) ka derivative chain rule se \\(e^{x^2}\\cdot 2x\\).\nDhyan dein: yahan \\(e^{x^2}\\) ko integrate karne ki koshish na karein; \\(\\int e^{x^2}\\,dx\\) kisi aam function mein nahi nikalta. Is liye usay first function banaya.",
+              "Dono integrals cancel\n\\[= e^{x^2}\\sin x - \\int e^{x^2}2x\\sin x\\,dx\\]\n\\[\\quad + \\int e^{x^2}2x\\sin x\\,dx\\]\n\\[= e^{x^2}\\sin x + c\\]\nKyun: ek hi integral ek dafa minus aur ek dafa plus ke saath aaya, to dono khatam. Note mein \\(g(x) = x^2\\), \\(f(x) = \\sin x\\) rakhein to yahi jawab seedha milta hai.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}(e^{x^2}\\sin x)\\]\n\\[= 2x e^{x^2}\\sin x + e^{x^2}\\cos x\\]\nKyun: product rule; yeh bilkul integrand hai."
+            ],
+            "answer": "\\(\\int e^{x^2}(\\cos x + 2x\\sin x)\\,dx = e^{x^2}\\sin x + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 34",
+            "problem": "Evaluate \\(\\int \\sin^{-1}\\left(\\dfrac{x}{\\sqrt{1+x^2}}\\right)dx\\).",
+            "steps": [
+              "Diya gaya: \\(\\int \\sin^{-1}\\left(\\frac{x}{\\sqrt{1+x^2}}\\right)dx\\).\nMaloom karna: yeh indefinite integral.\nTareeqa: \\(\\sqrt{1+x^2}\\) dekh kar foran \\(x = \\tan\\theta\\) ka khayal aana chahiye, kyunke \\(1 + \\tan^2\\theta = \\sec^2\\theta\\) root ko khatam kar deta hai. Is se inverse sine simplify ho kar sirf \\(\\theta\\) reh jayega, aur \\(\\int \\theta\\sec^2\\theta\\,d\\theta\\) parts se ho jayega.",
+              "\\(x = \\tan\\theta\\) rakhein\n\\[\\theta \\in \\left(-\\dfrac{\\pi}{2}, \\dfrac{\\pi}{2}\\right)\\]\n\\[dx = \\sec^2\\theta\\,d\\theta\\]\nKyun: is interval mein \\(\\tan\\theta\\) har real value sirf ek dafa leta hai, aur \\(\\sec\\theta\\) positive rehta hai.",
+              "Inverse sine ke andar simplify karein\n\\[\\dfrac{\\tan\\theta}{\\sqrt{1+\\tan^2\\theta}} = \\dfrac{\\tan\\theta}{\\sec\\theta}\\]\n\\[= \\dfrac{\\sin\\theta}{\\cos\\theta}\\cdot\\cos\\theta = \\sin\\theta\\]\nKyun: \\(1 + \\tan^2\\theta = \\sec^2\\theta\\), aur \\(\\sqrt{\\sec^2\\theta} = \\sec\\theta\\) kyunke \\(\\sec\\theta > 0\\).",
+              "Integral ab yeh ban gaya\n\\[= \\int \\sin^{-1}(\\sin\\theta)\\cdot\\sec^2\\theta\\,d\\theta\\]\n\\[= \\int \\theta\\cdot\\sec^2\\theta\\,d\\theta\\]\nKyun: \\(\\theta\\) jab \\(\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\) mein ho to \\(\\sin^{-1}(\\sin\\theta) = \\theta\\). Mushkil cheez ek saada \\(\\theta\\) ban gayi.",
+              "Parts lagayein (first \\(\\theta\\), second \\(\\sec^2\\theta\\))\n\\[= \\theta\\tan\\theta - \\int (\\tan\\theta)(1)\\,d\\theta\\]\n\\[= \\theta\\tan\\theta - \\ln|\\sec\\theta| + c\\]\nKyun: \\(\\theta\\) differentiate ho kar 1 banta hai; \\(\\int \\tan\\theta\\,d\\theta = \\ln|\\sec\\theta| + c\\) yaad rakhne wala result hai.",
+              "\\(\\sec\\theta\\) ko \\(\\tan\\theta\\) mein likhein\n\\[= \\theta\\tan\\theta - \\ln\\left|\\sqrt{\\sec^2\\theta}\\right| + c\\]\n\\[= \\theta\\tan\\theta - \\dfrac{1}{2}\\ln|1+\\tan^2\\theta| + c\\]\nKyun: \\(\\ln\\sqrt{A} = \\frac{1}{2}\\ln A\\) (power rule of log), aur \\(\\sec^2\\theta = 1 + \\tan^2\\theta\\). Is tarah sab kuch \\(\\tan\\theta\\) mein aa gaya, jo seedha \\(x\\) hai.",
+              "Wapas \\(x\\) mein\n\\[= (\\tan^{-1}x)\\cdot x - \\dfrac{1}{2}\\ln|1+x^2| + c\\]\n\\[= x\\tan^{-1}x - \\dfrac{1}{2}\\ln(1+x^2) + c\\]\nKyun: \\(\\tan\\theta = x\\) aur \\(\\theta = \\tan^{-1}x\\). \\(1 + x^2\\) hamesha positive hai, is liye modulus ki zaroorat nahi.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left[x\\tan^{-1}x - \\tfrac{1}{2}\\ln(1+x^2)\\right]\\]\n\\[= \\tan^{-1}x + \\dfrac{x}{1+x^2} - \\dfrac{x}{1+x^2}\\]\n\\[= \\tan^{-1}x\\]\nKyun: aur \\(\\tan^{-1}x = \\theta = \\sin^{-1}\\left(\\frac{x}{\\sqrt{1+x^2}}\\right)\\), yani integrand. Jawab sahi hai."
+            ],
+            "answer": "\\(\\int \\sin^{-1}\\left(\\dfrac{x}{\\sqrt{1+x^2}}\\right)dx = x\\tan^{-1}x - \\dfrac{1}{2}\\ln(1+x^2) + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Agli misaal mein ek dilchasp cheez hogi: do dafa parts lagane ke baad asal integral wapas aa jata hai. Ghabraiye nahi! Us integral ko \\(I\\) ka naam dein, saare \\(I\\) wale terms ek taraf le jayein aur \\(I\\) ko aam equation ki tarah solve kar lein. Yeh aisa hai jaise koi gol chakkar (circle) mein ghoom kar wapas usi jagah aa jaye, lekin is dafa haath mein jawab ho.\nEk zaroori baat: dono rounds mein first function ka intekhab (choice) ek jaisa rakhein. Doosre round mein choice badal di to pehle round ka kaam ulat jata hai aur aakhir mein \\(I = I\\) milta hai, jo kuch nahi batata."
+          },
+          {
+            "type": "example",
+            "title": "Example 35",
+            "problem": "Show that \\(\\int e^{ax}\\sin bx\\,dx = \\dfrac{1}{\\sqrt{a^2+b^2}}e^{ax}\\sin\\left(bx - \\tan^{-1}\\dfrac{b}{a}\\right) + c\\).",
+            "steps": [
+              "Diya gaya: \\(I = \\int e^{ax}\\sin bx\\,dx\\) (\\(a, b \\ne 0\\)).\nSaabit karna: diya hua formula.\nTareeqa: \\(e^{ax}\\) ko first function le kar do dafa parts lagayenge; asal integral wapas aayega, to \\(I\\) ke liye solve karenge. Phir \\(a = r\\cos\\theta\\), \\(b = r\\sin\\theta\\) rakh kar sine aur cosine ko ek hi sine mein jor denge.",
+              "Pehli dafa parts\n\\[I = e^{ax}\\left(-\\dfrac{\\cos bx}{b}\\right)\\]\n\\[\\quad - \\int \\left(-\\dfrac{\\cos bx}{b}\\right)e^{ax}\\cdot a\\,dx\\]\n\\[= -\\dfrac{e^{ax}\\cos bx}{b} + \\dfrac{a}{b}\\int e^{ax}\\cos bx\\,dx\\]\nKyun: \\(\\int \\sin bx\\,dx = -\\frac{\\cos bx}{b}\\) aur \\(e^{ax}\\) ka derivative \\(ae^{ax}\\). Do minus mil kar plus bane.",
+              "Doosri dafa parts\n\\[\\int e^{ax}\\cos bx\\,dx\\]\n\\[= e^{ax}\\dfrac{\\sin bx}{b} - \\int \\dfrac{\\sin bx}{b}e^{ax}\\cdot a\\,dx\\]\nKyun: wohi choice, \\(e^{ax}\\) first; \\(\\int \\cos bx\\,dx = \\frac{\\sin bx}{b}\\).",
+              "Wapas rakhein: \\(I\\) phir aa gaya\n\\[I = -\\dfrac{e^{ax}\\cos bx}{b} + \\dfrac{ae^{ax}\\sin bx}{b^2}\\]\n\\[\\quad - \\dfrac{a^2}{b^2}\\int e^{ax}\\sin bx\\,dx\\]\n\\[I = -\\dfrac{e^{ax}\\cos bx}{b} + \\dfrac{ae^{ax}\\sin bx}{b^2}\\]\n\\[\\quad - \\dfrac{a^2}{b^2}I\\]\nKyun: aakhri integral bilkul \\(I\\) hi hai. Ab yeh \\(I\\) ki ek simple equation hai.",
+              "\\(I\\) ke liye solve karein\n\\[I + \\dfrac{a^2}{b^2}I = -\\dfrac{e^{ax}\\cos bx}{b} + \\dfrac{ae^{ax}\\sin bx}{b^2}\\]\n\\[\\left(\\dfrac{b^2+a^2}{b^2}\\right)I\\]\n\\[= \\dfrac{e^{ax}}{b^2}(a\\sin bx - b\\cos bx)\\]\n\\[I = \\dfrac{e^{ax}(a\\sin bx - b\\cos bx)}{a^2+b^2}\\]\nKyun: \\(I\\) wale terms left par jama kiye, right par \\(\\frac{e^{ax}}{b^2}\\) common liya, phir dono taraf \\(\\frac{b^2}{a^2+b^2}\\) se zarb di. Yeh form bhi khud ek mukammal jawab hai aur exam mein bohat kaam aata hai.",
+              "\\(a = r\\cos\\theta\\), \\(b = r\\sin\\theta\\) rakhein\n\\[I = \\dfrac{e^{ax}}{a^2+b^2}(r\\cos\\theta\\sin bx\\]\n\\[\\qquad - r\\sin\\theta\\cos bx)\\]\n\\[= \\dfrac{e^{ax}\\,r}{a^2+b^2}(\\sin bx\\cos\\theta\\]\n\\[\\qquad - \\cos bx\\sin\\theta)\\]\n\\[= \\dfrac{1}{a^2+b^2}e^{ax}\\,r\\sin(bx - \\theta)\\]\nKyun: \\(\\sin A\\cos B - \\cos A\\sin B = \\sin(A - B)\\) wala formula; do terms ek sine mein jur gaye.",
+              "\\(r\\) aur \\(\\theta\\) maloom karein\n\\[r^2 = a^2 + b^2 \\Rightarrow r = \\sqrt{a^2+b^2}\\]\n\\[\\dfrac{r\\sin\\theta}{r\\cos\\theta} = \\dfrac{b}{a} \\Rightarrow \\theta = \\tan^{-1}\\left(\\dfrac{b}{a}\\right)\\]\nKyun: dono ko square kar ke jama kiya to \\(r^2(\\cos^2\\theta + \\sin^2\\theta) = a^2 + b^2\\); taqseem kiya to \\(\\tan\\theta\\) mila. (\\(\\theta = \\tan^{-1}\\frac{b}{a}\\) lena yeh farz karta hai ke \\(a > 0\\), taa ke \\(\\cos\\theta > 0\\) ho.)",
+              "Aakhri shakal\n\\[I = \\dfrac{\\sqrt{a^2+b^2}}{a^2+b^2}e^{ax}\\sin\\left(bx - \\tan^{-1}\\dfrac{b}{a}\\right)\\]\n\\[= \\dfrac{e^{ax}}{\\sqrt{a^2+b^2}}\\sin\\left(bx - \\tan^{-1}\\dfrac{b}{a}\\right) + c\\]\nKyun: \\(\\frac{\\sqrt{a^2+b^2}}{a^2+b^2} = \\frac{1}{\\sqrt{a^2+b^2}}\\); aakhir mein constant of integration lagaya.",
+              "Tasdeeq (beech wali shakal se)\n\\[\\dfrac{d}{dx}\\left[e^{ax}(a\\sin bx - b\\cos bx)\\right]\\]\n\\[= e^{ax}(a^2\\sin bx - ab\\cos bx\\]\n\\[\\qquad + ab\\cos bx + b^2\\sin bx)\\]\n\\[= (a^2+b^2)e^{ax}\\sin bx\\]\nKyun: \\(a^2 + b^2\\) se divide karne par integrand \\(e^{ax}\\sin bx\\) wapas mil gaya."
+            ],
+            "answer": "Saabit ho gaya: \\(\\int e^{ax}\\sin bx\\,dx = \\dfrac{e^{ax}}{a^2+b^2}(a\\sin bx - b\\cos bx) + c = \\dfrac{1}{\\sqrt{a^2+b^2}}e^{ax}\\sin\\left(bx - \\tan^{-1}\\dfrac{b}{a}\\right) + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahi: \\(\\int e^{x}\\cos x\\,dx\\) nikaliye.\nIsi tareeqe se (\\(\\cos x\\) ya \\(e^{x}\\) ko first rakh kar, dono rounds mein ek jaisa) do dafa parts lagayein: \\(I = e^{x}\\sin x + e^{x}\\cos x - I\\).\nIs liye \\(2I = e^{x}(\\sin x + \\cos x)\\), yani \\(I = \\frac{e^{x}}{2}(\\sin x + \\cos x) + c\\).\nTasdeeq: \\(\\frac{d}{dx}\\left[\\frac{e^{x}}{2}(\\sin x + \\cos x)\\right] = \\frac{e^{x}}{2}(\\sin x + \\cos x + \\cos x - \\sin x) = e^{x}\\cos x\\). Bilkul sahi."
+          },
+          {
+            "type": "example",
+            "title": "Example 36",
+            "problem": "Evaluate \\(\\int x\\sin^2 x\\,dx\\).",
+            "steps": [
+              "Diya gaya: \\(\\int x\\sin^2 x\\,dx\\).\nMaloom karna: yeh indefinite integral.\nTareeqa: \\(\\sin^2 x\\) ko seedha integrate karna mushkil hai, is liye pehle \\(\\sin^2 x = \\frac{1 - \\cos 2x}{2}\\) likhenge (power ghatane wala formula). Phir sirf \\(\\int x\\cos 2x\\,dx\\) ke liye parts chahiye honge.",
+              "Power ghatayein\n\\[\\int x\\cdot\\dfrac{1 - \\cos 2x}{2}\\,dx = \\dfrac{1}{2}\\int (x - x\\cos 2x)\\,dx\\]\n\\[= \\dfrac{1}{2}\\int x\\,dx - \\dfrac{1}{2}\\int x\\cos 2x\\,dx\\]\nKyun: \\(\\cos 2x = 1 - 2\\sin^2 x\\) se \\(\\sin^2 x = \\frac{1 - \\cos 2x}{2}\\) nikalta hai. Pehla integral to bilkul aasaan hai.",
+              "Doosre integral par parts\n\\[= \\dfrac{1}{2}\\left(\\dfrac{x^2}{2}\\right)\\]\n\\[\\quad - \\dfrac{1}{2}\\left[x\\left(\\dfrac{\\sin 2x}{2}\\right) - \\int \\dfrac{\\sin 2x}{2}\\cdot 1\\,dx\\right]\\]\n\\[= \\dfrac{x^2}{4} - \\dfrac{x\\sin 2x}{4} + \\dfrac{1}{4}\\int \\sin 2x\\,dx\\]\nKyun: \\(x\\) first, \\(\\cos 2x\\) second, aur \\(\\int \\cos 2x\\,dx = \\frac{\\sin 2x}{2}\\). Bahar wala \\(-\\frac{1}{2}\\) bracket ke har term se zarb hota hai.\nDhyan dein: \\(-\\frac{1}{2}\\) ko bracket ke andar wale minus se zarb karna na bhoolein; wahin se \\(+\\frac{1}{4}\\) aaya.",
+              "Khatam karein\n\\[= \\dfrac{x^2}{4} - \\dfrac{x\\sin 2x}{4}\\]\n\\[\\quad + \\dfrac{1}{4}\\left(-\\dfrac{\\cos 2x}{2}\\right) + c\\]\n\\[= \\dfrac{x^2}{4} - \\dfrac{x\\sin 2x}{4} - \\dfrac{1}{8}\\cos 2x + c\\]\nKyun: \\(\\int \\sin 2x\\,dx = -\\frac{\\cos 2x}{2}\\).",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}(\\ldots) = \\dfrac{x}{2} - \\dfrac{\\sin 2x}{4}\\]\n\\[\\quad - \\dfrac{x\\cos 2x}{2} + \\dfrac{\\sin 2x}{4}\\]\n\\[= \\dfrac{x(1 - \\cos 2x)}{2} = x\\sin^2 x\\]\nKyun: \\(\\frac{\\sin 2x}{4}\\) wale terms cancel ho gaye aur integrand wapas mila."
+            ],
+            "answer": "\\(\\int x\\sin^2 x\\,dx = \\dfrac{x^2}{4} - \\dfrac{x\\sin 2x}{4} - \\dfrac{1}{8}\\cos 2x + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(\\int \\ln x\\,dx\\) mein to sirf ek hi function hai, phir parts kaise lagega?\nJawab: \\(\\ln x = \\ln x\\cdot 1\\) likhiye aur 1 ko second function banaiye. Phir \\(\\int \\ln x\\,dx = x\\ln x - \\int x\\cdot\\frac{1}{x}\\,dx = x\\ln x - x + c\\). Yahi chaal agle Special Integral ke proof mein bhi chalegi, aur Exercise 3.3 ke Question 1 aur 19 mein bhi."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Special Integral"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}\\int \\sqrt{x^2+a^2}\\,dx &= \\frac{x}{2}\\sqrt{x^2+a^2} \\\\ &\\quad + \\frac{a^2}{2}\\ln\\left|x + \\sqrt{x^2+a^2}\\right| + c\\end{aligned}",
+            "text_alt": "integral of square root of x squared plus a squared dx equals x over 2 times square root of x squared plus a squared, plus a squared over 2 times ln of modulus of x plus square root of x squared plus a squared, plus c"
+          },
+          {
+            "type": "paragraph",
+            "text": "Proof: Farz karein \\(I = \\int \\sqrt{x^2+a^2}\\,dx = \\int \\sqrt{x^2+a^2}\\,(1)\\,dx\\). Root ko first aur 1 ko second function le kar parts lagate hain:\n\\[I = \\sqrt{x^2+a^2}\\,(x) - \\int x\\dfrac{d}{dx}\\left[(x^2+a^2)^{\\frac{1}{2}}\\right]dx\\]\n\\[= x\\sqrt{x^2+a^2} - \\int x\\cdot\\dfrac{1}{2}(x^2+a^2)^{-\\frac{1}{2}}(2x)\\,dx\\]\n\\[= x\\sqrt{x^2+a^2} - \\int \\dfrac{x^2}{\\sqrt{x^2+a^2}}\\,dx\\]\nAb numerator mein \\(a^2\\) jama aur minus karte hain, taa ke upar neeche wali cheez ban jaye:\n\\[= x\\sqrt{x^2+a^2} - \\int \\dfrac{x^2+a^2-a^2}{\\sqrt{x^2+a^2}}\\,dx\\]\n\\[= x\\sqrt{x^2+a^2} - \\int \\dfrac{x^2+a^2}{\\sqrt{x^2+a^2}}\\,dx\\]\n\\[\\quad + \\int \\dfrac{a^2}{\\sqrt{x^2+a^2}}\\,dx\\]\n\\[= x\\sqrt{x^2+a^2} - \\int \\sqrt{x^2+a^2}\\,dx\\]\n\\[\\quad + a^2\\int \\dfrac{1}{\\sqrt{x^2+a^2}}\\,dx\\]\nBeech wala integral phir se \\(I\\) hai! Is liye:\n\\[I = x\\sqrt{x^2+a^2} - I + a^2\\int \\dfrac{1}{\\sqrt{x^2+a^2}}\\,dx\\]\n\\[2I = x\\sqrt{x^2+a^2} + a^2\\ln\\left|x + \\sqrt{x^2+a^2}\\right| + c_1\\]\n\\[I = \\dfrac{1}{2}x\\sqrt{x^2+a^2} + \\dfrac{a^2}{2}\\ln\\left|x + \\sqrt{x^2+a^2}\\right| + c\\]\nIs tarah \\(\\int \\sqrt{x^2+a^2}\\,dx = \\frac{x}{2}\\sqrt{x^2+a^2} + \\frac{a^2}{2}\\ln\\left|x + \\sqrt{x^2+a^2}\\right| + c\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is proof mein teen chaalein (tricks) hain, teeno yaad rakhiye:\n1. Akela function ho to usay (function) \\(\\times\\) 1 likhte hain, taa ke 1 second function ban sake.\n2. \\(x^2 = (x^2 + a^2) - a^2\\) likhne se naya integral do hisson mein toot jata hai: ek asal \\(I\\) aur ek jaana pehchana integral.\n3. Jaana pehchana integral \\(\\int \\frac{dx}{\\sqrt{x^2+a^2}} = \\ln\\left|x + \\sqrt{x^2+a^2}\\right| + c\\) section 3.3 ke special integrals se aata hai. Phir Example 35 ki tarah \\(I\\) solve kiya, aur \\(c = \\frac{c_1}{2}\\) liya (constant ka aadha bhi constant hi hai)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Prove that:\n(i) \\(\\int \\sqrt{a^2-x^2}\\,dx = \\frac{x}{2}\\sqrt{a^2-x^2} + \\frac{a^2}{2}\\sin^{-1}\\left(\\frac{x}{a}\\right) + c\\)\n(ii) \\(\\int \\sqrt{x^2-a^2}\\,dx = \\frac{x}{2}\\sqrt{x^2-a^2} - \\frac{a^2}{2}\\ln\\left|x + \\sqrt{x^2-a^2}\\right| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Challenge ke dono results bilkul Special Integral ki tarah saabit hote hain: root \\(\\times\\) 1 likhein, parts lagayein, (i) mein \\(x^2 = a^2 - (a^2 - x^2)\\) aur (ii) mein \\(x^2 = (x^2 - a^2) + a^2\\) likhein, aur \\(I\\) solve karein. (i) mein jaana pehchana integral \\(\\int \\frac{dx}{\\sqrt{a^2-x^2}} = \\sin^{-1}\\frac{x}{a}\\) hai.\nTeeno formulas kab lagate hain? Jab \\(\\int \\sqrt{\\text{quadratic}}\\,dx\\) ho, to pehle complete the square (poora square banana) karein. Phir dekhein:\nsquare + constant, yani \\(\\sqrt{u^2 + k^2}\\): Special Integral (log ke saath plus);\nconstant - square, yani \\(\\sqrt{k^2 - u^2}\\): Challenge (i) (\\(\\sin^{-1}\\) wala);\nsquare - constant, yani \\(\\sqrt{u^2 - k^2}\\): Challenge (ii) (log ke saath minus).\nExamples 37, 38 aur 39 mein teeno ki ek ek misaal hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 37",
+            "problem": "Evaluate \\(\\int \\sqrt{x^2 - 4x + 13}\\,dx\\).",
+            "steps": [
+              "Diya gaya: \\(\\int \\sqrt{x^2 - 4x + 13}\\,dx\\).\nMaloom karna: yeh indefinite integral.\nTareeqa: root ke andar quadratic hai. Complete the square kar ke \\(\\sqrt{u^2 + 3^2}\\) ki shakal banayenge, phir Special Integral \\(a = 3\\) ke saath lagayenge.",
+              "Complete the square\n\\[x^2 - 4x + 13 = (x^2 - 4x + 4) + 13 - 4\\]\n\\[= (x - 2)^2 + 9 = (x-2)^2 + (3)^2\\]\nKyun: \\(x\\) ke coefficient \\(-4\\) ka aadha \\(-2\\) hai; us ka square 4 jama bhi kiya aur minus bhi, taa ke value na badle.",
+              "\\(u = x - 2\\) rakhein\n\\[du = dx\\]\n\\[\\int \\sqrt{(x-2)^2 + (3)^2}\\,dx = \\int \\sqrt{u^2 + 3^2}\\,du\\]\nKyun: \\(x\\) ko sirf khiskane (shift karne) se \\(dx\\) nahi badalta.",
+              "Special Integral lagayein (\\(a = 3\\))\n\\[= \\dfrac{u}{2}\\sqrt{u^2+3^2}\\]\n\\[\\quad + \\dfrac{3^2}{2}\\ln\\left|u + \\sqrt{u^2+3^2}\\right| + c\\]\nKyun: yeh bilkul \\(\\int \\sqrt{x^2 + a^2}\\,dx\\) hai, bas \\(x\\) ki jagah \\(u\\) aur \\(a = 3\\).",
+              "\\(u\\) ki jagah \\(x - 2\\) likhein\n\\[= \\dfrac{x-2}{2}\\sqrt{(x-2)^2+9}\\]\n\\[\\quad + \\dfrac{9}{2}\\ln\\left|(x-2) + \\sqrt{(x-2)^2+9}\\right| + c\\]\n\\[= \\dfrac{x-2}{2}\\sqrt{x^2-4x+13}\\]\n\\[\\quad + \\dfrac{9}{2}\\ln\\left|(x-2) + \\sqrt{x^2-4x+13}\\right| + c\\]\nKyun: \\((x-2)^2 + 9\\) wapas \\(x^2 - 4x + 13\\) hai, is liye asal shakal likh di.",
+              "Tasdeeq\nJawab ko differentiate karne se \\(\\sqrt{x^2 - 4x + 13}\\) wapas milta hai (sympy se check kiya). Yeh Special Integral hi hai jis mein \\(x\\) ki jagah \\(x - 2\\) hai, aur \\(\\frac{d}{dx}(x - 2) = 1\\).\nKyun: shift karne se derivative ka pattern nahi badalta."
+            ],
+            "answer": "\\(\\dfrac{x-2}{2}\\sqrt{x^2-4x+13} + \\dfrac{9}{2}\\ln\\left|(x-2) + \\sqrt{x^2-4x+13}\\right| + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 38",
+            "problem": "Evaluate \\(\\int \\sqrt{8x - x^2 - 7}\\,dx\\).",
+            "steps": [
+              "Diya gaya: \\(\\int \\sqrt{8x - x^2 - 7}\\,dx\\).\nMaloom karna: yeh indefinite integral.\nTareeqa: yahan \\(x^2\\) ka sign negative hai. Minus bahar nikaal kar complete the square karenge aur \\(\\sqrt{3^2 - u^2}\\) tak pahunchenge; phir Challenge (i) \\(a = 3\\) ke saath.",
+              "Minus bahar nikaalein\n\\[8x - x^2 - 7 = -(x^2 - 8x) - 7\\]\n\\[= -(x^2 - 8x + 16 - 16) - 7\\]\nKyun: bracket ke andar \\(16 = (-4)^2\\) jama aur minus kiya taa ke perfect square ban sake.",
+              "Complete the square\n\\[= -[(x-4)^2 - 16] - 7\\]\n\\[= 16 - (x-4)^2 - 7\\]\n\\[= 3^2 - (x-4)^2\\]\nKyun: minus ko bracket ke andar phailaya; \\(16 - 7 = 9 = 3^2\\).\nDhyan dein: bahar wala minus bracket ke andar \\(-16\\) ko \\(+16\\) bana deta hai; isay bhoolna aam ghalti hai.",
+              "\\(u = x - 4\\) rakhein\n\\[dx = du\\]\n\\[\\int \\sqrt{3^2 - (x-4)^2}\\,dx = \\int \\sqrt{3^2 - u^2}\\,du\\]\nKyun: shift of \\(x\\), \\(dx\\) wohi rehta hai.",
+              "Challenge (i) lagayein (\\(a = 3\\))\n\\[= \\dfrac{u}{2}\\sqrt{3^2-u^2}\\]\n\\[\\quad + \\dfrac{3^2}{2}\\sin^{-1}\\left(\\dfrac{u}{3}\\right) + c\\]\nKyun: \\(\\int \\sqrt{a^2 - x^2}\\,dx = \\frac{x}{2}\\sqrt{a^2-x^2} + \\frac{a^2}{2}\\sin^{-1}\\frac{x}{a} + c\\).",
+              "Wapas \\(u = x - 4\\)\n\\[= \\dfrac{x-4}{2}\\sqrt{9-(x-4)^2}\\]\n\\[\\quad + \\dfrac{9}{2}\\sin^{-1}\\left(\\dfrac{x-4}{3}\\right) + c\\]\n\\[= \\dfrac{x-4}{2}\\sqrt{8x-x^2-7}\\]\n\\[\\quad + \\dfrac{9}{2}\\sin^{-1}\\left(\\dfrac{x-4}{3}\\right) + c\\]\nKyun: \\(9 - (x-4)^2 = 8x - x^2 - 7\\).",
+              "Tasdeeq\n\\(1 < x < 7\\) par (jahan root real hai) jawab ko differentiate karne se \\(\\sqrt{8x - x^2 - 7}\\) milta hai (sympy se check kiya).\nKyun: domain ka khayal zaroori hai: \\(8x - x^2 - 7 = (x-1)(7-x) \\ge 0\\) sirf \\(1 \\le x \\le 7\\) par hai."
+            ],
+            "answer": "\\(\\dfrac{x-4}{2}\\sqrt{8x-x^2-7} + \\dfrac{9}{2}\\sin^{-1}\\left(\\dfrac{x-4}{3}\\right) + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 39",
+            "problem": "Evaluate \\(\\int \\sqrt{x^2 - 8x + 7}\\,dx\\).",
+            "steps": [
+              "Diya gaya: \\(\\int \\sqrt{x^2 - 8x + 7}\\,dx\\).\nMaloom karna: yeh indefinite integral.\nTareeqa: complete the square kar ke \\(\\sqrt{u^2 - 3^2}\\) banayenge; phir Challenge (ii) \\(a = 3\\) ke saath. Example 38 se farq yeh hai ke yahan square pehle aur constant baad mein minus ho raha hai.",
+              "Complete the square\n\\[x^2 - 8x + 7 = (x^2 - 8x + 16) + 7 - 16\\]\n\\[= (x-4)^2 - 9 = (x-4)^2 - 3^2\\]\nKyun: 16 jama aur minus kiya; \\(7 - 16 = -9\\).",
+              "\\(u = x - 4\\) rakhein\n\\[du = dx\\]\n\\[\\int \\sqrt{u^2 - 3^2}\\,du\\]\nKyun: shift of \\(x\\).",
+              "Challenge (ii) lagayein (\\(a = 3\\))\n\\[= \\dfrac{u}{2}\\sqrt{u^2-3^2}\\]\n\\[\\quad - \\dfrac{3^2}{2}\\ln\\left|u + \\sqrt{u^2-3^2}\\right| + c\\]\nKyun: \\(\\int \\sqrt{x^2 - a^2}\\,dx = \\frac{x}{2}\\sqrt{x^2-a^2} - \\frac{a^2}{2}\\ln\\left|x + \\sqrt{x^2-a^2}\\right| + c\\).",
+              "Wapas \\(u = x - 4\\)\n\\[= \\dfrac{x-4}{2}\\sqrt{(x-4)^2-9}\\]\n\\[\\quad - \\dfrac{9}{2}\\ln\\left|x - 4 + \\sqrt{(x-4)^2-9}\\right| + c\\]\n\\[= \\dfrac{x-4}{2}\\sqrt{x^2-8x+7}\\]\n\\[\\quad - \\dfrac{9}{2}\\ln\\left|x - 4 + \\sqrt{x^2-8x+7}\\right| + c\\]\nKyun: \\((x-4)^2 - 9 = x^2 - 8x + 7\\).",
+              "Tasdeeq\n\\(x > 7\\) par jawab ko differentiate karne se \\(\\sqrt{x^2 - 8x + 7}\\) milta hai (sympy se check kiya).\nKyun: dhyan dein ke yahan log se pehle minus hai, Example 37 ke ulat; yahi in dono formulas ka farq hai."
+            ],
+            "answer": "\\(\\dfrac{x-4}{2}\\sqrt{x^2-8x+7} - \\dfrac{9}{2}\\ln\\left|x - 4 + \\sqrt{x^2-8x+7}\\right| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(\\int \\sqrt{5 + 4x - x^2}\\,dx\\) mein kaunsa formula lagega?\nJawab: \\(5 + 4x - x^2 = 9 - (x - 2)^2 = 3^2 - (x-2)^2\\). Constant minus square hai, is liye Challenge (i), yani \\(\\sin^{-1}\\) wala formula, \\(a = 3\\) aur \\(u = x - 2\\) ke saath."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Integration by parts: \\(\\int f g\\,dx = f\\int g\\,dx - \\int \\left(\\int g\\,dx\\right)f'\\,dx\\); lafzon mein: pehla \\(\\times\\) doosre ka integral \\(-\\) \\(\\int\\)(doosre ka integral \\(\\times\\) pehle ka derivative).\n2. Second function woh lein jis ka integral aata ho; first woh jo differentiate ho kar aasaan ho jaye (ILATE madad karta hai).\n3. Akela \\(\\ln x\\), \\(\\sin^{-1}x\\), \\(\\tan^{-1}x\\) ya \\(\\sqrt{x^2 \\pm a^2}\\) ho to (function) \\(\\times\\) 1 likhein.\n4. Asal integral wapas aa jaye to usay \\(I\\) kahein aur equation ki tarah solve karein.\n5. \\(\\int e^{g(x)}[f(x)g'(x) + f'(x)]\\,dx = e^{g(x)}f(x) + c\\); khaas taur par \\(\\int e^{x}[f + f']\\,dx = e^{x}f + c\\).\n6. \\(\\int \\sqrt{\\text{quadratic}}\\,dx\\): pehle complete the square, phir Special Integral ya Challenge wala formula.\n7. Har jawab ko differentiate kar ke check karein; integration mein yeh sab se pakki tasdeeq hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Ghalat first function chunna: \\(\\int x e^{x}\\,dx\\) mein agar \\(e^{x}\\) ko first lein to \\(\\int \\frac{x^2}{2}e^{x}\\,dx\\) banta hai, jo pehle se bhi mushkil hai. Aisa ho to samajh jayein ke choice ulti hai.\n2. Formula ka minus ya \\(\\int \\sin bx\\,dx = -\\frac{\\cos bx}{b}\\) wala minus kho dena.\n3. Chain rule ka factor bhoolna: \\(\\frac{d}{dx}e^{x^2} = 2x e^{x^2}\\) aur \\(\\int e^{2x}\\,dx = \\frac{e^{2x}}{2}\\).\n4. Do dafa parts wale sawal mein doosre round mein choice badal dena: saara kaam cancel ho kar \\(I = I\\) reh jata hai.\n5. Teen root formulas ko mila dena: \\(\\sqrt{a^2 - x^2}\\) se \\(\\sin^{-1}\\) aata hai; \\(\\sqrt{x^2 \\pm a^2}\\) se \\(\\ln\\) (\\(x^2 + a^2\\) ke saath plus, \\(x^2 - a^2\\) ke saath minus).\n6. Substitution ke baad jawab \\(u\\) ya \\(\\theta\\) mein chhor dena; hamesha asal variable \\(x\\) mein wapas likhein."
+          }
+        ]
+      }
+    }
+  ]
+}

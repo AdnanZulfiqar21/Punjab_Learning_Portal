@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-7-Q13",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-7-q13",
+      "title": "Question 13",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 125,
+          "pdf_to": 125,
+          "note": "Exercise 3.7, Question 13 (book p. 123); answers printed in the key (book p. 302) under the heading 'Exercise 3.8'."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13(a)",
+            "prompt": "13. A patient takes a drug every 8 hours. The single-dose concentration (in mg/L) is \\(C(t) = 12e^{-0.2t}\\) where \\(t\\) is time in hours since that dose was taken. (a) Understanding Contributions: If the patient takes doses at \\(t = 0\\), \\(t = 8\\) and \\(t = 16\\), write the contribution from each dose separately at time \\(t = 10\\) hours. Then write the total concentration at \\(t = 10\\).",
+            "explanation": "Each dose contributes \\(12e^{-0.2(t - \\tau)}\\), where \\(\\tau\\) is the time it was taken; a dose not yet taken contributes nothing.\nPlan: list the three doses with their \"hours since dose\" at \\(t = 10\\) and add.",
+            "steps": [
+              "Given: \\(C(t) = 12e^{-0.2t}\\) per dose, doses at 0, 8, 16.\nTo find: each contribution at \\(t = 10\\), and the total.\nMethod: a dose taken at time \\(\\tau\\) has been in the body \\(10 - \\tau\\) hours at \\(t = 10\\).",
+              "First dose (\\(\\tau = 0\\))\n\\[12e^{-0.2(10)} = 12e^{-2} \\approx 1.624\\]",
+              "Second dose (\\(\\tau = 8\\))\n\\[12e^{-0.2(10 - 8)} = 12e^{-0.4} \\approx 8.044\\]\nWhy: at \\(t = 10\\) it has been in the body only 2 hours.",
+              "Third dose (\\(\\tau = 16\\))\nNot yet taken at \\(t = 10\\): contribution 0.",
+              "Total\n\\[C_{\\text{total}}(10) = 12e^{-2} + 12e^{-0.4}\\]\n\\[\\approx 1.624 + 8.044 = 9.668\\text{ mg/L}\\]\nWhy: concentrations from different doses add."
+            ],
+            "final_answer": "Contributions at \\(t = 10\\): \\(12e^{-2} \\approx 1.624\\) (1st dose), \\(12e^{-0.4} \\approx 8.044\\) (2nd dose), 0 (3rd dose). Total \\(= 12e^{-2} + 12e^{-0.4} \\approx 9.668\\) mg/L."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13(b)",
+            "prompt": "13. A patient takes a drug every 8 hours. The single-dose concentration (in mg/L) is \\(C(t) = 12e^{-0.2t}\\) where \\(t\\) is time in hours since that dose was taken. (b) Common Mistake: A student calculates concentration at \\(t = 10\\) as \\(12e^{-0.2\\times 10} \\approx 1.624\\) mg/L. What is wrong with this calculation?",
+            "explanation": "Compare the student's value with part (a): which dose did the student count, and which was left out?",
+            "steps": [
+              "Given: student's value \\(12e^{-0.2\\times 10} \\approx 1.624\\) mg/L.\nTo find: the mistake.\nMethod: compare with the dose-by-dose list of part (a).",
+              "What the student counted\n\\(12e^{-0.2\\times 10}\\) is the contribution of the first dose only (taken 10 hours earlier).",
+              "What was left out\nThe second dose, taken at \\(t = 8\\), has been in the body for 2 hours and contributes \\(12e^{-0.4} \\approx 8.044\\) mg/L, the larger part.",
+              "Correct value\n\\[12e^{-2} + 12e^{-0.4} \\approx 9.668\\text{ mg/L}\\]\nwhich is about six times the student's value."
+            ],
+            "final_answer": "The student counted only the first dose and forgot the second dose (taken at \\(t = 8\\)), which contributes \\(12e^{-0.4} \\approx 8.044\\) mg/L. The correct concentration is \\(12e^{-2} + 12e^{-0.4} \\approx 9.668\\) mg/L."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13(c)(i)",
+            "prompt": "13. A patient takes a drug every 8 hours. The single-dose concentration (in mg/L) is \\(C(t) = 12e^{-0.2t}\\) where \\(t\\) is time in hours since that dose was taken. (c) Just Before V/S Just After a Dose: Calculate (i) Concentration just before the third dose at \\(t = 16\\) hours.",
+            "explanation": "\"Just before\" the third dose, only the first two doses are in the body: the first is 16 hours old, the second 8 hours old.",
+            "steps": [
+              "Given: doses at 0 and 8 already taken; the third is about to be taken at \\(t = 16\\).\nTo find: \\(C\\) just before \\(t = 16\\).\nMethod: add the two contributions with their ages 16 and 8 hours.",
+              "Add the two doses\n\\[C_{\\text{before}} = 12e^{-0.2(16)} + 12e^{-0.2(8)}\\]\n\\[= 12e^{-3.2} + 12e^{-1.6}\\]\n\\[\\approx 0.489 + 2.423 = 2.912\\text{ mg/L}\\]"
+            ],
+            "final_answer": "\\(12e^{-3.2} + 12e^{-1.6} \\approx 2.912\\) mg/L"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13(c)(ii)",
+            "prompt": "13. A patient takes a drug every 8 hours. The single-dose concentration (in mg/L) is \\(C(t) = 12e^{-0.2t}\\) where \\(t\\) is time in hours since that dose was taken. (c) Just Before V/S Just After a Dose: Calculate (ii) Concentration just after the third dose at \\(t = 16\\) hours.",
+            "explanation": "\"Just after\" the third dose, the new dose adds its full starting value \\(12e^{0} = 12\\).",
+            "steps": [
+              "Given: part (c)(i) and a new dose at \\(t = 16\\).\nTo find: \\(C\\) just after \\(t = 16\\).\nMethod: the new dose has age 0, so it contributes \\(12e^{0} = 12\\).",
+              "Add the new dose\n\\[C_{\\text{after}} = 12e^{-3.2} + 12e^{-1.6} + 12\\]\n\\[\\approx 2.912 + 12 = 14.912\\text{ mg/L}\\]\nWhy: the concentration jumps up by 12 mg/L at the moment of the dose."
+            ],
+            "final_answer": "\\(12e^{-3.2} + 12e^{-1.6} + 12 \\approx 14.912\\) mg/L"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13(d)",
+            "prompt": "13. A patient takes a drug every 8 hours. The single-dose concentration (in mg/L) is \\(C(t) = 12e^{-0.2t}\\) where \\(t\\) is time in hours since that dose was taken. (d) General Formula: Write the general formula for \\(C_{\\text{total}}(t)\\) for \\(16 \\le t \\le 24\\), i.e., after 3 doses have been given.",
+            "explanation": "For \\(16 \\le t \\le 24\\) all three doses are in the body; add three terms, each with its own \"time since dose\".",
+            "steps": [
+              "Given: doses at 0, 8, 16; \\(C(t) = 12e^{-0.2t}\\) per dose.\nTo find: \\(C_{\\text{total}}(t)\\) for \\(16 \\le t \\le 24\\).\nMethod: the dose at \\(\\tau\\) contributes \\(12e^{-0.2(t - \\tau)}\\).",
+              "Add the three contributions\n\\[C_{\\text{total}}(t) = 12e^{-0.2t} + 12e^{-0.2(t - 8)} + 12e^{-0.2(t - 16)}\\]",
+              "Simplified form (optional)\n\\[e^{-0.2(t - 8)} = e^{1.6}e^{-0.2t}, \\quad e^{-0.2(t - 16)} = e^{3.2}e^{-0.2t}\\]\n\\[C_{\\text{total}}(t) = 12\\big(1 + e^{1.6} + e^{3.2}\\big)e^{-0.2t}\\]\n\\[\\approx 365.83\\,e^{-0.2t}\\]",
+              "Check\nAt \\(t = 16\\): \\(365.83e^{-3.2} \\approx 14.91\\), the same as (c)(ii) \\(\\checkmark\\)."
+            ],
+            "final_answer": "\\(C_{\\text{total}}(t) = 12e^{-0.2t} + 12e^{-0.2(t - 8)} + 12e^{-0.2(t - 16)} = 12(1 + e^{1.6} + e^{3.2})e^{-0.2t} \\approx 365.83\\,e^{-0.2t}\\) mg/L, for \\(16 \\le t \\le 24\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints this formula with a double plus sign, \"\\(12e^{-0.2(t-8)} + + 12e^{-0.2(t-16)}\\)\"; only one plus sign is meant: \\(C_{\\text{total}}(t) = 12e^{-0.2t} + 12e^{-0.2(t-8)} + 12e^{-0.2(t-16)}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

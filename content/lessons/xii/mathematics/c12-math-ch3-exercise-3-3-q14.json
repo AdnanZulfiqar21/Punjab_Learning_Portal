@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q14",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q14",
+      "title": "Question 14",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 14: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "14",
+            "prompt": "14. Evaluate \\(\\int \\dfrac{x\\cos x - \\sin x}{x^2}\\,dx\\).",
+            "explanation": "Split into \\(\\int \\frac{\\cos x}{x}\\,dx - \\int \\frac{\\sin x}{x^2}\\,dx\\); neither can be done alone.\nPlan: integrate the second by parts (\\(\\sin x\\) first, \\(x^{-2}\\) second); the \\(\\int \\frac{\\cos x}{x}\\,dx\\) terms cancel.",
+            "steps": [
+              "Given: \\(\\int \\frac{x\\cos x - \\sin x}{x^2}\\,dx\\), \\(x \\ne 0\\).\nTo find: the indefinite integral.\nMethod: split; integrate \\(\\int \\sin x\\cdot x^{-2}\\,dx\\) by parts with \\(\\sin x\\) first and \\(x^{-2}\\) second.",
+              "Split\n\\[= \\int \\dfrac{\\cos x}{x}\\,dx - \\int \\dfrac{\\sin x}{x^2}\\,dx\\]\nWhy: divide each term of the numerator by \\(x^2\\).",
+              "Parts on the second integral\n\\[\\int \\sin x\\cdot x^{-2}\\,dx = \\sin x\\left(-\\dfrac{1}{x}\\right) - \\int \\left(-\\dfrac{1}{x}\\right)\\cos x\\,dx\\]\n\\[= -\\dfrac{\\sin x}{x} + \\int \\dfrac{\\cos x}{x}\\,dx\\]\nWhy: \\(\\int x^{-2}\\,dx = -\\frac{1}{x}\\); \\(\\frac{d}{dx}\\sin x = \\cos x\\).",
+              "Substitute back: cancellation\n\\[= \\int \\dfrac{\\cos x}{x}\\,dx + \\dfrac{\\sin x}{x} - \\int \\dfrac{\\cos x}{x}\\,dx\\]\n\\[= \\dfrac{\\sin x}{x} + c\\]\nWhy: the two integrals cancel.",
+              "Check\n\\[\\dfrac{d}{dx}\\left(\\dfrac{\\sin x}{x}\\right) = \\dfrac{x\\cos x - \\sin x\\cdot 1}{x^2}\\]\nWhy: quotient rule gives the integrand."
+            ],
+            "final_answer": "\\(\\dfrac{\\sin x}{x} + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

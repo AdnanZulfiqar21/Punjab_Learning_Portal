@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q11",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q11",
+      "title": "Question 11",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 11: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11 Evaluate \\(\\int \\frac{x^2 + 2x - 1}{(x - 1)(x^2 + 1)}\\,dx\\).",
+            "explanation": "One linear factor and one irreducible quadratic factor \\(x^2 + 1\\): Case-III.\nThe quadratic factor needs a linear numerator \\(Bx + C\\).\nPlan: \\(x = 1\\) gives \\(A\\); comparing coefficients gives \\(B\\) and \\(C\\); integrate to \\(\\ln\\) and \\(\\tan^{-1}\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{x^2 + 2x - 1}{(x - 1)(x^2 + 1)}\\,dx\\).\nTo find: the integral.\nMethod: partial fractions, Case-III. \\(x^2 + 1\\) cannot be factorised over real numbers (it is never 0).",
+              "Write the partial fractions\n\\[\\dfrac{x^2 + 2x - 1}{(x - 1)(x^2 + 1)} = \\dfrac{A}{x - 1} + \\dfrac{Bx + C}{x^2 + 1}\\]\n\\[x^2 + 2x - 1 = A(x^2 + 1) + (Bx + C)(x - 1) \\quad (1)\\]\nWhy: Over a quadratic factor the numerator can be one degree lower, i.e. linear.",
+              "Put \\(x = 1\\) in (1)\n\\[1 + 2 - 1 = A(2)\\]\n\\[A = 1\\]\nWhy: \\(x - 1 = 0\\) removes the second term.",
+              "Compare coefficients in (1)\n\\[x^2:\\ 1 = A + B,\\ B = 0\\]\n\\[\\text{constant}:\\ -1 = A - C,\\ C = 2\\]\nWhy: \\((Bx + C)(x - 1) = Bx^2 + (C - B)x - C\\). Check with \\(x\\): \\(C - B = 2\\) \\(\\checkmark\\).",
+              "Integrate\n\\[\\int \\left(\\dfrac{1}{x - 1} + \\dfrac{2}{x^2 + 1}\\right)dx\\]\n\\[= \\ln|x - 1| + 2\\tan^{-1} x + c\\]\nWhy: \\(\\int \\frac{dx}{1 + x^2} = \\tan^{-1} x\\).",
+              "Check\n\\[\\dfrac{1}{x - 1} + \\dfrac{2}{x^2 + 1} = \\dfrac{x^2 + 1 + 2x - 2}{(x - 1)(x^2 + 1)}\\]\n\\[= \\dfrac{x^2 + 2x - 1}{(x - 1)(x^2 + 1)} \\;\\checkmark\\]\nWhy: The partial fractions add back to the integrand."
+            ],
+            "final_answer": "\\(\\ln|x - 1| + 2\\tan^{-1} x + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the answers at the end of the book (page 302), the answers of Exercise 3.4 are printed under the wrong heading \"Exercise 3.6\". The answer of this question is item (xi) of that block: \\(\\ln|x - 1| + 2\\tan^{-1} x + c\\). That answer is correct. The block headed \"Exercise 3.4\" (page 301) belongs to a different exercise."
+          }
+        ]
+      }
+    }
+  ]
+}

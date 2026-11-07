@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-1-Q1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-1-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 78,
+          "pdf_to": 79,
+          "note": "Exercise 3.1, Question 1: book p. 76-77, Q1-Q4 (29 parts); answers printed under 'EXERCISE 3.1' and 'Exercise 3.3' (book p. 299-300), matched by content"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Find all the antiderivatives for each derivative: \\(\\frac{dy}{dx} = 100x^4\\)",
+            "explanation": "We are given the derivative of \\(y\\) and must find \\(y\\) itself: this is antidifferentiation.\n\"All the antiderivatives\" means the whole family, so the answer must carry \\(+\\,c\\).\nPlan: take the constant 100 outside (Rule 1) and use the Power Rule (Rule 3).",
+            "steps": [
+              "Given: \\(\\frac{dy}{dx} = 100x^4\\).\nTo find: every function \\(y\\) with this derivative.\nMethod: \\(y = \\int 100x^4\\,dx\\). Rule 1 takes the constant out, Rule 3 integrates \\(x^4\\): add 1 to the power and divide by the new power.",
+              "Write \\(y\\) as an integral\n\\[y = \\int 100x^4\\,dx\\]\n\\[= 100\\int x^4\\,dx\\]\nWhy: Rule 1, \\(\\int k f(x)\\,dx = k\\int f(x)\\,dx\\). A constant factor can come outside the integral sign.",
+              "Apply the Power Rule\n\\[= 100\\cdot\\dfrac{x^{4+1}}{4+1} + c\\]\n\\[= 100\\cdot\\dfrac{x^5}{5} + c\\]\n\\[= 20x^5 + c\\]\nWhy: Rule 3, \\(\\int x^n\\,dx = \\frac{x^{n+1}}{n+1} + c\\) with \\(n = 4 \\ne -1\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left(20x^5 + c\\right) = 100x^4 \\;\\checkmark\\]\nWhy: Differentiating the answer must give back the given derivative; the derivative of the constant \\(c\\) is 0."
+            ],
+            "final_answer": "\\(y = 20x^5 + c\\), where \\(c\\) is an arbitrary constant (each value of \\(c\\) gives one antiderivative)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Find all the antiderivatives for each derivative: \\(\\frac{dy}{dt} = 2 + 24t^3 - 10t^4\\)",
+            "explanation": "Again the derivative is given and \\(y\\) is wanted, but now the variable is \\(t\\).\nThe right side is a sum of three terms, so we integrate term by term.\nPlan: Rule 2 (sum/difference), Rule 1 (constants out), Rule 3 (Power Rule), one constant \\(c\\) at the end.",
+            "steps": [
+              "Given: \\(\\frac{dy}{dt} = 2 + 24t^3 - 10t^4\\).\nTo find: all functions \\(y\\) of \\(t\\) with this derivative.\nMethod: \\(y = \\int (2 + 24t^3 - 10t^4)\\,dt\\). Split the integral term by term (Rule 2), take out constants (Rule 1), then use the Power Rule on each power of \\(t\\).",
+              "Split the integral term by term\n\\[y = \\int 2\\,dt + \\int 24t^3\\,dt - \\int 10t^4\\,dt\\]\n\\[= 2\\int 1\\,dt + 24\\int t^3\\,dt - 10\\int t^4\\,dt\\]\nWhy: Rule 2 lets us integrate a sum or difference one term at a time; Rule 1 takes each constant outside.",
+              "Integrate each term\n\\[= 2t + 24\\cdot\\dfrac{t^4}{4} - 10\\cdot\\dfrac{t^5}{5} + c\\]\n\\[= 2t + 6t^4 - 2t^5 + c\\]\nWhy: \\(\\int 1\\,dt = t\\), and the Power Rule gives \\(\\frac{t^4}{4}\\) and \\(\\frac{t^5}{5}\\). The three separate constants add up to one arbitrary constant \\(c\\).",
+              "Check\n\\[\\dfrac{d}{dt}\\left(2t + 6t^4 - 2t^5 + c\\right)\\]\n\\[= 2 + 24t^3 - 10t^4 \\;\\checkmark\\]\nWhy: Differentiating gives back exactly the given derivative."
+            ],
+            "final_answer": "\\(y = 2t + 6t^4 - 2t^5 + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

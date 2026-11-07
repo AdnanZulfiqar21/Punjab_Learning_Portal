@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q15",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q15",
+      "title": "Question 15",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 105,
+          "note": "Exercise 3.5, Question 15 (i)-(iv): show four integrals are zero (Properties IV, V); book pp. 102-103. No printed answer (show that)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15(i)",
+            "prompt": "15 (i) Show that: \\(\\int_{\\pi/6}^{\\pi/3} \\ln(\\tan x)\\,dx = 0\\)",
+            "explanation": "A 'show it is zero' question with no easy antiderivative.\nHere \\(a + b = \\frac{\\pi}{6} + \\frac{\\pi}{3} = \\frac{\\pi}{2}\\); Property IV turns \\(\\tan x\\) into \\(\\cot x\\), and \\(\\ln \\cot x = -\\ln \\tan x\\).\nSo \\(I = -I\\).",
+            "steps": [
+              "Given: \\(I = \\int_{\\pi/6}^{\\pi/3} \\ln(\\tan x)\\,dx\\).\nTo prove: \\(I = 0\\).\nMethod: Property IV with \\(a + b - x = \\frac{\\pi}{2} - x\\), and \\(\\tan(\\frac{\\pi}{2} - x) = \\cot x = \\frac{1}{\\tan x}\\).",
+              "Apply Property IV\n\\[I = \\int_{\\pi/6}^{\\pi/3} \\ln\\left(\\tan\\left(\\tfrac{\\pi}{2} - x\\right)\\right)dx\\]\n\\[= \\int_{\\pi/6}^{\\pi/3} \\ln\\left(\\dfrac{1}{\\tan x}\\right)dx\\]\nWhy: \\(\\frac{\\pi}{6} + \\frac{\\pi}{3} = \\frac{\\pi}{2}\\) and \\(\\tan(\\frac{\\pi}{2} - x) = \\cot x\\).",
+              "Use a log rule\n\\[\\ln\\dfrac{1}{\\tan x} = -\\ln(\\tan x)\\]\n\\[I = -\\int_{\\pi/6}^{\\pi/3} \\ln(\\tan x)\\,dx = -I\\]\nWhy: \\(\\ln\\frac{1}{p} = -\\ln p\\). On \\([\\frac{\\pi}{6}, \\frac{\\pi}{3}]\\), \\(\\tan x > 0\\), so the log is defined.",
+              "Conclude\n\\[I = -I \\Rightarrow 2I = 0 \\Rightarrow I = 0\\]\nWhy: a number equal to its negative is 0.",
+              "Check\n\\[\\ln \\tan\\tfrac{\\pi}{6} = -\\tfrac{1}{2}\\ln 3,\\quad \\ln \\tan\\tfrac{\\pi}{3} = +\\tfrac{1}{2}\\ln 3\\]\nWhy: the graph is negative on the left half and equally positive on the right half (mirror points \\(x\\) and \\(\\frac{\\pi}{2} - x\\)); a numerical evaluation gives 0."
+            ],
+            "final_answer": "Hence proved: \\(\\int_{\\pi/6}^{\\pi/3} \\ln(\\tan x)\\,dx = 0\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15(ii)",
+            "prompt": "15 (ii) Show that: \\(\\int_{0}^{\\pi} \\frac{\\sin x \\cos x}{1 + e^{\\sin x}}\\,dx = 0\\)",
+            "explanation": "Again 'show it is zero', with \\(a + b = \\pi\\).\nUnder \\(x \\to \\pi - x\\): \\(\\sin x\\) stays the same, \\(\\cos x\\) changes sign. So the integrand changes sign.\nProperty IV gives \\(I = -I\\).",
+            "steps": [
+              "Given: \\(I = \\int_{0}^{\\pi} \\frac{\\sin x \\cos x}{1 + e^{\\sin x}}\\,dx\\).\nTo prove: \\(I = 0\\).\nMethod: Property IV with \\(x \\to \\pi - x\\), using \\(\\sin(\\pi - x) = \\sin x\\), \\(\\cos(\\pi - x) = -\\cos x\\).",
+              "Apply Property IV\n\\[I = \\int_{0}^{\\pi} \\dfrac{\\sin(\\pi - x)\\cos(\\pi - x)}{1 + e^{\\sin(\\pi - x)}}\\,dx\\]\n\\[= \\int_{0}^{\\pi} \\dfrac{\\sin x\\,(-\\cos x)}{1 + e^{\\sin x}}\\,dx\\]\nWhy: \\(0 + \\pi - x = \\pi - x\\); the denominator does not change because it contains only \\(\\sin x\\).",
+              "Compare\n\\[I = -\\int_{0}^{\\pi} \\dfrac{\\sin x \\cos x}{1 + e^{\\sin x}}\\,dx = -I\\]\nWhy: take the minus sign outside.",
+              "Conclude\n\\[2I = 0 \\Rightarrow I = 0\\]\nWhy: \\(I = -I\\).",
+              "Check\n\\[x = \\tfrac{\\pi}{4}:\\ \\cos x > 0;\\quad x = \\tfrac{3\\pi}{4}:\\ \\cos x < 0\\]\nWhy: points mirrored about \\(\\frac{\\pi}{2}\\) give equal and opposite values, so the areas cancel; a numerical evaluation gives 0."
+            ],
+            "final_answer": "Hence proved: \\(\\int_{0}^{\\pi} \\frac{\\sin x \\cos x}{1 + e^{\\sin x}}\\,dx = 0\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15(iii)",
+            "prompt": "15 (iii) Show that: \\(\\int_{0}^{\\pi} x(\\pi - x)\\cos(\\pi - x)\\,dx = 0\\)",
+            "explanation": "\\(a + b = \\pi\\) again. The factor \\(x(\\pi - x)\\) does not change under \\(x \\to \\pi - x\\), but \\(\\cos(\\pi - x)\\) becomes \\(\\cos x = -\\cos(\\pi - x)\\).\nSo Property IV gives \\(I = -I\\).\n(The integral could also be done by parts, but this is much shorter.)",
+            "steps": [
+              "Given: \\(I = \\int_{0}^{\\pi} x(\\pi - x)\\cos(\\pi - x)\\,dx\\).\nTo prove: \\(I = 0\\).\nMethod: Property IV with \\(x \\to \\pi - x\\).",
+              "Apply Property IV\n\\[I = \\int_{0}^{\\pi} (\\pi - x)\\big(\\pi - (\\pi - x)\\big)\\cos\\big(\\pi - (\\pi - x)\\big)\\,dx\\]\n\\[= \\int_{0}^{\\pi} (\\pi - x)\\,x\\,\\cos x\\,dx\\]\nWhy: \\(\\pi - (\\pi - x) = x\\).",
+              "Compare with the original\n\\[\\cos x = -\\cos(\\pi - x)\\]\n\\[I = -\\int_{0}^{\\pi} x(\\pi - x)\\cos(\\pi - x)\\,dx = -I\\]\nWhy: \\(\\cos(\\pi - x) = -\\cos x\\), so \\(\\cos x = -\\cos(\\pi - x)\\).",
+              "Conclude\n\\[2I = 0 \\Rightarrow I = 0\\]\nWhy: \\(I = -I\\).",
+              "Check by parts\n\\[I = -\\int_{0}^{\\pi} (\\pi x - x^2)\\cos x\\,dx\\]\n\\[\\int_{0}^{\\pi} \\pi x\\cos x\\,dx = -2\\pi,\\quad \\int_{0}^{\\pi} x^2\\cos x\\,dx = -2\\pi\\]\nWhy: \\(I = -(-2\\pi - (-2\\pi)) = 0\\), using \\(\\int x\\cos x = x\\sin x + \\cos x\\) and \\(\\int x^2\\cos x = x^2\\sin x + 2x\\cos x - 2\\sin x\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\int_{0}^{\\pi} x(\\pi - x)\\cos(\\pi - x)\\,dx = 0\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15(iv)",
+            "prompt": "15 (iv) Show that: \\(\\int_{1}^{3} \\frac{(x - 2)^3 + 4(x - 2)}{1 + e^{(x - 2)^2}}\\,dx = 0\\)",
+            "explanation": "Everything is written in terms of \\(x - 2\\), and 2 is the midpoint of \\([1, 3]\\).\nPut \\(t = x - 2\\): the interval becomes \\([-1, 1]\\) and the integrand is odd in \\(t\\).\nProperty V then gives 0.",
+            "steps": [
+              "Given: \\(I = \\int_{1}^{3} \\frac{(x - 2)^3 + 4(x - 2)}{1 + e^{(x - 2)^2}}\\,dx\\).\nTo prove: \\(I = 0\\).\nMethod: substitution \\(t = x - 2\\), then Property V (odd function on \\([-a, a]\\)).",
+              "Substitute \\(t = x - 2\\)\n\\[dt = dx,\\quad x = 1 \\Rightarrow t = -1,\\quad x = 3 \\Rightarrow t = 1\\]\n\\[I = \\int_{-1}^{1} \\dfrac{t^3 + 4t}{1 + e^{t^2}}\\,dt\\]\nWhy: this centres the interval at 0.",
+              "Test odd or even\n\\[g(-t) = \\dfrac{-t^3 - 4t}{1 + e^{t^2}} = -g(t)\\]\nWhy: the top \\(t^3 + 4t\\) is odd and the bottom \\(1 + e^{t^2}\\) is even; odd divided by even is odd.",
+              "Apply Property V\n\\[I = \\int_{-1}^{1} g(t)\\,dt = 0\\]\nWhy: an odd function on \\([-1, 1]\\) has integral 0.",
+              "Check\n\\[x = 1.5,\\ 2.5\\ \\leftrightarrow\\ t = \\mp 0.5\\]\nWhy: points mirrored about \\(x = 2\\) give opposite values of the integrand, so the areas cancel; a numerical evaluation gives 0."
+            ],
+            "final_answer": "Hence proved: \\(\\int_{1}^{3} \\frac{(x - 2)^3 + 4(x - 2)}{1 + e^{(x - 2)^2}}\\,dx = 0\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

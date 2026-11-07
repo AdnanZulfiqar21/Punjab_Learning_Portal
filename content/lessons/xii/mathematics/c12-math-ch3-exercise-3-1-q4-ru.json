@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-1-Q4-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-1-q4",
+      "title": "Question 4 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 78,
+          "pdf_to": 79,
+          "note": "Exercise 3.1, Question 4: book p. 76-77, Q1-Q4 (29 parts); answers printed under 'EXERCISE 3.1' and 'Exercise 3.3' (book p. 299-300), matched by content"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-1-Q4",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(i)",
+            "prompt": "4 (i) Evaluate the following: \\(\\int \\csc x\\,dx\\)",
+            "explanation": "\\(\\csc x\\) ka integral formula table mein nahi hai. Lekin kitab ki Example 6 mein \\(\\sec x\\) ke liye ek trick use hui thi; wahi yahan lagayenge.\nTrick: upar neeche aisi cheez se multiply karo ke numerator, denominator ka derivative ban jaye. Phir Rule 4 (\\(\\int \\frac{f'}{f} = \\ln|f|\\)) seedha lag jata hai.\nYahan woh cheez \\(\\csc x - \\cot x\\) hai.\nPlan: multiply aur divide karein, \\(f'(x)\\) pehchanein, Rule 4 lagayein, check karein.",
+            "steps": [
+              "Diya gaya: \\(\\int \\csc x\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: integrand ko \\(\\frac{f'(x)}{f(x)}\\) banana, jahan \\(f(x) = \\csc x - \\cot x\\); phir Rule 4: \\(\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln|f(x)| + c\\).",
+              "Multiply aur divide karein\n\\[\\int \\csc x\\,dx = \\int \\dfrac{\\csc x(\\csc x - \\cot x)}{\\csc x - \\cot x}\\,dx\\]\n\\[= \\int \\dfrac{\\csc^2 x - \\csc x\\cot x}{\\csc x - \\cot x}\\,dx\\]\nKyun: Upar neeche ek hi (non-zero) cheez se multiply karne se value nahi badalti. Upar bracket khola to \\(\\csc^2 x - \\csc x\\cot x\\) bana.",
+              "Numerator mein \\(f'(x)\\) pehchanein\n\\[f(x) = \\csc x - \\cot x\\]\n\\[f'(x) = -\\csc x\\cot x + \\csc^2 x\\]\nKyun: \\(\\csc x\\) ka derivative \\(-\\csc x\\cot x\\) hai aur \\(\\cot x\\) ka \\(-\\csc^2 x\\); minus minus plus ban gaya. Dekhiye, yeh bilkul numerator hai!",
+              "Rule 4 lagayein\n\\[\\int \\csc x\\,dx = \\ln|\\csc x - \\cot x| + c\\]\nKyun: Integrand ab \\(\\frac{f'(x)}{f(x)}\\) ki shakal mein hai, aur aisi fraction ka integral denominator ka \\(\\ln\\) (modulus ke saath) hota hai.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\ln|\\csc x - \\cot x| = \\dfrac{\\csc^2 x - \\csc x\\cot x}{\\csc x - \\cot x}\\]\n\\[= \\dfrac{\\csc x(\\csc x - \\cot x)}{\\csc x - \\cot x} = \\csc x \\;\\checkmark\\]\nKyun: \\(\\ln|f|\\) ka derivative \\(\\frac{f'}{f}\\) hai; phir upar se \\(\\csc x\\) common nikala to bracket cancel ho gaya."
+            ],
+            "final_answer": "\\(\\ln|\\csc x - \\cot x| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key ka masla: Question 4 ka koi jawab \"EXERCISE 3.1\" ke neeche nahi chhapa. Yeh jawab \"Exercise 3.3\" ki heading ke neeche (kitab ka safha 300) doosri tarteeb mein chhape hain: Q4 (i) = 1 (i), (ii) = 1 (ii), (iii) = 1 (xii), (iv) = 1 (viii), (v) = 1 (iv), (vi) = 1 (v), (vii) = 1 (vi), (viii) = 1 (vii), (ix) = 1 (iii), (x) = 1 (ix). Values hamare jawabon se milti hain; sirf numbering aur heading ghalat hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ii)",
+            "prompt": "4 (ii) Evaluate the following: \\(\\int \\cot^2 x\\,dx\\)",
+            "explanation": "\\(\\cot^2 x\\) ka koi seedha formula nahi, lekin \\(\\csc^2 x\\) ka hai: \\(\\int \\csc^2 x\\,dx = -\\cot x\\).\nIs liye identity \\(1 + \\cot^2 x = \\csc^2 x\\) se \\(\\cot^2 x\\) ko \\(\\csc^2 x - 1\\) likhenge. Kitab ki Example 7 mein \\(\\tan^2 x\\) ke saath bilkul yahi kiya gaya tha.\nPlan: identity lagayein, integrate karein, check karein.",
+            "steps": [
+              "Diya gaya: \\(\\int \\cot^2 x\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: \\(\\cot^2 x = \\csc^2 x - 1\\), phir table ka formula \\(\\int \\csc^2 x\\,dx = -\\cot x + c\\).",
+              "Identity lagayein\n\\[\\int \\cot^2 x\\,dx = \\int (\\csc^2 x - 1)\\,dx\\]\nKyun: \\(1 + \\cot^2 x = \\csc^2 x\\) se \\(\\cot^2 x = \\csc^2 x - 1\\). Ab dono terms ka formula humare paas hai.",
+              "Integrate karein\n\\[= -\\cot x - x + c\\]\nKyun: Table se \\(\\int \\csc^2 x\\,dx = -\\cot x\\), aur \\(\\int 1\\,dx = x\\).\nDhyan dein: \\(\\csc^2 x\\) ka integral \\(-\\cot x\\) hai, \\(+\\cot x\\) nahi; minus sign bhoolna aam ghalti hai.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}(-\\cot x - x) = \\csc^2 x - 1 = \\cot^2 x \\;\\checkmark\\]\nKyun: \\(-\\cot x\\) ka derivative \\(+\\csc^2 x\\) hai, aur identity se \\(\\csc^2 x - 1 = \\cot^2 x\\)."
+            ],
+            "final_answer": "\\(-\\cot x - x + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iii)",
+            "prompt": "4 (iii) Evaluate the following: \\(\\int \\sec^4 x\\,dx\\)",
+            "explanation": "\\(\\sec^4 x\\) ka seedha formula nahi. Lekin \\(\\sec^4 x = \\sec^2 x\\cdot\\sec^2 x\\) likh sakte hain.\nEk \\(\\sec^2 x\\) ko waise hi rakhenge, kyunke yeh \\(\\tan x\\) ka derivative hai; doosre ko \\(1 + \\tan^2 x\\) mein badal denge.\nPhir sab kuch \\(\\tan x\\) aur us ke derivative ki shakal mein aa jata hai, aur General Power Rule kaam kar deta hai.",
+            "steps": [
+              "Diya gaya: \\(\\int \\sec^4 x\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: integrand ko \\((1 + \\tan^2 x)\\sec^2 x\\) likhna, phir table aur General Power Rule (\\(f(x) = \\tan x\\)).",
+              "Integrand ki nayi shakal\n\\[\\sec^4 x = \\sec^2 x\\cdot\\sec^2 x\\]\n\\[= (1 + \\tan^2 x)\\sec^2 x\\]\nKyun: Identity \\(1 + \\tan^2 x = \\sec^2 x\\) sirf ek \\(\\sec^2 x\\) par lagayi; doosra \\(\\sec^2 x\\) derivative ka kaam karega.",
+              "Integral ko torein\n\\[= \\int \\sec^2 x\\,dx + \\int (\\tan x)^2\\sec^2 x\\,dx\\]\nKyun: Bracket khol kar Rule 2 lagaya. Doosra integral \\([f(x)]^2 f'(x)\\) ki shakal ka hai, jahan \\(f(x) = \\tan x\\) aur \\(f'(x) = \\sec^2 x\\).",
+              "Integrate karein\n\\[= \\tan x + \\dfrac{\\tan^3 x}{3} + c\\]\nKyun: Table se \\(\\int \\sec^2 x\\,dx = \\tan x\\). General Power Rule \\(n = 2\\) ke saath: \\(\\frac{(\\tan x)^3}{3}\\).",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left(\\tan x + \\tfrac{1}{3}\\tan^3 x\\right)\\]\n\\[= \\sec^2 x + \\tan^2 x\\sec^2 x\\]\n\\[= \\sec^2 x(1 + \\tan^2 x) = \\sec^4 x \\;\\checkmark\\]\nKyun: \\(\\tan^3 x\\) par chain rule: \\(3\\tan^2 x\\cdot\\sec^2 x\\), aur \\(\\frac{1}{3}\\) se 3 cancel. Phir \\(\\sec^2 x\\) common nikal kar identity dobara lagayi."
+            ],
+            "final_answer": "\\(\\tan x + \\frac{\\tan^3 x}{3} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(iv)",
+            "prompt": "4 (iv) Evaluate the following: \\(\\int \\sin x\\cdot\\cos 7x\\,dx\\)",
+            "explanation": "Yahan sine aur cosine ka product hai, aur dono ke angles alag hain (\\(x\\) aur \\(7x\\)). Product ka integral seedha nahi aata.\nKitab ki Example 10 wala tareeqa: product ko sum mein badlo, formula \\(\\sin mx\\cos nx = \\frac{1}{2}[\\sin(m + n)x + \\sin(m - n)x]\\), yahan \\(m = 1\\), \\(n = 7\\).\nPhir har sine ka integral Rule 5 se aasaani se aa jata hai.",
+            "steps": [
+              "Diya gaya: \\(\\int \\sin x\\cdot\\cos 7x\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: product-to-sum formula, phir \\(\\int \\sin kx\\,dx = -\\frac{\\cos kx}{k}\\) (Rule 5).",
+              "Product ko sum banayein\n\\[\\sin x\\cos 7x = \\tfrac{1}{2}\\left[\\sin 8x + \\sin(-6x)\\right]\\]\n\\[= \\tfrac{1}{2}\\left[\\sin 8x - \\sin 6x\\right]\\]\nKyun: \\(m + n = 1 + 7 = 8\\) aur \\(m - n = 1 - 7 = -6\\). Sine odd function hai: \\(\\sin(-\\theta) = -\\sin\\theta\\).\nDhyan dein: \\(m\\) hamesha sine wala angle aur \\(n\\) cosine wala; ulta le liya to sign ghalat ho jayega.",
+              "Integrate karein\n\\[= \\tfrac{1}{2}\\left[-\\dfrac{\\cos 8x}{8} + \\dfrac{\\cos 6x}{6}\\right] + c\\]\n\\[= \\dfrac{\\cos 6x}{12} - \\dfrac{\\cos 8x}{16} + c\\]\nKyun: Rule 5: \\(\\int \\sin kx\\,dx = -\\frac{\\cos kx}{k}\\). Is liye \\(\\int \\sin 8x\\,dx = -\\frac{\\cos 8x}{8}\\), aur \\(-\\int \\sin 6x\\,dx = +\\frac{\\cos 6x}{6}\\). Phir \\(\\frac{1}{2}\\) andar multiply kiya.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left(\\tfrac{\\cos 6x}{12} - \\tfrac{\\cos 8x}{16}\\right)\\]\n\\[= -\\tfrac{1}{2}\\sin 6x + \\tfrac{1}{2}\\sin 8x\\]\n\\[= \\sin x\\cos 7x \\;\\checkmark\\]\nKyun: \\(\\cos 6x\\) ka derivative \\(-6\\sin 6x\\), aur \\(\\frac{6}{12} = \\frac{1}{2}\\); isi tarah \\(\\frac{8}{16} = \\frac{1}{2}\\). Yeh wahi sum wali shakal hai."
+            ],
+            "final_answer": "\\(\\frac{\\cos 6x}{12} - \\frac{\\cos 8x}{16} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(v)",
+            "prompt": "4 (v) Evaluate the following: \\(\\int \\frac{\\cos^3 x - \\sin^3 x}{\\cos x - \\sin x}\\,dx\\)",
+            "explanation": "Numerator dekhiye: \\(\\cos^3 x - \\sin^3 x\\), yani do cubes ka farq. Algebra ka formula yaad kijiye: \\(A^3 - B^3 = (A - B)(A^2 + AB + B^2)\\).\nIs se numerator mein \\((\\cos x - \\sin x)\\) nikal aata hai, jo denominator se cancel ho jata hai.\nPhir \\(\\sin^2 x + \\cos^2 x = 1\\) se integrand bohat simple ban jata hai.\nPlan: factorise, cancel, identity, integrate, check.",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{\\cos^3 x - \\sin^3 x}{\\cos x - \\sin x}\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: factorise, cancel, \\(\\sin^2 x + \\cos^2 x = 1\\), phir \\(\\sin x\\cos x\\) ke liye General Power Rule.",
+              "Factorise kar ke cancel karein\n\\[\\dfrac{\\cos^3 x - \\sin^3 x}{\\cos x - \\sin x}\\]\n\\[= \\cos^2 x + \\cos x\\sin x + \\sin^2 x\\]\n\\[= 1 + \\sin x\\cos x\\]\nKyun: \\(A = \\cos x\\), \\(B = \\sin x\\) le kar formula lagaya; \\((\\cos x - \\sin x)\\) upar neeche cancel hua (jahan \\(\\cos x \\ne \\sin x\\)). Phir \\(\\cos^2 x + \\sin^2 x = 1\\).",
+              "Integrate karein\n\\[\\int (1 + \\sin x\\cos x)\\,dx = x + \\dfrac{\\sin^2 x}{2} + c\\]\nKyun: \\(\\sin x\\cos x\\) ko dekhiye: \\(\\cos x\\) asal mein \\(\\sin x\\) ka derivative hai. To yeh \\([f(x)]^1 f'(x)\\) hai, jahan \\(f(x) = \\sin x\\); General Power Rule se \\(\\frac{\\sin^2 x}{2}\\).",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left(x + \\tfrac{1}{2}\\sin^2 x\\right) = 1 + \\sin x\\cos x \\;\\checkmark\\]\nKyun: \\(\\sin^2 x\\) par chain rule: \\(2\\sin x\\cos x\\), aur \\(\\frac{1}{2}\\) se 2 cancel. Note: agar koi \\(\\sin x\\cos x = \\frac{1}{2}\\sin 2x\\) likh kar \\(x - \\frac{1}{4}\\cos 2x + c\\) nikale, to woh bhi sahi hai; dono jawab sirf ek constant se mukhtalif hain."
+            ],
+            "final_answer": "\\(x + \\frac{\\sin^2 x}{2} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(vi)",
+            "prompt": "4 (vi) Evaluate the following: \\(\\int \\frac{\\cos 2x}{\\sin x + \\cos x}\\,dx\\)",
+            "explanation": "Numerator \\(\\cos 2x\\) hai aur denominator \\(\\sin x + \\cos x\\). Kya in mein koi rishta hai? Haan!\n\\(\\cos 2x = \\cos^2 x - \\sin^2 x\\), jo do squares ka farq hai: \\((\\cos x - \\sin x)(\\cos x + \\sin x)\\). Is ka ek factor denominator se cancel ho jata hai.\nPlan: factorise, cancel, phir table se integrate, aur check.",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{\\cos 2x}{\\sin x + \\cos x}\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: \\(\\cos 2x = (\\cos x - \\sin x)(\\cos x + \\sin x)\\), cancel, phir table.",
+              "Factorise kar ke cancel karein\n\\[\\dfrac{\\cos 2x}{\\sin x + \\cos x} = \\dfrac{(\\cos x - \\sin x)(\\cos x + \\sin x)}{\\sin x + \\cos x}\\]\n\\[= \\cos x - \\sin x\\]\nKyun: \\(\\cos 2x\\) ki teen shaklon mein se \\(\\cos^2 x - \\sin^2 x\\) wali chuni, kyunke yahi factorise ho kar denominator se milti hai. \\(A^2 - B^2 = (A - B)(A + B)\\); \\(\\sin x + \\cos x \\ne 0\\) jahan, wahan cancel jaiz hai.",
+              "Integrate karein\n\\[\\int (\\cos x - \\sin x)\\,dx = \\sin x + \\cos x + c\\]\nKyun: \\(\\int \\cos x\\,dx = \\sin x\\), aur \\(\\int \\sin x\\,dx = -\\cos x\\), is liye \\(-\\int \\sin x\\,dx = +\\cos x\\).",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}(\\sin x + \\cos x) = \\cos x - \\sin x \\;\\checkmark\\]\nKyun: Yeh simplified integrand hai, jo asal fraction ke barabar hai."
+            ],
+            "final_answer": "\\(\\sin x + \\cos x + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(vii)",
+            "prompt": "4 (vii) Evaluate the following: \\(\\int \\sqrt{1 - \\cos 2x}\\,dx\\)",
+            "explanation": "Root ke andar \\(1 - \\cos 2x\\) hai. Identity \\(1 - \\cos 2x = 2\\sin^2 x\\) se \"2x\" bhi khatam aur root bhi aasaan.\nLekin ek bareek baat: \\(\\sqrt{\\sin^2 x} = |\\sin x|\\) hota hai, sirf \\(\\sin x\\) nahi. Kitab ka jawab yeh maan kar hai ke \\(\\sin x \\ge 0\\).\nPlan: identity lagayein, root lein, us interval par integrate karein jahan \\(\\sin x \\ge 0\\), aur check karein.",
+            "steps": [
+              "Diya gaya: \\(\\int \\sqrt{1 - \\cos 2x}\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: \\(1 - \\cos 2x = 2\\sin^2 x\\), root lena, phir table se \\(\\sin x\\) ka integral.",
+              "Identity lagayein\n\\[\\sqrt{1 - \\cos 2x} = \\sqrt{2\\sin^2 x}\\]\n\\[= \\sqrt{2}\\,|\\sin x|\\]\nKyun: \\(\\cos 2x = 1 - 2\\sin^2 x\\) se \\(1 - \\cos 2x = 2\\sin^2 x\\). Kisi square ka square root hamesha absolute value hota hai: \\(\\sqrt{a^2} = |a|\\).",
+              "Integrate karein (us interval par jahan \\(\\sin x \\ge 0\\), maslan \\(0 \\le x \\le \\pi\\))\n\\[\\int \\sqrt{2}\\sin x\\,dx = -\\sqrt{2}\\cos x + c\\]\nKyun: Wahan \\(|\\sin x| = \\sin x\\), aur \\(\\int \\sin x\\,dx = -\\cos x\\).\nDhyan dein: jahan \\(\\sin x < 0\\) ho (maslan \\(\\pi < x < 2\\pi\\)), wahan integrand \\(-\\sqrt{2}\\sin x\\) hai aur jawab \\(\\sqrt{2}\\cos x + c\\) ban jata hai.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left(-\\sqrt{2}\\cos x\\right) = \\sqrt{2}\\sin x = \\sqrt{1 - \\cos 2x} \\;\\checkmark\\]\nKyun: \\(-\\cos x\\) ka derivative \\(\\sin x\\) hai. Yeh barabari wahan sahi hai jahan \\(\\sin x \\ge 0\\), jo humne shuru mein maana tha."
+            ],
+            "final_answer": "\\(-\\sqrt{2}\\cos x + c\\) (jahan \\(\\sin x \\ge 0\\))"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(viii)",
+            "prompt": "4 (viii) Evaluate the following: \\(\\int \\frac{1}{1 + \\cos x}\\,dx\\)",
+            "explanation": "Denominator \\(1 + \\cos x\\) hai; is ka seedha formula nahi. Half-angle identity yaad kijiye: \\(1 + \\cos x = 2\\cos^2\\frac{x}{2}\\).\nIs se integrand \\(\\frac{1}{2}\\sec^2\\frac{x}{2}\\) ban jata hai, aur \\(\\sec^2\\) ka formula table mein hai.\nAngle \\(\\frac{x}{2}\\) hai, is liye Rule 5 (\\(a = \\frac{1}{2}\\)) lagega.",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{1}{1 + \\cos x}\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: half-angle identity, phir \\(\\int \\sec^2(ax)\\,dx = \\frac{\\tan(ax)}{a}\\) (Rule 5).",
+              "Half-angle identity lagayein\n\\[1 + \\cos x = 2\\cos^2\\dfrac{x}{2}\\]\n\\[\\dfrac{1}{1 + \\cos x} = \\dfrac{1}{2}\\sec^2\\dfrac{x}{2}\\]\nKyun: \\(\\cos 2\\theta = 2\\cos^2\\theta - 1\\) mein \\(\\theta = \\frac{x}{2}\\) rakha: \\(\\cos x = 2\\cos^2\\frac{x}{2} - 1\\). Aur \\(\\frac{1}{\\cos^2} = \\sec^2\\).",
+              "Integrate karein (Rule 5, \\(a = \\frac{1}{2}\\))\n\\[\\dfrac{1}{2}\\int \\sec^2\\dfrac{x}{2}\\,dx = \\dfrac{1}{2}\\cdot\\dfrac{\\tan\\frac{x}{2}}{1/2} + c\\]\n\\[= \\tan\\dfrac{x}{2} + c\\]\nKyun: \\(\\int \\sec^2 x\\,dx = \\tan x\\); angle \\(\\frac{x}{2}\\) hone ki wajah se coefficient \\(\\frac{1}{2}\\) se divide karna pada, jo 2 se multiply ke barabar hai. Bahar wala \\(\\frac{1}{2}\\) aur yeh 2 cancel ho gaye.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\tan\\dfrac{x}{2} = \\dfrac{1}{2}\\sec^2\\dfrac{x}{2}\\]\n\\[= \\dfrac{1}{2\\cos^2\\frac{x}{2}} = \\dfrac{1}{1 + \\cos x} \\;\\checkmark\\]\nKyun: Chain rule se \\(\\frac{1}{2}\\) aaya, phir half-angle identity ulti lagayi."
+            ],
+            "final_answer": "\\(\\tan\\frac{x}{2} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(ix)",
+            "prompt": "4 (ix) Evaluate the following: \\(\\int \\frac{\\sin 2x}{\\sqrt{1 + \\sin^2 x}}\\,dx\\)",
+            "explanation": "Root ke andar \\(1 + \\sin^2 x\\) hai. Pehla sawal: is ka derivative kya hai? \\(2\\sin x\\cos x\\), jo bilkul \\(\\sin 2x\\) hai, yani numerator!\nIs liye integrand \\([f(x)]^{-1/2}f'(x)\\) ki shakal ka hai, aur General Power Rule seedha lagta hai.\nPlan: \\(f'(x)\\) pehchanein, integrate karein, check karein.",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{\\sin 2x}{\\sqrt{1 + \\sin^2 x}}\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: General Power Rule, \\(f(x) = 1 + \\sin^2 x\\), \\(n = -\\frac{1}{2}\\).",
+              "\\(f'(x)\\) nikalein\n\\[f(x) = 1 + \\sin^2 x\\]\n\\[f'(x) = 2\\sin x\\cos x = \\sin 2x\\]\nKyun: \\(\\sin^2 x = (\\sin x)^2\\) par chain rule: \\(2\\sin x\\cdot\\cos x\\). Aur double angle formula se yeh \\(\\sin 2x\\) hai.",
+              "Integrate karein\n\\[\\int [f(x)]^{-1/2}f'(x)\\,dx = \\dfrac{(1 + \\sin^2 x)^{1/2}}{1/2} + c\\]\n\\[= 2\\sqrt{1 + \\sin^2 x} + c\\]\nKyun: \\(n = -\\frac{1}{2}\\), to \\(n + 1 = \\frac{1}{2}\\). \\(\\frac{1}{2}\\) se divide karna yani 2 se multiply.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\,2\\sqrt{1 + \\sin^2 x} = \\dfrac{2\\sin x\\cos x}{\\sqrt{1 + \\sin^2 x}}\\]\n\\[= \\dfrac{\\sin 2x}{\\sqrt{1 + \\sin^2 x}} \\;\\checkmark\\]\nKyun: \\(\\sqrt{f}\\) ka derivative \\(\\frac{f'}{2\\sqrt{f}}\\); bahar wala 2 aur neeche wala 2 cancel."
+            ],
+            "final_answer": "\\(2\\sqrt{1 + \\sin^2 x} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4(x)",
+            "prompt": "4 (x) Evaluate the following: \\(\\int \\frac{1 - \\cos 2x}{1 + \\cos 2x}\\,dx\\)",
+            "explanation": "Upar neeche dono mein \"2x\" hai. Do identities is ka ilaaj hain: \\(1 - \\cos 2x = 2\\sin^2 x\\) aur \\(1 + \\cos 2x = 2\\cos^2 x\\).\nIn se fraction \\(\\tan^2 x\\) ban jati hai, aur phir kitab ki Example 7 wala tareeqa: \\(\\tan^2 x = \\sec^2 x - 1\\).\nPlan: simplify, integrate, check.",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{1 - \\cos 2x}{1 + \\cos 2x}\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: double-angle identities, phir \\(\\tan^2 x = \\sec^2 x - 1\\) aur table.",
+              "Fraction simplify karein\n\\[\\dfrac{1 - \\cos 2x}{1 + \\cos 2x} = \\dfrac{2\\sin^2 x}{2\\cos^2 x}\\]\n\\[= \\tan^2 x = \\sec^2 x - 1\\]\nKyun: \\(\\cos 2x = 1 - 2\\sin^2 x\\) se upar \\(2\\sin^2 x\\), aur \\(\\cos 2x = 2\\cos^2 x - 1\\) se neeche \\(2\\cos^2 x\\). 2 cancel, \\(\\frac{\\sin^2}{\\cos^2} = \\tan^2\\), aur \\(1 + \\tan^2 x = \\sec^2 x\\).",
+              "Integrate karein\n\\[\\int (\\sec^2 x - 1)\\,dx = \\tan x - x + c\\]\nKyun: Table se \\(\\int \\sec^2 x\\,dx = \\tan x\\), aur \\(\\int 1\\,dx = x\\).\nDhyan dein: \\(\\tan^2 x\\) ka integral \\(\\frac{\\tan^3 x}{3}\\) nahi hai; Power Rule tabhi lagta hai jab saath mein \\(\\tan x\\) ka derivative \\(\\sec^2 x\\) bhi ho.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}(\\tan x - x) = \\sec^2 x - 1 = \\tan^2 x \\;\\checkmark\\]\nKyun: Yeh simplified integrand ke barabar hai."
+            ],
+            "final_answer": "\\(\\tan x - x + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

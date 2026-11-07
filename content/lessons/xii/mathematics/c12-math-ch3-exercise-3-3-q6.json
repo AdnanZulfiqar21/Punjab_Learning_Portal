@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q6",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 6: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. Evaluate \\(\\int x^2 e^{ax}\\,dx\\).",
+            "explanation": "Algebraic \\(x^2\\) times exponential; \\(x^2\\) needs two differentiations to vanish.\nPlan: parts with \\(x^2\\) first, then use Example 30 for \\(\\int x e^{ax}\\,dx\\).",
+            "steps": [
+              "Given: \\(\\int x^2 e^{ax}\\,dx\\), \\(a \\ne 0\\).\nTo find: the indefinite integral.\nMethod: integration by parts with \\(f(x) = x^2\\), \\(g(x) = e^{ax}\\); the remaining \\(\\int x e^{ax}\\,dx\\) is Example 30.",
+              "First integration by parts\n\\[= x^2\\cdot\\dfrac{e^{ax}}{a} - \\int \\dfrac{e^{ax}}{a}\\cdot 2x\\,dx\\]\n\\[= \\dfrac{x^2e^{ax}}{a} - \\dfrac{2}{a}\\int x e^{ax}\\,dx\\]\nWhy: \\(\\int e^{ax}\\,dx = \\frac{e^{ax}}{a}\\), \\(\\frac{d}{dx}x^2 = 2x\\).",
+              "Use Example 30\n\\[\\int x e^{ax}\\,dx = \\dfrac{xe^{ax}}{a} - \\dfrac{e^{ax}}{a^2}\\]\nWhy: this is Example 30 (one more integration by parts with \\(x\\) first).",
+              "Substitute and expand\n\\[= \\dfrac{x^2e^{ax}}{a} - \\dfrac{2}{a}\\left(\\dfrac{xe^{ax}}{a} - \\dfrac{e^{ax}}{a^2}\\right) + c\\]\n\\[= \\dfrac{x^2e^{ax}}{a} - \\dfrac{2xe^{ax}}{a^2} + \\dfrac{2e^{ax}}{a^3} + c\\]\nWhy: multiply each term by \\(-\\frac{2}{a}\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left(\\dfrac{x^2e^{ax}}{a}\\right) = \\dfrac{2xe^{ax}}{a} + x^2e^{ax}\\]\n\\[\\dfrac{d}{dx}\\left(\\dfrac{2xe^{ax}}{a^2}\\right) = \\dfrac{2e^{ax}}{a^2} + \\dfrac{2xe^{ax}}{a}\\]\n\\[\\dfrac{d}{dx}\\left(\\dfrac{2e^{ax}}{a^3}\\right) = \\dfrac{2e^{ax}}{a^2}\\]\nWhy: first \\(-\\) second \\(+\\) third \\(= x^2e^{ax}\\): everything else cancels."
+            ],
+            "final_answer": "\\(\\dfrac{x^2e^{ax}}{a} - \\dfrac{2xe^{ax}}{a^2} + \\dfrac{2e^{ax}}{a^3} + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

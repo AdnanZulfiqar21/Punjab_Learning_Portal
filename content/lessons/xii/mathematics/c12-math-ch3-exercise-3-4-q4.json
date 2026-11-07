@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 4: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4 Evaluate \\(\\int \\frac{x^2 - 12x - 21}{x^2 - 6x - 7}\\,dx\\).",
+            "explanation": "Numerator and denominator both have degree 2: an improper fraction, so divide first.\nThe remainder fraction has a denominator that factorises into two different linear factors (Case-I).\nPlan: divide, factorise, find \\(A\\) and \\(B\\), integrate.",
+            "steps": [
+              "Given: \\(\\int \\frac{x^2 - 12x - 21}{x^2 - 6x - 7}\\,dx\\).\nTo find: the integral.\nMethod: equal degrees, so divide first; then partial fractions (Case-I) for the remainder.",
+              "Divide\n\\[x^2 - 12x - 21 = 1\\cdot(x^2 - 6x - 7) + (-6x - 14)\\]\n\\[\\dfrac{x^2 - 12x - 21}{x^2 - 6x - 7} = 1 + \\dfrac{-6x - 14}{x^2 - 6x - 7}\\]\nWhy: Quotient 1; remainder \\((x^2 - 12x - 21) - (x^2 - 6x - 7) = -6x - 14\\).",
+              "Factorise and split\n\\[x^2 - 6x - 7 = (x - 7)(x + 1)\\]\n\\[\\dfrac{-6x - 14}{(x - 7)(x + 1)} = \\dfrac{A}{x - 7} + \\dfrac{B}{x + 1}\\]\n\\[-6x - 14 = A(x + 1) + B(x - 7) \\quad (1)\\]\nWhy: \\((-7)(1) = -7\\) and \\(-7 + 1 = -6\\); then multiply through by the denominator.",
+              "Find \\(A\\) and \\(B\\)\n\\[x = 7:\\ -56 = 8A,\\ A = -7\\]\n\\[x = -1:\\ -8 = -8B,\\ B = 1\\]\nWhy: Each root of the denominator removes one term of (1).",
+              "Integrate\n\\[\\int \\left(1 - \\dfrac{7}{x - 7} + \\dfrac{1}{x + 1}\\right)dx\\]\n\\[= x - 7\\ln|x - 7| + \\ln|x + 1| + c\\]\nWhy: \\(\\int 1\\,dx = x\\) and \\(\\int \\frac{dx}{x + a} = \\ln|x + a|\\).",
+              "Check\n\\[-\\dfrac{7}{x - 7} + \\dfrac{1}{x + 1} = \\dfrac{-7x - 7 + x - 7}{(x - 7)(x + 1)}\\]\n\\[= \\dfrac{-6x - 14}{x^2 - 6x - 7} \\;\\checkmark\\]\nWhy: The fractions add back to the remainder fraction; with the 1 this is the integrand."
+            ],
+            "final_answer": "\\(x - 7\\ln|x - 7| + \\ln|x + 1| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the answers at the end of the book (page 301), the answers of Exercise 3.4 are printed under the wrong heading \"Exercise 3.6\". The answer of this question is item (iv) of that block: \\(x - 7\\ln|x - 7| + \\ln|x + 1| + c\\). That answer is correct. The block headed \"Exercise 3.4\" (page 301) belongs to a different exercise."
+          }
+        ]
+      }
+    }
+  ]
+}

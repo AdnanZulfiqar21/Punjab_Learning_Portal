@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q12-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q12",
+      "title": "Question 12 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 12: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-3-Q12",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12",
+            "prompt": "12. Evaluate \\(\\int \\dfrac{x}{1 + \\cos x}\\,dx\\).",
+            "explanation": "Denominator \\(1 + \\cos x\\) ke saath seedha kuch nahi hota, lekin half-angle identity \\(1 + \\cos x = 2\\cos^2\\frac{x}{2}\\) ise bohat aasaan bana deti hai.\nIs ke baad integrand \\(\\frac{1}{2}x\\sec^2\\frac{x}{2}\\) ban jata hai, yani algebraic \\(\\times\\) trigonometric.\nFirst \\(x\\), second \\(\\sec^2\\frac{x}{2}\\) jis ka integral \\(2\\tan\\frac{x}{2}\\) hai.\nPlan: identity, parts, phir \\(\\int \\tan\\frac{x}{2}\\,dx\\).",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{x}{1 + \\cos x}\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: identity \\(1 + \\cos x = 2\\cos^2\\frac{x}{2}\\); phir parts, \\(x\\) first aur \\(\\sec^2\\frac{x}{2}\\) second.",
+              "Half-angle identity\n\\[1 + \\cos x = 2\\cos^2\\dfrac{x}{2}\\]\n\\[\\int \\dfrac{x}{2\\cos^2\\frac{x}{2}}\\,dx = \\dfrac{1}{2}\\int x\\sec^2\\dfrac{x}{2}\\,dx\\]\nKyun: \\(\\cos 2\\theta = 2\\cos^2\\theta - 1\\) mein \\(\\theta = \\frac{x}{2}\\) rakhein to \\(\\cos x = 2\\cos^2\\frac{x}{2} - 1\\), yani \\(1 + \\cos x = 2\\cos^2\\frac{x}{2}\\). Denominator ab ek hi term hai.",
+              "Parts lagayein\n\\[= \\dfrac{1}{2}\\left[x\\cdot 2\\tan\\dfrac{x}{2} - \\int 2\\tan\\dfrac{x}{2}\\,dx\\right]\\]\n\\[= x\\tan\\dfrac{x}{2} - \\int \\tan\\dfrac{x}{2}\\,dx\\]\nKyun: \\(\\sec^2\\frac{x}{2}\\) ka integral \\(\\frac{\\tan\\frac{x}{2}}{\\frac{1}{2}} = 2\\tan\\frac{x}{2}\\). Bahar wala \\(\\frac{1}{2}\\) aur yeh 2 aapas mein cancel.\nDhyan dein: \\(\\frac{1}{2}\\) se divide karna 2 se zarb dena hai; yahan \\(\\frac{1}{2}\\tan\\frac{x}{2}\\) likhna ghalat hoga.",
+              "\\(\\tan\\frac{x}{2}\\) ka integral\n\\[\\int \\tan\\dfrac{x}{2}\\,dx = 2\\ln\\left|\\sec\\dfrac{x}{2}\\right|\\]\n\\[= x\\tan\\dfrac{x}{2} - 2\\ln\\left|\\sec\\dfrac{x}{2}\\right| + c\\]\nKyun: \\(\\int \\tan kx\\,dx = \\frac{1}{k}\\ln|\\sec kx|\\), yahan \\(k = \\frac{1}{2}\\), to \\(\\frac{1}{k} = 2\\).",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}(\\ldots) = \\tan\\dfrac{x}{2} + \\dfrac{x}{2}\\sec^2\\dfrac{x}{2} - \\tan\\dfrac{x}{2}\\]\n\\[= \\dfrac{x}{2\\cos^2\\frac{x}{2}} = \\dfrac{x}{1 + \\cos x}\\]\nKyun: \\(2\\ln|\\sec\\frac{x}{2}|\\) ka derivative \\(2\\cdot\\frac{1}{2}\\tan\\frac{x}{2} = \\tan\\frac{x}{2}\\). Cancel ke baad integrand wapas aaya."
+            ],
+            "final_answer": "\\(x\\tan\\dfrac{x}{2} - 2\\ln\\left|\\sec\\dfrac{x}{2}\\right| + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

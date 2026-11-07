@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q21-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q21",
+      "title": "Question 21 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 21: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-3-Q21",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "21",
+            "prompt": "21. Evaluate \\(\\int \\csc^3 x\\,dx\\).",
+            "explanation": "\\(\\csc^3 x\\) ka koi seedha formula nahi. Lekin \\(\\csc^3 x = \\csc x \\cdot \\csc^2 x\\) likhein to \\(\\csc^2 x\\) ka integral \\(-\\cot x\\) humein aata hai.\nIs liye \\(\\csc x\\) first aur \\(\\csc^2 x\\) second function.\nParts ke baad \\(\\csc x\\cot^2 x\\) aayega; identity \\(\\cot^2 x = \\csc^2 x - 1\\) se asal integral \\(I\\) wapas aa jayega.\nPlan: Example 35 ki tarah \\(I\\) ki equation bana kar solve karein, aur \\(\\int \\csc x\\,dx = \\ln|\\csc x - \\cot x|\\) use karein.",
+            "steps": [
+              "Diya gaya: \\(I = \\int \\csc^3 x\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: parts: \\(f = \\csc x\\), \\(g = \\csc^2 x\\); phir \\(\\cot^2 x = \\csc^2 x - 1\\) aur \\(I\\) solve.",
+              "Parts lagayein\n\\[I = \\int \\csc x\\cdot\\csc^2 x\\,dx\\]\n\\[= \\csc x(-\\cot x) - \\int (-\\cot x)(-\\csc x\\cot x)\\,dx\\]\n\\[= -\\csc x\\cot x - \\int \\csc x\\cot^2 x\\,dx\\]\nKyun: \\(\\csc^2 x\\) ka integral \\(-\\cot x\\), \\(\\csc x\\) ka derivative \\(-\\csc x\\cot x\\). Andar do minus ka product plus, aur formula ka minus bahar.\nDhyan dein: teen minus signs hain (formula, \\(-\\cot x\\), \\(-\\csc x\\cot x\\)); ek ek kar ke ginein.",
+              "Identity lagayein\n\\[= -\\csc x\\cot x - \\int \\csc x(\\csc^2 x - 1)\\,dx\\]\n\\[= -\\csc x\\cot x - \\int \\csc^3 x\\,dx + \\int \\csc x\\,dx\\]\nKyun: \\(1 + \\cot^2 x = \\csc^2 x\\) se \\(\\cot^2 x = \\csc^2 x - 1\\). Ab \\(\\int \\csc^3 x\\,dx\\) yani \\(I\\) wapas aa gaya.",
+              "\\(I\\) solve karein\n\\[I = -\\csc x\\cot x - I + \\ln|\\csc x - \\cot x|\\]\n\\[2I = -\\csc x\\cot x + \\ln|\\csc x - \\cot x|\\]\n\\[I = -\\dfrac{1}{2}\\csc x\\cot x + \\dfrac{1}{2}\\ln|\\csc x - \\cot x| + c\\]\nKyun: \\(\\int \\csc x\\,dx = \\ln|\\csc x - \\cot x| + c\\) standard result; \\(-I\\) ko left par la kar \\(2I\\) bana, phir 2 se divide.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}(-\\csc x\\cot x) = 2\\csc^3 x - \\csc x\\]\n\\[\\dfrac{d}{dx}\\ln|\\csc x - \\cot x| = \\csc x\\]\n\\[\\tfrac{1}{2}(2\\csc^3 x - \\csc x) + \\tfrac{1}{2}\\csc x = \\csc^3 x\\]\nKyun: \\(-\\csc x\\cot x\\) ka derivative \\(\\csc x\\cot^2 x + \\csc^3 x = 2\\csc^3 x - \\csc x\\). Aadha kar ke \\(\\frac{1}{2}\\csc x\\) jama karne se \\(\\csc^3 x\\) mila."
+            ],
+            "final_answer": "\\(-\\dfrac{1}{2}\\csc x\\cot x + \\dfrac{1}{2}\\ln|\\csc x - \\cot x| + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

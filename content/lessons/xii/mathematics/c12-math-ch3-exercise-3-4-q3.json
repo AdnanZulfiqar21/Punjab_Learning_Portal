@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 3: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3 Evaluate \\(\\int \\frac{x^3 + 2x^2 - x - 1}{x^2 - 1}\\,dx\\).",
+            "explanation": "The top has degree 3 and the bottom degree 2: an improper fraction.\nSo first divide (long division) to get a polynomial plus a proper fraction.\nPlan: divide, split the proper remainder fraction with partial fractions (Case-I), then integrate term by term.",
+            "steps": [
+              "Given: \\(\\int \\frac{x^3 + 2x^2 - x - 1}{x^2 - 1}\\,dx\\).\nTo find: the integral.\nMethod: the degree of the numerator (3) is not less than the degree of the denominator (2), so divide first. Partial fractions apply only to a proper fraction.",
+              "Long division\n\\[(x^2 - 1)(x + 2) = x^3 + 2x^2 - x - 2\\]\n\\[x^3 + 2x^2 - x - 1 = (x^2 - 1)(x + 2) + 1\\]\nWhy: Quotient \\(x + 2\\); subtracting \\(x^3 + 2x^2 - x - 2\\) from the numerator leaves remainder 1.",
+              "Rewrite the integrand\n\\[\\dfrac{x^3 + 2x^2 - x - 1}{x^2 - 1} = x + 2 + \\dfrac{1}{x^2 - 1}\\]\nWhy: Dividend = divisor × quotient + remainder; divide through by \\(x^2 - 1\\).",
+              "Partial fractions of the remainder\n\\[\\dfrac{1}{(x - 1)(x + 1)} = \\dfrac{A}{x - 1} + \\dfrac{B}{x + 1}\\]\n\\[1 = A(x + 1) + B(x - 1)\\]\n\\[x = 1:\\ A = \\tfrac{1}{2}\\]\n\\[x = -1:\\ B = -\\tfrac{1}{2}\\]\nWhy: \\(x^2 - 1 = (x - 1)(x + 1)\\), Case-I.",
+              "Integrate term by term\n\\[\\int \\left(x + 2\\right)dx = \\dfrac{x^2}{2} + 2x\\]\n\\[\\dfrac{1}{2}\\int \\dfrac{dx}{x - 1} - \\dfrac{1}{2}\\int \\dfrac{dx}{x + 1}\\]\n\\[= \\dfrac{1}{2}\\ln|x - 1| - \\dfrac{1}{2}\\ln|x + 1|\\]\nWhy: Power rule for the polynomial part; \\(\\int \\frac{dx}{x + a} = \\ln|x + a|\\) for the fractions.",
+              "Combine\n\\[\\int \\dfrac{x^3 + 2x^2 - x - 1}{x^2 - 1}\\,dx\\]\n\\[= \\dfrac{x^2}{2} + 2x + \\dfrac{1}{2}\\ln\\left|\\dfrac{x - 1}{x + 1}\\right| + c\\]\nWhy: \\(\\ln|p| - \\ln|q| = \\ln\\left|\\frac{p}{q}\\right|\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\,\\dfrac{1}{2}\\ln\\left|\\dfrac{x - 1}{x + 1}\\right| = \\dfrac{1}{2}\\left(\\dfrac{1}{x - 1} - \\dfrac{1}{x + 1}\\right)\\]\n\\[= \\dfrac{1}{x^2 - 1}\\]\nWhy: With \\(\\frac{d}{dx}\\left(\\frac{x^2}{2} + 2x\\right) = x + 2\\), the derivative of the answer is \\(x + 2 + \\frac{1}{x^2 - 1}\\), the integrand \\(\\checkmark\\)."
+            ],
+            "final_answer": "\\(\\frac{x^2}{2} + 2x + \\frac{1}{2}\\ln\\left|\\frac{x - 1}{x + 1}\\right| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the answers at the end of the book (page 301), the answers of Exercise 3.4 are printed under the wrong heading \"Exercise 3.6\". The answer of this question is item (iii) of that block: \\(\\frac{x^2}{2} + 2x + \\frac{1}{2}\\ln\\left|\\frac{x - 1}{x + 1}\\right| + c\\). That answer is correct. The block headed \"Exercise 3.4\" (page 301) belongs to a different exercise."
+          }
+        ]
+      }
+    }
+  ]
+}

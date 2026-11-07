@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q7-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q7",
+      "title": "Question 7 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 104,
+          "note": "Exercise 3.5, Question 7: integral of f from f(x) + f(-x); book p. 102. Key on p. 300 under 'Exercise 3.2' (8/3). The printed condition x^2 + x^3 is impossible; corrected to x^2."
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-5-Q7",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Sawal jaisa hona chahiye (durust kar ke): Maan lein \\(f(x)\\) aisa function hai ke har \\(x\\) ke liye \\(f(x) + f(-x) = x^2\\) ho. Definite integral \\(\\int_{-2}^{2} f(x)\\,dx\\) ki value nikaalein. Kitab mein right side \\(x^2 + x^3\\) chhapi hai; neeche wajah dekhiye."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein condition \\(f(x) + f(-x) = x^2 + x^3\\) chhapi hai, lekin aisa koi function ho hi nahi sakta. \\(x\\) ki jagah \\(-x\\) rakhein: left side \\(f(-x) + f(x)\\) wohi rehti hai, magar right side \\(x^2 - x^3\\) ban jati hai; yani har \\(x\\) ke liye \\(x^3 = 0\\) chahiye, jo ghalat hai. (Misaal: \\(x = 1\\) par condition kehti hai \\(f(1) + f(-1) = 2\\), aur \\(x = -1\\) par wohi cheez \\(0\\).) Left side hamesha even hoti hai, is liye sirf even hissa \\(x^2\\) hi mumkin hai: \\(f(x) + f(-x) = x^2\\) (jaise \\(f(x) = \\frac{x^2}{2} + x^3\\)). Is se jawab \\(\\frac{8}{3}\\) aata hai, jo answer key mein hai. Chhapi hui condition ke saath do sahi tareeqe do alag jawab (\\(\\frac{8}{3}\\) aur \\(\\frac{20}{3}\\)) dete hain, jo khud saboot hai ke data ghalat hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7 Let \\(f(x)\\) be a function satisfying \\(f(x) + f(-x) = x^2\\) [printed as \\(x^2 + x^3\\); see the correction above] for all \\(x\\). Evaluate the definite integral \\(\\int_{-2}^{2} f(x)\\,dx\\).",
+            "explanation": "Is sawal mein \\(f\\) ka formula nahi diya, sirf \\(f(x) + f(-x)\\) diya hai, aur interval \\([-2, 2]\\) symmetric hai.\nDiya kya hai? \\(f(x) + f(-x)\\) ki value (durust shakal \\(x^2\\)).\nFind kya karna hai? \\(\\int_{-2}^{2} f(x)\\,dx\\).\nRule kaunsa? Property V symmetric interval wale integral ko \\(\\int_0^a [f(x) + f(-x)]\\,dx\\) mein badal deti hai, yani bilkul wohi cheez jo humein di gayi hai. Is liye yeh property is sawal ke liye bani hai.\nPlan: pehle samjhein ke chhapi hui condition kyun ghalat hai, phir Property V, phir doosre tareeqe se tasdeeq.",
+            "steps": [
+              "Diya gaya: har \\(x\\) ke liye \\(f(x) + f(-x) = x^2\\) (kitab mein \\(x^2 + x^3\\)).\nMaloom karna: \\(\\int_{-2}^{2} f(x)\\,dx\\).\nTareeqa: Property V, \\(a = 2\\): \\(\\int_{-a}^{a} f(x)\\,dx = \\int_{0}^{a} \\big(f(x) + f(-x)\\big)\\,dx\\).",
+              "Chhapi hui condition kyun durust karni pari\n\\[x \\to -x:\\ f(-x) + f(x) = x^2 - x^3\\]\n\\[\\Rightarrow\\ x^2 + x^3 = x^2 - x^3\\]\nKyun: \\(f(x) + f(-x)\\) mein \\(x\\) ki jagah \\(-x\\) rakhein to wohi do terms ulti tarteeb mein aa jati hain, yani left side nahi badalti. To right side bhi nahi badalni chahiye. \\(x^2\\) nahi badalta lekin \\(x^3\\) ka sign badal jata hai, is liye \\(x^3\\) kisi sachi condition ka hissa nahi ho sakta.\nDhyan dein: \\(f(x) + f(-x)\\) hamesha even function hota hai; yeh baat aise sawalon mein bohat kaam aati hai.",
+              "Property V lagayein\n\\[\\int_{-2}^{2} f(x)\\,dx = \\int_{0}^{2} \\big(f(x) + f(-x)\\big)\\,dx\\]\n\\[= \\int_{0}^{2} x^2\\,dx\\]\nKyun: Property V ne left aur right aadhon ko jor kar \\([0, 2]\\) par \\(f(x) + f(-x)\\) bana diya, aur yeh humein maloom hai.",
+              "Integrate karein\n\\[= \\left[\\dfrac{x^3}{3}\\right]_{0}^{2} = \\dfrac{8}{3}\\]\nKyun: power rule; \\(\\frac{2^3}{3} = \\frac{8}{3}\\).",
+              "Doosra tareeqa (jis par answer key chalti hai)\n\\[I = \\int_{-2}^{2} f(-x)\\,dx\\]\n\\[2I = \\int_{-2}^{2} \\big(f(x) + f(-x)\\big)\\,dx\\]\n\\[= \\int_{-2}^{2} x^2\\,dx = \\dfrac{16}{3},\\quad I = \\dfrac{8}{3}\\]\nKyun: Property IV(ii) (\\(b = 2\\)) se \\(x\\) ki jagah \\(-x\\) rakh sakte hain, to \\(I\\) ki doosri shakal mili; dono jama kiye. Chhapi hui \\(x^2 + x^3\\) ke saath yeh tareeqa bhi \\(\\frac{8}{3}\\) deta hai (kyunke \\(\\int_{-2}^{2} x^3\\,dx = 0\\)), lekin Property V \\(\\int_0^2 (x^2 + x^3)\\,dx = \\frac{20}{3}\\) deti hai. Do sahi tareeqon se do alag jawab aana saboot hai ke chhapa hua data mumkin hi nahi.",
+              "Tasdeeq: ek misaal se\n\\[f(x) = \\dfrac{x^2}{2} + x^3:\\ f(x) + f(-x) = x^2\\]\n\\[\\int_{-2}^{2} \\left(\\dfrac{x^2}{2} + x^3\\right)dx = \\dfrac{8}{3} + 0 \\;\\checkmark\\]\nKyun: yeh function durust condition poori karta hai (\\(x^3\\) wale hisse cancel ho jate hain), aur is ka integral bhi \\(\\frac{8}{3}\\) aata hai: \\(\\frac{x^2}{2}\\) ka integral \\(\\frac{8}{3}\\) aur odd \\(x^3\\) ka 0. Answer key mein bhi \\(\\frac{8}{3}\\) hai."
+            ],
+            "final_answer": "\\(\\frac{8}{3}\\) (durust condition \\(f(x) + f(-x) = x^2\\) ke saath)"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q12-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q12",
+      "title": "Question 12 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 104,
+          "note": "Exercise 3.5, Question 12: show-that with f(a + x) + f(a - x) = 0; book p. 102. No printed answer (show that)."
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-5-Q12",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12",
+            "prompt": "12 If \\(f(a + x) + f(a - x) = 0\\), show that \\(\\int_{0}^{2a} f(x)\\,dx = 0\\).",
+            "explanation": "Yeh saboot ka sawal hai. Condition ka matlab hai ke \\(x = a\\) se barabar faasle par \\(f\\) ki values ulti hain: ek taraf jitni upar, doosri taraf utni neeche.\nDiya kya hai? \\(f(a + x) + f(a - x) = 0\\).\nKya saabit karna hai? \\([0, 2a]\\) par integral 0 hai; \\(a\\) is interval ka beech hai.\nRule kaunsa? Property IV: \\(x\\) ki jagah \\(2a - x\\). Condition se \\(f(2a - x) = -f(x)\\) nikal aata hai, to integral apne hi negative ke barabar ho jata hai.\nPlan: condition ko nayi shakal, Property IV, equation.",
+            "steps": [
+              "Diya gaya: har \\(x\\) ke liye \\(f(a + x) + f(a - x) = 0\\).\nSaabit karna: \\(\\int_{0}^{2a} f(x)\\,dx = 0\\).\nTareeqa: Property IV \\(\\int_0^{2a} f(x)\\,dx = \\int_0^{2a} f(2a - x)\\,dx\\).",
+              "Condition ko nayi shakal dein\n\\[x \\to a - x:\\ f(2a - x) + f(x) = 0\\]\n\\[f(2a - x) = -f(x)\\]\nKyun: condition har \\(x\\) ke liye sach hai, to \\(a - x\\) ke liye bhi. \\(a + (a - x) = 2a - x\\) aur \\(a - (a - x) = x\\). Ab humein woh shakal mil gayi jo Property IV mein chahiye.\nDhyan dein: yeh qadam hi sawal ki chaabi hai; is ke baghair Property IV ka faida nahi uthaya ja sakta.",
+              "Property IV lagayein\n\\[I = \\int_{0}^{2a} f(x)\\,dx = \\int_{0}^{2a} f(2a - x)\\,dx\\]\n\\[= -\\int_{0}^{2a} f(x)\\,dx = -I\\]\nKyun: limits ka jama \\(0 + 2a\\) hai, to \\(x\\) ki jagah \\(2a - x\\) rakh sakte hain; phir \\(f(2a - x) = -f(x)\\) rakha.",
+              "Equation hal karein\n\\[I = -I \\Rightarrow 2I = 0 \\Rightarrow I = 0\\]\nKyun: jo number apne negative ke barabar ho, woh sirf 0 hai.",
+              "Tasdeeq: ek misaal se\n\\[a = 3,\\quad f(x) = (x - 3)^3\\]\n\\[\\int_{0}^{6} (x - 3)^3\\,dx = \\left[\\dfrac{(x - 3)^4}{4}\\right]_{0}^{6}\\]\n\\[= \\dfrac{81}{4} - \\dfrac{81}{4} = 0 \\;\\checkmark\\]\nKyun: \\(f(3 + x) + f(3 - x) = x^3 + (-x)^3 = 0\\), condition poori. Integral \\(\\frac{81}{4} - \\frac{81}{4} = 0\\) aaya."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\int_{0}^{2a} f(x)\\,dx = 0\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

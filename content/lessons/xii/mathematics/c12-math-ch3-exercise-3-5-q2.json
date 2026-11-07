@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 103,
+          "pdf_to": 103,
+          "note": "Exercise 3.5, Question 2 (i)-(iii): piecewise and absolute-value integrals; book p. 101. Key on p. 300 under 'Exercise 3.2'; (iii) is labelled a second '(ii)'."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Evaluate the following definite integral: \\(\\int_{-1}^{1} f(x)\\,dx\\), where \\(f(x) = \\begin{cases} 5 - 3x & \\text{if } x \\leq 0 \\\\ 5 + 3x & \\text{if } x > 0 \\end{cases}\\)",
+            "explanation": "A piecewise function: one formula left of 0, another right of 0.\nSplit the interval at the corner point \\(x = 0\\) (Property III) and integrate each formula on its own piece.\nAdd the two results.",
+            "steps": [
+              "Given: \\(f(x) = 5 - 3x\\) for \\(x \\leq 0\\), \\(f(x) = 5 + 3x\\) for \\(x > 0\\).\nTo find: \\(\\int_{-1}^{1} f(x)\\,dx\\).\nMethod: Property III \\(\\int_a^b f = \\int_a^c f + \\int_c^b f\\) with \\(c = 0\\), where the formula changes.",
+              "Split at \\(x = 0\\)\n\\[\\int_{-1}^{1} f(x)\\,dx = \\int_{-1}^{0} (5 - 3x)\\,dx\\]\n\\[+ \\int_{0}^{1} (5 + 3x)\\,dx\\]\nWhy: on \\([-1, 0]\\) the first rule holds, on \\((0, 1]\\) the second. One point does not change an integral.",
+              "Left piece\n\\[\\left[5x - \\dfrac{3x^2}{2}\\right]_{-1}^{0} = 0 - \\left(-5 - \\dfrac{3}{2}\\right)\\]\n\\[= \\dfrac{13}{2}\\]\nWhy: at \\(x = -1\\): \\(5(-1) - \\frac{3}{2}(1) = -\\frac{13}{2}\\); subtracting a negative adds.",
+              "Right piece\n\\[\\left[5x + \\dfrac{3x^2}{2}\\right]_{0}^{1} = 5 + \\dfrac{3}{2} = \\dfrac{13}{2}\\]\nWhy: power rule; the value at 0 is 0.",
+              "Add\n\\[\\int_{-1}^{1} f(x)\\,dx = \\dfrac{13}{2} + \\dfrac{13}{2} = 13\\]\nWhy: Property III.",
+              "Check\n\\[f(-x) = 5 + 3x = f(x)\\ \\ (x > 0)\\]\nWhy: \\(f\\) is even (its graph is the V-shape \\(5 + 3|x|\\)), so the two halves must be equal, as found. The answer key also prints 13."
+            ],
+            "final_answer": "\\(13\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Evaluate the following definite integral: \\(\\int_{-3}^{5} f(x)\\,dx\\), where \\(f(x) = |x - 4| + |x|\\)",
+            "explanation": "A sum of two absolute values; each changes its formula where its inside is zero.\nCorner points: \\(x = 4\\) and \\(x = 0\\). Split \\([-3, 5]\\) at 0 and 4 and write \\(f\\) without bars on each piece.\nIntegrate the three pieces and add.",
+            "steps": [
+              "Given: \\(f(x) = |x - 4| + |x|\\) on \\([-3, 5]\\).\nTo find: \\(\\int_{-3}^{5} f(x)\\,dx\\).\nMethod: \\(|u| = u\\) when \\(u \\geq 0\\) and \\(|u| = -u\\) when \\(u < 0\\); split at the zeros of \\(x - 4\\) and \\(x\\) (Property III), as in Example 50.",
+              "Write \\(f\\) without absolute values\n\\[[-3, 0]:\\ f = (4 - x) + (-x) = 4 - 2x\\]\n\\[[0, 4]:\\ f = (4 - x) + x = 4\\]\n\\[[4, 5]:\\ f = (x - 4) + x = 2x - 4\\]\nWhy: \\(x - 4 < 0\\) for \\(x < 4\\) and \\(x < 0\\) for \\(x < 0\\).",
+              "First piece\n\\[\\int_{-3}^{0} (4 - 2x)\\,dx = \\Big[4x - x^2\\Big]_{-3}^{0}\\]\n\\[= 0 - (-12 - 9) = 21\\]\nWhy: at \\(x = -3\\): \\(4(-3) - 9 = -21\\).",
+              "Second piece\n\\[\\int_{0}^{4} 4\\,dx = \\Big[4x\\Big]_{0}^{4} = 16\\]\nWhy: constant integrand; area of a rectangle \\(4 \\times 4\\).",
+              "Third piece\n\\[\\int_{4}^{5} (2x - 4)\\,dx = \\Big[x^2 - 4x\\Big]_{4}^{5}\\]\n\\[= (25 - 20) - (16 - 16) = 5\\]\nWhy: power rule.",
+              "Add\n\\[\\int_{-3}^{5} f(x)\\,dx = 21 + 16 + 5 = 42\\]\nWhy: Property III.",
+              "Check by triangles\n\\[\\int_{-3}^{5} |x - 4|\\,dx = \\tfrac{1}{2}(7)(7) + \\tfrac{1}{2}(1)(1) = 25\\]\n\\[\\int_{-3}^{5} |x|\\,dx = \\tfrac{1}{2}(3)(3) + \\tfrac{1}{2}(5)(5) = 17\\]\nWhy: the graph of each absolute value is a V made of two triangles; \\(25 + 17 = 42\\). The key also prints 42."
+            ],
+            "final_answer": "\\(42\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) Evaluate the following definite integral: \\(\\int_{-3}^{4} |4 - x^2|\\,dx\\)",
+            "explanation": "An absolute value of \\(4 - x^2\\), which changes sign at \\(x = \\pm 2\\).\nOn \\([-2, 2]\\) we have \\(4 - x^2 \\geq 0\\); outside it, \\(4 - x^2 < 0\\). Split \\([-3, 4]\\) at \\(-2\\) and \\(2\\).\nIntegrate three pieces and add.",
+            "steps": [
+              "Given: \\(\\int_{-3}^{4} |4 - x^2|\\,dx\\).\nTo find: its value.\nMethod: find where \\(4 - x^2 = 0\\) (\\(x = \\pm 2\\)), remove the bars on each piece, then Property III.",
+              "Remove the bars\n\\[[-3, -2]:\\ |4 - x^2| = x^2 - 4\\]\n\\[[-2, 2]:\\ |4 - x^2| = 4 - x^2\\]\n\\[[2, 4]:\\ |4 - x^2| = x^2 - 4\\]\nWhy: \\(x^2 \\leq 4\\) exactly when \\(-2 \\leq x \\leq 2\\).",
+              "First piece\n\\[\\left[\\dfrac{x^3}{3} - 4x\\right]_{-3}^{-2} = \\left(-\\dfrac{8}{3} + 8\\right) - (-9 + 12)\\]\n\\[= \\dfrac{16}{3} - 3 = \\dfrac{7}{3}\\]\nWhy: \\((-2)^3 = -8\\), \\((-3)^3 = -27\\) and \\(\\frac{-27}{3} = -9\\).",
+              "Middle piece\n\\[\\left[4x - \\dfrac{x^3}{3}\\right]_{-2}^{2} = \\left(8 - \\dfrac{8}{3}\\right) - \\left(-8 + \\dfrac{8}{3}\\right)\\]\n\\[= \\dfrac{16}{3} + \\dfrac{16}{3} = \\dfrac{32}{3}\\]\nWhy: power rule; the integrand is even, so this is twice the value on \\([0, 2]\\).",
+              "Last piece\n\\[\\left[\\dfrac{x^3}{3} - 4x\\right]_{2}^{4} = \\left(\\dfrac{64}{3} - 16\\right) - \\left(\\dfrac{8}{3} - 8\\right)\\]\n\\[= \\dfrac{16}{3} + \\dfrac{16}{3} = \\dfrac{32}{3}\\]\nWhy: power rule.",
+              "Add\n\\[\\dfrac{7}{3} + \\dfrac{32}{3} + \\dfrac{32}{3} = \\dfrac{71}{3}\\]\nWhy: Property III.",
+              "Check\n\\[\\int_{-3}^{4} (4 - x^2)\\,dx = -\\dfrac{7}{3}\\]\n\\[-\\dfrac{7}{3} + 2\\left(\\dfrac{7}{3} + \\dfrac{32}{3}\\right) = \\dfrac{71}{3} \\;\\checkmark\\]\nWhy: without bars the two outer pieces count as negative; adding them back twice turns them positive. The key prints \\(\\frac{71}{3}\\)."
+            ],
+            "final_answer": "\\(\\frac{71}{3}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key labels this answer '(ii)' a second time (it reads 2. (i) 13, (ii) 42, (ii) \\(\\frac{71}{3}\\)). The third answer belongs to part (iii); its value \\(\\frac{71}{3}\\) is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

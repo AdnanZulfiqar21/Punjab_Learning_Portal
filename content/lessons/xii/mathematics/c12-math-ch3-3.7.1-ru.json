@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.7.1-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.7.1",
+      "title": "3.7.1 Area Under the Curve (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 105,
+          "pdf_to": 109,
+          "note": "Book p. 103-107: area under a curve, Notes 1-5, signed and net signed area, Examples 57-59 with Figures 3.1-3.7"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-3.7.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Aaiye aaj ki class shuru karte hain. School mein aap ne square, rectangle, triangle aur circle ka area nikalna seekha tha; in sab ke formulas isliye bane ke in ki sides ya to seedhi hain ya bilkul gol. Lekin agar kisi shakal ki ek side tedhi ho, jaise kisi parabola ka hissa, to koi seedha formula kaam nahi aata. Yahin integration hamari madad karti hai.\nIs lesson mein hum chaar cheezein seekhenge: (1) curve ke neeche ka area, (2) jab curve axis ke neeche chala jaye to kya karna hai, (3) do curves ke darmiyan ka area, aur (4) signed area aur total area ka farq. Har cheez ke baad kitab ki misaal (example) step by step hal karenge."
+          },
+          {
+            "type": "paragraph",
+            "text": "Calculus ka ek kamaal ka nateeja yeh hai: agar \\(f(x) \\ge 0\\) ho to \\(y = f(x)\\) ke graph ke neeche ka area sirf ek definite integral \\(\\int_a^b f(x)\\,dx\\) nikalne se mil jata hai. Yani jo area pehle hum sirf rectangles, triangles jaisi seedhi shaklon ka nikal sakte the, ab tedhi (curved) shaklon ka bhi nikal sakte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ka asool: agar \\(f\\) continuous hai (graph mein koi toot ya chhalang nahi) aur \\([a, b]\\) par \\(f(x) \\ge 0\\) hai, to \\(a\\) se \\(b\\) tak curve ke neeche wale region ka area"
+          },
+          {
+            "type": "equation",
+            "latex": "A = \\int_a^b f(x)\\,dx",
+            "text_alt": "A equals the integral from a to b of f of x d x"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Integral area kyun deta hai? Isay ek misaal se samjhte hain. Socho aap ke paas ek khet hai jis ki teen sides seedhi hain aur upar wali side ek nahar ke kinare ki tarah tedhi hai. Aap khet ko bohat patli patli khari pattiyon mein kaat dete hain. \\(x\\) par wali patti ki chaurai \\(dx\\) hai aur lambai \\(f(x)\\), to us ka area taqreeban \\(f(x)\\,dx\\). Ab \\(x = a\\) se \\(x = b\\) tak saari pattiyan jama karein aur chaurai ko zero ki taraf le jayein: yahi \\(\\int_a^b f(x)\\,dx\\) ka matlab hai.\nKab use karein: jab region upar se curve, neeche se \\(x\\)-axis, aur dono taraf se \\(x = a\\) aur \\(x = b\\) ki khari lines se ghira ho, aur curve axis ke upar (ya axis par) ho."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Notes"
+          },
+          {
+            "type": "paragraph",
+            "text": "1. Agar \\([a, b]\\) par \\(f(x) \\le 0\\) ho (yani curve axis ke neeche ho), to curve \\(y = f(x)\\) aur \\(x\\)-axis ke beech ka area \\(\\left|\\int_a^b f(x)\\,dx\\right|\\) hai, ya isi ko \\(\\int_a^b |f(x)|\\,dx\\) ya \\(-\\int_a^b f(x)\\,dx\\) bhi likh sakte hain. Wajah: axis ke neeche har patti ki height \\(f(x)\\) negative hai, is liye integral negative aata hai; area positive chahiye, is liye absolute value (sirf size, sign nahi) lete hain."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch3-fig-3-7-fig3-1",
+            "alt": "A curve y = f(x) lying below the x-axis between the vertical lines x = a and x = b; the region between the curve and the axis is shaded.",
+            "caption": "Figure 3.1: f(x) ≤ 0 on [a, b] (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "2. Agar \\([a, c]\\) par \\(f(x) \\ge 0\\) aur \\([c, b]\\) par \\(f(x) \\le 0\\) ho, yani curve pehle axis ke upar aur phir \\(x = c\\) par axis kaat kar neeche chala jaye, to \\([a, b]\\) par kul (total) area \\(\\int_a^c f(x)\\,dx + \\left|\\int_c^b f(x)\\,dx\\right|\\) hai. Isi ko \\(\\int_a^c f(x)\\,dx + \\int_c^b |f(x)|\\,dx\\) ya \\(\\int_a^c f(x)\\,dx - \\int_c^b f(x)\\,dx\\) bhi likhte hain. Matlab: upar wala hissa waisa hi, neeche wale hisse ka sirf size."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch3-fig-3-7-fig3-2",
+            "alt": "A curve that is above the x-axis from x = a to x = c (shaded green) and below the axis from x = c to x = b (shaded blue).",
+            "caption": "Figure 3.2: the curve is above the axis on [a, c] and below it on [c, b] (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "3. Agar \\(f(x)\\) interval \\((a, b)\\) ke andar kai jagah sign badle, maslan \\(c_1 < c_2 < \\cdots < c_n\\) par, jo \\(f(x) = 0\\) ke roots hain, to har tukde ka alag integral nikal kar us ki absolute value lein aur sab jama kar dein:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}\\text{Total Area} &= \\int_a^b |f(x)|\\,dx \\\\ &= \\left|\\int_a^{c_1} f(x)\\,dx\\right| + \\left|\\int_{c_1}^{c_2} f(x)\\,dx\\right| \\\\ &\\quad + \\cdots + \\left|\\int_{c_n}^{b} f(x)\\,dx\\right|\\end{aligned}",
+            "text_alt": "Total area equals the integral from a to b of the absolute value of f of x, which equals the sum of the absolute values of the integrals of f over a to c 1, c 1 to c 2, and so on up to c n to b"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Notes 1 se 3 asal mein ek hi baat keh rahe hain: area hamesha positive hota hai, lekin axis ke neeche wale hisse ka integral negative aata hai. Is liye kaam ka tareeqa yeh hai:\n1. \\([a, b]\\) ke andar \\(f(x) = 0\\) ke roots nikalein (jahan curve axis kaat'ta hai).\n2. Har do roots ke beech wale tukde ka integral alag nikalein.\n3. Har tukde ki absolute value le kar sab jama kar dein.\nMisaal ke taur par, bank account mein 500 jama aur 300 nikle to \"net\" 200 hai, lekin kul len-den (total) 800 tha. Integral seedha lagane se \"net\" milta hai; area ke liye humein \"total\" chahiye. Agar root ke aar paar seedha integrate kar diya to positive aur negative hisse ek doosre ko kaat denge aur jawab chhota aa jayega."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "\\(y = \\sin x\\) ko \\([0, 2\\pi]\\) par dekhiye. Yeh curve \\(0\\) se \\(\\pi\\) tak axis ke upar aur \\(\\pi\\) se \\(2\\pi\\) tak neeche hai; root \\(x = \\pi\\) hai.\nSeedha integral:\n\\[\\int_0^{2\\pi} \\sin x\\,dx = 0\\]\nLekin tukde kar ke:\n\\[\\int_0^{\\pi} \\sin x\\,dx = 2\\]\n\\[\\int_{\\pi}^{2\\pi} \\sin x\\,dx = -2\\]\nTotal area \\(= 2 + |-2| = 4\\) square units. Dekha aap ne? Seedha integrate karte to area zero aata, jo bilkul ghalat hai, kyunke graph ke neeche saaf saaf do hisse nazar aa rahe hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "4. Curve \\(x = f(y)\\), \\(y\\)-axis aur horizontal lines \\(y = c\\) aur \\(y = d\\) \\((d > c)\\) ke beech ka area \\(\\int_c^d f(y)\\,dy\\) hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch3-fig-3-7-fig3-3",
+            "alt": "A region between the y-axis and the curve x = f(y), cut off by the horizontal lines y = c and y = d; the region is shaded.",
+            "caption": "Figure 3.3: area between x = f(y) and the y-axis from y = c to y = d (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yahan pattiyan khari nahi, leti hui (horizontal) hain: har patti ki motai \\(dy\\) aur lambai \\(x = f(y)\\). Yeh form tab use karein jab curve ko \\(x\\) in terms of \\(y\\) likhna aasaan ho (jaise \\(x = 9 - y^2\\)) ya jab region \\(y\\)-axis ke saath laga ho. Socho ek almari ke shelves: har shelf ek horizontal patti hai, aur saare shelves ka jama poori almari."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(x = 9 - y^2\\) aur \\(y\\)-axis ke beech ka area kaise nikalenge? Pehle dekhein curve \\(y\\)-axis ko kahan kaat'ta hai: \\(x = 0\\) rakhne se \\(9 - y^2 = 0\\), yani \\(y = -3\\) aur \\(y = 3\\). Yahi \\(c\\) aur \\(d\\) hain. Phir Note 4 se area \\(\\int_{-3}^{3} (9 - y^2)\\,dy\\) hoga. Is ki value khud nikaliye; yeh Exercise 3.6 ka ek sawal bhi hai, wahan jawab mil jayega."
+          },
+          {
+            "type": "paragraph",
+            "text": "5. Do curves ke darmiyan area (area between two curves). Agar \\(f\\) aur \\(g\\) continuous hon aur \\([a, b]\\) par \\(f(x) \\ge g(x)\\) ho (yani \\(f\\) upar aur \\(g\\) neeche), to \\(f\\), \\(g\\), \\(x = a\\) aur \\(x = b\\) se ghire region ka area"
+          },
+          {
+            "type": "equation",
+            "latex": "A = \\int_a^b [f(x) - g(x)]\\,dx",
+            "text_alt": "A equals the integral from a to b of f of x minus g of x, d x"
+          },
+          {
+            "type": "paragraph",
+            "text": "Is formula ke liye \\(f(x)\\) ya \\(g(x)\\) ka positive hona zaroori nahi; dono curves axis ke neeche bhi hon to bhi yeh theek kaam karta hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch3-fig-3-7-fig3-4",
+            "alt": "Two wavy curves, y = f(x) above and y = g(x) below the x-axis, with the region between them from x = a on the left to x = b on the right shaded.",
+            "caption": "Figure 3.4: area between y = f(x) and y = g(x) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ki Figure 3.4 mein left wali khari line par \\(x = b\\) aur right wali par \\(x = a\\) likha hai. Region \\(x = a\\) se \\(x = b\\) tak hai aur \\(a < b\\), is liye left line \\(x = a\\) aur right line \\(x = b\\) honi chahiye, jaisa upar wali figure mein dikhaya gaya hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Note 5 axis ke neeche bhi kyun chalta hai? Khari patti ki lambai do curves ke darmiyan ka faasla hai: (upar wali \\(y\\)) \\(-\\) (neeche wali \\(y\\)). Agar dono curves ko ek jitna upar ya neeche khiska dein to yeh faasla nahi badalta, jaise kisi kamre ki unchai wohi rehti hai chahe woh ground floor par ho ya basement mein. Is liye \\(f\\) aur \\(g\\) ke apne signs se farq nahi parta; sirf yeh zaroori hai ke \\(f\\) upar wala curve ho."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(y = x^2\\) aur \\(y = x\\) ke beech ka area kaise nikalenge? Pehle intersection: \\(x^2 = x\\) se \\(x = 0, 1\\). Beech mein \\(x = \\frac{1}{2}\\) par \\(x = 0.5\\) aur \\(x^2 = 0.25\\), to line upar hai. Area \\(\\int_0^1 (x - x^2)\\,dx = \\frac{1}{2} - \\frac{1}{3} = \\frac{1}{6}\\). (Yeh hamari taraf se misaal hai.)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Signed Area and Net Signed Area"
+          },
+          {
+            "type": "paragraph",
+            "text": "Definite integral \\(\\int_a^b f(x)\\,dx\\) curve aur \\(x\\)-axis ke beech ka area to deta hai, lekin is ka matlab is baat par depend karta hai ke curve axis ko kaat'ta hai ya nahi."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Agar poora curve \\(x\\)-axis ke upar ho, to integral seedha signed area deta hai, aur woh positive hota hai.",
+              "Agar poora curve \\(x\\)-axis ke neeche ho, to bhi integral signed area deta hai, lekin woh negative hota hai.",
+              "Agar curve ka kuch hissa upar aur kuch neeche ho, aur hum in areas ko un ke signs ke saath jama karein (upar wala positive, neeche wala negative), to jo milta hai use net signed area kehte hain."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Yani:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Signed area: jab curve poora upar ya poora neeche ho.",
+              "Net signed area: jab curve axis kaat'ta ho aur positive aur negative hisse ek doosre ko kaat kar jo bache woh nateeja ho."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Dono soorton mein formula ek hi hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Signed Area (or Net Signed Area)} = \\int_a^b f(x)\\,dx",
+            "text_alt": "Signed area, or net signed area, equals the integral from a to b of f of x d x"
+          },
+          {
+            "type": "paragraph",
+            "text": "Nateeja yeh ho sakta hai:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Positive (upar wala area zyada ho ya poora curve upar ho),",
+              "Negative (neeche wala area zyada ho ya poora curve neeche ho), ya Zero (upar aur neeche ka area barabar ho)."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "\\(f(x) = x\\) ko \\([-1, 1]\\) par dekhiye:\n\\[\\int_{-1}^{1} x\\,dx = 0\\]\nYani net signed area zero hai, kyunke upar wala triangle neeche wale triangle ko kaat deta hai. Lekin asal (total, physical) area\n\\[\\int_{-1}^{1} |x|\\,dx = \\dfrac{1}{2} + \\dfrac{1}{2} = 1\\]\nhai. Sawal mein sirf \"area\" likha ho to total area chahiye; \"signed area\" likha ho to seedha integral."
+          },
+          {
+            "type": "example",
+            "title": "Example 57",
+            "problem": "Find the area bounded by the parabola \\(y = x^2 - 5x + 4\\) and the \\(x\\)-axis.",
+            "steps": [
+              "Diya gaya: parabola \\(y = x^2 - 5x + 4\\) aur \\(x\\)-axis.\nMaloom karna: in dono ke beech band (enclosed) region ka area.\nTareeqa: pehle dekhenge parabola \\(x\\)-axis ko kahan kaat'ta hai; yahi points hamari limits banenge. Phir dekhenge ke beech mein curve axis ke upar hai ya neeche. Agar neeche hai to Note 1 ke mutabiq absolute value lenge, warna jawab negative aa jayega.",
+              "Step 1: \\(x\\)-intercepts nikalein\n\\(y = 0\\) rakhte hain:\n\\[x^2 - 5x + 4 = 0\\]\n\\[(x - 1)(x - 4) = 0\\]\n\\[x = 1 \\text{ ya } x = 4\\]\nKyun: \"Curve aur \\(x\\)-axis se ghira hua region\" wahan se shuru hota hai jahan curve axis ko chhoota hai aur wahin khatam hota hai. Is liye yeh do roots hi integral ki limits hain. Factorise karne ke liye aise do numbers dhoonde jin ka product 4 aur jama \\(-5\\) ho: \\(-1\\) aur \\(-4\\).",
+              "Step 2: Curve axis ke upar hai ya neeche?\nLeading coefficient \\(+1\\) hai, is liye parabola upar ki taraf khulta hai (U shape). Beech ka koi point, maslan \\(x = 2\\), test karte hain:\n\\[y(2) = 4 - 10 + 4 = -2 < 0\\]\nYani \\(x = 1\\) se \\(x = 4\\) tak curve \\(x\\)-axis ke neeche hai (Figure 3.5 dekhiye).\nKyun: U shape wala parabola apne do roots ke darmiyan hamesha negative hota hai, bilkul jaise ek pyala (bowl) jis ka nichla hissa zameen ke neeche dhansa ho. Note 1 kehta hai ke aise area ke liye \\(|y|\\) lena hai.\nDhyan dein: yeh check chhod dena sab se aam ghalti hai; baghair check ke seedha integrate karein to \\(-\\frac{9}{2}\\) aata hai aur student wahi likh deta hai.",
+              "Step 3: Integral banayein\n\\[A = \\int_1^4 |y|\\,dx\\]\n\\[= \\int_1^4 -(x^2 - 5x + 4)\\,dx\\]\n\\[= \\int_1^4 (-x^2 + 5x - 4)\\,dx\\]\nKyun: \\([1, 4]\\) par \\(y \\le 0\\) hai, is liye \\(|y| = -y\\). Bahar wala minus har term ka sign badal deta hai, aur har patli patti ki height positive ban jati hai.",
+              "Step 4: Integrate karein\n\\[= \\left[-\\dfrac{x^3}{3} + \\dfrac{5x^2}{2} - 4x\\right]_1^4\\]\nKyun: har term par power rule \\(\\int x^n dx = \\frac{x^{n+1}}{n+1}\\) lagaya: \\(x^2\\) se \\(\\frac{x^3}{3}\\), \\(x\\) se \\(\\frac{x^2}{2}\\), aur constant 4 se \\(4x\\).",
+              "Step 5: Limits lagayein\n\\(x = 4\\) par:\n\\[-\\dfrac{64}{3} + \\dfrac{80}{2} - 16 = \\dfrac{8}{3}\\]\n\\(x = 1\\) par:\n\\[-\\dfrac{1}{3} + \\dfrac{5}{2} - 4 = -\\dfrac{11}{6}\\]\n\\[A = \\dfrac{8}{3} - \\left(-\\dfrac{11}{6}\\right)\\]\n\\[= \\dfrac{16 + 11}{6} = \\dfrac{27}{6} = \\dfrac{9}{2}\\]\nKyun: Fundamental Theorem ke mutabiq upper limit wali value mein se lower limit wali value minus karte hain. \\(\\frac{8}{3}\\) ko \\(\\frac{16}{6}\\) banaya taake denominator ek ho jaye.\nDhyan dein: bracket zaroor lagayein; negative ko minus karna asal mein jama karna hai.",
+              "Tasdeeq:\nAbsolute value ke baghair \\(\\int_1^4 (x^2 - 5x + 4)\\,dx = -\\frac{9}{2}\\) aata hai: negative, kyunke region axis ke neeche hai, aur size bilkul wohi. Is se pata chalta hai ke hamara jawab sahi hai.\nHamari taraf se ek shortcut (kitab mein nahi): parabola \\(y = a(x - \\alpha)(x - \\beta)\\) aur axis ke beech ka area \\(\\frac{|a|}{6}(\\beta - \\alpha)^3\\) hota hai. Yahan \\(\\frac{1}{6}(4 - 1)^3 = \\frac{27}{6} = \\frac{9}{2}\\). Exam mein jawab check karne ke liye bohat kaam ka hai."
+            ],
+            "answer": "Area \\(\\frac{9}{2}\\) square units hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch3-fig-3-7-fig3-5",
+            "alt": "The parabola y = x squared minus 5x plus 4 crossing the x-axis at (1, 0) and (4, 0), with vertex (2.5, minus 2.25); the region between the curve and the axis is shaded below the axis.",
+            "caption": "Figure 3.5: y = x² − 5x + 4 and the x-axis (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Agar Example 57 mein parabola \\(y = -x^2 + 5x - 4\\) hota (yani ulta), to area kitna hota? Socho: yeh wohi parabola hai jo axis ke gird palat diya gaya, ab region axis ke upar hai. Shakal aur size bilkul wohi rehte hain, is liye area phir bhi \\(\\frac{9}{2}\\) square units hi hoga; farq sirf itna hai ke ab absolute value lene ki zaroorat nahi parti."
+          },
+          {
+            "type": "example",
+            "title": "Example 58",
+            "problem": "Find the area bounded by the curves \\(y = 13 - x^2\\) and \\(y = 2x + 5\\).",
+            "steps": [
+              "Diya gaya: parabola \\(y = 13 - x^2\\) (ulta U, kyunke \\(x^2\\) ke saath minus hai) aur seedhi line \\(y = 2x + 5\\).\nMaloom karna: in dono ke beech band region ka area.\nTareeqa: Note 5 yani do curves ke darmiyan area. Pehle dono ke milne wale points (intersection) nikalenge, yahi limits hain. Phir dekhenge kaunsa curve upar hai, aur (upar wala \\(-\\) neeche wala) ko integrate karenge.",
+              "Step 1: Intersection points\nDono ki \\(y\\) barabar rakhte hain:\n\\[13 - x^2 = 2x + 5\\]\n\\[8 - x^2 - 2x = 0\\]\n\\[x^2 + 2x - 8 = 0\\]\n\\[(x - 2)(x + 4) = 0\\]\n\\[x = -4 \\text{ ya } x = 2\\]\nPoints: \\(y(2) = 9\\), \\(y(-4) = -3\\), yani \\((2, 9)\\) aur \\((-4, -3)\\).\nKyun: jahan do curves milte hain wahan dono ki \\(y\\) ek hoti hai. Band region inhi do points ke beech hai. Kitab ne factorise karne ke liye \\(2x = 4x - 2x\\) likh kar \\(x(x + 4) - 2(x + 4)\\) banaya.\nDhyan dein: pura equation \\(-1\\) se multiply karte waqt har term ka sign badalna hai.",
+              "Step 2: Kaunsa curve upar hai?\n\\([-4, 2]\\) ke andar se \\(x = 0\\) test karte hain:\n\\[13 - 0^2 = 13, \\quad 2(0) + 5 = 5\\]\n13 bara hai, is liye \\(y = 13 - x^2\\) upar hai aur line neeche.\nKyun: do continuous curves apne milne ke points ke beech jagah nahi badal sakte; agar badalte to beech mein ek aur intersection hota. Is liye ek test point kaafi hai.",
+              "Step 3: Integral banayein\n\\[A = \\int_{-4}^{2} [\\text{upper} - \\text{lower}]\\,dx\\]\n\\[= \\int_{-4}^{2} [(13 - x^2) - (2x + 5)]\\,dx\\]\n\\[= \\int_{-4}^{2} (8 - x^2 - 2x)\\,dx\\]\nKyun: har patli khari patti ki lambai = upar wale curve ki \\(y\\) \\(-\\) neeche wale curve ki \\(y\\). Yeh formula tab bhi theek hai jab region ka kuch hissa \\(x\\)-axis ke neeche ho (yahan \\(x = -4\\) ke paas region neeche jata hai).",
+              "Step 4: Integrate karein\n\\[= \\left[8x - \\dfrac{x^3}{3} - x^2\\right]_{-4}^{2}\\]\nKyun: har term par power rule.",
+              "Step 5: Limits lagayein\n\\(x = 2\\) par:\n\\[16 - \\dfrac{8}{3} - 4 = \\dfrac{28}{3}\\]\n\\(x = -4\\) par:\n\\[-32 + \\dfrac{64}{3} - 16 = -\\dfrac{80}{3}\\]\n\\[A = \\dfrac{28}{3} + \\dfrac{80}{3} = \\dfrac{108}{3} = 36\\]\nKitab yahi numbers is tarah jodti hai: \\(60 - \\left(\\frac{8}{3} + \\frac{64}{3}\\right) = 60 - 24 = 36\\). Dono ka jawab ek hai.\nKyun: upper limit ki value mein se lower limit ki value minus.\nDhyan dein: \\((-4)^3 = -64\\), to \\(-\\frac{(-4)^3}{3} = +\\frac{64}{3}\\) banta hai; negative limits par sign ki ghalti bohat aam hai.",
+              "Tasdeeq:\nHamari taraf se shortcut: patti ki height \\(8 - 2x - x^2 = -(x - 2)(x + 4)\\) ek parabola hai jis ka \\(|a| = 1\\) hai. Is liye area \\(\\frac{1}{6}(2 - (-4))^3 = \\frac{216}{6} = 36\\). Jawab mil gaya."
+            ],
+            "answer": "Dono curves ke darmiyan area 36 square units hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch3-fig-3-7-fig3-6",
+            "alt": "The downward parabola y = 13 minus x squared and the line y = 2x + 5 meeting at (minus 4, minus 3) and (2, 9); the region between them is shaded.",
+            "caption": "Figure 3.6: y = 13 − x² and y = 2x + 5 (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "example",
+            "title": "Example 59",
+            "problem": "Find the area of the region bounded by the parabolas \\(y = 4 - x^2\\) and \\(y = x^2 - 2x\\).",
+            "steps": [
+              "Diya gaya: do parabolas, \\(y = 4 - x^2\\) (neeche ko khulta, ulta U) aur \\(y = x^2 - 2x\\) (upar ko khulta, U).\nMaloom karna: dono ke beech band region ka area.\nTareeqa: do curves ke darmiyan area (Note 5): intersection points, upar wala curve kaunsa, phir \\(\\int (f - g)\\,dx\\).",
+              "Step 1: Intersection points\n\\[4 - x^2 = x^2 - 2x\\]\n\\[-2x^2 + 2x + 4 = 0\\]\n\\(-2\\) se divide karein:\n\\[x^2 - x - 2 = 0\\]\n\\[(x + 1)(x - 2) = 0\\]\n\\[x = -1 \\text{ ya } x = 2\\]\nPoints: \\(y(-1) = 4 - 1 = 3\\) aur \\(y(2) = 4 - 4 = 0\\), yani \\((-1, 3)\\) aur \\((2, 0)\\).\nKyun: dono parabolas inhi do points par milte hain aur region ko band karte hain. \\(-2\\) se divide karne se numbers chhote ho gaye aur factorise karna aasaan ho gaya.",
+              "Step 2: Upar wala curve kaunsa hai?\n\\(x = 0\\) lete hain jo \\([-1, 2]\\) ke andar hai:\n\\[y = 4 - 0^2 = 4, \\quad y = 0^2 - 2(0) = 0\\]\n4 bara hai, to \\(f(x) = 4 - x^2\\) upar wala curve aur \\(g(x) = x^2 - 2x\\) neeche wala curve hai.\nKyun: integral mein hamesha (upar \\(-\\) neeche) likhna hai taake har patti ki height positive ho.",
+              "Step 3: Integral banayein aur integrate karein\n\\[A = \\int_{-1}^{2} [f(x) - g(x)]\\,dx\\]\n\\[= \\int_{-1}^{2} [(4 - x^2) - (x^2 - 2x)]\\,dx\\]\n\\[= \\int_{-1}^{2} (4 - 2x^2 + 2x)\\,dx\\]\n\\[= \\left[4x - \\dfrac{2}{3}x^3 + x^2\\right]_{-1}^{2}\\]\nKyun: bracket khulte waqt \\(-(x^2 - 2x) = -x^2 + 2x\\) hota hai; isi liye \\(-x^2 - x^2 = -2x^2\\) aur \\(+2x\\) aaya.\nDhyan dein: bohat se students \\(-(x^2 - 2x)\\) ko \\(-x^2 - 2x\\) likh dete hain, aur poora jawab ghalat ho jata hai.",
+              "Step 4: Limits lagayein\n\\(x = 2\\) par:\n\\[8 - \\dfrac{16}{3} + 4 = \\dfrac{20}{3}\\]\n\\(x = -1\\) par:\n\\[-4 + \\dfrac{2}{3} + 1 = -\\dfrac{7}{3}\\]\n\\[A = \\dfrac{20}{3} - \\left(-\\dfrac{7}{3}\\right) = \\dfrac{27}{3} = 9\\]\nKyun: \\(-\\frac{2}{3}(-1)^3 = -\\frac{2}{3}(-1) = +\\frac{2}{3}\\); negative ka cube negative hi rehta hai.",
+              "Tasdeeq:\nHamara shortcut: \\(f - g = -2(x + 1)(x - 2)\\), yahan \\(|a| = 2\\), to area \\(\\frac{2}{6}(2 - (-1))^3 = \\frac{2}{6}(27) = 9\\). Bilkul wohi jawab."
+            ],
+            "answer": "Area 9 square units hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch3-fig-3-7-fig3-7",
+            "alt": "The parabolas y = 4 minus x squared and y = x squared minus 2x meeting at (minus 1, 3) and (2, 0); the region between them is shaded.",
+            "caption": "Figure 3.7: y = 4 − x² and y = x² − 2x (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Example 59 mein agar aap ghalti se \\(\\int_{-1}^{2} [g(x) - f(x)]\\,dx\\) likh dein to kya aayega? Jawab \\(-9\\) aayega. Size wohi, sirf sign ulta. Is liye negative jawab aaye to samajh jayein ke upar aur neeche wale curves ulat gaye hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(y = f(x) \\ge 0\\) ke neeche \\(a\\) se \\(b\\) tak area: \\(A = \\int_a^b f(x)\\,dx\\).\n2. Axis ke neeche ho to absolute value lein: \\(A = \\left|\\int_a^b f(x)\\,dx\\right|\\).\n3. Curve axis kaate to roots par tukde karein aur har tukde ki absolute value jama karein.\n4. Do curves ke beech: \\(A = \\int_a^b [\\text{upper} - \\text{lower}]\\,dx\\); limits intersection points se.\n5. \\(y\\)-axis ke saath wale region ke liye horizontal pattiyan: \\(A = \\int_c^d x\\,dy\\).\n6. Signed area = seedha integral; positive, negative ya zero ho sakta hai. Total area kabhi negative nahi."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Root ke aar paar seedha integrate kar dena: \\(\\int_{-3}^{3} (x^2 - 4)\\,dx = -6\\) net signed area hai, total area \\(\\frac{46}{3}\\) hai.\n2. (neeche \\(-\\) upar) likh kar negative area le aana; hamesha ek point test karein ke kaunsa curve upar hai.\n3. Bracket ghalat kholna: \\(-(x^2 - 2x) = -x^2 + 2x\\) hai, \\(-x^2 - 2x\\) nahi.\n4. Negative limits par sign ki ghalti, jaise \\((-4)^3 = -64\\) hai, \\(+64\\) nahi."
+          }
+        ]
+      }
+    }
+  ]
+}

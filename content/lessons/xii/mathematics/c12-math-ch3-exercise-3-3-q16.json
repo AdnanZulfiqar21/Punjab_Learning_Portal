@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q16",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q16",
+      "title": "Question 16",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 16: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "16",
+            "prompt": "16. Evaluate \\(\\int \\sqrt{x}\\sin\\sqrt{x}\\,dx\\).",
+            "explanation": "Substitute \\(t = \\sqrt{x}\\) (\\(dx = 2t\\,dt\\)) to get \\(2\\int t^2\\sin t\\,dt\\).\nPlan: integrate by parts twice with the power of \\(t\\) as the first function.",
+            "steps": [
+              "Given: \\(\\int \\sqrt{x}\\sin\\sqrt{x}\\,dx\\), \\(x > 0\\).\nTo find: the indefinite integral.\nMethod: substitute \\(t = \\sqrt{x}\\), \\(dx = 2t\\,dt\\); then integrate \\(2\\int t^2\\sin t\\,dt\\) by parts twice.",
+              "Substitute\n\\[x = t^2,\\ dx = 2t\\,dt\\]\n\\[\\int t\\sin t\\cdot 2t\\,dt = 2\\int t^2\\sin t\\,dt\\]\nWhy: \\(\\sqrt{x} = t\\) and \\(dx = 2t\\,dt\\).",
+              "First integration by parts\n\\[\\int t^2\\sin t\\,dt = -t^2\\cos t + \\int 2t\\cos t\\,dt\\]\nWhy: \\(\\int \\sin t\\,dt = -\\cos t\\), \\(\\frac{d}{dt}t^2 = 2t\\).",
+              "Second integration by parts\n\\[\\int 2t\\cos t\\,dt = 2t\\sin t - \\int 2\\sin t\\,dt\\]\n\\[= 2t\\sin t + 2\\cos t\\]\nWhy: \\(2t\\) first, \\(\\cos t\\) second; \\(\\int \\sin t\\,dt = -\\cos t\\).",
+              "Combine and multiply by 2\n\\[2\\int t^2\\sin t\\,dt = -2t^2\\cos t + 4t\\sin t + 4\\cos t + c\\]\n\\[= -2x\\cos\\sqrt{x} + 4\\sqrt{x}\\sin\\sqrt{x} + 4\\cos\\sqrt{x} + c\\]\nWhy: \\(t = \\sqrt{x}\\), \\(t^2 = x\\).",
+              "Check\n\\[\\dfrac{d}{dt}(-2t^2\\cos t + 4t\\sin t + 4\\cos t)\\]\n\\[= -4t\\cos t + 2t^2\\sin t + 4\\sin t + 4t\\cos t - 4\\sin t\\]\n\\[= 2t^2\\sin t\\]\nWhy: and \\(2t^2\\sin t\\,dt = \\sqrt{x}\\sin\\sqrt{x}\\cdot 2t\\,dt = \\sqrt{x}\\sin\\sqrt{x}\\,dx\\)."
+            ],
+            "final_answer": "\\(-2x\\cos\\sqrt{x} + 4\\sqrt{x}\\sin\\sqrt{x} + 4\\cos\\sqrt{x} + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

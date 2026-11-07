@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q3-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 103,
+          "pdf_to": 103,
+          "note": "Exercise 3.5, Question 3: integral of g(x) = f(x) + f(4 - x) for a piecewise f; book p. 101. Key on p. 300 under 'Exercise 3.2'."
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-5-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3 Let \\(f(x) = \\begin{cases} x^2 & \\text{if } 0 \\leq x \\leq 2 \\\\ 2x + 1 & \\text{if } 2 < x \\leq 4 \\end{cases}\\). Here \\(g(x)\\) is defined as: \\(g(x) = f(x) + f(4 - x)\\). Compute: \\(\\int_{0}^{4} g(x)\\,dx\\).",
+            "explanation": "Is sawal mein \\(g(x) = f(x) + f(4 - x)\\) ka integral \\([0, 4]\\) par chahiye, aur \\(f\\) khud piecewise hai.\nDiya kya hai? \\(f\\) ke do formulas (\\(x = 2\\) par badalte hain) aur \\(g\\) ki tareef.\nFind kya karna hai? \\(\\int_0^4 g(x)\\,dx\\).\nRule kaunsa? \\(f(4 - x)\\) ka formula likhna mushkil hai, lekin Property IV batati hai ke \\(\\int_0^4 f(4 - x)\\,dx = \\int_0^4 f(x)\\,dx\\). Is liye jawab seedha \\(2\\int_0^4 f(x)\\,dx\\) hai.\nPlan: Property IV, phir \\(x = 2\\) par torna, phir double.",
+            "steps": [
+              "Diya gaya: \\([0, 2]\\) par \\(f(x) = x^2\\), \\((2, 4]\\) par \\(f(x) = 2x + 1\\); \\(g(x) = f(x) + f(4 - x)\\).\nMaloom karna: \\(\\int_{0}^{4} g(x)\\,dx\\).\nTareeqa: Property IX (jama ka integral = integrals ka jama), Property IV (\\(a = 0\\), \\(b = 4\\)), phir Property III \\(x = 2\\) par. Yeh tareeqa \\(f(4 - x)\\) ka formula banane ki mehnat bacha leta hai.",
+              "Property IV lagayein\n\\[\\int_{0}^{4} g(x)\\,dx = \\int_{0}^{4} f(x)\\,dx + \\int_{0}^{4} f(4 - x)\\,dx\\]\n\\[= 2\\int_{0}^{4} f(x)\\,dx\\]\nKyun: \\(\\int_0^b f(b - x)\\,dx = \\int_0^b f(x)\\,dx\\); yahan \\(b = 4\\). Matlab: \\(f(4 - x)\\) ka graph \\(f\\) ka aaina (mirror image) hai \\(x = 2\\) ke ird gird, aur aaina mein area nahi badalta.",
+              "\\(\\int_0^4 f\\) ko \\(x = 2\\) par torein\n\\[\\int_{0}^{4} f(x)\\,dx = \\int_{0}^{2} x^2\\,dx + \\int_{2}^{4} (2x + 1)\\,dx\\]\nKyun: Property III; \\(f\\) ka formula 2 par badalta hai, to har hisse par us ka apna formula.",
+              "Hisse hal karein\n\\[\\int_{0}^{2} x^2\\,dx = \\left[\\dfrac{x^3}{3}\\right]_{0}^{2} = \\dfrac{8}{3}\\]\n\\[\\int_{2}^{4} (2x + 1)\\,dx = \\Big[x^2 + x\\Big]_{2}^{4} = 20 - 6 = 14\\]\n\\[\\int_{0}^{4} f(x)\\,dx = \\dfrac{8}{3} + 14 = \\dfrac{50}{3}\\]\nKyun: power rule; \\(x = 4\\) par \\(16 + 4 = 20\\), \\(x = 2\\) par \\(4 + 2 = 6\\). \\(14 = \\frac{42}{3}\\), to \\(\\frac{8 + 42}{3} = \\frac{50}{3}\\).",
+              "Double karein\n\\[\\int_{0}^{4} g(x)\\,dx = 2 \\cdot \\dfrac{50}{3} = \\dfrac{100}{3}\\]\nKyun: Property IV wale qadam se.\nDhyan dein: aakhir mein 2 se multiply bhool jana aam ghalti hai; \\(\\frac{50}{3}\\) sirf \\(f\\) ka integral hai, \\(g\\) ka nahi.",
+              "Tasdeeq: seedha \\([0, 2]\\) par\n\\[0 \\leq x < 2:\\ g(x) = x^2 + 2(4 - x) + 1\\]\n\\[= x^2 - 2x + 9\\]\n\\[\\int_{0}^{2} (x^2 - 2x + 9)\\,dx = \\dfrac{8}{3} - 4 + 18 = \\dfrac{50}{3}\\]\nKyun: \\(x < 2\\) ho to \\(4 - x > 2\\), is liye \\(f(4 - x)\\) mein doosra formula \\(2(4 - x) + 1\\) lagta hai. \\(g(4 - x) = g(x)\\) hai, to \\([2, 4]\\) wala aadha bhi \\(\\frac{50}{3}\\) dega; kul \\(\\frac{100}{3}\\). Answer key mein bhi \\(\\frac{100}{3}\\) hai."
+            ],
+            "final_answer": "\\(\\frac{100}{3}\\) (taqreeban 33.33)"
+          }
+        ]
+      }
+    }
+  ]
+}

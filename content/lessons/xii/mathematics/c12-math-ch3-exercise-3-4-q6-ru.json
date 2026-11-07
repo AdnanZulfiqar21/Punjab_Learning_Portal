@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q6-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q6",
+      "title": "Question 6 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 6: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-4-Q6",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6 Evaluate \\(\\int \\frac{6x^2 - 22x + 18}{x(x - 1)(x - 2)(x - 3)}\\,dx\\).",
+            "explanation": "Is sawal mein denominator mein chaar linear factors hain: \\(x\\), \\(x - 1\\), \\(x - 2\\), \\(x - 3\\), sab alag alag. Yani yeh bhi Case-I hai, bas factors zyada hain.\nUpar degree 2 aur neeche degree 4, to fraction proper hai.\nChaar factors hain to chaar constants \\(A, B, C, D\\) chahiye.\nPlan: ek ek kar ke \\(x = 0, 1, 2, 3\\) rakhenge; har value par sirf ek term bachega aur ek constant mil jayega.",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{6x^2 - 22x + 18}{x(x - 1)(x - 2)(x - 3)}\\,dx\\).\nMaloom karna: yeh integral.\nTareeqa: partial fractions, Case-I, chaar linear factors ke saath. Kaam lamba lagta hai lekin har qadam bilkul pichle sawalon jaisa hai.",
+              "Partial fractions likhein\n\\[\\dfrac{6x^2 - 22x + 18}{x(x - 1)(x - 2)(x - 3)}\\]\n\\[= \\dfrac{A}{x} + \\dfrac{B}{x - 1} + \\dfrac{C}{x - 2} + \\dfrac{D}{x - 3}\\]\nKyun: Har alag linear factor ke neeche ek constant. \\(x\\) bhi ek linear factor hai (yani \\(x - 0\\)).",
+              "Fractions khatam karein\n\\[6x^2 - 22x + 18\\]\n\\[= A(x - 1)(x - 2)(x - 3) + Bx(x - 2)(x - 3)\\]\n\\[+\\, Cx(x - 1)(x - 3) + Dx(x - 1)(x - 2) \\quad (1)\\]\nKyun: Poore denominator se multiply kiya. Har constant ke saath woh teen factors bachte hain jo us ke apne neeche nahi the. Yaad rakhne ka tareeqa: \"apna factor gaya, baaqi teen reh gaye\".",
+              "(1) mein \\(x = 0\\) aur \\(x = 1\\) rakhein\n\\[x = 0:\\ 18 = A(-1)(-2)(-3) = -6A,\\ A = -3\\]\n\\[x = 1:\\ 2 = B(1)(-1)(-2) = 2B,\\ B = 1\\]\nKyun: \\(x = 0\\) par \\(B, C, D\\) teeno ke saath \\(x\\) hai, sab zero. \\(x = 1\\) par left side \\(6 - 22 + 18 = 2\\), aur sirf \\(B\\) wala term bacha.\nDhyan dein: Teen negative numbers ka product negative hota hai: \\((-1)(-2)(-3) = -6\\).",
+              "(1) mein \\(x = 2\\) aur \\(x = 3\\) rakhein\n\\[x = 2:\\ -2 = C(2)(1)(-1) = -2C,\\ C = 1\\]\n\\[x = 3:\\ 6 = D(3)(2)(1) = 6D,\\ D = 1\\]\nKyun: \\(x = 2\\) par left side \\(24 - 44 + 18 = -2\\); \\(x = 3\\) par \\(54 - 66 + 18 = 6\\). Har dafa sirf ek term bacha.",
+              "Integral lein\n\\[\\int \\left(-\\dfrac{3}{x} + \\dfrac{1}{x - 1} + \\dfrac{1}{x - 2} + \\dfrac{1}{x - 3}\\right)dx\\]\n\\[= -3\\ln|x| + \\ln|x - 1|\\]\n\\[+ \\ln|x - 2| + \\ln|x - 3| + c\\]\nKyun: Har term \\(\\frac{k}{x - a}\\) jaisa hai jis ka integral \\(k\\ln|x - a|\\) hai. Chaar terms, chaar logs.",
+              "Tasdeeq\n\\[A + B + C + D = -3 + 1 + 1 + 1 = 0\\]\nKyun: (1) ke right side ko kholein to \\(x^3\\) ka coefficient \\(A + B + C + D\\) banta hai, aur left side par \\(x^3\\) hai hi nahi (coefficient 0). Dono barabar nikle, yeh ek tez aur achhi tasdeeq hai ke constants sahi hain."
+            ],
+            "final_answer": "\\(-3\\ln|x| + \\ln|x - 1| + \\ln|x - 2| + \\ln|x - 3| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke aakhir mein answers (page 301) mein Exercise 3.4 ke jawab ghalat heading \"Exercise 3.6\" ke neeche chhape hain. Is sawal ka jawab us block ka item (vi) hai: \\(-3\\ln|x| + \\ln|x - 1| + \\ln|x - 2| + \\ln|x - 3| + c\\). Yeh jawab sahi hai. Jis block par \"Exercise 3.4\" likha hai (page 301) woh kisi aur exercise ke jawab hain, is liye wahan se milane ki koshish na karein."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-2-Q1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-2-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 86,
+          "pdf_to": 86,
+          "note": "Exercise 3.2 Q1 (i)-(xiii), by suitable substitution; answers in key blocks 'EXERCISE 3.1' 4 and 'Exercise 3.3' 2"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Evaluate the following integral (by using suitable substitution): \\(\\int x(7x^{2}+8)^{9}\\,dx\\)",
+            "explanation": "A bracket raised to a power, multiplied by \\(x\\).\nThe derivative of the inside, \\(7x^{2}+8\\), is \\(14x\\): the \\(x\\) outside is that derivative apart from the constant 14.\nPlan: put \\(u = 7x^{2}+8\\), use the power rule in \\(u\\), then put \\(x\\) back.",
+            "steps": [
+              "Given: \\(\\int x(7x^{2}+8)^{9}\\,dx\\)\nTo find: the indefinite integral.\nMethod: substitution. When the derivative of an inner expression sits outside as a factor, call the inner expression \\(u\\); the integral becomes \\(\\int u^{n}\\,du\\).",
+              "Choose \\(u\\) and find \\(du\\)\n\\[u = 7x^{2}+8\\]\n\\[du = 14x\\,dx\\]\n\\[x\\,dx = \\dfrac{du}{14}\\]\nWhy: the factor \\(x\\,dx\\) in the integral must be replaced completely by something in \\(du\\).",
+              "Rewrite the integral in \\(u\\)\n\\[\\int (7x^{2}+8)^{9}\\,x\\,dx\\]\n\\[= \\int u^{9}\\cdot\\dfrac{du}{14}\\]\n\\[= \\dfrac{1}{14}\\int u^{9}\\,du\\]\nWhy: a constant factor can be taken outside the integral sign.",
+              "Power rule\n\\[= \\dfrac{1}{14}\\cdot\\dfrac{u^{10}}{10} + c\\]\n\\[= \\dfrac{1}{140}u^{10} + c\\]\nWhy: \\(\\int u^{n}\\,du = \\frac{u^{n+1}}{n+1} + c\\) for \\(n \\ne -1\\); here \\(n = 9\\).",
+              "Put \\(x\\) back\n\\[= \\dfrac{1}{140}(7x^{2}+8)^{10} + c\\]\nWhy: the question is in \\(x\\), so the answer must be in \\(x\\).",
+              "Check: differentiate the answer\n\\[\\dfrac{d}{dx}\\Big[\\tfrac{1}{140}(7x^{2}+8)^{10}\\Big]\\]\n\\[= \\dfrac{10\\cdot 14x}{140}(7x^{2}+8)^{9}\\]\n\\[= x(7x^{2}+8)^{9}\\]\nWhy: the chain rule gives back the integrand, so the answer is right."
+            ],
+            "final_answer": "\\(\\frac{1}{140}(7x^{2}+8)^{10} + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key does not print this question's answers under the heading 'Exercise 3.2' (that block holds the answers of Exercise 3.5). They are printed as follows:\nQ1 (i)-(iv): under 'EXERCISE 3.1' as 4 (i)-(iv); Q1 (v): as 4 (vi); Q1 (vi): as 4 (vii).\nQ1 (vii)-(xiii): under 'Exercise 3.3' as 2 (i)-(vii).\nThe key's 4 (v), \\(\\frac{2}{21}(7x+8)^{3/2} + c\\), belongs to no question of this exercise."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Evaluate the following integral (by using suitable substitution): \\(\\int \\frac{x^{2}}{(x^{3}+2)^{5}}\\,dx\\)",
+            "explanation": "A power of \\((x^{3}+2)\\) in the denominator, with \\(x^{2}\\) on top.\nThe derivative of \\(x^{3}+2\\) is \\(3x^{2}\\), a constant times the numerator.\nPlan: \\(u = x^{3}+2\\), write the integrand as \\(u^{-5}\\), use the power rule.",
+            "steps": [
+              "Given: \\(\\int \\frac{x^{2}}{(x^{3}+2)^{5}}\\,dx\\)\nTo find: the indefinite integral.\nMethod: substitution \\(u = x^{3}+2\\), because its derivative \\(3x^{2}\\) matches the numerator \\(x^{2}\\) up to the constant 3.",
+              "Choose \\(u\\)\n\\[u = x^{3}+2\\]\n\\[du = 3x^{2}\\,dx\\]\n\\[x^{2}\\,dx = \\dfrac{du}{3}\\]\nWhy: the numerator \\(x^{2}\\,dx\\) is replaced completely.",
+              "Rewrite in \\(u\\)\n\\[\\int \\dfrac{x^{2}\\,dx}{(x^{3}+2)^{5}} = \\dfrac{1}{3}\\int u^{-5}\\,du\\]\nWhy: \\(\\frac{1}{u^{5}} = u^{-5}\\), so the power rule can be used.",
+              "Power rule\n\\[= \\dfrac{1}{3}\\cdot\\dfrac{u^{-4}}{-4} + c\\]\n\\[= -\\dfrac{1}{12}u^{-4} + c\\]\nWhy: \\(n = -5\\), so \\(n + 1 = -4\\).",
+              "Put \\(x\\) back\n\\[= -\\dfrac{1}{12}(x^{3}+2)^{-4} + c\\]\n\\[= -\\dfrac{1}{12(x^{3}+2)^{4}} + c\\]\nWhy: the answer must be in \\(x\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\Big[-\\tfrac{1}{12}(x^{3}+2)^{-4}\\Big]\\]\n\\[= -\\tfrac{1}{12}(-4)(x^{3}+2)^{-5}(3x^{2})\\]\n\\[= \\dfrac{x^{2}}{(x^{3}+2)^{5}}\\]\nWhy: we get the integrand back."
+            ],
+            "final_answer": "\\(-\\frac{1}{12}(x^{3}+2)^{-4} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Evaluate the following integral (by using suitable substitution): \\(\\int \\left(1+\\frac{1}{x}\\right)^{-2}\\left(\\frac{1}{x^{2}}\\right)dx\\)",
+            "explanation": "A bracket to the power \\(-2\\), times \\(\\frac{1}{x^{2}}\\).\nThe derivative of \\(1 + \\frac{1}{x}\\) is \\(-\\frac{1}{x^{2}}\\), which is the other factor apart from the sign.\nPlan: \\(u = 1 + \\frac{1}{x}\\), power rule with \\(n = -2\\), then simplify.",
+            "steps": [
+              "Given: \\(\\int (1+\\frac{1}{x})^{-2}\\,\\frac{1}{x^{2}}\\,dx\\)\nTo find: the indefinite integral.\nMethod: substitution \\(u = 1 + \\frac{1}{x}\\), because its derivative \\(-\\frac{1}{x^{2}}\\) is present apart from the minus sign.",
+              "Choose \\(u\\)\n\\[u = 1 + \\dfrac{1}{x} = 1 + x^{-1}\\]\n\\[du = -x^{-2}\\,dx = -\\dfrac{1}{x^{2}}\\,dx\\]\n\\[\\dfrac{1}{x^{2}}\\,dx = -du\\]\nWhy: the derivative of \\(x^{-1}\\) is \\(-x^{-2}\\).",
+              "Rewrite in \\(u\\)\n\\[\\int u^{-2}(-du) = -\\int u^{-2}\\,du\\]\nWhy: every part of the integrand is now in \\(u\\).",
+              "Power rule\n\\[= -\\dfrac{u^{-1}}{-1} + c = u^{-1} + c\\]\nWhy: \\(n = -2\\), so \\(n + 1 = -1\\); the two minus signs cancel.",
+              "Put \\(x\\) back and simplify\n\\[= \\left(1+\\dfrac{1}{x}\\right)^{-1} + c\\]\n\\[= \\dfrac{1}{\\frac{x+1}{x}} + c = \\dfrac{x}{x+1} + c\\]\nWhy: \\(1 + \\frac{1}{x} = \\frac{x+1}{x}\\) and dividing by a fraction means multiplying by its reciprocal.",
+              "Check\n\\[\\dfrac{d}{dx}\\left(\\dfrac{x}{x+1}\\right) = \\dfrac{(x+1) - x}{(x+1)^{2}}\\]\n\\[= \\dfrac{1}{(x+1)^{2}}\\]\nIntegrand: \\((1+\\frac{1}{x})^{-2}\\frac{1}{x^{2}} = \\frac{x^{2}}{(x+1)^{2}}\\cdot\\frac{1}{x^{2}} = \\frac{1}{(x+1)^{2}}\\). They agree."
+            ],
+            "final_answer": "\\(\\left(1+\\frac{1}{x}\\right)^{-1} + c = \\frac{x}{x+1} + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(-\\frac{1}{3}\\left(1+\\frac{1}{x}\\right)^{3} + c\\). That is the answer of \\(\\int (1+\\frac{1}{x})^{2}\\frac{1}{x^{2}}\\,dx\\) (power \\(+2\\)), not of the question as printed (power \\(-2\\)).\nFor the printed question the correct answer is \\(\\left(1+\\frac{1}{x}\\right)^{-1} + c = \\frac{x}{x+1} + c\\), as the check above confirms."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Evaluate the following integral (by using suitable substitution): \\(\\int \\frac{(1+\\sqrt{x})^{5}}{\\sqrt{x}}\\,dx\\)",
+            "explanation": "A power of \\((1+\\sqrt{x})\\) divided by \\(\\sqrt{x}\\).\nThe derivative of \\(1+\\sqrt{x}\\) is \\(\\frac{1}{2\\sqrt{x}}\\), and \\(\\frac{1}{\\sqrt{x}}\\) is present.\nPlan: \\(u = 1+\\sqrt{x}\\), so \\(\\frac{dx}{\\sqrt{x}} = 2\\,du\\); then the power rule.",
+            "steps": [
+              "Given: \\(\\int \\frac{(1+\\sqrt{x})^{5}}{\\sqrt{x}}\\,dx\\), \\(x > 0\\)\nTo find: the indefinite integral.\nMethod: substitution \\(u = 1+\\sqrt{x}\\), because its derivative contains \\(\\frac{1}{\\sqrt{x}}\\).",
+              "Choose \\(u\\)\n\\[u = 1 + \\sqrt{x}\\]\n\\[du = \\dfrac{1}{2\\sqrt{x}}\\,dx\\]\n\\[\\dfrac{dx}{\\sqrt{x}} = 2\\,du\\]\nWhy: \\(\\frac{d}{dx}x^{1/2} = \\frac{1}{2}x^{-1/2}\\).",
+              "Rewrite in \\(u\\) and integrate\n\\[\\int u^{5}\\cdot 2\\,du = 2\\cdot\\dfrac{u^{6}}{6} + c\\]\n\\[= \\dfrac{1}{3}u^{6} + c\\]\nWhy: power rule with \\(n = 5\\).",
+              "Put \\(x\\) back\n\\[= \\dfrac{1}{3}(1+\\sqrt{x})^{6} + c\\]\nWhy: the answer must be in \\(x\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\Big[\\tfrac{1}{3}(1+\\sqrt{x})^{6}\\Big]\\]\n\\[= 2(1+\\sqrt{x})^{5}\\cdot\\dfrac{1}{2\\sqrt{x}}\\]\n\\[= \\dfrac{(1+\\sqrt{x})^{5}}{\\sqrt{x}}\\]\nWhy: the integrand comes back."
+            ],
+            "final_answer": "\\(\\frac{1}{3}(1+\\sqrt{x})^{6} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(v)",
+            "prompt": "1 (v) Evaluate the following integral (by using suitable substitution): \\(\\int (7-x^{5})^{4}\\,x^{4}\\,dx\\)",
+            "explanation": "A power of \\((7-x^{5})\\) times \\(x^{4}\\).\nThe derivative of \\(7-x^{5}\\) is \\(-5x^{4}\\): the \\(x^{4}\\) is there, apart from \\(-5\\).\nPlan: \\(u = 7-x^{5}\\), \\(x^{4}dx = -\\frac{du}{5}\\), power rule.",
+            "steps": [
+              "Given: \\(\\int (7-x^{5})^{4}x^{4}\\,dx\\)\nTo find: the indefinite integral.\nMethod: substitution \\(u = 7-x^{5}\\), whose derivative \\(-5x^{4}\\) matches \\(x^{4}\\) up to a constant.",
+              "Choose \\(u\\)\n\\[u = 7 - x^{5}\\]\n\\[du = -5x^{4}\\,dx\\]\n\\[x^{4}\\,dx = -\\dfrac{du}{5}\\]\nWhy: the constant 7 differentiates to 0, and \\(x^{5}\\) to \\(5x^{4}\\).",
+              "Rewrite in \\(u\\) and integrate\n\\[\\int u^{4}\\left(-\\dfrac{du}{5}\\right) = -\\dfrac{1}{5}\\cdot\\dfrac{u^{5}}{5} + c\\]\n\\[= -\\dfrac{1}{25}u^{5} + c\\]\nWhy: power rule with \\(n = 4\\).",
+              "Put \\(x\\) back\n\\[= -\\dfrac{1}{25}(7-x^{5})^{5} + c\\]\nWhy: the answer must be in \\(x\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\Big[-\\tfrac{1}{25}(7-x^{5})^{5}\\Big]\\]\n\\[= -\\tfrac{1}{25}\\cdot 5(7-x^{5})^{4}(-5x^{4})\\]\n\\[= (7-x^{5})^{4}x^{4}\\]\nWhy: the integrand comes back."
+            ],
+            "final_answer": "\\(-\\frac{1}{25}(7-x^{5})^{5} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(vi)",
+            "prompt": "1 (vi) Evaluate the following integral (by using suitable substitution): \\(\\int \\frac{t^{2}-2t}{(t^{3}-3t^{2}+5)^{4}}\\,dt\\)",
+            "explanation": "The variable is \\(t\\). A power of a cubic in the denominator, a quadratic on top.\nThe derivative of \\(t^{3}-3t^{2}+5\\) is \\(3t^{2}-6t = 3(t^{2}-2t)\\): three times the numerator.\nPlan: \\(u = t^{3}-3t^{2}+5\\), power rule with \\(n = -4\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{t^{2}-2t}{(t^{3}-3t^{2}+5)^{4}}\\,dt\\)\nTo find: the indefinite integral (in \\(t\\)).\nMethod: substitution with the bracket as \\(u\\), because its derivative is a constant multiple of the numerator.",
+              "Choose \\(u\\)\n\\[u = t^{3}-3t^{2}+5\\]\n\\[du = (3t^{2}-6t)\\,dt = 3(t^{2}-2t)\\,dt\\]\n\\[(t^{2}-2t)\\,dt = \\dfrac{du}{3}\\]\nWhy: taking 3 common shows the numerator.",
+              "Rewrite in \\(u\\) and integrate\n\\[\\dfrac{1}{3}\\int u^{-4}\\,du = \\dfrac{1}{3}\\cdot\\dfrac{u^{-3}}{-3} + c\\]\n\\[= -\\dfrac{1}{9}u^{-3} + c\\]\nWhy: power rule with \\(n = -4\\), \\(n+1 = -3\\).",
+              "Put \\(t\\) back\n\\[= -\\dfrac{1}{9}(t^{3}-3t^{2}+5)^{-3} + c\\]\nWhy: the answer is in the question's variable \\(t\\).",
+              "Check\n\\[\\dfrac{d}{dt}\\Big[-\\tfrac{1}{9}u^{-3}\\Big] = \\tfrac{1}{3}u^{-4}\\cdot\\dfrac{du}{dt}\\]\n\\[= \\tfrac{1}{3}u^{-4}\\cdot 3(t^{2}-2t)\\]\n\\[= \\dfrac{t^{2}-2t}{(t^{3}-3t^{2}+5)^{4}}\\]\nWhy: the integrand comes back."
+            ],
+            "final_answer": "\\(-\\frac{1}{9}(t^{3}-3t^{2}+5)^{-3} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(vii)",
+            "prompt": "1 (vii) Evaluate the following integral (by using suitable substitution): \\(\\int \\frac{\\sec^{2}x}{\\tan x\\cdot\\ln\\tan x}\\,dx\\)",
+            "explanation": "A logarithm in the denominator.\n\\(\\frac{d}{dx}(\\ln\\tan x) = \\frac{\\sec^{2}x}{\\tan x}\\), which is exactly the rest of the integrand.\nPlan: \\(u = \\ln\\tan x\\); the integral becomes \\(\\int\\frac{du}{u}\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{\\sec^{2}x}{\\tan x\\,\\ln\\tan x}\\,dx\\)\nTo find: the indefinite integral.\nMethod: substitution \\(u = \\ln\\tan x\\), then Rule 4: \\(\\int\\frac{du}{u} = \\ln|u| + c\\).",
+              "Choose \\(u\\)\n\\[u = \\ln\\tan x\\]\n\\[du = \\dfrac{1}{\\tan x}\\cdot\\sec^{2}x\\,dx\\]\nWhy: chain rule, \\(\\frac{d}{dx}\\ln f = \\frac{f'}{f}\\) and \\(\\frac{d}{dx}\\tan x = \\sec^{2}x\\).",
+              "Rewrite in \\(u\\)\n\\[\\int \\dfrac{1}{\\ln\\tan x}\\cdot\\dfrac{\\sec^{2}x}{\\tan x}\\,dx = \\int\\dfrac{du}{u}\\]\nWhy: the second factor with \\(dx\\) is exactly \\(du\\).",
+              "Integrate and put \\(x\\) back\n\\[= \\ln|u| + c\\]\n\\[= \\ln|\\ln\\tan x| + c\\]\nWhy: \\(\\int\\frac{du}{u} = \\ln|u| + c\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\ln|\\ln\\tan x| = \\dfrac{1}{\\ln\\tan x}\\cdot\\dfrac{\\sec^{2}x}{\\tan x}\\]\nWhy: this is the integrand."
+            ],
+            "final_answer": "\\(\\ln|\\ln\\tan x| + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(viii)",
+            "prompt": "1 (viii) Evaluate the following integral (by using suitable substitution): \\(\\int \\frac{\\sin x-\\cos x}{\\sqrt{1+\\sin 2x}}\\,dx\\)",
+            "explanation": "A root that hides a perfect square: \\(1 + \\sin 2x = (\\sin x + \\cos x)^{2}\\).\nAfter removing the root, the numerator is minus the derivative of the denominator.\nPlan: simplify the root, then \\(u = \\sin x + \\cos x\\) and Rule 4.",
+            "steps": [
+              "Given: \\(\\int \\frac{\\sin x-\\cos x}{\\sqrt{1+\\sin 2x}}\\,dx\\)\nTo find: the indefinite integral.\nMethod: write \\(1 = \\sin^{2}x + \\cos^{2}x\\) and \\(\\sin 2x = 2\\sin x\\cos x\\) to make a perfect square, then substitute.",
+              "Simplify the root\n\\[1 + \\sin 2x = \\sin^{2}x + \\cos^{2}x + 2\\sin x\\cos x\\]\n\\[= (\\sin x + \\cos x)^{2}\\]\n\\[\\sqrt{1+\\sin 2x} = |\\sin x + \\cos x|\\]\nWhy: \\(a^{2} + b^{2} + 2ab = (a+b)^{2}\\) and \\(\\sqrt{p^{2}} = |p|\\). We work where \\(\\sin x + \\cos x > 0\\) (as the book's answer does), so the root is \\(\\sin x + \\cos x\\).",
+              "The integral becomes\n\\[\\int \\dfrac{\\sin x - \\cos x}{\\sin x + \\cos x}\\,dx\\]\nWhy: the root has been removed.",
+              "Choose \\(u\\)\n\\[u = \\sin x + \\cos x\\]\n\\[du = (\\cos x - \\sin x)\\,dx\\]\n\\[(\\sin x - \\cos x)\\,dx = -du\\]\nWhy: the numerator is the negative of \\(du\\).",
+              "Integrate\n\\[\\int \\dfrac{-du}{u} = -\\ln|u| + c\\]\n\\[= -\\ln|\\sin x + \\cos x| + c\\]\nWhy: Rule 4. (Where \\(\\sin x + \\cos x < 0\\) the root equals \\(-(\\sin x + \\cos x)\\) and the same working gives \\(+\\ln|\\sin x + \\cos x| + c\\).)",
+              "Check (where \\(\\sin x + \\cos x > 0\\))\n\\[\\dfrac{d}{dx}\\big[-\\ln|\\sin x + \\cos x|\\big]\\]\n\\[= -\\dfrac{\\cos x - \\sin x}{\\sin x + \\cos x}\\]\n\\[= \\dfrac{\\sin x - \\cos x}{\\sin x + \\cos x}\\]\nWhy: this equals the integrand after the root was simplified."
+            ],
+            "final_answer": "\\(-\\ln|\\sin x + \\cos x| + c\\) (where \\(\\sin x + \\cos x > 0\\))"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ix)",
+            "prompt": "1 (ix) Evaluate the following integral (by using suitable substitution): \\(\\int \\frac{\\tan^{3}x}{\\sec^{4}x+\\tan^{4}x}\\,dx\\)",
+            "explanation": "Mixed \\(\\tan\\) and \\(\\sec\\) powers; no obvious \\(u\\) yet.\nMultiplying top and bottom by \\(\\cos^{4}x\\) turns it into \\(\\frac{\\sin^{3}x\\cos x}{1+\\sin^{4}x}\\).\nThen the numerator is a quarter of the derivative of the denominator: \\(u = 1 + \\sin^{4}x\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{\\tan^{3}x}{\\sec^{4}x+\\tan^{4}x}\\,dx\\)\nTo find: the indefinite integral.\nMethod: rewrite in \\(\\sin x\\) and \\(\\cos x\\), then substitute the denominator.",
+              "Multiply numerator and denominator by \\(\\cos^{4}x\\)\n\\[\\tan^{3}x\\cos^{4}x = \\dfrac{\\sin^{3}x}{\\cos^{3}x}\\cos^{4}x\\]\n\\[= \\sin^{3}x\\cos x\\]\n\\[(\\sec^{4}x + \\tan^{4}x)\\cos^{4}x = 1 + \\sin^{4}x\\]\nWhy: \\(\\sec x\\cos x = 1\\) and \\(\\tan x\\cos x = \\sin x\\); multiplying top and bottom by the same thing does not change the fraction.",
+              "The integral becomes\n\\[\\int \\dfrac{\\sin^{3}x\\cos x}{1 + \\sin^{4}x}\\,dx\\]\nWhy: now everything is in \\(\\sin x\\), with one \\(\\cos x\\) left for \\(du\\).",
+              "Choose \\(u\\)\n\\[u = 1 + \\sin^{4}x\\]\n\\[du = 4\\sin^{3}x\\cos x\\,dx\\]\n\\[\\sin^{3}x\\cos x\\,dx = \\dfrac{du}{4}\\]\nWhy: chain rule, \\(\\frac{d}{dx}\\sin^{4}x = 4\\sin^{3}x\\cos x\\).",
+              "Integrate\n\\[\\dfrac{1}{4}\\int\\dfrac{du}{u} = \\dfrac{1}{4}\\ln|u| + c\\]\n\\[= \\dfrac{1}{4}\\ln(1 + \\sin^{4}x) + c\\]\nWhy: Rule 4; no modulus needed since \\(1 + \\sin^{4}x > 0\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\Big[\\tfrac{1}{4}\\ln(1+\\sin^{4}x)\\Big] = \\dfrac{\\sin^{3}x\\cos x}{1+\\sin^{4}x}\\]\nWhy: this is the integrand after step 1."
+            ],
+            "final_answer": "\\(\\frac{1}{4}\\ln(1 + \\sin^{4}x) + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(x)",
+            "prompt": "1 (x) Evaluate the following integral (by using suitable substitution): \\(\\int \\frac{x}{1+x\\tan x}\\,dx\\)",
+            "explanation": "\\(\\tan x\\) in the denominator; clear it by multiplying top and bottom by \\(\\cos x\\).\nThen the denominator is \\(\\cos x + x\\sin x\\), whose derivative is \\(x\\cos x\\), the new numerator.\nPlan: multiply by \\(\\cos x\\), then \\(u = \\cos x + x\\sin x\\) and Rule 4.",
+            "steps": [
+              "Given: \\(\\int \\frac{x}{1+x\\tan x}\\,dx\\)\nTo find: the indefinite integral.\nMethod: make the numerator the derivative of the denominator, then Rule 4.",
+              "Multiply numerator and denominator by \\(\\cos x\\)\n\\[\\dfrac{x}{1+x\\tan x} = \\dfrac{x\\cos x}{\\cos x + x\\sin x}\\]\nWhy: \\(\\tan x\\cos x = \\sin x\\) removes the \\(\\tan x\\).",
+              "Choose \\(u\\)\n\\[u = \\cos x + x\\sin x\\]\n\\[du = (-\\sin x + \\sin x + x\\cos x)\\,dx\\]\n\\[du = x\\cos x\\,dx\\]\nWhy: product rule on \\(x\\sin x\\) gives \\(\\sin x + x\\cos x\\).",
+              "Integrate\n\\[\\int\\dfrac{du}{u} = \\ln|u| + c\\]\n\\[= \\ln|\\cos x + x\\sin x| + c\\]\nWhy: Rule 4.",
+              "Check\n\\[\\dfrac{d}{dx}\\ln|\\cos x + x\\sin x| = \\dfrac{x\\cos x}{\\cos x + x\\sin x}\\]\nDividing top and bottom by \\(\\cos x\\) gives \\(\\frac{x}{1 + x\\tan x}\\), the integrand."
+            ],
+            "final_answer": "\\(\\ln|\\cos x + x\\sin x| + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(xi)",
+            "prompt": "1 (xi) Evaluate the following integral (by using suitable substitution): \\(\\int \\frac{\\ln\\sec x}{\\cot x}\\,dx\\)",
+            "explanation": "Dividing by \\(\\cot x\\) means multiplying by \\(\\tan x\\): the integral is \\(\\int\\tan x\\,\\ln\\sec x\\,dx\\).\n\\(\\frac{d}{dx}\\ln\\sec x = \\tan x\\), so \\(u = \\ln\\sec x\\) works.\nPlan: substitute, then the power rule \\(\\int u\\,du\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{\\ln\\sec x}{\\cot x}\\,dx\\)\nTo find: the indefinite integral.\nMethod: rewrite \\(\\frac{1}{\\cot x} = \\tan x\\) and substitute \\(u = \\ln\\sec x\\).",
+              "Rewrite the integrand\n\\[\\int \\dfrac{\\ln\\sec x}{\\cot x}\\,dx = \\int \\tan x\\,\\ln\\sec x\\,dx\\]\nWhy: \\(\\tan x = \\frac{1}{\\cot x}\\).",
+              "Choose \\(u\\)\n\\[u = \\ln\\sec x\\]\n\\[du = \\dfrac{\\sec x\\tan x}{\\sec x}\\,dx = \\tan x\\,dx\\]\nWhy: \\(\\frac{d}{dx}\\ln f = \\frac{f'}{f}\\) and \\(\\frac{d}{dx}\\sec x = \\sec x\\tan x\\).",
+              "Integrate\n\\[\\int u\\,du = \\dfrac{u^{2}}{2} + c\\]\n\\[= \\dfrac{1}{2}(\\ln\\sec x)^{2} + c\\]\nWhy: power rule with \\(n = 1\\).",
+              "Same as the answer key's form\n\\[\\ln\\sec x = \\ln\\dfrac{1}{\\cos x} = -\\ln\\cos x\\]\n\\[\\dfrac{1}{2}(\\ln\\sec x)^{2} = \\dfrac{1}{2}(\\ln\\cos x)^{2}\\]\nWhy: squaring removes the minus sign.",
+              "Check\n\\[\\dfrac{d}{dx}\\Big[\\tfrac{1}{2}(\\ln\\sec x)^{2}\\Big] = \\ln\\sec x\\cdot\\tan x\\]\nWhy: this is \\(\\frac{\\ln\\sec x}{\\cot x}\\)."
+            ],
+            "final_answer": "\\(\\frac{1}{2}(\\ln\\sec x)^{2} + c = \\frac{1}{2}(\\ln\\cos x)^{2} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(xii)",
+            "prompt": "1 (xii) Evaluate the following integral (by using suitable substitution): \\(\\int \\frac{\\ln(\\sin x)}{\\tan x}\\,dx\\)",
+            "explanation": "Dividing by \\(\\tan x\\) means multiplying by \\(\\cot x\\).\n\\(\\frac{d}{dx}\\ln\\sin x = \\cot x\\), so \\(u = \\ln\\sin x\\).\nPlan: substitute, then \\(\\int u\\,du\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{\\ln(\\sin x)}{\\tan x}\\,dx\\)\nTo find: the indefinite integral.\nMethod: \\(\\frac{1}{\\tan x} = \\cot x\\), then \\(u = \\ln\\sin x\\).",
+              "Rewrite and choose \\(u\\)\n\\[\\int \\cot x\\,\\ln(\\sin x)\\,dx\\]\n\\[u = \\ln\\sin x,\\quad du = \\dfrac{\\cos x}{\\sin x}\\,dx = \\cot x\\,dx\\]\nWhy: \\(\\frac{d}{dx}\\ln f = \\frac{f'}{f}\\).",
+              "Integrate\n\\[\\int u\\,du = \\dfrac{u^{2}}{2} + c\\]\n\\[= \\dfrac{1}{2}(\\ln\\sin x)^{2} + c\\]\nWhy: power rule, \\(n = 1\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\Big[\\tfrac{1}{2}(\\ln\\sin x)^{2}\\Big] = \\ln\\sin x\\cdot\\cot x\\]\nWhy: this is \\(\\frac{\\ln\\sin x}{\\tan x}\\)."
+            ],
+            "final_answer": "\\(\\frac{1}{2}(\\ln\\sin x)^{2} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(xiii)",
+            "prompt": "1 (xiii) Evaluate the following integral (by using suitable substitution): \\(\\int \\frac{e^{2x}}{(2+e^{2x})^{2}}\\,dx\\)",
+            "explanation": "A square of \\((2 + e^{2x})\\) in the denominator, \\(e^{2x}\\) on top.\nThe derivative of \\(2 + e^{2x}\\) is \\(2e^{2x}\\).\nPlan: \\(u = 2 + e^{2x}\\), power rule with \\(n = -2\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{e^{2x}}{(2+e^{2x})^{2}}\\,dx\\)\nTo find: the indefinite integral.\nMethod: substitution \\(u = 2 + e^{2x}\\).",
+              "Choose \\(u\\)\n\\[u = 2 + e^{2x}\\]\n\\[du = 2e^{2x}\\,dx\\]\n\\[e^{2x}\\,dx = \\dfrac{du}{2}\\]\nWhy: \\(\\frac{d}{dx}e^{2x} = 2e^{2x}\\) (chain rule).",
+              "Integrate\n\\[\\dfrac{1}{2}\\int u^{-2}\\,du = \\dfrac{1}{2}\\cdot\\dfrac{u^{-1}}{-1} + c\\]\n\\[= -\\dfrac{1}{2u} + c\\]\nWhy: power rule with \\(n = -2\\).",
+              "Put \\(x\\) back\n\\[= -\\dfrac{1}{2(2 + e^{2x})} + c\\]\nWhy: the answer must be in \\(x\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\Big[-\\tfrac{1}{2}(2+e^{2x})^{-1}\\Big]\\]\n\\[= \\tfrac{1}{2}(2+e^{2x})^{-2}\\cdot 2e^{2x}\\]\n\\[= \\dfrac{e^{2x}}{(2+e^{2x})^{2}}\\]\nWhy: the integrand comes back."
+            ],
+            "final_answer": "\\(-\\frac{1}{2(2 + e^{2x})} + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}
