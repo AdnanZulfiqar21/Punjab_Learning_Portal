@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH5-5.4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch5",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch5/5.4",
+      "title": "5.4 Condition of Concurrency of Three Straight Lines",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 150,
+          "pdf_to": 151,
+          "note": "Book pp. 148-149: 5.4 Theorem 3 (condition of concurrency) with proof, Example 10 and a Challenge! box (missing sign corrected)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Three lines are called concurrent when all three pass through one common point, called the point of concurrency. Two non-parallel lines always meet at exactly one point, so for three lines the real question is: does the third line pass through the point where the first two meet? Theorem 3 turns this question into one number, a \\(3 \\times 3\\) determinant made from the coefficients."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Theorem 3"
+          },
+          {
+            "type": "paragraph",
+            "text": "Three non-parallel lines\n\\[\\ell_1 : a_1x + b_1y + c_1 = 0 \\quad \\ldots(i)\\]\n\\[\\ell_2 : a_2x + b_2y + c_2 = 0 \\quad \\ldots(ii)\\]\n\\[\\ell_3 : a_3x + b_3y + c_3 = 0 \\quad \\ldots(iii)\\]\nare concurrent iff\n\\[\\begin{vmatrix} a_1 & b_1 & c_1 \\\\ a_2 & b_2 & c_2 \\\\ a_3 & b_3 & c_3 \\end{vmatrix} = 0\\]"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{vmatrix} a_1 & b_1 & c_1 \\\\ a_2 & b_2 & c_2 \\\\ a_3 & b_3 & c_3 \\end{vmatrix} = 0",
+            "text_alt": "The determinant with rows a1 b1 c1, a2 b2 c2 and a3 b3 c3 equals zero"
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Proof"
+          },
+          {
+            "type": "paragraph",
+            "text": "If the lines are concurrent, then they have a common point of intersection \\(P(x_1, y_1)\\) say. As \\(\\ell_1 \\nparallel \\ell_2\\), so their point of intersection \\((x, y)\\) is:\n\\[x = \\dfrac{b_1c_2 - b_2c_1}{a_1b_2 - a_2b_1}\\]\n\\[y = \\dfrac{a_2c_1 - a_1c_2}{a_1b_2 - a_2b_1}\\]\n\\((\\because a_1b_2 - a_2b_1 \\ne 0)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Where do these values of \\(x\\) and \\(y\\) come from? Solve (i) and (ii) together by Cramer's rule (or by elimination). The denominator \\(a_1b_2 - a_2b_1\\) is not zero exactly because \\(\\ell_1\\) and \\(\\ell_2\\) are not parallel: their slopes \\(-\\frac{a_1}{b_1}\\) and \\(-\\frac{a_2}{b_2}\\) are different. The book names the common point \\(P(x_1, y_1)\\) and then writes it as \\((x, y)\\); both names mean the same point."
+          },
+          {
+            "type": "paragraph",
+            "text": "This point also lies on (iii), so\n\\[a_3\\left(\\dfrac{b_1c_2 - b_2c_1}{a_1b_2 - a_2b_1}\\right)\\]\n\\[+ b_3\\left(\\dfrac{a_2c_1 - a_1c_2}{a_1b_2 - a_2b_1}\\right) + c_3 = 0\\]\nor\n\\[a_3(b_1c_2 - b_2c_1)\\]\n\\[+ b_3(a_2c_1 - a_1c_2)\\]\n\\[+ c_3(a_1b_2 - a_2b_1) = 0\\]\nAn easier way to write the above equation is in the following determinant form:\n\\[\\begin{vmatrix} a_1 & b_1 & c_1 \\\\ a_2 & b_2 & c_2 \\\\ a_3 & b_3 & c_3 \\end{vmatrix} = 0\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Step 1 to step 2: multiply the whole equation by \\(a_1b_2 - a_2b_1\\) (it is not zero), so the fractions disappear.\nStep 2 to the determinant: expand the determinant along its third row. The cofactors of \\(a_3\\), \\(b_3\\), \\(c_3\\) are exactly \\(b_1c_2 - b_2c_1\\), \\(a_2c_1 - a_1c_2\\) and \\(a_1b_2 - a_2b_1\\), so the expansion gives the same equation."
+          },
+          {
+            "type": "paragraph",
+            "text": "This is necessary and sufficient condition iff of concurrency of given three lines.",
+            "book_errors": [
+              "condition iff of concurrency"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints 'This is necessary and sufficient condition iff of concurrency of given three lines.' The word 'iff' is stray ('iff' already means 'necessary and sufficient'). It should read: 'This is the necessary and sufficient condition for the concurrency of the given three lines.'"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The proof above shows one direction: concurrent \\(\\Rightarrow\\) determinant \\(= 0\\). The other direction also holds: if the determinant is \\(0\\) and \\(\\ell_1 \\nparallel \\ell_2\\), read the steps backwards. The determinant equation is the last equation multiplied by \\(a_1b_2 - a_2b_1 \\ne 0\\), so the meeting point of \\(\\ell_1\\) and \\(\\ell_2\\) satisfies (iii). That is why the condition is both necessary and sufficient. The words 'non-parallel' matter: three parallel lines also give a zero determinant, but they never meet."
+          },
+          {
+            "type": "paragraph",
+            "text": "Now the book applies Theorem 3 to three given lines."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "Check whether the following lines are concurrent or not. If concurrent, then find the point of concurrency.\n\\[3x - 2y - 2 = 0\\]\n\\[x + y - 4 = 0\\]\n\\[2x - y - 2 = 0\\]",
+            "steps": [
+              "Given: \\(3x - 2y - 2 = 0\\), \\(x + y - 4 = 0\\), \\(2x - y - 2 = 0\\).\nTo find: whether they are concurrent, and if so the point of concurrency.\nMethod: Theorem 3. Put the coefficients \\(a\\), \\(b\\), \\(c\\) of each line in a row and evaluate the determinant. If it is \\(0\\), the lines are concurrent; then the meeting point of any two of them is the point of concurrency.",
+              "Write the determinant of the coefficients\n\\[\\begin{vmatrix} 3 & -2 & -2 \\\\ 1 & 1 & -4 \\\\ 2 & -1 & -2 \\end{vmatrix}\\]\nWhy: row 1 is \\(3, -2, -2\\) from the first line, row 2 is \\(1, 1, -4\\), row 3 is \\(2, -1, -2\\). Each constant term goes in the third column with its sign.",
+              "Expand along the first row\n\\[= 3\\begin{vmatrix} 1 & -4 \\\\ -1 & -2 \\end{vmatrix} - (-2)\\begin{vmatrix} 1 & -4 \\\\ 2 & -2 \\end{vmatrix}\\]\n\\[- 2\\begin{vmatrix} 1 & 1 \\\\ 2 & -1 \\end{vmatrix}\\]\nWhy: the signs in the first row alternate \\(+, -, +\\). The middle entry is \\(-2\\), so its term is \\(-(-2) = +2\\) times its minor.",
+              "Evaluate the \\(2 \\times 2\\) minors\n\\[= 3(-2 - 4) + 2(-2 + 8) - 2(-1 - 2)\\]\n\\[= 3(-6) + 2(6) - 2(-3)\\]\n\\[= -18 + 12 + 6 = 0\\]\nWhy: \\(\\begin{vmatrix} p & q \\\\ r & s \\end{vmatrix} = ps - qr\\). For example \\(\\begin{vmatrix} 1 & -4 \\\\ -1 & -2 \\end{vmatrix} = (1)(-2) - (-4)(-1) = -2 - 4 = -6\\).",
+              "Conclusion\nThus, the given lines are concurrent.\nWhy: the determinant is zero and no two of the lines are parallel (slopes \\(\\frac{3}{2}\\), \\(-1\\), \\(2\\) are all different), so Theorem 3 applies.",
+              "Find the point of concurrency\nAs we know that the point of intersection of any two lines is the point of concurrency. From \\(x + y - 4 = 0\\) and \\(2x - y - 2 = 0\\), we have\n\\[3x - 6 = 0 \\Rightarrow x = 2\\]\nPut \\(x = 2\\) in \\(x + y - 4 = 0\\), we have\n\\[2 + y - 4 = 0 \\Rightarrow y = 2\\]\nSo, \\((2, 2)\\) is the point of concurrency.\nWhy: adding the two equations cancels \\(y\\) (one has \\(+y\\), the other \\(-y\\)), which is the quickest elimination.",
+              "Check:\nPut \\((2, 2)\\) in all three lines:\n\\[3(2) - 2(2) - 2 = 0\\]\n\\[2 + 2 - 4 = 0\\]\n\\[2(2) - 2 - 2 = 0\\]\nAll three are satisfied, so the point is on every line."
+            ],
+            "answer": "The determinant is \\(0\\), so the lines are concurrent; the point of concurrency is \\((2, 2)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "If the lines \\(2x \\quad 3y + 5 = 0\\), \\(3x + 4y - 1 = 0\\) and \\(kx - 7y + 6 = 0\\) are concurrent, then find the value of \\(k\\).",
+            "book_errors": [
+              "\\(2x \\quad 3y + 5 = 0\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The first line of the Challenge is printed as \\(2x \\quad 3y + 5 = 0\\): the sign between \\(2x\\) and \\(3y\\) is missing. It should be \\(2x - 3y + 5 = 0\\). With the minus sign, \\(2x - 3y + 5 = 0\\) and \\(3x + 4y - 1 = 0\\) meet at \\((-1, 1)\\) and the Challenge works out neatly. (With a plus sign the lines would meet at \\((23, -17)\\) and \\(k = -\\frac{125}{23}\\), which is clearly not what the book intends.)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Try the Challenge yourself before reading this. Using Theorem 3:\n\\[\\begin{vmatrix} 2 & -3 & 5 \\\\ 3 & 4 & -1 \\\\ k & -7 & 6 \\end{vmatrix} = 0\\]\n\\[2(24 - 7) + 3(18 + k) + 5(-21 - 4k) = 0\\]\n\\[34 + 54 + 3k - 105 - 20k = 0\\]\n\\[-17 - 17k = 0 \\Rightarrow k = -1\\]\nCheck: the first two lines meet at \\((-1, 1)\\), and \\((-1)(-1) - 7(1) + 6 = 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Two ways to test concurrency:\n1. Determinant method (Theorem 3): one calculation, and it is the method the book expects when you are asked to 'check' or 'find \\(k\\)'.\n2. Point method: solve two of the lines, then substitute the point in the third.\nWhen you must also give the point of concurrency, you need the point method anyway; use it as a check on the determinant."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Concurrent lines pass through one common point (the point of concurrency).\n2. Theorem 3: three non-parallel lines \\(a_ix + b_iy + c_i = 0\\) are concurrent iff the determinant of their coefficients is zero.\n3. The determinant equation is the third line evaluated at the meeting point of the first two, multiplied by \\(a_1b_2 - a_2b_1\\).\n4. The point of concurrency is found by solving any two of the lines.\n5. To find an unknown \\(k\\) for concurrency, set the determinant equal to zero and solve for \\(k\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing the lines in the form \\(ax + by = c\\) and putting \\(c\\) in the determinant: the theorem uses \\(ax + by + c = 0\\), so a constant moved to the right changes sign.\n2. Forgetting the minus sign on the middle term when expanding along a row.\n3. Calling three parallel lines concurrent because the determinant is zero: the theorem needs non-parallel lines.\n4. Stopping after 'determinant \\(= 0\\)' when the question also asks for the point of concurrency."
+          }
+        ]
+      }
+    }
+  ]
+}
