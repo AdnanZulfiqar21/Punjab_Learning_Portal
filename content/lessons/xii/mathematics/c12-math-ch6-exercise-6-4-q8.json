@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH6-EXERCISE-6-4-Q8",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch6",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch6/u-exercise-6-4-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 200,
+          "pdf_to": 200,
+          "note": "Exercise 6.4, Question 8: book p. 197-198 (Q1-Q13); answer key book p. 305-306 (PDF 307-308)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8 Find the minimum distance from the ellipse \\(\\frac{x^2}{9} + \\frac{y^2}{4} = 1\\) to the line \\(x + y = 6\\).",
+            "explanation": "We need the shortest gap between a curve and a line.\nFirst check that the line does not meet the ellipse; otherwise the answer would be 0.\nPlan: distance of the parametric point \\((3\\cos\\theta, 2\\sin\\theta)\\) from the line, then minimise.",
+            "steps": [
+              "Given: ellipse \\(\\frac{x^2}{9} + \\frac{y^2}{4} = 1\\) (\\(a = 3\\), \\(b = 2\\)); line \\(x + y = 6\\).\nTo find: the least distance between them.\nMethod: perpendicular distance of a point on the ellipse from the line, as a function of theta.",
+              "The line does not meet the ellipse\nWrite the line as \\(y = -x + 6\\): \\(m = -1\\), \\(c = 6\\).\n\\[a^2m^2 + b^2 = 9(1) + 4 = 13\\]\n\\[c^2 = 36 > 13\\]\nWhy: \\(c^2 > a^2m^2 + b^2\\), so the line lies completely outside the ellipse (6.4.3).",
+              "Distance of a point of the ellipse\nTake \\(P(3\\cos\\theta, 2\\sin\\theta)\\):\n\\[D(\\theta) = \\frac{|3\\cos\\theta + 2\\sin\\theta - 6|}{\\sqrt{1^2 + 1^2}}\\]\nWhy: distance of \\((x_1, y_1)\\) from \\(Ax + By + C = 0\\) is \\(\\frac{|Ax_1 + By_1 + C|}{\\sqrt{A^2 + B^2}}\\).",
+              "Largest value of \\(3\\cos\\theta + 2\\sin\\theta\\)\n\\[f(\\theta) = 3\\cos\\theta + 2\\sin\\theta\\]\n\\[f'(\\theta) = -3\\sin\\theta + 2\\cos\\theta = 0\\]\n\\[\\tan\\theta = \\frac{2}{3}\\]\n\\[\\sin\\theta = \\frac{2}{\\sqrt{13}}, \\quad \\cos\\theta = \\frac{3}{\\sqrt{13}}\\]\n\\[f_{\\max} = \\frac{9}{\\sqrt{13}} + \\frac{4}{\\sqrt{13}} = \\sqrt{13}\\]\nWhy: the derivative is zero at the extreme value; \\(f'' = -f < 0\\) there, so it is the maximum.",
+              "Least distance\nFor every \\(\\theta\\), \\(3\\cos\\theta + 2\\sin\\theta \\le \\sqrt{13} < 6\\), so the quantity inside the modulus is negative and \\(D = \\frac{6 - (3\\cos\\theta + 2\\sin\\theta)}{\\sqrt{2}}\\). It is least when the bracket is greatest:\n\\[D_{\\min} = \\frac{6 - \\sqrt{13}}{\\sqrt{2}}\\]\n\\[= \\frac{6\\sqrt{2} - \\sqrt{26}}{2} \\approx 1.69\\]\nWhy: subtracting the largest possible amount from 6 gives the smallest distance.",
+              "Check\nThe nearest point is \\(\\left(\\frac{9}{\\sqrt{13}}, \\frac{4}{\\sqrt{13}}\\right)\\). The tangent there is parallel to the line: \\(x + y = \\sqrt{13}\\) (from \\(c = \\sqrt{a^2m^2 + b^2}\\)). The distance between \\(x + y = 6\\) and \\(x + y = \\sqrt{13}\\) is \\(\\frac{6 - \\sqrt{13}}{\\sqrt{2}}\\), the same answer."
+            ],
+            "final_answer": "\\(\\frac{6 - \\sqrt{13}}{\\sqrt{2}} = \\frac{6\\sqrt{2} - \\sqrt{26}}{2} \\approx 1.69\\) units"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key numbers its Exercise 6.4 answers 1 to 16 for 13 questions, so the numbers do not match. The answer to this question is printed as key 13. Key 12 (\\(11 + 2\\sqrt{10}\\)) matches no printed question."
+          }
+        ]
+      }
+    }
+  ]
+}

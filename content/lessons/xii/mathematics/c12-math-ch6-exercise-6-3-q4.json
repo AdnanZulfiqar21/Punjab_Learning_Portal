@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH6-EXERCISE-6-3-Q4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch6",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch6/u-exercise-6-3-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 190,
+          "pdf_to": 190,
+          "note": "Exercise 6.3 (book p. 188), Question 4; answer key PDF 307 (Answers, Exercise 6.3; no key (proof))."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. Show that the an equation of parabola with focus at \\((a\\cos\\theta, a\\sin\\theta)\\) and directrix \\(x\\cos\\theta + y\\sin\\theta + a = 0\\) is \\((x\\sin\\theta - y\\cos\\theta)^{2} = 4a(x\\cos\\theta + y\\sin\\theta)^{2}\\).",
+            "explanation": "A proof from the definition: focus and directrix are given in terms of \\(a\\) and \\(\\theta\\).\nWrite \\(|PF|^{2} = |PM|^{2}\\), expand, and simplify with \\(\\cos^{2}\\theta + \\sin^{2}\\theta = 1\\).\nShortcut: let \\(u = x\\cos\\theta + y\\sin\\theta\\), \\(v = x\\sin\\theta - y\\cos\\theta\\); then \\(u^{2} + v^{2} = x^{2} + y^{2}\\).",
+            "steps": [
+              "Given: focus \\(F(a\\cos\\theta, a\\sin\\theta)\\), directrix \\(x\\cos\\theta + y\\sin\\theta + a = 0\\).\nTo prove: the parabola is \\((x\\sin\\theta - y\\cos\\theta)^{2} = 4a(x\\cos\\theta + y\\sin\\theta)\\) (see the correction below).\nMethod: \\(|PF| = |PM|\\) for \\(P(x, y)\\); write \\(u = x\\cos\\theta + y\\sin\\theta\\), \\(v = x\\sin\\theta - y\\cos\\theta\\).",
+              "Distance from the focus\n\\[|PF|^{2} = (x - a\\cos\\theta)^{2} + (y - a\\sin\\theta)^{2}\\]\n\\[= x^{2} + y^{2} - 2a(x\\cos\\theta + y\\sin\\theta) + a^{2}\\]\n\\[= x^{2} + y^{2} - 2au + a^{2}\\]\nWhy: expand both squares; \\(a^{2}\\cos^{2}\\theta + a^{2}\\sin^{2}\\theta = a^{2}\\).",
+              "Distance from the directrix\n\\[|PM| = \\dfrac{|x\\cos\\theta + y\\sin\\theta + a|}{\\sqrt{\\cos^{2}\\theta + \\sin^{2}\\theta}}\\]\n\\[= |u + a|\\]\nWhy: point-to-line distance; the denominator is \\(\\sqrt{1} = 1\\).",
+              "Use \\(|PF|^{2} = |PM|^{2}\\)\n\\[x^{2} + y^{2} - 2au + a^{2} = (u + a)^{2}\\]\n\\[x^{2} + y^{2} - 2au + a^{2} = u^{2} + 2au + a^{2}\\]\n\\[x^{2} + y^{2} - u^{2} = 4au\\ \\text{...(1)}\\]\nWhy: \\(a^{2}\\) cancels; move \\(u^{2}\\) to the left and \\(-2au\\) to the right.",
+              "Simplify the left side\n\\[u^{2} + v^{2} = x^{2}(\\cos^{2}\\theta + \\sin^{2}\\theta) + y^{2}(\\sin^{2}\\theta + \\cos^{2}\\theta)\\]\n\\[= x^{2} + y^{2}\\]\nSo \\(x^{2} + y^{2} - u^{2} = v^{2}\\), and (1) becomes\n\\[v^{2} = 4au\\]\nWhy: in \\(u^{2} + v^{2}\\) the cross terms \\(2xy\\sin\\theta\\cos\\theta\\) and \\(-2xy\\sin\\theta\\cos\\theta\\) cancel.",
+              "Write back \\(u\\) and \\(v\\)\n\\[(x\\sin\\theta - y\\cos\\theta)^{2} = 4a(x\\cos\\theta + y\\sin\\theta)\\]\nWhy: this is \\(v^{2} = 4au\\) in full.",
+              "Check:\n\\(\\theta = 0\\): focus \\((a, 0)\\), directrix \\(x = -a\\); the result gives \\(y^{2} = 4ax\\). Correct. \\(\\theta = \\frac{\\pi}{2}\\): focus \\((0, a)\\), directrix \\(y = -a\\); the result gives \\(x^{2} = 4ay\\). Correct. (The answer key has no answer for this question.)"
+            ],
+            "final_answer": "Hence proved: the parabola is \\((x\\sin\\theta - y\\cos\\theta)^{2} = 4a(x\\cos\\theta + y\\sin\\theta)\\) (without a square on the right; see the correction)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the result as \\((x\\sin\\theta - y\\cos\\theta)^{2} = 4a(x\\cos\\theta + y\\sin\\theta)^{2}\\), with a square on the right, and \"the an equation\". The square is wrong: for \\(\\theta = 0\\) the focus is \\((a, 0)\\), the directrix \\(x = -a\\), and the parabola is \\(y^{2} = 4ax\\), whereas the printed result would give \\(y^{2} = 4ax^{2}\\). The correct result, proved above, is\n\\[(x\\sin\\theta - y\\cos\\theta)^{2} = 4a(x\\cos\\theta + y\\sin\\theta)\\]"
+          }
+        ]
+      }
+    }
+  ]
+}

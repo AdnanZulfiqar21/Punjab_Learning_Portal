@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH6-EXERCISE-6-4-Q12",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch6",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch6/u-exercise-6-4-q12",
+      "title": "Question 12",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 200,
+          "pdf_to": 200,
+          "note": "Exercise 6.4, Question 12: book p. 197-198 (Q1-Q13); answer key book p. 305-306 (PDF 307-308)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12",
+            "prompt": "12 Show that the family of lines given by: \\(x\\cos\\theta + y\\sin\\theta = \\sqrt{a^2\\cos^2\\theta + b^2\\sin^2\\theta}\\) where \\(\\theta\\) is a parameter and \\(a > b\\), are all tangent to the ellipse \\(\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1\\).",
+            "explanation": "A proof: show that every line of the family satisfies the tangency condition.\nWrite the line as \\(y = mx + c\\) and test \\(c^2 = a^2m^2 + b^2\\).\nThe form fails when \\(\\sin\\theta = 0\\) (vertical lines), so treat that case separately.",
+            "steps": [
+              "Given: \\(x\\cos\\theta + y\\sin\\theta = p\\), where \\(p = \\sqrt{a^2\\cos^2\\theta + b^2\\sin^2\\theta} > 0\\).\nTo prove: every such line touches the ellipse.\nMethod: tangency condition \\(c^2 = a^2m^2 + b^2\\) of 6.4.3.",
+              "Case 1: \\(\\sin\\theta \\ne 0\\)\n\\[y = -\\frac{\\cos\\theta}{\\sin\\theta}x + \\frac{p}{\\sin\\theta}\\]\n\\[m = -\\frac{\\cos\\theta}{\\sin\\theta}, \\quad c = \\frac{p}{\\sin\\theta}\\]\nWhy: solve the line for \\(y\\).",
+              "Test the condition\n\\[a^2m^2 + b^2 = \\frac{a^2\\cos^2\\theta}{\\sin^2\\theta} + b^2\\]\n\\[= \\frac{a^2\\cos^2\\theta + b^2\\sin^2\\theta}{\\sin^2\\theta}\\]\n\\[= \\frac{p^2}{\\sin^2\\theta} = c^2\\]\nWhy: over a common denominator the numerator is exactly \\(p^2\\). The condition holds, so the line is a tangent.",
+              "Case 2: \\(\\sin\\theta = 0\\)\nThen \\(\\cos\\theta = \\pm 1\\) and \\(p = \\sqrt{a^2} = a\\). The line is \\(x = a\\) (when \\(\\cos\\theta = 1\\)) or \\(x = -a\\) (when \\(\\cos\\theta = -1\\)). Putting \\(x = \\pm a\\) in the ellipse gives \\(\\frac{y^2}{b^2} = 0\\), so \\(y = 0\\) only.\nWhy: each line meets the ellipse at exactly one point, the vertex \\((\\pm a, 0)\\): these are the vertical tangents.",
+              "Point of contact (a second check)\n\\((x_1, y_1) = \\left(\\frac{a^2\\cos\\theta}{p}, \\frac{b^2\\sin\\theta}{p}\\right)\\) lies on the ellipse: \\(\\frac{a^2\\cos^2\\theta + b^2\\sin^2\\theta}{p^2} = 1\\). The tangent there, \\(\\frac{xx_1}{a^2} + \\frac{yy_1}{b^2} = 1\\), is \\(\\frac{x\\cos\\theta}{p} + \\frac{y\\sin\\theta}{p} = 1\\), i.e. exactly the given line.\nWhy: this covers every theta at once.",
+              "Conclusion\nIn both cases the line touches the ellipse. Hence every member of the family is a tangent to \\(\\frac{x^2}{a^2} + \\frac{y^2}{b^2} = 1\\)."
+            ],
+            "final_answer": "Hence proved: every line of the family satisfies \\(c^2 = a^2m^2 + b^2\\) (or is a vertical tangent \\(x = \\pm a\\)), touching the ellipse at \\(\\left(\\frac{a^2\\cos\\theta}{p}, \\frac{b^2\\sin\\theta}{p}\\right)\\), \\(p = \\sqrt{a^2\\cos^2\\theta + b^2\\sin^2\\theta}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}
