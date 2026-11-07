@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH10-EXERCISE-10-1-Q19-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch10",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch10/u-exercise-10-1-q19",
+      "title": "Question 19 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 280,
+          "pdf_to": 280,
+          "note": "Exercise 10.1, Question 19 (book p. 278); the book prints no answers for Exercise 10.1; answers checked with sympy and the solution book"
+        }
+      ],
+      "variant_of": "C12-MATH-CH10-EXERCISE-10-1-Q19",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "19",
+            "prompt": "19 Solve the following trigonometric equation: \\(\\frac{\\tan\\left(7x + \\frac{\\pi}{6}\\right) + \\tan 3x}{1 - \\tan\\left(7x + \\frac{\\pi}{6}\\right)\\tan 3x} = 1\\)",
+            "explanation": "Fraction ki shakal ghaur se dekhiye: upar \"tan + tan\" aur neeche \"1 minus tan tan\". Yeh bilkul \\(\\tan(A + B)\\) ka formula hai.\nDiya kya hai? Ek lambi fraction jo 1 ke barabar hai.\nFind kya karna hai? \\([0, 2\\pi]\\) ke saare solutions aur general solution.\nRule: \\(\\tan(A + B) = \\frac{\\tan A + \\tan B}{1 - \\tan A\\tan B}\\), aur tangent ka period \\(\\pi\\).\nPlan: fraction ko \\(\\tan(10x + \\frac{\\pi}{6})\\) banana, period \\(\\pi\\) ke saath hal karna, 10 se divide karna, values ginna, aur yeh dekhna ke kisi value par question ka koi tangent undefined to nahi.",
+            "steps": [
+              "Diya gaya: \\(\\frac{\\tan(7x + \\frac{\\pi}{6}) + \\tan 3x}{1 - \\tan(7x + \\frac{\\pi}{6})\\tan 3x} = 1\\).\nMaloom karna: \\([0, 2\\pi]\\) mein solutions aur general solution.\nTareeqa: \\(\\tan(A + B) = \\frac{\\tan A + \\tan B}{1 - \\tan A\\tan B}\\), jahan \\(A = 7x + \\frac{\\pi}{6}\\) aur \\(B = 3x\\). Lambi fraction ko dekh kar ghabrayein nahi; formula pehchan liya to sawal aadha hal ho gaya.",
+              "Addition formula lagayein\n\\[A + B = 10x + \\tfrac{\\pi}{6}\\]\n\\[\\tan\\left(10x + \\tfrac{\\pi}{6}\\right) = 1\\]\nKyun: left side bilkul \\(\\tan(A + B)\\) ka formula hai, to poori fraction ek tangent ban gayi. \\(A + B = 7x + \\frac{\\pi}{6} + 3x = 10x + \\frac{\\pi}{6}\\).",
+              "Angle ke liye hal karein\n\\[10x + \\tfrac{\\pi}{6} = \\tfrac{\\pi}{4} + n\\pi\\]\nKyun: \\(\\tan\\theta = 1\\) pehle quadrant mein \\(\\frac{\\pi}{4}\\) par aur teesre quadrant mein \\(\\frac{5\\pi}{4}\\) par hota hai. Yeh dono \\(\\pi\\) ke faasle par hain, aur tangent ka period hi \\(\\pi\\) hai, is liye ek hi formula \\(\\frac{\\pi}{4} + n\\pi\\) dono ko cover karta hai.\nDhyan dein: tangent ke liye \\(2n\\pi\\) nahi, \\(n\\pi\\) likhte hain.",
+              "\\(x\\) alag karein\n\\[10x = \\tfrac{\\pi}{4} - \\tfrac{\\pi}{6} + n\\pi = \\tfrac{\\pi}{12} + n\\pi\\]\n\\[x = \\dfrac{\\pi}{120} + \\dfrac{n\\pi}{10} = \\dfrac{(12n + 1)\\pi}{120}\\]\nKyun: \\(\\frac{\\pi}{4} - \\frac{\\pi}{6} = \\frac{3\\pi - 2\\pi}{12} = \\frac{\\pi}{12}\\) (LCM 12). Phir har term ko 10 se divide kiya. Ek hi denominator 120 par likhne se ginti aasaan hoti hai: \\(\\frac{n\\pi}{10} = \\frac{12n\\pi}{120}\\).",
+              "\\([0, 2\\pi]\\) mein values: \\(n = 0, 1, \\ldots, 19\\)\n\\[\\tfrac{\\pi}{120}, \\tfrac{13\\pi}{120}, \\tfrac{5\\pi}{24}, \\tfrac{37\\pi}{120},\\]\n\\[\\tfrac{49\\pi}{120}, \\tfrac{61\\pi}{120}, \\tfrac{73\\pi}{120}, \\tfrac{17\\pi}{24},\\]\n\\[\\tfrac{97\\pi}{120}, \\tfrac{109\\pi}{120}, \\tfrac{121\\pi}{120}, \\tfrac{133\\pi}{120},\\]\n\\[\\tfrac{29\\pi}{24}, \\tfrac{157\\pi}{120}, \\tfrac{169\\pi}{120}, \\tfrac{181\\pi}{120},\\]\n\\[\\tfrac{193\\pi}{120}, \\tfrac{41\\pi}{24}, \\tfrac{217\\pi}{120}, \\tfrac{229\\pi}{120}\\]\nKyun: shart hai \\(12n + 1 \\le 240\\), kyunke \\(2\\pi = \\frac{240\\pi}{120}\\). Is se \\(n \\le 19\\) aata hai, yani 20 values. Numerator har dafa 12 barhta hai. 25, 85, 145, 205 wale numerators 5 se cut hote hain, jaise \\(\\frac{25\\pi}{120} = \\frac{5\\pi}{24}\\).",
+              "Check karein ke kuch undefined to nahi\n\\[B = 3x = \\tfrac{(12n + 1)\\pi}{40}\\]\n\\[A = 7x + \\tfrac{\\pi}{6} = \\tfrac{(84n + 27)\\pi}{120}\\]\nKyun: tangent sirf \\(\\frac{\\pi}{2}\\) ke odd multiples par undefined hota hai, jo \\(\\frac{20(2k + 1)\\pi}{40}\\) ya \\(\\frac{60(2k + 1)\\pi}{120}\\) hain; un ke numerators hamesha even (juft) hote hain. Hamare numerators \\(12n + 1\\) aur \\(84n + 27\\) hamesha odd (taaq) hain, is liye dono tangents defined hain. Denominator \\(1 - \\tan A\\tan B\\) bhi zero nahi, warna \\(\\tan(A + B)\\) defined hi na hota, jabke woh 1 hai. Matlab koi jawab nakli (extraneous) nahi.",
+              "Tasdeeq: \\(x = \\frac{\\pi}{120}\\)\n\\[A = \\tfrac{7\\pi}{120} + \\tfrac{20\\pi}{120} = \\tfrac{27\\pi}{120}\\]\n\\[B = \\tfrac{3\\pi}{120},\\quad A + B = \\tfrac{30\\pi}{120} = \\tfrac{\\pi}{4}\\]\n\\[\\tan\\tfrac{\\pi}{4} = 1 \\;\\checkmark\\]\nKyun: left side asal mein \\(\\tan(A + B)\\) hai, aur \\(\\frac{\\pi}{6} = \\frac{20\\pi}{120}\\) likh kar sab ek denominator par jama kiya."
+            ],
+            "final_answer": "\\([0, 2\\pi]\\) mein (20 values): \\(x = \\frac{(12n + 1)\\pi}{120}\\), \\(n = 0, 1, \\ldots, 19\\), yani \\(\\frac{\\pi}{120}, \\frac{13\\pi}{120}, \\frac{5\\pi}{24}, \\ldots, \\frac{229\\pi}{120}\\)\nGeneral solution \\(= \\left\\{\\frac{\\pi}{120} + \\frac{n\\pi}{10}\\right\\}\\), \\(n \\in \\mathbb{Z}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kitab mein Exercise 10.1 ke jawab chhape hue nahi hain. Is page ka har jawab hamara apna hai: qadam ba qadam hal kiya gaya, computer algebra system (sympy) se alag se check kiya gaya, aur ek solution book se bhi milaya gaya. Is liye aap apna jawab yahan wale jawab se mila kar dekh sakte hain."
+          }
+        ]
+      }
+    }
+  ]
+}

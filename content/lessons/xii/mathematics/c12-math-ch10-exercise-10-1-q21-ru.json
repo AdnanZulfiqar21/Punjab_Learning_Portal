@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH10-EXERCISE-10-1-Q21-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch10",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch10/u-exercise-10-1-q21",
+      "title": "Question 21 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 280,
+          "pdf_to": 280,
+          "note": "Exercise 10.1, Question 21 (book p. 278); the book prints no answers for Exercise 10.1; answers checked with sympy and the solution book"
+        }
+      ],
+      "variant_of": "C12-MATH-CH10-EXERCISE-10-1-Q21",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "21",
+            "prompt": "21 Solve the following trigonometric equation: \\(\\frac{\\sin^3 x + \\cos^3 x}{\\sin x + \\cos x} - \\frac{\\sin x}{\\sqrt{1 + \\tan^2 x}} = \\frac{1}{2}\\)",
+            "explanation": "Is sawal mein do fractions hain. Pehli mein cubes ka jama hai jo factorise ho kar chhota ho jata hai. Doosri mein \\(\\sqrt{1 + \\tan^2 x}\\) chhupa hua \\(\\sqrt{\\sec^2 x}\\) hai, aur yahin asal imtihan hai.\nFind kya karna hai? \\([0, 2\\pi]\\) mein solutions aur general solution.\nRule: \\(a^3 + b^3 = (a + b)(a^2 - ab + b^2)\\), \\(1 + \\tan^2 x = \\sec^2 x\\), aur \\(\\sqrt{p^2} = |p|\\) (absolute value, yani hamesha positive).\nPlan: absolute value ki wajah se do cases banenge: \\(\\cos x > 0\\) aur \\(\\cos x < 0\\). Har case alag hal karenge aur sirf woh jawab rakhenge jo apne case ki shart poori karte hon.",
+            "steps": [
+              "Diya gaya: \\(\\frac{\\sin^3 x + \\cos^3 x}{\\sin x + \\cos x} - \\frac{\\sin x}{\\sqrt{1 + \\tan^2 x}} = \\frac{1}{2}\\).\nMaloom karna: \\([0, 2\\pi]\\) mein solutions aur general solution.\nTareeqa: cubes ka formula, \\(1 + \\tan^2 x = \\sec^2 x\\), aur \\(\\sqrt{p^2} = |p|\\). Pabandi: \\(\\sin x + \\cos x \\neq 0\\) (denominator) aur \\(\\cos x \\neq 0\\) (warna \\(\\tan x\\) defined nahi).",
+              "Pehli term\n\\[\\dfrac{\\sin^3 x + \\cos^3 x}{\\sin x + \\cos x}\\]\n\\[= \\sin^2 x - \\sin x\\cos x + \\cos^2 x\\]\n\\[= 1 - \\sin x\\cos x\\]\nKyun: \\(a^3 + b^3 = (a + b)(a^2 - ab + b^2)\\) se numerator mein \\((\\sin x + \\cos x)\\) factor nikla jo denominator se cancel ho gaya (pabandi ke mutabiq woh zero nahi). Phir \\(\\sin^2 x + \\cos^2 x = 1\\).\nYahan \\(a = \\sin x\\) aur \\(b = \\cos x\\) hain; formula ka beech wala hissa \\(a^2 - ab + b^2\\) hai, jis mein \\(ab\\) ke saath minus hota hai.",
+              "Doosri term\n\\[\\sqrt{1 + \\tan^2 x} = \\sqrt{\\sec^2 x} = |\\sec x|\\]\nKyun: square root ka jawab kabhi negative nahi hota. Is liye \\(\\sqrt{\\sec^2 x}\\) sirf tab \\(\\sec x\\) hai jab \\(\\sec x\\) positive ho, yani \\(\\cos x > 0\\). Agar \\(\\cos x\\) negative ho to \\(\\sqrt{\\sec^2 x} = -\\sec x\\) hoga. Misaal: \\(\\sqrt{(-2)^2} = \\sqrt{4} = 2\\), \\(-2\\) nahi.\nDhyan dein: yahan seedha \\(\\sec x\\) likh dena is sawal ki sab se bari aur aam ghalti hai.",
+              "Case (a): \\(\\cos x > 0\\) (quadrant I ya IV)\n\\[\\dfrac{\\sin x}{\\sec x} = \\sin x\\cos x\\]\n\\[1 - \\sin x\\cos x - \\sin x\\cos x = \\tfrac{1}{2}\\]\n\\[1 - 2\\sin x\\cos x = \\tfrac{1}{2}\\]\n\\[\\sin 2x = \\tfrac{1}{2}\\]\nKyun: is case mein \\(|\\sec x| = \\sec x\\), aur \\(\\sec x\\) se divide karna \\(\\cos x\\) se multiply karne ke barabar hai. Do \\(\\sin x\\cos x\\) mil kar \\(2\\sin x\\cos x = \\sin 2x\\) bane, phir \\(1 - \\sin 2x = \\frac{1}{2}\\) se \\(\\sin 2x = \\frac{1}{2}\\).\nIs case mein \\(x\\) pehle ya chauthe quadrant mein hai; yeh shart aage jawab chhantne (filter karne) mein kaam aayegi.",
+              "\\(\\sin 2x = \\frac{1}{2}\\) hal karein\n\\[2x = \\tfrac{\\pi}{6} + 2n\\pi \\text{ ya } \\tfrac{5\\pi}{6} + 2n\\pi\\]\n\\[x = \\tfrac{\\pi}{12} + n\\pi \\text{ ya } \\tfrac{5\\pi}{12} + n\\pi\\]\n\\([0, 2\\pi]\\) mein: \\(\\frac{\\pi}{12}, \\frac{5\\pi}{12}, \\frac{13\\pi}{12}, \\frac{17\\pi}{12}\\).\nKyun: sine positive hai to angle \\(2x\\) pehle ya doosre quadrant mein, reference angle \\(\\frac{\\pi}{6}\\). Phir 2 se divide kiya, to period \\(2\\pi\\) bhi \\(\\pi\\) ban gaya.",
+              "Sirf \\(\\cos x > 0\\) wali values rakhein\n\\[\\tfrac{\\pi}{12}, \\tfrac{5\\pi}{12} \\text{ (quadrant I): qabool}\\]\n\\[\\tfrac{13\\pi}{12}, \\tfrac{17\\pi}{12} \\text{ (quadrant III): rad}\\]\nKyun: Case (a) ki buniyad hi yeh shart thi ke \\(\\cos x > 0\\). \\(\\frac{13\\pi}{12}\\) aur \\(\\frac{17\\pi}{12}\\) teesre quadrant mein hain jahan cosine negative hota hai, is liye yeh is case ke jawab ho hi nahi sakte.",
+              "Case (b): \\(\\cos x < 0\\) (quadrant II ya III)\n\\[\\dfrac{\\sin x}{|\\sec x|} = -\\sin x\\cos x\\]\n\\[1 - \\sin x\\cos x + \\sin x\\cos x = \\tfrac{1}{2}\\]\n\\[1 = \\tfrac{1}{2}\\]\nYeh namumkin hai, is liye \\(\\cos x < 0\\) par koi solution nahi.\nKyun: yahan \\(|\\sec x| = -\\sec x\\), to doosri term ka sign ulta ho gaya aur dono \\(\\sin x\\cos x\\) cancel ho gaye. Left side har jagah 1 reh gayi, jo kabhi \\(\\frac{1}{2}\\) nahi ban sakti.\nYani doosre aur teesre quadrant mein equation ka koi jawab hai hi nahi; yeh baat graph mein us seedhi line se bhi nazar aati hai jo 1 ki unchai par chalti hai.",
+              "General solution\n\\[\\left\\{\\tfrac{\\pi}{12} + 2n\\pi\\right\\} \\cup \\left\\{\\tfrac{5\\pi}{12} + 2n\\pi\\right\\}\\]\nKyun: qabool shuda values sirf \\(2\\pi\\) ke baad dohraati hain, kyunke \\(\\cos x\\) ka sign \\(2\\pi\\) ke baad wapas aata hai, \\(\\pi\\) ke baad nahi. Dono values par \\(\\cos x \\neq 0\\) aur \\(\\sin x + \\cos x > 0\\), is liye equation wahan defined hai.\nDhyan dein: \\(\\frac{\\pi}{12} + n\\pi\\) likhne se rejected values \\(\\frac{13\\pi}{12}\\) aur \\(\\frac{17\\pi}{12}\\) wapas aa jati hain.",
+              "Tasdeeq\n\\[x = \\tfrac{\\pi}{12}:\\ \\sin x\\cos x = \\tfrac{1}{2}\\sin\\tfrac{\\pi}{6} = \\tfrac{1}{4}\\]\n\\[\\text{L.H.S.} = \\left(1 - \\tfrac{1}{4}\\right) - \\tfrac{1}{4} = \\tfrac{1}{2} \\;\\checkmark\\]\n\\[x = \\tfrac{13\\pi}{12}:\\ \\text{L.H.S.} = \\tfrac{3}{4} + \\tfrac{1}{4} = 1 \\neq \\tfrac{1}{2}\\]\nKyun: \\(\\frac{13\\pi}{12}\\) par bhi \\(\\sin x\\cos x = \\frac{1}{4}\\) hai, magar wahan \\(\\cos x < 0\\) hai, is liye doosri term \\(-\\frac{1}{4}\\) ban kar plus ho jati hai aur jawab 1 aata hai. Isi se saabit hota hai ke us value ko rad karna sahi tha.\nGraph bhi yehi kehta hai: jahan \\(\\cos x < 0\\) hai wahan left side ki line 1 par seedhi rehti hai aur \\(\\frac{1}{2}\\) wali line ko kabhi nahi chhooti."
+            ],
+            "final_answer": "\\([0, 2\\pi]\\) mein: \\(x = \\frac{\\pi}{12}, \\frac{5\\pi}{12}\\)\nGeneral solution \\(= \\left\\{\\frac{\\pi}{12} + 2n\\pi\\right\\} \\cup \\left\\{\\frac{5\\pi}{12} + 2n\\pi\\right\\}\\), \\(n \\in \\mathbb{Z}\\)",
+            "answer_figure": {
+              "$asset": "c12-math-ch10-fig-ex10-1-q21",
+              "alt": "Graph of the left side of the equation for x from 0 to 2 pi together with the horizontal line y equals one half. The left side equals 1 minus sine 2x where cosine x is positive and equals 1 where cosine x is negative; it meets the line only at x equals pi over 12 and 5 pi over 12.",
+              "caption": "Left side sirf x = π/12 aur 5π/12 par y = 1/2 se milti hai; jahan cos x < 0 hai wahan yeh 1 par hi rehti hai (original drawing)"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kitab mein Exercise 10.1 ke jawab chhape hue nahi hain. Is page ka har jawab hamara apna hai: qadam ba qadam hal kiya gaya, computer algebra system (sympy) se alag se check kiya gaya, aur ek solution book se bhi milaya gaya. Is liye aap apna jawab yahan wale jawab se mila kar dekh sakte hain."
+          }
+        ]
+      }
+    }
+  ]
+}
