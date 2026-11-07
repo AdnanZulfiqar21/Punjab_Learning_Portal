@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q18-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q18",
+      "title": "Question 18 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 136,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 18: book p. 134 (Q2-Q25 general solutions and IVPs); answer key p. 303 (keys numbered 2-29)"
+        }
+      ],
+      "variant_of": "C12-MATH-CH4-EXERCISE-4-2-Q18",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "18",
+            "prompt": "18 Find the general solution of the differential equation \\(x\\frac{dy}{dx} - y = \\frac{x^4 + x^3y}{y^3 - x^3}\\).",
+            "explanation": "Yeh sawal lamba dikhta hai lekin tareeqa wohi hai. Agar \\(y = vx\\) rakhein to right side \\(x\\) times \\(v\\) ka function ban jati hai aur left side \\(x^2\\frac{dv}{dx}\\).\nIs liye equation homogeneous hai aur \\(y = vx\\) se separable ho jayegi.\nDiya kya hai? \\(x\\frac{dy}{dx} - y = \\frac{x^4 + x^3y}{y^3 - x^3}\\). Find kya karna hai? General solution.\nRule kaunsa? \\(y = vx\\), phir \\(v^3 - 1\\) ko \\(v + 1\\) par divide karna (kyunke upar ki degree neeche se zyada hai), phir integrate.\nPlan: dono sides alag alag simplify, variables alag, division, integrate, \\(v\\) wapas, aur \\(x^3\\) se multiply.",
+            "steps": [
+              "Diya gaya: \\(x\\frac{dy}{dx} - y = \\frac{x^4 + x^3y}{y^3 - x^3}\\).\nMaloom karna: general solution.\nTareeqa: Homogeneous equation: \\(y = vx\\), \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\). (\\(x\\) se divide karein to \\(\\frac{dy}{dx} = \\frac{y}{x} + \\frac{1 + y/x}{(y/x)^3 - 1}\\), jo sirf \\(y/x\\) ka function hai.)",
+              "Left side mein \\(y = vx\\)\n\\[x\\left(v + x\\dfrac{dv}{dx}\\right) - vx = x^2\\dfrac{dv}{dx}\\]\nKyun: Bracket kholne par \\(xv + x^2\\frac{dv}{dx}\\) aaya, aur \\(xv\\) aur \\(-vx\\) aapas mein cancel ho gaye. Is sawal mein yeh hissa khud hi bohat saaf ho jata hai.",
+              "Right side mein \\(y = vx\\)\n\\[\\dfrac{x^4 + x^4v}{x^3v^3 - x^3} = \\dfrac{x^4(1 + v)}{x^3(v^3 - 1)}\\]\n\\[= \\dfrac{x(1 + v)}{v^3 - 1}\\]\nKyun: \\(x^3y = x^3 \\cdot vx = x^4v\\) aur \\(y^3 = v^3x^3\\). Upar se \\(x^4\\) aur neeche se \\(x^3\\) common nikala, phir \\(x^3\\) cancel kiya to ek \\(x\\) bach gaya.\nDhyan dein: Denominator mein \\(y^3 - x^3\\) ko \\(x^3(v^3 - 1)\\) likhna hai, \\(x^3(1 - v^3)\\) nahi; sign ulta ho gaya to aage poora jawab ulta ho jayega. Isi liye har qadam par sign dobara dekh lena achhi aadat hai.",
+              "Dono sides barabar kar ke variables alag karein\n\\[x^2\\dfrac{dv}{dx} = \\dfrac{x(1 + v)}{v^3 - 1}\\]\n\\[\\dfrac{v^3 - 1}{v + 1}\\,dv = \\dfrac{dx}{x}\\]\nKyun: Dono taraf \\(x\\) se divide kiya, phir \\(\\frac{v^3 - 1}{v + 1}\\) ko \\(dv\\) ke saath aur \\(\\frac{1}{x}\\) ko \\(dx\\) ke saath rakha.",
+              "\\(v^3 - 1\\) ko \\(v + 1\\) par divide karein\n\\[(v + 1)(v^2 - v + 1) = v^3 + 1\\]\n\\[\\dfrac{v^3 - 1}{v + 1} = v^2 - v + 1 - \\dfrac{2}{v + 1}\\]\nKyun: Numerator ki degree 3 hai aur denominator ki 1, aisi fraction ko seedha integrate nahi kar sakte; pehle divide karna parta hai. Formula \\(a^3 + b^3 = (a + b)(a^2 - ab + b^2)\\) se \\(v^3 + 1\\) ke factors maloom hain, aur \\(v^3 - 1 = (v^3 + 1) - 2\\).\nDhyan dein: Yahan \\(-2\\) bachta hai, \\(-1\\) nahi; isi farq ki wajah se is sawal ka jawab key se mukhtalif aata hai (neeche dekhiye).",
+              "Integrate karein\n\\[\\dfrac{v^3}{3} - \\dfrac{v^2}{2} + v - 2\\ln|v + 1|\\]\n\\[= \\ln|x| + \\ln|C|\\]\nKyun: Har power par power rule \\(\\int v^n\\,dv = \\frac{v^{n+1}}{n+1}\\) lagaya, aur \\(\\int \\frac{dv}{v + 1} = \\ln|v + 1|\\).",
+              "6 se multiply kar ke logs ikatthe karein\n\\[2v^3 - 3v^2 + 6v\\]\n\\[= 6\\ln|x| + 12\\ln|v + 1| + 6\\ln|C|\\]\n\\[= 6\\ln|Cx(v + 1)^2|\\]\nKyun: 6 se multiply kiya taa ke 3 aur 2 wale fractions khatam ho jayein. \\(-2\\ln|v + 1|\\) ko right side le gaye to \\(+12\\ln|v + 1|\\) bana, aur \\(12\\ln|v + 1| = 6\\ln(v + 1)^2\\). Phir \\(\\ln a + \\ln b + \\ln c = \\ln abc\\).",
+              "\\(v = y/x\\) wapas rakhein\n\\[x(v + 1)^2 = \\dfrac{(x + y)^2}{x}\\]\n\\[\\dfrac{2y^3}{x^3} - \\dfrac{3y^2}{x^2} + \\dfrac{6y}{x}\\]\n\\[= 6\\ln\\left|\\dfrac{C(x + y)^2}{x}\\right|\\]\nKyun: \\(v + 1 = \\frac{y}{x} + 1 = \\frac{x + y}{x}\\), is liye \\((v + 1)^2 = \\frac{(x + y)^2}{x^2}\\), aur \\(x\\) se multiply karne par ek \\(x\\) cancel ho gaya.",
+              "\\(x^3\\) se multiply karein\n\\[2y^3 - 3xy^2 + 6x^2y\\]\n\\[= 6x^3\\ln\\left|\\dfrac{C(x + y)^2}{x}\\right|\\]\nKyun: Left side ke saare fractions khatam karne ke liye sab se bara denominator \\(x^3\\) tha, is liye har term ko \\(x^3\\) se multiply kiya: \\(\\frac{2y^3}{x^3}\\) se \\(2y^3\\), \\(\\frac{3y^2}{x^2}\\) se \\(3xy^2\\) aur \\(\\frac{6y}{x}\\) se \\(6x^2y\\) bana. Right side par \\(x^3\\) log ke bahar coefficient ki tarah aa gaya.",
+              "Tasdeeq\nIntegrate ki hui equation ki left side ka derivative \\(v^2 - v + 1 - \\frac{2}{v + 1}\\) hai, jo wohi integrand hai \\(\\checkmark\\). Aakhri jawab ko implicitly differentiate karne par (computer algebra se) wapas \\(x\\frac{dy}{dx} - y = \\frac{x^4 + x^3y}{y^3 - x^3}\\) milta hai \\(\\checkmark\\)\nKyun: Dono tasdeeqein batati hain ke chhape hue sawal ka yahi sahi jawab hai."
+            ],
+            "final_answer": "\\(2y^3 - 3xy^2 + 6x^2y = 6x^3\\ln\\left|\\frac{C(x + y)^2}{x}\\right|\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key (jo 18 ki bajaye number 21 par chhapi hai) \\(2y^3 - 3xy^2 + 6x^2y = 6x^3\\ln|C(y + x)|\\) deti hai. Yeh jawab chhapi hui equation ko satisfy nahi karta. Yeh us equation ka jawab hai jis mein denominator \\(y^3 - x^3\\) ki bajaye sirf \\(y^3\\) ho: tab \\(x\\frac{dv}{dx} = \\frac{1 + v}{v^3}\\) banta hai, \\(\\frac{v^3}{v + 1} = v^2 - v + 1 - \\frac{1}{v + 1}\\), aur integrate karne par \\(2v^3 - 3v^2 + 6v = 6\\ln|Cx(v + 1)|\\) aata hai, jo bilkul key wala jawab hai. Yani ya to sawal ka denominator ghalat chhapa hai ya key ghalat hai. Jo sawal chhapa hai (denominator \\(y^3 - x^3\\)) us ka sahi jawab woh hai jo upar nikala gaya. (Keys 2 se 29 tak hain jabke sawal 25 hain; keys 15, 19 aur 27 kisi chhape hue sawal ki nahi.)"
+          }
+        ]
+      }
+    }
+  ]
+}

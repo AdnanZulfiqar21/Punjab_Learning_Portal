@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q9",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 135,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 9: book p. 133-134; answers printed under 'EXERCISE 4.2' (book p. 303, PDF 305), numbered 2-29, matched by content"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9. Find the general solution of the differential equation \\(y - x\\frac{dy}{dx} = 2\\left(y^2 + \\frac{dy}{dx}\\right)\\).",
+            "explanation": "\\(\\frac{dy}{dx}\\) appears twice, so first collect it: we get \\((x + 2)\\frac{dy}{dx} = y - 2y^2\\), a product of a function of \\(x\\) and a function of \\(y\\). Separable.\nPlan: separate, use partial fractions on \\(\\frac{1}{y(1 - 2y)}\\), integrate, and combine the logs.",
+            "steps": [
+              "Given: \\(y - x\\frac{dy}{dx} = 2\\left(y^2 + \\frac{dy}{dx}\\right)\\).\nTo find: the general solution.\nMethod: collect the \\(\\frac{dy}{dx}\\) terms; the equation becomes separable. The \\(y\\)-side needs partial fractions.",
+              "Collect the \\(\\frac{dy}{dx}\\) terms\n\\[y - x\\dfrac{dy}{dx} = 2y^2 + 2\\dfrac{dy}{dx}\\]\n\\[y - 2y^2 = (x + 2)\\dfrac{dy}{dx}\\]\nWhy: expand the bracket; move \\(2y^2\\) left and \\(-x\\frac{dy}{dx}\\) right.",
+              "Separate the variables\n\\[\\dfrac{dy}{y(1 - 2y)} = \\dfrac{dx}{x + 2}\\]\nWhy: \\(y - 2y^2 = y(1 - 2y)\\); divide by it and by \\(x + 2\\).",
+              "Partial fractions\n\\[\\dfrac{1}{y(1 - 2y)} = \\dfrac{A}{y} + \\dfrac{B}{1 - 2y}\\]\n\\[1 = A(1 - 2y) + By\\]\nPut \\(y = 0\\): \\(A = 1\\). Put \\(y = \\frac{1}{2}\\): \\(1 = \\frac{B}{2}\\), \\(B = 2\\).\nWhy: each choice of \\(y\\) kills one term.",
+              "Integrate both sides\n\\[\\int\\left(\\dfrac{1}{y} + \\dfrac{2}{1 - 2y}\\right)dy = \\int\\dfrac{dx}{x + 2}\\]\n\\[\\ln|y| - \\ln|1 - 2y| = \\ln|x + 2| + \\ln|C|\\]\nWhy: \\(\\int\\frac{2\\,dy}{1 - 2y} = -\\ln|1 - 2y|\\) (the derivative of \\(1 - 2y\\) is \\(-2\\)); constant written as \\(\\ln|C|\\).",
+              "Combine and remove the logs\n\\[\\ln\\left|\\dfrac{y}{1 - 2y}\\right| = \\ln|C(x + 2)|\\]\n\\[\\dfrac{y}{1 - 2y} = C(x + 2)\\]\n\\[y = C(x + 2)(1 - 2y)\\]\nWhy: \\(\\ln a - \\ln b = \\ln\\frac{a}{b}\\); equal logs give equal arguments; the \\(\\pm\\) from the absolute values is absorbed into \\(C\\).",
+              "Check\nFrom \\(\\frac{y}{1 - 2y} = C(x + 2)\\), differentiate:\n\\[\\dfrac{1}{(1 - 2y)^2}\\dfrac{dy}{dx} = C = \\dfrac{y}{(1 - 2y)(x + 2)}\\]\n\\[(x + 2)\\dfrac{dy}{dx} = y(1 - 2y) = y - 2y^2\\]\nwhich is the given equation rearranged."
+            ],
+            "final_answer": "\\(y = C(x + 2)(1 - 2y)\\); the key's form \\(y = C(x + 2)(2y - 1)\\) is the same family (replace \\(C\\) by \\(-C\\))."
+          }
+        ]
+      }
+    }
+  ]
+}

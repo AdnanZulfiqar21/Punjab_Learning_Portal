@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-3-Q11",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-3-q11",
+      "title": "Question 11",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 141,
+          "pdf_to": 141,
+          "note": "Exercise 4.3, Q11; book page 139"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 305,
+          "pdf_to": 305,
+          "note": "Answers, Exercise 4.3, key 11"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11 An RC circuit has an emf of 12 volts, resistance \\(R = 6\\,\\Omega\\) and capacitance \\(C = 3\\) farad. Initially, the capacitor is uncharged. Find the current \\(I(t)\\) at any time \\(t\\).",
+            "explanation": "RC circuit: \\(RC\\frac{dq}{dt} = CV_S - q\\) for the charge \\(q\\) (Example 4 (i), Section 4.1.1). Solve for \\(q\\) with \\(q(0) = 0\\), then \\(I = \\frac{dq}{dt}\\).\nThe question asks for the current, not the charge.",
+            "steps": [
+              "Given: \\(V_S = 12\\) V, \\(R = 6\\ \\Omega\\), \\(C = 3\\) F, \\(q(0) = 0\\) (uncharged).\nTo find: \\(I(t)\\).\nMethod: RC model for \\(q\\) (separable), then differentiate: \\(I = \\frac{dq}{dt}\\).",
+              "Write the differential equation\n\\[RC = 6 \\times 3 = 18\\]\n\\[CV_S = 3 \\times 12 = 36\\]\n\\[18\\dfrac{dq}{dt} = 36 - q\\]\nWhy: substitute the values into the RC model.",
+              "Separate and integrate\n\\[\\int\\dfrac{dq}{36 - q} = \\int\\dfrac{dt}{18}\\]\n\\[-\\ln|36 - q| = \\dfrac{t}{18} + C_1\\]\nWhy: the derivative of \\(36 - q\\) is \\(-1\\).",
+              "Use \\(q(0) = 0\\)\n\\[-\\ln 36 = C_1\\]\n\\[\\ln\\left|\\dfrac{36 - q}{36}\\right| = -\\dfrac{t}{18}\\]\n\\[q(t) = 36\\left(1 - e^{-t/18}\\right)\\]\nWhy: substitute \\(C_1\\), combine the logarithms, take \\(e\\). At \\(t = 0\\), \\(36 - q = 36 > 0\\), so the \\(+\\) sign is taken.",
+              "Find the current\n\\[I = \\dfrac{dq}{dt} = 36 \\cdot \\dfrac{1}{18}e^{-t/18}\\]\n\\[I(t) = 2e^{-t/18}\\]\nWhy: current is the rate of flow of charge; \\(\\frac{d}{dt}e^{-t/18} = -\\frac{1}{18}e^{-t/18}\\).",
+              "Check\n\\(I(0) = 2 = \\frac{12}{6} = \\frac{V_S}{R}\\): at the start the empty capacitor takes no voltage \\(\\checkmark\\).\n\\[RI + \\dfrac{q}{C} = 12e^{-t/18} + 12 - 12e^{-t/18} = 12 \\;\\checkmark\\]"
+            ],
+            "final_answer": "\\(I(t) = 2e^{-t/18}\\) amperes"
+          }
+        ]
+      }
+    }
+  ]
+}

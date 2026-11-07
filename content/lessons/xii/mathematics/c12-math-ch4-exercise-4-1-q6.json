@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-1-Q6",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-1-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 130,
+          "pdf_to": 130,
+          "note": "Exercise 4.1, Question 6: RC circuit, charging recalled, discharging deduced; book p. 128, answers p. 303 (PDF 305, printed as item 7)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6 For an RC circuit, recall the differential equation representing the charging of a capacitor. Deduce the differential equation that represents the discharging of the capacitor.",
+            "explanation": "Recall the RC charging model of Example 4(i), then remove the source.\nDischarging means the charged capacitor empties through the resistor with no battery in the loop, so \\(V_{S} = 0\\).",
+            "steps": [
+              "Given: RC circuit; charging equation from Example 4(i).\nTo find: the equation for discharging.\nMethod: recall the charging equation and put \\(V_{S} = 0\\).",
+              "Recall the charging equation\n\\[R\\dfrac{dq}{dt} + \\dfrac{q}{C} = V_{S}\\]\nor\n\\[RC\\dfrac{dq}{dt} = CV_{S} - q\\]\nWhy: Kirchhoff's voltage law \\(V_{R} + V_{C} = V_{S}\\) with \\(V_{R} = R\\frac{dq}{dt}\\), \\(V_{C} = \\frac{q}{C}\\).",
+              "Discharging: no source\n\\[RC\\dfrac{dq}{dt} = -q\\]\n\\[\\dfrac{dq}{dt} = -\\dfrac{1}{RC}q\\]\nWhy: without the battery the loop law becomes \\(V_{R} + V_{C} = 0\\); the capacitor itself drives the current.",
+              "Check:\n\\(q = q_{0}e^{-t/RC}\\) satisfies it (sympy): the charge falls from \\(q_{0}\\) towards 0, as a discharging capacitor should. The key's answer \\(\\frac{dq}{dt} = -\\frac{1}{RC}q\\) (printed as item 7) agrees."
+            ],
+            "final_answer": "Charging: \\(RC\\dfrac{dq}{dt} = CV_{S} - q\\). Discharging: \\(\\dfrac{dq}{dt} = -\\dfrac{1}{RC}q\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key numbers this answer 7, not 6. Its item 6, \\(\\frac{dx}{dt} = -\\frac{k}{\\pi r^{2}}\\sqrt{x},\\ k > 0\\), matches no question of Exercise 4.1, so the answers to Questions 6 and 7 appear as items 7 and 8. The answer itself, \\(\\frac{dq}{dt} = -\\frac{1}{RC}q\\), is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

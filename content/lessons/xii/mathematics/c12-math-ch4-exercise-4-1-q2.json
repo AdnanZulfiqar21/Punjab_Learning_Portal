@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-1-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-1-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 130,
+          "pdf_to": 130,
+          "note": "Exercise 4.1, Question 2: bank deposit with compound interest (Hint); book p. 128, answers p. 303 (PDF 305)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2 Let \\(A\\) denote the amount of money deposited in a bank at time \\(t\\), which grows over time with constant compound interest rate \\(r > 0\\). Construct a differential equation which represents the growth of amount over time. (Hint: The rate of change of amount with respect to time is proportional to amount itself.)",
+            "explanation": "A modelling question: turn the hint into an equation.\n\"Rate of change of \\(A\\)\" is \\(\\frac{dA}{dt}\\); \"proportional to \\(A\\)\" means a constant times \\(A\\), and here the constant is the interest rate \\(r\\).",
+            "steps": [
+              "Given: amount \\(A(t)\\), constant compound interest rate \\(r > 0\\); the rate of change of \\(A\\) is proportional to \\(A\\).\nTo find: a differential equation for \\(A\\).\nMethod: the growth model of Example 1, \\(\\frac{dP}{dt} = kP\\), with \\(k = r\\).",
+              "Write the proportionality\n\\[\\dfrac{dA}{dt} \\propto A\\]\nWhy: with compound interest, interest is earned on the whole current amount, so a bigger amount grows faster.",
+              "Insert the constant\n\\[\\dfrac{dA}{dt} = rA\\]\n\\[\\dfrac{dA}{dt} - rA = 0\\]\nWhy: the constant of proportionality is the interest rate \\(r\\); \\(r > 0\\) gives growth.",
+              "Check:\n\\(A = A_{0}e^{rt}\\) gives \\(\\frac{dA}{dt} = rA_{0}e^{rt} = rA\\) (verified with sympy): the amount grows, as money in a bank should. The key prints \\(\\frac{dA}{dt} - rA = 0\\). Agrees."
+            ],
+            "final_answer": "\\(\\dfrac{dA}{dt} = rA\\), i.e. \\(\\dfrac{dA}{dt} - rA = 0\\) (\\(r > 0\\))."
+          }
+        ]
+      }
+    }
+  ]
+}

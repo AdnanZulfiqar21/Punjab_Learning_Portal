@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-3-Q10-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-3-q10",
+      "title": "Question 10 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 141,
+          "pdf_to": 141,
+          "note": "Exercise 4.3, Q10; book page 139"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 305,
+          "pdf_to": 305,
+          "note": "Answers, Exercise 4.3, key 10"
+        }
+      ],
+      "variant_of": "C12-MATH-CH4-EXERCISE-4-3-Q10",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10 An RL circuit has a battery of 12 volts, a resistor of 60 Ohms, and an inductor of 2 Henries. If the circuit is closed at time \\(t = 0\\) with initial current zero, find the current \\(I(t)\\) flowing in the circuit at any time \\(t\\).",
+            "explanation": "Yeh RL circuit ka sawal hai, bilkul Example 13 jaisa, sirf values alag hain.\nModel: \\(L\\frac{dI}{dt} = V_S - RI\\) (Section 4.1.1, Example 4 (ii)), jo Kirchhoff's voltage law se banta hai.\nDiya kya hai? \\(V_S = 12\\), \\(R = 60\\), \\(L = 2\\), aur \\(I(0) = 0\\).\nFind kya karna hai? Kisi bhi waqt current \\(I(t)\\).\nPlan: values rakhein, variables alag kar ke integrate karein, initial condition lagayein.",
+            "steps": [
+              "Diya gaya: \\(V_S = 12\\) V, \\(R = 60\\ \\Omega\\), \\(L = 2\\) H, \\(I(0) = 0\\).\nMaloom karna: \\(I(t)\\).\nTareeqa: RL circuit model, jo separable hai; initial condition se constant aur sign dono tay honge.",
+              "Differential equation likhein\n\\[2\\dfrac{dI}{dt} = 12 - 60I\\]\n\\[\\dfrac{dI}{dt} = 6 - 30I = 6(1 - 5I)\\]\nKyun: values rakhin aur \\(L = 2\\) se divide kiya. Phir 6 common nikala taa ke integrate karna aasaan ho.",
+              "Variables alag karein aur integrate karein\n\\[\\int\\dfrac{dI}{1 - 5I} = \\int 6\\,dt\\]\n\\[-\\dfrac{1}{5}\\ln|1 - 5I| = 6t + C\\]\nKyun: \\(1 - 5I\\) ka derivative \\(-5\\) hai, is liye \\(\\int\\frac{dI}{1 - 5I} = -\\frac{1}{5}\\ln|1 - 5I|\\).\nDhyan dein: \\(-\\frac{1}{5}\\) wala factor bhoolna sab se aam ghalti hai; derivative le kar check kar lein.",
+              "\\(I(0) = 0\\) lagayein\n\\[-\\dfrac{1}{5}\\ln 1 = 0 + C \\Rightarrow C = 0\\]\nKyun: \\(\\ln 1 = 0\\); shuru mein current zero tha.",
+              "\\(I\\) nikalein\n\\[\\ln|1 - 5I| = -30t\\]\n\\[1 - 5I = e^{-30t}\\]\n\\[I(t) = \\dfrac{1}{5}\\left(1 - e^{-30t}\\right)\\]\nKyun: \\(-5\\) se multiply kiya (\\(6 \\times 5 = 30\\)), phir \\(e\\) liya. \\(t = 0\\) par \\(1 - 5I = 1\\) positive hai, is liye \\(+\\) sign sahi hai (Example 13 ki tarah). Aakhir mein \\(I\\) akela kiya.",
+              "Tasdeeq\n\\[\\dfrac{dI}{dt} = 6e^{-30t}\\]\n\\[2(6e^{-30t}) + 60 \\cdot \\tfrac{1}{5}(1 - e^{-30t}) = 12 \\;\\checkmark\\]\n\\(I(0) = 0\\), aur jab \\(t \\to \\infty\\), \\(I \\to \\frac{1}{5} = \\frac{12}{60} = \\frac{V_S}{R}\\), yani Ohm's law wala current \\(\\checkmark\\)"
+            ],
+            "final_answer": "\\(I(t) = \\frac{1}{5}\\left(1 - e^{-30t}\\right)\\) amperes"
+          }
+        ]
+      }
+    }
+  ]
+}

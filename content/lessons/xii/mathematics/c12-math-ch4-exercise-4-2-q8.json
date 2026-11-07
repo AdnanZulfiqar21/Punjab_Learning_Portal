@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q8",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 135,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 8: book p. 133-134; answers printed under 'EXERCISE 4.2' (book p. 303, PDF 305), numbered 2-29, matched by content"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8. Find the general solution of the differential equation \\(x^2\\,dx + (1 - x^2)\\,dy = 0\\).",
+            "explanation": "Only \\(x\\) appears besides \\(dy\\), so the equation is separable: \\(dy = f(x)\\,dx\\).\nPlan: write \\(dy = \\frac{x^2}{x^2 - 1}\\,dx\\), divide out the improper fraction, then use \\(\\int\\frac{dx}{x^2 - 1} = \\frac{1}{2}\\ln\\left|\\frac{x - 1}{x + 1}\\right|\\).",
+            "steps": [
+              "Given: \\(x^2\\,dx + (1 - x^2)\\,dy = 0\\), \\(x \\ne \\pm 1\\).\nTo find: the general solution.\nMethod: separable; make \\(dy\\) the subject and integrate. The fraction has equal degrees on top and bottom, so divide first.",
+              "Separate\n\\[(1 - x^2)\\,dy = -x^2\\,dx\\]\n\\[dy = \\dfrac{x^2}{x^2 - 1}\\,dx\\]\nWhy: move \\(x^2\\,dx\\) across, divide by \\(1 - x^2\\); \\(\\frac{-x^2}{1 - x^2} = \\frac{x^2}{x^2 - 1}\\).",
+              "Divide the improper fraction\n\\[\\dfrac{x^2}{x^2 - 1} = \\dfrac{(x^2 - 1) + 1}{x^2 - 1}\\]\n\\[= 1 + \\dfrac{1}{x^2 - 1}\\]\nWhy: top and bottom have the same degree; adding and subtracting 1 splits it into a whole part and a proper fraction.",
+              "Integrate\n\\[y = \\int dx + \\int\\dfrac{dx}{x^2 - 1}\\]\n\\[y = x + \\dfrac{1}{2}\\ln\\left|\\dfrac{x - 1}{x + 1}\\right| + C\\]\nWhy: standard integral \\(\\int\\frac{dx}{x^2 - a^2} = \\frac{1}{2a}\\ln\\left|\\frac{x - a}{x + a}\\right|\\) with \\(a = 1\\) (it comes from \\(\\frac{1}{x^2 - 1} = \\frac{1}{2}\\left(\\frac{1}{x - 1} - \\frac{1}{x + 1}\\right)\\)).",
+              "Check\n\\[\\dfrac{dy}{dx} = 1 + \\dfrac{1}{2}\\left(\\dfrac{1}{x - 1} - \\dfrac{1}{x + 1}\\right)\\]\n\\[= 1 + \\dfrac{1}{x^2 - 1} = \\dfrac{x^2}{x^2 - 1}\\]\nSo \\((1 - x^2)\\,dy = -x^2\\,dx\\), the given equation."
+            ],
+            "final_answer": "\\(y = x + \\frac{1}{2}\\ln\\left|\\frac{x - 1}{x + 1}\\right| + C\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

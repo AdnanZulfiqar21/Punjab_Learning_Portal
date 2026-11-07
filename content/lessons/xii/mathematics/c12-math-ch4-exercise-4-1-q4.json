@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-1-Q4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-1-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 130,
+          "pdf_to": 130,
+          "note": "Exercise 4.1, Question 4: object thrown upward, air resistance proportional to velocity, and without air resistance; book p. 128, answers p. 303 (PDF 305)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4 An object of mass \\(m\\) is thrown vertically upward. Assuming that the air resistance is proportional to its velocity at any time \\(t\\), construct a differential equation representing the velocity \\(v\\). Also, deduce the equation in the case when air resistance is negligible.",
+            "explanation": "A modelling question from mechanics: use Newton's second law, mass \\(\\times\\) acceleration = total force.\nTake upward as positive. Two forces act: weight \\(mg\\) downward and air resistance \\(kv\\) opposite to the motion.",
+            "steps": [
+              "Given: mass \\(m\\), thrown upward; air resistance proportional to velocity \\(v\\).\nTo find: a differential equation for \\(v(t)\\), with and without air resistance.\nMethod: Newton's second law \\(m\\frac{dv}{dt} = \\) net force, with upward taken as positive.",
+              "The forces\nWeight: \\(-mg\\) (downward).\nAir resistance: \\(\\propto v\\), so it is \\(kv\\) in size with \\(k \\ge 0\\), and it opposes the motion: \\(-kv\\).\nWhy: air always pushes against the direction of motion; writing \\(-kv\\) gives a downward force while \\(v > 0\\) (going up) and an upward force while \\(v < 0\\) (falling).",
+              "Newton's second law\n\\[m\\dfrac{dv}{dt} = -mg - kv\\]\n\\[\\dfrac{dv}{dt} = -g - \\dfrac{k}{m}v\\]\nWhy: acceleration is \\(\\frac{dv}{dt}\\); dividing by \\(m\\) leaves \\(\\frac{dv}{dt}\\) alone.",
+              "Air resistance negligible\nPut \\(k = 0\\):\n\\[\\dfrac{dv}{dt} = -g\\]\n\\[\\dfrac{dv}{dt} + g = 0\\]\nWhy: with no air resistance the only force is the weight, so the acceleration is \\(-g\\) (free fall).",
+              "Check:\n\\(v = \\left(v_{0} + \\frac{mg}{k}\\right)e^{-kt/m} - \\frac{mg}{k}\\) satisfies the first equation, and as \\(k \\to 0\\) it tends to \\(v = v_{0} - gt\\), which satisfies \\(\\frac{dv}{dt} = -g\\) (both verified with sympy). The key prints \\(\\frac{dv}{dt} = -g - \\frac{k}{m}v,\\ k \\ge 0\\) and \\(\\frac{dv}{dt} + g = 0\\). Agrees."
+            ],
+            "final_answer": "With air resistance: \\(\\dfrac{dv}{dt} = -g - \\dfrac{k}{m}v\\) (\\(k \\ge 0\\), \\(g\\) = acceleration due to gravity). Air resistance negligible: \\(\\dfrac{dv}{dt} + g = 0\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

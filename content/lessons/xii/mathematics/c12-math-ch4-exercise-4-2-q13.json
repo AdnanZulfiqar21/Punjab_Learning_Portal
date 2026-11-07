@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q13",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q13",
+      "title": "Question 13",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 136,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 13: book p. 134 (Q2-Q25 general solutions and IVPs); answer key p. 303 (keys numbered 2-29)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13",
+            "prompt": "13 Find the general solution of the differential equation \\(\\frac{dy}{dx} = \\cos^2\\left(\\frac{y}{x}\\right) + \\frac{y}{x}\\).",
+            "explanation": "The right side contains \\(x\\) and \\(y\\) only through the ratio \\(y/x\\), so the equation is homogeneous (Section 4.2.2).\nWe must find the general solution, with one arbitrary constant.\nPlan: put \\(y = vx\\), separate \\(v\\) and \\(x\\), integrate, then put back \\(v = y/x\\).",
+            "steps": [
+              "Given: \\(\\frac{dy}{dx} = \\cos^2(y/x) + y/x\\).\nTo find: the general solution.\nMethod: Homogeneous equation: substitute \\(y = vx\\), so \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\). The equation then becomes separable in \\(v\\) and \\(x\\).",
+              "Substitute \\(y = vx\\)\n\\[v + x\\dfrac{dv}{dx} = \\cos^2 v + v\\]\nWhy: \\(y/x = v\\), and differentiating \\(y = vx\\) by the product rule gives \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\).",
+              "Cancel \\(v\\)\n\\[x\\dfrac{dv}{dx} = \\cos^2 v\\]\nWhy: \\(v\\) appears on both sides, so it cancels. This always happens when the right side is \"\\(v\\) + something\".",
+              "Separate the variables\n\\[\\dfrac{dv}{\\cos^2 v} = \\dfrac{dx}{x}\\]\n\\[\\sec^2 v\\,dv = \\dfrac{dx}{x}\\]\nWhy: all \\(v\\)-terms go with \\(dv\\), all \\(x\\)-terms with \\(dx\\) (we divide by \\(\\cos^2 v\\), assuming \\(\\cos v \\neq 0\\)); \\(1/\\cos^2 v = \\sec^2 v\\).",
+              "Integrate both sides\n\\[\\int \\sec^2 v\\,dv = \\int \\dfrac{dx}{x}\\]\n\\[\\tan v = \\ln|x| + \\ln|C|\\]\n\\[\\tan v = \\ln|Cx|\\]\nWhy: \\(\\frac{d}{dv}\\tan v = \\sec^2 v\\) and \\(\\int \\frac{1}{x}\\,dx = \\ln|x|\\). Writing the constant as \\(\\ln|C|\\) lets the two logarithms combine.",
+              "Put back \\(v = y/x\\)\n\\[\\tan\\left(\\dfrac{y}{x}\\right) = \\ln|Cx|\\]\nWhy: the answer must be in the original variables \\(x\\) and \\(y\\).",
+              "Check\nDifferentiate \\(\\tan(y/x) = \\ln|Cx|\\) with respect to \\(x\\):\n\\[\\sec^2\\!\\left(\\tfrac{y}{x}\\right)\\dfrac{xy' - y}{x^2} = \\dfrac{1}{x}\\]\n\\[xy' - y = x\\cos^2\\!\\left(\\tfrac{y}{x}\\right)\\]\nDividing by \\(x\\) gives back \\(y' = \\cos^2(y/x) + y/x\\) \\(\\checkmark\\)\nWhy: getting the given equation back confirms the solution."
+            ],
+            "final_answer": "\\(\\tan\\left(\\frac{y}{x}\\right) = \\ln|Cx|\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints this answer as number 14, not 13. The Exercise 4.2 keys are numbered 2 to 29 for 25 questions (key 2 answers Question 1, and the extra keys 15, 19 and 27 match no printed question), so look for this answer under 14. The answer itself, \\(\\tan(y/x) = \\ln|Cx|\\), is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

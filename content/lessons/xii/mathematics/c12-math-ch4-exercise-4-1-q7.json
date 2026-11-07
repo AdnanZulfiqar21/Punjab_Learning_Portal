@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-1-Q7",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-1-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 130,
+          "pdf_to": 130,
+          "note": "Exercise 4.1, Question 7: RL circuit, charging recalled, discharging deduced; book p. 128, answers p. 303 (PDF 305, printed as item 8)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7 For an RL circuit, recall the differential equation representing the charging of an inductor. Deduce the differential equation that represents the discharging of the inductor.",
+            "explanation": "Recall the RL charging model of Example 4(ii), then remove the source.\nWhen the source is removed (\\(V_{S} = 0\\)) the current dies away through the resistor.",
+            "steps": [
+              "Given: RL circuit; charging equation from Example 4(ii).\nTo find: the equation for discharging.\nMethod: recall the charging equation and put \\(V_{S} = 0\\).",
+              "Recall the charging equation\n\\[L\\dfrac{dI}{dt} + RI = V_{S}\\]\nor\n\\[L\\dfrac{dI}{dt} = V_{S} - RI\\]\nWhy: Kirchhoff's voltage law \\(V_{L} + V_{R} = V_{S}\\) with \\(V_{L} = L\\frac{dI}{dt}\\), \\(V_{R} = RI\\).",
+              "Discharging: no source\n\\[L\\dfrac{dI}{dt} = -RI\\]\n\\[\\dfrac{dI}{dt} = -\\dfrac{R}{L}I\\]\nWhy: without the battery the loop law becomes \\(V_{L} + V_{R} = 0\\); the inductor keeps the current going for a while, and the resistor uses it up.",
+              "Check:\n\\(I = I_{0}e^{-Rt/L}\\) satisfies it (sympy): the current decays from \\(I_{0}\\) to 0. The key's answer \\(\\frac{dI}{dt} = -\\frac{R}{L}I\\) (printed as item 8) agrees."
+            ],
+            "final_answer": "Charging: \\(L\\dfrac{dI}{dt} = V_{S} - RI\\). Discharging: \\(\\dfrac{dI}{dt} = -\\dfrac{R}{L}I\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints this answer as item 8 (its extra item 6 belongs to no question of this exercise). The answer \\(\\frac{dI}{dt} = -\\frac{R}{L}I\\) itself is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

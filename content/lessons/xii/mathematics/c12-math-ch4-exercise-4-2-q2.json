@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 135,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 2: book p. 133-134; answers printed under 'EXERCISE 4.2' (book p. 303, PDF 305), numbered 2-29, matched by content"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2. Find the general solution of the differential equation \\(\\frac{dy}{dx} = \\left(\\frac{1 - y^2}{1 - x^2}\\right)^{1/2}\\).",
+            "explanation": "The power \\(\\frac{1}{2}\\) is a square root, so the right side is \\(\\frac{\\sqrt{1 - y^2}}{\\sqrt{1 - x^2}}\\): a function of \\(y\\) times a function of \\(x\\). Separable.\nPlan: separate, then use \\(\\int\\frac{du}{\\sqrt{1 - u^2}} = \\sin^{-1}u\\) on both sides.",
+            "steps": [
+              "Given: \\(\\frac{dy}{dx} = \\left(\\frac{1 - y^2}{1 - x^2}\\right)^{1/2}\\).\nTo find: the general solution.\nMethod: the equation is separable; separate the variables and integrate both sides with the standard integral \\(\\int\\frac{du}{\\sqrt{1 - u^2}} = \\sin^{-1}u\\).",
+              "Write the power as a square root\n\\[\\dfrac{dy}{dx} = \\dfrac{\\sqrt{1 - y^2}}{\\sqrt{1 - x^2}}\\]\nWhy: \\(a^{1/2} = \\sqrt{a}\\) and \\(\\sqrt{\\frac{p}{q}} = \\frac{\\sqrt{p}}{\\sqrt{q}}\\). We take \\(|x| < 1\\), \\(|y| < 1\\) so the roots are real and non-zero.",
+              "Separate the variables\n\\[\\dfrac{dy}{\\sqrt{1 - y^2}} = \\dfrac{dx}{\\sqrt{1 - x^2}}\\]\nWhy: divide both sides by \\(\\sqrt{1 - y^2}\\) and multiply by \\(dx\\).",
+              "Integrate both sides\n\\[\\int\\dfrac{dy}{\\sqrt{1 - y^2}} = \\int\\dfrac{dx}{\\sqrt{1 - x^2}}\\]\n\\[\\sin^{-1}y = \\sin^{-1}x + C\\]\nWhy: \\(\\frac{d}{du}\\sin^{-1}u = \\frac{1}{\\sqrt{1 - u^2}}\\). One constant \\(C\\) is enough.",
+              "Check\nDifferentiate \\(\\sin^{-1}y - \\sin^{-1}x = C\\):\n\\[\\dfrac{1}{\\sqrt{1 - y^2}}\\dfrac{dy}{dx} - \\dfrac{1}{\\sqrt{1 - x^2}} = 0\\]\n\\[\\dfrac{dy}{dx} = \\dfrac{\\sqrt{1 - y^2}}{\\sqrt{1 - x^2}}\\]\nThis is the given equation."
+            ],
+            "final_answer": "\\(\\sin^{-1}y - \\sin^{-1}x = C\\), i.e. \\(\\sin^{-1}y = \\sin^{-1}x + C\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key (item 3) prints \\(\\sin^{-1}x + \\sin^{-1}x + C = 0\\). This is a misprint: it does not contain \\(y\\) at all, and even with the second term read as \\(\\sin^{-1}y\\) the sign would be wrong (\\(\\sin^{-1}x + \\sin^{-1}y = C\\) solves \\(\\frac{dy}{dx} = -\\frac{\\sqrt{1 - y^2}}{\\sqrt{1 - x^2}}\\)). The correct general solution is \\(\\sin^{-1}y - \\sin^{-1}x = C\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

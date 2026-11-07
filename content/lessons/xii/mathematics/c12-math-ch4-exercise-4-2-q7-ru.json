@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q7-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q7",
+      "title": "Question 7 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 135,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 7: book p. 133-134; answers printed under 'EXERCISE 4.2' (book p. 303, PDF 305), numbered 2-29, matched by content"
+        }
+      ],
+      "variant_of": "C12-MATH-CH4-EXERCISE-4-2-Q7",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7. Find the general solution of the differential equation \\(\\frac{dy}{dx} = \\frac{1 + x}{(1 - x)(1 + x^2)}\\).",
+            "explanation": "Right side mein sirf \\(x\\) hai, \\(y\\) bilkul nahi (yani \\(h(y) = 1\\)). Is liye equation separable hai aur \\(y = \\int f(x)\\,dx\\).\nMushkil sirf integral mein hai: fraction ke neeche ek linear factor \\((1 - x)\\) aur ek quadratic factor \\((1 + x^2)\\) hai.\nRule kaunsa? Partial fractions (fraction ko chhote aasaan fractions mein torna).\nPlan: partial fractions banayenge, har hissa alag integrate karenge, aur logs ko jor kar ek jawab banayenge.",
+            "steps": [
+              "Diya gaya: \\(\\frac{dy}{dx} = \\frac{1 + x}{(1 - x)(1 + x^2)}\\).\nMaloom karna: general solution.\nTareeqa: \\(h(y) = 1\\) wali separable equation hai, to \\(dy = f(x)\\,dx\\) likh kar seedha integrate karenge. \\(f(x)\\) ko integrate karne ke liye pehle partial fractions mein torenge.",
+              "Alag karein\n\\[dy = \\dfrac{1 + x}{(1 - x)(1 + x^2)}\\,dx\\]\nKyun: Dono taraf \\(dx\\) se multiply kiya. \\(y\\) to pehle hi akela hai.",
+              "Partial fractions ki shakal\n\\[\\dfrac{1 + x}{(1 - x)(1 + x^2)} = \\dfrac{A}{1 - x} + \\dfrac{Bx + D}{1 + x^2}\\]\n\\[1 + x = A(1 + x^2) + (Bx + D)(1 - x)\\]\nKyun: Linear factor \\((1 - x)\\) ke upar sirf constant \\(A\\) aata hai. \\(1 + x^2\\) ke real roots nahi hain (yeh toot nahi sakta), is liye us ke upar linear expression \\(Bx + D\\) aata hai. Phir dono taraf poore denominator se multiply kiya.",
+              "\\(A\\), \\(B\\), \\(D\\) maloom karein\n\\(x = 1\\) rakhein: \\(2 = 2A\\), to \\(A = 1\\).\n\\(x^2\\) ke coefficients: \\(0 = A - B\\), to \\(B = 1\\).\nConstant terms: \\(1 = A + D\\), to \\(D = 0\\).\nKyun: \\(x = 1\\) rakhne se doosri term \\((1 - x)\\) ki wajah se zero ho jati hai aur \\(A\\) seedha mil jata hai. Baqi coefficients compare kar ke mile. Tasalli ke liye \\(x\\) ke coefficient: \\(1 = B - D = 1\\), theek hai.\nDhyan dein: \\((Bx + D)(1 - x)\\) ko kholte waqt \\(-Bx^2\\) ka minus na bhooliye.",
+              "Dobara likh kar integrate karein\n\\[dy = \\left(\\dfrac{1}{1 - x} + \\dfrac{x}{1 + x^2}\\right)dx\\]\n\\[y = -\\ln|1 - x| + \\dfrac{1}{2}\\ln(1 + x^2) + \\ln|C|\\]\nKyun: \\(1 - x\\) ki derivative \\(-1\\) hai, is liye \\(\\int\\frac{dx}{1 - x} = -\\ln|1 - x|\\). Doosre hisse mein upar \\(x\\) hai jo neeche wale \\(1 + x^2\\) ki derivative \\(2x\\) ka aadha hai, is liye \\(\\frac{1}{2}\\ln(1 + x^2)\\). Constant ko \\(\\ln|C|\\) likha taake logs jur sakein.",
+              "Logs jorein\n\\[y = \\ln\\left|\\dfrac{C\\sqrt{1 + x^2}}{1 - x}\\right|\\]\nKyun: \\(\\frac{1}{2}\\ln a = \\ln\\sqrt{a}\\); jama wale logs zarb ban jate hain aur minus wala log taqseem. Is tarah teeno terms ek log mein aa gayin, bilkul kitab ke jawab jaisa.",
+              "Tasdeeq\n\\[\\dfrac{dy}{dx} = \\dfrac{x}{1 + x^2} + \\dfrac{1}{1 - x}\\]\n\\[= \\dfrac{x(1 - x) + 1 + x^2}{(1 - x)(1 + x^2)}\\]\n\\[= \\dfrac{1 + x}{(1 - x)(1 + x^2)}\\]\nKyun: Common denominator le kar upar \\(x - x^2 + 1 + x^2 = 1 + x\\) bacha. Di hui right side mil gayi."
+            ],
+            "final_answer": "\\(y = \\ln\\left|\\frac{C\\sqrt{1 + x^2}}{1 - x}\\right|\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q16",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q16",
+      "title": "Question 16",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 136,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 16: book p. 134 (Q2-Q25 general solutions and IVPs); answer key p. 303 (keys numbered 2-29)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "16",
+            "prompt": "16 Find the general solution of the differential equation \\((x^2 + xy + y^2)\\,dx - x^2\\,dy = 0\\).",
+            "explanation": "All terms \\(x^2\\), \\(xy\\), \\(y^2\\) have degree 2, so the equation is homogeneous.\nWe must find the general solution.\nPlan: write \\(\\frac{dy}{dx}\\) in terms of \\(v = y/x\\), put \\(y = vx\\), separate, integrate (an inverse tangent appears), put back \\(v\\).",
+            "steps": [
+              "Given: \\((x^2 + xy + y^2)\\,dx - x^2\\,dy = 0\\).\nTo find: the general solution.\nMethod: Homogeneous equation: substitute \\(y = vx\\), \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\).",
+              "Write \\(\\frac{dy}{dx}\\)\n\\[\\dfrac{dy}{dx} = \\dfrac{x^2 + xy + y^2}{x^2}\\]\n\\[= 1 + v + v^2\\]\nWhy: divide by \\(x^2\\,dx\\); each term divided by \\(x^2\\) gives \\(1\\), \\(y/x\\), \\((y/x)^2\\).",
+              "Substitute \\(y = vx\\)\n\\[v + x\\dfrac{dv}{dx} = 1 + v + v^2\\]\n\\[x\\dfrac{dv}{dx} = 1 + v^2\\]\nWhy: \\(v\\) cancels from both sides.",
+              "Separate and integrate\n\\[\\int \\dfrac{dv}{1 + v^2} = \\int \\dfrac{dx}{x}\\]\n\\[\\tan^{-1} v = \\ln|x| + \\ln|C|\\]\n\\[\\tan^{-1} v = \\ln|Cx|\\]\nWhy: \\(\\frac{d}{dv}\\tan^{-1} v = \\frac{1}{1 + v^2}\\); the constant is written as \\(\\ln|C|\\) so the logs combine.",
+              "Put back \\(v = y/x\\)\n\\[\\tan^{-1}\\left(\\dfrac{y}{x}\\right) = \\ln|Cx|\\]\nWhy: the answer must be in \\(x\\) and \\(y\\).",
+              "Check\nDifferentiate: \\(\\dfrac{1}{1 + y^2/x^2}\\cdot\\dfrac{xy' - y}{x^2} = \\dfrac{1}{x}\\), so\n\\[xy' - y = \\dfrac{x^2 + y^2}{x}\\]\n\\[x^2y' = x^2 + xy + y^2\\]\nwhich is the given equation \\(\\checkmark\\)\nWhy: getting the given equation back confirms the solution."
+            ],
+            "final_answer": "\\(\\tan^{-1}\\left(\\frac{y}{x}\\right) = \\ln|Cx|\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints this answer as number 18, not 16. The Exercise 4.2 keys are numbered 2 to 29 for 25 questions (key 2 answers Question 1, and the extra keys 15, 19 and 27 match no printed question), so look for this answer under 18. The answer itself, \\(\\tan^{-1}(y/x) = \\ln|Cx|\\), is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

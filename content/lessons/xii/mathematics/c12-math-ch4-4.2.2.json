@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-4.2.2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/4.2.2",
+      "title": "4.2.2 Homogeneous Differential Equation",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 132,
+          "pdf_to": 135,
+          "note": "Book p. 130-133 (PDF 132-135): 4.2.2 definition and examples, Method to Solve a Homogeneous Differential Equation (1)-(3), Note box, printed Examples 4 and 5 (shown as Examples 7 and 8)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "A first-order, first degree differential equation is called Homogeneous if it can be written in the form",
+            "bold": [
+              "Homogeneous"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{dy}{dx} = F\\left(\\dfrac{y}{x}\\right)",
+            "text_alt": "d y by d x equals F of y over x"
+          },
+          {
+            "type": "paragraph",
+            "text": "where \\(F\\left(\\frac{y}{x}\\right)\\) is a function of the ratio \\(\\frac{y}{x}\\) only. For example, \\(\\frac{dy}{dx} = \\frac{x^3 + xy^2}{y^3 - x^2y}\\) is a homogeneous differential equation because, it can be written as:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\dfrac{dy}{dx} = \\dfrac{\\dfrac{x^3 + xy^2}{x^3}}{\\dfrac{y^3 - x^2y}{x^3}}\\]\n\\[= \\dfrac{1 + \\left(\\dfrac{y}{x}\\right)^2}{\\left(\\dfrac{y}{x}\\right)^3 - \\left(\\dfrac{y}{x}\\right)}\\]\n\\[= F\\left(\\dfrac{y}{x}\\right)\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "On the other hand, the differential equation \\(\\frac{dy}{dx} = x + y\\) is not homogeneous because \\(x + y\\) cannot be expressed as a function of \\(\\frac{y}{x}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A quick test for fractions: if every term of the numerator and of the denominator has the same degree \\(n\\), divide top and bottom by \\(x^n\\); every term then turns into a power of \\(\\frac{y}{x}\\). In the example, \\(x^3\\), \\(xy^2\\), \\(y^3\\), \\(x^2y\\) all have degree 3, so we divide by \\(x^3\\).\nWhy \\(x + y\\) fails: \\(x + y = x\\left(1 + \\frac{y}{x}\\right)\\) always leaves an \\(x\\) outside. A homogeneous right side must not change when \\(x\\) and \\(y\\) are both multiplied by the same number \\(t\\): \\(\\frac{tx + ty}{ty - tx} = \\frac{x + y}{y - x}\\), but \\(tx + ty \\ne x + y\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Method to Solve a Homogeneous Differential Equation"
+          },
+          {
+            "type": "paragraph",
+            "text": "The homogeneous differential equation:\n\\[\\dfrac{dy}{dx} = F\\left(\\dfrac{y}{x}\\right) \\quad \\text{...(1)}\\]\ncan be converted into a separable differential equation in variables \\(x\\) and \\(v\\) by making the substitution:\n\\[y = vx \\quad \\text{...(2)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Differentiating both sides of equation (2) w.r.t \\(x\\):\n\\[\\dfrac{dy}{dx} = v + x\\dfrac{dv}{dx} \\quad \\text{...(3)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Where (3) comes from: \\(v\\) is not a constant, it is a new unknown function of \\(x\\) (\\(v = \\frac{y}{x}\\)). So \\(y = v \\cdot x\\) is a product and we use the product rule:\n\\[\\dfrac{dy}{dx} = v \\cdot 1 + x\\dfrac{dv}{dx}\\]\nWriting \\(\\frac{dy}{dx} = v\\) (forgetting the second term) is the most common error in this topic."
+          },
+          {
+            "type": "paragraph",
+            "text": "Substituting the values of \\(\\frac{y}{x}\\) and \\(\\frac{dy}{dx}\\) from equations (2) and (3), the equation (1) can be written as:\n\\[v + x\\dfrac{dv}{dx} = F(v)\\]\nRewriting, we obtain:\n\\[x\\dfrac{dv}{dx} = F(v) - v\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "It becomes separable differential equation.\n\\[\\dfrac{1}{F(v) - v}\\,dv = \\dfrac{1}{x}\\,dx\\]\nOn integrating both sides:\n\\[\\int \\dfrac{1}{F(v) - v}\\,dv = \\int \\dfrac{1}{x}\\,dx\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "By solving integrals of the above equation and then substituting back \\(v = \\frac{y}{x}\\), we obtain the general solution for the homogeneous differential equation (1)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "If the equation \\(\\frac{dy}{dx} = f(x, y)\\) is homogeneous, then on substituting \\(y = vx\\), \\(\\frac{dy}{dx}\\) is replaced by \\(v + x\\frac{dv}{dx}\\) and \\(f(x, y)\\) can easily be simplified by replacing \\(x\\) with 1 and \\(y\\) with \\(v\\). For example, in \\(\\frac{dy}{dx} = \\frac{x + y}{y - x}\\), replacing \\(x\\) with 1 and \\(y\\) with \\(v\\) in the right-hand side, we get \\(v + x\\frac{dv}{dx} = \\frac{1 + v}{v - 1}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why the shortcut in the Note works: put \\(y = vx\\) in \\(f\\); every term has the same degree, so a power of \\(x\\) comes out of the top and bottom and cancels:\n\\[\\dfrac{x + vx}{vx - x} = \\dfrac{x(1 + v)}{x(v - 1)} = \\dfrac{1 + v}{v - 1}\\]\nThe result is exactly what you get by writing 1 for \\(x\\) and \\(v\\) for \\(y\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "The book prints these two examples as \"Example 4\" and \"Example 5\" (its numbering restarted at Example 2 in 4.2.1, so \"Example 4\" is printed twice in this unit). We show them as Example 7 and Example 8, continuing the unit's sequence."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Find the general solution of the differential equation \\(\\frac{dy}{dx} = \\frac{x + y}{y - x}\\).",
+            "steps": [
+              "Given: \\(\\frac{dy}{dx} = \\frac{x + y}{y - x}\\) ...(1)\nTo find: the general solution.\nMethod: every term of the numerator and denominator of \\(f(x, y) = \\frac{x + y}{y - x}\\) is of degree 1, so (1) is homogeneous. Put \\(y = vx\\), \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\), separate \\(v\\) and \\(x\\), integrate, then put back \\(v = \\frac{y}{x}\\).",
+              "Step 1: Substitute \\(y = vx\\)\n\\[v + x\\dfrac{dv}{dx} = \\dfrac{x + vx}{vx - x}\\]\n\\[= \\dfrac{1 + v}{v - 1}\\]\nWhy: cancel the common factor \\(x\\) (this is the Note: replace \\(x\\) by 1 and \\(y\\) by \\(v\\)).",
+              "Step 2: Isolate \\(x\\frac{dv}{dx}\\)\n\\[x\\dfrac{dv}{dx} = \\dfrac{1 + v}{v - 1} - v\\]\n\\[= \\dfrac{1 + v - v^2 + v}{v - 1}\\]\n\\[= \\dfrac{-v^2 + 2v + 1}{v - 1}\\]\nWhy: subtract \\(v\\) from both sides and use the common denominator \\(v - 1\\).",
+              "Step 3: Separate \\(v\\) and \\(x\\)\n\\[\\dfrac{v - 1}{-v^2 + 2v + 1}\\,dv = \\dfrac{1}{x}\\,dx\\]\nWhy: now only \\(v\\) is on the left and only \\(x\\) on the right; the equation is separable.",
+              "Step 4: Make the numerator the derivative of the denominator\n\\[\\dfrac{d}{dv}(-v^2 + 2v + 1) = -2v + 2\\]\n\\[v - 1 = -\\dfrac{1}{2}(-2v + 2)\\]\nSo\n\\[-\\dfrac{1}{2}\\int \\dfrac{-2v + 2}{-v^2 + 2v + 1}\\,dv\\]\n\\[= \\ln|x| + \\ln|c|\\]\nWhy: then \\(\\int \\frac{f'(v)}{f(v)}\\,dv = \\ln|f(v)|\\). Writing the constant as \\(\\ln|c|\\) lets the logarithms combine.",
+              "Step 5: Integrate and combine the logarithms\n\\[-\\dfrac{1}{2}\\ln|-v^2 + 2v + 1| = \\ln|cx|\\]\n\\[\\ln|-v^2 + 2v + 1| = -2\\ln|cx|\\]\n\\[= \\ln|cx|^{-2}\\]\nWhy: \\(\\ln|x| + \\ln|c| = \\ln|cx|\\); multiply by \\(-2\\); \\(k\\ln a = \\ln a^k\\).",
+              "Step 6: Remove the logarithms\n\\[|-v^2 + 2v + 1| = \\dfrac{1}{c^2x^2}\\]\nWhy: if \\(\\ln A = \\ln B\\) then \\(A = B\\); and \\(|cx|^{-2} = \\frac{1}{c^2x^2}\\).",
+              "Step 7: Substitute \\(v = \\frac{y}{x}\\) back\n\\[\\left|-\\dfrac{y^2}{x^2} + \\dfrac{2y}{x} + 1\\right| = \\dfrac{1}{c^2x^2}\\]\n\\[\\dfrac{|-y^2 + 2xy + x^2|}{x^2} = \\dfrac{1}{c^2x^2}\\]\n\\[|-y^2 + 2xy + x^2| = \\dfrac{1}{c^2}\\]\n\\[-y^2 + 2xy + x^2 = \\pm\\dfrac{1}{c^2}\\]\nWhy: take the common denominator \\(x^2\\), then multiply both sides by \\(x^2\\). Removing the absolute value gives \\(\\pm\\).",
+              "Step 8: Rename the constant\n\\(\\pm\\frac{1}{c^2}\\) is just a non-zero constant; call it \\(c\\) (\\(c \\ne 0\\)):\n\\[-y^2 + 2xy + x^2 = c\\]\n\\[x^2 + 2xy - y^2 = c\\]\nWhy: the constant is arbitrary, so any non-zero constant expression may be called \\(c\\).",
+              "Check:\nDifferentiate \\(x^2 + 2xy - y^2 = c\\):\n\\[2x + 2y + 2x\\dfrac{dy}{dx} - 2y\\dfrac{dy}{dx} = 0\\]\n\\[(y - x)\\dfrac{dy}{dx} = x + y\\]\n\\[\\dfrac{dy}{dx} = \\dfrac{x + y}{y - x}\\]\nThis is equation (1)."
+            ],
+            "answer": "\\(x^2 + 2xy - y^2 = c\\) (\\(c \\ne 0\\) an arbitrary constant)."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Solve the differential equation \\(x\\sin\\left(\\frac{y}{x}\\right)dy - \\left[y\\sin\\left(\\frac{y}{x}\\right) - x\\right]dx = 0\\).",
+            "steps": [
+              "Given: \\(x\\sin\\left(\\frac{y}{x}\\right)dy - \\left[y\\sin\\left(\\frac{y}{x}\\right) - x\\right]dx = 0\\).\nTo find: the general solution.\nMethod: write it as \\(\\frac{dy}{dx} = \\ldots\\); dividing through by \\(x\\) shows the right side depends on \\(\\frac{y}{x}\\) only, so it is homogeneous. Then put \\(y = vx\\).",
+              "Step 1: Rewrite as \\(\\frac{dy}{dx}\\)\n\\[\\dfrac{dy}{dx} = \\dfrac{y\\sin\\left(\\frac{y}{x}\\right) - x}{x\\sin\\left(\\frac{y}{x}\\right)}\\]\n\\[= \\dfrac{\\frac{y}{x}\\sin\\left(\\frac{y}{x}\\right) - 1}{\\sin\\left(\\frac{y}{x}\\right)}\\]\nWhy: move the \\(dx\\) term across, divide by \\(x\\sin\\frac{y}{x}\\,dx\\); then divide top and bottom by \\(x\\).",
+              "Step 2: Recognise the type\nThe right side is a function of \\(\\frac{y}{x}\\) only, so the equation is homogeneous. Put \\(y = vx\\):\n\\[v + x\\dfrac{dv}{dx} = \\dfrac{v\\sin v - 1}{\\sin v}\\]\nWhy: \\(\\frac{y}{x} = v\\) and \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\).",
+              "Step 3: Isolate \\(x\\frac{dv}{dx}\\)\n\\[x\\dfrac{dv}{dx} = \\dfrac{v\\sin v - 1}{\\sin v} - v\\]\n\\[= \\dfrac{v\\sin v - 1 - v\\sin v}{\\sin v}\\]\n\\[= -\\dfrac{1}{\\sin v}\\]\nWhy: subtract \\(v = \\frac{v\\sin v}{\\sin v}\\); the \\(v\\sin v\\) terms cancel.",
+              "Step 4: Separate \\(v\\) and \\(x\\)\n\\[-\\sin v\\,dv = \\dfrac{1}{x}\\,dx\\]\nWhy: multiply both sides by \\(-\\sin v\\) and by \\(\\frac{dx}{x}\\).",
+              "Step 5: Integrate both sides\n\\[\\int (-\\sin v)\\,dv = \\int \\dfrac{1}{x}\\,dx\\]\n\\[\\cos v = \\ln|x| + \\ln|c|\\]\nWhy: \\(\\int(-\\sin v)\\,dv = \\cos v\\) because \\(\\frac{d}{dv}\\cos v = -\\sin v\\); \\(\\int\\frac{dx}{x} = \\ln|x|\\); constant written as \\(\\ln|c|\\).",
+              "Step 6: Put \\(v = \\frac{y}{x}\\) back\n\\[\\cos\\left(\\dfrac{y}{x}\\right) = \\ln|cx|\\]\nWhy: \\(\\ln|x| + \\ln|c| = \\ln|cx|\\), and the answer must be in \\(x\\) and \\(y\\).",
+              "Check:\nDifferentiate \\(\\cos\\frac{y}{x} = \\ln|cx|\\):\n\\[-\\sin\\dfrac{y}{x} \\cdot \\dfrac{x\\frac{dy}{dx} - y}{x^2} = \\dfrac{1}{x}\\]\nMultiply by \\(-x^2\\):\n\\[\\sin\\dfrac{y}{x}\\left(x\\dfrac{dy}{dx} - y\\right) = -x\\]\n\\[x\\sin\\dfrac{y}{x}\\,dy - \\left[y\\sin\\dfrac{y}{x} - x\\right]dx = 0\\]\nwhich is the given equation."
+            ],
+            "answer": "\\(\\cos\\left(\\frac{y}{x}\\right) = \\ln|cx|\\), where \\(c\\) is an arbitrary constant."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Separable",
+              "Homogeneous"
+            ],
+            "rows": [
+              [
+                "\\(\\frac{dy}{dx} = g(x)\\,h(y)\\)",
+                "\\(\\frac{dy}{dx} = F\\left(\\frac{y}{x}\\right)\\)"
+              ],
+              [
+                "Right side factors into (only \\(x\\)) \\(\\times\\) (only \\(y\\))",
+                "Right side depends on the ratio \\(\\frac{y}{x}\\) only (all terms of the same degree)"
+              ],
+              [
+                "Separate directly",
+                "First put \\(y = vx\\), \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\)"
+              ],
+              [
+                "Integrate in \\(x\\) and \\(y\\)",
+                "Integrate in \\(v\\) and \\(x\\), then put \\(v = \\frac{y}{x}\\)"
+              ],
+              [
+                "Example: \\(\\frac{dy}{dx} = -\\frac{x}{y}\\)",
+                "Example: \\(\\frac{dy}{dx} = \\frac{x + y}{y - x}\\)"
+              ]
+            ],
+            "caption": "Separable vs homogeneous (our teaching summary)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Homogeneous means \\(\\frac{dy}{dx} = F\\left(\\frac{y}{x}\\right)\\); for a fraction, every term of the top and bottom has the same degree.\n2. Substitute \\(y = vx\\) and \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\) (product rule).\n3. Shortcut: in \\(f(x, y)\\) write 1 for \\(x\\) and \\(v\\) for \\(y\\).\n4. Then \\(x\\frac{dv}{dx} = F(v) - v\\) is separable: \\(\\frac{dv}{F(v) - v} = \\frac{dx}{x}\\).\n5. Write the constant as \\(\\ln|c|\\) when the other terms are logarithms; at the end put \\(v = \\frac{y}{x}\\) back."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing \\(\\frac{dy}{dx} = v\\) instead of \\(v + x\\frac{dv}{dx}\\).\n2. Forgetting to subtract \\(v\\): the separable form is \\(x\\frac{dv}{dx} = F(v) - v\\), not \\(F(v)\\).\n3. Leaving the answer in \\(v\\); the final answer must be in \\(x\\) and \\(y\\).\n4. Calling \\(x + y\\) or \\(e^{x - y}\\) homogeneous: their terms do not all have the same degree."
+          }
+        ]
+      }
+    }
+  ]
+}
