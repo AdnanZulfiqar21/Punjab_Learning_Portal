@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-3-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-3-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 141,
+          "pdf_to": 141,
+          "note": "Exercise 4.3, Q2; book page 139"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 305,
+          "pdf_to": 305,
+          "note": "Answers, Exercise 4.3, key 2"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2 In a culture, there were 1000 bacteria initially and were found to be 900 after five hours. Use differential equation to find the number of bacteria 7 hours later.",
+            "explanation": "The number of bacteria changes at a rate proportional to the number present; here it falls (1000 to 900), so the model is \\(\\frac{dN}{dt} = -kN\\), \\(k > 0\\).\nTwo conditions are given: \\(N(0) = 1000\\) fixes the constant, \\(N(5) = 900\\) fixes \\(k\\).\nPlan: solve, find \\(k\\), then put \\(t = 7\\).",
+            "steps": [
+              "Given: \\(N(0) = 1000\\), \\(N(5) = 900\\) (\\(t\\) in hours).\nTo find: \\(N(7)\\).\nMethod: decay model \\(\\frac{dN}{dt} = -kN\\) (separable), as in Example 10.",
+              "Solve the differential equation\n\\[\\int\\dfrac{dN}{N} = -\\int k\\,dt\\]\n\\[\\ln|N| = -kt + C_1\\]\n\\[N = ce^{-kt}\\]\nWhy: separate, integrate, take \\(e\\) of both sides; \\(c = e^{C_1}\\).",
+              "Use \\(N(0) = 1000\\)\n\\[1000 = ce^{0} \\Rightarrow c = 1000\\]\n\\[N = 1000e^{-kt}\\]\nWhy: \\(e^{0} = 1\\).",
+              "Use \\(N(5) = 900\\) to find \\(k\\)\n\\[900 = 1000e^{-5k}\\]\n\\[e^{-5k} = 0.9\\]\n\\[-5k = \\ln 0.9\\]\n\\[k = \\tfrac{1}{5}\\ln\\tfrac{10}{9} \\approx 0.02107\\]\nWhy: take \\(\\ln\\); \\(-\\ln 0.9 = \\ln\\frac{10}{9}\\), so \\(k > 0\\).",
+              "Find \\(N(7)\\)\n\\[N(7) = 1000e^{-7k}\\]\n\\[= 1000\\left(e^{-5k}\\right)^{7/5}\\]\n\\[= 1000(0.9)^{1.4}\\]\n\\[\\approx 862.86\\]\nWhy: \\(e^{-7k} = (e^{-5k})^{7/5}\\), and \\(e^{-5k} = 0.9\\) exactly, so no rounding of \\(k\\) is needed.",
+              "Check\n\\[1000e^{-0.02107(7)} \\approx 1000e^{-0.1475} \\approx 862.9\\]\nThe count keeps falling: 900 at 5 hours, about 863 at 7 hours \\(\\checkmark\\)."
+            ],
+            "final_answer": "About 863 bacteria (862.86)."
+          }
+        ]
+      }
+    }
+  ]
+}

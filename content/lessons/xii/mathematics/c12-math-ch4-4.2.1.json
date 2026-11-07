@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-4.2.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/4.2.1",
+      "title": "4.2.1 Separable Differential Equation",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 131,
+          "pdf_to": 132,
+          "note": "Book p. 129-130 (PDF 131-132): 4.2.1 definition, examples, Method to Solve a Separable Differential Equation, printed Examples 2 and 3 (shown as Examples 5 and 6)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "A first-order, first-degree differential equation is called Separable if it can be written as:",
+            "bold": [
+              "Separable"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\dfrac{dy}{dx} = g(x)\\,h(y)\\]\nor\n\\[g(x)\\,dx = \\dfrac{1}{h(y)}\\,dy\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "For example, the differential equation \\(\\frac{dy}{dx} = -\\frac{x}{y}\\) is separable, as it can be written as \\(y\\,dy = -x\\,dx\\). However, the differential equation \\(\\frac{dy}{dx} = \\frac{x + y}{y - x}\\) is not separable."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why the name \"separable\"? We can separate the variables: put everything with \\(y\\) (and \\(dy\\)) on one side and everything with \\(x\\) (and \\(dx\\)) on the other. Then each side is integrated with respect to its own variable.\nHow to test: write the equation as \\(\\frac{dy}{dx} = f(x, y)\\) and try to factor \\(f\\) as (only \\(x\\)) \\(\\times\\) (only \\(y\\)).\n\\(-\\frac{x}{y} = (-x) \\cdot \\frac{1}{y}\\): it factors, so separable.\n\\(\\frac{x + y}{y - x}\\): the sum \\(x + y\\) and the difference \\(y - x\\) mix both letters and cannot be split into such a product, so not separable. (We will solve it in 4.2.2.)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Method to Solve a Separable Differential Equation"
+          },
+          {
+            "type": "paragraph",
+            "text": "Note that the separable differential equation:\n\\[\\dfrac{dy}{dx} = g(x)\\,h(y)\\]\ncan be written as:\n\\[\\dfrac{1}{h(y)}\\,dy = g(x)\\,dx\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Now, integrate both sides:\n\\[\\int \\dfrac{1}{h(y)}\\,dy = \\int g(x)\\,dx\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "By solving the integrals on both sides, we obtain the general solution of separable differential equation."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The method in three steps:\n1. Separate: \\(y\\)-part with \\(dy\\), \\(x\\)-part with \\(dx\\).\n2. Integrate both sides.\n3. Add one arbitrary constant (on one side only) and simplify.\nWhy one constant? \\(\\int\\) on the left gives \\(+c_1\\) and on the right \\(+c_2\\); moving them together gives a single constant \\(c = c_2 - c_1\\).\nWhen to use: whenever \\(f(x, y)\\) factors as \\(g(x)h(y)\\). Always try this first; it is the shortest method.\nSmall caution: dividing by \\(h(y)\\) assumes \\(h(y) \\ne 0\\). A value \\(y = k\\) with \\(h(k) = 0\\) makes \\(\\frac{dy}{dx} = 0\\), so the constant function \\(y = k\\) is also a solution."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "The book restarts its example numbering here: it prints \"Example 2\" and \"Example 3\" although Examples 1 to 4 were already printed in 4.1.1 (there is no second Example 1). So that every example in this unit has its own number, we show the book's second Example 2 as Example 5 and its second Example 3 as Example 6."
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Find the general solution of the differential equation \\(x\\,dx + y\\,dy = 0\\).",
+            "steps": [
+              "Given: \\(x\\,dx + y\\,dy = 0\\).\nTo find: the general solution.\nMethod: the \\(x\\)-term already sits with \\(dx\\) and the \\(y\\)-term with \\(dy\\), so the equation is separable. Keep \\(y\\,dy\\) on the left, move \\(x\\,dx\\) to the right, and integrate both sides.",
+              "Step 1: Separate the variables\n\\[y\\,dy = -x\\,dx\\]\nWhy: moving \\(x\\,dx\\) across the equals sign changes its sign. Now the left side has only \\(y\\) and the right side only \\(x\\).",
+              "Step 2: Integrate both sides\n\\[\\int y\\,dy = -\\int x\\,dx\\]\n\\[\\dfrac{y^2}{2} = -\\dfrac{x^2}{2} + c\\]\nWhy: power rule \\(\\int u\\,du = \\frac{u^2}{2}\\). One constant \\(c\\) is enough: the constants from the two sides combine into one.",
+              "Step 3: Clear the fractions\n\\[y^2 = -x^2 + 2c\\]\nWhy: multiply every term by 2.",
+              "Step 4: Rename the constant\nSince \\(c\\) is arbitrary, the book replaces \\(c\\) by \\(\\frac{c}{2}\\), so \\(2c\\) becomes \\(c\\):\n\\[x^2 + y^2 = c\\]\nWhy: twice an arbitrary constant is still just an arbitrary constant, so we may call it \\(c\\) again. This gives a neater answer.",
+              "Check:\nDifferentiate \\(x^2 + y^2 = c\\) with respect to \\(x\\):\n\\[2x + 2y\\dfrac{dy}{dx} = 0\\]\n\\[\\dfrac{dy}{dx} = -\\dfrac{x}{y}\\]\nwhich is \\(x\\,dx + y\\,dy = 0\\) again. (Geometrically: circles with centre at the origin, for \\(c > 0\\).)"
+            ],
+            "answer": "\\(x^2 + y^2 = c\\), where \\(c\\) is an arbitrary constant."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In Example 5 the answer could be left as \\(y^2 = -x^2 + 2c\\); it is the same family. Renaming the constant (\\(2c \\to c\\), \\(\\ln|c|\\), \\(e^c\\), and so on) is allowed because the constant is arbitrary. Exam answers often differ only in the form of the constant."
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Find the general solution for the differential equation \\(x^2(2y + 1)\\frac{dy}{dx} - 1 = 0\\).",
+            "steps": [
+              "Given: \\(x^2(2y + 1)\\frac{dy}{dx} - 1 = 0\\).\nTo find: the general solution.\nMethod: solve for \\(\\frac{dy}{dx}\\). The right side becomes \\(\\frac{1}{x^2} \\cdot \\frac{1}{2y + 1}\\), a function of \\(x\\) times a function of \\(y\\), so the equation is separable.",
+              "Step 1: Write \\(\\frac{dy}{dx}\\) alone\n\\[\\dfrac{dy}{dx} = \\dfrac{1}{x^2(2y + 1)}\\]\nWhy: add 1 to both sides, then divide by \\(x^2(2y + 1)\\).",
+              "Step 2: Separate the variables\n\\[(2y + 1)\\,dy = \\dfrac{1}{x^2}\\,dx\\]\nWhy: multiply both sides by \\((2y + 1)\\,dx\\). All \\(y\\) terms are now with \\(dy\\), all \\(x\\) terms with \\(dx\\).",
+              "Step 3: Integrate both sides\n\\[\\int (2y + 1)\\,dy = \\int \\dfrac{1}{x^2}\\,dx\\]\n\\[2\\int y\\,dy + \\int dy = \\int x^{-2}\\,dx\\]\nWhy: split the left integral term by term; write \\(\\frac{1}{x^2}\\) as \\(x^{-2}\\) to use the power rule.",
+              "Step 4: Evaluate\n\\[y^2 + y = -\\dfrac{1}{x} + C\\]\nWhy: \\(2 \\cdot \\frac{y^2}{2} = y^2\\), \\(\\int dy = y\\), and \\(\\int x^{-2}\\,dx = \\frac{x^{-1}}{-1} = -\\frac{1}{x}\\).",
+              "Step 5: Tidy the answer\n\\[y^2 + y + \\dfrac{1}{x} = C\\]\nWhy: move \\(-\\frac{1}{x}\\) to the left; it becomes \\(+\\frac{1}{x}\\).",
+              "Check:\nDifferentiate with respect to \\(x\\):\n\\[(2y + 1)\\dfrac{dy}{dx} - \\dfrac{1}{x^2} = 0\\]\nMultiply by \\(x^2\\):\n\\[x^2(2y + 1)\\dfrac{dy}{dx} - 1 = 0\\]\nThis is the given equation."
+            ],
+            "answer": "\\(y^2 + y + \\frac{1}{x} = C\\), where \\(C\\) is an arbitrary constant."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Separable means \\(\\frac{dy}{dx} = g(x)\\,h(y)\\): the right side is a product of a function of \\(x\\) only and a function of \\(y\\) only.\n2. Method: separate, integrate both sides, add one constant.\n3. The constant may be renamed (\\(2c\\) as \\(c\\), \\(\\ln|c|\\), ...) to make the answer neat.\n4. Check by differentiating the answer: you must get the original equation back.\n5. If \\(f(x, y)\\) has a sum such as \\(x + y\\) that cannot be factored, the equation is not separable; try the homogeneous method (4.2.2)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Integrating a side that still contains both \\(x\\) and \\(y\\), e.g. writing \\(\\int x^2(2y + 1)\\,dy\\) as if \\(x\\) were a constant. Separate completely first.\n2. Writing \\(+c\\) on both sides, or forgetting it completely.\n3. Thinking \\(e^{x + y}\\) is not separable: it is, since \\(e^{x + y} = e^x e^y\\). But \\(x + y\\) itself (no exponential) is not.\n4. Sign slips when moving a term across: \\(x\\,dx + y\\,dy = 0\\) gives \\(y\\,dy = -x\\,dx\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

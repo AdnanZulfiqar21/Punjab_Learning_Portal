@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-1-Q3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-1-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 130,
+          "pdf_to": 130,
+          "note": "Exercise 4.1, Question 3: temperature of a body losing heat, surroundings negligible; book p. 128, answers p. 303 (PDF 305)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3 Let \\(T\\) denote the temperature of a body at time \\(t\\). Suppose that the effect of the surrounding medium is negligible. Construct a differential equation that represents the temperature of the body at any time \\(t\\), assuming the body is losing heat due to some internal processes.",
+            "explanation": "A modelling question about cooling with no surroundings.\nAs in all such models we assume the rate of change of \\(T\\) is proportional to \\(T\\); losing heat means \\(T\\) decreases, so the rate is negative.",
+            "steps": [
+              "Given: temperature \\(T(t)\\); surroundings have no effect; the body is losing heat.\nTo find: a differential equation for \\(T\\).\nMethod: assume \\(\\frac{dT}{dt} \\propto T\\) and fix the sign from \"losing heat\".",
+              "Write the proportionality\n\\[\\dfrac{dT}{dt} \\propto T\\]\nWhy: a hotter body loses heat faster; with no surroundings to compare with, the rate depends on \\(T\\) itself.",
+              "Fix the sign\nThe body is losing heat, so \\(T\\) decreases and \\(\\frac{dT}{dt} < 0\\). With a positive constant \\(k\\):\n\\[\\dfrac{dT}{dt} = -kT\\]\n\\[\\dfrac{dT}{dt} + kT = 0,\\quad k > 0\\]\nWhy: \\(T > 0\\) and \\(k > 0\\) make \\(-kT\\) negative, which is exactly \"losing heat\".",
+              "Check:\nNewton's law \\(\\frac{dT}{dt} = k(T_{S} - T)\\) with the surroundings switched off (\\(T_{S} = 0\\)) gives the same \\(\\frac{dT}{dt} = -kT\\). Also \\(T = T_{0}e^{-kt}\\) satisfies it (sympy). The key prints \\(\\frac{dT}{dt} + kT = 0,\\ k > 0\\). Agrees."
+            ],
+            "final_answer": "\\(\\dfrac{dT}{dt} = -kT\\), i.e. \\(\\dfrac{dT}{dt} + kT = 0\\), where \\(k > 0\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

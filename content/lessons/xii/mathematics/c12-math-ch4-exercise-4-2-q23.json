@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q23",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q23",
+      "title": "Question 23",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 136,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 23: book p. 134 (Q2-Q25 general solutions and IVPs); answer key p. 303 (keys numbered 2-29)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "23",
+            "prompt": "23 Solve the initial value problem \\(\\frac{ds}{dt} + 2st = 0\\); \\(s = 4e\\) when \\(t = 0\\).",
+            "explanation": "An initial value problem in the variables \\(s\\) and \\(t\\): \\(\\frac{ds}{dt} = -2st\\) is separable.\nFind the general solution, then use \\(s = 4e\\) at \\(t = 0\\) to fix the constant.\nPlan: separate, integrate, take exponentials, apply the condition.",
+            "steps": [
+              "Given: \\(\\frac{ds}{dt} + 2st = 0\\), \\(s = 4e\\) when \\(t = 0\\).\nTo find: the particular solution \\(s(t)\\).\nMethod: Separable equation, then the initial condition to find the constant.",
+              "Separate the variables\n\\[\\dfrac{ds}{dt} = -2st\\]\n\\[\\dfrac{ds}{s} = -2t\\,dt\\]\nWhy: divide by \\(s\\) (here \\(s \\neq 0\\), since \\(s = 4e\\) at the start).",
+              "Integrate\n\\[\\ln|s| = -t^2 + c\\]\nWhy: \\(\\int \\frac{ds}{s} = \\ln|s|\\) and \\(\\int -2t\\,dt = -t^2\\).",
+              "Take exponentials\n\\[s = e^{-t^2 + c} = Ae^{-t^2}\\]\nWhy: \\(e^{-t^2 + c} = e^{c}\\cdot e^{-t^2}\\); the constant \\(\\pm e^{c}\\) is called \\(A\\).",
+              "Use \\(s = 4e\\) at \\(t = 0\\)\n\\[4e = Ae^{0} = A\\]\n\\[s = 4e\\cdot e^{-t^2} = 4e^{1 - t^2}\\]\nWhy: \\(e^{0} = 1\\); then \\(e \\cdot e^{-t^2} = e^{1 - t^2}\\) by the law of exponents.",
+              "Check\n\\[\\dfrac{ds}{dt} = 4e^{1 - t^2}(-2t) = -2ts\\]\nso \\(\\frac{ds}{dt} + 2st = 0\\) \\(\\checkmark\\); and \\(s(0) = 4e^{1} = 4e\\) \\(\\checkmark\\)\nWhy: chain rule on \\(e^{1 - t^2}\\)."
+            ],
+            "final_answer": "\\(s = 4e^{1 - t^2}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints this answer as number 26, not 23. The Exercise 4.2 keys are numbered 2 to 29 for 25 questions (key 2 answers Question 1, and the extra keys 15, 19 and 27 match no printed question), so look for this answer under 26. The answer itself, \\(s = 4e^{1 - t^2}\\), is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q13-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q13",
+      "title": "Question 13 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 136,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 13: book p. 134 (Q2-Q25 general solutions and IVPs); answer key p. 303 (keys numbered 2-29)"
+        }
+      ],
+      "variant_of": "C12-MATH-CH4-EXERCISE-4-2-Q13",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13",
+            "prompt": "13 Find the general solution of the differential equation \\(\\frac{dy}{dx} = \\cos^2\\left(\\frac{y}{x}\\right) + \\frac{y}{x}\\).",
+            "explanation": "Sab se pehle dekhein ke right side mein \\(x\\) aur \\(y\\) alag alag nahi aa rahe, balkay sirf \\(y/x\\) ki shakal mein aa rahe hain.\nJab poori right side sirf \\(y/x\\) ka function ho to equation homogeneous kehlati hai (Section 4.2.2).\nDiya kya hai? \\(\\frac{dy}{dx} = \\cos^2(y/x) + y/x\\). Find kya karna hai? General solution, yani aisa jawab jis mein ek arbitrary constant ho.\nRule kaunsa? Homogeneous equation ka tareeqa: \\(y = vx\\) rakhne se equation separable ban jati hai.\nPlan: \\(y = vx\\) rakhna, \\(v\\) ko cancel karna, variables alag karna, integrate karna aur aakhir mein \\(v = y/x\\) wapas rakhna.",
+            "steps": [
+              "Diya gaya: \\(\\frac{dy}{dx} = \\cos^2(y/x) + y/x\\).\nMaloom karna: general solution.\nTareeqa: Homogeneous equation hai, is liye \\(y = vx\\) aur \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\) rakhenge. Is substitution ka faida yeh hai ke do variables \\(x, y\\) ki jagah \\(x\\) aur \\(v\\) aa jate hain aur equation separable ho jati hai, jo hum pehle se solve karna jaante hain.",
+              "\\(y = vx\\) rakhein\n\\[v + x\\dfrac{dv}{dx} = \\cos^2 v + v\\]\nKyun: \\(y/x\\) ki jagah seedha \\(v\\) aa gaya. Left side ke liye \\(y = vx\\) ko product rule se differentiate kiya: \\(v\\) ka derivative \\(\\frac{dv}{dx}\\) hai aur \\(x\\) ka derivative 1, is liye \\(\\frac{dy}{dx} = v \\cdot 1 + x\\frac{dv}{dx}\\).",
+              "\\(v\\) cancel karein\n\\[x\\dfrac{dv}{dx} = \\cos^2 v\\]\nKyun: Dono taraf \\(v\\) hai, minus karne se khatam ho gaya. Jab bhi right side \"\\(v\\) + kuch\" ho, yeh \\(v\\) isi tarah cancel hota hai aur kaam aasaan ho jata hai.",
+              "Variables alag karein\n\\[\\dfrac{dv}{\\cos^2 v} = \\dfrac{dx}{x}\\]\n\\[\\sec^2 v\\,dv = \\dfrac{dx}{x}\\]\nKyun: \\(v\\) wali cheezein \\(dv\\) ke saath aur \\(x\\) wali cheezein \\(dx\\) ke saath rakhi hain; is ke liye \\(\\cos^2 v\\) se divide kiya (yeh maan kar ke \\(\\cos v \\neq 0\\)). Phir \\(\\frac{1}{\\cos^2 v} = \\sec^2 v\\) likha kyunke \\(\\sec^2 v\\) ka integral hum zabani jaante hain.",
+              "Dono taraf integrate karein\n\\[\\int \\sec^2 v\\,dv = \\int \\dfrac{dx}{x}\\]\n\\[\\tan v = \\ln|x| + \\ln|C|\\]\n\\[\\tan v = \\ln|Cx|\\]\nKyun: \\(\\tan v\\) ka derivative \\(\\sec^2 v\\) hai, is liye \\(\\sec^2 v\\) ka integral \\(\\tan v\\). \\(\\frac{1}{x}\\) ka integral \\(\\ln|x|\\). Constant ko \\(\\ln|C|\\) likhne ka faida yeh hai ke log ke rule \\(\\ln a + \\ln b = \\ln ab\\) se dono log ek ho jate hain.\nDhyan dein: Constant sirf ek taraf lagta hai; dono taraf alag constants likhne ki zaroorat nahi, woh mil kar ek hi constant ban jate hain.",
+              "\\(v = y/x\\) wapas rakhein\n\\[\\tan\\left(\\dfrac{y}{x}\\right) = \\ln|Cx|\\]\nKyun: \\(v\\) humne apni sahulat ke liye banaya tha; sawal \\(x\\) aur \\(y\\) mein hai, is liye jawab bhi \\(x\\) aur \\(y\\) mein dena zaroori hai.",
+              "Tasdeeq\n\\(\\tan(y/x) = \\ln|Cx|\\) ko \\(x\\) ke lehaz se differentiate karein:\n\\[\\sec^2\\!\\left(\\tfrac{y}{x}\\right)\\dfrac{xy' - y}{x^2} = \\dfrac{1}{x}\\]\n\\[xy' - y = x\\cos^2\\!\\left(\\tfrac{y}{x}\\right)\\]\n\\(x\\) se divide karne par wapas \\(y' = \\cos^2(y/x) + y/x\\) mil gaya \\(\\checkmark\\)\nKyun: Chain rule se \\(\\tan(y/x)\\) ka derivative nikala aur quotient rule se \\(y/x\\) ka. Jawab ko differentiate karke asal equation wapas aa jaye to jawab yaqeenan sahi hai."
+            ],
+            "final_answer": "\\(\\tan\\left(\\frac{y}{x}\\right) = \\ln|Cx|\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key mein is sawal ka jawab number 14 par chhapa hai, 13 par nahi. Exercise 4.2 ki keys 2 se 29 tak hain jabke sawal sirf 25 hain (key 2 Question 1 ka jawab hai, aur keys 15, 19 aur 27 kisi chhape hue sawal ki nahi), is liye jawab 14 par dhoondiye, warna aap kisi aur sawal ka jawab dekh kar pareshan ho jayenge. Jawab khud, \\(\\tan(y/x) = \\ln|Cx|\\), bilkul sahi hai."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q15",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q15",
+      "title": "Question 15",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 136,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 15: book p. 134 (Q2-Q25 general solutions and IVPs); answer key p. 303 (keys numbered 2-29)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15",
+            "prompt": "15 Find the general solution of the differential equation \\((x^2 + 3y^2)\\,dx - 2xy\\,dy = 0\\).",
+            "explanation": "All terms \\(x^2\\), \\(3y^2\\), \\(2xy\\) have degree 2, so the equation is homogeneous.\nWe must find the general solution.\nPlan: write \\(\\frac{dy}{dx}\\) in terms of \\(y/x\\), put \\(y = vx\\), separate, integrate, put back \\(v\\).",
+            "steps": [
+              "Given: \\((x^2 + 3y^2)\\,dx - 2xy\\,dy = 0\\).\nTo find: the general solution.\nMethod: Homogeneous equation: substitute \\(y = vx\\), \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\).",
+              "Write \\(\\frac{dy}{dx}\\)\n\\[\\dfrac{dy}{dx} = \\dfrac{x^2 + 3y^2}{2xy}\\]\n\\[= \\dfrac{1 + 3v^2}{2v}\\]\nWhy: divide by \\(2xy\\,dx\\); then replace \\(x\\) by 1 and \\(y\\) by \\(v\\) (the book's Note in Section 4.2.2).",
+              "Substitute \\(y = vx\\) and simplify\n\\[v + x\\dfrac{dv}{dx} = \\dfrac{1 + 3v^2}{2v}\\]\n\\[x\\dfrac{dv}{dx} = \\dfrac{1 + 3v^2 - 2v^2}{2v}\\]\n\\[x\\dfrac{dv}{dx} = \\dfrac{1 + v^2}{2v}\\]\nWhy: \\(v = \\frac{2v^2}{2v}\\), so subtracting \\(v\\) means subtracting \\(2v^2\\) in the numerator.",
+              "Separate the variables\n\\[\\dfrac{2v}{1 + v^2}\\,dv = \\dfrac{dx}{x}\\]\nWhy: \\(v\\)-terms with \\(dv\\), \\(x\\)-terms with \\(dx\\).",
+              "Integrate\n\\[\\ln(1 + v^2) = \\ln|x| + \\ln|C|\\]\n\\[1 + v^2 = Cx\\]\nWhy: the numerator \\(2v\\) is the derivative of the denominator \\(1 + v^2\\), so the integral is \\(\\ln(1 + v^2)\\) (no modulus needed since \\(1 + v^2 > 0\\)).",
+              "Put back \\(v = y/x\\)\n\\[1 + \\dfrac{y^2}{x^2} = Cx\\]\n\\[x^2 + y^2 = Cx^3\\]\nWhy: multiply both sides by \\(x^2\\).",
+              "Check\nDifferentiate \\(x^2 + y^2 = Cx^3\\): \\(2x + 2yy' = 3Cx^2\\). Put \\(C = \\frac{x^2 + y^2}{x^3}\\):\n\\[2yy' = \\dfrac{3(x^2 + y^2)}{x} - 2x\\]\n\\[2xy\\,y' = x^2 + 3y^2\\]\nwhich is the given equation \\(\\checkmark\\)\nWhy: eliminating \\(C\\) gives back the differential equation."
+            ],
+            "final_answer": "\\(x^2 + y^2 = Cx^3\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints this answer as number 17, not 15. The Exercise 4.2 keys are numbered 2 to 29 for 25 questions (key 2 answers Question 1, and the extra keys 15, 19 and 27 match no printed question), so look for this answer under 17. The answer itself, \\(x^2 + y^2 = Cx^3\\), is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

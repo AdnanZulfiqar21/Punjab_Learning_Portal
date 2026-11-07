@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-3-Q9",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-3-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 141,
+          "pdf_to": 141,
+          "note": "Exercise 4.3, Q9; book page 139"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 305,
+          "pdf_to": 305,
+          "note": "Answers, Exercise 4.3, key 9"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9 A fully insulated battery overheats during operation and reaches 80 °C. After shutdown, it begins to cool without any external influence. If it cools to 50 °C in 2 hours, how long will it take to cool to 15 °C?",
+            "explanation": "No room temperature is given ('without any external influence'), so we take the rate of cooling proportional to the temperature itself: \\(\\frac{dT}{dt} = -kT\\) (Newton's law with \\(T_S = 0\\)°C, as the answer key does).\nGiven \\(T(0) = 80\\), \\(T(2) = 50\\); find \\(t\\) when \\(T = 15\\).",
+            "steps": [
+              "Given: \\(T(0) = 80\\)°C, \\(T(2) = 50\\)°C; \\(t\\) in hours.\nTo find: the time \\(t\\) when \\(T = 15\\)°C.\nMethod: \\(\\frac{dT}{dt} = -kT\\), \\(k > 0\\) (surroundings neglected); separable.",
+              "Solve the differential equation\n\\[\\int\\dfrac{dT}{T} = -k\\int dt\\]\n\\[\\ln|T| = -kt + C\\]\n\\[T(0) = 80 \\Rightarrow C = \\ln 80\\]\n\\[T = 80e^{-kt}\\]\nWhy: separate, integrate, use the first condition, take \\(e\\).",
+              "Use \\(T(2) = 50\\)\n\\[50 = 80e^{-2k}\\]\n\\[e^{-2k} = \\dfrac{5}{8}\\]\n\\[k = \\tfrac{1}{2}\\ln\\tfrac{8}{5} \\approx 0.2350\\]\nWhy: take \\(\\ln\\); \\(\\ln\\frac{8}{5} \\approx 0.470004\\).",
+              "Put \\(T = 15\\)\n\\[15 = 80e^{-kt}\\]\n\\[e^{-kt} = \\dfrac{15}{80} = \\dfrac{3}{16}\\]\n\\[kt = \\ln\\dfrac{16}{3}\\]\nWhy: divide by 80, then take \\(\\ln\\).",
+              "Solve for \\(t\\)\n\\[t = \\dfrac{2\\ln(16/3)}{\\ln(8/5)}\\]\n\\[\\approx \\dfrac{2(1.673976)}{0.470004}\\]\n\\[\\approx 7.12\\]\nWhy: \\(k = \\frac{1}{2}\\ln\\frac{8}{5}\\), so dividing by \\(k\\) gives this exact form; round only at the end.",
+              "Check\n\\[80e^{-0.2350(7.12)} \\approx 80e^{-1.674} \\approx 80(0.1875) = 15 \\;\\checkmark\\]"
+            ],
+            "final_answer": "About 7.12 hours after shutdown."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The question does not give the temperature of the surroundings, and a 'fully insulated' battery could not lose heat at all. Under Newton's law with surroundings at \\(T_S \\ge 15\\)°C the battery would never reach 15°C. The answer key's 7.12 hours comes from \\(\\frac{dT}{dt} = -kT\\), i.e. surroundings taken as 0°C; the question should state this assumption."
+          }
+        ]
+      }
+    }
+  ]
+}

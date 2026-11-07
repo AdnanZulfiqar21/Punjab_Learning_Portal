@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-4.2.2-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/4.2.2",
+      "title": "4.2.2 Homogeneous Differential Equation (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 132,
+          "pdf_to": 135,
+          "note": "Book p. 130-133 (PDF 132-135): 4.2.2 definition and examples, Method to Solve a Homogeneous Differential Equation (1)-(3), Note box, printed Examples 4 and 5 (shown as Examples 7 and 8)"
+        }
+      ],
+      "variant_of": "C12-MATH-CH4-4.2.2",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "4.2.1 mein humne dekha tha ke \\(\\frac{dy}{dx} = \\frac{x + y}{y - x}\\) separable nahi, kyunke \\(x\\) aur \\(y\\) jama ki shakal mein jure hain. To kya aisi equations solve hi nahi hongi? Hongi! Agar equation ek khaas qisam ki ho, jise homogeneous kehte hain, to ek chhoti si substitution (badal) \\(y = vx\\) usay separable bana deti hai. Phir wahi purana tareeqa: alag karo aur integrate karo."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki definition: first order, first degree differential equation ko Homogeneous kehte hain agar usay is shakal mein likha ja sake:",
+            "bold": [
+              "Homogeneous"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{dy}{dx} = F\\left(\\dfrac{y}{x}\\right)",
+            "text_alt": "d y by d x equals F of y over x"
+          },
+          {
+            "type": "paragraph",
+            "text": "jahan \\(F\\left(\\frac{y}{x}\\right)\\) sirf ratio (nisbat) \\(\\frac{y}{x}\\) ka function hai. Yani right side mein \\(x\\) aur \\(y\\) alag alag nahi, balke hamesha \\(\\frac{y}{x}\\) ke jore ki shakal mein aate hain. Misaal: \\(\\frac{dy}{dx} = \\frac{x^3 + xy^2}{y^3 - x^2y}\\) homogeneous hai, kyunke upar neeche \\(x^3\\) se divide karne par yeh ban jati hai:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\dfrac{dy}{dx} = \\dfrac{\\dfrac{x^3 + xy^2}{x^3}}{\\dfrac{y^3 - x^2y}{x^3}}\\]\n\\[= \\dfrac{1 + \\left(\\dfrac{y}{x}\\right)^2}{\\left(\\dfrac{y}{x}\\right)^3 - \\left(\\dfrac{y}{x}\\right)}\\]\n\\[= F\\left(\\dfrac{y}{x}\\right)\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Doosri taraf \\(\\frac{dy}{dx} = x + y\\) homogeneous nahi, kyunke \\(x + y\\) ko \\(\\frac{y}{x}\\) ke function ki shakal mein nahi likha ja sakta."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Fraction ke liye aasaan test: numerator aur denominator ki har term ki degree (powers ka jama) dekhiye. Agar sab ki degree ek jaisi \\(n\\) ho, to upar neeche \\(x^n\\) se divide kar dein; har term \\(\\frac{y}{x}\\) ki kisi power mein badal jayegi. Upar wali misaal mein \\(x^3\\), \\(xy^2\\), \\(y^3\\), \\(x^2y\\) sab ki degree 3 hai (jaise \\(xy^2\\) mein \\(1 + 2 = 3\\)), is liye \\(x^3\\) se divide kiya.\n\\(x + y\\) kyun fail hota hai? \\(x + y = x\\left(1 + \\frac{y}{x}\\right)\\) likhein to bhi ek \\(x\\) bahar bach jata hai jo kahin cancel nahi hota.\nEk aur nazariya: homogeneous right side tab nahi badalti jab \\(x\\) aur \\(y\\) dono ko ek hi number \\(t\\) se multiply kar dein: \\(\\frac{tx + ty}{ty - tx} = \\frac{x + y}{y - x}\\). Jaise kisi tasveer ko barabar barha dein to shakal wohi rehti hai. Lekin \\(tx + ty\\) to \\(x + y\\) ke barabar nahi, is liye woh homogeneous nahi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Kya \\(\\frac{dy}{dx} = \\frac{x^2 + y^2}{xy}\\) homogeneous hai? Aur \\(\\frac{dy}{dx} = \\frac{x + y^2}{x}\\)?\n(Jawab: pehli haan, sab terms ki degree 2 hai aur yeh \\(\\frac{1 + v^2}{v}\\) ban jati hai. Doosri nahi, kyunke \\(x\\) ki degree 1 aur \\(y^2\\) ki degree 2 hai.)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Method to Solve a Homogeneous Differential Equation"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ka tareeqa. Homogeneous differential equation\n\\[\\dfrac{dy}{dx} = F\\left(\\dfrac{y}{x}\\right) \\quad \\text{...(1)}\\]\nko \\(x\\) aur \\(v\\) variables wali separable equation mein badla ja sakta hai, agar yeh substitution karein:\n\\[y = vx \\quad \\text{...(2)}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Equation (2) ke dono taraf \\(x\\) ke hisaab se differentiate karein:\n\\[\\dfrac{dy}{dx} = v + x\\dfrac{dv}{dx} \\quad \\text{...(3)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "(3) kahan se aaya? Yahan sab se ahem baat: \\(v\\) constant nahi hai. \\(v = \\frac{y}{x}\\) khud \\(x\\) ka ek naya, na-maloom function hai. Is liye \\(y = v \\cdot x\\) do functions ka product hai aur product rule lagta hai:\n\\[\\dfrac{dy}{dx} = v \\cdot 1 + x\\dfrac{dv}{dx}\\]\nPehla hissa: \\(v\\) zarb \\(x\\) ki derivative (jo 1 hai). Doosra hissa: \\(x\\) zarb \\(v\\) ki derivative.\nDhyan dein: \\(\\frac{dy}{dx} = v\\) likh dena (doosra hissa bhool jana) is topic ki sab se aam ghalti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "(2) aur (3) se \\(\\frac{y}{x}\\) aur \\(\\frac{dy}{dx}\\) ki values (1) mein rakhne se:\n\\[v + x\\dfrac{dv}{dx} = F(v)\\]\nDobara likhne par:\n\\[x\\dfrac{dv}{dx} = F(v) - v\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh separable differential equation ban gayi:\n\\[\\dfrac{1}{F(v) - v}\\,dv = \\dfrac{1}{x}\\,dx\\]\nDono taraf integrate karne par:\n\\[\\int \\dfrac{1}{F(v) - v}\\,dv = \\int \\dfrac{1}{x}\\,dx\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "In integrals ko hal kar ke aur phir \\(v = \\frac{y}{x}\\) wapas rakh kar homogeneous differential equation (1) ka general solution mil jata hai. Socho to yeh aisa hai jaise mushkil raste par jaane ke bajaye hum ek pul (\\(y = vx\\)) se guzar kar jaane pehchane raste (separable) par aa gaye, aur manzil par pohanch kar pul ko wapas hata diya (\\(v = \\frac{y}{x}\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Agar equation \\(\\frac{dy}{dx} = f(x, y)\\) homogeneous ho, to \\(y = vx\\) rakhne par \\(\\frac{dy}{dx}\\) ki jagah \\(v + x\\frac{dv}{dx}\\) aata hai, aur \\(f(x, y)\\) ko aasaani se simplify kar sakte hain: \\(x\\) ki jagah 1 aur \\(y\\) ki jagah \\(v\\) rakh dein. Misaal: \\(\\frac{dy}{dx} = \\frac{x + y}{y - x}\\) ki right side mein \\(x\\) ko 1 aur \\(y\\) ko \\(v\\) karne se \\(v + x\\frac{dv}{dx} = \\frac{1 + v}{v - 1}\\) milta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh shortcut kyun chalta hai? \\(f\\) mein \\(y = vx\\) rakhein; chunke har term ki degree barabar hai, upar aur neeche se \\(x\\) ki ek jaisi power bahar nikal kar cancel ho jati hai:\n\\[\\dfrac{x + vx}{vx - x} = \\dfrac{x(1 + v)}{x(v - 1)} = \\dfrac{1 + v}{v - 1}\\]\nNatija bilkul wohi hai jo \\(x\\) ki jagah 1 aur \\(y\\) ki jagah \\(v\\) likhne se aata hai. Lekin yaad rahe: yeh shortcut sirf homogeneous equation par chalta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "Kitab in do examples ko \"Example 4\" aur \"Example 5\" chhaapti hai (4.2.1 mein us ki numbering Example 2 se dobara shuru hui thi, is liye \"Example 4\" is unit mein do dafa chhapa hai). Hum unit ki ginti jaari rakhte hue inhein Example 7 aur Example 8 dikhate hain. Kitab mein dhoondna ho to printed number 4 aur 5 dekhiye."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Find the general solution of the differential equation \\(\\frac{dy}{dx} = \\frac{x + y}{y - x}\\).",
+            "steps": [
+              "Diya gaya: \\(\\frac{dy}{dx} = \\frac{x + y}{y - x}\\) ...(1)\nMaloom karna: general solution.\nTareeqa: Yeh wahi equation hai jo 4.2.1 mein separable nahi thi. Dekhiye, \\(f(x, y) = \\frac{x + y}{y - x}\\) ke numerator aur denominator ki har term ki degree 1 hai, is liye (1) homogeneous hai. Hum \\(y = vx\\) aur \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\) rakhenge, \\(v\\) aur \\(x\\) ko alag karenge, integrate karenge, aur aakhir mein \\(v = \\frac{y}{x}\\) wapas rakhenge.",
+              "Qadam 1: \\(y = vx\\) rakhein\n\\[v + x\\dfrac{dv}{dx} = \\dfrac{x + vx}{vx - x}\\]\n\\[= \\dfrac{1 + v}{v - 1}\\]\nKyun: Upar neeche \\(x\\) common nikla aur cancel ho gaya. Yahi Note wali baat hai: right side mein \\(x\\) ki jagah 1 aur \\(y\\) ki jagah \\(v\\) rakh do.",
+              "Qadam 2: \\(x\\frac{dv}{dx}\\) ko akela karein\n\\[x\\dfrac{dv}{dx} = \\dfrac{1 + v}{v - 1} - v\\]\n\\[= \\dfrac{1 + v - v^2 + v}{v - 1}\\]\n\\[= \\dfrac{-v^2 + 2v + 1}{v - 1}\\]\nKyun: Dono taraf se \\(v\\) minus kiya. Phir \\(v\\) ko \\(\\frac{v(v - 1)}{v - 1}\\) likh kar common denominator banaya: \\(v(v - 1) = v^2 - v\\), aur minus lagane se \\(-v^2 + v\\).\nDhyan dein: \\(-v(v - 1) = -v^2 + v\\) hai; yahan sign ki ghalti bahut hoti hai.",
+              "Qadam 3: \\(v\\) aur \\(x\\) ko alag karein\n\\[\\dfrac{v - 1}{-v^2 + 2v + 1}\\,dv = \\dfrac{1}{x}\\,dx\\]\nKyun: Ab left par sirf \\(v\\) hai aur right par sirf \\(x\\). Homogeneous equation separable ban gayi; yahi is tareeqe ka kamaal hai.",
+              "Qadam 4: Numerator ko denominator ki derivative banayein\n\\[\\dfrac{d}{dv}(-v^2 + 2v + 1) = -2v + 2\\]\n\\[v - 1 = -\\dfrac{1}{2}(-2v + 2)\\]\nIs liye\n\\[-\\dfrac{1}{2}\\int \\dfrac{-2v + 2}{-v^2 + 2v + 1}\\,dv\\]\n\\[= \\ln|x| + \\ln|c|\\]\nKyun: Jab numerator denominator ki derivative ho to \\(\\int \\frac{f'(v)}{f(v)}\\,dv = \\ln|f(v)|\\). Hamare paas \\(v - 1\\) tha, jo \\(-2v + 2\\) ka \\(-\\frac{1}{2}\\) guna hai, is liye bahar \\(-\\frac{1}{2}\\) likha. Constant ko \\(\\ln|c|\\) likha taake logs aapas mein jor sakein.",
+              "Qadam 5: Integrate karein aur logs jorein\n\\[-\\dfrac{1}{2}\\ln|-v^2 + 2v + 1| = \\ln|cx|\\]\n\\[\\ln|-v^2 + 2v + 1| = -2\\ln|cx|\\]\n\\[= \\ln|cx|^{-2}\\]\nKyun: \\(\\ln|x| + \\ln|c| = \\ln|cx|\\) (log ka product rule). Phir dono taraf \\(-2\\) se multiply kiya, aur \\(k\\ln a = \\ln a^k\\) wala rule lagaya.",
+              "Qadam 6: Logs hatayein\n\\[|-v^2 + 2v + 1| = \\dfrac{1}{c^2x^2}\\]\nKyun: Agar \\(\\ln A = \\ln B\\) ho to \\(A = B\\). Aur \\(|cx|^{-2} = \\frac{1}{c^2x^2}\\), kyunke negative power ka matlab ulta (reciprocal) hai.",
+              "Qadam 7: \\(v = \\frac{y}{x}\\) wapas rakhein\n\\[\\left|-\\dfrac{y^2}{x^2} + \\dfrac{2y}{x} + 1\\right| = \\dfrac{1}{c^2x^2}\\]\n\\[\\dfrac{|-y^2 + 2xy + x^2|}{x^2} = \\dfrac{1}{c^2x^2}\\]\n\\[|-y^2 + 2xy + x^2| = \\dfrac{1}{c^2}\\]\n\\[-y^2 + 2xy + x^2 = \\pm\\dfrac{1}{c^2}\\]\nKyun: Left side ka common denominator \\(x^2\\) banaya, phir dono taraf \\(x^2\\) se multiply kiya to \\(x^2\\) cancel ho gaya. Absolute value hatane se \\(\\pm\\) aata hai.\nDhyan dein: Jawab \\(v\\) mein chhor dena adhoora hai; sawal \\(x\\) aur \\(y\\) mein tha, jawab bhi \\(x\\) aur \\(y\\) mein chahiye.",
+              "Qadam 8: Constant ka naya naam\n\\(\\pm\\frac{1}{c^2}\\) bas ek non-zero constant hai; isay \\(c\\) keh dete hain (\\(c \\ne 0\\)):\n\\[-y^2 + 2xy + x^2 = c\\]\n\\[x^2 + 2xy - y^2 = c\\]\nKyun: Constant arbitrary hai, to koi bhi non-zero constant expression \\(c\\) kehla sakta hai. Kitab bhi yahi karti hai.",
+              "Tasdeeq:\n\\(x^2 + 2xy - y^2 = c\\) ko differentiate karein (\\(2xy\\) par product rule):\n\\[2x + 2y + 2x\\dfrac{dy}{dx} - 2y\\dfrac{dy}{dx} = 0\\]\n\\[(y - x)\\dfrac{dy}{dx} = x + y\\]\n\\[\\dfrac{dy}{dx} = \\dfrac{x + y}{y - x}\\]\nYeh equation (1) hi hai, to jawab sahi hai."
+            ],
+            "answer": "\\(x^2 + 2xy - y^2 = c\\) (\\(c \\ne 0\\) arbitrary constant)."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Solve the differential equation \\(x\\sin\\left(\\frac{y}{x}\\right)dy - \\left[y\\sin\\left(\\frac{y}{x}\\right) - x\\right]dx = 0\\).",
+            "steps": [
+              "Diya gaya: \\(x\\sin\\left(\\frac{y}{x}\\right)dy - \\left[y\\sin\\left(\\frac{y}{x}\\right) - x\\right]dx = 0\\).\nMaloom karna: general solution.\nTareeqa: Pehle isay \\(\\frac{dy}{dx} = \\ldots\\) ki shakal mein laayenge. Phir upar neeche \\(x\\) se divide karne par dikhega ke right side sirf \\(\\frac{y}{x}\\) par munhasir hai, yani equation homogeneous hai. Phir \\(y = vx\\) rakhenge.",
+              "Qadam 1: \\(\\frac{dy}{dx}\\) ki shakal mein likhein\n\\[\\dfrac{dy}{dx} = \\dfrac{y\\sin\\left(\\frac{y}{x}\\right) - x}{x\\sin\\left(\\frac{y}{x}\\right)}\\]\n\\[= \\dfrac{\\frac{y}{x}\\sin\\left(\\frac{y}{x}\\right) - 1}{\\sin\\left(\\frac{y}{x}\\right)}\\]\nKyun: \\(dx\\) wali term ko right par bheja, phir \\(x\\sin\\frac{y}{x}\\,dx\\) se divide kiya. Doosri line mein upar neeche dono ko \\(x\\) se divide kiya taake har jagah \\(\\frac{y}{x}\\) nazar aaye.",
+              "Qadam 2: Qisam pehchanein aur \\(y = vx\\) rakhein\nRight side sirf \\(\\frac{y}{x}\\) ka function hai, is liye equation homogeneous hai.\n\\[v + x\\dfrac{dv}{dx} = \\dfrac{v\\sin v - 1}{\\sin v}\\]\nKyun: \\(\\frac{y}{x} = v\\) aur \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\) (product rule se). Dekhiye, \\(\\sin\\frac{y}{x}\\) seedha \\(\\sin v\\) ban gaya; yahi homogeneous ki khoobsurati hai.",
+              "Qadam 3: \\(x\\frac{dv}{dx}\\) ko akela karein\n\\[x\\dfrac{dv}{dx} = \\dfrac{v\\sin v - 1}{\\sin v} - v\\]\n\\[= \\dfrac{v\\sin v - 1 - v\\sin v}{\\sin v}\\]\n\\[= -\\dfrac{1}{\\sin v}\\]\nKyun: \\(v\\) ko \\(\\frac{v\\sin v}{\\sin v}\\) likh kar minus kiya. \\(v\\sin v\\) aur \\(-v\\sin v\\) cancel ho gaye, sirf \\(-1\\) bacha. Itna saaf natija aksar is baat ka ishara hota hai ke hum sahi raaste par hain.",
+              "Qadam 4: \\(v\\) aur \\(x\\) alag karein\n\\[-\\sin v\\,dv = \\dfrac{1}{x}\\,dx\\]\nKyun: Dono taraf \\(-\\sin v\\) se aur \\(\\frac{dx}{x}\\) se multiply kiya. Ab yeh separable equation hai.",
+              "Qadam 5: Dono taraf integrate karein\n\\[\\int (-\\sin v)\\,dv = \\int \\dfrac{1}{x}\\,dx\\]\n\\[\\cos v = \\ln|x| + \\ln|c|\\]\nKyun: \\(\\frac{d}{dv}\\cos v = -\\sin v\\), is liye \\(\\int(-\\sin v)\\,dv = \\cos v\\). Right side par \\(\\int\\frac{dx}{x} = \\ln|x|\\). Constant ko \\(\\ln|c|\\) likha taake logs jur sakein.\nDhyan dein: \\(\\int \\sin v\\,dv = -\\cos v\\) hai; yahan pehle se minus tha, is liye jawab \\(+\\cos v\\) aaya.",
+              "Qadam 6: \\(v = \\frac{y}{x}\\) wapas rakhein\n\\[\\cos\\left(\\dfrac{y}{x}\\right) = \\ln|cx|\\]\nKyun: \\(\\ln|x| + \\ln|c| = \\ln|cx|\\), aur jawab \\(x\\) aur \\(y\\) mein hona chahiye.",
+              "Tasdeeq:\n\\(\\cos\\frac{y}{x} = \\ln|cx|\\) ko differentiate karein (chain rule aur quotient rule):\n\\[-\\sin\\dfrac{y}{x} \\cdot \\dfrac{x\\frac{dy}{dx} - y}{x^2} = \\dfrac{1}{x}\\]\n\\(-x^2\\) se multiply karein:\n\\[\\sin\\dfrac{y}{x}\\left(x\\dfrac{dy}{dx} - y\\right) = -x\\]\n\\[x\\sin\\dfrac{y}{x}\\,dy - \\left[y\\sin\\dfrac{y}{x} - x\\right]dx = 0\\]\nYeh di hui equation hi hai, to jawab sahi hai."
+            ],
+            "answer": "\\(\\cos\\left(\\frac{y}{x}\\right) = \\ln|cx|\\), jahan \\(c\\) arbitrary constant hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh misaal hamari apni hai. \\(\\frac{dy}{dx} = \\frac{y}{x} + 1\\) solve kijiye.\nRight side sirf \\(\\frac{y}{x}\\) par munhasir hai, to homogeneous. \\(y = vx\\): \\(v + x\\frac{dv}{dx} = v + 1\\), yani \\(x\\frac{dv}{dx} = 1\\). Alag karein: \\(dv = \\frac{dx}{x}\\). Integrate: \\(v = \\ln|cx|\\). Wapas: \\(y = x\\ln|cx|\\).\nCheck: \\(\\frac{dy}{dx} = \\ln|cx| + 1 = \\frac{y}{x} + 1\\). Sahi."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Separable",
+              "Homogeneous"
+            ],
+            "rows": [
+              [
+                "\\(\\frac{dy}{dx} = g(x)\\,h(y)\\)",
+                "\\(\\frac{dy}{dx} = F\\left(\\frac{y}{x}\\right)\\)"
+              ],
+              [
+                "Right side (sirf \\(x\\)) \\(\\times\\) (sirf \\(y\\)) mein toot jati hai",
+                "Right side sirf ratio \\(\\frac{y}{x}\\) par munhasir (sab terms ki degree barabar)"
+              ],
+              [
+                "Seedha alag karein",
+                "Pehle \\(y = vx\\), \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\) rakhein"
+              ],
+              [
+                "\\(x\\) aur \\(y\\) mein integrate karein",
+                "\\(v\\) aur \\(x\\) mein integrate, phir \\(v = \\frac{y}{x}\\) wapas"
+              ],
+              [
+                "Misaal: \\(\\frac{dy}{dx} = -\\frac{x}{y}\\)",
+                "Misaal: \\(\\frac{dy}{dx} = \\frac{x + y}{y - x}\\)"
+              ]
+            ],
+            "caption": "Separable aur homogeneous ka muqabla (hamari taraf se khulasa)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Exam mein homogeneous sawal ki pehli line mein wajah likhiye: \"every term has degree n, so the equation is homogeneous; put \\(y = vx\\)\". Phir \\(x\\frac{dv}{dx} = F(v) - v\\) wali line zaroor dikhayein; isi line par sab se zyada number milte hain aur sab se zyada ghaltiyan bhi yahin hoti hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Homogeneous ka matlab: \\(\\frac{dy}{dx} = F\\left(\\frac{y}{x}\\right)\\); fraction ho to upar neeche har term ki degree barabar.\n2. \\(y = vx\\) aur \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\) rakhein (product rule).\n3. Shortcut: \\(f(x, y)\\) mein \\(x\\) ki jagah 1 aur \\(y\\) ki jagah \\(v\\).\n4. Phir \\(x\\frac{dv}{dx} = F(v) - v\\) separable hai: \\(\\frac{dv}{F(v) - v} = \\frac{dx}{x}\\).\n5. Baqi terms logs hon to constant ko \\(\\ln|c|\\) likhein; aakhir mein \\(v = \\frac{y}{x}\\) wapas rakhna mat bhooliye."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(v + x\\frac{dv}{dx}\\) ki jagah sirf \\(\\frac{dy}{dx} = v\\) likh dena.\n2. \\(v\\) minus karna bhool jana: separable shakal \\(x\\frac{dv}{dx} = F(v) - v\\) hai, sirf \\(F(v)\\) nahi.\n3. Jawab \\(v\\) mein chhor dena; aakhri jawab \\(x\\) aur \\(y\\) mein hona chahiye.\n4. \\(x + y\\) ya \\(e^{x - y}\\) ko homogeneous samajh lena: in ki terms ki degree barabar nahi (\\(e^{x - y}\\) asal mein separable hai)."
+          }
+        ]
+      }
+    }
+  ]
+}

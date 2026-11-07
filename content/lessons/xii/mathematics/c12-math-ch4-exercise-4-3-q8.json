@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-3-Q8",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-3-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 141,
+          "pdf_to": 141,
+          "note": "Exercise 4.3, Q8; book page 139"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 305,
+          "pdf_to": 305,
+          "note": "Answers, Exercise 4.3, key 8"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8 A can of soda at 4°C is placed in a room at 24°C. After 30 minutes, its temperature is 12°C. Find the temperature after 1 hour.",
+            "explanation": "Heating version of Newton's law: \\(\\frac{dT}{dt} = -k(T - 24)\\). Since \\(T < 24\\), \\(\\frac{dT}{dt} > 0\\) and the can warms up.\nGiven \\(T(0) = 4\\), \\(T(30) = 12\\) (minutes); find \\(T(60)\\).",
+            "steps": [
+              "Given: \\(T_S = 24\\)°C, \\(T(0) = 4\\), \\(T(30) = 12\\); \\(t\\) in minutes.\nTo find: \\(T(60)\\) (1 hour = 60 minutes).\nMethod: Newton's law \\(\\frac{dT}{dt} = -k(T - T_S)\\), solved as in Example 12.",
+              "Solve the differential equation\n\\[\\int\\dfrac{dT}{T - 24} = -k\\int dt\\]\n\\[\\ln|T - 24| = -kt + \\ln|c|\\]\n\\[T = 24 + ce^{-kt}\\]\nWhy: separate, integrate, combine the logarithms and take e (as in Example 12).",
+              "Use \\(T(0) = 4\\)\n\\[4 = 24 + c \\Rightarrow c = -20\\]\n\\[T = 24 - 20e^{-kt}\\]\nWhy: \\(c\\) is the starting difference \\(4 - 24\\); it is negative because the can is colder than the room.",
+              "Use \\(T(30) = 12\\)\n\\[12 = 24 - 20e^{-30k}\\]\n\\[e^{-30k} = \\dfrac{12}{20} = \\dfrac{3}{5}\\]\n\\[k = \\tfrac{1}{30}\\ln\\tfrac{5}{3} \\approx 0.01703\\]\nWhy: \\(20e^{-30k} = 24 - 12 = 12\\); take \\(\\ln\\) for \\(k\\) (per minute).",
+              "Find \\(T(60)\\)\n\\[T(60) = 24 - 20e^{-60k}\\]\n\\[= 24 - 20\\left(e^{-30k}\\right)^{2}\\]\n\\[= 24 - 20\\left(\\tfrac{3}{5}\\right)^{2}\\]\n\\[= 24 - 7.2 = 16.8\\]\nWhy: \\(e^{-60k} = (e^{-30k})^{2}\\) uses the exact value \\(\\frac{3}{5}\\).",
+              "Check\nThe difference from the room: 20 at 0 min, 12 at 30 min, 7.2 at 60 min. Each 30 minutes it is multiplied by \\(\\frac{3}{5}\\) \\(\\checkmark\\). 16.8 lies between 12 and 24 \\(\\checkmark\\)."
+            ],
+            "final_answer": "The temperature after 1 hour is 16.8°C."
+          }
+        ]
+      }
+    }
+  ]
+}

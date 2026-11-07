@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-3-Q11-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-3-q11",
+      "title": "Question 11 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 141,
+          "pdf_to": 141,
+          "note": "Exercise 4.3, Q11; book page 139"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 305,
+          "pdf_to": 305,
+          "note": "Answers, Exercise 4.3, key 11"
+        }
+      ],
+      "variant_of": "C12-MATH-CH4-EXERCISE-4-3-Q11",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11 An RC circuit has an emf of 12 volts, resistance \\(R = 6\\,\\Omega\\) and capacitance \\(C = 3\\) farad. Initially, the capacitor is uncharged. Find the current \\(I(t)\\) at any time \\(t\\).",
+            "explanation": "Yeh RC circuit (resistor aur capacitor) ka sawal hai. Dhyan dein: current poochha gaya hai, charge nahi.\nModel charge \\(q\\) ke liye hai: \\(RC\\frac{dq}{dt} = CV_S - q\\) (Section 4.1.1, Example 4 (i)).\nDiya kya hai? \\(V_S = 12\\), \\(R = 6\\), \\(C = 3\\), aur shuru mein capacitor khaali: \\(q(0) = 0\\).\nPlan: pehle \\(q(t)\\) nikalein, phir current \\(I = \\frac{dq}{dt}\\) se.",
+            "steps": [
+              "Diya gaya: \\(V_S = 12\\) V, \\(R = 6\\ \\Omega\\), \\(C = 3\\) F, \\(q(0) = 0\\) (uncharged).\nMaloom karna: \\(I(t)\\).\nTareeqa: \\(q\\) ke liye RC model (separable) hal karenge, phir derivative lenge: \\(I = \\frac{dq}{dt}\\).",
+              "Differential equation likhein\n\\[RC = 6 \\times 3 = 18\\]\n\\[CV_S = 3 \\times 12 = 36\\]\n\\[18\\dfrac{dq}{dt} = 36 - q\\]\nKyun: RC model mein values rakhin. 36 woh poora charge hai jo capacitor aakhir kaar le lega.",
+              "Variables alag karein aur integrate karein\n\\[\\int\\dfrac{dq}{36 - q} = \\int\\dfrac{dt}{18}\\]\n\\[-\\ln|36 - q| = \\dfrac{t}{18} + C_1\\]\nKyun: \\(36 - q\\) ka derivative \\(-1\\) hai, is liye integral ke aage minus aata hai.\nDhyan dein: yahan \\(C\\) capacitance ke liye istemal ho chuka hai, is liye constant ko \\(C_1\\) likha.",
+              "\\(q(0) = 0\\) lagayein\n\\[-\\ln 36 = C_1\\]\n\\[\\ln\\left|\\dfrac{36 - q}{36}\\right| = -\\dfrac{t}{18}\\]\n\\[q(t) = 36\\left(1 - e^{-t/18}\\right)\\]\nKyun: \\(C_1\\) wapas rakha, logarithms ko jora (\\(\\ln a - \\ln b = \\ln\\frac{a}{b}\\)), aur \\(e\\) liya. \\(t = 0\\) par \\(36 - q = 36\\) positive hai, is liye \\(+\\) sign liya.",
+              "Current nikalein\n\\[I = \\dfrac{dq}{dt} = 36 \\cdot \\dfrac{1}{18}e^{-t/18}\\]\n\\[I(t) = 2e^{-t/18}\\]\nKyun: current charge ke behne ki raftar hai. \\(\\frac{d}{dt}e^{-t/18} = -\\frac{1}{18}e^{-t/18}\\), aur aage wala minus is ke saath mil kar plus ban gaya.",
+              "Tasdeeq\n\\(I(0) = 2 = \\frac{12}{6} = \\frac{V_S}{R}\\): shuru mein khaali capacitor par koi voltage nahi, saara voltage resistor par \\(\\checkmark\\).\n\\[RI + \\dfrac{q}{C} = 12e^{-t/18} + 12 - 12e^{-t/18} = 12 \\;\\checkmark\\]\nCurrent waqt ke saath zero ki taraf jata hai jab capacitor bhar jata hai; RL circuit mein ulta hota hai."
+            ],
+            "final_answer": "\\(I(t) = 2e^{-t/18}\\) amperes"
+          }
+        ]
+      }
+    }
+  ]
+}

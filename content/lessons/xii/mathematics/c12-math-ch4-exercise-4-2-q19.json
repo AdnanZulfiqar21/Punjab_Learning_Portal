@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q19",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q19",
+      "title": "Question 19",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 136,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 19: book p. 134 (Q2-Q25 general solutions and IVPs); answer key p. 303 (keys numbered 2-29)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "19",
+            "prompt": "19 Find the general solution of the differential equation \\(y - x\\frac{dy}{dx} = 3\\left(1 + x\\frac{dy}{dx}\\right)\\).",
+            "explanation": "After collecting the \\(\\frac{dy}{dx}\\) terms the equation becomes \\(y - 3 = 4x\\frac{dy}{dx}\\): the \\(y\\)-part and the \\(x\\)-part can be separated.\n(The constant 3 means it is not homogeneous; it is separable.)\nPlan: collect \\(\\frac{dy}{dx}\\), separate, integrate, remove the logarithms.",
+            "steps": [
+              "Given: \\(y - x\\frac{dy}{dx} = 3\\left(1 + x\\frac{dy}{dx}\\right)\\).\nTo find: the general solution.\nMethod: Separable equation (Section 4.2.1): write it as \\(\\frac{dy}{h(y)} = g(x)\\,dx\\) and integrate both sides.",
+              "Open the bracket and collect \\(\\frac{dy}{dx}\\)\n\\[y - x\\dfrac{dy}{dx} = 3 + 3x\\dfrac{dy}{dx}\\]\n\\[y - 3 = 4x\\dfrac{dy}{dx}\\]\nWhy: move \\(-x\\frac{dy}{dx}\\) to the right and 3 to the left: \\(3x\\frac{dy}{dx} + x\\frac{dy}{dx} = 4x\\frac{dy}{dx}\\).",
+              "Separate the variables\n\\[\\dfrac{dy}{y - 3} = \\dfrac{dx}{4x}\\]\nWhy: divide by \\(4x(y - 3)\\) (assuming \\(y \\neq 3\\)); \\(y\\)-terms with \\(dy\\), \\(x\\)-terms with \\(dx\\).",
+              "Integrate\n\\[\\ln|y - 3| = \\tfrac{1}{4}\\ln|x| + \\ln|C|\\]\n\\[\\ln|y - 3| = \\ln\\left|Cx^{1/4}\\right|\\]\nWhy: \\(\\int \\frac{dy}{y - 3} = \\ln|y - 3|\\), \\(\\int \\frac{dx}{4x} = \\frac{1}{4}\\ln|x|\\), and \\(\\frac{1}{4}\\ln x = \\ln x^{1/4}\\).",
+              "Remove the logarithms\n\\[y - 3 = Cx^{1/4}\\]\n\\[y = 3 + Cx^{1/4}\\]\nWhy: equal logarithms mean equal numbers; the sign \\(\\pm\\) is absorbed into \\(C\\) (and \\(C = 0\\) gives the solution \\(y = 3\\)). Here \\(x > 0\\).",
+              "Check\n\\[y' = \\tfrac{C}{4}x^{-3/4}\\]\n\\[4xy' = Cx^{1/4} = y - 3\\]\nSo \\(y - 3 = 4xy'\\), which is the given equation rearranged \\(\\checkmark\\)\nWhy: substituting the answer back satisfies the equation."
+            ],
+            "final_answer": "\\(y = 3 + Cx^{1/4}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints this answer as number 22, not 19. The Exercise 4.2 keys are numbered 2 to 29 for 25 questions (key 2 answers Question 1, and the extra keys 15, 19 and 27 match no printed question), so look for this answer under 22. The answer itself, \\(y = 3 + Cx^{1/4}\\), is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

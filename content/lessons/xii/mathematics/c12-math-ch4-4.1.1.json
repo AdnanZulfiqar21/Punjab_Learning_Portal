@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-4.1.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/4.1.1",
+      "title": "4.1.1 Construction of First-Order and Differential Equations from Practical Situations",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 127,
+          "pdf_to": 129,
+          "note": "Book p. 125-127: 4.1.1 introduction, Examples 1-4 (population, Newton's cooling law, inflation/deflation, RC and RL circuits) with Observations and Figures 4.1-4.2"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The printed heading of 4.1.1 reads \"Construction of First-Order and Differential Equations from Practical Situations\". A word is missing after \"and\"; in line with Section 4.2 it means \"Construction of First-Order and First-Degree Differential Equations from Practical Situations\". All four examples below give first-order, first-degree equations."
+          },
+          {
+            "type": "paragraph",
+            "text": "First-order differential equations model problems where the rate of change of a quantity depends on the quantity itself or on time. For example: motion of a particle, population growth or decay, Newton's law of cooling or heating, electric circuits, economic models and radioactive decay."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Building a model (a \"mathematical model\") from a situation is a translation job. Use these four steps in every example and exercise of this section:\n1. Name the changing quantity and the time: \\(P(t)\\), \\(T(t)\\), \\(q(t)\\), ...\n2. \"Rate of change of \\(Q\\)\" becomes \\(\\frac{dQ}{dt}\\).\n3. \"Proportional to X\" becomes \"\\(= k \\times X\\)\" with a constant \\(k\\).\n4. Decide the sign: if the quantity is decreasing, its rate is negative; write \\(-k\\) with \\(k > 0\\), or keep \\(k\\) and say \\(k < 0\\).\nWe do not solve these equations here; solving them is the work of Sections 4.2 and 4.3."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Population Growth/Decay. The rate of change of a population is proportional to the population itself. Construct the differential equation (mathematical model) for the population \\(P\\) at time \\(t\\).",
+            "steps": [
+              "Given: the rate of change of population is proportional to the population itself.\nTo find: a differential equation for \\(P(t)\\).\nMethod: translate the sentence into symbols. \"Rate of change of \\(P\\) with time\" is \\(\\frac{dP}{dt}\\); \"proportional to \\(P\\)\" means \"equal to a constant times \\(P\\)\".",
+              "Mathematical Model: write the proportionality\nLet \\(P\\) represent the population at time \\(t\\). Since the rate of change of population is proportional to the population at that time, we can write\n\\[\\dfrac{dP}{dt} \\propto P\\]\nWhy: a bigger population has more parents, so more births per year; the growth rate grows with \\(P\\).",
+              "Introduce the constant of proportionality\nIf \\(k\\) is the constant of proportionality, this becomes\n\\[\\dfrac{dP}{dt} = kP\\]\nWhy: \\(A \\propto B\\) always means \\(A = kB\\) for some constant \\(k\\). We cannot use the sign \\(\\propto\\) in calculations, so we replace it by \"\\(= k\\,\\times\\)\".",
+              "Classify the equation\nThis is a first-order differential equation.\nWhy: the only derivative is \\(\\frac{dP}{dt}\\), a first derivative (and its power is 1, so the degree is also 1).",
+              "Check:\nThe function \\(P = P_{0}e^{kt}\\) (a solution found later in this unit) gives\n\\[\\dfrac{dP}{dt} = kP_{0}e^{kt} = kP\\]\nso the model behaves as expected: growth for \\(k > 0\\), decay for \\(k < 0\\)."
+            ],
+            "answer": "\\(\\dfrac{dP}{dt} = kP\\), a first-order differential equation (\\(k\\) = constant of proportionality)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Observation",
+            "text": "From this equation, we observe:\n(i) If \\(k > 0\\), the population increases (growth).\n(ii) If \\(k < 0\\), the population decreases (decay).\n(iii) If \\(k = 0\\), the population remains constant.\nBy solving this differential equation, we can find the population at any specific time \\(t\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Temperature Problem (Cooling/Heating Law). Let \\(T\\) represent the temperature of a body at time \\(t\\), and let \\(T_{S}\\) be the constant temperature of the surrounding medium. According to Newton's law of cooling (or heating), the rate of change of the body's temperature with respect to time is proportional to the difference between the body's temperature and the surrounding temperature. Construct the differential equation.",
+            "steps": [
+              "Given: body temperature \\(T(t)\\), constant surrounding temperature \\(T_{S}\\); rate of change of \\(T\\) is proportional to the temperature difference.\nTo find: a differential equation for \\(T(t)\\).\nMethod: \"rate of change of \\(T\\)\" is \\(\\frac{dT}{dt}\\); write the proportionality, then insert a positive constant \\(k\\).",
+              "Mathematical Model: write the proportionality\n\\[\\dfrac{dT}{dt} \\propto (T_{S} - T)\\]\nWhy: the bigger the gap between the body and its surroundings, the faster heat flows, so the faster \\(T\\) changes. The book writes the difference as \\(T_{S} - T\\) so that the sign comes out right (next step).",
+              "Introduce the constant\nIntroducing a constant of proportionality \\(k > 0\\), the relation becomes\n\\[\\dfrac{dT}{dt} = k(T_{S} - T)\\]\nThis is the required first ordered differential.\nWhy: with \\(k > 0\\) the sign of \\(\\frac{dT}{dt}\\) is the sign of \\(T_{S} - T\\): a body colder than the room warms up, a hotter body cools down.",
+              "Check:\nHot tea: \\(T = 80\\), \\(T_{S} = 30\\) gives\n\\[\\dfrac{dT}{dt} = k(30 - 80) = -50k < 0\\]\nso the tea cools, exactly as in real life."
+            ],
+            "answer": "\\(\\dfrac{dT}{dt} = k(T_{S} - T)\\), \\(k > 0\\): a first-order differential equation.",
+            "book_errors": [
+              "This is the required first ordered differential."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book ends Example 2 with \"This is the required first ordered differential.\" A word is missing; it should read \"This is the required first-order differential equation.\" "
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Observations",
+            "text": "(i) If \\(T < T_{S}\\), the body is warming up and \\(\\frac{dT}{dt}\\) is positive.\n(ii) If \\(T > T_{S}\\), the body is cooling down and \\(\\frac{dT}{dt}\\) is negative.\nBy solving this differential equation, we can find the temperature \\(T\\) of the body at any time \\(t\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Inflation/Deflation Problem in Economics. Inflation means the price of goods is increasing over time, while deflation means the price of goods is decreasing over time. Construct a first-order differential equation to describe how the price of a good changes over time due to inflation or deflation.",
+            "steps": [
+              "Given: the rate of change of the price is proportional to the current price.\nTo find: a differential equation for the price \\(P(t)\\).\nMethod: same translation as in Example 1: rate = \\(\\frac{dP}{dt}\\), \"proportional\" = constant times.",
+              "Mathematical Model: the assumption\nLet \\(P\\) represent the price of a good at time \\(t\\). We assume that the rate of change of price is proportional to the current price:\n\\[\\dfrac{dP}{dt} \\propto P\\]\nWhy: with, say, 10% inflation a Rs. 1000 item rises by Rs. 100 a year, but a Rs. 100 item only by Rs. 10. The increase depends on the current price.",
+              "Introduce the constant\nLet \\(k\\) be the constant of proportionality representing the rate of inflation or deflation; then the desired differential equation is\n\\[\\dfrac{dP}{dt} = kP\\]\nWhy: \\(\\propto\\) becomes \"\\(= k\\,\\times\\)\". Here \\(k > 0\\) describes inflation (price rising) and \\(k < 0\\) deflation (price falling).",
+              "Check:\nFor \\(k > 0\\) and \\(P > 0\\), \\(\\frac{dP}{dt} > 0\\): prices rise (inflation). For \\(k < 0\\), \\(\\frac{dP}{dt} < 0\\): prices fall (deflation). The model matches both definitions."
+            ],
+            "answer": "\\(\\dfrac{dP}{dt} = kP\\) (\\(k > 0\\): inflation, \\(k < 0\\): deflation)."
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "Flow of Electricity in Series Circuits. In daily life, many problems involve the current flowing in series circuits. Construct the first-order differential equations for two simple cases: (i) charging a capacitor through a resistor (RC circuit model), and (ii) charging an inductor through a resistor (RL circuit model).",
+            "steps": [
+              "Given: (i) a resistor \\(R\\) and a capacitor \\(C\\) in series with a DC source of emf \\(V_{S}\\); (ii) a resistor \\(R\\) and an inductor \\(L\\) in series with the same kind of source.\nTo find: a differential equation for the charge \\(q(t)\\) in (i) and for the current \\(I(t)\\) in (ii).\nMethod: write the voltage across each component, then use Kirchhoff's voltage law: the voltages across the components add up to the source voltage.",
+              "(i) Charging a Capacitor Through a Resistor (RC Circuit Model): the situation\nAn RC circuit consists of a resistor of resistance \\(R\\) ohms and a capacitor of capacitance \\(C\\) farad connected in series with a DC voltage source of constant emf \\(V_{S}\\) volts. The initial current is assumed to be zero (see Figure 4.1 below). At time \\(t = 0\\) the switch is closed and the capacitor begins to charge. Let \\(q\\) be the charge on the capacitor at time \\(t\\), and \\(I\\) the current flowing through the circuit.\nWhy: we need names for the changing quantities before we can write an equation.",
+              "(i) Mathematical Model: voltage across each part\nThe voltage across the capacitor is\n\\[V_{C} = \\dfrac{q}{C}\\]\nAccording to Ohm's law, the voltage across the resistor is\n\\[V_{R} = IR\\]\nWhy: these are the two physics laws for the components: a capacitor's voltage is charge divided by capacitance, and a resistor obeys Ohm's law.",
+              "(i) Kirchhoff's voltage law\nBy Kirchhoff's voltage law, the sum of the voltages across the resistor and capacitor equals the total voltage from the battery:\n\\[V_{S} = V_{r} + V_{C}\\]\n\\[V_{S} = \\dfrac{q}{C} + V_{R}\\]\n\\[V_{S} = \\dfrac{q}{C} + IR\\]\nWhy: going once round a closed loop, the energy given by the source per unit charge is used up in the components.",
+              "(i) Bring in the derivative\nSubstituting \\(I = \\frac{dq}{dt}\\), the equation becomes\n\\[R\\dfrac{dq}{dt} + \\dfrac{q}{C} = V_{S}\\]\nor simply (multiply by \\(C\\) and rearrange)\n\\[RC\\dfrac{dq}{dt} = CV_{S} - q\\]\nWhy: current is the rate of flow of charge, so \\(I = \\frac{dq}{dt}\\). This turns an ordinary relation into a differential equation in \\(q\\).",
+              "(ii) Charging an Inductor Through a Resistor (RL Circuit Model): the situation\nSituation: an RL circuit consists of a resistor of resistance \\(R\\) ohms and an inductor of inductance \\(L\\) henries connected in series with a DC voltage source of constant emf \\(V_{S}\\) volts. The initial current is assumed to be zero (see Figure 4.2 below). At time \\(t = 0\\) the switch is closed and the inductor begins to charge. Let \\(I\\) be the current flowing through the inductor at time \\(t\\).\nWhy: this time the changing quantity we follow is the current \\(I\\) itself.",
+              "(ii) Mathematical Model: voltage across each part\nThe voltage across the inductor is\n\\[V_{L} = L\\dfrac{dI}{dt}\\]\nAccording to Ohm's law, the voltage across the resistor is\n\\[V_{R} = RI\\]\nWhy: an inductor opposes a change of current; its voltage is proportional to how fast the current changes.",
+              "(ii) Kirchhoff's voltage law\nThe sum of the voltages across the resistor and inductor equals the applied voltage:\n\\[V_{S} = V_{L} + V_{R}\\]\n\\[L\\dfrac{dI}{dt} + RI = V_{S}\\]\nIn this way the differential equation is\n\\[L\\dfrac{dI}{dt} = V_{S} - RI\\]\nWhy: same loop law as in (i); here the derivative is already present through \\(V_{L}\\).",
+              "Check:\n(i) \\(q = CV_{S}\\left(1 - e^{-t/RC}\\right)\\) gives \\(RC\\frac{dq}{dt} = CV_{S}e^{-t/RC} = CV_{S} - q\\).\n(ii) \\(I = \\frac{V_{S}}{R}\\left(1 - e^{-Rt/L}\\right)\\) gives \\(L\\frac{dI}{dt} = V_{S}e^{-Rt/L} = V_{S} - RI\\).\nBoth models are satisfied by the known charging formulas (checked with sympy)."
+            ],
+            "answer": "(i) RC circuit: \\(RC\\dfrac{dq}{dt} = CV_{S} - q\\). (ii) RL circuit: \\(L\\dfrac{dI}{dt} = V_{S} - RI\\).",
+            "book_errors": [
+              "\\[V_{S} = V_{r} + V_{C}\\]"
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch4-fig-rc-circuit",
+            "alt": "Series RC circuit. A DC source V S on the left, its plus terminal at the top. The top wire runs through an open switch and a resistor R to the right side, where a capacitor C carries charge plus q on its upper plate and minus q on its lower plate. A voltmeter V C is connected across the capacitor. An arrow below the top wire shows the charging current I. The bottom wire returns to the source and is earthed.",
+            "caption": "Figure 4.1: RC series circuit for charging a capacitor (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch4-fig-rl-circuit",
+            "alt": "Series RL circuit. A battery V on the left, plus terminal at the top. An arrow i on the top wire shows the current direction. A switch marked t = 0 is on the top wire. A resistor R is on the right side and an inductor L on the bottom wire.",
+            "caption": "Figure 4.2: RL series circuit for charging an inductor (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In part (i) the book prints \\(V_{S} = V_{r} + V_{C}\\) with a small \\(r\\). The voltage across the resistor is \\(V_{R}\\) (as in the very next line), so it should read \\(V_{S} = V_{R} + V_{C}\\). Also, Figure 4.1 in the book labels the switch \"Swithc\"; it means \"Switch\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In part (i) the book says \"the initial current is assumed to be zero\". This describes the circuit before the switch is closed. What is really zero at \\(t = 0\\) is the charge on the capacitor, \\(q(0) = 0\\). The moment the switch closes, the current jumps to \\(\\frac{V_{S}}{R}\\) and then dies away as the capacitor fills up. In part (ii) the current really does start from \\(I(0) = 0\\), because an inductor does not let the current change suddenly."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "In model questions the examiner checks three things: the correct derivative (\\(\\frac{dP}{dt}\\), \\(\\frac{dT}{dt}\\), \\(\\frac{dq}{dt}\\), ...), the proportionality turned into a constant, and the correct sign. Always write the \"\\(\\propto\\)\" line first and then the \"\\(= k\\)\" line, and state what the sign of \\(k\\) means."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Growth/decay and inflation/deflation: \\(\\frac{dP}{dt} = kP\\) (\\(k > 0\\) increase, \\(k < 0\\) decrease, \\(k = 0\\) constant).\n2. Newton's law of cooling/heating: \\(\\frac{dT}{dt} = k(T_{S} - T)\\), \\(k > 0\\).\n3. RC circuit (charging): \\(RC\\frac{dq}{dt} = CV_{S} - q\\), using \\(V_{C} = \\frac{q}{C}\\), \\(V_{R} = IR\\), \\(I = \\frac{dq}{dt}\\).\n4. RL circuit (charging): \\(L\\frac{dI}{dt} = V_{S} - RI\\), using \\(V_{L} = L\\frac{dI}{dt}\\), \\(V_{R} = RI\\).\n5. All these are first-order, first-degree differential equations."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Leaving the sign \\(\\propto\\) in the final answer: always replace it by \"\\(= k\\)\".\n2. Writing \\(\\frac{dT}{dt} = k(T - T_{S})\\) with \\(k > 0\\): then a hot body would get hotter. With \\(k > 0\\) the bracket must be \\(T_{S} - T\\).\n3. Forgetting \\(I = \\frac{dq}{dt}\\) in the RC circuit, which leaves an equation with no derivative.\n4. Mixing up the inductor voltage \\(L\\frac{dI}{dt}\\) with the resistor voltage \\(RI\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

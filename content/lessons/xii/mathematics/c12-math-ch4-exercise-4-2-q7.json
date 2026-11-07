@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q7",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 135,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 7: book p. 133-134; answers printed under 'EXERCISE 4.2' (book p. 303, PDF 305), numbered 2-29, matched by content"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7. Find the general solution of the differential equation \\(\\frac{dy}{dx} = \\frac{1 + x}{(1 - x)(1 + x^2)}\\).",
+            "explanation": "The right side contains \\(x\\) only (\\(h(y) = 1\\)), so the equation is separable: \\(y = \\int f(x)\\,dx\\).\nPlan: break the fraction into partial fractions, integrate each part, and combine the logarithms.",
+            "steps": [
+              "Given: \\(\\frac{dy}{dx} = \\frac{1 + x}{(1 - x)(1 + x^2)}\\).\nTo find: the general solution.\nMethod: separable with \\(h(y) = 1\\), so \\(dy = f(x)\\,dx\\). The fraction has a linear factor and an irreducible quadratic factor, so use partial fractions.",
+              "Separate\n\\[dy = \\dfrac{1 + x}{(1 - x)(1 + x^2)}\\,dx\\]\nWhy: multiply both sides by \\(dx\\).",
+              "Set up partial fractions\n\\[\\dfrac{1 + x}{(1 - x)(1 + x^2)} = \\dfrac{A}{1 - x} + \\dfrac{Bx + D}{1 + x^2}\\]\n\\[1 + x = A(1 + x^2) + (Bx + D)(1 - x)\\]\nWhy: a linear factor gets a constant on top; the quadratic \\(1 + x^2\\) (no real roots) gets a linear top.",
+              "Find \\(A\\), \\(B\\), \\(D\\)\nPut \\(x = 1\\): \\(2 = 2A\\), so \\(A = 1\\).\nCoefficients of \\(x^2\\): \\(0 = A - B\\), so \\(B = 1\\).\nConstant terms: \\(1 = A + D\\), so \\(D = 0\\).\nWhy: \\(x = 1\\) makes the second term vanish; the rest come from comparing coefficients. (Coefficient of \\(x\\): \\(1 = B - D\\), true.)",
+              "Rewrite and integrate\n\\[dy = \\left(\\dfrac{1}{1 - x} + \\dfrac{x}{1 + x^2}\\right)dx\\]\n\\[y = -\\ln|1 - x| + \\dfrac{1}{2}\\ln(1 + x^2) + \\ln|C|\\]\nWhy: \\(\\int\\frac{dx}{1 - x} = -\\ln|1 - x|\\) (derivative of \\(1 - x\\) is \\(-1\\)); \\(\\int\\frac{x\\,dx}{1 + x^2} = \\frac{1}{2}\\ln(1 + x^2)\\) (top is half the derivative of the bottom). The constant is written as \\(\\ln|C|\\).",
+              "Combine the logarithms\n\\[y = \\ln\\left|\\dfrac{C\\sqrt{1 + x^2}}{1 - x}\\right|\\]\nWhy: \\(\\frac{1}{2}\\ln a = \\ln\\sqrt{a}\\), \\(\\ln a + \\ln b = \\ln ab\\), \\(\\ln a - \\ln b = \\ln\\frac{a}{b}\\).",
+              "Check\n\\[\\dfrac{dy}{dx} = \\dfrac{x}{1 + x^2} + \\dfrac{1}{1 - x}\\]\n\\[= \\dfrac{x(1 - x) + 1 + x^2}{(1 - x)(1 + x^2)}\\]\n\\[= \\dfrac{1 + x}{(1 - x)(1 + x^2)}\\]\nThis is the given right side."
+            ],
+            "final_answer": "\\(y = \\ln\\left|\\frac{C\\sqrt{1 + x^2}}{1 - x}\\right|\\)"
+          }
+        ]
+      }
+    }
+  ]
+}
