@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH10-EXERCISE-10-1-Q21",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch10",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch10/u-exercise-10-1-q21",
+      "title": "Question 21",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 280,
+          "pdf_to": 280,
+          "note": "Exercise 10.1, Question 21 (book p. 278); the book prints no answers for Exercise 10.1; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "21",
+            "prompt": "21 Solve the following trigonometric equation: \\(\\frac{\\sin^3 x + \\cos^3 x}{\\sin x + \\cos x} - \\frac{\\sin x}{\\sqrt{1 + \\tan^2 x}} = \\frac{1}{2}\\)",
+            "explanation": "Two fractions: the first is a sum of cubes over a sum, the second hides \\(\\sqrt{\\sec^2 x}\\).\nTo find: the solutions in \\([0, 2\\pi]\\) and the general solution.\nPlan: simplify the first term with \\(a^3 + b^3\\); write \\(\\sqrt{1 + \\tan^2 x} = |\\sec x|\\), which forces two cases (\\(\\cos x > 0\\) and \\(\\cos x < 0\\)); solve each case and keep only the values that fit it.",
+            "steps": [
+              "Given: \\(\\frac{\\sin^3 x + \\cos^3 x}{\\sin x + \\cos x} - \\frac{\\sin x}{\\sqrt{1 + \\tan^2 x}} = \\frac{1}{2}\\).\nTo find: the solutions in \\([0, 2\\pi]\\) and the general solution.\nMethod: \\(a^3 + b^3 = (a + b)(a^2 - ab + b^2)\\); \\(1 + \\tan^2 x = \\sec^2 x\\) and \\(\\sqrt{p^2} = |p|\\). Restriction: \\(\\sin x + \\cos x \\neq 0\\), \\(\\cos x \\neq 0\\).",
+              "First term\n\\[\\dfrac{\\sin^3 x + \\cos^3 x}{\\sin x + \\cos x}\\]\n\\[= \\sin^2 x - \\sin x\\cos x + \\cos^2 x\\]\n\\[= 1 - \\sin x\\cos x\\]\nWhy: factorise the sum of cubes and cancel \\(\\sin x + \\cos x\\) (not zero); then \\(\\sin^2 x + \\cos^2 x = 1\\).",
+              "Second term\n\\[\\sqrt{1 + \\tan^2 x} = \\sqrt{\\sec^2 x} = |\\sec x|\\]\nWhy: a square root is never negative, so \\(\\sqrt{\\sec^2 x}\\) is \\(\\sec x\\) only when \\(\\sec x > 0\\), i.e. when \\(\\cos x > 0\\). The sign of \\(\\cos x\\) therefore matters.",
+              "Case (a): \\(\\cos x > 0\\) (quadrant I or IV)\n\\[\\dfrac{\\sin x}{\\sec x} = \\sin x\\cos x\\]\n\\[1 - \\sin x\\cos x - \\sin x\\cos x = \\tfrac{1}{2}\\]\n\\[1 - 2\\sin x\\cos x = \\tfrac{1}{2}\\]\n\\[\\sin 2x = \\tfrac{1}{2}\\]\nWhy: \\(|\\sec x| = \\sec x\\) here, and \\(\\frac{1}{\\sec x} = \\cos x\\); \\(2\\sin x\\cos x = \\sin 2x\\).",
+              "Solve \\(\\sin 2x = \\frac{1}{2}\\)\n\\[2x = \\tfrac{\\pi}{6} + 2n\\pi \\text{ or } \\tfrac{5\\pi}{6} + 2n\\pi\\]\n\\[x = \\tfrac{\\pi}{12} + n\\pi \\text{ or } \\tfrac{5\\pi}{12} + n\\pi\\]\nIn \\([0, 2\\pi]\\): \\(\\frac{\\pi}{12}, \\frac{5\\pi}{12}, \\frac{13\\pi}{12}, \\frac{17\\pi}{12}\\).\nWhy: sine is positive in quadrants I and II, reference angle \\(\\frac{\\pi}{6}\\); then divide by 2.",
+              "Keep only the values with \\(\\cos x > 0\\)\n\\[\\tfrac{\\pi}{12}, \\tfrac{5\\pi}{12} \\text{ (quadrant I): accepted}\\]\n\\[\\tfrac{13\\pi}{12}, \\tfrac{17\\pi}{12} \\text{ (quadrant III): rejected}\\]\nWhy: Case (a) was built on \\(\\cos x > 0\\); in quadrant III, \\(\\cos x < 0\\), so those two values do not belong to this case.",
+              "Case (b): \\(\\cos x < 0\\) (quadrant II or III)\n\\[\\dfrac{\\sin x}{|\\sec x|} = -\\sin x\\cos x\\]\n\\[1 - \\sin x\\cos x + \\sin x\\cos x = \\tfrac{1}{2}\\]\n\\[1 = \\tfrac{1}{2}\\]\nImpossible, so there are no solutions with \\(\\cos x < 0\\).\nWhy: here \\(|\\sec x| = -\\sec x\\), so the second term changes sign and the \\(\\sin x\\cos x\\) terms cancel.",
+              "General solution\n\\[\\left\\{\\tfrac{\\pi}{12} + 2n\\pi\\right\\} \\cup \\left\\{\\tfrac{5\\pi}{12} + 2n\\pi\\right\\}\\]\nWhy: the accepted values repeat only after \\(2\\pi\\) (the sign of \\(\\cos x\\) repeats after \\(2\\pi\\), not \\(\\pi\\)). At both values \\(\\cos x \\neq 0\\) and \\(\\sin x + \\cos x > 0\\), so the equation is defined.",
+              "Check\n\\[x = \\tfrac{\\pi}{12}:\\ \\sin x\\cos x = \\tfrac{1}{2}\\sin\\tfrac{\\pi}{6} = \\tfrac{1}{4}\\]\n\\[\\text{L.H.S.} = \\left(1 - \\tfrac{1}{4}\\right) - \\tfrac{1}{4} = \\tfrac{1}{2} \\;\\checkmark\\]\n\\[x = \\tfrac{13\\pi}{12}:\\ \\text{L.H.S.} = \\tfrac{3}{4} + \\tfrac{1}{4} = 1 \\neq \\tfrac{1}{2}\\]\nWhy: at \\(\\frac{13\\pi}{12}\\) again \\(\\sin x\\cos x = \\frac{1}{4}\\), but \\(\\cos x < 0\\), so the second term is \\(-\\frac{1}{4}\\) and the value is rejected."
+            ],
+            "final_answer": "In \\([0, 2\\pi]\\): \\(x = \\frac{\\pi}{12}, \\frac{5\\pi}{12}\\)\nGeneral solution \\(= \\left\\{\\frac{\\pi}{12} + 2n\\pi\\right\\} \\cup \\left\\{\\frac{5\\pi}{12} + 2n\\pi\\right\\}\\), \\(n \\in \\mathbb{Z}\\)",
+            "answer_figure": {
+              "$asset": "c12-math-ch10-fig-ex10-1-q21",
+              "alt": "Graph of the left side of the equation for x from 0 to 2 pi together with the horizontal line y equals one half. The left side equals 1 minus sine 2x where cosine x is positive and equals 1 where cosine x is negative; it meets the line only at x equals pi over 12 and 5 pi over 12.",
+              "caption": "The left side meets y = 1/2 only at x = π/12 and 5π/12; where cos x < 0 it stays at 1 (original drawing)"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 10.1. Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

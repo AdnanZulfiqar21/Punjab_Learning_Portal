@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH10-EXERCISE-10-1-Q23",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch10",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch10/u-exercise-10-1-q23",
+      "title": "Question 23",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 280,
+          "pdf_to": 280,
+          "note": "Exercise 10.1, Question 23 (book p. 278); the book prints no answers for Exercise 10.1; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "23",
+            "prompt": "23 Solve the following trigonometric equation: \\(\\cos 2x - \\cos 6x = \\sin 4x\\)",
+            "explanation": "A difference of two cosines equals a sine; the angles \\(2x\\) and \\(6x\\) average to \\(4x\\), the angle on the right.\nTo find: the solutions in \\([0, 2\\pi]\\) and the general solution.\nPlan: use \\(\\cos C - \\cos D\\) to get \\(\\sin 4x\\) as a factor, bring everything to one side, factorise and solve each factor.",
+            "steps": [
+              "Given: \\(\\cos 2x - \\cos 6x = \\sin 4x\\).\nTo find: the solutions in \\([0, 2\\pi]\\) and the general solution.\nMethod: \\(\\cos C - \\cos D = -2\\sin\\frac{C+D}{2}\\sin\\frac{C-D}{2}\\) with \\(C = 2x\\), \\(D = 6x\\).",
+              "Use the difference formula\n\\[\\cos 2x - \\cos 6x = -2\\sin 4x\\sin(-2x)\\]\n\\[= 2\\sin 4x\\sin 2x\\]\nWhy: \\(\\frac{C+D}{2} = 4x\\), \\(\\frac{C-D}{2} = -2x\\), and \\(\\sin(-\\theta) = -\\sin\\theta\\).",
+              "Factorise\n\\[2\\sin 4x\\sin 2x - \\sin 4x = 0\\]\n\\[\\sin 4x(2\\sin 2x - 1) = 0\\]\n\\[\\sin 4x = 0 \\text{ or } \\sin 2x = \\tfrac{1}{2}\\]\nWhy: \\(\\sin 4x\\) is common; never divide by it, or the roots of \\(\\sin 4x = 0\\) are lost.",
+              "When \\(\\sin 4x = 0\\)\n\\[4x = n\\pi \\;\\Rightarrow\\; x = \\tfrac{n\\pi}{4}\\]\nIn \\([0, 2\\pi]\\) (\\(n = 0, \\ldots, 8\\)):\n\\[0, \\tfrac{\\pi}{4}, \\tfrac{\\pi}{2}, \\tfrac{3\\pi}{4}, \\pi, \\tfrac{5\\pi}{4}, \\tfrac{3\\pi}{2}, \\tfrac{7\\pi}{4}, 2\\pi\\]\nWhy: sine is zero at every multiple of \\(\\pi\\).",
+              "When \\(\\sin 2x = \\frac{1}{2}\\)\n\\[2x = \\tfrac{\\pi}{6} + 2n\\pi \\text{ or } \\tfrac{5\\pi}{6} + 2n\\pi\\]\n\\[x = \\tfrac{\\pi}{12} + n\\pi \\text{ or } \\tfrac{5\\pi}{12} + n\\pi\\]\nIn \\([0, 2\\pi]\\): \\(\\frac{\\pi}{12}, \\frac{13\\pi}{12}, \\frac{5\\pi}{12}, \\frac{17\\pi}{12}\\).\nWhy: sine is positive in quadrants I and II, reference angle \\(\\frac{\\pi}{6}\\); divide by 2.",
+              "Collect the answers\n\\[\\left\\{\\tfrac{n\\pi}{4}\\right\\} \\cup \\left\\{\\tfrac{\\pi}{12} + n\\pi\\right\\} \\cup \\left\\{\\tfrac{5\\pi}{12} + n\\pi\\right\\}\\]\nWhy: \\(\\frac{\\pi}{12}\\) and \\(\\frac{5\\pi}{12}\\) are not multiples of \\(\\frac{\\pi}{4} = \\frac{3\\pi}{12}\\), so nothing is counted twice: \\(9 + 4 = 13\\) values in \\([0, 2\\pi]\\).",
+              "Check: \\(x = \\frac{\\pi}{12}\\)\n\\[\\cos\\tfrac{\\pi}{6} - \\cos\\tfrac{\\pi}{2} = \\tfrac{\\sqrt{3}}{2} - 0 = \\tfrac{\\sqrt{3}}{2}\\]\n\\[\\sin\\tfrac{\\pi}{3} = \\tfrac{\\sqrt{3}}{2} \\;\\checkmark\\]\nWhy: both sides give the same number."
+            ],
+            "final_answer": "In \\([0, 2\\pi]\\) (13 values): \\(x = 0, \\frac{\\pi}{12}, \\frac{\\pi}{4}, \\frac{5\\pi}{12}, \\frac{\\pi}{2}, \\frac{3\\pi}{4}, \\pi, \\frac{13\\pi}{12}, \\frac{5\\pi}{4}, \\frac{17\\pi}{12}, \\frac{3\\pi}{2}, \\frac{7\\pi}{4}, 2\\pi\\)\nGeneral solution \\(= \\left\\{\\frac{n\\pi}{4}\\right\\} \\cup \\left\\{\\frac{\\pi}{12} + n\\pi\\right\\} \\cup \\left\\{\\frac{5\\pi}{12} + n\\pi\\right\\}\\), \\(n \\in \\mathbb{Z}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 10.1. Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

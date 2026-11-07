@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH10-EXERCISE-10-1-Q17",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch10",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch10/u-exercise-10-1-q17",
+      "title": "Question 17",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 280,
+          "pdf_to": 280,
+          "note": "Exercise 10.1, Question 17 (book p. 278); the book prints no answers for Exercise 10.1; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "17",
+            "prompt": "17 Solve the following trigonometric equation: \\(\\sin 3x\\cos x + \\cos 3x\\sin x = \\frac{1}{\\sqrt{2}}\\)",
+            "explanation": "The left side has the pattern \\(\\sin A\\cos B + \\cos A\\sin B\\), which is \\(\\sin(A + B)\\).\nTo find: the solutions in \\([0, 2\\pi]\\) and the general solution.\nPlan: compress the left side to \\(\\sin 4x\\), solve for the angle \\(4x\\), then divide by 4.",
+            "steps": [
+              "Given: \\(\\sin 3x\\cos x + \\cos 3x\\sin x = \\frac{1}{\\sqrt{2}}\\).\nTo find: the solutions in \\([0, 2\\pi]\\) and the general solution.\nMethod: \\(\\sin(A + B) = \\sin A\\cos B + \\cos A\\sin B\\) with \\(A = 3x\\), \\(B = x\\).",
+              "Use the addition formula\n\\[\\sin(3x + x) = \\tfrac{1}{\\sqrt{2}}\\]\n\\[\\sin 4x = \\tfrac{1}{\\sqrt{2}}\\]\nWhy: the left side is exactly the expansion of \\(\\sin(A + B)\\).",
+              "Solve for the angle \\(4x\\)\n\\[4x = \\tfrac{\\pi}{4} + 2n\\pi\\]\n\\[4x = \\pi - \\tfrac{\\pi}{4} + 2n\\pi = \\tfrac{3\\pi}{4} + 2n\\pi\\]\nWhy: sine is positive, so \\(4x\\) is in quadrant I or II with reference angle \\(\\frac{\\pi}{4}\\); period \\(2\\pi\\).",
+              "Divide by 4\n\\[x = \\tfrac{\\pi}{16} + \\tfrac{n\\pi}{2}\\]\n\\[x = \\tfrac{3\\pi}{16} + \\tfrac{n\\pi}{2}\\]\nWhy: \\(\\frac{2n\\pi}{4} = \\frac{n\\pi}{2}\\).",
+              "Values in \\([0, 2\\pi]\\) (\\(n = 0, 1, 2, 3\\))\n\\[\\tfrac{\\pi}{16}, \\tfrac{9\\pi}{16}, \\tfrac{17\\pi}{16}, \\tfrac{25\\pi}{16}\\]\n\\[\\tfrac{3\\pi}{16}, \\tfrac{11\\pi}{16}, \\tfrac{19\\pi}{16}, \\tfrac{27\\pi}{16}\\]\nWhy: \\(\\frac{n\\pi}{2} = \\frac{8n\\pi}{16}\\), so the numerator grows by 8; \\(n = 4\\) passes \\(2\\pi = \\frac{32\\pi}{16}\\). Angle \\(4x\\) makes 4 turns, two answers per turn: 8 values.",
+              "Check: \\(x = \\frac{\\pi}{16}\\)\n\\[4x = \\tfrac{\\pi}{4},\\quad \\sin\\tfrac{\\pi}{4} = \\tfrac{1}{\\sqrt{2}} \\;\\checkmark\\]\nWhy: the left side is \\(\\sin 4x\\). For \\(x = \\frac{3\\pi}{16}\\): \\(\\sin\\frac{3\\pi}{4} = \\frac{1}{\\sqrt{2}}\\) \\(\\checkmark\\)."
+            ],
+            "final_answer": "In \\([0, 2\\pi]\\): \\(x = \\frac{\\pi}{16}, \\frac{3\\pi}{16}, \\frac{9\\pi}{16}, \\frac{11\\pi}{16}, \\frac{17\\pi}{16}, \\frac{19\\pi}{16}, \\frac{25\\pi}{16}, \\frac{27\\pi}{16}\\)\nGeneral solution \\(= \\left\\{\\frac{\\pi}{16} + \\frac{n\\pi}{2}\\right\\} \\cup \\left\\{\\frac{3\\pi}{16} + \\frac{n\\pi}{2}\\right\\}\\), \\(n \\in \\mathbb{Z}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 10.1. Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

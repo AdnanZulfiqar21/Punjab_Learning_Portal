@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH10-EXERCISE-10-1-Q16",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch10",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch10/u-exercise-10-1-q16",
+      "title": "Question 16",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 280,
+          "pdf_to": 280,
+          "note": "Exercise 10.1, Question 16 (book p. 278); the book prints no answers for Exercise 10.1; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "16",
+            "prompt": "16 Solve the following trigonometric equation: \\(\\sin^3 2x\\cos 2x - \\cos^3 2x\\sin 2x = \\frac{\\sqrt{2}}{8}\\)",
+            "explanation": "Same pattern as Q15, but with angle \\(2x\\) and a minus sign between the terms.\nTo find: the solutions in \\([0, 2\\pi]\\) and the general solution.\nPlan: take out \\(\\sin 2x\\cos 2x\\), use the double-angle formulas twice to reach \\(\\sin 8x\\), then solve and divide by 8.",
+            "steps": [
+              "Given: \\(\\sin^3 2x\\cos 2x - \\cos^3 2x\\sin 2x = \\frac{\\sqrt{2}}{8}\\).\nTo find: the solutions in \\([0, 2\\pi]\\) and the general solution.\nMethod: common factor \\(\\sin 2x\\cos 2x\\); then \\(2\\sin\\theta\\cos\\theta = \\sin 2\\theta\\) and \\(\\cos^2\\theta - \\sin^2\\theta = \\cos 2\\theta\\) with \\(\\theta = 2x\\) and later \\(\\theta = 4x\\).",
+              "Take out the common factor\n\\[\\sin 2x\\cos 2x(\\sin^2 2x - \\cos^2 2x)\\]\n\\[= \\tfrac{\\sqrt{2}}{8}\\]\nWhy: each term contains \\(\\sin 2x\\cos 2x\\) once.",
+              "Rewrite each factor with angle \\(4x\\)\n\\[\\sin 2x\\cos 2x = \\tfrac{1}{2}\\sin 4x\\]\n\\[\\sin^2 2x - \\cos^2 2x = -\\cos 4x\\]\nWhy: \\(\\sin 4x = 2\\sin 2x\\cos 2x\\) and \\(\\cos 4x = \\cos^2 2x - \\sin^2 2x\\). The bracket is in the opposite order, so it is \\(-\\cos 4x\\).",
+              "Reach \\(\\sin 8x\\)\n\\[-\\tfrac{1}{2}\\sin 4x\\cos 4x = \\tfrac{\\sqrt{2}}{8}\\]\n\\[-\\tfrac{1}{4}(2\\sin 4x\\cos 4x) = \\tfrac{\\sqrt{2}}{8}\\]\n\\[-\\tfrac{1}{4}\\sin 8x = \\tfrac{\\sqrt{2}}{8}\\]\n\\[\\sin 8x = -\\tfrac{\\sqrt{2}}{2} = -\\tfrac{1}{\\sqrt{2}}\\]\nWhy: \\(\\frac{1}{2} = \\frac{1}{4} \\cdot 2\\) makes \\(2\\sin 4x\\cos 4x = \\sin 8x\\); then multiply both sides by \\(-4\\).",
+              "Solve for the angle \\(8x\\)\n\\[8x = \\pi + \\tfrac{\\pi}{4} + 2n\\pi = \\tfrac{5\\pi}{4} + 2n\\pi\\]\n\\[8x = 2\\pi - \\tfrac{\\pi}{4} + 2n\\pi = \\tfrac{7\\pi}{4} + 2n\\pi\\]\nWhy: sine is negative, so \\(8x\\) lies in quadrants III and IV with reference angle \\(\\frac{\\pi}{4}\\) (as in Example 1); period \\(2\\pi\\).",
+              "Divide by 8\n\\[x = \\tfrac{5\\pi}{32} + \\tfrac{n\\pi}{4}\\]\n\\[x = \\tfrac{7\\pi}{32} + \\tfrac{n\\pi}{4}\\]\nWhy: \\(\\frac{2n\\pi}{8} = \\frac{n\\pi}{4}\\).",
+              "Values in \\([0, 2\\pi]\\) (\\(n = 0, 1, \\ldots, 7\\))\n\\[\\tfrac{5\\pi}{32}, \\tfrac{13\\pi}{32}, \\tfrac{21\\pi}{32}, \\tfrac{29\\pi}{32},\\]\n\\[\\tfrac{37\\pi}{32}, \\tfrac{45\\pi}{32}, \\tfrac{53\\pi}{32}, \\tfrac{61\\pi}{32}\\]\n\\[\\tfrac{7\\pi}{32}, \\tfrac{15\\pi}{32}, \\tfrac{23\\pi}{32}, \\tfrac{31\\pi}{32},\\]\n\\[\\tfrac{39\\pi}{32}, \\tfrac{47\\pi}{32}, \\tfrac{55\\pi}{32}, \\tfrac{63\\pi}{32}\\]\nWhy: \\(\\frac{n\\pi}{4} = \\frac{8n\\pi}{32}\\), so each step adds 8 to the numerator. \\(n = 8\\) gives more than \\(\\frac{64\\pi}{32} = 2\\pi\\). Angle \\(8x\\) makes 8 turns while \\(x\\) makes one, so there are \\(8 \\times 2 = 16\\) solutions.",
+              "Check: \\(x = \\frac{5\\pi}{32}\\)\n\\[8x = \\tfrac{5\\pi}{4},\\quad \\sin 8x = -\\tfrac{1}{\\sqrt{2}}\\]\n\\[\\text{L.H.S.} = -\\tfrac{1}{4}\\left(-\\tfrac{1}{\\sqrt{2}}\\right)\\]\n\\[= \\tfrac{1}{4\\sqrt{2}} = \\tfrac{\\sqrt{2}}{8} \\;\\checkmark\\]\nWhy: the left side equals \\(-\\frac{1}{4}\\sin 8x\\) (step 4); \\(\\frac{1}{4\\sqrt{2}} = \\frac{\\sqrt{2}}{8}\\) after rationalising."
+            ],
+            "final_answer": "In \\([0, 2\\pi]\\) (16 values): \\(x = \\frac{k\\pi}{32}\\), \\(k = 5, 7, 13, 15, 21, 23, 29, 31, 37, 39, 45, 47, 53, 55, 61, 63\\)\nGeneral solution \\(= \\left\\{\\frac{5\\pi}{32} + \\frac{n\\pi}{4}\\right\\} \\cup \\left\\{\\frac{7\\pi}{32} + \\frac{n\\pi}{4}\\right\\}\\), \\(n \\in \\mathbb{Z}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 10.1. Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}
