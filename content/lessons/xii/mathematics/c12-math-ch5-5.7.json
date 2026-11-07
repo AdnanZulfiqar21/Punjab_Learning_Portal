@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH5-5.7",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch5",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch5/5.7",
+      "title": "5.7 Area of a Triangular Region Whose Vertices are Given",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 159,
+          "pdf_to": 160,
+          "note": "Book p. 157-158: 5.7 Area of a Triangular Region, trapezium derivation (Figure 5.10), Note box, determinant formula, Corollary, Examples 14-15"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "To find the area of triangular region whose vertices are: \\(P(x_1, y_1)\\), \\(Q(x_2, y_2)\\) and \\(R(x_3, y_3)\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Draw perpendicular \\(\\overline{PL}\\), \\(\\overline{QN}\\) and \\(\\overline{RM}\\) on \\(x\\)-axis."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch5-fig-5-10-triangle-area",
+            "alt": "Coordinate axes with origin O. A shaded triangle with vertices P(x1, y1) on the left, R(x3, y3) at the top and Q(x2, y2) on the right. Dashed perpendiculars PL, RM and QN drop to the x-axis, with heights y1, y3, y2. Below the axis, LM is marked x3 minus x1, MN is x2 minus x3, and LN is x2 minus x1.",
+            "caption": "Figure 5.10: triangle PQR with perpendiculars PL, RM, QN to the x-axis (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Area of triangular region \\(PQR\\) = Area of trapezoidal region \\(PLMR\\) + Area of trapezoidal region \\(RMNQ\\) \\(-\\) Area of trapezoidal region \\(PLNQ\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "A trapezium is a quadrilateral having two parallel and two non-parallel sides.\nArea of trapezoidal region \\(= \\frac{1}{2}\\)(sum of \\(\\parallel\\) sides)(distance between \\(\\parallel\\) sides)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why trapeziums? Each of \\(PLMR\\), \\(RMNQ\\), \\(PLNQ\\) has two vertical sides (the perpendiculars), which are parallel. Their lengths are just the \\(y\\)-coordinates, and the distance between them is measured along the \\(x\\)-axis, the difference of the \\(x\\)-coordinates.\nLook at Figure 5.10: the two upper trapeziums together cover the triangle plus the trapezium \\(PLNQ\\) under it. Taking \\(PLNQ\\) away leaves exactly the triangle.\nIn the figure the points lie above the \\(x\\)-axis and \\(x_1 < x_3 < x_2\\); the final formula is true for any position of the points."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[= \\tfrac{1}{2}(|\\overline{PL}| + |\\overline{RM}|)(|\\overline{LM}|)\\]\n\\[+ \\tfrac{1}{2}(|\\overline{RM}| + |\\overline{QN}|)(|\\overline{MN}|)\\]\n\\[- \\tfrac{1}{2}(|\\overline{PL}| + |\\overline{QN}|)(|\\overline{LN}|)\\]\n\\[= \\tfrac{1}{2}\\big[(y_1 + y_3)(x_3 - x_1)\\]\n\\[+ (y_3 + y_2)(x_2 - x_3)\\]\n\\[- (y_1 + y_2)(x_2 - x_1)\\big]\\]\n\\[= \\tfrac{1}{2}(x_3y_1 + x_3y_3 - x_1y_1 - x_1y_3\\]\n\\[+ x_2y_3 + x_2y_2 - x_3y_3 - x_3y_2\\]\n\\[- x_2y_1 - x_2y_2 + x_1y_1 + x_1y_2)\\]\n\\[= \\tfrac{1}{2}(x_3y_1 - x_1y_3 + x_2y_3\\]\n\\[- x_3y_2 - x_2y_1 + x_1y_2)\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How the lines follow: \\(|\\overline{PL}| = y_1\\), \\(|\\overline{RM}| = y_3\\), \\(|\\overline{QN}| = y_2\\), and \\(|\\overline{LM}| = x_3 - x_1\\), \\(|\\overline{MN}| = x_2 - x_3\\), \\(|\\overline{LN}| = x_2 - x_1\\).\nAfter multiplying out, \\(x_3y_3\\), \\(x_1y_1\\) and \\(x_2y_2\\) each appear once with \\(+\\) and once with \\(-\\), so they cancel. Six terms remain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Thus, the required area is given by:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\Delta = \\dfrac{1}{2}\\big[x_1(y_2 - y_3) + x_2(y_3 - y_1) + x_3(y_1 - y_2)\\big]",
+            "text_alt": "Delta equals one half of: x1 times (y2 minus y3), plus x2 times (y3 minus y1), plus x3 times (y1 minus y2)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\Delta = \\dfrac{1}{2}\\begin{vmatrix} x_1 & y_1 & 1 \\\\ x_2 & y_2 & 1 \\\\ x_3 & y_3 & 1 \\end{vmatrix}",
+            "text_alt": "Delta equals one half of the determinant with rows x1 y1 1, x2 y2 1, x3 y3 1"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does the determinant give the same thing? Expand it along the third column (all 1s): \\(1(x_2y_3 - x_3y_2) - 1(x_1y_3 - x_3y_1) + 1(x_1y_2 - x_2y_1)\\). These are exactly the six terms of the line above.\nSign: the formula is positive when \\(P \\to Q \\to R\\) goes anticlockwise (as in Figure 5.10) and negative when it goes clockwise. Area is never negative, so if you get a negative number, take its absolute value."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Corollary"
+          },
+          {
+            "type": "paragraph",
+            "text": "If the points \\(P\\), \\(Q\\) and \\(R\\) are collinear, then \\(\\Delta = 0\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Three points on one line enclose no region, so the area is zero. The converse is also true: if \\(\\Delta = 0\\) the points are collinear. This gives a quick test for collinearity, used in Example 15."
+          },
+          {
+            "type": "example",
+            "title": "Example 14",
+            "problem": "Find the area of the region bounded by the triangle with vertices \\(A(a, b)\\), \\(B(-a, b)\\) and \\(C(0, -b)\\).",
+            "steps": [
+              "Given: \\(A(a, b)\\), \\(B(-a, b)\\), \\(C(0, -b)\\).\nTo find: the area \\(\\Delta\\) of triangle \\(ABC\\).\nMethod: the determinant formula \\(\\Delta = \\frac{1}{2}\\begin{vmatrix} x_1 & y_1 & 1 \\\\ x_2 & y_2 & 1 \\\\ x_3 & y_3 & 1 \\end{vmatrix}\\): each row is one vertex followed by 1.",
+              "Step 1: write the determinant\n\\[\\Delta = \\dfrac{1}{2}\\begin{vmatrix} a & b & 1 \\\\ -a & b & 1 \\\\ 0 & -b & 1 \\end{vmatrix}\\]\nWhy: rows are \\(A\\), \\(B\\), \\(C\\) in order.",
+              "Step 2: expand along the first row\n\\[= \\tfrac{1}{2}\\big[a(b + b) - b(-a - 0)\\]\n\\[+ 1(ab - 0)\\big]\\]\nWhy: the signs along a row are \\(+, -, +\\). The minor of \\(a\\) is \\(b \\cdot 1 - 1 \\cdot (-b) = b + b\\); of \\(b\\) is \\(-a \\cdot 1 - 1 \\cdot 0 = -a\\); of 1 is \\((-a)(-b) - b \\cdot 0 = ab\\).",
+              "Step 3: simplify\n\\[= \\tfrac{1}{2}\\big[2ab + ab + ab\\big]\\]\n\\[= \\tfrac{1}{2}(4ab) = 2ab\\]\nWhy: \\(-b(-a) = +ab\\).",
+              "Check:\n\\(A\\) and \\(B\\) are on the line \\(y = b\\), so the base \\(AB = 2a\\). The height is the distance of \\(C(0, -b)\\) from \\(y = b\\), which is \\(2b\\).\n\\[\\tfrac{1}{2} \\times 2a \\times 2b = 2ab \\;\\checkmark\\]\n(For \\(a, b > 0\\). In general the area is \\(|2ab|\\).)"
+            ],
+            "answer": "The area of \\(\\Delta ABC\\) is \\(2ab\\) square units."
+          },
+          {
+            "type": "example",
+            "title": "Example 15",
+            "problem": "Find the area of the region bounded by the triangle with vertices \\(A(1, 2)\\), \\(B(3, 6)\\) and \\(C(5, 10)\\).",
+            "steps": [
+              "Given: \\(A(1, 2)\\), \\(B(3, 6)\\), \\(C(5, 10)\\).\nTo find: the area \\(\\Delta\\) of the region bounded by triangle \\(ABC\\).\nMethod: the determinant formula. First make zeros with row operations so that the expansion is short.",
+              "Step 1: write the determinant and subtract \\(R_1\\)\n\\[\\Delta = \\dfrac{1}{2}\\begin{vmatrix} 1 & 2 & 1 \\\\ 3 & 6 & 1 \\\\ 5 & 10 & 1 \\end{vmatrix}\\]\n\\[= \\dfrac{1}{2}\\begin{vmatrix} 1 & 2 & 1 \\\\ 2 & 4 & 0 \\\\ 4 & 8 & 0 \\end{vmatrix}\\]\nby \\(R_2 - R_1\\) and \\(R_3 - R_1\\).\nWhy: subtracting one row from another does not change a determinant, and it turns the 1s in the third column into 0s.",
+              "Step 2: expand by the 3rd column\n\\[= \\tfrac{1}{2}\\left[1\\begin{vmatrix} 2 & 4 \\\\ 4 & 8 \\end{vmatrix}\\right]\\]\n\\[= \\tfrac{1}{2}[16 - 16] = 0\\]\nWhy: only the top entry of the third column is non-zero; its sign is \\(+\\) and its minor is \\(2 \\cdot 8 - 4 \\cdot 4\\).",
+              "Step 3: conclusion\nThe 'triangle' has zero area, so it is not a real triangle: the given points are collinear.\nWhy: Corollary of 5.7: \\(\\Delta = 0\\) exactly when the three points lie on one line.",
+              "Check:\n\\[m_{AB} = \\dfrac{6 - 2}{3 - 1} = 2\\]\n\\[m_{BC} = \\dfrac{10 - 6}{5 - 3} = 2\\]\nEqual slopes through the common point \\(B\\), so \\(A\\), \\(B\\), \\(C\\) are on one line \\(\\checkmark\\)."
+            ],
+            "answer": "\\(\\Delta = 0\\); thus, the given points are collinear."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\Delta = \\frac{1}{2}[x_1(y_2 - y_3) + x_2(y_3 - y_1) + x_3(y_1 - y_2)]\\), or the determinant with rows \\((x_i, y_i, 1)\\) times \\(\\frac{1}{2}\\).\n2. It comes from three trapeziums: two added, one subtracted.\n3. A negative value means the vertices were taken clockwise; the area is the absolute value.\n4. \\(\\Delta = 0\\) if and only if the three points are collinear.\n5. Row operations (like \\(R_2 - R_1\\)) make zeros and shorten the expansion."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Forgetting the factor \\(\\frac{1}{2}\\).\n2. Giving a negative area; always report \\(|\\Delta|\\).\n3. Wrong sign pattern in the expansion: along a row or column it is \\(+, -, +\\).\n4. Mixing up the order inside \\(x_1(y_2 - y_3) + x_2(y_3 - y_1) + x_3(y_1 - y_2)\\): the indices go round in a cycle 1, 2, 3."
+          }
+        ]
+      }
+    }
+  ]
+}
