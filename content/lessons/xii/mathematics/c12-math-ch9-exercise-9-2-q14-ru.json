@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q14-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q14",
+      "title": "Question 14 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 275,
+          "pdf_to": 275,
+          "note": "Exercise 9.2, Question 14 (book page 273); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "variant_of": "C12-MATH-CH9-EXERCISE-9-2-Q14",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "14(i)",
+            "prompt": "14 (i) [printed as the first of two questions numbered \"14.\"] Prove that \\(2\\tan^{-1} x = \\cos^{-1}\\left(\\frac{1 - x^2}{1 + x^2}\\right)\\).",
+            "explanation": "Yeh bilkul Question 12 jaisa sawal hai, bas right side par \\(\\sin^{-1}\\) ki jagah \\(\\cos^{-1}\\) hai.\nDiya kya hai? Sirf identity; kitab ne koi range nahi likhi. Sabit kya karna hai? Ke dono sides barabar hain, aur hum yeh bhi dekhenge ke kin \\(x\\) ke liye.\nRule kaunsa? Substitution \\(\\tan^{-1} x = \\theta\\), aur double-angle formula \\(\\cos 2\\theta = \\frac{1 - \\tan^2\\theta}{1 + \\tan^2\\theta}\\).\nPlan: fraction ko \\(\\cos 2\\theta\\) banana, phir dekhna ke \\(2\\theta\\) \\(\\cos^{-1}\\) ki range \\([0, \\pi]\\) mein kab aata hai. Yahin pata chalega ke identity sirf \\(x \\ge 0\\) ke liye sahi hai.",
+            "steps": [
+              "Diya gaya hai: \\(2\\tan^{-1} x\\) aur \\(\\cos^{-1}\\frac{1 - x^2}{1 + x^2}\\).\nSaabit karna hai: dono barabar hain (aur kin \\(x\\) ke liye).\nTareeqa: \\(\\tan^{-1} x = \\theta\\) rakhenge. Fraction \\(\\frac{1 - \\tan^2\\theta}{1 + \\tan^2\\theta}\\) dekh kar \\(\\cos 2\\theta\\) yaad aana chahiye. Phir right side \\(\\cos^{-1}(\\cos 2\\theta)\\) banegi, jo \\(2\\theta\\) sirf tab hai jab \\(0 \\le 2\\theta \\le \\pi\\) ho.",
+              "Inverse ko angle banayein\n\\[\\tan^{-1} x = \\theta\\]\n\\[x = \\tan\\theta\\]\nKyun: \\(\\tan^{-1}\\) ki definition; \\(\\theta\\) hamesha \\(\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\) mein hota hai.",
+              "Fraction ko \\(\\cos 2\\theta\\) banayein\n\\[\\dfrac{1 - x^2}{1 + x^2} = \\dfrac{1 - \\tan^2\\theta}{1 + \\tan^2\\theta}\\]\n\\[= \\dfrac{\\cos^2\\theta - \\sin^2\\theta}{\\cos^2\\theta + \\sin^2\\theta}\\]\n\\[= \\dfrac{\\cos 2\\theta}{1} = \\cos 2\\theta\\]\nKyun: \\(\\tan^2\\theta = \\frac{\\sin^2\\theta}{\\cos^2\\theta}\\) hai, is liye upar neeche \\(\\cos^2\\theta\\) se multiply karne se andar ke fractions khatam ho gaye. Upar \\(\\cos^2\\theta - \\sin^2\\theta\\) double-angle formula se \\(\\cos 2\\theta\\) hai, aur neeche \\(\\cos^2\\theta + \\sin^2\\theta = 1\\).",
+              "\\(\\cos^{-1}\\) lagayein\n\\[\\cos^{-1}\\dfrac{1 - x^2}{1 + x^2}\\]\n\\[= \\cos^{-1}(\\cos 2\\theta)\\]\nKyun: Ab sawal yeh hai ke \\(\\cos^{-1}(\\cos 2\\theta)\\) kab \\(2\\theta\\) hota hai. Jawab: sirf jab \\(2\\theta\\) \\([0, \\pi]\\) mein ho, kyunke \\(\\cos^{-1}\\) ki principal range yahi hai; is ke bahar woh koi doosra angle deta hai.",
+              "Pehli soorat: \\(x \\ge 0\\)\n\\[0 \\le \\theta < \\dfrac{\\pi}{2}\\]\n\\[0 \\le 2\\theta < \\pi\\]\n\\[\\cos^{-1}(\\cos 2\\theta) = 2\\theta = 2\\tan^{-1} x\\]\nKyun: \\(x \\ge 0\\) ho to \\(\\theta = \\tan^{-1} x\\) \\(\\left[0, \\frac{\\pi}{2}\\right)\\) mein hai, aur \\(2\\theta\\) \\([0, \\pi)\\) mein, yani principal range ke andar. Is liye identity sahi hai.",
+              "Doosri soorat: \\(x < 0\\)\n\\[x = -1:\\ 2\\tan^{-1}(-1) = -\\dfrac{\\pi}{2}\\]\n\\[\\cos^{-1}\\dfrac{1 - 1}{1 + 1} = \\cos^{-1} 0 = \\dfrac{\\pi}{2}\\]\nKyun: Negative \\(x\\) par \\(2\\theta\\) negative hai, range \\([0, \\pi]\\) se bahar. \\(\\cos(-2\\theta) = \\cos 2\\theta\\) hota hai aur \\(-2\\theta\\) \\((0, \\pi)\\) mein hai, is liye right side asal mein \\(-2\\theta = -2\\tan^{-1} x\\) deti hai. Seedhi baat: \\(\\cos^{-1}\\) kabhi negative nahi hota, aur left side negative hai, to barabar ho hi nahi sakte.\nDhyan dein: Exam mein yeh identity likhte waqt saath \\(x \\ge 0\\) zaroor likhiye.",
+              "Tasdeeq\n\\[x = 1:\\ 2\\tan^{-1} 1 = \\dfrac{\\pi}{2},\\ \\cos^{-1} 0 = \\dfrac{\\pi}{2}\\]\n\\[x = \\sqrt{3}:\\ 2\\tan^{-1}\\sqrt{3} = \\dfrac{2\\pi}{3}\\]\n\\[\\cos^{-1}\\dfrac{1 - 3}{1 + 3} = \\cos^{-1}\\left(-\\tfrac{1}{2}\\right) = \\dfrac{2\\pi}{3}\\]\nKyun: Positive \\(x\\) ki do values par dono sides barabar aayin, jaisa hum ne saabit kiya. \\(x = 1\\) par fraction \\(\\frac{0}{2} = 0\\) aur \\(x = \\sqrt{3}\\) par \\(\\frac{-2}{4} = -\\frac{1}{2}\\) banta hai; \\(\\cos^{-1}\\left(-\\frac{1}{2}\\right) = \\frac{2\\pi}{3}\\) doosre quadrant ka angle hai, jo \\(\\cos^{-1}\\) ki range mein hai."
+            ],
+            "final_answer": "Saabit ho gaya, jab \\(x \\ge 0\\): \\(2\\tan^{-1} x = \\cos^{-1}\\frac{1 - x^2}{1 + x^2}\\). (Negative \\(x\\) par right side \\(-2\\tan^{-1} x\\) ke barabar hai.)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab yeh identity bina kisi range ke chhapti hai, lekin yeh sirf \\(x \\ge 0\\) ke liye sahi hai. Har negative \\(x\\) par left side \\(2\\tan^{-1} x\\) negative hoti hai, jabke \\(\\cos^{-1}\\) ki value kabhi negative nahi hoti (us ki range \\([0, \\pi]\\) hai). Misaal: \\(x = -1\\) par left side \\(-\\frac{\\pi}{2}\\) hai aur right side \\(\\cos^{-1} 0 = \\frac{\\pi}{2}\\). Sahi bayan: \\(2\\tan^{-1} x = \\cos^{-1}\\frac{1 - x^2}{1 + x^2}\\), jab \\(x \\ge 0\\) (negative \\(x\\) par right side \\(-2\\tan^{-1} x\\) ke barabar hoti hai)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "14(ii)",
+            "prompt": "14 (ii) [printed as a second question numbered \"14.\"] Prove that \\(\\cos(\\sin^{-1} x) = \\sqrt{1 - x^2}\\).",
+            "explanation": "Yahan cos ke andar \\(\\sin^{-1} x\\) hai, aur humein usay \\(x\\) ki shakal mein likhna hai.\nDiya kya hai? Sirf \\(x\\), jo \\(\\sin^{-1}\\) ke domain \\([-1, 1]\\) mein hai. Sabit kya karna hai? \\(\\cos(\\sin^{-1} x) = \\sqrt{1 - x^2}\\).\nRule kaunsa? \\(\\sin^2\\alpha + \\cos^2\\alpha = 1\\), aur sign ka faisla principal range se.\nPlan: angle ka naam, cos ka formula, aur \\(+\\) sign ki wajah. Yeh wohi dalil hai jo kitab formula (i) ke proof mein deti hai.\nYeh sawal Question 13 ka chhota bhai hai: wahan tan chahiye tha, yahan sirf cos; is liye divide wala qadam bhi nahi aayega.",
+            "steps": [
+              "Diya gaya hai: \\(-1 \\le x \\le 1\\) (\\(\\sin^{-1}\\) ka domain).\nSaabit karna hai: \\(\\cos(\\sin^{-1} x) = \\sqrt{1 - x^2}\\).\nTareeqa: Angle ka naam rakhenge, Pythagorean identity se cos nikalenge, aur range dekh kar sign chunenge, bilkul jaise kitab formula (i) ke proof mein \\(\\cos\\alpha = \\sqrt{1 - x^2}\\) leti hai.",
+              "Inverse ko angle ka naam dein\n\\[\\sin^{-1} x = \\alpha\\]\n\\[\\sin\\alpha = x\\]\nKyun: \\(\\sin^{-1}\\) ki definition; principal range ki wajah se \\(\\alpha\\) \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\) mein hai.",
+              "\\(\\cos\\alpha\\) ka formula\n\\[\\cos\\alpha = \\pm\\sqrt{1 - \\sin^2\\alpha}\\]\n\\[= \\pm\\sqrt{1 - x^2}\\]\nKyun: \\(\\sin^2\\alpha + \\cos^2\\alpha = 1\\) se \\(\\cos^2\\alpha = 1 - \\sin^2\\alpha\\); square root lene par do sign aate hain. Phir \\(\\sin\\alpha\\) ki jagah \\(x\\) rakha, kyunke step 1 mein \\(\\sin\\alpha = x\\) tha. Abhi tak hum ne faisla nahi kiya ke kaunsa sign; woh agle qadam ka kaam hai.",
+              "Sign chunein\n\\[\\cos\\alpha \\ge 0\\]\n\\[\\cos(\\sin^{-1} x) = \\cos\\alpha = \\sqrt{1 - x^2}\\]\nKyun: \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\) mein cos kabhi negative nahi hota (yeh pehla aur chautha quadrant hai, jahan \\(x\\)-coordinate positive hota hai). Is liye sirf \\(+\\) sign sahi hai.\nDhyan dein: \\(\\pm\\) likh kar chhor dena aam ghalti hai; examiner sign ki wajah dekhna chahta hai.",
+              "Tasdeeq\n\\[x = \\tfrac{1}{2}:\\ \\cos\\dfrac{\\pi}{6} = \\dfrac{\\sqrt{3}}{2}\\]\n\\[\\sqrt{1 - \\tfrac{1}{4}} = \\dfrac{\\sqrt{3}}{2}\\]\n\\[x = -1:\\ \\cos\\left(-\\dfrac{\\pi}{2}\\right) = 0 = \\sqrt{0}\\]\nKyun: \\(\\sin^{-1}\\frac{1}{2} = \\frac{\\pi}{6}\\), aur domain ke kinare \\(x = -1\\) par bhi dono sides barabar hain. Figure ka triangle (hypotenuse 1, opposite \\(x\\)) bhi yahi dikhata hai: adjacent \\(\\sqrt{1 - x^2}\\)."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\cos(\\sin^{-1} x) = \\sqrt{1 - x^2}\\), jab \\(-1 \\le x \\le 1\\).",
+            "answer_figure": {
+              "$asset": "c12-math-ch9-fig-ex9-2-q13",
+              "alt": "A right triangle with angle alpha, hypotenuse 1, opposite side x and adjacent side root of 1 minus x squared, so sin alpha = x, cos alpha = root of 1 minus x squared and tan alpha = x over root of 1 minus x squared.",
+              "caption": "Right triangle for α = sin⁻¹ x, drawn for 0 < x < 1 (our drawing); the algebra also covers negative x"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Numbering ki ghalti: kitab ne \"14.\" do dafa chhapa hai, is sawal ke liye bhi aur pichhle sawal ke liye bhi, aur phir \"15\" bina full stop ke. Hum ne dono ko Question 14 hi rakha hai aur (i), (ii) ka label diya hai; yeh labels hamare hain, kitab ke nahi. Agla sawal kitab ki tarah 15 hi hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kitab mein Exercise 9.2 ke jawab chhape hue nahi hain. Is page ka har hal hamara apna hai: qadam ba qadam kiya gaya, computer algebra system (sympy) se alag se check kiya gaya, aur ek solution book se bhi milaya gaya. Is liye aap apna proof yahan wale proof se mila kar dekh sakte hain; agar aap ka tareeqa alag hai magar har qadam ki wajah sahi hai, to woh bhi theek hai."
+          }
+        ]
+      }
+    }
+  ]
+}

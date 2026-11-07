@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q13",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q13",
+      "title": "Question 13",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 275,
+          "pdf_to": 275,
+          "note": "Exercise 9.2, Question 13 (book page 273); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13",
+            "prompt": "13. Prove that \\(\\tan(\\sin^{-1} x) = \\frac{x}{\\sqrt{1 - x^2}}\\), \\(-1 < x < 1\\).",
+            "explanation": "A trigonometric function of an inverse function, to be written as an algebraic expression in \\(x\\).\nPlan: let \\(\\sin^{-1} x = \\alpha\\), find \\(\\cos\\alpha\\) from \\(\\sin^2\\alpha + \\cos^2\\alpha = 1\\) (sign fixed by the principal range), then \\(\\tan\\alpha = \\sin\\alpha/\\cos\\alpha\\).",
+            "steps": [
+              "Given: \\(-1 < x < 1\\).\nTo prove: \\(\\tan(\\sin^{-1} x) = \\frac{x}{\\sqrt{1 - x^2}}\\).\nMethod: Name the angle \\(\\alpha = \\sin^{-1} x\\), as the book does in Example 8 and in the proof of formula (i). Then \\(\\sin\\alpha = x\\) is known, \\(\\cos\\alpha\\) comes from the Pythagorean identity, and \\(\\tan\\alpha\\) is their quotient.",
+              "Let the inverse be an angle\n\\[\\sin^{-1} x = \\alpha\\]\n\\[\\sin\\alpha = x\\]\nWhy: Definition of \\(\\sin^{-1}\\). Here \\(\\alpha\\) lies in \\(\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\); the end points are excluded because \\(x \\ne \\pm 1\\).",
+              "Find \\(\\cos\\alpha\\)\n\\[\\cos^2\\alpha = 1 - \\sin^2\\alpha\\]\n\\[= 1 - x^2\\]\n\\[\\cos\\alpha = \\sqrt{1 - x^2}\\]\nWhy: \\(\\cos\\alpha = \\pm\\sqrt{1 - x^2}\\), but cosine is positive for angles in \\(\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\), so only the \\(+\\) sign is right. The book argues the same way when it proves formula (i).",
+              "Divide\n\\[\\tan(\\sin^{-1} x) = \\tan\\alpha\\]\n\\[= \\dfrac{\\sin\\alpha}{\\cos\\alpha}\\]\n\\[= \\dfrac{x}{\\sqrt{1 - x^2}}\\]\nWhy: \\(\\tan\\alpha = \\sin\\alpha/\\cos\\alpha\\). The denominator is not zero because \\(-1 < x < 1\\); at \\(x = \\pm 1\\), \\(\\alpha = \\pm\\frac{\\pi}{2}\\) and \\(\\tan\\alpha\\) does not exist.",
+              "Check\n\\[x = \\tfrac{1}{2}:\\ \\tan\\left(\\sin^{-1}\\tfrac{1}{2}\\right) = \\tan\\dfrac{\\pi}{6}\\]\n\\[= \\dfrac{1}{\\sqrt{3}}\\]\n\\[\\dfrac{1/2}{\\sqrt{1 - 1/4}} = \\dfrac{1/2}{\\sqrt{3}/2} = \\dfrac{1}{\\sqrt{3}}\\]\nWhy: Both sides agree. For \\(x = -\\frac{1}{2}\\) both sides are \\(-\\frac{1}{\\sqrt{3}}\\), so the sign also comes out right."
+            ],
+            "final_answer": "Hence proved: \\(\\tan(\\sin^{-1} x) = \\frac{x}{\\sqrt{1 - x^2}}\\) for \\(-1 < x < 1\\).",
+            "answer_figure": {
+              "$asset": "c12-math-ch9-fig-ex9-2-q13",
+              "alt": "A right triangle with angle alpha, hypotenuse 1, opposite side x and adjacent side root of 1 minus x squared, so sin alpha = x, cos alpha = root of 1 minus x squared and tan alpha = x over root of 1 minus x squared.",
+              "caption": "Right triangle for α = sin⁻¹ x, drawn for 0 < x < 1 (our drawing); the algebra also covers negative x"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 9.2. Every solution on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

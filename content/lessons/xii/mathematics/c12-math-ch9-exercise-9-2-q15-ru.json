@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q15-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q15",
+      "title": "Question 15 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 275,
+          "pdf_to": 275,
+          "note": "Exercise 9.2, Question 15 (book page 273); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "variant_of": "C12-MATH-CH9-EXERCISE-9-2-Q15",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15",
+            "prompt": "15 [printed without its full stop] Prove that \\(\\tan^{-1} x + \\cot^{-1}(x + 1) = \\tan^{-1}(x^2 + x + 1)\\).",
+            "explanation": "Yahan do alag qism ke inverse functions jama ho rahe hain: ek \\(\\tan^{-1}\\), ek \\(\\cot^{-1}\\). Humein inhein jor kar ek hi \\(\\tan^{-1}\\) banana hai.\nSabit kya karna hai? Ke jama \\(\\tan^{-1}(x^2 + x + 1)\\) ke barabar hai.\nRule kaunsa? Pehle \\(\\cot^{-1}\\) ko \\(\\tan^{-1}\\) mein badlenge (kitab ka Example 4(iii)), phir dono \\(\\tan^{-1}\\) ko formula (v) se jorenge.\nPlan: badalna, product \\(< 1\\) check karna, formula (v), fraction simplify. Aakhir mein un \\(x\\) ko bhi dekhenge jahan pehla tareeqa seedha nahi chalta (\\(x \\le -1\\)).",
+            "steps": [
+              "Diya gaya hai: \\(\\tan^{-1} x + \\cot^{-1}(x + 1)\\).\nSaabit karna hai: yeh \\(\\tan^{-1}(x^2 + x + 1)\\) hai.\nTareeqa: Formula (v), \\(\\tan^{-1} a + \\tan^{-1} b = \\tan^{-1}\\frac{a + b}{1 - ab}\\), sirf do \\(\\tan^{-1}\\) ko jorta hai, aur bilkul sahi tab hai jab \\(ab < 1\\). Is liye pehle \\(\\cot^{-1}\\) ko kitab ke Example 4(iii) se \\(\\tan^{-1}\\) banayenge: \\(\\cot^{-1} u = \\tan^{-1}\\frac{1}{u}\\), jo \\(u > 0\\) ke liye sahi hai. Pehle \\(x > -1\\) lenge, phir baqi values.",
+              "\\(\\cot^{-1}\\) ko \\(\\tan^{-1}\\) banayein (\\(x > -1\\) ke liye)\n\\[\\cot^{-1}(x + 1) = \\tan^{-1}\\dfrac{1}{x + 1}\\]\nKyun: \\(\\cot\\) aur \\(\\tan\\) ek doosre ke reciprocal hain, is liye positive \\(u\\) ke liye \\(\\cot^{-1} u = \\tan^{-1}\\frac{1}{u}\\) (Example 4(iii)). Yahan \\(u = x + 1\\), jo \\(x > -1\\) par positive hai.",
+              "Check karein ke formula (v) lag sakta hai\n\\[x \\cdot \\dfrac{1}{x + 1} = \\dfrac{x}{x + 1} < 1\\]\nKyun: \\(x\\) hamesha \\(x + 1\\) se chhota hai; dono taraf positive number \\(x + 1\\) se divide karne se inequality wahi rehti hai. Formula (v) tabhi seedha sahi jawab deta hai jab dono numbers ka product 1 se kam ho, warna \\(\\pm\\pi\\) ka farq aa jata hai.",
+              "Formula (v) se jorein\n\\[\\text{L.H.S} = \\tan^{-1} x + \\tan^{-1}\\dfrac{1}{x + 1}\\]\n\\[= \\tan^{-1}\\dfrac{x + \\frac{1}{x + 1}}{1 - \\frac{x}{x + 1}}\\]\nKyun: Formula (v) mein \\(a = x\\) aur \\(b = \\frac{1}{x + 1}\\) rakha. Upar dono numbers ka jama aur neeche 1 minus un ka product aata hai. Abhi fraction ke andar fraction hai, jo dekhne mein bhaari hai, magar agle qadam mein saaf ho jayega.",
+              "Fraction simplify karein\n\\[\\text{top} = \\dfrac{x(x + 1) + 1}{x + 1} = \\dfrac{x^2 + x + 1}{x + 1}\\]\n\\[\\text{bottom} = \\dfrac{(x + 1) - x}{x + 1} = \\dfrac{1}{x + 1}\\]\n\\[\\dfrac{\\text{top}}{\\text{bottom}} = x^2 + x + 1\\]\nKyun: Upar aur neeche dono mein common denominator \\(x + 1\\) liya. Neeche \\((x + 1) - x = 1\\) bacha. Phir \\(\\frac{1}{x + 1}\\) se divide karna \\(x + 1\\) se multiply karna hai, is liye \\(x + 1\\) cancel ho gaya.\nDhyan dein: Neeche \\(1 - \\frac{x}{x + 1}\\) mein 1 ko \\(\\frac{x + 1}{x + 1}\\) likhna na bhooliye.",
+              "\\(x > -1\\) ke liye natija\n\\[\\text{L.H.S} = \\tan^{-1}(x^2 + x + 1)\\]\n\\[= \\text{R.H.S}\\]\nKyun: \\(\\tan^{-1}\\) ke andar ab bilkul \\(x^2 + x + 1\\) hai, yani left side right side ban gayi. Exam mein aksar yahin tak likha jata hai; lekin poori baat samajhne ke liye agla qadam bhi parhiye.",
+              "Baqi values of \\(x\\)\n\\[x = -1:\\ \\tan^{-1}(-1) + \\cot^{-1} 0\\]\n\\[= -\\dfrac{\\pi}{4} + \\dfrac{\\pi}{2} = \\dfrac{\\pi}{4} = \\tan^{-1} 1\\]\nKyun: \\(x = -1\\) par \\(x^2 + x + 1 = 1\\), to identity yahan bhi sahi hai. \\(x < -1\\) par \\(x + 1\\) negative hai, is liye \\(\\cot^{-1}(x + 1) = \\pi + \\tan^{-1}\\frac{1}{x + 1}\\) (kyunke \\(\\cot^{-1}\\) ki range \\((0, \\pi)\\) hai). Saath hi dono numbers negative hain aur product \\(\\frac{x}{x + 1} > 1\\), is liye \\(\\tan^{-1} x + \\tan^{-1}\\frac{1}{x + 1} = \\tan^{-1}(x^2 + x + 1) - \\pi\\). \\(+\\pi\\) aur \\(-\\pi\\) cancel ho jate hain, yani identity har real \\(x\\) ke liye sahi hai.",
+              "Tasdeeq\n\\[x = 0:\\ 0 + \\cot^{-1} 1 = \\dfrac{\\pi}{4} = \\tan^{-1} 1\\]\n\\[x = -2:\\ \\tan^{-1}(-2) + \\cot^{-1}(-1)\\]\n\\[\\approx -1.1071 + 2.3562 = 1.2490\\]\n\\[\\tan^{-1} 3 \\approx 1.2490\\]\nKyun: \\(x = 0\\) (pehli soorat) aur \\(x = -2\\) (doosri soorat) dono par sides barabar hain. \\(\\cot^{-1}(-1) = \\frac{3\\pi}{4} \\approx 2.3562\\), kyunke range \\((0, \\pi)\\) hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\tan^{-1} x + \\cot^{-1}(x + 1) = \\tan^{-1}(x^2 + x + 1)\\) (har real \\(x\\) ke liye)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kitab mein Exercise 9.2 ke jawab chhape hue nahi hain. Is page ka har hal hamara apna hai: qadam ba qadam kiya gaya, computer algebra system (sympy) se alag se check kiya gaya, aur ek solution book se bhi milaya gaya. Is liye aap apna proof yahan wale proof se mila kar dekh sakte hain; agar aap ka tareeqa alag hai magar har qadam ki wajah sahi hai, to woh bhi theek hai."
+          }
+        ]
+      }
+    }
+  ]
+}

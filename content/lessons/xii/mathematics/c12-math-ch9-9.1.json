@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-9.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/9.1",
+      "title": "9.1 Inverse Trigonometric Functions and their Graph",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 256,
+          "pdf_to": 257,
+          "note": "PDF 256-257 (book p. 254-255): unit 9 introduction; 9.1 text before 9.1.1: inverse needs a bijection, Recall! box on inverse functions, sin^-1 notation, periodicity and restricting domains"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Introduction"
+          },
+          {
+            "type": "paragraph",
+            "text": "In earlier classes we studied the trigonometric functions and their real-life applications. This unit extends that knowledge to the inverse trigonometric functions, which help us to find an angle when the value of a trigonometric function is known. They are essential for solving equations and for modelling periodic behaviour, and they are used again in calculus. In this unit we define the inverse trigonometric functions, find their domains and ranges, examine their graphs on the given intervals and study their key properties and uses."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "About this unit",
+            "text": "What this unit is about: a trigonometric function takes an angle and gives a number, for example \\(\\sin 30^\\circ = \\frac{1}{2}\\). Very often the question is the other way round: which angle has sine equal to \\(\\frac{1}{2}\\)? An inverse trigonometric function answers exactly this question.\nWhat you will learn: why the trigonometric functions must first be restricted (9.1); the inverse sine, cosine and tangent functions, their domains, ranges and graphs (9.1.1 to 9.1.3); the inverse cosecant, secant and cotangent functions (9.1.4 to 9.1.6); and the sum and difference formulas for inverse trigonometric functions (9.2).\nWhat you need from before: the meaning of a one-to-one and onto function and of an inverse function (Unit 1), radian measure, the values of \\(\\sin\\), \\(\\cos\\), \\(\\tan\\) at \\(0, \\frac{\\pi}{6}, \\frac{\\pi}{4}, \\frac{\\pi}{3}, \\frac{\\pi}{2}\\) and the signs of the trigonometric functions in the four quadrants (Class XI)."
+          },
+          {
+            "type": "paragraph",
+            "text": "We have studied the inverse of a function. We learned that only a one-to-one and onto function will have an inverse. If a function is not one-to-one, it may be possible to restrict its domain to make it one-to-one so that its inverse can be found."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A quick reminder of the two words:\nOne-to-one: different inputs always give different outputs. On a graph, every horizontal line cuts the graph at most once (the horizontal line test).\nOnto: every element of the codomain is actually an output.\nWhy are both needed? The inverse must send each output back to exactly one input. If two inputs gave the same output, the inverse would not know which one to return; if some element of the codomain were never an output, the inverse would have nothing to return for it.\nA familiar example of restricting the domain: \\(f(x) = x^{2}\\) on \\(\\mathbb{R}\\) is not one-to-one, because \\(f(-3) = f(3) = 9\\). Restricted to \\([0, \\infty)\\) it becomes one-to-one, and its inverse is \\(f^{-1}(x) = \\sqrt{x}\\). Exactly the same idea is used for the trigonometric functions in this section."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Recall!",
+            "text": "Let \\(f\\) be a bijective function from a set \\(X\\) to a set \\(Y\\). The inverse function of \\(f\\), written as \\(f^{-1}\\), is a bijective function from the set \\(Y\\) back to the set \\(X\\) such that\n\\[x = f^{-1}(y),\\ \\forall\\, y \\in Y\\]\n\\[\\Leftrightarrow\\ y = f(x),\\ \\forall\\, x \\in X\\]\nHere domain of \\(f^{-1}\\) = range of \\(f\\) and range of \\(f^{-1}\\) = domain of \\(f\\). This mean that \\(f^{-1}\\) reverses the correspondence of \\(f\\), i.e., \\(f^{-1}(y) = x\\) when \\(f(x) = y\\). Also their compositions give:\n\\[(f^{-1}\\circ f)(x) = f^{-1}(f(x))\\]\n\\[= f^{-1}(y) = x,\\ \\forall\\, x \\in X\\]\nand\n\\[(f\\circ f^{-1})(y) = f(f^{-1}(y))\\]\n\\[= f(x) = y,\\ \\forall\\, y \\in Y\\]",
+            "book_errors": [
+              "This mean that"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The Recall! box prints \"This mean that \\(f^{-1}\\) reverses the correspondence of \\(f\\)\". It should read \"This means that \\(f^{-1}\\) reverses the correspondence of \\(f\\)\" (a grammar slip; the mathematics is correct)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our own example of the Recall! box: \\(f(x) = 2x + 3\\) on \\(\\mathbb{R}\\) is bijective. Solving \\(y = 2x + 3\\) for \\(x\\) gives \\(x = \\frac{y - 3}{2}\\), so \\(f^{-1}(y) = \\frac{y-3}{2}\\).\nCheck the compositions: \\(f^{-1}(f(x)) = \\frac{(2x+3) - 3}{2} = x\\) and \\(f(f^{-1}(y)) = 2\\cdot\\frac{y-3}{2} + 3 = y\\).\nSo \\(f\\) takes 4 to 11 and \\(f^{-1}\\) takes 11 back to 4: the inverse simply undoes what the function did."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "From a value back to the angle"
+          },
+          {
+            "type": "paragraph",
+            "text": "The equation \\(\\sin 90^\\circ = 1\\) clearly shows that \\(90^\\circ\\) is the angle whose sine is 1. Sometimes we know the value of sine, cosine or tangent, but not the angle itself. In such cases we use the inverse trigonometric functions to find the angle. For example, the inverse of \\(\\sin 90^\\circ = 1\\) can be written as \\(90^\\circ = \\sin^{-1}(1)\\) or \\(90^\\circ = \\arcsin 1\\), and it is read as \"\\(90^\\circ\\) is equal to sine inverse of 1\" or \"arcsine of 1\". Generally, the equation \\(x = \\sin y\\) gives the value of \\(x\\) for a given angle \\(y\\). To find the angle \\(y\\) when \\(x\\) is known, we use the inverse function, that is,"
+          },
+          {
+            "type": "equation",
+            "latex": "y = \\sin^{-1} x",
+            "text_alt": "y equals sine inverse of x"
+          },
+          {
+            "type": "paragraph",
+            "text": "This means \\(y\\) is an angle whose sine is \\(x\\), and the symbol \\(\\sin^{-1} x\\) is read as \"sine inverse of \\(x\\)\" or \"arcsine of \\(x\\)\". In other words, \\(y = \\sin^{-1} x\\) iff \\(x = \\sin y\\). Similarly, we can write the other equations as \\(y = \\cos^{-1} x\\) iff \\(x = \\cos y\\) and \\(y = \\tan^{-1} x\\) iff \\(x = \\tan y\\), etc."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Think of two machines working in opposite directions:\n\\(\\sin\\) takes an angle and gives a number: angle \\(\\frac{\\pi}{6}\\) goes in, the number \\(\\frac{1}{2}\\) comes out.\n\\(\\sin^{-1}\\) takes a number and gives an angle: the number \\(\\frac{1}{2}\\) goes in, the angle \\(\\frac{\\pi}{6}\\) comes out.\n\"iff\" means \"if and only if\": the two statements \\(y = \\sin^{-1} x\\) and \\(x = \\sin y\\) say the same thing in two different ways, so we may always change one into the other. This is the key step in every principal-value question (see Example 1 in 9.1.3)."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Question asked",
+              "Function to use"
+            ],
+            "rows": [
+              [
+                "What is \\(\\sin 30^\\circ\\)?",
+                "\\(\\sin\\) (angle known, value wanted): answer \\(\\frac{1}{2}\\)"
+              ],
+              [
+                "Which angle has sine \\(\\frac{1}{2}\\)?",
+                "\\(\\sin^{-1}\\) (value known, angle wanted): answer \\(\\frac{\\pi}{6}\\)"
+              ],
+              [
+                "What is \\(\\cos \\pi\\)?",
+                "\\(\\cos\\): answer \\(-1\\)"
+              ],
+              [
+                "Which angle has cosine \\(-1\\)?",
+                "\\(\\cos^{-1}\\): answer \\(\\pi\\)"
+              ]
+            ],
+            "caption": "Function or inverse function? (our examples)"
+          },
+          {
+            "type": "paragraph",
+            "text": "We know that the trigonometric functions sine, cosine and tangent are periodic, meaning they repeat their values at regular intervals. Due to this periodicity, trigonometric functions are generally not bijective (i.e., they are not both one-to-one and onto over their entire domain). As a result, their inverses do not naturally exist without restrictions. However, by carefully restricting their domains and codomains, we can make these functions bijective, which allows us to define their inverses, known as inverse trigonometric functions. Next, we discuss these functions one by one in detail."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why periodicity is the problem: \\(\\sin\\frac{\\pi}{6} = \\frac{1}{2}\\), but also \\(\\sin\\frac{5\\pi}{6} = \\frac{1}{2}\\), \\(\\sin\\frac{13\\pi}{6} = \\frac{1}{2}\\), \\(\\sin\\left(-\\frac{7\\pi}{6}\\right) = \\frac{1}{2}\\), and so on without end. So the question \"which angle has sine \\(\\frac{1}{2}\\)?\" has infinitely many answers, and a function is allowed to give only one.\nThe cure has two parts:\n1. Restrict the domain to one interval on which the function takes each of its values exactly once (this makes it one-to-one).\n2. Take the codomain equal to the set of values actually taken, for example \\([-1, 1]\\) for sine (this makes it onto).\nThe single angle chosen in this way is called the principal value. In 9.1.1 to 9.1.6 we meet the standard interval chosen for each function."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Only a bijective (one-to-one and onto) function has an inverse; the domain and range swap places.\n2. \\(y = \\sin^{-1} x\\) iff \\(x = \\sin y\\); similarly for \\(\\cos^{-1}\\) and \\(\\tan^{-1}\\).\n3. \\(\\sin^{-1} x\\) is read \"sine inverse of \\(x\\)\" or \"arcsine of \\(x\\)\"; it is an angle.\n4. Trigonometric functions are periodic, so they are not one-to-one on \\(\\mathbb{R}\\).\n5. Restricting the domain (and taking the right codomain) makes them bijective; the inverse then gives one angle, the principal value."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Thinking that \\(\\sin^{-1} x\\) is a number like \\(x\\): it is an angle (in radians or degrees).\n2. Giving every angle with the required value, e.g. \\(\\frac{\\pi}{6}, \\frac{5\\pi}{6}, \\dots\\) for \\(\\sin^{-1}\\frac{1}{2}\\): the inverse function gives only one, the principal value.\n3. Forgetting that an inverse needs the function to be onto as well as one-to-one: the codomain of sine must be \\([-1, 1]\\), not \\(\\mathbb{R}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

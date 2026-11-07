@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q12",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q12",
+      "title": "Question 12",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 275,
+          "pdf_to": 275,
+          "note": "Exercise 9.2, Question 12 (book page 273); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12",
+            "prompt": "12. Prove that \\(2\\tan^{-1} x = \\sin^{-1}\\left(\\frac{2x}{1 + x^2}\\right)\\), \\(-1 \\le x \\le 1\\).",
+            "explanation": "An identity between two inverse functions, true only on the given interval.\nPlan: put \\(\\tan^{-1} x = \\theta\\), so the fraction inside \\(\\sin^{-1}\\) becomes \\(\\sin 2\\theta\\).\nThen check that \\(2\\theta\\) lies in \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\), the principal range of \\(\\sin^{-1}\\).",
+            "steps": [
+              "Given: \\(-1 \\le x \\le 1\\).\nTo prove: \\(2\\tan^{-1} x = \\sin^{-1}\\frac{2x}{1 + x^2}\\).\nMethod: Let the inverse function be an angle (as in Example 8): \\(\\tan^{-1} x = \\theta\\). The fraction \\(\\frac{2x}{1 + x^2}\\) is the double-angle form \\(\\frac{2\\tan\\theta}{1 + \\tan^2\\theta} = \\sin 2\\theta\\), so the right side becomes \\(\\sin^{-1}(\\sin 2\\theta)\\).",
+              "Let the inverse be an angle\n\\[\\tan^{-1} x = \\theta\\]\n\\[x = \\tan\\theta\\]\nWhy: Definition of \\(\\tan^{-1}\\); the angle \\(\\theta\\) lies in \\(\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\).",
+              "Use the interval \\(-1 \\le x \\le 1\\)\n\\[-1 \\le \\tan\\theta \\le 1\\]\n\\[-\\dfrac{\\pi}{4} \\le \\theta \\le \\dfrac{\\pi}{4}\\]\n\\[-\\dfrac{\\pi}{2} \\le 2\\theta \\le \\dfrac{\\pi}{2}\\]\nWhy: \\(\\tan\\) is increasing on \\(\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\) and \\(\\tan\\left(\\pm\\frac{\\pi}{4}\\right) = \\pm 1\\). Doubling keeps the inequalities.",
+              "Rewrite the fraction\n\\[\\dfrac{2x}{1 + x^2} = \\dfrac{2\\tan\\theta}{1 + \\tan^2\\theta}\\]\n\\[= \\dfrac{2\\tan\\theta}{\\sec^2\\theta}\\]\n\\[= 2\\,\\dfrac{\\sin\\theta}{\\cos\\theta}\\,\\cos^2\\theta\\]\n\\[= 2\\sin\\theta\\cos\\theta = \\sin 2\\theta\\]\nWhy: \\(1 + \\tan^2\\theta = \\sec^2\\theta\\); dividing by \\(\\sec^2\\theta\\) is multiplying by \\(\\cos^2\\theta\\); and \\(2\\sin\\theta\\cos\\theta = \\sin 2\\theta\\).",
+              "Take \\(\\sin^{-1}\\)\n\\[\\sin^{-1}\\dfrac{2x}{1 + x^2}\\]\n\\[= \\sin^{-1}(\\sin 2\\theta)\\]\n\\[= 2\\theta = 2\\tan^{-1} x\\]\nWhy: \\(\\sin^{-1}(\\sin u) = u\\) only when \\(u\\) lies in \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\); step 3 showed that \\(2\\theta\\) does. This is exactly why the question gives \\(-1 \\le x \\le 1\\).",
+              "Check\n\\[x = 1:\\ 2\\tan^{-1} 1 = \\dfrac{\\pi}{2}\\]\n\\[\\sin^{-1}\\dfrac{2}{2} = \\sin^{-1} 1 = \\dfrac{\\pi}{2}\\]\n\\[x = \\tfrac{1}{2}:\\ 2\\tan^{-1}\\tfrac{1}{2} \\approx 0.9273\\]\n\\[\\sin^{-1}\\tfrac{4}{5} \\approx 0.9273\\]\nWhy: Both sides agree. Outside the interval the result fails: at \\(x = \\sqrt{3}\\), \\(2\\tan^{-1}\\sqrt{3} = \\frac{2\\pi}{3}\\) but \\(\\sin^{-1}\\frac{\\sqrt{3}}{2} = \\frac{\\pi}{3}\\)."
+            ],
+            "final_answer": "Hence proved: \\(2\\tan^{-1} x = \\sin^{-1}\\frac{2x}{1 + x^2}\\) for \\(-1 \\le x \\le 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 9.2. Every solution on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

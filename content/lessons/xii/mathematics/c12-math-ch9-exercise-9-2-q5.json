@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 274,
+          "pdf_to": 274,
+          "note": "Exercise 9.2, Question 5 (book p. 272); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5. Prove that \\(\\sin^{-1}\\frac{4}{5} + \\cos^{-1}\\frac{12}{13} = \\sin^{-1}\\frac{63}{65}\\).",
+            "explanation": "Mixed inverse functions: one \\(\\sin^{-1}\\), one \\(\\cos^{-1}\\); the answer is a \\(\\sin^{-1}\\).\nPlan: change \\(\\cos^{-1}\\frac{12}{13}\\) into a \\(\\sin^{-1}\\), then use formula (i).",
+            "steps": [
+              "Given: \\(\\sin^{-1}\\frac{4}{5}\\) and \\(\\cos^{-1}\\frac{12}{13}\\).\nTo prove: their sum is \\(\\sin^{-1}\\frac{63}{65}\\).\nMethod: the answer is a \\(\\sin^{-1}\\), so we want formula (i) \\(\\sin^{-1}x + \\sin^{-1}y = \\sin^{-1}\\left(x\\sqrt{1-y^{2}} + y\\sqrt{1-x^{2}}\\right)\\). First write \\(\\cos^{-1}\\frac{12}{13}\\) as a \\(\\sin^{-1}\\).",
+              "Change \\(\\cos^{-1}\\frac{12}{13}\\) into \\(\\sin^{-1}\\) form\n\\[\\beta = \\cos^{-1}\\tfrac{12}{13},\\quad \\cos\\beta = \\tfrac{12}{13}\\]\n\\[\\sin\\beta = \\sqrt{1 - \\tfrac{144}{169}} = \\tfrac{5}{13}\\]\n\\[\\beta = \\sin^{-1}\\tfrac{5}{13}\\]\nWhy: \\(\\beta \\in \\left[0, \\frac{\\pi}{2}\\right]\\) because its cosine is positive, so its sine is positive and \\(\\beta\\) is also the principal \\(\\sin^{-1}\\frac{5}{13}\\).",
+              "Prepare formula (i) with \\(x = \\frac{4}{5},\\ y = \\frac{5}{13}\\)\n\\[\\sqrt{1-x^{2}} = \\sqrt{1 - \\tfrac{16}{25}} = \\tfrac{3}{5}\\]\n\\[\\sqrt{1-y^{2}} = \\tfrac{12}{13}\\]\n\\[x^{2} + y^{2} = \\tfrac{16}{25} + \\tfrac{25}{169} \\approx 0.79 \\le 1\\]\nWhy: for positive \\(x, y\\), formula (i) needs \\(x^{2} + y^{2} \\le 1\\), which holds.",
+              "Apply formula (i)\n\\[\\text{L.H.S} = \\sin^{-1}\\tfrac{4}{5} + \\sin^{-1}\\tfrac{5}{13}\\]\n\\[= \\sin^{-1}\\left(\\tfrac{4}{5}\\cdot\\tfrac{12}{13} + \\tfrac{5}{13}\\cdot\\tfrac{3}{5}\\right)\\]\n\\[= \\sin^{-1}\\left(\\tfrac{48}{65} + \\tfrac{15}{65}\\right)\\]\n\\[= \\sin^{-1}\\tfrac{63}{65} = \\text{R.H.S}\\]\nWhy: \\(5 \\times 13 = 65\\); \\(4 \\times 12 = 48\\); \\(5 \\times 3 = 15\\); \\(48 + 15 = 63\\).",
+              "Check\n\\[\\sin^{-1}0.8 + \\cos^{-1}0.9231 \\approx 0.9273 + 0.3948\\]\n\\[= 1.3221\\]\n\\[\\sin^{-1}\\tfrac{63}{65} \\approx 1.3221\\ \\checkmark\\]\nWhy: a calculator in radian mode agrees."
+            ],
+            "final_answer": "Hence proved: \\(\\sin^{-1}\\frac{4}{5} + \\cos^{-1}\\frac{12}{13} = \\sin^{-1}\\frac{63}{65}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 9.2. Every solution on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}
