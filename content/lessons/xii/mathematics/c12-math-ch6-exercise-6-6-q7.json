@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH6-EXERCISE-6-6-Q7",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch6",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch6/u-exercise-6-6-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 218,
+          "pdf_to": 218,
+          "note": "Exercise 6.6, Question 7 (book p. 216-216); answer key PDF 308-309; checked with sympy"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(a)",
+            "prompt": "7. In the Bohr–Sompmerfeld model, an electron in an elliptical orbit around a nucleus obeys a modified form of Kepler's third law. For a hydrogen-like atom, the square of the orbital period \\(T\\) is proportional to the cube of the semi-major axis \\(a\\). Consider an electron in an elliptical orbit with a semi-major axis \\(a = 2.12 \\times 10^{-10}\\) m (four times the Bohr radius) and an eccentricity \\(e = 0.30\\). The constant of proportionality for hydrogen is \\(k = 2.96 \\times 10^{-16}\\ \\text{s}^2/\\text{m}^3\\). (a) Determine the distance between the nucleus (at one focus) and the centre of the ellipse.",
+            "explanation": "Same idea as Example 30: the nucleus is at a focus.\nThe distance from the centre to a focus is \\(c = ae\\). Given \\(a\\) and \\(e\\), multiply.",
+            "steps": [
+              "Given: \\(a = 2.12 \\times 10^{-10}\\) m, \\(e = 0.30\\).\nTo find: the distance from the nucleus (a focus) to the centre.\nMethod: for an ellipse the centre-to-focus distance is \\(c = ae\\).",
+              "Multiply\n\\[c = (2.12 \\times 10^{-10})(0.30)\\]\n\\[= 0.636 \\times 10^{-10}\\]\n\\[= 6.36 \\times 10^{-11} \\text{ m}\\]\nWhy: \\(2.12 \\times 0.30 = 0.636\\); moving the decimal one place right lowers the power of ten by one.",
+              "Check\n\\[6.36 \\times 10^{-11} < 2.12 \\times 10^{-10}\\]\nWhy: since \\(e < 1\\), the focus must be closer to the centre than the vertex, so \\(c < a\\)."
+            ],
+            "final_answer": "\\(6.36 \\times 10^{-11}\\) m"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(6.36 \\times 10^{-10}\\) m for 7(a). That is impossible: it is larger than \\(a = 2.12 \\times 10^{-10}\\) m, which would put the focus outside the ellipse. The correct value is \\(c = ae = 6.36 \\times 10^{-11}\\) m. (The question also prints the name as 'Bohr–Sompmerfeld'; the correct spelling is Bohr–Sommerfeld.)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(b)",
+            "prompt": "7. In the Bohr–Sompmerfeld model, an electron in an elliptical orbit around a nucleus obeys a modified form of Kepler's third law. For a hydrogen-like atom, the square of the orbital period \\(T\\) is proportional to the cube of the semi-major axis \\(a\\). Consider an electron in an elliptical orbit with a semi-major axis \\(a = 2.12 \\times 10^{-10}\\) m (four times the Bohr radius) and an eccentricity \\(e = 0.30\\). The constant of proportionality for hydrogen is \\(k = 2.96 \\times 10^{-16}\\ \\text{s}^2/\\text{m}^3\\). (b) Calculate the orbital period \\(T\\) of the electron.",
+            "explanation": "Kepler's law in the form \\(T^2 = k a^3\\) with \\(k\\) and \\(a\\) given.\nPlan: find \\(a^3\\), multiply by \\(k\\), take the square root.",
+            "steps": [
+              "Given: \\(T^2 = k a^3\\), \\(k = 2.96 \\times 10^{-16}\\ \\text{s}^2/\\text{m}^3\\), \\(a = 2.12 \\times 10^{-10}\\) m.\nTo find: the period \\(T\\).\nMethod: 'the square of \\(T\\) is proportional to the cube of \\(a\\)' means \\(T^2 = k a^3\\).",
+              "Cube of \\(a\\)\n\\[a^3 = (2.12)^3 \\times 10^{-30}\\]\n\\[= 9.528128 \\times 10^{-30} \\text{ m}^3\\]\nWhy: \\((10^{-10})^3 = 10^{-30}\\) and \\(2.12^3 = 9.528128\\).",
+              "Find \\(T^2\\)\n\\[T^2 = (2.96 \\times 10^{-16})(9.528128 \\times 10^{-30})\\]\n\\[= 28.2033 \\times 10^{-46}\\ \\text{s}^2\\]\nWhy: multiply the numbers and add the powers: \\(-16 + (-30) = -46\\). Keeping the power even makes the square root easy.",
+              "Square root\n\\[T = \\sqrt{28.2033} \\times 10^{-23}\\]\n\\[\\approx 5.31 \\times 10^{-23} \\text{ s}\\]\nWhy: \\(\\sqrt{10^{-46}} = 10^{-23}\\) and \\(\\sqrt{28.2033} \\approx 5.3107\\).",
+              "Check\n\\[(5.3107 \\times 10^{-23})^2 \\approx 28.203 \\times 10^{-46}\\]\nWhy: squaring the answer gives back \\(T^2\\). (We use the value of \\(k\\) printed in the question.)"
+            ],
+            "final_answer": "\\(T \\approx 5.31 \\times 10^{-23}\\) s"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(c)",
+            "prompt": "7. In the Bohr–Sompmerfeld model, an electron in an elliptical orbit around a nucleus obeys a modified form of Kepler's third law. For a hydrogen-like atom, the square of the orbital period \\(T\\) is proportional to the cube of the semi-major axis \\(a\\). Consider an electron in an elliptical orbit with a semi-major axis \\(a = 2.12 \\times 10^{-10}\\) m (four times the Bohr radius) and an eccentricity \\(e = 0.30\\). The constant of proportionality for hydrogen is \\(k = 2.96 \\times 10^{-16}\\ \\text{s}^2/\\text{m}^3\\). (c) Find the maximum and minimum distances of the electron from the nucleus during its orbit.",
+            "explanation": "Nearest and farthest points of an ellipse from a focus are the two vertices on the major axis.\nUse \\(r_{\\min} = a(1 - e)\\) and \\(r_{\\max} = a(1 + e)\\), as in Example 30(b).",
+            "steps": [
+              "Given: \\(a = 2.12 \\times 10^{-10}\\) m, \\(e = 0.30\\).\nTo find: \\(r_{\\min}\\) and \\(r_{\\max}\\).\nMethod: the electron is nearest the nucleus at the vertex next to that focus (distance \\(a - c\\)) and farthest at the opposite vertex (distance \\(a + c\\)), with \\(c = ae\\).",
+              "Minimum distance\n\\[r_{\\min} = a(1 - e)\\]\n\\[= (2.12 \\times 10^{-10})(0.70)\\]\n\\[= 1.484 \\times 10^{-10} \\text{ m}\\]\nWhy: \\(a - c = a - ae = a(1 - e)\\), and \\(2.12 \\times 0.70 = 1.484\\).",
+              "Maximum distance\n\\[r_{\\max} = a(1 + e)\\]\n\\[= (2.12 \\times 10^{-10})(1.30)\\]\n\\[= 2.756 \\times 10^{-10} \\text{ m}\\]\nWhy: \\(a + c = a(1 + e)\\), and \\(2.12 \\times 1.30 = 2.756\\).",
+              "Check\n\\[r_{\\min} + r_{\\max} = 4.24 \\times 10^{-10} = 2a\\]\n\\[r_{\\max} - r_{\\min} = 1.272 \\times 10^{-10} = 2c\\]\nWhy: the two vertices are \\(2a\\) apart, and their distances from a focus differ by \\(2c\\)."
+            ],
+            "final_answer": "\\(r_{\\max} = 2.756 \\times 10^{-10}\\) m, \\(r_{\\min} = 1.484 \\times 10^{-10}\\) m"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(r_{\\min} = 1.384 \\times 10^{-10}\\) m. Since \\(2.12 \\times 0.70 = 1.484\\), the correct value is \\(r_{\\min} = 1.484 \\times 10^{-10}\\) m. (With the key's value, \\(r_{\\min} + r_{\\max} = 4.14 \\times 10^{-10}\\) m, which is not \\(2a\\).) The key's \\(r_{\\max} = 2.756 \\times 10^{-10}\\) m is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

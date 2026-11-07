@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH6-EXERCISE-6-5-Q15",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch6",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch6/u-exercise-6-5-q15",
+      "title": "Question 15",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 212,
+          "pdf_to": 212,
+          "note": "Exercise 6.5, Question 15 (book page 210); answer key PDF 308."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15",
+            "prompt": "15. Find the equations of the normals to the hyperbola \\(\\frac{x^2}{9} - \\frac{y^2}{16} = 1\\) which are parallel to the line \\(2x - y = 5\\).",
+            "explanation": "A normal is the line through a point of the curve perpendicular to the tangent there.\n\"Parallel to \\(2x - y = 5\\)\" fixes the slope of the normal: \\(2\\).\nPlan: find the slope of the normal at \\((x_1, y_1)\\) as in Example 27, set it equal to 2, and look for a point of the hyperbola that satisfies this.",
+            "steps": [
+              "Given: \\(\\frac{x^2}{9} - \\frac{y^2}{16} = 1\\), normals parallel to \\(2x - y = 5\\).\nTo find: the equations of such normals.\nMethod: Example 27 gives the slope of the tangent at \\((x_1, y_1)\\) as \\(\\frac{b^2 x_1}{a^2 y_1}\\), so the normal has slope \\(-\\frac{a^2 y_1}{b^2 x_1}\\). Equate it to 2 and solve together with the equation of the hyperbola.",
+              "Read \\(a^2\\), \\(b^2\\) and the required slope\n\\[a^2 = 9,\\quad b^2 = 16\\]\n\\[2x - y = 5 \\Rightarrow y = 2x - 5\\]\n\\[\\text{Required slope} = 2\\]\nWhy: Parallel lines have equal slopes.",
+              "Slope of the normal at \\((x_1, y_1)\\)\n\\[\\dfrac{dy}{dx} = \\dfrac{b^2 x}{a^2 y} = \\dfrac{16x}{9y}\\]\n\\[m_{\\text{normal}} = -\\dfrac{9y_1}{16x_1}\\]\nWhy: Differentiating implicitly, as in Example 27. The normal is perpendicular to the tangent, so its slope is the negative reciprocal.",
+              "Set the slope equal to 2\n\\[-\\dfrac{9y_1}{16x_1} = 2\\]\n\\[y_1 = -\\dfrac{32x_1}{9}\\]\nWhy: Cross-multiply: \\(-9y_1 = 32x_1\\).",
+              "The point must lie on the hyperbola\n\\[\\dfrac{x_1^2}{9} - \\dfrac{1}{16}\\cdot\\dfrac{1024x_1^2}{81} = 1\\]\n\\[\\dfrac{x_1^2}{9} - \\dfrac{64x_1^2}{81} = 1\\]\n\\[\\dfrac{9x_1^2 - 64x_1^2}{81} = 1\\]\n\\[x_1^2 = -\\dfrac{81}{55}\\]\nWhy: Substitute \\(y_1 = -\\frac{32x_1}{9}\\), so \\(y_1^2 = \\frac{1024x_1^2}{81}\\). A square of a real number cannot be negative, so there is no real point.",
+              "Why this happens\n\\[(x_1, y_1) = (3\\sec\\theta,\\ 4\\tan\\theta)\\]\n\\[m_{\\text{normal}} = -\\dfrac{9(4\\tan\\theta)}{16(3\\sec\\theta)}\\]\n\\[= -\\dfrac{3}{4}\\sin\\theta\\]\nWhy: The book's parametric point. Since \\(|\\sin\\theta| < 1\\) on the hyperbola, every normal has slope between \\(-\\frac{3}{4}\\) and \\(\\frac{3}{4}\\). A slope of 2 is impossible.",
+              "Check\n\\[-\\dfrac{3}{4}\\sin\\theta = 2\\]\n\\[\\sin\\theta = -\\dfrac{8}{3}\\]\n\\[\\left|-\\dfrac{8}{3}\\right| > 1\\;\\checkmark\\]\nWhy: A slope of 2 would need \\(\\sin\\theta = -\\frac{8}{3}\\), but no angle has a sine larger than 1 in size. Both methods (substitution and the parametric form) agree: no normal of this hyperbola has slope 2."
+            ],
+            "final_answer": "No such normal exists: every normal to \\(\\frac{x^2}{9} - \\frac{y^2}{16} = 1\\) has slope \\(-\\frac{3}{4}\\sin\\theta\\), between \\(-\\frac{3}{4}\\) and \\(\\frac{3}{4}\\), so none is parallel to \\(2x - y = 5\\) (slope 2).",
+            "answer_figure": {
+              "$asset": "c12-math-ch6-fig-ex6-5-q15",
+              "alt": "The hyperbola x squared over 9 minus y squared over 16 equals 1 with vertices (3, 0) and (minus 3, 0) and dashed asymptotes y equals plus or minus four thirds x; the two answer-key lines y equals 2x plus or minus 14 over 5 pass between the branches without touching the curve.",
+              "caption": "Answer figure: the answer key's lines y = 2x ± 14/5 never meet the hyperbola, so they cannot be normals (original drawing)."
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(5y = 10x - 14\\) and \\(5y = 10x + 14\\), that is \\(y = 2x \\mp \\frac{14}{5}\\). These lines are not normals to \\(\\frac{x^2}{9} - \\frac{y^2}{16} = 1\\); they do not even meet it. Putting \\(y = 2x + k\\) into \\(16x^2 - 9y^2 = 144\\) gives \\(20x^2 + 36kx + 9k^2 + 144 = 0\\), whose discriminant is \\(576(k^2 - 20)\\); for \\(k^2 = \\frac{196}{25} < 20\\) it is negative. Correct answer: no normal to this hyperbola is parallel to \\(2x - y = 5\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH6-6.2.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch6",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch6/6.2.1",
+      "title": "6.2.1 Equation of Tangent to a Circle",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 176,
+          "pdf_to": 177,
+          "note": "Book p. 174-175: 6.2.1 (a) tangent to x^2 + y^2 = r^2, (b) tangent to the general circle, derived by implicit differentiation"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(a) Circle centered at origin: x² + y² = r²"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(P(x_{1}, y_{1})\\) be a point on the circle\n\\[x^{2} + y^{2} = r^{2} \\quad \\text{...(i)}\\]\nDifferentiating both sides of the equation with respect to \\(x\\), we have:\n\\[2x + 2y\\dfrac{dy}{dx} = 0\\]\n\\[\\Rightarrow \\dfrac{dy}{dx} = -\\dfrac{x}{y}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This is implicit differentiation: \\(y\\) is a function of \\(x\\) on the circle, so the derivative of \\(y^{2}\\) is \\(2y\\frac{dy}{dx}\\) (chain rule), and the derivative of the constant \\(r^{2}\\) is 0.\nWe do not need to solve for \\(y\\) first; differentiating the equation as it stands is quicker and works for the upper and lower halves of the circle at once."
+          },
+          {
+            "type": "paragraph",
+            "text": "The slope of the tangent at \\(P(x_{1}, y_{1})\\) is the value of \\(\\frac{dy}{dx}\\) at this point:\n\\[m_{T} = \\left(\\dfrac{dy}{dx}\\right)_{(x_{1},\\, y_{1})} = -\\dfrac{x_{1}}{y_{1}}\\]\nTherefore, the equation of the tangent at \\(P(x_{1}, y_{1})\\) is:\n\\[y - y_{1} = -\\dfrac{x_{1}}{y_{1}}(x - x_{1}), \\quad y_{1} \\ne 0\\]\n\\[xx_{1} + yy_{1} = x_{1}^{2} + y_{1}^{2} \\quad \\text{...(ii)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The small step the book leaves out: multiply both sides by \\(y_{1}\\):\n\\[y_{1}(y - y_{1}) = -x_{1}(x - x_{1})\\]\n\\[yy_{1} - y_{1}^{2} = -xx_{1} + x_{1}^{2}\\]\nNow take \\(xx_{1}\\) to the left and \\(y_{1}^{2}\\) to the right; this gives (ii)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Since \\(P(x_{1}, y_{1})\\) lies on the circle \\(x^{2} + y^{2} = r^{2}\\), we have\n\\[x_{1}^{2} + y_{1}^{2} = r^{2} \\quad \\text{...(iii)}\\]\nFrom equations (ii) and (iii), we obtain the required equation of the tangent:"
+          },
+          {
+            "type": "equation",
+            "latex": "xx_{1} + yy_{1} = r^{2}",
+            "text_alt": "x times x1 plus y times y1 equals r squared"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why the condition \\(y_{1} \\ne 0\\)? At the points \\((\\pm r, 0)\\) the slope \\(-\\frac{x_{1}}{y_{1}}\\) does not exist: the tangent there is vertical. The final formula still works: at \\((r, 0)\\) it gives \\(x \\cdot r = r^{2}\\), that is \\(x = r\\), which is exactly the vertical tangent. So the final form \\(xx_{1} + yy_{1} = r^{2}\\) holds at every point of the circle.\nGeometric check: the radius from \\(O\\) to \\(P\\) has slope \\(\\frac{y_{1}}{x_{1}}\\), and \\(\\frac{y_{1}}{x_{1}} \\times \\left(-\\frac{x_{1}}{y_{1}}\\right) = -1\\). The tangent is perpendicular to the radius, as it must be."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our illustration (not from the book): tangent to \\(x^{2} + y^{2} = 25\\) at \\((3, 4)\\).\nFirst check the point is on the circle: \\(9 + 16 = 25\\).\n\\[3x + 4y = 25\\]\nIts slope is \\(-\\frac{3}{4}\\), and the radius \\(OP\\) has slope \\(\\frac{4}{3}\\); the product is \\(-1\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(b) General circle: x² + y² + 2gx + 2fy + c = 0"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(P(x_{1}, y_{1})\\) be a point on the circle\n\\[x^{2} + y^{2} + 2gx + 2fy + c = 0\\]\nDifferentiating both sides with respect to \\(x\\):\n\\[2x + 2y\\dfrac{dy}{dx} + 2g + 2f\\dfrac{dy}{dx} = 0\\]\n\\[2y\\dfrac{dy}{dx} + 2f\\dfrac{dy}{dx} = -2x - 2g\\]\n\\[2(y + f)\\dfrac{dy}{dx} = -2(x + g)\\]\n\\[\\Rightarrow \\dfrac{dy}{dx} = -\\dfrac{x + g}{y + f}\\]\nThe slope of the tangent at \\(P(x_{1}, y_{1})\\) is:\n\\[m_{T} = \\left(\\dfrac{dy}{dx}\\right)_{(x_{1},\\, y_{1})} = -\\dfrac{x_{1} + g}{y_{1} + f}\\]\nHence, the equation of the tangent is:\n\\[y - y_{1} = -\\dfrac{x_{1} + g}{y_{1} + f}(x - x_{1})\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read the slope geometrically: the centre is \\(C(-g, -f)\\), so the radius \\(CP\\) has slope \\(\\frac{y_{1} + f}{x_{1} + g}\\). The tangent's slope \\(-\\frac{x_{1} + g}{y_{1} + f}\\) is its negative reciprocal. Again: tangent perpendicular to radius."
+          },
+          {
+            "type": "paragraph",
+            "text": "Multiplying both sides by \\((y_{1} + f)\\):\n\\[(y - y_{1})(y_{1} + f) = -(x_{1} + g)(x - x_{1})\\]\n\\[yy_{1} + fy - y_{1}^{2} - fy_{1}\\]\n\\[= -xx_{1} + x_{1}^{2} - gx + gx_{1}\\]\nRearranging:\n\\[xx_{1} + yy_{1} + gx + fy\\]\n\\[= x_{1}^{2} + y_{1}^{2} + gx_{1} + fy_{1}\\]\nAdding \\(gx_{1} + fy_{1}\\) to both sides:\n\\[xx_{1} + yy_{1} + gx + gx_{1} + fy + fy_{1}\\]\n\\[= x_{1}^{2} + y_{1}^{2} + 2gx_{1} + 2fy_{1} \\quad \\text{...(3)}\\]\nSince \\(P(x_{1}, y_{1})\\) lies on the circle, we have:\n\\[x_{1}^{2} + y_{1}^{2} + 2gx_{1} + 2fy_{1} + c = 0\\]\n\\[\\Rightarrow x_{1}^{2} + y_{1}^{2} + 2gx_{1} + 2fy_{1} = -c \\quad \\text{...(4)}\\]\nSubstituting equation (4) into equation (3) and rearranging gives the required equation:"
+          },
+          {
+            "type": "equation",
+            "latex": "xx_{1} + yy_{1} + g(x + x_{1}) + f(y + y_{1}) + c = 0",
+            "text_alt": "x x1 plus y y1 plus g times (x plus x1) plus f times (y plus y1) plus c equals 0"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why add \\(gx_{1} + fy_{1}\\)? Because it makes the right side exactly the left side of the circle's equation at \\(P\\) (without \\(c\\)), which we know equals \\(-c\\). This trick removes \\(x_{1}^{2}\\) and \\(y_{1}^{2}\\) and leaves a neat formula.\nLike part (a), the final formula also covers the case \\(y_{1} + f = 0\\), where the tangent is vertical and the slope form cannot be used.\nPut \\(g = f = 0\\) and \\(c = -r^{2}\\): the formula becomes \\(xx_{1} + yy_{1} - r^{2} = 0\\), which is part (a). So (a) is a special case of (b)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Circle \\(x^{2} + y^{2} = r^{2}\\): tangent at \\((x_{1}, y_{1})\\) is \\(xx_{1} + yy_{1} = r^{2}\\).\n2. Circle \\(x^{2} + y^{2} + 2gx + 2fy + c = 0\\): tangent at \\((x_{1}, y_{1})\\) is \\(xx_{1} + yy_{1} + g(x + x_{1}) + f(y + y_{1}) + c = 0\\).\n3. Both come from implicit differentiation and the point-slope form; the condition that \\(P\\) lies on the circle simplifies the result.\n4. The tangent is always perpendicular to the radius at the point of contact."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Using these formulas for a point that is not on the circle. First check that \\((x_{1}, y_{1})\\) satisfies the circle's equation.\n2. Writing \\(2g(x + x_{1})\\) instead of \\(g(x + x_{1})\\): the 2 is already used up by the \\(x + x_{1}\\).\n3. Applying the formula when the coefficients of \\(x^{2}\\) and \\(y^{2}\\) are not 1. Divide the equation by that coefficient first."
+          }
+        ]
+      }
+    }
+  ]
+}
