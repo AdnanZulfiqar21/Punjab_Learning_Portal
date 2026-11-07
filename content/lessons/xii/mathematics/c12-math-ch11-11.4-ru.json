@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-11.4-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/11.4",
+      "title": "11.4 Derivative Of A Vector-Valued Function (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 293,
+          "pdf_to": 294,
+          "note": "Book p. 291-292: 11.4 Derivative Of A Vector-Valued Function: definition by limit, componentwise derivative, printed Examples 4-5 (shown as Examples 6-7)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Is sabaq mein hum seekhenge ke vector-valued function ka derivative kaise nikalte hain. Achhi khabar yeh hai ke koi naya formula yaad nahin karna: Unit 2 mein jo derivatives seekhe the (power rule, product rule, quotient rule, chain rule), wohi yahan har component par alag alag lagte hain. Socheiye ek drone hawa mein chal raha hai: us ki position \\(\\mathbf{r}(t)\\) hai. Derivative batayega ke woh kitni tezi se aur kis simt mein ja raha hai. Isi liye agle hisse (11.5) mein yahi derivative velocity banta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki baat: single variable ka vector-valued function woh function hai jo ek scalar (aam taur par waqt \\(t\\)) ko \\(\\mathbb{R}^n\\) ke ek vector se jorta hai. Teen dimensions (3D) mein ise aam taur par yun likhte hain:\n\\[\\mathbf{r}(t) = \\langle f_1(t), f_2(t), f_3(t)\\rangle\\]\n\\[= f_1(t)\\,\\hat{i} + f_2(t)\\,\\hat{j} + f_3(t)\\,\\hat{k}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan \\(\\hat{i}, \\hat{j}, \\hat{k}\\) rectangular coordinates (\\(x, y, z\\) axes) ke unit vectors hain, aur \\(f_1(t), f_2(t), f_3(t)\\), jo \\(t\\) ke scalar functions hain, vector-valued function \\(\\mathbf{r}(t)\\) ke components hain. Yani har component ek aam function hai jo ek number deta hai, aur teeno mil kar ek vector banate hain."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke is jumle mein ek hi subject ke liye do verbs aa gaye hain (\"are scalar functions of \\(t\\), are the components\"). Sahi jumla: \"... and \\(f_1(t), f_2(t)\\) and \\(f_3(t)\\), which are scalar functions of \\(t\\), are the components of the vector-valued function \\(\\mathbf{r}(t)\\).\" Matlab mein koi farq nahin, sirf grammar ki ghalti hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh wahi idea hai jo 11.1.2 mein parha tha: input ek (\\(t\\)), aur output ek vector jis ke teen components \\(f_1, f_2, f_3\\) aam (scalar) functions hain. Misaal: \\(\\mathbf{r}(t) = t^2\\,\\hat{i} + \\sin t\\,\\hat{j} + e^t\\,\\hat{k}\\) mein \\(f_1 = t^2\\), \\(f_2 = \\sin t\\), \\(f_3 = e^t\\). 2D function mein bas \\(\\hat{k}\\) wala term nahin hota (yani \\(f_3 = 0\\))."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab derivative ki definition. Kitab kehti hai: vector-valued function \\(\\mathbf{r}(t)\\) ka \\(t\\) ke lihaz se derivative yun define hota hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{d\\mathbf{r}}{dt} = \\mathbf{r}'(t) = \\lim_{\\Delta t \\to 0} \\dfrac{\\mathbf{r}(t + \\Delta t) - \\mathbf{r}(t)}{\\Delta t}",
+            "text_alt": "d r by d t equals r prime of t equals the limit as delta t tends to 0 of r of t plus delta t minus r of t, all over delta t"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Ghor se dekhiye: yeh bilkul wahi difference quotient hai jo Unit 2 mein aam function \\(f(x)\\) ke liye tha, farq sirf itna hai ke ab oopar vector hai.\n\\(\\mathbf{r}(t + \\Delta t) - \\mathbf{r}(t)\\) position mein chhoti si tabdeeli hai, yani curve ke ek point se qareeb wale doosre point tak ka vector (chord). Isay \\(\\Delta t\\) se divide karein to average rate of change milta hai, aur \\(\\Delta t \\to 0\\) karne par instantaneous (usi lamhe ka) rate of change: ek vector jo curve ke tangent (chhoone wali line) ki simt mein hota hai. 11.5 mein yahi velocity kehlata hai. Misaal: car ki speedometer us lamhe ki speed batati hai, poore safar ki average nahin."
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar yeh limit mojood ho to \\(\\mathbf{r}'(t)\\) har component ko alag alag differentiate kar ke nikalta hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\mathbf{r}'(t) = \\langle f_1'(t), f_2'(t), f_3'(t)\\rangle",
+            "text_alt": "r prime of t equals the ordered triple f 1 prime of t, f 2 prime of t, f 3 prime of t"
+          },
+          {
+            "type": "equation",
+            "latex": "= f_1'(t)\\,\\hat{i} + f_2'(t)\\,\\hat{j} + f_3'(t)\\,\\hat{k}",
+            "text_alt": "equals f 1 prime of t times i hat plus f 2 prime of t times j hat plus f 3 prime of t times k hat"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Component by component kyun? Difference quotient ko components mein likh kar dekhein:\n\\[\\dfrac{\\mathbf{r}(t + \\Delta t) - \\mathbf{r}(t)}{\\Delta t}\\]\n\\[= \\dfrac{f_1(t + \\Delta t) - f_1(t)}{\\Delta t}\\,\\hat{i} + \\dots\\]\n\\(\\hat{i}, \\hat{j}, \\hat{k}\\) constant vectors hain (in ki lambai aur simt kabhi nahin badalti), is liye yeh bahar hi rehte hain, aur har component ki limit us component ka aam derivative \\(f_1'(t), f_2'(t), f_3'(t)\\) ban jati hai. Is liye Unit 2 ke saare rules (power, product, quotient, chain) yahan kaam karte hain, bas ek waqt mein ek component par.\n\\(\\mathbf{r}'(t)\\) sirf wahan mojood hai jahan har component ka derivative mojood ho; ek bhi component atak jaye to vector ka derivative nahin banta."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Agar \\(\\mathbf{r}(t) = 5\\,\\hat{i} + 3t\\,\\hat{j}\\) ho to \\(\\mathbf{r}'(t)\\) kya hoga? (Jawab: \\(0\\,\\hat{i} + 3\\,\\hat{j} = 3\\,\\hat{j}\\); constant 5 ka derivative zero hai, yani \\(x\\)-simt mein koi harkat nahin.)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "Kitab is hisse ki do misaalon ko Example 4 aur Example 5 likhti hai. Kitab ki numbering 11.2 mein dobara 1 se shuru ho jati hai (11.1.3 ke Example 1 aur 2 ke baad), is liye is unit mein \"Example 1\" aur \"Example 2\" do do baar aate hain. Har example ka apna alag number ho, is liye hum poore Unit 11 ki misaalein ek hi silsile mein ginte hain: kitab ka Example 4 aur Example 5 yahan Example 6 aur Example 7 hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki do misaalein dekhte hain. Pehli mein sirf general derivative nikalna hai, doosri mein derivative nikal kar ek khaas \\(t\\) par us ki value."
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Find the first derivative of \\(\\mathbf{r}(t) = t^2\\,\\hat{i} + \\sin t\\,\\hat{j} + e^t\\,\\hat{k}\\) with respect to \\(t\\).",
+            "steps": [
+              "Diya gaya: \\(\\mathbf{r}(t) = t^2\\,\\hat{i} + \\sin t\\,\\hat{j} + e^t\\,\\hat{k}\\).\nMaloom karna: \\(\\mathbf{r}'(t)\\).\nTareeqa: oopar wali definition ke mutabiq har component ko alag differentiate karein aur use apne hi unit vector ke saath rakhein. Yeh tareeqa is liye kaam karta hai ke unit vectors constant hain.",
+              "Har component ko alag differentiate karein\n\\[\\dfrac{d}{dt}(t^2) = 2t\\]\n\\[\\dfrac{d}{dt}(\\sin t) = \\cos t\\]\n\\[\\dfrac{d}{dt}(e^t) = e^t\\]\nKyun: \\(t^2\\) par power rule (power 2 aage aayi, ek kam ho gayi); \\(\\sin t\\) ka derivative \\(\\cos t\\) aur \\(e^t\\) ka derivative khud \\(e^t\\): yeh standard results hain jo Unit 2 mein yaad kiye the.",
+              "Unit vectors ke saath wapas jorein\n\\[\\mathbf{r}'(t) = 2t\\,\\hat{i} + \\cos t\\,\\hat{j} + e^t\\,\\hat{k}\\]\nKyun: \\(\\mathbf{r}'(t) = f_1'(t)\\,\\hat{i} + f_2'(t)\\,\\hat{j} + f_3'(t)\\,\\hat{k}\\). Har derivative usi unit vector ke saath gaya jis ke saath asal component tha.",
+              "Tasdeeq \\(t = 0\\) par\n\\[\\mathbf{r}'(0) = 0\\,\\hat{i} + \\hat{j} + \\hat{k}\\]\n\\(\\Delta t = 0.001\\) le kar: \\(\\frac{\\mathbf{r}(0.001) - \\mathbf{r}(0)}{0.001} \\approx 0.001\\,\\hat{i} + 1.000\\,\\hat{j} + 1.0005\\,\\hat{k}\\), bilkul qareeb \\(\\checkmark\\).\nKyun: chhote \\(\\Delta t\\) wala difference quotient derivative ke qareeb hi hona chahiye; yahi definition ka matlab hai."
+            ],
+            "answer": "\\(\\mathbf{r}'(t) = 2t\\,\\hat{i} + \\cos t\\,\\hat{j} + e^t\\,\\hat{k}\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Find the first derivative of \\(\\mathbf{r}(t) = \\sec t\\,\\hat{i} + \\tan t\\,\\hat{j} - \\cos t\\,\\hat{k}\\) at \\(t = \\frac{\\pi}{4}\\).",
+            "steps": [
+              "Diya gaya: \\(\\mathbf{r}(t) = \\sec t\\,\\hat{i} + \\tan t\\,\\hat{j} - \\cos t\\,\\hat{k}\\), \\(t = \\frac{\\pi}{4}\\).\nMaloom karna: \\(\\mathbf{r}'\\left(\\frac{\\pi}{4}\\right)\\).\nTareeqa: har component ko alag differentiate karein, phir \\(t = \\frac{\\pi}{4}\\) par value nikalein. Yaad rakhein: \\(\\sin\\frac{\\pi}{4} = \\cos\\frac{\\pi}{4} = \\frac{1}{\\sqrt{2}}\\).",
+              "\\(\\hat{i}\\)-component\n\\[\\dfrac{d}{dt}(\\sec t) = \\sec t \\cdot \\tan t\\]\n\\[\\left.\\dfrac{d(\\sec t)}{dt}\\right|_{t = \\pi/4} = \\sec\\tfrac{\\pi}{4}\\tan\\tfrac{\\pi}{4}\\]\n\\[= \\sqrt{2} \\cdot 1 = \\sqrt{2}\\]\nKyun: \\(\\sec t\\) ka standard derivative \\(\\sec t\\tan t\\) hai. \\(\\sec\\frac{\\pi}{4} = \\frac{1}{\\cos(\\pi/4)} = \\sqrt{2}\\) aur \\(\\tan\\frac{\\pi}{4} = 1\\). Kitab yahan \"\\(\\sqrt{2}.1\\)\" likhti hai; wahan bindi (dot) ka matlab multiply hai.",
+              "\\(\\hat{j}\\)-component\n\\[\\dfrac{d}{dt}(\\tan t) = \\sec^2 t\\]\n\\[\\left.\\dfrac{d(\\tan t)}{dt}\\right|_{t = \\pi/4} = \\sec^2\\tfrac{\\pi}{4}\\]\n\\[= (\\sqrt{2})^2 = 2\\]\nKyun: \\(\\tan t\\) ka standard derivative \\(\\sec^2 t\\). \\(\\sec\\frac{\\pi}{4} = \\sqrt{2}\\) ka square 2.",
+              "\\(\\hat{k}\\)-component\n\\[\\dfrac{d}{dt}(-\\cos t) = \\sin t\\]\n\\[\\left.\\dfrac{d(-\\cos t)}{dt}\\right|_{t = \\pi/4} = \\sin\\tfrac{\\pi}{4} = \\dfrac{1}{\\sqrt{2}}\\]\nKyun: \\(\\cos t\\) ka derivative \\(-\\sin t\\) hai, aur aage pehle se minus tha; minus minus mil kar plus.\nDhyan dein: yahan sab se zyada ghalti hoti hai; jawab \\(+\\sin t\\) hai.",
+              "Sab ko jorein\n\\[\\mathbf{r}'\\left(\\tfrac{\\pi}{4}\\right) = \\sqrt{2}\\,\\hat{i} + 2\\,\\hat{j} + \\dfrac{1}{\\sqrt{2}}\\,\\hat{k}\\]\nKyun: har value apne unit vector ke saath.",
+              "Tasdeeq\n\\(\\mathbf{r}'(t) = \\sec t\\tan t\\,\\hat{i} + \\sec^2 t\\,\\hat{j} + \\sin t\\,\\hat{k}\\); \\(t = \\frac{\\pi}{4}\\) par computer algebra system \\(\\sqrt{2}\\,\\hat{i} + 2\\,\\hat{j} + \\frac{\\sqrt{2}}{2}\\,\\hat{k}\\) deta hai. Yeh wahi hai, kyunke \\(\\frac{1}{\\sqrt{2}} = \\frac{\\sqrt{2}}{2}\\) (rationalize karne se) \\(\\checkmark\\)."
+            ],
+            "answer": "\\(\\mathbf{r}'\\left(\\frac{\\pi}{4}\\right) = \\sqrt{2}\\,\\hat{i} + 2\\,\\hat{j} + \\frac{1}{\\sqrt{2}}\\,\\hat{k}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahin. Circle par chalte particle ka derivative dekhein: \\(\\mathbf{r}(t) = \\cos t\\,\\hat{i} + \\sin t\\,\\hat{j}\\).\nHar component differentiate karein: \\(\\frac{d}{dt}\\cos t = -\\sin t\\), \\(\\frac{d}{dt}\\sin t = \\cos t\\).\n\\[\\mathbf{r}'(t) = -\\sin t\\,\\hat{i} + \\cos t\\,\\hat{j}\\]\n\\(t = 0\\) par particle \\((1, 0)\\) par hai aur \\(\\mathbf{r}'(0) = \\hat{j}\\), yani seedha oopar ki taraf: circle ko us point par chhoone wali (tangent) simt. Dot product \\(\\mathbf{r} \\cdot \\mathbf{r}' = -\\cos t\\sin t + \\sin t\\cos t = 0\\), yani derivative har waqt radius par perpendicular hai, jaise tangent hona chahiye. Is se samajh aata hai ke \\(\\mathbf{r}'(t)\\) curve ke saath saath chalne ki simt batata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Jab derivative kisi khaas \\(t\\) \"par\" maanga jaye: pehle har component ka general derivative nikalein, phir value rakhein. Pehle value rakh di to har component constant ban jayega aur us ka derivative zero aa jayega, jo ghalat hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(\\mathbf{r}(t) = f_1(t)\\,\\hat{i} + f_2(t)\\,\\hat{j} + f_3(t)\\,\\hat{k}\\): components \\(t\\) ke scalar functions hain.\n2. Definition: \\(\\mathbf{r}'(t) = \\lim_{\\Delta t \\to 0}\\frac{\\mathbf{r}(t + \\Delta t) - \\mathbf{r}(t)}{\\Delta t}\\).\n3. Amal mein: \\(\\mathbf{r}'(t) = f_1'(t)\\,\\hat{i} + f_2'(t)\\,\\hat{j} + f_3'(t)\\,\\hat{k}\\); Unit 2 ke saare rules har component par lagte hain.\n4. \\(\\hat{i}, \\hat{j}, \\hat{k}\\) constant hain: in ka derivative nahin lete.\n5. \\(\\mathbf{r}'(t)\\) curve ka tangent vector hai (11.5 mein velocity)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Unit vectors ko differentiate kar dena, ya unhein gira dena: har derivative apne hi \\(\\hat{i}\\), \\(\\hat{j}\\) ya \\(\\hat{k}\\) ke saath rehna chahiye.\n2. Differentiate karne se pehle \\(t\\) ki value rakh dena.\n3. Sign ki ghalti: \\(\\frac{d}{dt}(-\\cos t) = +\\sin t\\) hai, \\(-\\sin t\\) nahin.\n4. Bhool jana ke ghaib term (maslan \\(\\hat{j}\\) nahin likha) ka matlab zero component hai, jis ka derivative bhi zero hai."
+          }
+        ]
+      },
+      "variant_of": "C12-MATH-CH11-11.4"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-EXERCISE-11-1-Q3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/u-exercise-11-1-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 292,
+          "pdf_to": 292,
+          "note": "Exercise 11.1, Question 3: book page 290 (Q1-Q8). The book prints no answers for Unit 11; every answer here is ours."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. Write a vector function for a car moving along a parabolic path.",
+            "explanation": "An open construction question: the car's path is a parabola, which we take as \\(y = kx^2\\).\nWe choose how \\(x\\) changes with time (steady speed \\(c\\)), then the path fixes \\(y\\).\nPlan: components, vector form, domain; check by eliminating \\(t\\).",
+            "steps": [
+              "Given: a car moves along a parabolic path.\nTo find: a vector function \\(\\mathbf{r}(t)\\) for its position.\nMethod: the three steps of 11.1.3. Take the road as the parabola \\(y = kx^2\\) (\\(k \\ne 0\\)) with vertex at \\(O\\); the car is at \\(O\\) when \\(t = 0\\) and its \\(x\\)-coordinate grows at a steady \\(c\\) m/s.",
+              "Step-1: Determine the components\n\\[x(t) = ct\\]\n\\[y(t) = k(ct)^2 = kc^2t^2\\]\nWhy: \\(x\\) grows steadily, so distance \\(=\\) speed \\(\\times\\) time. The car stays on the road, so its \\(y\\) must satisfy \\(y = kx^2\\) with \\(x = ct\\).",
+              "Step-2: Combine into vector form\n\\[\\mathbf{r}(t) = ct\\,\\hat{i} + kc^2t^2\\,\\hat{j}\\]\nWhy: \\(x\\)-component with \\(\\hat{i}\\), \\(y\\)-component with \\(\\hat{j}\\).",
+              "Step-3: Specify the domain\n\\[t \\ge 0\\]\n(until the car leaves the curved part of the road)\nWhy: \\(t\\) is time from the start; both components are polynomials, defined for every real \\(t\\).",
+              "A particular case: road \\(y = \\frac{x^2}{10}\\), \\(c = 5\\) m/s\n\\[x = 5t,\\quad y = \\dfrac{(5t)^2}{10} = 2.5t^2\\]\n\\[\\mathbf{r}(t) = 5t\\,\\hat{i} + 2.5t^2\\,\\hat{j}\\]\nFor \\(0 \\le t \\le 4\\): \\(t = 0, 1, 2, 3, 4\\) give \\((0, 0), (5, 2.5), (10, 10), (15, 22.5), (20, 40)\\).\nWhy: here \\(k = \\frac{1}{10}\\), so \\(kc^2 = \\frac{25}{10} = 2.5\\).",
+              "Check: eliminate \\(t\\)\n\\[t = \\dfrac{x}{5}\\]\n\\[y = 2.5\\left(\\dfrac{x}{5}\\right)^2 = \\dfrac{x^2}{10} \\;\\checkmark\\]\nWhy: removing \\(t\\) gives back the road's equation, so every position is on the parabola. The simplest such function is \\(\\mathbf{r}(t) = t\\,\\hat{i} + t^2\\,\\hat{j}\\) (the book's Figure 11.1)."
+            ],
+            "final_answer": "\\(\\mathbf{r}(t) = ct\\,\\hat{i} + kc^2t^2\\,\\hat{j},\\ t \\ge 0\\), for the path \\(y = kx^2\\); for example \\(\\mathbf{r}(t) = 5t\\,\\hat{i} + 2.5t^2\\,\\hat{j}\\) (path \\(y = \\frac{x^2}{10}\\)).",
+            "answer_figure": {
+              "$asset": "c12-math-ch11-fig-ex11-1-q3-parabola",
+              "alt": "Parabola y = x squared over 10 from the origin to (20, 40), traced by r(t) = 5t i + 2.5t squared j. Marked points: t = 0 at (0, 0), t = 1 at (5, 2.5), t = 2 at (10, 10), t = 3 at (15, 22.5), t = 4 at (20, 40). Arrows show the direction of motion.",
+              "caption": "Path of the car r(t) = 5t i + 2.5t² j, 0 ≤ t ≤ 4, on the parabola y = x²/10 (our drawing)"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 11.1 (none for the whole of Unit 11). Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book. This question is open: many correct answers exist. Ours is one model answer built with the book's three steps (11.1.3); any function that models the motion correctly is also right."
+          }
+        ]
+      }
+    }
+  ]
+}

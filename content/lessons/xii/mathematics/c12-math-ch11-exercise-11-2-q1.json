@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-EXERCISE-11-2-Q1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/u-exercise-11-2-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 294,
+          "pdf_to": 294,
+          "note": "Exercise 11.2, Question 1: book page 292 (Q1-Q2). The book prints no answers for Unit 11; every answer here is ours."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Find the first-order derivatives of the following vector-valued function with respect to \\(t\\): \\(\\mathbf{r}(t) = (t^2 + 1)\\,\\hat{i} + (t^3 + t^2 + 3t)\\,\\hat{j}\\)",
+            "explanation": "A direct derivative of a 2D vector function.\nBoth components are polynomials, so only the power rule is needed.\nPlan: differentiate each component, then put the results back with \\(\\hat{i}\\) and \\(\\hat{j}\\).",
+            "steps": [
+              "Given: \\(\\mathbf{r}(t) = (t^2 + 1)\\,\\hat{i} + (t^3 + t^2 + 3t)\\,\\hat{j}\\).\nTo find: \\(\\mathbf{r}'(t)\\).\nMethod: by the definition in 11.4, \\(\\mathbf{r}'(t) = f_1'(t)\\,\\hat{i} + f_2'(t)\\,\\hat{j} + f_3'(t)\\,\\hat{k}\\): differentiate each component as an ordinary function; the unit vectors are constant and stay where they are.",
+              "Identify the components\n\\[f_1(t) = t^2 + 1\\]\n\\[f_2(t) = t^3 + t^2 + 3t\\]\nWhy: the part in front of \\(\\hat{i}\\) is the first component, the part in front of \\(\\hat{j}\\) the second.",
+              "Differentiate each component\n\\[f_1'(t) = 2t\\]\n\\[f_2'(t) = 3t^2 + 2t + 3\\]\nWhy: power rule \\(\\frac{d}{dt}t^n = nt^{n-1}\\); the derivative of the constant 1 is 0, and of \\(3t\\) is 3.",
+              "Put them back\n\\[\\mathbf{r}'(t) = 2t\\,\\hat{i} + (3t^2 + 2t + 3)\\,\\hat{j}\\]\nWhy: 11.4: \\(\\mathbf{r}'(t) = f_1'(t)\\,\\hat{i} + f_2'(t)\\,\\hat{j}\\).",
+              "Check at \\(t = 1\\)\n\\[\\mathbf{r}'(1) = 2\\,\\hat{i} + 8\\,\\hat{j}\\]\nDifference quotient with \\(\\Delta t = 0.001\\): \\(x\\) changes by \\(0.002001\\), \\(y\\) by \\(0.008004\\); divided by \\(0.001\\) these are about \\(2.001\\) and \\(8.004\\) \\(\\checkmark\\)."
+            ],
+            "final_answer": "\\(\\mathbf{r}'(t) = 2t\\,\\hat{i} + (3t^2 + 2t + 3)\\,\\hat{j}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 11.2 (none for the whole of Unit 11). Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Find the first-order derivatives of the following vector-valued function with respect to \\(t\\): \\(\\mathbf{r}(t) = (t\\sin t - \\cos t)\\,\\hat{i} + (\\cot(t) + \\ln t)\\,\\hat{j} + (\\ln(1 + t^2))\\,\\hat{k}\\)",
+            "explanation": "A 3D vector function; each component needs a different rule.\n\\(\\hat{i}\\): product rule; \\(\\hat{j}\\): standard derivatives of \\(\\cot t\\) and \\(\\ln t\\); \\(\\hat{k}\\): chain rule.\nPlan: differentiate component by component and recombine.",
+            "steps": [
+              "Given: \\(\\mathbf{r}(t) = (t\\sin t - \\cos t)\\,\\hat{i} + (\\cot t + \\ln t)\\,\\hat{j} + \\ln(1 + t^2)\\,\\hat{k}\\).\nTo find: \\(\\mathbf{r}'(t)\\).\nMethod: by the definition in 11.4, \\(\\mathbf{r}'(t) = f_1'(t)\\,\\hat{i} + f_2'(t)\\,\\hat{j} + f_3'(t)\\,\\hat{k}\\): differentiate each component as an ordinary function; the unit vectors are constant and stay where they are.",
+              "\\(\\hat{i}\\)-component: product rule on \\(t\\sin t\\)\n\\[\\tfrac{d}{dt}(t\\sin t) = 1 \\cdot \\sin t + t\\cos t\\]\n\\[\\tfrac{d}{dt}(-\\cos t) = -(-\\sin t) = \\sin t\\]\n\\[f_1'(t) = 2\\sin t + t\\cos t\\]\nWhy: \\((uv)' = u'v + uv'\\) with \\(u = t\\), \\(v = \\sin t\\); and \\(\\frac{d}{dt}\\cos t = -\\sin t\\).",
+              "\\(\\hat{j}\\)-component\n\\[f_2'(t) = -\\csc^2 t + \\dfrac{1}{t}\\]\nWhy: \\(\\frac{d}{dt}\\cot t = -\\csc^2 t\\) and \\(\\frac{d}{dt}\\ln t = \\frac{1}{t}\\).",
+              "\\(\\hat{k}\\)-component: chain rule\n\\[f_3'(t) = \\dfrac{1}{1 + t^2} \\cdot 2t = \\dfrac{2t}{1 + t^2}\\]\nWhy: \\(\\frac{d}{dt}\\ln u = \\frac{u'}{u}\\) with \\(u = 1 + t^2\\), \\(u' = 2t\\).",
+              "Put them back\n\\[\\mathbf{r}'(t) = (2\\sin t + t\\cos t)\\,\\hat{i}\\]\n\\[\\quad + \\left(\\dfrac{1}{t} - \\csc^2 t\\right)\\hat{j}\\]\n\\[\\quad + \\dfrac{2t}{1 + t^2}\\,\\hat{k}\\]\nWhy: 11.4. This holds where \\(\\mathbf{r}\\) is defined: \\(t > 0\\) (for \\(\\ln t\\)) and \\(t \\ne \\pi, 2\\pi, \\dots\\) (for \\(\\cot t\\)).",
+              "Check at \\(t = \\frac{\\pi}{2}\\)\n\\(\\mathbf{r}'(\\frac{\\pi}{2}) = 2\\,\\hat{i} + \\left(\\frac{2}{\\pi} - 1\\right)\\hat{j} + \\frac{\\pi}{1 + \\pi^2/4}\\,\\hat{k}\\); a computer algebra system gives the same derivative \\(\\checkmark\\)."
+            ],
+            "final_answer": "\\(\\mathbf{r}'(t) = (2\\sin t + t\\cos t)\\,\\hat{i} + \\left(\\frac{1}{t} - \\csc^2 t\\right)\\hat{j} + \\frac{2t}{1 + t^2}\\,\\hat{k}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Find the first-order derivatives of the following vector-valued function with respect to \\(t\\): \\(\\mathbf{r}(t) = \\frac{2}{\\sqrt{1 - t^2}}\\,\\hat{i} + \\frac{\\sqrt{3}}{1 + t^2}\\,\\hat{k}\\)",
+            "explanation": "A 3D function with no \\(\\hat{j}\\)-term (that component is 0).\nBoth components are constants over a power, so write them as negative powers and use the chain rule.\nPlan: rewrite, differentiate, recombine, state where it holds.",
+            "steps": [
+              "Given: \\(\\mathbf{r}(t) = \\frac{2}{\\sqrt{1 - t^2}}\\,\\hat{i} + \\frac{\\sqrt{3}}{1 + t^2}\\,\\hat{k}\\).\nTo find: \\(\\mathbf{r}'(t)\\).\nMethod: by the definition in 11.4, \\(\\mathbf{r}'(t) = f_1'(t)\\,\\hat{i} + f_2'(t)\\,\\hat{j} + f_3'(t)\\,\\hat{k}\\): differentiate each component as an ordinary function; the unit vectors are constant and stay where they are.",
+              "Rewrite as powers\n\\[f_1(t) = 2(1 - t^2)^{-1/2}\\]\n\\[f_2(t) = 0,\\quad f_3(t) = \\sqrt{3}\\,(1 + t^2)^{-1}\\]\nWhy: \\(\\frac{c}{u^n} = c\\,u^{-n}\\) is quicker to differentiate with the chain rule than with the quotient rule. A missing \\(\\hat{j}\\)-term means \\(f_2 = 0\\), so \\(f_2' = 0\\).",
+              "\\(\\hat{i}\\)-component\n\\[f_1'(t) = 2\\left(-\\tfrac{1}{2}\\right)(1 - t^2)^{-3/2}\\]\n\\[\\quad \\times (-2t)\\]\n\\[= \\dfrac{2t}{(1 - t^2)^{3/2}}\\]\nWhy: chain rule: \\(\\frac{d}{dt}u^n = nu^{n-1}u'\\) with \\(u = 1 - t^2\\), \\(u' = -2t\\); the two minus signs give plus.",
+              "\\(\\hat{k}\\)-component\n\\[f_3'(t) = \\sqrt{3}\\,(-1)(1 + t^2)^{-2} \\cdot 2t\\]\n\\[= -\\dfrac{2\\sqrt{3}\\,t}{(1 + t^2)^2}\\]\nWhy: same rule with \\(u = 1 + t^2\\), \\(u' = 2t\\); the constant \\(\\sqrt{3}\\) stays in front.",
+              "Put them back\n\\[\\mathbf{r}'(t) = \\dfrac{2t}{(1 - t^2)^{3/2}}\\,\\hat{i}\\]\n\\[\\quad - \\dfrac{2\\sqrt{3}\\,t}{(1 + t^2)^2}\\,\\hat{k}\\]\nvalid for \\(-1 < t < 1\\).\nWhy: \\(\\sqrt{1 - t^2}\\) must be real and non-zero.",
+              "Check at \\(t = 0\\)\n\\(\\mathbf{r}'(0) = \\mathbf{0}\\): both components of \\(\\mathbf{r}\\) are even functions of \\(t\\) (they have \\(t^2\\) only), so their graphs are flat at \\(t = 0\\) \\(\\checkmark\\)."
+            ],
+            "final_answer": "\\(\\mathbf{r}'(t) = \\frac{2t}{(1 - t^2)^{3/2}}\\,\\hat{i} - \\frac{2\\sqrt{3}\\,t}{(1 + t^2)^2}\\,\\hat{k}\\), for \\(-1 < t < 1\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

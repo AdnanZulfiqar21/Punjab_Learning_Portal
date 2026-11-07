@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-EXERCISE-11-1-Q1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/u-exercise-11-1-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 292,
+          "pdf_to": 292,
+          "note": "Exercise 11.1, Question 1: book page 290 (Q1-Q8). The book prints no answers for Unit 11; every answer here is ours."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1",
+            "prompt": "1. Give two real-life examples where vector-valued functions are necessary.",
+            "explanation": "A theory question: we must name two real situations where one number is not enough and a vector function is needed.\nThe test: the quantity has two or three coordinates (a direction) that change with time.\nPlan: for each situation choose axes, write \\(\\mathbf{r}(t)\\) with \\(\\hat{i}, \\hat{j}\\) (and \\(\\hat{k}\\)) components, and say why a single number fails.",
+            "steps": [
+              "Given: the definition of 11.1.2: a vector-valued function takes one input \\(t\\) and gives a vector output.\nTo find: two real-life situations that need such a function.\nMethod: look for moving objects whose position has several coordinates that change with time (like the book's projectile and drone examples) and build \\(\\mathbf{r}(t)\\) for each with the three steps of 11.1.3: components, vector form, domain.",
+              "Example 1: a ball hit into the air (2D)\nOrigin at the batter, \\(x\\)-axis horizontal, \\(y\\)-axis vertical. Take horizontal speed 20 m/s, upward speed 15 m/s and \\(g = 9.8\\) m/s² (the model of the book's projectile example).\n\\[x(t) = 20t\\]\n\\[y(t) = 15t - 4.9t^2\\]\n\\[\\mathbf{r}(t) = 20t\\,\\hat{i} + (15t - 4.9t^2)\\,\\hat{j}\\]\nWhy: the ball moves forward and up or down at the same time, so its position needs two numbers at every instant; \\(t \\ge 0\\) because \\(t\\) is time.",
+              "What the function tells us\n\\[\\mathbf{r}(2) = 40\\,\\hat{i} + (30 - 19.6)\\,\\hat{j}\\]\n\\[= 40\\,\\hat{i} + 10.4\\,\\hat{j}\\]\nWhy: after 2 s the ball is 40 m away and 10.4 m high. A single number (say its distance from the batter) cannot tell both how far and how high the ball is.",
+              "Example 2: an aeroplane after take-off (3D)\nOrigin at the control tower, \\(x\\) east, \\(y\\) north, \\(z\\) up. Take ground speeds 200 m/s east and 150 m/s north, and a climb of 10 m/s.\n\\[\\mathbf{r}(t) = 200t\\,\\hat{i} + 150t\\,\\hat{j}\\]\n\\[\\quad + 10t\\,\\hat{k}\\]\n\\[\\mathbf{r}(60) = 12000\\,\\hat{i} + 9000\\,\\hat{j}\\]\n\\[\\quad + 600\\,\\hat{k}\\]\nWhy: after one minute the plane is 12 km east, 9 km north and 600 m high. Air traffic control needs all three coordinates at once; one number gives no direction.",
+              "More situations\nThe position of a satellite in orbit (the book's Figure 11.2), a drone on a search pattern, the GPS track of a car, the wind velocity at a weather station, the force on a robotic arm.\nWhy: each of these has a magnitude and a direction (several components) that change with time.",
+              "Check\nBoth functions take one input \\(t\\) and give a vector whose components are scalar functions of \\(t\\): exactly the definition in 11.1.2 \\(\\checkmark\\)."
+            ],
+            "final_answer": "(1) A ball hit into the air: \\(\\mathbf{r}(t) = 20t\\,\\hat{i} + (15t - 4.9t^2)\\,\\hat{j}\\), \\(t \\ge 0\\).\n(2) An aeroplane climbing after take-off: \\(\\mathbf{r}(t) = 200t\\,\\hat{i} + 150t\\,\\hat{j} + 10t\\,\\hat{k}\\), \\(t \\ge 0\\).\nIn both, the position has several components and a direction, so a single number is not enough."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 11.1 (none for the whole of Unit 11). Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book. This question is open: many correct answers exist. Ours is one model answer built with the book's three steps (11.1.3); any function that models the motion correctly is also right."
+          }
+        ]
+      }
+    }
+  ]
+}
