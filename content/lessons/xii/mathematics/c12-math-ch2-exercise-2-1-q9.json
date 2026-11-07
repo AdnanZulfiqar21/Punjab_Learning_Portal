@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-1-Q9",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-1-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 43,
+          "note": "Exercise 2.1, Question 9: differentiate y = sec(tan x); book p. 41 (Q9 lies under both instruction lines 'In 7 - 9' and 'In 9 - 12'). No printed answers."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9. Differentiate w.r.t. the variable involved: \\(y = \\sec(\\tan x)\\)",
+            "explanation": "A function inside a function: \\(\\sec\\) of \\(\\tan x\\).\nLet \\(u = \\tan x\\); then \\(y = \\sec u\\) and the chain rule applies.\nPlan: \\(\\frac{dy}{du} = \\sec u\\tan u\\), \\(\\frac{du}{dx} = \\sec^2 x\\), multiply, put \\(u\\) back.",
+            "steps": [
+              "Given: \\(y = \\sec(\\tan x)\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: chain rule with the substitution \\(u = \\tan x\\).",
+              "Substitution\n\\[u = \\tan x,\\quad y = \\sec u\\]\nWhy: the outer function is \\(\\sec\\), the inner one is \\(\\tan x\\).",
+              "The two derivatives\n\\[\\dfrac{dy}{du} = \\sec u\\tan u\\]\n\\[\\dfrac{du}{dx} = \\sec^2 x\\]\nWhy: \\((\\sec u)' = \\sec u\\tan u\\) (Question 1(a)) and \\((\\tan x)' = \\sec^2 x\\).",
+              "Chain rule\n\\[\\dfrac{dy}{dx} = \\sec u\\tan u \\cdot \\sec^2 x\\]\n\\[= \\sec^2 x\\,\\sec(\\tan x)\\tan(\\tan x)\\]\nWhy: \\(\\frac{dy}{dx} = \\frac{dy}{du}\\cdot\\frac{du}{dx}\\); \\(u = \\tan x\\) goes back inside the brackets: \\(\\tan u = \\tan(\\tan x)\\), not \\(\\tan^2 x\\).",
+              "Check at x = 0\n\\[\\sec^2 0\\,\\sec 0\\tan 0 = 1 \\cdot 1 \\cdot 0 = 0\\]\nWhy: \\(\\tan x\\) is near 0 there and \\(\\sec\\) has its lowest point at 0, so \\(y\\) has a flat point at \\(x = 0\\)."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = \\sec^2 x\\,\\sec(\\tan x)\\tan(\\tan x)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The instruction lines overlap: 'In 7 - 9, find \\(\\frac{dy}{dx}\\) by making suitable substitutions and applying the Chain Rule' and 'In 9 - 12, differentiate w.r.t the variable involved' both include Question 9. The first line was most likely meant to read 'In 7 - 8'. The answer does not change: the substitution and chain rule used above satisfy both instructions."
+          }
+        ]
+      }
+    }
+  ]
+}

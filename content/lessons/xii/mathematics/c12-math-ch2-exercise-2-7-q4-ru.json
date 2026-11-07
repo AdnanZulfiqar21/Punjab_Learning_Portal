@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-7-Q4-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-7-q4",
+      "title": "Question 4 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 72,
+          "pdf_to": 72,
+          "note": "Exercise 2.7, Question 4 (book page 70). The book prints no answers for Unit 2; results verified with sympy."
+        }
+      ],
+      "variant_of": "C12-MATH-CH2-EXERCISE-2-7-Q4",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. A wire of 20 meters is cut into two pieces. One piece is bent into a square and the other into a circle. How should the wire be cut to maximize the total area enclosed?",
+            "explanation": "Yeh maximum ka sawal hai, lekin aik khaas qism ka: kaat (cut) 0 se 20 meter ke darmiyan kahin bhi ho sakta hai, yani closed interval hai.\nDiya kya hai? 20 meter taar; aik tukre ka square banana hai, doosre ka daira (circle).\nFind kya karna hai? Taar kahan se kaatein ke dono shakalon ka kul area sab se zyada ho.\nRule kaunsa? \\(A(x)\\) bana kar critical point aur second derivative test. Agar critical point ulti qism ka nikle to interval ke dono kinaron (end points) ko compare karna.\nPlan: pehle aam tareeqa, phir graph se samajhna ke asal jawab kahan hai. Is sawal mein aik chhupa hua sabaq hai: derivative zero hone ka matlab hamesha maximum nahi hota. Yeh sawal isi liye khaas hai, aur kitab ki wording ki ghalti bhi isi se judi hai (neeche dekhiye).",
+            "steps": [
+              "Diya gaya: taar 20 m; \\(x\\) m wala tukra square banega, baqi \\((20 - x)\\) m circle, jahan \\(0 \\le x \\le 20\\).\nMaloom karna: woh kaat jis se kul area sab se zyada ho.\nTareeqa: kul area ko \\(x\\) ka function banana; critical point aur second derivative test; closed interval hai to end points bhi check karne hain.",
+              "Har shakal ka area\nSquare: perimeter \\(4a = x\\), to side \\(a = \\frac{x}{4}\\) aur area \\(\\frac{x^{2}}{16}\\).\nCircle: \\(2\\pi R = 20 - x\\), to \\(R = \\frac{20 - x}{2\\pi}\\) aur area \\(\\pi R^{2} = \\frac{(20 - x)^{2}}{4\\pi}\\).\n\\[A(x) = \\dfrac{x^{2}}{16} + \\dfrac{(20 - x)^{2}}{4\\pi} \\quad \\text{...(1)}\\]\nKyun: taar hi har shakal ka kinara (perimeter) ban jata hai. Square ki char barabar sides hain, is liye side perimeter ka chautha hissa hai; aur daire ki circumference \\(2\\pi R\\) hai, is liye radius circumference ko \\(2\\pi\\) se divide karne par milta hai. Phir \\(\\pi R^{2}\\) mein \\(\\pi\\) aik dafa cancel ho kar \\(4\\pi\\) neeche bachta hai.",
+              "Critical point\n\\[\\dfrac{dA}{dx} = \\dfrac{x}{8} - \\dfrac{20 - x}{2\\pi} \\quad \\text{...(2)}\\]\n\\[\\pi x - 4(20 - x) = 0 \\Rightarrow (4 + \\pi)x = 80\\]\n\\[x = \\dfrac{80}{4 + \\pi} \\approx 11.20\\text{ m}\\]\nKyun: \\((20 - x)^{2}\\) par chain rule: \\(2(20 - x)\\) times andar ka derivative \\((-1)\\). Phir fractions hatane ke liye poori equation ko \\(8\\pi\\) se multiply kiya.",
+              "Second derivative test\n\\[\\dfrac{d^{2}A}{dx^{2}} = \\dfrac{1}{8} + \\dfrac{1}{2\\pi} > 0\\]\nKyun: second derivative positive hai, yani yeh critical point minimum hai, maximum nahi! Yahan kul area sab se kam hai: \\(A_{\\min} = \\frac{100}{4 + \\pi} \\approx 14.00\\text{ m}^{2}\\).\nDhyan dein: bahut se bachche yahan ruk kar \\(x = 11.20\\) ko maximum likh dete hain. Second derivative ka sign hamesha dekhiye.",
+              "End points compare karein\n\\[x = 0: \\ A(0) = \\dfrac{400}{4\\pi} = \\dfrac{100}{\\pi} \\approx 31.83\\text{ m}^{2}\\]\n\\[x = 20: \\ A(20) = \\dfrac{400}{16} = 25\\text{ m}^{2}\\]\nKyun: closed interval par continuous function ki sab se bari value ya to critical point par hoti hai ya kisi kinare par. Akela critical point minimum nikla, is liye maximum kinare par hi hoga. Graph mein dekhiye: curve beech mein neeche jati hai aur sab se oonchi \\(x = 0\\) par hai.",
+              "Jawab ka matlab\nSab se zyada area \\(\\frac{100}{\\pi} \\approx 31.83\\text{ m}^{2}\\) tab hai jab saari taar ka daira bana diya jaye (\\(x = 0\\)).\nKyun: barabar perimeter mein daira square se zyada jagah gherta hai. Isi liye roti gol hoti hai aur paani ki tankiyan aksar gol hoti hain. Agar taar ko lazmi do tukron mein kaatna ho, to square wala tukra jitna chhota ho sake utna behtar.",
+              "Tasdeeq\n\\[A(0) = 31.83 > A(20) = 25 > A\\!\\left(\\tfrac{80}{4 + \\pi}\\right) \\approx 14.00\\]\n\\(x = \\frac{80}{4 + \\pi}\\) par square ki side \\(\\frac{20}{4 + \\pi}\\), daire ka radius \\(\\frac{10}{4 + \\pi}\\), aur \\(\\frac{400 + 100\\pi}{(4 + \\pi)^{2}} = \\frac{100}{4 + \\pi}\\) ✓. Teeno values ki tarteeb graph se bhi milti hai: beech wala point sab se neecha, aur baayan kinara sab se ooncha."
+            ],
+            "final_answer": "Maximum: poori 20 m taar (ya jitni zyada ho sake) ka daira banayein; sab se zyada area \\(\\frac{100}{\\pi} \\approx 31.83\\text{ m}^{2}\\) hai. (Square ke liye \\(\\frac{80}{4 + \\pi} \\approx 11.20\\) m aur circle ke liye \\(\\frac{20\\pi}{4 + \\pi} \\approx 8.80\\) m kaatne se area sab se kam, \\(\\frac{100}{4 + \\pi} \\approx 14.00\\text{ m}^{2}\\), hota hai.)",
+            "answer_figure": {
+              "$asset": "c12-math-ch2-fig-ex2-7-q4-area-graph",
+              "alt": "Kul area A(x) = x square by 16 jama (20 minus x) square by 4 pi ka graph, x = 0 se 20 tak. Curve (0, 31.83) se neeche aa kar sab se nichle point (11.20, 14.00) tak jati hai aur phir (20, 25) tak oopar jati hai. Sab se oonchi value x = 0 par hai, jab saari taar ka daira banta hai.",
+              "caption": "Exercise 2.7 Question 4 ka answer sketch: square wale tukre ki lambai ke saath kul area; critical point sab se neecha point hai, sab se oonchi value kinare x = 0 par (hamari banayi hui tasveer)"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Sawal maximum area wala kaat poochta hai, lekin akela critical point \\(x = \\frac{80}{4 + \\pi}\\) minimum area deta hai (\\(\\frac{d^{2}A}{dx^{2}} > 0\\)). Maximum end point \\(x = 0\\) par hai: square bilkul nahi, poori taar ka daira, area \\(\\frac{100}{\\pi} \\approx 31.83\\text{ m}^{2}\\). Agar kitab ka matlab \"minimize\" tha to jawab yeh hai: square ke liye \\(\\frac{80}{4 + \\pi} \\approx 11.20\\) m, circle ke liye \\(\\frac{20\\pi}{4 + \\pi} \\approx 8.80\\) m, kam se kam area \\(\\frac{100}{4 + \\pi} \\approx 14.00\\text{ m}^{2}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

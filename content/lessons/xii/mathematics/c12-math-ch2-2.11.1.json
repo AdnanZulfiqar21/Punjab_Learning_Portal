@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.11.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.11.1",
+      "title": "2.11.1 Linearization",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 58,
+          "pdf_to": 61,
+          "note": "Book p. 56-59: 2.11.1 Linearization, Recall! box, Fig. 2.6 with the x, f(x), L(x) table, Examples 22-23"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "If a function \\(f(x)\\) is differentiable at \\(x = a\\), then the approximating function"
+          },
+          {
+            "type": "equation",
+            "latex": "L(x) = f(a) + f'(a)(x - a)",
+            "text_alt": "L of x equals f of a plus f prime of a times (x minus a)"
+          },
+          {
+            "type": "paragraph",
+            "text": "is the linearization of \\(f(x)\\) at \\(x = a\\). The approximation"
+          },
+          {
+            "type": "equation",
+            "latex": "f(x) \\approx L(x)",
+            "text_alt": "f of x is approximately equal to L of x"
+          },
+          {
+            "type": "paragraph",
+            "text": "of \\(f(x)\\) by \\(L(x)\\) is called the local linear approximation of \\(f(x)\\) at \\(x = a\\). The point \\(x = a\\) is referred to as the center of the approximation."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "text": "A function of the form \\(y = mx + c\\), where \\(m\\) is slope and \\(c\\) is the \\(y\\)-intercept, is called a linear function. The graph of a linear function is a straight line.\nLet \\((a, f(a))\\) be a point on the graph of \\(y = f(x)\\). If \\(f(x)\\) is differentiable, then the equation of tangent line at \\((a, f(a))\\) is given by:\n\\(y = f(a) + f'(a()x - a)\\).",
+            "book_errors": [
+              "\\(y = f(a) + f'(a()x - a)\\)"
+            ],
+            "title": "Recall!"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "text": "The Recall! box prints the tangent line as \\(y = f(a) + f'(a()x - a)\\) (a misplaced bracket). It should be \\(y = f(a) + f'(a)(x - a)\\).",
+            "title": "Book correction"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "text": "Why does this formula work? Compare it with the Recall! box: \\(L(x)\\) is exactly the tangent line at \\((a, f(a))\\), written with \\(L(x)\\) in place of \\(y\\).\nAt \\(x = a\\): \\(L(a) = f(a)\\), so the line touches the curve there; and \\(L'(x) = f'(a)\\), so it has the same slope as the curve there. Same height and same direction at \\(a\\): that is why the two stay close for \\(x\\) near \\(a\\).\nWhen to use it: when \\(f(x)\\) is hard to evaluate but \\(f(a)\\) and \\(f'(a)\\) are easy at a nearby point \\(a\\) (a perfect square, a perfect cube, a standard angle).",
+            "title": "Teaching note"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "text": "The recipe (use it in every question):\n1. Choose \\(f(x)\\) and a centre \\(a\\) close to the required value, where \\(f(a)\\) is easy.\n2. Find \\(f(a)\\).\n3. Find \\(f'(x)\\) and then \\(f'(a)\\).\n4. Write \\(L(x) = f(a) + f'(a)(x - a)\\).\n5. Put the required \\(x\\) into \\(L(x)\\) and write the result with \\(\\approx\\).",
+            "title": "Teaching note"
+          },
+          {
+            "type": "paragraph",
+            "text": "We can see in Fig. 2.6, the tangent line \\(L(x) = 2x - 1\\) to the graph of the curve \\(f(x) = x^{2}\\) at \\((1, f(1))\\) lies close to the curve near the point of tangency. For a small interval on either side of \\(x = 1\\), \\(y\\)-values of the tangent line provide good approximations to the \\(y\\)-values of the curve \\(f(x) = x^{2}\\). We observe this phenomenon by observing the table of values for the difference between the values of \\(L(x)\\) and \\(f(x)\\). The phenomenon is true not just for this curve; every differentiable curve behaves locally like its tangent line."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch2-fig-2-11-tangent-to-x-squared",
+            "alt": "Graph of the parabola f(x) = x squared and the straight line L(x) = 2x minus 1. The line touches the parabola at the point (1, 1), marked as (1, f(1)), and stays close to it near x = 1; it cuts the x-axis at x = 0.5.",
+            "caption": "Figure 2.6: the tangent line L(x) = 2x − 1 to f(x) = x² at (1, f(1)) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "table",
+            "header": [
+              "\\(x\\)",
+              "0.7",
+              "0.8",
+              "0.9",
+              "1",
+              "1.1",
+              "1.2",
+              "1.3"
+            ],
+            "rows": [
+              [
+                "\\(f(x) = x^{2}\\)",
+                "0.49",
+                "0.64",
+                "0.81",
+                "1",
+                "1.21",
+                "1.44",
+                "1.69"
+              ],
+              [
+                "\\(L(x) = 2x - 1\\)",
+                "0.4",
+                "0.6",
+                "0.8",
+                "1",
+                "1.2",
+                "1.4",
+                "1.6"
+              ],
+              [
+                "\\(f(x) - L(x)\\)",
+                "0.09",
+                "0.04",
+                "0.01",
+                "0",
+                "0.01",
+                "0.04",
+                "0.09"
+              ]
+            ],
+            "caption": "Values of f(x) = x², L(x) = 2x − 1 and their difference near x = 1"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "text": "Where does \\(L(x) = 2x - 1\\) come from? \\(f(x) = x^{2}\\), \\(a = 1\\): \\(f(1) = 1\\), \\(f'(x) = 2x\\), \\(f'(1) = 2\\). So \\(L(x) = 1 + 2(x - 1) = 2x - 1\\).\nRead the last row of the table: the difference is 0 at \\(x = 1\\), only 0.01 at \\(x = 0.9\\) and \\(1.1\\), and grows to 0.09 at \\(0.7\\) and \\(1.3\\). In fact \\(f(x) - L(x) = x^{2} - 2x + 1 = (x - 1)^{2}\\): the error is the square of the distance from the centre. Halve the distance and the error becomes a quarter. This is why the approximation is so good close to the centre.",
+            "title": "Teaching note"
+          },
+          {
+            "type": "example",
+            "title": "Example 22",
+            "problem": "(a) Find the local linear approximation of \\(f(x) = \\sqrt{2x - 1}\\) at \\(x = 5\\).\n(b) Use the local linear approximation obtained in part (a) to approximate \\(\\sqrt{9.2}\\), and compare your approximation to the result produced directly by calculator.",
+            "steps": [
+              "Given: \\(f(x) = \\sqrt{2x - 1}\\), centre \\(a = 5\\).\nTo find: (a) \\(L(x)\\) at \\(x = 5\\); (b) an estimate of \\(\\sqrt{9.2}\\) and its comparison with the calculator.\nMethod: \\(L(x) = f(a) + f'(a)(x - a)\\). We need only two numbers, \\(f(5)\\) and \\(f'(5)\\). For (b) we find the \\(x\\) that makes \\(2x - 1 = 9.2\\) and put it in \\(L(x)\\).",
+              "(a) Step 1: Differentiate\n\\[f(x) = \\sqrt{2x - 1} \\quad \\text{...(1)}\\]\n\\[f'(x) = \\tfrac{1}{2}(2x - 1)^{-1/2}(2)\\]\n\\[f'(x) = \\dfrac{1}{\\sqrt{2x - 1}} \\quad \\text{...(2)}\\]\nWhy: \\(\\sqrt{u} = u^{1/2}\\); the power rule gives \\(\\tfrac{1}{2}u^{-1/2}\\), and the chain rule multiplies by \\(u' = 2\\). The 2 and \\(\\tfrac{1}{2}\\) cancel.",
+              "Step 2: Values at the centre \\(x = 5\\)\n\\[f(5) = \\sqrt{2(5) - 1} = \\sqrt{9} = 3\\]\n\\[f'(5) = \\dfrac{1}{\\sqrt{9}} = \\dfrac{1}{3}\\]\nWhy: \\(x = 5\\) is chosen because \\(2(5) - 1 = 9\\) is a perfect square, so both values come out exactly.",
+              "Step 3: Build the linearization\n\\[L(x) = f(5) + f'(5)(x - 5)\\]\n\\[= 3 + \\tfrac{1}{3}(x - 5)\\]\n\\[= \\tfrac{1}{3}(9 + x - 5)\\]\n\\[L(x) = \\tfrac{1}{3}(x + 4)\\]\nWhy: this is the tangent line at \\((5, 3)\\). Taking \\(\\tfrac{1}{3}\\) common makes it neat.\nSo \\(\\sqrt{2x - 1} \\approx \\tfrac{1}{3}(x + 4)\\) near \\(x = 5\\) ...(3)",
+              "(b) Step 4: Which \\(x\\) gives \\(\\sqrt{9.2}\\)?\n\\[2x - 1 = 9.2\\]\n\\[x = 5.1\\]\nWhy: \\(\\sqrt{9.2}\\) is \\(f(5.1)\\), and 5.1 is very close to the centre 5, so the approximation should be good.",
+              "Step 5: Substitute \\(x = 5.1\\) in (3)\n\\[\\sqrt{2(5.1) - 1} \\approx \\tfrac{1}{3}(5.1 + 4)\\]\n\\[\\sqrt{9.2} \\approx \\tfrac{1}{3}(9.1)\\]\n\\[\\sqrt{9.2} \\approx 3.0333 \\quad \\text{...(4)}\\]\nWhy: on the right side there is no square root any more: only adding and dividing.",
+              "Step 6: Compare with the calculator\n\\[\\sqrt{9.2} = 3.0331 \\quad \\text{...(5)}\\]\nFrom (4) and (5) the calculator value is very close to the linear approximation.\nWhy: \\(x = 5.1\\) is only 0.1 away from the centre, so the curve and its tangent are almost together there.",
+              "Check:\n\\[3.0333^{2} \\approx 9.2011\\]\nVery close to 9.2. The difference \\(3.0333 - 3.0331 = 0.0002\\) is tiny; the estimate is slightly too big because \\(\\sqrt{2x - 1}\\) bends below its tangent line."
+            ],
+            "answer": "(a) \\(L(x) = \\tfrac{1}{3}(x + 4)\\), i.e. \\(\\sqrt{2x - 1} \\approx \\tfrac{1}{3}(x + 4)\\) near \\(x = 5\\). (b) \\(\\sqrt{9.2} \\approx 3.0333\\); calculator \\(3.0331\\): very close."
+          },
+          {
+            "type": "example",
+            "title": "Example 23",
+            "problem": "(a) Find the local linear approximation of \\(f(x) = \\cos x\\) at \\(x = \\dfrac{\\pi}{2}\\).\n(b) Use the local linear approximation obtained in part (a) to approximate \\(\\cos 91^\\circ\\), and compare your approximation to the result produced directly by a calculator.",
+            "steps": [
+              "Given: \\(f(x) = \\cos x\\), centre \\(a = \\frac{\\pi}{2}\\) (that is, \\(90^\\circ\\)).\nTo find: (a) \\(L(x)\\); (b) an estimate of \\(\\cos 91^\\circ\\) and its comparison with the calculator.\nMethod: \\(L(x) = f(a) + f'(a)(x - a)\\). \\(91^\\circ\\) is just \\(1^\\circ\\) more than \\(90^\\circ\\), whose cosine we know exactly. The angle must be in radians, because \\(\\frac{d}{dx}\\cos x = -\\sin x\\) holds only in radians.",
+              "(a) Step 1: Differentiate\n\\[f(x) = \\cos x \\quad \\text{...(1)}\\]\n\\[f'(x) = -\\sin x \\quad \\text{...(2)}\\]\nWhy: standard derivative of cosine.",
+              "Step 2: Values at \\(x = \\frac{\\pi}{2}\\)\n\\[f\\left(\\tfrac{\\pi}{2}\\right) = \\cos\\tfrac{\\pi}{2} = 0\\]\n\\[f'\\left(\\tfrac{\\pi}{2}\\right) = -\\sin\\tfrac{\\pi}{2} = -1\\]\nWhy: \\(\\cos 90^\\circ = 0\\) and \\(\\sin 90^\\circ = 1\\).",
+              "Step 3: The linearization at \\(x = \\frac{\\pi}{2}\\)\n\\[L(x) = f\\left(\\tfrac{\\pi}{2}\\right) + f'\\left(\\tfrac{\\pi}{2}\\right)\\left(x - \\tfrac{\\pi}{2}\\right)\\]\n\\[= 0 + (-1)\\left(x - \\tfrac{\\pi}{2}\\right)\\]\n\\[L(x) = -x + \\tfrac{\\pi}{2} \\quad \\text{...(3)}\\]\nWhy: put the two values in the formula and open the bracket.\nSo \\(f(x) \\approx L(x)\\), and from (1) and (3):\n\\[\\cos x \\approx -x + \\tfrac{\\pi}{2} \\quad \\text{...(4)}\\]",
+              "(b) Step 4: Convert \\(91^\\circ\\) to radians\n\\[91^\\circ = 91 \\times \\dfrac{\\pi}{180} = \\dfrac{91\\pi}{180}\\]\nSubstitute \\(x = 91^\\circ = 1.588825\\) into equation (4).\nWhy: formula (4) was made with \\(x\\) in radians, so the angle must be in radians too.",
+              "Step 5: Substitute in (4)\n\\[\\cos 91^\\circ \\approx -\\dfrac{91\\pi}{180} + \\dfrac{\\pi}{2}\\]\n\\[= -\\dfrac{\\pi}{180}\\]\n\\[\\cos 91^\\circ \\approx -0.01745329 \\quad \\text{...(5)}\\]\nWhy: \\(\\frac{\\pi}{2} = \\frac{90\\pi}{180}\\), so the two terms leave just \\(-\\frac{\\pi}{180}\\), which is \\(-1^\\circ\\) in radians.",
+              "Step 6: Compare with the calculator\n\\[\\cos 91^\\circ = -0.01745240 \\quad \\text{...(6)}\\]\nFrom expressions (4) and (5), we see that the calculator value is very close to the value obtained by linear approximation.\nWhy: the two values agree to five decimal places, because \\(91^\\circ\\) is only \\(1^\\circ\\) (about 0.0175 radian) from the centre.",
+              "Check:\n\\[-0.01745329 - (-0.01745240)\\]\n\\[= -0.00000089\\]\nThe error is less than one millionth, so the estimate is excellent."
+            ],
+            "answer": "(a) \\(L(x) = -x + \\frac{\\pi}{2}\\), i.e. \\(\\cos x \\approx -x + \\frac{\\pi}{2}\\) near \\(x = \\frac{\\pi}{2}\\). (b) \\(\\cos 91^\\circ \\approx -\\frac{\\pi}{180} \\approx -0.01745329\\); calculator \\(-0.01745240\\): very close.",
+            "book_errors": [
+              "\\(x = 91^\\circ = 1.588825\\)",
+              "From expressions (4) and (5)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "text": "In Example 23(b) the book prints \\(x = 91^\\circ = 1.588825\\). The correct radian value is \\(91^\\circ = \\frac{91\\pi}{180} = 1.588250\\) (the digits are misprinted; the book's later result \\(-0.01745329\\) is correct).\nThe book then says \"From expressions (4) and (5)\"; the two values being compared are (5) (the approximation) and (6) (the calculator value), so it should read \"From expressions (5) and (6)\".",
+            "title": "Book correction"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "text": "1. Linearization of \\(f\\) at \\(x = a\\): \\(L(x) = f(a) + f'(a)(x - a)\\), the tangent line at \\((a, f(a))\\).\n2. Local linear approximation: \\(f(x) \\approx L(x)\\) for \\(x\\) near the centre \\(a\\).\n3. Choose the centre where \\(f(a)\\) and \\(f'(a)\\) are easy and which is close to the required value.\n4. For trigonometric functions, angles must be in radians.\n5. The error grows as \\(x\\) moves away from \\(a\\) (for \\(x^{2}\\) it is exactly \\((x - a)^{2}\\)).",
+            "title": "Key points"
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "text": "1. Using \\(f'(x)\\) instead of the number \\(f'(a)\\) in the formula: the slope is fixed at the centre.\n2. Putting degrees into \\(\\cos x \\approx -x + \\frac{\\pi}{2}\\): \\(x = 91\\) gives nonsense; use \\(\\frac{91\\pi}{180}\\).\n3. Writing \\(=\\) instead of \\(\\approx\\) for the estimate.\n4. Choosing a centre far from the required value, which makes the error large.",
+            "title": "Common mistake"
+          }
+        ]
+      }
+    }
+  ]
+}

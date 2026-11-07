@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-4-Q1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-4-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 57,
+          "pdf_to": 57,
+          "note": "Exercise 2.4, Question 1: book p. 55-56; no printed answers for Unit 2 (verified with sympy and the solution book)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Determine the intervals on which \\(f\\) is increasing or decreasing for the domain mentioned: \\(f(x) = \\sin x\\); \\(x \\in (0, 2\\pi)\\).",
+            "explanation": "An increasing/decreasing question on a given domain.\nGiven \\(f(x) = \\sin x\\) on \\((0, 2\\pi)\\); we must find where \\(f'\\) is positive and where it is negative.\nPlan: \\(f'(x) = \\cos x\\), critical points from \\(\\cos x = 0\\), then one test point in each sub-interval.",
+            "steps": [
+              "Given: \\(f(x) = \\sin x\\), \\(x \\in (0, 2\\pi)\\).\nTo find: intervals of increase and decrease.\nMethod: the four-step method of 2.9.2, because the sign of \\(f'\\) decides increasing or decreasing.",
+              "Derivative\n\\[f'(x) = \\cos x\\]\nWhy: \\(\\frac{d}{dx}\\sin x = \\cos x\\); it exists for every \\(x\\), so critical points come only from \\(f'(x) = 0\\).",
+              "Critical points in \\((0, 2\\pi)\\)\n\\[\\cos x = 0\\]\n\\[x = \\dfrac{\\pi}{2},\\quad x = \\dfrac{3\\pi}{2}\\]\nWhy: cosine is zero at odd multiples of \\(\\frac{\\pi}{2}\\); only these two lie between 0 and \\(2\\pi\\).",
+              "Sub-intervals\n\\[\\left(0, \\tfrac{\\pi}{2}\\right),\\ \\left(\\tfrac{\\pi}{2}, \\tfrac{3\\pi}{2}\\right),\\ \\left(\\tfrac{3\\pi}{2}, 2\\pi\\right)\\]\nWhy: the critical points cut the domain into pieces where the sign of \\(f'\\) cannot change.",
+              "Test points\n\\[f'\\left(\\tfrac{\\pi}{4}\\right) = \\cos\\tfrac{\\pi}{4} = \\tfrac{1}{\\sqrt{2}} > 0\\]\n\\[f'(\\pi) = \\cos\\pi = -1 < 0\\]\n\\[f'\\left(\\tfrac{7\\pi}{4}\\right) = \\cos\\tfrac{7\\pi}{4} = \\tfrac{1}{\\sqrt{2}} > 0\\]\nWhy: cosine is positive in quadrants I and IV and negative in quadrants II and III.",
+              "Check: \\(\\sin x\\) rises from 0 to 1 at \\(\\frac{\\pi}{2}\\), falls to \\(-1\\) at \\(\\frac{3\\pi}{2}\\), and rises back towards 0: the familiar sine wave."
+            ],
+            "final_answer": "Increasing on \\(\\left(0, \\frac{\\pi}{2}\\right)\\) and \\(\\left(\\frac{3\\pi}{2}, 2\\pi\\right)\\); decreasing on \\(\\left(\\frac{\\pi}{2}, \\frac{3\\pi}{2}\\right)\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Determine the intervals on which \\(f\\) is increasing or decreasing for the domain mentioned: \\(f(x) = 4 - x^{2}\\); \\(x \\in \\mathbb{R} = (-\\infty, \\infty)\\).",
+            "explanation": "An increasing/decreasing question on the whole real line.\nGiven \\(f(x) = 4 - x^{2}\\); find the sign of \\(f'\\).\nPlan: \\(f'(x) = -2x\\), one critical point, two test points.",
+            "steps": [
+              "Given: \\(f(x) = 4 - x^{2}\\), \\(x \\in (-\\infty, \\infty)\\).\nTo find: intervals of increase and decrease.\nMethod: sign of \\(f'\\) on the pieces cut by the critical points.",
+              "Derivative\n\\[f'(x) = -2x\\]\nWhy: \\(\\frac{d}{dx}(4) = 0\\) and \\(\\frac{d}{dx}(x^{2}) = 2x\\).",
+              "Critical point\n\\[-2x = 0 \\Rightarrow x = 0\\]\nWhy: \\(f'\\) is a polynomial, defined everywhere, so only \\(f'(x) = 0\\) gives critical points.",
+              "Test points\n\\[f'(-1) = 2 > 0\\]\n\\[f'(1) = -2 < 0\\]\nWhy: one point from \\((-\\infty, 0)\\) and one from \\((0, \\infty)\\).",
+              "Check: \\(f(-2) = 0\\), \\(f(0) = 4\\), \\(f(2) = 0\\): the values go up to 4 and come down again; the graph is a downward parabola with top at \\((0, 4)\\)."
+            ],
+            "final_answer": "Increasing on \\((-\\infty, 0)\\); decreasing on \\((0, \\infty)\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Determine the intervals on which \\(f\\) is increasing or decreasing for the domain mentioned: \\(f(x) = x^{2} + 3x + 2\\); \\(x \\in [-4, 1]\\).",
+            "explanation": "An increasing/decreasing question on a closed interval.\nGiven \\(f(x) = x^{2} + 3x + 2\\) on \\([-4, 1]\\).\nPlan: \\(f'(x) = 2x + 3\\), critical point \\(-\\frac{3}{2}\\), test one point on each side inside \\([-4, 1]\\).",
+            "steps": [
+              "Given: \\(f(x) = x^{2} + 3x + 2\\), \\(x \\in [-4, 1]\\).\nTo find: intervals of increase and decrease within \\([-4, 1]\\).\nMethod: sign of \\(f'\\).",
+              "Derivative\n\\[f'(x) = 2x + 3\\]\nWhy: power rule; the constant 2 has derivative 0.",
+              "Critical point\n\\[2x + 3 = 0 \\Rightarrow x = -\\dfrac{3}{2}\\]\nWhy: \\(-\\frac{3}{2} = -1.5\\) lies in \\([-4, 1]\\), so it splits the domain into \\(\\left[-4, -\\frac{3}{2}\\right]\\) and \\(\\left[-\\frac{3}{2}, 1\\right]\\).",
+              "Test points\n\\[f'(-2) = -4 + 3 = -1 < 0\\]\n\\[f'(0) = 3 > 0\\]\nWhy: \\(-2\\) is in the left piece and 0 in the right piece.",
+              "Check: \\(f(-4) = 16 - 12 + 2 = 6\\), \\(f\\left(-\\frac{3}{2}\\right) = \\frac{9}{4} - \\frac{9}{2} + 2 = -\\frac{1}{4}\\), \\(f(1) = 6\\). Down from 6 to \\(-\\frac{1}{4}\\), then up to 6."
+            ],
+            "final_answer": "Decreasing on \\(\\left[-4, -\\frac{3}{2}\\right]\\); increasing on \\(\\left[-\\frac{3}{2}, 1\\right]\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Determine the intervals on which \\(f\\) is increasing or decreasing for the domain mentioned: \\(f(x) = \\sin x + \\frac{1}{4}\\cos 2x\\); \\(x \\in [0, 2\\pi]\\).",
+            "explanation": "An increasing/decreasing question with a trigonometric function.\nGiven \\(f(x) = \\sin x + \\frac{1}{4}\\cos 2x\\) on \\([0, 2\\pi]\\).\nPlan: differentiate (chain rule on \\(\\cos 2x\\)), factorise \\(f'\\) with \\(\\sin 2x = 2\\sin x\\cos x\\), find the critical points, test each piece.",
+            "steps": [
+              "Given: \\(f(x) = \\sin x + \\frac{1}{4}\\cos 2x\\), \\(x \\in [0, 2\\pi]\\).\nTo find: intervals of increase and decrease.\nMethod: sign of \\(f'\\); a factorised \\(f'\\) shows its sign clearly.",
+              "Derivative\n\\[f'(x) = \\cos x + \\tfrac{1}{4}(-\\sin 2x)(2)\\]\n\\[= \\cos x - \\tfrac{1}{2}\\sin 2x\\]\nWhy: chain rule: \\(\\frac{d}{dx}\\cos 2x = -\\sin 2x \\cdot 2\\).",
+              "Factorise\n\\[f'(x) = \\cos x - \\sin x\\cos x\\]\n\\[= \\cos x\\,(1 - \\sin x)\\]\nWhy: \\(\\sin 2x = 2\\sin x\\cos x\\), so \\(\\frac{1}{2}\\sin 2x = \\sin x\\cos x\\); then take out \\(\\cos x\\).",
+              "Critical points in \\([0, 2\\pi]\\)\n\\[\\cos x = 0 \\Rightarrow x = \\tfrac{\\pi}{2},\\ \\tfrac{3\\pi}{2}\\]\n\\[1 - \\sin x = 0 \\Rightarrow x = \\tfrac{\\pi}{2}\\]\nWhy: a product is zero when a factor is zero. The critical points are \\(\\frac{\\pi}{2}\\) and \\(\\frac{3\\pi}{2}\\).",
+              "Signs\nSince \\(1 - \\sin x \\ge 0\\) always, the sign of \\(f'\\) is the sign of \\(\\cos x\\):\n\\[f'\\left(\\tfrac{\\pi}{4}\\right) > 0,\\quad f'(\\pi) = -1 < 0,\\quad f'\\left(\\tfrac{7\\pi}{4}\\right) > 0\\]\nWhy: \\(\\sin x \\le 1\\); and \\(\\cos\\) is positive in quadrants I, IV, negative in II, III.",
+              "Check (values)\n\\[f(0) = \\tfrac{1}{4},\\ f\\left(\\tfrac{\\pi}{2}\\right) = \\tfrac{3}{4}\\]\n\\[f\\left(\\tfrac{3\\pi}{2}\\right) = -\\tfrac{5}{4},\\ f(2\\pi) = \\tfrac{1}{4}\\]\nUp from \\(\\frac{1}{4}\\) to \\(\\frac{3}{4}\\), down to \\(-\\frac{5}{4}\\), up to \\(\\frac{1}{4}\\): it agrees."
+            ],
+            "final_answer": "Increasing on \\(\\left[0, \\frac{\\pi}{2}\\right]\\) and \\(\\left[\\frac{3\\pi}{2}, 2\\pi\\right]\\); decreasing on \\(\\left[\\frac{\\pi}{2}, \\frac{3\\pi}{2}\\right]\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

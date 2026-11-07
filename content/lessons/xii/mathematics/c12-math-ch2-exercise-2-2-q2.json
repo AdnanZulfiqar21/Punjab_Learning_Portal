@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-2-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-2-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 46,
+          "pdf_to": 46,
+          "note": "Exercise 2.2, Question 2 (book p. 44): find dy/dx for six logarithmic functions; no printed answers for Unit 2 (checked with sympy)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Find \\(\\frac{dy}{dx}\\) if: \\(y = \\ln(e^{x} - e^{-x})\\)",
+            "explanation": "The logarithm of an expression in \\(x\\).\nPlan: \\(\\frac{d}{dx}(\\ln u) = \\frac{1}{u}\\frac{du}{dx}\\) with \\(u = e^{x} - e^{-x}\\); the log needs \\(u > 0\\), i.e. \\(x > 0\\).",
+            "steps": [
+              "Given: \\(y = \\ln(e^{x} - e^{-x})\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: Chain Rule for \\(\\ln u\\), \\(u = e^{x} - e^{-x}\\).",
+              "Domain\n\\[e^{x} - e^{-x} > 0 \\iff e^{2x} > 1 \\iff x > 0\\]\nWhy: a logarithm is defined only for a positive input (multiply by \\(e^{x} > 0\\) to get \\(e^{2x} > 1\\)).",
+              "Derivative of the inside\n\\[\\dfrac{du}{dx} = e^{x} - (-e^{-x}) = e^{x} + e^{-x}\\]\nWhy: \\(\\frac{d}{dx}(e^{-x}) = -e^{-x}\\), so subtracting it gives \\(+e^{-x}\\).",
+              "Chain Rule\n\\[\\dfrac{dy}{dx} = \\dfrac{1}{e^{x} - e^{-x}}\\cdot(e^{x} + e^{-x})\\]\n\\[= \\dfrac{e^{x} + e^{-x}}{e^{x} - e^{-x}}\\]\n\\[= \\dfrac{e^{2x} + 1}{e^{2x} - 1}\\]\nWhy: \\(\\frac{u'}{u}\\); the last form comes from multiplying top and bottom by \\(e^{x}\\).",
+              "Check: this answer is exactly the function of Question 1 (iv), so differentiating it again would give \\(-\\frac{4}{(e^{x} - e^{-x})^{2}}\\). Also at \\(x = 1\\): \\(\\frac{e + e^{-1}}{e - e^{-1}} \\approx \\frac{3.086}{2.350} \\approx 1.313 > 0\\), as expected since \\(y\\) increases for \\(x > 0\\)."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = \\frac{e^{x} + e^{-x}}{e^{x} - e^{-x}} = \\frac{e^{2x} + 1}{e^{2x} - 1}\\), \\(x > 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Find \\(\\frac{dy}{dx}\\) if: \\(y = \\log_{10}\\sqrt{\\frac{1 - x^{2}}{1 + x^{2}}}\\)",
+            "explanation": "A base-10 logarithm of the square root of a quotient.\nPlan: first break the log with the laws of logarithms (root = power \\(\\frac{1}{2}\\), quotient = difference), then use \\(\\frac{d}{dx}(\\log_a u) = \\frac{u'}{u\\ln a}\\) with \\(a = 10\\).",
+            "steps": [
+              "Given: \\(y = \\log_{10}\\sqrt{\\dfrac{1 - x^{2}}{1 + x^{2}}}\\), defined for \\(-1 < x < 1\\) (where \\(1 - x^{2} > 0\\)).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: simplify with log laws, then differentiate term by term.",
+              "Simplify first\n\\[y = \\log_{10}\\left(\\dfrac{1 - x^{2}}{1 + x^{2}}\\right)^{1/2}\\]\n\\[= \\dfrac{1}{2}\\log_{10}\\dfrac{1 - x^{2}}{1 + x^{2}}\\]\n\\[= \\dfrac{1}{2}\\left[\\log_{10}(1 - x^{2}) - \\log_{10}(1 + x^{2})\\right]\\]\nWhy: \\(\\sqrt{A} = A^{1/2}\\), \\(\\log A^{n} = n\\log A\\), \\(\\log\\frac{A}{B} = \\log A - \\log B\\).",
+              "Differentiate each log\n\\[\\dfrac{dy}{dx} = \\dfrac{1}{2}\\left[\\dfrac{-2x}{(1 - x^{2})\\ln 10} - \\dfrac{2x}{(1 + x^{2})\\ln 10}\\right]\\]\n\\[= -\\dfrac{x}{\\ln 10}\\left[\\dfrac{1}{1 - x^{2}} + \\dfrac{1}{1 + x^{2}}\\right]\\]\nWhy: \\(\\frac{d}{dx}(\\log_{10} u) = \\frac{u'}{u\\ln 10}\\); \\(u' = -2x\\) and \\(2x\\); then \\(-\\frac{x}{\\ln 10}\\) is taken out.",
+              "Add the fractions\n\\[\\dfrac{1}{1 - x^{2}} + \\dfrac{1}{1 + x^{2}} = \\dfrac{2}{1 - x^{4}}\\]\n\\[\\dfrac{dy}{dx} = -\\dfrac{2x}{(1 - x^{4})\\ln 10}\\]\nWhy: common denominator \\((1 - x^{2})(1 + x^{2}) = 1 - x^{4}\\); numerator \\((1 + x^{2}) + (1 - x^{2}) = 2\\).",
+              "Check: at \\(x = 0\\) the slope is 0; \\(y\\) is even (\\(y(-x) = y(x)\\)) with its largest value \\(\\log_{10} 1 = 0\\) at \\(x = 0\\), so a zero slope there fits. Sympy gives the same derivative. (Using \\(\\frac{1}{\\ln 10} = \\log_{10} e\\), the answer may also be written \\(-\\frac{2x\\log_{10} e}{1 - x^{4}}\\).)"
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = -\\frac{2x}{(1 - x^{4})\\ln 10}\\), \\(-1 < x < 1\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) Find \\(\\frac{dy}{dx}\\) if: \\(y = \\ln\\left(x - \\sqrt{x^{2} - 1}\\right)\\)",
+            "explanation": "The logarithm of \\(x - \\sqrt{x^{2} - 1}\\).\nPlan: \\(\\frac{d}{dx}(\\ln u) = \\frac{u'}{u}\\); the derivative of the square root needs the Chain Rule; a common factor then cancels.",
+            "steps": [
+              "Given: \\(y = \\ln\\left(x - \\sqrt{x^{2} - 1}\\right)\\); the root needs \\(|x| \\ge 1\\) and the log needs \\(x - \\sqrt{x^{2} - 1} > 0\\), which holds for \\(x \\ge 1\\). The derivative exists for \\(x > 1\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: Chain Rule with \\(u = x - \\sqrt{x^{2} - 1}\\).",
+              "Derivative of the square root\n\\[\\dfrac{d}{dx}\\sqrt{x^{2} - 1} = \\dfrac{1}{2\\sqrt{x^{2} - 1}}\\cdot 2x\\]\n\\[= \\dfrac{x}{\\sqrt{x^{2} - 1}}\\]\nWhy: \\(\\frac{d}{dx}\\sqrt{w} = \\frac{1}{2\\sqrt{w}}\\frac{dw}{dx}\\) with \\(w = x^{2} - 1\\).",
+              "Derivative of the inside\n\\[\\dfrac{du}{dx} = 1 - \\dfrac{x}{\\sqrt{x^{2} - 1}}\\]\n\\[= \\dfrac{\\sqrt{x^{2} - 1} - x}{\\sqrt{x^{2} - 1}}\\]\nWhy: common denominator \\(\\sqrt{x^{2} - 1}\\).",
+              "Chain Rule and cancel\n\\[\\dfrac{dy}{dx} = \\dfrac{1}{x - \\sqrt{x^{2} - 1}}\\cdot\\dfrac{-(x - \\sqrt{x^{2} - 1})}{\\sqrt{x^{2} - 1}}\\]\n\\[= -\\dfrac{1}{\\sqrt{x^{2} - 1}}\\]\nWhy: \\(\\sqrt{x^{2} - 1} - x = -(x - \\sqrt{x^{2} - 1})\\), so the bracket cancels with \\(u\\).",
+              "Check: \\((x - \\sqrt{x^{2} - 1})(x + \\sqrt{x^{2} - 1}) = x^{2} - (x^{2} - 1) = 1\\), so\n\\[y = -\\ln\\left(x + \\sqrt{x^{2} - 1}\\right)\\]\nDifferentiating this form gives \\(-\\frac{1 + x/\\sqrt{x^{2} - 1}}{x + \\sqrt{x^{2} - 1}} = -\\frac{1}{\\sqrt{x^{2} - 1}}\\). The same."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = -\\frac{1}{\\sqrt{x^{2} - 1}}\\), \\(x > 1\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iv)",
+            "prompt": "2 (iv) Find \\(\\frac{dy}{dx}\\) if: \\(y = \\ln(1 - \\cos^{2} x)\\)",
+            "explanation": "The logarithm of a trigonometric expression.\nPlan: \\(1 - \\cos^{2} x = \\sin^{2} x\\), so \\(y = \\ln(\\sin^{2} x) = 2\\ln|\\sin x|\\); then \\(\\frac{d}{dx}(\\ln u) = \\frac{u'}{u}\\).",
+            "steps": [
+              "Given: \\(y = \\ln(1 - \\cos^{2} x)\\), defined where \\(\\sin x \\ne 0\\), i.e. \\(x \\ne n\\pi\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: Chain Rule with \\(u = 1 - \\cos^{2} x\\).",
+              "Derivative of the inside\n\\[\\dfrac{du}{dx} = -2\\cos x\\cdot\\dfrac{d}{dx}(\\cos x)\\]\n\\[= -2\\cos x(-\\sin x) = 2\\sin x\\cos x\\]\nWhy: \\(\\cos^{2} x = (\\cos x)^{2}\\): power rule then derivative of \\(\\cos x\\).",
+              "Chain Rule\n\\[\\dfrac{dy}{dx} = \\dfrac{2\\sin x\\cos x}{1 - \\cos^{2} x}\\]\n\\[= \\dfrac{2\\sin x\\cos x}{\\sin^{2} x}\\]\n\\[= \\dfrac{2\\cos x}{\\sin x} = 2\\cot x\\]\nWhy: \\(\\frac{u'}{u}\\); Pythagorean identity \\(1 - \\cos^{2} x = \\sin^{2} x\\); cancel one \\(\\sin x\\).",
+              "Check: at \\(x = \\frac{\\pi}{2}\\), \\(y = \\ln 1 = 0\\) is the largest value of \\(y\\) (since \\(\\sin^{2} x \\le 1\\)), so the slope must be 0; indeed \\(2\\cot\\frac{\\pi}{2} = 0\\)."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = 2\\cot x\\), \\(x \\ne n\\pi\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(v)",
+            "prompt": "2 (v) Find \\(\\frac{dy}{dx}\\) if: \\(y = \\frac{\\ln x}{x^{2}}\\)",
+            "explanation": "A quotient: \\(\\ln x\\) over \\(x^{2}\\), defined for \\(x > 0\\).\nPlan: Quotient Rule with \\(u = \\ln x\\), \\(v = x^{2}\\); then cancel a common \\(x\\).",
+            "steps": [
+              "Given: \\(y = \\dfrac{\\ln x}{x^{2}}\\), \\(x > 0\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: Quotient Rule \\(\\frac{vu' - uv'}{v^{2}}\\), \\(u' = \\frac{1}{x}\\), \\(v' = 2x\\).",
+              "Quotient Rule\n\\[\\dfrac{dy}{dx} = \\dfrac{x^{2}\\cdot\\frac{1}{x} - \\ln x\\cdot 2x}{(x^{2})^{2}}\\]\n\\[= \\dfrac{x - 2x\\ln x}{x^{4}}\\]\nWhy: \\(\\frac{d}{dx}(\\ln x) = \\frac{1}{x}\\) (2.6) and \\(\\frac{d}{dx}(x^{2}) = 2x\\).",
+              "Simplify\n\\[= \\dfrac{x(1 - 2\\ln x)}{x^{4}}\\]\n\\[= \\dfrac{1 - 2\\ln x}{x^{3}}\\]\nWhy: take out \\(x\\) and cancel it (\\(x > 0\\), so \\(x \\ne 0\\)).",
+              "Check: at \\(x = 1\\): \\(\\frac{1 - 0}{1} = 1\\). Directly, \\(y \\approx \\frac{x - 1}{1}\\) near \\(x = 1\\) (because \\(\\ln x \\approx x - 1\\) and \\(x^{2} \\approx 1\\)), slope 1. It fits."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = \\frac{1 - 2\\ln x}{x^{3}}\\), \\(x > 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(vi)",
+            "prompt": "2 (vi) Find \\(\\frac{dy}{dx}\\) if: \\(y = \\frac{\\sqrt{x^{2} - 1}\\,(2x + 1)}{(x^{3} - 1)^{3/2}}\\)",
+            "explanation": "A product and quotient of several powers and roots.\nPlan: logarithmic differentiation: take \\(\\ln\\) of both sides, break with log laws, differentiate (left side implicitly), multiply by \\(y\\), then simplify.",
+            "steps": [
+              "Given: \\(y = \\dfrac{\\sqrt{x^{2} - 1}\\,(2x + 1)}{(x^{3} - 1)^{3/2}}\\). The power \\((x^{3} - 1)^{3/2}\\) in the denominator needs \\(x^{3} - 1 > 0\\), i.e. \\(x > 1\\); then every factor is positive and \\(y > 0\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: logarithmic differentiation (direct Product and Quotient Rules would be very long).",
+              "Take \\(\\ln\\) and expand\n\\[\\ln y = \\ln\\sqrt{x^{2} - 1} + \\ln(2x + 1)\\]\n\\[\\quad - \\ln(x^{3} - 1)^{3/2}\\]\n\\[\\ln y = \\tfrac{1}{2}\\ln(x^{2} - 1) + \\ln(2x + 1)\\]\n\\[\\quad - \\tfrac{3}{2}\\ln(x^{3} - 1)\\]\nWhy: \\(\\ln\\frac{AB}{C} = \\ln A + \\ln B - \\ln C\\) and \\(\\ln A^{n} = n\\ln A\\); allowed because every factor is positive for \\(x > 1\\).",
+              "Differentiate both sides w.r.t. \\(x\\)\n\\[\\dfrac{1}{y}\\dfrac{dy}{dx} = \\dfrac{1}{2}\\cdot\\dfrac{2x}{x^{2} - 1} + \\dfrac{2}{2x + 1}\\]\n\\[\\quad - \\dfrac{3}{2}\\cdot\\dfrac{3x^{2}}{x^{3} - 1}\\]\n\\[= \\dfrac{x}{x^{2} - 1} + \\dfrac{2}{2x + 1} - \\dfrac{9x^{2}}{2(x^{3} - 1)}\\]\nWhy: on the left \\(y\\) depends on \\(x\\), so \\(\\frac{d}{dx}(\\ln y) = \\frac{1}{y}\\frac{dy}{dx}\\) (implicit differentiation); each right-hand term uses \\(\\frac{u'}{u}\\).",
+              "Multiply by \\(y\\)\n\\[\\dfrac{dy}{dx} = y\\left[\\dfrac{x}{x^{2} - 1} + \\dfrac{2}{2x + 1} - \\dfrac{9x^{2}}{2(x^{3} - 1)}\\right]\\]\nwith \\(y = \\frac{\\sqrt{x^{2} - 1}\\,(2x + 1)}{(x^{3} - 1)^{3/2}}\\). This is already a correct answer.\nWhy: to get \\(\\frac{dy}{dx}\\) alone.",
+              "Simplify the bracket: common denominator\n\\(x^{2} - 1 = (x - 1)(x + 1)\\), \\(x^{3} - 1 = (x - 1)(x^{2} + x + 1)\\), so the common denominator is \\(2(x^{2} - 1)(2x + 1)(x^{2} + x + 1)\\). The three numerators:\n\\[2x(2x + 1)(x^{2} + x + 1)\\]\n\\[= 4x^{4} + 6x^{3} + 6x^{2} + 2x\\]\n\\[4(x^{2} - 1)(x^{2} + x + 1)\\]\n\\[= 4x^{4} + 4x^{3} - 4x - 4\\]\n\\[9x^{2}(x + 1)(2x + 1)\\]\n\\[= 18x^{4} + 27x^{3} + 9x^{2}\\]\nWhy: each fraction is multiplied by the factors its own denominator is missing (the third: \\(\\frac{9x^{2}}{2(x - 1)(x^{2} + x + 1)}\\) needs \\((x + 1)(2x + 1)\\)).",
+              "Combine (first + second - third)\n\\[(8x^{4} + 10x^{3} + 6x^{2} - 2x - 4)\\]\n\\[\\quad - (18x^{4} + 27x^{3} + 9x^{2})\\]\n\\[= -10x^{4} - 17x^{3} - 3x^{2} - 2x - 4\\]\n\\[[\\dots] = -\\dfrac{10x^{4} + 17x^{3} + 3x^{2} + 2x + 4}{2(x^{2} - 1)(2x + 1)(x^{2} + x + 1)}\\]\nWhy: add like powers.",
+              "Multiply by \\(y\\) and cancel\n\\[\\dfrac{dy}{dx} = -\\dfrac{10x^{4} + 17x^{3} + 3x^{2} + 2x + 4}{2\\sqrt{x^{2} - 1}\\,(x^{2} + x + 1)(x^{3} - 1)^{3/2}}\\]\nWhy: \\((2x + 1)\\) cancels, and \\(\\frac{\\sqrt{x^{2} - 1}}{x^{2} - 1} = \\frac{1}{\\sqrt{x^{2} - 1}}\\).",
+              "Check at \\(x = 2\\): \\(y = \\frac{5\\sqrt{3}}{7^{3/2}}\\); the bracket is \\(\\frac{2}{3} + \\frac{2}{5} - \\frac{36}{14} = -\\frac{158}{105}\\), so \\(\\frac{dy}{dx} = \\frac{5\\sqrt{3}}{7^{3/2}}\\left(-\\frac{158}{105}\\right) \\approx -0.7036\\).\nThe final formula: \\(-\\frac{316}{2\\sqrt{3}(7)(7^{3/2})} \\approx -0.7036\\). The same (also confirmed with sympy)."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = -\\frac{10x^{4} + 17x^{3} + 3x^{2} + 2x + 4}{2\\sqrt{x^{2} - 1}\\,(x^{2} + x + 1)(x^{3} - 1)^{3/2}}\\), \\(x > 1\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-1-Q15",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-1-q15",
+      "title": "Question 15",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 43,
+          "note": "Exercise 2.1, Question 15 (i)-(ii): implicit differentiation; book p. 41. Unit 2 has no printed answers."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15(i)",
+            "prompt": "15 (i) Use implicit differentiation to find \\(\\frac{dy}{dx}\\) if: \\(ax^2 + by^2 + 2gx + 2fy + c = 0\\)",
+            "explanation": "An implicit relation: \\(y\\) is not given alone on one side.\nDifferentiate every term w.r.t. \\(x\\), treating \\(y\\) as a function of \\(x\\) (section 2.3.3).\nPlan: differentiate, collect the \\(\\frac{dy}{dx}\\) terms, solve.",
+            "steps": [
+              "Given: \\(ax^2 + by^2 + 2gx + 2fy + c = 0\\) (\\(a, b, c, f, g\\) constants).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: implicit differentiation; every term containing \\(y\\) gets a factor \\(\\frac{dy}{dx}\\) by the chain rule.",
+              "Differentiate each term w.r.t. x\n\\[2ax + 2by\\dfrac{dy}{dx} + 2g + 2f\\dfrac{dy}{dx} + 0 = 0\\]\nWhy: \\(\\frac{d}{dx}(y^2) = 2y\\frac{dy}{dx}\\), \\(\\frac{d}{dx}(2fy) = 2f\\frac{dy}{dx}\\); the constant \\(c\\) gives 0.",
+              "Collect the dy/dx terms\n\\[(2by + 2f)\\dfrac{dy}{dx} = -(2ax + 2g)\\]\nWhy: keep \\(\\frac{dy}{dx}\\) terms on the left, move the rest to the right.",
+              "Solve\n\\[\\dfrac{dy}{dx} = -\\dfrac{2(ax + g)}{2(by + f)} = -\\dfrac{ax + g}{by + f}\\]\nWhy: divide by \\(2(by + f)\\), allowed when \\(by + f \\neq 0\\).",
+              "Check with a circle\n\\[a = b = 1,\\ g = f = 0:\\ x^2 + y^2 = -c\\]\n\\[\\dfrac{dy}{dx} = -\\dfrac{x}{y}\\]\nWhy: this is the well-known slope of a circle centred at the origin."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = -\\frac{ax + g}{by + f}\\), for \\(by + f \\neq 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15(ii)",
+            "prompt": "15 (ii) Use implicit differentiation to find \\(\\frac{dy}{dx}\\) if: \\(x + \\tan(xy) = 0\\)",
+            "explanation": "Implicit again; \\(\\tan(xy)\\) needs the chain rule, and \\(xy\\) needs the product rule.\nDifferentiate both sides w.r.t. \\(x\\), then solve for \\(\\frac{dy}{dx}\\).\nPlan: chain rule, product rule, collect, solve, simplify.",
+            "steps": [
+              "Given: \\(x + \\tan(xy) = 0\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: implicit differentiation with the chain and product rules.",
+              "Differentiate w.r.t. x\n\\[1 + \\sec^2(xy)\\dfrac{d}{dx}(xy) = 0\\]\nWhy: \\((\\tan w)' = \\sec^2 w \\cdot \\frac{dw}{dx}\\) with \\(w = xy\\).",
+              "Product rule on xy\n\\[1 + \\sec^2(xy)\\left(y + x\\dfrac{dy}{dx}\\right) = 0\\]\nWhy: \\(\\frac{d}{dx}(xy) = 1 \\cdot y + x\\frac{dy}{dx}\\).",
+              "Collect and solve\n\\[x\\sec^2(xy)\\dfrac{dy}{dx} = -1 - y\\sec^2(xy)\\]\n\\[\\dfrac{dy}{dx} = -\\dfrac{1 + y\\sec^2(xy)}{x\\sec^2(xy)}\\]\nWhy: move the terms without \\(\\frac{dy}{dx}\\) to the right, then divide.",
+              "Simplify\n\\[\\dfrac{dy}{dx} = -\\dfrac{\\cos^2(xy) + y}{x}\\]\nWhy: divide top and bottom by \\(\\sec^2(xy)\\); \\(\\frac{1}{\\sec^2} = \\cos^2\\).",
+              "Check with the curve itself\n\\[\\tan(xy) = -x \\Rightarrow \\sec^2(xy) = 1 + x^2\\]\n\\[\\dfrac{dy}{dx} = -\\dfrac{1 + y(1 + x^2)}{x(1 + x^2)}\\]\nWhy: \\(\\sec^2 = 1 + \\tan^2\\); this trig-free form agrees with sympy's implicit derivative."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = -\\frac{1 + y\\sec^2(xy)}{x\\sec^2(xy)} = -\\frac{y + \\cos^2(xy)}{x}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

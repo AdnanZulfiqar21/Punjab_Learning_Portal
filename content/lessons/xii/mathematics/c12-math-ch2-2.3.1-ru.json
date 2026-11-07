@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.3.1-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.3.1",
+      "title": "2.3.1 Composition of Functions (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 38,
+          "pdf_to": 39,
+          "note": "Book p. 36-37: composition of functions, Theorem 1 (The Chain Rule) with Leibniz notation, Critical Thinking box, Example 3"
+        }
+      ],
+      "variant_of": "C12-MATH-CH2-2.3.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum bachon! Chain rule samajhne se pehle humein yeh samajhna hoga ke \"function ke andar function\" ka matlab kya hai. Isi ko composition of functions kehte hain. Aap ne Class XI mein bhi composition dekha tha; aaj hum use derivative ke saath jorenge."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki definition: maan lijiye \\(g: X \\to Y\\) aur \\(f: Y \\to Z\\) hain. To in ki composition \\(f \\circ g: X \\to Z\\) is tarah define hoti hai:\n\\[f \\circ g(x) = f(g(x))\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab composition ko \\(f \\circ g: X \\to Y\\) likhti hai. Lekin \\(g\\) pehle \\(X\\) se \\(Y\\) mein le jata hai, phir \\(f\\) \\(Y\\) se \\(Z\\) mein. Is liye poora safar \\(X\\) se \\(Z\\) tak hai. Sahi yeh hai:\n\\[f \\circ g: X \\to Z\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Do machines ko ek line mein socho, jaise juice ki factory. Pehli machine \\(g\\) phal ko kaat'ti hai, doosri machine \\(f\\) kate hue phal ka juice nikalti hai. \\(x\\) pehle \\(g\\) mein jata hai, us ka output \\(g(x)\\) phir \\(f\\) mein jata hai, aur aakhri output \\(f(g(x))\\) milta hai. \\(g\\) inner function hai (pehle kaam karta hai) aur \\(f\\) outer function hai (baad mein).\nTarteeb zaroori hai: \\(f \\circ g\\) ka matlab hai 'pehle \\(g\\), phir \\(f\\)'. Aam taur par \\(f \\circ g \\ne g \\circ f\\). Pehle juice nikalo phir kaato, yeh mumkin hi nahin!"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki misaal: do real valued functions \\(g(x) = x^{2} - x\\) aur \\(f(x) = \\sin x\\) lein. To\n\\[f \\circ g(x) = f(g(x))\\]\n\\[= f(x^{2} - x)\\]\n\\[= \\sin(x^{2} - x)\\]\nYani \\(f\\) ke formula mein \\(x\\) ki jagah poora \\(x^{2} - x\\) rakh diya."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Inhi \\(f\\) aur \\(g\\) ko ulti tarteeb mein lagayein:\n\\[g \\circ f(x) = g(\\sin x)\\]\n\\[= \\sin^{2} x - \\sin x\\]\nYeh \\(\\sin(x^{2} - x)\\) se bilkul alag function hai. Is se saaf hai ke tarteeb badalne se function badal jata hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Theorem 1: (The Chain Rule)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ka theorem: agar \\(f(u)\\) point \\(u = g(x)\\) par differentiable ho aur \\(g(x)\\) point \\(x\\) par differentiable ho, to composite function \\(f \\circ g(x) = f(g(x))\\) bhi \\(x\\) par differentiable hota hai, aur\n\\[(f \\circ g)'(x) = f'(g(x)) \\cdot g'(x)\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab yahan 'an \\(f \\circ g'(x) = f'(g(x)) \\cdot g'(x)\\)' chhapti hai. 'an' asal mein 'and' hai, aur composite function ko dash (derivative ke nishan) se pehle bracket mein hona chahiye:\n\\[(f \\circ g)'(x) = f'(g(x)) \\cdot g'(x)\\]\nBracket ke baghair \\(f \\circ g'(x)\\) ko \\(f(g'(x))\\) bhi parha ja sakta hai, jo bilkul alag cheez hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Leibniz ki notation mein: agar \\(y = f(u)\\) aur \\(u = g(x)\\) ho, to\n\\[\\dfrac{dy}{dx} = \\dfrac{dy}{du} \\cdot \\dfrac{du}{dx}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Zarb kyun karte hain? \\(\\frac{du}{dx}\\) batata hai ke \\(u\\), \\(x\\) ke muqable mein kitni tezi se badalta hai, aur \\(\\frac{dy}{du}\\) batata hai ke \\(y\\), \\(u\\) ke muqable mein kitni tezi se. Socho cycle ke gears: agar \\(u\\), \\(x\\) se 3 guna tez ghoomta hai aur \\(y\\), \\(u\\) se 2 guna tez, to \\(y\\), \\(x\\) se \\(2 \\times 3 = 6\\) guna tez ghoomega. Rates zarb hote hain.\nIstemal ka tareeqa (outer-inner method), char qadam:\n1. Andar wala function pehchano aur use \\(u\\) kaho.\n2. Bahar wale function ka \\(u\\) ke lihaaz se derivative lo.\n3. \\(u\\) ka \\(x\\) ke lihaaz se derivative lo.\n4. Dono ko zarb karo, aur aakhir mein \\(u\\) ki jagah \\(x\\) wali value wapas rakho."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Critical Thinking",
+            "text": "Suppose \\(f(x) = x^{2}\\) and \\(g(x) = |x|\\). Then the composition \\((f \\circ g)(x) = x^{2}\\) is differentiable at \\(x = 0\\), although \\(g(x)\\) is not differentiable at \\(x = 0\\). Does this contradict the Chain Rule?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Critical Thinking ke sawal ka jawab: koi tazaad (contradiction) nahin hai. Dekhiye kyun:\n\\(f(g(x)) = |x|^{2} = x^{2}\\), aur \\(\\frac{d}{dx}(x^{2}) = 2x\\), jo \\(x = 0\\) par 0 hai. Yani composite function 0 par differentiable hai. Doosri taraf \\(|x|\\) ka graph 0 par nokeela (V jaisa) hai: baayen taraf slope \\(-1\\), daayen taraf \\(+1\\). Is liye \\(|x|\\) ka 0 par derivative nahin.\nAb theorem ko ghaur se parhiye: woh kehta hai AGAR \\(g\\) aur \\(f\\) dono differentiable hon TO composite bhi differentiable hoga. Yeh ulta nahin kehta ke agar \\(g\\) differentiable na ho to composite bhi nahin hoga. Shart kaafi (sufficient) hai, laazmi (necessary) nahin. Misaal: \"agar barish ho to sarak geeli hogi\" sach hai, lekin sarak geeli ho to zaroori nahin ke barish hui ho; kisi ne paani bhi phenka ho sakta hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Differentiate \\(y = \\sin(x^{2} - x)\\) w.r.t. 'x'.",
+            "steps": [
+              "Diya gaya: \\(y = \\sin(x^{2} - x)\\).\nMaloom karna: \\(\\frac{dy}{dx}\\).\nTareeqa: yeh function ke andar function hai. Andar wala (inner) function \\(x^{2} - x\\) hai aur bahar wala (outer) \\(\\sin\\) hai. Inner function ko \\(u\\) ka naam denge aur chain rule lagayenge.",
+              "Step 1: Andar wale function ko naam dein\n\\[u = x^{2} - x \\quad \\ldots(1)\\]\n\\[y = \\sin u\\]\nKyun: \\(u = x^{2} - x\\) rakhne se mushkil function \\(\\sin(x^{2} - x)\\) seedha \\(\\sin u\\) ban gaya, jis ka derivative hum jaante hain. Bara kaam do chhote kaamon mein toot gaya.",
+              "Step 2: Dono hisson ka alag derivative\n\\(y = \\sin u\\) ko \\(u\\) ke lihaaz se, aur \\(u = x^{2} - x\\) ko \\(x\\) ke lihaaz se differentiate karein:\n\\[\\dfrac{dy}{du} = \\cos u\\]\n\\[\\dfrac{du}{dx} = 2x - 1\\]\nKyun: \\((\\sin u)' = \\cos u\\) (2.2 se) aur power rule (2.1 se).",
+              "Step 3: Zarb karein (Chain Rule)\n\\[\\dfrac{dy}{dx} = \\dfrac{dy}{du} \\cdot \\dfrac{du}{dx}\\]\n\\[= \\cos u \\cdot (2x - 1)\\]\nKyun: yahi Theorem 1 hai, Leibniz ki notation mein.",
+              "Step 4: u ki jagah wapas x wali value rakhein\n\\[\\dfrac{dy}{dx} = \\cos(x^{2} - x)(2x - 1)\\]\nKyun: equation (1) se \\(u = x^{2} - x\\). Sawal \\(x\\) mein tha, is liye jawab bhi sirf \\(x\\) mein hona chahiye.\nDhyan dein: \\(\\cos\\) ke andar \\(x^{2} - x\\) hi rehta hai, us ka derivative andar nahin jata.",
+              "Tasdeeq: \\(x = 0\\) par formula \\(\\cos 0 \\cdot (-1) = -1\\) deta hai. Calculator se: \\(y(0.001) = \\sin(-0.000999) \\approx -0.000999\\) aur \\(y(-0.001) = \\sin(0.001001) \\approx 0.001001\\). Slope taqreeban \\(\\frac{-0.002}{0.002} = -1\\). Dono barabar, jawab sahi."
+            ],
+            "answer": "\\(\\frac{dy}{dx} = \\cos(x^{2} - x)(2x - 1)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "(a) \\(y = (3x^{2} + 1)^{5}\\). Andar \\(u = 3x^{2} + 1\\), bahar \\(u^{5}\\). Pehle bahar ka derivative \\(5u^{4}\\), phir andar ka \\(6x\\):\n\\[\\dfrac{dy}{dx} = 5u^{4} \\cdot 6x\\]\n\\[= 30x(3x^{2} + 1)^{4}\\]\nSocho agar yeh bracket khol kar power 5 tak multiply karte to kitna lamba kaam hota!\n(b) \\(y = \\cos(x^{3})\\): \\(\\frac{dy}{dx} = -\\sin(x^{3}) \\cdot 3x^{2} = -3x^{2}\\sin(x^{3})\\).\n(c) \\(y = \\sin^{2} x = (\\sin x)^{2}\\). Yahan andar \\(\\sin x\\) hai aur bahar square: \\(\\frac{dy}{dx} = 2\\sin x \\cdot \\cos x\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Chain rule ko pehchanne ki aadat daaliye. Har sawal mein pehle yeh poochiye: kya yahan koi function kisi doosre function ke andar baitha hai? Agar haan, to andar wale ko u kahiye. Kuch nishaniyan:\n1. Bracket ki power, jaise \\((\\ldots)^{5}\\): bahar power hai, andar bracket.\n2. Trigonometric function ke andar sirf \\(x\\) ke bajaye kuch aur ho, jaise \\(\\sin(x^{2} - x)\\) ya \\(\\cos(3x)\\).\n3. Square root ke andar poora expression, jaise \\(\\sqrt{a^{2} - x^{2}}\\).\nAur yaad rakhiye: chain lambi bhi ho sakti hai. Agar function ke andar function, aur us ke andar ek aur function ho, to har darje (level) ka derivative zarb hota chala jata hai, bilkul zanjeer ki kariyon ki tarah: sab se bahar se shuru karo aur andar ki taraf chalte jao."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(y = \\sin(2x)\\) ka derivative kya hai? Kya \\(\\cos 2x\\) theek hai? (Nahin: andar ka derivative 2 bhool gaye. Sahi jawab \\(2\\cos 2x\\) hai.)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(f \\circ g(x) = f(g(x))\\): \\(g\\) pehle (inner), \\(f\\) baad mein (outer); \\(f \\circ g: X \\to Z\\).\n2. Chain Rule: \\((f \\circ g)'(x) = f'(g(x)) \\cdot g'(x)\\), ya \\(\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx}\\).\n3. Tareeqa: inner ko \\(u\\) kaho, bahar aur andar ke derivatives lo, zarb karo, \\(u\\) wapas rakho.\n4. Chain rule ki shart kaafi hai, laazmi nahin (Critical Thinking wali baat).\n5. Kitab ki do ghaltiyan: composition \\(X \\to Z\\) hai, aur theorem mein \\((f \\circ g)'\\) bracket ke saath."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Andar wale function ka derivative bhool jana: \\(\\frac{d}{dx}\\sin(x^{2} - x) = \\cos(x^{2} - x)\\) likh dena ghalat hai; \\((2x - 1)\\) ka factor ghaib hai.\n2. Bahar ka derivative lete waqt andar ko bhi badal dena: \\(\\cos(x^{2} - x)\\) sahi hai, \\(\\cos(2x - 1)\\) nahin.\n3. Aakhri jawab mein \\(u\\) chhor dena: jawab hamesha \\(x\\) mein likhiye.\n4. \\(f \\circ g\\) aur \\(g \\circ f\\) ko ek hi samajh lena."
+          }
+        ]
+      }
+    }
+  ]
+}

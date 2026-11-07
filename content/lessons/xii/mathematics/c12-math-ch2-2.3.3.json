@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.3.3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.3.3",
+      "title": "2.3.3 Implicit Differentiation",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 40,
+          "pdf_to": 40,
+          "note": "Book p. 38: implicit differentiation, the three steps, Example 5"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "When an implicit relation cannot be easily solved for \\(y\\) (or when multiple explicit functions are involved), we can still compute \\(\\frac{dy}{dx}\\) using implicit differentiation. The steps are as follows:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Differentiate both sides of \\(F(x, y) = 0\\) with respect to \\(x\\), treating \\(y\\) as an implicit function of \\(x\\).",
+              "Apply the Chain Rule to terms containing \\(y\\).",
+              "Solve the resulting equation for \\(\\frac{dy}{dx}\\)."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Explicit and implicit: \\(y = x^{2} + 1\\) is explicit (\\(y\\) is alone on one side). \\(x^{2} + y^{2} = 25\\) or \\(x + y^{2} + \\sin(xy^{2}) = 0\\) are implicit: \\(x\\) and \\(y\\) are mixed, and \\(y\\) is not written as a formula in \\(x\\).\nThe key idea of step 2: \\(y\\) is a function of \\(x\\), so every term with \\(y\\) is a function of a function. For example \\(\\frac{d}{dx}(y^{2}) = 2y \\cdot \\frac{dy}{dx}\\), not just \\(2y\\). The factor \\(\\frac{dy}{dx}\\) is the inner derivative of the chain rule.\nWhy 'multiple explicit functions': \\(x^{2} + y^{2} = 25\\) gives two functions, \\(y = \\sqrt{25 - x^{2}}\\) and \\(y = -\\sqrt{25 - x^{2}}\\). Implicit differentiation handles both at once."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Explicit function",
+              "Implicit relation"
+            ],
+            "rows": [
+              [
+                "\\(y\\) is written alone: \\(y = f(x)\\)",
+                "\\(x\\) and \\(y\\) are mixed: \\(F(x, y) = 0\\)"
+              ],
+              [
+                "Example: \\(y = x^{2} + 1\\)",
+                "Example: \\(x^{2} + y^{2} = 25\\)"
+              ],
+              [
+                "Differentiate the formula directly",
+                "Differentiate every term; chain rule on each \\(y\\) term"
+              ],
+              [
+                "\\(\\frac{dy}{dx}\\) is in terms of \\(x\\)",
+                "\\(\\frac{dy}{dx}\\) usually contains both \\(x\\) and \\(y\\)"
+              ]
+            ],
+            "caption": "Explicit vs implicit (our comparison table)"
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Find \\(\\frac{dy}{dx}\\) if \\(x + y^{2} + \\sin(xy^{2}) = 0\\)",
+            "steps": [
+              "Given: \\(x + y^{2} + \\sin(xy^{2}) = 0\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: this relation cannot be solved easily for \\(y\\), so use implicit differentiation: differentiate every term w.r.t. \\(x\\), with the chain rule on terms containing \\(y\\) and the product rule on \\(xy^{2}\\).",
+              "Step 1: Differentiate each term w.r.t. x\n\\[\\dfrac{d}{dx}(x) + \\dfrac{d}{dx}(y^{2})\\]\n\\[\\quad + \\dfrac{d}{dx}\\left(\\sin(xy^{2})\\right) = 0\\]\nWhy: the derivative of a sum is the sum of the derivatives, and the derivative of 0 is 0.",
+              "Step 2: Differentiate the simple terms\n\\[1 + 2y\\dfrac{dy}{dx} + \\cos(xy^{2}) \\cdot \\dfrac{d}{dx}(xy^{2}) = 0\\]\nWhy: \\(\\frac{d}{dx}(y^{2}) = 2y\\frac{dy}{dx}\\) by the chain rule (\\(y\\) depends on \\(x\\)); and \\(\\frac{d}{dx}\\sin w = \\cos w \\cdot \\frac{dw}{dx}\\) with \\(w = xy^{2}\\).",
+              "Step 3: Product rule on xy^2 and move 1 to the right\n\\[\\dfrac{d}{dx}(xy^{2}) = y^{2} + x\\left(2y\\dfrac{dy}{dx}\\right)\\]\n\\[2y\\dfrac{dy}{dx} + \\cos(xy^{2})\\]\n\\[\\quad \\times \\left\\{y^{2} + x\\left(2y\\dfrac{dy}{dx}\\right)\\right\\} = -1\\]\nWhy: \\(xy^{2}\\) is a product of \\(x\\) and \\(y^{2}\\): \\((x)'y^{2} + x(y^{2})' = y^{2} + x \\cdot 2y\\frac{dy}{dx}\\).",
+              "Step 4: Open the bracket\n\\[2y\\dfrac{dy}{dx} + y^{2}\\cos(xy^{2})\\]\n\\[\\quad + 2xy\\dfrac{dy}{dx}\\cos(xy^{2}) = -1\\]\nWhy: multiply \\(\\cos(xy^{2})\\) into both terms of the bracket.",
+              "Step 5: Collect the dy/dx terms\n\\[2y\\dfrac{dy}{dx}\\left\\{1 + x\\cos(xy^{2})\\right\\}\\]\n\\[\\quad = -1 - y^{2}\\cos(xy^{2})\\]\nWhy: keep the terms with \\(\\frac{dy}{dx}\\) on the left, take out the common factor \\(2y\\frac{dy}{dx}\\), and move \\(y^{2}\\cos(xy^{2})\\) to the right.",
+              "Step 6: Solve for dy/dx\n\\[\\dfrac{dy}{dx} = -\\dfrac{1 + y^{2}\\cos(xy^{2})}{2y\\left\\{1 + x\\cos(xy^{2})\\right\\}}\\]\nWhy: divide both sides by \\(2y\\{1 + x\\cos(xy^{2})\\}\\), which must not be 0.",
+              "Check: differentiate the same relation w.r.t. \\(y\\) instead (treating \\(x\\) as a function of \\(y\\)). The same steps give\n\\[\\dfrac{dx}{dy} = -\\dfrac{2y\\{1 + x\\cos(xy^{2})\\}}{1 + y^{2}\\cos(xy^{2})}\\]\nwhich is exactly the reciprocal of our answer, as it must be, since \\(\\frac{dy}{dx} = \\frac{1}{dx/dy}\\)."
+            ],
+            "answer": "\\(\\frac{dy}{dx} = -\\frac{1 + y^{2}\\cos(xy^{2})}{2y\\{1 + x\\cos(xy^{2})\\}}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our examples:\n(a) \\(x^{2} + y^{2} = 25\\): \\(2x + 2y\\frac{dy}{dx} = 0\\), so \\(\\frac{dy}{dx} = -\\frac{x}{y}\\). At the point \\((3, 4)\\) of the circle the slope is \\(-\\frac{3}{4}\\).\n(b) \\(xy + y^{2} = 1\\): \\(\\left(y + x\\frac{dy}{dx}\\right) + 2y\\frac{dy}{dx} = 0\\), so \\(\\frac{dy}{dx} = -\\frac{y}{x + 2y}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Implicit differentiation: differentiate both sides of \\(F(x, y) = 0\\) w.r.t. \\(x\\), treating \\(y\\) as a function of \\(x\\).\n2. Every \\(y\\) term gets a factor \\(\\frac{dy}{dx}\\) (chain rule); products such as \\(xy^{2}\\) need the product rule.\n3. Collect the \\(\\frac{dy}{dx}\\) terms on one side, factor, and divide.\n4. The answer may contain both \\(x\\) and \\(y\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing \\(\\frac{d}{dx}(y^{2}) = 2y\\): the factor \\(\\frac{dy}{dx}\\) is missing.\n2. Treating \\(xy^{2}\\) as if only \\(x\\) changes: \\(\\frac{d}{dx}(xy^{2}) = y^{2}\\) is wrong; it is \\(y^{2} + 2xy\\frac{dy}{dx}\\).\n3. Forgetting to differentiate the right side (the derivative of a constant is 0).\n4. Sign errors when moving terms from one side to the other."
+          }
+        ]
+      }
+    }
+  ]
+}

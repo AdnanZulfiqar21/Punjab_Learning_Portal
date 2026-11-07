@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-2-Q1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-2-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 46,
+          "pdf_to": 46,
+          "note": "Exercise 2.2, Question 1 (book p. 44): find f'(x) for four exponential functions; no printed answers for Unit 2 (checked with sympy)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Find \\(f'(x)\\) if: \\(f(x) = (x^{3} + 4x)e^{1/x}\\)",
+            "explanation": "A product of an algebraic factor and an exponential factor whose power is \\(\\frac{1}{x}\\).\nPlan: Product Rule; the exponential factor needs the Chain Rule \\(\\frac{d}{dx}(e^{u}) = e^{u}u'\\) with \\(u = x^{-1}\\).",
+            "steps": [
+              "Given: \\(f(x) = (x^{3} + 4x)e^{1/x}\\), \\(x \\ne 0\\).\nTo find: \\(f'(x)\\).\nMethod: \\(f = uv\\) with \\(u = x^{3} + 4x\\), \\(v = e^{1/x}\\); Product Rule \\((uv)' = uv' + vu'\\).",
+              "Derivative of each factor\n\\[u' = 3x^{2} + 4\\]\n\\[v' = e^{1/x}\\cdot\\dfrac{d}{dx}(x^{-1})\\]\n\\[= e^{1/x}\\left(-\\dfrac{1}{x^{2}}\\right)\\]\nWhy: power rule for \\(u\\); for \\(v\\) copy \\(e^{1/x}\\) and multiply by the derivative of its power \\(x^{-1}\\), which is \\(-x^{-2}\\).",
+              "Product Rule\n\\[f'(x) = (x^{3} + 4x)e^{1/x}\\left(-\\dfrac{1}{x^{2}}\\right)\\]\n\\[\\quad + e^{1/x}(3x^{2} + 4)\\]\nWhy: \\(uv' + vu'\\).",
+              "Take out \\(e^{1/x}\\) and simplify\n\\[f'(x) = e^{1/x}\\left[3x^{2} + 4 - \\dfrac{x^{3} + 4x}{x^{2}}\\right]\\]\n\\[= e^{1/x}\\left[3x^{2} + 4 - x - \\dfrac{4}{x}\\right]\\]\n\\[= \\dfrac{e^{1/x}(3x^{3} - x^{2} + 4x - 4)}{x}\\]\nWhy: \\(e^{1/x}\\) is common; \\(\\frac{x^{3} + 4x}{x^{2}} = x + \\frac{4}{x}\\); then everything is put over the common denominator \\(x\\).",
+              "Check: at \\(x = 1\\) the formula gives \\(\\frac{e(3 - 1 + 4 - 4)}{1} = 2e\\).\nDirectly: \\(u(1) = 5\\), \\(u'(1) = 7\\), \\(v(1) = e\\), \\(v'(1) = -e\\), so \\(uv' + vu' = -5e + 7e = 2e\\). The same."
+            ],
+            "final_answer": "\\(f'(x) = \\frac{e^{1/x}(3x^{3} - x^{2} + 4x - 4)}{x}\\), \\(x \\ne 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Find \\(f'(x)\\) if: \\(f(x) = \\sin(2^{x})\\)",
+            "explanation": "A function of a function: \\(\\sin\\) outside, the exponential \\(2^{x}\\) inside.\nPlan: Chain Rule, with \\(\\frac{d}{dx}(a^{x}) = a^{x}\\ln a\\) for \\(a = 2\\).",
+            "steps": [
+              "Given: \\(f(x) = \\sin(2^{x})\\).\nTo find: \\(f'(x)\\).\nMethod: \\(f = \\sin u\\) with \\(u = 2^{x}\\); \\(\\frac{d}{dx}(\\sin u) = \\cos u\\,\\frac{du}{dx}\\).",
+              "Chain Rule\n\\[f'(x) = \\cos(2^{x})\\cdot\\dfrac{d}{dx}(2^{x})\\]\nWhy: derivative of the outer \\(\\sin\\) at the inner function, times the derivative of the inner function.",
+              "Derivative of \\(2^{x}\\)\n\\[f'(x) = \\cos(2^{x})\\cdot 2^{x}\\ln 2\\]\n\\[= 2^{x}\\ln 2\\,\\cos(2^{x})\\]\nWhy: \\(\\frac{d}{dx}(a^{x}) = a^{x}\\ln a\\) (2.5) with \\(a = 2\\).",
+              "Check: at \\(x = 0\\): \\(f'(0) = 1\\cdot\\ln 2\\cdot\\cos 1 \\approx 0.693 \\times 0.540 \\approx 0.375\\). A difference quotient \\(\\frac{\\sin(2^{0.001}) - \\sin 1}{0.001} \\approx 0.374\\) agrees."
+            ],
+            "final_answer": "\\(f'(x) = 2^{x}\\ln 2\\,\\cos(2^{x})\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Find \\(f'(x)\\) if: \\(f(x) = e^{x\\cos x}\\)",
+            "explanation": "An exponential \\(e^{u}\\) whose power \\(u = x\\cos x\\) is itself a product.\nPlan: \\(\\frac{d}{dx}(e^{u}) = e^{u}u'\\), and find \\(u'\\) by the Product Rule.",
+            "steps": [
+              "Given: \\(f(x) = e^{x\\cos x}\\).\nTo find: \\(f'(x)\\).\nMethod: Chain Rule with \\(u = x\\cos x\\); the Product Rule gives \\(u'\\).",
+              "Derivative of the power\n\\[u' = x\\dfrac{d}{dx}(\\cos x) + \\cos x\\dfrac{d}{dx}(x)\\]\n\\[= x(-\\sin x) + \\cos x\\]\n\\[= \\cos x - x\\sin x\\]\nWhy: Product Rule on \\(x\\cdot\\cos x\\); \\(\\frac{d}{dx}(\\cos x) = -\\sin x\\).",
+              "Chain Rule\n\\[f'(x) = e^{x\\cos x}\\cdot u'\\]\n\\[= e^{x\\cos x}(\\cos x - x\\sin x)\\]\nWhy: copy \\(e^{x\\cos x}\\) and multiply by the derivative of its power.",
+              "Check: at \\(x = 0\\): \\(f'(0) = e^{0}(1 - 0) = 1\\). Near 0, \\(x\\cos x \\approx x\\), so \\(f(x) \\approx e^{x}\\), whose slope at 0 is 1. It fits."
+            ],
+            "final_answer": "\\(f'(x) = e^{x\\cos x}(\\cos x - x\\sin x)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Find \\(f'(x)\\) if: \\(f(x) = \\frac{e^{x} + e^{-x}}{e^{x} - e^{-x}}\\)",
+            "explanation": "A quotient of two exponential expressions.\nPlan: Quotient Rule; note that the derivative of the numerator is the denominator and vice versa, and \\(e^{x}e^{-x} = 1\\) simplifies the top.",
+            "steps": [
+              "Given: \\(f(x) = \\dfrac{e^{x} + e^{-x}}{e^{x} - e^{-x}}\\), \\(x \\ne 0\\) (the denominator is 0 at \\(x = 0\\)).\nTo find: \\(f'(x)\\).\nMethod: Quotient Rule \\(\\left(\\frac{u}{v}\\right)' = \\frac{vu' - uv'}{v^{2}}\\), \\(u = e^{x} + e^{-x}\\), \\(v = e^{x} - e^{-x}\\).",
+              "Derivatives of numerator and denominator\n\\[\\dfrac{d}{dx}(e^{-x}) = e^{-x}(-1) = -e^{-x}\\]\n\\[u' = e^{x} - e^{-x} = v\\]\n\\[v' = e^{x} + e^{-x} = u\\]\nWhy: Chain Rule on \\(e^{-x}\\), power \\(-x\\) has derivative \\(-1\\).",
+              "Quotient Rule\n\\[f'(x) = \\dfrac{v\\cdot v - u\\cdot u}{v^{2}}\\]\n\\[= \\dfrac{(e^{x} - e^{-x})^{2} - (e^{x} + e^{-x})^{2}}{(e^{x} - e^{-x})^{2}}\\]\nWhy: \\(u' = v\\) and \\(v' = u\\) from the previous step.",
+              "Simplify the numerator\n\\[(A - B)^{2} - (A + B)^{2} = -4AB\\]\n\\[-4e^{x}e^{-x} = -4e^{0} = -4\\]\nWhy: identity with \\(A = e^{x}\\), \\(B = e^{-x}\\); \\(e^{x}e^{-x} = e^{0} = 1\\).",
+              "Result\n\\[f'(x) = \\dfrac{-4}{(e^{x} - e^{-x})^{2}}\\]\nMultiplying top and bottom by \\(e^{2x}\\) gives the equivalent form\n\\[f'(x) = -\\dfrac{4e^{2x}}{(e^{2x} - 1)^{2}}\\]\nWhy: \\(e^{x}(e^{x} - e^{-x}) = e^{2x} - 1\\).",
+              "Check: \\(f'(x) < 0\\) for every \\(x \\ne 0\\): the function decreases on each side of \\(x = 0\\). At \\(x = 1\\): \\(f'(1) = -\\frac{4}{(e - e^{-1})^{2}} \\approx -\\frac{4}{5.524} \\approx -0.724\\), which sympy confirms."
+            ],
+            "final_answer": "\\(f'(x) = -\\frac{4}{(e^{x} - e^{-x})^{2}}\\), \\(x \\ne 0\\) (equivalently \\(-\\frac{4e^{2x}}{(e^{2x} - 1)^{2}}\\))"
+          }
+        ]
+      }
+    }
+  ]
+}

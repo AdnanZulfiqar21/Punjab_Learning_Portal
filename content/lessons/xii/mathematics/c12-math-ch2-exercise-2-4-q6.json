@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-4-Q6",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-4-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 58,
+          "pdf_to": 58,
+          "note": "Exercise 2.4, Question 6: book p. 55-56; no printed answers for Unit 2 (verified with sympy and the solution book)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6 Show that \\(f(x) = x^{x^{2}}\\) has a relative minimum at \\(x = \\frac{1}{\\sqrt{e}}\\).",
+            "explanation": "A proof with the Second Derivative Test; the variable is in the base and in the power.\nGiven \\(f(x) = x^{x^{2}}\\), defined for \\(x > 0\\).\nPlan: logarithmic differentiation for \\(f'\\), show \\(f'\\left(\\frac{1}{\\sqrt{e}}\\right) = 0\\), then \\(f''\\left(\\frac{1}{\\sqrt{e}}\\right) > 0\\).",
+            "steps": [
+              "Given: \\(f(x) = x^{x^{2}}\\), \\(x > 0\\).\nTo show: relative minimum at \\(x = \\frac{1}{\\sqrt{e}}\\).\nMethod: neither the power rule nor the exponential rule fits \\(x^{x^{2}}\\), so take logarithms first (2.6); then the Second Derivative Test.",
+              "Take logarithms\nLet \\(y = x^{x^{2}}\\).\n\\[\\ln y = x^{2}\\ln x\\]\nWhy: \\(\\ln a^{b} = b\\ln a\\) brings the power down.",
+              "Differentiate\n\\[\\dfrac{1}{y}\\dfrac{dy}{dx} = 2x\\ln x + x^{2} \\cdot \\dfrac{1}{x}\\]\n\\[f'(x) = x^{x^{2}}\\,x\\,(1 + 2\\ln x)\\]\n\\[= x^{x^{2} + 1}(1 + 2\\ln x)\\]\nWhy: implicit differentiation on the left, product rule on the right; then multiply by \\(y = x^{x^{2}}\\).",
+              "Stationary point\n\\[1 + 2\\ln x = 0 \\Rightarrow \\ln x = -\\tfrac{1}{2}\\]\n\\[x = e^{-1/2} = \\dfrac{1}{\\sqrt{e}}\\]\nWhy: \\(x^{x^{2} + 1} > 0\\) for \\(x > 0\\), so only the bracket can be zero.",
+              "Second derivative at the point\nWrite \\(f'(x) = g(x)h(x)\\), \\(g = x^{x^{2} + 1}\\), \\(h = 1 + 2\\ln x\\):\n\\[f''(x) = g'(x)h(x) + g(x)h'(x)\\]\nAt \\(x = \\frac{1}{\\sqrt{e}}\\), \\(h = 0\\) and \\(h' = \\frac{2}{x}\\):\n\\[f''\\left(\\tfrac{1}{\\sqrt{e}}\\right) = x^{x^{2} + 1} \\cdot \\dfrac{2}{x} = 2x^{x^{2}}\\]\nWhy: product rule; the first term vanishes because \\(h = 0\\), so we never need \\(g'\\).",
+              "Its sign\n\\[x^{2} = \\dfrac{1}{e},\\quad x^{x^{2}} = \\left(e^{-1/2}\\right)^{1/e} = e^{-\\frac{1}{2e}}\\]\n\\[f''\\left(\\tfrac{1}{\\sqrt{e}}\\right) = 2e^{-\\frac{1}{2e}} > 0\\]\nWhy: a power of \\(e\\) is always positive. By the Second Derivative Test \\(f\\) has a relative minimum here.",
+              "Minimum value\n\\[f\\left(\\tfrac{1}{\\sqrt{e}}\\right) = e^{-\\frac{1}{2e}} \\approx 0.832\\]\nWhy: it is the same expression \\(x^{x^{2}}\\) found above.",
+              "Check: \\(\\frac{1}{\\sqrt{e}} \\approx 0.607\\); \\(f(0.5) = 0.5^{0.25} \\approx 0.841\\) and \\(f(0.7) = 0.7^{0.49} \\approx 0.839\\) are both larger than 0.832."
+            ],
+            "final_answer": "Hence proved: \\(f'\\left(\\frac{1}{\\sqrt{e}}\\right) = 0\\) and \\(f''\\left(\\frac{1}{\\sqrt{e}}\\right) = 2e^{-\\frac{1}{2e}} > 0\\), so \\(f(x) = x^{x^{2}}\\) has a relative minimum at \\(x = \\frac{1}{\\sqrt{e}}\\) (minimum value \\(e^{-\\frac{1}{2e}} \\approx 0.832\\))."
+          }
+        ]
+      }
+    }
+  ]
+}

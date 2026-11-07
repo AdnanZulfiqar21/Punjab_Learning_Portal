@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.9.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.9.1",
+      "title": "2.9.1 Stationary Point",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 51,
+          "pdf_to": 52,
+          "note": "Book p. 49-50: 2.9.1 definition, Example 16 (|x|, printed again), Critical Thinking box, closing remark and Conclusion"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "A point on the graph where its derivative is zero is called a stationary point."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "At a stationary point the tangent line is horizontal (slope 0): for a moment the graph is neither rising nor falling. The name says it: the graph \"stands still\" there.\nOur example: for \\(f(x) = x^{2}\\), \\(f'(x) = 2x = 0\\) at \\(x = 0\\), so \\((0, 0)\\) is a stationary point; it is the bottom of the parabola.\nA stationary point need not be a turning point: \\(g(x) = x^{3}\\) has \\(g'(0) = 0\\), yet \\(g\\) increases on both sides of 0."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note",
+            "text": "The book prints \"Example 16\" a second time here; the first Example 16 (\\(f(x) = 2^{-x}\\)) is in 2.9. We keep the printed number."
+          },
+          {
+            "type": "example",
+            "title": "Example 16",
+            "problem": "Find the intervals on which the function \\(f(x) = |x|\\), defined on \\(\\mathbb{R} = (-\\infty, \\infty)\\), is increasing or decreasing.",
+            "steps": [
+              "Given: \\(f(x) = |x|\\) on \\((-\\infty, \\infty)\\).\nTo find: the intervals where \\(f\\) is increasing or decreasing.\nMethod: \\(|x|\\) has two formulas, one for \\(x \\ge 0\\) and one for \\(x < 0\\). Differentiate each piece, check \\(x = 0\\) (where the formulas meet) by the definition of the derivative, then read the sign of \\(f'\\) on each side.",
+              "Step 1: Write \\(|x|\\) piece by piece\n\\[f(x) = |x| = \\begin{cases} x & \\text{if } x \\ge 0 \\\\ -x & \\text{if } x < 0 \\end{cases}\\]\nWhy: this is the definition of the modulus (Unit 1); each piece is a simple line we can differentiate.",
+              "Step 2: Differentiate each piece\n\\[f'(x) = \\begin{cases} 1 & \\text{if } x > 0 \\\\ -1 & \\text{if } x < 0 \\end{cases}\\]\nWhy: \\(\\frac{d}{dx}(x) = 1\\) and \\(\\frac{d}{dx}(-x) = -1\\). The point \\(x = 0\\) is left out: there the formula changes, so it needs its own check.",
+              "Step 3: Evaluate \\(f'(0)\\) by definition\n\\[f'(0) = \\lim_{h \\to 0}\\dfrac{f(0 + h) - f(0)}{h}\\]\n\\[= \\lim_{h \\to 0}\\dfrac{f(h) - 0}{h} = \\lim_{h \\to 0}\\dfrac{|h|}{h}\\]\nWhy: the derivative at a point is the limit of the difference quotient (by definition of derivative).",
+              "Step 4: One-sided limits\n\\[\\lim_{h \\to 0^{-}}\\dfrac{|h|}{h} = \\lim_{h \\to 0^{-}}\\dfrac{-h}{h} = -1\\]\n\\[\\lim_{h \\to 0^{+}}\\dfrac{|h|}{h} = \\lim_{h \\to 0^{+}}\\dfrac{h}{h} = 1\\]\nWhy: \\(f(x) = |x|\\) is defined differently on the left and right of \\(x = 0\\): for \\(h < 0\\), \\(|h| = -h\\); for \\(h > 0\\), \\(|h| = h\\).",
+              "Step 5: \\(f'(0)\\) is not defined\nSince the left-hand and right-hand limits are different (\\(-1 \\ne 1\\)), the limit \\(\\lim_{h \\to 0}\\frac{|h|}{h}\\) does not exist. Hence \\(f'(0)\\) is not defined. The book adds: \"(\\(\\therefore\\) x is a critical point but not stationary)\"; it means \\(x = 0\\) (see the Book correction below).\nWhy: a limit exists only when both one-sided limits agree. At \\(x = 0\\) the graph has a sharp corner, so there is no single tangent line.",
+              "Step 6: No stationary point\n\\(f'(x) = \\pm 1\\) wherever it exists, and \\(f'(0)\\) does not exist. So there is no point where the derivative is equal to zero: the function has no stationary point.\nWhy: a stationary point needs \\(f'(x) = 0\\) exactly.",
+              "Step 7: Read the signs\n\\[f'(x) = -1 < 0 \\text{ on } (-\\infty, 0)\\]\n\\[f'(x) = 1 > 0 \\text{ on } (0, \\infty)\\]\nWhy: by the test of 2.9, a negative derivative means decreasing and a positive derivative means increasing.",
+              "Check: \\(f(-3) = 3 > f(-1) = 1\\) (going down on the left) and \\(f(1) = 1 < f(3) = 3\\) (going up on the right). The V-shaped graph of \\(|x|\\) falls to its corner at the origin and then rises."
+            ],
+            "answer": "\\(f(x) = |x|\\) is decreasing on \\((-\\infty, 0)\\) and increasing on \\((0, \\infty)\\); \\(x = 0\\) is a critical point (\\(f'(0)\\) does not exist) but not a stationary point.",
+            "book_errors": [
+              "x is a critical point but not stationary"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 16 ends with \"(\\(\\therefore\\) x is a critical point but not stationary)\". It should name the point: \\(x = 0\\) is a critical point but not a stationary point (\\(f'(0)\\) does not exist)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Critical Thinking",
+            "text": "Every stationary point is a critical point.\nDo you think every critical point is a stationary point?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Answer to the Critical Thinking box: no. A critical point (2.9.2) is a point where \\(f'(c) = 0\\) or \\(f'(c)\\) does not exist. A stationary point covers only the first case. In Example 16, \\(x = 0\\) is a critical point of \\(|x|\\) because \\(f'(0)\\) does not exist, but it is not stationary because \\(f'(0)\\) is not 0."
+          },
+          {
+            "type": "paragraph",
+            "text": "In the above example, the function has no stationary point, but it changes behavior around a point where its derivative is undefined."
+          },
+          {
+            "type": "paragraph",
+            "text": "Conclusion: From these examples, we conclude that a function may change its:\n1. Increasing/decreasing behavior around:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Stationary points where \\(f'(x) = 0\\), or",
+              "Points where \\(f'(x)\\) is undefined."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This is why both kinds of points are collected under one name, critical points, in the next subsection: they are the only places where an increasing piece can turn into a decreasing piece (or the other way round). Between them the sign of \\(f'\\) cannot change."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Stationary point: \\(f'(x) = 0\\); the tangent is horizontal.\n2. \\(f(x) = |x|\\) has no stationary point; \\(f'(0)\\) does not exist because the one-sided limits are \\(-1\\) and \\(1\\).\n3. \\(|x|\\) is decreasing on \\((-\\infty, 0)\\) and increasing on \\((0, \\infty)\\).\n4. A function can change from decreasing to increasing at a stationary point or at a point where \\(f'\\) is undefined."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing \\(f'(0) = 0\\) for \\(|x|\\) because the graph has its lowest point there. At a corner the derivative does not exist at all.\n2. Thinking every stationary point is a turning point: \\(x^{3}\\) is stationary at 0 but keeps increasing.\n3. Using only the two-sided limit at a point where the formula changes; compute the left and right limits separately."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.10.3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.10.3",
+      "title": "2.10.3 Method to Find Global Extrema of a Continuous Functions Defined on a Closed Interval [a, b]",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 56,
+          "pdf_to": 56,
+          "note": "Book p. 54: 2.10.3 three-step method for global extrema on [a, b], Example 20 (derivative misprinted as x^4 - 4x)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Find all critical points of the function within the interval \\([a, b]\\).",
+              "Find values of the function at critical points and at end points of the interval.",
+              "The largest of these values is the global maximum value, and the smallest is the global minimum value."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why only these points? On a closed interval a continuous function has a global maximum and a global minimum (2.10.2). If such an extreme value occurs inside the interval it occurs at a critical point (the graph turns there); otherwise it occurs at an end point. So the candidates are: critical points inside \\([a, b]\\) and the two end points \\(a\\) and \\(b\\).\nWe do not need to decide whether each candidate is a maximum or a minimum: we simply compare the values."
+          },
+          {
+            "type": "example",
+            "title": "Example 20",
+            "problem": "Find the global extreme values of \\(f(x) = x^{4} - 4x\\) on \\([-2, 3]\\).",
+            "steps": [
+              "Given: \\(f(x) = x^{4} - 4x\\) ...(1), on the closed interval \\([-2, 3]\\).\nTo find: the global maximum and global minimum values.\nMethod: the three-step method above: \\(f\\) is a polynomial, so it is continuous on \\([-2, 3]\\) and its global extrema are among the values at the critical points and at the end points.",
+              "Step 1: Differentiate equation (1)\nThe book prints \\(f'(x) = x^{4} - 4x\\) ...(2) (see the Book correction below). Differentiating correctly:\n\\[f'(x) = 4x^{3} - 4 \\quad \\text{...(2)}\\]\nWhy: power rule: \\(\\frac{d}{dx}(x^{4}) = 4x^{3}\\) and \\(\\frac{d}{dx}(4x) = 4\\). The book's next line, \\(4x^{3} - 4 = 0\\), uses the correct derivative.",
+              "Step 2: Critical points\nFrom equation (2) it is clear that \\(f'(x)\\) exists on \\([-2, 3]\\). For stationary points we solve \\(f'(x) = 0\\):\n\\[4x^{3} - 4 = 0\\]\n\\[4(x^{3} - 1) = 0\\]\n\\[(x - 1)(x^{2} + x + 1) = 0\\]\nWhy: difference of cubes, \\(x^{3} - 1 = (x - 1)(x^{2} + x + 1)\\).",
+              "Step 3: Real roots only\nEither \\(x - 1 = 0\\) or \\(x^{2} + x + 1 = 0\\). The equation \\(x^{2} + x + 1 = 0\\) has complex roots (its discriminant is \\(1 - 4 = -3 < 0\\)), so the only real stationary point is \\(x = 1\\), and it lies in \\([-2, 3]\\).\nWhy: only real points of the interval can be critical points.",
+              "Step 4: Values at the critical point and the end points\n\\[f(1) = 1^{4} - 4(1) = -3\\]\n\\[f(-2) = (-2)^{4} - 4(-2) = 16 + 8 = 24\\]\n\\[f(3) = 3^{4} - 4(3) = 81 - 12 = 69\\]\nWhy: step 2 of the method: the end points must be included.",
+              "Step 5: Compare\nFrom the values \\(-3\\), \\(24\\), \\(69\\): the largest is 69 and the smallest is \\(-3\\).\nWhy: step 3 of the method.",
+              "Check: \\(f'(x) < 0\\) for \\(x < 1\\) and \\(f'(x) > 0\\) for \\(x > 1\\) (for example \\(f'(0) = -4\\), \\(f'(2) = 28\\)), so \\(f\\) falls from 24 to \\(-3\\) and then rises to 69. The lowest point is at \\(x = 1\\) and the highest at the right end \\(x = 3\\)."
+            ],
+            "answer": "The global maximum is \\(f(3) = 69\\) and the global minimum is \\(f(1) = -3\\).",
+            "book_errors": [
+              "\\(f'(x) = x^{4} - 4x\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 20 prints the derivative as \\(f'(x) = x^{4} - 4x\\) ...(2), which repeats \\(f(x)\\). The correct derivative is \\(f'(x) = 4x^{3} - 4\\). The next line (\\(4x^{3} - 4 = 0\\)) and the final answer use the correct derivative."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Lay out the candidates in one line: \"Critical point value: \\(f(1) = -3\\); end point values: \\(f(-2) = 24\\), \\(f(3) = 69\\)\". Then state the global maximum and minimum with the points where they occur."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Candidates for global extrema on \\([a, b]\\): critical points inside \\([a, b]\\) and the end points \\(a\\), \\(b\\).\n2. Evaluate \\(f\\) at every candidate; largest = global maximum value, smallest = global minimum value.\n3. Ignore critical points outside \\([a, b]\\) and complex roots.\n4. Example 20: global maximum \\(f(3) = 69\\), global minimum \\(f(1) = -3\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Forgetting the end points: in Example 20 the global maximum is at the end point \\(x = 3\\).\n2. Putting the critical point into \\(f'\\) instead of \\(f\\) when finding the values.\n3. Keeping a critical point that lies outside the interval."
+          }
+        ]
+      }
+    }
+  ]
+}

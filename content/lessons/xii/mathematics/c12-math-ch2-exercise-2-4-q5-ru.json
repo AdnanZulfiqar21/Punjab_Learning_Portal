@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-4-Q5-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-4-q5",
+      "title": "Question 5 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH2-EXERCISE-2-4-Q5",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 58,
+          "pdf_to": 58,
+          "note": "Exercise 2.4, Question 5: book p. 55-56; no printed answers for Unit 2 (verified with sympy and the solution book)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5 Prove that \\(f(x) = \\frac{\\ln(2x)}{x^{2}}\\) has local maximum at \\(x = \\frac{\\sqrt{e}}{2}\\).",
+            "explanation": "Yeh \"prove that\" wala sawal hai: point humein diya hua hai, sirf saabit karna hai ke wahan local maximum hai.\nDiya: \\(f(x) = \\frac{\\ln(2x)}{x^{2}}\\); \\(\\ln\\) ki wajah se sirf \\(x > 0\\) par defined.\nRule: Second Derivative Test: \\(f'(c) = 0\\) aur \\(f''(c) < 0\\) to relative maximum.\nPlan: quotient rule se \\(f'\\), dikhana ke diye gaye point par \\(f' = 0\\), phir \\(f''\\) ka sign negative dikhana.",
+            "steps": [
+              "Diya gaya: \\(f(x) = \\frac{\\ln(2x)}{x^{2}}\\), \\(x > 0\\).\nSaabit karna: \\(x = \\frac{\\sqrt{e}}{2}\\) par local maximum hai.\nTareeqa: Second Derivative Test, do sharten dikhani hain: \\(f'(c) = 0\\) aur \\(f''(c) < 0\\).",
+              "Pehla derivative\n\\[f'(x) = \\dfrac{x^{2} \\cdot \\frac{1}{x} - \\ln(2x) \\cdot 2x}{x^{4}}\\]\n\\[= \\dfrac{x - 2x\\ln(2x)}{x^{4}}\\]\n\\[= \\dfrac{1 - 2\\ln(2x)}{x^{3}}\\]\nKyun: quotient rule: (neeche wala \\(\\times\\) upar wale ka derivative \\(-\\) upar wala \\(\\times\\) neeche wale ka derivative) \\(\\div\\) neeche wale ka square. \\(\\frac{d}{dx}\\ln(2x) = \\frac{1}{2x} \\cdot 2 = \\frac{1}{x}\\). Aakhir mein upar neeche se ek \\(x\\) cancel kiya.\nDhyan dein: \\(\\ln(2x)\\) ka derivative \\(\\frac{1}{x}\\) hai, \\(\\frac{1}{2x}\\) nahin; chain rule ka 2 cancel kar deta hai.",
+              "Stationary point\n\\[1 - 2\\ln(2x) = 0\\]\n\\[\\ln(2x) = \\tfrac{1}{2} \\Rightarrow 2x = e^{1/2}\\]\n\\[x = \\dfrac{\\sqrt{e}}{2}\\]\nKyun: \\(x > 0\\) ke liye \\(x^{3} > 0\\), is liye sirf numerator zero ho sakta hai. \\(\\ln u = k\\) ka matlab \\(u = e^{k}\\). Yani diya gaya point waqai stationary hai: pehli shart poori.",
+              "Doosra derivative\n\\(f'(x) = \\frac{u}{v}\\) likhein, jahan \\(u = 1 - 2\\ln(2x)\\) aur \\(v = x^{3}\\):\n\\[f''(x) = \\dfrac{u'v - uv'}{v^{2}}\\]\n\\[u' = -\\dfrac{2}{x}\\]\nKyun: dobara quotient rule. Chalaaki yeh hai ke \\(x = \\frac{\\sqrt{e}}{2}\\) par \\(u = 0\\) hai, is liye \\(uv'\\) wali term khud zero ho jati hai; poora \\(f''\\) simplify karne ki zaroorat nahin.",
+              "Point par \\(f''\\) ki value\n\\[f''\\left(\\tfrac{\\sqrt{e}}{2}\\right) = \\dfrac{u'}{v} = -\\dfrac{2}{x^{4}}\\]\n\\[x^{4} = \\dfrac{e^{2}}{16}\\]\n\\[f''\\left(\\tfrac{\\sqrt{e}}{2}\\right) = -\\dfrac{32}{e^{2}} < 0\\]\nKyun: \\(\\frac{u'v}{v^{2}} = \\frac{u'}{v} = \\frac{-2/x}{x^{3}} = -\\frac{2}{x^{4}}\\); aur \\(\\left(\\frac{\\sqrt{e}}{2}\\right)^{4} = \\frac{e^{2}}{16}\\), to \\(-2 \\times \\frac{16}{e^{2}} = -\\frac{32}{e^{2}}\\). Doosri shart bhi poori.",
+              "Natija\n\\(f'\\left(\\frac{\\sqrt{e}}{2}\\right) = 0\\) aur \\(f''\\left(\\frac{\\sqrt{e}}{2}\\right) < 0\\), is liye \\(x = \\frac{\\sqrt{e}}{2}\\) par local maximum hai.\n\\[f\\left(\\tfrac{\\sqrt{e}}{2}\\right) = \\dfrac{\\ln\\sqrt{e}}{e/4} = \\dfrac{1/2}{e/4} = \\dfrac{2}{e}\\]\nKyun: Second Derivative Test. Value sawal mein nahin maangi, lekin likh dena achha hai: \\(\\ln\\sqrt{e} = \\frac{1}{2}\\).",
+              "Tasdeeq: \\(\\frac{\\sqrt{e}}{2} \\approx 0.824\\). \\(x = 0.7\\) par \\(\\ln 1.4 \\approx 0.34 < 0.5\\), to \\(f' > 0\\); \\(x = 1\\) par \\(\\ln 2 \\approx 0.69 > 0.5\\), to \\(f' < 0\\). Sign plus se minus hua: first derivative bhi maximum hi batata hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(f'\\left(\\frac{\\sqrt{e}}{2}\\right) = 0\\) aur \\(f''\\left(\\frac{\\sqrt{e}}{2}\\right) = -\\frac{32}{e^{2}} < 0\\), is liye \\(x = \\frac{\\sqrt{e}}{2}\\) par \\(f\\) ka local maximum hai (maximum value \\(\\frac{2}{e}\\))."
+          }
+        ]
+      }
+    }
+  ]
+}

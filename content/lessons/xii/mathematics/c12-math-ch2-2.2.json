@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.2",
+      "title": "2.2 Derivatives of Trigonometric Functions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 37,
+          "pdf_to": 38,
+          "note": "Book p. 35-36: derivative of sin x by definition, Try yourself! box, derivatives of the other trigonometric functions, Example 1, box of six trigonometric derivatives, Example 2"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Derivative of the Sine Function"
+          },
+          {
+            "type": "paragraph",
+            "text": "While finding derivatives of trigonometric functions, we assume that the angle is measured in radians. To calculate the derivative of \\(f(x) = \\sin x\\).\nHere, \\(f(x + h) = \\sin(x + h)\\), and\n\\[f'(x) = \\lim_{h \\to 0}\\dfrac{f(x+h) - f(x)}{h}\\]\n(By the definition of derivative)\n\\[= \\lim_{h \\to 0}\\dfrac{\\sin(x+h) - \\sin x}{h}\\]\n(By substituting the values)\nUsing \\(\\sin p - \\sin q = 2\\cos\\frac{p+q}{2}\\sin\\frac{p-q}{2}\\) with \\(p = x + h\\), \\(q = x\\):\n\\[\\dfrac{p+q}{2} = \\dfrac{x+h+x}{2} = \\dfrac{2x+h}{2}\\]\n\\[\\dfrac{p-q}{2} = \\dfrac{x+h-x}{2} = \\dfrac{h}{2}\\]\n\\[f'(x) = \\lim_{h \\to 0}\\dfrac{2\\cos\\left(\\frac{2x+h}{2}\\right)\\sin\\left(\\frac{h}{2}\\right)}{h}\\]\nApplying the limit \\(h \\to 0\\):\n\\[= \\lim_{h \\to 0}\\cos\\left(\\dfrac{2x+h}{2}\\right)\\]\n\\[\\quad \\cdot \\lim_{h \\to 0}\\dfrac{\\sin(h/2)}{h/2}\\]\n\\[= \\cos x\\,(1) = \\cos x\\]\n\\(\\left(\\because \\lim_{\\theta \\to 0}\\frac{\\sin\\theta}{\\theta} = 1,\\ \\theta \\text{ is measured in radians}\\right)\\)\nThus \\(\\frac{d}{dx}(\\sin x) = \\cos x\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What happened in each line: we wrote the definition, substituted sin, changed the difference of two sines into a product (so that a factor \\(\\sin(h/2)\\) appears), and arranged \\(\\frac{\\sin(h/2)}{h/2}\\), whose limit is 1.\nWhy \\(\\frac{h}{2}\\) in the denominator: \\(\\frac{2\\sin(h/2)}{h} = \\frac{\\sin(h/2)}{h/2}\\). The 2 in front was used to turn \\(h\\) into \\(h/2\\), so the standard limit with \\(\\theta = h/2\\) can be applied.\nWhy radians: the limit \\(\\lim_{\\theta \\to 0}\\frac{\\sin\\theta}{\\theta} = 1\\) is true only when \\(\\theta\\) is in radians. In degrees the limit is \\(\\frac{\\pi}{180}\\), and every trigonometric derivative would carry that extra factor."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "The derivative of the sine function is the cosine function",
+            "text": "\\[\\dfrac{d}{dx}(\\sin x) = \\cos x\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Try yourself!",
+            "text": "Prove by definition \\(\\frac{d}{dx}(\\cos x) = -\\sin x\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A guide for the Try yourself! box (follow the same steps as for sine):\nUse \\(\\cos p - \\cos q = -2\\sin\\frac{p+q}{2}\\sin\\frac{p-q}{2}\\) with \\(p = x + h\\), \\(q = x\\):\n\\[\\dfrac{\\cos(x+h) - \\cos x}{h}\\]\n\\[= \\dfrac{-2\\sin\\left(\\frac{2x+h}{2}\\right)\\sin\\left(\\frac{h}{2}\\right)}{h}\\]\n\\[= -\\sin\\left(\\dfrac{2x+h}{2}\\right) \\cdot \\dfrac{\\sin(h/2)}{h/2}\\]\nLet \\(h \\to 0\\): the first factor tends to \\(\\sin x\\) and the second to 1, so\n\\[\\dfrac{d}{dx}(\\cos x) = -\\sin x\\]"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Derivative of the Other Trigonometric Functions"
+          },
+          {
+            "type": "paragraph",
+            "text": "After finding derivatives of \\(\\sin x\\) and \\(\\cos x\\) by definition, the derivatives of the remaining trigonometric functions can be found using product rule and quotient rule of differentiation."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Find \\(f'(x)\\) if \\(f(x) = \\tan x\\) (By using definition)",
+            "steps": [
+              "Given: \\(f(x) = \\tan x\\).\nTo find: \\(f'(x)\\).\nMethod: write \\(\\tan x = \\frac{\\sin x}{\\cos x}\\) and use the quotient rule, together with the derivatives of \\(\\sin x\\) and \\(\\cos x\\) that were found by definition.",
+              "Step 1: Write tan x as a quotient\n\\[f(x) = \\tan x = \\dfrac{\\sin x}{\\cos x}\\]\nWhy: we already know the derivatives of \\(\\sin x\\) and \\(\\cos x\\); the quotient rule \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^{2}}\\) joins them, with \\(u = \\sin x\\), \\(v = \\cos x\\).",
+              "Step 2: Apply the quotient rule (differentiating w.r.t. x)\n\\[u'v = (\\sin x)'\\cos x = \\cos x\\cos x\\]\n\\[uv' = \\sin x(\\cos x)' = \\sin x(-\\sin x)\\]\n\\[f'(x) = \\dfrac{\\cos x\\cos x - \\sin x(-\\sin x)}{\\cos^{2} x}\\]\nWhy: \\((\\sin x)' = \\cos x\\) and \\((\\cos x)' = -\\sin x\\).",
+              "Step 3: Simplify\n\\[f'(x) = \\dfrac{\\cos^{2} x + \\sin^{2} x}{\\cos^{2} x}\\]\n\\[= \\dfrac{1}{\\cos^{2} x} = \\sec^{2} x\\]\nWhy: minus times minus is plus; \\(\\sin^{2} x + \\cos^{2} x = 1\\); and \\(\\frac{1}{\\cos x} = \\sec x\\).",
+              "Check: at \\(x = \\frac{\\pi}{4}\\) the formula gives \\(\\sec^{2}\\frac{\\pi}{4} = 2\\). Numerically, \\(\\frac{\\tan(0.7864) - \\tan(0.7844)}{0.002} \\approx 2.000\\). The slopes agree."
+            ],
+            "answer": "\\(\\frac{d}{dx}(\\tan x) = \\sec^{2} x\\)",
+            "book_errors": [
+              "(By using definition)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book labels Example 1 \"(By using definition)\", but the solution does not use the limit definition of the derivative directly: it uses the quotient rule together with \\((\\sin x)' = \\cos x\\) and \\((\\cos x)' = -\\sin x\\) (which were found by definition). The label should read \"(By using the quotient rule)\". The result \\(\\frac{d}{dx}(\\tan x) = \\sec^{2} x\\) is correct."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "The Derivatives of Six Trigonometric Functions",
+            "text": "(i) \\(\\frac{d}{dx}(\\sin x) = \\cos x\\)\n(ii) \\(\\frac{d}{dx}(\\cos x) = -\\sin x\\)\n(iii) \\(\\frac{d}{dx}(\\tan x) = \\sec^{2} x\\)\n(iv) \\(\\frac{d}{dx}(\\cot x) = -\\csc^{2} x\\)\n(v) \\(\\frac{d}{dx}(\\sec x) = \\sec x\\tan x\\)\n(vi) \\(\\frac{d}{dx}(\\csc x) = \\csc x\\cot x\\)",
+            "book_errors": [
+              "\\(\\frac{d}{dx}(\\csc x) = \\csc x\\cot x\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Formula (vi) is printed as \\(\\frac{d}{dx}(\\csc x) = \\csc x\\cot x\\). The correct formula has a minus sign:\n\\[\\dfrac{d}{dx}(\\csc x) = -\\csc x\\cot x\\]\nProof: \\(\\csc x = \\frac{1}{\\sin x}\\), so by the quotient rule \\((\\csc x)' = \\frac{0 \\cdot \\sin x - 1 \\cdot \\cos x}{\\sin^{2} x} = -\\frac{1}{\\sin x}\\cdot\\frac{\\cos x}{\\sin x} = -\\csc x\\cot x\\). The book itself uses the minus sign in Example 2."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The other three formulas come the same way from the quotient rule:\n\\(\\sec x = \\frac{1}{\\cos x}\\): \\((\\sec x)' = \\frac{0 - 1(-\\sin x)}{\\cos^{2} x} = \\frac{1}{\\cos x}\\cdot\\frac{\\sin x}{\\cos x} = \\sec x\\tan x\\).\n\\(\\cot x = \\frac{\\cos x}{\\sin x}\\): \\((\\cot x)' = \\frac{-\\sin^{2} x - \\cos^{2} x}{\\sin^{2} x} = -\\frac{1}{\\sin^{2} x} = -\\csc^{2} x\\).\nMemory aid: the derivatives of the 'co' functions (\\(\\cos\\), \\(\\cot\\), \\(\\csc\\)) all carry a minus sign. Each co-formula is the plain formula with every function replaced by its co-function and a minus sign added: \\(\\tan \\to \\sec^{2}\\) gives \\(\\cot \\to -\\csc^{2}\\); \\(\\sec \\to \\sec\\tan\\) gives \\(\\csc \\to -\\csc\\cot\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Find \\(\\frac{dy}{dx}\\) if \\(y = x^{2}\\csc x\\)",
+            "steps": [
+              "Given: \\(y = x^{2}\\csc x\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: \\(y\\) is a product of \\(u = x^{2}\\) and \\(v = \\csc x\\), so use the product rule with \\((\\csc x)' = -\\csc x\\cot x\\).",
+              "Step 1: Product rule (differentiating w.r.t. x)\n\\[\\dfrac{dy}{dx} = (x^{2})'\\csc x + x^{2}(\\csc x)'\\]\nWhy: \\((uv)' = u'v + uv'\\).",
+              "Step 2: Put in the derivatives\n\\[= 2x\\csc x + x^{2}(-\\csc x\\cot x)\\]\n\\[= 2x\\csc x - x^{2}\\csc x\\cot x\\]\nWhy: power rule gives \\((x^{2})' = 2x\\); formula (vi), with its correct minus sign, gives \\((\\csc x)' = -\\csc x\\cot x\\).",
+              "Step 3: Take out the common factor\n\\[\\dfrac{dy}{dx} = x\\csc x\\,(2 - x\\cot x)\\]\nWhy: both terms contain \\(x\\csc x\\).",
+              "Check: multiply out: \\(x\\csc x \\cdot 2 - x\\csc x \\cdot x\\cot x = 2x\\csc x - x^{2}\\csc x\\cot x\\), the line of Step 2. Note that the book's own solution uses the minus sign, which confirms the correction to box (vi)."
+            ],
+            "answer": "\\(\\frac{dy}{dx} = x\\csc x\\,(2 - x\\cot x)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our examples:\n(a) \\(\\frac{d}{dx}(x\\sin x) = (1)\\sin x + x\\cos x = \\sin x + x\\cos x\\) (product rule).\n(b) \\(\\frac{d}{dx}(3\\tan x - 2\\sec x) = 3\\sec^{2} x - 2\\sec x\\tan x\\) (constant multiple and difference rules)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Angles are in radians; the derivative of \\(\\sin x\\) by definition rests on \\(\\lim_{\\theta \\to 0}\\frac{\\sin\\theta}{\\theta} = 1\\).\n2. \\((\\sin x)' = \\cos x\\), \\((\\cos x)' = -\\sin x\\); the other four follow by the quotient rule.\n3. \\((\\tan x)' = \\sec^{2} x\\), \\((\\cot x)' = -\\csc^{2} x\\), \\((\\sec x)' = \\sec x\\tan x\\), \\((\\csc x)' = -\\csc x\\cot x\\).\n4. The co-functions (cos, cot, csc) have a minus sign in their derivatives."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing \\((\\cos x)' = \\sin x\\) or \\((\\csc x)' = \\csc x\\cot x\\): the minus sign is missing.\n2. Using degrees: the formulas hold only for \\(x\\) in radians.\n3. Writing \\((\\tan x)' = \\sec x\\): it is \\(\\sec^{2} x\\).\n4. Writing \\((x^{2}\\csc x)' = 2x(-\\csc x\\cot x)\\): a product needs the product rule, not two derivatives multiplied."
+          }
+        ]
+      }
+    }
+  ]
+}

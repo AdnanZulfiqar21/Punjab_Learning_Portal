@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-2-Q1-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-2-q1",
+      "title": "Question 1 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH2-EXERCISE-2-2-Q1",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 46,
+          "pdf_to": 46,
+          "note": "Exercise 2.2, Question 1 (book p. 44): find f'(x) for four exponential functions; no printed answers for Unit 2 (checked with sympy)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Find \\(f'(x)\\) if: \\(f(x) = (x^{3} + 4x)e^{1/x}\\)",
+            "explanation": "Sab se pehle dekhte hain ke function ki shakal kya hai. Yeh do factors ka zarb (product) hai: ek algebraic \\((x^{3} + 4x)\\) aur doosra exponential \\(e^{1/x}\\).\nDiya kya hai? \\(f(x)\\). Find kya karna hai? \\(f'(x)\\).\nKaunsa rule? Zarb hai to Product Rule. Lekin \\(e^{1/x}\\) ki power sirf \\(x\\) nahin balke \\(\\frac{1}{x}\\) hai, is liye us factor ke liye Chain Rule bhi lagega: \\(\\frac{d}{dx}(e^{u}) = e^{u}u'\\).\nPlan: pehle dono factors ke derivatives alag alag, phir Product Rule, phir saaf karna.",
+            "steps": [
+              "Diya gaya: \\(f(x) = (x^{3} + 4x)e^{1/x}\\), \\(x \\ne 0\\).\nMaloom karna: \\(f'(x)\\).\nTareeqa: \\(f = uv\\), jahan \\(u = x^{3} + 4x\\) aur \\(v = e^{1/x}\\). Product Rule: \\((uv)' = uv' + vu'\\).",
+              "Har factor ka derivative\n\\[u' = 3x^{2} + 4\\]\n\\[v' = e^{1/x}\\cdot\\dfrac{d}{dx}(x^{-1})\\]\n\\[= e^{1/x}\\left(-\\dfrac{1}{x^{2}}\\right)\\]\nKyun: \\(u\\) ke liye seedha power rule. \\(v\\) ke liye 'copy karo, phir zarb do': \\(e^{1/x}\\) waisa hi likha aur us ki power \\(x^{-1}\\) ke derivative \\(-x^{-2}\\) se zarb diya.\nDhyan dein: yahan sab se aam ghalti yeh hai ke \\(\\frac{d}{dx}(e^{1/x})\\) ko sirf \\(e^{1/x}\\) likh dena. Power \\(x\\) nahin, \\(\\frac{1}{x}\\) hai, is liye \\(-\\frac{1}{x^{2}}\\) zaroor aaye ga.",
+              "Product Rule lagayen\n\\[f'(x) = (x^{3} + 4x)e^{1/x}\\left(-\\dfrac{1}{x^{2}}\\right)\\]\n\\[\\quad + e^{1/x}(3x^{2} + 4)\\]\nKyun: rule \\(uv' + vu'\\): pehla factor zarb doosre ka derivative, jama doosra factor zarb pehle ka derivative.",
+              "\\(e^{1/x}\\) common nikaal kar saaf karein\n\\[f'(x) = e^{1/x}\\left[3x^{2} + 4 - \\dfrac{x^{3} + 4x}{x^{2}}\\right]\\]\n\\[= e^{1/x}\\left[3x^{2} + 4 - x - \\dfrac{4}{x}\\right]\\]\n\\[= \\dfrac{e^{1/x}(3x^{3} - x^{2} + 4x - 4)}{x}\\]\nKyun: dono terms mein \\(e^{1/x}\\) hai, is liye bahar nikala. \\(\\frac{x^{3} + 4x}{x^{2}} = x + \\frac{4}{x}\\) (har term ko \\(x^{2}\\) se taqseem kiya). Aakhir mein sab ko common denominator \\(x\\) par le aaye: \\(3x^{2}\\cdot x = 3x^{3}\\), \\(4\\cdot x = 4x\\), \\(-x\\cdot x = -x^{2}\\).",
+              "Tasdeeq: \\(x = 1\\) par formula deta hai \\(\\frac{e(3 - 1 + 4 - 4)}{1} = 2e\\).\nSeedha hisaab: \\(u(1) = 5\\), \\(u'(1) = 7\\), \\(v(1) = e\\), \\(v'(1) = -e\\). To \\(uv' + vu' = -5e + 7e = 2e\\). Dono barabar, jawab sahih."
+            ],
+            "final_answer": "\\(f'(x) = \\frac{e^{1/x}(3x^{3} - x^{2} + 4x - 4)}{x}\\), \\(x \\ne 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Find \\(f'(x)\\) if: \\(f(x) = \\sin(2^{x})\\)",
+            "explanation": "Yeh 'function ke andar function' wala sawal hai: bahar \\(\\sin\\) hai aur andar exponential \\(2^{x}\\).\nDiya kya hai? \\(f(x) = \\sin(2^{x})\\). Find kya karna hai? \\(f'(x)\\).\nKaunsa rule? Function ke andar function ho to Chain Rule. Andar wale \\(2^{x}\\) ke liye 2.5 ka formula \\(\\frac{d}{dx}(a^{x}) = a^{x}\\ln a\\), jahan \\(a = 2\\).\nPlan: pehle \\(\\sin\\) ka derivative (andar wala waisa hi rahe), phir andar wale ka derivative zarb.",
+            "steps": [
+              "Diya gaya: \\(f(x) = \\sin(2^{x})\\).\nMaloom karna: \\(f'(x)\\).\nTareeqa: \\(f = \\sin u\\), jahan \\(u = 2^{x}\\). Chain Rule: \\(\\frac{d}{dx}(\\sin u) = \\cos u\\,\\frac{du}{dx}\\).",
+              "Chain Rule\n\\[f'(x) = \\cos(2^{x})\\cdot\\dfrac{d}{dx}(2^{x})\\]\nKyun: bahar wale \\(\\sin\\) ka derivative \\(\\cos\\) hai, aur andar \\(2^{x}\\) ko bilkul nahin chhera. Phir andar wale ka derivative zarb karna hai.",
+              "\\(2^{x}\\) ka derivative\n\\[f'(x) = \\cos(2^{x})\\cdot 2^{x}\\ln 2\\]\n\\[= 2^{x}\\ln 2\\,\\cos(2^{x})\\]\nKyun: 2.5 ka formula \\(\\frac{d}{dx}(a^{x}) = a^{x}\\ln a\\), \\(a = 2\\) ke saath. Aakhir mein factors ki tarteeb saaf ki.\nDhyan dein: \\(\\frac{d}{dx}(2^{x})\\) ko \\(x\\,2^{x-1}\\) likhna ghalat hai; yeh power rule nahin, exponential rule hai.",
+              "Tasdeeq: \\(x = 0\\) par \\(f'(0) = 1\\cdot\\ln 2\\cdot\\cos 1 \\approx 0.693 \\times 0.540 \\approx 0.375\\). Numerical test \\(\\frac{\\sin(2^{0.001}) - \\sin 1}{0.001} \\approx 0.374\\). Dono qareeb, jawab sahih."
+            ],
+            "final_answer": "\\(f'(x) = 2^{x}\\ln 2\\,\\cos(2^{x})\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Find \\(f'(x)\\) if: \\(f(x) = e^{x\\cos x}\\)",
+            "explanation": "Yahan exponential \\(e^{u}\\) hai, lekin is ki power \\(u = x\\cos x\\) khud do cheezon ka zarb hai.\nDiya kya hai? \\(f(x) = e^{x\\cos x}\\). Find kya karna hai? \\(f'(x)\\).\nKaunsa rule? \\(e^{u}\\) ke liye Chain Rule: \\(\\frac{d}{dx}(e^{u}) = e^{u}u'\\). Aur \\(u'\\) nikaalne ke liye Product Rule, kyun ke \\(u = x\\cdot\\cos x\\).\nPlan: pehle power ka derivative, phir 'copy karo, zarb do'.",
+            "steps": [
+              "Diya gaya: \\(f(x) = e^{x\\cos x}\\).\nMaloom karna: \\(f'(x)\\).\nTareeqa: Chain Rule, \\(u = x\\cos x\\); \\(u'\\) Product Rule se.",
+              "Power ka derivative\n\\[u' = x\\dfrac{d}{dx}(\\cos x) + \\cos x\\dfrac{d}{dx}(x)\\]\n\\[= x(-\\sin x) + \\cos x\\]\n\\[= \\cos x - x\\sin x\\]\nKyun: \\(x\\cdot\\cos x\\) par Product Rule; \\(\\frac{d}{dx}(\\cos x) = -\\sin x\\) aur \\(\\frac{d}{dx}(x) = 1\\).\nDhyan dein: \\(\\cos\\) ka derivative minus ke saath aata hai; yeh sign bhoolna aam hai.",
+              "Chain Rule\n\\[f'(x) = e^{x\\cos x}\\cdot u'\\]\n\\[= e^{x\\cos x}(\\cos x - x\\sin x)\\]\nKyun: \\(e^{x\\cos x}\\) ko waisa hi copy kiya aur power ke derivative se zarb diya. Base \\(e\\) hai, is liye koi \\(\\ln\\) factor nahin.",
+              "Tasdeeq: \\(x = 0\\) par \\(f'(0) = e^{0}(1 - 0) = 1\\). Zero ke qareeb \\(\\cos x \\approx 1\\), to \\(x\\cos x \\approx x\\) aur \\(f(x) \\approx e^{x}\\), jis ka slope 0 par 1 hai. Baat mil gayi."
+            ],
+            "final_answer": "\\(f'(x) = e^{x\\cos x}(\\cos x - x\\sin x)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Find \\(f'(x)\\) if: \\(f(x) = \\frac{e^{x} + e^{-x}}{e^{x} - e^{-x}}\\)",
+            "explanation": "Yeh do exponential expressions ka quotient (taqseem) hai.\nDiya kya hai? \\(f(x)\\). Find kya karna hai? \\(f'(x)\\).\nKaunsa rule? Quotient Rule. Ek khoobsurat baat note karein: numerator ka derivative denominator ban jata hai aur denominator ka derivative numerator. Aur \\(e^{x}e^{-x} = 1\\) numerator ko bohat chhota kar deta hai.\nPlan: \\(u'\\), \\(v'\\) nikaalo, Quotient Rule lagao, phir identity \\((A - B)^{2} - (A + B)^{2} = -4AB\\) se saaf karo.",
+            "steps": [
+              "Diya gaya: \\(f(x) = \\dfrac{e^{x} + e^{-x}}{e^{x} - e^{-x}}\\), \\(x \\ne 0\\) (\\(x = 0\\) par denominator zero hai).\nMaloom karna: \\(f'(x)\\).\nTareeqa: Quotient Rule \\(\\left(\\frac{u}{v}\\right)' = \\frac{vu' - uv'}{v^{2}}\\), jahan \\(u = e^{x} + e^{-x}\\), \\(v = e^{x} - e^{-x}\\).",
+              "Numerator aur denominator ke derivatives\n\\[\\dfrac{d}{dx}(e^{-x}) = e^{-x}(-1) = -e^{-x}\\]\n\\[u' = e^{x} - e^{-x} = v\\]\n\\[v' = e^{x} + e^{-x} = u\\]\nKyun: \\(e^{-x}\\) par Chain Rule: power \\(-x\\) ka derivative \\(-1\\) hai, is liye minus aata hai.\nDhyan dein: \\(\\frac{d}{dx}(e^{-x}) = e^{-x}\\) likhna sab se aam ghalti hai; minus zaroor lagaiye.",
+              "Quotient Rule\n\\[f'(x) = \\dfrac{v\\cdot v - u\\cdot u}{v^{2}}\\]\n\\[= \\dfrac{(e^{x} - e^{-x})^{2} - (e^{x} + e^{-x})^{2}}{(e^{x} - e^{-x})^{2}}\\]\nKyun: pichhle step se \\(u' = v\\) aur \\(v' = u\\); inhein rule mein rakh diya.",
+              "Numerator saaf karein\n\\[(A - B)^{2} - (A + B)^{2} = -4AB\\]\n\\[-4e^{x}e^{-x} = -4e^{0} = -4\\]\nKyun: identity mein \\(A = e^{x}\\), \\(B = e^{-x}\\). Dono squares khol kar dekhein: \\(A^{2} - 2AB + B^{2} - A^{2} - 2AB - B^{2} = -4AB\\). Aur \\(e^{x}e^{-x} = e^{0} = 1\\).",
+              "Jawab\n\\[f'(x) = \\dfrac{-4}{(e^{x} - e^{-x})^{2}}\\]\nOopar neeche \\(e^{2x}\\) se zarb dein to doosri barabar shakal milti hai:\n\\[f'(x) = -\\dfrac{4e^{2x}}{(e^{2x} - 1)^{2}}\\]\nKyun: \\(e^{x}(e^{x} - e^{-x}) = e^{2x} - 1\\); dono shaklein ek hi jawab hain.",
+              "Tasdeeq: \\(x \\ne 0\\) ke liye \\(f'(x)\\) hamesha negative hai (square positive, oopar \\(-4\\)), yani function \\(x = 0\\) ke dono taraf ghatta hai. \\(x = 1\\) par \\(f'(1) = -\\frac{4}{(e - e^{-1})^{2}} \\approx -\\frac{4}{5.524} \\approx -0.724\\); sympy bhi yahi deta hai."
+            ],
+            "final_answer": "\\(f'(x) = -\\frac{4}{(e^{x} - e^{-x})^{2}}\\), \\(x \\ne 0\\) (equivalently \\(-\\frac{4e^{2x}}{(e^{2x} - 1)^{2}}\\))"
+          }
+        ]
+      }
+    }
+  ]
+}

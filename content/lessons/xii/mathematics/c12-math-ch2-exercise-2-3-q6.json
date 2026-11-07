@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-3-Q6",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-3-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 50,
+          "pdf_to": 50,
+          "note": "Exercise 2.3, Question 6: book p. 47-48, Q1-Q11 (Q1-4 tangent and normal lines, Q5-11 higher-order derivatives); no printed answers"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(i)",
+            "prompt": "6 (i) Find \\(y_{4}\\) and write expressions for \\(y_{10}\\) and \\(y_{11}\\) without evaluating them: \\(y = \\sin\\left(\\frac{x}{2}\\right)\\).",
+            "explanation": "Repeated derivatives of a sine: look for a pattern instead of differentiating 11 times.\nTo find: \\(y_{4}\\), then \\(y_{10}\\) and \\(y_{11}\\) from the pattern.\nPlan: \\(y_{1}\\) to \\(y_{4}\\) with the chain rule; the cycle has length 4.",
+            "steps": [
+              "Given: \\(y = \\sin\\left(\\frac{x}{2}\\right)\\).\nTo find: \\(y_{4}\\), \\(y_{10}\\), \\(y_{11}\\).\nMethod: each differentiation gives a factor \\(\\frac{1}{2}\\) (chain rule) and turns \\(\\sin \\to \\cos \\to -\\sin \\to -\\cos \\to \\sin\\).",
+              "First four derivatives\n\\[y_{1} = \\dfrac{1}{2}\\cos\\dfrac{x}{2}\\]\n\\[y_{2} = -\\dfrac{1}{2^{2}}\\sin\\dfrac{x}{2}\\]\n\\[y_{3} = -\\dfrac{1}{2^{3}}\\cos\\dfrac{x}{2}\\]\n\\[y_{4} = \\dfrac{1}{2^{4}}\\sin\\dfrac{x}{2} = \\dfrac{1}{16}\\sin\\dfrac{x}{2}\\]\nWhy: \\(\\frac{d}{dx}\\sin u = \\cos u\\frac{du}{dx}\\), \\(\\frac{d}{dx}\\cos u = -\\sin u\\frac{du}{dx}\\), with \\(\\frac{du}{dx} = \\frac{1}{2}\\).",
+              "The pattern\n\\(y_{n}\\) always has the factor \\(\\frac{1}{2^{n}}\\); sign and function repeat every 4 steps: \\(n = 4k + 1\\): \\(+\\cos\\); \\(4k + 2\\): \\(-\\sin\\); \\(4k + 3\\): \\(-\\cos\\); \\(4k\\): \\(+\\sin\\).\nWhy: after four steps we are back to \\(\\sin\\frac{x}{2}\\).",
+              "\\(y_{10}\\) and \\(y_{11}\\)\n\\(10 = 4 \\times 2 + 2\\) and \\(11 = 4 \\times 2 + 3\\), so\n\\[y_{10} = -\\dfrac{1}{2^{10}}\\sin\\dfrac{x}{2}\\]\n\\[y_{11} = -\\dfrac{1}{2^{11}}\\cos\\dfrac{x}{2}\\]\nWhy: \\(y_{10}\\) has the form of \\(y_{2}\\), \\(y_{11}\\) the form of \\(y_{3}\\).",
+              "Check\nOne formula: \\(y_{n} = \\frac{1}{2^{n}}\\sin\\left(\\frac{x}{2} + \\frac{n\\pi}{2}\\right)\\). For \\(n = 10\\): \\(\\sin\\left(\\frac{x}{2} + 5\\pi\\right) = -\\sin\\frac{x}{2}\\); for \\(n = 11\\): \\(\\sin\\left(\\frac{x}{2} + \\frac{11\\pi}{2}\\right) = -\\cos\\frac{x}{2}\\). Same results."
+            ],
+            "final_answer": "\\(y_{4} = \\frac{1}{16}\\sin\\frac{x}{2}\\), \\(y_{10} = -\\frac{1}{2^{10}}\\sin\\frac{x}{2}\\), \\(y_{11} = -\\frac{1}{2^{11}}\\cos\\frac{x}{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(ii)",
+            "prompt": "6 (ii) Find \\(y_{4}\\) and write expressions for \\(y_{10}\\) and \\(y_{11}\\) without evaluating them: \\(y = \\ln(x^{2} - a^{2})\\).",
+            "explanation": "Split the logarithm first, as in Example 14; then each term is a simple power after one step.\nTo find: \\(y_{4}\\), then \\(y_{10}\\), \\(y_{11}\\) from the pattern.\nPlan: \\(y = \\ln(x - a) + \\ln(x + a)\\); coefficients \\((-1)^{n-1}(n-1)!\\).",
+            "steps": [
+              "Given: \\(y = \\ln(x^{2} - a^{2})\\).\nTo find: \\(y_{4}\\), \\(y_{10}\\), \\(y_{11}\\).\nMethod: \\(x^{2} - a^{2} = (x - a)(x + a)\\) and \\(\\ln pq = \\ln p + \\ln q\\); then differentiate powers repeatedly and spot the pattern.",
+              "Split the logarithm\n\\[y = \\ln(x - a) + \\ln(x + a)\\]\nWhy: product law of logarithms (for \\(x > a > 0\\); with \\(\\ln|x - a| + \\ln|x + a|\\) the derivatives are the same in general).",
+              "First four derivatives\n\\[y_{1} = (x - a)^{-1} + (x + a)^{-1}\\]\n\\[y_{2} = -(x - a)^{-2} - (x + a)^{-2}\\]\n\\[y_{3} = 2(x - a)^{-3} + 2(x + a)^{-3}\\]\n\\[y_{4} = -6(x - a)^{-4} - 6(x + a)^{-4}\\]\nWhy: \\(\\frac{d}{dx}\\ln u = \\frac{1}{u}\\frac{du}{dx}\\), then the power rule; the inner derivative of \\(x \\pm a\\) is 1.",
+              "The pattern\nCoefficients \\(1, -1, 2, -6\\) are \\((-1)^{n-1}(n-1)!\\):\n\\[y_{n} = (-1)^{n-1}(n-1)!\\;\\times\\]\n\\[\\left[\\dfrac{1}{(x - a)^{n}} + \\dfrac{1}{(x + a)^{n}}\\right]\\]\nWhy: each step multiplies by the power \\(-n\\), so the signs alternate and the sizes are factorials.",
+              "\\(y_{10}\\) and \\(y_{11}\\)\n\\[y_{10} = -9!\\left[\\dfrac{1}{(x - a)^{10}} + \\dfrac{1}{(x + a)^{10}}\\right]\\]\n\\[y_{11} = 10!\\left[\\dfrac{1}{(x - a)^{11}} + \\dfrac{1}{(x + a)^{11}}\\right]\\]\nWhy: \\(n = 10\\): \\((-1)^{9} = -1\\), \\(9!\\); \\(n = 11\\): \\((-1)^{10} = 1\\), \\(10!\\).",
+              "Check\nThe pattern gives \\(y_{4} = (-1)^{3}\\,3!\\,[\\ldots] = -6[\\ldots]\\), which matches the direct working."
+            ],
+            "final_answer": "\\(y_{4} = -6\\left[\\frac{1}{(x - a)^{4}} + \\frac{1}{(x + a)^{4}}\\right]\\), \\(y_{10} = -9!\\left[\\frac{1}{(x - a)^{10}} + \\frac{1}{(x + a)^{10}}\\right]\\), \\(y_{11} = 10!\\left[\\frac{1}{(x - a)^{11}} + \\frac{1}{(x + a)^{11}}\\right]\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

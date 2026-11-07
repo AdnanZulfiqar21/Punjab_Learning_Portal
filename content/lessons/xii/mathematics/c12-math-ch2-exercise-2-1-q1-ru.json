@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-1-Q1-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-1-q1",
+      "title": "Question 1 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 43,
+          "note": "Exercise 2.1, Question 1 (a)-(c): derive the derivatives of sec x, csc x, cot x; book p. 41. Unit 2 has no printed answers."
+        }
+      ],
+      "variant_of": "C12-MATH-CH2-EXERCISE-2-1-Q1",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(a)",
+            "prompt": "1 (a) Derive the formula for the derivative of the following function w.r.t. \\(x\\): \\(\\sec x\\)",
+            "explanation": "Sab se pehle dekhte hain ke sawal kya keh raha hai: 'derive' karo, yani formula sirf likh dena kaafi nahi, usay saabit karna hai.\nDiya kya hai? Function \\(\\sec x\\). Find kya karna hai? Is ka derivative \\(\\frac{d}{dx}(\\sec x)\\).\nHum jaante hain ke \\(\\sec x = \\frac{1}{\\cos x}\\), aur \\(\\cos x\\) ka derivative \\(-\\sin x\\) humein pehle se maloom hai.\nRule kaunsa? Quotient rule, bilkul waise jaise kitab ne Example 1 mein \\(\\tan x\\) ke liye kiya.\nPlan: \\(\\sec x\\) ko fraction bana kar quotient rule lagayenge, phir jawab ko \\(\\sec x \\tan x\\) ki shakal mein toreinge.",
+            "steps": [
+              "Diya gaya hai: \\(y = \\sec x\\).\nMaloom karna: \\(\\frac{dy}{dx}\\).\nTareeqa: \\(\\sec x = \\frac{1}{\\cos x}\\) ek fraction \\(\\frac{u}{v}\\) hai jahan \\(u = 1\\) aur \\(v = \\cos x\\). Is liye quotient rule \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^2}\\) lagayenge. Yaad rakhiye, quotient rule mein upar pehle \\(u'v\\) aata hai, phir minus \\(uv'\\).",
+              "\\(\\sec x\\) ko fraction ki shakal dein\n\\[y = \\sec x = \\dfrac{1}{\\cos x}\\]\nKyun: \\(\\sec x\\) ki definition hi \\(\\cos x\\) ka reciprocal (ulta) hai. Is shakal mein laane ka faida yeh hai ke ab sirf \\(\\cos x\\) ka derivative chahiye, jo humein aata hai.",
+              "Quotient rule lagayein\n\\[\\dfrac{dy}{dx} = \\dfrac{(1)'\\cos x - 1\\,(\\cos x)'}{\\cos^2 x}\\]\nKyun: formula mein \\(u = 1\\) aur \\(v = \\cos x\\) rakha. Neeche \\(v^2 = \\cos^2 x\\) aaya.",
+              "Maloom derivatives rakhein\n\\[= \\dfrac{0 \\cdot \\cos x - 1\\,(-\\sin x)}{\\cos^2 x}\\]\n\\[= \\dfrac{\\sin x}{\\cos^2 x}\\]\nKyun: constant 1 ka derivative 0 hota hai, is liye pehli term khatam. \\((\\cos x)' = -\\sin x\\) hai, aur minus ke saath minus mil kar plus ban gaya.\nDhyan dein: bohat se students \\((\\cos x)'\\) ko \\(+\\sin x\\) likh dete hain; phir jawab ka sign ulta aa jata hai.",
+              "\\(\\sec\\) aur \\(\\tan\\) mein toreinge\n\\[\\dfrac{\\sin x}{\\cos^2 x} = \\dfrac{1}{\\cos x} \\cdot \\dfrac{\\sin x}{\\cos x}\\]\n\\[= \\sec x \\tan x\\]\nKyun: \\(\\cos^2 x\\) ka matlab \\(\\cos x \\cdot \\cos x\\) hai, to fraction ko do hisson mein baant sakte hain. Pehla hissa \\(\\frac{1}{\\cos x} = \\sec x\\), doosra \\(\\frac{\\sin x}{\\cos x} = \\tan x\\). Yeh sab wahan sahi hai jahan \\(\\cos x \\neq 0\\), kyunke wahan \\(\\sec x\\) define hi nahi.",
+              "Doosra tareeqa: definition (first principles) se\n\\[\\sec(x+h) - \\sec x = \\dfrac{\\cos x - \\cos(x+h)}{\\cos x\\cos(x+h)}\\]\n\\[\\cos x - \\cos(x+h) = 2\\sin\\left(x + \\tfrac{h}{2}\\right)\\sin\\tfrac{h}{2}\\]\n\\[f'(x) = \\lim_{h \\to 0} \\dfrac{\\sin(x + \\frac{h}{2})}{\\cos x\\cos(x+h)} \\cdot \\dfrac{\\sin\\frac{h}{2}}{\\frac{h}{2}}\\]\n\\[= \\dfrac{\\sin x}{\\cos^2 x} \\cdot 1 = \\sec x\\tan x\\]\nKyun: agar examiner 'by definition' likhe to yeh tareeqa chahiye. Do fractions ka common denominator liya, phir formula \\(\\cos p - \\cos q = -2\\sin\\frac{p+q}{2}\\sin\\frac{p-q}{2}\\) lagaya, aur aakhir mein \\(\\lim_{\\theta \\to 0}\\frac{\\sin\\theta}{\\theta} = 1\\) istemal kiya, bilkul waise jaise kitab ne \\((\\sin x)' = \\cos x\\) saabit kiya. Dono tareeqon se ek hi jawab aaya.",
+              "Tasdeeq ek point par\n\\[x = 0:\\ \\sec 0 \\tan 0 = 1 \\cdot 0 = 0\\]\nKyun: \\(x = 0\\) par \\(\\cos x\\) sab se bara (1) hai, is liye \\(\\sec x\\) wahan sab se chhota (1) hai, yani graph ka neeche wala mor (turning point). Mor par slope zero hona chahiye, aur hamara formula bhi zero de raha hai. Jawab sahi lagta hai."
+            ],
+            "final_answer": "\\(\\frac{d}{dx}(\\sec x) = \\sec x \\tan x\\), jahan \\(\\cos x \\neq 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(b)",
+            "prompt": "1 (b) Derive the formula for the derivative of the following function w.r.t. \\(x\\): \\(\\csc x\\)",
+            "explanation": "Yeh part (a) ka bhai hai: is dafa \\(\\csc x = \\frac{1}{\\sin x}\\) likhenge.\nDiya kya hai? \\(\\csc x\\). Find kya karna hai? Is ka derivative, derive kar ke.\nRule kaunsa? Phir se quotient rule, kyunke \\(\\sin x\\) ka derivative \\(\\cos x\\) humein maloom hai.\nPlan: quotient rule lagayenge, phir \\(\\frac{\\cos x}{\\sin^2 x}\\) ko \\(\\csc x \\cot x\\) mein toreinge. Sab se zaroori cheez minus sign hai, usay sambhal kar rakhna.",
+            "steps": [
+              "Diya gaya hai: \\(y = \\csc x\\).\nMaloom karna: \\(\\frac{dy}{dx}\\).\nTareeqa: \\(\\csc x = \\frac{1}{\\sin x}\\), to quotient rule mein \\(u = 1\\), \\(v = \\sin x\\). Jaise part (a) mein \\(\\cos x\\) tha, yahan \\(\\sin x\\) hai.",
+              "\\(\\csc x\\) ko fraction banayein\n\\[y = \\csc x = \\dfrac{1}{\\sin x}\\]\nKyun: \\(\\csc x\\) ki definition \\(\\sin x\\) ka reciprocal hai.",
+              "Quotient rule lagayein\n\\[\\dfrac{dy}{dx} = \\dfrac{(1)'\\sin x - 1\\,(\\sin x)'}{\\sin^2 x}\\]\n\\[= \\dfrac{0 - \\cos x}{\\sin^2 x} = -\\dfrac{\\cos x}{\\sin^2 x}\\]\nKyun: \\((1)' = 0\\) aur \\((\\sin x)' = \\cos x\\). Is dafa minus sign kahin cancel nahi hota, is liye jawab negative rahega.\nDhyan dein: part (a) mein do minus mil kar plus bane the; yahan sirf ek minus hai. Isi farq se \\(\\sec\\) ka derivative plus aur \\(\\csc\\) ka minus hai.",
+              "\\(\\csc\\) aur \\(\\cot\\) mein toreinge\n\\[-\\dfrac{\\cos x}{\\sin^2 x} = -\\dfrac{1}{\\sin x} \\cdot \\dfrac{\\cos x}{\\sin x}\\]\n\\[= -\\csc x \\cot x\\]\nKyun: \\(\\frac{1}{\\sin x} = \\csc x\\) aur \\(\\frac{\\cos x}{\\sin x} = \\cot x\\). Yeh wahan sahi hai jahan \\(\\sin x \\neq 0\\), yani \\(x \\neq n\\pi\\).",
+              "Sign ki tasdeeq\n\\[x = \\tfrac{\\pi}{4}:\\ -\\csc\\tfrac{\\pi}{4}\\cot\\tfrac{\\pi}{4} = -\\sqrt{2}\\]\nKyun: \\(0\\) se \\(\\frac{\\pi}{2}\\) tak \\(\\sin x\\) barhta hai, to us ka ulta \\(\\csc x\\) ghatta hai. Ghatte hue function ka slope negative hota hai, aur hamara jawab bhi negative hai. Matlab minus sign zaroori hai."
+            ],
+            "final_answer": "\\(\\frac{d}{dx}(\\csc x) = -\\csc x \\cot x\\), jahan \\(\\sin x \\neq 0\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab (page 36) ke box 'The Derivatives of Six Trigonometric Functions' mein item (vi) \\(\\frac{d}{dx}(\\csc x) = \\csc x \\cot x\\) chhapa hai. Is mein minus sign ghayab hai. Sahi formula, jo humne upar derive kiya, \\(\\frac{d}{dx}(\\csc x) = -\\csc x \\cot x\\) hai. Kitab ki apni Example 2 bhi sahi minus sign hi istemal karti hai, to aap box wali ghalti yaad na karein."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(c)",
+            "prompt": "1 (c) Derive the formula for the derivative of the following function w.r.t. \\(x\\): \\(\\cot x\\)",
+            "explanation": "Ab \\(\\cot x\\) ki baari hai. \\(\\cot x = \\frac{\\cos x}{\\sin x}\\), yani do functions ka fraction.\nDiya kya hai? \\(\\cot x\\). Find kya karna hai? Is ka derivative, derive kar ke.\nRule kaunsa? Quotient rule, jis mein ab \\(u = \\cos x\\) aur \\(v = \\sin x\\) dono functions hain.\nPlan: quotient rule ke baad upar \\(-(\\sin^2 x + \\cos^2 x)\\) banega; identity se yeh \\(-1\\) ho jayega. Phir \\(\\frac{1}{\\sin^2 x} = \\csc^2 x\\).",
+            "steps": [
+              "Diya gaya hai: \\(y = \\cot x\\).\nMaloom karna: \\(\\frac{dy}{dx}\\).\nTareeqa: \\(\\cot x = \\frac{\\cos x}{\\sin x}\\) par quotient rule, \\(u = \\cos x\\), \\(v = \\sin x\\). Yeh bilkul kitab ki Example 1 (\\(\\tan x\\)) jaisa hai, bas upar neeche ulat gaye hain.",
+              "\\(\\cot x\\) ko fraction likhein\n\\[y = \\cot x = \\dfrac{\\cos x}{\\sin x}\\]\nKyun: \\(\\cot x\\) ki definition yahi hai.",
+              "Quotient rule lagayein\n\\[\\dfrac{dy}{dx} = \\dfrac{(\\cos x)'\\sin x - \\cos x\\,(\\sin x)'}{\\sin^2 x}\\]\n\\[= \\dfrac{-\\sin x \\sin x - \\cos x \\cos x}{\\sin^2 x}\\]\nKyun: \\((\\cos x)' = -\\sin x\\) aur \\((\\sin x)' = \\cos x\\) rakh diye. Upar dono terms negative ho gayin.\nDhyan dein: quotient rule mein order ahem hai: pehle \\(u'v\\), phir minus \\(uv'\\). Order ulta karein to sign ulta aa jayega.",
+              "Identity istemal karein\n\\[= \\dfrac{-(\\sin^2 x + \\cos^2 x)}{\\sin^2 x}\\]\n\\[= -\\dfrac{1}{\\sin^2 x} = -\\csc^2 x\\]\nKyun: minus bahar nikala to bracket mein \\(\\sin^2 x + \\cos^2 x\\) bacha, jo hamesha 1 hota hai (Pythagorean identity). Phir \\(\\frac{1}{\\sin^2 x} = \\csc^2 x\\). Yeh \\(\\sin x \\neq 0\\) par sahi hai.",
+              "Tasdeeq doosre raste se\n\\[\\cot x = \\dfrac{1}{\\tan x}:\\ \\dfrac{-\\sec^2 x}{\\tan^2 x} = -\\dfrac{1}{\\sin^2 x}\\]\nKyun: \\(\\cot x\\) ko \\(\\frac{1}{\\tan x}\\) likh kar bhi quotient rule laga sakte hain: upar \\(0 - 1 \\cdot \\sec^2 x\\), neeche \\(\\tan^2 x\\). Phir \\(\\frac{\\sec^2 x}{\\tan^2 x} = \\frac{1}{\\cos^2 x}\\cdot\\frac{\\cos^2 x}{\\sin^2 x} = \\frac{1}{\\sin^2 x}\\). Wohi jawab aaya, to hum mutmain hain."
+            ],
+            "final_answer": "\\(\\frac{d}{dx}(\\cot x) = -\\csc^2 x\\), jahan \\(\\sin x \\neq 0\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

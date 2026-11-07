@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.14-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.14",
+      "title": "2.14 Applying Extrema to Real-World Problems (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 66,
+          "pdf_to": 72,
+          "note": "Book p. 64-70: 2.14 seven-step strategy, Examples 30-34 (garden, rectangle under a parabola with Figure 2.8, cylindrical can, car and tower, batch runtime)"
+        }
+      ],
+      "variant_of": "C12-MATH-CH2-2.14",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab tak hum ne kisi diye hue function ke maximum aur minimum nikale (2.10 se 2.12 tak). Aaj ka sabaq sab se zyada kaam ka hai: asal zindagi ke sawalon mein derivative ko istemal karna. Misaal ke taur par: itni hi baar (fence) se sab se bara bagh kaise banayein, kam se kam tin (metal) se can kaise banayein, ya tower se sab se qareeb jagah kaun si hai. Is kaam ko optimization (behtareen value dhoondna) kehte hain. Kitab kehti hai ke aise sawal hal karne ke liye yeh qadam follow karein:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Understand the Problem (sawal samjhein): pehchanein ke kis cheez ko optimize (sab se zyada ya sab se kam) karna hai.",
+              "Define Variables (variables rakhein): na-maloom miqdaron ko letters de dein, jaise \\(x\\), \\(y\\), \\(r\\).",
+              "Formulate the Function (function banayein): jis cheez ko optimize karna hai us ki equation likhein.",
+              "Find Constraints (paabandi likhein): agar koi shart di gayi hai (jaise fence ki lambai fixed hai) to use equation ki shakal mein likhein.",
+              "Find Critical Points (critical points): derivative lein aur use zero rakh kar critical points nikalein.",
+              "Verify Extrema (tasdeeq): second derivative test se confirm karein ke maximum hai ya minimum.",
+              "Interpret the Solution (jawab ka matlab): math ke jawab ko wapas asal sawal ki zubaan mein, units ke saath likhein."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In saat qadmon ko aik kahani ki tarah samjhiye. Pehle chaar qadam \"function banane\" ke hain, kyun ke word problem mein koi humein \\(f(x)\\) tayyar kar ke nahi deta; woh humein khud alfaaz se banana hota hai. Paanchwan aur chhata qadam wohi purana kaam hai jo aap 2.10 aur 2.11 mein kar chuke hain: \\(f'(x) = 0\\) se critical point, phir \\(f''(x)\\) ke sign se faisla. Aur saatwan qadam jawab ko wapas asal duniya mein le aata hai: \"x = 50\" kaafi nahi, \"deewar ke samne wali side 50 meter\" likhna hai.\nAik misaal se samjhiye: darzi (tailor) ke paas kapra mehdood hai aur woh sab se bara kurta banana chahta hai. Kapre ki lambai uski paabandi (constraint) hai, aur kurte ka size woh cheez hai jise woh zyada se zyada (maximize) karna chahta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Constraint itna zaroori kyun hai? Aksar jis cheez ko optimize karna hota hai woh do letters par depend karti hai, jaise rectangle ka area \\(A = xy\\). Lekin first aur second derivative test sirf aik variable wale function par chalta hai. Is liye sawal mein di gayi shart (fixed fence, fixed volume, fixed sum) se aik letter ko doosre ki shakal mein likh kar hata dete hain.\nDoosri zaroori baat: variable ki ijazat wali range (allowed interval) likhiye. Lambai negative nahi ho sakti, aur kaati gayi cheez sheet se bari nahi ho sakti. Jo critical point is range se bahar ho, use chhor dein. Aur agar akela critical point ulti qism ka nikle (maximum chahiye tha, minimum mila), to range ke dono kinaron (end points) par value check karein. Exercise 2.7 ka Question 4 aisa hi hai.\nKhud sochiye: agar kisi sawal mein \"sab se kam kharcha\" poocha jaye to aap kis cheez ko minimize karenge? (Aksar istemal hone wale material ka area.)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab misaalon ki taraf chalte hain. Har misaal mein main aap ko wohi saat qadam dikhaunga. Sab se pehle hum dekhte hain ke sawal mein find kya karna hai, yani kis cheez ko bara ya chhota karna hai. Phir given values identify karte hain, aur phir woh shart dhoondte hain jo do variables ko aapas mein jorti hai. Pehli misaal mein deewar ke saath bagh hai: figure ko ghaur se dekhiye, kyun ke deewar wali side par fence nahi lagti, aur yahi chhoti si baat poore sawal ki jaan hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch2-fig-2-14-ex30-garden",
+            "alt": "A rectangular garden against a wall along its top side. The other three sides are fenced: the bottom side has length x, the two sides perpendicular to the wall have length y each. Fence condition x + 2y = 100 m, area A = xy.",
+            "caption": "Example 30: the garden against the wall (our illustration; the book has no figure here)"
+          },
+          {
+            "type": "example",
+            "title": "Example 30",
+            "problem": "A rectangular garden is to be fenced on three sides with 100 meters of fencing. The fourth side is along a wall and requires no fence. Find the dimensions that maximize the area and the maximum area.",
+            "steps": [
+              "Diya gaya: rectangle ki teen sides ke liye 100 meter fence hai; chauthi side deewar ke saath hai, us par fence nahi lagegi.\nMaloom karna: woh dimensions (lambai chaurai) jin se bagh ka area sab se zyada ho, aur woh maximum area.\nTareeqa: area \\(A = xy\\) mein do variables hain. Fence wali shart se \\(y\\) ko \\(x\\) mein likhenge, phir \\(\\frac{dA}{dx} = 0\\) aur second derivative test lagayenge.",
+              "Step 1: Variables rakhein\nDeewar ke samne wali side \\(x\\) meter, aur deewar ke perpendicular (seedhi khari) har side \\(y\\) meter.\nKyun: deewar wali side par fence nahi lagti, is liye \\(x\\) wali sirf aik side fence leti hai, lekin \\(y\\) wali dono sides fence leti hain. Upar wali figure dekh lijiye.",
+              "Step 2: Constraint likhein (kul fence)\n\\[x + 2y = 100\\]\n\\[y = \\dfrac{100 - x}{2} \\quad \\text{...(1)}\\]\nKyun: poori 100 meter fence aik \\(x\\) side aur do \\(y\\) sides par lagti hai. Lambaiyan positive hain, is liye \\(0 < x < 100\\).\nDhyan dein: bahut se bachche yahan \\(2x + 2y = 100\\) likh dete hain, yani deewar wali side ki bhi fence gin lete hain. Yeh ghalat hai.",
+              "Step 3: Area ko aik variable mein likhein\n\\[A = xy = x\\left(\\dfrac{100 - x}{2}\\right)\\]\n\\[A = \\dfrac{1}{2}(100x - x^{2}) \\quad \\text{...(2)}\\]\nKyun: (1) se \\(y\\) rakhne ke baad \\(A\\) sirf \\(x\\) par depend karta hai, ab ise differentiate kar sakte hain.",
+              "Step 4: \\(x\\) ke lehaz se differentiate karein aur critical point nikalein\n\\[\\dfrac{dA}{dx} = \\dfrac{1}{2}(100 - 2x) = 50 - x \\quad \\text{...(3)}\\]\n\\[50 - x = 0 \\Rightarrow x = 50\\]\nKyun: sab se oonche point par tangent horizontal hoti hai, yani slope zero. Is liye \\(\\frac{dA}{dx} = 0\\) rakha. \\(x = 50\\) range \\(0 < x < 100\\) ke andar hai, is liye qabool hai.",
+              "Step 5: Second derivative test\nEquation (3) ko \\(x\\) ke lehaz se dobara differentiate karein:\n\\[\\dfrac{d^{2}A}{dx^{2}} = -1 < 0\\]\nKyun: second derivative negative hai, yani area ka graph neeche ki taraf mura hua (pahaari ki choti jaisa) hai. Is liye \\(x = 50\\) meter par area maximum hai.",
+              "Step 6: \\(x = 50\\) ko (1) aur (2) mein rakhein\n\\[y = \\dfrac{100 - 50}{2} = 25\\text{ m}\\]\n\\[A = \\dfrac{1}{2}\\left(100 \\times 50 - 50^{2}\\right)\\]\n\\[A = 1250\\text{ m}^{2}\\]\nKyun: (1) se doosri side milti hai aur (2) se sab se bara area.",
+              "Tasdeeq:\n\\[x + 2y = 50 + 2(25) = 100\\ \\checkmark\\]\nAas paas ki values ka area kam hai: \\(x = 40\\), \\(y = 30\\) se \\(A = 1200\\); \\(x = 60\\), \\(y = 20\\) se bhi \\(A = 1200\\). Dono 1250 se kam hain, to jawab sahi hai."
+            ],
+            "answer": "Bagh ka maximum area \\(1250\\text{ m}^{2}\\) hai. Yeh tab hota hai jab deewar ke samne wali side 50 meter aur deewar ke perpendicular har side 25 meter ho."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 30 mein \\(\\frac{d^{2}A}{dx^{2}} = -1\\) se pehle kitab likhti hai \"Differentiating equation (1) w.r.t. x\". Lekin equation (1) to \\(y = \\frac{100 - x}{2}\\) hai. Asal mein equation (3), yani \\(\\frac{dA}{dx} = 50 - x\\), ko differentiate kiya gaya hai, jis se \\(\\frac{d^{2}A}{dx^{2}} = -1\\) aata hai. Hum ne upar sahi number likha hai. Jawab par koi asar nahi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "(Yeh misaal kitab mein nahi, hamari taraf se hai.) Do positive numbers ka jama 20 hai. Unka product sab se zyada kab hoga?\nNumbers \\(x\\) aur \\(20 - x\\) lein. Product \\(P = x(20 - x) = 20x - x^{2}\\).\n\\[\\dfrac{dP}{dx} = 20 - 2x = 0 \\Rightarrow x = 10\\]\n\\(\\frac{d^{2}P}{dx^{2}} = -2 < 0\\), is liye maximum. Numbers 10 aur 10, product 100.\nGhor karein: Example 30 ki tarah yahan bhi jawab \"barabar hisse\" wala nikla. Aisa aksar hota hai, lekin hamesha nahi; is liye har dafa hisaab kar ke dekhein."
+          },
+          {
+            "type": "paragraph",
+            "text": "Doosri misaal mein shart (constraint) kisi lambai ki nahi balke aik curve ki hai: rectangle ke upar wale kone parabola par hone chahiye. Pehle sochiye: agar rectangle bahut chaura banayein to woh neeche (patla) ho jata hai, aur agar bahut ooncha banayein to tang ho jata hai. Dono soorton mein area kam hai. Kahin beech mein aik behtareen jagah hai, aur derivative wohi jagah dhoondta hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 31",
+            "problem": "Find the dimensions of a rectangle of maximum area that can be inscribed under the curve \\(y = 4 - x^{2}\\) and above the \\(x\\)-axis.",
+            "steps": [
+              "Diya gaya: curve \\(y = 4 - x^{2}\\), yani neeche ki taraf khulne wali parabola jo \\(x\\)-axis ko \\(x = \\pm 2\\) par kaatti hai.\nMaloom karna: us sab se bare rectangle ki chaurai aur oonchai jo \\(x\\)-axis par khara ho aur curve ke neeche ho.\nTareeqa: rectangle ke upar wale dono kone curve par rakhenge, area ko \\(x\\) mein likhenge, phir first aur second derivative test.",
+              "Step 1: Rectangle ko jagah dein (Figure 2.8)\nPehle quadrant mein parabola par aik kona \\(A(x, y)\\) lein. Doosre quadrant mein doosra kona \\(B(-x, y)\\) hoga.\n\\[\\text{Height} = y, \\quad \\text{Width} = 2x\\]\n\\[A = 2xy \\quad \\text{...(1)}\\]\nKyun: parabola \\(y\\)-axis ke dono taraf aik jaisi (symmetric) hai, is liye upar ke kone aik doosre ka aaina (mirror image) hain. Yahan \\(0 < x < 2\\).\nDhyan dein: kitab letter \\(A\\) ko kone ke naam ke liye bhi aur area ke liye bhi use karti hai; ghabraiye mat, context se farq samajh aata hai.",
+              "Step 2: Curve ki madad se \\(y\\) hatayein\nKona \\(A(x, y)\\) curve par hai, is liye \\(y = 4 - x^{2}\\). Ise (1) mein rakhein:\n\\[A = 2x(4 - x^{2})\\]\n\\[A = 2(4x - x^{3})\\]\nKyun: jo point curve par ho, us ke coordinates curve ki equation ko poora karte hain. Ab \\(A\\) sirf \\(x\\) ka function hai.",
+              "Step 3: Differentiate karein aur \\(\\frac{dA}{dx} = 0\\) rakhein\n\\[\\dfrac{dA}{dx} = 2(4 - 3x^{2}) \\quad \\text{...(2)}\\]\n\\[2(4 - 3x^{2}) = 0 \\Rightarrow 3x^{2} = 4\\]\n\\[x^{2} = \\dfrac{4}{3} \\Rightarrow x = \\dfrac{2}{\\sqrt{3}}\\]\nKyun: \\(x\\) pehle quadrant mein hai, is liye sirf positive root lete hain. Negative root \\(-\\frac{2}{\\sqrt{3}}\\) to wohi doosra kona \\(B\\) hai.",
+              "Step 4: Second derivative test\n\\(\\frac{dA}{dx} = 2(4 - 3x^{2})\\) ko \\(x\\) ke lehaz se differentiate karein:\n\\[\\dfrac{d^{2}A}{dx^{2}} = 2(-6x) = -12x\\]\n\\(x = \\frac{2}{\\sqrt{3}}\\) par:\n\\[\\dfrac{d^{2}A}{dx^{2}} = -12\\left(\\dfrac{2}{\\sqrt{3}}\\right)\\]\n\\[= -\\dfrac{24}{\\sqrt{3}} < 0\\]\nKyun: second derivative negative hai, is liye \\(x = \\frac{2}{\\sqrt{3}}\\) par area maximum hai.",
+              "Step 5: Oonchai aur chaurai nikalein\n\\[y = 4 - \\left(\\dfrac{2}{\\sqrt{3}}\\right)^{2} = 4 - \\dfrac{4}{3}\\]\n\\[y = \\dfrac{8}{3}\\]\n\\[\\text{Width} = 2x = \\dfrac{4}{\\sqrt{3}}\\]\nKyun: oonchai kone ki \\(y\\)-value hai, aur chaurai us ki \\(x\\)-value ka dugna, kyun ke rectangle \\(-x\\) se \\(x\\) tak phaila hua hai.\nDhyan dein: chaurai \\(x\\) nahi, \\(2x\\) hai. Yeh ghalti bahut aam hai.",
+              "Tasdeeq:\n\\[A_{\\max} = \\dfrac{4}{\\sqrt{3}} \\times \\dfrac{8}{3} = \\dfrac{32}{3\\sqrt{3}}\\]\n\\[\\approx 6.16 \\text{ square units}\\]\nQareeb ki values ka area kam hai: \\(x = 1\\) par \\(A = 2(1)(3) = 6\\), aur \\(x = 1.5\\) par \\(A = 2(1.5)(1.75) = 5.25\\)."
+            ],
+            "answer": "Maximum area wale rectangle ki chaurai \\(2x = \\frac{4}{\\sqrt{3}}\\) units aur oonchai \\(\\frac{8}{3}\\) units hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch2-fig-2-14-ex31-rectangle",
+            "alt": "The parabola y = 4 minus x squared opening downward with vertex (0, 4), cutting the X-axis at minus 2 and 2. A shaded rectangle stands on the X-axis with lower corners C(minus x, 0) and D(x, 0) and upper corners B(minus x, y) and A(x, y) on the parabola. Width 2x, height y.",
+            "caption": "Figure 2.8: rectangle under the curve y = 4 − x² (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Example 31 ko khud dohraiye, magar curve \\(y = 9 - x^{2}\\) ke saath (yeh hamari taraf se mashq hai, kitab mein nahi). Area \\(A = 2x(9 - x^{2})\\) banega. Derivative \\(18 - 6x^{2}\\) ko zero rakhne se \\(x = \\sqrt{3}\\) milta hai. Phir oonchai \\(y = 9 - 3 = 6\\) aur chaurai \\(2\\sqrt{3}\\). Second derivative \\(-12x\\) yahan bhi negative hai, is liye maximum.\nGhor kijiye ke dono sawalon mein sab se bare rectangle ki oonchai parabola ki choti ki oonchai ka do tihaai (two-thirds) hai: \\(\\frac{8}{3}\\) aur 4, phir 6 aur 9. Aisi pattern dhoondna maths ka mazaa hai, lekin exam mein hamesha poora hisaab likhiye."
+          },
+          {
+            "type": "paragraph",
+            "text": "Teesri misaal factory ka sawal hai. Can banane wala chahta hai ke 500 cm³ ka can kam se kam tin se ban jaye. Patla aur lamba can banayein to curved surface bahut bara ho jata hai; chapta aur chaura banayein to dhakkan bahut bare ho jate hain. Dekhte hain derivative kaun sa darmiyani size chunta hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 32",
+            "problem": "A cylindrical can must hold \\(500\\text{ cm}^{3}\\) of liquid. Find the radius and height that minimizes the material cost.",
+            "steps": [
+              "Diya gaya: band (closed) cylindrical can ka volume \\(V = 500\\text{ cm}^{3}\\).\nMaloom karna: radius \\(r\\) aur height \\(h\\) jin se material ka kharcha sab se kam ho.\nTareeqa: kharcha tab kam hoga jab material kam lage, yani cylinder ka surface area sab se kam ho. Volume ki madad se \\(S\\) ko sirf \\(r\\) mein likhenge, phir derivative tests.",
+              "Step 1: Fixed volume se \\(h\\) nikalein\nBase ka radius \\(r\\) cm aur height \\(h\\) cm lein.\n\\[V = \\pi r^{2}h = 500\\]\n\\[h = \\dfrac{500}{\\pi r^{2}} \\quad \\text{...(1)}\\]\nKyun: volume fixed hai, is liye \\(h\\) aur \\(r\\) aapas mein bandhe hue hain; is equation se \\(h\\) ko hata sakte hain.",
+              "Step 2: Kul surface area likhein\nDo gol dhakkan (top aur bottom): \\(2\\pi r^{2}\\); curved (gol ghoomne wali) surface: \\(2\\pi rh\\).\n\\[S = 2\\pi r^{2} + 2\\pi rh \\quad \\text{...(2)}\\]\nKyun: can upar aur neeche se band hai, is liye teeno hisson par material lagta hai.",
+              "Step 3: (1) se \\(h\\) ko (2) mein rakhein\n\\[S = 2\\pi r^{2} + 2\\pi r \\times \\dfrac{500}{\\pi r^{2}}\\]\n\\[S = 2\\pi r^{2} + \\dfrac{1000}{r}\\]\nKyun: \\(\\pi\\) aur aik \\(r\\) cancel ho gaye; ab \\(S\\) sirf \\(r\\) ka function hai.",
+              "Step 4: Differentiate karein aur \\(\\frac{dS}{dr} = 0\\) rakhein\n\\[\\dfrac{dS}{dr} = 4\\pi r - \\dfrac{1000}{r^{2}} \\quad \\text{...(3)}\\]\n\\[4\\pi r = \\dfrac{1000}{r^{2}} \\Rightarrow r^{3} = \\dfrac{1000}{4\\pi}\\]\n\\[r = \\left(\\dfrac{250}{\\pi}\\right)^{1/3} \\quad \\text{...(4)}\\]\nKyun: \\(\\frac{1000}{r} = 1000r^{-1}\\) ka derivative power rule se \\(-1000r^{-2}\\) hai. Dono taraf \\(r^{2}\\) se multiply karne par \\(r^{3}\\) bana, aur \\(\\frac{1000}{4\\pi} = \\frac{250}{\\pi}\\).",
+              "Step 5: Second derivative test\nEquation (3) ko \\(r\\) ke lehaz se differentiate karein:\n\\[\\dfrac{d^{2}S}{dr^{2}} = 4\\pi + \\dfrac{2000}{r^{3}}\\]\n\\(r = \\left(\\frac{250}{\\pi}\\right)^{1/3}\\) par \\(r^{3} = \\frac{250}{\\pi}\\), is liye\n\\[\\dfrac{d^{2}S}{dr^{2}} = 4\\pi + 8\\pi = 12\\pi > 0\\]\nKyun: second derivative positive hai, is liye \\(S\\) yahan minimum hai. Kitab yeh value poori nahi nikalti; woh sirf dikhati hai ke dono terms positive hain, jo kaafi hai, kyun ke radius positive hota hai.",
+              "Step 6: (1) se height nikalein\n\\[h = \\dfrac{500}{\\pi\\left(\\frac{250}{\\pi}\\right)^{2/3}}\\]\n\\[h = \\dfrac{500}{(\\pi)^{1/3}(250)^{2/3}}\\]\nKyun: \\(\\pi \\div \\pi^{2/3} = \\pi^{1/3}\\) (powers ghatate hain: \\(1 - \\frac{2}{3} = \\frac{1}{3}\\)).",
+              "Tasdeeq:\n\\[r \\approx 4.30\\text{ cm}, \\quad h \\approx 8.60\\text{ cm}\\]\n\\[\\pi r^{2}h \\approx \\pi(18.50)(8.60) \\approx 500\\ \\checkmark\\]\nAik khoobsurat baat: \\(h = \\frac{2 \\times 250}{\\pi^{1/3}250^{2/3}} = 2\\left(\\frac{250}{\\pi}\\right)^{1/3} = 2r\\). Yani sab se kifayati can utna hi lamba hota hai jitna chaura (height = diameter)."
+            ],
+            "answer": "Material ka kharcha tab sab se kam hai jab radius \\(r = \\left(\\frac{250}{\\pi}\\right)^{1/3} \\approx 4.30\\) cm aur height \\(h = \\frac{500}{\\pi^{1/3}(250)^{2/3}} \\approx 8.60\\) cm ho (yani \\(h = 2r\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Is misaal se kya seekha",
+            "text": "Teen baatein yaad rakhiye. Pehli: \"kam se kam kharcha\" ka matlab hai \"kam se kam material\", aur material ka hisaab surface area se hota hai. Doosri: volume fixed ho to woh \\(h\\) ko \\(r\\) se jorne wali shart (constraint) hai. Teesri: band cylinder ke liye jawab hamesha \\(h = 2r\\) aata hai, yani height diameter ke barabar. Exercise 2.7 ka Question 3 bilkul isi tarah ka hai; wahan bhi aakhir mein yeh check zaroor lagaiye.\nRozmarra ki misaal: doodh ya ghee ke dabbe aksar takreeban itne hi lambe hote hain jitne chaure, kyun ke is shakal mein tin kam lagta hai. (Asal dabbon mein jorne ki jagah aur design ki wajah se thora farq hota hai.)"
+          },
+          {
+            "type": "example",
+            "title": "Example 33",
+            "problem": "A car moves along the parabolic road \\(y = 4 - x^{2}\\). A mobile tower is at the origin. Find the position of the car where the signal strength is strongest.",
+            "steps": [
+              "Diya gaya: sarak \\(y = 4 - x^{2}\\); tower origin \\((0, 0)\\) par hai.\nMaloom karna: sarak ka woh point (ya points) \\(P(x, y)\\) jo tower ke sab se qareeb ho.\nTareeqa: signal tab sab se mazboot hota hai jab car aur tower ka faasla sab se kam ho. \\(D\\) ki jagah \\(D^{2}\\) ko minimize karenge (square root se jaan chhooti hai) aur ise \\(y\\) mein likhenge.",
+              "Step 1: Tower se car ka faasla\nCar ki position parabola par \\(P(x, y)\\) maan lein.\n\\[D = \\sqrt{x^{2} + y^{2}} \\quad \\text{...(1)}\\]\nKyun: \\((0, 0)\\) aur \\((x, y)\\) ke darmiyan distance formula.",
+              "Step 2: Sarak ki equation istemal karein\n\\[y = 4 - x^{2} \\Rightarrow x^{2} = 4 - y \\quad \\text{...(2)}\\]\n\\[D = \\sqrt{4 - y + y^{2}}\\]\nKyun: (1) mein \\(x\\) nahi balke \\(x^{2}\\) hai, is liye \\(x^{2}\\) ki jagah \\(4 - y\\) rakhna sab se aasaan raasta hai; seedha aik variable mil gaya.",
+              "Step 3: \\(D\\) ki jagah \\(D^{2}\\) ko minimize karein\n\\[D^{2} = 4 - y + y^{2}\\]\n\\[f(y) = y^{2} - y + 4\\]\nKyun: \\(D\\) kabhi negative nahi hota, aur non-negative numbers mein jo chhota ho us ka square bhi chhota hota hai. Is liye \\(D\\) aur \\(D^{2}\\) dono aik hi point par sab se kam hote hain, aur \\(D^{2}\\) ka derivative bahut aasaan hai.",
+              "Step 4: \\(y\\) ke lehaz se differentiate karein\n\\[\\dfrac{df}{dy} = 2y - 1 \\quad \\text{...(3)}\\]\n\\[2y - 1 = 0 \\Rightarrow y = \\dfrac{1}{2}\\]\nKyun: critical point woh hai jahan derivative zero ho.",
+              "Step 5: Second derivative test\nEquation (3) ko \\(y\\) ke lehaz se differentiate karein:\n\\[\\dfrac{d^{2}f}{dy^{2}} = 2 > 0\\]\nKyun: second derivative positive hai, is liye \\(y = \\frac{1}{2}\\) par \\(f\\) minimum hai.",
+              "Step 6: \\(x^{2} = 4 - y\\) se \\(x\\) nikalein\n\\[x^{2} = 4 - \\dfrac{1}{2} = \\dfrac{7}{2}\\]\n\\[x = \\pm\\sqrt{\\dfrac{7}{2}}\\]\nKyun: dono signs jaiz hain. Sarak \\(y\\)-axis ke dono taraf aik jaisi hai, is liye do qareeb tareen points hain, aik daayen aur aik baayen.",
+              "Tasdeeq:\n\\[D^{2} = \\dfrac{1}{4} - \\dfrac{1}{2} + 4 = \\dfrac{15}{4}\\]\n\\[D = \\dfrac{\\sqrt{15}}{2} \\approx 1.94\\]\nSarak ki choti \\((0, 4)\\) par faasla 4 hai, jo zyada hai. Yani choti par khare ho kar signal kamzor milega; yeh dilchasp baat hai ke sab se qareeb point choti nahi."
+            ],
+            "answer": "Car ki woh positions jahan signal sab se mazboot (strongest) hai: \\(\\left(\\sqrt{\\frac{7}{2}}, \\frac{1}{2}\\right)\\) aur \\(\\left(-\\sqrt{\\frac{7}{2}}, \\frac{1}{2}\\right)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 33 mein do chhoti ghaltiyan hain. (1) Kitab likhti hai \"Differentiate equation (3) with respect to x\", jab ke (3) yani \\(\\frac{df}{dy} = 2y - 1\\) ko \\(y\\) ke lehaz se differentiate kiya jata hai, jis se \\(\\frac{d^{2}f}{dy^{2}} = 2\\) milta hai. (2) Aakhri jumla \"The positions of the car where signal strength are ...\" mein lafz \"strongest\" ghaib hai; sahi jumla: \"where the signal strength is strongest are\" \\(\\left(\\pm\\sqrt{\\frac{7}{2}}, \\frac{1}{2}\\right)\\). Jawab khud sahi hai; hum ne upar sahi likha hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Agar hum \\(y\\) ki jagah \\(x\\) ko variable banate to kya hota? Tab \\(D^{2} = x^{2} + (4 - x^{2})^{2}\\) banta, jis ka derivative \\(2x(2x^{2} - 7)\\) hai. Is ke teen critical points hain: \\(x = 0\\) aur \\(x = \\pm\\sqrt{\\frac{7}{2}}\\). In mein \\(x = 0\\) (sarak ki choti) par faasla local maximum hai, aur \\(x = \\pm\\sqrt{\\frac{7}{2}}\\) par minimum. Jawab wohi aata hai, lekin kaam lamba hai. Sabaq: variable aisa chuniye jis se function sab se seedha bane.\nYahi \"\\(D^{2}\\)\" wali tarkeeb Exercise 2.7 ke Question 6 mein bhi kaam aati hai, jahan Heron's formula ke square root ki jagah \\(A^{2}\\) ko maximize karte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Aakhri misaal computer ki duniya se hai. Yahan koi figure ya fence nahi; function pehle se diya hua hai. Is liye pehle chaar qadam (variables, function, constraint) tayyar mil gaye, aur hum seedha derivative wale kaam par aa jate hain. Lekin saatwan qadam, yani jawab ka matlab samajhna, yahan sab se ahem hai: do critical points milenge, aur humein dekhna hai ke company ko kaun sa chahiye. Aap socha kijiye ke aap ki dukaan par grahak (customers) ek ek kar ke aa rahe hain ya group mein; har group ke saath kuch fixed kaam bhi hota hai. Group ka sahi size chunna hi is sawal ka maqsad hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 34",
+            "problem": "A software company is designing a data processing algorithm for analyzing batches of customer transactions. The runtime \\(T(n)\\) in milliseconds depends on the size of the batch \\(n\\) (the number of transactions processed together) and is modeled by the equation:\n\\[T(n) = n^{3} - 12n^{2} + 36n\\]\nThe term \\(n^{3}\\) reflects the time complexity of a sorting step in the algorithm. The term \\(-12n^{2}\\) accounts for optimizations that reduce processing time for moderate batch sizes. The term \\(36n\\) represents overhead that scales linearly with batch size.\nThe company wants to find the optimal batch size \\(n\\) that minimizes the algorithm's total runtime.",
+            "steps": [
+              "Diya gaya: runtime \\(T(n) = n^{3} - 12n^{2} + 36n\\) milliseconds ...(1), jahan batch size \\(n > 0\\).\nMaloom karna: woh batch size \\(n\\) jis par runtime \\(T(n)\\) sab se kam ho.\nTareeqa: yahan function pehle se aik variable mein diya hua hai, is liye seedha qadam 5 aur 6: critical points, phir second derivative test.",
+              "Step 1: Equation (1) ko \\(n\\) ke lehaz se differentiate karein\n\\[\\dfrac{dT}{dn} = 3n^{2} - 24n + 36 \\quad \\text{...(2)}\\]\nKyun: har term par power rule laga: \\(n^{3} \\to 3n^{2}\\), \\(-12n^{2} \\to -24n\\), \\(36n \\to 36\\).",
+              "Step 2: \\(\\frac{dT}{dn} = 0\\) rakhein\n\\[3n^{2} - 24n + 36 = 0\\]\n\\[n^{2} - 8n + 12 = 0\\]\n\\[(n - 2)(n - 6) = 0\\]\nKyun: pehle 3 se divide kiya taa ke numbers chhote ho jayein. Phir factorise kiya: \\(-2\\) aur \\(-6\\) ka product 12 aur jama \\(-8\\) hai. Critical points \\(n = 2\\) aur \\(n = 6\\) hain.",
+              "Step 3: Second derivative test\nEquation (2) ko \\(n\\) ke lehaz se differentiate karein:\n\\[\\dfrac{d^{2}T}{dn^{2}} = 6n - 24 \\quad \\text{...(3)}\\]\n\\[n = 2: \\ 6 \\times 2 - 24 = -12 < 0\\]\n\\[n = 6: \\ 6 \\times 6 - 24 = 12 > 0\\]\nKyun: \\(n = 2\\) par negative, yani local maximum (sab se bura batch size); \\(n = 6\\) par positive, yani local minimum.",
+              "Step 4: Jawab ka matlab\nRuntime tab sab se kam hai jab batch size \\(n = 6\\) ho.\nKyun: humein kam se kam waqt chahiye, is liye minimum wala point lete hain, \\(n = 2\\) wala maximum nahi.\nDhyan dein: dono critical points mil jane ke baad yeh dekhna zaroori hai ke sawal maximum maang raha hai ya minimum.",
+              "Tasdeeq:\n\\[T(5) = 125 - 300 + 180 = 5\\]\n\\[T(6) = 216 - 432 + 216 = 0\\]\n\\[T(7) = 343 - 588 + 252 = 7\\]\n\\(T(6)\\) apne dono parosiyon se chhota hai, aur \\(T(2) = 32\\) wala point choti hai."
+            ],
+            "answer": "Runtime tab sab se kam hai jab input (batch) size \\(n = 6\\) ho."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 34 sirf tareeqa sikhane ke liye bana hua model hai. Factorise karein to \\(T(n) = n(n - 6)^{2}\\), is liye \\(T(6) = 0\\) ms aata hai, jo asal program mein mumkin nahi (koi kaam zero waqt mein nahi hota). Phir bhi math sahi hai: har \\(n > 0\\) ke liye \\(T(n) \\ge 0\\), is liye \\(n = 6\\) sirf local minimum nahi balke model ka sab se kam runtime hai. Khud sochiye: \\(n = 2\\) par runtime kitna hai, aur kya company ko yeh batch size rakhna chahiye?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Sawal mein woh lafz dhoondein jo batata hai kya optimize karna hai: sab se bara area, sab se kam kharcha, sab se mazboot signal (yani sab se kam faasla), sab se kam waqt.\n2. Na-maloom cheezon ko letters dein, miqdaar ka formula likhein, aur di gayi shart se use aik variable par le aayein.\n3. Variable ki ijazat wali range likhein (lambai positive) aur us se bahar wale critical points chhor dein.\n4. \\(f'(x) = 0\\) hal karein; \\(f''(x) < 0\\) ho to maximum, \\(f''(x) > 0\\) ho to minimum.\n5. Faasle mein square root hota hai: \\(D\\) ki jagah \\(D^{2}\\) ko minimize karein.\n6. Aakhir mein saari maangi gayi dimensions aur behtareen value units ke saath likhein."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Do variables wale function (jaise \\(A = xy\\)) ko constraint lagaye baghair differentiate kar dena.\n2. Aisi side ya fence ginna jo maujood hi nahi (Example 30 mein deewar wali side, ya box ka khula dhakkan).\n3. Na-mumkin critical point rakh lena, jaise negative lambai ya sheet se bara cut.\n4. Sirf \\(x\\) nikal kar ruk jana; sawal aksar har dimension aur maximum ya minimum value bhi maangta hai.\n5. Units bhool jana, ya litre aur cm³ ko mila dena (1 litre = 1000 cm³)."
+          }
+        ]
+      }
+    }
+  ]
+}

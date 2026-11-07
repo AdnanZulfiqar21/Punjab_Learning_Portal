@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.5",
+      "title": "2.5 Derivative of Exponential Functions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 44,
+          "note": "Book p. 41-42: 2.5 Derivative of Exponential Functions, Recall! box, derivation of d/dx(a^x), Challenge! box, Example 7"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "A function defined by\n\\[f(x) = a^{x},\\]\nwhere \\(a > 0\\) and \\(a \\ne 1\\), is called an exponential function.\nIf \\(a = e \\approx 2.71828\\), then \\(f(x) = e^{x}\\) is called the natural exponential function."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In \\(a^{x}\\) the variable \\(x\\) is in the power and the base \\(a\\) is a fixed number. Compare \\(x^{3}\\) (variable base, fixed power: a power function) with \\(3^{x}\\) (fixed base, variable power: an exponential function). They are differentiated by completely different rules, so first decide which kind you have.\nWhy \\(a > 0\\) and \\(a \\ne 1\\)? For \\(a = 1\\), \\(1^{x} = 1\\) is just a constant. For \\(a < 0\\), values such as \\((-4)^{1/2}\\) are not real numbers.\nThe number \\(e \\approx 2.71828\\) is special because, as we will see below, \\(e^{x}\\) is its own derivative."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Recall!",
+            "text": "\\[\\lim_{h \\to 0} \\dfrac{a^{h} - 1}{h} = \\ln a\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This standard limit is the key to the whole derivation, so take it as known. A quick numerical feel for it with \\(a = 2\\) and \\(h = 0.001\\):\n\\[\\dfrac{2^{0.001} - 1}{0.001} \\approx 0.6934\\]\n\\[\\ln 2 \\approx 0.6931\\]\nThe smaller \\(h\\) is, the closer the two numbers get."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Derivative of \\(a^{x}\\) by definition"
+          },
+          {
+            "type": "paragraph",
+            "text": "Now, we shall find the derivative of \\(f(x) = a^{x}\\), using the definition.\nLet\n\\[f(x) = a^{x} \\quad \\text{...(1)}\\]\nFrom equation (1) we have\n\\[f(x + h) = a^{x + h} \\quad \\text{...(2)}\\]\n\\[f'(x) = \\lim_{h \\to 0} \\dfrac{f(x + h) - f(x)}{h}\\]\n(definition of derivative)"
+          },
+          {
+            "type": "paragraph",
+            "text": "After substituting the expression for \\(f(x)\\) and \\(f(x + h)\\) from equations (1) and (2), we get:\n\\[f'(x) = \\lim_{h \\to 0} \\dfrac{a^{x + h} - a^{x}}{h}\\]\n\\[= \\lim_{h \\to 0} \\dfrac{a^{x}(a^{h} - 1)}{h}\\]\n\\[= a^{x} \\lim_{h \\to 0} \\dfrac{a^{h} - 1}{h}\\]\n\\[= a^{x} \\ln a\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What happened in each line:\n1. Law of exponents: \\(a^{x + h} = a^{x} \\cdot a^{h}\\), so \\(a^{x}\\) is a common factor of the numerator.\n2. The limit is taken as \\(h \\to 0\\); \\(a^{x}\\) does not contain \\(h\\), so it behaves like a constant and comes outside the limit.\n3. The limit that is left is exactly the Recall! result, \\(\\ln a\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Hence, we have proved that"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{d}{dx}\\left(a^{x}\\right) = a^{x} \\ln a",
+            "text_alt": "d by d x of a to the power x equals a to the power x times natural log of a"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Prove that \\(\\frac{d}{dx}(e^{x}) = e^{x}\\).\nDo you know \\(\\ln e = 1\\)?"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Answer to the Challenge (our working). \\(\\ln e = \\log_{e} e = 1\\), because \\(e^{1} = e\\). Put \\(a = e\\) in the boxed result:\n\\[\\dfrac{d}{dx}(e^{x}) = e^{x} \\ln e\\]\n\\[= e^{x} \\cdot 1 = e^{x}\\]\nSo \\(e^{x}\\) is its own derivative; this is why \\(e\\) is the natural base.\nWith the Chain Rule (2.3), if \\(u\\) is a function of \\(x\\):\n\\[\\dfrac{d}{dx}(e^{u}) = e^{u}\\,\\dfrac{du}{dx}\\]\n\\[\\dfrac{d}{dx}(a^{u}) = a^{u} \\ln a\\,\\dfrac{du}{dx}\\]\nThese two forms are used in Example 7 and in Exercise 2.2."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Find \\(\\frac{dy}{dx}\\) if (i) \\(y = e^{\\sin^{2} x}\\) (ii) \\(a^{x^{3}}\\)",
+            "steps": [
+              "Given: (i) \\(y = e^{\\sin^{2} x}\\); (ii) \\(y = a^{x^{3}}\\).\nTo find: \\(\\frac{dy}{dx}\\) in each part.\nMethod: both are exponentials whose power is itself a function of \\(x\\), so we use the Chain Rule forms \\(\\frac{d}{dx}(e^{u}) = e^{u}\\frac{du}{dx}\\) and \\(\\frac{d}{dx}(a^{u}) = a^{u}\\ln a\\,\\frac{du}{dx}\\).",
+              "(i) Step 1: Chain Rule on the outer exponential\n\\[\\dfrac{dy}{dx} = e^{\\sin^{2} x}\\,\\dfrac{d}{dx}(\\sin^{2} x)\\]\nWhy: here \\(u = \\sin^{2} x\\). The exponential is copied unchanged and multiplied by the derivative of its power.",
+              "(i) Step 2: Differentiate \\(\\sin^{2} x = (\\sin x)^{2}\\)\n\\[\\dfrac{d}{dx}(\\sin x)^{2} = 2\\sin x\\,\\dfrac{d}{dx}(\\sin x)\\]\n\\[= 2\\sin x \\cos x\\]\nWhy: power rule with the Chain Rule again (inner function \\(\\sin x\\)), and \\(\\frac{d}{dx}(\\sin x) = \\cos x\\) from 2.2.",
+              "(i) Step 3: Put it together\n\\[\\dfrac{dy}{dx} = e^{\\sin^{2} x} \\cdot 2\\sin x \\cos x\\]\n\\[= 2\\sin x \\cos x\\, e^{\\sin^{2} x}\\]\nWhy: the book writes the factors in front of the exponential. (Optionally \\(2\\sin x\\cos x = \\sin 2x\\).)",
+              "(ii) Step 1: Chain Rule for base \\(a\\)\n\\[\\dfrac{dy}{dx} = a^{x^{3}} \\ln a\\,\\dfrac{d}{dx}(x^{3})\\]\nWhy: here \\(u = x^{3}\\); for base \\(a\\) the extra factor \\(\\ln a\\) appears, from \\(\\frac{d}{dx}(a^{u}) = a^{u}\\ln a\\,\\frac{du}{dx}\\).",
+              "(ii) Step 2: Finish\n\\[\\dfrac{dy}{dx} = a^{x^{3}} \\ln a\\,(3x^{2})\\]\n\\[= 3x^{2} a^{x^{3}} \\ln a\\]\nWhy: power rule \\(\\frac{d}{dx}(x^{3}) = 3x^{2}\\); then the factors are rearranged.",
+              "Check:\n(i) at \\(x = 0\\): \\(\\frac{dy}{dx} = 2(0)(1)e^{0} = 0\\). This fits: \\(\\sin^{2} x\\) has its smallest value 0 at \\(x = 0\\), so \\(y\\) has a minimum there and the slope is 0.\n(ii) with \\(a = e\\): \\(y = e^{x^{3}}\\) and the formula gives \\(3x^{2}e^{x^{3}}\\) because \\(\\ln e = 1\\), the same as the \\(e^{u}\\) rule gives directly."
+            ],
+            "answer": "(i) \\(\\frac{dy}{dx} = 2\\sin x \\cos x\\, e^{\\sin^{2} x}\\) (ii) \\(\\frac{dy}{dx} = 3x^{2} a^{x^{3}} \\ln a\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "'Copy, then multiply': to differentiate \\(e^{(\\text{anything})}\\), copy \\(e^{(\\text{anything})}\\) unchanged and multiply by the derivative of the anything. For \\(a^{(\\text{anything})}\\), also multiply by \\(\\ln a\\).\nAlways say which rule you are using (Chain Rule); examiners give marks for the method line."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Exponential function: \\(f(x) = a^{x}\\), \\(a > 0\\), \\(a \\ne 1\\); natural exponential: \\(e^{x}\\), \\(e \\approx 2.71828\\).\n2. \\(\\frac{d}{dx}(a^{x}) = a^{x}\\ln a\\), proved from the definition using \\(\\lim_{h \\to 0}\\frac{a^{h} - 1}{h} = \\ln a\\).\n3. \\(\\frac{d}{dx}(e^{x}) = e^{x}\\), since \\(\\ln e = 1\\).\n4. Chain Rule forms: \\(\\frac{d}{dx}(e^{u}) = e^{u}u'\\) and \\(\\frac{d}{dx}(a^{u}) = a^{u}\\ln a\\,u'\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Using the power rule on an exponential: \\(\\frac{d}{dx}(2^{x}) \\ne x\\,2^{x-1}\\). The correct answer is \\(2^{x}\\ln 2\\).\n2. Forgetting the derivative of the power: \\(\\frac{d}{dx}(e^{\\sin^{2} x})\\) is not just \\(e^{\\sin^{2} x}\\).\n3. Forgetting \\(\\ln a\\) when the base is not \\(e\\), or writing \\(\\ln a\\) when the base is \\(e\\) (it is 1 there)."
+          }
+        ]
+      }
+    }
+  ]
+}

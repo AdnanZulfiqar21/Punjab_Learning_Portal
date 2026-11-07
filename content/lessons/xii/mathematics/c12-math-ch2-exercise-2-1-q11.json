@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-1-Q11",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-1-q11",
+      "title": "Question 11",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 43,
+          "note": "Exercise 2.1, Question 11: differentiate y = tan^2 x + cot(x^2); book p. 41. Unit 2 has no printed answers."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11. Differentiate w.r.t. the variable involved: \\(y = \\tan^2 x + \\cot(x^2)\\)",
+            "explanation": "Two composite terms that look alike but are different: \\(\\tan^2 x = (\\tan x)^2\\) and \\(\\cot(x^2)\\).\nIn the first the function is squared; in the second the angle is squared.\nPlan: chain rule on each term, then add.",
+            "steps": [
+              "Given: \\(y = \\tan^2 x + \\cot(x^2)\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: sum rule; chain rule on \\((\\tan x)^2\\) (outer: square) and on \\(\\cot(x^2)\\) (outer: cot).",
+              "First term\n\\[\\dfrac{d}{dx}(\\tan x)^2 = 2\\tan x \\cdot \\sec^2 x\\]\nWhy: outer \\(u^2\\) gives \\(2u\\), inner \\(u = \\tan x\\) gives \\(\\sec^2 x\\).",
+              "Second term\n\\[\\dfrac{d}{dx}\\cot(x^2) = -\\csc^2(x^2) \\cdot 2x\\]\nWhy: \\((\\cot w)' = -\\csc^2 w\\) with \\(w = x^2\\), and \\((x^2)' = 2x\\).",
+              "Add\n\\[\\dfrac{dy}{dx} = 2\\tan x\\sec^2 x - 2x\\csc^2(x^2)\\]\nWhy: sum rule.",
+              "Check at x = pi/4\n\\[2(1)(2) - \\tfrac{\\pi}{2}\\csc^2\\tfrac{\\pi^2}{16} \\approx -0.694\\]\nWhy: \\(\\tan\\frac{\\pi}{4} = 1\\), \\(\\sec^2\\frac{\\pi}{4} = 2\\), so the first part is 4 and the second is about \\(4.694\\); differentiating \\(y\\) directly with sympy at \\(x = \\frac{\\pi}{4}\\) gives the same \\(-0.694\\)."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = 2\\tan x\\sec^2 x - 2x\\csc^2(x^2)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

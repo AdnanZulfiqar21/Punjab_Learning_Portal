@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.4",
+      "title": "2.4 Derivatives of Inverse Trigonometric Functions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 40,
+          "pdf_to": 42,
+          "note": "Book p. 38-40: formulas (i)-(vi), Proof (1) sin^-1, Proof (2) cot^-1, Proof (3) sec^-1, Challenge! and Recall! boxes, Example 6"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Here, we will prove that:\n(i)\n\\[\\dfrac{d}{dx}(\\sin^{-1} x) = \\dfrac{1}{\\sqrt{1 - x^{2}}}\\]\nfor \\(x \\in (-1, 1)\\)\n(ii)\n\\[\\dfrac{d}{dx}(\\cos^{-1} x) = -\\dfrac{1}{\\sqrt{1 - x^{2}}}\\]\nfor \\(x \\in (-1, 1)\\)\n(iii)\n\\[\\dfrac{d}{dx}(\\tan^{-1} x) = \\dfrac{1}{1 + x^{2}}\\]\nfor \\(x \\in \\mathbb{R}\\)\n(iv)\n\\[\\dfrac{d}{dx}(\\cot^{-1} x) = -\\dfrac{1}{1 + x^{2}}\\]\nfor \\(x \\in \\mathbb{R}\\)\n(v)\n\\[\\dfrac{d}{dx}(\\sec^{-1} x) = \\dfrac{1}{|x|\\sqrt{x^{2} - 1}}\\]\nfor \\(x \\in (-\\infty, -1) \\cup (1, \\infty)\\)\n(vi)\n\\[\\dfrac{d}{dx}(\\csc^{-1} x) = -\\dfrac{1}{|x|\\sqrt{x^{2} - 1}}\\]\nfor \\(x \\in (-\\infty, -1) \\cup (1, \\infty)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why these need care: an inverse trigonometric function such as \\(\\sin^{-1} x\\) is the angle whose sine is \\(x\\). Each one is defined on a principal range (so that it is a function, with one output for each input). Every proof below uses that range to decide the sign of a square root.\nPattern: the three co-functions (ii), (iv), (vi) are the negatives of (i), (iii), (v)."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Function",
+              "Domain",
+              "Principal range"
+            ],
+            "rows": [
+              [
+                "\\(\\sin^{-1} x\\)",
+                "\\([-1, 1]\\)",
+                "\\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\)"
+              ],
+              [
+                "\\(\\cos^{-1} x\\)",
+                "\\([-1, 1]\\)",
+                "\\([0, \\pi]\\)"
+              ],
+              [
+                "\\(\\tan^{-1} x\\)",
+                "\\(\\mathbb{R}\\)",
+                "\\(\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\)"
+              ],
+              [
+                "\\(\\cot^{-1} x\\)",
+                "\\(\\mathbb{R}\\)",
+                "\\((0, \\pi)\\)"
+              ],
+              [
+                "\\(\\sec^{-1} x\\)",
+                "\\(|x| \\ge 1\\)",
+                "\\([0, \\pi] - \\left\\{\\frac{\\pi}{2}\\right\\}\\)"
+              ],
+              [
+                "\\(\\csc^{-1} x\\)",
+                "\\(|x| \\ge 1\\)",
+                "\\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right] - \\{0\\}\\)"
+              ]
+            ],
+            "caption": "Domains and principal ranges used in the proofs (our table)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Proof (1)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(y = \\sin^{-1}(x)\\), where \\(x \\in [-1, 1]\\) and \\(y \\in \\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\).\n\\[\\sin y = x \\quad \\ldots(1)\\]\nDifferentiate equation (1) w.r.t. \\(x\\), we have\n\\[\\cos y\\dfrac{dy}{dx} = 1\\]\n\\[\\dfrac{dy}{dx} = \\dfrac{1}{\\cos y} = \\dfrac{1}{\\sqrt{\\cos^{2} y}}\\]\n\\[= \\dfrac{1}{\\sqrt{1 - \\sin^{2} y}}\\]\n\\[\\dfrac{d}{dx}(\\sin^{-1} x) = \\dfrac{1}{\\sqrt{1 - x^{2}}}\\]\nfor \\(x \\in (-1, 1)\\) \\((\\because \\sin y = x)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The method in every proof: write the inverse function as an ordinary trigonometric equation, differentiate implicitly (2.3.3), and change the answer back into \\(x\\).\nWhy \\(\\cos y = +\\sqrt{1 - \\sin^{2} y}\\): for \\(y \\in \\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\) the cosine is never negative, so the positive square root is the right one.\nWhy \\(x \\ne \\pm 1\\): there \\(\\cos y = 0\\) and we cannot divide by it; the graph of \\(\\sin^{-1} x\\) has vertical tangents at its two ends."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Proof (2)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(y = \\cot^{-1}(x)\\), where \\(y \\in (0, \\pi)\\) and \\(x \\in \\mathbb{R}\\).\n\\[\\cot y = x \\quad \\ldots(2)\\]\nWe differentiate equation (1) w.r.t. \\(x\\),\n\\[-\\csc^{2} y\\dfrac{dy}{dx} = 1\\]\n\\(\\left((\\cot y)' = -\\csc^{2} y\\right)\\)\n\\[\\dfrac{dy}{dx} = -\\dfrac{1}{\\csc^{2} y}\\]\n\\((\\csc y \\ne 0, \\text{ for } y \\in (0, \\pi))\\)\n\\[= -\\dfrac{1}{1 + \\cot^{2} y}\\]\n\\((\\because 1 + \\cot^{2} y = \\csc^{2} y)\\)\n\\[\\dfrac{d}{dx}(\\cot^{-1} x) = -\\dfrac{1}{1 + x^{2}}\\]\nfor \\(x \\in \\mathbb{R}\\) \\((\\because \\cot y = x)\\)",
+            "book_errors": [
+              "We differentiate equation (1) w.r.t. \\(x\\),"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In Proof (2) the equation \\(\\cot y = x\\) is labelled (2), but the next line says 'We differentiate equation (1)'. It should say 'We differentiate equation (2)' (the equation \\(\\cot y = x\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The book numbers its proofs 1, 2, 3, but the formulas are numbered (i) to (vi). Proof (2) proves formula (iv), \\(\\cot^{-1} x\\), and Proof (3) proves formula (v), \\(\\sec^{-1} x\\).\nHere no sign problem arises: \\(\\csc^{2} y = 1 + \\cot^{2} y\\) holds without any square root, so the formula is valid for every real \\(x\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Proof (3)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(y = \\sec^{-1} x\\), where \\(x \\in (-\\infty, -1] \\cup [1, \\infty)\\) and \\(y \\in [0, \\pi] - \\left\\{\\frac{\\pi}{2}\\right\\}\\)\n\\[\\sec y = x \\quad \\ldots(1), \\quad |x| \\ge 1\\]\nWe differentiate equation (1) w.r.t. \\(x\\):\n\\[\\sec y\\tan y\\dfrac{dy}{dx} = 1\\]\n\\(\\left(\\because (\\sec y)' = \\sec y\\tan y\\right)\\)\n\\[\\dfrac{dy}{dx} = \\dfrac{1}{\\sec y\\tan y}\\]\nwhere \\(\\sec y \\ne 0\\) and \\(\\tan y \\ne 0\\)\n\\(\\tan y \\ne 0 \\Rightarrow y \\ne 0\\) and \\(y \\ne \\pi \\Rightarrow x \\ne -1, 1\\) and from equation (1).\n\\[\\dfrac{dy}{dx} = \\dfrac{1}{x\\tan y} \\quad \\ldots(2)\\]\n\\((\\because \\sec y = x)\\)\n\\[\\tan y = \\begin{cases}\\sqrt{\\tan^{2} y}, & y \\in \\left(0, \\frac{\\pi}{2}\\right) \\\\ -\\sqrt{\\tan^{2} y}, & y \\in \\left(\\frac{\\pi}{2}, \\pi\\right)\\end{cases}\\]\n\\[= \\begin{cases}\\sqrt{\\sec^{2} y - 1}, & y \\in \\left(0, \\frac{\\pi}{2}\\right) \\\\ -\\sqrt{\\sec^{2} y - 1}, & y \\in \\left(\\frac{\\pi}{2}, \\pi\\right)\\end{cases}\\]\n\\[\\tan y = \\begin{cases}\\sqrt{x^{2} - 1}, & x \\in (1, \\infty) \\\\ -\\sqrt{x^{2} - 1}, & x \\in (-\\infty, -1)\\end{cases}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\tan y = \\begin{cases}\\sqrt{x^{2} - 1}, & x \\in (1, -1) \\\\ -\\sqrt{x^{2} - 1}, & x \\in (-\\infty, 1)\\end{cases}\\]\n\\(\\left(\\because \\sec y = x,\\ \\text{and } x \\in (1, \\infty) \\text{ when } y \\in \\left(0, \\frac{\\pi}{2}\\right),\\right.\\) \\(\\left.\\text{while } x \\in (-\\infty, -1) \\text{ when } y \\in \\left(\\frac{\\pi}{2}, \\pi\\right)\\right)\\)",
+            "book_errors": [
+              "\\[\\tan y = \\begin{cases}\\sqrt{x^{2} - 1}, & x \\in (1, -1) \\\\ -\\sqrt{x^{2} - 1}, & x \\in (-\\infty, 1)\\end{cases}\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "After writing \\(\\tan y\\) correctly, the book repeats it with wrong intervals: \\(x \\in (1, -1)\\) and \\(x \\in (-\\infty, 1)\\). The correct intervals (as in the line just before, and as the book's own reason says) are:\n\\[\\tan y = \\begin{cases}\\sqrt{x^{2} - 1}, & x \\in (1, \\infty) \\\\ -\\sqrt{x^{2} - 1}, & x \\in (-\\infty, -1)\\end{cases}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Substitute the value of \\(\\tan y\\) in equation (2)\n\\[\\dfrac{dy}{dx} = \\begin{cases}\\dfrac{1}{x\\sqrt{x^{2} - 1}}, & x \\in (1, \\infty) \\\\[2mm] \\dfrac{1}{-x\\sqrt{x^{2} - 1}}, & x \\in (-\\infty, -1)\\end{cases}\\]\nHence,\n\\[\\dfrac{d}{dx}(\\sec^{-1} x) = \\dfrac{1}{|x|\\sqrt{x^{2} - 1}}\\]\nwhere \\(x \\in (-\\infty, -1) \\cup (1, \\infty)\\) \\(\\left(\\because |x| = \\begin{cases}x & \\text{if } x \\ge 0 \\\\ -x & \\text{if } x < 0\\end{cases}\\right)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why two cases: \\(\\tan y = \\pm\\sqrt{\\sec^{2} y - 1}\\) and the sign depends on the quadrant. For \\(y \\in \\left(0, \\frac{\\pi}{2}\\right)\\), \\(x = \\sec y > 1\\) and \\(\\tan y > 0\\); for \\(y \\in \\left(\\frac{\\pi}{2}, \\pi\\right)\\), \\(x = \\sec y < -1\\) and \\(\\tan y < 0\\).\nIn both cases \\(x\\tan y\\) is positive and equals \\(|x|\\sqrt{x^{2} - 1}\\): when \\(x > 1\\) it is \\(x\\sqrt{x^{2} - 1}\\), and when \\(x < -1\\) it is \\((-x)\\sqrt{x^{2} - 1}\\). That is why \\(|x|\\) appears."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Prove formulae (2), (3) and (5).",
+            "book_errors": [
+              "and (5)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Formula (5), that is (v), is already proved above as Proof (3). The formulas not yet proved are (ii), (iii) and (vi), so the Challenge most likely means: Prove formulae (2), (3) and (6)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Recall!",
+            "text": "\\[\\sqrt{x^{2}} = \\begin{cases}x, & \\text{if } x \\ge 0 \\\\ -x, & \\text{if } x < 0\\end{cases}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A guide for the Challenge (the same method as the proofs above):\n(ii) \\(y = \\cos^{-1} x\\), \\(y \\in [0, \\pi]\\): \\(\\cos y = x\\), so \\(-\\sin y\\frac{dy}{dx} = 1\\). On \\([0, \\pi]\\), \\(\\sin y = \\sqrt{1 - x^{2}} \\ge 0\\), so \\(\\frac{dy}{dx} = -\\frac{1}{\\sqrt{1 - x^{2}}}\\), \\(x \\in (-1, 1)\\).\n(iii) \\(y = \\tan^{-1} x\\), \\(y \\in \\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\): \\(\\tan y = x\\), so \\(\\sec^{2} y\\frac{dy}{dx} = 1\\) and \\(\\frac{dy}{dx} = \\frac{1}{1 + \\tan^{2} y} = \\frac{1}{1 + x^{2}}\\).\n(vi) \\(y = \\csc^{-1} x\\), \\(y \\in \\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right] - \\{0\\}\\): \\(\\csc y = x\\), so \\(-\\csc y\\cot y\\frac{dy}{dx} = 1\\), \\(\\frac{dy}{dx} = -\\frac{1}{x\\cot y}\\). Here \\(\\cot y = \\sqrt{x^{2} - 1}\\) when \\(x > 1\\) and \\(-\\sqrt{x^{2} - 1}\\) when \\(x < -1\\), so \\(x\\cot y = |x|\\sqrt{x^{2} - 1}\\) and \\(\\frac{dy}{dx} = -\\frac{1}{|x|\\sqrt{x^{2} - 1}}\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Find \\(\\frac{dy}{dx}\\) if \\(y = x\\cos^{-1}\\left(\\frac{x}{a}\\right) - \\sqrt{a^{2} - x^{2}}\\).",
+            "steps": [
+              "Given: \\(y = x\\cos^{-1}\\left(\\frac{x}{a}\\right) - \\sqrt{a^{2} - x^{2}}\\) (with \\(a > 0\\) and \\(|x| < a\\), as the book's working assumes).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: the first term is a product, so use the product rule, with formula (ii) and the chain rule for \\(\\cos^{-1}\\left(\\frac{x}{a}\\right)\\); the second term is a square root, so use the power rule with the chain rule.",
+              "Step 1: Differentiate w.r.t. x\n\\[\\dfrac{dy}{dx} = \\cos^{-1}\\left(\\dfrac{x}{a}\\right)\\]\n\\[\\quad + x\\left(-\\dfrac{1}{\\sqrt{1 - (x/a)^{2}}} \\cdot \\dfrac{d}{dx}\\left(\\dfrac{x}{a}\\right)\\right)\\]\n\\[\\quad - \\dfrac{1}{2}(a^{2} - x^{2})^{-1/2} \\cdot \\dfrac{d}{dx}(a^{2} - x^{2})\\]\nWhy: product rule on \\(x \\cdot \\cos^{-1}\\left(\\frac{x}{a}\\right)\\) (the derivative of \\(x\\) is 1); \\(\\frac{d}{dx}\\cos^{-1} u = -\\frac{1}{\\sqrt{1 - u^{2}}}\\frac{du}{dx}\\) with \\(u = \\frac{x}{a}\\); and \\(\\sqrt{a^{2} - x^{2}} = (a^{2} - x^{2})^{1/2}\\).",
+              "Step 2: Work out the inner derivatives\n\\[= \\cos^{-1}\\left(\\dfrac{x}{a}\\right) - \\dfrac{x}{\\sqrt{\\frac{a^{2} - x^{2}}{a^{2}}}} \\cdot \\dfrac{1}{a}\\]\n\\[\\quad - \\dfrac{1}{2} \\cdot \\dfrac{1}{\\sqrt{a^{2} - x^{2}}}(-2x)\\]\nWhy: \\(\\frac{d}{dx}\\left(\\frac{x}{a}\\right) = \\frac{1}{a}\\), \\(\\frac{d}{dx}(a^{2} - x^{2}) = -2x\\), and \\(1 - \\frac{x^{2}}{a^{2}} = \\frac{a^{2} - x^{2}}{a^{2}}\\).",
+              "Step 3: Simplify\n\\[\\dfrac{dy}{dx} = \\cos^{-1}\\left(\\dfrac{x}{a}\\right) - \\dfrac{x}{\\sqrt{a^{2} - x^{2}}}\\]\n\\[\\quad + \\dfrac{x}{\\sqrt{a^{2} - x^{2}}}\\]\n\\[= \\cos^{-1}\\left(\\dfrac{x}{a}\\right)\\]\nWhy: \\(\\sqrt{\\frac{a^{2} - x^{2}}{a^{2}}} = \\frac{\\sqrt{a^{2} - x^{2}}}{a}\\) for \\(a > 0\\), so the second term is \\(\\frac{x \\cdot a}{\\sqrt{a^{2} - x^{2}}} \\cdot \\frac{1}{a} = \\frac{x}{\\sqrt{a^{2} - x^{2}}}\\); the last two terms cancel.",
+              "Check: take \\(a = 2\\), \\(x = 1\\). The answer gives \\(\\cos^{-1}\\frac{1}{2} = \\frac{\\pi}{3} \\approx 1.0472\\). Numerically, \\(\\frac{y(1.001) - y(0.999)}{0.002} \\approx 1.0472\\). They agree."
+            ],
+            "answer": "\\(\\frac{dy}{dx} = \\cos^{-1}\\left(\\frac{x}{a}\\right)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 6 uses \\(\\sqrt{a^{2}} = a\\), so it takes \\(a > 0\\) (and \\(|x| < a\\) so that the square root is real). For \\(a < 0\\) we would have \\(\\sqrt{a^{2}} = -a\\), and the two terms would no longer cancel.\nOur examples:\n(a) \\(\\frac{d}{dx}\\sin^{-1}(2x) = \\frac{1}{\\sqrt{1 - 4x^{2}}} \\cdot 2 = \\frac{2}{\\sqrt{1 - 4x^{2}}}\\), \\(|x| < \\frac{1}{2}\\).\n(b) \\(\\frac{d}{dx}\\tan^{-1}(x^{2}) = \\frac{1}{1 + x^{4}} \\cdot 2x = \\frac{2x}{1 + x^{4}}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\((\\sin^{-1} x)' = \\frac{1}{\\sqrt{1 - x^{2}}}\\), \\((\\tan^{-1} x)' = \\frac{1}{1 + x^{2}}\\), \\((\\sec^{-1} x)' = \\frac{1}{|x|\\sqrt{x^{2} - 1}}\\); the co-functions have the same with a minus sign.\n2. Proof method: write the inverse as a trigonometric equation, differentiate implicitly, change back to x.\n3. The principal range decides the sign of every square root; this is why |x| appears in (v) and (vi).\n4. With a chain: \\(\\frac{d}{dx}\\sin^{-1} u = \\frac{1}{\\sqrt{1 - u^{2}}}\\frac{du}{dx}\\), and similarly for the others."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Confusing \\(\\sin^{-1} x\\) with \\(\\frac{1}{\\sin x}\\): the \\(-1\\) means inverse function, not reciprocal.\n2. Writing \\(\\frac{1}{x\\sqrt{x^{2} - 1}}\\) for \\((\\sec^{-1} x)'\\): without \\(|x|\\) the sign is wrong for \\(x < -1\\).\n3. Forgetting the chain-rule factor, e.g. \\(\\frac{d}{dx}\\sin^{-1}(2x) = \\frac{1}{\\sqrt{1 - 4x^{2}}}\\) (the factor 2 is missing).\n4. Using the formulas at \\(x = \\pm 1\\), where (i), (ii), (v), (vi) are not defined."
+          }
+        ]
+      }
+    }
+  ]
+}

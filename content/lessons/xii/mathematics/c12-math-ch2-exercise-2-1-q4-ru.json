@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-1-Q4-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-1-q4",
+      "title": "Question 4 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 43,
+          "note": "Exercise 2.1, Question 4: differentiate y = sin t/(1 - cos t) w.r.t. t; book p. 41. Unit 2 has no printed answers."
+        }
+      ],
+      "variant_of": "C12-MATH-CH2-EXERCISE-2-1-Q4",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. Differentiate with respect to the variable involved: \\(y = \\dfrac{\\sin t}{1 - \\cos t}\\)",
+            "explanation": "Pehli baat: is sawal mein variable \\(x\\) nahi, \\(t\\) hai. Is liye humein \\(\\frac{dy}{dt}\\) nikalna hai.\nDiya kya hai? \\(y = \\frac{\\sin t}{1 - \\cos t}\\), yani ek fraction (quotient).\nRule kaunsa? Quotient rule. Upar \\(u = \\sin t\\), neeche \\(v = 1 - \\cos t\\).\nPlan: quotient rule ke baad upar \\(\\sin^2 t + \\cos^2 t\\) banega jo 1 ho jayega; phir upar neeche ek hi bracket \\((1 - \\cos t)\\) bachega jo cancel ho jayega. Jawab bohat chhota aayega.",
+            "steps": [
+              "Diya gaya hai: \\(y = \\frac{\\sin t}{1 - \\cos t}\\), jahan \\(\\cos t \\neq 1\\).\nMaloom karna: \\(\\frac{dy}{dt}\\).\nTareeqa: quotient rule. Pehle alag se \\(u' = \\cos t\\) aur \\(v' = \\sin t\\) likh lein, taa ke formula mein rakhte waqt ghalti na ho.",
+              "Quotient rule lagayein\n\\[\\dfrac{dy}{dt} = \\dfrac{\\cos t(1 - \\cos t) - \\sin t \\cdot \\sin t}{(1 - \\cos t)^2}\\]\nKyun: formula \\(\\frac{u'v - uv'}{v^2}\\). Yahan \\(v' = (1 - \\cos t)' = 0 - (-\\sin t) = \\sin t\\) hai.\nDhyan dein: \\(1\\) ka derivative 0 hai aur \\(-\\cos t\\) ka derivative \\(+\\sin t\\); is sign mein aksar ghalti hoti hai.",
+              "Upar wala hissa kholein aur identity lagayein\n\\[\\text{Top} = \\cos t - \\cos^2 t - \\sin^2 t\\]\n\\[= \\cos t - 1\\]\nKyun: \\(-\\cos^2 t - \\sin^2 t = -(\\cos^2 t + \\sin^2 t) = -1\\). Pythagorean identity ne do mushkil terms ko seedha \\(-1\\) bana diya.",
+              "Cancel karein\n\\[\\dfrac{dy}{dt} = \\dfrac{-(1 - \\cos t)}{(1 - \\cos t)^2}\\]\n\\[= -\\dfrac{1}{1 - \\cos t}\\]\nKyun: \\(\\cos t - 1\\) ko \\(-(1 - \\cos t)\\) likha, taa ke upar neeche ek jaisa bracket nazar aaye. Upar ek bracket aur neeche do, to ek cancel ho kar neeche ek bacha. Cancel karna jaiz hai kyunke \\(1 - \\cos t\\) zero nahi (warna \\(y\\) hi define na hota).",
+              "Tasdeeq half angle se\n\\[y = \\dfrac{2\\sin\\frac{t}{2}\\cos\\frac{t}{2}}{2\\sin^2\\frac{t}{2}} = \\cot\\dfrac{t}{2}\\]\n\\[\\dfrac{dy}{dt} = -\\dfrac{1}{2}\\csc^2\\dfrac{t}{2} = -\\dfrac{1}{2\\sin^2\\frac{t}{2}}\\]\nKyun: \\(\\sin t = 2\\sin\\frac{t}{2}\\cos\\frac{t}{2}\\) aur \\(1 - \\cos t = 2\\sin^2\\frac{t}{2}\\) se function \\(\\cot\\frac{t}{2}\\) ban jata hai. Is ka derivative chain rule se \\(-\\csc^2\\frac{t}{2} \\cdot \\frac{1}{2}\\) hai. Aur \\(2\\sin^2\\frac{t}{2} = 1 - \\cos t\\), to yeh bhi \\(-\\frac{1}{1 - \\cos t}\\) hi hai. Do alag raston se ek hi jawab."
+            ],
+            "final_answer": "\\(\\frac{dy}{dt} = -\\frac{1}{1 - \\cos t} = \\frac{1}{\\cos t - 1}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

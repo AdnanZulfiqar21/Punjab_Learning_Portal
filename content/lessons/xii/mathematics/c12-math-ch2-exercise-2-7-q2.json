@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-7-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-7-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 72,
+          "pdf_to": 72,
+          "note": "Exercise 2.7, Question 2 (book page 70). The book prints no answers for Unit 2; results verified with sympy."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2. A rectangular sheet of metal with dimensions 40 cm by 25 cm is to be made into an open box by cutting equal squares from the corners and folding up the sides. Find the size of the squares that maximize the volume.",
+            "explanation": "A maximum-volume problem.\nGiven: a 40 cm by 25 cm sheet; squares of side \\(x\\) are cut from the corners and the sides are folded up.\nPlan: write the box's length, width and height in \\(x\\), form \\(V(x)\\), solve \\(V'(x) = 0\\), keep the root inside \\(0 < x < 12.5\\), and test it.",
+            "steps": [
+              "Given: sheet 40 cm by 25 cm; equal squares cut from the four corners; open box (no lid).\nTo find: the side of the squares that gives the greatest volume.\nMethod: volume = length × width × height as a function of \\(x\\); first and second derivative tests.",
+              "Box dimensions in terms of \\(x\\)\n\\[\\text{length} = 40 - 2x, \\quad \\text{width} = 25 - 2x\\]\n\\[\\text{height} = x\\]\nWhy: a square of side \\(x\\) is removed from each end of each side, and the flaps of height \\(x\\) are folded up. All three must be positive, so \\(0 < x < 12.5\\).",
+              "Volume\n\\[V = x(40 - 2x)(25 - 2x)\\]\n\\[= x(1000 - 80x - 50x + 4x^{2})\\]\n\\[V = 4x^{3} - 130x^{2} + 1000x \\quad \\text{...(1)}\\]\nWhy: expanding first makes differentiation easy.",
+              "Critical points\n\\[\\dfrac{dV}{dx} = 12x^{2} - 260x + 1000 \\quad \\text{...(2)}\\]\n\\[3x^{2} - 65x + 250 = 0\\]\n\\[(x - 5)(3x - 50) = 0\\]\n\\[x = 5 \\ \\text{ or } \\ x = \\dfrac{50}{3}\\]\nWhy: divide by 4, then split \\(-65x = -15x - 50x\\): \\(3x(x - 5) - 50(x - 5)\\).",
+              "Reject the impossible root\n\\(x = \\frac{50}{3} \\approx 16.67\\) is not in \\(0 < x < 12.5\\).\nWhy: it would make the width \\(25 - 2x\\) negative; such squares cannot be cut from a 25 cm side. Only \\(x = 5\\) remains.",
+              "Second derivative test\n\\[\\dfrac{d^{2}V}{dx^{2}} = 24x - 260\\]\n\\[\\text{At } x = 5: \\ 120 - 260 = -140 < 0\\]\nWhy: negative, so \\(V\\) is maximum at \\(x = 5\\).",
+              "Maximum volume and check\n\\[V = 5(40 - 10)(25 - 10)\\]\n\\[= 5 \\times 30 \\times 15 = 2250\\text{ cm}^{3}\\]\nCheck neighbours: \\(x = 4\\) gives \\(4 \\times 32 \\times 17 = 2176\\); \\(x = 6\\) gives \\(6 \\times 28 \\times 13 = 2184\\). Both are less than 2250."
+            ],
+            "final_answer": "Squares of side 5 cm should be cut from the corners. The box is then 30 cm × 15 cm × 5 cm, with maximum volume \\(2250\\text{ cm}^{3}\\).",
+            "answer_figure": {
+              "$asset": "c12-math-ch2-fig-ex2-7-q2-box",
+              "alt": "A 40 cm by 25 cm rectangular sheet with equal squares of side x cut from the four corners (hatched) and dashed fold lines. With x = 5 cm the base is 30 cm by 15 cm and the box volume is 2250 cubic cm.",
+              "caption": "Answer sketch for Exercise 2.7 Question 2: the sheet with squares of side 5 cm cut from the corners (original drawing; the book has no figure)"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
