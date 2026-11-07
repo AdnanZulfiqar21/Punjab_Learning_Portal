@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH7-EXERCISE-7-1-Q13",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch7",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch7/u-exercise-7-1-q13",
+      "title": "Question 13",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 233,
+          "pdf_to": 233,
+          "note": "Exercise 7.1, Question 13: book p. 231 (PDF 233); the book prints no answers for Exercise 7.1"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13",
+            "prompt": "13. The motion of a robotic arm moving along a straight track is described by the velocity function \\(v(t) = 6 + t - t^2\\) where \\(v(t)\\) is in meters per second and \\(t\\) is the time in seconds, valid for \\(0 \\le t \\le 5\\). Find the distance travelled by the arm.",
+            "explanation": "Distance (not displacement) from a velocity function: it is the total area between the v-t graph and the t-axis.\nGiven: \\(v(t)\\) on \\(0 \\le t \\le 5\\). Find: the total distance.\nPlan: find where \\(v = 0\\), integrate \\(v\\) on each piece, and add the areas as positive amounts (the book's Note: distance \\(= A_1 + A_2\\)).",
+            "steps": [
+              "Given: \\(v(t) = 6 + t - t^2\\) m/s for \\(0 \\le t \\le 5\\).\nTo find: the distance travelled by the arm.\nMethod: The area under the v-t graph is the displacement; when the graph goes below the t-axis, the book's Note says displacement \\(= A_1 - A_2\\) but distance \\(= A_1 + A_2\\). So we find where the velocity changes sign and integrate on each interval.",
+              "Where is v = 0?\n\\[6 + t - t^2 = 0\\]\n\\[t^2 - t - 6 = 0\\]\n\\[(t - 3)(t + 2) = 0\\]\n\\[t = 3\\quad (t = -2\\ \\text{rejected})\\]\nWhy: The arm can change direction only where \\(v = 0\\); \\(t = -2\\) is outside \\(0 \\le t \\le 5\\).",
+              "Sign of v on each interval\n\\[v(0) = 6 > 0,\\quad v(4) = -6 < 0\\]\nWhy: \\(v = -(t - 3)(t + 2)\\) is positive for \\(0 \\le t < 3\\) (moving forward) and negative for \\(3 < t \\le 5\\) (moving back).",
+              "An antiderivative of v\n\\[F(t) = 6t + \\dfrac{t^2}{2} - \\dfrac{t^3}{3}\\]\n\\[F(0) = 0,\\quad F(3) = \\dfrac{27}{2}\\]\n\\[F(5) = \\dfrac{5}{6}\\]\nWhy: Power rule \\(\\int t^n\\,dt = \\frac{t^{n+1}}{n+1}\\). \\(F(3) = 18 + 4.5 - 9 = 13.5\\) and \\(F(5) = 30 + 12.5 - \\frac{125}{3} = \\frac{5}{6}\\).",
+              "Integral on each interval\n\\[\\int_0^3 v\\,dt = \\dfrac{27}{2} - 0 = \\dfrac{27}{2}\\]\n\\[\\int_3^5 v\\,dt = \\dfrac{5}{6} - \\dfrac{27}{2} = -\\dfrac{38}{3}\\]\n\\[A_1 = \\dfrac{27}{2},\\quad A_2 = \\dfrac{38}{3}\\]\nWhy: \\(\\frac{5}{6} - \\frac{81}{6} = -\\frac{76}{6}\\). The second integral is negative because the graph is below the t-axis there; the area is its size.",
+              "Total distance\n\\[\\text{Distance} = \\dfrac{27}{2} + \\dfrac{38}{3}\\]\n\\[= \\dfrac{81 + 76}{6} = \\dfrac{157}{6}\\]\n\\[\\approx 26.17\\ \\text{m}\\]\nWhy: Distance \\(= A_1 + A_2\\), both counted as positive.",
+              "Check\n\\[A_1 - A_2 = \\dfrac{81 - 76}{6} = \\dfrac{5}{6}\\]\n\\[F(5) - F(0) = \\dfrac{5}{6}\\ \\checkmark\\]\nWhy: \\(A_1 - A_2\\) is the displacement, and it matches \\(\\int_0^5 v\\,dt\\). The arm went 13.5 m forward and about 12.67 m back, ending only 5/6 m from the start."
+            ],
+            "final_answer": "Distance travelled \\(= \\frac{157}{6} \\approx 26.17\\) m (the displacement is only \\(\\frac{5}{6}\\) m).",
+            "answer_figure": {
+              "$asset": "c12-math-ch7-fig-ex7-1-q13",
+              "alt": "Velocity-time graph of v = 6 + t - t^2 from t = 0 to 5: it starts at (0, 6), crosses the t-axis at (3, 0) and ends at (5, -14); area A1 = 27/2 above the axis and A2 = 38/3 below it are shaded.",
+              "caption": "Velocity of the robotic arm: area A1 above the t-axis and A2 below it (original drawing)"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The book prints no answer for Exercise 7.1, so this answer is ours. It was checked independently with a computer algebra system and against an independent worked solution. Common mistake: \\(\\int_0^5 v\\,dt = \\frac{5}{6}\\) m is the displacement, not the distance; split the integral at every point where \\(v = 0\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

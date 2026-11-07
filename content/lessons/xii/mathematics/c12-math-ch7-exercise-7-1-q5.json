@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH7-EXERCISE-7-1-Q5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch7",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch7/u-exercise-7-1-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 232,
+          "pdf_to": 232,
+          "note": "Exercise 7.1, Question 5 (book p. 230); the book prints no answers for Exercise 7.1; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(a)",
+            "prompt": "5 (a) Figure 7.12 shows the velocity-time graph of an object moving in a straight line over a 12-second time interval. At what time did the object change its direction of motion?",
+            "explanation": "The sign of the velocity gives the direction of motion.\nGiven: the graph of Figure 7.12. To find: when v changes sign.\nPlan: find where the falling line from (5, 4) to (10, -2) cuts the time axis.",
+            "steps": [
+              "Given: the velocity-time graph through (0, 0), (3, 4), (5, 4), (10, -2), (12, -2). The figure prints no units; we take v in m/s and t in s.\nTo find: the time at which the direction changes.\nMethod: v > 0 means forward and v < 0 means backward, so the object turns round where v = 0 and changes sign.",
+              "Slope of the falling line\n\\[m = \\dfrac{-2 - 4}{10 - 5} = -\\dfrac{6}{5}\\]\nWhy: slope through the two corner points (5, 4) and (10, -2).",
+              "Equation of the line\n\\[v - 4 = -\\dfrac{6}{5}(t - 5)\\]\nWhy: point-slope form with the point (5, 4).",
+              "Put \\(v = 0\\)\n\\[t - 5 = 4 \\times \\dfrac{5}{6} = \\dfrac{10}{3}\\]\n\\[t = \\dfrac{25}{3} \\approx 8.33\\]\nWhy: at the turning instant the velocity is zero. The figure itself marks 25/3 on the time axis.",
+              "Check\n\\[4 - \\dfrac{6}{5}\\left(\\dfrac{25}{3} - 5\\right) = 4 - 4 = 0 \\;\\checkmark\\]\nWhy: at t = 10 there is only a corner: v stays at -2, still negative, so the object keeps moving backward there; only the acceleration changes."
+            ],
+            "final_answer": "At \\(t = \\frac{25}{3} \\approx 8.33\\) s"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5(b)",
+            "prompt": "5 (b) Figure 7.12 shows the velocity-time graph of an object moving in a straight line over a 12-second time interval. Calculate the total distance travelled and the displacement of the object during the 12 seconds.",
+            "explanation": "Distance and displacement both come from areas under the velocity-time graph.\nGiven: area A1 above the time axis, area A2 below it.\nPlan: by the Note of 7.1.5, distance = A1 + A2 and displacement = A1 - A2.",
+            "steps": [
+              "Given: the graph of Figure 7.12 and the turning time t = 25/3 from part (a).\nTo find: the total distance and the displacement in 12 s.\nMethod: Note (7.1.5): with \\(A_1\\) the area above the time axis and \\(A_2\\) the area below, displacement \\(= A_1 - A_2\\) and distance \\(= A_1 + A_2\\). Each area is split into triangles and rectangles.",
+              "Area above the axis, \\(0 \\le t \\le \\frac{25}{3}\\)\n\\[\\tfrac{1}{2}(3)(4) = 6\\]\n\\[2 \\times 4 = 8\\]\n\\[\\tfrac{1}{2}\\left(\\tfrac{10}{3}\\right)(4) = \\tfrac{20}{3}\\]\n\\[A_1 = 6 + 8 + \\tfrac{20}{3} = \\tfrac{62}{3}\\]\nWhy: triangle from 0 to 3, rectangle from 3 to 5, triangle from 5 to \\(\\frac{25}{3}\\) (base \\(\\frac{25}{3} - 5 = \\frac{10}{3}\\)).",
+              "Area below the axis, \\(\\frac{25}{3} \\le t \\le 12\\)\n\\[\\tfrac{1}{2}\\left(\\tfrac{5}{3}\\right)(2) = \\tfrac{5}{3}\\]\n\\[2 \\times 2 = 4\\]\n\\[A_2 = \\tfrac{5}{3} + 4 = \\tfrac{17}{3}\\]\nWhy: triangle from \\(\\frac{25}{3}\\) to 10 (base \\(\\frac{5}{3}\\), height 2), rectangle from 10 to 12. We take the size of the area; the minus sign is used in the next step.",
+              "Distance and displacement\n\\[\\text{Distance} = \\tfrac{62}{3} + \\tfrac{17}{3} = \\tfrac{79}{3}\\]\n\\[\\approx 26.33\\text{ m}\\]\n\\[\\text{Displacement} = \\tfrac{62}{3} - \\tfrac{17}{3} = 15\\text{ m}\\]\nWhy: distance adds both areas; displacement subtracts the backward part.",
+              "Check with trapeziums\n\\[A_1 = \\tfrac{1}{2}\\left(\\tfrac{25}{3} + 2\\right)(4) = \\tfrac{62}{3} \\;\\checkmark\\]\n\\[A_2 = \\tfrac{1}{2}\\left(\\tfrac{11}{3} + 2\\right)(2) = \\tfrac{17}{3} \\;\\checkmark\\]\nWhy: each region is also a trapezium (parallel sides \\(\\frac{25}{3}\\) and 2, and \\(12 - \\frac{25}{3} = \\frac{11}{3}\\) and 2)."
+            ],
+            "final_answer": "Distance \\(= \\frac{79}{3} \\approx 26.33\\) m; displacement \\(= 15\\) m (in the forward direction)",
+            "answer_figure": {
+              "$asset": "c12-math-ch7-fig-ex7-1-q5",
+              "alt": "Velocity-time graph through (0, 0), (3, 4), (5, 4), (25/3, 0), (10, -2) and (12, -2); the area above the time axis is split into 6, 8 and 20/3, the area below into 5/3 and 4.",
+              "caption": "Question 5: the graph of Figure 7.12 with the areas above and below the time axis (original drawing)"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 7.1. Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}
