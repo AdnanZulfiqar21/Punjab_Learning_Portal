@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 274,
+          "pdf_to": 274,
+          "note": "Exercise 9.2, Question 2 (book p. 272); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2. Prove that \\(\\cos^{-1}\\frac{7}{25} - \\cos^{-1}\\frac{5}{13} = \\cos^{-1}\\frac{323}{325}\\).",
+            "explanation": "A difference of two \\(\\cos^{-1}\\) angles must equal a \\(\\cos^{-1}\\).\nPlan: use formula (iv) directly, after finding the two square roots.",
+            "steps": [
+              "Given: \\(\\cos^{-1}\\frac{7}{25}\\) and \\(\\cos^{-1}\\frac{5}{13}\\).\nTo prove: their difference is \\(\\cos^{-1}\\frac{323}{325}\\).\nMethod: both terms are already \\(\\cos^{-1}\\), so use formula (iv): \\(\\cos^{-1}x - \\cos^{-1}y = \\cos^{-1}\\left(xy + \\sqrt{(1-x^{2})(1-y^{2})}\\right)\\) with \\(x = \\frac{7}{25}\\), \\(y = \\frac{5}{13}\\).",
+              "Check the condition\n\\[x = \\tfrac{7}{25} = 0.28,\\quad y = \\tfrac{5}{13} \\approx 0.385\\]\nWhy: formula (iv) needs \\(x \\le y\\). Then \\(\\cos^{-1}x \\ge \\cos^{-1}y\\), so the difference is not negative, as a \\(\\cos^{-1}\\) value must be.",
+              "Find the square roots\n\\[\\sqrt{1-x^{2}} = \\sqrt{1 - \\tfrac{49}{625}} = \\tfrac{24}{25}\\]\n\\[\\sqrt{1-y^{2}} = \\sqrt{1 - \\tfrac{25}{169}} = \\tfrac{12}{13}\\]\nWhy: \\(\\frac{576}{625}\\) and \\(\\frac{144}{169}\\) are perfect squares (triples 7, 24, 25 and 5, 12, 13).",
+              "Apply formula (iv)\n\\[\\text{L.H.S} = \\cos^{-1}\\left(\\tfrac{7}{25}\\cdot\\tfrac{5}{13} + \\tfrac{24}{25}\\cdot\\tfrac{12}{13}\\right)\\]\n\\[= \\cos^{-1}\\left(\\tfrac{35}{325} + \\tfrac{288}{325}\\right)\\]\n\\[= \\cos^{-1}\\tfrac{323}{325} = \\text{R.H.S}\\]\nWhy: for a difference the cosine formula has a plus sign. \\(25 \\times 13 = 325\\), \\(7 \\times 5 = 35\\), \\(24 \\times 12 = 288\\), \\(35 + 288 = 323\\).",
+              "Check\n\\[\\cos^{-1}0.28 - \\cos^{-1}0.3846 \\approx 1.2870 - 1.1760\\]\n\\[= 0.1110\\]\n\\[\\cos^{-1}\\tfrac{323}{325} \\approx 0.1110\\ \\checkmark\\]\nWhy: both sides give the same small angle (about \\(6.4^{\\circ}\\))."
+            ],
+            "final_answer": "Hence proved: \\(\\cos^{-1}\\frac{7}{25} - \\cos^{-1}\\frac{5}{13} = \\cos^{-1}\\frac{323}{325}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 9.2. Every solution on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

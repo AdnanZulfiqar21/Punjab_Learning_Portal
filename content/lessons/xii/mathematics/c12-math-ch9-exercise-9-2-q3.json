@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 274,
+          "pdf_to": 274,
+          "note": "Exercise 9.2, Question 3 (book p. 272); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. Prove that \\(\\tan^{-1}\\frac{3}{4} + \\tan^{-1}\\frac{3}{5} - \\tan^{-1}\\frac{8}{19} = \\frac{\\pi}{4}\\).",
+            "explanation": "Three \\(\\tan^{-1}\\) terms must add up to a standard angle.\nPlan: join the first two with formula (v), then subtract the third with formula (vi).",
+            "steps": [
+              "Given: \\(\\tan^{-1}\\frac{3}{4} + \\tan^{-1}\\frac{3}{5} - \\tan^{-1}\\frac{8}{19}\\).\nTo prove: it equals \\(\\frac{\\pi}{4}\\).\nMethod: combine two terms at a time. Formula (v) \\(\\tan^{-1}x + \\tan^{-1}y = \\tan^{-1}\\frac{x+y}{1-xy}\\) for the sum, then formula (vi) \\(\\tan^{-1}x - \\tan^{-1}y = \\tan^{-1}\\frac{x-y}{1+xy}\\) for the difference.",
+              "Add the first two terms\n\\[\\tan^{-1}\\tfrac{3}{4} + \\tan^{-1}\\tfrac{3}{5}\\]\n\\[= \\tan^{-1}\\dfrac{\\frac{3}{4} + \\frac{3}{5}}{1 - \\frac{3}{4}\\cdot\\frac{3}{5}}\\]\n\\[= \\tan^{-1}\\dfrac{27/20}{11/20} = \\tan^{-1}\\tfrac{27}{11}\\]\nWhy: \\(xy = \\frac{9}{20} < 1\\), so formula (v) holds. Top: \\(\\frac{15 + 12}{20} = \\frac{27}{20}\\); bottom: \\(1 - \\frac{9}{20} = \\frac{11}{20}\\); the 20s cancel.",
+              "Subtract the third term\n\\[\\text{L.H.S} = \\tan^{-1}\\tfrac{27}{11} - \\tan^{-1}\\tfrac{8}{19}\\]\n\\[= \\tan^{-1}\\dfrac{\\frac{27}{11} - \\frac{8}{19}}{1 + \\frac{27}{11}\\cdot\\frac{8}{19}}\\]\nWhy: formula (vi); its condition \\(xy > -1\\) holds because both numbers are positive.",
+              "Simplify\n\\[= \\tan^{-1}\\dfrac{(513 - 88)/209}{(209 + 216)/209}\\]\n\\[= \\tan^{-1}\\tfrac{425}{425} = \\tan^{-1}1\\]\n\\[= \\tfrac{\\pi}{4} = \\text{R.H.S}\\]\nWhy: common denominator \\(11 \\times 19 = 209\\); \\(27 \\times 19 = 513\\), \\(8 \\times 11 = 88\\), \\(27 \\times 8 = 216\\). And \\(\\tan\\frac{\\pi}{4} = 1\\).",
+              "Check\n\\[0.6435 + 0.5404 - 0.3985 = 0.7854\\]\n\\[\\tfrac{\\pi}{4} \\approx 0.7854\\ \\checkmark\\]\nWhy: the three angles from a calculator (radian mode) give \\(\\frac{\\pi}{4}\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\tan^{-1}\\frac{3}{4} + \\tan^{-1}\\frac{3}{5} - \\tan^{-1}\\frac{8}{19} = \\frac{\\pi}{4}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 9.2. Every solution on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

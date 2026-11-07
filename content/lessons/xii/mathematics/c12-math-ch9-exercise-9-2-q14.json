@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q14",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q14",
+      "title": "Question 14",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 275,
+          "pdf_to": 275,
+          "note": "Exercise 9.2, Question 14 (book page 273); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "14(i)",
+            "prompt": "14 (i) [printed as the first of two questions numbered \"14.\"] Prove that \\(2\\tan^{-1} x = \\cos^{-1}\\left(\\frac{1 - x^2}{1 + x^2}\\right)\\).",
+            "explanation": "Same type as Question 12, but the right side is a \\(\\cos^{-1}\\). No range is printed; the working shows the identity holds only for \\(x \\ge 0\\).\nPlan: put \\(\\tan^{-1} x = \\theta\\), turn the fraction into \\(\\cos 2\\theta\\), then check when \\(2\\theta\\) lies in \\([0, \\pi]\\), the principal range of \\(\\cos^{-1}\\).",
+            "steps": [
+              "Given: \\(2\\tan^{-1} x\\) and \\(\\cos^{-1}\\frac{1 - x^2}{1 + x^2}\\).\nTo prove: they are equal (and find for which \\(x\\)).\nMethod: Let \\(\\tan^{-1} x = \\theta\\). The fraction \\(\\frac{1 - \\tan^2\\theta}{1 + \\tan^2\\theta}\\) is the double-angle form of \\(\\cos 2\\theta\\), so the right side becomes \\(\\cos^{-1}(\\cos 2\\theta)\\), which equals \\(2\\theta\\) only when \\(0 \\le 2\\theta \\le \\pi\\).",
+              "Let the inverse be an angle\n\\[\\tan^{-1} x = \\theta\\]\n\\[x = \\tan\\theta\\]\nWhy: Definition of \\(\\tan^{-1}\\); \\(\\theta\\) lies in \\(\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\).",
+              "Rewrite the fraction\n\\[\\dfrac{1 - x^2}{1 + x^2} = \\dfrac{1 - \\tan^2\\theta}{1 + \\tan^2\\theta}\\]\n\\[= \\dfrac{\\cos^2\\theta - \\sin^2\\theta}{\\cos^2\\theta + \\sin^2\\theta}\\]\n\\[= \\dfrac{\\cos 2\\theta}{1} = \\cos 2\\theta\\]\nWhy: Multiply top and bottom by \\(\\cos^2\\theta\\) (this clears \\(\\tan^2\\theta = \\sin^2\\theta/\\cos^2\\theta\\)). Then \\(\\cos^2\\theta - \\sin^2\\theta = \\cos 2\\theta\\) and \\(\\cos^2\\theta + \\sin^2\\theta = 1\\).",
+              "Take \\(\\cos^{-1}\\)\n\\[\\cos^{-1}\\dfrac{1 - x^2}{1 + x^2}\\]\n\\[= \\cos^{-1}(\\cos 2\\theta)\\]\nWhy: This equals \\(2\\theta\\) only when \\(2\\theta\\) lies in \\([0, \\pi]\\), the principal range of \\(\\cos^{-1}\\).",
+              "The case \\(x \\ge 0\\)\n\\[0 \\le \\theta < \\dfrac{\\pi}{2}\\]\n\\[0 \\le 2\\theta < \\pi\\]\n\\[\\cos^{-1}(\\cos 2\\theta) = 2\\theta = 2\\tan^{-1} x\\]\nWhy: For \\(x \\ge 0\\), \\(\\theta = \\tan^{-1} x\\) is in \\(\\left[0, \\frac{\\pi}{2}\\right)\\), so \\(2\\theta\\) is in the principal range and the identity holds.",
+              "The case \\(x < 0\\)\n\\[x = -1:\\ 2\\tan^{-1}(-1) = -\\dfrac{\\pi}{2}\\]\n\\[\\cos^{-1}\\dfrac{1 - 1}{1 + 1} = \\cos^{-1} 0 = \\dfrac{\\pi}{2}\\]\nWhy: For \\(x < 0\\), \\(2\\theta\\) is negative, outside \\([0, \\pi]\\). Since \\(\\cos(-2\\theta) = \\cos 2\\theta\\) and \\(-2\\theta\\) is in \\((0, \\pi)\\), the right side then equals \\(-2\\theta = -2\\tan^{-1} x\\), not \\(2\\tan^{-1} x\\).",
+              "Check\n\\[x = 1:\\ 2\\tan^{-1} 1 = \\dfrac{\\pi}{2},\\ \\cos^{-1} 0 = \\dfrac{\\pi}{2}\\]\n\\[x = \\sqrt{3}:\\ 2\\tan^{-1}\\sqrt{3} = \\dfrac{2\\pi}{3}\\]\n\\[\\cos^{-1}\\dfrac{1 - 3}{1 + 3} = \\cos^{-1}\\left(-\\tfrac{1}{2}\\right) = \\dfrac{2\\pi}{3}\\]\nWhy: Both sides agree for these values of \\(x \\ge 0\\)."
+            ],
+            "final_answer": "Hence proved for \\(x \\ge 0\\): \\(2\\tan^{-1} x = \\cos^{-1}\\frac{1 - x^2}{1 + x^2}\\). (For \\(x < 0\\) the right side equals \\(-2\\tan^{-1} x\\).)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints this identity without any range of \\(x\\). It is true only for \\(x \\ge 0\\): for every \\(x < 0\\) the left side \\(2\\tan^{-1} x\\) is negative, while a \\(\\cos^{-1}\\) value is never negative. Example: at \\(x = -1\\) the left side is \\(-\\frac{\\pi}{2}\\) and the right side is \\(\\cos^{-1} 0 = \\frac{\\pi}{2}\\). Correct statement: \\(2\\tan^{-1} x = \\cos^{-1}\\frac{1 - x^2}{1 + x^2}\\) for \\(x \\ge 0\\) (for \\(x < 0\\) the right side equals \\(-2\\tan^{-1} x\\))."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "14(ii)",
+            "prompt": "14 (ii) [printed as a second question numbered \"14.\"] Prove that \\(\\cos(\\sin^{-1} x) = \\sqrt{1 - x^2}\\).",
+            "explanation": "A trigonometric function of an inverse function, to be written in terms of \\(x\\).\nPlan: let \\(\\sin^{-1} x = \\alpha\\), then \\(\\cos\\alpha = \\pm\\sqrt{1 - \\sin^2\\alpha}\\), and the principal range of \\(\\sin^{-1}\\) fixes the \\(+\\) sign.",
+            "steps": [
+              "Given: \\(-1 \\le x \\le 1\\) (the domain of \\(\\sin^{-1}\\)).\nTo prove: \\(\\cos(\\sin^{-1} x) = \\sqrt{1 - x^2}\\).\nMethod: The same idea the book uses to prove formula (i): name the angle, use \\(\\sin^2\\alpha + \\cos^2\\alpha = 1\\), and choose the sign from the range.",
+              "Let the inverse be an angle\n\\[\\sin^{-1} x = \\alpha\\]\n\\[\\sin\\alpha = x\\]\nWhy: Definition of \\(\\sin^{-1}\\); \\(\\alpha\\) lies in \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\).",
+              "Find \\(\\cos\\alpha\\)\n\\[\\cos\\alpha = \\pm\\sqrt{1 - \\sin^2\\alpha}\\]\n\\[= \\pm\\sqrt{1 - x^2}\\]\nWhy: From \\(\\sin^2\\alpha + \\cos^2\\alpha = 1\\).",
+              "Choose the sign\n\\[\\cos\\alpha \\ge 0\\]\n\\[\\cos(\\sin^{-1} x) = \\cos\\alpha = \\sqrt{1 - x^2}\\]\nWhy: On \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\) cosine is never negative, so the \\(+\\) sign is the only correct one.",
+              "Check\n\\[x = \\tfrac{1}{2}:\\ \\cos\\dfrac{\\pi}{6} = \\dfrac{\\sqrt{3}}{2}\\]\n\\[\\sqrt{1 - \\tfrac{1}{4}} = \\dfrac{\\sqrt{3}}{2}\\]\n\\[x = -1:\\ \\cos\\left(-\\dfrac{\\pi}{2}\\right) = 0 = \\sqrt{0}\\]\nWhy: Both sides agree, also at an end point of the domain."
+            ],
+            "final_answer": "Hence proved: \\(\\cos(\\sin^{-1} x) = \\sqrt{1 - x^2}\\) for \\(-1 \\le x \\le 1\\).",
+            "answer_figure": {
+              "$asset": "c12-math-ch9-fig-ex9-2-q13",
+              "alt": "A right triangle with angle alpha, hypotenuse 1, opposite side x and adjacent side root of 1 minus x squared, so sin alpha = x, cos alpha = root of 1 minus x squared and tan alpha = x over root of 1 minus x squared.",
+              "caption": "Right triangle for α = sin⁻¹ x, drawn for 0 < x < 1 (our drawing); the algebra also covers negative x"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Numbering: the book prints the number \"14.\" twice, for this question and for the one before it, and then prints \"15\" without its full stop. We keep both as Question 14 and label them (i) and (ii); these part labels are ours. The next question is still 15, as printed."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 9.2. Every solution on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

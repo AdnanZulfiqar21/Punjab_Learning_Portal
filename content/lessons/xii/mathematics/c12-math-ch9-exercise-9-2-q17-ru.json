@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q17-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q17",
+      "title": "Question 17 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 275,
+          "pdf_to": 275,
+          "note": "Exercise 9.2, Question 17 (book page 273); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "variant_of": "C12-MATH-CH9-EXERCISE-9-2-Q17",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "17",
+            "prompt": "17. Prove that \\(\\cot^{-1}\\left(\\frac{\\cos x}{1 - \\sin x}\\right) = \\frac{\\pi}{4} - \\frac{x}{2}\\).",
+            "explanation": "Left side par \\(\\cot^{-1}\\) ke andar ek fraction hai. Agar yeh fraction kisi angle ka cot ban jaye, to \\(\\cot^{-1}\\) aur \\(\\cot\\) ek doosre ko khatam kar dete hain aur angle bach jata hai.\nSabit kya karna hai? Ke woh angle \\(\\frac{\\pi}{4} - \\frac{x}{2}\\) hai.\nRule kaunsa? Half-angle formulas (\\(\\cos x\\) aur \\(1 - \\sin x\\) ko \\(\\frac{x}{2}\\) mein likhna) aur Remember box ka \\(\\tan(\\alpha + \\beta)\\) formula.\nPlan: fraction ko \\(\\tan\\left(\\frac{\\pi}{4} + \\frac{x}{2}\\right)\\) banana, phir usay \\(\\cot\\left(\\frac{\\pi}{4} - \\frac{x}{2}\\right)\\) likhna, aur range ki shart dekhna.\nIshara: jab bhi jawab mein \\(\\frac{x}{2}\\) nazar aaye, samajh lijiye ke half-angle formulas hi raasta hain.",
+            "steps": [
+              "Diya gaya hai: \\(\\cot^{-1}\\frac{\\cos x}{1 - \\sin x}\\).\nSaabit karna hai: yeh \\(\\frac{\\pi}{4} - \\frac{x}{2}\\) hai.\nTareeqa: \\(c = \\cos\\frac{x}{2}\\), \\(s = \\sin\\frac{x}{2}\\) rakhenge. Tab \\(\\cos x = c^2 - s^2\\) aur \\(1 - \\sin x = (c - s)^2\\) ban jate hain, aur fraction bohat chhota ho jata hai. Phir Remember box ka \\(\\tan(\\alpha + \\beta)\\) formula usay ek angle ka tan bana deta hai.",
+              "Half-angle shaklein\n\\[\\cos x = c^2 - s^2\\]\n\\[\\sin x = 2sc\\]\n\\[1 = c^2 + s^2\\]\nKyun: \\(x\\) ko \\(2 \\cdot \\frac{x}{2}\\) samjhein; phir double-angle formulas \\(\\cos 2A = \\cos^2 A - \\sin^2 A\\) aur \\(\\sin 2A = 2\\sin A\\cos A\\) lagte hain. Teesri line \\(\\sin^2 + \\cos^2 = 1\\) hai. 1 ko bhi \\(c^2 + s^2\\) likhna hi asal trick hai.",
+              "Denominator ek perfect square hai\n\\[1 - \\sin x = c^2 + s^2 - 2sc\\]\n\\[= (c - s)^2\\]\nKyun: \\((c - s)^2 = c^2 - 2cs + s^2\\), bilkul wohi terms. Is liye 1 ko \\(c^2 + s^2\\) likha tha: tab hi denominator ek perfect square ban kar saamne aata hai, jaise puzzle ke tukre apni jagah baith jayein.",
+              "Fraction chhota karein\n\\[\\dfrac{\\cos x}{1 - \\sin x} = \\dfrac{(c - s)(c + s)}{(c - s)^2}\\]\n\\[= \\dfrac{c + s}{c - s}\\]\nKyun: \\(c^2 - s^2\\) difference of squares hai: \\((c - s)(c + s)\\). Upar neeche ek \\((c - s)\\) cancel hua. Yeh zero nahi, kyunke \\(c = s\\) hone ka matlab \\(\\sin x = 1\\) hai, jahan sawal ka fraction hi defined nahi.",
+              "Upar neeche \\(c\\) se divide karein\n\\[= \\dfrac{1 + \\tan\\frac{x}{2}}{1 - \\tan\\frac{x}{2}}\\]\n\\[= \\dfrac{\\tan\\frac{\\pi}{4} + \\tan\\frac{x}{2}}{1 - \\tan\\frac{\\pi}{4}\\tan\\frac{x}{2}}\\]\n\\[= \\tan\\left(\\dfrac{\\pi}{4} + \\dfrac{x}{2}\\right)\\]\nKyun: \\(\\frac{s}{c} = \\tan\\frac{x}{2}\\). Phir 1 ko \\(\\tan\\frac{\\pi}{4}\\) likha, kyunke tab fraction bilkul \\(\\frac{\\tan\\alpha + \\tan\\beta}{1 - \\tan\\alpha\\tan\\beta}\\) ki shakal le leta hai, jo Remember box ke mutabiq \\(\\tan(\\alpha + \\beta)\\) hai.",
+              "Tan ko cot mein badlein\n\\[\\tan A = \\cot\\left(\\dfrac{\\pi}{2} - A\\right)\\]\n\\[\\dfrac{\\pi}{2} - \\left(\\dfrac{\\pi}{4} + \\dfrac{x}{2}\\right) = \\dfrac{\\pi}{4} - \\dfrac{x}{2}\\]\n\\[\\dfrac{\\cos x}{1 - \\sin x} = \\cot\\left(\\dfrac{\\pi}{4} - \\dfrac{x}{2}\\right)\\]\nKyun: Complementary angles ka rule: kisi angle ka tan us ke complement (woh angle jo mil kar \\(\\frac{\\pi}{2}\\) bana de) ka cot hota hai. Hum cot is liye chahte hain ke bahar \\(\\cot^{-1}\\) hai, aur \\(\\cot^{-1}\\) sirf cot ko hi seedha \"khol\" sakta hai. Complement nikalte waqt bracket ka khayal rakhiye: \\(\\frac{\\pi}{2} - \\frac{\\pi}{4} - \\frac{x}{2}\\), yani dono terms minus hote hain.",
+              "\\(\\cot^{-1}\\) lagayein\n\\[\\text{L.H.S} = \\cot^{-1}\\left[\\cot\\left(\\dfrac{\\pi}{4} - \\dfrac{x}{2}\\right)\\right]\\]\n\\[= \\dfrac{\\pi}{4} - \\dfrac{x}{2} = \\text{R.H.S}\\]\nKyun: \\(\\cot^{-1}(\\cot u) = u\\) sirf tab jab \\(u\\) \\((0, \\pi)\\) mein ho, jo \\(\\cot^{-1}\\) ki principal range hai. \\(0 < \\frac{\\pi}{4} - \\frac{x}{2} < \\pi\\) ko solve karein to \\(-\\frac{3\\pi}{2} < x < \\frac{\\pi}{2}\\) milta hai.\nDhyan dein: Is shart ke baghair natija har \\(x\\) par sahi nahi (neeche Kitab ki ghalti dekhiye).",
+              "Tasdeeq\n\\[x = \\dfrac{\\pi}{6}:\\ \\dfrac{\\cos x}{1 - \\sin x} = \\dfrac{\\sqrt{3}/2}{1/2} = \\sqrt{3}\\]\n\\[\\cot^{-1}\\sqrt{3} = \\dfrac{\\pi}{6}\\]\n\\[\\dfrac{\\pi}{4} - \\dfrac{\\pi}{12} = \\dfrac{\\pi}{6}\\]\nKyun: \\(\\cot\\frac{\\pi}{6} = \\sqrt{3}\\), aur right side bhi \\(\\frac{3\\pi}{12} - \\frac{\\pi}{12} = \\frac{2\\pi}{12} = \\frac{\\pi}{6}\\). Dono barabar. Ek aur aasaan check: \\(x = 0\\) par fraction \\(\\frac{1}{1} = 1\\) hai aur \\(\\cot^{-1} 1 = \\frac{\\pi}{4}\\), jo right side \\(\\frac{\\pi}{4} - 0\\) ke barabar hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\cot^{-1}\\frac{\\cos x}{1 - \\sin x} = \\frac{\\pi}{4} - \\frac{x}{2}\\), jab \\(-\\frac{3\\pi}{2} < x < \\frac{\\pi}{2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab \\(x\\) par koi shart nahi likhti, lekin natija sirf tab sahi hai jab \\(\\frac{\\pi}{4} - \\frac{x}{2}\\) \\(\\cot^{-1}\\) ki principal range \\((0, \\pi)\\) mein ho, yani \\(-\\frac{3\\pi}{2} < x < \\frac{\\pi}{2}\\). Misaal: \\(x = \\pi\\) par left side \\(\\cot^{-1}(-1) = \\frac{3\\pi}{4}\\) hai, magar right side \\(\\frac{\\pi}{4} - \\frac{\\pi}{2} = -\\frac{\\pi}{4}\\). Sahi bayan: \\(\\cot^{-1}\\frac{\\cos x}{1 - \\sin x} = \\frac{\\pi}{4} - \\frac{x}{2}\\), jab \\(-\\frac{3\\pi}{2} < x < \\frac{\\pi}{2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kitab mein Exercise 9.2 ke jawab chhape hue nahi hain. Is page ka har hal hamara apna hai: qadam ba qadam kiya gaya, computer algebra system (sympy) se alag se check kiya gaya, aur ek solution book se bhi milaya gaya. Is liye aap apna proof yahan wale proof se mila kar dekh sakte hain; agar aap ka tareeqa alag hai magar har qadam ki wajah sahi hai, to woh bhi theek hai."
+          }
+        ]
+      }
+    }
+  ]
+}

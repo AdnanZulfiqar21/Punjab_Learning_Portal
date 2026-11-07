@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-9.1.5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/9.1.5",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 264,
+          "pdf_to": 265,
+          "note": "PDF 264-265 (book p. 262-263): sec x domain and range, Figure 9.12, principal secant function, sec^-1 domain and range, Figures 9.13(a) and 9.13(b)"
+        }
+      ],
+      "title": "9.1.5 Inverse of Secant Function",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The graph of the function \\(f(x) = \\sec x\\) with domain \\(\\left\\{x \\mid x \\in \\mathbb{R} \\wedge x \\ne (2n+1)\\frac{\\pi}{2},\\ n \\in \\mathbb{Z}\\right\\}\\) and range \\(\\mathbb{R} - (-1, 1)\\) is shown in Figure 9.12."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(\\sec x = \\frac{1}{\\cos x}\\), so we must remove every \\(x\\) where \\(\\cos x = 0\\): the odd multiples of \\(\\frac{\\pi}{2}\\) (\\(\\pm\\frac{\\pi}{2}, \\pm\\frac{3\\pi}{2}, \\dots\\)), written \\((2n+1)\\frac{\\pi}{2}\\). These are the vertical asymptotes of the graph.\nAs with cosecant, \\(|\\cos x| \\le 1\\) gives \\(|\\sec x| \\ge 1\\), so the range is \\(\\mathbb{R} - (-1, 1) = (-\\infty, -1] \\cup [1, \\infty)\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch9-fig-9-12-sec-x",
+            "alt": "Graph of y = sec x for x from minus 5 pi over 2 to 5 pi over 2. Dashed vertical asymptotes at the odd multiples of pi over 2. Dashed horizontal lines y = 1 and y = minus 1. Branches opening upward have lowest points (minus 2 pi, 1), (0, 1) and (2 pi, 1); branches opening downward have highest points (minus pi, minus 1) and (pi, minus 1).",
+            "caption": "Figure 9.12: graph of \\(y = \\sec x\\) from \\(-\\frac{5\\pi}{2}\\) to \\(\\frac{5\\pi}{2}\\) (original drawing after the textbook's figure; the point at \\(x = \\pi\\) is correctly labelled \\((\\pi, -1)\\))"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the book's Figure 9.12 the point at \\(x = \\pi\\) is labelled \\((\\pi, 1)\\). Since \\(\\sec\\pi = \\frac{1}{\\cos\\pi} = \\frac{1}{-1} = -1\\), the point is \\((\\pi, -1)\\), the top of a downward branch (just like \\((-\\pi, -1)\\)). Our drawing shows the correct label."
+          },
+          {
+            "type": "paragraph",
+            "text": "Clearly from the graph it follows that secant function is not bijective because the line \\(y = 1\\) and \\(y = -1\\) touches the graph at many points. However, if we restrict the domain of \\(f(x) = \\sec x\\) to the interval \\([0, \\pi] - \\left\\{\\frac{\\pi}{2}\\right\\}\\), then the function with restricted domain i.e. \\(f : \\left[0, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{\\pi}{2}, \\pi\\right] \\to (-\\infty, -1] \\cup [1, \\infty)\\) becomes one-one and onto (bijective) that is invertible and is called principal secant function. The inverse secant function is defined by",
+            "bold": [
+              "principal secant function"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(y = \\sec^{-1} x\\) if \\(x = \\sec y\\)",
+            "book_errors": [
+              "\\(y = \\sec^{-1} x\\) if \\(x = \\sec y\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book writes 'if' here. As for every other inverse function in this unit, the definition works in both directions, so it should read\n\\[y = \\sec^{-1} x \\iff x = \\sec y\\]\n(iff = if and only if), with \\(y \\in \\left[0, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{\\pi}{2}, \\pi\\right]\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why \\([0, \\pi]\\)? It is the same interval we used for \\(\\cos^{-1} x\\). On \\([0, \\pi]\\), \\(\\cos x\\) decreases steadily from 1 to \\(-1\\), taking each value once. Its reciprocal \\(\\sec x\\) rises from 1 to \\(+\\infty\\) on \\(\\left[0, \\frac{\\pi}{2}\\right)\\) and from \\(-\\infty\\) up to \\(-1\\) on \\(\\left(\\frac{\\pi}{2}, \\pi\\right]\\): each value with \\(|y| \\ge 1\\) once. Only \\(\\frac{\\pi}{2}\\) has to go, because \\(\\cos\\frac{\\pi}{2} = 0\\).\nBecause the interval matches cosine's, \\(\\sec^{-1} x = \\cos^{-1}\\frac{1}{x}\\) (Example 4 in 9.1.6)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The domain of \\(\\sec^{-1} x\\) is \\(\\mathbb{R} - (-1, 1)\\) and range of \\(\\sec^{-1} x\\) is \\(\\left[0, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{\\pi}{2}, \\pi\\right]\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The graph of the function \\(\\sec : \\left[0, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{\\pi}{2}, \\pi\\right] \\to (-\\infty, -1] \\cup [1, \\infty)\\) is shown in Figure 9.13(a) and graph of \\(\\sec^{-1} : (-\\infty, -1] \\cup [1, \\infty) \\to \\left[0, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{\\pi}{2}, \\pi\\right]\\) is shown in Figure 9.13(b)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch9-fig-9-13a-principal-sec",
+            "alt": "Principal branch of y = sec x on 0 to pi. From the point (0, 1) the curve rises to plus infinity as x approaches pi over 2 from the left. To the right of the dashed asymptote x = pi over 2 the curve comes up from minus infinity to the end point (pi, minus 1).",
+            "caption": "Figure 9.13(a): graph of \\(y = \\sec x\\) from 0 to \\(\\pi\\) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch9-fig-9-13b-inverse-sec",
+            "alt": "Graph of y = inverse secant of x. For x at least 1 the curve starts at (1, 0) and rises towards the dashed line y = pi over 2 without reaching it. For x at most minus 1 the curve starts at (minus 1, pi) and falls towards y = pi over 2 without reaching it. Dashed horizontal lines y = pi over 2 and y = pi.",
+            "caption": "Figure 9.13(b): graph of \\(y = \\sec^{-1} x\\) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Reading the two graphs: reflecting Figure 9.13(a) in \\(y = x\\) gives Figure 9.13(b). The end points swap: \\((0, 1) \\to (1, 0)\\) and \\((\\pi, -1) \\to (-1, \\pi)\\). The vertical asymptote \\(x = \\frac{\\pi}{2}\\) becomes the horizontal asymptote \\(y = \\frac{\\pi}{2}\\): \\(\\sec^{-1} x\\) comes as close as we like to \\(\\frac{\\pi}{2}\\) for large \\(|x|\\) but never equals it. For \\(x \\ge 1\\) the values lie in \\(\\left[0, \\frac{\\pi}{2}\\right)\\); for \\(x \\le -1\\) they lie in \\(\\left(\\frac{\\pi}{2}, \\pi\\right]\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A quick example of our own. \\(\\sec^{-1} 2 = y\\) means \\(\\cos y = \\frac{1}{2}\\) with \\(y \\in [0, \\pi]\\), so \\(y = \\frac{\\pi}{3}\\).\n\\(\\sec^{-1}(-2) = y\\) means \\(\\cos y = -\\frac{1}{2}\\), so \\(y = \\frac{2\\pi}{3}\\) (not \\(-\\frac{\\pi}{3}\\): negative angles are outside the range of \\(\\sec^{-1}\\)).\n\\(\\sec^{-1}(-1) = \\pi\\) and \\(\\sec^{-1} 1 = 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\sec x = \\frac{1}{\\cos x}\\); domain \\(\\mathbb{R} - \\left\\{(2n+1)\\frac{\\pi}{2}\\right\\}\\), range \\((-\\infty, -1] \\cup [1, \\infty)\\).\n2. Principal secant function: \\(\\sec : \\left[0, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{\\pi}{2}, \\pi\\right] \\to (-\\infty, -1] \\cup [1, \\infty)\\).\n3. \\(y = \\sec^{-1} x \\iff x = \\sec y\\).\n4. Domain of \\(\\sec^{-1} x\\): \\(\\mathbb{R} - (-1, 1)\\); range: \\(\\left[0, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{\\pi}{2}, \\pi\\right]\\).\n5. \\(y = \\frac{\\pi}{2}\\) is a horizontal asymptote of \\(\\sec^{-1} x\\); its values are never negative."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Giving a negative answer for \\(\\sec^{-1}\\) of a negative number, e.g. \\(\\sec^{-1}(-2) = -\\frac{\\pi}{3}\\). The range of \\(\\sec^{-1}\\) is inside \\([0, \\pi]\\); the answer is \\(\\frac{2\\pi}{3}\\).\n2. Including \\(\\frac{\\pi}{2}\\) in the range: \\(\\sec\\frac{\\pi}{2}\\) is undefined.\n3. Confusing \\(\\sec^{-1} x\\) with \\(\\frac{1}{\\sec x} = \\cos x\\).\n4. Mixing up the intervals: \\(\\sec^{-1}\\) uses cosine's interval \\([0, \\pi]\\), \\(\\csc^{-1}\\) uses sine's interval \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

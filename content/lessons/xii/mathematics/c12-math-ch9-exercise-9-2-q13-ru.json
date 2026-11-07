@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q13-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q13",
+      "title": "Question 13 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 275,
+          "pdf_to": 275,
+          "note": "Exercise 9.2, Question 13 (book page 273); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "variant_of": "C12-MATH-CH9-EXERCISE-9-2-Q13",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13",
+            "prompt": "13. Prove that \\(\\tan(\\sin^{-1} x) = \\frac{x}{\\sqrt{1 - x^2}}\\), \\(-1 < x < 1\\).",
+            "explanation": "Yahan ek trigonometric function (tan) ke andar inverse function (\\(\\sin^{-1}\\)) hai, aur humein usay sirf \\(x\\) ki algebra mein likhna hai.\nDiya kya hai? \\(-1 < x < 1\\). Sabit kya karna hai? Ke \\(\\tan(\\sin^{-1} x)\\) bilkul \\(\\frac{x}{\\sqrt{1 - x^2}}\\) hai.\nRule kaunsa? \\(\\sin^2\\alpha + \\cos^2\\alpha = 1\\) aur \\(\\tan\\alpha = \\frac{\\sin\\alpha}{\\cos\\alpha}\\).\nPlan: angle ka naam, phir cos nikalna (sign ka faisla principal range se), phir divide. Ek right triangle bana kar dekhein to sab saamne aa jata hai (figure).\nYaad rakhiye: is qisam ke har sawal mein asal kaam sirf \"gumshuda\" function (yahan cos) dhoondna hai; baqi sab seedhi definition hai.",
+            "steps": [
+              "Diya gaya hai: \\(-1 < x < 1\\).\nSaabit karna hai: \\(\\tan(\\sin^{-1} x) = \\frac{x}{\\sqrt{1 - x^2}}\\).\nTareeqa: \\(\\alpha = \\sin^{-1} x\\) rakhenge, jaise kitab Example 8 aur formula (i) ke proof mein karti hai. Is se \\(\\sin\\alpha = x\\) maloom ho jata hai. Tan ke liye sin aur cos dono chahiye, is liye cos ko Pythagorean identity se nikalenge, phir divide karenge.",
+              "Inverse ko angle ka naam dein\n\\[\\sin^{-1} x = \\alpha\\]\n\\[\\sin\\alpha = x\\]\nKyun: \\(\\sin^{-1} x\\) ka matlab hai \"woh angle jiska sine \\(x\\) ho\". Principal range ki wajah se \\(\\alpha\\) \\(\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\) mein hai. Kinare (\\(\\pm\\frac{\\pi}{2}\\)) is liye nahi ke sawal mein \\(x \\ne \\pm 1\\) hai.",
+              "\\(\\cos\\alpha\\) nikalein\n\\[\\cos^2\\alpha = 1 - \\sin^2\\alpha\\]\n\\[= 1 - x^2\\]\n\\[\\cos\\alpha = \\sqrt{1 - x^2}\\]\nKyun: \\(\\sin^2\\alpha + \\cos^2\\alpha = 1\\) se \\(\\cos^2\\alpha = 1 - x^2\\). Square root lene par \\(\\pm\\) dono aate hain, lekin \\(\\alpha\\) pehle ya chauthe quadrant mein hai (\\(-\\frac{\\pi}{2}\\) se \\(\\frac{\\pi}{2}\\)), aur wahan cos hamesha positive hota hai. Is liye sirf \\(+\\) sign sahi hai. Kitab bhi formula (i) ke proof mein yahi dalil deti hai.\nDhyan dein: \\(\\pm\\sqrt{1 - x^2}\\) likh kar chhor dena ghalat hai; sign ka faisla wajah ke saath likhiye.",
+              "Ab divide karein\n\\[\\tan(\\sin^{-1} x) = \\tan\\alpha\\]\n\\[= \\dfrac{\\sin\\alpha}{\\cos\\alpha}\\]\n\\[= \\dfrac{x}{\\sqrt{1 - x^2}}\\]\nKyun: Tan hamesha sin divided by cos hota hai. Denominator zero nahi ho sakta kyunke \\(-1 < x < 1\\) hai, to \\(1 - x^2 > 0\\). Agar \\(x = \\pm 1\\) hota to \\(\\alpha = \\pm\\frac{\\pi}{2}\\) hota aur wahan tan exist hi nahi karta; isi liye sawal mein kinare chhor diye gaye hain. Sign bhi apne aap sahi aata hai: \\(x\\) negative ho to upar negative aur neeche positive, is liye tan negative, jaisa chauthe quadrant mein hona chahiye.",
+              "Tasdeeq\n\\[x = \\tfrac{1}{2}:\\ \\tan\\left(\\sin^{-1}\\tfrac{1}{2}\\right) = \\tan\\dfrac{\\pi}{6}\\]\n\\[= \\dfrac{1}{\\sqrt{3}}\\]\n\\[\\dfrac{1/2}{\\sqrt{1 - 1/4}} = \\dfrac{1/2}{\\sqrt{3}/2} = \\dfrac{1}{\\sqrt{3}}\\]\nKyun: \\(\\sin^{-1}\\frac{1}{2} = \\frac{\\pi}{6}\\) aur \\(\\tan\\frac{\\pi}{6} = \\frac{1}{\\sqrt{3}}\\); formula bhi wohi deta hai. \\(x = -\\frac{1}{2}\\) par dono sides \\(-\\frac{1}{\\sqrt{3}}\\) aati hain, yani negative \\(x\\) ke liye sign bhi theek aata hai. Figure wala triangle (opposite \\(x\\), hypotenuse 1, adjacent \\(\\sqrt{1 - x^2}\\)) bhi yahi kehta hai: tan = opposite/adjacent."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\tan(\\sin^{-1} x) = \\frac{x}{\\sqrt{1 - x^2}}\\), jab \\(-1 < x < 1\\).",
+            "answer_figure": {
+              "$asset": "c12-math-ch9-fig-ex9-2-q13",
+              "alt": "A right triangle with angle alpha, hypotenuse 1, opposite side x and adjacent side root of 1 minus x squared, so sin alpha = x, cos alpha = root of 1 minus x squared and tan alpha = x over root of 1 minus x squared.",
+              "caption": "Right triangle for α = sin⁻¹ x, drawn for 0 < x < 1 (our drawing); the algebra also covers negative x"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kitab mein Exercise 9.2 ke jawab chhape hue nahi hain. Is page ka har hal hamara apna hai: qadam ba qadam kiya gaya, computer algebra system (sympy) se alag se check kiya gaya, aur ek solution book se bhi milaya gaya. Is liye aap apna proof yahan wale proof se mila kar dekh sakte hain; agar aap ka tareeqa alag hai magar har qadam ki wajah sahi hai, to woh bhi theek hai."
+          }
+        ]
+      }
+    }
+  ]
+}

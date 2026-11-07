@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-9.1.5-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/9.1.5",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 264,
+          "pdf_to": 265,
+          "note": "PDF 264-265 (book p. 262-263): sec x domain and range, Figure 9.12, principal secant function, sec^-1 domain and range, Figures 9.13(a) and 9.13(b)"
+        }
+      ],
+      "title": "9.1.5 Inverse of Secant Function (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH9-9.1.5",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Cosecant ke baad ab secant ki baari hai. Achhi khabar yeh hai ke kahani wahi hai, sirf kirdar badle hain: jaise cosecant sine ka ulta tha, waise hi secant cosine ka ulta (reciprocal) hai, \\(\\sec x = \\frac{1}{\\cos x}\\). Is liye jo interval hum ne \\(\\cos^{-1} x\\) ke liye chuna tha, wahi yahan kaam aayega, bas ek point nikalna padega. Chaliye qadam ba qadam dekhte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Function \\(f(x) = \\sec x\\) ka domain \\(\\left\\{x \\mid x \\in \\mathbb{R} \\wedge x \\ne (2n+1)\\frac{\\pi}{2},\\ n \\in \\mathbb{Z}\\right\\}\\) aur range \\(\\mathbb{R} - (-1, 1)\\) hai. Is ka graph Figure 9.12 mein hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Domain samajhiye: \\(\\sec x = \\frac{1}{\\cos x}\\), aur zero se divide nahin ho sakta. \\(\\cos x = 0\\) kahan hota hai? \\(\\frac{\\pi}{2}, \\frac{3\\pi}{2}, -\\frac{\\pi}{2}, \\dots\\) yani \\(\\frac{\\pi}{2}\\) ke odd multiples (taaq zarb), jinhein \\((2n+1)\\frac{\\pi}{2}\\) likhte hain. Yeh saare points domain se bahar hain aur in par graph ke vertical asymptotes hain (dashed lines).\nRange: \\(\\cos x\\) hamesha \\(-1\\) aur \\(1\\) ke darmiyan hai, to us ka ulta hamesha size mein 1 ya us se bara hoga: \\(|\\sec x| \\ge 1\\). Is liye range \\(\\mathbb{R} - (-1, 1) = (-\\infty, -1] \\cup [1, \\infty)\\) hai, bilkul cosecant jaisi."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch9-fig-9-12-sec-x",
+            "alt": "Graph of y = sec x for x from minus 5 pi over 2 to 5 pi over 2. Dashed vertical asymptotes at the odd multiples of pi over 2. Dashed horizontal lines y = 1 and y = minus 1. Branches opening upward have lowest points (minus 2 pi, 1), (0, 1) and (2 pi, 1); branches opening downward have highest points (minus pi, minus 1) and (pi, minus 1).",
+            "caption": "Figure 9.12: graph of \\(y = \\sec x\\) from \\(-\\frac{5\\pi}{2}\\) to \\(\\frac{5\\pi}{2}\\) (original drawing after the textbook's figure; the point at \\(x = \\pi\\) is correctly labelled \\((\\pi, -1)\\))"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ki Figure 9.12 mein \\(x = \\pi\\) wale point par label \\((\\pi, 1)\\) likha hai. Hisaab lagaiye: \\(\\sec\\pi = \\frac{1}{\\cos\\pi} = \\frac{1}{-1} = -1\\). Is liye sahi point \\((\\pi, -1)\\) hai. Graph mein bhi yeh point neeche wali (downward) branch ki choti par hai, bilkul \\((-\\pi, -1)\\) ki tarah. Humari drawing mein sahi label hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Graph se saaf hai ke secant function bijective nahin, kyun ke line \\(y = 1\\) aur line \\(y = -1\\) graph ko bahut saare points par chhooti hain. Misal ke taur par \\(\\sec 0 = \\sec 2\\pi = \\sec(-2\\pi) = 1\\): ek output, kai inputs. Aise function ka inverse nahin ban sakta."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is liye domain ko interval \\([0, \\pi] - \\left\\{\\frac{\\pi}{2}\\right\\}\\) tak restrict karte hain. Restricted function, yani\n\\[f : \\left[0, \\tfrac{\\pi}{2}\\right) \\cup \\left(\\tfrac{\\pi}{2}, \\pi\\right]\\]\n\\[\\to (-\\infty, -1] \\cup [1, \\infty)\\]\none-one aur onto (bijective) ho jata hai, yani invertible hai. Isay principal secant function kehte hain. Inverse secant function ki definition yeh hai:",
+            "bold": [
+              "principal secant function"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "y = \\sec^{-1} x \\iff x = \\sec y",
+            "text_alt": "y equals inverse secant of x if and only if x equals secant of y"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab yahan 'if' likhti hai: \\(y = \\sec^{-1} x\\) if \\(x = \\sec y\\). Baqi saare inverse functions ki tarah yahan bhi 'iff' (if and only if, yani dono taraf se) hona chahiye, kyun ke definition dono taraf chalti hai: \\(y = \\sec^{-1} x\\) ho to \\(x = \\sec y\\), aur \\(x = \\sec y\\) (principal range mein \\(y\\)) ho to \\(y = \\sec^{-1} x\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Interval \\([0, \\pi]\\) hi kyun? Yeh wahi interval hai jo \\(\\cos^{-1} x\\) ke liye liya tha. Is par \\(\\cos x\\) lagataar 1 se ghat kar \\(-1\\) tak jata hai aur har value sirf ek dafa leta hai. Us ka ulta \\(\\sec x\\): \\(\\left[0, \\frac{\\pi}{2}\\right)\\) par 1 se \\(+\\infty\\) tak, aur \\(\\left(\\frac{\\pi}{2}, \\pi\\right]\\) par \\(-\\infty\\) se \\(-1\\) tak. Har ijazat wali value ek hi dafa. Sirf \\(\\frac{\\pi}{2}\\) nikalna pada kyun ke wahan \\(\\cos\\frac{\\pi}{2} = 0\\).\nIs ka faida aage 9.1.6 ki Example 4 mein milega: \\(\\sec^{-1} x = \\cos^{-1}\\frac{1}{x}\\). Yani secant ka sawal cosine ke sawal mein badla ja sakta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is tarah sochiye: cosine ka \\([0, \\pi]\\) wala tukda ek seedhi dhalaan (slope) ki tarah hai jo upar se neeche aati hai. Jab hum har value ka ulta lete hain to beech mein jahan cosine zero hai, wahan secant 'phat' jata hai (infinity), aur graph do hisson mein bat jata hai. Dono hisse mil kar bhi har value ek hi dafa dete hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab inverse ka domain aur range: \\(\\sec^{-1} x\\) ka domain \\(\\mathbb{R} - (-1, 1)\\) aur range \\(\\left[0, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{\\pi}{2}, \\pi\\right]\\) hai. Phir wahi adla badli: principal function ki range inverse ka domain, aur principal function ka domain inverse ki range."
+          },
+          {
+            "type": "paragraph",
+            "text": "Function \\(\\sec : \\left[0, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{\\pi}{2}, \\pi\\right] \\to (-\\infty, -1] \\cup [1, \\infty)\\) ka graph Figure 9.13(a) mein hai, aur \\(\\sec^{-1} : (-\\infty, -1] \\cup [1, \\infty) \\to \\left[0, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{\\pi}{2}, \\pi\\right]\\) ka graph Figure 9.13(b) mein."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch9-fig-9-13a-principal-sec",
+            "alt": "Principal branch of y = sec x on 0 to pi. From the point (0, 1) the curve rises to plus infinity as x approaches pi over 2 from the left. To the right of the dashed asymptote x = pi over 2 the curve comes up from minus infinity to the end point (pi, minus 1).",
+            "caption": "Figure 9.13(a): graph of \\(y = \\sec x\\) from 0 to \\(\\pi\\) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch9-fig-9-13b-inverse-sec",
+            "alt": "Graph of y = inverse secant of x. For x at least 1 the curve starts at (1, 0) and rises towards the dashed line y = pi over 2 without reaching it. For x at most minus 1 the curve starts at (minus 1, pi) and falls towards y = pi over 2 without reaching it. Dashed horizontal lines y = pi over 2 and y = pi.",
+            "caption": "Figure 9.13(b): graph of \\(y = \\sec^{-1} x\\) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Dono graphs ka rishta: Figure 9.13(a) ko line \\(y = x\\) mein palat dein (mirror image) to Figure 9.13(b) ban jati hai. End points ulat jate hain: \\((0, 1)\\) se \\((1, 0)\\), aur \\((\\pi, -1)\\) se \\((-1, \\pi)\\). Vertical asymptote \\(x = \\frac{\\pi}{2}\\) ab horizontal asymptote \\(y = \\frac{\\pi}{2}\\) ban gaya. Matlab \\(|x|\\) jitna bhi bara ho, \\(\\sec^{-1} x\\) \\(\\frac{\\pi}{2}\\) ke qareeb to aata hai magar kabhi barabar nahin hota.\nEk aur baat: \\(x \\ge 1\\) ke liye jawab \\(\\left[0, \\frac{\\pi}{2}\\right)\\) mein, aur \\(x \\le -1\\) ke liye \\(\\left(\\frac{\\pi}{2}, \\pi\\right]\\) mein aata hai. Yani positive input par chhota angle, negative input par bara (obtuse) angle."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "\\(\\sec^{-1} 2\\) nikalna ho to sochiye: kaun sa angle \\(y \\in [0, \\pi]\\) hai jis ka \\(\\cos y = \\frac{1}{2}\\)? Jawab \\(y = \\frac{\\pi}{3}\\).\n\\(\\sec^{-1}(-2)\\): \\(\\cos y = -\\frac{1}{2}\\), to \\(y = \\frac{2\\pi}{3}\\). Bahut se students yahan \\(-\\frac{\\pi}{3}\\) likh dete hain, jo ghalat hai, kyun ke negative angle \\(\\sec^{-1}\\) ki range mein hai hi nahin.\nAur aasan wale: \\(\\sec^{-1} 1 = 0\\), \\(\\sec^{-1}(-1) = \\pi\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Kya \\(\\sec^{-1} x\\) kabhi negative ho sakta hai? Range dekhiye: sab values 0 aur \\(\\pi\\) ke darmiyan hain, is liye kabhi nahin. Aur kya \\(\\sec^{-1} x = \\frac{\\pi}{2}\\) ho sakta hai? Iske liye \\(x = \\sec\\frac{\\pi}{2}\\) chahiye, jo define nahin. Is liye yeh bhi nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Exam mein agar \\(\\sec^{-1}\\) ya \\(\\csc^{-1}\\) ki value poochi jaye to sab se aasan raasta yeh hai ke pehle number ka ulta lein aur cosine ya sine ka sawal bana lein: \\(\\sec^{-1} x = \\cos^{-1}\\frac{1}{x}\\). Misal: \\(\\sec^{-1}\\frac{2}{\\sqrt{3}} = \\cos^{-1}\\frac{\\sqrt{3}}{2} = \\frac{\\pi}{6}\\). Aakhir mein hamesha check kijiye ke jawab range \\(\\left[0, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{\\pi}{2}, \\pi\\right]\\) ke andar hai ya nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(\\sec x = \\frac{1}{\\cos x}\\); domain \\(\\mathbb{R} - \\left\\{(2n+1)\\frac{\\pi}{2}\\right\\}\\), range \\((-\\infty, -1] \\cup [1, \\infty)\\).\n2. Principal secant function: domain \\(\\left[0, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{\\pi}{2}, \\pi\\right]\\), codomain \\((-\\infty, -1] \\cup [1, \\infty)\\).\n3. \\(y = \\sec^{-1} x \\iff x = \\sec y\\).\n4. \\(\\sec^{-1} x\\) ka domain \\(\\mathbb{R} - (-1, 1)\\), range \\(\\left[0, \\frac{\\pi}{2}\\right) \\cup \\left(\\frac{\\pi}{2}, \\pi\\right]\\).\n5. \\(y = \\frac{\\pi}{2}\\) horizontal asymptote hai; \\(\\sec^{-1} x\\) kabhi negative nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Negative number ka \\(\\sec^{-1}\\) negative angle likh dena, jaise \\(\\sec^{-1}(-2) = -\\frac{\\pi}{3}\\). Sahi jawab \\(\\frac{2\\pi}{3}\\) hai.\n2. Range mein \\(\\frac{\\pi}{2}\\) shamil kar dena; wahan secant define nahin.\n3. \\(\\sec^{-1} x\\) ko \\(\\frac{1}{\\sec x} = \\cos x\\) samajh lena.\n4. Intervals ulat dena: \\(\\sec^{-1}\\) cosine wala \\([0, \\pi]\\) leta hai, aur \\(\\csc^{-1}\\) sine wala \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

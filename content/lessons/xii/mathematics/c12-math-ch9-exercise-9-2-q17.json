@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q17",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q17",
+      "title": "Question 17",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 275,
+          "pdf_to": 275,
+          "note": "Exercise 9.2, Question 17 (book page 273); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "17",
+            "prompt": "17. Prove that \\(\\cot^{-1}\\left(\\frac{\\cos x}{1 - \\sin x}\\right) = \\frac{\\pi}{4} - \\frac{x}{2}\\).",
+            "explanation": "The fraction must be turned into a cotangent of an angle, so that \\(\\cot^{-1}\\) and \\(\\cot\\) undo each other.\nPlan: write \\(\\cos x\\) and \\(1 - \\sin x\\) with half-angles, simplify to \\(\\tan\\left(\\frac{\\pi}{4} + \\frac{x}{2}\\right) = \\cot\\left(\\frac{\\pi}{4} - \\frac{x}{2}\\right)\\), then use the range of \\(\\cot^{-1}\\).",
+            "steps": [
+              "Given: \\(\\cot^{-1}\\frac{\\cos x}{1 - \\sin x}\\).\nTo prove: it equals \\(\\frac{\\pi}{4} - \\frac{x}{2}\\).\nMethod: With \\(c = \\cos\\frac{x}{2}\\) and \\(s = \\sin\\frac{x}{2}\\), \\(\\cos x = c^2 - s^2\\) and \\(1 - \\sin x = (c - s)^2\\), so the fraction simplifies. The Remember box formula \\(\\tan(\\alpha + \\beta)\\) then gives \\(\\tan\\left(\\frac{\\pi}{4} + \\frac{x}{2}\\right)\\).",
+              "Half-angle forms\n\\[\\cos x = c^2 - s^2\\]\n\\[\\sin x = 2sc\\]\n\\[1 = c^2 + s^2\\]\nWhy: Double-angle formulas for \\(x = 2 \\cdot \\frac{x}{2}\\), and \\(\\sin^2 + \\cos^2 = 1\\).",
+              "The denominator is a perfect square\n\\[1 - \\sin x = c^2 + s^2 - 2sc\\]\n\\[= (c - s)^2\\]\nWhy: \\((c - s)^2 = c^2 - 2cs + s^2\\).",
+              "Simplify the fraction\n\\[\\dfrac{\\cos x}{1 - \\sin x} = \\dfrac{(c - s)(c + s)}{(c - s)^2}\\]\n\\[= \\dfrac{c + s}{c - s}\\]\nWhy: \\(c^2 - s^2 = (c - s)(c + s)\\); cancel one \\(c - s\\), which is not zero because \\(\\sin x \\ne 1\\).",
+              "Divide top and bottom by \\(c\\)\n\\[= \\dfrac{1 + \\tan\\frac{x}{2}}{1 - \\tan\\frac{x}{2}}\\]\n\\[= \\dfrac{\\tan\\frac{\\pi}{4} + \\tan\\frac{x}{2}}{1 - \\tan\\frac{\\pi}{4}\\tan\\frac{x}{2}}\\]\n\\[= \\tan\\left(\\dfrac{\\pi}{4} + \\dfrac{x}{2}\\right)\\]\nWhy: \\(s/c = \\tan\\frac{x}{2}\\) and \\(1 = \\tan\\frac{\\pi}{4}\\); then the \\(\\tan(\\alpha + \\beta)\\) formula of the Remember box.",
+              "Change \\(\\tan\\) into \\(\\cot\\)\n\\[\\tan A = \\cot\\left(\\dfrac{\\pi}{2} - A\\right)\\]\n\\[\\dfrac{\\pi}{2} - \\left(\\dfrac{\\pi}{4} + \\dfrac{x}{2}\\right) = \\dfrac{\\pi}{4} - \\dfrac{x}{2}\\]\n\\[\\dfrac{\\cos x}{1 - \\sin x} = \\cot\\left(\\dfrac{\\pi}{4} - \\dfrac{x}{2}\\right)\\]\nWhy: Complementary angles: the tangent of an angle is the cotangent of its complement.",
+              "Take \\(\\cot^{-1}\\)\n\\[\\text{L.H.S} = \\cot^{-1}\\left[\\cot\\left(\\dfrac{\\pi}{4} - \\dfrac{x}{2}\\right)\\right]\\]\n\\[= \\dfrac{\\pi}{4} - \\dfrac{x}{2} = \\text{R.H.S}\\]\nWhy: \\(\\cot^{-1}(\\cot u) = u\\) only when \\(u\\) lies in \\((0, \\pi)\\), the principal range of \\(\\cot^{-1}\\). Here \\(0 < \\frac{\\pi}{4} - \\frac{x}{2} < \\pi\\) means \\(-\\frac{3\\pi}{2} < x < \\frac{\\pi}{2}\\).",
+              "Check\n\\[x = \\dfrac{\\pi}{6}:\\ \\dfrac{\\cos x}{1 - \\sin x} = \\dfrac{\\sqrt{3}/2}{1/2} = \\sqrt{3}\\]\n\\[\\cot^{-1}\\sqrt{3} = \\dfrac{\\pi}{6}\\]\n\\[\\dfrac{\\pi}{4} - \\dfrac{\\pi}{12} = \\dfrac{\\pi}{6}\\]\nWhy: Both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\cot^{-1}\\frac{\\cos x}{1 - \\sin x} = \\frac{\\pi}{4} - \\frac{x}{2}\\) for \\(-\\frac{3\\pi}{2} < x < \\frac{\\pi}{2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints no condition on \\(x\\), but the result is true only when \\(\\frac{\\pi}{4} - \\frac{x}{2}\\) lies in \\((0, \\pi)\\), the principal range of \\(\\cot^{-1}\\), i.e. for \\(-\\frac{3\\pi}{2} < x < \\frac{\\pi}{2}\\). Example: at \\(x = \\pi\\) the left side is \\(\\cot^{-1}(-1) = \\frac{3\\pi}{4}\\) but the right side is \\(\\frac{\\pi}{4} - \\frac{\\pi}{2} = -\\frac{\\pi}{4}\\). Correct statement: \\(\\cot^{-1}\\frac{\\cos x}{1 - \\sin x} = \\frac{\\pi}{4} - \\frac{x}{2}\\) for \\(-\\frac{3\\pi}{2} < x < \\frac{\\pi}{2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 9.2. Every solution on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

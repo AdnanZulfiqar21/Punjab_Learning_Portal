@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q9",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 275,
+          "pdf_to": 275,
+          "note": "Exercise 9.2, Question 9 (book p. 273); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9. Prove that \\(\\tan^{-1}\\frac{10}{3} - \\tan^{-1}\\frac{7}{13} + \\tan^{-1}\\frac{9}{5} - \\tan^{-1}\\frac{2}{7} = \\frac{\\pi}{2}\\).",
+            "explanation": "Four \\(\\tan^{-1}\\) terms that should add to \\(\\frac{\\pi}{2}\\).\nPlan: group them as two differences, (1st - 2nd) and (3rd - 4th), and use formula (vi) on each.",
+            "steps": [
+              "Given: \\(\\tan^{-1}\\frac{10}{3} - \\tan^{-1}\\frac{7}{13} + \\tan^{-1}\\frac{9}{5} - \\tan^{-1}\\frac{2}{7}\\).\nTo prove: it equals \\(\\frac{\\pi}{2}\\).\nMethod: group into two differences and apply formula (vi) \\(\\tan^{-1}x - \\tan^{-1}y = \\tan^{-1}\\frac{x-y}{1+xy}\\) to each. Its condition \\(xy > -1\\) holds since all numbers are positive.",
+              "First pair\n\\[\\tan^{-1}\\tfrac{10}{3} - \\tan^{-1}\\tfrac{7}{13}\\]\n\\[= \\tan^{-1}\\dfrac{\\frac{10}{3} - \\frac{7}{13}}{1 + \\frac{10}{3}\\cdot\\frac{7}{13}}\\]\n\\[= \\tan^{-1}\\dfrac{(130 - 21)/39}{(39 + 70)/39}\\]\n\\[= \\tan^{-1}\\tfrac{109}{109} = \\tan^{-1}1 = \\tfrac{\\pi}{4}\\]\nWhy: common denominator \\(3 \\times 13 = 39\\); \\(10 \\times 13 = 130\\), \\(7 \\times 3 = 21\\), \\(10 \\times 7 = 70\\).",
+              "Second pair\n\\[\\tan^{-1}\\tfrac{9}{5} - \\tan^{-1}\\tfrac{2}{7}\\]\n\\[= \\tan^{-1}\\dfrac{\\frac{9}{5} - \\frac{2}{7}}{1 + \\frac{9}{5}\\cdot\\frac{2}{7}}\\]\n\\[= \\tan^{-1}\\dfrac{(63 - 10)/35}{(35 + 18)/35}\\]\n\\[= \\tan^{-1}\\tfrac{53}{53} = \\tan^{-1}1 = \\tfrac{\\pi}{4}\\]\nWhy: common denominator \\(5 \\times 7 = 35\\); \\(9 \\times 7 = 63\\), \\(2 \\times 5 = 10\\), \\(9 \\times 2 = 18\\).",
+              "Add the two pairs\n\\[\\text{L.H.S} = \\tfrac{\\pi}{4} + \\tfrac{\\pi}{4} = \\tfrac{\\pi}{2} = \\text{R.H.S}\\]\nWhy: the expression is (first pair) + (second pair), and each pair is \\(\\frac{\\pi}{4}\\).",
+              "Check\n\\[1.2793 - 0.4939 + 1.0637 - 0.2783\\]\n\\[= 1.5708 \\approx \\tfrac{\\pi}{2}\\ \\checkmark\\]\nWhy: a calculator in radian mode agrees."
+            ],
+            "final_answer": "Hence proved: \\(\\tan^{-1}\\frac{10}{3} - \\tan^{-1}\\frac{7}{13} + \\tan^{-1}\\frac{9}{5} - \\tan^{-1}\\frac{2}{7} = \\frac{\\pi}{2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 9.2. Every solution on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

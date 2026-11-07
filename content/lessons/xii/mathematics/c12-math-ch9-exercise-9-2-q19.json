@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q19",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q19",
+      "title": "Question 19",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 275,
+          "pdf_to": 275,
+          "note": "Exercise 9.2, Question 19 (book page 273); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "19",
+            "prompt": "19. Find the value of \\(x\\) if \\(\\tan^{-1}\\left(\\frac{2x - 1}{3x - 1}\\right) + \\tan^{-1}\\left(\\frac{2x + 1}{3x + 1}\\right) = \\frac{\\pi}{4}\\).",
+            "explanation": "An equation in inverse tangents, solved like the book's Example 11.\nPlan: join the two terms with formula (v), take \\(\\tan\\) of both sides, solve the quadratic, and then test every root in the original equation.",
+            "steps": [
+              "Given: \\(\\tan^{-1} a + \\tan^{-1} b = \\frac{\\pi}{4}\\) with \\(a = \\frac{2x - 1}{3x - 1}\\), \\(b = \\frac{2x + 1}{3x + 1}\\) (\\(x \\ne \\pm\\frac{1}{3}\\)).\nTo find: \\(x\\).\nMethod: Formula (v), \\(\\tan^{-1} a + \\tan^{-1} b = \\tan^{-1}\\frac{a + b}{1 - ab}\\), as in Example 11. Because such formulas can give false roots, every root is checked at the end (Example 11 rejected one).",
+              "Find \\(a + b\\)\n\\[a + b = \\dfrac{(2x-1)(3x+1) + (2x+1)(3x-1)}{(3x-1)(3x+1)}\\]\n\\[= \\dfrac{(6x^2 - x - 1) + (6x^2 + x - 1)}{9x^2 - 1}\\]\n\\[= \\dfrac{12x^2 - 2}{9x^2 - 1}\\]\nWhy: Common denominator \\((3x - 1)(3x + 1) = 9x^2 - 1\\); the \\(x\\) terms cancel.",
+              "Find \\(1 - ab\\)\n\\[ab = \\dfrac{(2x-1)(2x+1)}{(3x-1)(3x+1)} = \\dfrac{4x^2 - 1}{9x^2 - 1}\\]\n\\[1 - ab = \\dfrac{(9x^2 - 1) - (4x^2 - 1)}{9x^2 - 1}\\]\n\\[= \\dfrac{5x^2}{9x^2 - 1}\\]\nWhy: Both products are differences of squares.",
+              "Join with formula (v)\n\\[\\tan^{-1}\\dfrac{12x^2 - 2}{5x^2} = \\dfrac{\\pi}{4}\\]\nWhy: \\(\\frac{a + b}{1 - ab}\\): the common denominator \\(9x^2 - 1\\) cancels.",
+              "Take \\(\\tan\\) of both sides and solve\n\\[\\dfrac{12x^2 - 2}{5x^2} = \\tan\\dfrac{\\pi}{4} = 1\\]\n\\[12x^2 - 2 = 5x^2\\]\n\\[7x^2 = 2\\]\n\\[x = \\pm\\sqrt{\\dfrac{2}{7}} = \\pm\\dfrac{\\sqrt{14}}{7}\\]\nWhy: \\(\\tan(\\tan^{-1} u) = u\\). Then cross-multiply and take square roots; \\(\\sqrt{\\frac{2}{7}} = \\frac{\\sqrt{2}\\sqrt{7}}{7} = \\frac{\\sqrt{14}}{7}\\).",
+              "Test the roots\n\\[x^2 = \\dfrac{2}{7}:\\ ab = \\dfrac{4x^2 - 1}{9x^2 - 1}\\]\n\\[= \\dfrac{8/7 - 1}{18/7 - 1} = \\dfrac{1/7}{11/7} = \\dfrac{1}{11}\\]\nWhy: Formula (v) is exact when \\(ab < 1\\). Here \\(ab = \\frac{1}{11} < 1\\) for both roots (it depends only on \\(x^2\\)), and \\(x \\ne 0, \\pm\\frac{1}{3}\\). So, unlike Example 11, no root is rejected.",
+              "Check with decimals\n\\[x \\approx 0.5345:\\ a \\approx 0.1144,\\ b \\approx 0.7947\\]\n\\[\\tan^{-1} a + \\tan^{-1} b \\approx 0.1139 + 0.6715\\]\n\\[= 0.7854 = \\dfrac{\\pi}{4}\\]\nWhy: Both sides agree. Changing \\(x\\) to \\(-x\\) just swaps \\(a\\) and \\(b\\), so \\(x \\approx -0.5345\\) works too."
+            ],
+            "final_answer": "\\(x = \\pm\\sqrt{\\frac{2}{7}} = \\pm\\frac{\\sqrt{14}}{7} \\approx \\pm 0.5345\\) (both values satisfy the equation)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 9.2. Every solution on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

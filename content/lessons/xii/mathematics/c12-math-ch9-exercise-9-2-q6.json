@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q6",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 274,
+          "pdf_to": 274,
+          "note": "Exercise 9.2, Question 6 (book p. 272); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. Prove that \\(\\sin^{-1}\\frac{3}{5} + 2\\tan^{-1}\\frac{1}{4} = \\cos^{-1}\\frac{36}{85}\\).",
+            "explanation": "Three things to handle: a factor 2, two different inverse functions, and an answer in \\(\\cos^{-1}\\).\nPlan: remove the 2 with the double formula, change both terms into \\(\\cos^{-1}\\), then use formula (iii).",
+            "steps": [
+              "Given: \\(\\sin^{-1}\\frac{3}{5}\\) and \\(2\\tan^{-1}\\frac{1}{4}\\).\nTo prove: their sum is \\(\\cos^{-1}\\frac{36}{85}\\).\nMethod: (1) \\(2\\tan^{-1}x = \\tan^{-1}\\frac{2x}{1-x^{2}}\\) turns \\(2\\tan^{-1}\\frac{1}{4}\\) into one \\(\\tan^{-1}\\); (2) write both angles as \\(\\cos^{-1}\\); (3) add with formula (iii).",
+              "Remove the factor 2\n\\[2\\tan^{-1}\\tfrac{1}{4}\\]\n\\[= \\tan^{-1}\\dfrac{2 \\cdot \\frac{1}{4}}{1 - \\frac{1}{16}}\\]\n\\[= \\tan^{-1}\\dfrac{1/2}{15/16} = \\tan^{-1}\\tfrac{8}{15}\\]\nWhy: the double formula holds for \\(-1 < x < 1\\), and \\(x = \\frac{1}{4}\\). \\(\\frac{1}{2} \\div \\frac{15}{16} = \\frac{1}{2} \\cdot \\frac{16}{15} = \\frac{8}{15}\\).",
+              "Change \\(\\sin^{-1}\\frac{3}{5}\\) into \\(\\cos^{-1}\\)\n\\[\\alpha = \\sin^{-1}\\tfrac{3}{5}\\]\n\\[\\cos\\alpha = \\sqrt{1 - \\tfrac{9}{25}} = \\tfrac{4}{5}\\]\n\\[\\alpha = \\cos^{-1}\\tfrac{4}{5}\\]\nWhy: \\(\\alpha\\) is in the first quadrant, so its cosine is positive (triangle 3, 4, 5).",
+              "Change \\(\\tan^{-1}\\frac{8}{15}\\) into \\(\\cos^{-1}\\)\n\\[\\beta = \\tan^{-1}\\tfrac{8}{15}:\\ \\text{opposite } 8,\\ \\text{adjacent } 15\\]\n\\[\\text{hypotenuse} = \\sqrt{8^{2} + 15^{2}} = 17\\]\n\\[\\cos\\beta = \\tfrac{15}{17},\\quad \\beta = \\cos^{-1}\\tfrac{15}{17}\\]\nWhy: \\(\\tan\\beta = \\frac{\\text{opposite}}{\\text{adjacent}}\\); Pythagoras gives the hypotenuse; \\(\\beta\\) is in the first quadrant.",
+              "Apply formula (iii) with \\(x = \\frac{4}{5},\\ y = \\frac{15}{17}\\)\n\\[\\sqrt{1-x^{2}} = \\tfrac{3}{5},\\quad \\sqrt{1-y^{2}} = \\tfrac{8}{17}\\]\n\\[\\text{L.H.S} = \\cos^{-1}\\left(\\tfrac{4}{5}\\cdot\\tfrac{15}{17} - \\tfrac{3}{5}\\cdot\\tfrac{8}{17}\\right)\\]\n\\[= \\cos^{-1}\\left(\\tfrac{60}{85} - \\tfrac{24}{85}\\right) = \\cos^{-1}\\tfrac{36}{85}\\]\n\\[= \\text{R.H.S}\\]\nWhy: the roots are the sines \\(\\sin\\alpha = \\frac{3}{5}\\), \\(\\sin\\beta = \\frac{8}{17}\\). \\(5 \\times 17 = 85\\).",
+              "Check\n\\[\\sin^{-1}0.6 + 2\\tan^{-1}0.25 \\approx 0.6435 + 0.4900\\]\n\\[= 1.1335\\]\n\\[\\cos^{-1}\\tfrac{36}{85} \\approx 1.1335\\ \\checkmark\\]\nWhy: a calculator in radian mode agrees."
+            ],
+            "final_answer": "Hence proved: \\(\\sin^{-1}\\frac{3}{5} + 2\\tan^{-1}\\frac{1}{4} = \\cos^{-1}\\frac{36}{85}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 9.2. Every solution on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}
