@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-11.4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/11.4",
+      "title": "11.4 Derivative Of A Vector-Valued Function",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 293,
+          "pdf_to": 294,
+          "note": "Book p. 291-292: 11.4 Derivative Of A Vector-Valued Function: definition by limit, componentwise derivative, printed Examples 4-5 (shown as Examples 6-7)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "A vector-valued function of a single variable is a function that maps a scalar (usually time \\(t\\)) to a vector in \\(\\mathbb{R}^n\\). For a function in three-dimensional space, it is typically written as:\n\\[\\mathbf{r}(t) = \\langle f_1(t), f_2(t), f_3(t)\\rangle\\]\n\\[= f_1(t)\\,\\hat{i} + f_2(t)\\,\\hat{j} + f_3(t)\\,\\hat{k}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Where \\(\\hat{i}, \\hat{j}, \\hat{k}\\) are the unit vectors associated with the rectangular coordinates and \\(f_1(t), f_2(t)\\), and \\(f_3(t)\\) are scalar functions of \\(t\\), are the components of the vector-valued function \\(\\mathbf{r}(t)\\).",
+            "book_errors": [
+              "are scalar functions of \\(t\\), are the components"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The sentence has two verbs for one subject. It should read: \"... and \\(f_1(t), f_2(t)\\) and \\(f_3(t)\\), which are scalar functions of \\(t\\), are the components of the vector-valued function \\(\\mathbf{r}(t)\\).\""
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This is the same idea as 11.1.2: one input \\(t\\), and the output is a vector whose three components \\(f_1, f_2, f_3\\) are ordinary (scalar) functions of \\(t\\). For example, in \\(\\mathbf{r}(t) = t^2\\,\\hat{i} + \\sin t\\,\\hat{j} + e^t\\,\\hat{k}\\) the components are \\(f_1 = t^2\\), \\(f_2 = \\sin t\\), \\(f_3 = e^t\\). A 2D function simply has no \\(\\hat{k}\\)-term (\\(f_3 = 0\\))."
+          },
+          {
+            "type": "paragraph",
+            "text": "The derivative of a vector-valued function \\(\\mathbf{r}(t)\\) with respect to \\(t\\) is defined as:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{d\\mathbf{r}}{dt} = \\mathbf{r}'(t) = \\lim_{\\Delta t \\to 0} \\dfrac{\\mathbf{r}(t + \\Delta t) - \\mathbf{r}(t)}{\\Delta t}",
+            "text_alt": "d r by d t equals r prime of t equals the limit as delta t tends to 0 of r of t plus delta t minus r of t, all over delta t"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This is the same difference quotient as for an ordinary function \\(f(x)\\) (Unit 2), only now the top is a vector.\n\\(\\mathbf{r}(t + \\Delta t) - \\mathbf{r}(t)\\) is the small change in position (the chord vector from one point of the curve to a nearby point). Dividing by \\(\\Delta t\\) gives the average rate of change, and the limit \\(\\Delta t \\to 0\\) gives the instantaneous rate of change: a vector along the tangent to the curve. In 11.5 this is the velocity."
+          },
+          {
+            "type": "paragraph",
+            "text": "If the limit exists, then \\(\\mathbf{r}'(t)\\) is computed by differentiating each component:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\mathbf{r}'(t) = \\langle f_1'(t), f_2'(t), f_3'(t)\\rangle",
+            "text_alt": "r prime of t equals the ordered triple f 1 prime of t, f 2 prime of t, f 3 prime of t"
+          },
+          {
+            "type": "equation",
+            "latex": "= f_1'(t)\\,\\hat{i} + f_2'(t)\\,\\hat{j} + f_3'(t)\\,\\hat{k}",
+            "text_alt": "equals f 1 prime of t times i hat plus f 2 prime of t times j hat plus f 3 prime of t times k hat"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why component by component? Write the difference quotient in components:\n\\[\\dfrac{\\mathbf{r}(t + \\Delta t) - \\mathbf{r}(t)}{\\Delta t}\\]\n\\[= \\dfrac{f_1(t + \\Delta t) - f_1(t)}{\\Delta t}\\,\\hat{i} + \\dots\\]\nThe unit vectors \\(\\hat{i}, \\hat{j}, \\hat{k}\\) are constant, so they stay outside, and the limit of each component is that component's ordinary derivative \\(f_1'(t), f_2'(t), f_3'(t)\\). So all the rules of Unit 2 (power, product, quotient, chain) work, one component at a time.\n\\(\\mathbf{r}'(t)\\) exists only where every component has a derivative."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "The book prints the two examples of this section as Example 4 and Example 5. Its example numbering starts again at 1 in 11.2 (after Examples 1 and 2 of 11.1.3), so two different examples of this unit already carry each of the numbers 1 and 2. To give every example of Unit 11 its own number, we count them in one sequence: the book's Example 4 and Example 5 appear here as Example 6 and Example 7."
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Find the first derivative of \\(\\mathbf{r}(t) = t^2\\,\\hat{i} + \\sin t\\,\\hat{j} + e^t\\,\\hat{k}\\) with respect to \\(t\\).",
+            "steps": [
+              "Given: \\(\\mathbf{r}(t) = t^2\\,\\hat{i} + \\sin t\\,\\hat{j} + e^t\\,\\hat{k}\\).\nTo find: \\(\\mathbf{r}'(t)\\).\nMethod: by the definition above, differentiate each component separately and keep it with its own unit vector.",
+              "Differentiate each component separately\n\\[\\dfrac{d}{dt}(t^2) = 2t\\]\n\\[\\dfrac{d}{dt}(\\sin t) = \\cos t\\]\n\\[\\dfrac{d}{dt}(e^t) = e^t\\]\nWhy: power rule; the standard derivatives of \\(\\sin t\\) and \\(e^t\\).",
+              "Put them back with the unit vectors\n\\[\\mathbf{r}'(t) = 2t\\,\\hat{i} + \\cos t\\,\\hat{j} + e^t\\,\\hat{k}\\]\nWhy: \\(\\mathbf{r}'(t) = f_1'(t)\\,\\hat{i} + f_2'(t)\\,\\hat{j} + f_3'(t)\\,\\hat{k}\\).",
+              "Check at \\(t = 0\\)\n\\[\\mathbf{r}'(0) = 0\\,\\hat{i} + \\hat{j} + \\hat{k}\\]\nWith \\(\\Delta t = 0.001\\): \\(\\frac{\\mathbf{r}(0.001) - \\mathbf{r}(0)}{0.001} \\approx 0.001\\,\\hat{i} + 1.000\\,\\hat{j} + 1.0005\\,\\hat{k}\\), very close \\(\\checkmark\\)."
+            ],
+            "answer": "\\(\\mathbf{r}'(t) = 2t\\,\\hat{i} + \\cos t\\,\\hat{j} + e^t\\,\\hat{k}\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Find the first derivative of \\(\\mathbf{r}(t) = \\sec t\\,\\hat{i} + \\tan t\\,\\hat{j} - \\cos t\\,\\hat{k}\\) at \\(t = \\frac{\\pi}{4}\\).",
+            "steps": [
+              "Given: \\(\\mathbf{r}(t) = \\sec t\\,\\hat{i} + \\tan t\\,\\hat{j} - \\cos t\\,\\hat{k}\\), \\(t = \\frac{\\pi}{4}\\).\nTo find: \\(\\mathbf{r}'\\left(\\frac{\\pi}{4}\\right)\\).\nMethod: differentiate each component separately, then find its value at \\(t = \\frac{\\pi}{4}\\), using \\(\\sin\\frac{\\pi}{4} = \\cos\\frac{\\pi}{4} = \\frac{1}{\\sqrt{2}}\\).",
+              "\\(\\hat{i}\\)-component\n\\[\\dfrac{d}{dt}(\\sec t) = \\sec t \\cdot \\tan t\\]\n\\[\\left.\\dfrac{d(\\sec t)}{dt}\\right|_{t = \\pi/4} = \\sec\\tfrac{\\pi}{4}\\tan\\tfrac{\\pi}{4}\\]\n\\[= \\sqrt{2} \\cdot 1 = \\sqrt{2}\\]\nWhy: standard derivative of \\(\\sec t\\); \\(\\sec\\frac{\\pi}{4} = \\frac{1}{\\cos(\\pi/4)} = \\sqrt{2}\\), \\(\\tan\\frac{\\pi}{4} = 1\\).",
+              "\\(\\hat{j}\\)-component\n\\[\\dfrac{d}{dt}(\\tan t) = \\sec^2 t\\]\n\\[\\left.\\dfrac{d(\\tan t)}{dt}\\right|_{t = \\pi/4} = \\sec^2\\tfrac{\\pi}{4}\\]\n\\[= (\\sqrt{2})^2 = 2\\]\nWhy: standard derivative of \\(\\tan t\\).",
+              "\\(\\hat{k}\\)-component\n\\[\\dfrac{d}{dt}(-\\cos t) = \\sin t\\]\n\\[\\left.\\dfrac{d(-\\cos t)}{dt}\\right|_{t = \\pi/4} = \\sin\\tfrac{\\pi}{4} = \\dfrac{1}{\\sqrt{2}}\\]\nWhy: \\(\\frac{d}{dt}\\cos t = -\\sin t\\), and the minus sign in front makes it \\(+\\sin t\\).",
+              "Put them together\n\\[\\mathbf{r}'\\left(\\tfrac{\\pi}{4}\\right) = \\sqrt{2}\\,\\hat{i} + 2\\,\\hat{j} + \\dfrac{1}{\\sqrt{2}}\\,\\hat{k}\\]\nWhy: each value goes with its own unit vector.",
+              "Check\n\\(\\mathbf{r}'(t) = \\sec t\\tan t\\,\\hat{i} + \\sec^2 t\\,\\hat{j} + \\sin t\\,\\hat{k}\\); at \\(t = \\frac{\\pi}{4}\\) a computer algebra system gives \\(\\sqrt{2}\\,\\hat{i} + 2\\,\\hat{j} + \\frac{\\sqrt{2}}{2}\\,\\hat{k}\\), the same since \\(\\frac{1}{\\sqrt{2}} = \\frac{\\sqrt{2}}{2}\\) \\(\\checkmark\\)."
+            ],
+            "answer": "\\(\\mathbf{r}'\\left(\\frac{\\pi}{4}\\right) = \\sqrt{2}\\,\\hat{i} + 2\\,\\hat{j} + \\frac{1}{\\sqrt{2}}\\,\\hat{k}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "When the derivative is asked \"at\" a value of \\(t\\): first differentiate each component in general, then substitute. Substituting first turns each component into a constant, whose derivative is 0."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\mathbf{r}(t) = f_1(t)\\,\\hat{i} + f_2(t)\\,\\hat{j} + f_3(t)\\,\\hat{k}\\): the components are scalar functions of \\(t\\).\n2. Definition: \\(\\mathbf{r}'(t) = \\lim_{\\Delta t \\to 0}\\frac{\\mathbf{r}(t + \\Delta t) - \\mathbf{r}(t)}{\\Delta t}\\).\n3. In practice: \\(\\mathbf{r}'(t) = f_1'(t)\\,\\hat{i} + f_2'(t)\\,\\hat{j} + f_3'(t)\\,\\hat{k}\\); all the usual rules apply to each component.\n4. \\(\\hat{i}, \\hat{j}, \\hat{k}\\) are constants: they are not differentiated.\n5. \\(\\mathbf{r}'(t)\\) is a vector tangent to the curve (the velocity in 11.5)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Differentiating the unit vectors, or dropping them: each derivative must stay with its own \\(\\hat{i}\\), \\(\\hat{j}\\) or \\(\\hat{k}\\).\n2. Substituting the value of \\(t\\) before differentiating.\n3. Sign slips: \\(\\frac{d}{dt}(-\\cos t) = +\\sin t\\), not \\(-\\sin t\\).\n4. Forgetting that a missing term (no \\(\\hat{j}\\), say) is a zero component with zero derivative."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-11.1-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/11.1",
+      "title": "11.1 Scalar And Vector-Valued Functions Of A Single Variable (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 288,
+          "pdf_to": 288,
+          "note": "Book p. 286: Unit 11 Introduction, r(t) = t i + t^2 j (Figure 11.1) and the satellite helix (Figure 11.2)"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 289,
+          "pdf_to": 290,
+          "note": "Book p. 287-288: heading 11.1 (no own text; sub-topics 11.1.1-11.1.3 on their own pages)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Introduction"
+          },
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum! Aaj hum Unit 11 shuru kar rahe hain, aur is unit ka hero hai \"vector-valued function\". Ab tak aap ne jo functions parhe, jaise \\(f(x) = x^{2}\\) ya \\(f(x) = \\sin x\\), woh ek number lete the aur ek hi number wapas dete the. Lekin asal zindagi mein bohat si cheezein sirf ek number se bayan nahin hotin. Ek urti hui patang (kite), ek phenki hui gend (ball), ek drone ya ek satellite: in ki position batane ke liye humein ek se zyada numbers chahiye, yani ek vector."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is ko aasan zaban mein samjhte hain. Vector-valued functions aise vectors wapas dete hain jin ki magnitude (miqdar, yani size) bhi hoti hai aur direction (simt) bhi. In se hum position, velocity (raftar aur simt dono) aur force jaisi cheezein 2D ya 3D mein model karte hain. Scalar function sirf ek value deta hai. Vector function ka derivative humein instantaneous rate of change (bilkul usi lamhe ki tabdeeli ki raftar) deta hai, jo velocity vector hai, aur motion samajhne ke liye yahi sab se zaroori cheez hai. Is ke istemal engineering, computer graphics (games aur animation) aur physics mein hain: robotic arm ki harkat se le kar planets ke orbit tak. Is unit mein hum definitions, component form, operations aur differentiation seekhenge, aur velocity aur acceleration ke real-life sawal hal karenge."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Ek line mein: vector-valued function ek aisa rule hai jo ek number \\(t\\) (aam tor par time) leta hai aur badle mein ek vector deta hai. GPS tracker ka socho: aap usay time batate ho, woh aap ko batata hai ke cheez kahan hai, aur yeh jawab ek position vector hota hai. Scalar function sirf ek number deta hai, jaise us waqt ka temperature.\nGrade XI se yaad kijiye: \\(\\hat{i}, \\hat{j}, \\hat{k}\\) unit vectors hain (jin ki lambai 1 hai) jo \\(x\\)-, \\(y\\)- aur \\(z\\)-axis ki simt mein hain. Vector \\(a\\hat{i} + b\\hat{j} + c\\hat{k}\\) ko origin se draw karein to woh bilkul point \\((a, b, c)\\) par khatam hota hai. Is liye position vector aur point dono ek hi maloomat dete hain; bas likhne ka andaz alag hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki pehli misaal dekhte hain. Maan lijiye ek particle (bohat chhota zarra) 2D mein ek raaste par chal raha hai, aur time \\(t\\) par us ki position yeh hai:\n\\[\\mathbf{r}(t) = t\\hat{i} + t^{2}\\hat{j}\\]\nIska matlab hai ke time \\(t\\) par particle point \\((t, t^{2})\\) par hai (Figure 11.1). Yani \\(\\hat{i}\\) ke saath wala hissa \\(x\\)-coordinate hai aur \\(\\hat{j}\\) ke saath wala hissa \\(y\\)-coordinate."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch11-fig-11-1-parabola",
+            "alt": "Graph of the parabola traced by r(t) = t i + t squared j for t from about minus 3 to 3. Points marked at t = -2 (-2, 4), t = -1 (-1, 1), t = 0 at the origin, t = 1 (1, 1) and t = 2 (2, 4). Arrows on the curve point in the direction of increasing t: down the left branch, through the origin, up the right branch.",
+            "caption": "Figure 11.1: path of r(t) = t i + t² j with the points for t = −2, −1, 0, 1, 2 (original drawing after the textbook's figure)",
+            "side": true
+          },
+          {
+            "type": "paragraph",
+            "text": "Graph banane ka tareeqa bilkul seedha hai: \\(t\\) ki kuch values rakhiye, har dafa vector nikaaliye, aur us vector ka point plot kar dijiye. Neeche table mein yahi kaam kiya gaya hai."
+          },
+          {
+            "type": "table",
+            "header": [
+              "\\(t\\)",
+              "\\(\\mathbf{r}(t)\\)",
+              "Point"
+            ],
+            "rows": [
+              [
+                "\\(-2\\)",
+                "\\(-2\\hat{i} + 4\\hat{j}\\)",
+                "\\((-2, 4)\\)"
+              ],
+              [
+                "\\(-1\\)",
+                "\\(-\\hat{i} + \\hat{j}\\)",
+                "\\((-1, 1)\\)"
+              ],
+              [
+                "\\(0\\)",
+                "\\(\\mathbf{0}\\)",
+                "\\((0, 0)\\)"
+              ],
+              [
+                "\\(1\\)",
+                "\\(\\hat{i} + \\hat{j}\\)",
+                "\\((1, 1)\\)"
+              ],
+              [
+                "\\(2\\)",
+                "\\(2\\hat{i} + 4\\hat{j}\\)",
+                "\\((2, 4)\\)"
+              ]
+            ],
+            "caption": "Hamara table: Figure 11.1 mein plot kiye gaye particle ke positions"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Figure 11.1 kaise parhein: \\(t = -2, -1, 0, 1, 2\\) ko \\(\\mathbf{r}(t)\\) mein rakh kar points nikaale (upar table) aur plot kar diye. Curve par bane arrows batate hain ke \\(t\\) barhne ke saath particle kis taraf ja raha hai: pehle left wali shaakh (branch) se neeche aata hai, \\(t = 0\\) par origin se guzarta hai, phir right wali shaakh par upar chala jata hai.\nParabola hi kyun bana? Components hain \\(x = t\\) aur \\(y = t^{2}\\). Pehli equation kehti hai \\(t = x\\); ise doosri mein rakhein to \\(y = x^{2}\\), yani wahi parabola jo aap Grade XI se jaante hain. Lekin vector function sirf curve nahin batata: yeh bhi batata hai ke kis lamhe particle kahan hai aur kis taraf chal raha hai. Yeh izafi maloomat hi is ko taqatwar banati hai.\nKhud sochiye: \\(t = 3\\) par particle kahan hoga? (Jawab: \\(3\\hat{i} + 9\\hat{j}\\), yani point \\((3, 9)\\).)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab ek 3D misaal. Kitab kehti hai ke three-dimensional space mein vector-valued function ki ek real-life misaal zameen (Earth) ke gird ghoomne wale satellite ki position hai. Maan lijiye satellite ki position time \\(t\\) (ghanton mein) par is vector function se di gayi hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}\\mathbf{r}(t) &= (4000\\cos t)\\hat{i} \\\\ &\\quad + (4000\\sin t)\\hat{j} \\\\ &\\quad + 3000t\\,\\hat{k}\\end{aligned}",
+            "text_alt": "r of t equals 4000 cos t times i, plus 4000 sin t times j, plus 3000 t times k"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan teenon components space mein satellite ke coordinates hain: \\(x = 4000\\cos t\\), \\(y = 4000\\sin t\\) aur \\(z = 3000t\\) (kilometres mein). \\(x\\) aur \\(y\\) wale components \\(xy\\)-plane mein 4000 km radius (nisf qutr) wala circular orbit banate hain, jab ke \\(z\\)-component batata hai ke satellite \\(z\\)-axis ke saath ek seedhi (linear) raftar se, 3000 km fi ghanta, upar ja raha hai. Yeh function time ko ek position vector mein badal deta hai aur satellite ka poora raasta (trajectory) bata deta hai. Aerospace engineering mein satellite ko track karne aur us se rabta (communication) rakhne ke liye yahi kaam aata hai (Figure 11.2)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch11-fig-11-2-satellite-helix",
+            "alt": "Three-dimensional sketch of a helix around the z-axis. The dashed circle of radius 4000 km lies in the xy-plane; the curve starts at (4000, 0, 0) at t = 0 and winds upward twice, with points marked at t = 0, pi/2, pi, 3pi/2, 2pi, 5pi/2, 3pi, 7pi/2 and 4pi. A z scale on the right runs from 0 to 40000 km in steps of 5000.",
+            "caption": "Figure 11.2: helix of the satellite r(t) = (4000 cos t) i + (4000 sin t) j + 3000t k for 0 ≤ t ≤ 4π, z scale 0 to 40000 km (original drawing after the textbook's figure)",
+            "side": true
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ki Figure 11.2 mein \\(z\\)-axis ke upar wale do nishaan 3500 aur 3000 chhape hain, jab ke baqi nishaan 25000, 20000, 15000, 10000, 5000, 0 hain. Nishaan 5000 km ke barabar qadmon mein barhte hain, is liye upar wale do nishaan 35000 aur 30000 hone chahiye (har ek mein ek zero reh gaya hai). Hamari figure sahi scale ke saath bani hai, aur 40000 km tak jaati hai kyun ke \\(t = 4\\pi\\) par unchai \\(3000 \\times 4\\pi \\approx 37699\\) km hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Orbit 4000 km radius ka circle kyun hai? Har \\(t\\) ke liye\n\\[x^{2} + y^{2} = 4000^{2}(\\cos^{2} t + \\sin^{2} t)\\]\n\\[= 4000^{2}\\]\nkyun ke \\(\\cos^{2} t + \\sin^{2} t = 1\\) (Grade XI ki identity). Matlab point \\((x, y)\\) hamesha \\(z\\)-axis se 4000 km door rehta hai, aur yahi circle ki pehchaan hai.\n3000 km fi ghanta kyun? \\(z = 3000t\\) mein jab bhi \\(t\\) ek ghanta barhta hai, \\(z\\) 3000 barh jata hai. Yeh seedhi line wali (linear) barhotri hai.\nEk poora chakkar \\(t = 2\\pi \\approx 6.28\\) ghanton mein hota hai, aur is dauran satellite \\(3000 \\times 2\\pi \\approx 18850\\) km upar chala jata hai. Gol chakkar + mustaqil chadhai = helix, yani spring ya ghoomne wali seerhi (spiral staircase) jaisi shakal. Yeh kitab ka saada kiya hua model hai; asal maqsad yeh dekhna hai ke teen scalar components mil kar ek vector kaise banate hain."
+          },
+          {
+            "type": "table",
+            "header": [
+              "\\(t\\) (ghante)",
+              "\\(x\\) (km)",
+              "\\(y\\) (km)",
+              "\\(z\\) (km)"
+            ],
+            "rows": [
+              [
+                "\\(0\\)",
+                "4000",
+                "0",
+                "\\(0\\)"
+              ],
+              [
+                "\\(\\pi/2\\)",
+                "0",
+                "4000",
+                "\\(1500\\pi \\approx 4712\\)"
+              ],
+              [
+                "\\(\\pi\\)",
+                "−4000",
+                "0",
+                "\\(3000\\pi \\approx 9425\\)"
+              ],
+              [
+                "\\(3\\pi/2\\)",
+                "0",
+                "−4000",
+                "\\(4500\\pi \\approx 14137\\)"
+              ],
+              [
+                "\\(2\\pi\\)",
+                "4000",
+                "0",
+                "\\(6000\\pi \\approx 18850\\)"
+              ],
+              [
+                "\\(5\\pi/2\\)",
+                "0",
+                "4000",
+                "\\(7500\\pi \\approx 23562\\)"
+              ],
+              [
+                "\\(3\\pi\\)",
+                "−4000",
+                "0",
+                "\\(9000\\pi \\approx 28274\\)"
+              ],
+              [
+                "\\(7\\pi/2\\)",
+                "0",
+                "−4000",
+                "\\(10500\\pi \\approx 32987\\)"
+              ],
+              [
+                "\\(4\\pi\\)",
+                "4000",
+                "0",
+                "\\(12000\\pi \\approx 37699\\)"
+              ]
+            ],
+            "caption": "Hamara table: Figure 11.2 mein lagaye gaye points"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "11.1 ka naqsha",
+            "text": "Heading 11.1 ke neeche kitab apna koi alag text nahin chhaapti; seedha teen sub-topics shuru hote hain, aur har ek ka apna page hai:\n11.1.1 Scalar Function: andar ek number, bahar bhi ek number.\n11.1.2 Vector-Valued Function: andar ek number, bahar ek vector.\n11.1.3 Constructing A Vector-Valued Function: teen steps mein vector function banana, projectile (phenki hui cheez) aur drone ki misaalon ke saath."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Hamari taraf se misaal (kitab ka sawal nahin): satellite \\(t = \\pi/2\\) ghante par kahan hoga?\n\\(x = 4000\\cos(\\pi/2) = 0\\), \\(y = 4000\\sin(\\pi/2) = 4000\\), \\(z = 3000 \\times \\pi/2 = 1500\\pi \\approx 4712\\).\nYani \\(\\mathbf{r}(\\pi/2) = 4000\\hat{j} + 1500\\pi\\,\\hat{k}\\): satellite \\(y\\)-axis ke upar, taqriban 4712 km ki unchai par hai. Table aur figure mein yahi point \\(t = \\pi/2\\) ke naam se laga hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ek baat aur ghor karne wali hai. Figure 11.2 asal mein 3D tasveer hai jo kaghaz (2D) par banayi gayi hai. Is liye neeche ka dashed circle (jo \\(xy\\)-plane mein hai) humein ek lamba sa ellipse dikhta hai, jaise gol plate ko tircha dekhein to woh ande (egg) jaisi lagti hai. Unchai parhne ke liye daayen taraf wala \\(z\\) scale dekhiye. Har point ke saath \\(t\\) ki value likhi hai, taa ke aap table se mila kar check kar sakein."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Khud sochiye: \\(t = \\pi\\) ghante par satellite kahan hoga? \\(x = 4000\\cos\\pi = -4000\\), \\(y = 4000\\sin\\pi = 0\\), \\(z = 3000\\pi \\approx 9425\\). Yani aadha chakkar poora kar ke woh \\(x\\)-axis ki doosri taraf, taqriban 9425 km unchai par hai. Figure mein \\(t = \\pi\\) wala point dhoond kar dekhiye.\nAur agar \\(t\\) \\(2\\pi\\) barh jaye to \\(x\\) aur \\(y\\) wapas wahi ho jate hain (kyun ke \\(\\cos\\) aur \\(\\sin\\) har \\(2\\pi\\) baad dohrate hain), sirf \\(z\\) barhta hai. Isi liye \\(t = 0\\), \\(2\\pi\\), \\(4\\pi\\) wale points ek doosre ke bilkul upar hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Aage ka naqsha bhi zehan mein rakh lijiye: is unit mein pehle hum vector functions ko pehchaanna aur banana seekhenge (11.1 se 11.3), phir un ka derivative (11.4), aur aakhir mein derivative se velocity aur acceleration (11.5). Jo cheez aaj aap ne dekhi, yani \"har component apna kaam alag karta hai\", wahi poore unit mein baar baar kaam aayegi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Vector-valued function ek number \\(t\\) leta hai aur ek vector deta hai; scalar function sirf ek number deta hai.\n2. \\(\\mathbf{r}(t) = t\\hat{i} + t^{2}\\hat{j}\\) ka matlab: time \\(t\\) par particle point \\((t, t^{2})\\) par hai; raasta parabola \\(y = x^{2}\\) hai.\n3. Satellite: \\(x = 4000\\cos t\\), \\(y = 4000\\sin t\\) se 4000 km radius ka circle; \\(z = 3000t\\) se mustaqil chadhai; dono mil kar helix.\n4. Raasta dekhne ke liye \\(t\\) ki kai values rakh kar points nikaalein aur \\(t\\) ki tarteeb se jorein; yahi tarteeb motion ki direction batati hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Yeh samajhna ke vector \\(\\mathbf{r}(t)\\) aur point do alag cheezein hain: origin se draw kiya gaya position vector bilkul usi point par khatam hota hai.\n2. Yeh maan lena ke \\(x\\)-component hamesha \\(t\\) hota hai: \\(t\\hat{i} + t^{2}\\hat{j}\\) mein to hai, lekin satellite mein \\(x = 4000\\cos t\\) hai.\n3. \\(\\cos t\\) aur \\(\\sin t\\) mein degrees istemal karna: calculus mein \\(t\\) radians mein hota hai (yahan \\(t\\) ghante bhi gin raha hai).\n4. Figure 11.2 ke chhape hue nishaan 3500 aur 3000 ko sach maan lena; sahi values 35000 aur 30000 hain."
+          }
+        ]
+      },
+      "variant_of": "C12-MATH-CH11-11.1"
+    }
+  ]
+}

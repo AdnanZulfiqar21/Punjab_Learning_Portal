@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-EXERCISE-11-1-Q7",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/u-exercise-11-1-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 292,
+          "pdf_to": 292,
+          "note": "Exercise 11.1, Question 7: book page 290 (Q1-Q8). The book prints no answers for Unit 11; every answer here is ours."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(i)",
+            "prompt": "7 (i) Find the domain and range of the following vector-valued function: \\(\\mathbf{r}(t) = \\sqrt{t}\\,\\hat{i} + \\ln t\\,\\hat{j}\\)",
+            "explanation": "Domain: the intersection of the component domains (11.2.1).\nRange: the set of all output vectors \\(\\mathbf{r}(t)\\) (11.2). Their tips trace a curve, which we find by eliminating \\(t\\).\nPlan: domain of \\(\\sqrt{t}\\) and \\(\\ln t\\); then put \\(x = \\sqrt{t}\\), \\(y = \\ln t\\) and remove \\(t\\).",
+            "steps": [
+              "Given: \\(\\mathbf{r}(t) = \\sqrt{t}\\,\\hat{i} + \\ln t\\,\\hat{j}\\).\nTo find: the domain and the range.\nMethod: domain = where every component is defined (Steps 1-2 of 11.2.1). Range = set of all outputs \\(\\langle x(t), y(t)\\rangle\\); writing \\(y\\) in terms of \\(x\\) shows which points are reached.",
+              "Domain of each component\n\\(\\sqrt{t}\\): needs \\(t \\ge 0\\), domain \\([0, \\infty)\\).\n\\(\\ln t\\): needs \\(t > 0\\), domain \\((0, \\infty)\\).\n\\[[0, \\infty) \\cap (0, \\infty) = (0, \\infty)\\]\nWhy: \\(t = 0\\) is lost because \\(\\ln 0\\) is not defined.",
+              "Eliminate \\(t\\)\n\\[x = \\sqrt{t} \\Rightarrow t = x^2,\\ x > 0\\]\n\\[y = \\ln t = \\ln(x^2) = 2\\ln x\\]\nWhy: the two components are linked through \\(t\\); removing \\(t\\) gives the curve on which every output lies.",
+              "Which points are reached?\nAs \\(t\\) runs through \\((0, \\infty)\\), \\(x = \\sqrt{t}\\) takes every positive value, so every point of \\(y = 2\\ln x\\), \\(x > 0\\), is reached.\n\\[\\text{Range} = \\{(x, y) : x > 0,\\ y = 2\\ln x\\}\\]\nComponent-wise: \\(x(t)\\) takes all values in \\((0, \\infty)\\), \\(y(t)\\) all real values.\nWhy: \\(\\sqrt{t}\\) is increasing and unbounded; \\(\\ln t\\) goes from \\(-\\infty\\) to \\(\\infty\\).",
+              "Check\n\\(t = 1\\): \\(\\mathbf{r}(1) = \\hat{i} + 0\\,\\hat{j}\\), and \\(2\\ln 1 = 0\\) \\(\\checkmark\\).\n\\(t = 4\\): \\(\\mathbf{r}(4) = 2\\hat{i} + \\ln 4\\,\\hat{j}\\), and \\(2\\ln 2 = \\ln 4\\) \\(\\checkmark\\).\nWhy: the range is a curve, not the whole region \\(x > 0, y \\in \\mathbb{R}\\): e.g. \\((1, 5)\\) is not an output, since \\(x = 1\\) forces \\(t = 1\\) and then \\(y = 0\\)."
+            ],
+            "final_answer": "Domain: \\((0, \\infty)\\). Range: \\(\\{(x, y) : x > 0,\\ y = 2\\ln x\\}\\), the whole curve \\(y = 2\\ln x\\) (here \\(x \\in (0, \\infty)\\) and \\(y \\in \\mathbb{R}\\)).",
+            "answer_figure": {
+              "$asset": "c12-math-ch11-fig-ex11-1-q7-i-log-curve",
+              "alt": "Graph of the curve y = 2 ln x for x greater than 0, rising from far below near the y-axis through (1, 0). Marked points: t = 1/4 at (1/2, -1.39), t = 1 at (1, 0), t = 4 at (2, 1.39), t = 9 at (3, 2.20). Arrows show the direction of increasing t.",
+              "caption": "The tip of r(t) = √t i + ln t j traces the whole curve y = 2 ln x, x > 0 (our drawing)"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 11.1 (none for the whole of Unit 11). Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Range of a vector function: the book defines it as the set of all output vectors \\(\\mathbf{r}(t)\\) (11.2). Their tips form a curve, so we describe the range by the curve's equation(s), found by eliminating \\(t\\). The component-wise intervals are also given, but on their own they describe a larger set."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(ii)",
+            "prompt": "7 (ii) Find the domain and range of the following vector-valued function: \\(\\mathbf{r}(t) = \\cos(t)\\,\\hat{i} + \\sin(t)\\,\\hat{j}\\)",
+            "explanation": "Domain: where both \\(\\cos t\\) and \\(\\sin t\\) are defined.\nRange: the set of output vectors; the identity \\(\\cos^2 t + \\sin^2 t = 1\\) removes \\(t\\).\nPlan: domain, then square and add the components.",
+            "steps": [
+              "Given: \\(\\mathbf{r}(t) = \\cos t\\,\\hat{i} + \\sin t\\,\\hat{j}\\).\nTo find: the domain and the range.\nMethod: domain from the components; range by eliminating \\(t\\) with \\(\\cos^2 t + \\sin^2 t = 1\\), then checking which points are reached.",
+              "Domain\n\\(\\cos t\\) and \\(\\sin t\\) are defined for every real \\(t\\).\n\\[\\text{Domain} = \\mathbb{R} = (-\\infty, \\infty)\\]\nWhy: the intersection of \\(\\mathbb{R}\\) with \\(\\mathbb{R}\\) is \\(\\mathbb{R}\\).",
+              "Eliminate \\(t\\)\n\\[x = \\cos t,\\quad y = \\sin t\\]\n\\[x^2 + y^2 = \\cos^2 t + \\sin^2 t = 1\\]\nWhy: squaring and adding uses the Pythagorean identity; every output lies on the circle with centre \\(O\\) and radius 1.",
+              "Which points are reached?\nAs \\(t\\) goes from \\(0\\) to \\(2\\pi\\), \\((\\cos t, \\sin t)\\) goes once round the whole circle (then repeats).\n\\[\\text{Range} = \\{(x, y) : x^2 + y^2 = 1\\}\\]\nComponent-wise: \\(x, y \\in [-1, 1]\\); also \\(|\\mathbf{r}(t)| = 1\\) for every \\(t\\) (all outputs are unit vectors).\nWhy: every point of the unit circle is \\((\\cos\\theta, \\sin\\theta)\\) for some angle \\(\\theta\\).",
+              "Check\n\\(\\mathbf{r}(0) = \\hat{i}\\), \\(\\mathbf{r}(\\frac{\\pi}{2}) = \\hat{j}\\), \\(\\mathbf{r}(\\pi) = -\\hat{i}\\): all on the unit circle \\(\\checkmark\\).\nWhy: the vector \\(\\langle 1, 1\\rangle\\) has both components in \\([-1, 1]\\) but is not in the range, since \\(1^2 + 1^2 = 2 \\ne 1\\). So \"\\(x, y \\in [-1, 1]\\)\" alone is not the range."
+            ],
+            "final_answer": "Domain: \\(\\mathbb{R}\\). Range: \\(\\{(x, y) : x^2 + y^2 = 1\\}\\), the unit circle (centre \\(O\\), radius 1); here \\(x, y \\in [-1, 1]\\).",
+            "answer_figure": {
+              "$asset": "c12-math-ch11-fig-ex11-1-q7-ii-unit-circle",
+              "alt": "Unit circle x squared plus y squared equals 1 with centre at the origin. Points t = 0 at (1, 0), t = pi/2 at (0, 1), t = pi at (-1, 0), t = 3pi/2 at (0, -1); arrows show anticlockwise motion.",
+              "caption": "The tip of r(t) = cos t i + sin t j goes round the unit circle (our drawing)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(iii)",
+            "prompt": "7 (iii) Find the domain and range of the following vector-valued function: \\(\\mathbf{r}(t) = t\\,\\hat{i} + t^2\\,\\hat{j} + e^t\\,\\hat{k}\\)",
+            "explanation": "A 3D vector function: domain from the three components, range as a curve in space.\n\\(x = t\\) makes elimination easy: replace \\(t\\) by \\(x\\).\nPlan: domain; then write \\(y\\) and \\(z\\) in terms of \\(x\\).",
+            "steps": [
+              "Given: \\(\\mathbf{r}(t) = t\\,\\hat{i} + t^2\\,\\hat{j} + e^t\\,\\hat{k}\\).\nTo find: the domain and the range.\nMethod: domain = intersection of the component domains; range = set of outputs \\(\\langle t, t^2, e^t\\rangle\\), described by eliminating \\(t\\).",
+              "Domain\n\\(t\\), \\(t^2\\) and \\(e^t\\) are defined for every real \\(t\\).\n\\[\\text{Domain} = \\mathbb{R}\\]\nWhy: polynomials and the exponential function have no restriction.",
+              "Eliminate \\(t\\)\n\\[x = t,\\quad y = t^2,\\quad z = e^t\\]\n\\[y = x^2,\\quad z = e^x\\]\nWhy: since \\(t = x\\), each output is \\(\\langle x, x^2, e^x\\rangle\\).",
+              "Which points are reached?\n\\(x = t\\) takes every real value, so the range is the whole curve\n\\[\\{(x, y, z) : y = x^2,\\ z = e^x,\\ x \\in \\mathbb{R}\\}\\]\nComponent-wise: \\(x \\in \\mathbb{R}\\), \\(y \\in [0, \\infty)\\), \\(z \\in (0, \\infty)\\).\nWhy: \\(t^2 \\ge 0\\) and \\(e^t > 0\\). The curve lies directly above the parabola \\(y = x^2\\) of the \\(xy\\)-plane, always above that plane.",
+              "Check\n\\(\\mathbf{r}(0) = 0\\,\\hat{i} + 0\\,\\hat{j} + 1\\,\\hat{k}\\): \\(y = 0^2\\), \\(z = e^0 = 1\\) \\(\\checkmark\\).\n\\(\\mathbf{r}(1) = \\hat{i} + \\hat{j} + e\\,\\hat{k}\\): \\(y = 1^2\\), \\(z = e^1\\) \\(\\checkmark\\)."
+            ],
+            "final_answer": "Domain: \\(\\mathbb{R}\\). Range: \\(\\{(x, y, z) : y = x^2,\\ z = e^x,\\ x \\in \\mathbb{R}\\} = \\{\\langle t, t^2, e^t\\rangle : t \\in \\mathbb{R}\\}\\); here \\(x \\in \\mathbb{R}\\), \\(y \\in [0, \\infty)\\), \\(z \\in (0, \\infty)\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7(iv)",
+            "prompt": "7 (iv) Find the domain and range of the following vector-valued function: \\(\\mathbf{r}(t) = \\sin(t)\\,\\hat{i} + \\cos(t)\\,\\hat{j} + t\\,\\hat{k}\\)",
+            "explanation": "A 3D function like the book's helix Example 3 (11.3.1).\n\\(\\sin^2 t + \\cos^2 t = 1\\) links \\(x\\) and \\(y\\); \\(z = t\\) tells how the curve rises.\nPlan: domain; then eliminate \\(t\\) and describe the curve.",
+            "steps": [
+              "Given: \\(\\mathbf{r}(t) = \\sin t\\,\\hat{i} + \\cos t\\,\\hat{j} + t\\,\\hat{k}\\).\nTo find: the domain and the range.\nMethod: domain from the three components; range by eliminating \\(t\\) (Pythagorean identity and \\(z = t\\)).",
+              "Domain\n\\(\\sin t\\), \\(\\cos t\\) and \\(t\\) are defined for every real \\(t\\).\n\\[\\text{Domain} = \\mathbb{R}\\]\nWhy: none of the components has a restriction.",
+              "Eliminate \\(t\\)\n\\[x = \\sin t,\\quad y = \\cos t,\\quad z = t\\]\n\\[x^2 + y^2 = \\sin^2 t + \\cos^2 t = 1\\]\n\\[x = \\sin z,\\quad y = \\cos z\\]\nWhy: every output lies on the cylinder of radius 1 around the \\(z\\)-axis, and since \\(z = t\\), \\(x\\) and \\(y\\) are fixed by \\(z\\).",
+              "Which points are reached?\nAs \\(t\\) increases, the point goes round the \\(z\\)-axis and rises \\(2\\pi\\) in each full turn: a circular helix. \\(z = t\\) takes every real value, so the helix goes up and down without end.\n\\[\\text{Range} = \\{(\\sin z, \\cos z, z) : z \\in \\mathbb{R}\\}\\]\nComponent-wise: \\(x, y \\in [-1, 1]\\), \\(z \\in \\mathbb{R}\\).\nWhy: each \\(z\\) gives exactly one point \\((\\sin z, \\cos z, z)\\).",
+              "Check\n\\(\\mathbf{r}(0) = 0\\,\\hat{i} + \\hat{j} + 0\\,\\hat{k}\\): \\(0^2 + 1^2 = 1\\) \\(\\checkmark\\).\n\\(\\mathbf{r}(\\frac{\\pi}{2}) = \\hat{i} + 0\\,\\hat{j} + \\frac{\\pi}{2}\\,\\hat{k}\\): \\(1^2 + 0^2 = 1\\) \\(\\checkmark\\).\nWhy: like Example 3 of the book (\\(\\langle\\cos t, \\sin t, t\\rangle\\)), this is a helix; here it starts at \\((0, 1, 0)\\) and turns the other way."
+            ],
+            "final_answer": "Domain: \\(\\mathbb{R}\\). Range: \\(\\{(\\sin z, \\cos z, z) : z \\in \\mathbb{R}\\}\\), the circular helix on the cylinder \\(x^2 + y^2 = 1\\); here \\(x, y \\in [-1, 1]\\), \\(z \\in \\mathbb{R}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

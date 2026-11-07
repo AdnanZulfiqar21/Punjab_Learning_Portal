@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-EXERCISE-11-1-Q6",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/u-exercise-11-1-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 292,
+          "pdf_to": 292,
+          "note": "Exercise 11.1, Question 6: book page 290 (Q1-Q8). The book prints no answers for Unit 11; every answer here is ours."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. Given \\(x(t) = \\frac{1}{t+4}\\), \\(y(t) = \\ln\\sqrt{t}\\), \\(z(t) = \\sec^{-1}(t)\\), construct \\(\\mathbf{r}(t)\\).",
+            "explanation": "Three components are given, so \\(\\mathbf{r}(t)\\) is a 3D vector function.\nWe combine them with \\(\\hat{i}, \\hat{j}, \\hat{k}\\) and state the domain.\nPlan: vector form; the domain of each component (fraction, log of a root, inverse secant); their intersection.",
+            "steps": [
+              "Given: \\(x(t) = \\frac{1}{t+4}\\), \\(y(t) = \\ln\\sqrt{t}\\), \\(z(t) = \\sec^{-1} t\\).\nTo find: \\(\\mathbf{r}(t)\\) and its domain.\nMethod: Step-2 and Step-3 of 11.1.3; domain \\(=\\) intersection of the component domains (11.2.1).",
+              "Combine into vector form\n\\[\\mathbf{r}(t) = \\dfrac{1}{t+4}\\,\\hat{i} + \\ln\\sqrt{t}\\,\\hat{j}\\]\n\\[\\quad + \\sec^{-1}(t)\\,\\hat{k}\\]\nSince \\(\\ln\\sqrt{t} = \\ln t^{1/2} = \\frac{1}{2}\\ln t\\), the \\(\\hat{j}\\)-component may also be written \\(\\frac{1}{2}\\ln t\\).\nWhy: \\(x, y, z\\) go with \\(\\hat{i}, \\hat{j}, \\hat{k}\\); the log rule \\(\\ln a^n = n\\ln a\\) (for \\(a > 0\\)) simplifies \\(y\\).",
+              "Domain of \\(x(t) = \\frac{1}{t+4}\\)\n\\[t + 4 \\ne 0 \\Rightarrow t \\ne -4\\]\n\\[\\text{domain } \\mathbb{R} - \\{-4\\}\\]\nWhy: division by zero is not defined.",
+              "Domain of \\(y(t) = \\ln\\sqrt{t}\\)\n\\(\\sqrt{t}\\) needs \\(t \\ge 0\\); \\(\\ln\\) needs \\(\\sqrt{t} > 0\\), so\n\\[t > 0,\\quad \\text{domain } (0, \\infty)\\]\nWhy: the logarithm is defined only for positive numbers, and \\(\\sqrt{0} = 0\\) is not positive.",
+              "Domain of \\(z(t) = \\sec^{-1} t\\)\n\\[|t| \\ge 1\\]\n\\[\\text{domain } (-\\infty, -1] \\cup [1, \\infty)\\]\nWhy: \\(\\sec\\theta = \\frac{1}{\\cos\\theta}\\) and \\(|\\cos\\theta| \\le 1\\), so \\(|\\sec\\theta| \\ge 1\\). Only such numbers can be values of sec, so only they have an inverse secant.",
+              "Intersection\nFrom \\(y\\): \\(t > 0\\). Of these, \\(z\\) keeps only \\(t \\ge 1\\); \\(t = -4\\) is already outside.\n\\[\\text{Domain of } \\mathbf{r} = [1, \\infty)\\]\nWhy: \\(t\\) is allowed only where all three components exist.",
+              "Check\n\\[\\mathbf{r}(1) = \\tfrac{1}{5}\\,\\hat{i} + 0\\,\\hat{j} + 0\\,\\hat{k}\\]\nexists (\\(\\ln 1 = 0\\), \\(\\sec^{-1} 1 = 0\\)). At \\(t = \\frac{1}{2}\\): \\(\\sec^{-1}\\frac{1}{2}\\) is not defined, so \\(t = \\frac{1}{2}\\) is rightly excluded \\(\\checkmark\\)."
+            ],
+            "final_answer": "\\(\\mathbf{r}(t) = \\frac{1}{t+4}\\,\\hat{i} + \\ln\\sqrt{t}\\,\\hat{j} + \\sec^{-1}(t)\\,\\hat{k}\\) \\(\\left(= \\frac{1}{t+4}\\,\\hat{i} + \\frac{1}{2}\\ln t\\,\\hat{j} + \\sec^{-1}(t)\\,\\hat{k}\\right)\\), with domain \\(t \\ge 1\\), i.e. \\([1, \\infty)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 11.1 (none for the whole of Unit 11). Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}
