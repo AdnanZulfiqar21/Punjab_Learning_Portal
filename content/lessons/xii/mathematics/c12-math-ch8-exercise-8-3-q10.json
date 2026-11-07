@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-3-Q10",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-3-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 250,
+          "pdf_to": 250,
+          "note": "Exercise 8.3 (book p. 248): Trapezium Rule, Q1-Q10"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.3 (book p. 307)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10. Setting \\(h = 0.5\\), use the trapezium rule to find the approximate area bounded by the curve \\(y = e^{x^{2}}\\) from the line \\(x = 0\\) to the line \\(x = 4\\).",
+            "explanation": "A numerical integration question: estimate a definite integral by the Trapezium Rule.\nGiven: \\(f(x) = e^{x^{2}}\\), interval \\([0, 4]\\), \\(h = 0.5\\), so \\(n = \\frac{b-a}{h}\\).\nPlan: list the points and 4-decimal function values, then use h/2 [first + 2(inner) + last].",
+            "steps": [
+              "Given: \\(f(x) = e^{x^{2}}\\), \\(a = 0\\), \\(b = 4\\), \\(h = 0.5\\).\nTo find: an approximate value of \\(\\int_{0}^{4} e^{x^{2}}\\,dx\\).\nMethod: the Trapezium Rule, as the question asks. Here \\(h\\) is given, so find \\(n\\) first.",
+              "Continuity\n\\(e^{x^{2}}\\) is a composition of continuous functions, so it is continuous on \\([0, 4]\\); it is positive, so the integral is the area.\nWhy: the Trapezium Rule needs a continuous function on the interval.",
+              "Number of subintervals and points\n\\[n = \\dfrac{b-a}{h} = \\dfrac{4-0}{0.5} = 8\\]\nPoints \\(x_{i} = a + ih\\): \\(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4\\)\nWhy: \\(h = \\frac{b-a}{n}\\) rearranged gives \\(n = \\frac{b-a}{h}\\); 8 subintervals give 9 points.",
+              "Function values (4 decimal places)\n\\[f(0) = e^{0} = 1.0000\\]\n\\[f(0.5) = e^{0.25} = 1.2840\\]\n\\[f(1) = e^{1} = 2.7183\\]\n\\[f(1.5) = e^{2.25} = 9.4877\\]\n\\[f(2) = e^{4} = 54.5982\\]\n\\[f(2.5) = e^{6.25} = 518.0128\\]\n\\[f(3) = e^{9} = 8103.0839\\]\n\\[f(3.5) = e^{12.25} = 208981.2889\\]\n\\[f(4) = e^{16} = 8886110.5205\\]\nWhy: Square first: \\(e^{(3.5)^{2}} = e^{12.25}\\). The values grow enormously (up to \\(e^{16}\\)), so write them in full and add carefully. The table with the answer collects them with their weights.",
+              "Add the inner values\n\\[S = f(x_{1}) + \\dots + f(x_{7})\\]\n\\[= 1.2840 + 2.7183\\]\n\\[+ 9.4877 + 54.5982\\]\n\\[+ 518.0128 + 8103.0839\\]\n\\[+ 208981.2889\\]\n\\[= 217670.4738\\]\nWhy: these 7 inner values are shared by two neighbouring trapeziums, so they will be doubled.",
+              "Apply the Trapezium Rule\n\\[\\int_{0}^{4} e^{x^{2}}\\,dx\\]\n\\[\\approx \\dfrac{h}{2}\\big[f(x_{0}) + 2S + f(x_{8})\\big]\\]\n\\[= 0.25\\big[1.0000 + 2(217670.4738)\\]\n\\[+ 8886110.5205\\big]\\]\n\\[= 0.25(9321452.4681)\\]\n\\[= 2330363.12\\]\n\\[\\approx 2.3304 \\times 10^{6}\\]\nWhy: \\(\\frac{h}{2} = 0.25\\); the end values are used once and the inner sum twice. Round only at the end.",
+              "Check:\n\\(e^{x^{2}}\\) has no elementary antiderivative. A computer with very many subintervals gives about \\(1.1494 \\times 10^{6}\\), so this approximation is poor (about double): the curve rises from 208981 at \\(x = 3.5\\) to 8886111 at \\(x = 4\\), and the last trapezium alone contributes about \\(2.27 \\times 10^{6}\\). A much smaller \\(h\\) is needed for such a steep curve."
+            ],
+            "final_answer": "Area \\(\\approx 2330363 \\approx 2.3304 \\times 10^{6}\\) square units.",
+            "answer_table": {
+              "header": [
+                "i",
+                "\\(x_{i}\\)",
+                "\\(f(x_{i})\\)",
+                "Weight"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(0\\)",
+                  "\\(1.0000\\)",
+                  "1"
+                ],
+                [
+                  "1",
+                  "\\(0.5\\)",
+                  "\\(1.2840\\)",
+                  "2"
+                ],
+                [
+                  "2",
+                  "\\(1\\)",
+                  "\\(2.7183\\)",
+                  "2"
+                ],
+                [
+                  "3",
+                  "\\(1.5\\)",
+                  "\\(9.4877\\)",
+                  "2"
+                ],
+                [
+                  "4",
+                  "\\(2\\)",
+                  "\\(54.5982\\)",
+                  "2"
+                ],
+                [
+                  "5",
+                  "\\(2.5\\)",
+                  "\\(518.0128\\)",
+                  "2"
+                ],
+                [
+                  "6",
+                  "\\(3\\)",
+                  "\\(8103.0839\\)",
+                  "2"
+                ],
+                [
+                  "7",
+                  "\\(3.5\\)",
+                  "\\(208981.2889\\)",
+                  "2"
+                ],
+                [
+                  "8",
+                  "\\(4\\)",
+                  "\\(8886110.5205\\)",
+                  "1"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(2.3203 \\times 10^{6}\\). The bracket is \\(1 + 2(217670.4738) + 8886110.5205 = 9321452.4681\\) and \\(0.25 \\times 9321452.4681 = 2330363.12\\), so the correct value is \\(2.3304 \\times 10^{6}\\) (the key's digits appear misprinted)."
+          }
+        ]
+      }
+    }
+  ]
+}

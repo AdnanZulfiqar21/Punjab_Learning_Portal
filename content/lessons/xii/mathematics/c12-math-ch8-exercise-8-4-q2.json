@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-4-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-4-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 255,
+          "pdf_to": 255,
+          "note": "Exercise 8.4, Question 2 (book p. 253); answer key p. 307 (PDF 309)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2. The flow rate of blood in an artery is modeled by the nonlinear equation \\(Q = k\\left(P - \\frac{Q^{2}}{R}\\right)\\), where \\(Q\\) is the flow rate (mL/s), \\(P = 100\\) mmHg is the blood pressure, \\(k = 0.05\\), and \\(R = 10\\). Determine the possible real values of the flow rate \\(Q\\) accurate to two decimal places.",
+            "explanation": "Substituting the constants turns the model into a quadratic equation in Q, which has two real roots.\nNo method is named, so we use Newton-Raphson (fast, f' is easy) and check with the quadratic formula.\nPlan: form f(Q) = 0, locate each root by a sign change, iterate, then decide which root is a possible flow rate.",
+            "steps": [
+              "Given: \\(Q = k(P - Q^{2}/R)\\), \\(P = 100\\), \\(k = 0.05\\), \\(R = 10\\).\nTo find: the real values of \\(Q\\) to two decimal places.\nMethod: Newton-Raphson \\(Q_{n+1} = Q_n - f(Q_n)/f'(Q_n)\\), because \\(f\\) will be a simple polynomial.",
+              "Form the equation\n\\[Q = 0.05\\left(100 - \\dfrac{Q^{2}}{10}\\right)\\]\n\\[Q = 5 - 0.005Q^{2}\\]\n\\[f(Q) = 0.005Q^{2} + Q - 5 = 0\\]\n\\[f'(Q) = 0.01Q + 1\\]\nWhy: Newton-Raphson needs the equation in the form f(Q) = 0; f is a polynomial, so it is continuous and differentiable.",
+              "Locate the positive root\n\\[f(4) = 0.08 + 4 - 5 = -0.92 < 0\\]\n\\[f(5) = 0.125 + 5 - 5 = 0.125 > 0\\]\nRoot in \\([4, 5]\\); take \\(Q_0 = 5\\).\nWhy: \\(f(5)\\) is much closer to 0 than \\(f(4)\\), and \\(f'(5) = 1.05 \\ne 0\\).",
+              "Iteration 1\n\\[Q_1 = 5 - \\dfrac{0.125}{1.05}\\]\n\\[= 5 - 0.1190 = 4.8810\\]\nWhy: substitute Q_0 = 5 in the Newton-Raphson formula.",
+              "Iteration 2\n\\[f(4.8810) = 0.1191 + 4.8810 - 5\\]\n\\[= 0.0001\\]\n\\[f'(4.8810) = 1.0488\\]\n\\[Q_2 = 4.8810 - \\dfrac{0.0001}{1.0488} = 4.8809\\]\nWhy: \\(|Q_2 - Q_1| = 0.0001 < 0.005\\) and \\(f(Q_2) \\approx 0\\), so \\(Q \\approx 4.88\\).",
+              "The second real root\n\\[f(-204) = 208.08 - 209 = -0.92\\]\n\\[f(-205) = 210.125 - 210 = 0.125\\]\nStart \\(Q_0 = -205\\), \\(f'(-205) = -1.05\\):\n\\[Q_1 = -205 - \\dfrac{0.125}{-1.05} = -204.8810\\]\n\\[Q_2 = -204.8809\\]\nWhy: multiplying \\(f(Q) = 0\\) by 200 gives \\(Q^{2} + 200Q - 1000 = 0\\); its roots add up to \\(-200\\), so the second root is near \\(-200 - 4.88\\).",
+              "Which values are possible?\n\\(Q \\approx -204.88\\) would mean blood flowing backwards against the pressure, which has no meaning here, so it is rejected.\nWhy: a model can give mathematical roots that do not fit the real situation.",
+              "Check\n\\[Q^{2} + 200Q - 1000 = 0\\]\n\\[Q = -100 \\pm \\sqrt{11000}\\]\n\\[= -100 \\pm 104.8809\\]\nSo \\(Q = 4.8809\\) or \\(Q = -204.8809\\). Sign test: \\(f(4.875) = -0.0062 < 0\\), \\(f(4.885) = 0.0043 > 0\\), so 4.88 is correct to two places.\nWhy: the quadratic formula gives the exact roots and confirms both iterations."
+            ],
+            "final_answer": "The real values are \\(Q \\approx 4.88\\) and \\(Q \\approx -204.88\\); only \\(Q \\approx 4.88\\) mL/s is a possible flow rate.",
+            "answer_table": {
+              "header": [
+                "Start",
+                "\\(Q_n\\)",
+                "\\(f(Q_n)\\), \\(f'(Q_n)\\)",
+                "\\(Q_{n+1}\\)"
+              ],
+              "rows": [
+                [
+                  "root 1, n = 0",
+                  "5.0000",
+                  "0.1250, 1.0500",
+                  "4.8810"
+                ],
+                [
+                  "root 1, n = 1",
+                  "4.8810",
+                  "0.0001, 1.0488",
+                  "4.8809"
+                ],
+                [
+                  "root 2, n = 0",
+                  "-205.0000",
+                  "0.1250, -1.0500",
+                  "-204.8810"
+                ],
+                [
+                  "root 2, n = 1",
+                  "-204.8810",
+                  "0.0001, -1.0488",
+                  "-204.8809"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

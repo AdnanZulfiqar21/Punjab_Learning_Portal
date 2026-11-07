@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.1.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.1.1",
+      "title": "8.1.1 Location of Root Theorem (LRT)",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 235,
+          "pdf_to": 236,
+          "note": "PDF 235-236 (book p. 233-234): Theorem 1 (LRT), Figure 8.2, geometric idea, interval of sign change, Example 1 with its sign table"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Theorem 1",
+            "text": "Let \\(f\\) be a real-valued function which is continuous on a closed interval \\([a, b]\\) If \\(f(a)f(b) < 0\\) then \\(f\\) has at least one real root \\(c\\) in the open interval \\([a, b]\\)",
+            "book_errors": [
+              "open interval \\([a, b]\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book calls \\([a, b]\\) an open interval. \\([a, b]\\) is the closed interval; the open interval is \\(]a, b[\\) (also written \\((a, b)\\)). The theorem should end: \"... has at least one real root \\(c\\) in the open interval \\(]a, b[\\).\" A full stop is also missing after \"closed interval \\([a, b]\\)\" before \"If\"."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch8-fig-8-2-location-of-root",
+            "alt": "A continuous increasing curve y = f(x). At x = a the point (a, f(a)) is below the x-axis, at x = b the point (b, f(b)) is above it, and the curve crosses the x-axis at c between a and b, where f(c) = 0. Dashed vertical lines join a and b to the curve.",
+            "caption": "Figure 8.2: a continuous curve from \\((a, f(a))\\) below the x-axis to \\((b, f(b))\\) above it must cross the axis at some \\(c\\) (original drawing after the textbook's figure)",
+            "side": true
+          },
+          {
+            "type": "paragraph",
+            "text": "The geometric idea of the Location of Root Theorem (LRT) comes from the behavior of a continuous graph. If a function is continuous on an interval \\([a, b]\\), its graph can be drawn without lifting the pencil from the paper. Since \\(f(a)f(b) < 0\\), the values of \\(f(a)\\) and \\(f(b)\\) have opposite signs. Without loss of generality, assume that \\(f(a) < 0\\) and \\(f(b) > 0\\). In this case the point \\((a, f(a))\\) lies below the \\(x\\)-axis and the point \\((b, f(b))\\) lies above the \\(x\\)-axis as shown in Figure 8.2. Since \\(f\\) is continuous on \\([a, b]\\), the graph can be drawn continuously from the point \\((a, f(a))\\) to the point \\((b, f(b))\\) without any jump or break, in particular, at \\(x\\)-axis."
+          },
+          {
+            "type": "paragraph",
+            "text": "As the graph moves from below the \\(x\\)-axis to above the \\(x\\)-axis, it must cross the \\(x\\)-axis at some point \\(c\\) in the interval \\([a, b]\\). At this point, \\(f(c) = 0\\). Which shows that \\(c\\) is a real root in the interval \\([a, b]\\), which shows that at least one root must exist. We call the interval \\([a, b]\\) an interval of sign change for the function \\(f\\), because the function changes sign from positive to negative or vice versa.",
+            "bold": [
+              "interval of sign change for the function"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read the theorem as a simple promise: \"continuous + opposite signs at the ends \\(\\Rightarrow\\) a root in between\". Think of walking from a valley floor below sea level to a hill top above sea level along a path with no jumps: somewhere you must be exactly at sea level.\nWhy \\(f(a)f(b) < 0\\)? A product is negative only when one factor is negative and the other positive, so this one test says \"the signs are opposite\".\nWhy \"at least one\"? The curve may cross the axis three times (or any odd number of times) between \\(a\\) and \\(b\\). The theorem promises one, not exactly one."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Two things the theorem does NOT say:\n1. Continuity cannot be dropped. \\(f(x) = \\frac{1}{x}\\) has \\(f(-1) = -1\\) and \\(f(1) = 1\\), so the signs are opposite, yet \\(\\frac{1}{x}\\) is never 0. The graph jumps at \\(x = 0\\), where \\(f\\) is not continuous.\n2. No sign change does not mean no root. \\(f(x) = x^2 - 4\\) has \\(f(-3) = 5\\) and \\(f(3) = 5\\) (same sign), yet it has two roots, \\(\\pm 2\\), in \\([-3, 3]\\). The roots come in a pair, so the signs at the ends agree."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Show that the function \\(f(x) = x^4 - 200x - 50\\) has at least two real roots by finding its intervals of sign change.",
+            "steps": [
+              "Given: \\(f(x) = x^4 - 200x - 50\\).\nTo prove: \\(f\\) has at least two real roots.\nMethod: the Location of Root Theorem. If we find two separate closed intervals on which \\(f\\) is continuous and changes sign, each interval contains at least one root, so there are at least two roots.",
+              "Continuity\n\\[\\lim_{x \\to c} f(x) = \\lim_{x \\to c}(x^4 - 200x - 50)\\]\n\\[= f(c) \\quad \\forall c \\in \\mathbb{R}\\]\n\\[\\Rightarrow f \\text{ is continuous at every real number.}\\]\nWhy: \\(f\\) is a polynomial, and the limit of a polynomial at any point is just its value there. The LRT can only be used on an interval where \\(f\\) is continuous, so this must be checked first.",
+              "Interval of sign change: first values\n\\[f(-3) = 81 + 600 - 50\\]\n\\[= 631 > 0\\]\n\\[f(-2) = 16 + 400 - 50\\]\n\\[= 366 > 0\\]\nWhy: we try whole numbers, because they are easy to substitute. Note \\((-3)^4 = 81\\) and \\(-200(-3) = +600\\).",
+              "The remaining values (see the table below)\n\\[f(-1) = 1 + 200 - 50 = 151\\]\n\\[f(0) = -50\\]\n\\[f(5) = 625 - 1000 - 50\\]\n\\[= -425\\]\n\\[f(6) = 1296 - 1200 - 50\\]\n\\[= 46\\]\nWhy: we keep going until the sign of \\(f(x)\\) changes. Between 0 and 5 all values stay negative; the sign changes back to + only at \\(x = 6\\).",
+              "Read the sign changes\n\\[f(-1)\\,f(0) = (151)(-50) < 0\\]\n\\[f(5)\\,f(6) = (-425)(46) < 0\\]\nWhy: a negative product means the two values have opposite signs. So \\([-1, 0]\\) and \\([5, 6]\\) are intervals of sign change for \\(f\\).",
+              "Conclude with the LRT\nBy the LRT there is a root in \\(]-1, 0[\\) and a root in \\(]5, 6[\\).\nWhy: \\(f\\) is continuous on both intervals and changes sign on each. The two intervals do not overlap, so these are two different roots. Hence \\(f\\) has at least two real roots.",
+              "Check:\n\\[\\text{Roots} \\approx -0.2500 \\text{ and } 5.9291\\]\nWhy: a computer root-finder gives these two real roots, and indeed \\(-0.25 \\in\\, ]-1, 0[\\) and \\(5.93 \\in\\, ]5, 6[\\)."
+            ],
+            "answer": "\\([-1, 0]\\) and \\([5, 6]\\) are intervals of sign change of the continuous function \\(f\\), so by the LRT \\(f(x) = x^4 - 200x - 50\\) has at least two real roots. Hence proved."
+          },
+          {
+            "type": "table",
+            "caption": "Values of \\(f(x) = x^4 - 200x - 50\\) (the table printed in Example 1)",
+            "header": [
+              "\\(x\\)",
+              "\\(f(x)\\)",
+              "Sign of \\(f(x)\\)"
+            ],
+            "rows": [
+              [
+                "\\(-3\\)",
+                "\\(631\\)",
+                "+"
+              ],
+              [
+                "\\(-2\\)",
+                "\\(366\\)",
+                "+"
+              ],
+              [
+                "\\(-1\\)",
+                "\\(151\\)",
+                "+"
+              ],
+              [
+                "\\(0\\)",
+                "\\(-50\\)",
+                "−"
+              ],
+              [
+                "\\(1\\)",
+                "\\(-249\\)",
+                "−"
+              ],
+              [
+                "\\(2\\)",
+                "\\(-434\\)",
+                "−"
+              ],
+              [
+                "\\(3\\)",
+                "\\(-569\\)",
+                "−"
+              ],
+              [
+                "\\(4\\)",
+                "\\(-594\\)",
+                "−"
+              ],
+              [
+                "\\(5\\)",
+                "\\(-425\\)",
+                "−"
+              ],
+              [
+                "\\(6\\)",
+                "\\(46\\)",
+                "+"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Note that, \\(f(-1)f(0) < 0\\). It means that, \\([-1, 0]\\) is an interval of sign change for \\(f\\). Similarly, \\(f(5)f(6) < 0\\). Thus, \\([5, 6]\\) is another interval of sign change. We have shown two intervals of sign change for \\(f\\). Since \\(f\\) is continuous on these intervals, it has at least two real roots."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "How to find intervals of sign change quickly:\n1. Make a table of \\(f(x)\\) at whole numbers (\\(\\ldots, -2, -1, 0, 1, 2, \\ldots\\)).\n2. Write only the sign of each value under it.\n3. Every place where the sign flips (+ to − or − to +) gives an interval of sign change.\nIn the exam always write the continuity line, the two values with their signs, and the sentence \"hence by the LRT a root lies in ...\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Location of Root Theorem: if \\(f\\) is continuous on \\([a, b]\\) and \\(f(a)f(b) < 0\\), then \\(f\\) has at least one real root \\(c\\) in \\(]a, b[\\).\n2. Such an \\([a, b]\\) is called an interval of sign change for \\(f\\).\n3. Always check continuity first; then compare the signs of \\(f(a)\\) and \\(f(b)\\).\n4. Separate (non-overlapping) intervals of sign change give separate roots, so \\(k\\) such intervals give at least \\(k\\) roots."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Using the LRT on an interval where \\(f\\) is not continuous (for example across an asymptote of \\(\\frac{1}{x}\\) or \\(\\tan x\\)). A sign change there does not prove a root.\n2. Concluding \"no root\" because \\(f(a)\\) and \\(f(b)\\) have the same sign. Two roots (or none) may lie between them.\n3. Saying the LRT gives exactly one root. It guarantees at least one.\n4. Sign slips with negatives: \\((-3)^4 = +81\\) and \\(-200 \\times (-3) = +600\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

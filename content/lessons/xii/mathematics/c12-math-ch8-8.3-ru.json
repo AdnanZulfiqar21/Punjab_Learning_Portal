@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.3-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.3",
+      "title": "8.3 Numerical Methods for Solving Nonlinear Equations (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-8.3",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 238,
+          "pdf_to": 238,
+          "note": "Book p. 236: 8.3 main text (one paragraph) introducing Bisection, Regula-Falsi and Newton-Raphson; our summary table"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Pichhle hisse (8.2) mein hum ne graph bana kar root ka andaza lagaya tha. Graph se jawab aksar ek ya do decimal places tak hi theek milta hai, kyunke graph ki line ki moti-pan aur hamari aankh ki had hoti hai. Ab sawal yeh hai: agar humein root 3 ya 4 decimal places tak chahiye ho to kya karein? Is hisse mein hum aise tareeqe seekhenge jo graph ki bajaye hisaab (calculation) se kaam karte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki baat: do ya zyada decimal places tak sahi roots nikalne ke liye humein bakaida (systematic) numerical methods chahiye. Yeh methods un intervals ka idea use karte hain jahan function ka sign badalta hai, aur qadam ba qadam root ki jagah ko tang karte jate hain. Is section mein teen ahem tareeqe parhenge: Bisection Method, Regula-Falsi Method aur Newton–Raphson Method."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Teeno tareeqe iterative hain (iteration yani ek hi kaam ko baar baar dohrana). Har tareeqa root ka ek andaza leta hai aur us se behtar andaza banata hai; phir us behtar andaze se aur behtar. Jaise koi cheez dhoondte hue aap kehte hain \"garam... aur garam...\" aur aakhir mein cheez mil jati hai.\nKab rukna hai? Jab andaza itna qareeb ho jaye ke hamari zaroorat ke decimal places pakke ho jayein. Yeh faisla kaise karna hai, woh agle hisse 8.3.1 mein hai."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Method",
+              "Naya andaza",
+              "Kya chahiye",
+              "Raftaar"
+            ],
+            "rows": [
+              [
+                "Bisection (8.3.2)",
+                "beech ka point \\(c = \\frac{a + b}{2}\\)",
+                "\\(f\\) continuous ho \\([a, b]\\) par, aur \\(f(a)f(b) < 0\\)",
+                "aahista lekin hamesha kaam karta hai"
+              ],
+              [
+                "Regula-Falsi (8.3.3)",
+                "\\((a, f(a))\\) aur \\((b, f(b))\\) wali secant line jahan x-axis ko kaate",
+                "\\(f\\) continuous, \\(f(a)f(b) < 0\\)",
+                "aam taur par bisection se tez"
+              ],
+              [
+                "Newton–Raphson (8.3.4)",
+                "\\((x_n, f(x_n))\\) par tangent jahan x-axis ko kaate",
+                "\\(f\\) differentiable, root ke qareeb \\(f'(x) \\ne 0\\), achhi \\(x_0\\)",
+                "aam taur par sab se tez"
+              ]
+            ],
+            "caption": "Teeno methods ek nazar mein (hamara khulasa)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "1. Bisection aur Regula-Falsi dono ko shuru karne se pehle kaunsi shart check karni zaroori hai?\n2. Newton–Raphson ke liye function ka derivative kyun chahiye?\nJawab: (1) interval ke dono siron par sign alag ho, yani \\(f(a)f(b) < 0\\), aur function continuous ho. (2) Kyunke yeh method tangent line use karta hai, aur tangent ki dhalwan (slope) derivative hi hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Socho aap ko 1 se 100 ke beech ek chhupa hua number guess karna hai aur har guess par sirf \"bara\" ya \"chhota\" bataya jata hai. Sab se samajhdar tareeqa: 50 bolo, phir 25 ya 75, yani har dafa baqi range ko aadha karo. Yahi bisection ka idea hai.\nAb socho aap ko yeh bhi bataya jaye ke aap kitna door hain (\"bohat bara\" ya \"thora sa bara\"). Phir aap aadhe ki bajaye usi hisaab se aage peechhe hote hain; yeh Regula-Falsi jaisa hai, jo values ke size ko bhi use karta hai. Newton–Raphson is se bhi aage jata hai: woh curve ki dhalwan dekh kar seedha root ki taraf chhalang lagata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Bisection, Regula-Falsi aur Newton–Raphson teeno iterative methods hain: har qadam root ka behtar andaza deta hai.\n2. Bisection aur Regula-Falsi sign change wale interval (8.1.1 ka LRT) se shuru hote hain aur root ko usi interval mein qaid rakhte hain.\n3. Newton–Raphson ek value \\(x_0\\) se shuru hota hai aur tangent use karta hai; is ke liye \\(f'(x)\\) chahiye.\n4. Rukte tab hain jab \\(|f(c)|\\) zaroori decimal places ki tolerance se chhota ho jaye (8.3.1)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(f(a)f(b) < 0\\) check kiye baghair bisection ya Regula-Falsi shuru kar dena. Agar sign change hi nahin to method ke paas qaid karne ko kuch nahin.\n2. Kaam ke beech mein hi andaze ko aakhri decimal places tak round kar dena. Extra decimals aakhir tak rakhein, round sirf jawab likhte waqt."
+          }
+        ]
+      }
+    }
+  ]
+}

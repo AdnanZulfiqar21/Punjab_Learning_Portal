@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-3-Q3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-3-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 250,
+          "pdf_to": 250,
+          "note": "Exercise 8.3 (book p. 248): Trapezium Rule, Q1-Q10"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.3 (book p. 307)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. Use Trapezoidal Rule to approximate the value of the definite integral \\(\\int_{1}^{7} \\ln(x)\\,dx\\) taking \\(n = 6\\).",
+            "explanation": "A numerical integration question: estimate a definite integral by the Trapezium Rule.\nGiven: \\(f(x) = \\ln(x)\\), interval \\([1, 7]\\), \\(n = 6\\), so \\(h = \\frac{b-a}{n}\\).\nPlan: list the points and 4-decimal function values, then use h/2 [first + 2(inner) + last].",
+            "steps": [
+              "Given: \\(f(x) = \\ln(x)\\), \\(a = 1\\), \\(b = 7\\), \\(n = 6\\).\nTo find: an approximate value of \\(\\int_{1}^{7} \\ln(x)\\,dx\\).\nMethod: the Trapezium Rule, as the question asks. n is given, so find h first.",
+              "Continuity\n\\(\\ln x\\) is continuous for every \\(x > 0\\), and \\([1, 7]\\) lies inside \\(x > 0\\).\nWhy: the Trapezium Rule needs a continuous function on the interval.",
+              "Step size and points\n\\[h = \\dfrac{b-a}{n} = \\dfrac{7-1}{6} = 1\\]\nPoints \\(x_{i} = a + ih\\): \\(1, 2, 3, 4, 5, 6, 7\\)\nWhy: 6 equal subintervals give 7 points; the first and last are the ends \\(a\\) and \\(b\\).",
+              "Function values (4 decimal places)\n\\[f(1) = \\ln 1 = 0.0000\\]\n\\[f(2) = \\ln 2 = 0.6931\\]\n\\[f(3) = \\ln 3 = 1.0986\\]\n\\[f(4) = \\ln 4 = 1.3863\\]\n\\[f(5) = \\ln 5 = 1.6094\\]\n\\[f(6) = \\ln 6 = 1.7918\\]\n\\[f(7) = \\ln 7 = 1.9459\\]\nWhy: Use the natural logarithm (ln key), not log base 10. \\(\\ln 1 = 0\\). The table with the answer collects them with their weights.",
+              "Add the inner values\n\\[S = f(x_{1}) + \\dots + f(x_{5})\\]\n\\[= 0.6931 + 1.0986 + 1.3863\\]\n\\[+ 1.6094 + 1.7918\\]\n\\[= 6.5792\\]\nWhy: these 5 inner values are shared by two neighbouring trapeziums, so they will be doubled.",
+              "Apply the Trapezium Rule\n\\[\\int_{1}^{7} \\ln(x)\\,dx\\]\n\\[\\approx \\dfrac{h}{2}\\big[f(x_{0}) + 2S + f(x_{6})\\big]\\]\n\\[= 0.5\\big[0.0000 + 2(6.5792)\\]\n\\[+ 1.9459\\big]\\]\n\\[= 0.5(15.1043)\\]\n\\[= 7.55215 \\approx 7.5522\\]\nWhy: \\(\\frac{h}{2} = 0.5\\); the end values are used once and the inner sum twice. Round only at the end.",
+              "Check:\n\\[\\int_{1}^{7} \\ln x\\,dx = \\big[x\\ln x - x\\big]_{1}^{7}\\]\n\\[= 7\\ln 7 - 6 \\approx 7.6214\\]\nThe trapezium value 7.5522 is slightly smaller, as expected: \\(\\ln x\\) bends downwards, so the chords lie below the curve."
+            ],
+            "final_answer": "\\(\\int_{1}^{7} \\ln(x)\\,dx \\approx 7.5522\\)",
+            "answer_table": {
+              "header": [
+                "i",
+                "\\(x_{i}\\)",
+                "\\(f(x_{i})\\)",
+                "Weight"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(1\\)",
+                  "\\(0.0000\\)",
+                  "1"
+                ],
+                [
+                  "1",
+                  "\\(2\\)",
+                  "\\(0.6931\\)",
+                  "2"
+                ],
+                [
+                  "2",
+                  "\\(3\\)",
+                  "\\(1.0986\\)",
+                  "2"
+                ],
+                [
+                  "3",
+                  "\\(4\\)",
+                  "\\(1.3863\\)",
+                  "2"
+                ],
+                [
+                  "4",
+                  "\\(5\\)",
+                  "\\(1.6094\\)",
+                  "2"
+                ],
+                [
+                  "5",
+                  "\\(6\\)",
+                  "\\(1.7918\\)",
+                  "2"
+                ],
+                [
+                  "6",
+                  "\\(7\\)",
+                  "\\(1.9459\\)",
+                  "1"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

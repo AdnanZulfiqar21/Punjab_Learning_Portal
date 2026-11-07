@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.5.2-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.5.2",
+      "title": "8.5.2 Regulation of Heartbeats (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-8.5.2",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 252,
+          "pdf_to": 253,
+          "note": "Book p. 250-251: 8.5.2 Regulation of Heartbeats, Example 2 (shown as Example 9): x^3 - x - 1 = 0 by bisection on [1, 2], iterations table, x = 1.32."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab chaliye biology aur medicine ki taraf. Kitab kehti hai: insani dil ki dhadkan ko electrical signals control karte hain jo dil ke muscles ke sukarne (contraction) aur dheela hone (relaxation) ka nizam chalate hain. In signals ka waqt ke saath badalna aksar nonlinear equations se model kiya ja sakta hai. Sochiye, ECG machine par jo lehrein aap dekhte hain, unke peeche bhi aisi hi mathematics hai. Steady-state ka matlab hai woh halat jahan signal ek jagah thehar jaye aur waqt ke saath na badle; isi thehri hui value ko hum neeche wali example mein dhoondenge."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "Kitab is example ko 'Example 2' chhaapti hai (is unit mein yeh teesra Example 2 hai); hum ise Example 9 dikhate hain (8.5.1 wala note dekhiye)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yahan Bisection kyun? Is ko sirf f ki values aur sign change wala interval chahiye, derivative ki koi zaroorat nahin, aur yeh hamesha root ki taraf hi barhta hai. Is ki qeemat raftaar hai: har iteration sirf interval ko aadha karti hai, is liye kai iterations lagti hain. Isi liye kitab saari working ek table mein jama karti hai. Bilkul aise jaise aap kisi kitab mein page dhoondte hue usay beech se kholte hain, phir aadhe ko phir beech se, yahan tak ke page mil jaye."
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "The electrical activity of the heart is represented by a variable \\(x\\), which measures the signal strength of the heartbeat. At steady-state, the signal satisfies the nonlinear equation \\(x^{3} - x - 1 = 0\\). Find the real steady-state value of the heartbeat signal near \\(x = 1\\) using the Bisection Method, correct to two decimal places.",
+            "steps": [
+              "Diya gaya: \\(x^{3} - x - 1 = 0\\), aur root \\(x = 1\\) ke qareeb hai.\nMaloom karna: real root (yani steady-state signal) do decimal places tak.\nTareeqa: Bisection. Aisa interval dhoondenge jahan f ka sign badalta ho, phir use baar baar aadha karenge aur woh aadha rakhenge jis mein sign ab bhi badal raha ho. Sawal ne yahi method maanga hai, aur is ki khoobi yeh hai ke root kabhi haath se nahin nikalta.",
+              "Function pehchaniye\n\\[f(x) = x^{3} - x - 1\\]\nKyun: bisection \\(f(x) = 0\\) par kaam karta hai, aur equation pehle se isi shakal mein hai, kuch shift karne ki zaroorat nahin.",
+              "Continuity\n\\(f(c) = \\lim_{x \\to c} (x^{3} - x - 1)\\) har \\(c \\in \\mathbb{R}\\) ke liye.\n\\(\\Rightarrow f\\) har real number par continuous hai.\nKyun: f ek polynomial hai, aur polynomial ki limit har point par us ki value ke barabar hoti hai. Continuity is liye zaroori hai ke Location of Root Theorem sirf continuous function par lagta hai.",
+              "Sign change wala interval\n\\[f(1) = 1 - 1 - 1 = -1 < 0\\]\n\\[f(2) = 8 - 2 - 1 = 5 > 0\\]\n\\(\\Rightarrow [1, 2]\\) mein sign badalta hai, is liye root \\([1, 2]\\) mein hai.\nKyun: sawal ne kaha 'near x = 1', to hum ne 1 aur agla whole number 2 check kiya. Ek negative aur ek positive, yani graph ne darmiyan mein x-axis cross ki hai.",
+              "Iteration 1\n\\[c = \\dfrac{1 + 2}{2} = 1.5\\]\n\\[f(1.5) = 3.375 - 1.5 - 1 = 0.875\\]\nKyun: \\(f(1.5)\\) positive aur \\(f(1)\\) negative hai, yani sign left wale aadhe mein badal raha hai. Naya interval \\([1, 1.5]\\). Right wala aadha \\([1.5, 2]\\) phenk diya, kyun ke wahan dono kinare positive hain.",
+              "Iteration 2\n\\[c = \\dfrac{1 + 1.5}{2} = 1.25\\]\n\\[f(1.25) = 1.9531 - 1.25 - 1\\]\n\\[= -0.2969\\]\nKyun: \\(f(1.25)\\) negative aur \\(f(1.5)\\) positive: naya interval \\([1.25, 1.5]\\). Dekhiye, har qadam par interval ki lambai aadhi ho rahi hai: 1, 0.5, 0.25, ...",
+              "Iterations 3 aur 4\n\\[f(1.375) = 2.5996 - 1.375 - 1 = 0.2246\\]\n\\[f(1.3125) = 2.2610 - 1.3125 - 1 = -0.0515\\]\nKyun: har dafa woh aadha rakha jis ke kinaron par sign ulte hon: pehle \\([1.25, 1.375]\\), phir \\([1.3125, 1.375]\\).",
+              "Iterations 5 aur 6\n\\[c = \\dfrac{1.3125 + 1.375}{2} = 1.34375\\]\n\\[\\approx 1.3438,\\ f(c) = 0.0828\\]\n\\[c = \\dfrac{1.3125 + 1.3438}{2} = 1.32815\\]\n\\[\\approx 1.3282,\\ f(c) = 0.0149\\]\nKyun: kitab darmiyani values 4 decimal places tak rakhti hai. Paanchvi jagah par 5 ho to upar round hota hai: 1.34375 se 1.3438 aur 1.32815 se 1.3282.\nDhyan dein: yahan ghalat rounding (1.3281) aage ki saari values thori si badal deti hai, is liye rounding ka rule pakka rakhiye.",
+              "Iterations 7 aur 8\n\\[c = \\dfrac{1.3125 + 1.3282}{2} \\approx 1.3204\\]\n\\[f(1.3204) = -0.0183\\]\n\\[c = \\dfrac{1.3204 + 1.3282}{2} = 1.3243\\]\n\\[f(1.3243) = -0.0018\\]\nKyun: yeh saari aath iterations neeche wali Iterations Table mein ek nazar mein di gayi hain.",
+              "Rukne ka faisla\n\\(|f(1.3243)| = |-0.0018| < 0.01\\).\nKyun: f ki value taqreeban zero hai, is liye \\(c = 1.3243\\) qubool. Yeh 8.3.1 ki do decimal places wali tolerance 0.005 se bhi kam hai, yani dono rules ke mutabiq hum ruk sakte hain.",
+              "Tasdeeq:\nSign test: \\(f(1.315) \\approx -0.0411 < 0\\) aur \\(f(1.325) \\approx 0.0012 > 0\\), yani root \\(]1.315, 1.325[\\) mein hai aur 1.32 par round hota hai.\nAsal root \\(x = 1.3247\\ldots\\) hai."
+            ],
+            "answer": "\\(x \\approx 1.32\\) (do decimal places tak). Yani dil ki dhadkan ke signal ki steady-state value taqreeban 1.32 units hai."
+          },
+          {
+            "type": "table",
+            "caption": "Iterations Table: (Intermediate 4 decimal places)",
+            "header": [
+              "Iteration",
+              "\\(a\\)",
+              "\\(b\\)",
+              "\\(c = \\frac{a+b}{2}\\)",
+              "\\(f(c)\\)",
+              "New Interval"
+            ],
+            "rows": [
+              [
+                "1",
+                "1 (-)",
+                "2 (+)",
+                "1.5 (+)",
+                "0.875",
+                "[1, 1.5]"
+              ],
+              [
+                "2",
+                "1 (-)",
+                "1.5 (+)",
+                "1.25 (-)",
+                "-0.2969",
+                "[1.25, 1.5]"
+              ],
+              [
+                "3",
+                "1.25 (-)",
+                "1.5 (+)",
+                "1.375 (+)",
+                "0.2246",
+                "[1.25, 1.375]"
+              ],
+              [
+                "4",
+                "1.25 (-)",
+                "1.375 (+)",
+                "1.3125 (-)",
+                "-0.0515",
+                "[1.3125, 1.375]"
+              ],
+              [
+                "5",
+                "1.3125 (-)",
+                "1.375 (+)",
+                "1.3438 (+)",
+                "0.0828",
+                "[1.3125, 1.3438]"
+              ],
+              [
+                "6",
+                "1.3125 (-)",
+                "1.3438 (+)",
+                "1.3282 (+)",
+                "0.0149",
+                "[1.3125, 1.3282]"
+              ],
+              [
+                "7",
+                "1.3125 (-)",
+                "1.3282 (+)",
+                "1.3204 (-)",
+                "-0.0183",
+                "[1.3204, 1.3282]"
+              ],
+              [
+                "8",
+                "1.3204 (-)",
+                "1.3282 (+)",
+                "1.3243 (-)",
+                "-0.0018",
+                "Stop"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Yaad rakhiye: \\(|f(1.3243)| = |-0.0018| < 0.01\\). Aakhri jawab: \\(x \\approx 1.32\\) (do decimal places tak). Yani dil ki dhadkan ke signal ki steady-state value taqreeban 1.32 units hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Table kaise parhein: a, b aur c ke saath bracket mein jo sign likha hai woh wahan f ka sign hai. Naye interval ka ek kinara hamesha (-) aur doosra (+) hota hai; jis kinare ka sign f(c) jaisa ho, usay c se badal dete hain.\nYahan kitab \\(|f(c)| < 0.01\\) par rukti hai. 8.3.1 ka do decimal places wala rule zyada sakht hai: \\(|f(c)| < 0.005\\). Aakhri value \\(-0.0018\\) dono ko poora karti hai, is liye jawab 1.32 mehfooz hai.\nLambai ka hisaab: 8 dafa aadha karne ke baad interval \\([1.3204, 1.3282]\\) ki lambai 0.0078 hai. Is ke kinare 1.32 aur 1.33 par round hote hain, is liye aakhri faisla sign test karta hai: 1.32."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Bisection kitni iterations lega, yeh pehle se bataya ja sakta hai! Shuru mein interval ki lambai 1 hai (1 se 2). Har iteration ke baad lambai aadhi hoti hai: 0.5, 0.25, 0.125, ... aath iterations ke baad yeh 1/256, yani taqreeban 0.004 reh jati hai.\nDo decimal places ke liye humein itni hi baareek lambai chahiye hoti hai, is liye kitab ki table bhi taqreeban aath rows par khatam hoti hai. Yeh bisection ki sab se pyari baat hai: yeh kabhi dhoka nahin deta, bas waqt leta hai. Isi liye jab baqi methods par bharosa na ho to bisection hi sab se mehfooz rasta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Agar hum \\([1, 2]\\) ki bajaye \\([1.3, 1.4]\\) se shuru karte to kitni iterations bachtin? \\(f(1.3) = -0.103 < 0\\) aur \\(f(1.4) = 0.344 > 0\\), to interval sahi hai aur lambai sirf 0.1 hai. Yani shuru ki taqreeban teen chaar iterations bach jatin. Achha interval chunna waqt bachata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Isi tareeqe se \\(x^{3} - 2x - 5 = 0\\) ka root \\([2, 3]\\) mein dhoondiye: \\(f(2) = -1\\), \\(f(3) = 16\\). \\(c = 2.5\\): \\(f = 5.625 > 0\\); \\(c = 2.25\\): \\(f = 1.89 > 0\\); \\(c = 2.125\\): \\(f = 0.35 > 0\\); \\(c = 2.0625\\): \\(f = -0.35 < 0\\) ... aur aakhir mein jawab \\(x \\approx 2.09\\) aata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Table hamesha chhe columns ke saath banaiye, har value ke saath f ka sign likhiye, aur aakhir mein ek line mein rukne ki wajah aur aakhri jawab alfaaz mein likhiye (yahan: dil ki dhadkan ka steady-state signal taqreeban 1.32 units hai)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "Heartbeat model \\(x^{3} - x - 1 = 0\\) ka root \\([1, 2]\\) mein hai kyun ke \\(f(1) = -1 < 0\\) aur \\(f(2) = 5 > 0\\).\nBisection: \\(c = \\frac{a+b}{2}\\); woh aadha rakhiye jis ke kinaron par signs ulte hon.\nDarmiyani values 4 decimal places tak rakhi jati hain.\nJab \\(|f(c)|\\) tolerance se kam ho jaye to ruk jaiye: \\(x \\approx 1.32\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "Interval ka ghalat kinara badal dena: c usi kinare ki jagah leta hai jis ka f, f(c) ke SAME sign wala ho.\n1.34375 ko 1.3437 likhna (5 upar round hota hai) ya iterations ke darmiyan hi c ko do places par round kar dena.\nDo decimal places maange gaye hon aur jawab 1.3243 likh dena: jawab 1.32 dijiye."
+          }
+        ]
+      }
+    }
+  ]
+}

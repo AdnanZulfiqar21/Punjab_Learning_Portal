@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-3-Q7",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-3-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 250,
+          "pdf_to": 250,
+          "note": "Exercise 8.3 (book p. 248): Trapezium Rule, Q1-Q10"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.3 (book p. 307)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7. Use Trapezoidal Rule to approximate the value of the definite integral \\(\\int_{-1}^{1} (x^{4} - x + 1)\\,dx\\) taking \\(h = 0.2\\).",
+            "explanation": "A numerical integration question: estimate a definite integral by the Trapezium Rule.\nGiven: \\(f(x) = x^{4} - x + 1\\), interval \\([-1, 1]\\), \\(h = 0.2\\), so \\(n = \\frac{b-a}{h}\\).\nPlan: list the points and 4-decimal function values, then use h/2 [first + 2(inner) + last].",
+            "steps": [
+              "Given: \\(f(x) = x^{4} - x + 1\\), \\(a = -1\\), \\(b = 1\\), \\(h = 0.2\\).\nTo find: an approximate value of \\(\\int_{-1}^{1} (x^{4} - x + 1)\\,dx\\).\nMethod: the Trapezium Rule, as the question asks. Here \\(h\\) is given, so find \\(n\\) first.",
+              "Continuity\n\\(x^{4} - x + 1\\) is a polynomial, continuous everywhere, so it is continuous on \\([-1, 1]\\).\nWhy: the Trapezium Rule needs a continuous function on the interval.",
+              "Number of subintervals and points\n\\[n = \\dfrac{b-a}{h} = \\dfrac{1-(-1)}{0.2} = \\dfrac{2}{0.2} = 10\\]\nPoints \\(x_{i} = a + ih\\): \\(-1, -0.8, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8, 1\\)\nWhy: \\(h = \\frac{b-a}{n}\\) rearranged gives \\(n = \\frac{b-a}{h}\\); 10 subintervals give 11 points.",
+              "Function values (4 decimal places)\n\\[f(-1) = 3.0000\\]\n\\[f(-0.8) = 2.2096\\]\n\\[f(-0.6) = 1.7296\\]\n\\[f(-0.4) = 1.4256\\]\n\\[f(-0.2) = 1.2016\\]\n\\[f(0) = 1.0000\\]\n\\[f(0.2) = 0.8016\\]\n\\[f(0.4) = 0.6256\\]\n\\[f(0.6) = 0.5296\\]\n\\[f(0.8) = 0.6096\\]\n\\[f(1) = 1.0000\\]\nWhy: For negative \\(x\\): \\(x^{4}\\) is positive and \\(-x\\) is positive, e.g. \\(f(-0.8) = 0.4096 + 0.8 + 1 = 2.2096\\). The table with the answer collects them with their weights.",
+              "Add the inner values\n\\[S = f(x_{1}) + \\dots + f(x_{9})\\]\n\\[= 2.2096 + 1.7296 + 1.4256\\]\n\\[+ 1.2016 + 1.0000 + 0.8016\\]\n\\[+ 0.6256 + 0.5296 + 0.6096\\]\n\\[= 10.1328\\]\nWhy: these 9 inner values are shared by two neighbouring trapeziums, so they will be doubled.",
+              "Apply the Trapezium Rule\n\\[\\int_{-1}^{1} (x^{4} - x + 1)\\,dx\\]\n\\[\\approx \\dfrac{h}{2}\\big[f(x_{0}) + 2S + f(x_{10})\\big]\\]\n\\[= 0.1\\big[3.0000 + 2(10.1328)\\]\n\\[+ 1.0000\\big]\\]\n\\[= 0.1(24.2656)\\]\n\\[= 2.42656 \\approx 2.4266\\]\nWhy: \\(\\frac{h}{2} = 0.1\\); the end values are used once and the inner sum twice. Round only at the end.",
+              "Check:\n\\[\\int_{-1}^{1} (x^{4} - x + 1)\\,dx = \\Big[\\dfrac{x^{5}}{5} - \\dfrac{x^{2}}{2} + x\\Big]_{-1}^{1}\\]\n\\[= \\dfrac{7}{10} + \\dfrac{17}{10} = \\dfrac{12}{5} = 2.4\\]\nThe trapezium value 2.4266 is very close (difference 0.0266)."
+            ],
+            "final_answer": "\\(\\int_{-1}^{1} (x^{4} - x + 1)\\,dx \\approx 2.4266\\)",
+            "answer_table": {
+              "header": [
+                "i",
+                "\\(x_{i}\\)",
+                "\\(f(x_{i})\\)",
+                "Weight"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(-1\\)",
+                  "\\(3.0000\\)",
+                  "1"
+                ],
+                [
+                  "1",
+                  "\\(-0.8\\)",
+                  "\\(2.2096\\)",
+                  "2"
+                ],
+                [
+                  "2",
+                  "\\(-0.6\\)",
+                  "\\(1.7296\\)",
+                  "2"
+                ],
+                [
+                  "3",
+                  "\\(-0.4\\)",
+                  "\\(1.4256\\)",
+                  "2"
+                ],
+                [
+                  "4",
+                  "\\(-0.2\\)",
+                  "\\(1.2016\\)",
+                  "2"
+                ],
+                [
+                  "5",
+                  "\\(0\\)",
+                  "\\(1.0000\\)",
+                  "2"
+                ],
+                [
+                  "6",
+                  "\\(0.2\\)",
+                  "\\(0.8016\\)",
+                  "2"
+                ],
+                [
+                  "7",
+                  "\\(0.4\\)",
+                  "\\(0.6256\\)",
+                  "2"
+                ],
+                [
+                  "8",
+                  "\\(0.6\\)",
+                  "\\(0.5296\\)",
+                  "2"
+                ],
+                [
+                  "9",
+                  "\\(0.8\\)",
+                  "\\(0.6096\\)",
+                  "2"
+                ],
+                [
+                  "10",
+                  "\\(1\\)",
+                  "\\(1.0000\\)",
+                  "1"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints 2.9411. This cannot be right: the exact value is \\(\\frac{12}{5} = 2.4\\), and the rule with \\(h = 0.2\\) gives \\(0.1(24.2656) = 2.4266\\). The correct answer is 2.4266."
+          }
+        ]
+      }
+    }
+  ]
+}

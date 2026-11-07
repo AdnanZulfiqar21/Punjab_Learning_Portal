@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.3.2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.3.2",
+      "title": "8.3.2 Bisection Method",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 239,
+          "pdf_to": 240,
+          "note": "Book p. 237-238: 8.3.2 Bisection Method, Figure 8.4, steps and note, Example 3 with its iteration table"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The Bisection Method is a simple and reliable numerical technique to find roots of nonlinear equations in one variable. It is based on the Location of Root Theorem (LRT): if a continuous function \\(f(x)\\) changes sign over an interval \\([a, b]\\), that is, \\(f(a)f(b) < 0\\), then at least one root exists within that interval. The method systematically halves the interval to narrow down the location of the root until the desired accuracy is reached."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch8-fig-8-4-bisection",
+            "alt": "Graph of an increasing curve y = f(x) between x = a, where f(a) is below the x-axis, and x = b, where f(b) is above it. The midpoint c = (a + b)/2 is marked on the x-axis just left of the point where the curve crosses the axis, labelled root.",
+            "caption": "Figure 8.4: bisection, the midpoint c of [a, b] near the root (original drawing after the textbook's figure; plotted for f(x) = x^3 - 3x - 10 on [2, 3])"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\"Bisect\" means cut into two equal parts. At each step the interval is cut at its midpoint \\(c\\), and we keep the half in which \\(f\\) still changes sign, because the LRT guarantees a root there.\nAfter \\(k\\) steps the interval has length \\(\\frac{b - a}{2^{k}}\\). For \\([2, 3]\\): after 10 steps the root is trapped in an interval of length \\(\\frac{1}{1024} < 0.001\\). That is why bisection always works, but slowly."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Steps of Bisection Method:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Check that continuity of \\(f\\) on \\([a, b]\\) and the condition \\(f(a)\\,f(b) < 0\\).",
+              "Compute the midpoint: \\(c = \\frac{a + b}{2}\\).",
+              "Check the function value \\(f(c)\\):\n• If \\(|f(c)| \\approx 0\\), then \\(c\\) is the desired root.\n• Otherwise, determine the subinterval containing the root:\n◦ If \\(f(a) \\cdot f(c) < 0\\), the root lies in \\([a, c]\\). Set \\(b = c\\).\n◦ If \\(f(c) \\cdot f(b) < 0\\), the root lies in \\([c, b]\\). Set \\(a = c\\).",
+              "Repeat Steps 2–3 until \\(|f(c)|\\) is near zero."
+            ],
+            "book_errors": [
+              "Check that continuity of"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Step 1 prints \"Check that continuity of \\(f\\)\". It should read \"Check the continuity of \\(f\\) on \\([a, b]\\) and the condition \\(f(a)f(b) < 0\\).\""
+          },
+          {
+            "type": "paragraph",
+            "text": "Note: the by section method guarantees that, after a finite number of steps, there must exists \\(c \\in \\,]a, b[\\) such that \\(|f(c)| \\approx 0\\) up to the desired accuracy.",
+            "book_errors": [
+              "by section",
+              "must exists"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "\"the by section method\" should be \"the bisection method\", and \"there must exists\" should be \"there must exist\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to decide which half to keep: look only at signs. If \\(f(c)\\) has the same sign as \\(f(a)\\), the sign change is between \\(c\\) and \\(b\\): replace \\(a\\) by \\(c\\). If \\(f(c)\\) has the same sign as \\(f(b)\\), replace \\(b\\) by \\(c\\).\n\"\\(|f(c)| \\approx 0\\)\" means: below the tolerance of 8.3.1, e.g. \\(|f(c)| < 0.005\\) for 2 decimal places."
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Use bisection method to find a root of \\(f(x) = x^3 - 3x - 10\\) within the interval \\([2, 3]\\) accurate up to two decimal places.",
+            "steps": [
+              "Given: \\(f(x) = x^3 - 3x - 10\\) on \\([2, 3]\\).\nTo find: a root accurate to 2 decimal places.\nMethod: bisection. \\(f\\) is continuous and changes sign on \\([2, 3]\\), so we can halve the interval again and again. Intermediate values are rounded to 4 decimal places.",
+              "Check initial interval and continuity\n\\[f(c) = \\lim_{x \\to c}(x^3 - 3x - 10)\\]\nfor every \\(c \\in [2, 3]\\), so \\(f\\) is continuous on \\([2, 3]\\).\n\\[f(2) = 2^3 - 3(2) - 10 = -8 < 0\\]\n\\[f(3) = 3^3 - 3(3) - 10 = 8 > 0\\]\nWhy: \\(f\\) is a polynomial, and a polynomial is continuous everywhere (its limit at any point equals its value).",
+              "Sign change occurs\n\\[f(2)\\,f(3) < 0\\]\nso a root exists in \\([2, 3]\\).\nWhy: Location of Root Theorem (8.1.1).",
+              "Iteration 1: \\(a = 2,\\ b = 3\\)\n\\[c = \\dfrac{2 + 3}{2} = 2.5\\]\n\\[f(2.5) = 15.625 - 7.5 - 10\\]\n\\[= -1.875 < 0\\]\nSince \\(f(2.5) < 0\\) and \\(f(3) = 8 > 0\\), the root lies in \\(]2.5, 3[\\). Consider \\(a = c\\).\nWhy: the sign change is now between 2.5 and 3.",
+              "Iteration 2: \\(a = 2.5,\\ b = 3\\)\n\\[c = \\dfrac{2.5 + 3}{2} = 2.75\\]\n\\[f(2.75) = 20.7969 - 8.25 - 10\\]\n\\[= 2.5469 > 0\\]\nThe root lies in \\(]2.5, 2.75[\\), so consider \\(b = c\\).\nWhy: \\(f(2.5) < 0 < f(2.75)\\). (The book goes straight to \\(f(2.75)\\); the line \\(c = 2.75\\) is our small missing step.)",
+              "Iteration 3: \\(a = 2.5,\\ b = 2.75\\)\n\\[c = \\dfrac{2.5 + 2.75}{2} = 2.625\\]\n\\[f(2.625) = 18.0879 - 7.875 - 10\\]\n\\[= 0.2129 > 0\\]\nThe root lies in \\([2.5, 2.625]\\), so set \\(b = c\\).\nWhy: \\(f(2.5) < 0 < f(2.625)\\). The book shortens \\(2.625^3 = 18.087890...\\) to 18.087 and writes 0.212; to 4 decimals it is 0.2129.",
+              "Iterations 4 to 8 (table below)\n\\[c_4 = 2.5625,\\ f = -0.8611\\]\n\\[c_5 = 2.5938,\\ f = -0.3308\\]\n\\[c_6 = 2.6094,\\ f = -0.0609\\]\n\\[c_7 = 2.6172,\\ f = 0.0755\\]\n\\[c_8 = 2.6133,\\ f = 0.0072\\]\nWhy: the same process; each time the half with the sign change is kept.",
+              "Approximate root\nApproximate Root: \\(|f(2.6133)| = 0.0072 \\approx 0.01\\).\nWhy: the book stops here (see the correction below the table).",
+              "Final root\n\\[x \\approx 2.61\\]\ncorrect to 2 decimal places.",
+              "Check:\n\\[f(2.605) = -0.1374 < 0\\]\n\\[f(2.615) = 0.0370 > 0\\]\nThe exact root lies between 2.605 and 2.615, so it rounds to 2.61."
+            ],
+            "answer": "\\(x \\approx 2.61\\) (correct to 2 decimal places)",
+            "book_errors": [
+              "\\(|f(2.6133)| = 0.0072 \\approx 0.01\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "In the iteration table, the signs written inside the brackets along with the values of \\(a\\), \\(b\\) and \\(c\\) means their functional values are negative or positive accordingly."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Iteration",
+              "\\(a\\)",
+              "\\(b\\)",
+              "\\(c = \\frac{a + b}{2}\\)",
+              "\\(f(c)\\)",
+              "New Interval"
+            ],
+            "rows": [
+              [
+                "1",
+                "2 (−)",
+                "3 (+)",
+                "2.50 (−)",
+                "\\(-1.875\\)",
+                "\\([2.5, 3]\\)"
+              ],
+              [
+                "2",
+                "2.5 (−)",
+                "3 (+)",
+                "2.75 (+)",
+                "\\(2.547\\)",
+                "\\([2.5, 2.75]\\)"
+              ],
+              [
+                "3",
+                "2.5 (−)",
+                "2.75 (+)",
+                "2.625 (+)",
+                "\\(0.212\\)",
+                "\\([2.5, 2.625]\\)"
+              ],
+              [
+                "4",
+                "2.5 (−)",
+                "2.625 (+)",
+                "2.5625 (−)",
+                "\\(-0.8611\\)",
+                "\\([2.5625, 2.625]\\)"
+              ],
+              [
+                "5",
+                "2.5625 (−)",
+                "2.625 (+)",
+                "2.5938 (−)",
+                "\\(-0.3308\\)",
+                "\\([2.5938, 2.625]\\)"
+              ],
+              [
+                "6",
+                "2.5938 (−)",
+                "2.625 (+)",
+                "2.6094 (−)",
+                "\\(-0.0609\\)",
+                "\\([2.6094, 2.625]\\)"
+              ],
+              [
+                "7",
+                "2.6094 (−)",
+                "2.625 (+)",
+                "2.6172 (+)",
+                "\\(0.0755\\)",
+                "\\([2.6094, 2.6172]\\)"
+              ],
+              [
+                "8",
+                "2.6094 (−)",
+                "2.6172 (+)",
+                "2.6133 (+)",
+                "\\(0.0072\\)",
+                "Stop"
+              ]
+            ],
+            "caption": "Bisection iterations for Example 3 (intermediate values rounded to 4 decimal places, as printed)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book stops at \\(|f(2.6133)| = 0.0072 \\approx 0.01\\), but its own rule (8.3.1) for 2 decimal places is \\(|f(c)| < 0.005\\), and 0.0072 is not below 0.005. Three more iterations meet the rule:\n9: \\(c = 2.6114\\), \\(f(c) = -0.0260\\), interval \\([2.6114, 2.6133]\\);\n10: \\(c = 2.6124\\), \\(f(c) = -0.0085\\), interval \\([2.6124, 2.6133]\\);\n11: \\(c = 2.6129\\), \\(f(c) = 0.0002\\), and \\(0.0002 < 0.005\\): stop.\nThe final root \\(x \\approx 2.61\\) is unchanged."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Bisection needs only: \\(f\\) continuous on \\([a, b]\\) and \\(f(a)f(b) < 0\\).\n2. New estimate: the midpoint \\(c = \\frac{a + b}{2}\\).\n3. Keep the half where the sign changes: replace the end whose \\(f\\) has the same sign as \\(f(c)\\).\n4. Stop when \\(|f(c)|\\) is below the tolerance (0.005 for 2 d.p.), then round.\n5. It always converges, but slowly: the interval only halves at each step."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Keeping the wrong half: compare the sign of \\(f(c)\\) with the signs at the ends, not the size of the numbers.\n2. Stopping at \\(|f(c)| \\approx 0.01\\) for 2 decimal places; the rule is \\(|f(c)| < 0.005\\).\n3. Using degree mode for trigonometric functions.\n4. Giving \\(c\\) itself (e.g. 2.6133) as the answer instead of rounding to the asked decimal places (2.61)."
+          }
+        ]
+      }
+    }
+  ]
+}

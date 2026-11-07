@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.5.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.5.1",
+      "title": "8.5.1 Chemical Reactions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 251,
+          "pdf_to": 252,
+          "note": "Book p. 249-250: 8.5.1 Chemical Reactions, Example 1 (shown as Example 8): x e^x = 1 by Newton-Raphson, two iterations, x = 0.57 moles per liter."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "In many chemical reactions, the equilibrium concentration or the reaction rate leads to nonlinear equations. These equations are often difficult to solve analytically, so numerical methods are used to find approximate values."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "The book starts its example numbering again in 8.5 and prints this example as 'Example 1' (the third Example 1 in this unit). So that every example of Unit 8 has its own number, we show the book's Examples 1, 2, 3 and 4 of 8.5 as Examples 8, 9, 10 and 11 (Examples 1-5 are in 8.2-8.3 and Examples 6-7 in 8.4.1)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why Newton-Raphson here? \\(f(x) = xe^{x} - 1\\) is differentiable everywhere and \\(f'(x)\\) is easy to write down, so each step uses the tangent line and the error shrinks very quickly. In the example below only two iterations are needed for two decimal places."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "In a chemical reaction, the concentration \\(x\\) (in moles per liter) of a product at equilibrium satisfies the relation \\(xe^{x} = 1\\). Find the equilibrium concentration correct to two decimal places using Newton-Raphson Method.",
+            "steps": [
+              "Given: \\(xe^{x} = 1\\), where \\(x\\) is a concentration in moles per liter.\nTo find: \\(x\\) correct to two decimal places.\nMethod: Newton-Raphson. Write the equation as \\(f(x) = 0\\), find \\(f'(x)\\), choose a starting value near the root and repeat \\(x_{n+1} = x_n - f(x_n)/f'(x_n)\\). It fits because \\(f\\) is differentiable everywhere and its derivative is easy to find.",
+              "Define the function\n\\[f(x) = xe^{x} - 1\\]\nWhy: Newton-Raphson finds a root of \\(f(x) = 0\\), so the 1 is brought to the left side.",
+              "Derivative\n\\[f'(x) = e^{x} + xe^{x}\\]\nThis exists at every real number \\(x\\).\nWhy: product rule on \\(x \\cdot e^{x}\\): \\((x)' e^{x} + x (e^{x})' = e^{x} + xe^{x}\\); the constant \\(-1\\) gives 0.",
+              "Newton-Raphson formula\n\\[x_{n+1} = x_n - \\dfrac{f(x_n)}{f'(x_n)}\\]\n\\[x_{n+1} = x_n - \\dfrac{x_n e^{x_n} - 1}{e^{x_n} + x_n e^{x_n}}\\]\nWhy: we put our f and f' into the general formula once, so each iteration is only a substitution.",
+              "Locate the root\n\\[f(0) = -1\\]\n\\(f(1) = i.e^{1} - 1 = 1.718\\)\nSo the root lies between 0 and 1.\nWhy: \\(f(0) < 0\\) and \\(f(1) > 0\\), and \\(f\\) is continuous, so by the Location of Root Theorem there is a root in \\([0, 1]\\).",
+              "Initial guess\nNote that \\(f(0.5) = 0.5e^{0.5} - 1 = -0.1756\\), which is closed to zero.\nAlso \\(f\\) is differentiable near \\(x_0 = 0.5\\) and hence continuous as well. Thus we take \\(x_0 = 0.5\\) as the initial guess and the Newton-Raphson formula is applicable.\nWhy: Newton-Raphson needs a start near the root; 0.5 is the middle of \\([0, 1]\\) and \\(|f(0.5)|\\) is much smaller than \\(|f(0)|\\) and \\(|f(1)|\\).",
+              "First iteration\n\\[f(0.5) = 0.5 \\cdot e^{0.5} - 1\\]\n\\[= -0.1757\\]\n\\[f'(0.5) = e^{0.5} + 0.5e^{0.5}\\]\n\\[= 2.4730\\]\n\\[x_1 = 0.5 - \\dfrac{-0.1757}{2.4730}\\]\n\\[= 0.5711\\]\nWhy: we put \\(x_0 = 0.5\\) in the formula. Subtracting a negative number moves \\(x\\) to the right, towards the root (see the Book correction below for the rounding).",
+              "Value at the new point\n\\[f(x_1) = 0.5711 \\cdot e^{0.5711} - 1\\]\n\\[\\approx 0.0107\\]\nWhy: \\(|f(x_1)|\\) is about 16 times smaller than \\(|f(x_0)|\\), so \\(x_1\\) is already much closer to the root, but 0.0107 is still above the tolerance 0.005.",
+              "Second iteration\n\\[f'(x_1) = e^{0.5711} + 0.5711 e^{0.5711}\\]\n\\[\\approx 2.7813\\]\n\\[x_2 = 0.5711 - \\dfrac{0.0107}{2.7813}\\]\n\\[\\approx 0.5673\\]\nWhy: the same formula with \\(x_1\\) in place of \\(x_0\\). Now \\(f(x_1) > 0\\), so the step goes to the left.",
+              "Stop\n\\[f(x_2) = 0.5673 \\cdot e^{0.5673} - 1\\]\n\\[\\approx 1.0004 - 1\\]\n\\[\\approx 0.0004 \\approx 0\\]\nThat is, \\(|f(0.5673)| \\approx 0\\).\nWhy: \\(0.0004 < 0.005\\), the tolerance for two decimal places (8.3.1), so the second decimal place is settled.",
+              "Check:\nSign test (ours): \\(f(0.565) \\approx -0.0059 < 0\\) and \\(f(0.575) \\approx 0.0219 > 0\\), so the root lies in \\(]0.565, 0.575[\\) and every number there rounds to 0.57.\nSubstitution: \\(0.57 \\times e^{0.57} = 0.57 \\times 1.7683 \\approx 1.008 \\approx 1\\). The exact root is \\(x = 0.5671\\ldots\\)"
+            ],
+            "answer": "\\(x \\approx 0.57\\) moles per liter",
+            "book_errors": [
+              "\\(f(1) = i.e^{1} - 1 = 1.718\\)",
+              "closed to zero",
+              "\\[= -0.1757\\]",
+              "\\[= 2.4730\\]",
+              "\\[= 0.5711\\]",
+              "\\[\\approx 2.7813\\]",
+              "\\[\\approx 0.5673\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "1. The book prints \\(f(1) = i.e^{1} - 1\\); it should be \\(f(1) = 1 \\cdot e^{1} - 1 = 1.718\\). It also prints 'closed to zero' for 'close to zero'.\n2. In the first iteration it prints \\(f(0.5) = -0.1757\\), although it printed \\(-0.1756\\) a few lines earlier; the correct value is \\(-0.1756\\) (\\(-0.17564\\)), and \\(f'(0.5) = 2.47308 \\approx 2.4731\\), not 2.4730.\n3. \\(x_1 = 0.5 + \\frac{0.17564}{2.47308} = 0.57102\\), which rounds to 0.5710, not 0.5711. (The printed \\(f(x_1) \\approx 0.0107\\) is the value at 0.5710; at 0.5711 it would be 0.0110.)\n4. Continuing with \\(x_1 = 0.5710\\): \\(f'(0.5710) \\approx 2.7807\\) (book 2.7813) and \\(x_2 = 0.5710 - \\frac{0.0107}{2.7807} \\approx 0.5672\\) (book 0.5673), with \\(f(0.5672) \\approx 0.0002\\).\nThe exact root is \\(0.5671\\ldots\\), so the book's final answer \\(x \\approx 0.57\\) moles per liter is correct."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why was Newton-Raphson so fast here? Near the root the graph of f is almost a straight line, and the tangent line at x_n hits the x-axis very close to where the curve does. Roughly, the number of correct decimal places doubles in every iteration (0.5, then 0.57, then 0.5672).\nThe concentration must be positive, and \\(f(x) = xe^{x} - 1 < 0\\) for every \\(x \\le 0\\), so 0.57 is the only meaningful (indeed the only real) root."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Write the formula once with your f and f' substituted, then make a small table: \\(n\\), \\(x_n\\), \\(f(x_n)\\), \\(f'(x_n)\\), \\(x_{n+1}\\). Examiners look for the substitution, the stopping reason (|f| below the tolerance) and the unit in the final answer."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "Equilibrium problems give equations like \\(xe^{x} = 1\\) that cannot be solved by algebra.\nNewton-Raphson: \\(x_{n+1} = x_n - f(x_n)/f'(x_n)\\); here \\(f'(x) = e^{x} + xe^{x}\\) by the product rule.\nA good start: \\(f(0) < 0\\), \\(f(1) > 0\\), take \\(x_0 = 0.5\\).\nStop when \\(|f(x_n)| < 0.005\\) for two decimal places: \\(x \\approx 0.57\\) moles per liter."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Differentiating \\(xe^{x}\\) as \\(e^{x}\\) only (forgetting the product rule).\nRounding \\(x_1\\) carelessly: \\(0.57102\\) is 0.5710 to four places; a wrong last digit is carried into every later step.\nStopping because two iterates look close without checking |f| against the tolerance."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-4-Q3-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-4-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-EXERCISE-8-4-Q3",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 255,
+          "pdf_to": 255,
+          "note": "Exercise 8.4, Question 3 (book p. 253); answer key p. 307 (PDF 309)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. In a nonlinear LC circuit, the equilibrium charge \\(q\\) on the capacitor satisfies \\(q^{3} - 4q + 2 = 0\\). Find the equilibrium values of charge stored on the capacitor lying in the interval \\([0, 1]\\) using Regula-Falsi method accurate to three decimal places.",
+            "explanation": "Yeh ek cubic equation hai, aur humein sirf woh root chahiye jo diye gaye interval [0, 1] mein ho.\nDiya kya hai? Equation aur interval. Find kya karna hai? Teen decimal places tak charge q.\nRule kaunsa? Regula-Falsi formula, aur teen places ke liye tolerance 0.0005.\nPlan: [0, 1] par sign change check, phir 5 decimal places rakh kar formula chalana jab tak |f(c)| 0.0005 se kam na ho jaye.\nAakhir mein sign test se teesre decimal ki tasdeeq.",
+            "steps": [
+              "Diya gaya: \\(q^{3} - 4q + 2 = 0\\), interval \\([0, 1]\\).\nMaloom karna: \\([0, 1]\\) mein equilibrium charge \\(q\\), teen decimal places tak.\nTareeqa: Regula-Falsi, \\(c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\). Teen decimal places ke liye 8.3.1 ka rule \\(|f(c)| < 0.0005\\) hai, is liye working mein 5 places rakhenge.",
+              "Function, continuity, sign change\n\\[f(q) = q^{3} - 4q + 2\\]\n\\[f(0) = 2 > 0, \\quad f(1) = -1 < 0\\]\nKyun: f polynomial hai, is liye [0, 1] par continuous hai, aur kinaron par signs ulte hain. Location of Root Theorem ke mutabiq [0, 1] mein root zaroor hai.",
+              "Iteration 1: a = 0, b = 1\n\\[c = \\dfrac{0(-1) - 1(2)}{-1 - 2} = \\dfrac{-2}{-3}\\]\n\\[= 0.66667\\]\n\\[f(0.66667) = 0.29630 - 2.66668 + 2\\]\n\\[= -0.37038 < 0\\]\nKyun: \\(f(c)\\) ka sign \\(f(b)\\) jaisa (negative) hai, is liye \\(b\\) ki jagah c aaya: \\([0, 0.66667]\\).",
+              "Jab tak a = 0 hai, ek shortcut\n\\[c = \\dfrac{0 \\cdot f(b) - b \\cdot 2}{f(b) - 2} = \\dfrac{2b}{2 - f(b)}\\]\nKyun: har iteration mein \\(f(c)\\) negative aata hai, is liye \\(a = 0\\) aur \\(f(a) = 2\\) kabhi nahin badalte. Formula mein inhein rakh dein to yeh chhota sa formula ban jata hai, aur hisaab tez ho jata hai.",
+              "Iteration 2\n\\[c = \\dfrac{2(0.66667)}{2 + 0.37038}\\]\n\\[= \\dfrac{1.33334}{2.37038} = 0.56250\\]\n\\[f(0.5625) = 0.17798 - 2.25 + 2\\]\n\\[= -0.07202\\]\nKyun: phir negative, to \\(b = 0.5625\\).\nDhyan dein: \\(2 - f(b) = 2 - (-0.37038) = 2.37038\\); minus ka minus plus banta hai.",
+              "Iteration 3\n\\[c = \\dfrac{1.125}{2.07202} = 0.54295\\]\n\\[f(0.54295) = -0.01174\\]\nKyun: \\(b = 0.54295\\); \\(|f(c)|\\) abhi 0.0005 se bara hai, is liye aage chalte hain.",
+              "Iteration 4\n\\[c = \\dfrac{1.08590}{2.01174} = 0.53978\\]\n\\[f(0.53978) = -0.00185\\]\nKyun: \\(b = 0.53978\\); ab bhi 0.0005 se zyada.",
+              "Iteration 5\n\\[c = \\dfrac{1.07956}{2.00185} = 0.53928\\]\n\\[f(0.53928) = -0.00029\\]\nKyun: \\(|f(c)| = 0.00029 < 0.0005\\), is liye ruk jate hain: \\(q \\approx 0.539\\).",
+              "Tasdeeq\n\\[f(0.5385) = 0.00216 > 0\\]\n\\[f(0.5395) = -0.00097 < 0\\]\nRoot \\(]0.5385, 0.5395[\\) mein hai, is liye 0.539 par round hota hai. Baqi do real roots (taqreeban 1.675 aur \\(-2.214\\)) \\([0, 1]\\) se bahar hain, is liye sawal ke mutabiq jawab sirf ek hai.\nKyun: 0.539 ke dono taraf aadhe faasle par sign test teeno decimal places ko pakka karta hai."
+            ],
+            "final_answer": "\\(q \\approx 0.539\\) coulombs (\\([0, 1]\\) mein wahid equilibrium charge).",
+            "answer_table": {
+              "header": [
+                "Iteration",
+                "\\([a, b]\\)",
+                "\\(c\\)",
+                "\\(f(c)\\)"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "[0, 1]",
+                  "0.66667",
+                  "-0.37038 (-)"
+                ],
+                [
+                  "2",
+                  "[0, 0.66667]",
+                  "0.56250",
+                  "-0.07202 (-)"
+                ],
+                [
+                  "3",
+                  "[0, 0.56250]",
+                  "0.54295",
+                  "-0.01174 (-)"
+                ],
+                [
+                  "4",
+                  "[0, 0.54295]",
+                  "0.53978",
+                  "-0.00185 (-)"
+                ],
+                [
+                  "5",
+                  "[0, 0.53978]",
+                  "0.53928",
+                  "-0.00029 (-)"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

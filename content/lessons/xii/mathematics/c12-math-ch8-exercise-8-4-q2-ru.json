@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-4-Q2-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-4-q2",
+      "title": "Question 2 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-EXERCISE-8-4-Q2",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 255,
+          "pdf_to": 255,
+          "note": "Exercise 8.4, Question 2 (book p. 253); answer key p. 307 (PDF 309)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2. The flow rate of blood in an artery is modeled by the nonlinear equation \\(Q = k\\left(P - \\frac{Q^{2}}{R}\\right)\\), where \\(Q\\) is the flow rate (mL/s), \\(P = 100\\) mmHg is the blood pressure, \\(k = 0.05\\), and \\(R = 10\\). Determine the possible real values of the flow rate \\(Q\\) accurate to two decimal places.",
+            "explanation": "Constants rakhne ke baad yeh model Q ki ek quadratic equation ban jata hai, jis ke do real roots hain.\nDiya kya hai? Model aur teen constants P, k, R. Find kya karna hai? Q ki saari real values, do decimal places tak.\nMethod sawal mein nahin likha, is liye hum Newton-Raphson lenge kyun ke f' bohat aasaan hai aur yeh sab se tez hai.\nPlan: f(Q) = 0 banana, sign change se har root ki jagah dhoondna, iterations chalana, aur aakhir mein dekhna ke kaunsi value asal mein flow rate ho sakti hai.\nTasdeeq quadratic formula se karenge.",
+            "steps": [
+              "Diya gaya: \\(Q = k(P - Q^{2}/R)\\), \\(P = 100\\), \\(k = 0.05\\), \\(R = 10\\).\nMaloom karna: \\(Q\\) ki real values, do decimal places tak.\nTareeqa: Newton-Raphson \\(Q_{n+1} = Q_n - f(Q_n)/f'(Q_n)\\). Kyun? Kyun ke f ek seedhi si polynomial banegi jis ka derivative ek line mein nikal aata hai.",
+              "Equation banaiye\n\\[Q = 0.05\\left(100 - \\dfrac{Q^{2}}{10}\\right)\\]\n\\[Q = 5 - 0.005Q^{2}\\]\n\\[f(Q) = 0.005Q^{2} + Q - 5 = 0\\]\n\\[f'(Q) = 0.01Q + 1\\]\nKyun: 0.05 ko bracket ke andar multiply kiya: \\(0.05 \\times 100 = 5\\) aur \\(0.05 \\times Q^{2}/10 = 0.005Q^{2}\\). Phir sab ek taraf le aaye, kyun ke Newton-Raphson ko \\(f(Q) = 0\\) chahiye. Polynomial hai, is liye continuous bhi aur differentiable bhi.",
+              "Positive root kahan hai?\n\\[f(4) = 0.08 + 4 - 5 = -0.92 < 0\\]\n\\[f(5) = 0.125 + 5 - 5 = 0.125 > 0\\]\nRoot \\([4, 5]\\) mein; \\(Q_0 = 5\\) lete hain.\nKyun: \\(f(5) = 0.125\\), \\(f(4) = -0.92\\) ke muqable mein zero ke bohat qareeb hai, aur \\(f'(5) = 1.05 \\ne 0\\), to formula lag sakta hai.",
+              "Iteration 1\n\\[Q_1 = 5 - \\dfrac{0.125}{1.05}\\]\n\\[= 5 - 0.1190 = 4.8810\\]\nKyun: Newton-Raphson formula mein Q_0 = 5 rakha. f(5) positive tha, is liye qadam left ki taraf gaya.",
+              "Iteration 2\n\\[f(4.8810) = 0.1191 + 4.8810 - 5\\]\n\\[= 0.0001\\]\n\\[f'(4.8810) = 1.0488\\]\n\\[Q_2 = 4.8810 - \\dfrac{0.0001}{1.0488} = 4.8809\\]\nKyun: \\(|Q_2 - Q_1| = 0.0001 < 0.005\\) aur \\(f(Q_2) \\approx 0\\). Do lagataar values ek jaisi, aur f taqreeban zero: \\(Q \\approx 4.88\\).",
+              "Doosra real root\n\\[f(-204) = 208.08 - 209 = -0.92\\]\n\\[f(-205) = 210.125 - 210 = 0.125\\]\n\\(Q_0 = -205\\) se shuru, \\(f'(-205) = -1.05\\):\n\\[Q_1 = -205 - \\dfrac{0.125}{-1.05} = -204.8810\\]\n\\[Q_2 = -204.8809\\]\nKyun: \\(f(Q) = 0\\) ko 200 se multiply karein to \\(Q^{2} + 200Q - 1000 = 0\\) banta hai. Quadratic ke roots ka jama \\(-b/a = -200\\) hota hai, is liye doosra root \\(-200 - 4.88\\) ke qareeb hona chahiye. Isi liye hum ne \\(-204\\) aur \\(-205\\) check kiye.\nDhyan dein: sawal 'possible real values' (jama) keh raha hai, is liye doosra root dhoondna bhi zaroori hai.",
+              "Kaunsi value mumkin hai?\n\\(Q \\approx -204.88\\) ka matlab hoga ke khoon pressure ke khilaaf ulti taraf beh raha hai, jo is model mein be-maani hai. Is liye yeh rad.\nKyun: mathematics kabhi kabhi aise roots bhi deti hai jo asal situation par fit nahin hote; unhein pehchaan kar chhorna samajhdari hai.",
+              "Tasdeeq\n\\[Q^{2} + 200Q - 1000 = 0\\]\n\\[Q = -100 \\pm \\sqrt{11000}\\]\n\\[= -100 \\pm 104.8809\\]\nYani \\(Q = 4.8809\\) ya \\(Q = -204.8809\\). Sign test: \\(f(4.875) = -0.0062 < 0\\), \\(f(4.885) = 0.0043 > 0\\), is liye do places par 4.88 bilkul sahi.\nKyun: quadratic formula exact roots deta hai aur dono iterations ki tasdeeq karta hai."
+            ],
+            "final_answer": "Real values \\(Q \\approx 4.88\\) aur \\(Q \\approx -204.88\\) hain; sirf \\(Q \\approx 4.88\\) mL/s mumkin flow rate hai.",
+            "answer_table": {
+              "header": [
+                "Start",
+                "\\(Q_n\\)",
+                "\\(f(Q_n)\\), \\(f'(Q_n)\\)",
+                "\\(Q_{n+1}\\)"
+              ],
+              "rows": [
+                [
+                  "root 1, n = 0",
+                  "5.0000",
+                  "0.1250, 1.0500",
+                  "4.8810"
+                ],
+                [
+                  "root 1, n = 1",
+                  "4.8810",
+                  "0.0001, 1.0488",
+                  "4.8809"
+                ],
+                [
+                  "root 2, n = 0",
+                  "-205.0000",
+                  "0.1250, -1.0500",
+                  "-204.8810"
+                ],
+                [
+                  "root 2, n = 1",
+                  "-204.8810",
+                  "0.0001, -1.0488",
+                  "-204.8809"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

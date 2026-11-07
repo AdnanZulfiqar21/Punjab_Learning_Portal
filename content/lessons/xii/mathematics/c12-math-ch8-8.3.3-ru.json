@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.3.3-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.3.3",
+      "title": "8.3.3 Regula-Falsi Method (False Position Method) (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-8.3.3",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 241,
+          "pdf_to": 243,
+          "note": "Book p. 239-241: 8.3.3 Regula-Falsi Method, Figure 8.5, derivation of the formula, steps, note box, Example 4"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Bisection ka ek kamzor pehlu hai: woh sirf signs dekhta hai, values ka size nahin. Maan lijiye \\(f(a) = -0.1\\) aur \\(f(b) = 50\\). Saaf lagta hai ke root \\(a\\) ke bohat qareeb hoga, lekin bisection phir bhi beech mein kaat-ta hai. Regula-Falsi (false position) yahi kami door karta hai: woh values ke size ka bhi faida uthata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki baat: Regula-Falsi Method nonlinear equation \\(f(x) = 0\\) ka real root dhoondne ka numerical tareeqa hai. Bisection ki tarah yeh bhi seedha Location of Root Theorem (LRT) par khara hai. Maan lein \\(y = f(x)\\) interval \\([a, b]\\) par continuous hai aur \\(f(a)f(b) < 0\\); to \\([a, b]\\) mein kam az kam ek root hai. Aam baat ko nuqsan pohanchaye baghair hum maan lete hain ke \\(f(a) < 0\\) aur \\(f(b) > 0\\). Idea yeh hai ke points \\((a, f(a))\\) aur \\((b, f(b))\\) se seedhi line kheenchein (isay secant line kehte hain) aur dekhein yeh line \\(x\\)-axis ko kahan kaatti hai. Yeh point aksar bisection ke saade midpoint \\(c = \\frac{a + b}{2}\\) se behtar andaza hota hai (Figure 8.5).",
+            "bold": [
+              "secant line"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein \"this method also based\" chhapa hai; sahi \"this method is also based\" hai (\"is\" reh gaya)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch8-fig-8-5-regula-falsi",
+            "alt": "Graph of an increasing curve y = f(x) that rises steeply and then flattens. Point (a, f(a)) is below the x-axis and (b, f(b)) above it. A dashed secant line joins them and cuts the x-axis at c1. A second secant from (a, f(a)) to (c1, f(c1)) cuts the axis at c2, closer to the exact root marked on the axis.",
+            "caption": "Figure 8.5: Regula-Falsi, secant lines through (a, f(a)) cutting the x-axis near the exact root (original drawing after the textbook's figure; plotted for f(x) = ln x - 1)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Figure 8.5 ko ghaur se dekhiye. Curve \\((a, f(a))\\) se, jo axis ke neeche hai, \\((b, f(b))\\) tak jati hai, jo upar hai. In do points ko seedhi line se jor dein to yeh line bhi kahin na kahin x-axis ko kaategi. Curve ki jagah seedhi line ko use karna hi \"false position\" hai: hum jhoot moot maan lete hain ke curve seedhi line hai, aur us ka root nikaal lete hain. Yeh asal root nahin, lekin us ke qareeb hota hai.\nPhir hum dekhte hain ke naye point \\(c\\) par sign kya hai, aur sign change wala hissa rakh kar dobara secant kheenchte hain. Har nayi secant curve se zyada chipki hui hoti hai, is liye andaza behtar hota jata hai. Figure mein doosri secant ka \\(c_2\\) pehli wali ke \\(c_1\\) se root ke zyada qareeb hai.\nNaam ki kahani: \"Regula Falsi\" Latin ke alfaaz hain jin ka matlab hai \"jhooti jagah ka qaida\", yani ek ghalat (false) jagah maan kar sahi jawab ki taraf barhna."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab formula banate hain. Points \\((a, f(a))\\) aur \\((b, f(b))\\) se guzarne wali secant line ki dhalwan (slope) \\(\\frac{f(b) - f(a)}{b - a}\\) hai, yani \"upar kitna gaye\" taqseem \"aage kitna gaye\". Point-slope form se secant line ki equation:"
+          },
+          {
+            "type": "equation",
+            "latex": "y - f(a) = \\dfrac{f(b) - f(a)}{b - a}(x - a)",
+            "text_alt": "y minus f of a equals, f of b minus f of a over b minus a, times x minus a"
+          },
+          {
+            "type": "paragraph",
+            "text": "Line \\(x\\)-axis ko wahan kaatti hai jahan \\(y = 0\\) ho. Us point ko \\(c\\) kehte hain, is liye equation mein \\(y = 0\\) aur \\(x = c\\) daalte hain:"
+          },
+          {
+            "type": "equation",
+            "latex": "c = a - \\dfrac{f(a)(b - a)}{f(b) - f(a)}",
+            "text_alt": "c equals a minus f of a times b minus a, over f of b minus f of a"
+          },
+          {
+            "type": "paragraph",
+            "text": "Simplify karne par:"
+          },
+          {
+            "type": "equation",
+            "latex": "c = \\dfrac{af(b) - bf(a)}{f(b) - f(a)}",
+            "text_alt": "c equals a f of b minus b f of a, over f of b minus f of a"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Woh chhote qadam jo kitab ne chhor diye. Secant equation mein \\(y = 0\\), \\(x = c\\):\n\\[-f(a) = \\dfrac{f(b) - f(a)}{b - a}(c - a)\\]\n\\[c - a = -\\dfrac{f(a)(b - a)}{f(b) - f(a)}\\]\nAb common denominator lein:\n\\[c = \\dfrac{a\\big(f(b) - f(a)\\big) - f(a)(b - a)}{f(b) - f(a)}\\]\nNumerator: \\(af(b) - af(a) - bf(a) + af(a) = af(b) - bf(a)\\), kyunke \\(-af(a)\\) aur \\(+af(a)\\) cancel ho jate hain. Yahi formula hai.\nYaad rakhne ka tareeqa: numerator mein \"cross\" hai: \\(a\\) ke saath \\(f(b)\\), aur \\(b\\) ke saath \\(f(a)\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Steps of the Regula-Falsi Method:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Check karein ke \\(f\\) interval \\([a, b]\\) par continuous hai aur \\(f(a)f(b) < 0\\).",
+              "Regula-Falsi formula se \\(c\\) nikalein:\n\\[c = \\dfrac{af(b) - bf(a)}{f(b) - f(a)}\\]",
+              "Function value \\(f(c)\\) dekhein:\n• Agar \\(|f(c)| \\approx 0\\), to \\(c\\) hi root hai.\n• Warna woh hissa dhoondein jis mein root hai:\n◦ Agar \\(f(a) \\cdot f(c) < 0\\), root \\([a, c]\\) mein hai. \\(b = c\\) rakhein.\n◦ Agar \\(f(c) \\cdot f(b) < 0\\), root \\([c, b]\\) mein hai. \\(a = c\\) rakhein.",
+              "Steps 2 aur 3 dohrayein jab tak \\(|f(c)|\\) zaroori tolerance se kam na ho jaye."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Step 1 mein \"Check that continuity of \\(f\\)\" chhapa hai; sahi \"Check the continuity of \\(f\\)\" hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Regula-Falsi method yeh zamanat deta hai ke kuch mehdood qadam ke baad koi \\(c \\in \\,]a, b[\\) zaroor milega jis par zaroori accuracy tak \\(|f(c)| \\approx 0\\) ho."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Bisection aur Regula-Falsi mein farq sirf Step 2 ka hai: midpoint ki jagah secant ka x-intercept. Baqi steps bilkul wahi hain, is liye agar aap bisection samajh gaye to Regula-Falsi aadha aa gaya.\nAksar ek sira hilta hi nahin (Example 4 mein \\(b = 3\\) aakhir tak wahi rehta hai), kyunke poore interval mein curve ek hi taraf mura hua hota hai aur secant har dafa root ke ek hi taraf girti hai.\nFormula mein negative values hamesha bracket mein likhein: \\(f(a) = -8\\) ho to \\(-bf(a) = -(3)(-8) = +24\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(a = 1\\), \\(b = 2\\), \\(f(1) = -1\\), \\(f(2) = 3\\). Regula-Falsi ka pehla \\(c\\) kya hoga, aur bisection ka kya?\nJawab: \\(c = \\frac{(1)(3) - (2)(-1)}{3 - (-1)} = \\frac{5}{4} = 1.25\\); bisection 1.5 deta. \\(|f(1)|\\) chhota hai, is liye Regula-Falsi ne root ko \\(a\\) ke qareeb rakha."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Regula-Falsi kab use karein? Jab bisection ki tarah yaqeeni hifazat bhi chahiye (root interval se bahar na jaye) aur raftaar bhi. Derivative ki zaroorat nahin, is liye mushkil functions par bhi aasaani se lagta hai.\nKamzori: kabhi kabhi ek sira itna der tak fixed rehta hai ke method aahista ho jata hai, khaas taur par jab curve bohat mura hua ho. Phir bhi exam ke sawalon mein yeh aam taur par 3 se 6 iterations mein jawab de deta hai.\nHisaab ka mashwara: har iteration mein pehle \\(f(a)\\) aur \\(f(b)\\) likh lein, phir numerator aur denominator alag alag nikalein, phir taqseem karein. Is tarah ghalti pakarna aasaan hota hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Example 4 mein \\(b = 3\\) kabhi kyun nahin badla?\nJawab: har iteration mein \\(f(c)\\) negative aaya, bilkul \\(f(a)\\) ki tarah. Is liye har dafa \\(a\\) badla. Wajah yeh hai ke \\([2, 3]\\) par curve \\(y = x^3 - 3x - 10\\) upar ki taraf muri hui hai (concave up), is liye secant line hamesha curve ke upar rehti hai aur axis ko root se pehle kaatti hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "Use Regula-Falsi method to find a root of \\(f(x) = x^3 - 3x - 10\\) within the interval \\([2, 3]\\) accurate up to two decimal places.",
+            "steps": [
+              "Diya gaya: \\(f(x) = x^3 - 3x - 10\\), interval \\([2, 3]\\).\nMaloom karna: root 2 decimal places tak.\nTareeqa: Regula-Falsi. \\((a, f(a))\\) aur \\((b, f(b))\\) ko jorne wali secant line x-axis ko \\(c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\) par kaatti hai; phir sign change wala hissa rakhte hain. Beech ki values 4 decimals tak.",
+              "\\(a = 2\\), \\(b = 3\\) lete hain\n\\[f(2) = -8 < 0,\\quad f(3) = 8 > 0\\]\n\\(\\Rightarrow f\\) ka root \\([2, 3]\\) mein hai.\nKyun: sign badal raha hai, LRT.",
+              "Continuity\n\\[f(c) = \\lim_{x \\to c}(x^3 - 3x - 10)\\]\nhar \\(c \\in [2, 3]\\) ke liye, yani \\(f\\) continuous hai.\nKyun: LRT sirf continuous function par lagta hai; polynomial hamesha continuous hota hai.",
+              "Regula-Falsi formula\n\\[c = \\dfrac{af(b) - bf(a)}{f(b) - f(a)}\\]\nKyun: yeh secant line ka x-intercept hai, jo hum ne upar derive kiya.",
+              "Iteration 1: \\(a = 2,\\ b = 3\\)\n\\[c = \\dfrac{(2)(8) - (3)(-8)}{(8) - (-8)}\\]\n\\[= \\dfrac{16 + 24}{16} = 2.5\\]\n\\[f(2.5) = (2.5)^3 - 3(2.5) - 10\\]\n\\[= -1.8750 < 0\\]\n\\(f(2.5)\\,f(3) < 0\\), is liye root \\([2.5, 3]\\) mein hai.\nKyun: \\(f(2.5)\\) negative hai, \\(f(2)\\) ki tarah, to \\(a = 2.5\\) ho gaya. Yahan \\(f(a) = -f(b)\\) hai, is liye secant bilkul beech mein kaatti hai; pehla qadam bisection jaisa hi aaya.",
+              "Iteration 2: \\(a = 2.5,\\ b = 3\\)\n\\[f(a) = f(2.5) = -1.8750\\]\n\\[f(b) = f(3) = 8\\]\n\\[c = \\dfrac{(2.5)(8) - (3)(-1.875)}{(8) - (-1.875)}\\]\n\\[= 2.5949\\]\n\\[f(2.5949) = -0.3119 < 0\\]\n\\(f(2.5949)\\,f(3) < 0\\), is liye root interval \\([2.5949, 3]\\) mein hai.\nKyun: \\(f(c)\\) negative hai, bilkul \\(f(a)\\) ki tarah; is liye \\(a\\) ki jagah \\(c\\) aata hai aur \\(b = 3\\) wahin rehta hai. Dhyan dein: \\(-(3)(-1.875) = +5.625\\); minus minus plus.",
+              "Iteration 3: \\(a = 2.5949,\\ b = 3\\)\n\\[f(a) = f(2.5949) = -0.3119\\]\n\\[f(b) = f(3) = 8\\]\n\\[c = \\dfrac{(2.5949)(8) - (3)(-0.3119)}{(8) - (-0.3119)}\\]\n\\[= 2.6101\\]\n\\[f(2.6101) = -0.0487 < 0\\]\n\\(f(2.6101)\\,f(3) < 0\\), is liye root interval \\([2.6101, 3]\\) mein hai.\nKyun: \\(f(c)\\) negative hai, bilkul \\(f(a)\\) ki tarah; is liye \\(a\\) ki jagah \\(c\\) aata hai aur \\(b = 3\\) wahin rehta hai.",
+              "Iteration 4: \\(a = 2.6101,\\ b = 3\\)\n\\[f(a) = -0.0487,\\quad f(b) = 8\\]\n\\[c = \\dfrac{(2.6101)(8) - (3)(-0.0487)}{(8) - (-0.0487)}\\]\n\\[= 2.6125\\]\n\\[f(2.6125) = -0.0068 < 0\\]\nKitab yahan \\(|f(2.6125)| = 0.0068\\) ko 0.01 ke barabar maan kar ruk jati hai.\nKyun: 8.3.1 ki shart \\(|f(c)| < 0.005\\) hai aur 0.0068 is se bara hai; neeche correction box mein ek qadam aur hai.",
+              "Aakhri root\n\\[x \\approx 2.61\\]\n2 decimal places tak sahi.",
+              "Tasdeeq:\n\\[f(2.605) = -0.1374 < 0\\]\n\\[f(2.615) = 0.0370 > 0\\]\nRoot 2.605 aur 2.615 ke beech hai, is liye 2.61. Yahi root Example 3 mein bisection ne 8 iterations mein diya tha; Regula-Falsi ne 4 mein de diya."
+            ],
+            "answer": "\\(x \\approx 2.61\\) (2 decimal places tak sahi)"
+          },
+          {
+            "type": "table",
+            "header": [
+              "n",
+              "\\([a, b]\\)",
+              "\\(c\\)",
+              "\\(f(c)\\)"
+            ],
+            "rows": [
+              [
+                "1",
+                "\\([2, 3]\\)",
+                "\\(2.5\\)",
+                "\\(-1.8750\\)"
+              ],
+              [
+                "2",
+                "\\([2.5, 3]\\)",
+                "\\(2.5949\\)",
+                "\\(-0.3119\\)"
+              ],
+              [
+                "3",
+                "\\([2.5949, 3]\\)",
+                "\\(2.6101\\)",
+                "\\(-0.0487\\)"
+              ],
+              [
+                "4",
+                "\\([2.6101, 3]\\)",
+                "\\(2.6125\\)",
+                "\\(-0.0068\\)"
+              ],
+              [
+                "5",
+                "\\([2.6125, 3]\\)",
+                "\\(2.6128\\)",
+                "\\(-0.0015\\)"
+              ]
+            ],
+            "caption": "Example 4 ki iterations ek table mein (hamara khulasa; row 5 woh extra qadam hai jo 0.005 wala rule maangta hai)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab \\(|f(2.6125)| = 0.0068\\) ko 0.01 ke barabar maan kar ruk jati hai, lekin 2 decimal places ke liye 8.3.1 ki shart \\(|f(c)| < 0.005\\) hai. Ek iteration aur: \\(c = \\frac{(2.6125)(8) - (3)(-0.0068)}{8 - (-0.0068)} = 2.6128\\), \\(f(2.6128) = -0.0015\\), aur \\(0.0015 < 0.005\\). Aakhri root \\(x \\approx 2.61\\) wahi rehta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "\\(f(x) = x^2 - 3\\) on \\([1, 2]\\), 2 decimal places (tolerance 0.005):\n\\(f(1) = -2\\), \\(f(2) = 1\\). \\(c_1 = \\frac{(1)(1) - (2)(-2)}{1 - (-2)} = \\frac{5}{3} = 1.6667\\), \\(f = -0.2221\\); naya interval \\([1.6667, 2]\\).\n\\(c_2 = \\frac{(1.6667)(1) - (2)(-0.2221)}{1 + 0.2221} = 1.7273\\), \\(f = -0.0164\\).\n\\(c_3 = 1.7317\\), \\(f = -0.0012\\), ab \\(|f| < 0.005\\): \\(x \\approx 1.73\\). Bisection ko yahan tak pohanchne mein kaafi zyada qadam lagte."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Regula-Falsi ki shuruaat bisection jaisi: \\(f\\) continuous, \\(f(a)f(b) < 0\\).\n2. Naya andaza: \\(c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\), yani secant line ka x-intercept.\n3. Sign change wala hissa rakhein; aksar ek sira fixed rehta hai.\n4. Aam taur par bisection se tez (Example 4: 4-5 iterations, bisection ke 8-11 ke muqable mein)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Negative values mein sign ki ghalti: hamesha bracket lagayein, maslan \\(-(3)(-0.3119) = +0.9357\\).\n2. Formula ulta likh dena, \\(\\frac{af(a) - bf(b)}{f(b) - f(a)}\\): numerator mein \\(a\\) ke saath \\(f(b)\\) aur \\(b\\) ke saath \\(f(a)\\) aata hai.\n3. Yeh samajhna ke bisection ki tarah dono sire badlenge; Regula-Falsi mein ek sira har qadam par wahi reh sakta hai."
+          }
+        ]
+      }
+    }
+  ]
+}

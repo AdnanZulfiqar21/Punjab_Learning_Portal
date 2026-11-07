@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-2-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-2-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 246,
+          "pdf_to": 246,
+          "note": "Exercise 8.2 Q2 (Regula-Falsi, 2 d.p.) on book p. 244; answers p. 307 (printed under '3.')"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.2 (book p. 307)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Find the real roots of nonlinear equations correct to 2 decimal places using the Regula-Falsi method, by finding some interval of sign change if not specified. \\(3x^3 - 9x^2 + 8 = 0 ; [2, 3]\\)",
+            "explanation": "A Regula-Falsi question with the interval \\([2, 3]\\) given.\nGiven \\(3x^3 - 9x^2 + 8 = 0\\); find the root to 2 decimal places.\nPlan: secant formula for \\(c\\), keep the sign-change part, stop at \\(|f(c)| < 0.005\\).",
+            "steps": [
+              "Given: \\(3x^3 - 9x^2 + 8 = 0\\) on the given interval \\([2, 3]\\).\nTo find: the root correct to 2 decimal places.\nMethod: Regula-Falsi. Join \\((a, f(a))\\) and \\((b, f(b))\\) by a straight line; where it cuts the x-axis is the next estimate \\(c = \\frac{a f(b) - b f(a)}{f(b) - f(a)}\\). Keep the part where \\(f\\) still changes sign. Tolerance for 2 decimal places: \\(|f(c)| < 0.005\\); intermediate values to 4 decimals.",
+              "Check continuity and the sign change\n\\[f(x) = 3x^3 - 9x^2 + 8\\]\\[f(2) = 24 - 36 + 8 = -4\\]\\[f(3) = 81 - 81 + 8 = 8\\]So \\(f(2)\\,f(3) < 0\\).\nWhy: \\(f\\) is continuous everywhere (a polynomial), so by the LRT a root lies in \\([2, 3]\\).",
+              "Iteration 1: \\(a = 2,\\ b = 3\\), \\(f(a) = -4,\\ f(b) = 8\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(2)(8) - (3)(-4)}{8 - (-4)}\\]\\[= 2.3333\\]\\[f(2.3333) = -2.8891 < 0\\]\nThe root lies in \\([2.3333, 3]\\), so set \\(a = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(a)\\), so the sign change is now between \\(c\\) and \\(b\\).",
+              "Iteration 2: \\(a = 2.3333,\\ b = 3\\), \\(f(a) = -2.8891,\\ f(b) = 8\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(2.3333)(8) - (3)(-2.8891)}{8 - (-2.8891)}\\]\\[= 2.5102\\]\\[f(2.5102) = -1.2588 < 0\\]\nThe root lies in \\([2.5102, 3]\\), so set \\(a = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(a)\\), so the sign change is now between \\(c\\) and \\(b\\).",
+              "Continue in the same way (table)\nThe table lists every iteration. Notice that the end \\(b\\) never moves: the curve bends the same way throughout, so the secant always cuts the axis on the same side of the root.\nWhy: in Regula-Falsi only the end whose sign matches \\(f(c)\\) is replaced.",
+              "Stop\n\\[|f(2.6076)| = 0.0045 < 0.005\\]So \\(c = 2.6076\\) is accurate enough; to 2 decimal places \\(x \\approx 2.61\\).\nWhy: the 8.3.1 tolerance for \\(n = 2\\) is \\(|f(c)| < 0.005\\).",
+              "Check:\n\\[f(2.605) = -0.0414\\]\\[f(2.615) = 0.1019\\]Opposite signs, so the exact root lies between 2.605 and 2.615 and rounds to 2.61."
+            ],
+            "final_answer": "\\(x \\approx 2.61\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\([a, b]\\)",
+                "\\(c\\)",
+                "\\(f(c)\\)"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "\\([2, 3]\\)",
+                  "\\(2.3333\\)",
+                  "\\(-2.8891\\)"
+                ],
+                [
+                  "2",
+                  "\\([2.3333, 3]\\)",
+                  "\\(2.5102\\)",
+                  "\\(-1.2588\\)"
+                ],
+                [
+                  "3",
+                  "\\([2.5102, 3]\\)",
+                  "\\(2.5768\\)",
+                  "\\(-0.43\\)"
+                ],
+                [
+                  "4",
+                  "\\([2.5768, 3]\\)",
+                  "\\(2.5984\\)",
+                  "\\(-0.1344\\)"
+                ],
+                [
+                  "5",
+                  "\\([2.5984, 3]\\)",
+                  "\\(2.605\\)",
+                  "\\(-0.0414\\)"
+                ],
+                [
+                  "6",
+                  "\\([2.605, 3]\\)",
+                  "\\(2.607\\)",
+                  "\\(-0.013\\)"
+                ],
+                [
+                  "7",
+                  "\\([2.607, 3]\\)",
+                  "\\(2.6076\\)",
+                  "\\(-0.0045\\) (stop)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Answer key numbering: the answers printed under \"3.\" (2.61, −1.93, 0.85, 0.36) belong to this Question 2."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Find the real roots of nonlinear equations correct to 2 decimal places using the Regula-Falsi method, by finding some interval of sign change if not specified. \\(x^2 + 4\\sin x = 0 ; [-2.2, -1]\\)",
+            "explanation": "Regula-Falsi on the given interval \\([-2.2, -1]\\) (negative numbers: use brackets).\nGiven \\(x^2 + 4\\sin x = 0\\); find the root to 2 decimal places (radian mode).\nPlan: secant formula, keep the sign-change part, stop at \\(|f(c)| < 0.005\\).",
+            "steps": [
+              "Given: \\(x^2 + 4\\sin x = 0\\) on the given interval \\([-2.2, -1]\\).\nTo find: the root correct to 2 decimal places.\nMethod: Regula-Falsi. Join \\((a, f(a))\\) and \\((b, f(b))\\) by a straight line; where it cuts the x-axis is the next estimate \\(c = \\frac{a f(b) - b f(a)}{f(b) - f(a)}\\). Keep the part where \\(f\\) still changes sign. Tolerance for 2 decimal places: \\(|f(c)| < 0.005\\); intermediate values to 4 decimals.",
+              "Check continuity and the sign change\n\\[f(x) = x^2 + 4\\sin x\\]\\[f(-2.2) = 4.84 + 4\\sin(-2.2)\\]\\[= 4.84 - 3.2340 = 1.6060\\]\\[f(-1) = 1 + 4\\sin(-1)\\]\\[= 1 - 3.3659 = -2.3659\\]So \\(f(-2.2)\\,f(-1) < 0\\).\nWhy: \\(f\\) is continuous everywhere (a polynomial plus a sine term), so by the LRT a root lies in \\([-2.2, -1]\\).",
+              "Iteration 1: \\(a = -2.2,\\ b = -1\\), \\(f(a) = 1.606,\\ f(b) = -2.3659\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(-2.2)(-2.3659) - (-1)(1.606)}{-2.3659 - (1.606)}\\]\\[= -1.7148\\]\\[f(-1.7148) = -1.0181 < 0\\]\nThe root lies in \\([-2.2, -1.7148]\\), so set \\(b = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(b)\\), so the sign change is now between \\(a\\) and \\(c\\).",
+              "Iteration 2: \\(a = -2.2,\\ b = -1.7148\\), \\(f(a) = 1.606,\\ f(b) = -1.0181\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(-2.2)(-1.0181) - (-1.7148)(1.606)}{-1.0181 - (1.606)}\\]\\[= -1.903\\]\\[f(-1.903) = -0.1599 < 0\\]\nThe root lies in \\([-2.2, -1.903]\\), so set \\(b = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(b)\\), so the sign change is now between \\(a\\) and \\(c\\).",
+              "Continue in the same way (table)\nThe table lists every iteration. Notice that the end \\(a\\) never moves: the curve bends the same way throughout, so the secant always cuts the axis on the same side of the root.\nWhy: in Regula-Falsi only the end whose sign matches \\(f(c)\\) is replaced.",
+              "Stop\n\\[|f(-1.9333)| = 0.0024 < 0.005\\]So \\(c = -1.9333\\) is accurate enough; to 2 decimal places \\(x \\approx -1.93\\).\nWhy: the 8.3.1 tolerance for \\(n = 2\\) is \\(|f(c)| < 0.005\\).",
+              "Check:\n\\[f(-1.935) = 0.0066\\]\\[f(-1.925) = -0.0461\\]Opposite signs, so the exact root lies between -1.935 and -1.925 and rounds to -1.93."
+            ],
+            "final_answer": "\\(x \\approx -1.93\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\([a, b]\\)",
+                "\\(c\\)",
+                "\\(f(c)\\)"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "\\([-2.2, -1]\\)",
+                  "\\(-1.7148\\)",
+                  "\\(-1.0181\\)"
+                ],
+                [
+                  "2",
+                  "\\([-2.2, -1.7148]\\)",
+                  "\\(-1.903\\)",
+                  "\\(-0.1599\\)"
+                ],
+                [
+                  "3",
+                  "\\([-2.2, -1.903]\\)",
+                  "\\(-1.9299\\)",
+                  "\\(-0.0203\\)"
+                ],
+                [
+                  "4",
+                  "\\([-2.2, -1.9299]\\)",
+                  "\\(-1.9333\\)",
+                  "\\(-0.0024\\) (stop)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) [printed as \\(xe_x = 2\\)] Find the real roots of nonlinear equations correct to 2 decimal places using the Regula-Falsi method, by finding some interval of sign change if not specified. \\(xe^{x} = 2\\)",
+            "explanation": "Regula-Falsi with no interval given, so first find one.\nGiven \\(xe^{x} = 2\\) (the book prints it as \\(xe_x = 2\\)); write \\(f(x) = xe^{x} - 2\\).\nPlan: try \\(x = 0, 1\\) for a sign change, then iterate until \\(|f(c)| < 0.005\\).",
+            "steps": [
+              "Given: \\(xe^{x} = 2\\) (no interval is given, so we first find one).\nTo find: the root correct to 2 decimal places.\nMethod: Regula-Falsi. Join \\((a, f(a))\\) and \\((b, f(b))\\) by a straight line; where it cuts the x-axis is the next estimate \\(c = \\frac{a f(b) - b f(a)}{f(b) - f(a)}\\). Keep the part where \\(f\\) still changes sign. Tolerance for 2 decimal places: \\(|f(c)| < 0.005\\); intermediate values to 4 decimals.",
+              "Write the equation as \\(f(x) = 0\\) and find a sign change\n\\[f(x) = xe^{x} - 2\\]\\[f(0) = 0 - 2 = -2\\]\\[f(1) = e - 2 = 0.7183\\]So \\(f(0)\\,f(1) < 0\\).\nWhy: \\(f\\) is continuous everywhere (a product of \\(x\\) and \\(e^{x}\\)), so by the LRT a root lies in \\([0, 1]\\).",
+              "Iteration 1: \\(a = 0,\\ b = 1\\), \\(f(a) = -2,\\ f(b) = 0.7183\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(0)(0.7183) - (1)(-2)}{0.7183 - (-2)}\\]\\[= 0.7358\\]\\[f(0.7358) = -0.4643 < 0\\]\nThe root lies in \\([0.7358, 1]\\), so set \\(a = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(a)\\), so the sign change is now between \\(c\\) and \\(b\\).",
+              "Iteration 2: \\(a = 0.7358,\\ b = 1\\), \\(f(a) = -0.4643,\\ f(b) = 0.7183\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(0.7358)(0.7183) - (1)(-0.4643)}{0.7183 - (-0.4643)}\\]\\[= 0.8395\\]\\[f(0.8395) = -0.0564 < 0\\]\nThe root lies in \\([0.8395, 1]\\), so set \\(a = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(a)\\), so the sign change is now between \\(c\\) and \\(b\\).",
+              "Continue in the same way (table)\nThe table lists every iteration. Notice that the end \\(b\\) never moves: the curve bends the same way throughout, so the secant always cuts the axis on the same side of the root.\nWhy: in Regula-Falsi only the end whose sign matches \\(f(c)\\) is replaced.",
+              "Stop\n\\[|f(0.8525)| = 0.0005 < 0.005\\]So \\(c = 0.8525\\) is accurate enough; to 2 decimal places \\(x \\approx 0.85\\).\nWhy: the 8.3.1 tolerance for \\(n = 2\\) is \\(|f(c)| < 0.005\\).",
+              "Check:\n\\[f(0.845) = -0.0329\\]\\[f(0.855) = 0.0104\\]Opposite signs, so the exact root lies between 0.845 and 0.855 and rounds to 0.85."
+            ],
+            "final_answer": "\\(x \\approx 0.85\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\([a, b]\\)",
+                "\\(c\\)",
+                "\\(f(c)\\)"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "\\([0, 1]\\)",
+                  "\\(0.7358\\)",
+                  "\\(-0.4643\\)"
+                ],
+                [
+                  "2",
+                  "\\([0.7358, 1]\\)",
+                  "\\(0.8395\\)",
+                  "\\(-0.0564\\)"
+                ],
+                [
+                  "3",
+                  "\\([0.8395, 1]\\)",
+                  "\\(0.8512\\)",
+                  "\\(-0.0061\\)"
+                ],
+                [
+                  "4",
+                  "\\([0.8512, 1]\\)",
+                  "\\(0.8525\\)",
+                  "\\(-0.0005\\) (stop)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the equation as \\(xe_x = 2\\) (with \\(x\\) as a subscript). It should be \\(xe^{x} = 2\\); the answer key's 0.85 confirms this."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iv)",
+            "prompt": "2 (iv) Find the real roots of nonlinear equations correct to 2 decimal places using the Regula-Falsi method, by finding some interval of sign change if not specified. \\(3x + \\sin x = e^{x}\\)",
+            "explanation": "Regula-Falsi with no interval given.\nGiven \\(3x + \\sin x = e^{x}\\); write \\(f(x) = 3x + \\sin x - e^{x}\\) and look for sign changes.\nPlan: root in \\([0, 1]\\) first, then the second sign change in \\([1, 2]\\).",
+            "steps": [
+              "Given: \\(3x + \\sin x = e^{x}\\) (no interval is given, so we first find one).\nTo find: the root correct to 2 decimal places.\nMethod: Regula-Falsi. Join \\((a, f(a))\\) and \\((b, f(b))\\) by a straight line; where it cuts the x-axis is the next estimate \\(c = \\frac{a f(b) - b f(a)}{f(b) - f(a)}\\). Keep the part where \\(f\\) still changes sign. Tolerance for 2 decimal places: \\(|f(c)| < 0.005\\); intermediate values to 4 decimals.",
+              "Write the equation as \\(f(x) = 0\\) and find a sign change\n\\[f(x) = 3x + \\sin x - e^{x}\\]\\[f(0) = 0 + 0 - 1 = -1\\]\\[f(1) = 3 + 0.8415 - 2.7183\\]\\[= 1.1232\\]So \\(f(0)\\,f(1) < 0\\).\nWhy: \\(f\\) is continuous everywhere (linear, sine and exponential terms), so by the LRT a root lies in \\([0, 1]\\).",
+              "Iteration 1: \\(a = 0,\\ b = 1\\), \\(f(a) = -1,\\ f(b) = 1.1232\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(0)(1.1232) - (1)(-1)}{1.1232 - (-1)}\\]\\[= 0.471\\]\\[f(0.471) = 0.2652 > 0\\]\nThe root lies in \\([0, 0.471]\\), so set \\(b = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(b)\\), so the sign change is now between \\(a\\) and \\(c\\).",
+              "Iteration 2: \\(a = 0,\\ b = 0.471\\), \\(f(a) = -1,\\ f(b) = 0.2652\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(0)(0.2652) - (0.471)(-1)}{0.2652 - (-1)}\\]\\[= 0.3723\\]\\[f(0.3723) = 0.0296 > 0\\]\nThe root lies in \\([0, 0.3723]\\), so set \\(b = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(b)\\), so the sign change is now between \\(a\\) and \\(c\\).",
+              "Continue in the same way (table)\nThe table lists every iteration. Notice that the end \\(a\\) never moves: the curve bends the same way throughout, so the secant always cuts the axis on the same side of the root.\nWhy: in Regula-Falsi only the end whose sign matches \\(f(c)\\) is replaced.",
+              "Stop\n\\[|f(0.3616)| = 0.0029 < 0.005\\]So \\(c = 0.3616\\) is accurate enough; to 2 decimal places \\(x \\approx 0.36\\).\nWhy: the 8.3.1 tolerance for \\(n = 2\\) is \\(|f(c)| < 0.005\\).",
+              "Second root\n\\[f(2) = 6 + 0.9093 - 7.3891 = -0.4798\\]So \\(f\\) changes sign again on \\([1, 2]\\). Regula-Falsi there (end \\(b = 2\\) stays fixed):\n\\[c_1 = 1.7007,\\ f = 0.6159\\]\\[c_2 = 1.8689,\\ f = 0.0814\\]\\[c_3 = 1.8879,\\ f = 0.0084\\]\\[c_4 = 1.8898,\\ f = 0.0009\\]Why: \\(|f(1.8898)| = 0.0009 < 0.005\\), so the second root is \\(x \\approx 1.89\\); \\(f(1.885) > 0 > f(1.895)\\) confirms it.",
+              "Check:\n\\[f(0.355) = -0.0136\\]\\[f(0.365) = 0.0114\\]Opposite signs, so the exact root lies between 0.355 and 0.365 and rounds to 0.36."
+            ],
+            "final_answer": "\\(x \\approx 0.36\\) (and the second root \\(x \\approx 1.89\\))",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\([a, b]\\)",
+                "\\(c\\)",
+                "\\(f(c)\\)"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "\\([0, 1]\\)",
+                  "\\(0.471\\)",
+                  "\\(0.2652\\)"
+                ],
+                [
+                  "2",
+                  "\\([0, 0.471]\\)",
+                  "\\(0.3723\\)",
+                  "\\(0.0296\\)"
+                ],
+                [
+                  "3",
+                  "\\([0, 0.3723]\\)",
+                  "\\(0.3616\\)",
+                  "\\(0.0029\\) (stop)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key gives only 0.36. The equation has a second real root: \\(f(1) > 0\\) and \\(f(2) = -0.4798 < 0\\). Regula-Falsi on \\([1, 2]\\) gives 1.7007, 1.8689, 1.8879, 1.8898 with \\(|f(1.8898)| = 0.0009 < 0.005\\), so the second root is \\(x \\approx 1.89\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

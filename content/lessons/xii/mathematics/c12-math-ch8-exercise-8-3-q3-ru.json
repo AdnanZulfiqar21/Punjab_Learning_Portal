@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-3-Q3-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-3-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 250,
+          "pdf_to": 250,
+          "note": "Exercise 8.3 (book p. 248): Trapezium Rule, Q1-Q10"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.3 (book p. 307)"
+        }
+      ],
+      "variant_of": "C12-MATH-CH8-EXERCISE-8-3-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. Use Trapezoidal Rule to approximate the value of the definite integral \\(\\int_{1}^{7} \\ln(x)\\,dx\\) taking \\(n = 6\\).",
+            "explanation": "Sab se pehle dekhte hain ke yeh kis qisam ka sawal hai: definite integral ki value Trapezium Rule se approximately nikalni hai, seedha integration nahi karna.\nDiya kya hai? Function \\(f(x) = \\ln(x)\\), interval \\([1, 7]\\), aur \\(n = 6\\) diya hai, to \\(h = \\frac{b-a}{n}\\) nikalega.\nFind kya karna hai? Integral ki approximate value, chaar decimal places tak.\nRule kaunsa aur kyun? Trapezium Rule, kyunke sawal yahi maangta hai: area ko barabar chaurai ki pattiyon (trapeziums) mein baant kar jama karna.\nPlan: h ya n, phir points ki list, phir har point par function ki value, phir beech wali values ka jama, aur aakhir mein formula aur tasdeeq.",
+            "steps": [
+              "Diya gaya: \\(f(x) = \\ln(x)\\), \\(a = 1\\), \\(b = 7\\), \\(n = 6\\).\nMaloom karna: \\(\\int_{1}^{7} \\ln(x)\\,dx\\) ki approximate value.\nTareeqa: sawal khud Trapezium Rule maang raha hai, is liye wohi lagayenge. Yahan n diya hua hai, is liye pehle h nikalenge. Phir points aur un par function ki values (chaar decimal tak) nikal kar formula \\(\\frac{h}{2}[\\text{pehli} + 2(\\text{beech wali}) + \\text{aakhri}]\\) mein rakhenge.",
+              "Continuity\n\\(\\ln x\\) sirf \\(x > 0\\) par defined aur continuous hai. Hamara interval \\([1, 7]\\) poora \\(x > 0\\) ke andar hai, is liye koi masla nahi.\nKyun: Trapezium Rule continuous function ke liye bana hai; agar graph beech mein toot jaye to trapeziums us hisse ko sahi nahi dhaanp sakte.",
+              "Step size aur points\n\\[h = \\dfrac{b-a}{n} = \\dfrac{7-1}{6} = 1\\]\nPoints \\(x_{i} = a + ih\\): \\(1, 2, 3, 4, 5, 6, 7\\)\nKyun: interval ko 6 barabar hisson mein baanta, to har hisse ki chaurai \\(h\\) hai. 6 subintervals ke 7 points bante hain: pehla point \\(a\\) aur aakhri \\(b\\), baqi beech wale.",
+              "Function values (4 decimal places)\n\\[f(1) = \\ln 1 = 0.0000\\]\n\\[f(2) = \\ln 2 = 0.6931\\]\n\\[f(3) = \\ln 3 = 1.0986\\]\n\\[f(4) = \\ln 4 = 1.3863\\]\n\\[f(5) = \\ln 5 = 1.6094\\]\n\\[f(6) = \\ln 6 = 1.7918\\]\n\\[f(7) = \\ln 7 = 1.9459\\]\nKyun: har point ko function mein rakha. Calculator ka ln button istemal karein (natural log, base \\(e\\)), log (base 10) wala nahi.\nDhyan dein: \\(\\ln 1 = 0\\), is liye pehli value zero hai; aur \\(\\ln 7\\) aakhri value hai, jo sirf ek dafa aayegi.\nNeeche jawab ke saath di gayi table mein yahi values un ke weights (1 ya 2) ke saath hain.",
+              "Beech wali values jama karein\n\\[S = f(x_{1}) + \\dots + f(x_{5})\\]\n\\[= 0.6931 + 1.0986 + 1.3863\\]\n\\[+ 1.6094 + 1.7918\\]\n\\[= 6.5792\\]\nKyun: yeh 5 beech wali values har ek do saath wale trapeziums ki saanjhi deewar hain, is liye formula mein in ka jama do dafa (double) aayega. Pehle in ka jama alag nikal lena hisaab ko saaf aur check karne ke qabil banata hai.",
+              "Trapezium Rule apply karein\n\\[\\int_{1}^{7} \\ln(x)\\,dx\\]\n\\[\\approx \\dfrac{h}{2}\\big[f(x_{0}) + 2S + f(x_{6})\\big]\\]\n\\[= 0.5\\big[0.0000 + 2(6.5792)\\]\n\\[+ 1.9459\\big]\\]\n\\[= 0.5(15.1043)\\]\n\\[= 7.55215 \\approx 7.5522\\]\nKyun: \\(\\frac{h}{2} = 0.5\\). Kinaron wali do values ek ek dafa aayin aur beech wali values ka jama do dafa; phir poore bracket ko \\(\\frac{h}{2}\\) se zarb diya. Round sirf aakhri jawab ko kiya, beech mein nahi, taake ghalti jama na ho.",
+              "Tasdeeq:\n\\[\\int_{1}^{7} \\ln x\\,dx = \\big[x\\ln x - x\\big]_{1}^{7}\\]\n\\[= 7\\ln 7 - 6 \\approx 7.6214\\]\nKyun: \\(\\ln x\\) ka antiderivative integration by parts se \\(x\\ln x - x\\) aata hai. Hamara jawab 7.5522 is se thora kam hai, jo theek hai: \\(\\ln x\\) neeche ki taraf mudta (concave down) hai, is liye trapezium ki chhat curve ke neeche rehti hai aur area ka thora hissa chhoot jata hai."
+            ],
+            "final_answer": "\\(\\int_{1}^{7} \\ln(x)\\,dx \\approx 7.5522\\)",
+            "answer_table": {
+              "header": [
+                "i",
+                "\\(x_{i}\\)",
+                "\\(f(x_{i})\\)",
+                "Weight"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(1\\)",
+                  "\\(0.0000\\)",
+                  "1"
+                ],
+                [
+                  "1",
+                  "\\(2\\)",
+                  "\\(0.6931\\)",
+                  "2"
+                ],
+                [
+                  "2",
+                  "\\(3\\)",
+                  "\\(1.0986\\)",
+                  "2"
+                ],
+                [
+                  "3",
+                  "\\(4\\)",
+                  "\\(1.3863\\)",
+                  "2"
+                ],
+                [
+                  "4",
+                  "\\(5\\)",
+                  "\\(1.6094\\)",
+                  "2"
+                ],
+                [
+                  "5",
+                  "\\(6\\)",
+                  "\\(1.7918\\)",
+                  "2"
+                ],
+                [
+                  "6",
+                  "\\(7\\)",
+                  "\\(1.9459\\)",
+                  "1"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

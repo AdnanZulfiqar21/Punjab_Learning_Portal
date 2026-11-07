@@ -1,0 +1,345 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-2-Q3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-2-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 246,
+          "pdf_to": 246,
+          "note": "Exercise 8.2 Q3 (Newton-Raphson) on book p. 244; answers p. 307 (printed under '4.')"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.2 (book p. 307)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Find the real roots of nonlinear equations using the Newton-Raphson method. \\(x^3 + x^2 = 3(x + 1)\\) near \\(x = 1\\) accurate to 2 decimal places.",
+            "explanation": "A Newton-Raphson question with a starting point near \\(x = 1\\).\nBring all terms to one side: \\(f(x) = x^3 + x^2 - 3x - 3\\); we need \\(f'(x)\\) too.\nPlan: iterate from \\(x_0 = 1\\) until \\(|f(x_n)| < 0.005\\); the factorised form gives an exact check.",
+            "steps": [
+              "Given: \\(x^3 + x^2 = 3(x + 1)\\), near \\(x = 1\\) accurate to 2 decimal places.\nTo find: the real root to 2 decimal places.\nMethod: Newton-Raphson. Write the equation as \\(f(x) = 0\\), find \\(f'(x)\\), then use \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\) until \\(|f(x_n)| < 0.005\\). Intermediate values carry 4 decimals.",
+              "Prepare the function and its derivative\n\\[f(x) = x^3 + x^2 - 3x - 3\\]\\[f'(x) = 3x^2 + 2x - 3\\]Why: Newton-Raphson needs the equation in the form \\(f(x) = 0\\) and the slope \\(f'(x)\\) of the tangent.",
+              "Starting value\n\\[x_0 = 1\\]\\[f(1) = 1 + 1 - 3 - 3 = -4\\]\\[f(2) = 8 + 4 - 6 - 3 = 3\\]Why: the question says near \\(x = 1\\); the sign change on \\([1, 2]\\) shows a root there. \\(f'(1) = 2\\) is small, so the first tangent is shallow and \\(x_1\\) jumps to 3; the next steps come back to the root.",
+              "Iteration 1: \\(x_0 = 1\\)\n\\[f(1) = -4\\]\\[f'(1) = 2\\]\\[x_{1} = 1 - \\dfrac{-4}{2}\\]\\[= 3\\]\nWhy: the tangent at \\((x_0, f(x_0))\\) cuts the x-axis at \\(x_1\\); \\(|f(1)| = 4\\) is not yet below 0.005, so we go on.",
+              "Iteration 2: \\(x_1 = 3\\)\n\\[f(3) = 24\\]\\[f'(3) = 30\\]\\[x_{2} = 3 - \\dfrac{24}{30}\\]\\[= 2.2\\]\nWhy: the tangent at \\((x_1, f(x_1))\\) cuts the x-axis at \\(x_2\\); \\(|f(3)| = 24\\) is not yet below 0.005, so we go on.",
+              "Continue (table)\nThe table lists \\(x_n\\), \\(f(x_n)\\) and \\(f'(x_n)\\) for every step; each new \\(x_{n+1}\\) is the next row's \\(x_n\\).\nWhy: the same formula is applied again and again.",
+              "Stop\n\\[|f(1.7321)| \\approx 0.0005 < 0.005\\]So \\(x \\approx 1.73\\) (to 2 decimal places).\nWhy: the tolerance of 8.3.1 for \\(n = 2\\) is met.",
+              "Check:\n\\[f(1.725) = -0.0664\\]\\[f(1.735) = 0.028\\]Opposite signs, so the exact root lies between 1.725 and 1.735 and rounds to 1.73.\nExact check: \\(x^3 + x^2 - 3x - 3 = (x + 1)(x^2 - 3)\\), so the positive root is \\(\\sqrt{3} = 1.7321\\)."
+            ],
+            "final_answer": "\\(x \\approx 1.73\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\(x_n\\)",
+                "\\(f(x_n)\\)",
+                "\\(f'(x_n)\\)"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(1\\)",
+                  "\\(-4\\)",
+                  "\\(2\\)"
+                ],
+                [
+                  "1",
+                  "\\(3\\)",
+                  "\\(24\\)",
+                  "\\(30\\)"
+                ],
+                [
+                  "2",
+                  "\\(2.2\\)",
+                  "\\(5.888\\)",
+                  "\\(15.92\\)"
+                ],
+                [
+                  "3",
+                  "\\(1.8302\\)",
+                  "\\(0.9895\\)",
+                  "\\(10.7093\\)"
+                ],
+                [
+                  "4",
+                  "\\(1.7378\\)",
+                  "\\(0.0546\\)",
+                  "\\(9.5354\\)"
+                ],
+                [
+                  "5",
+                  "\\(1.7321\\)",
+                  "\\(0.0005\\)",
+                  "\\(9.4647\\)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Answer key numbering: the answers printed under \"4.\" (1.73, 2.153, 2.0946, 0.361, 4.4934) belong to this Question 3."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Find the real roots of nonlinear equations using the Newton-Raphson method. \\(e^{x} = 4x\\) near \\(x = 2\\) accurate to 3 decimal places.",
+            "explanation": "Newton-Raphson near \\(x = 2\\), 3 decimal places.\nWrite \\(f(x) = e^{x} - 4x\\), so \\(f'(x) = e^{x} - 4\\).\nPlan: iterate from \\(x_0 = 2\\) until \\(|f(x_n)| < 0.0005\\), then check.",
+            "steps": [
+              "Given: \\(e^{x} = 4x\\), near \\(x = 2\\) accurate to 3 decimal places.\nTo find: the real root to 3 decimal places.\nMethod: Newton-Raphson. Write the equation as \\(f(x) = 0\\), find \\(f'(x)\\), then use \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\) until \\(|f(x_n)| < 0.0005\\). Intermediate values carry 4 decimals.",
+              "Prepare the function and its derivative\n\\[f(x) = e^{x} - 4x\\]\\[f'(x) = e^{x} - 4\\]Why: Newton-Raphson needs the equation in the form \\(f(x) = 0\\) and the slope \\(f'(x)\\) of the tangent.",
+              "Starting value\n\\[x_0 = 2\\]\\[f(2) = 7.3891 - 8 = -0.6109\\]\\[f(3) = 20.0855 - 12 = 8.0855\\]Why: the question says near \\(x = 2\\); the sign change on \\([2, 3]\\) confirms a root just above 2.",
+              "Iteration 1: \\(x_0 = 2\\)\n\\[f(2) = -0.6109\\]\\[f'(2) = 3.3891\\]\\[x_{1} = 2 - \\dfrac{-0.6109}{3.3891}\\]\\[= 2.1803\\]\nWhy: the tangent at \\((x_0, f(x_0))\\) cuts the x-axis at \\(x_1\\); \\(|f(2)| = 0.6109\\) is not yet below 0.0005, so we go on.",
+              "Iteration 2: \\(x_1 = 2.1803\\)\n\\[f(2.1803) = 0.1278\\]\\[f'(2.1803) = 4.849\\]\\[x_{2} = 2.1803 - \\dfrac{0.1278}{4.849}\\]\\[= 2.1539\\]\nWhy: the tangent at \\((x_1, f(x_1))\\) cuts the x-axis at \\(x_2\\); \\(|f(2.1803)| = 0.1278\\) is not yet below 0.0005, so we go on.",
+              "Continue (table)\nThe table lists \\(x_n\\), \\(f(x_n)\\) and \\(f'(x_n)\\) for every step; each new \\(x_{n+1}\\) is the next row's \\(x_n\\).\nWhy: the same formula is applied again and again.",
+              "Stop\n\\[|f(2.1533)| \\approx 0.00004 < 0.0005\\]So \\(x \\approx 2.153\\) (to 3 decimal places).\nWhy: the tolerance of 8.3.1 for \\(n = 3\\) is met.",
+              "Check:\n\\[f(2.1525) = -0.0037\\]\\[f(2.1535) = 0.001\\]Opposite signs, so the exact root lies between 2.1525 and 2.1535 and rounds to 2.153. (The equation has a second root near 0.357; the question asks only for the one near 2.)"
+            ],
+            "final_answer": "\\(x \\approx 2.153\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\(x_n\\)",
+                "\\(f(x_n)\\)",
+                "\\(f'(x_n)\\)"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(2\\)",
+                  "\\(-0.6109\\)",
+                  "\\(3.3891\\)"
+                ],
+                [
+                  "1",
+                  "\\(2.1803\\)",
+                  "\\(0.1278\\)",
+                  "\\(4.849\\)"
+                ],
+                [
+                  "2",
+                  "\\(2.1539\\)",
+                  "\\(0.0028\\)",
+                  "\\(4.6184\\)"
+                ],
+                [
+                  "3",
+                  "\\(2.1533\\)",
+                  "\\(0\\)",
+                  "\\(4.6132\\)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) Find the real roots of nonlinear equations using the Newton-Raphson method. \\(x^3 + 2x - 5 = 0\\) accurate to 4 decimal places.",
+            "explanation": "Newton-Raphson, 4 decimal places, no starting value given.\n\\(f(x) = x^3 + 2x - 5\\), \\(f'(x) = 3x^2 + 2\\); find a sign change to choose \\(x_0\\).\nPlan: iterate until \\(|f(x_n)| < 0.00005\\); compare with the answer key, which solves a different equation.",
+            "steps": [
+              "Given: \\(x^3 + 2x - 5 = 0\\), accurate to 4 decimal places.\nTo find: the real root to 4 decimal places.\nMethod: Newton-Raphson. Write the equation as \\(f(x) = 0\\), find \\(f'(x)\\), then use \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\) until \\(|f(x_n)| < 0.00005\\). Intermediate values carry 5 decimals.",
+              "Prepare the function and its derivative\n\\[f(x) = x^3 + 2x - 5\\]\\[f'(x) = 3x^2 + 2\\]Why: Newton-Raphson needs the equation in the form \\(f(x) = 0\\) and the slope \\(f'(x)\\) of the tangent.",
+              "Starting value\n\\[f(1) = 1 + 2 - 5 = -2\\]\\[f(2) = 8 + 4 - 5 = 7\\]\\[x_0 = 1.5\\]Why: no starting value is given, so we take the midpoint of the sign-change interval \\([1, 2]\\). Since \\(f'(x) = 3x^2 + 2 > 0\\) for all \\(x\\), \\(f\\) is increasing and this is the only real root.",
+              "Iteration 1: \\(x_0 = 1.5\\)\n\\[f(1.5) = 1.375\\]\\[f'(1.5) = 8.75\\]\\[x_{1} = 1.5 - \\dfrac{1.375}{8.75}\\]\\[= 1.34286\\]\nWhy: the tangent at \\((x_0, f(x_0))\\) cuts the x-axis at \\(x_1\\); \\(|f(1.5)| = 1.375\\) is not yet below 0.00005, so we go on.",
+              "Iteration 2: \\(x_1 = 1.34286\\)\n\\[f(1.34286) = 0.10726\\]\\[f'(1.34286) = 7.40982\\]\\[x_{2} = 1.34286 - \\dfrac{0.10726}{7.40982}\\]\\[= 1.32838\\]\nWhy: the tangent at \\((x_1, f(x_1))\\) cuts the x-axis at \\(x_2\\); \\(|f(1.34286)| = 0.10726\\) is not yet below 0.00005, so we go on.",
+              "Continue (table)\nThe table lists \\(x_n\\), \\(f(x_n)\\) and \\(f'(x_n)\\) for every step; each new \\(x_{n+1}\\) is the next row's \\(x_n\\).\nWhy: the same formula is applied again and again.",
+              "Stop\n\\[|f(1.32827)| \\approx 0.00001 < 0.00005\\]So \\(x \\approx 1.3283\\) (to 4 decimal places).\nWhy: the tolerance of 8.3.1 for \\(n = 4\\) is met.",
+              "Check:\n\\[f(1.32825) = -0.0001\\]\\[f(1.32835) = 0.0006\\]Opposite signs, so the exact root lies between 1.32825 and 1.32835 and rounds to 1.3283."
+            ],
+            "final_answer": "\\(x \\approx 1.3283\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\(x_n\\)",
+                "\\(f(x_n)\\)",
+                "\\(f'(x_n)\\)"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(1.5\\)",
+                  "\\(1.375\\)",
+                  "\\(8.75\\)"
+                ],
+                [
+                  "1",
+                  "\\(1.34286\\)",
+                  "\\(0.10726\\)",
+                  "\\(7.40982\\)"
+                ],
+                [
+                  "2",
+                  "\\(1.32838\\)",
+                  "\\(0.00081\\)",
+                  "\\(7.29378\\)"
+                ],
+                [
+                  "3",
+                  "\\(1.32827\\)",
+                  "\\(0.00001\\)",
+                  "\\(7.2929\\)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key gives 2.0946. That cannot be a root of \\(x^3 + 2x - 5 = 0\\): \\(f(2.0946) \\approx 8.38\\). 2.0946 is the root of the different equation \\(x^3 - 2x - 5 = 0\\) (from \\(x_0 = 2\\): 2.1, 2.09457, 2.09455). For the equation as printed, the root is \\(x \\approx 1.3283\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iv)",
+            "prompt": "3 (iv) Find the real roots of nonlinear equations using the Newton-Raphson method. \\(3x + \\sin x = e^{x}\\) accurate to 3 decimal places.",
+            "explanation": "Newton-Raphson, 3 decimal places, no starting value given.\n\\(f(x) = 3x + \\sin x - e^{x}\\), \\(f'(x) = 3 + \\cos x - e^{x}\\) (radian mode).\nPlan: root in \\([0, 1]\\) from \\(x_0 = 0.5\\); the second sign change in \\([1, 2]\\) gives a second root.",
+            "steps": [
+              "Given: \\(3x + \\sin x = e^{x}\\), accurate to 3 decimal places.\nTo find: the real root to 3 decimal places.\nMethod: Newton-Raphson. Write the equation as \\(f(x) = 0\\), find \\(f'(x)\\), then use \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\) until \\(|f(x_n)| < 0.0005\\). Intermediate values carry 4 decimals.",
+              "Prepare the function and its derivative\n\\[f(x) = 3x + \\sin x - e^{x}\\]\\[f'(x) = 3 + \\cos x - e^{x}\\]Why: Newton-Raphson needs the equation in the form \\(f(x) = 0\\) and the slope \\(f'(x)\\) of the tangent.",
+              "Starting value\n\\[f(0) = 0 + 0 - 1 = -1\\]\\[f(1) = 3 + 0.8415 - 2.7183 = 1.1232\\]\\[x_0 = 0.5\\]Why: no starting value is given; the sign change on \\([0, 1]\\) (see Question 2(iv)) gives the midpoint 0.5. Radian mode.",
+              "Iteration 1: \\(x_0 = 0.5\\)\n\\[f(0.5) = 0.3307\\]\\[f'(0.5) = 2.2289\\]\\[x_{1} = 0.5 - \\dfrac{0.3307}{2.2289}\\]\\[= 0.3516\\]\nWhy: the tangent at \\((x_0, f(x_0))\\) cuts the x-axis at \\(x_1\\); \\(|f(0.5)| = 0.3307\\) is not yet below 0.0005, so we go on.",
+              "Iteration 2: \\(x_1 = 0.3516\\)\n\\[f(0.3516) = -0.0221\\]\\[f'(0.3516) = 2.5175\\]\\[x_{2} = 0.3516 - \\dfrac{-0.0221}{2.5175}\\]\\[= 0.3604\\]\nWhy: the tangent at \\((x_1, f(x_1))\\) cuts the x-axis at \\(x_2\\); \\(|f(0.3516)| = 0.0221\\) is not yet below 0.0005, so we go on.",
+              "Continue (table)\nThe table lists \\(x_n\\), \\(f(x_n)\\) and \\(f'(x_n)\\) for every step; each new \\(x_{n+1}\\) is the next row's \\(x_n\\).\nWhy: the same formula is applied again and again.",
+              "Stop\n\\[|f(0.3604)| \\approx 0.0001 < 0.0005\\]So \\(x \\approx 0.360\\) (to 3 decimal places).\nWhy: the tolerance of 8.3.1 for \\(n = 3\\) is met.",
+              "Check:\n\\[f(0.3595) = -0.0023\\]\\[f(0.3605) = 0.0002\\]Opposite signs, so the exact root lies between 0.3595 and 0.3605 and rounds to 0.360.\nSecond root: \\(f(2) = -0.4798 < 0\\), so there is another sign change on \\([1, 2]\\). From \\(x_0 = 2\\): \\(x_1 = 1.9001\\), \\(x_2 = 1.8901\\), \\(|f(1.8901)| \\approx 0.0003 < 0.0005\\), and \\(f(1.8895) > 0 > f(1.8905)\\). So the second root is \\(x \\approx 1.890\\)."
+            ],
+            "final_answer": "\\(x \\approx 0.360\\) (and the second root \\(x \\approx 1.890\\))",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\(x_n\\)",
+                "\\(f(x_n)\\)",
+                "\\(f'(x_n)\\)"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(0.5\\)",
+                  "\\(0.3307\\)",
+                  "\\(2.2289\\)"
+                ],
+                [
+                  "1",
+                  "\\(0.3516\\)",
+                  "\\(-0.0221\\)",
+                  "\\(2.5175\\)"
+                ],
+                [
+                  "2",
+                  "\\(0.3604\\)",
+                  "\\(-0.0001\\)",
+                  "\\(2.5019\\)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key gives 0.361. The root is 0.36042..., which is 0.360 to 3 decimal places (\\(f(0.361) = 0.0014\\) is not within 0.0005). The key also leaves out the second real root \\(x \\approx 1.890\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(v)",
+            "prompt": "3 (v) Find the real roots of nonlinear equations using the Newton-Raphson method. \\(\\tan(x) = x\\) around \\(x_0 = 4.3\\) accurate to 4 decimal places.",
+            "explanation": "Newton-Raphson for \\(\\tan x = x\\) from \\(x_0 = 4.3\\), 4 decimal places.\n\\(f(x) = \\tan x - x\\), \\(f'(x) = \\sec^2 x - 1 = \\tan^2 x\\); watch the asymptote at \\(\\frac{3\\pi}{2}\\).\nPlan: iterate until \\(|f(x_n)| < 0.00005\\), keeping 5 decimals.",
+            "steps": [
+              "Given: \\(\\tan(x) = x\\), around \\(x_0 = 4.3\\) accurate to 4 decimal places.\nTo find: the real root to 4 decimal places.\nMethod: Newton-Raphson. Write the equation as \\(f(x) = 0\\), find \\(f'(x)\\), then use \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\) until \\(|f(x_n)| < 0.00005\\). Intermediate values carry 5 decimals.",
+              "Prepare the function and its derivative\n\\[f(x) = \\tan x - x\\]\\[f'(x) = \\sec^{2}x - 1 = \\tan^{2}x\\]Why: Newton-Raphson needs the equation in the form \\(f(x) = 0\\) and the slope \\(f'(x)\\) of the tangent.",
+              "Branch and starting value\n\\[x_0 = 4.3\\]\\[f(4.4) = 3.0963 - 4.4 = -1.3037\\]\\[f(4.6) = 8.8602 - 4.6 = 4.2602\\]Why: \\(\\tan x\\) is continuous on the branch \\((\\frac{\\pi}{2}, \\frac{3\\pi}{2}) = (1.5708, 4.7124)\\), which contains 4.3, and the sign change on \\([4.4, 4.6]\\) shows the root is there. Radian mode, 5 decimals.",
+              "Iteration 1: \\(x_0 = 4.3\\)\n\\[f(4.3) = -2.01415\\]\\[f'(4.3) = 5.2251\\]\\[x_{1} = 4.3 - \\dfrac{-2.01415}{5.2251}\\]\\[= 4.68548\\]\nWhy: the tangent at \\((x_0, f(x_0))\\) cuts the x-axis at \\(x_1\\); \\(|f(4.3)| = 2.01415\\) is not yet below 0.00005, so we go on.",
+              "Iteration 2: \\(x_1 = 4.68548\\)\n\\[f(4.68548) = 32.46786\\]\\[f'(4.68548) = 1380.37102\\]\\[x_{2} = 4.68548 - \\dfrac{32.46786}{1380.37102}\\]\\[= 4.66196\\]\nWhy: the tangent at \\((x_1, f(x_1))\\) cuts the x-axis at \\(x_2\\); \\(|f(4.68548)| = 32.46786\\) is not yet below 0.00005, so we go on.",
+              "Continue (table)\nThe table lists \\(x_n\\), \\(f(x_n)\\) and \\(f'(x_n)\\) for every step; each new \\(x_{n+1}\\) is the next row's \\(x_n\\).\nWhy: the same formula is applied again and again.",
+              "Stop\n\\[|f(4.49341)| \\approx 0.00001 < 0.00005\\]So \\(x \\approx 4.4934\\) (to 4 decimal places).\nWhy: the tolerance of 8.3.1 for \\(n = 4\\) is met.",
+              "Check:\n\\[f(4.49335) = -0.0012\\]\\[f(4.49345) = 0.0008\\]Opposite signs, so the exact root lies between 4.49335 and 4.49345 and rounds to 4.4934.\nNote: the first step lands at 4.68548, close to the asymptote 4.7124, where \\(\\tan x\\) is huge; it is still on the same branch, so the next steps come down to the root. A faster form is \\(g(x) = x\\cos x - \\sin x = 0\\) (multiply by \\(\\cos x\\)), with \\(g'(x) = -x\\sin x\\): from 4.3 it gives 4.50492, 4.49344, 4.49341 in three steps."
+            ],
+            "final_answer": "\\(x \\approx 4.4934\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\(x_n\\)",
+                "\\(f(x_n)\\)",
+                "\\(f'(x_n)\\)"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(4.3\\)",
+                  "\\(-2.01415\\)",
+                  "\\(5.2251\\)"
+                ],
+                [
+                  "1",
+                  "\\(4.68548\\)",
+                  "\\(32.46786\\)",
+                  "\\(1380.37102\\)"
+                ],
+                [
+                  "2",
+                  "\\(4.66196\\)",
+                  "\\(15.1511\\)",
+                  "\\(392.55715\\)"
+                ],
+                [
+                  "3",
+                  "\\(4.62336\\)",
+                  "\\(6.57925\\)",
+                  "\\(125.49837\\)"
+                ],
+                [
+                  "4",
+                  "\\(4.57094\\)",
+                  "\\(2.45153\\)",
+                  "\\(49.31514\\)"
+                ],
+                [
+                  "5",
+                  "\\(4.52123\\)",
+                  "\\(0.64614\\)",
+                  "\\(26.70174\\)"
+                ],
+                [
+                  "6",
+                  "\\(4.49703\\)",
+                  "\\(0.07437\\)",
+                  "\\(20.8977\\)"
+                ],
+                [
+                  "7",
+                  "\\(4.49347\\)",
+                  "\\(0.00122\\)",
+                  "\\(20.20226\\)"
+                ],
+                [
+                  "8",
+                  "\\(4.49341\\)",
+                  "\\(0.00001\\)",
+                  "\\(20.19083\\)"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

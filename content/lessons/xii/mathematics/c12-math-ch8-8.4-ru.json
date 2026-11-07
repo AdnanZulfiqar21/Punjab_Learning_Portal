@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.4-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.4",
+      "title": "8.4 Estimating the Value of a Definite Integral (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 246,
+          "pdf_to": 246,
+          "note": "Book p. 244: 8.4 Estimating the Value of a Definite Integral, introduction before 8.4.1"
+        }
+      ],
+      "variant_of": "C12-MATH-CH8-8.4",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab tak hum ne is unit mein nonlinear equations ke roots approximately nikalna seekha. Ab hum isi soch ko ek naye kaam par lagate hain: definite integral ki value nikalna. Bohat se practical masail (masalan engineering, physics aur statistics ke sawal) mein asal maqsad kisi function ka ek diye gaye interval par definite integral nikalna hota hai. Lekin nonlinear equations ki tarah definite integrals bhi hamesha analytically (yani formula aur integration ke qawaid se) aasani se hal nahi hote, aur kuch soorton mein standard integration techniques se exact jawab nikalna mumkin hi nahi hota."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal ke taur par yeh do integrals dekhiye:\n\\[\\text{(i)}\\ \\int_{0}^{1} e^{-x^{2}}\\,dx\\]\n\\[\\text{(ii)}\\ \\int_{0}^{\\pi} \\sin(x^{2})\\,dx\\]\nIn ko elementary methods (woh aam tareeqe jo hum ne integration mein seekhe) se aasani se evaluate nahi kiya ja sakta. Aisi soorat mein numerical methods istemal hote hain, jo definite integral ki value munasib accuracy (durustagi) ke saath estimate kar dete hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is kaam ke liye ek bohat ahem numerical method Trapezium Rule hai. Is section mein hum yeh rule khud bana kar (derive kar ke) phir sawalon par apply karenge."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Pehle yaad karein ke definite integral aam taur par kaise nikalta hai. Fundamental Theorem of Calculus kehta hai: \\(\\int_{a}^{b} f(x)\\,dx = F(b) - F(a)\\), jahan \\(F\\) ek antiderivative (aisa function jiska derivative \\(f\\) ho) hai, yani \\(F'(x) = f(x)\\). Yeh tareeqa sirf tab chalta hai jab \\(F\\) ko kisi formula ki shakal mein likh saken. \\(e^{-x^{2}}\\) aur \\(\\sin(x^{2})\\) ke baare mein mathematicians ne saabit kar diya hai ke in ka antiderivative aam (elementary) functions, yani polynomials, roots, exponentials, logarithms aur trigonometric functions, ki madad se likha hi nahi ja sakta. Matlab masla hamari mehnat ka nahi; formula mojood hi nahi, is liye \"F(b) - F(a)\" mein rakhne ke liye kuch hai hi nahi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Lekin dhyan rahe: integral khud mojood hai. Agar function positive aur continuous ho to \\(\\int_{a}^{b} f(x)\\,dx\\) curve aur \\(x\\)-axis ke darmiyan \\(x = a\\) se \\(x = b\\) tak ka area hai, aur har area ek pakka number hota hai. Numerical method yahi number approximately dhoondta hai: woh is area ko aasan shaklon (jaise trapezium) mein kaat deta hai, jin ka area hum formula se nikal sakte hain, aur phir sab ko jama kar leta hai. Socha jaye to yeh bilkul aisa hai jaise kisi tedhi meydhi zameen ka raqba (area) naapna ho: hum us ko seedhi lakeeron wale tukron mein baant kar har tukre ka area jama kar lete hain. Yahi tareeqa tab bhi kaam aata hai jab function ka formula hi na ho, sirf naapi hui values ki table ho (masalan har second ki speed readings ya baarish ka data)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh section unit mein kahan fit hota hai? 8.1 se 8.3 tak humne roots (yani f(x) = 0 ke hal) approximately nikale, kyunke exact formula kaam nahi karta tha. Yahan wohi soch integration par lagti hai: thori si, qaabu mein rehne wali ghalti (error) qubool kar lo, aur badle mein aisa jawab lo jo waqai calculate ho sake. Agle page 8.4.1 par Trapezium Rule qadam ba qadam banega."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Sawal: kya \\(\\int_{0}^{1} e^{-x^{2}}\\,dx\\) ki value 0 aur 1 ke darmiyan honi chahiye?\nJawab: haan. \\([0, 1]\\) par \\(e^{-x^{2}}\\) ki value 1 (x = 0 par) se ghat kar \\(e^{-1} \\approx 0.3679\\) (x = 1 par) tak aati hai, yani har jagah 0 aur 1 ke beech hai. Interval ki lambai 1 hai, is liye area 0 se zyada aur 1 se kam hoga. Aisi chhoti si soch baad mein aap ke numerical jawab ko check karne ke kaam aayegi (8.4.1 mein yeh value taqreeban 0.7456 aati hai)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Kuch definite integrals, jaise \\(\\int_{0}^{1} e^{-x^{2}}\\,dx\\) aur \\(\\int_{0}^{\\pi} \\sin(x^{2})\\,dx\\), elementary methods se hal nahi hote, kyunke un ka antiderivative formula mein likha hi nahi ja sakta.\n2. Phir bhi un ki value mojood hai (area ek number hai); numerical methods us ko munasib accuracy ke saath estimate karte hain.\n3. Is section ka numerical method Trapezium Rule hai (8.4.1), jo area ko trapeziums mein baant kar jama karta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Yeh samajhna ke \\\"antiderivative ka formula nahi mila\\\" ka matlab hai \\\"integral mojood hi nahi\\\" ya \\\"jawab zero hai\\\". Ghalat: agar \\(f\\) interval \\([a, b]\\) par continuous hai to integral zaroor mojood hai; sirf Fundamental Theorem wala raasta band hai, is liye hum approximate karte hain.\n2. \\(\\sin(x^{2})\\) ko \\(\\sin^{2}x\\) samajh lena. \\(\\sin(x^{2})\\) mein pehle \\(x\\) ka square hota hai, phir sine; \\(\\sin^{2}x = (\\sin x)^{2}\\) bilkul alag function hai."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.3.1-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.3.1",
+      "title": "8.3.1 General Rule of Accuracy, Tolerance and Calculator Setup (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-8.3.1",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 238,
+          "pdf_to": 239,
+          "note": "Book p. 236-237: 8.3.1 tolerance rule |f(c)| < 10^-n/2 with examples, Calculator Setup"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Koi bhi numerical method chalane se pehle ek sawal ka jawab zaroori hai: humein jawab kitna sahi chahiye? 2 decimal places? 3? Kyunke yeh methods kabhi khud nahin rukte; hum hi faisla karte hain ke ab andaza kaafi achha hai. Yeh faisla ek tolerance (bardasht ki had) se hota hai, yani yeh had ke approximate root asal root se kitna qareeb ho to hum use qubool kar lein."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Ek misaal se samjhein: darzi kapra naapta hai to use millimetre tak ki fikr nahin hoti, lekin ghari banane wale ko hoti hai. Har kaam ki apni zaroori accuracy hoti hai. Isi tarah maths mein bhi pehle tay karte hain ke jawab kitne decimal places tak chahiye, aur usi hisaab se tolerance chunte hain. Zyada accuracy ka matlab zyada iterations aur zyada mehnat, is liye zaroorat se zyada bhi nahin karna."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Decide tolerance based on desired decimal places:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab batati hai ke root ki accuracy check karne ke kai tareeqe hain, maslan interval ki lambai ko chhota karte jana, ya function ki value dekhna. Is chapter mein hum function value wala tareeqa (criterion) use karenge: root ko us waqt sahi maanenge jab \\(|f(x)|\\) zero ke kaafi qareeb ho jaye. Wajah seedhi hai: root par \\(f(x) = 0\\) hota hai, to jahan \\(f(x)\\) taqreeban zero ho, wahan hum root ke qareeb hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar root \\(c\\) humein \\(n\\) decimal places tak chahiye, to shart yeh hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "|f(c)| < \\dfrac{10^{-n}}{2}",
+            "text_alt": "the absolute value of f of c is less than 10 to the power minus n, divided by 2"
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaalein:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "2 decimal places (\\(n = 2\\)): \\(|f(c)| < 0.005\\)",
+              "3 decimal places (\\(n = 3\\)): \\(|f(c)| < 0.0005\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ne yahan \\(|f(c)| < 0.005 \\approx 0.01\\) aur \\(|f(c)| < 0.0005 \\approx 0.001\\) likha hai. Asal tolerance pehla number hi hai: 2 decimal places ke liye 0.005 aur 3 ke liye 0.0005. 0.01 to 0.005 ka dugna hai, is liye use rukne ki had nahin banaya ja sakta. Example 3 aur 4 bhi 0.0072 aur 0.0068 par ruk jate hain jo 0.005 se kam nahin; wahan hum ek do qadam aage chal kar dikhayenge. Un ka aakhri jawab 2.61 phir bhi sahi rehta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh \\(\\frac{10^{-n}}{2}\\) aaya kahan se? Jab hum kisi number ko \\(n\\) decimal places tak round karte hain to woh zyada se zyada aakhri jagah ki aadhi unit tak hilta hai. Maslan 2.6149 aur 2.6051 dono 2.61 bante hain; 2.61 se farq 0.005 se kam hai. Isi liye 2 decimal places ke liye 0.005, 3 ke liye 0.0005, aur 4 ke liye 0.00005.\n\\(|f(c)|\\) chhota hone ka matlab hai ke \\(c\\) par curve x-axis ke bilkul qareeb hai, yani \\(c\\) root ke qareeb hai. Hamari taraf se ek pakki tasdeeq: agar aap ka round kiya hua jawab \\(r\\) hai, to \\(r - \\frac{1}{2}10^{-n}\\) aur \\(r + \\frac{1}{2}10^{-n}\\) par \\(f\\) nikalein. Agar dono ke sign ulte hon to LRT ke mutabiq asal root in dono ke beech hai, yani \\(r\\) pakka \\(n\\) decimal places tak sahi hai."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Decimal places \\(n\\)",
+              "Tolerance \\(\\frac{10^{-n}}{2}\\)",
+              "Kam az kam itne decimals rakhein"
+            ],
+            "rows": [
+              [
+                "1",
+                "\\(0.05\\)",
+                "2 decimals"
+              ],
+              [
+                "2",
+                "\\(0.005\\)",
+                "3 decimals"
+              ],
+              [
+                "3",
+                "\\(0.0005\\)",
+                "4 decimals"
+              ],
+              [
+                "4",
+                "\\(0.00005\\)",
+                "5 decimals"
+              ]
+            ],
+            "caption": "Har accuracy ke liye tolerance aur kaam ke decimals (hamara table)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Calculator Setup"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Agar root \\(n\\) decimal places tak sahi chahiye, to beech ke saare hisaab mein calculator ko kam az kam \\(n + 1\\) decimal places par fix rakhein, aur sirf aakhri jawab ko zaroori accuracy tak round karein.",
+              "Agar trigonometric functions (sin, cos, tan) hon to radian mode use karein."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(n + 1\\) decimals kyun? Har beech wali value ko agar \\(n\\) decimals par hi kaat dein to chhoti chhoti rounding ki ghaltiyan jama ho kar aakhri digit badal sakti hain. Jaise baar baar thora thora paani girta rahe to aakhir mein glass mein kaafi kam reh jata hai. Kitab ke apne examples 2 decimal places ke jawab ke liye 4 decimals rakhte hain.\nJab root ke qareeb function bohat tez (steep) ho, yani \\(f'(x)\\) bara ho, to kabhi \\(n + 1\\) decimals bhi kaafi nahin hote aur \\(|f(c)|\\) tolerance se neeche nahin aata. Aisi soorat mein ek decimal aur barha lein (Exercise 8.2 ka Q1(iii) aisa hi sawal hai).\nRadian mode kyun? Calculus mein \\(\\sin x\\), \\(\\cos x\\), \\(\\tan x\\) hamesha radians mein hote hain. Degree mode mein \\(\\sin 1\\) ka matlab \\(\\sin 1^{\\circ} = 0.0175\\) ho jata hai, jab ke sahi \\(\\sin 1 = 0.8415\\) hai. Poora jawab ghalat ho jata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "1. Root 4 decimal places tak chahiye. Tolerance kya hogi aur beech mein kitne decimals rakhenge?\n2. Kisi sawal mein \\(|f(c)| = 0.0068\\) aaya aur jawab 2 decimal places tak chahiye. Kya rukna theek hai?\nJawab: (1) \\(|f(c)| < 0.00005\\), aur kam az kam 5 decimals. (2) Nahin, kyunke 0.0068 tolerance 0.005 se bara hai; ek iteration aur karein."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Maan lein \\(f(x) = x^2 - 2\\) aur hum \\(\\sqrt{2} = 1.41421...\\) ko 2 decimal places tak chahte hain. Tolerance 0.005 hai.\n\\(c = 1.41\\): \\(f(1.41) = 1.9881 - 2 = -0.0119\\). Yeh 0.005 se bara hai, abhi ruk nahin sakte.\n\\(c = 1.414\\): \\(f(1.414) = 1.999396 - 2 = -0.0006\\). Ab \\(|f(c)| < 0.005\\), ruk jayein; jawab 1.41.\nTasdeeq: \\(f(1.405) = -0.0260 < 0\\) aur \\(f(1.415) = 0.0022 > 0\\); sign ulte hain, is liye 1.41 pakka hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Pehle accuracy tay karein: \\(n\\) decimal places ka matlab tolerance \\(|f(c)| < \\frac{10^{-n}}{2}\\).\n2. 2 d.p.: 0.005; 3 d.p.: 0.0005; 4 d.p.: 0.00005.\n3. Beech mein kam az kam \\(n + 1\\) decimals; round sirf aakhri jawab.\n4. sin, cos ya tan ho to radian mode."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. 2 decimal places ke liye \\(|f(c)| \\approx 0.01\\) par ruk jana; asal shart \\(|f(c)| < 0.005\\) hai.\n2. Trigonometric equation mein calculator degree mode mein chhor dena.\n3. Beech ki values ko aakhri decimals tak round kar dena; is se jawab ki aakhri digit ghalat ho sakti hai."
+          }
+        ]
+      }
+    }
+  ]
+}

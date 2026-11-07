@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-3-Q6",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-3-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 250,
+          "pdf_to": 250,
+          "note": "Exercise 8.3 (book p. 248): Trapezium Rule, Q1-Q10"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.3 (book p. 307)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. Use Trapezoidal Rule to approximate the value of the definite integral \\(\\int_{-1}^{1} e^{-x^{2}}\\,dx\\) taking \\(h = 0.4\\).",
+            "explanation": "A numerical integration question: estimate a definite integral by the Trapezium Rule.\nGiven: \\(f(x) = e^{-x^{2}}\\), interval \\([-1, 1]\\), \\(h = 0.4\\), so \\(n = \\frac{b-a}{h}\\).\nPlan: list the points and 4-decimal function values, then use h/2 [first + 2(inner) + last].",
+            "steps": [
+              "Given: \\(f(x) = e^{-x^{2}}\\), \\(a = -1\\), \\(b = 1\\), \\(h = 0.4\\).\nTo find: an approximate value of \\(\\int_{-1}^{1} e^{-x^{2}}\\,dx\\).\nMethod: the Trapezium Rule, as the question asks. Here \\(h\\) is given, so find \\(n\\) first.",
+              "Continuity\n\\(e^{-x^{2}}\\) is a composition of a polynomial and the exponential function, so it is continuous on \\([-1, 1]\\).\nWhy: the Trapezium Rule needs a continuous function on the interval.",
+              "Number of subintervals and points\n\\[n = \\dfrac{b-a}{h} = \\dfrac{1-(-1)}{0.4} = \\dfrac{2}{0.4} = 5\\]\nPoints \\(x_{i} = a + ih\\): \\(-1, -0.6, -0.2, 0.2, 0.6, 1\\)\nWhy: \\(h = \\frac{b-a}{n}\\) rearranged gives \\(n = \\frac{b-a}{h}\\); 5 subintervals give 6 points.",
+              "Function values (4 decimal places)\n\\[f(-1) = 0.3679\\]\n\\[f(-0.6) = 0.6977\\]\n\\[f(-0.2) = 0.9608\\]\n\\[f(0.2) = 0.9608\\]\n\\[f(0.6) = 0.6977\\]\n\\[f(1) = 0.3679\\]\nWhy: Square first, then put the minus sign: \\((-0.6)^{2} = 0.36\\), so \\(f(-0.6) = e^{-0.36}\\). The values are symmetric: \\(f(-x) = f(x)\\). The table with the answer collects them with their weights.",
+              "Add the inner values\n\\[S = f(x_{1}) + \\dots + f(x_{4})\\]\n\\[= 0.6977 + 0.9608 + 0.9608\\]\n\\[+ 0.6977\\]\n\\[= 3.3170\\]\nWhy: these 4 inner values are shared by two neighbouring trapeziums, so they will be doubled.",
+              "Apply the Trapezium Rule\n\\[\\int_{-1}^{1} e^{-x^{2}}\\,dx\\]\n\\[\\approx \\dfrac{h}{2}\\big[f(x_{0}) + 2S + f(x_{5})\\big]\\]\n\\[= 0.2\\big[0.3679 + 2(3.3170)\\]\n\\[+ 0.3679\\big]\\]\n\\[= 0.2(7.3698)\\]\n\\[= 1.47396 \\approx 1.4740\\]\nWhy: \\(\\frac{h}{2} = 0.2\\); the end values are used once and the inner sum twice. Round only at the end.",
+              "Check:\nWith unrounded function values the rule gives 1.4739, so 1.4740 is correct to the rounding used. \\(e^{-x^{2}}\\) has no elementary antiderivative; a computer with very many subintervals gives 1.4936, so the error here is about 0.02."
+            ],
+            "final_answer": "\\(\\int_{-1}^{1} e^{-x^{2}}\\,dx \\approx 1.4740\\)",
+            "answer_table": {
+              "header": [
+                "i",
+                "\\(x_{i}\\)",
+                "\\(f(x_{i})\\)",
+                "Weight"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(-1\\)",
+                  "\\(0.3679\\)",
+                  "1"
+                ],
+                [
+                  "1",
+                  "\\(-0.6\\)",
+                  "\\(0.6977\\)",
+                  "2"
+                ],
+                [
+                  "2",
+                  "\\(-0.2\\)",
+                  "\\(0.9608\\)",
+                  "2"
+                ],
+                [
+                  "3",
+                  "\\(0.2\\)",
+                  "\\(0.9608\\)",
+                  "2"
+                ],
+                [
+                  "4",
+                  "\\(0.6\\)",
+                  "\\(0.6977\\)",
+                  "2"
+                ],
+                [
+                  "5",
+                  "\\(1\\)",
+                  "\\(0.3679\\)",
+                  "1"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints 1.4704. With \\(h = 0.4\\) (\\(n = 5\\)) the rule gives \\(0.2(7.3698) = 1.4740\\) (1.4739 with unrounded values). The correct answer is 1.4740; the key's last digits appear interchanged."
+          }
+        ]
+      }
+    }
+  ]
+}

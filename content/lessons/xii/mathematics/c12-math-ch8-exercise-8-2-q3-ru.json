@@ -1,0 +1,346 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-2-Q3-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-2-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-EXERCISE-8-2-Q3",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 246,
+          "pdf_to": 246,
+          "note": "Exercise 8.2 Q3 (Newton-Raphson) on book p. 244; answers p. 307 (printed under '4.')"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.2 (book p. 307)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Find the real roots of nonlinear equations using the Newton-Raphson method. \\(x^3 + x^2 = 3(x + 1)\\) near \\(x = 1\\) accurate to 2 decimal places.",
+            "explanation": "Yeh Newton-Raphson ka sawal hai; shuruaat \\(x = 1\\) ke qareeb se karni hai.\nPehle sab terms ek taraf: \\(x^3 + x^2 - 3x - 3 = 0\\), yani \\(f(x) = x^3 + x^2 - 3x - 3\\).\nFormula ke liye derivative bhi chahiye: \\(f'(x) = 3x^2 + 2x - 3\\).\nPlan: \\(x_0 = 1\\) se iterations, jab tak \\(|f(x_n)| < 0.005\\).\nAakhir mein factorisation se exact jawab \\(\\sqrt{3}\\) se milayenge.",
+            "steps": [
+              "Diya gaya: \\(x^3 + x^2 = 3(x + 1)\\), near \\(x = 1\\) accurate to 2 decimal places.\nMaloom karna: real root 2 decimal places tak.\nTareeqa: Newton-Raphson. Pehle equation ko \\(f(x) = 0\\) banayein, phir derivative \\(f'(x)\\) nikalein, phir formula \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\) baar baar lagayein jab tak \\(|f(x_n)| < 0.005\\) na ho jaye. Beech ki values 4 decimals tak rakhenge.",
+              "Function aur us ka derivative tayyar karein\n\\[f(x) = x^3 + x^2 - 3x - 3\\]\\[f'(x) = 3x^2 + 2x - 3\\]Kyun: Newton-Raphson har qadam par curve ki tangent (chhoone wali line) banata hai, aur tangent ki dhalwan (slope) \\(f'(x)\\) se milti hai. Is liye derivative pehle se tayyar rakhna zaroori hai.",
+              "Shuruaati value\n\\[x_0 = 1\\]\\[f(1) = 1 + 1 - 3 - 3 = -4\\]\\[f(2) = 8 + 4 - 6 - 3 = 3\\]Kyun: sawal kehta hai \\(x = 1\\) ke qareeb; \\([1, 2]\\) par sign badalta hai, yani root yahin hai. Lekin \\(f'(1) = 2\\) chhota hai, yani tangent kaafi leti hui (shallow) hai, is liye pehla qadam \\(x_1 = 3\\) tak door chala jata hai. Ghabrayein nahin: agle qadam wapas root ki taraf aa jate hain.",
+              "Iteration 1: \\(x_0 = 1\\)\n\\[f(1) = -4\\]\\[f'(1) = 2\\]\\[x_{1} = 1 - \\dfrac{-4}{2}\\]\\[= 3\\]\nKyun: point \\((x_0, f(x_0))\\) par tangent kheenchein to woh x-axis ko \\(x_1\\) par kaatti hai; yahi naya behtar andaza hai. Abhi \\(|f(1)| = 4\\) hai jo 0.005 se bara hai, is liye aage chalte hain.\nDhyan dein: fraction ka sign ghaur se dekhein; \\(f\\) ya \\(f'\\) negative ho to minus minus plus ban jata hai.",
+              "Iteration 2: \\(x_1 = 3\\)\n\\[f(3) = 24\\]\\[f'(3) = 30\\]\\[x_{2} = 3 - \\dfrac{24}{30}\\]\\[= 2.2\\]\nKyun: point \\((x_1, f(x_1))\\) par tangent kheenchein to woh x-axis ko \\(x_2\\) par kaatti hai; yahi naya behtar andaza hai. Abhi \\(|f(3)| = 24\\) hai jo 0.005 se bara hai, is liye aage chalte hain.\nDhyan dein: fraction ka sign ghaur se dekhein; \\(f\\) ya \\(f'\\) negative ho to minus minus plus ban jata hai.",
+              "Aage (table)\nTable mein har qadam ki \\(x_n\\), \\(f(x_n)\\) aur \\(f'(x_n)\\) likhi hain; har nayi \\(x_{n+1}\\) agli row ki \\(x_n\\) ban jati hai.\nKyun: ek hi formula baar baar lagaya ja raha hai; har baar tangent root ke aur qareeb pohanchti hai.",
+              "Rukna kab hai\n\\[|f(1.7321)| \\approx 0.0005 < 0.005\\]Is liye \\(x \\approx 1.73\\) (2 decimal places tak).\nKyun: \\(n = 2\\) ke liye 8.3.1 ki tolerance yahi hai aur woh poori ho gayi.\nDhyan dein: Newton-Raphson mein root ke qareeb pohanch kar har qadam par sahi decimals taqreeban dugne ho jate hain, is liye aakhri do values bohat qareeb hoti hain. Agar values root se door bhaagne lagen to samajh lein shuruaati value ya derivative mein ghalti hai; dobara check karein.",
+              "Tasdeeq:\n\\[f(1.725) = -0.0664\\]\\[f(1.735) = 0.028\\]Sign ulte hain, is liye asal root 1.725 aur 1.735 ke beech hai aur round ho kar 1.73 banta hai.\nPakki tasdeeq: \\(x^3 + x^2 - 3x - 3 = x^2(x + 1) - 3(x + 1) = (x + 1)(x^2 - 3)\\), yani asal root \\(\\sqrt{3} = 1.7321\\) hai, jo 1.73 hi banta hai. Numerical jawab exact jawab se mil gaya."
+            ],
+            "final_answer": "\\(x \\approx 1.73\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\(x_n\\)",
+                "\\(f(x_n)\\)",
+                "\\(f'(x_n)\\)"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(1\\)",
+                  "\\(-4\\)",
+                  "\\(2\\)"
+                ],
+                [
+                  "1",
+                  "\\(3\\)",
+                  "\\(24\\)",
+                  "\\(30\\)"
+                ],
+                [
+                  "2",
+                  "\\(2.2\\)",
+                  "\\(5.888\\)",
+                  "\\(15.92\\)"
+                ],
+                [
+                  "3",
+                  "\\(1.8302\\)",
+                  "\\(0.9895\\)",
+                  "\\(10.7093\\)"
+                ],
+                [
+                  "4",
+                  "\\(1.7378\\)",
+                  "\\(0.0546\\)",
+                  "\\(9.5354\\)"
+                ],
+                [
+                  "5",
+                  "\\(1.7321\\)",
+                  "\\(0.0005\\)",
+                  "\\(9.4647\\)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key ki numbering: \"4.\" ke neeche likhe jawab (1.73, 2.153, 2.0946, 0.361, 4.4934) asal mein isi Question 3 ke hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Find the real roots of nonlinear equations using the Newton-Raphson method. \\(e^{x} = 4x\\) near \\(x = 2\\) accurate to 3 decimal places.",
+            "explanation": "Newton-Raphson ka sawal: \\(e^{x} = 4x\\), \\(x = 2\\) ke qareeb, 3 decimal places tak.\nSab ek taraf: \\(f(x) = e^{x} - 4x\\); derivative \\(f'(x) = e^{x} - 4\\), kyunke \\(e^{x}\\) ka derivative khud \\(e^{x}\\) hai.\nTolerance 0.0005.\nPlan: \\(x_0 = 2\\) se shuru, formula lagate jayein, phir \\(\\pm 0.0005\\) par tasdeeq.",
+            "steps": [
+              "Diya gaya: \\(e^{x} = 4x\\), near \\(x = 2\\) accurate to 3 decimal places.\nMaloom karna: real root 3 decimal places tak.\nTareeqa: Newton-Raphson. Pehle equation ko \\(f(x) = 0\\) banayein, phir derivative \\(f'(x)\\) nikalein, phir formula \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\) baar baar lagayein jab tak \\(|f(x_n)| < 0.0005\\) na ho jaye. Beech ki values 4 decimals tak rakhenge.",
+              "Function aur us ka derivative tayyar karein\n\\[f(x) = e^{x} - 4x\\]\\[f'(x) = e^{x} - 4\\]Kyun: Newton-Raphson har qadam par curve ki tangent (chhoone wali line) banata hai, aur tangent ki dhalwan (slope) \\(f'(x)\\) se milti hai. Is liye derivative pehle se tayyar rakhna zaroori hai.",
+              "Shuruaati value\n\\[x_0 = 2\\]\\[f(2) = 7.3891 - 8 = -0.6109\\]\\[f(3) = 20.0855 - 12 = 8.0855\\]Kyun: sawal ne \\(x = 2\\) ke qareeb kaha hai, aur \\([2, 3]\\) par sign badal raha hai, yani root 2 se thora upar hai. Achhi shuruaati value se Newton-Raphson bohat jaldi pohanchta hai.",
+              "Iteration 1: \\(x_0 = 2\\)\n\\[f(2) = -0.6109\\]\\[f'(2) = 3.3891\\]\\[x_{1} = 2 - \\dfrac{-0.6109}{3.3891}\\]\\[= 2.1803\\]\nKyun: point \\((x_0, f(x_0))\\) par tangent kheenchein to woh x-axis ko \\(x_1\\) par kaatti hai; yahi naya behtar andaza hai. Abhi \\(|f(2)| = 0.6109\\) hai jo 0.0005 se bara hai, is liye aage chalte hain.\nDhyan dein: fraction ka sign ghaur se dekhein; \\(f\\) ya \\(f'\\) negative ho to minus minus plus ban jata hai.",
+              "Iteration 2: \\(x_1 = 2.1803\\)\n\\[f(2.1803) = 0.1278\\]\\[f'(2.1803) = 4.849\\]\\[x_{2} = 2.1803 - \\dfrac{0.1278}{4.849}\\]\\[= 2.1539\\]\nKyun: point \\((x_1, f(x_1))\\) par tangent kheenchein to woh x-axis ko \\(x_2\\) par kaatti hai; yahi naya behtar andaza hai. Abhi \\(|f(2.1803)| = 0.1278\\) hai jo 0.0005 se bara hai, is liye aage chalte hain.\nDhyan dein: fraction ka sign ghaur se dekhein; \\(f\\) ya \\(f'\\) negative ho to minus minus plus ban jata hai.",
+              "Aage (table)\nTable mein har qadam ki \\(x_n\\), \\(f(x_n)\\) aur \\(f'(x_n)\\) likhi hain; har nayi \\(x_{n+1}\\) agli row ki \\(x_n\\) ban jati hai.\nKyun: ek hi formula baar baar lagaya ja raha hai; har baar tangent root ke aur qareeb pohanchti hai.",
+              "Rukna kab hai\n\\[|f(2.1533)| \\approx 0.00004 < 0.0005\\]Is liye \\(x \\approx 2.153\\) (3 decimal places tak).\nKyun: \\(n = 3\\) ke liye 8.3.1 ki tolerance yahi hai aur woh poori ho gayi.\nDhyan dein: Newton-Raphson mein root ke qareeb pohanch kar har qadam par sahi decimals taqreeban dugne ho jate hain, is liye aakhri do values bohat qareeb hoti hain. Agar values root se door bhaagne lagen to samajh lein shuruaati value ya derivative mein ghalti hai; dobara check karein.",
+              "Tasdeeq:\n\\[f(2.1525) = -0.0037\\]\\[f(2.1535) = 0.001\\]Sign ulte hain, is liye asal root 2.1525 aur 2.1535 ke beech hai aur round ho kar 2.153 banta hai. (Is equation ka ek doosra root 0.357 ke qareeb bhi hai, lekin sawal sirf 2 ke qareeb wala maang raha hai.)"
+            ],
+            "final_answer": "\\(x \\approx 2.153\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\(x_n\\)",
+                "\\(f(x_n)\\)",
+                "\\(f'(x_n)\\)"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(2\\)",
+                  "\\(-0.6109\\)",
+                  "\\(3.3891\\)"
+                ],
+                [
+                  "1",
+                  "\\(2.1803\\)",
+                  "\\(0.1278\\)",
+                  "\\(4.849\\)"
+                ],
+                [
+                  "2",
+                  "\\(2.1539\\)",
+                  "\\(0.0028\\)",
+                  "\\(4.6184\\)"
+                ],
+                [
+                  "3",
+                  "\\(2.1533\\)",
+                  "\\(0\\)",
+                  "\\(4.6132\\)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) Find the real roots of nonlinear equations using the Newton-Raphson method. \\(x^3 + 2x - 5 = 0\\) accurate to 4 decimal places.",
+            "explanation": "Newton-Raphson ka sawal, 4 decimal places tak; shuruaati value nahin di gayi.\n\\(f(x) = x^3 + 2x - 5\\) aur \\(f'(x) = 3x^2 + 2\\).\nPehle sign change se \\(x_0\\) chunenge.\nTolerance 0.00005, is liye beech mein 5 decimals.\nIs sawal ki answer key ki value asal mein ek doosri equation ka jawab hai; aakhir mein us par baat karenge.",
+            "steps": [
+              "Diya gaya: \\(x^3 + 2x - 5 = 0\\), accurate to 4 decimal places.\nMaloom karna: real root 4 decimal places tak.\nTareeqa: Newton-Raphson. Pehle equation ko \\(f(x) = 0\\) banayein, phir derivative \\(f'(x)\\) nikalein, phir formula \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\) baar baar lagayein jab tak \\(|f(x_n)| < 0.00005\\) na ho jaye. Beech ki values 5 decimals tak rakhenge.",
+              "Function aur us ka derivative tayyar karein\n\\[f(x) = x^3 + 2x - 5\\]\\[f'(x) = 3x^2 + 2\\]Kyun: Newton-Raphson har qadam par curve ki tangent (chhoone wali line) banata hai, aur tangent ki dhalwan (slope) \\(f'(x)\\) se milti hai. Is liye derivative pehle se tayyar rakhna zaroori hai.",
+              "Shuruaati value\n\\[f(1) = 1 + 2 - 5 = -2\\]\\[f(2) = 8 + 4 - 5 = 7\\]\\[x_0 = 1.5\\]Kyun: sawal ne koi shuruaati value nahin di, is liye sign change wale interval \\([1, 2]\\) ka beech 1.5 le liya. Aur \\(f'(x) = 3x^2 + 2\\) hamesha positive hai, yani function hamesha barhta hai; is liye is ka sirf ek hi real root hai. 4 decimal places ke liye beech ki values 5 decimals tak rakhenge.",
+              "Iteration 1: \\(x_0 = 1.5\\)\n\\[f(1.5) = 1.375\\]\\[f'(1.5) = 8.75\\]\\[x_{1} = 1.5 - \\dfrac{1.375}{8.75}\\]\\[= 1.34286\\]\nKyun: point \\((x_0, f(x_0))\\) par tangent kheenchein to woh x-axis ko \\(x_1\\) par kaatti hai; yahi naya behtar andaza hai. Abhi \\(|f(1.5)| = 1.375\\) hai jo 0.00005 se bara hai, is liye aage chalte hain.\nDhyan dein: fraction ka sign ghaur se dekhein; \\(f\\) ya \\(f'\\) negative ho to minus minus plus ban jata hai.",
+              "Iteration 2: \\(x_1 = 1.34286\\)\n\\[f(1.34286) = 0.10726\\]\\[f'(1.34286) = 7.40982\\]\\[x_{2} = 1.34286 - \\dfrac{0.10726}{7.40982}\\]\\[= 1.32838\\]\nKyun: point \\((x_1, f(x_1))\\) par tangent kheenchein to woh x-axis ko \\(x_2\\) par kaatti hai; yahi naya behtar andaza hai. Abhi \\(|f(1.34286)| = 0.10726\\) hai jo 0.00005 se bara hai, is liye aage chalte hain.\nDhyan dein: fraction ka sign ghaur se dekhein; \\(f\\) ya \\(f'\\) negative ho to minus minus plus ban jata hai.",
+              "Aage (table)\nTable mein har qadam ki \\(x_n\\), \\(f(x_n)\\) aur \\(f'(x_n)\\) likhi hain; har nayi \\(x_{n+1}\\) agli row ki \\(x_n\\) ban jati hai.\nKyun: ek hi formula baar baar lagaya ja raha hai; har baar tangent root ke aur qareeb pohanchti hai.",
+              "Rukna kab hai\n\\[|f(1.32827)| \\approx 0.00001 < 0.00005\\]Is liye \\(x \\approx 1.3283\\) (4 decimal places tak).\nKyun: \\(n = 4\\) ke liye 8.3.1 ki tolerance yahi hai aur woh poori ho gayi.\nDhyan dein: Newton-Raphson mein root ke qareeb pohanch kar har qadam par sahi decimals taqreeban dugne ho jate hain, is liye aakhri do values bohat qareeb hoti hain. Agar values root se door bhaagne lagen to samajh lein shuruaati value ya derivative mein ghalti hai; dobara check karein.",
+              "Tasdeeq:\n\\[f(1.32825) = -0.0001\\]\\[f(1.32835) = 0.0006\\]Sign ulte hain, is liye asal root 1.32825 aur 1.32835 ke beech hai aur round ho kar 1.3283 banta hai."
+            ],
+            "final_answer": "\\(x \\approx 1.3283\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\(x_n\\)",
+                "\\(f(x_n)\\)",
+                "\\(f'(x_n)\\)"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(1.5\\)",
+                  "\\(1.375\\)",
+                  "\\(8.75\\)"
+                ],
+                [
+                  "1",
+                  "\\(1.34286\\)",
+                  "\\(0.10726\\)",
+                  "\\(7.40982\\)"
+                ],
+                [
+                  "2",
+                  "\\(1.32838\\)",
+                  "\\(0.00081\\)",
+                  "\\(7.29378\\)"
+                ],
+                [
+                  "3",
+                  "\\(1.32827\\)",
+                  "\\(0.00001\\)",
+                  "\\(7.2929\\)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key 2.0946 deti hai, lekin yeh \\(x^3 + 2x - 5 = 0\\) ka root ho hi nahin sakta: \\(f(2.0946) \\approx 8.38\\). 2.0946 asal mein doosri equation \\(x^3 - 2x - 5 = 0\\) ka root hai (\\(x_0 = 2\\) se: 2.1, 2.09457, 2.09455). Kitab mein chhapi equation ka sahi root \\(x \\approx 1.3283\\) hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iv)",
+            "prompt": "3 (iv) Find the real roots of nonlinear equations using the Newton-Raphson method. \\(3x + \\sin x = e^{x}\\) accurate to 3 decimal places.",
+            "explanation": "Newton-Raphson, 3 decimal places; shuruaati value nahin di.\nSab ek taraf: \\(f(x) = 3x + \\sin x - e^{x}\\), aur \\(f'(x) = 3 + \\cos x - e^{x}\\).\nYeh wahi equation hai jo Question 2(iv) mein Regula-Falsi se 2 decimal places tak hal ki thi (0.36 aur 1.89).\nPlan: \\(x_0 = 0.5\\) se pehla root, phir \\(x_0 = 2\\) se doosra.\nTolerance 0.0005, radian mode.",
+            "steps": [
+              "Diya gaya: \\(3x + \\sin x = e^{x}\\), accurate to 3 decimal places.\nMaloom karna: real root 3 decimal places tak.\nTareeqa: Newton-Raphson. Pehle equation ko \\(f(x) = 0\\) banayein, phir derivative \\(f'(x)\\) nikalein, phir formula \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\) baar baar lagayein jab tak \\(|f(x_n)| < 0.0005\\) na ho jaye. Beech ki values 4 decimals tak rakhenge.",
+              "Function aur us ka derivative tayyar karein\n\\[f(x) = 3x + \\sin x - e^{x}\\]\\[f'(x) = 3 + \\cos x - e^{x}\\]Kyun: Newton-Raphson har qadam par curve ki tangent (chhoone wali line) banata hai, aur tangent ki dhalwan (slope) \\(f'(x)\\) se milti hai. Is liye derivative pehle se tayyar rakhna zaroori hai.",
+              "Shuruaati value\n\\[f(0) = 0 + 0 - 1 = -1\\]\\[f(1) = 3 + 0.8415 - 2.7183 = 1.1232\\]\\[x_0 = 0.5\\]Kyun: shuruaati value nahin di gayi. \\([0, 1]\\) par sign badalta hai (yahi baat Question 2(iv) mein bhi dekhi thi), is liye beech wali value 0.5 le li. Calculator radian mode mein.",
+              "Iteration 1: \\(x_0 = 0.5\\)\n\\[f(0.5) = 0.3307\\]\\[f'(0.5) = 2.2289\\]\\[x_{1} = 0.5 - \\dfrac{0.3307}{2.2289}\\]\\[= 0.3516\\]\nKyun: point \\((x_0, f(x_0))\\) par tangent kheenchein to woh x-axis ko \\(x_1\\) par kaatti hai; yahi naya behtar andaza hai. Abhi \\(|f(0.5)| = 0.3307\\) hai jo 0.0005 se bara hai, is liye aage chalte hain.\nDhyan dein: fraction ka sign ghaur se dekhein; \\(f\\) ya \\(f'\\) negative ho to minus minus plus ban jata hai.",
+              "Iteration 2: \\(x_1 = 0.3516\\)\n\\[f(0.3516) = -0.0221\\]\\[f'(0.3516) = 2.5175\\]\\[x_{2} = 0.3516 - \\dfrac{-0.0221}{2.5175}\\]\\[= 0.3604\\]\nKyun: point \\((x_1, f(x_1))\\) par tangent kheenchein to woh x-axis ko \\(x_2\\) par kaatti hai; yahi naya behtar andaza hai. Abhi \\(|f(0.3516)| = 0.0221\\) hai jo 0.0005 se bara hai, is liye aage chalte hain.\nDhyan dein: fraction ka sign ghaur se dekhein; \\(f\\) ya \\(f'\\) negative ho to minus minus plus ban jata hai.",
+              "Aage (table)\nTable mein har qadam ki \\(x_n\\), \\(f(x_n)\\) aur \\(f'(x_n)\\) likhi hain; har nayi \\(x_{n+1}\\) agli row ki \\(x_n\\) ban jati hai.\nKyun: ek hi formula baar baar lagaya ja raha hai; har baar tangent root ke aur qareeb pohanchti hai.",
+              "Rukna kab hai\n\\[|f(0.3604)| \\approx 0.0001 < 0.0005\\]Is liye \\(x \\approx 0.360\\) (3 decimal places tak).\nKyun: \\(n = 3\\) ke liye 8.3.1 ki tolerance yahi hai aur woh poori ho gayi.\nDhyan dein: Newton-Raphson mein root ke qareeb pohanch kar har qadam par sahi decimals taqreeban dugne ho jate hain, is liye aakhri do values bohat qareeb hoti hain. Agar values root se door bhaagne lagen to samajh lein shuruaati value ya derivative mein ghalti hai; dobara check karein.",
+              "Tasdeeq:\n\\[f(0.3595) = -0.0023\\]\\[f(0.3605) = 0.0002\\]Sign ulte hain, is liye asal root 0.3595 aur 0.3605 ke beech hai aur round ho kar 0.360 banta hai.\nDoosra root: \\(f(2) = -0.4798 < 0\\), yani \\([1, 2]\\) par bhi sign badalta hai. \\(x_0 = 2\\) se shuru karein: \\(f'(2) = -4.8052\\), \\(x_1 = 1.9001\\), phir \\(x_2 = 1.8901\\), aur \\(|f(1.8901)| \\approx 0.0003 < 0.0005\\). \\(f(1.8895) > 0 > f(1.8905)\\) bhi tasdeeq karta hai. Is liye doosra root \\(x \\approx 1.890\\) hai."
+            ],
+            "final_answer": "\\(x \\approx 0.360\\) (aur doosra root \\(x \\approx 1.890\\))",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\(x_n\\)",
+                "\\(f(x_n)\\)",
+                "\\(f'(x_n)\\)"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(0.5\\)",
+                  "\\(0.3307\\)",
+                  "\\(2.2289\\)"
+                ],
+                [
+                  "1",
+                  "\\(0.3516\\)",
+                  "\\(-0.0221\\)",
+                  "\\(2.5175\\)"
+                ],
+                [
+                  "2",
+                  "\\(0.3604\\)",
+                  "\\(-0.0001\\)",
+                  "\\(2.5019\\)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key 0.361 deti hai. Root 0.36042... hai, jo 3 decimal places tak 0.360 banta hai (\\(f(0.361) = 0.0014\\), jo 0.0005 ke andar nahin). Key doosra real root \\(x \\approx 1.890\\) bhi chhor deti hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(v)",
+            "prompt": "3 (v) Find the real roots of nonlinear equations using the Newton-Raphson method. \\(\\tan(x) = x\\) around \\(x_0 = 4.3\\) accurate to 4 decimal places.",
+            "explanation": "Newton-Raphson: \\(\\tan x = x\\), \\(x_0 = 4.3\\) se, 4 decimal places tak.\nSab ek taraf: \\(f(x) = \\tan x - x\\); derivative \\(\\sec^2 x - 1\\), aur identity \\(\\sec^2 x - 1 = \\tan^2 x\\) se \\(f'(x) = \\tan^2 x\\).\nKhatra: \\(\\tan x\\) ka asymptote \\(\\frac{3\\pi}{2} \\approx 4.7124\\) par hai, us ke paar nahin jana.\nPlan: 5 decimals ke saath iterations jab tak \\(|f(x_n)| < 0.00005\\); phir tasdeeq.",
+            "steps": [
+              "Diya gaya: \\(\\tan(x) = x\\), around \\(x_0 = 4.3\\) accurate to 4 decimal places.\nMaloom karna: real root 4 decimal places tak.\nTareeqa: Newton-Raphson. Pehle equation ko \\(f(x) = 0\\) banayein, phir derivative \\(f'(x)\\) nikalein, phir formula \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\) baar baar lagayein jab tak \\(|f(x_n)| < 0.00005\\) na ho jaye. Beech ki values 5 decimals tak rakhenge.",
+              "Function aur us ka derivative tayyar karein\n\\[f(x) = \\tan x - x\\]\\[f'(x) = \\sec^{2}x - 1 = \\tan^{2}x\\]Kyun: Newton-Raphson har qadam par curve ki tangent (chhoone wali line) banata hai, aur tangent ki dhalwan (slope) \\(f'(x)\\) se milti hai. Is liye derivative pehle se tayyar rakhna zaroori hai.",
+              "Branch aur shuruaati value\n\\[x_0 = 4.3\\]\\[f(4.4) = 3.0963 - 4.4 = -1.3037\\]\\[f(4.6) = 8.8602 - 4.6 = 4.2602\\]Kyun: \\(\\tan x\\) har jagah continuous nahin; \\(\\frac{3\\pi}{2} = 4.7124\\) par is ka asymptote (woh line jis ke qareeb graph jata hai magar chhoota nahin) hai. Is liye hum branch \\((1.5708, 4.7124)\\) par kaam karte hain jis mein 4.3 aur root dono hain. \\([4.4, 4.6]\\) par sign badalta hai, yani root yahin hai. Radian mode, 5 decimals.",
+              "Iteration 1: \\(x_0 = 4.3\\)\n\\[f(4.3) = -2.01415\\]\\[f'(4.3) = 5.2251\\]\\[x_{1} = 4.3 - \\dfrac{-2.01415}{5.2251}\\]\\[= 4.68548\\]\nKyun: point \\((x_0, f(x_0))\\) par tangent kheenchein to woh x-axis ko \\(x_1\\) par kaatti hai; yahi naya behtar andaza hai. Abhi \\(|f(4.3)| = 2.01415\\) hai jo 0.00005 se bara hai, is liye aage chalte hain.\nDhyan dein: fraction ka sign ghaur se dekhein; \\(f\\) ya \\(f'\\) negative ho to minus minus plus ban jata hai.",
+              "Iteration 2: \\(x_1 = 4.68548\\)\n\\[f(4.68548) = 32.46786\\]\\[f'(4.68548) = 1380.37102\\]\\[x_{2} = 4.68548 - \\dfrac{32.46786}{1380.37102}\\]\\[= 4.66196\\]\nKyun: point \\((x_1, f(x_1))\\) par tangent kheenchein to woh x-axis ko \\(x_2\\) par kaatti hai; yahi naya behtar andaza hai. Abhi \\(|f(4.68548)| = 32.46786\\) hai jo 0.00005 se bara hai, is liye aage chalte hain.\nDhyan dein: fraction ka sign ghaur se dekhein; \\(f\\) ya \\(f'\\) negative ho to minus minus plus ban jata hai.",
+              "Aage (table)\nTable mein har qadam ki \\(x_n\\), \\(f(x_n)\\) aur \\(f'(x_n)\\) likhi hain; har nayi \\(x_{n+1}\\) agli row ki \\(x_n\\) ban jati hai.\nKyun: ek hi formula baar baar lagaya ja raha hai; har baar tangent root ke aur qareeb pohanchti hai.",
+              "Rukna kab hai\n\\[|f(4.49341)| \\approx 0.00001 < 0.00005\\]Is liye \\(x \\approx 4.4934\\) (4 decimal places tak).\nKyun: \\(n = 4\\) ke liye 8.3.1 ki tolerance yahi hai aur woh poori ho gayi.\nDhyan dein: Newton-Raphson mein root ke qareeb pohanch kar har qadam par sahi decimals taqreeban dugne ho jate hain, is liye aakhri do values bohat qareeb hoti hain. Agar values root se door bhaagne lagen to samajh lein shuruaati value ya derivative mein ghalti hai; dobara check karein.",
+              "Tasdeeq:\n\\[f(4.49335) = -0.0012\\]\\[f(4.49345) = 0.0008\\]Sign ulte hain, is liye asal root 4.49335 aur 4.49345 ke beech hai aur round ho kar 4.4934 banta hai.\nDhyan dein: pehla qadam 4.68548 par aata hai jo asymptote 4.7124 ke bohat qareeb hai, wahan \\(\\tan x\\) bohat bara hai (32.47). Kyunke yeh abhi bhi usi branch par hai, agle qadam aahista aahista root par aa jate hain. Agar koi qadam asymptote paar kar jaye to method kisi aur root ki taraf bhaag sakta hai. Tez tareeqa: dono taraf \\(\\cos x\\) se zarb dein, \\(g(x) = x\\cos x - \\sin x = 0\\), jis ka \\(g'(x) = -x\\sin x\\) hai; is ka koi asymptote nahin aur 4.3 se sirf teen qadam mein 4.50492, 4.49344, 4.49341 mil jate hain."
+            ],
+            "final_answer": "\\(x \\approx 4.4934\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\(x_n\\)",
+                "\\(f(x_n)\\)",
+                "\\(f'(x_n)\\)"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(4.3\\)",
+                  "\\(-2.01415\\)",
+                  "\\(5.2251\\)"
+                ],
+                [
+                  "1",
+                  "\\(4.68548\\)",
+                  "\\(32.46786\\)",
+                  "\\(1380.37102\\)"
+                ],
+                [
+                  "2",
+                  "\\(4.66196\\)",
+                  "\\(15.1511\\)",
+                  "\\(392.55715\\)"
+                ],
+                [
+                  "3",
+                  "\\(4.62336\\)",
+                  "\\(6.57925\\)",
+                  "\\(125.49837\\)"
+                ],
+                [
+                  "4",
+                  "\\(4.57094\\)",
+                  "\\(2.45153\\)",
+                  "\\(49.31514\\)"
+                ],
+                [
+                  "5",
+                  "\\(4.52123\\)",
+                  "\\(0.64614\\)",
+                  "\\(26.70174\\)"
+                ],
+                [
+                  "6",
+                  "\\(4.49703\\)",
+                  "\\(0.07437\\)",
+                  "\\(20.8977\\)"
+                ],
+                [
+                  "7",
+                  "\\(4.49347\\)",
+                  "\\(0.00122\\)",
+                  "\\(20.20226\\)"
+                ],
+                [
+                  "8",
+                  "\\(4.49341\\)",
+                  "\\(0.00001\\)",
+                  "\\(20.19083\\)"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

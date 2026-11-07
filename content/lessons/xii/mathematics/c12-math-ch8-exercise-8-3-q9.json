@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-3-Q9",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-3-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 250,
+          "pdf_to": 250,
+          "note": "Exercise 8.3 (book p. 248): Trapezium Rule, Q1-Q10"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.3 (book p. 307)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9. Show by the trapezium rule that the approximate area bounded by the curve \\(y = \\sqrt{8 - 2x - x^{2}}\\) and the \\(x\\)-axis using \\(n = 8\\) is 13.5 square units. Calculate the exact area by using the formula for finding the area of semi-circle.",
+            "explanation": "A numerical integration question: estimate a definite integral by the Trapezium Rule.\nGiven: \\(f(x) = \\sqrt{8 - 2x - x^{2}}\\), the interval must first be found from where the curve meets the x-axis, \\(n = 8\\), so \\(h = \\frac{b-a}{n}\\).\nPlan: list the points and 4-decimal function values, then use h/2 [first + 2(inner) + last], and compare with the semicircle area.",
+            "steps": [
+              "Given: \\(f(x) = \\sqrt{8 - 2x - x^{2}}\\), \\(a = -4\\), \\(b = 2\\), \\(n = 8\\).\nTo find: an approximate value of \\(\\int_{-4}^{2} \\sqrt{8 - 2x - x^{2}}\\,dx\\).\nMethod: the Trapezium Rule, as the question asks. n is given, so find h first; the interval must first be found from the curve.",
+              "Find the limits of the region\n\\[8 - 2x - x^{2} = 9 - (x + 1)^{2}\\]\n\\[y = \\sqrt{9 - (x+1)^{2}}\\]\n\\[\\Rightarrow (x+1)^{2} + y^{2} = 9,\\ y \\ge 0\\]\n\\[y = 0 \\Rightarrow x + 1 = \\pm 3 \\Rightarrow x = -4, 2\\]\nWhy: the question gives no interval, so we find where the curve meets the \\(x\\)-axis. Completing the square shows the curve is the upper half of the circle with centre \\((-1, 0)\\) and radius 3, so the region is over \\([-4, 2]\\).",
+              "Continuity\n\\(8 - 2x - x^{2} \\ge 0\\) on \\([-4, 2]\\), and the square root of a continuous non-negative function is continuous, so \\(y\\) is continuous on \\([-4, 2]\\).\nWhy: the Trapezium Rule needs a continuous function on the interval.",
+              "Step size and points\n\\[h = \\dfrac{b-a}{n} = \\dfrac{2-(-4)}{8} = \\dfrac{6}{8} = 0.75\\]\nPoints \\(x_{i} = a + ih\\): \\(-4, -3.25, -2.5, -1.75, -1, -0.25, 0.5, 1.25, 2\\)\nWhy: 8 equal subintervals give 9 points; the first and last are the ends \\(a\\) and \\(b\\).",
+              "Function values (4 decimal places)\n\\[f(-4) = 0.0000\\]\n\\[f(-3.25) = 1.9843\\]\n\\[f(-2.5) = 2.5981\\]\n\\[f(-1.75) = 2.9047\\]\n\\[f(-1) = 3.0000\\]\n\\[f(-0.25) = 2.9047\\]\n\\[f(0.5) = 2.5981\\]\n\\[f(1.25) = 1.9843\\]\n\\[f(2) = 0.0000\\]\nWhy: Work out \\(8 - 2x - x^{2}\\) first, then the square root. The values are symmetric about \\(x = -1\\), the centre of the circle. The table with the answer collects them with their weights.",
+              "Add the inner values\n\\[S = f(x_{1}) + \\dots + f(x_{7})\\]\n\\[= 1.9843 + 2.5981 + 2.9047\\]\n\\[+ 3.0000 + 2.9047 + 2.5981\\]\n\\[+ 1.9843\\]\n\\[= 17.9742\\]\nWhy: these 7 inner values are shared by two neighbouring trapeziums, so they will be doubled.",
+              "Apply the Trapezium Rule\n\\[\\text{Area} \\approx \\dfrac{h}{2}\\big[f(x_{0}) + 2S + f(x_{8})\\big]\\]\n\\[= 0.375\\big[0.0000 + 2(17.9742)\\]\n\\[+ 0.0000\\big]\\]\n\\[= 0.375(35.9484)\\]\n\\[= 13.48065 \\approx 13.4807\\]\nWhy: \\(\\frac{h}{2} = 0.375\\); the end values are used once and the inner sum twice. Round only at the end.",
+              "Check:\n\\[\\text{Exact area} = \\dfrac{1}{2}\\pi r^{2} = \\dfrac{1}{2}\\pi (3)^{2}\\]\n\\[= \\dfrac{9\\pi}{2} \\approx 14.137\\]\nWhy: the region is a semicircle of radius 3. The trapezium value 13.48 is smaller because the circle bends downwards and the chords cut off the curved edge."
+            ],
+            "final_answer": "Approximate area \\(\\approx 13.4807 \\approx 13.5\\) square units (13.48 rounds to 13.5, as stated); exact area \\(\\frac{9\\pi}{2} \\approx 14.137\\) square units.",
+            "answer_table": {
+              "header": [
+                "i",
+                "\\(x_{i}\\)",
+                "\\(f(x_{i})\\)",
+                "Weight"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(-4\\)",
+                  "\\(0.0000\\)",
+                  "1"
+                ],
+                [
+                  "1",
+                  "\\(-3.25\\)",
+                  "\\(1.9843\\)",
+                  "2"
+                ],
+                [
+                  "2",
+                  "\\(-2.5\\)",
+                  "\\(2.5981\\)",
+                  "2"
+                ],
+                [
+                  "3",
+                  "\\(-1.75\\)",
+                  "\\(2.9047\\)",
+                  "2"
+                ],
+                [
+                  "4",
+                  "\\(-1\\)",
+                  "\\(3.0000\\)",
+                  "2"
+                ],
+                [
+                  "5",
+                  "\\(-0.25\\)",
+                  "\\(2.9047\\)",
+                  "2"
+                ],
+                [
+                  "6",
+                  "\\(0.5\\)",
+                  "\\(2.5981\\)",
+                  "2"
+                ],
+                [
+                  "7",
+                  "\\(1.25\\)",
+                  "\\(1.9843\\)",
+                  "2"
+                ],
+                [
+                  "8",
+                  "\\(2\\)",
+                  "\\(0.0000\\)",
+                  "1"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

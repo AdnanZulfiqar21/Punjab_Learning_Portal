@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-4-Q4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-4-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 255,
+          "pdf_to": 255,
+          "note": "Exercise 8.4, Question 4 (book p. 253); answer key p. 307 (PDF 309)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. In a certain cryptographic system, the decoding speed \\(v\\) (in units per second) is related to the security delay function \\(d(v) = \\frac{v^{2}}{20 + v}\\), where \\(d(v)\\) represents the decoding delay in milliseconds. For secure transmission, the system requires a decoding delay of 50 milliseconds. Use Newton-Raphson Method with initial guess \\(v_0 = 35\\) to determine the decoding speed \\(v\\) that satisfies \\(d(v) = 50\\), correct to three decimal places.",
+            "explanation": "We need v with d(v) = 50: write it as f(v) = d(v) - 50 = 0.\nGiven: the start v_0 = 35. To find: v to three decimal places by Newton-Raphson.\nPlan: differentiate by the quotient rule, iterate with 5 decimal places until two successive values agree to 0.0005.",
+            "steps": [
+              "Given: \\(d(v) = \\frac{v^{2}}{20 + v}\\), required \\(d(v) = 50\\), \\(v_0 = 35\\).\nTo find: \\(v\\), correct to three decimal places.\nMethod: Newton-Raphson, \\(v_{n+1} = v_n - f(v_n)/f'(v_n)\\), as the question asks.",
+              "Form f(v) = 0\n\\[f(v) = \\dfrac{v^{2}}{20 + v} - 50\\]\nWhy: a root of f is exactly a speed at which the delay is 50 ms.",
+              "Derivative (quotient rule)\n\\[f'(v) = \\dfrac{(20 + v)(2v) - v^{2}(1)}{(20 + v)^{2}}\\]\n\\[= \\dfrac{v^{2} + 40v}{(20 + v)^{2}} = \\dfrac{v(v + 40)}{(v + 20)^{2}}\\]\nWhy: for \\(v > 0\\), \\(f'(v) > 0\\), so \\(f'(v) \\ne 0\\) and the method can be applied.",
+              "Iteration 1: v_0 = 35\n\\[f(35) = \\dfrac{1225}{55} - 50 = -27.72727\\]\n\\[f'(35) = \\dfrac{35(75)}{55^{2}} = \\dfrac{2625}{3025}\\]\n\\[= 0.86777\\]\n\\[v_1 = 35 + \\dfrac{27.72727}{0.86777} = 66.95238\\]\nWhy: f(35) < 0 means the delay at 35 is too small, so v must increase; the step is large because the slope is small.",
+              "Iteration 2: v_1 = 66.95238\n\\[f(v_1) = \\dfrac{4482.62119}{86.95238} - 50\\]\n\\[= 1.55260\\]\n\\[f'(v_1) = 0.94709\\]\n\\[v_2 = 66.95238 - \\dfrac{1.55260}{0.94709}\\]\n\\[= 65.31305\\]\nWhy: the first step went past the root (f > 0 now), so this step comes back.",
+              "Iterations 3 and 4\n\\[f(65.31305) = 0.00166\\]\n\\[v_3 = 65.31305 - \\dfrac{0.00166}{0.94504} = 65.31129\\]\n\\[f(65.31129) \\approx 0.00000,\\ v_4 = 65.31129\\]\nWhy: \\(|v_4 - v_3| < 0.0005\\) and \\(f \\approx 0\\), so \\(v \\approx 65.311\\).",
+              "Check\n\\[d(65.311) = \\dfrac{65.311^{2}}{85.311} \\approx 50.000\\]\nExact: \\(v^{2} = 50(20 + v)\\), i.e. \\(v^{2} - 50v - 1000 = 0\\), so \\(v = 25 + \\sqrt{1625} = 65.31129\\). The other root \\(-15.31\\) is rejected (a speed is not negative).\nWhy: clearing the fraction gives a quadratic whose exact root agrees with the iterations."
+            ],
+            "final_answer": "\\(v \\approx 65.311\\) units per second.",
+            "answer_table": {
+              "header": [
+                "\\(n\\)",
+                "\\(v_n\\)",
+                "\\(f(v_n)\\), \\(f'(v_n)\\)",
+                "\\(v_{n+1}\\)"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "35.00000",
+                  "-27.72727, 0.86777",
+                  "66.95238"
+                ],
+                [
+                  "1",
+                  "66.95238",
+                  "1.55260, 0.94709",
+                  "65.31305"
+                ],
+                [
+                  "2",
+                  "65.31305",
+                  "0.00166, 0.94504",
+                  "65.31129"
+                ],
+                [
+                  "3",
+                  "65.31129",
+                  "0.00000, 0.94504",
+                  "65.31129"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

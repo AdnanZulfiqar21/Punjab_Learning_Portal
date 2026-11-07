@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.5.4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.5.4",
+      "title": "8.5.4 Cryptography",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 254,
+          "pdf_to": 254,
+          "note": "Book p. 252: 8.5.4 Cryptography, Example 4 Key Parameter (shown as Example 11): x^5 - 10x + 5 = 0 by Regula-Falsi on [1, 2], iteration table, x = 1.62."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Cryptographic algorithms sometimes involve high-degree nonlinear equations to generate secure keys or pseudo-random numbers."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "The book prints this example as 'Example 4' (the second Example 4 in this unit); we show it as Example 11 (see the note in 8.5.1)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A degree-five polynomial has no general formula for its roots, so a numerical method is the natural tool. The question asks for 'a real value': the book chooses the root in \\([1, 2]\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "Key Parameter. In a cryptosystem, a key parameter \\(x\\) satisfies the equation \\(x^{5} - 10x + 5 = 0\\). Find a real value of \\(x\\) correct to two decimal places using the Regula-Falsi method.\nNote: \\(x\\) represents a component of the encryption key; its approximate value is crucial for secure key generation.",
+            "steps": [
+              "Given: \\(x^{5} - 10x + 5 = 0\\).\nTo find: a real root \\(x\\), correct to two decimal places.\nMethod: Regula-Falsi on an interval of sign change. Since \\(b\\) will stay fixed at 2 with \\(f(2) = 17\\), each step only needs the new \\(a\\) and \\(f(a)\\).",
+              "Define function\n\\[f(x) = x^{5} - 10x + 5\\]\nWhy: Regula-Falsi finds a root of \\(f(x) = 0\\).",
+              "Select interval\n\\[f(1) = 1 - 10 + 5 = -4 < 0\\]\n\\[f(2) = 32 - 20 + 5 = 17 > 0\\]\nWhy: opposite signs, so a root lies in \\([1, 2]\\).",
+              "Continuity\nNote that \\(f(c) = \\lim_{x \\to c} (x^{5} - 10x + 5)\\) for every \\(c \\in [1, 2]\\).\n\\(f\\) is continuous on the interval of sign change \\([1, 2]\\).\nWhy: f is a polynomial; continuity makes the Location of Root Theorem and the method valid.",
+              "Iteration 1: a = 1, b = 2\n\\[x_c = \\dfrac{1(17) - 2(-4)}{17 - (-4)}\\]\n\\[= \\dfrac{25}{21} = 1.1905\\]\n\\[f(1.1905) = 2.3914 - 11.905 + 5\\]\n\\[= -4.5136\\]\nWhy: \\(f(x_c) < 0\\), the same sign as \\(f(a)\\), so \\(a\\) is replaced: \\([1.1905, 2]\\).",
+              "Iteration 2: a = 1.1905, b = 2\n\\[x_c = \\dfrac{1.1905(17) - 2(-4.5136)}{17 + 4.5136}\\]\n\\[= \\dfrac{29.2657}{21.5136} = 1.3603\\]\n\\[f(1.3603) = -3.9453\\]\nWhy: negative again: new interval \\([1.3603, 2]\\).",
+              "Iteration 3: a = 1.3603, b = 2\n\\[x_c = \\dfrac{1.3603(17) + 2(3.9453)}{17 + 3.9453}\\]\n\\[= \\dfrac{31.0157}{20.9453} = 1.4808\\]\n\\[f(1.4808) = -2.6880\\]\nWhy: the iterations continue in the same way; the book lists all of them in the Regula-Falsi Iteration Table below.",
+              "Checking\n\\(|f(1.6216)| = 0.0031 < 0.01\\)\nWhy: \\(f\\) is practically zero at 1.6216 (also below 0.005, the tolerance of 8.3.1), so \\(x \\approx 1.62\\).",
+              "Check:\nSign test (ours): \\(f(1.615) \\approx -0.1634 < 0\\) and \\(f(1.625) \\approx 0.0810 > 0\\), so the root lies in \\(]1.615, 1.625[\\) and rounds to 1.62.\nThe exact root in \\([1, 2]\\) is \\(x = 1.6217\\ldots\\)"
+            ],
+            "answer": "\\(x \\approx 1.62\\)"
+          },
+          {
+            "type": "table",
+            "caption": "Regula-Falsi Iteration Table: (4 decimal places)",
+            "header": [
+              "Iteration",
+              "\\(a\\)",
+              "\\(b\\)",
+              "\\(x_c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\)",
+              "\\(f(x_c)\\)",
+              "New Interval"
+            ],
+            "rows": [
+              [
+                "1",
+                "1.0 (-)",
+                "2.0 (+)",
+                "1.1905 (-)",
+                "-4.5136",
+                "[1.1905, 2]"
+              ],
+              [
+                "2",
+                "1.1905 (-)",
+                "2.0 (+)",
+                "1.3603 (-)",
+                "-3.9453",
+                "[1.3603, 2]"
+              ],
+              [
+                "3",
+                "1.3603 (-)",
+                "2.0 (+)",
+                "1.4808 (-)",
+                "-2.6880",
+                "[1.4808, 2]"
+              ],
+              [
+                "4",
+                "1.4808 (-)",
+                "2.0 (+)",
+                "1.5523 (-)",
+                "-1.5098",
+                "[1.5523, 2]"
+              ],
+              [
+                "5",
+                "1.5523 (-)",
+                "2.0 (+)",
+                "1.5888 (-)",
+                "-0.7641",
+                "[1.5888, 2]"
+              ],
+              [
+                "6",
+                "1.5888 (-)",
+                "2.0 (+)",
+                "1.6065 (-)",
+                "-0.3645",
+                "[1.6065, 2]"
+              ],
+              [
+                "7",
+                "1.6065 (-)",
+                "2.0 (+)",
+                "1.6148 (-)",
+                "-0.1682",
+                "[1.6148, 2]"
+              ],
+              [
+                "8",
+                "1.6148 (-)",
+                "2.0 (+)",
+                "1.6186 (-)",
+                "-0.0764",
+                "[1.6186, 2]"
+              ],
+              [
+                "9",
+                "1.6186 (-)",
+                "2.0 (+)",
+                "1.6203 (-)",
+                "-0.0350",
+                "[1.6203, 2]"
+              ],
+              [
+                "10",
+                "1.6203 (-)",
+                "2.0 (+)",
+                "1.6581 (+)",
+                "+0.9520",
+                "[1.6203, 1.6581]"
+              ],
+              [
+                "11",
+                "1.6203 (-)",
+                "1.6581 (+)",
+                "1.6216 (-)",
+                "-0.0031",
+                "Stop"
+              ]
+            ],
+            "book_errors": [
+              "1.5523",
+              "1.6581",
+              "+0.9520"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "1. Row 4: from \\(a = 1.4808\\) (\\(f(a) = -2.6880\\)) and \\(b = 2\\) (\\(f(b) = 17\\)) the formula gives \\(x_c = \\frac{30.5496}{19.6880} = 1.5517\\) with \\(f(1.5517) = -1.5212\\); the book prints 1.5523. Rows 5-9 are then worked correctly from that printed value, so the slip only changes the numbers a little.\n2. Row 10 is impossible: Regula-Falsi on \\([1.6203, 2]\\) gives \\(x_c = \\frac{27.6151}{17.0350} = 1.6211\\) with \\(f(1.6211) = -0.0154\\), not 1.6581 with \\(f = +0.9520\\). Since \\(f > 0\\) at 1.6581 the printed point lies past the root; a secant through \\((1.6203, -0.0350)\\) and \\((2, 17)\\) cannot cut the axis there. Row 11's interval \\([1.6203, 1.6581]\\) is wrong for the same reason.\n3. Worked correctly (table below) the iterations continue 1.6211, 1.6214, 1.6216, and stop at \\(|f(1.6216)| = 0.0031\\). The book's final answer \\(x \\approx 1.62\\) is correct (exact root 1.6217...)."
+          },
+          {
+            "type": "table",
+            "caption": "Book correction (ours): the Regula-Falsi table worked correctly (4 decimal places)",
+            "header": [
+              "Iteration",
+              "\\(a\\)",
+              "\\(b\\)",
+              "\\(x_c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\)",
+              "\\(f(x_c)\\)",
+              "New Interval"
+            ],
+            "rows": [
+              [
+                "1",
+                "1 (-)",
+                "2 (+)",
+                "1.1905 (-)",
+                "-4.5136",
+                "[1.1905, 2]"
+              ],
+              [
+                "2",
+                "1.1905 (-)",
+                "2 (+)",
+                "1.3603 (-)",
+                "-3.9453",
+                "[1.3603, 2]"
+              ],
+              [
+                "3",
+                "1.3603 (-)",
+                "2 (+)",
+                "1.4808 (-)",
+                "-2.6880",
+                "[1.4808, 2]"
+              ],
+              [
+                "4",
+                "1.4808 (-)",
+                "2 (+)",
+                "1.5517 (-)",
+                "-1.5212",
+                "[1.5517, 2]"
+              ],
+              [
+                "5",
+                "1.5517 (-)",
+                "2 (+)",
+                "1.5885 (-)",
+                "-0.7707",
+                "[1.5885, 2]"
+              ],
+              [
+                "6",
+                "1.5885 (-)",
+                "2 (+)",
+                "1.6063 (-)",
+                "-0.3692",
+                "[1.6063, 2]"
+              ],
+              [
+                "7",
+                "1.6063 (-)",
+                "2 (+)",
+                "1.6147 (-)",
+                "-0.1706",
+                "[1.6147, 2]"
+              ],
+              [
+                "8",
+                "1.6147 (-)",
+                "2 (+)",
+                "1.6185 (-)",
+                "-0.0789",
+                "[1.6185, 2]"
+              ],
+              [
+                "9",
+                "1.6185 (-)",
+                "2 (+)",
+                "1.6203 (-)",
+                "-0.0350",
+                "[1.6203, 2]"
+              ],
+              [
+                "10",
+                "1.6203 (-)",
+                "2 (+)",
+                "1.6211 (-)",
+                "-0.0154",
+                "[1.6211, 2]"
+              ],
+              [
+                "11",
+                "1.6211 (-)",
+                "2 (+)",
+                "1.6214 (-)",
+                "-0.0080",
+                "[1.6214, 2]"
+              ],
+              [
+                "12",
+                "1.6214 (-)",
+                "2 (+)",
+                "1.6216 (-)",
+                "-0.0031",
+                "Stop"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Checking: \\(|f(1.6216)| = 0.0031 < 0.01\\). Final Answer: \\(x \\approx 1.62\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is Regula-Falsi slow here (11-12 iterations)? On \\([1, 2]\\) the curve bends upwards (\\(f''(x) = 20x^{3} > 0\\)), so every secant line lies above the curve and cuts the axis to the LEFT of the root. Hence \\(b = 2\\) never moves, and because \\(f(2) = 17\\) is huge compared with \\(f(a)\\), each step creeps forward only a little.\nWith \\(b\\) fixed the formula simplifies to \\(x_c = \\frac{17a - 2f(a)}{17 - f(a)}\\), which makes the table quicker to fill.\nThe equation has two more real roots: \\(f(0) = 5 > 0\\) and \\(f(1) = -4 < 0\\) give one in \\([0, 1]\\) (\\(x \\approx 0.50\\)), and there is one near \\(-1.89\\). The question only asks for 'a real value'."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "When one end stays fixed, write \\(f(b)\\) once and reuse it; check each new \\(x_c\\) lies between the current \\(a\\) and \\(b\\). A value outside the interval (like the printed 1.6581 with \\(f > 0\\)) is a sure sign of an arithmetic slip."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "Key model: \\(x^{5} - 10x + 5 = 0\\), \\(f(1) = -4\\), \\(f(2) = 17\\): root in \\([1, 2]\\).\nRegula-Falsi with \\(b = 2\\) fixed; every \\(f(x_c) < 0\\) replaces \\(a\\).\nStop at \\(|f(1.6216)| = 0.0031\\): \\(x \\approx 1.62\\).\nEvery new point must stay inside the current interval."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Writing \\(-2(-4)\\) as \\(-8\\) in the first iteration: it is \\(+8\\), giving \\(25/21\\).\nReplacing b when f(x_c) is negative: the end with the same sign as f(x_c) (here a) is replaced.\nStopping at |f| = 0.0080 when the 8.3.1 tolerance for two places is 0.005."
+          }
+        ]
+      }
+    }
+  ]
+}
