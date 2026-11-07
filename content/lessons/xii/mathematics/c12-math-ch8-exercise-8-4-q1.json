@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-4-Q1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-4-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 255,
+          "pdf_to": 255,
+          "note": "Exercise 8.4, Question 1 (book p. 253); answer key p. 307 (PDF 309)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1",
+            "prompt": "1. In a certain chemical reaction, the concentration of a substance at equilibrium is governed by the relation \\(x^{2} + 0.2x - 0.04 = 0\\), where \\(x\\) is the equilibrium concentration (in moles per liter). Use bisection method to find the positive equilibrium concentration of the substance accurate to two decimal places.",
+            "explanation": "A real-life model that is a quadratic equation; we must use bisection, not the quadratic formula.\nGiven: the equation and that the concentration is positive. To find: the positive root to 2 decimal places.\nPlan: find a small interval of sign change, halve it until every number left in it rounds to the same 2-decimal value.",
+            "steps": [
+              "Given: \\(x^{2} + 0.2x - 0.04 = 0\\), \\(x > 0\\) (a concentration).\nTo find: the positive root, correct to two decimal places.\nMethod: Bisection, as the question asks. It needs only an interval \\([a, b]\\) where \\(f\\) changes sign.",
+              "Function and continuity\n\\[f(x) = x^{2} + 0.2x - 0.04\\]\nWhy: f is a polynomial, so it is continuous at every real number; the Location of Root Theorem can be used.",
+              "Interval of sign change\n\\[f(0) = -0.04 < 0\\]\n\\[f(0.1) = 0.01 + 0.02 - 0.04 = -0.01\\]\n\\[f(0.2) = 0.04 + 0.04 - 0.04 = 0.04\\]\nSo the positive root lies in \\([0.1, 0.2]\\).\nWhy: a concentration is a small positive number, so we test small values; f(0.1) < 0 and f(0.2) > 0.",
+              "Iteration 1\n\\[c = \\dfrac{0.1 + 0.2}{2} = 0.15\\]\n\\[f(0.15) = 0.0225 + 0.03 - 0.04\\]\n\\[= 0.0125 > 0\\]\nWhy: \\(f(0.1) < 0 < f(0.15)\\), so the root is in \\([0.1, 0.15]\\).",
+              "Iteration 2\n\\[c = \\dfrac{0.1 + 0.15}{2} = 0.125\\]\n\\[f(0.125) = 0.015625 + 0.025 - 0.04\\]\n\\[= 0.000625 > 0\\]\nWhy: the root is in \\([0.1, 0.125]\\). Although \\(|f(0.125)| < 0.005\\), we do not stop: 0.125 would round to 0.13, but the root is below 0.125. Near the root the graph rises slowly (\\(f'(x) = 2x + 0.2 \\approx 0.45\\)), so a small \\(|f|\\) alone does not fix the second decimal.",
+              "Iteration 3\n\\[c = \\dfrac{0.1 + 0.125}{2} = 0.1125\\]\n\\[f(0.1125) = -0.004844 < 0\\]\nWhy: now the sign change is in \\([0.1125, 0.125]\\).",
+              "Iteration 4\n\\[c = \\dfrac{0.1125 + 0.125}{2} = 0.11875\\]\n\\[f(0.11875) = -0.002148 < 0\\]\nWhy: new interval \\([0.11875, 0.125]\\).",
+              "Iteration 5\n\\[c = \\dfrac{0.11875 + 0.125}{2} = 0.121875\\]\n\\[f(0.121875) = -0.000771 < 0\\]\nWhy: the root is in \\(]0.121875, 0.125[\\); every number in this interval rounds to 0.12, so the second decimal is settled and we stop (and \\(|f(c)| < 0.005\\)).",
+              "Check\n\\[f(0.115) = -0.003775 < 0\\]\n\\[f(0.125) = 0.000625 > 0\\]\nSo the root lies in \\(]0.115, 0.125[\\) and rounds to 0.12.\nExact: \\(x = \\frac{-0.2 + \\sqrt{0.2}}{2} = 0.1236\\); the other root \\(-0.3236\\) is negative and rejected.\nWhy: a sign test on both sides of 0.12 confirms the rounding."
+            ],
+            "final_answer": "\\(x \\approx 0.12\\) moles per liter (the positive equilibrium concentration).",
+            "answer_table": {
+              "header": [
+                "Iteration",
+                "\\([a, b]\\)",
+                "\\(c = \\frac{a+b}{2}\\)",
+                "\\(f(c)\\)"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "[0.1, 0.2]",
+                  "0.15",
+                  "0.012500 (+)"
+                ],
+                [
+                  "2",
+                  "[0.1, 0.15]",
+                  "0.125",
+                  "0.000625 (+)"
+                ],
+                [
+                  "3",
+                  "[0.1, 0.125]",
+                  "0.1125",
+                  "-0.004844 (-)"
+                ],
+                [
+                  "4",
+                  "[0.1125, 0.125]",
+                  "0.11875",
+                  "-0.002148 (-)"
+                ],
+                [
+                  "5",
+                  "[0.11875, 0.125]",
+                  "0.121875",
+                  "-0.000771 (-)"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

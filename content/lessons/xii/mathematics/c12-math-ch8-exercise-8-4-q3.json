@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-4-Q3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-4-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 255,
+          "pdf_to": 255,
+          "note": "Exercise 8.4, Question 3 (book p. 253); answer key p. 307 (PDF 309)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. In a nonlinear LC circuit, the equilibrium charge \\(q\\) on the capacitor satisfies \\(q^{3} - 4q + 2 = 0\\). Find the equilibrium values of charge stored on the capacitor lying in the interval \\([0, 1]\\) using Regula-Falsi method accurate to three decimal places.",
+            "explanation": "A cubic equation; the root we want lies in the given interval [0, 1].\nTo find: the root in [0, 1] to three decimal places by Regula-Falsi.\nPlan: check the sign change on [0, 1], apply the Regula-Falsi formula carrying 5 decimal places, stop when |f(c)| < 0.0005.",
+            "steps": [
+              "Given: \\(q^{3} - 4q + 2 = 0\\), interval \\([0, 1]\\).\nTo find: the equilibrium charge \\(q\\) in \\([0, 1]\\), correct to three decimal places.\nMethod: Regula-Falsi, \\(c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\). For 3 decimal places the tolerance is \\(|f(c)| < 0.0005\\) (8.3.1).",
+              "Function, continuity, sign change\n\\[f(q) = q^{3} - 4q + 2\\]\n\\[f(0) = 2 > 0, \\quad f(1) = -1 < 0\\]\nWhy: f is a polynomial, hence continuous on [0, 1], and the signs at the ends are opposite, so a root lies in [0, 1].",
+              "Iteration 1: a = 0, b = 1\n\\[c = \\dfrac{0(-1) - 1(2)}{-1 - 2} = \\dfrac{-2}{-3}\\]\n\\[= 0.66667\\]\n\\[f(0.66667) = 0.29630 - 2.66668 + 2\\]\n\\[= -0.37038 < 0\\]\nWhy: \\(f(c)\\) has the sign of \\(f(b)\\), so \\(b\\) is replaced: \\([0, 0.66667]\\).",
+              "A shortcut while a = 0\n\\[c = \\dfrac{0 \\cdot f(b) - b \\cdot 2}{f(b) - 2} = \\dfrac{2b}{2 - f(b)}\\]\nWhy: \\(a = 0\\) and \\(f(a) = 2\\) stay the same in every iteration (each \\(f(c)\\) turns out negative), so the formula simplifies.",
+              "Iteration 2\n\\[c = \\dfrac{2(0.66667)}{2 + 0.37038}\\]\n\\[= \\dfrac{1.33334}{2.37038} = 0.56250\\]\n\\[f(0.5625) = 0.17798 - 2.25 + 2\\]\n\\[= -0.07202\\]\nWhy: negative again, so \\(b = 0.5625\\).",
+              "Iteration 3\n\\[c = \\dfrac{1.125}{2.07202} = 0.54295\\]\n\\[f(0.54295) = -0.01174\\]\nWhy: \\(b = 0.54295\\); \\(|f(c)|\\) is still above 0.0005.",
+              "Iteration 4\n\\[c = \\dfrac{1.08590}{2.01174} = 0.53978\\]\n\\[f(0.53978) = -0.00185\\]\nWhy: \\(b = 0.53978\\); still above 0.0005.",
+              "Iteration 5\n\\[c = \\dfrac{1.07956}{2.00185} = 0.53928\\]\n\\[f(0.53928) = -0.00029\\]\nWhy: \\(|f(c)| = 0.00029 < 0.0005\\), so we stop: \\(q \\approx 0.539\\).",
+              "Check\n\\[f(0.5385) = 0.00216 > 0\\]\n\\[f(0.5395) = -0.00097 < 0\\]\nThe root lies in \\(]0.5385, 0.5395[\\), so it rounds to 0.539. The other two real roots (about 1.675 and \\(-2.214\\)) are outside \\([0, 1]\\).\nWhy: the sign test on both sides of 0.539 confirms all three decimal places."
+            ],
+            "final_answer": "\\(q \\approx 0.539\\) coulombs (the only equilibrium charge in \\([0, 1]\\)).",
+            "answer_table": {
+              "header": [
+                "Iteration",
+                "\\([a, b]\\)",
+                "\\(c\\)",
+                "\\(f(c)\\)"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "[0, 1]",
+                  "0.66667",
+                  "-0.37038 (-)"
+                ],
+                [
+                  "2",
+                  "[0, 0.66667]",
+                  "0.56250",
+                  "-0.07202 (-)"
+                ],
+                [
+                  "3",
+                  "[0, 0.56250]",
+                  "0.54295",
+                  "-0.01174 (-)"
+                ],
+                [
+                  "4",
+                  "[0, 0.54295]",
+                  "0.53978",
+                  "-0.00185 (-)"
+                ],
+                [
+                  "5",
+                  "[0, 0.53978]",
+                  "0.53928",
+                  "-0.00029 (-)"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

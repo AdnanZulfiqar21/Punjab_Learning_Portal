@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.4.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.4.1",
+      "title": "8.4.1 Trapezium (Trapezoidal) Rule",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 246,
+          "pdf_to": 250,
+          "note": "Book p. 244-248: 8.4.1 Trapezium Rule, Figure 8.7, derivation, Note, printed Examples 1-2 (shown as Examples 6-7)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Consider a continuous function \\(f(x) \\ge 0\\) on \\([a, b]\\). Let \\(h = \\frac{b-a}{n}\\) for some positive integer \\(n\\). Divide the interval \\([a, b]\\) into \\(n\\) subintervals of equal length \\(h\\) as follows:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[[a, a+h],\\ [a+h, a+2h],\\]\n\\[[a+2h, a+3h],\\ \\dots,\\]\n\\[[a+(n-1)h,\\ a+nh = b]\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(x_{i} = a + ih;\\ i = 0, 1, 2, \\dots, n\\). In this way the above subintervals can be written as follows:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[[a = x_{0}, x_{1}],\\ [x_{1}, x_{2}],\\]\n\\[[x_{2}, x_{3}],\\ \\dots,\\ [x_{n-1}, x_{n} = b].\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A quick illustration (ours): for \\([0, 1]\\) with \\(n = 4\\), \\(h = \\frac{1-0}{4} = 0.25\\) and the points are \\(x_{0} = 0\\), \\(x_{1} = 0.25\\), \\(x_{2} = 0.5\\), \\(x_{3} = 0.75\\), \\(x_{4} = 1\\). Notice: \\(n\\) subintervals always have \\(n + 1\\) points, and the last point is \\(x_{n} = a + nh = b\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The function values \\(f(x_{0}), f(x_{1}), f(x_{2}), \\dots, f(x_{n})\\) at the end points of each subinterval represent the lengths of parallel sides of \\(n\\) trapeziums as shown in the Figure 8.7. Length of the base of each trapezium is \\(h\\), that is, the distance between the parallel sides of these trapeziums. Thus, the areas of these trapeziums are given by:"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch8-fig-8-7-trapezium-rule",
+            "alt": "A curve y = f(x) above the x-axis. Vertical lines at a = x0, x1, x2, x3, x4 and, after three dots, at x n-2, x n-1 and xn = b meet the curve at the points f(x0), f(x1) and so on. Each pair of neighbouring vertical lines, the x-axis and the straight chord joining the two curve points form a coloured trapezium of width h.",
+            "caption": "Figure 8.7: the region under y = f(x) from a to b cut into n trapeziums of equal width h (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "equation",
+            "latex": "A_{i} = \\dfrac{h}{2}\\big[f(x_{i-1}) + f(x_{i})\\big];\\ i = 1, 2, \\dots, n",
+            "text_alt": "A i equals h over 2 times, open bracket, f of x i minus 1 plus f of x i, close bracket, for i equals 1, 2, up to n"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Area of a trapezium = (1/2) x (sum of the two parallel sides) x (distance between them). In Figure 8.7 each trapezium stands upright: its parallel sides are the vertical lengths \\(f(x_{i-1})\\) and \\(f(x_{i})\\), and the distance between them is the width \\(h\\). The top is the straight chord joining the two points of the curve, and this chord is the only approximation we make: the trapezium replaces the thin curved strip under the graph."
+          },
+          {
+            "type": "paragraph",
+            "text": "Since the value of the definite integral \\(\\int_{a}^{b} f(x)\\,dx\\) is approximately equal to the sum of areas of the trapeziums, we have:\n\\[\\int_{a}^{b} f(x)\\,dx \\approx \\sum_{i=1}^{n} A_{i}\\]\n\\[= A_{1} + A_{2} + A_{3} + \\dots + A_{n}\\]\n\\[= \\dfrac{h}{2}\\big[f(x_{0}) + f(x_{1})\\big]\\]\n\\[+ \\dfrac{h}{2}\\big[f(x_{1}) + f(x_{2})\\big]\\]\n\\[+ \\dfrac{h}{2}\\big[f(x_{2}) + f(x_{3})\\big] + \\dots\\]\n\\[+ \\dfrac{h}{2}\\big[f(x_{n-1}) + f(x_{n})\\big]\\]\n\\[= \\dfrac{h}{2}\\big[f(x_{0}) + 2f(x_{1}) + 2f(x_{2})\\]\n\\[+ \\dots + 2f(x_{n-1}) + f(x_{n})\\big]\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why the factor 2? Every inner value \\(f(x_{1}), \\dots, f(x_{n-1})\\) is the right side of one trapezium and the left side of the next, so it is counted twice. The two end values \\(f(x_{0})\\) and \\(f(x_{n})\\) belong to only one trapezium each. Memory aid: \\\"first + last + 2 x (all the middle ones)\\\", then multiply by \\(\\frac{h}{2}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Hence,"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}\\int_{a}^{b} f(x)\\,dx \\approx \\dfrac{h}{2}\\Big[&f(x_{0}) + 2f(x_{1}) + 2f(x_{2}) \\\\ &+ \\dots + 2f(x_{n-1}) + f(x_{n})\\Big]\\end{aligned}",
+            "text_alt": "integral from a to b of f of x d x is approximately h over 2 times, open bracket, f of x 0 plus 2 f of x 1 plus 2 f of x 2 plus and so on plus 2 f of x n minus 1 plus f of x n, close bracket"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "1. From Figure 8.6, it is clear that the accuracy of the approximation improves as n is taken sufficiently large, because increasing the number of trapeziums reduces the gap between the exact area and the approximated area.\n2. While applying the Trapezium Rule, the values obtained from the calculator should be rounded to at least four decimal places to maintain accuracy in the final result.\n3. Although the rule is motivated using a positive function only to represent area, it is generally true for any continuous function on \\([a, b]\\), including those that take negative values. In such cases, each trapezium approximates the signed area, and the sum provides a reliable estimate of the integral. The proof of this generalization is beyond the scope of the book.",
+            "book_errors": [
+              "From Figure 8.6"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Note 1 prints \"From Figure 8.6\". Figure 8.6 is the Newton-Raphson tangent figure of 8.3.4; the trapeziums are in Figure 8.7, so it should read \"From Figure 8.7\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Note 3 in practice: where \\(f(x) < 0\\), the function value is negative, so that trapezium adds a negative amount. This is exactly what a definite integral does (area below the \\(x\\)-axis counts as negative). So do not drop the minus signs: in Exercise 8.3, \\(\\cos 2 = -0.4161\\) (Question 1) and some values of \\(\\sin(x^{2})\\) (Question 8) are negative."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "The book restarts its example numbering in 8.4.1: the two examples below are printed as \"Example 1\" and \"Example 2\". They are the sixth and seventh examples of this unit, so we show them as Example 6 and Example 7, to keep them apart from Examples 1 and 2 of 8.1 and 8.2. Nothing else is changed."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Example 6 (printed as Example 1)"
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Use trapezium rule to approximate the definite integral \\(\\int_{0}^{1} e^{-x^{2}}\\,dx\\) by dividing the closed interval \\([0, 1]\\) into 7 subintervals of equal length.",
+            "book_errors": [
+              "\\(h = \\frac{b-a}{n} = \\frac{1-0}{7} = \\frac{1}{7} \\cong 0.142\\)"
+            ],
+            "steps": [
+              "Given: \\(f(x) = e^{-x^{2}}\\), \\(a = 0\\), \\(b = 1\\), \\(n = 7\\).\nTo find: an approximate value of \\(\\int_{0}^{1} e^{-x^{2}}\\,dx\\).\nMethod: the Trapezium Rule. \\(e^{-x^{2}}\\) has no elementary antiderivative, so the Fundamental Theorem cannot be used; the number of subintervals \\(n = 7\\) is given directly.",
+              "Continuity\n\\[f(c) = \\lim_{x \\to c} e^{-x^{2}}\\ \\ \\forall\\, c \\in [0, 1]\\]\n\\[\\Rightarrow f(x) = e^{-x^{2}} \\text{ is continuous on } [0, 1]\\]\nWhy: the rule is built for a continuous function. \\(-x^{2}\\) is a polynomial and the exponential function is continuous everywhere, so their composition has no breaks.",
+              "Step size\n\\(h = \\frac{b-a}{n} = \\frac{1-0}{7} = \\frac{1}{7} \\cong 0.142\\)\nWhy: \\([0, 1]\\) is cut into 7 equal parts, so each width is the length 1 divided by 7. We keep the exact fraction, so \\(\\frac{h}{2} = \\frac{1}{14}\\).",
+              "Trapezium Rule for n = 7\n\\[\\int_{a}^{b} f(x)\\,dx \\approx \\dfrac{h}{2}\\big[f(x_{0})\\]\n\\[+ 2\\big(f(x_{1}) + f(x_{2}) + \\dots + f(x_{6})\\big)\\]\n\\[+ f(x_{7})\\big]\\]\nWhy: with 7 subintervals there are 8 points \\(x_{0}, \\dots, x_{7}\\). The end values are used once, the six inner values \\(x_{1}, \\dots, x_{6}\\) twice.",
+              "Compute function values (round to 4 decimal places)\n\\[x_{0} = 0,\\quad f(0) = 1\\]\n\\[x_{1} = 0 + \\tfrac{1}{7} = \\tfrac{1}{7}\\]\n\\[f(\\tfrac{1}{7}) = e^{-1/49} = 0.9798\\]\n\\[x_{2} = \\tfrac{1}{7} + \\tfrac{1}{7} = \\tfrac{2}{7}\\]\n\\[f(\\tfrac{2}{7}) = e^{-4/49} = 0.9216\\]\n\\[x_{3} = \\tfrac{3}{7},\\quad f(\\tfrac{3}{7}) = e^{-9/49} = 0.8322\\]\n\\[x_{4} = \\tfrac{4}{7},\\quad f(\\tfrac{4}{7}) = e^{-16/49} = 0.7214\\]\n\\[x_{5} = \\tfrac{5}{7},\\quad f(\\tfrac{5}{7}) = e^{-25/49} = 0.6004\\]\n\\[x_{6} = \\tfrac{6}{7},\\quad f(\\tfrac{6}{7}) = e^{-36/49} = 0.4797\\]\n\\[x_{7} = \\tfrac{6}{7} + \\tfrac{1}{7} = 1,\\quad f(1) = 0.3679\\]\nWhy: \\(x_{i} = a + ih = \\frac{i}{7}\\), so \\(x_{i}^{2} = \\frac{i^{2}}{49}\\) and \\(f(x_{i}) = e^{-i^{2}/49}\\). Note 2 asks for at least four decimal places.",
+              "Apply Trapezium Rule\n\\[\\int_{0}^{1} e^{-x^{2}}\\,dx \\approx \\dfrac{1}{14}\\big[1 + 2(0.9798\\]\n\\[+ 0.9216 + 0.8322 + 0.7214\\]\n\\[+ 0.6004 + 0.4797) + 0.3679\\big]\\]\n\\[= \\dfrac{1}{14}\\big[1 + 2(4.5351) + 0.3679\\big]\\]\n\\[= \\dfrac{1}{14}(10.4381) = 0.7456\\]\nWhy: \\(\\frac{h}{2} = \\frac{1}{14}\\); the six inner values add to 4.5351, twice that is 9.0702, and \\(1 + 9.0702 + 0.3679 = 10.4381\\).",
+              "Check:\nAll values of \\(e^{-x^{2}}\\) on \\([0, 1]\\) lie between 0.3679 and 1, and the interval has length 1, so the integral must lie between 0.3679 and 1: 0.7456 does. (Our addition: a computer with very many subintervals gives 0.7468, so the error with only 7 trapeziums is about 0.001.)"
+            ],
+            "answer": "\\(\\int_{0}^{1} e^{-x^{2}}\\,dx \\approx 0.7456\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 6 prints \\(h = \\frac{1}{7} \\cong 0.142\\). To four decimal places \\(\\frac{1}{7} = 0.142857\\ldots \\approx 0.1429\\), not 0.142. The working uses the exact \\(h = \\frac{1}{7}\\) (so \\(\\frac{h}{2} = \\frac{1}{14}\\)), so the result 0.7456 is not affected."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Example 7 (printed as Example 2)"
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Use Trapezium Rule to approximate the definite integral \\(\\int_{0}^{6} \\frac{x}{1+x^{2}}\\,dx\\) by subdividing the closed interval \\([0, 6]\\) each of length 1. Also compare the answer by solving the integral using the Fundamental Theorem of Calculus.",
+            "steps": [
+              "Given: \\(f(x) = \\frac{x}{1+x^{2}}\\), \\(a = 0\\), \\(b = 6\\), \\(h = 1\\).\nTo find: the trapezium approximation of \\(\\int_{0}^{6} \\frac{x}{1+x^{2}}\\,dx\\), and the exact value for comparison.\nMethod: here the width \\(h\\) is given, not \\(n\\), so first find \\(n\\). For the exact value, the numerator is (half) the derivative of the denominator, so \\(\\int \\frac{u'}{u}\\,dx = \\ln|u| + c\\) applies.",
+              "Number of subintervals\n\\[n = \\dfrac{b-a}{h} = \\dfrac{6-0}{1} = 6\\]\nWhy: \\(h = \\frac{b-a}{n}\\) rearranged gives \\(n = \\frac{b-a}{h}\\).",
+              "Points\n\\[x_{0} = 0, x_{1} = 1, x_{2} = 2, x_{3} = 3,\\]\n\\[x_{4} = 4, x_{5} = 5, x_{6} = 6\\]\nWhy: \\(x_{i} = a + ih = 0 + i(1) = i\\).",
+              "Function and continuity\n\\[f(c) = \\lim_{x \\to c} \\dfrac{x}{1+x^{2}}\\ \\ \\forall\\, c \\in [0, 6]\\]\n\\[\\Rightarrow f(x) = \\dfrac{x}{1+x^{2}} \\text{ is continuous on } [0, 6]\\]\nWhy: a rational function is continuous wherever its denominator is not zero, and \\(1 + x^{2} \\ge 1\\) is never zero.",
+              "Trapezium Rule Formula\n\\[\\int_{0}^{6} f(x)\\,dx \\approx \\dfrac{h}{2}\\big[f(x_{0}) + 2\\big(f(x_{1})\\]\n\\[+ f(x_{2}) + f(x_{3}) + f(x_{4})\\]\n\\[+ f(x_{5})\\big) + f(x_{6})\\big]\\]\nWhy: 6 subintervals give 7 points; \\(x_{1}\\) to \\(x_{5}\\) are the inner points.",
+              "Compute function values (4 decimal places)\n\\[f(0) = 0/(1+0) = 0.0000\\]\n\\[f(1) = 1/(1+1) = 0.5000\\]\n\\[f(2) = 2/(1+4) = 0.4000\\]\n\\[f(3) = 3/(1+9) = 0.3000\\]\n\\[f(4) = 4/(1+16) = 4/17 \\approx 0.2353\\]\n\\[f(5) = 5/(1+25) = 5/26 \\approx 0.1923\\]\n\\[f(6) = 6/(1+36) = 6/37 \\approx 0.1622\\]\nWhy: substitute each point into \\(\\frac{x}{1+x^{2}}\\).",
+              "Apply Trapezium Rule\n\\[\\int_{0}^{6} \\dfrac{x}{1+x^{2}}\\,dx \\approx \\dfrac{1}{2}\\big[0 + 2(0.5 + 0.4\\]\n\\[+ 0.3 + 0.2353 + 0.1923) + 0.1622\\big]\\]\n\\[= 0.5\\big[2(1.6276) + 0.1622\\big]\\]\n\\[= 0.5(3.4174) = 1.7087\\]\nWhy: \\(\\frac{h}{2} = \\frac{1}{2} = 0.5\\); inner sum \\(0.5 + 0.4 + 0.3 + 0.2353 + 0.1923 = 1.6276\\); \\(2(1.6276) + 0.1622 = 3.4174\\) (the first value is 0).",
+              "Exact value using the Fundamental Theorem of Calculus\n\\[\\int_{0}^{6} \\dfrac{x}{1+x^{2}}\\,dx = \\dfrac{1}{2}\\int_{0}^{6} \\dfrac{2x}{1+x^{2}}\\,dx\\]\n\\[= \\dfrac{1}{2}\\ln|1+x^{2}|\\,\\Big|_{0}^{6}\\]\n\\[\\because \\int \\dfrac{du/dx}{u}\\,dx = \\ln|u| + c\\]\n\\[= \\dfrac{1}{2}\\ln(1+36) - \\dfrac{1}{2}\\ln(1+0)\\]\n\\[= \\dfrac{1}{2}\\ln(37) = 0.5 \\times 3.6109\\]\n\\[\\approx 1.8055\\]\nWhy: with \\(u = 1 + x^{2}\\), \\(\\frac{du}{dx} = 2x\\); we multiplied and divided by 2 to make the numerator exactly \\(\\frac{du}{dx}\\). Then \\(F(6) - F(0)\\) with \\(\\ln 1 = 0\\).",
+              "Comparison and check:\n\\[1.8055 - 1.7087 = 0.0968\\]\nThe trapezium value is a little below the exact value; the book's note (below) rounds both to three decimals and gets 0.098. Taking more subintervals reduces this difference."
+            ],
+            "answer": "By the Trapezium Rule \\(\\int_{0}^{6} \\frac{x}{1+x^{2}}\\,dx \\approx 1.7087\\); exact value \\(\\frac{1}{2}\\ln 37 \\approx 1.8055\\)."
+          },
+          {
+            "type": "table",
+            "caption": "Example 7: comparison (the book shows the two results in two boxes)",
+            "header": [
+              "By Trapezium Rule",
+              "Exact Value"
+            ],
+            "rows": [
+              [
+                "\\(\\int_{0}^{6} \\frac{x}{1+x^{2}}\\,dx \\approx 1.7087\\)",
+                "\\(\\int_{0}^{6} \\frac{x}{1+x^{2}}\\,dx \\approx 1.8055\\)"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "The difference between the approximate value and the exact value of the definite integral is \\(|1.708 - 1.806| = 0.098\\), which can be decreased by increasing the number of subintervals."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "1. Write a small table: i, x_i, f(x_i). Then add the inner values once and double the sum.\n2. If \\(h\\) is given, find \\(n = \\frac{b-a}{h}\\) first; if \\(n\\) is given, find \\(h = \\frac{b-a}{n}\\).\n3. Keep at least four decimal places in every function value; round only the final answer.\n4. For trigonometric functions put the calculator in radian mode.\n5. When an exact value can be found (as in Example 7), compare it with the trapezium value; the two should be close."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "When is the rule too big or too small? The top of each trapezium is a straight chord. If the curve bends upwards (concave up, like e^x), the chord lies above the curve and the rule overestimates; if it bends downwards (concave down, like the square root or ln x), the chord lies below the curve and the rule underestimates. A smaller h makes the chords hug the curve and the error smaller."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(h = \\frac{b-a}{n}\\), \\(x_{i} = a + ih\\), \\(i = 0, 1, \\dots, n\\): \\(n\\) subintervals and \\(n + 1\\) points.\n2. Each strip is a trapezium of area \\(\\frac{h}{2}[f(x_{i-1}) + f(x_{i})]\\).\n3. Trapezium Rule: \\(\\int_{a}^{b} f(x)\\,dx \\approx \\frac{h}{2}[f(x_{0}) + 2f(x_{1}) + \\dots + 2f(x_{n-1}) + f(x_{n})]\\).\n4. Larger n (smaller h) gives a better approximation; round function values to at least four decimals.\n5. The rule works for any continuous function; negative values give signed area."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Multiplying by \\(h\\) instead of \\(\\frac{h}{2}\\).\n2. Doubling the end values f(x_0) and f(x_n), or forgetting to double the inner values.\n3. Counting points as subintervals: \\(n = 4\\) means 5 points, not 4.\n4. Calculator in degree mode for \\(\\cos x\\) or \\(\\sin(x^{2})\\); the rule needs radians.\\n5. Rounding the inner values to two decimals: the small errors add up and spoil the fourth decimal of the answer."
+          }
+        ]
+      }
+    }
+  ]
+}

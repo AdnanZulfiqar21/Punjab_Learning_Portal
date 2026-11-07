@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.3.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.3.1",
+      "title": "8.3.1 General Rule of Accuracy, Tolerance and Calculator Setup",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 238,
+          "pdf_to": 239,
+          "note": "Book p. 236-237: 8.3.1 tolerance rule |f(c)| < 10^-n/2 with examples, Calculator Setup"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Before applying any numerical method for solving nonlinear equations, it is important to decide the desired accuracy of the root. This is done using a tolerance value, which determines how close the approximate root should be to the actual root to achieve the required number of decimal places."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Decide tolerance based on desired decimal places:"
+          },
+          {
+            "type": "paragraph",
+            "text": "There are several methods to check the accuracy of a root in numerical methods, such as reducing the interval length and checking the function value. In this chapter, we will follow the function value criterion and consider the root accurate when \\(|f(x)|\\) is sufficiently close to zero."
+          },
+          {
+            "type": "paragraph",
+            "text": "If \\(n\\) is the number of decimal places required for the root \\(c\\) of the function \\(f(x)\\), then"
+          },
+          {
+            "type": "equation",
+            "latex": "|f(c)| < \\dfrac{10^{-n}}{2}",
+            "text_alt": "the absolute value of f of c is less than 10 to the power minus n, divided by 2"
+          },
+          {
+            "type": "paragraph",
+            "text": "Examples:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "For 2 decimal places (\\(n = 2\\)): \\(|f(c)| < 0.005 \\approx 0.01\\)",
+              "For 3 decimal places (\\(n = 3\\)): \\(|f(c)| < 0.0005 \\approx 0.001\\)"
+            ],
+            "book_errors": [
+              "\\(|f(c)| < 0.005 \\approx 0.01\\)",
+              "\\(|f(c)| < 0.0005 \\approx 0.001\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book writes \\(|f(c)| < 0.005 \\approx 0.01\\) and \\(|f(c)| < 0.0005 \\approx 0.001\\). The tolerance is the first number: 0.005 for 2 decimal places and 0.0005 for 3 decimal places. 0.01 is twice 0.005, so \"\\(\\approx 0.01\\)\" must not be used as the stopping value. (Examples 3 and 4 stop at 0.0072 and 0.0068, which are not below 0.005; see the corrections there. Their final root 2.61 is still right.)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why \\(\\frac{10^{-n}}{2}\\)? Rounding to \\(n\\) decimal places can move a number by at most half a unit of the last place: \\(\\frac{1}{2} \\times 10^{-n}\\). For \\(n = 2\\) that is 0.005, for \\(n = 3\\) it is 0.0005, for \\(n = 4\\) it is 0.00005.\n\\(|f(c)|\\) small means the curve is close to the x-axis at \\(c\\), so \\(c\\) is close to the root. A good final check (our addition): if \\(r\\) is your rounded answer, work out \\(f\\) at \\(r - \\frac{1}{2}10^{-n}\\) and at \\(r + \\frac{1}{2}10^{-n}\\). Opposite signs mean the exact root is within half a unit of \\(r\\) (by the LRT), so \\(r\\) is surely correct to \\(n\\) decimal places."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Decimal places \\(n\\)",
+              "Tolerance \\(\\frac{10^{-n}}{2}\\)",
+              "Keep at least"
+            ],
+            "rows": [
+              [
+                "1",
+                "\\(0.05\\)",
+                "2 decimals"
+              ],
+              [
+                "2",
+                "\\(0.005\\)",
+                "3 decimals"
+              ],
+              [
+                "3",
+                "\\(0.0005\\)",
+                "4 decimals"
+              ],
+              [
+                "4",
+                "\\(0.00005\\)",
+                "5 decimals"
+              ]
+            ],
+            "caption": "Tolerance and working decimals for each accuracy (our table)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Calculator Setup"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "To obtain a root correct to \\(n\\) decimal places, fix the calculator to at least \\(n + 1\\) decimal places through all the intermediate calculations and round the final answer to the required accuracy.",
+              "Use radian mode if trigonometric functions are involved."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why at least \\(n + 1\\) decimals? If you round every intermediate value to \\(n\\) decimals, the small rounding errors add up and can change the last digit of the answer. The textbook's own examples keep 4 decimals for a 2-decimal answer.\nWhen the function is steep near the root (large \\(f'(x)\\)), even \\(n + 1\\) decimals may not be enough to bring \\(|f(c)|\\) below the tolerance; then keep one more decimal (Exercise 8.2 Q1(iii) is such a case).\nWhy radian mode? In calculus \\(\\sin x\\), \\(\\cos x\\), \\(\\tan x\\) always take \\(x\\) in radians; in degree mode \\(\\sin 1\\) would mean \\(\\sin 1^{\\circ} = 0.0175\\) instead of \\(\\sin 1 = 0.8415\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Decide the accuracy first: \\(n\\) decimal places means tolerance \\(|f(c)| < \\frac{10^{-n}}{2}\\).\n2. 2 d.p.: 0.005; 3 d.p.: 0.0005; 4 d.p.: 0.00005.\n3. Work with at least \\(n + 1\\) decimals; round only the final answer.\n4. Radian mode whenever \\(\\sin\\), \\(\\cos\\) or \\(\\tan\\) appear."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Stopping at \\(|f(c)| \\approx 0.01\\) for 2 decimal places: the rule is \\(|f(c)| < 0.005\\).\n2. Leaving the calculator in degree mode for a trigonometric equation.\n3. Rounding intermediate values to the final number of decimals."
+          }
+        ]
+      }
+    }
+  ]
+}

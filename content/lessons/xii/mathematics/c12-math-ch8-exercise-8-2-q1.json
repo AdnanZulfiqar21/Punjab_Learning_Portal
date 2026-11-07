@@ -1,0 +1,428 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-2-Q1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-2-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 245,
+          "pdf_to": 245,
+          "note": "Exercise 8.2 Q1 (bisection, 3 d.p.) on book p. 243; answers p. 307 (printed under '2.')"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.2 (book p. 307)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Find the real roots of the following functions correct to 3 decimal places using the bisection method, within the specified interval of sign change. \\(f(x) = x^2\\sin(x) - 1\\) : \\([1, 2]\\)",
+            "explanation": "A bisection question: the interval \\([1, 2]\\) is given, so we only check the sign change and then halve.\nGiven \\(f(x) = x^2\\sin x - 1\\); find the root to 3 decimal places.\nPlan: midpoints until \\(|f(c)| < 0.0005\\), then round and check.",
+            "steps": [
+              "Given: \\(f(x) = x^2\\sin(x) - 1\\) on \\([1, 2]\\).\nTo find: the root correct to 3 decimal places.\nMethod: the bisection method. It needs a continuous function that changes sign on the interval; then we halve the interval again and again, always keeping the half where the sign change is. For 3 decimal places the tolerance is \\(|f(c)| < \\frac{10^{-3}}{2} = 0.0005\\), and intermediate values carry 4 decimals. Keep the calculator in radian mode: \\(x\\) is in radians.",
+              "Check continuity and the sign change\n\\[f(1) = 1^{2}\\sin 1 - 1\\]\\[= 0.8415 - 1 = -0.1585\\]\\[f(2) = 2^{2}\\sin 2 - 1\\]\\[= 3.6372 - 1 = 2.6372\\]\n\\(f(1) < 0\\) and \\(f(2) > 0\\), so \\(f(1)\\,f(2) < 0\\).\nWhy: \\(f\\) is built from continuous functions (polynomials, sine, cosine), so it is continuous on \\([1, 2]\\). By the Location of Root Theorem a root lies in this interval.",
+              "Iteration 1: \\(a = 1,\\ b = 2\\)\n\\[c = \\dfrac{1 + 2}{2} = 1.5\\]\\[f(1.5) = (1.5)^{2}\\sin(1.5) - 1\\]\\[= 1.2444 > 0\\]\nThe root lies in \\([1, 1.5]\\), so set \\(b = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(b)\\), so the sign change is between \\(a\\) and \\(c\\).",
+              "Iteration 2: \\(a = 1,\\ b = 1.5\\)\n\\[c = \\dfrac{1 + 1.5}{2} = 1.25\\]\\[f(1.25) = (1.25)^{2}\\sin(1.25) - 1\\]\\[= 0.4828 > 0\\]\nThe root lies in \\([1, 1.25]\\), so set \\(b = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(b)\\), so the sign change is between \\(a\\) and \\(c\\).",
+              "Continue in the same way (table)\nIterations 3 to 12 repeat the same two moves: take the midpoint, keep the half with the sign change. All iterations are in the table below (the sign of \\(f\\) at \\(c\\) is in brackets).\nWhy: each step halves the interval, so after \\(k\\) steps its length is \\(\\frac{1}{2^{k}}\\).",
+              "Stop\n\\[|f(1.0683)| = 0.0002 < 0.0005\\]So \\(c = 1.0683\\) is accurate enough. Rounding to 3 decimal places gives \\(x \\approx 1.068\\).\nWhy: this is the tolerance rule of 8.3.1 for \\(n = 3\\).",
+              "Check:\n\\[f(1.0675) = -0.0018\\]\\[f(1.0685) = 0.0007\\]The signs are opposite, so by the LRT the exact root lies between 1.0675 and 1.0685, and every number there rounds to 1.068."
+            ],
+            "final_answer": "\\(x \\approx 1.068\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\(c\\) (sign of f)",
+                "\\(f(c)\\)",
+                "New interval"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "\\(1.5\\) (+)",
+                  "\\(1.2444\\)",
+                  "\\([1, 1.5]\\)"
+                ],
+                [
+                  "2",
+                  "\\(1.25\\) (+)",
+                  "\\(0.4828\\)",
+                  "\\([1, 1.25]\\)"
+                ],
+                [
+                  "3",
+                  "\\(1.125\\) (+)",
+                  "\\(0.1419\\)",
+                  "\\([1, 1.125]\\)"
+                ],
+                [
+                  "4",
+                  "\\(1.0625\\) (-)",
+                  "\\(-0.0138\\)",
+                  "\\([1.0625, 1.125]\\)"
+                ],
+                [
+                  "5",
+                  "\\(1.0938\\) (+)",
+                  "\\(0.0629\\)",
+                  "\\([1.0625, 1.0938]\\)"
+                ],
+                [
+                  "6",
+                  "\\(1.0782\\) (+)",
+                  "\\(0.0243\\)",
+                  "\\([1.0625, 1.0782]\\)"
+                ],
+                [
+                  "7",
+                  "\\(1.0704\\) (+)",
+                  "\\(0.0053\\)",
+                  "\\([1.0625, 1.0704]\\)"
+                ],
+                [
+                  "8",
+                  "\\(1.0665\\) (-)",
+                  "\\(-0.0042\\)",
+                  "\\([1.0665, 1.0704]\\)"
+                ],
+                [
+                  "9",
+                  "\\(1.0685\\) (+)",
+                  "\\(0.0007\\)",
+                  "\\([1.0665, 1.0685]\\)"
+                ],
+                [
+                  "10",
+                  "\\(1.0675\\) (-)",
+                  "\\(-0.0018\\)",
+                  "\\([1.0675, 1.0685]\\)"
+                ],
+                [
+                  "11",
+                  "\\(1.068\\) (-)",
+                  "\\(-0.0005\\)",
+                  "\\([1.068, 1.0685]\\)"
+                ],
+                [
+                  "12",
+                  "\\(1.0683\\) (+)",
+                  "\\(0.0002\\)",
+                  "Stop"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Answer key numbering: in \"Answers 8.2\" the three questions are printed as 2., 3. and 4. instead of 1., 2. and 3. The answers printed under \"2.\" (1.068, 0.605, 1.929, 2.613) belong to this Question 1."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Find the real roots of the following functions correct to 3 decimal places using the bisection method, within the specified interval of sign change. \\(f(x) = 3x - \\cos x - 1\\) : \\([0, 1]\\)",
+            "explanation": "Bisection on the given interval \\([0, 1]\\).\nGiven \\(f(x) = 3x - \\cos x - 1\\); find the root to 3 decimal places (radian mode).\nPlan: halve until \\(|f(c)| < 0.0005\\), round, then check the answer key's value too.",
+            "steps": [
+              "Given: \\(f(x) = 3x - \\cos x - 1\\) on \\([0, 1]\\).\nTo find: the root correct to 3 decimal places.\nMethod: the bisection method. It needs a continuous function that changes sign on the interval; then we halve the interval again and again, always keeping the half where the sign change is. For 3 decimal places the tolerance is \\(|f(c)| < \\frac{10^{-3}}{2} = 0.0005\\), and intermediate values carry 4 decimals. Radian mode again, because of \\(\\cos x\\).",
+              "Check continuity and the sign change\n\\[f(0) = 0 - \\cos 0 - 1\\]\\[= 0 - 1 - 1 = -2\\]\\[f(1) = 3 - \\cos 1 - 1\\]\\[= 3 - 0.5403 - 1 = 1.4597\\]\n\\(f(0) < 0\\) and \\(f(1) > 0\\), so \\(f(0)\\,f(1) < 0\\).\nWhy: \\(f\\) is built from continuous functions (polynomials, sine, cosine), so it is continuous on \\([0, 1]\\). By the Location of Root Theorem a root lies in this interval.",
+              "Iteration 1: \\(a = 0,\\ b = 1\\)\n\\[c = \\dfrac{0 + 1}{2} = 0.5\\]\\[f(0.5) = 3(0.5) - \\cos(0.5) - 1\\]\\[= -0.3776 < 0\\]\nThe root lies in \\([0.5, 1]\\), so set \\(a = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(a)\\), so the sign change is between \\(c\\) and \\(b\\).",
+              "Iteration 2: \\(a = 0.5,\\ b = 1\\)\n\\[c = \\dfrac{0.5 + 1}{2} = 0.75\\]\\[f(0.75) = 3(0.75) - \\cos(0.75) - 1\\]\\[= 0.5183 > 0\\]\nThe root lies in \\([0.5, 0.75]\\), so set \\(b = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(b)\\), so the sign change is between \\(a\\) and \\(c\\).",
+              "Continue in the same way (table)\nIterations 3 to 11 repeat the same two moves: take the midpoint, keep the half with the sign change. All iterations are in the table below (the sign of \\(f\\) at \\(c\\) is in brackets).\nWhy: each step halves the interval, so after \\(k\\) steps its length is \\(\\frac{1}{2^{k}}\\).",
+              "Stop\n\\[|f(0.607)| = 0.0004 < 0.0005\\]So \\(c = 0.607\\) is accurate enough. Rounding to 3 decimal places gives \\(x \\approx 0.607\\).\nWhy: this is the tolerance rule of 8.3.1 for \\(n = 3\\).",
+              "Check:\n\\[f(0.6065) = -0.0021\\]\\[f(0.6075) = 0.0014\\]The signs are opposite, so by the LRT the exact root lies between 0.6065 and 0.6075, and every number there rounds to 0.607."
+            ],
+            "final_answer": "\\(x \\approx 0.607\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\(c\\) (sign of f)",
+                "\\(f(c)\\)",
+                "New interval"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "\\(0.5\\) (-)",
+                  "\\(-0.3776\\)",
+                  "\\([0.5, 1]\\)"
+                ],
+                [
+                  "2",
+                  "\\(0.75\\) (+)",
+                  "\\(0.5183\\)",
+                  "\\([0.5, 0.75]\\)"
+                ],
+                [
+                  "3",
+                  "\\(0.625\\) (+)",
+                  "\\(0.064\\)",
+                  "\\([0.5, 0.625]\\)"
+                ],
+                [
+                  "4",
+                  "\\(0.5625\\) (-)",
+                  "\\(-0.1584\\)",
+                  "\\([0.5625, 0.625]\\)"
+                ],
+                [
+                  "5",
+                  "\\(0.5938\\) (-)",
+                  "\\(-0.0474\\)",
+                  "\\([0.5938, 0.625]\\)"
+                ],
+                [
+                  "6",
+                  "\\(0.6094\\) (+)",
+                  "\\(0.0082\\)",
+                  "\\([0.5938, 0.6094]\\)"
+                ],
+                [
+                  "7",
+                  "\\(0.6016\\) (-)",
+                  "\\(-0.0196\\)",
+                  "\\([0.6016, 0.6094]\\)"
+                ],
+                [
+                  "8",
+                  "\\(0.6055\\) (-)",
+                  "\\(-0.0057\\)",
+                  "\\([0.6055, 0.6094]\\)"
+                ],
+                [
+                  "9",
+                  "\\(0.6075\\) (+)",
+                  "\\(0.0014\\)",
+                  "\\([0.6055, 0.6075]\\)"
+                ],
+                [
+                  "10",
+                  "\\(0.6065\\) (-)",
+                  "\\(-0.0021\\)",
+                  "\\([0.6065, 0.6075]\\)"
+                ],
+                [
+                  "11",
+                  "\\(0.607\\) (-)",
+                  "\\(-0.0004\\)",
+                  "Stop"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints 0.605. That is not correct to 3 decimal places: \\(f(0.605) = -0.0075\\), far from the tolerance 0.0005. It is the value you get by stopping too early (iteration 8, \\(c = 0.6055\\)). The correct root is \\(x \\approx 0.607\\) (more exactly 0.60710)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Find the real roots of the following functions correct to 3 decimal places using the bisection method, within the specified interval of sign change. \\(f(x) = x^4 - 2x - 10\\) : \\([1, 2]\\)",
+            "explanation": "Bisection on the given interval \\([1, 2]\\) for a polynomial.\nGiven \\(f(x) = x^4 - 2x - 10\\); find the root to 3 decimal places.\nPlan: halve until \\(|f(c)| < 0.0005\\); the function is steep, so keep 5 decimals in \\(c\\).",
+            "steps": [
+              "Given: \\(f(x) = x^4 - 2x - 10\\) on \\([1, 2]\\).\nTo find: the root correct to 3 decimal places.\nMethod: the bisection method. It needs a continuous function that changes sign on the interval; then we halve the interval again and again, always keeping the half where the sign change is. For 3 decimal places the tolerance is \\(|f(c)| < \\frac{10^{-3}}{2} = 0.0005\\), and intermediate values carry 5 decimals. Here we keep 5 decimals in \\(c\\), not 4 (see the step \"Why 5 decimals here\").",
+              "Check continuity and the sign change\n\\[f(1) = 1 - 2 - 10 = -11\\]\\[f(2) = 16 - 4 - 10 = 2\\]\n\\(f(1) < 0\\) and \\(f(2) > 0\\), so \\(f(1)\\,f(2) < 0\\).\nWhy: \\(f\\) is built from continuous functions (polynomials, sine, cosine), so it is continuous on \\([1, 2]\\). By the Location of Root Theorem a root lies in this interval.",
+              "Why 5 decimals here\nNear the root \\(f'(x) = 4x^3 - 2 \\approx 27\\). A change of 0.0001 in \\(c\\) changes \\(f(c)\\) by about 0.0027, which is bigger than the tolerance 0.0005. With only 4 decimals the bisection gets stuck between 1.9294 (\\(f = -0.0012\\)) and 1.9295 (\\(f = 0.0015\\)) and the test is never met.\nWhy: the book's calculator rule says at least \\(n + 1\\) decimals; a steep function needs one more.",
+              "Iteration 1: \\(a = 1,\\ b = 2\\)\n\\[c = \\dfrac{1 + 2}{2} = 1.5\\]\\[f(1.5) = (1.5)^{4} - 2(1.5) - 10\\]\\[= -7.9375 < 0\\]\nThe root lies in \\([1.5, 2]\\), so set \\(a = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(a)\\), so the sign change is between \\(c\\) and \\(b\\).",
+              "Iteration 2: \\(a = 1.5,\\ b = 2\\)\n\\[c = \\dfrac{1.5 + 2}{2} = 1.75\\]\\[f(1.75) = (1.75)^{4} - 2(1.75) - 10\\]\\[= -4.1211 < 0\\]\nThe root lies in \\([1.75, 2]\\), so set \\(a = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(a)\\), so the sign change is between \\(c\\) and \\(b\\).",
+              "Continue in the same way (table)\nIterations 3 to 12 repeat the same two moves: take the midpoint, keep the half with the sign change. All iterations are in the table below (the sign of \\(f\\) at \\(c\\) is in brackets).\nWhy: each step halves the interval, so after \\(k\\) steps its length is \\(\\frac{1}{2^{k}}\\).",
+              "Stop\n\\[|f(1.92945)| = 0.0002 < 0.0005\\]So \\(c = 1.92945\\) is accurate enough. Rounding to 3 decimal places gives \\(x \\approx 1.929\\).\nWhy: this is the tolerance rule of 8.3.1 for \\(n = 3\\).",
+              "Check:\n\\[f(1.9285) = -0.0252\\]\\[f(1.9295) = 0.0015\\]The signs are opposite, so by the LRT the exact root lies between 1.9285 and 1.9295, and every number there rounds to 1.929."
+            ],
+            "final_answer": "\\(x \\approx 1.929\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\(c\\) (sign of f)",
+                "\\(f(c)\\)",
+                "New interval"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "\\(1.5\\) (-)",
+                  "\\(-7.9375\\)",
+                  "\\([1.5, 2]\\)"
+                ],
+                [
+                  "2",
+                  "\\(1.75\\) (-)",
+                  "\\(-4.1211\\)",
+                  "\\([1.75, 2]\\)"
+                ],
+                [
+                  "3",
+                  "\\(1.875\\) (-)",
+                  "\\(-1.3904\\)",
+                  "\\([1.875, 2]\\)"
+                ],
+                [
+                  "4",
+                  "\\(1.9375\\) (+)",
+                  "\\(0.2168\\)",
+                  "\\([1.875, 1.9375]\\)"
+                ],
+                [
+                  "5",
+                  "\\(1.90625\\) (-)",
+                  "\\(-0.6081\\)",
+                  "\\([1.90625, 1.9375]\\)"
+                ],
+                [
+                  "6",
+                  "\\(1.92188\\) (-)",
+                  "\\(-0.2009\\)",
+                  "\\([1.92188, 1.9375]\\)"
+                ],
+                [
+                  "7",
+                  "\\(1.92969\\) (+)",
+                  "\\(0.0066\\)",
+                  "\\([1.92188, 1.92969]\\)"
+                ],
+                [
+                  "8",
+                  "\\(1.92578\\) (-)",
+                  "\\(-0.0976\\)",
+                  "\\([1.92578, 1.92969]\\)"
+                ],
+                [
+                  "9",
+                  "\\(1.92774\\) (-)",
+                  "\\(-0.0455\\)",
+                  "\\([1.92774, 1.92969]\\)"
+                ],
+                [
+                  "10",
+                  "\\(1.92872\\) (-)",
+                  "\\(-0.0193\\)",
+                  "\\([1.92872, 1.92969]\\)"
+                ],
+                [
+                  "11",
+                  "\\(1.92921\\) (-)",
+                  "\\(-0.0062\\)",
+                  "\\([1.92921, 1.92969]\\)"
+                ],
+                [
+                  "12",
+                  "\\(1.92945\\) (+)",
+                  "\\(0.0002\\)",
+                  "Stop"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iv)",
+            "prompt": "1 (iv) Find the real roots of the following functions correct to 3 decimal places using the bisection method, within the specified interval of sign change. \\(f(x) = x^3 - 3x - 10\\) : \\([2, 3]\\)",
+            "explanation": "Bisection on \\([2, 3]\\) for the function of Example 3.\nGiven \\(f(x) = x^3 - 3x - 10\\); find the root to 3 decimal places.\nPlan: the first 8 iterations are those of Example 3; continue until \\(|f(c)| < 0.0005\\).",
+            "steps": [
+              "Given: \\(f(x) = x^3 - 3x - 10\\) on \\([2, 3]\\).\nTo find: the root correct to 3 decimal places.\nMethod: the bisection method. It needs a continuous function that changes sign on the interval; then we halve the interval again and again, always keeping the half where the sign change is. For 3 decimal places the tolerance is \\(|f(c)| < \\frac{10^{-3}}{2} = 0.0005\\), and intermediate values carry 4 decimals. This is the function of Examples 3 and 4, now to 3 decimal places.",
+              "Check continuity and the sign change\n\\[f(2) = 8 - 6 - 10 = -8\\]\\[f(3) = 27 - 9 - 10 = 8\\]\n\\(f(2) < 0\\) and \\(f(3) > 0\\), so \\(f(2)\\,f(3) < 0\\).\nWhy: \\(f\\) is built from continuous functions (polynomials, sine, cosine), so it is continuous on \\([2, 3]\\). By the Location of Root Theorem a root lies in this interval.",
+              "Iteration 1: \\(a = 2,\\ b = 3\\)\n\\[c = \\dfrac{2 + 3}{2} = 2.5\\]\\[f(2.5) = (2.5)^{3} - 3(2.5) - 10\\]\\[= -1.875 < 0\\]\nThe root lies in \\([2.5, 3]\\), so set \\(a = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(a)\\), so the sign change is between \\(c\\) and \\(b\\).",
+              "Iteration 2: \\(a = 2.5,\\ b = 3\\)\n\\[c = \\dfrac{2.5 + 3}{2} = 2.75\\]\\[f(2.75) = (2.75)^{3} - 3(2.75) - 10\\]\\[= 2.5469 > 0\\]\nThe root lies in \\([2.5, 2.75]\\), so set \\(b = c\\).\nWhy: \\(f(c)\\) has the same sign as \\(f(b)\\), so the sign change is between \\(a\\) and \\(c\\).",
+              "Continue in the same way (table)\nIterations 3 to 11 repeat the same two moves: take the midpoint, keep the half with the sign change. All iterations are in the table below (the sign of \\(f\\) at \\(c\\) is in brackets).\nWhy: each step halves the interval, so after \\(k\\) steps its length is \\(\\frac{1}{2^{k}}\\).",
+              "Stop\n\\[|f(2.6129)| = 0.0002 < 0.0005\\]So \\(c = 2.6129\\) is accurate enough. Rounding to 3 decimal places gives \\(x \\approx 2.613\\).\nWhy: this is the tolerance rule of 8.3.1 for \\(n = 3\\).",
+              "Check:\n\\[f(2.6125) = -0.0068\\]\\[f(2.6135) = 0.0107\\]The signs are opposite, so by the LRT the exact root lies between 2.6125 and 2.6135, and every number there rounds to 2.613."
+            ],
+            "final_answer": "\\(x \\approx 2.613\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\(c\\) (sign of f)",
+                "\\(f(c)\\)",
+                "New interval"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "\\(2.5\\) (-)",
+                  "\\(-1.875\\)",
+                  "\\([2.5, 3]\\)"
+                ],
+                [
+                  "2",
+                  "\\(2.75\\) (+)",
+                  "\\(2.5469\\)",
+                  "\\([2.5, 2.75]\\)"
+                ],
+                [
+                  "3",
+                  "\\(2.625\\) (+)",
+                  "\\(0.2129\\)",
+                  "\\([2.5, 2.625]\\)"
+                ],
+                [
+                  "4",
+                  "\\(2.5625\\) (-)",
+                  "\\(-0.8611\\)",
+                  "\\([2.5625, 2.625]\\)"
+                ],
+                [
+                  "5",
+                  "\\(2.5938\\) (-)",
+                  "\\(-0.3308\\)",
+                  "\\([2.5938, 2.625]\\)"
+                ],
+                [
+                  "6",
+                  "\\(2.6094\\) (-)",
+                  "\\(-0.0609\\)",
+                  "\\([2.6094, 2.625]\\)"
+                ],
+                [
+                  "7",
+                  "\\(2.6172\\) (+)",
+                  "\\(0.0755\\)",
+                  "\\([2.6094, 2.6172]\\)"
+                ],
+                [
+                  "8",
+                  "\\(2.6133\\) (+)",
+                  "\\(0.0072\\)",
+                  "\\([2.6094, 2.6133]\\)"
+                ],
+                [
+                  "9",
+                  "\\(2.6114\\) (-)",
+                  "\\(-0.026\\)",
+                  "\\([2.6114, 2.6133]\\)"
+                ],
+                [
+                  "10",
+                  "\\(2.6124\\) (-)",
+                  "\\(-0.0085\\)",
+                  "\\([2.6124, 2.6133]\\)"
+                ],
+                [
+                  "11",
+                  "\\(2.6129\\) (+)",
+                  "\\(0.0002\\)",
+                  "Stop"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

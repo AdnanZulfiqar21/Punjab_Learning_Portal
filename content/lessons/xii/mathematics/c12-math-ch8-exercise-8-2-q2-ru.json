@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-2-Q2-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-2-q2",
+      "title": "Question 2 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-EXERCISE-8-2-Q2",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 246,
+          "pdf_to": 246,
+          "note": "Exercise 8.2 Q2 (Regula-Falsi, 2 d.p.) on book p. 244; answers p. 307 (printed under '3.')"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.2 (book p. 307)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Find the real roots of nonlinear equations correct to 2 decimal places using the Regula-Falsi method, by finding some interval of sign change if not specified. \\(3x^3 - 9x^2 + 8 = 0 ; [2, 3]\\)",
+            "explanation": "Yeh Regula-Falsi ka sawal hai aur interval \\([2, 3]\\) diya hua hai.\nEquation \\(3x^3 - 9x^2 + 8 = 0\\) hai, is liye \\(f(x) = 3x^3 - 9x^2 + 8\\).\nFind karna hai root 2 decimal places tak; tolerance 0.005.\nRule: secant line ka x-intercept, \\(c = \\frac{a f(b) - b f(a)}{f(b) - f(a)}\\).\nPlan: \\(c\\) nikalo, sign dekho, interval chhota karo, jab tak \\(|f(c)| < 0.005\\) na ho.",
+            "steps": [
+              "Diya gaya: \\(3x^3 - 9x^2 + 8 = 0\\) diya hua interval \\([2, 3]\\).\nMaloom karna: root jo 2 decimal places tak sahi ho.\nTareeqa: Regula-Falsi (false position). Do points \\((a, f(a))\\) aur \\((b, f(b))\\) ko seedhi line (secant line) se jorte hain; yeh line x-axis ko jahan kaatti hai woh naya andaza \\(c\\) hai: \\(c = \\frac{a f(b) - b f(a)}{f(b) - f(a)}\\). Phir woh hissa rakhte hain jahan sign abhi bhi badal raha ho. 2 decimal places ke liye tolerance \\(|f(c)| < 0.005\\) hai; beech ki values 4 decimals tak.",
+              "Continuity aur sign change check karein\n\\[f(x) = 3x^3 - 9x^2 + 8\\]\\[f(2) = 24 - 36 + 8 = -4\\]\\[f(3) = 81 - 81 + 8 = 8\\]Yani \\(f(2)\\,f(3) < 0\\).\nKyun: \\(f\\) har jagah continuous hai (polynomial hai, aur polynomial har jagah continuous hota hai). Continuous function ka sign badle to LRT kehta hai ke beech mein root zaroor hai.",
+              "Iteration 1: \\(a = 2,\\ b = 3\\), \\(f(a) = -4,\\ f(b) = 8\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(2)(8) - (3)(-4)}{8 - (-4)}\\]\\[= 2.3333\\]\\[f(2.3333) = -2.8891 < 0\\]\nRoot ab \\([2.3333, 3]\\) mein hai, is liye \\(a = c\\).\nKyun: \\(f(c)\\) ka sign \\(f(a)\\) jaisa hai, is liye \\(a\\) hata kar \\(c\\) rakha; sign change ab \\(c\\) aur \\(b\\) ke beech hai.\nDhyan dein: formula mein negative values bracket ke saath likhein, warna minus ka sign gum ho jata hai.",
+              "Iteration 2: \\(a = 2.3333,\\ b = 3\\), \\(f(a) = -2.8891,\\ f(b) = 8\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(2.3333)(8) - (3)(-2.8891)}{8 - (-2.8891)}\\]\\[= 2.5102\\]\\[f(2.5102) = -1.2588 < 0\\]\nRoot ab \\([2.5102, 3]\\) mein hai, is liye \\(a = c\\).\nKyun: \\(f(c)\\) ka sign \\(f(a)\\) jaisa hai, is liye \\(a\\) hata kar \\(c\\) rakha; sign change ab \\(c\\) aur \\(b\\) ke beech hai.\nDhyan dein: formula mein negative values bracket ke saath likhein, warna minus ka sign gum ho jata hai.",
+              "Isi tarah aage (table)\nTable mein har iteration likhi hai. Ghaur karein ke \\(b\\) wala sira apni jagah se hilta hi nahin: curve poore hisse mein ek hi taraf mura hua hai, is liye secant line har dafa root ke ek hi taraf axis ko kaatti hai.\nKyun: Regula-Falsi mein sirf woh sira badalta hai jis ka sign \\(f(c)\\) jaisa ho. Bisection ki tarah dono siron ki bari bari nahin aati.",
+              "Rukna kab hai\n\\[|f(2.6076)| = 0.0045 < 0.005\\]Is liye \\(c = 2.6076\\) kaafi hai; 2 decimal places tak \\(x \\approx 2.61\\).\nKyun: \\(n = 2\\) ke liye 8.3.1 ki tolerance \\(|f(c)| < 0.005\\) hai, aur yeh poori ho gayi.",
+              "Tasdeeq:\n\\[f(2.605) = -0.0414\\]\\[f(2.615) = 0.1019\\]Sign ulte hain, is liye asal root 2.605 aur 2.615 ke darmiyan hai, aur woh round ho kar 2.61 hi banta hai. Jawab pakka hai."
+            ],
+            "final_answer": "\\(x \\approx 2.61\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\([a, b]\\)",
+                "\\(c\\)",
+                "\\(f(c)\\)"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "\\([2, 3]\\)",
+                  "\\(2.3333\\)",
+                  "\\(-2.8891\\)"
+                ],
+                [
+                  "2",
+                  "\\([2.3333, 3]\\)",
+                  "\\(2.5102\\)",
+                  "\\(-1.2588\\)"
+                ],
+                [
+                  "3",
+                  "\\([2.5102, 3]\\)",
+                  "\\(2.5768\\)",
+                  "\\(-0.43\\)"
+                ],
+                [
+                  "4",
+                  "\\([2.5768, 3]\\)",
+                  "\\(2.5984\\)",
+                  "\\(-0.1344\\)"
+                ],
+                [
+                  "5",
+                  "\\([2.5984, 3]\\)",
+                  "\\(2.605\\)",
+                  "\\(-0.0414\\)"
+                ],
+                [
+                  "6",
+                  "\\([2.605, 3]\\)",
+                  "\\(2.607\\)",
+                  "\\(-0.013\\)"
+                ],
+                [
+                  "7",
+                  "\\([2.607, 3]\\)",
+                  "\\(2.6076\\)",
+                  "\\(-0.0045\\) (ruk jayein)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key ki numbering: \"3.\" ke neeche likhe jawab (2.61, −1.93, 0.85, 0.36) asal mein isi Question 2 ke hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Find the real roots of nonlinear equations correct to 2 decimal places using the Regula-Falsi method, by finding some interval of sign change if not specified. \\(x^2 + 4\\sin x = 0 ; [-2.2, -1]\\)",
+            "explanation": "Regula-Falsi ka sawal; interval \\([-2.2, -1]\\) diya hai aur dono sire negative hain.\nFunction \\(f(x) = x^2 + 4\\sin x\\); \\(\\sin\\) ki wajah se radian mode.\nRoot 2 decimal places tak chahiye.\nNegative numbers formula mein daalte waqt bracket zaroor lagayein, yahin sab se zyada ghaltiyan hoti hain.\nPlan: \\(c\\) nikalo, sign dekho, interval chhota karo, \\(|f(c)| < 0.005\\) par ruko.",
+            "steps": [
+              "Diya gaya: \\(x^2 + 4\\sin x = 0\\) diya hua interval \\([-2.2, -1]\\).\nMaloom karna: root jo 2 decimal places tak sahi ho.\nTareeqa: Regula-Falsi (false position). Do points \\((a, f(a))\\) aur \\((b, f(b))\\) ko seedhi line (secant line) se jorte hain; yeh line x-axis ko jahan kaatti hai woh naya andaza \\(c\\) hai: \\(c = \\frac{a f(b) - b f(a)}{f(b) - f(a)}\\). Phir woh hissa rakhte hain jahan sign abhi bhi badal raha ho. 2 decimal places ke liye tolerance \\(|f(c)| < 0.005\\) hai; beech ki values 4 decimals tak.",
+              "Continuity aur sign change check karein\n\\[f(x) = x^2 + 4\\sin x\\]\\[f(-2.2) = 4.84 + 4\\sin(-2.2)\\]\\[= 4.84 - 3.2340 = 1.6060\\]\\[f(-1) = 1 + 4\\sin(-1)\\]\\[= 1 - 3.3659 = -2.3659\\]Yani \\(f(-2.2)\\,f(-1) < 0\\).\nKyun: \\(f\\) har jagah continuous hai (polynomial aur sine dono continuous hain). Continuous function ka sign badle to LRT kehta hai ke beech mein root zaroor hai.",
+              "Iteration 1: \\(a = -2.2,\\ b = -1\\), \\(f(a) = 1.606,\\ f(b) = -2.3659\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(-2.2)(-2.3659) - (-1)(1.606)}{-2.3659 - (1.606)}\\]\\[= -1.7148\\]\\[f(-1.7148) = -1.0181 < 0\\]\nRoot ab \\([-2.2, -1.7148]\\) mein hai, is liye \\(b = c\\).\nKyun: \\(f(c)\\) ka sign \\(f(b)\\) jaisa hai, is liye \\(b\\) hata kar \\(c\\) rakha; sign change ab \\(a\\) aur \\(c\\) ke beech hai.\nDhyan dein: formula mein negative values bracket ke saath likhein, warna minus ka sign gum ho jata hai.",
+              "Iteration 2: \\(a = -2.2,\\ b = -1.7148\\), \\(f(a) = 1.606,\\ f(b) = -1.0181\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(-2.2)(-1.0181) - (-1.7148)(1.606)}{-1.0181 - (1.606)}\\]\\[= -1.903\\]\\[f(-1.903) = -0.1599 < 0\\]\nRoot ab \\([-2.2, -1.903]\\) mein hai, is liye \\(b = c\\).\nKyun: \\(f(c)\\) ka sign \\(f(b)\\) jaisa hai, is liye \\(b\\) hata kar \\(c\\) rakha; sign change ab \\(a\\) aur \\(c\\) ke beech hai.\nDhyan dein: formula mein negative values bracket ke saath likhein, warna minus ka sign gum ho jata hai.",
+              "Isi tarah aage (table)\nTable mein har iteration likhi hai. Ghaur karein ke \\(a\\) wala sira apni jagah se hilta hi nahin: curve poore hisse mein ek hi taraf mura hua hai, is liye secant line har dafa root ke ek hi taraf axis ko kaatti hai.\nKyun: Regula-Falsi mein sirf woh sira badalta hai jis ka sign \\(f(c)\\) jaisa ho. Bisection ki tarah dono siron ki bari bari nahin aati.",
+              "Rukna kab hai\n\\[|f(-1.9333)| = 0.0024 < 0.005\\]Is liye \\(c = -1.9333\\) kaafi hai; 2 decimal places tak \\(x \\approx -1.93\\).\nKyun: \\(n = 2\\) ke liye 8.3.1 ki tolerance \\(|f(c)| < 0.005\\) hai, aur yeh poori ho gayi.",
+              "Tasdeeq:\n\\[f(-1.935) = 0.0066\\]\\[f(-1.925) = -0.0461\\]Sign ulte hain, is liye asal root -1.935 aur -1.925 ke darmiyan hai, aur woh round ho kar -1.93 hi banta hai. Jawab pakka hai."
+            ],
+            "final_answer": "\\(x \\approx -1.93\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\([a, b]\\)",
+                "\\(c\\)",
+                "\\(f(c)\\)"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "\\([-2.2, -1]\\)",
+                  "\\(-1.7148\\)",
+                  "\\(-1.0181\\)"
+                ],
+                [
+                  "2",
+                  "\\([-2.2, -1.7148]\\)",
+                  "\\(-1.903\\)",
+                  "\\(-0.1599\\)"
+                ],
+                [
+                  "3",
+                  "\\([-2.2, -1.903]\\)",
+                  "\\(-1.9299\\)",
+                  "\\(-0.0203\\)"
+                ],
+                [
+                  "4",
+                  "\\([-2.2, -1.9299]\\)",
+                  "\\(-1.9333\\)",
+                  "\\(-0.0024\\) (ruk jayein)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) [printed as \\(xe_x = 2\\)] Find the real roots of nonlinear equations correct to 2 decimal places using the Regula-Falsi method, by finding some interval of sign change if not specified. \\(xe^{x} = 2\\)",
+            "explanation": "Is sawal mein interval nahin diya, is liye pehle khud dhoondna hai.\nKitab ne \\(xe_x = 2\\) chhapa hai, lekin matlab \\(xe^{x} = 2\\) hai (x subscript nahin, power hai).\nSab kuch ek taraf le ja kar \\(f(x) = xe^{x} - 2\\) banayein.\nPlan: \\(x = 0\\) aur \\(x = 1\\) daal kar sign change dekhein, phir Regula-Falsi chalayein jab tak \\(|f(c)| < 0.005\\) na ho.\nAakhir mein \\(\\pm 0.005\\) wali tasdeeq.",
+            "steps": [
+              "Diya gaya: \\(xe^{x} = 2\\) (interval nahin diya, pehle khud dhoondna hai).\nMaloom karna: root jo 2 decimal places tak sahi ho.\nTareeqa: Regula-Falsi (false position). Do points \\((a, f(a))\\) aur \\((b, f(b))\\) ko seedhi line (secant line) se jorte hain; yeh line x-axis ko jahan kaatti hai woh naya andaza \\(c\\) hai: \\(c = \\frac{a f(b) - b f(a)}{f(b) - f(a)}\\). Phir woh hissa rakhte hain jahan sign abhi bhi badal raha ho. 2 decimal places ke liye tolerance \\(|f(c)| < 0.005\\) hai; beech ki values 4 decimals tak.",
+              "Equation ko \\(f(x) = 0\\) ki shakal mein likhein aur sign change dhoondein\n\\[f(x) = xe^{x} - 2\\]\\[f(0) = 0 - 2 = -2\\]\\[f(1) = e - 2 = 0.7183\\]Yani \\(f(0)\\,f(1) < 0\\).\nKyun: \\(f\\) har jagah continuous hai (\\(x\\) aur \\(e^{x}\\) dono continuous, aur un ka product bhi). Continuous function ka sign badle to LRT kehta hai ke beech mein root zaroor hai; isi liye hum ne choti si values (0 aur 1) daal kar sign change dhoonda.",
+              "Iteration 1: \\(a = 0,\\ b = 1\\), \\(f(a) = -2,\\ f(b) = 0.7183\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(0)(0.7183) - (1)(-2)}{0.7183 - (-2)}\\]\\[= 0.7358\\]\\[f(0.7358) = -0.4643 < 0\\]\nRoot ab \\([0.7358, 1]\\) mein hai, is liye \\(a = c\\).\nKyun: \\(f(c)\\) ka sign \\(f(a)\\) jaisa hai, is liye \\(a\\) hata kar \\(c\\) rakha; sign change ab \\(c\\) aur \\(b\\) ke beech hai.\nDhyan dein: formula mein negative values bracket ke saath likhein, warna minus ka sign gum ho jata hai.",
+              "Iteration 2: \\(a = 0.7358,\\ b = 1\\), \\(f(a) = -0.4643,\\ f(b) = 0.7183\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(0.7358)(0.7183) - (1)(-0.4643)}{0.7183 - (-0.4643)}\\]\\[= 0.8395\\]\\[f(0.8395) = -0.0564 < 0\\]\nRoot ab \\([0.8395, 1]\\) mein hai, is liye \\(a = c\\).\nKyun: \\(f(c)\\) ka sign \\(f(a)\\) jaisa hai, is liye \\(a\\) hata kar \\(c\\) rakha; sign change ab \\(c\\) aur \\(b\\) ke beech hai.\nDhyan dein: formula mein negative values bracket ke saath likhein, warna minus ka sign gum ho jata hai.",
+              "Isi tarah aage (table)\nTable mein har iteration likhi hai. Ghaur karein ke \\(b\\) wala sira apni jagah se hilta hi nahin: curve poore hisse mein ek hi taraf mura hua hai, is liye secant line har dafa root ke ek hi taraf axis ko kaatti hai.\nKyun: Regula-Falsi mein sirf woh sira badalta hai jis ka sign \\(f(c)\\) jaisa ho. Bisection ki tarah dono siron ki bari bari nahin aati.",
+              "Rukna kab hai\n\\[|f(0.8525)| = 0.0005 < 0.005\\]Is liye \\(c = 0.8525\\) kaafi hai; 2 decimal places tak \\(x \\approx 0.85\\).\nKyun: \\(n = 2\\) ke liye 8.3.1 ki tolerance \\(|f(c)| < 0.005\\) hai, aur yeh poori ho gayi.",
+              "Tasdeeq:\n\\[f(0.845) = -0.0329\\]\\[f(0.855) = 0.0104\\]Sign ulte hain, is liye asal root 0.845 aur 0.855 ke darmiyan hai, aur woh round ho kar 0.85 hi banta hai. Jawab pakka hai."
+            ],
+            "final_answer": "\\(x \\approx 0.85\\)",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\([a, b]\\)",
+                "\\(c\\)",
+                "\\(f(c)\\)"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "\\([0, 1]\\)",
+                  "\\(0.7358\\)",
+                  "\\(-0.4643\\)"
+                ],
+                [
+                  "2",
+                  "\\([0.7358, 1]\\)",
+                  "\\(0.8395\\)",
+                  "\\(-0.0564\\)"
+                ],
+                [
+                  "3",
+                  "\\([0.8395, 1]\\)",
+                  "\\(0.8512\\)",
+                  "\\(-0.0061\\)"
+                ],
+                [
+                  "4",
+                  "\\([0.8512, 1]\\)",
+                  "\\(0.8525\\)",
+                  "\\(-0.0005\\) (ruk jayein)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ne equation \\(xe_x = 2\\) chhapi hai (x neeche subscript mein). Sahi \\(xe^{x} = 2\\) hai, yani x power mein; answer key ka 0.85 bhi isi ki tasdeeq karta hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iv)",
+            "prompt": "2 (iv) Find the real roots of nonlinear equations correct to 2 decimal places using the Regula-Falsi method, by finding some interval of sign change if not specified. \\(3x + \\sin x = e^{x}\\)",
+            "explanation": "Interval nahin diya; equation \\(3x + \\sin x = e^{x}\\) hai.\nPehle sab ek taraf: \\(f(x) = 3x + \\sin x - e^{x}\\).\nValues daal kar dekhein: \\(f(0) < 0\\), \\(f(1) > 0\\), \\(f(2) < 0\\), yani do jagah sign badalta hai, is liye do real roots hain.\nPlan: pehle \\([0, 1]\\) wala root Regula-Falsi se, phir \\([1, 2]\\) wala.\nTolerance 0.005, radian mode.",
+            "steps": [
+              "Diya gaya: \\(3x + \\sin x = e^{x}\\) (interval nahin diya, pehle khud dhoondna hai).\nMaloom karna: root jo 2 decimal places tak sahi ho.\nTareeqa: Regula-Falsi (false position). Do points \\((a, f(a))\\) aur \\((b, f(b))\\) ko seedhi line (secant line) se jorte hain; yeh line x-axis ko jahan kaatti hai woh naya andaza \\(c\\) hai: \\(c = \\frac{a f(b) - b f(a)}{f(b) - f(a)}\\). Phir woh hissa rakhte hain jahan sign abhi bhi badal raha ho. 2 decimal places ke liye tolerance \\(|f(c)| < 0.005\\) hai; beech ki values 4 decimals tak.",
+              "Equation ko \\(f(x) = 0\\) ki shakal mein likhein aur sign change dhoondein\n\\[f(x) = 3x + \\sin x - e^{x}\\]\\[f(0) = 0 + 0 - 1 = -1\\]\\[f(1) = 3 + 0.8415 - 2.7183\\]\\[= 1.1232\\]Yani \\(f(0)\\,f(1) < 0\\).\nKyun: \\(f\\) har jagah continuous hai (linear, sine aur exponential sab continuous hain). Continuous function ka sign badle to LRT kehta hai ke beech mein root zaroor hai; isi liye hum ne choti si values (0 aur 1) daal kar sign change dhoonda.",
+              "Iteration 1: \\(a = 0,\\ b = 1\\), \\(f(a) = -1,\\ f(b) = 1.1232\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(0)(1.1232) - (1)(-1)}{1.1232 - (-1)}\\]\\[= 0.471\\]\\[f(0.471) = 0.2652 > 0\\]\nRoot ab \\([0, 0.471]\\) mein hai, is liye \\(b = c\\).\nKyun: \\(f(c)\\) ka sign \\(f(b)\\) jaisa hai, is liye \\(b\\) hata kar \\(c\\) rakha; sign change ab \\(a\\) aur \\(c\\) ke beech hai.\nDhyan dein: formula mein negative values bracket ke saath likhein, warna minus ka sign gum ho jata hai.",
+              "Iteration 2: \\(a = 0,\\ b = 0.471\\), \\(f(a) = -1,\\ f(b) = 0.2652\\)\n\\[c = \\dfrac{a f(b) - b f(a)}{f(b) - f(a)}\\]\\[= \\dfrac{(0)(0.2652) - (0.471)(-1)}{0.2652 - (-1)}\\]\\[= 0.3723\\]\\[f(0.3723) = 0.0296 > 0\\]\nRoot ab \\([0, 0.3723]\\) mein hai, is liye \\(b = c\\).\nKyun: \\(f(c)\\) ka sign \\(f(b)\\) jaisa hai, is liye \\(b\\) hata kar \\(c\\) rakha; sign change ab \\(a\\) aur \\(c\\) ke beech hai.\nDhyan dein: formula mein negative values bracket ke saath likhein, warna minus ka sign gum ho jata hai.",
+              "Isi tarah aage (table)\nTable mein har iteration likhi hai. Ghaur karein ke \\(a\\) wala sira apni jagah se hilta hi nahin: curve poore hisse mein ek hi taraf mura hua hai, is liye secant line har dafa root ke ek hi taraf axis ko kaatti hai.\nKyun: Regula-Falsi mein sirf woh sira badalta hai jis ka sign \\(f(c)\\) jaisa ho. Bisection ki tarah dono siron ki bari bari nahin aati.",
+              "Rukna kab hai\n\\[|f(0.3616)| = 0.0029 < 0.005\\]Is liye \\(c = 0.3616\\) kaafi hai; 2 decimal places tak \\(x \\approx 0.36\\).\nKyun: \\(n = 2\\) ke liye 8.3.1 ki tolerance \\(|f(c)| < 0.005\\) hai, aur yeh poori ho gayi.",
+              "Doosra root\n\\[f(2) = 6 + 0.9093 - 7.3891 = -0.4798\\]Yani \\([1, 2]\\) par bhi sign badalta hai. Wahan Regula-Falsi lagayein (sira \\(b = 2\\) apni jagah rehta hai):\n\\[c_1 = 1.7007,\\ f = 0.6159\\]\\[c_2 = 1.8689,\\ f = 0.0814\\]\\[c_3 = 1.8879,\\ f = 0.0084\\]\\[c_4 = 1.8898,\\ f = 0.0009\\]Kyun: \\(|f(1.8898)| = 0.0009 < 0.005\\), is liye doosra root \\(x \\approx 1.89\\) hai; \\(f(1.885) > 0 > f(1.895)\\) is ki tasdeeq karta hai. Sawal \"real roots\" poochta hai, is liye dono roots likhna behtar hai.",
+              "Tasdeeq:\n\\[f(0.355) = -0.0136\\]\\[f(0.365) = 0.0114\\]Sign ulte hain, is liye asal root 0.355 aur 0.365 ke darmiyan hai, aur woh round ho kar 0.36 hi banta hai. Jawab pakka hai."
+            ],
+            "final_answer": "\\(x \\approx 0.36\\) (aur doosra root \\(x \\approx 1.89\\))",
+            "answer_table": {
+              "header": [
+                "n",
+                "\\([a, b]\\)",
+                "\\(c\\)",
+                "\\(f(c)\\)"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "\\([0, 1]\\)",
+                  "\\(0.471\\)",
+                  "\\(0.2652\\)"
+                ],
+                [
+                  "2",
+                  "\\([0, 0.471]\\)",
+                  "\\(0.3723\\)",
+                  "\\(0.0296\\)"
+                ],
+                [
+                  "3",
+                  "\\([0, 0.3723]\\)",
+                  "\\(0.3616\\)",
+                  "\\(0.0029\\) (ruk jayein)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key sirf 0.36 deti hai, lekin is equation ka ek doosra real root bhi hai: \\(f(1) > 0\\) aur \\(f(2) = -0.4798 < 0\\). \\([1, 2]\\) par Regula-Falsi se 1.7007, 1.8689, 1.8879, 1.8898 milte hain aur \\(|f(1.8898)| = 0.0009 < 0.005\\), is liye doosra root \\(x \\approx 1.89\\) hai."
+          }
+        ]
+      }
+    }
+  ]
+}

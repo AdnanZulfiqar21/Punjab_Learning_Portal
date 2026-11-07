@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-4-Q5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-4-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 255,
+          "pdf_to": 255,
+          "note": "Exercise 8.4, Question 5 (book p. 253); answer key p. 307 (PDF 309)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5. In a secure communication system, the phase shift \\(\\theta\\) (in radians) of an encrypted signal is modeled by the nonlinear function \\(f(\\theta) = \\sin\\theta - 0.5\\). For proper synchronization of the encrypted signal, the phase shift must satisfy \\(f(\\theta) = 0\\). Use the Newton-Raphson Method with initial guess \\(\\theta_0 = 0.5\\) to determine the required phase shift \\(\\theta\\), correct to three decimal places.",
+            "explanation": "A trigonometric equation sin(theta) = 0.5 solved numerically; theta is in radians.\nGiven: f and the start 0.5. To find: theta to three decimal places by Newton-Raphson.\nPlan: f'(theta) = cos(theta); iterate in radian mode until two successive values agree within 0.0005.",
+            "steps": [
+              "Given: \\(f(\\theta) = \\sin\\theta - 0.5\\), \\(\\theta_0 = 0.5\\).\nTo find: the root \\(\\theta\\), correct to three decimal places.\nMethod: Newton-Raphson \\(\\theta_{n+1} = \\theta_n - \\frac{f(\\theta_n)}{f'(\\theta_n)}\\), with the calculator in radian mode.",
+              "Derivative\n\\[f'(\\theta) = \\cos\\theta\\]\nWhy: near \\(\\theta_0 = 0.5\\), \\(\\cos\\theta \\approx 0.88 \\ne 0\\), and \\(f\\) is differentiable everywhere, so the method applies.",
+              "Iteration 1: theta_0 = 0.5\n\\[f(0.5) = 0.47943 - 0.5 = -0.02057\\]\n\\[f'(0.5) = \\cos 0.5 = 0.87758\\]\n\\[\\theta_1 = 0.5 + \\dfrac{0.02057}{0.87758}\\]\n\\[= 0.5 + 0.02344 = 0.52344\\]\nWhy: f(0.5) < 0, so theta increases.",
+              "Iteration 2: theta_1 = 0.52344\n\\[f(0.52344) = 0.49986 - 0.5 = -0.00014\\]\n\\[f'(0.52344) = 0.86610\\]\n\\[\\theta_2 = 0.52344 + \\dfrac{0.00014}{0.86610}\\]\n\\[= 0.52360\\]\nWhy: \\(|\\theta_2 - \\theta_1| = 0.00016 < 0.0005\\). We did not stop at \\(\\theta_1\\) although \\(|f(\\theta_1)| < 0.0005\\): 0.52344 would round to 0.523, which is wrong in the third place.",
+              "Iteration 3\n\\[f(0.52360) \\approx 0.00000\\]\n\\[\\theta_3 = 0.52360\\]\nWhy: two successive values agree, so \\(\\theta \\approx 0.524\\).",
+              "Check\n\\[f(0.5235) = -0.00009 < 0\\]\n\\[f(0.5245) = 0.00078 > 0\\]\nSo the root lies in \\(]0.5235, 0.5245[\\) and rounds to 0.524. Exact: \\(\\sin\\theta = \\frac{1}{2}\\) gives \\(\\theta = \\frac{\\pi}{6} = 0.5235988\\) rad \\(= 30^{\\circ}\\).\nWhy: the known exact value confirms the iterations."
+            ],
+            "final_answer": "\\(\\theta \\approx 0.524\\) radian (\\(= \\pi/6\\), i.e. \\(30^{\\circ}\\)).",
+            "answer_table": {
+              "header": [
+                "\\(n\\)",
+                "\\(\\theta_n\\)",
+                "\\(f(\\theta_n)\\), \\(f'(\\theta_n)\\)",
+                "\\(\\theta_{n+1}\\)"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "0.50000",
+                  "-0.02057, 0.87758",
+                  "0.52344"
+                ],
+                [
+                  "1",
+                  "0.52344",
+                  "-0.00014, 0.86610",
+                  "0.52360"
+                ],
+                [
+                  "2",
+                  "0.52360",
+                  "0.00000, 0.86603",
+                  "0.52360"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

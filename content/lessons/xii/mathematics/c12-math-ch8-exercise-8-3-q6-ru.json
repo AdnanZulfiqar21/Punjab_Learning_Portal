@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-3-Q6-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-3-q6",
+      "title": "Question 6 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 250,
+          "pdf_to": 250,
+          "note": "Exercise 8.3 (book p. 248): Trapezium Rule, Q1-Q10"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.3 (book p. 307)"
+        }
+      ],
+      "variant_of": "C12-MATH-CH8-EXERCISE-8-3-Q6",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. Use Trapezoidal Rule to approximate the value of the definite integral \\(\\int_{-1}^{1} e^{-x^{2}}\\,dx\\) taking \\(h = 0.4\\).",
+            "explanation": "Sab se pehle dekhte hain ke yeh kis qisam ka sawal hai: definite integral ki value Trapezium Rule se approximately nikalni hai, seedha integration nahi karna.\nDiya kya hai? Function \\(f(x) = e^{-x^{2}}\\), interval \\([-1, 1]\\), aur \\(h = 0.4\\) diya hai, to pehle \\(n = \\frac{b-a}{h}\\) nikalna hoga.\nFind kya karna hai? Integral ki approximate value, chaar decimal places tak.\nRule kaunsa aur kyun? Trapezium Rule, kyunke sawal yahi maangta hai: area ko barabar chaurai ki pattiyon (trapeziums) mein baant kar jama karna.\nPlan: h ya n, phir points ki list, phir har point par function ki value, phir beech wali values ka jama, aur aakhir mein formula aur tasdeeq.",
+            "steps": [
+              "Diya gaya: \\(f(x) = e^{-x^{2}}\\), \\(a = -1\\), \\(b = 1\\), \\(h = 0.4\\).\nMaloom karna: \\(\\int_{-1}^{1} e^{-x^{2}}\\,dx\\) ki approximate value.\nTareeqa: sawal khud Trapezium Rule maang raha hai, is liye wohi lagayenge. Yahan \\(n\\) nahi balke \\(h\\) diya hai, is liye pehle \\(n = \\frac{b-a}{h}\\) nikalenge. Phir points aur un par function ki values (chaar decimal tak) nikal kar formula \\(\\frac{h}{2}[\\text{pehli} + 2(\\text{beech wali}) + \\text{aakhri}]\\) mein rakhenge.",
+              "Continuity\n\\(e^{-x^{2}}\\) mein andar polynomial \\(-x^{2}\\) hai aur bahar exponential; dono continuous hain, is liye un ka composition bhi \\([-1, 1]\\) par continuous hai.\nKyun: Trapezium Rule continuous function ke liye bana hai; agar graph beech mein toot jaye to trapeziums us hisse ko sahi nahi dhaanp sakte.",
+              "Subintervals ki tadaad aur points\n\\[n = \\dfrac{b-a}{h} = \\dfrac{1-(-1)}{0.4} = \\dfrac{2}{0.4} = 5\\]\nPoints \\(x_{i} = a + ih\\): \\(-1, -0.6, -0.2, 0.2, 0.6, 1\\)\nKyun: \\(h = \\frac{b-a}{n}\\) ko ulat kar \\(n = \\frac{b-a}{h}\\) milta hai, yani poori lambai mein \\(h\\) kitni dafa aata hai. 5 subintervals ke 6 points hain; har agla point pichle se \\(h\\) aage hai.",
+              "Function values (4 decimal places)\n\\[f(-1) = 0.3679\\]\n\\[f(-0.6) = 0.6977\\]\n\\[f(-0.2) = 0.9608\\]\n\\[f(0.2) = 0.9608\\]\n\\[f(0.6) = 0.6977\\]\n\\[f(1) = 0.3679\\]\nKyun: har point ko function mein rakha. Pehle square, phir minus: \\((-0.6)^{2} = 0.36\\), is liye \\(f(-0.6) = e^{-0.36}\\), \\(e^{+0.36}\\) nahi.\nDhyan dein: \\(f(-x) = f(x)\\) (even function), is liye values ke jore barabar aate hain: \\(f(-1) = f(1)\\), \\(f(-0.6) = f(0.6)\\), \\(f(-0.2) = f(0.2)\\). Is se aadhi mehnat bach jati hai aur ghalti bhi pakri jati hai.\nNeeche jawab ke saath di gayi table mein yahi values un ke weights (1 ya 2) ke saath hain.",
+              "Beech wali values jama karein\n\\[S = f(x_{1}) + \\dots + f(x_{4})\\]\n\\[= 0.6977 + 0.9608 + 0.9608\\]\n\\[+ 0.6977\\]\n\\[= 3.3170\\]\nKyun: yeh 4 beech wali values har ek do saath wale trapeziums ki saanjhi deewar hain, is liye formula mein in ka jama do dafa (double) aayega. Pehle in ka jama alag nikal lena hisaab ko saaf aur check karne ke qabil banata hai.",
+              "Trapezium Rule apply karein\n\\[\\int_{-1}^{1} e^{-x^{2}}\\,dx\\]\n\\[\\approx \\dfrac{h}{2}\\big[f(x_{0}) + 2S + f(x_{5})\\big]\\]\n\\[= 0.2\\big[0.3679 + 2(3.3170)\\]\n\\[+ 0.3679\\big]\\]\n\\[= 0.2(7.3698)\\]\n\\[= 1.47396 \\approx 1.4740\\]\nKyun: \\(\\frac{h}{2} = 0.2\\). Kinaron wali do values ek ek dafa aayin aur beech wali values ka jama do dafa; phir poore bracket ko \\(\\frac{h}{2}\\) se zarb diya. Round sirf aakhri jawab ko kiya, beech mein nahi, taake ghalti jama na ho.",
+              "Tasdeeq:\nAgar function values round kiye baghair poori rakhein to jawab 1.4739 aata hai; hamara 1.4740 chaar decimal wali values ka nateeja hai, dono sahi hain. \\(e^{-x^{2}}\\) ka koi elementary antiderivative nahi, is liye exact value formula se nahi nikalti; computer bohat zyada subintervals le kar 1.4936 deta hai, yani yahan ghalti taqreeban 0.02 hai. Ek aur moti tasdeeq: har value 0.3679 aur 1 ke beech hai aur interval ki lambai 2 hai, is liye jawab 0.7358 aur 2 ke beech hona chahiye; 1.4740 isi mein hai."
+            ],
+            "final_answer": "\\(\\int_{-1}^{1} e^{-x^{2}}\\,dx \\approx 1.4740\\)",
+            "answer_table": {
+              "header": [
+                "i",
+                "\\(x_{i}\\)",
+                "\\(f(x_{i})\\)",
+                "Weight"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(-1\\)",
+                  "\\(0.3679\\)",
+                  "1"
+                ],
+                [
+                  "1",
+                  "\\(-0.6\\)",
+                  "\\(0.6977\\)",
+                  "2"
+                ],
+                [
+                  "2",
+                  "\\(-0.2\\)",
+                  "\\(0.9608\\)",
+                  "2"
+                ],
+                [
+                  "3",
+                  "\\(0.2\\)",
+                  "\\(0.9608\\)",
+                  "2"
+                ],
+                [
+                  "4",
+                  "\\(0.6\\)",
+                  "\\(0.6977\\)",
+                  "2"
+                ],
+                [
+                  "5",
+                  "\\(1\\)",
+                  "\\(0.3679\\)",
+                  "1"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ki answer key 1.4704 likhti hai. \\(h = 0.4\\) (\\(n = 5\\)) ke saath rule \\(0.2(7.3698) = 1.4740\\) deta hai (poori values ke saath 1.4739). Sahi jawab 1.4740 hai; key mein digits aage peeche ho gaye lagte hain."
+          }
+        ]
+      }
+    }
+  ]
+}

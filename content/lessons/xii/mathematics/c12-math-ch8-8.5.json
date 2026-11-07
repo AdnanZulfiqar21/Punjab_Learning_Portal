@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.5",
+      "title": "8.5 Real-Life Applications of Nonlinear Equations",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 251,
+          "pdf_to": 254,
+          "note": "Book p. 249: 8.5 introduction (two paragraphs: chemistry, biology and medicine, electronic circuits, cryptography); lessons 8.5.1-8.5.4 on p. 249-252."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "In real life, many physical, biological, chemical and technological problems lead to nonlinear equations whose real solutions can only be approximated. In such situations solving the equation by algebraic methods becomes complicated, and sometimes no exact formula exists at all. Numerical methods therefore give a practical and systematic way to obtain approximate solutions with the accuracy we want."
+          },
+          {
+            "type": "paragraph",
+            "text": "For example, in chemical reactions scientists need to determine equilibrium concentrations of substances, which often leads to nonlinear equations. In biology and medicine, the regulation of heartbeats and nerve signals involves nonlinear mathematical models. Similarly, in electronic circuits, components such as diodes and transistors follow exponential laws, producing nonlinear equations that must be solved numerically. In cryptography, nonlinear equations play an important role in designing secure communication systems and encryption algorithms."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why can these equations not simply be solved by algebra? Look at \\(xe^{x} = 1\\): the unknown \\(x\\) sits both outside and inside the exponent, and no algebraic step separates them. In \\(\\sin V = 0.5V\\) the unknown is inside and outside the sine. For \\(x^{5} - 10x + 5 = 0\\) there is no general formula for degree five at all (unlike the quadratic formula for degree two).\nSo instead of an exact formula we use the three methods of 8.3: Bisection, Regula-Falsi and Newton-Raphson. Each produces numbers that come closer and closer to the root, and we stop as soon as the required decimal places are certain."
+          },
+          {
+            "type": "table",
+            "caption": "Teaching table (ours): the four applications in 8.5 and the method the book uses",
+            "header": [
+              "Lesson",
+              "Equation",
+              "Method"
+            ],
+            "rows": [
+              [
+                "8.5.1 Chemical Reactions",
+                "\\(xe^{x} = 1\\)",
+                "Newton-Raphson"
+              ],
+              [
+                "8.5.2 Regulation of Heartbeats",
+                "\\(x^{3} - x - 1 = 0\\)",
+                "Bisection"
+              ],
+              [
+                "8.5.3 Electronic Circuits",
+                "\\(\\sin V - 0.5V = 0\\)",
+                "Regula-Falsi"
+              ],
+              [
+                "8.5.4 Cryptography",
+                "\\(x^{5} - 10x + 5 = 0\\)",
+                "Regula-Falsi"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The same recipe solves every problem in this section:\n1. Write the model as \\(f(x) = 0\\) (bring every term to one side).\n2. Check that \\(f\\) is continuous and find an interval \\([a, b]\\) with \\(f(a)\\) and \\(f(b)\\) of opposite signs (Location of Root Theorem).\n3. Apply the method the question names, carrying at least 4 decimal places.\n4. Stop when \\(|f(c)|\\) is below the tolerance of 8.3.1: \\(|f(c)| < \\frac{10^{-n}}{2}\\) for \\(n\\) decimal places, i.e. 0.005 for two places, 0.0005 for three.\n5. Round, give the unit (moles per liter, volts, ...) and say what the number means in the real situation."
+          },
+          {
+            "type": "table",
+            "caption": "Teaching table (ours): the three methods side by side",
+            "header": [
+              "Feature",
+              "Bisection",
+              "Regula-Falsi",
+              "Newton-Raphson"
+            ],
+            "rows": [
+              [
+                "Starts from",
+                "an interval \\([a, b]\\) of sign change",
+                "an interval \\([a, b]\\) of sign change",
+                "one guess \\(x_0\\) near the root"
+              ],
+              [
+                "New value",
+                "\\(c = \\frac{a+b}{2}\\)",
+                "\\(c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\)",
+                "\\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\)"
+              ],
+              [
+                "Needs",
+                "only values of \\(f\\)",
+                "only values of \\(f\\)",
+                "values of \\(f\\) and \\(f'\\), with \\(f'(x) \\ne 0\\)"
+              ],
+              [
+                "Speed",
+                "slow but sure",
+                "usually faster than bisection",
+                "fastest from a good guess"
+              ],
+              [
+                "Always closes in?",
+                "yes",
+                "yes",
+                "not always (a bad guess can run away)"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "Real problems in chemistry, medicine, electronics and cryptography give nonlinear equations that algebra cannot solve exactly.\nNumerical methods give the root to any accuracy: always start with \\(f(x) = 0\\), continuity and an interval of sign change.\nBisection and Regula-Falsi need only values of f; Newton-Raphson also needs the derivative but is fastest.\nThe answer is a number with a unit and a meaning, rounded to the decimal places asked."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Starting the iterations without checking that \\(f(a)\\) and \\(f(b)\\) have opposite signs: then there may be no root in the interval at all.\nRounding to 2 decimal places during the working: carry 4 decimal places (5 for a 3-place answer) and round only at the end.\nUsing degree mode when sin or cos appears: numerical methods (and derivatives) need radian mode."
+          }
+        ]
+      }
+    }
+  ]
+}

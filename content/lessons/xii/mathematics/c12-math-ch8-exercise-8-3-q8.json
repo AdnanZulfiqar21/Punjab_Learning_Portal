@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-3-Q8",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-3-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 250,
+          "pdf_to": 250,
+          "note": "Exercise 8.3 (book p. 248): Trapezium Rule, Q1-Q10"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.3 (book p. 307)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8. Use Trapezoidal Rule to approximate the value of the definite integral \\(\\int_{0}^{\\pi} \\sin(x^{2})\\,dx\\) taking \\(h = \\frac{\\pi}{6}\\).",
+            "explanation": "A numerical integration question: estimate a definite integral by the Trapezium Rule.\nGiven: \\(f(x) = \\sin(x^{2})\\), interval \\([0, \\pi]\\), \\(h = \\frac{\\pi}{6}\\), so \\(n = \\frac{b-a}{h}\\).\nPlan: list the points and 4-decimal function values, then use h/2 [first + 2(inner) + last].",
+            "steps": [
+              "Given: \\(f(x) = \\sin(x^{2})\\), \\(a = 0\\), \\(b = \\pi\\), \\(h = \\frac{\\pi}{6}\\).\nTo find: an approximate value of \\(\\int_{0}^{\\pi} \\sin(x^{2})\\,dx\\).\nMethod: the Trapezium Rule, as the question asks. Here \\(h\\) is given, so find \\(n\\) first.",
+              "Continuity\n\\(\\sin(x^{2})\\) is a composition of the polynomial \\(x^{2}\\) and \\(\\sin\\), both continuous, so it is continuous on \\([0, \\pi]\\).\nWhy: the Trapezium Rule needs a continuous function on the interval.",
+              "Number of subintervals and points\n\\[n = \\dfrac{b-a}{h} = \\dfrac{\\pi - 0}{\\pi/6} = 6\\]\nPoints \\(x_{i} = a + ih\\): \\(0, \\tfrac{\\pi}{6}, \\tfrac{\\pi}{3}, \\tfrac{\\pi}{2}, \\tfrac{2\\pi}{3}, \\tfrac{5\\pi}{6}, \\pi\\)\nWhy: \\(h = \\frac{b-a}{n}\\) rearranged gives \\(n = \\frac{b-a}{h}\\); 6 subintervals give 7 points.",
+              "Function values (4 decimal places)\n\\[x_{i}^{2}:\\ 0,\\ 0.274156,\\ 1.096623,\\]\n\\[2.467401,\\ 4.386491,\\]\n\\[6.853892,\\ 9.869604\\]\n\\[f(0) = \\sin(0.000000) = 0.0000\\]\n\\[f(\\tfrac{\\pi}{6}) = \\sin(0.274156) = 0.2707\\]\n\\[f(\\tfrac{\\pi}{3}) = \\sin(1.096623) = 0.8897\\]\n\\[f(\\tfrac{\\pi}{2}) = \\sin(2.467401) = 0.6243\\]\n\\[f(\\tfrac{2\\pi}{3}) = \\sin(4.386491) = -0.9474\\]\n\\[f(\\tfrac{5\\pi}{6}) = \\sin(6.853892) = 0.5402\\]\n\\[f(\\pi) = \\sin(9.869604) = -0.4303\\]\nWhy: First square \\(x_{i}\\) (a number in radians), then take the sine in radian mode. \\(\\sin(x^{2})\\) is not \\((\\sin x)^{2}\\). Two values are negative; keep their signs. The table with the answer collects them with their weights.",
+              "Add the inner values\n\\[S = f(x_{1}) + \\dots + f(x_{5})\\]\n\\[= 0.2707 + 0.8897 + 0.6243\\]\n\\[- 0.9474 + 0.5402\\]\n\\[= 1.3775\\]\nWhy: these 5 inner values are shared by two neighbouring trapeziums, so they will be doubled.",
+              "Apply the Trapezium Rule\n\\[\\int_{0}^{\\pi} \\sin(x^{2})\\,dx\\]\n\\[\\approx \\dfrac{h}{2}\\big[f(x_{0}) + 2S + f(x_{6})\\big]\\]\n\\[= \\dfrac{\\pi}{12}\\big[0 + 2(1.3775) + (-0.4303)\\big]\\]\n\\[= \\dfrac{\\pi}{12}(2.3247)\\]\n\\[= 0.261799 \\times 2.3247 = 0.6086\\]\nWhy: \\(\\frac{h}{2} = \\frac{\\pi}{12} \\approx 0.261799\\); the end values are used once and the inner sum twice. Round only at the end.",
+              "Check:\n\\(\\sin(x^{2})\\) has no elementary antiderivative. A computer with very many subintervals gives 0.7727, so with only 6 strips the error is large (about 0.16): \\(x^{2}\\) runs from 0 to 9.87 radians, so the graph waves up and down faster and faster and 6 straight chords cannot follow it."
+            ],
+            "final_answer": "\\(\\int_{0}^{\\pi} \\sin(x^{2})\\,dx \\approx 0.6086\\)",
+            "answer_table": {
+              "header": [
+                "i",
+                "\\(x_{i}\\)",
+                "\\(f(x_{i})\\)",
+                "Weight"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(0\\)",
+                  "\\(0.0000\\)",
+                  "1"
+                ],
+                [
+                  "1",
+                  "\\(\\tfrac{\\pi}{6}\\)",
+                  "\\(0.2707\\)",
+                  "2"
+                ],
+                [
+                  "2",
+                  "\\(\\tfrac{\\pi}{3}\\)",
+                  "\\(0.8897\\)",
+                  "2"
+                ],
+                [
+                  "3",
+                  "\\(\\tfrac{\\pi}{2}\\)",
+                  "\\(0.6243\\)",
+                  "2"
+                ],
+                [
+                  "4",
+                  "\\(\\tfrac{2\\pi}{3}\\)",
+                  "\\(-0.9474\\)",
+                  "2"
+                ],
+                [
+                  "5",
+                  "\\(\\tfrac{5\\pi}{6}\\)",
+                  "\\(0.5402\\)",
+                  "2"
+                ],
+                [
+                  "6",
+                  "\\(\\pi\\)",
+                  "\\(-0.4303\\)",
+                  "1"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints 0.6179. Recomputing every ordinate gives the bracket \\(2.3247\\) and \\(\\frac{\\pi}{12}(2.3247) = 0.6086\\) (also 0.6086 with unrounded values). The correct answer is 0.6086."
+          }
+        ]
+      }
+    }
+  ]
+}

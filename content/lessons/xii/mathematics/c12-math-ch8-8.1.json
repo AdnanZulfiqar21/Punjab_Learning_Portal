@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.1",
+      "title": "8.1 Basic Principles of Approximating Real Roots of Nonlinear Equations",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 234,
+          "pdf_to": 235,
+          "note": "PDF 234-235 (book p. 232-233): unit 8 introduction; 8.1 root (zero), geometric meaning of a root, Figure 8.1, nonlinear equations, exact cubic root formula, lead-in to the LRT"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Introduction"
+          },
+          {
+            "type": "paragraph",
+            "text": "Nonlinear equations, where variables appear with powers exceeding one or within trigonometric, exponential, or logarithmic functions, are ubiquitous in mathematics, science, and engineering. Since most such equations resist exact algebraic solutions, numerical techniques are essential for approximating their real roots. The Graphical Method offers a visual foundation by plotting functions and identifying x-axis intersections. More sophisticated numerical methods (the Bisection Method, Regula-Falsi Method, and Newton-Raphson Method) systematically refine approximations to achieve desired accuracy through iterative procedures grounded in function continuity and the intermediate value theorem. This chapter explores solution techniques for nonlinear equations and introduces the Trapezium Rule, a numerical integration method for estimating definite integrals when analytical integration is impractical. Beyond theoretical importance, these methods have substantial practical applications in determining chemical equilibrium concentrations, regulating cardiac rhythms, analyzing nonlinear electronic circuits with diodes and transistors, and solving cryptographic problems."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What does \"numerical\" mean here? Until now you solved equations exactly: \\(x^2 - 4 = 0\\) gives \\(x = \\pm 2\\) by algebra. Many equations, such as \\(x - \\cos x = 0\\), cannot be solved by any algebraic formula. A numerical method does not look for a formula; it produces a number that is close to the root, for example correct to two decimal places, and it can be made as accurate as we need.\nThe plan of this unit:\n1. 8.1: what a root is, and the Location of Root Theorem (LRT), which tells us where a root must lie.\n2. 8.2: the Graphical Method, a first rough estimate of a root.\n3. 8.3: Bisection, Regula-Falsi and Newton-Raphson, which sharpen an estimate step by step.\n4. 8.4: the Trapezium Rule, which estimates a definite integral numerically.\n5. 8.5: real-life applications."
+          },
+          {
+            "type": "paragraph",
+            "text": "Before learning methods to find roots of nonlinear equations, it is important to understand some basic definitions."
+          },
+          {
+            "type": "paragraph",
+            "text": "A root (or zero) of a function \\(y = f(x)\\) is a value of \\(x\\) for which \\(y = 0\\).",
+            "bold": [
+              "root",
+              "zero"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "In other words, a root is the solution of the equation \\(f(x) = 0\\). Since the equation \\(y = 0\\) represents the . x .-axis and a root is a common solution of the equations \\(y = f(x)\\) and \\(y = 0\\), the geometric representation of a root of the function \\(y = f(x)\\) is the point on the Cartesian plane where the graph of the function intersects the \\(x\\)-axis.",
+            "bold": [
+              "geometric representation of a root"
+            ],
+            "book_errors": [
+              "the . x .-axis"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \"represents the . x .-axis\" with two stray dots. It should read \"represents the \\(x\\)-axis\"."
+          },
+          {
+            "type": "paragraph",
+            "text": "For example, if \\(f(x) = x^2 - 4\\) then\n\\[f(x) = 0\\]\n\\[\\Rightarrow x^2 - 4 = 0\\]\n\\[\\Rightarrow x = 2 \\text{ or } x = -2\\]\nSo, 2 and \\(-2\\) are roots of the function (see Figure 8.1)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch8-fig-8-1-x-squared-minus-4",
+            "alt": "Graph of the parabola y = x squared minus 4 on a grid. It cuts the x-axis at A(-2, 0) and B(2, 0), and its lowest point is (0, -4).",
+            "caption": "Figure 8.1: \\(y = f(x) = x^2 - 4\\) meets the x-axis at A(−2, 0) and B(2, 0) (original drawing after the textbook's figure)",
+            "side": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Two ways of seeing the same root:\n1. Algebra: \\(x^2 - 4 = (x - 2)(x + 2) = 0\\), so \\(x = 2\\) or \\(x = -2\\).\n2. Graph: the curve \\(y = x^2 - 4\\) touches the line \\(y = 0\\) (the \\(x\\)-axis) at exactly these two \\(x\\)-values.\nNotice the words: the root is the number \\(x = 2\\); the point where the graph meets the axis is \\((2, 0)\\). Every numerical method in this unit is a clever way of finding where the graph meets the \\(x\\)-axis without drawing it perfectly."
+          },
+          {
+            "type": "paragraph",
+            "text": "A nonlinear equation is an equation of the form \\(y = f(x) = 0\\), where \\(f\\) is not a linear function in the variable \\(x\\), that is, \\(f(x)\\) cannot be expressed in the form \\(ax + b\\) for some real numbers \\(a\\) and \\(b\\) with \\(a \\ne 0\\). In such equations, the variable may appear with powers greater than one or inside trigonometric, exponential, logarithmic or other nonlinear functions. For example:",
+            "bold": [
+              "nonlinear equation"
+            ]
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) \\(x^3 - 1 = 0\\)",
+              "(ii) \\(x^3 + 2x + 5 = 0\\)",
+              "(iii) \\(x - \\cos x = 0\\)"
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Linear and nonlinear equations (our summary)",
+            "header": [
+              "Linear equation",
+              "Nonlinear equation"
+            ],
+            "rows": [
+              [
+                "Can be written as \\(ax + b = 0\\), \\(a \\ne 0\\)",
+                "Cannot be written as \\(ax + b = 0\\)"
+              ],
+              [
+                "\\(x\\) appears only to the power 1",
+                "\\(x\\) appears with a power above 1, or inside sin, cos, \\(e^{x}\\), ln and so on"
+              ],
+              [
+                "Graph is a straight line",
+                "Graph is a curve"
+              ],
+              [
+                "Exactly one root, \\(x = -b/a\\)",
+                "May have no root, one root or many roots"
+              ],
+              [
+                "Always solved exactly by algebra",
+                "Often has no exact formula; we approximate the root"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Note that \\(x = 1\\) is a root of the cubic function \\(y = x^3 - 1\\) which can easily be found analytically. Consider another cubic function \\(y = x^3 + 2x + 5\\). This equation has an exact root given by"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}x &= \\sqrt[3]{-\\dfrac{5}{2} + \\sqrt{\\dfrac{707}{108}}} \\\\ &\\quad + \\sqrt[3]{-\\dfrac{5}{2} - \\sqrt{\\dfrac{707}{108}}}\\end{aligned}",
+            "text_alt": "x equals the cube root of (minus 5 over 2 plus the square root of 707 over 108), plus the cube root of (minus 5 over 2 minus the square root of 707 over 108)"
+          },
+          {
+            "type": "paragraph",
+            "text": "which can be obtained analytically using algebraic methods but the expression is complicated and difficult to handle in practice. On the other hand, its approximate root (correct to two decimal places) \\(x \\approx -1.33\\) can easily be obtained using graphical or numerical methods. In fact, formulas for solving quadratic, cubic, and quartic equations do exist but no general algebraic formula is available for quintic or higher-degree polynomials. Therefore, numerical methods are essential for finding approximate roots in such cases. Before exploring these methods, we need to introduce a basic result known as the Location of Root Theorem (LRT).",
+            "bold": [
+              "Location of Root Theorem (LRT)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is the exact root of \\(x^3 + 2x + 5 = 0\\) so ugly? It comes from the cubic formula (Cardano's formula). For \\(x^3 + px + q = 0\\) it uses \\(-\\frac{q}{2}\\) and \\(\\frac{q^2}{4} + \\frac{p^3}{27}\\). Here \\(p = 2\\), \\(q = 5\\):\n\\[\\frac{q^2}{4} + \\frac{p^3}{27} = \\frac{25}{4} + \\frac{8}{27}\\]\n\\[= \\frac{675 + 32}{108} = \\frac{707}{108}\\]\nThat is where 707/108 comes from. You do not need to learn this formula. The point is: even when an exact formula exists, the decimal value is what we actually use, and that value is \\(x \\approx -1.3283\\), that is \\(-1.33\\) to two decimal places.\nFor \\(x - \\cos x = 0\\) there is no algebraic formula at all, so a numerical method is the only way."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "\"Correct to two decimal places\" means the answer is written with exactly two digits after the point, and the true root rounds to it. For example the true root \\(-1.3283\\ldots\\) is written \\(-1.33\\). Always keep more decimals in your working (at least 4) and round only at the end."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A root (zero) of \\(f\\) is a number \\(c\\) with \\(f(c) = 0\\); on the graph it is where \\(y = f(x)\\) meets the \\(x\\)-axis.\n2. A nonlinear equation \\(f(x) = 0\\) is one where \\(f(x)\\) is not of the form \\(ax + b\\).\n3. Many nonlinear equations have no usable exact formula (and none exists for general polynomials of degree 5 or more), so we find approximate roots by numerical methods.\n4. The first tool is the Location of Root Theorem (next page), which tells us an interval that must contain a root."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Calling the point \\((2, 0)\\) the root. The root is the number \\(x = 2\\); \\((2, 0)\\) is the point on the graph.\n2. Thinking that every equation with \\(x^2\\) is \"easy\". \\(x^2 = 4\\) is easy, but \\(x^2 = \\sin x + 1\\) has no algebraic formula.\n3. Rounding too early. If you round each value to 2 decimals during the working, the final answer can be wrong in the second decimal place."
+          }
+        ]
+      }
+    }
+  ]
+}

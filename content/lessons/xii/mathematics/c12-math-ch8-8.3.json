@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.3",
+      "title": "8.3 Numerical Methods for Solving Nonlinear Equations",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 238,
+          "pdf_to": 238,
+          "note": "Book p. 236: 8.3 main text (one paragraph) introducing Bisection, Regula-Falsi and Newton-Raphson; our summary table"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "To find roots accurate to two or more decimal places, we need systematic numerical methods. These methods use the concept of intervals where the function changes sign to progressively narrow down the root. In this section, we will study three important numerical techniques—Bisection Method, Regula-Falsi Method, and Newton–Raphson Method."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In 8.2 the graphical method gave a root to one or two decimal places by reading a graph. Reading a graph is never more accurate than the drawing. The three methods of this section replace the drawing by calculation, so we can go to as many decimal places as we like.\nAll three are iterative: each method takes an estimate of the root and produces a better one, again and again, until the estimate is accurate enough. 8.3.1 explains how we decide that it is accurate enough."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Method",
+              "New estimate",
+              "What it needs",
+              "Speed"
+            ],
+            "rows": [
+              [
+                "Bisection (8.3.2)",
+                "midpoint \\(c = \\frac{a + b}{2}\\)",
+                "\\(f\\) continuous on \\([a, b]\\), \\(f(a)f(b) < 0\\)",
+                "slow but always works"
+              ],
+              [
+                "Regula-Falsi (8.3.3)",
+                "where the secant through \\((a, f(a))\\), \\((b, f(b))\\) cuts the x-axis",
+                "\\(f\\) continuous on \\([a, b]\\), \\(f(a)f(b) < 0\\)",
+                "usually faster than bisection"
+              ],
+              [
+                "Newton–Raphson (8.3.4)",
+                "where the tangent at \\((x_n, f(x_n))\\) cuts the x-axis",
+                "\\(f\\) differentiable, \\(f'(x) \\ne 0\\) near the root, a good \\(x_0\\)",
+                "usually the fastest"
+              ]
+            ],
+            "caption": "The three methods of 8.3 at a glance (our summary)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Bisection, Regula-Falsi and Newton–Raphson are iterative methods: each step improves the estimate of the root.\n2. Bisection and Regula-Falsi start from an interval of sign change (the LRT of 8.1.1) and keep the root trapped inside it.\n3. Newton–Raphson starts from one value \\(x_0\\) and uses the tangent; it needs \\(f'(x)\\).\n4. We stop when \\(|f(c)|\\) is smaller than the tolerance for the required decimal places (8.3.1)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Starting bisection or Regula-Falsi without checking \\(f(a)f(b) < 0\\): if there is no sign change the methods have nothing to trap.\n2. Rounding the estimate to the final number of decimal places in the middle of the working; keep extra decimals until the end."
+          }
+        ]
+      }
+    }
+  ]
+}

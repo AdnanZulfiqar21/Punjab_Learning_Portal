@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.5-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.5",
+      "title": "8.5 Real-Life Applications of Nonlinear Equations (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-8.5",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 251,
+          "pdf_to": 254,
+          "note": "Book p. 249: 8.5 introduction (two paragraphs: chemistry, biology and medicine, electronic circuits, cryptography); lessons 8.5.1-8.5.4 on p. 249-252."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum bachon! Ab tak 8.3 mein aap ne teen numerical methods seekh liye hain: Bisection, Regula-Falsi aur Newton-Raphson. Sawal yeh hai ke yeh sab seekhne ka faida kya? Is section (8.5) mein kitab humein dikhati hai ke yahi methods asal zindagi ke masail mein kaise kaam aate hain: chemistry ki lab mein, dil ki dhadkan mein, bijli ke circuit mein aur secret codes (cryptography) mein. Yani ab hum formulas ko asal duniya se jorenge."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab kehti hai: asal zindagi ke bohat se physical, biological, chemical aur technological masail aisi nonlinear equations (woh equations jo seedhi line wali nahin, jin mein \\(x^{2}\\), \\(x^{5}\\), \\(e^{x}\\) ya \\(\\sin x\\) jaisi cheezein hon) tak le jate hain jin ke real solutions sirf taqreeban (approximate) hi nikal sakte hain. Aise mauqon par algebra se equation hal karna bohat mushkil ho jata hai, aur kabhi kabhi to koi exact formula hota hi nahin. Is liye numerical methods ek practical aur munazzam (systematic) tareeqa dete hain jis se hum jitni accuracy chahein utni accuracy wala approximate solution nikal lete hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab misalein deti hai: chemical reactions mein scientists ko substances ki equilibrium concentration (woh miqdar jo reaction ke thehar jane par bachti hai) maloom karni hoti hai, aur yeh aksar nonlinear equation ban jati hai. Biology aur medicine mein dil ki dhadkan aur nerve signals ka nizam nonlinear mathematical models se chalta hai. Isi tarah electronic circuits mein diodes aur transistors jaise parts exponential qawaneen (laws) follow karte hain, jin se nonlinear equations banti hain jo numerically hi hal hoti hain. Aur cryptography (secret codes aur encryption ka ilm) mein nonlinear equations mehfooz communication systems aur encryption algorithms banane mein ahem kirdar ada karti hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh equations algebra se kyun hal nahin hotin? Zara \\(xe^{x} = 1\\) ko dekhiye: \\(x\\) bahar bhi hai aur exponent ke andar bhi. Koi bhi algebraic qadam in dono ko alag nahin kar sakta. \\(\\sin V = 0.5V\\) mein bhi \\(V\\) sine ke andar bhi hai aur bahar bhi. Aur \\(x^{5} - 10x + 5 = 0\\) ke liye to degree five ka koi general formula hai hi nahin (jaise degree two ke liye quadratic formula hota hai, waisa yahan nahin).\nIs liye hum exact formula ki bajaye 8.3 ke teen methods use karte hain. Har method aise numbers deta hai jo har qadam par root ke aur qareeb aate jate hain, aur jaise hi maangi hui decimal places pakki ho jayen, hum ruk jate hain. Yeh aisa hi hai jaise andhere kamre mein switch dhoondna: har koshish ke baad aap switch ke aur qareeb pohanchte hain."
+          },
+          {
+            "type": "table",
+            "caption": "Teaching table (ours): 8.5 ke chaar applications aur kitab ka method",
+            "header": [
+              "Lesson",
+              "Equation",
+              "Method"
+            ],
+            "rows": [
+              [
+                "8.5.1 Chemical Reactions",
+                "\\(xe^{x} = 1\\)",
+                "Newton-Raphson"
+              ],
+              [
+                "8.5.2 Regulation of Heartbeats",
+                "\\(x^{3} - x - 1 = 0\\)",
+                "Bisection"
+              ],
+              [
+                "8.5.3 Electronic Circuits",
+                "\\(\\sin V - 0.5V = 0\\)",
+                "Regula-Falsi"
+              ],
+              [
+                "8.5.4 Cryptography",
+                "\\(x^{5} - 10x + 5 = 0\\)",
+                "Regula-Falsi"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is section ka har sawal ek hi tareeqe se hal hota hai, yeh paanch qadam yaad kar lijiye:\n1. Model ko \\(f(x) = 0\\) ki shakal mein likhiye (saare terms ek taraf). Kyun? Kyun ke teeno methods \\(f(x) = 0\\) ka root dhoondte hain.\n2. Check kijiye ke \\(f\\) continuous hai aur ek aisa interval \\([a, b]\\) dhoondiye jahan \\(f(a)\\) aur \\(f(b)\\) ke signs ulte hon (Location of Root Theorem). Yeh is baat ki guarantee hai ke andar root mojood hai.\n3. Jo method sawal mein likha hai wahi lagaiye, aur working mein kam az kam 4 decimal places rakhiye.\n4. Jab \\(|f(c)|\\) tolerance se chhota ho jaye to ruk jaiye. 8.3.1 ka rule: \\(n\\) decimal places ke liye \\(|f(c)| < \\frac{10^{-n}}{2}\\), yani do places ke liye 0.005 aur teen ke liye 0.0005.\n5. Round kijiye, unit likhiye (moles per liter, volts waghera) aur bataiye ke yeh number asal situation mein kya matlab rakhta hai."
+          },
+          {
+            "type": "table",
+            "caption": "Teaching table (ours): teeno methods ka muqabla",
+            "header": [
+              "Feature",
+              "Bisection",
+              "Regula-Falsi",
+              "Newton-Raphson"
+            ],
+            "rows": [
+              [
+                "Kahan se shuru",
+                "sign change wala interval \\([a, b]\\)",
+                "sign change wala interval \\([a, b]\\)",
+                "root ke qareeb ek guess \\(x_0\\)"
+              ],
+              [
+                "Naya value",
+                "\\(c = \\frac{a+b}{2}\\)",
+                "\\(c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\)",
+                "\\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\)"
+              ],
+              [
+                "Kya chahiye",
+                "sirf \\(f\\) ki values",
+                "sirf \\(f\\) ki values",
+                "\\(f\\) aur \\(f'\\) dono, aur \\(f'(x) \\ne 0\\)"
+              ],
+              [
+                "Raftaar",
+                "aahista magar pakka",
+                "aam taur par bisection se tez",
+                "achhe guess se sab se tez"
+              ],
+              [
+                "Hamesha root tak?",
+                "haan",
+                "haan",
+                "hamesha nahin (bura guess door le ja sakta hai)"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Agar sawal mein koi method na likha ho (jaise Exercise 8.4 ka Question 2), to aap kaunsa lenge? Jawab: agar \\(f'(x)\\) aasaani se nikal aaye aur root ke qareeb ek achha guess maloom ho to Newton-Raphson sab se tez hai. Agar derivative mushkil ho to Regula-Falsi, aur agar sirf pakki guarantee chahiye to Bisection."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Maan lijiye ek tank mein paani ka level \\(h\\) is equation ko satisfy karta hai: \\(h^{3} + h = 3\\). Kya yeh aap algebra se seedha hal kar sakte hain? Mushkil hai. Lekin \\(f(h) = h^{3} + h - 3\\) lein to \\(f(1) = -1 < 0\\) aur \\(f(2) = 7 > 0\\). Yani root \\([1, 2]\\) mein hai, aur ab koi bhi method laga kar hum \\(h \\approx 1.21\\) tak pohanch sakte hain. Yahi is poore section ka khayal hai: asal masle ko \\(f(x) = 0\\) banao, sign change dhoondo, aur method chalao."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "Chemistry, medicine, electronics aur cryptography ke asal masail aisi nonlinear equations dete hain jo algebra se exact hal nahin hotin.\nNumerical method kisi bhi accuracy tak root de deta hai, lekin shuruaat hamesha \\(f(x) = 0\\), continuity aur sign change wale interval se hoti hai.\nBisection aur Regula-Falsi ko sirf f ki values chahiye; Newton-Raphson ko derivative bhi chahiye magar woh sab se tez hai.\nJawab hamesha ek number hai jis ke saath unit aur matlab ho, aur jitni decimal places maangi gayi hon utni par round kiya gaya ho."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "Sign check kiye baghair iterations shuru kar dena: agar \\(f(a)\\) aur \\(f(b)\\) ka sign ek jaisa hai to ho sakta hai interval mein root ho hi nahin.\nWorking ke darmiyan hi 2 decimal places par round kar dena: working mein 4 places (teen place wale jawab ke liye 5) rakhiye, round sirf aakhir mein.\nJahan sin ya cos ho wahan calculator degree mode mein rakhna: numerical methods aur derivatives ke liye radian mode zaroori hai."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-3-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-3-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 250,
+          "pdf_to": 250,
+          "note": "Exercise 8.3 (book p. 248): Trapezium Rule, Q1-Q10"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.3 (book p. 307)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2. Use Trapezoidal Rule to approximate the value of the definite integral \\(\\int_{0}^{1} e^{x}\\,dx\\) taking \\(n = 7\\).",
+            "explanation": "A numerical integration question: estimate a definite integral by the Trapezium Rule.\nGiven: \\(f(x) = e^{x}\\), interval \\([0, 1]\\), \\(n = 7\\), so \\(h = \\frac{b-a}{n}\\).\nPlan: list the points and 4-decimal function values, then use h/2 [first + 2(inner) + last].",
+            "steps": [
+              "Given: \\(f(x) = e^{x}\\), \\(a = 0\\), \\(b = 1\\), \\(n = 7\\).\nTo find: an approximate value of \\(\\int_{0}^{1} e^{x}\\,dx\\).\nMethod: the Trapezium Rule, as the question asks. n is given, so find h first.",
+              "Continuity\n\\(e^{x}\\) is continuous for every real \\(x\\), so it is continuous on \\([0, 1]\\).\nWhy: the Trapezium Rule needs a continuous function on the interval.",
+              "Step size and points\n\\[h = \\dfrac{b-a}{n} = \\dfrac{1-0}{7} = \\dfrac{1}{7}\\]\nPoints \\(x_{i} = a + ih\\): \\(0, \\tfrac{1}{7}, \\tfrac{2}{7}, \\tfrac{3}{7}, \\tfrac{4}{7}, \\tfrac{5}{7}, \\tfrac{6}{7}, 1\\)\nWhy: 7 equal subintervals give 8 points; the first and last are the ends \\(a\\) and \\(b\\).",
+              "Function values (4 decimal places)\n\\[f(0) = e^{0} = 1.0000\\]\n\\[f(\\tfrac{1}{7}) = e^{\\tfrac{1}{7}} = 1.1536\\]\n\\[f(\\tfrac{2}{7}) = e^{\\tfrac{2}{7}} = 1.3307\\]\n\\[f(\\tfrac{3}{7}) = e^{\\tfrac{3}{7}} = 1.5351\\]\n\\[f(\\tfrac{4}{7}) = e^{\\tfrac{4}{7}} = 1.7708\\]\n\\[f(\\tfrac{5}{7}) = e^{\\tfrac{5}{7}} = 2.0427\\]\n\\[f(\\tfrac{6}{7}) = e^{\\tfrac{6}{7}} = 2.3564\\]\n\\[f(1) = e^{1} = 2.7183\\]\nWhy: Keep \\(h = \\frac{1}{7}\\) as a fraction: \\(\\frac{1}{7} = 0.142857\\ldots\\) rounded early would spoil the answer, and \\(\\frac{h}{2} = \\frac{1}{14}\\) is exact. The table with the answer collects them with their weights.",
+              "Add the inner values\n\\[S = f(x_{1}) + \\dots + f(x_{6})\\]\n\\[= 1.1536 + 1.3307 + 1.5351\\]\n\\[+ 1.7708 + 2.0427 + 2.3564\\]\n\\[= 10.1893\\]\nWhy: these 6 inner values are shared by two neighbouring trapeziums, so they will be doubled.",
+              "Apply the Trapezium Rule\n\\[\\int_{0}^{1} e^{x}\\,dx\\]\n\\[\\approx \\dfrac{h}{2}\\big[f(x_{0}) + 2S + f(x_{7})\\big]\\]\n\\[= \\dfrac{1}{14}\\big[1.0000 + 2(10.1893)\\]\n\\[+ 2.7183\\big]\\]\n\\[= \\dfrac{1}{14}(24.0969)\\]\n\\[= 1.721207 \\approx 1.7212\\]\nWhy: \\(\\frac{h}{2} = \\frac{1}{14}\\); the end values are used once and the inner sum twice. Round only at the end.",
+              "Check:\n\\[\\int_{0}^{1} e^{x}\\,dx = e - 1 \\approx 1.7183\\]\nThe trapezium value 1.7212 is slightly larger, as expected: \\(e^{x}\\) bends upwards, so each chord lies above the curve."
+            ],
+            "final_answer": "\\(\\int_{0}^{1} e^{x}\\,dx \\approx 1.7212\\)",
+            "answer_table": {
+              "header": [
+                "i",
+                "\\(x_{i}\\)",
+                "\\(f(x_{i})\\)",
+                "Weight"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(0\\)",
+                  "\\(1.0000\\)",
+                  "1"
+                ],
+                [
+                  "1",
+                  "\\(\\tfrac{1}{7}\\)",
+                  "\\(1.1536\\)",
+                  "2"
+                ],
+                [
+                  "2",
+                  "\\(\\tfrac{2}{7}\\)",
+                  "\\(1.3307\\)",
+                  "2"
+                ],
+                [
+                  "3",
+                  "\\(\\tfrac{3}{7}\\)",
+                  "\\(1.5351\\)",
+                  "2"
+                ],
+                [
+                  "4",
+                  "\\(\\tfrac{4}{7}\\)",
+                  "\\(1.7708\\)",
+                  "2"
+                ],
+                [
+                  "5",
+                  "\\(\\tfrac{5}{7}\\)",
+                  "\\(2.0427\\)",
+                  "2"
+                ],
+                [
+                  "6",
+                  "\\(\\tfrac{6}{7}\\)",
+                  "\\(2.3564\\)",
+                  "2"
+                ],
+                [
+                  "7",
+                  "\\(1\\)",
+                  "\\(2.7183\\)",
+                  "1"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

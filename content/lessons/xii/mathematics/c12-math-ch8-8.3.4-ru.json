@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.3.4-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.3.4",
+      "title": "8.3.4 Newton–Raphson Method (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-8.3.4",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 243,
+          "pdf_to": 245,
+          "note": "Book p. 241-243: 8.3.4 Newton-Raphson Method, Figure 8.6, tangent derivation of the formula, steps, Example 5"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab teesra aur aam taur par sab se tez method: Newton–Raphson. Pichhle dono methods ek interval ko tang karte the. Yeh method bilkul alag soch rakhta hai: woh ek hi point se shuru hota hai aur curve ki dhalwan (slope) dekh kar seedha root ki taraf chhalang lagata hai. Jaise pahaar se neeche utarte hue aap dhalwan dekh kar andaza lagate hain ke zameen kahan aayegi."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki baat: Newton–Raphson Method nonlinear equation \\(f(x) = 0\\) ka taqreebi real root dhoondne ka numerical tareeqa hai. Yeh curve \\(y = f(x)\\) par root ke qareeb kisi point par tangent (woh line jo curve ko sirf ek point par chhooti hai) kheenchta hai, aur jahan yeh tangent \\(x\\)-axis ko kaatti hai use root ka behtar andaza maanta hai. Shuruaati andaza sign change wale interval se chuna jata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kyunke is method ke liye function ka differentiable hona zaroori hai (yani us ki tangent ki slope ho), yeh aam taur par Bisection ya Regula-Falsi se jaldi achhe jawab tak pohanchta hai. Root ke qareeb \\(f\\) ka derivative zero nahin hona chahiye. Yeh method seedha Location of Root Theorem (LRT) par nahin khara."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch8-fig-8-6-newton-raphson",
+            "alt": "Graph of an increasing curve y = f(x) bending downwards. The point (x0, f(x0)) is well below the x-axis; the tangent there cuts the axis at x1. The tangent at (x1, f(x1)) cuts the axis at x2, very close to the root c where the curve crosses the axis.",
+            "caption": "Figure 8.6: Newton–Raphson, tangents at x0 and x1 meeting the x-axis at x1 and x2 near the root c (original drawing after the textbook's figure; plotted for f(x) = ln x - 1 from x0 = 1)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Figure 8.6 ko qadam ba qadam parhein. Hum \\(x_0\\) se shuru karte hain; wahan curve axis ke kaafi neeche hai. Point \\((x_0, f(x_0))\\) par tangent kheenchi (hari dotted line); woh axis ko \\(x_1\\) par kaatti hai. Ab \\(x_1\\) se seedha upar ya neeche ja kar curve par point \\((x_1, f(x_1))\\) milta hai; wahan nayi tangent (narangi line) axis ko \\(x_2\\) par kaatti hai, jo root \\(c\\) ke bilkul qareeb hai.\nGhaur karein ke bisection aur Regula-Falsi ko do points chahiye the, lekin Newton–Raphson ko har qadam par sirf ek point aur us ki slope chahiye. Isi liye is ke liye derivative zaroori hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Maan lein \\(x_0\\) equation \\(f(x) = 0\\) ke root ka shuruaati andaza hai, jahan:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "\\(f\\) differentiable ho \\(x_0\\) ke qareeb, aur",
+              "\\(f'(x) \\ne 0\\) ho \\(x_0\\) ke qareeb."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Curve \\(y = f(x)\\) par point \\((x_0, f(x_0))\\) par tangent ki slope \\(f'(x_0)\\) hai; derivative ka matlab hi yeh hai. Is point par tangent kheenchein (Figure 8.6). Point-slope form se tangent ki equation:"
+          },
+          {
+            "type": "equation",
+            "latex": "y - f(x_0) = f'(x_0)(x - x_0)",
+            "text_alt": "y minus f of x nought equals f dash of x nought times x minus x nought"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh tangent \\(x\\)-axis ko \\(x = x_1\\) par kaatti hai. Axis par \\(y = 0\\) hota hai, is liye \\(y = 0\\) aur \\(x = x_1\\) rakhein:"
+          },
+          {
+            "type": "equation",
+            "latex": "0 - f(x_0) = f'(x_0)(x_1 - x_0)",
+            "text_alt": "0 minus f of x nought equals f dash of x nought times x 1 minus x nought"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(x_1\\) ke liye hal karein:"
+          },
+          {
+            "type": "equation",
+            "latex": "x_1 = x_0 - \\dfrac{f(x_0)}{f'(x_0)}",
+            "text_alt": "x 1 equals x nought minus f of x nought over f dash of x nought"
+          },
+          {
+            "type": "paragraph",
+            "text": "Isi tarah \\(x = x_1\\) par tangent kheenchein to us ka \\(x\\)-intercept \\(x_2\\) hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "x_2 = x_1 - \\dfrac{f(x_1)}{f'(x_1)}",
+            "text_alt": "x 2 equals x 1 minus f of x 1 over f dash of x 1"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahi amal dohrate jayein to \\(x\\)-intercepts ka ek silsila (sequence) banta hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "x_{n+1} = x_n - \\dfrac{f(x_n)}{f'(x_n)},\\quad f'(x_n) \\ne 0",
+            "text_alt": "x n plus 1 equals x n minus f of x n over f dash of x n, n equals 0, 1, 2 and so on, with f dash of x n not zero"
+          },
+          {
+            "type": "paragraph",
+            "text": "(\\(n = 0, 1, 2, \\ldots\\)). Yahi Newton–Raphson formula hai, jis se \\(f(x) = 0\\) ka root qadam ba qadam (iteratively) nikalte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Figure 8.6 se saaf hai ke har naya andaza \\(x_{n+1}\\) pichhle andaze \\(x_n\\) se root \\(x = c\\) ke zyada qareeb hai. Agar koi non-negative integer \\(m\\) aisa ho ke \\(x_{m+1} - x_m\\) zero ke qareeb ho jaye, to \\(x_m\\) hi matloob root hai, yani \\(|f(x_m)| \\approx 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ne yahan \"From Figure 8.5\" likha hai; sahi Figure 8.6 hai (8.5 Regula-Falsi ki figure hai). Aur \"closed to zero\" ki jagah \"close to zero\" hona chahiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(0 - f(x_0) = f'(x_0)(x_1 - x_0)\\) se \\(x_1\\) tak: dono taraf \\(f'(x_0)\\) se taqseem karein (ijazat hai kyunke \\(f'(x_0) \\ne 0\\)): \\(x_1 - x_0 = -\\frac{f(x_0)}{f'(x_0)}\\); phir dono taraf \\(x_0\\) jama karein.\n\\(f'(x) \\ne 0\\) kyun? Zero slope ka matlab horizontal tangent, jo x-axis ke bilkul parallel hai aur use kabhi nahin kaatti; formula mein zero se taqseem aa jati hai. Bohat chhoti \\(f'(x_n)\\) bhi khatarnak hai: tangent itni leti hui hoti hai ke agla andaza root se bohat door ja girta hai.\nItna tez kyun? Root ke qareeb curve taqreeban seedhi line hoti hai aur tangent us se chipki rehti hai; is liye har qadam par sahi decimals taqreeban dugne ho jate hain."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Steps of Newton-Raphson Method:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Equation tayyar karein: di gayi equation ko \\(f(x) = 0\\) ki shakal mein likhein. Jis interval mein function ka sign badalta hai us mein se shuruaati andaza \\(x_0\\) chunein aur yaqeeni banayein ke:\n(i) \\(f(x)\\) is interval mein differentiable ho.   (ii) \\(x_0\\) ke qareeb \\(f'(x) \\ne 0\\) ho.",
+              "Formula set karein: \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\), \\(n = 0, 1, 2, \\ldots\\)\nIs se ek ke baad ek behtar andaze nikalein.",
+              "Convergence check karein: agar \\(|f(x_{n+1})| \\approx 0\\) (tolerance se kam), to ruk jayein.",
+              "Root likhein: \\(x = x_{n+1}\\) zaroori accuracy tak root hai."
+            ],
+            "bold": [
+              "Equation tayyar karein:",
+              "Formula set karein:",
+              "Convergence check karein:",
+              "Root likhein:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke Step 1(ii) mein \\(f'(a) \\ne 0\\) chhapa hai. Is method mein koi \\(a\\) hai hi nahin; sahi \\(f'(x) \\ne 0\\) hai \\(x_0\\) ke qareeb."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(f(x) = x^2 - 5\\), \\(x_0 = 2\\). Pehla qadam \\(x_1\\) kya hoga?\nJawab: \\(f(2) = -1\\), \\(f'(x) = 2x\\), \\(f'(2) = 4\\); \\(x_1 = 2 - \\frac{-1}{4} = 2.25\\). Asal \\(\\sqrt{5} = 2.2361\\); ek hi qadam mein kaafi qareeb!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Newton–Raphson kab mushkil mein parta hai? (1) Jab shuruaati andaza root se door ho aur beech mein curve mur jaye; tangent kisi aur taraf le ja sakti hai. (2) Jab kisi \\(x_n\\) par \\(f'(x_n)\\) zero ke qareeb ho; tangent leti hui hoti hai aur agla andaza bohat door girta hai. (3) Jab function mein asymptote ho (jaise \\(\\tan x\\)) aur koi qadam asymptote ke paar chala jaye.\nBachao: \\(x_0\\) hamesha sign change wale interval ke andar se lein, aur har qadam ke baad dekhein ke nayi value usi interval ke aas paas hai. Agar values bhaagne lagen to \\(x_0\\) badal dein ya pehle do teen qadam bisection se kar ke interval chhota kar lein.\nNaam ki kahani: yeh tareeqa Isaac Newton aur Joseph Raphson ke naam par hai; dono ne 17vi sadi mein isay apne apne tareeqe se istemal kiya."
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Use Newton-Raphson method to find a root of \\(f(x) = x^3 + 2x^2 + 10x - 20\\) correct to two decimal places.",
+            "steps": [
+              "Diya gaya: \\(f(x) = x^3 + 2x^2 + 10x - 20\\).\nMaloom karna: root 2 decimal places tak.\nTareeqa: Newton–Raphson: sign change wale interval ke andar kisi shuruaati value se tangent ke qadam, \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\). Calculator 3 decimal places par fix.",
+              "Shuruaati andaza chunein\n\\[f(1) = -7 < 0,\\quad f(2) = 16 > 0\\]\n\\[f(c) = \\lim_{x \\to c}(x^3 + 2x^2 + 10x - 20)\\]\nhar \\(c \\in [1, 2]\\) ke liye, yani \\(f\\) sign change wale interval \\([1, 2]\\) par continuous hai.\n\\(\\Rightarrow\\) root \\([1, 2]\\) mein hai. Shuruaati andaza \\(x_0 = 1.500\\).\nKyun: LRT root ko \\([1, 2]\\) mein rakhta hai, aur us ka beech 1.5 achhi shuruaat hai. Kitab ne \"is continuous\" se pehle \\(f\\) nahin likha; matlab \\(f\\) hi hai.",
+              "Derivative\n\\[f'(x) = 3x^2 + 4x + 10\\]\n\\(f'\\) maujood hai aur \\(x_0 = 1.5\\) ke aas paas \\(f'(x) \\ne 0\\) \\(\\Rightarrow\\) Newton–Raphson lag sakta hai.\nKyun: asal mein \\(3x^2 + 4x + 10\\) har \\(x\\) ke liye positive hai (discriminant \\(16 - 120\\) negative hai), yani tangent kabhi horizontal nahin hoti aur formula mein zero se taqseem ka khatra nahin.",
+              "Newton–Raphson formula\n\\[x_{n+1} = x_n - \\dfrac{f(x_n)}{f'(x_n)}\\]\n\\(n = 0, 1, 2, \\ldots\\)",
+              "Iterations: \\(x_0 = 1.5\\)\n\\[f(1.5) = 3.375 + 4.500 + 15 - 20\\]\n\\[= 2.875 \\ne 0\\]\nKyun: \\(x_0\\) abhi root nahin, is liye formula lagayenge.",
+              "Iteration 1\n\\[f'(1.5) = 6.750 + 6 + 10 = 22.750\\]\n\\[x_1 = 1.500 - \\dfrac{2.875}{22.750} = 1.374\\]\n\\[f(x_1) = f(1.374) \\approx 0.110 \\ne 0\\]\nKyun: \\((1.5, 2.875)\\) par tangent x-axis ko 1.374 par kaatti hai; \\(f(1.374)\\) abhi kaafi chhota nahin.",
+              "Iteration 2\n\\[f'(1.374) \\approx 21.160\\]\n\\[x_2 = 1.374 - \\dfrac{0.110}{21.160} \\approx 1.369\\]\n\\[f(x_2) = f(1.369) \\approx 0.004\\]\nKyun: agla tangent qadam. Ghaur karein, \\(x_2\\) aur \\(x_1\\) mein sirf teesre decimal ka farq hai: method tezi se ruk raha hai. Kitab ne yahan 0.002 likha hai, sahi 0.004 hai (neeche box).",
+              "Iterations rokein\n\\[|f(1.369)| \\approx 0.004 < 0.005\\]\nKyun: 2 decimal places ki tolerance 0.005 hai aur shart poori hai (kitab 0.01 se muqabla karti hai).",
+              "Root likhein\n\\[x \\approx 1.37\\]\n2 decimal places tak sahi.",
+              "Tasdeeq:\n\\[f(1.365) = -0.0802 < 0\\]\n\\[f(1.375) = 0.1309 > 0\\]\nRoot 1.365 aur 1.375 ke beech hai, is liye 1.37. Sirf do iterations! Yahi Newton–Raphson ki taaqat hai."
+            ],
+            "answer": "\\(x \\approx 1.37\\) (2 decimal places tak sahi)"
+          },
+          {
+            "type": "table",
+            "header": [
+              "n",
+              "\\(x_n\\)",
+              "\\(f(x_n)\\)",
+              "\\(f'(x_n)\\)"
+            ],
+            "rows": [
+              [
+                "0",
+                "\\(1.500\\)",
+                "\\(2.875\\)",
+                "\\(22.750\\)"
+              ],
+              [
+                "1",
+                "\\(1.374\\)",
+                "\\(0.110\\)",
+                "\\(21.160\\)"
+              ],
+              [
+                "2",
+                "\\(1.369\\)",
+                "\\(0.004\\)",
+                "ruk jayein"
+              ]
+            ],
+            "caption": "Example 5 ki iterations ek table mein (hamara khulasa, 3 decimal places; f(1.369) ki sahi value 0.004)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "1. Kitab ne \"\\(\\Rightarrow\\) is continuous on the interval of sign change\" likha hai, \\(f\\) chhoot gaya; sahi \"\\(\\Rightarrow f\\) \\([1, 2]\\) par continuous hai\".\n2. \\(f(1.369) = 2.5657 + 3.7483 + 13.69 - 20 = 0.0040\\), 0.002 nahin.\n3. Rukne ka test 2 decimal places ki tolerance se hona chahiye: \\(|f(1.369)| \\approx 0.004 < 0.005\\), na ke \\(< 0.01\\). Jawab \\(x \\approx 1.37\\) phir bhi sahi hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "\\(\\sqrt{10}\\) ko 3 decimal places tak: \\(f(x) = x^2 - 10\\), \\(f'(x) = 2x\\), \\(f(3) = -1 < 0 < f(4) = 6\\), \\(x_0 = 3\\).\n\\(x_1 = 3 - \\frac{-1}{6} = 3.1667\\), \\(f(3.1667) = 0.0280\\).\n\\(x_2 = 3.1667 - \\frac{0.0280}{6.3334} = 3.1623\\), \\(f(3.1623) = 0.00014 < 0.0005\\): ruk jayein, \\(x \\approx 3.162\\).\nCalculator: \\(\\sqrt{10} = 3.16228\\). Do qadam mein 3 decimal places!"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(f(x) = x^3 - 3x\\) aur koi student \\(x_0 = 1\\) se Newton–Raphson shuru karta hai. Kya hoga?\nJawab: \\(f'(x) = 3x^2 - 3\\), to \\(f'(1) = 0\\). Tangent bilkul horizontal hai aur x-axis ko kabhi nahin kaatti; formula mein zero se taqseem aa jati hai. Is liye \\(x_0\\) chunte waqt pehle dekh lein ke wahan \\(f'(x_0) \\ne 0\\) ho, aur behtar hai ke woh zero se kaafi door ho."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Formula: \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\), yani \\((x_n, f(x_n))\\) par tangent ka x-intercept.\n2. Shartein: root ke qareeb \\(f\\) differentiable aur \\(f'(x) \\ne 0\\); \\(x_0\\) sign change wale interval ke andar se.\n3. \\(|f(x_{n+1})|\\) tolerance se kam ho to rukein (2 d.p. ke liye 0.005).\n4. Teeno mein aam taur par sab se tez (Example 5: sirf do iterations).\n5. Bisection aur Regula-Falsi ki tarah root kisi interval mein qaid nahin rehta, is liye buri \\(x_0\\) root se door bhi le ja sakti hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Formula mein plus likh dena, \\(x_n + \\frac{f(x_n)}{f'(x_n)}\\): sign minus hai.\n2. Derivative ghalat lena, maslan \\(\\frac{d}{dx}(2x^2) = 2x\\) likh dena jab ke sahi \\(4x\\) hai; iteration se pehle \\(f'(x)\\) dobara check karein.\n3. Sirf yeh dekh kar ruk jana ke \\(x_{n+1}\\) aur \\(x_n\\) 2 decimals tak barabar hain, aur \\(|f(x_{n+1})|\\) ko tolerance se na milana.\n4. Trigonometric functions mein degree mode."
+          }
+        ]
+      }
+    }
+  ]
+}

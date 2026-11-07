@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.5.2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.5.2",
+      "title": "8.5.2 Regulation of Heartbeats",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 252,
+          "pdf_to": 253,
+          "note": "Book p. 250-251: 8.5.2 Regulation of Heartbeats, Example 2 (shown as Example 9): x^3 - x - 1 = 0 by bisection on [1, 2], iterations table, x = 1.32."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The human heartbeat is regulated by electrical signals that control the contraction and relaxation of the heart muscles. The variation of these signals over time can often be modelled by nonlinear equations."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "The book prints this example as 'Example 2' (the third Example 2 in this unit); we show it as Example 9 (see the note in 8.5.1)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why Bisection here? It needs nothing but values of f and an interval of sign change, and it is guaranteed to close in on the root. The price is speed: each iteration only halves the interval, so it takes several iterations, which is why the working is collected in a table."
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "The electrical activity of the heart is represented by a variable \\(x\\), which measures the signal strength of the heartbeat. At steady-state, the signal satisfies the nonlinear equation \\(x^{3} - x - 1 = 0\\). Find the real steady-state value of the heartbeat signal near \\(x = 1\\) using the Bisection Method, correct to two decimal places.",
+            "steps": [
+              "Given: \\(x^{3} - x - 1 = 0\\), with the root near \\(x = 1\\).\nTo find: the real root (the steady-state signal) correct to two decimal places.\nMethod: Bisection. Find an interval where f changes sign, halve it again and again, and keep the half in which the sign still changes. It is the method the question asks for, and it can never lose the root.",
+              "Identify the function\n\\[f(x) = x^{3} - x - 1\\]\nWhy: bisection works on \\(f(x) = 0\\); the equation is already in that form.",
+              "Continuity\nNote that \\(f(c) = \\lim_{x \\to c} (x^{3} - x - 1)\\) for every \\(c \\in \\mathbb{R}\\).\n\\(\\Rightarrow f\\) is continuous at every real number.\nWhy: f is a polynomial, and its limit at every point equals its value; continuity is needed for the Location of Root Theorem.",
+              "Interval of sign change\n\\[f(1) = 1^{3} - 1 - 1 = -1 < 0\\]\n\\[f(2) = 8 - 2 - 1 = 5 > 0\\]\n\\(\\Rightarrow [1, 2]\\) is an interval of sign change, so \\(f\\) has a root in \\([1, 2]\\).\nWhy: the question says 'near x = 1', so we test 1 and the next whole number 2.",
+              "Iteration 1\n\\[c = \\dfrac{1 + 2}{2} = 1.5\\]\n\\[f(1.5) = 3.375 - 1.5 - 1 = 0.875\\]\nWhy: \\(f(1.5) > 0\\) and \\(f(1) < 0\\), so the sign changes on the left half: new interval \\([1, 1.5]\\).",
+              "Iteration 2\n\\[c = \\dfrac{1 + 1.5}{2} = 1.25\\]\n\\[f(1.25) = 1.9531 - 1.25 - 1\\]\n\\[= -0.2969\\]\nWhy: \\(f(1.25) < 0\\) and \\(f(1.5) > 0\\): new interval \\([1.25, 1.5]\\).",
+              "Iterations 3 and 4\n\\[f(1.375) = 0.2246 > 0\\]\n\\[f(1.3125) = -0.0515 < 0\\]\nWhy: each time we keep the half whose ends have opposite signs: \\([1.25, 1.375]\\), then \\([1.3125, 1.375]\\).",
+              "Iterations 5 and 6\n\\[c = \\dfrac{1.3125 + 1.375}{2} = 1.34375\\]\n\\[\\approx 1.3438,\\ f(c) = 0.0828\\]\n\\[c = \\dfrac{1.3125 + 1.3438}{2} = 1.32815\\]\n\\[\\approx 1.3282,\\ f(c) = 0.0149\\]\nWhy: the book keeps 4 decimal places in the intermediate values (a 5 in the fifth place rounds up).",
+              "Iterations 7 and 8\n\\[c = \\dfrac{1.3125 + 1.3282}{2} \\approx 1.3204\\]\n\\[f(1.3204) = -0.0183\\]\n\\[c = \\dfrac{1.3204 + 1.3282}{2} = 1.3243\\]\n\\[f(1.3243) = -0.0018\\]\nWhy: all eight iterations are collected in the Iterations Table below.",
+              "Stop\nNote that \\(|f(1.3243)| = |-0.0018| < 0.01\\).\nWhy: the value of \\(f\\) is practically zero, so \\(c = 1.3243\\) is accepted. It is also below 0.005, the tolerance of 8.3.1 for two decimal places.",
+              "Check:\nSign test (ours): \\(f(1.315) \\approx -0.0411 < 0\\) and \\(f(1.325) \\approx 0.0012 > 0\\), so the root lies in \\(]1.315, 1.325[\\) and rounds to 1.32.\nThe exact root is \\(x = 1.3247\\ldots\\)"
+            ],
+            "answer": "\\(x \\approx 1.32\\) (correct to two decimal places). Thus, the steady-state value of the heartbeat signal is approximately 1.32 units."
+          },
+          {
+            "type": "table",
+            "caption": "Iterations Table: (Intermediate 4 decimal places)",
+            "header": [
+              "Iteration",
+              "\\(a\\)",
+              "\\(b\\)",
+              "\\(c = \\frac{a+b}{2}\\)",
+              "\\(f(c)\\)",
+              "New Interval"
+            ],
+            "rows": [
+              [
+                "1",
+                "1 (-)",
+                "2 (+)",
+                "1.5 (+)",
+                "0.875",
+                "[1, 1.5]"
+              ],
+              [
+                "2",
+                "1 (-)",
+                "1.5 (+)",
+                "1.25 (-)",
+                "-0.2969",
+                "[1.25, 1.5]"
+              ],
+              [
+                "3",
+                "1.25 (-)",
+                "1.5 (+)",
+                "1.375 (+)",
+                "0.2246",
+                "[1.25, 1.375]"
+              ],
+              [
+                "4",
+                "1.25 (-)",
+                "1.375 (+)",
+                "1.3125 (-)",
+                "-0.0515",
+                "[1.3125, 1.375]"
+              ],
+              [
+                "5",
+                "1.3125 (-)",
+                "1.375 (+)",
+                "1.3438 (+)",
+                "0.0828",
+                "[1.3125, 1.3438]"
+              ],
+              [
+                "6",
+                "1.3125 (-)",
+                "1.3438 (+)",
+                "1.3282 (+)",
+                "0.0149",
+                "[1.3125, 1.3282]"
+              ],
+              [
+                "7",
+                "1.3125 (-)",
+                "1.3282 (+)",
+                "1.3204 (-)",
+                "-0.0183",
+                "[1.3204, 1.3282]"
+              ],
+              [
+                "8",
+                "1.3204 (-)",
+                "1.3282 (+)",
+                "1.3243 (-)",
+                "-0.0018",
+                "Stop"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Note that \\(|f(1.3243)| = |-0.0018| < 0.01\\). Final Answer: \\(x \\approx 1.32\\) (correct to two decimal places). Thus, the steady-state value of the heartbeat signal is approximately 1.32 units."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to read the table: the sign written beside a, b and c is the sign of f there. The new interval always keeps one end with (-) and one with (+); the end that has the same sign as f(c) is replaced by c.\nHere the book stops when \\(|f(c)| < 0.01\\). The rule of 8.3.1 for two decimal places is the stricter \\(|f(c)| < 0.005\\); the final value \\(-0.0018\\) satisfies both, so the answer 1.32 is safe.\nLength check: after 8 halvings the interval \\([1.3204, 1.3282]\\) has length 0.0078, and both ends round to 1.32 or 1.33; the sign test above decides it: 1.32."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Always draw the table with all six columns, write the sign of f beside each value, and finish with one line giving the stopping reason and the final answer in words (here: the steady-state heartbeat signal is about 1.32 units)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "The heartbeat model \\(x^{3} - x - 1 = 0\\) has its root in \\([1, 2]\\) because \\(f(1) = -1 < 0\\) and \\(f(2) = 5 > 0\\).\nBisection: \\(c = \\frac{a+b}{2}\\); keep the half whose ends have opposite signs.\nIntermediate values are kept to 4 decimal places.\nStop when \\(|f(c)|\\) is below the tolerance: \\(x \\approx 1.32\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Replacing the wrong end of the interval: c replaces the end whose f has the SAME sign as f(c).\nRounding 1.34375 to 1.3437 (a 5 rounds up) or rounding c to 2 places during the iterations.\nWriting the final answer as 1.3243 when two decimal places are asked: give 1.32."
+          }
+        ]
+      }
+    }
+  ]
+}
