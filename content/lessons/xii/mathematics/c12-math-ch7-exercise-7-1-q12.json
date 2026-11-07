@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH7-EXERCISE-7-1-Q12",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch7",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch7/u-exercise-7-1-q12",
+      "title": "Question 12",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 233,
+          "pdf_to": 233,
+          "note": "Exercise 7.1, Question 12: book p. 231 (PDF 233); the book prints no answers for Exercise 7.1"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12",
+            "prompt": "12. The acceleration of a particle is \\(a(t) = \\frac{1}{1 + t}\\) for \\(t \\ge 0\\). If the velocity is 0 m/s when \\(t = 0\\), find the velocity at \\(t = 5\\) seconds.",
+            "explanation": "The acceleration changes with time, so the equations of motion (which need a constant \\(a\\)) cannot be used.\nGiven: \\(a(t)\\) and \\(v(0) = 0\\). Find: \\(v(5)\\).\nPlan: integrate \\(a(t)\\) to get \\(v(t)\\) as in Examples 9 and 10, use \\(v(0) = 0\\) for the constant, then put \\(t = 5\\).",
+            "steps": [
+              "Given: \\(a(t) = \\frac{1}{1 + t}\\) for \\(t \\ge 0\\), and \\(v = 0\\) when \\(t = 0\\).\nTo find: the velocity at \\(t = 5\\) s.\nMethod: Since \\(a = \\frac{dv}{dt}\\), integrating \\(a(t)\\) with respect to \\(t\\) gives \\(v(t)\\); the initial condition fixes the constant of integration (the book's method in Examples 9 and 10).",
+              "Integrate the acceleration\n\\[\\dfrac{dv}{dt} = \\dfrac{1}{1 + t}\\]\n\\[\\int dv = \\int \\dfrac{1}{1 + t}\\,dt\\]\n\\[v(t) = \\ln(1 + t) + c\\]\nWhy: \\(\\int \\frac{1}{u}\\,du = \\ln|u|\\); here \\(1 + t > 0\\) for \\(t \\ge 0\\), so no modulus sign is needed.",
+              "Use the initial condition\n\\[0 = \\ln(1 + 0) + c\\]\n\\[0 = 0 + c \\Rightarrow c = 0\\]\n\\[v(t) = \\ln(1 + t)\\]\nWhy: \\(v = 0\\) at \\(t = 0\\), and \\(\\ln 1 = 0\\).",
+              "Velocity at t = 5\n\\[v(5) = \\ln(1 + 5) = \\ln 6\\]\n\\[v(5) \\approx 1.79\\ \\text{m/s}\\]\nWhy: Put \\(t = 5\\); \\(\\ln 6 \\approx 1.7918\\).",
+              "Check\n\\[\\dfrac{d}{dt}\\ln(1 + t) = \\dfrac{1}{1 + t}\\ \\checkmark\\]\n\\[v(0) = \\ln 1 = 0\\ \\checkmark\\]\nWhy: Differentiating \\(v(t)\\) gives back \\(a(t)\\), and the initial condition holds."
+            ],
+            "final_answer": "\\(v(5) = \\ln 6 \\approx 1.79\\) m/s"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The book prints no answer for Exercise 7.1, so this answer is ours. It was checked independently with a computer algebra system and against an independent worked solution."
+          }
+        ]
+      }
+    }
+  ]
+}
