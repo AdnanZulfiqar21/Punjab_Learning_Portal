@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-6-Q9",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-6-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 116,
+          "pdf_to": 117,
+          "note": "Exercise 3.6 (printed 1, 1, 2-13, 15; numbered 1-15 as in the answer key), Question 9; answers under block 'Exercise 3.7' (PDF 304)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9. [printed as 8.] Find the area of the region bounded by the curve \\(y = (x - 1)(x + 1)(x - 2)\\) and the \\(x\\)-axis.",
+            "explanation": "A cubic with three roots encloses two regions with the \\(x\\)-axis: one above and one below. The total area is the sum of the sizes (Note 3 of 3.7.1).\nPlan: roots, sign on each sub-interval, expand, integrate each piece, add absolute values.",
+            "steps": [
+              "Given: \\(y = (x - 1)(x + 1)(x - 2)\\) and the \\(x\\)-axis.\nTo find: the total enclosed area.\nMethod: total area \\(= \\int_{-1}^{1}|y|\\,dx + \\int_1^2 |y|\\,dx\\).",
+              "Step 1: Roots and signs\nRoots: \\(x = -1, 1, 2\\).\nAt \\(x = 0\\): \\(y = (-1)(1)(-2) = 2 > 0\\) (above on \\([-1, 1]\\)).\nAt \\(x = 1.5\\): \\(y = (0.5)(2.5)(-0.5) = -0.625 < 0\\) (below on \\([1, 2]\\)).\nWhy: the bounded regions lie between consecutive roots; the sign decides whether to take the absolute value.",
+              "Step 2: Expand\n\\[(x^{2} - 1)(x - 2) = x^{3} - 2x^{2} - x + 2\\]\n\\[F(x) = \\dfrac{x^{4}}{4} - \\dfrac{2x^{3}}{3} - \\dfrac{x^{2}}{2} + 2x\\]\nWhy: \\((x - 1)(x + 1) = x^{2} - 1\\); the expanded polynomial integrates term by term.",
+              "Step 3: Values of \\(F\\)\n\\[F(-1) = \\dfrac{1}{4} + \\dfrac{2}{3} - \\dfrac{1}{2} - 2 = -\\dfrac{19}{12}\\]\n\\[F(1) = \\dfrac{1}{4} - \\dfrac{2}{3} - \\dfrac{1}{2} + 2 = \\dfrac{13}{12}\\]\n\\[F(2) = 4 - \\dfrac{16}{3} - 2 + 4 = \\dfrac{2}{3}\\]\nWhy: use the common denominator 12 to avoid slips.",
+              "Step 4: The two pieces\n\\[\\int_{-1}^{1} y\\,dx = \\dfrac{13}{12} + \\dfrac{19}{12} = \\dfrac{32}{12} = \\dfrac{8}{3}\\]\n\\[\\int_{1}^{2} y\\,dx = \\dfrac{8}{12} - \\dfrac{13}{12} = -\\dfrac{5}{12}\\]\nWhy: the second piece is negative because the curve is below the axis there.",
+              "Step 5: Total area\n\\[A = \\dfrac{8}{3} + \\dfrac{5}{12} = \\dfrac{32 + 5}{12} = \\dfrac{37}{12}\\]\nWhy: add the sizes of the two regions.",
+              "Check:\nThe signed integral \\(\\int_{-1}^{2} y\\,dx = F(2) - F(-1) = \\frac{8}{12} + \\frac{19}{12} = \\frac{27}{12}\\), and indeed \\(\\frac{32}{12} - \\frac{5}{12} = \\frac{27}{12}\\). The pieces are consistent."
+            ],
+            "final_answer": "Area \\(= \\frac{37}{12}\\) square units.",
+            "answer_figure": {
+              "$asset": "c12-math-ch3-fig-ex3-6-q9",
+              "alt": "The cubic y = (x minus 1)(x plus 1)(x minus 2) cutting the x-axis at (minus 1, 0), (1, 0) and (2, 0) and the y-axis at (0, 2). The region above the axis from minus 1 to 1 (area 8/3) and the region below the axis from 1 to 2 (area 5/12) are shaded.",
+              "caption": "Figure: region for Question 9 (original drawing)"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

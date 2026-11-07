@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q11",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q11",
+      "title": "Question 11",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 11: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11. Evaluate \\(\\int e^x\\tan^{-1}(e^x)\\,dx\\).",
+            "explanation": "\\(e^x\\,dx = d(e^x)\\), so substitute \\(t = e^x\\).\nPlan: \\(\\int \\tan^{-1}t\\,dt\\) by parts with \\(\\tan^{-1}t\\cdot 1\\).",
+            "steps": [
+              "Given: \\(\\int e^x\\tan^{-1}(e^x)\\,dx\\).\nTo find: the indefinite integral.\nMethod: substitute \\(t = e^x\\); then \\(\\int \\tan^{-1}t\\cdot 1\\,dt\\) by parts.",
+              "Substitute\n\\[t = e^x \\Rightarrow dt = e^x\\,dx\\]\n\\[= \\int \\tan^{-1}t\\,dt\\]\nWhy: \\(e^x\\,dx = dt\\).",
+              "Parts with \\(\\tan^{-1}t\\cdot 1\\)\n\\[= t\\tan^{-1}t - \\int t\\cdot\\dfrac{1}{1+t^2}\\,dt\\]\nWhy: \\(\\frac{d}{dt}\\tan^{-1}t = \\frac{1}{1+t^2}\\), \\(\\int 1\\,dt = t\\).",
+              "Log integral\n\\[\\int \\dfrac{t}{1+t^2}\\,dt = \\dfrac{1}{2}\\int \\dfrac{2t}{1+t^2}\\,dt\\]\n\\[= \\dfrac{1}{2}\\ln(1+t^2)\\]\nWhy: \\(2t\\) is the derivative of \\(1 + t^2\\).",
+              "Return to \\(x\\)\n\\[= e^x\\tan^{-1}(e^x) - \\dfrac{1}{2}\\ln(1 + e^{2x}) + c\\]\nWhy: \\(t = e^x\\), \\(t^2 = e^{2x}\\).",
+              "Check\n\\[\\dfrac{d}{dx}(\\ldots) = e^x\\tan^{-1}(e^x) + \\dfrac{e^{2x}}{1+e^{2x}} - \\dfrac{e^{2x}}{1+e^{2x}}\\]\n\\[= e^x\\tan^{-1}(e^x)\\]\nWhy: the two fractions cancel."
+            ],
+            "final_answer": "\\(e^x\\tan^{-1}(e^x) - \\dfrac{1}{2}\\ln(1 + e^{2x}) + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q4-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q4",
+      "title": "Question 4 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 4: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-3-Q4",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. Evaluate \\(\\int \\dfrac{x}{\\sin^2 x}\\,dx\\).",
+            "explanation": "Sab se pehle shakal pehchanein: \\(\\frac{x}{\\sin^2 x}\\) asal mein \\(x \\cdot \\csc^2 x\\) hai.\nYeh kitab ke Example 31 (\\(\\int \\frac{x}{\\cos^2 x}\\,dx\\)) ka jurwa (twin) sawal hai, bas \\(\\cos\\) ki jagah \\(\\sin\\).\nFirst function \\(x\\), second function \\(\\csc^2 x\\), kyunke \\(\\int \\csc^2 x\\,dx = -\\cot x\\) yaad hai.\nPlan: parts, phir \\(\\int \\cot x\\,dx = \\ln|\\sin x|\\) wala result.",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{x}{\\sin^2 x}\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: pehle \\(\\int x\\csc^2 x\\,dx\\) likhenge; phir parts, \\(f(x) = x\\) aur \\(g(x) = \\csc^2 x\\).",
+              "Nayi shakal\n\\[\\int \\dfrac{x}{\\sin^2 x}\\,dx = \\int x\\csc^2 x\\,dx\\]\nKyun: \\(\\csc x = \\frac{1}{\\sin x}\\), is liye \\(\\frac{1}{\\sin^2 x} = \\csc^2 x\\). Is shakal mein second function pehchanna aasaan hai.",
+              "Parts lagayein\n\\[= x(-\\cot x) - \\int (-\\cot x)\\cdot 1\\,dx\\]\n\\[= -x\\cot x + \\int \\dfrac{\\cos x}{\\sin x}\\,dx\\]\nKyun: \\(\\cot x\\) ka derivative \\(-\\csc^2 x\\) hai, is liye \\(\\csc^2 x\\) ka integral \\(-\\cot x\\). Formula ke minus aur \\(-\\cot x\\) ke minus se plus bana.\nDhyan dein: \\(\\int \\csc^2 x\\,dx\\) ka minus sign aksar bhool jate hain; derivative se check kar lein.",
+              "Upar neeche ka derivative hai\n\\[= -x\\cot x + \\ln|\\sin x| + c\\]\nKyun: \\(\\sin x\\) ka derivative \\(\\cos x\\) hai, yani numerator denominator ka derivative hai; rule \\(\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln|f(x)| + c\\).",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}(-x\\cot x + \\ln|\\sin x|)\\]\n\\[= -\\cot x + x\\csc^2 x + \\cot x\\]\n\\[= x\\csc^2 x\\]\nKyun: \\(-x\\cot x\\) par product rule se \\(-\\cot x + x\\csc^2 x\\), aur \\(\\ln|\\sin x|\\) ka derivative \\(\\cot x\\). \\(\\cot x\\) cancel ho gaya; integrand mil gaya."
+            ],
+            "final_answer": "\\(-x\\cot x + \\ln|\\sin x| + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

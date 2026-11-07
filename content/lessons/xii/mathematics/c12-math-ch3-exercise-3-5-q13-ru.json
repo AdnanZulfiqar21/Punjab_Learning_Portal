@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q13-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q13",
+      "title": "Question 13 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 104,
+          "note": "Exercise 3.5, Question 13: show-that for even f with 1 + e^x, then evaluate; book p. 102. Key on p. 300 under 'Exercise 3.2'."
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-5-Q13",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13",
+            "prompt": "13 Show that \\(\\int_{-a}^{a} \\frac{f(x)}{1 + e^x}\\,dx = \\int_{0}^{a} f(x)\\,dx\\), where \\(f(x)\\) is an even function. Hence or otherwise evaluate \\(\\int_{-a}^{a} \\frac{x^2}{1 + e^x}\\,dx\\).",
+            "explanation": "Is sawal mein symmetric interval \\([-a, a]\\) hai aur neeche \\(1 + e^x\\). Aise sawal Example 54 jaise hote hain.\nDiya kya hai? \\(f\\) even function hai, yani \\(f(-x) = f(x)\\).\nKya saabit karna hai? Ke \\(\\frac{1}{1 + e^x}\\) wala factor poore interval ko aadha kar deta hai, yani integral \\(\\int_0^a f\\) ban jata hai.\nRule kaunsa? Property V: \\(\\int_{-a}^{a} h = \\int_0^a [h(x) + h(-x)]\\). \\(h(x) + h(-x)\\) jor kar dekhenge to seedha \\(f(x)\\) banta hai.\nPhir \\(f(x) = x^2\\) (jo even hai) par result lagayenge.",
+            "steps": [
+              "Diya gaya: \\(f(-x) = f(x)\\).\nSaabit karna: \\(\\int_{-a}^{a} \\frac{f(x)}{1 + e^x}\\,dx = \\int_{0}^{a} f(x)\\,dx\\); phir \\(\\int_{-a}^{a} \\frac{x^2}{1 + e^x}\\,dx\\) nikalna.\nTareeqa: Property V \\(\\int_{-a}^{a} h(x)\\,dx = \\int_0^a \\big(h(x) + h(-x)\\big)\\,dx\\), jahan \\(h(x) = \\frac{f(x)}{1 + e^x}\\).",
+              "\\(h(-x)\\) nikalein\n\\[h(-x) = \\dfrac{f(-x)}{1 + e^{-x}} = \\dfrac{f(x)\\,e^{x}}{e^{x} + 1}\\]\nKyun: \\(f\\) even hai to \\(f(-x) = f(x)\\). Phir upar neeche \\(e^{x}\\) se multiply kiya taa ke \\(e^{-x}\\) khatam ho: \\((1 + e^{-x})e^{x} = e^{x} + 1\\).",
+              "\\(h(x) + h(-x)\\) jama karein\n\\[\\dfrac{f(x)}{1 + e^x} + \\dfrac{f(x)\\,e^x}{1 + e^x} = \\dfrac{f(x)(1 + e^x)}{1 + e^x}\\]\n\\[= f(x)\\]\nKyun: dono ka denominator ek hai, numerators jama kiye aur \\(f(x)\\) common nikala; \\(1 + e^x\\) cancel ho gaya. Yahi woh jaadu hai jo is sawal ko aasaan banata hai.\nDhyan dein: \\(f\\) ke even hone ki shart isi qadam mein kaam aayi; agar \\(f\\) even na ho to yeh cancel nahi hota.",
+              "Property V lagayein\n\\[\\int_{-a}^{a} \\dfrac{f(x)}{1 + e^x}\\,dx = \\int_{0}^{a} f(x)\\,dx\\]\nKyun: Property V mein bracket ki jagah \\(f(x)\\) rakha; saboot mukammal.",
+              "Ab \\(f(x) = x^2\\) ke saath\n\\[\\int_{-a}^{a} \\dfrac{x^2}{1 + e^x}\\,dx = \\int_{0}^{a} x^2\\,dx\\]\n\\[= \\left[\\dfrac{x^3}{3}\\right]_{0}^{a} = \\dfrac{a^3}{3}\\]\nKyun: \\((-x)^2 = x^2\\), to \\(x^2\\) even hai aur saabit kiya hua result seedha lagta hai. 'Hence' ka yahi matlab hai.",
+              "Tasdeeq\n\\[a = 2:\\ \\int_{-2}^{2} \\dfrac{x^2}{1 + e^x}\\,dx \\approx 2.6667 = \\dfrac{8}{3} \\;\\checkmark\\]\nKyun: \\(a = 2\\) le kar calculator se numerical value 2.6667 aati hai, jo \\(\\frac{2^3}{3}\\) hai. Answer key mein bhi \\(\\frac{a^3}{3}\\) hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\int_{-a}^{a} \\frac{f(x)}{1 + e^x}\\,dx = \\int_{0}^{a} f(x)\\,dx\\); aur \\(\\int_{-a}^{a} \\frac{x^2}{1 + e^x}\\,dx = \\frac{a^3}{3}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

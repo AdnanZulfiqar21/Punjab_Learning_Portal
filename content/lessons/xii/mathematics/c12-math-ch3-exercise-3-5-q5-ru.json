@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q5-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q5",
+      "title": "Question 5 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 104,
+          "note": "Exercise 3.5, Question 5: prove the x <-> 1 - x symmetry on [0, 1] and evaluate; book p. 102. Key on p. 300 under 'Exercise 3.2'."
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-5-Q5",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5 Prove that \\(\\int_{0}^{1} x^m(1 - x)^n\\,dx = \\int_{0}^{1} x^n(1 - x)^m\\,dx\\) and hence evaluate \\(\\int_{0}^{1} x(1 - x)^{10}\\,dx\\).",
+            "explanation": "Yeh 'pehle saabit karo, phir istemal karo' wala sawal hai.\nDiya kya hai? \\(x^m(1 - x)^n\\) ka \\([0, 1]\\) par integral.\nKya saabit karna hai? Ke \\(x\\) aur \\(1 - x\\) ki powers aapas mein badal dein to integral nahi badalta.\nRule kaunsa? Property IV: \\([0, 1]\\) par \\(x\\) ki jagah \\(1 - x\\) rakh sakte hain. Is se \\(x\\) ban jata hai \\(1 - x\\) aur \\(1 - x\\) ban jata hai \\(x\\), yani bilkul wohi adla badli jo saabit karni hai.\nPhir \\(m = 1\\), \\(n = 10\\) le kar \\((1 - x)^{10}\\) ki lambi expansion se bach jayenge.",
+            "steps": [
+              "Diya gaya: \\(I = \\int_{0}^{1} x^m(1 - x)^n\\,dx\\).\nSaabit karna: \\(I = \\int_{0}^{1} x^n(1 - x)^m\\,dx\\); phir \\(\\int_0^1 x(1 - x)^{10}\\,dx\\) nikalna.\nTareeqa: Property IV, \\(a = 0\\), \\(b = 1\\): \\(\\int_0^1 f(x)\\,dx = \\int_0^1 f(1 - x)\\,dx\\).",
+              "\\(x\\) ki jagah \\(1 - x\\) rakhein\n\\[I = \\int_{0}^{1} (1 - x)^m\\big(1 - (1 - x)\\big)^n\\,dx\\]\n\\[= \\int_{0}^{1} (1 - x)^m x^n\\,dx\\]\nKyun: Property IV mein \\(a + b - x = 0 + 1 - x = 1 - x\\). Pehle factor \\(x^m\\) mein \\(x\\) ki jagah \\(1 - x\\) aaya, aur doosre factor mein \\(1 - (1 - x) = x\\) ban gaya.\nDhyan dein: \\(1 - (1 - x)\\) mein bracket kholte waqt \\(-(-x) = +x\\) hota hai.",
+              "Saboot mukammal\n\\[\\int_{0}^{1} x^m(1 - x)^n\\,dx = \\int_{0}^{1} x^n(1 - x)^m\\,dx\\]\nKyun: product mein factors ki tarteeb badalne se kuch nahi badalta: \\((1 - x)^m x^n = x^n(1 - x)^m\\).",
+              "\\(m = 1\\), \\(n = 10\\) ke saath istemal\n\\[\\int_{0}^{1} x(1 - x)^{10}\\,dx = \\int_{0}^{1} x^{10}(1 - x)\\,dx\\]\n\\[= \\int_{0}^{1} (x^{10} - x^{11})\\,dx\\]\nKyun: \\((1 - x)^{10}\\) ko binomial se kholte to 11 terms bante, bohat lamba kaam. Adla badli ke baad sirf do terms bachti hain. 'Hence' ka matlab yahi hai ke saabit kiya hua result istemal karna hai.",
+              "Integrate karein\n\\[= \\left[\\dfrac{x^{11}}{11} - \\dfrac{x^{12}}{12}\\right]_{0}^{1}\\]\n\\[= \\dfrac{1}{11} - \\dfrac{1}{12} = \\dfrac{1}{132}\\]\nKyun: power rule; \\(x = 0\\) par sab zero. \\(\\frac{1}{11} - \\frac{1}{12} = \\frac{12 - 11}{132} = \\frac{1}{132}\\).",
+              "Tasdeeq: property ke baghair, by parts se\n\\[\\int x(1 - x)^{10}dx = -\\dfrac{x(1 - x)^{11}}{11}\\]\n\\[- \\dfrac{(1 - x)^{12}}{132}\\]\n\\[\\Big[\\ \\cdot\\ \\Big]_{0}^{1} = 0 - \\left(-\\dfrac{1}{132}\\right) = \\dfrac{1}{132} \\;\\checkmark\\]\nKyun: by parts mein \\(x\\) pehla function aur \\((1 - x)^{10}\\) doosra, jis ka integral \\(-\\frac{(1 - x)^{11}}{11}\\) hai. \\(x = 1\\) par sab zero, \\(x = 0\\) par \\(-\\frac{1}{132}\\). Do alag raaston se ek hi jawab. Answer key mein bhi \\(\\frac{1}{132}\\) hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\int_{0}^{1} x^m(1 - x)^n\\,dx = \\int_{0}^{1} x^n(1 - x)^m\\,dx\\); aur \\(\\int_{0}^{1} x(1 - x)^{10}\\,dx = \\frac{1}{132}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

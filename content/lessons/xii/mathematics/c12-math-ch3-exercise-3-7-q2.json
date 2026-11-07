@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-7-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-7-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 123,
+          "pdf_to": 123,
+          "note": "Exercise 3.7, Question 2 (book p. 121); answers printed in the key (book p. 302) under the heading 'Exercise 3.8'."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2. Find the moment of inertia of a uniform triangular lamina about its base.",
+            "explanation": "A moment of inertia of a continuous body: strip method with strips parallel to the axis (the base).\nGiven: a uniform triangle; call its base \\(a\\), its height \\(h\\) and its mass \\(M\\).\nPlan: strip at height \\(y\\), its length from similar triangles, \\(\\delta m\\) from the density, then \\(I = \\int_0^h y^{2}\\,dm\\).",
+            "steps": [
+              "Given: uniform triangular lamina \\(ABC\\), base \\(BC = a\\), height \\(h\\) (from \\(A\\) to \\(BC\\)), mass \\(M\\).\nTo find: \\(I\\) about the base \\(BC\\).\nMethod: cut the triangle into thin strips parallel to \\(BC\\). Every point of a strip is at the same distance \\(y\\) from \\(BC\\), so its moment of inertia is \\(y^{2}\\,\\delta m\\).",
+              "Density\n\\[\\text{Area} = \\dfrac{1}{2}ah, \\qquad \\rho = \\dfrac{M}{\\frac{1}{2}ah} = \\dfrac{2M}{ah}\\]\nWhy: the lamina is uniform, so mass per unit area = total mass \\(\\div\\) area.",
+              "Length of the strip at height \\(y\\)\nThe strip \\(PQ\\) at distance \\(y\\) from \\(BC\\) cuts off a small triangle \\(APQ\\) of height \\(h - y\\), similar to \\(ABC\\).\n\\[\\dfrac{PQ}{BC} = \\dfrac{h - y}{h} \\Rightarrow PQ = \\dfrac{a(h - y)}{h}\\]\nWhy: in similar triangles, corresponding lengths are in the ratio of the heights.",
+              "Mass of the strip (thickness \\(\\delta y\\))\n\\[\\delta m = \\dfrac{2M}{ah}\\cdot\\dfrac{a(h - y)}{h}\\,\\delta y\\]\n\\[= \\dfrac{2M}{h^{2}}(h - y)\\,\\delta y\\]\nWhy: mass = density \\(\\times\\) area, and the strip's area is \\(PQ \\times \\delta y\\).",
+              "Add all the strips\n\\[I = \\int_{0}^{h} y^{2}\\cdot\\dfrac{2M}{h^{2}}(h - y)\\,dy\\]\n\\[= \\dfrac{2M}{h^{2}}\\int_{0}^{h}(hy^{2} - y^{3})\\,dy\\]\nWhy: the strips run from the base (\\(y = 0\\)) to the vertex \\(A\\) (\\(y = h\\)).",
+              "Integrate\n\\[= \\dfrac{2M}{h^{2}}\\left[\\dfrac{hy^{3}}{3} - \\dfrac{y^{4}}{4}\\right]_{0}^{h}\\]\n\\[= \\dfrac{2M}{h^{2}}\\left(\\dfrac{h^{4}}{3} - \\dfrac{h^{4}}{4}\\right)\\]\n\\[= \\dfrac{2M}{h^{2}}\\cdot\\dfrac{h^{4}}{12} = \\dfrac{Mh^{2}}{6}\\]\nWhy: \\(\\frac{1}{3} - \\frac{1}{4} = \\frac{1}{12}\\).",
+              "Check\nUnits: mass \\(\\times\\) length\\(^2\\) \\(\\checkmark\\). The base length \\(a\\) cancelled, which makes sense: widening the triangle along the base does not move mass farther from the base. Radius of gyration \\(R = \\frac{h}{\\sqrt{6}}\\)."
+            ],
+            "final_answer": "\\(I = \\dfrac{1}{6}Mh^{2}\\), where \\(M\\) is the mass and \\(h\\) the height of the triangle measured from the base."
+          }
+        ]
+      }
+    }
+  ]
+}

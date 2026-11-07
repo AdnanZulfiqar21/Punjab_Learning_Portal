@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q13",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q13",
+      "title": "Question 13",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 13: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13",
+            "prompt": "13 Evaluate \\(\\int \\frac{x^4 + 3x^2 + x + 1}{(x^2 + 1)^2(x - 1)}\\,dx\\).",
+            "explanation": "A linear factor \\(x - 1\\) and a repeated irreducible quadratic factor \\((x^2 + 1)^2\\): Case-IV. Degree 4 < degree 5, so proper.\nFive constants: \\(\\frac{A}{x - 1} + \\frac{Bx + C}{x^2 + 1} + \\frac{Dx + E}{(x^2 + 1)^2}\\).\nPlan: \\(x = 1\\) gives \\(A\\); coefficients give the rest; the last piece \\(\\int \\frac{dx}{(x^2 + 1)^2}\\) is done as in Example 43.",
+            "steps": [
+              "Given: \\(\\int \\frac{x^4 + 3x^2 + x + 1}{(x^2 + 1)^2(x - 1)}\\,dx\\).\nTo find: the integral.\nMethod: partial fractions, Case-IV (repeated irreducible quadratic factor).",
+              "Write the partial fractions\n\\[\\dfrac{A}{x - 1} + \\dfrac{Bx + C}{x^2 + 1} + \\dfrac{Dx + E}{(x^2 + 1)^2}\\]\n\\[x^4 + 3x^2 + x + 1 = A(x^2 + 1)^2\\]\n\\[+\\, (Bx + C)(x - 1)(x^2 + 1)\\]\n\\[+\\, (Dx + E)(x - 1) \\quad (1)\\]\nWhy: \\((x^2 + 1)^2\\) needs a linear numerator for each power 1 and 2.",
+              "Put \\(x = 1\\) in (1)\n\\[1 + 3 + 1 + 1 = A(2)^2\\]\n\\[A = \\dfrac{3}{2}\\]\nWhy: \\(x - 1 = 0\\) removes every other term.",
+              "Expand the other terms\n\\[(Bx + C)(x^3 - x^2 + x - 1)\\]\n\\[= Bx^4 + (C - B)x^3 + (B - C)x^2 + (C - B)x - C\\]\n\\[(Dx + E)(x - 1) = Dx^2 + (E - D)x - E\\]\nWhy: \\((x - 1)(x^2 + 1) = x^3 - x^2 + x - 1\\), and \\(A(x^2 + 1)^2 = A(x^4 + 2x^2 + 1)\\).",
+              "Compare coefficients\n\\[x^4:\\ 1 = A + B,\\ B = -\\tfrac{1}{2}\\]\n\\[x^3:\\ 0 = C - B,\\ C = -\\tfrac{1}{2}\\]\n\\[x^2:\\ 3 = 2A + B - C + D,\\ D = 0\\]\n\\[x:\\ 1 = C - B + E - D,\\ E = 1\\]\nWhy: Work from the highest power down. Constant check: \\(A - C - E = \\frac{3}{2} + \\frac{1}{2} - 1 = 1\\) \\(\\checkmark\\).",
+              "Rewrite the integrand\n\\[= \\dfrac{3}{2}\\cdot\\dfrac{1}{x - 1} - \\dfrac{1}{2}\\cdot\\dfrac{x + 1}{x^2 + 1} + \\dfrac{1}{(x^2 + 1)^2}\\]\nWhy: Put in \\(A, B, C, D, E\\).",
+              "Integrate the first two parts\n\\[\\dfrac{3}{2}\\ln|x - 1| - \\dfrac{1}{4}\\ln(x^2 + 1) - \\dfrac{1}{2}\\tan^{-1} x\\]\nWhy: \\(\\int \\frac{x}{x^2 + 1}\\,dx = \\frac{1}{2}\\ln(x^2 + 1)\\) and \\(\\int \\frac{dx}{x^2 + 1} = \\tan^{-1} x\\).",
+              "The last part (put \\(x = \\tan\\theta\\))\n\\[\\int \\dfrac{dx}{(x^2 + 1)^2} = \\int \\cos^2\\theta\\,d\\theta\\]\n\\[= \\dfrac{1}{2}\\left(\\theta + \\sin\\theta\\cos\\theta\\right)\\]\n\\[= \\dfrac{1}{2}\\tan^{-1} x + \\dfrac{x}{2(x^2 + 1)}\\]\nWhy: \\(dx = \\sec^2\\theta\\,d\\theta\\), \\(x^2 + 1 = \\sec^2\\theta\\), and \\(\\sin\\theta\\cos\\theta = \\frac{\\tan\\theta}{\\sec^2\\theta} = \\frac{x}{1 + x^2}\\) (as in Example 43).",
+              "Add the parts\n\\[\\dfrac{3}{2}\\ln|x - 1| - \\dfrac{1}{4}\\ln(x^2 + 1) + \\dfrac{x}{2(x^2 + 1)} + c\\]\nWhy: \\(-\\frac{1}{2}\\tan^{-1} x + \\frac{1}{2}\\tan^{-1} x = 0\\): the inverse tangent terms cancel."
+            ],
+            "final_answer": "\\(\\frac{3}{2}\\ln|x - 1| - \\frac{1}{4}\\ln(x^2 + 1) + \\frac{x}{2(x^2 + 1)} + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the answers at the end of the book (page 302), the answers of Exercise 3.4 are printed under the wrong heading \"Exercise 3.6\". The answer of this question is item (xiii) of that block: \\(\\frac{3}{2}\\ln|x - 1| - \\frac{1}{4}\\ln(x^2 + 1) + \\frac{x}{2(x^2 + 1)} + c\\). That answer is correct. The block headed \"Exercise 3.4\" (page 301) belongs to a different exercise."
+          }
+        ]
+      }
+    }
+  ]
+}

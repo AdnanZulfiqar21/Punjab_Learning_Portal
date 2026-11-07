@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q13",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q13",
+      "title": "Question 13",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 13: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13",
+            "prompt": "13. Evaluate \\(\\int \\dfrac{x}{1 - \\sin x}\\,dx\\).",
+            "explanation": "Remove \\(1 - \\sin x\\) from the denominator by multiplying by \\(1 + \\sin x\\).\nPlan: the integrand becomes \\(x(\\sec^2 x + \\sec x\\tan x)\\); integrate by parts with \\(x\\) first.",
+            "steps": [
+              "Given: \\(\\int \\frac{x}{1 - \\sin x}\\,dx\\).\nTo find: the indefinite integral.\nMethod: multiply by \\(\\frac{1 + \\sin x}{1 + \\sin x}\\); then integration by parts with \\(x\\) first and \\(\\sec^2 x + \\sec x\\tan x\\) second.",
+              "Rationalise the denominator\n\\[\\dfrac{x}{1 - \\sin x}\\cdot\\dfrac{1 + \\sin x}{1 + \\sin x} = \\dfrac{x(1 + \\sin x)}{\\cos^2 x}\\]\n\\[= x(\\sec^2 x + \\sec x\\tan x)\\]\nWhy: \\(1 - \\sin^2 x = \\cos^2 x\\); \\(\\frac{\\sin x}{\\cos^2 x} = \\sec x\\tan x\\).",
+              "Integration by parts\n\\[\\int (\\sec^2 x + \\sec x\\tan x)\\,dx = \\tan x + \\sec x\\]\n\\[= x(\\tan x + \\sec x) - \\int (\\tan x + \\sec x)\\,dx\\]\nWhy: \\(\\frac{d}{dx}\\tan x = \\sec^2 x\\), \\(\\frac{d}{dx}\\sec x = \\sec x\\tan x\\).",
+              "Standard integrals\n\\[= x\\tan x + x\\sec x - \\ln|\\sec x|\\]\n\\[\\quad - \\ln|\\sec x + \\tan x| + c\\]\nWhy: \\(\\int \\tan x\\,dx = \\ln|\\sec x|\\), \\(\\int \\sec x\\,dx = \\ln|\\sec x + \\tan x|\\).",
+              "Check\n\\[\\dfrac{d}{dx}[x(\\tan x + \\sec x)] = \\tan x + \\sec x + x(\\sec^2 x + \\sec x\\tan x)\\]\n\\[\\dfrac{d}{dx}[\\ln|\\sec x| + \\ln|\\sec x + \\tan x|] = \\tan x + \\sec x\\]\nWhy: the difference is \\(x(\\sec^2 x + \\sec x\\tan x) = \\frac{x}{1 - \\sin x}\\)."
+            ],
+            "final_answer": "\\(x\\tan x + x\\sec x - \\ln|\\sec x| - \\ln|\\sec x + \\tan x| + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

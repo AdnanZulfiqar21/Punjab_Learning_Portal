@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.6",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.6",
+      "title": "3.6 The Definite Integral",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 103,
+          "note": "Book p. 94-96: 3.6 Definition, Remark, Theorems 3.2 and 3.3 (FTC), Examples 44-48, boxes on substitution and integration by parts for definite integrals"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In 3.1 to 3.5 every integral was indefinite: the answer was a whole family of functions \\(F(x) + c\\). Now we write two numbers on the integral sign, a lower limit \\(a\\) and an upper limit \\(b\\). The answer is then one single number: how much the antiderivative \\(F\\) changes from \\(x = a\\) to \\(x = b\\).\nEverything you learned so far (the standard rules, substitution, integration by parts, partial fractions) is still used. Only one last step is added: put in the limits and subtract. In 3.7 you will see that this number measures an area."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Definition",
+            "text": "Let \\(f\\) be a continuous function on the closed interval \\([a, b]\\). The definite integral of \\(f\\) from \\(a\\) to \\(b\\) is defined as\n\\[\\int_{a}^{b} f(x)\\,dx = F(b) - F(a),\\]\nwhere \\(F'(x) = f(x)\\). Here, \\(a\\) is the lower limit and \\(b\\) the upper limit of the integration."
+          },
+          {
+            "type": "paragraph",
+            "text": "Remark: The value of a definite integral is a real number, not a family of functions, as is the case for indefinite integrals. The numbers \\(a\\) and \\(b\\) are the limits of integration."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is there no \\(+c\\)? Any antiderivative may be used. With \\(F(x) + c\\) we get\n\\[[F(b) + c] - [F(a) + c]\\]\n\\[= F(b) - F(a)\\]\nThe constant cancels, so it is simply left out.\nNotation: \\(\\big[F(x)\\big]_{a}^{b}\\) means \\(F(b) - F(a)\\). Some books (and our textbook in places) write a vertical bar \\(F(x)\\big|_{a}^{b}\\) or \\(\\big|F(x)\\big|_{a}^{b}\\) for the same thing; it is not an absolute value.\nOur own small example:\n\\[\\int_{1}^{3} 2x\\,dx = \\big[x^{2}\\big]_{1}^{3}\\]\n\\[= 3^{2} - 1^{2} = 8\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Theorem 3.2: First Fundamental Theorem of Calculus (FTC)",
+            "text": "If \\(f\\) is continuous on \\([a, b]\\) and \\(F(x) = \\int_{a}^{x} f(t)\\,dt\\) for every \\(x\\) in \\([a, b]\\), then \\(F'(x) = f(x)\\), on \\([a, b]\\).\nThe derivative with respect to upper limit of the integral of \\(f\\) is just \\(f(x)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read Theorem 3.2 slowly. The upper limit is the variable \\(x\\). Inside the integral the letter \\(t\\) is only a dummy variable (any other letter would give the same value). \\(F(x)\\) collects (accumulates) the integral of \\(f\\) from the fixed point \\(a\\) up to the moving point \\(x\\).\nThe theorem says: differentiate this accumulated amount and you get \\(f\\) back. So differentiation and integration undo each other; this is why integration is called anti-differentiation.\nOur own example: with \\(f(t) = t^{2}\\) and \\(a = 0\\),\n\\[F(x) = \\int_{0}^{x} t^{2}\\,dt = \\dfrac{x^{3}}{3}\\]\n\\[F'(x) = x^{2} = f(x)\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Theorem 3.3: Second Fundamental Theorem of Calculus (FTC)",
+            "text": "If \\(f\\) is continuous on \\([a, b]\\) and \\(F'(x) = f(x)\\) on \\([a, b]\\), then\n\\[\\int_{a}^{b} f(x)\\,dx = F(b) - F(a).\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Theorem 3.3 is the working rule for every definite integral in this unit. Recipe:\n1. Find any antiderivative \\(F(x)\\) with the rules of 3.1 to 3.5 (no \\(+c\\) needed).\n2. Write it in square brackets with the limits: \\(\\big[F(x)\\big]_{a}^{b}\\).\n3. Put in the upper limit, then the lower limit, and subtract: \\(F(b) - F(a)\\).\nAlways upper minus lower, and keep \\(F(a)\\) inside brackets so that every one of its terms is subtracted."
+          },
+          {
+            "type": "example",
+            "title": "Example 44",
+            "problem": "Evaluate: \\(\\int_{-1}^{1} \\big(x^{\\frac{1}{5}} + 1\\big)\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int_{-1}^{1} \\big(x^{\\frac{1}{5}} + 1\\big)\\,dx\\), lower limit \\(a = -1\\), upper limit \\(b = 1\\).\nTo find: the value of the definite integral.\nMethod: Theorem 3.3. Integrate term by term with the power rule \\(\\int x^{n}\\,dx = \\frac{x^{n+1}}{n+1}\\) (\\(n \\ne -1\\)), then put in the limits and subtract.",
+              "Step 1: Antiderivative of each term\n\\[\\int x^{\\frac{1}{5}}\\,dx = \\dfrac{x^{\\frac{1}{5}+1}}{\\frac{1}{5}+1}\\]\n\\[= \\dfrac{5}{6}\\,x^{\\frac{6}{5}}\\]\n\\[\\int 1\\,dx = x\\]\nWhy: power rule with \\(n = \\frac{1}{5}\\). Here \\(\\frac{1}{5} + 1 = \\frac{6}{5}\\), and dividing by \\(\\frac{6}{5}\\) is the same as multiplying by \\(\\frac{5}{6}\\).",
+              "Step 2: Attach the limits\n\\[\\int_{-1}^{1} \\big(x^{\\frac{1}{5}} + 1\\big)\\,dx\\]\n\\[= \\Big[\\tfrac{5}{6}x^{\\frac{6}{5}} + x\\Big]_{-1}^{1}\\]\nWhy: Theorem 3.3 with \\(F(x) = \\frac{5}{6}x^{6/5} + x\\); no \\(+c\\) is needed.",
+              "Step 3: Value at each limit\n\\[F(1) = \\tfrac{5}{6}(1)^{\\frac{6}{5}} + 1 = \\tfrac{5}{6} + 1\\]\n\\[F(-1) = \\tfrac{5}{6}(-1)^{\\frac{6}{5}} + (-1)\\]\n\\[= \\tfrac{5}{6} - 1\\]\nWhy: \\((-1)^{\\frac{6}{5}} = \\big((-1)^{\\frac{1}{5}}\\big)^{6} = (-1)^{6} = 1\\). The real fifth root of \\(-1\\) is \\(-1\\), and an even power makes it positive.",
+              "Step 4: Upper minus lower\n\\[F(1) - F(-1)\\]\n\\[= \\Big(\\tfrac{5}{6} + 1\\Big) - \\Big(\\tfrac{5}{6} - 1\\Big)\\]\n\\[= \\tfrac{5}{6} + 1 - \\tfrac{5}{6} + 1 = 2\\]\nWhy: the bracket around \\(F(-1)\\) changes the sign of both its terms.",
+              "Check: \\(x^{\\frac{1}{5}}\\) is an odd function, because \\((-x)^{\\frac{1}{5}} = -x^{\\frac{1}{5}}\\). Over \\([-1, 1]\\) its positive and negative parts cancel (Property V in 3.6.1), so only\n\\[\\int_{-1}^{1} 1\\,dx = 1 - (-1) = 2\\]\nremains. \\(\\checkmark\\)"
+            ],
+            "answer": "\\(\\int_{-1}^{1} \\big(x^{\\frac{1}{5}} + 1\\big)\\,dx = 2\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 45",
+            "problem": "Evaluate \\(\\int_{0}^{\\pi/4} \\frac{\\sec\\theta}{\\sin\\theta + \\cos\\theta}\\,d\\theta\\)",
+            "steps": [
+              "Given: \\(\\int_{0}^{\\pi/4} \\frac{\\sec\\theta}{\\sin\\theta + \\cos\\theta}\\,d\\theta\\).\nTo find: its value.\nMethod: rewrite the integrand so that the numerator becomes the derivative of the denominator; then use \\(\\int \\frac{f'(\\theta)}{f(\\theta)}\\,d\\theta = \\ln|f(\\theta)| + c\\) and put in the limits.",
+              "Step 1: Take \\(\\cos\\theta\\) common in the denominator\n\\[\\sin\\theta + \\cos\\theta = \\cos\\theta(\\tan\\theta + 1)\\]\nWhy: \\(\\cos\\theta \\cdot \\tan\\theta = \\cos\\theta \\cdot \\frac{\\sin\\theta}{\\cos\\theta} = \\sin\\theta\\).",
+              "Step 2: Simplify the integrand\n\\[\\dfrac{\\sec\\theta}{\\cos\\theta(\\tan\\theta + 1)}\\]\n\\[= \\dfrac{\\sec^{2}\\theta}{1 + \\tan\\theta}\\]\nWhy: \\(\\frac{1}{\\cos\\theta} = \\sec\\theta\\), so \\(\\sec\\theta \\cdot \\frac{1}{\\cos\\theta} = \\sec^{2}\\theta\\).",
+              "Step 3: Antiderivative\n\\[\\dfrac{d}{d\\theta}(1 + \\tan\\theta) = \\sec^{2}\\theta\\]\n\\[\\int \\dfrac{\\sec^{2}\\theta}{1 + \\tan\\theta}\\,d\\theta\\]\n\\[= \\ln|1 + \\tan\\theta|\\]\nWhy: the numerator is exactly the derivative of the denominator, so the \\(\\int \\frac{f'}{f} = \\ln|f|\\) rule applies.",
+              "Step 4: Put in the limits\n\\[\\Big[\\ln|1 + \\tan\\theta|\\Big]_{0}^{\\pi/4}\\]\n\\[= \\ln\\Big|1 + \\tan\\tfrac{\\pi}{4}\\Big| - \\ln|1 + 0|\\]\n\\[= \\ln|1 + 1| - 0 = \\ln 2\\]\nWhy: \\(\\tan\\frac{\\pi}{4} = 1\\), \\(\\tan 0 = 0\\) and \\(\\ln 1 = 0\\).",
+              "Check (rough size): the integrand equals 1 at \\(\\theta = 0\\) and at \\(\\theta = \\frac{\\pi}{4}\\), and about 0.83 at the middle \\(\\theta = \\frac{\\pi}{8}\\). The width is \\(\\frac{\\pi}{4} \\approx 0.785\\), so the value must be a little below 0.785.\n\\[\\ln 2 \\approx 0.693\\]\nfits, and a numerical integration also gives 0.6931. \\(\\checkmark\\)"
+            ],
+            "answer": "\\(\\int_{0}^{\\pi/4} \\frac{\\sec\\theta}{\\sin\\theta + \\cos\\theta}\\,d\\theta = \\ln 2\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 46",
+            "problem": "Evaluate \\(\\int_{0}^{\\sqrt{7}} \\frac{x}{\\sqrt{x^{2} + 9}}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int_{0}^{\\sqrt{7}} \\frac{x}{\\sqrt{x^{2} + 9}}\\,dx\\).\nTo find: its value.\nMethod: the factor \\(x\\) outside is (half) the derivative of \\(x^{2} + 9\\) inside the root, so the integrand is of the form \\(\\big[f(x)\\big]^{n} f'(x)\\). Use \\(\\int [f(x)]^{n} f'(x)\\,dx = \\frac{[f(x)]^{n+1}}{n+1}\\), then the limits.",
+              "Step 1: Name the inside function\n\\[f(x) = x^{2} + 9\\]\n\\[f'(x) = 2x\\]\nWhy: we need \\(2x\\) next to \\((x^{2} + 9)^{-\\frac{1}{2}}\\) to use the rule.",
+              "Step 2: Make the derivative appear\n\\[\\int_{0}^{\\sqrt{7}} \\dfrac{x}{\\sqrt{x^{2} + 9}}\\,dx\\]\n\\[= \\dfrac{1}{2}\\int_{0}^{\\sqrt{7}} (x^{2} + 9)^{-\\frac{1}{2}}(2x)\\,dx\\]\nWhy: multiplying inside by 2 and outside by \\(\\frac{1}{2}\\) does not change the value; \\(\\frac{1}{\\sqrt{u}} = u^{-\\frac{1}{2}}\\).",
+              "Step 3: Integrate\n\\[= \\dfrac{1}{2}\\Bigg[\\dfrac{(x^{2} + 9)^{\\frac{1}{2}}}{\\frac{1}{2}}\\Bigg]_{0}^{\\sqrt{7}}\\]\n\\[= \\Big[\\sqrt{x^{2} + 9}\\Big]_{0}^{\\sqrt{7}}\\]\nWhy: \\(n = -\\frac{1}{2}\\), so \\(n + 1 = \\frac{1}{2}\\); the \\(\\frac{1}{2}\\) outside and the division by \\(\\frac{1}{2}\\) cancel.",
+              "Step 4: Put in the limits\n\\[= \\sqrt{7 + 9} - \\sqrt{0 + 9}\\]\n\\[= \\sqrt{16} - \\sqrt{9} = 4 - 3 = 1\\]\nWhy: \\((\\sqrt{7})^{2} = 7\\) and \\(0^{2} = 0\\).",
+              "Check: differentiate the antiderivative.\n\\[\\dfrac{d}{dx}\\sqrt{x^{2} + 9} = \\dfrac{2x}{2\\sqrt{x^{2} + 9}}\\]\n\\[= \\dfrac{x}{\\sqrt{x^{2} + 9}}\\;\\checkmark\\]"
+            ],
+            "answer": "\\(\\int_{0}^{\\sqrt{7}} \\frac{x}{\\sqrt{x^{2} + 9}}\\,dx = 1\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Substitution in a Definite Integral (Change of variables)",
+            "text": "Suppose that \\(g\\) is differentiable function on \\([a, b]\\). Also suppose that \\(f\\) is continuous on the range of \\(g\\). Then\n\\[\\int_{a}^{b} f\\big(g(x)\\big)\\,g'(x)\\,dx\\]\n\\[= \\int_{g(a)}^{g(b)} f(u)\\,du.\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This is the substitution method of 3.3 with one extra job: change the limits too. If \\(u = g(x)\\), then\nwhen \\(x = a\\), \\(u = g(a)\\) (new lower limit);\nwhen \\(x = b\\), \\(u = g(b)\\) (new upper limit).\nAfter that the whole integral is in \\(u\\) and you never return to \\(x\\). Use it when the integrand contains some function \\(g(x)\\) together with its derivative \\(g'(x)\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 47",
+            "problem": "Evaluate \\(\\int_{0}^{2} 2x\\,e^{x^{2}}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int_{0}^{2} 2x\\,e^{x^{2}}\\,dx\\).\nTo find: its value.\nMethod: substitution in a definite integral. \\(2x\\) is the derivative of \\(x^{2}\\), which sits in the exponent, so put \\(u = x^{2}\\) and change the limits.",
+              "Step 1: Choose \\(g\\) and \\(f\\)\n\\[g(x) = x^{2},\\quad g'(x) = 2x\\]\n\\[e^{x^{2}} \\cdot 2x = f\\big(g(x)\\big)\\cdot g'(x)\\]\n\\[\\text{with } f(u) = e^{u}\\]\nWhy: the integrand now has exactly the shape \\(f(g(x))\\,g'(x)\\) of the box.",
+              "Step 2: New limits\n\\[x = 0:\\ u = g(0) = 0^{2} = 0\\]\n\\[x = 2:\\ u = g(2) = 2^{2} = 4\\]\nWhy: the limits must belong to the new variable \\(u\\).",
+              "Step 3: Integrate in \\(u\\)\n\\[\\int_{0}^{2} 2x\\,e^{x^{2}}\\,dx = \\int_{u=0}^{u=4} e^{u}\\,du\\]\n\\[= \\Big[e^{u}\\Big]_{0}^{4} = e^{4} - e^{0}\\]\n\\[= e^{4} - 1\\]\nWhy: \\(\\int e^{u}\\,du = e^{u}\\) and \\(e^{0} = 1\\).",
+              "Check: without changing limits, the antiderivative in \\(x\\) is \\(e^{x^{2}}\\) (its derivative is \\(2x\\,e^{x^{2}}\\)).\n\\[\\Big[e^{x^{2}}\\Big]_{0}^{2} = e^{4} - e^{0} = e^{4} - 1\\;\\checkmark\\]\nNumerically \\(e^{4} - 1 \\approx 53.598\\)."
+            ],
+            "answer": "\\(\\int_{0}^{2} 2x\\,e^{x^{2}}\\,dx = e^{4} - 1\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Integration by Parts Formula for Definite Integrals",
+            "text": "Let \\(f(x)\\) and \\(g(x)\\) be functions with continuous derivatives on the interval \\([a, b]\\). Then the integration by parts formula for definite integrals is:\n\\[\\int_{a}^{b} f(x)g(x)\\,dx\\]\n\\[= \\Big[f(x)\\Big(\\int g(x)\\,dx\\Big)\\Big]_{a}^{b}\\]\n\\[\\; - \\int_{a}^{b}\\Big[\\Big(\\int g(x)\\,dx\\Big)f'(x)\\Big]dx\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This is the integration by parts rule of 3.4, word for word: first function \\(\\times\\) integral of the second, minus the integral of (integral of the second \\(\\times\\) derivative of the first). The only new thing: the first part is already integrated, so it is evaluated at once between \\(a\\) and \\(b\\).\nVery often that evaluated part becomes 0 because a factor vanishes at both limits, as in Example 48."
+          },
+          {
+            "type": "example",
+            "title": "Example 48",
+            "problem": "If \\(f(0) = f(\\pi) = 0\\), show that \\(\\int_{0}^{\\pi} f(x)\\sin x\\,dx = -\\int_{0}^{\\pi} f''(x)\\sin x\\,dx\\)",
+            "steps": [
+              "Given: \\(f(0) = f(\\pi) = 0\\) (and \\(f\\) has continuous derivatives up to \\(f''\\)).\nTo prove: \\(\\int_{0}^{\\pi} f(x)\\sin x\\,dx = -\\int_{0}^{\\pi} f''(x)\\sin x\\,dx\\).\nMethod: integration by parts twice, taking \\(f\\) (and then \\(f'\\)) as the first function and the trigonometric factor as the second. The evaluated parts vanish because of the given values and because \\(\\sin 0 = \\sin\\pi = 0\\).",
+              "Step 1: First integration by parts\n\\[\\int_{0}^{\\pi} f(x)\\sin x\\,dx\\]\n\\[= \\Big[f(x)(-\\cos x)\\Big]_{0}^{\\pi}\\]\n\\[\\; - \\int_{0}^{\\pi} f'(x)(-\\cos x)\\,dx\\]\nWhy: first function \\(f(x)\\), second \\(\\sin x\\); \\(\\int \\sin x\\,dx = -\\cos x\\).",
+              "Step 2: The evaluated part\n\\[\\Big[-f(x)\\cos x\\Big]_{0}^{\\pi}\\]\n\\[= -f(\\pi)\\cos\\pi + f(0)\\cos 0\\]\n\\[= -(0)(-1) + (0)(1) = 0\\]\nSo \\(\\int_{0}^{\\pi} f(x)\\sin x\\,dx = \\int_{0}^{\\pi} f'(x)\\cos x\\,dx\\).\nWhy: \\(f(\\pi) = f(0) = 0\\) (given), \\(\\cos\\pi = -1\\), \\(\\cos 0 = 1\\). In Step 1 the two minus signs in front of the last integral make a plus.",
+              "Step 3: Second integration by parts\n\\[\\int_{0}^{\\pi} f'(x)\\cos x\\,dx\\]\n\\[= \\Big[f'(x)\\sin x\\Big]_{0}^{\\pi}\\]\n\\[\\; - \\int_{0}^{\\pi} \\sin x \\cdot f''(x)\\,dx\\]\nWhy: first function \\(f'(x)\\), second \\(\\cos x\\); \\(\\int \\cos x\\,dx = \\sin x\\) and the derivative of \\(f'\\) is \\(f''\\).",
+              "Step 4: The evaluated part again vanishes\n\\[f'(\\pi)\\sin\\pi - f'(0)\\sin 0\\]\n\\[= f'(\\pi)(0) - f'(0)(0) = 0\\]\nWhy: \\(\\sin\\pi = \\sin 0 = 0\\), so we do not even need the values of \\(f'\\).",
+              "Step 5: Put the pieces together\n\\[\\int_{0}^{\\pi} f(x)\\sin x\\,dx\\]\n\\[= 0 + 0 - \\int_{0}^{\\pi} f''(x)\\sin x\\,dx\\]\n\\[= -\\int_{0}^{\\pi} f''(x)\\sin x\\,dx\\]\nWhy: Step 2 gave the first integral as \\(\\int_{0}^{\\pi} f'(x)\\cos x\\,dx\\), and Step 4 turned that into \\(-\\int_{0}^{\\pi} f''(x)\\sin x\\,dx\\).",
+              "Check with a sample function (ours): \\(f(x) = x(\\pi - x)\\) has \\(f(0) = f(\\pi) = 0\\) and \\(f''(x) = -2\\).\n\\[\\int_{0}^{\\pi} x(\\pi - x)\\sin x\\,dx = 4\\]\n\\[-\\int_{0}^{\\pi} (-2)\\sin x\\,dx = 2\\big[-\\cos x\\big]_{0}^{\\pi} = 4\\]\nBoth sides agree. \\(\\checkmark\\)"
+            ],
+            "answer": "Hence proved: \\(\\int_{0}^{\\pi} f(x)\\sin x\\,dx = -\\int_{0}^{\\pi} f''(x)\\sin x\\,dx\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\int_{a}^{b} f(x)\\,dx = F(b) - F(a)\\), where \\(F' = f\\). The answer is a number; no \\(+c\\).\n2. First FTC (Theorem 3.2): \\(\\frac{d}{dx}\\int_{a}^{x} f(t)\\,dt = f(x)\\).\n3. Second FTC (Theorem 3.3): find an antiderivative, then upper value minus lower value.\n4. Substitution \\(u = g(x)\\): change the limits to \\(g(a)\\) and \\(g(b)\\) and stay in \\(u\\).\n5. Integration by parts: \\(\\big[\\text{first} \\times \\int\\text{second}\\big]_{a}^{b} - \\int_{a}^{b}\\big(\\int\\text{second}\\big)\\times(\\text{first})'\\,dx\\).\n6. Results: Example 44: 2; Example 45: \\(\\ln 2\\); Example 46: 1; Example 47: \\(e^{4} - 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Subtracting the wrong way, \\(F(a) - F(b)\\). It is always upper minus lower.\n2. Dropping the bracket around \\(F(a)\\): \\(\\frac{5}{6} + 1 - \\frac{5}{6} - 1\\) instead of \\(\\frac{5}{6} + 1 - \\frac{5}{6} + 1\\).\n3. Substituting \\(u = g(x)\\) but keeping the old \\(x\\)-limits.\n4. Writing \\(+c\\) in the value of a definite integral.\n5. Thinking \\((-1)^{\\frac{6}{5}}\\) is negative or undefined. The real fifth root of \\(-1\\) is \\(-1\\), and its sixth power is 1.\n6. In integration by parts, forgetting to evaluate the first part between the limits."
+          }
+        ]
+      }
+    }
+  ]
+}

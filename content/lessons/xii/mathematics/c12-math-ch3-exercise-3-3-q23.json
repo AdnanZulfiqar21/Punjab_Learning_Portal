@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q23",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q23",
+      "title": "Question 23",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 23: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "23",
+            "prompt": "23. Evaluate \\(\\int \\dfrac{e^{\\sqrt{x}}(1 + \\sqrt{x})}{\\sqrt{x}}\\,dx\\).",
+            "explanation": "Substitute \\(t = \\sqrt{x}\\) (\\(\\frac{dx}{\\sqrt{x}} = 2\\,dt\\)) to get \\(2\\int e^t(t + 1)\\,dt\\).\nPlan: \\(t + 1 = f + f'\\) with \\(f = t\\), so the integral is \\(2te^t\\); show it by parts.",
+            "steps": [
+              "Given: \\(\\int \\frac{e^{\\sqrt{x}}(1 + \\sqrt{x})}{\\sqrt{x}}\\,dx\\), \\(x > 0\\).\nTo find: the indefinite integral.\nMethod: substitute \\(t = \\sqrt{x}\\); then \\(2\\int e^t(t + 1)\\,dt\\), with \\(\\int te^t\\,dt\\) by parts.",
+              "Substitute\n\\[t = \\sqrt{x} \\Rightarrow \\dfrac{dx}{\\sqrt{x}} = 2\\,dt\\]\n\\[= 2\\int e^t(1 + t)\\,dt\\]\nWhy: \\(dt = \\frac{dx}{2\\sqrt{x}}\\).",
+              "Parts on \\(\\int te^t\\,dt\\)\n\\[\\int te^t\\,dt = te^t - \\int e^t\\,dt = te^t - e^t\\]\nWhy: \\(t\\) first, \\(e^t\\) second.",
+              "Combine\n\\[2\\int e^t(t + 1)\\,dt = 2\\left(te^t - e^t + e^t\\right) + c\\]\n\\[= 2te^t + c = 2\\sqrt{x}e^{\\sqrt{x}} + c\\]\nWhy: \\(\\int e^t\\,dt = e^t\\) cancels the \\(-e^t\\).",
+              "Check\n\\[\\dfrac{d}{dx}(2\\sqrt{x}e^{\\sqrt{x}}) = \\dfrac{e^{\\sqrt{x}}}{\\sqrt{x}} + 2\\sqrt{x}e^{\\sqrt{x}}\\cdot\\dfrac{1}{2\\sqrt{x}}\\]\n\\[= \\dfrac{e^{\\sqrt{x}}(1 + \\sqrt{x})}{\\sqrt{x}}\\]\nWhy: product and chain rules."
+            ],
+            "final_answer": "\\(2\\sqrt{x}e^{\\sqrt{x}} + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

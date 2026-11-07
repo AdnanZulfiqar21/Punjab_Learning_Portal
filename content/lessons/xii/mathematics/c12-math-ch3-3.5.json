@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.5",
+      "title": "3.5 Integration by Using Partial Fractions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 92,
+          "pdf_to": 95,
+          "note": "Book p. 90-93: 3.5 Integration by Using Partial Fractions; Case-I to Case-IV boxes; Examples 40-43"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "book_errors": [
+              "\\(Q(x)\\ (x \\ne 0)\\)"
+            ],
+            "text": "If \\(P(x)\\), \\(Q(x)\\) are polynomial functions and the denominator \\(Q(x)\\ (x \\ne 0)\\), in the rational function \\(\\frac{P(x)}{Q(x)}\\), can be factorized into linear and quadratic (irreducible) factors, then the rational function \\(\\frac{P(x)}{Q(x)}\\) is written as a sum of simpler rational functions, each of which can be integrated by methods already known to us."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the condition as \\(Q(x)\\ (x \\ne 0)\\). The condition is on the denominator, not on \\(x\\): it should read \\(Q(x) \\ne 0\\) (the fraction is defined only where the denominator is not zero)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why do we need this method? Integrals such as \\(\\int \\frac{dx}{x - 2}\\) or \\(\\int \\frac{dx}{x^2 + 1}\\) are easy, but \\(\\int \\frac{3x - 2}{x(x - 1)(x - 2)}\\,dx\\) has no ready formula. Partial fractions reverse the process of adding fractions: we break one hard fraction into a sum of easy fractions (you met partial fractions in Class XI), and then integrate each easy fraction.\nBefore you start, check two things:\n1. Is the fraction proper (degree of \\(P\\) less than degree of \\(Q\\))? If not, divide first: \\(\\frac{P}{Q} = \\text{quotient} + \\frac{\\text{remainder}}{Q}\\).\n2. Is \\(Q(x)\\) fully factorised into linear factors and irreducible quadratic factors? A quadratic \\(ax^2 + bx + c\\) is irreducible when \\(b^2 - 4ac < 0\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Here, we will give examples of the following four cases when the denominator \\(Q(x)\\) contains"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Case-I: Non-repeated linear factors.",
+              "Case-II: Repeated and non-repeated linear factors.",
+              "Case-III: Linear and non repeated irreducible quadratic factors.",
+              "Case-IV: Linear and repeated irreducible quadratic factors."
+            ]
+          },
+          {
+            "type": "table",
+            "header": [
+              "Factor in the denominator Q(x)",
+              "Partial fractions to write"
+            ],
+            "rows": [
+              [
+                "\\(x - a\\) (not repeated)",
+                "\\(\\frac{A}{x - a}\\)"
+              ],
+              [
+                "\\((x - a)^2\\) (repeated)",
+                "\\(\\frac{A}{x - a} + \\frac{B}{(x - a)^2}\\)"
+              ],
+              [
+                "\\((x - a)^3\\)",
+                "\\(\\frac{A}{x - a} + \\frac{B}{(x - a)^2} + \\frac{C}{(x - a)^3}\\)"
+              ],
+              [
+                "\\(x^2 + bx + c\\) (irreducible)",
+                "\\(\\frac{Ax + B}{x^2 + bx + c}\\)"
+              ],
+              [
+                "\\((x^2 + bx + c)^2\\)",
+                "\\(\\frac{Ax + B}{x^2 + bx + c} + \\frac{Cx + D}{(x^2 + bx + c)^2}\\)"
+              ]
+            ],
+            "caption": "Our summary table: which partial fractions each kind of factor needs"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "After splitting, only a few integrals are ever needed:\n\\(\\int \\frac{dx}{x - a} = \\ln|x - a| + c\\) and \\(\\int \\frac{dx}{ax + b} = \\frac{1}{a}\\ln|ax + b| + c\\);\n\\(\\int \\frac{dx}{(x - a)^n} = \\frac{(x - a)^{1-n}}{1 - n} + c\\) for \\(n \\ne 1\\);\n\\(\\int \\frac{2x}{x^2 + a^2}\\,dx = \\ln(x^2 + a^2) + c\\);\n\\(\\int \\frac{dx}{x^2 + a^2} = \\frac{1}{a}\\tan^{-1}\\frac{x}{a} + c\\).\nTo find the constants: put the roots of the linear factors (each root removes all but one term); when no root is left, compare the coefficients of the powers of \\(x\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Case-I",
+            "text": "Integration of \\(\\int \\frac{P(x)}{Q(x)}\\,dx\\) where \\(Q(x)\\) has non-repeated linear factors"
+          },
+          {
+            "type": "example",
+            "title": "Example 40",
+            "problem": "Integrate \\(\\int \\frac{3x - 2}{x(x - 1)(x - 2)}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int \\frac{3x - 2}{x(x - 1)(x - 2)}\\,dx\\).\nTo find: the integral.\nMethod: Case-I. The denominator has three different linear factors \\(x\\), \\(x - 1\\), \\(x - 2\\) and the fraction is proper (degree 1 < degree 3). Split it into three simple fractions, each of which integrates to a logarithm.",
+              "Write the partial fractions\n\\[\\dfrac{3x - 2}{x(x - 1)(x - 2)} = \\dfrac{A}{x} + \\dfrac{B}{x - 1} + \\dfrac{C}{x - 2}\\]\nWhy: One unknown constant over each non-repeated linear factor.",
+              "Multiply both sides by \\(x(x - 1)(x - 2)\\)\n\\[3x - 2 = A(x - 1)(x - 2) + Bx(x - 2)\\]\n\\[+\\, Cx(x - 1) \\quad (1)\\]\nWhy: This clears the fractions. (1) is an identity, true for every value of \\(x\\).",
+              "Put \\(x = 0\\) in (1)\n\\[3(0) - 2 = A(0 - 1)(0 - 2)\\]\n\\[-2 = 2A \\;\\Rightarrow\\; A = -1\\]\nWhy: At \\(x = 0\\) the \\(B\\) and \\(C\\) terms contain the factor \\(x = 0\\) and vanish.",
+              "Put \\(x = 1\\) in (1)\n\\[3(1) - 2 = B(1)(1 - 2)\\]\n\\[1 = -B \\;\\Rightarrow\\; B = -1\\]\nWhy: At \\(x = 1\\) the \\(A\\) and \\(C\\) terms contain \\(x - 1 = 0\\).",
+              "Put \\(x = 2\\) in (1)\n\\[3(2) - 2 = C(2)(2 - 1)\\]\n\\[4 = 2C \\;\\Rightarrow\\; C = 2\\]\nWhy: At \\(x = 2\\) the \\(A\\) and \\(B\\) terms contain \\(x - 2 = 0\\).",
+              "Integrate term by term\n\\[\\int \\left[\\dfrac{-1}{x} + \\dfrac{-1}{x - 1} + \\dfrac{2}{x - 2}\\right]dx\\]\n\\[= -\\int \\dfrac{dx}{x} - \\int \\dfrac{dx}{x - 1} + 2\\int \\dfrac{dx}{x - 2}\\]\n\\[= -\\ln|x| - \\ln|x - 1| + 2\\ln|x - 2| + C\\]\nWhy: \\(\\int \\frac{dx}{x - a} = \\ln|x - a|\\), because the numerator 1 is the derivative of \\(x - a\\). (Here the book uses capital \\(C\\) for the constant of integration.)",
+              "Check\n\\[-(x - 1)(x - 2) - x(x - 2) + 2x(x - 1)\\]\n\\[= -x^2 + 3x - 2 - x^2 + 2x + 2x^2 - 2x\\]\n\\[= 3x - 2 \\;\\checkmark\\]\nWhy: Putting the constants back into the right side of (1) gives the numerator \\(3x - 2\\)."
+            ],
+            "answer": "\\(-\\ln|x| - \\ln|x - 1| + 2\\ln|x - 2| + C\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Case-II",
+            "text": "Integration of \\(\\int \\frac{P(x)}{Q(x)}\\,dx\\) where \\(Q(x)\\) has repeated linear factors:"
+          },
+          {
+            "type": "example",
+            "title": "Example 41",
+            "problem": "Evaluate \\(\\int \\frac{6x - 10}{(x + 1)(x - 3)^2}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int \\frac{6x - 10}{(x + 1)(x - 3)^2}\\,dx\\).\nTo find: the integral.\nMethod: Case-II. The factor \\(x - 3\\) is repeated (squared), so it needs two fractions, one with \\(x - 3\\) and one with \\((x - 3)^2\\). Roots give two constants; comparing coefficients gives the third.",
+              "Write the partial fractions\n\\[\\dfrac{6x - 10}{(x + 1)(x - 3)^2} = \\dfrac{A}{x + 1} + \\dfrac{B}{x - 3} + \\dfrac{C}{(x - 3)^2}\\]\nWhy: One fraction for \\(x + 1\\) and one for each power of the repeated factor.",
+              "Multiply both sides by \\((x + 1)(x - 3)^2\\)\n\\[6x - 10 = A(x - 3)^2 + B(x + 1)(x - 3)\\]\n\\[+\\, C(x + 1) \\quad (1)\\]\n\\[0\\cdot x^2 + 6x - 10 = A(x^2 - 6x + 9)\\]\n\\[+\\, B(x^2 - 2x - 3) + C(x + 1) \\quad (2)\\]\nWhy: (2) is (1) with the brackets opened; the left side has no \\(x^2\\) term, so its \\(x^2\\) coefficient is 0.",
+              "Put \\(x = -1\\) in (1)\n\\[6(-1) - 10 = A(-1 - 3)^2\\]\n\\[-16 = 16A \\;\\Rightarrow\\; A = -1\\]\nWhy: \\(x + 1 = 0\\) removes the \\(B\\) and \\(C\\) terms.",
+              "Put \\(x = 3\\) in (1)\n\\[6(3) - 10 = C(3 + 1)\\]\n\\[8 = 4C \\;\\Rightarrow\\; C = 2\\]\nWhy: \\(x - 3 = 0\\) removes the \\(A\\) and \\(B\\) terms.",
+              "Compare the coefficients of \\(x^2\\) in (2)\n\\[A + B = 0 \\;\\Rightarrow\\; B = -A = 1\\]\nWhy: No value of \\(x\\) removes both \\(A\\) and \\(C\\) at once, so \\(B\\) comes from comparing coefficients.",
+              "Integrate term by term\n\\[\\int \\left[\\dfrac{-1}{x + 1} + \\dfrac{1}{x - 3} + \\dfrac{2}{(x - 3)^2}\\right]dx\\]\n\\[= -\\ln|x + 1| + \\ln|x - 3| + 2\\,\\dfrac{(x - 3)^{-2+1}}{-2+1} + c\\]\nWhy: The last term is \\(2(x - 3)^{-2}\\); use the power rule \\(\\int (x - a)^n\\,dx = \\frac{(x - a)^{n+1}}{n + 1}\\).",
+              "Simplify\n\\[= \\ln|x - 3| - \\ln|x + 1| + 2\\,\\dfrac{(x - 3)^{-1}}{-1} + c\\]\n\\[= \\ln\\left|\\dfrac{x - 3}{x + 1}\\right| - \\dfrac{2}{x - 3} + c\\]\nWhy: \\(\\ln|p| - \\ln|q| = \\ln\\left|\\frac{p}{q}\\right|\\) and \\((x - 3)^{-1} = \\frac{1}{x - 3}\\).",
+              "Check (constant term of (2))\n\\[9A - 3B + C = -9 - 3 + 2 = -10 \\;\\checkmark\\]\nWhy: The constant term on the left of (2) is \\(-10\\); the three constants reproduce it."
+            ],
+            "answer": "\\(\\ln\\left|\\frac{x - 3}{x + 1}\\right| - \\frac{2}{x - 3} + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does a repeated factor need two fractions? With only \\(\\frac{C}{(x - 3)^2}\\), the factor \\((x - 3)\\) can only appear in the combined denominator as \\((x - 3)^2\\), and the numerator \\(6x - 10\\) cannot be produced. The fraction \\(\\frac{B}{x - 3}\\) supplies the missing freedom. In general \\((x - a)^k\\) needs \\(k\\) fractions."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Case-III",
+            "text": "Integration of \\(\\int \\frac{P(x)}{Q(x)}\\,dx\\) where \\(Q(x)\\) has at least one non-repeated irreducible quadratic factor."
+          },
+          {
+            "type": "example",
+            "title": "Example 42",
+            "problem": "Find \\(\\int \\frac{5x^2 + 3x + 2}{(x + 1)(x^2 + 1)}\\,dx\\)",
+            "book_errors": [
+              "\\(\\frac{5x + 3x + 2}{(x + 1)(x^2 + 1)}\\)"
+            ],
+            "steps": [
+              "Given: \\(\\int \\frac{5x^2 + 3x + 2}{(x + 1)(x^2 + 1)}\\,dx\\).\nTo find: the integral.\nMethod: Case-III. \\(x + 1\\) is linear; \\(x^2 + 1\\) is an irreducible quadratic (it has no real roots), so its numerator must be linear, \\(Bx + C\\).",
+              "Write the partial fractions\n\\[\\dfrac{5x^2 + 3x + 2}{(x + 1)(x^2 + 1)} = \\dfrac{A}{x + 1} + \\dfrac{Bx + C}{x^2 + 1}\\]\nWhy: The book's solution prints the left side here (and again twice below) as \\(\\frac{5x + 3x + 2}{(x + 1)(x^2 + 1)}\\); the numerator is \\(5x^2 + 3x + 2\\), as in the question.",
+              "Multiply both sides by \\((x + 1)(x^2 + 1)\\)\n\\[5x^2 + 3x + 2 = A(x^2 + 1)\\]\n\\[+\\, (Bx + C)(x + 1) \\quad (1)\\]\nWhy: This clears the fractions.",
+              "Put \\(x = -1\\) in (1)\n\\[5(-1)^2 + 3(-1) + 2 = A[(-1)^2 + 1] + 0\\]\n\\[5 - 3 + 2 = 2A \\;\\Rightarrow\\; A = 2\\]\nWhy: \\(x + 1 = 0\\) removes the second term.",
+              "Expand (1) and compare coefficients\n\\[5x^2 + 3x + 2 = (A + B)x^2 + (B + C)x + (C + A)\\]\n\\[x^2:\\ 5 = A + B = 2 + B \\;\\Rightarrow\\; B = 3\\]\n\\[\\text{constants}:\\ 2 = A + C = C + 2 \\;\\Rightarrow\\; C = 0\\]\nWhy: \\(x^2 + 1\\) has no real root, so \\(B\\) and \\(C\\) come from equating coefficients. (The \\(x\\) coefficients agree: \\(B + C = 3\\).)",
+              "The integrand becomes\n\\[\\dfrac{5x^2 + 3x + 2}{(x + 1)(x^2 + 1)} = \\dfrac{2}{x + 1} + \\dfrac{3x + 0}{x^2 + 1}\\]\nWhy: Put \\(A = 2\\), \\(B = 3\\), \\(C = 0\\).",
+              "Integrate\n\\[= 2\\int \\dfrac{dx}{x + 1} + \\dfrac{3}{2}\\int \\dfrac{2x}{x^2 + 1}\\,dx\\]\n\\[= 2\\ln|x + 1| + \\dfrac{3}{2}\\ln|x^2 + 1| + c\\]\n\\[= 2\\ln|x + 1| + \\dfrac{3}{2}\\ln(x^2 + 1) + c\\]\nWhy: Multiply and divide by 2 so that the numerator \\(2x\\) is the derivative of \\(x^2 + 1\\). The modulus can be dropped because \\(x^2 + 1 > 0\\).",
+              "Check\n\\[2(x^2 + 1) + 3x(x + 1) = 5x^2 + 3x + 2 \\;\\checkmark\\]\nWhy: The partial fractions add back to the integrand."
+            ],
+            "answer": "\\(2\\ln|x + 1| + \\frac{3}{2}\\ln(x^2 + 1) + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the solution of Example 42 the book prints the integrand three times as \\(\\frac{5x + 3x + 2}{(x + 1)(x^2 + 1)}\\). The numerator must be \\(5x^2 + 3x + 2\\), as in the question and in equation (1); the working and the answer use the correct \\(5x^2 + 3x + 2\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Case-IV",
+            "text": "Integration of \\(\\int \\frac{P(x)}{Q(x)}\\,dx\\) where \\(Q(x)\\) has repeated irreducible quadratic factors:"
+          },
+          {
+            "type": "example",
+            "title": "Example 43",
+            "problem": "Evaluate \\(\\int \\frac{x^3 + 2x + 1}{(x^2 + 1)^2}\\,dx\\)",
+            "book_errors": [
+              "\\(\\frac{\\sin\\theta\\cos^2\\theta}{\\cos}\\)"
+            ],
+            "steps": [
+              "Given: \\(\\int \\frac{x^3 + 2x + 1}{(x^2 + 1)^2}\\,dx\\).\nTo find: the integral.\nMethod: Case-IV. The irreducible factor \\(x^2 + 1\\) is repeated. The book finds the partial fractions by splitting the numerator with \\(x^2 + 1\\) in mind, then uses \\(x = \\tan\\theta\\) for the last integral.",
+              "Split the numerator\n\\[x^3 + 2x + 1 = x^3 + x + x + 1\\]\n\\[= x(x^2 + 1) + x + 1\\]\nWhy: Taking \\(x\\) out of \\(x^3 + x\\) creates a factor \\(x^2 + 1\\) that cancels with the denominator.",
+              "Partial fractions\n\\[\\dfrac{x(x^2 + 1) + x + 1}{(x^2 + 1)^2} = \\dfrac{x}{x^2 + 1} + \\dfrac{x + 1}{(x^2 + 1)^2}\\]\n\\[= \\dfrac{x}{x^2 + 1} + \\dfrac{x}{(x^2 + 1)^2} + \\dfrac{1}{(x^2 + 1)^2}\\]\nWhy: This is the Case-IV form \\(\\frac{Ax + B}{x^2 + 1} + \\frac{Cx + D}{(x^2 + 1)^2}\\) with \\(A = 1\\), \\(B = 0\\), \\(C = 1\\), \\(D = 1\\).",
+              "Integrate the first two parts\n\\[\\dfrac{1}{2}\\int \\dfrac{2x}{x^2 + 1}\\,dx + \\dfrac{1}{2}\\int (x^2 + 1)^{-2}(2x)\\,dx\\]\n\\[= \\dfrac{1}{2}\\ln(x^2 + 1) + \\dfrac{1}{2}\\cdot\\dfrac{(x^2 + 1)^{-1}}{-1}\\]\n\\[+ \\int \\dfrac{dx}{(x^2 + 1)^2} \\quad (1)\\]\nWhy: In both parts \\(2x\\) is the derivative of \\(x^2 + 1\\): the first gives a logarithm, the second the power rule.",
+              "For \\(\\int \\frac{dx}{(x^2 + 1)^2}\\) put \\(x = \\tan\\theta\\)\n\\[dx = \\sec^2\\theta\\,d\\theta\\]\n\\[\\int \\dfrac{\\sec^2\\theta\\,d\\theta}{(\\tan^2\\theta + 1)^2} = \\int \\dfrac{\\sec^2\\theta\\,d\\theta}{(\\sec^2\\theta)^2}\\]\n\\[= \\int \\dfrac{d\\theta}{\\sec^2\\theta} = \\int \\cos^2\\theta\\,d\\theta\\]\nWhy: \\(1 + \\tan^2\\theta = \\sec^2\\theta\\) turns the denominator into a single power of \\(\\sec\\theta\\).",
+              "Integrate \\(\\cos^2\\theta\\)\n\\[= \\int \\dfrac{1 + \\cos 2\\theta}{2}\\,d\\theta = \\dfrac{1}{2}\\left[\\theta + \\dfrac{\\sin 2\\theta}{2}\\right]\\]\n\\[= \\dfrac{1}{2}\\left[\\theta + \\sin\\theta\\cos\\theta\\right]\\]\nWhy: \\(\\cos^2\\theta = \\frac{1 + \\cos 2\\theta}{2}\\) and \\(\\sin 2\\theta = 2\\sin\\theta\\cos\\theta\\).",
+              "Return to \\(x\\)\n\\[\\sin\\theta\\cos\\theta = \\dfrac{\\sin\\theta\\cos^2\\theta}{\\cos\\theta} = \\dfrac{\\tan\\theta}{\\sec^2\\theta}\\]\n\\[= \\dfrac{\\tan\\theta}{1 + \\tan^2\\theta} = \\dfrac{x}{1 + x^2}\\]\n\\[\\int \\dfrac{dx}{(x^2 + 1)^2} = \\dfrac{1}{2}\\left[\\tan^{-1} x + \\dfrac{x}{1 + x^2}\\right]\\]\nWhy: Multiply and divide by \\(\\cos\\theta\\) to reach \\(\\tan\\theta\\), then use \\(\\tan\\theta = x\\), \\(\\theta = \\tan^{-1} x\\). The book prints the middle fraction as \\(\\frac{\\sin\\theta\\cos^2\\theta}{\\cos}\\): the denominator must be \\(\\cos\\theta\\).",
+              "Put this into (1)\n\\[\\dfrac{1}{2}\\ln(x^2 + 1) - \\dfrac{1}{2}\\cdot\\dfrac{1}{x^2 + 1}\\]\n\\[+ \\dfrac{1}{2}\\tan^{-1} x + \\dfrac{1}{2}\\cdot\\dfrac{x}{1 + x^2} + c\\]\n\\[= \\dfrac{1}{2}\\ln(x^2 + 1) + \\dfrac{1}{2}\\tan^{-1} x + \\dfrac{x - 1}{2(x^2 + 1)} + c\\]\nWhy: The two fractions have the same denominator \\(2(x^2 + 1)\\), so \\(\\frac{x}{2(x^2 + 1)} - \\frac{1}{2(x^2 + 1)} = \\frac{x - 1}{2(x^2 + 1)}\\).",
+              "Check (differentiate the answer)\n\\[\\dfrac{x}{x^2 + 1} + \\dfrac{1}{2(x^2 + 1)} + \\dfrac{(x^2 + 1) - 2x(x - 1)}{2(x^2 + 1)^2}\\]\n\\[= \\dfrac{2x^3 + 2x + x^2 + 1 - x^2 + 2x + 1}{2(x^2 + 1)^2}\\]\n\\[= \\dfrac{x^3 + 2x + 1}{(x^2 + 1)^2} \\;\\checkmark\\]\nWhy: The derivative of the answer is the integrand."
+            ],
+            "answer": "\\(\\frac{1}{2}\\ln(x^2 + 1) + \\frac{1}{2}\\tan^{-1} x + \\frac{x - 1}{2(x^2 + 1)} + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In Example 43 the book prints \\(\\frac{\\sin\\theta\\cos^2\\theta}{\\cos}\\) with the angle missing in the denominator. It should be \\(\\frac{\\sin\\theta\\cos^2\\theta}{\\cos\\theta}\\) (multiply and divide \\(\\sin\\theta\\cos\\theta\\) by \\(\\cos\\theta\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The integral \\(\\int \\frac{dx}{(x^2 + 1)^2} = \\frac{1}{2}\\tan^{-1} x + \\frac{x}{2(x^2 + 1)} + c\\) found in Example 43 appears again in every Case-IV question (Exercise 3.4, Q13 and Q15). With \\(x^2 + a^2\\) in place of \\(x^2 + 1\\), the same idea uses \\(x = a\\tan\\theta\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Partial fractions apply to a proper fraction; if \\(\\deg P \\ge \\deg Q\\), divide first.\n2. Factorise \\(Q(x)\\) completely: linear factors and irreducible quadratics (\\(b^2 - 4ac < 0\\)).\n3. Non-repeated linear factor: \\(\\frac{A}{x - a}\\). Repeated \\((x - a)^k\\): \\(k\\) fractions with powers \\(1, \\ldots, k\\).\n4. Irreducible quadratic factor: linear numerator \\(\\frac{Ax + B}{x^2 + bx + c}\\); repeated quadratics need one such fraction for each power.\n5. Constants: put roots first, then compare coefficients; check by adding the fractions back.\n6. Linear parts integrate to \\(\\ln\\), squared parts by the power rule, quadratic parts to \\(\\ln\\) plus \\(\\tan^{-1}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Splitting an improper fraction without dividing first (e.g. \\(\\frac{x^3 + 2x^2 - x - 1}{x^2 - 1}\\)).\n2. Writing only \\(\\frac{C}{(x - 3)^2}\\) for a repeated factor and forgetting \\(\\frac{B}{x - 3}\\).\n3. Writing a constant \\(\\frac{B}{x^2 + 1}\\) over a quadratic factor instead of \\(\\frac{Bx + C}{x^2 + 1}\\).\n4. Forgetting \\(\\frac{1}{a}\\): \\(\\int \\frac{dx}{4 - 3x} = -\\frac{1}{3}\\ln|4 - 3x|\\), not \\(\\ln|4 - 3x|\\).\n5. Integrating \\(\\frac{1}{(x - 3)^2}\\) as a logarithm; it is \\(-\\frac{1}{x - 3}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

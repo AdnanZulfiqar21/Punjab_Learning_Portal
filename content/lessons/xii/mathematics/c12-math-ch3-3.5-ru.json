@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.5-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.5",
+      "title": "3.5 Integration by Using Partial Fractions (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 92,
+          "pdf_to": 95,
+          "note": "Book p. 90-93: 3.5 Integration by Using Partial Fractions; Case-I to Case-IV boxes; Examples 40-43"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-3.5",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Pichle sabaq mein aap ne integration by parts seekha. Ab ek aur bohat kaam ka tareeqa: partial fractions ke zariye integration. Jab integrand ek rational function ho (yani ek polynomial ko doosre polynomial se divide kiya gaya ho), jaise \\(\\frac{3x - 2}{x(x - 1)(x - 2)}\\), to is ka seedha koi formula nahi hota. Lekin agar hum isay chhote chhote fractions mein tor dein, to har chhota fraction aasaani se integrate ho jata hai. Yeh bilkul aisa hai jaise ek bari raqam ko chhote noton mein badal lena: har chhota note ginna aasaan hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki baat: agar \\(P(x)\\) aur \\(Q(x)\\) polynomial functions hon, aur rational function \\(\\frac{P(x)}{Q(x)}\\) ka denominator \\(Q(x)\\) (jo zero nahi hona chahiye) linear aur irreducible quadratic factors mein toot sake, to \\(\\frac{P(x)}{Q(x)}\\) ko chhote rational functions ke jama ki shakal mein likha ja sakta hai, aur har ek ko un tareeqon se integrate kar sakte hain jo hum pehle seekh chuke hain."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein shart \\(Q(x)\\ (x \\ne 0)\\) chhapi hai. Asal shart denominator par hai, \\(x\\) par nahi: sahi \\(Q(x) \\ne 0\\) hai, kyunke fraction sirf wahan defined hai jahan denominator zero na ho. Misal ke taur par Example 40 mein \\(x = 0\\) par denominator zero hai, lekin baaqi sab \\(x\\) ke liye fraction bilkul theek hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh tareeqa kyun chahiye? \\(\\int \\frac{dx}{x - 2}\\) ya \\(\\int \\frac{dx}{x^2 + 1}\\) jaise integrals to aasaan hain, lekin \\(\\int \\frac{3x - 2}{x(x - 1)(x - 2)}\\,dx\\) ka koi tayyar formula nahi. Fractions jama karna aap jaante hain: \\(\\frac{1}{x} + \\frac{1}{x - 1}\\) ko mila kar ek fraction banta hai. Partial fractions is ka ulta kaam hai: ek mushkil fraction ko wapas aasaan fractions mein torna. Partial fractions aap Class XI mein parh chuke hain; yahan sirf un ka integral naya hai.\nShuru karne se pehle do cheezein zaroor check karein:\n1. Kya fraction proper hai (yani \\(P\\) ki degree \\(Q\\) ki degree se kam)? Agar nahi, to pehle long division: \\(\\frac{P}{Q} = \\text{quotient} + \\frac{\\text{remainder}}{Q}\\). Bilkul jaise \\(\\frac{7}{2} = 3 + \\frac{1}{2}\\).\n2. Kya \\(Q(x)\\) poori tarah factorise ho chuka hai? Quadratic \\(ax^2 + bx + c\\) irreducible (mazeed na tootne wala) tab hota hai jab \\(b^2 - 4ac < 0\\), yani us ke real roots nahi."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab yahan chaar cases ki misaalein deti hai, is hisaab se ke denominator \\(Q(x)\\) mein kis qisam ke factors hain:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Case-I: Non-repeated linear factors.",
+              "Case-II: Repeated and non-repeated linear factors.",
+              "Case-III: Linear and non repeated irreducible quadratic factors.",
+              "Case-IV: Linear and repeated irreducible quadratic factors."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Inhein aasaani se pehchanne ke liye neeche hamari banayi hui ek khulasa table hai. Pehle column mein dekhiye ke denominator mein kaunsa factor hai, aur doosre column se pata chalega ke us ke liye kaun se fractions likhne hain. Yaad rakhne ki baat: jitni power, utne fractions; aur quadratic ke upar hamesha linear numerator."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Denominator Q(x) mein factor",
+              "Kaun se partial fractions likhein"
+            ],
+            "rows": [
+              [
+                "\\(x - a\\) (not repeated)",
+                "\\(\\frac{A}{x - a}\\)"
+              ],
+              [
+                "\\((x - a)^2\\) (repeated)",
+                "\\(\\frac{A}{x - a} + \\frac{B}{(x - a)^2}\\)"
+              ],
+              [
+                "\\((x - a)^3\\)",
+                "\\(\\frac{A}{x - a} + \\frac{B}{(x - a)^2} + \\frac{C}{(x - a)^3}\\)"
+              ],
+              [
+                "\\(x^2 + bx + c\\) (irreducible)",
+                "\\(\\frac{Ax + B}{x^2 + bx + c}\\)"
+              ],
+              [
+                "\\((x^2 + bx + c)^2\\)",
+                "\\(\\frac{Ax + B}{x^2 + bx + c} + \\frac{Cx + D}{(x^2 + bx + c)^2}\\)"
+              ]
+            ],
+            "caption": "Hamari banayi hui khulasa table: har qisam ke factor ke liye kaun se partial fractions"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Torne ke baad sirf yeh chand integrals kaam aate hain, inhein achhi tarah yaad kar lein:\n\\(\\int \\frac{dx}{x - a} = \\ln|x - a| + c\\) aur \\(\\int \\frac{dx}{ax + b} = \\frac{1}{a}\\ln|ax + b| + c\\) (\\(\\frac{1}{a}\\) is liye ke \\(ax + b\\) ka derivative \\(a\\) hai);\n\\(\\int \\frac{dx}{(x - a)^n} = \\frac{(x - a)^{1-n}}{1 - n} + c\\), jab \\(n \\ne 1\\) (yani squared ya us se zyada power par \\(\\ln\\) nahi, power rule);\n\\(\\int \\frac{2x}{x^2 + a^2}\\,dx = \\ln(x^2 + a^2) + c\\) (numerator denominator ka derivative hai);\n\\(\\int \\frac{dx}{x^2 + a^2} = \\frac{1}{a}\\tan^{-1}\\frac{x}{a} + c\\).\nConstants dhoondne ka tareeqa: pehle linear factors ke roots rakhein (har root ek ke ilawa sab terms mita deta hai); jab koi root na bache to \\(x\\) ki powers ke coefficients compare karein (yani dono taraf \\(x^2\\) ke saath wala number barabar, \\(x\\) ke saath wala barabar, waghera)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Case-I",
+            "text": "Integration of \\(\\int \\frac{P(x)}{Q(x)}\\,dx\\) where \\(Q(x)\\) has non-repeated linear factors"
+          },
+          {
+            "type": "paragraph",
+            "text": "Pehla case sab se aasaan hai: denominator ke saare factors linear hain aur koi dobara nahi aata. Har factor ke neeche ek constant likhte hain. Kitab ki misaal dekhiye."
+          },
+          {
+            "type": "example",
+            "title": "Example 40",
+            "problem": "Integrate \\(\\int \\frac{3x - 2}{x(x - 1)(x - 2)}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{3x - 2}{x(x - 1)(x - 2)}\\,dx\\).\nMaloom karna: yeh integral.\nTareeqa: Case-I. Sab se pehle hum dekhte hain ke denominator mein kya hai: teen linear factors \\(x\\), \\(x - 1\\), \\(x - 2\\), teeno alag, koi dobara nahi aata. Upar degree 1 aur neeche degree 3, yani fraction proper hai, division nahi chahiye. Is liye isay teen chhote fractions mein torenge, jin mein se har ek ka integral \\(\\ln\\) hai.",
+              "Partial fractions likhein\n\\[\\dfrac{3x - 2}{x(x - 1)(x - 2)} = \\dfrac{A}{x} + \\dfrac{B}{x - 1} + \\dfrac{C}{x - 2}\\]\nKyun: Har alag linear factor ke neeche ek unknown constant. Abhi \\(A\\), \\(B\\), \\(C\\) maloom nahi; agla kaam inhein dhoondna hai.",
+              "Dono sides ko \\(x(x - 1)(x - 2)\\) se multiply karein\n\\[3x - 2 = A(x - 1)(x - 2) + Bx(x - 2)\\]\n\\[+\\, Cx(x - 1) \\quad (1)\\]\nKyun: Fractions khatam karne ke liye. Har constant ke saath woh do factors bache jo us ke apne denominator mein nahi the. (1) ek identity hai, yani \\(x\\) ki har value par sach hai; isi liye hum apni pasand ki values rakh sakte hain.",
+              "(1) mein \\(x = 0\\) rakhein\n\\[3(0) - 2 = A(0 - 1)(0 - 2)\\]\n\\[-2 = 2A \\;\\Rightarrow\\; A = -1\\]\nKyun: \\(B\\) aur \\(C\\) dono terms mein \\(x\\) multiply ho raha hai, to \\(x = 0\\) par dono zero. Sirf \\(A\\) bacha. Yeh \"root rakhne\" ki chaal hai: aisi value rakho jo baaqi sab terms ko mita de.",
+              "(1) mein \\(x = 1\\) rakhein\n\\[3(1) - 2 = B(1)(1 - 2)\\]\n\\[1 = -B \\;\\Rightarrow\\; B = -1\\]\nKyun: \\(x = 1\\) par \\(x - 1 = 0\\), jo \\(A\\) aur \\(C\\) dono terms mein hai.",
+              "(1) mein \\(x = 2\\) rakhein\n\\[3(2) - 2 = C(2)(2 - 1)\\]\n\\[4 = 2C \\;\\Rightarrow\\; C = 2\\]\nKyun: \\(x = 2\\) par \\(x - 2 = 0\\), jo \\(A\\) aur \\(B\\) terms mein hai.",
+              "Har term ka integral\n\\[\\int \\left[\\dfrac{-1}{x} + \\dfrac{-1}{x - 1} + \\dfrac{2}{x - 2}\\right]dx\\]\n\\[= -\\int \\dfrac{dx}{x} - \\int \\dfrac{dx}{x - 1} + 2\\int \\dfrac{dx}{x - 2}\\]\n\\[= -\\ln|x| - \\ln|x - 1| + 2\\ln|x - 2| + C\\]\nKyun: \\(\\int \\frac{dx}{x - a} = \\ln|x - a|\\), kyunke numerator 1 bilkul \\(x - a\\) ka derivative hai. Kitab ne yahan integration ka constant capital \\(C\\) likha hai; yeh upar wale \\(C = 2\\) se alag cheez hai, confuse na hon.",
+              "Tasdeeq\n\\[-(x - 1)(x - 2) - x(x - 2) + 2x(x - 1)\\]\n\\[= -x^2 + 3x - 2 - x^2 + 2x + 2x^2 - 2x\\]\n\\[= 3x - 2 \\;\\checkmark\\]\nKyun: Constants wapas (1) ke right side mein rakh kar khola: \\(x^2\\) wale terms \\(-1 - 1 + 2 = 0\\) se khatam, aur \\(3x - 2\\) bacha, jo numerator hai. Matlab hamare constants bilkul sahi hain."
+            ],
+            "answer": "\\(-\\ln|x| - \\ln|x - 1| + 2\\ln|x - 2| + C\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Example 40 mein agar hum \\(x = 0, 1, 2\\) ke bajaye coefficients compare karte to kya hota? Teen equations \\(A + B + C = 0\\), \\(-3A - 2B - C = 3\\), \\(2A = -2\\) banti, aur un ko hal karne mein zyada waqt lagta. Is liye linear factors ho to hamesha pehle roots rakhiye; yeh sab se tez raasta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahi: \\(\\int \\frac{dx}{x^2 - 4}\\).\n\\(x^2 - 4 = (x - 2)(x + 2)\\), Case-I. \\(\\frac{1}{(x - 2)(x + 2)} = \\frac{A}{x - 2} + \\frac{B}{x + 2}\\), yani \\(1 = A(x + 2) + B(x - 2)\\).\n\\(x = 2\\): \\(1 = 4A\\), \\(A = \\frac{1}{4}\\). \\(x = -2\\): \\(1 = -4B\\), \\(B = -\\frac{1}{4}\\).\nJawab: \\(\\frac{1}{4}\\ln|x - 2| - \\frac{1}{4}\\ln|x + 2| + c = \\frac{1}{4}\\ln\\left|\\frac{x - 2}{x + 2}\\right| + c\\). Yeh wohi formula hai jo aap ne \\(\\int \\frac{dx}{x^2 - a^2} = \\frac{1}{2a}\\ln\\left|\\frac{x - a}{x + a}\\right|\\) ki shakal mein dekha hoga, \\(a = 2\\) ke saath."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Case-II",
+            "text": "Integration of \\(\\int \\frac{P(x)}{Q(x)}\\,dx\\) where \\(Q(x)\\) has repeated linear factors:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Doosre case mein koi linear factor dobara aata hai, jaise \\((x - 3)^2\\). Aisi soorat mein us factor ki har power ke liye alag fraction likhna parta hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 41",
+            "problem": "Evaluate \\(\\int \\frac{6x - 10}{(x + 1)(x - 3)^2}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{6x - 10}{(x + 1)(x - 3)^2}\\,dx\\).\nMaloom karna: yeh integral.\nTareeqa: Case-II. Denominator mein \\(x - 3\\) do dafa (square) aa raha hai, yani repeated linear factor. Is ke liye do fractions likhne parte hain: ek \\(x - 3\\) ke saath aur ek \\((x - 3)^2\\) ke saath. Do constants roots se milenge, teesra coefficients compare kar ke.",
+              "Partial fractions likhein\n\\[\\dfrac{6x - 10}{(x + 1)(x - 3)^2} = \\dfrac{A}{x + 1} + \\dfrac{B}{x - 3} + \\dfrac{C}{(x - 3)^2}\\]\nKyun: \\(x + 1\\) ke liye ek fraction, aur repeated factor ki har power (1 aur 2) ke liye ek ek fraction.",
+              "Dono sides ko \\((x + 1)(x - 3)^2\\) se multiply karein\n\\[6x - 10 = A(x - 3)^2 + B(x + 1)(x - 3)\\]\n\\[+\\, C(x + 1) \\quad (1)\\]\n\\[0\\cdot x^2 + 6x - 10 = A(x^2 - 6x + 9)\\]\n\\[+\\, B(x^2 - 2x - 3) + C(x + 1) \\quad (2)\\]\nKyun: (2) asal mein (1) hi hai, bas brackets khol diye. Left side par \\(x^2\\) nahi, is liye kitab ne \\(0\\cdot x^2\\) likh kar yaad dilaya ke \\(x^2\\) ka coefficient zero hai; yeh baad mein \\(B\\) nikalne ke kaam aayega.",
+              "(1) mein \\(x = -1\\) rakhein\n\\[6(-1) - 10 = A(-1 - 3)^2\\]\n\\[-16 = 16A \\;\\Rightarrow\\; A = -1\\]\nKyun: \\(x + 1 = 0\\) hone se \\(B\\) aur \\(C\\) wale terms gayab. \\((-4)^2 = 16\\).",
+              "(1) mein \\(x = 3\\) rakhein\n\\[6(3) - 10 = C(3 + 1)\\]\n\\[8 = 4C \\;\\Rightarrow\\; C = 2\\]\nKyun: \\(x - 3 = 0\\) se \\(A\\) aur \\(B\\) wale terms gayab.",
+              "(2) mein \\(x^2\\) ke coefficients compare karein\n\\[A + B = 0 \\;\\Rightarrow\\; B = -A = 1\\]\nKyun: \\(B\\) ke liye koi aisi value nahi jo \\(A\\) aur \\(C\\) dono ko ek saath mita de, kyunke ab sirf do roots hain aur dono istemal ho chuke. Is liye coefficients compare kiye: right side par \\(x^2\\) ka coefficient \\(A + B\\), left side par 0.",
+              "Har term ka integral\n\\[\\int \\left[\\dfrac{-1}{x + 1} + \\dfrac{1}{x - 3} + \\dfrac{2}{(x - 3)^2}\\right]dx\\]\n\\[= -\\ln|x + 1| + \\ln|x - 3| + 2\\,\\dfrac{(x - 3)^{-2+1}}{-2+1} + c\\]\nKyun: Pehle do terms \\(\\ln\\) dete hain. Teesra term \\(2(x - 3)^{-2}\\) hai; is par \\(\\ln\\) nahi, power rule lagta hai: power ek barhao aur nayi power se divide karo.",
+              "Saaf karein\n\\[= \\ln|x - 3| - \\ln|x + 1| + 2\\,\\dfrac{(x - 3)^{-1}}{-1} + c\\]\n\\[= \\ln\\left|\\dfrac{x - 3}{x + 1}\\right| - \\dfrac{2}{x - 3} + c\\]\nKyun: Do logs ka farq ek log ban jata hai: \\(\\ln|p| - \\ln|q| = \\ln\\left|\\frac{p}{q}\\right|\\). Aur \\(\\frac{(x - 3)^{-1}}{-1} = -\\frac{1}{x - 3}\\).",
+              "Tasdeeq ((2) ka constant term)\n\\[9A - 3B + C = -9 - 3 + 2 = -10 \\;\\checkmark\\]\nKyun: (2) ke right side ka constant: \\(9A\\), \\(-3B\\) aur \\(C\\). Left side ka constant \\(-10\\). Teeno constants rakhne se wohi aaya, yani sab sahi hai."
+            ],
+            "answer": "\\(\\ln\\left|\\frac{x - 3}{x + 1}\\right| - \\frac{2}{x - 3} + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Repeated factor ke liye do fractions kyun? Agar hum sirf \\(\\frac{C}{(x - 3)^2}\\) likhein to \\(\\frac{A}{x + 1} + \\frac{C}{(x - 3)^2}\\) ko jorne par numerator \\(A(x - 3)^2 + C(x + 1)\\) banta hai. Is mein sirf do constants hain, jab ke milane ke liye teen coefficients (\\(x^2\\), \\(x\\), constant) hain; aam taur par yeh poora nahi hota. \\(\\frac{B}{x - 3}\\) woh teesri \"azadi\" deta hai. Qaida: \\((x - a)^k\\) ke liye \\(k\\) fractions."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Case-III",
+            "text": "Integration of \\(\\int \\frac{P(x)}{Q(x)}\\,dx\\) where \\(Q(x)\\) has at least one non-repeated irreducible quadratic factor."
+          },
+          {
+            "type": "paragraph",
+            "text": "Teesre case mein denominator mein ek aisa quadratic factor hai jo real numbers mein toot nahi sakta, jaise \\(x^2 + 1\\). Is ke upar constant ke bajaye linear numerator \\(Bx + C\\) aata hai. Integral karte waqt is fraction ke do hisse banenge: ek \\(\\ln\\) wala aur ek \\(\\tan^{-1}\\) wala."
+          },
+          {
+            "type": "example",
+            "title": "Example 42",
+            "problem": "Find \\(\\int \\frac{5x^2 + 3x + 2}{(x + 1)(x^2 + 1)}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{5x^2 + 3x + 2}{(x + 1)(x^2 + 1)}\\,dx\\).\nMaloom karna: yeh integral.\nTareeqa: Case-III. \\(x + 1\\) linear factor hai, aur \\(x^2 + 1\\) aisa quadratic hai jo kabhi zero nahi hota (irreducible). Quadratic factor ke upar sirf constant kaafi nahi; linear numerator \\(Bx + C\\) likhna parta hai.",
+              "Partial fractions likhein\n\\[\\dfrac{5x^2 + 3x + 2}{(x + 1)(x^2 + 1)} = \\dfrac{A}{x + 1} + \\dfrac{Bx + C}{x^2 + 1}\\]\nKyun: Linear factor ke upar constant, quadratic factor ke upar linear expression. Rule: numerator ki degree apne denominator se ek kam ho sakti hai. (Kitab ne solution mein yahan numerator \\(5x + 3x + 2\\) chhap diya hai; sahi \\(5x^2 + 3x + 2\\) hai, neeche correction dekhiye.)",
+              "Dono sides ko \\((x + 1)(x^2 + 1)\\) se multiply karein\n\\[5x^2 + 3x + 2 = A(x^2 + 1)\\]\n\\[+\\, (Bx + C)(x + 1) \\quad (1)\\]\nKyun: Fractions khatam ho gaye aur ek identity bachi.",
+              "(1) mein \\(x = -1\\) rakhein\n\\[5(-1)^2 + 3(-1) + 2 = A[(-1)^2 + 1] + 0\\]\n\\[5 - 3 + 2 = 2A \\;\\Rightarrow\\; A = 2\\]\nKyun: \\(x + 1 = 0\\) se doosra term zero. \\(x^2 + 1\\) ka koi real root nahi, is liye \\(B\\) aur \\(C\\) ke liye yeh chaal nahi chalegi.",
+              "(1) ko khol kar coefficients compare karein\n\\[5x^2 + 3x + 2 = (A + B)x^2 + (B + C)x + (C + A)\\]\n\\[x^2:\\ 5 = A + B = 2 + B \\;\\Rightarrow\\; B = 3\\]\n\\[\\text{constants}:\\ 2 = A + C = C + 2 \\;\\Rightarrow\\; C = 0\\]\nKyun: Right side khola: \\(Ax^2 + A + Bx^2 + Bx + Cx + C\\), phir same powers ikatthi kin. Do equations kaafi thin; \\(x\\) wala coefficient \\(B + C = 3\\) tasdeeq ke liye bacha, aur woh bhi poora hota hai.",
+              "Integrand nayi shakal mein\n\\[\\dfrac{5x^2 + 3x + 2}{(x + 1)(x^2 + 1)} = \\dfrac{2}{x + 1} + \\dfrac{3x + 0}{x^2 + 1}\\]\nKyun: \\(A = 2\\), \\(B = 3\\), \\(C = 0\\) rakh diye.",
+              "Integral lein\n\\[= 2\\int \\dfrac{dx}{x + 1} + \\dfrac{3}{2}\\int \\dfrac{2x}{x^2 + 1}\\,dx\\]\n\\[= 2\\ln|x + 1| + \\dfrac{3}{2}\\ln|x^2 + 1| + c\\]\n\\[= 2\\ln|x + 1| + \\dfrac{3}{2}\\ln(x^2 + 1) + c\\]\nKyun: \\(x^2 + 1\\) ka derivative \\(2x\\) hai, lekin numerator mein \\(3x\\) hai. Is liye \\(3x = \\frac{3}{2}(2x)\\) likha, taa ke \\(\\frac{f'}{f}\\) shakal ban jaye aur \\(\\ln\\) aa jaye. \\(x^2 + 1\\) hamesha positive hai, is liye modulus hata sakte hain.",
+              "Tasdeeq\n\\[2(x^2 + 1) + 3x(x + 1) = 5x^2 + 3x + 2 \\;\\checkmark\\]\nKyun: Dono fractions ko common denominator par jora to numerator \\(2x^2 + 2 + 3x^2 + 3x = 5x^2 + 3x + 2\\) aaya, jo asal numerator hai."
+            ],
+            "answer": "\\(2\\ln|x + 1| + \\frac{3}{2}\\ln(x^2 + 1) + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 42 ke solution mein kitab ne integrand teen jagah \\(\\frac{5x + 3x + 2}{(x + 1)(x^2 + 1)}\\) chhapa hai. Yeh printing ki ghalti hai: numerator \\(5x^2 + 3x + 2\\) hai, jaisa sawal mein aur equation (1) mein likha hai. Upar hamare hal mein har jagah sahi \\(5x^2 + 3x + 2\\) istemal hua hai, aur jawab is se mutasir nahi hota."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Case-IV",
+            "text": "Integration of \\(\\int \\frac{P(x)}{Q(x)}\\,dx\\) where \\(Q(x)\\) has repeated irreducible quadratic factors:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Chautha case sab se lamba hai: irreducible quadratic factor repeated hai, jaise \\((x^2 + 1)^2\\). Har power ke liye linear numerator wala fraction aata hai, aur aakhir mein \\(\\int \\frac{dx}{(x^2 + 1)^2}\\) jaisa integral bachta hai jo \\(x = \\tan\\theta\\) se hal hota hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 43",
+            "problem": "Evaluate \\(\\int \\frac{x^3 + 2x + 1}{(x^2 + 1)^2}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{x^3 + 2x + 1}{(x^2 + 1)^2}\\,dx\\).\nMaloom karna: yeh integral.\nTareeqa: Case-IV. Irreducible factor \\(x^2 + 1\\) square mein hai. Kitab constants ki lambi equations ke bajaye ek chaalaak tareeqa istemal karti hai: numerator ko aise torti hai ke \\(x^2 + 1\\) ka factor ban jaye. Aakhri mushkil integral ke liye \\(x = \\tan\\theta\\) rakhenge.",
+              "Numerator ko torein\n\\[x^3 + 2x + 1 = x^3 + x + x + 1\\]\n\\[= x(x^2 + 1) + x + 1\\]\nKyun: \\(2x\\) ko \\(x + x\\) likha taa ke \\(x^3 + x\\) se \\(x\\) common nikal kar \\(x^2 + 1\\) ban jaye, jo neeche wale se cancel ho sakta hai.",
+              "Partial fractions\n\\[\\dfrac{x(x^2 + 1) + x + 1}{(x^2 + 1)^2} = \\dfrac{x}{x^2 + 1} + \\dfrac{x + 1}{(x^2 + 1)^2}\\]\n\\[= \\dfrac{x}{x^2 + 1} + \\dfrac{x}{(x^2 + 1)^2} + \\dfrac{1}{(x^2 + 1)^2}\\]\nKyun: Pehle hisse mein ek \\(x^2 + 1\\) cancel hua. Yeh bilkul Case-IV wali shakal \\(\\frac{Ax + B}{x^2 + 1} + \\frac{Cx + D}{(x^2 + 1)^2}\\) hai, jahan \\(A = 1\\), \\(B = 0\\), \\(C = 1\\), \\(D = 1\\). Yani equations ke baghair hi constants mil gaye.",
+              "Pehle do hisson ka integral\n\\[\\dfrac{1}{2}\\int \\dfrac{2x}{x^2 + 1}\\,dx + \\dfrac{1}{2}\\int (x^2 + 1)^{-2}(2x)\\,dx\\]\n\\[= \\dfrac{1}{2}\\ln(x^2 + 1) + \\dfrac{1}{2}\\cdot\\dfrac{(x^2 + 1)^{-1}}{-1}\\]\n\\[+ \\int \\dfrac{dx}{(x^2 + 1)^2} \\quad (1)\\]\nKyun: Dono mein \\(2x\\) banaya, jo \\(x^2 + 1\\) ka derivative hai. Pehla \\(\\frac{f'}{f}\\) hai, to \\(\\ln\\); doosra \\(f^{-2}f'\\) hai, to power rule. Teesra hissa abhi baaqi hai.",
+              "\\(\\int \\frac{dx}{(x^2 + 1)^2}\\) ke liye \\(x = \\tan\\theta\\) rakhein\n\\[dx = \\sec^2\\theta\\,d\\theta\\]\n\\[\\int \\dfrac{\\sec^2\\theta\\,d\\theta}{(\\tan^2\\theta + 1)^2} = \\int \\dfrac{\\sec^2\\theta\\,d\\theta}{(\\sec^2\\theta)^2}\\]\n\\[= \\int \\dfrac{d\\theta}{\\sec^2\\theta} = \\int \\cos^2\\theta\\,d\\theta\\]\nKyun: \\(x^2 + 1\\) dekh kar \\(\\tan\\theta\\) yaad aata hai, kyunke \\(1 + \\tan^2\\theta = \\sec^2\\theta\\). Is se denominator ek seedhi power ban gaya aur sab kuch \\(\\cos^2\\theta\\) mein simat gaya.",
+              "\\(\\cos^2\\theta\\) ka integral\n\\[= \\int \\dfrac{1 + \\cos 2\\theta}{2}\\,d\\theta = \\dfrac{1}{2}\\left[\\theta + \\dfrac{\\sin 2\\theta}{2}\\right]\\]\n\\[= \\dfrac{1}{2}\\left[\\theta + \\sin\\theta\\cos\\theta\\right]\\]\nKyun: \\(\\cos^2\\theta\\) ka seedha formula nahi, is liye double angle identity \\(\\cos^2\\theta = \\frac{1 + \\cos 2\\theta}{2}\\) se power hata di. Phir \\(\\sin 2\\theta = 2\\sin\\theta\\cos\\theta\\).",
+              "Wapas \\(x\\) mein\n\\[\\sin\\theta\\cos\\theta = \\dfrac{\\sin\\theta\\cos^2\\theta}{\\cos\\theta} = \\dfrac{\\tan\\theta}{\\sec^2\\theta}\\]\n\\[= \\dfrac{\\tan\\theta}{1 + \\tan^2\\theta} = \\dfrac{x}{1 + x^2}\\]\n\\[\\int \\dfrac{dx}{(x^2 + 1)^2} = \\dfrac{1}{2}\\left[\\tan^{-1} x + \\dfrac{x}{1 + x^2}\\right]\\]\nKyun: Jawab \\(x\\) mein chahiye aur humein sirf \\(\\tan\\theta = x\\) maloom hai. Is liye \\(\\cos\\theta\\) se multiply aur divide kar ke \\(\\frac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta\\) aur \\(\\cos^2\\theta = \\frac{1}{\\sec^2\\theta}\\) banaya. \\(\\theta = \\tan^{-1} x\\).",
+              "Yeh (1) mein rakhein\n\\[\\dfrac{1}{2}\\ln(x^2 + 1) - \\dfrac{1}{2}\\cdot\\dfrac{1}{x^2 + 1}\\]\n\\[+ \\dfrac{1}{2}\\tan^{-1} x + \\dfrac{1}{2}\\cdot\\dfrac{x}{1 + x^2} + c\\]\n\\[= \\dfrac{1}{2}\\ln(x^2 + 1) + \\dfrac{1}{2}\\tan^{-1} x + \\dfrac{x - 1}{2(x^2 + 1)} + c\\]\nKyun: Dono chhote fractions ka denominator \\(2(x^2 + 1)\\) same hai, is liye numerators jor diye: \\(x - 1\\).",
+              "Tasdeeq (jawab ko differentiate karein)\n\\[\\dfrac{x}{x^2 + 1} + \\dfrac{1}{2(x^2 + 1)} + \\dfrac{(x^2 + 1) - 2x(x - 1)}{2(x^2 + 1)^2}\\]\n\\[= \\dfrac{2x^3 + 2x + x^2 + 1 - x^2 + 2x + 1}{2(x^2 + 1)^2}\\]\n\\[= \\dfrac{x^3 + 2x + 1}{(x^2 + 1)^2} \\;\\checkmark\\]\nKyun: \\(\\ln\\) ka derivative, \\(\\tan^{-1}\\) ka derivative, aur quotient rule se aakhri fraction ka derivative liya, phir common denominator \\(2(x^2 + 1)^2\\) par jora. Asal integrand wapas mil gaya."
+            ],
+            "answer": "\\(\\frac{1}{2}\\ln(x^2 + 1) + \\frac{1}{2}\\tan^{-1} x + \\frac{x - 1}{2(x^2 + 1)} + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Example 43 mein kitab ne \\(\\frac{\\sin\\theta\\cos^2\\theta}{\\cos}\\) chhapa hai, jis ke denominator mein angle \\(\\theta\\) ghayab hai. Sahi \\(\\frac{\\sin\\theta\\cos^2\\theta}{\\cos\\theta}\\) hai: \\(\\sin\\theta\\cos\\theta\\) ko \\(\\cos\\theta\\) se multiply aur divide kiya gaya hai. Akela \"\\(\\cos\\)\" koi matlab nahi rakhta; function ke saath angle likhna zaroori hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 43 mein jo integral nikla, \\(\\int \\frac{dx}{(x^2 + 1)^2} = \\frac{1}{2}\\tan^{-1} x + \\frac{x}{2(x^2 + 1)} + c\\), woh har Case-IV sawal mein dobara aata hai (Exercise 3.4 ke Q13 aur Q15 mein bhi). Agar \\(x^2 + 1\\) ki jagah \\(x^2 + a^2\\) ho, to wohi idea \\(x = a\\tan\\theta\\) se chalta hai. Is result ko derive karna seekh lein, ratta lagane ki zaroorat nahi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(\\int \\frac{x^2}{x^2 - 1}\\,dx\\) mein pehla qadam kya hoga? Upar aur neeche dono ki degree 2 hai, yani fraction improper hai. Pehle divide: \\(\\frac{x^2}{x^2 - 1} = 1 + \\frac{1}{x^2 - 1}\\). Phir \\(\\frac{1}{x^2 - 1}\\) ko Case-I se toriye. Jawab: \\(x + \\frac{1}{2}\\ln\\left|\\frac{x - 1}{x + 1}\\right| + c\\). Agar aap division bhool kar seedha \\(\\frac{A}{x - 1} + \\frac{B}{x + 1}\\) likhte, to equation kabhi poori na hoti."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Partial fractions sirf proper fraction ke hote hain; agar \\(\\deg P \\ge \\deg Q\\) ho to pehle divide karein.\n2. \\(Q(x)\\) ko poora factorise karein: linear factors aur irreducible quadratics (\\(b^2 - 4ac < 0\\)).\n3. Akela linear factor: \\(\\frac{A}{x - a}\\). Repeated \\((x - a)^k\\): power 1 se \\(k\\) tak \\(k\\) fractions.\n4. Irreducible quadratic factor: linear numerator \\(\\frac{Ax + B}{x^2 + bx + c}\\); repeated quadratic ki har power ke liye aisa ek fraction.\n5. Constants: pehle roots rakhein, phir coefficients compare karein; aakhir mein fractions wapas jor kar tasdeeq karein.\n6. Linear wale hisse \\(\\ln\\) dete hain, squared wale power rule se, aur quadratic wale \\(\\ln\\) aur \\(\\tan^{-1}\\) dete hain."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Improper fraction ko bina divide kiye torna (jaise \\(\\frac{x^3 + 2x^2 - x - 1}{x^2 - 1}\\)). Pehle degree check karein.\n2. Repeated factor ke liye sirf \\(\\frac{C}{(x - 3)^2}\\) likhna aur \\(\\frac{B}{x - 3}\\) bhool jana.\n3. Quadratic factor ke upar sirf constant \\(\\frac{B}{x^2 + 1}\\) likhna; sahi \\(\\frac{Bx + C}{x^2 + 1}\\) hai.\n4. \\(\\frac{1}{a}\\) bhool jana: \\(\\int \\frac{dx}{4 - 3x} = -\\frac{1}{3}\\ln|4 - 3x|\\), sirf \\(\\ln|4 - 3x|\\) nahi.\n5. \\(\\frac{1}{(x - 3)^2}\\) ka integral \\(\\ln\\) likh dena; sahi \\(-\\frac{1}{x - 3}\\) hai.\n6. Division ke baad quotient ka integral (jaise \\(x + 2\\) ka) jawab mein shamil karna bhool jana."
+          }
+        ]
+      }
+    }
+  ]
+}

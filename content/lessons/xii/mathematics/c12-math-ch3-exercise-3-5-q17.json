@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q17",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q17",
+      "title": "Question 17",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 105,
+          "pdf_to": 105,
+          "note": "Exercise 3.5, Question 17 (i), (ii): derivatives of integrals (First FTC with chain rule); book p. 103. Key on p. 300 under 'Exercise 3.2'."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "17(i)",
+            "prompt": "17 (i) Find the indicated derivative: \\(\\frac{d}{dt}\\int_{\\pi}^{t} \\frac{\\sin y}{1 + \\sqrt{y}}\\,dy\\)",
+            "explanation": "The derivative of an integral whose upper limit is the variable \\(t\\) and whose lower limit is a constant.\nThis is exactly the First Fundamental Theorem (Theorem 3.2): the answer is the integrand with \\(y\\) replaced by \\(t\\).\nNo integration is needed (and \\(\\frac{\\sin y}{1 + \\sqrt{y}}\\) has no elementary antiderivative anyway).",
+            "steps": [
+              "Given: \\(F(t) = \\int_{\\pi}^{t} \\frac{\\sin y}{1 + \\sqrt{y}}\\,dy\\).\nTo find: \\(F'(t)\\).\nMethod: Theorem 3.2: if \\(f\\) is continuous and \\(F(x) = \\int_a^x f(t)\\,dt\\), then \\(F'(x) = f(x)\\).",
+              "Check the conditions\n\\[f(y) = \\dfrac{\\sin y}{1 + \\sqrt{y}}\\ \\text{is continuous for } y \\geq 0\\]\nWhy: \\(1 + \\sqrt{y} \\geq 1\\) is never 0, and \\(\\pi > 0\\), so the theorem applies for \\(t > 0\\).",
+              "Apply the First FTC\n\\[\\dfrac{d}{dt}\\int_{\\pi}^{t} \\dfrac{\\sin y}{1 + \\sqrt{y}}\\,dy = \\dfrac{\\sin t}{1 + \\sqrt{t}}\\]\nWhy: the derivative with respect to the upper limit is the integrand at that limit; the constant lower limit \\(\\pi\\) contributes nothing.",
+              "Check\n\\[\\int_{\\pi}^{t} f(y)\\,dy = G(t) - G(\\pi),\\quad G' = f\\]\n\\[\\dfrac{d}{dt}\\big(G(t) - G(\\pi)\\big) = f(t)\\]\nWhy: \\(G(\\pi)\\) is a constant, so its derivative is 0. The key prints \\(\\frac{\\sin t}{1 + \\sqrt{t}}\\)."
+            ],
+            "final_answer": "\\(\\frac{\\sin t}{1 + \\sqrt{t}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "17(ii)",
+            "prompt": "17 (ii) Find the indicated derivative: \\(\\frac{d}{dx}\\int_{ax}^{bx} \\frac{1}{1 + t^2}\\,dt\\)",
+            "explanation": "Now both limits depend on \\(x\\): \\(ax\\) and \\(bx\\).\nSplit at 0 (Property III) into two integrals with a variable upper limit; then use the First FTC together with the chain rule.\nEach limit contributes 'integrand at the limit times derivative of the limit'.",
+            "steps": [
+              "Given: \\(H(x) = \\int_{ax}^{bx} \\frac{1}{1 + t^2}\\,dt\\).\nTo find: \\(H'(x)\\).\nMethod: Property III and II to write \\(H(x) = \\int_0^{bx} f - \\int_0^{ax} f\\); then Theorem 3.2 with the chain rule: \\(\\frac{d}{dx}\\int_0^{u(x)} f(t)\\,dt = f(u(x))\\,u'(x)\\).",
+              "Split at 0\n\\[H(x) = \\int_{0}^{bx} \\dfrac{dt}{1 + t^2} - \\int_{0}^{ax} \\dfrac{dt}{1 + t^2}\\]\nWhy: \\(\\int_{ax}^{bx} = \\int_{ax}^{0} + \\int_{0}^{bx}\\) and \\(\\int_{ax}^{0} = -\\int_{0}^{ax}\\).",
+              "Differentiate each part\n\\[\\dfrac{d}{dx}\\int_{0}^{bx} \\dfrac{dt}{1 + t^2} = \\dfrac{1}{1 + (bx)^2} \\cdot b\\]\n\\[\\dfrac{d}{dx}\\int_{0}^{ax} \\dfrac{dt}{1 + t^2} = \\dfrac{1}{1 + (ax)^2} \\cdot a\\]\nWhy: First FTC gives the integrand at the upper limit; the chain rule multiplies by \\(\\frac{d}{dx}(bx) = b\\) and \\(\\frac{d}{dx}(ax) = a\\).",
+              "Subtract\n\\[H'(x) = \\dfrac{b}{1 + b^2x^2} - \\dfrac{a}{1 + a^2x^2}\\]\nWhy: derivative of a difference.",
+              "Check by integrating first\n\\[H(x) = \\tan^{-1}(bx) - \\tan^{-1}(ax)\\]\n\\[H'(x) = \\dfrac{b}{1 + b^2x^2} - \\dfrac{a}{1 + a^2x^2} \\;\\checkmark\\]\nWhy: \\(\\int \\frac{dt}{1 + t^2} = \\tan^{-1} t\\), then the chain rule. The key prints the same."
+            ],
+            "final_answer": "\\(\\frac{b}{1 + b^2x^2} - \\frac{a}{1 + a^2x^2}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.8.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.8.1",
+      "title": "3.8.1 Moment of Inertia",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 117,
+          "pdf_to": 119,
+          "note": "Book p. 115-117: 3.8.1 Moment of Inertia: definition, Figure 17, radius of gyration, Example 66 (rod, Figure 20) and Example 67 (rectangular lamina, Figure 22)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Definition: The moment of inertia of a single particle of mass \\(m\\) about an axis \\(AB\\) is defined to be \\(mr^{2}\\), where \\(r\\) is its distance from the particle to the axis \\(AB\\). For a system of particles \\(m_1, m_2, \\dots, m_n\\) placed at distances \\(r_1, r_2, \\dots, r_n\\) respectively from a given axis, the moment of inertia of the system is defined as",
+            "bold": [
+              "Definition:"
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch3-fig-3-8-1-figure-17-particle-axis",
+            "alt": "A horizontal axis A B. Above it a particle of mass m is shown as a dot; a dotted perpendicular of length r joins the particle to the axis, with a right-angle mark at the foot.",
+            "caption": "Figure 17: a particle of mass m at distance r from the axis AB (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "equation",
+            "latex": "m_1r_1^{2} + m_2r_2^{2} + \\cdots + m_nr_n^{2} = \\sum_{i=1}^{n} m_ir_i^{2}",
+            "text_alt": "m 1 r 1 squared plus m 2 r 2 squared plus and so on up to m n r n squared equals the sum from i equals 1 to n of m i r i squared"
+          },
+          {
+            "type": "paragraph",
+            "text": "The moment of inertia of a rigid body having continuous matter is:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\lim_{\\delta m\\to 0}\\sum r^{2}\\cdot\\delta m = \\int r^{2}\\,dm",
+            "text_alt": "the limit as delta m tends to 0 of the sum of r squared times delta m equals the integral of r squared d m"
+          },
+          {
+            "type": "paragraph",
+            "text": "the integral being taken all over the body."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What does moment of inertia measure? Mass tells us how hard it is to start a body moving in a straight line; moment of inertia tells us how hard it is to start it turning about an axis. It depends on the mass and on how far that mass is from the axis.\nWhy \\(r^{2}\\)? A particle far from the axis moves faster when the body turns, so it counts much more: doubling \\(r\\) makes \\(mr^{2}\\) four times larger.\nWhy an integral? A rod or a plate is not a few particles but continuous matter. We cut it into tiny pieces \\(\\delta m\\), add \\(r^{2}\\,\\delta m\\), and let the pieces shrink: the sum becomes \\(\\int r^{2}\\,dm\\), exactly as Riemann sums became definite integrals."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "If the moment of inertia of a body of mass \\(M\\) about any axis be \\(MR^{2}\\), then \\(R\\) is called the radius of gyration of the body about that axis.",
+              "The above definitions and the following two theorems enable us to determine the moment of inertia of many other bodies."
+            ],
+            "book_errors": [
+              "the following two theorems"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Point 2 speaks of \"the following two theorems\", but no theorems are printed after it: the book goes straight on to Example 66. (In mechanics books these are usually the theorems of parallel axes and perpendicular axes.) Nothing in the examples or in Exercise 3.7 needs them; everything below is done directly from \\(I = \\int r^{2}\\,dm\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Radius of gyration in simple words: \\(R\\) is the distance at which the whole mass \\(M\\), if it were squeezed into one particle, would have the same moment of inertia. From \\(I = MR^{2}\\) we get \\(R = \\sqrt{I/M}\\).\nThe strip method used in both examples:\n1. Choose small elements so that every point of one element is at (almost) the same distance from the axis.\n2. Find the mass of the element: \\(\\delta m\\) = (mass per unit length or area) \\(\\times\\) (its length or area).\n3. Its moment of inertia is (distance)\\(^2 \\times \\delta m\\), or a result you already know for that shape.\n4. Integrate between limits that cover the whole body."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch3-fig-3-8-1-figure-20-rod",
+            "alt": "A uniform rod A B drawn as a long thin rectangle with the line A Y perpendicular to it through A. A small element P Q of width delta x is shaded at distance x from A Y.",
+            "caption": "Figure 20: uniform rod AB with an element PQ of width δx at distance x from AY (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "example",
+            "title": "Example 66",
+            "problem": "A uniform Rod of Length \\(2a\\): Find the moment of inertia of a uniform rod of length \\(2a\\) and mass \\(M\\) about a line through one end and perpendicular to the rod.",
+            "steps": [
+              "Given: a uniform rod \\(AB\\) of length \\(2a\\) and mass \\(M\\); the axis \\(AY\\) passes through the end \\(A\\) and is perpendicular to the rod (Figure 20).\nTo find: the moment of inertia \\(I\\) of the rod about \\(AY\\).\nMethod: the rod is continuous matter, so we cannot use \\(\\sum m_i r_i^{2}\\) directly. We cut it into tiny elements, write \\(x^{2}\\,\\delta m\\) for one element and add all of them with an integral from \\(x = 0\\) to \\(x = 2a\\).",
+              "Step 1: Mass per unit length\n\\[\\text{mass per unit length} = \\dfrac{M}{2a}\\]\nWhy: the rod is uniform, so its mass \\(M\\) is spread evenly over its length \\(2a\\).",
+              "Step 2: Mass of a small element\nTake an element \\(PQ\\) of length \\(\\delta x\\) at a distance \\(x\\) from the line \\(AY\\).\n\\[\\delta m = \\dfrac{M}{2a}\\times \\delta x\\]\nWhy: mass of a piece = (mass per unit length) \\(\\times\\) (its length).",
+              "Step 3: Moment of inertia of the element\n\\[\\delta I = x^{2}\\,\\delta m\\]\n\\[= x^{2}\\cdot \\dfrac{M}{2a}\\cdot \\delta x\\]\nWhy: the element is so short that all its points are (almost) at the same distance \\(x\\) from \\(AY\\), so it behaves like a particle: \\(mr^{2}\\) with \\(r = x\\).",
+              "Step 4: Add all the elements\n\\[I = \\int_{0}^{2a} x^{2}\\,\\dfrac{M}{2a}\\,dx\\]\n\\[= \\dfrac{M}{2a}\\int_{0}^{2a} x^{2}\\,dx\\]\n\\[= \\dfrac{M}{2a}\\left[\\dfrac{x^{3}}{3}\\right]_{0}^{2a}\\]\nWhy: the elements run from the end \\(A\\) (\\(x = 0\\)) to the end \\(B\\) (\\(x = 2a\\)); in the limit \\(\\delta x \\to 0\\) the sum becomes this integral. \\(\\frac{M}{2a}\\) is a constant, so it comes outside.",
+              "Step 5: Put in the limits\n\\[= \\dfrac{M}{2a}\\left(\\dfrac{(2a)^{3}}{3} - \\dfrac{(0)^{3}}{3}\\right)\\]\n\\[= \\dfrac{M}{2a}\\left(\\dfrac{8a^{3}}{3}\\right)\\]\n\\[= \\dfrac{4}{3}Ma^{2}\\]\nWhy: \\((2a)^{3} = 8a^{3}\\), and \\(\\frac{8a^{3}}{2a} = 4a^{2}\\).",
+              "Check:\nThe unit is (mass)\\(\\times\\)(length)\\(^2\\), as a moment of inertia must be. Writing \\(L = 2a\\) for the length, \\(\\frac{4}{3}Ma^{2} = \\frac{1}{3}ML^{2}\\), the standard result for a rod about one end."
+            ],
+            "answer": "\\(I = \\dfrac{4}{3}Ma^{2}\\) about the line through one end perpendicular to the rod."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch3-fig-3-8-1-figure-22-lamina",
+            "alt": "Rectangle A B C D with centre O. Axis O X runs parallel to A B and O Y parallel to B C. A thin strip P Q of breadth delta x, parallel to O Y, is shaded at distance x from O.",
+            "caption": "Figure 22: rectangular lamina ABCD, centre O, with a strip PQ of breadth δx at distance x from O (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "example",
+            "title": "Example 67",
+            "problem": "A Uniform Rectangular Lamina: Find the moment of inertia of a uniform rectangular lamina about a line through the centre and parallel to a side.",
+            "steps": [
+              "Given: a uniform rectangular lamina \\(ABCD\\) with \\(AB = 2a\\), \\(BC = 2b\\), mass \\(M\\) and centre \\(O\\); the axis \\(OX\\) passes through \\(O\\) parallel to \\(AB\\) (Figure 22).\nTo find: the moment of inertia about \\(OX\\).\nMethod: cut the lamina into thin strips perpendicular to \\(OX\\). Each strip is a thin rod whose middle lies on \\(OX\\), so we know its moment of inertia; then we add the strips from \\(x = -a\\) to \\(x = a\\).",
+              "Step 1: Density (mass per unit area)\n\\[\\dfrac{\\text{Mass}}{\\text{Area}} = \\dfrac{M}{(2a)(2b)} = \\dfrac{M}{4ab}\\]\nWhy: the lamina is uniform, so mass is spread evenly over its area \\(2a \\times 2b\\).",
+              "Step 2: Mass of a strip\nTake a strip \\(PQ\\) of breadth \\(\\delta x\\), perpendicular to \\(OX\\), at a distance \\(x\\) from \\(O\\). Its length is \\(2b\\).\n\\[\\delta m = \\text{density}\\times\\text{area}\\]\n\\[= \\dfrac{M}{4ab}(2b\\cdot\\delta x) = \\dfrac{M}{2a}\\,\\delta x\\]\nWhy: the area of the strip is length \\(\\times\\) breadth \\(= 2b\\,\\delta x\\).",
+              "Step 3: Moment of inertia of the strip about \\(OX\\)\n\\[\\delta m\\cdot\\dfrac{b^{2}}{3} = \\dfrac{M}{2a}\\,\\delta x\\cdot\\dfrac{b^{2}}{3}\\]\nWhy: the strip is a thin rod of length \\(2b\\) and mass \\(\\delta m\\), and \\(OX\\) cuts it at its middle at right angles. The book says \"by previous example\": each half of the strip is a rod of length \\(b\\) and mass \\(\\frac{\\delta m}{2}\\) turning about its end, so by Example 66 (with \\(2a\\) replaced by \\(b\\)) each half gives \\(\\frac{1}{3}\\cdot\\frac{\\delta m}{2}\\cdot b^{2}\\). The two halves give \\(\\frac{\\delta m\\,b^{2}}{3}\\).",
+              "Step 4: Add all the strips\n\\[I = \\int_{-a}^{a}\\dfrac{M}{2a}\\cdot\\dfrac{b^{2}}{3}\\,dx\\]\n\\[= \\dfrac{Mb^{2}}{6a}\\int_{-a}^{a}1\\,dx\\]\n\\[= \\dfrac{Mb^{2}}{6a}\\,[x]_{-a}^{a}\\]\nWhy: the strips cover the lamina from the left edge \\(x = -a\\) to the right edge \\(x = a\\). Here every strip has the same moment of inertia, so the integrand is a constant.",
+              "Step 5: Put in the limits\n\\[= \\dfrac{Mb^{2}}{6a}\\big(a - (-a)\\big)\\]\n\\[= \\dfrac{Mb^{2}}{6a}(2a) = \\dfrac{1}{3}Mb^{2}\\]\nWhy: \\(a - (-a) = 2a\\), and the \\(a\\) cancels.",
+              "Check:\nThe answer does not contain \\(a\\): stretching the lamina along \\(OX\\) does not move any mass farther from \\(OX\\), so it should not change. A direct double sum gives the same: \\(\\int_{-a}^{a}\\int_{-b}^{b}\\frac{M}{4ab}y^{2}\\,dy\\,dx = \\frac{1}{3}Mb^{2}\\)."
+            ],
+            "answer": "The moment of inertia of the rectangular lamina about a line through the centre and parallel to the side of length \\(2a\\) is \\(\\dfrac{1}{3}Mb^{2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the book's Figure 22 a second letter \\(B\\) is printed on the side \\(BC\\), where the axis \\(OX\\) meets it; \\(B\\) is only the corner of the rectangle, so that extra label is a misprint and our drawing leaves it out. The book's figure captions in 3.8 are also numbered 17, 20, 22, 23 (no 18, 19, 21, and without the unit number 3)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Particle: \\(I = mr^{2}\\); system: \\(I = \\sum m_ir_i^{2}\\); continuous body: \\(I = \\int r^{2}\\,dm\\).\n2. Radius of gyration: \\(I = MR^{2}\\), so \\(R = \\sqrt{I/M}\\).\n3. Rod of length \\(2a\\) about one end: \\(I = \\frac{4}{3}Ma^{2}\\). Rod of length \\(2b\\) about its middle: \\(I = \\frac{1}{3}Mb^{2}\\).\n4. Lamina \\(2a \\times 2b\\) about the line through the centre parallel to the side \\(2a\\): \\(I = \\frac{1}{3}Mb^{2}\\).\n5. Units: kg m\\(^2\\) (mass \\(\\times\\) length\\(^2\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Using \\(r\\) instead of \\(r^{2}\\), or measuring \\(r\\) from the wrong line: \\(r\\) is the perpendicular distance from the axis of rotation.\n2. Writing \\(\\delta m = \\delta x\\): the mass of an element is density \\(\\times\\) length (or area), e.g. \\(\\frac{M}{2a}\\,\\delta x\\).\n3. Taking the limits \\(0\\) to \\(a\\) for a rod of length \\(2a\\): the limits must cover the whole body."
+          }
+        ]
+      }
+    }
+  ]
+}

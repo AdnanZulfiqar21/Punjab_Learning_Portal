@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q9",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 9: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9 Evaluate \\(\\int \\frac{25(x + 2)}{(x - 2)(x + 3)^2}\\,dx\\).",
+            "explanation": "A proper fraction with one non-repeated factor \\(x - 2\\) and a repeated factor \\((x + 3)^2\\): Case-II.\nThree constants: \\(\\frac{A}{x - 2} + \\frac{B}{x + 3} + \\frac{C}{(x + 3)^2}\\).\nPlan: roots give \\(A\\) and \\(C\\); the \\(x^2\\) coefficient gives \\(B\\); integrate.",
+            "steps": [
+              "Given: \\(\\int \\frac{25(x + 2)}{(x - 2)(x + 3)^2}\\,dx\\).\nTo find: the integral.\nMethod: partial fractions, Case-II (a repeated linear factor). Proper: degree 1 < degree 3.",
+              "Write the partial fractions\n\\[\\dfrac{25(x + 2)}{(x - 2)(x + 3)^2} = \\dfrac{A}{x - 2} + \\dfrac{B}{x + 3} + \\dfrac{C}{(x + 3)^2}\\]\n\\[25(x + 2) = A(x + 3)^2\\]\n\\[+\\, B(x - 2)(x + 3) + C(x - 2) \\quad (1)\\]\nWhy: The repeated factor \\((x + 3)^2\\) needs both powers 1 and 2.",
+              "Put \\(x = 2\\) and \\(x = -3\\) in (1)\n\\[x = 2:\\ 100 = 25A,\\ A = 4\\]\n\\[x = -3:\\ -25 = -5C,\\ C = 5\\]\nWhy: Each root removes the terms containing its factor.",
+              "Compare the coefficients of \\(x^2\\) in (1)\n\\[0 = A + B\\]\n\\[B = -4\\]\nWhy: The left side \\(25x + 50\\) has no \\(x^2\\) term.",
+              "Integrate\n\\[\\int \\left(\\dfrac{4}{x - 2} - \\dfrac{4}{x + 3} + 5(x + 3)^{-2}\\right)dx\\]\n\\[= 4\\ln|x - 2| - 4\\ln|x + 3| - \\dfrac{5}{x + 3} + c\\]\n\\[= 4\\ln\\left|\\dfrac{x - 2}{x + 3}\\right| - \\dfrac{5}{x + 3} + c\\]\nWhy: \\(\\int (x + 3)^{-2}\\,dx = -(x + 3)^{-1}\\); then combine the logarithms.",
+              "Check (constant term of (1))\n\\[9A - 6B - 2C = 36 + 24 - 10 = 50 \\;\\checkmark\\]\nWhy: The constant term on the left is \\(25 \\times 2 = 50\\)."
+            ],
+            "final_answer": "\\(4\\ln\\left|\\frac{x - 2}{x + 3}\\right| - \\frac{5}{x + 3} + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the answers at the end of the book (page 302), the answers of Exercise 3.4 are printed under the wrong heading \"Exercise 3.6\". The answer of this question is item (ix) of that block: \\(4\\ln\\left|\\frac{x - 2}{x + 3}\\right| - \\frac{5}{x + 3} + c\\). That answer is correct. The block headed \"Exercise 3.4\" (page 301) belongs to a different exercise."
+          }
+        ]
+      }
+    }
+  ]
+}

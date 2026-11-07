@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q6",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 104,
+          "note": "Exercise 3.5, Question 6 (i)-(iii): substitution and an odd integrand; book p. 102. Key on p. 300 under 'Exercise 3.2'."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(i)",
+            "prompt": "6 (i) Evaluate the following definite integral: \\(\\int_{0}^{4} x\\sqrt{4 - x}\\,dx\\)",
+            "explanation": "A product with a root of \\(4 - x\\).\nPut \\(t = 4 - x\\): the root becomes \\(\\sqrt{t}\\) and \\(x = 4 - t\\), so the integrand becomes powers of \\(t\\).\nChange the limits and integrate.",
+            "steps": [
+              "Given: \\(\\int_{0}^{4} x\\sqrt{4 - x}\\,dx\\).\nTo find: its value.\nMethod: substitution \\(t = 4 - x\\) in a definite integral (the same effect as Property IV).",
+              "Substitute and change the limits\n\\[t = 4 - x,\\quad x = 4 - t,\\quad dx = -dt\\]\n\\[x = 0 \\Rightarrow t = 4,\\quad x = 4 \\Rightarrow t = 0\\]\n\\[\\int_{4}^{0} (4 - t)\\sqrt{t}\\,(-dt)\\]\n\\[= \\int_{0}^{4} (4t^{1/2} - t^{3/2})\\,dt\\]\nWhy: the minus from \\(dx = -dt\\) is used to turn the limits round (Property II).",
+              "Integrate\n\\[= \\left[\\dfrac{8}{3}t^{3/2} - \\dfrac{2}{5}t^{5/2}\\right]_{0}^{4}\\]\nWhy: \\(\\int t^{1/2}dt = \\frac{2}{3}t^{3/2}\\) and \\(\\int t^{3/2}dt = \\frac{2}{5}t^{5/2}\\).",
+              "Put in the limits\n\\[= \\dfrac{8}{3}(8) - \\dfrac{2}{5}(32)\\]\n\\[= \\dfrac{64}{3} - \\dfrac{64}{5} = \\dfrac{128}{15}\\]\nWhy: \\(4^{3/2} = (\\sqrt{4})^3 = 8\\), \\(4^{5/2} = 2^5 = 32\\); \\(64\\left(\\frac{1}{3} - \\frac{1}{5}\\right) = \\frac{128}{15}\\).",
+              "Check\n\\[\\dfrac{128}{15} \\approx 8.53\\]\nWhy: the integrand is 0 at both ends and largest at \\(x = \\frac{8}{3}\\) (value about 3.08), so the area is below \\(4 \\times 3.08 \\approx 12.3\\) and well above 0. The key prints \\(\\frac{128}{15}\\)."
+            ],
+            "final_answer": "\\(\\frac{128}{15}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(ii)",
+            "prompt": "6 (ii) Evaluate the following definite integral: \\(\\int_{0}^{1} \\frac{x^2}{\\sqrt{1 - x}}\\,dx\\)",
+            "explanation": "\\(\\sqrt{1 - x}\\) in the denominator (the integrand grows without bound near \\(x = 1\\), but the area is finite).\nPut \\(t = 1 - x\\); then \\(x^2 = (1 - t)^2\\) and the integrand becomes powers \\(t^{-1/2}, t^{1/2}, t^{3/2}\\).\nChange the limits and integrate.",
+            "steps": [
+              "Given: \\(\\int_{0}^{1} \\frac{x^2}{\\sqrt{1 - x}}\\,dx\\).\nTo find: its value.\nMethod: substitution \\(t = 1 - x\\), expand \\((1 - t)^2\\), divide each term by \\(t^{1/2}\\), power rule.",
+              "Substitute and change the limits\n\\[t = 1 - x,\\quad x = 1 - t,\\quad dx = -dt\\]\n\\[x = 0 \\Rightarrow t = 1,\\quad x = 1 \\Rightarrow t = 0\\]\n\\[\\int_{1}^{0} \\dfrac{(1 - t)^2}{\\sqrt{t}}(-dt) = \\int_{0}^{1} \\dfrac{(1 - t)^2}{\\sqrt{t}}\\,dt\\]\nWhy: the minus sign turns the limits round.",
+              "Expand and divide\n\\[\\dfrac{1 - 2t + t^2}{t^{1/2}} = t^{-1/2} - 2t^{1/2} + t^{3/2}\\]\nWhy: divide each term by \\(t^{1/2}\\) (subtract \\(\\frac{1}{2}\\) from each power).",
+              "Integrate\n\\[\\left[2t^{1/2} - \\dfrac{4}{3}t^{3/2} + \\dfrac{2}{5}t^{5/2}\\right]_{0}^{1}\\]\n\\[= 2 - \\dfrac{4}{3} + \\dfrac{2}{5} = \\dfrac{30 - 20 + 6}{15} = \\dfrac{16}{15}\\]\nWhy: power rule; all terms are 0 at \\(t = 0\\). The term \\(2t^{1/2}\\) stays finite, which is why the area is finite.",
+              "Check\n\\[\\dfrac{d}{dt}\\left(2t^{1/2} - \\dfrac{4}{3}t^{3/2} + \\dfrac{2}{5}t^{5/2}\\right)\\]\n\\[= t^{-1/2} - 2t^{1/2} + t^{3/2} \\;\\checkmark\\]\nWhy: the antiderivative differentiates back to the integrand. The key prints \\(\\frac{16}{15}\\)."
+            ],
+            "final_answer": "\\(\\frac{16}{15}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(iii)",
+            "prompt": "6 (iii) Evaluate the following definite integral: \\(\\int_{-1}^{1} \\frac{e^x - 1}{e^x + 1}\\,dx\\)",
+            "explanation": "The interval \\([-1, 1]\\) is symmetric about 0, so first test whether the integrand is even or odd.\nIf it is odd, Property V gives 0 at once.\nFind \\(f(-x)\\) and simplify by multiplying top and bottom by \\(e^x\\).",
+            "steps": [
+              "Given: \\(\\int_{-1}^{1} \\frac{e^x - 1}{e^x + 1}\\,dx\\).\nTo find: its value.\nMethod: Property V: if \\(f(-x) = -f(x)\\), then \\(\\int_{-a}^{a} f(x)\\,dx = 0\\).",
+              "Find \\(f(-x)\\)\n\\[f(-x) = \\dfrac{e^{-x} - 1}{e^{-x} + 1}\\]\n\\[= \\dfrac{1 - e^{x}}{1 + e^{x}}\\]\nWhy: multiply top and bottom by \\(e^{x}\\); \\(e^{-x}e^{x} = 1\\).",
+              "Compare with \\(f(x)\\)\n\\[\\dfrac{1 - e^{x}}{1 + e^{x}} = -\\dfrac{e^{x} - 1}{e^{x} + 1} = -f(x)\\]\nWhy: \\(1 - e^x = -(e^x - 1)\\). So \\(f\\) is odd.",
+              "Apply Property V\n\\[\\int_{-1}^{1} \\dfrac{e^x - 1}{e^x + 1}\\,dx = 0\\]\nWhy: for an odd function on \\([-a, a]\\), the area below the axis on one side cancels the area above it on the other.",
+              "Check\n\\[\\dfrac{e^x - 1}{e^x + 1} = \\tanh\\dfrac{x}{2}\\]\nWhy: dividing top and bottom by \\(e^{x/2}\\) gives \\(\\frac{e^{x/2} - e^{-x/2}}{e^{x/2} + e^{-x/2}}\\), a known odd function. The key prints 0."
+            ],
+            "final_answer": "\\(0\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

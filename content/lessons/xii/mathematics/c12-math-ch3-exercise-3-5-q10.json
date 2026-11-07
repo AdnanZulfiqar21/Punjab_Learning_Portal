@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q10",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 104,
+          "note": "Exercise 3.5, Question 10: show-that with f(4 - x) = f(x); book p. 102. No printed answer (show that)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10 If \\(f(4 - x) = f(x)\\), show that \\(\\int_{0}^{2} f(2x)\\,dx = \\int_{0}^{2} f(x)\\,dx\\).",
+            "explanation": "A proof: the left side has \\(f(2x)\\), the right side \\(f(x)\\).\nSubstitute \\(u = 2x\\) to remove the 2; the interval becomes \\([0, 4]\\) with a factor \\(\\frac{1}{2}\\).\nThen the symmetry \\(f(4 - x) = f(x)\\) and Property VI turn \\(\\int_0^4 f\\) into \\(2\\int_0^2 f\\).",
+            "steps": [
+              "Given: \\(f(4 - x) = f(x)\\) for all \\(x\\).\nTo prove: \\(\\int_{0}^{2} f(2x)\\,dx = \\int_{0}^{2} f(x)\\,dx\\).\nMethod: substitution \\(u = 2x\\), then Property VI: \\(\\int_0^{a} f = 2\\int_0^{a/2} f\\) when \\(f(a - x) = f(x)\\), with \\(a = 4\\).",
+              "Substitute \\(u = 2x\\)\n\\[du = 2\\,dx,\\quad x = 0 \\Rightarrow u = 0,\\quad x = 2 \\Rightarrow u = 4\\]\n\\[\\int_{0}^{2} f(2x)\\,dx = \\dfrac{1}{2}\\int_{0}^{4} f(u)\\,du\\]\nWhy: \\(dx = \\frac{1}{2}du\\), and the limits move with the variable.",
+              "Use the symmetry (Property VI, \\(a = 4\\))\n\\[\\int_{0}^{4} f(u)\\,du = \\int_{0}^{2} \\big(f(u) + f(4 - u)\\big)\\,du\\]\n\\[= 2\\int_{0}^{2} f(u)\\,du\\]\nWhy: \\(f(4 - u) = f(u)\\) is given, so the two halves \\([0, 2]\\) and \\([2, 4]\\) give equal integrals.",
+              "Combine\n\\[\\int_{0}^{2} f(2x)\\,dx = \\dfrac{1}{2} \\cdot 2\\int_{0}^{2} f(u)\\,du\\]\n\\[= \\int_{0}^{2} f(x)\\,dx\\]\nWhy: the \\(\\frac{1}{2}\\) and the 2 cancel; the name of the variable does not matter (Property I).",
+              "Check with an example\n\\[f(x) = (x - 2)^2:\\ \\int_{0}^{2} (2x - 2)^2\\,dx = \\dfrac{8}{3}\\]\n\\[\\int_{0}^{2} (x - 2)^2\\,dx = \\dfrac{8}{3} \\;\\checkmark\\]\nWhy: \\((x - 2)^2\\) satisfies \\(f(4 - x) = (2 - x)^2 = f(x)\\), and both sides agree."
+            ],
+            "final_answer": "Hence proved: \\(\\int_{0}^{2} f(2x)\\,dx = \\int_{0}^{2} f(x)\\,dx\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

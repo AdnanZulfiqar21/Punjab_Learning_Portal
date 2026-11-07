@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q17-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q17",
+      "title": "Question 17 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 17: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-3-Q17",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "17",
+            "prompt": "17. Evaluate \\(\\int e^x\\left(\\dfrac{1 - x}{1 + x^2}\\right)^2 dx\\).",
+            "explanation": "\\(e^x\\) ke saath ek mushkil sa fraction hai. Aise sawalon mein hamesha dekhiye ke kahin \\(e^x[f(x) + f'(x)]\\) ki shakal to nahi; agar ho to jawab seedha \\(e^xf(x)\\).\nSquare kholte hain: \\((1 - x)^2 = 1 - 2x + x^2 = (1 + x^2) - 2x\\).\nIs se integrand do hisson mein toot jata hai: \\(\\frac{1}{1+x^2}\\) aur \\(\\frac{-2x}{(1+x^2)^2}\\), aur doosra pehle ka derivative hai!\nPlan: square kholein, \\(f\\) aur \\(f'\\) pehchanein, Note lagayein (ya parts se dikhayein ke integrals cancel hote hain).",
+            "steps": [
+              "Diya gaya: \\(\\int e^x\\left(\\frac{1 - x}{1 + x^2}\\right)^2 dx\\).\nMaloom karna: indefinite integral.\nTareeqa: integrand ko \\(e^x[f(x) + f'(x)]\\) banayenge, \\(f(x) = \\frac{1}{1+x^2}\\); phir Note (\\(g(x) = x\\)): \\(\\int e^x[f + f']\\,dx = e^xf + c\\).",
+              "Square kholein\n\\[\\dfrac{(1 - x)^2}{(1 + x^2)^2} = \\dfrac{(1 + x^2) - 2x}{(1 + x^2)^2}\\]\n\\[= \\dfrac{1}{1 + x^2} - \\dfrac{2x}{(1 + x^2)^2}\\]\nKyun: \\((1 - x)^2 = 1 - 2x + x^2\\), aur \\(1 + x^2\\) ko ikattha likha taa ke ek term cancel ho sake.",
+              "\\(f\\) aur \\(f'\\) pehchanein\n\\[f(x) = \\dfrac{1}{1 + x^2} \\Rightarrow f'(x) = \\dfrac{-2x}{(1 + x^2)^2}\\]\n\\[\\int e^x[f(x) + f'(x)]\\,dx\\]\nKyun: \\((1 + x^2)^{-1}\\) ka derivative chain rule se \\(-1\\cdot(1 + x^2)^{-2}\\cdot 2x\\). Yani doosra hissa bilkul pehle ka derivative hai.",
+              "Jawab \\(e^xf\\) kyun (parts se)\n\\[\\int e^xf\\,dx = f e^x - \\int e^x f'\\,dx\\]\n\\[\\int e^x(f + f')\\,dx = e^xf + c\\]\nKyun: \\(\\int e^xf\\,dx\\) par parts (\\(f\\) first, \\(e^x\\) second) se \\(-\\int e^xf'\\,dx\\) nikalta hai, jo doosre hisse ko cancel kar deta hai. Yahi kitab ka Note hai.",
+              "Jawab\n\\[= \\dfrac{e^x}{1 + x^2} + c\\]\nKyun: \\(e^xf(x)\\) mein \\(f = \\frac{1}{1+x^2}\\) rakh diya.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left(\\dfrac{e^x}{1 + x^2}\\right) = e^x\\left[\\dfrac{1}{1+x^2} - \\dfrac{2x}{(1+x^2)^2}\\right]\\]\n\\[= \\dfrac{e^x(1 - x)^2}{(1 + x^2)^2}\\]\nKyun: product rule lagaya, phir step 1 ulta: bracket \\(\\frac{(1 - x)^2}{(1+x^2)^2}\\) hai. Integrand mil gaya."
+            ],
+            "final_answer": "\\(\\dfrac{e^x}{1 + x^2} + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

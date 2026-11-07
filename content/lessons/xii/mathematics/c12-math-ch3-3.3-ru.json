@@ -1,0 +1,334 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.3-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.3",
+      "title": "3.3 Trigonometric Substitution (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 82,
+          "pdf_to": 85,
+          "note": "3.3 Trigonometric Substitution: Cases 1-3, special integrals (i)-(ii) with proofs, Challenge box, Examples 22-28 (book prints 23 twice, no 25; shown as 22-28)"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-3.3",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Pichle sabaq (3.2) mein humne substitution seekhi: andar wale function ko \\(u\\) bana kar integral ko aasaan karna. Aaj hum usi ka ek khaas roop seekhenge jise trigonometric substitution kehte hain.\nSawal yeh hai: jab integrand mein \\(\\sqrt{9-x^{2}}\\) ya \\(\\sqrt{x^{2}+4}\\) jaisa root ho, aur us ka derivative bahar maujood na ho, to kya karein? Root integration ka sab se bara dushman hai. Aaj ka tareeqa us root ko jad se khatam kar deta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab kehti hai: jin integrals mein radicals (roots) \\(\\sqrt{a^{2}-x^{2}}\\), \\(\\sqrt{a^{2}+x^{2}}\\) aur \\(\\sqrt{x^{2}-a^{2}}\\) (jahan \\(a > 0\\)) hon, unhein aksar ek trigonometric function wali substitution se hal kiya ja sakta hai. Trigonometric substitution ka maqsad integrand se radical ko khatam karna hai. Yeh kaam Pythagorean identities se hota hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\sin^{2}\\theta + \\cos^{2}\\theta = 1 \\quad\\text{and}\\quad \\sec^{2}\\theta - \\tan^{2}\\theta = 1",
+            "text_alt": "sine squared theta plus cosine squared theta equals 1, and secant squared theta minus tangent squared theta equals 1"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Trigonometry kyun madad karti hai? Root mushkil hai, lekin perfect square ka root aasaan hai: \\(\\sqrt{p^{2}} = |p|\\). Pythagorean identities \\(a^{2} - x^{2}\\), \\(a^{2} + x^{2}\\) ya \\(x^{2} - a^{2}\\) ko ek hi square bana deti hain, aur root ghayab ho jata hai.\nMisaal: \\(x = a\\sin\\theta\\) rakhein to \\(a^{2} - x^{2} = a^{2}(1 - \\sin^{2}\\theta) = a^{2}\\cos^{2}\\theta\\), aur \\(\\sqrt{a^{2}-x^{2}} = a\\cos\\theta\\). Dekha? Root chala gaya!\nDoosri identity ko \\(1 + \\tan^{2}\\theta = \\sec^{2}\\theta\\) bhi likh sakte hain; dono ek hi baat hain.\nEk misaal se samjhein: jaise taala kholne ke liye sahi chaabi chahiye, waise har root ki apni chaabi (substitution) hai. Ghalat chaabi lagayein to root khulega nahi."
+          },
+          {
+            "type": "paragraph",
+            "text": "Case 1: Jin integrals mein \\(\\sqrt{a^{2}-x^{2}}\\) (jahan \\(a > 0\\)) ho, unhein aksar substitution \\(x = a\\sin\\theta\\) se aasaan shakal mein laya ja sakta hai.",
+            "bold": [
+              "Case 1:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Case 2: Jin integrals mein \\(\\sqrt{a^{2}+x^{2}}\\) (jahan \\(a > 0\\)) ho, unhein aksar substitution \\(x = a\\tan\\theta\\) se aasaan kiya ja sakta hai.",
+            "bold": [
+              "Case 2:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Case 3: Aur aakhir mein, jin integrals mein \\(\\sqrt{x^{2}-a^{2}}\\) (jahan \\(a > 0\\)) ho, unhein aksar substitution \\(x = a\\sec\\theta\\) se aasaan kiya ja sakta hai.",
+            "bold": [
+              "Case 3:"
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Hamara khulasa: teen cases (kitab mein yeh table nahi hai)",
+            "header": [
+              "Radical",
+              "Substitute",
+              "Identity used",
+              "Radical becomes"
+            ],
+            "rows": [
+              [
+                "\\(\\sqrt{a^{2}-x^{2}}\\)",
+                "\\(x = a\\sin\\theta\\)",
+                "\\(1 - \\sin^{2}\\theta = \\cos^{2}\\theta\\)",
+                "\\(a\\cos\\theta\\)"
+              ],
+              [
+                "\\(\\sqrt{a^{2}+x^{2}}\\)",
+                "\\(x = a\\tan\\theta\\)",
+                "\\(1 + \\tan^{2}\\theta = \\sec^{2}\\theta\\)",
+                "\\(a\\sec\\theta\\)"
+              ],
+              [
+                "\\(\\sqrt{x^{2}-a^{2}}\\)",
+                "\\(x = a\\sec\\theta\\)",
+                "\\(\\sec^{2}\\theta - 1 = \\tan^{2}\\theta\\)",
+                "\\(a\\tan\\theta\\)"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kaise pehchanein ke kaunsa case hai? Root ke andar signs dekhiye:\nConstant minus variable \\((a^{2} - x^{2})\\): \\(\\sin\\). Constant plus variable \\((a^{2} + x^{2})\\): \\(\\tan\\). Variable minus constant \\((x^{2} - a^{2})\\): \\(\\sec\\).\nAngle \\(\\theta\\) ko ek khaas range mein rakhte hain taa ke root positive aaye aur substitution ulti bhi ho sake: Case 1 mein \\(-\\frac{\\pi}{2} \\le \\theta \\le \\frac{\\pi}{2}\\) (\\(\\cos\\theta \\ge 0\\)); Case 2 mein \\(-\\frac{\\pi}{2} < \\theta < \\frac{\\pi}{2}\\) (\\(\\sec\\theta > 0\\)); Case 3 mein \\(x \\ge a\\) ho to \\(0 \\le \\theta < \\frac{\\pi}{2}\\) (\\(\\tan\\theta \\ge 0\\)).\nAakhir mein jawab wapas \\(x\\) mein likhna hota hai. Is ke liye right triangle bohat kaam aata hai: \\(\\sin\\theta = \\frac{x}{a}\\) ho to opposite side \\(x\\), hypotenuse \\(a\\), aur Pythagoras se adjacent side \\(\\sqrt{a^{2}-x^{2}}\\). Ab koi bhi ratio parh lijiye.\nAgar expression bilkul \\(a^{2} \\pm x^{2}\\) na ho to pehle complete square ya koi aur substitution karein (Example 23 aur 28 dekhiye)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Neeche har integral ke liye kaunsi substitution lagayenge?\n(a) \\(\\int\\frac{dx}{\\sqrt{16-x^{2}}}\\)  (b) \\(\\int\\sqrt{x^{2}+25}\\,dx\\)  (c) \\(\\int\\frac{dx}{x\\sqrt{x^{2}-4}}\\)\nJawab: (a) \\(x = 4\\sin\\theta\\), (b) \\(x = 5\\tan\\theta\\), (c) \\(x = 2\\sec\\theta\\). Agar aap ne root ke andar ke signs dekh kar yeh bata diya, to aap ne Case wali baat samajh li."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Some Special Integrals as Formulae"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab do aise integrals deti hai jo itni dafa aate hain ke unhein formula ki tarah yaad rakhna chahiye. Pehle formulas dekhiye, phir hum dono ka proof samajhenge taa ke ratta na lagana pare."
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{(i)}\\ \\int\\dfrac{dx}{a^{2}-x^{2}} = \\dfrac{1}{2a}\\ln\\left|\\dfrac{a+x}{a-x}\\right| + c",
+            "text_alt": "(i) integral of 1 over (a squared minus x squared) dx equals 1 over 2a times ln of modulus of (a plus x) over (a minus x), plus c"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{(ii)}\\ \\int\\dfrac{dx}{\\sqrt{a^{2}-x^{2}}} = \\sin^{-1}\\left(\\dfrac{x}{a}\\right) + c,\\ a > 0",
+            "text_alt": "(ii) integral of 1 over square root of (a squared minus x squared) dx equals inverse sine of x over a, plus c, where a is greater than 0"
+          },
+          {
+            "type": "paragraph",
+            "text": "Proof: (i) Humein \\(\\int\\frac{1}{a^{2}-x^{2}}\\,dx\\) nikalna hai.\nDenominator ko factorise karein: \\(a^{2}-x^{2} = (a-x)(a+x)\\) (do squares ka farq). Is liye\n\\[\\int\\dfrac{1}{a^{2}-x^{2}}\\,dx = \\int\\dfrac{1}{(a-x)(a+x)}\\,dx\\]\n\\[= \\dfrac{1}{2a}\\int\\dfrac{(a-x)+(a+x)}{(a-x)(a+x)}\\,dx\\]\n\\[= \\dfrac{1}{2a}\\int\\Big[\\dfrac{(a-x)}{(a-x)(a+x)}\\]\n\\[\\qquad + \\dfrac{(a+x)}{(a-x)(a+x)}\\Big]dx\\]\n\\[= \\dfrac{1}{2a}\\int\\left(\\dfrac{1}{a+x} + \\dfrac{1}{a-x}\\right)dx\\]\n\\[= \\dfrac{1}{2a}\\int\\left(\\dfrac{1}{a+x} - \\dfrac{-1}{a-x}\\right)dx\\]\n\\[= \\dfrac{1}{2a}\\big(\\ln|a+x| - \\ln|a-x|\\big) + c\\]\n\\[= \\dfrac{1}{2a}\\ln\\left|\\dfrac{a+x}{a-x}\\right| + c\\]",
+            "bold": [
+              "Proof:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is proof ki chaabi: numerator 1 ko \\(\\frac{(a-x)+(a+x)}{2a}\\) likha, kyunke \\((a-x)+(a+x) = 2a\\). Is se ek mushkil fraction do aasaan fractions mein toot gaya (yeh asal mein partial fractions ka hi chhupa hua roop hai, jo aap 3.5 mein parhenge).\n\\(\\int\\frac{dx}{a-x} = -\\ln|a-x|\\) kyun? \\(a - x\\) ka derivative \\(-1\\) hai. Is liye \\(\\frac{-1}{a-x}\\) bilkul \\(\\frac{f'(x)}{f(x)}\\) ki shakal mein hai jis ka integral \\(\\ln|a-x|\\) hai. Isi liye kitab \\(\\frac{1}{a-x}\\) ko \\(-\\frac{-1}{a-x}\\) likhti hai.\nAakhir mein log ka rule: \\(\\ln|A| - \\ln|B| = \\ln\\left|\\frac{A}{B}\\right|\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Prove the given formulae.\n(i) \\(\\int\\frac{1}{x^{2}-a^{2}}\\,dx = \\frac{1}{2a}\\ln\\left|\\frac{x-a}{x+a}\\right| + c\\)\n(ii) \\(\\int\\frac{1}{a^{2}+x^{2}}\\,dx = \\frac{1}{a}\\tan^{-1}\\left(\\frac{x}{a}\\right) + c\\)\n(iii) \\(\\int\\frac{dx}{\\sqrt{a^{2}+x^{2}}} = \\ln\\left|x + \\sqrt{a^{2}+x^{2}}\\right| + c\\), where \\(a > 0\\)\n(iv) \\(\\int\\frac{dx}{\\sqrt{x^{2}-a^{2}}} = \\ln\\left|x + \\sqrt{x^{2}-a^{2}}\\right| + c\\), where \\(a > 0\\)\n(v) \\(\\int\\frac{dx}{x\\sqrt{x^{2}-a^{2}}} = \\frac{1}{a}\\sec^{-1}\\left(\\frac{x}{a}\\right) + c\\), where \\(a > 0\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Challenge ke liye ishare: (i) Proof (i) jaisa hi, bas \\(1 = \\frac{(x+a)-(x-a)}{2a}\\) likhein. (ii) \\(x = a\\tan\\theta\\) rakhein. (iii) \\(x = a\\tan\\theta\\) rakhein aur \\(\\int\\sec\\theta\\,d\\theta = \\ln|\\sec\\theta + \\tan\\theta|\\) lagayein. (iv) \\(x = a\\sec\\theta\\) aur wahi \\(\\sec\\theta\\) wala integral. (v) \\(x = a\\sec\\theta\\); integral \\(\\frac{1}{a}\\int d\\theta\\) ban jata hai.\n(iii) aur (iv) mein ek constant \\(-\\ln a\\) bhi aata hai; woh \\(c\\) mein shamil ho jata hai, is liye formula mein nazar nahi aata.\nFormula (v) jaisa chhapa hai, \\(x > a\\) ke liye hai. \\(x < -a\\) ke liye \\(\\frac{1}{a}\\sec^{-1}\\left|\\frac{x}{a}\\right| + c\\) likhein (kitab Example 28 mein yahi karti hai).\nMashwara: in paanch formulas ko khud prove kar ke dekhein; ek dafa khud nikal liye to kabhi nahi bhoolenge."
+          },
+          {
+            "type": "paragraph",
+            "text": "(ii) Ab doosra formula prove karte hain. Humein \\(\\int\\frac{1}{\\sqrt{a^{2}-x^{2}}}\\,dx\\) nikalna hai, jahan \\(a\\) ek positive constant hai aur domain \\(-a < x < a\\) hai taa ke square root real ho (root ke andar negative number na aaye)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Root \\(\\sqrt{a^{2}-x^{2}}\\) hai, yani Case 1. Is liye \\(x = a\\sin\\theta\\), \\(-\\frac{\\pi}{2} < \\theta < \\frac{\\pi}{2}\\) rakhte hain, to \\(dx = a\\cos\\theta\\,d\\theta\\). Saath hi\n\\[\\sqrt{a^{2}-x^{2}} = \\sqrt{a^{2}-(a\\sin\\theta)^{2}}\\]\n\\[= \\sqrt{a^{2}-a^{2}\\sin^{2}\\theta}\\]\n\\[= \\sqrt{a^{2}(1-\\sin^{2}\\theta)}\\]\n\\[= \\sqrt{a^{2}\\cos^{2}\\theta} = a|\\cos\\theta|\\]\nInterval \\(-\\frac{\\pi}{2} < \\theta < \\frac{\\pi}{2}\\) par \\(\\cos\\theta > 0\\) hai, is liye \\(|\\cos\\theta| = \\cos\\theta\\). Yani \\(\\sqrt{a^{2}-x^{2}} = a\\cos\\theta\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab integral mein rakhein:\n\\[\\int\\dfrac{1}{\\sqrt{a^{2}-x^{2}}}\\,dx\\]\n\\[= \\int\\dfrac{1}{a\\cos\\theta}\\cdot a\\cos\\theta\\,d\\theta\\]\n\\[= \\int 1\\,d\\theta = \\theta + c\\]\nDekhiye kitna khoobsurat nateeja: substitution ke baad integrand sirf 1 reh gaya!"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab is line ko \\(\\int 1\\,d = \\theta + c\\) chhapti hai, yani integration ka variable \\(\\theta\\) gayab hai. Sahi line \\(\\int 1\\,d\\theta = \\theta + c\\) hai, jaisa upar likha hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab wapas \\(x\\) mein: \\(x = a\\sin\\theta \\Rightarrow \\sin\\theta = \\frac{x}{a}\\). Kyunke \\(\\theta\\) principal range \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\) mein hai, \\(\\theta = \\sin^{-1}\\left(\\frac{x}{a}\\right)\\).\nIs liye \\(\\int\\frac{1}{\\sqrt{a^{2}-x^{2}}}\\,dx = \\sin^{-1}\\left(\\frac{x}{a}\\right) + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(\\theta\\) ko \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\) mein kyun rakha? Is range mein \\(\\cos\\theta \\ge 0\\) hai, is liye \\(\\sqrt{a^{2}\\cos^{2}\\theta} = a\\cos\\theta\\) bina minus ke likh sakte hain. Aur \\(\\sin\\theta = \\frac{x}{a}\\) ka is range mein sirf ek hi hal hai, \\(\\theta = \\sin^{-1}\\frac{x}{a}\\). Yani range na rakhein to jawab ghair-wazeh (ambiguous) ho jata.\nKhud sochiye: agar \\(a = 1\\) ho to formula kya kehta hai? Haan, \\(\\int\\frac{dx}{\\sqrt{1-x^{2}}} = \\sin^{-1}x + c\\), jo aap ko differentiation se pehle se maloom hai: \\(\\frac{d}{dx}\\sin^{-1}x = \\frac{1}{\\sqrt{1-x^{2}}}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Formulas ko seedha istemal kar ke dekhte hain (yeh misaalein kitab ki nahi, hamari hain):\n(a) \\(\\int\\frac{dx}{\\sqrt{16-x^{2}}}\\): yahan \\(a^{2} = 16\\), \\(a = 4\\). Formula (ii) se jawab \\(\\sin^{-1}\\frac{x}{4} + c\\).\n(b) \\(\\int\\frac{dx}{25-x^{2}}\\): yahan \\(a = 5\\). Formula (i) se jawab \\(\\frac{1}{10}\\ln\\left|\\frac{5+x}{5-x}\\right| + c\\).\nDhyan dein: formula mein \\(a\\) aata hai, \\(a^{2}\\) nahi; is liye pehle \\(a\\) nikalein (\\(16 = 4^{2}\\), \\(25 = 5^{2}\\))."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki worked examples dekhte hain. Har example mein pehle yeh pehchanein ke root kis case ka hai, phir qadam ba qadam chalein."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example 22 se pehle ek lamha sochiye: root \\(\\sqrt{9-x^{2}}\\) mein constant 9 pehle hai aur variable ka square baad mein minus ho raha hai. Yani yeh Case 1 hai, \\(a = 3\\). Neeche \\(x^{2}\\) bhi hai, jo substitution ke baad \\(9\\sin^{2}\\theta\\) ban jayega. Hum dekhenge ke aakhir mein ek jana pehchana integral \\(\\int\\cot^{2}\\theta\\,d\\theta\\) bachta hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 22",
+            "problem": "Evaluate \\(\\int\\frac{\\sqrt{9-x^{2}}}{x^{2}}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int\\frac{\\sqrt{9-x^{2}}}{x^{2}}\\,dx\\)\nMaloom karna: indefinite integral.\nTareeqa: root \\(\\sqrt{a^{2}-x^{2}}\\) ki shakal mein hai, \\(a = 3\\). Yeh Case 1 hai, is liye \\(x = 3\\sin\\theta\\) rakhenge. Identity \\(1 - \\sin^{2}\\theta = \\cos^{2}\\theta\\) root ko khatam kar degi.",
+              "Qadam 1: Substitute karein\n\\[x = 3\\sin\\theta,\\quad dx = 3\\cos\\theta\\,d\\theta\\]\njahan \\(\\theta \\in \\left[-\\frac{\\pi}{2}, 0\\right)\\cup\\left(0, \\frac{\\pi}{2}\\right]\\).\nKyun: \\(\\theta = 0\\) is liye nikala ke \\(x\\) denominator mein hai aur zero nahi ho sakta. Is range mein \\(\\cos\\theta \\ge 0\\) hai, jo root ke liye zaroori hai. \\(dx\\) ko badalna kabhi na bhoolein.",
+              "Qadam 2: Root khatam karein\n\\[\\sqrt{9-x^{2}} = \\sqrt{9-(3\\sin\\theta)^{2}}\\]\n\\[= \\sqrt{9(1-\\sin^{2}\\theta)} = \\sqrt{9\\cos^{2}\\theta}\\]\n\\[= 3\\cos\\theta\\]\nKyun: 9 common nikala, phir Pythagorean identity. \\(\\cos\\theta \\ge 0\\) hai, is liye modulus ki zaroorat nahi.",
+              "Qadam 3: Integral ko \\(\\theta\\) mein likhein\n\\[\\int\\dfrac{3\\cos\\theta}{(3\\sin\\theta)^{2}}\\cdot 3\\cos\\theta\\,d\\theta\\]\n\\[= \\int\\dfrac{9\\cos^{2}\\theta}{9\\sin^{2}\\theta}\\,d\\theta = \\int\\cot^{2}\\theta\\,d\\theta\\]\nKyun: har \\(x\\) aur \\(dx\\) badal diya; 9 cancel ho gaya aur \\(\\frac{\\cos^{2}\\theta}{\\sin^{2}\\theta} = \\cot^{2}\\theta\\).",
+              "Qadam 4: Integrate karein\n\\[\\int(\\csc^{2}\\theta - 1)\\,d\\theta = -\\cot\\theta - \\theta + c \\quad (1)\\]\nKyun: \\(\\cot^{2}\\theta\\) ka seedha formula nahi, lekin identity \\(1 + \\cot^{2}\\theta = \\csc^{2}\\theta\\) se \\(\\cot^{2}\\theta = \\csc^{2}\\theta - 1\\). Aur \\(\\csc^{2}\\theta\\) ka integral \\(-\\cot\\theta\\) hai (kyunke \\(\\cot\\theta\\) ka derivative \\(-\\csc^{2}\\theta\\)).",
+              "Qadam 5: Wapas \\(x\\) mein\n\\[\\sin\\theta = \\dfrac{x}{3} \\Rightarrow \\theta = \\sin^{-1}\\left(\\dfrac{x}{3}\\right)\\]\n\\[\\cot\\theta = \\dfrac{\\sqrt{1-\\sin^{2}\\theta}}{\\sin\\theta} = \\dfrac{\\sqrt{1-\\frac{x^{2}}{9}}}{\\frac{x}{3}}\\]\n\\[= \\dfrac{\\sqrt{9-x^{2}}}{x}\\]\nKyun: \\(\\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta}\\) aur \\(\\cos\\theta = \\sqrt{1-\\sin^{2}\\theta}\\). Triangle se bhi dekh sakte hain: opposite \\(x\\), hypotenuse 3, adjacent \\(\\sqrt{9-x^{2}}\\).",
+              "Qadam 6: (1) mein rakhein\n\\[\\int\\dfrac{\\sqrt{9-x^{2}}}{x^{2}}\\,dx\\]\n\\[= -\\dfrac{\\sqrt{9-x^{2}}}{x} - \\sin^{-1}\\dfrac{x}{3} + c\\]\nKyun: jawab \\(x\\) mein dena zaroori hai.",
+              "Tasdeeq:\n\\[\\dfrac{d}{dx}\\Big(-\\dfrac{\\sqrt{9-x^{2}}}{x}\\Big) = \\dfrac{9}{x^{2}\\sqrt{9-x^{2}}}\\]\n\\[\\dfrac{d}{dx}\\Big(-\\sin^{-1}\\dfrac{x}{3}\\Big) = -\\dfrac{1}{\\sqrt{9-x^{2}}}\\]\nDono jama: \\(\\frac{9 - x^{2}}{x^{2}\\sqrt{9-x^{2}}} = \\frac{\\sqrt{9-x^{2}}}{x^{2}}\\), yani asal integrand. Jawab sahi hai."
+            ],
+            "answer": "\\(\\int\\frac{\\sqrt{9-x^{2}}}{x^{2}}\\,dx = -\\frac{\\sqrt{9-x^{2}}}{x} - \\sin^{-1}\\left(\\frac{x}{3}\\right) + c\\)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Example 23 thora chalaak sawal hai. Root ke andar \\(x^{4} + 1\\) hai, \\(x^{2} + 1\\) nahi. Is liye seedha \\(x = \\tan\\theta\\) kaam nahi karega. Pehle \\(x^{4}\\) ko \\((x^{2})^{2}\\) dekhna hai, aur \\(x^{2}\\) ko hi \\(\\tan\\theta\\) banana hai. Is ke liye integrand mein \\(2x\\,dx\\) paida karna parega; yahi is example ka asal sabaq hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 23",
+            "problem": "Evaluate \\(\\int\\frac{1}{x\\sqrt{x^{4}+1}}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int\\frac{1}{x\\sqrt{x^{4}+1}}\\,dx\\)\nMaloom karna: indefinite integral.\nTareeqa: \\(x^{4}+1 = (x^{2})^{2}+1\\), yani 'kuch ka square plus 1'. Yeh Case 2 jaisa hai, is liye \\(x^{2} = \\tan\\theta\\) rakhenge. Lekin \\(d(x^{2}) = 2x\\,dx\\) chahiye, to pehle \\(2x\\) se multiply aur divide karenge.",
+              "Qadam 1: Integrand tayyar karein\n\\[\\int\\dfrac{dx}{x\\sqrt{x^{4}+1}}\\]\n\\[= \\dfrac{1}{2}\\int\\dfrac{2x\\,dx}{x^{2}\\sqrt{(x^{2})^{2}+1}}\\]\nKyun: \\(\\frac{1}{x} = \\frac{1}{2}\\cdot\\frac{2x}{x^{2}}\\); value wahi hai, sirf shakal badli taa ke \\(2x\\,dx\\) saamne aa jaye.",
+              "Qadam 2: Substitute karein\n\\[x^{2} = \\tan\\theta,\\quad 2x\\,dx = \\sec^{2}\\theta\\,d\\theta\\]\nKitab \\(\\theta \\in \\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\) leti hai; lekin \\(x^{2} > 0\\) hai, is liye asal mein \\(0 < \\theta < \\frac{\\pi}{2}\\).\nKyun: dono taraf differentiate kiya; \\(\\tan\\theta\\) ka derivative \\(\\sec^{2}\\theta\\).",
+              "Qadam 3: Simple karein\n\\[= \\dfrac{1}{2}\\int\\dfrac{\\sec^{2}\\theta}{\\tan\\theta\\sqrt{\\tan^{2}\\theta+1}}\\,d\\theta\\]\n\\[= \\dfrac{1}{2}\\int\\dfrac{\\sec^{2}\\theta}{\\tan\\theta\\sec\\theta}\\,d\\theta = \\dfrac{1}{2}\\int\\dfrac{\\sec\\theta}{\\tan\\theta}\\,d\\theta\\]\n\\[= \\dfrac{1}{2}\\int\\csc\\theta\\,d\\theta\\]\nKyun: \\(\\tan^{2}\\theta + 1 = \\sec^{2}\\theta\\) se root \\(\\sec\\theta\\) bana. Phir \\(\\frac{\\sec\\theta}{\\tan\\theta} = \\frac{1}{\\cos\\theta}\\cdot\\frac{\\cos\\theta}{\\sin\\theta} = \\frac{1}{\\sin\\theta} = \\csc\\theta\\).",
+              "Qadam 4: Integrate karein\n\\[= \\dfrac{1}{2}\\ln|\\csc\\theta - \\cot\\theta| + c\\]\nKyun: \\(\\int\\csc\\theta\\,d\\theta = \\ln|\\csc\\theta - \\cot\\theta| + c\\); yeh formula zabani yaad rakhein.",
+              "Qadam 5: Wapas \\(x\\) mein\n\\[\\cot\\theta = \\dfrac{1}{\\tan\\theta} = \\dfrac{1}{x^{2}}\\]\n\\[\\csc\\theta = \\sqrt{1+\\cot^{2}\\theta} = \\sqrt{1+\\left(\\dfrac{1}{x^{2}}\\right)^{2}}\\]\n\\[= \\dfrac{\\sqrt{x^{4}+1}}{x^{2}}\\]\nKyun: identity \\(1 + \\cot^{2}\\theta = \\csc^{2}\\theta\\); aur \\(0 < \\theta < \\frac{\\pi}{2}\\) mein \\(\\csc\\theta\\) positive hai, is liye positive root liya.",
+              "Qadam 6: Jawab likhein\n\\[= \\dfrac{1}{2}\\ln\\left|\\dfrac{\\sqrt{x^{4}+1}}{x^{2}} - \\dfrac{1}{x^{2}}\\right| + c\\]\n\\[= \\dfrac{1}{2}\\ln\\left|\\dfrac{\\sqrt{x^{4}+1}-1}{x^{2}}\\right| + c\\]\nKyun: dono ka denominator \\(x^{2}\\) ek hai, is liye ek fraction bana diya.",
+              "Tasdeeq:\nJawab ko \\(\\frac{1}{2}\\ln(\\sqrt{x^{4}+1}-1) - \\ln|x|\\) likhein. Is ka derivative:\n\\[\\dfrac{x^{3}}{\\sqrt{x^{4}+1}(\\sqrt{x^{4}+1}-1)} - \\dfrac{1}{x}\\]\nPehle fraction ko \\(\\frac{\\sqrt{x^{4}+1}+1}{\\sqrt{x^{4}+1}+1}\\) se multiply karein to \\(\\frac{\\sqrt{x^{4}+1}+1}{x\\sqrt{x^{4}+1}}\\) banta hai; \\(\\frac{1}{x}\\) minus karne par \\(\\frac{1}{x\\sqrt{x^{4}+1}}\\) bachta hai, yani asal integrand."
+            ],
+            "answer": "\\(\\frac{1}{2}\\ln\\left|\\frac{\\sqrt{x^{4}+1}-1}{x^{2}}\\right| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Numbering note (ours)",
+            "text": "Kitab 'Example 23' ka number do dafa chhapti hai (pehle \\(\\int\\frac{dx}{x\\sqrt{x^{4}+1}}\\) ke liye, phir \\(\\int\\frac{\\sqrt{x^{2}-9}}{x}\\,dx\\) ke liye) aur Example 25 kahin nahi. Hum doosre wale ko Example 24 aur kitab ke Example 24 ko Example 25 dikhate hain, taa ke har example ka apna number ho: 22, 23, 24, 25, 26, 27, 28."
+          },
+          {
+            "type": "example",
+            "title": "Example 24",
+            "problem": "Evaluate \\(\\int\\frac{\\sqrt{x^{2}-9}}{x}\\,dx\\), \\((x > 3)\\)",
+            "steps": [
+              "Diya gaya: \\(\\int\\frac{\\sqrt{x^{2}-9}}{x}\\,dx\\), \\(x > 3\\)\nMaloom karna: indefinite integral.\nTareeqa: root \\(\\sqrt{x^{2}-a^{2}}\\) hai, \\(a = 3\\): Case 3, \\(x = 3\\sec\\theta\\). Identity \\(\\sec^{2}\\theta - 1 = \\tan^{2}\\theta\\) root ko khatam karegi.",
+              "Qadam 1: Substitute karein\n\\[x = 3\\sec\\theta,\\quad dx = 3\\sec\\theta\\tan\\theta\\,d\\theta\\]\n\\(x > 3\\) hai, is liye \\(0 < \\theta < \\frac{\\pi}{2}\\) aur \\(\\tan\\theta > 0\\).\nKyun: \\(\\sec\\theta\\) ka derivative \\(\\sec\\theta\\tan\\theta\\).",
+              "Qadam 2: Integral ko \\(\\theta\\) mein likhein\n\\[\\int\\dfrac{\\sqrt{(3\\sec\\theta)^{2}-9}}{3\\sec\\theta}\\cdot 3\\sec\\theta\\tan\\theta\\,d\\theta\\]\n\\[= \\int\\sqrt{9(\\sec^{2}\\theta-1)}\\cdot\\tan\\theta\\,d\\theta\\]\n\\[= \\int 3\\tan\\theta\\tan\\theta\\,d\\theta = 3\\int\\tan^{2}\\theta\\,d\\theta\\]\nKyun: \\(3\\sec\\theta\\) upar neeche cancel; \\(\\sqrt{9\\tan^{2}\\theta} = 3\\tan\\theta\\) kyunke \\(\\tan\\theta > 0\\).",
+              "Qadam 3: Integrate karein\n\\[= 3\\int(\\sec^{2}\\theta - 1)\\,d\\theta = 3(\\tan\\theta - \\theta) + c\\]\nKyun: \\(\\tan^{2}\\theta = \\sec^{2}\\theta - 1\\), aur \\(\\sec^{2}\\theta\\) ka integral \\(\\tan\\theta\\).",
+              "Qadam 4: Wapas \\(x\\) mein\n\\[\\tan\\theta = \\sqrt{\\sec^{2}\\theta - 1} = \\sqrt{\\left(\\dfrac{x}{3}\\right)^{2} - 1}\\]\n\\[\\theta = \\sec^{-1}\\left(\\dfrac{x}{3}\\right)\\]\n\\[3\\Big[\\sqrt{\\tfrac{x^{2}}{9}-1} - \\sec^{-1}\\tfrac{x}{3}\\Big]\\]\n\\[= \\sqrt{x^{2}-9} - 3\\sec^{-1}\\dfrac{x}{3}\\]\nKyun: \\(3\\sqrt{\\frac{x^{2}-9}{9}} = 3\\cdot\\frac{\\sqrt{x^{2}-9}}{3} = \\sqrt{x^{2}-9}\\).",
+              "Tasdeeq:\n\\[\\dfrac{d}{dx}\\sqrt{x^{2}-9} = \\dfrac{x}{\\sqrt{x^{2}-9}}\\]\n\\[\\dfrac{d}{dx}3\\sec^{-1}\\dfrac{x}{3} = \\dfrac{9}{x\\sqrt{x^{2}-9}}\\]\nFarq: \\(\\frac{x^{2}-9}{x\\sqrt{x^{2}-9}} = \\frac{\\sqrt{x^{2}-9}}{x}\\), yani asal integrand."
+            ],
+            "answer": "\\(\\sqrt{x^{2}-9} - 3\\sec^{-1}\\left(\\frac{x}{3}\\right) + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 25",
+            "problem": "Evaluate \\(\\int\\frac{(x+1)e^{x}}{1+x^{2}e^{2x}}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int\\frac{(x+1)e^{x}}{1+x^{2}e^{2x}}\\,dx\\)\nMaloom karna: indefinite integral.\nTareeqa: \\(x^{2}e^{2x} = (xe^{x})^{2}\\), aur numerator \\((x+1)e^{x}\\) bilkul \\(xe^{x}\\) ka derivative hai. Is liye \\(u = xe^{x}\\) rakhenge; integral \\(\\int\\frac{du}{1+u^{2}}\\) ban jayega.",
+              "Qadam 1: \\(u\\) chunein\n\\[u = xe^{x}\\]\n\\[\\dfrac{du}{dx} = xe^{x} + e^{x}(1) \\Rightarrow du = (x+1)e^{x}\\,dx\\]\nKyun: \\(xe^{x}\\) do functions ka product hai, is liye product rule.",
+              "Qadam 2: Likhein aur integrate karein\n\\[\\int\\dfrac{(x+1)e^{x}}{1+(xe^{x})^{2}}\\,dx = \\int\\dfrac{du}{1+u^{2}}\\]\n\\[= \\tan^{-1}u + c = \\tan^{-1}(xe^{x}) + c\\]\nKyun: \\(\\int\\frac{du}{1+u^{2}} = \\tan^{-1}u + c\\) (Challenge formula (ii), \\(a = 1\\)).",
+              "Tasdeeq:\n\\[\\dfrac{d}{dx}\\tan^{-1}(xe^{x})\\]\n\\[= \\dfrac{(x+1)e^{x}}{1+x^{2}e^{2x}}\\]\nChain rule se asal integrand wapas mil gaya."
+            ],
+            "answer": "\\(\\tan^{-1}(xe^{x}) + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 25 mein trigonometric substitution ki zaroorat hi nahi pari: seedhi substitution \\(u = xe^{x}\\) ne integral ko standard shakal \\(\\int\\frac{du}{1+u^{2}} = \\tan^{-1}u\\) mein la diya. Sabaq: hamesha pehle dekhiye ke kisi andar wale function ka derivative bahar maujood to nahi. Trigonometric substitution tab karein jab yeh aasaan rasta na mile."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example 26 mein root ke andar \\(1 - x^{3}\\) hai, jo kisi bhi Case ki shakal mein nahi (cube hai, square nahi). Yahan hum root ko hi poora \\(u\\) bana dete hain: \\(u = \\sqrt{1-x^{3}}\\). Yeh bhi ek mashhoor tareeqa hai: jab root kisi case mein fit na ho, to poore root ko naya variable bana kar dekhiye."
+          },
+          {
+            "type": "example",
+            "title": "Example 26",
+            "problem": "Evaluate \\(\\int\\frac{1}{x\\sqrt{1-x^{3}}}\\,dx\\), \\(x \\in (-\\infty, 0)\\cup(0, 1)\\).",
+            "steps": [
+              "Diya gaya: \\(\\int\\frac{1}{x\\sqrt{1-x^{3}}}\\,dx\\), \\(x \\in (-\\infty, 0)\\cup(0, 1)\\)\nMaloom karna: indefinite integral.\nTareeqa: \\(u = \\sqrt{1-x^{3}}\\) rakhenge jo root ko khatam kar deta hai. Is ke differential mein \\(-3x^{2}\\,dx\\) aata hai, is liye pehle \\(-3x^{2}\\) se multiply aur divide karenge.",
+              "Qadam 1: Integrand tayyar karein\n\\[\\int\\dfrac{dx}{x\\sqrt{1-x^{3}}}\\]\n\\[= -\\dfrac{1}{3}\\int\\dfrac{-3x^{2}}{x^{3}\\sqrt{1-x^{3}}}\\,dx\\]\nKyun: \\(-\\frac{1}{3}\\cdot\\frac{-3x^{2}}{x^{3}} = \\frac{1}{x}\\); value nahi badli.",
+              "Qadam 2: Substitute karein\n\\[u = \\sqrt{1-x^{3}} \\Rightarrow u^{2} = 1 - x^{3}\\]\n\\[2u\\,du = -3x^{2}\\,dx,\\quad x^{3} = 1 - u^{2}\\]\nKyun: pehle square kiya taa ke root ka derivative na lena pare; phir dono taraf differentiate kiya.",
+              "Qadam 3: \\(u\\) mein likhein\n\\[= -\\dfrac{1}{3}\\int\\dfrac{2u}{(1-u^{2})u}\\,du\\]\n\\[= \\dfrac{2}{3}\\int\\dfrac{du}{u^{2}-1^{2}}\\]\nKyun: \\(u\\) cancel ho gaya, aur minus andar le ja kar \\(-\\frac{1}{1-u^{2}} = \\frac{1}{u^{2}-1}\\).",
+              "Qadam 4: Formula \\(\\int\\frac{du}{u^{2}-a^{2}}\\), \\(a = 1\\)\n\\[= \\dfrac{2}{3}\\cdot\\dfrac{1}{2(1)}\\ln\\left|\\dfrac{u-1}{u+1}\\right| + c\\]\n\\[= \\dfrac{1}{3}\\ln\\left|\\dfrac{\\sqrt{1-x^{3}}-1}{\\sqrt{1-x^{3}}+1}\\right| + c\\]\nKyun: Challenge formula (i); phir \\(u = \\sqrt{1-x^{3}}\\) wapas rakha.",
+              "Tasdeeq:\n\\[\\dfrac{d}{dx}\\Big[\\tfrac{1}{3}\\ln\\left|\\tfrac{u-1}{u+1}\\right|\\Big]\\]\n\\[= \\dfrac{1}{3}\\cdot\\dfrac{2}{u^{2}-1}\\cdot\\dfrac{du}{dx}\\]\n\\(u^{2} - 1 = -x^{3}\\) aur \\(\\frac{du}{dx} = \\frac{-3x^{2}}{2u}\\) rakhein: \\(\\frac{1}{3}\\cdot\\frac{2}{-x^{3}}\\cdot\\frac{-3x^{2}}{2u} = \\frac{1}{xu} = \\frac{1}{x\\sqrt{1-x^{3}}}\\). Integrand mil gaya."
+            ],
+            "answer": "\\(\\frac{1}{3}\\ln\\left|\\frac{\\sqrt{1-x^{3}}-1}{\\sqrt{1-x^{3}}+1}\\right| + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 27",
+            "problem": "Evaluate \\(\\int\\frac{2x}{\\sqrt{x^{4}+9}}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int\\frac{2x}{\\sqrt{x^{4}+9}}\\,dx\\)\nMaloom karna: indefinite integral.\nTareeqa: \\(x^{4} = (x^{2})^{2}\\) aur \\(2x\\,dx = d(x^{2})\\), is liye \\(u = x^{2}\\). Phir Challenge formula (iii), \\(a = 3\\).",
+              "Qadam 1: Substitute karein\n\\[u = x^{2},\\quad du = 2x\\,dx\\]\n\\[\\int\\dfrac{2x\\,dx}{\\sqrt{x^{4}+9}} = \\int\\dfrac{du}{\\sqrt{u^{2}+3^{2}}}\\]\nKyun: numerator bilkul \\(du\\) hai.",
+              "Qadam 2: Formula lagayein\n\\[= \\ln\\left|u + \\sqrt{u^{2}+3^{2}}\\right| + c\\]\n\\[= \\ln\\left|x^{2} + \\sqrt{x^{4}+9}\\right| + c\\]\nKyun: \\(\\int\\frac{du}{\\sqrt{a^{2}+u^{2}}} = \\ln|u + \\sqrt{a^{2}+u^{2}}| + c\\); phir \\(u = x^{2}\\). (Kitab aakhri line mein left side par \\(u\\) wala integral likhti hai; woh diye hue integral ke barabar hi hai.)",
+              "Tasdeeq:\n\\[\\dfrac{d}{dx}\\ln(x^{2}+\\sqrt{x^{4}+9})\\]\n\\[= \\dfrac{2x + \\frac{2x^{3}}{\\sqrt{x^{4}+9}}}{x^{2}+\\sqrt{x^{4}+9}}\\]\n\\[= \\dfrac{2x(\\sqrt{x^{4}+9}+x^{2})}{\\sqrt{x^{4}+9}\\,(x^{2}+\\sqrt{x^{4}+9})}\\]\n\\[= \\dfrac{2x}{\\sqrt{x^{4}+9}}\\]\nAsal integrand wapas aa gaya."
+            ],
+            "answer": "\\(\\ln\\left|x^{2} + \\sqrt{x^{4}+9}\\right| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Example 27 mein \\(\\sqrt{x^{4}+9}\\) ko dekh kar kya aap ne foran \\(x = 3\\tan\\theta\\) socha? Woh ghalat hoga, kyunke andar \\(x^{2}\\) nahi balke \\(x^{4} = (x^{2})^{2}\\) hai. Pehle \\(u = x^{2}\\) rakhna zaroori tha; phir \\(\\sqrt{u^{2}+3^{2}}\\) Case 2 ki shakal mein aaya."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example 28 mein root ke andar ek quadratic \\(x^{2}-4x+3\\) hai jis mein \\(x\\) wala term bhi hai. Aise quadratic ko kisi case mein laane ka tareeqa complete square hai: us ke baad yeh \\((x-2)^{2} - 1\\) ban jata hai, yani \\(u^{2} - 1^{2}\\) ki shakal. Bahar ka \\((x-2)\\) bhi \\(u\\) hi hai, is liye Challenge formula (v) seedha lag jata hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 28",
+            "problem": "\\(\\int\\frac{dx}{(x-2)\\sqrt{x^{2}-4x+3}}\\)",
+            "steps": [
+              "Diya gaya: \\(\\int\\frac{dx}{(x-2)\\sqrt{x^{2}-4x+3}}\\)\nMaloom karna: indefinite integral.\nTareeqa: root ke andar complete square banayenge, phir \\(u = x - 2\\). Integral \\(\\int\\frac{du}{u\\sqrt{u^{2}-a^{2}}}\\) (Challenge formula (v)) ki shakal le lega, \\(a = 1\\).",
+              "Qadam 1: Complete square\n\\[x^{2}-4x+3 = (x^{2}-4x+4) + 3 - 4\\]\n\\[= (x-2)^{2} - 1\\]\nKyun: \\(x\\) ke coefficient \\(-4\\) ka aadha \\(-2\\), us ka square 4; 4 jama aur minus kiya.",
+              "Qadam 2: \\(u = x - 2\\), \\(du = dx\\)\n\\[\\int\\dfrac{dx}{(x-2)\\sqrt{(x-2)^{2}-1}}\\]\n\\[= \\int\\dfrac{du}{u\\sqrt{u^{2}-1^{2}}}\\]\nKyun: root ke bahar wala factor bhi wahi \\(x - 2\\) hai, is liye sab \\(u\\) mein badal gaya.",
+              "Qadam 3: Formula, \\(a = 1\\)\n\\[= \\dfrac{1}{1}\\sec^{-1}\\left|\\dfrac{u}{1}\\right| + c = \\sec^{-1}|u| + c\\]\nKyun: Challenge formula (v). Kitab \\(|u|\\) likhti hai; is se jawab \\(u > 1\\) aur \\(u < -1\\) dono ke liye sahi rehta hai (yani \\(x > 3\\) ya \\(x < 1\\)).",
+              "Qadam 4: Wapas \\(x\\)\n\\[= \\sec^{-1}|x-2| + c\\]\nKyun: \\(u = x - 2\\).",
+              "Tasdeeq:\n\\(u > 1\\) ke liye: \\(\\frac{d}{du}\\sec^{-1}u = \\frac{1}{u\\sqrt{u^{2}-1}}\\). \\(u < -1\\) ke liye: \\(\\frac{d}{du}\\sec^{-1}(-u) = \\frac{-1}{(-u)\\sqrt{u^{2}-1}} = \\frac{1}{u\\sqrt{u^{2}-1}}\\). Dono soorton mein integrand milta hai."
+            ],
+            "answer": "\\(\\sec^{-1}|x-2| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "\\(\\sqrt{a^{2}-x^{2}}\\): \\(x = a\\sin\\theta\\); \\(\\sqrt{a^{2}+x^{2}}\\): \\(x = a\\tan\\theta\\); \\(\\sqrt{x^{2}-a^{2}}\\): \\(x = a\\sec\\theta\\).\n\\(dx\\) bhi badlein: \\(dx = a\\cos\\theta\\,d\\theta\\), \\(a\\sec^{2}\\theta\\,d\\theta\\) ya \\(a\\sec\\theta\\tan\\theta\\,d\\theta\\).\nYaad rakhne wale special integrals: \\(\\int\\frac{dx}{a^{2}-x^{2}} = \\frac{1}{2a}\\ln\\left|\\frac{a+x}{a-x}\\right| + c\\), \\(\\int\\frac{dx}{\\sqrt{a^{2}-x^{2}}} = \\sin^{-1}\\frac{x}{a} + c\\), aur Challenge box ke paanch formulas.\nFormula lagane se pehle integrand ko us ki asal shakal mein laayein: substitution (\\(u = e^{x}\\), \\(u = \\ln x\\), \\(u = x^{2}\\)) ya complete square.\nAakhri jawab hamesha \\(x\\) mein likhein; doosre ratios ke liye right triangle banayein.\nHar jawab ko differentiate kar ke check karein; integration ka yeh sab se pakka imtihan hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "\\(dx\\) badalna bhool jana: \\(x = 3\\sin\\theta\\) mein \\(dx = 3\\cos\\theta\\,d\\theta\\) hai, sirf \\(d\\theta\\) nahi.\nDo log wale formulas ko mila dena: \\(a^{2} - x^{2}\\) se \\(\\frac{1}{2a}\\ln\\left|\\frac{a+x}{a-x}\\right|\\) aata hai, jab ke \\(x^{2} - a^{2}\\) se \\(\\frac{1}{2a}\\ln\\left|\\frac{x-a}{x+a}\\right|\\).\n\\(\\sqrt{a^{2}\\cos^{2}\\theta} = a\\cos\\theta\\) likh dena bina yeh dekhe ke chuni hui range mein \\(\\cos\\theta \\ge 0\\) hai ya nahi.\nJawab \\(\\theta\\) mein chhor dena, ya \\(\\sin^{-1}\\frac{x}{a}\\) ki jagah \\(\\sin^{-1}\\frac{x}{a^{2}}\\) likh dena.\nRoot ke andar \\(x^{4}\\) ko \\(x^{2}\\) samajh kar seedha \\(\\tan\\theta\\) laga dena (Example 23 aur 27 mein pehle \\(x^{2}\\) ko variable banana para)."
+          }
+        ]
+      }
+    }
+  ]
+}

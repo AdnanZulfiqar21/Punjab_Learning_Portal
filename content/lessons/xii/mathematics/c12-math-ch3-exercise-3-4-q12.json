@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q12",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q12",
+      "title": "Question 12",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 12: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12",
+            "prompt": "12 Evaluate \\(\\int \\frac{x^3 + 2x + 1}{(x^2 + 1)(x^2 + 4)}\\,dx\\).",
+            "explanation": "Two different irreducible quadratic factors: Case-III. Degree 3 over degree 4, so the fraction is proper.\nEach quadratic factor gets a linear numerator; there are no real roots, so all four constants come from comparing coefficients.\nPlan: compare coefficients, then split each fraction into a \\(\\ln\\) part and a \\(\\tan^{-1}\\) part.",
+            "steps": [
+              "Given: \\(\\int \\frac{x^3 + 2x + 1}{(x^2 + 1)(x^2 + 4)}\\,dx\\).\nTo find: the integral.\nMethod: partial fractions, Case-III with two quadratic factors; then \\(\\int \\frac{2x}{x^2 + a^2}\\,dx = \\ln(x^2 + a^2)\\) and \\(\\int \\frac{dx}{x^2 + a^2} = \\frac{1}{a}\\tan^{-1}\\frac{x}{a}\\).",
+              "Write the partial fractions\n\\[\\dfrac{x^3 + 2x + 1}{(x^2 + 1)(x^2 + 4)} = \\dfrac{Ax + B}{x^2 + 1} + \\dfrac{Cx + D}{x^2 + 4}\\]\n\\[x^3 + 2x + 1 = (Ax + B)(x^2 + 4)\\]\n\\[+\\, (Cx + D)(x^2 + 1)\\]\nWhy: A linear numerator over each irreducible quadratic factor.",
+              "Expand and compare coefficients\n\\[x^3:\\ A + C = 1\\]\n\\[x^2:\\ B + D = 0\\]\n\\[x:\\ 4A + C = 2\\]\n\\[\\text{constant}:\\ 4B + D = 1\\]\nWhy: The right side is \\((A + C)x^3 + (B + D)x^2 + (4A + C)x + (4B + D)\\).",
+              "Solve\n\\[3A = 1:\\ A = \\tfrac{1}{3},\\ C = \\tfrac{2}{3}\\]\n\\[3B = 1:\\ B = \\tfrac{1}{3},\\ D = -\\tfrac{1}{3}\\]\nWhy: Subtract the \\(x^3\\) equation from the \\(x\\) equation, and the \\(x^2\\) equation from the constant equation.",
+              "Rewrite the integrand\n\\[= \\dfrac{1}{3}\\cdot\\dfrac{x + 1}{x^2 + 1} + \\dfrac{1}{3}\\cdot\\dfrac{2x - 1}{x^2 + 4}\\]\nWhy: Put in the four constants and take \\(\\frac{1}{3}\\) out.",
+              "Integrate the first fraction\n\\[\\dfrac{1}{3}\\int \\dfrac{x}{x^2 + 1}\\,dx + \\dfrac{1}{3}\\int \\dfrac{dx}{x^2 + 1}\\]\n\\[= \\dfrac{1}{6}\\ln(x^2 + 1) + \\dfrac{1}{3}\\tan^{-1} x\\]\nWhy: \\(\\int \\frac{x}{x^2 + 1}\\,dx = \\frac{1}{2}\\int \\frac{2x}{x^2 + 1}\\,dx = \\frac{1}{2}\\ln(x^2 + 1)\\).",
+              "Integrate the second fraction\n\\[\\dfrac{1}{3}\\int \\dfrac{2x}{x^2 + 4}\\,dx - \\dfrac{1}{3}\\int \\dfrac{dx}{x^2 + 2^2}\\]\n\\[= \\dfrac{1}{3}\\ln(x^2 + 4) - \\dfrac{1}{6}\\tan^{-1}\\dfrac{x}{2}\\]\nWhy: \\(\\int \\frac{dx}{x^2 + a^2} = \\frac{1}{a}\\tan^{-1}\\frac{x}{a}\\) with \\(a = 2\\).",
+              "Answer and check\n\\[\\dfrac{1}{6}\\ln(x^2 + 1) + \\dfrac{1}{3}\\ln(x^2 + 4)\\]\n\\[+ \\dfrac{1}{3}\\tan^{-1} x - \\dfrac{1}{6}\\tan^{-1}\\dfrac{x}{2} + c\\]\nWhy: Check the constants: \\((x + 1)(x^2 + 4) + (2x - 1)(x^2 + 1) = 3x^3 + 6x + 3\\), which is \\(3\\) times the numerator \\(\\checkmark\\)."
+            ],
+            "final_answer": "\\(\\frac{1}{6}\\ln(x^2 + 1) + \\frac{1}{3}\\ln(x^2 + 4) + \\frac{1}{3}\\tan^{-1} x - \\frac{1}{6}\\tan^{-1}\\frac{x}{2} + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the answers at the end of the book (page 302), the answers of Exercise 3.4 are printed under the wrong heading \"Exercise 3.6\". The answer of this question is item (xii) of that block: \\(\\frac{1}{6}\\ln(x^2 + 1) + \\frac{1}{3}\\ln(x^2 + 4) + \\frac{1}{3}\\tan^{-1} x - \\frac{1}{6}\\tan^{-1}\\frac{x}{2} + c\\). That answer is correct. The block headed \"Exercise 3.4\" (page 301) belongs to a different exercise."
+          }
+        ]
+      }
+    }
+  ]
+}

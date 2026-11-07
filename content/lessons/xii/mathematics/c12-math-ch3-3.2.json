@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.2",
+      "title": "3.2 Method of Substitution or Change of Variable",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 79,
+          "pdf_to": 81,
+          "note": "Book p. 77-79: 3.2 Method of Substitution or Change of Variable, Chain Rule reversed, Theorem 3.1, Recall! The Rule 4 box, Examples 13-21"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The method stems from reversing the Chain Rule for derivatives. Recall that for the differentiable functions \\(y = F(u)\\) and \\(u = g(x)\\) the Chain Rule states that"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{d}{dx}\\big[F(g(x))\\big] = F'(g(x))\\,g'(x)",
+            "text_alt": "d by d x of F of g of x equals F prime of g of x times g prime of x"
+          },
+          {
+            "type": "paragraph",
+            "text": "In terms of definite integrals \\(\\int F'(g(x))\\,g'(x) = F(g(x)) + c\\).",
+            "book_errors": [
+              "definite integrals",
+              "\\(\\int F'(g(x))\\,g'(x) = F(g(x)) + c\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \"In terms of definite integrals \\(\\int F'(g(x))\\,g'(x) = F(g(x)) + c\\)\". It should say indefinite integrals (a definite integral has limits and no \\(+\\,c\\)), and the \\(dx\\) is missing. Correct: \\(\\int F'(g(x))\\,g'(x)\\,dx = F(g(x)) + c\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This line is the Chain Rule read backwards. If an integrand is (a function of \\(g(x)\\)) \\(\\times\\) \\(g'(x)\\), it is the derivative of \\(F(g(x))\\), so its integral is \\(F(g(x)) + c\\).\nWhat to look for: an \"inner\" expression \\(g(x)\\), and its derivative \\(g'(x)\\) (or a constant multiple of it) sitting as a factor elsewhere in the integrand."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Theorem 3.1: Antidifferentiation of a Composite Function",
+            "text": "Let \\(g\\) be a function whose range is an interval \\(I\\), and let \\(f\\) be a function that is continuous on \\(I\\). If \\(g\\) is differentiable on its domain and \\(F\\) is an antiderivative of \\(f\\) (\\(F' = f\\)) on \\(I\\), then \\(\\int f(g(x)\\cdot g'(x)dx = F(u) + c\\).\nLetting \\(u = g(x)\\) gives \\(du = g'(x)\\,dx\\) and \\(\\int f(u)\\,du = F(u) + c\\).",
+            "book_errors": [
+              "\\(\\int f(g(x)\\cdot g'(x)dx = F(u) + c\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The theorem's formula is printed as \\(\\int f(g(x)\\cdot g'(x)dx = F(u) + c\\): a bracket is missing and the result uses \\(u\\) before \\(u\\) has been defined. Correct: \\(\\int f(g(x))\\,g'(x)\\,dx = F(g(x)) + c\\). Only after letting \\(u = g(x)\\) does it become \\(\\int f(u)\\,du = F(u) + c\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "This equation \\(\\int f(u)\\,du = F(u) + c\\) has the same form as the basic antiderivative formula, \\(\\int f(x)\\,dx = F(x) + c\\), but the independent variable is now \\(u\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The process of replacing \\(x\\) with a new variable \\(u = g(x)\\) (and \\(dx\\) with the corresponding \\(du\\)) is called a change of variable or the method of substitution.",
+            "bold": [
+              "change of variable",
+              "the method of substitution"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The method in five steps:\n1. Choose \\(u = g(x)\\): usually the inside of a power, a root, an exponent, a logarithm or an inverse function.\n2. Differentiate: \\(du = g'(x)\\,dx\\).\n3. Rewrite the whole integral in \\(u\\) (every \\(x\\) and the \\(dx\\)); adjust a constant factor if needed.\n4. Integrate with respect to \\(u\\).\n5. Substitute back \\(u = g(x)\\) and check by differentiating.\nIf some \\(x\\) is left over after step 3, the choice of \\(u\\) was wrong (or \\(x\\) itself must be written through \\(u\\), as in Example 14)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Recall! The Rule 4",
+            "text": "\\(\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln|f(x)| + c\\)\nLet \\(u = f(x)\\). Then \\(du = f'(x)\\,dx\\).\nSubstituting into the given integral, we have \\(\\int \\frac{f'(x)}{f(x)}\\,dx = \\int \\frac{1}{u}\\,du\\).\nWe know from basic integration rules that \\(\\int \\frac{1}{u}\\,du = \\ln|u| + c\\).\nFinally, substituting \\(u = f(x)\\), we obtain \\(\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln|f(x)| + c\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 13",
+            "problem": "Evaluate \\(\\int (5x^5 + 5)^3 x^4\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int (5x^5 + 5)^3 x^4\\,dx\\).\nTo find: the indefinite integral.\nMethod: when an integrand contains an expression raised to a power, such as \\((5x^5 + 5)^3\\), a useful strategy is to substitute \\(u\\) for that expression. Here \\(x^4\\) is (a constant times) its derivative, so the substitution works.",
+              "Choose \\(u\\) and find \\(du\\)\n\\[u = 5x^5 + 5\\]\n\\[du = 25x^4\\,dx\\]\nWhy: \\(\\frac{d}{dx}(5x^5 + 5) = 25x^4\\).",
+              "Make \\(du\\) appear\n\\[\\int (5x^5 + 5)^3 x^4\\,dx\\]\n\\[= \\dfrac{1}{25}\\int (5x^5 + 5)^3\\cdot 25x^4\\,dx\\]\n\\[= \\dfrac{1}{25}\\int u^3\\,du\\]\nWhy: The integrand has \\(x^4\\,dx\\), not \\(25x^4\\,dx\\); multiplying inside by 25 and outside by \\(\\frac{1}{25}\\) changes nothing.",
+              "Integrate in \\(u\\)\n\\[= \\dfrac{1}{25}\\cdot\\dfrac{u^4}{4} + c = \\dfrac{1}{100}u^4 + c\\]\nWhy: Power Rule in the variable \\(u\\).",
+              "Substitute back\n\\[\\int (5x^5 + 5)^3 x^4\\,dx = \\dfrac{1}{100}(5x^5 + 5)^4 + c\\]\nWhy: Finally, substitute back \\(u = 5x^5 + 5\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left[\\tfrac{1}{100}(5x^5 + 5)^4\\right]\\]\n\\[= \\tfrac{4}{100}(5x^5 + 5)^3\\cdot 25x^4\\]\n\\[= (5x^5 + 5)^3 x^4 \\;\\checkmark\\]\nWhy: Chain rule; \\(\\frac{4 \\times 25}{100} = 1\\)."
+            ],
+            "answer": "\\(\\frac{1}{100}(5x^5 + 5)^4 + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 14",
+            "problem": "Integrate \\(\\int \\sqrt{x}\\,\\sqrt{1 + \\sqrt{x}}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int \\sqrt{x}\\,\\sqrt{1 + \\sqrt{x}}\\,dx\\).\nTo find: the integral.\nMethod: let \\(1 + \\sqrt{x} = u\\). The derivative of \\(1 + \\sqrt{x}\\) is not a factor here, so we also express \\(\\sqrt{x}\\), \\(x\\) and \\(dx\\) through \\(u\\).",
+              "Express everything through \\(u\\)\n\\[\\sqrt{x} = u - 1\\]\n\\[x = (u - 1)^2\\]\n\\[dx = 2(u - 1)\\,du\\]\nWhy: From \\(1 + \\sqrt{x} = u\\); square, then differentiate with respect to \\(u\\).",
+              "Substitute into the integral\n\\[\\int \\sqrt{x}\\,\\sqrt{1 + \\sqrt{x}}\\,dx = \\int (u - 1)\\sqrt{u}\\;2(u - 1)\\,du\\]\n\\[= 2\\int (u - 1)^2 u^{1/2}\\,du\\]\nWhy: \\(\\sqrt{x} = u - 1\\), \\(\\sqrt{1 + \\sqrt{x}} = \\sqrt{u}\\), \\(dx = 2(u - 1)\\,du\\).",
+              "Expand and integrate\n\\[= 2\\int (u^2 - 2u + 1)u^{1/2}\\,du\\]\n\\[= 2\\int \\left(u^{5/2} - 2u^{3/2} + u^{1/2}\\right)du\\]\n\\[= 2\\left[\\tfrac{2}{7}u^{7/2} - \\tfrac{4}{5}u^{5/2} + \\tfrac{2}{3}u^{3/2}\\right] + c\\]\nWhy: \\((u - 1)^2 = u^2 - 2u + 1\\); multiply by \\(u^{1/2}\\); then the Power Rule on each term.",
+              "Simplify and substitute back \\(u = 1 + \\sqrt{x}\\)\n\\[= \\tfrac{4}{7}u^{7/2} - \\tfrac{8}{5}u^{5/2} + \\tfrac{4}{3}u^{3/2} + c\\]\n\\[= \\tfrac{4}{7}(1 + \\sqrt{x})^{7/2} - \\tfrac{8}{5}(1 + \\sqrt{x})^{5/2}\\]\n\\[+ \\tfrac{4}{3}(1 + \\sqrt{x})^{3/2} + c\\]\nWhy: The answer must be in \\(x\\).",
+              "Check\n\\[\\dfrac{d}{du}\\left[\\tfrac{4}{7}u^{7/2} - \\tfrac{8}{5}u^{5/2} + \\tfrac{4}{3}u^{3/2}\\right]\\]\n\\[= 2u^{5/2} - 4u^{3/2} + 2u^{1/2}\\]\n\\[= 2u^{1/2}(u - 1)^2 \\;\\checkmark\\]\nWhy: This is the \\(u\\)-integrand, that is, the original integrand times \\(\\frac{dx}{du}\\)."
+            ],
+            "answer": "\\(\\frac{4}{7}(1 + \\sqrt{x})^{7/2} - \\frac{8}{5}(1 + \\sqrt{x})^{5/2} + \\frac{4}{3}(1 + \\sqrt{x})^{3/2} + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 15",
+            "problem": "Evaluate \\(\\int \\frac{x}{\\sqrt{1 + x^2} + 1 + x^2}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int \\frac{x}{\\sqrt{1 + x^2} + 1 + x^2}\\,dx\\).\nTo find: the integral.\nMethod: let \\(u = \\sqrt{1 + x^2}\\). Then \\(1 + x^2 = u^2\\), and the derivative brings an \\(x\\,dx\\), which is in the numerator.",
+              "Find \\(x\\,dx\\) in terms of \\(u\\)\n\\[u^2 = 1 + x^2\\]\n\\[2u\\,du = 2x\\,dx\\]\n\\[u\\,du = x\\,dx\\]\nWhy: Differentiating \\(u^2 = 1 + x^2\\) on both sides avoids differentiating a square root.",
+              "Substitute\n\\[\\int \\dfrac{x}{\\sqrt{1 + x^2} + 1 + x^2}\\,dx = \\int \\dfrac{u}{u + u^2}\\,du\\]\n\\[= \\int \\dfrac{u}{u(1 + u)}\\,du = \\int \\dfrac{1}{1 + u}\\,du\\]\nWhy: The denominator is \\(u + u^2\\); take out the common factor \\(u\\) and cancel.",
+              "Integrate and substitute back\n\\[= \\ln|1 + u| + c\\]\n\\[= \\ln\\left(1 + \\sqrt{1 + x^2}\\right) + c\\]\nWhy: Rule 4. We can remove the absolute value signs since \\(1 + \\sqrt{1 + x^2} > 0\\) for all \\(x\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\ln\\left(1 + \\sqrt{1 + x^2}\\right) = \\dfrac{x/\\sqrt{1 + x^2}}{1 + \\sqrt{1 + x^2}}\\]\n\\[= \\dfrac{x}{\\sqrt{1 + x^2} + 1 + x^2} \\;\\checkmark\\]\nWhy: Multiply top and bottom by \\(\\sqrt{1 + x^2}\\)."
+            ],
+            "answer": "\\(\\ln\\left(1 + \\sqrt{1 + x^2}\\right) + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 16",
+            "problem": "Evaluate \\(\\int \\frac{\\sin x}{e^{\\cos x}}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int \\frac{\\sin x}{e^{\\cos x}}\\,dx\\).\nTo find: the integral.\nMethod: let \\(u = \\cos x\\) (the exponent); its derivative \\(-\\sin x\\) is, up to sign, the numerator.",
+              "Choose \\(u\\) and find \\(du\\)\n\\[u = \\cos x\\]\n\\[du = -\\sin x\\,dx\\]\nWhy: \\(\\frac{d}{dx}\\cos x = -\\sin x\\), so \\(\\sin x\\,dx = -du\\).",
+              "Substitute and integrate\n\\[\\int \\dfrac{\\sin x}{e^{\\cos x}}\\,dx = \\int \\dfrac{-du}{e^u}\\]\n\\[= -\\int e^{-u}\\,du = -\\dfrac{e^{-u}}{-1} + c\\]\n\\[= e^{-u} + c = e^{-\\cos x} + c\\]\nWhy: \\(\\frac{1}{e^u} = e^{-u}\\), and Rule 5 gives \\(\\int e^{-u}\\,du = \\frac{e^{-u}}{-1}\\).",
+              "Check\n\\[\\dfrac{d}{dx}e^{-\\cos x} = e^{-\\cos x}\\cdot\\sin x = \\dfrac{\\sin x}{e^{\\cos x}} \\;\\checkmark\\]\nWhy: Chain rule: the derivative of \\(-\\cos x\\) is \\(\\sin x\\)."
+            ],
+            "answer": "\\(e^{-\\cos x} + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 17",
+            "problem": "Evaluate \\(\\int \\frac{e^{\\tan^{-1}x}}{1 + x^2}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int \\frac{e^{\\tan^{-1}x}}{1 + x^2}\\,dx\\).\nTo find: the integral.\nMethod: let \\(u = \\tan^{-1}x\\) (the exponent); its derivative \\(\\frac{1}{1 + x^2}\\) is the other factor.",
+              "Choose \\(u\\) and find \\(du\\)\n\\[u = \\tan^{-1}x\\]\n\\[du = \\dfrac{1}{1 + x^2}\\,dx\\]\nWhy: Table: \\(\\frac{d}{dx}\\tan^{-1}x = \\frac{1}{1 + x^2}\\).",
+              "Substitute and integrate\n\\[\\int \\dfrac{e^{\\tan^{-1}x}}{1 + x^2}\\,dx = \\int e^u\\,du\\]\n\\[= e^u + c = e^{\\tan^{-1}x} + c\\]\nWhy: \\(\\int e^u\\,du = e^u + c\\).",
+              "Check\n\\[\\dfrac{d}{dx}e^{\\tan^{-1}x} = e^{\\tan^{-1}x}\\cdot\\dfrac{1}{1 + x^2} \\;\\checkmark\\]\nWhy: Chain rule."
+            ],
+            "answer": "\\(e^{\\tan^{-1}x} + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 18",
+            "problem": "Evaluate \\(\\int \\frac{e^{2x} + 2e^x}{(e^x + 1)^2}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int \\frac{e^{2x} + 2e^x}{(e^x + 1)^2}\\,dx\\).\nTo find: the integral.\nMethod: let \\(e^x + 1 = u\\). Then \\(e^x = u - 1\\) and \\(e^x\\,dx = du\\); first take out one factor \\(e^x\\) from the numerator.",
+              "Choose \\(u\\)\n\\[e^x + 1 = u\\]\n\\[e^x = u - 1\\]\n\\[e^x\\,dx = du\\]\nWhy: \\(\\frac{d}{dx}(e^x + 1) = e^x\\).",
+              "Rewrite and substitute\n\\[\\int \\dfrac{e^{2x} + 2e^x}{(e^x + 1)^2}\\,dx\\]\n\\[= \\int \\dfrac{e^x + 2}{(e^x + 1)^2}\\cdot e^x\\,dx\\]\n\\[= \\int \\dfrac{u - 1 + 2}{u^2}\\,du = \\int \\dfrac{u + 1}{u^2}\\,du\\]\nWhy: \\(e^{2x} + 2e^x = (e^x + 2)e^x\\); then \\(e^x = u - 1\\) and \\(e^x\\,dx = du\\).",
+              "Split and integrate\n\\[= \\int \\left(\\dfrac{1}{u} + u^{-2}\\right)du\\]\n\\[= \\ln|u| + \\dfrac{u^{-1}}{-1} + c = \\ln|u| - \\dfrac{1}{u} + c\\]\nWhy: \\(\\frac{u + 1}{u^2} = \\frac{u}{u^2} + \\frac{1}{u^2}\\); \\(\\int \\frac{1}{u}\\,du = \\ln|u|\\) and the Power Rule for \\(u^{-2}\\).",
+              "Substitute back\n\\[= \\ln|e^x + 1| - \\dfrac{1}{e^x + 1} + c\\]\nWhy: \\(u = e^x + 1\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left[\\ln(e^x + 1) - (e^x + 1)^{-1}\\right]\\]\n\\[= \\dfrac{e^x}{e^x + 1} + \\dfrac{e^x}{(e^x + 1)^2}\\]\n\\[= \\dfrac{e^x(e^x + 1) + e^x}{(e^x + 1)^2}\\]\n\\[= \\dfrac{e^{2x} + 2e^x}{(e^x + 1)^2} \\;\\checkmark\\]\nWhy: Common denominator \\((e^x + 1)^2\\)."
+            ],
+            "answer": "\\(\\ln|e^x + 1| - \\frac{1}{e^x + 1} + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 19",
+            "problem": "Evaluate \\(\\int \\frac{e^x\\ln(1 + e^x)}{1 + e^x}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int \\frac{e^x\\ln(1 + e^x)}{1 + e^x}\\,dx\\).\nTo find: the integral.\nMethod: let \\(u = \\ln(1 + e^x)\\); its derivative \\(\\frac{e^x}{1 + e^x}\\) is the rest of the integrand.",
+              "Choose \\(u\\) and find \\(du\\)\n\\[u = \\ln(1 + e^x)\\]\n\\[du = \\dfrac{e^x}{1 + e^x}\\,dx\\]\nWhy: \\(\\frac{d}{dx}\\ln f(x) = \\frac{f'(x)}{f(x)}\\) with \\(f(x) = 1 + e^x\\).",
+              "Substitute and integrate\n\\[\\int \\dfrac{e^x\\ln(1 + e^x)}{1 + e^x}\\,dx = \\int u\\,du\\]\n\\[= \\dfrac{u^2}{2} + c = \\dfrac{1}{2}\\left[\\ln(1 + e^x)\\right]^2 + c\\]\nWhy: Power Rule in \\(u\\), then \\(u = \\ln(1 + e^x)\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\,\\tfrac{1}{2}\\left[\\ln(1 + e^x)\\right]^2\\]\n\\[= \\ln(1 + e^x)\\cdot\\dfrac{e^x}{1 + e^x} \\;\\checkmark\\]\nWhy: Chain rule."
+            ],
+            "answer": "\\(\\frac{1}{2}\\left[\\ln(1 + e^x)\\right]^2 + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 20",
+            "problem": "Evaluate \\(\\int \\frac{\\ln(1 + x) - \\ln x}{x(1 + x)}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int \\frac{\\ln(1 + x) - \\ln x}{x(1 + x)}\\,dx\\) (\\(x > 0\\)).\nTo find: the integral.\nMethod: let \\(u = \\ln(1 + x) - \\ln x\\); we expect its derivative to be related to \\(\\frac{1}{x(1 + x)}\\).",
+              "Differentiate \\(u\\)\n\\[\\dfrac{du}{dx} = \\dfrac{1}{1 + x} - \\dfrac{1}{x} = \\dfrac{x - (1 + x)}{x(1 + x)}\\]\n\\[= \\dfrac{x - 1 - x}{x(1 + x)} = \\dfrac{-1}{x(1 + x)}\\]\nWhy: Derivative of \\(\\ln\\), then a common denominator.",
+              "Write \\(dx\\) part through \\(du\\)\n\\[\\dfrac{du}{dx} = \\dfrac{-1}{x(1 + x)}\\]\n\\[\\Rightarrow -du = \\dfrac{1}{x(1 + x)}\\,dx\\]\nWhy: Multiply both sides by \\(dx\\) and by \\(-1\\).",
+              "Substitute and integrate\n\\[\\int \\dfrac{\\ln(1 + x) - \\ln x}{x(1 + x)}\\,dx = \\int u(-du)\\]\n\\[= -\\int u\\,du = -\\dfrac{u^2}{2} + c\\]\n\\[= -\\dfrac{1}{2}\\left[\\ln(1 + x) - \\ln x\\right]^2 + c\\]\nWhy: Power Rule in \\(u\\), then put back \\(u\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left(-\\tfrac{1}{2}u^2\\right) = -u\\dfrac{du}{dx}\\]\n\\[= \\dfrac{\\ln(1 + x) - \\ln x}{x(1 + x)} \\;\\checkmark\\]\nWhy: Chain rule with \\(\\frac{du}{dx} = \\frac{-1}{x(1 + x)}\\)."
+            ],
+            "answer": "\\(-\\frac{1}{2}\\left[\\ln(1 + x) - \\ln x\\right]^2 + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 21",
+            "problem": "Evaluate \\(\\int \\frac{x^2\\tan^{-1}(x^3)}{1 + x^6}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int \\frac{x^2\\tan^{-1}(x^3)}{1 + x^6}\\,dx\\).\nTo find: the integral.\nMethod: let \\(u = \\tan^{-1}(x^3)\\); its derivative is \\(\\frac{3x^2}{1 + x^6}\\), which is 3 times the remaining factor.",
+              "Choose \\(u\\) and find \\(du\\)\n\\[\\dfrac{du}{dx} = \\dfrac{1}{1 + (x^3)^2}\\,\\dfrac{d}{dx}(x^3)\\]\n\\[du = \\dfrac{3x^2}{1 + x^6}\\,dx\\]\n\\[\\dfrac{1}{3}\\,du = \\dfrac{x^2}{1 + x^6}\\,dx\\]\nWhy: Chain rule on \\(\\tan^{-1}(x^3)\\); \\((x^3)^2 = x^6\\).",
+              "Substitute and integrate\n\\[\\int \\dfrac{x^2\\tan^{-1}(x^3)}{1 + x^6}\\,dx = \\int u\\,\\dfrac{1}{3}\\,du\\]\n\\[= \\dfrac{1}{3}\\int u\\,du = \\dfrac{u^2}{6} + c\\]\n\\[= \\dfrac{1}{6}\\left[\\tan^{-1}(x^3)\\right]^2 + c\\]\nWhy: Power Rule in \\(u\\), then put back \\(u\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\,\\tfrac{1}{6}u^2 = \\tfrac{1}{3}u\\cdot\\dfrac{3x^2}{1 + x^6}\\]\n\\[= \\dfrac{x^2\\tan^{-1}(x^3)}{1 + x^6} \\;\\checkmark\\]\nWhy: Chain rule."
+            ],
+            "answer": "\\(\\frac{1}{6}\\left[\\tan^{-1}(x^3)\\right]^2 + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Substitution is the Chain Rule in reverse: \\(\\int f(g(x))\\,g'(x)\\,dx = F(g(x)) + c\\).\n2. Choose \\(u\\) as the \"inside\" expression whose derivative (up to a constant) is also a factor of the integrand.\n3. Change everything: \\(x\\), \\(dx\\) and the integrand must all be written in \\(u\\) and \\(du\\).\n4. A missing constant factor is fixed by multiplying inside and dividing outside (Example 13, Example 21).\n5. If the derivative is not present, write \\(x\\) itself through \\(u\\) (Example 14).\n6. Always substitute back \\(u = g(x)\\) and check by differentiating."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Changing the integrand to \\(u\\) but leaving \\(dx\\) as it is: \\(dx\\) must become \\(du\\) with the correct factor.\n2. Pulling a variable factor outside: only constants may be taken outside the integral sign. In \\(\\int (5x^5 + 5)^3x^4\\,dx\\) we cannot write \\(\\frac{1}{25x^4}\\) outside.\n3. Leaving the answer in \\(u\\).\n4. Losing a minus sign from \\(du = -\\sin x\\,dx\\) (Example 16) or from \\(\\frac{du}{dx} = \\frac{-1}{x(1 + x)}\\) (Example 20)."
+          }
+        ]
+      }
+    }
+  ]
+}

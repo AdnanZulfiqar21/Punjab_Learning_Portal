@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q7",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 104,
+          "note": "Exercise 3.5, Question 7: integral of f from f(x) + f(-x); book p. 102. Key on p. 300 under 'Exercise 3.2' (8/3). The printed condition x^2 + x^3 is impossible; corrected to x^2."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "As printed: Let \\(f(x)\\) be a function satisfying \\(f(x) + f(-x) = x^2 + x^3\\) for all \\(x\\). Evaluate the definite integral \\(\\int_{-2}^{2} f(x)\\,dx\\).",
+            "book_errors": [
+              "\\(f(x) + f(-x) = x^2 + x^3\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "No function can satisfy \\(f(x) + f(-x) = x^2 + x^3\\) for all \\(x\\): replacing \\(x\\) by \\(-x\\) leaves the left side unchanged but turns the right side into \\(x^2 - x^3\\), so we would need \\(x^3 = 0\\) for every \\(x\\). (At \\(x = 1\\) the condition says \\(f(1) + f(-1) = 2\\), at \\(x = -1\\) it says \\(f(-1) + f(1) = 0\\).) Because the left side is always even, only the even part \\(x^2\\) can be meant: \\(f(x) + f(-x) = x^2\\) (for example \\(f(x) = \\frac{x^2}{2} + x^3\\)). With it the answer is \\(\\frac{8}{3}\\), the key's value. With the printed data two correct methods give different results (\\(\\frac{8}{3}\\) and \\(\\frac{20}{3}\\)), which shows the data are inconsistent."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7 Let \\(f(x)\\) be a function satisfying \\(f(x) + f(-x) = x^2\\) [printed as \\(x^2 + x^3\\); see the correction above] for all \\(x\\). Evaluate the definite integral \\(\\int_{-2}^{2} f(x)\\,dx\\).",
+            "explanation": "We know only \\(f(x) + f(-x)\\), not \\(f\\) itself, and the interval \\([-2, 2]\\) is symmetric.\nProperty V turns \\(\\int_{-a}^{a} f\\) into \\(\\int_0^a [f(x) + f(-x)]\\,dx\\), which uses exactly what is given.\nWe use the condition \\(f(x) + f(-x) = x^2\\) (see the correction above).",
+            "steps": [
+              "Given: \\(f(x) + f(-x) = x^2\\) for all \\(x\\) (printed \\(x^2 + x^3\\)).\nTo find: \\(\\int_{-2}^{2} f(x)\\,dx\\).\nMethod: Property V \\(\\int_{-a}^{a} f(x)\\,dx = \\int_{0}^{a} \\big(f(x) + f(-x)\\big)\\,dx\\) with \\(a = 2\\).",
+              "Why the printed condition must be corrected\n\\[x \\to -x:\\ f(-x) + f(x) = x^2 - x^3\\]\n\\[\\Rightarrow\\ x^2 + x^3 = x^2 - x^3\\]\nWhy: the left side \\(f(x) + f(-x)\\) does not change when \\(x\\) becomes \\(-x\\), so the right side must not change either; \\(x^3\\) does change, so it cannot be part of a true condition.",
+              "Apply Property V\n\\[\\int_{-2}^{2} f(x)\\,dx = \\int_{0}^{2} \\big(f(x) + f(-x)\\big)\\,dx\\]\n\\[= \\int_{0}^{2} x^2\\,dx\\]\nWhy: put in the given (corrected) condition.",
+              "Integrate\n\\[= \\left[\\dfrac{x^3}{3}\\right]_{0}^{2} = \\dfrac{8}{3}\\]\nWhy: power rule.",
+              "Second method (the one the key follows)\n\\[I = \\int_{-2}^{2} f(-x)\\,dx\\]\n\\[2I = \\int_{-2}^{2} \\big(f(x) + f(-x)\\big)\\,dx\\]\n\\[= \\int_{-2}^{2} x^2\\,dx = \\dfrac{16}{3},\\quad I = \\dfrac{8}{3}\\]\nWhy: Property IV(ii) with \\(b = 2\\) lets us replace \\(x\\) by \\(-x\\). With the printed \\(x^2 + x^3\\) this method still gives \\(\\frac{8}{3}\\) (because \\(\\int_{-2}^{2} x^3\\,dx = 0\\)), but Property V would give \\(\\int_0^2 (x^2 + x^3)\\,dx = \\frac{20}{3}\\); two different answers prove the printed data are impossible.",
+              "Check with an example\n\\[f(x) = \\dfrac{x^2}{2} + x^3:\\ f(x) + f(-x) = x^2\\]\n\\[\\int_{-2}^{2} \\left(\\dfrac{x^2}{2} + x^3\\right)dx = \\dfrac{8}{3} + 0 \\;\\checkmark\\]\nWhy: a concrete function satisfying the corrected condition gives the same value. The key prints \\(\\frac{8}{3}\\)."
+            ],
+            "final_answer": "\\(\\frac{8}{3}\\) (with the corrected condition \\(f(x) + f(-x) = x^2\\))"
+          }
+        ]
+      }
+    }
+  ]
+}

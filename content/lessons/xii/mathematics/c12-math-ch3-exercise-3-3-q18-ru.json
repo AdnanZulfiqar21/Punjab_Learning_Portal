@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q18-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q18",
+      "title": "Question 18 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 18: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-3-Q18",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "18",
+            "prompt": "18. Evaluate \\(\\int \\dfrac{e^{\\tan^{-1}x}}{(1 + x^2)^2}\\,dx\\).",
+            "explanation": "\\(e^{\\tan^{-1}x}\\) dekh kar \\(t = \\tan^{-1}x\\) rakhna sab se behtar hai, yani \\(x = \\tan t\\).\nPhir \\(dx = \\sec^2 t\\,dt\\) aur \\(1 + x^2 = \\sec^2 t\\); denominator \\(\\sec^4 t\\) ban jata hai aur integral \\(\\int e^t\\cos^2 t\\,dt\\) reh jata hai.\n\\(\\cos^2 t\\) ki power ghatane ke liye \\(\\frac{1 + \\cos 2t}{2}\\) likhenge.\n\\(\\int e^t\\cos 2t\\,dt\\) Example 35 ki tarah do dafa parts se aayega (integral wapas aata hai).\nAakhir mein \\(\\cos 2t\\) aur \\(\\sin 2t\\) ko \\(x\\) mein badalna hai.",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{e^{\\tan^{-1}x}}{(1 + x^2)^2}\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: \\(t = \\tan^{-1}x\\); \\(\\int e^t\\cos^2 t\\,dt\\) banayenge, \\(\\cos^2 t = \\frac{1 + \\cos 2t}{2}\\), aur \\(\\int e^t\\cos 2t\\,dt\\) do dafa parts se.",
+              "\\(t = \\tan^{-1}x\\) rakhein\n\\[x = \\tan t,\\ dx = \\sec^2 t\\,dt\\]\n\\[(1 + x^2)^2 = \\sec^4 t\\]\n\\[= \\int \\dfrac{e^t\\sec^2 t}{\\sec^4 t}\\,dt = \\int e^t\\cos^2 t\\,dt\\]\nKyun: \\(1 + \\tan^2 t = \\sec^2 t\\); \\(\\sec^2 t\\) upar aur \\(\\sec^4 t\\) neeche, to \\(\\frac{1}{\\sec^2 t} = \\cos^2 t\\) bacha.",
+              "Power ghatayein\n\\[= \\dfrac{1}{2}\\int e^t\\,dt + \\dfrac{1}{2}\\int e^t\\cos 2t\\,dt\\]\n\\[= \\dfrac{e^t}{2} + \\dfrac{1}{2}J\\]\nKyun: \\(\\cos^2 t = \\frac{1 + \\cos 2t}{2}\\). Mushkil hissay ko \\(J\\) ka naam diya taa ke alag se nikaal sakein.",
+              "\\(J\\) do dafa parts se\n\\[J = e^t\\cos 2t + 2\\int e^t\\sin 2t\\,dt\\]\n\\[\\int e^t\\sin 2t\\,dt = e^t\\sin 2t - 2J\\]\n\\[J = e^t\\cos 2t + 2e^t\\sin 2t - 4J\\]\nKyun: dono dafa trigonometric function first aur \\(e^t\\) second (ek hi choice, warna kaam ulat jata hai). \\(J\\) wapas aa gaya.\nDhyan dein: \\(\\cos 2t\\) ka derivative \\(-2\\sin 2t\\) hai; 2 ka factor bhoolne se \\(J\\) ka coefficient ghalat ho jata hai.",
+              "\\(J\\) solve karein\n\\[5J = e^t(\\cos 2t + 2\\sin 2t)\\]\n\\[J = \\dfrac{e^t}{5}(\\cos 2t + 2\\sin 2t)\\]\nKyun: \\(-4J\\) ko left par laye: \\(J + 4J = 5J\\).",
+              "Wapas \\(x\\) mein\n\\[\\cos 2t = \\dfrac{1 - x^2}{1 + x^2},\\ \\sin 2t = \\dfrac{2x}{1 + x^2}\\]\n\\[I = \\dfrac{e^t}{2} + \\dfrac{e^t(1 - x^2 + 4x)}{10(1 + x^2)}\\]\n\\[= \\dfrac{e^t[5(1 + x^2) + 1 - x^2 + 4x]}{10(1 + x^2)}\\]\n\\[= \\dfrac{e^{\\tan^{-1}x}(2x^2 + 2x + 3)}{5(1 + x^2)} + c\\]\nKyun: double angle ke \\(\\tan\\) wale formulas: \\(\\cos 2t = \\frac{1 - \\tan^2 t}{1 + \\tan^2 t}\\), \\(\\sin 2t = \\frac{2\\tan t}{1 + \\tan^2 t}\\), aur \\(\\tan t = x\\). Common denominator le kar numerator \\(4x^2 + 4x + 6\\) bana; 2 cancel kiya.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left[\\dfrac{e^{\\tan^{-1}x}(2x^2 + 2x + 3)}{5(1 + x^2)}\\right] = \\dfrac{e^{\\tan^{-1}x}}{(1 + x^2)^2}\\]\nKyun: jawab ko differentiate kar ke sympy se check kiya; integrand wapas milta hai."
+            ],
+            "final_answer": "\\(\\dfrac{e^{\\tan^{-1}x}(2x^2 + 2x + 3)}{5(1 + x^2)} + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

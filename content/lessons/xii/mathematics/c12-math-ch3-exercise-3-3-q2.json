@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 2: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2. Evaluate \\(\\int x^7\\cdot\\ln x\\,dx\\).",
+            "explanation": "A product of an algebraic and a logarithmic function.\nPlan: take \\(\\ln x\\) as the first function (ILATE: L before A) and \\(x^7\\) as the second, then integrate by parts once.",
+            "steps": [
+              "Given: \\(\\int x^7\\ln x\\,dx\\), \\(x > 0\\).\nTo find: the indefinite integral.\nMethod: integration by parts with \\(f(x) = \\ln x\\), \\(g(x) = x^7\\), because \\(\\ln x\\) becomes \\(\\frac{1}{x}\\) and \\(x^7\\) is easy to integrate.",
+              "Integrate the second, differentiate the first\n\\[\\int x^7\\,dx = \\dfrac{x^8}{8}\\]\n\\[\\dfrac{d}{dx}\\ln x = \\dfrac{1}{x}\\]\nWhy: power rule \\(\\int x^n\\,dx = \\frac{x^{n+1}}{n+1}\\).",
+              "Apply integration by parts\n\\[= \\ln x\\cdot\\dfrac{x^8}{8} - \\int \\dfrac{x^8}{8}\\cdot\\dfrac{1}{x}\\,dx\\]\n\\[= \\dfrac{x^8\\ln x}{8} - \\dfrac{1}{8}\\int x^7\\,dx\\]\nWhy: \\(\\frac{x^8}{x} = x^7\\); the constant \\(\\frac{1}{8}\\) comes outside.",
+              "Integrate\n\\[= \\dfrac{x^8\\ln x}{8} - \\dfrac{1}{8}\\cdot\\dfrac{x^8}{8} + c\\]\n\\[= \\dfrac{x^8\\ln x}{8} - \\dfrac{x^8}{64} + c\\]\nWhy: \\(\\int x^7\\,dx = \\frac{x^8}{8}\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left(\\dfrac{x^8\\ln x}{8}\\right) = x^7\\ln x + \\dfrac{x^7}{8}\\]\n\\[\\dfrac{d}{dx}\\left(\\dfrac{x^8}{64}\\right) = \\dfrac{x^7}{8}\\]\nWhy: the \\(\\frac{x^7}{8}\\) terms cancel, leaving \\(x^7\\ln x\\)."
+            ],
+            "final_answer": "\\(\\dfrac{x^8\\ln x}{8} - \\dfrac{x^8}{64} + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

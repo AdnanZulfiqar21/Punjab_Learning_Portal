@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q22-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q22",
+      "title": "Question 22 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 22: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-3-Q22",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "22",
+            "prompt": "22. Evaluate \\(\\int e^{5x}(x^5 + x^4 + 1)\\,dx\\).",
+            "explanation": "Agar \\(x^5e^{5x}\\) ko seedha parts se karein to paanch dafa parts lagana parega! Is liye pehle koi shortcut dhoondhte hain.\nKitab ka Note: \\(\\int e^{g}[fg' + f']\\,dx = e^{g}f + c\\). Yahan \\(g = 5x\\), \\(g' = 5\\), to chahiye \\(5f + f' = x^5 + x^4 + 1\\).\n\\(f = \\frac{x^5 + 1}{5}\\) lein: \\(5f = x^5 + 1\\) aur \\(f' = x^4\\). Bilkul fit!\nPlan: integral ko torein, \\((x^5 + 1)\\) ko first function bana kar parts lagayein; bacha hua \\(\\int x^4e^{5x}\\,dx\\) cancel ho jayega.",
+            "steps": [
+              "Diya gaya: \\(\\int e^{5x}(x^5 + x^4 + 1)\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: torenge; \\(\\int (x^5 + 1)e^{5x}\\,dx\\) par parts, \\(x^5 + 1\\) first aur \\(e^{5x}\\) second; \\(\\int x^4e^{5x}\\,dx\\) cancel ho jayega.",
+              "Torein\n\\[= \\int (x^5 + 1)e^{5x}\\,dx + \\int x^4e^{5x}\\,dx\\]\nKyun: \\(x^5 + 1\\) ko ikattha rakha, kyunke us ka derivative \\(5x^4\\) hai, jo doosre hisse se mel khata hai.",
+              "Pehle integral par parts\n\\[\\int (x^5 + 1)e^{5x}\\,dx = (x^5 + 1)\\dfrac{e^{5x}}{5} - \\int \\dfrac{e^{5x}}{5}\\cdot 5x^4\\,dx\\]\n\\[= \\dfrac{(x^5 + 1)e^{5x}}{5} - \\int x^4e^{5x}\\,dx\\]\nKyun: \\(e^{5x}\\) ka integral \\(\\frac{e^{5x}}{5}\\), \\((x^5 + 1)\\) ka derivative \\(5x^4\\); 5 aur \\(\\frac{1}{5}\\) cancel.",
+              "Cancel karein\n\\[= \\dfrac{(x^5 + 1)e^{5x}}{5} - \\int x^4e^{5x}\\,dx + \\int x^4e^{5x}\\,dx\\]\n\\[= \\dfrac{e^{5x}}{5}(x^5 + 1) + c\\]\nKyun: \\(\\int x^4e^{5x}\\,dx\\) ek dafa minus, ek dafa plus; dono khatam.\nDhyan dein: answer key ka \\(\\frac{e^{5x}}{5}(x^5 + 1)\\) aur yeh ek hi cheez hai; \\(+1\\) ko bhoolna nahi.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left[\\dfrac{e^{5x}}{5}(x^5 + 1)\\right] = e^{5x}(x^5 + 1) + \\dfrac{e^{5x}}{5}\\cdot 5x^4\\]\n\\[= e^{5x}(x^5 + x^4 + 1)\\]\nKyun: product rule; integrand wapas aaya."
+            ],
+            "final_answer": "\\(\\dfrac{e^{5x}}{5}(x^5 + 1) + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

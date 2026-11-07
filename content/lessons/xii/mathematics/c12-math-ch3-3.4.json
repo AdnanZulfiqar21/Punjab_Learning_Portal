@@ -1,0 +1,290 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.4",
+      "title": "3.4 Integration by Parts",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 86,
+          "pdf_to": 91,
+          "note": "Book p. 84-89: 3.4 Integration by Parts, product rule in integral form, Examples 29-39 (Example 30 printed twice), Note!, Special Integral with proof and Challenge!"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The rule that corresponds to the Product Rule for differentiation is called integration by parts. Integration by parts is a technique for simplifying integrals of the form\n\\[\\int f(x)\\,g(x)\\,dx\\]",
+            "bold": [
+              "integration by parts"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why do we need a new method? Substitution works when one factor is (almost) the derivative of the other, as in \\(\\int 2x\\cos(x^2)\\,dx\\). It fails for a product of two unrelated functions such as \\(\\int x\\sin x\\,dx\\), \\(\\int x e^{x}\\,dx\\) or \\(\\int \\ln x\\,dx\\).\nIntegration by parts trades the integral we cannot do for a simpler one: we differentiate one factor (making it simpler) and integrate the other."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Product Rule in Integral Form"
+          },
+          {
+            "type": "paragraph",
+            "text": "Suppose that \\(f(x)\\) and \\(h(x)\\) are two differentiable functions. According to the product rule,\n\\[\\dfrac{d}{dx}[f(x)h(x)]\\]\n\\[= f(x)h'(x) + h(x)f'(x)\\]\nIntegrating both sides with respect to \\(x\\) gives:\n\\[f(x)h(x) = \\int [f(x)h'(x) + h(x)f'(x)]\\,dx\\]\nSplitting the integral, we have:\n\\[f(x)h(x) = \\int f(x)h'(x)\\,dx\\]\n\\[\\quad + \\int h(x)f'(x)\\,dx\\]\nRearranging terms, we obtain:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\int f(x)h'(x)\\,dx = f(x)h(x) - \\int h(x)f'(x)\\,dx \\quad \\text{...(1)}",
+            "text_alt": "integral of f(x) h prime(x) dx equals f(x) h(x) minus integral of h(x) f prime(x) dx, equation 1"
+          },
+          {
+            "type": "paragraph",
+            "text": "Now, let \\(h'(x) = g(x)\\), then \\(h(x) = \\int g(x)\\,dx\\).\nSubstituting into (1), we get:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}\\int f(x)g(x)\\,dx &= f(x)\\left(\\int g(x)\\,dx\\right) \\ &\\quad - \\int \\left[\\left(\\int g(x)\\,dx\\right) f'(x)\\right] dx \\quad \\text{...(2)}\\end{aligned}",
+            "text_alt": "integral of f(x) g(x) dx equals f(x) times the integral of g(x) dx, minus the integral of (integral of g(x) dx) times f prime(x), dx, equation 2"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read formula (2) in words: (first) \\(\\times\\) (integral of second) \\(-\\) \\(\\int\\) (integral of second) \\(\\times\\) (derivative of first) \\(dx\\).\n\\(f\\) is called the first function (we differentiate it) and \\(g\\) the second function (we integrate it).\nHow to choose: the second function must be one we can integrate; the first should become simpler when differentiated. A popular memory word (not in the textbook) is ILATE: Inverse trigonometric, Logarithmic, Algebraic, Trigonometric, Exponential; take as first the function that comes earlier in this list.\nNo constant is needed when we write \\(\\int g(x)\\,dx\\) inside the formula; one constant \\(c\\) is added at the very end."
+          },
+          {
+            "type": "example",
+            "title": "Example 29",
+            "problem": "Evaluate \\(\\int x\\sin nx\\,dx,\\ n \\ne 0\\).",
+            "steps": [
+              "Given: \\(\\int x\\sin nx\\,dx\\), \\(n \\ne 0\\).\nTo find: the indefinite integral.\nMethod: a product of an algebraic function \\(x\\) and a trigonometric function \\(\\sin nx\\). Integrate by parts taking \\(x\\) as the first function (its derivative is 1) and \\(\\sin nx\\) as the second.",
+              "Integrate the second and differentiate the first\n\\[\\int \\sin nx\\,dx = \\dfrac{-\\cos nx}{n}\\]\n\\[\\dfrac{d}{dx}(x) = 1\\]\nWhy: \\(\\dfrac{d}{dx}\\cos nx = -n\\sin nx\\), so we divide by \\(n\\) (this is why \\(n \\ne 0\\)).",
+              "Apply formula (2)\n\\[= x\\left(\\dfrac{-\\cos nx}{n}\\right)\\]\n\\[\\quad - \\int \\left(\\dfrac{-\\cos nx}{n}\\right)(1)\\,dx\\]\n\\[= \\dfrac{-x\\cos nx}{n} + \\dfrac{1}{n}\\int \\cos nx\\,dx\\]\nWhy: first \\(\\times\\) integral of second, minus \\(\\int\\) (integral of second \\(\\times\\) derivative of first). Two minus signs give plus.",
+              "Finish the easy integral\n\\[= \\dfrac{-x\\cos nx}{n} + \\dfrac{1}{n}\\cdot\\dfrac{\\sin nx}{n} + c\\]\n\\[= \\dfrac{-x\\cos nx}{n} + \\dfrac{\\sin nx}{n^2} + c\\]\nWhy: \\(\\int \\cos nx\\,dx = \\frac{\\sin nx}{n}\\).",
+              "Check: differentiate the answer\n\\[\\dfrac{d}{dx}\\left(\\dfrac{-x\\cos nx}{n}\\right) = \\dfrac{-\\cos nx}{n} + x\\sin nx\\]\n\\[\\dfrac{d}{dx}\\left(\\dfrac{\\sin nx}{n^2}\\right) = \\dfrac{\\cos nx}{n}\\]\nWhy: the two \\(\\frac{\\cos nx}{n}\\) terms cancel and \\(x\\sin nx\\) is left, which is the integrand."
+            ],
+            "answer": "\\(\\int x\\sin nx\\,dx = \\dfrac{-x\\cos nx}{n} + \\dfrac{\\sin nx}{n^2} + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 30",
+            "problem": "Evaluate \\(\\int x e^{ax}\\,dx\\).",
+            "steps": [
+              "Given: \\(\\int x e^{ax}\\,dx\\) (\\(a \\ne 0\\)).\nTo find: the indefinite integral.\nMethod: integration by parts with \\(x\\) as the first function and \\(e^{ax}\\) as the second, because \\(e^{ax}\\) is easy to integrate and \\(x\\) becomes 1 when differentiated.",
+              "Apply formula (2)\n\\[\\int x e^{ax}\\,dx = x\\dfrac{e^{ax}}{a} - \\int \\dfrac{e^{ax}}{a}\\cdot 1\\,dx\\]\nWhy: \\(\\int e^{ax}\\,dx = \\frac{e^{ax}}{a}\\) and \\(\\frac{d}{dx}x = 1\\).",
+              "Take the constant out and integrate\n\\[= x\\dfrac{e^{ax}}{a} - \\dfrac{1}{a}\\int e^{ax}\\,dx\\]\n\\[= x\\dfrac{e^{ax}}{a} - \\dfrac{1}{a}\\cdot\\dfrac{e^{ax}}{a} + c\\]\nWhy: \\(\\frac{1}{a}\\) is a constant, so it comes outside the integral.",
+              "Factor out \\(e^{ax}\\)\n\\[= e^{ax}\\left(\\dfrac{x}{a} - \\dfrac{1}{a^2}\\right) + c\\]\n\\[= e^{ax}\\left(\\dfrac{ax - 1}{a^2}\\right) + c\\]\nWhy: common factor \\(e^{ax}\\); then a common denominator \\(a^2\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left[\\dfrac{e^{ax}(ax-1)}{a^2}\\right]\\]\n\\[= \\dfrac{a e^{ax}(ax-1) + a e^{ax}}{a^2}\\]\n\\[= \\dfrac{a^2 x e^{ax}}{a^2} = x e^{ax}\\]\nWhy: product rule on \\(e^{ax}(ax-1)\\); the result is the integrand."
+            ],
+            "answer": "\\(\\int x e^{ax}\\,dx = e^{ax}\\left(\\dfrac{ax-1}{a^2}\\right) + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 31",
+            "problem": "Evaluate \\(\\int \\dfrac{x}{\\cos^2 x}\\,dx\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{x}{\\cos^2 x}\\,dx\\).\nTo find: the indefinite integral.\nMethod: write \\(\\frac{1}{\\cos^2 x} = \\sec^2 x\\). Then integrate by parts with \\(x\\) first and \\(\\sec^2 x\\) second, because \\(\\int \\sec^2 x\\,dx = \\tan x\\) is a standard result.",
+              "Rewrite the integrand\n\\[\\int \\dfrac{x}{\\cos^2 x}\\,dx = \\int x\\sec^2 x\\,dx\\]\nWhy: \\(\\sec x = \\frac{1}{\\cos x}\\).",
+              "Apply formula (2)\n\\[= x\\cdot\\tan x - \\int \\tan x\\cdot 1\\,dx\\]\n\\[= x\\tan x - \\int \\dfrac{\\sin x}{\\cos x}\\,dx\\]\nWhy: first \\(x\\), integral of the second \\(\\tan x\\), derivative of the first 1.",
+              "Make the numerator the derivative of the denominator\n\\[= x\\tan x + \\int \\dfrac{-\\sin x}{\\cos x}\\,dx\\]\n\\[= x\\tan x + \\ln|\\cos x| + c\\]\nWhy: \\(\\frac{d}{dx}\\cos x = -\\sin x\\), and \\(\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln|f(x)| + c\\).",
+              "Check\n\\[\\dfrac{d}{dx}(x\\tan x + \\ln|\\cos x|)\\]\n\\[= \\tan x + x\\sec^2 x - \\tan x\\]\n\\[= x\\sec^2 x\\]\nWhy: \\(\\frac{d}{dx}\\ln|\\cos x| = \\frac{-\\sin x}{\\cos x} = -\\tan x\\)."
+            ],
+            "answer": "\\(\\int \\dfrac{x}{\\cos^2 x}\\,dx = x\\tan x + \\ln|\\cos x| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Numbering note (ours)",
+            "text": "The textbook prints the number 'Example 30' twice: first for \\(\\int x e^{ax}\\,dx\\), then for \\(\\int \\frac{x}{\\cos^2 x}\\,dx\\), and no Example 31 is printed (the next one is Example 32). We show the second one as Example 31 so that every example has its own number."
+          },
+          {
+            "type": "example",
+            "title": "Example 32",
+            "problem": "Evaluate \\(\\int \\ln(\\sin x)\\cdot\\sin 2x\\,dx\\).",
+            "steps": [
+              "Given: \\(\\int \\ln(\\sin x)\\cdot\\sin 2x\\,dx\\).\nTo find: the indefinite integral.\nMethod: use \\(\\sin 2x = 2\\sin x\\cos x\\), then the substitution \\(u = \\sin x\\) turns it into \\(2\\int u\\ln u\\,du\\), which we integrate by parts with \\(\\ln u\\) first.",
+              "Use the double-angle formula\n\\[\\int \\ln(\\sin x)\\cdot 2\\sin x\\cos x\\,dx\\]\n\\[= 2\\int \\ln(\\sin x)\\sin x\\cos x\\,dx\\]\nWhy: \\(\\cos x\\,dx\\) is exactly \\(d(\\sin x)\\), so a substitution is ready.",
+              "Substitute \\(u = \\sin x\\)\n\\[\\dfrac{du}{dx} = \\cos x \\Rightarrow du = \\cos x\\,dx\\]\n\\[= 2\\int \\ln u\\cdot u\\,du\\]\nWhy: \\(\\sin x\\) becomes \\(u\\) and \\(\\cos x\\,dx\\) becomes \\(du\\).",
+              "Integrate by parts (first \\(\\ln u\\), second \\(u\\))\n\\[= 2\\Big[\\ln u\\cdot\\dfrac{u^2}{2}\\]\n\\[\\qquad - \\int \\dfrac{u^2}{2}\\cdot\\dfrac{1}{u}\\,du\\Big]\\]\n\\[= u^2\\ln u - \\int u\\,du\\]\n\\[= u^2\\ln u - \\dfrac{u^2}{2} + c\\]\nWhy: \\(\\ln u\\) has no simple antiderivative of our list but its derivative \\(\\frac{1}{u}\\) is simple; \\(u\\) is easy to integrate.",
+              "Return to \\(x\\)\n\\[= \\sin^2 x\\ln(\\sin x) - \\dfrac{\\sin^2 x}{2} + c\\]\n\\[= \\sin^2 x\\left[\\ln(\\sin x) - \\dfrac{1}{2}\\right] + c\\]\nWhy: put \\(u = \\sin x\\) back; take \\(\\sin^2 x\\) common.",
+              "Check\n\\[\\dfrac{d}{dx}\\left[\\sin^2 x\\ln(\\sin x) - \\tfrac{\\sin^2 x}{2}\\right]\\]\n\\[= 2\\sin x\\cos x\\ln(\\sin x)\\]\n\\[\\quad + \\sin x\\cos x - \\sin x\\cos x\\]\n\\[= \\sin 2x\\ln(\\sin x)\\]\nWhy: \\(\\frac{d}{dx}\\ln(\\sin x) = \\frac{\\cos x}{\\sin x}\\), so \\(\\sin^2 x\\cdot\\frac{\\cos x}{\\sin x} = \\sin x\\cos x\\)."
+            ],
+            "answer": "\\(\\int \\ln(\\sin x)\\cdot\\sin 2x\\,dx = \\sin^2 x\\left[\\ln(\\sin x) - \\dfrac{1}{2}\\right] + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note!",
+            "text": "\\(\\int e^{g(x)}[f(x)g'(x) + f'(x)]\\,dx = e^{g(x)}f(x) + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is the Note true? By the product rule and the chain rule,\n\\[\\dfrac{d}{dx}\\left[e^{g(x)}f(x)\\right]\\]\n\\[= e^{g(x)}g'(x)f(x) + e^{g(x)}f'(x)\\]\n\\[= e^{g(x)}[f(x)g'(x) + f'(x)]\\]\nSo whenever the integrand is \\(e^{g(x)}\\) times a bracket of this shape, the answer can be written at once. The most used case is \\(g(x) = x\\): \\(\\int e^{x}[f(x) + f'(x)]\\,dx = e^{x}f(x) + c\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 33",
+            "problem": "Evaluate \\(\\int e^{x^2}(\\cos x + 2x\\sin x)\\,dx\\).",
+            "steps": [
+              "Given: \\(\\int e^{x^2}(\\cos x + 2x\\sin x)\\,dx\\).\nTo find: the indefinite integral.\nMethod: split into two integrals. Integrate the first, \\(\\int e^{x^2}\\cos x\\,dx\\), by parts with \\(e^{x^2}\\) as the first function; the new integral cancels the second one.",
+              "Split the integral\n\\[= \\int e^{x^2}\\cos x\\,dx + \\int e^{x^2}\\,2x\\sin x\\,dx\\]\nWhy: the integral of a sum is the sum of the integrals.",
+              "Parts on the first integral\n\\[\\int e^{x^2}\\cos x\\,dx\\]\n\\[= e^{x^2}(\\sin x) - \\int (\\sin x)e^{x^2}\\,2x\\,dx\\]\nWhy: second function \\(\\cos x\\) integrates to \\(\\sin x\\); the first \\(e^{x^2}\\) differentiates to \\(e^{x^2}\\cdot 2x\\) (chain rule).",
+              "The two integrals cancel\n\\[= e^{x^2}\\sin x - \\int e^{x^2}2x\\sin x\\,dx\\]\n\\[\\quad + \\int e^{x^2}2x\\sin x\\,dx\\]\n\\[= e^{x^2}\\sin x + c\\]\nWhy: the same integral appears once with minus and once with plus. This is the Note with \\(g(x) = x^2\\), \\(f(x) = \\sin x\\).",
+              "Check\n\\[\\dfrac{d}{dx}(e^{x^2}\\sin x)\\]\n\\[= 2x e^{x^2}\\sin x + e^{x^2}\\cos x\\]\nWhy: product rule; it equals the integrand."
+            ],
+            "answer": "\\(\\int e^{x^2}(\\cos x + 2x\\sin x)\\,dx = e^{x^2}\\sin x + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 34",
+            "problem": "Evaluate \\(\\int \\sin^{-1}\\left(\\dfrac{x}{\\sqrt{1+x^2}}\\right)dx\\).",
+            "steps": [
+              "Given: \\(\\int \\sin^{-1}\\left(\\frac{x}{\\sqrt{1+x^2}}\\right)dx\\).\nTo find: the indefinite integral.\nMethod: the expression \\(\\sqrt{1+x^2}\\) suggests \\(x = \\tan\\theta\\). The inverse sine then simplifies to \\(\\theta\\), and \\(\\int \\theta\\sec^2\\theta\\,d\\theta\\) is done by parts.",
+              "Substitute \\(x = \\tan\\theta\\)\n\\[\\theta \\in \\left(-\\dfrac{\\pi}{2}, \\dfrac{\\pi}{2}\\right)\\]\n\\[dx = \\sec^2\\theta\\,d\\theta\\]\nWhy: on this interval \\(\\tan\\theta\\) takes every real value once, and \\(\\sec\\theta > 0\\).",
+              "Simplify inside the inverse sine\n\\[\\dfrac{\\tan\\theta}{\\sqrt{1+\\tan^2\\theta}} = \\dfrac{\\tan\\theta}{\\sec\\theta}\\]\n\\[= \\dfrac{\\sin\\theta}{\\cos\\theta}\\cdot\\cos\\theta = \\sin\\theta\\]\nWhy: \\(1 + \\tan^2\\theta = \\sec^2\\theta\\) and \\(\\sqrt{\\sec^2\\theta} = \\sec\\theta\\) because \\(\\sec\\theta > 0\\).",
+              "The integral becomes\n\\[= \\int \\sin^{-1}(\\sin\\theta)\\cdot\\sec^2\\theta\\,d\\theta\\]\n\\[= \\int \\theta\\cdot\\sec^2\\theta\\,d\\theta\\]\nWhy: \\(\\sin^{-1}(\\sin\\theta) = \\theta\\) for \\(\\theta \\in \\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\).",
+              "Integrate by parts (first \\(\\theta\\), second \\(\\sec^2\\theta\\))\n\\[= \\theta\\tan\\theta - \\int (\\tan\\theta)(1)\\,d\\theta\\]\n\\[= \\theta\\tan\\theta - \\ln|\\sec\\theta| + c\\]\nWhy: \\(\\int \\tan\\theta\\,d\\theta = \\ln|\\sec\\theta| + c\\).",
+              "Write \\(\\sec\\theta\\) through \\(\\tan\\theta\\)\n\\[= \\theta\\tan\\theta - \\ln\\left|\\sqrt{\\sec^2\\theta}\\right| + c\\]\n\\[= \\theta\\tan\\theta - \\dfrac{1}{2}\\ln|1+\\tan^2\\theta| + c\\]\nWhy: \\(\\ln\\sqrt{A} = \\frac{1}{2}\\ln A\\) and \\(\\sec^2\\theta = 1 + \\tan^2\\theta\\).",
+              "Return to \\(x\\)\n\\[= (\\tan^{-1}x)\\cdot x - \\dfrac{1}{2}\\ln|1+x^2| + c\\]\n\\[= x\\tan^{-1}x - \\dfrac{1}{2}\\ln(1+x^2) + c\\]\nWhy: \\(\\tan\\theta = x\\), \\(\\theta = \\tan^{-1}x\\); \\(1 + x^2 > 0\\), so the modulus can be dropped.",
+              "Check\n\\[\\dfrac{d}{dx}\\left[x\\tan^{-1}x - \\tfrac{1}{2}\\ln(1+x^2)\\right]\\]\n\\[= \\tan^{-1}x + \\dfrac{x}{1+x^2} - \\dfrac{x}{1+x^2}\\]\n\\[= \\tan^{-1}x\\]\nWhy: and \\(\\tan^{-1}x = \\theta = \\sin^{-1}\\left(\\frac{x}{\\sqrt{1+x^2}}\\right)\\), the integrand."
+            ],
+            "answer": "\\(\\int \\sin^{-1}\\left(\\dfrac{x}{\\sqrt{1+x^2}}\\right)dx = x\\tan^{-1}x - \\dfrac{1}{2}\\ln(1+x^2) + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In the next example the integral comes back after integrating by parts twice. Do not panic: call the integral \\(I\\), bring the \\(I\\) terms to one side and solve for \\(I\\) like an ordinary equation.\nKeep the same choice in both rounds (here the trigonometric function is the first function both times); switching the choice in the second round just undoes the first round."
+          },
+          {
+            "type": "example",
+            "title": "Example 35",
+            "problem": "Show that \\(\\int e^{ax}\\sin bx\\,dx = \\dfrac{1}{\\sqrt{a^2+b^2}}e^{ax}\\sin\\left(bx - \\tan^{-1}\\dfrac{b}{a}\\right) + c\\).",
+            "steps": [
+              "Given: \\(I = \\int e^{ax}\\sin bx\\,dx\\) (\\(a, b \\ne 0\\)).\nTo prove: the stated formula.\nMethod: integrate by parts twice with \\(e^{ax}\\) as the first function; the original integral returns, so solve for \\(I\\). Then write \\(a = r\\cos\\theta\\), \\(b = r\\sin\\theta\\) to combine the sine and cosine.",
+              "First integration by parts\n\\[I = e^{ax}\\left(-\\dfrac{\\cos bx}{b}\\right)\\]\n\\[\\quad - \\int \\left(-\\dfrac{\\cos bx}{b}\\right)e^{ax}\\cdot a\\,dx\\]\n\\[= -\\dfrac{e^{ax}\\cos bx}{b} + \\dfrac{a}{b}\\int e^{ax}\\cos bx\\,dx\\]\nWhy: \\(\\int \\sin bx\\,dx = -\\frac{\\cos bx}{b}\\) and \\(\\frac{d}{dx}e^{ax} = ae^{ax}\\).",
+              "Second integration by parts\n\\[\\int e^{ax}\\cos bx\\,dx\\]\n\\[= e^{ax}\\dfrac{\\sin bx}{b} - \\int \\dfrac{\\sin bx}{b}e^{ax}\\cdot a\\,dx\\]\nWhy: same choice as before, \\(e^{ax}\\) first; \\(\\int \\cos bx\\,dx = \\frac{\\sin bx}{b}\\).",
+              "Put it back: \\(I\\) appears again\n\\[I = -\\dfrac{e^{ax}\\cos bx}{b} + \\dfrac{ae^{ax}\\sin bx}{b^2}\\]\n\\[\\quad - \\dfrac{a^2}{b^2}\\int e^{ax}\\sin bx\\,dx\\]\n\\[I = -\\dfrac{e^{ax}\\cos bx}{b} + \\dfrac{ae^{ax}\\sin bx}{b^2}\\]\n\\[\\quad - \\dfrac{a^2}{b^2}I\\]\nWhy: the last integral is exactly \\(I\\).",
+              "Solve for \\(I\\)\n\\[I + \\dfrac{a^2}{b^2}I = -\\dfrac{e^{ax}\\cos bx}{b} + \\dfrac{ae^{ax}\\sin bx}{b^2}\\]\n\\[\\left(\\dfrac{b^2+a^2}{b^2}\\right)I\\]\n\\[= \\dfrac{e^{ax}}{b^2}(a\\sin bx - b\\cos bx)\\]\n\\[I = \\dfrac{e^{ax}(a\\sin bx - b\\cos bx)}{a^2+b^2}\\]\nWhy: collect the \\(I\\) terms, take \\(\\frac{e^{ax}}{b^2}\\) common, then multiply by \\(\\frac{b^2}{a^2+b^2}\\).",
+              "Substitute \\(a = r\\cos\\theta\\), \\(b = r\\sin\\theta\\)\n\\[I = \\dfrac{e^{ax}}{a^2+b^2}(r\\cos\\theta\\sin bx\\]\n\\[\\qquad - r\\sin\\theta\\cos bx)\\]\n\\[= \\dfrac{e^{ax}\\,r}{a^2+b^2}(\\sin bx\\cos\\theta\\]\n\\[\\qquad - \\cos bx\\sin\\theta)\\]\n\\[= \\dfrac{1}{a^2+b^2}e^{ax}\\,r\\sin(bx - \\theta)\\]\nWhy: \\(\\sin A\\cos B - \\cos A\\sin B = \\sin(A - B)\\).",
+              "Find \\(r\\) and \\(\\theta\\)\n\\[r^2 = a^2 + b^2 \\Rightarrow r = \\sqrt{a^2+b^2}\\]\n\\[\\dfrac{r\\sin\\theta}{r\\cos\\theta} = \\dfrac{b}{a} \\Rightarrow \\theta = \\tan^{-1}\\left(\\dfrac{b}{a}\\right)\\]\nWhy: squaring and adding gives \\(r^2(\\cos^2\\theta + \\sin^2\\theta) = a^2 + b^2\\); dividing gives \\(\\tan\\theta\\). (Taking \\(\\theta = \\tan^{-1}\\frac{b}{a}\\) assumes \\(a > 0\\), so that \\(\\cos\\theta > 0\\).)",
+              "Final form\n\\[I = \\dfrac{\\sqrt{a^2+b^2}}{a^2+b^2}e^{ax}\\sin\\left(bx - \\tan^{-1}\\dfrac{b}{a}\\right)\\]\n\\[= \\dfrac{e^{ax}}{\\sqrt{a^2+b^2}}\\sin\\left(bx - \\tan^{-1}\\dfrac{b}{a}\\right) + c\\]\nWhy: \\(\\frac{\\sqrt{a^2+b^2}}{a^2+b^2} = \\frac{1}{\\sqrt{a^2+b^2}}\\); add the constant of integration.",
+              "Check (the middle form)\n\\[\\dfrac{d}{dx}\\left[e^{ax}(a\\sin bx - b\\cos bx)\\right]\\]\n\\[= e^{ax}(a^2\\sin bx - ab\\cos bx\\]\n\\[\\qquad + ab\\cos bx + b^2\\sin bx)\\]\n\\[= (a^2+b^2)e^{ax}\\sin bx\\]\nWhy: dividing by \\(a^2 + b^2\\) gives the integrand \\(e^{ax}\\sin bx\\)."
+            ],
+            "answer": "Hence proved: \\(\\int e^{ax}\\sin bx\\,dx = \\dfrac{e^{ax}}{a^2+b^2}(a\\sin bx - b\\cos bx) + c = \\dfrac{1}{\\sqrt{a^2+b^2}}e^{ax}\\sin\\left(bx - \\tan^{-1}\\dfrac{b}{a}\\right) + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 36",
+            "problem": "Evaluate \\(\\int x\\sin^2 x\\,dx\\).",
+            "steps": [
+              "Given: \\(\\int x\\sin^2 x\\,dx\\).\nTo find: the indefinite integral.\nMethod: \\(\\sin^2 x\\) is not easy to integrate directly, so first use \\(\\sin^2 x = \\frac{1 - \\cos 2x}{2}\\). Then only \\(\\int x\\cos 2x\\,dx\\) needs parts.",
+              "Reduce the power\n\\[\\int x\\cdot\\dfrac{1 - \\cos 2x}{2}\\,dx = \\dfrac{1}{2}\\int (x - x\\cos 2x)\\,dx\\]\n\\[= \\dfrac{1}{2}\\int x\\,dx - \\dfrac{1}{2}\\int x\\cos 2x\\,dx\\]\nWhy: \\(\\cos 2x = 1 - 2\\sin^2 x\\).",
+              "Parts on the second integral\n\\[= \\dfrac{1}{2}\\left(\\dfrac{x^2}{2}\\right)\\]\n\\[\\quad - \\dfrac{1}{2}\\left[x\\left(\\dfrac{\\sin 2x}{2}\\right) - \\int \\dfrac{\\sin 2x}{2}\\cdot 1\\,dx\\right]\\]\n\\[= \\dfrac{x^2}{4} - \\dfrac{x\\sin 2x}{4} + \\dfrac{1}{4}\\int \\sin 2x\\,dx\\]\nWhy: \\(x\\) first, \\(\\cos 2x\\) second with \\(\\int \\cos 2x\\,dx = \\frac{\\sin 2x}{2}\\).",
+              "Finish\n\\[= \\dfrac{x^2}{4} - \\dfrac{x\\sin 2x}{4}\\]\n\\[\\quad + \\dfrac{1}{4}\\left(-\\dfrac{\\cos 2x}{2}\\right) + c\\]\n\\[= \\dfrac{x^2}{4} - \\dfrac{x\\sin 2x}{4} - \\dfrac{1}{8}\\cos 2x + c\\]\nWhy: \\(\\int \\sin 2x\\,dx = -\\frac{\\cos 2x}{2}\\).",
+              "Check\n\\[\\dfrac{d}{dx}(\\ldots) = \\dfrac{x}{2} - \\dfrac{\\sin 2x}{4}\\]\n\\[\\quad - \\dfrac{x\\cos 2x}{2} + \\dfrac{\\sin 2x}{4}\\]\n\\[= \\dfrac{x(1 - \\cos 2x)}{2} = x\\sin^2 x\\]\nWhy: the \\(\\frac{\\sin 2x}{4}\\) terms cancel."
+            ],
+            "answer": "\\(\\int x\\sin^2 x\\,dx = \\dfrac{x^2}{4} - \\dfrac{x\\sin 2x}{4} - \\dfrac{1}{8}\\cos 2x + c\\)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Special Integral"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}\\int \\sqrt{x^2+a^2}\\,dx &= \\frac{x}{2}\\sqrt{x^2+a^2} \\ &\\quad + \\frac{a^2}{2}\\ln\\left|x + \\sqrt{x^2+a^2}\\right| + c\\end{aligned}",
+            "text_alt": "integral of square root of x squared plus a squared dx equals x over 2 times square root of x squared plus a squared, plus a squared over 2 times ln of modulus of x plus square root of x squared plus a squared, plus c"
+          },
+          {
+            "type": "paragraph",
+            "text": "Proof: Let \\(I = \\int \\sqrt{x^2+a^2}\\,dx = \\int \\sqrt{x^2+a^2}\\,(1)\\,dx\\). Integrating by parts, we have\n\\[I = \\sqrt{x^2+a^2}\\,(x) - \\int x\\dfrac{d}{dx}\\left[(x^2+a^2)^{\\frac{1}{2}}\\right]dx\\]\n\\[= x\\sqrt{x^2+a^2} - \\int x\\cdot\\dfrac{1}{2}(x^2+a^2)^{-\\frac{1}{2}}(2x)\\,dx\\]\n\\[= x\\sqrt{x^2+a^2} - \\int \\dfrac{x^2}{\\sqrt{x^2+a^2}}\\,dx\\]\n\\[= x\\sqrt{x^2+a^2} - \\int \\dfrac{x^2+a^2-a^2}{\\sqrt{x^2+a^2}}\\,dx\\]\n\\[= x\\sqrt{x^2+a^2} - \\int \\dfrac{x^2+a^2}{\\sqrt{x^2+a^2}}\\,dx\\]\n\\[\\quad + \\int \\dfrac{a^2}{\\sqrt{x^2+a^2}}\\,dx\\]\n\\[= x\\sqrt{x^2+a^2} - \\int \\sqrt{x^2+a^2}\\,dx\\]\n\\[\\quad + a^2\\int \\dfrac{1}{\\sqrt{x^2+a^2}}\\,dx\\]\n\\[I = x\\sqrt{x^2+a^2} - I + a^2\\int \\dfrac{1}{\\sqrt{x^2+a^2}}\\,dx\\]\n\\[2I = x\\sqrt{x^2+a^2} + a^2\\ln\\left|x + \\sqrt{x^2+a^2}\\right| + c_1\\]\n\\[I = \\dfrac{1}{2}x\\sqrt{x^2+a^2} + \\dfrac{a^2}{2}\\ln\\left|x + \\sqrt{x^2+a^2}\\right| + c\\]\nThus, \\(\\int \\sqrt{x^2+a^2}\\,dx = \\frac{x}{2}\\sqrt{x^2+a^2} + \\frac{a^2}{2}\\ln\\left|x + \\sqrt{x^2+a^2}\\right| + c\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Three ideas make this proof work:\n1. A single function is written as (function) \\(\\times\\) 1, so that 1 can be the second function.\n2. The trick \\(x^2 = (x^2 + a^2) - a^2\\) splits the new integral into the original \\(I\\) and a known integral.\n3. The known integral \\(\\int \\frac{dx}{\\sqrt{x^2+a^2}} = \\ln\\left|x + \\sqrt{x^2+a^2}\\right| + c\\) comes from the special integrals of 3.3. Then \\(I\\) is found like in Example 35, and \\(c = \\frac{c_1}{2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Prove that:\n(i) \\(\\int \\sqrt{a^2-x^2}\\,dx = \\frac{x}{2}\\sqrt{a^2-x^2} + \\frac{a^2}{2}\\sin^{-1}\\left(\\frac{x}{a}\\right) + c\\)\n(ii) \\(\\int \\sqrt{x^2-a^2}\\,dx = \\frac{x}{2}\\sqrt{x^2-a^2} - \\frac{a^2}{2}\\ln\\left|x + \\sqrt{x^2-a^2}\\right| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Both Challenge results are proved exactly like the Special Integral: write the root \\(\\times\\) 1, integrate by parts, use \\(x^2 = a^2 - (a^2 - x^2)\\) (for (i)) or \\(x^2 = (x^2 - a^2) + a^2\\) (for (ii)), and solve for \\(I\\). For (i) the known integral is \\(\\int \\frac{dx}{\\sqrt{a^2-x^2}} = \\sin^{-1}\\frac{x}{a}\\).\nHow to use the three formulas: for \\(\\int \\sqrt{\\text{quadratic}}\\,dx\\), complete the square. A plus sign between the square and the constant inside the root gives the \\(\\sqrt{u^2 + k^2}\\) formula; \\(k^2 - u^2\\) gives the \\(\\sin^{-1}\\) formula; \\(u^2 - k^2\\) gives the formula with a minus before the log. Examples 37 to 39 show one of each."
+          },
+          {
+            "type": "example",
+            "title": "Example 37",
+            "problem": "Evaluate \\(\\int \\sqrt{x^2 - 4x + 13}\\,dx\\).",
+            "steps": [
+              "Given: \\(\\int \\sqrt{x^2 - 4x + 13}\\,dx\\).\nTo find: the indefinite integral.\nMethod: complete the square to get the form \\(\\sqrt{u^2 + 3^2}\\), then use the Special Integral with \\(a = 3\\).",
+              "Complete the square\n\\[x^2 - 4x + 13 = (x^2 - 4x + 4) + 13 - 4\\]\n\\[= (x - 2)^2 + 9 = (x-2)^2 + (3)^2\\]\nWhy: half of the coefficient of \\(x\\) is \\(-2\\); add and subtract \\((-2)^2 = 4\\).",
+              "Substitute \\(u = x - 2\\)\n\\[du = dx\\]\n\\[\\int \\sqrt{(x-2)^2 + (3)^2}\\,dx = \\int \\sqrt{u^2 + 3^2}\\,du\\]\nWhy: a shift of \\(x\\) does not change \\(dx\\).",
+              "Use the Special Integral (\\(a = 3\\))\n\\[= \\dfrac{u}{2}\\sqrt{u^2+3^2}\\]\n\\[\\quad + \\dfrac{3^2}{2}\\ln\\left|u + \\sqrt{u^2+3^2}\\right| + c\\]\nWhy: it is exactly \\(\\int \\sqrt{x^2 + a^2}\\,dx\\) with \\(u\\) for \\(x\\) and \\(a = 3\\).",
+              "Replace \\(u\\) with \\(x - 2\\)\n\\[= \\dfrac{x-2}{2}\\sqrt{(x-2)^2+9}\\]\n\\[\\quad + \\dfrac{9}{2}\\ln\\left|(x-2) + \\sqrt{(x-2)^2+9}\\right| + c\\]\n\\[= \\dfrac{x-2}{2}\\sqrt{x^2-4x+13}\\]\n\\[\\quad + \\dfrac{9}{2}\\ln\\left|(x-2) + \\sqrt{x^2-4x+13}\\right| + c\\]\nWhy: \\((x-2)^2 + 9 = x^2 - 4x + 13\\).",
+              "Check\nDifferentiating the answer gives back \\(\\sqrt{x^2 - 4x + 13}\\) (verified; it is the Special Integral with \\(x\\) replaced by \\(x - 2\\), and \\(\\frac{d}{dx}(x - 2) = 1\\)).\nWhy: a shift inside a formula does not change its derivative pattern."
+            ],
+            "answer": "\\(\\dfrac{x-2}{2}\\sqrt{x^2-4x+13} + \\dfrac{9}{2}\\ln\\left|(x-2) + \\sqrt{x^2-4x+13}\\right| + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 38",
+            "problem": "Evaluate \\(\\int \\sqrt{8x - x^2 - 7}\\,dx\\).",
+            "steps": [
+              "Given: \\(\\int \\sqrt{8x - x^2 - 7}\\,dx\\).\nTo find: the indefinite integral.\nMethod: the \\(x^2\\) term is negative, so take the minus sign out, complete the square and reach \\(\\sqrt{3^2 - u^2}\\); then use Challenge (i) with \\(a = 3\\).",
+              "Take out the minus sign\n\\[8x - x^2 - 7 = -(x^2 - 8x) - 7\\]\n\\[= -(x^2 - 8x + 16 - 16) - 7\\]\nWhy: add and subtract \\(16 = (-4)^2\\) inside the bracket.",
+              "Complete the square\n\\[= -[(x-4)^2 - 16] - 7\\]\n\\[= 16 - (x-4)^2 - 7\\]\n\\[= 3^2 - (x-4)^2\\]\nWhy: \\(16 - 7 = 9 = 3^2\\).",
+              "Substitute \\(u = x - 4\\)\n\\[dx = du\\]\n\\[\\int \\sqrt{3^2 - (x-4)^2}\\,dx = \\int \\sqrt{3^2 - u^2}\\,du\\]\nWhy: shift of \\(x\\).",
+              "Use Challenge (i) with \\(a = 3\\)\n\\[= \\dfrac{u}{2}\\sqrt{3^2-u^2}\\]\n\\[\\quad + \\dfrac{3^2}{2}\\sin^{-1}\\left(\\dfrac{u}{3}\\right) + c\\]\nWhy: \\(\\int \\sqrt{a^2 - x^2}\\,dx = \\frac{x}{2}\\sqrt{a^2-x^2} + \\frac{a^2}{2}\\sin^{-1}\\frac{x}{a} + c\\).",
+              "Substitute back \\(u = x - 4\\)\n\\[= \\dfrac{x-4}{2}\\sqrt{9-(x-4)^2}\\]\n\\[\\quad + \\dfrac{9}{2}\\sin^{-1}\\left(\\dfrac{x-4}{3}\\right) + c\\]\n\\[= \\dfrac{x-4}{2}\\sqrt{8x-x^2-7}\\]\n\\[\\quad + \\dfrac{9}{2}\\sin^{-1}\\left(\\dfrac{x-4}{3}\\right) + c\\]\nWhy: \\(9 - (x-4)^2 = 8x - x^2 - 7\\).",
+              "Check\nDifferentiating the answer (for \\(1 < x < 7\\), where the root is real) gives \\(\\sqrt{8x - x^2 - 7}\\) (verified).\nWhy: the domain matters: \\(8x - x^2 - 7 = (x-1)(7-x) \\ge 0\\) only for \\(1 \\le x \\le 7\\)."
+            ],
+            "answer": "\\(\\dfrac{x-4}{2}\\sqrt{8x-x^2-7} + \\dfrac{9}{2}\\sin^{-1}\\left(\\dfrac{x-4}{3}\\right) + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 39",
+            "problem": "Evaluate \\(\\int \\sqrt{x^2 - 8x + 7}\\,dx\\).",
+            "steps": [
+              "Given: \\(\\int \\sqrt{x^2 - 8x + 7}\\,dx\\).\nTo find: the indefinite integral.\nMethod: complete the square to reach \\(\\sqrt{u^2 - 3^2}\\); use Challenge (ii) with \\(a = 3\\).",
+              "Complete the square\n\\[x^2 - 8x + 7 = (x^2 - 8x + 16) + 7 - 16\\]\n\\[= (x-4)^2 - 9 = (x-4)^2 - 3^2\\]\nWhy: add and subtract \\(16\\).",
+              "Substitute \\(u = x - 4\\)\n\\[du = dx\\]\n\\[\\int \\sqrt{u^2 - 3^2}\\,du\\]\nWhy: shift of \\(x\\).",
+              "Use Challenge (ii) with \\(a = 3\\)\n\\[= \\dfrac{u}{2}\\sqrt{u^2-3^2}\\]\n\\[\\quad - \\dfrac{3^2}{2}\\ln\\left|u + \\sqrt{u^2-3^2}\\right| + c\\]\nWhy: \\(\\int \\sqrt{x^2 - a^2}\\,dx = \\frac{x}{2}\\sqrt{x^2-a^2} - \\frac{a^2}{2}\\ln\\left|x + \\sqrt{x^2-a^2}\\right| + c\\).",
+              "Substitute back \\(u = x - 4\\)\n\\[= \\dfrac{x-4}{2}\\sqrt{(x-4)^2-9}\\]\n\\[\\quad - \\dfrac{9}{2}\\ln\\left|x - 4 + \\sqrt{(x-4)^2-9}\\right| + c\\]\n\\[= \\dfrac{x-4}{2}\\sqrt{x^2-8x+7}\\]\n\\[\\quad - \\dfrac{9}{2}\\ln\\left|x - 4 + \\sqrt{x^2-8x+7}\\right| + c\\]\nWhy: \\((x-4)^2 - 9 = x^2 - 8x + 7\\).",
+              "Check\nDifferentiating the answer (for \\(x > 7\\)) gives \\(\\sqrt{x^2 - 8x + 7}\\) (verified).\nWhy: note the minus before the log here, unlike Example 37."
+            ],
+            "answer": "\\(\\dfrac{x-4}{2}\\sqrt{x^2-8x+7} - \\dfrac{9}{2}\\ln\\left|x - 4 + \\sqrt{x^2-8x+7}\\right| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Integration by parts: \\(\\int f g\\,dx = f\\int g\\,dx - \\int \\left(\\int g\\,dx\\right)f'\\,dx\\).\n2. Choose as second function one you can integrate; as first, one that gets simpler when differentiated (ILATE helps).\n3. A lone \\(\\ln x\\), \\(\\sin^{-1}x\\), \\(\\tan^{-1}x\\) or \\(\\sqrt{x^2 \\pm a^2}\\) is written as (function) \\(\\times\\) 1.\n4. If the original integral returns, call it \\(I\\) and solve for \\(I\\).\n5. \\(\\int e^{g(x)}[f(x)g'(x) + f'(x)]\\,dx = e^{g(x)}f(x) + c\\); with \\(g(x) = x\\): \\(\\int e^{x}[f + f']\\,dx = e^{x}f + c\\).\n6. \\(\\int \\sqrt{\\text{quadratic}}\\,dx\\): complete the square, then use the Special Integral or a Challenge formula.\n7. Always check by differentiating your answer."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Choosing the wrong first function: for \\(\\int x e^{x}\\,dx\\) taking \\(e^{x}\\) as first gives \\(\\int \\frac{x^2}{2}e^{x}\\,dx\\), which is harder.\n2. Losing the minus sign of the formula, or the minus inside \\(\\int \\sin bx\\,dx = -\\frac{\\cos bx}{b}\\).\n3. Forgetting the chain-rule factor: \\(\\frac{d}{dx}e^{x^2} = 2x e^{x^2}\\), \\(\\int e^{2x}\\,dx = \\frac{e^{2x}}{2}\\).\n4. Switching the choice of first function in the second round of a repeated parts: the work cancels and you get \\(I = I\\).\n5. Mixing up the three root formulas: \\(\\sqrt{a^2 - x^2}\\) gives \\(\\sin^{-1}\\); \\(\\sqrt{x^2 \\pm a^2}\\) gives \\(\\ln\\) (with + for \\(x^2 + a^2\\), − for \\(x^2 - a^2\\))."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-2-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-2-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 86,
+          "pdf_to": 86,
+          "note": "Exercise 3.2 Q2 (i)-(xiii), by change of variable; answers printed in the key block 'Exercise 3.4'"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(i)",
+            "prompt": "2 (i) Evaluate the following integral (by change of variable): \\(\\int \\frac{e^{x}}{9-e^{2x}}\\,dx\\)",
+            "explanation": "\\(e^{2x} = (e^{x})^{2}\\) and \\(e^{x}dx\\) is the differential of \\(e^{x}\\).\nWith \\(u = e^{x}\\) the integral is \\(\\int\\frac{du}{3^{2}-u^{2}}\\), special integral (i) of Section 3.3 with \\(a = 3\\).\nPlan: substitute, use the formula, put \\(x\\) back.",
+            "steps": [
+              "Given: \\(\\int \\frac{e^{x}}{9-e^{2x}}\\,dx\\)\nTo find: the indefinite integral.\nMethod: change of variable \\(u = e^{x}\\), then the special integral \\(\\int\\frac{du}{a^{2}-u^{2}} = \\frac{1}{2a}\\ln\\left|\\frac{a+u}{a-u}\\right| + c\\).",
+              "Change of variable\n\\[u = e^{x},\\quad du = e^{x}\\,dx\\]\n\\[e^{2x} = (e^{x})^{2} = u^{2}\\]\nWhy: the numerator \\(e^{x}dx\\) becomes \\(du\\) exactly.",
+              "Use the special integral with \\(a = 3\\)\n\\[\\int\\dfrac{du}{3^{2}-u^{2}} = \\dfrac{1}{2(3)}\\ln\\left|\\dfrac{3+u}{3-u}\\right| + c\\]\nWhy: \\(9 = 3^{2}\\), so the denominator has the form \\(a^{2} - u^{2}\\).",
+              "Put \\(x\\) back\n\\[= \\dfrac{1}{6}\\ln\\left|\\dfrac{3+e^{x}}{3-e^{x}}\\right| + c\\]\nWhy: \\(u = e^{x}\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\Big[\\tfrac{1}{6}\\big(\\ln|3+e^{x}| - \\ln|3-e^{x}|\\big)\\Big]\\]\n\\[= \\dfrac{1}{6}\\Big(\\dfrac{e^{x}}{3+e^{x}} + \\dfrac{e^{x}}{3-e^{x}}\\Big)\\]\n\\[= \\dfrac{1}{6}\\cdot\\dfrac{6e^{x}}{9-e^{2x}} = \\dfrac{e^{x}}{9-e^{2x}}\\]\nWhy: the integrand comes back."
+            ],
+            "final_answer": "\\(\\frac{1}{6}\\ln\\left|\\frac{3+e^{x}}{3-e^{x}}\\right| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints this question's answers under the heading 'Exercise 3.4' (the block headed 'Exercise 3.2' holds the answers of Exercise 3.5).\nQ2 (i)-(viii) are 1 (i)-(viii); Q2 (x), (xi), (xii) keep their numbers; Q2 (ix) is printed as (xiv) and Q2 (xiii) as (xv).\nThe key's (ix) \\(2 - \\frac{\\pi}{2}\\) and (xiii) \\(\\frac{\\pi}{8}\\ln 2\\) are definite-integral values that belong to no question of this exercise."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ii)",
+            "prompt": "2 (ii) Evaluate the following integral (by change of variable): \\(\\int \\frac{\\cos x}{\\sin^{2}x-4}\\,dx\\)",
+            "explanation": "\\(\\cos x\\,dx\\) is the differential of \\(\\sin x\\).\nWith \\(u = \\sin x\\): \\(\\int\\frac{du}{u^{2}-2^{2}}\\), the Challenge formula (i) with \\(a = 2\\).\nPlan: substitute, formula, put \\(x\\) back.",
+            "steps": [
+              "Given: \\(\\int \\frac{\\cos x}{\\sin^{2}x-4}\\,dx\\)\nTo find: the indefinite integral.\nMethod: \\(u = \\sin x\\), then \\(\\int\\frac{du}{u^{2}-a^{2}} = \\frac{1}{2a}\\ln\\left|\\frac{u-a}{u+a}\\right| + c\\).",
+              "Change of variable\n\\[u = \\sin x,\\quad du = \\cos x\\,dx\\]\nWhy: the numerator becomes \\(du\\).",
+              "Use the formula with \\(a = 2\\)\n\\[\\int\\dfrac{du}{u^{2}-2^{2}} = \\dfrac{1}{2(2)}\\ln\\left|\\dfrac{u-2}{u+2}\\right| + c\\]\nWhy: the denominator has the form \\(u^{2} - a^{2}\\).",
+              "Put \\(x\\) back\n\\[= \\dfrac{1}{4}\\ln\\left|\\dfrac{\\sin x-2}{\\sin x+2}\\right| + c\\]\nWhy: \\(u = \\sin x\\). Since \\(-1 \\le \\sin x \\le 1\\), this also equals \\(\\frac{1}{4}\\ln\\frac{2-\\sin x}{2+\\sin x} + c\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\Big[\\tfrac{1}{4}\\big(\\ln|\\sin x-2| - \\ln|\\sin x+2|\\big)\\Big]\\]\n\\[= \\dfrac{\\cos x}{4}\\Big(\\dfrac{1}{\\sin x-2} - \\dfrac{1}{\\sin x+2}\\Big)\\]\n\\[= \\dfrac{\\cos x}{4}\\cdot\\dfrac{4}{\\sin^{2}x-4} = \\dfrac{\\cos x}{\\sin^{2}x-4}\\]\nWhy: the integrand comes back."
+            ],
+            "final_answer": "\\(\\frac{1}{4}\\ln\\left|\\frac{\\sin x-2}{\\sin x+2}\\right| + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iii)",
+            "prompt": "2 (iii) Evaluate the following integral (by change of variable): \\(\\int \\frac{e^{x}}{1+e^{2x}}\\,dx\\)",
+            "explanation": "Again \\(e^{2x} = (e^{x})^{2}\\) and \\(e^{x}dx = d(e^{x})\\).\nWith \\(u = e^{x}\\): \\(\\int\\frac{du}{1+u^{2}} = \\tan^{-1}u + c\\).\nPlan: substitute and use the \\(\\tan^{-1}\\) formula with \\(a = 1\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{e^{x}}{1+e^{2x}}\\,dx\\)\nTo find: the indefinite integral.\nMethod: \\(u = e^{x}\\), then \\(\\int\\frac{du}{a^{2}+u^{2}} = \\frac{1}{a}\\tan^{-1}\\frac{u}{a} + c\\) with \\(a = 1\\).",
+              "Change of variable\n\\[u = e^{x},\\quad du = e^{x}\\,dx\\]\n\\[\\int\\dfrac{e^{x}\\,dx}{1+(e^{x})^{2}} = \\int\\dfrac{du}{1+u^{2}}\\]\nWhy: the numerator becomes \\(du\\) and \\(e^{2x} = u^{2}\\).",
+              "Integrate and put \\(x\\) back\n\\[= \\tan^{-1}u + c = \\tan^{-1}(e^{x}) + c\\]\nWhy: \\(\\frac{d}{du}\\tan^{-1}u = \\frac{1}{1+u^{2}}\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\tan^{-1}(e^{x}) = \\dfrac{e^{x}}{1+e^{2x}}\\]\nWhy: chain rule gives the integrand."
+            ],
+            "final_answer": "\\(\\tan^{-1}(e^{x}) + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(iv)",
+            "prompt": "2 (iv) Evaluate the following integral (by change of variable): \\(\\int \\frac{1}{x\\sqrt{4-(\\ln x)^{2}}}\\,dx\\)",
+            "explanation": "\\(\\frac{1}{x}dx\\) is the differential of \\(\\ln x\\).\nWith \\(u = \\ln x\\): \\(\\int\\frac{du}{\\sqrt{2^{2}-u^{2}}}\\), special integral (ii) of Section 3.3 with \\(a = 2\\).\nPlan: substitute, use \\(\\sin^{-1}\\), put \\(x\\) back.",
+            "steps": [
+              "Given: \\(\\int \\frac{dx}{x\\sqrt{4-(\\ln x)^{2}}}\\)\nTo find: the indefinite integral.\nMethod: \\(u = \\ln x\\), then \\(\\int\\frac{du}{\\sqrt{a^{2}-u^{2}}} = \\sin^{-1}\\frac{u}{a} + c\\).",
+              "Change of variable\n\\[u = \\ln x,\\quad du = \\dfrac{1}{x}\\,dx\\]\n\\[\\int\\dfrac{1}{\\sqrt{4-(\\ln x)^{2}}}\\cdot\\dfrac{dx}{x} = \\int\\dfrac{du}{\\sqrt{2^{2}-u^{2}}}\\]\nWhy: \\(\\frac{d}{dx}\\ln x = \\frac{1}{x}\\).",
+              "Integrate and put \\(x\\) back\n\\[= \\sin^{-1}\\dfrac{u}{2} + c = \\sin^{-1}\\left(\\dfrac{\\ln x}{2}\\right) + c\\]\nWhy: special integral (ii) with \\(a = 2\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\sin^{-1}\\dfrac{\\ln x}{2} = \\dfrac{1}{\\sqrt{1-\\frac{(\\ln x)^{2}}{4}}}\\cdot\\dfrac{1}{2x}\\]\n\\[= \\dfrac{1}{x\\sqrt{4-(\\ln x)^{2}}}\\]\nWhy: \\(\\sqrt{1 - \\frac{p}{4}} = \\frac{1}{2}\\sqrt{4-p}\\), and the 2s cancel."
+            ],
+            "final_answer": "\\(\\sin^{-1}\\left(\\frac{\\ln x}{2}\\right) + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(v)",
+            "prompt": "2 (v) Evaluate the following integral (by change of variable): \\(\\int \\frac{1}{9x^{2}-25}\\,dx\\)",
+            "explanation": "\\(9x^{2} - 25 = (3x)^{2} - 5^{2}\\), a difference of squares.\nWith \\(u = 3x\\) (so \\(dx = \\frac{du}{3}\\)) it is \\(\\frac{1}{3}\\int\\frac{du}{u^{2}-5^{2}}\\).\nPlan: substitute, use the \\(u^{2} - a^{2}\\) formula with \\(a = 5\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{dx}{9x^{2}-25}\\)\nTo find: the indefinite integral.\nMethod: \\(u = 3x\\), then \\(\\int\\frac{du}{u^{2}-a^{2}} = \\frac{1}{2a}\\ln\\left|\\frac{u-a}{u+a}\\right| + c\\).",
+              "Change of variable\n\\[u = 3x,\\quad du = 3\\,dx,\\quad dx = \\dfrac{du}{3}\\]\n\\[\\int\\dfrac{dx}{(3x)^{2}-5^{2}} = \\dfrac{1}{3}\\int\\dfrac{du}{u^{2}-5^{2}}\\]\nWhy: \\(9x^{2} = (3x)^{2}\\) and \\(25 = 5^{2}\\).",
+              "Use the formula with \\(a = 5\\)\n\\[= \\dfrac{1}{3}\\cdot\\dfrac{1}{2(5)}\\ln\\left|\\dfrac{u-5}{u+5}\\right| + c\\]\n\\[= \\dfrac{1}{30}\\ln\\left|\\dfrac{u-5}{u+5}\\right| + c\\]\nWhy: \\(\\frac{1}{3}\\cdot\\frac{1}{10} = \\frac{1}{30}\\).",
+              "Put \\(x\\) back\n\\[= \\dfrac{1}{30}\\ln\\left|\\dfrac{3x-5}{3x+5}\\right| + c\\]\nWhy: \\(u = 3x\\).",
+              "Check\n\\[\\dfrac{1}{30}\\Big(\\dfrac{3}{3x-5} - \\dfrac{3}{3x+5}\\Big)\\]\n\\[= \\dfrac{1}{30}\\cdot\\dfrac{30}{9x^{2}-25}\\]\n\\[= \\dfrac{1}{9x^{2}-25}\\]\nWhy: the derivative of the answer is the integrand."
+            ],
+            "final_answer": "\\(\\frac{1}{30}\\ln\\left|\\frac{3x-5}{3x+5}\\right| + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(vi)",
+            "prompt": "2 (vi) Evaluate the following integral (by change of variable): \\(\\int \\frac{dx}{x\\sqrt{3x^{2}-12}}\\)",
+            "explanation": "Take 3 out of the root: \\(\\sqrt{3x^{2}-12} = \\sqrt{3}\\sqrt{x^{2}-4}\\).\n\\(\\sqrt{x^{2}-2^{2}}\\) is Case 3: put \\(x = 2\\sec\\theta\\) (take \\(x > 2\\)).\nPlan: substitute, simplify to \\(\\int d\\theta\\), go back to \\(x\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{dx}{x\\sqrt{3x^{2}-12}}\\), \\(x > 2\\)\nTo find: the indefinite integral.\nMethod: trigonometric substitution, Case 3 (\\(\\sqrt{x^{2}-a^{2}}\\), \\(x = a\\sec\\theta\\)), because \\(\\sec^{2}\\theta - 1 = \\tan^{2}\\theta\\) removes the root.",
+              "Take the common factor out of the root\n\\[\\sqrt{3x^{2}-12} = \\sqrt{3(x^{2}-4)} = \\sqrt{3}\\sqrt{x^{2}-4}\\]\n\\[I = \\dfrac{1}{\\sqrt{3}}\\int\\dfrac{dx}{x\\sqrt{x^{2}-4}}\\]\nWhy: the root now has the Case 3 form with \\(a = 2\\).",
+              "Substitute \\(x = 2\\sec\\theta\\), \\(0 < \\theta < \\frac{\\pi}{2}\\)\n\\[dx = 2\\sec\\theta\\tan\\theta\\,d\\theta\\]\n\\[\\sqrt{x^{2}-4} = \\sqrt{4\\sec^{2}\\theta - 4}\\]\n\\[= 2\\sqrt{\\tan^{2}\\theta} = 2\\tan\\theta\\]\nWhy: \\(\\sec^{2}\\theta - 1 = \\tan^{2}\\theta\\), and \\(\\tan\\theta > 0\\) on this interval.",
+              "Simplify and integrate\n\\[I = \\dfrac{1}{\\sqrt{3}}\\int\\dfrac{2\\sec\\theta\\tan\\theta\\,d\\theta}{(2\\sec\\theta)(2\\tan\\theta)}\\]\n\\[= \\dfrac{1}{\\sqrt{3}}\\int\\dfrac{1}{2}\\,d\\theta = \\dfrac{\\theta}{2\\sqrt{3}} + c\\]\nWhy: everything cancels except \\(\\frac{1}{2}\\).",
+              "Back to \\(x\\)\n\\[\\sec\\theta = \\dfrac{x}{2} \\Rightarrow \\theta = \\sec^{-1}\\dfrac{x}{2}\\]\n\\[I = \\dfrac{1}{2\\sqrt{3}}\\sec^{-1}\\left(\\dfrac{x}{2}\\right) + c\\]\nWhy: from the substitution \\(x = 2\\sec\\theta\\).",
+              "The answer key's form\n\\[\\tan\\theta = \\sqrt{\\sec^{2}\\theta-1} = \\dfrac{\\sqrt{x^{2}-4}}{2}\\]\n\\[\\theta = \\tan^{-1}\\dfrac{\\sqrt{x^{2}-4}}{2}\\]\nWhy: so the key's \\(\\frac{1}{2\\sqrt{3}}\\arctan\\left(\\frac{\\sqrt{x^{2}-4}}{2}\\right) + c\\) is the same answer for \\(x > 2\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\Big[\\tfrac{1}{2\\sqrt{3}}\\sec^{-1}\\tfrac{x}{2}\\Big]\\]\n\\[= \\dfrac{1}{2\\sqrt{3}}\\cdot\\dfrac{2}{x\\sqrt{x^{2}-4}}\\]\n\\[= \\dfrac{1}{\\sqrt{3}\\,x\\sqrt{x^{2}-4}} = \\dfrac{1}{x\\sqrt{3x^{2}-12}}\\]\nWhy: \\(\\frac{d}{dx}\\sec^{-1}\\frac{x}{a} = \\frac{a}{x\\sqrt{x^{2}-a^{2}}}\\) for \\(x > a\\)."
+            ],
+            "final_answer": "\\(\\frac{1}{2\\sqrt{3}}\\sec^{-1}\\left(\\frac{x}{2}\\right) + c = \\frac{1}{2\\sqrt{3}}\\tan^{-1}\\left(\\frac{\\sqrt{x^{2}-4}}{2}\\right) + c\\) (\\(x > 2\\))"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(vii)",
+            "prompt": "2 (vii) Evaluate the following integral (by change of variable): \\(\\int \\frac{x^{2}}{x^{2}+a^{2}}\\,dx\\)",
+            "explanation": "\\(x^{2} + a^{2}\\) suggests Case 2: \\(x = a\\tan\\theta\\) (take \\(a > 0\\)).\nThen \\(x^{2} + a^{2} = a^{2}\\sec^{2}\\theta\\) and the integral becomes \\(a\\int\\tan^{2}\\theta\\,d\\theta\\).\nPlan: substitute, use \\(\\tan^{2}\\theta = \\sec^{2}\\theta - 1\\), go back to \\(x\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{x^{2}}{x^{2}+a^{2}}\\,dx\\), \\(a > 0\\)\nTo find: the indefinite integral.\nMethod: Case 2 substitution \\(x = a\\tan\\theta\\), because \\(\\tan^{2}\\theta + 1 = \\sec^{2}\\theta\\).",
+              "Substitute \\(x = a\\tan\\theta\\), \\(-\\frac{\\pi}{2} < \\theta < \\frac{\\pi}{2}\\)\n\\[dx = a\\sec^{2}\\theta\\,d\\theta\\]\n\\[x^{2}+a^{2} = a^{2}\\tan^{2}\\theta + a^{2} = a^{2}\\sec^{2}\\theta\\]\nWhy: \\(\\frac{d}{d\\theta}\\tan\\theta = \\sec^{2}\\theta\\); the identity simplifies the denominator.",
+              "Simplify\n\\[\\int\\dfrac{a^{2}\\tan^{2}\\theta}{a^{2}\\sec^{2}\\theta}\\cdot a\\sec^{2}\\theta\\,d\\theta\\]\n\\[= a\\int\\tan^{2}\\theta\\,d\\theta\\]\nWhy: \\(a^{2}\\) and \\(\\sec^{2}\\theta\\) cancel.",
+              "Integrate\n\\[= a\\int(\\sec^{2}\\theta - 1)\\,d\\theta\\]\n\\[= a(\\tan\\theta - \\theta) + c\\]\nWhy: \\(\\tan^{2}\\theta = \\sec^{2}\\theta - 1\\) and \\(\\int\\sec^{2}\\theta\\,d\\theta = \\tan\\theta\\).",
+              "Back to \\(x\\)\n\\[a\\tan\\theta = x,\\quad \\theta = \\tan^{-1}\\dfrac{x}{a}\\]\n\\[= x - a\\tan^{-1}\\left(\\dfrac{x}{a}\\right) + c\\]\nWhy: from \\(x = a\\tan\\theta\\).",
+              "A quicker way\n\\[\\dfrac{x^{2}}{x^{2}+a^{2}} = 1 - \\dfrac{a^{2}}{x^{2}+a^{2}}\\]\n\\[\\int = x - a^{2}\\cdot\\dfrac{1}{a}\\tan^{-1}\\dfrac{x}{a} + c\\]\nWhy: dividing first, then the \\(\\tan^{-1}\\) formula, gives the same answer.",
+              "Check\n\\[\\dfrac{d}{dx}\\Big[x - a\\tan^{-1}\\tfrac{x}{a}\\Big] = 1 - \\dfrac{a^{2}}{x^{2}+a^{2}}\\]\n\\[= \\dfrac{x^{2}}{x^{2}+a^{2}}\\]\nWhy: the integrand comes back."
+            ],
+            "final_answer": "\\(x - a\\tan^{-1}\\left(\\frac{x}{a}\\right) + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(viii)",
+            "prompt": "2 (viii) Evaluate the following integral (by change of variable): \\(\\int \\frac{1}{x\\left[1+(\\ln x)^{2}\\right]}\\,dx\\)",
+            "explanation": "\\(\\frac{dx}{x}\\) and \\(\\ln x\\) together: \\(u = \\ln x\\).\nThen the integral is \\(\\int\\frac{du}{1+u^{2}} = \\tan^{-1}u + c\\).\nPlan: substitute, \\(\\tan^{-1}\\), put \\(x\\) back.",
+            "steps": [
+              "Given: \\(\\int \\frac{dx}{x[1+(\\ln x)^{2}]}\\)\nTo find: the indefinite integral.\nMethod: \\(u = \\ln x\\), then the \\(\\tan^{-1}\\) formula with \\(a = 1\\).",
+              "Change of variable\n\\[u = \\ln x,\\quad du = \\dfrac{dx}{x}\\]\n\\[\\int\\dfrac{1}{1+(\\ln x)^{2}}\\cdot\\dfrac{dx}{x} = \\int\\dfrac{du}{1+u^{2}}\\]\nWhy: \\(\\frac{d}{dx}\\ln x = \\frac{1}{x}\\).",
+              "Integrate and put \\(x\\) back\n\\[= \\tan^{-1}u + c = \\tan^{-1}(\\ln x) + c\\]\nWhy: \\(\\int\\frac{du}{1+u^{2}} = \\tan^{-1}u + c\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\tan^{-1}(\\ln x) = \\dfrac{1}{1+(\\ln x)^{2}}\\cdot\\dfrac{1}{x}\\]\nWhy: this is the integrand."
+            ],
+            "final_answer": "\\(\\tan^{-1}(\\ln x) + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(ix)",
+            "prompt": "2 (ix) Evaluate the following integral (by change of variable): \\(\\int \\frac{1}{x^{2}\\sqrt{x^{2}+4}}\\,dx\\)",
+            "explanation": "\\(\\sqrt{x^{2}+2^{2}}\\) is Case 2: \\(x = 2\\tan\\theta\\).\nThe integral becomes \\(\\frac{1}{4}\\int\\frac{\\cos\\theta}{\\sin^{2}\\theta}d\\theta\\), a simple substitution in \\(\\sin\\theta\\).\nPlan: substitute, integrate, return to \\(x\\) with a right triangle.",
+            "steps": [
+              "Given: \\(\\int \\frac{dx}{x^{2}\\sqrt{x^{2}+4}}\\)\nTo find: the indefinite integral.\nMethod: Case 2, \\(x = 2\\tan\\theta\\), because \\(1 + \\tan^{2}\\theta = \\sec^{2}\\theta\\) removes the root.",
+              "Substitute \\(x = 2\\tan\\theta\\), \\(-\\frac{\\pi}{2} < \\theta < \\frac{\\pi}{2}\\)\n\\[dx = 2\\sec^{2}\\theta\\,d\\theta\\]\n\\[\\sqrt{x^{2}+4} = \\sqrt{4\\tan^{2}\\theta+4} = 2\\sec\\theta\\]\nWhy: \\(\\sec\\theta > 0\\) on this interval.",
+              "Simplify\n\\[I = \\int\\dfrac{2\\sec^{2}\\theta\\,d\\theta}{(4\\tan^{2}\\theta)(2\\sec\\theta)}\\]\n\\[= \\dfrac{1}{4}\\int\\dfrac{\\sec\\theta}{\\tan^{2}\\theta}\\,d\\theta\\]\n\\[= \\dfrac{1}{4}\\int\\dfrac{\\cos\\theta}{\\sin^{2}\\theta}\\,d\\theta\\]\nWhy: \\(\\frac{\\sec\\theta}{\\tan^{2}\\theta} = \\frac{1}{\\cos\\theta}\\cdot\\frac{\\cos^{2}\\theta}{\\sin^{2}\\theta}\\).",
+              "Integrate (put \\(v = \\sin\\theta\\), \\(dv = \\cos\\theta\\,d\\theta\\))\n\\[\\dfrac{1}{4}\\int v^{-2}\\,dv = -\\dfrac{1}{4v} + c\\]\n\\[= -\\dfrac{1}{4\\sin\\theta} + c\\]\nWhy: power rule with \\(n = -2\\).",
+              "Back to \\(x\\)\n\\[\\tan\\theta = \\dfrac{x}{2} \\Rightarrow \\sin\\theta = \\dfrac{x}{\\sqrt{x^{2}+4}}\\]\n\\[I = -\\dfrac{\\sqrt{x^{2}+4}}{4x} + c\\]\nWhy: in a right triangle with opposite side \\(x\\) and adjacent side 2 the hypotenuse is \\(\\sqrt{x^{2}+4}\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\Big(-\\dfrac{\\sqrt{x^{2}+4}}{4x}\\Big)\\]\n\\[= -\\dfrac{1}{4}\\cdot\\dfrac{\\frac{x^{2}}{\\sqrt{x^{2}+4}} - \\sqrt{x^{2}+4}}{x^{2}}\\]\n\\[= -\\dfrac{1}{4}\\cdot\\dfrac{x^{2} - (x^{2}+4)}{x^{2}\\sqrt{x^{2}+4}}\\]\n\\[= \\dfrac{1}{x^{2}\\sqrt{x^{2}+4}}\\]\nWhy: quotient rule gives the integrand."
+            ],
+            "final_answer": "\\(-\\frac{\\sqrt{x^{2}+4}}{4x} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(x)",
+            "prompt": "2 (x) Evaluate the following integral (by change of variable): \\(\\int \\frac{dx}{(1+x^{2})^{3/2}}\\)",
+            "explanation": "\\((1+x^{2})^{3/2} = (\\sqrt{1+x^{2}})^{3}\\): Case 2 with \\(a = 1\\), \\(x = \\tan\\theta\\).\nThen \\((1+x^{2})^{3/2} = \\sec^{3}\\theta\\) and the integral is \\(\\int\\cos\\theta\\,d\\theta\\).\nPlan: substitute, integrate, return to \\(x\\) with a triangle.",
+            "steps": [
+              "Given: \\(\\int \\frac{dx}{(1+x^{2})^{3/2}}\\)\nTo find: the indefinite integral.\nMethod: Case 2, \\(x = \\tan\\theta\\).",
+              "Substitute \\(x = \\tan\\theta\\), \\(-\\frac{\\pi}{2} < \\theta < \\frac{\\pi}{2}\\)\n\\[dx = \\sec^{2}\\theta\\,d\\theta\\]\n\\[1 + x^{2} = \\sec^{2}\\theta\\]\n\\[(1+x^{2})^{3/2} = \\sec^{3}\\theta\\]\nWhy: \\((\\sec^{2}\\theta)^{3/2} = \\sec^{3}\\theta\\) since \\(\\sec\\theta > 0\\) here.",
+              "Integrate\n\\[\\int\\dfrac{\\sec^{2}\\theta}{\\sec^{3}\\theta}\\,d\\theta = \\int\\cos\\theta\\,d\\theta\\]\n\\[= \\sin\\theta + c\\]\nWhy: \\(\\frac{1}{\\sec\\theta} = \\cos\\theta\\).",
+              "Back to \\(x\\)\n\\[\\tan\\theta = x \\Rightarrow \\sin\\theta = \\dfrac{x}{\\sqrt{1+x^{2}}}\\]\n\\[= \\dfrac{x}{\\sqrt{1+x^{2}}} + c\\]\nWhy: right triangle with opposite \\(x\\), adjacent 1, hypotenuse \\(\\sqrt{1+x^{2}}\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\dfrac{x}{\\sqrt{1+x^{2}}}\\]\n\\[= \\dfrac{\\sqrt{1+x^{2}} - \\frac{x^{2}}{\\sqrt{1+x^{2}}}}{1+x^{2}}\\]\n\\[= \\dfrac{1}{(1+x^{2})^{3/2}}\\]\nWhy: quotient rule gives the integrand."
+            ],
+            "final_answer": "\\(\\frac{x}{\\sqrt{1+x^{2}}} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(xi)",
+            "prompt": "2 (xi) Evaluate the following integral (by change of variable): \\(\\int \\frac{dx}{x\\sqrt{x^{2}-9}}\\)",
+            "explanation": "\\(\\sqrt{x^{2}-3^{2}}\\) is Case 3: \\(x = 3\\sec\\theta\\) (take \\(x > 3\\)).\nEverything cancels to \\(\\frac{1}{3}\\int d\\theta\\).\nPlan: substitute, integrate, return to \\(x\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{dx}{x\\sqrt{x^{2}-9}}\\), \\(x > 3\\)\nTo find: the indefinite integral.\nMethod: Case 3, \\(x = 3\\sec\\theta\\), because \\(\\sec^{2}\\theta - 1 = \\tan^{2}\\theta\\).",
+              "Substitute \\(x = 3\\sec\\theta\\), \\(0 < \\theta < \\frac{\\pi}{2}\\)\n\\[dx = 3\\sec\\theta\\tan\\theta\\,d\\theta\\]\n\\[\\sqrt{x^{2}-9} = \\sqrt{9\\sec^{2}\\theta - 9} = 3\\tan\\theta\\]\nWhy: \\(\\tan\\theta > 0\\) on this interval.",
+              "Simplify and integrate\n\\[\\int\\dfrac{3\\sec\\theta\\tan\\theta\\,d\\theta}{(3\\sec\\theta)(3\\tan\\theta)} = \\dfrac{1}{3}\\int d\\theta\\]\n\\[= \\dfrac{\\theta}{3} + c\\]\nWhy: \\(\\sec\\theta\\tan\\theta\\) cancels.",
+              "Back to \\(x\\)\n\\[\\sec\\theta = \\dfrac{x}{3} \\Rightarrow \\theta = \\sec^{-1}\\dfrac{x}{3}\\]\n\\[= \\dfrac{1}{3}\\sec^{-1}\\left(\\dfrac{x}{3}\\right) + c\\]\nWhy: this agrees with Challenge formula (v) with \\(a = 3\\).",
+              "The answer key's form\n\\[\\tan\\theta = \\sqrt{\\sec^{2}\\theta - 1} = \\dfrac{\\sqrt{x^{2}-9}}{3}\\]\n\\[\\dfrac{\\theta}{3} = \\dfrac{1}{3}\\tan^{-1}\\dfrac{\\sqrt{x^{2}-9}}{3}\\]\nWhy: the key's \\(\\frac{1}{3}\\arctan\\left(\\frac{\\sqrt{x^{2}-9}}{3}\\right) + c\\) is the same for \\(x > 3\\). (For \\(x < -3\\) use \\(\\frac{1}{3}\\sec^{-1}\\left|\\frac{x}{3}\\right| + c\\), as in Example 28.)",
+              "Check\n\\[\\dfrac{d}{dx}\\Big[\\tfrac{1}{3}\\sec^{-1}\\tfrac{x}{3}\\Big] = \\dfrac{1}{3}\\cdot\\dfrac{3}{x\\sqrt{x^{2}-9}}\\]\n\\[= \\dfrac{1}{x\\sqrt{x^{2}-9}}\\]\nWhy: the integrand comes back."
+            ],
+            "final_answer": "\\(\\frac{1}{3}\\sec^{-1}\\left(\\frac{x}{3}\\right) + c = \\frac{1}{3}\\tan^{-1}\\left(\\frac{\\sqrt{x^{2}-9}}{3}\\right) + c\\) (\\(x > 3\\))"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(xii)",
+            "prompt": "2 (xii) Evaluate the following integral (by change of variable): \\(\\int \\sqrt{\\frac{1+x}{1-x}}\\,dx\\)",
+            "explanation": "Defined for \\(-1 \\le x < 1\\). Multiply inside the root by \\(\\frac{1+x}{1+x}\\) to get \\(\\frac{1+x}{\\sqrt{1-x^{2}}}\\).\n\\(\\sqrt{1-x^{2}}\\) is Case 1: \\(x = \\sin\\theta\\).\nPlan: rationalise, substitute, integrate \\(1 + \\sin\\theta\\), return to \\(x\\).",
+            "steps": [
+              "Given: \\(\\int \\sqrt{\\frac{1+x}{1-x}}\\,dx\\), \\(-1 \\le x < 1\\)\nTo find: the indefinite integral.\nMethod: make the denominator \\(\\sqrt{1-x^{2}}\\), then Case 1, \\(x = \\sin\\theta\\).",
+              "Rationalise\n\\[\\sqrt{\\dfrac{1+x}{1-x}} = \\sqrt{\\dfrac{(1+x)^{2}}{(1-x)(1+x)}}\\]\n\\[= \\dfrac{1+x}{\\sqrt{1-x^{2}}}\\]\nWhy: \\(\\sqrt{(1+x)^{2}} = 1 + x\\) because \\(1 + x \\ge 0\\).",
+              "Substitute \\(x = \\sin\\theta\\), \\(-\\frac{\\pi}{2} \\le \\theta < \\frac{\\pi}{2}\\)\n\\[dx = \\cos\\theta\\,d\\theta,\\quad \\sqrt{1-x^{2}} = \\cos\\theta\\]\n\\[\\int\\dfrac{1+\\sin\\theta}{\\cos\\theta}\\cdot\\cos\\theta\\,d\\theta = \\int(1+\\sin\\theta)\\,d\\theta\\]\nWhy: \\(1 - \\sin^{2}\\theta = \\cos^{2}\\theta\\) and \\(\\cos\\theta \\ge 0\\) here.",
+              "Integrate\n\\[= \\theta - \\cos\\theta + c\\]\nWhy: \\(\\int\\sin\\theta\\,d\\theta = -\\cos\\theta\\).",
+              "Back to \\(x\\)\n\\[\\theta = \\sin^{-1}x,\\quad \\cos\\theta = \\sqrt{1-x^{2}}\\]\n\\[= \\sin^{-1}x - \\sqrt{1-x^{2}} + c\\]\nWhy: from \\(x = \\sin\\theta\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\Big[\\sin^{-1}x - \\sqrt{1-x^{2}}\\Big]\\]\n\\[= \\dfrac{1}{\\sqrt{1-x^{2}}} + \\dfrac{x}{\\sqrt{1-x^{2}}}\\]\n\\[= \\dfrac{1+x}{\\sqrt{1-x^{2}}} = \\sqrt{\\dfrac{1+x}{1-x}}\\]\nWhy: the integrand comes back."
+            ],
+            "final_answer": "\\(\\sin^{-1}x - \\sqrt{1-x^{2}} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2(xiii)",
+            "prompt": "2 (xiii) Evaluate the following integral (by change of variable): \\(\\int \\frac{\\sqrt{a^{2}-x^{2}}}{x}\\,dx\\ (a > 0)\\)",
+            "explanation": "\\(\\sqrt{a^{2}-x^{2}}\\) is Case 1: \\(x = a\\sin\\theta\\).\nThe integral becomes \\(a\\int\\frac{\\cos^{2}\\theta}{\\sin\\theta}d\\theta = a\\int(\\csc\\theta - \\sin\\theta)d\\theta\\).\nPlan: substitute, split, integrate, return to \\(x\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{\\sqrt{a^{2}-x^{2}}}{x}\\,dx\\), \\(a > 0\\)\nTo find: the indefinite integral.\nMethod: Case 1, \\(x = a\\sin\\theta\\), because \\(1 - \\sin^{2}\\theta = \\cos^{2}\\theta\\).",
+              "Substitute \\(x = a\\sin\\theta\\), \\(-\\frac{\\pi}{2} \\le \\theta \\le \\frac{\\pi}{2}\\), \\(\\theta \\ne 0\\)\n\\[dx = a\\cos\\theta\\,d\\theta\\]\n\\[\\sqrt{a^{2}-x^{2}} = a\\cos\\theta\\]\nWhy: \\(\\cos\\theta \\ge 0\\) on this interval.",
+              "Simplify\n\\[I = \\int\\dfrac{a\\cos\\theta}{a\\sin\\theta}\\cdot a\\cos\\theta\\,d\\theta\\]\n\\[= a\\int\\dfrac{\\cos^{2}\\theta}{\\sin\\theta}\\,d\\theta = a\\int\\dfrac{1-\\sin^{2}\\theta}{\\sin\\theta}\\,d\\theta\\]\n\\[= a\\int(\\csc\\theta - \\sin\\theta)\\,d\\theta\\]\nWhy: split the fraction into two terms.",
+              "Integrate\n\\[= a\\ln|\\csc\\theta - \\cot\\theta| + a\\cos\\theta + c\\]\nWhy: \\(\\int\\csc\\theta\\,d\\theta = \\ln|\\csc\\theta - \\cot\\theta|\\) and \\(\\int\\sin\\theta\\,d\\theta = -\\cos\\theta\\).",
+              "Back to \\(x\\)\n\\[\\csc\\theta = \\dfrac{a}{x},\\quad \\cot\\theta = \\dfrac{\\sqrt{a^{2}-x^{2}}}{x}\\]\n\\[a\\cos\\theta = \\sqrt{a^{2}-x^{2}}\\]\n\\[I = a\\ln\\left|\\dfrac{a-\\sqrt{a^{2}-x^{2}}}{x}\\right| + \\sqrt{a^{2}-x^{2}} + c\\]\nWhy: from \\(\\sin\\theta = \\frac{x}{a}\\): hypotenuse \\(a\\), opposite \\(x\\), adjacent \\(\\sqrt{a^{2}-x^{2}}\\).",
+              "Check\nThe derivative of \\(a\\ln|a - \\sqrt{a^{2}-x^{2}}| - a\\ln|x| + \\sqrt{a^{2}-x^{2}}\\) is\n\\[\\dfrac{ax}{\\sqrt{a^{2}-x^{2}}\\,(a - \\sqrt{a^{2}-x^{2}})}\\]\n\\[- \\dfrac{a}{x} - \\dfrac{x}{\\sqrt{a^{2}-x^{2}}}\\]\nwhich simplifies to \\(\\frac{\\sqrt{a^{2}-x^{2}}}{x}\\) (multiply the first fraction by \\(\\frac{a+\\sqrt{a^{2}-x^{2}}}{a+\\sqrt{a^{2}-x^{2}}}\\) to get \\(\\frac{a(a+\\sqrt{a^{2}-x^{2}})}{x\\sqrt{a^{2}-x^{2}}}\\)); checked also with sympy."
+            ],
+            "final_answer": "\\(a\\ln\\left|\\frac{a-\\sqrt{a^{2}-x^{2}}}{x}\\right| + \\sqrt{a^{2}-x^{2}} + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

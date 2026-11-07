@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q15-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q15",
+      "title": "Question 15 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 15: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-3-Q15",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15",
+            "prompt": "15. Evaluate \\(\\int \\dfrac{\\tan^{-1}\\sqrt{x}}{\\sqrt{x}}\\,dx\\).",
+            "explanation": "\\(\\sqrt{x}\\) do jagah hai: \\(\\tan^{-1}\\) ke andar aur denominator mein. Aisi soorat mein \\(t = \\sqrt{x}\\) rakhna faidemand hai.\n\\(dt = \\frac{1}{2\\sqrt{x}}\\,dx\\), yani \\(\\frac{dx}{\\sqrt{x}} = 2\\,dt\\); denominator khud ba khud khatam!\nPhir \\(2\\int \\tan^{-1}t\\,dt\\) bachta hai, jo Question 11 wala hi kaam hai.\nPlan: substitution, parts (\\(\\tan^{-1}t \\cdot 1\\)), log integral, wapas \\(x\\).",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{\\tan^{-1}\\sqrt{x}}{\\sqrt{x}}\\,dx\\), \\(x > 0\\).\nMaloom karna: indefinite integral.\nTareeqa: \\(t = \\sqrt{x}\\) rakhenge; phir \\(2\\int \\tan^{-1}t\\,dt\\) parts se.",
+              "Substitution\n\\[t = \\sqrt{x} \\Rightarrow dt = \\dfrac{1}{2\\sqrt{x}}\\,dx\\]\n\\[\\dfrac{dx}{\\sqrt{x}} = 2\\,dt\\]\n\\[= 2\\int \\tan^{-1}t\\,dt\\]\nKyun: \\(\\sqrt{x}\\) ka derivative \\(\\frac{1}{2\\sqrt{x}}\\) hai, is liye \\(\\frac{dx}{\\sqrt{x}}\\) seedha \\(2\\,dt\\) ban gaya.",
+              "Parts: \\(\\tan^{-1}t \\cdot 1\\)\n\\[= 2\\left[t\\tan^{-1}t - \\int \\dfrac{t}{1+t^2}\\,dt\\right]\\]\nKyun: \\(\\tan^{-1}t\\) first (derivative \\(\\frac{1}{1+t^2}\\)), 1 second (integral \\(t\\)).",
+              "Log wala integral\n\\[= 2t\\tan^{-1}t - 2\\cdot\\dfrac{1}{2}\\ln(1+t^2) + c\\]\n\\[= 2t\\tan^{-1}t - \\ln(1+t^2) + c\\]\nKyun: \\(2t\\) denominator \\(1 + t^2\\) ka derivative hai, is liye \\(\\frac{1}{2}\\) laga kar log; bahar ka 2 aur yeh \\(\\frac{1}{2}\\) cancel.",
+              "Wapas \\(x\\) mein\n\\[= 2\\sqrt{x}\\tan^{-1}\\sqrt{x} - \\ln(1 + x) + c\\]\nKyun: \\(t = \\sqrt{x}\\) aur \\(t^2 = x\\).\nDhyan dein: \\(1 + t^2\\) ko \\(1 + \\sqrt{x}\\) mat likhiye; \\(t^2 = x\\) hai.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}(\\ldots) = \\dfrac{\\tan^{-1}\\sqrt{x}}{\\sqrt{x}} + \\dfrac{1}{1+x} - \\dfrac{1}{1+x}\\]\nKyun: \\(2\\sqrt{x}\\) ka derivative \\(\\frac{1}{\\sqrt{x}}\\), aur \\(\\tan^{-1}\\sqrt{x}\\) ka derivative chain rule se \\(\\frac{1}{1+x}\\cdot\\frac{1}{2\\sqrt{x}}\\). \\(\\frac{1}{1+x}\\) cancel ho kar integrand bacha."
+            ],
+            "final_answer": "\\(2\\sqrt{x}\\tan^{-1}\\sqrt{x} - \\ln(1 + x) + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

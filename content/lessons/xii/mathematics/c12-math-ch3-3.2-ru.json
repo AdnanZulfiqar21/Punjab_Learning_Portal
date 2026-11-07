@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.2-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.2",
+      "title": "3.2 Method of Substitution or Change of Variable (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 79,
+          "pdf_to": 81,
+          "note": "Book p. 77-79: 3.2 Method of Substitution or Change of Variable, Chain Rule reversed, Theorem 3.1, Recall! The Rule 4 box, Examples 13-21"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-3.2",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum bachon! Pichle sabaq (3.1) mein humne seedhe formulas se integration ki: power rule, table ke trigonometric formulas, aur kuch tricks. Lekin bohat se integrals aise hote hain jo kisi formula se seedhe nahi milte, jaise \\(\\int (5x^5 + 5)^3x^4\\,dx\\). Kya hum \\((5x^5 + 5)^3\\) ko khol kar 16 terms banayein? Bohat lamba kaam! Aaj hum ek zabardast tareeqa seekhenge jo aise integrals ko pal bhar mein aasaan bana deta hai: method of substitution, yani variable badalna."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab kehti hai ke yeh tareeqa differentiation ke Chain Rule ko ulta chalane se paida hota hai. Yaad kijiye: agar \\(y = F(u)\\) aur \\(u = g(x)\\) dono differentiable functions hon, to Chain Rule kehta hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{d}{dx}\\big[F(g(x))\\big] = F'(g(x))\\,g'(x)",
+            "text_alt": "d by d x of F of g of x equals F prime of g of x times g prime of x"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yani bahar wale function ka derivative (andar wali cheez ko waise hi rakh kar) zarb andar wali cheez ka derivative. Ab is ko ulta parhiye: agar kisi integrand mein \\(F'(g(x))\\,g'(x)\\) jaisi shakal nazar aaye, to us ka integral \\(F(g(x))\\) hai. Indefinite integrals ki zubaan mein:\n\\[\\int F'(g(x))\\,g'(x)\\,dx = F(g(x)) + c\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ne yahan \"In terms of definite integrals\" likha hai aur formula mein \\(dx\\) bhi nahi likha. Sahi lafz indefinite integrals hai (definite integral ki limits hoti hain aur us mein \\(+\\,c\\) nahi aata), aur sahi formula \\(\\int F'(g(x))\\,g'(x)\\,dx = F(g(x)) + c\\) hai, jo humne upar likha hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Ise ek misaal se samjhiye: ek dabba hai jis ke andar ek aur dabba hai. Chain Rule mein hum bahar wala dabba kholte hain aur andar wale dabbe ka derivative saath multiply karte hain. Integration mein humein pehchanna hai ke \"andar wala dabba\" kaun sa hai (yani \\(g(x)\\)), aur kya us ka derivative \\(g'(x)\\) bahar kahin multiply ho raha hai.\nAgar haan, to samajh lijiye ke yeh integral substitution se ho jayega. Agar derivative mein sirf constant ka farq ho (maslan 25 kam ho), to bhi koi masla nahi; constant ko andar bahar kar sakte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Theorem 3.1: Antidifferentiation of a Composite Function",
+            "text": "Maan lijiye \\(g\\) aisa function hai jis ki range ek interval \\(I\\) hai, aur \\(f\\) aisa function hai jo \\(I\\) par continuous hai. Agar \\(g\\) apne domain par differentiable ho aur \\(F\\), \\(I\\) par \\(f\\) ka antiderivative ho (\\(F' = f\\)), to\n\\[\\int f(g(x))\\,g'(x)\\,dx = F(g(x)) + c\\]\n\\(u = g(x)\\) rakhne se \\(du = g'(x)\\,dx\\) milta hai aur \\(\\int f(u)\\,du = F(u) + c\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein theorem ka formula \\(\\int f(g(x)\\cdot g'(x)dx = F(u) + c\\) chhapa hai: is mein ek bracket kam hai, aur jawab \\(F(u)\\) likha hai jab ke \\(u\\) abhi define hi nahi hua. Sahi shakal \\(\\int f(g(x))\\,g'(x)\\,dx = F(g(x)) + c\\) hai. \\(u = g(x)\\) rakhne ke baad hi yeh \\(\\int f(u)\\,du = F(u) + c\\) banta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab dekhiye kitni pyari baat hai: equation \\(\\int f(u)\\,du = F(u) + c\\) bilkul basic formula \\(\\int f(x)\\,dx = F(x) + c\\) jaisi hai, farq sirf itna hai ke independent variable (azad variable) ab \\(x\\) ki jagah \\(u\\) hai. Yani substitution ke baad hum wohi purane formulas istemal karte hain, bas letter badal jata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "\\(x\\) ki jagah naya variable \\(u = g(x)\\) rakhne ka amal (aur \\(dx\\) ki jagah us ke mutabiq \\(du\\)) change of variable ya the method of substitution kehlata hai.",
+            "bold": [
+              "change of variable",
+              "the method of substitution"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is tareeqe ke paanch qadam yaad kar lijiye:\n1. \\(u = g(x)\\) chuniye: aam taur par power ke andar wali cheez, root ke andar wali cheez, exponent, logarithm ya inverse function ke andar wali cheez.\n2. Differentiate kijiye: \\(du = g'(x)\\,dx\\).\n3. Poora integral \\(u\\) mein likhiye: har \\(x\\) aur \\(dx\\) bhi. Agar koi constant kam ya zyada ho to andar bahar adjust kijiye.\n4. \\(u\\) ke saath integrate kijiye.\n5. \\(u = g(x)\\) wapas rakhiye aur differentiate kar ke check kijiye.\nAgar qadam 3 ke baad bhi koi \\(x\\) bach jaye, to ya to \\(u\\) ka intekhab ghalat tha, ya phir \\(x\\) ko bhi \\(u\\) ke zariye likhna padega (Example 14 mein yahi hoga)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Recall! The Rule 4",
+            "text": "\\(\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln|f(x)| + c\\)\n\\(u = f(x)\\) rakhiye. Phir \\(du = f'(x)\\,dx\\).\nDiye gaye integral mein substitute karne se \\(\\int \\frac{f'(x)}{f(x)}\\,dx = \\int \\frac{1}{u}\\,du\\).\nBasic integration rules se hum jaante hain ke \\(\\int \\frac{1}{u}\\,du = \\ln|u| + c\\).\nAakhir mein \\(u = f(x)\\) wapas rakhne se \\(\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln|f(x)| + c\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Rule 4 asal mein substitution hi ki ek misaal hai: jab bhi kisi fraction ka numerator, denominator ka derivative ho, jawab denominator ka \\(\\ln\\) hai. Ab sochiye: \\(\\int \\frac{2x}{x^2 + 7}\\,dx\\) kya hoga? (Jawab: \\(\\ln(x^2 + 7) + c\\), kyunke \\(x^2 + 7\\) ka derivative \\(2x\\) hai, aur \\(x^2 + 7\\) hamesha positive hai is liye modulus ki zaroorat nahi.)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ki misaalein qadam ba qadam dekhte hain. Har misaal mein pehle yeh sochiye ke \"andar wali cheez\" kaun si hai aur kya us ka derivative bahar maujood hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 13",
+            "problem": "Evaluate \\(\\int (5x^5 + 5)^3 x^4\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int (5x^5 + 5)^3 x^4\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: jab integrand mein koi expression kisi power par ho, jaise \\((5x^5 + 5)^3\\), to us expression ko \\(u\\) maan lena acha tareeqa hai. Yahan khushqismati se \\(x^4\\) bhi maujood hai, jo \\(5x^5 + 5\\) ke derivative (\\(25x^4\\)) ka hissa hai. Bracket khol kar 16 terms banane ki zaroorat nahi.",
+              "\\(u\\) chunein aur \\(du\\) nikalein\n\\[u = 5x^5 + 5\\]\n\\[du = 25x^4\\,dx\\]\nKyun: \\(5x^5\\) ka derivative \\(25x^4\\) aur 5 ka zero. Ab dekhiye, integrand mein \\(x^4\\,dx\\) hai, \\(25x^4\\,dx\\) nahi; sirf 25 ka farq hai jo constant hai.",
+              "\\(du\\) ko integrand mein paida karein\n\\[\\int (5x^5 + 5)^3 x^4\\,dx\\]\n\\[= \\dfrac{1}{25}\\int (5x^5 + 5)^3\\cdot 25x^4\\,dx\\]\n\\[= \\dfrac{1}{25}\\int u^3\\,du\\]\nKyun: Andar 25 se multiply aur bahar 25 se divide kiya; \\(25 \\times \\frac{1}{25} = 1\\), is liye value nahi badli. Ab andar \\((5x^5 + 5)^3 = u^3\\) aur \\(25x^4\\,dx = du\\).\nDhyan dein: sirf constant hi integral ke bahar ja sakta hai; \\(x^4\\) jaisi variable cheez kabhi bahar nahi nikalti.",
+              "\\(u\\) mein integrate karein\n\\[= \\dfrac{1}{25}\\cdot\\dfrac{u^4}{4} + c = \\dfrac{1}{100}u^4 + c\\]\nKyun: Ab yeh sirf \\(u^3\\) ka integral hai: Power Rule, power 4 aur 4 se divide. \\(25 \\times 4 = 100\\).",
+              "\\(u\\) wapas rakhein\n\\[\\int (5x^5 + 5)^3 x^4\\,dx = \\dfrac{1}{100}(5x^5 + 5)^4 + c\\]\nKyun: Sawal \\(x\\) mein tha, to jawab bhi \\(x\\) mein; \\(u = 5x^5 + 5\\) wapas rakh diya.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left[\\tfrac{1}{100}(5x^5 + 5)^4\\right]\\]\n\\[= \\tfrac{4}{100}(5x^5 + 5)^3\\cdot 25x^4\\]\n\\[= (5x^5 + 5)^3 x^4 \\;\\checkmark\\]\nKyun: Chain rule se power 4 neeche aayi aur andar ka derivative \\(25x^4\\) saath aaya; \\(\\frac{4 \\times 25}{100} = 1\\). Integrand wapas mil gaya."
+            ],
+            "answer": "\\(\\frac{1}{100}(5x^5 + 5)^4 + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahi: \\(\\int x(x^2 + 1)^4\\,dx\\).\nAndar wali cheez \\(x^2 + 1\\) hai, us ka derivative \\(2x\\), aur bahar \\(x\\) maujood hai (sirf 2 ka farq).\n\\(u = x^2 + 1\\), \\(du = 2x\\,dx\\), yani \\(x\\,dx = \\frac{1}{2}du\\).\n\\(\\int x(x^2 + 1)^4\\,dx = \\frac{1}{2}\\int u^4\\,du = \\frac{1}{2}\\cdot\\frac{u^5}{5} + c = \\frac{(x^2 + 1)^5}{10} + c\\).\nTasdeeq: \\(\\frac{5(x^2 + 1)^4\\cdot 2x}{10} = x(x^2 + 1)^4\\). Sahi!"
+          },
+          {
+            "type": "example",
+            "title": "Example 14",
+            "problem": "Integrate \\(\\int \\sqrt{x}\\,\\sqrt{1 + \\sqrt{x}}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int \\sqrt{x}\\,\\sqrt{1 + \\sqrt{x}}\\,dx\\).\nMaloom karna: integral.\nTareeqa: \\(1 + \\sqrt{x} = u\\) rakhenge. Lekin yahan \\(1 + \\sqrt{x}\\) ka derivative (\\(\\frac{1}{2\\sqrt{x}}\\)) bahar maujood nahi. Is liye doosra raasta: \\(\\sqrt{x}\\), \\(x\\) aur \\(dx\\) sab ko \\(u\\) ke zariye likhenge. Yeh substitution ki doosri shakal hai.",
+              "Har cheez \\(u\\) mein likhein\n\\[\\sqrt{x} = u - 1\\]\n\\[x = (u - 1)^2\\]\n\\[dx = 2(u - 1)\\,du\\]\nKyun: \\(1 + \\sqrt{x} = u\\) se \\(\\sqrt{x} = u - 1\\). Square karne se \\(x = (u - 1)^2\\). Phir \\(x\\) ko \\(u\\) ke saath differentiate kiya: \\(\\frac{dx}{du} = 2(u - 1)\\).",
+              "Integral mein substitute karein\n\\[\\int \\sqrt{x}\\,\\sqrt{1 + \\sqrt{x}}\\,dx = \\int (u - 1)\\sqrt{u}\\;2(u - 1)\\,du\\]\n\\[= 2\\int (u - 1)^2 u^{1/2}\\,du\\]\nKyun: Teen cheezein badlin: \\(\\sqrt{x} \\to u - 1\\), \\(\\sqrt{1 + \\sqrt{x}} \\to \\sqrt{u}\\), \\(dx \\to 2(u - 1)\\,du\\). Do \\((u - 1)\\) mil kar \\((u - 1)^2\\) bane, aur 2 constant bahar.\nDhyan dein: \\(dx\\) ko seedha \\(du\\) likh dena (yani \\(2(u - 1)\\) bhool jana) is sawal ki sab se badi ghalti hai.",
+              "Expand kar ke integrate karein\n\\[= 2\\int (u^2 - 2u + 1)u^{1/2}\\,du\\]\n\\[= 2\\int \\left(u^{5/2} - 2u^{3/2} + u^{1/2}\\right)du\\]\n\\[= 2\\left[\\tfrac{2}{7}u^{7/2} - \\tfrac{4}{5}u^{5/2} + \\tfrac{2}{3}u^{3/2}\\right] + c\\]\nKyun: \\((u - 1)^2 = u^2 - 2u + 1\\). Har term ko \\(u^{1/2}\\) se multiply kiya to power mein \\(\\frac{1}{2}\\) jama hua. Phir Power Rule: \\(\\frac{u^{7/2}}{7/2} = \\frac{2}{7}u^{7/2}\\), \\(2\\cdot\\frac{u^{5/2}}{5/2} = \\frac{4}{5}u^{5/2}\\), \\(\\frac{u^{3/2}}{3/2} = \\frac{2}{3}u^{3/2}\\).",
+              "Simplify kar ke \\(u = 1 + \\sqrt{x}\\) wapas rakhein\n\\[= \\tfrac{4}{7}u^{7/2} - \\tfrac{8}{5}u^{5/2} + \\tfrac{4}{3}u^{3/2} + c\\]\n\\[= \\tfrac{4}{7}(1 + \\sqrt{x})^{7/2} - \\tfrac{8}{5}(1 + \\sqrt{x})^{5/2}\\]\n\\[+ \\tfrac{4}{3}(1 + \\sqrt{x})^{3/2} + c\\]\nKyun: Bahar wala 2 andar multiply kiya, phir jawab ko asal variable \\(x\\) mein likha.",
+              "Tasdeeq\n\\[\\dfrac{d}{du}\\left[\\tfrac{4}{7}u^{7/2} - \\tfrac{8}{5}u^{5/2} + \\tfrac{4}{3}u^{3/2}\\right]\\]\n\\[= 2u^{5/2} - 4u^{3/2} + 2u^{1/2}\\]\n\\[= 2u^{1/2}(u - 1)^2 \\;\\checkmark\\]\nKyun: \\(u\\) ke saath differentiate karne par \\(u\\) wala integrand wapas mila, jo asal integrand zarb \\(\\frac{dx}{du}\\) hai (chain rule). Is liye jawab sahi hai."
+            ],
+            "answer": "\\(\\frac{4}{7}(1 + \\sqrt{x})^{7/2} - \\frac{8}{5}(1 + \\sqrt{x})^{5/2} + \\frac{4}{3}(1 + \\sqrt{x})^{3/2} + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 15",
+            "problem": "Evaluate \\(\\int \\frac{x}{\\sqrt{1 + x^2} + 1 + x^2}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{x}{\\sqrt{1 + x^2} + 1 + x^2}\\,dx\\).\nMaloom karna: integral.\nTareeqa: denominator mein \\(\\sqrt{1 + x^2}\\) bhi hai aur \\(1 + x^2\\) bhi. Agar \\(u = \\sqrt{1 + x^2}\\) rakhein to \\(1 + x^2 = u^2\\) ban jata hai, aur differentiate karne se \\(x\\,dx\\) nikalta hai jo numerator mein maujood hai. Do parindey ek teer se!",
+              "\\(x\\,dx\\) ko \\(u\\) mein likhein\n\\[u^2 = 1 + x^2\\]\n\\[2u\\,du = 2x\\,dx\\]\n\\[u\\,du = x\\,dx\\]\nKyun: Root ka derivative lene ke bajaye pehle square kiya (\\(u^2 = 1 + x^2\\)), phir dono taraf differentiate kiya. Yeh tareeqa aasaan aur saaf hai. 2 dono taraf cancel.",
+              "Substitute karein\n\\[\\int \\dfrac{x}{\\sqrt{1 + x^2} + 1 + x^2}\\,dx = \\int \\dfrac{u}{u + u^2}\\,du\\]\n\\[= \\int \\dfrac{u}{u(1 + u)}\\,du = \\int \\dfrac{1}{1 + u}\\,du\\]\nKyun: Numerator mein \\(x\\,dx = u\\,du\\), aur denominator \\(\\sqrt{1 + x^2} + (1 + x^2) = u + u^2\\). Neeche \\(u\\) common nikala aur upar wale \\(u\\) se cancel kiya.",
+              "Integrate kar ke \\(u\\) wapas rakhein\n\\[= \\ln|1 + u| + c\\]\n\\[= \\ln\\left(1 + \\sqrt{1 + x^2}\\right) + c\\]\nKyun: Rule 4: numerator 1, denominator \\(1 + u\\) ka derivative hai. Modulus hata sakte hain kyunke \\(1 + \\sqrt{1 + x^2}\\) har \\(x\\) ke liye positive hai.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\ln\\left(1 + \\sqrt{1 + x^2}\\right) = \\dfrac{x/\\sqrt{1 + x^2}}{1 + \\sqrt{1 + x^2}}\\]\n\\[= \\dfrac{x}{\\sqrt{1 + x^2} + 1 + x^2} \\;\\checkmark\\]\nKyun: \\(\\ln\\) ka derivative aur chain rule; phir upar neeche \\(\\sqrt{1 + x^2}\\) se multiply kiya to neeche \\(\\sqrt{1 + x^2} + (1 + x^2)\\) ban gaya."
+            ],
+            "answer": "\\(\\ln\\left(1 + \\sqrt{1 + x^2}\\right) + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 16",
+            "problem": "Evaluate \\(\\int \\frac{\\sin x}{e^{\\cos x}}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{\\sin x}{e^{\\cos x}}\\,dx\\).\nMaloom karna: integral.\nTareeqa: exponent (power) mein \\(\\cos x\\) baitha hai. Us ka derivative \\(-\\sin x\\) hai, aur \\(\\sin x\\) numerator mein maujood hai; sirf minus ka farq hai. Is liye \\(u = \\cos x\\).",
+              "\\(u\\) chunein aur \\(du\\) nikalein\n\\[u = \\cos x\\]\n\\[du = -\\sin x\\,dx\\]\nKyun: \\(\\cos x\\) ka derivative \\(-\\sin x\\). Is ka matlab \\(\\sin x\\,dx = -du\\).",
+              "Substitute kar ke integrate karein\n\\[\\int \\dfrac{\\sin x}{e^{\\cos x}}\\,dx = \\int \\dfrac{-du}{e^u}\\]\n\\[= -\\int e^{-u}\\,du = -\\dfrac{e^{-u}}{-1} + c\\]\n\\[= e^{-u} + c = e^{-\\cos x} + c\\]\nKyun: \\(\\frac{1}{e^u} = e^{-u}\\). Rule 5 se \\(\\int e^{-u}\\,du = \\frac{e^{-u}}{-1}\\). Do minus mil kar plus ho gaye. Aakhir mein \\(u = \\cos x\\) wapas rakha.\nDhyan dein: \\(du = -\\sin x\\,dx\\) wala minus sign bhoolna bohat aam hai; is se poora jawab ulta ho jata hai.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}e^{-\\cos x} = e^{-\\cos x}\\cdot\\sin x = \\dfrac{\\sin x}{e^{\\cos x}} \\;\\checkmark\\]\nKyun: Chain rule: exponent \\(-\\cos x\\) ka derivative \\(\\sin x\\) hai."
+            ],
+            "answer": "\\(e^{-\\cos x} + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 17",
+            "problem": "Evaluate \\(\\int \\frac{e^{\\tan^{-1}x}}{1 + x^2}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{e^{\\tan^{-1}x}}{1 + x^2}\\,dx\\).\nMaloom karna: integral.\nTareeqa: exponent mein \\(\\tan^{-1}x\\) hai, aur us ka derivative \\(\\frac{1}{1 + x^2}\\) bilkul bahar maujood hai. Is liye \\(u = \\tan^{-1}x\\).",
+              "\\(u\\) chunein aur \\(du\\) nikalein\n\\[u = \\tan^{-1}x\\]\n\\[du = \\dfrac{1}{1 + x^2}\\,dx\\]\nKyun: Table ka formula: \\(\\frac{d}{dx}\\tan^{-1}x = \\frac{1}{1 + x^2}\\).",
+              "Substitute kar ke integrate karein\n\\[\\int \\dfrac{e^{\\tan^{-1}x}}{1 + x^2}\\,dx = \\int e^u\\,du\\]\n\\[= e^u + c = e^{\\tan^{-1}x} + c\\]\nKyun: \\(e^u\\) ka integral \\(e^u\\) hi hai. Dekhiye kitna mushkil nazar aane wala integral ek line mein ho gaya.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}e^{\\tan^{-1}x} = e^{\\tan^{-1}x}\\cdot\\dfrac{1}{1 + x^2} \\;\\checkmark\\]\nKyun: Chain rule se exponent ka derivative saath aaya."
+            ],
+            "answer": "\\(e^{\\tan^{-1}x} + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Examples 16 aur 17 mein ek hi pattern hai: \\(\\int e^{g(x)}\\,g'(x)\\,dx = e^{g(x)} + c\\). Ab aap batayein: \\(\\int 2x\\,e^{x^2}\\,dx\\) kya hoga? (Jawab: \\(e^{x^2} + c\\), kyunke \\(x^2\\) ka derivative \\(2x\\) bahar maujood hai.)"
+          },
+          {
+            "type": "example",
+            "title": "Example 18",
+            "problem": "Evaluate \\(\\int \\frac{e^{2x} + 2e^x}{(e^x + 1)^2}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{e^{2x} + 2e^x}{(e^x + 1)^2}\\,dx\\).\nMaloom karna: integral.\nTareeqa: denominator mein \\(e^x + 1\\) ki power hai, to \\(u = e^x + 1\\). Phir \\(e^x = u - 1\\) aur \\(e^x\\,dx = du\\). Numerator mein se ek \\(e^x\\) common nikal kar \\(dx\\) ke saath jorenge.",
+              "\\(u\\) chunein\n\\[e^x + 1 = u\\]\n\\[e^x = u - 1\\]\n\\[e^x\\,dx = du\\]\nKyun: \\(e^x + 1\\) ka derivative \\(e^x\\) hai.",
+              "Nayi shakal aur substitution\n\\[\\int \\dfrac{e^{2x} + 2e^x}{(e^x + 1)^2}\\,dx\\]\n\\[= \\int \\dfrac{e^x + 2}{(e^x + 1)^2}\\cdot e^x\\,dx\\]\n\\[= \\int \\dfrac{u - 1 + 2}{u^2}\\,du = \\int \\dfrac{u + 1}{u^2}\\,du\\]\nKyun: \\(e^{2x} = e^x\\cdot e^x\\), is liye numerator \\((e^x + 2)e^x\\). Ek \\(e^x\\) ko \\(dx\\) ke saath mila kar \\(du\\) banaya, aur baqi \\(e^x\\) ki jagah \\(u - 1\\) rakha.",
+              "Torein aur integrate karein\n\\[= \\int \\left(\\dfrac{1}{u} + u^{-2}\\right)du\\]\n\\[= \\ln|u| + \\dfrac{u^{-1}}{-1} + c = \\ln|u| - \\dfrac{1}{u} + c\\]\nKyun: \\(\\frac{u + 1}{u^2} = \\frac{u}{u^2} + \\frac{1}{u^2} = \\frac{1}{u} + u^{-2}\\). \\(\\frac{1}{u}\\) ka integral \\(\\ln|u|\\), aur \\(u^{-2}\\) par Power Rule (power \\(-1\\)).",
+              "\\(u\\) wapas rakhein\n\\[= \\ln|e^x + 1| - \\dfrac{1}{e^x + 1} + c\\]\nKyun: \\(u = e^x + 1\\). (Kyunke \\(e^x + 1\\) hamesha positive hai, modulus ke baghair bhi likh sakte hain.)",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left[\\ln(e^x + 1) - (e^x + 1)^{-1}\\right]\\]\n\\[= \\dfrac{e^x}{e^x + 1} + \\dfrac{e^x}{(e^x + 1)^2}\\]\n\\[= \\dfrac{e^x(e^x + 1) + e^x}{(e^x + 1)^2}\\]\n\\[= \\dfrac{e^{2x} + 2e^x}{(e^x + 1)^2} \\;\\checkmark\\]\nKyun: Common denominator \\((e^x + 1)^2\\) liya; upar \\(e^{2x} + e^x + e^x = e^{2x} + 2e^x\\)."
+            ],
+            "answer": "\\(\\ln|e^x + 1| - \\frac{1}{e^x + 1} + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 19",
+            "problem": "Evaluate \\(\\int \\frac{e^x\\ln(1 + e^x)}{1 + e^x}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{e^x\\ln(1 + e^x)}{1 + e^x}\\,dx\\).\nMaloom karna: integral.\nTareeqa: integrand mein \\(\\ln(1 + e^x)\\) hai, aur us ka derivative \\(\\frac{e^x}{1 + e^x}\\) baqi poora integrand hai. Is liye \\(u = \\ln(1 + e^x)\\).",
+              "\\(u\\) chunein aur \\(du\\) nikalein\n\\[u = \\ln(1 + e^x)\\]\n\\[du = \\dfrac{e^x}{1 + e^x}\\,dx\\]\nKyun: \\(\\ln f(x)\\) ka derivative \\(\\frac{f'(x)}{f(x)}\\) hai, jahan \\(f(x) = 1 + e^x\\) aur \\(f'(x) = e^x\\).",
+              "Substitute kar ke integrate karein\n\\[\\int \\dfrac{e^x\\ln(1 + e^x)}{1 + e^x}\\,dx = \\int u\\,du\\]\n\\[= \\dfrac{u^2}{2} + c = \\dfrac{1}{2}\\left[\\ln(1 + e^x)\\right]^2 + c\\]\nKyun: Integrand ko \\(\\ln(1 + e^x)\\cdot\\frac{e^x}{1 + e^x}\\,dx\\) dekhiye: pehla hissa \\(u\\), doosra \\(du\\). Phir Power Rule.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\,\\tfrac{1}{2}\\left[\\ln(1 + e^x)\\right]^2\\]\n\\[= \\ln(1 + e^x)\\cdot\\dfrac{e^x}{1 + e^x} \\;\\checkmark\\]\nKyun: Chain rule: power 2 neeche aa kar \\(\\frac{1}{2}\\) se cancel, aur \\(\\ln(1 + e^x)\\) ka derivative saath aaya."
+            ],
+            "answer": "\\(\\frac{1}{2}\\left[\\ln(1 + e^x)\\right]^2 + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 20",
+            "problem": "Evaluate \\(\\int \\frac{\\ln(1 + x) - \\ln x}{x(1 + x)}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{\\ln(1 + x) - \\ln x}{x(1 + x)}\\,dx\\) (\\(x > 0\\)).\nMaloom karna: integral.\nTareeqa: numerator mein \\(\\ln(1 + x) - \\ln x\\) hai. Is ko \\(u\\) maan kar dekhte hain ke kya is ka derivative denominator wale \\(\\frac{1}{x(1 + x)}\\) se milta hai.",
+              "\\(u\\) ko differentiate karein\n\\[\\dfrac{du}{dx} = \\dfrac{1}{1 + x} - \\dfrac{1}{x} = \\dfrac{x - (1 + x)}{x(1 + x)}\\]\n\\[= \\dfrac{x - 1 - x}{x(1 + x)} = \\dfrac{-1}{x(1 + x)}\\]\nKyun: \\(\\ln(1 + x)\\) ka derivative \\(\\frac{1}{1 + x}\\) aur \\(\\ln x\\) ka \\(\\frac{1}{x}\\). Common denominator \\(x(1 + x)\\) liya; upar \\(x\\) cancel ho kar \\(-1\\) bacha.",
+              "\\(dx\\) wala hissa \\(du\\) mein likhein\n\\[\\dfrac{du}{dx} = \\dfrac{-1}{x(1 + x)}\\]\n\\[\\Rightarrow -du = \\dfrac{1}{x(1 + x)}\\,dx\\]\nKyun: Dono taraf \\(dx\\) aur \\(-1\\) se multiply kiya. Derivative mil gaya, bas ek minus ka farq hai.",
+              "Substitute kar ke integrate karein\n\\[\\int \\dfrac{\\ln(1 + x) - \\ln x}{x(1 + x)}\\,dx = \\int u(-du)\\]\n\\[= -\\int u\\,du = -\\dfrac{u^2}{2} + c\\]\n\\[= -\\dfrac{1}{2}\\left[\\ln(1 + x) - \\ln x\\right]^2 + c\\]\nKyun: Numerator \\(u\\) bana, aur \\(\\frac{1}{x(1 + x)}\\,dx = -du\\). Minus constant hai, bahar aa gaya. Phir Power Rule aur \\(u\\) wapas.\nDhyan dein: yeh minus sign bhool gaye to jawab ka sign ulta ho jayega.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left(-\\tfrac{1}{2}u^2\\right) = -u\\dfrac{du}{dx}\\]\n\\[= \\dfrac{\\ln(1 + x) - \\ln x}{x(1 + x)} \\;\\checkmark\\]\nKyun: Chain rule; \\(-u\\cdot\\frac{-1}{x(1 + x)} = \\frac{u}{x(1 + x)}\\)."
+            ],
+            "answer": "\\(-\\frac{1}{2}\\left[\\ln(1 + x) - \\ln x\\right]^2 + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 21",
+            "problem": "Evaluate \\(\\int \\frac{x^2\\tan^{-1}(x^3)}{1 + x^6}\\,dx\\)",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{x^2\\tan^{-1}(x^3)}{1 + x^6}\\,dx\\).\nMaloom karna: integral.\nTareeqa: \\(\\tan^{-1}(x^3)\\) ko \\(u\\) maanein. Us ka derivative \\(\\frac{3x^2}{1 + x^6}\\) hai, jo baqi integrand \\(\\frac{x^2}{1 + x^6}\\) ka teen guna hai; sirf constant 3 ka farq.",
+              "\\(u\\) chunein aur \\(du\\) nikalein\n\\[\\dfrac{du}{dx} = \\dfrac{1}{1 + (x^3)^2}\\,\\dfrac{d}{dx}(x^3)\\]\n\\[du = \\dfrac{3x^2}{1 + x^6}\\,dx\\]\n\\[\\dfrac{1}{3}\\,du = \\dfrac{x^2}{1 + x^6}\\,dx\\]\nKyun: \\(\\tan^{-1}\\) ka derivative formula aur chain rule: andar \\(x^3\\) ka derivative \\(3x^2\\). \\((x^3)^2 = x^6\\). Phir 3 se divide kiya.",
+              "Substitute kar ke integrate karein\n\\[\\int \\dfrac{x^2\\tan^{-1}(x^3)}{1 + x^6}\\,dx = \\int u\\,\\dfrac{1}{3}\\,du\\]\n\\[= \\dfrac{1}{3}\\int u\\,du = \\dfrac{u^2}{6} + c\\]\n\\[= \\dfrac{1}{6}\\left[\\tan^{-1}(x^3)\\right]^2 + c\\]\nKyun: \\(\\frac{1}{3}\\) constant hai, bahar. \\(\\int u\\,du = \\frac{u^2}{2}\\), aur \\(\\frac{1}{3}\\cdot\\frac{1}{2} = \\frac{1}{6}\\).",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\,\\tfrac{1}{6}u^2 = \\tfrac{1}{3}u\\cdot\\dfrac{3x^2}{1 + x^6}\\]\n\\[= \\dfrac{x^2\\tan^{-1}(x^3)}{1 + x^6} \\;\\checkmark\\]\nKyun: Chain rule; 3 aur \\(\\frac{1}{3}\\) cancel ho gaye."
+            ],
+            "answer": "\\(\\frac{1}{6}\\left[\\tan^{-1}(x^3)\\right]^2 + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Yeh hamari practice hai, kitab ka sawal nahi: \\(\\int \\frac{\\cos x}{1 + \\sin x}\\,dx\\).\nDenominator \\(1 + \\sin x\\) ka derivative \\(\\cos x\\) hai, jo numerator hai. To \\(u = 1 + \\sin x\\), \\(du = \\cos x\\,dx\\).\n\\(\\int \\frac{du}{u} = \\ln|u| + c = \\ln(1 + \\sin x) + c\\) (kyunke \\(1 + \\sin x \\ge 0\\); jahan yeh zero ho wahan integrand bhi define nahi).\nYeh bilkul Rule 4 hai, jo substitution ki hi ek shakal hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Substitution, Chain Rule ka ulta hai: \\(\\int f(g(x))\\,g'(x)\\,dx = F(g(x)) + c\\).\n2. \\(u\\) us \"andar wali cheez\" ko banaiye jis ka derivative (constant ke farq ke saath) integrand mein bahar maujood ho.\n3. Sab kuch badliye: \\(x\\), \\(dx\\) aur poora integrand \\(u\\) aur \\(du\\) mein.\n4. Constant ka farq ho to andar multiply aur bahar divide kar dijiye (Example 13, Example 21).\n5. Derivative maujood na ho to \\(x\\) ko bhi \\(u\\) ke zariye likhiye (Example 14).\n6. Aakhir mein \\(u = g(x)\\) wapas rakhiye aur differentiate kar ke check kijiye."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Integrand ko \\(u\\) mein badal dena lekin \\(dx\\) ko waise hi chhor dena: \\(dx\\) ko sahi factor ke saath \\(du\\) banana zaroori hai.\n2. Variable cheez ko integral ke bahar nikal dena: sirf constant bahar ja sakta hai. \\(\\int (5x^5 + 5)^3x^4\\,dx\\) mein \\(\\frac{1}{25x^4}\\) bahar likhna ghalat hai.\n3. Jawab \\(u\\) mein hi chhor dena; sawal \\(x\\) mein tha to jawab bhi \\(x\\) mein.\n4. \\(du = -\\sin x\\,dx\\) (Example 16) ya \\(\\frac{du}{dx} = \\frac{-1}{x(1 + x)}\\) (Example 20) wala minus sign kho dena.\n5. \\(\\ln\\) ke andar modulus bina soche hata dena: sirf tab hatayein jab andar wali cheez hamesha positive ho."
+          }
+        ]
+      }
+    }
+  ]
+}

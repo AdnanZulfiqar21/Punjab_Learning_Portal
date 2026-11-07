@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q9",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q9",
+      "title": "Question 9",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 9: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9. Evaluate \\(\\int e^x\\ln(1 + e^x)\\,dx\\).",
+            "explanation": "\\(e^x\\,dx\\) is the derivative of \\(1 + e^x\\), so substitute first.\nPlan: \\(u = 1 + e^x\\) gives \\(\\int \\ln u\\,du\\), which is Question 1.",
+            "steps": [
+              "Given: \\(\\int e^x\\ln(1 + e^x)\\,dx\\).\nTo find: the indefinite integral.\nMethod: substitute \\(u = 1 + e^x\\), \\(du = e^x\\,dx\\); then \\(\\int \\ln u\\,du\\) by parts (Question 1).",
+              "Substitute\n\\[u = 1 + e^x \\Rightarrow du = e^x\\,dx\\]\n\\[\\int e^x\\ln(1 + e^x)\\,dx = \\int \\ln u\\,du\\]\nWhy: \\(e^x\\,dx\\) is exactly \\(du\\).",
+              "Parts with \\(\\ln u\\cdot 1\\)\n\\[= u\\ln u - \\int u\\cdot\\dfrac{1}{u}\\,du\\]\n\\[= u\\ln u - u + c_1\\]\nWhy: as in Question 1: \\(\\ln u\\) first, 1 second.",
+              "Return to \\(x\\)\n\\[= (1 + e^x)\\ln(1 + e^x) - (1 + e^x) + c_1\\]\n\\[= (e^x + 1)\\ln(1 + e^x) - e^x + c\\]\nWhy: the constant \\(-1\\) joins the arbitrary constant: \\(c = c_1 - 1\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left[(e^x + 1)\\ln(1 + e^x) - e^x\\right]\\]\n\\[= e^x\\ln(1 + e^x) + (e^x + 1)\\dfrac{e^x}{1 + e^x} - e^x\\]\n\\[= e^x\\ln(1 + e^x)\\]\nWhy: product rule; \\(e^x\\) cancels."
+            ],
+            "final_answer": "\\((e^x + 1)\\ln(1 + e^x) - e^x + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}
