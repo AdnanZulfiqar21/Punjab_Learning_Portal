@@ -17,7 +17,7 @@ import { GRADE_LABEL } from "@/lib/format";
 import { LANGUAGE_COOKIE, missingLanguageNote, preferredLanguage, READING_LANGUAGES, subjectKey } from "@/lib/learn-context";
 import { api, currentUser } from "@/lib/session";
 
-export const metadata: Metadata = { title: "Book exercise", robots: { index: false } };
+export const metadata: Metadata = { title: "Chapter practice", robots: { index: false } };
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
