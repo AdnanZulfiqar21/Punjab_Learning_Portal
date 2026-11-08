@@ -10,6 +10,7 @@ import { bookErrors, markLatex, markPieces, styledPieces } from "@/lib/book-erro
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
 import { hasMath } from "@/lib/inline-math";
+import { splitQuestionNumber } from "@/lib/question-number";
 import { SOLVED_LABELS_EN, stepText, type SolvedLabels } from "@/lib/solved-labels";
 import { fillMerged, mergedColumns, mergeStarts, rowSpans } from "@/lib/table-merge";
 
@@ -143,6 +144,7 @@ export function LessonBlocks({
   revealLabel,
   solvedLabels,
   math,
+  numbered = false,
 }: {
   blocks: Block[];
   headingOffset?: number;
@@ -165,6 +167,8 @@ export function LessonBlocks({
   solvedLabels?: SolvedLabels;
   /** INLINE-MATH-01: the formulas written in the text, typeset on the server (`lib/typeset.ts` `typesetMath`). */
   math?: MathHtml;
+  /** QUESTION-NUMBER-01: a Practice page: each question's printed number is drawn apart from its words. */
+  numbered?: boolean;
 }) {
   const view = (b: Block, i: number) => (
     <BlockView
@@ -178,6 +182,7 @@ export function LessonBlocks({
       revealLabel={revealLabel}
       solvedLabels={solvedLabels}
       math={math}
+      numbered={numbered}
     />
   );
   // Each block keeps its own id (b0, b1, …), also inside a Quick Check card, so the language switch finds its place.
@@ -263,6 +268,7 @@ function BlockView({
   revealLabel,
   solvedLabels = SOLVED_LABELS_EN,
   math,
+  numbered = false,
 }: {
   block: Block;
   headingOffset: number;
@@ -274,6 +280,7 @@ function BlockView({
   revealLabel?: string;
   solvedLabels?: SolvedLabels;
   math?: MathHtml;
+  numbered?: boolean;
 }) {
   const marks = bookErrors(b.book_errors);
   const bold = bookErrors(b.bold); // BOOK-BOLD-01: the terms the book prints in bold
@@ -517,11 +524,14 @@ function BlockView({
         ) : null;
       // INLINE-MATH-01 / SOLVED-QUESTION-01: formulas typeset here, so the client component gets ready markup.
       const steps = Array.isArray(b.steps) ? strs(b.steps).map((s, i) => <Marked math={math} key={i} text={stepText(s)} marks={[]} />) : undefined;
+      const q = numbered ? splitQuestionNumber(str(b.prompt)) : null; // QUESTION-NUMBER-01
+      const words = q ? q.text : str(b.prompt);
       return (
         <Checkpoint
           mode={b.mode === "self_check" ? "self_check" : "question"}
           prompt={str(b.prompt)}
-          promptView={hasMath(str(b.prompt)) ? <MathText text={str(b.prompt)} html={math} /> : undefined}
+          promptView={hasMath(words) ? <MathText text={words} html={math} /> : q ? words : undefined}
+          number={q?.number}
           options={Array.isArray(b.options) ? (b.options as { id: string; text: string }[]) : []}
           answerId={typeof b.answer_id === "string" ? b.answer_id : null}
           explanation={str(b.explanation)}

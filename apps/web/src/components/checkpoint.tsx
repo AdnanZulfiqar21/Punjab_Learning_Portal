@@ -23,6 +23,7 @@ export function Checkpoint({
   finalAnswer,
   labels = SOLVED_LABELS_EN,
   bookHref,
+  number,
 }: {
   mode: "question" | "self_check";
   prompt: string;
@@ -45,6 +46,8 @@ export function Checkpoint({
   labels?: SolvedLabels;
   /** MCQ-BOOK-LINK-01: opens the book passage this question comes from, highlighted. */
   bookHref?: string;
+  /** QUESTION-NUMBER-01: the question's printed number, drawn apart from its words (`promptView` then has the words). */
+  number?: string;
 }) {
   const [chosen, setChosen] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
@@ -52,6 +55,19 @@ export function Checkpoint({
   const panelId = useId();
   const done = mode === "question" ? chosen !== null : revealed;
   const solved = mode === "self_check" && (Boolean(steps?.length) || finalAnswer !== undefined);
+  const promptLine = number ? (
+    <p className="flex items-start gap-3">
+      <span
+        className="question-number mt-px inline-flex h-8 min-w-8 shrink-0 items-center justify-center rounded-full bg-accent px-2.5 text-sm font-bold whitespace-nowrap text-white tabular-nums shadow-sm"
+      >
+        <span className="sr-only">{`${labels.question} `}</span>
+        {number}
+      </span>
+      <span className="min-w-0 flex-1 pt-1 whitespace-pre-wrap">{promptView ?? prompt}</span>
+    </p>
+  ) : (
+    <p className="whitespace-pre-wrap">{promptView ?? prompt}</p>
+  );
   if (solved) {
     // A book question solved step by step: the question, then (on demand) how to think about it, the numbered working
     // and the final answer, each set apart so a student can tell the question, the steps and the answer at a glance.
@@ -59,7 +75,7 @@ export function Checkpoint({
       <article aria-label={qref ? `${labels.question} ${qref}` : prompt} className="solved-question overflow-hidden rounded-xl border border-accent/40 bg-surface shadow-sm" data-ref={qref}>
         <div className="space-y-2 bg-accent-soft px-4 py-3">
           {qref && <p className="text-xs font-semibold tracking-wide text-accent-strong uppercase">{`${labels.question} ${qref}`}</p>}
-          <p className="whitespace-pre-wrap">{promptView ?? prompt}</p>
+          {promptLine}
           <button
             type="button"
             aria-expanded={revealed}
@@ -123,7 +139,7 @@ export function Checkpoint({
         )}
       </div>
       {/* Prompts and answers keep their line breaks and indentation: book exercises quote and answer with programs. */}
-      <p className="whitespace-pre-wrap">{promptView ?? prompt}</p>
+      {promptLine}
       {mode === "question" ? (
         <fieldset className="space-y-2" disabled={chosen !== null}>
           <legend className="sr-only">{prompt}</legend>

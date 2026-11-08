@@ -17,6 +17,7 @@ import { bookBoxKind, boxRow, isMarginNote, isSideBox, isSideFigure, type BookBo
 import { bookErrors, markPieces, styledPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
+import { splitQuestionNumber } from "@/lib/question-number";
 import { findBlock, findRange } from "@/lib/find-in-book";
 import { comparisonCards } from "@/lib/lesson-tables";
 import { plainBlocks } from "@/lib/inline-math";
@@ -145,6 +146,8 @@ const Premium = createContext(false);
 const Runnable = createContext(false);
 /** BOOK-EXERCISES-01: the words on each self-check's reveal button (the checkpoint's own label otherwise). */
 const RevealLabel = createContext<string | undefined>(undefined);
+/** QUESTION-NUMBER-01: a Practice page: each question's printed number is drawn apart from its words. */
+const Numbered = createContext(false);
 const Solved = createContext<SolvedLabels>(SOLVED_LABELS_EN);
 /** MCQ-BOOK-LINK-01: the book's words to mark, given only to the block that holds them. */
 const Find = createContext<string | null>(null);
@@ -160,6 +163,7 @@ export function LessonBlocks({
   revealLabel,
   solvedLabels = SOLVED_LABELS_EN,
   find,
+  numbered = false,
 }: {
   blocks: Block[];
   assetSource?: AssetSource;
@@ -176,6 +180,8 @@ export function LessonBlocks({
   solvedLabels?: SolvedLabels;
   /** MCQ-BOOK-LINK-01: the book's words to mark like a highlighter ("See in book" from a practice MCQ). */
   find?: string;
+  /** QUESTION-NUMBER-01: a Practice page: each question's printed number is drawn apart from its words. */
+  numbered?: boolean;
 }) {
   // INLINE-MATH-01: formulas written in the text (\( … \), \[ … \]) read as plain text here.
   const blocks = useMemo(() => plainBlocks(authored) as Block[], [authored]);
@@ -185,6 +191,7 @@ export function LessonBlocks({
   const holder = target < 0 ? -1 : sideStart >= 0 ? sideStart : isQuickCheck(blocks[target - 1], blocks[target]) ? target - 1 : target;
   return (
     <Solved.Provider value={solvedLabels}>
+    <Numbered.Provider value={numbered}>
     <RevealLabel.Provider value={revealLabel}>
     <Runnable.Provider value={runnable}>
     <Premium.Provider value={premium}>
@@ -203,6 +210,7 @@ export function LessonBlocks({
     </Premium.Provider>
     </Runnable.Provider>
     </RevealLabel.Provider>
+    </Numbered.Provider>
     </Solved.Provider>
   );
 
@@ -527,6 +535,7 @@ function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block
   const runnable = useContext(Runnable);
   const revealLabel = useContext(RevealLabel);
   const solvedLabels = useContext(Solved);
+  const numbered = useContext(Numbered);
   const marks = bookErrors(b.book_errors);
   const bold = bookErrors(b.bold); // BOOK-BOLD-01: the terms the book prints in bold
   switch (b.type) {
@@ -714,7 +723,8 @@ function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block
       return (
         <Checkpoint
           mode={b.mode === "self_check" ? "self_check" : "question"}
-          prompt={str(b.prompt)}
+          prompt={(numbered ? splitQuestionNumber(str(b.prompt))?.text : undefined) ?? str(b.prompt)}
+          number={numbered ? splitQuestionNumber(str(b.prompt))?.number : undefined}
           options={Array.isArray(b.options) ? (b.options as { id: string; text: string }[]) : []}
           answerId={typeof b.answer_id === "string" ? b.answer_id : null}
           explanation={str(b.explanation)}

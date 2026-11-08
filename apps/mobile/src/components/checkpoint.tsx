@@ -22,6 +22,7 @@ export function Checkpoint({
   finalAnswer,
   labels = SOLVED_LABELS_EN,
   onBook,
+  number,
 }: {
   mode: "question" | "self_check";
   prompt: string;
@@ -41,11 +42,25 @@ export function Checkpoint({
   labels?: SolvedLabels;
   /** MCQ-BOOK-LINK-01: opens the book passage this question comes from, highlighted. */
   onBook?: () => void;
+  /** QUESTION-NUMBER-01: the question's printed number, drawn apart from its words (`prompt` then has the words). */
+  number?: string;
 }) {
   const c = useTheme();
   const [chosen, setChosen] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
   const done = mode === "question" ? chosen !== null : revealed;
+  const promptLine = number ? (
+    <View style={{ flexDirection: "row", alignItems: "flex-start", gap: Space.sm }}>
+      <View
+        accessibilityLabel={`${labels.question} ${number}`}
+        style={{ minWidth: 32, height: 32, paddingHorizontal: 10, borderRadius: 16, alignItems: "center", justifyContent: "center", backgroundColor: c.accent }}>
+        <Text style={{ color: "#ffffff", fontWeight: "700", fontSize: 14, fontVariant: ["tabular-nums"] }}>{number}</Text>
+      </View>
+      <T style={{ flex: 1, paddingTop: 4 }}>{prompt}</T>
+    </View>
+  ) : (
+    <T>{prompt}</T>
+  );
   if (mode === "self_check" && (steps?.length || finalAnswer)) {
     // A book question solved step by step: the question, then (on demand) how to think about it, the numbered
     // working and the final answer, each set apart.
@@ -55,7 +70,7 @@ export function Checkpoint({
         style={{ borderWidth: 1, borderColor: c.accent, backgroundColor: c.surface, borderRadius: Radius.sm, overflow: "hidden" }}>
         <View style={{ gap: Space.sm, backgroundColor: c.accentSoft, padding: Space.md }}>
           {qref ? <T variant="eyebrow" style={{ color: c.accent }}>{`${labels.question} ${qref}`}</T> : null}
-          <T>{prompt}</T>
+          {promptLine}
           <Pressable accessibilityRole="button" aria-expanded={revealed} onPress={() => setRevealed((r) => !r)} style={{ minHeight: 44, justifyContent: "center" }}>
             <Text style={{ color: c.accent, fontWeight: "600" }}>{revealed ? labels.hide : revealLabel}</Text>
           </Pressable>
@@ -109,7 +124,7 @@ export function Checkpoint({
           </Pressable>
         ) : null}
       </View>
-      <T>{prompt}</T>
+      {promptLine}
       {mode === "question" ? (
         <View accessibilityRole="radiogroup" style={{ gap: Space.xs }}>
           {options.map((o) => {

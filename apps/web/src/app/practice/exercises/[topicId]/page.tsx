@@ -160,6 +160,7 @@ async function ExerciseView({ id }: { id: string }) {
             premium={premiumBook(subject, reading.grade_number)}
             runnable={lesson.language === "roman_ur"}
             revealLabel={revealLabel(lesson.language)}
+            numbered
             solvedLabels={solvedLabels(lesson.language)}
             assetUrl={(versionId) =>
               lesson.private_preview ? `/learn/topics/${reading.topic_id}/preview-assets/${versionId}` : `/learn/lessons/${lesson.id}/assets/${versionId}`
