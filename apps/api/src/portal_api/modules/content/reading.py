@@ -36,6 +36,7 @@ from portal_api.modules.curriculum.models import (
     EXERCISE_KEY_SUFFIX,
     MCQ_KEY_SUFFIX,
     PAPER_KEY_SUFFIXES,
+    SHORT_KEY_SUFFIX,
     BookEdition,
     Chapter,
     Topic,
@@ -127,19 +128,21 @@ def book_exercises(db: Session, who: Principal | None, grade: int, subject: str)
                 available_languages=languages,  # type: ignore[arg-type]
             )
         )
-    mcq_sets: list[BookExerciseOut] = []
-    for topic, chapter in rows(MCQ_KEY_SUFFIX):
-        availability, languages = _listed_availability(db, topic, preview)
-        mcq_sets.append(
-            BookExerciseOut(
-                topic_id=topic.id,
-                chapter_id=chapter.id,
-                chapter_number=chapter.number,
-                chapter_title=chapter.title,
-                availability=availability,
-                available_languages=languages,  # type: ignore[arg-type]
+    # PRACTICE-MCQ-01 / PRACTICE-SHORT-01: the chapters' own practice sets, each kind in chapter order.
+    sets: dict[str, list[BookExerciseOut]] = {MCQ_KEY_SUFFIX: [], SHORT_KEY_SUFFIX: []}
+    for suffix, found in sets.items():
+        for topic, chapter in rows(suffix):
+            availability, languages = _listed_availability(db, topic, preview)
+            found.append(
+                BookExerciseOut(
+                    topic_id=topic.id,
+                    chapter_id=chapter.id,
+                    chapter_number=chapter.number,
+                    chapter_title=chapter.title,
+                    availability=availability,
+                    available_languages=languages,  # type: ignore[arg-type]
+                )
             )
-        )
     papers: list[BookPaperOut] = []
     for topic, _chapter in rows(*PAPER_KEY_SUFFIXES):
         availability, languages = _listed_availability(db, topic, preview)
@@ -158,7 +161,8 @@ def book_exercises(db: Session, who: Principal | None, grade: int, subject: str)
         chapter_label=book.chapter_label,
         exercises=exercises,
         papers=papers,
-        mcq_sets=mcq_sets,
+        mcq_sets=sets[MCQ_KEY_SUFFIX],
+        short_sets=sets[SHORT_KEY_SUFFIX],
     )
 
 

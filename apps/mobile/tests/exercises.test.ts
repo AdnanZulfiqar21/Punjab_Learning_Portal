@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { exerciseStatus, exerciseTitle, learnTopics, mcqTitle, practiceChapters, practiceOnly, practiceTitle, revealLabel } from "../src/lib/exercises.ts";
+import { exerciseStatus, exerciseTitle, learnTopics, mcqTitle, practiceChapters, practiceOnly, practiceTitle, revealLabel, shortTitle } from "../src/lib/exercises.ts";
 
 describe("book exercises", () => {
   it("leaves the exercise out of Learn's topic list", () => {
@@ -41,6 +41,15 @@ describe("book exercises", () => {
       [[1, "e1", "m1"], [2, "e2", undefined], [3, undefined, "m3"]],
     );
     assert.deepEqual(practiceChapters({ exercises: [] }), []);
+    // PRACTICE-SHORT-01: short questions sit beside the MCQs in the same chapter.
+    assert.equal(practiceOnly("short"), true);
+    assert.equal(practiceTitle({ kind: "short", title: "Short Questions", chapter_number: 1 }), "Chapter 1 · Short Questions");
+    assert.equal(shortTitle("Unit", 2), "Unit 2 · Short Questions");
+    const withShorts = practiceChapters({ exercises: [item("e1", 1)], mcq_sets: [item("m1", 1)], short_sets: [item("s1", 1), item("s4", 4)] });
+    assert.deepEqual(
+      withShorts.map((c) => [c.number, c.mcqs?.topic_id, c.shorts?.topic_id]),
+      [[1, "m1", "s1"], [4, undefined, "s4"]],
+    );
   });
 
   it("names the exercise by its chapter", () => {
