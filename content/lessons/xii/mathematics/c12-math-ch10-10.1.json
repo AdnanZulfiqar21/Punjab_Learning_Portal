@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH10-10.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch10",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch10/10.1",
+      "title": "10.1 Trigonometric Equation",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 276,
+          "pdf_to": 279,
+          "note": "Book p. 274-277: Unit 10 introduction, 10.1 definition, principal and general solutions (cos x = 1/2), Examples 1-3, Remember! box"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Introduction"
+          },
+          {
+            "type": "paragraph",
+            "text": "Trigonometric equations involve functions like \\(\\sin\\theta\\), \\(\\cos\\theta\\) and \\(\\tan\\theta\\), and are solved to find the angle(s) that satisfy a given condition. In this unit, we solve such equations using the periodic, even/odd, and translation properties of trigonometric functions. For instance, equations such as \\(\\sin\\theta = k\\), \\(\\cos\\theta = k\\) or \\(\\tan\\theta = k\\) are solved by considering the periodic nature of these functions. Next, we also explore graphical methods to solve equations like \\(\\sin\\theta = \\frac{\\theta}{2}\\), \\(\\cos\\theta = \\theta\\) or \\(\\tan\\theta = 2\\theta\\) within specific intervals. The general solution of these equations incorporates the periodic behavior of trigonometric functions to identify all possible values of \\(\\theta\\). Finally, we apply the concepts of inverse trigonometric functions to real-life problems in engineering and architecture, such as determining heights, calculating angles of elevation and depression, and designing accurate scale models."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What you need before starting this unit:\n1. Radian measure: \\(\\pi\\) radians \\(= 180^{\\circ}\\), so \\(\\frac{\\pi}{6} = 30^{\\circ}\\), \\(\\frac{\\pi}{4} = 45^{\\circ}\\), \\(\\frac{\\pi}{3} = 60^{\\circ}\\), \\(\\frac{\\pi}{2} = 90^{\\circ}\\). All answers in this unit are in radians.\n2. The values of \\(\\sin\\), \\(\\cos\\), \\(\\tan\\) at the standard angles (table below).\n3. The signs of the ratios in the four quadrants (table further down).\n4. The periods: \\(\\sin\\), \\(\\cos\\), \\(\\csc\\), \\(\\sec\\) repeat after \\(2\\pi\\); \\(\\tan\\) and \\(\\cot\\) repeat after \\(\\pi\\)."
+          },
+          {
+            "type": "table",
+            "header": [
+              "\\(\\theta\\)",
+              "\\(0\\)",
+              "\\(\\frac{\\pi}{6}\\)",
+              "\\(\\frac{\\pi}{4}\\)",
+              "\\(\\frac{\\pi}{3}\\)",
+              "\\(\\frac{\\pi}{2}\\)"
+            ],
+            "rows": [
+              [
+                "\\(\\sin\\theta\\)",
+                "\\(0\\)",
+                "\\(\\frac{1}{2}\\)",
+                "\\(\\frac{1}{\\sqrt{2}}\\)",
+                "\\(\\frac{\\sqrt{3}}{2}\\)",
+                "\\(1\\)"
+              ],
+              [
+                "\\(\\cos\\theta\\)",
+                "\\(1\\)",
+                "\\(\\frac{\\sqrt{3}}{2}\\)",
+                "\\(\\frac{1}{\\sqrt{2}}\\)",
+                "\\(\\frac{1}{2}\\)",
+                "\\(0\\)"
+              ],
+              [
+                "\\(\\tan\\theta\\)",
+                "\\(0\\)",
+                "\\(\\frac{1}{\\sqrt{3}}\\)",
+                "\\(1\\)",
+                "\\(\\sqrt{3}\\)",
+                "undefined"
+              ]
+            ],
+            "caption": "Teaching aid (ours): values at the standard angles, used in almost every question of this unit"
+          },
+          {
+            "type": "paragraph",
+            "text": "A trigonometric equation is an equation that involves one or more trigonometric functions such as sine, cosine, tangent etc. and their inverses. For example,"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[\\sin x = \\dfrac{1}{\\sqrt{2}}\\]\n\\[2\\cos^{2}\\theta - 5\\cos\\theta + 1 = 0\\]\n\\[2\\tan^{-1}x = \\dfrac{\\pi}{2}\\]\n\\[\\sqrt{3}\\cot x - \\sec x - 1 = 0\\]\nare trigonometric equations."
+          },
+          {
+            "type": "paragraph",
+            "text": "An unknown value of the angle that satisfy the given trigonometric equation is called a solution of the equation. The solutions that lie within the interval \\([0, 2\\pi]\\) are called the principal solutions. Due to the periodic nature of trigonometric functions, these equations have infinitely many solutions. Once a solution is found within one period, adding or subtracting multiples of the period generates all possible solutions called the general solution.",
+            "book_errors": [
+              "that satisfy the given trigonometric equation"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints 'An unknown value of the angle that satisfy the given trigonometric equation'. The verb must agree with 'value': '... that satisfies the given trigonometric equation'. This is grammar only; the meaning does not change."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Three words to keep apart:\nSolution: one angle that makes the two sides equal. For \\(\\sin x = 0\\), \\(x = \\pi\\) is a solution because \\(\\sin\\pi = 0\\).\nPrincipal solutions: all the solutions in one full turn, \\(0 \\le x \\le 2\\pi\\).\nGeneral solution: all solutions of every turn, written with an integer \\(n\\). For \\(\\sin x = 0\\) they are \\(x = 0, \\pm\\pi, \\pm 2\\pi, \\ldots\\), i.e. \\(x = n\\pi\\), \\(n \\in \\mathbb{Z}\\).\nWhy infinitely many? A trigonometric function repeats its values: going once more round the circle (adding \\(2\\pi\\)) gives the same sine and cosine. So a single solution produces a whole family of solutions."
+          },
+          {
+            "type": "paragraph",
+            "text": "For example, consider the equation:\n\\[\\cos x = \\dfrac{1}{2}\\]\nSince cosine is positive, so \\(x\\) lies in the I and IV quadrant.\n\\[x = \\dfrac{\\pi}{3}\\]\n\\[x = 2\\pi - \\dfrac{\\pi}{3} = \\dfrac{5\\pi}{3}\\]\nwhere \\(x \\in [0, 2\\pi]\\). So, \\(\\frac{\\pi}{3}\\) and \\(\\frac{5\\pi}{3}\\) are the solution of the equation \\(\\cos x = \\frac{1}{2}\\) and are called the principal solutions. Since \\(2\\pi\\) is the period of \\(\\cos x\\), so all possible solutions of \\(\\cos x = \\frac{1}{2}\\) are \\(\\frac{\\pi}{3} + 2n\\pi\\) and \\(\\frac{5\\pi}{3} + 2n\\pi\\), \\(n \\in \\mathbb{Z}\\). Hence, general solution is given by"
+          },
+          {
+            "type": "equation",
+            "latex": "x = \\left\\{\\dfrac{\\pi}{3} + 2n\\pi\\right\\} \\cup \\left\\{\\dfrac{5\\pi}{3} + 2n\\pi\\right\\}",
+            "text_alt": "x equals the set pi over 3 plus 2 n pi, union the set 5 pi over 3 plus 2 n pi"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Where do \\(\\frac{\\pi}{3}\\) and \\(\\frac{5\\pi}{3}\\) come from? First find the acute angle \\(\\alpha\\) with \\(\\cos\\alpha = \\frac{1}{2}\\): \\(\\alpha = \\frac{\\pi}{3}\\). This is the reference angle. Cosine is positive in quadrants I and IV. The quadrant I angle is \\(\\alpha\\) itself; the quadrant IV angle is one full turn minus \\(\\alpha\\): \\(2\\pi - \\frac{\\pi}{3} = \\frac{5\\pi}{3}\\).\nMeaning of \\(n \\in \\mathbb{Z}\\): \\(n\\) can be any integer \\(\\ldots, -2, -1, 0, 1, 2, \\ldots\\). For \\(n = 1\\) we get \\(\\frac{\\pi}{3} + 2\\pi = \\frac{7\\pi}{3}\\), and indeed \\(\\cos\\frac{7\\pi}{3} = \\frac{1}{2}\\)."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Quadrant",
+              "Angle with reference angle \\(\\alpha\\)",
+              "Positive ratios"
+            ],
+            "rows": [
+              [
+                "I",
+                "\\(\\alpha\\)",
+                "all ratios"
+              ],
+              [
+                "II",
+                "\\(\\pi - \\alpha\\)",
+                "\\(\\sin\\), \\(\\csc\\)"
+              ],
+              [
+                "III",
+                "\\(\\pi + \\alpha\\)",
+                "\\(\\tan\\), \\(\\cot\\)"
+              ],
+              [
+                "IV",
+                "\\(2\\pi - \\alpha\\)",
+                "\\(\\cos\\), \\(\\sec\\)"
+              ]
+            ],
+            "caption": "Teaching aid (ours): placing the reference angle in each quadrant (all angles in \\([0, 2\\pi]\\))"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The method used in all three examples:\n1. Reduce the equation to one or more basic equations \\(\\sin x = k\\), \\(\\cos x = k\\) or \\(\\tan x = k\\) (use identities, factorise; never cancel a factor that contains \\(x\\)).\n2. Find the reference angle \\(\\alpha\\) from the positive value \\(|k|\\).\n3. Use the sign of \\(k\\) to choose the two quadrants and write the principal solutions in \\([0, 2\\pi]\\).\n4. Add the period: \\(+2n\\pi\\) for \\(\\sin\\), \\(\\cos\\), \\(\\csc\\), \\(\\sec\\); \\(+n\\pi\\) for \\(\\tan\\), \\(\\cot\\).\n5. If you squared, multiplied by a variable expression, or the equation has \\(\\tan\\), \\(\\cot\\), \\(\\sec\\), \\(\\csc\\), put every root back into the original equation.\nSpecial values with no quadrant pair: \\(\\sin x = 0 \\Rightarrow x = n\\pi\\); \\(\\cos x = 0 \\Rightarrow x = \\frac{\\pi}{2} + n\\pi\\); \\(\\cos x = 1 \\Rightarrow x = 2n\\pi\\); \\(\\cos x = -1 \\Rightarrow x = \\pi + 2n\\pi\\); \\(\\sin x = 1 \\Rightarrow x = \\frac{\\pi}{2} + 2n\\pi\\); \\(\\sin x = -1 \\Rightarrow x = \\frac{3\\pi}{2} + 2n\\pi\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Solve \\(\\sin x = -\\frac{\\sqrt{3}}{2}\\)",
+            "steps": [
+              "Given: \\(\\sin x = -\\frac{\\sqrt{3}}{2}\\).\nTo find: the principal solutions (in \\([0, 2\\pi]\\)) and the general solution.\nMethod: this is already a basic equation of the form \\(\\sin x = k\\). We find the reference angle from the positive number \\(\\frac{\\sqrt{3}}{2}\\), use the minus sign to choose the quadrants, and then add the period \\(2\\pi\\).",
+              "Reference angle\n\\[\\sin\\alpha = \\dfrac{\\sqrt{3}}{2}\\]\n\\[\\alpha = \\dfrac{\\pi}{3}\\]\nWhy: the reference angle is the acute angle for the positive value; from the table of standard values, \\(\\sin\\frac{\\pi}{3} = \\frac{\\sqrt{3}}{2}\\). The minus sign is used only in the next step.",
+              "Choose the quadrants\nSince sine is negative, \\(x\\) lies in the III and IV quadrants with reference angle \\(\\frac{\\pi}{3}\\).\nWhy: sine is positive in quadrants I and II only, so a negative sine needs quadrant III or IV.",
+              "Principal solutions\n\\[x = \\pi + \\dfrac{\\pi}{3} = \\dfrac{4\\pi}{3}\\]\n\\[x = 2\\pi - \\dfrac{\\pi}{3} = \\dfrac{5\\pi}{3}\\]\nwhere \\(x \\in [0, 2\\pi]\\).\nWhy: an angle in quadrant III is \\(\\pi + \\alpha\\) and an angle in quadrant IV is \\(2\\pi - \\alpha\\).",
+              "All solutions\nAs \\(2\\pi\\) is the period of \\(\\sin x\\), the book's next line reads: all possible solutions of \\(\\sin x = -\\frac{\\sqrt{3}}{2}\\) are \\(\\frac{2\\pi}{3} + 2n\\pi\\) and \\(\\frac{5\\pi}{3} + 2n\\pi\\), \\(n \\in \\mathbb{Z}\\). The first family is a misprint (see the Book correction below). It must start from the principal solution found above:\n\\[x = \\dfrac{4\\pi}{3} + 2n\\pi\\]\n\\[x = \\dfrac{5\\pi}{3} + 2n\\pi,\\ n \\in \\mathbb{Z}\\]\nWhy: adding a whole number of periods \\(2n\\pi\\) brings us back to the same point of the unit circle, so the value of sine does not change.",
+              "General solution\n\\[\\left\\{\\dfrac{4\\pi}{3} + 2n\\pi\\right\\}\\]\n\\[\\cup \\left\\{\\dfrac{5\\pi}{3} + 2n\\pi\\right\\},\\ n \\in \\mathbb{Z}\\]\nWhy: the general solution collects both families; the union sign \\(\\cup\\) means \"all members of the first set together with all members of the second set\".",
+              "Check:\n\\[\\sin\\dfrac{4\\pi}{3} = -\\sin\\dfrac{\\pi}{3} = -\\dfrac{\\sqrt{3}}{2}\\]\n\\[\\sin\\dfrac{5\\pi}{3} = -\\sin\\dfrac{\\pi}{3} = -\\dfrac{\\sqrt{3}}{2}\\]\nBoth principal solutions satisfy the equation. On the other hand \\(\\sin\\frac{2\\pi}{3} = +\\frac{\\sqrt{3}}{2}\\), which confirms that \\(\\frac{2\\pi}{3}\\) is not a solution."
+            ],
+            "answer": "Principal solutions: \\(x = \\frac{4\\pi}{3}\\) and \\(x = \\frac{5\\pi}{3}\\). General solution: \\(\\left\\{\\frac{4\\pi}{3} + 2n\\pi\\right\\} \\cup \\left\\{\\frac{5\\pi}{3} + 2n\\pi\\right\\}\\), \\(n \\in \\mathbb{Z}\\).",
+            "book_errors": [
+              "\\(\\frac{2\\pi}{3} + 2n\\pi\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 1: the book prints 'So, all possible solutions of \\(\\sin x = -\\frac{\\sqrt{3}}{2}\\) are \\(\\frac{2\\pi}{3} + 2n\\pi\\) and \\(\\frac{5\\pi}{3} + 2n\\pi\\)'. The first family should be \\(\\frac{4\\pi}{3} + 2n\\pi\\). The angle \\(\\frac{2\\pi}{3}\\) lies in quadrant II, where \\(\\sin\\frac{2\\pi}{3} = +\\frac{\\sqrt{3}}{2}\\), so it is not a solution. The book's own principal solutions (line above) and its final general solution correctly use \\(\\frac{4\\pi}{3}\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Solve \\(2\\sec^{2}x - \\frac{8}{3} = 0\\).",
+            "steps": [
+              "Given: \\(2\\sec^{2}x - \\frac{8}{3} = 0\\).\nTo find: the principal solutions and the general solution.\nMethod: isolate \\(\\sec^{2}x\\), take the square root (two signs), change secant to cosine (whose standard values we know), and solve the two basic equations one by one.",
+              "Isolate \\(\\sec^{2}x\\)\n\\[2\\sec^{2}x = \\dfrac{8}{3}\\]\n\\[\\sec^{2}x = \\dfrac{4}{3}\\]\nWhy: move the constant to the right side, then divide by 2. (The book goes straight to \\(\\sec x\\); this is the small step in between.)",
+              "Take the square root\n\\[\\sec x = \\pm\\dfrac{2}{\\sqrt{3}}\\]\n\\[\\sec x = \\dfrac{2}{\\sqrt{3}}\\ \\text{ or }\\ \\sec x = -\\dfrac{2}{\\sqrt{3}}\\]\nWhy: a positive and a negative number have the same square, so both signs must be kept; dropping \\(\\pm\\) loses half of the solutions.",
+              "Change to cosine\n\\[\\cos x = \\dfrac{\\sqrt{3}}{2}\\]\nor\n\\[\\cos x = -\\dfrac{\\sqrt{3}}{2}\\]\nWhy: \\(\\cos x = \\frac{1}{\\sec x}\\), and the reciprocal of \\(\\frac{2}{\\sqrt{3}}\\) is \\(\\frac{\\sqrt{3}}{2}\\).",
+              "When \\(\\cos x = \\frac{\\sqrt{3}}{2}\\)\nSince cosine is positive, \\(x\\) lies in the I and IV quadrants with reference angle \\(\\frac{\\pi}{6}\\).\n\\[x = \\dfrac{\\pi}{6}\\]\n\\[x = 2\\pi - \\dfrac{\\pi}{6} = \\dfrac{11\\pi}{6}\\]\nwhere \\(x \\in [0, 2\\pi]\\). The period of \\(\\cos x\\) is \\(2\\pi\\), so all possible solutions of \\(\\cos x = \\frac{\\sqrt{3}}{2}\\) are \\(\\frac{\\pi}{6} + 2n\\pi\\) and \\(\\frac{11\\pi}{6} + 2n\\pi\\), \\(n \\in \\mathbb{Z}\\).\nWhy: \\(\\cos\\frac{\\pi}{6} = \\frac{\\sqrt{3}}{2}\\), and cosine is positive in quadrants I and IV.",
+              "When \\(\\cos x = -\\frac{\\sqrt{3}}{2}\\)\nSince cosine is negative, \\(x\\) lies in the II and III quadrants with reference angle \\(\\frac{\\pi}{6}\\).\n\\[x = \\pi - \\dfrac{\\pi}{6} = \\dfrac{5\\pi}{6}\\]\n\\[x = \\pi + \\dfrac{\\pi}{6} = \\dfrac{7\\pi}{6}\\]\nThe period of \\(\\cos x\\) is \\(2\\pi\\), so all possible solutions of \\(\\cos x = -\\frac{\\sqrt{3}}{2}\\) are \\(\\frac{5\\pi}{6} + 2n\\pi\\) and \\(\\frac{7\\pi}{6} + 2n\\pi\\), \\(n \\in \\mathbb{Z}\\).\nWhy: the reference angle always comes from the positive value \\(\\frac{\\sqrt{3}}{2}\\); the minus sign only moves \\(x\\) into quadrants II and III.",
+              "General solution\n\\[\\left\\{\\dfrac{\\pi}{6} + 2n\\pi\\right\\} \\cup \\left\\{\\dfrac{5\\pi}{6} + 2n\\pi\\right\\}\\]\n\\[\\cup \\left\\{\\dfrac{7\\pi}{6} + 2n\\pi\\right\\} \\cup \\left\\{\\dfrac{11\\pi}{6} + 2n\\pi\\right\\}\\]\nwith \\(n \\in \\mathbb{Z}\\).\nWhy: the equation is satisfied when either case holds, so we take the union of all four families.",
+              "Check:\nAt each of \\(\\frac{\\pi}{6}, \\frac{5\\pi}{6}, \\frac{7\\pi}{6}, \\frac{11\\pi}{6}\\) we have \\(\\cos^{2}x = \\frac{3}{4}\\), so\n\\[\\sec^{2}x = \\dfrac{4}{3}\\]\n\\[2 \\cdot \\dfrac{4}{3} - \\dfrac{8}{3} = 0\\]\nAll four principal solutions satisfy the equation."
+            ],
+            "answer": "Principal solutions: \\(x = \\frac{\\pi}{6}, \\frac{5\\pi}{6}, \\frac{7\\pi}{6}, \\frac{11\\pi}{6}\\). General solution: \\(\\left\\{\\frac{\\pi}{6} + 2n\\pi\\right\\} \\cup \\left\\{\\frac{5\\pi}{6} + 2n\\pi\\right\\} \\cup \\left\\{\\frac{7\\pi}{6} + 2n\\pi\\right\\} \\cup \\left\\{\\frac{11\\pi}{6} + 2n\\pi\\right\\}\\), \\(n \\in \\mathbb{Z}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In Example 2 the four families can be written more briefly. \\(\\frac{7\\pi}{6} = \\frac{\\pi}{6} + \\pi\\) and \\(\\frac{11\\pi}{6} = \\frac{5\\pi}{6} + \\pi\\), so the general solution is also \\(\\left\\{\\frac{\\pi}{6} + n\\pi\\right\\} \\cup \\left\\{\\frac{5\\pi}{6} + n\\pi\\right\\}\\), \\(n \\in \\mathbb{Z}\\). Both forms are correct; the book's form with four sets is the safer one in an exam because each set comes straight from a quadrant."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Remember!",
+            "text": "Sometimes we have to square both sides of a trigonometric equation to solve it. Squaring can bring in extraneous roots: values that look valid but do not actually satisfy the original equation. So every potential solution must be substituted back into the original equation before it is accepted."
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Solve \\(\\sqrt{3}\\cot x - \\csc x - 1 = 0\\).",
+            "steps": [
+              "Given: \\(\\sqrt{3}\\cot x - \\csc x - 1 = 0\\) ...(1)\nTo find: the principal solutions and the general solution.\nMethod: write \\(\\cot x\\) and \\(\\csc x\\) in terms of \\(\\sin x\\) and \\(\\cos x\\), clear the fractions, and square to get an equation in \\(\\cos x\\) only. Squaring can create false (extraneous) roots, so every candidate is put back into (1). Note that \\(\\cot x\\) and \\(\\csc x\\) need \\(\\sin x \\ne 0\\).",
+              "Write in sine and cosine\n\\[\\sqrt{3}\\dfrac{\\cos x}{\\sin x} - \\dfrac{1}{\\sin x} - 1 = 0\\]\nWhy: \\(\\cot x = \\frac{\\cos x}{\\sin x}\\) and \\(\\csc x = \\frac{1}{\\sin x}\\).",
+              "Multiply by \\(\\sin x\\)\n\\[\\sqrt{3}\\cos x - 1 - \\sin x = 0\\]\n\\[\\sqrt{3}\\cos x - 1 = \\sin x\\]\nWhy: this clears the denominators; it is allowed because \\(\\sin x \\ne 0\\) wherever (1) is defined.",
+              "Taking square on both sides\n\\[(\\sqrt{3}\\cos x - 1)^{2} = \\sin^{2}x\\]\n\\[3\\cos^{2}x + 1 - 2\\sqrt{3}\\cos x\\]\n\\[= \\sin^{2}x = 1 - \\cos^{2}x\\]\nWhy: after squaring, \\(\\sin^{2}x = 1 - \\cos^{2}x\\) turns everything into cosine, so we get a quadratic in \\(\\cos x\\).",
+              "Collect terms and factorise\n\\[4\\cos^{2}x - 2\\sqrt{3}\\cos x = 0\\]\n\\[2\\cos x\\left(2\\cos x - \\sqrt{3}\\right) = 0\\]\n\\[\\cos x = 0\\ \\text{ or }\\ \\cos x = \\dfrac{\\sqrt{3}}{2}\\]\nWhy: a product is zero only when one of its factors is zero. We do not cancel \\(\\cos x\\); cancelling would lose the case \\(\\cos x = 0\\).",
+              "When \\(\\cos x = 0\\)\n\\[x = \\dfrac{\\pi}{2}\\ \\text{ and }\\ x = \\dfrac{3\\pi}{2}\\]\nwhere \\(x \\in [0, 2\\pi]\\).\nWhy: cosine is zero at the top and bottom points of the unit circle.",
+              "Check \\(x = \\frac{\\pi}{2}\\) in equation (1)\n\\[\\sqrt{3}\\cot\\dfrac{\\pi}{2} - \\csc\\dfrac{\\pi}{2} - 1\\]\n\\[= \\sqrt{3}(0) - 1 - 1 = -2 \\ne 0\\]\nSo \\(x = \\frac{\\pi}{2}\\) does not satisfy the equation: it is an extraneous root.\nWhy: at \\(\\frac{\\pi}{2}\\), \\(\\sqrt{3}\\cos x - 1 = -1\\) but \\(\\sin x = +1\\). Their squares are equal, their values are not, so the root came from squaring.",
+              "Check \\(x = \\frac{3\\pi}{2}\\) in equation (1)\n\\[\\sqrt{3}\\cot\\dfrac{3\\pi}{2} - \\csc\\dfrac{3\\pi}{2} - 1\\]\n\\[= \\sqrt{3}(0) - (-1) - 1 = 0\\]\nSo \\(x = \\frac{3\\pi}{2}\\) is a solution. The period of \\(\\cos x\\) is \\(2\\pi\\), so the general values are \\(\\frac{3\\pi}{2} + 2n\\pi\\), \\(n \\in \\mathbb{Z}\\).\nWhy: \\(\\cot\\frac{3\\pi}{2} = 0\\) and \\(\\csc\\frac{3\\pi}{2} = \\frac{1}{\\sin(3\\pi/2)} = -1\\).",
+              "When \\(\\cos x = \\frac{\\sqrt{3}}{2}\\)\nSince cosine is positive, \\(x\\) lies in the I and IV quadrants with reference angle \\(\\frac{\\pi}{6}\\).\n\\[x = \\dfrac{\\pi}{6}\\]\n\\[x = 2\\pi - \\dfrac{\\pi}{6} = \\dfrac{11\\pi}{6}\\]\nwhere \\(x \\in [0, 2\\pi]\\).\nWhy: \\(\\cos\\frac{\\pi}{6} = \\frac{\\sqrt{3}}{2}\\).",
+              "Check \\(x = \\frac{\\pi}{6}\\) in equation (1)\n\\[\\sqrt{3}\\cot\\dfrac{\\pi}{6} - \\csc\\dfrac{\\pi}{6} - 1\\]\n\\[= \\sqrt{3}\\cdot\\sqrt{3} - 2 - 1 = 3 - 3 = 0\\]\nSo \\(x = \\frac{\\pi}{6}\\) is a solution of (1); its general values are \\(\\frac{\\pi}{6} + 2n\\pi\\), \\(n \\in \\mathbb{Z}\\).\nWhy: \\(\\cot\\frac{\\pi}{6} = \\sqrt{3}\\) and \\(\\csc\\frac{\\pi}{6} = 2\\).",
+              "Check \\(x = \\frac{11\\pi}{6}\\) in equation (1)\n\\[\\sqrt{3}\\cot\\dfrac{11\\pi}{6} - \\csc\\dfrac{11\\pi}{6} - 1\\]\n\\[= \\sqrt{3}(-\\sqrt{3}) - (-2) - 1\\]\n\\[= -3 + 2 - 1 = -2 \\ne 0\\]\nSo \\(x = \\frac{11\\pi}{6}\\) is an extraneous root.\nWhy: in quadrant IV, \\(\\cot\\) and \\(\\csc\\) are negative: \\(\\cot\\frac{11\\pi}{6} = -\\sqrt{3}\\), \\(\\csc\\frac{11\\pi}{6} = -2\\).",
+              "General solution\n\\[\\left\\{\\dfrac{3\\pi}{2} + 2n\\pi\\right\\}\\]\n\\[\\cup \\left\\{\\dfrac{\\pi}{6} + 2n\\pi\\right\\},\\ n \\in \\mathbb{Z}\\]\nWhy: only the two roots that passed the check are kept, each with its period \\(2\\pi\\).",
+              "Check:\nBoth kept values satisfy (1), as shown above. Neither makes \\(\\sin x = 0\\) (\\(\\sin\\frac{3\\pi}{2} = -1\\), \\(\\sin\\frac{\\pi}{6} = \\frac{1}{2}\\)), so \\(\\cot x\\) and \\(\\csc x\\) are defined there."
+            ],
+            "answer": "Principal solutions: \\(x = \\frac{\\pi}{6}\\) and \\(x = \\frac{3\\pi}{2}\\) (\\(\\frac{\\pi}{2}\\) and \\(\\frac{11\\pi}{6}\\) are extraneous). General solution: \\(\\left\\{\\frac{3\\pi}{2} + 2n\\pi\\right\\} \\cup \\left\\{\\frac{\\pi}{6} + 2n\\pi\\right\\}\\), \\(n \\in \\mathbb{Z}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why did squaring create extra roots in Example 3? If \\(A^{2} = B^{2}\\), then \\(A = B\\) or \\(A = -B\\). By squaring \\(\\sqrt{3}\\cos x - 1 = \\sin x\\) we also solved, without wanting to, \\(\\sqrt{3}\\cos x - 1 = -\\sin x\\). The roots \\(\\frac{\\pi}{2}\\) and \\(\\frac{11\\pi}{6}\\) belong to that second equation (at \\(\\frac{11\\pi}{6}\\): \\(\\sqrt{3}\\cdot\\frac{\\sqrt{3}}{2} - 1 = \\frac{1}{2}\\) while \\(\\sin\\frac{11\\pi}{6} = -\\frac{1}{2}\\)). The check in the original equation removes them."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A trigonometric equation is solved for angles. Principal solutions lie in \\([0, 2\\pi]\\); the general solution adds whole periods and is written with \\(n \\in \\mathbb{Z}\\).\n2. Reference angle from the positive value, quadrants from the sign: I \\(\\alpha\\), II \\(\\pi - \\alpha\\), III \\(\\pi + \\alpha\\), IV \\(2\\pi - \\alpha\\).\n3. Period \\(2\\pi\\) for \\(\\sin\\), \\(\\cos\\), \\(\\sec\\), \\(\\csc\\); period \\(\\pi\\) for \\(\\tan\\), \\(\\cot\\).\n4. After \\(\\pm\\) (square roots) solve both cases; the general solution is the union of all families.\n5. After squaring, or when \\(\\cot\\), \\(\\csc\\), \\(\\tan\\), \\(\\sec\\) appear, check every root in the original equation and reject extraneous roots."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Taking the reference angle from a negative number, e.g. writing \\(x = -\\frac{\\pi}{3}\\) for \\(\\sin x = -\\frac{\\sqrt{3}}{2}\\) and stopping there. The reference angle comes from \\(\\frac{\\sqrt{3}}{2}\\); the sign only picks the quadrants.\n2. Writing only one principal solution: every basic equation \\(\\sin x = k\\) or \\(\\cos x = k\\) with \\(-1 < k < 1\\), \\(k \\ne 0\\), has two in \\([0, 2\\pi)\\).\n3. Dropping \\(\\pm\\) when taking a square root (Example 2).\n4. Cancelling a factor such as \\(\\cos x\\) instead of factorising (Example 3 would lose \\(\\frac{3\\pi}{2}\\)).\n5. Keeping all roots after squaring without checking (keeping \\(\\frac{\\pi}{2}\\) and \\(\\frac{11\\pi}{6}\\) in Example 3).\n6. Forgetting to write \\(n \\in \\mathbb{Z}\\) with the general solution."
+          }
+        ]
+      }
+    }
+  ]
+}
