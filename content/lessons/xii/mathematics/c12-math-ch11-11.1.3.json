@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-11.1.3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/11.1.3",
+      "title": "11.1.3 Constructing A Vector-Valued Function",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 289,
+          "pdf_to": 290,
+          "note": "Book p. 287-288: 11.1.3 Step-1 to Step-3, Example 1 Projectile Motion (Figure 11.3), Example 2 Flight Path of a Drone (Figure 11.4)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Step-1: Determine the Components: Identify how each coordinate changes with respect to \\(t\\).",
+            "bold": [
+              "Determine the Components:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Step-2: Combine into Vector Form:\nExpress the components as a single vector using either component notation \\(\\mathbf{r}(t) = \\langle f(t), g(t), h(t)\\rangle\\) or unit vectors \\(\\mathbf{r}(t) = f(t)\\hat{i} + g(t)\\hat{j} + h(t)\\hat{k}\\).",
+            "bold": [
+              "Combine into Vector Form:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Step-3: Specify the Domain: Define the range of \\(t\\) where the function is valid (e.g., \\(t \\ge 0\\)) for time-dependent motion.",
+            "bold": [
+              "Specify the Domain:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why these three steps? A vector function is just its components put together, so we first work out each coordinate on its own (a scalar function of \\(t\\)), then write them as one vector, and finally say for which \\(t\\) the formula makes sense.\nIn Step-3 the words \"range of \\(t\\)\" mean the set of allowed values of \\(t\\), i.e. the domain of \\(\\mathbf{r}\\) (not the range of the function, which is the set of output vectors; see 11.2.1)."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Projectile Motion\nWhen a ball is thrown at an angle, its position over time follows a parabolic path under the influence of gravity. If the initial velocity is \\(v_{0}\\) at an angle \\(\\theta\\), the position vector is:\n\\[\\mathbf{r}(t) = (v_{0}\\cos\\theta)t\\,\\hat{i}\\]\n\\[+ \\Big((v_{0}\\sin\\theta)t - \\tfrac{1}{2}gt^{2}\\Big)\\hat{j}\\]",
+            "steps": [
+              "Given: a ball thrown from the origin at time \\(t = 0\\) with initial speed \\(v_{0}\\) at angle \\(\\theta\\) above the horizontal; gravity \\(g\\) acts downward.\nTo find / prove: how the position vector \\(\\mathbf{r}(t)\\) is built, i.e. why its components are \\((v_{0}\\cos\\theta)t\\) and \\((v_{0}\\sin\\theta)t - \\frac{1}{2}gt^{2}\\).\nMethod: the three steps of 11.1.3: find each component, combine them into one vector, state the domain of \\(t\\).",
+              "Step 1: Split the initial velocity\n\\[\\text{horizontal part} = v_{0}\\cos\\theta\\]\n\\[\\text{vertical part} = v_{0}\\sin\\theta\\]\nWhy: a vector of length \\(v_{0}\\) making angle \\(\\theta\\) with the \\(x\\)-axis has components \\(v_{0}\\cos\\theta\\) and \\(v_{0}\\sin\\theta\\) (resolution of a vector, Grade XI).",
+              "Step 2: The \\(x\\)-component (Step-1 of the method)\n\\[x(t) = (v_{0}\\cos\\theta)t\\]\nWhy: nothing pushes the ball sideways (air resistance ignored), so it moves horizontally at constant speed \\(v_{0}\\cos\\theta\\), and distance = speed × time.",
+              "Step 3: The \\(y\\)-component\n\\[y(t) = (v_{0}\\sin\\theta)t - \\tfrac{1}{2}gt^{2}\\]\nWhy: vertically the ball starts with speed \\(v_{0}\\sin\\theta\\) upward and gravity slows it with acceleration \\(g\\) downward. The equation of motion \\(s = ut + \\frac{1}{2}at^{2}\\) with \\(u = v_{0}\\sin\\theta\\) and \\(a = -g\\) gives this.",
+              "Step 4: Combine into vector form (Step-2 of the method)\n\\[\\mathbf{r}(t) = x(t)\\,\\hat{i} + y(t)\\,\\hat{j}\\]\n\\[= (v_{0}\\cos\\theta)t\\,\\hat{i}\\]\n\\[+ \\Big((v_{0}\\sin\\theta)t - \\tfrac{1}{2}gt^{2}\\Big)\\hat{j}\\]\nWhy: the \\(x\\)-component goes with \\(\\hat{i}\\) and the \\(y\\)-component with \\(\\hat{j}\\).",
+              "Step 5: Specify the domain (Step-3 of the method; our addition)\nThe ball is in the air from \\(t = 0\\) until \\(y(t) = 0\\) again:\n\\[t\\Big(v_{0}\\sin\\theta - \\tfrac{1}{2}gt\\Big) = 0\\]\n\\[t = 0 \\ \\text{or}\\ t = \\dfrac{2v_{0}\\sin\\theta}{g}\\]\nSo \\(0 \\le t \\le \\dfrac{2v_{0}\\sin\\theta}{g}\\).\nWhy: time cannot be negative, and after landing the formula no longer describes the ball.",
+              "Check:\nAt \\(t = 0\\): \\(\\mathbf{r}(0) = 0\\hat{i} + 0\\hat{j}\\), the ball starts at the origin.\nThe path is a parabola: from \\(x = (v_{0}\\cos\\theta)t\\) we get \\(t = \\dfrac{x}{v_{0}\\cos\\theta}\\), and then\n\\[y = x\\tan\\theta - \\dfrac{g x^{2}}{2v_{0}^{2}\\cos^{2}\\theta}\\]\nwhich is a quadratic in \\(x\\) with a negative \\(x^{2}\\) term: a downward parabola, as the book says."
+            ],
+            "answer": "\\(\\mathbf{r}(t) = (v_{0}\\cos\\theta)t\\,\\hat{i} + \\Big((v_{0}\\sin\\theta)t - \\tfrac{1}{2}gt^{2}\\Big)\\hat{j}\\), valid for \\(0 \\le t \\le \\frac{2v_{0}\\sin\\theta}{g}\\) (the time in the air)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Where, \\((v_{0}\\cos\\theta)t\\) = \\(x\\)-component (horizontal motion at constant speed) and \\((v_{0}\\sin\\theta)t - \\frac{1}{2}gt^{2}\\) = \\(y\\)-component (vertical motion with gravity deceleration).\nThis model simulates the trajectories of objects like soccer balls, arrows, or rockets in 2D."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch11-fig-11-3-projectile",
+            "alt": "Graph of a projectile path: a downward-opening parabola starting at the origin, rising to about 23 m at x about 46 m and landing at x about 92 m. Dots mark the positions at 0.5 s, 1.0 s, 1.5 s, 2.0 s, 2.5 s, 3.0 s, 3.5 s and 4.0 s; the dots are equally spaced horizontally.",
+            "caption": "Figure 11.3: projectile path with the position every 0.5 s, plotted for v₀ = 30 m/s, θ = 45°, g = 9.8 m/s² (our values; the book states none) (original drawing after the textbook's figure)",
+            "side": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(v_{0}\\) is read \"v naught\" and means the initial velocity (the book prints the small 0 like a degree sign).\nFigure 11.3 shows the dots equally spaced left to right: \\(x\\) grows by the same amount every 0.5 s because the horizontal speed is constant. Vertically the dots get closer near the top, where the ball slows down, and spread out again as it falls.\nOur own numbers: with \\(v_{0} = 20\\) m/s, \\(\\theta = 30^{\\circ}\\), \\(g = 9.8\\) m/s\\(^{2}\\):\n\\[\\mathbf{r}(t) = 10\\sqrt{3}\\,t\\,\\hat{i} + (10t - 4.9t^{2})\\hat{j}\\]\n\\[\\mathbf{r}(1) = 10\\sqrt{3}\\,\\hat{i} + 5.1\\hat{j}\\]\nso after 1 s the ball is about 17.32 m along and 5.1 m up."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Flight Path of a Drone\nA drone taking off and moving in a helical search pattern can be modeled as:\n\\[\\mathbf{r}(t) = 5\\cos t\\,\\hat{i} + 5\\sin t\\,\\hat{j}\\]\n\\[+ 0.5t\\,\\hat{k}\\]",
+            "steps": [
+              "Given: \\(\\mathbf{r}(t) = 5\\cos t\\,\\hat{i} + 5\\sin t\\,\\hat{j} + 0.5t\\,\\hat{k}\\), with \\(t\\) in seconds and distances in metres.\nTo find / prove: what each component tells us about the drone's motion and why the path is a helix.\nMethod: read the three steps of 11.1.3 backwards: look at the components, see what they do together, then the domain.",
+              "Step 1: The \\(x\\)- and \\(y\\)-components\n\\[x = 5\\cos t,\\quad y = 5\\sin t\\]\n\\[x^{2} + y^{2} = 25(\\cos^{2}t + \\sin^{2}t) = 25\\]\nWhy: \\(x^{2} + y^{2} = 5^{2}\\) is the circle of radius 5 about the \\(z\\)-axis, so seen from above the drone moves on a circle of radius 5 m.",
+              "Step 2: The \\(z\\)-component\n\\[z = 0.5t\\]\nWhy: \\(z\\) grows by 0.5 every time \\(t\\) grows by 1, so the drone climbs steadily at 0.5 m per second.",
+              "Step 3: Put the two motions together\nOne full circle needs \\(t\\) to grow by \\(2\\pi \\approx 6.28\\) s; in that time the drone climbs\n\\[0.5 \\times 2\\pi = \\pi \\approx 3.14 \\text{ m}\\]\nWhy: going round while rising steadily gives a helix (like a spring), with a climb of \\(\\pi\\) m per turn.",
+              "Step 4: The domain\n\\(t \\ge 0\\) (the drone takes off at \\(t = 0\\)); Figure 11.4 shows \\(0 \\le t \\le 16\\), where the height reaches \\(0.5 \\times 16 = 8\\) m.\nWhy: Step-3 of the method: time-dependent motion starts at \\(t = 0\\).",
+              "Check:\n\\(\\mathbf{r}(0) = 5\\hat{i}\\): the drone starts on the ground at \\((5, 0, 0)\\).\n\\(\\mathbf{r}(2\\pi) = 5\\hat{i} + \\pi\\hat{k}\\): after one turn it is directly above the start, \\(\\pi\\) m higher."
+            ],
+            "answer": "The drone moves round a circle of radius 5 m about the \\(z\\)-axis while climbing steadily at 0.5 m/s: a helix, \\(\\mathbf{r}(t) = 5\\cos t\\,\\hat{i} + 5\\sin t\\,\\hat{j} + 0.5t\\,\\hat{k}\\), \\(t \\ge 0\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Where \\(x\\)- and \\(y\\)-components represent the circular motion with a 5-meter radius, and the \\(z\\)-component represents the steady ascent at 0.5 meters per second. This describes real-world applications like surveillance, search missions, or aerial photography."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch11-fig-11-4-drone-helix",
+            "alt": "Three-dimensional sketch of a helix of radius 5 m around the z-axis, rising from height 0 to 8 m. The dashed circle of radius 5 lies in the xy-plane. Dots mark the drone's position at 2 s, 4 s, 6 s, 8 s, 10 s, 12 s, 14 s, 15 s and 16 s; a z scale on the right runs from 0 to 8 m.",
+            "caption": "Figure 11.4: helical flight path r(t) = 5cos t i + 5sin t j + 0.5t k for 0 ≤ t ≤ 16 s (original drawing after the textbook's figure)",
+            "side": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In Figure 11.4 the drone is back above its starting direction every \\(2\\pi \\approx 6.28\\) s, so 16 s is a little more than \\(2\\frac{1}{2}\\) turns. Example 1 and Example 2 use the same three steps: the only difference is which scalar function sits in each component."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Step-1: find each component (how \\(x\\), \\(y\\), \\(z\\) change with \\(t\\)). Step-2: write them as one vector. Step-3: state the domain of \\(t\\).\n2. Projectile: \\(\\mathbf{r}(t) = (v_{0}\\cos\\theta)t\\,\\hat{i} + ((v_{0}\\sin\\theta)t - \\frac{1}{2}gt^{2})\\hat{j}\\): constant horizontal speed, gravity slows the vertical motion.\n3. Drone: \\(\\mathbf{r}(t) = 5\\cos t\\,\\hat{i} + 5\\sin t\\,\\hat{j} + 0.5t\\,\\hat{k}\\): circle of radius 5 m plus a steady climb of 0.5 m/s gives a helix.\n4. For motion problems the domain usually starts at \\(t \\ge 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing \\(+\\frac{1}{2}gt^{2}\\) in the \\(y\\)-component: gravity pulls down, so the sign is minus.\n2. Swapping \\(\\cos\\theta\\) and \\(\\sin\\theta\\): \\(\\cos\\theta\\) goes with the horizontal part, \\(\\sin\\theta\\) with the vertical part (\\(\\theta\\) measured from the horizontal).\n3. Leaving out the domain: Step-3 is part of the answer.\n4. Thinking the drone's radius is 0.5: the radius is the 5 in front of \\(\\cos t\\) and \\(\\sin t\\); 0.5 is the climbing rate."
+          }
+        ]
+      }
+    }
+  ]
+}

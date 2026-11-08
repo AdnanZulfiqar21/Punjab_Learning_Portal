@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-EXERCISE-11-3-Q10",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/u-exercise-11-3-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 298,
+          "pdf_to": 298,
+          "note": "Exercise 11.3, Question 10: book page 296. The book prints no answers for Unit 11."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10(a)",
+            "prompt": "10 (a) A Ferris wheel of radius 20 m rotates with an angular speed of 0.2 rad/sec. Construct its position vector \\(\\mathbf{r}(t)\\).",
+            "explanation": "Uniform circular motion: the passenger's angle grows at 0.2 rad every second.\nFind: a position vector for a passenger on the rim.\nPlan: centre at the origin, passenger at \\((20, 0)\\) at \\(t = 0\\), turning anticlockwise; angle \\(= \\omega t\\).",
+            "steps": [
+              "Given: \\(R = 20\\) m, \\(\\omega = 0.2\\) rad/s.\nTo find: \\(\\mathbf{r}(t)\\).\nMethod: a point on a circle of radius \\(R\\) at angle \\(\\theta\\) is \\((R\\cos\\theta, R\\sin\\theta)\\); here \\(\\theta = \\omega t\\).",
+              "Choice of axes\nThe book does not fix the axes, so we take the centre of the wheel as the origin and suppose the passenger is at \\((20, 0)\\) at \\(t = 0\\) and the wheel turns anticlockwise.\nWhy: any choice is allowed; this one gives the simplest formula (the form used in Question 9).",
+              "Position vector\n\\[\\theta = \\omega t = 0.2t\\]\n\\[\\mathbf{r}(t) = 20\\cos(0.2t)\\,\\hat{i}\\]\n\\[\\quad + 20\\sin(0.2t)\\,\\hat{j}\\]\nWhy: in \\(t\\) seconds the wheel turns through \\(0.2t\\) radians.",
+              "Check\n\\(|\\mathbf{r}(t)| = \\sqrt{400\\cos^{2}(0.2t) + 400\\sin^{2}(0.2t)} = 20\\): the passenger always stays on the rim."
+            ],
+            "final_answer": "\\(\\mathbf{r}(t) = 20\\cos(0.2t)\\,\\hat{i} + 20\\sin(0.2t)\\,\\hat{j}\\) metres (centre at the origin, passenger at \\((20, 0)\\) when \\(t = 0\\), turning anticlockwise)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10(b)",
+            "prompt": "10 (b) A Ferris wheel of radius 20 m rotates with an angular speed of 0.2 rad/sec. Find the passenger's velocity at \\(t = 10\\) sec.",
+            "explanation": "Velocity is the derivative of the position vector from part (a).\nFind: \\(\\mathbf{v}(10)\\).\nPlan: differentiate with the chain rule, put \\(t = 10\\) (angle 2 radians).",
+            "steps": [
+              "Given: \\(\\mathbf{r}(t) = 20\\cos(0.2t)\\,\\hat{i} + 20\\sin(0.2t)\\,\\hat{j}\\).\nTo find: \\(\\mathbf{v}(10)\\).\nMethod: \\(\\mathbf{v}(t) = \\mathbf{r}'(t)\\).",
+              "Velocity\n\\[\\mathbf{v}(t) = -20(0.2)\\sin(0.2t)\\,\\hat{i}\\]\n\\[\\quad + 20(0.2)\\cos(0.2t)\\,\\hat{j}\\]\n\\[= -4\\sin(0.2t)\\,\\hat{i} + 4\\cos(0.2t)\\,\\hat{j}\\]\nWhy: chain rule; the inner derivative is 0.2.",
+              "At \\(t = 10\\)\n\\[0.2 \\times 10 = 2 \\text{ radians}\\]\n\\[\\mathbf{v}(10) = -4\\sin 2\\,\\hat{i} + 4\\cos 2\\,\\hat{j}\\]\n\\[\\approx -3.637\\,\\hat{i} - 1.665\\,\\hat{j}\\]\nWhy: \\(\\sin 2 \\approx 0.9093\\), \\(\\cos 2 \\approx -0.4161\\) (radian mode).",
+              "Meaning and check\n\\[|\\mathbf{v}| = \\sqrt{16\\sin^{2}2 + 16\\cos^{2}2} = 4 \\text{ m/s}\\]\nThis equals \\(R\\omega = 20 \\times 0.2 = 4\\). At \\(t = 10\\) the passenger is at about \\((-8.32, 18.19)\\), near the top-left of the wheel, moving to the left and downward."
+            ],
+            "final_answer": "\\(\\mathbf{v}(10) = -4\\sin 2\\,\\hat{i} + 4\\cos 2\\,\\hat{j} \\approx -3.637\\,\\hat{i} - 1.665\\,\\hat{j}\\) m/s (speed 4 m/s).",
+            "answer_figure": {
+              "$asset": "c12-math-ch11-fig-ex11-3-q10-ferris",
+              "alt": "Circle of radius 20 centred at the origin. The passenger P at t = 10 s is at about (-8.32, 18.19) in the upper left; a red arrow shows the velocity pointing left and down along the tangent, and a green arrow points from P towards the centre.",
+              "caption": "Ferris wheel r(t) = 20 cos(0.2t) i + 20 sin(0.2t) j: at t = 10 s the velocity is tangent and the acceleration points to the centre (arrows scaled; original drawing)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10(c)",
+            "prompt": "10 (c) A Ferris wheel of radius 20 m rotates with an angular speed of 0.2 rad/sec. Show that the acceleration is centripetal (toward the center).",
+            "explanation": "'Centripetal' means pointing to the centre; with the centre at the origin, that is the direction of \\(-\\mathbf{r}\\).\nFind \\(\\mathbf{a}(t)\\) and compare it with \\(\\mathbf{r}(t)\\).\nPlan: differentiate \\(\\mathbf{v}(t)\\) and write \\(\\mathbf{a}\\) as a negative multiple of \\(\\mathbf{r}\\).",
+            "steps": [
+              "Given: \\(\\mathbf{v}(t) = -4\\sin(0.2t)\\,\\hat{i} + 4\\cos(0.2t)\\,\\hat{j}\\).\nTo prove: \\(\\mathbf{a}(t)\\) points to the centre for every \\(t\\).\nMethod: as in Question 7(c).",
+              "Acceleration\n\\[\\mathbf{a}(t) = -0.8\\cos(0.2t)\\,\\hat{i}\\]\n\\[\\quad - 0.8\\sin(0.2t)\\,\\hat{j}\\]\n\\[= -0.04\\left[20\\cos(0.2t)\\,\\hat{i}\\right.\\]\n\\[\\quad \\left. + 20\\sin(0.2t)\\,\\hat{j}\\right]\\]\n\\[= -0.04\\,\\mathbf{r}(t)\\]\nWhy: \\(4 \\times 0.2 = 0.8\\) and \\(0.8 = 0.04 \\times 20\\); \\(0.04 = \\omega^{2}\\).",
+              "Direction\n\\(\\mathbf{r}(t)\\) points from the centre to the passenger, so the negative multiple \\(-0.04\\,\\mathbf{r}(t)\\) points from the passenger to the centre at every instant: the acceleration is centripetal.\nWhy: a negative multiple reverses the direction.",
+              "Size and check\n\\[|\\mathbf{a}| = 0.04 \\times 20 = 0.8 \\text{ m/s}^{2}\\]\n\\[\\dfrac{v^{2}}{R} = \\dfrac{4^{2}}{20} = 0.8 \\text{ m/s}^{2}\\]\nThe two agree."
+            ],
+            "final_answer": "Hence proved: \\(\\mathbf{a}(t) = -0.04\\,\\mathbf{r}(t)\\), which points from the passenger to the centre, so the acceleration is centripetal; \\(|\\mathbf{a}| = 0.8\\) m/s\\(^{2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 11.3 (it prints no answers for any exercise of Unit 11). Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book. Angles such as \\(t = \\frac{\\pi}{2}\\) are in radians."
+          }
+        ]
+      }
+    }
+  ]
+}

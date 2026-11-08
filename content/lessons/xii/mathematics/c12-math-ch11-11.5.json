@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-11.5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/11.5",
+      "title": "11.5 Velocity and Acceleration",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 294,
+          "pdf_to": 296,
+          "note": "Book p. 292-294: 11.5 Velocity and Acceleration, definitions of v(t) and a(t), Example 6 (conveyor belt) and Example 7 (drone), shown here as Examples 8 and 9."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "book_errors": [
+              "represent the velocity vector"
+            ],
+            "text": "If \\(\\mathbf{r}\\) is the position vector of a particle moving along a smooth curve in space, then \\(\\frac{d}{dt}\\mathbf{r}(t)\\) represent the velocity vector of the particle, which is tangent to the curve, i.e."
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{d}{dt}\\mathbf{r}(t) = \\mathbf{v}(t)",
+            "text_alt": "d by d t of r of t equals v of t, the velocity vector"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints '\\(\\frac{d}{dt}\\mathbf{r}(t)\\) represent the velocity vector'. The subject is singular (one derivative), so the verb must be 'represents': '\\(\\frac{d}{dt}\\mathbf{r}(t)\\) represents the velocity vector of the particle'. This is grammar only; the mathematics does not change."
+          },
+          {
+            "type": "paragraph",
+            "text": "and the derivative of the velocity vector with respect to time \\(t\\) is the acceleration of the particle, denoted by \\(\\mathbf{a}\\), i.e."
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{d}{dt}\\mathbf{v}(t) = \\mathbf{a}(t) = \\dfrac{d^{2}}{dt^{2}}\\mathbf{r}(t)",
+            "text_alt": "d by d t of v of t equals a of t, which equals the second derivative of r of t with respect to t"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is the derivative of position the velocity? In a short time \\(\\Delta t\\) the particle moves from \\(\\mathbf{r}(t)\\) to \\(\\mathbf{r}(t + \\Delta t)\\). The change \\(\\mathbf{r}(t + \\Delta t) - \\mathbf{r}(t)\\) is its displacement, and displacement divided by time is the average velocity. Letting \\(\\Delta t \\to 0\\) gives the velocity at the instant \\(t\\), which is exactly the derivative of 11.4.\nWhy is it tangent to the curve? The displacement vector joins two nearby points of the path (a chord). As \\(\\Delta t \\to 0\\) the two points come together and the chord turns into the tangent line.\nHow to compute it: as in 11.4, differentiate each component separately. If \\(\\mathbf{r}(t) = x(t)\\hat{i} + y(t)\\hat{j} + z(t)\\hat{k}\\), then\n\\[\\mathbf{v}(t) = x'(t)\\hat{i} + y'(t)\\hat{j}\\]\n\\[\\quad + z'(t)\\hat{k}\\]\n\\[\\mathbf{a}(t) = x''(t)\\hat{i} + y''(t)\\hat{j}\\]\n\\[\\quad + z''(t)\\hat{k}\\]\nUnits: if \\(\\mathbf{r}\\) is in metres and \\(t\\) in seconds, then \\(\\mathbf{v}\\) is in m/s and \\(\\mathbf{a}\\) in m/s\\(^{2}\\)."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Quantity",
+              "Formula",
+              "Vector or scalar",
+              "What it tells us"
+            ],
+            "rows": [
+              [
+                "Position",
+                "\\(\\mathbf{r}(t)\\)",
+                "vector",
+                "where the particle is"
+              ],
+              [
+                "Velocity",
+                "\\(\\mathbf{v}(t) = \\mathbf{r}'(t)\\)",
+                "vector",
+                "how fast and which way it moves (tangent to the path)"
+              ],
+              [
+                "Acceleration",
+                "\\(\\mathbf{a}(t) = \\mathbf{v}'(t) = \\mathbf{r}''(t)\\)",
+                "vector",
+                "how the velocity is changing"
+              ],
+              [
+                "Speed",
+                "\\(|\\mathbf{v}(t)|\\)",
+                "scalar (never negative)",
+                "how fast it moves, without direction"
+              ],
+              [
+                "Direction of motion",
+                "\\(\\hat{\\mathbf{v}}(t) = \\dfrac{\\mathbf{v}(t)}{|\\mathbf{v}(t)|}\\)",
+                "unit vector",
+                "the direction only (the unit tangent vector)"
+              ]
+            ],
+            "caption": "Our summary (not printed in the book): the quantities found in Examples 8 and 9 and in Exercise 11.3"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Exercise 11.3 also asks whether the particle is speeding up or slowing down, and how its path is curving. The rule (ours, it follows from the definitions above): since \\(|\\mathbf{v}|^{2} = \\mathbf{v}\\cdot\\mathbf{v}\\), differentiating gives\n\\[\\dfrac{d}{dt}|\\mathbf{v}|^{2} = 2\\,\\mathbf{v}\\cdot\\mathbf{a}\\]\nSo if \\(\\mathbf{v}\\cdot\\mathbf{a} > 0\\) the speed is increasing (speeding up); if \\(\\mathbf{v}\\cdot\\mathbf{a} < 0\\) it is decreasing (slowing down); if \\(\\mathbf{v}\\cdot\\mathbf{a} = 0\\) the speed is not changing at that instant.\nThe part of \\(\\mathbf{a}\\) that points across \\(\\mathbf{v}\\) bends the path towards the side it points to. If \\(\\mathbf{a}\\) is perpendicular to \\(\\mathbf{v}\\), the acceleration only turns the particle and does not change its speed (as in circular motion)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "The book prints the two examples of this section as Example 6 and Example 7. Its numbering in Unit 11 starts again at Example 1 in Section 11.2 (after Examples 1 and 2 of 11.1.3), so the numbers 1 and 2 are used twice. On this portal the examples of Unit 11 are numbered in one sequence, so the book's Example 6 is shown as Example 8 and its Example 7 as Example 9."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Vibrating conveyor belt in a factory sorting system\nA small metal part moves on a conveyor belt in a factory. The belt transports the part eastward (x-direction) while simultaneously vibrating sideways (north-south, y-direction) to help sort items into bins. The position of the part at time \\(t\\) seconds is given by \\(\\mathbf{r}(t) = 3t^{2}\\hat{i} + 2\\sin t\\,\\hat{j}\\) in meters. At a specific moment, \\(t = \\frac{\\pi}{2}\\) an engineer needs to analyze the part's motion to ensure it enters the correct bin. Hence, find the following quantities at \\(t = \\frac{\\pi}{2}\\).\n(a) velocity (b) acceleration (c) speed (d) direction of motion.",
+            "steps": [
+              "Given: \\(\\mathbf{r}(t) = 3t^{2}\\hat{i} + 2\\sin t\\,\\hat{j}\\) (metres), \\(t\\) in seconds; the instant \\(t = \\frac{\\pi}{2}\\).\nTo find: velocity, acceleration, speed and direction of motion at \\(t = \\frac{\\pi}{2}\\).\nMethod: velocity is the first derivative of the position vector and acceleration is the derivative of the velocity; speed is the magnitude of the velocity and the direction is the unit vector \\(\\frac{\\mathbf{v}}{|\\mathbf{v}|}\\). Each component is differentiated separately (11.4).",
+              "(a) Velocity: the first derivative of the position function\n\\[\\mathbf{v}(t) = \\mathbf{r}'(t)\\]\n\\[= 6t\\,\\hat{i} + 2\\cos t\\,\\hat{j}\\]\nAt \\(t = \\frac{\\pi}{2}\\):\n\\[\\mathbf{v}\\left(\\tfrac{\\pi}{2}\\right) = 6\\left(\\tfrac{\\pi}{2}\\right)\\hat{i} + 2\\cos\\left(\\tfrac{\\pi}{2}\\right)\\hat{j}\\]\n\\[= 3\\pi\\,\\hat{i} + 0\\,\\hat{j}\\]\nWhy: \\(\\frac{d}{dt}(3t^{2}) = 6t\\) (power rule) and \\(\\frac{d}{dt}(2\\sin t) = 2\\cos t\\); \\(\\cos\\frac{\\pi}{2} = 0\\). As the book says, at this instant the part is moving purely eastward with no north-south velocity.",
+              "(b) Acceleration: the derivative of the velocity vector\n\\[\\mathbf{a}(t) = \\mathbf{v}'(t)\\]\n\\[= 6\\,\\hat{i} - 2\\sin t\\,\\hat{j}\\]\nAt \\(t = \\frac{\\pi}{2}\\):\n\\[\\mathbf{a}\\left(\\tfrac{\\pi}{2}\\right) = 6\\,\\hat{i} - 2\\sin\\left(\\tfrac{\\pi}{2}\\right)\\hat{j}\\]\n\\[= 6\\,\\hat{i} - 2\\,\\hat{j}\\]\nWhy: \\(\\frac{d}{dt}(6t) = 6\\), \\(\\frac{d}{dt}(2\\cos t) = -2\\sin t\\), and \\(\\sin\\frac{\\pi}{2} = 1\\). The book reads this as: the part is accelerating eastward at 6 m/s\\(^{2}\\) and southward at 2 m/s\\(^{2}\\); even though its north-south velocity is momentarily zero, it is starting to move southward.",
+              "(c) Speed: the magnitude of the velocity vector\n\\[|\\mathbf{v}(t)| = \\sqrt{36t^{2} + 4\\cos^{2}t}\\]\nAt \\(t = \\frac{\\pi}{2}\\):\n\\[\\left|\\mathbf{v}\\left(\\tfrac{\\pi}{2}\\right)\\right|\\]\n\\[= \\sqrt{\\left(6\\cdot\\tfrac{\\pi}{2}\\right)^{2} + \\left(2\\cos\\tfrac{\\pi}{2}\\right)^{2}}\\]\n\\[= \\sqrt{(3\\pi)^{2} + 0} = 3\\pi\\]\nWhy: the magnitude of \\(a\\hat{i} + b\\hat{j}\\) is \\(\\sqrt{a^{2} + b^{2}}\\). Numerically \\(3\\pi \\approx 9.42\\): the part is moving along its path at about 9.42 metres per second.",
+              "(d) Direction of motion: the unit tangent vector\n\\[\\hat{\\mathbf{v}}(t) = \\dfrac{\\mathbf{v}(t)}{|\\mathbf{v}(t)|}\\]\nAt \\(t = \\frac{\\pi}{2}\\):\n\\[\\hat{\\mathbf{v}}\\left(\\tfrac{\\pi}{2}\\right) = \\dfrac{3\\pi\\,\\hat{i} + 0\\,\\hat{j}}{3\\pi}\\]\n\\[= \\hat{i} + 0\\,\\hat{j}\\]\nWhy: dividing a vector by its own length keeps its direction and makes its length 1. The direction is due east (the positive \\(x\\)-direction): the part has momentarily stopped its north-south oscillation and is moving purely horizontally along the belt.",
+              "Check:\n\\(\\hat{\\mathbf{v}}\\) has length \\(\\sqrt{1^{2} + 0^{2}} = 1\\) and the speed is positive. Our extra check (not in the book):\n\\[\\mathbf{v}\\cdot\\mathbf{a} = (3\\pi)(6) + (0)(-2) = 18\\pi\\]\nwhich is positive, so at this instant the part is speeding up. And the north-south velocity \\(2\\cos t\\) is positive just before \\(\\frac{\\pi}{2}\\) and negative just after it, which agrees with the book: the part is starting to move southward."
+            ],
+            "answer": "At \\(t = \\frac{\\pi}{2}\\): (a) \\(\\mathbf{v} = 3\\pi\\,\\hat{i} + 0\\,\\hat{j}\\) m/s; (b) \\(\\mathbf{a} = 6\\,\\hat{i} - 2\\,\\hat{j}\\) m/s\\(^{2}\\); (c) speed \\(= 3\\pi \\approx 9.42\\) m/s; (d) direction \\(\\hat{\\mathbf{v}} = \\hat{i} + 0\\,\\hat{j}\\), due east."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Reading the signs in Example 8: the positive \\(y\\)-direction is north, so a negative \\(\\hat{j}\\)-component means south. The acceleration \\(-2\\,\\hat{j}\\) points south while the north-south velocity is zero; a moment later that velocity becomes negative, so the part starts moving south. The same thing happens to a swing at its highest point: it stops for an instant, but its acceleration already points back.\nSpeed is \\(|\\mathbf{v}|\\), never \\(|\\mathbf{r}|\\): \\(|\\mathbf{r}|\\) is the distance from the origin, which is a different quantity."
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "book_errors": [
+              "\\(y(t) = 2\\cos t\\)"
+            ],
+            "problem": "Drone inspecting a cylindrical water tower\nA drone is programmed to fly in a helical (spiral) path around a large cylindrical water tower to inspect its outer surface for cracks or rust. The drone maintains a constant horizontal distance of 2 meters from the tower's center while climbing upward at a steady rate. The drone's position in 3D space at time \\(t\\) seconds is given by: \\(\\mathbf{r}(t) = 2\\cos t\\,\\hat{i} + 2\\sin t\\,\\hat{j} + 3t\\,\\hat{k}\\)\nHere:\n\\(x(t) = 2\\cos t\\): east-west position (amplitude 2 m)\n\\(y(t) = 2\\cos t\\): north-south position (amplitude 2 m)\n\\(z(t) = 3t\\): vertical height (climbs 3 m/s)\nAt a specific moment \\(t = \\pi\\) seconds, the drone operator needs to analyze its motion to ensure smooth inspection. Find the following quantities at \\(t = \\pi\\): (a) velocity, (b) acceleration, (c) speed, and (d) direction of motion at \\(t = \\pi\\).",
+            "steps": [
+              "Given: \\(\\mathbf{r}(t) = 2\\cos t\\,\\hat{i} + 2\\sin t\\,\\hat{j} + 3t\\,\\hat{k}\\) (metres), \\(t\\) in seconds; the instant \\(t = \\pi\\). (The north-south component is \\(y(t) = 2\\sin t\\), see the correction below.)\nTo find: velocity, acceleration, speed and direction of motion at \\(t = \\pi\\).\nMethod: differentiate each component once for \\(\\mathbf{v}\\) and again for \\(\\mathbf{a}\\); speed \\(= |\\mathbf{v}|\\); direction \\(= \\frac{\\mathbf{v}}{|\\mathbf{v}|}\\). Then put \\(t = \\pi\\), using \\(\\sin\\pi = 0\\), \\(\\cos\\pi = -1\\).",
+              "(a) Velocity: compute the first derivative of each component\n\\[\\mathbf{v}(t) = \\mathbf{r}'(t)\\]\n\\[= -2\\sin t\\,\\hat{i} + 2\\cos t\\,\\hat{j} + 3\\,\\hat{k}\\]\nAt \\(t = \\pi\\):\n\\[\\mathbf{v}(\\pi) = -2\\sin\\pi\\,\\hat{i} + 2\\cos\\pi\\,\\hat{j} + 3\\,\\hat{k}\\]\n\\[= 0\\,\\hat{i} - 2\\,\\hat{j} + 3\\,\\hat{k}\\]\nWhy: \\(\\frac{d}{dt}\\cos t = -\\sin t\\), \\(\\frac{d}{dt}\\sin t = \\cos t\\), \\(\\frac{d}{dt}(3t) = 3\\). At this instant the drone has no east-west motion, is moving southward at 2 m/s, and is climbing at 3 m/s.",
+              "(b) Acceleration: compute the second derivative\n\\[\\mathbf{a}(t) = \\mathbf{v}'(t)\\]\n\\[= -2\\cos t\\,\\hat{i} - 2\\sin t\\,\\hat{j} + 0\\,\\hat{k}\\]\nAt \\(t = \\pi\\):\n\\[\\mathbf{a}(\\pi) = -2\\cos\\pi\\,\\hat{i} - 2\\sin\\pi\\,\\hat{j} + 0\\,\\hat{k}\\]\n\\[= 2\\,\\hat{i} + 0\\,\\hat{j} + 0\\,\\hat{k}\\]\nWhy: the constant 3 has derivative 0, and \\(-2\\cos\\pi = -2(-1) = 2\\). The drone is accelerating eastward at 2 m/s\\(^{2}\\). At \\(t = \\pi\\) it is at \\((-2, 0, 3\\pi)\\), west of the tower's axis (the \\(z\\)-axis), so \\(2\\,\\hat{i}\\) points from the drone towards the axis: this centripetal acceleration keeps the drone on its circular horizontal path.",
+              "(c) Speed: calculate the magnitude of the velocity\n\\[|\\mathbf{v}(t)| = \\sqrt{4\\sin^{2}t + 4\\cos^{2}t + 9}\\]\n\\[= \\sqrt{4 + 9} = \\sqrt{13}\\]\nAt \\(t = \\pi\\):\n\\[|\\mathbf{v}(\\pi)| = \\sqrt{13} \\approx 3.6056 \\text{ m/s}\\]\nWhy: \\(\\sin^{2}t + \\cos^{2}t = 1\\), so the speed does not depend on \\(t\\) at all. The drone's speed is constant at about 3.61 m/s throughout its helical climb, which is ideal for stable inspection footage.",
+              "(d) Direction of motion: the unit tangent vector\n\\[\\hat{\\mathbf{v}}(t) = \\dfrac{\\mathbf{v}(t)}{|\\mathbf{v}(t)|}\\]\n\\[= \\dfrac{-2\\sin t\\,\\hat{i} + 2\\cos t\\,\\hat{j} + 3\\,\\hat{k}}{\\sqrt{13}}\\]\nAt \\(t = \\pi\\):\n\\[\\hat{\\mathbf{v}}(\\pi) = \\dfrac{0\\,\\hat{i} - 2\\,\\hat{j} + 3\\,\\hat{k}}{\\sqrt{13}}\\]\n\\[= 0\\,\\hat{i} - \\dfrac{2}{\\sqrt{13}}\\hat{j} + \\dfrac{3}{\\sqrt{13}}\\hat{k}\\]\nWhy: divide the velocity by the speed \\(\\sqrt{13}\\). The drone is moving in the south-up vertical plane; its direction has no east-west component.",
+              "Check:\n\\[|\\hat{\\mathbf{v}}(\\pi)|^{2} = \\dfrac{0 + 4 + 9}{13} = 1\\]\nso \\(\\hat{\\mathbf{v}}\\) is a unit vector. Also (ours) \\(\\mathbf{v}(\\pi)\\cdot\\mathbf{a}(\\pi) = (0)(2) + (-2)(0) + (3)(0) = 0\\): the speed is not changing, which agrees with the constant speed found in (c)."
+            ],
+            "answer": "At \\(t = \\pi\\): (a) \\(\\mathbf{v} = 0\\,\\hat{i} - 2\\,\\hat{j} + 3\\,\\hat{k}\\) m/s; (b) \\(\\mathbf{a} = 2\\,\\hat{i} + 0\\,\\hat{j} + 0\\,\\hat{k}\\) m/s\\(^{2}\\) (centripetal, towards the tower's axis); (c) speed \\(= \\sqrt{13} \\approx 3.61\\) m/s (constant); (d) \\(\\hat{\\mathbf{v}} = 0\\,\\hat{i} - \\frac{2}{\\sqrt{13}}\\hat{j} + \\frac{3}{\\sqrt{13}}\\hat{k}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the list after the drone's position vector the book prints '\\(y(t) = 2\\cos t\\): north-south position'. The position vector it gives is \\(\\mathbf{r}(t) = 2\\cos t\\,\\hat{i} + 2\\sin t\\,\\hat{j} + 3t\\,\\hat{k}\\), so the north-south component is \\(y(t) = 2\\sin t\\); the book's own solution also uses it (its velocity has \\(2\\cos t\\,\\hat{j}\\), the derivative of \\(2\\sin t\\)). Correct: \\(y(t) = 2\\sin t\\): north-south position (amplitude 2 m)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why is the drone's path a helix? Its horizontal part \\(x = 2\\cos t\\), \\(y = 2\\sin t\\) satisfies \\(x^{2} + y^{2} = 4\\): seen from above, the drone goes round a circle of radius 2 m. At the same time its height \\(z = 3t\\) grows steadily. Going round while rising gives a spiral, like the thread of a screw.\nCheck the size of the centripetal acceleration (ours): the horizontal speed is \\(\\sqrt{4\\sin^{2}t + 4\\cos^{2}t} = 2\\) m/s and the radius is 2 m, so \\(\\frac{(\\text{speed})^{2}}{\\text{radius}} = \\frac{4}{2} = 2\\) m/s\\(^{2}\\), exactly \\(|\\mathbf{a}(\\pi)|\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\mathbf{v}(t) = \\mathbf{r}'(t)\\) is tangent to the path; \\(\\mathbf{a}(t) = \\mathbf{v}'(t) = \\mathbf{r}''(t)\\). Differentiate component by component.\n2. Speed \\(= |\\mathbf{v}(t)|\\) is a scalar; direction of motion \\(= \\frac{\\mathbf{v}(t)}{|\\mathbf{v}(t)|}\\) is a unit vector.\n3. Find \\(\\mathbf{v}(t)\\) and \\(\\mathbf{a}(t)\\) for general \\(t\\) first, then substitute the given instant.\n4. \\(\\mathbf{v}\\cdot\\mathbf{a} > 0\\): speeding up; \\(< 0\\): slowing down; \\(= 0\\): speed not changing at that instant.\n5. For circular or helical motion with \\(\\cos t\\) and \\(\\sin t\\), the speed is constant and the horizontal acceleration points to the centre (centripetal)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Substituting the value of \\(t\\) before differentiating. \\(\\mathbf{r}(\\frac{\\pi}{2})\\) is a fixed vector and its derivative is zero; always differentiate first.\n2. Calculator in degree mode: \\(t = \\frac{\\pi}{2}\\) or \\(t = \\pi\\) are radians.\n3. Sign of the derivative of \\(\\cos t\\): it is \\(-\\sin t\\), not \\(\\sin t\\).\n4. Giving the velocity as the answer for direction: the direction must be divided by the speed so that its length is 1.\n5. Taking speed as \\(|\\mathbf{r}|\\) instead of \\(|\\mathbf{v}|\\)."
+          }
+        ]
+      }
+    }
+  ]
+}
