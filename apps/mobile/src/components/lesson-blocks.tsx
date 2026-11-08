@@ -12,7 +12,7 @@ import { Model3D } from "@/components/model3d";
 import { LinkButton, T } from "@/components/ui";
 import { CodeColors, Fonts, Radius, Space } from "@/constants/theme";
 import { useScheme, useTheme } from "@/hooks/use-theme";
-import { bookBoxKind, isMarginNote, isSideFigure, type BookBoxKind } from "@/lib/book-box";
+import { bookBoxKind, boxRow, isMarginNote, isSideBox, isSideFigure, type BookBoxKind } from "@/lib/book-box";
 import { bookErrors, markPieces, styledPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
@@ -152,10 +152,13 @@ export function LessonBlocks({
     <View style={{ gap: Space.lg }}>
       {blocks.map((b, i) => {
         if (isQuickCheck(blocks[i - 1], b)) return null; // drawn inside the card above
-        // BOOK-LAYOUT-01 on the phone (owner, 2026-11-08: "book ma diagram right side pr hy with text ... same format book
-        // wala raho"): a figure the book prints beside a paragraph sits at the right of that paragraph, as printed.
-        if (isSideFigure(b) && besideText(blocks[i - 1])) return null; // drawn in the row above
-        if (besideText(b) && isSideFigure(blocks[i + 1])) {
+        // BOOK-LAYOUT-01 and BOOK-BOX-01 on the phone (owner, 2026-11-08: "book wala format follow karo phr wo chahy boxes
+        // hain ya figures"): what the book prints at the side of a paragraph (a figure marked side, a short printed box
+        // or margin note) sits at the right of that paragraph, as printed; the same rule as the web's sideOrder.
+        if (sideRunStart(blocks, i) >= 0) return null; // drawn in the row of its paragraph
+        const run = sideRun(blocks, i);
+        if (run > 0) {
+          const side = Array.from({ length: run }, (_, k) => i + 1 + k);
           return (
             <View
               key={i}
@@ -164,15 +167,17 @@ export function LessonBlocks({
                 onBlockLayout
                   ? (e) => {
                       onBlockLayout(i, e.nativeEvent.layout.y);
-                      onBlockLayout(i + 1, e.nativeEvent.layout.y);
+                      side.forEach((k) => onBlockLayout(k, e.nativeEvent.layout.y));
                     }
                   : undefined
               }>
               <View style={{ flex: 1 }}>
                 <BlockView block={b} assetSource={assetSource} dataSaver={dataSaver} />
               </View>
-              <View style={{ width: "46%" }}>
-                <BlockView block={blocks[i + 1]} assetSource={assetSource} dataSaver={dataSaver} compact />
+              <View style={{ width: "46%", gap: Space.sm }}>
+                {side.map((k) => (
+                  <BlockView key={k} block={blocks[k]} assetSource={assetSource} dataSaver={dataSaver} compact />
+                ))}
               </View>
             </View>
           );
@@ -337,9 +342,37 @@ function Item({ text, marks, bold }: { text: string; marks: string[] | null; bol
   );
 }
 
-/** Text a side figure can sit beside: a paragraph or a list. */
+/** The smaller type of a box at the side of the text (the web's 0.8em). */
+const SIDE_TEXT = { fontSize: 13, lineHeight: 19 } as const;
+
+/** Text that side items sit beside: a paragraph or a list. */
 function besideText(b: Block | undefined): boolean {
   return b?.type === "paragraph" || b?.type === "list";
+}
+
+/** Printed at the side of the text: a figure marked side, or a short printed box or margin note. */
+function atSide(b: Block | undefined): boolean {
+  return isSideFigure(b) || isSideBox(b);
+}
+
+/** At a paragraph or list followed by side items, how many follow (0 elsewhere). Boxes the web draws side by side in
+ * one row (boxRow) are not moved, as on the web. */
+function sideRun(blocks: readonly Block[], i: number): number {
+  if (!besideText(blocks[i])) return 0;
+  let n = 0;
+  while (atSide(blocks[i + 1 + n])) n++;
+  return n > 0 && boxRow(blocks, i + 1) === 0 ? n : 0;
+}
+
+/** For a side item drawn in its paragraph's row, that paragraph's index; -1 otherwise. */
+function sideRunStart(blocks: readonly Block[], i: number): number {
+  let j = i;
+  while (j > 0 && atSide(blocks[j])) {
+    j--;
+    if (sideRun(blocks, j) >= i - j) return j;
+    if (!atSide(blocks[j])) break;
+  }
+  return -1;
 }
 
 function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block; assetSource?: AssetSource; dataSaver?: boolean; compact?: boolean }) {
@@ -415,10 +448,10 @@ function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block
         const head = BOOK_BOX_HEAD[bookBoxKind(title)];
         return (
           <View style={{ borderWidth: 1, borderColor: head, borderRadius: Radius.md, overflow: "hidden", backgroundColor: scheme === "dark" ? c.surfaceMuted : `${head}14` }}>
-            <T style={{ backgroundColor: head, color: "#ffffff", fontWeight: "700", paddingHorizontal: Space.md, paddingVertical: Space.xs }}>
+            <T style={[{ backgroundColor: head, color: "#ffffff", fontWeight: "700", paddingHorizontal: compact ? Space.sm : Space.md, paddingVertical: Space.xs }, compact && SIDE_TEXT]}>
               <Marked text={title} marks={marks} bold={bold} />
             </T>
-            <T style={{ padding: Space.md }}>
+            <T style={[{ padding: compact ? Space.sm : Space.md }, compact && SIDE_TEXT]}>
               <Marked text={str(b.text)} marks={marks} bold={bold} />
             </T>
           </View>
@@ -427,8 +460,8 @@ function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block
       // A margin note the book prints without a title: the same tinted box with no header (full width on a phone).
       if (isMarginNote(b))
         return (
-          <View style={{ borderWidth: 1, borderColor: MARGIN_NOTE, borderRadius: Radius.md, backgroundColor: scheme === "dark" ? c.surfaceMuted : `${MARGIN_NOTE}1f`, padding: Space.md }}>
-            <T>
+          <View style={{ borderWidth: 1, borderColor: MARGIN_NOTE, borderRadius: Radius.md, backgroundColor: scheme === "dark" ? c.surfaceMuted : `${MARGIN_NOTE}1f`, padding: compact ? Space.sm : Space.md }}>
+            <T style={compact ? SIDE_TEXT : undefined}>
               <Marked text={str(b.text)} marks={marks} bold={bold} />
             </T>
           </View>
