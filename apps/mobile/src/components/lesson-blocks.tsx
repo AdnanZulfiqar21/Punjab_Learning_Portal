@@ -162,7 +162,6 @@ export function LessonBlocks({
           return (
             <View
               key={i}
-              style={{ flexDirection: "row", alignItems: "flex-start", gap: Space.md }}
               onLayout={
                 onBlockLayout
                   ? (e) => {
@@ -171,14 +170,13 @@ export function LessonBlocks({
                     }
                   : undefined
               }>
-              <View style={{ flex: 1 }}>
-                <BlockView block={b} assetSource={assetSource} dataSaver={dataSaver} />
-              </View>
-              <View style={{ width: "46%", gap: Space.sm }}>
-                {side.map((k) => (
+              <SideRow
+                text={b}
+                side={side.map((k) => (
                   <BlockView key={k} block={blocks[k]} assetSource={assetSource} dataSaver={dataSaver} compact />
                 ))}
-              </View>
+                render={(block) => <BlockView block={block} assetSource={assetSource} dataSaver={dataSaver} />}
+              />
             </View>
           );
         }
@@ -339,6 +337,49 @@ function Item({ text, marks, bold }: { text: string; marks: string[] | null; bol
       </Text>{" "}
       <Marked text={lead[1]} marks={marks ?? []} bold={bold} />
     </>
+  );
+}
+
+/** A paragraph with what the book prints at its side (owner, 2026-11-08: "jb figure khatam ho gaya hy to baki ka text
+ * nechy lago"): the paragraph runs beside the side items only as far down as they reach, and the rest of it continues
+ * across the full width below them, as the web's float does. React Native has no float, so the paragraph is laid out
+ * once, unseen, in the narrow column; the lines that fit beside the side items stay there and the rest moves below.
+ * A list (or a paragraph shorter than the side items) stays whole beside them. */
+function SideRow({ text, side, render }: { text: Block; side: ReactNode; render: (block: Block) => ReactNode }) {
+  const [sideHeight, setSideHeight] = useState(0);
+  const [lines, setLines] = useState<{ text: string; y: number; height: number }[] | null>(null);
+  const full = text.type === "paragraph" ? str(text.text) : "";
+  const cut = useMemo(() => {
+    if (!full || !lines || !sideHeight) return null;
+    let k = 0;
+    while (k < lines.length && lines[k].y + lines[k].height <= sideHeight + 2) k++;
+    if (k >= lines.length) return null; // the whole paragraph fits beside the side items
+    const at = lines.slice(0, Math.max(k, 1)).reduce((n, l) => n + l.text.length, 0);
+    return at > 0 && at < full.length ? at : null;
+  }, [full, lines, sideHeight]);
+  return (
+    <View>
+      <View style={{ flexDirection: "row", alignItems: "flex-start", gap: Space.md }}>
+        <View style={{ flex: 1 }}>
+          {full ? (
+            <T
+              aria-hidden
+              accessibilityElementsHidden
+              importantForAccessibility="no-hide-descendants"
+              pointerEvents="none"
+              onTextLayout={(e) => setLines(e.nativeEvent.lines.map((l) => ({ text: l.text, y: l.y, height: l.height })))}
+              style={{ position: "absolute", left: 0, right: 0, opacity: 0 }}>
+              {full}
+            </T>
+          ) : null}
+          {render(cut == null ? text : { ...text, text: full.slice(0, cut).trimEnd() })}
+        </View>
+        <View style={{ width: "46%", gap: Space.sm }} onLayout={(e) => setSideHeight(e.nativeEvent.layout.height)}>
+          {side}
+        </View>
+      </View>
+      {cut != null ? render({ ...text, text: full.slice(cut).trimStart() }) : null}
+    </View>
   );
 }
 
