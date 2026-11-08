@@ -302,12 +302,15 @@ function Lines({
   marks = [],
   bold = [],
   start = 1,
+  continued = false,
 }: {
   items: string[];
   ordered: boolean;
   marks?: string[];
   bold?: string[];
   start?: number;
+  /** The first item goes on from the item above it (cut by a side figure or box): no number of its own. */
+  continued?: boolean;
 }) {
   const c = useTheme();
   const premium = useContext(Premium);
@@ -315,7 +318,7 @@ function Lines({
     <View style={{ gap: Space.sm }} accessibilityRole="list">
       {items.map((item, i) => (
         <View key={i} style={{ flexDirection: "row", gap: Space.sm }}>
-          <T style={{ width: 24, textAlign: "right", color: c.accent, fontWeight: "700" }}>{ordered ? `${start + i}.` : "•"}</T>
+          <T style={{ width: 24, textAlign: "right", color: c.accent, fontWeight: "700" }}>{continued && i === 0 ? "" : ordered ? `${start + i}.` : "•"}</T>
           <T style={{ flex: 1 }}>
             <Item text={item} marks={premium ? marks : null} bold={bold} />
           </T>
@@ -340,45 +343,96 @@ function Item({ text, marks, bold }: { text: string; marks: string[] | null; bol
   );
 }
 
-/** A paragraph with what the book prints at its side (owner, 2026-11-08: "jb figure khatam ho gaya hy to baki ka text
- * nechy lago"): the paragraph runs beside the side items only as far down as they reach, and the rest of it continues
- * across the full width below them, as the web's float does. React Native has no float, so the paragraph is laid out
- * once, unseen, in the narrow column; the lines that fit beside the side items stay there and the rest moves below.
- * A list (or a paragraph shorter than the side items) stays whole beside them. */
+type Line = { text: string; y: number; height: number };
+
+/** A paragraph or list with what the book prints at its side (owner, 2026-11-08: "jb figure khatam ho gaya hy to baki ka
+ * text nechy lago"; then "abhe bhe right pr space khali hy" for a list): the text runs beside the side items only as far
+ * down as they reach, and the rest continues across the full width below them, as the web's float does. React Native
+ * has no float, so the text is laid out once, unseen, in the narrow column; the lines that fit beside the side items
+ * stay there and the rest moves below (a list item cut in two goes on below without its number). */
 function SideRow({ text, side, render }: { text: Block; side: ReactNode; render: (block: Block) => ReactNode }) {
   const [sideHeight, setSideHeight] = useState(0);
-  const [lines, setLines] = useState<{ text: string; y: number; height: number }[] | null>(null);
-  const full = text.type === "paragraph" ? str(text.text) : "";
-  const cut = useMemo(() => {
-    if (!full || !lines || !sideHeight) return null;
-    let k = 0;
-    while (k < lines.length && lines[k].y + lines[k].height <= sideHeight + 2) k++;
-    if (k >= lines.length) return null; // the whole paragraph fits beside the side items
-    const at = lines.slice(0, Math.max(k, 1)).reduce((n, l) => n + l.text.length, 0);
-    return at > 0 && at < full.length ? at : null;
-  }, [full, lines, sideHeight]);
+  const isList = text.type === "list";
+  const items = isList ? strs(text.items) : text.type === "paragraph" ? [str(text.text)] : [];
+  const [lines, setLines] = useState<(Line[] | undefined)[]>([]);
+  // Plain computation: the React Compiler memoizes it.
+  const split = ((): { item: number; at: number } | null => {
+    if (!items.length || !sideHeight || items.some((_, i) => !lines[i])) return null;
+    const gap = isList ? Space.sm : 0;
+    let top = 0;
+    for (let i = 0; i < items.length; i++) {
+      const ls = lines[i]!;
+      const height = ls.reduce((h, l) => Math.max(h, l.y + l.height), 0);
+      if (top + height <= sideHeight + 2) {
+        top += height + gap;
+        continue;
+      }
+      // Item i reaches below the side items: the lines of it that still fit stay beside them.
+      let k = 0;
+      while (k < ls.length && top + ls[k].y + ls[k].height <= sideHeight + 2) k++;
+      if (i === 0 && k === 0) k = 1; // at least one line beside the side items
+      const at = ls.slice(0, k).reduce((n, l) => n + l.text.length, 0);
+      return { item: i, at: Math.min(at, items[i].length) };
+    }
+    return null; // everything fits beside the side items
+  })();
+
+  const start = typeof text.start === "number" ? text.start : 1;
+  let beside: Block = text;
+  let below: Block[] = [];
+  if (split) {
+    const { item, at } = split;
+    const head = items[item].slice(0, at).trimEnd();
+    const tail = items[item].slice(at).trimStart();
+    if (!isList) {
+      beside = { ...text, text: head };
+      below = tail ? [{ ...text, text: tail }] : [];
+    } else {
+      beside = { ...text, items: [...items.slice(0, item), ...(head ? [head] : [])] };
+      if (tail) below.push({ ...text, items: [tail], start: start + item, continued: true });
+      if (item + 1 < items.length) below.push({ ...text, items: items.slice(item + 1), start: start + item + 1 });
+      if (!head && item === 0) beside = { ...text, items: [] };
+    }
+  }
+  const besideEmpty = isList && strs(beside.items).length === 0;
   return (
-    <View>
+    <View style={{ gap: isList ? Space.sm : 0 }}>
       <View style={{ flexDirection: "row", alignItems: "flex-start", gap: Space.md }}>
         <View style={{ flex: 1 }}>
-          {full ? (
-            <T
-              aria-hidden
-              accessibilityElementsHidden
-              importantForAccessibility="no-hide-descendants"
-              pointerEvents="none"
-              onTextLayout={(e) => setLines(e.nativeEvent.lines.map((l) => ({ text: l.text, y: l.y, height: l.height })))}
-              style={{ position: "absolute", left: 0, right: 0, opacity: 0 }}>
-              {full}
-            </T>
-          ) : null}
-          {render(cut == null ? text : { ...text, text: full.slice(0, cut).trimEnd() })}
+          {/* the unseen layout of the text in this column */}
+          <View
+            aria-hidden
+            accessibilityElementsHidden
+            importantForAccessibility="no-hide-descendants"
+            pointerEvents="none"
+            style={{ position: "absolute", left: 0, right: 0, opacity: 0, gap: isList ? Space.sm : 0 }}>
+            {items.map((item, i) => (
+              <View key={i} style={{ flexDirection: "row", gap: isList ? Space.sm : 0 }}>
+                {isList ? <View style={{ width: 24 }} /> : null}
+                <T
+                  style={{ flex: 1 }}
+                  onTextLayout={(e) => {
+                    const ls = e.nativeEvent.lines.map((l) => ({ text: l.text, y: l.y, height: l.height }));
+                    setLines((old) => {
+                      const next = [...old];
+                      next[i] = ls;
+                      return next;
+                    });
+                  }}>
+                  {item}
+                </T>
+              </View>
+            ))}
+          </View>
+          {besideEmpty ? null : render(beside)}
         </View>
         <View style={{ width: "46%", gap: Space.sm }} onLayout={(e) => setSideHeight(e.nativeEvent.layout.height)}>
           {side}
         </View>
       </View>
-      {cut != null ? render({ ...text, text: full.slice(cut).trimStart() }) : null}
+      {below.map((block, i) => (
+        <Fragment key={i}>{render(block)}</Fragment>
+      ))}
     </View>
   );
 }
@@ -472,7 +526,7 @@ function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block
         </T>
       );
     case "list":
-      return <Lines items={strs(b.items)} ordered={b.ordered === true} marks={marks} bold={bold} start={typeof b.start === "number" ? b.start : 1} />;
+      return <Lines items={strs(b.items)} ordered={b.ordered === true} marks={marks} bold={bold} start={typeof b.start === "number" ? b.start : 1} continued={b.continued === true} />;
     case "callout": {
       const tone = str(b.tone) || "note";
       // A tip is green, as on the web: the diagram explanations ("Understanding the diagram") use it. So is a book
