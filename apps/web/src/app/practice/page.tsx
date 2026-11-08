@@ -69,7 +69,7 @@ export default function PracticePage({ searchParams }: PageProps<"/practice">) {
               <span className="min-w-0 space-y-1.5">
                 <span className="block text-xs font-semibold tracking-[0.15em] text-accent uppercase">Chapter by chapter</span>
                 <h3 className="font-display text-2xl leading-tight font-semibold group-hover:text-accent">Chapter practice</h3>
-                <span className="block text-[15px] text-muted">Our own MCQs and short questions for each chapter of your book, with answers in English and Roman Urdu.</span>
+                <span className="block text-[15px] text-muted">Our own MCQs, short questions and long questions for each chapter of your book, with answers in English and Roman Urdu.</span>
               </span>
             </span>
             <span className="relative mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-accent">

@@ -289,7 +289,7 @@ class TopicReadingOut(BaseModel):
     chapter_start: bool = False
     # BOOK-EXERCISES-01: the chapter's end-of-chapter exercise is read in Practice; Learn never leads into it.
     # BOOK-PAPERS-01: so is a Board paper at the end of the book.
-    kind: Literal["topic", "exercise", "paper", "mcq", "short"] = "topic"
+    kind: Literal["topic", "exercise", "paper", "mcq", "short", "long"] = "topic"
 
 
 class BookExerciseOut(BaseModel):
@@ -325,6 +325,8 @@ class BookExercisesOut(BaseModel):
     mcq_sets: list[BookExerciseOut] = []
     # PRACTICE-SHORT-01: each chapter's practice short-question set, in chapter order (only chapters that have one).
     short_sets: list[BookExerciseOut] = []
+    # PRACTICE-LONG-01: each chapter's practice long-question set, in chapter order (only chapters that have one).
+    long_sets: list[BookExerciseOut] = []
 
 
 class VariantOut(BaseModel):

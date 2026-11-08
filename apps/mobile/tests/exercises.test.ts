@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { exerciseStatus, exerciseTitle, learnTopics, mcqTitle, practiceChapters, practiceOnly, practiceTitle, revealLabel, shortTitle } from "../src/lib/exercises.ts";
+import { exerciseStatus, exerciseTitle, learnTopics, mcqTitle, practiceChapters, practiceOnly, practiceTitle, revealLabel, shortTitle, longTitle } from "../src/lib/exercises.ts";
 
 describe("book exercises", () => {
   it("leaves the exercise out of Learn's topic list", () => {
@@ -49,6 +49,15 @@ describe("book exercises", () => {
     assert.deepEqual(
       withShorts.map((c) => [c.number, c.mcqs?.topic_id, c.shorts?.topic_id]),
       [[1, "m1", "s1"], [4, undefined, "s4"]],
+    );
+    // PRACTICE-LONG-01: long questions sit beside them too.
+    assert.equal(practiceOnly("long"), true);
+    assert.equal(practiceTitle({ kind: "long", title: "Long Questions", chapter_number: 1 }), "Chapter 1 · Long Questions");
+    assert.equal(longTitle("Unit", 3), "Unit 3 · Long Questions");
+    const withLongs = practiceChapters({ exercises: [], short_sets: [item("s1", 1)], long_sets: [item("l1", 1), item("l2", 2)] });
+    assert.deepEqual(
+      withLongs.map((c) => [c.number, c.shorts?.topic_id, c.longs?.topic_id]),
+      [[1, "s1", "l1"], [2, undefined, "l2"]],
     );
   });
 

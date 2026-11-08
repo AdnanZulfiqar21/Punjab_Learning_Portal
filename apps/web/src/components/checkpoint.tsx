@@ -68,13 +68,31 @@ export function Checkpoint({
   ) : (
     <p className="whitespace-pre-wrap">{promptView ?? prompt}</p>
   );
+  // MCQ-BOOK-LINK-01: opens the book passage this question comes from (also on a question solved step by step).
+  const bookLink = bookHref ? (
+    <Link
+      href={bookHref}
+      className="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-accent/40 bg-surface px-3 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-white focus-visible:outline-2 focus-visible:outline-accent"
+    >
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 7v14" />
+        <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+      </svg>
+      {labels.book}
+    </Link>
+  ) : null;
   if (solved) {
     // A book question solved step by step: the question, then (on demand) how to think about it, the numbered working
     // and the final answer, each set apart so a student can tell the question, the steps and the answer at a glance.
     return (
       <article aria-label={qref ? `${labels.question} ${qref}` : prompt} className="solved-question overflow-hidden rounded-xl border border-accent/40 bg-surface shadow-sm" data-ref={qref}>
         <div className="space-y-2 bg-accent-soft px-4 py-3">
-          {qref && <p className="text-xs font-semibold tracking-wide text-accent-strong uppercase">{`${labels.question} ${qref}`}</p>}
+          {(qref || bookHref) && (
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              {qref ? <p className="text-xs font-semibold tracking-wide text-accent-strong uppercase">{`${labels.question} ${qref}`}</p> : <span />}
+              {bookLink}
+            </div>
+          )}
           {promptLine}
           <button
             type="button"
@@ -125,18 +143,7 @@ export function Checkpoint({
     <aside aria-label="Check your understanding" className="space-y-3 rounded-xl border border-accent/40 bg-accent-soft p-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm font-semibold">Check your understanding</p>
-        {bookHref && (
-          <Link
-            href={bookHref}
-            className="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-accent/40 bg-surface px-3 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-white focus-visible:outline-2 focus-visible:outline-accent"
-          >
-            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 7v14" />
-              <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
-            </svg>
-            {labels.book}
-          </Link>
-        )}
+        {bookLink}
       </div>
       {/* Prompts and answers keep their line breaks and indentation: book exercises quote and answer with programs. */}
       {promptLine}

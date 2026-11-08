@@ -31,7 +31,7 @@ type ExerciseReading = {
   grade_number: number;
   subject_name: string;
   availability: "published" | "private_preview" | "unavailable";
-  kind?: "topic" | "exercise" | "paper" | "mcq" | "short";
+  kind?: "topic" | "exercise" | "paper" | "mcq" | "short" | "long";
   lesson: {
     id: string;
     language: string;
@@ -75,8 +75,8 @@ async function ExerciseView({ id }: { id: string }) {
   const note = lesson && readable ? missingLanguageNote(language, lesson.language) : null;
   const display = parseDisplay(jar.get(DISPLAY_COOKIE)?.value);
   const dataSaver = display ? display.dataSaver : (await headers()).get("save-data") === "on";
-  // PRACTICE-MCQ-01 / PRACTICE-SHORT-01: a chapter's MCQs and short questions belong to Chapter practice
-  const mcq = reading.kind === "mcq" || reading.kind === "short";
+  // PRACTICE-MCQ-01 / PRACTICE-SHORT-01 / PRACTICE-LONG-01: a chapter's own questions belong to Chapter practice
+  const mcq = reading.kind === "mcq" || reading.kind === "short" || reading.kind === "long";
   const back = `/practice/${mcq ? "chapters" : "exercises"}?grade=${reading.grade_number}${subject ? `&subject=${subject}` : ""}`;
   // DESIGN-01: the same pill switch as a topic; the chosen language is the dark primary pill.
   const segment = "inline-flex min-h-11 items-center justify-center rounded-full px-4 text-sm transition duration-200 sm:px-5";

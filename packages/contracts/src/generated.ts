@@ -5602,6 +5602,11 @@ export interface components {
             /** Grade Number */
             grade_number: number;
             /**
+             * Long Sets
+             * @default []
+             */
+            long_sets: components["schemas"]["BookExerciseOut"][];
+            /**
              * Mcq Sets
              * @default []
              */
@@ -11827,7 +11832,7 @@ export interface components {
              * Kind
              * @enum {string}
              */
-            kind: "topic" | "exercise" | "paper" | "mcq" | "short";
+            kind: "topic" | "exercise" | "paper" | "mcq" | "short" | "long";
             /** Number */
             number: string | null;
             /** Pdf Page */
@@ -11865,7 +11870,7 @@ export interface components {
              * @default topic
              * @enum {string}
              */
-            kind: "topic" | "exercise" | "paper" | "mcq" | "short";
+            kind: "topic" | "exercise" | "paper" | "mcq" | "short" | "long";
             lesson: components["schemas"]["TopicLessonOut"] | null;
             /** Next Topic Id */
             next_topic_id: string | null;

@@ -34,7 +34,7 @@ export default function ChapterPracticePage({ searchParams }: PageProps<"/practi
           align="start"
           eyebrow="Practice · Chapter by chapter"
           title="Chapter practice"
-          lead="Our own MCQs and short questions for each chapter of your book, with answers in English and Roman Urdu."
+          lead="Our own MCQs, short questions and long questions for each chapter of your book, with answers in English and Roman Urdu."
           backdrop={<span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-accent-soft opacity-50" />}
         />
       </div>
@@ -89,7 +89,7 @@ async function Chapters({ grade: rawGrade, subject: rawSubject }: { grade?: stri
   const res = await api<BookExercises>(`/v1/grades/${grade}/subjects/${encodeURIComponent(subject)}/exercises`, user ? { token: user.token } : {});
   const name = SUBJECTS.find(([c]) => c === subject)?.[1];
   const chapters = res.ok ? practiceChapters(res.data) : [];
-  const any = res.ok && ((res.data.mcq_sets ?? []).length > 0 || (res.data.short_sets ?? []).length > 0);
+  const any = res.ok && [res.data.mcq_sets, res.data.short_sets, res.data.long_sets].some((s) => (s ?? []).length > 0);
   return (
     <div className="space-y-8" data-subject={subjectKey(subject)}>
       <ClassSubjectFilter path="/practice/chapters" grade={grade} subject={subject} subjects={SUBJECTS} />
@@ -99,7 +99,7 @@ async function Chapters({ grade: rawGrade, subject: rawSubject }: { grade?: stri
         </Notice>
       ) : !any ? (
         <Notice title="No chapter practice here yet">
-          MCQs and short questions for the {GRADE_LABEL[grade]} {name} book are added chapter by chapter. They appear here once they are.
+          MCQs, short questions and long questions for the {GRADE_LABEL[grade]} {name} book are added chapter by chapter. They appear here once they are.
         </Notice>
       ) : (
         <section aria-labelledby="chapter-practice">
@@ -125,6 +125,7 @@ async function Chapters({ grade: rawGrade, subject: rawSubject }: { grade?: stri
                   <ul className="mt-auto grid gap-2">
                     <SetLink kind="MCQs" item={ch.mcqs} />
                     <SetLink kind="Short questions" item={ch.shorts} />
+                    <SetLink kind="Long questions" item={ch.longs} />
                   </ul>
                 </GlassCard>
               </li>

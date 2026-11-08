@@ -34,6 +34,7 @@ from portal_api.modules.content.workflow import roles_in_scope
 from portal_api.modules.curriculum import service as curriculum
 from portal_api.modules.curriculum.models import (
     EXERCISE_KEY_SUFFIX,
+    LONG_KEY_SUFFIX,
     MCQ_KEY_SUFFIX,
     PAPER_KEY_SUFFIXES,
     SHORT_KEY_SUFFIX,
@@ -129,7 +130,7 @@ def book_exercises(db: Session, who: Principal | None, grade: int, subject: str)
             )
         )
     # PRACTICE-MCQ-01 / PRACTICE-SHORT-01: the chapters' own practice sets, each kind in chapter order.
-    sets: dict[str, list[BookExerciseOut]] = {MCQ_KEY_SUFFIX: [], SHORT_KEY_SUFFIX: []}
+    sets: dict[str, list[BookExerciseOut]] = {MCQ_KEY_SUFFIX: [], SHORT_KEY_SUFFIX: [], LONG_KEY_SUFFIX: []}
     for suffix, found in sets.items():
         for topic, chapter in rows(suffix):
             availability, languages = _listed_availability(db, topic, preview)
@@ -163,6 +164,7 @@ def book_exercises(db: Session, who: Principal | None, grade: int, subject: str)
         papers=papers,
         mcq_sets=sets[MCQ_KEY_SUFFIX],
         short_sets=sets[SHORT_KEY_SUFFIX],
+        long_sets=sets[LONG_KEY_SUFFIX],
     )
 
 

@@ -209,6 +209,7 @@ def test_practice_lists_each_chapters_exercise_with_what_the_caller_can_read(cli
     assert all(e["availability"] == "unavailable" and e["available_languages"] == [] for e in body["exercises"])
     assert all(m["topic_id"] not in expected for m in body["mcq_sets"])  # PRACTICE-MCQ-01: a separate list
     assert all(s["topic_id"] not in expected for s in body["short_sets"])  # PRACTICE-SHORT-01: another
+    assert all(t["topic_id"] not in expected for t in body["long_sets"])  # PRACTICE-LONG-01: and another
 
     created = client.post(
         "/v1/studio/items",
@@ -245,6 +246,7 @@ def test_the_topic_kind_rule_is_the_catalogue_key() -> None:
             "u-paper",
             "u-mcq",
             "u-short-questions",
+            "u-long-questions",
         )
     }
     assert kinds == {
@@ -256,6 +258,7 @@ def test_the_topic_kind_rule_is_the_catalogue_key() -> None:
         "u-paper": ("topic", False),
         "u-mcq": ("mcq", True),  # PRACTICE-MCQ-01: a chapter's practice MCQs
         "u-short-questions": ("short", True),  # PRACTICE-SHORT-01: its practice short questions
+        "u-long-questions": ("long", True),  # PRACTICE-LONG-01: its practice long questions
     }
 
 
