@@ -235,7 +235,15 @@ def test_the_topic_kind_rule_is_the_catalogue_key() -> None:
     cs12 = "pk-punjab/xii/computer_science/c12-cs/ch9"
     kinds = {
         key: (Topic(natural_key=f"{cs12}/{key}").kind, Topic(natural_key=f"{cs12}/{key}").practice_only)
-        for key in ("9.1", "u-business-plan-tools", "u-exercise", "u-paper-pattern", "u-model-paper", "u-paper", "u-mcq")
+        for key in (
+            "9.1",
+            "u-business-plan-tools",
+            "u-exercise",
+            "u-paper-pattern",
+            "u-model-paper",
+            "u-paper",
+            "u-mcq",
+        )
     }
     assert kinds == {
         "9.1": ("topic", False),
