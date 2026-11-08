@@ -21,6 +21,7 @@ export function Checkpoint({
   steps,
   finalAnswer,
   labels = SOLVED_LABELS_EN,
+  onBook,
 }: {
   mode: "question" | "self_check";
   prompt: string;
@@ -38,6 +39,8 @@ export function Checkpoint({
   /** SOLVED-QUESTION-01: the answer, set apart from the working. */
   finalAnswer?: string;
   labels?: SolvedLabels;
+  /** MCQ-BOOK-LINK-01: opens the book passage this question comes from, highlighted. */
+  onBook?: () => void;
 }) {
   const c = useTheme();
   const [chosen, setChosen] = useState<string | null>(null);
@@ -85,7 +88,27 @@ export function Checkpoint({
   }
   return (
     <View accessibilityLabel="Check your understanding" style={{ gap: Space.sm, borderWidth: 1, borderColor: c.accent, backgroundColor: c.accentSoft, borderRadius: Radius.sm, padding: Space.md }}>
-      <T style={{ fontWeight: "600" }}>Check your understanding</T>
+      <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: Space.sm, flexWrap: "wrap" }}>
+        <T style={{ fontWeight: "600" }}>Check your understanding</T>
+        {onBook ? (
+          <Pressable
+            accessibilityRole="link"
+            accessibilityLabel={labels.book}
+            onPress={onBook}
+            hitSlop={8}
+            style={({ pressed }) => ({
+              justifyContent: "center",
+              minHeight: 36,
+              paddingHorizontal: Space.md,
+              borderRadius: 999,
+              borderWidth: 1,
+              borderColor: c.accent,
+              backgroundColor: pressed ? c.accent : c.surface,
+            })}>
+            {({ pressed }) => <Text style={{ fontSize: 14, fontWeight: "600", color: pressed ? "#ffffff" : c.accent }}>{labels.book}</Text>}
+          </Pressable>
+        ) : null}
+      </View>
       <T>{prompt}</T>
       {mode === "question" ? (
         <View accessibilityRole="radiogroup" style={{ gap: Space.xs }}>
