@@ -8,6 +8,7 @@ import { KeepPlace } from "@/components/keep-place";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { premiumBook } from "@/lib/book-style";
 import { practiceOnly, practiceTitle, revealLabel } from "@/lib/exercises";
+import { solvedLabels } from "@/lib/solved-labels";
 import { typesetEquations, typesetMath } from "@/lib/typeset";
 import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
 import { Icon } from "@/components/icons";
@@ -158,6 +159,7 @@ async function ExerciseView({ id }: { id: string }) {
             premium={premiumBook(subject, reading.grade_number)}
             runnable={lesson.language === "roman_ur"}
             revealLabel={revealLabel(lesson.language)}
+            solvedLabels={solvedLabels(lesson.language)}
             assetUrl={(versionId) =>
               lesson.private_preview ? `/learn/topics/${reading.topic_id}/preview-assets/${versionId}` : `/learn/lessons/${lesson.id}/assets/${versionId}`
             }

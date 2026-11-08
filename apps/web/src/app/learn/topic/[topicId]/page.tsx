@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 import { chooseReadingLanguage } from "@/app/actions/learn";
+import { FindInBook } from "@/components/find-in-book";
 import { KeepPlace } from "@/components/keep-place";
 import { LectureView } from "@/components/lecture-view";
 import { LessonBlocks } from "@/components/lesson-blocks";
@@ -98,17 +99,24 @@ type TopicLecture = {
 export default function TopicPage({ params, searchParams }: PageProps<"/learn/topic/[topicId]">) {
   return (
     <Suspense fallback={<SkeletonLines lines={8} label="Loading lesson" />}>
-      {Promise.all([params, searchParams]).then(([{ topicId }, sp]) => <TopicView id={topicId} view={sp.view === "lecture" ? "lecture" : sp.view === "video" ? "video" : "read"} />)}
+      {Promise.all([params, searchParams]).then(([{ topicId }, sp]) => (
+        <TopicView
+          id={topicId}
+          view={sp.view === "lecture" ? "lecture" : sp.view === "video" ? "video" : "read"}
+          find={typeof sp.find === "string" ? sp.find.slice(0, 600) : undefined}
+        />
+      ))}
     </Suspense>
   );
 }
 
-async function TopicView({ id, view: asked }: { id: string; view: "read" | "lecture" | "video" }) {
+async function TopicView({ id, view: asked, find }: { id: string; view: "read" | "lecture" | "video"; find?: string }) {
   if (!UUID.test(id)) notFound();
   const user = await currentUser();
   const token = user?.token;
   const jar = await cookies();
-  const language = preferredLanguage(jar.get(LANGUAGE_COOKIE)?.value, user?.me.profile?.explanation_language);
+  // MCQ-BOOK-LINK-01: "See in book" opens the book's own words, the English tab, whatever language was last read.
+  const language = find ? "en" : preferredLanguage(jar.get(LANGUAGE_COOKIE)?.value, user?.me.profile?.explanation_language);
   const res = await api<TopicReading>(`/v1/topics/${id}/lesson${language === "en" ? "" : `?language=${language}`}`, token ? { token } : {});
   if (!res.ok) notFound();
   const reading = res.data;
@@ -287,7 +295,13 @@ async function TopicView({ id, view: asked }: { id: string; view: "read" | "lect
         </Notice>
       ) : (
         // Owner rule 5: the lesson is read on a solid surface, never on glass.
-        <div className="space-y-4 rounded-card border border-border bg-surface px-4 py-5 text-[1.0625rem] leading-7 shadow-glass sm:px-8 sm:py-8 sm:text-[1.125rem] sm:leading-8" lang={lesson.language === "ur" ? "ur" : "en"} dir={lesson.language === "ur" ? "rtl" : undefined}>
+        <div
+          data-lesson-body
+          className="space-y-4 rounded-card border border-border bg-surface px-4 py-5 text-[1.0625rem] leading-7 shadow-glass sm:px-8 sm:py-8 sm:text-[1.125rem] sm:leading-8"
+          lang={lesson.language === "ur" ? "ur" : "en"}
+          dir={lesson.language === "ur" ? "rtl" : undefined}
+        >
+          {find && view === "read" && <FindInBook text={find} />}
           {cont && <h2 className="font-display text-2xl font-semibold tracking-tight">{`${cont.number} ${cont.title}`}</h2>}
           <LessonBlocks
             blocks={lesson.body.blocks}

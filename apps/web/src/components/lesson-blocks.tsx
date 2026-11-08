@@ -78,6 +78,13 @@ function Marked({ text, marks, bold = [], math }: { text: string; marks: string[
 }
 
 /** A program with its parts coloured (CODE-HIGHLIGHT-01, globals.css `.code-*`) and the book's errors still in red. */
+/** MCQ-BOOK-LINK-01: the Learn topic that prints a practice question's passage, opened with that passage highlighted. */
+function bookHref(ref: unknown): string | undefined {
+  const r = (ref ?? null) as { topic_id?: unknown; quote?: unknown } | null;
+  if (!r || typeof r.topic_id !== "string" || typeof r.quote !== "string") return undefined;
+  return `/learn/topic/${r.topic_id}?find=${encodeURIComponent(r.quote)}`;
+}
+
 function Code({ text, language, marks }: { text: string; language: string; marks: string[] }) {
   return (
     <>
@@ -523,6 +530,7 @@ function BlockView({
           steps={steps}
           finalAnswer={str(b.final_answer) ? <Marked math={math} text={str(b.final_answer)} marks={[]} /> : undefined}
           labels={solvedLabels}
+          bookHref={bookHref(b.book_ref)}
           answerFigure={
             answerTable || answerFigure ? (
               <>

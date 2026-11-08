@@ -747,3 +747,36 @@ html:has(.lesson-flow, [data-reading-bar]) {
     transition: none !important;
   }
 }
+
+/* MCQ-BOOK-LINK-01: the book passage a practice question comes from, marked like a highlighter pen, with a soft pulse
+   when it arrives so the eye finds it (no pulse when reduced motion is asked for). */
+mark.find-in-book {
+  background: #ffe36b;
+  color: #1c1a17;
+  border-radius: 0.2em;
+  padding: 0.05em 0.1em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  scroll-margin-block: 30vh;
+  outline: none;
+}
+:root[data-theme="dark"] mark.find-in-book {
+  background: #b38f00;
+  color: #fffdf5;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) mark.find-in-book {
+    background: #b38f00;
+    color: #fffdf5;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  mark.find-in-book {
+    animation: find-in-book 1.6s ease-out 0.4s 2;
+  }
+}
+@keyframes find-in-book {
+  50% {
+    box-shadow: 0 0 0 0.35em rgb(255 214 0 / 0.45);
+  }
+}
