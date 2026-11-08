@@ -84,12 +84,13 @@ function towardBlack(hex: string, t: number): string {
 }
 
 /** PREMIUM-MOBILE-01: the two stops of a subject's banner gradient (web chapter and topic headers): light accent to
- * strong; dark the same, deepened toward black so white text keeps its contrast. */
+ * strong; dark the same colours deepened toward black, so white text keeps its contrast. */
 export function bannerStops(subject: string | null, scheme: "light" | "dark"): [string, string] {
   const key = subject && subject in SubjectAccents ? subject : "computer_science";
   const strong = SubjectStrong[key];
   if (scheme === "light") return [SubjectAccents[key].light.accent, strong.light];
-  return [towardBlack(SubjectAccents[key].dark.accent, 0.42), towardBlack(strong.dark, 0.3)];
+  // Dark: the light accents deepened, so the banner keeps the subject's colour (the pale dark-mode accents turn grey).
+  return [towardBlack(SubjectAccents[key].light.accent, 0.78), towardBlack(strong.light, 0.62)];
 }
 
 /** PREMIUM-MOBILE-01 (Soft Glass, DESIGN-01): the frosted surface and the gradient mesh behind the browsing screens. Same

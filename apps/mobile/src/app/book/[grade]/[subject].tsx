@@ -79,7 +79,7 @@ function Book({ book }: { book: Awaited<ReturnType<typeof api.bookFor>> }) {
                   {ch.title}
                 </T>
                 <T variant="small">
-                  {ch.topic_count} topics · {ch.visual_count} figures/tables · book pages {pageRange(ch.printed_start, ch.printed_end)}
+                  {ch.topic_count} topics · {ch.visual_count} figures/tables · {`book pages ${pageRange(ch.printed_start, ch.printed_end).replace("–", "⁠–⁠")}`}
                 </T>
               </View>
             </View>
