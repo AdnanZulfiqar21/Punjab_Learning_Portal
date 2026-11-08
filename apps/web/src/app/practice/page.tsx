@@ -48,7 +48,7 @@ export default function PracticePage({ searchParams }: PageProps<"/practice">) {
             </ButtonLink>
             <ButtonLink href="/practice/exercises" variant="secondary" size="lg">
               <Icon name="book-open" size={18} />
-              Book exercises
+              Chapter practice
             </ButtonLink>
           </>
         }
@@ -66,12 +66,12 @@ export default function PracticePage({ searchParams }: PageProps<"/practice">) {
               </IconTile>
               <span className="min-w-0 space-y-1.5">
                 <span className="block text-xs font-semibold tracking-[0.15em] text-accent uppercase">From your textbook</span>
-                <h3 className="font-display text-2xl leading-tight font-semibold group-hover:text-accent">Book exercises</h3>
-                <span className="block text-[15px] text-muted">Each chapter&apos;s exercise, solved, in English and Roman Urdu.</span>
+                <h3 className="font-display text-2xl leading-tight font-semibold group-hover:text-accent">Chapter practice</h3>
+                <span className="block text-[15px] text-muted">Each chapter&apos;s exercise, solved, and MCQs to practise, in English and Roman Urdu.</span>
               </span>
             </span>
             <span className="relative mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
-              Open the exercises
+              Open chapter practice
               <Icon name="arrow-right" size={16} />
             </span>
           </GlassCardLink>

@@ -62,7 +62,7 @@ function Shell() {
         <Stack.Screen name="book/[grade]/[subject]" options={{ title: "Chapters" }} />
         <Stack.Screen name="chapter/[id]" options={{ title: "Chapter" }} />
         <Stack.Screen name="topic/[id]" options={{ title: "Lesson" }} />
-        <Stack.Screen name="exercises" options={{ title: "Book exercises" }} />
+        <Stack.Screen name="exercises" options={{ title: "Chapter practice" }} />
         <Stack.Screen name="exercise/[id]" options={{ title: "Exercise" }} />
         <Stack.Screen name="dashboard" options={{ title: "Dashboard" }} />
         <Stack.Screen name="onboarding" options={{ title: "Learning preferences" }} />

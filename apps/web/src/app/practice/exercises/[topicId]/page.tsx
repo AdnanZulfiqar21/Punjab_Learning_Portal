@@ -84,7 +84,7 @@ async function ExerciseView({ id }: { id: string }) {
       <Breadcrumbs
         items={[
           { href: "/practice", label: "Practice" },
-          { href: back, label: "Book exercises" },
+          { href: back, label: "Chapter practice" },
           { label: title },
         ]}
       />

@@ -18,9 +18,27 @@ export function exerciseTitle(chapterLabel: string, chapterNumber: number): stri
   return `${chapterLabel} ${chapterNumber} · Exercise`;
 }
 
-/** A Practice screen's title: a Board paper's own ("Model Paper", "Paper Pattern"), else "Chapter 2 · Exercise". */
+/** A Practice screen's title: a Board paper's own ("Model Paper", "Paper Pattern"), "Chapter 1 · MCQs", else "Chapter 2 · Exercise". */
 export function practiceTitle(reading: { kind?: string; title: string; chapter_number: number }): string {
-  return reading.kind === "paper" ? reading.title : exerciseTitle("Chapter", reading.chapter_number);
+  if (reading.kind === "paper") return reading.title;
+  return reading.kind === "mcq" ? mcqTitle("Chapter", reading.chapter_number) : exerciseTitle("Chapter", reading.chapter_number);
+}
+
+/** PRACTICE-MCQ-01: a chapter's practice MCQs, written from the chapter (not printed in the book): "Chapter 1 · MCQs". */
+export function mcqTitle(chapterLabel: string, chapterNumber: number): string {
+  return `${chapterLabel} ${chapterNumber} · MCQs`;
+}
+
+type ChapterItem = { topic_id: string; chapter_number: number; chapter_title: string; availability: string; available_languages: readonly string[] };
+
+/** PRACTICE-MCQ-01: Practice by book, then chapter, as Learn: each chapter with its book exercise and its MCQs (either
+ * may be missing), in chapter order. */
+export function practiceChapters<E extends ChapterItem>(book: { exercises: readonly E[]; mcq_sets?: readonly E[] }) {
+  const chapters = new Map<number, { number: number; title: string; exercise?: E; mcqs?: E }>();
+  const at = (e: E) => chapters.get(e.chapter_number) ?? chapters.set(e.chapter_number, { number: e.chapter_number, title: e.chapter_title }).get(e.chapter_number)!;
+  for (const e of book.exercises) at(e).exercise = e;
+  for (const m of book.mcq_sets ?? []) at(m).mcqs = m;
+  return [...chapters.values()].sort((a, b) => a.number - b.number);
 }
 
 /** The self-check button's words on an exercise, in the lesson's own language. */

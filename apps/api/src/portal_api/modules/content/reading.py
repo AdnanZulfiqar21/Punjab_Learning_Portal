@@ -34,6 +34,7 @@ from portal_api.modules.content.workflow import roles_in_scope
 from portal_api.modules.curriculum import service as curriculum
 from portal_api.modules.curriculum.models import (
     EXERCISE_KEY_SUFFIX,
+    MCQ_KEY_SUFFIX,
     PAPER_KEY_SUFFIXES,
     BookEdition,
     Chapter,
@@ -126,6 +127,19 @@ def book_exercises(db: Session, who: Principal | None, grade: int, subject: str)
                 available_languages=languages,  # type: ignore[arg-type]
             )
         )
+    mcq_sets: list[BookExerciseOut] = []
+    for topic, chapter in rows(MCQ_KEY_SUFFIX):
+        availability, languages = _listed_availability(db, topic, preview)
+        mcq_sets.append(
+            BookExerciseOut(
+                topic_id=topic.id,
+                chapter_id=chapter.id,
+                chapter_number=chapter.number,
+                chapter_title=chapter.title,
+                availability=availability,
+                available_languages=languages,  # type: ignore[arg-type]
+            )
+        )
     papers: list[BookPaperOut] = []
     for topic, _chapter in rows(*PAPER_KEY_SUFFIXES):
         availability, languages = _listed_availability(db, topic, preview)
@@ -144,6 +158,7 @@ def book_exercises(db: Session, who: Principal | None, grade: int, subject: str)
         chapter_label=book.chapter_label,
         exercises=exercises,
         papers=papers,
+        mcq_sets=mcq_sets,
     )
 
 

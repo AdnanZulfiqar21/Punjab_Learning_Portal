@@ -5601,6 +5601,11 @@ export interface components {
             exercises: components["schemas"]["BookExerciseOut"][];
             /** Grade Number */
             grade_number: number;
+            /**
+             * Mcq Sets
+             * @default []
+             */
+            mcq_sets: components["schemas"]["BookExerciseOut"][];
             /** Papers */
             papers: components["schemas"]["BookPaperOut"][];
             /** Subject Code */
@@ -11817,7 +11822,7 @@ export interface components {
              * Kind
              * @enum {string}
              */
-            kind: "topic" | "exercise" | "paper";
+            kind: "topic" | "exercise" | "paper" | "mcq";
             /** Number */
             number: string | null;
             /** Pdf Page */
@@ -11855,7 +11860,7 @@ export interface components {
              * @default topic
              * @enum {string}
              */
-            kind: "topic" | "exercise" | "paper";
+            kind: "topic" | "exercise" | "paper" | "mcq";
             lesson: components["schemas"]["TopicLessonOut"] | null;
             /** Next Topic Id */
             next_topic_id: string | null;

@@ -36,7 +36,7 @@ export default function ExerciseScreen() {
   if (!practiceOnly(state.data.kind)) return <Redirect href={{ pathname: "/topic/[id]", params: { id: state.data.topic_id } }} />;
   return (
     <SubjectAccent subject={state.data.subject_name}>
-      <Stack.Screen options={{ title: practiceTitle(state.data), headerBackTitle: "Exercises" }} />
+      <Stack.Screen options={{ title: practiceTitle(state.data), headerBackTitle: "Practice" }} />
       <Reader reading={state.data} token={token} language={language} onLanguage={choose} placeRef={placeRef} />
     </SubjectAccent>
   );
