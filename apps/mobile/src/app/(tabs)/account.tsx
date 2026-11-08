@@ -6,6 +6,7 @@ import type { AppSession, Me } from "@portal/contracts";
 
 import { Button, Field, FormError } from "@/components/form";
 import { PlanCard } from "@/components/plan-card";
+import { Screen } from "@/components/premium";
 import { Badge, Card, ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Space, TAB_SCREEN_TOP } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
@@ -15,10 +16,10 @@ import { useAuth } from "@/lib/auth";
 import { TIME_ZONE } from "@/lib/dates";
 
 export default function AccountScreen() {
-  const c = useTheme();
   const { state, refresh } = useAuth();
   return (
-    <SafeAreaView edges={["top"]} style={{ flex: 1, backgroundColor: c.background }}>
+    <Screen>
+    <SafeAreaView edges={["top"]} style={{ flex: 1 }}>
       {state.status === "loading" && <Loading label="Checking your sign-in" />}
       {state.status === "unavailable" && <ErrorState error={state.error} onRetry={() => void refresh()} />}
       {(state.status === "signed_out" || state.status === "signed_in") && (
@@ -30,6 +31,7 @@ export default function AccountScreen() {
         </ScrollView>
       )}
     </SafeAreaView>
+    </Screen>
   );
 }
 

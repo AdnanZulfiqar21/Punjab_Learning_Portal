@@ -1,12 +1,13 @@
 // A chapter (pilot): a compact header, the topics right under it, and offline saving as one quiet row at the end.
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
-import { Pressable, ScrollView, View } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
 import type { TopicNode } from "@portal/contracts";
 
 import { FavouriteStar } from "@/components/lesson-study";
 import { OfflinePack } from "@/components/offline-pack";
-import { ErrorState, LinkButton, Loading, Notice, T } from "@/components/ui";
+import { Banner, BannerText, Screen } from "@/components/premium";
+import { Card, ErrorState, LinkButton, Loading, Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { SubjectAccent, useTheme } from "@/hooks/use-theme";
@@ -42,29 +43,38 @@ export default function ChapterScreen() {
 }
 
 function Chapter({ ch }: { ch: Awaited<ReturnType<typeof api.chapter>> }) {
-  const c = useTheme();
   const bc = ch.breadcrumb;
   const [intro, setIntro] = useState(false);
   const long = (ch.main_concept ?? "").length > 180;
   const topics = learnTopics(ch.topics); // BOOK-EXERCISES-01/BOOK-PAPERS-01: exercises and Board papers are in Practice
   return (
-    <ScrollView style={{ backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg, gap: Space.lg }}>
-      <View style={{ gap: Space.xs }}>
-        <T variant="eyebrow">
+    <Screen>
+    <ScrollView contentContainerStyle={{ padding: Space.lg, paddingBottom: Space.xxl * 2, gap: Space.lg }}>
+      {/* PREMIUM-MOBILE-01: the chapter's gradient banner (web chapter header) */}
+      <Banner subject={bc.subject.code}>
+        <BannerText variant="eyebrow">
           {GRADE_LABEL[bc.grade.number]} · {bc.subject.name} · {bc.chapter_label} {ch.number}
-        </T>
-        <T variant="title" accessibilityRole="header">
-          {ch.title}
-        </T>
+        </BannerText>
+        <BannerText variant="title">{ch.title}</BannerText>
         {ch.main_concept ? (
           <View>
-            <T variant="muted" numberOfLines={intro || !long ? undefined : 3}>
+            <BannerText variant="body" numberOfLines={intro || !long ? undefined : 3}>
               {ch.main_concept}
-            </T>
-            {long ? <LinkButton label={intro ? "Less" : "More"} accessibilityLabel={intro ? "Show less of the introduction" : "Show the whole introduction"} onPress={() => setIntro((o) => !o)} /> : null}
+            </BannerText>
+            {long ? (
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel={intro ? "Show less of the introduction" : "Show the whole introduction"}
+                onPress={() => setIntro((o) => !o)}
+                style={{ alignSelf: "flex-start", minHeight: 44, justifyContent: "center", marginTop: Space.xs }}>
+                <View style={{ borderRadius: 999, paddingHorizontal: Space.md, paddingVertical: 6, backgroundColor: "rgba(255,255,255,0.2)" }}>
+                  <Text style={{ color: "#ffffff", fontWeight: "600", fontSize: 14 }}>{intro ? "Less" : "More"}</Text>
+                </View>
+              </Pressable>
+            ) : null}
           </View>
         ) : null}
-      </View>
+      </Banner>
       {ch.status !== "complete" && (
         <Notice tone="warn" title={`This chapter is ${ch.status} in the supplied textbook file`}>Topics from missing pages are not listed.</Notice>
       )}
@@ -72,7 +82,13 @@ function Chapter({ ch }: { ch: Awaited<ReturnType<typeof api.chapter>> }) {
         <T variant="heading" accessibilityRole="header">
           Topics
         </T>
-        {topics.length === 0 ? <T variant="muted">No topics are recorded for this chapter.</T> : <Topics topics={topics} />}
+        {topics.length === 0 ? (
+          <T variant="muted">No topics are recorded for this chapter.</T>
+        ) : (
+          <Card style={{ paddingVertical: Space.xs }}>
+            <Topics topics={topics} />
+          </Card>
+        )}
       </View>
       <Offline chapterId={ch.id} />
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -84,6 +100,7 @@ function Chapter({ ch }: { ch: Awaited<ReturnType<typeof api.chapter>> }) {
         {ch.next_chapter_id ? <LinkButton label="Next chapter →" onPress={() => router.replace({ pathname: "/chapter/[id]", params: { id: ch.next_chapter_id! } })} /> : null}
       </View>
     </ScrollView>
+    </Screen>
   );
 }
 

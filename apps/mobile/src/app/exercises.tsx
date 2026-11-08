@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 
 import { Choices } from "@/components/form";
+import { Screen } from "@/components/premium";
 import { ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Radius, Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
@@ -18,13 +19,13 @@ import { exerciseStatus } from "@/lib/exercises";
 const SUBJECTS = ALL_SUBJECTS.filter(([code]) => code !== "mathematics");
 
 export default function ExercisesScreen() {
-  const c = useTheme();
   const { state } = useAuth();
   if (state.status === "loading") return <Loading label="Checking your sign-in" />;
   const me = state.status === "signed_in" ? state.me : null;
   const subjects = SUBJECTS.map(([code]) => code as string);
   return (
-    <ScrollView style={{ backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg, gap: Space.lg }}>
+    <Screen>
+    <ScrollView contentContainerStyle={{ padding: Space.lg, gap: Space.lg }}>
       <Stack.Screen options={{ title: "Book exercises" }} />
       <T variant="muted">The exercise at the end of each chapter of your textbook, solved in English and Roman Urdu.</T>
       <List
@@ -33,6 +34,7 @@ export default function ExercisesScreen() {
         initialSubject={(me?.profile?.subjects?.find((s) => subjects.includes(s)) as SubjectCode | undefined) ?? "computer_science"}
       />
     </ScrollView>
+    </Screen>
   );
 }
 

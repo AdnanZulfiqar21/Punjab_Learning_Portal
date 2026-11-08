@@ -4,6 +4,7 @@ import { FlatList, Pressable, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import type { SearchHit } from "@portal/contracts";
 
+import { Screen } from "@/components/premium";
 import { Card, ErrorState, Loading, T } from "@/components/ui";
 import { Radius, Space, TAB_SCREEN_TOP } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
@@ -23,7 +24,8 @@ export default function SearchScreen() {
   const [query, setQuery] = useState("");
   const [grade, setGrade] = useState<number | undefined>(undefined);
   return (
-    <SafeAreaView edges={["top"]} style={{ flex: 1, backgroundColor: c.background }}>
+    <Screen>
+    <SafeAreaView edges={["top"]} style={{ flex: 1 }}>
       <View style={{ padding: Space.lg, paddingTop: TAB_SCREEN_TOP, gap: Space.md }}>
         <T variant="title">Search</T>
         <TextInput
@@ -57,6 +59,7 @@ export default function SearchScreen() {
       </View>
       {query.length >= 2 ? <Results q={query} grade={grade} /> : <T variant="muted" style={{ paddingHorizontal: Space.lg }}>Enter at least two characters.</T>}
     </SafeAreaView>
+    </Screen>
   );
 }
 
