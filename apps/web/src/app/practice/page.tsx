@@ -25,8 +25,8 @@ type Way = { href: string; title: string; text: string; icon: ReactNode };
 
 // The other ways to practise, each a page of its own. What each one is, in the words of its page; no figures.
 const WAYS: Way[] = [
-  // PRACTICE-MCQ-01: the portal's own questions for each chapter (MCQs; short and long questions later).
-  { href: "/practice/chapters", title: "Chapter practice", text: "Our own MCQs and short questions for each chapter of your book.", icon: <Icon name="list-checks" size={22} /> },
+  // BOOK-EXERCISES-01: the textbook's own end-of-chapter exercises, solved (Chapter practice leads, owner 2026-11-08).
+  { href: "/practice/exercises", title: "Book exercises", text: "Each chapter's exercise, solved, in English and Roman Urdu.", icon: <Icon name="book-open" size={22} /> },
   { href: "/practice/written", title: "Written practice", text: "Answer on paper, photograph your pages, teacher-marked.", icon: <PracticeIcon name="pen-line" size={22} /> },
   { href: "/practice/mocks", title: "Mock tests", text: "Full-length tests that follow official patterns.", icon: <PracticeIcon name="timer" size={22} /> },
   { href: "/practice/notebook", title: "Mistake notebook", text: "Questions you missed or flagged come back for review.", icon: <PracticeIcon name="bookmark" size={22} /> },
@@ -48,9 +48,9 @@ export default function PracticePage({ searchParams }: PageProps<"/practice">) {
               Build a test
               <Icon name="arrow-right" size={18} />
             </ButtonLink>
-            <ButtonLink href="/practice/exercises" variant="secondary" size="lg">
-              <Icon name="book-open" size={18} />
-              Book exercises
+            <ButtonLink href="/practice/chapters" variant="secondary" size="lg">
+              <Icon name="list-checks" size={18} />
+              Chapter practice
             </ButtonLink>
           </>
         }
@@ -59,21 +59,21 @@ export default function PracticePage({ searchParams }: PageProps<"/practice">) {
       <section aria-labelledby="ways-heading">
         <SectionHeader id="ways-heading" title="Ways to practise" />
         <div className="grid gap-4 lg:grid-cols-3">
-          {/* BOOK-EXERCISES-01 / BOOK-PAPERS-01: the textbook's own exercises and Board paper, solved, lead the list. */}
-          <GlassCardLink href="/practice/exercises" padded={false} className="group relative flex flex-col gap-4 overflow-hidden p-6 lg:col-span-2 sm:p-7">
+          {/* PRACTICE-MCQ-01 (owner, 2026-11-08): Chapter practice, the portal's own questions, leads the list. */}
+          <GlassCardLink href="/practice/chapters" padded={false} className="group relative flex flex-col gap-4 overflow-hidden p-6 lg:col-span-2 sm:p-7">
             <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-accent-soft opacity-50" />
             <span className="relative flex items-start gap-4">
               <IconTile size={52}>
-                <Icon name="book-open" size={26} />
+                <Icon name="list-checks" size={26} />
               </IconTile>
               <span className="min-w-0 space-y-1.5">
-                <span className="block text-xs font-semibold tracking-[0.15em] text-accent uppercase">From your textbook</span>
-                <h3 className="font-display text-2xl leading-tight font-semibold group-hover:text-accent">Book exercises</h3>
-                <span className="block text-[15px] text-muted">Each chapter&apos;s exercise, solved, in English and Roman Urdu.</span>
+                <span className="block text-xs font-semibold tracking-[0.15em] text-accent uppercase">Chapter by chapter</span>
+                <h3 className="font-display text-2xl leading-tight font-semibold group-hover:text-accent">Chapter practice</h3>
+                <span className="block text-[15px] text-muted">Our own MCQs and short questions for each chapter of your book, with answers in English and Roman Urdu.</span>
               </span>
             </span>
             <span className="relative mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
-              Open the exercises
+              Open chapter practice
               <Icon name="arrow-right" size={16} />
             </span>
           </GlassCardLink>

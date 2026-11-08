@@ -25,10 +25,10 @@ export default function PracticeScreen() {
         <T variant="title">Practice</T>
         <T variant="muted">Build a test from your textbook chapters. Only questions approved by an independent subject reviewer are used.</T>
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: Space.sm }}>
+          {/* PRACTICE-MCQ-01: the portal's own MCQs and short questions for each chapter; first (owner, 2026-11-08). */}
+          <Button variant="link" label="Chapter practice" onPress={() => router.push("/chapter-practice")} />
           {/* BOOK-EXERCISES-01: each chapter's end-of-chapter exercise, solved (Learn no longer lists it). */}
           <Button variant="link" label="Book exercises" onPress={() => router.push("/exercises")} />
-          {/* PRACTICE-MCQ-01: the portal's own MCQs for each chapter (short and long questions later). */}
-          <Button variant="link" label="Chapter practice" onPress={() => router.push("/chapter-practice")} />
           {state.status === "signed_in" && (
             <>
               <Button variant="link" label="Mock tests" onPress={() => router.push("/mocks")} />
