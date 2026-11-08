@@ -65,4 +65,6 @@ There is no `expo-updates` dependency, update channel, or development client. Re
 
 **Build 14 (8 November 2026, main after #513).** EAS id `497b6c3f-0417-43d7-b2f4-a1615feec819`, git `90ba2148` (branch `chore/ios-build-11`: `main` after #513 plus the `ios.buildNumber` 14 bump); install page https://expo.dev/accounts/desirly/projects/punjab-learning-portal/builds/497b6c3f-0417-43d7-b2f4-a1615feec819. Same bundle, team, iPhone and origin. Same app as build 13, now built from `main` after #513 merged on green CI (mobile, web, images, security). Claude did not run build 14 on the physical phone.
 
+**Build 15 (8 November 2026, text below side items).** EAS id `cad11c03-d4dc-4afb-9449-37df21e6df98`, git `6defd2d0` (branch `chore/ios-build-11`: `main` plus #515 and the `ios.buildNumber` 15 bump); install page https://expo.dev/accounts/desirly/projects/punjab-learning-portal/builds/cad11c03-d4dc-4afb-9449-37df21e6df98. Same bundle, team, iPhone and origin. New since build 14: a paragraph beside a side figure or box continues full width below it once the side items end (owner, on build 14). Built before #515's CI; mobile typecheck, lint and the 123 host tests passed. Claude did not run build 15 on the physical phone.
+
 A production build must get an `https` origin. The preview exception for local networking is not on the production variant.
