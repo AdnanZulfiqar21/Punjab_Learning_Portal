@@ -67,8 +67,54 @@ export function subjectKey(nameOrCode: string | null | undefined): string | null
   return key in SubjectAccents ? key : null;
 }
 
+/** Strong end of each subject's gradient banner (same values as globals.css `--accent-strong`). */
+const SubjectStrong: Record<string, { light: string; dark: string }> = {
+  biology: { light: "#0b5f4c", dark: "#a6dbc6" },
+  chemistry: { light: "#7a3b00", dark: "#ecbe9c" },
+  physics: { light: "#323893", dark: "#cdc3f2" },
+  mathematics: { light: "#6e2154", dark: "#e8c3d9" },
+  computer_science: { light: "#08485a", dark: "#a3d9df" },
+};
+
+/** A hex colour mixed with black (`t` of the colour kept), as the web's `color-mix(in oklab, X t%, black)` approximates. */
+function towardBlack(hex: string, t: number): string {
+  const n = parseInt(hex.slice(1), 16);
+  const ch = (shift: number) => Math.round(((n >> shift) & 255) * t).toString(16).padStart(2, "0");
+  return `#${ch(16)}${ch(8)}${ch(0)}`;
+}
+
+/** PREMIUM-MOBILE-01: the two stops of a subject's banner gradient (web chapter and topic headers): light accent to
+ * strong; dark the same colours deepened toward black, so white text keeps its contrast. */
+export function bannerStops(subject: string | null, scheme: "light" | "dark"): [string, string] {
+  const key = subject && subject in SubjectAccents ? subject : "computer_science";
+  const strong = SubjectStrong[key];
+  if (scheme === "light") return [SubjectAccents[key].light.accent, strong.light];
+  // Dark: the light accents deepened, so the banner keeps the subject's colour (the pale dark-mode accents turn grey).
+  return [towardBlack(SubjectAccents[key].light.accent, 0.78), towardBlack(strong.light, 0.62)];
+}
+
+/** PREMIUM-MOBILE-01 (Soft Glass, DESIGN-01): the frosted surface and the gradient mesh behind the browsing screens. Same
+ * values as globals.css `--glass-*` and `--mesh-*`. No live blur: a translucent surface over the mesh costs nothing on
+ * a low-end phone. */
+export const Glass = {
+  light: { bg: "rgba(255,255,255,0.72)", border: "rgba(255,255,255,0.9)", shadow: "0px 8px 30px rgba(15,29,43,0.07)", mesh: ["#bfe3ee", "#d9d6f7", "#fbe3cf"] },
+  dark: { bg: "rgba(27,30,27,0.72)", border: "rgba(255,255,255,0.08)", shadow: "0px 8px 30px rgba(0,0,0,0.35)", mesh: ["rgba(108,196,220,0.16)", "rgba(120,112,222,0.14)", "rgba(243,183,101,0.1)"] },
+} as const;
+
+/** Outfit for headings and the brand (web DESIGN-01); body text keeps the system font. Loaded in the root layout. */
+export const HeadingFont = { semibold: "Outfit_600SemiBold", bold: "Outfit_700Bold" } as const;
+
+/** SF Symbol per subject for its icon tile (iOS); other platforms show the subject's initials. */
+export const SubjectSymbol: Record<string, { ios: string; initials: string }> = {
+  biology: { ios: "leaf.fill", initials: "Bi" },
+  chemistry: { ios: "flask.fill", initials: "Ch" },
+  physics: { ios: "atom", initials: "Ph" },
+  mathematics: { ios: "function", initials: "Ma" },
+  computer_science: { ios: "desktopcomputer", initials: "CS" },
+};
+
 export const Space = { xs: 4, sm: 8, md: 12, lg: 16, xl: 24, xxl: 32 } as const;
-export const Radius = { sm: 8, md: 12, lg: 16, pill: 999 } as const;
+export const Radius = { sm: 8, md: 12, lg: 16, xl: 22, pill: 999 } as const;
 
 export const Fonts = Platform.select({
   ios: { sans: "system-ui", mono: "ui-monospace" },

@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, Choices, Field, FormError } from "@/components/form";
 import { PlanCard } from "@/components/plan-card";
 import { WrittenBuilder } from "@/components/written-builder";
+import { Screen } from "@/components/premium";
 import { ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Radius, Space, TAB_SCREEN_TOP } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
@@ -16,10 +17,10 @@ import { useAuth } from "@/lib/auth";
 const newKey = () => `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 12)}`;
 
 export default function PracticeScreen() {
-  const c = useTheme();
   const { state } = useAuth();
   return (
-    <SafeAreaView edges={["top"]} style={{ flex: 1, backgroundColor: c.background }}>
+    <Screen>
+    <SafeAreaView edges={["top"]} style={{ flex: 1 }}>
       <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={{ padding: Space.lg, paddingTop: TAB_SCREEN_TOP, gap: Space.lg }}>
         <T variant="title">Practice</T>
         <T variant="muted">Build a test from your textbook chapters. Only questions approved by an independent subject reviewer are used.</T>
@@ -52,6 +53,7 @@ export default function PracticeScreen() {
         )}
       </ScrollView>
     </SafeAreaView>
+    </Screen>
   );
 }
 

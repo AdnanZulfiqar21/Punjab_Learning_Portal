@@ -5,7 +5,7 @@ import { useTheme } from "@/hooks/use-theme";
 export default function TabsLayout() {
   const c = useTheme();
   return (
-    <NativeTabs backgroundColor={c.surface} indicatorColor={c.accentSoft} labelStyle={{ selected: { color: c.text } }}>
+    <NativeTabs backgroundColor={c.surface} tintColor={c.accent} indicatorColor={c.accentSoft} labelStyle={{ selected: { color: c.accent } }}>
       <NativeTabs.Trigger name="index">
         <NativeTabs.Trigger.Label>Learn</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon src={require("@/assets/images/tabIcons/home.png")} renderingMode="template" />

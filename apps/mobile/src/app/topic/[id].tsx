@@ -8,6 +8,7 @@ import { Pressable, ScrollView, View, type NativeScrollEvent, type NativeSynthet
 
 import { LectureView } from "@/components/lecture-view";
 import { LessonBlocks } from "@/components/lesson-blocks";
+import { Banner, BannerText } from "@/components/premium";
 import { CompletionToggle, LessonNote, SaveFormula } from "@/components/lesson-study";
 import { Chip, ErrorState, LinkButton, Loading, Notice, Segmented, T } from "@/components/ui";
 import { Space, subjectKey } from "@/constants/theme";
@@ -186,24 +187,23 @@ function Reader({
         // CHAPTER-OPENING-01 (owner-approved for every book, 2026-10-27): the chapter's first topic opens with
         // the chapter itself, its name large in the subject colour on a tinted panel; the topic's own title follows.
         <View style={{ gap: Space.md }}>
-          <View style={{ overflow: "hidden", borderRadius: 16, borderWidth: 1, borderColor: c.border, backgroundColor: c.accentSoft, padding: Space.lg, gap: Space.sm }}>
-            <T aria-hidden importantForAccessibility="no-hide-descendants" style={{ position: "absolute", right: Space.md, bottom: -24, fontSize: 112, lineHeight: 120, fontWeight: "800", color: c.accent, opacity: 0.1 }}>
+          {/* PREMIUM-MOBILE-01: the opening panel is the subject's gradient banner, as on the web (PREMIUM-LOOK-01). */}
+          <Banner subject={reading.subject_name}>
+            <T aria-hidden importantForAccessibility="no-hide-descendants" style={{ position: "absolute", right: Space.md, bottom: -24, fontSize: 112, lineHeight: 120, fontWeight: "800", color: "#ffffff", opacity: 0.14 }}>
               {reading.chapter_number}
             </T>
             <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, flexWrap: "wrap" }}>
               <Pressable accessibilityRole="button" accessibilityLabel={`Back to chapter ${reading.chapter_number}: ${reading.chapter_title}`} onPress={() => router.push({ pathname: "/chapter/[id]", params: { id: reading.chapter_id } })}>
-                <T variant="eyebrow">
+                <BannerText variant="eyebrow">
                   {GRADE_LABEL[reading.grade_number] ?? `Class ${reading.grade_number}`} · {reading.subject_name}
-                </T>
+                </BannerText>
               </Pressable>
               {reading.availability === "private_preview" ? <Chip label="Draft preview: not yet reviewed or published">Draft preview</Chip> : null}
             </View>
-            <T variant="eyebrow" style={{ color: c.accent, letterSpacing: 2 }}>{`CHAPTER ${reading.chapter_number}`}</T>
-            <T accessibilityRole="header" style={{ fontSize: 36, lineHeight: 42, fontWeight: "800", color: c.accent, letterSpacing: -0.5 }}>
-              {reading.chapter_title}
-            </T>
-            <View style={{ height: 4, width: 56, borderRadius: 2, backgroundColor: c.accent }} />
-          </View>
+            <BannerText variant="eyebrow">{`CHAPTER ${reading.chapter_number}`}</BannerText>
+            <BannerText variant="title">{reading.chapter_title}</BannerText>
+            <View style={{ height: 4, width: 56, borderRadius: 2, backgroundColor: "rgba(255,255,255,0.8)" }} />
+          </Banner>
           <T variant="heading" accessibilityRole="header" style={{ color: toneColor(headingTone(reading.number), c) }}>
             {reading.number ? `${reading.number} ${reading.title}` : reading.title}
           </T>

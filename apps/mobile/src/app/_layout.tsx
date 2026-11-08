@@ -1,7 +1,9 @@
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from "expo-router";
+import { Outfit_600SemiBold, Outfit_700Bold, useFonts } from "@expo-google-fonts/outfit";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useState } from "react";
 
+import { HeadingFont } from "@/constants/theme";
 import { useScheme, useTheme } from "@/hooks/use-theme";
 import { VersionGate } from "@/components/version-gate";
 import { loadApiOriginOverride } from "@/lib/api-origin";
@@ -13,13 +15,16 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [ready, setReady] = useState(false);
+  // PREMIUM-MOBILE-01: the heading font ships inside the app; a failed load falls back to the system font.
+  const [fontsLoaded, fontError] = useFonts({ Outfit_600SemiBold, Outfit_700Bold });
+  const fontsDone = fontsLoaded || !!fontError;
   useEffect(() => {
-    loadApiOriginOverride().finally(() => {
-      setReady(true);
-      SplashScreen.hideAsync();
-    });
+    loadApiOriginOverride().finally(() => setReady(true));
   }, []);
-  if (!ready) return null; // the splash screen stays until the API address is known
+  useEffect(() => {
+    if (ready && fontsDone) SplashScreen.hideAsync();
+  }, [ready, fontsDone]);
+  if (!ready || !fontsDone) return null; // the splash screen stays until the API address and the fonts are known
   return (
     <VersionGate>
     <AuthProvider>
@@ -42,8 +47,18 @@ function Shell() {
   return (
     <ThemeProvider
       value={{ ...base, colors: { ...base.colors, background: c.background, card: c.surface, text: c.text, border: c.border, primary: c.accent } }}>
-      <Stack screenOptions={{ headerTintColor: c.accent, headerTitleStyle: { color: c.text }, animation: still ? "none" : "default" }}>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      {/* PREMIUM-MOBILE-01: a quiet header on the page colour (no rule under it), the title in Outfit, and only the back
+          chevron, so a long title or "(tabs)" never fills the back button. */}
+      <Stack
+        screenOptions={{
+          headerTintColor: c.accent,
+          headerTitleStyle: { color: c.text, fontFamily: HeadingFont.semibold, fontSize: 17 },
+          headerStyle: { backgroundColor: c.background },
+          headerShadowVisible: false,
+          headerBackButtonDisplayMode: "minimal",
+          animation: still ? "none" : "default",
+        }}>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false, title: "Learn" }} />
         <Stack.Screen name="book/[grade]/[subject]" options={{ title: "Chapters" }} />
         <Stack.Screen name="chapter/[id]" options={{ title: "Chapter" }} />
         <Stack.Screen name="topic/[id]" options={{ title: "Lesson" }} />

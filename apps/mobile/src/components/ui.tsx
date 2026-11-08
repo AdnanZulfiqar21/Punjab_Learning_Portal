@@ -2,8 +2,8 @@ import { router } from "expo-router";
 import type { ReactNode } from "react";
 import { ActivityIndicator, Pressable, StyleSheet, Text, View, type TextProps, type ViewStyle } from "react-native";
 
-import { Radius, Space } from "@/constants/theme";
-import { useTheme } from "@/hooks/use-theme";
+import { Glass, HeadingFont, Radius, Space } from "@/constants/theme";
+import { useScheme, useTheme } from "@/hooks/use-theme";
 import type { ApiError } from "@/lib/api";
 import { useDisplay } from "@/lib/display-context";
 
@@ -27,9 +27,10 @@ export function T({ variant = "body", style, ...rest }: TextProps & { variant?: 
 
 // Reading sizes: 16/24 body for long lessons, a clear step between title, section and sub-section.
 const text = StyleSheet.create({
-  title: { fontSize: 27, lineHeight: 33, fontWeight: "700", letterSpacing: -0.3 },
-  heading: { fontSize: 20, lineHeight: 26, fontWeight: "700" },
-  subheading: { fontSize: 17, lineHeight: 24, fontWeight: "600" },
+  // PREMIUM-MOBILE-01: titles and headings in Outfit, as on the web (the weight is in the font, so no fontWeight).
+  title: { fontSize: 30, lineHeight: 36, fontFamily: HeadingFont.bold, letterSpacing: -0.4 },
+  heading: { fontSize: 21, lineHeight: 27, fontFamily: HeadingFont.semibold, letterSpacing: -0.2 },
+  subheading: { fontSize: 18, lineHeight: 24, fontFamily: HeadingFont.semibold },
   body: { fontSize: 16, lineHeight: 24 },
   muted: { fontSize: 15, lineHeight: 22 },
   small: { fontSize: 13, lineHeight: 18 },
@@ -39,14 +40,16 @@ const text = StyleSheet.create({
 
 export function Card({ children, onPress, style, label }: { children: ReactNode; onPress?: () => void; style?: ViewStyle; label?: string }) {
   const c = useTheme();
-  const base = [styles.card, { backgroundColor: c.surface, borderColor: c.border }, style];
+  const glass = Glass[useScheme()];
+  // PREMIUM-MOBILE-01: a frosted card (translucent surface, light hairline, soft shadow) as on the web.
+  const base = [styles.card, { backgroundColor: glass.bg, borderColor: glass.border, boxShadow: glass.shadow }, style];
   if (!onPress) return <View style={base}>{children}</View>;
   return (
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={label}
       onPress={onPress}
-      style={({ pressed }) => [...base, pressed && { borderColor: c.accent, opacity: 0.85 }]}>
+      style={({ pressed }) => [...base, pressed && { borderColor: c.accent, transform: [{ scale: 0.985 }] }]}>
       {children}
     </Pressable>
   );
@@ -95,8 +98,8 @@ export function Segmented<V extends string>({
             aria-checked={on}
             accessibilityLabel={text}
             onPress={() => onChange(v)}
-            style={[styles.segment, on && { backgroundColor: c.surface, borderColor: c.border }]}>
-            <Text style={{ color: on ? c.text : c.muted, fontSize: 15, fontWeight: on ? "700" : "500" }}>{text}</Text>
+            style={[styles.segment, on && { backgroundColor: c.surface, boxShadow: "0px 2px 8px rgba(15,29,43,0.12)" }]}>
+            <Text style={{ color: on ? c.accent : c.muted, fontSize: 15, fontWeight: on ? "700" : "500" }}>{text}</Text>
           </Pressable>
         );
       })}
@@ -176,13 +179,13 @@ export function ErrorState({ error, onRetry }: { error: ApiError; onRetry: () =>
 }
 
 export const styles = StyleSheet.create({
-  card: { borderWidth: 1, borderRadius: Radius.md, padding: Space.lg, gap: Space.xs },
+  card: { borderWidth: 1, borderRadius: Radius.xl, padding: Space.lg, gap: Space.xs },
   badge: { alignSelf: "flex-start", borderRadius: Radius.pill, paddingHorizontal: Space.sm, paddingVertical: 2 },
   chip: { alignSelf: "flex-start", borderWidth: 1, borderRadius: Radius.pill, paddingHorizontal: Space.sm, paddingVertical: 3 },
-  segmented: { flexDirection: "row", borderWidth: 1, borderRadius: Radius.sm + 2, padding: 3, gap: 3 },
-  segment: { flex: 1, minHeight: 40, alignItems: "center", justifyContent: "center", borderRadius: Radius.sm, borderWidth: 1, borderColor: "transparent" },
+  segmented: { flexDirection: "row", borderWidth: 1, borderRadius: Radius.pill, padding: 4, gap: 4 },
+  segment: { flex: 1, minHeight: 42, alignItems: "center", justifyContent: "center", borderRadius: Radius.pill, paddingHorizontal: Space.xs },
   link: { minHeight: 44, flexDirection: "row", alignItems: "center", gap: Space.sm, paddingHorizontal: Space.xs },
-  notice: { borderWidth: 1, borderRadius: Radius.md, padding: Space.lg, gap: Space.xs },
+  notice: { borderWidth: 1, borderRadius: Radius.lg, padding: Space.lg, gap: Space.xs },
   center: { flex: 1, alignItems: "center", justifyContent: "center", padding: Space.xl },
-  button: { marginTop: Space.lg, minHeight: 48, paddingHorizontal: Space.xl, borderRadius: Radius.sm, justifyContent: "center" },
+  button: { marginTop: Space.lg, minHeight: 48, paddingHorizontal: Space.xl, borderRadius: Radius.pill, justifyContent: "center" },
 });

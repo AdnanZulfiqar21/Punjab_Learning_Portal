@@ -7,6 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import type { Discovery, Me, ProfileInput } from "@portal/contracts";
 
 import { LearnContextPicker } from "@/components/learn-context-picker";
+import { Screen, SubjectTile } from "@/components/premium";
 import { Badge, Card, ErrorState, LinkButton, Loading, Notice, T } from "@/components/ui";
 import { Space, SubjectAccents, subjectKey, TAB_SCREEN_TOP } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
@@ -54,19 +55,23 @@ export default function LearnScreen() {
 
   const ready = loaded && auth.state.status !== "loading";
   return (
-    <SafeAreaView edges={["top"]} style={{ flex: 1, backgroundColor: c.background }}>
-      <ScrollView contentContainerStyle={{ padding: Space.lg, paddingTop: TAB_SCREEN_TOP, gap: Space.lg }}>
-        <T variant="title" accessibilityRole="header">
-          Learn
-        </T>
+    <Screen>
+    <SafeAreaView edges={["top"]} style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={{ padding: Space.lg, paddingTop: TAB_SCREEN_TOP, paddingBottom: Space.xxl * 3, gap: Space.lg }}>
+        <View style={{ gap: 2 }}>
+          <T variant="eyebrow">Punjab Learning Portal</T>
+          <T variant="title" accessibilityRole="header" style={{ fontSize: 34, lineHeight: 40 }}>
+            Learn
+          </T>
+        </View>
         {!ready ? (
           <Loading label="Loading" />
         ) : !context || editing ? (
           <LearnContextPicker value={partial} tracks={tracks} onChange={choose} onCancel={context ? () => setEditing(false) : undefined} saving={saved} />
         ) : (
-          <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm }}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, borderRadius: 999, paddingLeft: Space.lg, paddingVertical: Space.xs, backgroundColor: c.accentSoft }}>
             <View style={{ flex: 1 }}>
-              <T style={{ fontWeight: "700" }}>{contextLine(context)}</T>
+              <T style={{ fontWeight: "700", color: c.accent }}>{contextLine(context)}</T>
               <T variant="small">{source === "profile" ? "From your profile" : token ? "Chosen on this device" : "Chosen on this device · sign in to keep it"}</T>
             </View>
             <LinkButton label="Change" accessibilityLabel="Change class or study group" onPress={() => setEditing(true)} />
@@ -79,6 +84,7 @@ export default function LearnScreen() {
         {token ? <LinkButton label="Your dashboard and tests" onPress={() => router.push("/dashboard")} /> : null}
       </ScrollView>
     </SafeAreaView>
+    </Screen>
   );
 }
 
@@ -169,17 +175,26 @@ function Books({ data, context }: { data: Discovery; context: LearnContext }) {
             <Card
               key={book.book_id}
               label={`${GRADE_LABEL[book.grade] ?? ""} ${book.subject_name}, ${book.chapter_count} ${book.chapter_label.toLowerCase()}s`}
-              style={{ borderLeftWidth: 4, borderLeftColor: accent }}
               onPress={() => router.push({ pathname: "/book/[grade]/[subject]", params: { grade: String(book.grade), subject: book.subject } })}>
-              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: Space.sm }}>
-                <T variant="subheading" style={{ flexShrink: 1 }}>
-                  {book.subject_name}
+              {/* PREMIUM-MOBILE-01: the subject's icon tile, as on the web */}
+              <View style={{ flexDirection: "row", alignItems: "center", gap: Space.md }}>
+                <SubjectTile subject={book.subject} />
+                <View style={{ flex: 1, gap: 2 }}>
+                  <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: Space.sm }}>
+                    <T variant="subheading" style={{ flexShrink: 1 }}>
+                      {book.subject_name}
+                    </T>
+                    {book.completeness !== "complete" && <Badge tone="warn">Source has gaps</Badge>}
+                  </View>
+                  <T variant="small" style={{ color: accent, fontWeight: "600" }}>
+                    {book.chapter_count} {book.chapter_label.toLowerCase()}s
+                  </T>
+                  <T variant="small">{bookSummary(book)}</T>
+                </View>
+                <T variant="heading" style={{ color: accent }} accessibilityElementsHidden>
+                  ›
                 </T>
-                {book.completeness !== "complete" && <Badge tone="warn">Source has gaps</Badge>}
               </View>
-              <T variant="small">
-                {book.chapter_count} {book.chapter_label.toLowerCase()}s · {bookSummary(book)}
-              </T>
             </Card>
           );
         })}
