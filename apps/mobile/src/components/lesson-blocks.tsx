@@ -12,7 +12,7 @@ import { Model3D } from "@/components/model3d";
 import { LinkButton, T } from "@/components/ui";
 import { CodeColors, Fonts, Radius, Space } from "@/constants/theme";
 import { useScheme, useTheme } from "@/hooks/use-theme";
-import { bookBoxKind, isMarginNote, type BookBoxKind } from "@/lib/book-box";
+import { bookBoxKind, isMarginNote, isSideFigure, type BookBoxKind } from "@/lib/book-box";
 import { bookErrors, markPieces, styledPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
@@ -152,6 +152,31 @@ export function LessonBlocks({
     <View style={{ gap: Space.lg }}>
       {blocks.map((b, i) => {
         if (isQuickCheck(blocks[i - 1], b)) return null; // drawn inside the card above
+        // BOOK-LAYOUT-01 on the phone (owner, 2026-11-08: "book ma diagram right side pr hy with text ... same format book
+        // wala raho"): a figure the book prints beside a paragraph sits at the right of that paragraph, as printed.
+        if (isSideFigure(b) && besideText(blocks[i - 1])) return null; // drawn in the row above
+        if (besideText(b) && isSideFigure(blocks[i + 1])) {
+          return (
+            <View
+              key={i}
+              style={{ flexDirection: "row", alignItems: "flex-start", gap: Space.md }}
+              onLayout={
+                onBlockLayout
+                  ? (e) => {
+                      onBlockLayout(i, e.nativeEvent.layout.y);
+                      onBlockLayout(i + 1, e.nativeEvent.layout.y);
+                    }
+                  : undefined
+              }>
+              <View style={{ flex: 1 }}>
+                <BlockView block={b} assetSource={assetSource} dataSaver={dataSaver} />
+              </View>
+              <View style={{ width: "46%" }}>
+                <BlockView block={blocks[i + 1]} assetSource={assetSource} dataSaver={dataSaver} compact />
+              </View>
+            </View>
+          );
+        }
         if (isQuickCheck(b, blocks[i + 1])) {
           // Both blocks report the card's place, so a language switch still lands on it.
           return (
@@ -200,12 +225,15 @@ function ArchivedImage({
   caption,
   assetSource,
   dataSaver,
+  compact,
 }: {
   id: string;
   alt: string;
   caption?: string;
   assetSource?: AssetSource;
   dataSaver?: boolean;
+  /** Beside the text: a smaller zoom hint. */
+  compact?: boolean;
 }) {
   const c = useTheme();
   const [shown, setShown] = useState(false);
@@ -237,8 +265,8 @@ function ArchivedImage({
         <View
           pointerEvents="none"
           style={{ position: "absolute", right: Space.sm, bottom: Space.sm, backgroundColor: "rgba(17,19,23,0.72)", borderRadius: Radius.pill, paddingHorizontal: Space.sm, paddingVertical: 3 }}>
-          <T variant="small" style={{ color: "#ffffff", fontWeight: "600" }}>
-            Tap to zoom
+          <T variant="small" style={{ color: "#ffffff", fontWeight: "600", fontSize: compact ? 11 : undefined, lineHeight: compact ? 14 : undefined }}>
+            {compact ? "Zoom" : "Tap to zoom"}
           </T>
         </View>
       </Pressable>
@@ -309,7 +337,12 @@ function Item({ text, marks, bold }: { text: string; marks: string[] | null; bol
   );
 }
 
-function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSource?: AssetSource; dataSaver?: boolean }) {
+/** Text a side figure can sit beside: a paragraph or a list. */
+function besideText(b: Block | undefined): boolean {
+  return b?.type === "paragraph" || b?.type === "list";
+}
+
+function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block; assetSource?: AssetSource; dataSaver?: boolean; compact?: boolean }) {
   const c = useTheme();
   const scheme = useScheme();
   const premium = useContext(Premium);
@@ -586,8 +619,10 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
     case "diagram":
       return (
         <View style={{ gap: Space.xs }}>
-          <ArchivedImage id={str(b.asset_version_id)} alt={str(b.alt)} caption={str(b.caption)} assetSource={assetSource} dataSaver={dataSaver} />
-          <T variant="small">{str(b.caption)}</T>
+          <ArchivedImage id={str(b.asset_version_id)} alt={str(b.alt)} caption={str(b.caption)} assetSource={assetSource} dataSaver={dataSaver} compact={compact} />
+          <T variant="small" style={compact ? { fontSize: 12, lineHeight: 16 } : undefined}>
+            {str(b.caption)}
+          </T>
           {str(b.long_description) ? <Description text={str(b.long_description)} /> : null}
         </View>
       );
