@@ -54,7 +54,16 @@ export function FindInBook({ text }: { text: string }) {
       marks[0].scrollIntoView({ block: "center", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
       marks[0].focus({ preventScroll: true });
     }, 350);
-    return () => window.clearTimeout(t);
+    return () => {
+      window.clearTimeout(t);
+      // Leave the text as it was (a re-run, or another passage asked for), so marks never nest.
+      for (const mark of marks) {
+        const parent = mark.parentNode;
+        if (!parent) continue;
+        mark.replaceWith(...Array.from(mark.childNodes));
+        parent.normalize();
+      }
+    };
   }, [text]);
   return null;
 }
