@@ -25,6 +25,8 @@ type Way = { href: string; title: string; text: string; icon: ReactNode };
 
 // The other ways to practise, each a page of its own. What each one is, in the words of its page; no figures.
 const WAYS: Way[] = [
+  // PRACTICE-MCQ-01: the portal's own questions for each chapter (MCQs; short and long questions later).
+  { href: "/practice/chapters", title: "Chapter practice", text: "Our own MCQs for each chapter of your book, explained.", icon: <Icon name="list-checks" size={22} /> },
   { href: "/practice/written", title: "Written practice", text: "Answer on paper, photograph your pages, teacher-marked.", icon: <PracticeIcon name="pen-line" size={22} /> },
   { href: "/practice/mocks", title: "Mock tests", text: "Full-length tests that follow official patterns.", icon: <PracticeIcon name="timer" size={22} /> },
   { href: "/practice/notebook", title: "Mistake notebook", text: "Questions you missed or flagged come back for review.", icon: <PracticeIcon name="bookmark" size={22} /> },

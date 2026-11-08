@@ -1843,6 +1843,14 @@
             "title": "Grade Number",
             "type": "integer"
           },
+          "mcq_sets": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/BookExerciseOut"
+            },
+            "title": "Mcq Sets",
+            "type": "array"
+          },
           "papers": {
             "items": {
               "$ref": "#/components/schemas/BookPaperOut"
@@ -16935,7 +16943,8 @@
             "enum": [
               "topic",
               "exercise",
-              "paper"
+              "paper",
+              "mcq"
             ],
             "title": "Kind",
             "type": "string"
@@ -17025,7 +17034,8 @@
             "enum": [
               "topic",
               "exercise",
-              "paper"
+              "paper",
+              "mcq"
             ],
             "title": "Kind",
             "type": "string"

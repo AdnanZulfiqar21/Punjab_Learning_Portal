@@ -97,8 +97,8 @@ export type TopicReading = {
   /** CHAPTER-OPENING-01: the chapter's first topic. */
   chapter_start?: boolean;
   /** BOOK-EXERCISES-01: "exercise" is the chapter's end-of-chapter exercise, read in Practice; BOOK-PAPERS-01: so is
-   * a "paper", one of the Board papers at the end of the book. */
-  kind?: "topic" | "exercise" | "paper";
+   * a "paper", one of the Board papers at the end of the book; PRACTICE-MCQ-01: and "mcq", a chapter's practice MCQs. */
+  kind?: "topic" | "exercise" | "paper" | "mcq";
 };
 
 function origin(): string {

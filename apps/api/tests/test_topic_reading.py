@@ -207,6 +207,7 @@ def test_practice_lists_each_chapters_exercise_with_what_the_caller_can_read(cli
     numbers = [e["chapter_number"] for e in body["exercises"]]
     assert numbers == sorted(numbers)
     assert all(e["availability"] == "unavailable" and e["available_languages"] == [] for e in body["exercises"])
+    assert all(m["topic_id"] not in expected for m in body["mcq_sets"])  # PRACTICE-MCQ-01: a separate list
 
     created = client.post(
         "/v1/studio/items",
@@ -234,7 +235,15 @@ def test_the_topic_kind_rule_is_the_catalogue_key() -> None:
     cs12 = "pk-punjab/xii/computer_science/c12-cs/ch9"
     kinds = {
         key: (Topic(natural_key=f"{cs12}/{key}").kind, Topic(natural_key=f"{cs12}/{key}").practice_only)
-        for key in ("9.1", "u-business-plan-tools", "u-exercise", "u-paper-pattern", "u-model-paper", "u-paper")
+        for key in (
+            "9.1",
+            "u-business-plan-tools",
+            "u-exercise",
+            "u-paper-pattern",
+            "u-model-paper",
+            "u-paper",
+            "u-mcq",
+        )
     }
     assert kinds == {
         "9.1": ("topic", False),
@@ -243,6 +252,7 @@ def test_the_topic_kind_rule_is_the_catalogue_key() -> None:
         "u-paper-pattern": ("paper", True),
         "u-model-paper": ("paper", True),
         "u-paper": ("topic", False),
+        "u-mcq": ("mcq", True),  # PRACTICE-MCQ-01: a chapter's practice MCQs
     }
 
 

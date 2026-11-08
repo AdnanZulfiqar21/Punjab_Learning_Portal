@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { exerciseStatus, exerciseTitle, learnTopics, practiceOnly, practiceTitle, revealLabel } from "../src/lib/exercises.ts";
+import { exerciseStatus, exerciseTitle, learnTopics, mcqTitle, practiceChapters, practiceOnly, practiceTitle, revealLabel } from "../src/lib/exercises.ts";
 
 describe("book exercises", () => {
   it("leaves the exercise out of Learn's topic list", () => {
@@ -28,6 +28,19 @@ describe("book exercises", () => {
   it("names a Board paper by its own title and an exercise by its chapter", () => {
     assert.equal(practiceTitle({ kind: "paper", title: "Model Paper", chapter_number: 9 }), "Model Paper");
     assert.equal(practiceTitle({ kind: "exercise", title: "Exercise", chapter_number: 9 }), "Chapter 9 · Exercise");
+  });
+
+  it("lists a chapter's MCQs in Practice beside its exercise, by chapter", () => {
+    assert.equal(practiceOnly("mcq"), true);
+    assert.equal(practiceTitle({ kind: "mcq", title: "MCQs", chapter_number: 1 }), "Chapter 1 · MCQs");
+    assert.equal(mcqTitle("Unit", 3), "Unit 3 · MCQs");
+    const item = (id: string, n: number) => ({ topic_id: id, chapter_number: n, chapter_title: `Ch ${n}`, availability: "published", available_languages: ["en"] });
+    const chapters = practiceChapters({ exercises: [item("e2", 2), item("e1", 1)], mcq_sets: [item("m1", 1), item("m3", 3)] });
+    assert.deepEqual(
+      chapters.map((c) => [c.number, c.exercise?.topic_id, c.mcqs?.topic_id]),
+      [[1, "e1", "m1"], [2, "e2", undefined], [3, undefined, "m3"]],
+    );
+    assert.deepEqual(practiceChapters({ exercises: [] }), []);
   });
 
   it("names the exercise by its chapter", () => {
