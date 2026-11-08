@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q11",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q11",
+      "title": "Question 11",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 135,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 11: book p. 133-134; answers printed under 'EXERCISE 4.2' (book p. 303, PDF 305), numbered 2-29, matched by content"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11. Find the general solution of the differential equation \\((e^{2x} + e^{-2x})\\,dy + (e^{-2x} - e^{2x})\\,dx = 0\\).",
+            "explanation": "Only \\(x\\) appears in the coefficients, so the equation is separable: \\(dy = f(x)\\,dx\\).\nPlan: make \\(dy\\) the subject; the numerator turns out to be half the derivative of the denominator, so the integral is a logarithm.",
+            "steps": [
+              "Given: \\((e^{2x} + e^{-2x})\\,dy + (e^{-2x} - e^{2x})\\,dx = 0\\).\nTo find: the general solution.\nMethod: separable; write \\(dy = f(x)\\,dx\\) and integrate using \\(\\int\\frac{f'}{f} = \\ln|f|\\).",
+              "Separate\n\\[dy = \\dfrac{e^{2x} - e^{-2x}}{e^{2x} + e^{-2x}}\\,dx\\]\nWhy: move the \\(dx\\) term across (its bracket changes sign: \\(-(e^{-2x} - e^{2x}) = e^{2x} - e^{-2x}\\)) and divide by \\(e^{2x} + e^{-2x}\\).",
+              "Look at the derivative of the denominator\n\\[\\dfrac{d}{dx}(e^{2x} + e^{-2x}) = 2e^{2x} - 2e^{-2x}\\]\n\\[= 2(e^{2x} - e^{-2x})\\]\nWhy: chain rule, \\(\\frac{d}{dx}e^{kx} = ke^{kx}\\). So the numerator is half of this derivative.",
+              "Integrate\n\\[y = \\dfrac{1}{2}\\ln(e^{2x} + e^{-2x}) + \\dfrac{1}{2}\\ln|C|\\]\nWhy: \\(\\int\\frac{f'}{f} = \\ln|f|\\), times \\(\\frac{1}{2}\\). The constant is written as \\(\\frac{1}{2}\\ln|C|\\) so that the logs combine.",
+              "Simplify\n\\[2y = \\ln|C(e^{2x} + e^{-2x})|\\]\nWhy: multiply by 2 and use \\(\\ln a + \\ln b = \\ln ab\\).",
+              "Check\nFrom \\(y = \\frac{1}{2}\\ln(e^{2x} + e^{-2x}) + \\text{const}\\):\n\\[\\dfrac{dy}{dx} = \\dfrac{1}{2} \\cdot \\dfrac{2e^{2x} - 2e^{-2x}}{e^{2x} + e^{-2x}}\\]\n\\[= \\dfrac{e^{2x} - e^{-2x}}{e^{2x} + e^{-2x}}\\]\nThis is the separated equation."
+            ],
+            "final_answer": "\\(2y = \\ln|C(e^{2x} + e^{-2x})|\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

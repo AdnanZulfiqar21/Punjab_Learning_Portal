@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.8.4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.8.4",
+      "title": "3.8.4 Drug Dosage Required by Integrating Concentration",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 122,
+          "pdf_to": 123,
+          "note": "Book p. 120-121: 3.8.4 Core Concept box (drug concentration, MIC, AUC, why integrate) and Example 72 (Basic AUC Calculation)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Core Concept: Drug Concentration and Integration"
+          },
+          {
+            "type": "paragraph",
+            "text": "Think of fighting an infection as a battle between the drug and the bacteria.",
+            "bold": [
+              "battle"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "text": "Drug Concentration \\(C(t)\\): like the \"number of soldiers\" in the bloodstream at time \\(t\\). Right after a dose there are many; over time the body removes them (metabolism/excretion), so the number decreases.\nMinimum Inhibitory Concentration (MIC): the minimum number of soldiers needed to hold the battlefield and stop the bacteria from growing. If the concentration drops below it, the infection can start winning again.\nArea Under the Curve (AUC): on a graph of concentration against time, the area under the curve is the total fighting effort over time. A short time with many soldiers can give the same total effort as a long time with fewer soldiers. This total effort (AUC) is what matters for killing the bacteria.\nWhy Integrate? Integration adds up the total \"soldier-hours\" (concentration \\(\\times\\) time). If \\(C(t)\\) is the concentration at time \\(t\\), then\n\\[\\text{AUC} = \\int_{t_1}^{t_2} C(t)\\,dt\\]\nThis AUC measures total drug exposure. Doctors know from experiments: if AUC is too small, the drug won't work well; if AUC is too large, there is a risk of side effects. So they calculate the AUC to decide the right dose and frequency.",
+            "bold": [
+              "Drug Concentration",
+              "Minimum Inhibitory Concentration (MIC):",
+              "Area Under the Curve (AUC):",
+              "Why Integrate?",
+              "total drug exposure"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A common model (used in Example 72 and Exercise 3.7) is exponential decay: \\(C(t) = C_0e^{-kt}\\), where \\(C_0\\) is the concentration just after the dose and \\(k > 0\\) tells how fast the body removes the drug.\nFor this model:\n\\[\\int_{0}^{T} C_0e^{-kt}\\,dt = \\dfrac{C_0}{k}\\big(1 - e^{-kT}\\big)\\]\n\\[\\int_{0}^{\\infty} C_0e^{-kt}\\,dt = \\dfrac{C_0}{k}\\]\nThe second integral has an infinite upper limit (an improper integral): we integrate up to \\(b\\) and let \\(b \\to \\infty\\); since \\(e^{-kb} \\to 0\\), the area stays finite.\nUnit of AUC: (mg/L) \\(\\times\\) hours \\(=\\) mg hr/L."
+          },
+          {
+            "type": "example",
+            "title": "Example 72",
+            "problem": "Basic AUC Calculation: A patient is given an intravenous dose of an antibiotic. The concentration in the bloodstream over time is modeled by \\(C(t) = 8e^{-0.15t}\\) (mg/L), where \\(t\\) is in hours.\n(a) Find the total drug exposure (AUC) from \\(t = 0\\) to \\(t = 6\\) hours.\n(b) What is the AUC from \\(t = 0\\) to infinity?\n(c) If the minimum required total exposure over the first 6 hours is 40 mg hr/L, is the drug exposure from this dose sufficient for a 6-hour treatment?",
+            "steps": [
+              "Given: \\(C(t) = 8e^{-0.15t}\\) mg/L, \\(t\\) in hours; required exposure over 6 hours: 40 mg hr/L.\nTo find: (a) \\(\\text{AUC}_{0\\to 6}\\); (b) \\(\\text{AUC}_{0\\to\\infty}\\); (c) whether the dose is enough.\nMethod: AUC is the definite integral of \\(C(t)\\). Use \\(\\int e^{kt}\\,dt = \\frac{e^{kt}}{k}\\) with \\(k = -0.15\\). For (b) the upper limit is infinity, so we let it grow and use \\(e^{-0.15t} \\to 0\\).",
+              "(a) AUC from \\(t = 0\\) to \\(t = 6\\)\n\\[\\text{AUC}_{0\\to 6} = \\int_{0}^{6} 8e^{-0.15t}\\,dt\\]\n\\[= 8\\left[\\dfrac{e^{-0.15t}}{-0.15}\\right]_{0}^{6}\\]\n\\[= \\dfrac{8}{-0.15}\\big(e^{-0.15\\times 6} - e^{0}\\big)\\]\nWhy: the antiderivative of \\(e^{-0.15t}\\) is \\(\\frac{e^{-0.15t}}{-0.15}\\) (divide by the coefficient of \\(t\\)).",
+              "(a) Simplify\n\\[= \\dfrac{8}{0.15}\\big(1 - e^{-0.9}\\big)\\]\n\\[= 53.333 \\times 0.5934\\]\n\\[\\approx 31.65\\text{ mg hr/L}\\]\nWhy: \\(\\frac{8}{-0.15}(e^{-0.9} - 1) = \\frac{8}{0.15}(1 - e^{-0.9})\\) (two minus signs cancel); \\(e^{-0.9} \\approx 0.4066\\), so \\(1 - e^{-0.9} \\approx 0.5934\\).",
+              "(b) AUC from \\(t = 0\\) to infinity (as printed)\n\\[\\text{AUC}_{0\\to\\infty} = \\int_{0}^{\\infty} 8e^{-0.15t}\\,dt8\\left[\\dfrac{e^{-0.15t}}{-0.15}\\right]_{0}^{\\infty}\\]\n\\[= \\dfrac{8}{0.15}(1 - 0) = 53.33\\text{ mg hr/L}\\]\nWhy: as \\(t \\to \\infty\\), \\(e^{-0.15t} \\to 0\\), so the bracket becomes \\(\\frac{0 - 1}{-0.15} = \\frac{1}{0.15}\\). (Strictly, \\(\\int_0^\\infty\\) means \\(\\lim_{b\\to\\infty}\\int_0^b\\).)",
+              "(c) Compare with the requirement\nRequired total exposure over first 6 hours \\(= 40\\) mg hr/L.\nActual AUC from \\(t = 0\\) to \\(t = 6\\) \\(= 31.65\\) mg hr/L.\n\\[31.65 < 40\\]\nConclusion: No. The drug exposure from this dose over 6 hours is insufficient to meet the required minimum of 40 mg hr/L.\nWhy: the 6-hour exposure is the AUC of part (a); it falls short of the minimum.",
+              "Check:\nThe 6-hour AUC must be less than the total AUC to infinity: \\(31.65 < 53.33\\). And \\(\\frac{31.65}{53.33} \\approx 0.593 = 1 - e^{-0.9}\\), the fraction of the total exposure delivered in the first 6 hours."
+            ],
+            "answer": "(a) \\(\\text{AUC}_{0\\to 6} = \\frac{8}{0.15}(1 - e^{-0.9}) \\approx 31.65\\) mg hr/L. (b) \\(\\text{AUC}_{0\\to\\infty} = \\frac{8}{0.15} \\approx 53.33\\) mg hr/L. (c) No: \\(31.65 < 40\\), so one dose is not sufficient for the 6-hour treatment.",
+            "book_errors": [
+              "dt8"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In part (b) the book prints \"\\(dt8\\)\": a stray 8 after \\(dt\\) and a missing equals sign. It should read \\(\\int_{0}^{\\infty} 8e^{-0.15t}\\,dt = 8\\left[\\frac{e^{-0.15t}}{-0.15}\\right]_{0}^{\\infty}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\text{AUC} = \\int_{t_1}^{t_2} C(t)\\,dt\\) measures total drug exposure; unit mg hr/L.\n2. For \\(C(t) = C_0e^{-kt}\\): \\(\\text{AUC}_{0\\to T} = \\frac{C_0}{k}(1 - e^{-kT})\\) and \\(\\text{AUC}_{0\\to\\infty} = \\frac{C_0}{k}\\).\n3. A dose is sufficient when its AUC over the required time is at least the required exposure.\n4. When several doses are given, their concentrations add (each dose counted from its own starting time)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Dividing by \\(+0.15\\) instead of \\(-0.15\\) when integrating \\(e^{-0.15t}\\), which gives a negative AUC.\n2. Comparing a concentration (mg/L) with an exposure (mg hr/L): compare AUC with AUC.\n3. Thinking \\(\\int_0^\\infty\\) must be infinite: the curve falls fast enough that the area is finite."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-3-Q10",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-3-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 141,
+          "pdf_to": 141,
+          "note": "Exercise 4.3, Q10; book page 139"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 305,
+          "pdf_to": 305,
+          "note": "Answers, Exercise 4.3, key 10"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10 An RL circuit has a battery of 12 volts, a resistor of 60 Ohms, and an inductor of 2 Henries. If the circuit is closed at time \\(t = 0\\) with initial current zero, find the current \\(I(t)\\) flowing in the circuit at any time \\(t\\).",
+            "explanation": "RL circuit: \\(L\\frac{dI}{dt} = V_S - RI\\) (Example 4 (ii), Section 4.1.1). With \\(L = 2\\), \\(V_S = 12\\), \\(R = 60\\) it is separable.\nPlan: separate, integrate, use \\(I(0) = 0\\), as in Example 13.",
+            "steps": [
+              "Given: \\(V_S = 12\\) V, \\(R = 60\\ \\Omega\\), \\(L = 2\\) H, \\(I(0) = 0\\).\nTo find: \\(I(t)\\).\nMethod: RL circuit model, separable; the initial condition fixes the constant and the sign.",
+              "Write the differential equation\n\\[2\\dfrac{dI}{dt} = 12 - 60I\\]\n\\[\\dfrac{dI}{dt} = 6 - 30I = 6(1 - 5I)\\]\nWhy: substitute the values and divide by L = 2.",
+              "Separate and integrate\n\\[\\int\\dfrac{dI}{1 - 5I} = \\int 6\\,dt\\]\n\\[-\\dfrac{1}{5}\\ln|1 - 5I| = 6t + C\\]\nWhy: the derivative of \\(1 - 5I\\) is \\(-5\\), so \\(\\int\\frac{dI}{1 - 5I} = -\\frac{1}{5}\\ln|1 - 5I|\\).",
+              "Use \\(I(0) = 0\\)\n\\[-\\dfrac{1}{5}\\ln 1 = 0 + C \\Rightarrow C = 0\\]\nWhy: \\(\\ln 1 = 0\\).",
+              "Solve for \\(I\\)\n\\[\\ln|1 - 5I| = -30t\\]\n\\[1 - 5I = e^{-30t}\\]\n\\[I(t) = \\dfrac{1}{5}\\left(1 - e^{-30t}\\right)\\]\nWhy: multiply by \\(-5\\), take \\(e\\). At \\(t = 0\\), \\(1 - 5I = 1 > 0\\), so the \\(+\\) sign is the right one (as in Example 13).",
+              "Check\n\\[\\dfrac{dI}{dt} = 6e^{-30t}\\]\n\\[2(6e^{-30t}) + 60 \\cdot \\tfrac{1}{5}(1 - e^{-30t}) = 12 \\;\\checkmark\\]\n\\(I(0) = 0\\), and as \\(t \\to \\infty\\), \\(I \\to \\frac{1}{5} = \\frac{12}{60} = \\frac{V_S}{R}\\) \\(\\checkmark\\)"
+            ],
+            "final_answer": "\\(I(t) = \\frac{1}{5}\\left(1 - e^{-30t}\\right)\\) amperes"
+          }
+        ]
+      }
+    }
+  ]
+}

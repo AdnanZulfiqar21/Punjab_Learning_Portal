@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.5.3-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.5.3",
+      "title": "8.5.3 Electronic Circuits (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-8.5.3",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 253,
+          "pdf_to": 254,
+          "note": "Book p. 251-252: 8.5.3 Electronic Circuits, Example 3 Diode/AC Circuit (shown as Example 10): sin V - 0.5V = 0 by Regula-Falsi on [1, 2], V = 1.90 volts."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab electronics ki baari hai. Kitab kehti hai: diodes aur transistors jaise electronic parts aksar voltage aur current ke darmiyan nonlinear rishte (relationships) banate hain. Circuits mein kuch points par voltage ya current nonlinear equations ko satisfy karte hain. Aap ke mobile charger aur ghar ke UPS ke andar bhi aise hi parts lage hote hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "Kitab is example ko 'Example 3' chhaapti hai (is unit mein yeh doosra Example 3 hai); hum ise Example 10 dikhate hain (8.5.1 wala note dekhiye)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yahan Regula-Falsi kyun? Bisection ki tarah yeh bhi root ko sign change wale interval mein qaid rakhta hai, lekin darmiyani point ki bajaye dono kinaron ko jorne wali secant line use karta hai, jo aam taur par root ke bohat qareeb girti hai. Is liye yahan sirf teen iterations kaafi hain, jab ke bisection ko das ke qareeb chahiye hotin."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "Diode/AC Circuit. In a circuit, the voltage \\(V\\) across a component satisfies the equation \\(\\sin V - 0.5V = 0\\). Find a non-zero real value of \\(V\\) correct to two decimal places using Regula-Falsi method.\nNote: \\(V\\) represents the voltage in volts.",
+            "steps": [
+              "Diya gaya: \\(\\sin V - 0.5V = 0\\), jahan \\(V\\) volts mein voltage hai.\nMaloom karna: \\(V\\) ki koi non-zero (zero ke ilawa) real value, do decimal places tak.\nTareeqa: Regula-Falsi. \\((a, f(a))\\) aur \\((b, f(b))\\) ko seedhi line (secant) se jorte hain, aur jahan yeh line x-axis ko kaat-ti hai usay naya andaza maante hain. Sine ki wajah se calculator radian mode mein hona chahiye.",
+              "Function banaiye\n\\[f(V) = \\sin V - 0.5V\\]\nKyun: Regula-Falsi \\(f(V) = 0\\) ka root dhoondta hai. Dhyan dein, \\(V = 0\\) to seedha root hai kyun ke \\(\\sin 0 = 0\\); is liye sawal 'non-zero' value maang raha hai, warna jawab bekaar sa hota.",
+              "Interval chuniye\n\\[f(1) = \\sin 1 - 0.5 \\approx 0.3415 > 0\\]\n\\[f(2) = \\sin 2 - 1 \\approx -0.0907 < 0\\]\n\\(\\Rightarrow [1, 2]\\) mein sign badalta hai.\nKyun: radian mein \\(\\sin 1 = 0.8415\\) aur \\(\\sin 2 = 0.9093\\). Ek value positive aur ek negative, to darmiyan mein root zaroor hai.\nDhyan dein: degree mode mein sin 1 = 0.0175 aata hai aur saara hisaab ghalat ho jata hai.",
+              "Continuity\n\\(f(c) = \\lim_{V \\to c} (\\sin V - 0.5V)\\) har \\(c \\in [1, 2]\\) ke liye.\n\\(\\Rightarrow f\\) sign change wale interval \\([1, 2]\\) par continuous hai, is liye Regula-Falsi method \\([1, 2]\\) ke saath lag sakta hai.\nKyun: sin V aur 0.5V dono continuous hain, aur do continuous functions ka farq bhi continuous hota hai.",
+              "Regula-Falsi formula\n\\[V_c = \\dfrac{af(b) - bf(a)}{f(b) - f(a)}\\]\nKyun: yeh woh point hai jahan dono kinaron ko jorne wali secant line x-axis ko kaat-ti hai (8.3.3). Graph seedha na ho tab bhi yeh line root ka achha andaza deti hai.",
+              "Iteration 1: a = 1, b = 2\n\\[V_c = \\dfrac{1(-0.0907) - 2(0.3415)}{-0.0907 - 0.3415}\\]\n\\[= \\dfrac{-0.7737}{-0.4322} = 1.7901\\]\n\\[f(1.7901) = 0.9760 - 0.8951 = 0.0810\\]\nKyun: \\(f(1.7901)\\) positive hai, bilkul \\(f(1)\\) jaisa. Is liye \\(a\\) ki jagah 1.7901 aaya aur naya interval \\([1.7901, 2]\\) bana.",
+              "Iteration 2: a = 1.7901, b = 2\n\\[V_c = \\dfrac{1.7901(-0.0907) - 2(0.0810)}{-0.0907 - 0.0810}\\]\n\\[= \\dfrac{-0.3244}{-0.1717} = 1.8891\\]\n\\[f(1.8891) = 0.9498 - 0.9446 = 0.0052\\]\nKyun: phir positive, to naya interval \\([1.8891, 2]\\). Dekhiye \\(b = 2\\) apni jagah se hil hi nahin raha; Regula-Falsi mein aksar ek kinara qaim rehta hai.",
+              "Iteration 3: a = 1.8891, b = 2\n\\[V_c = \\dfrac{1.8891(-0.0907) - 2(0.0052)}{-0.0907 - 0.0052}\\]\n\\[= \\dfrac{-0.1817}{-0.0959} = 1.8951\\]\n\\[f(1.8951) = 0.9479 - 0.9476 = 0.0003\\]\nKyun: teeno iterations neeche Iterations Table mein ek saath di gayi hain.",
+              "Checking\n\\(|f(1.8951)| = 0.0003 < 0.01\\), is liye hum ruk jate hain.\nKyun: 1.8951 par \\(f\\) taqreeban zero hai (yeh 8.3.1 ki tolerance 0.005 se bhi kam hai).",
+              "Tasdeeq:\nSign test: \\(f(1.895) \\approx 0.0004 > 0\\) aur \\(f(1.905) \\approx -0.0078 < 0\\), yani root \\(]1.895, 1.905[\\) mein hai aur 1.90 par round hota hai.\nAsal root \\(V = 1.8955\\ldots\\) hai."
+            ],
+            "answer": "\\(V \\approx 1.90\\) volts (do decimal places tak)"
+          },
+          {
+            "type": "table",
+            "caption": "Iterations Table: (4 decimal places)",
+            "header": [
+              "Iteration",
+              "\\(a\\)",
+              "\\(b\\)",
+              "\\(V_c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\)",
+              "\\(f(V_c)\\)",
+              "New Interval"
+            ],
+            "rows": [
+              [
+                "1",
+                "1 (+)",
+                "2 (-)",
+                "1.7901 (+)",
+                "0.0810",
+                "[1.7901, 2]"
+              ],
+              [
+                "2",
+                "1.7901 (+)",
+                "2 (-)",
+                "1.8891 (+)",
+                "0.0052",
+                "[1.8891, 2]"
+              ],
+              [
+                "3",
+                "1.8891 (+)",
+                "2 (-)",
+                "1.8951 (+)",
+                "0.0003",
+                "Stop"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Checking: \\(|f(1.8951)| = 0.0003 < 0.01\\). Aakhri jawab: \\(V \\approx 1.90\\) volts (do decimal places tak)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(b = 2\\) kabhi kyun nahin hilta? \\([1, 2]\\) par \\(f(V) = \\sin V - 0.5V\\) ka graph neeche ki taraf jhuka hua hai (\\(f''(V) = -\\sin V < 0\\)). Is liye har secant line curve ke neeche rehti hai aur x-axis ko root ke LEFT par kaat-ti hai. Har naye point par \\(f > 0\\) hota hai aur woh \\(a\\) ki jagah leta hai; right wala kinara qaim rehta hai.\nAakhri jawab mein aakhri zero bhi likhiye: 1.90 (na ke 1.9), kyun ke yeh batata hai ke value do decimal places tak durust hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is equation ko graph ki nazar se bhi samajhiye. Ek taraf y = sin V ki lehar hai, doosri taraf y = 0.5V ki seedhi line jo origin se guzarti hai. Jahan yeh dono ek doosre ko kaat-ti hain, wahi hamare roots hain. Origin par dono milti hain (V = 0), aur phir V taqreeban 1.9 par dobara.\nIs ke baad line itni ooper chali jati hai ke sine (jo kabhi 1 se bara nahin hota) usay dobara nahin chhoo sakta, kyun ke V = 2 ke baad 0.5V hamesha 1 ya us se zyada hai. Is liye positive taraf sirf ek hi non-zero root hai, aur hum ne wahi dhoonda."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Kya is equation ka koi negative root bhi hai? \\(f(-V) = -\\sin V + 0.5V = -f(V)\\), yani \\(f\\) odd function hai. Agar \\(V = 1.90\\) root hai to \\(V = -1.90\\) bhi root hai! Kitab ne sirf ek non-zero value maangi thi, is liye positive wali di."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Isi tarah \\(\\cos x = x\\) ka root Regula-Falsi se \\([0, 1]\\) mein dhoondiye: \\(f(x) = \\cos x - x\\), \\(f(0) = 1\\), \\(f(1) = -0.4597\\). Pehli iteration: \\(c = \\frac{0(-0.4597) - 1(1)}{-0.4597 - 1} = 0.6851\\), \\(f(0.6851) = 0.0893 > 0\\). Do teen iterations ke baad \\(x \\approx 0.74\\) milta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Formula mein daalne se pehle \\(f(a)\\) aur \\(f(b)\\) un ke signs ke saath likh lijiye. Zyada tar ghalat jawab \\(af(b) - bf(a)\\) mein kho jane wale minus sign se aate hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "Circuit model: \\(\\sin V - 0.5V = 0\\); \\(V = 0\\) seedha (trivial) root hai, non-zero root \\([1, 2]\\) mein hai.\nRegula-Falsi: \\(V_c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\); woh hissa rakhiye jahan sign badalta ho.\nSin ke liye radian mode.\nTeen iterations se \\(V \\approx 1.90\\) volts."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "Degree mode mein kaam karna: sin 1 = 0.0175 ban jata hai aur sign change hota hi nahin.\nJawab \\(V = 0\\) de dena: sawal non-zero value maang raha hai.\nFormula ulta likhna, jaise \\(\\frac{af(a) - bf(b)}{f(b) - f(a)}\\): har kinare ko DOOSRE kinare wali f ki value se multiply kiya jata hai."
+          }
+        ]
+      }
+    }
+  ]
+}

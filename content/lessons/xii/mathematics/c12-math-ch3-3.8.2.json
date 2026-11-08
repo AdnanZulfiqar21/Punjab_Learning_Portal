@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.8.2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.8.2",
+      "title": "3.8.2 Distance, Velocity, Acceleration",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 119,
+          "pdf_to": 121,
+          "note": "Book p. 117-119: 3.8.2 boxed results (1) and (2), distance, Figure 23, Example 68 (motion) and Example 69 (population growth rate)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Suppose a particle is moving along a straight line with position function \\(s(t)\\), velocity function \\(v(t)\\), and acceleration function \\(a(t)\\). Since \\(s'(t) = v(t)\\), the Fundamental theorem of Calculus gives:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}\\int_{t_1}^{t_2} v(t)\\,dt &= \\int_{t_1}^{t_2} s'(t)\\,dt \\\\ &= \\big[s(t)\\big]_{t_1}^{t_2} \\\\ &= s(t_2) - s(t_1)\\quad\\text{...(1)}\\end{aligned}",
+            "text_alt": "the integral from t 1 to t 2 of v of t d t equals the integral of s dash of t d t, equals s of t evaluated from t 1 to t 2, equals s of t 2 minus s of t 1, equation 1"
+          },
+          {
+            "type": "paragraph",
+            "text": "Similarly, since \\(v'(t) = a(t)\\), the Fundamental Theorem of Calculus gives:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\int_{t_1}^{t_2} a(t)\\,dt = v(t_2) - v(t_1)\\quad\\text{...(2)}",
+            "text_alt": "the integral from t 1 to t 2 of a of t d t equals v of t 2 minus v of t 1, equation 2"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read (1) in words: the integral of velocity over a time interval is the change in position, called the displacement. Read (2) in words: the integral of acceleration is the change in velocity.\nSo the chain is: position \\(\\xrightarrow{\\text{differentiate}}\\) velocity \\(\\xrightarrow{\\text{differentiate}}\\) acceleration, and integration walks the chain backwards. Each step backwards needs one starting value (\\(v(0)\\) or \\(s(0)\\)) to fix the constant."
+          },
+          {
+            "type": "paragraph",
+            "text": "If we want to calculate the distance traveled during the time interval \\([t_1, t_2]\\), we have to consider the intervals when \\(v(t) \\ge 0\\) (the particle moves to the right) and also the intervals when \\(v(t) \\le 0\\) (the particle moves to the left). In both cases the distance is computed by integrating \\(|v(t)|\\), the speed. Therefore, total distance traveled \\(= \\int_{t_2}^{t_1} v(t)\\,dt\\).",
+            "book_errors": [
+              "\\(= \\int_{t_2}^{t_1} v(t)\\,dt\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the total distance as \\(\\int_{t_2}^{t_1} v(t)\\,dt\\): the limits are upside down and the modulus is missing. As the sentence before it says, the distance is the integral of the speed \\(|v(t)|\\): total distance traveled \\(= \\int_{t_1}^{t_2} |v(t)|\\,dt\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch3-fig-3-8-2-figure-23-velocity-areas",
+            "alt": "Velocity curve v(t) against time t, starting at t1 and ending at t2 on the t-axis. It rises above the axis (shaded area A1), dips below the axis (shaded area A2) and rises above it again (shaded area A3).",
+            "caption": "Figure 23: displacement and distance as areas under a velocity curve (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Given figure shows how both displacement and distance traveled can be interpreted in terms of areas under a velocity curve."
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Displacement} = \\int_{t_1}^{t_2} v(t)\\,dt = A_1 - A_2 + A_3",
+            "text_alt": "Displacement equals the integral from t 1 to t 2 of v of t d t, equals A 1 minus A 2 plus A 3"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Distance} = \\int_{t_1}^{t_2} v(t)\\,dt = A_1 + A_2 + A_3",
+            "text_alt": "Distance equals the integral from t 1 to t 2 of v of t d t, equals A 1 plus A 2 plus A 3, as printed",
+            "book_errors": [
+              "\\int_{t_1}^{t_2} v(t)\\,dt = A_1 + A_2 + A_3"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The second line prints \\(\\text{Distance} = \\int_{t_1}^{t_2} v(t)\\,dt\\), which is the same integral as the displacement. It should be \\(\\text{Distance} = \\int_{t_1}^{t_2} |v(t)|\\,dt = A_1 + A_2 + A_3\\): taking \\(|v|\\) turns the part below the axis upwards, so \\(A_2\\) is added instead of subtracted."
+          },
+          {
+            "type": "table",
+            "caption": "Displacement and distance compared (our summary)",
+            "header": [
+              "Displacement",
+              "Distance travelled"
+            ],
+            "rows": [
+              [
+                "\\(\\int_{t_1}^{t_2} v(t)\\,dt\\)",
+                "\\(\\int_{t_1}^{t_2} |v(t)|\\,dt\\)"
+              ],
+              [
+                "Change in position \\(s(t_2) - s(t_1)\\)",
+                "Total length of the path covered"
+              ],
+              [
+                "Areas below the axis count negative: \\(A_1 - A_2 + A_3\\)",
+                "All areas count positive: \\(A_1 + A_2 + A_3\\)"
+              ],
+              [
+                "Can be positive, negative or zero",
+                "Never negative"
+              ],
+              [
+                "Needs no splitting of the interval",
+                "Split the interval where \\(v(t)\\) changes sign"
+              ]
+            ]
+          },
+          {
+            "type": "example",
+            "title": "Example 68",
+            "problem": "A particle moves along a straight line with acceleration \\(a(t) = 6t - 18\\) (m/s\\(^2\\)) and initial velocity \\(v(0) = 15\\) m/s.\n(a) Find the velocity function \\(v(t)\\).\n(b) Find the displacement of the particle during \\(0 \\le t \\le 3\\).\n(c) Find the total distance traveled during \\(0 \\le t \\le 3\\).",
+            "steps": [
+              "Given: \\(a(t) = 6t - 18\\) m/s\\(^2\\), \\(v(0) = 15\\) m/s.\nTo find: (a) \\(v(t)\\); (b) the displacement on \\([0, 3]\\); (c) the total distance on \\([0, 3]\\).\nMethod: velocity is an antiderivative of acceleration, and the starting value \\(v(0)\\) fixes the constant. Displacement is \\(\\int v\\,dt\\); distance is \\(\\int |v|\\,dt\\), so we split \\([0, 3]\\) where \\(v\\) changes sign.",
+              "(a) Integrate the acceleration (as printed)\n\\[v(t) = \\int_{0}^{t} a(t)\\,dt = \\int_{0}^{t} (6t - 18)\\,dt\\]\n\\[= 6\\dfrac{t^{2}}{2} - 18t + c\\]\n\\[= 3t^{2} - 18t + c\\]\nwhere \\(c\\) is the constant of integration.\nWhy: \\(v'(t) = a(t)\\), so \\(v\\) is an antiderivative of \\(a\\): \\(\\int t\\,dt = \\frac{t^{2}}{2}\\) and \\(\\int 18\\,dt = 18t\\). (On the limits printed here, see the correction after this example.)",
+              "(a) Use the starting velocity\n\\[v(0) = 3(0)^{2} - 18(0) + c\\]\n\\[15 = c\\]\n\\[v(t) = 3t^{2} - 18t + 15\\]\nWhy: at \\(t = 0\\) every term except \\(c\\) is zero, so \\(c\\) equals the initial velocity.",
+              "(b) Displacement on \\(0 \\le t \\le 3\\)\n\\[S = \\int_{0}^{3} (3t^{2} - 18t + 15)\\,dt\\]\n\\[= \\big[t^{3} - 9t^{2} + 15t\\big]_{0}^{3}\\]\n\\[= 27 - 81 + 45 = -9\\]\nThis means that the particle moved 9 m to the left.\nWhy: by equation (1), \\(\\int_{0}^{3} v\\,dt = s(3) - s(0)\\), the change in position. The minus sign means the final position is 9 m to the left of the start.",
+              "(c) Where does \\(v\\) change sign?\n\\[v(t) = 3(t^{2} - 6t + 5)\\]\n\\[= 3(t - 1)(t - 5)\\]\nSo \\(v(t) \\ge 0\\) on \\([0, 1]\\) and \\(v(t) \\le 0\\) on \\([1, 3]\\).\nWhy: distance counts every metre travelled, left or right, so we need \\(|v|\\). Between the roots 1 and 5 the factor \\((t - 1)\\) is positive and \\((t - 5)\\) negative, so \\(v \\le 0\\) there.",
+              "(c) Split the integral\n\\[\\int_{0}^{3}|v(t)|\\,dt = \\int_{0}^{1} v(t)\\,dt + \\int_{1}^{3}\\big(-v(t)\\big)\\,dt\\]\n\\[= \\big[t^{3} - 9t^{2} + 15t\\big]_{0}^{1} - \\big[t^{3} - 9t^{2} + 15t\\big]_{1}^{3}\\]\nWhy: on \\([1, 3]\\), \\(|v| = -v\\) because \\(v\\) is negative there.",
+              "(c) Evaluate\n\\[= \\big[(1 - 9 + 15) - 0\\big] - \\big[(27 - 81 + 45) - (1 - 9 + 15)\\big]\\]\n\\[= 7 - (-9 - 7)\\]\n\\[= 7 - (-16) = 7 + 16 = 23\\text{ m}\\]\nWhy: the particle goes 7 m to the right in the first second, then 16 m to the left.",
+              "Check:\nDisplacement \\(= 7 - 16 = -9\\) m, which agrees with part (b). Distance \\(= 7 + 16 = 23\\) m \\(\\ge |{-9}|\\), as it must be."
+            ],
+            "answer": "(a) \\(v(t) = 3t^{2} - 18t + 15\\) m/s. (b) Displacement \\(= -9\\) m (9 m to the left). (c) Total distance \\(= 23\\) m.",
+            "book_errors": [
+              "\\int_{0}^{t} a(t)\\,dt"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book writes \\(v(t) = \\int_{0}^{t} a(t)\\,dt = \\dots + c\\). A definite integral from \\(0\\) to \\(t\\) has no constant of integration; it gives \\(v(t) - v(0)\\), not \\(v(t)\\). Correct: \\(v(t) = \\int a(t)\\,dt = 3t^{2} - 18t + c\\) (an indefinite integral), or equivalently \\(v(t) = v(0) + \\int_{0}^{t} a(u)\\,du\\). Both give \\(v(t) = 3t^{2} - 18t + 15\\), so the book's answer is right."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 69 is printed under 3.8.2 but is not about motion: it uses the same idea for any rate. If \\(P'(t)\\) is a rate of change, then \\(\\int_{t_1}^{t_2} P'(t)\\,dt = P(t_2) - P(t_1)\\) is the total change: people added, water filled, money earned."
+          },
+          {
+            "type": "example",
+            "title": "Example 69",
+            "problem": "Growth rate of population: A town's population growth rate (in people per year) is given by \\(P'(t) = 5000 + 200t\\), where \\(t\\) is the number of years after 2020. If the population in 2020 (\\(t = 0\\)) was 100,000:\n(a) Find the population function \\(P(t)\\). (b) What will the population be in 2030? (c) Find the total population increase from 2022 to 2028.",
+            "steps": [
+              "Given: \\(P'(t) = 5000 + 200t\\) people/year, \\(t\\) = years after 2020, \\(P(0) = 100{,}000\\).\nTo find: (a) \\(P(t)\\); (b) \\(P\\) in 2030; (c) the increase from 2022 to 2028.\nMethod: \\(P\\) is an antiderivative of the rate \\(P'\\); the 2020 population fixes the constant. A change between two years is \\(P(t_2) - P(t_1) = \\int_{t_1}^{t_2} P'(t)\\,dt\\).",
+              "(a) Population function\n\\[P(t) = \\int P'(t)\\,dt = \\int (5000 + 200t)\\,dt\\]\n\\[P(t) = 5000t + 100t^{2} + C\\]\nWhy: \\(\\int 200t\\,dt = 200\\cdot\\frac{t^{2}}{2} = 100t^{2}\\).",
+              "(a) Use \\(P(0) = 100000\\)\n\\[100000 = 0 + 0 + C \\Rightarrow C = 100000\\]\n\\[P(t) = 100000 + 5000t + 100t^{2}\\]\nWhy: at \\(t = 0\\) only \\(C\\) remains, so \\(C\\) is the starting population.",
+              "(b) Population in 2030\n\\(2030 \\to t = 10\\) (i.e. 10 years)\n\\[P(10) = 100000 + 5000(10) + 100(100)\\]\n\\[= 100000 + 50000 + 10000\\]\n\\[= 160000\\text{ people}\\]\nWhy: \\(t\\) counts years after 2020, so 2030 is \\(t = 10\\).",
+              "(c) Increase from 2022 to 2028\n\\(2022 \\to t_1 = 2\\) and \\(2028 \\to t_2 = 8\\)\n\\[\\text{Increase} = P(8) - P(2)\\]\n\\[P(8) = 100000 + 5000(8) + 100(64) = 146400\\]\n\\[P(2) = 100000 + 5000(2) + 100(4) = 110400\\]\n\\[\\text{Increase} = 146400 - 110400 = 36000\\]\nWhy: the increase is the difference of the two populations; by the Fundamental Theorem it also equals \\(\\int_{2}^{8} P'(t)\\,dt\\).",
+              "Check:\n\\[\\int_{2}^{8}(5000 + 200t)\\,dt = \\big[5000t + 100t^{2}\\big]_{2}^{8}\\]\n\\[= 46400 - 10400 = 36000\\]\nSame answer, without needing \\(C\\)."
+            ],
+            "answer": "(a) \\(P(t) = 100000 + 5000t + 100t^{2}\\). (b) 160000 people in 2030. (c) Increase from 2022 to 2028 \\(= 36000\\) people."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\int_{t_1}^{t_2} v\\,dt = s(t_2) - s(t_1)\\) (displacement); \\(\\int_{t_1}^{t_2} a\\,dt = v(t_2) - v(t_1)\\).\n2. Distance \\(= \\int_{t_1}^{t_2} |v(t)|\\,dt\\): find where \\(v = 0\\), split the interval, and take \\(-v\\) where \\(v < 0\\).\n3. Velocity from acceleration: integrate, then use \\(v(0)\\) for the constant; position from velocity: integrate again and use \\(s(0)\\).\n4. Any rate works the same way: total change \\(= \\int\\) rate \\(dt\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Giving the displacement when the distance is asked: in Example 68 the displacement is \\(-9\\) m but the distance is 23 m.\n2. Forgetting the constant of integration, or not using the starting value to find it.\n3. Not splitting at the zero of \\(v(t)\\), so that motion to the left cancels motion to the right.\n4. Using the calendar year instead of \\(t\\): 2028 is \\(t = 8\\), not \\(t = 2028\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

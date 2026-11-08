@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-9.1-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/9.1",
+      "title": "9.1 Inverse Trigonometric Functions and their Graph (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 256,
+          "pdf_to": 257,
+          "note": "PDF 256-257 (book p. 254-255): unit 9 introduction; 9.1 text before 9.1.1: inverse needs a bijection, Recall! box on inverse functions, sin^-1 notation, periodicity and restricting domains"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum bachon! Aaj hum Unit 9 shuru kar rahe hain: Inverse Trigonometric Functions. Pichli classes mein aap ne \\(\\sin\\), \\(\\cos\\), \\(\\tan\\) jaise trigonometric functions parhe. Wahan hamesha angle diya hota tha aur hum us ki value nikalte the, jaise \\(\\sin 30^\\circ = \\frac{1}{2}\\). Is unit mein hum ulta safar karenge: value di hogi aur angle dhoondna hoga. Yahi kaam inverse trigonometric functions karte hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Introduction"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ka introduction yeh kehta hai: pichli classes mein hum ne trigonometric functions aur un ki real-life applications parhin. Ab hum is ilm ko aage barha kar inverse trigonometric functions ko dekhenge, jo humein angle dhoondne mein madad dete hain jab function ki value maloom ho. Equations solve karne aur periodic behaviour (yani baar baar dohrane wale amal, jaise lehrein ya pendulum) ki modelling ke liye yeh zaroori hain, aur calculus mein bhi dobara aate hain. Is unit mein hum inverse trigonometric functions ki definition, un ke domain aur range, diye gaye interval mein un ke graphs, aur un ki aham properties aur istemaal seekhenge."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Is unit ke baare mein",
+            "text": "Yeh unit kis baare mein hai: trigonometric function angle leta hai aur number deta hai. Lekin aksar sawal ulta hota hai, jaise: woh kaun sa angle hai jis ka sine \\(\\frac{1}{2}\\) hai? Ya: ek seedhi (ladder) deewar se is tarah lagi hai ke height aur lambai ka ratio \\(\\frac{1}{2}\\) hai, to seedhi zameen se kitna angle bana rahi hai? Aise sawalon ka jawab inverse trigonometric function deta hai.\nAap kya seekhenge: pehle yeh ke trigonometric functions ko restrict kyun karna parta hai (9.1); phir inverse sine, cosine aur tangent, un ke domain, range aur graphs (9.1.1 se 9.1.3); phir inverse cosecant, secant aur cotangent (9.1.4 se 9.1.6); aur aakhir mein sum aur difference ke formulas (9.2).\nPehle se kya aana chahiye: one-to-one aur onto function aur inverse function ka matlab (Unit 1), radian measure, \\(0, \\frac{\\pi}{6}, \\frac{\\pi}{4}, \\frac{\\pi}{3}, \\frac{\\pi}{2}\\) par \\(\\sin\\), \\(\\cos\\), \\(\\tan\\) ki values, aur chaaron quadrants mein in ke signs (Class XI). Agar in mein se koi cheez kamzor hai to pehle use dohra lijiye, phir yeh unit bohat aasan lagega."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab section 9.1 ki baat. Kitab yaad dilati hai ke hum inverse function parh chuke hain, aur yeh seekh chuke hain ke sirf woh function inverse rakhta hai jo one-to-one bhi ho aur onto bhi. Agar koi function one-to-one nahin hai, to aksar hum us ka domain chhota (restrict) kar ke use one-to-one bana sakte hain, taa ke us ka inverse mil sake."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Do lafzon ki choti si dohrai:\nOne-to-one: alag alag inputs hamesha alag alag outputs dete hain. Graph par is ka matlab hai ke koi bhi horizontal line (ufqi line) graph ko zyada se zyada ek jagah kaate. Ise horizontal line test kehte hain.\nOnto: codomain ka har element kisi na kisi input ka output zaroor hai, koi element khaali nahin bachta.\nDono kyun zaroori hain? Inverse ka kaam hai har output ko wapas usi ek input tak le jana. Agar do inputs ka output ek hi ho, to inverse pareshan ho jayega ke kis input ko wapas de. Aur agar codomain ka koi element kabhi output hi na bana ho, to inverse ke paas us ke liye dene ko kuch nahin hoga.\nHamari taraf se misaal: \\(f(x) = x^{2}\\) poore \\(\\mathbb{R}\\) par one-to-one nahin, kyun ke \\(f(-3) = f(3) = 9\\). Lekin agar domain sirf \\([0, \\infty)\\) rakh dein to yeh one-to-one ban jata hai, aur is ka inverse \\(f^{-1}(x) = \\sqrt{x}\\) hai. Bilkul yahi chaal hum trigonometric functions ke saath chalenge."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Recall!",
+            "text": "Kitab ka Recall! box yeh yaad dilata hai: maan lijiye \\(f\\) set \\(X\\) se set \\(Y\\) tak ek bijective function hai (yani one-to-one aur onto dono). To \\(f\\) ka inverse function, jise \\(f^{-1}\\) likhte hain, \\(Y\\) se wapas \\(X\\) tak ek bijective function hai, aisa ke\n\\[x = f^{-1}(y),\\ \\forall\\, y \\in Y\\]\n\\[\\Leftrightarrow\\ y = f(x),\\ \\forall\\, x \\in X\\]\nYahan \\(f^{-1}\\) ka domain = \\(f\\) ki range, aur \\(f^{-1}\\) ki range = \\(f\\) ka domain. Is ka matlab hai ke \\(f^{-1}\\) function \\(f\\) ke rishte ko ulat deta hai: jab \\(f(x) = y\\) ho to \\(f^{-1}(y) = x\\). Aur dono ka composition yeh deta hai:\n\\[(f^{-1}\\circ f)(x) = f^{-1}(f(x))\\]\n\\[= f^{-1}(y) = x,\\ \\forall\\, x \\in X\\]\naur\n\\[(f\\circ f^{-1})(y) = f(f^{-1}(y))\\]\n\\[= f(x) = y,\\ \\forall\\, y \\in Y\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Recall! box mein chhapa hai \"This mean that \\(f^{-1}\\) reverses the correspondence of \\(f\\)\". Sahi angrezi \"This means that ...\" hai. Yeh sirf grammar ki ghalti hai; maths bilkul theek hai. Upar hum ne iska sahi matlab likha hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Hamari taraf se misaal, taa ke Recall! box ki baat haath mein aa jaye: \\(f(x) = 2x + 3\\) poore \\(\\mathbb{R}\\) par bijective hai. \\(y = 2x + 3\\) ko \\(x\\) ke liye solve karein: \\(x = \\frac{y-3}{2}\\). Yani \\(f^{-1}(y) = \\frac{y-3}{2}\\).\nAb composition check karte hain: \\(f^{-1}(f(x)) = \\frac{(2x+3)-3}{2} = x\\), aur \\(f(f^{-1}(y)) = 2\\cdot\\frac{y-3}{2} + 3 = y\\). Dono baar wahi cheez wapas mil gayi jis se shuru kiya tha.\nAasan misaal: \\(f\\) ne 4 ko 11 bana diya, aur \\(f^{-1}\\) ne 11 ko wapas 4 bana diya. Jaise taala lagana aur chaabi se kholna: inverse woh kaam ulat deta hai jo function ne kiya tha."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Value se wapas angle tak"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ab ek seedhi si misaal deti hai: \\(\\sin 90^\\circ = 1\\) saaf batata hai ke \\(90^\\circ\\) woh angle hai jis ka sine 1 hai. Kabhi kabhi humein sine, cosine ya tangent ki value to maloom hoti hai magar angle maloom nahin hota. Aise mauqe par hum angle dhoondne ke liye inverse trigonometric functions istemaal karte hain. Maslan \\(\\sin 90^\\circ = 1\\) ka inverse yun likha jata hai: \\(90^\\circ = \\sin^{-1}(1)\\), ya \\(90^\\circ = \\arcsin 1\\). Ise parhte hain: \"\\(90^\\circ\\) barabar hai 1 ke sine inverse ke\", ya \"1 ka arcsine\". Aam taur par equation \\(x = \\sin y\\) kisi diye gaye angle \\(y\\) se \\(x\\) ki value deti hai. Jab \\(x\\) maloom ho aur angle \\(y\\) dhoondna ho, to hum inverse function istemaal karte hain:"
+          },
+          {
+            "type": "equation",
+            "latex": "y = \\sin^{-1} x",
+            "text_alt": "y equals sine inverse of x"
+          },
+          {
+            "type": "paragraph",
+            "text": "Is ka matlab hai: \\(y\\) woh angle hai jis ka sine \\(x\\) hai. Symbol \\(\\sin^{-1} x\\) ko \"sine inverse of \\(x\\)\" ya \"arcsine of \\(x\\)\" parhte hain. Doosre lafzon mein, \\(y = \\sin^{-1} x\\) iff \\(x = \\sin y\\). Isi tarah baqi equations bhi likh sakte hain: \\(y = \\cos^{-1} x\\) iff \\(x = \\cos y\\), aur \\(y = \\tan^{-1} x\\) iff \\(x = \\tan y\\), waghera."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Isay do machines ki tarah sochiye jo ulti simt mein kaam karti hain:\n\\(\\sin\\) wali machine angle leti hai aur number deti hai: \\(\\frac{\\pi}{6}\\) daalo, \\(\\frac{1}{2}\\) niklega.\n\\(\\sin^{-1}\\) wali machine number leti hai aur angle deti hai: \\(\\frac{1}{2}\\) daalo, \\(\\frac{\\pi}{6}\\) niklega.\n\"iff\" ka matlab hai \"if and only if\" (agar aur sirf agar). Yani \\(y = \\sin^{-1} x\\) aur \\(x = \\sin y\\) ek hi baat ko do tareeqon se keh rahe hain, aur hum hamesha ek ko doosre mein badal sakte hain. Har principal value wale sawal mein pehla qadam yahi hota hai (9.1.3 ki Example 1 dekhiye).\nKhud sochiye: \\(\\sin^{-1}(1)\\) radian mein kitna hai? (Jawab: \\(\\frac{\\pi}{2}\\), kyun ke \\(90^\\circ = \\frac{\\pi}{2}\\) radian.)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Degree ya radian? Kitab ne \\(90^\\circ = \\sin^{-1}(1)\\) degree mein likha hai, lekin is unit mein aage tamam ranges aur jawab radian mein hain, jaise \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\). Is liye aadat daal lijiye ke jawab radian mein dein, jab tak sawal khud degree na maange.\nYaad rakhne ke liye: \\(\\pi\\) radian \\(= 180^\\circ\\). Is se \\(\\frac{\\pi}{6} = 30^\\circ\\), \\(\\frac{\\pi}{4} = 45^\\circ\\), \\(\\frac{\\pi}{3} = 60^\\circ\\), \\(\\frac{\\pi}{2} = 90^\\circ\\).\nCalculator par \\(\\sin^{-1}\\) aam taur par SHIFT dabaa kar sin wale button se milta hai. Lekin calculator ki mode (DEG ya RAD) zaroor dekh lijiye, warna jawab ghalat unit mein aayega aur aap pareshan honge ke ghalti kahan hui."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Poocha gaya sawal",
+              "Kaun sa function lagega"
+            ],
+            "rows": [
+              [
+                "\\(\\sin 30^\\circ\\) kitna hai?",
+                "\\(\\sin\\) (angle maloom, value chahiye): jawab \\(\\frac{1}{2}\\)"
+              ],
+              [
+                "Kis angle ka sine \\(\\frac{1}{2}\\) hai?",
+                "\\(\\sin^{-1}\\) (value maloom, angle chahiye): jawab \\(\\frac{\\pi}{6}\\)"
+              ],
+              [
+                "\\(\\cos \\pi\\) kitna hai?",
+                "\\(\\cos\\): jawab \\(-1\\)"
+              ],
+              [
+                "Kis angle ka cosine \\(-1\\) hai?",
+                "\\(\\cos^{-1}\\): jawab \\(\\pi\\)"
+              ]
+            ],
+            "caption": "Function ya inverse function? (hamari misaalein)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab asal masla. Hum jaante hain ke sine, cosine aur tangent periodic functions hain, yani yeh ek muqarrar faasle ke baad apni values dohrate rehte hain. Isi periodicity ki wajah se trigonometric functions aam taur par bijective nahin hote (yani apne poore domain par one-to-one aur onto dono nahin hote). Natija yeh ke bina kisi pabandi ke in ke inverse mojood hi nahin. Lekin agar hum soch samajh kar in ke domain aur codomain ko restrict kar dein, to yeh functions bijective ban jate hain aur phir in ke inverse define ho sakte hain. Inhi ko inverse trigonometric functions kehte hain. Agle hisson mein hum in functions ko ek ek kar ke tafseel se dekhenge."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Periodicity masla kyun hai? Dekhiye: \\(\\sin\\frac{\\pi}{6} = \\frac{1}{2}\\), lekin \\(\\sin\\frac{5\\pi}{6} = \\frac{1}{2}\\) bhi, \\(\\sin\\frac{13\\pi}{6} = \\frac{1}{2}\\) bhi, \\(\\sin\\left(-\\frac{7\\pi}{6}\\right) = \\frac{1}{2}\\) bhi, aur yeh silsila kabhi khatam nahin hota. To \"kis angle ka sine \\(\\frac{1}{2}\\) hai?\" ke laatadaad (infinitely many) jawab hain, jab ke function ko sirf ek jawab dene ki ijazat hai.\nIlaaj do hisson mein hai:\n1. Domain ko aise ek interval tak mehdood (restrict) karo jahan function apni har value sirf ek baar le. Is se function one-to-one ban jata hai.\n2. Codomain ko bilkul un values ke barabar rakho jo function waqai leta hai, jaise sine ke liye \\([-1, 1]\\). Is se function onto ban jata hai.\nIs tareeqe se chuna gaya woh ek angle principal value (asal ya bunyaadi value) kehlata hai. Misaal: ek bari building mein \"Ali\" naam ke das log hon to sirf \"Ali\" kehne se pata nahin chalta kis ki baat ho rahi hai; \"teesri manzil wala Ali\" keh dein to ek hi aadmi bachta hai. Restricted interval yahi \"teesri manzil\" hai.\nKhud sochiye: \\(\\cos 0 = 1\\) aur \\(\\cos 2\\pi = 1\\). To kya cosine poore \\(\\mathbb{R}\\) par one-to-one hai? (Nahin, kyun ke do alag inputs ka output ek hi hai.)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Khud sochiye, phir jawab dekhiye:\n(a) \\(\\tan\\frac{\\pi}{4} = 1\\). To \\(\\tan^{-1}(1)\\) kya hoga? Jawab: \\(\\frac{\\pi}{4}\\), kyun ke \\(y = \\tan^{-1} x\\) iff \\(x = \\tan y\\), aur \\(\\tan\\frac{\\pi}{4} = 1\\).\n(b) \\(\\cos\\frac{\\pi}{3} = \\frac{1}{2}\\). To \\(\\cos^{-1}\\frac{1}{2}\\) kya hoga? Jawab: \\(\\frac{\\pi}{3}\\). Lekin \\(\\cos\\left(-\\frac{\\pi}{3}\\right) = \\frac{1}{2}\\) bhi hai; in dono mein se kaun sa jawab chunna hai, yeh faisla 9.1.2 mein cosine ka restricted interval karega.\n(c) Kya \\(\\sin^{-1}(2)\\) ka koi matlab hai? Nahin! Sine ki value kabhi 1 se zyada nahin hoti, is liye koi angle aisa nahin jis ka sine 2 ho. Yani \\(\\sin^{-1}\\) ke andar sirf \\(-1\\) se \\(1\\) tak ke numbers ja sakte hain. Yeh baat domain ke roop mein 9.1.1 mein aayegi."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ek baat aur zehan mein bitha lijiye. Hum domain aur codomain dono ko restrict kyun karte hain? Domain ko is liye ke function one-to-one ho jaye, yani har value sirf ek angle se aaye. Codomain ko is liye ke function onto ho jaye, yani jo values function leta hi nahin (jaise sine ke liye 5 ya \\(-3\\)), woh codomain mein reh kar inverse ko pareshan na karein. Jab yeh dono kaam ho jate hain to function bijective ban jata hai, aur Recall! box wala inverse ka poora nizaam (system) us par lagu ho jata hai: domain aur range jagah badal lete hain, aur composition wapas wahi cheez deta hai jis se shuru kiya tha."
+          },
+          {
+            "type": "paragraph",
+            "text": "Aage ka raasta yeh hai: 9.1.1 mein sine ko \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\) par restrict kar ke \\(\\sin^{-1}\\) banayenge, 9.1.2 mein cosine ko \\([0, \\pi]\\) par restrict kar ke \\(\\cos^{-1}\\), aur 9.1.3 mein tangent ko \\(\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\) par restrict kar ke \\(\\tan^{-1}\\). Har ek ke saath us ka graph bhi dekhenge, aur yeh bhi ke inverse ka graph asal function ke graph ka line \\(y = x\\) mein aaina (mirror image) hota hai. Yeh teen intervals achhi tarah yaad kar lijiye; poore unit ka daromadar (dependence) inhi par hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Sirf bijective (one-to-one aur onto) function ka inverse hota hai; inverse mein domain aur range jagah badal lete hain.\n2. \\(y = \\sin^{-1} x\\) iff \\(x = \\sin y\\); isi tarah \\(\\cos^{-1}\\) aur \\(\\tan^{-1}\\) ke liye.\n3. \\(\\sin^{-1} x\\) ko \"sine inverse of \\(x\\)\" ya \"arcsine of \\(x\\)\" parhte hain, aur yeh ek angle hai.\n4. Trigonometric functions periodic hain, is liye poore \\(\\mathbb{R}\\) par one-to-one nahin.\n5. Domain restrict karne (aur sahi codomain lene) se yeh bijective ban jate hain; phir inverse sirf ek angle deta hai, jise principal value kehte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(\\sin^{-1} x\\) ko \\(x\\) jaisa koi aam number samajhna: yeh ek angle hai (radian ya degree mein).\n2. Har woh angle likh dena jis ki value di gayi hai, jaise \\(\\sin^{-1}\\frac{1}{2}\\) ke liye \\(\\frac{\\pi}{6}, \\frac{5\\pi}{6}, \\dots\\): inverse function sirf ek jawab deta hai, yani principal value.\n3. Bhool jana ke inverse ke liye function ka onto hona bhi zaroori hai: sine ka codomain \\([-1, 1]\\) lena hai, \\(\\mathbb{R}\\) nahin."
+          }
+        ]
+      },
+      "variant_of": "C12-MATH-CH9-9.1"
+    }
+  ]
+}

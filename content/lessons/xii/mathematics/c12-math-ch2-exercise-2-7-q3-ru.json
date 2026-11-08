@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-7-Q3-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-7-q3",
+      "title": "Question 3 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 72,
+          "pdf_to": 72,
+          "note": "Exercise 2.7, Question 3 (book page 70). The book prints no answers for Unit 2; results verified with sympy."
+        }
+      ],
+      "variant_of": "C12-MATH-CH2-EXERCISE-2-7-Q3",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. A closed cylindrical tank is to be constructed to hold \\(54\\pi\\) liters of water. Find the dimensions that minimize the construction cost of the tank.",
+            "explanation": "Yeh minimum ka sawal hai. \"Kam se kam construction cost\" ka matlab hai kam se kam metal ki chadar, yani tank ka total surface area sab se kam.\nDiya kya hai? Band (closed) tank ka volume \\(54\\pi\\) litre, jo \\(54\\pi\\text{ dm}^{3}\\) hai.\nFind kya karna hai? Tank ka radius aur height.\nRule kaunsa? Volume se \\(h\\) ko \\(r\\) mein likhna, phir \\(S = 2\\pi r^{2} + 2\\pi rh\\) ko minimize karna.\nPlan: dm mein kaam karenge taa ke numbers chhote rahein, aur aakhir mein cm mein bhi bata denge.",
+            "steps": [
+              "Diya gaya: band cylinder jis mein \\(54\\pi\\) litre paani aaye.\nMaloom karna: radius \\(r\\) aur height \\(h\\) jin se banane ka kharcha sab se kam ho.\nTareeqa: maan lete hain ke metal ki har square unit ki qeemat barabar hai; to kharcha tab kam hoga jab total surface area (do dhakkan + curved surface) kam ho. Phir derivative tests.",
+              "Units\n\\[1\\text{ litre} = 1\\text{ dm}^{3}\\]\n\\[V = 54\\pi\\text{ dm}^{3}\\]\nKyun: decimetre mein kaam karne se numbers chhote rehte hain. Agar cm mein karein to \\(54\\pi\\) litre \\(= 54000\\pi\\text{ cm}^{3}\\) hota hai, aur jawab wohi aata hai, bas hisaab bhaari hota hai.",
+              "Constraint (volume)\n\\[\\pi r^{2}h = 54\\pi\\]\n\\[h = \\dfrac{54}{r^{2}} \\quad \\text{...(1)}\\]\nKyun: volume fixed hai, is liye \\(h\\) aur \\(r\\) aapas mein jure hue hain. Dono taraf \\(\\pi\\) cancel ho gaya.",
+              "Surface area aik variable mein\n\\[S = 2\\pi r^{2} + 2\\pi rh \\quad \\text{...(2)}\\]\n\\[S = 2\\pi r^{2} + 2\\pi r\\cdot\\dfrac{54}{r^{2}}\\]\n\\[S = 2\\pi r^{2} + \\dfrac{108\\pi}{r}\\]\nKyun: band tank ke upar aur neeche do gol dhakkan hain (\\(2\\pi r^{2}\\)) aur aas paas curved surface (\\(2\\pi rh\\)). Phir (1) se \\(h\\) rakh diya.\nDhyan dein: \"closed\" lafz par ghaur karein; khula tank hota to sirf aik dhakkan, yani \\(\\pi r^{2}\\), aata.",
+              "Critical point\n\\[\\dfrac{dS}{dr} = 4\\pi r - \\dfrac{108\\pi}{r^{2}} \\quad \\text{...(3)}\\]\n\\[4\\pi r = \\dfrac{108\\pi}{r^{2}} \\Rightarrow r^{3} = 27\\]\n\\[r = 3\\text{ dm}\\]\nKyun: \\(\\frac{108\\pi}{r} = 108\\pi r^{-1}\\) ka derivative \\(-108\\pi r^{-2}\\) hai. Dono taraf \\(r^{2}\\) se multiply aur \\(4\\pi\\) se divide kiya: \\(r^{3} = \\frac{108}{4} = 27\\), aur \\(27 = 3^{3}\\).",
+              "Second derivative test\n\\[\\dfrac{d^{2}S}{dr^{2}} = 4\\pi + \\dfrac{216\\pi}{r^{3}}\\]\n\\[r = 3 \\text{ par}: \\ 4\\pi + 8\\pi = 12\\pi > 0\\]\nKyun: positive hai, is liye \\(r = 3\\) dm par surface area (aur kharcha) minimum hai.",
+              "Height aur tasdeeq\n\\[h = \\dfrac{54}{3^{2}} = 6\\text{ dm}\\]\n\\[S_{\\min} = 18\\pi + 36\\pi = 54\\pi\\text{ dm}^{2}\\]\n\\[\\pi(3)^{2}(6) = 54\\pi\\ \\checkmark\\]\nKyun: (1) se height nikali, aur volume dobara nikal kar check kiya. Dekhiye: height diameter ke barabar hai (\\(h = 2r\\)), bilkul Example 32 ki tarah. Band cylinder ka sab se kifayati shape yahi hota hai."
+            ],
+            "final_answer": "Radius \\(r = 3\\) dm \\(= 30\\) cm aur height \\(h = 6\\) dm \\(= 60\\) cm (height = diameter); kam se kam surface area \\(54\\pi\\text{ dm}^{2} \\approx 1.70\\text{ m}^{2}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

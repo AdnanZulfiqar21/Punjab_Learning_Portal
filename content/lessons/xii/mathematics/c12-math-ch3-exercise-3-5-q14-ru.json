@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q14-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q14",
+      "title": "Question 14 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 104,
+          "note": "Exercise 3.5, Question 14: one integral from three given conditions (printed (i)-(iii)); book p. 102. Key on p. 300 under 'Exercise 3.2'."
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-5-Q14",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "14",
+            "prompt": "14 Given the function \\(f(x)\\) satisfies the following conditions: (i) \\(\\int_{0}^{4} f(x)\\,dx = 12\\) (ii) \\(f(4 - x) = f(x)\\) (iii) \\(f(x + 2) = f(x)\\). Evaluate \\(\\int_{-1}^{5} f(x)\\,dx\\). [The printed (i)-(iii) are the three given conditions, so this question has one answer.]",
+            "explanation": "Is sawal mein \\(f\\) ka formula nahi, teen conditions di hain. (Kitab ne inhein (i), (ii), (iii) likha hai, lekin yeh alag sawal nahi, ek hi sawal ki teen shartein hain.)\nCondition (iii) ka matlab hai ke \\(f\\) har 2 units baad khud ko dohrata hai (period 2), jaise ghari ki sui har 12 ghante baad wahi jagah aati hai.\nFind kya karna hai? \\(\\int_{-1}^{5} f\\).\nPlan: pehle (i) aur (iii) se \\(\\int_0^2 f\\) nikalenge. Phir \\([-1, 5]\\) ko \\([-1, 0]\\), \\([0, 4]\\), \\([4, 5]\\) mein torenge aur kinaron wale tukron ko shift kar ke \\([0, 2]\\) mein le aayenge. Total ke liye (ii) ki zaroorat nahi parti.",
+            "steps": [
+              "Diya gaya: (i) \\(\\int_0^4 f(x)\\,dx = 12\\), (ii) \\(f(4 - x) = f(x)\\), (iii) \\(f(x + 2) = f(x)\\).\nMaloom karna: \\(\\int_{-1}^{5} f(x)\\,dx\\).\nTareeqa: Property III se torna, aur substitutions \\(x = t \\pm 2\\), \\(x = t + 4\\) period 2 ke saath.",
+              "\\(\\int_0^2 f\\) nikalein (\\(x = t + 2\\))\n\\[\\int_{2}^{4} f(x)\\,dx = \\int_{0}^{2} f(t + 2)\\,dt\\]\n\\[= \\int_{0}^{2} f(t)\\,dt\\]\n\\[12 = \\int_{0}^{2} f + \\int_{2}^{4} f = 2\\int_{0}^{2} f\\]\n\\[\\int_{0}^{2} f(x)\\,dx = 6\\]\nKyun: \\(x = t + 2\\) rakha, \\(dx = dt\\), aur limits 2, 4 ban gayin 0, 2. Phir (iii) se \\(f(t + 2) = f(t)\\). Yani \\([2, 4]\\) ka area bilkul \\([0, 2]\\) jitna hai, kyunke graph wahi dohraya ja raha hai.",
+              "\\([-1, 5]\\) ko torein\n\\[\\int_{-1}^{5} f = \\int_{-1}^{0} f + \\int_{0}^{4} f + \\int_{4}^{5} f\\]\nKyun: Property III; beech wala tukra pehle se maloom hai (12).",
+              "Left tukra shift karein (\\(x = t - 2\\))\n\\[\\int_{-1}^{0} f(x)\\,dx = \\int_{1}^{2} f(t - 2)\\,dt\\]\n\\[= \\int_{1}^{2} f(t)\\,dt\\]\nKyun: \\(x = t - 2\\) rakha to limits \\(-1, 0\\) ban gayin 1, 2. Aur (iii) se \\(f(t) = f((t - 2) + 2) = f(t - 2)\\).\nDhyan dein: substitution mein limits badalna zaroori hai: \\(x = -1\\) par \\(t = 1\\).",
+              "Right tukra shift karein (\\(x = t + 4\\))\n\\[\\int_{4}^{5} f(x)\\,dx = \\int_{0}^{1} f(t + 4)\\,dt\\]\n\\[= \\int_{0}^{1} f(t)\\,dt\\]\nKyun: (iii) do dafa: \\(f(t + 4) = f(t + 2) = f(t)\\). Limits 4, 5 ban gayin 0, 1.",
+              "Jama karein\n\\[\\int_{-1}^{0} f + \\int_{4}^{5} f = \\int_{1}^{2} f + \\int_{0}^{1} f = \\int_{0}^{2} f = 6\\]\n\\[\\int_{-1}^{5} f(x)\\,dx = 6 + 12 = 18\\]\nKyun: Property III se \\([0, 1]\\) aur \\([1, 2]\\) jur kar \\([0, 2]\\) bane, jis ka integral 6 hai.",
+              "Tasdeeq: ek misaal se\n\\[f(x) = 3 + 2\\cos \\pi x:\\ \\int_{0}^{4} f = 12,\\quad \\int_{-1}^{5} f = 18 \\;\\checkmark\\]\nKyun: is \\(f\\) ka period 2 hai aur \\(f(4 - x) = f(x)\\) bhi hai; cosine wala hissa poore periods par 0 deta hai, to integrals \\(3 \\times 4 = 12\\) aur \\(3 \\times 6 = 18\\). Shortcut: \\([-1, 5]\\) ki lambai 6 yani 3 periods, har period ka integral 6, to \\(3 \\times 6 = 18\\). Answer key mein bhi 18 hai."
+            ],
+            "final_answer": "\\(18\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

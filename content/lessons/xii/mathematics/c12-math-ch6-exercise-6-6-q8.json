@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH6-EXERCISE-6-6-Q8",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch6",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch6/u-exercise-6-6-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 218,
+          "pdf_to": 219,
+          "note": "Exercise 6.6, Question 8 (book p. 216-217); answer key PDF 308-309; checked with sympy"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8. LORAN (long distance radio navigation) for aircraft and ships uses synchronized pulses transmitted by widely separated transmitting stations. These pulses travel at the speed of light (186,000 miles per second). The difference in the times of arrival of these pulses at an aircraft or ship is constant on a hyperbola having the transmitting stations as foci. Assume that two stations, 500 miles apart, are positioned on a rectangular coordinate system at \\((-250, 0)\\) and \\((250, 0)\\) and that a ship is traveling on a path with coordinates \\((x, 120)\\) (a horizontal line 120 miles above the \\(x\\)-axis). Find the \\(x\\)-coordinate of the position of the ship when the time difference between the pulses from the transmitting stations is 1200 microseconds (0.0008 second).",
+            "explanation": "A hyperbola question: points whose distances from two fixed points differ by a constant lie on a hyperbola with those points as foci.\nThe time difference times the speed gives that constant difference \\(2a\\); the stations give \\(c = 250\\).\nPlan: find \\(a\\), then \\(b^2 = c^2 - a^2\\), then put \\(y = 120\\) in the hyperbola.",
+            "steps": [
+              "Given: foci \\(F'(-250, 0)\\), \\(F(250, 0)\\); speed 186,000 miles/s; time difference 1200 microseconds; ship on \\(y = 120\\).\nTo find: the \\(x\\)-coordinate of the ship.\nMethod: \\(\\big||PF'| - |PF|\\big| = 2a\\) for every point \\(P\\) of the hyperbola \\(\\frac{x^2}{a^2} - \\frac{y^2}{b^2} = 1\\) with foci \\((\\pm c, 0)\\) and \\(c^2 = a^2 + b^2\\).",
+              "Time in seconds\n\\[1200\\ \\mu\\text{s} = 1200 \\times 10^{-6} \\text{ s}\\]\n\\[= 0.0012 \\text{ s}\\]\nWhy: one microsecond is \\(10^{-6}\\) s. (The bracket in the question prints 0.0008 s; see the correction below.)",
+              "Difference of distances\n\\[2a = 186000 \\times 0.0012 = 223.2\\]\n\\[a = 111.6,\\quad a^2 = 12454.56\\]\nWhy: distance = speed \\(\\times\\) time. In the extra time the pulse from the farther station travels 223.2 miles more.",
+              "Find \\(b^2\\)\n\\[c = 250,\\quad c^2 = 62500\\]\n\\[b^2 = c^2 - a^2 = 62500 - 12454.56\\]\n\\[b^2 = 50045.44\\]\nWhy: the stations are the foci \\((\\pm 250, 0)\\); for a hyperbola \\(c^2 = a^2 + b^2\\).",
+              "Equation of the hyperbola\n\\[\\dfrac{x^2}{12454.56} - \\dfrac{y^2}{50045.44} = 1\\]\nWhy: centre at the origin, foci on the \\(x\\)-axis.",
+              "Put \\(y = 120\\)\n\\[\\dfrac{x^2}{12454.56} = 1 + \\dfrac{14400}{50045.44}\\]\n\\[= 1.2877385\\]\n\\[x^2 = 12454.56 \\times 1.2877385\\]\n\\[x^2 = 16038.22\\]\n\\[x \\approx \\pm 126.64\\]\nWhy: the ship is on the line \\(y = 120\\); \\(120^2 = 14400\\).",
+              "Choose the sign\nIf the pulse from \\(F(250, 0)\\) arrives first, the ship is nearer \\(F\\), on the right branch: \\(x \\approx 126.64\\). If the pulse from \\((-250, 0)\\) arrives first, \\(x \\approx -126.64\\).\nWhy: the question does not say which pulse arrives first; the key takes the positive value.",
+              "Check\n\\[|PF'| = \\sqrt{376.64^2 + 120^2} \\approx 395.30\\]\n\\[|PF| = \\sqrt{123.36^2 + 120^2} \\approx 172.10\\]\n\\[395.30 - 172.10 = 223.20 \\;\\checkmark\\]\nWhy: the difference of distances is \\(2a = 223.2\\) miles, as required."
+            ],
+            "final_answer": "\\(x \\approx 126.64\\) miles (ship at about \\((126.64, 120)\\), nearer the station at \\((250, 0)\\)); \\(x \\approx -126.64\\) if it is nearer the station at \\((-250, 0)\\). The key's 126.65 comes from rounding in the middle of the working."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The question prints '1200 microseconds (0.0008 second)'. Since \\(1\\ \\mu\\text{s} = 10^{-6}\\) s, 1200 microseconds \\(= 0.0012\\) s, not 0.0008 s. The key's answer (126.65 miles) agrees with 0.0012 s; with 0.0008 s one would get \\(x \\approx 83.27\\) miles. So the bracket should read (0.0012 second)."
+          }
+        ]
+      }
+    }
+  ]
+}

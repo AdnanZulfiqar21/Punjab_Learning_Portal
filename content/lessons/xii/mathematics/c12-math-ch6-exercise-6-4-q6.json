@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH6-EXERCISE-6-4-Q6",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch6",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch6/u-exercise-6-4-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 200,
+          "pdf_to": 200,
+          "note": "Exercise 6.4, Question 6: book p. 197-198 (Q1-Q13); answer key book p. 305-306 (PDF 307-308)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6 Find the dimensions of the rectangle with greatest perimeter that can be inscribed in the ellipse \\(\\frac{x^2}{16} + \\frac{y^2}{9} = 1\\).",
+            "explanation": "An optimisation question: the rectangle's corners lie on the ellipse.\nThe parametric point \\((4\\cos\\theta, 3\\sin\\theta)\\) describes the corner with one variable.\nPlan: perimeter as a function of theta, then maximise with the derivative.",
+            "steps": [
+              "Given: \\(\\frac{x^2}{16} + \\frac{y^2}{9} = 1\\) (\\(a = 4\\), \\(b = 3\\)).\nTo find: the sides of the inscribed rectangle of greatest perimeter.\nMethod: the ellipse is symmetric about both axes, so the inscribed rectangle has its centre at the origin and sides parallel to the axes. Take its first-quadrant corner as \\((4\\cos\\theta, 3\\sin\\theta)\\), \\(0 < \\theta < \\frac{\\pi}{2}\\).",
+              "Sides and perimeter\nThe other corners are \\((-4\\cos\\theta, 3\\sin\\theta)\\), \\((-4\\cos\\theta, -3\\sin\\theta)\\), \\((4\\cos\\theta, -3\\sin\\theta)\\). So length \\(= 8\\cos\\theta\\), width \\(= 6\\sin\\theta\\).\n\\[P(\\theta) = 2(8\\cos\\theta + 6\\sin\\theta)\\]\n\\[= 16\\cos\\theta + 12\\sin\\theta\\]\nWhy: perimeter = 2(length + width).",
+              "Differentiate and set to zero\n\\[P'(\\theta) = -16\\sin\\theta + 12\\cos\\theta = 0\\]\n\\[\\tan\\theta = \\frac{12}{16} = \\frac{3}{4}\\]\nWhy: at a maximum the derivative is zero.",
+              "Find \\(\\sin\\theta\\), \\(\\cos\\theta\\)\n\\[\\sin\\theta = \\frac{3}{5}, \\quad \\cos\\theta = \\frac{4}{5}\\]\nWhy: \\(\\theta\\) is acute; a right triangle with sides 3, 4, 5 has \\(\\tan\\theta = \\frac{3}{4}\\).",
+              "Second derivative test\n\\[P''(\\theta) = -16\\cos\\theta - 12\\sin\\theta\\]\n\\[= -\\frac{64}{5} - \\frac{36}{5} = -20 < 0\\]\nWhy: a negative second derivative means a maximum.",
+              "Dimensions\n\\[\\text{length} = 8 \\cdot \\frac{4}{5} = \\frac{32}{5}\\]\n\\[\\text{width} = 6 \\cdot \\frac{3}{5} = \\frac{18}{5}\\]\n\\[P = 2\\left(\\frac{32}{5} + \\frac{18}{5}\\right) = 20\\]\nWhy: substitute the values of cos and sin.",
+              "Check\nThe corner \\(\\left(\\frac{16}{5}, \\frac{9}{5}\\right)\\) lies on the ellipse: \\(\\frac{256/25}{16} + \\frac{81/25}{9} = \\frac{16}{25} + \\frac{9}{25} = 1\\). Also \\(16\\cos\\theta + 12\\sin\\theta = 20\\cos(\\theta - \\alpha)\\) with \\(\\cos\\alpha = \\frac{4}{5}\\), whose largest value is 20."
+            ],
+            "final_answer": "\\(\\frac{32}{5}\\) units by \\(\\frac{18}{5}\\) units (greatest perimeter 20 units)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key numbers its Exercise 6.4 answers 1 to 16 for 13 questions, so the numbers do not match. The answer to this question is printed as key 10."
+          }
+        ]
+      }
+    }
+  ]
+}

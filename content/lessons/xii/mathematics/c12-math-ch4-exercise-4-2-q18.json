@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q18",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q18",
+      "title": "Question 18",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 136,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 18: book p. 134 (Q2-Q25 general solutions and IVPs); answer key p. 303 (keys numbered 2-29)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "18",
+            "prompt": "18 Find the general solution of the differential equation \\(x\\frac{dy}{dx} - y = \\frac{x^4 + x^3y}{y^3 - x^3}\\).",
+            "explanation": "Putting \\(y = vx\\) turns the right side into \\(x\\) times a function of \\(v\\), and the left side into \\(x^2\\frac{dv}{dx}\\), so the equation is homogeneous.\nWe must find the general solution.\nPlan: substitute \\(y = vx\\), separate, divide \\(v^3 - 1\\) by \\(v + 1\\), integrate, put back \\(v\\).",
+            "steps": [
+              "Given: \\(x\\frac{dy}{dx} - y = \\frac{x^4 + x^3y}{y^3 - x^3}\\).\nTo find: the general solution.\nMethod: Homogeneous equation: substitute \\(y = vx\\), \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\). (Dividing by \\(x\\) gives \\(\\frac{dy}{dx} = \\frac{y}{x} + \\frac{1 + y/x}{(y/x)^3 - 1}\\), a function of \\(y/x\\) only.)",
+              "Left side with \\(y = vx\\)\n\\[x\\left(v + x\\dfrac{dv}{dx}\\right) - vx = x^2\\dfrac{dv}{dx}\\]\nWhy: the terms \\(xv\\) and \\(-vx\\) cancel.",
+              "Right side with \\(y = vx\\)\n\\[\\dfrac{x^4 + x^4v}{x^3v^3 - x^3} = \\dfrac{x^4(1 + v)}{x^3(v^3 - 1)}\\]\n\\[= \\dfrac{x(1 + v)}{v^3 - 1}\\]\nWhy: \\(x^3y = x^3 \\cdot vx = x^4v\\) and \\(y^3 = v^3x^3\\); then cancel \\(x^3\\).",
+              "Equate and separate\n\\[x^2\\dfrac{dv}{dx} = \\dfrac{x(1 + v)}{v^3 - 1}\\]\n\\[\\dfrac{v^3 - 1}{v + 1}\\,dv = \\dfrac{dx}{x}\\]\nWhy: divide both sides by \\(x\\), then move \\(v\\)-terms to \\(dv\\) and \\(x\\)-terms to \\(dx\\).",
+              "Divide \\(v^3 - 1\\) by \\(v + 1\\)\n\\[(v + 1)(v^2 - v + 1) = v^3 + 1\\]\n\\[\\dfrac{v^3 - 1}{v + 1} = v^2 - v + 1 - \\dfrac{2}{v + 1}\\]\nWhy: \\(v^3 - 1 = (v^3 + 1) - 2\\). The degree of the numerator is higher, so we divide before integrating.",
+              "Integrate\n\\[\\dfrac{v^3}{3} - \\dfrac{v^2}{2} + v - 2\\ln|v + 1|\\]\n\\[= \\ln|x| + \\ln|C|\\]\nWhy: power rule for each power of \\(v\\), and \\(\\int \\frac{dv}{v + 1} = \\ln|v + 1|\\).",
+              "Multiply by 6 and collect the logs\n\\[2v^3 - 3v^2 + 6v\\]\n\\[= 6\\ln|x| + 12\\ln|v + 1| + 6\\ln|C|\\]\n\\[= 6\\ln|Cx(v + 1)^2|\\]\nWhy: \\(12\\ln|v + 1| = 6\\ln(v + 1)^2\\), then \\(\\ln a + \\ln b = \\ln ab\\).",
+              "Put back \\(v = y/x\\)\n\\[x(v + 1)^2 = \\dfrac{(x + y)^2}{x}\\]\n\\[\\dfrac{2y^3}{x^3} - \\dfrac{3y^2}{x^2} + \\dfrac{6y}{x}\\]\n\\[= 6\\ln\\left|\\dfrac{C(x + y)^2}{x}\\right|\\]\nWhy: \\(v + 1 = \\frac{x + y}{x}\\), so \\(x(v + 1)^2 = x\\cdot\\frac{(x + y)^2}{x^2}\\).",
+              "Multiply by \\(x^3\\)\n\\[2y^3 - 3xy^2 + 6x^2y\\]\n\\[= 6x^3\\ln\\left|\\dfrac{C(x + y)^2}{x}\\right|\\]\nWhy: this removes all fractions on the left.",
+              "Check\nThe derivative of the left side of the integrated equation is \\(v^2 - v + 1 - \\frac{2}{v + 1}\\), which is the separated integrand \\(\\checkmark\\). Differentiating the final answer implicitly (done with a computer algebra system) gives back \\(x\\frac{dy}{dx} - y = \\frac{x^4 + x^3y}{y^3 - x^3}\\) \\(\\checkmark\\)\nWhy: both checks confirm the solution of the printed equation."
+            ],
+            "final_answer": "\\(2y^3 - 3xy^2 + 6x^2y = 6x^3\\ln\\left|\\frac{C(x + y)^2}{x}\\right|\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key (printed as number 21, not 18) gives \\(2y^3 - 3xy^2 + 6x^2y = 6x^3\\ln|C(y + x)|\\). This does not satisfy the equation as printed. It is the solution when the denominator is \\(y^3\\) instead of \\(y^3 - x^3\\): then \\(x\\frac{dv}{dx} = \\frac{1 + v}{v^3}\\), \\(\\frac{v^3}{v + 1} = v^2 - v + 1 - \\frac{1}{v + 1}\\), and integration gives \\(2v^3 - 3v^2 + 6v = 6\\ln|Cx(v + 1)|\\), which is the key's answer. So either the printed denominator or the key is wrong. For the question as printed (denominator \\(y^3 - x^3\\)) the correct answer is the one found above. (The keys are numbered 2 to 29 for 25 questions; the extra keys 15, 19 and 27 match no printed question.)"
+          }
+        ]
+      }
+    }
+  ]
+}

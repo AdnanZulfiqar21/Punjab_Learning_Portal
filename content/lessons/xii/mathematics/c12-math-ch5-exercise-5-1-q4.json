@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH5-EXERCISE-5-1-Q4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch5",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch5/u-exercise-5-1-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 156,
+          "pdf_to": 156,
+          "note": "Exercise 5.1 (book p. 154), Question 4; answer key PDF 306 (Answers 5.1, no printed answer)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. Show that the medians of the triangle with vertices \\(A(3, 2)\\), \\(B(-1, -5)\\) and \\(C(7, 2)\\) are concurrent.",
+            "explanation": "This is a 'show that' question: find the three medians, then prove they meet at one point.\nTool: Theorem 3, the determinant of the coefficients must be zero.\nPlan: mid-points, three median equations, determinant, then the common point as a check.",
+            "steps": [
+              "Given: \\(A(3, 2)\\), \\(B(-1, -5)\\), \\(C(7, 2)\\).\nTo prove: the medians \\(AD\\), \\(BE\\), \\(CF\\) are concurrent.\nMethod: find the medians by the two-point form, then apply Theorem 3.",
+              "Mid-points\n\\[D\\left(\\dfrac{-1 + 7}{2}, \\dfrac{-5 + 2}{2}\\right) = D\\left(3, -\\dfrac{3}{2}\\right)\\]\n\\[E\\left(\\dfrac{3 + 7}{2}, \\dfrac{2 + 2}{2}\\right) = E(5, 2)\\]\n\\[F\\left(\\dfrac{3 - 1}{2}, \\dfrac{2 - 5}{2}\\right) = F\\left(1, -\\dfrac{3}{2}\\right)\\]\nWhy: \\(D\\), \\(E\\), \\(F\\) are the mid-points of \\(BC\\), \\(CA\\), \\(AB\\).",
+              "Median \\(AD\\)\n\\(A(3, 2)\\) and \\(D\\left(3, -\\frac{3}{2}\\right)\\) have the same \\(x\\)-coordinate, so\n\\[x = 3 \\;\\text{ or }\\; x - 3 = 0 \\;\\ldots(i)\\]\nWhy: a vertical line; the two-point form cannot be used because \\(x_2 - x_1 = 0\\).",
+              "Median \\(BE\\)\n\\[\\dfrac{y + 5}{2 + 5} = \\dfrac{x + 1}{5 + 1}\\]\n\\[6(y + 5) = 7(x + 1)\\]\n\\[7x - 6y - 23 = 0 \\;\\ldots(ii)\\]\nWhy: two-point form through \\(B(-1, -5)\\) and \\(E(5, 2)\\).",
+              "Median \\(CF\\)\n\\[\\dfrac{y - 2}{-\\frac{3}{2} - 2} = \\dfrac{x - 7}{1 - 7}\\]\n\\[-6(y - 2) = -\\tfrac{7}{2}(x - 7)\\]\n\\[12y - 24 = 7x - 49\\]\n\\[7x - 12y - 25 = 0 \\;\\ldots(iii)\\]\nWhy: two-point form through \\(C(7, 2)\\) and \\(F\\left(1, -\\frac{3}{2}\\right)\\); multiplying by \\(-2\\) clears the fraction.",
+              "Apply Theorem 3\n\\[\\begin{vmatrix} 1 & 0 & -3 \\\\ 7 & -6 & -23 \\\\ 7 & -12 & -25 \\end{vmatrix}\\]\n\\[= 1(150 - 276) - 0 - 3(-84 + 42)\\]\n\\[= -126 + 126 = 0\\]\nWhy: rows are the coefficients \\((a, b, c)\\) of (i), (ii), (iii); expanding along the first row, the middle term is zero. Since the determinant is zero (and no two medians are parallel), the medians are concurrent.",
+              "Check: the common point\nFrom (i), \\(x = 3\\); in (ii): \\(21 - 6y - 23 = 0\\), so \\(y = -\\frac{1}{3}\\). In (iii):\n\\[7(3) - 12\\left(-\\tfrac{1}{3}\\right) - 25 = 21 + 4 - 25 = 0\\]\nThis is the centroid \\(\\left(\\frac{3 - 1 + 7}{3}, \\frac{2 - 5 + 2}{3}\\right) = \\left(3, -\\frac{1}{3}\\right)\\)."
+            ],
+            "final_answer": "Hence proved: the medians \\(x - 3 = 0\\), \\(7x - 6y - 23 = 0\\), \\(7x - 12y - 25 = 0\\) are concurrent (determinant \\(= 0\\)); they meet at \\(\\left(3, -\\frac{1}{3}\\right)\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

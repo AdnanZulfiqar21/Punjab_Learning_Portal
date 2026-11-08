@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.2",
+      "title": "8.2 Graphical Method for Approximating Real Roots",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 236,
+          "pdf_to": 238,
+          "note": "PDF 236-238 (book p. 234-236): graphical method, its steps, Example 2 (x - cos x = 0) with its table and Figure 8.3, radian-mode Note"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "After learning the Location of Root Theorem (LRT), we can use a graphical method to approximate roots of nonlinear equations. This method provides a visual way to locate where a function crosses the \\(x\\)-axis."
+          },
+          {
+            "type": "paragraph",
+            "text": "The graphical method is mainly suitable for obtaining the root correct up to one or two decimal places and is used to provide an initial estimate for numerical methods such as the Bisection Method, Regula-Falsi Method, and Newton-Raphson Method."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why only one or two decimal places? A graph is read by eye. Even on graph paper we cannot read the crossing point much better than to the nearest small square, so the third decimal place would be a guess. That is why the graphical method is used as a starting estimate, and the methods of 8.3 then improve it to as many decimal places as we want.\nHow the LRT helps: it tells us which small interval to draw. Drawing the whole graph is not needed; we draw only the part where the sign changes."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Steps of Graphical Method:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Identify the interval of sign change where \\(f(a) \\cdot f(b) < 0\\), if not provided.",
+              "Draw the graph of \\(y = f(x)\\) on \\(xy\\)-plane within the interval of sign change only.",
+              "Observe where the graph crosses the \\(x\\)-axis."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to carry out step 2 in practice:\n1. Divide the interval into 10 equal steps, for example \\(x = 0, 0.1, 0.2, \\ldots, 1\\), and make a table of \\(f(x)\\). Keep 4 decimal places in the table.\n2. Find the two neighbouring points where the sign changes; the crossing lies between them.\n3. For the second decimal place, look closely (or tabulate again at steps of 0.01) between those two points.\n4. To be sure of the rounding, check that \\(f(c - 0.005)\\) and \\(f(c + 0.005)\\) have opposite signs, where \\(c\\) is your 2-decimal answer. Then by the LRT the root lies in \\(]c - 0.005, c + 0.005[\\), which rounds to \\(c\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Find a root of the equation \\(x - \\cos x = 0\\) graphically, approximate to two decimal places.",
+            "steps": [
+              "Given: the equation \\(x - \\cos x = 0\\).\nTo find: a root, correct to two decimal places.\nMethod: the graphical method. Put \\(y = f(x) = x - \\cos x\\), find an interval of sign change, plot \\(f\\) inside it, and read where the graph crosses the \\(x\\)-axis.",
+              "Fixing Calculator\nFix the calculator to two decimal places (and set it to radian mode).\nWhy: the answer is needed to two decimal places, and \\(\\cos x\\) here takes \\(x\\) in radians (see the Note below).",
+              "Continuity\n\\[y = f(x) = x - \\cos x\\]\n\\[f(c) = \\lim_{x \\to c}(x - \\cos x) \\quad \\forall c \\in \\mathbb{R}\\]\n\\[\\Rightarrow f \\text{ is continuous at every real number.}\\]\nWhy: \\(x\\) and \\(\\cos x\\) are continuous everywhere, and a difference of continuous functions is continuous. The LRT needs this.",
+              "Identify Interval of Sign Change\n\\[f(0) = 0 - \\cos 0 = -1 < 0\\]\n\\[f(1) = 1 - \\cos(1) = 0.46 > 0\\]\nWhy: the signs are opposite, so \\([0, 1]\\) is an interval of sign change and, by the LRT, a root lies in it. (\\(\\cos 1 = 0.5403\\) in radians.)",
+              "Draw the graph\n\\[f(0.7) = 0.7 - 0.7648\\]\n\\[= -0.0648 \\approx -0.06\\]\n\\[f(0.8) = 0.8 - 0.6967\\]\n\\[= 0.1033 \\approx 0.10\\]\nWhy: we calculate \\(f\\) at \\(x = 0.1, 0.2, \\ldots, 0.9\\) (all values are in the table below), plot the points and join them with a smooth curve (Figure 8.3). The sign changes between 0.7 and 0.8, so the crossing is there.",
+              "Read the root\nThe curve crosses the \\(x\\)-axis at \\(x \\approx 0.74\\).\nWhy: \\(f(0.7) = -0.06\\) and \\(f(0.8) = 0.10\\); the curve is nearly straight here and rises 0.16 over this step, so it reaches 0 about \\(\\frac{0.06}{0.16} \\approx 0.4\\) of the way from 0.7 to 0.8, near 0.74. (Our extra check: \\(f(0.73) = -0.0152\\) and \\(f(0.74) = 0.0015\\), so the crossing is just below 0.74.)",
+              "Check:\n\\[f(0.735) = -0.0068 < 0\\]\n\\[f(0.745) = 0.0099 > 0\\]\nWhy: by the LRT the root lies in \\(]0.735, 0.745[\\), and every number there rounds to 0.74. (A computer gives the root 0.7391.)"
+            ],
+            "answer": "\\(x \\approx 0.74\\)"
+          },
+          {
+            "type": "table",
+            "caption": "Values of \\(f(x) = x - \\cos x\\) inside \\([0, 1]\\) (the table printed in Example 2)",
+            "header": [
+              "\\(x\\)",
+              "\\(f\\)"
+            ],
+            "rows": [
+              [
+                "\\(0.1\\)",
+                "\\(-0.89\\)"
+              ],
+              [
+                "\\(0.2\\)",
+                "\\(-0.78\\)"
+              ],
+              [
+                "\\(0.3\\)",
+                "\\(-0.66\\)"
+              ],
+              [
+                "\\(0.4\\)",
+                "\\(-0.52\\)"
+              ],
+              [
+                "\\(0.5\\)",
+                "\\(-0.38\\)"
+              ],
+              [
+                "\\(0.6\\)",
+                "\\(-0.23\\)"
+              ],
+              [
+                "\\(0.7\\)",
+                "\\(-0.06\\)"
+              ],
+              [
+                "\\(0.8\\)",
+                "\\(0.10\\)"
+              ],
+              [
+                "\\(0.9\\)",
+                "\\(0.28\\)"
+              ]
+            ],
+            "book_errors": [
+              "\\(-0.89\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The table prints \\(f(0.1) = -0.89\\). In fact \\(f(0.1) = 0.1 - \\cos 0.1 = 0.1 - 0.9950 = -0.8950\\), which is \\(-0.90\\) to two decimal places. The other values are correct, and the root 0.74 is not affected."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch8-fig-8-3-x-minus-cos-x",
+            "alt": "Graph of y = x minus cos x on the interval from 0 to 1, plotted through the points x = 0, 0.1, ..., 1 on a grid. The curve rises from (0, -1) to (1, 0.46) and crosses the x-axis at about x = 0.74. A dashed vertical line marks x = 1.",
+            "caption": "Figure 8.3: \\(y = x - \\cos x\\) on \\([0, 1]\\) crosses the x-axis at \\(x \\approx 0.74\\) (original drawing after the textbook's figure)",
+            "side": true
+          },
+          {
+            "type": "paragraph",
+            "text": "Draw the graph of \\(y = x - \\cos x\\) on the interval \\([0, 1]\\) as shown in Figure 8.3. It is clear from the figure, that the curve is crossing the \\(x\\)-axis at \\(x \\approx 0.74\\). Hence, the required root approximate to two decimal places is \\(x \\approx 0.74\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "While performing calculations with trigonometric equations, always keep your calculator in radian mode."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why radian mode? In calculus, \\(\\sin x\\) and \\(\\cos x\\) always take \\(x\\) in radians. In degree mode the calculator gives \\(\\cos 1 = \\cos 1^{\\circ} = 0.9998\\) instead of \\(\\cos 1 = 0.5403\\), so \\(f(1)\\) would come out as 0.0002 instead of 0.46, and every value in the table would be wrong."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "In a graphical-method answer show four things: (1) continuity, (2) the interval of sign change with both values, (3) the table of values and a neat graph with the crossing marked, (4) the root read from the graph, rounded to the required decimal places."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. The graphical method locates a root by drawing \\(y = f(x)\\) and reading where it crosses the \\(x\\)-axis.\n2. Steps: find an interval of sign change, draw the graph only inside it, read the crossing.\n3. It is good for one or two decimal places and gives the starting value for the Bisection, Regula-Falsi and Newton-Raphson methods.\n4. Keep the calculator in radian mode whenever sin, cos or tan appear."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Calculator in degree mode for \\(\\cos x\\) or \\(\\sin x\\): every value is wrong.\n2. Rounding table values to 2 decimals and then misreading the sign of a value close to 0 (for example \\(f(0.74) = 0.0015\\) would show as 0.00).\n3. Reading the root from a rough sketch on the whole interval. Draw the graph carefully, close to the crossing.\n4. Joining the points with straight jagged lines far apart; use enough points and a smooth curve."
+          }
+        ]
+      }
+    }
+  ]
+}

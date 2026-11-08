@@ -1,0 +1,290 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.3",
+      "title": "3.3 Trigonometric Substitution",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 82,
+          "pdf_to": 85,
+          "note": "3.3 Trigonometric Substitution: Cases 1-3, special integrals (i)-(ii) with proofs, Challenge box, Examples 22-28 (book prints 23 twice, no 25; shown as 22-28)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Integrals involving the radicals \\(\\sqrt{a^{2}-x^{2}}\\), \\(\\sqrt{a^{2}+x^{2}}\\), and \\(\\sqrt{x^{2}-a^{2}}\\) (where \\(a > 0\\)) can often be evaluated by making a substitution involving a trigonometric function. The objective of trigonometric substitution is to eliminate the radical in the integrand. We do this by using the Pythagorean identities:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\sin^{2}\\theta + \\cos^{2}\\theta = 1 \\quad\\text{and}\\quad \\sec^{2}\\theta - \\tan^{2}\\theta = 1",
+            "text_alt": "sine squared theta plus cosine squared theta equals 1, and secant squared theta minus tangent squared theta equals 1"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does a trigonometric function help? A square root is hard to integrate, but the square root of a perfect square is easy: \\(\\sqrt{p^{2}} = |p|\\). The Pythagorean identities turn \\(a^{2} - x^{2}\\), \\(a^{2} + x^{2}\\) or \\(x^{2} - a^{2}\\) into a single square, so the root disappears.\nFor example, if \\(x = a\\sin\\theta\\) then \\(a^{2} - x^{2} = a^{2}(1 - \\sin^{2}\\theta) = a^{2}\\cos^{2}\\theta\\), and \\(\\sqrt{a^{2}-x^{2}} = a\\cos\\theta\\).\nThe second identity can also be written \\(1 + \\tan^{2}\\theta = \\sec^{2}\\theta\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Case 1: Integrals involving \\(\\sqrt{a^{2}-x^{2}}\\) (where, \\(a > 0\\)) can frequently be reduced to a simpler form by using the substitution \\(x = a\\sin\\theta\\).",
+            "bold": [
+              "Case 1:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Case 2: Integrals involving \\(\\sqrt{a^{2}+x^{2}}\\) (where, \\(a > 0\\)) can frequently be reduced to a simpler form by using the substitution \\(x = a\\tan\\theta\\).",
+            "bold": [
+              "Case 2:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Case 3: Finally, integrals involving \\(\\sqrt{x^{2}-a^{2}}\\) (where, \\(a > 0\\)) can frequently be reduced to a simpler form by using the substitution \\(x = a\\sec\\theta\\).",
+            "bold": [
+              "Case 3:"
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Our summary of the three cases (not printed in the book)",
+            "header": [
+              "Radical",
+              "Substitute",
+              "Identity used",
+              "Radical becomes"
+            ],
+            "rows": [
+              [
+                "\\(\\sqrt{a^{2}-x^{2}}\\)",
+                "\\(x = a\\sin\\theta\\)",
+                "\\(1 - \\sin^{2}\\theta = \\cos^{2}\\theta\\)",
+                "\\(a\\cos\\theta\\)"
+              ],
+              [
+                "\\(\\sqrt{a^{2}+x^{2}}\\)",
+                "\\(x = a\\tan\\theta\\)",
+                "\\(1 + \\tan^{2}\\theta = \\sec^{2}\\theta\\)",
+                "\\(a\\sec\\theta\\)"
+              ],
+              [
+                "\\(\\sqrt{x^{2}-a^{2}}\\)",
+                "\\(x = a\\sec\\theta\\)",
+                "\\(\\sec^{2}\\theta - 1 = \\tan^{2}\\theta\\)",
+                "\\(a\\tan\\theta\\)"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to choose: look at the sign pattern under the root. Constant minus variable: \\(\\sin\\). Constant plus variable: \\(\\tan\\). Variable minus constant: \\(\\sec\\).\nThe angle is kept in a fixed range so that the root is positive and the substitution can be reversed: Case 1 \\(-\\frac{\\pi}{2} \\le \\theta \\le \\frac{\\pi}{2}\\) (\\(\\cos\\theta \\ge 0\\)); Case 2 \\(-\\frac{\\pi}{2} < \\theta < \\frac{\\pi}{2}\\) (\\(\\sec\\theta > 0\\)); Case 3 \\(0 \\le \\theta < \\frac{\\pi}{2}\\) when \\(x \\ge a\\) (\\(\\tan\\theta \\ge 0\\)).\nAt the end the answer must be written back in \\(x\\). A right triangle helps: from \\(\\sin\\theta = \\frac{x}{a}\\) take opposite side \\(x\\), hypotenuse \\(a\\), adjacent side \\(\\sqrt{a^{2}-x^{2}}\\), and read off any other ratio.\nThe same idea works when the expression is not exactly \\(a^{2} \\pm x^{2}\\): complete the square or substitute first (see Examples 23 and 28)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Some Special Integrals as Formulae"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{(i)}\\ \\int\\dfrac{dx}{a^{2}-x^{2}} = \\dfrac{1}{2a}\\ln\\left|\\dfrac{a+x}{a-x}\\right| + c",
+            "text_alt": "(i) integral of 1 over (a squared minus x squared) dx equals 1 over 2a times ln of modulus of (a plus x) over (a minus x), plus c"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{(ii)}\\ \\int\\dfrac{dx}{\\sqrt{a^{2}-x^{2}}} = \\sin^{-1}\\left(\\dfrac{x}{a}\\right) + c,\\ a > 0",
+            "text_alt": "(ii) integral of 1 over square root of (a squared minus x squared) dx equals inverse sine of x over a, plus c, where a is greater than 0"
+          },
+          {
+            "type": "paragraph",
+            "text": "Proof: (i) We want to evaluate \\(\\int\\frac{1}{a^{2}-x^{2}}\\,dx\\)\nThe denominator \\(a^{2}-x^{2} = (a-x)(a+x)\\), so\n\\[\\int\\dfrac{1}{a^{2}-x^{2}}\\,dx = \\int\\dfrac{1}{(a-x)(a+x)}\\,dx\\]\n\\[= \\dfrac{1}{2a}\\int\\dfrac{(a-x)+(a+x)}{(a-x)(a+x)}\\,dx\\]\n\\[= \\dfrac{1}{2a}\\int\\Big[\\dfrac{(a-x)}{(a-x)(a+x)}\\]\n\\[\\qquad + \\dfrac{(a+x)}{(a-x)(a+x)}\\Big]dx\\]\n\\[= \\dfrac{1}{2a}\\int\\left(\\dfrac{1}{a+x} + \\dfrac{1}{a-x}\\right)dx\\]\n\\[= \\dfrac{1}{2a}\\int\\left(\\dfrac{1}{a+x} - \\dfrac{-1}{a-x}\\right)dx\\]\n\\[= \\dfrac{1}{2a}\\big(\\ln|a+x| - \\ln|a-x|\\big) + c\\]\n\\[= \\dfrac{1}{2a}\\ln\\left|\\dfrac{a+x}{a-x}\\right| + c\\]",
+            "bold": [
+              "Proof:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The key trick: the numerator 1 is written as \\(\\frac{(a-x)+(a+x)}{2a}\\), because \\((a-x)+(a+x) = 2a\\). This splits one hard fraction into two easy ones (this is partial fractions in disguise).\nWhy \\(\\int\\frac{dx}{a-x} = -\\ln|a-x|\\)? The derivative of \\(a - x\\) is \\(-1\\), so \\(\\frac{-1}{a-x}\\) is of the form \\(\\frac{f'(x)}{f(x)}\\) and integrates to \\(\\ln|a-x|\\). That is why the book writes \\(\\frac{1}{a-x} = -\\frac{-1}{a-x}\\).\nFinally \\(\\ln|A| - \\ln|B| = \\ln\\left|\\frac{A}{B}\\right|\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Prove the given formulae.\n(i) \\(\\int\\frac{1}{x^{2}-a^{2}}\\,dx = \\frac{1}{2a}\\ln\\left|\\frac{x-a}{x+a}\\right| + c\\)\n(ii) \\(\\int\\frac{1}{a^{2}+x^{2}}\\,dx = \\frac{1}{a}\\tan^{-1}\\left(\\frac{x}{a}\\right) + c\\)\n(iii) \\(\\int\\frac{dx}{\\sqrt{a^{2}+x^{2}}} = \\ln\\left|x + \\sqrt{a^{2}+x^{2}}\\right| + c\\), where \\(a > 0\\)\n(iv) \\(\\int\\frac{dx}{\\sqrt{x^{2}-a^{2}}} = \\ln\\left|x + \\sqrt{x^{2}-a^{2}}\\right| + c\\), where \\(a > 0\\)\n(v) \\(\\int\\frac{dx}{x\\sqrt{x^{2}-a^{2}}} = \\frac{1}{a}\\sec^{-1}\\left(\\frac{x}{a}\\right) + c\\), where \\(a > 0\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Hints for the Challenge: (i) as in Proof (i), with \\(1 = \\frac{(x+a)-(x-a)}{2a}\\). (ii) put \\(x = a\\tan\\theta\\). (iii) put \\(x = a\\tan\\theta\\) and use \\(\\int\\sec\\theta\\,d\\theta = \\ln|\\sec\\theta + \\tan\\theta|\\). (iv) put \\(x = a\\sec\\theta\\) and use the same \\(\\sec\\theta\\) integral. (v) put \\(x = a\\sec\\theta\\); the integral becomes \\(\\frac{1}{a}\\int d\\theta\\).\nIn (iii) and (iv) a constant \\(-\\ln a\\) appears; it is absorbed into \\(c\\).\nFormula (v) as printed holds for \\(x > a\\). For \\(x < -a\\) write \\(\\frac{1}{a}\\sec^{-1}\\left|\\frac{x}{a}\\right| + c\\) (the book does this in Example 28)."
+          },
+          {
+            "type": "paragraph",
+            "text": "(ii) We want to evaluate \\(\\int\\frac{1}{\\sqrt{a^{2}-x^{2}}}\\,dx\\), where \\(a\\) is a positive constant and the domain is \\(-a < x < a\\) so that the square root is real."
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(x = a\\sin\\theta\\), \\(-\\frac{\\pi}{2} < \\theta < \\frac{\\pi}{2}\\), then \\(dx = a\\cos\\theta\\,d\\theta\\). Also\n\\[\\sqrt{a^{2}-x^{2}} = \\sqrt{a^{2}-(a\\sin\\theta)^{2}}\\]\n\\[= \\sqrt{a^{2}-a^{2}\\sin^{2}\\theta}\\]\n\\[= \\sqrt{a^{2}(1-\\sin^{2}\\theta)}\\]\n\\[= \\sqrt{a^{2}\\cos^{2}\\theta} = a|\\cos\\theta|\\]\nOn the interval \\(-\\frac{\\pi}{2} < \\theta < \\frac{\\pi}{2}\\), \\(\\cos\\theta > 0\\), so \\(|\\cos\\theta| = \\cos\\theta\\). Thus, \\(\\sqrt{a^{2}-x^{2}} = a\\cos\\theta\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Substitute into the integral:\n\\[\\int\\dfrac{1}{\\sqrt{a^{2}-x^{2}}}\\,dx\\]\n\\[= \\int\\dfrac{1}{a\\cos\\theta}\\cdot a\\cos\\theta\\,d\\theta\\]\n\\(= \\int 1\\,d = \\theta + c\\)",
+            "book_errors": [
+              "\\(= \\int 1\\,d = \\theta + c\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \\(\\int 1\\,d = \\theta + c\\): the variable of integration is missing. It should be \\(\\int 1\\,d\\theta = \\theta + c\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "We have \\(x = a\\sin\\theta \\Rightarrow \\sin\\theta = \\frac{x}{a}\\), and since \\(\\theta\\) is in the principal range \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\), \\(\\theta = \\sin^{-1}\\left(\\frac{x}{a}\\right)\\).\nThus, \\(\\int\\frac{1}{\\sqrt{a^{2}-x^{2}}}\\,dx = \\sin^{-1}\\left(\\frac{x}{a}\\right) + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why must \\(\\theta\\) stay in \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\)? On this range \\(\\cos\\theta \\ge 0\\), so \\(\\sqrt{a^{2}\\cos^{2}\\theta} = a\\cos\\theta\\) without a minus sign, and \\(\\sin\\theta = \\frac{x}{a}\\) has exactly one solution \\(\\theta = \\sin^{-1}\\frac{x}{a}\\).\nNotice how neat the result is: after the substitution the integrand became just 1. That is the power of choosing the right substitution."
+          },
+          {
+            "type": "example",
+            "title": "Example 22",
+            "problem": "Evaluate \\(\\int\\frac{\\sqrt{9-x^{2}}}{x^{2}}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int\\frac{\\sqrt{9-x^{2}}}{x^{2}}\\,dx\\)\nTo find: the indefinite integral.\nMethod: the radical is \\(\\sqrt{a^{2}-x^{2}}\\) with \\(a = 3\\), so Case 1: put \\(x = 3\\sin\\theta\\). The identity \\(1 - \\sin^{2}\\theta = \\cos^{2}\\theta\\) removes the root.",
+              "Step 1: Substitute\n\\[x = 3\\sin\\theta,\\quad dx = 3\\cos\\theta\\,d\\theta\\]\nwith \\(\\theta \\in \\left[-\\frac{\\pi}{2}, 0\\right)\\cup\\left(0, \\frac{\\pi}{2}\\right]\\).\nWhy: \\(\\theta \\ne 0\\) because \\(x \\ne 0\\) (it is in the denominator); on this range \\(\\cos\\theta \\ge 0\\).",
+              "Step 2: Remove the root\n\\[\\sqrt{9-x^{2}} = \\sqrt{9-(3\\sin\\theta)^{2}}\\]\n\\[= \\sqrt{9(1-\\sin^{2}\\theta)} = \\sqrt{9\\cos^{2}\\theta}\\]\n\\[= 3\\cos\\theta\\]\nWhy: \\(1 - \\sin^{2}\\theta = \\cos^{2}\\theta\\) and \\(\\cos\\theta \\ge 0\\).",
+              "Step 3: Write the integral in \\(\\theta\\)\n\\[\\int\\dfrac{3\\cos\\theta}{(3\\sin\\theta)^{2}}\\cdot 3\\cos\\theta\\,d\\theta\\]\n\\[= \\int\\dfrac{9\\cos^{2}\\theta}{9\\sin^{2}\\theta}\\,d\\theta = \\int\\cot^{2}\\theta\\,d\\theta\\]\nWhy: every \\(x\\) and \\(dx\\) has been replaced.",
+              "Step 4: Integrate\n\\[\\int(\\csc^{2}\\theta - 1)\\,d\\theta = -\\cot\\theta - \\theta + c \\quad (1)\\]\nWhy: \\(\\cot^{2}\\theta = \\csc^{2}\\theta - 1\\) and \\(\\int\\csc^{2}\\theta\\,d\\theta = -\\cot\\theta\\).",
+              "Step 5: Back to \\(x\\)\n\\[\\sin\\theta = \\dfrac{x}{3} \\Rightarrow \\theta = \\sin^{-1}\\left(\\dfrac{x}{3}\\right)\\]\n\\[\\cot\\theta = \\dfrac{\\sqrt{1-\\sin^{2}\\theta}}{\\sin\\theta} = \\dfrac{\\sqrt{1-\\frac{x^{2}}{9}}}{\\frac{x}{3}}\\]\n\\[= \\dfrac{\\sqrt{9-x^{2}}}{x}\\]\nWhy: \\(\\cos\\theta = \\sqrt{1-\\sin^{2}\\theta}\\) because \\(\\cos\\theta \\ge 0\\); \\(\\sqrt{1 - \\frac{x^{2}}{9}} = \\frac{\\sqrt{9-x^{2}}}{3}\\).",
+              "Step 6: Put into (1)\n\\[\\int\\dfrac{\\sqrt{9-x^{2}}}{x^{2}}\\,dx\\]\n\\[= -\\dfrac{\\sqrt{9-x^{2}}}{x} - \\sin^{-1}\\dfrac{x}{3} + c\\]\nWhy: the answer must be in \\(x\\).",
+              "Check:\n\\[\\dfrac{d}{dx}\\Big(-\\dfrac{\\sqrt{9-x^{2}}}{x}\\Big) = \\dfrac{9}{x^{2}\\sqrt{9-x^{2}}}\\]\n\\[\\dfrac{d}{dx}\\Big(-\\sin^{-1}\\dfrac{x}{3}\\Big) = -\\dfrac{1}{\\sqrt{9-x^{2}}}\\]\nSum: \\(\\frac{9 - x^{2}}{x^{2}\\sqrt{9-x^{2}}} = \\frac{\\sqrt{9-x^{2}}}{x^{2}}\\), the integrand."
+            ],
+            "answer": "\\(\\int\\frac{\\sqrt{9-x^{2}}}{x^{2}}\\,dx = -\\frac{\\sqrt{9-x^{2}}}{x} - \\sin^{-1}\\left(\\frac{x}{3}\\right) + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 23",
+            "problem": "Evaluate \\(\\int\\frac{1}{x\\sqrt{x^{4}+1}}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int\\frac{1}{x\\sqrt{x^{4}+1}}\\,dx\\)\nTo find: the indefinite integral.\nMethod: \\(x^{4}+1 = (x^{2})^{2}+1\\) has the form \\(u^{2}+1\\) with \\(u = x^{2}\\): Case 2, put \\(x^{2} = \\tan\\theta\\). To make \\(d(x^{2}) = 2x\\,dx\\) appear, multiply and divide by \\(2x\\).",
+              "Step 1: Prepare the integrand\n\\[\\int\\dfrac{dx}{x\\sqrt{x^{4}+1}}\\]\n\\[= \\dfrac{1}{2}\\int\\dfrac{2x\\,dx}{x^{2}\\sqrt{(x^{2})^{2}+1}}\\]\nWhy: \\(\\frac{1}{x} = \\frac{1}{2}\\cdot\\frac{2x}{x^{2}}\\), so nothing has changed.",
+              "Step 2: Substitute\n\\[x^{2} = \\tan\\theta,\\quad 2x\\,dx = \\sec^{2}\\theta\\,d\\theta\\]\nThe book takes \\(\\theta \\in \\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\); since \\(x^{2} > 0\\), in fact \\(0 < \\theta < \\frac{\\pi}{2}\\).\nWhy: differentiate both sides; \\(\\frac{d}{d\\theta}\\tan\\theta = \\sec^{2}\\theta\\).",
+              "Step 3: Simplify\n\\[= \\dfrac{1}{2}\\int\\dfrac{\\sec^{2}\\theta}{\\tan\\theta\\sqrt{\\tan^{2}\\theta+1}}\\,d\\theta\\]\n\\[= \\dfrac{1}{2}\\int\\dfrac{\\sec^{2}\\theta}{\\tan\\theta\\sec\\theta}\\,d\\theta = \\dfrac{1}{2}\\int\\dfrac{\\sec\\theta}{\\tan\\theta}\\,d\\theta\\]\n\\[= \\dfrac{1}{2}\\int\\csc\\theta\\,d\\theta\\]\nWhy: \\(\\tan^{2}\\theta + 1 = \\sec^{2}\\theta\\) with \\(\\sec\\theta > 0\\), and \\(\\frac{\\sec\\theta}{\\tan\\theta} = \\frac{1}{\\cos\\theta}\\cdot\\frac{\\cos\\theta}{\\sin\\theta} = \\csc\\theta\\).",
+              "Step 4: Integrate\n\\[= \\dfrac{1}{2}\\ln|\\csc\\theta - \\cot\\theta| + c\\]\nWhy: \\(\\int\\csc\\theta\\,d\\theta = \\ln|\\csc\\theta - \\cot\\theta| + c\\).",
+              "Step 5: Back to \\(x\\)\n\\[\\cot\\theta = \\dfrac{1}{\\tan\\theta} = \\dfrac{1}{x^{2}}\\]\n\\[\\csc\\theta = \\sqrt{1+\\cot^{2}\\theta} = \\sqrt{1+\\left(\\dfrac{1}{x^{2}}\\right)^{2}}\\]\n\\[= \\dfrac{\\sqrt{x^{4}+1}}{x^{2}}\\]\nWhy: \\(1 + \\cot^{2}\\theta = \\csc^{2}\\theta\\), and \\(\\csc\\theta > 0\\) for \\(0 < \\theta < \\frac{\\pi}{2}\\).",
+              "Step 6: Write the answer\n\\[= \\dfrac{1}{2}\\ln\\left|\\dfrac{\\sqrt{x^{4}+1}}{x^{2}} - \\dfrac{1}{x^{2}}\\right| + c\\]\n\\[= \\dfrac{1}{2}\\ln\\left|\\dfrac{\\sqrt{x^{4}+1}-1}{x^{2}}\\right| + c\\]\nWhy: same denominator \\(x^{2}\\).",
+              "Check:\nWrite the answer as \\(\\frac{1}{2}\\ln(\\sqrt{x^{4}+1}-1) - \\ln|x|\\). Its derivative is\n\\[\\dfrac{x^{3}}{\\sqrt{x^{4}+1}(\\sqrt{x^{4}+1}-1)} - \\dfrac{1}{x}\\]\nMultiplying the first fraction by \\(\\frac{\\sqrt{x^{4}+1}+1}{\\sqrt{x^{4}+1}+1}\\) gives \\(\\frac{\\sqrt{x^{4}+1}+1}{x\\sqrt{x^{4}+1}}\\); subtracting \\(\\frac{1}{x}\\) leaves \\(\\frac{1}{x\\sqrt{x^{4}+1}}\\), the integrand."
+            ],
+            "answer": "\\(\\frac{1}{2}\\ln\\left|\\frac{\\sqrt{x^{4}+1}-1}{x^{2}}\\right| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Numbering note (ours)",
+            "text": "The textbook prints the number 'Example 23' twice (first for \\(\\int\\frac{dx}{x\\sqrt{x^{4}+1}}\\), then for \\(\\int\\frac{\\sqrt{x^{2}-9}}{x}\\,dx\\)) and has no Example 25. We show the second one as Example 24 and the book's Example 24 as Example 25, so that every example has its own number: 22, 23, 24, 25, 26, 27, 28."
+          },
+          {
+            "type": "example",
+            "title": "Example 24",
+            "problem": "Evaluate \\(\\int\\frac{\\sqrt{x^{2}-9}}{x}\\,dx\\), \\((x > 3)\\)",
+            "steps": [
+              "Given: \\(\\int\\frac{\\sqrt{x^{2}-9}}{x}\\,dx\\), \\(x > 3\\)\nTo find: the indefinite integral.\nMethod: the radical is \\(\\sqrt{x^{2}-a^{2}}\\) with \\(a = 3\\): Case 3, put \\(x = 3\\sec\\theta\\). The identity \\(\\sec^{2}\\theta - 1 = \\tan^{2}\\theta\\) removes the root.",
+              "Step 1: Substitute\n\\[x = 3\\sec\\theta,\\quad dx = 3\\sec\\theta\\tan\\theta\\,d\\theta\\]\nSince \\(x > 3\\), \\(0 < \\theta < \\frac{\\pi}{2}\\), so \\(\\tan\\theta > 0\\).\nWhy: \\(\\frac{d}{d\\theta}\\sec\\theta = \\sec\\theta\\tan\\theta\\).",
+              "Step 2: Write the integral in \\(\\theta\\)\n\\[\\int\\dfrac{\\sqrt{(3\\sec\\theta)^{2}-9}}{3\\sec\\theta}\\cdot 3\\sec\\theta\\tan\\theta\\,d\\theta\\]\n\\[= \\int\\sqrt{9(\\sec^{2}\\theta-1)}\\cdot\\tan\\theta\\,d\\theta\\]\n\\[= \\int 3\\tan\\theta\\tan\\theta\\,d\\theta = 3\\int\\tan^{2}\\theta\\,d\\theta\\]\nWhy: \\(3\\sec\\theta\\) cancels; \\(\\sqrt{9\\tan^{2}\\theta} = 3\\tan\\theta\\).",
+              "Step 3: Integrate\n\\[= 3\\int(\\sec^{2}\\theta - 1)\\,d\\theta = 3(\\tan\\theta - \\theta) + c\\]\nWhy: \\(\\tan^{2}\\theta = \\sec^{2}\\theta - 1\\).",
+              "Step 4: Back to \\(x\\)\n\\[\\tan\\theta = \\sqrt{\\sec^{2}\\theta - 1} = \\sqrt{\\left(\\dfrac{x}{3}\\right)^{2} - 1}\\]\n\\[\\theta = \\sec^{-1}\\left(\\dfrac{x}{3}\\right)\\]\n\\[3\\Big[\\sqrt{\\tfrac{x^{2}}{9}-1} - \\sec^{-1}\\tfrac{x}{3}\\Big]\\]\n\\[= \\sqrt{x^{2}-9} - 3\\sec^{-1}\\dfrac{x}{3}\\]\nWhy: \\(3\\sqrt{\\frac{x^{2}-9}{9}} = \\sqrt{x^{2}-9}\\).",
+              "Check:\n\\[\\dfrac{d}{dx}\\sqrt{x^{2}-9} = \\dfrac{x}{\\sqrt{x^{2}-9}}\\]\n\\[\\dfrac{d}{dx}3\\sec^{-1}\\dfrac{x}{3} = \\dfrac{9}{x\\sqrt{x^{2}-9}}\\]\nDifference: \\(\\frac{x^{2}-9}{x\\sqrt{x^{2}-9}} = \\frac{\\sqrt{x^{2}-9}}{x}\\), the integrand."
+            ],
+            "answer": "\\(\\sqrt{x^{2}-9} - 3\\sec^{-1}\\left(\\frac{x}{3}\\right) + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 25",
+            "problem": "Evaluate \\(\\int\\frac{(x+1)e^{x}}{1+x^{2}e^{2x}}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int\\frac{(x+1)e^{x}}{1+x^{2}e^{2x}}\\,dx\\)\nTo find: the indefinite integral.\nMethod: \\(x^{2}e^{2x} = (xe^{x})^{2}\\), and the numerator \\((x+1)e^{x}\\) is the derivative of \\(xe^{x}\\). So put \\(u = xe^{x}\\); the integral becomes \\(\\int\\frac{du}{1+u^{2}}\\).",
+              "Step 1: Choose \\(u\\)\n\\[u = xe^{x}\\]\n\\[\\dfrac{du}{dx} = xe^{x} + e^{x}(1) \\Rightarrow du = (x+1)e^{x}\\,dx\\]\nWhy: product rule.",
+              "Step 2: Rewrite and integrate\n\\[\\int\\dfrac{(x+1)e^{x}}{1+(xe^{x})^{2}}\\,dx = \\int\\dfrac{du}{1+u^{2}}\\]\n\\[= \\tan^{-1}u + c = \\tan^{-1}(xe^{x}) + c\\]\nWhy: \\(\\int\\frac{du}{1+u^{2}} = \\tan^{-1}u + c\\) (Challenge formula (ii) with \\(a = 1\\)).",
+              "Check:\n\\[\\dfrac{d}{dx}\\tan^{-1}(xe^{x})\\]\n\\[= \\dfrac{(x+1)e^{x}}{1+x^{2}e^{2x}}\\]\nThe integrand comes back."
+            ],
+            "answer": "\\(\\tan^{-1}(xe^{x}) + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 25 needs no trigonometric substitution: a plain substitution \\(u = xe^{x}\\) already gives the standard form \\(\\int\\frac{du}{1+u^{2}} = \\tan^{-1}u\\). Always first look for an inner function whose derivative is present."
+          },
+          {
+            "type": "example",
+            "title": "Example 26",
+            "problem": "Evaluate \\(\\int\\frac{1}{x\\sqrt{1-x^{3}}}\\,dx\\), \\(x \\in (-\\infty, 0)\\cup(0, 1)\\).",
+            "steps": [
+              "Given: \\(\\int\\frac{1}{x\\sqrt{1-x^{3}}}\\,dx\\), \\(x \\in (-\\infty, 0)\\cup(0, 1)\\)\nTo find: the indefinite integral.\nMethod: put \\(u = \\sqrt{1-x^{3}}\\), which removes the root. Its differential needs \\(-3x^{2}\\,dx\\), so first multiply and divide by \\(-3x^{2}\\).",
+              "Step 1: Prepare the integrand\n\\[\\int\\dfrac{dx}{x\\sqrt{1-x^{3}}}\\]\n\\[= -\\dfrac{1}{3}\\int\\dfrac{-3x^{2}}{x^{3}\\sqrt{1-x^{3}}}\\,dx\\]\nWhy: \\(-\\frac{1}{3}\\cdot\\frac{-3x^{2}}{x^{3}} = \\frac{1}{x}\\); the value is unchanged.",
+              "Step 2: Substitute\n\\[u = \\sqrt{1-x^{3}} \\Rightarrow u^{2} = 1 - x^{3}\\]\n\\[2u\\,du = -3x^{2}\\,dx,\\quad x^{3} = 1 - u^{2}\\]\nWhy: squaring first makes the differentiation easy.",
+              "Step 3: Write in \\(u\\)\n\\[= -\\dfrac{1}{3}\\int\\dfrac{2u}{(1-u^{2})u}\\,du\\]\n\\[= \\dfrac{2}{3}\\int\\dfrac{du}{u^{2}-1^{2}}\\]\nWhy: \\(u\\) cancels and \\(-\\frac{1}{1-u^{2}} = \\frac{1}{u^{2}-1}\\).",
+              "Step 4: Use the formula \\(\\int\\frac{du}{u^{2}-a^{2}}\\) with \\(a = 1\\)\n\\[= \\dfrac{2}{3}\\cdot\\dfrac{1}{2(1)}\\ln\\left|\\dfrac{u-1}{u+1}\\right| + c\\]\n\\[= \\dfrac{1}{3}\\ln\\left|\\dfrac{\\sqrt{1-x^{3}}-1}{\\sqrt{1-x^{3}}+1}\\right| + c\\]\nWhy: Challenge formula (i); then \\(u = \\sqrt{1-x^{3}}\\) is put back.",
+              "Check:\n\\[\\dfrac{d}{dx}\\Big[\\tfrac{1}{3}\\ln\\left|\\tfrac{u-1}{u+1}\\right|\\Big]\\]\n\\[= \\dfrac{1}{3}\\cdot\\dfrac{2}{u^{2}-1}\\cdot\\dfrac{du}{dx}\\]\nWith \\(u^{2} - 1 = -x^{3}\\) and \\(\\frac{du}{dx} = \\frac{-3x^{2}}{2u}\\) this is \\(\\frac{1}{3}\\cdot\\frac{2}{-x^{3}}\\cdot\\frac{-3x^{2}}{2u} = \\frac{1}{xu} = \\frac{1}{x\\sqrt{1-x^{3}}}\\)."
+            ],
+            "answer": "\\(\\frac{1}{3}\\ln\\left|\\frac{\\sqrt{1-x^{3}}-1}{\\sqrt{1-x^{3}}+1}\\right| + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 27",
+            "problem": "Evaluate \\(\\int\\frac{2x}{\\sqrt{x^{4}+9}}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\int\\frac{2x}{\\sqrt{x^{4}+9}}\\,dx\\)\nTo find: the indefinite integral.\nMethod: \\(x^{4} = (x^{2})^{2}\\) and \\(2x\\,dx = d(x^{2})\\), so put \\(u = x^{2}\\); the result is the Challenge formula (iii) with \\(a = 3\\).",
+              "Step 1: Substitute\n\\[u = x^{2},\\quad du = 2x\\,dx\\]\n\\[\\int\\dfrac{2x\\,dx}{\\sqrt{x^{4}+9}} = \\int\\dfrac{du}{\\sqrt{u^{2}+3^{2}}}\\]\nWhy: the numerator is exactly \\(du\\).",
+              "Step 2: Use the formula\n\\[= \\ln\\left|u + \\sqrt{u^{2}+3^{2}}\\right| + c\\]\n\\[= \\ln\\left|x^{2} + \\sqrt{x^{4}+9}\\right| + c\\]\nWhy: \\(\\int\\frac{du}{\\sqrt{a^{2}+u^{2}}} = \\ln|u + \\sqrt{a^{2}+u^{2}}| + c\\); then \\(u = x^{2}\\) is put back (the book's last line writes the \\(u\\)-integral on the left; it equals the given integral).",
+              "Check:\n\\[\\dfrac{d}{dx}\\ln(x^{2}+\\sqrt{x^{4}+9})\\]\n\\[= \\dfrac{2x + \\frac{2x^{3}}{\\sqrt{x^{4}+9}}}{x^{2}+\\sqrt{x^{4}+9}}\\]\n\\[= \\dfrac{2x(\\sqrt{x^{4}+9}+x^{2})}{\\sqrt{x^{4}+9}\\,(x^{2}+\\sqrt{x^{4}+9})}\\]\n\\[= \\dfrac{2x}{\\sqrt{x^{4}+9}}\\]"
+            ],
+            "answer": "\\(\\ln\\left|x^{2} + \\sqrt{x^{4}+9}\\right| + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 28",
+            "problem": "\\(\\int\\frac{dx}{(x-2)\\sqrt{x^{2}-4x+3}}\\)",
+            "steps": [
+              "Given: \\(\\int\\frac{dx}{(x-2)\\sqrt{x^{2}-4x+3}}\\)\nTo find: the indefinite integral.\nMethod: complete the square under the root, then put \\(u = x - 2\\); the integral has the form \\(\\int\\frac{du}{u\\sqrt{u^{2}-a^{2}}}\\) (Challenge formula (v)) with \\(a = 1\\).",
+              "Step 1: Complete the square\n\\[x^{2}-4x+3 = (x^{2}-4x+4) + 3 - 4\\]\n\\[= (x-2)^{2} - 1\\]\nWhy: half of the coefficient of \\(x\\) is \\(-2\\), and \\((-2)^{2} = 4\\) is added and subtracted.",
+              "Step 2: Substitute \\(u = x - 2\\), \\(du = dx\\)\n\\[\\int\\dfrac{dx}{(x-2)\\sqrt{(x-2)^{2}-1}}\\]\n\\[= \\int\\dfrac{du}{u\\sqrt{u^{2}-1^{2}}}\\]\nWhy: the factor outside the root is the same \\(x - 2\\).",
+              "Step 3: Use the formula with \\(a = 1\\)\n\\[= \\dfrac{1}{1}\\sec^{-1}\\left|\\dfrac{u}{1}\\right| + c = \\sec^{-1}|u| + c\\]\nWhy: Challenge formula (v). The book writes \\(|u|\\): then the answer holds for \\(u > 1\\) and for \\(u < -1\\) (that is, \\(x > 3\\) or \\(x < 1\\)).",
+              "Step 4: Put \\(x\\) back\n\\[= \\sec^{-1}|x-2| + c\\]\nWhy: \\(u = x - 2\\).",
+              "Check:\nFor \\(u > 1\\): \\(\\frac{d}{du}\\sec^{-1}u = \\frac{1}{u\\sqrt{u^{2}-1}}\\). For \\(u < -1\\): \\(\\frac{d}{du}\\sec^{-1}(-u) = \\frac{-1}{(-u)\\sqrt{u^{2}-1}} = \\frac{1}{u\\sqrt{u^{2}-1}}\\). Both give the integrand."
+            ],
+            "answer": "\\(\\sec^{-1}|x-2| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "\\(\\sqrt{a^{2}-x^{2}}\\): \\(x = a\\sin\\theta\\); \\(\\sqrt{a^{2}+x^{2}}\\): \\(x = a\\tan\\theta\\); \\(\\sqrt{x^{2}-a^{2}}\\): \\(x = a\\sec\\theta\\).\nReplace \\(dx\\) too: \\(dx = a\\cos\\theta\\,d\\theta\\), \\(a\\sec^{2}\\theta\\,d\\theta\\) or \\(a\\sec\\theta\\tan\\theta\\,d\\theta\\).\nSpecial integrals to remember: \\(\\int\\frac{dx}{a^{2}-x^{2}} = \\frac{1}{2a}\\ln\\left|\\frac{a+x}{a-x}\\right| + c\\), \\(\\int\\frac{dx}{\\sqrt{a^{2}-x^{2}}} = \\sin^{-1}\\frac{x}{a} + c\\), and the five Challenge formulae.\nBefore using a formula, bring the integrand to its exact form: substitute (\\(u = e^{x}\\), \\(u = \\ln x\\), \\(u = x^{2}\\)) or complete the square.\nAlways write the final answer back in \\(x\\), using a right triangle for the other ratios."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Forgetting to change \\(dx\\): \\(x = 3\\sin\\theta\\) needs \\(dx = 3\\cos\\theta\\,d\\theta\\), not \\(d\\theta\\).\nMixing up the two log formulas: \\(a^{2} - x^{2}\\) gives \\(\\frac{1}{2a}\\ln\\left|\\frac{a+x}{a-x}\\right|\\), while \\(x^{2} - a^{2}\\) gives \\(\\frac{1}{2a}\\ln\\left|\\frac{x-a}{x+a}\\right|\\).\nWriting \\(\\sqrt{a^{2}\\cos^{2}\\theta} = a\\cos\\theta\\) without checking that \\(\\cos\\theta \\ge 0\\) on the chosen range.\nLeaving the answer in \\(\\theta\\), or writing \\(\\sin^{-1}\\frac{x}{a^{2}}\\) instead of \\(\\sin^{-1}\\frac{x}{a}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

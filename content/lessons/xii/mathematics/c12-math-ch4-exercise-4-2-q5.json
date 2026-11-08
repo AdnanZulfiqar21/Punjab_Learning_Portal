@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 135,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 5: book p. 133-134; answers printed under 'EXERCISE 4.2' (book p. 303, PDF 305), numbered 2-29, matched by content"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5. Find the general solution of the differential equation \\(\\sqrt{x}\\frac{dy}{dx} = e^{y + \\sqrt{x}}\\).",
+            "explanation": "\\(e^{y + \\sqrt{x}} = e^y e^{\\sqrt{x}}\\), so after dividing by \\(\\sqrt{x}\\) the right side is (function of \\(x\\)) \\(\\times\\) (function of \\(y\\)): separable.\nPlan: separate as \\(e^{-y}\\,dy = \\frac{e^{\\sqrt{x}}}{\\sqrt{x}}\\,dx\\); integrate the right side with \\(u = \\sqrt{x}\\).",
+            "steps": [
+              "Given: \\(\\sqrt{x}\\frac{dy}{dx} = e^{y + \\sqrt{x}}\\), \\(x > 0\\).\nTo find: the general solution.\nMethod: split the exponential, separate the variables, integrate (substitution \\(u = \\sqrt{x}\\) on the right).",
+              "Split and separate\n\\[\\sqrt{x}\\dfrac{dy}{dx} = e^y \\cdot e^{\\sqrt{x}}\\]\n\\[e^{-y}\\,dy = \\dfrac{e^{\\sqrt{x}}}{\\sqrt{x}}\\,dx\\]\nWhy: \\(e^{a + b} = e^a e^b\\); then divide by \\(e^y\\) and \\(\\sqrt{x}\\), multiply by \\(dx\\).",
+              "Integrate the left side\n\\[\\int e^{-y}\\,dy = -e^{-y}\\]\nWhy: \\(\\frac{d}{dy}e^{-y} = -e^{-y}\\), so the integral carries a minus sign.",
+              "Integrate the right side (\\(u = \\sqrt{x}\\))\n\\[du = \\dfrac{dx}{2\\sqrt{x}}, \\quad \\dfrac{dx}{\\sqrt{x}} = 2\\,du\\]\n\\[\\int\\dfrac{e^{\\sqrt{x}}}{\\sqrt{x}}\\,dx = 2\\int e^u\\,du\\]\n\\[= 2e^{\\sqrt{x}}\\]\nWhy: the derivative of the inner function \\(\\sqrt{x}\\) is present in the integral.",
+              "Combine\n\\[-e^{-y} = 2e^{\\sqrt{x}} + c\\]\n\\[e^{-y} + 2e^{\\sqrt{x}} + C = 0\\]\nWhy: move everything to one side; \\(C = c\\) is still an arbitrary constant.",
+              "Check\nDifferentiate \\(e^{-y} + 2e^{\\sqrt{x}} + C = 0\\):\n\\[-e^{-y}\\dfrac{dy}{dx} + \\dfrac{e^{\\sqrt{x}}}{\\sqrt{x}} = 0\\]\n\\[\\sqrt{x}\\dfrac{dy}{dx} = e^y e^{\\sqrt{x}} = e^{y + \\sqrt{x}}\\]\nThis is the given equation."
+            ],
+            "final_answer": "\\(e^{-y} + 2e^{\\sqrt{x}} + C = 0\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

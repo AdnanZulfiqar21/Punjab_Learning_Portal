@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 135,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 4: book p. 133-134; answers printed under 'EXERCISE 4.2' (book p. 303, PDF 305), numbered 2-29, matched by content"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. Find the general solution of the differential equation \\(\\frac{dy}{dx} = \\sqrt{y}\\cos^2\\sqrt{y}\\).",
+            "explanation": "The right side contains only \\(y\\) (\\(g(x) = 1\\)), so the equation is separable.\nPlan: separate, write \\(\\frac{1}{\\cos^2} = \\sec^2\\), and substitute \\(u = \\sqrt{y}\\) to integrate.",
+            "steps": [
+              "Given: \\(\\frac{dy}{dx} = \\sqrt{y}\\cos^2\\sqrt{y}\\), \\(y > 0\\).\nTo find: the general solution.\nMethod: separable (the right side is a function of \\(y\\) only). Separate, then integrate the \\(y\\)-side with the substitution \\(u = \\sqrt{y}\\).",
+              "Separate the variables\n\\[\\dfrac{dy}{\\sqrt{y}\\cos^2\\sqrt{y}} = dx\\]\n\\[\\dfrac{\\sec^2\\sqrt{y}}{\\sqrt{y}}\\,dy = dx\\]\nWhy: divide by \\(\\sqrt{y}\\cos^2\\sqrt{y}\\); \\(\\frac{1}{\\cos^2\\theta} = \\sec^2\\theta\\).",
+              "Substitute \\(u = \\sqrt{y}\\)\n\\[du = \\dfrac{1}{2\\sqrt{y}}\\,dy\\]\n\\[\\dfrac{dy}{\\sqrt{y}} = 2\\,du\\]\nWhy: \\(\\frac{d}{dy}\\sqrt{y} = \\frac{1}{2\\sqrt{y}}\\); the factor \\(\\frac{dy}{\\sqrt{y}}\\) is already in the integral.",
+              "Integrate both sides\n\\[\\int 2\\sec^2u\\,du = \\int dx\\]\n\\[2\\tan u = x + C\\]\n\\[2\\tan\\sqrt{y} = x + C\\]\nWhy: \\(\\int\\sec^2u\\,du = \\tan u\\); then put \\(u = \\sqrt{y}\\) back.",
+              "Check\nDifferentiate \\(2\\tan\\sqrt{y} = x + C\\):\n\\[2\\sec^2\\sqrt{y} \\cdot \\dfrac{1}{2\\sqrt{y}}\\dfrac{dy}{dx} = 1\\]\n\\[\\dfrac{dy}{dx} = \\sqrt{y}\\cos^2\\sqrt{y}\\]\nThis is the given equation."
+            ],
+            "final_answer": "\\(2\\tan\\sqrt{y} = x + C\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

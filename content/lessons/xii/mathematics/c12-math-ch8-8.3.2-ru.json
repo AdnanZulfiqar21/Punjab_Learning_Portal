@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.3.2-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.3.2",
+      "title": "8.3.2 Bisection Method (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-8.3.2",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 239,
+          "pdf_to": 240,
+          "note": "Book p. 237-238: 8.3.2 Bisection Method, Figure 8.4, steps and note, Example 3 with its iteration table"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Ab hum pehla aur sab se seedha method seekhte hain: Bisection Method. \"Bisect\" ka matlab hai kisi cheez ko do barabar hisson mein kaatna. Yahi is method ka poora raaz hai: interval ko beech se kaato, aur jis aadhe mein root hai use rakh lo."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ki baat: Bisection Method ek variable wali nonlinear equations ke roots dhoondne ka aasaan aur bharosemand numerical tareeqa hai. Yeh Location of Root Theorem (LRT) par khara hai: agar continuous function \\(f(x)\\) interval \\([a, b]\\) par sign badle, yani \\(f(a)f(b) < 0\\), to us interval mein kam az kam ek root zaroor hai. Method bakaida tareeqe se interval ko aadha karta jata hai aur root ki jagah ko tang karta jata hai, jab tak zaroori accuracy na mil jaye."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch8-fig-8-4-bisection",
+            "alt": "Graph of an increasing curve y = f(x) between x = a, where f(a) is below the x-axis, and x = b, where f(b) is above it. The midpoint c = (a + b)/2 is marked on the x-axis just left of the point where the curve crosses the axis, labelled root.",
+            "caption": "Figure 8.4: bisection, the midpoint c of [a, b] near the root (original drawing after the textbook's figure; plotted for f(x) = x^3 - 3x - 10 on [2, 3])"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Figure 8.4 dekhiye: \\(a\\) par curve x-axis ke neeche hai (\\(f(a) < 0\\)) aur \\(b\\) par upar (\\(f(b) > 0\\)). Beech mein kahin curve axis ko kaatti hai; wahi root hai. Hum beech wala point \\(c = \\frac{a + b}{2}\\) lete hain aur dekhte hain ke \\(f(c)\\) ka sign kya hai.\nHar qadam par interval aadha hota hai, is liye \\(k\\) qadam ke baad lambai \\(\\frac{b - a}{2^{k}}\\) reh jati hai. \\([2, 3]\\) ke liye 10 qadam ke baad lambai \\(\\frac{1}{1024}\\), yani 0.001 se bhi kam. Isi liye bisection hamesha kaam karta hai, lekin aahista aahista."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Steps of Bisection Method:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Check karein ke \\(f\\) interval \\([a, b]\\) par continuous hai aur shart \\(f(a)\\,f(b) < 0\\) poori hai.",
+              "Midpoint nikalein: \\(c = \\frac{a + b}{2}\\).",
+              "Function value \\(f(c)\\) dekhein:\n• Agar \\(|f(c)| \\approx 0\\) (yani tolerance se kam), to \\(c\\) hi root hai.\n• Warna woh hissa dhoondein jis mein root hai:\n◦ Agar \\(f(a) \\cdot f(c) < 0\\), root \\([a, c]\\) mein hai. \\(b = c\\) rakhein.\n◦ Agar \\(f(c) \\cdot f(b) < 0\\), root \\([c, b]\\) mein hai. \\(a = c\\) rakhein.",
+              "Steps 2 aur 3 dohrate rahein jab tak \\(|f(c)|\\) zero ke qareeb (tolerance se kam) na ho jaye."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke Step 1 mein \"Check that continuity of \\(f\\)\" chhapa hai; sahi jumla \"Check the continuity of \\(f\\)\" hai, yani \\(f\\) ki continuity check karein. Matlab wahi hai, sirf angrezi ki ghalti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Note: bisection method yeh zamanat deta hai ke kuch mehdood (finite) qadam ke baad koi \\(c \\in \\,]a, b[\\) zaroor milega jis par \\(|f(c)| \\approx 0\\), utni accuracy tak jitni humein chahiye."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ne yahan \"the by section method\" likha hai, sahi \"the bisection method\" hai; aur \"there must exists\" ki jagah \"there must exist\" hona chahiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kaunsa aadha rakhna hai, yeh sirf signs se tay hota hai, numbers ke size se nahin. Agar \\(f(c)\\) ka sign \\(f(a)\\) jaisa hai, to sign ka badalna \\(c\\) aur \\(b\\) ke beech hai: \\(a\\) ki jagah \\(c\\). Agar \\(f(c)\\) ka sign \\(f(b)\\) jaisa hai, to \\(b\\) ki jagah \\(c\\).\nAasaan yaad: \"jis sire ka sign \\(f(c)\\) jaisa ho, usi ko \\(c\\) se badal do.\""
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(f(1) = -3\\), \\(f(2) = 5\\), aur midpoint par \\(f(1.5) = 1.2\\). Agla interval kaunsa hoga?\nJawab: \\(f(1.5)\\) positive hai, \\(f(2)\\) jaisa; is liye \\(b = 1.5\\) aur naya interval \\([1, 1.5]\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Bisection kab use karein? Jab function sirf continuous ho (derivative nikalna mushkil ho ya mumkin na ho), ya jab humein yaqeen chahiye ke method har haal mein root tak pohanchega. Is ki sab se bari khoobi yeh hai ke root kabhi interval se bahar nahin nikalta, kyunke hum hamesha sign change wala hissa hi rakhte hain.\nIs ki kamzori: raftaar. Har qadam par sirf ek binary digit ki accuracy barhti hai; ek decimal place ke liye taqreeban 3 se 4 qadam lagte hain. Isi liye 3 decimal places ke sawalon mein 10 se 12 iterations aam baat hai. Ghabrayein nahin, bas table saaf banayein."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Interval \\([0, 1]\\) se shuru kar ke kitni iterations ke baad interval ki lambai 0.01 se kam hogi?\nJawab: \\(\\frac{1}{2^{k}} < 0.01\\) chahiye, yani \\(2^{k} > 100\\). \\(2^{6} = 64\\) kaafi nahin, \\(2^{7} = 128\\) kaafi hai: 7 iterations. Is se andaza hota hai ke bisection kitna waqt lega."
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Use bisection method to find a root of \\(f(x) = x^3 - 3x - 10\\) within the interval \\([2, 3]\\) accurate up to two decimal places.",
+            "steps": [
+              "Diya gaya: \\(f(x) = x^3 - 3x - 10\\), interval \\([2, 3]\\).\nMaloom karna: root jo 2 decimal places tak sahi ho.\nTareeqa: bisection. \\(f\\) continuous hai aur \\([2, 3]\\) par sign badalta hai, is liye hum interval ko baar baar aadha kar sakte hain. Beech ki values 4 decimal places tak round karenge.",
+              "Shuruaati interval aur continuity\n\\[f(c) = \\lim_{x \\to c}(x^3 - 3x - 10)\\]\nhar \\(c \\in [2, 3]\\) ke liye, yani \\(f\\) continuous hai.\n\\[f(2) = 2^3 - 3(2) - 10 = -8 < 0\\]\n\\[f(3) = 3^3 - 3(3) - 10 = 8 > 0\\]\nKyun: \\(f\\) polynomial hai, aur polynomial har jagah continuous hota hai, kyunke kisi bhi point par us ki limit us ki value ke barabar hoti hai. Graph mein koi toot ya chhalang nahin.",
+              "Sign change\n\\[f(2)\\,f(3) < 0\\]\nis liye \\([2, 3]\\) mein root maujood hai.\nKyun: Location of Root Theorem (8.1.1): continuous function neeche se upar jaye to x-axis ko zaroor kaatega.",
+              "Iteration 1: \\(a = 2,\\ b = 3\\)\n\\[c = \\dfrac{2 + 3}{2} = 2.5\\]\n\\[f(2.5) = 15.625 - 7.5 - 10\\]\n\\[= -1.875 < 0\\]\n\\(f(2.5) < 0\\) aur \\(f(3) = 8 > 0\\), is liye root \\(]2.5, 3[\\) mein hai; \\(a = c\\) rakhein.\nKyun: 2.5 par bhi sign negative hai, jaise 2 par tha; sign ka badalna ab 2.5 aur 3 ke beech hai. Left wala aadha bekaar ho gaya.",
+              "Iteration 2: \\(a = 2.5,\\ b = 3\\)\n\\[c = \\dfrac{2.5 + 3}{2} = 2.75\\]\n\\[f(2.75) = 20.7969 - 8.25 - 10\\]\n\\[= 2.5469 > 0\\]\nRoot \\(]2.5, 2.75[\\) mein hai, is liye \\(b = c\\).\nKyun: \\(f(2.5) < 0 < f(2.75)\\). Kitab ne seedha \\(f(2.75)\\) likh diya hai; \\(c = 2.75\\) wali line hum ne add ki hai taa ke koi qadam chhoot na jaye.",
+              "Iteration 3: \\(a = 2.5,\\ b = 2.75\\)\n\\[c = \\dfrac{2.5 + 2.75}{2} = 2.625\\]\n\\[f(2.625) = 18.0879 - 7.875 - 10\\]\n\\[= 0.2129 > 0\\]\nRoot \\([2.5, 2.625]\\) mein hai, \\(b = c\\).\nKyun: \\(f(2.5) < 0 < f(2.625)\\). Kitab \\(2.625^3 = 18.087890...\\) ko 18.087 kar ke 0.212 likhti hai; 4 decimals tak yeh 0.2129 hai. Jawab par koi asar nahin.",
+              "Iteration 4 se 8 (neeche table)\n\\[c_4 = 2.5625,\\ f = -0.8611\\]\n\\[c_5 = 2.5938,\\ f = -0.3308\\]\n\\[c_6 = 2.6094,\\ f = -0.0609\\]\n\\[c_7 = 2.6172,\\ f = 0.0755\\]\n\\[c_8 = 2.6133,\\ f = 0.0072\\]\nKyun: wahi amal dohraya gaya; har dafa sign change wala aadha rakha. Dekhiye \\(f(c)\\) ki values kaise zero ki taraf aa rahi hain.",
+              "Taqreebi root\nKitab yahan ruk jati hai: \\(|f(2.6133)| = 0.0072\\).\nKyun: kitab 0.0072 ko 0.01 ke barabar maan leti hai. Lekin 8.3.1 ki shart \\(|f(c)| < 0.005\\) hai; neeche correction box mein hum teen qadam aage chal kar dikhate hain.",
+              "Aakhri root\n\\[x \\approx 2.61\\]\n2 decimal places tak sahi.",
+              "Tasdeeq:\n\\[f(2.605) = -0.1374 < 0\\]\n\\[f(2.615) = 0.0370 > 0\\]\nSign ulte hain, is liye asal root 2.605 aur 2.615 ke beech hai, jo round ho kar 2.61 hi banta hai. Jawab pakka hai."
+            ],
+            "answer": "\\(x \\approx 2.61\\) (2 decimal places tak sahi)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Iteration table mein \\(a\\), \\(b\\) aur \\(c\\) ki values ke saath bracket mein likha sign batata hai ke us point par function ki value negative hai ya positive."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Iteration",
+              "\\(a\\)",
+              "\\(b\\)",
+              "\\(c = \\frac{a + b}{2}\\)",
+              "\\(f(c)\\)",
+              "Naya interval"
+            ],
+            "rows": [
+              [
+                "1",
+                "2 (−)",
+                "3 (+)",
+                "2.50 (−)",
+                "\\(-1.875\\)",
+                "\\([2.5, 3]\\)"
+              ],
+              [
+                "2",
+                "2.5 (−)",
+                "3 (+)",
+                "2.75 (+)",
+                "\\(2.547\\)",
+                "\\([2.5, 2.75]\\)"
+              ],
+              [
+                "3",
+                "2.5 (−)",
+                "2.75 (+)",
+                "2.625 (+)",
+                "\\(0.212\\)",
+                "\\([2.5, 2.625]\\)"
+              ],
+              [
+                "4",
+                "2.5 (−)",
+                "2.625 (+)",
+                "2.5625 (−)",
+                "\\(-0.8611\\)",
+                "\\([2.5625, 2.625]\\)"
+              ],
+              [
+                "5",
+                "2.5625 (−)",
+                "2.625 (+)",
+                "2.5938 (−)",
+                "\\(-0.3308\\)",
+                "\\([2.5938, 2.625]\\)"
+              ],
+              [
+                "6",
+                "2.5938 (−)",
+                "2.625 (+)",
+                "2.6094 (−)",
+                "\\(-0.0609\\)",
+                "\\([2.6094, 2.625]\\)"
+              ],
+              [
+                "7",
+                "2.6094 (−)",
+                "2.625 (+)",
+                "2.6172 (+)",
+                "\\(0.0755\\)",
+                "\\([2.6094, 2.6172]\\)"
+              ],
+              [
+                "8",
+                "2.6094 (−)",
+                "2.6172 (+)",
+                "2.6133 (+)",
+                "\\(0.0072\\)",
+                "Ruk jayein"
+              ]
+            ],
+            "caption": "Example 3 ki bisection iterations (beech ki values 4 decimal places tak, jaise kitab mein)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab \\(|f(2.6133)| = 0.0072\\) par ruk kar ise 0.01 ke barabar maan leti hai, lekin us ka apna rule (8.3.1) 2 decimal places ke liye \\(|f(c)| < 0.005\\) hai, aur 0.0072 is se bara hai. Teen iterations aur karne se shart poori hoti hai:\n9: \\(c = 2.6114\\), \\(f(c) = -0.0260\\), interval \\([2.6114, 2.6133]\\);\n10: \\(c = 2.6124\\), \\(f(c) = -0.0085\\), interval \\([2.6124, 2.6133]\\);\n11: \\(c = 2.6129\\), \\(f(c) = 0.0002 < 0.005\\): ab rukein.\nAakhri root \\(x \\approx 2.61\\) wahi rehta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "\\(f(x) = x^2 - 3\\) ka root \\([1, 2]\\) mein 1 decimal place tak (tolerance 0.05):\n\\(f(1) = -2\\), \\(f(2) = 1\\): sign change.\n\\(c = 1.5\\): \\(f = -0.75\\), naya interval \\([1.5, 2]\\).\n\\(c = 1.75\\): \\(f = 0.0625\\), naya interval \\([1.5, 1.75]\\).\n\\(c = 1.625\\): \\(f = -0.3594\\), naya interval \\([1.625, 1.75]\\).\n\\(c = 1.6875\\): \\(f = -0.1523\\); \\(c = 1.7188\\): \\(f = -0.0459\\), ab \\(|f| < 0.05\\), ruk jayein: \\(x \\approx 1.7\\). Asal mein \\(\\sqrt{3} = 1.732\\), jo 1.7 hi banta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Bisection ko sirf do cheezein chahiye: \\(f\\) continuous ho aur \\(f(a)f(b) < 0\\).\n2. Naya andaza hamesha midpoint \\(c = \\frac{a + b}{2}\\).\n3. Jis sire ka sign \\(f(c)\\) jaisa ho, usay \\(c\\) se badlein.\n4. \\(|f(c)|\\) tolerance se kam ho to rukein (2 d.p. ke liye 0.005), phir round karein.\n5. Yeh hamesha root tak pohanchta hai lekin aahista, kyunke har qadam par interval sirf aadha hota hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Ghalat aadha rakh lena: \\(f(c)\\) ke sign ko siron ke sign se milayein, numbers ke size se nahin.\n2. 2 decimal places ke liye \\(|f(c)| \\approx 0.01\\) par ruk jana; shart \\(|f(c)| < 0.005\\) hai.\n3. Trigonometric functions mein degree mode.\n4. Jawab mein \\(c\\) hi likh dena (maslan 2.6133) jab ke sawal 2 decimal places maangta hai (2.61)."
+          }
+        ]
+      }
+    }
+  ]
+}

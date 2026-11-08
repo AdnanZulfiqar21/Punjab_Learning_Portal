@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.3.4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.3.4",
+      "title": "8.3.4 Newton–Raphson Method",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 243,
+          "pdf_to": 245,
+          "note": "Book p. 241-243: 8.3.4 Newton-Raphson Method, Figure 8.6, tangent derivation of the formula, steps, Example 5"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The Newton–Raphson Method is a numerical method used to find an approximate real root of a nonlinear equation \\(f(x) = 0\\). This method works by drawing a tangent to the curve \\(y = f(x)\\) at a point near the root and using the point where this tangent crosses the \\(x\\)-axis as a better approximation of the root. The initial guess chosen is based on a sign-change interval."
+          },
+          {
+            "type": "paragraph",
+            "text": "Since this method requires the function to be differentiable (having a slope of tangent), it usually reaches a good approximation faster than the Bisection or Regula-Falsi methods. The derivative of \\(f\\) should not be zero near the root. This method does not rely directly on the Location of Root Theorem (LRT)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch8-fig-8-6-newton-raphson",
+            "alt": "Graph of an increasing curve y = f(x) bending downwards. The point (x0, f(x0)) is well below the x-axis; the tangent there cuts the axis at x1. The tangent at (x1, f(x1)) cuts the axis at x2, very close to the root c where the curve crosses the axis.",
+            "caption": "Figure 8.6: Newton–Raphson, tangents at x0 and x1 meeting the x-axis at x1 and x2 near the root c (original drawing after the textbook's figure; plotted for f(x) = ln x - 1 from x0 = 1)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Suppose \\(x_0\\) is an initial guess for the root of \\(f(x) = 0\\), where:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "\\(f\\) is differentiable near \\(x_0\\), and",
+              "\\(f'(x) \\ne 0\\) near \\(x_0\\)."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "The slope of the tangent line to the curve \\(y = f(x)\\) at the point \\((x_0, f(x_0))\\) is given by \\(f'(x_0)\\). Draw a tangent to the curve at this point (see Figure 8.6). The equation of the tangent line is:"
+          },
+          {
+            "type": "equation",
+            "latex": "y - f(x_0) = f'(x_0)(x - x_0)",
+            "text_alt": "y minus f of x nought equals f dash of x nought times x minus x nought"
+          },
+          {
+            "type": "paragraph",
+            "text": "This tangent intersects the \\(x\\)-axis at \\(x = x_1\\). Substituting \\(y = 0\\) and \\(x = x_1\\) gives:"
+          },
+          {
+            "type": "equation",
+            "latex": "0 - f(x_0) = f'(x_0)(x_1 - x_0)",
+            "text_alt": "0 minus f of x nought equals f dash of x nought times x 1 minus x nought"
+          },
+          {
+            "type": "paragraph",
+            "text": "Solving for \\(x_1\\):"
+          },
+          {
+            "type": "equation",
+            "latex": "x_1 = x_0 - \\dfrac{f(x_0)}{f'(x_0)}",
+            "text_alt": "x 1 equals x nought minus f of x nought over f dash of x nought"
+          },
+          {
+            "type": "paragraph",
+            "text": "Similarly, if we draw a tangent at \\(x = x_1\\), its \\(x\\)-intercept \\(x_2\\) is:"
+          },
+          {
+            "type": "equation",
+            "latex": "x_2 = x_1 - \\dfrac{f(x_1)}{f'(x_1)}",
+            "text_alt": "x 2 equals x 1 minus f of x 1 over f dash of x 1"
+          },
+          {
+            "type": "paragraph",
+            "text": "Repeating this process produces a sequence of \\(x\\)-intercepts:"
+          },
+          {
+            "type": "equation",
+            "latex": "x_{n+1} = x_n - \\dfrac{f(x_n)}{f'(x_n)},\\quad f'(x_n) \\ne 0",
+            "text_alt": "x n plus 1 equals x n minus f of x n over f dash of x n, n equals 0, 1, 2 and so on, with f dash of x n not zero"
+          },
+          {
+            "type": "paragraph",
+            "text": "(\\(n = 0, 1, 2, \\ldots\\)). This is the Newton–Raphson formula, used to approximate the root of \\(f(x) = 0\\) iteratively."
+          },
+          {
+            "type": "paragraph",
+            "text": "From Figure 8.5, it is clear that each new approximation \\(x_{n+1}\\) is closer to the root, \\(x = c\\), than the previous one \\(x_n\\). If there exists some non-negative integer \\(m\\) such that \\(x_{m+1} - x_m\\) is closed to zero, then \\(x_m\\) will be the desired root, i.e. \\(|f(x_m)| \\approx 0\\).",
+            "book_errors": [
+              "From Figure 8.5",
+              "closed to zero"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "\"From Figure 8.5\" should be \"From Figure 8.6\" (Figure 8.5 is the Regula-Falsi figure), and \"closed to zero\" should be \"close to zero\"."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The step from \\(0 - f(x_0) = f'(x_0)(x_1 - x_0)\\) to \\(x_1\\): divide both sides by \\(f'(x_0)\\) (allowed because \\(f'(x_0) \\ne 0\\)) to get \\(x_1 - x_0 = -\\frac{f(x_0)}{f'(x_0)}\\), then add \\(x_0\\).\nWhy \\(f'(x) \\ne 0\\)? A zero slope means a horizontal tangent, which never meets the x-axis; the formula would divide by zero. A very small \\(f'(x_n)\\) gives a huge jump away from the root.\nWhy it is fast: near the root the curve is almost a straight line, and the tangent follows it closely, so the number of correct decimals roughly doubles at each step."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Steps of Newton-Raphson Method:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Prepare the equation: Write the given equation in the form \\(f(x) = 0\\). Choose an initial approximation \\(x_0\\) from the interval where the function changes sign and ensure that:\n(i) \\(f(x)\\) is differentiable within this interval.   (ii) \\(f'(a) \\ne 0\\) near \\(x_0\\).",
+              "Set up the formula: \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\), \\(n = 0, 1, 2, \\ldots\\)\nUse this to compute successive approximations.",
+              "Check for convergence: If \\(|f(x_{n+1})| \\approx 0\\), then stop.",
+              "Conclude the root: \\(x = x_{n+1}\\) is the root correct to the desired accuracy."
+            ],
+            "book_errors": [
+              "\\(f'(a) \\ne 0\\)"
+            ],
+            "bold": [
+              "Prepare the equation:",
+              "Set up the formula:",
+              "Check for convergence:",
+              "Conclude the root:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Step 1(ii) prints \\(f'(a) \\ne 0\\) near \\(x_0\\). There is no \\(a\\) in this method; it should be \\(f'(x) \\ne 0\\) near \\(x_0\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Use Newton-Raphson method to find a root of \\(f(x) = x^3 + 2x^2 + 10x - 20\\) correct to two decimal places.",
+            "steps": [
+              "Given: \\(f(x) = x^3 + 2x^2 + 10x - 20\\).\nTo find: a root correct to 2 decimal places.\nMethod: Newton–Raphson: tangent steps \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\) from a starting value inside an interval of sign change. Calculator fixed to 3 decimal places.",
+              "Choose initial approximation\n\\[f(1) = -7 < 0,\\quad f(2) = 16 > 0\\]\n\\[f(c) = \\lim_{x \\to c}(x^3 + 2x^2 + 10x - 20)\\]\nfor every \\(c \\in [1, 2]\\).\n\\(\\Rightarrow\\) is continuous on the interval of sign change \\([1, 2]\\).\n\\(\\Rightarrow\\) Root lies in the interval \\([1, 2]\\). Take the initial guess \\(x_0 = 1.500\\).\nWhy: the LRT puts a root in \\([1, 2]\\); its midpoint is a sensible starting value.",
+              "Derivative\n\\[f'(x) = 3x^2 + 4x + 10\\]\n\\(f'\\) exists and \\(f'(x) \\ne 0\\) around \\(x_0 = 1.5\\) \\(\\Rightarrow\\) Newton–Raphson method can be applied.\nWhy: in fact \\(3x^2 + 4x + 10 > 0\\) for every \\(x\\) (its discriminant \\(16 - 120\\) is negative), so the tangent is never horizontal.",
+              "Newton–Raphson formula\n\\[x_{n+1} = x_n - \\dfrac{f(x_n)}{f'(x_n)}\\]\n\\(n = 0, 1, 2, \\ldots\\)",
+              "Perform iterations: \\(x_0 = 1.5\\)\n\\[f(1.5) = 3.375 + 4.500 + 15 - 20\\]\n\\[= 2.875 \\ne 0\\]\nWhy: \\(x_0\\) is not yet a root, so we iterate.",
+              "Iteration 1\n\\[f'(1.5) = 6.750 + 6 + 10 = 22.750\\]\n\\[x_1 = 1.500 - \\dfrac{2.875}{22.750} = 1.374\\]\n\\[f(x_1) = f(1.374) \\approx 0.110 \\ne 0\\]\nWhy: the tangent at \\((1.5, 2.875)\\) cuts the x-axis at 1.374; \\(f(1.374)\\) is still not small enough.",
+              "Iteration 2\n\\[f'(1.374) \\approx 21.160\\]\n\\[x_2 = 1.374 - \\dfrac{0.110}{21.160} \\approx 1.369\\]\n\\[f(x_2) = f(1.369) \\approx 0.002\\]\nWhy: the next tangent step; \\(x_2\\) changes only in the third decimal place.",
+              "Stop iterations\n\\[|f(1.369)| \\approx 0.002 < 0.01\\]\nWhy: the book stops here (see the correction below).",
+              "Conclude the root\n\\[x \\approx 1.37\\]\naccurate to two decimal places.",
+              "Check:\n\\[f(1.365) = -0.0802 < 0\\]\n\\[f(1.375) = 0.1309 > 0\\]\nThe root lies between 1.365 and 1.375, so it rounds to 1.37."
+            ],
+            "answer": "\\(x \\approx 1.37\\) (accurate to two decimal places)",
+            "book_errors": [
+              "\\(\\Rightarrow\\) is continuous",
+              "\\[f(x_2) = f(1.369) \\approx 0.002\\]",
+              "\\[|f(1.369)| \\approx 0.002 < 0.01\\]"
+            ]
+          },
+          {
+            "type": "table",
+            "header": [
+              "n",
+              "\\(x_n\\)",
+              "\\(f(x_n)\\)",
+              "\\(f'(x_n)\\)"
+            ],
+            "rows": [
+              [
+                "0",
+                "\\(1.500\\)",
+                "\\(2.875\\)",
+                "\\(22.750\\)"
+              ],
+              [
+                "1",
+                "\\(1.374\\)",
+                "\\(0.110\\)",
+                "\\(21.160\\)"
+              ],
+              [
+                "2",
+                "\\(1.369\\)",
+                "\\(0.004\\)",
+                "stop"
+              ]
+            ],
+            "caption": "Example 5 iterations in one table (our summary, 3 decimal places; f(1.369) corrected to 0.004)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "1. \"\\(\\Rightarrow\\) is continuous on the interval of sign change\" leaves out \\(f\\): it should be \"\\(\\Rightarrow f\\) is continuous on \\([1, 2]\\)\".\n2. \\(f(1.369) = 1.369^3 + 2(1.369)^2 + 10(1.369) - 20 = 2.5657 + 3.7483 + 13.69 - 20 = 0.0040\\), not 0.002.\n3. The stopping test should use the 2-decimal tolerance: \\(|f(1.369)| \\approx 0.004 < 0.005\\), not \\(< 0.01\\). The conclusion \\(x \\approx 1.37\\) is still correct."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Newton–Raphson formula: \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\), the x-intercept of the tangent at \\((x_n, f(x_n))\\).\n2. Conditions: \\(f\\) differentiable near the root and \\(f'(x) \\ne 0\\) there; start with \\(x_0\\) inside an interval of sign change.\n3. Stop when \\(|f(x_{n+1})|\\) is below the tolerance (0.005 for 2 d.p.).\n4. Usually the fastest of the three methods (Example 5: two iterations).\n5. Unlike bisection and Regula-Falsi, the root is not trapped in an interval, so a poor \\(x_0\\) can lead away from the root."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing \\(x_{n+1} = x_n + \\frac{f(x_n)}{f'(x_n)}\\): the sign is minus.\n2. Differentiating wrongly, e.g. \\(\\frac{d}{dx}(2x^2) = 2x\\) instead of \\(4x\\); check \\(f'(x)\\) before iterating.\n3. Stopping because \\(x_{n+1}\\) and \\(x_n\\) agree to 2 decimals without checking \\(|f(x_{n+1})|\\) against the tolerance.\n4. Using degree mode for trigonometric functions."
+          }
+        ]
+      }
+    }
+  ]
+}

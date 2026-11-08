@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-1-Q12-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-1-q12",
+      "title": "Question 12 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 43,
+          "note": "Exercise 2.1, Question 12: differentiate y = sin^3(cos 2v) w.r.t. v; book p. 41. Unit 2 has no printed answers."
+        }
+      ],
+      "variant_of": "C12-MATH-CH2-EXERCISE-2-1-Q12",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12",
+            "prompt": "12. Differentiate w.r.t. the variable involved: \\(y = \\sin^3(\\cos 2v)\\)",
+            "explanation": "Yahan variable \\(v\\) hai, to \\(\\frac{dy}{dv}\\) chahiye.\n\\(\\sin^3(\\cos 2v)\\) ka matlab \\([\\sin(\\cos 2v)]^3\\) hai. Is mein chaar tehein (layers) hain, jaise pyaz ke chhilke: sab se bahar cube, phir sine, phir cosine, aur sab se andar \\(2v\\).\nRule kaunsa? Chain rule, har teh ke liye ek dafa.\nPlan: har teh ko naam denge, har ek ka derivative nikalenge, chaaron ko multiply karenge, aur aakhir mein naam wapas asal cheezon se badal denge.",
+            "steps": [
+              "Diya gaya hai: \\(y = \\sin^3(\\cos 2v)\\).\nMaloom karna: \\(\\frac{dy}{dv}\\).\nTareeqa: lambi chain rule. Bahar se andar ki taraf chalenge aur har qadam par andar wali cheez ko waisa hi rakhenge.",
+              "Tehon ko naam dein\n\\[w = 2v,\\ u = \\cos w,\\ s = \\sin u,\\ y = s^3\\]\nKyun: naam dene se har teh ek basic function ban jati hai jis ka derivative humein zabani yaad hai.",
+              "Har teh ka derivative\n\\[\\dfrac{dy}{ds} = 3s^2,\\quad \\dfrac{ds}{du} = \\cos u\\]\n\\[\\dfrac{du}{dw} = -\\sin w,\\quad \\dfrac{dw}{dv} = 2\\]\nKyun: cube par power rule, \\(\\sin\\) ka derivative \\(\\cos\\), \\(\\cos\\) ka derivative \\(-\\sin\\), aur \\(2v\\) ka derivative 2.",
+              "Chain rule se multiply\n\\[\\dfrac{dy}{dv} = 3s^2 \\cdot \\cos u \\cdot (-\\sin w) \\cdot 2\\]\nKyun: chaar tehein hain to chain rule mein chaar factors: \\(\\frac{dy}{dv} = \\frac{dy}{ds}\\cdot\\frac{ds}{du}\\cdot\\frac{du}{dw}\\cdot\\frac{dw}{dv}\\). Har factor ek teh ko kholta hai.",
+              "Naam wapas badlein\n\\[= 3\\sin^2(\\cos 2v)\\cos(\\cos 2v)\\]\n\\[\\quad \\times (-\\sin 2v)(2)\\]\n\\[= -6\\sin 2v\\,\\sin^2(\\cos 2v)\\cos(\\cos 2v)\\]\nKyun: \\(s = \\sin(\\cos 2v)\\), \\(u = \\cos 2v\\), \\(w = 2v\\) rakh diye. Numbers \\(3 \\times 2 = 6\\) aur minus sign aage le aaye.\nDhyan dein: aakhri teh ka '2' (yani \\(2v\\) ka derivative) sab se zyada bhoola jata hai. Har teh ka derivative zaroor likhiye, chahe woh sirf ek number ho.",
+              "Tasdeeq \\(v = 0\\) par\n\\[-6\\sin 0 \\cdots = 0\\]\nKyun: \\(v = 0\\) par \\(\\cos 2v\\) apni sab se bari value 1 par hai, yani andar wali teh wahan bilkul flat hai. Jab andar koi tabdeeli na ho to bahar bhi nahi hoti, is liye slope zero hona chahiye. Formula bhi zero deta hai."
+            ],
+            "final_answer": "\\(\\frac{dy}{dv} = -6\\sin 2v\\,\\sin^2(\\cos 2v)\\cos(\\cos 2v)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

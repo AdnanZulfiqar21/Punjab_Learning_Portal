@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-3-Q8",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-3-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 50,
+          "pdf_to": 50,
+          "note": "Exercise 2.3, Question 8: book p. 47-48, Q1-Q11 (Q1-4 tangent and normal lines, Q5-11 higher-order derivatives); no printed answers"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8. If \\(y = e^{ax}\\cos bx\\), show that \\(\\frac{d^{2}y}{dx^{2}} - 2a\\frac{dy}{dx} + (a^{2} + b^{2})y = 0\\).",
+            "explanation": "A product of an exponential and a cosine; we must show a relation between \\(y\\), \\(y_{1}\\), \\(y_{2}\\).\nPlan: find \\(y_{1}\\), keep the sine term as \\(ay - y_{1}\\), differentiate again and eliminate the sine.",
+            "steps": [
+              "Given: \\(y = e^{ax}\\cos bx\\) ...(1).\nTo prove: \\(y_{2} - 2ay_{1} + (a^{2} + b^{2})y = 0\\).\nMethod: product rule twice; replace \\(e^{ax}\\cos bx\\) by \\(y\\) and the sine term by an expression in \\(y\\) and \\(y_{1}\\).",
+              "First derivative\n\\[y_{1} = ae^{ax}\\cos bx - be^{ax}\\sin bx\\]\n\\[y_{1} = ay - be^{ax}\\sin bx\\]\n\\[be^{ax}\\sin bx = ay - y_{1} \\quad \\text{...(2)}\\]\nWhy: product rule; \\(\\frac{d}{dx}e^{ax} = ae^{ax}\\), \\(\\frac{d}{dx}\\cos bx = -b\\sin bx\\); and \\(e^{ax}\\cos bx = y\\).",
+              "Second derivative\n\\[y_{2} = ay_{1} - b\\left(ae^{ax}\\sin bx + be^{ax}\\cos bx\\right)\\]\n\\[= ay_{1} - a\\left(be^{ax}\\sin bx\\right) - b^{2}y\\]\nWhy: differentiate \\(y_{1} = ay - be^{ax}\\sin bx\\); product rule on \\(e^{ax}\\sin bx\\).",
+              "Use (2)\n\\[y_{2} = ay_{1} - a(ay - y_{1}) - b^{2}y\\]\n\\[= 2ay_{1} - a^{2}y - b^{2}y\\]\n\\[y_{2} - 2ay_{1} + (a^{2} + b^{2})y = 0\\]\nWhy: replacing the sine term removes it; then everything goes to one side.",
+              "Check\nFor \\(a = 0\\): \\(y = \\cos bx\\), \\(y_{2} = -b^{2}\\cos bx\\), and \\(y_{2} + b^{2}y = 0\\), which is the result with \\(a = 0\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\frac{d^{2}y}{dx^{2}} - 2a\\frac{dy}{dx} + (a^{2} + b^{2})y = 0\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

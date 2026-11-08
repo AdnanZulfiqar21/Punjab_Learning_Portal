@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q15-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q15",
+      "title": "Question 15 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 105,
+          "note": "Exercise 3.5, Question 15 (i)-(iv): show four integrals are zero (Properties IV, V); book pp. 102-103. No printed answer (show that)."
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-5-Q15",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15(i)",
+            "prompt": "15 (i) Show that: \\(\\int_{\\pi/6}^{\\pi/3} \\ln(\\tan x)\\,dx = 0\\)",
+            "explanation": "Yeh 'saabit karo ke zero hai' wala sawal hai. \\(\\ln(\\tan x)\\) ka antiderivative aasaan nahi, is liye property se kaam lenge.\nDiya kya hai? Limits \\(\\frac{\\pi}{6}\\) aur \\(\\frac{\\pi}{3}\\), jin ka jama \\(\\frac{\\pi}{2}\\) hai.\nKya saabit karna hai? Integral 0 hai.\nRule kaunsa? Property IV: \\(x\\) ki jagah \\(\\frac{\\pi}{2} - x\\). Is se \\(\\tan x\\) ban jata hai \\(\\cot x\\), aur \\(\\ln \\cot x = -\\ln \\tan x\\). To integral apne negative ke barabar aayega.\nPlan: Property IV, log ka qanoon, \\(I = -I\\).",
+            "steps": [
+              "Diya gaya: \\(I = \\int_{\\pi/6}^{\\pi/3} \\ln(\\tan x)\\,dx\\).\nSaabit karna: \\(I = 0\\).\nTareeqa: Property IV, jahan \\(a + b - x = \\frac{\\pi}{2} - x\\), aur identity \\(\\tan(\\frac{\\pi}{2} - x) = \\cot x = \\frac{1}{\\tan x}\\). Is poore sawal ki 'replace aur jama/compare' wali chaal yahi hai.",
+              "Property IV lagayein\n\\[I = \\int_{\\pi/6}^{\\pi/3} \\ln\\left(\\tan\\left(\\tfrac{\\pi}{2} - x\\right)\\right)dx\\]\n\\[= \\int_{\\pi/6}^{\\pi/3} \\ln\\left(\\dfrac{1}{\\tan x}\\right)dx\\]\nKyun: \\(\\frac{\\pi}{6} + \\frac{\\pi}{3} = \\frac{\\pi}{2}\\), to \\(x\\) ki jagah \\(\\frac{\\pi}{2} - x\\). Complementary angle ka tan, cot hota hai: \\(\\tan(\\frac{\\pi}{2} - x) = \\cot x\\).",
+              "Log ka qanoon\n\\[\\ln\\dfrac{1}{\\tan x} = -\\ln(\\tan x)\\]\n\\[I = -\\int_{\\pi/6}^{\\pi/3} \\ln(\\tan x)\\,dx = -I\\]\nKyun: \\(\\ln\\frac{1}{p} = \\ln 1 - \\ln p = -\\ln p\\). Is interval par \\(\\tan x\\) positive hai, to log ki value bani rehti hai.\nDhyan dein: \\(\\ln\\frac{1}{\\tan x}\\) ko \\(\\frac{1}{\\ln \\tan x}\\) samajhna bari ghalti hai.",
+              "Nateeja\n\\[I = -I \\Rightarrow 2I = 0 \\Rightarrow I = 0\\]\nKyun: jo number apne negative ke barabar ho woh 0 hai.",
+              "Tasdeeq\n\\[\\ln \\tan\\tfrac{\\pi}{6} = -\\tfrac{1}{2}\\ln 3,\\quad \\ln \\tan\\tfrac{\\pi}{3} = +\\tfrac{1}{2}\\ln 3\\]\nKyun: graph left aadhe mein negative aur right aadhe mein utna hi positive hai (aaine wale points \\(x\\) aur \\(\\frac{\\pi}{2} - x\\) par values ulti hain); dono areas cancel. Calculator bhi 0 deta hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\int_{\\pi/6}^{\\pi/3} \\ln(\\tan x)\\,dx = 0\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15(ii)",
+            "prompt": "15 (ii) Show that: \\(\\int_{0}^{\\pi} \\frac{\\sin x \\cos x}{1 + e^{\\sin x}}\\,dx = 0\\)",
+            "explanation": "Yeh bhi 'zero saabit karo' wala sawal hai; limits ka jama \\(0 + \\pi = \\pi\\).\nDiya kya hai? Integrand mein \\(\\sin x\\), \\(\\cos x\\) aur \\(e^{\\sin x}\\).\nKya saabit karna hai? Integral 0 hai.\nRule kaunsa? Property IV: \\(x\\) ki jagah \\(\\pi - x\\). Is se \\(\\sin x\\) wohi rehta hai lekin \\(\\cos x\\) ka sign ulat jata hai. Neeche sirf \\(\\sin x\\) hai, to woh nahi badalta; poora integrand ulta ho jata hai.\nPlan: Property IV, compare, \\(I = -I\\).",
+            "steps": [
+              "Diya gaya: \\(I = \\int_{0}^{\\pi} \\frac{\\sin x \\cos x}{1 + e^{\\sin x}}\\,dx\\).\nSaabit karna: \\(I = 0\\).\nTareeqa: Property IV \\(x \\to \\pi - x\\), aur identities \\(\\sin(\\pi - x) = \\sin x\\), \\(\\cos(\\pi - x) = -\\cos x\\).",
+              "Property IV lagayein\n\\[I = \\int_{0}^{\\pi} \\dfrac{\\sin(\\pi - x)\\cos(\\pi - x)}{1 + e^{\\sin(\\pi - x)}}\\,dx\\]\n\\[= \\int_{0}^{\\pi} \\dfrac{\\sin x\\,(-\\cos x)}{1 + e^{\\sin x}}\\,dx\\]\nKyun: second quadrant mein sine positive rehta hai aur cosine negative ho jata hai; isi liye \\(\\sin(\\pi - x) = \\sin x\\) aur \\(\\cos(\\pi - x) = -\\cos x\\). Denominator mein sirf \\(\\sin x\\) hai, to woh bilkul nahi badla.",
+              "Muqabla karein\n\\[I = -\\int_{0}^{\\pi} \\dfrac{\\sin x \\cos x}{1 + e^{\\sin x}}\\,dx = -I\\]\nKyun: minus bahar nikala; jo bacha woh asal \\(I\\) hai.\nDhyan dein: \\(e^{\\sin(\\pi - x)}\\) ko \\(e^{-\\sin x}\\) likhna ghalat hai; sine ka sign nahi badalta.",
+              "Nateeja\n\\[2I = 0 \\Rightarrow I = 0\\]\nKyun: \\(I = -I\\) sirf 0 ke liye sach hai.",
+              "Tasdeeq\n\\[x = \\tfrac{\\pi}{4}:\\ \\cos x > 0;\\quad x = \\tfrac{3\\pi}{4}:\\ \\cos x < 0\\]\nKyun: \\(\\frac{\\pi}{2}\\) ke ird gird aaine wale points par integrand ki values barabar magar ulti hain, to areas cancel ho jate hain. Calculator bhi 0 deta hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\int_{0}^{\\pi} \\frac{\\sin x \\cos x}{1 + e^{\\sin x}}\\,dx = 0\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15(iii)",
+            "prompt": "15 (iii) Show that: \\(\\int_{0}^{\\pi} x(\\pi - x)\\cos(\\pi - x)\\,dx = 0\\)",
+            "explanation": "Is mein bhi limits ka jama \\(\\pi\\) hai.\nDiya kya hai? Integrand teen hisson ka product: \\(x\\), \\((\\pi - x)\\) aur \\(\\cos(\\pi - x)\\).\nKya saabit karna hai? Integral 0 hai.\nRule kaunsa? Property IV (\\(x \\to \\pi - x\\)). \\(x(\\pi - x)\\) wala hissa wohi rehta hai (do factors aapas mein jagah badal lete hain), lekin cosine wala hissa ulta ho jata hai. To \\(I = -I\\).\nBy parts se bhi ho sakta hai, lekin property wala raasta bohat chhota hai.",
+            "steps": [
+              "Diya gaya: \\(I = \\int_{0}^{\\pi} x(\\pi - x)\\cos(\\pi - x)\\,dx\\).\nSaabit karna: \\(I = 0\\).\nTareeqa: Property IV, \\(x \\to \\pi - x\\).",
+              "Property IV lagayein\n\\[I = \\int_{0}^{\\pi} (\\pi - x)\\big(\\pi - (\\pi - x)\\big)\\cos\\big(\\pi - (\\pi - x)\\big)\\,dx\\]\n\\[= \\int_{0}^{\\pi} (\\pi - x)\\,x\\,\\cos x\\,dx\\]\nKyun: har jagah \\(x\\) ki jagah \\(\\pi - x\\) rakha; \\(\\pi - (\\pi - x) = x\\). Pehle do factors ne bas jagah badli: \\(x(\\pi - x)\\) ban gaya \\((\\pi - x)x\\), jo wohi hai.\nDhyan dein: har \\(x\\) ko badalna hai, sirf cosine ke andar wale ko nahi.",
+              "Asal se muqabla karein\n\\[\\cos x = -\\cos(\\pi - x)\\]\n\\[I = -\\int_{0}^{\\pi} x(\\pi - x)\\cos(\\pi - x)\\,dx = -I\\]\nKyun: \\(\\cos(\\pi - x) = -\\cos x\\), to ulta bhi sach hai: \\(\\cos x = -\\cos(\\pi - x)\\). Rakhne par asal integrand ka minus aaya.",
+              "Nateeja\n\\[2I = 0 \\Rightarrow I = 0\\]\nKyun: \\(I = -I\\).",
+              "Tasdeeq: by parts se\n\\[I = -\\int_{0}^{\\pi} (\\pi x - x^2)\\cos x\\,dx\\]\n\\[\\int_{0}^{\\pi} \\pi x\\cos x\\,dx = -2\\pi,\\quad \\int_{0}^{\\pi} x^2\\cos x\\,dx = -2\\pi\\]\nKyun: \\(\\int x\\cos x\\,dx = x\\sin x + \\cos x\\) se pehla \\(\\pi(-1 - 1) = -2\\pi\\); \\(\\int x^2\\cos x\\,dx = x^2\\sin x + 2x\\cos x - 2\\sin x\\) se doosra \\(2\\pi(-1) = -2\\pi\\). To \\(I = -(-2\\pi + 2\\pi) = 0\\). Dono raaste ek hi jawab dete hain."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\int_{0}^{\\pi} x(\\pi - x)\\cos(\\pi - x)\\,dx = 0\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15(iv)",
+            "prompt": "15 (iv) Show that: \\(\\int_{1}^{3} \\frac{(x - 2)^3 + 4(x - 2)}{1 + e^{(x - 2)^2}}\\,dx = 0\\)",
+            "explanation": "Ghaur karein: integrand mein har jagah \\(x - 2\\) hai, aur 2 interval \\([1, 3]\\) ka beech (midpoint) hai.\nDiya kya hai? Ek lamba sa fraction jo \\(x - 2\\) ki powers aur \\(e^{(x - 2)^2}\\) se bana hai.\nKya saabit karna hai? Integral 0 hai.\nRule kaunsa? \\(t = x - 2\\) rakhenge to interval \\([-1, 1]\\) ban jayega aur integrand \\(t\\) mein odd hoga. Phir Property V se seedha 0.\nPlan: shift, odd saabit karna, Property V.",
+            "steps": [
+              "Diya gaya: \\(I = \\int_{1}^{3} \\frac{(x - 2)^3 + 4(x - 2)}{1 + e^{(x - 2)^2}}\\,dx\\).\nSaabit karna: \\(I = 0\\).\nTareeqa: substitution \\(t = x - 2\\), phir Property V (\\([-a, a]\\) par odd function). Jab sab kuch kisi ek cheez ke ird gird likha ho to usi ko naya variable bana dena chahiye.",
+              "\\(t = x - 2\\) rakhein\n\\[dt = dx,\\quad x = 1 \\Rightarrow t = -1,\\quad x = 3 \\Rightarrow t = 1\\]\n\\[I = \\int_{-1}^{1} \\dfrac{t^3 + 4t}{1 + e^{t^2}}\\,dt\\]\nKyun: is se interval ka beech 0 par aa gaya, aur integrand saaf ho gaya. \\(dt = dx\\) kyunke sirf 2 ka shift hai.",
+              "Odd ya even?\n\\[g(-t) = \\dfrac{-t^3 - 4t}{1 + e^{t^2}} = -g(t)\\]\nKyun: upar \\(t^3 + 4t\\) odd hai (dono odd powers), aur neeche \\(1 + e^{t^2}\\) even hai (\\((-t)^2 = t^2\\)). Odd ko even se divide karein to odd hi bachta hai.\nDhyan dein: \\(e^{t^2}\\) mein \\(-t\\) rakhne par bhi \\(e^{t^2}\\) hi aata hai, \\(e^{-t^2}\\) nahi.",
+              "Property V lagayein\n\\[I = \\int_{-1}^{1} g(t)\\,dt = 0\\]\nKyun: \\([-1, 1]\\) par odd function ka integral 0 hai.",
+              "Tasdeeq\n\\[x = 1.5,\\ 2.5\\ \\leftrightarrow\\ t = \\mp 0.5\\]\nKyun: \\(x = 2\\) ke ird gird aaine wale points par integrand ki values barabar magar ulti hain, to areas cancel. Calculator bhi 0 deta hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\int_{1}^{3} \\frac{(x - 2)^3 + 4(x - 2)}{1 + e^{(x - 2)^2}}\\,dx = 0\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

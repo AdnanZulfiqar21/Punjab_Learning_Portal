@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-1-Q11-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-1-q11",
+      "title": "Question 11 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 43,
+          "note": "Exercise 2.1, Question 11: differentiate y = tan^2 x + cot(x^2); book p. 41. Unit 2 has no printed answers."
+        }
+      ],
+      "variant_of": "C12-MATH-CH2-EXERCISE-2-1-Q11",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11. Differentiate w.r.t. the variable involved: \\(y = \\tan^2 x + \\cot(x^2)\\)",
+            "explanation": "Yeh sawal ek jaal (trap) hai: dono terms dekhne mein milti julti hain magar asal mein bilkul alag hain.\n\\(\\tan^2 x\\) ka matlab \\((\\tan x)^2\\) hai: poora function square hua. \\(\\cot(x^2)\\) mein sirf angle \\(x\\) square hua.\nFind kya karna hai? \\(\\frac{dy}{dx}\\).\nRule kaunsa? Dono par chain rule, lekin 'bahar' aur 'andar' alag alag hain.\nPlan: pehli term mein bahar square aur andar \\(\\tan x\\); doosri mein bahar \\(\\cot\\) aur andar \\(x^2\\). Phir jama.",
+            "steps": [
+              "Diya gaya hai: \\(y = \\tan^2 x + \\cot(x^2)\\).\nMaloom karna: \\(\\frac{dy}{dx}\\).\nTareeqa: sum rule aur har term par chain rule.",
+              "Pehli term\n\\[\\dfrac{d}{dx}(\\tan x)^2 = 2\\tan x \\cdot \\sec^2 x\\]\nKyun: bahar \\(u^2\\) hai, jis ka derivative \\(2u\\); \\(u = \\tan x\\) rakha. Phir andar ka derivative \\((\\tan x)' = \\sec^2 x\\) se multiply kiya.",
+              "Doosri term\n\\[\\dfrac{d}{dx}\\cot(x^2) = -\\csc^2(x^2) \\cdot 2x\\]\nKyun: bahar \\(\\cot w\\) hai, \\((\\cot w)' = -\\csc^2 w\\) (Question 1(c)), aur \\(w = x^2\\) wapas rakha. Andar ka derivative \\(2x\\).\nDhyan dein: \\(\\csc^2(x^2)\\) mein bracket ke andar \\(x^2\\) hi rehta hai; isay \\(\\csc^2 x\\) likhna ghalat hai.",
+              "Jama karein\n\\[\\dfrac{dy}{dx} = 2\\tan x\\sec^2 x - 2x\\csc^2(x^2)\\]\nKyun: sum rule, aur \\(2x\\) ko aage likh diya taa ke jawab saaf lage.",
+              "Tasdeeq \\(x = \\frac{\\pi}{4}\\) par\n\\[2(1)(2) - \\tfrac{\\pi}{2}\\csc^2\\tfrac{\\pi^2}{16} \\approx -0.694\\]\nKyun: \\(\\tan\\frac{\\pi}{4} = 1\\), \\(\\sec^2\\frac{\\pi}{4} = 2\\), to pehla hissa 4 hai. Doosra hissa taqreeban \\(4.694\\) hai, to kul taqreeban \\(-0.694\\). Sympy se \\(y\\) ka derivative seedha \\(x = \\frac{\\pi}{4}\\) par nikala to bhi yahi \\(-0.694\\) aaya. Jawab sahi hai."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = 2\\tan x\\sec^2 x - 2x\\csc^2(x^2)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q6",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 6: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6 Evaluate \\(\\int \\frac{6x^2 - 22x + 18}{x(x - 1)(x - 2)(x - 3)}\\,dx\\).",
+            "explanation": "A proper fraction (degree 2 over degree 4) with four different linear factors: Case-I.\nFour constants are needed, one for each factor.\nPlan: put \\(x = 0, 1, 2, 3\\) in turn; each value leaves only one term.",
+            "steps": [
+              "Given: \\(\\int \\frac{6x^2 - 22x + 18}{x(x - 1)(x - 2)(x - 3)}\\,dx\\).\nTo find: the integral.\nMethod: partial fractions, Case-I, with four linear factors.",
+              "Write the partial fractions\n\\[\\dfrac{6x^2 - 22x + 18}{x(x - 1)(x - 2)(x - 3)}\\]\n\\[= \\dfrac{A}{x} + \\dfrac{B}{x - 1} + \\dfrac{C}{x - 2} + \\dfrac{D}{x - 3}\\]\nWhy: One constant over each of the four different linear factors.",
+              "Clear the fractions\n\\[6x^2 - 22x + 18\\]\n\\[= A(x - 1)(x - 2)(x - 3) + Bx(x - 2)(x - 3)\\]\n\\[+\\, Cx(x - 1)(x - 3) + Dx(x - 1)(x - 2) \\quad (1)\\]\nWhy: Multiply by the whole denominator; each constant keeps the three factors it does not have.",
+              "Put \\(x = 0\\) and \\(x = 1\\) in (1)\n\\[x = 0:\\ 18 = A(-1)(-2)(-3) = -6A,\\ A = -3\\]\n\\[x = 1:\\ 2 = B(1)(-1)(-2) = 2B,\\ B = 1\\]\nWhy: \\(6 - 22 + 18 = 2\\). Each root removes three of the four terms.",
+              "Put \\(x = 2\\) and \\(x = 3\\) in (1)\n\\[x = 2:\\ -2 = C(2)(1)(-1) = -2C,\\ C = 1\\]\n\\[x = 3:\\ 6 = D(3)(2)(1) = 6D,\\ D = 1\\]\nWhy: \\(24 - 44 + 18 = -2\\) and \\(54 - 66 + 18 = 6\\).",
+              "Integrate\n\\[\\int \\left(-\\dfrac{3}{x} + \\dfrac{1}{x - 1} + \\dfrac{1}{x - 2} + \\dfrac{1}{x - 3}\\right)dx\\]\n\\[= -3\\ln|x| + \\ln|x - 1|\\]\n\\[+ \\ln|x - 2| + \\ln|x - 3| + c\\]\nWhy: Each term is of the form \\(\\frac{k}{x - a}\\), whose integral is \\(k\\ln|x - a|\\).",
+              "Check\n\\[A + B + C + D = -3 + 1 + 1 + 1 = 0\\]\nWhy: In (1) the coefficient of \\(x^3\\) on the right is \\(A + B + C + D\\), and on the left it is 0 \\(\\checkmark\\)."
+            ],
+            "final_answer": "\\(-3\\ln|x| + \\ln|x - 1| + \\ln|x - 2| + \\ln|x - 3| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the answers at the end of the book (page 301), the answers of Exercise 3.4 are printed under the wrong heading \"Exercise 3.6\". The answer of this question is item (vi) of that block: \\(-3\\ln|x| + \\ln|x - 1| + \\ln|x - 2| + \\ln|x - 3| + c\\). That answer is correct. The block headed \"Exercise 3.4\" (page 301) belongs to a different exercise."
+          }
+        ]
+      }
+    }
+  ]
+}

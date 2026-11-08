@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.4.1-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.4.1",
+      "title": "8.4.1 Trapezium (Trapezoidal) Rule (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 246,
+          "pdf_to": 250,
+          "note": "Book p. 244-248: 8.4.1 Trapezium Rule, Figure 8.7, derivation, Note, printed Examples 1-2 (shown as Examples 6-7)"
+        }
+      ],
+      "variant_of": "C12-MATH-CH8-8.4.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Sab se pehle hum ek seedhi si baat samajhte hain: humein curve ke neeche ka area chahiye, lekin curve tedha hai, is liye us ka area seedha formula se nahi nikalta. Hal yeh hai ke area ko patli patli khari pattiyon (strips) mein kaat dein, har patti ko ek trapezium (char kinaron wali shakal jis ke do kinare parallel hon) maan lein, aur sab trapeziums ke area jama kar dein. Ab yahi baat kitab ki tarah qadam ba qadam banate hain. Is page ke aakhir tak aap ke paas ek aisa formula hoga jo kisi bhi continuous function ka definite integral sirf jama aur zarb se approximately nikal deta hai, aur do hal shuda examples (Example 6 aur Example 7) bhi, jin mein se doosre mein hum apne jawab ko exact value se mila kar dekhenge ke rule kitna qareeb pohanchta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Farz karein \\(f(x) \\ge 0\\) interval \\([a, b]\\) par ek continuous function hai. Kisi positive integer \\(n\\) ke liye \\(h = \\frac{b-a}{n}\\) lein. Ab interval \\([a, b]\\) ko \\(n\\) barabar lambai \\(h\\) wale subintervals mein yun baant dete hain:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[[a, a+h],\\ [a+h, a+2h],\\]\n\\[[a+2h, a+3h],\\ \\dots,\\]\n\\[[a+(n-1)h,\\ a+nh = b]\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab \\(x_{i} = a + ih;\\ i = 0, 1, 2, \\dots, n\\) likhein. Is tarah upar wale subintervals ko yun likha ja sakta hai:"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[[a = x_{0}, x_{1}],\\ [x_{1}, x_{2}],\\]\n\\[[x_{2}, x_{3}],\\ \\dots,\\ [x_{n-1}, x_{n} = b].\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "\\([0, 1]\\) aur \\(n = 4\\) lein. To \\(h = \\frac{1-0}{4} = 0.25\\), aur points hain: \\(x_{0} = 0\\), \\(x_{1} = 0.25\\), \\(x_{2} = 0.5\\), \\(x_{3} = 0.75\\), \\(x_{4} = 1\\). Ghaur karein: 4 subintervals ke 5 points bane. Hamesha \\(n\\) subintervals ke \\(n + 1\\) points hote hain, aur aakhri point \\(x_{n} = a + nh = b\\) hota hai. Bilkul jaise ek deewar par 4 barabar khane banane hon to 5 lakeerein khenchni parti hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Har subinterval ke kinaron (end points) par function ki values \\(f(x_{0}), f(x_{1}), f(x_{2}), \\dots, f(x_{n})\\) un \\(n\\) trapeziums ke parallel kinaron ki lambai hain, jaisa Figure 8.7 mein dikhaya gaya hai. Har trapezium ki base (yani us ke parallel kinaron ke darmiyan faasla) \\(h\\) hai. Is liye in trapeziums ke area yeh hain:"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch8-fig-8-7-trapezium-rule",
+            "alt": "A curve y = f(x) above the x-axis. Vertical lines at a = x0, x1, x2, x3, x4 and, after three dots, at x n-2, x n-1 and xn = b meet the curve at the points f(x0), f(x1) and so on. Each pair of neighbouring vertical lines, the x-axis and the straight chord joining the two curve points form a coloured trapezium of width h.",
+            "caption": "Figure 8.7: the region under y = f(x) from a to b cut into n trapeziums of equal width h (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "equation",
+            "latex": "A_{i} = \\dfrac{h}{2}\\big[f(x_{i-1}) + f(x_{i})\\big];\\ i = 1, 2, \\dots, n",
+            "text_alt": "A i equals h over 2 times, open bracket, f of x i minus 1 plus f of x i, close bracket, for i equals 1, 2, up to n"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Trapezium ka area = (1/2) x (dono parallel kinaron ka jama) x (un ke darmiyan faasla). Figure 8.7 mein har trapezium khara hua hai: us ke parallel kinare khari lambaiyan \\(f(x_{i-1})\\) aur \\(f(x_{i})\\) hain, aur un ke beech faasla chaurai \\(h\\) hai. Upar ka kinara curve ke do points ko milane wali seedhi lakeer (chord) hai. Yahi wahid jagah hai jahan hum approximation karte hain: curve ke neeche wali patli tedhi patti ki jagah seedhi chhat wala trapezium rakh dete hain. Jitni patli patti, utna kam farq."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kyunke definite integral \\(\\int_{a}^{b} f(x)\\,dx\\) ki value taqreeban in trapeziums ke areas ke jama ke barabar hai, is liye:\n\\[\\int_{a}^{b} f(x)\\,dx \\approx \\sum_{i=1}^{n} A_{i}\\]\n\\[= A_{1} + A_{2} + A_{3} + \\dots + A_{n}\\]\n\\[= \\dfrac{h}{2}\\big[f(x_{0}) + f(x_{1})\\big]\\]\n\\[+ \\dfrac{h}{2}\\big[f(x_{1}) + f(x_{2})\\big]\\]\n\\[+ \\dfrac{h}{2}\\big[f(x_{2}) + f(x_{3})\\big] + \\dots\\]\n\\[+ \\dfrac{h}{2}\\big[f(x_{n-1}) + f(x_{n})\\big]\\]\n\\[= \\dfrac{h}{2}\\big[f(x_{0}) + 2f(x_{1}) + 2f(x_{2})\\]\n\\[+ \\dots + 2f(x_{n-1}) + f(x_{n})\\big]\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh 2 kahan se aaya? Har beech wali value \\(f(x_{1}), \\dots, f(x_{n-1})\\) ek trapezium ka daayan (right) kinara bhi hai aur agle trapezium ka baayan (left) kinara bhi. Jab hum sab trapeziums ke area jama karte hain to har beech wali value do dafa aati hai. Lekin kinaron wali values \\(f(x_{0})\\) aur \\(f(x_{n})\\) sirf ek ek trapezium mein hain, is liye ek hi dafa aati hain. Yaad rakhne ka aasan jumla: \\\"pehli + aakhri + 2 x (saari beech wali)\\\", phir poore ko \\(\\frac{h}{2}\\) se zarb. Jaise do saath saath kamron ki darmiyani deewar dono kamron ki deewar hoti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Lehaza,"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}\\int_{a}^{b} f(x)\\,dx \\approx \\dfrac{h}{2}\\Big[&f(x_{0}) + 2f(x_{1}) + 2f(x_{2}) \\\\ &+ \\dots + 2f(x_{n-1}) + f(x_{n})\\Big]\\end{aligned}",
+            "text_alt": "integral from a to b of f of x d x is approximately h over 2 times, open bracket, f of x 0 plus 2 f of x 1 plus 2 f of x 2 plus and so on plus 2 f of x n minus 1 plus f of x n, close bracket"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yeh formula kab aur kyun lagayein? Jab bhi definite integral ka exact hal mushkil ya na-mumkin ho (antiderivative ka formula na mile), ya jab function sirf values ki table ki shakal mein diya ho, to Trapezium Rule sab se seedha raasta hai. Is ke liye sirf teen cheezein chahiyen: interval \\([a, b]\\), subintervals ki tadaad \\(n\\) (ya chaurai \\(h\\)), aur har point par function ki value. Koi derivative, koi substitution, koi integration ka qaida nahi; sirf jama aur zarb. Isi liye computers bhi integrals isi qisam ke tareeqon se nikalte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Ek chhota sa sawal jis ka exact jawab hum jaante hain, taake rule ko parakh saken: \\(\\int_{0}^{2} x^{2}\\,dx\\) ko \\(n = 2\\) le kar nikalein.\nPehle \\(h = \\frac{2-0}{2} = 1\\); points \\(x_{0} = 0\\), \\(x_{1} = 1\\), \\(x_{2} = 2\\); values \\(f(0) = 0\\), \\(f(1) = 1\\), \\(f(2) = 4\\).\nRule: \\(\\frac{1}{2}[0 + 2(1) + 4] = \\frac{1}{2}(6) = 3\\).\nExact: \\(\\int_{0}^{2} x^{2}\\,dx = \\frac{x^{3}}{3}\\Big|_{0}^{2} = \\frac{8}{3} \\approx 2.6667\\).\nRule ka jawab thora zyada aaya, kyunke \\(x^{2}\\) ka graph upar ki taraf mudta hai (concave up) aur trapezium ki seedhi chhat curve ke upar se guzarti hai. Agar aap \\(n = 4\\) lein to jawab 2.75 aata hai, yani exact value ke aur qareeb. Yahi Note 1 ki baat hai: n barhao, ghalti ghatao."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Sawal: \\(n = 3\\) ho to formula mein kitni values double hongi?\nJawab: points \\(x_{0}, x_{1}, x_{2}, x_{3}\\) hain. Beech wali sirf \\(x_{1}\\) aur \\(x_{2}\\) hain, to do values double hongi: \\(\\frac{h}{2}[f(x_{0}) + 2f(x_{1}) + 2f(x_{2}) + f(x_{3})]\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "1. Figure 8.7 se saaf zahir hai ke jab n kaafi bara liya jaye to approximation ki accuracy behtar hoti jati hai, kyunke zyada trapeziums lene se asal (exact) area aur approximate area ka farq (gap) kam ho jata hai.\n2. Trapezium Rule lagate waqt calculator se aane wali values kam az kam chaar decimal places tak round karni chahiyen, taake aakhri jawab mein accuracy bani rahe.\n3. Agarche yeh rule area ke liye sirf positive function se samjhaya gaya hai, lekin yeh \\([a, b]\\) par har continuous function ke liye aam taur par sahi hai, un functions samet jo negative values bhi lete hain. Aisi soorat mein har trapezium signed area (x-axis ke neeche wala hissa minus mein gina jata hai) ka approximation deta hai aur sab ka jama integral ka bharosemand andaza deta hai. Is aam soorat ka saboot kitab ke daire se bahar hai."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab Note 1 mein \"From Figure 8.6\" likhti hai. Figure 8.6 to 8.3.4 ka Newton-Raphson (tangent) wala figure hai; trapeziums Figure 8.7 mein hain, is liye sahi \"Figure 8.7\" hai. Upar note mein hum ne sahi number likh diya hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Note 3 ka amli matlab: jahan \\(f(x) < 0\\) ho, wahan function ki value negative hai, to woh trapezium jama mein minus wali miqdar daalta hai. Definite integral bhi yahi karta hai: \\(x\\)-axis ke neeche wala area minus mein gina jata hai. Is liye minus signs kabhi mat chhodiye. Exercise 8.3 mein \\(\\cos 2 = -0.4161\\) (Question 1) aur \\(\\sin(x^{2})\\) ki kuch values (Question 8) negative hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Signed area ko ek chhoti misaal se dekhte hain: \\(\\int_{-1}^{1} x\\,dx\\) ko \\(n = 2\\) le kar. Yahan \\(h = 1\\), points \\(-1, 0, 1\\), values \\(f(-1) = -1\\), \\(f(0) = 0\\), \\(f(1) = 1\\).\nRule: \\(\\frac{1}{2}[-1 + 2(0) + 1] = 0\\).\nExact value bhi \\(\\frac{x^{2}}{2}\\Big|_{-1}^{1} = \\frac{1}{2} - \\frac{1}{2} = 0\\) hai. Graph mein \\(x\\)-axis ke neeche wala triangle (minus) aur upar wala triangle (plus) barabar hain, is liye ek doosre ko cancel kar dete hain. Agar hum minus sign chhor dete to jawab 1 aata, jo ghalat hai. Yahi Note 3 ka matlab hai: rule khud hi neeche wale hisse ko minus mein gin leta hai, bas aap sign sahi rakhein."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "Kitab 8.4.1 mein examples ki ginti dobara 1 se shuru kar deti hai: neeche wale do examples kitab mein \"Example 1\" aur \"Example 2\" chhape hue hain. Yeh is unit ke chhatte aur saatwein examples hain, is liye hum inhein Example 6 aur Example 7 likh rahe hain, taake 8.1 aur 8.2 wale Example 1 aur Example 2 se gadbad na ho. Is ke ilawa kuch nahi badla."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab formula ko amal mein dekhte hain. Har example mein hum ek hi tarteeb rakhenge, jo exam mein bhi yahi rakhni hai: (1) diya gaya aur maloom karna likhein, (2) continuity check karein, (3) h ya n nikalein, (4) points aur function values ki list banayein, (5) formula mein values rakhein, aur (6) jawab ko kisi tarah parkhein. Yeh tarteeb yaad ho jaye to har sawal aadha to wahin hal ho jata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Sawal: agar \\([0, 2]\\) par \\(h = 0.25\\) diya ho to kitne subintervals aur kitne points honge?\nJawab: \\(n = \\frac{2-0}{0.25} = 8\\) subintervals, aur points \\(n + 1 = 9\\): \\(0, 0.25, 0.5, \\dots, 2\\). Beech wale points 7 hain, yani formula mein 7 values double hongi. Exercise 8.3 ke Question 4 mein bhi yahi points aate hain (wahan \\(n = 8\\) diya hai, to \\(h = 0.25\\) nikalta hai)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Example 6 (printed as Example 1)"
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Use trapezium rule to approximate the definite integral \\(\\int_{0}^{1} e^{-x^{2}}\\,dx\\) by dividing the closed interval \\([0, 1]\\) into 7 subintervals of equal length.",
+            "steps": [
+              "Diya gaya: \\(f(x) = e^{-x^{2}}\\), \\(a = 0\\), \\(b = 1\\), \\(n = 7\\).\nMaloom karna: \\(\\int_{0}^{1} e^{-x^{2}}\\,dx\\) ki approximate value.\nTareeqa: sab se pehle dekhte hain ke sawal kya maang raha hai: integral ki value, lekin \\(e^{-x^{2}}\\) ka antiderivative formula mein likha hi nahi ja sakta, is liye Fundamental Theorem kaam nahi aayega. Is liye Trapezium Rule lagayenge. Subintervals ki tadaad \\(n = 7\\) seedhi di hui hai, to pehle \\(h\\) nikalenge, phir points, phir function values, aur aakhir mein formula.",
+              "Continuity\n\\[f(c) = \\lim_{x \\to c} e^{-x^{2}}\\ \\ \\forall\\, c \\in [0, 1]\\]\n\\[\\Rightarrow f(x) = e^{-x^{2}} \\text{ is continuous on } [0, 1]\\]\nKyun: Trapezium Rule continuous function ke liye bana hai; agar graph beech mein toot jaye to trapezium us hisse ko theek nahi dhaanp sakta. Yahan \\(-x^{2}\\) polynomial hai aur exponential function har jagah continuous hai; dono ka composition (ek ke andar doosra) bhi continuous hota hai.",
+              "Step size\n\\[h = \\dfrac{b-a}{n} = \\dfrac{1-0}{7} = \\dfrac{1}{7}\\]\n\\[\\tfrac{1}{7} = 0.142857\\ldots \\approx 0.1429\\]\nKyun: \\([0, 1]\\) ko 7 barabar hisson mein kaatna hai, to har hisse ki chaurai (width) poori lambai 1 ko 7 se divide karne se milti hai. Hum fraction \\(\\frac{1}{7}\\) hi rakhenge, taake \\(\\frac{h}{2} = \\frac{1}{14}\\) bilkul exact rahe.\nDhyan dein: kitab yahan 0.142 likhti hai, jo chaar decimal tak 0.1429 hona chahiye (neeche correction box dekhiye); jawab par is ka asar nahi, kyunke hum fraction istemal kar rahe hain.",
+              "Trapezium Rule (n = 7 ke liye)\n\\[\\int_{a}^{b} f(x)\\,dx \\approx \\dfrac{h}{2}\\big[f(x_{0})\\]\n\\[+ 2\\big(f(x_{1}) + f(x_{2}) + \\dots + f(x_{6})\\big)\\]\n\\[+ f(x_{7})\\big]\\]\nKyun: 7 subintervals ke 8 points hote hain: \\(x_{0}\\) se \\(x_{7}\\) tak. Pehli aur aakhri value sirf ek dafa aati hai, jab ke beech wali chhe values (\\(x_{1}\\) se \\(x_{6}\\)) do dafa, kyunke har beech wali deewar do trapeziums mein shareek hai.",
+              "Function values nikalein (4 decimal places tak round)\n\\[x_{0} = 0,\\quad f(0) = 1\\]\n\\[x_{1} = 0 + \\tfrac{1}{7} = \\tfrac{1}{7}\\]\n\\[f(\\tfrac{1}{7}) = e^{-1/49} = 0.9798\\]\n\\[x_{2} = \\tfrac{1}{7} + \\tfrac{1}{7} = \\tfrac{2}{7}\\]\n\\[f(\\tfrac{2}{7}) = e^{-4/49} = 0.9216\\]\n\\[x_{3} = \\tfrac{3}{7},\\quad f(\\tfrac{3}{7}) = e^{-9/49} = 0.8322\\]\n\\[x_{4} = \\tfrac{4}{7},\\quad f(\\tfrac{4}{7}) = e^{-16/49} = 0.7214\\]\n\\[x_{5} = \\tfrac{5}{7},\\quad f(\\tfrac{5}{7}) = e^{-25/49} = 0.6004\\]\n\\[x_{6} = \\tfrac{6}{7},\\quad f(\\tfrac{6}{7}) = e^{-36/49} = 0.4797\\]\n\\[x_{7} = \\tfrac{6}{7} + \\tfrac{1}{7} = 1,\\quad f(1) = 0.3679\\]\nKyun: \\(x_{i} = a + ih = \\frac{i}{7}\\), is liye \\(x_{i}^{2} = \\frac{i^{2}}{49}\\) aur \\(f(x_{i}) = e^{-i^{2}/49}\\). Calculator mein pehle power ka hisaab, phir \\(e\\). Note 2 kehta hai kam az kam chaar decimal places rakhein.\nDhyan dein: \\(e^{-x^{2}}\\) mein minus sirf square ke baad lagta hai: \\(-(\\frac{1}{7})^{2} = -\\frac{1}{49}\\), \\(+\\frac{1}{49}\\) nahi.",
+              "Trapezium Rule apply karein\n\\[\\int_{0}^{1} e^{-x^{2}}\\,dx \\approx \\dfrac{1}{14}\\big[1 + 2(0.9798\\]\n\\[+ 0.9216 + 0.8322 + 0.7214\\]\n\\[+ 0.6004 + 0.4797) + 0.3679\\big]\\]\n\\[= \\dfrac{1}{14}\\big[1 + 2(4.5351) + 0.3679\\big]\\]\n\\[= \\dfrac{1}{14}(10.4381) = 0.7456\\]\nKyun: \\(\\frac{h}{2} = \\frac{1}{14}\\). Beech ki chhe values ka jama 4.5351 hai; is ka double 9.0702 hua; phir dono kinaron wali values jama ki: \\(1 + 9.0702 + 0.3679 = 10.4381\\). Aakhir mein 14 se divide kiya.\nDhyan dein: calculator mein yeh poora hisaab ek hi line mein daalne ke bajaye pehle beech wali values ka jama alag nikal kar likh lein, phir double karein. Is tarah agar koi value ghalat type ho jaye to foran pakri jati hai, aur examiner ko bhi aap ka har qadam nazar aata hai, jis ke alag marks milte hain.",
+              "Tasdeeq:\n\\([0, 1]\\) par \\(e^{-x^{2}}\\) ki har value 0.3679 aur 1 ke darmiyan hai aur interval ki lambai 1 hai, is liye integral bhi 0.3679 aur 1 ke beech hona chahiye: 0.7456 isi range mein hai. (Hamari taraf se: computer bohat zyada subintervals le kar 0.7468 deta hai, yani sirf 7 trapeziums se bhi ghalti taqreeban 0.001 hai.)"
+            ],
+            "answer": "\\(\\int_{0}^{1} e^{-x^{2}}\\,dx \\approx 0.7456\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab Example 6 mein \\(h = \\frac{1}{7} \\cong 0.142\\) likhti hai. Chaar decimal places tak \\(\\frac{1}{7} = 0.142857\\ldots \\approx 0.1429\\) hai, 0.142 nahi. Hal mein exact \\(h = \\frac{1}{7}\\) (yani \\(\\frac{h}{2} = \\frac{1}{14}\\)) istemal hua hai, is liye jawab 0.7456 par koi asar nahi."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Example 7 (printed as Example 2)"
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Use Trapezium Rule to approximate the definite integral \\(\\int_{0}^{6} \\frac{x}{1+x^{2}}\\,dx\\) by subdividing the closed interval \\([0, 6]\\) each of length 1. Also compare the answer by solving the integral using the Fundamental Theorem of Calculus.",
+            "steps": [
+              "Diya gaya: \\(f(x) = \\frac{x}{1+x^{2}}\\), \\(a = 0\\), \\(b = 6\\), \\(h = 1\\).\nMaloom karna: Trapezium Rule se \\(\\int_{0}^{6} \\frac{x}{1+x^{2}}\\,dx\\) ki approximate value, aur phir Fundamental Theorem se exact value nikal kar dono ka muqabla (comparison).\nTareeqa: is sawal mein \\(n\\) nahi, balke har subinterval ki lambai \\(h = 1\\) di gayi hai, to pehle \\(n\\) nikalenge. Exact value ke liye ghaur karein: numerator \\(x\\) denominator \\(1 + x^{2}\\) ke derivative \\(2x\\) ka aadha hai, is liye \\(\\int \\frac{u'}{u}\\,dx = \\ln|u| + c\\) wala qaida lagega.",
+              "Subintervals ki tadaad\n\\[n = \\dfrac{b-a}{h} = \\dfrac{6-0}{1} = 6\\]\nKyun: \\(h = \\frac{b-a}{n}\\) ko ulat kar \\(n = \\frac{b-a}{h}\\) milta hai. Yani 6 lambai ke interval mein 1 lambai ke 6 tukre aate hain.",
+              "Points\n\\[x_{0} = 0, x_{1} = 1, x_{2} = 2, x_{3} = 3,\\]\n\\[x_{4} = 4, x_{5} = 5, x_{6} = 6\\]\nKyun: \\(x_{i} = a + ih = 0 + i(1) = i\\). 6 subintervals ke 7 points hain.",
+              "Function aur continuity\n\\[f(c) = \\lim_{x \\to c} \\dfrac{x}{1+x^{2}}\\ \\ \\forall\\, c \\in [0, 6]\\]\n\\[\\Rightarrow f(x) = \\dfrac{x}{1+x^{2}} \\text{ is continuous on } [0, 6]\\]\nKyun: rational function (do polynomials ki taqseem) wahan continuous hota hai jahan denominator zero na ho. \\(1 + x^{2}\\) kam az kam 1 hai, kabhi zero nahi hota, is liye poore \\([0, 6]\\) par koi toot (break) nahi.",
+              "Trapezium Rule ka formula\n\\[\\int_{0}^{6} f(x)\\,dx \\approx \\dfrac{h}{2}\\big[f(x_{0}) + 2\\big(f(x_{1})\\]\n\\[+ f(x_{2}) + f(x_{3}) + f(x_{4})\\]\n\\[+ f(x_{5})\\big) + f(x_{6})\\big]\\]\nKyun: 7 points mein \\(x_{0}\\) aur \\(x_{6}\\) kinare (ends) hain, ek dafa aate hain; \\(x_{1}\\) se \\(x_{5}\\) beech ke points hain, do dafa aate hain.",
+              "Function values nikalein (4 decimal places)\n\\[f(0) = 0/(1+0) = 0.0000\\]\n\\[f(1) = 1/(1+1) = 0.5000\\]\n\\[f(2) = 2/(1+4) = 0.4000\\]\n\\[f(3) = 3/(1+9) = 0.3000\\]\n\\[f(4) = 4/(1+16) = 4/17 \\approx 0.2353\\]\n\\[f(5) = 5/(1+25) = 5/26 \\approx 0.1923\\]\n\\[f(6) = 6/(1+36) = 6/37 \\approx 0.1622\\]\nKyun: har point ko \\(\\frac{x}{1+x^{2}}\\) mein rakha. Jo values poori nahi aati (jaise 4/17), un ko chaar decimal tak round kiya.",
+              "Trapezium Rule apply karein\n\\[\\int_{0}^{6} \\dfrac{x}{1+x^{2}}\\,dx \\approx \\dfrac{1}{2}\\big[0 + 2(0.5 + 0.4\\]\n\\[+ 0.3 + 0.2353 + 0.1923) + 0.1622\\big]\\]\n\\[= 0.5\\big[2(1.6276) + 0.1622\\big]\\]\n\\[= 0.5(3.4174) = 1.7087\\]\nKyun: \\(\\frac{h}{2} = \\frac{1}{2} = 0.5\\). Beech ki values ka jama \\(0.5 + 0.4 + 0.3 + 0.2353 + 0.1923 = 1.6276\\) hai; is ka double 3.2552, phir aakhri value 0.1622 jama ki to 3.4174 bana (pehli value 0 hai). Aakhir mein 0.5 se zarb diya.",
+              "Fundamental Theorem of Calculus se exact value\n\\[\\int_{0}^{6} \\dfrac{x}{1+x^{2}}\\,dx = \\dfrac{1}{2}\\int_{0}^{6} \\dfrac{2x}{1+x^{2}}\\,dx\\]\n\\[= \\dfrac{1}{2}\\ln|1+x^{2}|\\,\\Big|_{0}^{6}\\]\n\\[\\because \\int \\dfrac{du/dx}{u}\\,dx = \\ln|u| + c\\]\n\\[= \\dfrac{1}{2}\\ln(1+36) - \\dfrac{1}{2}\\ln(1+0)\\]\n\\[= \\dfrac{1}{2}\\ln(37) = 0.5 \\times 3.6109\\]\n\\[\\approx 1.8055\\]\nKyun: \\(u = 1 + x^{2}\\) lein to \\(\\frac{du}{dx} = 2x\\). Numerator sirf \\(x\\) hai, to hum ne andar 2 se zarb aur bahar 2 se divide kiya, taake numerator bilkul \\(\\frac{du}{dx}\\) ban jaye aur \\(\\ln|u|\\) wala qaida lag sake. Phir upper limit mein se lower limit wali value minus ki; \\(\\ln 1 = 0\\).\nDhyan dein: bahar wala \\(\\frac{1}{2}\\) bhool jana aam ghalti hai; us ke baghair jawab double (3.6109) aa jayega.",
+              "Muqabla aur tasdeeq:\n\\[1.8055 - 1.7087 = 0.0968\\]\nTrapezium wali value exact value se thori kam hai. Kitab ka note (neeche) dono ko teen decimal tak round kar ke farq 0.098 likhta hai. Zyada subintervals (chhota h) lene se yeh farq kam ho jata hai. Yeh muqabla hi is example ka asal sabaq hai: jab exact jawab mil sakta ho to numerical jawab ko us se mila kar apne kaam par bharosa paida karein, aur jab exact jawab na mil sakta ho (jaise Example 6 mein) to yahi tareeqa hamara sahara hai."
+            ],
+            "answer": "Trapezium Rule se \\(\\int_{0}^{6} \\frac{x}{1+x^{2}}\\,dx \\approx 1.7087\\); exact value \\(\\frac{1}{2}\\ln 37 \\approx 1.8055\\)."
+          },
+          {
+            "type": "table",
+            "caption": "Example 7 ka muqabla (kitab dono jawab do alag boxes mein dikhati hai)",
+            "header": [
+              "By Trapezium Rule",
+              "Exact Value"
+            ],
+            "rows": [
+              [
+                "\\(\\int_{0}^{6} \\frac{x}{1+x^{2}}\\,dx \\approx 1.7087\\)",
+                "\\(\\int_{0}^{6} \\frac{x}{1+x^{2}}\\,dx \\approx 1.8055\\)"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "Approximate value aur exact value ka farq \\(|1.708 - 1.806| = 0.098\\) hai. Subintervals ki tadaad barhane se yeh farq kam kiya ja sakta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Sawal: Example 7 mein trapezium wala jawab (1.7087) exact value (1.8055) se kam kyun aaya?\nJawab: \\(\\frac{x}{1+x^{2}}\\) ka graph 0 se tezi se upar charhta hai, \\(x = 1\\) par sab se ooncha (0.5) hota hai, aur phir aahista aahista neeche aata hai. Shuru ke hisse mein (taqreeban \\(x = 1.73\\) tak) curve neeche ki taraf mud raha hai (concave down), wahan seedhi chhat curve ke neeche reh jati hai aur area ka kuch hissa chhoot jata hai; baad ke hisse mein ulta thora sa zyada gina jata hai, magar woh kam hai. \\(h = 1\\) kaafi bari chaurai hai, is liye yeh chhoota hua hissa nazar aane wala farq (taqreeban 0.097) bana deta hai. Chhota \\(h\\) lein to farq kam hoga."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "1. Pehle ek chhoti si table banayein: i, x_i, f(x_i). Phir beech wali values ek dafa jama karein aur jama ko double karein.\n2. Agar \\(h\\) diya ho to pehle \\(n = \\frac{b-a}{h}\\) nikalein; agar \\(n\\) diya ho to \\(h = \\frac{b-a}{n}\\).\n3. Har function value kam az kam chaar decimal places tak rakhein; round sirf aakhri jawab ko karein.\n4. Trigonometric functions ke liye calculator radian mode mein rakhein (degree mode mein jawab bilkul ghalat aata hai).\n5. Jab exact value nikal sakti ho (jaise Example 7 mein), us ka muqabla trapezium wali value se karein; dono qareeb honi chahiyen. Yeh aap ki apni tasdeeq hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Rule ka jawab kab zyada aur kab kam aata hai? Har trapezium ki chhat seedhi lakeer hai. Agar curve upar ki taraf mud raha ho (concave up, jaise e^x ya x^3), to seedhi lakeer curve ke upar rehti hai aur rule ka jawab asal se zyada aata hai. Agar curve neeche ki taraf mud raha ho (concave down, jaise square root ya ln x), to lakeer curve ke neeche rehti hai aur jawab kam aata hai. Chhota h lene se lakeerein curve se chipak jati hain aur error kam ho jata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(h = \\frac{b-a}{n}\\), \\(x_{i} = a + ih\\), \\(i = 0, 1, \\dots, n\\): \\(n\\) subintervals aur \\(n + 1\\) points.\n2. Har patti ek trapezium hai jis ka area \\(\\frac{h}{2}[f(x_{i-1}) + f(x_{i})]\\) hai.\n3. Trapezium Rule: \\(\\int_{a}^{b} f(x)\\,dx \\approx \\frac{h}{2}[f(x_{0}) + 2f(x_{1}) + \\dots + 2f(x_{n-1}) + f(x_{n})]\\): pehli aur aakhri ek dafa, beech wali do dafa.\n4. n bara (h chhota) karne se approximation behtar hoti hai; function values kam az kam chaar decimal tak round karein.\n5. Rule har continuous function par lagta hai; negative values signed area deti hain."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(\\frac{h}{2}\\) ki jagah \\(h\\) se zarb de dena; is se jawab double ho jata hai.\n2. Kinaron wali values f(x_0) aur f(x_n) ko bhi double kar dena, ya beech wali values ko double karna bhool jana.\n3. Points aur subintervals ko ek samajhna: \\(n = 4\\) ka matlab 5 points hai, 4 nahi.\n4. \\(\\cos x\\) ya \\(\\sin(x^{2})\\) ke liye calculator degree mode mein rehna; rule ko radians chahiyen.\n5. Beech ki values ko sirf do decimal tak round karna: chhoti chhoti ghaltiyan jama ho kar jawab ke chauthe decimal ko kharab kar deti hain."
+          }
+        ]
+      }
+    }
+  ]
+}

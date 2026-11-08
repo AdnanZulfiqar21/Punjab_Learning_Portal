@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q16-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q16",
+      "title": "Question 16 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 275,
+          "pdf_to": 275,
+          "note": "Exercise 9.2, Question 16 (book page 273); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "variant_of": "C12-MATH-CH9-EXERCISE-9-2-Q16",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "16",
+            "prompt": "16. Prove that \\(2\\tan^{-1}\\left(\\tan\\frac{\\theta}{2}\\tan\\frac{\\phi}{2}\\right) = \\cos^{-1}\\left(\\frac{\\cos\\theta + \\cos\\phi}{1 + \\cos\\theta\\cos\\phi}\\right)\\).",
+            "explanation": "Sawal dekhne mein lamba hai, lekin left side ki shakal pehchaniye: \\(2\\tan^{-1}(\\text{kuch})\\). Yeh bilkul Question 14 (i) wali shakal hai.\nSabit kya karna hai? Ke yeh \\(\\cos^{-1}\\frac{\\cos\\theta + \\cos\\phi}{1 + \\cos\\theta\\cos\\phi}\\) ke barabar hai.\nRule kaunsa? Question 14 (i): \\(2\\tan^{-1} t = \\cos^{-1}\\frac{1 - t^2}{1 + t^2}\\), aur half-angle formula \\(\\tan^2\\frac{\\theta}{2} = \\frac{1 - \\cos\\theta}{1 + \\cos\\theta}\\).\nPlan: \\(t\\) ka naam, 14 (i) lagana, phir sirf algebra: \\(\\frac{1 - t^2}{1 + t^2}\\) ko cos mein likhna. Aakhir mein dekhenge ke yeh kab sahi hai.",
+            "steps": [
+              "Diya gaya hai: \\(t = \\tan\\frac{\\theta}{2}\\tan\\frac{\\phi}{2}\\).\nSaabit karna hai: \\(2\\tan^{-1} t = \\cos^{-1}\\frac{\\cos\\theta + \\cos\\phi}{1 + \\cos\\theta\\cos\\phi}\\).\nTareeqa: Question 14 (i) se \\(2\\tan^{-1} t\\) seedha \\(\\cos^{-1}\\frac{1 - t^2}{1 + t^2}\\) ban jata hai. Ab bas yeh dikhana hai ke yeh fraction right side wala fraction hai. Is ke liye \\(t^2\\) ko half-angle formula se cos mein likhenge, kyunke right side mein sirf \\(\\cos\\theta\\) aur \\(\\cos\\phi\\) hain.",
+              "Question 14 (i) lagayein\n\\[2\\tan^{-1} t = \\cos^{-1}\\dfrac{1 - t^2}{1 + t^2}\\quad (1)\\]\nKyun: Question 14 (i) mein \\(x\\) ki jagah \\(t\\) rakha. Yaad rahe, woh identity \\(t \\ge 0\\) mangti hai; is par aakhir mein baat karenge.",
+              "Half-angle formula\n\\[\\tan^2\\dfrac{\\theta}{2} = \\dfrac{1 - \\cos\\theta}{1 + \\cos\\theta}\\]\nKyun: \\(1 - \\cos\\theta = 2\\sin^2\\frac{\\theta}{2}\\) aur \\(1 + \\cos\\theta = 2\\cos^2\\frac{\\theta}{2}\\). Dono ko divide karein to 2 cancel aur \\(\\frac{\\sin^2}{\\cos^2} = \\tan^2\\) bach jata hai. Yeh formula tan ko cos mein badalne ka pul hai.",
+              "\\(t^2\\) likhein (\\(a = \\cos\\theta\\), \\(b = \\cos\\phi\\) rakh kar)\n\\[t^2 = \\dfrac{(1 - a)(1 - b)}{(1 + a)(1 + b)}\\]\nKyun: \\(t^2 = \\tan^2\\frac{\\theta}{2}\\tan^2\\frac{\\phi}{2}\\), aur dono par half-angle formula lagaya. Chhote letters \\(a, b\\) is liye ke likhai saaf rahe aur ghalti na ho.",
+              "Andar ke fractions khatam karein\n\\[\\dfrac{1 - t^2}{1 + t^2} = \\dfrac{(1+a)(1+b) - (1-a)(1-b)}{(1+a)(1+b) + (1-a)(1-b)}\\]\nKyun: Upar neeche dono ko \\((1 + a)(1 + b)\\) se multiply kiya; is se value nahi badalti magar \\(t^2\\) ka denominator chala jata hai.",
+              "Expand karein\n\\[(1+a)(1+b) = 1 + a + b + ab\\]\n\\[(1-a)(1-b) = 1 - a - b + ab\\]\n\\[\\text{top} = 2a + 2b\\]\n\\[\\text{bottom} = 2 + 2ab\\]\nKyun: Minus karne se \\(1\\) aur \\(ab\\) cancel ho gaye aur \\(a + b\\) do dafa bache; plus karne se \\(a\\) aur \\(b\\) cancel ho gaye aur \\(1 + ab\\) do dafa bache.\nDhyan dein: \\(-(1 - a - b + ab)\\) mein bracket ke har term ka sign badalta hai.",
+              "Simplify karein\n\\[\\dfrac{1 - t^2}{1 + t^2} = \\dfrac{2(a + b)}{2(1 + ab)}\\]\n\\[= \\dfrac{\\cos\\theta + \\cos\\phi}{1 + \\cos\\theta\\cos\\phi}\\]\nKyun: 2 cancel kiya aur \\(a, b\\) ki jagah wapas \\(\\cos\\theta, \\cos\\phi\\) likhe. Yeh bilkul right side wala fraction hai.",
+              "(1) mein rakhein\n\\[2\\tan^{-1}\\left(\\tan\\dfrac{\\theta}{2}\\tan\\dfrac{\\phi}{2}\\right)\\]\n\\[= \\cos^{-1}\\dfrac{\\cos\\theta + \\cos\\phi}{1 + \\cos\\theta\\cos\\phi}\\]\nKyun: (1) ke \\(\\cos^{-1}\\) ke andar wala fraction abhi hum ne nikal liya, to dono sides barabar ho gayin.",
+              "Yeh kab sahi hai\n\\[t = \\tan\\dfrac{\\theta}{2}\\tan\\dfrac{\\phi}{2} \\ge 0\\]\nKyun: Hum ne Question 14 (i) istemal kiya, jo sirf \\(t \\ge 0\\) par sahi hai. Aam tor par \\(0 \\le \\theta < \\pi\\) aur \\(0 \\le \\phi < \\pi\\) liye jate hain; tab dono half-angles \\(\\left[0, \\frac{\\pi}{2}\\right)\\) mein hain aur \\(t \\ge 0\\). Agar \\(t\\) negative ho, jaise \\(\\theta = \\frac{\\pi}{2}\\), \\(\\phi = -\\frac{\\pi}{2}\\), to left side \\(2\\tan^{-1}(-1) = -\\frac{\\pi}{2}\\) aur right side \\(\\cos^{-1} 0 = \\frac{\\pi}{2}\\); barabar nahi.",
+              "Tasdeeq\n\\[\\theta = \\phi = \\dfrac{\\pi}{3}:\\ 2\\tan^{-1}\\tfrac{1}{3} \\approx 0.6435\\]\n\\[\\cos^{-1}\\dfrac{\\frac{1}{2} + \\frac{1}{2}}{1 + \\frac{1}{4}} = \\cos^{-1}\\tfrac{4}{5} \\approx 0.6435\\]\nKyun: \\(\\tan\\frac{\\pi}{6} = \\frac{1}{\\sqrt{3}}\\), is liye \\(t = \\frac{1}{3}\\); aur \\(\\cos\\frac{\\pi}{3} = \\frac{1}{2}\\). Dono sides ek jaisi aayin."
+            ],
+            "final_answer": "Saabit ho gaya: \\(2\\tan^{-1}\\left(\\tan\\frac{\\theta}{2}\\tan\\frac{\\phi}{2}\\right) = \\cos^{-1}\\frac{\\cos\\theta + \\cos\\phi}{1 + \\cos\\theta\\cos\\phi}\\), jab \\(\\tan\\frac{\\theta}{2}\\tan\\frac{\\phi}{2} \\ge 0\\) ho (jaise \\(0 \\le \\theta, \\phi < \\pi\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kitab mein Exercise 9.2 ke jawab chhape hue nahi hain. Is page ka har hal hamara apna hai: qadam ba qadam kiya gaya, computer algebra system (sympy) se alag se check kiya gaya, aur ek solution book se bhi milaya gaya. Is liye aap apna proof yahan wale proof se mila kar dekh sakte hain; agar aap ka tareeqa alag hai magar har qadam ki wajah sahi hai, to woh bhi theek hai."
+          }
+        ]
+      }
+    }
+  ]
+}

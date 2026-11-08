@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH10-EXERCISE-10-1-Q20-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch10",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch10/u-exercise-10-1-q20",
+      "title": "Question 20 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 280,
+          "pdf_to": 280,
+          "note": "Exercise 10.1, Question 20 (book p. 278); the book prints no answers for Exercise 10.1; answers checked with sympy and the solution book"
+        }
+      ],
+      "variant_of": "C12-MATH-CH10-EXERCISE-10-1-Q20",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "20",
+            "prompt": "20 Solve the following trigonometric equation: \\(\\frac{\\cot\\left(2x + \\frac{\\pi}{12}\\right) - \\cot\\left(5x + \\frac{\\pi}{12}\\right)}{1 + \\cot\\left(2x + \\frac{\\pi}{12}\\right)\\cot\\left(5x + \\frac{\\pi}{12}\\right)} = \\frac{1}{\\sqrt{3}}\\)",
+            "explanation": "Yeh Q19 ka bhai hai, magar tangent ki jagah cotangent hai aur upar minus, neeche plus hai.\nDiya kya hai? \\(\\frac{\\cot A - \\cot B}{1 + \\cot A\\cot B} = \\frac{1}{\\sqrt{3}}\\), jahan \\(A = 2x + \\frac{\\pi}{12}\\) aur \\(B = 5x + \\frac{\\pi}{12}\\).\nFind kya karna hai? \\([0, 2\\pi]\\) mein solutions aur general solution.\nRule: cot ko cos/sin mein likh kar \\(\\sin(B - A)\\) aur \\(\\cos(B - A)\\) ke formulas.\nPlan: fraction ko \\(\\tan 3x\\) banana, \\(\\tan 3x = \\frac{1}{\\sqrt{3}}\\) hal karna, aur check karna ke jawabon par har cotangent defined hai.\nTip: agar aap formula bhool jayein to cot ko \\(\\frac{\\cos}{\\sin}\\) likh kar khud bana sakte hain, jaisa neeche kiya gaya hai.",
+            "steps": [
+              "Diya gaya: \\(\\frac{\\cot A - \\cot B}{1 + \\cot A\\cot B} = \\frac{1}{\\sqrt{3}}\\), \\(A = 2x + \\frac{\\pi}{12}\\), \\(B = 5x + \\frac{\\pi}{12}\\).\nMaloom karna: \\([0, 2\\pi]\\) mein solutions aur general solution.\nTareeqa: \\(\\cot\\theta = \\frac{\\cos\\theta}{\\sin\\theta}\\) likh kar upar aur neeche ko alag alag simplify karenge, phir \\(\\sin(B - A)\\) aur \\(\\cos(B - A)\\) ke formulas pehchanenge. Pabandi: \\(\\sin A \\neq 0\\) aur \\(\\sin B \\neq 0\\), warna cot defined hi nahi.",
+              "Fraction ka upar wala hissa\n\\[\\cot A - \\cot B = \\dfrac{\\sin B\\cos A - \\cos B\\sin A}{\\sin A\\sin B}\\]\n\\[= \\dfrac{\\sin(B - A)}{\\sin A\\sin B}\\]\nKyun: \\(\\frac{\\cos A}{\\sin A} - \\frac{\\cos B}{\\sin B}\\) ko common denominator \\(\\sin A\\sin B\\) par likha. Upar jo bana woh \\(\\sin(B - A) = \\sin B\\cos A - \\cos B\\sin A\\) ka formula hai.\nDhyan dein: order \\(B - A\\) hai, \\(A - B\\) nahi; ulta likhne se sign badal jata hai.",
+              "Fraction ka neeche wala hissa\n\\[1 + \\cot A\\cot B = \\dfrac{\\sin A\\sin B + \\cos A\\cos B}{\\sin A\\sin B}\\]\n\\[= \\dfrac{\\cos(B - A)}{\\sin A\\sin B}\\]\nKyun: 1 ko \\(\\frac{\\sin A\\sin B}{\\sin A\\sin B}\\) likha aur \\(\\cot A\\cot B = \\frac{\\cos A\\cos B}{\\sin A\\sin B}\\). Upar \\(\\cos B\\cos A + \\sin B\\sin A\\) bana jo \\(\\cos(B - A)\\) hai.",
+              "Divide karein\n\\[\\dfrac{\\sin(B - A)}{\\cos(B - A)} = \\tan(B - A)\\]\n\\[B - A = 3x \\;\\Rightarrow\\; \\tan 3x = \\dfrac{1}{\\sqrt{3}}\\]\nKyun: upar aur neeche dono ka denominator \\(\\sin A\\sin B\\) tha, jo cancel ho gaya. Sine ko cosine se divide karein to tangent milta hai. \\(B - A = 5x + \\frac{\\pi}{12} - 2x - \\frac{\\pi}{12} = 3x\\); \\(\\frac{\\pi}{12}\\) khud hi cancel ho gaya.",
+              "\\(\\tan 3x = \\frac{1}{\\sqrt{3}}\\) hal karein\n\\[3x = \\tfrac{\\pi}{6} + n\\pi\\]\n\\[x = \\dfrac{\\pi}{18} + \\dfrac{n\\pi}{3} = \\dfrac{(6n + 1)\\pi}{18}\\]\nKyun: \\(\\tan\\frac{\\pi}{6} = \\frac{1}{\\sqrt{3}}\\). Tangent positive hai to angle pehle aur teesre quadrant mein, jo \\(\\pi\\) ke faasle par hain, aur tangent ka period \\(\\pi\\) hai. Phir 3 se divide kiya; \\(\\frac{n\\pi}{3} = \\frac{6n\\pi}{18}\\).",
+              "\\([0, 2\\pi]\\) mein values: \\(n = 0, \\ldots, 5\\)\n\\[\\tfrac{\\pi}{18}, \\tfrac{7\\pi}{18}, \\tfrac{13\\pi}{18}, \\tfrac{19\\pi}{18}, \\tfrac{25\\pi}{18}, \\tfrac{31\\pi}{18}\\]\nKyun: shart \\(6n + 1 \\le 36\\) hai (kyunke \\(2\\pi = \\frac{36\\pi}{18}\\)), to \\(n \\le 5\\), yani 6 values; har dafa numerator mein 6 jurta hai.",
+              "Pabandi check karein\n\\[A = \\tfrac{(24n + 7)\\pi}{36},\\quad B = \\tfrac{(60n + 13)\\pi}{36}\\]\nKyun: \\(\\sin A = 0\\) tab hota jab \\(A\\) \\(\\pi = \\frac{36\\pi}{36}\\) ka multiple hota, aur aise multiples ke numerators even hote hain. Hamare numerators \\(24n + 7\\) aur \\(60n + 13\\) hamesha odd hain, is liye \\(\\sin A\\) aur \\(\\sin B\\) kabhi zero nahi. \\(\\cos 3x\\) bhi zero nahi kyunke \\(\\tan 3x\\) ki value maujood hai. Is liye chhe ki chhe values sahi hain.",
+              "Tasdeeq: \\(x = \\frac{\\pi}{18}\\)\n\\[3x = \\tfrac{\\pi}{6},\\quad \\tan\\tfrac{\\pi}{6} = \\tfrac{1}{\\sqrt{3}} \\;\\checkmark\\]\nKyun: humne saabit kiya tha ke left side \\(\\tan 3x\\) ke barabar hai, aur yahan woh bilkul right side ke barabar aaya."
+            ],
+            "final_answer": "\\([0, 2\\pi]\\) mein: \\(x = \\frac{\\pi}{18}, \\frac{7\\pi}{18}, \\frac{13\\pi}{18}, \\frac{19\\pi}{18}, \\frac{25\\pi}{18}, \\frac{31\\pi}{18}\\)\nGeneral solution \\(= \\left\\{\\frac{\\pi}{18} + \\frac{n\\pi}{3}\\right\\}\\), \\(n \\in \\mathbb{Z}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kitab mein Exercise 10.1 ke jawab chhape hue nahi hain. Is page ka har jawab hamara apna hai: qadam ba qadam hal kiya gaya, computer algebra system (sympy) se alag se check kiya gaya, aur ek solution book se bhi milaya gaya. Is liye aap apna jawab yahan wale jawab se mila kar dekh sakte hain."
+          }
+        ]
+      }
+    }
+  ]
+}

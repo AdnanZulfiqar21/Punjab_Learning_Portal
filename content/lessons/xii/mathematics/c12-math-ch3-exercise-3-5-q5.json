@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 104,
+          "note": "Exercise 3.5, Question 5: prove the x <-> 1 - x symmetry on [0, 1] and evaluate; book p. 102. Key on p. 300 under 'Exercise 3.2'."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5 Prove that \\(\\int_{0}^{1} x^m(1 - x)^n\\,dx = \\int_{0}^{1} x^n(1 - x)^m\\,dx\\) and hence evaluate \\(\\int_{0}^{1} x(1 - x)^{10}\\,dx\\).",
+            "explanation": "A 'prove, then use' question.\nOn \\([0, 1]\\), Property IV lets us replace \\(x\\) by \\(1 - x\\); this swaps the roles of \\(x\\) and \\(1 - x\\), which is exactly the statement.\nThen use it with \\(m = 1\\), \\(n = 10\\): \\((1 - x)^{10}\\) becomes \\(x^{10}\\), which is easy to integrate.",
+            "steps": [
+              "Given: \\(I = \\int_{0}^{1} x^m(1 - x)^n\\,dx\\).\nTo prove: \\(I = \\int_{0}^{1} x^n(1 - x)^m\\,dx\\); then evaluate \\(\\int_0^1 x(1 - x)^{10}\\,dx\\).\nMethod: Property IV with \\(a = 0\\), \\(b = 1\\): \\(\\int_0^1 f(x)\\,dx = \\int_0^1 f(1 - x)\\,dx\\).",
+              "Replace \\(x\\) by \\(1 - x\\)\n\\[I = \\int_{0}^{1} (1 - x)^m\\big(1 - (1 - x)\\big)^n\\,dx\\]\n\\[= \\int_{0}^{1} (1 - x)^m x^n\\,dx\\]\nWhy: Property IV; and \\(1 - (1 - x) = x\\).",
+              "Conclusion of the proof\n\\[\\int_{0}^{1} x^m(1 - x)^n\\,dx = \\int_{0}^{1} x^n(1 - x)^m\\,dx\\]\nWhy: the order of the factors in a product does not matter.",
+              "Use it with \\(m = 1\\), \\(n = 10\\)\n\\[\\int_{0}^{1} x(1 - x)^{10}\\,dx = \\int_{0}^{1} x^{10}(1 - x)\\,dx\\]\n\\[= \\int_{0}^{1} (x^{10} - x^{11})\\,dx\\]\nWhy: expanding \\((1 - x)^{10}\\) would give 11 terms; after the swap only two terms remain.",
+              "Integrate\n\\[= \\left[\\dfrac{x^{11}}{11} - \\dfrac{x^{12}}{12}\\right]_{0}^{1}\\]\n\\[= \\dfrac{1}{11} - \\dfrac{1}{12} = \\dfrac{1}{132}\\]\nWhy: power rule; \\(\\frac{12 - 11}{132} = \\frac{1}{132}\\).",
+              "Check by parts (without the property)\n\\[\\int x(1 - x)^{10}dx = -\\dfrac{x(1 - x)^{11}}{11}\\]\n\\[- \\dfrac{(1 - x)^{12}}{132}\\]\n\\[\\Big[\\ \\cdot\\ \\Big]_{0}^{1} = 0 - \\left(-\\dfrac{1}{132}\\right) = \\dfrac{1}{132} \\;\\checkmark\\]\nWhy: by parts with \\(\\int (1 - x)^{10}dx = -\\frac{(1 - x)^{11}}{11}\\). The key prints \\(\\frac{1}{132}\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\int_{0}^{1} x^m(1 - x)^n\\,dx = \\int_{0}^{1} x^n(1 - x)^m\\,dx\\); and \\(\\int_{0}^{1} x(1 - x)^{10}\\,dx = \\frac{1}{132}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

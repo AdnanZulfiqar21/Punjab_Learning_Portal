@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-7-Q6-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-7-q6",
+      "title": "Question 6 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 124,
+          "pdf_to": 124,
+          "note": "Exercise 3.7, Question 6 (book p. 122); answers printed in the key (book p. 302) under the heading 'Exercise 3.8'."
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-7-Q6",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(a)",
+            "prompt": "6. In a bacterial culture, the growth rate is proportional to the number of bacteria present. Initially there are 200 bacteria. After 2 hours, there are 1800 bacteria. (a) Find the number of bacteria at time \\(t\\) hours.",
+            "explanation": "\"Growth rate number ke proportional hai\" ka matlab hai: jitne zyada bacteria, utni tez barhotri. Equation mein: \\(\\frac{dN}{dt} = kN\\).\nDiya kya hai? Shuru mein 200, 2 ghante baad 1800.\nRule kaunsa? Variables alag karo (separate), dono taraf integrate karo; \\(\\int\\frac{1}{N}\\,dN = \\ln N\\).\nPlan: \\(N = Ae^{kt}\\) banao, phir do di hui values se \\(A\\) aur \\(k\\).",
+            "steps": [
+              "Diya gaya: \\(\\frac{dN}{dt} = kN\\), \\(N(0) = 200\\), \\(N(2) = 1800\\).\nMaloom karna: \\(N(t)\\).\nTareeqa: dono taraf \\(N\\) se divide karein taa ke har taraf ek hi variable rahe, phir dono taraf integrate karein, aur aakhir mein di hui values lagayein.",
+              "Alag kar ke integrate karein\n\\[\\dfrac{1}{N}\\,dN = k\\,dt\\]\n\\[\\int\\dfrac{1}{N}\\,dN = \\int k\\,dt\\]\n\\[\\ln N = kt + c\\]\nKyun: \\(\\int\\frac{1}{N}\\,dN = \\ln N\\) (bacteria ki tadaad positive hai), aur \\(k\\) constant hai to \\(\\int k\\,dt = kt\\).",
+              "\\(N\\) nikaalein\n\\[N = e^{kt + c} = e^{c}e^{kt} = Ae^{kt}\\]\nKyun: \\(\\ln\\) hatane ke liye dono taraf exponential liya. \\(e^{c}\\) bhi ek constant hai, use \\(A\\) kaha.",
+              "\\(N(0) = 200\\) lagayein\n\\[200 = Ae^{0} \\Rightarrow A = 200\\]\n\\[N(t) = 200e^{kt}\\]\nKyun: \\(e^{0} = 1\\), is liye \\(A\\) shuru ki tadaad hai.",
+              "\\(N(2) = 1800\\) lagayein\n\\[1800 = 200e^{2k} \\Rightarrow e^{2k} = 9\\]\n\\[e^{k} = 3, \\qquad k = \\ln 3\\]\n\\[N(t) = 200(e^{k})^{t} = 200\\cdot 3^{t}\\]\nKyun: \\(e^{2k} = (e^{k})^{2} = 9\\), aur \\(e^{k}\\) hamesha positive hai, is liye \\(e^{k} = 3\\) (\\(-3\\) nahin). Phir \\(e^{kt} = (e^{k})^{t} = 3^{t}\\).\nDhyan dein: \\(k = \\ln 3 \\approx 1.0986\\) ko decimal mein rakhne ki bajaye \\(3^{t}\\) likhna saaf aur bilkul durust hai.",
+              "Tasdeeq\n\\(N(0) = 200\\), \\(N(2) = 200 \\times 9 = 1800\\;\\checkmark\\); \\(\\frac{dN}{dt} = 200\\cdot 3^{t}\\ln 3 = (\\ln 3)N\\), yani rate waqai \\(N\\) ke proportional hai \\(\\checkmark\\)."
+            ],
+            "final_answer": "\\(N(t) = 200\\cdot 3^{t}\\) (yani \\(200e^{(\\ln 3)t}\\)), \\(t\\) ghanton mein."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(b)",
+            "prompt": "6. In a bacterial culture, the growth rate is proportional to the number of bacteria present. Initially there are 200 bacteria. After 2 hours, there are 1800 bacteria. (b) How many bacteria will there be after 4 hours?",
+            "explanation": "Part (a) ka formula mil chuka hai; ab sirf \\(t = 4\\) rakhna hai.\nDiya kya hai? \\(N(t) = 200\\cdot 3^{t}\\).\nPlan: \\(t = 4\\) rakh kar hisaab, aur ek aasaan tareeqe se tasdeeq.",
+            "steps": [
+              "Diya gaya: \\(N(t) = 200\\cdot 3^{t}\\).\nMaloom karna: \\(N(4)\\).\nTareeqa: \\(t = 4\\) rakhna.",
+              "\\(t = 4\\) rakhein\n\\[N(4) = 200\\cdot 3^{4} = 200 \\times 81\\]\n\\[= 16200\\]\nKyun: \\(3^{4} = 3 \\times 3 \\times 3 \\times 3 = 81\\).",
+              "Tasdeeq\nHar 2 ghante mein tadaad 9 guna hoti hai: \\(200 \\to 1800 \\to 16200\\;\\checkmark\\). Dekhiye exponential growth kitni tez hai: 4 ghante mein 81 guna."
+            ],
+            "final_answer": "4 ghante baad 16200 bacteria."
+          }
+        ]
+      }
+    }
+  ]
+}

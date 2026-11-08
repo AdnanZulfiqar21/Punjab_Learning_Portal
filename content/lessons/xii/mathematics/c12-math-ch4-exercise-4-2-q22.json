@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q22",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q22",
+      "title": "Question 22",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 136,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 22: book p. 134 (Q2-Q25 general solutions and IVPs); answer key p. 303 (keys numbered 2-29)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "22",
+            "prompt": "22 Solve the initial value problem \\(\\frac{dy}{dx} - x = xy^2\\); \\(y(0) = 1\\).",
+            "explanation": "This is an initial value problem: first the general solution, then the condition \\(y(0) = 1\\) fixes the constant.\n\\(\\frac{dy}{dx} = x(1 + y^2)\\) is a product of an \\(x\\)-part and a \\(y\\)-part, so it is separable.\nPlan: factorise, separate, integrate (inverse tangent), apply \\(y(0) = 1\\).",
+            "steps": [
+              "Given: \\(\\frac{dy}{dx} - x = xy^2\\), \\(y(0) = 1\\).\nTo find: the particular solution.\nMethod: Separable equation, then the initial value condition \\(y(x_0) = y_0\\) (Section 4.2) to find \\(C\\).",
+              "Factorise\n\\[\\dfrac{dy}{dx} = x + xy^2 = x(1 + y^2)\\]\nWhy: take \\(x\\) common; now the right side is \\(g(x)h(y)\\).",
+              "Separate the variables\n\\[\\dfrac{dy}{1 + y^2} = x\\,dx\\]\nWhy: divide by \\(1 + y^2\\) (never zero) and multiply by \\(dx\\).",
+              "Integrate\n\\[\\tan^{-1} y = \\dfrac{x^2}{2} + C\\]\nWhy: \\(\\int \\frac{dy}{1 + y^2} = \\tan^{-1} y\\) and \\(\\int x\\,dx = \\frac{x^2}{2}\\). This is the general solution.",
+              "Use \\(y(0) = 1\\)\n\\[\\tan^{-1} 1 = 0 + C\\]\n\\[C = \\dfrac{\\pi}{4}\\]\nWhy: put \\(x = 0\\), \\(y = 1\\); \\(\\tan\\frac{\\pi}{4} = 1\\).",
+              "Particular solution\n\\[\\tan^{-1} y = \\dfrac{x^2}{2} + \\dfrac{\\pi}{4}\\]\n\\[y = \\tan\\left(\\dfrac{x^2}{2} + \\dfrac{\\pi}{4}\\right)\\]\nWhy: take tan of both sides to write \\(y\\) explicitly.",
+              "Check\n\\[y' = x\\sec^2\\left(\\tfrac{x^2}{2} + \\tfrac{\\pi}{4}\\right)\\]\n\\[= x(1 + y^2)\\]\nso \\(y' - x = xy^2\\) \\(\\checkmark\\); and \\(y(0) = \\tan\\frac{\\pi}{4} = 1\\) \\(\\checkmark\\)\nWhy: \\(\\sec^2\\theta = 1 + \\tan^2\\theta\\)."
+            ],
+            "final_answer": "\\(\\tan^{-1} y = \\frac{x^2}{2} + \\frac{\\pi}{4}\\), i.e. \\(y = \\tan\\left(\\frac{x^2}{2} + \\frac{\\pi}{4}\\right)\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints this answer as number 25, not 22. The Exercise 4.2 keys are numbered 2 to 29 for 25 questions (key 2 answers Question 1, and the extra keys 15, 19 and 27 match no printed question), so look for this answer under 25. The answer itself, \\(\\tan^{-1} y = \\frac{x^2}{2} + \\frac{\\pi}{4}\\), is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

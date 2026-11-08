@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-7-Q12-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-7-q12",
+      "title": "Question 12 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 124,
+          "pdf_to": 124,
+          "note": "Exercise 3.7, Question 12 (book p. 122); answers printed in the key (book p. 302) under the heading 'Exercise 3.8'."
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-7-Q12",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12(a)",
+            "prompt": "12. A patient receives an IV bolus dose of a drug. The concentration in the blood is modeled by \\(C(t) = 12e^{-0.3t}\\) (mg/L) where \\(t\\) is the time in hours since that dose was taken. The minimum effective concentration (MEC) is 3 mg/L. The drug is considered effective if total AUC in a 24-hour period is at least 150 mg h/L. (a) Find the time \\(T\\) (in hours) when the concentration reaches the MEC.",
+            "explanation": "Yeh exponential equation ka sawal hai: woh waqt dhoondna hai jab concentration gir kar 3 mg/L reh jaye.\nDiya kya hai? \\(C(t) = 12e^{-0.3t}\\) aur MEC \\(= 3\\).\nRule kaunsa? \\(C(T) = 3\\) rakh kar exponential ko akela karo, phir \\(\\ln\\) lo, kyun ke \\(\\ln\\) exponential ko khol deta hai.\nPlan: \\(12e^{-0.3T} = 3\\), \\(e^{-0.3T} = \\frac{1}{4}\\), \\(\\ln\\), \\(T\\).",
+            "steps": [
+              "Diya gaya: \\(C(t) = 12e^{-0.3t}\\), MEC \\(= 3\\) mg/L.\nMaloom karna: woh \\(T\\) jis par \\(C(T) = 3\\).\nTareeqa: exponential ko akela karna, phir \\(\\ln\\) lena.",
+              "Hal karein\n\\[12e^{-0.3T} = 3 \\Rightarrow e^{-0.3T} = \\dfrac{1}{4}\\]\n\\[-0.3T = \\ln\\dfrac{1}{4} = -\\ln 4\\]\n\\[T = \\dfrac{\\ln 4}{0.3} \\approx 4.62\\text{ hours}\\]\nKyun: dono taraf 12 se divide kiya; phir \\(\\ln(e^{x}) = x\\). \\(\\ln\\frac{1}{4} = -\\ln 4\\), dono taraf minus cancel ho gaye. \\(\\ln 4 \\approx 1.386\\), \\(1.386 \\div 0.3 \\approx 4.62\\).",
+              "Tasdeeq\n\\[12e^{-0.3 \\times 4.621} \\approx 12 \\times 0.25 = 3\\;\\checkmark\\]\nYani taqreeban 4 ghante 37 minute baad dawai kam se kam asar wali hadd tak gir jati hai."
+            ],
+            "final_answer": "\\(T = \\dfrac{\\ln 4}{0.3} \\approx 4.62\\) ghante (taqreeban 4 ghante 37 minute)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12(b)",
+            "prompt": "12. A patient receives an IV bolus dose of a drug. The concentration in the blood is modeled by \\(C(t) = 12e^{-0.3t}\\) (mg/L) where \\(t\\) is the time in hours since that dose was taken. The minimum effective concentration (MEC) is 3 mg/L. The drug is considered effective if total AUC in a 24-hour period is at least 150 mg h/L. (b) Calculate the AUC from \\(t = 0\\) to \\(t = T\\) for a single dose.",
+            "explanation": "AUC, concentration ka integral hai; is liye \\(C(t)\\) ko 0 se \\(T\\) tak integrate karna hai.\nDiya kya hai? \\(C(t)\\) aur part (a) se \\(e^{-0.3T} = \\frac{1}{4}\\).\nPlan: exponential ka integral lo, aur \\(e^{-0.3T}\\) ki jagah seedha \\(\\frac{1}{4}\\) rakho taa ke rounding ki ghalti na aaye.",
+            "steps": [
+              "Diya gaya: \\(C(t) = 12e^{-0.3t}\\), \\(e^{-0.3T} = \\frac{1}{4}\\).\nMaloom karna: \\(\\int_{0}^{T} C(t)\\,dt\\).\nTareeqa: \\(\\int e^{kt}\\,dt = \\frac{e^{kt}}{k}\\), jahan \\(k = -0.3\\).",
+              "Integrate karein\n\\[\\int_{0}^{T} 12e^{-0.3t}\\,dt = 12\\left[\\dfrac{e^{-0.3t}}{-0.3}\\right]_{0}^{T}\\]\n\\[= -40\\big(e^{-0.3T} - 1\\big) = 40\\big(1 - e^{-0.3T}\\big)\\]\nKyun: \\(\\frac{12}{0.3} = 40\\); minus sign bracket ke andar le jane se \\(1 - e^{-0.3T}\\) ban gaya.",
+              "Part (a) istemal karein\n\\[= 40\\left(1 - \\dfrac{1}{4}\\right) = 30\\]\nKyun: \\(e^{-0.3T} = \\frac{1}{4}\\) pehle se maloom hai, decimal \\(T\\) daalne ki zaroorat nahin.",
+              "Tasdeeq\nEk dose ka kul AUC \\(\\int_0^\\infty = 40\\) hai; 30 us ka teen chauthai hai, jo \\(1 - \\frac{1}{4}\\) se milta hai \\(\\checkmark\\)."
+            ],
+            "final_answer": "\\(\\text{AUC}_{0\\to T} = 30\\) mg h/L"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12(c)",
+            "prompt": "12. A patient receives an IV bolus dose of a drug. The concentration in the blood is modeled by \\(C(t) = 12e^{-0.3t}\\) (mg/L) where \\(t\\) is the time in hours since that dose was taken. The minimum effective concentration (MEC) is 3 mg/L. The drug is considered effective if total AUC in a 24-hour period is at least 150 mg h/L. (c) Determine if one dose provides enough total AUC over 24 hours. If not, how many doses (given at intervals of \\(T\\) hours) are needed in 24 hours to meet the requirement?",
+            "explanation": "Do sawal hain: kya ek dose kaafi hai, aur agar nahin to kitne doses.\nDiya kya hai? Har dose \\(12e^{-0.3t}\\) deta hai, doses har \\(T\\) ghante baad, aur 24 ghante mein AUC kam se kam 150 chahiye.\nRule kaunsa? Kayi doses ke asraat jama hote hain; \\(\\tau\\) waqt par liya dose 24 ghante ke andar \\(40(1 - e^{-0.3(24 - \\tau)})\\) deta hai.\nPlan: pehle ek dose; phir yeh ke har dose zyada se zyada 40 deta hai, to kam se kam 4; phir tasdeeq ke 4 waqai kaafi hain.",
+            "steps": [
+              "Diya gaya: har dose ka \\(C(t) = 12e^{-0.3t}\\), 24 ghante mein zaroori AUC \\(\\ge 150\\) mg h/L, har \\(T\\) ghante baad dose, aur \\(e^{0.3T} = 4\\).\nMaloom karna: ek dose kaafi hai ya nahin; agar nahin to kitne doses chahiyein.\nTareeqa: \\(\\tau\\) waqt par liye gaye dose ka AUC, \\(t = 24\\) tak: \\(\\int_{0}^{24 - \\tau} 12e^{-0.3u}\\,du = 40\\big(1 - e^{-0.3(24 - \\tau)}\\big)\\).",
+              "Ek dose\n\\[\\text{AUC}_{0\\to 24} = 40\\big(1 - e^{-7.2}\\big)\\]\n\\[\\approx 40(1 - 0.00075) \\approx 39.97\\]\n\\(39.97 < 150\\): ek dose kaafi nahin.\nKyun: \\(0.3 \\times 24 = 7.2\\), aur \\(e^{-7.2}\\) bohat chhota hai.",
+              "Kam se kam kitne doses?\nHar dose zyada se zyada \\(\\int_0^\\infty 12e^{-0.3t}\\,dt = 40\\) deta hai, is liye \\(n\\) doses zyada se zyada \\(40n\\) dete hain.\n\\[40n \\ge 150 \\Rightarrow n \\ge 3.75\\]\nTo 3 doses (zyada se zyada 120) kabhi kaafi nahin; kam se kam 4 chahiyein.\nKyun: yeh ek \"upper limit\" wali soch hai: agar sab se behtar soorat mein bhi 3 doses 150 tak nahin pahunchte to 3 bilkul nahin chalenge.",
+              "Chaar doses, \\(t = 0, T, 2T, 3T\\) par\n\\(kT\\) par liya dose 24 ghante ke andar \\(24 - kT\\) ghante kaam karta hai:\n\\[40\\big(1 - e^{-0.3(24 - kT)}\\big) = 40\\big(1 - 4^{k}e^{-7.2}\\big)\\]\n\\[\\text{Total} = 160 - 40(1 + 4 + 16 + 64)e^{-7.2}\\]\n\\[= 160 - 3400e^{-7.2} \\approx 157.46\\]\nKyun: \\(e^{0.3kT} = (e^{0.3T})^{k} = 4^{k}\\). Aakhri dose \\(3T \\approx 13.86\\) ghante par hai, jo 24 ghante ke andar hai.",
+              "Nateeja\n\\(157.46 \\ge 150\\), is liye 4 doses zaroorat poori kar dete hain, aur 3 nahin kar sakte.",
+              "Tasdeeq\nHar dose alag: \\(39.97 + 39.88 + 39.52 + 38.09 \\approx 157.46\\;\\checkmark\\).\nDhyan dein: \\(150 \\div 30 = 5\\) jawab nahin, kyun ke part (b) ka 30 har dose ko sirf \\(T\\) waqt tak ginta hai, jab ke dawai us ke baad bhi kaam karti rehti hai."
+            ],
+            "final_answer": "Nahin, ek dose sirf taqreeban 39.97 mg h/L deta hai (\\(< 150\\)). Kam se kam 4 doses (\\(t = 0, T, 2T, 3T \\approx 0, 4.62, 9.24, 13.86\\) ghante par) chahiyein; yeh taqreeban 157.5 mg h/L dete hain."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Answer key kehti hai \"One dose insufficient; 6 doses needed in 24 hours\". Pehla hissa sahi hai, lekin 6 sirf itne doses hain jo har \\(T\\) ghante baad dene se 24 ghante mein samaa jate hain (\\(t = 0, T, \\dots, 5T \\approx 23.1\\) ghante); chhe doses taqreeban 199 mg h/L dete hain, jo 150 se kahin zyada hai. Zaroorat poori karne ke liye kam se kam doses 4 hain (AUC \\(\\approx 157.5\\) mg h/L), jaisa upar dikhaya."
+          }
+        ]
+      }
+    }
+  ]
+}

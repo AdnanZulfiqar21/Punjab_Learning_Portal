@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.1",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 73,
+          "pdf_to": 78,
+          "note": "Book p. 71-72: Unit 3 introduction; 3.1 definition of antiderivative, illustration f(x) = 2x, definition of the indefinite integral, notation (i)-(vi). Subtopics 3.1.1 and 3.1.2 have their own pages."
+        }
+      ],
+      "title": "3.1 Antiderivatives and The Indefinite Integral",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "INTRODUCTION"
+          },
+          {
+            "type": "paragraph",
+            "text": "In the previous units we studied differentiation and used it to find rates of change, slopes of curves, maxima and minima, and to solve real-world problems. In this unit we study integration, the reverse process of differentiation. It is the branch of calculus used to find accumulation, area, volume and total change. We will learn antiderivatives, indefinite and definite integrals, their notation, properties and basic rules (including the power rule), and the Fundamental Theorem of Calculus. We will relate the definite integral to the net area under a curve and use integration to find areas bounded by curves and lines, and volumes of solids of revolution. We will also learn the main techniques of integration: substitution, integration by parts, trigonometric substitution, partial fractions, and integrals of exponential and logarithmic functions. Integration is used in mathematics, physics, engineering, economics, biology and technology, for example for the volume of containers, population growth, consumer and producer surplus, distance and velocity, drug dosage, moment of inertia and sensor network measurements."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Differentiation answers the question: given a function, what is its rate of change? Integration asks the reverse question: given the rate of change (the derivative), which function did it come from?\nSo every derivative formula you learned in Unit 2 also gives an integration formula when it is read backwards. For example \\(\\frac{d}{dx}(x^{2}) = 2x\\) read backwards says: a function whose derivative is \\(2x\\) is \\(x^{2}\\).\nKeep your differentiation rules ready; this whole unit uses them."
+          },
+          {
+            "type": "paragraph",
+            "text": "Definition: A function \\(F\\) is called an antiderivative of a given function \\(f\\) on an interval \\(I\\) if \\(F'(x) = f(x)\\) for all \\(x\\) in \\(I\\). In other words, the process of recovering a function \\(F\\) from its derivative \\(f\\) is called antidifferentiation.",
+            "bold": [
+              "Definition:",
+              "antiderivative"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Read the definition as a test. To check that \\(F\\) is an antiderivative of \\(f\\), differentiate \\(F\\). If you get \\(f\\), the answer is yes.\n'Anti' means 'reverse': antidifferentiation undoes differentiation, just as subtraction undoes addition.\nThe interval \\(I\\) matters because some functions are not defined everywhere; for example \\(\\frac{1}{x}\\) is not defined at \\(x = 0\\), so we work on an interval that does not contain 0."
+          },
+          {
+            "type": "paragraph",
+            "text": "To illustrate, let \\(f(x) = 2x\\). If \\(F(x) = x^{2}\\) then \\(F'(x) = 2x = f(x)\\). Moreover, the function \\(G(x) = x^{2} + 10\\) also satisfies \\(G'(x) = 2x = f(x)\\). Therefore, if \\(F(x)\\) is any antiderivative of \\(f(x)\\) on a given interval, then for any value of \\(c\\), the function \\(F(x) + c\\) is also an antiderivative of \\(f(x)\\) on that interval."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does adding a constant change nothing? Because the derivative of a constant is zero:\n\\[\\dfrac{d}{dx}\\big(F(x) + c\\big) = F'(x) + 0\\]\n\\[= f(x)\\]\nSo \\(x^{2}\\), \\(x^{2} + 10\\), \\(x^{2} - 3\\), \\(x^{2} + \\sqrt{2}\\) all have derivative \\(2x\\). A function therefore has not one antiderivative but a whole family of them.\nGraphically, the curves \\(y = x^{2} + c\\) are the same parabola moved up or down. At any fixed \\(x\\) they all have the same slope \\(2x\\), so their derivatives agree.\nIt is also a known fact (from the Mean Value Theorem) that on an interval any two antiderivatives of the same function differ only by a constant. So \\(F(x) + c\\) describes all of them; no antiderivative is missed."
+          },
+          {
+            "type": "paragraph",
+            "text": "Definition: Let \\(F\\) be an antiderivative of \\(f\\) on an interval \\(I\\). The set (or family) of all antiderivatives of \\(f\\) is called the indefinite integral of \\(f(x)\\) with respect to \\(x\\), denoted by \\(\\int f(x)\\,dx\\) and defined as \\(\\int f(x)\\,dx = F(x) + c\\), where \\(F'(x) = f(x)\\) and \\(c\\) is an arbitrary constant.",
+            "bold": [
+              "Definition:",
+              "indefinite integral"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "In the notation \\(\\int f(x)\\,dx = F(x) + c\\):"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) The symbol \\(\\int\\) is called the integral sign.",
+              "(ii) \\(\\int f(x)\\,dx\\) is called the indefinite integral of \\(f(x)\\).",
+              "(iii) The function \\(f(x)\\) inside the integral sign is the integrand.",
+              "(iv) The symbol \\(dx\\) is called the differential of \\(x\\). It indicates the variable of integration: the variable with respect to which the integration is performed.",
+              "(v) \\(F(x)\\) is an antiderivative of \\(f(x)\\).",
+              "(vi) \\(c\\) is the constant of integration."
+            ],
+            "bold": [
+              "integral sign",
+              "indefinite integral",
+              "integrand",
+              "differential",
+              "variable of integration",
+              "antiderivative",
+              "constant of integration"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to read \\(\\int 2x\\,dx = x^{2} + c\\) aloud: 'the integral of \\(2x\\) with respect to \\(x\\) is \\(x^{2}\\) plus \\(c\\)'.\nThe sign \\(\\int\\) is a stretched letter S (for 'sum'); you will see why in the section on the definite integral.\nThe \\(\\int\\) and the \\(dx\\) always come as a pair: \\(\\int\\) opens and \\(dx\\) closes, and the integrand sits between them. Never drop the \\(dx\\).\nWhy is it called 'indefinite'? Because the answer is not one definite function: \\(c\\) can be any number.\nThe letter after \\(d\\) names the variable. In \\(\\int 3t^{2}\\,dt = t^{3} + c\\) the variable is \\(t\\), and the answer is written in \\(t\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Our examples (not from the book): find all antiderivatives and check by differentiating.\n(a) \\(f(x) = 3x^{2}\\). We know \\(\\frac{d}{dx}(x^{3}) = 3x^{2}\\), so\n\\[\\int 3x^{2}\\,dx = x^{3} + c\\]\nCheck: \\(\\frac{d}{dx}(x^{3} + c) = 3x^{2}\\).\n(b) \\(f(x) = \\cos x\\). We know \\(\\frac{d}{dx}(\\sin x) = \\cos x\\), so\n\\[\\int \\cos x\\,dx = \\sin x + c\\]\n(c) \\(f(x) = 3x^{2} + 2x\\). Since \\(\\frac{d}{dx}(x^{3} + x^{2}) = 3x^{2} + 2x\\),\n\\[\\int (3x^{2} + 2x)\\,dx = x^{3} + x^{2} + c\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(F\\) is an antiderivative of \\(f\\) when \\(F'(x) = f(x)\\).\n2. If \\(F\\) is one antiderivative, every \\(F(x) + c\\) is another; together they form the indefinite integral \\(\\int f(x)\\,dx = F(x) + c\\).\n3. \\(\\int\\) is the integral sign, \\(f(x)\\) the integrand, \\(dx\\) shows the variable of integration, \\(c\\) is the constant of integration.\n4. Integration is the reverse of differentiation: every derivative formula read backwards is an integration formula.\n5. Always check an integral by differentiating the answer: you must get back the integrand."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Forgetting \\(+\\,c\\) in an indefinite integral. Without it you give only one member of the family.\n2. Dropping \\(dx\\), or writing the answer in the wrong variable (\\(\\int 3t^{2}\\,dt\\) is \\(t^{3} + c\\), not \\(x^{3} + c\\)).\n3. Differentiating instead of integrating: \\(\\int 2x\\,dx\\) is \\(x^{2} + c\\), not \\(2\\).\n4. Writing \\(+\\,c\\) after differentiating in a check: the derivative of \\(F(x) + c\\) is \\(F'(x)\\); the constant disappears."
+          }
+        ]
+      }
+    }
+  ]
+}

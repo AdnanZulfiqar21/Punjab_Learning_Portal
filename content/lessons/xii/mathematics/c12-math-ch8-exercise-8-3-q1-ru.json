@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-3-Q1-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-3-q1",
+      "title": "Question 1 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 250,
+          "pdf_to": 250,
+          "note": "Exercise 8.3 (book p. 248): Trapezium Rule, Q1-Q10"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.3 (book p. 307)"
+        }
+      ],
+      "variant_of": "C12-MATH-CH8-EXERCISE-8-3-Q1",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1",
+            "prompt": "1. Use Trapezoidal Rule to approximate the value of the definite integral \\(\\int_{0}^{2} \\cos(x)\\,dx\\) taking \\(n = 4\\).",
+            "explanation": "Sab se pehle dekhte hain ke yeh kis qisam ka sawal hai: definite integral ki value Trapezium Rule se approximately nikalni hai, seedha integration nahi karna.\nDiya kya hai? Function \\(f(x) = \\cos(x)\\), interval \\([0, 2]\\), aur \\(n = 4\\) diya hai, to \\(h = \\frac{b-a}{n}\\) nikalega.\nFind kya karna hai? Integral ki approximate value, chaar decimal places tak.\nRule kaunsa aur kyun? Trapezium Rule, kyunke sawal yahi maangta hai: area ko barabar chaurai ki pattiyon (trapeziums) mein baant kar jama karna.\nPlan: h ya n, phir points ki list, phir har point par function ki value, phir beech wali values ka jama, aur aakhir mein formula aur tasdeeq.",
+            "steps": [
+              "Diya gaya: \\(f(x) = \\cos(x)\\), \\(a = 0\\), \\(b = 2\\), \\(n = 4\\).\nMaloom karna: \\(\\int_{0}^{2} \\cos(x)\\,dx\\) ki approximate value.\nTareeqa: sawal khud Trapezium Rule maang raha hai, is liye wohi lagayenge. Yahan n diya hua hai, is liye pehle h nikalenge. Phir points aur un par function ki values (chaar decimal tak) nikal kar formula \\(\\frac{h}{2}[\\text{pehli} + 2(\\text{beech wali}) + \\text{aakhri}]\\) mein rakhenge.",
+              "Continuity\n\\(\\cos x\\) har real number par continuous hai (us ka graph kahin nahi toot'ta), is liye \\([0, 2]\\) par bhi continuous hai aur rule lag sakta hai.\nKyun: Trapezium Rule continuous function ke liye bana hai; agar graph beech mein toot jaye to trapeziums us hisse ko sahi nahi dhaanp sakte.",
+              "Step size aur points\n\\[h = \\dfrac{b-a}{n} = \\dfrac{2-0}{4} = 0.5\\]\nPoints \\(x_{i} = a + ih\\): \\(0, 0.5, 1, 1.5, 2\\)\nKyun: interval ko 4 barabar hisson mein baanta, to har hisse ki chaurai \\(h\\) hai. 4 subintervals ke 5 points bante hain: pehla point \\(a\\) aur aakhri \\(b\\), baqi beech wale.",
+              "Function values (4 decimal places)\n\\[f(0) = \\cos(0) = 1.0000\\]\n\\[f(0.5) = \\cos(0.5) = 0.8776\\]\n\\[f(1) = \\cos(1) = 0.5403\\]\n\\[f(1.5) = \\cos(1.5) = 0.0707\\]\n\\[f(2) = \\cos(2) = -0.4161\\]\nKyun: har point ko function mein rakha. Calculator radian mode mein hona chahiye, kyunke 0.5, 1, 1.5 aur 2 radians hain, degrees nahi.\nDhyan dein: \\(\\cos 2 = -0.4161\\) negative hai, kyunke 2 radian \\(\\frac{\\pi}{2} \\approx 1.5708\\) se bara hai; is minus sign ko zaroor saath rakhein (Note 3: signed area).\nNeeche jawab ke saath di gayi table mein yahi values un ke weights (1 ya 2) ke saath hain.",
+              "Beech wali values jama karein\n\\[S = f(x_{1}) + \\dots + f(x_{3})\\]\n\\[= 0.8776 + 0.5403 + 0.0707\\]\n\\[= 1.4886\\]\nKyun: yeh 3 beech wali values har ek do saath wale trapeziums ki saanjhi deewar hain, is liye formula mein in ka jama do dafa (double) aayega. Pehle in ka jama alag nikal lena hisaab ko saaf aur check karne ke qabil banata hai.",
+              "Trapezium Rule apply karein\n\\[\\int_{0}^{2} \\cos(x)\\,dx\\]\n\\[\\approx \\dfrac{h}{2}\\big[f(x_{0}) + 2S + f(x_{4})\\big]\\]\n\\[= 0.25\\big[1.0000 + 2(1.4886)\\]\n\\[+ (-0.4161)\\big]\\]\n\\[= 0.25(3.5611)\\]\n\\[= 0.890275 \\approx 0.8903\\]\nKyun: \\(\\frac{h}{2} = 0.25\\). Kinaron wali do values ek ek dafa aayin aur beech wali values ka jama do dafa; phir poore bracket ko \\(\\frac{h}{2}\\) se zarb diya. Round sirf aakhri jawab ko kiya, beech mein nahi, taake ghalti jama na ho.",
+              "Tasdeeq:\n\\[\\int_{0}^{2} \\cos x\\,dx = \\sin 2 - \\sin 0 \\approx 0.9093\\]\nKyun: \\(\\cos x\\) ka antiderivative \\(\\sin x\\) hai, is liye yahan exact value bhi nikal sakti hai. Hamara jawab 0.8903 is ke qareeb hai (farq taqreeban 0.019), yani hisaab theek hai. Jawab thora kam is liye hai ke \\(\\cos x\\) ka zyada hissa neeche ki taraf mudta (concave down) hai aur trapezium ki chhat curve ke neeche reh jati hai."
+            ],
+            "final_answer": "\\(\\int_{0}^{2} \\cos(x)\\,dx \\approx 0.8903\\)",
+            "answer_table": {
+              "header": [
+                "i",
+                "\\(x_{i}\\)",
+                "\\(f(x_{i})\\)",
+                "Weight"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(0\\)",
+                  "\\(1.0000\\)",
+                  "1"
+                ],
+                [
+                  "1",
+                  "\\(0.5\\)",
+                  "\\(0.8776\\)",
+                  "2"
+                ],
+                [
+                  "2",
+                  "\\(1\\)",
+                  "\\(0.5403\\)",
+                  "2"
+                ],
+                [
+                  "3",
+                  "\\(1.5\\)",
+                  "\\(0.0707\\)",
+                  "2"
+                ],
+                [
+                  "4",
+                  "\\(2\\)",
+                  "\\(-0.4161\\)",
+                  "1"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

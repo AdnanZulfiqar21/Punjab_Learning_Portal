@@ -7,13 +7,17 @@ draft text, asset ids or page numbers. Several lesson concepts for one topic are
 
 from __future__ import annotations
 
+import threading
+import time
 import uuid
 from collections.abc import Sequence
+from dataclasses import dataclass
 from typing import Literal
 
 from sqlalchemy import or_, select
 from sqlalchemy.orm import Session
 
+from portal_api.config import get_settings
 from portal_api.errors import Conflict, NotFound
 from portal_api.modules.access import service as access
 from portal_api.modules.content import assets, kinds
@@ -28,7 +32,14 @@ from portal_api.modules.content.schemas import (
 )
 from portal_api.modules.content.workflow import roles_in_scope
 from portal_api.modules.curriculum import service as curriculum
-from portal_api.modules.curriculum.models import EXERCISE_KEY_SUFFIX, PAPER_KEY_SUFFIXES, BookEdition, Chapter, Topic
+from portal_api.modules.curriculum.models import (
+    EXERCISE_KEY_SUFFIX,
+    PAPER_KEY_SUFFIXES,
+    BookEdition,
+    Chapter,
+    Topic,
+    TopicKind,
+)
 from portal_api.modules.curriculum.regions import book_is_released
 from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.permissions import Permission, Role, permissions_for
@@ -45,34 +56,33 @@ def reading(
     topic_id: uuid.UUID,
     language: Language | None,
 ) -> TopicReadingOut:
-    topic, chapter, book = _place(db, topic_id)
-    previous_id, next_id = _neighbours(db, topic)
+    place = _located(db, topic_id)
 
     def out(availability: Availability, lesson: TopicLessonOut | None) -> TopicReadingOut:
         return TopicReadingOut(
-            topic_id=topic.id,
-            number=topic.number,
-            title=topic.title,
-            chapter_id=chapter.id,
-            chapter_number=chapter.number,
-            chapter_title=chapter.title,
-            grade_number=book.grade.number,
-            subject_name=book.subject.name,
-            previous_topic_id=previous_id,
-            next_topic_id=next_id,
-            chapter_start=topic.parent_id is None and previous_id is None and not topic.practice_only,
-            kind=topic.kind,
+            topic_id=place.topic_id,
+            number=place.number,
+            title=place.title,
+            chapter_id=place.chapter_id,
+            chapter_number=place.chapter_number,
+            chapter_title=place.chapter_title,
+            grade_number=place.grade,
+            subject_name=place.subject_name,
+            previous_topic_id=place.previous_id,
+            next_topic_id=place.next_id,
+            chapter_start=place.parent_id is None and place.previous_id is None and not place.practice_only,
+            kind=place.kind,
             availability=availability,
             lesson=lesson,
         )
 
-    published = _concepts(db, topic.id, published_only=True)
+    published = _concepts(db, place.topic_id, published_only=True)
     if len(published) > 1:
         raise Conflict("This topic has more than one published lesson. None is chosen automatically.")
     if published:
-        return out("published", _published_lesson(db, who, book, published[0], language))
-    if _can_preview(db, who, book.grade.number, book.subject.code):
-        drafts = _concepts(db, topic.id, published_only=False)
+        return out("published", _published_lesson(db, who, place.grade, place.subject_code, published[0], language))
+    if _can_preview(db, who, place.grade, place.subject_code):
+        drafts = _concepts(db, place.topic_id, published_only=False)
         if len(drafts) > 1:
             raise Conflict("This topic has more than one draft lesson. None is chosen automatically.")
         if drafts:
@@ -188,6 +198,77 @@ def _place(db: Session, topic_id: uuid.UUID) -> tuple[Topic, Chapter, BookEditio
     return topic, chapter, book
 
 
+@dataclass(frozen=True)
+class _Place:
+    """Where a topic sits: everything `reading` needs from the catalogue, as plain values (no ORM rows)."""
+
+    topic_id: uuid.UUID
+    number: str | None
+    title: str
+    kind: TopicKind
+    parent_id: uuid.UUID | None
+    practice_only: bool
+    chapter_id: uuid.UUID
+    chapter_number: int
+    chapter_title: str
+    grade: int
+    subject_name: str
+    subject_code: str
+    previous_id: uuid.UUID | None
+    next_id: uuid.UUID | None
+
+
+_places: dict[uuid.UUID, tuple[float, _Place]] = {}
+_places_lock = threading.Lock()
+_PLACES_MAX = 20_000
+
+
+def _located(db: Session, topic_id: uuid.UUID) -> _Place:
+    """READING-PLACE-CACHE-01: a topic's place in the catalogue and its reading-order neighbours, kept per process for
+    `reading_place_cache_s` (60 s; 0 = off). Every lesson read needed four catalogue lookups and the whole chapter's
+    topic list for this, about half the request's work, for data that changes only with a catalogue import; the public
+    chapter route already lets it be cached for the same minute. A retired topic or chapter, or a region withdrawn,
+    is therefore noticed within that minute. Lessons, their availability and the caller's access are never cached
+    here: they are read on every request. A topic that is not found is not cached."""
+    ttl = get_settings().reading_place_cache_s
+    now = time.monotonic()
+    if ttl > 0:
+        with _places_lock:
+            hit = _places.get(topic_id)
+        if hit is not None and now - hit[0] < ttl:
+            return hit[1]
+    topic, chapter, book = _place(db, topic_id)
+    previous_id, next_id = _neighbours(db, topic)
+    place = _Place(
+        topic_id=topic.id,
+        number=topic.number,
+        title=topic.title,
+        kind=topic.kind,
+        parent_id=topic.parent_id,
+        practice_only=topic.practice_only,
+        chapter_id=chapter.id,
+        chapter_number=chapter.number,
+        chapter_title=chapter.title,
+        grade=book.grade.number,
+        subject_name=book.subject.name,
+        subject_code=book.subject.code,
+        previous_id=previous_id,
+        next_id=next_id,
+    )
+    if ttl > 0:
+        with _places_lock:
+            if len(_places) >= _PLACES_MAX:
+                _places.clear()
+            _places[topic_id] = (now, place)
+    return place
+
+
+def forget_places() -> None:
+    """Tests and tools: drop every cached place."""
+    with _places_lock:
+        _places.clear()
+
+
 def _neighbours(db: Session, topic: Topic) -> tuple[uuid.UUID | None, uuid.UUID | None]:
     """The topics before and after this one in the book's reading order: each topic, then its subtopics, then the next
     topic (1.2, 1.2.1, 1.2.2, 1.2.2.1, …, 1.3). Siblings alone skipped every subtopic (owner, 2026-10-28).
@@ -252,16 +333,15 @@ def _concepts(db: Session, topic_id: uuid.UUID, *, published_only: bool) -> list
 def _published_lesson(
     db: Session,
     who: Principal | None,
-    book: BookEdition,
+    grade: int,
+    subject_code: str,
     variants: list[ContentItem],
     language: Language | None,
 ) -> TopicLessonOut:
     item = _pick(variants, language)
     version = item.published
     assert version is not None
-    entitled = who is not None and access.entitled_for(
-        db, who.user.id, access.Need.subjects(book.grade.number, book.subject.code)
-    )
+    entitled = who is not None and access.entitled_for(db, who.user.id, access.Need.subjects(grade, subject_code))
     locked = item.access_tier != "preview" and not entitled
     return TopicLessonOut(
         id=item.id,

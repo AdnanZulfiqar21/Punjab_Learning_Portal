@@ -1,0 +1,314 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.1.2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.1.2",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 75,
+          "pdf_to": 78,
+          "note": "Book p. 73-76: 3.1.2 table of 15 derivatives and the indefinite integrals they give; Examples 1-12 (power rule, sums, General Power Rule, trigonometric integrals, exponential base a/b)."
+        }
+      ],
+      "title": "3.1.2 Some Useful Formulae",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "From (the above Definitions), we obtain integration formulas directly from differentiation formulas, as shown in the following table."
+          },
+          {
+            "type": "table",
+            "caption": "Derivatives and the indefinite integrals they give (the book's table; it has no caption)",
+            "header": [
+              "Derivative \\(\\frac{d}{dx}(f(x))\\)",
+              "Indefinite Integral \\(\\int \\frac{d}{dx}(f(x))\\,dx = f(x) + c\\)"
+            ],
+            "rows": [
+              [
+                "\\(\\frac{d}{dx}(c) = 0\\)",
+                "\\(\\int 0\\,dx = c\\)"
+              ],
+              [
+                "\\(\\frac{d}{dx}(x) = 1\\)",
+                "\\(\\int 1\\,dx = \\int dx = x + c\\)"
+              ],
+              [
+                "\\(\\frac{d}{dx}(x^{n}) = nx^{n-1}\\)",
+                "\\(\\int x^{n}\\,dx = \\frac{x^{n+1}}{n+1} + c,\\ n \\ne -1\\) (Power Rule)"
+              ],
+              [
+                "\\(\\frac{d}{dx}(\\ln|x|) = \\frac{1}{x},\\ x \\ne 0\\)",
+                "\\(\\int \\frac{1}{x}\\,dx = \\ln|x| + c,\\ x \\ne 0\\)"
+              ],
+              [
+                "\\(\\frac{d}{dx}(e^{x}) = e^{x}\\)",
+                "\\(\\int e^{x}\\,dx = e^{x} + c\\)"
+              ],
+              [
+                "\\(\\frac{d}{dx}(a^{x}) = a^{x}\\ln a\\)",
+                "\\(\\int a^{x}\\,dx = \\frac{a^{x}}{\\ln a} + c;\\ a > 0,\\ a \\ne 1\\)"
+              ],
+              [
+                "\\(\\frac{d}{dx}(\\sin x) = \\cos x\\)",
+                "\\(\\int \\cos x\\,dx = \\sin x + c\\)"
+              ],
+              [
+                "\\(\\frac{d}{dx}(\\cos x) = -\\sin x\\)",
+                "\\(\\int \\sin x\\,dx = -\\cos x + c\\)"
+              ],
+              [
+                "\\(\\frac{d}{dx}(\\tan x) = \\sec^{2}x\\)",
+                "\\(\\int \\sec^{2}x\\,dx = \\tan x + c\\)"
+              ],
+              [
+                "\\(\\frac{d}{dx}(\\cot x) = -\\csc^{2}x\\)",
+                "\\(\\int \\csc^{2}x\\,dx = -\\cot x + c\\)"
+              ],
+              [
+                "\\(\\frac{d}{dx}(\\sec x) = \\sec x\\tan x\\)",
+                "\\(\\int \\sec x\\tan x\\,dx = \\sec x + c\\)"
+              ],
+              [
+                "\\(\\frac{d}{dx}(\\csc x) = -\\csc x\\cot x\\)",
+                "\\(\\int \\csc x\\cot x\\,dx = -\\csc x + c\\)"
+              ],
+              [
+                "\\(\\frac{d}{dx}(\\sin^{-1}x) = \\frac{1}{\\sqrt{1-x^{2}}}\\)",
+                "\\(\\int \\frac{1}{\\sqrt{1-x^{2}}}\\,dx = \\sin^{-1}x + c\\)"
+              ],
+              [
+                "\\(\\frac{d}{dx}(\\sec^{-1}x) = \\frac{1}{|x|\\sqrt{x^{2}-1}}\\)",
+                "\\(\\int \\frac{1}{x\\sqrt{x^{2}-1}}\\,dx = \\sec^{-1}|x| + c\\)"
+              ],
+              [
+                "\\(\\frac{d}{dx}(\\tan^{-1}x) = \\frac{1}{1+x^{2}}\\)",
+                "\\(\\int \\frac{1}{1+x^{2}}\\,dx = \\tan^{-1}x + c\\)"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to use the table: each right-hand entry is the left-hand derivative read backwards. If you know the derivatives, you know these integrals.\nWatch the signs: since \\(\\frac{d}{dx}\\cos x = -\\sin x\\), we get \\(\\int \\sin x\\,dx = -\\cos x + c\\). The same happens for \\(\\csc^{2}x\\) and \\(\\csc x\\cot x\\).\nWhy \\(\\ln|x|\\) and not \\(\\ln x\\)? For \\(x < 0\\), \\(\\frac{d}{dx}\\ln(-x) = \\frac{-1}{-x} = \\frac{1}{x}\\) as well, so \\(\\ln|x|\\) works on both sides of 0.\nFor \\(a^{x}\\) we divide by \\(\\ln a\\), because differentiating \\(a^{x}\\) multiplies by \\(\\ln a\\). For \\(e^{x}\\), \\(\\ln e = 1\\), so nothing changes.\nWith Rule 5 every row also works for \\(ax + b\\) in place of \\(x\\): for example \\(\\int \\sec^{2}(3x)\\,dx = \\frac{\\tan 3x}{3} + c\\).\n\\(\\tan x\\), \\(\\sec x\\), \\(\\tan^{2}x\\), \\(\\cos^{2}x\\) are not in the table. Examples 5 to 9 show how to reach them with Rule 4 and trigonometric identities."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Integrate the following: (i) \\(\\int x^{99}\\,dx\\) (ii) \\(\\int -98x^{-99}\\,dx\\)",
+            "steps": [
+              "Given: (i) the integrand \\(x^{99}\\); (ii) the integrand \\(-98x^{-99}\\).\nTo find: the indefinite integral of each.\nMethod: both are powers of \\(x\\), so the power rule (Rule 3) fits, since \\(99 \\ne -1\\) and \\(-99 \\ne -1\\). In (ii) the constant \\(-98\\) is first taken out by Rule 1.",
+              "(i) Apply the power rule with \\(n = 99\\)\n\\[\\int x^{99}\\,dx = \\dfrac{x^{99+1}}{99+1} + c\\]\n\\[= \\dfrac{x^{100}}{100} + c\\]\nWhy: Rule 3: add 1 to the power and divide by the new power.",
+              "(i) Verify by differentiation\nThe book writes: \\(\\frac{d}{dx}\\left(\\frac{x^{100}}{100} + c\\right) = \\frac{100x^{99}}{100} + c = x^{99} + c\\)\nThe derivative of the constant \\(c\\) is 0, so correctly:\n\\[\\dfrac{d}{dx}\\left(\\dfrac{x^{100}}{100} + c\\right) = \\dfrac{100x^{99}}{100}\\]\n\\[= x^{99}\\]\nWhy: an antiderivative is confirmed when its derivative gives back the integrand.",
+              "(ii) Take the constant out\n\\[\\int -98x^{-99}\\,dx = -98\\int x^{-99}\\,dx\\]\nWhy: Rule 1: a constant factor comes out of the integral.",
+              "(ii) Apply the power rule with \\(n = -99\\)\n\\[= -98\\cdot\\dfrac{x^{-98}}{-98} + c\\]\n\\[= x^{-98} + c\\]\n\\[= \\dfrac{1}{x^{98}} + c\\]\nWhy: \\(-99 + 1 = -98\\); the \\(-98\\) in front cancels the \\(-98\\) in the denominator; \\(x^{-98} = \\frac{1}{x^{98}}\\).",
+              "Check:\n\\[\\dfrac{d}{dx}\\left(x^{-98}\\right) = -98x^{-99}\\]\nThis is the integrand of (ii), and the derivative of \\(\\frac{x^{100}}{100}\\) is \\(x^{99}\\), the integrand of (i)."
+            ],
+            "answer": "(i) \\(\\frac{x^{100}}{100} + c\\) (ii) \\(x^{-98} + c = \\frac{1}{x^{98}} + c\\)",
+            "book_errors": [
+              "\\(\\frac{d}{dx}\\left(\\frac{x^{100}}{100} + c\\right) = \\frac{100x^{99}}{100} + c = x^{99} + c\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 1(i): the book's check line prints \\(\\frac{d}{dx}\\left(\\frac{x^{100}}{100} + c\\right) = \\frac{100x^{99}}{100} + c = x^{99} + c\\). The derivative of the constant \\(c\\) is 0, so the line should read \\(\\frac{d}{dx}\\left(\\frac{x^{100}}{100} + c\\right) = \\frac{100x^{99}}{100} = x^{99}\\), with no \\(+\\,c\\) after differentiating. The answer \\(\\frac{x^{100}}{100} + c\\) itself is correct."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Integrate: \\(\\int (8x^{7} - 6x^{5} + 4x^{3} - 2x - 3)\\,dx\\)",
+            "steps": [
+              "Given: a polynomial integrand of five terms.\nTo find: its indefinite integral.\nMethod: Rule 2 splits it into five integrals, Rule 1 takes out the constants, and Rule 3 integrates each power.",
+              "Split term by term (Rule 2)\n\\[= \\int 8x^{7}dx - \\int 6x^{5}dx + \\int 4x^{3}dx\\]\n\\[\\quad - \\int 2x\\,dx - \\int 3\\,dx\\]\nWhy: the integral of a sum or difference is the sum or difference of the integrals.",
+              "Take the constants out (Rule 1)\n\\[= 8\\int x^{7}dx - 6\\int x^{5}dx + 4\\int x^{3}dx\\]\n\\[\\quad - 2\\int x\\,dx - 3\\int 1\\,dx\\]\nWhy: numbers multiplying a function come out of the integral.",
+              "Integrate each power (Rule 3)\n\\[= 8\\left(\\dfrac{x^{8}}{8}\\right) - 6\\left(\\dfrac{x^{6}}{6}\\right) + 4\\left(\\dfrac{x^{4}}{4}\\right)\\]\n\\[\\quad - 2\\left(\\dfrac{x^{2}}{2}\\right) - 3x + c\\]\nWhy: add 1 to each power and divide by the new power; \\(\\int 1\\,dx = x\\). One constant \\(c\\) collects the constants of all five integrals.",
+              "Simplify\n\\[= x^{8} - x^{6} + x^{4} - x^{2} - 3x + c\\]\nWhy: each coefficient cancels with the new power (\\(\\frac{8}{8} = 1\\), \\(\\frac{6}{6} = 1\\), and so on).",
+              "Check:\n\\[\\dfrac{d}{dx}(x^{8} - x^{6} + x^{4} - x^{2} - 3x)\\]\n\\[= 8x^{7} - 6x^{5} + 4x^{3} - 2x - 3\\]\nwhich is the integrand."
+            ],
+            "answer": "\\(x^{8} - x^{6} + x^{4} - x^{2} - 3x + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Integrate: (i) \\(\\int \\frac{7}{\\sqrt{x}}\\,dx\\) (ii) \\(\\int \\frac{(1+x^{2})^{2}}{x^{4}}\\,dx\\)",
+            "steps": [
+              "Given: (i) \\(\\frac{7}{\\sqrt{x}}\\); (ii) \\(\\frac{(1+x^{2})^{2}}{x^{4}}\\).\nTo find: both indefinite integrals.\nMethod: there is no rule for a quotient directly, so first rewrite each integrand as powers of \\(x\\); then use Rules 1, 2 and 3.",
+              "(i) Write the root as a power\n\\[\\int \\dfrac{7}{\\sqrt{x}}\\,dx = 7\\int x^{-1/2}\\,dx\\]\nWhy: \\(\\sqrt{x} = x^{1/2}\\), so \\(\\frac{1}{\\sqrt{x}} = x^{-1/2}\\); the 7 comes out by Rule 1.",
+              "(i) Apply the power rule with \\(n = -\\frac{1}{2}\\)\n\\[= 7\\,\\dfrac{x^{1/2}}{1/2} + c\\]\n\\[= 14\\sqrt{x} + c\\]\nWhy: \\(-\\frac{1}{2} + 1 = \\frac{1}{2}\\); dividing by \\(\\frac{1}{2}\\) means multiplying by 2.",
+              "(ii) Expand the numerator\n\\[\\int \\dfrac{(1+x^{2})^{2}}{x^{4}}\\,dx = \\int \\dfrac{1 + 2x^{2} + x^{4}}{x^{4}}\\,dx\\]\nWhy: \\((a+b)^{2} = a^{2} + 2ab + b^{2}\\). A bracket squared must be opened before dividing.",
+              "(ii) Divide each term by \\(x^{4}\\) (Rule 2)\n\\[= \\int \\left(\\dfrac{1}{x^{4}} + \\dfrac{2x^{2}}{x^{4}} + \\dfrac{x^{4}}{x^{4}}\\right)dx\\]\n\\[= \\int (x^{-4} + 2x^{-2} + 1)\\,dx\\]\nWhy: \\(\\frac{x^{m}}{x^{k}} = x^{m-k}\\); now every term is a power of \\(x\\).",
+              "(ii) Integrate each term (Rule 3)\n\\[= \\dfrac{x^{-3}}{-3} + 2\\,\\dfrac{x^{-1}}{-1} + x + c\\]\n\\[= -\\dfrac{1}{3x^{3}} - \\dfrac{2}{x} + x + c\\]\nWhy: \\(-4 + 1 = -3\\) and \\(-2 + 1 = -1\\); neither power is \\(-1\\) before integrating, so the power rule applies.",
+              "Check:\n\\[\\dfrac{d}{dx}(14x^{1/2}) = 7x^{-1/2} = \\dfrac{7}{\\sqrt{x}}\\]\n\\[\\dfrac{d}{dx}\\left(-\\tfrac{1}{3}x^{-3} - 2x^{-1} + x\\right)\\]\n\\[= x^{-4} + 2x^{-2} + 1\\]\nBoth give back the integrands."
+            ],
+            "answer": "(i) \\(14\\sqrt{x} + c\\) (ii) \\(-\\frac{1}{3x^{3}} - \\frac{2}{x} + x + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Examples 1 to 3 all follow one plan: first rewrite the integrand as a sum of powers of \\(x\\) (roots as fractional powers, divisions as negative powers, squares expanded), then apply Rules 1, 2 and 3. Example 4 shows the General Power Rule, where a bracket is treated like a single \\(x\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "(i) \\(\\int (5x^{2} + 7x - 3)^{7}(10x + 7)\\,dx = \\frac{(5x^{2} + 7x - 3)^{8}}{8} + c\\) (ii) \\(\\int \\left(x + \\frac{1}{x}\\right)\\left(1 - \\frac{1}{x^{2}}\\right)dx = \\frac{1}{2}\\left(x + \\frac{1}{x}\\right)^{2} + c\\)",
+            "steps": [
+              "Given: two integrals with their results printed in the book (no working is printed).\nTo show: why each result is true.\nMethod: in each integrand a bracket is raised to a power and multiplied by the derivative of that bracket, so the General Power Rule applies.",
+              "(i) Identify \\(f(x)\\), \\(f'(x)\\) and \\(n\\)\n\\[f(x) = 5x^{2} + 7x - 3\\]\n\\[f'(x) = 10x + 7,\\quad n = 7\\]\nWhy: the factor \\((10x + 7)\\) beside the bracket is exactly the derivative of the bracket.",
+              "(i) Apply the General Power Rule\n\\[\\int [f(x)]^{7} f'(x)\\,dx = \\dfrac{[f(x)]^{8}}{8} + c\\]\n\\[= \\dfrac{(5x^{2} + 7x - 3)^{8}}{8} + c\\]\nWhy: treat the whole bracket like \\(x\\) in the power rule: add 1 to the power, divide by the new power.",
+              "(ii) Identify \\(f(x)\\), \\(f'(x)\\) and \\(n\\)\n\\[f(x) = x + \\dfrac{1}{x}\\]\n\\[f'(x) = 1 - \\dfrac{1}{x^{2}},\\quad n = 1\\]\nWhy: \\(\\frac{d}{dx}(x^{-1}) = -x^{-2} = -\\frac{1}{x^{2}}\\), so the second bracket is the derivative of the first.",
+              "(ii) Apply the General Power Rule\n\\[\\int f(x)\\,f'(x)\\,dx = \\dfrac{[f(x)]^{2}}{2} + c\\]\n\\[= \\dfrac{1}{2}\\left(x + \\dfrac{1}{x}\\right)^{2} + c\\]\nWhy: \\(n = 1\\), so the new power is 2.",
+              "Check:\n\\[\\dfrac{d}{dx}\\dfrac{(5x^{2}+7x-3)^{8}}{8}\\]\n\\[= (5x^{2}+7x-3)^{7}(10x+7)\\]\n\\[\\dfrac{d}{dx}\\,\\dfrac{1}{2}\\left(x + \\dfrac{1}{x}\\right)^{2}\\]\n\\[= \\left(x + \\dfrac{1}{x}\\right)\\left(1 - \\dfrac{1}{x^{2}}\\right)\\]\n(chain rule). Both results are confirmed."
+            ],
+            "answer": "(i) \\(\\frac{(5x^{2} + 7x - 3)^{8}}{8} + c\\) (ii) \\(\\frac{1}{2}\\left(x + \\frac{1}{x}\\right)^{2} + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Evaluate \\(\\int \\tan x\\,dx\\)",
+            "steps": [
+              "Given: the integrand \\(\\tan x\\).\nTo find: \\(\\int \\tan x\\,dx\\).\nMethod: \\(\\tan x\\) is not in the table. Multiply and divide by \\(\\sec x\\) so that the numerator becomes the derivative of the denominator; then Rule 4 applies.",
+              "Multiply and divide by \\(\\sec x\\)\n\\[\\int \\tan x\\,dx = \\int \\dfrac{\\sec x \\cdot \\tan x}{\\sec x}\\,dx\\]\nWhy: \\(\\frac{\\sec x}{\\sec x} = 1\\) does not change the value, and \\(\\frac{d}{dx}(\\sec x) = \\sec x\\tan x\\) is now on top.",
+              "Apply Rule 4\n\\[= \\ln|\\sec x| + c\\]\nWhy: \\(\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln|f(x)| + c\\) with \\(f(x) = \\sec x\\).",
+              "The other form\n\\[\\ln|\\sec x| = \\ln\\left|\\dfrac{1}{\\cos x}\\right| = -\\ln|\\cos x|\\]\n\\[\\text{or}\\quad = -\\ln|\\cos x| + c\\]\nWhy: \\(\\ln\\frac{1}{u} = -\\ln u\\). Both forms are correct.",
+              "Check:\n\\[\\dfrac{d}{dx}(-\\ln|\\cos x|) = -\\dfrac{-\\sin x}{\\cos x}\\]\n\\[= \\tan x\\]"
+            ],
+            "answer": "\\(\\int \\tan x\\,dx = \\ln|\\sec x| + c\\), or \\(-\\ln|\\cos x| + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 6",
+            "problem": "Evaluate \\(\\int \\sec x\\,dx\\)",
+            "steps": [
+              "Given: the integrand \\(\\sec x\\).\nTo find: \\(\\int \\sec x\\,dx\\).\nMethod: a standard trick: multiply and divide by \\(\\sec x + \\tan x\\). The new numerator is then the derivative of the new denominator, so Rule 4 applies.",
+              "Multiply and divide by \\(\\sec x + \\tan x\\)\n\\[\\int \\sec x\\,dx = \\int \\dfrac{\\sec x(\\sec x + \\tan x)}{(\\sec x + \\tan x)}\\,dx\\]\nWhy: multiplying by \\(\\frac{\\sec x + \\tan x}{\\sec x + \\tan x} = 1\\) keeps the value.",
+              "Open the bracket and rearrange\n\\[= \\int \\dfrac{\\sec^{2}x + \\sec x\\tan x}{\\sec x + \\tan x}\\,dx\\]\n\\[= \\int \\dfrac{\\sec x\\tan x + \\sec^{2}x}{\\sec x + \\tan x}\\,dx\\]\nWhy: \\(\\frac{d}{dx}(\\sec x + \\tan x) = \\sec x\\tan x + \\sec^{2}x\\), which is exactly the numerator.",
+              "Apply Rule 4\nThe book's last line: \\(= -\\ln|\\cos x| + c\\) (By Rule 4)\nCorrectly, Rule 4 with \\(f(x) = \\sec x + \\tan x\\) gives:\n\\[= \\ln|\\sec x + \\tan x| + c\\]\nWhy: \\(\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln|f(x)| + c\\), and here \\(f(x)\\) is the denominator \\(\\sec x + \\tan x\\).",
+              "Check:\n\\[\\dfrac{d}{dx}\\ln|\\sec x + \\tan x|\\]\n\\[= \\dfrac{\\sec x\\tan x + \\sec^{2}x}{\\sec x + \\tan x}\\]\n\\[= \\dfrac{\\sec x(\\tan x + \\sec x)}{\\sec x + \\tan x} = \\sec x\\]\nThe printed \\(-\\ln|\\cos x|\\) instead differentiates to \\(\\tan x\\) (Example 5), not \\(\\sec x\\)."
+            ],
+            "answer": "\\(\\int \\sec x\\,dx = \\ln|\\sec x + \\tan x| + c\\) (the book's last line \\(-\\ln|\\cos x| + c\\) is wrong; see the Book correction)",
+            "book_errors": [
+              "\\(= -\\ln|\\cos x| + c\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 6: the book's solution ends with \\(\\int \\sec x\\,dx = -\\ln|\\cos x| + c\\) (By Rule 4). That is the answer of Example 5 (\\(\\int \\tan x\\,dx\\)); its derivative is \\(\\tan x\\), not \\(\\sec x\\). The numerator \\(\\sec x\\tan x + \\sec^{2}x\\) is the derivative of the denominator \\(\\sec x + \\tan x\\), so Rule 4 gives \\(\\int \\sec x\\,dx = \\ln|\\sec x + \\tan x| + c\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Examples 5 to 11 show the main ideas for trigonometric integrals: make the numerator the derivative of the denominator (Rule 4: Examples 5, 6, 11), replace powers by identities (\\(\\tan^{2}x = \\sec^{2}x - 1\\), \\(\\cos^{2}x = \\frac{1 + \\cos 2x}{2}\\): Examples 7, 8), rewrite in \\(\\sin x\\) and \\(\\cos x\\) (Example 9), and turn products into sums (Example 10)."
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "Evaluate \\(\\int \\tan^{2}x\\,dx\\)",
+            "steps": [
+              "Given: the integrand \\(\\tan^{2}x\\).\nTo find: \\(\\int \\tan^{2}x\\,dx\\).\nMethod: \\(\\tan^{2}x\\) is not in the table, but \\(\\sec^{2}x\\) is. The identity \\(1 + \\tan^{2}x = \\sec^{2}x\\) changes one into the other.",
+              "Use the identity\n\\[\\int \\tan^{2}x\\,dx = \\int (\\sec^{2}x - 1)\\,dx\\]\nWhy: from \\(1 + \\tan^{2}x = \\sec^{2}x\\) we get \\(\\tan^{2}x = \\sec^{2}x - 1\\).",
+              "Split and integrate (Rule 2 and the table)\n\\[= \\int \\sec^{2}x\\,dx - \\int 1\\,dx\\]\n\\[= \\tan x - x + c\\]\nWhy: \\(\\int \\sec^{2}x\\,dx = \\tan x\\) and \\(\\int 1\\,dx = x\\).",
+              "Check:\n\\[\\dfrac{d}{dx}(\\tan x - x) = \\sec^{2}x - 1 = \\tan^{2}x\\]"
+            ],
+            "answer": "\\(\\tan x - x + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Evaluate \\(\\int \\cos^{2}x\\,dx\\)",
+            "steps": [
+              "Given: the integrand \\(\\cos^{2}x\\).\nTo find: \\(\\int \\cos^{2}x\\,dx\\).\nMethod: a square of cosine has no table formula. The double-angle identity \\(\\cos^{2}x = \\frac{1 + \\cos 2x}{2}\\) removes the square.",
+              "Use the identity\n\\[\\int \\cos^{2}x\\,dx = \\int \\dfrac{1 + \\cos 2x}{2}\\,dx\\]\nWhy: \\(\\cos 2x = 2\\cos^{2}x - 1\\), so \\(\\cos^{2}x = \\frac{1 + \\cos 2x}{2}\\).",
+              "Take out \\(\\frac{1}{2}\\) and integrate\n\\[= \\dfrac{1}{2}\\int (1 + \\cos 2x)\\,dx\\]\n\\[= \\dfrac{1}{2}\\left[x + \\dfrac{\\sin 2x}{2}\\right] + c\\]\nWhy: Rule 1 for \\(\\frac{1}{2}\\); \\(\\int \\cos 2x\\,dx = \\frac{\\sin 2x}{2}\\) by Rule 5 with \\(a = 2\\).",
+              "Check:\n\\[\\dfrac{d}{dx}\\left(\\dfrac{x}{2} + \\dfrac{\\sin 2x}{4}\\right) = \\dfrac{1}{2} + \\dfrac{\\cos 2x}{2}\\]\n\\[= \\dfrac{1 + \\cos 2x}{2} = \\cos^{2}x\\]"
+            ],
+            "answer": "\\(\\frac{1}{2}\\left[x + \\frac{\\sin 2x}{2}\\right] + c\\), i.e. \\(\\frac{x}{2} + \\frac{\\sin 2x}{4} + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "Evaluate \\(\\int \\frac{\\tan x - \\sec x}{1 + \\tan^{2}x}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\frac{\\tan x - \\sec x}{1 + \\tan^{2}x}\\).\nTo find: its indefinite integral.\nMethod: replace \\(1 + \\tan^{2}x\\) by \\(\\sec^{2}x\\), split the fraction, and write everything in \\(\\sin x\\) and \\(\\cos x\\).",
+              "Use \\(1 + \\tan^{2}x = \\sec^{2}x\\) and split\n\\[= \\int \\dfrac{\\tan x - \\sec x}{\\sec^{2}x}\\,dx\\]\n\\[= \\int \\left(\\dfrac{\\tan x}{\\sec^{2}x} - \\dfrac{\\sec x}{\\sec^{2}x}\\right)dx\\]\nWhy: a fraction with a difference on top splits into two fractions with the same denominator.",
+              "Write in \\(\\sin x\\) and \\(\\cos x\\)\n\\[= \\int \\left(\\dfrac{\\sin x}{\\cos x}\\cos^{2}x - \\dfrac{1}{\\sec x}\\right)dx\\]\n\\[= \\int (\\sin x\\cos x - \\cos x)\\,dx\\]\nWhy: \\(\\tan x = \\frac{\\sin x}{\\cos x}\\) and \\(\\frac{1}{\\sec^{2}x} = \\cos^{2}x\\); \\(\\frac{\\sec x}{\\sec^{2}x} = \\frac{1}{\\sec x} = \\cos x\\).",
+              "Integrate\n\\[= \\dfrac{\\sin^{2}x}{2} - \\sin x + c\\]\nWhy: in \\(\\int \\sin x\\cos x\\,dx\\), \\(\\cos x\\) is the derivative of \\(\\sin x\\), so the General Power Rule (with \\(n = 1\\)) gives \\(\\frac{\\sin^{2}x}{2}\\); and \\(\\int \\cos x\\,dx = \\sin x\\).",
+              "Check:\n\\[\\dfrac{d}{dx}\\left(\\dfrac{\\sin^{2}x}{2} - \\sin x\\right)\\]\n\\[= \\sin x\\cos x - \\cos x\\]\nwhich is the simplified integrand."
+            ],
+            "answer": "\\(\\frac{\\sin^{2}x}{2} - \\sin x + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "Evaluate \\(\\int \\sin 3x\\cos 7x\\,dx\\)",
+            "steps": [
+              "Given: a product \\(\\sin 3x\\cos 7x\\).\nTo find: its indefinite integral.\nMethod: there is no rule for a product, so change it into a sum by the product-to-sum formula, then integrate each sine by Rule 5.",
+              "The formula\n\\[\\sin mx\\cos nx\\]\n\\[= \\dfrac{1}{2}[\\sin(m+n)x + \\sin(m-n)x]\\]\nWhy: it turns a product into a sum, which Rule 2 can split.",
+              "Put \\(m = 3\\) and \\(n = 7\\)\n\\[\\int \\sin 3x\\cos 7x\\,dx\\]\n\\[= \\dfrac{1}{2}\\int [\\sin(10x) + \\sin(-4x)]\\,dx\\]\n\\[= \\dfrac{1}{2}\\int (\\sin 10x - \\sin 4x)\\,dx\\]\nWhy: \\(3 + 7 = 10\\), \\(3 - 7 = -4\\), and \\(\\sin(-\\theta) = -\\sin\\theta\\).",
+              "Integrate each term (Rule 5)\n\\[= \\dfrac{1}{2}\\left[-\\dfrac{\\cos 10x}{10} - \\left(-\\dfrac{\\cos 4x}{4}\\right)\\right] + c\\]\n\\[= -\\dfrac{\\cos 10x}{20} + \\dfrac{\\cos 4x}{8} + c\\]\nWhy: \\(\\int \\sin ax\\,dx = -\\frac{\\cos ax}{a}\\).",
+              "Check:\n\\[\\dfrac{d}{dx}\\left(-\\dfrac{\\cos 10x}{20} + \\dfrac{\\cos 4x}{8}\\right)\\]\n\\[= \\dfrac{\\sin 10x}{2} - \\dfrac{\\sin 4x}{2}\\]\nwhich equals \\(\\frac{1}{2}(\\sin 10x - \\sin 4x) = \\sin 3x\\cos 7x\\)."
+            ],
+            "answer": "\\(-\\frac{\\cos 10x}{20} + \\frac{\\cos 4x}{8} + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "Evaluate \\(\\int \\frac{\\sin(x+a)}{\\sin(x+b)}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\frac{\\sin(x+a)}{\\sin(x+b)}\\), where \\(a\\) and \\(b\\) are constants.\nTo find: its indefinite integral.\nMethod: write the angle on top in terms of the angle below: \\(x + a = (x + b) + (a - b)\\). Expanding by the sine addition formula leaves terms we can integrate.",
+              "Rewrite the angle\n\\[\\int \\dfrac{\\sin(x+a)}{\\sin(x+b)}\\,dx\\]\n\\[= \\int \\dfrac{\\sin[(x+b) + (a-b)]}{\\sin(x+b)}\\,dx\\]\nWhy: \\((x+b) + (a-b) = x + a\\), so nothing changes, but now the denominator's angle appears on top.",
+              "Expand by \\(\\sin(A+B) = \\sin A\\cos B + \\cos A\\sin B\\)\n\\[\\sin[(x+b) + (a-b)]\\]\n\\[= \\sin(x+b)\\cos(a-b)\\]\n\\[\\quad + \\cos(x+b)\\sin(a-b)\\]\nWhy: \\(A = x + b\\), \\(B = a - b\\).",
+              "Divide by \\(\\sin(x+b)\\)\n\\[= \\int \\left[\\cos(a-b) + \\sin(a-b)\\dfrac{\\cos(x+b)}{\\sin(x+b)}\\right]dx\\]\n\\[= \\cos(a-b)\\int 1\\,dx\\]\n\\[\\quad + \\sin(a-b)\\int \\dfrac{\\cos(x+b)}{\\sin(x+b)}\\,dx\\]\nWhy: \\(\\cos(a-b)\\) and \\(\\sin(a-b)\\) contain no \\(x\\), so they are constants and come out by Rule 1.",
+              "Integrate\n\\[= \\cos(a-b)\\cdot x\\]\n\\[\\quad + \\sin(a-b)\\cdot\\ln|\\sin(x+b)| + c\\]\nWhy: \\(\\cos(x+b)\\) is the derivative of \\(\\sin(x+b)\\), so Rule 4 gives \\(\\ln|\\sin(x+b)|\\).",
+              "Check:\nDifferentiating gives \\(\\cos(a-b) + \\sin(a-b)\\frac{\\cos(x+b)}{\\sin(x+b)}\\); over the common denominator the numerator is \\(\\sin(x+b)\\cos(a-b) + \\cos(x+b)\\sin(a-b) = \\sin(x+a)\\), so we get back \\(\\frac{\\sin(x+a)}{\\sin(x+b)}\\)."
+            ],
+            "answer": "\\(\\cos(a-b)\\cdot x + \\sin(a-b)\\cdot\\ln|\\sin(x+b)| + c\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 12",
+            "problem": "Evaluate \\(\\int \\frac{a^{2x} - b^{2x}}{(ab)^{x}}\\,dx\\)",
+            "steps": [
+              "Given: \\(\\frac{a^{2x} - b^{2x}}{(ab)^{x}}\\), with \\(a, b > 0\\) and \\(a \\ne b\\) (so that \\(\\frac{a}{b}\\) is a positive base other than 1).\nTo find: its indefinite integral.\nMethod: use the laws of exponents to write each term as a single power \\(\\left(\\frac{a}{b}\\right)^{x}\\) or \\(\\left(\\frac{b}{a}\\right)^{x}\\); then use the table formula \\(\\int k^{x}\\,dx = \\frac{k^{x}}{\\ln k} + c\\).",
+              "Split the fraction\n\\[= \\int \\dfrac{a^{2x} - b^{2x}}{a^{x}b^{x}}\\,dx\\]\n\\[= \\int \\left[\\dfrac{a^{2x}}{a^{x}b^{x}} - \\dfrac{b^{2x}}{a^{x}b^{x}}\\right]dx\\]\nWhy: \\((ab)^{x} = a^{x}b^{x}\\).",
+              "Simplify the powers\n\\[= \\int \\left[\\dfrac{a^{2x-x}}{b^{x}} - \\dfrac{b^{2x-x}}{a^{x}}\\right]dx\\]\n\\[= \\int \\left[\\dfrac{a^{x}}{b^{x}} - \\dfrac{b^{x}}{a^{x}}\\right]dx\\]\nWhy: \\(\\frac{a^{2x}}{a^{x}} = a^{2x-x} = a^{x}\\), and the same for \\(b\\).",
+              "Write as single powers\n\\[= \\int \\left(\\dfrac{a}{b}\\right)^{x}dx - \\int \\left(\\dfrac{b}{a}\\right)^{x}dx\\]\nWhy: \\(\\frac{a^{x}}{b^{x}} = \\left(\\frac{a}{b}\\right)^{x}\\); Rule 2 splits the difference.",
+              "Apply \\(\\int k^{x}\\,dx = \\frac{k^{x}}{\\ln k} + c\\)\n\\[= \\dfrac{\\left(\\frac{a}{b}\\right)^{x}}{\\ln\\left(\\frac{a}{b}\\right)} - \\dfrac{\\left(\\frac{b}{a}\\right)^{x}}{\\ln\\left(\\frac{b}{a}\\right)} + c\\]\nWhy: the table row for \\(a^{x}\\), used once with base \\(\\frac{a}{b}\\) and once with base \\(\\frac{b}{a}\\).",
+              "Check:\n\\(\\frac{d}{dx}\\frac{k^{x}}{\\ln k} = k^{x}\\), so the derivative is \\(\\left(\\frac{a}{b}\\right)^{x} - \\left(\\frac{b}{a}\\right)^{x} = \\frac{a^{2x} - b^{2x}}{(ab)^{x}}\\)."
+            ],
+            "answer": "\\(\\frac{(a/b)^{x}}{\\ln(a/b)} - \\frac{(b/a)^{x}}{\\ln(b/a)} + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Results worth learning by heart from this page: \\(\\int \\tan x\\,dx = \\ln|\\sec x| + c\\), \\(\\int \\sec x\\,dx = \\ln|\\sec x + \\tan x| + c\\), \\(\\int \\tan^{2}x\\,dx = \\tan x - x + c\\), \\(\\int \\cos^{2}x\\,dx = \\frac{x}{2} + \\frac{\\sin 2x}{4} + c\\). In the same way \\(\\int \\cot x\\,dx = \\ln|\\sin x| + c\\) and \\(\\int \\sin^{2}x\\,dx = \\frac{x}{2} - \\frac{\\sin 2x}{4} + c\\) (our additions; check them by differentiating)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Every derivative formula read backwards is an integral formula; learn the table together with the derivatives.\n2. Rewrite first, integrate second: powers for roots and fractions, identities for squares of trigonometric functions, product-to-sum for products.\n3. If the numerator is the derivative of the denominator, the answer is \\(\\ln|\\text{denominator}| + c\\) (Rule 4).\n4. \\(\\int a^{x}\\,dx = \\frac{a^{x}}{\\ln a} + c\\): the variable is in the exponent, so the power rule does not apply.\n5. Check every answer by differentiating; one constant \\(c\\) is enough for the whole answer."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Sign errors: \\(\\int \\sin x\\,dx = -\\cos x + c\\), \\(\\int \\csc^{2}x\\,dx = -\\cot x + c\\).\n2. Treating a power of a trigonometric function like a power of \\(x\\): \\(\\int \\tan^{2}x\\,dx \\ne \\frac{\\tan^{3}x}{3} + c\\).\n3. Forgetting to divide by \\(a\\) for \\(ax\\) inside: \\(\\int \\cos 2x\\,dx = \\frac{\\sin 2x}{2} + c\\), not \\(\\sin 2x + c\\).\n4. Using the power rule on \\(a^{x}\\): \\(\\int 2^{x}\\,dx = \\frac{2^{x}}{\\ln 2} + c\\), not \\(\\frac{2^{x+1}}{x+1}\\).\n5. Writing \\(+\\,c\\) after differentiating in a check (the book itself does this in Example 1)."
+          }
+        ]
+      }
+    }
+  ]
+}

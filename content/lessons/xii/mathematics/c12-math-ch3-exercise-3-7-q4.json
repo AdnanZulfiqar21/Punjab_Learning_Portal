@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-7-Q4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-7-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 123,
+          "pdf_to": 123,
+          "note": "Exercise 3.7, Question 4 (book p. 121); answers printed in the key (book p. 302) under the heading 'Exercise 3.8'."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. A particle moving along a coordinate line at time \\(t = 0\\) is at a position 2 cm from the origin and traveling at a velocity of 5 cm/sec. If the acceleration of the particle is given by \\(a(t) = 3 - 4(t + 2)^{-3}\\), find the velocity and the position of the particle as functions of \\(t\\).",
+            "explanation": "Two integrations: acceleration \\(\\to\\) velocity \\(\\to\\) position, each with its own constant.\nGiven: \\(s(0) = 2\\), \\(v(0) = 5\\), \\(a(t) = 3 - 4(t+2)^{-3}\\).\nPlan: integrate \\(a\\) (power rule on \\((t+2)^{-3}\\)), use \\(v(0) = 5\\); integrate \\(v\\), use \\(s(0) = 2\\).",
+            "steps": [
+              "Given: \\(a(t) = 3 - 4(t + 2)^{-3}\\), \\(v(0) = 5\\) cm/s, \\(s(0) = 2\\) cm.\nTo find: \\(v(t)\\) and \\(s(t)\\).\nMethod: \\(v = \\int a\\,dt\\), \\(s = \\int v\\,dt\\); the two starting values fix the two constants.",
+              "Integrate the acceleration\n\\[v(t) = \\int\\big(3 - 4(t + 2)^{-3}\\big)\\,dt\\]\n\\[= 3t - 4\\cdot\\dfrac{(t + 2)^{-2}}{-2} + c_1\\]\n\\[= 3t + \\dfrac{2}{(t + 2)^{2}} + c_1\\]\nWhy: \\(\\int (t + 2)^{n}\\,dt = \\frac{(t + 2)^{n+1}}{n + 1}\\) with \\(n = -3\\) (the inside \\(t + 2\\) has derivative 1).",
+              "Use \\(v(0) = 5\\)\n\\[5 = 0 + \\dfrac{2}{4} + c_1 \\Rightarrow c_1 = \\dfrac{9}{2}\\]\n\\[v(t) = 3t + \\dfrac{2}{(t + 2)^{2}} + \\dfrac{9}{2}\\]\nWhy: at \\(t = 0\\), \\((t + 2)^{2} = 4\\).",
+              "Integrate the velocity\n\\[s(t) = \\int\\left(3t + 2(t + 2)^{-2} + \\dfrac{9}{2}\\right)dt\\]\n\\[= \\dfrac{3}{2}t^{2} + 2\\cdot\\dfrac{(t + 2)^{-1}}{-1} + \\dfrac{9}{2}t + c_2\\]\n\\[= \\dfrac{3}{2}t^{2} - \\dfrac{2}{t + 2} + \\dfrac{9}{2}t + c_2\\]\nWhy: power rule again with \\(n = -2\\).",
+              "Use \\(s(0) = 2\\)\n\\[2 = 0 - \\dfrac{2}{2} + 0 + c_2 \\Rightarrow c_2 = 3\\]\n\\[s(t) = \\dfrac{3}{2}t^{2} + \\dfrac{9}{2}t - \\dfrac{2}{t + 2} + 3\\]\nWhy: at \\(t = 0\\), \\(\\frac{2}{t + 2} = 1\\).",
+              "Check\n\\[s'(t) = 3t + \\dfrac{9}{2} + \\dfrac{2}{(t + 2)^{2}} = v(t)\\;\\checkmark\\]\n\\[v'(t) = 3 - \\dfrac{4}{(t + 2)^{3}} = a(t)\\;\\checkmark\\]\n\\(v(0) = \\frac{1}{2} + \\frac{9}{2} = 5\\) and \\(s(0) = -1 + 3 = 2\\;\\checkmark\\)."
+            ],
+            "final_answer": "\\(v(t) = 3t + \\dfrac{2}{(t + 2)^{2}} + \\dfrac{9}{2}\\) cm/s and \\(s(t) = \\dfrac{3}{2}t^{2} + \\dfrac{9}{2}t - \\dfrac{2}{t + 2} + 3\\) cm."
+          }
+        ]
+      }
+    }
+  ]
+}

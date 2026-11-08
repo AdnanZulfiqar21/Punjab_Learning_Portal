@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH1-EXERCISE-1-2-Q8",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch1",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch1/u-exercise-1-2-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 16,
+          "pdf_to": 17,
+          "note": "Exercise 1.2, Question 8 (book p. 14-15): prove four inverse hyperbolic formulas (i)-(iv); no printed answers"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(i)",
+            "prompt": "8 (i) Prove the following inverse hyperbolic formula: \\(\\tanh^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{1+x}{1-x}\\right),\\ x \\ne 1\\)",
+            "explanation": "Prove a formula for an inverse hyperbolic function, as in Examples 10 and 11.\nNote the condition: \\(\\tanh^{-1} x\\) exists only for \\(|x| < 1\\) (see the correction).\nPlan: \\(y = \\tanh^{-1} x\\), so \\(x = \\tanh y\\); write with exponentials, solve for \\(e^{2y}\\), take \\(\\ln\\).",
+            "steps": [
+              "Given: \\(\\tanh y = \\frac{e^{y}-e^{-y}}{e^{y}+e^{-y}}\\) takes every value in \\((-1, 1)\\) exactly once, so \\(\\tanh^{-1} x\\) exists for \\(|x| < 1\\).\nTo prove: \\(\\tanh^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{1+x}{1-x}\\right)\\).\nMethod: put \\(y = \\tanh^{-1} x\\), so \\(x = \\tanh y\\); solve for \\(e^{2y}\\); take \\(\\ln\\).",
+              "Change the inverse into the function\n\\[y = \\tanh^{-1} x\\]\n\\[x = \\tanh y = \\dfrac{e^{y} - e^{-y}}{e^{y} + e^{-y}}\\]\nWhy: definition of the inverse and of \\(\\tanh\\).",
+              "Multiply top and bottom by \\(e^{y}\\)\n\\[x = \\dfrac{e^{2y} - 1}{e^{2y} + 1}\\]\nWhy: \\(e^{y} \\cdot e^{-y} = 1\\); now only \\(e^{2y}\\) appears.",
+              "Solve for \\(e^{2y}\\)\n\\[xe^{2y} + x = e^{2y} - 1\\]\n\\[1 + x = e^{2y} - xe^{2y}\\]\n\\[1 + x = e^{2y}(1 - x)\\]\n\\[e^{2y} = \\dfrac{1+x}{1-x}\\]\nWhy: cross-multiply, collect the \\(e^{2y}\\) terms on one side, take \\(e^{2y}\\) common, and divide by \\(1 - x \\ne 0\\).",
+              "Take ln\n\\[2y = \\ln\\left(\\dfrac{1+x}{1-x}\\right)\\]\n\\[y = \\dfrac{1}{2}\\ln\\left(\\dfrac{1+x}{1-x}\\right)\\]\nWhy: for \\(-1 < x < 1\\) both \\(1 + x\\) and \\(1 - x\\) are positive, so the fraction is positive and its \\(\\ln\\) exists.",
+              "Check: \\(x = \\frac{3}{5}\\): \\(\\frac{1+3/5}{1-3/5} = 4\\), so \\(y = \\frac{1}{2}\\ln 4 = \\ln 2\\).\n\\[\\tanh(\\ln 2) = \\dfrac{2 - \\frac{1}{2}}{2 + \\frac{1}{2}} = \\dfrac{3}{5}\\]\nIt returns \\(x\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\tanh^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{1+x}{1-x}\\right)\\) for \\(|x| < 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The condition is printed as \\(x \\ne 1\\). That is not enough: \\(\\tanh y\\) always lies in \\((-1, 1)\\), so \\(\\tanh^{-1} x\\) exists only for \\(|x| < 1\\); for \\(x > 1\\) or \\(x \\le -1\\) the fraction \\(\\frac{1+x}{1-x}\\) is negative or zero and its \\(\\ln\\) is not defined. The correct statement is \\(\\tanh^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{1+x}{1-x}\\right)\\), \\(|x| < 1\\) (as in the 1.5.3 table)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(ii)",
+            "prompt": "8 (ii) Prove the following inverse hyperbolic formula: \\(\\coth^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{1+x}{1-x}\\right),\\ x \\ne 1\\)",
+            "explanation": "The printed formula is that of \\(\\tanh^{-1}\\) and cannot hold for \\(\\coth^{-1}\\) (see the correction); we prove the correct one.\n\\(\\coth^{-1} x\\) exists for \\(|x| > 1\\).\nPlan: \\(x = \\coth y\\), solve for \\(e^{2y}\\), take \\(\\ln\\).",
+            "steps": [
+              "Given: \\(\\coth y = \\frac{e^{y}+e^{-y}}{e^{y}-e^{-y}}\\) (\\(y \\ne 0\\)) takes every value with \\(|x| > 1\\) exactly once, so \\(\\coth^{-1} x\\) exists for \\(|x| > 1\\).\nTo prove: the correct formula \\(\\coth^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{x+1}{x-1}\\right)\\), \\(|x| > 1\\) (see the correction below).\nMethod: as in part (i): \\(x = \\coth y\\), solve for \\(e^{2y}\\), take \\(\\ln\\).",
+              "Change the inverse into the function\n\\[y = \\coth^{-1} x\\]\n\\[x = \\coth y = \\dfrac{e^{y} + e^{-y}}{e^{y} - e^{-y}}\\]\n\\[x = \\dfrac{e^{2y} + 1}{e^{2y} - 1}\\]\nWhy: definition of \\(\\coth\\); then multiply top and bottom by \\(e^{y}\\).",
+              "Solve for \\(e^{2y}\\)\n\\[xe^{2y} - x = e^{2y} + 1\\]\n\\[xe^{2y} - e^{2y} = x + 1\\]\n\\[e^{2y}(x - 1) = x + 1\\]\n\\[e^{2y} = \\dfrac{x+1}{x-1}\\]\nWhy: cross-multiply, collect the \\(e^{2y}\\) terms, take it common, divide by \\(x - 1 \\ne 0\\).",
+              "Take ln\n\\[2y = \\ln\\left(\\dfrac{x+1}{x-1}\\right)\\]\n\\[y = \\dfrac{1}{2}\\ln\\left(\\dfrac{x+1}{x-1}\\right)\\]\nWhy: if \\(x > 1\\), both \\(x + 1\\) and \\(x - 1\\) are positive; if \\(x < -1\\), both are negative. In either case the fraction is positive, so the \\(\\ln\\) exists.",
+              "Check: \\(x = \\frac{5}{3}\\): \\(\\frac{8/3}{2/3} = 4\\), so \\(y = \\frac{1}{2}\\ln 4 = \\ln 2\\).\n\\[\\coth(\\ln 2) = \\dfrac{2 + \\frac{1}{2}}{2 - \\frac{1}{2}} = \\dfrac{5}{3}\\]\nIt returns \\(x\\). (The printed formula at \\(x = \\frac{5}{3}\\) would need \\(\\ln\\left(\\frac{8/3}{-2/3}\\right) = \\ln(-4)\\), which does not exist.)"
+            ],
+            "final_answer": "Hence proved (corrected formula): \\(\\coth^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{x+1}{x-1}\\right)\\) for \\(|x| > 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \\(\\coth^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{1+x}{1-x}\\right),\\ x \\ne 1\\), which is the formula of \\(\\tanh^{-1} x\\) from part (i). It cannot be right: \\(\\coth^{-1} x\\) exists only for \\(|x| > 1\\), and for every such \\(x\\) the fraction \\(\\frac{1+x}{1-x}\\) is negative, so its \\(\\ln\\) is undefined (for example \\(x = 2\\) gives \\(\\frac{3}{-1} = -3\\)). The correct formula, also given in the book's own 1.5.3 table, is \\(\\coth^{-1} x = \\frac{1}{2}\\ln\\left(\\frac{x+1}{x-1}\\right),\\ |x| > 1\\). That is what is proved above."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(iii)",
+            "prompt": "8 (iii) Prove the following inverse hyperbolic formula: \\(\\operatorname{sech}^{-1} x = \\ln\\left(\\frac{1+\\sqrt{1-x^{2}}}{x}\\right),\\ x \\ne 0\\)",
+            "explanation": "Prove the formula for \\(\\operatorname{sech}^{-1} x\\). Like \\(\\cosh\\), \\(\\operatorname{sech}\\) is even, so its inverse uses \\(y \\ge 0\\) and exists for \\(0 < x \\le 1\\).\nPlan: quadratic in \\(e^{y}\\), then choose the root with \\(y \\ge 0\\).",
+            "steps": [
+              "Given: \\(\\operatorname{sech} y = \\frac{2}{e^{y}+e^{-y}}\\) is even, so (as for \\(\\cosh\\)) we use only \\(y \\ge 0\\); there it takes every value in \\((0, 1]\\) once. So \\(\\operatorname{sech}^{-1} x\\) exists for \\(0 < x \\le 1\\), with \\(y \\ge 0\\).\nTo prove: \\(\\operatorname{sech}^{-1} x = \\ln\\left(\\frac{1+\\sqrt{1-x^{2}}}{x}\\right)\\).\nMethod: \\(x = \\operatorname{sech} y\\) gives a quadratic in \\(e^{y}\\); the condition \\(y \\ge 0\\) chooses the root (as in Example 11).",
+              "Change the inverse into the function\n\\[y = \\operatorname{sech}^{-1} x,\\quad y \\ge 0\\]\n\\[x = \\operatorname{sech} y = \\dfrac{2}{e^{y} + e^{-y}}\\]\nWhy: definition of the inverse on the restricted domain \\(y \\ge 0\\).",
+              "Make a quadratic in \\(e^{y}\\)\n\\[xe^{y} + xe^{-y} = 2\\]\n\\[xe^{2y} + x = 2e^{y}\\]\n\\[x(e^{y})^{2} - 2e^{y} + x = 0\\]\nWhy: cross-multiply, then multiply by \\(e^{y}\\). Here \\(a = x\\), \\(b = -2\\), \\(c = x\\).",
+              "Quadratic formula\n\\[e^{y} = \\dfrac{2 \\pm \\sqrt{4 - 4x^{2}}}{2x}\\]\n\\[= \\dfrac{1 \\pm \\sqrt{1 - x^{2}}}{x}\\]\nWhy: \\(\\sqrt{4 - 4x^{2}} = 2\\sqrt{1 - x^{2}}\\), real because \\(0 < x \\le 1\\).",
+              "Choose the sign\nThe two roots multiply to\n\\[\\dfrac{1 - (1 - x^{2})}{x^{2}} = 1\\]\nFor \\(0 < x < 1\\) the plus root is \\(> \\frac{1}{x} > 1\\), so the minus root lies between 0 and 1 and would give \\(y = \\ln(\\text{minus root}) < 0\\). Since \\(y \\ge 0\\), we take the plus sign. (At \\(x = 1\\) both roots equal 1.)\nWhy: the same reasoning as Example 11.",
+              "Take ln\n\\[e^{y} = \\dfrac{1 + \\sqrt{1 - x^{2}}}{x}\\]\n\\[\\operatorname{sech}^{-1} x = \\ln\\left(\\dfrac{1+\\sqrt{1-x^{2}}}{x}\\right)\\]\nWhy: \\(\\ln\\) undoes \\(e\\).",
+              "Check: \\(x = \\frac{4}{5}\\): \\(\\sqrt{1 - \\frac{16}{25}} = \\frac{3}{5}\\), so \\(\\frac{1 + 3/5}{4/5} = 2\\) and \\(y = \\ln 2\\).\n\\[\\operatorname{sech}(\\ln 2) = \\dfrac{2}{2 + \\frac{1}{2}} = \\dfrac{4}{5}\\]\nIt returns \\(x\\). Also \\(x = 1\\) gives \\(\\ln 1 = 0\\), and \\(\\operatorname{sech} 0 = 1\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\operatorname{sech}^{-1} x = \\ln\\left(\\frac{1+\\sqrt{1-x^{2}}}{x}\\right)\\) for \\(0 < x \\le 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The condition is printed as \\(x \\ne 0\\). That is not enough: \\(\\operatorname{sech} y\\) takes values only in \\((0, 1]\\), so \\(\\operatorname{sech}^{-1} x\\) exists only for \\(0 < x \\le 1\\). For \\(x > 1\\) the root \\(\\sqrt{1-x^{2}}\\) is not real, and for \\(x < 0\\) the fraction is negative, so the \\(\\ln\\) is undefined. The correct condition is \\(0 < x \\le 1\\) (as in the 1.5.3 table)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(iv)",
+            "prompt": "8 (iv) Prove the following inverse hyperbolic formula: \\(\\operatorname{csch}^{-1} x = \\ln\\left(\\frac{1}{x} + \\sqrt{\\frac{1}{x^{2}}+1}\\right),\\ x \\ne 0\\)",
+            "explanation": "Prove the formula for \\(\\operatorname{csch}^{-1} x\\), defined for all \\(x \\ne 0\\) (printed correctly).\nPlan: quadratic in \\(e^{y}\\), then reject the negative root because \\(e^{y} > 0\\).",
+            "steps": [
+              "Given: \\(\\operatorname{csch} y = \\frac{2}{e^{y}-e^{-y}}\\) (\\(y \\ne 0\\)) is one-to-one and takes every non-zero value, so \\(\\operatorname{csch}^{-1} x\\) exists for every \\(x \\ne 0\\).\nTo prove: \\(\\operatorname{csch}^{-1} x = \\ln\\left(\\frac{1}{x} + \\sqrt{\\frac{1}{x^{2}}+1}\\right)\\), \\(x \\ne 0\\).\nMethod: \\(x = \\operatorname{csch} y\\) gives a quadratic in \\(e^{y}\\); \\(e^{y} > 0\\) chooses the root (as in Example 10).",
+              "Change the inverse into the function\n\\[y = \\operatorname{csch}^{-1} x\\]\n\\[x = \\operatorname{csch} y = \\dfrac{2}{e^{y} - e^{-y}}\\]\nWhy: definition of the inverse and of \\(\\operatorname{csch}\\).",
+              "Make a quadratic in \\(e^{y}\\)\n\\[e^{y} - e^{-y} = \\dfrac{2}{x}\\]\n\\[e^{2y} - 1 = \\dfrac{2}{x}e^{y}\\]\n\\[(e^{y})^{2} - \\dfrac{2}{x}e^{y} - 1 = 0\\]\nWhy: cross-multiply, then multiply by \\(e^{y}\\). Here \\(a = 1\\), \\(b = -\\frac{2}{x}\\), \\(c = -1\\).",
+              "Quadratic formula\n\\[e^{y} = \\dfrac{\\frac{2}{x} \\pm \\sqrt{\\frac{4}{x^{2}} + 4}}{2}\\]\n\\[= \\dfrac{1}{x} \\pm \\sqrt{\\dfrac{1}{x^{2}} + 1}\\]\nWhy: \\(\\sqrt{\\frac{4}{x^{2}} + 4} = 2\\sqrt{\\frac{1}{x^{2}} + 1}\\); the 2 cancels.",
+              "Choose the sign\n\\[\\sqrt{\\dfrac{1}{x^{2}} + 1} > \\sqrt{\\dfrac{1}{x^{2}}} = \\left|\\dfrac{1}{x}\\right| \\ge \\dfrac{1}{x}\\]\nSo the minus root \\(\\frac{1}{x} - \\sqrt{\\frac{1}{x^{2}}+1}\\) is negative, but \\(e^{y} > 0\\). Take the plus sign.\nWhy: the same reasoning as Example 10.",
+              "Take ln\n\\[\\operatorname{csch}^{-1} x = \\ln\\left(\\dfrac{1}{x} + \\sqrt{\\dfrac{1}{x^{2}}+1}\\right)\\]\nWhy: \\(\\ln\\) undoes \\(e\\); the plus root is positive, so the \\(\\ln\\) exists for every \\(x \\ne 0\\).",
+              "Check: \\(x = \\frac{3}{4}\\): \\(\\frac{1}{x} = \\frac{4}{3}\\), \\(\\sqrt{\\frac{16}{9} + 1} = \\frac{5}{3}\\), so \\(y = \\ln 3\\).\n\\[\\operatorname{csch}(\\ln 3) = \\dfrac{2}{3 - \\frac{1}{3}} = \\dfrac{3}{4}\\]\nIt returns \\(x\\). For \\(x = -\\frac{3}{4}\\): \\(\\ln\\left(-\\frac{4}{3} + \\frac{5}{3}\\right) = \\ln\\frac{1}{3} = -\\ln 3\\), and \\(\\operatorname{csch}(-\\ln 3) = -\\frac{3}{4}\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\operatorname{csch}^{-1} x = \\ln\\left(\\frac{1}{x} + \\sqrt{\\frac{1}{x^{2}}+1}\\right)\\) for \\(x \\ne 0\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

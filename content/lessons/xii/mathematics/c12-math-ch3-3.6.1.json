@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-3.6.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/3.6.1",
+      "title": "3.6.1 Properties of the Definite Integrals",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 98,
+          "pdf_to": 103,
+          "note": "Book p. 96-101: 3.6.1 Property-I to Property-IX, Remember! box, Examples 49-56"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In 3.6 every definite integral was found the long way: antiderivative first, then the limits. The properties on this page are shortcuts. Some of them (Properties IV, V, VI) can give the value of an integral whose antiderivative is very hard or impossible to find, as in Examples 52, 53 and 55.\nFor each property we show in a teaching note why it is true, using only \\(\\int_{a}^{b} f(x)\\,dx = F(b) - F(a)\\) and substitution."
+          },
+          {
+            "type": "paragraph",
+            "text": "Throughout this section, assume \\(f\\) is a continuous function on the given interval."
+          },
+          {
+            "type": "paragraph",
+            "text": "Property-I: \\[\\int_{a}^{b} f(x)\\,dx = \\int_{a}^{b} f(t)\\,dt.\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The letter used for the variable does not matter: both sides equal \\(F(b) - F(a)\\). The variable inside a definite integral is a dummy variable. We use this whenever we change the letter after a substitution (Examples 51 and 56)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Remember!",
+            "text": "\\[\\int_{a}^{a} f(x)\\,dx = 0\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why: \\(\\int_{a}^{a} f(x)\\,dx = F(a) - F(a) = 0\\). An interval of zero width collects nothing."
+          },
+          {
+            "type": "paragraph",
+            "text": "Property-II: \\[\\int_{a}^{b} f(x)\\,dx = -\\int_{b}^{a} f(x)\\,dx.\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why: \\(F(a) - F(b) = -\\big(F(b) - F(a)\\big)\\). Swapping the limits only changes the sign.\nOur own example: \\(\\int_{3}^{1} 2x\\,dx = 1 - 9 = -8 = -\\int_{1}^{3} 2x\\,dx\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Property-III: \\[\\int_{a}^{b} f(x)\\,dx\\]\n\\[= \\int_{a}^{c} f(x)\\,dx + \\int_{c}^{b} f(x)\\,dx,\\]\nwhere \\(a < c < b\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "This result can be generalized as follows:\n\\[\\int_{a}^{b} f(x)\\,dx = \\int_{a}^{c_{1}} f(x)\\,dx\\]\n\\[+ \\int_{c_{1}}^{c_{2}} f(x)\\,dx + \\int_{c_{2}}^{c_{3}} f(x)\\,dx\\]\n\\[+ \\cdots + \\int_{c_{n-1}}^{c_{n}} f(x)\\,dx\\]\n\\[+ \\int_{c_{n}}^{b} f(x)\\,dx\\]\nwhere \\(a < c_{1} < c_{2} < c_{3} < \\cdots < c_{n-1} < c_{n} < b\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why: \\(\\big(F(c) - F(a)\\big) + \\big(F(b) - F(c)\\big) = F(b) - F(a)\\); the value at the meeting point \\(c\\) cancels.\nWhen: the function is given in pieces (Example 49), contains absolute values (Example 50), or you need the area of parts that lie above and below the x-axis (3.7). Break the interval exactly where the formula changes."
+          },
+          {
+            "type": "paragraph",
+            "text": "Property-IV: \\[\\int_{a}^{b} f(x)\\,dx = \\int_{a}^{b} f(a + b - x)\\,dx.\\]"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) As a special case, if we take \\(a = 0\\), we obtain: \\(\\int_{0}^{b} f(x)\\,dx = \\int_{0}^{b} f(b - x)\\,dx\\)",
+              "(ii) As another special case, if we take \\(a = -b\\), we obtain: \\(\\int_{-b}^{b} f(x)\\,dx = \\int_{-b}^{b} f(-x)\\,dx\\).",
+              "(iii) For any integrand of the form \\(\\frac{f(x)}{f(x) + g(x)}\\), if there exists a substitution \\(x \\to a + b - x\\) such that \\(f(a + b - x) = g(x)\\) and \\(g(a + b - x) = f(x)\\), then \\(\\int_{a}^{b} \\frac{f(x)}{f(x) + g(x)}\\,dx = \\frac{b - a}{2}\\)."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why Property-IV is true: put \\(x = a + b - t\\), so \\(dx = -dt\\); when \\(x = a\\), \\(t = b\\), and when \\(x = b\\), \\(t = a\\).\n\\[\\int_{a}^{b} f(x)\\,dx = \\int_{b}^{a} f(a + b - t)(-dt)\\]\n\\[= \\int_{a}^{b} f(a + b - t)\\,dt\\]\n(Property-II removed the minus sign), and Property-I lets us write \\(x\\) for \\(t\\). The point \\(a + b - x\\) runs through the same interval in the opposite direction, like reading a ruler from the other end.\nWhy (iii) gives \\(\\frac{b - a}{2}\\): call the integral \\(I\\). By Property-IV the swap turns \\(f\\) into \\(g\\) and \\(g\\) into \\(f\\), so\n\\[I = \\int_{a}^{b} \\dfrac{g(x)}{g(x) + f(x)}\\,dx\\]\nAdding the two forms of \\(I\\):\n\\[2I = \\int_{a}^{b} \\dfrac{f(x) + g(x)}{f(x) + g(x)}\\,dx\\]\n\\[= \\int_{a}^{b} 1\\,dx = b - a\\]\nOur own example: \\(\\int_{0}^{\\pi/2} \\frac{\\sqrt{\\sin x}}{\\sqrt{\\sin x} + \\sqrt{\\cos x}}\\,dx = \\frac{\\pi}{4}\\), because \\(x \\to \\frac{\\pi}{2} - x\\) swaps \\(\\sin\\) and \\(\\cos\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Property-V: \\[\\int_{-a}^{a} f(x)\\,dx = \\int_{0}^{a} \\big(f(x) + f(-x)\\big)\\,dx\\]\nIn particular, if \\(f(-x) = f(x)\\) (that is, \\(f\\) is an even function), then\n\\[\\int_{-a}^{a} f(x)\\,dx = 2\\int_{0}^{a} f(x)\\,dx\\]\nand if \\(f(-x) = -f(x)\\) (that is, \\(f\\) is an odd function), then \\(\\int_{-a}^{a} f(x)\\,dx = 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why: split \\(\\int_{-a}^{a} = \\int_{-a}^{0} + \\int_{0}^{a}\\) (Property-III) and put \\(x = -t\\) in the first part; it becomes \\(\\int_{0}^{a} f(-t)\\,dt\\).\nHow to test a function: replace \\(x\\) by \\(-x\\). If nothing changes, it is even (\\(x^{2}\\), \\(\\cos x\\), \\(|x|\\)). If only the sign changes, it is odd (\\(x^{3}\\), \\(\\sin x\\), \\(\\tan x\\)). The graph of an even function is a mirror image about the y-axis, so the two halves are equal; for an odd function the two halves are equal but opposite, so they cancel.\nUseful facts: odd \\(\\times\\) even = odd; odd \\(\\times\\) odd = even; even \\(\\times\\) even = even."
+          },
+          {
+            "type": "paragraph",
+            "text": "Property-VI: \\[\\int_{0}^{a} f(x)\\,dx = \\int_{0}^{a/2} \\big(f(x) + f(a - x)\\big)\\,dx\\]\nIn particular,\n\\[\\int_{0}^{a} f(x)\\,dx = 0 \\;\\text{ if } f(a - x) = -f(x)\\]\n\\[\\int_{0}^{a} f(x)\\,dx = 2\\int_{0}^{a/2} f(x)\\,dx\\]\n\\[\\text{if } f(a - x) = f(x)\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why: split at the middle, \\(\\int_{0}^{a} = \\int_{0}^{a/2} + \\int_{a/2}^{a}\\), and put \\(x = a - t\\) in the second part; it becomes \\(\\int_{0}^{a/2} f(a - t)\\,dt\\).\nIf \\(f(a - x) = -f(x)\\), the second half cancels the first, so the total is 0. If \\(f(a - x) = f(x)\\), the two halves are equal, so the total is twice one half. Example 52 uses both cases."
+          },
+          {
+            "type": "paragraph",
+            "text": "Property-VII: If \\(f(x) \\ge 0\\) on the interval \\([a, b]\\), then \\(\\int_{a}^{b} f(x)\\,dx \\ge 0\\) and if \\(f(x) \\le 0\\) on the interval \\([c, d]\\), then \\(\\int_{c}^{d} f(x)\\,dx \\le 0\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Property-VIII: If \\(f(x) \\le g(x)\\) on \\([a, b]\\), then \\(\\int_{a}^{b} f(x)\\,dx\\) \\(\\le \\int_{c}^{b} g(x)\\,dx\\).",
+            "book_errors": [
+              "\\(\\le \\int_{c}^{b} g(x)\\,dx\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the right-hand integral of Property-VIII with lower limit \\(c\\): \\(\\int_{c}^{b} g(x)\\,dx\\). Both integrals run over the same interval \\([a, b]\\). Correct:\n\\[\\int_{a}^{b} f(x)\\,dx \\le \\int_{a}^{b} g(x)\\,dx\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Property-IX: \\[\\int_{a}^{b} \\big(\\alpha f_{1}(x) + \\beta f_{2}(x)\\big)\\,dx\\]\n\\[= \\alpha\\int_{a}^{b} f_{1}(x)\\,dx + \\beta\\int_{a}^{b} f_{2}(x)\\,dx.\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Property-VII: a function that never goes below the x-axis cannot have a negative integral (with \\(a < b\\)). Use it to check the sign of an answer.\nProperty-VIII follows from VII: \\(g - f \\ge 0\\) on \\([a, b]\\), so \\(\\int_{a}^{b} (g - f)\\,dx \\ge 0\\).\nProperty-IX (linearity): integrate a sum term by term and take constants outside, exactly as for indefinite integrals."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Property",
+              "Use it when"
+            ],
+            "rows": [
+              [
+                "I (change the letter)",
+                "The variable of integration is only a name; the value depends on \\(f\\), \\(a\\) and \\(b\\) alone."
+              ],
+              [
+                "II (swap limits)",
+                "The lower limit is bigger than the upper limit, or you want the limits in the usual order."
+              ],
+              [
+                "III (split the interval)",
+                "The function is defined piece by piece, contains \\(|\\;|\\), or changes sign (Examples 49, 50)."
+              ],
+              [
+                "IV (\\(x \\to a + b - x\\))",
+                "The replacement turns the integrand into something simpler or related (\\(x \\leftrightarrow 1 - x\\), \\(\\sin \\leftrightarrow \\cos\\)) (Examples 51, 53)."
+              ],
+              [
+                "V (symmetric limits \\(-a\\) to \\(a\\))",
+                "First test \\(f(-x)\\): even gives \\(2\\int_{0}^{a}\\), odd gives 0 (Example 55)."
+              ],
+              [
+                "VI (\\(0\\) to \\(a\\), compare \\(f(a - x)\\))",
+                "\\(f(a - x) = -f(x)\\) gives 0; \\(f(a - x) = f(x)\\) gives \\(2\\int_{0}^{a/2}\\) (Example 52)."
+              ],
+              [
+                "VII, VIII (sign and comparison)",
+                "You need the sign of an integral, or to compare two integrals, without evaluating them."
+              ],
+              [
+                "IX (linearity)",
+                "Split a sum into separate integrals and take constants outside."
+              ]
+            ],
+            "caption": "Our summary (not in the book): which property to try"
+          },
+          {
+            "type": "example",
+            "title": "Example 49",
+            "problem": "Let \\(f(x) = \\begin{cases} x^{2} & \\text{if } 0 \\le x < 2 \\\\ 4 - x & \\text{if } 2 \\le x \\le 4 \\end{cases}\\) Compute: \\(\\int_{0}^{4} f(x)\\,dx\\).",
+            "steps": [
+              "Given: \\(f(x) = x^{2}\\) on \\(0 \\le x < 2\\) and \\(f(x) = 4 - x\\) on \\(2 \\le x \\le 4\\).\nTo find: \\(\\int_{0}^{4} f(x)\\,dx\\).\nMethod: the formula changes at \\(x = 2\\), so split the interval there (Property-III) and integrate each piece with its own formula.",
+              "Step 1: Split at \\(x = 2\\)\n\\[\\int_{0}^{4} f(x)\\,dx = \\int_{0}^{2} f(x)\\,dx\\]\n\\[\\; + \\int_{2}^{4} f(x)\\,dx\\]\n\\[= \\int_{0}^{2} x^{2}\\,dx + \\int_{2}^{4} (4 - x)\\,dx\\]\nWhy: Property-III with \\(c = 2\\); on each piece \\(f\\) has one formula.",
+              "Step 2: First piece\n\\[\\int_{0}^{2} x^{2}\\,dx = \\Big[\\dfrac{x^{3}}{3}\\Big]_{0}^{2}\\]\n\\[= \\dfrac{(2)^{3}}{3} - \\dfrac{(0)^{3}}{3} = \\dfrac{8}{3} - 0\\]\nWhy: power rule \\(\\int x^{2}\\,dx = \\frac{x^{3}}{3}\\).",
+              "Step 3: Second piece\n\\[\\int_{2}^{4} (4 - x)\\,dx = \\Big[4x - \\dfrac{x^{2}}{2}\\Big]_{2}^{4}\\]\n\\[= \\Big(4(4) - \\dfrac{(4)^{2}}{2}\\Big) - \\Big(4(2) - \\dfrac{(2)^{2}}{2}\\Big)\\]\n\\[= (16 - 8) - (8 - 2)\\]\n\\[= 8 - 6 = 2\\]\nWhy: \\(\\int 4\\,dx = 4x\\) and \\(\\int x\\,dx = \\frac{x^{2}}{2}\\); upper value minus lower value.",
+              "Step 4: Add the pieces\n\\[\\int_{0}^{4} f(x)\\,dx = \\dfrac{8}{3} + 2\\]\n\\[= \\dfrac{8 + 6}{3} = \\dfrac{14}{3}\\]\nWhy: \\(2 = \\frac{6}{3}\\) to get a common denominator.",
+              "Check: on \\([2, 4]\\) the graph of \\(4 - x\\) is a straight line from \\((2, 2)\\) down to \\((4, 0)\\): a triangle of area \\(\\frac{1}{2}(2)(2) = 2\\). \\(\\checkmark\\)\nTotal \\(\\frac{8}{3} + 2 = \\frac{14}{3} \\approx 4.667\\)."
+            ],
+            "answer": "\\(\\int_{0}^{4} f(x)\\,dx = \\frac{14}{3}\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 50",
+            "problem": "Evaluate: \\(\\int_{-6}^{4} f(x)\\,dx\\) where \\(f(x) = |x - 1| + |x + 2|\\).",
+            "steps": [
+              "Given: \\(f(x) = |x - 1| + |x + 2|\\) on \\([-6, 4]\\).\nTo find: \\(\\int_{-6}^{4} f(x)\\,dx\\).\nMethod: an absolute value has no single antiderivative formula, so first find where the expressions inside change sign, split the interval there (Property-III), and write \\(f\\) without bars on each piece.",
+              "Step 1: Where the insides change sign\n\\[x - 1 = 0 \\Rightarrow x = 1\\]\n\\[x + 2 = 0 \\Rightarrow x = -2\\]\nSo break \\([-6, 4]\\) at \\(x = -6, -2, 1, 4\\). These points divide it into three sub-intervals: \\([-6, -2]\\), \\([-2, 1]\\), \\([1, 4]\\). (The book prints the first one as \\([-6, 2]\\).)\nWhy: \\(|u| = u\\) when \\(u \\ge 0\\) and \\(|u| = -u\\) when \\(u < 0\\); the formula can change only where \\(u = 0\\).",
+              "Step 2: (a) For \\(x \\in [-6, -2]\\)\n\\[|x - 1| = -(x - 1) = -x + 1\\]\n\\[|x + 2| = -(x + 2) = -x - 2\\]\n\\[f(x) = -x + 1 - x - 2 = -2x - 1\\]\n\\[\\int_{-6}^{-2} (-2x - 1)\\,dx = \\Big[-\\dfrac{2x^{2}}{2} - x\\Big]_{-6}^{-2}\\]\n\\[= \\Big[-x^{2} - x\\Big]_{-6}^{-2}\\]\n\\[= (-4 + 2) - (-36 + 6)\\]\n\\[= -2 - (-30) = -2 + 30 = 28\\]\nWhy: here \\(x - 1 < 0\\) and \\(x + 2 \\le 0\\), so both bars put a minus sign in front.",
+              "Step 3: (b) For \\(x \\in [-2, 1]\\)\n\\[|x - 1| = -(x - 1) = -x + 1\\]\n\\[|x + 2| = x + 2\\]\n\\[f(x) = -x + 1 + x + 2 = 3\\]\n\\[\\int_{-2}^{1} 3\\,dx = \\big[3x\\big]_{-2}^{1}\\]\n\\[= 3(1) - 3(-2) = 3 + 6 = 9\\]\nWhy: here \\(x - 1 \\le 0\\) but \\(x + 2 \\ge 0\\); the \\(x\\) terms cancel and \\(f\\) is the constant 3.",
+              "Step 4: (c) For \\(x \\in [1, 4]\\)\n\\[|x - 1| = x - 1,\\quad |x + 2| = x + 2\\]\n\\[f(x) = x - 1 + x + 2 = 2x + 1\\]\n\\[\\int_{1}^{4} (2x + 1)\\,dx = \\big[x^{2} + x\\big]_{1}^{4}\\]\n\\[= [(4)^{2} + 4] - [(1)^{2} + 1]\\]\n\\[= 16 + 4 - 2 = 18\\]\nWhy: here both insides are \\(\\ge 0\\), so the bars can simply be removed.",
+              "Step 5: Add (a), (b) and (c)\n\\[\\int_{-6}^{4} f\\,dx = \\int_{-6}^{-2} f\\,dx\\]\n\\[\\; + \\int_{-2}^{1} f\\,dx + \\int_{1}^{4} f\\,dx\\]\n\\[= 28 + 9 + 18 = 55\\]\n(The book prints \\(28 + 9 + 18 = 57\\).)\nWhy: Property-III with two break points.",
+              "Check: each piece is a straight line, so each integral is the area of a trapezium or rectangle.\n\\[[-6, -2]:\\ \\tfrac{11 + 3}{2}\\times 4 = 28\\]\n\\[[-2, 1]:\\ 3 \\times 3 = 9\\]\n\\[[1, 4]:\\ \\tfrac{3 + 9}{2}\\times 3 = 18\\]\n\\(28 + 9 + 18 = 55\\); sympy gives 55 as well. \\(\\checkmark\\)"
+            ],
+            "answer": "\\(\\int_{-6}^{4} \\big(|x - 1| + |x + 2|\\big)\\,dx = 55\\) (the book prints 57; see the correction below)",
+            "book_errors": [
+              "\\([-6, 2]\\)",
+              "\\(28 + 9 + 18 = 57\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 50 has three printing slips:\n1. The sub-intervals are printed as \\([-6, 2]\\), \\([-2, 1]\\), \\([1, 4]\\). The first one is \\([-6, -2]\\) (part (a) of the book's own solution uses \\([-6, -2]\\)).\n2. Part (c) prints only \\(|x - 1|\\) and leaves out \\(= x - 1\\).\n3. The final sum is printed as \\(28 + 9 + 18 = 57\\). The sum is 55, so \\(\\int_{-6}^{4} f(x)\\,dx = 55\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 51",
+            "problem": "Evaluate \\(\\int_{0}^{1} x^{2}(1 - x)^{\\frac{3}{2}}\\,dx\\).",
+            "steps": [
+              "Given: \\(I = \\int_{0}^{1} x^{2}(1 - x)^{\\frac{3}{2}}\\,dx\\).\nTo find: the value of \\(I\\).\nMethod: \\((1 - x)^{\\frac{3}{2}}\\) is a fractional power of a binomial and cannot be expanded easily. Property-IV with \\(a = 0\\), \\(b = 1\\) replaces \\(x\\) by \\(1 - x\\); then the fractional power falls on \\(x\\) alone and everything becomes simple powers of \\(x\\).",
+              "Step 1: Apply Property-IV (\\(x \\to 0 + 1 - x = 1 - x\\))\n\\[I = \\int_{0}^{1} (1 - x)^{2}\\big(1 - (1 - x)\\big)^{\\frac{3}{2}}\\,dx\\]\n\\[= \\int_{0}^{1} (1 - 2x + x^{2})(1 - 1 + x)^{\\frac{3}{2}}\\,dx\\]\n\\[= \\int_{0}^{1} (1 - 2x + x^{2})\\,x^{\\frac{3}{2}}\\,dx\\]\nWhy: \\(\\int_{a}^{b} f(x)\\,dx = \\int_{a}^{b} f(a + b - x)\\,dx\\); \\((1 - x)^{2} = 1 - 2x + x^{2}\\) and \\(1 - (1 - x) = x\\).",
+              "Step 2: Multiply out\n\\[= \\int_{0}^{1} \\Big(x^{\\frac{3}{2}} - 2x^{\\frac{5}{2}} + x^{\\frac{7}{2}}\\Big)dx\\]\nWhy: add powers when multiplying: \\(x \\cdot x^{\\frac{3}{2}} = x^{\\frac{5}{2}}\\), \\(x^{2}x^{\\frac{3}{2}} = x^{\\frac{7}{2}}\\).",
+              "Step 3: Integrate and put in the limits\n\\[= \\Big[\\tfrac{2}{5}x^{\\frac{5}{2}} - \\tfrac{4}{7}x^{\\frac{7}{2}} + \\tfrac{2}{9}x^{\\frac{9}{2}}\\Big]_{0}^{1}\\]\n\\[= \\Big(\\tfrac{2}{5} - \\tfrac{4}{7} + \\tfrac{2}{9}\\Big) - (0)\\]\nWhy: power rule; for example \\(\\int x^{\\frac{3}{2}}\\,dx = \\frac{x^{5/2}}{5/2} = \\frac{2}{5}x^{\\frac{5}{2}}\\). Every term is 0 at \\(x = 0\\).",
+              "Step 4: Simplify\n\\[\\dfrac{2}{5} - \\dfrac{4}{7} + \\dfrac{2}{9} = \\dfrac{126 - 180 + 70}{315}\\]\n\\[= \\dfrac{16}{315}\\]\nWhy: the common denominator is \\(5 \\times 7 \\times 9 = 315\\); \\(\\frac{2}{5} = \\frac{126}{315}\\), \\(\\frac{4}{7} = \\frac{180}{315}\\), \\(\\frac{2}{9} = \\frac{70}{315}\\).",
+              "Check: sympy evaluates both \\(\\int_{0}^{1} x^{2}(1 - x)^{\\frac{3}{2}}\\,dx\\) and \\(\\int_{0}^{1} (1 - x)^{2}x^{\\frac{3}{2}}\\,dx\\) as \\(\\frac{16}{315} \\approx 0.0508\\). The integrand is positive and at most about 0.09 on \\([0, 1]\\), so a small positive value is right. \\(\\checkmark\\)"
+            ],
+            "answer": "\\(\\int_{0}^{1} x^{2}(1 - x)^{\\frac{3}{2}}\\,dx = \\frac{16}{315}\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 52",
+            "problem": "\\(\\int_{0}^{2\\pi} \\cos^{5} x\\,dx\\)",
+            "steps": [
+              "Given: \\(I = \\int_{0}^{2\\pi} \\cos^{5} x\\,dx\\).\nTo find: the value of \\(I\\).\nMethod: expanding \\(\\cos^{5} x\\) would be long. Use Property-VI twice: first with \\(a = 2\\pi\\), then with \\(a = \\pi\\).",
+              "Step 1: Property-VI with \\(a = 2\\pi\\)\n\\[f(x) = \\cos^{5} x\\]\n\\[f(2\\pi - x) = \\big[\\cos(2\\pi - x)\\big]^{5}\\]\n\\[= (\\cos x)^{5} = \\cos^{5} x = f(x)\\]\n\\[\\therefore\\; I = 2\\int_{0}^{\\pi} \\cos^{5} x\\,dx\\]\nWhy: \\(\\cos(2\\pi - x) = \\cos x\\), so \\(f(a - x) = f(x)\\) and the integral is twice the integral over the first half \\([0, \\pi]\\).",
+              "Step 2: Property-VI with \\(a = \\pi\\)\n\\[f(\\pi - x) = \\big(\\cos(\\pi - x)\\big)^{5}\\]\n\\[= (-\\cos x)^{5} = -\\cos^{5} x = -f(x)\\]\n\\[\\int_{0}^{\\pi} \\cos^{5} x\\,dx = 0\\]\nWhy: \\(\\cos(\\pi - x) = -\\cos x\\), and an odd power keeps the minus sign. So \\(f(\\pi - x) = -f(x)\\) and the integral over \\([0, \\pi]\\) is 0.",
+              "Step 3: Result\n\\[I = 2 \\times 0\\]\n\\[I = \\int_{0}^{2\\pi} \\cos^{5} x\\,dx = 0\\]\nWhy: twice zero is zero.",
+              "Check: on \\([0, \\pi]\\) the graph of \\(\\cos^{5} x\\) is above the axis on \\([0, \\frac{\\pi}{2}]\\) and is the same shape below the axis on \\([\\frac{\\pi}{2}, \\pi]\\); the parts cancel. Sympy also gives 0. \\(\\checkmark\\)"
+            ],
+            "answer": "\\(\\int_{0}^{2\\pi} \\cos^{5} x\\,dx = 0\\)",
+            "book_errors": [
+              "\\(\\int_{0}^{2\\pi} \\cos^{5} x\\,dx\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 52 is printed as the bare integral \\(\\int_{0}^{2\\pi} \\cos^{5} x\\,dx\\) without an instruction. It means: Evaluate \\(\\int_{0}^{2\\pi} \\cos^{5} x\\,dx\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 53",
+            "problem": "Show that \\(\\int_{\\pi/5}^{3\\pi/10} \\frac{\\sqrt{\\sin x} - \\sqrt{\\cos x}}{\\sqrt{2 + \\sin^{2}x\\,\\cos^{2}x}}\\,dx = 0\\).",
+            "steps": [
+              "Given: the integral \\(I\\) above, with \\(a = \\frac{\\pi}{5}\\), \\(b = \\frac{3\\pi}{10}\\).\nTo prove: \\(I = 0\\).\nMethod: Property-IV, \\(x \\to a + b - x\\). Here \\(a + b = \\frac{\\pi}{2}\\), and replacing \\(x\\) by \\(\\frac{\\pi}{2} - x\\) swaps \\(\\sin x\\) and \\(\\cos x\\). The numerator changes sign while the denominator stays the same, so \\(I = -I\\).",
+              "Step 1: Name the parts\n\\[D(x) = \\sqrt{2 + \\sin^{2}x\\cos^{2}x}\\]\n\\[I = \\int_{\\pi/5}^{3\\pi/10} \\dfrac{\\sqrt{\\sin x} - \\sqrt{\\cos x}}{D(x)}\\,dx\\]\n\\[a + b = \\dfrac{\\pi}{5} + \\dfrac{3\\pi}{10} = \\dfrac{\\pi}{2}\\]\nWhy: a short name \\(D(x)\\) for the denominator keeps the lines short; \\(a + b\\) tells us the substitution.",
+              "Step 2: What the substitution does\n\\[\\sin\\Big(\\dfrac{\\pi}{2} - x\\Big) = \\cos x\\]\n\\[\\cos\\Big(\\dfrac{\\pi}{2} - x\\Big) = \\sin x\\]\n\\[D\\Big(\\dfrac{\\pi}{2} - x\\Big) = \\sqrt{2 + \\cos^{2}x\\sin^{2}x}\\]\n\\[= D(x)\\]\nWhy: complementary angle identities. The denominator contains the product \\(\\sin^{2}x\\cos^{2}x\\), which is unchanged when the two factors swap.",
+              "Step 3: Apply Property-IV\n\\[I = \\int_{\\pi/5}^{3\\pi/10} \\dfrac{\\sqrt{\\cos x} - \\sqrt{\\sin x}}{D(x)}\\,dx\\]\n\\[= -\\int_{\\pi/5}^{3\\pi/10} \\dfrac{\\sqrt{\\sin x} - \\sqrt{\\cos x}}{D(x)}\\,dx\\]\n\\[= -I\\]\nWhy: \\(\\sqrt{\\cos x} - \\sqrt{\\sin x} = -\\big(\\sqrt{\\sin x} - \\sqrt{\\cos x}\\big)\\), and the remaining integral is \\(I\\) itself.",
+              "Step 4: Solve for \\(I\\)\n\\[I = -I \\Rightarrow 2I = 0 \\Rightarrow I = 0\\]\nWhy: the only number equal to its own negative is 0. Clearly \\(I = -I\\).",
+              "Check: on \\([\\frac{\\pi}{5}, \\frac{3\\pi}{10}]\\) (36 to 54 degrees) both \\(\\sin x\\) and \\(\\cos x\\) are positive, so the roots are real. The interval is symmetric about \\(\\frac{\\pi}{4}\\), and the numerator is negative before \\(\\frac{\\pi}{4}\\) and positive after it. A numerical integration gives 0. \\(\\checkmark\\)"
+            ],
+            "answer": "Hence proved: \\(\\int_{\\pi/5}^{3\\pi/10} \\frac{\\sqrt{\\sin x} - \\sqrt{\\cos x}}{\\sqrt{2 + \\sin^{2}x\\,\\cos^{2}x}}\\,dx = 0\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 54",
+            "problem": "Given \\(\\int_{-3}^{3} \\frac{f(x)}{1 + e^{x}}\\,dx = 4\\) and \\(\\int_{-3}^{3} f(x)\\,dx = 10\\). Evaluate \\(\\int_{-3}^{3} \\frac{f(x)}{1 + e^{-x}}\\,dx\\).",
+            "steps": [
+              "Given: \\(\\int_{-3}^{3} \\frac{f(x)}{1 + e^{x}}\\,dx = 4\\) and \\(\\int_{-3}^{3} f(x)\\,dx = 10\\).\nTo find: \\(\\int_{-3}^{3} \\frac{f(x)}{1 + e^{-x}}\\,dx\\).\nMethod: \\(f\\) is not known, so we cannot integrate directly. Instead find an identity that links the three integrands, then use Property-IX (linearity).",
+              "Step 1: Key identity\n\\[\\dfrac{1}{1 + e^{-x}} = \\dfrac{e^{x}}{e^{x} + 1}\\]\n\\[\\dfrac{1}{1 + e^{x}} + \\dfrac{1}{1 + e^{-x}}\\]\n\\[= \\dfrac{1}{1 + e^{x}} + \\dfrac{e^{x}}{1 + e^{x}}\\]\n\\[= \\dfrac{1 + e^{x}}{1 + e^{x}} = 1\\]\nWhy: multiply top and bottom of \\(\\frac{1}{1 + e^{-x}}\\) by \\(e^{x}\\); then both fractions have denominator \\(1 + e^{x}\\).",
+              "Step 2: Multiply the identity by \\(f(x)\\)\n\\[\\dfrac{f(x)}{1 + e^{x}} + \\dfrac{f(x)}{1 + e^{-x}} = f(x)\\]\nWhy: this connects the unknown integrand with the two given ones.",
+              "Step 3: Integrate over \\([-3, 3]\\)\n\\[\\int_{-3}^{3} \\dfrac{f(x)}{1 + e^{x}}\\,dx\\]\n\\[\\; + \\int_{-3}^{3} \\dfrac{f(x)}{1 + e^{-x}}\\,dx\\]\n\\[= \\int_{-3}^{3} f(x)\\,dx\\]\nWhy: Property-IX: the integral of a sum is the sum of the integrals.",
+              "Step 4: Substitute the given values\n\\[4 + \\int_{-3}^{3} \\dfrac{f(x)}{1 + e^{-x}}\\,dx = 10\\]\n\\[\\int_{-3}^{3} \\dfrac{f(x)}{1 + e^{-x}}\\,dx = 10 - 4 = 6\\]\nWhy: the first integral is 4 and the right side is 10.",
+              "Check: \\(4 + 6 = 10\\) \\(\\checkmark\\). With a sample function (ours) \\(f(x) = x^{2} + 1\\), a numerical integration confirms that the two fractional integrals add up to \\(\\int_{-3}^{3} f(x)\\,dx = 24\\)."
+            ],
+            "answer": "\\(\\int_{-3}^{3} \\frac{f(x)}{1 + e^{-x}}\\,dx = 6\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 55",
+            "problem": "Evaluate \\(\\int_{-a}^{a} \\frac{x^{3}\\sin^{2}x}{x^{4} + 2x^{2} + 1}\\,dx\\).",
+            "steps": [
+              "Given: \\(\\int_{-a}^{a} \\frac{x^{3}\\sin^{2}x}{x^{4} + 2x^{2} + 1}\\,dx\\).\nTo find: its value.\nMethod: the limits are symmetric, \\(-a\\) to \\(a\\), so first test whether the integrand is even or odd (Property-V). Finding an antiderivative here would be very hard.",
+              "Step 1: Test \\(f(-x)\\)\n\\[f(x) = \\dfrac{x^{3}\\sin^{2}x}{x^{4} + 2x^{2} + 1}\\]\n\\[f(-x) = \\dfrac{(-x)^{3}\\sin^{2}(-x)}{(-x)^{4} + 2(-x)^{2} + 1}\\]\n\\[= \\dfrac{-x^{3}\\sin^{2}x}{x^{4} + 2x^{2} + 1} = -f(x)\\]\nWhy: \\((-x)^{3} = -x^{3}\\), \\(\\sin(-x) = -\\sin x\\) so \\(\\sin^{2}(-x) = \\sin^{2}x\\), and even powers of \\(-x\\) equal those of \\(x\\). So \\(f\\) is odd.",
+              "Step 2: Apply Property-V (odd function)\n\\[\\int_{-a}^{a} \\dfrac{x^{3}\\sin^{2}x}{x^{4} + 2x^{2} + 1}\\,dx = 0\\]\nWhy: this shows that \\(f(x)\\) is odd over the symmetric interval \\([-a, a]\\); the part on \\([-a, 0]\\) cancels the part on \\([0, a]\\).",
+              "Check: odd \\(\\times\\) even \\(\\div\\) even is odd: \\(x^{3}\\) odd, \\(\\sin^{2}x\\) even, \\(x^{4} + 2x^{2} + 1 = (x^{2} + 1)^{2}\\) even and never 0. For \\(a = 2\\) a numerical integration gives 0. \\(\\checkmark\\)"
+            ],
+            "answer": "\\(\\int_{-a}^{a} \\frac{x^{3}\\sin^{2}x}{x^{4} + 2x^{2} + 1}\\,dx = 0\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 56",
+            "problem": "Evaluate \\(\\int_{1}^{3} f(x)\\,dx\\).",
+            "steps": [
+              "Given (stated inside the book's solution): \\(\\int_{0}^{2} f(x)\\,dx = 4\\) and \\(f(2 - x) = f(x) = f(-x)\\).\nTo find: \\(\\int_{1}^{3} f(x)\\,dx\\).\nMethod: Property-VI gives \\(\\int_{0}^{1} f\\); the substitution \\(x = 2 - t\\) moves \\([1, 3]\\) to \\([-1, 1]\\); then \\(f\\) even (Property-V) finishes it.",
+              "Step 1: Property-VI with \\(a = 2\\)\n\\[f(2 - x) = f(x)\\]\n\\[\\Rightarrow \\int_{0}^{2} f(x)\\,dx = 2\\int_{0}^{1} f(x)\\,dx\\]\n\\[4 = 2\\int_{0}^{1} f(x)\\,dx\\]\n\\[\\Rightarrow \\int_{0}^{1} f(x)\\,dx = 2\\]\nWhy: \\(f(a - x) = f(x)\\) with \\(a = 2\\), so the integral is twice the integral over the first half \\([0, 1]\\).",
+              "Step 2: Substitute \\(x = 2 - t\\)\n\\[x = 2 - t,\\quad dx = -dt\\]\n\\[x = 1:\\ t = 1;\\qquad x = 3:\\ t = -1\\]\n\\[\\int_{1}^{3} f(x)\\,dx = \\int_{1}^{-1} f(2 - t)(-dt)\\]\n\\[= -\\int_{-1}^{1} f(2 - t)(-dt)\\]\n\\[= \\int_{-1}^{1} f(2 - t)\\,dt\\]\nWhy: \\(dx = -dt\\); new limits \\(t = 2 - 1 = 1\\) and \\(t = 2 - 3 = -1\\); Property-II swaps the limits and removes one minus sign.",
+              "Step 3: Use \\(f(2 - x) = f(x)\\)\n\\[= \\int_{-1}^{1} f(2 - x)\\,dx\\]\n\\[= \\int_{-1}^{1} f(x)\\,dx\\]\nWhy: Property-I lets us write \\(x\\) for \\(t\\), and \\(f(2 - x) = f(x)\\) is given.",
+              "Step 4: \\(f\\) is even\n\\[= 2\\int_{0}^{1} f(x)\\,dx = 2(2) = 4\\]\nWhy: \\(f(-x) = f(x)\\) and the limits \\(-1\\) to 1 are symmetric (Property-V); \\(\\int_{0}^{1} f(x)\\,dx = 2\\) from Step 1.",
+              "Check: from \\(f(2 - x) = f(-x)\\), putting \\(y = -x\\) gives \\(f(y + 2) = f(y)\\): \\(f\\) repeats every 2 units. \\([1, 3]\\) is one full period, just like \\([0, 2]\\), so the integral is again 4. Sample function (ours): \\(f(x) = 2 + \\cos\\pi x\\) satisfies all the givens, and sympy gives \\(\\int_{1}^{3} f(x)\\,dx = 4\\). \\(\\checkmark\\)"
+            ],
+            "answer": "\\(\\int_{1}^{3} f(x)\\,dx = 4\\)",
+            "book_errors": [
+              "Evaluate \\(\\int_{1}^{3} f(x)\\,dx\\)."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The statement of Example 56 prints only Evaluate \\(\\int_{1}^{3} f(x)\\,dx\\); the data needed appear only inside the solution. The full question is: Given \\(\\int_{0}^{2} f(x)\\,dx = 4\\) and \\(f(2 - x) = f(x) = f(-x)\\), evaluate \\(\\int_{1}^{3} f(x)\\,dx\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\int_{a}^{a} f = 0\\); swapping limits changes the sign; the variable's letter does not matter.\n2. Split the interval where the formula changes: piecewise functions and absolute values.\n3. Property-IV, \\(x \\to a + b - x\\): for \\([0, 1]\\) it swaps \\(x\\) and \\(1 - x\\); for \\(a + b = \\frac{\\pi}{2}\\) it swaps \\(\\sin\\) and \\(\\cos\\). If the integral becomes \\(-I\\), then \\(I = 0\\); if it becomes a partner integral, add the two.\n4. Symmetric limits \\([-a, a]\\): even gives \\(2\\int_{0}^{a}\\), odd gives 0. Always test \\(f(-x)\\) first.\n5. Property-VI on \\([0, a]\\): \\(f(a - x) = -f(x)\\) gives 0; \\(f(a - x) = f(x)\\) gives \\(2\\int_{0}^{a/2}\\).\n6. Results: Example 49: \\(\\frac{14}{3}\\); 50: 55; 51: \\(\\frac{16}{315}\\); 52, 53, 55: 0; 54: 6; 56: 4."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Integrating \\(|x - 1|\\) as if the bars were not there. Split first at the zeros of the insides.\n2. After a substitution, keeping the old limits or losing the minus sign of \\(dx = -dt\\).\n3. Using Property-V on limits that are not symmetric, e.g. \\(\\int_{-1}^{2}\\).\n4. Calling a function odd without checking every factor: \\(\\sin^{2}x\\) is even, not odd.\n5. In Property-VI, testing \\(f(-x)\\) instead of \\(f(a - x)\\).\n6. Arithmetic slips when adding the pieces (the book itself prints 57 instead of 55 in Example 50)."
+          }
+        ]
+      }
+    }
+  ]
+}

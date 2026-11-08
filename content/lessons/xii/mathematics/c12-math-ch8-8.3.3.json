@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.3.3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.3.3",
+      "title": "8.3.3 Regula-Falsi Method (False Position Method)",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 241,
+          "pdf_to": 243,
+          "note": "Book p. 239-241: 8.3.3 Regula-Falsi Method, Figure 8.5, derivation of the formula, steps, note box, Example 4"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The Regula-Falsi Method (False Position) is a numerical method used to find a real root of a nonlinear equation \\(f(x) = 0\\). Like bisection method, this method also based directly on the Location of Root Theorem (LRT). Suppose the function \\(y = f(x)\\) is continuous on an interval \\([a, b]\\) and \\(f(a)f(b) < 0\\), then there exists at least one root in \\([a, b]\\). Without loss of generality, we assume that \\(f(a) < 0\\) and \\(f(b) > 0\\). The idea of Regula-Falsi is to approximate the root by drawing a straight line through the points \\((a, f(a))\\) and \\((b, f(b))\\) (called secant line) and finding where this line crosses the \\(x\\)-axis. This intersection is used often as a better approximation of the root than the simple midpoint \\(c = \\frac{a + b}{2}\\) used in the Bisection Method (see Figure 8.5).",
+            "book_errors": [
+              "this method also based"
+            ],
+            "bold": [
+              "secant line"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "\"this method also based\" should be \"this method is also based\"."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch8-fig-8-5-regula-falsi",
+            "alt": "Graph of an increasing curve y = f(x) that rises steeply and then flattens. Point (a, f(a)) is below the x-axis and (b, f(b)) above it. A dashed secant line joins them and cuts the x-axis at c1. A second secant from (a, f(a)) to (c1, f(c1)) cuts the axis at c2, closer to the exact root marked on the axis.",
+            "caption": "Figure 8.5: Regula-Falsi, secant lines through (a, f(a)) cutting the x-axis near the exact root (original drawing after the textbook's figure; plotted for f(x) = ln x - 1)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Slope of the secant line passing through the points \\((a, f(a))\\) and \\((b, f(b))\\) is \\(\\frac{f(b) - f(a)}{b - a}\\). Thus, the equation of secant line is given by:"
+          },
+          {
+            "type": "equation",
+            "latex": "y - f(a) = \\dfrac{f(b) - f(a)}{b - a}(x - a)",
+            "text_alt": "y minus f of a equals, f of b minus f of a over b minus a, times x minus a"
+          },
+          {
+            "type": "paragraph",
+            "text": "For the \\(x\\)-intercepts of the secant line, we substitute \\(y = 0\\) and \\(x = c\\) in the above equation to get:"
+          },
+          {
+            "type": "equation",
+            "latex": "c = a - \\dfrac{f(a)(b - a)}{f(b) - f(a)}",
+            "text_alt": "c equals a minus f of a times b minus a, over f of b minus f of a"
+          },
+          {
+            "type": "paragraph",
+            "text": "On simplifying:"
+          },
+          {
+            "type": "equation",
+            "latex": "c = \\dfrac{af(b) - bf(a)}{f(b) - f(a)}",
+            "text_alt": "c equals a f of b minus b f of a, over f of b minus f of a"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The small steps the book leaves out. Put \\(y = 0\\), \\(x = c\\) in the secant equation:\n\\[-f(a) = \\dfrac{f(b) - f(a)}{b - a}(c - a)\\]\n\\[c - a = -\\dfrac{f(a)(b - a)}{f(b) - f(a)}\\]\nNow take a common denominator:\n\\[c = \\dfrac{a\\big(f(b) - f(a)\\big) - f(a)(b - a)}{f(b) - f(a)}\\]\nThe numerator is \\(af(b) - af(a) - bf(a) + af(a) = af(b) - bf(a)\\), which gives the formula.\nWhy is it a good estimate? If \\(|f(a)|\\) is much smaller than \\(|f(b)|\\), the root is probably nearer to \\(a\\); the secant takes this into account, the midpoint does not."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Steps of the Regula-Falsi Method:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Check that continuity of \\(f\\) on \\([a, b]\\) and the condition \\(f(a)f(b) < 0\\).",
+              "Compute the value of \\(c\\) using the Regula-Falsi formula:\n\\[c = \\dfrac{af(b) - bf(a)}{f(b) - f(a)}\\]",
+              "Check the function value \\(f(c)\\):\n• If \\(|f(c)| \\approx 0\\), then \\(c\\) is the desired root.\n• Otherwise, determine the subinterval containing the root:\n◦ If \\(f(a) \\cdot f(c) < 0\\), the root lies in \\([a, c]\\). Set \\(b = c\\).\n◦ If \\(f(c) \\cdot f(b) < 0\\), the root lies in \\([c, b]\\). Set \\(a = c\\).",
+              "Repeat Steps 2–3 until \\(|f(c)|\\) is less than the desired tolerance."
+            ],
+            "book_errors": [
+              "Check that continuity of"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Step 1 prints \"Check that continuity of \\(f\\)\"; it should read \"Check the continuity of \\(f\\) on \\([a, b]\\) and the condition \\(f(a)f(b) < 0\\).\""
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "The Regula-Falsi method guarantees that, after a finite number of steps, there exists some \\(c \\in \\,]a, b[\\) such that \\(|f(c)| \\approx 0\\) upto the desired accuracy."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Bisection and Regula-Falsi differ only in Step 2: the midpoint is replaced by the secant's x-intercept. Steps 1, 3 and 4 are the same.\nOften one end never moves (in Example 4, \\(b = 3\\) stays fixed), because the curve bends the same way over the whole interval and the secant always lands on the same side of the root.\nWrite negative values in brackets when substituting: \\(-b f(a)\\) with \\(f(a) = -8\\) is \\(-(3)(-8) = +24\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "Use Regula-Falsi method to find a root of \\(f(x) = x^3 - 3x - 10\\) within the interval \\([2, 3]\\) accurate up to two decimal places.",
+            "steps": [
+              "Given: \\(f(x) = x^3 - 3x - 10\\) on \\([2, 3]\\).\nTo find: a root accurate to 2 decimal places.\nMethod: Regula-Falsi. The secant through \\((a, f(a))\\) and \\((b, f(b))\\) cuts the x-axis at \\(c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\); keep the part with the sign change. Intermediate values to 4 decimals.",
+              "We set \\(a = 2\\), \\(b = 3\\)\n\\[f(2) = -8 < 0,\\quad f(3) = 8 > 0\\]\n\\(\\Rightarrow f\\) has a root in \\([2, 3]\\).\nWhy: sign change (LRT).",
+              "Continuity\n\\[f(c) = \\lim_{x \\to c}(x^3 - 3x - 10)\\]\nfor every \\(c \\in [2, 3]\\) \\(\\Rightarrow f\\) is continuous on \\([2, 3]\\).\nWhy: the LRT needs a continuous function.",
+              "Regula-Falsi formula\n\\[c = \\dfrac{af(b) - bf(a)}{f(b) - f(a)}\\]\nWhy: this is the x-intercept of the secant line (derived above).",
+              "Iteration 1: \\(a = 2,\\ b = 3\\)\n\\[c = \\dfrac{(2)(8) - (3)(-8)}{(8) - (-8)}\\]\n\\[= \\dfrac{16 + 24}{16} = 2.5\\]\n\\[f(2.5) = (2.5)^3 - 3(2.5) - 10\\]\n\\[= -1.8750 < 0\\]\nSince \\(f(2.5)\\,f(3) < 0\\), the root lies in \\([2.5, 3]\\).\nWhy: \\(f(2.5)\\) is negative like \\(f(2)\\), so \\(a\\) moves to 2.5. (Here \\(f(a) = -f(b)\\), so the secant cuts exactly at the midpoint.)",
+              "Iteration 2: \\(a = 2.5,\\ b = 3\\)\n\\[f(a) = f(2.5) = -1.8750\\]\n\\[f(b) = f(3) = 8\\]\n\\[c = \\dfrac{(2.5)(8) - (3)(-1.875)}{(8) - (-1.875)}\\]\n\\[= 2.5949\\]\n\\[f(2.5949) = -0.3119 < 0\\]\nSince \\(f(2.5949)\\,f(3) < 0\\), the root lies in the interval \\([2.5949, 3]\\).\nWhy: \\(f(c)\\) is negative like \\(f(a)\\), so \\(a\\) is replaced by \\(c\\); \\(b = 3\\) stays.",
+              "Iteration 3: \\(a = 2.5949,\\ b = 3\\)\n\\[f(a) = f(2.5949) = -0.3119\\]\n\\[f(b) = f(3) = 8\\]\n\\[c = \\dfrac{(2.5949)(8) - (3)(-0.3119)}{(8) - (-0.3119)}\\]\n\\[= 2.6101\\]\n\\[f(2.6101) = -0.0487 < 0\\]\nSince \\(f(2.6101)\\,f(3) < 0\\), the root lies in the interval \\([2.6101, 3]\\).\nWhy: \\(f(c)\\) is negative like \\(f(a)\\), so \\(a\\) is replaced by \\(c\\); \\(b = 3\\) stays.",
+              "Iteration 4: \\(a = 2.6101,\\ b = 3\\)\n\\[f(a) = -0.0487,\\quad f(b) = 8\\]\n\\[c = \\dfrac{(2.6101)(8) - (3)(-0.0487)}{(8) - (-0.0487)}\\]\n\\[= 2.6125\\]\n\\[f(2.6125) = -0.0068 < 0\\]\nSince \\(|f(2.6125)| = |-0.0068| = 0.0068 \\approx 0.01\\) \\(\\Rightarrow\\) 2.6125 is a root.\nWhy: the book stops here (see the correction below).",
+              "Final root\n\\[x \\approx 2.61\\]\ncorrect to 2 decimal places.",
+              "Check:\n\\[f(2.605) = -0.1374 < 0\\]\n\\[f(2.615) = 0.0370 > 0\\]\nThe root lies between 2.605 and 2.615, so it rounds to 2.61, the same root as bisection found in Example 3, but in 4 iterations instead of 8."
+            ],
+            "answer": "\\(x \\approx 2.61\\) (correct to 2 decimal places)",
+            "book_errors": [
+              "\\(|f(2.6125)| = |-0.0068| = 0.0068 \\approx 0.01\\)"
+            ]
+          },
+          {
+            "type": "table",
+            "header": [
+              "n",
+              "\\([a, b]\\)",
+              "\\(c\\)",
+              "\\(f(c)\\)"
+            ],
+            "rows": [
+              [
+                "1",
+                "\\([2, 3]\\)",
+                "\\(2.5\\)",
+                "\\(-1.8750\\)"
+              ],
+              [
+                "2",
+                "\\([2.5, 3]\\)",
+                "\\(2.5949\\)",
+                "\\(-0.3119\\)"
+              ],
+              [
+                "3",
+                "\\([2.5949, 3]\\)",
+                "\\(2.6101\\)",
+                "\\(-0.0487\\)"
+              ],
+              [
+                "4",
+                "\\([2.6101, 3]\\)",
+                "\\(2.6125\\)",
+                "\\(-0.0068\\)"
+              ],
+              [
+                "5",
+                "\\([2.6125, 3]\\)",
+                "\\(2.6128\\)",
+                "\\(-0.0015\\)"
+              ]
+            ],
+            "caption": "Example 4 iterations in one table (our summary; row 5 is the extra step required by the 0.005 rule)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book stops at \\(|f(2.6125)| = 0.0068 \\approx 0.01\\), but the 8.3.1 rule for 2 decimal places is \\(|f(c)| < 0.005\\). One more iteration: \\(c = \\frac{(2.6125)(8) - (3)(-0.0068)}{8 - (-0.0068)} = 2.6128\\), \\(f(2.6128) = -0.0015\\), and \\(0.0015 < 0.005\\). The final root \\(x \\approx 2.61\\) is unchanged."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Regula-Falsi needs the same start as bisection: \\(f\\) continuous on \\([a, b]\\), \\(f(a)f(b) < 0\\).\n2. New estimate: \\(c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\), the x-intercept of the secant line.\n3. Keep the part where the sign changes; often one end stays fixed.\n4. It is usually faster than bisection (Example 4: 4 to 5 iterations against 8 to 11)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Sign slips with negative values in the formula: always use brackets, e.g. \\(-(3)(-0.3119) = +0.9357\\).\n2. Writing the formula as \\(\\frac{af(a) - bf(b)}{f(b) - f(a)}\\): in the numerator \\(a\\) goes with \\(f(b)\\) and \\(b\\) with \\(f(a)\\).\n3. Expecting both ends to move as in bisection; in Regula-Falsi one end may stay the same for every step."
+          }
+        ]
+      }
+    }
+  ]
+}

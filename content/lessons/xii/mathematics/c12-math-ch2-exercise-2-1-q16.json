@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-1-Q16",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-1-q16",
+      "title": "Question 16",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 43,
+          "note": "Exercise 2.1, Question 16 (i)-(iv): derivatives with inverse trigonometric functions; 'Point to Note' box beside Q16; book p. 41. No printed answers."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "16(i)",
+            "prompt": "16 (i) Differentiate w.r.t. the variables involved: \\(\\sin^{-1}\\left(\\frac{x}{a}\\right)\\)",
+            "explanation": "An inverse sine of the inner function \\(\\frac{x}{a}\\) (\\(a\\) a constant).\nUse \\(\\frac{d}{du}(\\sin^{-1}u) = \\frac{1}{\\sqrt{1 - u^2}}\\) with the chain rule.\nPlan: \\(u = \\frac{x}{a}\\), differentiate, simplify the root (take \\(a > 0\\)).",
+            "steps": [
+              "Given: \\(y = \\sin^{-1}\\left(\\frac{x}{a}\\right)\\), \\(a > 0\\), \\(-a < x < a\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: chain rule with formula (i) of section 2.4.",
+              "Substitution\n\\[u = \\dfrac{x}{a},\\quad \\dfrac{du}{dx} = \\dfrac{1}{a}\\]\nWhy: \\(a\\) is a constant.",
+              "Chain rule\n\\[\\dfrac{dy}{dx} = \\dfrac{1}{\\sqrt{1 - \\frac{x^2}{a^2}}} \\cdot \\dfrac{1}{a}\\]\nWhy: \\(\\frac{dy}{du} = \\frac{1}{\\sqrt{1 - u^2}}\\), times \\(\\frac{du}{dx}\\).",
+              "Simplify the root\n\\[\\sqrt{1 - \\dfrac{x^2}{a^2}} = \\dfrac{\\sqrt{a^2 - x^2}}{a}\\]\n\\[\\dfrac{dy}{dx} = \\dfrac{a}{\\sqrt{a^2 - x^2}} \\cdot \\dfrac{1}{a} = \\dfrac{1}{\\sqrt{a^2 - x^2}}\\]\nWhy: \\(\\sqrt{a^2} = a\\) because \\(a > 0\\). (If \\(a < 0\\), \\(\\sqrt{a^2} = -a\\) and the answer becomes \\(-\\frac{1}{\\sqrt{a^2 - x^2}}\\).)",
+              "Check at x = 0\n\\[\\dfrac{1}{\\sqrt{a^2}} = \\dfrac{1}{a}\\]\nWhy: near 0, \\(\\sin^{-1}u \\approx u = \\frac{x}{a}\\), slope \\(\\frac{1}{a}\\)."
+            ],
+            "final_answer": "\\(\\frac{d}{dx}\\sin^{-1}\\left(\\frac{x}{a}\\right) = \\frac{1}{\\sqrt{a^2 - x^2}}\\) (for \\(a > 0\\))"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "16(ii)",
+            "prompt": "16 (ii) Differentiate w.r.t. the variables involved: \\(\\csc^{-1}\\left(\\frac{x^2 + 1}{x^2 - 1}\\right)\\)",
+            "explanation": "An inverse cosecant of a fraction: use formula (vi) of section 2.4 with the chain rule.\n\\(\\frac{d}{du}(\\csc^{-1}u) = -\\frac{1}{|u|\\sqrt{u^2 - 1}}\\), \\(u = \\frac{x^2 + 1}{x^2 - 1}\\).\nPlan: find \\(\\frac{du}{dx}\\), simplify \\(|u|\\sqrt{u^2 - 1}\\), multiply; keep the absolute values.",
+            "steps": [
+              "Given: \\(y = \\csc^{-1}\\left(\\frac{x^2 + 1}{x^2 - 1}\\right)\\), \\(x \\neq 0, \\pm 1\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: chain rule, \\(\\frac{dy}{dx} = -\\frac{1}{|u|\\sqrt{u^2 - 1}}\\cdot\\frac{du}{dx}\\).",
+              "du/dx by the quotient rule\n\\[\\dfrac{du}{dx} = \\dfrac{2x(x^2 - 1) - (x^2 + 1)2x}{(x^2 - 1)^2}\\]\n\\[= \\dfrac{-4x}{(x^2 - 1)^2}\\]\nWhy: the top is \\(2x^3 - 2x - 2x^3 - 2x = -4x\\).",
+              "The root\n\\[u^2 - 1 = \\dfrac{(x^2 + 1)^2 - (x^2 - 1)^2}{(x^2 - 1)^2}\\]\n\\[= \\dfrac{4x^2}{(x^2 - 1)^2}\\]\n\\[\\sqrt{u^2 - 1} = \\dfrac{2|x|}{|x^2 - 1|}\\]\nWhy: \\((A + B)^2 - (A - B)^2 = 4AB\\) with \\(A = x^2\\), \\(B = 1\\); \\(\\sqrt{p^2} = |p|\\).",
+              "The modulus of u\n\\[|u| = \\dfrac{x^2 + 1}{|x^2 - 1|}\\]\n\\[|u|\\sqrt{u^2 - 1} = \\dfrac{2|x|(x^2 + 1)}{(x^2 - 1)^2}\\]\nWhy: \\(x^2 + 1 > 0\\); \\(|x^2 - 1|^2 = (x^2 - 1)^2\\).",
+              "Chain rule\n\\[\\dfrac{dy}{dx} = -\\dfrac{(x^2 - 1)^2}{2|x|(x^2 + 1)} \\cdot \\dfrac{-4x}{(x^2 - 1)^2}\\]\n\\[= \\dfrac{2x}{|x|(1 + x^2)}\\]\nWhy: the minus signs cancel and \\((x^2 - 1)^2\\) cancels.",
+              "Write without the modulus\n\\[x > 0:\\ \\dfrac{dy}{dx} = \\dfrac{2}{1 + x^2}\\]\n\\[x < 0:\\ \\dfrac{dy}{dx} = -\\dfrac{2}{1 + x^2}\\]\nWhy: \\(\\frac{x}{|x|} = 1\\) for \\(x > 0\\) and \\(-1\\) for \\(x < 0\\).",
+              "Check another way\n\\[y = \\sin^{-1}w,\\quad w = \\dfrac{x^2 - 1}{x^2 + 1}\\]\n\\[\\dfrac{dw}{dx} = \\dfrac{4x}{(x^2 + 1)^2},\\ \\sqrt{1 - w^2} = \\dfrac{2|x|}{x^2 + 1}\\]\n\\[\\dfrac{dy}{dx} = \\dfrac{x^2 + 1}{2|x|} \\cdot \\dfrac{4x}{(x^2 + 1)^2} = \\dfrac{2x}{|x|(x^2 + 1)}\\]\nWhy: \\(\\csc^{-1}u = \\sin^{-1}\\frac{1}{u}\\). Same result; sympy also confirms it at \\(x = \\pm\\frac{1}{2}, 2, -3\\)."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = \\frac{2x}{|x|(1 + x^2)}\\), i.e. \\(\\frac{2}{1 + x^2}\\) for \\(x > 0\\) and \\(-\\frac{2}{1 + x^2}\\) for \\(x < 0\\) (\\(x \\neq 0, \\pm 1\\))"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The 'Point to Note' box beside Question 16 says \\(\\left|\\frac{x^2 + 1}{x^2 - 1}\\right| = \\frac{x^2 + 1}{x^2 - 1} > 1\\) for \\(x \\in (-\\infty, -1) \\cup (1, \\infty)\\) (true) and that \\(\\frac{x^2 + 1}{x^2 - 1} < -1\\) has no solution. The second statement is wrong: for \\(0 < |x| < 1\\) the denominator is negative, e.g. \\(x = \\frac{1}{2}\\) gives \\(\\frac{5/4}{-3/4} = -\\frac{5}{3} < -1\\). In fact \\(\\frac{x^2 + 1}{x^2 - 1} \\leq -1\\) for all \\(|x| < 1\\) (equal to \\(-1\\) only at \\(x = 0\\)). So the function is defined for every \\(x \\neq \\pm 1\\), and the derivative \\(\\frac{2x}{|x|(1 + x^2)}\\) holds for all \\(x \\neq 0, \\pm 1\\), not only for \\(|x| > 1\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "16(iii)",
+            "prompt": "16 (iii) Differentiate w.r.t. the variables involved: \\(\\cot^{-1}\\left(\\sqrt{x}\\right) + \\sqrt{\\cot^{-1} x}\\)",
+            "explanation": "Two composite terms with the layers in opposite order.\n\\(\\cot^{-1}(\\sqrt{x})\\): outer \\(\\cot^{-1}\\), inner \\(\\sqrt{x}\\). \\(\\sqrt{\\cot^{-1}x}\\): outer root, inner \\(\\cot^{-1}x\\).\nPlan: chain rule on each, using \\(\\frac{d}{du}(\\cot^{-1}u) = -\\frac{1}{1 + u^2}\\), then add.",
+            "steps": [
+              "Given: \\(y = \\cot^{-1}(\\sqrt{x}) + \\sqrt{\\cot^{-1}x}\\), \\(x > 0\\).\nTo find: \\(\\frac{dy}{dx}\\).\nMethod: sum rule and chain rule.",
+              "First term\n\\[\\dfrac{d}{dx}\\cot^{-1}(\\sqrt{x}) = -\\dfrac{1}{1 + x} \\cdot \\dfrac{1}{2\\sqrt{x}}\\]\n\\[= -\\dfrac{1}{2\\sqrt{x}(1 + x)}\\]\nWhy: \\(-\\frac{1}{1 + u^2}\\) with \\(u = \\sqrt{x}\\), so \\(u^2 = x\\); \\((\\sqrt{x})' = \\frac{1}{2\\sqrt{x}}\\).",
+              "Second term\n\\[\\dfrac{d}{dx}(\\cot^{-1}x)^{1/2}\\]\n\\[= \\dfrac{1}{2\\sqrt{\\cot^{-1}x}} \\cdot \\left(-\\dfrac{1}{1 + x^2}\\right)\\]\nWhy: outer \\(w^{1/2}\\) with \\(w = \\cot^{-1}x\\); \\(\\cot^{-1}x > 0\\) always (range \\((0, \\pi)\\)), so the root is fine.",
+              "Add\n\\[\\dfrac{dy}{dx} = -\\dfrac{1}{2\\sqrt{x}(1 + x)}\\]\n\\[\\quad - \\dfrac{1}{2(1 + x^2)\\sqrt{\\cot^{-1}x}}\\]\nWhy: sum rule.",
+              "Check the sign\n\\[\\text{both terms} < 0\\]\nWhy: \\(\\cot^{-1}\\) is a decreasing function, so both terms decrease as \\(x\\) grows; a negative derivative is expected."
+            ],
+            "final_answer": "\\(\\frac{dy}{dx} = -\\frac{1}{2\\sqrt{x}(1 + x)} - \\frac{1}{2(1 + x^2)\\sqrt{\\cot^{-1}x}}\\), \\(x > 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "16(iv)",
+            "prompt": "16 (iv) Differentiate w.r.t. the variables involved: \\((\\tan t)^{-1} + \\frac{1}{\\tan^{-1} t}\\)",
+            "explanation": "The variable is \\(t\\). Read the notation carefully: \\((\\tan t)^{-1} = \\frac{1}{\\tan t} = \\cot t\\), but \\(\\tan^{-1}t\\) is the inverse tangent.\nSo \\(y = \\cot t + (\\tan^{-1}t)^{-1}\\).\nPlan: \\((\\cot t)' = -\\csc^2 t\\); chain rule on \\((\\tan^{-1}t)^{-1}\\) with \\((\\tan^{-1}t)' = \\frac{1}{1 + t^2}\\).",
+            "steps": [
+              "Given: \\(y = (\\tan t)^{-1} + \\frac{1}{\\tan^{-1}t}\\), \\(t \\neq 0\\).\nTo find: \\(\\frac{dy}{dt}\\).\nMethod: rewrite each term, then differentiate term by term.",
+              "Rewrite\n\\[(\\tan t)^{-1} = \\cot t\\]\n\\[\\dfrac{1}{\\tan^{-1}t} = (\\tan^{-1}t)^{-1}\\]\nWhy: a power \\(-1\\) on a bracket means 'one over'; the \\(^{-1}\\) on \\(\\tan^{-1}\\) means inverse function.",
+              "First term\n\\[\\dfrac{d}{dt}(\\cot t) = -\\csc^2 t\\]\nWhy: Question 1(c).",
+              "Second term\n\\[\\dfrac{d}{dt}(\\tan^{-1}t)^{-1} = -(\\tan^{-1}t)^{-2} \\cdot \\dfrac{1}{1 + t^2}\\]\n\\[= -\\dfrac{1}{(1 + t^2)(\\tan^{-1}t)^2}\\]\nWhy: power rule on the outer \\(w^{-1}\\), \\(w = \\tan^{-1}t\\), times \\(\\frac{dw}{dt} = \\frac{1}{1 + t^2}\\).",
+              "Add\n\\[\\dfrac{dy}{dt} = -\\csc^2 t - \\dfrac{1}{(1 + t^2)(\\tan^{-1}t)^2}\\]\nWhy: sum rule; this matches the sympy check."
+            ],
+            "final_answer": "\\(\\frac{dy}{dt} = -\\csc^2 t - \\frac{1}{(1 + t^2)(\\tan^{-1}t)^2}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

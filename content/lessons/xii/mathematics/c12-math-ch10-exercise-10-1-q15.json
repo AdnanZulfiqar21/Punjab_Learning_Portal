@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH10-EXERCISE-10-1-Q15",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch10",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch10/u-exercise-10-1-q15",
+      "title": "Question 15",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 280,
+          "pdf_to": 280,
+          "note": "Exercise 10.1, Question 15 (book p. 278); the book prints no answers for Exercise 10.1; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15",
+            "prompt": "15 Solve the following trigonometric equation: \\(\\sin^3 x\\cos x + \\cos^3 x\\sin x = \\frac{1}{2}\\)",
+            "explanation": "Both terms on the left contain \\(\\sin x\\cos x\\), so a common factor is waiting to be taken out.\nTo find: the solutions in \\([0, 2\\pi]\\) and the general solution.\nPlan: factorise, use \\(\\sin^2 x + \\cos^2 x = 1\\), turn \\(2\\sin x\\cos x\\) into \\(\\sin 2x\\), and solve \\(\\sin 2x = 1\\).",
+            "steps": [
+              "Given: \\(\\sin^3 x\\cos x + \\cos^3 x\\sin x = \\frac{1}{2}\\).\nTo find: the solutions in \\([0, 2\\pi]\\) and the general solution.\nMethod: take out \\(\\sin x\\cos x\\); the bracket left behind is \\(\\sin^2 x + \\cos^2 x = 1\\). Then the double-angle formula \\(\\sin 2x = 2\\sin x\\cos x\\) gives one simple equation.",
+              "Take out the common factor\n\\[\\sin x\\cos x(\\sin^2 x + \\cos^2 x) = \\tfrac{1}{2}\\]\n\\[\\sin x\\cos x \\cdot 1 = \\tfrac{1}{2}\\]\nWhy: \\(\\sin^3 x\\cos x = \\sin x\\cos x \\cdot \\sin^2 x\\) and \\(\\cos^3 x\\sin x = \\sin x\\cos x \\cdot \\cos^2 x\\); then \\(\\sin^2 x + \\cos^2 x = 1\\).",
+              "Use the double-angle formula\n\\[2\\sin x\\cos x = 1\\]\n\\[\\sin 2x = 1\\]\nWhy: multiply both sides by 2 to make \\(2\\sin x\\cos x\\), which is \\(\\sin 2x\\).",
+              "Solve \\(\\sin 2x = 1\\)\n\\[2x = \\tfrac{\\pi}{2} + 2n\\pi\\]\n\\[x = \\tfrac{\\pi}{4} + n\\pi\\]\nWhy: in one turn \\(\\sin\\theta = 1\\) only at \\(\\theta = \\frac{\\pi}{2}\\); the period of sine is \\(2\\pi\\). Dividing by 2 halves the step to \\(n\\pi\\).",
+              "Values in \\([0, 2\\pi]\\)\n\\[n = 0:\\ x = \\tfrac{\\pi}{4},\\qquad n = 1:\\ x = \\tfrac{5\\pi}{4}\\]\nWhy: \\(n = 2\\) gives \\(\\frac{9\\pi}{4} > 2\\pi\\).",
+              "Check: \\(x = \\frac{\\pi}{4}\\)\n\\[\\sin x\\cos x = \\tfrac{1}{\\sqrt{2}} \\cdot \\tfrac{1}{\\sqrt{2}} = \\tfrac{1}{2} \\;\\checkmark\\]\nWhy: the left side equals \\(\\sin x\\cos x\\). At \\(x = \\frac{5\\pi}{4}\\) both are \\(-\\frac{1}{\\sqrt{2}}\\), and the product is again \\(\\frac{1}{2}\\) \\(\\checkmark\\)."
+            ],
+            "final_answer": "In \\([0, 2\\pi]\\): \\(x = \\frac{\\pi}{4}, \\frac{5\\pi}{4}\\)\nGeneral solution \\(= \\left\\{\\frac{\\pi}{4} + n\\pi\\right\\}\\), \\(n \\in \\mathbb{Z}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 10.1. Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

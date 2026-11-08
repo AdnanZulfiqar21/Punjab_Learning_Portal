@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q10",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 135,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 10: book p. 133-134; answers printed under 'EXERCISE 4.2' (book p. 303, PDF 305), numbered 2-29, matched by content"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10. Find the general solution of the differential equation \\(\\sec^2x\\tan y\\,dx + \\sec^2y\\tan x\\,dy = 0\\).",
+            "explanation": "Each term is (function of \\(x\\)) \\(\\times\\) (function of \\(y\\)), so dividing by \\(\\tan x\\tan y\\) separates the variables.\nPlan: divide, notice each numerator is the derivative of its denominator, integrate to logarithms, combine.",
+            "steps": [
+              "Given: \\(\\sec^2x\\tan y\\,dx + \\sec^2y\\tan x\\,dy = 0\\).\nTo find: the general solution.\nMethod: separable; divide every term by \\(\\tan x\\tan y\\), then use \\(\\int\\frac{f'}{f} = \\ln|f|\\).",
+              "Separate the variables\n\\[\\dfrac{\\sec^2x}{\\tan x}\\,dx + \\dfrac{\\sec^2y}{\\tan y}\\,dy = 0\\]\nWhy: dividing by \\(\\tan x\\tan y\\) leaves only \\(x\\) in the first term and only \\(y\\) in the second.",
+              "Integrate\n\\[\\ln|\\tan x| + \\ln|\\tan y| = \\ln|C|\\]\nWhy: \\(\\frac{d}{dx}\\tan x = \\sec^2x\\), so \\(\\int\\frac{\\sec^2x}{\\tan x}\\,dx = \\ln|\\tan x|\\); the same for \\(y\\). Constant written as \\(\\ln|C|\\).",
+              "Combine and remove the logs\n\\[\\ln|\\tan x\\tan y| = \\ln|C|\\]\n\\[\\tan x\\tan y = C\\]\nWhy: \\(\\ln a + \\ln b = \\ln ab\\); equal logs give equal arguments (sign absorbed in \\(C\\)).",
+              "Check\nDifferentiate \\(\\tan x\\tan y = C\\):\n\\[\\sec^2x\\tan y + \\tan x\\sec^2y\\dfrac{dy}{dx} = 0\\]\nMultiply by \\(dx\\): \\(\\sec^2x\\tan y\\,dx + \\sec^2y\\tan x\\,dy = 0\\), the given equation."
+            ],
+            "final_answer": "\\(\\tan x\\tan y = C\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

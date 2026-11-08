@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-1-Q12",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-1-q12",
+      "title": "Question 12",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 43,
+          "note": "Exercise 2.1, Question 12: differentiate y = sin^3(cos 2v) w.r.t. v; book p. 41. Unit 2 has no printed answers."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12",
+            "prompt": "12. Differentiate w.r.t. the variable involved: \\(y = \\sin^3(\\cos 2v)\\)",
+            "explanation": "The variable is \\(v\\). \\(y = [\\sin(\\cos 2v)]^3\\) has four layers: cube, sine, cosine, \\(2v\\).\nThe chain rule is applied once for each layer, from the outside in.\nPlan: substitutions \\(w = 2v\\), \\(u = \\cos w\\), \\(s = \\sin u\\), \\(y = s^3\\); multiply the four derivatives.",
+            "steps": [
+              "Given: \\(y = \\sin^3(\\cos 2v)\\).\nTo find: \\(\\frac{dy}{dv}\\).\nMethod: chain rule through four layers.",
+              "Name the layers\n\\[w = 2v,\\ u = \\cos w,\\ s = \\sin u,\\ y = s^3\\]\nWhy: \\(\\sin^3(\\cdot)\\) means \\([\\sin(\\cdot)]^3\\); each layer is a basic function.",
+              "Derivative of each layer\n\\[\\dfrac{dy}{ds} = 3s^2,\\quad \\dfrac{ds}{du} = \\cos u\\]\n\\[\\dfrac{du}{dw} = -\\sin w,\\quad \\dfrac{dw}{dv} = 2\\]\nWhy: power rule, \\((\\sin)' = \\cos\\), \\((\\cos)' = -\\sin\\), \\((2v)' = 2\\).",
+              "Multiply (chain rule)\n\\[\\dfrac{dy}{dv} = 3s^2 \\cdot \\cos u \\cdot (-\\sin w) \\cdot 2\\]\nWhy: \\(\\frac{dy}{dv} = \\frac{dy}{ds}\\cdot\\frac{ds}{du}\\cdot\\frac{du}{dw}\\cdot\\frac{dw}{dv}\\).",
+              "Put the layers back\n\\[= 3\\sin^2(\\cos 2v)\\cos(\\cos 2v)\\]\n\\[\\quad \\times (-\\sin 2v)(2)\\]\n\\[= -6\\sin 2v\\,\\sin^2(\\cos 2v)\\cos(\\cos 2v)\\]\nWhy: \\(s = \\sin(\\cos 2v)\\), \\(u = \\cos 2v\\), \\(w = 2v\\); \\(3 \\times 2 = 6\\) with the minus sign.",
+              "Check at v = 0\n\\[-6\\sin 0 \\cdots = 0\\]\nWhy: \\(\\cos 2v\\) has its maximum at \\(v = 0\\), so the inner layer is flat there and \\(y\\) must be flat too."
+            ],
+            "final_answer": "\\(\\frac{dy}{dv} = -6\\sin 2v\\,\\sin^2(\\cos 2v)\\cos(\\cos 2v)\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

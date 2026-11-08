@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 5: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5 Evaluate \\(\\int \\frac{3 - 16x}{4 + 5x - 6x^2}\\,dx\\).",
+            "explanation": "A proper rational function (degree 1 over degree 2) whose quadratic denominator factorises.\nThe factors \\(4 - 3x\\) and \\(1 + 2x\\) are different and linear: Case-I.\nPlan: factorise, find \\(A\\), \\(B\\) using the roots \\(x = \\frac{4}{3}\\) and \\(x = -\\frac{1}{2}\\), integrate with care for the inside coefficients.",
+            "steps": [
+              "Given: \\(\\int \\frac{3 - 16x}{4 + 5x - 6x^2}\\,dx\\).\nTo find: the integral.\nMethod: factorise the denominator, partial fractions (Case-I), and \\(\\int \\frac{dx}{ax + b} = \\frac{1}{a}\\ln|ax + b|\\).",
+              "Factorise the denominator\n\\[4 + 5x - 6x^2 = (4 - 3x)(1 + 2x)\\]\nWhy: Expand: \\(4 + 8x - 3x - 6x^2 = 4 + 5x - 6x^2\\).",
+              "Partial fractions\n\\[\\dfrac{3 - 16x}{(4 - 3x)(1 + 2x)} = \\dfrac{A}{4 - 3x} + \\dfrac{B}{1 + 2x}\\]\n\\[3 - 16x = A(1 + 2x) + B(4 - 3x) \\quad (1)\\]\nWhy: One constant over each linear factor; multiply by the denominator.",
+              "Put \\(x = \\frac{4}{3}\\) in (1)\n\\[3 - \\dfrac{64}{3} = A\\left(1 + \\dfrac{8}{3}\\right)\\]\n\\[-\\dfrac{55}{3} = \\dfrac{11}{3}A\\]\n\\[A = -5\\]\nWhy: \\(x = \\frac{4}{3}\\) makes \\(4 - 3x = 0\\).",
+              "Put \\(x = -\\frac{1}{2}\\) in (1)\n\\[3 + 8 = B\\left(4 + \\dfrac{3}{2}\\right)\\]\n\\[11 = \\dfrac{11}{2}B\\]\n\\[B = 2\\]\nWhy: \\(x = -\\frac{1}{2}\\) makes \\(1 + 2x = 0\\).",
+              "Integrate\n\\[\\int \\left(\\dfrac{-5}{4 - 3x} + \\dfrac{2}{1 + 2x}\\right)dx\\]\n\\[= -5\\cdot\\dfrac{\\ln|4 - 3x|}{-3} + 2\\cdot\\dfrac{\\ln|1 + 2x|}{2}\\]\n\\[= \\dfrac{5}{3}\\ln|4 - 3x| + \\ln|2x + 1| + c\\]\nWhy: \\(\\int \\frac{dx}{ax + b} = \\frac{1}{a}\\ln|ax + b|\\); here \\(a = -3\\) and \\(a = 2\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\,\\dfrac{5}{3}\\ln|4 - 3x| = \\dfrac{5}{3}\\cdot\\dfrac{-3}{4 - 3x} = \\dfrac{-5}{4 - 3x}\\]\n\\[\\dfrac{d}{dx}\\,\\ln|2x + 1| = \\dfrac{2}{2x + 1}\\]\nWhy: Both derivatives give back the two partial fractions \\(\\checkmark\\)."
+            ],
+            "final_answer": "\\(\\frac{5}{3}\\ln|4 - 3x| + \\ln|2x + 1| + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the answers at the end of the book (page 301), the answers of Exercise 3.4 are printed under the wrong heading \"Exercise 3.6\". The answer of this question is item (v) of that block: \\(\\frac{5}{3}\\ln|4 - 3x| + \\ln|2x + 1| + c\\). That answer is correct. The block headed \"Exercise 3.4\" (page 301) belongs to a different exercise."
+          }
+        ]
+      }
+    }
+  ]
+}

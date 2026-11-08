@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-7-Q3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-7-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 72,
+          "pdf_to": 72,
+          "note": "Exercise 2.7, Question 3 (book page 70). The book prints no answers for Unit 2; results verified with sympy."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3",
+            "prompt": "3. A closed cylindrical tank is to be constructed to hold \\(54\\pi\\) liters of water. Find the dimensions that minimize the construction cost of the tank.",
+            "explanation": "A minimum problem: least cost means least sheet metal, i.e. least total surface area.\nGiven: the volume \\(54\\pi\\) litres \\(= 54\\pi\\text{ dm}^{3}\\). To find: radius and height.\nPlan: use the volume to write \\(h\\) in terms of \\(r\\), minimize \\(S = 2\\pi r^{2} + 2\\pi rh\\), and give the answer in dm and cm.",
+            "steps": [
+              "Given: a closed cylinder holding \\(54\\pi\\) litres.\nTo find: the radius \\(r\\) and height \\(h\\) for least construction cost.\nMethod: assume each square unit of metal costs the same, so the cost is least when the total surface area (two ends + curved surface) is least. Then the derivative tests.",
+              "Units\n\\[1\\text{ litre} = 1\\text{ dm}^{3}\\]\n\\[V = 54\\pi\\text{ dm}^{3}\\]\nWhy: working in decimetres keeps the numbers small; we convert to cm at the end.",
+              "Constraint (volume)\n\\[\\pi r^{2}h = 54\\pi\\]\n\\[h = \\dfrac{54}{r^{2}} \\quad \\text{...(1)}\\]\nWhy: the volume is fixed, so it links \\(h\\) to \\(r\\).",
+              "Surface area in one variable\n\\[S = 2\\pi r^{2} + 2\\pi rh \\quad \\text{...(2)}\\]\n\\[S = 2\\pi r^{2} + 2\\pi r\\cdot\\dfrac{54}{r^{2}}\\]\n\\[S = 2\\pi r^{2} + \\dfrac{108\\pi}{r}\\]\nWhy: a closed tank has a top and a bottom (\\(2\\pi r^{2}\\)) and a curved surface (\\(2\\pi rh\\)).",
+              "Critical point\n\\[\\dfrac{dS}{dr} = 4\\pi r - \\dfrac{108\\pi}{r^{2}} \\quad \\text{...(3)}\\]\n\\[4\\pi r = \\dfrac{108\\pi}{r^{2}} \\Rightarrow r^{3} = 27\\]\n\\[r = 3\\text{ dm}\\]\nWhy: \\(\\frac{108\\pi}{r} = 108\\pi r^{-1}\\) has derivative \\(-108\\pi r^{-2}\\); cancel \\(4\\pi\\): \\(r^{3} = \\frac{108}{4} = 27\\).",
+              "Second derivative test\n\\[\\dfrac{d^{2}S}{dr^{2}} = 4\\pi + \\dfrac{216\\pi}{r^{3}}\\]\n\\[\\text{At } r = 3: \\ 4\\pi + 8\\pi = 12\\pi > 0\\]\nWhy: positive, so \\(S\\) (and the cost) is minimum at \\(r = 3\\) dm.",
+              "Height and check\n\\[h = \\dfrac{54}{3^{2}} = 6\\text{ dm}\\]\n\\[S_{\\min} = 18\\pi + 36\\pi = 54\\pi\\text{ dm}^{2}\\]\n\\[\\pi(3)^{2}(6) = 54\\pi\\ \\checkmark\\]\nWhy: from (1). The height equals the diameter (\\(h = 2r\\)), as always for a closed cylinder of least surface area (compare Example 32)."
+            ],
+            "final_answer": "Radius \\(r = 3\\) dm \\(= 30\\) cm and height \\(h = 6\\) dm \\(= 60\\) cm (height = diameter); least surface area \\(54\\pi\\text{ dm}^{2} \\approx 1.70\\text{ m}^{2}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

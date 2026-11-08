@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-EXERCISE-11-2-Q1-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/u-exercise-11-2-q1",
+      "title": "Question 1 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 294,
+          "pdf_to": 294,
+          "note": "Exercise 11.2, Question 1: book page 292 (Q1-Q2). The book prints no answers for Unit 11; every answer here is ours."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(i)",
+            "prompt": "1 (i) Find the first-order derivatives of the following vector-valued function with respect to \\(t\\): \\(\\mathbf{r}(t) = (t^2 + 1)\\,\\hat{i} + (t^3 + t^2 + 3t)\\,\\hat{j}\\)",
+            "explanation": "Yeh 2D vector function ka seedha derivative hai.\nDono components polynomials hain, is liye sirf power rule chahiye.\nRule: vector function ka derivative component by component (har hissa alag alag) liya jata hai.\nPlan: har component ko differentiate karenge aur nateeje ko wapas \\(\\hat{i}\\) aur \\(\\hat{j}\\) ke saath likhenge.\nYaad rahe: \\(\\hat{i}, \\hat{j}\\) constant vectors hain, in ka derivative nahin lena.",
+            "steps": [
+              "Diya gaya: \\(\\mathbf{r}(t) = (t^2 + 1)\\,\\hat{i} + (t^3 + t^2 + 3t)\\,\\hat{j}\\).\nMaloom karna: \\(\\mathbf{r}'(t)\\).\nTareeqa: 11.4 ki definition ke mutabiq \\(\\mathbf{r}'(t) = f_1'(t)\\,\\hat{i} + f_2'(t)\\,\\hat{j} + f_3'(t)\\,\\hat{k}\\): har component ko aam function ki tarah differentiate karein; unit vectors constant hain, apni jagah rehte hain.",
+              "Components pehchanein\n\\[f_1(t) = t^2 + 1\\]\n\\[f_2(t) = t^3 + t^2 + 3t\\]\nKyun: \\(\\hat{i}\\) ke saamne wala hissa pehla component hai aur \\(\\hat{j}\\) ke saamne wala doosra. Pehle inhein alag likh lene se ghalti ka imkaan kam hota hai.",
+              "Har component ko differentiate karein\n\\[f_1'(t) = 2t\\]\n\\[f_2'(t) = 3t^2 + 2t + 3\\]\nKyun: power rule \\(\\frac{d}{dt}t^n = nt^{n-1}\\): power aage aati hai aur ek kam ho jati hai. Constant 1 ka derivative 0 hai (jo cheez badalti nahin us ki rate of change zero), aur \\(3t\\) ka derivative 3.\nDhyan dein: \\(t^2 + 1\\) ka derivative \\(2t + 1\\) nahin, \\(2t\\) hai.",
+              "Wapas jorein\n\\[\\mathbf{r}'(t) = 2t\\,\\hat{i} + (3t^2 + 2t + 3)\\,\\hat{j}\\]\nKyun: 11.4: \\(\\mathbf{r}'(t) = f_1'(t)\\,\\hat{i} + f_2'(t)\\,\\hat{j}\\). Har derivative apne hi unit vector ke saath jata hai.",
+              "Tasdeeq \\(t = 1\\) par\n\\[\\mathbf{r}'(1) = 2\\,\\hat{i} + 8\\,\\hat{j}\\]\n\\(\\Delta t = 0.001\\) le kar difference quotient dekhein: \\(x\\) mein \\(0.002001\\) aur \\(y\\) mein \\(0.008004\\) ka farq aata hai; \\(0.001\\) se divide karein to taqreeban \\(2.001\\) aur \\(8.004\\) \\(\\checkmark\\).\nKyun: yahi derivative ki definition hai: chhote se waqt mein tabdeeli ko us waqt se divide karna."
+            ],
+            "final_answer": "\\(\\mathbf{r}'(t) = 2t\\,\\hat{i} + (3t^2 + 2t + 3)\\,\\hat{j}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kitab mein Exercise 11.2 ke jawab chhape hue nahin hain (balke poore Unit 11 ke nahin hain). Is page ka har jawab hamara apna hai: qadam ba qadam hal kiya gaya, computer algebra system (sympy) se alag se check kiya gaya, aur ek solution book se bhi milaya gaya. Aap apna kaam yahan wale hal se mila kar dekh sakte hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(ii)",
+            "prompt": "1 (ii) Find the first-order derivatives of the following vector-valued function with respect to \\(t\\): \\(\\mathbf{r}(t) = (t\\sin t - \\cos t)\\,\\hat{i} + (\\cot(t) + \\ln t)\\,\\hat{j} + (\\ln(1 + t^2))\\,\\hat{k}\\)",
+            "explanation": "Yeh 3D vector function hai, aur har component ke liye alag rule lagega.\n\\(\\hat{i}\\) mein product rule, \\(\\hat{j}\\) mein \\(\\cot t\\) aur \\(\\ln t\\) ke standard derivatives, aur \\(\\hat{k}\\) mein chain rule.\nSab se pehle hum har component ko alag kar ke dekhte hain ke us mein kaunsi shakal hai.\nPlan: component by component differentiate karna, phir wapas jorna.",
+            "steps": [
+              "Diya gaya: \\(\\mathbf{r}(t) = (t\\sin t - \\cos t)\\,\\hat{i} + (\\cot t + \\ln t)\\,\\hat{j} + \\ln(1 + t^2)\\,\\hat{k}\\).\nMaloom karna: \\(\\mathbf{r}'(t)\\).\nTareeqa: 11.4 ki definition ke mutabiq \\(\\mathbf{r}'(t) = f_1'(t)\\,\\hat{i} + f_2'(t)\\,\\hat{j} + f_3'(t)\\,\\hat{k}\\): har component ko aam function ki tarah differentiate karein; unit vectors constant hain, apni jagah rehte hain.",
+              "\\(\\hat{i}\\)-component: \\(t\\sin t\\) par product rule\n\\[\\tfrac{d}{dt}(t\\sin t) = 1 \\cdot \\sin t + t\\cos t\\]\n\\[\\tfrac{d}{dt}(-\\cos t) = -(-\\sin t) = \\sin t\\]\n\\[f_1'(t) = 2\\sin t + t\\cos t\\]\nKyun: \\(t\\sin t\\) do functions ka product hai, is liye \\((uv)' = u'v + uv'\\), jahan \\(u = t\\), \\(v = \\sin t\\). Aur \\(\\cos t\\) ka derivative \\(-\\sin t\\) hai; aage pehle se minus tha, to minus minus plus ban gaya.\nDhyan dein: yahan do \\(\\sin t\\) jama ho kar \\(2\\sin t\\) bante hain; aksar students ek \\(\\sin t\\) bhool jate hain.",
+              "\\(\\hat{j}\\)-component\n\\[f_2'(t) = -\\csc^2 t + \\dfrac{1}{t}\\]\nKyun: standard results: \\(\\frac{d}{dt}\\cot t = -\\csc^2 t\\) aur \\(\\frac{d}{dt}\\ln t = \\frac{1}{t}\\). Jama ka derivative derivatives ka jama hota hai.",
+              "\\(\\hat{k}\\)-component: chain rule\n\\[f_3'(t) = \\dfrac{1}{1 + t^2} \\cdot 2t = \\dfrac{2t}{1 + t^2}\\]\nKyun: \\(\\ln\\) ke andar sirf \\(t\\) nahin, poora \\(1 + t^2\\) hai, is liye chain rule: \\(\\frac{d}{dt}\\ln u = \\frac{u'}{u}\\), \\(u = 1 + t^2\\), \\(u' = 2t\\). Pehle bahar wale function (ln) ka derivative, phir andar wale ka.",
+              "Wapas jorein\n\\[\\mathbf{r}'(t) = (2\\sin t + t\\cos t)\\,\\hat{i}\\]\n\\[\\quad + \\left(\\dfrac{1}{t} - \\csc^2 t\\right)\\hat{j}\\]\n\\[\\quad + \\dfrac{2t}{1 + t^2}\\,\\hat{k}\\]\nKyun: 11.4 ka formula. Yeh wahan sahi hai jahan \\(\\mathbf{r}\\) defined hai: \\(t > 0\\) (\\(\\ln t\\) ke liye) aur \\(t \\ne \\pi, 2\\pi, \\dots\\) (\\(\\cot t\\) ke liye).",
+              "Tasdeeq \\(t = \\frac{\\pi}{2}\\) par\n\\(\\mathbf{r}'(\\frac{\\pi}{2}) = 2\\,\\hat{i} + \\left(\\frac{2}{\\pi} - 1\\right)\\hat{j} + \\frac{\\pi}{1 + \\pi^2/4}\\,\\hat{k}\\); computer algebra system bhi yahi derivative deta hai \\(\\checkmark\\).\nKyun: \\(\\sin\\frac{\\pi}{2} = 1\\), \\(\\cos\\frac{\\pi}{2} = 0\\), \\(\\csc\\frac{\\pi}{2} = 1\\); values rakhna aasan tha."
+            ],
+            "final_answer": "\\(\\mathbf{r}'(t) = (2\\sin t + t\\cos t)\\,\\hat{i} + \\left(\\frac{1}{t} - \\csc^2 t\\right)\\hat{j} + \\frac{2t}{1 + t^2}\\,\\hat{k}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1(iii)",
+            "prompt": "1 (iii) Find the first-order derivatives of the following vector-valued function with respect to \\(t\\): \\(\\mathbf{r}(t) = \\frac{2}{\\sqrt{1 - t^2}}\\,\\hat{i} + \\frac{\\sqrt{3}}{1 + t^2}\\,\\hat{k}\\)",
+            "explanation": "Yeh 3D function hai magar is mein \\(\\hat{j}\\) wala term hai hi nahin (yani woh component 0 hai).\nDono components \"constant upar, power neeche\" ki shakal mein hain, is liye inhein negative power bana kar chain rule lagayenge.\nRule: \\(\\frac{d}{dt}u^n = nu^{n-1}u'\\).\nPlan: pehle powers mein likhna, phir differentiate, phir jorna, aur batana ke jawab kahan sahi hai.",
+            "steps": [
+              "Diya gaya: \\(\\mathbf{r}(t) = \\frac{2}{\\sqrt{1 - t^2}}\\,\\hat{i} + \\frac{\\sqrt{3}}{1 + t^2}\\,\\hat{k}\\).\nMaloom karna: \\(\\mathbf{r}'(t)\\).\nTareeqa: 11.4 ki definition ke mutabiq \\(\\mathbf{r}'(t) = f_1'(t)\\,\\hat{i} + f_2'(t)\\,\\hat{j} + f_3'(t)\\,\\hat{k}\\): har component ko aam function ki tarah differentiate karein; unit vectors constant hain, apni jagah rehte hain.",
+              "Powers ki shakal mein likhein\n\\[f_1(t) = 2(1 - t^2)^{-1/2}\\]\n\\[f_2(t) = 0,\\quad f_3(t) = \\sqrt{3}\\,(1 + t^2)^{-1}\\]\nKyun: \\(\\frac{c}{u^n} = c\\,u^{-n}\\). Is shakal mein chain rule seedha lag jata hai, quotient rule ka lamba kaam nahin karna parta. \\(\\hat{j}\\) wala term na ho to \\(f_2 = 0\\), aur zero ka derivative bhi zero.",
+              "\\(\\hat{i}\\)-component\n\\[f_1'(t) = 2\\left(-\\tfrac{1}{2}\\right)(1 - t^2)^{-3/2}\\]\n\\[\\quad \\times (-2t)\\]\n\\[= \\dfrac{2t}{(1 - t^2)^{3/2}}\\]\nKyun: chain rule mein \\(u = 1 - t^2\\), \\(u' = -2t\\). Power \\(-\\frac{1}{2}\\) aage aayi aur ek kam ho kar \\(-\\frac{3}{2}\\) bani. \\(2 \\cdot (-\\frac{1}{2}) \\cdot (-2t) = 2t\\): do minus mil kar plus.\nDhyan dein: andar ka derivative \\(-2t\\) lagana mat bhooliye; isi se sign theek aata hai.",
+              "\\(\\hat{k}\\)-component\n\\[f_3'(t) = \\sqrt{3}\\,(-1)(1 + t^2)^{-2} \\cdot 2t\\]\n\\[= -\\dfrac{2\\sqrt{3}\\,t}{(1 + t^2)^2}\\]\nKyun: wahi rule, \\(u = 1 + t^2\\), \\(u' = 2t\\). Constant \\(\\sqrt{3}\\) bas aage likha rehta hai, us ka derivative nahin lena.",
+              "Wapas jorein\n\\[\\mathbf{r}'(t) = \\dfrac{2t}{(1 - t^2)^{3/2}}\\,\\hat{i}\\]\n\\[\\quad - \\dfrac{2\\sqrt{3}\\,t}{(1 + t^2)^2}\\,\\hat{k}\\]\n\\(-1 < t < 1\\) ke liye.\nKyun: \\(\\sqrt{1 - t^2}\\) real aur non-zero hona chahiye, yani \\(1 - t^2 > 0\\).",
+              "Tasdeeq \\(t = 0\\) par\n\\(\\mathbf{r}'(0) = \\mathbf{0}\\): \\(\\mathbf{r}\\) ke dono components \\(t\\) ke even functions hain (sirf \\(t^2\\) aata hai), is liye \\(t = 0\\) par un ke graphs bilkul flat (seedhe) hote hain \\(\\checkmark\\).\nKyun: even function ka graph \\(y\\)-axis ke dono taraf aaina (mirror) jaisa hota hai, is liye beech mein slope zero."
+            ],
+            "final_answer": "\\(\\mathbf{r}'(t) = \\frac{2t}{(1 - t^2)^{3/2}}\\,\\hat{i} - \\frac{2\\sqrt{3}\\,t}{(1 + t^2)^2}\\,\\hat{k}\\), jab \\(-1 < t < 1\\)."
+          }
+        ]
+      },
+      "variant_of": "C12-MATH-CH11-EXERCISE-11-2-Q1"
+    }
+  ]
+}

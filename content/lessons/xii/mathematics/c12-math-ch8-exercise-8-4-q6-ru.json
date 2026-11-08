@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-4-Q6-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-4-q6",
+      "title": "Question 6 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-EXERCISE-8-4-Q6",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 255,
+          "pdf_to": 255,
+          "note": "Exercise 8.4, Question 6 (book p. 253); answer key p. 307 (PDF 309)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6",
+            "prompt": "6. In a nonlinear electric circuit, the voltage \\(x\\) (in volts) across a component is modeled by \\(f(x) = -0.1x^{2} + 2x + 1\\). Use the Newton-Raphson Method with initial guess \\(x_0 = 15\\) to estimate the operating voltage at which the circuit reaches equilibrium. The equilibrium voltage is the voltage at which the net change in the circuit becomes zero, i.e., the circuit reaches a stable operating point.",
+            "explanation": "Equilibrium ka matlab hai net change zero, yani humein f(x) = 0 hal karni hai, aur shuruat x_0 = 15 se.\nDiya kya hai? f(x) aur guess 15. Find kya karna hai? Woh voltage jahan circuit stable hota hai.\nAccuracy sawal mein nahin likhi, is liye hum teen decimal places denge (jaise answer key deti hai) aur working 5 places ke saath karenge.\nRule kaunsa? Newton-Raphson, f'(x) = -0.2x + 2.\nPlan: iterations tab tak jab tak do lagataar values 0.0005 se kam farq na rakhein.",
+            "steps": [
+              "Diya gaya: \\(f(x) = -0.1x^{2} + 2x + 1\\), \\(x_0 = 15\\).\nMaloom karna: equilibrium voltage, yani \\(f(x) = 0\\) ka woh root jo \\(x_0 = 15\\) se milta hai.\nTareeqa: Newton-Raphson, jaisa sawal ne kaha. Accuracy nahin di gayi, is liye 3 decimal places tak kaam karenge.",
+              "Derivative\n\\[f'(x) = -0.2x + 2\\]\nKyun: power rule: \\(-0.1x^{2}\\) ka derivative \\(-0.2x\\), \\(2x\\) ka 2, aur 1 ka zero. f polynomial hai, har jagah differentiable, aur \\(f'(15) = -1 \\ne 0\\), to 15 se shuru kar sakte hain.",
+              "Iteration 1: x_0 = 15\n\\[f(15) = -22.5 + 30 + 1 = 8.5\\]\n\\[f'(15) = -3 + 2 = -1\\]\n\\[x_1 = 15 - \\dfrac{8.5}{-1} = 23.5\\]\nKyun: 15 par slope sirf -1 hai, yani tangent line kaafi lait-ti hui hai aur x-axis ko door ja kar kaat-ti hai. Is liye pehla qadam root se aage nikal gaya.\nDhyan dein: 8.5 ko -1 se divide kiya to -8.5, aur 15 - (-8.5) = 23.5; sign ka khayal rakhiye.",
+              "Iteration 2: x_1 = 23.5\n\\[f(23.5) = -55.225 + 47 + 1 = -7.225\\]\n\\[f'(23.5) = -4.7 + 2 = -2.7\\]\n\\[x_2 = 23.5 - \\dfrac{-7.225}{-2.7}\\]\n\\[= 23.5 - 2.67593 = 20.82407\\]\nKyun: ab f negative hai, to qadam wapas root ki taraf aaya. Minus ko minus se divide kiya to plus 2.67593, phir 23.5 mein se minus.",
+              "Iterations 3 aur 4\n\\[x_3 = 20.82407 - \\dfrac{-0.71605}{-2.16481} = 20.49330\\]\n\\[x_4 = 20.49330 - \\dfrac{-0.01093}{-2.09866} = 20.48809\\]\nKyun: root ke qareeb aate hi qadam bohat chhote ho jate hain; yahi Newton-Raphson ki taqat hai.",
+              "Iteration 5\n\\[f(20.48809) \\approx 0.00000\\]\n\\[x_5 = 20.48809\\]\nKyun: \\(x_5 = x_4\\) paanch places tak, is liye \\(x \\approx 20.488\\).",
+              "Tasdeeq\n\\[f(20.4875) = 0.0012 > 0\\]\n\\[f(20.4885) = -0.0009 < 0\\]\nYani root 20.488 par round hota hai. Exact: \\(-0.1x^{2} + 2x + 1 = 0\\) ko \\(-10\\) se multiply karein to \\(x^{2} - 20x - 10 = 0\\), aur \\(x = 10 \\pm \\sqrt{110}\\), yani 20.48809 ya \\(-0.48809\\). 15 se shuru karne par pehla wala milta hai.\nKyun: quadratic formula exact roots deta hai aur hamari iterations ki tasdeeq karta hai."
+            ],
+            "final_answer": "\\(x \\approx 20.488\\) volts.",
+            "answer_table": {
+              "header": [
+                "\\(n\\)",
+                "\\(x_n\\)",
+                "\\(f(x_n)\\), \\(f'(x_n)\\)",
+                "\\(x_{n+1}\\)"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "15.00000",
+                  "8.50000, -1.00000",
+                  "23.50000"
+                ],
+                [
+                  "1",
+                  "23.50000",
+                  "-7.22500, -2.70000",
+                  "20.82407"
+                ],
+                [
+                  "2",
+                  "20.82407",
+                  "-0.71605, -2.16481",
+                  "20.49330"
+                ],
+                [
+                  "3",
+                  "20.49330",
+                  "-0.01093, -2.09866",
+                  "20.48809"
+                ],
+                [
+                  "4",
+                  "20.48809",
+                  "0.00000, -2.09762",
+                  "20.48809"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

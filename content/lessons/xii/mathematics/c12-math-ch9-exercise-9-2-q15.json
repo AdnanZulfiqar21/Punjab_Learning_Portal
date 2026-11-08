@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q15",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q15",
+      "title": "Question 15",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 275,
+          "pdf_to": 275,
+          "note": "Exercise 9.2, Question 15 (book page 273); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15",
+            "prompt": "15 [printed without its full stop] Prove that \\(\\tan^{-1} x + \\cot^{-1}(x + 1) = \\tan^{-1}(x^2 + x + 1)\\).",
+            "explanation": "A sum of two inverse functions of different kinds, to be combined into one \\(\\tan^{-1}\\).\nPlan: change \\(\\cot^{-1}(x + 1)\\) into \\(\\tan^{-1}\\frac{1}{x + 1}\\) (Example 4(iii)), add with formula (v), simplify. Then look at the values of \\(x\\) the first argument did not cover.",
+            "steps": [
+              "Given: \\(\\tan^{-1} x + \\cot^{-1}(x + 1)\\).\nTo prove: it equals \\(\\tan^{-1}(x^2 + x + 1)\\).\nMethod: Two \\(\\tan^{-1}\\) terms can be joined by formula (v), \\(\\tan^{-1} a + \\tan^{-1} b = \\tan^{-1}\\frac{a + b}{1 - ab}\\) (exact when \\(ab < 1\\)). So first write the \\(\\cot^{-1}\\) as a \\(\\tan^{-1}\\) with the book's Example 4(iii), \\(\\cot^{-1} u = \\tan^{-1}\\frac{1}{u}\\) (true for \\(u > 0\\)). We do \\(x > -1\\) first, then the remaining values.",
+              "Write \\(\\cot^{-1}\\) as \\(\\tan^{-1}\\) (for \\(x > -1\\))\n\\[\\cot^{-1}(x + 1) = \\tan^{-1}\\dfrac{1}{x + 1}\\]\nWhy: Example 4(iii) with \\(u = x + 1 > 0\\).",
+              "Check that formula (v) may be used\n\\[x \\cdot \\dfrac{1}{x + 1} = \\dfrac{x}{x + 1} < 1\\]\nWhy: \\(x < x + 1\\); dividing by the positive number \\(x + 1\\) keeps the inequality. Formula (v) gives the sum exactly when the product of the two numbers is less than 1.",
+              "Add with formula (v)\n\\[\\text{L.H.S} = \\tan^{-1} x + \\tan^{-1}\\dfrac{1}{x + 1}\\]\n\\[= \\tan^{-1}\\dfrac{x + \\frac{1}{x + 1}}{1 - \\frac{x}{x + 1}}\\]\nWhy: Formula (v) with \\(a = x\\) and \\(b = \\frac{1}{x + 1}\\).",
+              "Simplify the fraction\n\\[\\text{top} = \\dfrac{x(x + 1) + 1}{x + 1} = \\dfrac{x^2 + x + 1}{x + 1}\\]\n\\[\\text{bottom} = \\dfrac{(x + 1) - x}{x + 1} = \\dfrac{1}{x + 1}\\]\n\\[\\dfrac{\\text{top}}{\\text{bottom}} = x^2 + x + 1\\]\nWhy: Common denominators; dividing by \\(\\frac{1}{x + 1}\\) cancels the \\(x + 1\\).",
+              "Conclude for \\(x > -1\\)\n\\[\\text{L.H.S} = \\tan^{-1}(x^2 + x + 1)\\]\n\\[= \\text{R.H.S}\\]\nWhy: The fraction inside \\(\\tan^{-1}\\) is exactly \\(x^2 + x + 1\\).",
+              "The other values of \\(x\\)\n\\[x = -1:\\ \\tan^{-1}(-1) + \\cot^{-1} 0\\]\n\\[= -\\dfrac{\\pi}{4} + \\dfrac{\\pi}{2} = \\dfrac{\\pi}{4} = \\tan^{-1} 1\\]\nWhy: At \\(x = -1\\), \\(x^2 + x + 1 = 1\\), so the identity holds. For \\(x < -1\\), \\(\\cot^{-1}(x + 1) = \\pi + \\tan^{-1}\\frac{1}{x + 1}\\) (the range of \\(\\cot^{-1}\\) is \\((0, \\pi)\\)), while the product \\(\\frac{x}{x + 1}\\) is greater than 1 with both numbers negative, so \\(\\tan^{-1} x + \\tan^{-1}\\frac{1}{x + 1} = \\tan^{-1}(x^2 + x + 1) - \\pi\\). The \\(+\\pi\\) and \\(-\\pi\\) cancel: the identity holds for every real \\(x\\).",
+              "Check\n\\[x = 0:\\ 0 + \\cot^{-1} 1 = \\dfrac{\\pi}{4} = \\tan^{-1} 1\\]\n\\[x = -2:\\ \\tan^{-1}(-2) + \\cot^{-1}(-1)\\]\n\\[\\approx -1.1071 + 2.3562 = 1.2490\\]\n\\[\\tan^{-1} 3 \\approx 1.2490\\]\nWhy: Both sides agree, on both sides of \\(x = -1\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\tan^{-1} x + \\cot^{-1}(x + 1) = \\tan^{-1}(x^2 + x + 1)\\) (true for every real \\(x\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 9.2. Every solution on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

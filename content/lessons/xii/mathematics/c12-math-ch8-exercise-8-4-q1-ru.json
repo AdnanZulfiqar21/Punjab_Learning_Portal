@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-4-Q1-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-4-q1",
+      "title": "Question 1 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-EXERCISE-8-4-Q1",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 255,
+          "pdf_to": 255,
+          "note": "Exercise 8.4, Question 1 (book p. 253); answer key p. 307 (PDF 309)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1",
+            "prompt": "1. In a certain chemical reaction, the concentration of a substance at equilibrium is governed by the relation \\(x^{2} + 0.2x - 0.04 = 0\\), where \\(x\\) is the equilibrium concentration (in moles per liter). Use bisection method to find the positive equilibrium concentration of the substance accurate to two decimal places.",
+            "explanation": "Yeh asal mein ek quadratic equation hai jo chemistry ke masle se bani hai, lekin sawal quadratic formula nahin balke bisection method maang raha hai.\nDiya kya hai? Equation, aur yeh baat ke concentration positive hoti hai.\nFind kya karna hai? Positive root, do decimal places tak.\nRule kaunsa? Location of Root Theorem aur bisection: sign change wala interval baar baar aadha karna.\nPlan: chhote positive numbers par f dekh kar interval dhoondenge, phir itni dafa aadha karenge ke interval ka har number ek hi do-decimal value par round ho.",
+            "steps": [
+              "Diya gaya: \\(x^{2} + 0.2x - 0.04 = 0\\), aur \\(x > 0\\) kyun ke yeh concentration hai.\nMaloom karna: positive root, do decimal places tak.\nTareeqa: Bisection, jaisa sawal ne kaha. Is ko sirf ek aisa interval \\([a, b]\\) chahiye jahan \\(f\\) ka sign badle. Derivative ki zaroorat nahin.",
+              "Function aur continuity\n\\[f(x) = x^{2} + 0.2x - 0.04\\]\nKyun: f polynomial hai, is liye har real number par continuous hai. Continuity ke baghair Location of Root Theorem nahin lagta, is liye pehle yeh likhna zaroori hai.",
+              "Sign change wala interval\n\\[f(0) = -0.04 < 0\\]\n\\[f(0.1) = 0.01 + 0.02 - 0.04 = -0.01\\]\n\\[f(0.2) = 0.04 + 0.04 - 0.04 = 0.04\\]\nYani positive root \\([0.1, 0.2]\\) mein hai.\nKyun: concentration ek chhota sa positive number hota hai, is liye hum ne 0, 0.1, 0.2 jaisi chhoti values try kin. f(0.1) negative aur f(0.2) positive hai, to darmiyan mein graph ne x-axis cross ki hai.\nDhyan dein: [0, 1] jaisa bara interval bhi chal jata, lekin chhota interval iterations bachata hai.",
+              "Iteration 1\n\\[c = \\dfrac{0.1 + 0.2}{2} = 0.15\\]\n\\[f(0.15) = 0.0225 + 0.03 - 0.04\\]\n\\[= 0.0125 > 0\\]\nKyun: \\(f(0.1)\\) negative aur \\(f(0.15)\\) positive, to root left wale aadhe \\([0.1, 0.15]\\) mein hai. Right wala aadha chhor diya.",
+              "Iteration 2\n\\[c = \\dfrac{0.1 + 0.15}{2} = 0.125\\]\n\\[f(0.125) = 0.015625 + 0.025 - 0.04\\]\n\\[= 0.000625 > 0\\]\nKyun: root ab \\([0.1, 0.125]\\) mein hai.\nDhyan dein: yahan \\(|f(0.125)| = 0.000625\\) to 0.005 se kam hai, lekin agar hum yahin ruk jayen to jawab 0.125, yani 0.13 banega, jo ghalat hai, kyun ke asal root 0.125 se chhota hai. Wajah: root ke qareeb graph bohat aahista uthta hai (\\(f'(x) = 2x + 0.2 \\approx 0.45\\)), is liye chhota \\(|f|\\) akela doosre decimal ki guarantee nahin deta.",
+              "Iteration 3\n\\[c = \\dfrac{0.1 + 0.125}{2} = 0.1125\\]\n\\[f(0.1125) = -0.004844 < 0\\]\nKyun: ab sign \\([0.1125, 0.125]\\) mein badal raha hai, to left kinara 0.1125 ho gaya.",
+              "Iteration 4\n\\[c = \\dfrac{0.1125 + 0.125}{2} = 0.11875\\]\n\\[f(0.11875) = -0.002148 < 0\\]\nKyun: naya interval \\([0.11875, 0.125]\\).",
+              "Iteration 5\n\\[c = \\dfrac{0.11875 + 0.125}{2} = 0.121875\\]\n\\[f(0.121875) = -0.000771 < 0\\]\nKyun: root ab \\(]0.121875, 0.125[\\) mein hai. Is interval ka har number 0.12 par round hota hai (0.125 khud shamil nahin, kyun ke wahan \\(f > 0\\)). Is liye doosra decimal pakka ho gaya aur hum ruk jate hain; \\(|f(c)| < 0.005\\) bhi hai.",
+              "Tasdeeq\n\\[f(0.115) = -0.003775 < 0\\]\n\\[f(0.125) = 0.000625 > 0\\]\nYani root \\(]0.115, 0.125[\\) mein hai aur 0.12 par round hota hai.\nExact: \\(x = \\frac{-0.2 + \\sqrt{0.2}}{2} = 0.1236\\); doosra root \\(-0.3236\\) negative hai, concentration negative nahin ho sakti, is liye rad.\nKyun: 0.12 ke dono taraf aadhe aadhe faasle (0.115 aur 0.125) par sign test rounding ki pakki tasdeeq hai."
+            ],
+            "final_answer": "\\(x \\approx 0.12\\) moles per liter (positive equilibrium concentration).",
+            "answer_table": {
+              "header": [
+                "Iteration",
+                "\\([a, b]\\)",
+                "\\(c = \\frac{a+b}{2}\\)",
+                "\\(f(c)\\)"
+              ],
+              "rows": [
+                [
+                  "1",
+                  "[0.1, 0.2]",
+                  "0.15",
+                  "0.012500 (+)"
+                ],
+                [
+                  "2",
+                  "[0.1, 0.15]",
+                  "0.125",
+                  "0.000625 (+)"
+                ],
+                [
+                  "3",
+                  "[0.1, 0.125]",
+                  "0.1125",
+                  "-0.004844 (-)"
+                ],
+                [
+                  "4",
+                  "[0.1125, 0.125]",
+                  "0.11875",
+                  "-0.002148 (-)"
+                ],
+                [
+                  "5",
+                  "[0.11875, 0.125]",
+                  "0.121875",
+                  "-0.000771 (-)"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

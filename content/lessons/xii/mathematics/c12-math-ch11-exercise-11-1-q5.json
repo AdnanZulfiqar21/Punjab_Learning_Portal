@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-EXERCISE-11-1-Q5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/u-exercise-11-1-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 292,
+          "pdf_to": 292,
+          "note": "Exercise 11.1, Question 5: book page 290 (Q1-Q8). The book prints no answers for Unit 11; every answer here is ours."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5. Given \\(x(t) = r^2 + 1\\), \\(y(t) = \\sqrt{t}\\), construct \\(\\mathbf{r}(t)\\).",
+            "explanation": "The components are given; we only combine them and state the domain.\nAs printed, \\(x(t)\\) contains \\(r\\), which is meant to be \\(t\\) (see the correction below): \\(x(t) = t^2 + 1\\).\nPlan: vector form, then the domain as the intersection of the component domains.",
+            "steps": [
+              "Given: \\(x(t) = t^2 + 1\\) (printed \\(r^2 + 1\\)), \\(y(t) = \\sqrt{t}\\).\nTo find: \\(\\mathbf{r}(t)\\) and its domain.\nMethod: Step-2 and Step-3 of 11.1.3 (Step-1 is already done: the components are given). The domain is the set of \\(t\\) where every component is defined (11.2).",
+              "Combine into vector form\n\\[\\mathbf{r}(t) = x(t)\\,\\hat{i} + y(t)\\,\\hat{j}\\]\n\\[= (t^2 + 1)\\,\\hat{i} + \\sqrt{t}\\,\\hat{j}\\]\n\\[= \\langle t^2 + 1, \\sqrt{t}\\rangle\\]\nWhy: two components, so \\(\\mathbf{r}(t)\\) is a 2D vector function; \\(x\\) goes with \\(\\hat{i}\\), \\(y\\) with \\(\\hat{j}\\).",
+              "Domain of each component\n\\(t^2 + 1\\): defined for every real \\(t\\), domain \\(\\mathbb{R}\\).\n\\(\\sqrt{t}\\): needs \\(t \\ge 0\\), domain \\([0, \\infty)\\).\nWhy: a polynomial has no restriction; the square root of a negative number is not real.",
+              "Intersection\n\\[\\mathbb{R} \\cap [0, \\infty) = [0, \\infty)\\]\nWhy: \\(t\\) is allowed only if both components exist (Step-2 of 11.2.1).",
+              "Check with values\n\\[\\mathbf{r}(0) = \\hat{i},\\quad \\mathbf{r}(1) = 2\\hat{i} + \\hat{j}\\]\n\\[\\mathbf{r}(4) = 17\\hat{i} + 2\\hat{j}\\]\n\\(\\mathbf{r}(-1)\\) does not exist, since \\(\\sqrt{-1}\\) is not real \\(\\checkmark\\).\nWhy: eliminating \\(t\\) (\\(t = y^2\\), \\(y \\ge 0\\)) gives the path \\(x = y^4 + 1\\), which starts at \\((1, 0)\\)."
+            ],
+            "final_answer": "\\(\\mathbf{r}(t) = (t^2 + 1)\\,\\hat{i} + \\sqrt{t}\\,\\hat{j} = \\langle t^2 + 1, \\sqrt{t}\\rangle\\), with domain \\(t \\ge 0\\), i.e. \\([0, \\infty)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \\(x(t) = r^2 + 1\\). Here \\(x\\) is a function of \\(t\\), and \\(r\\) is the name of the vector function we are asked to build, so \\(r^2\\) makes no sense inside \\(x(t)\\). The intended component is \\(x(t) = t^2 + 1\\), which we use above."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 11.1 (none for the whole of Unit 11). Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

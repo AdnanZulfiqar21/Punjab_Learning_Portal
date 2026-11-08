@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q9-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q9",
+      "title": "Question 9 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 9: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-4-Q9",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9 Evaluate \\(\\int \\frac{25(x + 2)}{(x - 2)(x + 3)^2}\\,dx\\).",
+            "explanation": "Denominator mein do qisam ke factors hain: \\(x - 2\\) jo ek dafa aata hai, aur \\((x + 3)^2\\) jo repeated hai. Is liye yeh Case-II hai.\nTeen constants chahiye: \\(x - 2\\) ke liye ek, aur \\((x + 3)\\) ki dono powers ke liye ek ek.\nPlan: roots \\(x = 2\\) aur \\(x = -3\\) se \\(A\\) aur \\(C\\), phir \\(x^2\\) ka coefficient compare kar ke \\(B\\), aur aakhir mein integral.",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{25(x + 2)}{(x - 2)(x + 3)^2}\\,dx\\).\nMaloom karna: yeh integral.\nTareeqa: partial fractions, Case-II. Fraction proper hai (upar degree 1, neeche degree 3). Upar wala 25 sirf ek constant hai, ghabrane ki baat nahi; bas numbers bare aayenge.",
+              "Partial fractions likhein\n\\[\\dfrac{25(x + 2)}{(x - 2)(x + 3)^2} = \\dfrac{A}{x - 2} + \\dfrac{B}{x + 3} + \\dfrac{C}{(x + 3)^2}\\]\n\\[25(x + 2) = A(x + 3)^2\\]\n\\[+\\, B(x - 2)(x + 3) + C(x - 2) \\quad (1)\\]\nKyun: Repeated factor \\((x + 3)^2\\) ke liye power 1 aur 2 dono ke fractions. Phir poore denominator se multiply: \\(A\\) ke saath \\((x + 3)^2\\) bacha, \\(B\\) ke saath \\((x - 2)(x + 3)\\), aur \\(C\\) ke saath sirf \\((x - 2)\\).",
+              "(1) mein \\(x = 2\\) aur \\(x = -3\\) rakhein\n\\[x = 2:\\ 100 = 25A,\\ A = 4\\]\n\\[x = -3:\\ -25 = -5C,\\ C = 5\\]\nKyun: \\(x = 2\\) par left side \\(25 \\times 4 = 100\\) aur right side par sirf \\(A(5)^2 = 25A\\). \\(x = -3\\) par left side \\(25 \\times (-1) = -25\\) aur sirf \\(C(-5)\\) bacha.",
+              "\\(x^2\\) ke coefficients compare karein\n\\[0 = A + B\\]\n\\[B = -4\\]\nKyun: \\(B\\) ke liye koi aisa root nahi jo baaqi sab ko zero kar de. Right side kholein to \\(x^2\\) sirf \\(A(x + 3)^2\\) aur \\(B(x - 2)(x + 3)\\) se aata hai: \\(A + B\\). Left side \\(25x + 50\\) mein \\(x^2\\) hai hi nahi.",
+              "Integral lein\n\\[\\int \\left(\\dfrac{4}{x - 2} - \\dfrac{4}{x + 3} + 5(x + 3)^{-2}\\right)dx\\]\n\\[= 4\\ln|x - 2| - 4\\ln|x + 3| - \\dfrac{5}{x + 3} + c\\]\n\\[= 4\\ln\\left|\\dfrac{x - 2}{x + 3}\\right| - \\dfrac{5}{x + 3} + c\\]\nKyun: Pehle do terms \\(\\ln\\) dete hain. Teesra term power rule se: \\(5\\int (x + 3)^{-2}\\,dx = 5\\cdot\\frac{(x + 3)^{-1}}{-1} = -\\frac{5}{x + 3}\\). Aakhir mein \\(4\\ln|p| - 4\\ln|q| = 4\\ln\\left|\\frac{p}{q}\\right|\\).\nDhyan dein: \\(\\frac{5}{(x + 3)^2}\\) ka integral \\(5\\ln(x + 3)^2\\) nahi hai; \\(\\ln\\) sirf power 1 par aata hai.",
+              "Tasdeeq (constant term)\n\\[9A - 6B - 2C = 36 + 24 - 10 = 50 \\;\\checkmark\\]\nKyun: (1) ke right side ka constant term: \\(A \\cdot 9 + B \\cdot (-6) + C \\cdot (-2)\\). Left side ka constant \\(25 \\times 2 = 50\\). Dono barabar, is liye teeno constants sahi hain."
+            ],
+            "final_answer": "\\(4\\ln\\left|\\frac{x - 2}{x + 3}\\right| - \\frac{5}{x + 3} + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke aakhir mein answers (page 302) mein Exercise 3.4 ke jawab ghalat heading \"Exercise 3.6\" ke neeche chhape hain. Is sawal ka jawab us block ka item (ix) hai: \\(4\\ln\\left|\\frac{x - 2}{x + 3}\\right| - \\frac{5}{x + 3} + c\\). Yeh jawab sahi hai. Jis block par \"Exercise 3.4\" likha hai (page 301) woh kisi aur exercise ke jawab hain, is liye wahan se milane ki koshish na karein."
+          }
+        ]
+      }
+    }
+  ]
+}

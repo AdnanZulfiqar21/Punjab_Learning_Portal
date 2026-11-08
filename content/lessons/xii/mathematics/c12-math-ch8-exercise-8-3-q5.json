@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-3-Q5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-3-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 250,
+          "pdf_to": 250,
+          "note": "Exercise 8.3 (book p. 248): Trapezium Rule, Q1-Q10"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 309,
+          "pdf_to": 309,
+          "note": "Answers 8.3 (book p. 307)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5. Use Trapezoidal Rule to approximate the value of the definite integral \\(\\int_{0}^{4} \\sqrt{x}\\,dx\\) taking \\(n = 4\\).",
+            "explanation": "A numerical integration question: estimate a definite integral by the Trapezium Rule.\nGiven: \\(f(x) = \\sqrt{x}\\), interval \\([0, 4]\\), \\(n = 4\\), so \\(h = \\frac{b-a}{n}\\).\nPlan: list the points and 4-decimal function values, then use h/2 [first + 2(inner) + last].",
+            "steps": [
+              "Given: \\(f(x) = \\sqrt{x}\\), \\(a = 0\\), \\(b = 4\\), \\(n = 4\\).\nTo find: an approximate value of \\(\\int_{0}^{4} \\sqrt{x}\\,dx\\).\nMethod: the Trapezium Rule, as the question asks. n is given, so find h first.",
+              "Continuity\n\\(\\sqrt{x}\\) is continuous for \\(x \\ge 0\\), so it is continuous on \\([0, 4]\\).\nWhy: the Trapezium Rule needs a continuous function on the interval.",
+              "Step size and points\n\\[h = \\dfrac{b-a}{n} = \\dfrac{4-0}{4} = 1\\]\nPoints \\(x_{i} = a + ih\\): \\(0, 1, 2, 3, 4\\)\nWhy: 4 equal subintervals give 5 points; the first and last are the ends \\(a\\) and \\(b\\).",
+              "Function values (4 decimal places)\n\\[f(0) = \\sqrt{0} = 0.0000\\]\n\\[f(1) = \\sqrt{1} = 1.0000\\]\n\\[f(2) = \\sqrt{2} = 1.4142\\]\n\\[f(3) = \\sqrt{3} = 1.7321\\]\n\\[f(4) = \\sqrt{4} = 2.0000\\]\nWhy: \\(\\sqrt{2}\\) and \\(\\sqrt{3}\\) are irrational; round them to four decimals. The table with the answer collects them with their weights.",
+              "Add the inner values\n\\[S = f(x_{1}) + \\dots + f(x_{3})\\]\n\\[= 1.0000 + 1.4142 + 1.7321\\]\n\\[= 4.1463\\]\nWhy: these 3 inner values are shared by two neighbouring trapeziums, so they will be doubled.",
+              "Apply the Trapezium Rule\n\\[\\int_{0}^{4} \\sqrt{x}\\,dx\\]\n\\[\\approx \\dfrac{h}{2}\\big[f(x_{0}) + 2S + f(x_{4})\\big]\\]\n\\[= 0.5\\big[0.0000 + 2(4.1463)\\]\n\\[+ 2.0000\\big]\\]\n\\[= 0.5(10.2926)\\]\n\\[= 5.1463\\]\nWhy: \\(\\frac{h}{2} = 0.5\\); the end values are used once and the inner sum twice. Round only at the end.",
+              "Check:\n\\[\\int_{0}^{4} x^{1/2}\\,dx = \\dfrac{2}{3}x^{3/2}\\Big|_{0}^{4} = \\dfrac{16}{3}\\]\n\\[\\approx 5.3333\\]\nThe trapezium value 5.1463 is smaller: \\(\\sqrt{x}\\) bends downwards (very steeply near 0), so the chords lie below the curve."
+            ],
+            "final_answer": "\\(\\int_{0}^{4} \\sqrt{x}\\,dx \\approx 5.1463\\)",
+            "answer_table": {
+              "header": [
+                "i",
+                "\\(x_{i}\\)",
+                "\\(f(x_{i})\\)",
+                "Weight"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "\\(0\\)",
+                  "\\(0.0000\\)",
+                  "1"
+                ],
+                [
+                  "1",
+                  "\\(1\\)",
+                  "\\(1.0000\\)",
+                  "2"
+                ],
+                [
+                  "2",
+                  "\\(2\\)",
+                  "\\(1.4142\\)",
+                  "2"
+                ],
+                [
+                  "3",
+                  "\\(3\\)",
+                  "\\(1.7321\\)",
+                  "2"
+                ],
+                [
+                  "4",
+                  "\\(4\\)",
+                  "\\(2.0000\\)",
+                  "1"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

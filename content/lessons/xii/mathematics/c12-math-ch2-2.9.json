@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.9",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.9",
+      "title": "2.9 Increasing and Decreasing Functions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 50,
+          "pdf_to": 54,
+          "note": "Book p. 48-49: 2.9 definitions table, Recall! box, derivative test (i)-(ii), Example 15, Example 16 (2^-x; ln 2 factor missing in print)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "table",
+            "header": [
+              "Increasing Function",
+              "Decreasing Function"
+            ],
+            "rows": [
+              [
+                "Let \\(I\\) be an interval and let \\(f: I \\to \\mathbb{R}\\) be a function. We say that \\(f\\) is increasing if for any \\(x_{1}, x_{2} \\in I\\), \\(x_{1} < x_{2} \\Rightarrow f(x_{1}) \\le f(x_{2})\\).",
+                "Let \\(I\\) be an interval and let \\(f: I \\to \\mathbb{R}\\) be a function. We say that \\(f\\) is decreasing if for any \\(x_{1}, x_{2} \\in I\\), \\(x_{1} < x_{2} \\Rightarrow f(x_{1}) \\ge f(x_{2})\\)."
+              ]
+            ],
+            "caption": "Increasing and decreasing functions (as printed in the book)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In simple words: \\(f\\) is increasing when its graph never goes down as we move from left to right (a bigger input never gives a smaller output), and decreasing when its graph never goes up.\nThe book uses \\(\\le\\) and \\(\\ge\\), so a flat piece is allowed. If we want the graph to go strictly up we write \\(f(x_{1}) < f(x_{2})\\) (strictly increasing), and strictly down \\(f(x_{1}) > f(x_{2})\\) (strictly decreasing).\nThe words always refer to an interval: \\(f(x) = x^{2}\\) is decreasing on \\((-\\infty, 0]\\) and increasing on \\([0, \\infty)\\), but neither on the whole real line."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Recall!",
+            "text": "\\((a, b)\\), \\([a, b]\\), \\((a, b]\\), \\([a, b)\\), \\((-\\infty, a)\\), \\((-\\infty, \\infty)\\), \\((-\\infty, a]\\), \\((a, \\infty)\\), \\([a, \\infty)\\) all are intervals."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "An interval is an unbroken piece of the number line. A round bracket leaves the end point out, a square bracket keeps it in; \\(\\infty\\) is never a number, so it always gets a round bracket."
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(f\\) be a differentiable function defined on an interval \\(I\\). Then"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) \\(f\\) is increasing on \\(I\\), if \\(f'(x) \\ge 0\\) for each \\(x \\in I\\).",
+              "(ii) \\(f\\) is decreasing on \\(I\\), if \\(f'(x) \\le 0\\) for each \\(x \\in I\\)."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does the sign of the derivative decide it? \\(f'(x)\\) is the slope of the tangent line at \\(x\\) (2.7).\nA positive slope means the tangent, and the curve with it, rises to the right; a negative slope means it falls to the right.\nSo instead of comparing \\(f(x_{1})\\) and \\(f(x_{2})\\) for all pairs (impossible to do one by one), we check one thing: the sign of \\(f'(x)\\) on the interval."
+          },
+          {
+            "type": "example",
+            "title": "Example 15",
+            "problem": "Prove that \\(f(x) = e^{x}\\) defined on \\(\\mathbb{R} = (-\\infty, \\infty)\\) is increasing.",
+            "steps": [
+              "Given: \\(f(x) = e^{x}\\) on \\((-\\infty, \\infty)\\).\nTo prove: \\(f\\) is increasing on \\((-\\infty, \\infty)\\).\nMethod: \\(f\\) is differentiable, so we use test (i): if \\(f'(x) \\ge 0\\) for every \\(x\\) in the interval, \\(f\\) is increasing. We only have to find the sign of \\(f'(x)\\).",
+              "Step 1: Differentiate\n\\[f'(x) = \\dfrac{d}{dx}\\left(e^{x}\\right) = e^{x}\\]\nWhy: the exponential function \\(e^{x}\\) is its own derivative (2.5).",
+              "Step 2: Find the sign of \\(f'(x)\\)\n\\[f'(x) = e^{x} > 0\\]\n\\[\\text{for each } x \\in (-\\infty, \\infty)\\]\nWhy: a positive base raised to any real power is positive; \\(e \\approx 2.718 > 0\\), so \\(e^{x}\\) is never zero or negative.",
+              "Step 3: Conclude\nSince \\(f'(x) > 0\\) on the whole real line, \\(f(x) = e^{x}\\) is increasing on \\(\\mathbb{R} = (-\\infty, \\infty)\\).\nWhy: this is test (i) above, and \\(> 0\\) is even stronger than \\(\\ge 0\\).",
+              "Check: take \\(x_{1} = 0 < x_{2} = 1\\).\n\\[f(0) = 1 < f(1) = e \\approx 2.718\\]\nThe larger input gives the larger output, as the definition requires."
+            ],
+            "answer": "\\(f'(x) = e^{x} > 0\\) for every real \\(x\\), so \\(f(x) = e^{x}\\) is increasing on \\((-\\infty, \\infty)\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 16",
+            "problem": "Show that \\(f(x) = 2^{-x}\\) defined on \\(\\mathbb{R} = (-\\infty, \\infty)\\) is decreasing.",
+            "steps": [
+              "Given: \\(f(x) = 2^{-x}\\) on \\((-\\infty, \\infty)\\).\nTo show: \\(f\\) is decreasing on \\((-\\infty, \\infty)\\).\nMethod: test (ii): if \\(f'(x) \\le 0\\) for every \\(x\\) in the interval, \\(f\\) is decreasing. We differentiate with the rule for \\(a^{u}\\) and the chain rule.",
+              "Step 1: The book's working\nThe book writes \\(f'(x) = 2^{-x}\\frac{d}{dx}(-x) = -2^{-x} < 0\\) for each \\(x \\in (-\\infty, \\infty)\\). The factor \\(\\ln 2\\) is missing (see the Book correction below); the conclusion is still right.\nWhy we mention it: \\(\\frac{d}{dx}\\left(2^{u}\\right) = 2^{u}\\ln 2\\,\\frac{du}{dx}\\), not \\(2^{u}\\frac{du}{dx}\\). Only for the base \\(e\\) does the logarithm factor disappear, because \\(\\ln e = 1\\).",
+              "Step 2: Differentiate correctly\n\\[f'(x) = 2^{-x}\\ln 2 \\cdot \\dfrac{d}{dx}(-x)\\]\n\\[= 2^{-x}\\ln 2 \\cdot (-1)\\]\n\\[f'(x) = -2^{-x}\\ln 2\\]\nWhy: \\(\\frac{d}{dx}\\left(a^{u}\\right) = a^{u}\\ln a \\cdot \\frac{du}{dx}\\) (2.5) with \\(a = 2\\) and \\(u = -x\\), so \\(\\frac{du}{dx} = -1\\).",
+              "Step 3: Find the sign of \\(f'(x)\\)\n\\[2^{-x} > 0,\\quad \\ln 2 \\approx 0.693 > 0\\]\n\\[f'(x) = -2^{-x}\\ln 2 < 0\\]\n\\[\\text{for each } x \\in (-\\infty, \\infty)\\]\nWhy: \\(2^{-x}\\) is positive and \\(\\ln 2\\) is positive (since \\(2 > 1\\)); the minus sign in front makes the product negative.",
+              "Step 4: Conclude\nSo \\(f(x) = 2^{-x}\\) is a decreasing function on \\(\\mathbb{R} = (-\\infty, \\infty)\\).\nWhy: test (ii).",
+              "Check: take \\(x_{1} = 0 < x_{2} = 1\\).\n\\[f(0) = 2^{0} = 1 > f(1) = 2^{-1} = \\tfrac{1}{2}\\]\nThe larger input gives the smaller output, so \\(f\\) goes down."
+            ],
+            "answer": "\\(f'(x) = -2^{-x}\\ln 2 < 0\\) for every real \\(x\\), so \\(f(x) = 2^{-x}\\) is decreasing on \\((-\\infty, \\infty)\\).",
+            "book_errors": [
+              "\\(f'(x) = 2^{-x}\\frac{d}{dx}(-x) = -2^{-x} < 0\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Example 16 prints \\(f'(x) = 2^{-x}\\frac{d}{dx}(-x)\\) and then \\(f'(x) = -2^{-x} < 0\\). The derivative of \\(a^{u}\\) is \\(a^{u}\\ln a\\,\\frac{du}{dx}\\), so the factor \\(\\ln 2\\) is missing. Correct: \\(f'(x) = -2^{-x}\\ln 2 < 0\\). Because \\(\\ln 2 > 0\\), the sign and the conclusion (decreasing) do not change."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note",
+            "text": "The book prints the label \"Example 16\" twice: here (\\(f(x) = 2^{-x}\\)) and again under 2.9.1 (\\(f(x) = |x|\\)). We keep both printed numbers so that every example can be found by its printed label."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "For \"prove that \\(f\\) is increasing\" questions write three lines: the derivative, its sign with the reason (\"since \\(e^{x} > 0\\) for all \\(x\\)\"), and the conclusion with the interval."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Increasing: \\(x_{1} < x_{2} \\Rightarrow f(x_{1}) \\le f(x_{2})\\); decreasing: \\(x_{1} < x_{2} \\Rightarrow f(x_{1}) \\ge f(x_{2})\\).\n2. For a differentiable \\(f\\): \\(f'(x) \\ge 0\\) on \\(I\\) gives increasing, \\(f'(x) \\le 0\\) on \\(I\\) gives decreasing.\n3. Always name the interval: a function can increase on one interval and decrease on another.\n4. \\(e^{x}\\) is increasing on \\(\\mathbb{R}\\); \\(2^{-x} = \\left(\\frac{1}{2}\\right)^{x}\\) is decreasing on \\(\\mathbb{R}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Forgetting the factor \\(\\ln a\\) when differentiating \\(a^{x}\\): \\(\\frac{d}{dx}\\left(2^{-x}\\right) = -2^{-x}\\ln 2\\), not \\(-2^{-x}\\).\n2. Saying \"\\(f\\) is increasing\" without an interval.\n3. Checking the sign of \\(f(x)\\) instead of \\(f'(x)\\): \\(2^{-x}\\) is always positive, yet it is decreasing."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-1-Q4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-1-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 43,
+          "pdf_to": 43,
+          "note": "Exercise 2.1, Question 4: differentiate y = sin t/(1 - cos t) w.r.t. t; book p. 41. Unit 2 has no printed answers."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. Differentiate with respect to the variable involved: \\(y = \\dfrac{\\sin t}{1 - \\cos t}\\)",
+            "explanation": "The variable is \\(t\\), so we want \\(\\frac{dy}{dt}\\).\n\\(y\\) is a quotient: \\(\\sin t\\) over \\(1 - \\cos t\\).\nPlan: quotient rule, then \\(\\sin^2 t + \\cos^2 t = 1\\) makes the top \\(-(1 - \\cos t)\\), which cancels.",
+            "steps": [
+              "Given: \\(y = \\frac{\\sin t}{1 - \\cos t}\\), \\(\\cos t \\neq 1\\).\nTo find: \\(\\frac{dy}{dt}\\).\nMethod: quotient rule with \\(u = \\sin t\\), \\(v = 1 - \\cos t\\), so \\(u' = \\cos t\\), \\(v' = \\sin t\\).",
+              "Quotient rule\n\\[\\dfrac{dy}{dt} = \\dfrac{\\cos t(1 - \\cos t) - \\sin t \\cdot \\sin t}{(1 - \\cos t)^2}\\]\nWhy: \\(\\frac{u'v - uv'}{v^2}\\); note \\(v' = (1 - \\cos t)' = 0 - (-\\sin t) = \\sin t\\).",
+              "Expand the top and use the identity\n\\[\\text{Top} = \\cos t - \\cos^2 t - \\sin^2 t\\]\n\\[= \\cos t - 1\\]\nWhy: \\(\\cos^2 t + \\sin^2 t = 1\\).",
+              "Cancel\n\\[\\dfrac{dy}{dt} = \\dfrac{-(1 - \\cos t)}{(1 - \\cos t)^2}\\]\n\\[= -\\dfrac{1}{1 - \\cos t}\\]\nWhy: \\(\\cos t - 1 = -(1 - \\cos t)\\); we may cancel because \\(1 - \\cos t \\neq 0\\) (otherwise \\(y\\) is undefined).",
+              "Check with half angles\n\\[y = \\dfrac{2\\sin\\frac{t}{2}\\cos\\frac{t}{2}}{2\\sin^2\\frac{t}{2}} = \\cot\\dfrac{t}{2}\\]\n\\[\\dfrac{dy}{dt} = -\\dfrac{1}{2}\\csc^2\\dfrac{t}{2} = -\\dfrac{1}{2\\sin^2\\frac{t}{2}}\\]\nWhy: \\(2\\sin^2\\frac{t}{2} = 1 - \\cos t\\), so this equals \\(-\\frac{1}{1 - \\cos t}\\). Same answer."
+            ],
+            "final_answer": "\\(\\frac{dy}{dt} = -\\frac{1}{1 - \\cos t} = \\frac{1}{\\cos t - 1}\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

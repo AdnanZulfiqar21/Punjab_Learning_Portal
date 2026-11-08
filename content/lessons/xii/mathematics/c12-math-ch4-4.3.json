@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-4.3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/4.3",
+      "title": "4.3 Applications of First Order Differential Equations in Real-Life Problems",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 136,
+          "pdf_to": 140,
+          "note": "4.3 intro paragraph and Examples 6-10 (printed numbering restarts; shown as Examples 9-13): population growth, radioactive decay, deflation, cooling, RL circuit"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 141,
+          "pdf_to": 141,
+          "note": "Half-Life box printed beside Exercise 4.3, Question 4"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "First-order differential equations play a vital role in modeling various real-life phenomena in fields such as physics, biology, chemistry, economics, and engineering. These equations involve the rate of change of a quantity and help describe how that quantity evolves over time."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In Section 4.1.1 we built the models (population, cooling, inflation, circuits) and in Section 4.2.1 we learnt to solve separable equations. This section puts the two together. Every example follows the same five steps:\n1. Name the quantity and the time (for example \\(N\\) bacteria at time \\(t\\) hours) and list the given conditions such as \\(N(0) = 100\\).\n2. Write the differential equation of the situation (the model).\n3. Separate the variables and integrate both sides.\n4. Use the condition at \\(t = 0\\) to find the constant of integration, and the second condition to find \\(k\\).\n5. Substitute the required time (or value) and give the answer with units."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Situation",
+              "Differential equation",
+              "Solution"
+            ],
+            "rows": [
+              [
+                "Growth (bacteria, money, inflation)",
+                "\\(\\frac{dN}{dt} = kN,\\ k > 0\\)",
+                "\\(N = N_0 e^{kt}\\)"
+              ],
+              [
+                "Decay (radioactive mass, deflation)",
+                "\\(\\frac{dM}{dt} = -kM,\\ k > 0\\)",
+                "\\(M = M_0 e^{-kt}\\)"
+              ],
+              [
+                "Cooling / heating in surroundings at \\(T_S\\)",
+                "\\(\\frac{dT}{dt} = -k(T - T_S)\\)",
+                "\\(T = T_S + (T_0 - T_S)e^{-kt}\\)"
+              ],
+              [
+                "RL circuit, \\(I(0) = 0\\)",
+                "\\(L\\frac{dI}{dt} = V_S - RI\\)",
+                "\\(I = \\frac{V_S}{R}\\left(1 - e^{-Rt/L}\\right)\\)"
+              ],
+              [
+                "RC circuit, \\(q(0) = 0\\)",
+                "\\(RC\\frac{dq}{dt} = CV_S - q\\)",
+                "\\(q = CV_S\\left(1 - e^{-t/(RC)}\\right)\\)"
+              ]
+            ],
+            "caption": "Our summary of the models used in this section (not printed in the book)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Three logarithm facts do almost all the work in these problems:\n\\(e^{\\ln x} = x\\) and \\(\\ln(e^{x}) = x\\): they undo each other.\n\\(\\ln(a^{b}) = b\\ln a\\), so \\(e^{b\\ln a} = a^{b}\\).\nIf \\(e^{ak} = b\\), then \\(ak = \\ln b\\), so \\(k = \\frac{1}{a}\\ln b\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Numbering note (ours)",
+            "text": "The textbook restarts its example numbers in this unit (after Example 4 it prints Example 2 again). To give every example its own number we continue the unit's sequence: the book's Examples 6, 7, 8, 9 and 10 on these pages are shown here as Examples 9, 10, 11, 12 and 13."
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "(Population Growth) In a culture, there are 100 bacteria initially and are doubled in 2 hours. Find the number of bacteria 7 hours later.",
+            "steps": [
+              "Given: \\(N(0) = 100\\) and \\(N(2) = 200\\), where \\(N\\) is the number of bacteria at time \\(t\\) hours.\nTo find: \\(N(7)\\).\nMethod: the population grows at a rate proportional to its size, so \\(\\frac{dN}{dt} = kN\\) with \\(k > 0\\) (growth). The equation is separable; the first condition fixes the constant of integration and the second fixes \\(k\\).",
+              "Step 1: Write the model and separate the variables\n\\[\\dfrac{dN}{dt} = kN\\]\n\\[\\dfrac{1}{N}\\,dN = k\\,dt\\]\nWhy: \\(k > 0\\) because the population is increasing. Dividing by \\(N\\) and multiplying by \\(dt\\) puts all \\(N\\) on one side and all \\(t\\) on the other.",
+              "Step 2: Integrate both sides\n\\[\\int \\dfrac{1}{N}\\,dN = \\int k\\,dt\\]\n\\[\\ln|N| = kt + C \\quad \\ldots(1)\\]\nWhy: \\(\\int \\frac{1}{N}\\,dN = \\ln|N|\\); one constant \\(C\\) on the right is enough.",
+              "Step 3: Use \\(N(0) = 100\\)\n\\[\\ln 100 = k(0) + C\\]\n\\[C = \\ln(100)\\]\n\\[\\ln|N| = kt + \\ln(100)\\]\n\\[\\ln\\left|\\dfrac{N}{100}\\right| = kt\\]\n\\[\\dfrac{N}{100} = e^{kt}\\]\n\\[N = 100e^{kt} \\quad \\ldots(2)\\]\nWhy: \\(\\ln|N| - \\ln 100 = \\ln\\left|\\frac{N}{100}\\right|\\). \\(N\\) is positive, so the modulus can be dropped, and taking \\(e\\) of both sides removes \\(\\ln\\).",
+              "Step 4: Use \\(N(2) = 200\\) to find \\(k\\)\n\\[200 = 100e^{2k}\\]\n\\[e^{2k} = 2\\]\n\\[2k = \\ln 2\\]\n\\[k = \\tfrac{1}{2}\\ln 2 = \\ln\\sqrt{2}\\]\nWhy: take \\(\\ln\\) of both sides; \\(\\frac{1}{2}\\ln 2 = \\ln 2^{1/2} = \\ln\\sqrt{2} \\approx 0.3466\\).",
+              "Step 5: Find \\(N(7)\\)\n\\[N = 100e^{(\\ln\\sqrt{2})t}\\]\n\\[N(7) = 100e^{7\\ln\\sqrt{2}}\\]\n\\[= 100e^{\\ln(2)^{7/2}}\\]\n\\[= 100(2)^{7/2}\\]\n\\[\\approx 1131.371\\]\nWhy: \\(7\\ln\\sqrt{2} = \\ln(\\sqrt{2})^{7} = \\ln 2^{7/2}\\) and \\(e^{\\ln x} = x\\). Exactly, \\(100 \\cdot 2^{7/2} = 800\\sqrt{2}\\).",
+              "Check:\nThe population doubles every 2 hours: 100 at 0 h, 200 at 2 h, 400 at 4 h, 800 at 6 h. One more hour is half a doubling period, i.e. a factor \\(\\sqrt{2} \\approx 1.414\\):\n\\[800 \\times 1.414 \\approx 1131 \\;\\checkmark\\]"
+            ],
+            "answer": "The number of bacteria 7 hours later is 1131 (approximately)."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "(Radioactive Decay) A certain radioactive substance has a mass of 80 grams initially. After 10 hours, only 50 grams remain.\n(a) Find decay constant.\n(b) How much of the substance will remain after 24 hours?\n(c) After how many hours will only 20 grams remain?",
+            "steps": [
+              "Given: \\(M(0) = 80\\) g and \\(M(10) = 50\\) g, where \\(M\\) is the mass at time \\(t\\) hours.\nTo find: (a) the decay constant \\(k\\); (b) \\(M(24)\\); (c) the time \\(t\\) when \\(M = 20\\).\nMethod: radioactive mass decays at a rate proportional to the mass present, so \\(\\frac{dM}{dt} = -kM\\) with \\(k > 0\\). Solve it once, then use it for all three parts.",
+              "Step 1: The model and its solution\n\\[\\dfrac{dM}{dt} = -kM\\]\n\\[\\int\\dfrac{dM}{M} = -\\int k\\,dt\\]\n\\[\\ln|M| = -kt + C_1\\]\n\\[M(t) = ce^{-kt} \\quad \\ldots(1)\\]\nWhy: the equation is separable. Taking \\(e\\) of both sides gives \\(M = e^{C_1}e^{-kt}\\); we call the constant \\(e^{C_1} = c\\). Here \\(c\\) is the constant of integration and \\(k > 0\\) is the constant of proportionality (decay constant).",
+              "Step 2: (a) Use \\(M(0) = 80\\), then \\(M(10) = 50\\)\n\\[80 = ce^{0} \\Rightarrow c = 80\\]\n\\[50 = 80e^{-10k}\\]\n\\[e^{-10k} = \\dfrac{5}{8}\\]\n\\[-10k = \\ln\\left(\\dfrac{5}{8}\\right)\\]\n\\[k = -\\dfrac{1}{10}\\ln\\left(\\dfrac{5}{8}\\right)\\]\n\\[k \\approx 0.047\\]\nWhy: \\(\\ln\\frac{5}{8}\\) is negative (\\(\\approx -0.470\\)), so the minus sign in front makes \\(k\\) positive, as a decay constant must be.",
+              "Step 3: (b) Find \\(M(24)\\)\n\\[M(t) = 80e^{-0.047t} \\quad \\ldots(2)\\]\n\\[M(24) = 80e^{-0.047(24)}\\]\n\\[= 80e^{-1.128}\\]\n\\[\\approx 25.8944 \\approx 26 \\text{ grams}\\]\nWhy: put \\(c = 80\\) and \\(k = 0.047\\) in (1), then \\(t = 24\\).",
+              "Step 4: (c) Find \\(t\\) when \\(M = 20\\)\n\\[20 = 80e^{-0.047t}\\]\n\\[e^{-0.047t} = \\dfrac{1}{4}\\]\n\\[0.047t = \\ln 4\\]\n\\[t = \\dfrac{1.3863}{0.047}\\]\n\\[t \\approx 29.496\\]\nWhy: take \\(\\ln\\) of both sides: \\(\\ln\\frac{1}{4} = -\\ln 4\\), and the two minus signs cancel.",
+              "Check:\nThe half-life is \\(\\frac{\\ln 2}{k} = \\frac{0.6931}{0.047} \\approx 14.75\\) hours. 20 g is a quarter of 80 g, i.e. two half-lives: \\(2 \\times 14.75 = 29.5\\) hours \\(\\checkmark\\). Also 26 g after 24 hours lies between 40 g (one half-life) and 20 g (two half-lives) \\(\\checkmark\\)."
+            ],
+            "answer": "(a) Decay constant \\(k \\approx 0.047\\). (b) About 26 grams remain after 24 hours. (c) Only 20 grams remain after approximately 29.5 hours."
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "(Deflation Problem in Economics) Suppose an economy is experiencing deflation at 4% per year. If the current price of an item is Rs. 500, find its expected price after 3 years.",
+            "steps": [
+              "Given: deflation 4% per year, \\(P(0) = 500\\) rupees, where \\(P\\) is the price at time \\(t\\) years.\nTo find: \\(P(3)\\).\nMethod: in deflation the price decreases at a rate proportional to the price, with rate \\(4\\% = 0.04\\): \\(\\frac{dP}{dt} = -0.04P\\). This is the decay model.",
+              "Step 1: The model and its solution\n\\[\\dfrac{dP}{dt} = -(4\\%)P = -0.04P\\]\n\\[\\int\\dfrac{dP}{P} = -0.04\\int dt\\]\n\\[P(t) = Ce^{-0.04t} \\quad \\ldots(1)\\]\nWhy: separate, integrate (\\(\\ln|P| = -0.04t + C_1\\)) and take \\(e\\) of both sides; \\(C = e^{C_1}\\). The minus sign shows that the price falls.",
+              "Step 2: Use \\(P(0) = 500\\)\n\\[500 = Ce^{0} \\Rightarrow C = 500\\]\n\\[P(t) = 500e^{-0.04t}\\]\nWhy: the current price is the price at \\(t = 0\\).",
+              "Step 3: Substitute \\(t = 3\\)\n\\[P(3) = 500e^{-0.04(3)}\\]\n\\[= 500e^{-0.12}\\]\n\\[\\approx 500(0.88692)\\]\n\\[\\approx 443.46\\]\nWhy: the required time is 3 years.",
+              "Check:\nLosing roughly 4% a year for 3 years: \\(500 \\times 0.96^{3} \\approx 442.4\\). Our 443.46 is very close; continuous deflation gives a slightly different value \\(\\checkmark\\)."
+            ],
+            "answer": "The expected price of the item after three years will be Rs. 443.5 (approximately)."
+          },
+          {
+            "type": "example",
+            "title": "Example 12",
+            "problem": "(Cooling/Heating Problem) A cup of coffee is served at 90° C in a room where the temperature is 25° C. After 10 minutes, the coffee cools to 60° C. Find the temperature of the coffee after 20 minutes.",
+            "steps": [
+              "Given: room temperature \\(T_S = 25\\)°C, \\(T(0) = 90\\), \\(T(10) = 60\\), where \\(T\\) is the coffee's temperature at time \\(t\\) minutes.\nTo find: \\(T(20)\\).\nMethod: Newton's law of cooling (Example 2 of Section 4.1.1): the rate of cooling is proportional to the difference from the room temperature, \\(\\frac{dT}{dt} = -k(T - 25)\\).",
+              "Step 1: Separate the variables and integrate\n\\[\\dfrac{1}{(T - 25)}\\,dT = -k\\,dt\\]\n\\[\\int\\dfrac{dT}{T - 25} = -k\\int dt\\]\n\\[\\ln|T - 25| = -kt + \\ln|c|\\]\nWhy: \\(\\int\\frac{dT}{T - 25} = \\ln|T - 25|\\). Writing the constant as \\(\\ln|c|\\) makes the next step neat.",
+              "Step 2: Remove the logarithm\n\\[\\ln\\left|\\dfrac{T - 25}{c}\\right| = -kt\\]\n\\[\\dfrac{T - 25}{c} = e^{-kt}\\]\n\\[T(t) = 25 + ce^{-kt} \\quad \\ldots(1)\\]\nWhy: \\(\\ln|T - 25| - \\ln|c| = \\ln\\left|\\frac{T - 25}{c}\\right|\\); then take \\(e\\) of both sides.",
+              "Step 3: Use \\(T(0) = 90\\) and \\(T(10) = 60\\)\n\\[90 = 25 + c \\Rightarrow c = 65\\]\n\\[60 = 25 + 65e^{-10k}\\]\n\\[e^{-10k} = \\dfrac{35}{65} = \\dfrac{7}{13}\\]\n\\[e^{10k} = \\dfrac{13}{7}\\]\n\\[k = \\tfrac{1}{10}\\ln\\tfrac{13}{7} \\approx 0.0619\\]\nWhy: \\(c\\) is the starting difference \\(90 - 25\\). Taking reciprocals turns \\(e^{-10k}\\) into \\(e^{10k}\\), so \\(k\\) comes out positive.",
+              "Step 4: Find \\(T(20)\\)\n\\[T(t) = 25 + 65e^{-0.0619t}\\]\n\\[T(20) = 25 + 65e^{-0.0619(20)}\\]\n\\[T(20) \\approx 43.85\\]\nWhy: put \\(t = 20\\) in the solution.",
+              "Check:\nWithout rounding \\(k\\): \\(e^{-20k} = (e^{-10k})^{2} = \\left(\\frac{7}{13}\\right)^{2}\\), so\n\\[T(20) = 25 + 65 \\cdot \\dfrac{49}{169}\\]\n\\[= 25 + \\dfrac{245}{13} \\approx 43.85 \\;\\checkmark\\]\nIt lies between 25 (room) and 60 (the reading at 10 minutes), as it should."
+            ],
+            "answer": "The approximate temperature of the coffee after 20 minutes will be 43.85°C."
+          },
+          {
+            "type": "example",
+            "title": "Example 13",
+            "problem": "(RL Circuit Problem) An RL circuit has an emf of 5 volts, a resistance 50 ohms, an inductor of 1 henry and no initial current. Find the current in the circuit at any time t.",
+            "steps": [
+              "Given: \\(V_S = 5\\) volts, \\(R = 50\\ \\Omega\\), \\(L = 1\\) henry and \\(I(0) = 0\\).\nTo find: the current \\(I\\) flowing in the circuit at time \\(t\\).\nMethod: use the RL circuit model, which is separable; the initial condition fixes the constant and the sign.",
+              "Step 1: The differential equation (see Example 4, Section 4.1.2)\n\\[L\\dfrac{dI}{dt} = V_S - RI \\quad \\because L = 1 \\text{ henry}\\]\n\\[\\dfrac{dI}{dt} = 5 - 50I\\]\nWhy: substitute the given values \\(L = 1\\), \\(V_S = 5\\), \\(R = 50\\).",
+              "Step 2: Separate the variables and integrate\n\\[5 - 50I = 5(1 - 10I)\\]\n\\[\\dfrac{1}{5}\\int\\dfrac{1}{1 - 10I}\\,dI = \\int dt\\]\n\\[-\\dfrac{1}{50}\\int\\dfrac{-10}{1 - 10I}\\,dI = \\int dt\\]\n\\[-\\dfrac{1}{50}\\ln|1 - 10I| = t + C \\quad \\ldots(1)\\]\nWhy: the derivative of \\(1 - 10I\\) is \\(-10\\). Writing \\(\\frac{1}{5} = -\\frac{1}{50} \\times (-10)\\) puts this derivative on top, and \\(\\int\\frac{f'}{f} = \\ln|f|\\).",
+              "Step 3: Use \\(I(0) = 0\\)\n\\[-\\dfrac{1}{50}\\ln|1 - 10(0)| = 0 + C\\]\n\\[-\\dfrac{1}{50}\\ln|1| = C \\Rightarrow C = 0\\]\nWhy: \\(\\ln 1 = 0\\).",
+              "Step 4: Solve for the current\n\\[-\\dfrac{1}{50}\\ln|1 - 10I| = t\\]\n\\[\\ln|1 - 10I| = -50t\\]\n\\[|1 - 10I| = e^{-50t}\\]\n\\[\\pm(1 - 10I) = e^{-50t}\\]\nWhy: multiply by \\(-50\\), then take \\(e\\) of both sides. Removing a modulus gives two signs.",
+              "Step 5: Choose the sign with the initial condition\n\\[\\pm(1 - 10(0)) = e^{-50(0)} \\Rightarrow \\pm 1 = 1\\]\n\\[1 - 10I = e^{-50t}\\]\n\\[I(t) = \\dfrac{1}{10}\\left(1 - e^{-50t}\\right)\\]\nWhy: only the \\(+\\) sign gives \\(1 = 1\\), so the negative sign is ignored. Then make \\(I\\) the subject.",
+              "Check:\n\\(I(0) = \\frac{1}{10}(1 - 1) = 0 \\;\\checkmark\\). \\(\\frac{dI}{dt} = 5e^{-50t}\\) and \\(5 - 50I = 5 - 5 + 5e^{-50t} = 5e^{-50t} \\;\\checkmark\\). As \\(t \\to \\infty\\), \\(I \\to \\frac{1}{10} = \\frac{V_S}{R}\\) A, the steady current of Ohm's law \\(\\checkmark\\)."
+            ],
+            "answer": "\\(I(t) = \\frac{1}{10}\\left(1 - e^{-50t}\\right)\\) amperes.",
+            "book_errors": [
+              "Section 4.1.2"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book refers to 'Example 4, Section 4.1.2' for the RL circuit equation. There is no Section 4.1.2; the RL circuit model \\(L\\frac{dI}{dt} = V_S - RI\\) is derived in Example 4 (ii) of Section 4.1.1."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Half-Life",
+            "text": "Half-life is the time required for a quantity of a radioactive substance to reduce to half of its initial amount due to radioactive decay."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The book prints this Half-Life box beside Exercise 4.3, Question 4. From the decay model it gives a short formula:\n\\[M_0 e^{-kT_{1/2}} = \\tfrac{1}{2}M_0\\]\n\\[kT_{1/2} = \\ln 2\\]\n\\[T_{1/2} = \\dfrac{\\ln 2}{k}, \\quad k = \\dfrac{\\ln 2}{T_{1/2}}\\]\nSo the half-life does not depend on the starting mass. After \\(n\\) half-lives the mass is \\(M_0\\left(\\frac{1}{2}\\right)^{n}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "Growth: \\(\\frac{dN}{dt} = kN\\) gives \\(N = N_0e^{kt}\\). Decay: \\(\\frac{dM}{dt} = -kM\\) gives \\(M = M_0e^{-kt}\\) (\\(k > 0\\)).\nCooling or heating: \\(T = T_S + (T_0 - T_S)e^{-kt}\\), where \\(T_S\\) is the temperature of the surroundings.\nRL circuit with \\(I(0) = 0\\): \\(I = \\frac{V_S}{R}\\left(1 - e^{-Rt/L}\\right)\\).\nThe condition at \\(t = 0\\) gives the constant of integration; the second condition gives \\(k\\).\nA percentage rate is written as a decimal: \\(4\\% = 0.04\\).\nHalf-life: \\(T_{1/2} = \\frac{\\ln 2}{k}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Forgetting the minus sign for decay, deflation or cooling: the quantity must decrease, so \\(\\frac{dM}{dt} = -kM\\) with \\(k > 0\\).\nIn cooling problems using \\(\\frac{dT}{dt} = -kT\\) instead of \\(\\frac{dT}{dt} = -k(T - T_S)\\): the rate depends on the difference from the room temperature.\nUsing 4 instead of 0.04 for a 4% rate.\nRounding \\(k\\) too early: keep \\(e^{-10k} = \\frac{7}{13}\\) as a fraction where you can, and round only the final answer.\nMixing units of time: if \\(k\\) was found per minute, \\(t\\) must be in minutes."
+          }
+        ]
+      }
+    }
+  ]
+}

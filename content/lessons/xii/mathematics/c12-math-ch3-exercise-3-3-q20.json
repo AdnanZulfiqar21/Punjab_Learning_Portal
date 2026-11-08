@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q20",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q20",
+      "title": "Question 20",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 20: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "20",
+            "prompt": "20. Evaluate \\(\\int \\dfrac{\\ln x\\tan^{-1}(\\ln x)}{x}\\,dx\\).",
+            "explanation": "\\(\\frac{dx}{x} = d(\\ln x)\\): substitute \\(u = \\ln x\\) to get \\(\\int u\\tan^{-1}u\\,du\\).\nPlan: parts with \\(\\tan^{-1}u\\) first and \\(u\\) second; then \\(\\frac{u^2}{1+u^2} = 1 - \\frac{1}{1+u^2}\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{\\ln x\\tan^{-1}(\\ln x)}{x}\\,dx\\), \\(x > 0\\).\nTo find: the indefinite integral.\nMethod: substitute \\(u = \\ln x\\); then \\(\\int u\\tan^{-1}u\\,du\\) by parts with \\(\\tan^{-1}u\\) first.",
+              "Substitute\n\\[u = \\ln x \\Rightarrow du = \\dfrac{1}{x}\\,dx\\]\n\\[= \\int u\\tan^{-1}u\\,du\\]\nWhy: \\(\\frac{dx}{x} = du\\).",
+              "Integration by parts\n\\[= \\dfrac{u^2}{2}\\tan^{-1}u - \\int \\dfrac{u^2}{2}\\cdot\\dfrac{1}{1+u^2}\\,du\\]\nWhy: \\(\\int u\\,du = \\frac{u^2}{2}\\), \\(\\frac{d}{du}\\tan^{-1}u = \\frac{1}{1+u^2}\\).",
+              "Divide the fraction\n\\[\\dfrac{u^2}{1+u^2} = 1 - \\dfrac{1}{1+u^2}\\]\n\\[\\int \\dfrac{u^2}{1+u^2}\\,du = u - \\tan^{-1}u\\]\nWhy: \\(u^2 = (1 + u^2) - 1\\).",
+              "Combine\n\\[= \\dfrac{u^2}{2}\\tan^{-1}u - \\dfrac{u}{2} + \\dfrac{1}{2}\\tan^{-1}u + c\\]\nWhy: multiply \\(u - \\tan^{-1}u\\) by \\(-\\frac{1}{2}\\).",
+              "Return to \\(x\\)\n\\[= \\dfrac{(\\ln x)^2\\tan^{-1}(\\ln x)}{2} - \\dfrac{\\ln x}{2}\\]\n\\[\\quad + \\dfrac{\\tan^{-1}(\\ln x)}{2} + c\\]\nWhy: \\(u = \\ln x\\).",
+              "Check\n\\[\\dfrac{d}{du}(\\ldots) = u\\tan^{-1}u + \\dfrac{u^2}{2(1+u^2)} - \\dfrac{1}{2} + \\dfrac{1}{2(1+u^2)}\\]\n\\[= u\\tan^{-1}u + \\dfrac{1 + u^2}{2(1 + u^2)} - \\dfrac{1}{2} = u\\tan^{-1}u\\]\nWhy: the extra terms add to zero."
+            ],
+            "final_answer": "\\(\\dfrac{(\\ln x)^2\\tan^{-1}(\\ln x)}{2} - \\dfrac{\\ln x}{2} + \\dfrac{\\tan^{-1}(\\ln x)}{2} + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

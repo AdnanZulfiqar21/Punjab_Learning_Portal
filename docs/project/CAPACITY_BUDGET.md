@@ -57,7 +57,20 @@ These rules come from the code (`attempt-runner.tsx` on the web, `app/attempt/[i
 
 - **Per account:** limits apply to support messages, help screenshots and staff import previews (P15.S4.T2), not to schools or carrier IPs.
 - **Overload:** the API protects itself by pool timeout with `Retry-After`. Evidence parsing (`WorkersBusy`, `Retry-After: 10`) and teacher-review capacity refuse new work before accepting work they can't finish.
-- **Not built yet:** per-endpoint admission budgets that shed catalogue, search and analytics first, then starts and probes, while protecting saves and submissions. They need the measured envelope (P20) and hosting (B03).
+- **Process admission (ADMISSION-01, `portal_api/admission.py`):** each API process admits at most `PORTAL_API_ADMISSION_SLOTS` requests at once (default twice the pool, 20). Others wait in the event loop, holding no thread or connection, for up to `PORTAL_API_ADMISSION_WAIT_S` (5 s), then get `503 SERVICE_BUSY` with `Retry-After: 5`.
+  - Reads (GET/HEAD) may hold at most three quarters of the slots, so saves and submissions always find room.
+  - The worker-thread pool is raised to at least twice the slots.
+  - Not counted: health checks, multipart and large (over 1 MB) uploads, and a streamed body once its response has started.
+  - Why: before this, a request held its pooled connection across several thread hops. Under overload every thread waited for a connection while the connection holders waited for a thread, and throughput collapsed until the pool timeout. Local probe, one development process, public reading mix:
+
+    | Readers | Before | After |
+    |---|---|---|
+    | 100 | 4 req/s, 158 failures | 92 req/s, 0 failures |
+    | 200 | 1 req/s, 390 failures | 94 req/s, 0 failures |
+    | 400 | not run | 103 req/s; 219 quick 503s once waits passed 5 s |
+
+    These are laptop numbers, not a capacity claim (P20).
+- **Not built yet:** per-endpoint budgets within reads (shed search and analytics before catalogue and lessons). They need the measured envelope (P20) and hosting (B03).
 
 ## Payload budgets
 

@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q1-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q1",
+      "title": "Question 1 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 274,
+          "pdf_to": 274,
+          "note": "Exercise 9.2, Question 1 (book p. 272); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "variant_of": "C12-MATH-CH9-EXERCISE-9-2-Q1",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1",
+            "prompt": "1. Prove that \\(\\sin^{-1}\\frac{7}{25} + \\sin^{-1}\\frac{15}{17} = \\cos^{-1}\\frac{87}{425}\\).",
+            "explanation": "Yeh numbers wala proof hai: left side par do \\(\\sin^{-1}\\) angles jama ho rahe hain, aur right side par ek \\(\\cos^{-1}\\) hai.\nDiya kya hai? Do angles jin ke sines \\(\\frac{7}{25}\\) aur \\(\\frac{15}{17}\\) hain.\nFind kya karna hai? Dikhana hai ke in ka jama woh angle hai jis ka cosine \\(\\frac{87}{425}\\) hai.\nRule kaunsa? Jawab \\(\\cos^{-1}\\) mein hai, is liye cosine wala jama formula (iii) lagayenge.\nPlan: pehle dono angles ko right triangle ki madad se \\(\\cos^{-1}\\) shakal mein badlenge, phir formula (iii).",
+            "steps": [
+              "Diya gaya: \\(\\sin^{-1}\\frac{7}{25}\\) aur \\(\\sin^{-1}\\frac{15}{17}\\).\nMaloom karna (prove): in ka jama \\(\\cos^{-1}\\frac{87}{425}\\) hai.\nTareeqa: jawab \\(\\cos^{-1}\\) mein hai, is liye formula (iii) lagayenge: \\(\\cos^{-1}x + \\cos^{-1}y = \\cos^{-1}\\left(xy - \\sqrt{(1-x^{2})(1-y^{2})}\\right)\\). Lekin yeh formula tabhi lagta hai jab dono terms \\(\\cos^{-1}\\) hon, is liye pehle har angle ko \\(\\cos^{-1}\\) mein badalna hoga.",
+              "\\(\\sin^{-1}\\frac{7}{25}\\) ko \\(\\cos^{-1}\\) mein badlein\n\\[\\alpha = \\sin^{-1}\\tfrac{7}{25},\\quad \\sin\\alpha = \\tfrac{7}{25}\\]\n\\[\\cos\\alpha = \\sqrt{1 - \\tfrac{49}{625}} = \\sqrt{\\tfrac{576}{625}}\\]\n\\[= \\tfrac{24}{25}\\]\n\\[\\alpha = \\cos^{-1}\\tfrac{24}{25}\\]\nKyun: \\(\\sin^{2}\\alpha + \\cos^{2}\\alpha = 1\\) se cosine nikala. Sine positive hai, is liye \\(\\alpha\\) pehle quadrant \\(\\left[0, \\frac{\\pi}{2}\\right]\\) mein hai, jahan cosine bhi positive hota hai. \\(\\cos^{-1}\\frac{24}{25}\\) bhi isi interval mein hai, is liye dono ek hi angle hain. Triangle ki zubaan mein: opposite 7, hypotenuse 25, to adjacent 24 (7, 24, 25 triple).\nDhyan dein: \\(\\sqrt{576} = 24\\) aur \\(\\sqrt{625} = 25\\); yeh squares yaad hon to hisaab foran ho jata hai.",
+              "\\(\\sin^{-1}\\frac{15}{17}\\) ko \\(\\cos^{-1}\\) mein badlein\n\\[\\beta = \\sin^{-1}\\tfrac{15}{17},\\quad \\sin\\beta = \\tfrac{15}{17}\\]\n\\[\\cos\\beta = \\sqrt{1 - \\tfrac{225}{289}} = \\sqrt{\\tfrac{64}{289}}\\]\n\\[= \\tfrac{8}{17}\\]\n\\[\\beta = \\cos^{-1}\\tfrac{8}{17}\\]\nKyun: bilkul wohi wajah. Opposite 15, hypotenuse 17, to adjacent 8 (8, 15, 17 bhi Pythagorean triple hai). Angle pehle quadrant mein hai, is liye positive root.",
+              "Formula (iii) lagayein, \\(x = \\frac{24}{25},\\ y = \\frac{8}{17}\\)\n\\[\\sqrt{1-x^{2}} = \\tfrac{7}{25},\\quad \\sqrt{1-y^{2}} = \\tfrac{15}{17}\\]\n\\[\\text{L.H.S} = \\cos^{-1}\\tfrac{24}{25} + \\cos^{-1}\\tfrac{8}{17}\\]\n\\[= \\cos^{-1}\\left(\\tfrac{24}{25}\\cdot\\tfrac{8}{17} - \\tfrac{7}{25}\\cdot\\tfrac{15}{17}\\right)\\]\nKyun: formula ke square roots asal mein wohi sines hain jin se hum ne shuru kiya tha, is liye dobara hisaab ki zaroorat nahi. Formula (iii) ki shart \\(x + y \\ge 0\\) hai, jo yahan poori hai kyunke dono positive hain.\nDhyan dein: cosine ke jama mein beech mein minus hai, plus nahi.",
+              "Hisaab saaf karein\n\\[= \\cos^{-1}\\left(\\tfrac{192}{425} - \\tfrac{105}{425}\\right)\\]\n\\[= \\cos^{-1}\\tfrac{87}{425} = \\text{R.H.S}\\]\nKyun: denominator \\(25 \\times 17 = 425\\). Numerators: \\(24 \\times 8 = 192\\) aur \\(7 \\times 15 = 105\\). Farq \\(192 - 105 = 87\\). Left side right side ke barabar ho gaya.\nIs tarah humein do lambe square roots dobara nahi nikalne pare, sirf multiplication aur ek minus.",
+              "Tasdeeq\n\\[\\sin^{-1}\\tfrac{7}{25} + \\sin^{-1}\\tfrac{15}{17} \\approx 0.2838 + 1.0808\\]\n\\[= 1.3646\\]\n\\[\\cos^{-1}\\tfrac{87}{425} \\approx 1.3646\\ \\checkmark\\]\nKyun: calculator (radian mode) dono taraf ek hi angle deta hai, is liye proof ka natija sahi hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\sin^{-1}\\frac{7}{25} + \\sin^{-1}\\frac{15}{17} = \\cos^{-1}\\frac{87}{425}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kitab mein Exercise 9.2 ke jawab chhape hue nahi hain. Is page ka har hal hamara apna hai: qadam ba qadam kiya gaya, computer algebra system (sympy) se alag se check kiya gaya, aur ek solution book se bhi milaya gaya. Is liye aap apna kaam yahan wale hal se mila kar dekh sakte hain."
+          }
+        ]
+      }
+    }
+  ]
+}

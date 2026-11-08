@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q10-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q10",
+      "title": "Question 10 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 10: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-3-Q10",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10. Evaluate \\(\\int (2x^3 + 2x)e^{x^2}\\,dx\\).",
+            "explanation": "Yahan \\(e^{x^2}\\) ke saath ek bracket hai. Kitab ka Note yaad kijiye: \\(\\int e^{g(x)}[f(x)g'(x) + f'(x)]\\,dx = e^{g(x)}f(x) + c\\).\n\\(g(x) = x^2\\) lein to \\(g'(x) = 2x\\). Agar \\(f(x) = x^2\\) ho to \\(fg' + f' = 2x^3 + 2x\\), bilkul hamara bracket!\nIs liye jawab \\(x^2e^{x^2}\\) hona chahiye. Lekin hum ise parts se bhi saabit karenge taa ke wajah samajh aaye.\nPlan: integral ko torein, \\(2x^3e^{x^2} = x^2 \\cdot 2xe^{x^2}\\) par parts lagayein; bacha hua integral cancel ho jayega.",
+            "steps": [
+              "Diya gaya: \\(\\int (2x^3 + 2x)e^{x^2}\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: integral torenge; \\(\\int x^2\\cdot 2xe^{x^2}\\,dx\\) mein \\(x^2\\) first aur \\(2xe^{x^2}\\) second (jis ka integral \\(e^{x^2}\\) hai).",
+              "Torein\n\\[= \\int x^2\\cdot 2xe^{x^2}\\,dx + \\int 2xe^{x^2}\\,dx\\]\nKyun: \\(2x^3 = x^2\\cdot 2x\\) likha, kyunke \\(2xe^{x^2}\\) ka integral humein aata hai: \\(\\frac{d}{dx}e^{x^2} = 2xe^{x^2}\\).",
+              "Pehle integral par parts\n\\[\\int x^2\\cdot 2xe^{x^2}\\,dx = x^2e^{x^2} - \\int e^{x^2}\\cdot 2x\\,dx\\]\nKyun: second function \\(2xe^{x^2}\\) ka integral \\(e^{x^2}\\) (chain rule ka ulta), first \\(x^2\\) ka derivative \\(2x\\).\nDhyan dein: \\(e^{x^2}\\) ko akela integrate karne ki koshish na karein; woh kisi aam function mein nahi nikalta. \\(2x\\) saath ho tabhi aasaan hai.",
+              "Integrals cancel\n\\[= x^2e^{x^2} - \\int 2xe^{x^2}\\,dx + \\int 2xe^{x^2}\\,dx\\]\n\\[= x^2e^{x^2} + c\\]\nKyun: ek hi integral ek dafa minus aur ek dafa plus ke saath; dono khatam. Yahi Note ka jawab \\(e^{g}f = e^{x^2}x^2\\) hai.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}(x^2e^{x^2}) = 2xe^{x^2} + x^2\\cdot 2xe^{x^2}\\]\n\\[= (2x^3 + 2x)e^{x^2}\\]\nKyun: product rule aur chain rule; bilkul integrand."
+            ],
+            "final_answer": "\\(x^2e^{x^2} + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

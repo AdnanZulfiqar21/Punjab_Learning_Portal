@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.13",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.13",
+      "title": "2.13 Error in Differential Approximations",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 63,
+          "pdf_to": 66,
+          "note": "Book p. 61-64: 2.13 Error in Differential Approximations, error / relative error / percentage error, Examples 25-29"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Suppose \\(f\\) is a differentiable function at a point \\(x\\), and there is a small change \\(\\Delta x\\) in \\(x\\). If:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "\\(\\Delta y\\) is actual corresponding change in \\(y\\), given by \\(\\Delta y = f(x + \\Delta x) - f(x)\\)",
+              "\\(dy\\) is the approximation change in \\(y\\) obtained using differentials, given by \\(dy = f'(x)\\,dx\\) where \\(dx = \\Delta x\\)"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Then:"
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Error in Δy"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Error} = \\Delta y - dy",
+            "text_alt": "Error equals delta y minus d y"
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Relative error in Δy"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Relative Error} = \\dfrac{\\Delta y - dy}{\\Delta y} = \\dfrac{\\text{Error}}{\\text{Original Value}},\\ \\Delta y \\ne 0",
+            "text_alt": "Relative error equals (delta y minus d y) over delta y, which is error over original value, when delta y is not zero"
+          },
+          {
+            "type": "heading",
+            "level": 4,
+            "text": "Percentage error Δy"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Percentage Error} = \\left|\\dfrac{\\Delta y - dy}{\\Delta y}\\right| \\times 100,\\ \\Delta y \\ne 0",
+            "text_alt": "Percentage error equals the absolute value of (delta y minus d y) over delta y, times 100, when delta y is not zero"
+          },
+          {
+            "type": "paragraph",
+            "text": "that is, Percentage Error \\(= \\left|\\frac{\\text{Error}}{\\text{Original value}}\\right| \\times 100\\) when \\(\\Delta y \\ne 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "text": "Error measures how far the easy estimate \\(dy\\) is from the true change \\(\\Delta y\\).\nRelative error compares the error with the size of the true change: an error of 0.03 is small if \\(\\Delta y = 100\\) but large if \\(\\Delta y = 0.3\\).\nPercentage error is the relative error written per hundred, always positive (absolute value).",
+            "title": "Teaching note"
+          },
+          {
+            "type": "example",
+            "title": "Example 25",
+            "problem": "Find \\(dy\\) and \\(\\Delta y\\) for the function \\(f(x) = x^{3}\\) when \\(x = 1\\) and \\(dx = 0.1\\).",
+            "steps": [
+              "Given: \\(f(x) = x^{3}\\), \\(x = 1\\), \\(dx = \\Delta x = 0.1\\).\nTo find: the differential \\(dy\\) and the actual change \\(\\Delta y\\).\nMethod: \\(dy = f'(x)\\,dx\\) (tangent-line change) and \\(\\Delta y = f(x + \\Delta x) - f(x)\\) (actual change).",
+              "Step 1: Differentiate\n\\[f(x) = x^{3} \\quad \\text{...(1)}\\]\n\\[f'(x) = 3x^{2}\\]\nWhy: power rule.",
+              "Step 2: Find \\(dy\\)\n\\[dy = f'(x)\\,dx = 3x^{2}\\,dx\\]\n\\[dy = 3(1)^{2}(0.1) = 0.3\\]\nWhy: substitute \\(x = 1\\) and \\(dx = 0.1\\) in the formula for \\(dy\\).",
+              "Step 3: Find \\(\\Delta y\\)\n\\[\\Delta y = f(x + \\Delta x) - f(x)\\]\n\\[= f(1 + 0.1) - f(1)\\]\n\\[= f(1.1) - f(1)\\]\n\\[= (1.1)^{3} - (1)^{3}\\]\n\\[= 1.331 - 1 = 0.331\\]\nWhy: from equation (1), \\(f(x) = x^{3}\\); the actual change is new value minus old value, with \\(\\Delta x = dx = 0.1\\).",
+              "Check (the error, using the definitions above):\n\\[\\text{Error} = \\Delta y - dy = 0.331 - 0.3 = 0.031\\]\n\\[\\left|\\dfrac{0.031}{0.331}\\right| \\times 100 \\approx 9.37\\%\\]\n\\(dy\\) is close to \\(\\Delta y\\); the error is the part the tangent line misses because the curve bends."
+            ],
+            "answer": "\\(dy = 0.3\\) and \\(\\Delta y = 0.331\\) (error \\(\\Delta y - dy = 0.031\\))."
+          },
+          {
+            "type": "example",
+            "title": "Example 26",
+            "problem": "Use differentials to approximate \\(\\sqrt{24}\\).",
+            "steps": [
+              "Given: the number \\(\\sqrt{24}\\).\nTo find: an approximate value without a calculator.\nMethod: \\(f(x + \\Delta x) \\approx f(x) + dy\\) with \\(f(x) = \\sqrt{x}\\). Start from the nearest perfect square, 25, where \\(\\sqrt{25} = 5\\) is exact.",
+              "Step 1: Choose the function and differentiate\n\\[f(x) = \\sqrt{x} \\quad \\text{...(1)}\\]\n\\[f'(x) = \\tfrac{1}{2}x^{-1/2} = \\dfrac{1}{2\\sqrt{x}} \\quad \\text{...(2)}\\]\nWhy: \\(\\sqrt{x} = x^{1/2}\\) and the power rule.",
+              "Step 2: Choose \\(x\\) and \\(\\Delta x\\)\nChoose a real number that closest to 24 is a perfect square. Take \\(x = 25\\).\nWe are approximating \\(\\sqrt{24}\\), so: \\(x + \\Delta x = 24\\) and \\(x = 25\\).\nThus: \\(24 + \\Delta x = 25 \\Rightarrow \\Delta x = -1\\)\nSince in differential approximation, \\(dx = \\Delta x\\), we take: \\(dx = -1\\).\nWhy: 25 is the perfect square nearest to 24. \\(\\Delta x\\) is negative because we move down from 25 to 24.",
+              "Step 3: Find \\(dy\\)\n\\[dy = f'(x)\\,dx = \\dfrac{1}{2\\sqrt{x}}\\,dx\\]\n\\[dy = \\dfrac{1}{2\\sqrt{25}}(-1)\\]\n\\[= -\\dfrac{1}{10} = -0.1\\]\nWhy: from equation (2), with \\(x = 25\\) and \\(dx = -1\\).",
+              "Step 4: Use \\(f(x + \\Delta x) \\approx f(x) + dy\\)\n\\[f(25 - 1) \\approx f(25) + (-0.1)\\]\n\\[f(24) \\approx f(25) - 0.1\\]\nFrom equation (1):\n\\[\\sqrt{24} = \\sqrt{25} - 0.1 = 5 - 0.1 = 4.9\\]\nWhy: the known value \\(f(25) = 5\\) plus the small correction \\(dy\\).",
+              "Check:\n\\[4.9^{2} = 24.01\\]\nVery close to 24. Calculator: \\(\\sqrt{24} = 4.89898\\), so the error is only about \\(0.001\\)."
+            ],
+            "answer": "\\(\\sqrt{24} \\approx 4.9\\)",
+            "book_errors": [
+              "\\(24 + \\Delta x = 25 \\Rightarrow \\Delta x = -1\\)",
+              "\\[\\sqrt{24} = \\sqrt{25} - 0.1 = 5 - 0.1 = 4.9\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "text": "Example 26 prints \\(24 + \\Delta x = 25 \\Rightarrow \\Delta x = -1\\). From \\(x + \\Delta x = 24\\) with \\(x = 25\\) the equation is \\(25 + \\Delta x = 24\\), which gives \\(\\Delta x = -1\\) (the printed equation would give \\(+1\\)).\nThe final line prints \\(\\sqrt{24} = \\sqrt{25} - 0.1\\); since this is an approximation it should be \\(\\sqrt{24} \\approx 4.9\\).",
+            "title": "Book correction"
+          },
+          {
+            "type": "example",
+            "title": "Example 27",
+            "problem": "Using differentials approximate the value of \\(\\cos 61^\\circ 3\\).",
+            "steps": [
+              "Given: \\(\\cos 61^\\circ\\) (the printed \"3\" is a stray character; see the correction below).\nTo find: an approximate value of \\(\\cos 61^\\circ\\).\nMethod: \\(f(x + \\Delta x) \\approx f(x) + dy\\) with \\(f(x) = \\cos x\\), starting at \\(60^\\circ\\), whose cosine and sine are known exactly. \\(dx\\) must be in radians.",
+              "Step 1: Choose the function and differentiate\n\\[f(x) = \\cos x \\quad \\text{...(1)}\\]\n\\[f'(x) = -\\sin x \\quad \\text{...(2)}\\]\nWhy: standard derivative of cosine.",
+              "Step 2: Choose \\(x\\) and \\(\\Delta x\\)\nChoose \\(x = 60^\\circ\\) because calculating \\(\\cos 60^\\circ\\) is easy.\n\\[x + \\Delta x = 61^\\circ,\\ x = 60^\\circ\\]\n\\[60^\\circ + \\Delta x = 61^\\circ \\Rightarrow \\Delta x = 1^\\circ\\]\n\\[dx = 1^\\circ = \\dfrac{\\pi}{180} \\text{ radian}\\]\nWhy: in differential approximation \\(dx = \\Delta x\\), and the derivative formula of \\(\\cos x\\) holds only for radians.",
+              "Step 3: Find \\(dy\\)\n\\[dy = f'(x)\\,dx = -\\sin x\\,dx\\]\n\\[dy = -\\sin 60^\\circ\\left(\\dfrac{\\pi}{180}\\right)\\]\n\\[= -\\dfrac{\\sqrt{3}}{2} \\times \\dfrac{\\pi}{180}\\]\n\\[= -0.0151\\]\nWhy: from (2) with \\(x = 60^\\circ\\) and \\(dx = \\frac{\\pi}{180}\\); \\(\\sin 60^\\circ = \\frac{\\sqrt{3}}{2}\\) and \\(\\frac{\\pi}{180} \\approx 0.017453\\).",
+              "Step 4: Use \\(f(x + \\Delta x) \\approx f(x) + dy\\)\n\\[f(61^\\circ) \\approx f(60^\\circ) + (-0.0151)\\]\nFrom equation (1):\n\\[\\cos 61^\\circ = \\cos 60^\\circ - 0.0151\\]\n\\[= 0.5 - 0.0151 = 0.4849\\]\nWhy: \\(\\cos 60^\\circ = 0.5\\) exactly (the result is approximate, \\(\\cos 61^\\circ \\approx 0.4849\\)); \\(dy\\) is negative because cosine decreases between \\(0^\\circ\\) and \\(90^\\circ\\).",
+              "Check:\nCalculator: \\(\\cos 61^\\circ = 0.48481\\). The estimate \\(0.4849\\) differs by less than \\(0.0001\\)."
+            ],
+            "answer": "\\(\\cos 61^\\circ \\approx 0.4849\\)",
+            "book_errors": [
+              "\\(\\cos 61^\\circ 3\\)",
+              "\\[\\cos 61^\\circ = \\cos 60^\\circ - 0.0151\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "text": "Example 27 prints \"approximate the value of \\(\\cos 61^\\circ 3\\)\". The \"3\" is a stray character: the solution approximates \\(\\cos 61^\\circ\\) (\\(\\approx 0.4849\\)). The final line also prints \"\\(\\cos 61^\\circ = \\ldots\\)\" for a value that is only approximate (\\(\\approx\\)).",
+            "title": "Book correction"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "text": "Examples 28 and 29 use \"error\" in a second, practical sense: an error in measuring a quantity (here the side or radius, \\(dx\\) or \\(dr\\)) causes an error in a quantity calculated from it (volume, area), estimated by its differential (\\(dV\\), \\(dA\\)).\nPercentage error in a calculated quantity \\(Q\\): \\(\\left|\\frac{dQ}{Q}\\right| \\times 100\\).\nShortcut: if \\(Q = kx^{n}\\), then \\(\\frac{dQ}{Q} = n\\frac{dx}{x}\\): the percentage error is multiplied by the power \\(n\\) (cube volume: 3 times; circle area: 2 times; circumference: 1 time).",
+            "title": "Teaching note"
+          },
+          {
+            "type": "example",
+            "title": "Example 28",
+            "problem": "The side of a cube is measured to be 25 cm, with a possible error of \\(\\pm 1\\) cm.\n(a) Use differentials to estimate the error in the calculated volume.\n(b) Estimate the percentage errors in the side and volume.",
+            "steps": [
+              "Given: side \\(x = 25\\) cm, error in the side \\(dx = \\Delta x = \\pm 1\\) cm.\nTo find: (a) the error \\(dV\\) in the volume; (b) the percentage errors in the side and in the volume.\nMethod: the error in a calculated quantity is estimated by its differential: \\(V = x^{3}\\), so \\(dV = 3x^{2}\\,dx\\).",
+              "(a) Step 1: The differential of \\(V\\)\n\\[V = x^{3}\\]\n\\[dV = \\dfrac{d}{dx}(x^{3})\\,dx\\]\n\\[= 3x^{2}\\,dx \\quad \\text{...(1)}\\]\nWhy: a small error \\(dx\\) in the side causes a change of about \\(dV\\) in the volume.",
+              "Step 2: Substitute \\(x = 25\\), \\(dx = \\pm 1\\) in (1)\n\\[dV = 3(25)^{2}(\\pm 1)\\]\n\\[= \\pm 1875 \\text{ cm}^{3}\\]\nThus, the estimated error in measuring volume is \\(\\pm 1875\\) cm\\(^{3}\\).\nWhy: \\(25^{2} = 625\\) and \\(3 \\times 625 = 1875\\).",
+              "(b) Step 3: Percentage error in the side\n\\[\\left|\\dfrac{dx}{x}\\right| \\times 100 = \\dfrac{1}{25} \\times 100\\]\n\\[= 4\\% \\quad \\text{...(2)}\\]\nWhy: percentage error = (error / measured value) \\(\\times\\) 100.",
+              "Step 4: Percentage error in the volume\nSince \\(V = x^{3}\\) and \\(dV = 3x^{2}\\,dx\\):\n\\[\\left|\\dfrac{dV}{V}\\right| \\times 100 = \\left|\\dfrac{3x^{2}\\,dx}{x^{3}}\\right| \\times 100\\]\n\\[= 3 \\times \\left|\\dfrac{dx}{x}\\right| \\times 100\\]\nUsing equation (2):\n\\[\\left|\\dfrac{dV}{V}\\right| \\times 100 = 3 \\times 4\\% = 12\\%\\]\nWhy: \\(\\frac{x^{2}}{x^{3}} = \\frac{1}{x}\\), so the percentage error of the volume is 3 times that of the side.",
+              "Check:\n\\[V = 25^{3} = 15625 \\text{ cm}^{3}\\]\n\\[\\dfrac{1875}{15625} \\times 100 = 12\\%\\]\nThe same 12% comes directly from parts (a) and the volume."
+            ],
+            "answer": "(a) \\(dV = \\pm 1875\\) cm\\(^{3}\\). (b) Side: 4%; volume: 12%."
+          },
+          {
+            "type": "example",
+            "title": "Example 29",
+            "problem": "The radius \\(r\\) of a circle is measured with an error of at most 2%. What is the maximum corresponding percentage error in computing the circle's\n(a) circumference? (b) area?",
+            "steps": [
+              "Given: percentage error in the radius \\(\\left|\\frac{dr}{r}\\right| \\times 100 = 2\\%\\).\nTo find: the percentage error in (a) \\(C = 2\\pi r\\) and (b) \\(A = \\pi r^{2}\\).\nMethod: find the differential of each formula, divide by the formula itself, and use the given 2%. The radius itself is not needed.",
+              "Step 1: The given error\nSince \\(r\\) is the radius, the percentage error in measuring the radius is\n\\[\\left|\\dfrac{dr}{r}\\right| \\times 100 = 2\\% \\quad \\text{...(1)}\\]",
+              "(a) Step 2: Differential of the circumference\n\\[C = 2\\pi r\\]\n\\[dC = \\dfrac{d}{dr}(2\\pi r)\\,dr = 2\\pi\\,dr \\quad \\text{...(2)}\\]\nWhy: \\(2\\pi\\) is a constant, so the derivative of \\(2\\pi r\\) is \\(2\\pi\\).",
+              "Step 3: Percentage error in the circumference\n\\[\\left|\\dfrac{dC}{C}\\right| \\times 100 = \\left|\\dfrac{2\\pi\\,dr}{2\\pi r}\\right| \\times 100\\]\n\\[= \\left|\\dfrac{dr}{r}\\right| \\times 100\\]\nUsing equation (1):\n\\[\\left|\\dfrac{dC}{C}\\right| \\times 100 = 2\\%\\]\nWhy: \\(2\\pi\\) cancels; \\(C\\) is proportional to \\(r\\) (power 1), so its percentage error equals that of \\(r\\).",
+              "(b) Step 4: Differential of the area\n\\[A = \\pi r^{2}\\]\n\\[dA = \\dfrac{d}{dr}(\\pi r^{2})\\,dr = 2\\pi r\\,dr\\]\nWhy: power rule, \\(\\pi\\) is a constant.",
+              "Step 5: Percentage error in the area\n\\[\\left|\\dfrac{dA}{A}\\right| \\times 100 = \\left|\\dfrac{2\\pi r\\,dr}{\\pi r^{2}}\\right| \\times 100\\]\n\\[= 2 \\times \\left|\\dfrac{dr}{r}\\right| \\times 100\\]\nUsing equation (1):\n\\[\\left|\\dfrac{dA}{A}\\right| \\times 100 = 2 \\times 2\\% = 4\\%\\]\nWhy: \\(\\frac{r}{r^{2}} = \\frac{1}{r}\\); power 2 doubles the percentage error.",
+              "Check with numbers (any radius works), say \\(r = 10\\), \\(dr = 0.2\\) (2%):\n\\[dA = 2\\pi(10)(0.2) = 4\\pi,\\ A = 100\\pi\\]\n\\[\\dfrac{4\\pi}{100\\pi} \\times 100 = 4\\%\\]"
+            ],
+            "answer": "(a) Circumference: 2%. (b) Area: 4%."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "text": "1. Error \\(= \\Delta y - dy\\); relative error \\(= \\frac{\\Delta y - dy}{\\Delta y}\\); percentage error \\(= \\left|\\frac{\\Delta y - dy}{\\Delta y}\\right| \\times 100\\).\n2. To approximate a value: \\(f(x + \\Delta x) \\approx f(x) + f'(x)\\,dx\\), starting from a nearby easy value.\n3. For angles, \\(dx\\) must be in radians: \\(1^\\circ = \\frac{\\pi}{180}\\).\n4. Measurement error: \\(dQ = Q'(x)\\,dx\\); percentage error \\(\\left|\\frac{dQ}{Q}\\right| \\times 100\\).\n5. For \\(Q = kx^{n}\\), percentage error in \\(Q\\) = \\(n \\times\\) percentage error in \\(x\\).",
+            "title": "Key points"
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "text": "1. Putting \\(dx = 1\\) for \\(1^\\circ\\); it must be \\(\\frac{\\pi}{180}\\).\n2. Wrong sign of \\(\\Delta x\\): moving from 25 down to 24 gives \\(\\Delta x = -1\\).\n3. Writing \\(=\\) for an approximate value.\n4. Forgetting the absolute value, giving a negative percentage error.\n5. Adding the percentage errors instead of multiplying by the power.",
+            "title": "Common mistake"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.1-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.1",
+      "title": "8.1 Basic Principles of Approximating Real Roots of Nonlinear Equations (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 234,
+          "pdf_to": 235,
+          "note": "PDF 234-235 (book p. 232-233): unit 8 introduction; 8.1 root (zero), geometric meaning of a root, Figure 8.1, nonlinear equations, exact cubic root formula, lead-in to the LRT"
+        }
+      ],
+      "variant_of": "C12-MATH-CH8-8.1",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum bachon! Aaj hum ek naya unit shuru kar rahe hain: Numerical Solutions of Nonlinear Equations. Ab tak aap ne equations ko hamesha exact tareeqe se solve kiya hai, jaise \\(x^2 - 4 = 0\\) ho to factor kiya aur \\(x = \\pm 2\\) mil gaya. Lekin asal zindagi mein, physics, chemistry aur engineering mein, aisi equations bohat aati hain jin ka koi formula hi nahin hota. Tab hum kya karte hain? Hum root ka andaaza (approximation) lagate hain, aur woh bhi itni accuracy ke saath jitni humein chahiye. Yeh pura unit isi kaam ke baare mein hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Introduction"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab ka introduction yeh kehta hai: nonlinear equations (jin mein variable ki power ek se zyada ho, ya variable trigonometric, exponential ya logarithmic function ke andar ho) mathematics, science aur engineering mein har jagah milti hain. Aksar in ka exact algebraic hal nahin nikalta, is liye un ke real roots ka andaaza lagane ke liye numerical techniques zaroori hain. Graphical Method ek visual (nazar aane wali) buniyaad deta hai: function ka graph bana kar dekhte hain ke woh x-axis ko kahan kaatta hai. Phir zyada behtar numerical methods, yani Bisection Method, Regula-Falsi Method aur Newton-Raphson Method, iteration (baar baar dohrane wala amal) ke zariye andaaze ko qadam ba qadam behtar karte hain, aur in ki buniyaad function ki continuity aur intermediate value theorem par hai. Is chapter mein Trapezium Rule bhi hai, jo definite integral ki value ka andaaza lagata hai jab integration seedha mumkin na ho. Kitab yeh bhi batati hai ke yeh methods chemical equilibrium ki concentrations nikalne, dil ki dhadkan (cardiac rhythm) ko control karne, diodes aur transistors wale electronic circuits ko samajhne, aur cryptography (khufia codes) ke masail hal karne mein kaam aate hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\"Numerical\" ka kya matlab hai? Abhi tak aap equation ko exact solve karte aaye hain, jaise \\(x^2 - 4 = 0\\) se \\(x = \\pm 2\\). Lekin \\(x - \\cos x = 0\\) jaisi equation ka koi algebraic formula nahin. Numerical method formula nahin dhoondta; woh ek aisa number deta hai jo asal root ke bohat qareeb ho, maslan do decimal places tak bilkul sahi. Aur zaroorat ho to us ko aur bhi accurate banaya ja sakta hai.\nIs unit ka naqsha (plan) yeh hai:\n1. 8.1: root kya hota hai, aur Location of Root Theorem (LRT), jo batata hai ke root kis interval mein zaroor hai.\n2. 8.2: Graphical Method, root ka pehla mota andaaza.\n3. 8.3: Bisection, Regula-Falsi aur Newton-Raphson, jo andaaze ko qadam ba qadam tez (sharp) karte hain.\n4. 8.4: Trapezium Rule, jo definite integral ki value numerically nikalta hai.\n5. 8.5: asal zindagi ki applications.\nTo ghabraiye nahin: is unit ka zyada tar kaam calculator ke saath seedha hisaab hai; asal baat yeh samajhna hai ke har qadam kyun uthaya ja raha hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Methods seekhne se pehle kuch buniyaadi definitions samajhna zaroori hai. Kitab kehti hai:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Function \\(y = f(x)\\) ka root (ya zero) \\(x\\) ki woh value hai jis par \\(y = 0\\) ho jaye.",
+            "bold": [
+              "root",
+              "zero"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Doosre lafzon mein, root equation \\(f(x) = 0\\) ka hal (solution) hai. Ab socho: equation \\(y = 0\\) khud \\(x\\)-axis hai, kyun ke \\(x\\)-axis ke har point par \\(y\\) zero hota hai. Root aisa \\(x\\) hai jo \\(y = f(x)\\) aur \\(y = 0\\) dono ko ek saath poora kare. Is liye kisi root ki geometric representation (graph par us ki shakal) Cartesian plane ka woh point hai jahan function ka graph \\(x\\)-axis ko kaatta hai.",
+            "bold": [
+              "geometric representation"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein \"represents the . x .-axis\" chhapa hai, yani \\(x\\) ke dono taraf faltu dots aa gaye hain. Sahi ibarat hai \"represents the \\(x\\)-axis\". Matlab mein koi farq nahin, bas chhapai ki ghalti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal: agar \\(f(x) = x^2 - 4\\) ho to\n\\[f(x) = 0\\]\n\\[\\Rightarrow x^2 - 4 = 0\\]\n\\[\\Rightarrow x = 2 \\text{ or } x = -2\\]\nYani 2 aur \\(-2\\) is function ke roots hain. Figure 8.1 mein dekhiye: parabola \\(x\\)-axis ko bilkul inhi do jagahon par kaat raha hai, A(\\(-2\\), 0) aur B(2, 0) par."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch8-fig-8-1-x-squared-minus-4",
+            "alt": "Graph of the parabola y = x squared minus 4 on a grid. It cuts the x-axis at A(-2, 0) and B(2, 0), and its lowest point is (0, -4).",
+            "caption": "Figure 8.1: \\(y = f(x) = x^2 - 4\\) meets the x-axis at A(−2, 0) and B(2, 0) (original drawing after the textbook's figure)",
+            "side": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Ek hi root ko do tareeqon se dekhiye:\n1. Algebra se: \\(x^2 - 4 = (x - 2)(x + 2) = 0\\), to \\(x = 2\\) ya \\(x = -2\\).\n2. Graph se: curve \\(y = x^2 - 4\\) line \\(y = 0\\) (yani \\(x\\)-axis) ko bilkul inhi do \\(x\\)-values par milti hai.\nAlfaaz par dhyan dein: root number \\(x = 2\\) hai; graph par jo point hai woh \\((2, 0)\\) hai. Is unit ke saare numerical methods asal mein yahi dhoondte hain ke graph \\(x\\)-axis ko kahan kaatta hai, magar graph ko bilkul theek theek banaye baghair."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Function \\(f(x) = x^2 - 9\\) ke roots kya hain, aur graph \\(x\\)-axis ko kin points par kaatega?\nJawab: \\(x^2 - 9 = (x - 3)(x + 3) = 0\\), to roots \\(x = 3\\) aur \\(x = -3\\) hain, aur graph \\(x\\)-axis ko \\((3, 0)\\) aur \\((-3, 0)\\) par kaatega."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab nonlinear equation ki definition. Kitab kehti hai: nonlinear equation woh equation hai jo \\(y = f(x) = 0\\) ki shakal mein ho, jahan \\(f\\) variable \\(x\\) ka linear function nahin, yani \\(f(x)\\) ko \\(ax + b\\) (kisi real \\(a\\), \\(b\\) ke saath, \\(a \\ne 0\\)) ki shakal mein nahin likha ja sakta. Aisi equations mein variable ki power ek se zyada ho sakti hai, ya variable trigonometric, exponential, logarithmic ya kisi aur nonlinear function ke andar ho sakta hai. Misaalen:",
+            "bold": [
+              "nonlinear equation"
+            ]
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) \\(x^3 - 1 = 0\\)",
+              "(ii) \\(x^3 + 2x + 5 = 0\\)",
+              "(iii) \\(x - \\cos x = 0\\)"
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Linear and nonlinear equations (our summary)",
+            "header": [
+              "Linear equation",
+              "Nonlinear equation"
+            ],
+            "rows": [
+              [
+                "\\(ax + b = 0\\), \\(a \\ne 0\\) ki shakal mein likhi ja sakti hai",
+                "\\(ax + b = 0\\) ki shakal mein nahin likhi ja sakti"
+              ],
+              [
+                "\\(x\\) sirf power 1 ke saath aata hai",
+                "\\(x\\) ki power 1 se zyada hoti hai, ya \\(x\\) sin, cos, \\(e^{x}\\), ln waghera ke andar hota hai"
+              ],
+              [
+                "Graph seedhi line hai",
+                "Graph curve (khamdaar) hai"
+              ],
+              [
+                "Hamesha ek hi root, \\(x = -b/a\\)",
+                "Koi root nahin, ek root ya kai roots ho sakte hain"
+              ],
+              [
+                "Algebra se hamesha exact hal",
+                "Aksar exact formula nahin; root ka andaaza lagate hain"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab kitab ek dilchasp baat batati hai. \\(y = x^3 - 1\\) ka root \\(x = 1\\) hai, jo foran mil jata hai, kyun ke \\(1^3 - 1 = 0\\). Ab ek aur cubic function lijiye: \\(y = x^3 + 2x + 5\\). Is ka bhi ek exact root hai, magar woh yeh hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned}x &= \\sqrt[3]{-\\dfrac{5}{2} + \\sqrt{\\dfrac{707}{108}}} \\\\ &\\quad + \\sqrt[3]{-\\dfrac{5}{2} - \\sqrt{\\dfrac{707}{108}}}\\end{aligned}",
+            "text_alt": "x equals the cube root of (minus 5 over 2 plus the square root of 707 over 108), plus the cube root of (minus 5 over 2 minus the square root of 707 over 108)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh algebra se nikal to aata hai, lekin itna pecheeda (complicated) hai ke amal mein is se kaam lena mushkil hai. Doosri taraf, is ka approximate root, do decimal places tak, \\(x \\approx -1.33\\) hai, aur yeh graphical ya numerical methods se aasaani se mil jata hai. Kitab yeh bhi batati hai ke quadratic, cubic aur quartic (degree 4) equations ke formulas to maujood hain, magar quintic (degree 5) ya us se oonchi degree ke polynomials ka koi general algebraic formula hai hi nahin. Is liye aise mauqon par numerical methods hi kaam aate hain. In methods se pehle humein ek buniyaadi result seekhna hai jis ka naam hai Location of Root Theorem (LRT).",
+            "bold": [
+              "Location of Root Theorem (LRT)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\\(x^3 + 2x + 5 = 0\\) ka exact root itna bhaari kyun hai? Yeh cubic formula (Cardano ka formula) se aata hai. \\(x^3 + px + q = 0\\) ke liye yeh formula \\(-\\frac{q}{2}\\) aur \\(\\frac{q^2}{4} + \\frac{p^3}{27}\\) istemal karta hai. Yahan \\(p = 2\\) aur \\(q = 5\\):\n\\[\\frac{q^2}{4} + \\frac{p^3}{27} = \\frac{25}{4} + \\frac{8}{27}\\]\n\\[= \\frac{675 + 32}{108} = \\frac{707}{108}\\]\nYahi 707/108 hai jo kitab mein nazar aa raha hai. Yeh formula aap ko yaad nahin karna. Asal sabaq yeh hai: formula ho bhi, to aakhir mein humein decimal value hi chahiye hoti hai, aur woh \\(x \\approx -1.3283\\) hai, yani do decimal places tak \\(-1.33\\).\nAur \\(x - \\cos x = 0\\) ka to koi algebraic formula hai hi nahin; wahan numerical method hi ek raasta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "(Yeh hamari misaal hai, kitab ki nahin.) Socho aap ko kisi ka qad (height) chahiye. Exact jawab shayad 167.38214... cm ho, lekin form mein aap 167.4 cm hi likhte hain, aur yeh kaafi hai. Numerical methods bhi yahi karte hain: root ko itni accuracy se dete hain jitni kaam ke liye zaroori ho. Is liye \"approximate\" ka matlab \"ghalat\" nahin, balke \"zaroorat ke mutabiq durust\" hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "\"Correct to two decimal places\" ka matlab hai jawab point ke baad bilkul do digits ke saath likha jaye, aur asal root round karne par isi number par aaye. Maslan asal root \\(-1.3283\\ldots\\) ko \\(-1.33\\) likhte hain. Working mein hamesha zyada decimals rakhiye (kam az kam 4) aur rounding sirf aakhir mein kijiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Kya \\(2x - 7 = 0\\) nonlinear equation hai? Aur \\(e^{x} - 3 = 0\\)?\nJawab: \\(2x - 7 = 0\\) linear hai, kyun ke yeh \\(ax + b\\) ki shakal mein hai (\\(a = 2\\), \\(b = -7\\)). \\(e^{x} - 3 = 0\\) nonlinear hai, kyun ke \\(x\\) exponential function ke andar hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Ek sawal jo aksar bachche poochte hain: \"Sir, jab calculator mein SOLVE ka button hai to yeh sab kyun seekhein?\" Jawab yeh hai ke calculator ke andar bhi yahi numerical methods chal rahe hote hain. Calculator koi jadoo nahin karta; woh ek shuru ki value le kar baar baar behtar andaaza lagata hai, bilkul usi tarah jaise hum 8.3 mein Bisection aur Newton-Raphson se karenge. Jab aap yeh methods khud samajh lenge to aap ko pata hoga ke calculator ka jawab kab bharose ke qabil hai aur kab nahin, maslan jab equation ke kai roots hon aur calculator sirf ek de."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "(Yeh hamari misaal hai, kitab ki nahin.) \\(f(x) = x^3 - 1\\) ka root kitab ne \\(x = 1\\) bataya. Graph se bhi dekhiye: \\(f(0) = -1\\) (axis ke neeche) aur \\(f(2) = 7\\) (axis ke upar). Curve neeche se upar gayi, to beech mein kahin axis ko zaroor kaata, aur woh jagah \\(x = 1\\) hai, kyun ke \\(f(1) = 1 - 1 = 0\\). Yahi khayal agle page par Location of Root Theorem ban jata hai: neeche se upar jane wali toot-phoot ke baghair curve axis ko zaroor kaatti hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Teesri misaal \\(x - \\cos x = 0\\) ko dekhiye. Kya aap \\(x\\) ko akela kar sakte hain, jaise \\(x = \\ldots\\)? Koshish kijiye.\nJawab: nahin. \\(x = \\cos x\\) likh sakte hain, magar right side par phir \\(x\\) maujood hai. \\(x\\) ek taraf bahar hai aur doosri taraf cos ke andar, aur koi algebraic qadam dono ko ek jagah nahin la sakta. Isi liye is equation ko 8.2 mein graph se hal karenge, aur jawab \\(x \\approx 0.74\\) aayega."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Kya har nonlinear equation ka koi real root hota hai? \\(x^2 + 1 = 0\\) ko dekhiye.\nJawab: nahin. \\(x^2\\) kabhi negative nahin hota, to \\(x^2 + 1 \\ge 1\\) hamesha; graph \\(x\\)-axis se hamesha upar rehta hai aur usay kabhi nahin kaatta. Is liye root dhoondne se pehle yeh yaqeen karna zaroori hai ke root maujood bhi hai. Yahi kaam agle page ka Location of Root Theorem karta hai: woh batata hai ke kis interval mein root zaroor hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Is page se teen alfaaz pakke kar lijiye, kyun ke poore unit mein baar baar aayenge: (1) root ya zero, yani woh \\(x\\) jahan function ki value zero ho; (2) nonlinear equation, yani aisi equation jo seedhi line wali \\(ax + b = 0\\) nahin; (3) approximate root, yani root ki aisi value jo maangi gayi accuracy (maslan do decimal places) tak durust ho. Agle sabaq mein jab bhi \"find the root correct to two decimal places\" likha ho, to inhi teeno ko zehan mein rakhiye."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Function \\(f\\) ka root (zero) woh number \\(c\\) hai jis par \\(f(c) = 0\\); graph par yeh woh jagah hai jahan \\(y = f(x)\\) \\(x\\)-axis ko milta hai.\n2. Nonlinear equation \\(f(x) = 0\\) woh hai jis mein \\(f(x)\\) \\(ax + b\\) ki shakal mein na ho.\n3. Bohat si nonlinear equations ka koi kaam ka exact formula nahin (degree 5 ya zyada ke general polynomials ka to formula hai hi nahin), is liye hum numerical methods se approximate root nikalte hain.\n4. Pehla auzaar Location of Root Theorem hai (agla page), jo batata hai ke kaunse interval mein root zaroor maujood hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. Point \\((2, 0)\\) ko root kehna. Root number \\(x = 2\\) hai; \\((2, 0)\\) graph par point hai.\n2. Yeh samajhna ke jis equation mein \\(x^2\\) ho woh aasaan hogi. \\(x^2 = 4\\) aasaan hai, magar \\(x^2 = \\sin x + 1\\) ka koi algebraic formula nahin.\n3. Jaldi rounding karna. Agar har qadam par values ko 2 decimals tak round karte jayenge, to aakhri jawab ka doosra decimal ghalat ho sakta hai."
+          }
+        ]
+      }
+    }
+  ]
+}

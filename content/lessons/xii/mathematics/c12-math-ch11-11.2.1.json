@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-11.2.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/11.2.1",
+      "title": "11.2.1 Steps to Find the Domain of a Vector-Valued Function",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 290,
+          "pdf_to": 291,
+          "note": "Book p. 288-289: 11.2.1 Step-1, Step-2, definition of range, printed Example 1 (shown as Example 3): domain and range of sqrt(4 - t^2) i + 1/(t - 1) j"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Step-1: Determine the domain of each component separately."
+          },
+          {
+            "type": "paragraph",
+            "text": "Step-2: Find the intersection of the domains of each component \\(f(t), g(t)\\), and \\(h(t)\\). The domain of \\(\\mathbf{r}(t)\\) is the intersection of the domains of \\(f(t), g(t)\\), and \\(h(t)\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The range of a vector-valued function is the set of all possible output vectors \\(\\mathbf{r}(t)\\) as \\(t\\) varies over the domain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Domain answers \"which \\(t\\) may I put in?\"; range answers \"which vectors come out?\".\nEach output vector \\(\\langle x(t), y(t)\\rangle\\), drawn from the origin, ends at a point, so the range is the set of points on the curve traced by \\(\\mathbf{r}\\). Finding the range of each component tells us the strip or box in which the curve lies, but not every combination of those values occurs, because the same \\(t\\) fixes all components at once."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Numbering note (ours)",
+            "text": "The book starts its example numbers again here: this example is printed as \"Example 1\" (the first Examples 1 and 2 are in 11.1.3). On this portal the examples of Unit 11 are numbered in one sequence, so it is shown as Example 3. Book label → portal label: Example 1 → 3 (here), Example 2 → 4 and Example 3 → 5 (both in 11.3.1), Example 4 → 6 and Example 5 → 7 (11.4), Example 6 → 8 and Example 7 → 9 (11.5)."
+          },
+          {
+            "type": "example",
+            "title": "Example 3",
+            "problem": "Find the domain and range of the vector-valued function\n\\[\\mathbf{r}(t) = \\sqrt{4 - t^{2}}\\,\\hat{i} + \\dfrac{1}{t - 1}\\hat{j}\\]",
+            "steps": [
+              "Given: \\(\\mathbf{r}(t) = \\sqrt{4 - t^{2}}\\,\\hat{i} + \\dfrac{1}{t - 1}\\hat{j}\\), with components \\(x(t) = \\sqrt{4 - t^{2}}\\) and \\(y(t) = \\dfrac{1}{t - 1}\\).\nTo find / prove: the domain and the range of \\(\\mathbf{r}\\).\nMethod: Step-1 and Step-2 of 11.2.1 (domain of each component, then their intersection); then the set of output vectors for \\(t\\) in that domain.",
+              "Step 1: Domain of the first component\nThe domain of \\(\\mathbf{r}(t)\\) is the set of all \\(t\\) for which both components are defined. For the first component \\(\\sqrt{4 - t^{2}}\\), the square root requires \\(4 - t^{2} \\ge 0\\).\n\\[\\Rightarrow t^{2} \\le 4\\]\n\\[\\Rightarrow -2 \\le t \\le 2\\]\n\\[\\Rightarrow t \\in [-2, 2]\\]\nWhy: the square root of a negative number is not a real number.",
+              "Step 2: Domain of the second component\nFor the second component \\(\\frac{1}{t-1}\\), the denominator cannot be zero, i.e.\n\\[t - 1 \\ne 0 \\Rightarrow t \\ne 1\\]\nWhy: division by zero is not defined.",
+              "Step 3: Intersection of the domains\nHence, the final domain:\n\\[t \\in [-2, 1) \\cup (1, 2]\\]\nWhy: \\(t\\) must satisfy both conditions, so we take \\([-2, 2]\\) and remove \\(t = 1\\).",
+              "Step 4: Range of \\(x(t)\\)\nThe range is the set of all possible output vectors \\(\\mathbf{r}(t) = \\langle x(t), y(t)\\rangle\\). For \\(4 - t^{2}\\), range is \\([0, 4]\\). Thus, the range of \\(x(t)\\) is \\([0, 2]\\).\nWhy: on the domain, \\(t^{2}\\) takes every value from 0 (at \\(t = 0\\)) to 4 (at \\(t = \\pm 2\\)), so \\(4 - t^{2}\\) runs over \\([0, 4]\\) and its square root over \\([0, 2]\\). Removing \\(t = 1\\) loses nothing, since \\(t = -1\\) gives the same \\(x\\).",
+              "Step 5: Range of \\(y(t)\\)\nThe book prints: and \\(y(t)\\) can be any real number except 0 (since \\(\\frac{1}{t-1}\\) never equals zero).\nThis forgets that \\(t\\) must stay in the domain. Taking the two pieces of the domain one at a time:\n\\[-2 \\le t < 1 \\Rightarrow -3 \\le t - 1 < 0\\]\n\\[\\Rightarrow y \\le -\\tfrac{1}{3}\\]\n\\[1 < t \\le 2 \\Rightarrow 0 < t - 1 \\le 1\\]\n\\[\\Rightarrow y \\ge 1\\]\nSo the range of \\(y(t)\\) is \\((-\\infty, -\\tfrac{1}{3}] \\cup [1, \\infty)\\).\nWhy: for \\(u\\) in \\([-3, 0)\\), \\(\\frac{1}{u} \\le -\\frac{1}{3}\\) and it becomes very large and negative as \\(u \\to 0\\); for \\(u\\) in \\((0, 1]\\), \\(\\frac{1}{u} \\ge 1\\). A value such as \\(y = \\frac{1}{2}\\) would need \\(t = 3\\), which is outside the domain.",
+              "Step 6: Range of \\(\\mathbf{r}(t)\\)\nThe book prints: Finally, range: \\(\\{(x, y) \\mid 0 \\le x \\le 2,\\ y \\in \\mathbb{R},\\ y \\ne 0,\\ x \\ne \\sqrt{3}\\}\\)\nBy the definition above, the range is the set of output vectors themselves, i.e. the points of the curve:\n\\[\\Big\\{\\Big\\langle\\sqrt{4 - t^{2}}, \\tfrac{1}{t - 1}\\Big\\rangle\\Big\\}\\]\nfor \\(t \\in [-2, 1) \\cup (1, 2]\\). Eliminating \\(t\\) (\\(t = 1 + \\frac{1}{y}\\)) describes the same set as the points \\(\\big(\\sqrt{4 - (1 + \\frac{1}{y})^{2}},\\ y\\big)\\) with \\(y \\le -\\frac{1}{3}\\) or \\(y \\ge 1\\).\nWhy: \\(x\\) and \\(y\\) are not independent: one \\(t\\) fixes both, so not every pair of an \\(x\\)-value and a \\(y\\)-value occurs. Also \\(x = \\sqrt{3}\\) does occur (at \\(t = -1\\)).",
+              "Check:\n\\(t = -1\\): \\(\\mathbf{r}(-1) = \\langle\\sqrt{3}, -\\frac{1}{2}\\rangle\\), so \\(x = \\sqrt{3}\\) is in the range.\n\\(t = -2\\): \\(\\langle 0, -\\frac{1}{3}\\rangle\\); \\(t = 0\\): \\(\\langle 2, -1\\rangle\\); \\(t = 2\\): \\(\\langle 0, 1\\rangle\\): the end values \\(-\\frac{1}{3}\\) and \\(1\\) of \\(y\\) are reached.\n\\(y = \\frac{1}{2}\\): \\(\\frac{1}{t - 1} = \\frac{1}{2}\\) gives \\(t = 3\\), not in the domain, so no output has \\(y = \\frac{1}{2}\\)."
+            ],
+            "answer": "Domain: \\(t \\in [-2, 1) \\cup (1, 2]\\). Range: the set of points \\(\\big\\langle\\sqrt{4 - t^{2}}, \\frac{1}{t - 1}\\big\\rangle\\) for \\(t\\) in the domain, with \\(x \\in [0, 2]\\) and \\(y \\in (-\\infty, -\\frac{1}{3}] \\cup [1, \\infty)\\). (As printed: \\(y\\) any real number except 0 and range \\(\\{(x, y) \\mid 0 \\le x \\le 2, y \\ne 0, x \\ne \\sqrt{3}\\}\\); see the Book correction.)",
+            "book_errors": [
+              "can be any real number except 0",
+              "\\(\\{(x, y) \\mid 0 \\le x \\le 2,\\ y \\in \\mathbb{R},\\ y \\ne 0,\\ x \\ne \\sqrt{3}\\}\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Two statements in this example are wrong.\n1. The book prints that \\(y(t)\\) \"can be any real number except 0\". With \\(t\\) restricted to \\([-2, 1) \\cup (1, 2]\\), the values of \\(y(t) = \\frac{1}{t-1}\\) are \\((-\\infty, -\\frac{1}{3}] \\cup [1, \\infty)\\); for example \\(y = \\frac{1}{2}\\) would need \\(t = 3\\).\n2. The book prints the final range as \\(\\{(x, y) \\mid 0 \\le x \\le 2, y \\in \\mathbb{R}, y \\ne 0, x \\ne \\sqrt{3}\\}\\). The condition \\(x \\ne \\sqrt{3}\\) is wrong (\\(t = -1\\) gives \\(x = \\sqrt{3}\\), \\(y = -\\frac{1}{2}\\)), and a set of all pairs is too large: the range is the set of output vectors \\(\\big\\langle\\sqrt{4 - t^{2}}, \\frac{1}{t-1}\\big\\rangle\\), \\(t \\in [-2, 1) \\cup (1, 2]\\), i.e. the points \\(\\big(\\sqrt{4 - (1 + \\frac{1}{y})^{2}}, y\\big)\\) with \\(y \\le -\\frac{1}{3}\\) or \\(y \\ge 1\\).\nThe domain \\([-2, 1) \\cup (1, 2]\\) and the range \\([0, 2]\\) of \\(x(t)\\) are correct."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Step-1: find the domain of each component separately. Step-2: the domain of \\(\\mathbf{r}\\) is the intersection of these domains.\n2. The range is the set of all output vectors \\(\\mathbf{r}(t)\\) for \\(t\\) in the domain, i.e. the points of the curve.\n3. When finding a component's range, use only the \\(t\\) in the domain of \\(\\mathbf{r}\\), piece by piece.\n4. Test a few values of \\(t\\) (end points, \\(t = 0\\)) to check the answer."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Finding a component's range over all real \\(t\\) instead of over the domain (this is how \"\\(y\\) any real number except 0\" arises).\n2. Treating the components' ranges as independent and writing the range as all pairs \\((x, y)\\).\n3. Excluding values without checking: \\(x = \\sqrt{3}\\) is reached at \\(t = -1\\).\n4. Forgetting to remove \\(t = 1\\) from \\([-2, 2]\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

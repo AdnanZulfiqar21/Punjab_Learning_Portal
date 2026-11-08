@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q7",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q7",
+      "title": "Question 7",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 274,
+          "pdf_to": 274,
+          "note": "Exercise 9.2, Question 7 (book p. 272); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "7",
+            "prompt": "7. Prove that \\(\\sin^{-1}\\frac{1}{\\sqrt{2}} + \\sin^{-1}\\frac{1}{\\sqrt{5}} + \\sin^{-1}\\frac{1}{\\sqrt{10}} = \\frac{\\pi}{2}\\).",
+            "explanation": "Three \\(\\sin^{-1}\\) terms; the first is a standard angle.\nPlan: \\(\\sin^{-1}\\frac{1}{\\sqrt{2}} = \\frac{\\pi}{4}\\); add the other two with formula (i) and show they also give \\(\\frac{\\pi}{4}\\).",
+            "steps": [
+              "Given: \\(\\sin^{-1}\\frac{1}{\\sqrt{2}} + \\sin^{-1}\\frac{1}{\\sqrt{5}} + \\sin^{-1}\\frac{1}{\\sqrt{10}}\\).\nTo prove: the sum is \\(\\frac{\\pi}{2}\\).\nMethod: the first term is a known angle. Combine the last two with formula (i) \\(\\sin^{-1}x + \\sin^{-1}y = \\sin^{-1}\\left(x\\sqrt{1-y^{2}} + y\\sqrt{1-x^{2}}\\right)\\), with \\(x = \\frac{1}{\\sqrt{5}}\\), \\(y = \\frac{1}{\\sqrt{10}}\\).",
+              "The standard angle\n\\[\\sin^{-1}\\tfrac{1}{\\sqrt{2}} = \\tfrac{\\pi}{4}\\]\nWhy: \\(\\sin\\frac{\\pi}{4} = \\frac{1}{\\sqrt{2}}\\) and \\(\\frac{\\pi}{4}\\) is in \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\).",
+              "Square roots for the other two\n\\[\\sqrt{1-x^{2}} = \\sqrt{1 - \\tfrac{1}{5}} = \\tfrac{2}{\\sqrt{5}}\\]\n\\[\\sqrt{1-y^{2}} = \\sqrt{1 - \\tfrac{1}{10}} = \\tfrac{3}{\\sqrt{10}}\\]\n\\[x^{2} + y^{2} = \\tfrac{1}{5} + \\tfrac{1}{10} = \\tfrac{3}{10} \\le 1\\]\nWhy: \\(\\sqrt{\\frac{4}{5}} = \\frac{2}{\\sqrt{5}}\\), \\(\\sqrt{\\frac{9}{10}} = \\frac{3}{\\sqrt{10}}\\); the condition of formula (i) holds.",
+              "Apply formula (i)\n\\[\\sin^{-1}\\tfrac{1}{\\sqrt{5}} + \\sin^{-1}\\tfrac{1}{\\sqrt{10}}\\]\n\\[= \\sin^{-1}\\left(\\tfrac{1}{\\sqrt{5}}\\cdot\\tfrac{3}{\\sqrt{10}} + \\tfrac{1}{\\sqrt{10}}\\cdot\\tfrac{2}{\\sqrt{5}}\\right)\\]\n\\[= \\sin^{-1}\\left(\\tfrac{3}{\\sqrt{50}} + \\tfrac{2}{\\sqrt{50}}\\right) = \\sin^{-1}\\tfrac{5}{\\sqrt{50}}\\]\nWhy: \\(\\sqrt{5}\\cdot\\sqrt{10} = \\sqrt{50}\\) in both products.",
+              "Simplify\n\\[\\tfrac{5}{\\sqrt{50}} = \\tfrac{5}{5\\sqrt{2}} = \\tfrac{1}{\\sqrt{2}}\\]\n\\[\\sin^{-1}\\tfrac{1}{\\sqrt{2}} = \\tfrac{\\pi}{4}\\]\nWhy: \\(\\sqrt{50} = \\sqrt{25 \\times 2} = 5\\sqrt{2}\\).",
+              "Add everything\n\\[\\text{L.H.S} = \\tfrac{\\pi}{4} + \\tfrac{\\pi}{4} = \\tfrac{\\pi}{2} = \\text{R.H.S}\\]\nWhy: the first term and the combined pair are both \\(\\frac{\\pi}{4}\\).",
+              "Check\n\\[0.7854 + 0.4636 + 0.3218 = 1.5708\\]\n\\[\\tfrac{\\pi}{2} \\approx 1.5708\\ \\checkmark\\]\nWhy: a calculator in radian mode agrees."
+            ],
+            "final_answer": "Hence proved: \\(\\sin^{-1}\\frac{1}{\\sqrt{2}} + \\sin^{-1}\\frac{1}{\\sqrt{5}} + \\sin^{-1}\\frac{1}{\\sqrt{10}} = \\frac{\\pi}{2}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 9.2. Every solution on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

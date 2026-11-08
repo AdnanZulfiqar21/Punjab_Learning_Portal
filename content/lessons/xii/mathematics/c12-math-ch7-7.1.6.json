@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH7-7.1.6",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch7",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch7/7.1.6",
+      "title": "7.1.6 Motion with Constant Acceleration",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 228,
+          "pdf_to": 231,
+          "note": "Book p. 226-229: 7.1.6 derivation of v = u + at, x = ut + at^2/2, 2ax = v^2 - u^2 (equations (1)-(5)), Examples 7-10 (Example 10 ends at the top of p. 229)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "To study the motion of a particle moving with constant acceleration, we consider four quantities: displacement, time, velocity, and acceleration. Usually, some of these quantities are known and the remaining are to be determined. To relate these quantities, we use the equations of motion. Suppose a particle moves along a straight line with constant acceleration \\(a\\). At time \\(t = 0\\), the particle is at point \\(O\\) (i.e, \\(x = 0\\)) and has initial velocity \\(u\\). Since acceleration is the instantaneous rate of change in velocity with respect to time, we have:\n\\[\\dfrac{dv}{dt} = a \\Rightarrow dv = a\\,dt\\]\nIntegrating both sides:\n\\[\\int dv = \\int a\\,dt\\]\n\\[v = at + c \\quad \\text{...(1)}\\]\n(where \\(c\\) is the constant of integration)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why integrate? \\(\\frac{dv}{dt} = a\\) gives the rate of change of velocity, not the velocity itself; integration recovers a quantity from its rate. Because \\(a\\) is constant, \\(\\int a\\,dt = at\\). Every indefinite integral carries a constant \\(c\\) (the derivative of a constant is zero), and the starting value (the \"initial condition\") tells us what \\(c\\) is."
+          },
+          {
+            "type": "paragraph",
+            "text": "Using the initial condition \\(v = u\\) at \\(t = 0\\), substitute into equation (1):\n\\[u = 0 + c \\Rightarrow c = u\\]\nSubstitute back into equation (1):\n\\[v = u + at \\quad \\text{...(2)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "So the constant is just the starting velocity \\(u\\). Equation (2) reads: final velocity = starting velocity + (gain per second) \\(\\times\\) (number of seconds)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Since velocity is the instantaneous rate of change of displacement with respect to time:\n\\[v = \\dfrac{dx}{dt}\\]\n\\[\\Rightarrow \\dfrac{dx}{dt} = u + at\\]\n\\[\\Rightarrow dx = (u + at)\\,dt\\]\nIntegrating both sides:\n\\[\\int dx = \\int (u + at)\\,dt\\]\n\\[x = ut + a\\dfrac{t^{2}}{2} + c_{1} \\quad \\text{...(3)}\\]\nUsing the initial condition \\(x = 0\\) at \\(t = 0\\), substitute into equation (3):\n\\[0 = 0 + 0 + c_{1} \\Rightarrow c_{1} = 0\\]\nSubstitute back into equation (3):\n\\[x = ut + \\dfrac{1}{2}at^{2} \\quad \\text{...(4)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Here \\(u\\) and \\(a\\) are constants, so \\(\\int u\\,dt = ut\\) and \\(\\int at\\,dt = a\\frac{t^{2}}{2}\\) (power rule). \\(c_{1} = 0\\) because we chose the starting point \\(O\\) as \\(x = 0\\). If the particle started at \\(x_{0}\\), we would get \\(c_{1} = x_{0}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Now from equation (2):\n\\[t = \\dfrac{v - u}{a}\\]\nSubstitute this into equation (4) to eliminate \\(t\\):\n\\[x = u\\left(\\dfrac{v - u}{a}\\right) + \\dfrac{1}{2}a\\left(\\dfrac{v - u}{a}\\right)^{2}\\]\nBy simplification, we get:\n\\[2ax = v^{2} - u^{2} \\quad \\text{...(5)}\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The book skips the simplification. Cancel one \\(a\\) in the second term, take the common denominator \\(2a\\) and factor out \\((v - u)\\):\n\\[x = \\dfrac{u(v - u)}{a} + \\dfrac{(v - u)^{2}}{2a}\\]\n\\[= \\dfrac{2u(v - u) + (v - u)^{2}}{2a}\\]\n\\[= \\dfrac{(v - u)(2u + v - u)}{2a}\\]\n\\[= \\dfrac{(v - u)(v + u)}{2a}\\]\n\\[= \\dfrac{v^{2} - u^{2}}{2a}\\]\n\\[\\Rightarrow 2ax = v^{2} - u^{2}\\]\nThe last step uses the difference of squares \\((v - u)(v + u) = v^{2} - u^{2}\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The three equations of motion for a particle moving with constant acceleration are:"
+          },
+          {
+            "type": "equation",
+            "latex": "v = u + at",
+            "text_alt": "v equals u plus a t"
+          },
+          {
+            "type": "equation",
+            "latex": "x = ut + \\dfrac{1}{2}at^{2}",
+            "text_alt": "x equals u t plus one half a t squared"
+          },
+          {
+            "type": "equation",
+            "latex": "2ax = v^{2} - u^{2}",
+            "text_alt": "2 a x equals v squared minus u squared"
+          },
+          {
+            "type": "paragraph",
+            "text": "These equations are frequently used to describe and analyze the motion of a particle under constant acceleration."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Which equation when? Each equation links four of the five quantities \\(u, v, a, x, t\\) and leaves one out. Find the quantity that is neither given nor asked, and pick the equation that does not contain it (see the table).\nThese three equations are valid only when the acceleration is constant. If \\(a\\) depends on \\(t\\) (as in Examples 9 and 10), integrate directly instead."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Equation",
+              "Quantity it does not contain",
+              "Use it when"
+            ],
+            "rows": [
+              [
+                "\\(v = u + at\\)",
+                "displacement \\(x\\)",
+                "\\(x\\) is neither given nor asked"
+              ],
+              [
+                "\\(x = ut + \\frac{1}{2}at^{2}\\)",
+                "final velocity \\(v\\)",
+                "\\(v\\) is neither given nor asked"
+              ],
+              [
+                "\\(2ax = v^{2} - u^{2}\\)",
+                "time \\(t\\)",
+                "\\(t\\) is neither given nor asked"
+              ]
+            ],
+            "caption": "Choosing an equation of motion (our summary, not printed in the book)"
+          },
+          {
+            "type": "example",
+            "title": "Example 7",
+            "problem": "A car starts from rest and accelerates uniformly at 3 m/s\\(^2\\). Find the velocity of the car after 5 seconds.",
+            "steps": [
+              "Given: \\(u = 0\\) (car stats from vert) \\(a = 3m/s^{2}\\) \\(t = 5\\), \\(v = ?\\)\nTo find: \\(v\\).\nMethod: \\(u\\), \\(a\\), \\(t\\) are known and \\(v\\) is wanted; \\(x\\) is not involved, so use \\(v = u + at\\).",
+              "Substitute\nTo find \\(v\\), we use \\(v = u + at\\). By substituting the values of \\(u\\), \\(a\\) and \\(t\\), we get:\n\\[v = 0 + 3 \\times 5 = 15 \\text{ m/s}\\]\nWhy: \"starts from rest\" means the initial velocity is zero, \\(u = 0\\). The velocity grows by 3 m/s every second for 5 seconds.",
+              "Check:\nDistance \\(x = \\frac{1}{2}(3)(5^{2}) = 37.5\\) m, and \\(2ax = 2 \\times 3 \\times 37.5 = 225 = 15^{2} - 0^{2}\\). Consistent."
+            ],
+            "answer": "\\(v = 15\\) m/s.",
+            "book_errors": [
+              "(car stats from vert)",
+              "\\(a = 3m/s^{2}\\) \\(t = 5\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints \"Given that \\(u = 0\\) (car stats from vert) \\(a = 3m/s^{2}\\) \\(t = 5\\)\". It should read \"Given that \\(u = 0\\) (car starts from rest), \\(a = 3\\) m/s\\(^2\\), \\(t = 5\\) s\" (misprinted words and missing commas). The working and the answer 15 m/s are correct."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "A car accelerates from 10 m/s to 30 m/s in 4 seconds. Find the distance covered during this time.",
+            "steps": [
+              "Given: \\(v = 30\\) m/s, \\(u = 10\\) m/s, \\(t = 4\\) s.\nTo find: the distance \\(x\\).\nMethod: every equation for \\(x\\) needs \\(a\\), which is not given. So first find \\(a\\) from \\(v = u + at\\), then \\(x\\) from \\(2ax = v^{2} - u^{2}\\).",
+              "First, the acceleration (as printed)\nFirst, we find its acceleration, using: \\(v = u + at\\)\nSubstitute the known values: \\(30 = 10 + a \\times 4\\)\nTo find distance \\(x\\), we use\n\\[2ax = v^{2} - u^{2} \\quad \\text{...(1)}\\]\n\\[\\Rightarrow 4a = 20 \\Rightarrow a = \\dfrac{20}{4} = 5 \\text{ m/s}^{2}\\]\nWhy: \\(4a = 20\\) comes from \\(30 = 10 + 4a\\) (subtract 10 from both sides), not from (1); see the correction below.",
+              "Then the distance\nBy substituting the values of \\(u\\), \\(a\\) and \\(v\\) in (1), we get:\n\\[2 \\times 5x = 30^{2} - 10^{2} = 800\\]\n\\[\\Rightarrow x = \\dfrac{800}{10} = 80 \\text{ meter}\\]\nWhy: now \\(u, v, a\\) are known, and this equation does not need \\(t\\).",
+              "Check:\n\\(x = ut + \\frac{1}{2}at^{2} = 10 \\times 4 + \\frac{1}{2} \\times 5 \\times 16 = 40 + 40 = 80\\) m. Same result."
+            ],
+            "answer": "Acceleration \\(a = 5\\) m/s\\(^2\\); distance covered \\(x = 80\\) m.",
+            "book_errors": [
+              "To find distance \\(x\\), we use"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book's solution is printed out of order: after \"Substitute the known values: \\(30 = 10 + a \\times 4\\)\" it prints \"To find distance \\(x\\), we use \\(2ax = v^{2} - u^{2}\\) ...(1)\" and only then \"\\(\\Rightarrow 4a = 20 \\Rightarrow a = 5\\)\". The step \\(4a = 20\\) comes from \\(30 = 10 + 4a\\), not from equation (1). Correct order: first finish \\(a = 5\\) m/s\\(^2\\), then use (1) for \\(x\\). The results \\(a = 5\\) m/s\\(^2\\) and \\(x = 80\\) m are correct."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "In Examples 9 and 10 the acceleration changes with time, so the three equations of motion do not apply. We repeat the method of the derivation: integrate \\(a = \\frac{dv}{dt}\\) to get \\(v\\), integrate \\(v = \\frac{dx}{dt}\\) to get \\(x\\), and fix each constant from an initial condition. Recall \\(\\int \\cos t\\,dt = \\sin t\\) and \\(\\int \\sin t\\,dt = -\\cos t\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "Find the position and the velocity of a particle moving along a straight line at any time \\(t\\) seconds, given that starts from rest at \\(t = 0\\) and is subject to an acceleration \\(a(t) = t^{2} + \\cos t\\).",
+            "steps": [
+              "Given: \\(a(t) = t^{2} + \\cos t\\); the particle starts from rest at \\(t = 0\\), so \\(v(0) = 0\\). For the position, the book takes the starting point as the origin: \\(x(0) = 0\\).\nTo find: \\(v(t)\\) and \\(x(t)\\).\nMethod: the acceleration is not constant, so integrate twice: \\(a = \\frac{dv}{dt}\\) gives \\(v\\), then \\(v = \\frac{dx}{dt}\\) gives \\(x\\).",
+              "Integrate the acceleration\n\\[\\dfrac{dv}{dt} = t^{2} + \\cos t\\]\n\\[\\Rightarrow dv = (t^{2} + \\cos t)\\,dt\\]\n\\[\\Rightarrow \\int dv = \\int (t^{2} + \\cos t)\\,dt\\]\n\\[\\because\\ a(t) = \\dfrac{dv}{dt}\\]\n\\[v(t) = \\dfrac{1}{3}t^{3} + \\sin t + c\\]\nWhy: power rule \\(\\int t^{2}\\,dt = \\frac{t^{3}}{3}\\), and \\(\\int \\cos t\\,dt = \\sin t\\).",
+              "Using the initial condition \\(v = 0\\) at \\(t = 0\\):\n\\[0 = 0 + 0 + c \\Rightarrow c = 0\\]\nSo,\n\\[v(t) = \\dfrac{1}{3}t^{3} + \\sin t\\]\nWhy: \\(\\sin 0 = 0\\).",
+              "Integrate the velocity\n\\[\\dfrac{dx}{dt} = \\dfrac{1}{3}t^{3} + \\sin t\\]\n\\[\\Rightarrow \\int dx = \\int \\left(\\dfrac{1}{3}t^{3} + \\sin t\\right)dt\\]\nBoxed reason printed beside this line: \\(\\because a(t) = \\frac{dv}{dt}\\)\n\\[x(t) = \\dfrac{1}{12}t^{4} - \\cos t + c_{1}\\]\nWhy: this step uses \\(v(t) = \\frac{dx}{dt}\\) (see the correction below). \\(\\int \\frac{1}{3}t^{3}\\,dt = \\frac{t^{4}}{12}\\) and \\(\\int \\sin t\\,dt = -\\cos t\\).",
+              "Printed: Example 9 \\(= 0\\) at \\(t = 0\\):\n(meaning: using the initial condition \\(x = 0\\) at \\(t = 0\\))\n\\[0 = 0 - 1 + c_{1} \\Rightarrow c_{1} = 1\\]\nSo,\n\\[x(t) = \\dfrac{1}{12}t^{4} - \\cos t + 1\\]\nWhy: \\(\\cos 0 = 1\\), so \\(-\\cos 0 = -1\\) and the constant is 1, not 0.",
+              "Check:\n\\[\\dfrac{d}{dt}\\left(\\tfrac{1}{12}t^{4} - \\cos t + 1\\right) = \\tfrac{1}{3}t^{3} + \\sin t\\]\n\\[\\dfrac{d}{dt}\\left(\\tfrac{1}{3}t^{3} + \\sin t\\right) = t^{2} + \\cos t\\]\nand \\(v(0) = 0\\), \\(x(0) = 0 - 1 + 1 = 0\\)."
+            ],
+            "answer": "\\(v(t) = \\frac{1}{3}t^{3} + \\sin t\\) and \\(x(t) = \\frac{1}{12}t^{4} - \\cos t + 1\\) (taking \\(x = 0\\) at \\(t = 0\\)).",
+            "book_errors": [
+              "given that starts from rest",
+              "\\(\\because a(t) = \\frac{dv}{dt}\\)",
+              "Example 9 \\(= 0\\) at \\(t = 0\\):"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Three misprints in Example 9:\n1. The question says \"given that starts from rest\"; it should be \"given that it starts from rest\".\n2. The second boxed reason, beside \\(\\frac{dx}{dt} = \\frac{1}{3}t^{3} + \\sin t\\), prints \\(\\because a(t) = \\frac{dv}{dt}\\). That step uses velocity, so the reason should be \\(\\because v(t) = \\frac{dx}{dt}\\).\n3. The line before \\(0 = 0 - 1 + c_{1}\\) is printed as \"Example 9 \\(= 0\\) at \\(t = 0\\):\", repeating the example label. It should read \"Using the initial condition \\(x = 0\\) at \\(t = 0\\):\". This is not a new example.\nThe answers \\(v(t) = \\frac{1}{3}t^{3} + \\sin t\\) and \\(x(t) = \\frac{1}{12}t^{4} - \\cos t + 1\\) are correct."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "The acceleration (in m/s\\(^2\\)) of a particle is given by \\(a(t) = \\cos t + \\sin t\\). Given that the velocity is 2 m/s at \\(t = 0\\), find the expression for velocity \\(v(t)\\).",
+            "steps": [
+              "Given: \\(a(t) = \\cos t + \\sin t\\) (m/s\\(^2\\)), \\(v = 2\\) m/s at \\(t = 0\\).\nTo find: \\(v(t)\\).\nMethod: integrate \\(a = \\frac{dv}{dt}\\) once and fix the constant from \\(v(0) = 2\\).",
+              "Integrate\n\\[\\dfrac{dv}{dt} = \\cos t + \\sin t\\]\n\\[\\Rightarrow \\int dv = \\int (\\cos t + \\sin t)\\,dt\\]\n\\[\\because\\ a(t) = \\dfrac{dv}{dt}\\]\n\\[v(t) = \\sin t - \\cos t + c\\]\nWhy: \\(\\int \\cos t\\,dt = \\sin t\\) and \\(\\int \\sin t\\,dt = -\\cos t\\).",
+              "Using initial condition \\(v = 2\\) at \\(t = 0\\):\n\\[2 = 0 - 1 + c \\Rightarrow c = 3\\]\nSo,\n\\[v(t) = \\sin t - \\cos t + 3\\]\nWhy: \\(\\sin 0 = 0\\) and \\(\\cos 0 = 1\\).",
+              "Check:\n\\[\\dfrac{d}{dt}(\\sin t - \\cos t + 3) = \\cos t + \\sin t\\]\nand \\(v(0) = 0 - 1 + 3 = 2\\) m/s."
+            ],
+            "answer": "\\(v(t) = \\sin t - \\cos t + 3\\) m/s."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. The equations of motion \\(v = u + at\\), \\(x = ut + \\frac{1}{2}at^{2}\\), \\(2ax = v^{2} - u^{2}\\) come from integrating \\(\\frac{dv}{dt} = a\\) with \\(v = u\\), \\(x = 0\\) at \\(t = 0\\).\n2. They hold only for constant acceleration.\n3. Choose the equation that leaves out the quantity which is neither given nor asked.\n4. \"Starts from rest\" means \\(u = 0\\).\n5. For variable acceleration integrate: \\(v = \\int a\\,dt\\), \\(x = \\int v\\,dt\\), fixing each constant from an initial condition."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Using \\(v = u + at\\) when \\(a\\) depends on \\(t\\).\n2. Forgetting the constant of integration, or assuming it is zero: \\(\\cos 0 = 1\\) gave \\(c_{1} = 1\\) in Example 9.\n3. Writing \\(\\int \\sin t\\,dt = \\cos t\\) instead of \\(-\\cos t\\).\n4. Treating \\(30^{2} - 10^{2}\\) as \\((30 - 10)^{2}\\).\n5. Mixing units (km/h with m/s\\(^2\\))."
+          }
+        ]
+      }
+    }
+  ]
+}

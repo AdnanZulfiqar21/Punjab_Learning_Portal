@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-7-Q6",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-7-q6",
+      "title": "Question 6",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 124,
+          "pdf_to": 124,
+          "note": "Exercise 3.7, Question 6 (book p. 122); answers printed in the key (book p. 302) under the heading 'Exercise 3.8'."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(a)",
+            "prompt": "6. In a bacterial culture, the growth rate is proportional to the number of bacteria present. Initially there are 200 bacteria. After 2 hours, there are 1800 bacteria. (a) Find the number of bacteria at time \\(t\\) hours.",
+            "explanation": "\"Rate proportional to the amount\" means \\(\\frac{dN}{dt} = kN\\). Separate the variables and integrate.\nGiven: \\(N(0) = 200\\), \\(N(2) = 1800\\). Plan: get \\(N = Ae^{kt}\\), then find \\(A\\) and \\(k\\).",
+            "steps": [
+              "Given: \\(\\frac{dN}{dt} = kN\\) (rate proportional to \\(N\\)), \\(N(0) = 200\\), \\(N(2) = 1800\\).\nTo find: \\(N(t)\\).\nMethod: divide by \\(N\\) so that each side has one variable, integrate both sides, then use the two given values.",
+              "Separate and integrate\n\\[\\dfrac{1}{N}\\,dN = k\\,dt\\]\n\\[\\int\\dfrac{1}{N}\\,dN = \\int k\\,dt\\]\n\\[\\ln N = kt + c\\]\nWhy: \\(\\int\\frac{1}{N}\\,dN = \\ln N\\) (\\(N > 0\\)), and \\(k\\) is a constant.",
+              "Solve for \\(N\\)\n\\[N = e^{kt + c} = e^{c}e^{kt} = Ae^{kt}\\]\nWhy: take the exponential of both sides; write the constant \\(e^{c}\\) as \\(A\\).",
+              "Use \\(N(0) = 200\\)\n\\[200 = Ae^{0} \\Rightarrow A = 200\\]\n\\[N(t) = 200e^{kt}\\]",
+              "Use \\(N(2) = 1800\\)\n\\[1800 = 200e^{2k} \\Rightarrow e^{2k} = 9\\]\n\\[e^{k} = 3, \\qquad k = \\ln 3\\]\n\\[N(t) = 200(e^{k})^{t} = 200\\cdot 3^{t}\\]\nWhy: \\(e^{2k} = (e^{k})^{2} = 9\\) and \\(e^{k} > 0\\), so \\(e^{k} = 3\\).",
+              "Check\n\\(N(0) = 200\\), \\(N(2) = 200 \\times 9 = 1800\\;\\checkmark\\); \\(\\frac{dN}{dt} = 200\\cdot 3^{t}\\ln 3 = (\\ln 3)N\\;\\checkmark\\)."
+            ],
+            "final_answer": "\\(N(t) = 200\\cdot 3^{t}\\) (equivalently \\(200e^{(\\ln 3)t}\\)), \\(t\\) in hours."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "6(b)",
+            "prompt": "6. In a bacterial culture, the growth rate is proportional to the number of bacteria present. Initially there are 200 bacteria. After 2 hours, there are 1800 bacteria. (b) How many bacteria will there be after 4 hours?",
+            "explanation": "Substitute \\(t = 4\\) in the formula from (a).",
+            "steps": [
+              "Given: \\(N(t) = 200\\cdot 3^{t}\\).\nTo find: \\(N(4)\\).\nMethod: substitute.",
+              "Substitute \\(t = 4\\)\n\\[N(4) = 200\\cdot 3^{4} = 200 \\times 81\\]\n\\[= 16200\\]\nWhy: \\(3^{4} = 81\\).",
+              "Check\nIn every 2 hours the number is multiplied by 9: \\(200 \\to 1800 \\to 16200\\;\\checkmark\\)."
+            ],
+            "final_answer": "16200 bacteria after 4 hours."
+          }
+        ]
+      }
+    }
+  ]
+}

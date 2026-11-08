@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q14",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q14",
+      "title": "Question 14",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 14: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "14",
+            "prompt": "14 Evaluate \\(\\int \\frac{\\cos x}{\\sin^3 x - 1}\\,dx\\).",
+            "explanation": "\\(\\cos x\\,dx\\) is the differential of \\(\\sin x\\), so \\(t = \\sin x\\) gives \\(\\int \\frac{dt}{t^3 - 1}\\).\n\\(t^3 - 1 = (t - 1)(t^2 + t + 1)\\), and \\(t^2 + t + 1\\) is irreducible: Case-III.\nPlan: substitute, split, integrate the quadratic part by completing the square, then return to \\(\\sin x\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{\\cos x}{\\sin^3 x - 1}\\,dx\\).\nTo find: the integral.\nMethod: substitution \\(t = \\sin x\\), then partial fractions (Case-III).",
+              "Substitute \\(t = \\sin x\\)\n\\[dt = \\cos x\\,dx\\]\n\\[\\int \\dfrac{\\cos x}{\\sin^3 x - 1}\\,dx = \\int \\dfrac{dt}{t^3 - 1}\\]\nWhy: The numerator \\(\\cos x\\,dx\\) is exactly \\(dt\\).",
+              "Factorise and split\n\\[t^3 - 1 = (t - 1)(t^2 + t + 1)\\]\n\\[\\dfrac{1}{(t - 1)(t^2 + t + 1)} = \\dfrac{A}{t - 1} + \\dfrac{Bt + C}{t^2 + t + 1}\\]\n\\[1 = A(t^2 + t + 1) + (Bt + C)(t - 1) \\quad (1)\\]\nWhy: \\(a^3 - b^3 = (a - b)(a^2 + ab + b^2)\\); \\(t^2 + t + 1\\) has discriminant \\(1 - 4 = -3 < 0\\).",
+              "Find the constants\n\\[t = 1:\\ 1 = 3A,\\ A = \\tfrac{1}{3}\\]\n\\[t^2:\\ 0 = A + B,\\ B = -\\tfrac{1}{3}\\]\n\\[\\text{constant}:\\ 1 = A - C,\\ C = -\\tfrac{2}{3}\\]\nWhy: The root \\(t = 1\\) gives \\(A\\); comparing coefficients gives \\(B\\) and \\(C\\).",
+              "Rewrite\n\\[\\dfrac{1}{t^3 - 1} = \\dfrac{1}{3}\\cdot\\dfrac{1}{t - 1} - \\dfrac{1}{3}\\cdot\\dfrac{t + 2}{t^2 + t + 1}\\]\n\\[t + 2 = \\dfrac{1}{2}(2t + 1) + \\dfrac{3}{2}\\]\nWhy: \\(2t + 1\\) is the derivative of \\(t^2 + t + 1\\); split the numerator to use it.",
+              "Integrate the quadratic part\n\\[\\int \\dfrac{t + 2}{t^2 + t + 1}\\,dt\\]\n\\[= \\dfrac{1}{2}\\ln(t^2 + t + 1) + \\dfrac{3}{2}\\int \\dfrac{dt}{\\left(t + \\frac{1}{2}\\right)^2 + \\frac{3}{4}}\\]\n\\[= \\dfrac{1}{2}\\ln(t^2 + t + 1) + \\sqrt{3}\\tan^{-1}\\dfrac{2t + 1}{\\sqrt{3}}\\]\nWhy: Completing the square, \\(a = \\frac{\\sqrt{3}}{2}\\): \\(\\frac{3}{2}\\cdot\\frac{2}{\\sqrt{3}} = \\sqrt{3}\\) and \\(\\frac{t + 1/2}{\\sqrt{3}/2} = \\frac{2t + 1}{\\sqrt{3}}\\).",
+              "Combine and return to \\(x\\)\n\\[\\dfrac{1}{3}\\ln|t - 1| - \\dfrac{1}{6}\\ln(t^2 + t + 1)\\]\n\\[- \\dfrac{\\sqrt{3}}{3}\\tan^{-1}\\dfrac{2t + 1}{\\sqrt{3}} + c\\]\nWhy: Multiply the quadratic part by \\(-\\frac{1}{3}\\); \\(\\frac{\\sqrt{3}}{3} = \\frac{1}{\\sqrt{3}}\\). Then put \\(t = \\sin x\\). No modulus is needed on \\(t^2 + t + 1\\) because it is always positive.",
+              "Check (the constants)\n\\[\\tfrac{1}{3}(t^2 + t + 1) - \\tfrac{1}{3}(t + 2)(t - 1)\\]\n\\[= \\tfrac{1}{3}(t^2 + t + 1 - t^2 - t + 2)\\]\n\\[= 1 \\;\\checkmark\\]\nWhy: The partial fractions recombine to \\(\\frac{1}{t^3 - 1}\\)."
+            ],
+            "final_answer": "\\(\\frac{1}{3}\\ln|\\sin x - 1| - \\frac{1}{6}\\ln(\\sin^2 x + \\sin x + 1) - \\frac{\\sqrt{3}}{3}\\tan^{-1}\\left(\\frac{2\\sin x + 1}{\\sqrt{3}}\\right) + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the answers at the end of the book (page 302), the answers of Exercise 3.4 are printed under the wrong heading \"Exercise 3.6\". The answer of this question is item (xiv) of that block: \\(\\frac{1}{3}\\ln|\\sin x - 1| - \\frac{1}{6}\\ln(\\sin^2 x + \\sin x + 1) - \\frac{\\sqrt{3}}{3}\\tan^{-1}\\left(\\frac{2\\sin x + 1}{\\sqrt{3}}\\right) + c\\). That answer is correct. The block headed \"Exercise 3.4\" (page 301) belongs to a different exercise."
+          }
+        ]
+      }
+    }
+  ]
+}

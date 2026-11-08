@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-EXERCISE-8-4-Q5-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-exercise-8-4-q5",
+      "title": "Question 5 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-EXERCISE-8-4-Q5",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 255,
+          "pdf_to": 255,
+          "note": "Exercise 8.4, Question 5 (book p. 253); answer key p. 307 (PDF 309)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5. In a secure communication system, the phase shift \\(\\theta\\) (in radians) of an encrypted signal is modeled by the nonlinear function \\(f(\\theta) = \\sin\\theta - 0.5\\). For proper synchronization of the encrypted signal, the phase shift must satisfy \\(f(\\theta) = 0\\). Use the Newton-Raphson Method with initial guess \\(\\theta_0 = 0.5\\) to determine the required phase shift \\(\\theta\\), correct to three decimal places.",
+            "explanation": "Yeh asal mein sin(theta) = 0.5 hai, jise hum numerically hal kar rahe hain; theta radians mein hai.\nDiya kya hai? f aur shuruati guess 0.5. Find kya karna hai? Theta, teen decimal places tak.\nRule kaunsa? Newton-Raphson, jis mein f'(theta) = cos(theta).\nPlan: calculator radian mode mein, 5 places ke saath iterations, aur do lagataar values 0.0005 se kam farq par rukna.\nAakhir mein exact jawab pi/6 se milana.",
+            "steps": [
+              "Diya gaya: \\(f(\\theta) = \\sin\\theta - 0.5\\), \\(\\theta_0 = 0.5\\).\nMaloom karna: root \\(\\theta\\), teen decimal places tak.\nTareeqa: Newton-Raphson \\(\\theta_{n+1} = \\theta_n - \\frac{f(\\theta_n)}{f'(\\theta_n)}\\), calculator radian mode mein.",
+              "Derivative\n\\[f'(\\theta) = \\cos\\theta\\]\nKyun: \\(\\sin\\theta\\) ka derivative \\(\\cos\\theta\\) aur constant ka zero. Yeh formula sirf radians mein sahi hai. \\(\\theta_0 = 0.5\\) ke qareeb \\(\\cos\\theta \\approx 0.88 \\ne 0\\), to method lag sakta hai.\nDhyan dein: degree mode mein sin 0.5 = 0.0087 aata hai aur saara hisaab bigar jata hai.",
+              "Iteration 1: theta_0 = 0.5\n\\[f(0.5) = 0.47943 - 0.5 = -0.02057\\]\n\\[f'(0.5) = \\cos 0.5 = 0.87758\\]\n\\[\\theta_1 = 0.5 + \\dfrac{0.02057}{0.87758}\\]\n\\[= 0.5 + 0.02344 = 0.52344\\]\nKyun: f(0.5) negative hai, minus aur minus mil kar plus, is liye theta barh gaya, root ki taraf.",
+              "Iteration 2: theta_1 = 0.52344\n\\[f(0.52344) = 0.49986 - 0.5 = -0.00014\\]\n\\[f'(0.52344) = 0.86610\\]\n\\[\\theta_2 = 0.52344 + \\dfrac{0.00014}{0.86610}\\]\n\\[= 0.52360\\]\nKyun: \\(|\\theta_2 - \\theta_1| = 0.00016 < 0.0005\\).\nDhyan dein: \\(\\theta_1\\) par \\(|f| = 0.00014\\) pehle hi 0.0005 se kam tha, lekin wahan rukte to 0.52344 se 0.523 banta, jo teesre decimal mein ghalat hai. Newton-Raphson mein do lagataar values ka milna bhi zaroori hai.",
+              "Iteration 3\n\\[f(0.52360) \\approx 0.00000\\]\n\\[\\theta_3 = 0.52360\\]\nKyun: do lagataar values bilkul ek jaisi, is liye \\(\\theta \\approx 0.524\\).",
+              "Tasdeeq\n\\[f(0.5235) = -0.00009 < 0\\]\n\\[f(0.5245) = 0.00078 > 0\\]\nRoot \\(]0.5235, 0.5245[\\) mein hai aur 0.524 par round hota hai. Exact: \\(\\sin\\theta = \\frac{1}{2}\\) se \\(\\theta = \\frac{\\pi}{6} = 0.5235988\\) rad \\(= 30^{\\circ}\\).\nKyun: hum pehle se jaante hain ke sin 30 degree = 1/2, aur numerical jawab isi se milta hai; yeh method par bharosa barhata hai."
+            ],
+            "final_answer": "\\(\\theta \\approx 0.524\\) radian (\\(= \\pi/6\\), yani \\(30^{\\circ}\\)).",
+            "answer_table": {
+              "header": [
+                "\\(n\\)",
+                "\\(\\theta_n\\)",
+                "\\(f(\\theta_n)\\), \\(f'(\\theta_n)\\)",
+                "\\(\\theta_{n+1}\\)"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "0.50000",
+                  "-0.02057, 0.87758",
+                  "0.52344"
+                ],
+                [
+                  "1",
+                  "0.52344",
+                  "-0.00014, 0.86610",
+                  "0.52360"
+                ],
+                [
+                  "2",
+                  "0.52360",
+                  "0.00000, 0.86603",
+                  "0.52360"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

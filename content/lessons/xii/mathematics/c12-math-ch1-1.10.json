@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH1-1.10",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch1",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch1/1.10",
+      "title": "1.10 Solving Problems Involving Exponential and Logarithmic Equations and Inequalities",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 26,
+          "pdf_to": 30,
+          "note": "Book p. 24-28: 1.10 intro, equations (Examples 15, 16, 16 again, 17), inequations (Examples 19, 20, 21); Example 16 printed twice, no Example 18"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "In this section, we solve exponential and logarithmic equations and inequalities in which the variable appears in the exponent or inside a logarithmic expression. Before solving, the domain must be considered wherever the expression is not defined for all real values of the variable. The methods of solving equations and inequalities are illustrated in the following examples."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What is new here? In \\(4^{x-1} = 8\\) the unknown sits in an exponent, and in \\(\\log x + \\log(x - 3) = 1\\) it sits inside a logarithm. Ordinary algebra cannot reach it there, so we use four tools from Sections 1.4 and 1.6:\n1. Domain first: \\(\\log_a u\\) exists only when \\(u > 0\\) (base \\(a > 0,\\ a \\ne 1\\)); \\(a^u\\) exists for every real \\(u\\) and is always positive.\n2. One-to-one property: \\(a^u = a^v \\iff u = v\\) and \\(\\log_a u = \\log_a v \\iff u = v\\).\n3. Laws of logarithms (product, quotient, power) to collect several logarithms into one.\n4. Changing form: \\(\\log_a u = k \\iff u = a^k\\).\nAt the end, every value we find must be checked against the domain: values outside it are rejected."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Examples of Exponential and Logarithmic Equations"
+          },
+          {
+            "type": "example",
+            "title": "Example 15",
+            "problem": "Solve the equation: \\(4^{x-1} = 8\\).",
+            "steps": [
+              "Given: \\(4^{x-1} = 8\\).\nTo find: every real \\(x\\) that satisfies the equation.\nMethod: write both sides as powers of the same base 2, then use the one-to-one property of the exponential function to equate the exponents.",
+              "Domain\n\\[\\text{Domain} = ]-\\infty, \\infty[\\]\nWhy: \\(4^{x-1}\\) is defined for every real number, because an exponential with a positive base has a value for any exponent. No value of \\(x\\) has to be excluded.",
+              "Write both sides with base 2\n\\[4 = 2^2,\\quad 8 = 2^3\\]\n\\[(2^2)^{x-1} = 2^3\\]\n\\[2^{2x-2} = 2^3\\]\nWhy: 4 and 8 are both powers of 2. The rule \\((a^m)^n = a^{mn}\\) gives \\(2^{2(x-1)} = 2^{2x-2}\\).",
+              "Equate the exponents\n\\[2x - 2 = 3\\]\n\\[x = \\dfrac{5}{2}\\]\nWhy: the exponential function is one-to-one, so two equal powers of the same base must have equal exponents.",
+              "Check:\n\\[4^{\\frac{5}{2} - 1} = 4^{\\frac{3}{2}}\\]\n\\[= (\\sqrt{4})^3 = 2^3 = 8 \\;\\checkmark\\]"
+            ],
+            "answer": "Solution set: \\(\\left\\{\\frac{5}{2}\\right\\}\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 16",
+            "problem": "Find the solution of \\(2^{2x} - 3^{5x+3} = 0\\).",
+            "steps": [
+              "Given: \\(2^{2x} - 3^{5x+3} = 0\\).\nTo find: the real solution \\(x\\).\nMethod: the bases 2 and 3 cannot be made equal, so we take natural logarithms of both sides. The power law brings \\(x\\) down from the exponents and the equation becomes linear in \\(x\\).",
+              "Rewrite and find the domain\n\\[2^{2x} = 3^{5x+3} \\quad \\text{...(1)}\\]\n\\[\\text{Domain} = ]-\\infty, \\infty[\\]\nWhy: moving one term to the right gives two powers that must be equal. Both \\(2^{2x}\\) and \\(3^{5x+3}\\) are defined for every real number.",
+              "Take natural logarithms of both sides of (1)\n\\[\\ln 2^{2x} = \\ln 3^{5x+3}\\]\nWhy: both sides are positive, so their logarithms exist, and equal numbers have equal logarithms.",
+              "Apply the power law\n\\[2x\\ln 2 = (5x + 3)\\ln 3\\]\n\\[2x\\ln 2 = 5x\\ln 3 + 3\\ln 3\\]\nWhy: \\(\\ln a^k = k\\ln a\\). Now \\(x\\) is no longer in an exponent.",
+              "Collect the \\(x\\)-terms\n\\[(2\\ln 2 - 5\\ln 3)x = 3\\ln 3\\]\nWhy: this is now an ordinary linear equation: bring the \\(x\\)-terms to one side and take \\(x\\) out as a common factor.",
+              "Power law, then quotient law\n\\[(\\ln 2^2 - \\ln 3^5)x = \\ln 3^3\\]\n\\[(\\ln 4 - \\ln 243)x = \\ln 27\\]\n\\[x\\ln\\left(\\dfrac{4}{243}\\right) = \\ln 27\\]\nWhy: \\(k\\ln a = \\ln a^k\\) read backwards, then \\(\\ln m - \\ln n = \\ln\\frac{m}{n}\\). This makes the answer short.",
+              "Solve for \\(x\\)\n\\[x = \\dfrac{\\ln 27}{\\ln\\left(\\frac{4}{243}\\right)}\\]\n\\[x = \\log_{\\frac{4}{243}}(27)\\]\nWhy: divide by \\(\\ln\\frac{4}{243}\\), which is not zero because \\(\\frac{4}{243} \\ne 1\\). The change of base formula \\(\\log_b a = \\frac{\\ln a}{\\ln b}\\) writes the quotient as one logarithm.",
+              "Check:\n\\[x \\approx \\dfrac{3.2958}{-4.1068} \\approx -0.8025\\]\n\\[2^{2x} \\approx 0.3287\\]\n\\[3^{5x+3} \\approx 0.3287 \\;\\checkmark\\]"
+            ],
+            "answer": "Solution set: \\(\\left\\{\\log_{\\frac{4}{243}}(27)\\right\\}\\), that is \\(x \\approx -0.8025\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 16",
+            "problem": "Solve the equation: \\(\\log x + \\log(x - 3) = 1\\).",
+            "steps": [
+              "Given: \\(\\log x + \\log(x - 3) = 1\\) (here \\(\\log\\) means base 10).\nTo find: the real solutions \\(x\\).\nMethod: find the domain first, join the two logarithms with the product law, change to exponential form, solve the quadratic and reject any root outside the domain.",
+              "Domain\n\\[x > 0 \\text{ and } x - 3 > 0\\]\n\\[\\Rightarrow x > 3\\]\n\\[\\text{Domain} = ]3, \\infty[\\]\nWhy: a logarithm is defined only for a positive argument. Both conditions must hold, and \\(x > 3\\) already makes \\(x > 0\\).",
+              "Apply the product law to the left side of (1)\n\\[\\log[x(x - 3)] = 1\\]\nWhy: \\(\\log m + \\log n = \\log(mn)\\).",
+              "Write in exponential form\n\\[x(x - 3) = 10^1 = 10\\]\nWhy: \\(\\log_{10} u = k \\iff u = 10^k\\).",
+              "Factorize\n\\[x^2 - 3x - 10 = 0\\]\n\\[(x - 5)(x + 2) = 0\\]\n\\[x = 5 \\text{ or } x = -2\\]\nWhy: \\(-5\\) and \\(+2\\) multiply to \\(-10\\) and add to \\(-3\\).",
+              "Compare with the domain\n\\(5 \\in ]3, \\infty[\\): accepted. \\(-2 \\notin ]3, \\infty[\\): rejected.\nWhy: at \\(x = -2\\), \\(\\log(-2)\\) does not exist. The product law joined the logarithms into one, and that step let in an extra root.",
+              "Check:\n\\[\\log 5 + \\log(5 - 3)\\]\n\\[= \\log 5 + \\log 2 = \\log 10 = 1 \\;\\checkmark\\]"
+            ],
+            "answer": "Solution set: \\(\\{5\\}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Numbering note (ours)",
+            "text": "The textbook prints the number \"Example 16\" twice: first for \\(2^{2x} - 3^{5x+3} = 0\\), then for \\(\\log x + \\log(x - 3) = 1\\). After Example 17 the next example is numbered 19: there is no Example 18. We keep the printed numbers so that each example can be found in the book."
+          },
+          {
+            "type": "example",
+            "title": "Example 17",
+            "problem": "Solve the equation: \\(\\log_x(x^2 - 3x + 2) = 2\\).",
+            "steps": [
+              "Given: \\(\\log_x(x^2 - 3x + 2) = 2\\).\nTo find: the real solutions \\(x\\).\nMethod: here the unknown is also the base. Write the conditions on the base and on the argument, change to exponential form, solve, then check the conditions.",
+              "Domain conditions\nBase condition: \\(x > 0,\\ x \\ne 1\\)\nArgument condition: \\(x^2 - 3x + 2 > 0\\)\nWhy: a logarithm needs a positive base different from 1 and a positive argument.",
+              "Convert to exponential form\n\\[x^2 = x^2 - 3x + 2\\]\nWhy: \\(\\log_x u = 2 \\iff u = x^2\\).",
+              "Solve\n\\[3x - 2 = 0\\]\n\\[x = \\dfrac{2}{3}\\]\nWhy: \\(x^2\\) cancels from both sides, leaving a linear equation.",
+              "Check the domain\nBase: \\(x = \\frac{2}{3} > 0\\) and \\(x \\ne 1\\).\nArgument:\n\\[\\left(\\tfrac{2}{3}\\right)^2 - 3\\left(\\tfrac{2}{3}\\right) + 2\\]\n\\[= \\tfrac{4}{9} - 2 + 2 = \\tfrac{4}{9} > 0\\]\nWhy: a value that breaks either condition would have to be rejected; \\(\\frac{2}{3}\\) passes both. Hence \\(x = \\frac{2}{3}\\) is a solution of the given equation.",
+              "Check:\n\\[\\left(\\tfrac{2}{3}\\right)^2 = \\tfrac{4}{9}\\]\nso \\(\\log_{\\frac{2}{3}}\\frac{4}{9} = 2\\) \\(\\checkmark\\)"
+            ],
+            "answer": "Solution set: \\(\\left\\{\\frac{2}{3}\\right\\}\\)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Examples of Exponential and Logarithmic Inequations"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "An inequality is solved like an equation with one extra question at the moment we remove an exponential or a logarithm: is the function increasing or decreasing? If the base is greater than 1 the sign is kept; if the base is between 0 and 1 the sign is reversed. The final answer is always (solution of the algebraic inequality) \\(\\cap\\) (domain)."
+          },
+          {
+            "type": "table",
+            "caption": "Our summary: what happens to the inequality sign when the base is removed",
+            "header": [
+              "Base \\(a > 1\\)",
+              "Base \\(0 < a < 1\\)"
+            ],
+            "rows": [
+              [
+                "\\(a^x\\) and \\(\\log_a x\\) are strictly increasing",
+                "\\(a^x\\) and \\(\\log_a x\\) are strictly decreasing"
+              ],
+              [
+                "\\(a^u > a^v \\iff u > v\\)",
+                "\\(a^u > a^v \\iff u < v\\)"
+              ],
+              [
+                "\\(\\log_a u \\ge \\log_a v \\iff u \\ge v\\)",
+                "\\(\\log_a u \\ge \\log_a v \\iff u \\le v\\)"
+              ],
+              [
+                "The inequality sign is kept",
+                "The inequality sign is reversed"
+              ],
+              [
+                "Examples: bases \\(2, 10, e\\)",
+                "Examples: bases \\(\\frac{1}{3}, \\frac{7}{9}, \\frac{1}{e}\\)"
+              ]
+            ]
+          },
+          {
+            "type": "example",
+            "title": "Example 19",
+            "problem": "Solve the inequality: \\(2^{x+1} > 5^x\\).",
+            "steps": [
+              "Given: \\(2^{x+1} > 5^x\\).\nTo find: all real \\(x\\) satisfying the inequality.\nMethod: divide by the positive number \\(2^x\\) to get a single power \\(\\left(\\frac{5}{2}\\right)^x\\), take logarithms to base 10 (increasing, so the sign is kept), use the power law, then divide by the positive number \\(\\log\\frac{5}{2}\\).",
+              "Domain\nBoth \\(2^{x+1}\\) and \\(5^x\\) are defined for every real number.\nWhy: exponentials with positive bases have a value for every exponent.",
+              "Split the power\n\\[2 \\cdot 2^x > 5^x\\]\nWhy: \\(2^{x+1} = 2^1 \\cdot 2^x\\).",
+              "Divide by \\(2^x\\)\n\\[2 > \\dfrac{5^x}{2^x}\\]\n\\[2 > \\left(\\dfrac{5}{2}\\right)^x\\]\nWhy: \\(2^x > 0\\) for every real number, so dividing by it keeps the sign. Also \\(\\frac{a^x}{b^x} = \\left(\\frac{a}{b}\\right)^x\\).",
+              "Take logarithms to base 10\n\\[\\log 2 > \\log\\left(\\dfrac{5}{2}\\right)^x\\]\nWhy: the logarithmic function with base 10 is strictly increasing, so the bigger number has the bigger logarithm and the sign stays the same.",
+              "Apply the power law\n\\[\\log 2 > x\\log\\left(\\dfrac{5}{2}\\right)\\]\nWhy: \\(\\log a^k = k\\log a\\).",
+              "Divide by \\(\\log\\frac{5}{2}\\)\nSince \\(\\frac{5}{2} > 0 \\Rightarrow \\log\\left(\\frac{5}{2}\\right) > 0\\), we have:\n\\[x < \\dfrac{\\log 2}{\\log\\left(\\frac{5}{2}\\right)}\\]\n\\[= \\log_{\\frac{5}{2}}(2) \\approx 0.7565\\]\nWhy: dividing by a positive number keeps the sign; the change of base formula writes the quotient as one logarithm.",
+              "Check:\n\\(x = 0\\): \\(2^1 = 2 > 5^0 = 1\\) \\(\\checkmark\\)\n\\(x = 1\\): \\(2^2 = 4 > 5^1 = 5\\) is false, and indeed \\(1 > 0.7565\\) lies outside the answer."
+            ],
+            "answer": "Solution set: \\(]-\\infty, \\log_{\\frac{5}{2}}(2)[\\)",
+            "book_errors": [
+              "\\(\\frac{5}{2} > 0 \\Rightarrow \\log\\left(\\frac{5}{2}\\right) > 0\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book gives the reason as \\(\\frac{5}{2} > 0 \\Rightarrow \\log\\left(\\frac{5}{2}\\right) > 0\\). Being positive is not enough: \\(\\frac{1}{2} > 0\\) but \\(\\log\\frac{1}{2} < 0\\). The correct reason is \\(\\frac{5}{2} > 1 \\Rightarrow \\log\\left(\\frac{5}{2}\\right) > 0\\). The final answer does not change."
+          },
+          {
+            "type": "example",
+            "title": "Example 20",
+            "problem": "Solve the inequality: \\(\\log(2x - 1) \\ge \\log(5 - 3x)\\).",
+            "steps": [
+              "Given: \\(\\log(2x - 1) \\ge \\log(5 - 3x)\\).\nTo find: all real \\(x\\) satisfying the inequality.\nMethod: find the domain, remove the logarithms (base 10 is increasing, so the sign is kept), solve the linear inequality, and intersect with the domain.",
+              "Domain\n\\[2x - 1 > 0 \\Rightarrow x > \\tfrac{1}{2}\\]\n\\[5 - 3x > 0 \\Rightarrow x < \\tfrac{5}{3}\\]\n\\[\\tfrac{1}{2} < x < \\tfrac{5}{3}\\]\nWhy: both logarithms need positive arguments, so both conditions must hold together.",
+              "Remove the logarithms\n\\[2x - 1 \\ge 5 - 3x\\]\nWhy: the logarithmic function with base 10 is strictly increasing, so the sign is kept.",
+              "Solve the inequality\n\\[2x + 3x \\ge 5 + 1\\]\n\\[5x \\ge 6\\]\n\\[x \\ge \\tfrac{6}{5}\\]\nWhy: collect the \\(x\\)-terms on one side, then divide by the positive number 5 (sign kept).",
+              "Compatibility with the domain\n\\[\\tfrac{6}{5} \\le x < \\tfrac{5}{3}\\]\nWhy: \\(\\frac{6}{5} = 1.2\\) lies inside \\(]\\frac{1}{2}, \\frac{5}{3}[\\). The end \\(\\frac{5}{3}\\) stays open, because there \\(\\log(5 - 3x) = \\log 0\\) does not exist.",
+              "Check:\n\\(x = 1.5\\): \\(\\log 2 \\ge \\log 0.5\\) \\(\\checkmark\\)\n\\(x = 1\\): \\(\\log 1 = 0 \\ge \\log 2\\) is false, as expected (\\(1 < 1.2\\))."
+            ],
+            "answer": "Solution set: \\([\\frac{6}{5}, \\frac{5}{3}[\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 21",
+            "problem": "Solve the inequality: \\(\\log_{\\frac{7}{9}}(x^2 - 3x + 2) \\ge \\log_{\\frac{7}{9}}(2x - 1)\\).",
+            "steps": [
+              "Given: \\(\\log_{\\frac{7}{9}}(x^2 - 3x + 2) \\ge \\log_{\\frac{7}{9}}(2x - 1)\\).\nTo find: all real \\(x\\) satisfying the inequality.\nMethod: find the domain of both logarithms; since the base \\(\\frac{7}{9}\\) is between 0 and 1 the function is decreasing, so the sign is reversed when we remove it; solve the quadratic inequality and intersect with the domain.",
+              "Domain of the first logarithm\n\\[x^2 - 3x + 2 > 0\\]\n\\[(x - 1)(x - 2) > 0\\]\n\\[x < 1 \\text{ or } x > 2\\]\nWhy: a product is positive when both factors are negative (\\(x < 1\\) and \\(x < 2\\), which gives \\(x < 1\\)) or both are positive (\\(x > 1\\) and \\(x > 2\\), which gives \\(x > 2\\)).",
+              "Domain of the second logarithm\n\\[2x - 1 > 0 \\Rightarrow x > \\tfrac{1}{2}\\]",
+              "Combined domain\n\\[]\\tfrac{1}{2}, 1[ \\cup ]2, \\infty[\\]\nWhy: both conditions must hold, so we keep the part of \\(x < 1\\) or \\(x > 2\\) that also has \\(x > \\frac{1}{2}\\).",
+              "Remove the logarithms (sign reversed)\n\\[x^2 - 3x + 2 \\le 2x - 1\\]\n\\[x^2 - 5x + 3 \\le 0\\]\nWhy: \\(0 < \\frac{7}{9} < 1\\), so \\(\\log_{\\frac{7}{9}}\\) is strictly decreasing: the bigger logarithm belongs to the smaller argument.",
+              "Solve \\(x^2 - 5x + 3 = 0\\)\n\\[x = \\dfrac{5 \\pm \\sqrt{25 - 12}}{2}\\]\n\\[= \\dfrac{5 \\pm \\sqrt{13}}{2}\\]\nWhy: the quadratic formula with \\(a = 1,\\ b = -5,\\ c = 3\\).",
+              "Where is \\(x^2 - 5x + 3 \\le 0\\)?\n\\[\\dfrac{5 - \\sqrt{13}}{2} \\le x \\le \\dfrac{5 + \\sqrt{13}}{2}\\]\nWhy: the other possibility, \\(x \\le \\frac{5 - \\sqrt{13}}{2}\\) and \\(x \\ge \\frac{5 + \\sqrt{13}}{2}\\) together, is impossible. So \\(x\\) lies between the roots (about \\(0.697 \\le x \\le 4.303\\)).",
+              "Compatibility with the domain\n\\[x \\in [\\tfrac{5 - \\sqrt{13}}{2}, 1[\\]\n\\[\\text{or } x \\in ]2, \\tfrac{5 + \\sqrt{13}}{2}]\\]\nWhy: \\(\\frac{5 - \\sqrt{13}}{2} \\approx 0.697\\) is bigger than \\(\\frac{1}{2}\\), so the first piece starts there; 1 and 2 are excluded by the domain; the ends \\(\\frac{5 \\pm \\sqrt{13}}{2}\\) are included because equality is allowed and both arguments are positive there.",
+              "Check:\n\\(x = 3\\): \\(x^2 - 3x + 2 = 2\\) and \\(2x - 1 = 5\\). Since \\(2 < 5\\) and the base is less than 1, \\(\\log_{\\frac{7}{9}} 2 > \\log_{\\frac{7}{9}} 5\\) \\(\\checkmark\\)"
+            ],
+            "answer": "Solution set: \\([\\frac{5 - \\sqrt{13}}{2}, 1[ \\cup ]2, \\frac{5 + \\sqrt{13}}{2}]\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Always find the domain first: every logarithm needs a positive argument (and a positive base \\(\\ne 1\\)).\n2. Same base on both sides: equate the exponents or the arguments (one-to-one property).\n3. Different bases: take logarithms of both sides and use the power law.\n4. Several logarithms: join them with the product or quotient law, then change to exponential form.\n5. Inequalities: base \\(> 1\\) keeps the sign, base between 0 and 1 reverses it.\n6. Final answer = (algebraic solution) \\(\\cap\\) (domain); check one value inside and one outside."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Forgetting the domain: in \\(\\log x + \\log(x - 3) = 1\\) the root \\(x = -2\\) must be rejected.\n2. Keeping the inequality sign when the base is between 0 and 1 (Example 21).\n3. Dividing by a logarithm without checking its sign: \\(\\log a < 0\\) when \\(0 < a < 1\\), and then the sign reverses.\n4. Including an end point where a logarithm becomes \\(\\log 0\\) (Example 20: \\(x = \\frac{5}{3}\\) is excluded).\n5. Writing \\(\\log(m + n) = \\log m + \\log n\\): the product law is \\(\\log(mn) = \\log m + \\log n\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

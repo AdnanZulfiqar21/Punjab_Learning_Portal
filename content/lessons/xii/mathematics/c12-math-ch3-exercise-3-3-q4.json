@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 4: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. Evaluate \\(\\int \\dfrac{x}{\\sin^2 x}\\,dx\\).",
+            "explanation": "Write \\(\\frac{1}{\\sin^2 x} = \\csc^2 x\\); then it is algebraic times trigonometric.\nPlan: \\(x\\) first, \\(\\csc^2 x\\) second (its integral is \\(-\\cot x\\)), then \\(\\int \\cot x\\,dx = \\ln|\\sin x|\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{x}{\\sin^2 x}\\,dx\\).\nTo find: the indefinite integral.\nMethod: rewrite as \\(\\int x\\csc^2 x\\,dx\\); integration by parts with \\(f(x) = x\\), \\(g(x) = \\csc^2 x\\).",
+              "Rewrite\n\\[\\int \\dfrac{x}{\\sin^2 x}\\,dx = \\int x\\csc^2 x\\,dx\\]\nWhy: \\(\\csc x = \\frac{1}{\\sin x}\\).",
+              "Apply integration by parts\n\\[= x(-\\cot x) - \\int (-\\cot x)\\cdot 1\\,dx\\]\n\\[= -x\\cot x + \\int \\dfrac{\\cos x}{\\sin x}\\,dx\\]\nWhy: \\(\\frac{d}{dx}\\cot x = -\\csc^2 x\\), so \\(\\int \\csc^2 x\\,dx = -\\cot x\\).",
+              "Numerator is the derivative of the denominator\n\\[= -x\\cot x + \\ln|\\sin x| + c\\]\nWhy: \\(\\frac{d}{dx}\\sin x = \\cos x\\) and \\(\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln|f(x)| + c\\).",
+              "Check\n\\[\\dfrac{d}{dx}(-x\\cot x + \\ln|\\sin x|)\\]\n\\[= -\\cot x + x\\csc^2 x + \\cot x\\]\n\\[= x\\csc^2 x\\]\nWhy: product rule; the \\(\\cot x\\) terms cancel."
+            ],
+            "final_answer": "\\(-x\\cot x + \\ln|\\sin x| + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

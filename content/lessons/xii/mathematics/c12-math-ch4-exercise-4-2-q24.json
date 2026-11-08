@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q24",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q24",
+      "title": "Question 24",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 136,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 24: book p. 134 (Q2-Q25 general solutions and IVPs); answer key p. 303 (keys numbered 2-29)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "As printed: Solve the initial value problem \\(\\left(y + \\sqrt{x^2 + y^2}\\right)dy - x\\,dy = 0\\); \\(y = 0\\) when \\(x = 0\\).",
+            "book_errors": [
+              "\\(\\left(y + \\sqrt{x^2 + y^2}\\right)dy - x\\,dy = 0\\)",
+              "\\(y = 0\\) when \\(x = 0\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Two misprints. (1) The equation contains \\(dy\\) twice; the first must be \\(dx\\): \\(\\left(y + \\sqrt{x^2 + y^2}\\right)dx - x\\,dy = 0\\). As printed it would only say \\(\\left(y + \\sqrt{x^2 + y^2} - x\\right)dy = 0\\), which is not the intended homogeneous equation. (2) The condition \\(y = 0\\) when \\(x = 0\\) cannot fix the constant: at \\(x = 0\\) the equation \\(\\frac{dy}{dx} = \\frac{y + \\sqrt{x^2 + y^2}}{x}\\) is not defined, every solution curve \\(y = \\frac{Cx^2}{2} - \\frac{1}{2C}\\) meets \\(x = 0\\) at \\(y = -\\frac{1}{2C} \\neq 0\\), and the general solution \\(y + \\sqrt{x^2 + y^2} = Cx^2\\) gives \\(0 = 0\\) at \\((0, 0)\\) for every \\(C\\). The key's answer \\(y + \\sqrt{x^2 + y^2} = x^2\\) is the curve through \\((1, 0)\\), so we solve with \\(y = 0\\) when \\(x = 1\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "24",
+            "prompt": "24 Solve the initial value problem \\(\\left(y + \\sqrt{x^2 + y^2}\\right)dx - x\\,dy = 0\\) [printed with \\(dy\\) in place of the first \\(dx\\)]; \\(y = 0\\) when \\(x = 1\\) [printed as \\(x = 0\\); see the correction above].",
+            "explanation": "The printed equation needs one correction (\\(dx\\) for the first \\(dy\\)); then every term has degree 1, so it is homogeneous.\nThe printed condition at \\(x = 0\\) cannot fix the constant; we use \\(y = 0\\) when \\(x = 1\\), which gives the key's answer.\nPlan: \\(y = vx\\), separate, integrate \\(\\frac{1}{\\sqrt{1 + v^2}}\\), put back \\(v\\), then apply the condition.",
+            "steps": [
+              "Given: \\(\\left(y + \\sqrt{x^2 + y^2}\\right)dx - x\\,dy = 0\\), \\(y = 0\\) when \\(x = 1\\) (corrected).\nTo find: the particular solution.\nMethod: Homogeneous equation (Section 4.2.2): \\(y = vx\\); then the initial condition fixes \\(C\\). The initial point has \\(x = 1 > 0\\), so we work with \\(x > 0\\).",
+              "Write \\(\\frac{dy}{dx}\\)\n\\[\\dfrac{dy}{dx} = \\dfrac{y + \\sqrt{x^2 + y^2}}{x}\\]\nWhy: every term (\\(y\\), \\(\\sqrt{x^2 + y^2}\\), \\(x\\)) has degree 1, so the right side depends only on \\(y/x\\).",
+              "Substitute \\(y = vx\\)\n\\[\\sqrt{x^2 + v^2x^2} = x\\sqrt{1 + v^2}\\]\n\\[v + x\\dfrac{dv}{dx} = v + \\sqrt{1 + v^2}\\]\n\\[x\\dfrac{dv}{dx} = \\sqrt{1 + v^2}\\]\nWhy: \\(\\sqrt{x^2} = x\\) because \\(x > 0\\); then \\(v\\) cancels.",
+              "Separate and integrate\n\\[\\int \\dfrac{dv}{\\sqrt{1 + v^2}} = \\int \\dfrac{dx}{x}\\]\n\\[\\ln\\left(v + \\sqrt{1 + v^2}\\right) = \\ln x + \\ln C\\]\n\\[v + \\sqrt{1 + v^2} = Cx\\]\nWhy: standard integral \\(\\int \\frac{dv}{\\sqrt{v^2 + 1}} = \\ln\\left|v + \\sqrt{v^2 + 1}\\right|\\); here \\(v + \\sqrt{1 + v^2} > 0\\), so no modulus, and \\(C > 0\\).",
+              "Put back \\(v = y/x\\) (general solution)\n\\[\\dfrac{y}{x} + \\dfrac{\\sqrt{x^2 + y^2}}{x} = Cx\\]\n\\[y + \\sqrt{x^2 + y^2} = Cx^2\\]\nWhy: \\(\\sqrt{1 + y^2/x^2} = \\frac{\\sqrt{x^2 + y^2}}{x}\\) for \\(x > 0\\); multiply by \\(x\\).",
+              "Use \\(y = 0\\) when \\(x = 1\\)\n\\[0 + \\sqrt{1 + 0} = C(1)^2\\]\n\\[C = 1\\]\n\\[y + \\sqrt{x^2 + y^2} = x^2\\]\nWhy: put the initial point into the general solution.",
+              "Explicit form\n\\[\\sqrt{x^2 + y^2} = x^2 - y\\]\n\\[x^2 + y^2 = x^4 - 2x^2y + y^2\\]\n\\[y = \\dfrac{x^2 - 1}{2}\\]\nWhy: square both sides; \\(y^2\\) cancels, then divide by \\(2x^2\\).",
+              "Why the printed condition fails\nIn general \\(\\sqrt{x^2 + y^2} = Cx^2 - y\\) gives\n\\[y = \\dfrac{Cx^2}{2} - \\dfrac{1}{2C}\\]\nAt \\(x = 0\\) this is \\(y = -\\frac{1}{2C} \\neq 0\\), so no solution curve passes through \\((0, 0)\\).\nWhy: this is why the condition must be given at a point with \\(x \\neq 0\\).",
+              "Check\nFor \\(y = \\frac{x^2 - 1}{2}\\):\n\\[x^2 + y^2 = \\left(\\dfrac{x^2 + 1}{2}\\right)^2\\]\nso \\(y + \\sqrt{x^2 + y^2} = x^2\\) and \\(\\frac{y + \\sqrt{x^2 + y^2}}{x} = x = \\frac{dy}{dx}\\) \\(\\checkmark\\); \\(y(1) = 0\\) \\(\\checkmark\\)\nWhy: the curve satisfies both the equation and the condition."
+            ],
+            "final_answer": "\\(y + \\sqrt{x^2 + y^2} = x^2\\), i.e. \\(y = \\frac{x^2 - 1}{2}\\) (with the corrected condition \\(y = 0\\) when \\(x = 1\\))"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints this answer as number 28, not 24. The Exercise 4.2 keys are numbered 2 to 29 for 25 questions (key 2 answers Question 1, and the extra keys 15, 19 and 27 match no printed question), so look for this answer under 28. Its answer \\(y + \\sqrt{x^2 + y^2} = x^2\\) is correct for the corrected problem (condition \\(y = 0\\) when \\(x = 1\\))."
+          }
+        ]
+      }
+    }
+  ]
+}

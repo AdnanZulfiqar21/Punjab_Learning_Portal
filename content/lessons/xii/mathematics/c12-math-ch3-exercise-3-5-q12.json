@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q12",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q12",
+      "title": "Question 12",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 104,
+          "note": "Exercise 3.5, Question 12: show-that with f(a + x) + f(a - x) = 0; book p. 102. No printed answer (show that)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12",
+            "prompt": "12 If \\(f(a + x) + f(a - x) = 0\\), show that \\(\\int_{0}^{2a} f(x)\\,dx = 0\\).",
+            "explanation": "A proof: \\(f\\) is 'odd about \\(x = a\\)', the midpoint of \\([0, 2a]\\).\nProperty IV replaces \\(x\\) by \\(2a - x\\); the condition (with \\(x\\) replaced by \\(a - x\\)) says \\(f(2a - x) = -f(x)\\).\nSo the integral equals its own negative.",
+            "steps": [
+              "Given: \\(f(a + x) + f(a - x) = 0\\) for all \\(x\\).\nTo prove: \\(\\int_{0}^{2a} f(x)\\,dx = 0\\).\nMethod: Property IV \\(\\int_0^{2a} f(x)\\,dx = \\int_0^{2a} f(2a - x)\\,dx\\).",
+              "Rewrite the condition\n\\[x \\to a - x:\\ f(2a - x) + f(x) = 0\\]\n\\[f(2a - x) = -f(x)\\]\nWhy: \\(a + (a - x) = 2a - x\\) and \\(a - (a - x) = x\\); the condition holds for every \\(x\\), so also for \\(a - x\\).",
+              "Apply Property IV\n\\[I = \\int_{0}^{2a} f(x)\\,dx = \\int_{0}^{2a} f(2a - x)\\,dx\\]\n\\[= -\\int_{0}^{2a} f(x)\\,dx = -I\\]\nWhy: \\(0 + 2a - x = 2a - x\\), then the rewritten condition.",
+              "Solve\n\\[I = -I \\Rightarrow 2I = 0 \\Rightarrow I = 0\\]\nWhy: the only number equal to its own negative is 0.",
+              "Check with an example\n\\[a = 3,\\quad f(x) = (x - 3)^3\\]\n\\[\\int_{0}^{6} (x - 3)^3\\,dx = \\left[\\dfrac{(x - 3)^4}{4}\\right]_{0}^{6}\\]\n\\[= \\dfrac{81}{4} - \\dfrac{81}{4} = 0 \\;\\checkmark\\]\nWhy: \\(f(3 + x) + f(3 - x) = x^3 - x^3 = 0\\), and the integral is 0."
+            ],
+            "final_answer": "Hence proved: \\(\\int_{0}^{2a} f(x)\\,dx = 0\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

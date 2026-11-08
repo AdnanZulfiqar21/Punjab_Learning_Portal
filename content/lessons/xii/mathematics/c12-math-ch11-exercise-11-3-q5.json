@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-EXERCISE-11-3-Q5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/u-exercise-11-3-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 297,
+          "pdf_to": 297,
+          "note": "Exercise 11.3, Question 5: book page 295 (instruction for Q1-Q5). The book prints no answers for Unit 11."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5 Find the velocity, acceleration, speed, and direction of motion of the particle with position vector \\(\\mathbf{r}(t) = e^{t}\\sin t\\,\\hat{i} + (t^{3} - 2t)\\hat{j} + \\arctan(2t)\\,\\hat{k}\\) at \\(t = 0\\). Interpret the results by describing the particle's motion at that instant, including how fast and in what direction it is moving, whether it is speeding up or slowing down, and how its path is curving.",
+            "explanation": "Same task as Questions 1-4, but the components need the product rule (\\(e^{t}\\sin t\\)) and the derivative of \\(\\arctan\\) with the chain rule.\nWe need \\(\\mathbf{v}\\), \\(\\mathbf{a}\\), speed and direction at \\(t = 0\\) and a description of the motion.\nPlan: differentiate carefully, substitute \\(t = 0\\), then interpret with \\(\\mathbf{v}\\cdot\\mathbf{a}\\) and the angle between \\(\\mathbf{v}\\) and \\(\\mathbf{a}\\).",
+            "steps": [
+              "Given: \\(\\mathbf{r}(t) = e^{t}\\sin t\\,\\hat{i} + (t^{3} - 2t)\\hat{j} + \\arctan(2t)\\,\\hat{k}\\), \\(t = 0\\).\nTo find: velocity, acceleration, speed, direction of motion; interpretation.\nMethod: differentiate each component once for \\(\\mathbf{v}(t)\\) and again for \\(\\mathbf{a}(t)\\), then substitute \\(t = 0\\). Speed \\(= |\\mathbf{v}|\\); direction \\(= \\frac{\\mathbf{v}}{|\\mathbf{v}|}\\). To interpret: the sign of \\(\\mathbf{v}\\cdot\\mathbf{a}\\) tells speeding up or slowing down, and the part of \\(\\mathbf{a}\\) across \\(\\mathbf{v}\\) shows which way the path bends.",
+              "Derivatives of the components\n\\[\\dfrac{d}{dt}(e^{t}\\sin t) = e^{t}\\sin t + e^{t}\\cos t\\]\n\\[\\dfrac{d}{dt}(t^{3} - 2t) = 3t^{2} - 2\\]\n\\[\\dfrac{d}{dt}\\arctan(2t) = \\dfrac{2}{1 + 4t^{2}}\\]\nWhy: product rule \\((uv)' = u'v + uv'\\); for \\(\\arctan u\\), \\(\\frac{d}{dt}\\arctan u = \\frac{1}{1 + u^{2}}\\frac{du}{dt}\\) with \\(u = 2t\\), \\(\\frac{du}{dt} = 2\\).",
+              "Velocity\n\\[\\mathbf{v}(t) = e^{t}(\\sin t + \\cos t)\\,\\hat{i}\\]\n\\[\\quad + (3t^{2} - 2)\\,\\hat{j}\\]\n\\[\\quad + \\dfrac{2}{1 + 4t^{2}}\\,\\hat{k}\\]\n\\[\\mathbf{v}(0) = 1(0 + 1)\\hat{i} + (0 - 2)\\hat{j} + \\dfrac{2}{1}\\hat{k}\\]\n\\[= \\hat{i} - 2\\,\\hat{j} + 2\\,\\hat{k}\\]\nWhy: at \\(t = 0\\), \\(e^{0} = 1\\), \\(\\sin 0 = 0\\), \\(\\cos 0 = 1\\).",
+              "Acceleration\n\\[\\dfrac{d}{dt}\\left[e^{t}(\\sin t + \\cos t)\\right] = 2e^{t}\\cos t\\]\n\\[\\dfrac{d}{dt}(3t^{2} - 2) = 6t\\]\n\\[\\dfrac{d}{dt}\\left[2(1 + 4t^{2})^{-1}\\right]\\]\n\\[= -\\dfrac{16t}{(1 + 4t^{2})^{2}}\\]\n\\[\\mathbf{a}(t) = 2e^{t}\\cos t\\,\\hat{i} + 6t\\,\\hat{j}\\]\n\\[\\quad - \\dfrac{16t}{(1 + 4t^{2})^{2}}\\,\\hat{k}\\]\n\\[\\mathbf{a}(0) = 2\\,\\hat{i} + 0\\,\\hat{j} - 0\\,\\hat{k} = 2\\,\\hat{i}\\]\nWhy: product rule gives \\(e^{t}(\\sin t + \\cos t) + e^{t}(\\cos t - \\sin t) = 2e^{t}\\cos t\\); the chain rule gives \\(2(-1)(1 + 4t^{2})^{-2}(8t)\\).",
+              "Speed\n\\[|\\mathbf{v}(0)| = \\sqrt{1^{2} + (-2)^{2} + 2^{2}}\\]\n\\[= \\sqrt{9} = 3\\]\nWhy: magnitude of the velocity vector.",
+              "Direction of motion\n\\[\\hat{\\mathbf{v}}(0) = \\dfrac{\\hat{i} - 2\\,\\hat{j} + 2\\,\\hat{k}}{3}\\]\n\\[= \\dfrac{1}{3}\\hat{i} - \\dfrac{2}{3}\\hat{j} + \\dfrac{2}{3}\\hat{k}\\]\nWhy: velocity divided by speed.",
+              "Interpretation\nPosition: \\(\\mathbf{r}(0) = 0\\,\\hat{i} + 0\\,\\hat{j} + \\arctan 0\\,\\hat{k} = \\mathbf{0}\\), so the particle is at the origin. It moves with speed 3 units per second, in the positive \\(x\\), negative \\(y\\) and positive \\(z\\) directions (mostly in the \\(-y\\) and \\(+z\\) directions).\n\\[\\mathbf{v}\\cdot\\mathbf{a} = (1)(2) + (-2)(0)\\]\n\\[\\quad + (2)(0) = 2 > 0\\]\nso the particle is speeding up, at the rate \\(\\frac{\\mathbf{v}\\cdot\\mathbf{a}}{|\\mathbf{v}|} = \\frac{2}{3}\\) unit/s per second. With \\(|\\mathbf{a}(0)| = 2\\):\n\\[\\cos\\theta = \\dfrac{2}{3 \\times 2} = \\dfrac{1}{3}\\]\n\\[\\theta \\approx 70.53^{\\circ}\\]\nMost of the acceleration points across the velocity, so the path is bending noticeably (towards the positive \\(x\\)-side, where \\(\\mathbf{a} = 2\\,\\hat{i}\\) points) while the speed increases only slowly.\nWhy: the larger the angle between \\(\\mathbf{a}\\) and \\(\\mathbf{v}\\) (below \\(90^{\\circ}\\)), the more of \\(\\mathbf{a}\\) goes into turning and the less into speeding up.",
+              "Check\n\\[\\left(\\tfrac{1}{3}\\right)^{2} + \\left(\\tfrac{2}{3}\\right)^{2} + \\left(\\tfrac{2}{3}\\right)^{2}\\]\n\\[= \\dfrac{9}{9} = 1\\]\nso \\(\\hat{\\mathbf{v}}\\) is a unit vector."
+            ],
+            "final_answer": "\\(\\mathbf{v}(0) = \\hat{i} - 2\\,\\hat{j} + 2\\,\\hat{k}\\), \\(\\mathbf{a}(0) = 2\\,\\hat{i}\\), speed \\(= 3\\), direction \\(\\hat{\\mathbf{v}} = \\frac{1}{3}\\hat{i} - \\frac{2}{3}\\hat{j} + \\frac{2}{3}\\hat{k}\\). At the origin the particle is speeding up slowly (\\(\\mathbf{v}\\cdot\\mathbf{a} = 2 > 0\\)), and since the angle between \\(\\mathbf{v}\\) and \\(\\mathbf{a}\\) is about \\(70.5^{\\circ}\\), its path bends noticeably towards the positive \\(x\\)-side."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 11.3 (it prints no answers for any exercise of Unit 11). Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book. Angles such as \\(t = \\frac{\\pi}{2}\\) are in radians."
+          }
+        ]
+      }
+    }
+  ]
+}

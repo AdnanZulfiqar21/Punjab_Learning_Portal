@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q18",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q18",
+      "title": "Question 18",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 275,
+          "pdf_to": 275,
+          "note": "Exercise 9.2, Question 18 (book page 273); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "18",
+            "prompt": "18. If \\(\\tan^{-1} x + \\tan^{-1} y + \\tan^{-1} z = \\pi\\), then show that \\(x + y + z = xyz\\).",
+            "explanation": "A condition on three inverse tangents is turned into an algebraic relation.\nPlan: name the angles \\(\\alpha, \\beta, \\gamma\\); move \\(\\gamma\\) to get \\(\\alpha + \\beta = \\pi - \\gamma\\); take the tangent of both sides and cross-multiply.",
+            "steps": [
+              "Given: \\(\\tan^{-1} x + \\tan^{-1} y + \\tan^{-1} z = \\pi\\).\nTo show: \\(x + y + z = xyz\\).\nMethod: Taking the tangent of both sides with the Remember box formula \\(\\tan(\\alpha + \\beta)\\). We do not use formula (v) here: it needs \\(xy < 1\\), but \\(\\alpha + \\beta = \\pi - \\gamma > \\frac{\\pi}{2}\\) forces \\(xy > 1\\).",
+              "Name the angles\n\\[\\tan^{-1} x = \\alpha,\\ \\tan^{-1} y = \\beta\\]\n\\[\\tan^{-1} z = \\gamma\\]\n\\[\\tan\\alpha = x,\\ \\tan\\beta = y,\\ \\tan\\gamma = z\\]\nWhy: Definition of \\(\\tan^{-1}\\); each angle lies in \\(\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\).",
+              "Rewrite the condition\n\\[\\alpha + \\beta + \\gamma = \\pi\\]\n\\[\\alpha + \\beta = \\pi - \\gamma\\]\nWhy: Subtract \\(\\gamma\\) from both sides.",
+              "Take the tangent of both sides\n\\[\\tan(\\alpha + \\beta) = \\tan(\\pi - \\gamma)\\]\n\\[\\dfrac{\\tan\\alpha + \\tan\\beta}{1 - \\tan\\alpha\\tan\\beta} = -\\tan\\gamma\\]\n\\[\\dfrac{x + y}{1 - xy} = -z\\]\nWhy: Remember box formula on the left; \\(\\tan(\\pi - \\gamma) = -\\tan\\gamma\\) on the right. Here \\(xy \\ne 1\\): if \\(xy = 1\\), then \\(\\alpha + \\beta = \\pm\\frac{\\pi}{2}\\) and \\(\\gamma\\) would be \\(\\frac{\\pi}{2}\\) or \\(\\frac{3\\pi}{2}\\), impossible for \\(\\gamma\\) in \\(\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\).",
+              "Cross-multiply\n\\[x + y = -z(1 - xy)\\]\n\\[x + y = -z + xyz\\]\n\\[x + y + z = xyz\\]\nWhy: Multiply both sides by \\(1 - xy\\) (not zero), expand, and move \\(-z\\) to the left.",
+              "Check\n\\[x = 1,\\ y = 2,\\ z = 3\\]\n\\[\\tan^{-1} 1 + \\tan^{-1} 2 + \\tan^{-1} 3\\]\n\\[\\approx 0.7854 + 1.1071 + 1.2490 = \\pi\\]\n\\[1 + 2 + 3 = 6 = 1 \\cdot 2 \\cdot 3\\]\nWhy: A triple that satisfies the condition also satisfies the result."
+            ],
+            "final_answer": "Hence shown: \\(x + y + z = xyz\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 9.2. Every solution on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

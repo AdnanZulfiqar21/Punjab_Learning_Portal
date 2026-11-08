@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH10-EXERCISE-10-1-Q14",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch10",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch10/u-exercise-10-1-q14",
+      "title": "Question 14",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 280,
+          "pdf_to": 280,
+          "note": "Exercise 10.1, Question 14 (book p. 278); the book prints no answers for Exercise 10.1; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "14",
+            "prompt": "14 Solve the following trigonometric equation: \\(\\sqrt{2\\sin^2 x + 1} = \\sin x + \\cos x\\)",
+            "explanation": "The unknown sits under a square root, so we must square both sides.\nSquaring can bring in extraneous roots (see the Remember! box beside Example 3), so every value must be checked in the original equation.\nPlan: square, simplify with \\(\\sin^2 x + \\cos^2 x = 1\\), factorise, solve each factor in \\([0, 2\\pi]\\), check, then write the general solution.",
+            "steps": [
+              "Given: \\(\\sqrt{2\\sin^2 x + 1} = \\sin x + \\cos x \\quad (1)\\)\nTo find: the solutions in \\([0, 2\\pi]\\) and the general solution.\nMethod: square both sides to remove the root (as in Example 3), use \\(\\sin^2 x + \\cos^2 x = 1\\), factorise, then test every value in (1).",
+              "Square both sides\n\\[2\\sin^2 x + 1 = (\\sin x + \\cos x)^2\\]\n\\[= \\sin^2 x + \\cos^2 x + 2\\sin x\\cos x\\]\n\\[= 1 + 2\\sin x\\cos x\\]\nWhy: \\((a + b)^2 = a^2 + b^2 + 2ab\\), and \\(\\sin^2 x + \\cos^2 x = 1\\).",
+              "Bring everything to one side and factorise\n\\[2\\sin^2 x - 2\\sin x\\cos x = 0\\]\n\\[2\\sin x(\\sin x - \\cos x) = 0\\]\n\\[\\sin x = 0 \\text{ or } \\sin x = \\cos x\\]\nWhy: the 1 cancels from both sides; \\(2\\sin x\\) is a common factor. Never divide by \\(\\sin x\\): that would lose the roots of \\(\\sin x = 0\\).",
+              "When \\(\\sin x = 0\\)\n\\[x = 0,\\ \\pi,\\ 2\\pi \\quad \\text{in } [0, 2\\pi]\\]\nWhy: sine is zero at the angles on the x-axis.",
+              "When \\(\\sin x = \\cos x\\)\n\\[\\tan x = 1\\]\n\\[x = \\tfrac{\\pi}{4},\\ \\pi + \\tfrac{\\pi}{4} = \\tfrac{5\\pi}{4}\\]\nWhy: here \\(\\cos x \\neq 0\\) (if \\(\\cos x = 0\\) then \\(\\sin x = \\pm 1 \\neq \\cos x\\)), so we may divide by \\(\\cos x\\). Tangent is positive in quadrants I and III; the reference angle is \\(\\frac{\\pi}{4}\\).",
+              "Check \\(x = 0\\) and \\(x = \\frac{\\pi}{4}\\) in (1)\n\\[x = 0:\\ \\sqrt{1} = 1,\\quad 0 + 1 = 1 \\;\\checkmark\\]\n\\[x = \\tfrac{\\pi}{4}:\\ \\sqrt{2 \\cdot \\tfrac{1}{2} + 1} = \\sqrt{2}\\]\n\\[\\tfrac{1}{\\sqrt{2}} + \\tfrac{1}{\\sqrt{2}} = \\sqrt{2} \\;\\checkmark\\]\nWhy: the Remember! box: test every potential solution in the original equation. \\(x = 2\\pi\\) gives the same values as \\(x = 0\\), so it is also a solution.",
+              "Check \\(x = \\pi\\) and \\(x = \\frac{5\\pi}{4}\\) in (1)\n\\[x = \\pi:\\ \\text{L.H.S.} = 1,\\ \\text{R.H.S.} = -1\\]\n\\[x = \\tfrac{5\\pi}{4}:\\ \\text{L.H.S.} = \\sqrt{2},\\ \\text{R.H.S.} = -\\sqrt{2}\\]\nBoth fail, so \\(\\pi\\) and \\(\\frac{5\\pi}{4}\\) are extraneous roots.\nWhy: a square root is never negative, but here the right side is negative. These values satisfy L.H.S. = \\(-\\)R.H.S., and squaring cannot tell the two signs apart.",
+              "General solution\n\\[\\{2n\\pi\\} \\cup \\left\\{\\tfrac{\\pi}{4} + 2n\\pi\\right\\}\\]\nWhy: both sides of (1) repeat after \\(2\\pi\\) (the period of \\(\\sin x\\) and \\(\\cos x\\)), so each accepted value is repeated by adding \\(2n\\pi\\). \\(0\\) and \\(2\\pi\\) belong to the same family \\(2n\\pi\\). Using \\(n\\pi\\) here would bring back the rejected values \\(\\pi\\) and \\(\\frac{5\\pi}{4}\\)."
+            ],
+            "final_answer": "In \\([0, 2\\pi]\\): \\(x = 0, \\frac{\\pi}{4}, 2\\pi\\) (\\(\\pi\\) and \\(\\frac{5\\pi}{4}\\) are extraneous)\nGeneral solution \\(= \\{2n\\pi\\} \\cup \\left\\{\\frac{\\pi}{4} + 2n\\pi\\right\\}\\), \\(n \\in \\mathbb{Z}\\)",
+            "answer_figure": {
+              "$asset": "c12-math-ch10-fig-ex10-1-q14",
+              "alt": "Graphs of y equals root of 2 sine squared x plus 1 and y equals sine x plus cosine x for x from 0 to 2 pi. They meet only at x equals 0, pi over 4 and 2 pi; at x equals pi and 5 pi over 4 one graph is at plus a value and the other at minus the same value.",
+              "caption": "The two sides meet only at x = 0, π/4, 2π; at π and 5π/4 they are equal in size but opposite in sign (original drawing)"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 10.1. Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

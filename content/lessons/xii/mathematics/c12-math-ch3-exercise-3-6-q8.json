@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-6-Q8",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-6-q8",
+      "title": "Question 8",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 116,
+          "pdf_to": 116,
+          "note": "Exercise 3.6 (printed 1, 1, 2-13, 15; numbered 1-15 as in the answer key), Question 8; answers under block 'Exercise 3.7' (PDF 304)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(a)",
+            "prompt": "8 (a) [printed as 7 (a)] For the function \\(f(x) = 2x\\) over the interval \\([0, 3]\\): Find the signed area.",
+            "explanation": "The signed area is simply the definite integral \\(\\int_0^3 f(x)\\,dx\\).",
+            "steps": [
+              "Given: \\(f(x) = 2x\\) on \\([0, 3]\\).\nTo find: the signed area.\nMethod: signed area \\(= \\int_a^b f(x)\\,dx\\).",
+              "Step 1: Integrate\n\\[\\int_0^3 2x\\,dx = \\left[x^{2}\\right]_0^3 = 9 - 0 = 9\\]\nWhy: \\(\\int 2x\\,dx = x^{2}\\) by the power rule.",
+              "Check:\nThe region is a triangle with base 3 and height \\(f(3) = 6\\): \\(\\frac{1}{2}\\cdot 3\\cdot 6 = 9\\)."
+            ],
+            "final_answer": "Signed area \\(= 9\\).",
+            "answer_figure": {
+              "$asset": "c12-math-ch3-fig-ex3-6-q8",
+              "alt": "The line y = 2x from the origin to the point (3, 6); the triangle under it between x = 0 and x = 3 is shaded and lies wholly above the x-axis.",
+              "caption": "Figure: f(x) = 2x over [0, 3] for Question 8 (original drawing)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(b)",
+            "prompt": "8 (b) [printed as 7 (b)] For the function \\(f(x) = 2x\\) over the interval \\([0, 3]\\): Find the total (physical) area.",
+            "explanation": "The total (physical) area is \\(\\int_0^3 |f(x)|\\,dx\\). First check whether \\(f\\) changes sign on the interval.",
+            "steps": [
+              "Given: \\(f(x) = 2x\\) on \\([0, 3]\\).\nTo find: the total area \\(\\int_0^3 |2x|\\,dx\\).\nMethod: remove the modulus using the sign of \\(f\\).",
+              "Step 1: Sign of \\(f\\)\nFor \\(0 \\le x \\le 3\\), \\(2x \\ge 0\\), so \\(|2x| = 2x\\).\nWhy: the only root \\(x = 0\\) is the left end, so there is no sign change inside.",
+              "Step 2: Integrate\n\\[\\int_0^3 |2x|\\,dx = \\int_0^3 2x\\,dx = 9\\]\nWhy: with the modulus removed, this is the same integral as in part (a).",
+              "Check:\nSame triangle as in (a): \\(\\frac{1}{2}\\cdot 3\\cdot 6 = 9\\) square units."
+            ],
+            "final_answer": "Total area \\(= 9\\) square units."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8(c)",
+            "prompt": "8 (c) [printed as 7 (c)] For the function \\(f(x) = 2x\\) over the interval \\([0, 3]\\): Explain why they are equal in this case.",
+            "explanation": "Signed area and total area differ only when part of the graph is below the axis. So we explain using the sign of \\(f\\) on \\([0, 3]\\).",
+            "steps": [
+              "Given: signed area \\(= 9\\), total area \\(= 9\\).\nTo prove / explain: why the two are equal here.\nMethod: compare \\(\\int f\\,dx\\) with \\(\\int |f|\\,dx\\).",
+              "Step 1: When are they equal?\n\\[\\int_a^b |f(x)|\\,dx = \\int_a^b f(x)\\,dx \\text{ when } f(x) \\ge 0\\]\nWhy: if \\(f\\) is never negative, \\(|f(x)| = f(x)\\) everywhere on \\([a, b]\\), so the two integrals are the same integral.",
+              "Step 2: Apply to \\(f(x) = 2x\\)\nOn \\([0, 3]\\), \\(f(x) = 2x \\ge 0\\): the whole region lies above the \\(x\\)-axis (see the figure), so no part is counted negative in the signed area.\nWhy: only parts below the axis make the signed area smaller than the total area."
+            ],
+            "final_answer": "The function is non-negative on \\([0, 3]\\), so there is no negative contribution and the signed area equals the total area (both 9)."
+          }
+        ]
+      }
+    }
+  ]
+}

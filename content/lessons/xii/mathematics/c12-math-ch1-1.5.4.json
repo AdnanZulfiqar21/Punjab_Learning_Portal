@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH1-1.5.4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch1",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch1/1.5.4",
+      "title": "1.5.4 Inverse Hyperbolic Functions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 15,
+          "pdf_to": 16,
+          "note": "Book p. 13-14: second '1.5.2 Inverse Hyperbolic Functions' (shown as 1.5.4): (i) sinh^-1 with Note box and Example 10, (ii) cosh^-1 with Remember! box and Example 11"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The book prints this heading as \"1.5.2 Inverse Hyperbolic Functions\", repeating both the number 1.5.2 and the title of 1.5.3. On this site it is numbered 1.5.4 so that every sub-heading has its own number. It continues the inverse hyperbolic functions: the formulas for \\(\\sinh^{-1} x\\) and \\(\\cosh^{-1} x\\) are derived here."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(i) Inverse Hyperbolic sine Functions"
+          },
+          {
+            "type": "paragraph",
+            "text": "From the graph of \\(y = \\sinh x\\) (see Figure 1.8), it is clear from the horizontal line test that the function is bijective. Hence, its inverse function exists, and we define it as follows:\n\\[x = \\sinh^{-1} y \\iff y = \\sinh x\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Note",
+            "text": "If \\(y = f(x)\\) is a bijective function, then \\(x = f^{-1}(y)\\) is its inverse."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The horizontal line test: draw any horizontal line \\(y = c\\). If it meets the graph at most once, the function is one-to-one. If, in addition, every horizontal line meets the graph (every \\(c\\) in the codomain is a value), the function is onto. One-to-one and onto together is bijective, and only a bijective function has an inverse function.\nFor \\(y = \\sinh x\\) every horizontal line meets Figure 1.8 exactly once, so \\(\\sinh^{-1}\\) is defined on all of \\(\\mathbb{R}\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "Prove that \\(\\sinh^{-1} x = \\ln\\left(x + \\sqrt{x^{2}+1}\\right)\\).",
+            "steps": [
+              "Given: \\(y = \\sinh x\\) is a bijection of \\(\\mathbb{R}\\) onto \\(\\mathbb{R}\\), so \\(\\sinh^{-1} x\\) exists for every real \\(x\\).\nTo prove: \\(\\sinh^{-1} x = \\ln\\left(x + \\sqrt{x^{2}+1}\\right)\\).\nMethod: put \\(y = \\sinh^{-1} x\\), so \\(x = \\sinh y\\). Write \\(\\sinh y\\) with \\(e^{y}\\), which gives a quadratic equation in \\(e^{y}\\); solve it, reject the root that cannot be \\(e^{y}\\), then take \\(\\ln\\).",
+              "Step 1: Change the inverse into the function\nLet \\(y = \\sinh^{-1} x\\), where \\(x, y \\in\\, ]-\\infty, \\infty[\\). Then\n\\[x = \\sinh y\\]\nWhy: by definition, \\(y = \\sinh^{-1} x\\) if and only if \\(x = \\sinh y\\). We know how to handle \\(\\sinh\\), not \\(\\sinh^{-1}\\).",
+              "Step 2: Write it with exponentials\n\\[x = \\dfrac{e^{y} - e^{-y}}{2}\\]\n\\[2x = e^{y} - \\dfrac{1}{e^{y}}\\]\nWhy: the definition of \\(\\sinh\\), then \\(e^{-y} = \\frac{1}{e^{y}}\\).",
+              "Step 3: Clear the fraction\n\\[2x = \\dfrac{e^{2y} - 1}{e^{y}}\\]\n\\[2xe^{y} = e^{2y} - 1\\]\n\\[(e^{y})^{2} - 2xe^{y} - 1 = 0\\]\nWhy: multiplying by \\(e^{y}\\) (never zero) removes the fraction. Since \\(e^{2y} = (e^{y})^{2}\\), this is a quadratic equation in the unknown \\(e^{y}\\) with \\(a = 1\\), \\(b = -2x\\), \\(c = -1\\).",
+              "Step 4: Use the quadratic formula\n\\[e^{y} = \\dfrac{2x \\pm \\sqrt{4x^{2} + 4}}{2}\\]\n\\[= x \\pm \\sqrt{x^{2} + 1}\\]\nWhy: \\(b^{2} - 4ac = 4x^{2} + 4\\), and \\(\\sqrt{4x^{2}+4} = 2\\sqrt{x^{2}+1}\\); the 2 cancels.",
+              "Step 5: Choose the sign\nNote that \\(x - \\sqrt{x^{2}+1} < 0\\ \\forall\\ x \\in\\, ]-\\infty, \\infty[\\). Since \\(e^{y} > 0\\), we take the positive sign:\n\\[e^{y} = x + \\sqrt{x^{2}+1}\\]\nWhy: \\(\\sqrt{x^{2}+1} > \\sqrt{x^{2}} = |x| \\ge x\\), so the minus root is always negative, but an exponential is always positive.",
+              "Step 6: Take ln\n\\[y = \\ln\\left(x + \\sqrt{x^{2}+1}\\right)\\]\nHence, \\(\\sinh^{-1} x = \\ln\\left(x + \\sqrt{x^{2}+1}\\right)\\).\nWhy: \\(\\ln\\) undoes \\(e\\): if \\(e^{y} = A\\) with \\(A > 0\\), then \\(y = \\ln A\\).",
+              "Check: take \\(x = \\frac{3}{4}\\): \\(\\sqrt{\\frac{9}{16} + 1} = \\frac{5}{4}\\), so the formula gives \\(y = \\ln\\left(\\frac{3}{4} + \\frac{5}{4}\\right) = \\ln 2\\).\n\\[\\sinh(\\ln 2) = \\dfrac{2 - \\frac{1}{2}}{2} = \\dfrac{3}{4}\\]\nIt returns \\(x\\). Also \\(x = 0\\) gives \\(\\ln 1 = 0\\), and \\(\\sinh 0 = 0\\)."
+            ],
+            "answer": "\\(\\sinh^{-1} x = \\ln\\left(x + \\sqrt{x^{2}+1}\\right)\\) for every real \\(x\\). (Hence proved.)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "(ii) Inverse Hyperbolic cosine Function"
+          },
+          {
+            "type": "paragraph",
+            "text": "From the graph of \\(y = \\cosh x\\) (see Figure 1.9), it is clear from the horizontal line test that the function is not one-to-one on the domain \\((-\\infty, \\infty)\\). However, if we restrict the domain to \\([0, \\infty)\\), the range set is not disturbed. It follows that \\(y = \\cosh x\\) becomes one-to-one for the restricted domain \\([0, \\infty)\\) and thus bijective. Therefore, on the domain \\([0, \\infty)\\), the inverse hyperbolic cosine function exists and we define it as follows:\n\\[x = \\cosh^{-1} y \\iff y = \\cosh x\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why restrict? The line \\(y = 2\\) meets Figure 1.9 twice (at \\(x \\approx -1.32\\) and \\(x \\approx 1.32\\)), so \"\\(\\cosh^{-1} 2\\)\" would have two answers. Keeping only the right half (\\(x \\ge 0\\)) leaves one answer and still reaches every height from 1 upward. You did the same in trigonometry: \\(\\sin^{-1}\\) uses only \\([-\\frac{\\pi}{2}, \\frac{\\pi}{2}]\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Remember!",
+            "text": "Dom \\(f\\) = Range \\(f^{-1}\\)\nRange \\(f\\) = Dom \\(f^{-1}\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "Prove that \\(\\cosh^{-1} x = \\ln\\left(x + \\sqrt{x^{2}-1}\\right)\\) for all \\(x \\in [1, \\infty)\\).",
+            "steps": [
+              "Given: \\(\\cosh x\\) restricted to \\([0, \\infty)\\) is a bijection onto \\([1, \\infty)\\), so \\(\\cosh^{-1} x\\) exists for \\(x \\ge 1\\) and its values are \\(\\ge 0\\).\nTo prove: \\(\\cosh^{-1} x = \\ln\\left(x + \\sqrt{x^{2}-1}\\right)\\), \\(x \\ge 1\\).\nMethod: the same as Example 10: \\(x = \\cosh y\\), a quadratic in \\(e^{y}\\), then \\(\\ln\\). This time both roots are positive, so the condition \\(y \\ge 0\\) decides the sign.",
+              "Step 1: Change the inverse into the function\nFor \\(y \\in [0, \\infty)\\) = restricted domain of \\(\\cosh x\\) and \\(x \\in [1, \\infty)\\) = range of \\(\\cosh x\\), let\n\\[y = \\cosh^{-1} x\\]\n\\[x = \\cosh y\\]\nWhy: definition of the inverse on the restricted domain (Remember!: the domain of \\(f\\) is the range of \\(f^{-1}\\)).",
+              "Step 2: Write it with exponentials\n\\[x = \\dfrac{e^{y} + e^{-y}}{2}\\]\n\\[2x = e^{y} + \\dfrac{1}{e^{y}}\\]\nWhy: the definition of \\(\\cosh\\) and \\(e^{-y} = \\frac{1}{e^{y}}\\).",
+              "Step 3: Make a quadratic in \\(e^{y}\\)\n\\[2x = \\dfrac{e^{2y} + 1}{e^{y}}\\]\n\\[2xe^{y} = e^{2y} + 1\\]\n\\[(e^{y})^{2} - 2xe^{y} + 1 = 0\\]\nWhy: multiply by \\(e^{y} \\ne 0\\); here \\(a = 1\\), \\(b = -2x\\), \\(c = 1\\).",
+              "Step 4: Use the quadratic formula\n\\[e^{y} = \\dfrac{2x \\pm \\sqrt{4x^{2} - 4}}{2}\\]\n\\[e^{y} = x \\pm \\sqrt{x^{2}-1}\\]\nwhere \\(x \\ge 1\\), \\(y \\ge 0\\) and \\(e^{y} > 0\\). So\n\\[y = \\ln\\left(x \\pm \\sqrt{x^{2}-1}\\right)\\]\nWhy: \\(\\sqrt{4x^{2}-4} = 2\\sqrt{x^{2}-1}\\), which is real because \\(x \\ge 1\\).",
+              "Step 5: Choose the sign\nIt can easily be observed that \\(0 < x-\\sqrt{x^{2}-1} < 1\\) for all \\(x \\ge 1\\). Thus, \\(y = \\ln\\left(x - \\sqrt{x^{2}-1}\\right) < 0\\). But \\(y \\ge 0\\), which is possible only if the positive sign is taken.\nWhy: the two roots multiply to 1:\n\\[\\left(x - \\sqrt{x^{2}-1}\\right)\\left(x + \\sqrt{x^{2}-1}\\right)\\]\n\\[= x^{2} - (x^{2} - 1) = 1\\]\nFor \\(x > 1\\) the plus root is bigger than 1, so the minus root is between 0 and 1 and its \\(\\ln\\) is negative.",
+              "Step 6: Conclude\n\\[y = \\ln\\left(x + \\sqrt{x^{2}-1}\\right)\\]\n\\[\\cosh^{-1} x = \\ln\\left(x + \\sqrt{x^{2}-1}\\right)\\]\nWhy: replace \\(y\\) by \\(\\cosh^{-1} x\\).",
+              "Check: take \\(x = \\frac{5}{4}\\): \\(\\sqrt{\\frac{25}{16} - 1} = \\frac{3}{4}\\), so \\(y = \\ln\\left(\\frac{5}{4} + \\frac{3}{4}\\right) = \\ln 2 \\ge 0\\).\n\\[\\cosh(\\ln 2) = \\dfrac{2 + \\frac{1}{2}}{2} = \\dfrac{5}{4}\\]\nIt returns \\(x\\). At \\(x = 1\\): \\(\\ln 1 = 0\\) and \\(\\cosh 0 = 1\\)."
+            ],
+            "answer": "\\(\\cosh^{-1} x = \\ln\\left(x + \\sqrt{x^{2}-1}\\right)\\) for all \\(x \\in [1, \\infty)\\). (Hence proved.)",
+            "book_errors": [
+              "\\(0 < x-\\sqrt{x^{2}-1} < 1\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book states \\(0 < x-\\sqrt{x^{2}-1} < 1\\) \"for all \\(x \\ge 1\\)\". At \\(x = 1\\) the value is \\(1 - 0 = 1\\), not less than 1. The correct statement is \\(0 < x - \\sqrt{x^{2}-1} \\le 1\\) for \\(x \\ge 1\\), with \\(< 1\\) for \\(x > 1\\). At \\(x = 1\\) both signs give the same value \\(y = \\ln 1 = 0\\), so the result \\(\\cosh^{-1} x = \\ln\\left(x + \\sqrt{x^{2}-1}\\right)\\) is not affected."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\sinh x\\) is bijective on \\(\\mathbb{R}\\): \\(\\sinh^{-1} x = \\ln\\left(x + \\sqrt{x^{2}+1}\\right)\\) for all real \\(x\\).\n2. \\(\\cosh x\\) is bijective only after restricting to \\([0, \\infty)\\): \\(\\cosh^{-1} x = \\ln\\left(x + \\sqrt{x^{2}-1}\\right)\\), \\(x \\ge 1\\), values \\(\\ge 0\\).\n3. Method: \\(y = f^{-1}(x) \\Rightarrow x = f(y)\\); quadratic in \\(e^{y}\\); quadratic formula; reject the impossible root; take \\(\\ln\\).\n4. In Example 10 the minus root is rejected because \\(e^{y} > 0\\); in Example 11 because \\(y \\ge 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Keeping both signs \\(\\pm\\) in the final answer: an inverse function gives one value.\n2. In Example 10, writing \\(\\sqrt{4x^{2}+4} = 2x + 2\\): the square root of a sum is not the sum of square roots; it is \\(2\\sqrt{x^{2}+1}\\).\n3. Forgetting the restriction for \\(\\cosh^{-1}\\): it is defined only for \\(x \\ge 1\\) and its value is never negative.\n4. Mixing the formulas: \\(+1\\) under the root for \\(\\sinh^{-1}\\), \\(-1\\) for \\(\\cosh^{-1}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

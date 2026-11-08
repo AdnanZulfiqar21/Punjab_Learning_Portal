@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-1-Q3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-1-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 78,
+          "pdf_to": 79,
+          "note": "Exercise 3.1, Question 3: book p. 76-77, Q1-Q4 (29 parts); answers printed under 'EXERCISE 3.1' and 'Exercise 3.3' (book p. 299-300), matched by content"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) Evaluate the following: \\(\\int (5x^3 + 10x + 20)\\,dx\\)",
+            "explanation": "A polynomial: integrate it term by term.\nPlan: Rules 1 and 2, the Power Rule on each power of \\(x\\), and \\(\\int 20\\,dx = 20x\\).",
+            "steps": [
+              "Given: \\(\\int (5x^3 + 10x + 20)\\,dx\\).\nTo find: the indefinite integral.\nMethod: term by term (Rule 2), constants out (Rule 1), Power Rule (Rule 3).",
+              "Integrate each term\n\\[= 5\\cdot\\dfrac{x^4}{4} + 10\\cdot\\dfrac{x^2}{2} + 20x + c\\]\n\\[= \\dfrac{5}{4}x^4 + 5x^2 + 20x + c\\]\nWhy: \\(\\int x^3\\,dx = \\frac{x^4}{4}\\), \\(\\int x\\,dx = \\frac{x^2}{2}\\), \\(\\int 20\\,dx = 20x\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left(\\tfrac{5}{4}x^4 + 5x^2 + 20x\\right)\\]\n\\[= 5x^3 + 10x + 20 \\;\\checkmark\\]\nWhy: The derivative gives back the integrand."
+            ],
+            "final_answer": "\\(\\frac{5}{4}x^4 + 5x^2 + 20x + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) Evaluate the following: \\(\\int x^2\\left(x + \\frac{1}{x}\\right)dx\\)",
+            "explanation": "A product of two simple factors. There is no product rule for integrals, so first multiply out.\nPlan: expand, then use the Power Rule on each term.",
+            "steps": [
+              "Given: \\(\\int x^2\\left(x + \\frac{1}{x}\\right)dx\\).\nTo find: the indefinite integral.\nMethod: simplify the integrand into powers of \\(x\\), then Rules 2 and 3.",
+              "Multiply out\n\\[x^2\\left(x + \\dfrac{1}{x}\\right) = x^3 + x\\]\nWhy: \\(x^2 \\cdot x = x^3\\) and \\(x^2 \\cdot \\frac{1}{x} = x\\).",
+              "Integrate\n\\[\\int (x^3 + x)\\,dx = \\dfrac{x^4}{4} + \\dfrac{x^2}{2} + c\\]\nWhy: Power Rule with \\(n = 3\\) and \\(n = 1\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left(\\tfrac{x^4}{4} + \\tfrac{x^2}{2}\\right) = x^3 + x \\;\\checkmark\\]\nWhy: This equals \\(x^2\\left(x + \\frac{1}{x}\\right)\\)."
+            ],
+            "final_answer": "\\(\\frac{x^4}{4} + \\frac{x^2}{2} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) Evaluate the following: \\(\\int \\left(\\sqrt{y} + \\frac{1}{y}\\right)^2 dy,\\ (y > 0)\\)",
+            "explanation": "A square of a sum: expand it first, then every term is a power of \\(y\\).\nPlan: \\((A + B)^2 = A^2 + 2AB + B^2\\), change roots and fractions to powers, Power Rule.",
+            "steps": [
+              "Given: \\(\\int \\left(\\sqrt{y} + \\frac{1}{y}\\right)^2 dy\\), \\(y > 0\\).\nTo find: the indefinite integral.\nMethod: expand the square, write each term as \\(y^n\\), then use the Power Rule.",
+              "Expand the square\n\\[\\left(\\sqrt{y} + \\dfrac{1}{y}\\right)^2 = y + \\dfrac{2\\sqrt{y}}{y} + \\dfrac{1}{y^2}\\]\n\\[= y + 2y^{-1/2} + y^{-2}\\]\nWhy: \\((\\sqrt{y})^2 = y\\), \\(2\\cdot\\sqrt{y}\\cdot\\frac{1}{y} = 2y^{1/2 - 1} = 2y^{-1/2}\\), \\(\\left(\\frac{1}{y}\\right)^2 = y^{-2}\\).",
+              "Integrate term by term\n\\[= \\dfrac{y^2}{2} + 2\\cdot\\dfrac{y^{1/2}}{1/2} + \\dfrac{y^{-1}}{-1} + c\\]\n\\[= \\dfrac{y^2}{2} + 4\\sqrt{y} - \\dfrac{1}{y} + c\\]\nWhy: Power Rule with \\(n = 1, -\\frac{1}{2}, -2\\). Dividing by \\(\\frac{1}{2}\\) means multiplying by 2.",
+              "Check\n\\[\\dfrac{d}{dy}\\left(\\tfrac{y^2}{2} + 4y^{1/2} - y^{-1}\\right)\\]\n\\[= y + 2y^{-1/2} + y^{-2} \\;\\checkmark\\]\nWhy: This is the expanded integrand."
+            ],
+            "final_answer": "\\(\\frac{y^2}{2} + 4\\sqrt{y} - \\frac{1}{y} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iv)",
+            "prompt": "3 (iv) Evaluate the following: \\(\\int \\frac{\\sqrt{x}\\,(x + 2)}{x}\\,dx,\\ (x > 0)\\)",
+            "explanation": "A fraction whose denominator is a single term \\(x\\): divide each term of the numerator by it.\nPlan: rewrite as powers of \\(x\\), then use the Power Rule.",
+            "steps": [
+              "Given: \\(\\int \\frac{\\sqrt{x}\\,(x + 2)}{x}\\,dx\\), \\(x > 0\\).\nTo find: the indefinite integral.\nMethod: split the fraction into powers of \\(x\\), then Rules 2 and 3.",
+              "Simplify the integrand\n\\[\\dfrac{\\sqrt{x}\\,(x + 2)}{x} = \\dfrac{x^{3/2} + 2x^{1/2}}{x}\\]\n\\[= x^{1/2} + 2x^{-1/2}\\]\nWhy: \\(\\sqrt{x} = x^{1/2}\\); dividing by \\(x\\) subtracts 1 from each power.",
+              "Integrate\n\\[= \\dfrac{x^{3/2}}{3/2} + 2\\cdot\\dfrac{x^{1/2}}{1/2} + c\\]\n\\[= \\dfrac{2}{3}x^{3/2} + 4\\sqrt{x} + c\\]\nWhy: Power Rule with \\(n = \\frac{1}{2}\\) and \\(n = -\\frac{1}{2}\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left(\\tfrac{2}{3}x^{3/2} + 4x^{1/2}\\right)\\]\n\\[= x^{1/2} + 2x^{-1/2} \\;\\checkmark\\]\nWhy: This is the simplified integrand."
+            ],
+            "final_answer": "\\(\\frac{2}{3}x^{3/2} + 4\\sqrt{x} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(v)",
+            "prompt": "3 (v) Evaluate the following: \\(\\int \\frac{x + 1}{\\sqrt{x + 2}}\\,dx\\)",
+            "explanation": "The denominator is a power of the linear expression \\(x + 2\\). Make \\(x + 2\\) appear in the numerator too.\nPlan: write \\(x + 1 = (x + 2) - 1\\), split into two powers of \\(x + 2\\), then use Rule 5.",
+            "steps": [
+              "Given: \\(\\int \\frac{x + 1}{\\sqrt{x + 2}}\\,dx\\).\nTo find: the indefinite integral.\nMethod: rewrite the numerator through \\(x + 2\\); then each term is \\((x + 2)^n\\), integrated by the Linear Substitution Rule (Rule 5) with \\(a = 1\\): \\(\\int (x + 2)^n dx = \\frac{(x + 2)^{n+1}}{n+1}\\).",
+              "Split the fraction\n\\[\\dfrac{x + 1}{\\sqrt{x + 2}} = \\dfrac{(x + 2) - 1}{(x + 2)^{1/2}}\\]\n\\[= (x + 2)^{1/2} - (x + 2)^{-1/2}\\]\nWhy: \\(x + 1 = (x + 2) - 1\\), and dividing by \\((x + 2)^{1/2}\\) subtracts \\(\\frac{1}{2}\\) from the power.",
+              "Integrate (Rule 5, \\(a = 1\\))\n\\[= \\dfrac{(x + 2)^{3/2}}{3/2} - \\dfrac{(x + 2)^{1/2}}{1/2} + c\\]\n\\[= \\dfrac{2}{3}(x + 2)^{3/2} - 2(x + 2)^{1/2} + c\\]\nWhy: Each term is (linear)\\(^n\\) with \\(n \\ne -1\\).",
+              "Take out the common factor\n\\[= \\dfrac{2}{3}\\sqrt{x + 2}\\,\\big[(x + 2) - 3\\big] + c\\]\n\\[= \\dfrac{2}{3}\\sqrt{x + 2}\\,(x - 1) + c\\]\nWhy: \\(\\frac{2}{3}(x + 2)^{1/2}\\) is common: \\(2(x + 2)^{1/2} = \\frac{2}{3}(x + 2)^{1/2}\\cdot 3\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left[\\tfrac{2}{3}(x + 2)^{3/2} - 2(x + 2)^{1/2}\\right]\\]\n\\[= (x + 2)^{1/2} - (x + 2)^{-1/2}\\]\n\\[= \\dfrac{x + 1}{\\sqrt{x + 2}} \\;\\checkmark\\]\nWhy: We get back the split form of the integrand."
+            ],
+            "final_answer": "\\(\\frac{2}{3}\\sqrt{x + 2}\\,(x - 1) + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Answer key: the answers to Q3 (v) to (x) are printed as \"5. (i)\" to \"5. (vi)\" under \"EXERCISE 3.1\" (book p. 300), not under \"3.\"; the block \"4. (i)-(vii)\" printed just before them belongs to another exercise. The printed values agree with our answers to (v)-(x)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(vi)",
+            "prompt": "3 (vi) Evaluate the following: \\(\\int \\frac{ax + b}{\\sqrt{ax^2 + 2bx + c}}\\,dx\\)",
+            "explanation": "Look at the expression under the root and differentiate it: its derivative is \\(2(ax + b)\\), twice the numerator.\nSo the integrand is \\(\\frac{1}{2}[f(x)]^{-1/2}f'(x)\\): use the General Power Rule.",
+            "steps": [
+              "Given: \\(\\int \\frac{ax + b}{\\sqrt{ax^2 + 2bx + c}}\\,dx\\).\nTo find: the indefinite integral.\nMethod: General Power Rule \\(\\int [f(x)]^n f'(x)\\,dx = \\frac{[f(x)]^{n+1}}{n+1}\\) with \\(f(x) = ax^2 + 2bx + c\\), \\(n = -\\frac{1}{2}\\).",
+              "Find \\(f'(x)\\)\n\\[f(x) = ax^2 + 2bx + c\\]\n\\[f'(x) = 2ax + 2b = 2(ax + b)\\]\nWhy: So \\(ax + b = \\frac{1}{2}f'(x)\\): the numerator is half the derivative of the inside.",
+              "Write the integral in General Power Rule form\n\\[= \\dfrac{1}{2}\\int [f(x)]^{-1/2}f'(x)\\,dx\\]\nWhy: \\(\\frac{1}{\\sqrt{f(x)}} = [f(x)]^{-1/2}\\), and \\(ax + b = \\frac{1}{2}f'(x)\\).",
+              "Integrate\n\\[= \\dfrac{1}{2}\\cdot\\dfrac{[f(x)]^{1/2}}{1/2} + C\\]\n\\[= \\sqrt{ax^2 + 2bx + c} + C\\]\nWhy: General Power Rule with \\(n = -\\frac{1}{2}\\), so \\(n + 1 = \\frac{1}{2}\\). The letter \\(c\\) is already used in the question, so the constant of integration is written \\(C\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\sqrt{ax^2 + 2bx + c} = \\dfrac{2ax + 2b}{2\\sqrt{ax^2 + 2bx + c}}\\]\n\\[= \\dfrac{ax + b}{\\sqrt{ax^2 + 2bx + c}} \\;\\checkmark\\]\nWhy: Chain rule; the 2s cancel."
+            ],
+            "final_answer": "\\(\\sqrt{ax^2 + 2bx + c} + C\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(vii)",
+            "prompt": "3 (vii) Evaluate the following: \\(\\int \\frac{1}{\\sqrt{x + 1} + \\sqrt{x}}\\,dx,\\ (x > 0)\\)",
+            "explanation": "The denominator is a sum of two square roots: rationalise it.\nMultiplying by \\(\\sqrt{x + 1} - \\sqrt{x}\\) makes the denominator \\((x + 1) - x = 1\\).\nPlan: rationalise, then integrate two simple powers.",
+            "steps": [
+              "Given: \\(\\int \\frac{1}{\\sqrt{x + 1} + \\sqrt{x}}\\,dx\\), \\(x > 0\\).\nTo find: the indefinite integral.\nMethod: multiply top and bottom by the conjugate \\(\\sqrt{x + 1} - \\sqrt{x}\\) and use \\((A + B)(A - B) = A^2 - B^2\\).",
+              "Rationalise the denominator\n\\[\\dfrac{1}{\\sqrt{x + 1} + \\sqrt{x}} = \\dfrac{\\sqrt{x + 1} - \\sqrt{x}}{(x + 1) - x}\\]\n\\[= \\sqrt{x + 1} - \\sqrt{x}\\]\nWhy: \\((\\sqrt{x + 1})^2 - (\\sqrt{x})^2 = (x + 1) - x = 1\\).",
+              "Integrate\n\\[\\int \\left[(x + 1)^{1/2} - x^{1/2}\\right]dx\\]\n\\[= \\dfrac{2}{3}(x + 1)^{3/2} - \\dfrac{2}{3}x^{3/2} + c\\]\nWhy: Rule 5 (with \\(a = 1\\)) for \\((x + 1)^{1/2}\\) and the Power Rule for \\(x^{1/2}\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left[\\tfrac{2}{3}(x + 1)^{3/2} - \\tfrac{2}{3}x^{3/2}\\right]\\]\n\\[= \\sqrt{x + 1} - \\sqrt{x} \\;\\checkmark\\]\nWhy: This is the rationalised integrand."
+            ],
+            "final_answer": "\\(\\frac{2}{3}(x + 1)^{3/2} - \\frac{2}{3}x^{3/2} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(viii)",
+            "prompt": "3 (viii) Evaluate the following: \\(\\int x\\sqrt{1 + \\sqrt{x}}\\,dx\\)",
+            "explanation": "A root inside a root: simplifying alone does not help.\nReplace the inner expression by a new letter: put \\(u = 1 + \\sqrt{x}\\) (the method of substitution, section 3.2).\nPlan: change \\(x\\) and \\(dx\\) into \\(u\\) and \\(du\\), expand, integrate powers of \\(u\\), put back \\(u\\).",
+            "steps": [
+              "Given: \\(\\int x\\sqrt{1 + \\sqrt{x}}\\,dx\\).\nTo find: the indefinite integral.\nMethod: substitution \\(u = 1 + \\sqrt{x}\\) (\\(x \\ge 0\\)); every \\(x\\) and the \\(dx\\) must be written in terms of \\(u\\).",
+              "Express \\(x\\) and \\(dx\\) through \\(u\\)\n\\[\\sqrt{x} = u - 1\\]\n\\[x = (u - 1)^2\\]\n\\[dx = 2(u - 1)\\,du\\]\nWhy: From \\(u = 1 + \\sqrt{x}\\); then differentiate \\(x = (u - 1)^2\\) with respect to \\(u\\).",
+              "Substitute\n\\[\\int x\\sqrt{1 + \\sqrt{x}}\\,dx = \\int (u - 1)^2\\,u^{1/2}\\cdot 2(u - 1)\\,du\\]\n\\[= 2\\int (u - 1)^3\\,u^{1/2}\\,du\\]\nWhy: \\(x = (u - 1)^2\\), \\(\\sqrt{1 + \\sqrt{x}} = u^{1/2}\\), \\(dx = 2(u - 1)\\,du\\).",
+              "Expand and multiply by \\(u^{1/2}\\)\n\\[(u - 1)^3 = u^3 - 3u^2 + 3u - 1\\]\n\\[2\\int \\left(u^{7/2} - 3u^{5/2} + 3u^{3/2} - u^{1/2}\\right)du\\]\nWhy: \\((A - B)^3 = A^3 - 3A^2B + 3AB^2 - B^3\\); multiplying by \\(u^{1/2}\\) adds \\(\\frac{1}{2}\\) to each power.",
+              "Integrate each power\n\\[= 2\\left[\\tfrac{2}{9}u^{9/2} - \\tfrac{6}{7}u^{7/2}\\right.\\]\n\\[\\left. + \\tfrac{6}{5}u^{5/2} - \\tfrac{2}{3}u^{3/2}\\right] + c\\]\n\\[= \\tfrac{4}{9}u^{9/2} - \\tfrac{12}{7}u^{7/2}\\]\n\\[+ \\tfrac{12}{5}u^{5/2} - \\tfrac{4}{3}u^{3/2} + c\\]\nWhy: Power Rule: \\(\\frac{u^{9/2}}{9/2} = \\frac{2}{9}u^{9/2}\\), \\(3\\cdot\\frac{u^{7/2}}{7/2} = \\frac{6}{7}u^{7/2}\\), and so on.",
+              "Put back \\(u = 1 + \\sqrt{x}\\)\n\\[\\tfrac{4}{9}(1 + \\sqrt{x})^{9/2} - \\tfrac{12}{7}(1 + \\sqrt{x})^{7/2}\\]\n\\[+ \\tfrac{12}{5}(1 + \\sqrt{x})^{5/2} - \\tfrac{4}{3}(1 + \\sqrt{x})^{3/2} + c\\]\nWhy: The answer must be in the original variable \\(x\\).",
+              "Check\n\\[\\dfrac{d}{du}\\left[\\tfrac{4}{9}u^{9/2} - \\tfrac{12}{7}u^{7/2}\\right.\\]\n\\[\\left. + \\tfrac{12}{5}u^{5/2} - \\tfrac{4}{3}u^{3/2}\\right]\\]\n\\[= 2u^{1/2}(u - 1)^3\\]\n\\[= x\\sqrt{1 + \\sqrt{x}}\\cdot\\dfrac{dx}{du} \\;\\checkmark\\]\nWhy: Differentiating in \\(u\\) gives back the \\(u\\)-integrand, which is the original integrand times \\(\\frac{dx}{du} = 2(u - 1)\\) (chain rule). Checked also with a computer algebra system."
+            ],
+            "final_answer": "\\(\\frac{4}{9}(1 + \\sqrt{x})^{9/2} - \\frac{12}{7}(1 + \\sqrt{x})^{7/2} + \\frac{12}{5}(1 + \\sqrt{x})^{5/2} - \\frac{4}{3}(1 + \\sqrt{x})^{3/2} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ix)",
+            "prompt": "3 (ix) Evaluate the following: \\(\\int \\frac{x}{(a + bx)^3}\\,dx\\)",
+            "explanation": "The denominator is a power of the linear expression \\(a + bx\\) (with \\(b \\ne 0\\)). Write the numerator \\(x\\) through \\(a + bx\\) too.\nPlan: \\(x = \\frac{1}{b}[(a + bx) - a]\\), split into two powers of \\(a + bx\\), use Rule 5, then combine.",
+            "steps": [
+              "Given: \\(\\int \\frac{x}{(a + bx)^3}\\,dx\\), \\(b \\ne 0\\).\nTo find: the indefinite integral.\nMethod: rewrite the numerator, then Rule 5: \\(\\int (a + bx)^n dx = \\frac{(a + bx)^{n+1}}{b(n+1)}\\).",
+              "Split the fraction\n\\[\\dfrac{x}{(a + bx)^3} = \\dfrac{1}{b}\\cdot\\dfrac{(a + bx) - a}{(a + bx)^3}\\]\n\\[= \\dfrac{1}{b}\\left[(a + bx)^{-2} - a(a + bx)^{-3}\\right]\\]\nWhy: \\(bx = (a + bx) - a\\), so \\(x = \\frac{1}{b}[(a + bx) - a]\\).",
+              "Integrate each power (Rule 5)\n\\[\\int (a + bx)^{-2}dx = \\dfrac{(a + bx)^{-1}}{-b}\\]\n\\[\\int (a + bx)^{-3}dx = \\dfrac{(a + bx)^{-2}}{-2b}\\]\nWhy: Add 1 to the power and divide by the new power and by \\(b\\), the coefficient of \\(x\\).",
+              "Put the pieces together\n\\[= \\dfrac{1}{b}\\left[-\\dfrac{1}{b(a + bx)} + \\dfrac{a}{2b(a + bx)^2}\\right] + c\\]\n\\[= \\dfrac{-2(a + bx) + a}{2b^2(a + bx)^2} + c\\]\n\\[= -\\dfrac{a + 2bx}{2b^2(a + bx)^2} + c\\]\nWhy: Common denominator \\(2b^2(a + bx)^2\\); then \\(-2a - 2bx + a = -(a + 2bx)\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left[-\\dfrac{1}{b^2(a + bx)} + \\dfrac{a}{2b^2(a + bx)^2}\\right]\\]\n\\[= \\dfrac{1}{b(a + bx)^2} - \\dfrac{a}{b(a + bx)^3}\\]\n\\[= \\dfrac{(a + bx) - a}{b(a + bx)^3} = \\dfrac{x}{(a + bx)^3} \\;\\checkmark\\]\nWhy: Differentiating the two separate terms gives back the integrand."
+            ],
+            "final_answer": "\\(-\\frac{a + 2bx}{2b^2(a + bx)^2} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(x)",
+            "prompt": "3 (x) Evaluate the following: \\(\\int x^5\\sqrt{x^3 + 1}\\,dx\\)",
+            "explanation": "The inside of the root is \\(x^3 + 1\\), whose derivative is \\(3x^2\\). Split \\(x^5 = x^3\\cdot x^2\\): the \\(x^2\\) goes with \\(dx\\), and \\(x^3 = (x^3 + 1) - 1\\).\nPlan: write the integrand as powers of \\(x^3 + 1\\) times \\(3x^2\\), then use the General Power Rule.",
+            "steps": [
+              "Given: \\(\\int x^5\\sqrt{x^3 + 1}\\,dx\\).\nTo find: the indefinite integral.\nMethod: General Power Rule with \\(f(x) = x^3 + 1\\), \\(f'(x) = 3x^2\\).",
+              "Rewrite the integrand\n\\[x^5\\sqrt{x^3 + 1} = \\big[(x^3 + 1) - 1\\big](x^3 + 1)^{1/2}x^2\\]\n\\[= \\tfrac{1}{3}\\left[(x^3 + 1)^{3/2} - (x^3 + 1)^{1/2}\\right]3x^2\\]\nWhy: \\(x^5 = x^3 \\cdot x^2\\) and \\(x^3 = (x^3 + 1) - 1\\); multiplying and dividing by 3 makes \\(3x^2 = f'(x)\\) appear.",
+              "Integrate (General Power Rule)\n\\[= \\tfrac{1}{3}\\cdot\\dfrac{(x^3 + 1)^{5/2}}{5/2}\\]\n\\[- \\tfrac{1}{3}\\cdot\\dfrac{(x^3 + 1)^{3/2}}{3/2} + c\\]\n\\[= \\tfrac{2}{15}(x^3 + 1)^{5/2} - \\tfrac{2}{9}(x^3 + 1)^{3/2} + c\\]\nWhy: Each term is \\([f(x)]^n f'(x)\\) with \\(n = \\frac{3}{2}\\) and \\(n = \\frac{1}{2}\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left[\\tfrac{2}{15}(x^3 + 1)^{5/2} - \\tfrac{2}{9}(x^3 + 1)^{3/2}\\right]\\]\n\\[= x^2(x^3 + 1)^{3/2} - x^2(x^3 + 1)^{1/2}\\]\n\\[= x^2(x^3 + 1)^{1/2}\\cdot x^3 = x^5\\sqrt{x^3 + 1} \\;\\checkmark\\]\nWhy: Chain rule: \\(\\frac{2}{15}\\cdot\\frac{5}{2}\\cdot 3x^2 = x^2\\) and \\(\\frac{2}{9}\\cdot\\frac{3}{2}\\cdot 3x^2 = x^2\\)."
+            ],
+            "final_answer": "\\(\\frac{2}{15}(x^3 + 1)^{5/2} - \\frac{2}{9}(x^3 + 1)^{3/2} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(xi)",
+            "prompt": "3 (xi) Evaluate the following: \\(\\int (3x + 3^x + x^3)\\,dx\\)",
+            "explanation": "Three different kinds of term: \\(3x\\) (constant times \\(x\\)), \\(3^x\\) (exponential: variable in the power) and \\(x^3\\) (power of \\(x\\)).\nPlan: integrate term by term, using \\(\\int a^x dx = \\frac{a^x}{\\ln a}\\) for \\(3^x\\).",
+            "steps": [
+              "Given: \\(\\int (3x + 3^x + x^3)\\,dx\\).\nTo find: the indefinite integral.\nMethod: Rule 2, the Power Rule, and the table formula \\(\\int a^x\\,dx = \\frac{a^x}{\\ln a} + c\\) (\\(a > 0, a \\ne 1\\)).",
+              "Integrate each term\n\\[= 3\\cdot\\dfrac{x^2}{2} + \\dfrac{3^x}{\\ln 3} + \\dfrac{x^4}{4} + c\\]\n\\[= \\dfrac{3x^2}{2} + \\dfrac{3^x}{\\ln 3} + \\dfrac{x^4}{4} + c\\]\nWhy: \\(3^x\\) has a constant base and a variable power, so the Power Rule does not apply to it; the \\(a^x\\) formula with \\(a = 3\\) does.",
+              "Check\n\\[\\dfrac{d}{dx}\\left(\\tfrac{3x^2}{2} + \\tfrac{3^x}{\\ln 3} + \\tfrac{x^4}{4}\\right)\\]\n\\[= 3x + 3^x + x^3 \\;\\checkmark\\]\nWhy: \\(\\frac{d}{dx}(3^x) = 3^x\\ln 3\\), and the \\(\\ln 3\\) cancels."
+            ],
+            "final_answer": "\\(\\frac{3x^2}{2} + \\frac{3^x}{\\ln 3} + \\frac{x^4}{4} + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Answer key: the answers to Q3 (xi), (xii) and (xiii) are printed under the heading \"Exercise 3.3\" as 1 (xiii), 1 (xvi) and 1 (xv) (book p. 300). The printed values agree with our answers."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(xii)",
+            "prompt": "3 (xii) Evaluate the following: \\(\\int 7^{\\ln x}\\,dx\\)",
+            "explanation": "The power contains \\(\\ln x\\), so \\(x > 0\\). The trick: \\(7^{\\ln x}\\) is really a power of \\(x\\).\nPlan: show \\(7^{\\ln x} = x^{\\ln 7}\\), then use the Power Rule with the constant power \\(n = \\ln 7\\).",
+            "steps": [
+              "Given: \\(\\int 7^{\\ln x}\\,dx\\), \\(x > 0\\).\nTo find: the indefinite integral.\nMethod: rewrite \\(7^{\\ln x}\\) as \\(x^{\\ln 7}\\) by taking logarithms, then the Power Rule.",
+              "Rewrite the integrand\n\\[\\ln\\left(7^{\\ln x}\\right) = \\ln x\\cdot\\ln 7\\]\n\\[\\ln\\left(x^{\\ln 7}\\right) = \\ln 7\\cdot\\ln x\\]\n\\[\\Rightarrow 7^{\\ln x} = x^{\\ln 7}\\]\nWhy: \\(\\ln(A^B) = B\\ln A\\). Both numbers have the same logarithm, so they are equal.",
+              "Apply the Power Rule\n\\[\\int x^{\\ln 7}\\,dx = \\dfrac{x^{\\ln 7 + 1}}{\\ln 7 + 1} + c\\]\nWhy: \\(n = \\ln 7 \\approx 1.95\\) is a constant and \\(n \\ne -1\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left(\\dfrac{x^{\\ln 7 + 1}}{\\ln 7 + 1}\\right) = x^{\\ln 7} = 7^{\\ln x} \\;\\checkmark\\]\nWhy: Power rule for derivatives; the factor \\(\\ln 7 + 1\\) cancels."
+            ],
+            "final_answer": "\\(\\frac{x^{\\ln 7 + 1}}{\\ln 7 + 1} + c\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(xiii)",
+            "prompt": "3 (xiii) Evaluate the following: \\(\\int \\frac{1}{1 + \\sqrt{2 + x}}\\,dx\\)",
+            "explanation": "A square root in the denominator: remove it by a change of variable, \\(u = \\sqrt{2 + x}\\) (section 3.2).\nPlan: change \\(x\\) and \\(dx\\), divide the resulting fraction, integrate, put back \\(u\\).",
+            "steps": [
+              "Given: \\(\\int \\frac{1}{1 + \\sqrt{2 + x}}\\,dx\\).\nTo find: the indefinite integral.\nMethod: substitution \\(u = \\sqrt{2 + x}\\) (\\(u \\ge 0\\)), then Rule 4 for \\(\\int \\frac{1}{1 + u}\\,du\\).",
+              "Change the variable\n\\[u^2 = 2 + x\\]\n\\[x = u^2 - 2\\]\n\\[dx = 2u\\,du\\]\nWhy: Squaring removes the root; differentiate \\(x = u^2 - 2\\) with respect to \\(u\\).",
+              "Substitute and divide\n\\[\\int \\dfrac{2u}{1 + u}\\,du\\]\n\\[\\dfrac{2u}{1 + u} = \\dfrac{2(1 + u) - 2}{1 + u} = 2 - \\dfrac{2}{1 + u}\\]\nWhy: Numerator and denominator have the same degree, so divide first (write \\(2u = 2(1 + u) - 2\\)).",
+              "Integrate\n\\[\\int \\left(2 - \\dfrac{2}{1 + u}\\right)du = 2u - 2\\ln(1 + u) + c\\]\nWhy: \\(\\int \\frac{1}{1 + u}\\,du = \\ln|1 + u|\\) by Rule 4 (the top is the derivative of the bottom); \\(1 + u \\ge 1 > 0\\), so no modulus is needed.",
+              "Put back \\(u = \\sqrt{2 + x}\\)\n\\[= 2\\sqrt{2 + x} - 2\\ln\\left(1 + \\sqrt{2 + x}\\right) + c\\]\nWhy: The answer must be in terms of \\(x\\).",
+              "Check\n\\[\\dfrac{d}{dx}\\left[2\\sqrt{2 + x} - 2\\ln(1 + \\sqrt{2 + x})\\right]\\]\n\\[= \\dfrac{1}{\\sqrt{2 + x}} - \\dfrac{1}{\\sqrt{2 + x}\\,(1 + \\sqrt{2 + x})}\\]\n\\[= \\dfrac{1}{1 + \\sqrt{2 + x}} \\;\\checkmark\\]\nWhy: Common factor \\(\\frac{1}{\\sqrt{2 + x}}\\): \\(1 - \\frac{1}{1 + u} = \\frac{u}{1 + u}\\) with \\(u = \\sqrt{2 + x}\\)."
+            ],
+            "final_answer": "\\(2\\sqrt{2 + x} - 2\\ln\\left(1 + \\sqrt{2 + x}\\right) + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

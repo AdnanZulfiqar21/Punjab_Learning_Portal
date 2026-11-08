@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.5.3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.5.3",
+      "title": "8.5.3 Electronic Circuits",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 253,
+          "pdf_to": 254,
+          "note": "Book p. 251-252: 8.5.3 Electronic Circuits, Example 3 Diode/AC Circuit (shown as Example 10): sin V - 0.5V = 0 by Regula-Falsi on [1, 2], V = 1.90 volts."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Electronic components such as diodes and transistors often produce nonlinear voltage-current relationships. In circuits, the voltage or current at certain points may satisfy nonlinear equations."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "The book prints this example as 'Example 3' (the second Example 3 in this unit); we show it as Example 10 (see the note in 8.5.1)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why Regula-Falsi here? Like bisection it keeps the root trapped in an interval of sign change, but instead of the midpoint it uses the secant line through the two end points, which usually lands much closer to the root. Here three iterations are enough."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "Diode/AC Circuit. In a circuit, the voltage \\(V\\) across a component satisfies the equation \\(\\sin V - 0.5V = 0\\). Find a non-zero real value of \\(V\\) correct to two decimal places using Regula-Falsi method.\nNote: \\(V\\) represents the voltage in volts.",
+            "steps": [
+              "Given: \\(\\sin V - 0.5V = 0\\), \\(V\\) in volts.\nTo find: a non-zero real root \\(V\\), correct to two decimal places.\nMethod: Regula-Falsi. Join \\((a, f(a))\\) and \\((b, f(b))\\) by a straight line (secant) and take the point where it cuts the axis as the new estimate. The calculator must be in radian mode.",
+              "Define function\n\\[f(V) = \\sin V - 0.5V\\]\nWhy: Regula-Falsi works on \\(f(V) = 0\\). Note that \\(V = 0\\) is an obvious root (\\(\\sin 0 = 0\\)); the question asks for a non-zero one.",
+              "Select interval\n\\[f(1) = \\sin 1 - 0.5 \\approx 0.3415 > 0\\]\n\\[f(2) = \\sin 2 - 1 \\approx -0.0907 < 0\\]\n\\(\\Rightarrow [1, 2]\\) is an interval of sign change.\nWhy: \\(\\sin 1 = 0.8415\\) and \\(\\sin 2 = 0.9093\\) (radians); the values have opposite signs.",
+              "Continuity\nNote that \\(f(c) = \\lim_{V \\to c} (\\sin V - 0.5V)\\) for every \\(c \\in [1, 2]\\).\n\\(\\Rightarrow f\\) is continuous on the interval of sign change \\([1, 2]\\), so the Regula-Falsi method is applicable with the interval \\([1, 2]\\).\nWhy: sin V and 0.5V are both continuous, so their difference is too.",
+              "Regula-Falsi formula\n\\[V_c = \\dfrac{af(b) - bf(a)}{f(b) - f(a)}\\]\nWhy: this is where the secant line through the two end points meets the axis (8.3.3).",
+              "Iteration 1: a = 1, b = 2\n\\[V_c = \\dfrac{1(-0.0907) - 2(0.3415)}{-0.0907 - 0.3415}\\]\n\\[= \\dfrac{-0.7737}{-0.4322} = 1.7901\\]\n\\[f(1.7901) = 0.9760 - 0.8951 = 0.0810\\]\nWhy: \\(f(1.7901) > 0\\), the same sign as \\(f(1)\\), so \\(a\\) is replaced: new interval \\([1.7901, 2]\\).",
+              "Iteration 2: a = 1.7901, b = 2\n\\[V_c = \\dfrac{1.7901(-0.0907) - 2(0.0810)}{-0.0907 - 0.0810}\\]\n\\[= \\dfrac{-0.3244}{-0.1717} = 1.8891\\]\n\\[f(1.8891) = 0.9498 - 0.9446 = 0.0052\\]\nWhy: again positive, so the new interval is \\([1.8891, 2]\\).",
+              "Iteration 3: a = 1.8891, b = 2\n\\[V_c = \\dfrac{1.8891(-0.0907) - 2(0.0052)}{-0.0907 - 0.0052}\\]\n\\[= \\dfrac{-0.1817}{-0.0959} = 1.8951\\]\n\\[f(1.8951) = 0.9479 - 0.9476 = 0.0003\\]\nWhy: the three iterations are collected in the Iterations Table below.",
+              "Checking\n\\(|f(1.8951)| = 0.0003 < 0.01\\), so we stop.\nWhy: \\(f\\) is practically zero at 1.8951 (it is also below 0.005, the tolerance of 8.3.1).",
+              "Check:\nSign test (ours): \\(f(1.895) \\approx 0.0004 > 0\\) and \\(f(1.905) \\approx -0.0078 < 0\\), so the root lies in \\(]1.895, 1.905[\\) and rounds to 1.90.\nThe exact root is \\(V = 1.8955\\ldots\\)"
+            ],
+            "answer": "\\(V \\approx 1.90\\) volts (two decimal places)"
+          },
+          {
+            "type": "table",
+            "caption": "Iterations Table: (4 decimal places)",
+            "header": [
+              "Iteration",
+              "\\(a\\)",
+              "\\(b\\)",
+              "\\(V_c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\)",
+              "\\(f(V_c)\\)",
+              "New Interval"
+            ],
+            "rows": [
+              [
+                "1",
+                "1 (+)",
+                "2 (-)",
+                "1.7901 (+)",
+                "0.0810",
+                "[1.7901, 2]"
+              ],
+              [
+                "2",
+                "1.7901 (+)",
+                "2 (-)",
+                "1.8891 (+)",
+                "0.0052",
+                "[1.8891, 2]"
+              ],
+              [
+                "3",
+                "1.8891 (+)",
+                "2 (-)",
+                "1.8951 (+)",
+                "0.0003",
+                "Stop"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Checking: \\(|f(1.8951)| = 0.0003 < 0.01\\). Final Answer: \\(V \\approx 1.90\\) volts (two decimal places)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why does \\(b = 2\\) never move? On \\([1, 2]\\) the graph of \\(f(V) = \\sin V - 0.5V\\) bends downwards (\\(f''(V) = -\\sin V < 0\\)), so every secant line lies below the curve and cuts the axis to the LEFT of the root. Each new point therefore has \\(f > 0\\) and replaces \\(a\\); the right end stays fixed.\nThe final answer keeps its trailing zero: 1.90 (not 1.9) shows that the value is correct to two decimal places."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Write \\(f(a)\\) and \\(f(b)\\) with their signs before putting them into the formula: most wrong answers come from a lost minus sign in \\(af(b) - bf(a)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "Circuit model: \\(\\sin V - 0.5V = 0\\); \\(V = 0\\) is a trivial root, the non-zero root lies in \\([1, 2]\\).\nRegula-Falsi: \\(V_c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\); keep the sub-interval with a sign change.\nRadian mode for sin.\nThree iterations give \\(V \\approx 1.90\\) volts."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "Working in degree mode: sin 1 would become 0.0175 and there would be no sign change at all.\nGiving \\(V = 0\\) as the answer: the question asks for a non-zero value.\nMixing up the formula as \\(\\frac{af(a) - bf(b)}{f(b) - f(a)}\\): each end point is multiplied by the value of f at the OTHER end."
+          }
+        ]
+      }
+    }
+  ]
+}

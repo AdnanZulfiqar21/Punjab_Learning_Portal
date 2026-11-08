@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.6-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.6",
+      "title": "2.6 Derivative of Logarithmic Functions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH2-2.6",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 44,
+          "pdf_to": 45,
+          "note": "Book p. 42-43: 2.6 Derivative of Logarithmic Functions, derivation of d/dx(log_a x), Recall! box, Examples 8-9, Challenge! box"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Pichhle topic mein humne exponential function \\(a^{x}\\) ka derivative nikala. Ab us ka 'ulta' (inverse) function aata hai: logarithm. Jaise jama ka ulta tafreeq hai aur square ka ulta square root, waise hi exponential ka ulta logarithm hai. Sound ki loudness (decibel), zalzale ki shiddat (Richter scale) aur pH sab logarithm se naape jate hain, is liye is ka derivative bhi bohat kaam aata hai.\nKitab ki definition: agar \\(a^{y} = x\\) ho, jahan \\(a > 0\\) aur \\(a \\ne 1\\), to \\(y\\) ko \\(x\\) ka base \\(a\\) par logarithm kehte hain, aur likhte hain:\n\\[y = \\log_a x, \\quad x > 0, \\quad y \\in \\mathbb{R}\\]\nAgar \\(a = e\\) ho (\\(e \\approx 2.71828\\)), to function\n\\[y = \\log_e x = \\ln x \\quad (\\text{jab } e^{y} = x)\\]\nko \\(x\\) ka natural logarithm kehte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Logarithm sirf ek sawal ka jawab hai: '\\(a\\) ko kis power tak le jayen ke \\(x\\) mile?' Maslan \\(\\log_2 8 = 3\\), kyun ke \\(2^{3} = 8\\). Is liye \\(\\log_a x\\) exponential function \\(a^{x}\\) ka inverse hai: ek jo karta hai, doosra use wapas kar deta hai.\n\\(x > 0\\) ki shart kyun? Kyun ke \\(a^{y}\\) har real \\(y\\) ke liye positive hi hota hai. Koi bhi power lagayen, positive base ka jawab kabhi zero ya negative nahin banta. Is liye \\(a^{y} = x\\) tab mumkin hi nahin jab \\(x \\le 0\\) ho. Yahi wajah hai ke zero aur negative numbers ka log defined nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(\\log_{10} 1000\\) kitna hai? Aur \\(\\ln 1\\)?\nJawab: 3 (kyun ke \\(10^{3} = 1000\\)) aur 0 (kyun ke \\(e^{0} = 1\\))."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Derivative of \\(\\log_a x\\) by definition"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab hum \\(f(x) = \\log_a x\\) ka derivative bhi definition se hi nikalenge, bilkul 2.5 ki tarah. Plan yeh hai: log ke qawaid (laws) laga kar expression ko aisi shakal mein laana jo Recall! wali limit se mil jaye.\nFarz karein\n\\[f(x) = \\log_a x \\quad \\text{...(1)}\\]\nEquation (1) se:\n\\[f(x + h) = \\log_a(x + h) \\quad \\text{...(2)}\\]\nHum jaante hain ke derivative ki definition hai:\n\\[f'(x) = \\lim_{h \\to 0} \\dfrac{f(x + h) - f(x)}{h}\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Equations (1) aur (2) se \\(f(x)\\) aur \\(f(x + h)\\) rakhne par:\n\\[f'(x) = \\lim_{h \\to 0} \\dfrac{\\log_a(x + h) - \\log_a x}{h}\\]\n\\[= \\lim_{h \\to 0} \\dfrac{1}{h}\\log_a\\left(\\dfrac{x + h}{x}\\right)\\]\n\\[= \\lim_{h \\to 0} \\dfrac{1}{x}\\cdot\\dfrac{x}{h}\\log_a\\left(1 + \\dfrac{h}{x}\\right)\\]\n\\[= \\lim_{h \\to 0} \\dfrac{1}{x}\\log_a\\left(1 + \\dfrac{h}{x}\\right)^{\\frac{x}{h}}\\]\n\\[= \\dfrac{1}{x}\\cdot\\log_a e\\]\n\\[= \\dfrac{1}{x}\\cdot\\dfrac{1}{\\log_e a} \\quad \\left(\\because \\log_a b = \\dfrac{1}{\\log_b a}\\right)\\]\n\\[= \\dfrac{1}{x\\ln a} \\quad (\\because \\log_e x = \\ln x)\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Recall!",
+            "text": "\\[\\lim_{h \\to 0}\\left(1 + \\dfrac{h}{a}\\right)^{\\frac{a}{h}} = e\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Har line mein kya hua, ek ek kar ke:\n1. Log ka qaida: \\(\\log_a A - \\log_a B = \\log_a \\frac{A}{B}\\). Phir \\(\\frac{x + h}{x} = 1 + \\frac{h}{x}\\), yani fraction ko tod diya.\n2. \\(\\frac{1}{h}\\) ko \\(\\frac{1}{x}\\cdot\\frac{x}{h}\\) likha (\\(x\\) se zarb aur taqseem; value wohi rehti hai). Yeh chaal is liye chali ke humein power mein \\(\\frac{x}{h}\\) chahiye tha, jo Recall! wali limit mein hai.\n3. Log ka doosra qaida: \\(n\\log_a A = \\log_a A^{n}\\). Yahan \\(n = \\frac{x}{h}\\) power ban kar log ke andar chala gaya.\n4. \\(\\frac{1}{x}\\) mein \\(h\\) nahin, is liye woh limit se bahar; aur log ek continuous (bina toote) function hai, is liye limit log ke andar ja sakti hai. Recall! mein \\(a\\) ki jagah \\(x\\) samjhein: \\(\\left(1 + \\frac{h}{x}\\right)^{x/h} \\to e\\).\n5. Change of base ka qaida: \\(\\log_a e = \\frac{1}{\\log_e a} = \\frac{1}{\\ln a}\\). Bas jawab aa gaya."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is tarah humne saabit kar diya ke"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{d}{dx}\\left(\\log_a x\\right) = \\dfrac{1}{x\\ln a}",
+            "text_alt": "d by d x of log to the base a of x equals 1 over x times natural log of a"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "\\(\\frac{d}{dx}(\\log_{10} x)\\) kya hoga? Aur \\(x = 10\\) par is ki value kitni hai?\nJawab: formula mein \\(a = 10\\) rakhein: \\(\\frac{1}{x\\ln 10}\\). \\(x = 10\\) par \\(\\frac{1}{10\\ln 10} \\approx \\frac{1}{23.03} \\approx 0.043\\). Note karein ke \\(x\\) jitna bara hota hai, slope utna chhota hota jata hai: log ka graph barhta to hamesha hai magar aahista aahista, jaise umar ke saath qad ka barhna dheema par jata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab hum yeh formulas do examples mein istemal karte hain. Example 8 mein exponential aur log dono ek quotient mein aate hain, is liye 2.5 aur 2.6 dono ke results chahiye. Example 9 mein teen functions ek doosre ke andar hain, is liye Chain Rule baar baar lagana hoga. Dono mein pehle sawal ki shakal pehchaniye, phir rule chuniye."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "Find \\(\\frac{dy}{dx}\\) if \\(y = \\frac{a^{x}}{\\log_a x}\\).",
+            "steps": [
+              "Diya gaya: \\(y = \\dfrac{a^{x}}{\\log_a x}\\) (yeh \\(x > 0\\), \\(x \\ne 1\\) ke liye defined hai).\nMaloom karna: \\(\\frac{dy}{dx}\\).\nTareeqa: yahan ek function doosre function se taqseem ho raha hai (oopar \\(a^{x}\\), neeche \\(\\log_a x\\)). Jab do functions ka quotient ho to Quotient Rule lagta hai: \\(\\left(\\frac{u}{v}\\right)' = \\frac{u'v - uv'}{v^{2}}\\), jahan \\(u = a^{x}\\) aur \\(v = \\log_a x\\). Dono ke derivatives hum 2.5 aur 2.6 mein nikaal chuke hain, is liye kaam aasan hai.",
+              "Step 1: Quotient Rule likhein\n\\[\\dfrac{dy}{dx} = \\dfrac{(a^{x})'\\log_a x - a^{x}(\\log_a x)'}{(\\log_a x)^{2}}\\]\nKyun: rule yeh kehta hai: oopar wale ka derivative zarb neeche wala, minus oopar wala zarb neeche wale ka derivative, aur sab ko neeche wale ke square se taqseem.\nDhyan dein: minus ki wajah se tarteeb bohat ahem hai. Ulta likh diya to poora jawab ka sign ulat jaye ga.",
+              "Step 2: Dono derivatives rakhein\n\\[(a^{x})' = a^{x}\\ln a\\]\n\\[(\\log_a x)' = \\dfrac{1}{x\\ln a}\\]\n\\[\\dfrac{dy}{dx} = \\dfrac{a^{x}\\ln a\\,\\log_a x - a^{x}\\cdot\\frac{1}{x\\ln a}}{(\\log_a x)^{2}}\\]\nKyun: pehla result 2.5 ka hai aur doosra abhi 2.6 mein saabit hua. Sirf in ki values formula mein rakh di hain.",
+              "Step 3: Numerator ko saaf karein\n\\[a^{x}\\ln a\\,\\log_a x - \\dfrac{a^{x}}{x\\ln a}\\]\n\\[= \\dfrac{a^{x}\\left(x(\\ln a)^{2}\\log_a x - 1\\right)}{x\\ln a}\\]\nKyun: numerator mein ek term fraction hai, is liye common denominator \\(x\\ln a\\) liya. Pehle term ko \\(x\\ln a\\) se zarb aur taqseem kiya to woh \\(\\frac{a^{x}\\,x(\\ln a)^{2}\\log_a x}{x\\ln a}\\) ban gaya. Phir dono terms mein \\(a^{x}\\) common nikaal liya.",
+              "Step 4: Aakhri shakal\n\\[\\dfrac{dy}{dx} = \\dfrac{a^{x}\\left(x(\\ln a)^{2}\\log_a x - 1\\right)}{x\\ln a\\,(\\log_a x)^{2}}\\]\nKyun: numerator \\(\\frac{a^{x}(\\dots)}{x\\ln a}\\) ko \\((\\log_a x)^{2}\\) se taqseem kiya, to \\((\\log_a x)^{2}\\) bhi \\(x\\ln a\\) ke saath neeche chala gaya. Yahi kitab ka boxed jawab hai.",
+              "Tasdeeq: \\(a = e\\) aur \\(x = e\\) le kar dekhte hain. Tab \\(y = \\frac{e^{x}}{\\ln x}\\) aur seedha Quotient Rule se\n\\[y' = \\dfrac{e^{x}\\ln x - e^{x}/x}{(\\ln x)^{2}}\\]\n\\(x = e\\) par (\\(\\ln e = 1\\)): \\(y' = e^{e} - \\frac{e^{e}}{e} = e^{e}\\left(1 - \\frac{1}{e}\\right)\\).\nKitab ka formula: \\(\\frac{e^{e}(e \\cdot 1 \\cdot 1 - 1)}{e \\cdot 1 \\cdot 1} = e^{e}\\left(1 - \\frac{1}{e}\\right)\\). Dono barabar, yani jawab durust hai."
+            ],
+            "answer": "\\(\\frac{dy}{dx} = \\frac{a^{x}\\left(x(\\ln a)^{2}\\log_a x - 1\\right)}{x\\ln a\\,(\\log_a x)^{2}}\\)"
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "Find \\(\\frac{dy}{dx}\\), if \\(y = \\ln(\\cos(e^{x}))\\).",
+            "steps": [
+              "Diya gaya: \\(y = \\ln(\\cos(e^{x}))\\) (jahan \\(\\cos(e^{x}) > 0\\) ho, wahan defined).\nMaloom karna: \\(\\frac{dy}{dx}\\).\nTareeqa: yahan teen functions ek doosre ke andar hain, jaise pyaz ki tehen (layers): sab se bahar \\(\\ln\\), beech mein \\(\\cos\\), sab se andar \\(e^{x}\\). Chain Rule mein hum bahar se andar ki taraf aate hain, har tah ka derivative le kar zarb karte jate hain. Bahar wali tah ke liye \\(\\frac{d}{dx}(\\ln u) = \\frac{1}{u}\\frac{du}{dx}\\).",
+              "Step 1: Bahar wali tah, \\(\\ln\\)\n\\[\\dfrac{dy}{dx} = \\dfrac{1}{\\cos(e^{x})}\\,\\dfrac{d}{dx}(\\cos e^{x})\\]\nKyun: \\(u = \\cos(e^{x})\\) maan kar \\(\\ln u\\) ka derivative \\(\\frac{1}{u}\\) hai, aur Chain Rule kehta hai ke andar wale \\(u\\) ka derivative bhi zarb karo.",
+              "Step 2: Beech wali tah, \\(\\cos\\)\n\\[\\dfrac{dy}{dx} = \\dfrac{1}{\\cos(e^{x})}(-\\sin e^{x})\\,\\dfrac{d}{dx}(e^{x})\\]\nKyun: \\(\\frac{d}{dx}(\\cos v) = -\\sin v\\,\\frac{dv}{dx}\\), jahan \\(v = e^{x}\\). Minus sign yahin se aata hai; ise sambhal kar rakhiye.",
+              "Step 3: Andar wali tah, \\(e^{x}\\)\n\\[\\dfrac{dy}{dx} = -\\dfrac{\\sin(e^{x})}{\\cos(e^{x})}\\,e^{x}\\]\n\\[= -e^{x}\\tan(e^{x})\\]\nKyun: 2.5 se \\(\\frac{d}{dx}(e^{x}) = e^{x}\\). Phir \\(\\frac{\\sin\\theta}{\\cos\\theta} = \\tan\\theta\\) se jawab chhota ho gaya.",
+              "Tasdeeq: \\(x = 0\\) par \\(y = \\ln(\\cos 1)\\). Formula se \\(\\frac{dy}{dx} = -e^{0}\\tan 1 = -\\tan 1 \\approx -1.557\\).\nAb ek chhota sa numerical test, \\(h = 0.001\\) le kar: \\(\\frac{\\ln\\cos(e^{0.001}) - \\ln\\cos 1}{0.001} \\approx -1.56\\). Dono qareeb qareeb barabar, to jawab sahih hai."
+            ],
+            "answer": "\\(\\frac{dy}{dx} = -e^{x}\\tan(e^{x})\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Challenge!",
+            "text": "Saabit kijiye ke \\(\\frac{d}{dx}(\\ln x) = \\frac{1}{x}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Challenge ka hal (hamari taraf se). \\(\\ln x\\) asal mein \\(\\log_e x\\) hai. To upar wale formula mein \\(a = e\\) rakhein aur yaad rakhein ke \\(\\ln e = 1\\):\n\\[\\dfrac{d}{dx}(\\ln x) = \\dfrac{1}{x\\ln e}\\]\n\\[= \\dfrac{1}{x \\cdot 1} = \\dfrac{1}{x}\\]\nPhir wohi baat: base \\(e\\) ho to koi extra factor nahin aata. Isi liye calculus mein zyada tar \\(\\ln\\) hi istemal hota hai.\nChain Rule ke saath, agar andar koi function \\(u\\) ho (aur \\(u > 0\\)):\n\\[\\dfrac{d}{dx}(\\ln u) = \\dfrac{1}{u}\\,\\dfrac{du}{dx}\\]\n\\[\\dfrac{d}{dx}(\\log_a u) = \\dfrac{1}{u\\ln a}\\,\\dfrac{du}{dx}\\]\nAasan alfaaz mein: \\(\\ln(\\text{kuch})\\) ka derivative = (kuch ka derivative) taqseem (kuch)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Agar log ke andar zarb, taqseem, power ya root ho, to derivative lene se pehle log ke qawaid se use tod lijiye:\n\\[\\ln(AB) = \\ln A + \\ln B\\]\n\\[\\ln\\dfrac{A}{B} = \\ln A - \\ln B\\]\n\\[\\ln A^{n} = n\\ln A\\]\nPhir har chhota tukra alag se differentiate hota hai. Lamba Quotient Rule ka kaam bach jata hai (Exercise 2.2, Question 2 mein yeh baar baar kaam aaye ga)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "\\(y = \\ln(x^{2} + 1)\\) ka derivative nikaaliye.\nYahan \\(u = x^{2} + 1\\) aur \\(\\frac{du}{dx} = 2x\\), to\n\\[\\dfrac{dy}{dx} = \\dfrac{2x}{x^{2} + 1}\\]\nYaad rakhiye: \\(\\ln(x^{2} + 1)\\) ko \\(\\ln x^{2} + \\ln 1\\) mein todna ghalat hai, kyun ke andar jama hai, zarb nahin. Log ke qawaid sirf zarb, taqseem aur power par chalte hain; jama aur tafreeq par in ka koi zor nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. \\(y = \\log_a x\\) ka matlab \\(a^{y} = x\\) (\\(a > 0\\), \\(a \\ne 1\\), \\(x > 0\\)). Natural logarithm: \\(\\ln x = \\log_e x\\).\n2. \\(\\frac{d}{dx}(\\log_a x) = \\frac{1}{x\\ln a}\\). Yeh definition se saabit hua, limit \\(\\lim_{h \\to 0}\\left(1 + \\frac{h}{a}\\right)^{a/h} = e\\) ki madad se.\n3. \\(\\frac{d}{dx}(\\ln x) = \\frac{1}{x}\\).\n4. Chain Rule ke saath: \\(\\frac{d}{dx}(\\ln u) = \\frac{u'}{u}\\) aur \\(\\frac{d}{dx}(\\log_a u) = \\frac{u'}{u\\ln a}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(\\frac{d}{dx}\\ln(\\cos e^{x}) = \\frac{1}{\\cos e^{x}}\\) likh kar ruk jana. Har andar wali tah ka derivative bhi zarb karna hai.\n2. Base \\(e\\) na ho (maslan base 10) to \\(\\frac{d}{dx}(\\log_a x) = \\frac{1}{x\\ln a}\\) mein \\(\\ln a\\) bhool jana.\n3. Ghalat todna: \\(\\ln(A + B) \\ne \\ln A + \\ln B\\). Sirf zarb, taqseem aur power wale log tootte hain, jama wale nahin.\n4. Quotient Rule mein numerator ki tarteeb ulat dena: sahih \\(u'v - uv'\\) hai, \\(uv' - u'v\\) nahin."
+          }
+        ]
+      }
+    }
+  ]
+}

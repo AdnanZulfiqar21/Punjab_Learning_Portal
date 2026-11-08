@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q12-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q12",
+      "title": "Question 12 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 275,
+          "pdf_to": 275,
+          "note": "Exercise 9.2, Question 12 (book page 273); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "variant_of": "C12-MATH-CH9-EXERCISE-9-2-Q12",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12",
+            "prompt": "12. Prove that \\(2\\tan^{-1} x = \\sin^{-1}\\left(\\frac{2x}{1 + x^2}\\right)\\), \\(-1 \\le x \\le 1\\).",
+            "explanation": "Yeh ek identity hai jo do alag inverse functions ko jorti hai: left par \\(\\tan^{-1}\\), right par \\(\\sin^{-1}\\). Saath ek interval \\(-1 \\le x \\le 1\\) bhi diya hai, aur woh bekaar nahi hai.\nSabit kya karna hai? Ke dono sides har us \\(x\\) ke liye barabar hain jo is interval mein ho.\nRule kaunsa? Substitution: \\(\\tan^{-1} x = \\theta\\). Is se right side ka fraction \\(\\sin 2\\theta\\) ban jata hai (double-angle formula).\nPlan: substitution, fraction ko \\(\\sin 2\\theta\\) banana, aur phir dekhna ke \\(2\\theta\\) \\(\\sin^{-1}\\) ki principal range mein hai ya nahi; yahin interval kaam aata hai.",
+            "steps": [
+              "Diya gaya hai: \\(-1 \\le x \\le 1\\).\nSaabit karna hai: \\(2\\tan^{-1} x = \\sin^{-1}\\frac{2x}{1 + x^2}\\).\nTareeqa: Inverse function ko angle ka naam denge (jaise Example 8 mein): \\(\\tan^{-1} x = \\theta\\). Fraction \\(\\frac{2x}{1 + x^2}\\) ko dekh kar foran double-angle formula yaad aana chahiye: \\(\\frac{2\\tan\\theta}{1 + \\tan^2\\theta} = \\sin 2\\theta\\). Is liye right side \\(\\sin^{-1}(\\sin 2\\theta)\\) ban jayegi, aur woh \\(2\\theta\\) tabhi hai jab \\(2\\theta\\) principal range mein ho.",
+              "Inverse ko angle banayein\n\\[\\tan^{-1} x = \\theta\\]\n\\[x = \\tan\\theta\\]\nKyun: \\(\\tan^{-1}\\) ki definition: \\(\\tan^{-1} x\\) woh angle hai jiska tan \\(x\\) ho. Yeh angle hamesha \\(\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\) mein hota hai, kyunke yahi \\(\\tan^{-1}\\) ki principal range hai.",
+              "Interval \\(-1 \\le x \\le 1\\) ko \\(\\theta\\) ki zabaan mein badlein\n\\[-1 \\le \\tan\\theta \\le 1\\]\n\\[-\\dfrac{\\pi}{4} \\le \\theta \\le \\dfrac{\\pi}{4}\\]\n\\[-\\dfrac{\\pi}{2} \\le 2\\theta \\le \\dfrac{\\pi}{2}\\]\nKyun: \\(\\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)\\) mein tan barhta hua (increasing) function hai, aur \\(\\tan\\frac{\\pi}{4} = 1\\), \\(\\tan\\left(-\\frac{\\pi}{4}\\right) = -1\\). Is liye tan ka \\(-1\\) aur \\(1\\) ke darmiyan hona yahi hai ke \\(\\theta\\) \\(-\\frac{\\pi}{4}\\) aur \\(\\frac{\\pi}{4}\\) ke darmiyan ho. Phir sab ko 2 se multiply kiya; positive number se multiply karne par inequality ke nishan nahi badalte.",
+              "Fraction ko \\(\\sin 2\\theta\\) banayein\n\\[\\dfrac{2x}{1 + x^2} = \\dfrac{2\\tan\\theta}{1 + \\tan^2\\theta}\\]\n\\[= \\dfrac{2\\tan\\theta}{\\sec^2\\theta}\\]\n\\[= 2\\,\\dfrac{\\sin\\theta}{\\cos\\theta}\\,\\cos^2\\theta\\]\n\\[= 2\\sin\\theta\\cos\\theta = \\sin 2\\theta\\]\nKyun: Pehle \\(x = \\tan\\theta\\) rakha. Neeche identity \\(1 + \\tan^2\\theta = \\sec^2\\theta\\) lagi. \\(\\sec^2\\theta\\) se divide karna \\(\\cos^2\\theta\\) se multiply karne ke barabar hai, kyunke \\(\\sec\\theta = 1/\\cos\\theta\\). Ek \\(\\cos\\theta\\) cancel hua aur \\(2\\sin\\theta\\cos\\theta\\) bacha, jo double-angle formula se \\(\\sin 2\\theta\\) hai.",
+              "Ab \\(\\sin^{-1}\\) lagayein\n\\[\\sin^{-1}\\dfrac{2x}{1 + x^2}\\]\n\\[= \\sin^{-1}(\\sin 2\\theta)\\]\n\\[= 2\\theta = 2\\tan^{-1} x\\]\nKyun: \\(\\sin^{-1}(\\sin u) = u\\) sirf tab hota hai jab \\(u\\) \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\) mein ho; warna \\(\\sin^{-1}\\) koi doosra angle de deta hai jis ka sine wohi ho. Step 3 mein hum ne dikhaya ke \\(2\\theta\\) isi range mein hai. Yahi wajah hai ke sawal mein \\(-1 \\le x \\le 1\\) likha hai.\nDhyan dein: Yeh range wala qadam chhorna sab se aam ghalti hai; examiner isi qadam ke marks deta hai.",
+              "Tasdeeq\n\\[x = 1:\\ 2\\tan^{-1} 1 = \\dfrac{\\pi}{2}\\]\n\\[\\sin^{-1}\\dfrac{2}{2} = \\sin^{-1} 1 = \\dfrac{\\pi}{2}\\]\n\\[x = \\tfrac{1}{2}:\\ 2\\tan^{-1}\\tfrac{1}{2} \\approx 0.9273\\]\n\\[\\sin^{-1}\\tfrac{4}{5} \\approx 0.9273\\]\nKyun: Dono values par dono sides barabar aayin (\\(x = \\frac{1}{2}\\) par fraction \\(\\frac{1}{5/4} = \\frac{4}{5}\\) banta hai). Ab interval ki ahmiyat dekhiye: \\(x = \\sqrt{3}\\) par left side \\(2 \\cdot \\frac{\\pi}{3} = \\frac{2\\pi}{3}\\) hai magar right side \\(\\sin^{-1}\\frac{\\sqrt{3}}{2} = \\frac{\\pi}{3}\\). Yani interval ke bahar identity toot jati hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(2\\tan^{-1} x = \\sin^{-1}\\frac{2x}{1 + x^2}\\), jab \\(-1 \\le x \\le 1\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Kitab mein Exercise 9.2 ke jawab chhape hue nahi hain. Is page ka har hal hamara apna hai: qadam ba qadam kiya gaya, computer algebra system (sympy) se alag se check kiya gaya, aur ek solution book se bhi milaya gaya. Is liye aap apna proof yahan wale proof se mila kar dekh sakte hain; agar aap ka tareeqa alag hai magar har qadam ki wajah sahi hai, to woh bhi theek hai."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q10",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 10: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10. Evaluate \\(\\int (2x^3 + 2x)e^{x^2}\\,dx\\).",
+            "explanation": "The bracket fits the Note \\(\\int e^{g}[fg' + f']\\,dx = e^{g}f + c\\) with \\(g = x^2\\), \\(f = x^2\\).\nPlan: split, integrate \\(\\int x^2(2xe^{x^2})\\,dx\\) by parts; the leftover cancels.",
+            "steps": [
+              "Given: \\(\\int (2x^3 + 2x)e^{x^2}\\,dx\\).\nTo find: the indefinite integral.\nMethod: split; for \\(\\int 2x^3e^{x^2}\\,dx = \\int x^2\\cdot 2xe^{x^2}\\,dx\\) take \\(x^2\\) first and \\(2xe^{x^2}\\) second (its integral is \\(e^{x^2}\\)).",
+              "Split\n\\[= \\int x^2\\cdot 2xe^{x^2}\\,dx + \\int 2xe^{x^2}\\,dx\\]\nWhy: \\(2x^3 = x^2\\cdot 2x\\).",
+              "Parts on the first integral\n\\[\\int x^2\\cdot 2xe^{x^2}\\,dx = x^2e^{x^2} - \\int e^{x^2}\\cdot 2x\\,dx\\]\nWhy: \\(\\int 2xe^{x^2}\\,dx = e^{x^2}\\), \\(\\frac{d}{dx}x^2 = 2x\\).",
+              "The integrals cancel\n\\[= x^2e^{x^2} - \\int 2xe^{x^2}\\,dx + \\int 2xe^{x^2}\\,dx\\]\n\\[= x^2e^{x^2} + c\\]\nWhy: the same integral appears with minus and plus.",
+              "Check\n\\[\\dfrac{d}{dx}(x^2e^{x^2}) = 2xe^{x^2} + x^2\\cdot 2xe^{x^2}\\]\n\\[= (2x^3 + 2x)e^{x^2}\\]\nWhy: product rule with the chain rule."
+            ],
+            "final_answer": "\\(x^2e^{x^2} + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

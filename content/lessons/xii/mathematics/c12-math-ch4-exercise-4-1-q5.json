@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-1-Q5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-1-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 130,
+          "pdf_to": 130,
+          "note": "Exercise 4.1, Question 5: radioactive decay (Hint); book p. 128, answers p. 303 (PDF 305)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5 Let \\(N\\) denote the amount of radioactive substance present at time \\(t\\). Construct a differential equation that models the radioactive decay of the substance. Hint: (Radioactive decay is a natural process by which an unstable atomic nucleus loses energy by emitting radiation. The rate at which a radioactive substance decays is proportional to the amount of the substance present at any given time.)",
+            "explanation": "A modelling question: the hint says the decay rate is proportional to the amount \\(N\\).\nDecay means \\(N\\) decreases, so the rate \\(\\frac{dN}{dt}\\) is negative.",
+            "steps": [
+              "Given: amount \\(N(t)\\); rate of decay proportional to \\(N\\).\nTo find: a differential equation for \\(N\\).\nMethod: the decay model \\(\\frac{dN}{dt} = -kN\\) with \\(k > 0\\).",
+              "Write the proportionality\n\\[\\dfrac{dN}{dt} \\propto N\\]\nWhy: more atoms means more of them break up each second.",
+              "Fix the sign\n\\(N\\) decreases, so \\(\\frac{dN}{dt} < 0\\). With a positive constant \\(k\\) (the decay constant):\n\\[\\dfrac{dN}{dt} = -kN\\]\n\\[\\dfrac{dN}{dt} + kN = 0,\\quad k > 0\\]\nWhy: this is Example 1's model \\(\\frac{dP}{dt} = kP\\) with a negative constant, which the book's Observation calls decay.",
+              "Check:\n\\(N = N_{0}e^{-kt}\\) gives \\(\\frac{dN}{dt} = -kN_{0}e^{-kt} = -kN\\) (sympy); \\(N\\) decreases towards 0 but never becomes negative."
+            ],
+            "final_answer": "\\(\\dfrac{dN}{dt} = -kN\\), i.e. \\(\\dfrac{dN}{dt} + kN = 0\\), where \\(k > 0\\) is the decay constant."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints \\(\\frac{dN}{dt} = -kT,\\ k > 0\\). There is no \\(T\\) in this question: the decay rate depends on the amount \\(N\\). The correct equation is \\(\\frac{dN}{dt} = -kN,\\ k > 0\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

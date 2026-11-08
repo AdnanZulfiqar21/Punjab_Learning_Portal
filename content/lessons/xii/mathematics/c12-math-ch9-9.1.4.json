@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-9.1.4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/9.1.4",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 262,
+          "pdf_to": 264,
+          "note": "PDF 262-264 (book p. 260-262): csc x domain and range, Figure 9.10, principal cosecant function, csc^-1 domain and range, Figures 9.11(a) and 9.11(b)"
+        }
+      ],
+      "title": "9.1.4 Inverse of Cosecant Function",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The graph of the function \\(f(x) = \\csc x\\) with domain \\(\\{x \\mid x \\in \\mathbb{R} \\wedge x \\ne n\\pi,\\ n \\in \\mathbb{Z}\\}\\) and range is the set \\(\\mathbb{R} - (-1, 1)\\) is shown in Figure 9.10."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Where do this domain and range come from? \\(\\csc x = \\frac{1}{\\sin x}\\). Division by zero is not allowed, so we remove every \\(x\\) where \\(\\sin x = 0\\), that is \\(x = n\\pi\\) (\\(0, \\pm\\pi, \\pm 2\\pi, \\dots\\)). At these points the graph has vertical asymptotes (the dashed lines in Figure 9.10).\nSince \\(-1 \\le \\sin x \\le 1\\), the reciprocal always has size at least 1: \\(|\\csc x| \\ge 1\\). So \\(\\csc x\\) never takes a value strictly between \\(-1\\) and \\(1\\). That is what \\(\\mathbb{R} - (-1, 1)\\) means; written as intervals it is \\((-\\infty, -1] \\cup [1, \\infty)\\)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch9-fig-9-10-csc-x",
+            "alt": "Graph of y = csc x for x from minus 2 pi to 2 pi. Dashed vertical asymptotes at x = minus 2 pi, minus pi, 0, pi and 2 pi. Dashed horizontal lines y = 1 and y = minus 1. U-shaped branches open upward with lowest points (minus 3 pi over 2, 1) and (pi over 2, 1); branches open downward with highest points (minus pi over 2, minus 1) and (3 pi over 2, minus 1). No part of the graph lies between y = minus 1 and y = 1.",
+            "caption": "Figure 9.10: graph of \\(y = \\csc x\\) from \\(-2\\pi\\) to \\(2\\pi\\) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Clearly from the graph it follows that cosecant function is not bijective because the line \\(y = 1\\) and \\(y = -1\\) touches the graph at many points. However, if we restrict the domain of \\(f(x) = \\csc x\\) to the interval \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right] - \\{0\\}\\), then the function with restricted domain i.e. \\(f : \\left[-\\frac{\\pi}{2}, 0\\right) \\cup \\left(0, \\frac{\\pi}{2}\\right]\\) \\(\\to (-\\infty, 1) \\cup (1, \\infty)\\) becomes one-one and onto that is invertible and is called principal cosecant function. The inverse cosecant function is defined by",
+            "bold": [
+              "principal cosecant function"
+            ],
+            "book_errors": [
+              "\\(\\to (-\\infty, 1) \\cup (1, \\infty)\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints the codomain of the restricted function as \\((-\\infty, 1) \\cup (1, \\infty)\\). That set wrongly contains every number between \\(-1\\) and \\(1\\) (which \\(\\csc x\\) never takes) and leaves out \\(-1\\) and \\(1\\) (which it does take: \\(\\csc\\frac{\\pi}{2} = 1\\), \\(\\csc\\left(-\\frac{\\pi}{2}\\right) = -1\\)). The correct statement is\n\\[f : \\left[-\\tfrac{\\pi}{2}, 0\\right) \\cup \\left(0, \\tfrac{\\pi}{2}\\right]\\]\n\\[\\to (-\\infty, -1] \\cup [1, \\infty)\\]\nwhich matches the book's own summary table in 9.1.6."
+          },
+          {
+            "type": "equation",
+            "latex": "y = \\csc^{-1} x \\iff x = \\csc y",
+            "text_alt": "y equals inverse cosecant of x if and only if x equals cosecant of y"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Why this particular piece of the graph? On \\(\\left(0, \\frac{\\pi}{2}\\right]\\), \\(\\sin x\\) increases from 0 to 1, so \\(\\csc x\\) decreases from \\(+\\infty\\) down to 1: every value \\(\\ge 1\\) is taken exactly once. On \\(\\left[-\\frac{\\pi}{2}, 0\\right)\\), \\(\\csc x\\) runs from \\(-1\\) down to \\(-\\infty\\): every value \\(\\le -1\\) is taken exactly once. So no horizontal line meets this piece twice (one-one), and every allowed value is reached (onto).\nIt is the same interval \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\) that we used for \\(\\sin^{-1} x\\), with only 0 removed (because \\(\\sin 0 = 0\\)). This choice is what makes \\(\\csc^{-1} x = \\sin^{-1}\\frac{1}{x}\\) true (Example 4 in 9.1.6)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The domain of \\(\\csc^{-1} x = \\mathbb{R} - (-1, 1)\\) and range of \\(\\csc^{-1} x = \\left[-\\frac{\\pi}{2}, 0\\right) \\cup \\left(0, \\frac{\\pi}{2}\\right]\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The graph of the function \\(\\csc : \\left[-\\frac{\\pi}{2}, 0\\right) \\cup \\left(0, \\frac{\\pi}{2}\\right]\\) \\(\\to (-\\infty, -1) \\cup (1, \\infty)\\) is shown in Figure 9.11(a) and graph of \\(\\csc^{-1} : (-\\infty, -1) \\cup (1, \\infty)\\) \\(\\to: \\left[-\\frac{\\pi}{2}, 0\\right) \\cup \\left(0, \\frac{\\pi}{2}\\right]\\) is shown in Figure 9.11(b).",
+            "book_errors": [
+              "\\(\\to (-\\infty, -1) \\cup (1, \\infty)\\)",
+              "\\(\\csc^{-1} : (-\\infty, -1) \\cup (1, \\infty)\\)",
+              "\\(\\to: \\left[-\\frac{\\pi}{2}, 0\\right) \\cup \\left(0, \\frac{\\pi}{2}\\right]\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In this sentence the book writes \\((-\\infty, -1) \\cup (1, \\infty)\\) twice, with round brackets. The end points \\(-1\\) and \\(1\\) belong to the set, so the brackets must be closed: \\((-\\infty, -1] \\cup [1, \\infty)\\). There is also a stray colon in \\(\\to:\\), which should be just \\(\\to\\). Correctly:\n\\[\\csc^{-1} : (-\\infty, -1] \\cup [1, \\infty)\\]\n\\[\\to \\left[-\\tfrac{\\pi}{2}, 0\\right) \\cup \\left(0, \\tfrac{\\pi}{2}\\right]\\]"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch9-fig-9-11a-principal-csc",
+            "alt": "Principal branch of y = csc x: for x in (0, pi over 2] the curve comes down from plus infinity near the y-axis to the end point (pi over 2, 1); for x in [minus pi over 2, 0) it starts at the end point (minus pi over 2, minus 1) and goes down to minus infinity near the y-axis. Dashed vertical lines at x = minus pi over 2 and x = pi over 2.",
+            "caption": "Figure 9.11(a): graph of \\(y = \\csc x\\) on \\([-\\frac{\\pi}{2}, 0) \\cup (0, \\frac{\\pi}{2}]\\) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book's caption under Figure 9.11(a) reads 'Graph of \\(y = \\csc x\\) from \\(-2\\pi\\) to \\(2\\pi\\)', copied from Figure 9.10. Figure 9.11(a) shows only the principal branch on \\(\\left[-\\frac{\\pi}{2}, 0\\right) \\cup \\left(0, \\frac{\\pi}{2}\\right]\\); our caption says this."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch9-fig-9-11b-inverse-csc",
+            "alt": "Graph of y = inverse cosecant of x. For x at least 1 the curve starts at (1, pi over 2) and decreases towards the x-axis without touching it. For x at most minus 1 the curve starts at (minus 1, minus pi over 2) and rises towards the x-axis without touching it. Dashed horizontal lines y = pi over 2 and y = minus pi over 2. Nothing is drawn for x between minus 1 and 1.",
+            "caption": "Figure 9.11(b): graph of \\(y = \\csc^{-1} x\\) (original drawing after the textbook's figure)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How to read Figures 9.11(a) and 9.11(b) together: the graph of \\(\\csc^{-1} x\\) is the mirror image of the principal branch of \\(\\csc x\\) in the line \\(y = x\\). Every point \\((a, b)\\) becomes \\((b, a)\\):\n\\(\\left(\\frac{\\pi}{2}, 1\\right) \\to \\left(1, \\frac{\\pi}{2}\\right)\\) and \\(\\left(-\\frac{\\pi}{2}, -1\\right) \\to \\left(-1, -\\frac{\\pi}{2}\\right)\\).\nThe vertical asymptote \\(x = 0\\) of \\(\\csc x\\) becomes the horizontal asymptote \\(y = 0\\) (the \\(x\\)-axis) of \\(\\csc^{-1} x\\): as \\(x\\) grows large, \\(\\csc^{-1} x\\) gets close to 0 but never reaches it, because \\(\\csc y\\) is never infinite. That is why 0 is not in the range."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A quick example of our own. Find \\(\\csc^{-1} 2\\) and \\(\\csc^{-1}(-\\sqrt{2})\\).\n\\(\\csc^{-1} 2 = y\\) means \\(\\csc y = 2\\), i.e. \\(\\sin y = \\frac{1}{2}\\), with \\(y\\) in the principal range. So \\(y = \\frac{\\pi}{6}\\).\n\\(\\csc^{-1}(-\\sqrt{2}) = y\\) means \\(\\sin y = -\\frac{1}{\\sqrt{2}}\\), so \\(y = -\\frac{\\pi}{4}\\) (not \\(\\frac{5\\pi}{4}\\), which is outside the range).\n\\(\\csc^{-1}\\frac{1}{2}\\) does not exist: \\(\\frac{1}{2}\\) is not in the domain \\(\\mathbb{R} - (-1, 1)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(\\csc x\\) has domain \\(\\mathbb{R} - \\{n\\pi\\}\\) and range \\((-\\infty, -1] \\cup [1, \\infty)\\); it is periodic, so it is not one-one.\n2. Principal cosecant function: \\(\\csc : \\left[-\\frac{\\pi}{2}, 0\\right) \\cup \\left(0, \\frac{\\pi}{2}\\right] \\to (-\\infty, -1] \\cup [1, \\infty)\\).\n3. \\(y = \\csc^{-1} x \\iff x = \\csc y\\).\n4. Domain of \\(\\csc^{-1} x\\): \\(\\mathbb{R} - (-1, 1)\\); range: \\(\\left[-\\frac{\\pi}{2}, 0\\right) \\cup \\left(0, \\frac{\\pi}{2}\\right]\\).\n5. The two graphs are mirror images in \\(y = x\\); \\(y = 0\\) is a horizontal asymptote of \\(\\csc^{-1} x\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Writing \\(\\csc^{-1} x\\) as \\(\\frac{1}{\\csc x}\\): the \\(-1\\) means inverse function, not reciprocal (\\(\\frac{1}{\\csc x}\\) is just \\(\\sin x\\)).\n2. Including 0 in the range: \\(\\csc y\\) is undefined at \\(y = 0\\), so \\(\\csc^{-1} x \\ne 0\\) for every \\(x\\).\n3. Giving an answer outside \\(\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\\), e.g. \\(\\csc^{-1} 2 = \\frac{5\\pi}{6}\\): true that \\(\\csc\\frac{5\\pi}{6} = 2\\), but it is not the principal value.\n4. Trying \\(\\csc^{-1}\\) of a number between \\(-1\\) and \\(1\\): it does not exist."
+          }
+        ]
+      }
+    }
+  ]
+}

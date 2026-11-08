@@ -17,6 +17,10 @@ import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
 import { ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icons";
 import { Notice, SkeletonLines } from "@/components/ui";
+import { OutlineAccordion } from "@/components/premium/outline-accordion";
+import { OutlineSheet } from "@/components/premium/outline-sheet";
+import { ScrollProgress } from "@/components/premium/scroll-progress";
+import { getChapter } from "@/lib/api";
 import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
 import { practiceOnly } from "@/lib/exercises";
 import { GRADE_LABEL } from "@/lib/format";
@@ -24,6 +28,18 @@ import { LANGUAGE_COOKIE, missingLanguageNote, preferredLanguage, READING_LANGUA
 import { api, currentUser } from "@/lib/session";
 
 export const metadata: Metadata = { title: "Lesson" };
+
+/** PREMIUM-LOOK-01: "Chapter outline" opens the chapter's contents in a side sheet. The chapter is a shared public read
+ * (PUBLIC-CACHE-01), streamed on its own so it never holds up the lesson. */
+async function ChapterOutline({ chapterId }: { chapterId: string }) {
+  const res = await getChapter(chapterId).catch(() => null);
+  if (!res?.ok) return null;
+  return (
+    <OutlineSheet title={res.data.title}>
+      <OutlineAccordion topics={res.data.topics.filter((t) => !practiceOnly(t.kind))} base="/learn/topic" />
+    </OutlineSheet>
+  );
+}
 
 // BOOK-HEADING-01: a heading's colour by its depth (lib/book-heading.ts `headingTone`).
 // DESIGN-01: the page's chrome (switch, header, chapter opening, navigation) is glass; the lesson stays on a solid card.
@@ -141,6 +157,7 @@ async function TopicView({ id, view: asked }: { id: string; view: "read" | "lect
   );
   return (
     <article className="mx-auto max-w-3xl space-y-6" data-subject={subjectKey(reading.subject_name)}>
+      <ScrollProgress />
       {readable && (
         <form data-reading-bar action={chooseReadingLanguage} className="sticky top-0 z-10 -mx-4 space-y-2 bg-background/90 px-4 py-2.5 backdrop-blur" aria-label="Explanation language">
           <input type="hidden" name="topic" value={reading.topic_id} />
@@ -182,21 +199,26 @@ async function TopicView({ id, view: asked }: { id: string; view: "read" | "lect
         // CHAPTER-OPENING-01 (owner trial, 2026-10-27): a chapter's introduction opens with the chapter itself: its name
         // large in the subject colour on a tinted panel, then the introduction's own title.
         <header className="space-y-5">
-          <div className="glass relative overflow-hidden rounded-card px-6 py-8 sm:px-9 sm:py-11">
-            <span aria-hidden className="pointer-events-none absolute inset-0 bg-accent-soft opacity-80" />
-            <span aria-hidden className="pointer-events-none absolute -bottom-6 right-4 select-none font-display text-[8rem] font-bold leading-none text-accent opacity-10 sm:text-[10rem]">
+          {/* PREMIUM-LOOK-01: the chapter's own banner in the subject colour, as on the chapter page. */}
+          <div className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-accent to-accent-strong px-6 py-8 text-white shadow-glass sm:px-9 sm:py-11 dark:from-[color-mix(in_oklab,var(--accent)_42%,black)] dark:to-[color-mix(in_oklab,var(--accent-strong)_30%,black)]">
+            <span aria-hidden className="pointer-events-none absolute -top-16 -right-10 size-56 rounded-full bg-white/15 blur-2xl" />
+            <span aria-hidden className="pointer-events-none absolute -bottom-6 right-4 select-none font-display text-[8rem] font-bold leading-none text-white opacity-10 sm:text-[10rem]">
               {reading.chapter_number}
             </span>
             <div className="relative space-y-3">
-              <p className="flex flex-wrap items-center gap-2 text-sm font-medium text-accent">
-                <Link href={`/learn/chapter/${reading.chapter_id}`} className="underline underline-offset-2">
+              <div className="flex flex-wrap items-center gap-2 text-sm font-medium text-white/90">
+                <Link href={`/learn/chapter/${reading.chapter_id}`} className="inline-flex min-h-11 items-center underline underline-offset-2 hover:text-white">
                   {grade} · {reading.subject_name}
                 </Link>
                 {reading.availability === "private_preview" && draft}
-              </p>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Chapter {reading.chapter_number}</p>
-              <p className="font-display text-4xl font-bold tracking-tight text-accent sm:text-5xl">{reading.chapter_title}</p>
-              <div aria-hidden className="h-1 w-16 rounded-full bg-accent" />
+                <span className="ml-auto">
+                  <Suspense fallback={null}>
+                    <ChapterOutline chapterId={reading.chapter_id} />
+                  </Suspense>
+                </span>
+              </div>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/80">Chapter {reading.chapter_number}</p>
+              <p className="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">{reading.chapter_title}</p>
             </div>
           </div>
           {/* The page's heading stays the topic; the chapter above is its setting. */}
@@ -206,13 +228,18 @@ async function TopicView({ id, view: asked }: { id: string; view: "read" | "lect
         </header>
       ) : (
         <header className="glass space-y-3 rounded-card px-6 py-6 sm:px-8 sm:py-7">
-          <p className="flex flex-wrap items-center gap-2 text-sm font-semibold text-accent">
-            <Link href={`/learn/chapter/${reading.chapter_id}`} className="inline-flex items-center gap-1.5 underline underline-offset-2">
+          <div className="flex flex-wrap items-center gap-2 text-sm font-semibold text-accent">
+            <Link href={`/learn/chapter/${reading.chapter_id}`} className="inline-flex min-h-11 items-center gap-1.5 underline underline-offset-2">
               <Icon name="book-open" size={16} />
               {grade} · {reading.subject_name} · Chapter {reading.chapter_number}
             </Link>
             {reading.availability === "private_preview" && draft}
-          </p>
+            <span className="ml-auto">
+              <Suspense fallback={null}>
+                <ChapterOutline chapterId={reading.chapter_id} />
+              </Suspense>
+            </span>
+          </div>
           <h1 className={`font-display text-[28px] leading-9 font-bold tracking-tight sm:text-[36px] sm:leading-[2.75rem] ${TONE[headingTone(reading.number) ?? "topic"]}`}>
             {reading.number ? `${reading.number} ${reading.title}` : reading.title}
           </h1>

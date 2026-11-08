@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q9-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q9",
+      "title": "Question 9 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 9: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-3-Q9",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9. Evaluate \\(\\int e^x\\ln(1 + e^x)\\,dx\\).",
+            "explanation": "Pehle shakal ghaur se dekhiye: \\(\\ln(1 + e^x)\\) ke saath \\(e^x\\) bhi hai, aur \\(e^x\\) bilkul \\(1 + e^x\\) ka derivative hai.\nIs ka matlab hai substitution ka raasta khula hai: \\(u = 1 + e^x\\).\nSubstitution ke baad \\(\\int \\ln u\\,du\\) bachega, jo Question 1 mein hum parts se nikal chuke hain.\nPlan: substitution, phir parts (ln \\(\\times\\) 1), phir wapas \\(x\\) mein.",
+            "steps": [
+              "Diya gaya: \\(\\int e^x\\ln(1 + e^x)\\,dx\\).\nMaloom karna: indefinite integral.\nTareeqa: \\(u = 1 + e^x\\) rakhenge, \\(du = e^x\\,dx\\); phir \\(\\int \\ln u\\,du\\) parts se (Question 1 ki tarah).",
+              "Substitution\n\\[u = 1 + e^x \\Rightarrow du = e^x\\,dx\\]\n\\[\\int e^x\\ln(1 + e^x)\\,dx = \\int \\ln u\\,du\\]\nKyun: \\(e^x\\,dx\\) bilkul \\(du\\) ban gaya aur \\(\\ln(1 + e^x)\\) ban gaya \\(\\ln u\\). Integral bohat saaf ho gaya.",
+              "Parts: \\(\\ln u \\cdot 1\\)\n\\[= u\\ln u - \\int u\\cdot\\dfrac{1}{u}\\,du\\]\n\\[= u\\ln u - u + c_1\\]\nKyun: Question 1 wali chaal: \\(\\ln u\\) first, 1 second; andar \\(u\\cdot\\frac{1}{u} = 1\\) reh gaya.",
+              "Wapas \\(x\\) mein\n\\[= (1 + e^x)\\ln(1 + e^x) - (1 + e^x) + c_1\\]\n\\[= (e^x + 1)\\ln(1 + e^x) - e^x + c\\]\nKyun: \\(u = 1 + e^x\\) wapas rakha. \\(-(1 + e^x)\\) mein se \\(-1\\) ek constant hai, usay \\(c_1\\) ke saath mila kar naya constant \\(c = c_1 - 1\\) bana diya. Is liye answer key wali shakal bhi sahi hai.\nDhyan dein: dono jawab, \\(-(1 + e^x)\\) wala aur \\(-e^x\\) wala, sahi hain; farq sirf constant ka hai.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left[(e^x + 1)\\ln(1 + e^x) - e^x\\right]\\]\n\\[= e^x\\ln(1 + e^x) + (e^x + 1)\\dfrac{e^x}{1 + e^x} - e^x\\]\n\\[= e^x\\ln(1 + e^x)\\]\nKyun: product rule lagaya; \\((e^x + 1)\\) cancel ho kar \\(e^x\\) bacha jo \\(-e^x\\) se khatam ho gaya."
+            ],
+            "final_answer": "\\((e^x + 1)\\ln(1 + e^x) - e^x + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

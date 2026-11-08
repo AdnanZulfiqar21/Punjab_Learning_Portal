@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q12",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q12",
+      "title": "Question 12",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 135,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 12: book p. 133-134; answers printed under 'EXERCISE 4.2' (book p. 303, PDF 305), numbered 2-29, matched by content"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "12",
+            "prompt": "12. Find the general solution of the differential equation \\(x\\sin x\\,dx + \\ln y\\,dy = 0\\).",
+            "explanation": "The variables are already separated: \\(x\\) only with \\(dx\\), \\(y\\) only with \\(dy\\).\nPlan: integrate each term; both integrals need integration by parts.",
+            "steps": [
+              "Given: \\(x\\sin x\\,dx + \\ln y\\,dy = 0\\), \\(y > 0\\).\nTo find: the general solution.\nMethod: separable (already separated). Integrate term by term; use integration by parts \\(\\int u\\,dv = uv - \\int v\\,du\\) for \\(\\int x\\sin x\\,dx\\) and \\(\\int\\ln y\\,dy\\).",
+              "Write the integrals\n\\[\\int x\\sin x\\,dx + \\int\\ln y\\,dy = C\\]\nWhy: integrate both terms; the integral of 0 is a constant.",
+              "First integral (\\(u = x\\), \\(dv = \\sin x\\,dx\\))\n\\[\\int x\\sin x\\,dx = -x\\cos x + \\int\\cos x\\,dx\\]\n\\[= -x\\cos x + \\sin x\\]\nWhy: \\(du = dx\\), \\(v = -\\cos x\\); choosing \\(u = x\\) makes it simpler after differentiating.",
+              "Second integral (\\(u = \\ln y\\), \\(dv = dy\\))\n\\[\\int\\ln y\\,dy = y\\ln y - \\int y \\cdot \\dfrac{1}{y}\\,dy\\]\n\\[= y\\ln y - y\\]\nWhy: \\(du = \\frac{1}{y}\\,dy\\), \\(v = y\\).",
+              "Combine\n\\[-x\\cos x + \\sin x + y\\ln y - y = C\\]\n\\[y\\ln y = y + x\\cos x - \\sin x + C\\]\nWhy: move every term except \\(y\\ln y\\) to the right side.",
+              "Check\nDifferentiate \\(y\\ln y - y - x\\cos x + \\sin x = C\\):\n\\[(\\ln y + 1)\\dfrac{dy}{dx} - \\dfrac{dy}{dx} - \\cos x + x\\sin x + \\cos x = 0\\]\n\\[\\ln y\\dfrac{dy}{dx} + x\\sin x = 0\\]\nMultiply by \\(dx\\): the given equation."
+            ],
+            "final_answer": "\\(y\\ln y = y + x\\cos x - \\sin x + C\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

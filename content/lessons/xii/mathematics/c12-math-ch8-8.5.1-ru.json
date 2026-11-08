@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.5.1-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.5.1",
+      "title": "8.5.1 Chemical Reactions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-8.5.1",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 251,
+          "pdf_to": 252,
+          "note": "Book p. 249-250: 8.5.1 Chemical Reactions, Example 1 (shown as Example 8): x e^x = 1 by Newton-Raphson, two iterations, x = 0.57 moles per liter."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Chaliye ab pehla real-life application dekhte hain: chemistry. Kitab kehti hai: bohat si chemical reactions mein equilibrium concentration (reaction ke thehar jane par kisi cheez ki miqdar) ya reaction rate (reaction kitni tezi se ho raha hai) nonlinear equations tak le jata hai. Yeh equations aksar analytically (seedhe algebra se) hal karna mushkil hota hai, is liye taqreebi values nikaalne ke liye numerical methods use kiye jate hain. Lab mein kaam karne wale chemist ke liye 0.57 aur 0.5671 mein koi khaas farq nahin, use bas itni accuracy chahiye jitni us ke tajurbe ke liye kaafi ho, aur numerical method bilkul yahi deta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "Kitab 8.5 mein examples ki ginti phir se 1 se shuru kar deti hai aur is example ko 'Example 1' chhaapti hai (is unit mein yeh teesra Example 1 hai). Taa ke Unit 8 ki har example ka apna alag number ho, hum 8.5 ki kitabi Examples 1, 2, 3 aur 4 ko Examples 8, 9, 10 aur 11 dikhate hain (Examples 1-5, 8.2-8.3 mein hain aur Examples 6-7, 8.4.1 mein)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yahan Newton-Raphson hi kyun? Dekhiye, \\(f(x) = xe^{x} - 1\\) har jagah differentiable hai aur \\(f'(x)\\) likhna aasaan hai. Newton-Raphson har qadam par tangent line (woh seedhi line jo curve ko ek point par sirf chhooti hai) use karta hai, is liye ghalti bohat jaldi kam hoti hai. Neeche wali example mein do decimal places ke liye sirf do iterations kaafi hain. Bisection se yahi kaam karne mein taqreeban saat aath iterations lagtin."
+          },
+          {
+            "type": "example",
+            "title": "Example 8",
+            "problem": "In a chemical reaction, the concentration \\(x\\) (in moles per liter) of a product at equilibrium satisfies the relation \\(xe^{x} = 1\\). Find the equilibrium concentration correct to two decimal places using Newton-Raphson Method.",
+            "steps": [
+              "Diya gaya: \\(xe^{x} = 1\\), jahan \\(x\\) concentration hai (moles per liter mein).\nMaloom karna: \\(x\\), do decimal places tak durust.\nTareeqa: Newton-Raphson. Pehle equation ko \\(f(x) = 0\\) banayenge, phir \\(f'(x)\\) nikalenge, root ke qareeb ek shuruati value lenge aur \\(x_{n+1} = x_n - f(x_n)/f'(x_n)\\) baar baar lagayenge. Yeh method yahan is liye munasib hai ke \\(f\\) har jagah differentiable hai aur is ka derivative aasaani se nikal aata hai, aur sawal ne bhi yahi method maanga hai.",
+              "Function banaiye\n\\[f(x) = xe^{x} - 1\\]\nKyun: Newton-Raphson hamesha \\(f(x) = 0\\) ka root dhoondta hai, is liye right side wala 1 left par le aaye. Ab jis \\(x\\) par \\(f(x) = 0\\) ho, wahi hamari concentration hai.",
+              "Derivative nikaaliye\n\\[f'(x) = e^{x} + xe^{x}\\]\nYeh har real number \\(x\\) par mojood hai.\nKyun: \\(x \\cdot e^{x}\\) do functions ka product hai, is liye product rule: pehle ka derivative \\(\\times\\) doosra + pehla \\(\\times\\) doosre ka derivative \\(= 1 \\cdot e^{x} + x \\cdot e^{x}\\). Constant \\(-1\\) ka derivative zero hai.\nDhyan dein: bohat se students sirf \\(e^{x}\\) likh dete hain aur \\(xe^{x}\\) wala hissa bhool jate hain.",
+              "Newton-Raphson formula\n\\[x_{n+1} = x_n - \\dfrac{f(x_n)}{f'(x_n)}\\]\n\\[x_{n+1} = x_n - \\dfrac{x_n e^{x_n} - 1}{e^{x_n} + x_n e^{x_n}}\\]\nKyun: hum ne apna f aur f' ek dafa general formula mein daal diya; ab har iteration sirf value rakhne ka kaam hai. Calculator mein bhi yahi poora formula ek baar type kar ke Ans key se baar baar chala sakte hain.",
+              "Root kahan hai?\n\\[f(0) = 0 \\cdot e^{0} - 1 = -1\\]\n\\[f(1) = 1 \\cdot e^{1} - 1 = 1.718\\]\nYani root 0 aur 1 ke darmiyan hai.\nKyun: \\(f(0)\\) negative aur \\(f(1)\\) positive hai, aur \\(f\\) continuous hai. Location of Root Theorem kehta hai ke graph ko negative se positive jane ke liye x-axis kahin na kahin cross karna parega, yani \\([0, 1]\\) mein root zaroor hai.",
+              "Shuruati guess\n\\[f(0.5) = 0.5e^{0.5} - 1 = -0.1756\\]\nYeh zero ke kaafi qareeb hai. \\(f\\) \\(x_0 = 0.5\\) ke qareeb differentiable hai (is liye continuous bhi), to hum \\(x_0 = 0.5\\) lete hain aur Newton-Raphson formula lag sakta hai.\nKyun: Newton-Raphson ko root ke qareeb se shuru karna chahiye. 0.5 interval ka darmiyan hai aur \\(|f(0.5)| = 0.1756\\) baqi dono kinaron \\((1\\) aur \\(1.718)\\) se bohat chhota hai.",
+              "Pehli iteration\n\\[f(0.5) = -0.1756\\]\n\\[f'(0.5) = e^{0.5} + 0.5e^{0.5}\\]\n\\[= 1.6487 + 0.8244 = 2.4731\\]\n\\[x_1 = 0.5 - \\dfrac{-0.1756}{2.4731}\\]\n\\[= 0.5 + 0.0710 = 0.5710\\]\nKyun: formula mein \\(x_0 = 0.5\\) rakha. Minus aur minus mil kar plus ban gaye, is liye \\(x\\) right ki taraf, root ki taraf, chala gaya.\nDhyan dein: \\(0.5 + 0.0710\\) ka asal hisaab 0.57102 hai jo 4 places par 0.5710 banta hai (kitab ne 0.5711 likha hai, neeche Kitab ki ghalti dekhiye).",
+              "Naye point par f ki value\n\\[f(0.5710) = 0.5710 \\cdot e^{0.5710} - 1\\]\n\\[\\approx 0.0107\\]\nKyun: \\(|f(x_1)|\\) ab \\(|f(x_0)|\\) se taqreeban 16 guna chhota hai, yani hum root ke bohat qareeb aa gaye. Lekin 0.0107 abhi tolerance 0.005 se bara hai, is liye ek aur iteration.",
+              "Doosri iteration\n\\[f'(0.5710) = e^{0.5710} + 0.5710 e^{0.5710}\\]\n\\[\\approx 2.7807\\]\n\\[x_2 = 0.5710 - \\dfrac{0.0107}{2.7807}\\]\n\\[\\approx 0.5672\\]\nKyun: wahi formula, ab \\(x_0\\) ki jagah \\(x_1\\). Is dafa \\(f(x_1)\\) positive hai, is liye qadam left ki taraf gaya: hum root se thora aage nikal gaye the, ab wapas aaye.",
+              "Rukne ka faisla\n\\[f(0.5672) = 0.5672 \\cdot e^{0.5672} - 1\\]\n\\[\\approx 1.0002 - 1 = 0.0002\\]\nKyun: \\(0.0002 < 0.005\\), jo do decimal places ki tolerance hai (8.3.1). Is liye doosra decimal pakka ho gaya aur hum ruk jate hain.",
+              "Tasdeeq:\nSign test: \\(f(0.565) \\approx -0.0059 < 0\\) aur \\(f(0.575) \\approx 0.0219 > 0\\). Yani root \\(]0.565, 0.575[\\) mein hai aur wahan ka har number 0.57 par round hota hai.\nWapas rakh kar: \\(0.57 \\times e^{0.57} = 0.57 \\times 1.7683 \\approx 1.008 \\approx 1\\). Asal root \\(x = 0.5671\\ldots\\) hai."
+            ],
+            "answer": "\\(x \\approx 0.57\\) moles per liter"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "1. Kitab \\(f(1) = i.e^{1} - 1\\) chhaapti hai; sahi \\(f(1) = 1 \\cdot e^{1} - 1 = 1.718\\) hai. 'closed to zero' asal mein 'close to zero' hai.\n2. Pehli iteration mein kitab \\(f(0.5) = -0.1757\\) likhti hai, halaanke chand line pehle \\(-0.1756\\) likha tha; sahi \\(-0.1756\\) hai, aur \\(f'(0.5) = 2.47308 \\approx 2.4731\\) hai (kitab 2.4730).\n3. \\(x_1 = 0.57102 \\approx 0.5710\\) hai, 0.5711 nahin. (Kitab ka \\(f(x_1) \\approx 0.0107\\) asal mein 0.5710 par value hai; 0.5711 par yeh 0.0110 hoti.)\n4. Is liye \\(f'(x_1) \\approx 2.7807\\) (kitab 2.7813) aur \\(x_2 \\approx 0.5672\\) (kitab 0.5673) hain, aur \\(f(0.5672) \\approx 0.0002\\).\nAsal root \\(0.5671\\ldots\\) hai, is liye kitab ka aakhri jawab \\(x \\approx 0.57\\) moles per liter bilkul sahi hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Newton-Raphson itna tez kyun nikla? Root ke qareeb f ka graph taqreeban seedhi line jaisa hota hai, aur tangent line x-axis ko taqreeban wahin kaat-ti hai jahan curve kaat-ta hai. Mote taur par har iteration mein sahi decimal places ki tadaad double ho jati hai: 0.5, phir 0.57, phir 0.5672.\nConcentration negative nahin ho sakti, aur waise bhi har \\(x \\le 0\\) ke liye \\(f(x) = xe^{x} - 1 < 0\\) hai. Is liye 0.57 hi wahid ba-maani (balke wahid real) root hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Calculator par yeh kaam kaise karein? Sab se pehle calculator ko radian mode mein rakhiye (yahan sin cos nahin hai, lekin aadat achhi hai). Phir 0.5 likh kar = dabaiye, taa ke yeh Ans mein chala jaye. Ab poora formula ek dafa type kijiye: Ans - (Ans e^Ans - 1) / (e^Ans + Ans e^Ans). Har dafa = dabane par agli value aa jayegi: 0.5710, 0.5672, 0.5671, 0.5671. Jab do baar wahi value aaye to samajh lijiye ke root mil gaya.\nIs tareeqe ka faida yeh hai ke beech mein copy karte waqt koi digit ghalat nahin hota, aur exam mein waqt bhi bachta hai. Lekin paper par har iteration ki substitution zaroor likhiye, kyun ke examiner ko working chahiye, sirf aakhri number nahin."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Agar hum \\(x_0 = 1\\) se shuru karte to kya hota? \\(f(1) = 1.7183\\), \\(f'(1) = 2e = 5.4366\\), to \\(x_1 = 1 - 0.3161 = 0.6839\\). Root phir bhi milta, bas ek do iterations zyada lagtin. Yani achha guess waqt bachata hai, magar is example mein jawab wahi 0.57 aata."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "Isi tareeqe se \\(xe^{x} = 2\\) hal kar ke dekhiye (yeh Exercise 8.2 mein bhi aata hai). \\(f(x) = xe^{x} - 2\\), \\(f(0) = -2\\), \\(f(1) = 0.7183\\), to \\(x_0 = 1\\) lein: \\(x_1 = 1 - \\frac{0.7183}{5.4366} = 0.8679\\), \\(x_2 \\approx 0.8528\\), aur \\(x_3 \\approx 0.8526\\). Jawab \\(x \\approx 0.85\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Formula mein apna f aur f' daal kar ek dafa likh dijiye, phir chhoti si table banaiye: \\(n\\), \\(x_n\\), \\(f(x_n)\\), \\(f'(x_n)\\), \\(x_{n+1}\\). Examiner substitution, rukne ki wajah (|f| tolerance se kam) aur aakhri jawab ke saath unit dekhta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "Equilibrium ke masail \\(xe^{x} = 1\\) jaisi equations dete hain jo algebra se hal nahin hotin.\nNewton-Raphson: \\(x_{n+1} = x_n - f(x_n)/f'(x_n)\\); yahan product rule se \\(f'(x) = e^{x} + xe^{x}\\).\nAchha aaghaz: \\(f(0) < 0\\), \\(f(1) > 0\\), is liye \\(x_0 = 0.5\\).\nDo decimal places ke liye \\(|f(x_n)| < 0.005\\) par ruk jaiye: \\(x \\approx 0.57\\) moles per liter."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "\\(xe^{x}\\) ka derivative sirf \\(e^{x}\\) likh dena, yani product rule bhool jana.\n\\(x_1\\) ko laparwahi se round karna: 0.57102 chaar places par 0.5710 hai; aakhri digit ki ghalti aage har qadam mein chalti rehti hai.\nSirf yeh dekh kar ruk jana ke do values qareeb lag rahi hain, aur |f| ko tolerance se compare na karna."
+          }
+        ]
+      }
+    }
+  ]
+}

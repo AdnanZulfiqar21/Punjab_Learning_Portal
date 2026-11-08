@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q1",
+      "title": "Question 1",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 274,
+          "pdf_to": 274,
+          "note": "Exercise 9.2, Question 1 (book p. 272); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "1",
+            "prompt": "1. Prove that \\(\\sin^{-1}\\frac{7}{25} + \\sin^{-1}\\frac{15}{17} = \\cos^{-1}\\frac{87}{425}\\).",
+            "explanation": "A proof with numbers: two \\(\\sin^{-1}\\) angles on the left, one \\(\\cos^{-1}\\) on the right.\nPlan: write both left angles in \\(\\cos^{-1}\\) form (right triangles), then add them with formula (iii).",
+            "steps": [
+              "Given: \\(\\sin^{-1}\\frac{7}{25}\\) and \\(\\sin^{-1}\\frac{15}{17}\\).\nTo prove: their sum is \\(\\cos^{-1}\\frac{87}{425}\\).\nMethod: the answer is a \\(\\cos^{-1}\\), so use formula (iii): \\(\\cos^{-1}x + \\cos^{-1}y = \\cos^{-1}\\left(xy - \\sqrt{(1-x^{2})(1-y^{2})}\\right)\\). First write each angle as a \\(\\cos^{-1}\\).",
+              "Write \\(\\sin^{-1}\\frac{7}{25}\\) as a \\(\\cos^{-1}\\)\n\\[\\alpha = \\sin^{-1}\\tfrac{7}{25},\\quad \\sin\\alpha = \\tfrac{7}{25}\\]\n\\[\\cos\\alpha = \\sqrt{1 - \\tfrac{49}{625}} = \\sqrt{\\tfrac{576}{625}}\\]\n\\[= \\tfrac{24}{25}\\]\n\\[\\alpha = \\cos^{-1}\\tfrac{24}{25}\\]\nWhy: \\(\\sin^{2}\\alpha + \\cos^{2}\\alpha = 1\\). The sine is positive, so \\(\\alpha\\) is in \\(\\left[0, \\frac{\\pi}{2}\\right]\\), where cosine is positive; that is also where \\(\\cos^{-1}\\frac{24}{25}\\) lies, so it is the same angle.",
+              "Write \\(\\sin^{-1}\\frac{15}{17}\\) as a \\(\\cos^{-1}\\)\n\\[\\beta = \\sin^{-1}\\tfrac{15}{17},\\quad \\sin\\beta = \\tfrac{15}{17}\\]\n\\[\\cos\\beta = \\sqrt{1 - \\tfrac{225}{289}} = \\sqrt{\\tfrac{64}{289}}\\]\n\\[= \\tfrac{8}{17}\\]\n\\[\\beta = \\cos^{-1}\\tfrac{8}{17}\\]\nWhy: the same reasoning (8, 15, 17 is a Pythagorean triple).",
+              "Apply formula (iii) with \\(x = \\frac{24}{25},\\ y = \\frac{8}{17}\\)\n\\[\\sqrt{1-x^{2}} = \\tfrac{7}{25},\\quad \\sqrt{1-y^{2}} = \\tfrac{15}{17}\\]\n\\[\\text{L.H.S} = \\cos^{-1}\\tfrac{24}{25} + \\cos^{-1}\\tfrac{8}{17}\\]\n\\[= \\cos^{-1}\\left(\\tfrac{24}{25}\\cdot\\tfrac{8}{17} - \\tfrac{7}{25}\\cdot\\tfrac{15}{17}\\right)\\]\nWhy: the square roots are just the sines we started with. Formula (iii) needs \\(x + y \\ge 0\\), which is true.",
+              "Simplify\n\\[= \\cos^{-1}\\left(\\tfrac{192}{425} - \\tfrac{105}{425}\\right)\\]\n\\[= \\cos^{-1}\\tfrac{87}{425} = \\text{R.H.S}\\]\nWhy: \\(25 \\times 17 = 425\\), \\(24 \\times 8 = 192\\), \\(7 \\times 15 = 105\\), and \\(192 - 105 = 87\\).",
+              "Check\n\\[\\sin^{-1}\\tfrac{7}{25} + \\sin^{-1}\\tfrac{15}{17} \\approx 0.2838 + 1.0808\\]\n\\[= 1.3646\\]\n\\[\\cos^{-1}\\tfrac{87}{425} \\approx 1.3646\\ \\checkmark\\]\nWhy: a calculator in radian mode gives the same angle on both sides."
+            ],
+            "final_answer": "Hence proved: \\(\\sin^{-1}\\frac{7}{25} + \\sin^{-1}\\frac{15}{17} = \\cos^{-1}\\frac{87}{425}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 9.2. Every solution on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

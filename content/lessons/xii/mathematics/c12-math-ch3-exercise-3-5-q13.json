@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q13",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q13",
+      "title": "Question 13",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 104,
+          "note": "Exercise 3.5, Question 13: show-that for even f with 1 + e^x, then evaluate; book p. 102. Key on p. 300 under 'Exercise 3.2'."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "13",
+            "prompt": "13 Show that \\(\\int_{-a}^{a} \\frac{f(x)}{1 + e^x}\\,dx = \\int_{0}^{a} f(x)\\,dx\\), where \\(f(x)\\) is an even function. Hence or otherwise evaluate \\(\\int_{-a}^{a} \\frac{x^2}{1 + e^x}\\,dx\\).",
+            "explanation": "A symmetric interval and \\(1 + e^x\\) in the denominator.\nProperty V gives \\(\\int_0^a [h(x) + h(-x)]\\,dx\\); with \\(f\\) even, \\(h(x) + h(-x)\\) simplifies to \\(f(x)\\) because \\(\\frac{1}{1 + e^x} + \\frac{e^x}{1 + e^x} = 1\\).\nThen apply the result to \\(f(x) = x^2\\).",
+            "steps": [
+              "Given: \\(f(-x) = f(x)\\).\nTo prove: \\(\\int_{-a}^{a} \\frac{f(x)}{1 + e^x}\\,dx = \\int_{0}^{a} f(x)\\,dx\\); then evaluate \\(\\int_{-a}^{a} \\frac{x^2}{1 + e^x}\\,dx\\).\nMethod: Property V \\(\\int_{-a}^{a} h(x)\\,dx = \\int_0^a \\big(h(x) + h(-x)\\big)\\,dx\\) with \\(h(x) = \\frac{f(x)}{1 + e^x}\\).",
+              "Find \\(h(-x)\\)\n\\[h(-x) = \\dfrac{f(-x)}{1 + e^{-x}} = \\dfrac{f(x)\\,e^{x}}{e^{x} + 1}\\]\nWhy: \\(f\\) is even; multiply top and bottom by \\(e^{x}\\).",
+              "Add \\(h(x) + h(-x)\\)\n\\[\\dfrac{f(x)}{1 + e^x} + \\dfrac{f(x)\\,e^x}{1 + e^x} = \\dfrac{f(x)(1 + e^x)}{1 + e^x}\\]\n\\[= f(x)\\]\nWhy: same denominator.",
+              "Apply Property V\n\\[\\int_{-a}^{a} \\dfrac{f(x)}{1 + e^x}\\,dx = \\int_{0}^{a} f(x)\\,dx\\]\nWhy: this proves the result.",
+              "Hence evaluate with \\(f(x) = x^2\\)\n\\[\\int_{-a}^{a} \\dfrac{x^2}{1 + e^x}\\,dx = \\int_{0}^{a} x^2\\,dx\\]\n\\[= \\left[\\dfrac{x^3}{3}\\right]_{0}^{a} = \\dfrac{a^3}{3}\\]\nWhy: \\(x^2\\) is even, so the proved result applies.",
+              "Check\n\\[a = 2:\\ \\int_{-2}^{2} \\dfrac{x^2}{1 + e^x}\\,dx \\approx 2.6667 = \\dfrac{8}{3} \\;\\checkmark\\]\nWhy: a numerical evaluation for \\(a = 2\\) gives \\(\\frac{2^3}{3}\\). The key prints \\(\\frac{a^3}{3}\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\int_{-a}^{a} \\frac{f(x)}{1 + e^x}\\,dx = \\int_{0}^{a} f(x)\\,dx\\); and \\(\\int_{-a}^{a} \\frac{x^2}{1 + e^x}\\,dx = \\frac{a^3}{3}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

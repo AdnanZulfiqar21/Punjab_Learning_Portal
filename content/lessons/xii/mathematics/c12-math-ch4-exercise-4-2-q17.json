@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-2-Q17",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-2-q17",
+      "title": "Question 17",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 136,
+          "pdf_to": 136,
+          "note": "Exercise 4.2, Question 17: book p. 134 (Q2-Q25 general solutions and IVPs); answer key p. 303 (keys numbered 2-29)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "17",
+            "prompt": "17 Find the general solution of the differential equation \\(x\\frac{dy}{dx} = x e^{-y/x} + y\\).",
+            "explanation": "Dividing by \\(x\\) gives \\(\\frac{dy}{dx} = e^{-y/x} + y/x\\), a function of \\(y/x\\) only, so the equation is homogeneous.\nWe must find the general solution.\nPlan: put \\(y = vx\\), cancel \\(v\\), separate, integrate \\(e^{v}\\), put back \\(v\\).",
+            "steps": [
+              "Given: \\(x\\frac{dy}{dx} = xe^{-y/x} + y\\).\nTo find: the general solution.\nMethod: Homogeneous equation: substitute \\(y = vx\\), \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\).",
+              "Divide by \\(x\\)\n\\[\\dfrac{dy}{dx} = e^{-y/x} + \\dfrac{y}{x}\\]\nWhy: this shows the right side depends only on \\(y/x\\).",
+              "Substitute \\(y = vx\\)\n\\[v + x\\dfrac{dv}{dx} = e^{-v} + v\\]\n\\[x\\dfrac{dv}{dx} = e^{-v}\\]\nWhy: \\(v\\) cancels from both sides.",
+              "Separate the variables\n\\[\\dfrac{dv}{e^{-v}} = \\dfrac{dx}{x}\\]\n\\[e^{v}\\,dv = \\dfrac{dx}{x}\\]\nWhy: \\(\\frac{1}{e^{-v}} = e^{v}\\).",
+              "Integrate\n\\[e^{v} = \\ln|x| + \\ln|C|\\]\n\\[e^{v} = \\ln|Cx|\\]\nWhy: \\(\\int e^{v}\\,dv = e^{v}\\) and \\(\\int \\frac{dx}{x} = \\ln|x|\\).",
+              "Put back \\(v = y/x\\)\n\\[e^{y/x} = \\ln|Cx|\\]\nWhy: the answer must be in \\(x\\) and \\(y\\).",
+              "Check\nDifferentiate: \\(e^{y/x}\\,\\dfrac{xy' - y}{x^2} = \\dfrac{1}{x}\\), so\n\\[xy' - y = xe^{-y/x}\\]\nwhich is the given equation \\(\\checkmark\\)\nWhy: multiply both sides by \\(x^2 e^{-y/x}\\)."
+            ],
+            "final_answer": "\\(e^{y/x} = \\ln|Cx|\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key prints this answer as number 20, not 17. The Exercise 4.2 keys are numbered 2 to 29 for 25 questions (key 2 answers Question 1, and the extra keys 15, 19 and 27 match no printed question), so look for this answer under 20. The answer itself, \\(e^{y/x} = \\ln|Cx|\\), is correct."
+          }
+        ]
+      }
+    }
+  ]
+}

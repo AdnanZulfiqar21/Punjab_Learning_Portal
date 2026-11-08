@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-4.2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/4.2",
+      "title": "4.2 Solution of First-Order and First-Degree Differential Equations",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 131,
+          "pdf_to": 131,
+          "note": "Book p. 129 (PDF 131): 4.2 general form dy/dx = f(x,y), differential form M dx + N dy = 0, Examples (i)-(ii), solution, initial value condition, IVP; text before 4.2.1"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "General form of the first order and first degree differential equations."
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{dy}{dx} = f(x, y)",
+            "text_alt": "d y by d x equals f of x and y"
+          },
+          {
+            "type": "paragraph",
+            "text": "where \\(f\\) is a function of two variables \\(x\\) and \\(y\\), defined on some region of the \\(xy\\)-plane. It is always possible to write the above equation in differential form as follows:"
+          },
+          {
+            "type": "equation",
+            "latex": "M(x, y)\\,dx + N(x, y)\\,dy = 0",
+            "text_alt": "M of x and y times d x plus N of x and y times d y equals zero"
+          },
+          {
+            "type": "paragraph",
+            "text": "where \\(M(x, y)\\) and \\(N(x, y)\\) are the functions of \\(x\\) and \\(y\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Recall from 4.1: \"first order\" means the highest derivative in the equation is \\(\\frac{dy}{dx}\\) (no \\(\\frac{d^2y}{dx^2}\\) or higher). \"First degree\" means \\(\\frac{dy}{dx}\\) appears only to the power 1 (no \\(\\left(\\frac{dy}{dx}\\right)^2\\)). So every equation in this section can be solved for \\(\\frac{dy}{dx}\\) and written as \\(\\frac{dy}{dx} = f(x, y)\\).\nWhy two forms? The form \\(\\frac{dy}{dx} = f(x, y)\\) shows the rate of change clearly; the differential form \\(M\\,dx + N\\,dy = 0\\) is handy when we want to separate or integrate. They carry the same information:\n\\[M\\,dx + N\\,dy = 0\\]\n\\[\\Rightarrow \\dfrac{dy}{dx} = -\\dfrac{M}{N}, \\quad N \\ne 0\\]"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Examples"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "(i) \\(\\frac{dy}{dx} = \\frac{x + y}{y - x}\\) or \\((x + y)\\,dx + (x - y)\\,dy = 0\\)",
+              "(ii) \\(\\frac{dy}{dx} = -\\frac{x}{y}\\) or \\(x\\,dx + y\\,dy = 0\\)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "How the book changes (i) into differential form (the step it leaves out): cross-multiply, then bring every term to one side.\n\\[(y - x)\\,dy = (x + y)\\,dx\\]\n\\[(x + y)\\,dx - (y - x)\\,dy = 0\\]\n\\[(x + y)\\,dx + (x - y)\\,dy = 0\\]\nThe last line uses \\(-(y - x) = x - y\\). For (ii): \\(y\\,dy = -x\\,dx\\), so \\(x\\,dx + y\\,dy = 0\\). Here \\(M = x\\) and \\(N = y\\)."
+          },
+          {
+            "type": "paragraph",
+            "text": "A solution of a differential equation is a function defined on some interval \\(I\\) that reduces the equation to an identity. A condition of the form"
+          },
+          {
+            "type": "paragraph",
+            "text": "\\[y = y_0 \\ \\text{at} \\ x = x_0\\]\nwritten as\n\\[y(x_0) = y_0\\]"
+          },
+          {
+            "type": "paragraph",
+            "text": "is called an initial value condition or one point boundary condition. A differential equation together with an initial value condition is called an Initial Value Problem (IVP).",
+            "bold": [
+              "initial value condition",
+              "one point boundary condition",
+              "Initial Value Problem (IVP)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What \"reduces the equation to an identity\" means: put the function and its derivative into the equation; both sides become exactly the same expression for every \\(x\\) in \\(I\\).\nOur own illustration: for \\(\\frac{dy}{dx} = 2x\\), the function \\(y = x^2 + c\\) is a solution for every constant \\(c\\), because \\(\\frac{d}{dx}(x^2 + c) = 2x\\). This whole family (one curve for each \\(c\\)) is the general solution.\nIf we also demand \\(y(0) = 3\\) (an IVP), then \\(3 = 0 + c\\), so \\(c = 3\\) and the one curve we want is \\(y = x^2 + 3\\): the particular solution. The initial condition picks one curve, the one passing through the point \\((x_0, y_0)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "What comes next: this section solves two kinds of first-order, first-degree equations.\n4.2.1 Separable: the right side splits as (function of \\(x\\)) \\(\\times\\) (function of \\(y\\)).\n4.2.2 Homogeneous: the right side depends only on the ratio \\(\\frac{y}{x}\\); the substitution \\(y = vx\\) turns it into a separable equation.\nSo the first job in every question is the same: write the equation as \\(\\frac{dy}{dx} = f(x, y)\\) and look carefully at \\(f\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. A first-order, first-degree equation can always be written as \\(\\frac{dy}{dx} = f(x, y)\\) or as \\(M\\,dx + N\\,dy = 0\\).\n2. A solution is a function that makes the equation an identity on an interval \\(I\\).\n3. The general solution contains one arbitrary constant; it is a family of curves.\n4. An initial value condition \\(y(x_0) = y_0\\) fixes that constant. Equation + initial condition = Initial Value Problem (IVP).\n5. In an IVP, first find the general solution, then substitute \\(x_0\\) and \\(y_0\\) to find the constant."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Losing a sign when changing to differential form: from \\((y - x)\\,dy = (x + y)\\,dx\\) the term moved across changes sign.\n2. Reading \\(y(x_0) = y_0\\) as \"y times \\(x_0\\)\". It means: the value of \\(y\\) when \\(x = x_0\\).\n3. Forgetting the arbitrary constant: without it you have only one solution, not the general solution, and an IVP cannot be solved."
+          }
+        ]
+      }
+    }
+  ]
+}

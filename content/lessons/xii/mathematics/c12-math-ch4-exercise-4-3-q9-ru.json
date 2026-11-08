@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-EXERCISE-4-3-Q9-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-exercise-4-3-q9",
+      "title": "Question 9 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 141,
+          "pdf_to": 141,
+          "note": "Exercise 4.3, Q9; book page 139"
+        },
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 305,
+          "pdf_to": 305,
+          "note": "Answers, Exercise 4.3, key 9"
+        }
+      ],
+      "variant_of": "C12-MATH-CH4-EXERCISE-4-3-Q9",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "9",
+            "prompt": "9 A fully insulated battery overheats during operation and reaches 80 °C. After shutdown, it begins to cool without any external influence. If it cools to 50 °C in 2 hours, how long will it take to cool to 15 °C?",
+            "explanation": "Yeh cooling ka sawal hai, lekin is mein kamre (surroundings) ka temperature diya hi nahi gaya; sawal kehta hai 'baghair kisi bairooni asar ke'.\nIs liye hum thanda hone ki raftar ko seedha temperature ke proportional lete hain: \\(\\frac{dT}{dt} = -kT\\). Yeh Newton's law hai jis mein \\(T_S = 0\\)°C maan liya gaya hai; answer key bhi yahi maanti hai.\nDiya kya hai? \\(T(0) = 80\\), \\(T(2) = 50\\).\nFind kya karna hai? Woh waqt jab \\(T = 15\\).\nPlan: hal karein, \\(k\\) nikalein, phir \\(T = 15\\) rakh kar \\(t\\) nikalein.",
+            "steps": [
+              "Diya gaya: \\(T(0) = 80\\)°C, \\(T(2) = 50\\)°C; \\(t\\) ghanton mein.\nMaloom karna: woh waqt \\(t\\) jab \\(T = 15\\)°C ho.\nTareeqa: \\(\\frac{dT}{dt} = -kT\\), \\(k > 0\\) (surroundings ka asar nazar andaz); yeh separable hai.",
+              "Differential equation hal karein\n\\[\\int\\dfrac{dT}{T} = -k\\int dt\\]\n\\[\\ln|T| = -kt + C\\]\n\\[T(0) = 80 \\Rightarrow C = \\ln 80\\]\n\\[T = 80e^{-kt}\\]\nKyun: variables alag kar ke integrate kiya, pehli condition se \\(C = \\ln 80\\) mila, phir \\(\\ln|T| - \\ln 80 = -kt\\) se \\(e\\) liya. Yeh bilkul radioactive decay jaisa model hai.",
+              "\\(T(2) = 50\\) lagayein\n\\[50 = 80e^{-2k}\\]\n\\[e^{-2k} = \\dfrac{5}{8}\\]\n\\[k = \\tfrac{1}{2}\\ln\\tfrac{8}{5} \\approx 0.2350\\]\nKyun: 80 se divide kiya, phir \\(\\ln\\) liya; \\(-\\ln\\frac{5}{8} = \\ln\\frac{8}{5} \\approx 0.470004\\). Yeh \\(k\\) fi ghanta hai.",
+              "\\(T = 15\\) rakhein\n\\[15 = 80e^{-kt}\\]\n\\[e^{-kt} = \\dfrac{15}{80} = \\dfrac{3}{16}\\]\n\\[kt = \\ln\\dfrac{16}{3}\\]\nKyun: 80 se divide kiya aur fraction ko simplify kiya, phir \\(\\ln\\) liya; minus ulta karne se \\(\\frac{16}{3}\\) aaya.",
+              "\\(t\\) nikalein\n\\[t = \\dfrac{2\\ln(16/3)}{\\ln(8/5)}\\]\n\\[\\approx \\dfrac{2(1.673976)}{0.470004}\\]\n\\[\\approx 7.12\\]\nKyun: \\(k = \\frac{1}{2}\\ln\\frac{8}{5}\\) se divide kiya; 2 upar chala gaya. Round sirf aakhir mein kiya.\nDhyan dein: 7.12 ghante shutdown se hain; 50°C ke baad mazeed waqt 7.12 - 2 = 5.12 ghante hai.",
+              "Tasdeeq\n\\[80e^{-0.2350(7.12)} \\approx 80e^{-1.674} \\approx 80(0.1875) = 15 \\;\\checkmark\\]\nKyun: hamare waqt par temperature sach mein 15°C aata hai."
+            ],
+            "final_answer": "Shutdown ke taqreeban 7.12 ghante baad."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Sawal mein surroundings ka temperature nahi diya gaya, aur 'fully insulated' battery to garmi kho hi nahi sakti. Agar kamra \\(T_S \\ge 15\\)°C ho to Newton's law ke mutabiq battery kabhi 15°C tak nahi pohanchegi. Answer key ka 7.12 ghante wala jawab \\(\\frac{dT}{dt} = -kT\\) se aata hai, yani surroundings 0°C maan kar; sawal mein yeh baat likhi honi chahiye thi."
+          }
+        ]
+      }
+    }
+  ]
+}

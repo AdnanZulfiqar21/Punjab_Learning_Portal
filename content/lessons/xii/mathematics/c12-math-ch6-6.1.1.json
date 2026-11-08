@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH6-6.1.1",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch6",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch6/6.1.1",
+      "title": "6.1.1 Parametric Equations of a Circle",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 166,
+          "pdf_to": 167,
+          "note": "Book p. 164-165: parametric equations x = r cos(theta), y = r sin(theta) with Figure 6.3; Examples 1 and 2"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch6-fig-6-3-parametric-point",
+            "alt": "Circle with centre O(0, 0). P(x, y) on the circle joined to O by radius r making angle theta with the x-axis; PM is perpendicular to the x-axis, forming right triangle OMP.",
+            "caption": "Figure 6.3: the point P(x, y) on the circle and the angle theta (original drawing after the textbook's figure)",
+            "side": true
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(P(x, y)\\) be any point on the circle \\(x^{2} + y^{2} = r^{2}\\) and let the inclination of \\(\\overline{OP}\\) be \\(\\theta\\), as shown in the Figure 6.3. Draw \\(\\overline{PM}\\) perpendicular to the \\(x\\)-axis. From right triangle \\(OMP\\), we have\n\\[\\cos\\theta = \\dfrac{|\\overline{OM}|}{|\\overline{OP}|}\\]\n\\[\\sin\\theta = \\dfrac{|\\overline{PM}|}{|\\overline{OP}|}\\]\nSince \\(|\\overline{OM}| = x\\) and \\(|\\overline{PM}| = y\\), and \\(|\\overline{OP}| = r\\), it follows that\n\\[\\cos\\theta = \\dfrac{x}{r}, \\quad \\sin\\theta = \\dfrac{y}{r}\\]\nThus, the parametric equations of the circle are:"
+          },
+          {
+            "type": "equation",
+            "latex": "x = r\\cos\\theta, \\quad y = r\\sin\\theta",
+            "text_alt": "x equals r cos theta, y equals r sin theta"
+          },
+          {
+            "type": "paragraph",
+            "text": "The point \\(P(r\\cos\\theta, r\\sin\\theta)\\) lies on the circle \\(x^{2} + y^{2} = r^{2}\\) for all values of \\(\\theta\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A parameter is a helper variable: instead of describing the circle by one equation in \\(x\\) and \\(y\\), we describe every point by one number \\(\\theta\\). As \\(\\theta\\) runs from \\(0\\) to \\(2\\pi\\) (0 to 360 degrees), the point \\((r\\cos\\theta, r\\sin\\theta)\\) goes once round the circle.\nWhy it lies on the circle: substitute and use \\(\\cos^{2}\\theta + \\sin^{2}\\theta = 1\\):\n\\[r^{2}\\cos^{2}\\theta + r^{2}\\sin^{2}\\theta = r^{2}\\]\nThe figure shows \\(P\\) in the first quadrant, but the formulas hold in every quadrant, because the signs of \\(\\cos\\theta\\) and \\(\\sin\\theta\\) give the signs of \\(x\\) and \\(y\\).\nFor a circle with centre \\((h, k)\\) the same idea gives \\(x = h + r\\cos\\theta\\), \\(y = k + r\\sin\\theta\\) (you will meet this in Exercise 6.2)."
+          },
+          {
+            "type": "example",
+            "title": "Example 1",
+            "problem": "Write an equation of the circle with centre \\((-2, 1)\\) and radius 5.",
+            "steps": [
+              "Given: centre \\((-2, 1)\\), radius \\(5\\).\nTo find: the equation of the circle.\nMethod: the centre and the radius are given directly, so the standard form (Theorem 1) fits exactly.",
+              "Step 1: Identify h, k and r\n\\[h = -2, \\quad k = 1, \\quad r = 5\\]\nWhy: the standard form \\((x - h)^{2} + (y - k)^{2} = r^{2}\\) needs exactly these three numbers.",
+              "Step 2: Substitute in the standard form\n\\[(x - (-2))^{2} + (y - 1)^{2} = 5^{2}\\]\n\\[(x + 2)^{2} + (y - 1)^{2} = 25\\]\nWhy: subtracting a negative number is adding it, so \\(x - (-2) = x + 2\\).",
+              "Step 3: Expand into the form the book gives\n\\[x^{2} + 4x + 4 + y^{2} - 2y + 1 = 25\\]\n\\[x^{2} + y^{2} + 4x - 2y - 20 = 0\\]\nWhy: \\((x + 2)^{2} = x^{2} + 4x + 4\\) and \\((y - 1)^{2} = y^{2} - 2y + 1\\); then \\(4 + 1 - 25 = -20\\).",
+              "Check:\nComparing with \\(x^{2} + y^{2} + 2gx + 2fy + c = 0\\) (6.1.2): \\(g = 2\\), \\(f = -1\\), \\(c = -20\\).\n\\[\\text{centre} = (-g, -f) = (-2, 1)\\]\n\\[r = \\sqrt{4 + 1 + 20} = 5\\]\nBoth agree with the data."
+            ],
+            "answer": "\\((x + 2)^{2} + (y - 1)^{2} = 25\\), i.e. \\(x^{2} + y^{2} + 4x - 2y - 20 = 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 2 is a locus question. Its pattern is: (1) the point is given through a parameter (here \\(\\theta\\)); (2) eliminate the parameter; (3) the equation left in \\(x\\) and \\(y\\) is the locus. Squaring and adding is the standard trick whenever \\(\\theta\\) appears as \\(\\cos\\theta\\) and \\(\\sin\\theta\\) with matching pairs."
+          },
+          {
+            "type": "example",
+            "title": "Example 2",
+            "problem": "Prove that the locus of the point of intersection of the lines \\(x\\cos\\theta + y\\sin\\theta = a\\), \\(x\\sin\\theta - y\\cos\\theta = b\\) is a circle with centre at \\((0, 0)\\) and radius \\(\\sqrt{a^{2} + b^{2}}\\), where \\(\\theta\\) is a parameter.",
+            "steps": [
+              "Given: the lines \\(x\\cos\\theta + y\\sin\\theta = a\\) and \\(x\\sin\\theta - y\\cos\\theta = b\\), with \\(\\theta\\) varying.\nTo prove: their point of intersection always lies on a circle with centre \\((0, 0)\\) and radius \\(\\sqrt{a^{2} + b^{2}}\\).\nMethod: a locus is found by eliminating the parameter \\(\\theta\\). Squaring and adding works because the identity \\(\\cos^{2}\\theta + \\sin^{2}\\theta = 1\\) will remove \\(\\theta\\).",
+              "Step 1: Square both equations and add them\n\\[(x\\cos\\theta + y\\sin\\theta)^{2}\\]\n\\[+ (x\\sin\\theta - y\\cos\\theta)^{2}\\]\n\\[= a^{2} + b^{2}\\]\nWhy: the point of intersection satisfies both equations at the same time, so the squares of the left sides add up to \\(a^{2} + b^{2}\\).",
+              "Step 2: Expand each square\n\\[(x\\cos\\theta + y\\sin\\theta)^{2}\\]\n\\[= x^{2}\\cos^{2}\\theta + 2xy\\cos\\theta\\sin\\theta\\]\n\\[+ y^{2}\\sin^{2}\\theta\\]\n\\[(x\\sin\\theta - y\\cos\\theta)^{2}\\]\n\\[= x^{2}\\sin^{2}\\theta - 2xy\\sin\\theta\\cos\\theta\\]\n\\[+ y^{2}\\cos^{2}\\theta\\]\nWhy: \\((p + q)^{2} = p^{2} + 2pq + q^{2}\\) and \\((p - q)^{2} = p^{2} - 2pq + q^{2}\\). The middle terms \\(+2xy\\cos\\theta\\sin\\theta\\) and \\(-2xy\\sin\\theta\\cos\\theta\\) are opposite, so they cancel when added.",
+              "Step 3: Simplify by collecting the \\(x^{2}\\) and \\(y^{2}\\) terms\n\\[x^{2}(\\cos^{2}\\theta + \\sin^{2}\\theta)\\]\n\\[+ y^{2}(\\sin^{2}\\theta + \\cos^{2}\\theta) = a^{2} + b^{2}\\]\nWhy: taking common factors brings the same bracket into both terms.",
+              "Step 4: Use \\(\\cos^{2}\\theta + \\sin^{2}\\theta = 1\\)\n\\[x^{2}(1) + y^{2}(1) = a^{2} + b^{2}\\]\n\\[x^{2} + y^{2} = \\left(\\sqrt{a^{2} + b^{2}}\\right)^{2}\\]\nWhy: the identity removes \\(\\theta\\) completely; what remains is a relation between \\(x\\) and \\(y\\) only, which is the locus.",
+              "Step 5: Read the locus\nCompare with \\(x^{2} + y^{2} = r^{2}\\) (Note (iii) of 6.1): this is a circle with centre \\((0, 0)\\) and radius \\(\\sqrt{a^{2} + b^{2}}\\).\nWhy: writing the right side as a perfect square shows the radius directly.",
+              "Check:\nTake \\(a = 3\\), \\(b = 4\\), \\(\\theta = 0\\): the lines are \\(x = 3\\) and \\(-y = 4\\), meeting at \\((3, -4)\\).\n\\[3^{2} + (-4)^{2} = 25 = 3^{2} + 4^{2}\\]\nSo the point lies on the circle of radius \\(\\sqrt{25} = 5\\), as claimed."
+            ],
+            "answer": "Hence proved: the locus is \\(x^{2} + y^{2} = a^{2} + b^{2}\\), a circle with centre \\((0, 0)\\) and radius \\(\\sqrt{a^{2} + b^{2}}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. Parametric equations of \\(x^{2} + y^{2} = r^{2}\\): \\(x = r\\cos\\theta\\), \\(y = r\\sin\\theta\\).\n2. \\(\\theta\\) is the angle that \\(\\overline{OP}\\) makes with the positive \\(x\\)-axis; one turn \\(0 \\le \\theta < 2\\pi\\) traces the whole circle.\n3. Centre and radius given: write the standard form at once (Example 1).\n4. To find a locus with a parameter, eliminate the parameter; with \\(\\cos\\theta\\), \\(\\sin\\theta\\) pairs, square and add (Example 2)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Swapping the roles: \\(x\\) goes with \\(\\cos\\theta\\) and \\(y\\) with \\(\\sin\\theta\\) (angle measured from the \\(x\\)-axis).\n2. Sign slip in the centre: centre \\((-2, 1)\\) gives \\((x + 2)^{2}\\), not \\((x - 2)^{2}\\).\n3. Forgetting the middle terms when expanding \\((x\\cos\\theta + y\\sin\\theta)^{2}\\); they cancel only after adding both squares."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q16-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q16",
+      "title": "Question 16 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 105,
+          "pdf_to": 105,
+          "note": "Exercise 3.5, Question 16 (i), (ii): Property IV(iii) and an f'/f integral; book p. 103. Key on p. 300 under 'Exercise 3.2'."
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-5-Q16",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "16(i)",
+            "prompt": "16 (i) Evaluate the following definite integral: \\(\\int_{1}^{3} \\frac{x^2}{x^2 + (4 - x)^2}\\,dx\\)",
+            "explanation": "Is fraction ki shakal \\(\\frac{f(x)}{f(x) + g(x)}\\) hai: \\(f = x^2\\), \\(g = (4 - x)^2\\), aur limits ka jama \\(1 + 3 = 4\\).\nDiya kya hai? Limits 1 se 3.\nFind kya karna hai? Integral ki value.\nRule kaunsa? Property IV mein \\(x\\) ki jagah \\(4 - x\\) rakhne se \\(f\\) aur \\(g\\) aapas mein jagah badal lete hain (yahi Property IV(iii) hai). Dono shaklein jama karein to integrand bilkul 1 ban jata hai.\nIs liye jawab interval ki lambai ka aadha hoga. Yeh trick yaad rakhne wali hai: jab bhi fraction mein upar ek hissa ho aur neeche wohi hissa plus us ka 'aaina' (mirror) ho, to \\(x \\to a + b - x\\) kar ke jama kar lein.",
+            "steps": [
+              "Diya gaya: \\(I = \\int_{1}^{3} \\frac{x^2}{x^2 + (4 - x)^2}\\,dx\\).\nMaloom karna: \\(I\\).\nTareeqa: Property IV, \\(x \\to 1 + 3 - x = 4 - x\\) (khaas surat IV(iii): \\(\\int_a^b \\frac{f}{f + g}\\,dx = \\frac{b - a}{2}\\)). Aise fractions ka antiderivative bohat lamba hota hai, property se ek line mein kaam ho jata hai.",
+              "Property IV lagayein\n\\[I = \\int_{1}^{3} \\dfrac{(4 - x)^2}{(4 - x)^2 + x^2}\\,dx\\]\nKyun: \\(x^2\\) ban gaya \\((4 - x)^2\\), aur \\((4 - x)^2\\) ban gaya \\(\\big(4 - (4 - x)\\big)^2 = x^2\\). Denominator wohi raha (bas terms ki tarteeb badli), numerator badal gaya.",
+              "Dono shaklein jama karein\n\\[2I = \\int_{1}^{3} \\dfrac{x^2 + (4 - x)^2}{x^2 + (4 - x)^2}\\,dx\\]\n\\[= \\int_{1}^{3} 1\\,dx = 2\\]\nKyun: denominator ek hai, numerators jama kiye to upar neeche bilkul ek jaisa; fraction 1 ban gaya. \\(\\int_1^3 1\\,dx = 3 - 1 = 2\\).\nDhyan dein: asal \\(I\\) aur nayi shakal dono ek hi \\(I\\) hain, isi liye jama \\(2I\\) hai.",
+              "Hal karein\n\\[I = 1\\]\nKyun: \\(2I = 2\\). Yeh wohi \\(\\frac{b - a}{2} = \\frac{3 - 1}{2}\\) hai.",
+              "Tasdeeq\n\\[x = 2:\\ \\dfrac{4}{4 + 4} = \\dfrac{1}{2}\\]\nKyun: beech mein integrand \\(\\frac{1}{2}\\) hai, aur har aaine wale jore ka average \\(\\frac{1}{2}\\) hai; to area \\(\\frac{1}{2} \\times 2 = 1\\). Calculator bhi 1 deta hai, aur answer key bhi."
+            ],
+            "final_answer": "\\(1\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "16(ii)",
+            "prompt": "16 (ii) Evaluate the following definite integral: \\(\\int_{0}^{\\ln 2} \\frac{e^x}{e^x + 2e^{-x}}\\,dx\\)",
+            "explanation": "Yeh exponential fraction hai jis ke neeche \\(e^{-x}\\) (negative power) hai.\nDiya kya hai? \\(\\frac{e^x}{e^x + 2e^{-x}}\\) aur limits \\(0\\) se \\(\\ln 2\\).\nFind kya karna hai? Integral ki value.\nRule kaunsa? Upar neeche \\(e^x\\) se multiply karenge taa ke negative power khatam ho. Phir upar wali cheez neeche wali ke derivative ka aadha ban jayegi, aur \\(\\int \\frac{f'}{f} = \\ln f\\) lag jayega.\nPlan: multiply, \\(f'/f\\) pehchanna, limits. Pehchan ka asool: jab upar wali cheez neeche wali ka derivative (ya us ka koi multiple) ho, to jawab hamesha log hota hai.",
+            "steps": [
+              "Diya gaya: \\(\\int_{0}^{\\ln 2} \\frac{e^x}{e^x + 2e^{-x}}\\,dx\\).\nMaloom karna: is ki value.\nTareeqa: \\(\\frac{e^x}{e^x}\\) se multiply, phir substitution \\(u = e^{2x} + 2\\) (ya seedha rule \\(\\int \\frac{f'(x)}{f(x)}\\,dx = \\ln|f(x)|\\)).",
+              "Negative power khatam karein\n\\[\\dfrac{e^x}{e^x + 2e^{-x}} \\cdot \\dfrac{e^x}{e^x} = \\dfrac{e^{2x}}{e^{2x} + 2}\\]\nKyun: \\(e^x \\cdot e^x = e^{2x}\\) aur \\(2e^{-x} \\cdot e^{x} = 2e^0 = 2\\). Upar neeche ek hi cheez se multiply karne se value nahi badalti.",
+              "\\(f'/f\\) pehchanein\n\\[\\dfrac{d}{dx}(e^{2x} + 2) = 2e^{2x}\\]\n\\[\\int \\dfrac{e^{2x}}{e^{2x} + 2}\\,dx = \\dfrac{1}{2}\\ln(e^{2x} + 2)\\]\nKyun: neeche wali cheez ka derivative \\(2e^{2x}\\) hai aur upar sirf \\(e^{2x}\\), yani aadha; is liye \\(\\frac{1}{2}\\) aaya. \\(e^{2x} + 2\\) hamesha positive hai, to modulus ki zaroorat nahi.\nDhyan dein: \\(e^{2x}\\) ka derivative \\(2e^{2x}\\) hai (chain rule), \\(e^{2x}\\) nahi.",
+              "Limits daalein\n\\[\\dfrac{1}{2}\\Big[\\ln(e^{2x} + 2)\\Big]_{0}^{\\ln 2} = \\dfrac{1}{2}\\big(\\ln 6 - \\ln 3\\big)\\]\n\\[= \\dfrac{1}{2}\\ln 2\\]\nKyun: \\(e^{2\\ln 2} = (e^{\\ln 2})^2 = 2^2 = 4\\), to \\(4 + 2 = 6\\); \\(e^0 = 1\\), to \\(1 + 2 = 3\\). Phir \\(\\ln 6 - \\ln 3 = \\ln\\frac{6}{3} = \\ln 2\\).",
+              "Tasdeeq\n\\[\\dfrac{1}{2}\\ln 2 \\approx 0.347\\]\nKyun: integrand \\(x = 0\\) par \\(\\frac{1}{3}\\) aur \\(x = \\ln 2\\) par \\(\\frac{2}{3}\\) hai, aur lambai taqreeban 0.693. To area 0.23 aur 0.46 ke darmiyan hona chahiye; 0.347 bilkul theek. Answer key mein bhi \\(\\frac{1}{2}\\ln 2\\) hai."
+            ],
+            "final_answer": "\\(\\frac{1}{2}\\ln 2\\) (taqreeban 0.347)"
+          }
+        ]
+      }
+    }
+  ]
+}

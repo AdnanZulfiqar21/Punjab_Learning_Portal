@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-8.5.4-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/8.5.4",
+      "title": "8.5.4 Cryptography (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-8.5.4",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 254,
+          "pdf_to": 254,
+          "note": "Book p. 252: 8.5.4 Cryptography, Example 4 Key Parameter (shown as Example 11): x^5 - 10x + 5 = 0 by Regula-Falsi on [1, 2], iteration table, x = 1.62."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Aakhri application: cryptography, yani secret codes ka ilm. Jab aap online banking ya WhatsApp use karte hain to aap ke messages encryption se mehfooz hote hain. Kitab kehti hai: cryptographic algorithms kabhi kabhi high-degree (oonchi power wali) nonlinear equations use karte hain taa ke secure keys ya pseudo-random numbers (aise numbers jo dekhne mein bilkul be-tarteeb lagein) banaye ja sakein."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Numbering note (ours)",
+            "text": "Kitab is example ko 'Example 4' chhaapti hai (is unit mein yeh doosra Example 4 hai); hum ise Example 11 dikhate hain (8.5.1 wala note dekhiye)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Degree five ki polynomial ke roots ka koi general formula nahin hota, is liye numerical method hi qudrati rasta hai. Sawal 'a real value' maangta hai, yani koi ek real root; kitab \\([1, 2]\\) wala root chunti hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 11",
+            "problem": "Key Parameter. In a cryptosystem, a key parameter \\(x\\) satisfies the equation \\(x^{5} - 10x + 5 = 0\\). Find a real value of \\(x\\) correct to two decimal places using the Regula-Falsi method.\nNote: \\(x\\) represents a component of the encryption key; its approximate value is crucial for secure key generation.",
+            "steps": [
+              "Diya gaya: \\(x^{5} - 10x + 5 = 0\\).\nMaloom karna: ek real root \\(x\\), do decimal places tak.\nTareeqa: sign change wale interval par Regula-Falsi. Hum dekhenge ke \\(b = 2\\) qaim rehta hai aur \\(f(2) = 17\\), is liye har qadam par sirf naya \\(a\\) aur \\(f(a)\\) nikaalna parta hai.",
+              "Function banaiye\n\\[f(x) = x^{5} - 10x + 5\\]\nKyun: Regula-Falsi \\(f(x) = 0\\) ka root dhoondta hai, aur equation pehle se is shakal mein hai.",
+              "Interval chuniye\n\\[f(1) = 1 - 10 + 5 = -4 < 0\\]\n\\[f(2) = 32 - 20 + 5 = 17 > 0\\]\nKyun: signs ulte hain, is liye \\([1, 2]\\) mein root zaroor hai.",
+              "Continuity\n\\(f(c) = \\lim_{x \\to c} (x^{5} - 10x + 5)\\) har \\(c \\in [1, 2]\\) ke liye.\n\\(f\\) sign change wale interval \\([1, 2]\\) par continuous hai.\nKyun: f polynomial hai; continuity ke baghair na Location of Root Theorem lagta hai na yeh method.",
+              "Iteration 1: a = 1, b = 2\n\\[x_c = \\dfrac{1(17) - 2(-4)}{17 - (-4)}\\]\n\\[= \\dfrac{25}{21} = 1.1905\\]\n\\[f(1.1905) = 2.3914 - 11.905 + 5\\]\n\\[= -4.5136\\]\nKyun: \\(f(x_c)\\) negative hai, \\(f(a)\\) jaisa, is liye \\(a\\) badla: naya interval \\([1.1905, 2]\\).\nDhyan dein: \\(-2(-4) = +8\\); minus minus ka plus yahan sab se zyada bhoola jata hai.",
+              "Iteration 2: a = 1.1905, b = 2\n\\[x_c = \\dfrac{1.1905(17) - 2(-4.5136)}{17 + 4.5136}\\]\n\\[= \\dfrac{29.2657}{21.5136} = 1.3603\\]\n\\[f(1.3603) = -3.9453\\]\nKyun: phir negative: naya interval \\([1.3603, 2]\\).",
+              "Iteration 3: a = 1.3603, b = 2\n\\[x_c = \\dfrac{1.3603(17) + 2(3.9453)}{17 + 3.9453}\\]\n\\[= \\dfrac{31.0157}{20.9453} = 1.4808\\]\n\\[f(1.4808) = -2.6880\\]\nKyun: isi tarah aage chalte hain; saari iterations neeche wali table mein hain.",
+              "Iteration 4 (yahan dhyan se)\n\\[x_c = \\dfrac{1.4808(17) + 2(2.6880)}{17 + 2.6880}\\]\n\\[= \\dfrac{30.5496}{19.6880} = 1.5517\\]\n\\[f(1.5517) = -1.5212\\]\nKyun: yahi woh qadam hai jahan kitab 1.5523 likh deti hai; sahi hisaab 1.5517 hai (neeche Kitab ki ghalti dekhiye).",
+              "Iterations 5 se 9\n\\[1.5885,\\ 1.6063,\\ 1.6147,\\ 1.6185,\\ 1.6203\\]\nIn par \\(f\\): \\(-0.7707, -0.3692, -0.1706, -0.0789, -0.0350\\).\nKyun: har dafa \\(f(x_c) < 0\\), is liye har dafa \\(a\\) badalta hai aur \\(b = 2\\) wahin rehta hai.",
+              "Iterations 10 se 12\n\\[x_c = 1.6211,\\ f = -0.0154\\]\n\\[x_c = 1.6214,\\ f = -0.0080\\]\n\\[x_c = 1.6216,\\ f = -0.0031\\]\nKyun: iteration 11 par \\(|f| = 0.0080\\), jo kitab ke 0.01 wale rule se to kam hai magar 8.3.1 ki asal tolerance 0.005 se zyada; is liye hum ek aur iteration karte hain.",
+              "Checking\n\\(|f(1.6216)| = 0.0031 < 0.005\\)\nKyun: ab \\(f\\) tolerance se kam hai, is liye \\(x \\approx 1.62\\).",
+              "Tasdeeq:\nSign test: \\(f(1.615) \\approx -0.1634 < 0\\) aur \\(f(1.625) \\approx 0.0810 > 0\\), yani root \\(]1.615, 1.625[\\) mein hai aur 1.62 par round hota hai.\n\\([1, 2]\\) mein asal root \\(x = 1.6217\\ldots\\) hai."
+            ],
+            "answer": "\\(x \\approx 1.62\\)"
+          },
+          {
+            "type": "table",
+            "caption": "Regula-Falsi Iteration Table: (4 decimal places), sahi hisaab ke saath",
+            "header": [
+              "Iteration",
+              "\\(a\\)",
+              "\\(b\\)",
+              "\\(x_c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\)",
+              "\\(f(x_c)\\)",
+              "New Interval"
+            ],
+            "rows": [
+              [
+                "1",
+                "1 (-)",
+                "2 (+)",
+                "1.1905 (-)",
+                "-4.5136",
+                "[1.1905, 2]"
+              ],
+              [
+                "2",
+                "1.1905 (-)",
+                "2 (+)",
+                "1.3603 (-)",
+                "-3.9453",
+                "[1.3603, 2]"
+              ],
+              [
+                "3",
+                "1.3603 (-)",
+                "2 (+)",
+                "1.4808 (-)",
+                "-2.6880",
+                "[1.4808, 2]"
+              ],
+              [
+                "4",
+                "1.4808 (-)",
+                "2 (+)",
+                "1.5517 (-)",
+                "-1.5212",
+                "[1.5517, 2]"
+              ],
+              [
+                "5",
+                "1.5517 (-)",
+                "2 (+)",
+                "1.5885 (-)",
+                "-0.7707",
+                "[1.5885, 2]"
+              ],
+              [
+                "6",
+                "1.5885 (-)",
+                "2 (+)",
+                "1.6063 (-)",
+                "-0.3692",
+                "[1.6063, 2]"
+              ],
+              [
+                "7",
+                "1.6063 (-)",
+                "2 (+)",
+                "1.6147 (-)",
+                "-0.1706",
+                "[1.6147, 2]"
+              ],
+              [
+                "8",
+                "1.6147 (-)",
+                "2 (+)",
+                "1.6185 (-)",
+                "-0.0789",
+                "[1.6185, 2]"
+              ],
+              [
+                "9",
+                "1.6185 (-)",
+                "2 (+)",
+                "1.6203 (-)",
+                "-0.0350",
+                "[1.6203, 2]"
+              ],
+              [
+                "10",
+                "1.6203 (-)",
+                "2 (+)",
+                "1.6211 (-)",
+                "-0.0154",
+                "[1.6211, 2]"
+              ],
+              [
+                "11",
+                "1.6211 (-)",
+                "2 (+)",
+                "1.6214 (-)",
+                "-0.0080",
+                "[1.6214, 2]"
+              ],
+              [
+                "12",
+                "1.6214 (-)",
+                "2 (+)",
+                "1.6216 (-)",
+                "-0.0031",
+                "Stop"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "1. Row 4: \\(a = 1.4808\\) aur \\(b = 2\\) se formula \\(x_c = 1.5517\\) deta hai (\\(f = -1.5212\\)); kitab 1.5523 chhaapti hai. Rows 5-9 kitab ne usi ghalat value se sahi hisaab kiye hain, is liye numbers thore se hi badle.\n2. Row 10 mumkin hi nahin: \\([1.6203, 2]\\) par Regula-Falsi \\(x_c = 1.6211\\) (\\(f = -0.0154\\)) deta hai, 1.6581 (\\(f = +0.9520\\)) nahin. 1.6581 par \\(f > 0\\) hai, yani woh root se aage hai; \\((1.6203, -0.0350)\\) aur \\((2, 17)\\) wali secant wahan axis ko kaat hi nahin sakti. Isi wajah se row 11 ka interval \\([1.6203, 1.6581]\\) bhi ghalat hai.\n3. Sahi hisaab upar wali table mein hai: 1.6211, 1.6214, 1.6216 aur \\(|f(1.6216)| = 0.0031\\) par stop. Kitab ka aakhri jawab \\(x \\approx 1.62\\) sahi hai (asal root 1.6217...)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Checking: \\(|f(1.6216)| = 0.0031 < 0.005\\). Aakhri jawab: \\(x \\approx 1.62\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Yahan Regula-Falsi itna aahista kyun (12 iterations)? \\([1, 2]\\) par curve upar ki taraf mura hua hai (\\(f''(x) = 20x^{3} > 0\\)), is liye har secant line curve ke upar rehti hai aur x-axis ko root ke LEFT par kaat-ti hai. Nateeja: \\(b = 2\\) kabhi nahin hilta, aur kyun ke \\(f(2) = 17\\) bohat bara hai jab ke \\(f(a)\\) chhota, har qadam thora sa hi aage barhta hai. Jaise koi bhaari darwaza jo har dhakke par thora sa hi khulta hai.\n\\(b\\) qaim ho to formula aasaan ho jata hai: \\(x_c = \\frac{17a - 2f(a)}{17 - f(a)}\\). Is se table jaldi bharti hai.\nIs equation ke do aur real roots bhi hain: \\(f(0) = 5 > 0\\) aur \\(f(1) = -4 < 0\\), to \\([0, 1]\\) mein ek root hai (\\(x \\approx 0.50\\)), aur ek \\(-1.89\\) ke qareeb. Sawal ne sirf 'a real value' maangi thi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Agar kisi row mein naya \\(x_c\\) interval se bahar aa jaye, ya \\(f(x_c)\\) ka sign achanak ulta ho kar bohat bara ho jaye (jaise kitab ki row 10 mein \\(+0.9520\\)), to kya samjhein? Yeh hisaab ki ghalti ki pakki nishani hai, kyun ke Regula-Falsi ka naya point hamesha \\(a\\) aur \\(b\\) ke darmiyan aur, is curve par, root ke left mein aata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "\\([0, 1]\\) wala root bhi isi tarah nikaaliye: \\(f(0) = 5\\), \\(f(1) = -4\\). Pehli iteration: \\(x_c = \\frac{0(-4) - 1(5)}{-4 - 5} = \\frac{5}{9} = 0.5556\\), \\(f(0.5556) = -0.5031 < 0\\), naya interval \\([0, 0.5556]\\). Agli iteration: \\(x_c = 0.5048\\), \\(f(0.5048) = -0.0152\\). Aur aage chal kar \\(x \\approx 0.50\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Exam tip",
+            "text": "Jab ek kinara qaim ho to \\(f(b)\\) ek dafa likh kar baar baar use kijiye, aur har naye \\(x_c\\) ko check kijiye ke woh \\(a\\) aur \\(b\\) ke darmiyan hai. Interval se bahar value hisaab ki ghalti ka saboot hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "Key model: \\(x^{5} - 10x + 5 = 0\\), \\(f(1) = -4\\), \\(f(2) = 17\\): root \\([1, 2]\\) mein.\nRegula-Falsi mein \\(b = 2\\) qaim; har \\(f(x_c) < 0\\) \\(a\\) ko badalta hai.\n\\(|f(1.6216)| = 0.0031\\) par stop: \\(x \\approx 1.62\\).\nHar naya point maujooda interval ke andar hi hona chahiye."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "Pehli iteration mein \\(-2(-4)\\) ko \\(-8\\) likh dena: yeh \\(+8\\) hai, aur jawab \\(25/21\\) banta hai.\nf(x_c) negative ho aur b badal dena: usi kinare ko badliye jis ka sign f(x_c) jaisa ho (yahan a).\n|f| = 0.0080 par ruk jana, jab ke 8.3.1 ki do places wali tolerance 0.005 hai."
+          }
+        ]
+      }
+    }
+  ]
+}

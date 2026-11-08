@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH9-EXERCISE-9-2-Q20",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch9",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch9/u-exercise-9-2-q20",
+      "title": "Question 20",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 275,
+          "pdf_to": 275,
+          "note": "Exercise 9.2, Question 20 (book page 273); the book prints no answers for Exercise 9.2; answers checked with sympy and the solution book"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "20",
+            "prompt": "20. If \\(\\sin^{-1}\\frac{2p}{1 + p^2} + \\cos^{-1}\\frac{1 - q^2}{1 + q^2} = \\tan^{-1}\\frac{2y}{1 - y^2}\\), show that \\(y = \\frac{p + q}{1 - pq}\\).",
+            "explanation": "Each term is a double-angle form met earlier in this exercise.\nPlan: write all three terms as \\(2\\tan^{-1}(\\ldots)\\) (Question 12, Question 14 (i) and the book's \\(2\\tan^{-1} x\\) formula), divide by 2, join with formula (v), and take \\(\\tan\\).",
+            "steps": [
+              "Given: \\(\\sin^{-1}\\frac{2p}{1 + p^2} + \\cos^{-1}\\frac{1 - q^2}{1 + q^2} = \\tan^{-1}\\frac{2y}{1 - y^2}\\).\nTo show: \\(y = \\frac{p + q}{1 - pq}\\).\nMethod: Recognise the three double-angle forms; they turn the equation into one between \\(\\tan^{-1} p\\), \\(\\tan^{-1} q\\) and \\(\\tan^{-1} y\\). As the book does, we take the values for which these results hold: \\(-1 \\le p \\le 1\\), \\(q \\ge 0\\), \\(-1 < y < 1\\) and \\(pq < 1\\).",
+              "Replace each term\n\\[\\sin^{-1}\\dfrac{2p}{1 + p^2} = 2\\tan^{-1} p\\]\n\\[\\cos^{-1}\\dfrac{1 - q^2}{1 + q^2} = 2\\tan^{-1} q\\]\n\\[\\tan^{-1}\\dfrac{2y}{1 - y^2} = 2\\tan^{-1} y\\]\nWhy: Question 12 (for \\(-1 \\le p \\le 1\\)), Question 14 (i) (for \\(q \\ge 0\\)), and the book's result \\(2\\tan^{-1} x = \\tan^{-1}\\frac{2x}{1 - x^2}\\) from Section 9.2 (for \\(-1 < y < 1\\)).",
+              "Substitute and divide by 2\n\\[2\\tan^{-1} p + 2\\tan^{-1} q = 2\\tan^{-1} y\\]\n\\[\\tan^{-1} p + \\tan^{-1} q = \\tan^{-1} y\\]\nWhy: Every term has the factor 2.",
+              "Join with formula (v)\n\\[\\tan^{-1}\\dfrac{p + q}{1 - pq} = \\tan^{-1} y\\]\nWhy: Formula (v) with \\(pq < 1\\).",
+              "Take \\(\\tan\\) of both sides\n\\[y = \\dfrac{p + q}{1 - pq}\\]\nWhy: \\(\\tan(\\tan^{-1} u) = u\\) for every real \\(u\\).",
+              "Check\n\\[p = 0.3,\\ q = 0.4:\\ y = \\dfrac{0.7}{0.88} \\approx 0.7955\\]\n\\[\\sin^{-1}\\dfrac{0.6}{1.09} \\approx 0.5829\\]\n\\[\\cos^{-1}\\dfrac{0.84}{1.16} \\approx 0.7610\\]\n\\[\\text{sum} \\approx 0.5829 + 0.7610\\]\n\\[= 1.3439\\]\n\\[\\tan^{-1}\\dfrac{2y}{1 - y^2} \\approx \\tan^{-1} 4.3319 \\approx 1.3439\\]\nWhy: Both sides of the given equation agree for this \\(y\\)."
+            ],
+            "final_answer": "Hence shown: \\(y = \\frac{p + q}{1 - pq}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 9.2. Every solution on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book."
+          }
+        ]
+      }
+    }
+  ]
+}

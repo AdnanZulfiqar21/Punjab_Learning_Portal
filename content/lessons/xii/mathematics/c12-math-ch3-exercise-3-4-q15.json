@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q15",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q15",
+      "title": "Question 15",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 15: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "15",
+            "prompt": "15 Evaluate \\(\\int \\frac{x^2 + 1}{(x^2 - 2x + 2)^2}\\,dx\\).",
+            "explanation": "\\(x^2 - 2x + 2 = (x - 1)^2 + 1\\) is irreducible and squared: Case-IV. Degree 2 < degree 4, so proper.\nSplit into \\(\\frac{Ax + B}{x^2 - 2x + 2} + \\frac{Cx + D}{(x^2 - 2x + 2)^2}\\), then put \\(t = x - 1\\) to integrate.\nPlan: constants by comparing coefficients; integrate each piece; the squared piece is done with \\(t = \\tan\\theta\\) as in Example 43.",
+            "steps": [
+              "Given: \\(\\int \\frac{x^2 + 1}{(x^2 - 2x + 2)^2}\\,dx\\).\nTo find: the integral.\nMethod: partial fractions, Case-IV; discriminant of \\(x^2 - 2x + 2\\) is \\(4 - 8 = -4 < 0\\), so it is irreducible.",
+              "Write the partial fractions\n\\[\\dfrac{x^2 + 1}{(x^2 - 2x + 2)^2} = \\dfrac{Ax + B}{x^2 - 2x + 2} + \\dfrac{Cx + D}{(x^2 - 2x + 2)^2}\\]\n\\[x^2 + 1 = (Ax + B)(x^2 - 2x + 2) + Cx + D\\]\nWhy: A linear numerator for each power of the repeated quadratic factor.",
+              "Compare coefficients\n\\[x^3:\\ A = 0\\]\n\\[x^2:\\ B - 2A = 1,\\ B = 1\\]\n\\[x:\\ 2A - 2B + C = 0,\\ C = 2\\]\n\\[\\text{constant}:\\ 2B + D = 1,\\ D = -1\\]\nWhy: \\((Ax + B)(x^2 - 2x + 2) = Ax^3 + (B - 2A)x^2 + (2A - 2B)x + 2B\\).",
+              "Rewrite the integrand\n\\[= \\dfrac{1}{x^2 - 2x + 2} + \\dfrac{2x - 1}{(x^2 - 2x + 2)^2}\\]\n\\[= \\dfrac{1}{x^2 - 2x + 2} + \\dfrac{2x - 2}{(x^2 - 2x + 2)^2} + \\dfrac{1}{(x^2 - 2x + 2)^2}\\]\nWhy: \\(2x - 2\\) is the derivative of \\(x^2 - 2x + 2\\), so split \\(2x - 1 = (2x - 2) + 1\\).",
+              "First two pieces\n\\[\\int \\dfrac{dx}{(x - 1)^2 + 1} = \\tan^{-1}(x - 1)\\]\n\\[\\int \\dfrac{2x - 2}{(x^2 - 2x + 2)^2}\\,dx = -\\dfrac{1}{x^2 - 2x + 2}\\]\nWhy: Completing the square; and \\(\\int u^{-2}\\,du = -u^{-1}\\) with \\(u = x^2 - 2x + 2\\).",
+              "Last piece (put \\(t = x - 1 = \\tan\\theta\\))\n\\[\\int \\dfrac{dx}{\\left((x - 1)^2 + 1\\right)^2} = \\int \\dfrac{dt}{(t^2 + 1)^2}\\]\n\\[= \\dfrac{1}{2}\\left(\\tan^{-1} t + \\dfrac{t}{t^2 + 1}\\right)\\]\n\\[= \\dfrac{1}{2}\\tan^{-1}(x - 1) + \\dfrac{x - 1}{2(x^2 - 2x + 2)}\\]\nWhy: Same as Example 43: \\(\\int \\cos^2\\theta\\,d\\theta = \\frac{1}{2}(\\theta + \\sin\\theta\\cos\\theta)\\) and \\(\\sin\\theta\\cos\\theta = \\frac{t}{1 + t^2}\\).",
+              "Add the pieces\n\\[\\dfrac{3}{2}\\tan^{-1}(x - 1) - \\dfrac{1}{x^2 - 2x + 2} + \\dfrac{x - 1}{2(x^2 - 2x + 2)}\\]\n\\[= \\dfrac{3}{2}\\tan^{-1}(x - 1) + \\dfrac{x - 3}{2(x^2 - 2x + 2)} + c\\]\nWhy: \\(\\tan^{-1} + \\frac{1}{2}\\tan^{-1} = \\frac{3}{2}\\tan^{-1}\\); and \\(\\frac{-2 + (x - 1)}{2(x^2 - 2x + 2)} = \\frac{x - 3}{2(x^2 - 2x + 2)}\\).",
+              "Check by differentiating (with \\(t = x - 1\\), \\(q = t^2 + 1\\))\n\\[\\dfrac{d}{dt}\\left(\\dfrac{3}{2}\\tan^{-1} t + \\dfrac{t - 2}{2q}\\right) = \\dfrac{3}{2q} + \\dfrac{q - 2t(t - 2)}{2q^2}\\]\n\\[= \\dfrac{3q + q - 2t^2 + 4t}{2q^2} = \\dfrac{t^2 + 2t + 2}{q^2}\\]\nWhy: \\(t^2 + 2t + 2 = (x - 1)^2 + 2(x - 1) + 2 = x^2 + 1\\) and \\(q = x^2 - 2x + 2\\): the integrand \\(\\checkmark\\)."
+            ],
+            "final_answer": "\\(\\frac{3}{2}\\tan^{-1}(x - 1) + \\frac{x - 3}{2(x^2 - 2x + 2)} + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answers at the end of the book (pages 301-302, printed under the heading \"Exercise 3.6\") stop at item (xiv); no answer is printed for Question 15. The correct answer, checked by differentiation, is \\(\\frac{3}{2}\\tan^{-1}(x - 1) + \\frac{x - 3}{2(x^2 - 2x + 2)} + c\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

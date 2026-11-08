@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-EXERCISE-11-1-Q4",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/u-exercise-11-1-q4",
+      "title": "Question 4",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 292,
+          "pdf_to": 292,
+          "note": "Exercise 11.1, Question 4: book page 290 (Q1-Q8). The book prints no answers for Unit 11; every answer here is ours."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "4",
+            "prompt": "4. Create a 3D vector function for a drone flying upward in a spiral.",
+            "explanation": "An open construction question in 3D, like the book's drone Example 2 (11.1.3).\nA spiral climb = circular motion seen from above + a steady rise.\nPlan: \\(x, y\\) as in Question 2, \\(z = ct\\); vector form; domain; check that the shadow is a circle.",
+            "steps": [
+              "Given: a drone flies upward in a spiral.\nTo find: a 3D vector function \\(\\mathbf{r}(t)\\) for its position.\nMethod: the three steps of 11.1.3. Seen from above, the drone goes round a circle of radius \\(a\\) with angular speed \\(\\omega\\); at the same time it rises steadily at \\(c\\) m/s from the ground.",
+              "Step-1: Determine the components\n\\[x(t) = a\\cos(\\omega t)\\]\n\\[y(t) = a\\sin(\\omega t)\\]\n\\[z(t) = ct\\]\nWhy: \\(x\\) and \\(y\\) describe the circle exactly as in Question 2; height \\(=\\) climbing speed \\(\\times\\) time.",
+              "Step-2: Combine into vector form\n\\[\\mathbf{r}(t) = a\\cos(\\omega t)\\,\\hat{i} + a\\sin(\\omega t)\\,\\hat{j}\\]\n\\[\\quad + ct\\,\\hat{k}\\]\nWhy: the third (vertical) component goes with \\(\\hat{k}\\).",
+              "Step-3: Specify the domain\n\\[t \\ge 0\\]\nWhy: \\(t\\) is flight time; all three components are defined for every real \\(t\\).",
+              "A particular case: radius 4 m, one turn every 8 s, climbing 1 m/s\n\\[\\omega = \\dfrac{2\\pi}{8} = \\dfrac{\\pi}{4} \\text{ rad/s}\\]\n\\[\\mathbf{r}(t) = 4\\cos\\tfrac{\\pi t}{4}\\,\\hat{i} + 4\\sin\\tfrac{\\pi t}{4}\\,\\hat{j}\\]\n\\[\\quad + t\\,\\hat{k}\\]\nAt \\(t = 0, 2, 4, 8\\) the drone is at \\((4, 0, 0), (0, 4, 2), (-4, 0, 4), (4, 0, 8)\\).\nWhy: one turn is \\(2\\pi\\) radians in 8 s. The book's Example 2, \\(\\mathbf{r}(t) = 5\\cos t\\,\\hat{i} + 5\\sin t\\,\\hat{j} + 0.5t\\,\\hat{k}\\), is another such spiral.",
+              "Check\n\\[x^2 + y^2 = 16\\left(\\cos^2\\tfrac{\\pi t}{4} + \\sin^2\\tfrac{\\pi t}{4}\\right)\\]\n\\[= 16 \\;\\checkmark\\]\nWhy: seen from above the drone always stays on the circle of radius 4, while \\(z = t\\) keeps growing: a spiral (helix). After one turn (\\(t = 8\\)) it is directly above its start, 8 m higher."
+            ],
+            "final_answer": "\\(\\mathbf{r}(t) = a\\cos(\\omega t)\\,\\hat{i} + a\\sin(\\omega t)\\,\\hat{j} + ct\\,\\hat{k},\\ t \\ge 0\\); for example \\(\\mathbf{r}(t) = 4\\cos\\frac{\\pi t}{4}\\,\\hat{i} + 4\\sin\\frac{\\pi t}{4}\\,\\hat{j} + t\\,\\hat{k}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 11.1 (none for the whole of Unit 11). Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book. This question is open: many correct answers exist. Ours is one model answer built with the book's three steps (11.1.3); any function that models the motion correctly is also right."
+          }
+        ]
+      }
+    }
+  ]
+}

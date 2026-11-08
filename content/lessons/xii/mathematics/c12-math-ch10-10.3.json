@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH10-10.3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch10",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch10/10.3",
+      "title": "10.3 Real Life Problems",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 284,
+          "pdf_to": 286,
+          "note": "Book p. 282-284: 10.3 Real Life Problems, Example 9 (lighthouse, Figure 10.6) and Example 10 (projectile range)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "This section uses inverse trigonometric functions to answer real questions: heights, angles of elevation and launch angles. The plan is always the same:\n1. Draw (or read) the figure and mark the right angles.\n2. In each right triangle write \\(\\tan(\\text{angle}) = \\frac{\\text{opposite}}{\\text{adjacent}}\\), then use \\(\\tan^{-1}\\) to write the angle itself.\n3. Translate the condition in the question into an equation between angles.\n4. Solve the equation, keep only the answers that make physical sense (a height is positive, a launch angle is between \\(0^{\\circ}\\) and \\(90^{\\circ}\\)).\nThe difference formula used in Example 9 is \\(\\tan^{-1}\\alpha - \\tan^{-1}\\beta = \\tan^{-1}\\frac{\\alpha - \\beta}{1 + \\alpha\\beta}\\) (valid here because \\(\\alpha\\) and \\(\\beta\\) are positive)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-math-ch10-fig-10-6",
+            "alt": "Schematic, not to scale. A ship at B on the sea, 120 m from the foot A of a cliff. The cliff AD has unknown height h; a 15 m lantern DC stands on top of it, and a 1.5 m buoy AE stands at the foot. Red lines join B to E, D and C. Angle theta 3 is between BA and BE, theta 1 between BA and BD, theta 2 between BD and BC, and theta between BA and BC.",
+            "caption": "Figure 10.6: the lighthouse, cliff, buoy and ship (original schematic drawing after the textbook's figure)"
+          },
+          {
+            "type": "example",
+            "title": "Example 9",
+            "problem": "A lighthouse with a 15 meter tall lantern stands atop a cliff. From a ship 120 meters offshore, the lantern subtends the same angle as a 1.5 meter buoy placed at the base of the cliff.\n(a) Find the exact height of the cliff.\n(b) Calculate the subtended angle (\\(\\theta\\)).",
+            "steps": [
+              "Given: lantern \\(DC = 15\\) m on top of the cliff \\(AD = h\\); ship at \\(B\\) with \\(AB = 120\\) m; buoy \\(AE = 1.5\\) m at the foot \\(A\\); the angle the lantern subtends at \\(B\\) (\\(\\theta_2 = \\angle DBC\\)) equals the angle the buoy subtends (\\(\\theta_3 = \\angle ABE\\)).\nTo find: (a) \\(h\\); (b) the subtended angle \\(\\theta_2\\).\nMethod: the cliff is vertical, so triangles \\(ABD\\), \\(ABC\\) and \\(ABE\\) are right-angled at \\(A\\). Write each angle at \\(B\\) with \\(\\tan^{-1}\\), express \\(\\theta_2\\) as a difference of two angles, set \\(\\theta_2 = \\theta_3\\) and solve for \\(h\\).",
+              "Step 1: Triangle ABD\n\\[\\tan\\theta_1 = \\dfrac{h}{120}\\]\n\\[\\theta_1 = \\tan^{-1}\\left(\\dfrac{h}{120}\\right)\\]\nWhy: in triangle \\(ABD\\) the side opposite \\(\\theta_1\\) is \\(AD = h\\) and the adjacent side is \\(AB = 120\\).",
+              "Step 2: Triangle ABC\n\\[\\tan\\theta = \\dfrac{h + 15}{120}\\]\n\\[\\theta = \\tan^{-1}\\left(\\dfrac{h + 15}{120}\\right)\\]\nWhy: the top of the lantern is \\(AC = AD + DC = h + 15\\) above the sea.",
+              "Step 3: The subtended angle for the lantern\n\\[\\theta_2 = \\theta - \\theta_1\\]\n\\[\\theta_2 = \\tan^{-1}\\left(\\dfrac{h+15}{120}\\right)\\]\n\\[\\qquad - \\tan^{-1}\\left(\\dfrac{h}{120}\\right)\\]\nWhy: the lantern is seen between the lines \\(BD\\) and \\(BC\\), so its angle is the big angle \\(\\theta\\) minus the angle \\(\\theta_1\\) of the cliff.",
+              "Step 4: Triangle ABE (height of the buoy = 1.5 m)\n\\[\\tan\\theta_3 = \\dfrac{1.5}{120}\\]\n\\[\\theta_3 = \\tan^{-1}\\left(\\dfrac{1.5}{120}\\right)\\]\nWhy: opposite side \\(AE = 1.5\\), adjacent side \\(AB = 120\\). Note \\(\\frac{1.5}{120} = 0.0125\\).",
+              "Step 5: Use the condition \\(\\theta_2 = \\theta_3\\)\n\\[\\tan^{-1}\\tfrac{h+15}{120} - \\tan^{-1}\\tfrac{h}{120}\\]\n\\[= \\tan^{-1}\\tfrac{1.5}{120}\\]\nUsing \\(\\tan^{-1}\\alpha - \\tan^{-1}\\beta = \\tan^{-1}\\frac{\\alpha - \\beta}{1 + \\alpha\\beta}\\):\n\\[\\tan^{-1}\\left(\\dfrac{\\frac{h+15}{120} - \\frac{h}{120}}{1 + \\frac{h+15}{120}\\cdot\\frac{h}{120}}\\right)\\]\n\\[= \\tan^{-1}\\left(\\dfrac{1.5}{120}\\right)\\]\nWhy: the question says the lantern subtends the same angle as the buoy. The formula turns the difference of two inverse tangents into one inverse tangent.",
+              "Step 6: Simplify the fraction\nNumerator: \\(\\frac{h+15}{120} - \\frac{h}{120} = \\frac{15}{120}\\).\nDenominator: \\(1 + \\frac{h(h+15)}{14400} = \\frac{14400 + h^2 + 15h}{14400}\\).\nSince \\(\\tan^{-1}\\) is one-one, the arguments are equal:\n\\[\\dfrac{\\frac{15}{120}}{\\frac{14400 + h^2 + 15h}{14400}} = 0.0125\\]\n\\[\\dfrac{15}{120}\\cdot\\dfrac{14400}{14400 + h^2 + 15h} = 0.0125\\]\nWhy: two angles with equal inverse tangents have equal tangents; \\(120 \\times 120 = 14400\\).",
+              "Step 7: Form the quadratic\n\\[\\dfrac{1800}{14400 + h^2 + 15h} = 0.0125\\]\n\\[14400 + h^2 + 15h = \\dfrac{1800}{0.0125}\\]\n\\[14400 + h^2 + 15h = 144000\\]\n\\[h^2 + 15h - 129600 = 0\\]\nWhy: \\(\\frac{15}{120} \\times 14400 = 1800\\); cross-multiply, then subtract \\(144000\\) from both sides.",
+              "Step 8: Quadratic formula\n\\[h = \\dfrac{-15 \\pm \\sqrt{15^2 - 4(1)(-129600)}}{2(1)}\\]\n\\[h = \\dfrac{-15 \\pm \\sqrt{225 + 518400}}{2}\\]\n\\[h = \\dfrac{-15 \\pm \\sqrt{518625}}{2}\\]\n\\[h = \\dfrac{-15 \\pm 720.2}{2}\\]\nWhy: \\(a = 1\\), \\(b = 15\\), \\(c = -129600\\). A height cannot be negative, so we take the \\(+\\) sign.",
+              "Step 9: Height of the cliff\n\\[h = \\dfrac{705.2}{2} = 352.6\\]\nThus, height of the cliff is 352.6 m.\nExact form (the question asks for the exact height): \\(518625 = 225 \\times 2305\\), so \\(\\sqrt{518625} = 15\\sqrt{2305}\\) and\n\\[h = \\dfrac{15(\\sqrt{2305} - 1)}{2} \\approx 352.58 \\text{ m}\\]\nWhy: \\(\\sqrt{225} = 15\\) comes out of the root; \\(2305 = 5 \\times 461\\) has no square factor, so this is the simplest exact form.",
+              "Step 10: (b) The subtended angle for the lantern\n\\[\\theta_2 = \\tan^{-1}\\tfrac{367.6}{120} - \\tan^{-1}\\tfrac{352.6}{120}\\]\n\\[\\theta_2 = 71.93^{\\circ} - 71.21^{\\circ} = 0.72^{\\circ}\\]\nWhy: put \\(h = 352.6\\) in Step 3; \\(h + 15 = 367.6\\). (More precisely \\(\\tan^{-1}\\frac{367.6}{120} = 71.92^{\\circ}\\); see the Book correction.)",
+              "Check:\nBecause \\(\\theta_2 = \\theta_3\\), the angle must equal the buoy's angle:\n\\[\\theta_3 = \\tan^{-1}(0.0125) \\approx 0.716^{\\circ}\\]\nThis rounds to \\(0.72^{\\circ}\\), the same as Step 10. Also \\(352.58^2 + 15(352.58) \\approx 129600\\)."
+            ],
+            "answer": "(a) \\(h = \\frac{15(\\sqrt{2305} - 1)}{2} \\approx 352.6\\) m. (b) \\(\\theta_2 \\approx 0.72^{\\circ}\\).",
+            "book_errors": [
+              "Thus, height of the cliff is 352.6 m.",
+              "\\[\\theta_2 = 71.93^{\\circ} - 71.21^{\\circ} = 0.72^{\\circ}\\]"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Part (a) asks for the exact height, but the book gives only the decimal \\(352.6\\) m (after rounding \\(\\sqrt{518625}\\) to \\(720.2\\)). The exact height is \\(h = \\frac{-15 + \\sqrt{518625}}{2} = \\frac{15(\\sqrt{2305} - 1)}{2} \\approx 352.58\\) m.\nIn part (b) the book prints \\(\\tan^{-1}\\frac{367.6}{120} = 71.93^{\\circ}\\); the value is \\(71.92^{\\circ}\\) (\\(71.921^{\\circ}\\)). The final answer \\(\\theta_2 \\approx 0.72^{\\circ}\\) is right: \\(71.921^{\\circ} - 71.205^{\\circ} = 0.716^{\\circ}\\), which equals \\(\\tan^{-1}(0.0125)\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 10",
+            "problem": "A projectile is launched from the ground with an initial velocity \\(v_0 = 30\\) m/s. The range \\(R\\) of the projectile is given by the formula \\(R = \\frac{v_0^2}{g}\\sin 2\\theta\\), where \\(\\theta\\) is the launch angle to the horizontal and \\(g = 9.8\\) m/s\\(^2\\) is the acceleration due to gravity.\n(a) Find the angle \\(\\theta\\) (in degrees) required for the projectile to hit a target exactly 80 meters away.\n(b) If the maximum range achievable is \\(R_{\\max} = \\frac{v_0^2}{g}\\), determine the angle \\(\\theta\\) that gives the maximum range. Justify your answer mathematically.",
+            "steps": [
+              "Given: \\(v_0 = 30\\) m/s, \\(g = 9.8\\) m/s\\(^2\\), \\(R = \\frac{v_0^2}{g}\\sin 2\\theta\\); in (a) \\(R = 80\\) m.\nTo find: (a) \\(\\theta\\) for \\(R = 80\\) m; (b) the \\(\\theta\\) that makes \\(R\\) largest, with a reason.\nMethod: substitute the values, make \\(\\sin 2\\theta\\) the subject, then solve the trigonometric equation \\(\\sin 2\\theta = k\\) for all angles that make sense for a launch (\\(0^{\\circ} < \\theta < 90^{\\circ}\\), so \\(0^{\\circ} < 2\\theta < 180^{\\circ}\\)).",
+              "Step 1: (a) Substitute the values\n\\[80 = \\dfrac{(30)^2 \\sin 2\\theta}{9.8}\\]\n\\[80 \\times 9.8 = 900\\sin 2\\theta\\]\n\\[784 = 900\\sin 2\\theta\\]\nWhy: \\(v_0^2 = 900\\); multiplying both sides by \\(9.8\\) clears the fraction.",
+              "Step 2: Make \\(\\sin 2\\theta\\) the subject\n\\[\\sin 2\\theta = \\dfrac{784}{900} = 0.8711\\]\nWhy: divide both sides by 900. The value is between 0 and 1, so solutions exist.",
+              "Step 3: First solution\n\\[2\\theta = \\sin^{-1}(0.8711)\\]\n\\[2\\theta = 60.5^{\\circ}\\]\n\\[\\theta = \\dfrac{60.5^{\\circ}}{2} = 30.25^{\\circ}\\]\nWhy: \\(\\sin^{-1}\\) gives the angle in \\([-90^{\\circ}, 90^{\\circ}]\\) whose sine is \\(0.8711\\). (A calculator gives \\(\\sin^{-1}(0.87111) = 60.59^{\\circ}\\), so \\(\\theta = 30.29^{\\circ}\\); see the Book correction.)",
+              "Step 4: Second solution\nSince \\(\\sin\\theta = \\sin(180^{\\circ} - \\theta)\\), second possible solution in \\([0, 2\\pi]\\) is:\n\\[2\\theta = 180^{\\circ} - 60.5^{\\circ} = 119.5^{\\circ}\\]\n\\[\\theta = \\dfrac{119.5^{\\circ}}{2} = 59.75^{\\circ}\\]\nWhy: sine is positive in quadrants I and II, so \\(2\\theta\\) can be in either; since \\(2\\theta\\) lies between \\(0^{\\circ}\\) and \\(180^{\\circ}\\), these two are the only possibilities. (With \\(60.59^{\\circ}\\): \\(2\\theta = 119.41^{\\circ}\\), \\(\\theta = 59.71^{\\circ}\\).)",
+              "Step 5: Conclusion of (a)\nThus, the projectile will hit the ground 80 meters away at angles \\(30.25^{\\circ}\\) or \\(59.75^{\\circ}\\) (more precisely \\(30.29^{\\circ}\\) or \\(59.71^{\\circ}\\)).\nWhy: the two angles add up to \\(90^{\\circ}\\). Complementary launch angles always give the same range, because \\(\\sin 2\\theta = \\sin(180^{\\circ} - 2\\theta) = \\sin 2(90^{\\circ} - \\theta)\\).",
+              "Step 6: (b) When is the range largest?\nThe range is maximized when \\(\\sin 2\\theta\\) is maximized. Since the maximum value of \\(\\sin 2\\theta\\) is 1:\n\\[\\sin 2\\theta = 1 \\Rightarrow 2\\theta = \\sin^{-1}(1)\\]\n\\[2\\theta = 90^{\\circ} \\Rightarrow \\theta = 45^{\\circ}\\]\nWhy: \\(\\frac{v_0^2}{g}\\) is a fixed positive number, so \\(R\\) is largest exactly when \\(\\sin 2\\theta\\) is largest. For \\(0^{\\circ} < 2\\theta < 180^{\\circ}\\), \\(\\sin 2\\theta = 1\\) only at \\(2\\theta = 90^{\\circ}\\).",
+              "Step 7: The maximum range\n\\[R_{\\max} = \\dfrac{v_0^2}{g} = \\dfrac{900}{9.8} = 91.84 \\text{ m}\\]\nWhy (justification): \\(\\sin 2\\theta \\le 1\\) for every angle, so \\(R = \\frac{v_0^2}{g}\\sin 2\\theta \\le \\frac{v_0^2}{g}\\), with equality only at \\(\\theta = 45^{\\circ}\\). Thus, the maximum range is achieved at \\(45^{\\circ}\\), and no other angle yields a greater range.",
+              "Check:\n\\[R(30.29^{\\circ}) = 91.84 \\times \\sin 60.59^{\\circ} \\approx 80.0\\]\n\\[R(45^{\\circ}) = 91.84 \\times \\sin 90^{\\circ} = 91.84\\]\nThe angle found in (a) gives 80 m, and \\(80 < 91.84\\), so the target is within reach."
+            ],
+            "answer": "(a) \\(\\theta \\approx 30.25^{\\circ}\\) or \\(59.75^{\\circ}\\) as printed (more precisely \\(30.29^{\\circ}\\) or \\(59.71^{\\circ}\\)). (b) \\(\\theta = 45^{\\circ}\\), giving \\(R_{\\max} = \\frac{900}{9.8} \\approx 91.84\\) m.",
+            "book_errors": [
+              "\\[2\\theta = 60.5^{\\circ}\\]",
+              "second possible solution in \\([0, 2\\pi]\\) is"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book takes \\(\\sin^{-1}(0.8711) = 60.5^{\\circ}\\). More precisely \\(\\sin^{-1}\\frac{784}{900} = 60.59^{\\circ}\\), so \\(\\theta = 30.29^{\\circ}\\) or \\(59.71^{\\circ}\\) (with \\(30.25^{\\circ}\\) the range is \\(79.93\\) m, not 80 m).\nThe book also says \"second possible solution in \\([0, 2\\pi]\\)\" while working in degrees. The second solution comes from \\(0^{\\circ} < 2\\theta < 180^{\\circ}\\) (a launch angle is between \\(0^{\\circ}\\) and \\(90^{\\circ}\\))."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. In a right triangle, an angle at the observer is \\(\\tan^{-1}\\frac{\\text{opposite}}{\\text{adjacent}}\\).\n2. The angle an object subtends (between the lines to its bottom and its top) is a difference of two such angles.\n3. \\(\\tan^{-1}\\alpha - \\tan^{-1}\\beta = \\tan^{-1}\\frac{\\alpha - \\beta}{1 + \\alpha\\beta}\\) turns the difference into one inverse tangent.\n4. \\(\\sin 2\\theta = k\\) (with \\(0 < k < 1\\)) gives two launch angles that add to \\(90^{\\circ}\\).\n5. \\(R = \\frac{v_0^2}{g}\\sin 2\\theta\\) is largest at \\(\\theta = 45^{\\circ}\\): \\(R_{\\max} = \\frac{v_0^2}{g}\\).\n6. Reject answers that make no physical sense (negative height, angles outside the possible range)."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Using the height of the cliff alone for the top of the lantern: the lantern top is at \\(h + 15\\).\n2. Keeping the negative root of the quadratic: a height is positive.\n3. Giving only one launch angle in Example 10: \\(\\sin 2\\theta = k\\) has two solutions with \\(0^{\\circ} < 2\\theta < 180^{\\circ}\\).\n4. Halving too early: solve for \\(2\\theta\\) first, then divide by 2.\n5. Leaving the calculator in radian mode when the answer is wanted in degrees."
+          }
+        ]
+      }
+    }
+  ]
+}

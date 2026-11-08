@@ -16,6 +16,7 @@ assert TEST_URL.rsplit("/", 1)[-1].endswith("_test"), "refusing to run tests aga
 os.environ["PORTAL_DATABASE_URL"] = TEST_URL
 os.environ["PORTAL_ROLE"] = "test"
 os.environ.setdefault("PORTAL_HEALTH_SAMPLE_S", "0")  # WORKLOAD-GUARD-01: tests publish samples themselves
+os.environ.setdefault("PORTAL_READING_PLACE_CACHE_S", "0")  # READING-PLACE-CACHE-01: tests change the catalogue
 # Uploaded evidence from tests goes to a throwaway directory, never the development store.
 os.environ.setdefault("PORTAL_EVIDENCE_DIR", tempfile.mkdtemp(prefix="portal-evidence-test-"))
 os.environ.setdefault("PORTAL_ASSET_DIR", tempfile.mkdtemp(prefix="portal-assets-test-"))  # ASSETS-01

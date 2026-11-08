@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH11-EXERCISE-11-1-Q2",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch11",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch11/u-exercise-11-1-q2",
+      "title": "Question 2",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 292,
+          "pdf_to": 292,
+          "note": "Exercise 11.1, Question 2: book page 290 (Q1-Q8). The book prints no answers for Unit 11; every answer here is ours."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "2",
+            "prompt": "2. Construct a vector function for a particle moving in a circle.",
+            "explanation": "An open construction question: we build \\(\\mathbf{r}(t)\\) for circular motion.\nWe choose the circle (centre \\(O\\), radius \\(a\\)) and the speed of turning (\\(\\omega\\) radians per second).\nPlan: the book's three steps: components from the angle turned, vector form, domain; then check that \\(|\\mathbf{r}(t)| = a\\).",
+            "steps": [
+              "Given: a particle moves on a circle.\nTo find: a vector function \\(\\mathbf{r}(t)\\) for its position.\nMethod: the three steps of 11.1.3. Let the circle have centre \\(O\\) and radius \\(a\\); the particle starts at \\((a, 0)\\) at \\(t = 0\\) and turns anticlockwise at a constant \\(\\omega\\) radians per second.",
+              "Step-1: Determine the components\nAfter \\(t\\) seconds the radius has turned through\n\\[\\theta = \\omega t\\]\n\\[x(t) = a\\cos(\\omega t)\\]\n\\[y(t) = a\\sin(\\omega t)\\]\nWhy: a point on a circle of radius \\(a\\) at angle \\(\\theta\\) from the \\(x\\)-axis is \\((a\\cos\\theta, a\\sin\\theta)\\) (trigonometric ratios in a right triangle with hypotenuse \\(a\\)).",
+              "Step-2: Combine into vector form\n\\[\\mathbf{r}(t) = a\\cos(\\omega t)\\,\\hat{i}\\]\n\\[\\quad + a\\sin(\\omega t)\\,\\hat{j}\\]\nWhy: the \\(x\\)-component goes with \\(\\hat{i}\\) and the \\(y\\)-component with \\(\\hat{j}\\), as in 11.1.2.",
+              "Step-3: Specify the domain\n\\[t \\ge 0\\]\nOne full turn takes\n\\[T = \\dfrac{2\\pi}{\\omega} \\text{ seconds}\\]\nWhy: \\(t\\) is time measured from the start. Both components are defined for every real \\(t\\), so time is the only restriction.",
+              "A particular case: \\(a = 3\\), \\(\\omega = 1\\)\n\\[\\mathbf{r}(t) = 3\\cos t\\,\\hat{i} + 3\\sin t\\,\\hat{j}\\]\nAt \\(t = 0, \\frac{\\pi}{2}, \\pi, \\frac{3\\pi}{2}\\) the particle is at \\((3, 0), (0, 3), (-3, 0), (0, -3)\\), and back at \\((3, 0)\\) when \\(t = 2\\pi\\).\nWhy: putting values of \\(t\\) shows the particle going round anticlockwise (see the figure).",
+              "Check: the particle stays on the circle\n\\[|\\mathbf{r}(t)|^2 = a^2\\cos^2(\\omega t)\\]\n\\[\\quad + a^2\\sin^2(\\omega t)\\]\n\\[= a^2 \\cdot 1 = a^2\\]\n\\[|\\mathbf{r}(t)| = a \\;\\checkmark\\]\nWhy: \\(\\cos^2\\theta + \\sin^2\\theta = 1\\). The distance from \\(O\\) is always \\(a\\), so every position is on the circle."
+            ],
+            "final_answer": "\\(\\mathbf{r}(t) = a\\cos(\\omega t)\\,\\hat{i} + a\\sin(\\omega t)\\,\\hat{j},\\ t \\ge 0\\) (circle of radius \\(a\\), centre \\(O\\), angular speed \\(\\omega\\)); for example \\(\\mathbf{r}(t) = 3\\cos t\\,\\hat{i} + 3\\sin t\\,\\hat{j}\\).",
+            "answer_figure": {
+              "$asset": "c12-math-ch11-fig-ex11-1-q2-circle",
+              "alt": "Circle of radius 3 with centre at the origin. Points t = 0 at (3, 0), t = pi/2 at (0, 3), t = pi at (-3, 0) and t = 3pi/2 at (0, -3). Arrows show anticlockwise motion; a pink arrow from O is the position vector r(t) making angle t with the x-axis.",
+              "caption": "The particle r(t) = 3cos t i + 3sin t j goes anticlockwise round the circle of radius 3 (our drawing)"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The textbook prints no answers for Exercise 11.1 (none for the whole of Unit 11). Every answer on this page is ours: worked out step by step, checked independently with a computer algebra system (sympy) and compared with a solution book. This question is open: many correct answers exist. Ours is one model answer built with the book's three steps (11.1.3); any function that models the motion correctly is also right."
+          }
+        ]
+      }
+    }
+  ]
+}

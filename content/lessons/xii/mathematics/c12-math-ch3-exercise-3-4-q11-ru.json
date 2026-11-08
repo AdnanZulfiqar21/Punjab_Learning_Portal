@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q11-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q11",
+      "title": "Question 11 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 11: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-4-Q11",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11 Evaluate \\(\\int \\frac{x^2 + 2x - 1}{(x - 1)(x^2 + 1)}\\,dx\\).",
+            "explanation": "Denominator mein ek linear factor \\(x - 1\\) hai aur ek quadratic factor \\(x^2 + 1\\) jo real numbers mein toot nahi sakta (irreducible). Yeh Case-III hai.\nQuadratic factor ke upar sirf constant nahi, balke linear numerator \\(Bx + C\\) likhna parta hai.\nPlan: \\(x = 1\\) rakh kar \\(A\\), phir coefficients compare kar ke \\(B\\) aur \\(C\\); integral mein \\(\\ln\\) aur \\(\\tan^{-1}\\) aayenge.",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{x^2 + 2x - 1}{(x - 1)(x^2 + 1)}\\,dx\\).\nMaloom karna: yeh integral.\nTareeqa: partial fractions, Case-III. \\(x^2 + 1\\) kabhi zero nahi hota (kyunke \\(x^2 \\ge 0\\)), is liye is ka koi real root nahi aur yeh linear factors mein nahi tootta.",
+              "Partial fractions likhein\n\\[\\dfrac{x^2 + 2x - 1}{(x - 1)(x^2 + 1)} = \\dfrac{A}{x - 1} + \\dfrac{Bx + C}{x^2 + 1}\\]\n\\[x^2 + 2x - 1 = A(x^2 + 1) + (Bx + C)(x - 1) \\quad (1)\\]\nKyun: Rule yeh hai ke numerator ki degree denominator se ek kam ho sakti hai. Linear factor ke upar constant (degree 0), quadratic factor ke upar linear \\(Bx + C\\) (degree 1). Agar sirf \\(B\\) likhein to har case poora nahi hoga.",
+              "(1) mein \\(x = 1\\) rakhein\n\\[1 + 2 - 1 = A(2)\\]\n\\[A = 1\\]\nKyun: \\(x = 1\\) par \\(x - 1 = 0\\), is liye \\((Bx + C)(x - 1)\\) wala poora term zero. \\(x^2 + 1\\) ka real root nahi, is liye \\(B\\), \\(C\\) ke liye yeh shortcut nahi chalega.",
+              "Coefficients compare karein\n\\[x^2:\\ 1 = A + B,\\ B = 0\\]\n\\[\\text{constant}:\\ -1 = A - C,\\ C = 2\\]\nKyun: \\((Bx + C)(x - 1) = Bx^2 + (C - B)x - C\\) aur \\(A(x^2 + 1) = Ax^2 + A\\). \\(x^2\\) ka coefficient: \\(A + B = 1\\); constant: \\(A - C = -1\\). Teesri equation (\\(x\\) ka coefficient) \\(C - B = 2\\) se tasdeeq bhi ho gayi.",
+              "Integral lein\n\\[\\int \\left(\\dfrac{1}{x - 1} + \\dfrac{2}{x^2 + 1}\\right)dx\\]\n\\[= \\ln|x - 1| + 2\\tan^{-1} x + c\\]\nKyun: \\(B = 0\\) hone se quadratic wala hissa sirf \\(\\frac{2}{x^2 + 1}\\) reh gaya, aur \\(\\int \\frac{dx}{1 + x^2} = \\tan^{-1} x\\) jaana pehchana formula hai (kyunke \\(\\frac{d}{dx}\\tan^{-1} x = \\frac{1}{1 + x^2}\\)).",
+              "Tasdeeq\n\\[\\dfrac{1}{x - 1} + \\dfrac{2}{x^2 + 1} = \\dfrac{x^2 + 1 + 2x - 2}{(x - 1)(x^2 + 1)}\\]\n\\[= \\dfrac{x^2 + 2x - 1}{(x - 1)(x^2 + 1)} \\;\\checkmark\\]\nKyun: Dono fractions ko wapas jama kiya to asal integrand mil gaya, is liye jawab sahi hai."
+            ],
+            "final_answer": "\\(\\ln|x - 1| + 2\\tan^{-1} x + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke aakhir mein answers (page 302) mein Exercise 3.4 ke jawab ghalat heading \"Exercise 3.6\" ke neeche chhape hain. Is sawal ka jawab us block ka item (xi) hai: \\(\\ln|x - 1| + 2\\tan^{-1} x + c\\). Yeh jawab sahi hai. Jis block par \"Exercise 3.4\" likha hai (page 301) woh kisi aur exercise ke jawab hain, is liye wahan se milane ki koshish na karein."
+          }
+        ]
+      }
+    }
+  ]
+}

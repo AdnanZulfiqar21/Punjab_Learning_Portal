@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-EXERCISE-2-4-Q5",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/u-exercise-2-4-q5",
+      "title": "Question 5",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 58,
+          "pdf_to": 58,
+          "note": "Exercise 2.4, Question 5: book p. 55-56; no printed answers for Unit 2 (verified with sympy and the solution book)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "5",
+            "prompt": "5 Prove that \\(f(x) = \\frac{\\ln(2x)}{x^{2}}\\) has local maximum at \\(x = \\frac{\\sqrt{e}}{2}\\).",
+            "explanation": "A proof with the Second Derivative Test.\nGiven \\(f(x) = \\frac{\\ln(2x)}{x^{2}}\\), defined for \\(x > 0\\).\nPlan: quotient rule for \\(f'\\), show \\(f'\\left(\\frac{\\sqrt{e}}{2}\\right) = 0\\), then show \\(f''\\left(\\frac{\\sqrt{e}}{2}\\right) < 0\\).",
+            "steps": [
+              "Given: \\(f(x) = \\frac{\\ln(2x)}{x^{2}}\\), \\(x > 0\\).\nTo prove: \\(f\\) has a local maximum at \\(x = \\frac{\\sqrt{e}}{2}\\).\nMethod: Second Derivative Test: \\(f'(c) = 0\\) and \\(f''(c) < 0\\) give a relative maximum.",
+              "First derivative\n\\[f'(x) = \\dfrac{x^{2} \\cdot \\frac{1}{x} - \\ln(2x) \\cdot 2x}{x^{4}}\\]\n\\[= \\dfrac{x - 2x\\ln(2x)}{x^{4}}\\]\n\\[= \\dfrac{1 - 2\\ln(2x)}{x^{3}}\\]\nWhy: quotient rule; \\(\\frac{d}{dx}\\ln(2x) = \\frac{2}{2x} = \\frac{1}{x}\\); then cancel one \\(x\\).",
+              "Stationary point\n\\[1 - 2\\ln(2x) = 0\\]\n\\[\\ln(2x) = \\tfrac{1}{2} \\Rightarrow 2x = e^{1/2}\\]\n\\[x = \\dfrac{\\sqrt{e}}{2}\\]\nWhy: \\(x^{3} > 0\\), so only the numerator can be zero; \\(\\ln u = k\\) means \\(u = e^{k}\\).",
+              "Second derivative\nWrite \\(f'(x) = \\frac{u}{v}\\) with \\(u = 1 - 2\\ln(2x)\\), \\(v = x^{3}\\):\n\\[f''(x) = \\dfrac{u'v - uv'}{v^{2}}\\]\n\\[u' = -\\dfrac{2}{x}\\]\nWhy: quotient rule again. At \\(x = \\frac{\\sqrt{e}}{2}\\) we have \\(u = 0\\), so the term \\(uv'\\) vanishes.",
+              "Value of \\(f''\\) at the point\n\\[f''\\left(\\tfrac{\\sqrt{e}}{2}\\right) = \\dfrac{u'}{v} = -\\dfrac{2}{x^{4}}\\]\n\\[x^{4} = \\dfrac{e^{2}}{16}\\]\n\\[f''\\left(\\tfrac{\\sqrt{e}}{2}\\right) = -\\dfrac{32}{e^{2}} < 0\\]\nWhy: \\(\\frac{u'v}{v^{2}} = \\frac{u'}{v} = \\frac{-2/x}{x^{3}}\\); and \\(\\left(\\frac{\\sqrt{e}}{2}\\right)^{4} = \\frac{e^{2}}{16}\\).",
+              "Conclusion\n\\(f'\\left(\\frac{\\sqrt{e}}{2}\\right) = 0\\) and \\(f''\\left(\\frac{\\sqrt{e}}{2}\\right) < 0\\), so \\(f\\) has a local maximum at \\(x = \\frac{\\sqrt{e}}{2}\\).\n\\[f\\left(\\tfrac{\\sqrt{e}}{2}\\right) = \\dfrac{\\ln\\sqrt{e}}{e/4} = \\dfrac{1/2}{e/4} = \\dfrac{2}{e}\\]\nWhy: Second Derivative Test; the value is extra information.",
+              "Check: \\(\\frac{\\sqrt{e}}{2} \\approx 0.824\\). \\(f'(0.7) > 0\\) since \\(\\ln 1.4 \\approx 0.34 < 0.5\\), and \\(f'(1) < 0\\) since \\(\\ln 2 \\approx 0.69 > 0.5\\): the sign changes from \\(+\\) to \\(-\\)."
+            ],
+            "final_answer": "Hence proved: \\(f'\\left(\\frac{\\sqrt{e}}{2}\\right) = 0\\) and \\(f''\\left(\\frac{\\sqrt{e}}{2}\\right) = -\\frac{32}{e^{2}} < 0\\), so \\(f\\) has a local maximum at \\(x = \\frac{\\sqrt{e}}{2}\\) (maximum value \\(\\frac{2}{e}\\))."
+          }
+        ]
+      }
+    }
+  ]
+}

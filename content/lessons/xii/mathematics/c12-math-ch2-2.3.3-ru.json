@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH2-2.3.3-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch2",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch2/2.3.3",
+      "title": "2.3.3 Implicit Differentiation (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 40,
+          "pdf_to": 40,
+          "note": "Book p. 38: implicit differentiation, the three steps, Example 5"
+        }
+      ],
+      "variant_of": "C12-MATH-CH2-2.3.3",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Assalam o alaikum bachon! Ab tak zyada tar functions y = (x ka formula) ki shakal mein thay, jaise y = x^2 + 1. Inhein explicit functions kehte hain: y akela ek taraf baitha hai. Lekin kabhi x aur y aapas mein aise ghul mil jate hain ke y ko alag karna mushkil ya na-mumkin hota hai, jaise x + y^2 + sin(xy^2) = 0. Aisi relations ko implicit kehte hain. Aaj ka sabaq yeh hai ke y ko alag kiye baghair bhi dy/dx kaise nikalte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kitab kehti hai: jab kisi implicit relation ko \\(y\\) ke liye aasani se hal na kiya ja sake (ya jab us se kai explicit functions bante hon), tab bhi hum implicit differentiation se \\(\\frac{dy}{dx}\\) nikal sakte hain. Qadam yeh hain:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "\\(F(x, y) = 0\\) ke dono taraf \\(x\\) ke lihaaz se differentiate karein, aur \\(y\\) ko \\(x\\) ka (chhupa hua) implicit function samjhein.",
+              "Jin terms mein \\(y\\) hai un par Chain Rule lagayein.",
+              "Jo equation bane us se \\(\\frac{dy}{dx}\\) ko alag (solve) karein."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Step 2 ka raaz: \\(y\\) asal mein \\(x\\) ka function hai, chahe formula nazar na aaye. Is liye \\(y\\) wala har term 'function ke andar function' hai. Maslan \\(\\frac{d}{dx}(y^{2}) = 2y \\cdot \\frac{dy}{dx}\\), sirf \\(2y\\) nahin. Yeh \\(\\frac{dy}{dx}\\) chain rule ka andar wala derivative hai.\nEk misaal se samjhein: agar \\(y\\) ki jagah \\(y = x^{3}\\) hota, to \\(y^{2} = x^{6}\\) aur derivative \\(6x^{5}\\). Formula se: \\(2y\\frac{dy}{dx} = 2x^{3} \\cdot 3x^{2} = 6x^{5}\\). Dono barabar! Is liye \\(\\frac{dy}{dx}\\) lagana zaroori hai.\n'Kai explicit functions' ka matlab: \\(x^{2} + y^{2} = 25\\) se do functions bante hain, \\(y = \\sqrt{25 - x^{2}}\\) (upar wala aadha circle) aur \\(y = -\\sqrt{25 - x^{2}}\\) (neeche wala). Implicit differentiation dono ko ek hi baar mein sambhal leti hai."
+          },
+          {
+            "type": "table",
+            "header": [
+              "Explicit function",
+              "Implicit relation"
+            ],
+            "rows": [
+              [
+                "\\(y\\) akela likha hota hai: \\(y = f(x)\\)",
+                "\\(x\\) aur \\(y\\) mile hue: \\(F(x, y) = 0\\)"
+              ],
+              [
+                "Misaal: \\(y = x^{2} + 1\\)",
+                "Misaal: \\(x^{2} + y^{2} = 25\\)"
+              ],
+              [
+                "Formula ka seedha derivative",
+                "Har term ka derivative; har \\(y\\) term par chain rule"
+              ],
+              [
+                "\\(\\frac{dy}{dx}\\) sirf \\(x\\) mein",
+                "\\(\\frac{dy}{dx}\\) mein aam taur par \\(x\\) aur \\(y\\) dono"
+              ]
+            ],
+            "caption": "Explicit aur implicit ka muqabla (hamari table)"
+          },
+          {
+            "type": "example",
+            "title": "Example 5",
+            "problem": "Find \\(\\frac{dy}{dx}\\) if \\(x + y^{2} + \\sin(xy^{2}) = 0\\)",
+            "steps": [
+              "Diya gaya: \\(x + y^{2} + \\sin(xy^{2}) = 0\\).\nMaloom karna: \\(\\frac{dy}{dx}\\).\nTareeqa: is relation ko \\(y\\) ke liye hal karna (yani \\(y = \\ldots\\) banana) bohat mushkil hai, kyun ke \\(y\\) \\(\\sin\\) ke andar bhi hai aur bahar bhi. Is liye implicit differentiation: har term ko \\(x\\) ke lihaaz se differentiate karenge, \\(y\\) wale terms par chain rule aur \\(xy^{2}\\) par product rule lagayenge.",
+              "Step 1: Har term ko x ke lihaaz se differentiate karein\n\\[\\dfrac{d}{dx}(x) + \\dfrac{d}{dx}(y^{2})\\]\n\\[\\quad + \\dfrac{d}{dx}\\left(\\sin(xy^{2})\\right) = 0\\]\nKyun: jor ka derivative derivatives ka jor hota hai, aur daayen taraf 0 ka derivative 0 hai.",
+              "Step 2: Aasan terms ka derivative\n\\[1 + 2y\\dfrac{dy}{dx} + \\cos(xy^{2}) \\cdot \\dfrac{d}{dx}(xy^{2}) = 0\\]\nKyun: \\(\\frac{d}{dx}(x) = 1\\). \\(\\frac{d}{dx}(y^{2}) = 2y\\frac{dy}{dx}\\), chain rule se, kyun ke \\(y\\) khud \\(x\\) par depend karta hai. Aur \\(\\frac{d}{dx}\\sin w = \\cos w \\cdot \\frac{dw}{dx}\\), jahan \\(w = xy^{2}\\).\nDhyan dein: \\(y^{2}\\) ka derivative sirf \\(2y\\) likh dena sab se aam ghalti hai; \\(\\frac{dy}{dx}\\) zaroor lagayein.",
+              "Step 3: xy^2 par product rule, aur 1 ko daayen taraf\n\\[\\dfrac{d}{dx}(xy^{2}) = y^{2} + x\\left(2y\\dfrac{dy}{dx}\\right)\\]\n\\[2y\\dfrac{dy}{dx} + \\cos(xy^{2})\\]\n\\[\\quad \\times \\left\\{y^{2} + x\\left(2y\\dfrac{dy}{dx}\\right)\\right\\} = -1\\]\nKyun: \\(xy^{2}\\) do cheezon ka zarb hai, \\(x\\) aur \\(y^{2}\\). Product rule: \\((x)'y^{2} + x(y^{2})' = y^{2} + x \\cdot 2y\\frac{dy}{dx}\\). Phir 1 ko doosri taraf le gaye to woh \\(-1\\) ban gaya.",
+              "Step 4: Bracket kholein\n\\[2y\\dfrac{dy}{dx} + y^{2}\\cos(xy^{2})\\]\n\\[\\quad + 2xy\\dfrac{dy}{dx}\\cos(xy^{2}) = -1\\]\nKyun: \\(\\cos(xy^{2})\\) ko bracket ke dono terms se zarb kiya.",
+              "Step 5: dy/dx wale terms ikatthe karein\n\\[2y\\dfrac{dy}{dx}\\left\\{1 + x\\cos(xy^{2})\\right\\}\\]\n\\[\\quad = -1 - y^{2}\\cos(xy^{2})\\]\nKyun: jin terms mein \\(\\frac{dy}{dx}\\) hai unhein baayen taraf rakha aur common factor \\(2y\\frac{dy}{dx}\\) bahar nikala; \\(y^{2}\\cos(xy^{2})\\) daayen taraf chala gaya, is liye us ka sign minus ho gaya.",
+              "Step 6: dy/dx alag karein\n\\[\\dfrac{dy}{dx} = -\\dfrac{1 + y^{2}\\cos(xy^{2})}{2y\\left\\{1 + x\\cos(xy^{2})\\right\\}}\\]\nKyun: dono taraf \\(2y\\{1 + x\\cos(xy^{2})\\}\\) se divide kiya. Shart: yeh zero na ho.",
+              "Tasdeeq: yahi relation \\(y\\) ke lihaaz se differentiate karein (ab \\(x\\) ko \\(y\\) ka function maan kar). Wohi qadam yeh dete hain:\n\\[\\dfrac{dx}{dy} = -\\dfrac{2y\\{1 + x\\cos(xy^{2})\\}}{1 + y^{2}\\cos(xy^{2})}\\]\nYeh hamare jawab ka bilkul ulta (reciprocal) hai, aur aisa hi hona chahiye, kyun ke \\(\\frac{dy}{dx} = \\frac{1}{dx/dy}\\)."
+            ],
+            "answer": "\\(\\frac{dy}{dx} = -\\frac{1 + y^{2}\\cos(xy^{2})}{2y\\{1 + x\\cos(xy^{2})\\}}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Hamari taraf se misaal",
+            "text": "(a) Circle \\(x^{2} + y^{2} = 25\\): \\(2x + 2y\\frac{dy}{dx} = 0\\), is liye \\(\\frac{dy}{dx} = -\\frac{x}{y}\\). Point \\((3, 4)\\) par slope \\(-\\frac{3}{4}\\) hai. (Kya \\((3, 4)\\) circle par hai? \\(9 + 16 = 25\\), haan.)\n(b) \\(xy + y^{2} = 1\\): \\(xy\\) par product rule: \\(\\left(y + x\\frac{dy}{dx}\\right) + 2y\\frac{dy}{dx} = 0\\). \\(\\frac{dy}{dx}\\) wale terms ikatthe: \\(\\frac{dy}{dx}(x + 2y) = -y\\), is liye \\(\\frac{dy}{dx} = -\\frac{y}{x + 2y}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Example 5 jaise lambe sawalon mein ghabraiye mat. Poora kaam hamesha isi tarteeb se chalta hai:\n1. Har term ke neeche likh lijiye ke us par kaun sa rule lagega: sirf x wala term (seedha derivative), y wala term (chain rule), x aur y ka zarb (product rule), aur kisi function ke andar x aur y (chain rule ke saath product rule).\n2. Derivative lene ke baad dy/dx wale terms ko ek taraf aur baqi sab ko doosri taraf le jaiye.\n3. dy/dx ko common factor bana kar bahar nikaliye aur divide kar dijiye.\nIs tarteeb se chalenge to sab se lamba sawal bhi chhote chhote qadmon mein toot jata hai, aur ghalti ka imkaan kam ho jata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Khud sochiye",
+            "text": "Circle \\(x^{2} + y^{2} = 25\\) par point \\((5, 0)\\) par \\(\\frac{dy}{dx} = -\\frac{x}{y}\\) kya deta hai? Neeche zero aa jata hai. Iska matlab hai ke wahan tangent khari (vertical) line hai; circle ki daayen kinaare par tangent waqai seedhi khari hoti hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne wali baatein",
+            "text": "1. Implicit differentiation: \\(F(x, y) = 0\\) ke dono taraf \\(x\\) ke lihaaz se differentiate karo; \\(y\\) ko \\(x\\) ka function samjho.\n2. \\(y\\) wale har term ke saath \\(\\frac{dy}{dx}\\) aata hai (chain rule); \\(xy^{2}\\) jaise products par product rule.\n3. \\(\\frac{dy}{dx}\\) wale terms ek taraf, common factor bahar, phir divide.\n4. Jawab mein \\(x\\) aur \\(y\\) dono ho sakte hain; yeh bilkul theek hai."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Aam ghaltiyan",
+            "text": "1. \\(\\frac{d}{dx}(y^{2}) = 2y\\) likhna: \\(\\frac{dy}{dx}\\) ghaib hai.\n2. \\(xy^{2}\\) ko aise differentiate karna jaise sirf \\(x\\) badal raha ho: \\(\\frac{d}{dx}(xy^{2}) = y^{2}\\) ghalat hai; sahi \\(y^{2} + 2xy\\frac{dy}{dx}\\) hai.\n3. Daayen taraf ko differentiate karna bhool jana (constant ka derivative 0 hota hai).\n4. Term ko ek taraf se doosri taraf le jate waqt sign na badalna."
+          }
+        ]
+      }
+    }
+  ]
+}

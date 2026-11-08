@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q8-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q8",
+      "title": "Question 8 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 8: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-3-Q8",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8. Evaluate \\(\\int \\ln(\\sin x)\\cdot\\cos x\\,dx\\).",
+            "explanation": "Yahan \\(\\ln(\\sin x)\\) aur \\(\\cos x\\) ka product hai.\nFind karna hai indefinite integral.\nILATE: L (logarithmic) pehle, is liye \\(\\ln(\\sin x)\\) first function, \\(\\cos x\\) second.\nKhoobsurat baat yeh hai ke \\(\\ln(\\sin x)\\) ka derivative \\(\\frac{\\cos x}{\\sin x}\\) hai, jo \\(\\sin x\\) se zarb ho kar cancel ho jata hai.\nPlan: ek dafa parts, phir seedha \\(\\int \\cos x\\,dx\\). (Doosra raasta: \\(u = \\sin x\\) rakh kar Question 1 wala \\(\\int \\ln u\\,du\\).)",
+            "steps": [
+              "Diya gaya: \\(\\int \\ln(\\sin x)\\cos x\\,dx\\), jahan \\(\\sin x > 0\\).\nMaloom karna: indefinite integral.\nTareeqa: parts: \\(f(x) = \\ln(\\sin x)\\), \\(g(x) = \\cos x\\).",
+              "Doosre ka integral, pehle ka derivative\n\\[\\int \\cos x\\,dx = \\sin x\\]\n\\[\\dfrac{d}{dx}\\ln(\\sin x) = \\dfrac{\\cos x}{\\sin x}\\]\nKyun: chain rule: \\(\\ln u\\) ka derivative \\(\\frac{u'}{u}\\), yahan \\(u = \\sin x\\) aur \\(u' = \\cos x\\).",
+              "Parts lagayein\n\\[= \\ln(\\sin x)\\cdot\\sin x - \\int \\sin x\\cdot\\dfrac{\\cos x}{\\sin x}\\,dx\\]\n\\[= \\sin x\\ln(\\sin x) - \\int \\cos x\\,dx\\]\nKyun: andar \\(\\sin x\\) upar aur neeche cancel ho gaya, sirf \\(\\cos x\\) bacha. Log ab integral se nikal chuka hai.",
+              "Integrate karein\n\\[= \\sin x\\ln(\\sin x) - \\sin x + c\\]\nKyun: \\(\\int \\cos x\\,dx = \\sin x\\).",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}(\\sin x\\ln(\\sin x) - \\sin x)\\]\n\\[= \\cos x\\ln(\\sin x) + \\sin x\\cdot\\dfrac{\\cos x}{\\sin x} - \\cos x\\]\n\\[= \\cos x\\ln(\\sin x)\\]\nKyun: product rule lagaya; \\(+\\cos x\\) aur \\(-\\cos x\\) cancel ho gaye aur integrand bacha."
+            ],
+            "final_answer": "\\(\\sin x\\ln(\\sin x) - \\sin x + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

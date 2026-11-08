@@ -665,3 +665,85 @@ html:has(.lesson-flow, [data-reading-bar]) {
   font-size: 1.05em;
   white-space: nowrap;
 }
+
+/* PREMIUM-LOOK-01: motion for the premium demo components (Magic UI / shadcn patterns). All stop for reduced motion. */
+@property --beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.border-beam {
+  padding: 1.5px;
+  background: conic-gradient(from var(--beam-angle), transparent 0 70%, var(--accent) 82%, color-mix(in oklab, var(--accent) 40%, white) 88%, transparent 96%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: beam-spin var(--beam-duration, 8s) linear infinite;
+}
+@keyframes beam-spin {
+  to {
+    --beam-angle: 360deg;
+  }
+}
+.marquee-track {
+  animation: marquee 60s linear infinite;
+}
+.marquee-reverse {
+  animation-direction: reverse;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-100%);
+  }
+}
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / 0.35) 50%, transparent 65%);
+  transform: translateX(-100%);
+  animation: shimmer 2.8s ease-in-out infinite;
+}
+@keyframes shimmer {
+  60%,
+  100% {
+    transform: translateX(100%);
+  }
+}
+/* Native <details> outline: animate to auto height where supported (interpolate-size), plain open elsewhere. */
+.outline-fold {
+  interpolate-size: allow-keywords;
+}
+.outline-fold::details-content {
+  height: 0;
+  overflow: clip;
+  opacity: 0;
+  transition:
+    height 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 200ms ease,
+    content-visibility 260ms allow-discrete;
+}
+.outline-fold[open]::details-content {
+  height: auto;
+  opacity: 1;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .text-rise,
+  .border-beam,
+  .marquee-track,
+  .shimmer::after,
+  .dialog-overlay,
+  .dialog-content,
+  .sheet-content {
+    animation: none !important;
+  }
+  .outline-fold::details-content {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-3-Q24-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-3-q24",
+      "title": "Question 24 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 91,
+          "pdf_to": 92,
+          "note": "Exercise 3.3, Question 24: book p. 89-90, 24 questions (integration by parts); answer key p. 301 (printed under 'Exercise 3.5')"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-3-Q24",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "24",
+            "prompt": "24. Evaluate \\(\\int e^{3x}(\\sin x - 3\\cos 3x)\\,dx\\).",
+            "explanation": "Bracket mein \\(\\sin x\\) aur \\(\\cos 3x\\) hain, angles alag alag hain, is liye inhein jor nahi sakte. Integral ko do hisson mein torenge: \\(A - 3B\\).\n\\(A = \\int e^{3x}\\sin x\\,dx\\) bilkul Example 35 hai, \\(a = 3\\) aur \\(b = 1\\) ke saath; beech wali shakal \\(\\frac{e^{ax}}{a^2 + b^2}(a\\sin bx - b\\cos bx)\\) use karenge.\n\\(B = \\int e^{3x}\\cos 3x\\,dx\\) ko do dafa parts se nikalenge; \\(B\\) wapas aayega aur equation solve karenge.\nPlan: \\(A\\), phir \\(B\\), phir \\(A - 3B\\).",
+            "steps": [
+              "Diya gaya: \\(\\int e^{3x}(\\sin x - 3\\cos 3x)\\,dx = A - 3B\\).\nMaloom karna: \\(A\\), \\(B\\) aur poora integral.\nTareeqa: \\(A\\) Example 35 se (\\(a = 3\\), \\(b = 1\\)); \\(B\\) do dafa parts se (dono dafa trigonometric first), phir \\(B\\) solve.",
+              "\\(A\\) (Example 35 se)\n\\[A = \\int e^{3x}\\sin x\\,dx = \\dfrac{e^{3x}}{3^2 + 1^2}(3\\sin x - \\cos x)\\]\n\\[= \\dfrac{e^{3x}}{10}(3\\sin x - \\cos x)\\]\nKyun: Example 35 mein saabit kiya tha: \\(\\int e^{ax}\\sin bx\\,dx = \\frac{e^{ax}}{a^2+b^2}(a\\sin bx - b\\cos bx)\\). \\(a = 3\\), \\(b = 1\\) rakhe.",
+              "\\(B\\) par pehli dafa parts\n\\[B = \\cos 3x\\cdot\\dfrac{e^{3x}}{3} - \\int \\dfrac{e^{3x}}{3}(-3\\sin 3x)\\,dx\\]\n\\[= \\dfrac{e^{3x}\\cos 3x}{3} + \\int e^{3x}\\sin 3x\\,dx\\]\nKyun: \\(\\cos 3x\\) first (derivative \\(-3\\sin 3x\\)), \\(e^{3x}\\) second (integral \\(\\frac{e^{3x}}{3}\\)); 3 cancel aur minus plus ban gaya.",
+              "Doosri dafa parts\n\\[\\int e^{3x}\\sin 3x\\,dx = \\sin 3x\\cdot\\dfrac{e^{3x}}{3} - \\int \\dfrac{e^{3x}}{3}(3\\cos 3x)\\,dx\\]\n\\[= \\dfrac{e^{3x}\\sin 3x}{3} - B\\]\nKyun: wohi choice, \\(\\sin 3x\\) first; aakhri integral bilkul \\(B\\) hai.\nDhyan dein: doosri dafa \\(e^{3x}\\) ko first mat banaiye, warna pehle round ka kaam ulat jayega.",
+              "\\(B\\) solve karein\n\\[B = \\dfrac{e^{3x}\\cos 3x}{3} + \\dfrac{e^{3x}\\sin 3x}{3} - B\\]\n\\[2B = \\dfrac{e^{3x}}{3}(\\cos 3x + \\sin 3x)\\]\n\\[B = \\dfrac{e^{3x}}{6}(\\cos 3x + \\sin 3x)\\]\nKyun: \\(-B\\) ko left par laye, \\(2B\\) bana, phir 2 se divide.",
+              "\\(A - 3B\\)\n\\[= \\dfrac{e^{3x}}{10}(3\\sin x - \\cos x)\\]\n\\[\\quad - \\dfrac{e^{3x}}{2}(\\cos 3x + \\sin 3x) + c\\]\nKyun: \\(3B = \\frac{3}{6}e^{3x}(\\ldots) = \\frac{e^{3x}}{2}(\\ldots)\\); aakhir mein ek constant \\(c\\).",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left[\\dfrac{e^{3x}}{10}(3\\sin x - \\cos x)\\right] = e^{3x}\\sin x\\]\n\\[\\dfrac{d}{dx}\\left[\\dfrac{e^{3x}}{2}(\\cos 3x + \\sin 3x)\\right] = 3e^{3x}\\cos 3x\\]\nKyun: pehle ka derivative \\(e^{3x}\\cdot\\frac{10\\sin x}{10}\\) aur doosre ka \\(\\frac{e^{3x}}{2}\\cdot 6\\cos 3x\\); minus karne se integrand mila."
+            ],
+            "final_answer": "\\(\\dfrac{e^{3x}}{10}(3\\sin x - \\cos x) - \\dfrac{e^{3x}}{2}(\\cos 3x + \\sin 3x) + c\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

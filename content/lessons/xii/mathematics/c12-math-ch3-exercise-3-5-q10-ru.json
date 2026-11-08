@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-5-Q10-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-5-q10",
+      "title": "Question 10 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 104,
+          "pdf_to": 104,
+          "note": "Exercise 3.5, Question 10: show-that with f(4 - x) = f(x); book p. 102. No printed answer (show that)."
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-5-Q10",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10 If \\(f(4 - x) = f(x)\\), show that \\(\\int_{0}^{2} f(2x)\\,dx = \\int_{0}^{2} f(x)\\,dx\\).",
+            "explanation": "Yeh saboot (proof) wala sawal hai: left side mein \\(f(2x)\\) hai aur right side mein \\(f(x)\\).\nDiya kya hai? \\(f(4 - x) = f(x)\\), yani \\(f\\) ka graph \\(x = 2\\) ke ird gird aaine ki tarah barabar hai.\nKya saabit karna hai? Dono integrals barabar hain.\nRule kaunsa? Pehle \\(u = 2x\\) rakh kar 2 ko hatayenge; interval \\([0, 4]\\) ban jayega aur saath \\(\\frac{1}{2}\\) aayega. Phir symmetry aur Property VI se \\(\\int_0^4 f = 2\\int_0^2 f\\).\nPlan: substitution, symmetry, cancel.\nYaad rakhiye: proof mein hum jawab se shuru nahi karte; left side se chal kar qadam ba qadam right side tak pohanchte hain, aur har qadam ki wajah likhte hain.",
+            "steps": [
+              "Diya gaya: har \\(x\\) ke liye \\(f(4 - x) = f(x)\\).\nSaabit karna: \\(\\int_{0}^{2} f(2x)\\,dx = \\int_{0}^{2} f(x)\\,dx\\).\nTareeqa: substitution \\(u = 2x\\), phir Property VI: agar \\(f(a - x) = f(x)\\) ho to \\(\\int_0^{a} f = 2\\int_0^{a/2} f\\), yahan \\(a = 4\\).",
+              "\\(u = 2x\\) rakhein\n\\[du = 2\\,dx,\\quad x = 0 \\Rightarrow u = 0,\\quad x = 2 \\Rightarrow u = 4\\]\n\\[\\int_{0}^{2} f(2x)\\,dx = \\dfrac{1}{2}\\int_{0}^{4} f(u)\\,du\\]\nKyun: \\(dx = \\frac{1}{2}du\\), aur limits bhi naye variable ki: \\(x = 2\\) par \\(u = 4\\). Yani \\(f(2x)\\) ka graph \\(f\\) ko aadha daba deta hai, is liye interval double aur area aadha.\nDhyan dein: \\(\\frac{1}{2}\\) aur nayi upar wali limit 4, dono zaroori hain.",
+              "Symmetry istemal karein (Property VI, \\(a = 4\\))\n\\[\\int_{0}^{4} f(u)\\,du = \\int_{0}^{2} \\big(f(u) + f(4 - u)\\big)\\,du\\]\n\\[= 2\\int_{0}^{2} f(u)\\,du\\]\nKyun: \\(f(4 - u) = f(u)\\) diya hai, is liye bracket \\(2f(u)\\) ban gaya. Matlab \\([0, 2]\\) aur \\([2, 4]\\) dono aadhon ka area barabar hai.",
+              "Milayein\n\\[\\int_{0}^{2} f(2x)\\,dx = \\dfrac{1}{2} \\cdot 2\\int_{0}^{2} f(u)\\,du\\]\n\\[= \\int_{0}^{2} f(x)\\,dx\\]\nKyun: \\(\\frac{1}{2}\\) aur 2 cancel ho gaye. Variable ka naam \\(u\\) ho ya \\(x\\), definite integral ki value wohi rehti hai (Property I), kyunke aakhir mein sirf limits rakhi jati hain aur variable ghaib ho jata hai. Is tarah left side qadam ba qadam right side ban gayi, aur yahi saboot hai.",
+              "Tasdeeq: ek misaal se\n\\[f(x) = (x - 2)^2:\\ \\int_{0}^{2} (2x - 2)^2\\,dx = \\dfrac{8}{3}\\]\n\\[\\int_{0}^{2} (x - 2)^2\\,dx = \\dfrac{8}{3} \\;\\checkmark\\]\nKyun: \\((x - 2)^2\\) condition poori karta hai: \\(f(4 - x) = (2 - x)^2 = (x - 2)^2\\). Dono sides ki value \\(\\frac{8}{3}\\) aayi, to result is misaal par sach hai."
+            ],
+            "final_answer": "Saabit ho gaya: \\(\\int_{0}^{2} f(2x)\\,dx = \\int_{0}^{2} f(x)\\,dx\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

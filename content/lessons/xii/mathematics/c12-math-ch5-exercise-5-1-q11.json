@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH5-EXERCISE-5-1-Q11",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch5",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch5/u-exercise-5-1-q11",
+      "title": "Question 11",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 156,
+          "pdf_to": 156,
+          "note": "Exercise 5.1 (book p. 154), Question 11; answer key PDF 306 (Answers 5.1, key numbered 14)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "11",
+            "prompt": "11. Find the condition that the lines \\(y = m_1x + c_1\\); \\(y = m_2x + c_2\\) and \\(y = m_3x + c_3\\) are concurrent.",
+            "explanation": "A general (letters only) version of Theorem 3.\nThe lines are in slope-intercept form, so first rewrite them as \\(ax + by + c = 0\\).\nPlan: general form, determinant, expand, simplify.",
+            "steps": [
+              "Given: \\(y = m_ix + c_i\\), \\(i = 1, 2, 3\\).\nTo find: the condition for concurrency.\nMethod: write each line in general form and use Theorem 3.",
+              "General form\n\\[m_1x - y + c_1 = 0\\]\n\\[m_2x - y + c_2 = 0\\]\n\\[m_3x - y + c_3 = 0\\]\nWhy: Theorem 3 needs \\(ax + by + c = 0\\): here \\(a = m_i\\), \\(b = -1\\), \\(c = c_i\\).",
+              "Theorem 3 (lines with different slopes)\n\\[\\begin{vmatrix} m_1 & -1 & c_1 \\\\ m_2 & -1 & c_2 \\\\ m_3 & -1 & c_3 \\end{vmatrix} = 0\\]\nWhy: the lines are non-parallel when the slopes \\(m_1, m_2, m_3\\) are different.",
+              "Expand along the first row\n\\[m_1(-c_3 + c_2) + 1(m_2c_3 - m_3c_2)\\]\n\\[+ c_1(-m_2 + m_3) = 0\\]\n\\[m_1c_2 - m_1c_3 + m_2c_3\\]\n\\[- m_3c_2 + m_3c_1 - m_2c_1 = 0\\]\nWhy: \\(m_1[(-1)c_3 - c_2(-1)] - (-1)[m_2c_3 - c_2m_3] + c_1[m_2(-1) - (-1)m_3]\\).",
+              "Group neatly\n\\[m_1(c_2 - c_3) + m_2(c_3 - c_1)\\]\n\\[+ m_3(c_1 - c_2) = 0\\]\nWhy: collect the terms of each \\(m_i\\); this is the same six terms as the answer key's \\(m_1c_2 - m_2c_1 + m_2c_3 - m_3c_2 + m_3c_1 - m_1c_3 = 0\\).",
+              "Check (second method):\nLines 1 and 2 meet where \\(m_1x + c_1 = m_2x + c_2\\), i.e. \\(x = \\frac{c_2 - c_1}{m_1 - m_2}\\), \\(y = \\frac{m_1c_2 - m_2c_1}{m_1 - m_2}\\). Putting this point in \\(y = m_3x + c_3\\) and multiplying by \\(m_1 - m_2\\): \\(m_1c_2 - m_2c_1 = m_3(c_2 - c_1) + c_3(m_1 - m_2)\\), which rearranges to the same condition. Example: \\(y = x\\), \\(y = 2x - 1\\), \\(y = 3x - 2\\) all pass through \\((1, 1)\\), and \\(1(-1 + 2) + 2(-2 - 0) + 3(0 + 1) = 1 - 4 + 3 = 0\\)."
+            ],
+            "final_answer": "\\(m_1(c_2 - c_3) + m_2(c_3 - c_1) + m_3(c_1 - c_2) = 0\\), i.e. \\(m_1c_2 - m_2c_1 + m_2c_3 - m_3c_2 + m_3c_1 - m_1c_3 = 0\\) (the slopes being different)."
+          }
+        ]
+      }
+    }
+  ]
+}

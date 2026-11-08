@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-6-Q3",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-6-q3",
+      "title": "Question 3",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 116,
+          "pdf_to": 116,
+          "note": "Exercise 3.6 (printed 1, 1, 2-13, 15; numbered 1-15 as in the answer key), Question 3; answers under block 'Exercise 3.7' (PDF 304)"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(i)",
+            "prompt": "3 (i) [printed as 2 (i)] Sketch the region bounded by the given curves and find the area of the region: \\(y = 2x,\\ y = x^{2}\\).",
+            "explanation": "Area between two curves: we need the intersection points (limits) and which curve is on top.\nFormula: \\(A = \\int_a^b [f(x) - g(x)]\\,dx\\) with \\(f \\ge g\\) (Note 5 of 3.7.1).",
+            "steps": [
+              "Given: \\(y = 2x\\) and \\(y = x^{2}\\).\nTo find: a sketch and the area enclosed.\nMethod: area between two curves, top minus bottom.",
+              "Step 1: Intersection points\n\\[x^{2} = 2x \\Rightarrow x(x - 2) = 0\\]\n\\[x = 0 \\text{ or } x = 2\\]\nPoints: \\((0, 0)\\) and \\((2, 4)\\).\nWhy: the curves enclose the region between the points where they meet.",
+              "Step 2: Which curve is on top?\nAt \\(x = 1\\): line \\(2(1) = 2\\), parabola \\(1^{2} = 1\\). So \\(y = 2x\\) is on top on \\([0, 2]\\).\nWhy: the integrand must be (top) minus (bottom) to give a positive area. The sketch shows the line above the parabola.",
+              "Step 3: Integrate\n\\[A = \\int_0^2 (2x - x^{2})\\,dx\\]\n\\[= \\left[x^{2} - \\dfrac{x^{3}}{3}\\right]_0^2 = 4 - \\dfrac{8}{3} = \\dfrac{4}{3}\\]\nWhy: power rule on each term, then upper limit minus lower limit.",
+              "Check:\nThe parabola-and-chord shortcut: the area between \\(y = x^{2}\\) and a line cutting it at \\(x = \\alpha, \\beta\\) is \\(\\frac{(\\beta - \\alpha)^{3}}{6} = \\frac{8}{6} = \\frac{4}{3}\\). It matches."
+            ],
+            "final_answer": "Area \\(= \\frac{4}{3}\\) square units.",
+            "answer_figure": {
+              "$asset": "c12-math-ch3-fig-ex3-6-q3-i",
+              "alt": "The line y = 2x and the parabola y = x squared meeting at the origin and at (2, 4); the region between them, with the line on top, is shaded.",
+              "caption": "Figure: region for Question 3 (i) (original drawing)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(ii)",
+            "prompt": "3 (ii) [printed as 2 (ii)] Sketch the region bounded by the given curves and find the area of the region: \\(y = \\sqrt{x},\\ y = x^{2}\\).",
+            "explanation": "Again an area between two curves. Both curves pass through the origin and \\((1, 1)\\); between them \\(\\sqrt{x}\\) is above \\(x^{2}\\).\nPlan: intersections, top curve, integrate top minus bottom.",
+            "steps": [
+              "Given: \\(y = \\sqrt{x}\\) and \\(y = x^{2}\\).\nTo find: a sketch and the enclosed area.\nMethod: \\(A = \\int_a^b (\\text{top} - \\text{bottom})\\,dx\\).",
+              "Step 1: Intersection points\n\\[\\sqrt{x} = x^{2} \\Rightarrow x = x^{4}\\]\n\\[x(x^{3} - 1) = 0 \\Rightarrow x = 0,\\ 1\\]\nPoints: \\((0, 0)\\) and \\((1, 1)\\).\nWhy: squaring is safe here because both sides are non-negative for \\(x \\ge 0\\).",
+              "Step 2: Top curve\nAt \\(x = 0.25\\): \\(\\sqrt{0.25} = 0.5\\) and \\(0.25^{2} = 0.0625\\). So \\(y = \\sqrt{x}\\) is on top.\nWhy: for \\(0 < x < 1\\), a square root is larger than the number and a square is smaller.",
+              "Step 3: Integrate\n\\[A = \\int_0^1 \\left(x^{1/2} - x^{2}\\right)dx\\]\n\\[= \\left[\\dfrac{2}{3}x^{3/2} - \\dfrac{x^{3}}{3}\\right]_0^1 = \\dfrac{2}{3} - \\dfrac{1}{3} = \\dfrac{1}{3}\\]\nWhy: write \\(\\sqrt{x} = x^{1/2}\\) so the power rule applies: \\(\\int x^{1/2}dx = \\frac{x^{3/2}}{3/2}\\).",
+              "Check:\nThe two curves are reflections of each other in \\(y = x\\), so the region is cut in half by \\(y = x\\). Half of it is \\(\\int_0^1 (x - x^{2})\\,dx = \\frac{1}{6}\\); double is \\(\\frac{1}{3}\\). It matches."
+            ],
+            "final_answer": "Area \\(= \\frac{1}{3}\\) square unit.",
+            "answer_figure": {
+              "$asset": "c12-math-ch3-fig-ex3-6-q3-ii",
+              "alt": "The curves y = square root of x and y = x squared meeting at the origin and at (1, 1); the region between them, with the square-root curve on top, is shaded.",
+              "caption": "Figure: region for Question 3 (ii) (original drawing)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iii)",
+            "prompt": "3 (iii) [printed as 2 (iii)] Sketch the region bounded by the given curves and find the area of the region: \\(y = x^{4} - x^{2},\\ y = 1 - x^{2}\\).",
+            "explanation": "Area between two curves, both even functions, so the picture is symmetric about the \\(y\\)-axis.\nPlan: find where they meet, decide which is on top, integrate (and use symmetry to simplify).",
+            "steps": [
+              "Given: \\(y = x^{4} - x^{2}\\) and \\(y = 1 - x^{2}\\).\nTo find: a sketch and the enclosed area.\nMethod: top minus bottom, using symmetry.",
+              "Step 1: Intersection points\n\\[x^{4} - x^{2} = 1 - x^{2} \\Rightarrow x^{4} = 1\\]\n\\[x = \\pm 1\\]\nPoints: \\((-1, 0)\\) and \\((1, 0)\\).\nWhy: the \\(-x^{2}\\) terms cancel, leaving a very simple equation.",
+              "Step 2: Top curve\nAt \\(x = 0\\): \\(1 - 0 = 1\\) and \\(0 - 0 = 0\\). So \\(y = 1 - x^{2}\\) is on top on \\([-1, 1]\\).\nWhy: the difference \\((1 - x^{2}) - (x^{4} - x^{2}) = 1 - x^{4} \\ge 0\\) for \\(|x| \\le 1\\).",
+              "Step 3: Integrate\n\\[A = \\int_{-1}^{1}(1 - x^{4})\\,dx = 2\\int_0^1 (1 - x^{4})\\,dx\\]\n\\[= 2\\left[x - \\dfrac{x^{5}}{5}\\right]_0^1 = 2\\cdot\\dfrac{4}{5} = \\dfrac{8}{5}\\]\nWhy: \\(1 - x^{4}\\) is even, so the integral from \\(-1\\) to \\(1\\) is twice the integral from \\(0\\) to \\(1\\).",
+              "Check:\nWithout symmetry: \\(\\left[x - \\frac{x^{5}}{5}\\right]_{-1}^{1} = \\frac{4}{5} - \\left(-\\frac{4}{5}\\right) = \\frac{8}{5}\\). Same result."
+            ],
+            "final_answer": "Area \\(= \\frac{8}{5}\\) square units.",
+            "answer_figure": {
+              "$asset": "c12-math-ch3-fig-ex3-6-q3-iii",
+              "alt": "The curves y = 1 minus x squared (an arch with top (0, 1)) and y = x to the fourth minus x squared (a W shape) meeting at (minus 1, 0) and (1, 0); the region between them is shaded.",
+              "caption": "Figure: region for Question 3 (iii) (original drawing)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "3(iv)",
+            "prompt": "3 (iv) [printed as 2 (iv)] Sketch the region bounded by the given curves and find the area of the region: \\(y = x^{2}\\) and \\(y = |x|\\).",
+            "explanation": "Area between \\(y = |x|\\) and \\(y = x^{2}\\). The absolute value means the line has two pieces, \\(y = x\\) for \\(x \\ge 0\\) and \\(y = -x\\) for \\(x < 0\\), so there are two equal regions.\nPlan: find the meeting points, use symmetry, integrate on \\([0, 1]\\) and double.",
+            "steps": [
+              "Given: \\(y = x^{2}\\) and \\(y = |x|\\).\nTo find: a sketch and the enclosed area.\nMethod: split \\(|x|\\) by sign; both graphs are symmetric about the \\(y\\)-axis.",
+              "Step 1: Intersection points\nFor \\(x \\ge 0\\): \\(x^{2} = x \\Rightarrow x = 0, 1\\).\nFor \\(x < 0\\): \\(x^{2} = -x \\Rightarrow x = -1\\).\nPoints: \\((-1, 1)\\), \\((0, 0)\\), \\((1, 1)\\).\nWhy: \\(|x|\\) must be replaced by \\(x\\) or \\(-x\\) before solving.",
+              "Step 2: Top curve\nAt \\(x = 0.5\\): \\(|x| = 0.5\\), \\(x^{2} = 0.25\\). So \\(y = |x|\\) is on top on \\([-1, 1]\\).\nWhy: for \\(|x| < 1\\), squaring makes a number smaller.",
+              "Step 3: Integrate using symmetry\n\\[A = 2\\int_0^1 (x - x^{2})\\,dx\\]\n\\[= 2\\left[\\dfrac{x^{2}}{2} - \\dfrac{x^{3}}{3}\\right]_0^1 = 2\\cdot\\dfrac{1}{6} = \\dfrac{1}{3}\\]\nWhy: the left region is the mirror image of the right one, and on \\([0, 1]\\), \\(|x| = x\\).",
+              "Check:\nLeft region directly: \\(\\int_{-1}^{0}(-x - x^{2})\\,dx = \\left[-\\frac{x^{2}}{2} - \\frac{x^{3}}{3}\\right]_{-1}^{0} = 0 - \\left(-\\frac{1}{2} + \\frac{1}{3}\\right) = \\frac{1}{6}\\). Equal to the right region, as expected."
+            ],
+            "final_answer": "Area \\(= \\frac{1}{3}\\) square unit.",
+            "answer_figure": {
+              "$asset": "c12-math-ch3-fig-ex3-6-q3-iv",
+              "alt": "The V-shaped graph y = |x| and the parabola y = x squared meeting at (minus 1, 1), the origin and (1, 1); the two small regions between them are shaded.",
+              "caption": "Figure: region for Question 3 (iv) (original drawing)"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

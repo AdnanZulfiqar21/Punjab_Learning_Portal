@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH3-EXERCISE-3-4-Q8-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch3",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch3/u-exercise-3-4-q8",
+      "title": "Question 8 (Roman Urdu)",
+      "language": "roman_ur",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 96,
+          "pdf_to": 96,
+          "note": "Exercise 3.4, Question 8: Exercise 3.4, book page 94: Q1-Q15 (integration by partial fractions); answers book pages 301-302"
+        }
+      ],
+      "variant_of": "C12-MATH-CH3-EXERCISE-3-4-Q8",
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "8",
+            "prompt": "8 Evaluate \\(\\int \\frac{e^x - 1}{e^x\\left(e^x + 1\\right)}\\,dx\\).",
+            "explanation": "Pehli nazar mein yeh rational function nahi lagta, kyunke is mein \\(e^x\\) hai, \\(x\\) ki powers nahi.\nLekin ghor karein: har jagah \\(e^x\\) hi \\(e^x\\) hai. Agar \\(t = e^x\\) rakh dein to yeh \\(t\\) ka rational function ban jata hai.\nSubstitution ke baad denominator \\(t^2(t + 1)\\) banega, jis mein \\(t\\) repeated hai, yani Case-II.\nPlan: substitution (\\(dx\\) ko bhi badalna hai), \\(t\\) mein partial fractions, integral, aur wapas \\(x\\) mein.",
+            "steps": [
+              "Diya gaya: \\(\\int \\frac{e^x - 1}{e^x(e^x + 1)}\\,dx\\).\nMaloom karna: yeh integral.\nTareeqa: substitution \\(t = e^x\\) se yeh \\(t\\) ka rational function banega, phir partial fractions (Case-II). Yeh dikhata hai ke partial fractions sirf seedhe polynomial walon tak mehdood nahi; substitution ke baad bhi kaam aate hain.",
+              "\\(t = e^x\\) rakhein\n\\[dt = e^x\\,dx \\;\\Rightarrow\\; dx = \\dfrac{dt}{t}\\]\n\\[\\int \\dfrac{t - 1}{t(t + 1)}\\cdot\\dfrac{dt}{t} = \\int \\dfrac{t - 1}{t^2(t + 1)}\\,dt\\]\nKyun: \\(e^x\\) ka derivative \\(e^x\\) hai, is liye \\(dt = e^x\\,dx = t\\,dx\\), yani \\(dx = \\frac{dt}{t}\\). Har \\(e^x\\) ki jagah \\(t\\) likha.\nDhyan dein: Sirf \\(e^x\\) badal kar \\(dx\\) ko waise hi chhor dena ghalat hai; \\(dx\\) badalne se hi neeche ek aur \\(t\\) aaya aur \\(t^2\\) bana.",
+              "\\(t\\) mein partial fractions\n\\[\\dfrac{t - 1}{t^2(t + 1)} = \\dfrac{A}{t} + \\dfrac{B}{t^2} + \\dfrac{C}{t + 1}\\]\n\\[t - 1 = At(t + 1) + B(t + 1) + Ct^2 \\quad (1)\\]\nKyun: \\(t\\) do dafa (power 2) hai, is liye us ke do fractions \\(\\frac{A}{t}\\) aur \\(\\frac{B}{t^2}\\); \\(t + 1\\) akela hai to \\(\\frac{C}{t + 1}\\). Phir \\(t^2(t + 1)\\) se multiply.",
+              "Constants nikalein\n\\[t = 0:\\ -1 = B\\]\n\\[t = -1:\\ -2 = C\\]\n\\[t^2:\\ 0 = A + C,\\ A = 2\\]\nKyun: \\(t = 0\\) par \\(A\\) aur \\(C\\) wale terms zero, \\(B(0 + 1) = B\\). \\(t = -1\\) par \\(A\\) aur \\(B\\) wale zero, \\(C(-1)^2 = C\\). \\(A\\) ke liye koi root nahi bacha, is liye \\(t^2\\) ka coefficient compare kiya: right side par \\(A + C\\), left side par 0.",
+              "\\(t\\) mein integral\n\\[\\int \\left(\\dfrac{2}{t} - \\dfrac{1}{t^2} - \\dfrac{2}{t + 1}\\right)dt\\]\n\\[= 2\\ln t + \\dfrac{1}{t} - 2\\ln(t + 1) + c\\]\nKyun: \\(-\\int t^{-2}\\,dt = -\\frac{t^{-1}}{-1} = \\frac{1}{t}\\). \\(t = e^x\\) hamesha positive hai, is liye modulus ki zaroorat nahi.",
+              "Wapas \\(x\\) mein\n\\[= 2x + e^{-x} - 2\\ln(e^x + 1) + c\\]\n\\[= e^{-x} + 2\\ln\\left(\\dfrac{e^x}{e^x + 1}\\right) + c\\]\nKyun: \\(\\ln e^x = x\\) aur \\(\\frac{1}{e^x} = e^{-x}\\). Kitab ki shakal ke liye \\(2x = 2\\ln e^x\\) likh kar logs ko jora: \\(2\\ln e^x - 2\\ln(e^x + 1) = 2\\ln\\frac{e^x}{e^x + 1}\\). Dono shakalein ek hi jawab hain.",
+              "Tasdeeq\n\\[\\dfrac{d}{dx}\\left(2x + e^{-x} - 2\\ln(e^x + 1)\\right)\\]\n\\[= 2 - e^{-x} - \\dfrac{2e^x}{e^x + 1}\\]\n\\[= \\dfrac{2}{e^x + 1} - \\dfrac{1}{e^x} = \\dfrac{e^x - 1}{e^x(e^x + 1)} \\;\\checkmark\\]\nKyun: \\(2 - \\frac{2e^x}{e^x + 1} = \\frac{2e^x + 2 - 2e^x}{e^x + 1} = \\frac{2}{e^x + 1}\\). Phir common denominator \\(e^x(e^x + 1)\\) liya: \\(\\frac{2e^x - (e^x + 1)}{e^x(e^x + 1)} = \\frac{e^x - 1}{e^x(e^x + 1)}\\). Asal integrand wapas mil gaya."
+            ],
+            "final_answer": "\\(e^{-x} + 2\\ln\\left(\\frac{e^x}{e^x + 1}\\right) + c\\), yani \\(2x + e^{-x} - 2\\ln(e^x + 1) + c\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke aakhir mein answers (page 301) mein Exercise 3.4 ke jawab ghalat heading \"Exercise 3.6\" ke neeche chhape hain. Is sawal ka jawab us block ka item (viii) hai: \\(e^{-x} + 2\\ln\\left(\\frac{e^x}{e^x + 1}\\right) + c\\). Yeh jawab sahi hai. Jis block par \"Exercise 3.4\" likha hai (page 301) woh kisi aur exercise ke jawab hain, is liye wahan se milane ki koshish na karein."
+          }
+        ]
+      }
+    }
+  ]
+}
