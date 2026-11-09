@@ -122,6 +122,20 @@ def test_code_listings_keep_their_indentation() -> None:
     assert ok_table.errors == []
     for bad in ({**table, "rows": [["only one"]]}, {**table, "header": ["A"]}):
         assert blocks.validate_body({"blocks": [{**check, "answer_table": bad}]}, for_publication=False).errors
+    # MCQ-BOOK-LINK-01: a practice question may point to the book passage it comes from (a topic and its exact words).
+    mcq = {
+        "type": "checkpoint",
+        "prompt": "Which is a base quantity?",
+        "options": [{"id": "a", "text": "Mass"}, {"id": "b", "text": "Speed"}],
+    }
+    mcq |= {"answer_id": "a", "explanation": "Mass is a base quantity (1.1)."}
+    ref = {
+        "topic_id": "7e170ed2-3ef0-5679-a222-100079160a0e",
+        "quote": "Typical examples of base quantities are length, mass and time.",
+    }
+    assert blocks.validate_body({"blocks": [{**mcq, "book_ref": ref}]}, for_publication=True).errors == []
+    for bad in ({**ref, "topic_id": "1.1"}, {**ref, "quote": "mass"}, {**ref, "page": 3}):
+        assert blocks.validate_body({"blocks": [{**mcq, "book_ref": bad}]}, for_publication=False).errors
     # CODE-RUNNER-01: a program the content tools ran cleanly carries `runnable`; it must be a real boolean.
     assert blocks.validate_body({"blocks": [{**block, "runnable": True}]}, for_publication=True).errors == []
     assert blocks.validate_body({"blocks": [{**block, "runnable": "yes"}]}, for_publication=False).errors

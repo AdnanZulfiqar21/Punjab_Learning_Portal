@@ -19,6 +19,7 @@ from contextlib import contextmanager
 from contextvars import ContextVar
 from dataclasses import dataclass
 from typing import Annotated, Any, Literal
+from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, TypeAdapter, ValidationError, model_validator
 
@@ -267,6 +268,16 @@ class AnswerTable(BaseModel):
         return self
 
 
+class BookRef(BaseModel):
+    """MCQ-BOOK-LINK-01 (owner, 2026-11-08): the book passage a practice question is written from. `topic_id` is the
+    Learn topic that prints it and `quote` its exact words in the English (book) text, so the button under the question
+    opens that topic with the passage highlighted."""
+
+    model_config = ConfigDict(extra="forbid")
+    topic_id: UUID
+    quote: Annotated[str, Field(min_length=8, max_length=600)]
+
+
 class Checkpoint(_Block):
     """A formative check at a lesson point (P07.S1.T3; CHECKPOINTS-01). `question`: 2 to 6 options, one key, and the
     explanation shown after answering. `self_check`: a prompt and what a good answer contains; no key. The key travels
@@ -279,6 +290,8 @@ class Checkpoint(_Block):
     options: list[CheckpointOption] = Field(default_factory=list, max_length=6)
     answer_id: str | None = None
     explanation: Text
+    # MCQ-BOOK-LINK-01: where in the book this question comes from (practice MCQs).
+    book_ref: BookRef | None = None
     # SOLVED-QUESTION-01 (owner, 2026-11-05, Mathematics): a book exercise question solved step by step. `ref` is the
     # printed question number ("3(ii)"), the same in both languages, so a language switch and the question's video
     # solution find the same question; `steps` are the numbered working shown with the revealed answer, and

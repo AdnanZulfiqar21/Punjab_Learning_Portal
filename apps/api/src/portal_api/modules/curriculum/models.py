@@ -30,10 +30,14 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from portal_api.db import Base
 
-TopicKind = Literal["topic", "exercise", "paper", "mcq"]
+TopicKind = Literal["topic", "exercise", "paper", "mcq", "short", "long"]
 EXERCISE_KEY_SUFFIX = "/u-exercise"
 # PRACTICE-MCQ-01: a chapter's practice MCQs, written from the chapter (not printed in the book); Practice only.
 MCQ_KEY_SUFFIX = "/u-mcq"
+# PRACTICE-SHORT-01: a chapter's practice short questions with answers, written from the chapter; Practice only.
+SHORT_KEY_SUFFIX = "/u-short-questions"
+# PRACTICE-LONG-01: a chapter's practice long questions with answers, written from the chapter; Practice only.
+LONG_KEY_SUFFIX = "/u-long-questions"
 # BOOK-PAPERS-01: the Board's paper pattern (pairing scheme) and model paper printed at the end of a book.
 PAPER_KEY_SUFFIXES = ("/u-paper-pattern", "/u-model-paper")
 # A printed heading number in a natural key fragment ("1.1.1.1", or "1.1.1.1~2" for the book's second 1.1.1.1).
@@ -217,6 +221,10 @@ class Topic(Base):
             return "paper"
         if self.natural_key.endswith(MCQ_KEY_SUFFIX):
             return "mcq"
+        if self.natural_key.endswith(SHORT_KEY_SUFFIX):
+            return "short"
+        if self.natural_key.endswith(LONG_KEY_SUFFIX):
+            return "long"
         return "topic"
 
     @property

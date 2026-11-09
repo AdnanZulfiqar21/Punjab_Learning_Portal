@@ -1843,6 +1843,14 @@
             "title": "Grade Number",
             "type": "integer"
           },
+          "long_sets": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/BookExerciseOut"
+            },
+            "title": "Long Sets",
+            "type": "array"
+          },
           "mcq_sets": {
             "default": [],
             "items": {
@@ -1856,6 +1864,14 @@
               "$ref": "#/components/schemas/BookPaperOut"
             },
             "title": "Papers",
+            "type": "array"
+          },
+          "short_sets": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/BookExerciseOut"
+            },
+            "title": "Short Sets",
             "type": "array"
           },
           "subject_code": {
@@ -16944,7 +16960,9 @@
               "topic",
               "exercise",
               "paper",
-              "mcq"
+              "mcq",
+              "short",
+              "long"
             ],
             "title": "Kind",
             "type": "string"
@@ -17035,7 +17053,9 @@
               "topic",
               "exercise",
               "paper",
-              "mcq"
+              "mcq",
+              "short",
+              "long"
             ],
             "title": "Kind",
             "type": "string"

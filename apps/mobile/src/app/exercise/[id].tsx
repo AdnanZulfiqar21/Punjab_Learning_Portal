@@ -144,6 +144,7 @@ function Reader({
             premium={premiumBook(subjectKey(reading.subject_name), reading.grade_number)}
             runnable={lesson.language === "roman_ur"}
             revealLabel={revealLabel(lesson.language)}
+            numbered
           />
         </View>
       )}

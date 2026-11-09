@@ -19,6 +19,7 @@ import { api, GRADE_LABEL, lessonAsset, previewAsset, type TopicLecture, type To
 import { useAuth } from "@/lib/auth";
 import { continuesInto, headingOnly, headingTone } from "@/lib/book-heading";
 import { premiumBook } from "@/lib/book-style";
+import { findBlock } from "@/lib/find-in-book";
 import { useDisplay } from "@/lib/display";
 import { practiceOnly, revealLabel } from "@/lib/exercises";
 import { plainMath } from "@/lib/inline-math";
@@ -34,12 +35,16 @@ type Shown = TopicReading & { continued?: TopicReading };
 const SEGMENTS: readonly (readonly [Segment, string])[] = [...READING_LANGUAGES, ["lecture", "Lecture"]];
 
 export default function TopicScreen() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  // MCQ-BOOK-LINK-01: `find` is the book's words a practice MCQ comes from ("See in book").
+  const { id, find } = useLocalSearchParams<{ id: string; find?: string }>();
   const auth = useAuth();
   const { prefs, update } = usePrefs();
   const token = auth.state.status === "signed_in" ? auth.state.token : null;
-  const { language, choose } = useReadingLanguage();
-  const view = prefs.view === "lecture" ? "lecture" : "read";
+  const { language: chosen, choose } = useReadingLanguage();
+  // The book's words are in the English (book) text, whatever language was last read; the choice is not changed.
+  const [bookFirst, setBookFirst] = useState(Boolean(find));
+  const language: ReadingLanguage = bookFirst ? "en" : chosen;
+  const view = bookFirst ? "read" : prefs.view === "lecture" ? "lecture" : "read";
   const { state, retry } = useRequest(async (signal): Promise<Shown> => {
     const reading = await api.topicLesson(id, token, signal, language);
     // BOOK-HEADING-01: the book's heading alone goes on with its first subtopic (lib/book-heading.ts).
@@ -65,7 +70,11 @@ export default function TopicScreen() {
         language={language}
         view={view}
         lecture={lecture.state.status === "success" ? lecture.state.data : null}
-        onLanguage={choose}
+        onLanguage={(next) => {
+          setBookFirst(false);
+          choose(next);
+        }}
+        find={bookFirst ? find : undefined}
         onView={(next) => update({ view: next })}
         background={c.background}
         placeRef={placeRef}
@@ -84,6 +93,7 @@ function Reader({
   onView,
   background,
   placeRef,
+  find,
 }: {
   reading: Shown;
   token: string | null;
@@ -94,6 +104,7 @@ function Reader({
   onView: (next: "read" | "lecture") => void;
   background: string;
   placeRef: RefObject<Place | null>;
+  find?: string;
 }) {
   const c = useTheme();
   const shown = reading.continued ?? reading; // the topic whose lesson is on the screen
@@ -147,8 +158,15 @@ function Reader({
     if (view === "lecture") onView("read");
     switchLanguage(next);
   }
+  // MCQ-BOOK-LINK-01: scroll the marked passage into view once its block is laid out (a little below the top).
+  const findAt = find ? findBlock(blocks, find) : -1;
+  const found = useRef(false);
   function onBlockLayout(index: number, y: number) {
     blockYs.current[index] = y;
+    if (index === findAt && !found.current) {
+      found.current = true;
+      setTimeout(() => scroll.current?.scrollTo({ y: Math.max(0, bodyTop.current + y - 96), animated: true }), 250);
+    }
     const p = placeRef.current;
     if (!p || !lesson || p.lessonId === lesson.id) return;
     p.target ??= mapPlace(p.signatures, signatures, p.index);
@@ -264,6 +282,7 @@ function Reader({
             runnable={lesson.language === "roman_ur"}
             revealLabel={questions.length > 0 ? revealLabel(lesson.language) : undefined}
             solvedLabels={solvedLabels(lesson.language)}
+            find={find}
           />
         </View>
       )}
@@ -291,6 +310,7 @@ function LessonBody({
   runnable,
   revealLabel: reveal,
   solvedLabels: labels,
+  find,
 }: {
   chapterId: string;
   topicId: string;
@@ -303,6 +323,7 @@ function LessonBody({
   runnable: boolean;
   revealLabel?: string;
   solvedLabels?: ReturnType<typeof solvedLabels>;
+  find?: string;
 }) {
   const { dataSaver } = useDisplay().display;
   useEffect(() => {
@@ -327,6 +348,7 @@ function LessonBody({
         runnable={runnable}
         revealLabel={reveal}
         solvedLabels={labels}
+        find={find}
       />
       {token && !privatePreview ? (
         <View style={{ gap: Space.sm }}>

@@ -1,6 +1,7 @@
 "use client";
 
 // A formative checkpoint inside a lesson (P07.S1.T3). Self-check only: nothing is sent, stored or scored.
+import Link from "next/link";
 import { type ReactNode, useId, useState } from "react";
 import { SOLVED_LABELS_EN, type SolvedLabels } from "@/lib/solved-labels";
 
@@ -21,6 +22,8 @@ export function Checkpoint({
   steps,
   finalAnswer,
   labels = SOLVED_LABELS_EN,
+  bookHref,
+  number,
 }: {
   mode: "question" | "self_check";
   prompt: string;
@@ -41,6 +44,10 @@ export function Checkpoint({
   /** SOLVED-QUESTION-01: the answer, set apart from the working. */
   finalAnswer?: ReactNode;
   labels?: SolvedLabels;
+  /** MCQ-BOOK-LINK-01: opens the book passage this question comes from, highlighted. */
+  bookHref?: string;
+  /** QUESTION-NUMBER-01: the question's printed number, drawn apart from its words (`promptView` then has the words). */
+  number?: string;
 }) {
   const [chosen, setChosen] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
@@ -48,14 +55,45 @@ export function Checkpoint({
   const panelId = useId();
   const done = mode === "question" ? chosen !== null : revealed;
   const solved = mode === "self_check" && (Boolean(steps?.length) || finalAnswer !== undefined);
+  const promptLine = number ? (
+    <p className="flex items-start gap-3">
+      <span
+        className="question-number mt-px inline-flex h-8 min-w-8 shrink-0 items-center justify-center rounded-full bg-accent px-2.5 text-sm font-bold whitespace-nowrap text-white tabular-nums shadow-sm"
+      >
+        <span className="sr-only">{`${labels.question} `}</span>
+        {number}
+      </span>
+      <span className="min-w-0 flex-1 pt-1 whitespace-pre-wrap">{promptView ?? prompt}</span>
+    </p>
+  ) : (
+    <p className="whitespace-pre-wrap">{promptView ?? prompt}</p>
+  );
+  // MCQ-BOOK-LINK-01: opens the book passage this question comes from (also on a question solved step by step).
+  const bookLink = bookHref ? (
+    <Link
+      href={bookHref}
+      className="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-accent/40 bg-surface px-3 text-sm font-semibold text-accent transition-colors hover:bg-accent hover:text-white focus-visible:outline-2 focus-visible:outline-accent"
+    >
+      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 7v14" />
+        <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+      </svg>
+      {labels.book}
+    </Link>
+  ) : null;
   if (solved) {
     // A book question solved step by step: the question, then (on demand) how to think about it, the numbered working
     // and the final answer, each set apart so a student can tell the question, the steps and the answer at a glance.
     return (
       <article aria-label={qref ? `${labels.question} ${qref}` : prompt} className="solved-question overflow-hidden rounded-xl border border-accent/40 bg-surface shadow-sm" data-ref={qref}>
         <div className="space-y-2 bg-accent-soft px-4 py-3">
-          {qref && <p className="text-xs font-semibold tracking-wide text-accent-strong uppercase">{`${labels.question} ${qref}`}</p>}
-          <p className="whitespace-pre-wrap">{promptView ?? prompt}</p>
+          {(qref || bookHref) && (
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              {qref ? <p className="text-xs font-semibold tracking-wide text-accent-strong uppercase">{`${labels.question} ${qref}`}</p> : <span />}
+              {bookLink}
+            </div>
+          )}
+          {promptLine}
           <button
             type="button"
             aria-expanded={revealed}
@@ -103,9 +141,12 @@ export function Checkpoint({
   }
   return (
     <aside aria-label="Check your understanding" className="space-y-3 rounded-xl border border-accent/40 bg-accent-soft p-4">
-      <p className="text-sm font-semibold">Check your understanding</p>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-sm font-semibold">Check your understanding</p>
+        {bookLink}
+      </div>
       {/* Prompts and answers keep their line breaks and indentation: book exercises quote and answer with programs. */}
-      <p className="whitespace-pre-wrap">{promptView ?? prompt}</p>
+      {promptLine}
       {mode === "question" ? (
         <fieldset className="space-y-2" disabled={chosen !== null}>
           <legend className="sr-only">{prompt}</legend>

@@ -2,6 +2,7 @@
 // natively, comparison tables become cards, and `model3d` blocks show a poster render with a drag-to-rotate turntable.
 // An unknown or unsupported block shows its reviewed fallback, or an explicit "update required" note instead of failing.
 import { Image } from "expo-image";
+import { router } from "expo-router";
 import { createContext, Fragment, useContext, useMemo, useState, type ReactNode } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
@@ -16,6 +17,8 @@ import { bookBoxKind, boxRow, isMarginNote, isSideBox, isSideFigure, type BookBo
 import { bookErrors, markPieces, styledPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
+import { splitQuestionNumber } from "@/lib/question-number";
+import { findBlock, findRange } from "@/lib/find-in-book";
 import { comparisonCards } from "@/lib/lesson-tables";
 import { plainBlocks } from "@/lib/inline-math";
 import { SOLVED_LABELS_EN, stepText, type SolvedLabels } from "@/lib/solved-labels";
@@ -65,8 +68,36 @@ function Code({ text, language, marks }: { text: string; language: string; marks
 }
 
 /** Text with the textbook's wrong passages marked in red (BOOK-CORRECTION-01). Nested Text keeps it one paragraph. */
+/** MCQ-BOOK-LINK-01: opens the Learn topic that prints a practice question's passage, with that passage marked. */
+function bookPress(ref: unknown): (() => void) | undefined {
+  const r = (ref ?? null) as { topic_id?: unknown; quote?: unknown } | null;
+  if (!r || typeof r.topic_id !== "string" || typeof r.quote !== "string") return undefined;
+  const id = r.topic_id;
+  const find = r.quote;
+  return () => router.push({ pathname: "/topic/[id]", params: { id, find } });
+}
+
 function Marked({ text, marks, bold = [] }: { text: string; marks: string[]; bold?: string[] }) {
   const c = useTheme();
+  const scheme = useScheme();
+  const find = useContext(Find);
+  const hit = find ? findRange(text, find) : null;
+  if (hit) {
+    // MCQ-BOOK-LINK-01: the book's words a practice question comes from, marked like a highlighter pen.
+    return (
+      <>
+        <Find.Provider value={null}>
+          <Marked text={text.slice(0, hit[0])} marks={marks} bold={bold} />
+        </Find.Provider>
+        <Text style={{ backgroundColor: scheme === "dark" ? "#b38f00" : "#ffe36b", color: scheme === "dark" ? "#fffdf5" : "#1c1a17" }}>
+          {text.slice(hit[0], hit[1])}
+        </Text>
+        <Find.Provider value={null}>
+          <Marked text={text.slice(hit[1])} marks={marks} bold={bold} />
+        </Find.Provider>
+      </>
+    );
+  }
   if (!marks.length && !bold.length) return <>{text}</>;
   return (
     <>
@@ -115,7 +146,11 @@ const Premium = createContext(false);
 const Runnable = createContext(false);
 /** BOOK-EXERCISES-01: the words on each self-check's reveal button (the checkpoint's own label otherwise). */
 const RevealLabel = createContext<string | undefined>(undefined);
+/** QUESTION-NUMBER-01: a Practice page: each question's printed number is drawn apart from its words. */
+const Numbered = createContext(false);
 const Solved = createContext<SolvedLabels>(SOLVED_LABELS_EN);
+/** MCQ-BOOK-LINK-01: the book's words to mark, given only to the block that holds them. */
+const Find = createContext<string | null>(null);
 
 export function LessonBlocks({
   blocks: authored,
@@ -127,6 +162,8 @@ export function LessonBlocks({
   runnable = false,
   revealLabel,
   solvedLabels = SOLVED_LABELS_EN,
+  find,
+  numbered = false,
 }: {
   blocks: Block[];
   assetSource?: AssetSource;
@@ -141,16 +178,43 @@ export function LessonBlocks({
   revealLabel?: string;
   /** SOLVED-QUESTION-01: the words of a solved book question in the lesson's language. */
   solvedLabels?: SolvedLabels;
+  /** MCQ-BOOK-LINK-01: the book's words to mark like a highlighter ("See in book" from a practice MCQ). */
+  find?: string;
+  /** QUESTION-NUMBER-01: a Practice page: each question's printed number is drawn apart from its words. */
+  numbered?: boolean;
 }) {
   // INLINE-MATH-01: formulas written in the text (\( … \), \[ … \]) read as plain text here.
   const blocks = useMemo(() => plainBlocks(authored) as Block[], [authored]);
+  // The block drawn with the words (a side item is drawn in its paragraph's row, a quick check's question in its card).
+  const target = find ? findBlock(blocks, find) : -1;
+  const sideStart = target < 0 ? -1 : sideRunStart(blocks, target);
+  const holder = target < 0 ? -1 : sideStart >= 0 ? sideStart : isQuickCheck(blocks[target - 1], blocks[target]) ? target - 1 : target;
   return (
     <Solved.Provider value={solvedLabels}>
+    <Numbered.Provider value={numbered}>
     <RevealLabel.Provider value={revealLabel}>
     <Runnable.Provider value={runnable}>
     <Premium.Provider value={premium}>
     <View style={{ gap: Space.lg }}>
       {blocks.map((b, i) => {
+        const el = renderAt(b, i);
+        return i === holder && el ? (
+          <Find.Provider key={`find-${i}`} value={find ?? null}>
+            {el}
+          </Find.Provider>
+        ) : (
+          el
+        );
+      })}
+    </View>
+    </Premium.Provider>
+    </Runnable.Provider>
+    </RevealLabel.Provider>
+    </Numbered.Provider>
+    </Solved.Provider>
+  );
+
+  function renderAt(b: Block, i: number): ReactNode {
         if (isQuickCheck(blocks[i - 1], b)) return null; // drawn inside the card above
         // BOOK-LAYOUT-01 and BOOK-BOX-01 on the phone (owner, 2026-11-08: "book wala format follow karo phr wo chahy boxes
         // hain ya figures"): what the book prints at the side of a paragraph (a figure marked side, a short printed box
@@ -211,13 +275,7 @@ export function LessonBlocks({
             {b.type === "equation" && equationAction?.(i)}
           </Fragment>
         );
-      })}
-    </View>
-    </Premium.Provider>
-    </Runnable.Provider>
-    </RevealLabel.Provider>
-    </Solved.Provider>
-  );
+  }
 }
 
 /** A figure plate: archived PNGs have white backgrounds, so the plate stays white in both themes. Tapping it opens the
@@ -477,6 +535,7 @@ function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block
   const runnable = useContext(Runnable);
   const revealLabel = useContext(RevealLabel);
   const solvedLabels = useContext(Solved);
+  const numbered = useContext(Numbered);
   const marks = bookErrors(b.book_errors);
   const bold = bookErrors(b.bold); // BOOK-BOLD-01: the terms the book prints in bold
   switch (b.type) {
@@ -664,7 +723,8 @@ function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block
       return (
         <Checkpoint
           mode={b.mode === "self_check" ? "self_check" : "question"}
-          prompt={str(b.prompt)}
+          prompt={(numbered ? splitQuestionNumber(str(b.prompt))?.text : undefined) ?? str(b.prompt)}
+          number={numbered ? splitQuestionNumber(str(b.prompt))?.number : undefined}
           options={Array.isArray(b.options) ? (b.options as { id: string; text: string }[]) : []}
           answerId={typeof b.answer_id === "string" ? b.answer_id : null}
           explanation={str(b.explanation)}
@@ -672,6 +732,7 @@ function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block
           steps={Array.isArray(b.steps) ? strs(b.steps).map(stepText) : undefined}
           finalAnswer={str(b.final_answer) || undefined}
           labels={solvedLabels}
+          onBook={bookPress(b.book_ref)}
           answerFigure={
             answerTable || answerFigure ? (
               <View style={{ gap: Space.sm }}>

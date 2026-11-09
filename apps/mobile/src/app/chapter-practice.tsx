@@ -25,7 +25,7 @@ export default function ChapterPracticeScreen() {
   return (
     <Screen>
       <ScrollView contentContainerStyle={{ padding: Space.lg, gap: Space.lg }}>
-        <T variant="muted">Our own MCQs for each chapter of your book, with answers explained in English and Roman Urdu.</T>
+        <T variant="muted">Our own MCQs, short questions and long questions for each chapter of your book, with answers in English and Roman Urdu.</T>
         <List
           token={state.status === "signed_in" ? state.token : null}
           initialGrade={me?.profile?.grade === 12 ? 12 : 11}
@@ -43,7 +43,7 @@ function List({ token, initialGrade, initialSubject }: { token: string | null; i
   const req = useRequest((signal) => api.bookExercises(grade, subject, token, signal), [grade, subject, token]);
   const book = req.state.status === "success" ? req.state.data : null;
   const chapters = book ? practiceChapters(book) : [];
-  const any = (book?.mcq_sets ?? []).length > 0;
+  const any = [book?.mcq_sets, book?.short_sets, book?.long_sets].some((s) => (s ?? []).length > 0);
   return (
     <View style={{ gap: Space.lg }}>
       <Choices label="Class" options={[[11, GRADE_LABEL[11]], [12, GRADE_LABEL[12]]] as const} selected={[grade]} onToggle={setGrade} />
@@ -51,7 +51,7 @@ function List({ token, initialGrade, initialSubject }: { token: string | null; i
       {req.state.status === "loading" && <Loading label="Loading chapter practice" />}
       {req.state.status === "error" && <ErrorState error={req.state.error} onRetry={req.retry} />}
       {book && !any && (
-        <Notice title="No chapter practice here yet">MCQs for this book are added chapter by chapter. They appear here once they are.</Notice>
+        <Notice title="No chapter practice here yet">MCQs, short questions and long questions for this book are added chapter by chapter. They appear here once they are.</Notice>
       )}
       {book && any && (
         <View style={{ gap: Space.md }}>
@@ -72,6 +72,8 @@ function List({ token, initialGrade, initialSubject }: { token: string | null; i
               </View>
               <View style={{ gap: Space.xs, marginTop: Space.sm }}>
                 <SetLink kind="MCQs" chapter={`${book.chapter_label} ${ch.number}`} item={ch.mcqs} />
+                <SetLink kind="Short questions" chapter={`${book.chapter_label} ${ch.number}`} item={ch.shorts} />
+                <SetLink kind="Long questions" chapter={`${book.chapter_label} ${ch.number}`} item={ch.longs} />
               </View>
             </Card>
           ))}

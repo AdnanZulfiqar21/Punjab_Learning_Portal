@@ -18,6 +18,8 @@ export function practiceOnly(kind: string | undefined): boolean {
 /** A Practice screen's title: a Board paper's own ("Model Paper", "Paper Pattern"), "Chapter 1 · MCQs", else "Chapter 2 · Exercise". */
 export function practiceTitle(reading: { kind?: string; title: string; chapter_number: number }): string {
   if (reading.kind === "paper") return reading.title;
+  if (reading.kind === "short") return shortTitle("Chapter", reading.chapter_number);
+  if (reading.kind === "long") return longTitle("Chapter", reading.chapter_number);
   return reading.kind === "mcq" ? mcqTitle("Chapter", reading.chapter_number) : exerciseTitle("Chapter", reading.chapter_number);
 }
 
@@ -26,15 +28,27 @@ export function mcqTitle(chapterLabel: string, chapterNumber: number): string {
   return `${chapterLabel} ${chapterNumber} · MCQs`;
 }
 
+/** PRACTICE-SHORT-01: a chapter's practice short questions with answers: "Chapter 1 · Short Questions". */
+export function shortTitle(chapterLabel: string, chapterNumber: number): string {
+  return `${chapterLabel} ${chapterNumber} · Short Questions`;
+}
+
+/** PRACTICE-LONG-01: a chapter's practice long questions with answers: "Chapter 1 · Long Questions". */
+export function longTitle(chapterLabel: string, chapterNumber: number): string {
+  return `${chapterLabel} ${chapterNumber} · Long Questions`;
+}
+
 type ChapterItem = { topic_id: string; chapter_number: number; chapter_title: string; availability: string; available_languages: readonly string[] };
 
 /** PRACTICE-MCQ-01: Practice by book, then chapter, as Learn: each chapter with its book exercise and its MCQs (either
  * may be missing), in chapter order. */
-export function practiceChapters<E extends ChapterItem>(book: { exercises: readonly E[]; mcq_sets?: readonly E[] }) {
-  const chapters = new Map<number, { number: number; title: string; exercise?: E; mcqs?: E }>();
+export function practiceChapters<E extends ChapterItem>(book: { exercises: readonly E[]; mcq_sets?: readonly E[]; short_sets?: readonly E[]; long_sets?: readonly E[] }) {
+  const chapters = new Map<number, { number: number; title: string; exercise?: E; mcqs?: E; shorts?: E; longs?: E }>();
   const at = (e: E) => chapters.get(e.chapter_number) ?? chapters.set(e.chapter_number, { number: e.chapter_number, title: e.chapter_title }).get(e.chapter_number)!;
   for (const e of book.exercises) at(e).exercise = e;
   for (const m of book.mcq_sets ?? []) at(m).mcqs = m;
+  for (const s of book.short_sets ?? []) at(s).shorts = s;
+  for (const l of book.long_sets ?? []) at(l).longs = l;
   return [...chapters.values()].sort((a, b) => a.number - b.number);
 }
 
