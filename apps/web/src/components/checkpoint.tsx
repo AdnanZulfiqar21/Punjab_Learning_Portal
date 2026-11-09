@@ -164,14 +164,19 @@ export function Checkpoint({
           })}
         </fieldset>
       ) : (
-        !revealed && (
-          <button type="button" onClick={() => setRevealed(true)} className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-medium hover:border-accent">
-            {revealLabel}
-          </button>
-        )
+        // ANSWER-TOGGLE-01: the same button hides the answer again once it is shown.
+        <button
+          type="button"
+          aria-expanded={revealed}
+          aria-controls={panelId}
+          onClick={() => setRevealed((r) => !r)}
+          className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-medium hover:border-accent"
+        >
+          {revealed ? labels.hide : revealLabel}
+        </button>
       )}
       {done && (
-        <p role="status" className="text-sm">
+        <p id={panelId} role="status" className="text-sm">
           {mode === "question" && (chosen === answerId ? "Right. " : "Not quite. ")}
           <span className="whitespace-pre-wrap">{explanationView ?? explanation}</span>
         </p>
