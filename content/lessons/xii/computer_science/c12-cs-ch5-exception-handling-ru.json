@@ -72,9 +72,9 @@
           },
           {
             "type": "callout",
-            "tone": "warning",
-            "title": "Agar connection hi nakam ho",
-            "text": "Agar sqlite3.connect() khud nakam ho to connection ka naam banta hi nahi, is liye finally mein 'if connection:' NameError deta hai, aur except wala rollback bhi isi tarah nakam hota hai. try se pehle connection = None likhna, aur rollback se pehle bhi 'if connection:', ise theek karta hai."
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ka program us waqt crash ho jata hai jab sqlite3.connect() khud nakam ho (maslan database file khul na sake): connection ka naam banta hi nahi, is liye except mein connection.rollback() aur finally mein 'if connection:' dono NameError dete hain. Sahi: try se pehle connection = None likhein, aur except mein 'if connection: connection.rollback()'. Phir program \"Error occurred: unable to open database file\" dikha kar baghair crash ke khatam hota hai."
           },
           {
             "type": "callout",
