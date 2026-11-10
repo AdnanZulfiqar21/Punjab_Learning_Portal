@@ -1,0 +1,727 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-SHORT",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-short-questions",
+      "title": "Short Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 223,
+          "pdf_to": 241,
+          "note": "Practice short questions written from Unit 12 (PDF 223-241, printed 218-236); not printed in the book. Based on the unit's text, theorems, formulas and worked examples (changed values); none repeats the unit's exercises. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice short questions for the whole of Unit 12 (Limit and Continuity), arranged by the unit's sections, in the style of a 2-mark Board short question. Each one is solved briefly, step by step."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.1.1 Meaning of the Phrase \"x approaches zero\""
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Show that the terms of \\(x_{n} = \\frac{1}{2n}\\) approach \\(0\\), and find after which position every term is smaller than \\(0.001\\).",
+            "explanation": "Terms: \\(\\frac{1}{2}, \\frac{1}{4}, \\frac{1}{6}, \\ldots\\) become as small as we please as \\(n\\) grows, so \\(x_{n} \\to 0\\) as \\(n \\to \\infty\\). \\(\\frac{1}{2n} < 0.001 \\Leftrightarrow 2n > 1000 \\Leftrightarrow n > 500\\): every term after the 500th.",
+            "book_ref": {
+              "topic_id": "e74f561b-eb30-50c8-a1e3-703360749f31",
+              "quote": "becoming closer and closer to"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.1.2 Meaning of the Phrase \"x approaches infinity\""
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Explain why \\(x_{n} = 2^{n}\\) tends to infinity, and find the first \\(n\\) for which \\(x_{n} > 1000\\).",
+            "explanation": "\\(2, 4, 8, 16, \\ldots\\) increase without end and can be made as large as we please, so \\(x_{n} \\to \\infty\\) as \\(n \\to \\infty\\). \\(2^{9} = 512\\), \\(2^{10} = 1024 > 1000\\): the first such \\(n\\) is \\(10\\).",
+            "book_ref": {
+              "topic_id": "b7ab0767-838f-5279-88cd-7dafbe044d54",
+              "quote": "can be made as large as we please by taking"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.1.3 Meaning of the Phrase \"x approaches a\""
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 What is meant by \\(x \\to a\\)?",
+            "explanation": "\\(x \\to a\\) means \\(x\\) is sufficiently close to \\(a\\) but different from \\(a\\), from both the left and the right of \\(a\\): \\(x - a\\) becomes as small as we please, but \\(x - a \\ne 0\\).",
+            "book_ref": {
+              "topic_id": "0c7dbab2-f735-5f96-807f-f6128e3d7e83",
+              "quote": "but different from the number"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Distinguish between \\(x \\to 0\\) and \\(x = 0\\).",
+            "explanation": "See the table.",
+            "book_ref": {
+              "topic_id": "0c7dbab2-f735-5f96-807f-f6128e3d7e83",
+              "quote": "\\(x \\to 0\\) is quite different from \\(x = 0\\)"
+            },
+            "answer_table": {
+              "header": [
+                "\\(x \\to 0\\)",
+                "\\(x = 0\\)"
+              ],
+              "rows": [
+                [
+                  "\\(x\\) is very close to zero",
+                  "\\(x\\) is actually zero"
+                ],
+                [
+                  "\\(x\\) is never equal to \\(0\\)",
+                  "\\(x\\) has the single value \\(0\\)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.1.4 Concept of Limit of a Function"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 How does the area of a regular polygon inscribed in a circle of radius \\(1\\) show the idea of a limit?",
+            "explanation": "Doubling the sides gives areas \\(2\\) (square), \\(2\\sqrt{2} \\approx 2.828\\) (8 sides), \\(3.061\\) (16 sides), getting nearer to \\(\\pi \\approx 3.142\\). No polygon reaches \\(\\pi\\), but area of inscribed polygon \\(\\to\\) area of circle \\(= \\pi\\) as \\(n \\to \\infty\\).",
+            "book_ref": {
+              "topic_id": "935adfbf-5580-5d79-a7c2-f458e6acf1af",
+              "quote": "the limiting value of the area of the inscribed polygon is the area of the circle"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Use values of \\(x\\) on both sides of \\(3\\) to find \\(\\lim_{x \\to 3}(2x + 1)\\) numerically.",
+            "explanation": "\\(f(2.99) = 6.98\\), \\(f(2.999) = 6.998\\); \\(f(3.001) = 7.002\\), \\(f(3.01) = 7.02\\). From both sides the values approach \\(7\\), so \\(\\lim_{x \\to 3}(2x + 1) = 7\\).",
+            "book_ref": {
+              "topic_id": "935adfbf-5580-5d79-a7c2-f458e6acf1af",
+              "quote": "We say that 8 is the limit of"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.1.5 Limit of a Function"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Define the limit of a function.",
+            "explanation": "Let \\(f(x)\\) be defined in an open interval near \\(a\\) (need not be at \\(a\\)). If, as \\(x\\) approaches \\(a\\) from both the left and the right of \\(a\\), \\(f(x)\\) approaches a specific number \\(L\\), then \\(L\\) is the limit of \\(f(x)\\) as \\(x \\to a\\): \\(\\lim_{x \\to a} f(x) = L\\).",
+            "book_ref": {
+              "topic_id": "abfc303f-daaf-544f-96aa-88be6fea72ec",
+              "quote": "be defined in an open interval near the number"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.1.6 Theorems on Limits of Functions"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 State the theorem on the limit of a quotient of two functions.",
+            "explanation": "If \\(\\lim_{x \\to a} f(x) = L\\) and \\(\\lim_{x \\to a} g(x) = M\\), then \\(\\lim_{x \\to a}\\frac{f(x)}{g(x)} = \\frac{L}{M}\\), provided \\(g(x) \\ne 0\\) in a neighbourhood of \\(a\\) and \\(M \\ne 0\\).",
+            "book_ref": {
+              "topic_id": "a6d10277-79dd-5d65-971a-0b757d6f80dd",
+              "quote": "The limit of the quotient of the functions is equal to the quotient of their limits"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Evaluate \\(\\lim_{x \\to -2}(x^{3} + 4x - 1)\\) by using the theorems on limits.",
+            "explanation": "\\(= \\lim x^{3} + 4\\lim x - \\lim 1 = (-2)^{3} + 4(-2) - 1 = -8 - 8 - 1 = -17\\).",
+            "book_ref": {
+              "topic_id": "a6d10277-79dd-5d65-971a-0b757d6f80dd",
+              "quote": "The limit of the sum of two functions is equal to the sum of their limits."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Evaluate \\(\\lim_{x \\to 3}\\sqrt{x^{2} + 16}\\).",
+            "explanation": "\\(= \\left[\\lim_{x \\to 3}(x^{2} + 16)\\right]^{\\frac{1}{2}} = (9 + 16)^{\\frac{1}{2}} = \\sqrt{25} = 5\\).",
+            "book_ref": {
+              "topic_id": "a6d10277-79dd-5d65-971a-0b757d6f80dd",
+              "quote": "where \\(p > 0\\) and \\(p \\in \\mathbb{R}\\)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Evaluate \\(\\lim_{x \\to 1}\\frac{4x^{2} + 1}{2x + 3}\\).",
+            "explanation": "The denominator's limit is \\(2 + 3 = 5 \\ne 0\\), so \\(= \\frac{\\lim(4x^{2} + 1)}{\\lim(2x + 3)} = \\frac{5}{5} = 1\\).",
+            "book_ref": {
+              "topic_id": "a6d10277-79dd-5d65-971a-0b757d6f80dd",
+              "quote": "provided the limit of denominator is non-zero"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 If \\(\\lim_{x \\to a} f(x) = 4\\) and \\(\\lim_{x \\to a} g(x) = -3\\), find \\(\\lim_{x \\to a}\\left[f(x)\\,g(x) + 2f(x)\\right]\\).",
+            "explanation": "\\(= LM + 2L = (4)(-3) + 2(4) = -12 + 8 = -4\\).",
+            "book_ref": {
+              "topic_id": "a6d10277-79dd-5d65-971a-0b757d6f80dd",
+              "quote": "The limit of the product of the functions is equal to the product of their limits."
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.2 Limits of Important Functions"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 Evaluate \\(\\lim_{x \\to -3}\\frac{x^{2} - 9}{x + 3}\\).",
+            "explanation": "Substitution gives \\(\\frac{0}{0}\\). \\(\\frac{(x + 3)(x - 3)}{x + 3} = x - 3\\) (\\(x \\ne -3\\)), so the limit is \\(-3 - 3 = -6\\).",
+            "book_ref": {
+              "topic_id": "dae59391-de49-5d37-af0b-cce44fdbb367",
+              "quote": "We simplify the given function by using the algebraic technique of making factors"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Evaluate \\(\\lim_{x \\to 2}\\frac{x^{3} - 2x^{2}}{x^{2} - 4}\\).",
+            "explanation": "\\(\\frac{0}{0}\\) form. \\(\\frac{x^{2}(x - 2)}{(x - 2)(x + 2)} = \\frac{x^{2}}{x + 2} \\to \\frac{4}{4} = 1\\).",
+            "book_ref": {
+              "topic_id": "dae59391-de49-5d37-af0b-cce44fdbb367",
+              "quote": "and cancel the common factors"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 Evaluate \\(\\lim_{x \\to 1}\\frac{2x^{2} - x - 1}{x^{2} - 1}\\).",
+            "explanation": "\\(\\frac{0}{0}\\) form. \\(\\frac{(x - 1)(2x + 1)}{(x - 1)(x + 1)} = \\frac{2x + 1}{x + 1} \\to \\frac{3}{2}\\).",
+            "book_ref": {
+              "topic_id": "dae59391-de49-5d37-af0b-cce44fdbb367",
+              "quote": "then we evaluate the limits as follows"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.2.1 Lim_{x->a} (x^n - a^n)/(x - a) = n a^(n-1) where n is a non-zero integer and a > 0"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 Evaluate \\(\\lim_{x \\to 3}\\frac{x^{3} - 27}{x - 3}\\).",
+            "explanation": "\\(27 = 3^{3}\\): \\(\\lim_{x \\to 3}\\frac{x^{3} - 3^{3}}{x - 3} = 3(3)^{2} = 27\\).",
+            "book_ref": {
+              "topic_id": "63863e9c-f49d-5702-bdc0-93c7ca1a0594",
+              "quote": "This important limit holds for every non-zero integer"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Evaluate \\(\\lim_{x \\to 2}\\frac{x^{-3} - \\frac{1}{8}}{x - 2}\\).",
+            "explanation": "\\(\\frac{1}{8} = 2^{-3}\\), \\(n = -3\\): \\(na^{n-1} = -3(2)^{-4} = -\\frac{3}{16}\\).",
+            "book_ref": {
+              "topic_id": "63863e9c-f49d-5702-bdc0-93c7ca1a0594",
+              "quote": "where \\(m\\) is a positive integer"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 Evaluate \\(\\lim_{x \\to 2}\\frac{x^{4} - 16}{x - 2}\\).",
+            "explanation": "\\(16 = 2^{4}\\): \\(4(2)^{3} = 32\\).",
+            "book_ref": {
+              "topic_id": "63863e9c-f49d-5702-bdc0-93c7ca1a0594",
+              "quote": "Suppose \\(n\\) is a positive integer."
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.2.2 Lim_{x->0} (sqrt(x+a) - sqrt(a))/x = 1/(2 sqrt(a)) where n is an integer and a > 0."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 Evaluate \\(\\lim_{x \\to 0}\\frac{\\sqrt{x + 16} - 4}{x}\\).",
+            "explanation": "Rationalizing: \\(\\frac{x}{x(\\sqrt{x + 16} + 4)} = \\frac{1}{\\sqrt{x + 16} + 4} \\to \\frac{1}{8}\\) (\\(= \\frac{1}{2\\sqrt{16}}\\)).",
+            "book_ref": {
+              "topic_id": "c9b85ca4-da32-5eac-9b17-48d70cd7598f",
+              "quote": "By substituting \\(x = 0\\), we have"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 Evaluate \\(\\lim_{x \\to 0}\\frac{\\sqrt{4 + x} - \\sqrt{4 - x}}{x}\\).",
+            "explanation": "\\(\\frac{0}{0}\\) form; rationalize the numerator.",
+            "book_ref": {
+              "topic_id": "c9b85ca4-da32-5eac-9b17-48d70cd7598f",
+              "quote": "so rationalizing the numerator"
+            },
+            "steps": [
+              "\\(= \\lim_{x \\to 0}\\frac{(4 + x) - (4 - x)}{x\\left(\\sqrt{4 + x} + \\sqrt{4 - x}\\right)}\\)",
+              "\\(= \\lim_{x \\to 0}\\frac{2x}{x\\left(\\sqrt{4 + x} + \\sqrt{4 - x}\\right)} = \\lim_{x \\to 0}\\frac{2}{\\sqrt{4 + x} + \\sqrt{4 - x}}\\)",
+              "\\(= \\frac{2}{2 + 2} = \\frac{1}{2}\\)"
+            ],
+            "final_answer": "\\(\\frac{1}{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 Evaluate \\(\\lim_{x \\to 7}\\frac{x - 7}{\\sqrt{x} - \\sqrt{7}}\\).",
+            "explanation": "\\(x - 7 = (\\sqrt{x} + \\sqrt{7})(\\sqrt{x} - \\sqrt{7})\\); cancelling, \\(\\lim_{x \\to 7}(\\sqrt{x} + \\sqrt{7}) = 2\\sqrt{7}\\).",
+            "book_ref": {
+              "topic_id": "c9b85ca4-da32-5eac-9b17-48d70cd7598f",
+              "quote": "Method: substitution gives"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.2.3 Limit at Infinity"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "22 Evaluate \\(\\lim_{x \\to +\\infty}\\frac{12}{x^{3}}\\) and \\(\\lim_{x \\to -\\infty}\\frac{-4}{\\sqrt[3]{x}}\\).",
+            "explanation": "By the theorem \\(\\lim_{x \\to \\pm\\infty}\\frac{a}{x^{p}} = 0\\): both are \\(0\\) (\\(a = 12\\), \\(p = 3\\); \\(a = -4\\), \\(p = \\frac{1}{3}\\), and \\(\\sqrt[3]{x}\\) is defined for negative \\(x\\)).",
+            "book_ref": {
+              "topic_id": "774517b4-0a4c-53b9-98ff-ec977981a99b",
+              "quote": "The following theorem is useful for evaluating limits at infinity."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "23 Why does \\(\\lim_{x \\to -\\infty}\\frac{5}{\\sqrt{x}}\\) have no meaning?",
+            "explanation": "The theorem \\(\\lim \\frac{a}{x^{p}} = 0\\) needs \\(x^{p}\\) to be defined. \\(\\sqrt{x} = x^{\\frac{1}{2}}\\) is not a real number for negative \\(x\\), so the expression is not defined as \\(x \\to -\\infty\\).",
+            "book_ref": {
+              "topic_id": "774517b4-0a4c-53b9-98ff-ec977981a99b",
+              "quote": "be a positive rational number"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.2.4 Limit of a Sequence"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "24 Define a convergent and a divergent sequence.",
+            "explanation": "\\(\\{a_{n}\\}\\) converges to \\(L\\) if for every \\(\\varepsilon > 0\\) there is \\(N \\in \\mathbb{N}\\) with \\(|a_{n} - L| < \\varepsilon\\) for all \\(n > N\\). If no such \\(L\\) exists, the sequence diverges (it grows without bound or oscillates).",
+            "book_ref": {
+              "topic_id": "0a51ef26-d9af-52d2-9860-8b2ba4f79e6f",
+              "quote": "If such an \\(L\\) exists, the sequence is said to converge to"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "25 Find the limit of the sequence \\(a_{n} = \\frac{4n - 1}{2n + 5}\\).",
+            "explanation": "\\(a_{n} = \\frac{n\\left(4 - \\frac{1}{n}\\right)}{n\\left(2 + \\frac{5}{n}\\right)} = \\frac{4 - \\frac{1}{n}}{2 + \\frac{5}{n}} \\to \\frac{4 - 0}{2 + 0} = 2\\).",
+            "book_ref": {
+              "topic_id": "0a51ef26-d9af-52d2-9860-8b2ba4f79e6f",
+              "quote": "is the value that the terms of the sequence approach as"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "26 Find the limit of the sequence \\(b_{n} = \\frac{3n^{2} + 1}{n^{3} + 2}\\).",
+            "explanation": "Divide by \\(n^{3}\\): \\(\\frac{\\frac{3}{n} + \\frac{1}{n^{3}}}{1 + \\frac{2}{n^{3}}} \\to \\frac{0 + 0}{1 + 0} = 0\\).",
+            "book_ref": {
+              "topic_id": "0a51ef26-d9af-52d2-9860-8b2ba4f79e6f",
+              "quote": "Find the limit of the sequence"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "27 For \\(a_{n} = \\frac{1}{n}\\) and \\(\\varepsilon = 0.002\\), find a position \\(N\\) such that \\(|a_{n} - 0| < \\varepsilon\\) for all \\(n > N\\).",
+            "explanation": "Take \\(N \\ge \\frac{1}{\\varepsilon} = 500\\), say \\(N = 500\\). For \\(n > 500\\): \\(\\frac{1}{n} < \\frac{1}{500} = 0.002\\).",
+            "book_ref": {
+              "topic_id": "0a51ef26-d9af-52d2-9860-8b2ba4f79e6f",
+              "quote": "for any arbitrarily small positive number"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "28 Write the first four terms of \\(a_{n} = 2 + (-1)^{n}\\) and say whether it converges.",
+            "explanation": "\\(a_{1} = 1\\), \\(a_{2} = 3\\), \\(a_{3} = 1\\), \\(a_{4} = 3\\). The terms oscillate between \\(1\\) and \\(3\\) and do not settle near one value, so the sequence diverges.",
+            "book_ref": {
+              "topic_id": "0a51ef26-d9af-52d2-9860-8b2ba4f79e6f",
+              "quote": "The sequence may oscillate between different values and not settle near any one value"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.2.5 Methods for Evaluating the Limits at Infinity"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "29 Evaluate \\(\\lim_{x \\to +\\infty}\\frac{6x^{2} - x + 2}{3x^{2} + 4}\\).",
+            "explanation": "Divide by \\(x^{2}\\): \\(\\frac{6 - \\frac{1}{x} + \\frac{2}{x^{2}}}{3 + \\frac{4}{x^{2}}} \\to \\frac{6}{3} = 2\\).",
+            "book_ref": {
+              "topic_id": "a2d7026d-868c-50a7-a0de-74aa168d670a",
+              "quote": "In this case we first divide each term of both the numerator and the denominator"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "30 Evaluate \\(\\lim_{x \\to -\\infty}\\frac{2x + 7}{x^{2} - 3}\\).",
+            "explanation": "Divide by \\(x^{2}\\): \\(\\frac{\\frac{2}{x} + \\frac{7}{x^{2}}}{1 - \\frac{3}{x^{2}}} \\to \\frac{0}{1} = 0\\).",
+            "book_ref": {
+              "topic_id": "a2d7026d-868c-50a7-a0de-74aa168d670a",
+              "quote": "that appears in the denominator and then use the theorems on limit"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "31 Evaluate \\(\\lim_{x \\to +\\infty}\\frac{\\sqrt{16x^{2} + 1}}{x - 2}\\).",
+            "explanation": "For \\(x > 0\\), \\(\\sqrt{x^{2}} = x\\). Divide by \\(x\\): \\(\\frac{\\sqrt{16 + \\frac{1}{x^{2}}}}{1 - \\frac{2}{x}} \\to \\frac{\\sqrt{16}}{1} = 4\\).",
+            "book_ref": {
+              "topic_id": "a2d7026d-868c-50a7-a0de-74aa168d670a",
+              "quote": "Here \\(\\sqrt{x^{2}} = |x| = x\\) as \\(x > 0\\)."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "32 Evaluate \\(\\lim_{x \\to -\\infty}\\frac{\\sqrt{16x^{2} + 1}}{x - 2}\\).",
+            "explanation": "For \\(x < 0\\), \\(\\sqrt{x^{2}} = -x\\). Divide by \\(-x\\): \\(\\frac{\\sqrt{16 + \\frac{1}{x^{2}}}}{-1 + \\frac{2}{x}} \\to \\frac{4}{-1} = -4\\).",
+            "book_ref": {
+              "topic_id": "a2d7026d-868c-50a7-a0de-74aa168d670a",
+              "quote": "Here \\(\\sqrt{x^{2}} = |x| = -x\\) as \\(x < 0\\)."
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.2.6 Lim_{n->+inf} (1 + 1/n)^n = e"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "33 Express \\(\\lim_{n \\to +\\infty}\\left(1 + \\frac{1}{n}\\right)^{3n}\\) in terms of \\(e\\).",
+            "explanation": "\\(= \\lim_{n \\to +\\infty}\\left[\\left(1 + \\frac{1}{n}\\right)^{n}\\right]^{3} = e^{3}\\).",
+            "book_ref": {
+              "topic_id": "86e64fdd-e894-5669-9e82-4ed873a48e97",
+              "quote": "By the binomial theorem, we have"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "34 Express \\(\\lim_{x \\to 0}(1 + 4x)^{\\frac{1}{x}}\\) in terms of \\(e\\).",
+            "explanation": "\\(= \\lim_{x \\to 0}\\left[(1 + 4x)^{\\frac{1}{4x}}\\right]^{4}\\); with \\(m = 4x \\to 0\\), \\((1 + m)^{\\frac{1}{m}} \\to e\\), so the limit is \\(e^{4}\\).",
+            "book_ref": {
+              "topic_id": "86e64fdd-e894-5669-9e82-4ed873a48e97",
+              "quote": "Put \\(n = \\frac{1}{x}\\) in (i), then"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "35 Express \\(\\lim_{n \\to +\\infty}\\left(1 + \\frac{2}{n}\\right)^{\\frac{n}{4}}\\) in terms of \\(e\\).",
+            "explanation": "\\(\\frac{2}{n} = \\frac{1}{n/2}\\) and \\(\\frac{n}{4} = \\frac{n}{2}\\cdot\\frac{1}{2}\\): \\(\\left[\\left(1 + \\frac{1}{n/2}\\right)^{\\frac{n}{2}}\\right]^{\\frac{1}{2}} \\to e^{\\frac{1}{2}}\\).",
+            "book_ref": {
+              "topic_id": "86e64fdd-e894-5669-9e82-4ed873a48e97",
+              "quote": "all tend to zero, therefore"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "36 Express \\(\\lim_{x \\to 0}(1 - 3x)^{\\frac{1}{2x}}\\) in terms of \\(e\\).",
+            "explanation": "Put \\(m = -3x \\to 0\\): \\(\\frac{1}{2x} = \\frac{1}{m}\\cdot\\left(-\\frac{3}{2}\\right)\\), so \\(\\left[(1 + m)^{\\frac{1}{m}}\\right]^{-\\frac{3}{2}} \\to e^{-\\frac{3}{2}}\\).",
+            "book_ref": {
+              "topic_id": "86e64fdd-e894-5669-9e82-4ed873a48e97",
+              "quote": "When \\(x \\to 0\\), \\(n \\to \\infty\\), so"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.2.7 Lim_{x->0} (a^x - 1)/x = log_e a"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "37 Evaluate \\(\\lim_{x \\to 0}\\frac{7^{x} - 1}{x}\\).",
+            "explanation": "By \\(\\lim_{x \\to 0}\\frac{a^{x} - 1}{x} = \\log_{e} a\\) with \\(a = 7\\): the limit is \\(\\log_{e} 7\\).",
+            "book_ref": {
+              "topic_id": "86ecbaf0-c514-502c-89d0-98e9cb98376c",
+              "quote": "From (i), when \\(x \\to 0\\), \\(y \\to 0\\)."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "38 Evaluate \\(\\lim_{x \\to 0}\\frac{e^{3x} - 1}{x}\\).",
+            "explanation": "Put \\(u = 3x \\to 0\\): \\(\\frac{e^{3x} - 1}{x} = 3\\cdot\\frac{e^{u} - 1}{u} \\to 3(1) = 3\\).",
+            "book_ref": {
+              "topic_id": "86ecbaf0-c514-502c-89d0-98e9cb98376c",
+              "quote": "Put \\(a = e\\) in (i), we know"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "39 Evaluate \\(\\lim_{x \\to 0}\\frac{5^{x} - 3^{x}}{x}\\).",
+            "explanation": "\\(\\frac{5^{x} - 3^{x}}{x} = \\frac{5^{x} - 1}{x} - \\frac{3^{x} - 1}{x} \\to \\log_{e} 5 - \\log_{e} 3 = \\log_{e}\\frac{5}{3}\\).",
+            "book_ref": {
+              "topic_id": "86ecbaf0-c514-502c-89d0-98e9cb98376c",
+              "quote": "Put \\(a = e\\) in (i), we know"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.2.8 The Sandwich Theorem"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "40 State the Sandwich Theorem.",
+            "explanation": "Let \\(f(x) \\le g(x) \\le h(x)\\) for all \\(x\\) in some open interval containing \\(c\\), except possibly at \\(c\\) itself. If \\(\\lim_{x \\to c} f(x) = L\\) and \\(\\lim_{x \\to c} h(x) = L\\), then \\(\\lim_{x \\to c} g(x) = L\\).",
+            "book_ref": {
+              "topic_id": "6652a353-3a2b-5576-ae94-59a337d385c8",
+              "quote": "for all numbers \\(x\\) in some open interval containing"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "41 Use the Sandwich Theorem to find \\(\\lim_{x \\to 0} x^{2}\\cos\\frac{1}{x}\\).",
+            "explanation": "\\(-1 \\le \\cos\\frac{1}{x} \\le 1\\) and \\(x^{2} \\ge 0\\) give \\(-x^{2} \\le x^{2}\\cos\\frac{1}{x} \\le x^{2}\\). Both \\(-x^{2}\\) and \\(x^{2}\\) tend to \\(0\\), so the limit is \\(0\\).",
+            "book_ref": {
+              "topic_id": "6652a353-3a2b-5576-ae94-59a337d385c8",
+              "quote": "Many limit problems arise that cannot be directly evaluated by algebraic techniques."
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.2.9 If theta is measured in radian, then Lim_{theta->0} sin(theta)/theta = 1."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "42 Evaluate \\(\\lim_{\\theta \\to 0}\\frac{\\sin 3\\theta}{2\\theta}\\).",
+            "explanation": "\\(= \\frac{3}{2}\\lim_{\\theta \\to 0}\\frac{\\sin 3\\theta}{3\\theta} = \\frac{3}{2}(1) = \\frac{3}{2}\\) (\\(x = 3\\theta \\to 0\\)).",
+            "book_ref": {
+              "topic_id": "e324ce62-95d1-5ee1-9fe3-27cf38ba99af",
+              "quote": "Since \\(\\frac{\\sin\\theta}{\\theta}\\) is sandwiched between 1 and a quantity approaching 1 itself."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "43 Evaluate \\(\\lim_{x \\to 0}\\frac{\\tan 5x}{\\sin 2x}\\).",
+            "explanation": "\\(= \\lim_{x \\to 0}\\frac{5}{2}\\cdot\\frac{\\sin 5x}{5x}\\cdot\\frac{2x}{\\sin 2x}\\cdot\\frac{1}{\\cos 5x} = \\frac{5}{2}(1)(1)(1) = \\frac{5}{2}\\).",
+            "book_ref": {
+              "topic_id": "e324ce62-95d1-5ee1-9fe3-27cf38ba99af",
+              "quote": "it must also approach 1, that is"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "44 Evaluate \\(\\lim_{x \\to 0}\\frac{1 - \\cos x}{x\\sin x}\\).",
+            "explanation": "Multiply up and down by \\(1 + \\cos x\\).",
+            "book_ref": {
+              "topic_id": "e324ce62-95d1-5ee1-9fe3-27cf38ba99af",
+              "quote": "When \\(\\theta \\to 0\\), \\(\\cos\\theta \\to 1\\)."
+            },
+            "steps": [
+              "\\(\\frac{1 - \\cos x}{x\\sin x}\\cdot\\frac{1 + \\cos x}{1 + \\cos x} = \\frac{\\sin^{2} x}{x\\sin x\\,(1 + \\cos x)}\\)",
+              "\\(= \\frac{\\sin x}{x}\\cdot\\frac{1}{1 + \\cos x}\\)",
+              "\\(\\to (1)\\cdot\\frac{1}{1 + 1} = \\frac{1}{2}\\)"
+            ],
+            "final_answer": "\\(\\frac{1}{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "45 In the proof of \\(\\lim_{\\theta \\to 0}\\frac{\\sin\\theta}{\\theta} = 1\\), which three areas are compared, and what inequality do they give?",
+            "explanation": "Area of \\(\\Delta OAB = \\frac{1}{2}\\sin\\theta\\) < area of sector \\(OAB = \\frac{\\theta}{2}\\) < area of \\(\\Delta OAD = \\frac{1}{2}\\tan\\theta\\). Dividing by \\(\\frac{1}{2}\\sin\\theta\\) and taking reciprocals: \\(\\cos\\theta < \\frac{\\sin\\theta}{\\theta} < 1\\).",
+            "book_ref": {
+              "topic_id": "e324ce62-95d1-5ee1-9fe3-27cf38ba99af",
+              "quote": "From the figure we see that Area of"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.3.1 One-Sided Limits"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "46 Define the left hand limit and the right hand limit of \\(f(x)\\) at \\(c\\).",
+            "explanation": "\\(\\lim_{x \\to c^{-}} f(x) = L\\): for all \\(x\\) sufficiently close to \\(c\\) but less than \\(c\\), \\(f(x)\\) can be made as close as we please to \\(L\\). \\(\\lim_{x \\to c^{+}} f(x) = M\\): for all \\(x\\) sufficiently close to \\(c\\) but greater than \\(c\\), \\(f(x)\\) can be made as close as we please to \\(M\\).",
+            "book_ref": {
+              "topic_id": "83b40b58-2e92-5b49-a8e5-ca524dbd3303",
+              "quote": "for all \\(x\\) sufficiently close to \\(c\\), but less than \\(c\\)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "47 For \\(f(x) = x^{2} - 2\\) when \\(x < 3\\) and \\(f(x) = 2x + 1\\) when \\(x \\ge 3\\), find the left and right hand limits at \\(x = 3\\).",
+            "explanation": "\\(\\lim_{x \\to 3^{-}}(x^{2} - 2) = 9 - 2 = 7\\); \\(\\lim_{x \\to 3^{+}}(2x + 1) = 6 + 1 = 7\\).",
+            "book_ref": {
+              "topic_id": "83b40b58-2e92-5b49-a8e5-ca524dbd3303",
+              "quote": "The rules for calculating the left hand and the right hand limits are the same"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.3.2 Criterion for Existence of Limit of a Function"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "48 Show that \\(\\lim_{x \\to -2}\\frac{|x + 2|}{x + 2}\\) does not exist.",
+            "explanation": "For \\(x < -2\\), \\(|x + 2| = -(x + 2)\\), so LHL \\(= -1\\). For \\(x > -2\\), \\(|x + 2| = x + 2\\), so RHL \\(= 1\\). \\(-1 \\ne 1\\), so the limit does not exist.",
+            "book_ref": {
+              "topic_id": "fc5dace1-d787-5263-8429-1bca64cfa372",
+              "quote": "exactly when the left hand limit and the right hand limit both exist and both equal"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "49 Find \\(k\\) so that \\(\\lim_{x \\to 2} f(x)\\) exists, where \\(f(x) = kx + 1\\) for \\(x < 2\\) and \\(f(x) = x^{2} - 1\\) for \\(x > 2\\).",
+            "explanation": "LHL \\(= 2k + 1\\), RHL \\(= 4 - 1 = 3\\). The limit exists when \\(2k + 1 = 3\\), i.e. \\(k = 1\\).",
+            "book_ref": {
+              "topic_id": "fc5dace1-d787-5263-8429-1bca64cfa372",
+              "quote": "Method: \\(x = 2\\) and \\(x = 4\\) are the points where the formula changes"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.3.3 Continuity of a Function at a Point"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "50 When is a function \\(f\\) said to be continuous at \\(x = c\\)?",
+            "explanation": "\\(f\\) is continuous at \\(c\\) if and only if (i) \\(f(c)\\) is defined, (ii) \\(\\lim_{x \\to c} f(x)\\) exists, (iii) \\(\\lim_{x \\to c} f(x) = f(c)\\). If any one fails, \\(f\\) is discontinuous at \\(c\\).",
+            "book_ref": {
+              "topic_id": "2a34aa86-5821-576a-a80b-74053f62364a",
+              "quote": "if and only if the following three conditions are satisfied"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "51 Is \\(f(x) = \\frac{x^{2} - 25}{x - 5}\\) continuous at \\(x = 5\\)? Give a reason.",
+            "explanation": "No. \\(f(5) = \\frac{0}{0}\\) is not defined, so condition (i) fails and \\(f\\) is discontinuous at \\(x = 5\\) (though \\(\\lim_{x \\to 5} f(x) = 10\\)).",
+            "book_ref": {
+              "topic_id": "2a34aa86-5821-576a-a80b-74053f62364a",
+              "quote": "If one or more of these three conditions fail to hold"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "52 Discuss the continuity of \\(f(x) = x^{2} + 1\\) for \\(x \\le 1\\), \\(f(x) = 3x - 1\\) for \\(x > 1\\), at \\(x = 1\\).",
+            "explanation": "(i) \\(f(1) = 1 + 1 = 2\\). (ii) LHL \\(= 2\\), RHL \\(= 3 - 1 = 2\\), so \\(\\lim_{x \\to 1} f(x) = 2\\). (iii) \\(\\lim_{x \\to 1} f(x) = f(1)\\): \\(f\\) is continuous at \\(x = 1\\).",
+            "book_ref": {
+              "topic_id": "2a34aa86-5821-576a-a80b-74053f62364a",
+              "quote": "Discuss continuity of \\(f(x)\\) at \\(x = 3\\), when"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "53 Find \\(k\\) so that \\(f(x) = \\frac{x^{2} - 1}{x + 1}\\) for \\(x \\ne -1\\) and \\(f(-1) = k\\) is continuous at \\(x = -1\\).",
+            "explanation": "\\(\\lim_{x \\to -1}\\frac{(x + 1)(x - 1)}{x + 1} = \\lim_{x \\to -1}(x - 1) = -2\\). Continuity needs \\(f(-1) = -2\\), so \\(k = -2\\).",
+            "book_ref": {
+              "topic_id": "2a34aa86-5821-576a-a80b-74053f62364a",
+              "quote": "Discuss the continuity of the functions"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "12.4 Application of Transcendental Functions to Limits and Continuity on Real World Problems"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "54 A substance decays as \\(A(t) = 80e^{-0.05t}\\) (grams). Find \\(A(20)\\) and \\(\\lim_{t \\to \\infty} A(t)\\).",
+            "explanation": "\\(A(20) = 80e^{-1} = \\frac{80}{e} \\approx 29.43\\) g. \\(e^{-0.05t} \\to 0\\) as \\(t \\to \\infty\\), so \\(\\lim_{t \\to \\infty} A(t) = 0\\).",
+            "book_ref": {
+              "topic_id": "8cbc15b6-8bd0-5668-9bbb-0ba22be3209c",
+              "quote": "The radioactive decay of a substance is given by the function"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "55 An investment grows as \\(A(t) = 2000e^{0.08t}\\) (rupees). Find \\(A(25)\\) and the limit as \\(t \\to \\infty\\).",
+            "explanation": "\\(A(25) = 2000e^{2} \\approx 14778.11\\) rupees. Since \\(0.08t \\to \\infty\\), \\(e^{0.08t} \\to \\infty\\), so \\(\\lim_{t \\to \\infty} A(t) = \\infty\\): the value grows without bound.",
+            "book_ref": {
+              "topic_id": "8cbc15b6-8bd0-5668-9bbb-0ba22be3209c",
+              "quote": "The value of an investment grows according to the formula for continuous compounding"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "56 The demand function is \\(D(p) = \\frac{500}{2p + 5}\\). Find \\(\\lim_{p \\to \\infty} D(p)\\) and interpret it.",
+            "explanation": "\\(\\frac{500/p}{2 + 5/p} \\to \\frac{0}{2} = 0\\). As the price becomes very large, the demand approaches \\(0\\).",
+            "book_ref": {
+              "topic_id": "8cbc15b6-8bd0-5668-9bbb-0ba22be3209c",
+              "quote": "the demand function \\(D(p)\\) decreases as the price \\(p\\) increases"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "57 A cost function is \\(C(x) = 8x + 200\\) for \\(x \\le 50\\) and \\(C(x) = 10x + 100\\) for \\(x > 50\\). Is it continuous at \\(x = 50\\)?",
+            "explanation": "\\(C(50) = 400 + 200 = 600\\); LHL \\(= 600\\); RHL \\(= 500 + 100 = 600\\). All equal, so \\(C\\) is continuous at \\(x = 50\\).",
+            "book_ref": {
+              "topic_id": "8cbc15b6-8bd0-5668-9bbb-0ba22be3209c",
+              "quote": "These concepts help us model, analyze and solve problems in various fields"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
