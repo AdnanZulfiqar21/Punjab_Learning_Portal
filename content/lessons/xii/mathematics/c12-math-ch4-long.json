@@ -1,0 +1,392 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH4-LONG",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch4",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch4/u-long-questions",
+      "title": "Long Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 126,
+          "pdf_to": 141,
+          "note": "Practice long questions written from Unit 4 (PDF 126-141, printed 124-139); not printed in the book. Based on the unit's text, theorems, formulas and worked examples (changed values); none repeats the unit's exercises. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice long questions for the whole of Unit 4 (Differential Equations), in the shape of a Board Section-II question part: each carries 5 marks (a longer problem, a proof or a derivation). Each one is solved in full, step by step."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Find the order and degree (if defined) of: (i) \\(\\dfrac{d^{2}y}{dx^{2}} + \\sqrt{\\dfrac{dy}{dx}} = x\\) (ii) \\(\\left(\\dfrac{d^{3}y}{dx^{3}}\\right)^{2/3} = \\dfrac{dy}{dx} + 1\\) (iii) \\(\\dfrac{dy}{dx} + \\tan\\left(\\dfrac{d^{2}y}{dx^{2}}\\right) = 0\\) (5 marks)",
+            "explanation": "Name the highest derivative (order); clear any root or fractional power by isolating it and raising to a power; if a derivative is inside a function like tan, the degree is not defined.",
+            "book_ref": {
+              "topic_id": "794a5c3a-73d9-5787-a7fc-c4c36176d702",
+              "quote": "Answer order and degree questions in three short lines"
+            },
+            "steps": [
+              "(i) Highest derivative \\(\\frac{d^{2}y}{dx^{2}}\\), so order 2",
+              "Isolate the root: \\(\\sqrt{\\frac{dy}{dx}} = x - \\frac{d^{2}y}{dx^{2}}\\); square: \\(\\frac{dy}{dx} = \\left(x - \\frac{d^{2}y}{dx^{2}}\\right)^{2}\\), which contains \\(\\left(\\frac{d^{2}y}{dx^{2}}\\right)^{2}\\): degree 2",
+              "(ii) Highest derivative \\(\\frac{d^{3}y}{dx^{3}}\\), so order 3",
+              "Cube both sides: \\(\\left(\\frac{d^{3}y}{dx^{3}}\\right)^{2} = \\left(\\frac{dy}{dx} + 1\\right)^{3}\\); the highest derivative has power 2: degree 2",
+              "(iii) Highest derivative \\(\\frac{d^{2}y}{dx^{2}}\\), so order 2; it is inside \\(\\tan\\), which no algebra can remove: degree not defined"
+            ],
+            "final_answer": "(i) order 2, degree 2 (ii) order 3, degree 2 (iii) order 2, degree not defined"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 A resistor \\(R\\) and a capacitor \\(C\\) are connected in series with a DC source of constant emf \\(V_{S}\\). Derive the differential equation for the charge \\(q\\) on the capacitor and verify that \\(q = CV_{S}\\left(1 - e^{-t/(RC)}\\right)\\) satisfies it. (5 marks)",
+            "explanation": "Write the voltage across each part, add them by Kirchhoff's voltage law, then replace I by dq/dt; verify by differentiating.",
+            "book_ref": {
+              "topic_id": "89498e52-5e3b-5847-878e-a96b754ddc14",
+              "quote": "Method: write the voltage across each component, then use Kirchhoff's voltage law"
+            },
+            "steps": [
+              "Voltage across the capacitor: \\(V_{C} = \\frac{q}{C}\\); across the resistor (Ohm's law): \\(V_{R} = IR\\)",
+              "Kirchhoff's voltage law: \\(V_{S} = V_{R} + V_{C} = IR + \\frac{q}{C}\\)",
+              "Current is the rate of flow of charge, \\(I = \\frac{dq}{dt}\\): \\(R\\frac{dq}{dt} + \\frac{q}{C} = V_{S}\\)",
+              "Multiply by \\(C\\): \\(RC\\frac{dq}{dt} = CV_{S} - q\\)",
+              "For \\(q = CV_{S}\\left(1 - e^{-t/(RC)}\\right)\\): \\(\\frac{dq}{dt} = CV_{S} \\cdot \\frac{1}{RC}e^{-t/(RC)}\\), so \\(RC\\frac{dq}{dt} = CV_{S}e^{-t/(RC)}\\)",
+              "And \\(CV_{S} - q = CV_{S} - CV_{S} + CV_{S}e^{-t/(RC)} = CV_{S}e^{-t/(RC)}\\): both sides agree"
+            ],
+            "final_answer": "\\(RC\\dfrac{dq}{dt} = CV_{S} - q\\); hence proved that \\(q = CV_{S}\\left(1 - e^{-t/(RC)}\\right)\\) satisfies it."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Find the general solution of \\((1 + e^{x})\\,y\\,dy = e^{x}\\,dx\\), and the particular solution with \\(y(0) = 0\\). (5 marks)",
+            "explanation": "Divide by (1 + e^x) to separate; the x-integral has the derivative of its denominator on top.",
+            "book_ref": {
+              "topic_id": "7166d1ee-5fe0-55ae-adff-42b9a3e8bb2b",
+              "quote": "By solving the integrals on both sides, we obtain the general solution of separable differential equation."
+            },
+            "steps": [
+              "Separate: \\(y\\,dy = \\frac{e^{x}}{1 + e^{x}}\\,dx\\)",
+              "\\(\\int y\\,dy = \\frac{y^{2}}{2}\\); \\(\\frac{d}{dx}(1 + e^{x}) = e^{x}\\), so \\(\\int\\frac{e^{x}}{1 + e^{x}}\\,dx = \\ln(1 + e^{x})\\)",
+              "\\(\\frac{y^{2}}{2} = \\ln(1 + e^{x}) + c_{1}\\), i.e. \\(y^{2} = 2\\ln(1 + e^{x}) + c\\)",
+              "\\(y(0) = 0\\): \\(0 = 2\\ln 2 + c\\), so \\(c = -2\\ln 2\\)",
+              "\\(y^{2} = 2\\ln(1 + e^{x}) - 2\\ln 2 = 2\\ln\\frac{1 + e^{x}}{2}\\)"
+            ],
+            "final_answer": "General: \\(y^{2} = 2\\ln(1 + e^{x}) + c\\); particular: \\(y^{2} = 2\\ln\\dfrac{1 + e^{x}}{2}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Solve the initial value problem \\(2y\\dfrac{dy}{dx} = xe^{x}\\), \\(y(0) = 2\\). (5 marks)",
+            "explanation": "Separate, integrate the right side by parts, then use the initial condition to fix the constant.",
+            "book_ref": {
+              "topic_id": "7166d1ee-5fe0-55ae-adff-42b9a3e8bb2b",
+              "quote": "Method: separate, integrate both sides, add one constant."
+            },
+            "steps": [
+              "Separate: \\(2y\\,dy = xe^{x}\\,dx\\)",
+              "Left: \\(\\int 2y\\,dy = y^{2}\\)",
+              "Right, by parts: \\(\\int xe^{x}\\,dx = xe^{x} - \\int e^{x}\\,dx = xe^{x} - e^{x}\\)",
+              "\\(y^{2} = (x - 1)e^{x} + c\\)",
+              "\\(y(0) = 2\\): \\(4 = (0 - 1)(1) + c\\), so \\(c = 5\\)"
+            ],
+            "final_answer": "\\(y^{2} = (x - 1)e^{x} + 5\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Solve \\(x\\dfrac{dy}{dx} = y^{2} - 1\\) (\\(x > 0\\)) with \\(y(1) = 3\\), and express \\(y\\) explicitly. (5 marks)",
+            "explanation": "Separate y and x; split 1/(y^2 - 1) into partial fractions, integrate, then use y(1) = 3.",
+            "book_ref": {
+              "topic_id": "7166d1ee-5fe0-55ae-adff-42b9a3e8bb2b",
+              "quote": "Separable means \\(\\frac{dy}{dx} = g(x)\\,h(y)\\)"
+            },
+            "steps": [
+              "Separate: \\(\\frac{dy}{y^{2} - 1} = \\frac{dx}{x}\\)",
+              "Partial fractions: \\(\\frac{1}{y^{2} - 1} = \\frac{1}{2}\\left(\\frac{1}{y - 1} - \\frac{1}{y + 1}\\right)\\)",
+              "Integrate: \\(\\frac{1}{2}\\ln\\left|\\frac{y - 1}{y + 1}\\right| = \\ln x + c_{1}\\), so \\(\\frac{y - 1}{y + 1} = Ax^{2}\\)",
+              "\\(y(1) = 3\\): \\(\\frac{2}{4} = A\\), \\(A = \\frac{1}{2}\\); so \\(2(y - 1) = x^{2}(y + 1)\\)",
+              "\\(y(2 - x^{2}) = 2 + x^{2}\\), so \\(y = \\frac{2 + x^{2}}{2 - x^{2}}\\)"
+            ],
+            "final_answer": "\\(y = \\dfrac{2 + x^{2}}{2 - x^{2}}\\) (for \\(0 < x < \\sqrt{2}\\))"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Solve the initial value problem \\(\\dfrac{dy}{dx} = \\sin x\\cos^{2}y\\), \\(y(0) = \\dfrac{\\pi}{4}\\), and check the answer by differentiation. (5 marks)",
+            "explanation": "Divide by cos^2 y to separate (sec^2 y on the left), integrate, fix the constant, then differentiate the answer.",
+            "book_ref": {
+              "topic_id": "7166d1ee-5fe0-55ae-adff-42b9a3e8bb2b",
+              "quote": "Check by differentiating the answer: you must get the original equation back."
+            },
+            "steps": [
+              "Separate: \\(\\sec^{2}y\\,dy = \\sin x\\,dx\\)",
+              "Integrate: \\(\\tan y = -\\cos x + c\\)",
+              "\\(y(0) = \\frac{\\pi}{4}\\): \\(1 = -1 + c\\), so \\(c = 2\\): \\(\\tan y = 2 - \\cos x\\)",
+              "Check: \\(\\sec^{2}y\\frac{dy}{dx} = \\sin x\\), so \\(\\frac{dy}{dx} = \\sin x\\cos^{2}y\\) \\(\\checkmark\\)"
+            ],
+            "final_answer": "\\(\\tan y = 2 - \\cos x\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Show that the substitution \\(y = vx\\) turns \\(\\dfrac{dy}{dx} = F\\left(\\dfrac{y}{x}\\right)\\) into a separable equation, and use it to solve \\(\\dfrac{dy}{dx} = \\dfrac{x^{2} + y^{2}}{2x^{2}}\\). (5 marks)",
+            "explanation": "Differentiate y = vx by the product rule, substitute, subtract v and separate; then apply with F(v) found by putting x = 1, y = v.",
+            "book_ref": {
+              "topic_id": "e318a84b-7666-5da3-9e5b-6277839dce08",
+              "quote": "can be converted into a separable differential equation in variables"
+            },
+            "steps": [
+              "\\(y = vx\\) gives \\(\\frac{dy}{dx} = v + x\\frac{dv}{dx}\\), and \\(F\\left(\\frac{y}{x}\\right) = F(v)\\)",
+              "\\(v + x\\frac{dv}{dx} = F(v)\\), so \\(x\\frac{dv}{dx} = F(v) - v\\) and \\(\\frac{dv}{F(v) - v} = \\frac{dx}{x}\\): separable",
+              "Here \\(F(v) = \\frac{1 + v^{2}}{2}\\), so \\(F(v) - v = \\frac{1 - 2v + v^{2}}{2} = \\frac{(1 - v)^{2}}{2}\\)",
+              "\\(\\frac{2\\,dv}{(1 - v)^{2}} = \\frac{dx}{x}\\); integrating, \\(\\frac{2}{1 - v} = \\ln|x| + \\ln|c| = \\ln|cx|\\)",
+              "Put \\(v = \\frac{y}{x}\\): \\(\\frac{2}{1 - \\frac{y}{x}} = \\frac{2x}{x - y}\\), so \\(\\frac{2x}{x - y} = \\ln|cx|\\)"
+            ],
+            "final_answer": "Hence proved (separable form \\(\\dfrac{dv}{F(v) - v} = \\dfrac{dx}{x}\\)); general solution \\(\\dfrac{2x}{x - y} = \\ln|cx|\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Solve \\(\\dfrac{dy}{dx} = \\dfrac{y^{2} - x^{2}}{2xy}\\), and find the particular solution through \\((1, 1)\\). (5 marks)",
+            "explanation": "Every term has degree 2, so the equation is homogeneous: put y = vx, separate v and x, integrate, put v = y/x back.",
+            "book_ref": {
+              "topic_id": "e318a84b-7666-5da3-9e5b-6277839dce08",
+              "quote": "if every term of the numerator and of the denominator has the same degree"
+            },
+            "steps": [
+              "\\(y = vx\\): \\(v + x\\frac{dv}{dx} = \\frac{v^{2} - 1}{2v}\\)",
+              "\\(x\\frac{dv}{dx} = \\frac{v^{2} - 1 - 2v^{2}}{2v} = -\\frac{1 + v^{2}}{2v}\\)",
+              "Separate: \\(\\frac{2v}{1 + v^{2}}\\,dv = -\\frac{dx}{x}\\); integrate: \\(\\ln(1 + v^{2}) = -\\ln|x| + \\ln|c|\\)",
+              "\\(1 + v^{2} = \\frac{c}{x}\\); with \\(v = \\frac{y}{x}\\): \\(\\frac{x^{2} + y^{2}}{x^{2}} = \\frac{c}{x}\\), so \\(x^{2} + y^{2} = cx\\)",
+              "Through \\((1, 1)\\): \\(1 + 1 = c\\), so \\(c = 2\\): \\(x^{2} + y^{2} = 2x\\)"
+            ],
+            "final_answer": "General solution \\(x^{2} + y^{2} = cx\\); particular solution \\(x^{2} + y^{2} = 2x\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Find the general solution of \\(x\\dfrac{dy}{dx} = y + x\\sec\\left(\\dfrac{y}{x}\\right)\\). (5 marks)",
+            "explanation": "Divide by x to get dy/dx as a function of y/x; then y = vx makes it separable.",
+            "book_ref": {
+              "topic_id": "e318a84b-7666-5da3-9e5b-6277839dce08",
+              "quote": "can easily be simplified by replacing"
+            },
+            "steps": [
+              "Divide by \\(x\\): \\(\\frac{dy}{dx} = \\frac{y}{x} + \\sec\\left(\\frac{y}{x}\\right)\\), a function of \\(\\frac{y}{x}\\): homogeneous",
+              "\\(y = vx\\): \\(v + x\\frac{dv}{dx} = v + \\sec v\\), so \\(x\\frac{dv}{dx} = \\sec v\\)",
+              "Separate: \\(\\cos v\\,dv = \\frac{dx}{x}\\)",
+              "Integrate: \\(\\sin v = \\ln|x| + \\ln|c| = \\ln|cx|\\)",
+              "Put \\(v = \\frac{y}{x}\\): \\(\\sin\\left(\\frac{y}{x}\\right) = \\ln|cx|\\)"
+            ],
+            "final_answer": "\\(\\sin\\left(\\dfrac{y}{x}\\right) = \\ln|cx|\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Solve the initial value problem \\((x - y)\\,dy = (x + y)\\,dx\\), \\(y(1) = 0\\). (5 marks)",
+            "explanation": "Write dy/dx = (x + y)/(x - y), a homogeneous equation; y = vx, separate, split the v-integral into two standard integrals.",
+            "book_ref": {
+              "topic_id": "e318a84b-7666-5da3-9e5b-6277839dce08",
+              "quote": "It becomes separable differential equation."
+            },
+            "steps": [
+              "\\(\\frac{dy}{dx} = \\frac{x + y}{x - y}\\); \\(y = vx\\): \\(v + x\\frac{dv}{dx} = \\frac{1 + v}{1 - v}\\)",
+              "\\(x\\frac{dv}{dx} = \\frac{1 + v - v + v^{2}}{1 - v} = \\frac{1 + v^{2}}{1 - v}\\)",
+              "Separate: \\(\\frac{1 - v}{1 + v^{2}}\\,dv = \\frac{dx}{x}\\), i.e. \\(\\left(\\frac{1}{1 + v^{2}} - \\frac{1}{2}\\cdot\\frac{2v}{1 + v^{2}}\\right)dv = \\frac{dx}{x}\\)",
+              "Integrate: \\(\\tan^{-1}v - \\frac{1}{2}\\ln(1 + v^{2}) = \\ln|x| + c\\)",
+              "\\(v = \\frac{y}{x}\\): \\(\\tan^{-1}\\frac{y}{x} - \\frac{1}{2}\\ln(x^{2} + y^{2}) + \\ln|x| = \\ln|x| + c\\), so \\(\\tan^{-1}\\frac{y}{x} = \\frac{1}{2}\\ln(x^{2} + y^{2}) + c\\)",
+              "\\(y(1) = 0\\): \\(0 = \\frac{1}{2}\\ln 1 + c\\), so \\(c = 0\\)"
+            ],
+            "final_answer": "\\(\\tan^{-1}\\left(\\dfrac{y}{x}\\right) = \\dfrac{1}{2}\\ln(x^{2} + y^{2})\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 An RL circuit has constant emf \\(V_{S}\\), resistance \\(R\\), inductance \\(L\\) and \\(I(0) = 0\\). Starting from \\(L\\dfrac{dI}{dt} = V_{S} - RI\\), show that \\(I = \\dfrac{V_{S}}{R}\\left(1 - e^{-Rt/L}\\right)\\). (5 marks)",
+            "explanation": "The equation is separable: put I terms with dI and t with dt, integrate (the numerator must be the derivative of V_S - RI), and use I(0) = 0 for the constant.",
+            "book_ref": {
+              "topic_id": "5cceaeb5-36e2-5ee6-9db5-38f251ffb84b",
+              "quote": "use the RL circuit model, which is separable"
+            },
+            "steps": [
+              "Separate: \\(\\frac{dI}{V_{S} - RI} = \\frac{dt}{L}\\)",
+              "\\(\\frac{d}{dI}(V_{S} - RI) = -R\\), so \\(-\\frac{1}{R}\\int\\frac{-R}{V_{S} - RI}\\,dI = \\int\\frac{dt}{L}\\): \\(-\\frac{1}{R}\\ln|V_{S} - RI| = \\frac{t}{L} + C\\)",
+              "\\(I(0) = 0\\): \\(-\\frac{1}{R}\\ln V_{S} = C\\)",
+              "Then \\(-\\frac{1}{R}\\ln|V_{S} - RI| + \\frac{1}{R}\\ln V_{S} = \\frac{t}{L}\\), i.e. \\(\\ln\\left|\\frac{V_{S} - RI}{V_{S}}\\right| = -\\frac{Rt}{L}\\)",
+              "At \\(t = 0\\) the fraction is 1 (positive), so \\(\\frac{V_{S} - RI}{V_{S}} = e^{-Rt/L}\\)",
+              "\\(RI = V_{S} - V_{S}e^{-Rt/L}\\), so \\(I = \\frac{V_{S}}{R}\\left(1 - e^{-Rt/L}\\right)\\)"
+            ],
+            "final_answer": "Hence proved: \\(I = \\dfrac{V_{S}}{R}\\left(1 - e^{-Rt/L}\\right)\\); as \\(t \\to \\infty\\), \\(I \\to \\dfrac{V_{S}}{R}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 A body at temperature \\(T_{0}\\) at \\(t = 0\\) is placed in surroundings at constant temperature \\(T_{S}\\). Using \\(\\dfrac{dT}{dt} = -k(T - T_{S})\\), \\(k > 0\\), show that \\(T = T_{S} + (T_{0} - T_{S})e^{-kt}\\), and explain what happens as \\(t \\to \\infty\\). (5 marks)",
+            "explanation": "Separate T and t, integrate, write the constant as ln|c|, remove the logarithm and use T(0) = T_0.",
+            "book_ref": {
+              "topic_id": "5cceaeb5-36e2-5ee6-9db5-38f251ffb84b",
+              "quote": "Cooling / heating in surroundings at"
+            },
+            "steps": [
+              "Separate: \\(\\frac{dT}{T - T_{S}} = -k\\,dt\\)",
+              "Integrate: \\(\\ln|T - T_{S}| = -kt + \\ln|c|\\)",
+              "\\(\\ln\\left|\\frac{T - T_{S}}{c}\\right| = -kt\\), so \\(T = T_{S} + ce^{-kt}\\)",
+              "\\(T(0) = T_{0}\\): \\(T_{0} = T_{S} + c\\), so \\(c = T_{0} - T_{S}\\)",
+              "\\(T = T_{S} + (T_{0} - T_{S})e^{-kt}\\)",
+              "As \\(t \\to \\infty\\), \\(e^{-kt} \\to 0\\) (\\(k > 0\\)), so \\(T \\to T_{S}\\)"
+            ],
+            "final_answer": "Hence proved: \\(T = T_{S} + (T_{0} - T_{S})e^{-kt}\\); in the long run the body takes the temperature \\(T_{S}\\) of its surroundings."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 Starting from \\(\\dfrac{dM}{dt} = -kM\\), \\(M(0) = M_{0}\\), show that the half-life is \\(T_{1/2} = \\dfrac{\\ln 2}{k}\\), independent of \\(M_{0}\\). A sample of 48 g has half-life 5 hours: find \\(k\\) and the mass left after 20 hours. (5 marks)",
+            "explanation": "Solve the decay equation, set M equal to half of M_0, take ln; then use the formula and count half-lives.",
+            "book_ref": {
+              "topic_id": "5cceaeb5-36e2-5ee6-9db5-38f251ffb84b",
+              "quote": "Half-life is the time required for a quantity of a radioactive substance to reduce to half of its initial amount due to radioactive decay."
+            },
+            "steps": [
+              "\\(\\frac{dM}{M} = -k\\,dt\\), \\(\\ln|M| = -kt + C\\); \\(M(0) = M_{0}\\) gives \\(M = M_{0}e^{-kt}\\)",
+              "Half-life: \\(M_{0}e^{-kT_{1/2}} = \\frac{1}{2}M_{0}\\), so \\(e^{kT_{1/2}} = 2\\)",
+              "\\(kT_{1/2} = \\ln 2\\), \\(T_{1/2} = \\frac{\\ln 2}{k}\\); \\(M_{0}\\) cancelled, so it does not depend on \\(M_{0}\\)",
+              "\\(k = \\frac{\\ln 2}{5} \\approx 0.1386\\) per hour",
+              "20 hours \\(= 4\\) half-lives: \\(M(20) = 48e^{-20k} = 48e^{-4\\ln 2} = 48 \\cdot \\frac{1}{16} = 3\\) g"
+            ],
+            "final_answer": "\\(T_{1/2} = \\dfrac{\\ln 2}{k}\\) (hence proved); \\(k \\approx 0.1386\\) per hour; 3 g remain after 20 hours."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 A culture has 300 bacteria initially and the number triples in 4 hours. Find (i) the number after 10 hours (ii) the time when the number reaches 5000. (5 marks)",
+            "explanation": "Growth model dN/dt = kN: N(0) gives the constant, N(4) gives k; keep e^{4k} = 3 exact and round only at the end.",
+            "book_ref": {
+              "topic_id": "5cceaeb5-36e2-5ee6-9db5-38f251ffb84b",
+              "quote": "the population grows at a rate proportional to its size"
+            },
+            "steps": [
+              "\\(\\frac{dN}{dt} = kN\\), \\(\\ln|N| = kt + C\\); \\(N(0) = 300\\) gives \\(N = 300e^{kt}\\)",
+              "\\(N(4) = 900\\): \\(e^{4k} = 3\\), \\(k = \\frac{1}{4}\\ln 3 \\approx 0.2747\\)",
+              "(i) \\(N(10) = 300e^{10k} = 300 \\cdot 3^{10/4} = 300 \\cdot 3^{2.5} \\approx 4676.5\\)",
+              "(ii) \\(5000 = 300e^{kt}\\): \\(e^{kt} = \\frac{50}{3}\\), \\(t = \\frac{\\ln(50/3)}{k} = \\frac{4\\ln(50/3)}{\\ln 3}\\)",
+              "\\(t \\approx \\frac{4(2.8134)}{1.0986} \\approx 10.24\\) hours"
+            ],
+            "final_answer": "(i) about 4677 bacteria (ii) about 10.24 hours"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 A radioactive substance has mass 120 g initially and 90 g after 6 hours. Find (i) the decay constant (ii) the mass after 15 hours (iii) the time when 30 g remain. (5 marks)",
+            "explanation": "Use dM/dt = -kM, M = 120e^{-kt}; the second reading gives e^{-6k} = 3/4, which answers every part exactly.",
+            "book_ref": {
+              "topic_id": "5cceaeb5-36e2-5ee6-9db5-38f251ffb84b",
+              "quote": "radioactive mass decays at a rate proportional to the mass present"
+            },
+            "steps": [
+              "\\(\\frac{dM}{dt} = -kM\\) gives \\(M = ce^{-kt}\\); \\(M(0) = 120\\): \\(c = 120\\)",
+              "(i) \\(90 = 120e^{-6k}\\): \\(e^{-6k} = \\frac{3}{4}\\), \\(k = \\frac{1}{6}\\ln\\frac{4}{3} \\approx 0.0479\\) per hour",
+              "(ii) \\(M(15) = 120e^{-15k} = 120\\left(\\frac{3}{4}\\right)^{15/6} = 120(0.75)^{2.5} \\approx 58.46\\) g",
+              "(iii) \\(30 = 120e^{-kt}\\): \\(e^{kt} = 4\\), \\(t = \\frac{\\ln 4}{k} = \\frac{6\\ln 4}{\\ln(4/3)}\\)",
+              "\\(t \\approx \\frac{6(1.3863)}{0.2877} \\approx 28.91\\) hours"
+            ],
+            "final_answer": "(i) \\(k \\approx 0.0479\\) per hour (ii) about 58.46 g (iii) about 28.91 hours"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 A metal block at \\(200^{\\circ}\\)C is placed in a room at \\(30^{\\circ}\\)C. After 10 minutes its temperature is \\(150^{\\circ}\\)C. Find (i) its temperature after 30 minutes (ii) when it reaches \\(50^{\\circ}\\)C. (5 marks)",
+            "explanation": "Newton's law dT/dt = -k(T - 30): T = 30 + 170e^{-kt}; the 10-minute reading gives e^{-10k} = 12/17.",
+            "book_ref": {
+              "topic_id": "5cceaeb5-36e2-5ee6-9db5-38f251ffb84b",
+              "quote": "the rate of cooling is proportional to the difference from the room temperature"
+            },
+            "steps": [
+              "\\(\\frac{dT}{dt} = -k(T - 30)\\) gives \\(T = 30 + ce^{-kt}\\); \\(T(0) = 200\\): \\(c = 170\\)",
+              "\\(150 = 30 + 170e^{-10k}\\): \\(e^{-10k} = \\frac{120}{170} = \\frac{12}{17}\\)",
+              "(i) \\(T(30) = 30 + 170\\left(\\frac{12}{17}\\right)^{3} = 30 + \\frac{170 \\cdot 1728}{4913} \\approx 30 + 59.79 = 89.79\\)",
+              "(ii) \\(50 = 30 + 170e^{-kt}\\): \\(e^{-kt} = \\frac{2}{17}\\); with \\(k = \\frac{1}{10}\\ln\\frac{17}{12}\\), \\(t = \\frac{10\\ln(17/2)}{\\ln(17/12)}\\)",
+              "\\(t \\approx \\frac{10(2.1401)}{0.3483} \\approx 61.44\\) minutes"
+            ],
+            "final_answer": "(i) about \\(89.79^{\\circ}\\)C (ii) after about 61.44 minutes"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Under steady inflation the price of an item rose from Rs. 2500 to Rs. 3200 in 4 years. Assuming the rate of change of price is proportional to the price, find the inflation rate and the price after 10 years. (5 marks)",
+            "explanation": "Model dP/dt = kP: P = 2500e^{kt}; P(4) gives e^{4k} = 1.28, which gives k and then P(10).",
+            "book_ref": {
+              "topic_id": "5cceaeb5-36e2-5ee6-9db5-38f251ffb84b",
+              "quote": "Growth (bacteria, money, inflation)"
+            },
+            "steps": [
+              "\\(\\frac{dP}{dt} = kP\\), \\(P = Ce^{kt}\\); \\(P(0) = 2500\\): \\(P = 2500e^{kt}\\)",
+              "\\(3200 = 2500e^{4k}\\): \\(e^{4k} = 1.28\\)",
+              "\\(k = \\frac{1}{4}\\ln 1.28 \\approx 0.0617\\), about \\(6.17\\%\\) per year",
+              "\\(P(10) = 2500e^{10k} = 2500(1.28)^{10/4} = 2500(1.28)^{2.5}\\)",
+              "\\(P(10) \\approx 4634.10\\)"
+            ],
+            "final_answer": "Inflation rate about \\(6.17\\%\\) per year; price after 10 years about Rs. 4634.10."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 An RL circuit has emf 24 V, resistance \\(8\\ \\Omega\\), inductance 4 H and no initial current. Solve the differential equation for \\(I(t)\\), find the current after 1 second and the steady current. (5 marks)",
+            "explanation": "Put the values in L dI/dt = V_S - RI, separate, integrate with the derivative of the denominator on top, use I(0) = 0.",
+            "book_ref": {
+              "topic_id": "5cceaeb5-36e2-5ee6-9db5-38f251ffb84b",
+              "quote": "the steady current of Ohm's law"
+            },
+            "steps": [
+              "\\(4\\frac{dI}{dt} = 24 - 8I\\), i.e. \\(\\frac{dI}{dt} = 6 - 2I = 2(3 - I)\\)",
+              "Separate: \\(\\frac{dI}{3 - I} = 2\\,dt\\); integrate: \\(-\\ln|3 - I| = 2t + C\\)",
+              "\\(I(0) = 0\\): \\(C = -\\ln 3\\); so \\(\\ln\\left|\\frac{3 - I}{3}\\right| = -2t\\)",
+              "At \\(t = 0\\) the fraction is 1, so \\(3 - I = 3e^{-2t}\\), \\(I = 3\\left(1 - e^{-2t}\\right)\\)",
+              "\\(I(1) = 3(1 - e^{-2}) \\approx 2.594\\) A; as \\(t \\to \\infty\\), \\(I \\to 3\\) A \\(= \\frac{V_{S}}{R}\\)"
+            ],
+            "final_answer": "\\(I(t) = 3\\left(1 - e^{-2t}\\right)\\) A; \\(I(1) \\approx 2.594\\) A; steady current 3 A."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 An uncharged capacitor of \\(C = 0.2\\) F is charged through \\(R = 5\\ \\Omega\\) by a 10 V source. Solve \\(RC\\dfrac{dq}{dt} = CV_{S} - q\\) for \\(q(t)\\), find the current \\(I(t)\\), and the time when the charge reaches 90% of its final value. (5 marks)",
+            "explanation": "Here RC = 1 and CV_S = 2; solve the separable equation with q(0) = 0, differentiate for I, and solve q = 0.9 CV_S.",
+            "book_ref": {
+              "topic_id": "5cceaeb5-36e2-5ee6-9db5-38f251ffb84b",
+              "quote": "Our summary of the models used in this section (not printed in the book)"
+            },
+            "steps": [
+              "\\(RC = 5(0.2) = 1\\), \\(CV_{S} = 0.2(10) = 2\\): \\(\\frac{dq}{dt} = 2 - q\\)",
+              "Separate: \\(\\frac{dq}{2 - q} = dt\\); integrate: \\(-\\ln|2 - q| = t + C\\); \\(q(0) = 0\\): \\(C = -\\ln 2\\)",
+              "\\(\\ln\\left|\\frac{2 - q}{2}\\right| = -t\\), so \\(q = 2\\left(1 - e^{-t}\\right)\\) coulombs",
+              "\\(I = \\frac{dq}{dt} = 2e^{-t}\\) amperes",
+              "Final charge \\(2\\) C; \\(q = 1.8\\): \\(e^{-t} = 0.1\\), \\(t = \\ln 10 \\approx 2.303\\) s"
+            ],
+            "final_answer": "\\(q = 2\\left(1 - e^{-t}\\right)\\) C, \\(I = 2e^{-t}\\) A; 90% charge after \\(\\ln 10 \\approx 2.303\\) s."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 A 50 mg dose of a medicine is in the blood at t = 0. The body removes it at a rate proportional to the amount present, with constant 0.3 per hour. Construct the model, solve it, and find (i) the amount after 4 hours (ii) when only 10 mg remain. (5 marks)",
+            "explanation": "Translate the sentence (rate = dA/dt, proportional = constant times, decreasing = minus), solve the separable equation, then substitute.",
+            "book_ref": {
+              "topic_id": "5cceaeb5-36e2-5ee6-9db5-38f251ffb84b",
+              "quote": "First-order differential equations play a vital role in modeling various real-life phenomena"
+            },
+            "steps": [
+              "Model: \\(\\frac{dA}{dt} = -0.3A\\) (minus because the amount decreases)",
+              "\\(\\frac{dA}{A} = -0.3\\,dt\\), \\(\\ln|A| = -0.3t + C\\); \\(A(0) = 50\\): \\(A = 50e^{-0.3t}\\)",
+              "(i) \\(A(4) = 50e^{-1.2} \\approx 15.06\\) mg",
+              "(ii) \\(10 = 50e^{-0.3t}\\): \\(e^{0.3t} = 5\\), \\(t = \\frac{\\ln 5}{0.3}\\)",
+              "\\(t \\approx \\frac{1.6094}{0.3} \\approx 5.36\\) hours"
+            ],
+            "final_answer": "\\(A = 50e^{-0.3t}\\); (i) about 15.06 mg (ii) after about 5.36 hours"
+          }
+        ]
+      }
+    }
+  ]
+}
