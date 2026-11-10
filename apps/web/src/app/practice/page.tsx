@@ -26,6 +26,8 @@ type Way = { href: string; title: string; text: string; icon: ReactNode };
 // The other ways to practise, each a page of its own. What each one is, in the words of its page; no figures.
 const WAYS: Way[] = [
   // BOOK-EXERCISES-01: the textbook's own end-of-chapter exercises, solved (Chapter practice leads, owner 2026-11-08).
+  // CHAPTER-MOCK-01 (owner, 2026-11-10): a Board-pattern paper per chapter, with a Question paper and a Solution paper.
+  { href: "/practice/chapter-mocks", title: "Chapter mock tests", text: "A Board-pattern paper for each chapter, with its solution paper.", icon: <PracticeIcon name="timer" size={22} /> },
   { href: "/practice/exercises", title: "Book exercises", text: "Each chapter's exercise, solved, in English and Roman Urdu.", icon: <Icon name="book-open" size={22} /> },
   { href: "/practice/written", title: "Written practice", text: "Answer on paper, photograph your pages, teacher-marked.", icon: <PracticeIcon name="pen-line" size={22} /> },
   { href: "/practice/mocks", title: "Mock tests", text: "Full-length tests that follow official patterns.", icon: <PracticeIcon name="timer" size={22} /> },
