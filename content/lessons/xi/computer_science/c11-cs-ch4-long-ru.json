@@ -1,0 +1,371 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-LONG-RU",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/u-long-questions",
+      "title": "Long Questions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-CS-CH4-LONG",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 90,
+          "pdf_to": 125,
+          "note": "Roman Urdu: practice long questions written from Chapter 4 (PDF 90-125), not printed in the book; same questions and order as the English set. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Yeh chapter 4 (Computational Structures) ke poore chapter se practice long questions (tafseeli sawal) hain, Board ke long question ki shakal mein: har sawal 8 number ka hai (definition, misalon ke saath wazahat, farq, program likh kar samjhana), aksar definition aur wazahat ke hisson mein (jaise 2 + 3 x 2). Har sawal ka poora model jawab hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Define a list. Explain any three properties of lists other than dynamic size, with an example of each. (8 marks)\n(List ki definition likhein. Dynamic size ke ilawa list ki koi teen properties misal ke saath samjhayein.)",
+            "explanation": "Definition: list aik data structure hai jo bohat se data ke tukre aik khaas tarteeb mein rakhti hai. Har tukra, jise element kehte hain, aik khaas index par hota hai. Python mein list square brackets mein likhi jati hai aur items comma se alag hote hain.\n\n1. Index-based access: har item ki aik position (index) hoti hai; pehle item ka index 0, doosre ka 1, waghera. Misal: marks = [45, 67, 89] mein marks[0] 45 hai.\n\n2. Ordered collection: items jis tarteeb se dale jayen woh qaim rehti hai; pehle dala gaya item usi jagah rehta hai jab tak aap na badlein. Misal: [\"Decorations\", \"Snacks\", \"Plates\"] hamesha isi tarteeb mein print hoti hai.\n\n3. Heterogeneous elements: list mein mukhtalif qism ke items aik saath ho sakte hain, jaise numbers, words balke doosri lists bhi. Misal: [\"Apple\", 42, 3.14, True].\n\n(Baqi properties: mutability, banne ke baad list badli ja sakti hai; supports duplicates, aik item aik se zyada baar aa sakta hai.)",
+            "book_ref": {
+              "topic_id": "054330db-3814-5e10-ac99-af2cbf8a43c6",
+              "quote": "Index-Based Access: Every item in a list has a position, called an index."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Explain the three ways of deleting items from a Python list and the two ways of searching a list. Write a program that uses all five and show its output. (8 marks)\n(Python list se items delete karne ke teen tareeqe aur list mein talash ke do tareeqe samjhayein. Aik program likhein jo paanchon istemal kare aur us ka output dikhayein.)",
+            "explanation": "Deletion (mukammal kaam kaatne jaisa):\n1. remove(value): kisi khaas item ka pehla wajood hatata hai.\n2. pop(index): khaas index wala item hatata hai.\n3. clear(): saare items hata kar list khaali kar deta hai.\n\nSearching (to-do list mein kaam dhoondne jaisa):\n1. in keyword dekhta hai ke item list mein hai ya nahin (True ya False).\n2. index(value) item ki position batata hai.\n\nProgram:\nparty = [\"Invite friends\", \"Buy snacks\", \"Buy drinks\", \"Buy snacks\"]\nparty.remove(\"Buy snacks\")\nprint(party)\nparty.pop(0)\nprint(party)\nprint(\"Buy drinks\" in party)\nprint(party.index(\"Buy snacks\"))\nparty.clear()\nprint(party)\n\nOutput:\n['Invite friends', 'Buy drinks', 'Buy snacks']\n['Buy drinks', 'Buy snacks']\nTrue\n1\n[]\n\nWazahat: remove() sirf pehla \"Buy snacks\" hatata hai; pop(0) \"Invite friends\" hatata hai; in \"Buy drinks\" dhoond leta hai; index() baqi \"Buy snacks\" ki position 1 deta hai; clear() list khaali kar deta hai.",
+            "book_ref": {
+              "topic_id": "34522a45-d095-5d68-b10a-e5d8fd89bb17",
+              "quote": "2. Deletion: Removing an item from your list is like crossing off a task"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Explain the push and pop operations of a stack. Write a Python program that uses a list as a stack for a web browser's Back button: visit Home, News and Sports, then go back once, and explain the output. (8 marks)\n(Stack ke push aur pop operations samjhayein. Aik Python program likhein jo web browser ke Back button ke liye list ko stack banaye: Home, News aur Sports kholein, phir aik baar wapas jayen, aur output samjhayein.)",
+            "explanation": "Push: stack ke top par item jorna. Python mein list ko stack banaya jata hai aur append() top par element jorta hai.\nPop: stack ke top se item nikalna. List ka pop() function top element nikal kar wapas deta hai.\nDono kaam sirf top par hote hain, is liye stack LIFO hai: aakhri dala gaya item pehle nikalta hai. Web pages mein wapas jana LIFO masla hai.\n\nProgram:\nhistory = []\nhistory.append(\"Home\")\nhistory.append(\"News\")\nhistory.append(\"Sports\")\nprint(\"Pages:\", history)\nleft = history.pop()\nprint(\"Back from:\", left)\nprint(\"Now on:\", history[len(history) - 1])\nprint(\"Pages:\", history)\n\nOutput:\nPages: ['Home', 'News', 'Sports']\nBack from: Sports\nNow on: News\nPages: ['Home', 'News']\n\nWazahat: teeno pages kholne ki tarteeb mein push hote hain, is liye Sports top par hai. Wapas jane par Sports (aakhri khola gaya page) pop hota hai aur ab top par News hai.",
+            "book_ref": {
+              "topic_id": "c9034781-78e6-5fe6-86f2-4761159fb201",
+              "quote": "Push Operation: Push means adding an item to the top of the stack."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Explain infix, postfix and prefix notations with one example each. Why do postfix and prefix need no parentheses? (8 marks)\n(Infix, postfix aur prefix notations aik aik misal ke saath samjhayein. Postfix aur prefix ko parentheses ki zaroorat kyun nahin?)",
+            "explanation": "1. Infix notation: operator operands ke darmiyan hota hai. Yeh hisab aur algebra ka aam tareeqa hai. Misal: A + B ya (A + B) x C. Operations ki tarteeb dikhane ke liye parentheses lag sakte hain.\n\n2. Postfix notation (Reverse Polish Notation, RPN): operator operands ke baad aata hai. Misal: A + B = AB+, aur (A + B) x C = AB+Cx: pehle A aur B jama, phir natije ko C se zarb.\n\n3. Prefix notation (Polish Notation): operator operands se pehle aata hai. Misal: A + B = +AB, aur +A x BC ka matlab pehle B aur C zarb, phir A jama.\n\nParentheses kyun nahin: postfix aur prefix mein har operator ki jagah khud tay kar deti hai ke woh kin operands par aur kis tarteeb mein kaam karega, is liye operations ki tarteeb ke liye parentheses ki zaroorat nahin. Is se computer ke liye postfix ka hisab aasan bhi hota hai.",
+            "book_ref": {
+              "topic_id": "199743fc-2d41-52fb-a442-7a50dc9bc6ec",
+              "quote": "In mathematics and computer science, expressions can be written in different notations."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Convert the infix expression A + B * C - D to postfix notation using a stack. Show the stack and the output list after each token. (8 marks)\n(Infix expression A + B * C - D ko stack se postfix mein badlein. Har token ke baad stack aur output list dikhayein.)",
+            "explanation": "Expression ko baen se daen parhein: operands seedhe output mein; operator push hota hai, magar pehle stack par maujood zyada ya barabar priority wale operators output mein pop hote hain; aakhir mein stack khaali kar ke output mein dalein.",
+            "book_ref": {
+              "topic_id": "199743fc-2d41-52fb-a442-7a50dc9bc6ec",
+              "quote": "Start with an empty stack and an empty output list."
+            },
+            "steps": [
+              "Shuru: stack [ ], output [ ]",
+              "A parha: operand, output [A]; stack [ ]",
+              "+ parha: stack khaali, push: stack [+]; output [A]",
+              "B parha: output [A, B]; stack [+]",
+              "* parha: + ki priority * se kam hai, is liye push: stack [+, *]; output [A, B]",
+              "C parha: output [A, B, C]; stack [+, *]",
+              "- parha: * ki priority zyada, pop: output [A, B, C, *]; + ki priority barabar, pop: output [A, B, C, *, +]; - push: stack [-]",
+              "D parha: output [A, B, C, *, +, D]; stack [-]",
+              "Aakhir: baqi - pop: output [A, B, C, *, +, D, -]; stack [ ]"
+            ],
+            "final_answer": "Postfix: A B C * + D -"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "Yaad rakhein: naya operator push karne se pehle stack ke top par dekhein. Agar wahan barabar ya zyada priority wala operator ho (jaise - aane par * aur +), to pehle use output mein bhejein. Is liye - se pehle * aur + dono nikal gaye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Evaluate the postfix expression 8 2 3 * + 4 - using a stack. Show the stack after each token. (8 marks)\n(Postfix expression 8 2 3 * + 4 - ko stack se hal karein. Har token ke baad stack dikhayein.)",
+            "explanation": "Baen se daen parhein: har number push karein; operator par do items pop karein, operation karein (pehla pop hone wala right operand hai) aur natija push karein. Stack par aakhri item jawab hai.",
+            "book_ref": {
+              "topic_id": "13f1c0cd-85e5-5ebe-93c6-4c8b6cdeb33e",
+              "quote": "When you find an operator, pop the required number of items from the stack, perform the operation"
+            },
+            "steps": [
+              "8 parha: push, stack [8]",
+              "2 parha: push, stack [8, 2]",
+              "3 parha: push, stack [8, 2, 3]",
+              "* parha: 3 aur 2 pop, 2 * 3 = 6, push: stack [8, 6]",
+              "+ parha: 6 aur 8 pop, 8 + 6 = 14, push: stack [14]",
+              "4 parha: push, stack [14, 4]",
+              "- parha: 4 aur 14 pop, 14 - 4 = 10, push: stack [10]"
+            ],
+            "final_answer": "8 2 3 * + 4 - ki value 10 hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Why is balancing parentheses important? Write a Python function that uses a list as a stack to check whether the parentheses of an expression are balanced. Test it on three expressions and explain the output. (8 marks)\n(Parentheses balance karna kyun zaroori hai? Aik Python function likhein jo list ko stack bana kar check kare ke expression ke parentheses balanced hain ya nahin. Teen expressions par test karein aur output samjhayein.)",
+            "explanation": "Infix expressions mein parentheses batate hain ke pehle kaun sa operation hoga, is liye har opening parenthesis ka matching closing parenthesis hona chahiye.\nTareeqa: har ( stack par push karein; har ) par top pop karein. Aakhir mein stack khaali ho to parentheses balanced hain. Stack khaali na ho, ya khaali stack se pop ki koshish ho, to balanced nahin.\n\nProgram:\ndef is_balanced(expr):\n    stack = []\n    for ch in expr:\n        if ch == \"(\":\n            stack.append(ch)\n        elif ch == \")\":\n            if len(stack) == 0:\n                return False\n            stack.pop()\n    return len(stack) == 0\n\nprint(is_balanced(\"(3 + 4) * (5 - 2)\"))\nprint(is_balanced(\"((7 - 1)\"))\nprint(is_balanced(\"(9 - 3))\"))\n\nOutput:\nTrue\nFalse\nFalse\n\nWazahat:\n1. (3 + 4) * (5 - 2): har ( ka jora ) hai, stack aakhir mein khaali, is liye True.\n2. ((7 - 1): aik ( stack par bach jata hai, is liye False.\n3. (9 - 3)): doosre ) ko stack khaali milta hai (pop ke liye kuch nahin), is liye False.",
+            "book_ref": {
+              "topic_id": "1c020db5-64b2-5d3f-a9c9-3f73b2d569e7",
+              "quote": "Balancing parentheses is important to ensure that every opening parenthesis has a matching closing parenthesis."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Explain how a stack implements the undo mechanism of a text editor. Write a Python program in which the words Hello, World and Pakistan are typed one by one and undo is pressed twice; explain the output. (8 marks)\n(Samjhayein ke stack text editor ka undo mechanism kaise banata hai. Aik Python program likhein jis mein Hello, World aur Pakistan aik aik kar ke type hon aur do baar undo dabaya jaye; output samjhayein.)",
+            "explanation": "Notepad aur Microsoft Word jaisi applications mein undo stack se hota hai:\n1. Actions: har tabdeeli (text type ya delete karna) stack par push hoti hai.\n2. Undo: undo dabane par sab se taaza action pop hota hai aur editor use ulat deta hai (maslan type kiya gaya word mita deta hai).\n3. Kai undos: dobara undo se pichle actions aik aik kar ke ulti tarteeb (LIFO) mein ulat-te hain.\n\nProgram:\ndocument = []\nactions = []\nfor word in [\"Hello\", \"World\", \"Pakistan\"]:\n    document.append(word)\n    actions.append(word)\nprint(\"Document:\", document)\nlast = actions.pop()\ndocument.remove(last)\nprint(\"Undo removed:\", last)\nlast = actions.pop()\ndocument.remove(last)\nprint(\"Undo removed:\", last)\nprint(\"Document:\", document)\n\nOutput:\nDocument: ['Hello', 'World', 'Pakistan']\nUndo removed: Pakistan\nUndo removed: World\nDocument: ['Hello']\n\nWazahat: har type kiya gaya word actions stack par push hota hai. Pehla undo \"Pakistan\" (sab se taaza action) pop kar ke document se hatata hai; doosra \"World\". Sirf \"Hello\" bachta hai.",
+            "book_ref": {
+              "topic_id": "0ca12aa2-4856-5281-bfca-48c925b11c66",
+              "quote": "When you want to undo an action, the most recent action is removed from the stack and reversed."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Define a queue and explain its properties. Write a Python program using the queue module that schedules three tasks, Print, Save and Email, peeks at the next task and then processes all of them; explain the output. (8 marks)\n(Queue ki definition likhein aur us ki properties samjhayein. queue module se aik Python program likhein jo teen tasks, Print, Save aur Email, schedule kare, agla task dekhe (peek) aur phir sab process kare; output samjhayein.)",
+            "explanation": "Definition: queue items ko is tarah rakhti hai ke pehla dala gaya item pehle nikle, jaise bank ki qataar. Items peeche add aur aage se remove hote hain (FIFO).\n\nProperties:\n1. Order preservation: queue items ki tarteeb qaim rakhti hai; pehle aaya pehle gaya.\n2. FIFO usool: queue mein pehla dala gaya item pehle nikalta hai.\n3. Dynamic size: items add ya remove hone par queue barhti ya ghat-ti hai.\n\nProgram:\nfrom queue import Queue\ntasks = [\"Print\", \"Save\", \"Email\"]\nq = Queue()\nfor t in tasks:\n    q.put(t)\nprint(\"Next task:\", q.queue[0])\nfor t in tasks:\n    print(\"Processing:\", q.get())\nprint(\"Waiting tasks:\", list(q.queue))\n\nOutput:\nNext task: Print\nProcessing: Print\nProcessing: Save\nProcessing: Email\nWaiting tasks: []\n\nWazahat: put() tasks ko aane ki tarteeb mein peeche enqueue karta hai; q.queue[0] aage wala task nikale baghair dekhta hai (peek); har get() aage wala task dequeue karta hai, is liye tasks aane ki tarteeb mein process hote hain aur aakhir mein queue khaali hai.",
+            "book_ref": {
+              "topic_id": "f7620f99-156e-5db5-ade4-ecd96b246e03",
+              "quote": "FIFO Principle: A queue works on the"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Name the uses of queues in computers. Explain print spooling, task scheduling and data buffering. (8 marks)\n(Computers mein queues ke istemal ke naam likhein. Print spooling, task scheduling aur data buffering samjhayein.)",
+            "explanation": "Queues graphs mein Breadth-First Search (BFS), task scheduling, print spooling, data buffering aur call centre systems mein istemal hoti hain.\n\n1. Print spooling: printer ko bheje gaye print jobs sambhalne ka nizam. Documents queue mein lagte hain; har naya document aakhir mein judta hai aur documents bhejne ki tarteeb mein print hote hain. Is se documents be-tarteeb print nahin hote aur aik saath aane wali requests mein uljhan nahin hoti.\n\n2. Task scheduling: tasks clinic ke mareezon jaise aur queue intezar ki list jaisi hai. Naya task (maslan Print dabana) queue ke aakhir mein judta hai (enqueue); computer tayyar ho to aage se pehla task nikalta hai (dequeue). Tasks aane ki tarteeb mein, munsifana tareeqe se, process hote hain.\n\n3. Data buffering: online video streaming mein video chhote hisson mein buffer hoti hai; queue dekhe ja rahe hisse se aage ke hisse jama aur load karti hai, taake data der se aaye tab bhi video bina ruke chale. Printer queue bhi kai documents rakh kar aik ke baad aik print karti hai.",
+            "book_ref": {
+              "topic_id": "2ee8147c-3cdf-5592-b9e1-dd529e1457af",
+              "quote": "Let's discuss them one by one."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 A tree has root 10 with children 20 and 30; node 20 has children 40 and 50; node 30 has one child 60. Traverse it by Breadth-First Search using a queue. Show the queue after each visit and write the BFS order. (8 marks)\n(Aik tree ka root 10 hai jis ke bachay 20 aur 30 hain; node 20 ke bachay 40 aur 50 hain; node 30 ka aik bacha 60 hai. Ise queue ke saath Breadth-First Search se traverse karein. Har visit ke baad queue dikhayein aur BFS tarteeb likhein.)",
+            "explanation": "BFS tree ko level ba level visit karti hai: root ko queue mein rakhein; baar baar aage wala node dequeue kar ke visit karein aur us ke bachay enqueue karein; queue khaali hone par ruk jayen.",
+            "book_ref": {
+              "topic_id": "e09157a8-d2c4-52af-9db9-2a7b007d7194",
+              "quote": "This approach uses a queue to manage the nodes that need to be visited."
+            },
+            "steps": [
+              "Root se shuru: queue [10]",
+              "10 visit, us ke bachay 20 aur 30 enqueue: queue [20, 30]",
+              "20 visit, 40 aur 50 enqueue: queue [30, 40, 50]",
+              "30 visit, 60 enqueue: queue [40, 50, 60]",
+              "40 visit (koi bacha nahin): queue [50, 60]",
+              "50 visit (koi bacha nahin): queue [60]",
+              "60 visit (koi bacha nahin): queue [ ]; queue khaali, saare nodes visit ho gaye"
+            ],
+            "final_answer": "BFS tarteeb: 10, 20, 30, 40, 50, 60"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Define a tree data structure with an example. Explain the properties of trees: root node, edges and nodes, height and balanced trees. (8 marks)\n(Tree data structure ki definition misal ke saath likhein. Trees ki properties samjhayein: root node, edges aur nodes, height aur balanced trees.)",
+            "explanation": "Definition: tree maloomat ko aik markazi point, root node, se phailata hai. Har node doosre nodes se jur kar shakhon wala dhancha banata hai, list ke bar-aks jahan items seedhi line mein hote hain. Misal: family tree mein sab se purane buzurg root aur un ki aulaad agle levels hain.\n\n1. Root node: tree ka sab se pehla ya upar wala node, jaise main folder jis mein saare folders aur files hon.\n2. Edges aur nodes: nodes tree ke alag alag elements hain jo edges naam ki lines se jure hain. Jis node ka koi bacha na ho woh leaf hai, jaise file jis mein koi aur file na ho.\n3. Height: root node se sab se door leaf tak sab se lamba raasta; batati hai ke tree kitna gehra ya lamba hai.\n4. Balanced trees: tree balanced hai agar left aur right shakhon ki height taqreeban barabar ho.",
+            "book_ref": {
+              "topic_id": "d60cda27-5223-57a6-9a98-f9bbd9ccd7ea",
+              "quote": "Root Node: The root is the very first or top node in a tree"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 Write the chapter's FamilyTree program in Python, add 'Child3' under 'Parent2', print the children of 'Parent1' and search for a member who is not in the tree. Explain the two classes and the output. (8 marks)\n(Chapter ka FamilyTree program Python mein likhein, 'Parent2' ke neeche 'Child3' jorein, 'Parent1' ke bachay print karein aur aise member ko dhoondein jo tree mein nahin. Dono classes aur output samjhayein.)",
+            "explanation": "Program:\nclass FamilyMember:\n    def __init__(self, name):\n        self.name = name\n        self.children = []\n\nclass FamilyTree:\n    def __init__(self, ancestor_name):\n        self.root = FamilyMember(ancestor_name)\n\n    def add_child(self, parent_name, child_name):\n        parent_node = self._find_member(self.root, parent_name)\n        if parent_node:\n            parent_node.children.append(FamilyMember(child_name))\n\n    def _find_member(self, current_member, name):\n        if current_member.name == name:\n            return current_member\n        for child in current_member.children:\n            result = self._find_member(child, name)\n            if result:\n                return result\n        return None\n\nfamily_tree = FamilyTree('Grandparent')\nfamily_tree.add_child('Grandparent', 'Parent1')\nfamily_tree.add_child('Grandparent', 'Parent2')\nfamily_tree.add_child('Parent1', 'Child1')\nfamily_tree.add_child('Parent1', 'Child2')\nfamily_tree.add_child('Parent2', 'Child3')\nmember = family_tree._find_member(family_tree.root, 'Parent1')\nfor child in member.children:\n    print(child.name)\nprint(family_tree._find_member(family_tree.root, 'Uncle'))\n\nOutput:\nChild1\nChild2\nNone\n\nWazahat:\n1. FamilyMember aik shakhs (node) hai; har shakhs ka naam aur bachon (aulaad) ki list hoti hai.\n2. FamilyTree poora tree sambhalti hai, root par buzurg se shuru kar ke. add_child() _find_member() se parent dhoondta hai aur us ke children mein naya FamilyMember append karta hai (insertion). _find_member() pehle maujooda member check karta hai phir har bache mein dhoondta hai (searching).\n3. Output: Parent1 ke bachay Child1 aur Child2 print hote hain; 'Uncle' tree mein kahin nahin, is liye _find_member() None deta hai.",
+            "book_ref": {
+              "topic_id": "d60cda27-5223-57a6-9a98-f9bbd9ccd7ea",
+              "quote": "The 'FamilyTree' class manages the entire tree, starting with an ancestor at the root."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 A tree has root A; A's left child is B and right child is C; B has left child D and right child E; C has right child F. Write its in-order, pre-order and post-order traversals, showing the rule used for each. (8 marks)\n(Aik tree ka root A hai; A ka left child B aur right child C hai; B ka left child D aur right child E hai; C ka right child F hai. Is ki in-order, pre-order aur post-order traversals likhein aur har aik ka usool dikhayein.)",
+            "explanation": "Har node par, root se shuru kar ke, usool lagayein: in-order = left, root, right; pre-order = root, left, right; post-order = left, right, root.",
+            "book_ref": {
+              "topic_id": "3ff4ec15-e7b3-55e9-8b24-96b1af245315",
+              "quote": "We will use the following simple tree structure with numeric data to understand traversal functions more easily."
+            },
+            "steps": [
+              "In-order (left, root, right): A ka left subtree D, B, E deta hai; phir A; A ka right subtree C, F (C ka left child nahin)",
+              "In-order: D, B, E, A, C, F",
+              "Pre-order (root, left, right): pehle A; phir B ka subtree B, D, E; phir C ka subtree C, F",
+              "Pre-order: A, B, D, E, C, F",
+              "Post-order (left, right, root): B ka subtree D, E, B; phir C ka subtree F, C; aakhir mein A",
+              "Post-order: D, E, B, F, C, A"
+            ],
+            "final_answer": "In-order D, B, E, A, C, F; pre-order A, B, D, E, C, F; post-order D, E, B, F, C, A"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "C ka sirf right child F hai. In-order mein C ka left subtree khaali hai, is liye pehle C aur phir F aata hai; post-order mein pehle F aur phir C."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 Define a balanced tree and explain the library example. Describe binary trees and AVL trees with examples. (8 marks)\n(Balanced tree ki definition likhein aur library ki misal samjhayein. Binary trees aur AVL trees misalon ke saath bayan karein.)",
+            "explanation": "Balanced tree: aisa tree jis ki height kam se kam rakhi jaye, is tarah ke kisi bhi node ke left aur right subtree ki height ka farq aik had (aam taur par 1) se zyada na ho. Is se searching, insertion aur deletion O(log n) ke qareeb rehte hain.\nLibrary ki misal: root Science hai jo Physics aur Biology mein batta hai; Physics Classical Mechanics aur Quantum Physics mein, Biology Botany aur Zoology mein. Quantum Physics ki kitab Science, phir Physics, phir Quantum Physics se milti hai; tree balanced hai is liye talash tez hai.\n\nBinary tree: aisa hierarchical data structure jis mein har node ke zyada se zyada do bachay (left aur right) hon. Misal (Figure 4.9): \"Grandparent\" root hai jis ke do bachay \"Parent1\" aur \"Parent2\" hain, aur har parent ke apne bachay jaise \"Child1\" aur \"Child2\" ho sakte hain.\n\nAVL tree: binary tree ki aik qism jo khud ko balanced rakhti hai; aik taraf doosri se zyada lambi hone lage to tree khud ko dobara tarteeb deta hai. Misal (Figure 4.10): shelves par kitabon ka tawazun rakhne ki tarah har naya number dalne ke baad tree balanced rehta hai; left side (15, 10, 18) aur right side (30) ki height mein bohat kam farq hai.",
+            "book_ref": {
+              "topic_id": "0e77ba9d-e51d-5859-b952-448d0a6e13c1",
+              "quote": "This structure is analogous to a family tree, where each individual may have up to two descendants"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 Explain any four applications of trees. (8 marks)\n(Trees ke koi chaar istemal samjhayein.)",
+            "explanation": "1. File systems (backup): pre-order traversal pehle root visit karti hai phir har directory ka recursively backup leti hai, is liye directories apne andar ki cheezon se pehle backup hoti hain.\n\n2. File system deletion: post-order traversal pehle saari subdirectories aur files aur aakhir mein parent directory delete karti hai, yani sahi tarteeb mein.\n\n3. Hierarchical data: trees wazeh hierarchical rishte wala data dikhate hain, jaise organisational charts aur family trees.\n\n4. Syntax parsing: programming languages mein trees source code ki banawat (syntax) ko parse aur zahir karte hain aur compilers ko code samajhne mein madad dete hain.\n\n(Decision making: decision trees mukhtalif conditions aur nataij ki bunyad par faislay ke liye algorithms mein kaam aate hain.)",
+            "book_ref": {
+              "topic_id": "bb1d9c7f-0279-50c0-b1a3-2ce58974c086",
+              "quote": "Hierarchical Data Representation: Trees are used in representing data"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Define a graph with an example. Describe its characteristics (vertices and edges) and differentiate between a tree and a graph. (8 marks)\n(Graph ki definition misal ke saath likhein. Is ki khususiyat (vertices aur edges) bayan karein aur tree aur graph mein farq likhein.)",
+            "explanation": "Definition: graph aisa data structure hai jo vertices (nodes) aur un ko jorne wale edges ka majmua hai. Yeh connections ke network dikhata hai jahan har connection do vertices ka rishta hai. Misal: Pakistan ke shehron ke naqshe mein har shehar vertex aur do shehron ke darmiyan har sarak edge hai.\n\nKhususiyat:\n1. Vertices (nodes): graph ke alag alag points ya cheezein, maslan social network graph mein har user.\n2. Edges (links): vertices ke darmiyan connections, maslan transport graph mein do shehron ko jorne wali har sarak.\n\nTree aik khaas qism ka graph hai. Farq table mein hai.",
+            "book_ref": {
+              "topic_id": "6b975c6d-4863-5cee-90ce-70f0af3c7d24",
+              "quote": "Difference from a Tree: While both graphs and trees are used to represent relationships between objects"
+            },
+            "answer_table": {
+              "header": [
+                "Tree",
+                "Graph"
+              ],
+              "rows": [
+                [
+                  "Hierarchical: aik root node jis se baqi nodes phailte hain",
+                  "Zaroori nahin ke hierarchy ya root ho"
+                ],
+                [
+                  "Do nodes ke darmiyan bilkul aik raasta, is liye koi cycle (loop) nahin",
+                  "Nodes ke darmiyan kai raaste; cycles ho sakte hain"
+                ],
+                [
+                  "Sakht parent-child rishte",
+                  "Koi bhi do vertices jur sakte hain, pecheeda jaal banta hai"
+                ],
+                [
+                  "Family trees aur organizational charts jaisa tarteeb wala data",
+                  "Zyada lachakdar: networks, web links, transport systems"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 Explain the operations on graphs (insertion, deletion, traversal and searching) with examples. Describe the two traversal techniques. (8 marks)\n(Graphs ke operations (insertion, deletion, traversal aur searching) misalon ke saath samjhayein. Traversal ki dono techniques bayan karein.)",
+            "explanation": "1. Insertion: naya vertex ya edge jorna. Misal: transport map mein naya shehar naya vertex aur shayad naye edges lata hai.\n\n2. Deletion: vertex ya edge hatana. Misal: naqshe se shehar hataya jaye to us ka vertex aur us se jure saare edges delete ho jate hain.\n\n3. Traversal: saare vertices aur edges ko tarteeb se visit karna, do techniques se:\n   Breadth-First Search (BFS): source vertex se shuru ho kar agle level par jane se pehle us ke saare qareebi padosi dekhti hai. Misal: markazi train station se pehle seedhe jure saare mohallay, phir un se jure mohallay, yahan tak ke saare pahunch wale mohallay dekh liye jayen.\n   Depth-First Search (DFS): source vertex se shuru ho kar har shakh par jitna mumkin ho aage jati hai, phir wapas (backtrack) aati hai.\n\n4. Searching: graph mein koi khaas vertex ya edge dhoondna, maslan khaas shehar ya raaste jaldi talash karna.",
+            "book_ref": {
+              "topic_id": "060b70ad-4070-5b19-99b7-489cddbb046c",
+              "quote": "Traversal: Visiting all vertices and edges systematically."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 Explain the properties of graphs (degree, weight and direction). Describe the three main types of graphs with examples. (8 marks)\n(Graphs ki properties (degree, weight aur direction) samjhayein. Graphs ki teen bari qismein misalon ke saath bayan karein.)",
+            "explanation": "Properties:\n1. Degree: vertex se jure edges ki tadaad; teen shehron se jura shehar degree 3 rakhta hai.\n2. Weight: kuch graphs mein edges par weight hota hai jo faasla ya qeemat batata hai; 50 km sarak ka weight 50 ho sakta hai.\n3. Direction: edges directed (yak-tarfa: A se B ki sarak ka matlab B se A ki wapsi nahin) ya undirected (do-tarfa) hote hain.\n\nQismein:\n1. Directed graph: edges ki aik vertex se doosre ki taraf simt hoti hai (Figure 4.11). Misal: shehar A se B sirf usi simt ja sakte hain jis ki sign ijazat de; A se B ki one-way sarak na ho to seedha nahin ja sakte.\n2. Undirected graph: edges ki koi simt nahin, dono taraf ja sakte hain (Figure 4.12). Misal: A B ka dost hai to B bhi A ka dost hai.\n3. Weighted graph: har edge ka weight ya cost hota hai jo vertices ke darmiyan safar ka faasla, waqt ya qeemat batata hai. Misal: shehar ka naqsha jis mein har sarak ka faasla ya waqt likha ho, taake landmarks ke darmiyan sab se chhota ya tez raasta mile.",
+            "book_ref": {
+              "topic_id": "be0c4516-54da-538a-bee6-3e68343765f7",
+              "quote": "Each type has its own characteristics, which can be better understood through simple examples."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 Why is choosing the right data structure important? Explain when a stack, a queue, a list, a tree and a graph should be used, with one application of each. (8 marks)\n(Sahi data structure chunna kyun zaroori hai? Batayein ke stack, queue, list, tree aur graph kab istemal hon, har aik ka aik istemal ke saath.)",
+            "explanation": "Mukhtalif data structures mukhtalif masail ke liye munasib hain; sahi structure chunne se hal zyada efficient aur banane mein aasan hota hai. Kab kaun sa istemal ho, table mein hai.",
+            "book_ref": {
+              "topic_id": "0ac30122-7359-58e6-90eb-e7f71a941448",
+              "quote": "Let's break down when each of the five data structures"
+            },
+            "answer_table": {
+              "header": [
+                "Structure",
+                "Kab istemal karein",
+                "Istemal"
+              ],
+              "rows": [
+                [
+                  "Stack",
+                  "Data aane ki ulti tarteeb (LIFO) mein; backtracking",
+                  "Text editor mein undo; expression evaluation; DFS"
+                ],
+                [
+                  "Queue",
+                  "First-In, First-Out (FIFO) tarteeb mein processing",
+                  "Print jobs ya web server requests ki task scheduling; BFS"
+                ],
+                [
+                  "List",
+                  "Tarteeb wala majmua jahan tarteeb aham ho aur index se access chahiye",
+                  "To-do list ya playlist; stacks aur queues banana"
+                ],
+                [
+                  "Tree",
+                  "Parent-child rishton wala hierarchical data",
+                  "File systems, XML/HTML documents; binary search trees"
+                ],
+                [
+                  "Graph",
+                  "Network mein cheezein (nodes) aur connections (edges)",
+                  "Social networks; naqshon mein chhota raasta; software ki build tarteeb"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 A graph is drawn as a tree: node 1 has children 2 and 3; node 2 has children 4 and 5; node 3 has one child 6. Using a stack, traverse it by Depth-First Search, showing the stack after each step (push children so that the left child is on top). (8 marks)\n(Aik graph tree ki shakal mein hai: node 1 ke bachay 2 aur 3; node 2 ke bachay 4 aur 5; node 3 ka aik bacha 6. Stack ke saath Depth-First Search se traverse karein aur har qadam ke baad stack dikhayein (bachay is tarah push karein ke left child top par ho).)",
+            "explanation": "DFS root push karti hai, phir baar baar top node pop kar ke visited mark karti hai aur us ke unvisited bachay push karti hai. Stack mein top daen taraf likha hai.",
+            "book_ref": {
+              "topic_id": "78179912-f24b-568e-8924-68f8599faa8c",
+              "quote": "This method is particularly useful when we need to explore as far as possible along a branch before backtracking"
+            },
+            "steps": [
+              "Root push: stack [1]",
+              "1 pop, visit, us ke bachay 3 aur 2 push: stack [3, 2]",
+              "2 pop, visit, us ke bachay 5 aur 4 push: stack [3, 5, 4]",
+              "4 pop, visit (koi bacha nahin): stack [3, 5]",
+              "5 pop, visit (koi bacha nahin): stack [3]",
+              "3 pop, visit, us ka bacha 6 push: stack [6]",
+              "6 pop, visit (koi bacha nahin): stack [ ]; stack khaali"
+            ],
+            "final_answer": "DFS tarteeb: 1, 2, 4, 5, 3, 6"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "22 Why are computational structures combined to solve complex problems? Write a Python program that combines a list and a stack to reverse the list [\"Ali\", \"Sara\", \"Zain\", \"Hina\"], and explain it. (8 marks)\n(Pecheeda masail hal karne ke liye computational structures kyun milaye jate hain? Aik Python program likhein jo list aur stack mila kar [\"Ali\", \"Sara\", \"Zain\", \"Hina\"] ko ulta kare, aur use samjhayein.)",
+            "explanation": "Har structure (list, stack, queue, tree, graph) ki apni khoobi hai. Inhein milane se mazboot aur efficient hal milte hain aur pecheeda data ke rishte sambhalte hain, maslan expressions ke liye stack aur queue, DFS ke liye stack aur graph, BFS ke liye queue aur graph. List lachakdar storage aur access deti hai jab ke stack LIFO tarteeb lagata hai, jo ulta karne, undo aur backtracking mein kaam aati hai.\n\nProgram:\nnames = [\"Ali\", \"Sara\", \"Zain\", \"Hina\"]\nstack = []\nfor n in names:\n    stack.append(n)\nprint(\"Stack:\", stack)\nreversed_names = []\nfor n in names:\n    reversed_names.append(stack.pop())\nprint(\"Reversed list:\", reversed_names)\n\nOutput:\nStack: ['Ali', 'Sara', 'Zain', 'Hina']\nReversed list: ['Hina', 'Zain', 'Sara', 'Ali']\n\nWazahat: pehla qadam list ka har element stack par push karta hai, is liye \"Hina\" top par hai. Doosra qadam elements aik aik kar ke nayi list mein pop karta hai; stack LIFO hai, is liye woh ulti tarteeb mein aate hain.",
+            "book_ref": {
+              "topic_id": "c1d6729e-5ca6-5937-9635-1ea490a129d1",
+              "quote": "A list allows for flexible data storage and access, while a stack imposes a Last-In-First-Out (LIFO) order"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH3-LONG",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch3",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch3/u-long-questions",
+      "title": "Long Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 68,
+          "pdf_to": 89,
+          "note": "Practice long questions written from Chapter 3 (PDF 68-89, printed 65-86); not printed in the book. Based on the chapter's text, tables, boxes and worked examples (numericals with changed values); none repeats the chapter exercise. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice long questions for the whole of Chapter 3 (Algorithms and Problem Solving), in the shape of a Board long question: each theory question carries 8 marks (define, explain with examples, compare, write and explain a program), often as a definition plus explained points (e.g. 2 + 3 x 2). Each question has a full model answer."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Computer science starts by describing problems clearly. (i) Define a computational problem and explain its input, process and output. (3) (ii) Explain the four common classes of computational problems with one example of each. (5) (8 marks)",
+            "explanation": "(i) A computational problem is a challenge that can be solved through a computational process, i.e. an algorithm: a set of step-by-step instructions that a computer can execute. The objective is to find a solution by following a finite sequence of steps.\n1. Input: the data or information given to the algorithm.\n2. Process: the steps or rules (algorithm) applied to the input to generate the output.\n3. Output: the solution or result produced by the algorithm after processing the input.\nExample: deciding whether a number is even: input a single integer, process check divisibility by 2, output even or odd.\n\n(ii) 1. Decision problems: the output is a simple yes or no, e.g. is the given number even?\n2. Search problems: the task is to find a solution or an item that meets certain criteria, e.g. finding Islamabad in a list of cities.\n3. Optimization problems: the goal is to find the best solution according to some criteria, e.g. the shortest route that visits each college once and returns to the start.\n4. Counting problems: the objective is to count the number of ways certain conditions can be met, e.g. counting the possible routes between cities.",
+            "book_ref": {
+              "topic_id": "5c29ec9d-5dc7-534b-baf9-35148b44afd4",
+              "quote": "Some common classifications include"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Generate and Test is a simple problem-solving approach. (i) Describe the Generate and Test algorithm and the scenarios in which it is particularly useful. (3) (ii) Explain three advantages and three disadvantages of Generate and Test. (5) (8 marks)",
+            "explanation": "(i) Generate and Test is a straightforward, intuitive approach used in AI and computer science. It generates potential solutions (randomly, systematically or by a heuristic) and tests each against the problem's requirements; a solution that satisfies all conditions is valid, otherwise a new one is generated. It continues until a satisfactory solution is found or all possibilities are exhausted.\nIt is useful when: the problem space is small, so all solutions can be tried; there is no clear strategy and an exhaustive search is necessary; heuristics or rules can reduce the number of generated solutions.\n\n(ii) Advantages (pros):\n1. Simplicity: easy to understand and implement, useful for simple problems.\n2. Versatility: applies to a wide range of problems, particularly when no clear solution strategy exists.\n3. Exhaustiveness: it explores all possible solutions, so no potential solution is overlooked.\nDisadvantages (cons):\n1. Inefficiency: for large problem spaces it may test many solutions before finding a valid one.\n2. No optimality guarantee: it guarantees a valid solution, not necessarily the best; in optimization problems it may find a working but not the best solution.\n3. Computational expense: with a vast number of possible solutions it becomes expensive and impractical.",
+            "book_ref": {
+              "topic_id": "59defbb1-f80f-58d3-b294-d282e3692544",
+              "quote": "Versatility: It can be applied to a wide range of problems, particularly when no clear solution strategy exists"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Before solving a problem we ask whether it can be solved and how fast. (i) Differentiate between solvable and unsolvable problems with one example each. (4) (ii) Explain why the Travelling Salesman Problem is intractable, finding the number of possible routes for 3, 4, 5 and 6 cities. (4) (8 marks)",
+            "explanation": "(i) Problems are solvable or unsolvable depending on whether an algorithm exists that can solve them (see the table).\n\n(ii) Problems that can be solved in polynomial time are tractable; intractable problems need super-polynomial time, often growing exponentially, so they are impractical for large inputs.\nThe Travelling Salesman Problem (TSP) is to find the shortest possible route that visits a set of cities and returns to the origin. It is NP-hard: as the number of cities increases, the number of possible routes grows factorially (n! = n × (n − 1) × ... × 1):\n3 cities: 3! = 3 × 2 × 1 = 6 routes\n4 cities: 4! = 4 × 3 × 2 × 1 = 24 routes\n5 cities: 5! = 120 routes\n6 cities: 6! = 720 routes\nThe routes increase very rapidly (10 cities already give 3,628,800), so solving TSP exactly for large instances is infeasible; this makes it intractable.",
+            "book_ref": {
+              "topic_id": "adfc7820-c314-59dc-9518-d3b522dd6942",
+              "quote": "The problem is NP-hard, meaning that as the number of cities increases, the number of possible routes grows factorially"
+            },
+            "answer_table": {
+              "header": [
+                "Solvable problem",
+                "Unsolvable problem"
+              ],
+              "rows": [
+                [
+                  "An algorithm can solve it within a finite amount of time.",
+                  "No algorithm can be created that solves it in all cases."
+                ],
+                [
+                  "It has clearly defined inputs and outputs and a step-by-step procedure.",
+                  "It has no general procedure that guarantees a solution for every input."
+                ],
+                [
+                  "Example: GCD of two integers by the Euclidean algorithm, a clear and finite method.",
+                  "Example: the Halting Problem (will a program halt or run forever?); Alan Turing proved no general algorithm solves it."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Complexity classes describe how hard problems are. (i) Explain Class P using the example of sorting the list [4, 1, 3, 2, 5]. (4) (ii) Explain Class NP using the example of Sudoku. (4) (8 marks)",
+            "explanation": "(i) Class P is the category of problems that a computer can solve efficiently, finding a solution quickly even as the problem grows.\nExample: arranging [4, 1, 3, 2, 5] in ascending order as [1, 2, 3, 4, 5].\n1. Easy to solve: as the list gets larger, the time increases at a manageable rate.\n2. Polynomial time: the time grows in a predictable, reasonable way; doubling the list roughly doubles the time.\n3. Deterministic algorithm: clear steps (compare the first number with the second and swap if needed, move to the next pair, continue until sorted) always give the correct result.\nGoing from 5 to 10 numbers increases the time, but it stays within a reasonable limit.\n\n(ii) Class NP is the category of problems for which a given solution can be checked quickly by a computer, although finding the solution might be difficult and time-consuming.\nExample: Sudoku, where a 9 × 9 grid is filled so that each row, column and 3 × 3 sub-grid contains all digits 1 to 9 exactly once.\n1. Verification is easy: a completed grid is checked quickly by making sure every row, column and sub-grid has 1 to 9 without repetition.\n2. Finding the solution is hard: solving from scratch, especially for large or complex puzzles, has no simple fast guaranteed method; it involves many configurations and a lot of trial and error.\n3. Non-deterministic polynomial time: an NP problem is quick to check given a correct solution, but finding it may take an impractically long time for large problems.",
+            "book_ref": {
+              "topic_id": "d1826557-2c68-523f-a38f-2e3d9b9f5e38",
+              "quote": "Verification is Easy: If someone gives you a completed Sudoku grid, you can quickly check if the solution is correct"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Big O notation compares how algorithms grow. (i) Define Big O notation. (2) (ii) Explain O(1), O(n), O(n²) and O(log n) time with the chapter's college examples. (6) (8 marks)",
+            "explanation": "(i) Big O notation is a mathematical way to describe the time complexity of an algorithm. It gives an upper bound on the time an algorithm takes as the input size grows, and helps compare the efficiency of different algorithms.\n\n(ii) 1. O(1) constant time: the runtime does not change with input size. Accessing a specific array item by its index takes the same time whatever the array size; on the graph it is a flat line.\n2. O(n) linear time: the runtime grows linearly with input size. To find a student among n students by checking IDs one by one, in the worst case the student is the last one and all n are checked, so the time is proportional to n.\n3. O(n²) quadratic time: the runtime grows quadratically. To compare each of n students in a programming competition with every other student, the number of comparisons is 1 + 2 + ... + (n − 1) = n(n − 1)/2, so the time is O(n²).\n4. O(log n) logarithmic time: the runtime grows very slowly. In a guessing game for a number between 1 and n, each guess starts in the middle and the higher/lower answer halves the range; the guesses equal the number of halvings, so the time is O(log n).",
+            "book_ref": {
+              "topic_id": "888c5290-b73f-5447-84ca-988405508599",
+              "quote": "This notation helps in comparing the efficiency of different algorithms by giving a clear picture of their performance"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Compare the growth of common time complexities. For n = 8, 16 and 1024, find log₂ n, n, n log₂ n and n², and the number of pair comparisons n(n − 1)/2. State which complexity is best and which is worst for large n. (8 marks)",
+            "explanation": "Work out each expression for every n and compare how fast the values grow as n increases (O(1) stays the same for every n).",
+            "book_ref": {
+              "topic_id": "888c5290-b73f-5447-84ca-988405508599",
+              "quote": "When comparing different time complexities, it"
+            },
+            "steps": [
+              "n = 8: log₂ 8 = 3; n = 8; n log₂ n = 8 × 3 = 24; n² = 64; pairs = 8 × 7/2 = 28.",
+              "n = 16: log₂ 16 = 4; n = 16; n log₂ n = 16 × 4 = 64; n² = 256; pairs = 16 × 15/2 = 120.",
+              "n = 1024: log₂ 1024 = 10; n = 1024; n log₂ n = 1024 × 10 = 10,240; n² = 1,048,576; pairs = 1024 × 1023/2 = 523,776.",
+              "From n = 8 to n = 1024, log₂ n grows only from 3 to 10, n grows 128 times, but n² grows from 64 to more than a million.",
+              "So for large inputs O(1) and O(log n) are the best, O(n) and O(n log n) are manageable, and O(n²) grows fastest and is the worst of these."
+            ],
+            "final_answer": "At n = 1024: log₂ n = 10, n log₂ n = 10,240, n² = 1,048,576, pairs = 523,776; O(1)/O(log n) best, O(n²) worst."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Algorithms also need memory. (i) Define space complexity and explain why it matters. (2) (ii) Explain O(1), O(n), O(n²) and O(log n) space with an example of each. (6) (8 marks)",
+            "explanation": "(i) Space complexity measures how the amount of memory an algorithm uses changes as the size of the input data increases; e.g. how much memory is needed to store a growing list of numbers. It matters because it shows the memory needs of an algorithm, and efficient memory use is crucial for large-scale applications and systems with limited memory.\n\n(ii) Like time complexity, it is expressed in Big O notation as an upper limit on memory use:\n1. O(1) constant space: a fixed amount of memory whatever the input size, e.g. a simple algorithm that needs only a few variables for intermediate values.\n2. O(n) linear space: memory grows directly with the input, e.g. an algorithm that stores a list of items.\n3. O(n²) quadratic space: memory grows with the square of the input, e.g. storing an n × n matrix, whose elements increase with n².\n4. O(log n) logarithmic space: memory grows very slowly, e.g. some divide-and-conquer algorithms that store only a small portion of the data at each step.",
+            "book_ref": {
+              "topic_id": "3ccd8af1-57de-52f9-9a22-81d3e83b2fbb",
+              "quote": "Space complexity is typically expressed using Big O notation, similar to time complexity"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 A good algorithm must suit the data and the problem. (i) Explain algorithm efficiency with the example of Bubble Sort and Merge Sort. (3) (ii) Explain scalability. (2) (iii) Explain suitability for specific problems with the book-search example. (3) (8 marks)",
+            "explanation": "(i) Efficiency is how well an algorithm uses resources like time and space (memory). It is judged by its time complexity (how run time grows with input size) and space complexity (how memory grows with input size).\nExample: Bubble Sort is O(n²), so if the input doubles the time becomes four times. Merge Sort is O(n log n), which grows much more slowly, so it is more efficient for large datasets.\n\n(ii) Scalability is an algorithm's ability to maintain its efficiency as the input data grows. An algorithm that scales well performs efficiently even when the data is much larger than it was first designed for.\n\n(iii) Not every algorithm suits every problem; the choice depends on the problem's requirements such as speed, memory usage or the nature of the data.\nExample: to find a book in a small, unorganized collection, the best way is to check each book one by one (Linear Search). If the books are arranged alphabetically on a shelf, start in the middle and decide which half to search (Binary Search), which is much quicker.",
+            "book_ref": {
+              "topic_id": "f09f3cdc-f0e6-5a20-8f58-df1bb683db53",
+              "quote": "The efficiency of an algorithm is typically evaluated based on its time complexity"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Explain the Divide and Conquer technique and sort the list [38, 27, 43, 3, 9, 82, 10] with Merge Sort, showing every divide and merge step. (8 marks)",
+            "explanation": "Divide and Conquer breaks a large problem into smaller, manageable parts, solves each part independently and combines the solutions. Merge Sort divides the list into two halves, sorts each half and merges the sorted halves.",
+            "book_ref": {
+              "topic_id": "12c7d12b-e7cc-52cd-b310-72b59a3a3784",
+              "quote": "Divide and Conquer is a powerful algorithm design technique that works by breaking a large problem into smaller, more manageable parts"
+            },
+            "steps": [
+              "Divide [38, 27, 43, 3, 9, 82, 10] into [38, 27, 43] and [3, 9, 82, 10].",
+              "Divide [38, 27, 43] into [38] and [27, 43]; divide [27, 43] into [27] and [43].",
+              "Merge [27] and [43] into [27, 43]; merge [38] and [27, 43] into [27, 38, 43].",
+              "Divide [3, 9, 82, 10] into [3, 9] and [82, 10]; then into [3], [9], [82] and [10].",
+              "Merge [3] and [9] into [3, 9]; merge [82] and [10] into [10, 82]; merge these into [3, 9, 10, 82].",
+              "Merge [27, 38, 43] and [3, 9, 10, 82] into the final sorted list [3, 9, 10, 27, 38, 43, 82]."
+            ],
+            "final_answer": "[3, 9, 10, 27, 38, 43, 82]"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Explain greedy algorithms and optimal substructure. Using the greedy Coin Change method, make 87 rupees with coins of 50, 20, 10, 5 and 1 rupees, then make 6 with coins of 4, 3 and 1, and comment on whether greedy always gives the fewest coins. (8 marks)",
+            "explanation": "Greedy algorithms make a sequence of locally optimal choices, hoping they lead to a globally optimal solution; they are used when a problem has optimal substructure (its optimal solution can be built from optimal solutions to subproblems). Coin Change: each time take the largest coin that does not exceed the remaining amount, subtract it and repeat.",
+            "book_ref": {
+              "topic_id": "81b23f3d-ba4c-5861-958f-d781fb1aeaec",
+              "quote": "The greedy algorithm would involve choosing the largest denomination coin that does not exceed the remaining amount"
+            },
+            "steps": [
+              "87: take 50, remaining 37.",
+              "37: take 20, remaining 17; 17: take 10, remaining 7.",
+              "7: take 5, remaining 2; 2: take 1, remaining 1; 1: take 1, remaining 0.",
+              "87 = 50 + 20 + 10 + 5 + 1 + 1, i.e. 6 coins.",
+              "6 with coins 4, 3, 1: take 4 (remaining 2), then 1 and 1: 4 + 1 + 1 = 3 coins.",
+              "But 3 + 3 = 6 uses only 2 coins, so here the greedy choice is not the best.",
+              "Greedy algorithms are fast and easy, but they do not always guarantee the optimal solution, so the problem must be analysed before using them."
+            ],
+            "final_answer": "87 rupees = 6 coins (50, 20, 10, 5, 1, 1); for 6 with {4, 3, 1} greedy gives 3 coins but 2 coins (3 + 3) is optimal, so greedy is not always optimal."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Explain Dynamic Programming and write the steps of a Dynamic Programming method that finds the Fibonacci sequence up to the 20th term (first term 0) by storing each term. Give the stored terms. (8 marks)",
+            "explanation": "Dynamic Programming breaks a problem into simpler subproblems and stores their results to avoid redundant calculations; it suits problems with overlapping subproblems and optimal substructure. For Fibonacci, each term is the sum of the two before it, and DP stores every term as it is computed instead of recalculating it.",
+            "book_ref": {
+              "topic_id": "3619e597-f327-5eb6-9d88-f39f0396b82e",
+              "quote": "Implement a dynamic programming algorithm to solve the Fibonacci sequence up to the 20th term"
+            },
+            "steps": [
+              "Make a table F to store the terms; store F(1) = 0 and F(2) = 1.",
+              "For k = 3 to 20: F(k) = F(k − 1) + F(k − 2), read directly from the table, and store F(k).",
+              "Terms 1 to 10: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34.",
+              "Terms 11 to 20: 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181.",
+              "Each term is computed only once (18 additions), because earlier terms are read from the table instead of being recalculated again and again."
+            ],
+            "final_answer": "The 20th term is 4181; the stored sequence is 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Explain Selection Sort and sort [64, 25, 12, 22, 11] in ascending order, showing the list after each pass. State its time complexity. (8 marks)",
+            "explanation": "Selection Sort selects the smallest element of the unsorted part, swaps it with the first unsorted element and moves the sorted/unsorted boundary by one, repeating for the rest.",
+            "book_ref": {
+              "topic_id": "a68173a6-d868-5f43-acb6-ef219692dfbe",
+              "quote": "Find the minimum element in the unsorted part of the list"
+            },
+            "steps": [
+              "Pass 1: minimum of [64, 25, 12, 22, 11] is 11; swap with 64: [11, 25, 12, 22, 64].",
+              "Pass 2: minimum of [25, 12, 22, 64] is 12; swap with 25: [11, 12, 25, 22, 64].",
+              "Pass 3: minimum of [25, 22, 64] is 22; swap with 25: [11, 12, 22, 25, 64].",
+              "Pass 4: minimum of [25, 64] is 25, already first; no change: [11, 12, 22, 25, 64].",
+              "Time complexity is O(n²); like Bubble Sort it is not efficient for large datasets but is straightforward to implement."
+            ],
+            "final_answer": "[11, 12, 22, 25, 64]; time complexity O(n²)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 Algorithms are step-by-step procedures. (i) Define an algorithm and give two reasons why algorithms are important. (3) (ii) Explain linear search with its steps, show how it finds Faisalabad in [Karachi, Lahore, Islamabad, Faisalabad], and state its worst case and time complexity. (5) (8 marks)",
+            "explanation": "(i) Algorithms are step-by-step procedures for solving problems, much like a recipe gives steps for cooking a dish. Importance:\n1. They form the backbone of computer science and give the logic behind software operations, enabling machines to perform tasks efficiently.\n2. They allow us to solve complex problems, optimize performance and ensure accuracy in various applications (e.g. Google's PageRank ranks web pages).\n\n(ii) Linear search is a straightforward method that checks each item one by one until the item is found.\nSteps: 1. Start at the first item. 2. Compare the wanted item with the current item. 3. If they don't match, move to the next item. 4. Repeat until the item is found or the end of the list is reached.\nFinding Faisalabad: Karachi (no), Lahore (no), Islamabad (no), Faisalabad (found): 4 checks.\nWorst case: the item is the last one or not in the list, so all n items are checked; if it is absent, every item is checked before concluding it is not there.\nTime complexity: the time grows directly with the number of items, O(n).",
+            "book_ref": {
+              "topic_id": "181c636b-8da9-5c10-9ba8-c2a66a7f4a5e",
+              "quote": "This method is called a linear search because you check each item in a straight line"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Explain Binary Search. On the sorted list [2, 5, 8, 12, 16, 23, 38, 56, 72, 91] (positions 1 to 10, take the lower middle), trace the search for 23 and for 60, and state the time complexity. (8 marks)",
+            "explanation": "Binary Search works on a sorted list: check the middle element; if it is the target, stop; if the target is smaller, search the left half; if larger, the right half; repeat until found or the interval is empty.",
+            "book_ref": {
+              "topic_id": "d2a39f76-dce1-56b2-99bb-44266e5cd326",
+              "quote": "It works by repeatedly dividing the search interval in half and discarding the half where the item cannot be, until the item is found or the interval is empty"
+            },
+            "steps": [
+              "Search 23: positions 1-10, middle position 5 = 16; 23 > 16, so search positions 6-10.",
+              "Positions 6-10, middle position 8 = 56; 23 < 56, so search positions 6-7.",
+              "Positions 6-7, middle position 6 = 23: found at position 6 after 3 comparisons.",
+              "Search 60: middle 16 (60 > 16, positions 6-10), then 56 (60 > 56, positions 9-10).",
+              "Positions 9-10, middle position 9 = 72; 60 < 72, so the interval becomes empty: 60 is not in the list (3 comparisons).",
+              "Each comparison halves the interval, so the time complexity is O(log n)."
+            ],
+            "final_answer": "23 is found at position 6 (checks 16, 56, 23); 60 is not in the list (checks 16, 56, 72); time complexity O(log n)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 A graph has edges A-B, A-C, B-D, B-E and C-F. Starting at A, trace Breadth-First Search (with a queue) and Depth-First Search (with a stack), showing the queue or stack after each node is processed. Take neighbours in alphabetical order; for DFS push them in reverse order so the alphabetically first is popped first. (8 marks)",
+            "explanation": "BFS: enqueue the root; dequeue a node, process it and enqueue its unvisited neighbours; repeat until the queue is empty (level by level). DFS: push the root; pop a node, process it and push its unvisited neighbours; repeat until the stack is empty (as deep as possible, then backtrack).",
+            "book_ref": {
+              "topic_id": "6dcd26b5-86bc-5cbe-8ee9-e19abe17833f",
+              "quote": "Repeat the process until the stack is empty"
+            },
+            "steps": [
+              "BFS: queue [A]. Process A, enqueue B, C: queue [B, C].",
+              "BFS: process B, enqueue D, E: queue [C, D, E]. Process C, enqueue F: queue [D, E, F].",
+              "BFS: process D, E and F in turn (no new neighbours); the queue becomes empty. BFS order: A, B, C, D, E, F.",
+              "DFS: stack [A]. Pop A, push C then B: stack [C, B] (B on top).",
+              "DFS: pop B, push E then D: stack [C, E, D]. Pop D: stack [C, E]. Pop E: stack [C].",
+              "DFS: pop C, push F: stack [F]. Pop F: stack empty. DFS order: A, B, D, E, C, F.",
+              "BFS visits level by level (A; B, C; D, E, F), while DFS goes down the branch A-B-D first and backtracks. Both have time complexity O(V + E)."
+            ],
+            "final_answer": "BFS order: A, B, C, D, E, F. DFS order: A, B, D, E, C, F."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,913 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH3-SHORT-RU",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch3",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch3/u-short-questions",
+      "title": "Short Questions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-CS-CH3-SHORT",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 68,
+          "pdf_to": 89,
+          "note": "Roman Urdu: practice short questions written from Chapter 3 (PDF 68-89), not printed in the book; same questions and order as the English set. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Yeh chapter 3 (Algorithms and Problem Solving) ke poore chapter se practice short questions (mukhtasar sawal) hain, chapter ke sections ki tarteeb mein, Board ke 2 number wale sawal ke andaz mein. Har sawal ka mukhtasar model jawab hai; chhote numericals mein hal ke qadam hain, aur farq wale sawal ka jawab table mein hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.1 Understanding Computational Problems"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 What is a computational problem? Name its three parts.\n(Computational problem kya hai? Is ke teen hisson ke naam likhein.)",
+            "explanation": "Computational problem woh masla hai jo computer par chalne wale qadam ba qadam algorithm se hal ho sake. Hisse: input (diya gaya data), process (lagaye gaye qadam) aur output (nateeja).",
+            "book_ref": {
+              "topic_id": "07767a83-8bce-5d32-b3f2-98b710e1db61",
+              "quote": "which involves using an algorithm, i.e., a set of step-by-step instructions that a computer can execute"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Why is understanding algorithms useful outside computer science too?\n(Algorithms samajhna computer science ke bahar bhi kyon mufeed hai?)",
+            "explanation": "Algorithms kaam karne ki qadam ba qadam hidayaat hain, is liye inhein samajhna rozmarrah ke masail mein bhi madad deta hai: munazzam soch aur mo'assar hal.",
+            "book_ref": {
+              "topic_id": "07767a83-8bce-5d32-b3f2-98b710e1db61",
+              "quote": "Understanding algorithms is essential not only for computer science but also for everyday problem-solving"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.1.1 Characterizing Computational Problems"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 What must be identified to characterize a computational problem?\n(Computational problem ki khususiyat jaanne ke liye kya pehchanna zaroori hai?)",
+            "explanation": "Is ke inputs, matloob outputs aur woh process jo inputs ko outputs mein badle.",
+            "book_ref": {
+              "topic_id": "e4cb148f-7227-5fa0-8ac2-05412eb08b57",
+              "quote": "To solve a problem computationally, we need to understand its characteristics"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.1.1.1 Classifying Computational Problems"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Name the four common classes of computational problems.\n(Computational problems ki chaar aam qisamon ke naam likhein.)",
+            "explanation": "1. Decision problems\n2. Search problems\n3. Optimization problems\n4. Counting problems",
+            "book_ref": {
+              "topic_id": "5c29ec9d-5dc7-534b-baf9-35148b44afd4",
+              "quote": "Computational problems can be classified into different categories based on their characteristics"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Differentiate between a search problem and an optimization problem.\n(Search problem aur optimization problem mein farq likhein.)",
+            "explanation": "Search problem shart poori karne wali cheez dhoondta hai; optimization behtareen hal.",
+            "book_ref": {
+              "topic_id": "5c29ec9d-5dc7-534b-baf9-35148b44afd4",
+              "quote": "Problems where the goal is to find the best solution according to some criteria"
+            },
+            "answer_table": {
+              "header": [
+                "Search problem",
+                "Optimization problem"
+              ],
+              "rows": [
+                [
+                  "Shart poori karne wala hal ya item dhoondna.",
+                  "Kisi miyar par behtareen hal dhoondna."
+                ],
+                [
+                  "Misaal: shehron ki list mein Islamabad dhoondna.",
+                  "Misaal: har college se aik dafa guzarne wala sab se chhota raasta."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 What is a decision problem and what is a counting problem?\n(Decision problem aur counting problem kya hain?)",
+            "explanation": "Decision problem: output sirf haan ya na (jaise number juft hai?).\nCounting problem: ginna ke kuch shiraait kitne tareeqon se poori hoti hain.",
+            "book_ref": {
+              "topic_id": "5c29ec9d-5dc7-534b-baf9-35148b44afd4",
+              "quote": "Problems where the objective is to count the number of ways certain conditions can be met"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.1.1.2 Well-defined vs. ill-defined Problems"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Give reason: determining whether a number is even is a well-defined problem.\n(Wajah batayein: number juft hai ya nahin tay karna well-defined masla hai.)",
+            "explanation": "Kyon ke is ke sab hisse wazeh hain: maqsad (juft hai ya nahin), input (aik integer), process (2 se taqseem) aur output (even ya odd).",
+            "book_ref": {
+              "topic_id": "4e8694c1-5926-5572-975f-ec50b6266b0d",
+              "quote": "it has a clear goal (determine if the number is even)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Why is \"improving education in Pakistan\" called an ill-defined problem?\n(\"Pakistan mein taleem behtar karna\" ill-defined masla kyon hai?)",
+            "explanation": "Is ka maqsad mubham aur wasee hai. Inputs (fund, teachers, material) wazeh nahin: kitna fund, kaise teachers, kaun sa material.",
+            "book_ref": {
+              "topic_id": "4e8694c1-5926-5572-975f-ec50b6266b0d",
+              "quote": "but without clear specifications on how much funding is needed, what kind of teachers are required"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.2 Algorithms for Problem Solving"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Define an algorithm. Why are algorithms called the backbone of computer science?\n(Algorithm ki definition likhein. Algorithms ko computer science ki reerh ki haddi kyon kaha jata hai?)",
+            "explanation": "Algorithm masla hal karne ka qadam ba qadam tareeqa hai, jaise khane ki recipe. Yeh software ki mantiq dete hain aur machines ko tez, durust aur mo'assar kaam ke qabil banate hain.",
+            "book_ref": {
+              "topic_id": "a3d4e0c2-b603-54e9-8758-10a30f42b598",
+              "quote": "They form the backbone of computer science, enabling machines to perform tasks efficiently"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 What is PageRank and what does it consider?\n(PageRank kya hai aur yeh kya dekhta hai?)",
+            "explanation": "PageRank Google search engine ka algorithm hai jo web pages ki ahmiyat tay karta hai. Yeh page ki taraf links ki tadaad aur un ki quality dekh kar darja deta hai.",
+            "book_ref": {
+              "topic_id": "a3d4e0c2-b603-54e9-8758-10a30f42b598",
+              "quote": "to rank pages in search results"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.2.1 Generate and Test Algorithm"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 What is the Generate and Test algorithm?\n(Generate and Test algorithm kya hai?)",
+            "explanation": "Yeh AI aur computer science mein istemal hone wala seedha tareeqa hai. Yeh mumkina hal bana kar har aik ko shiraait par parakhta hai, jab tak durust hal na mile ya sab hal khatam na hon.",
+            "book_ref": {
+              "topic_id": "35347409-7336-50d7-93ad-3fe5d5f2cb3a",
+              "quote": "The Generate and Test algorithm is a straightforward and intuitive problem-solving approach"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.2.1.1 Definition and Process"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 In Generate and Test, when is a solution considered valid?\n(Generate and Test mein hal kab durust (valid) maana jata hai?)",
+            "explanation": "Jab woh Test qadam mein masle ki sab zaroriyat ya pabandiyan poori kare. Warna naya hal bana kar parkha jata hai.",
+            "book_ref": {
+              "topic_id": "97956959-2871-5f4b-9c2d-97fd5043451f",
+              "quote": "If the solution satisfies all the conditions, it is considered valid"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.2.1.2 Applications and Examples"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 Give two situations in which Generate and Test is particularly useful.\n(Do suraten batayein jin mein Generate and Test khaas tor par mufeed hai.)",
+            "explanation": "1. Problem space chhota ho taa ke sab hal aazmaye ja saken.\n2. Hal dhoondne ki koi wazeh hikmat-e-amli na ho aur sab dekhna zaroori ho.\n(Neez: heuristics se hal ki tadaad kam ho sake.)",
+            "book_ref": {
+              "topic_id": "085c5b5f-f7bb-5be3-a435-65f7d2afb7aa",
+              "quote": "There is no clear strategy for finding a solution, and an exhaustive search is necessary"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.2.1.3 Pros and Cones"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Write two advantages (pros) of the Generate and Test algorithm.\n(Generate and Test ke do faide likhein.)",
+            "explanation": "1. Saadgi: samajhna aur banana aasan.\n2. Wasee istemal: bohat se masail par, khaas kar jab wazeh hikmat-e-amli na ho.\n(Neez exhaustiveness: koi hal reh nahin jata.)",
+            "book_ref": {
+              "topic_id": "59defbb1-f80f-58d3-b294-d282e3692544",
+              "quote": "The Generate and Test algorithm is easy to understand and implement, making it a useful approach for simple problems"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 Write two disadvantages (cons) of the Generate and Test algorithm.\n(Generate and Test ki do khamiyan likhein.)",
+            "explanation": "1. Susti: bare problem space mein bohat se hal parakhne parte hain.\n2. Behtareen hal ki zamanat nahin: sirf durust hal.\n(Neez bohat zyada mumkina hal hon to bohat mehnga.)",
+            "book_ref": {
+              "topic_id": "59defbb1-f80f-58d3-b294-d282e3692544",
+              "quote": "For problems with a vast number of potential solutions, the algorithm may become computationally expensive and impractical"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "Kitab yahan \"Cones\" likhti hai; durust lafz \"Cons\" hai, yani khamiyan (disadvantages)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.3 Problem Solvability and Complexity"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 Why is it important to understand the solvability and complexity of problems?\n(Masail ki solvability aur complexity samajhna kyon zaroori hai?)",
+            "explanation": "Is se pata chalta hai ke masla algorithm se hal ho sakta hai ya nahin, aur agar haan to kitni mo'assar tareeqe se.",
+            "book_ref": {
+              "topic_id": "1da9749c-f345-5857-b481-33f005161fbe",
+              "quote": "This section explores the distinctions between solvable and unsolvable problems"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.3.1 Solvable vs. Unsolvable Problems"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Differentiate between solvable and unsolvable problems.\n(Solvable aur unsolvable masail mein farq likhein.)",
+            "explanation": "Solvable ka algorithm mehdood waqt mein hal deta hai; unsolvable ka har surat ke liye koi algorithm nahin.",
+            "book_ref": {
+              "topic_id": "a9d74646-0350-5296-8186-784611e9cf58",
+              "quote": "On the other hand, a problem is unsolvable if no algorithm can be created that will provide a solution in all cases"
+            },
+            "answer_table": {
+              "header": [
+                "Solvable masla",
+                "Unsolvable masla"
+              ],
+              "rows": [
+                [
+                  "Algorithm mehdood waqt mein hal kar deta hai.",
+                  "Har surat ke liye koi algorithm nahin ban sakta."
+                ],
+                [
+                  "Wazeh input, output aur qadam ba qadam tareeqa.",
+                  "Har input ke liye hal ki zamanat dene wala aam tareeqa nahin."
+                ],
+                [
+                  "Misaal: Euclidean algorithm se GCD.",
+                  "Misaal: Halting Problem."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 What is the Halting Problem? Who proved it unsolvable?\n(Halting Problem kya hai? Kis ne ise unsolvable sabit kiya?)",
+            "explanation": "Halting Problem yeh tay karna hai ke diya gaya program aakhir ruk jayega ya hamesha chalega. Alan Turing ne sabit kiya ke har program-input jore ke liye koi aam algorithm nahin.",
+            "book_ref": {
+              "topic_id": "a9d74646-0350-5296-8186-784611e9cf58",
+              "quote": "The Halting Problem is a famous example of an unsolvable problem"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.3.2 Tractable vs. Intractable Problems"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 What is meant by polynomial time?\n(Polynomial time ka kya matlab hai?)",
+            "explanation": "Polynomial time ka matlab hal ka waqt input ke size ke sath qabil-e-intezam raftaar (polynomial function) se barhe. Aise masail (P) tractable hain.",
+            "book_ref": {
+              "topic_id": "adfc7820-c314-59dc-9518-d3b522dd6942",
+              "quote": "Polynomial time means that the time taken to solve the problem increases at a manageable rate"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 Using the chapter's factorial count, find the number of possible TSP routes for 5 and for 7 cities.\n(Chapter ke factorial hisab se 5 aur 7 cities ke TSP raaste nikalein.)",
+            "explanation": "5 cities: 5! = 120 raaste.\n7 cities: 7! = 5,040 raaste.\nCities barhne par raaste bohat tezi se barhte hain.",
+            "book_ref": {
+              "topic_id": "adfc7820-c314-59dc-9518-d3b522dd6942",
+              "quote": "As you can see, the number of possible routes increases very rapidly as you add more cities"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.3.3.1 Class P"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 Give reasons why sorting a list of numbers belongs to Class P.\n(Wajoohat dein ke numbers ki list sort karna Class P mein kyon hai?)",
+            "explanation": "1. Hal aasan: list barhne par waqt qabil-e-intezam raftaar se barhta hai.\n2. Polynomial time: waqt andaze ke mutabiq barhta hai.\n3. Deterministic algorithm: compare aur swap ke wazeh qadam hamesha durust nateeja dete hain.",
+            "book_ref": {
+              "topic_id": "8bfe2555-f43c-5233-83a0-d96d7ec35606",
+              "quote": "In simpler terms, these are problems where a computer can find a solution quickly, even as the size of the problem grows"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.3.3.2 Class NP"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "22 Differentiate between Class P and Class NP.\n(Class P aur Class NP mein farq likhein.)",
+            "explanation": "P mein hal jaldi milta hai; NP mein diya gaya hal jaldi jaancha ja sakta hai magar dhoondna mushkil ho sakta hai.",
+            "book_ref": {
+              "topic_id": "d1826557-2c68-523f-a38f-2e3d9b9f5e38",
+              "quote": "These are problems where verifying a proposed solution is easy, but finding that solution might be difficult and time-consuming"
+            },
+            "answer_table": {
+              "header": [
+                "Class P",
+                "Class NP"
+              ],
+              "rows": [
+                [
+                  "Computer polynomial time mein mo'assar tareeqe se hal kar le.",
+                  "Diya gaya hal computer jaldi jaanch le."
+                ],
+                [
+                  "Masla barhne par bhi hal jaldi milta hai.",
+                  "Hal dhoondna mushkil aur waqt talab ho sakta hai."
+                ],
+                [
+                  "Misaal: numbers sort karna.",
+                  "Misaal: Sudoku hal karna."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "23 How can a completed Sudoku grid be verified quickly?\n(Mukammal Sudoku grid ko jaldi kaise jaancha ja sakta hai?)",
+            "explanation": "Dekhein ke har row, har column aur har 3 x 3 sub-grid mein 1 se 9 tak sab numbers baghair dohraye hon. Yeh jaanch aasan aur tez hai.",
+            "book_ref": {
+              "topic_id": "d1826557-2c68-523f-a38f-2e3d9b9f5e38",
+              "quote": "You just need to ensure that each row, column, and 3 x 3 sub grid contains all numbers from 1 to 9 without repeating"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.3.3.3 Class NP-Hard"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "24 What are NP-hard problems? Give one example.\n(NP-hard masail kya hain? Aik misaal dein.)",
+            "explanation": "NP-hard masail NP ke sab se mushkil masail jitne mushkil hain; koi tez algorithm maloom nahin. Misaal: Travelling Salesman Problem (TSP).",
+            "book_ref": {
+              "topic_id": "17aa0667-b53e-5251-9b8f-eb39fbced500",
+              "quote": "Solving an NP-hard problem is challenging, and no efficient algorithm is known for finding a solution"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "25 How do the TSP routes grow from 5 to 10 to 20 cities?\n(5 se 10 aur 20 cities tak TSP ke raaste kaise barhte hain?)",
+            "explanation": "5 cities: 120; 10 cities: 3,628,800; 20 cities: taqreeban 2.43 × 10¹⁸ raaste. Factorial barhotri ki wajah se bare masail ka theek hal na-mumkin sa hai.",
+            "book_ref": {
+              "topic_id": "17aa0667-b53e-5251-9b8f-eb39fbced500",
+              "quote": "With 20 Cities: The number of possible routes is approximately"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.3.3.4 NP-Complete"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "26 Define NP-Complete problems and give an example.\n(NP-Complete masail ki definition aur misaal dein.)",
+            "explanation": "NP-Complete masail NP ka khaas hissa hain jo NP mein bhi hain aur NP ke sab se mushkil jitne bhi; aik ka tez hal sab NP ka tez hal. Misaal: Knapsack Problem.",
+            "book_ref": {
+              "topic_id": "3b0dd328-5fcb-5c9c-863c-57a08170c9df",
+              "quote": "NP-Complete problems are a special subset of NP problems that are both in NP and as hard as the hardest problems in NP"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "27 Why is the Knapsack Problem easy to verify but hard to solve?\n(Knapsack Problem jaanchna aasan magar hal karna mushkil kyon hai?)",
+            "explanation": "Jaanch: diye gaye items ka kul wazan aur kul qeemat jaldi dekhi ja sakti hai.\nHal: wazan ki had mein sab se qeemti combination dhoondna mushkil hai kyon ke combinations exponential barhte hain.",
+            "book_ref": {
+              "topic_id": "3b0dd328-5fcb-5c9c-863c-57a08170c9df",
+              "quote": "you can quickly check if the total weight is within the knapsack"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.4 Algorithm Analysis"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "28 What is algorithm analysis and why is it done?\n(Algorithm analysis kya hai aur kyon kiya jata hai?)",
+            "explanation": "Algorithm analysis algorithms ki computational complexity (time aur space) tay karna hai. Is se performance ka andaza hota hai aur behtareen algorithm chuna jata hai.",
+            "book_ref": {
+              "topic_id": "a415a667-201d-5a71-9e8a-2578f362c562",
+              "quote": "This analysis helps predict the algorithm"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.4.1 Time Complexity"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "29 Define time complexity with an example.\n(Time complexity ki definition misaal ke sath likhein.)",
+            "explanation": "Time complexity naapti hai ke input barhne par algorithm ka waqt kaise barhta hai. Misaal: thore numbers jaldi sort hote hain, list bari ho to waqt barhta hai.",
+            "book_ref": {
+              "topic_id": "ec23c316-a1b2-5141-b757-56e324b2e7ba",
+              "quote": "Time complexity allows us to predict how this runtime will grow as the size of the list becomes larger"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.4.1.1 Big O Notation"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "30 What is Big O notation? Why is it used?\n(Big O notation kya hai? Yeh kyon istemal hoti hai?)",
+            "explanation": "Big O notation algorithm ki time complexity bayan karne ka riyazi tareeqa hai. Yeh input barhne par waqt ki upari had batati hai aur algorithms ka muqabla aasan karti hai.",
+            "book_ref": {
+              "topic_id": "888c5290-b73f-5447-84ca-988405508599",
+              "quote": "Big O notation is a mathematical way to describe the time complexity of an algorithm"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "31 Differentiate between O(1) and O(n) time with an example of each.\n(O(1) aur O(n) time mein misaal ke sath farq likhein.)",
+            "explanation": "O(1) input se nahin badalta; O(n) input ke sath barhta hai.",
+            "book_ref": {
+              "topic_id": "888c5290-b73f-5447-84ca-988405508599",
+              "quote": "The runtime does not change with the size of the input"
+            },
+            "answer_table": {
+              "header": [
+                "O(1) constant time",
+                "O(n) linear time"
+              ],
+              "rows": [
+                [
+                  "Waqt input ke size se nahin badalta.",
+                  "Waqt input ke sath seedha barhta hai."
+                ],
+                [
+                  "Misaal: index se array item lena.",
+                  "Misaal: n talaba ki IDs aik aik kar ke dekhna."
+                ],
+                [
+                  "Graph par sapaat line.",
+                  "Graph par seedhi uthti line."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "32 Six students are compared pairwise, each with every other once. How many comparisons are needed, and what is the complexity?\n(Chhe talaba ka har aik se aik dafa jora wise muqabla ho to kitne comparisons honge aur complexity kya hai?)",
+            "explanation": "Comparisons = n(n − 1)/2 = 6 × 5/2 = 15. Complexity O(n²).",
+            "book_ref": {
+              "topic_id": "888c5290-b73f-5447-84ca-988405508599",
+              "quote": "The number of comparisons required is the sum of the first n - 1 integers"
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "Kitab n(n − 1) likhti hai; durusti ke mutabiq pehle n − 1 integers ka jama theek n(n − 1)/2 hai, kyon ke har jora aik dafa compare hota hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "33 Why is the guessing game (number between 1 and n) O(log n)?\n(Andaza lagane wala khel (1 se n ke darmiyan number) O(log n) kyon hai?)",
+            "explanation": "Har andaza range ke beech se hota hai aur jawab (zyada/kam) aadhi range khatam kar deta hai. Andazon ki tadaad range aadhi karne ki tadaad hai, jo logarithmic hai.",
+            "book_ref": {
+              "topic_id": "888c5290-b73f-5447-84ca-988405508599",
+              "quote": "By starting in the middle of the range and adjusting your guess based on the feedback"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.4.2 Space Complexity"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "34 Define space complexity. Why does it matter?\n(Space complexity ki definition likhein. Yeh kyon aham hai?)",
+            "explanation": "Space complexity naapti hai ke input barhne par algorithm ki memory kaise badalti hai. Bari applications aur kam memory wale systems mein yeh bohat aham hai.",
+            "book_ref": {
+              "topic_id": "3ccd8af1-57de-52f9-9a22-81d3e83b2fbb",
+              "quote": "It helps us understand how efficiently an algorithm uses memory when dealing with larger amounts of data"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "35 Give the space complexity of an algorithm that stores (i) a list of n items and (ii) an n × n matrix.\n(Space complexity batayein: n items ki list aur n × n matrix mehfooz karne wala algorithm.)",
+            "explanation": "n items ki list: O(n), memory items ke sath seedhi barhti hai.\nn × n matrix: O(n²), elements n ke square ke sath barhte hain.",
+            "book_ref": {
+              "topic_id": "3ccd8af1-57de-52f9-9a22-81d3e83b2fbb",
+              "quote": "For instance, if an algorithm needs to store a list of items, the amount of memory required increases directly with the number of items"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.5.1 Efficiency"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "36 Why is Merge Sort more efficient than Bubble Sort for large datasets?\n(Bare data ke liye Merge Sort Bubble Sort se zyada mo'assar kyon hai?)",
+            "explanation": "Bubble Sort O(n²) hai: input dugna to waqt chaar guna. Merge Sort O(n log n) hai jo bohat aahista barhta hai.",
+            "book_ref": {
+              "topic_id": "f09f3cdc-f0e6-5a20-8f58-df1bb683db53",
+              "quote": "which grows much more slowly as the input size increases, making it more efficient for large datasets"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.5.2 Scalability"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "37 What is scalability of an algorithm?\n(Algorithm ki scalability kya hai?)",
+            "explanation": "Scalability yeh hai ke input barhne par bhi algorithm mo'assar rahe, chahe data shuru ke andaze se kahin bara ho.",
+            "book_ref": {
+              "topic_id": "15371085-18ef-5487-9cbb-7e2bf302ca29",
+              "quote": "An algorithm that scales well will perform efficiently even when the input data is significantly larger than what it was initially designed for"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.5.3 Suitability for Specific Problems"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "38 Which search would you use for a book in (i) a small unorganized collection and (ii) an alphabetically arranged shelf? Why?\n(Kitab dhoondne ke liye kaun si search: chhota be-tarteeb majmooa, aur alphabetical shelf? Kyon?)",
+            "explanation": "Be-tarteeb majmooa: Linear Search, har kitab aik aik kar ke, kyon ke koi tarteeb nahin.\nAlphabetical shelf: Binary Search, beech se shuru kar ke aadha chunein, kyon ke kitabain sorted hain.",
+            "book_ref": {
+              "topic_id": "95a611c6-abcd-5b29-b000-b233f727f02d",
+              "quote": "The best way is to check each book one by one, this is a Linear Search"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.6 Algorithm Design Techniques"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "39 What is algorithm design? Name four design techniques.\n(Algorithm design kya hai? Chaar design techniques ke naam likhein.)",
+            "explanation": "Algorithm design masail ko mo'assar tareeqe se hal karne ke munazzam tareeqe banana hai. Techniques: divide and conquer, greedy, dynamic programming aur backtracking.",
+            "book_ref": {
+              "topic_id": "1e0f0c97-7256-5de3-9375-83604cc3da67",
+              "quote": "There are several well-known algorithm design techniques that help in developing robust algorithms"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.6.1 Divide and Conquer"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "40 Define Divide and Conquer with an example.\n(Divide and Conquer ki definition misaal ke sath likhein.)",
+            "explanation": "Divide and Conquer bare masle ko chhote hisson mein torta hai, har hissa alag hal karta hai aur hal jor deta hai. Misaal: Merge Sort.",
+            "book_ref": {
+              "topic_id": "12c7d12b-e7cc-52cd-b310-72b59a3a3784",
+              "quote": "This approach is particularly effective for problems that can be divided into similar smaller problems"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "41 Sort [38, 27, 43, 3] by Merge Sort, showing the divide and merge steps.\n([38, 27, 43, 3] ko Merge Sort se sort karein, divide aur merge qadam dikhayein.)",
+            "explanation": "Divide: [38, 27] aur [43, 3]; phir 38, 27, 43, 3.\nMerge: [27, 38] aur [3, 43]; phir [3, 27, 38, 43].",
+            "book_ref": {
+              "topic_id": "12c7d12b-e7cc-52cd-b310-72b59a3a3784",
+              "quote": "Each half is then sorted independently, and finally, the two sorted halves are merged together to create the final sorted list"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.6.2 Greedy Algorithms"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "42 Using the greedy Coin Change method with notes of 100, 50, 20 and 10 rupees, make 380 rupees.\n(100, 50, 20 aur 10 rupay se greedy Coin Change tareeqe se 380 rupay banayein.)",
+            "explanation": "Har dafa bachi raqam se bara na ho aisa sab se bara note: 100, 100, 100, 50, 20, 10. Kul 6 note.",
+            "book_ref": {
+              "topic_id": "81b23f3d-ba4c-5861-958f-d781fb1aeaec",
+              "quote": "then subtracting that value and repeating the process until the desired amount is achieved"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "43 What is optimal substructure? Why is it important for greedy algorithms?\n(Optimal substructure kya hai? Greedy algorithms ke liye yeh kyon aham hai?)",
+            "explanation": "Optimal substructure ka matlab masle ka behtareen hal chhote masail ke behtareen hal se ban sake. Aise masail mein greedy ke har qadam ke behtareen faisle poora behtareen hal bana sakte hain.",
+            "book_ref": {
+              "topic_id": "81b23f3d-ba4c-5861-958f-d781fb1aeaec",
+              "quote": "The greedy approach is often used when a problem has an optimal substructure"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.6.3 Dynamic Programming; Fibonacci sequence"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "44 Define Dynamic Programming.\n(Dynamic Programming ki definition likhein.)",
+            "explanation": "Dynamic Programming (DP) optimization technique hai jo masle ko chhote masail mein tor kar un ke nataij mehfooz karti hai taa ke dobara hisab na ho.",
+            "book_ref": {
+              "topic_id": "3619e597-f327-5eb6-9d88-f39f0396b82e",
+              "quote": "Dynamic Programming (DP) is an optimization technique used to solve problems by breaking them down into simpler subproblems"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "45 Write the first twelve numbers of the Fibonacci sequence and the rule that forms them.\n(Fibonacci sequence ke pehle baara numbers aur un ka qaida likhein.)",
+            "explanation": "Qaida: 0 aur 1 se shuru; har agla number pichhle do ka jama.\n0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89",
+            "book_ref": {
+              "topic_id": "3619e597-f327-5eb6-9d88-f39f0396b82e",
+              "quote": "The Fibonacci sequence is a series of numbers that starts with 0 and 1"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "46 How does Dynamic Programming reduce work when computing Fibonacci numbers?\n(Fibonacci numbers nikalne mein DP kaam kaise kam karta hai?)",
+            "explanation": "Fibonacci numbers baar baar nikalne ke bajaye DP har number bante hi mehfooz karta hai aur zaroorat par seedha le leta hai; hisab bohat kam ho jata hai.",
+            "book_ref": {
+              "topic_id": "3619e597-f327-5eb6-9d88-f39f0396b82e",
+              "quote": "allowing the algorithm to retrieve these values directly when needed, significantly reducing the number of calculations"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.6.4 Backtracking"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "47 What is backtracking? Give its everyday comparison.\n(Backtracking kya hai? Is ki rozmarrah misaal dein.)",
+            "explanation": "Backtracking qadam ba qadam hal banata hai; raasta hal tak na le jaye to wapas ja kar doosra aazmata hai. Jaise naqshe par ghalat raasta ho to mur jana.",
+            "book_ref": {
+              "topic_id": "58d01201-ee01-5d05-b503-5c2563b65237",
+              "quote": "Backtracking is a method used in solving problems where you build up a solution step by step"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.7.1 Sorting Algorithms"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "48 What are sorting algorithms? Why is sorting important?\n(Sorting algorithms kya hain? Sorting kyon aham hai?)",
+            "explanation": "Sorting algorithms data ko kisi tarteeb (barhti ya ghatti) mein lagate hain. Sorting bunyadi amal hai aur aksar searching aur data analysis se pehle zaroori hai.",
+            "book_ref": {
+              "topic_id": "4368b1f4-5d33-5d98-b4cd-034eb096e931",
+              "quote": "Sorting algorithms are used to arrange data in a particular order, such as ascending or descending"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.7.1.1 Bubble Sort"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "49 Write the list [5, 3, 8, 4, 2] after the first and after the second pass of Bubble Sort (ascending).\n([5, 3, 8, 4, 2] ko Bubble Sort (barhti tarteeb) ke pehle aur doosre pass ke baad likhein.)",
+            "explanation": "Pass 1 ke baad: [3, 5, 4, 2, 8] (8 aakhir mein).\nPass 2 ke baad: [3, 4, 2, 5, 8].",
+            "book_ref": {
+              "topic_id": "af865805-12a0-5db3-a5c0-9510221b2b35",
+              "quote": "After several passes through the list, the algorithm will sort the list as"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "50 Give reason: Bubble Sort is not used for large datasets.\n(Wajah batayein: Bubble Sort bare data ke liye istemal nahin hota.)",
+            "explanation": "Is ki time complexity O(n²) hai; data dugna to waqt chaar guna. Bare data ke liye Quick Sort ya Merge Sort waqt aur wasail bachate hain.",
+            "book_ref": {
+              "topic_id": "af865805-12a0-5db3-a5c0-9510221b2b35",
+              "quote": "The time complexity of Bubble Sort is O(n²), making it inefficient for large datasets"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.7.1.2 Selection Sort"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "51 Write the steps of Selection Sort.\n(Selection Sort ke qadam likhein.)",
+            "explanation": "1. Unsorted hisse ka sab se chhota element dhoondein.\n2. Use pehle unsorted element se swap karein.\n3. Sorted aur unsorted ki had aik qadam aage karein.\n4. Baqi elements ke liye dohrayein.",
+            "book_ref": {
+              "topic_id": "a68173a6-d868-5f43-acb6-ef219692dfbe",
+              "quote": "Move the boundary of the sorted and unsorted sections by one element"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "52 Show every swap of Selection Sort on [29, 10, 14, 37, 13].\n([29, 10, 14, 37, 13] par Selection Sort ka har swap dikhayein.)",
+            "explanation": "10 aur 29 swap: [10, 29, 14, 37, 13]\n13 aur 29 swap: [10, 13, 14, 37, 29]\n14 apni jagah: [10, 13, 14, 37, 29]\n29 aur 37 swap: [10, 13, 14, 29, 37]",
+            "book_ref": {
+              "topic_id": "a68173a6-d868-5f43-acb6-ef219692dfbe",
+              "quote": "Selection Sort will first find the smallest element, 10, and swap it with 29"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.7.2 Search Algorithms"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "53 What are search algorithms? Name two.\n(Search algorithms kya hain? Do ke naam likhein.)",
+            "explanation": "Search algorithms data mein khaas elements dhoondte hain; information retrieval aur database queries mein aham. Misaalein: Linear Search aur Binary Search.",
+            "book_ref": {
+              "topic_id": "25e4a793-a0bb-5340-8873-44a561249b14",
+              "quote": "Search algorithms are designed to find specific elements or a set of elements within a dataset"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.7.2.1 Linear Search"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "54 Write the steps of a linear search.\n(Linear search ke qadam likhein.)",
+            "explanation": "1. List ke pehle item se shuru karein.\n2. Matloob item ko mojooda item se milayein.\n3. Na mile to agle item par jayen.\n4. Item milne ya list khatam hone tak dohrayein.",
+            "book_ref": {
+              "topic_id": "181c636b-8da9-5c10-9ba8-c2a66a7f4a5e",
+              "quote": "A linear search is a straightforward method for finding an item in a list"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.7.2.2 Binary Search"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "55 Write the steps of Binary Search.\n(Binary Search ke qadam likhein.)",
+            "explanation": "1. Sorted list ke beech wale element se shuru.\n2. Woh target ho to us ki jagah batayein.\n3. Target chhota ho to baayen aadhe par dohrayein.\n4. Target bara ho to daayen aadhe par dohrayein.",
+            "book_ref": {
+              "topic_id": "d2a39f76-dce1-56b2-99bb-44266e5cd326",
+              "quote": "Start with the middle element of the sorted list"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "56 Trace Binary Search for 10 in [3, 9, 14, 21, 27, 35, 42].\n([3, 9, 14, 21, 27, 35, 42] mein 10 ki Binary Search trace karein.)",
+            "explanation": "Beech 21: 10 chhota, baayan [3, 9, 14].\nBeech 9: 10 bara, daayan [14].\nBeech 14: 10 chhota, interval khaali; 10 list mein nahin.",
+            "book_ref": {
+              "topic_id": "d2a39f76-dce1-56b2-99bb-44266e5cd326",
+              "quote": "until the item is found or the interval is empty"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "57 Give reason: Binary Search cannot be used on unsorted data.\n(Wajah batayein: Binary Search be-tarteeb data par istemal nahin ho sakti.)",
+            "explanation": "Binary Search beech wale se mila kar woh aadha chhorti hai jahan item nahin ho sakta; yeh sirf sorted list mein durust hai. Be-tarteeb data pehle sort karein, jaise Merge Sort se.",
+            "book_ref": {
+              "topic_id": "d2a39f76-dce1-56b2-99bb-44266e5cd326",
+              "quote": "Binary Search is only effective on sorted lists"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.7.3 Graph Algorithms"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "58 What is a graph? Write two uses of graph algorithms.\n(Graph kya hai? Graph algorithms ke do istemal likhein.)",
+            "explanation": "Graph nodes (vertices) aur unhein jorne wale edges ka data structure hai. Graph algorithms network analysis aur route planning (aur social network analysis) mein kaam aate hain.",
+            "book_ref": {
+              "topic_id": "23fdc27d-1e65-53d2-8496-9dc19b9b87ef",
+              "quote": "Graph algorithms are used to explore and analyze graphs"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.7.3.1 Breadth-First Search (BFS)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "59 Write the steps of Breadth-First Search.\n(Breadth-First Search ke qadam likhein.)",
+            "explanation": "1. Root node se shuru kar ke use enqueue karein.\n2. Aik node dequeue, process, aur us ke sab unvisited padosi enqueue.\n3. Queue khaali hone tak dohrayein.",
+            "book_ref": {
+              "topic_id": "a3b48383-d811-591a-974c-de7eb10a1838",
+              "quote": "Dequeue a node, process it, and enqueue all its unvisited neighbors"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3.7.3.2 Depth-First Search (DFS)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "60 Write the steps of Depth-First Search.\n(Depth-First Search ke qadam likhein.)",
+            "explanation": "1. Root node se shuru kar ke use stack par push karein.\n2. Aik node pop, process, aur us ke sab unvisited padosi push.\n3. Stack khaali hone tak dohrayein.",
+            "book_ref": {
+              "topic_id": "6dcd26b5-86bc-5cbe-8ee9-e19abe17833f",
+              "quote": "Pop a node, process it, and push all its unvisited neighbors onto the stack"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "61 Name the data structure used by BFS and by DFS, with one use of each.\n(BFS aur DFS kaun sa data structure istemal karte hain? Har aik ka aik istemal likhein.)",
+            "explanation": "BFS queue istemal karta hai; istemal: social network mein do logon ka sab se chhota raasta.\nDFS stack istemal karta hai; istemal: maze jaise puzzles.",
+            "book_ref": {
+              "topic_id": "6dcd26b5-86bc-5cbe-8ee9-e19abe17833f",
+              "quote": "DFS can be used in solving puzzles like mazes"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
