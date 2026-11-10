@@ -31,9 +31,15 @@ const PHYSICS: MockPattern = {
 export const PATTERNS: Record<string, MockPattern> = { physics: PHYSICS };
 
 /** Tests offered now, by "subject-grade" and chapter (owner: Physics 11, chapter 1, Mock test 1 first, for checking). */
-export const OPEN: Record<string, Record<number, number[]>> = { "physics-11": { 1: [1] } };
+export const OPEN: Record<string, Record<number, number[]>> = {
+  "physics-11": { 1: [1] },
+};
 
-export function openTests(subject: string, grade: number, chapter: number): number[] {
+export function openTests(
+  subject: string,
+  grade: number,
+  chapter: number,
+): number[] {
   return OPEN[`${subject}-${grade}`]?.[chapter] ?? [];
 }
 
@@ -56,7 +62,12 @@ export type PaperQuestion = {
   marks: number;
   options?: string[];
   key?: number;
-  answer: { text?: string; table?: { header: string[]; rows: string[][] }; steps?: string[]; final?: string };
+  answer: {
+    text?: string;
+    table?: { header: string[]; rows: string[][] };
+    steps?: string[];
+    final?: string;
+  };
 };
 
 export type Paper = {
@@ -78,7 +89,12 @@ function question(b: Checkpoint, marks: number): PaperQuestion {
   return {
     q: clean(b.prompt ?? ""),
     marks,
-    ...(opts.length ? { options: opts.map((o) => o.text), key: opts.findIndex((o) => o.id === b.answer_id) } : {}),
+    ...(opts.length
+      ? {
+          options: opts.map((o) => o.text),
+          key: opts.findIndex((o) => o.id === b.answer_id),
+        }
+      : {}),
     answer: {
       text: b.explanation || undefined,
       table: b.answer_table ?? undefined,
@@ -92,15 +108,21 @@ function question(b: Checkpoint, marks: number): PaperQuestion {
  * thinned; topped up from the rest of the bank if the chapter is short. Book order is kept. */
 function pick<T>(bank: T[], n: number, count: number): T[] {
   const mine = bank.filter((_, i) => i % TESTS_PER_CHAPTER === n - 1);
-  if (mine.length >= count) return Array.from({ length: count }, (_, j) => mine[Math.floor((j * mine.length) / count)]);
+  if (mine.length >= count)
+    return Array.from(
+      { length: count },
+      (_, j) => mine[Math.floor((j * mine.length) / count)],
+    );
   const rest = bank.filter((x) => !mine.includes(x));
-  return bank.filter((x) => mine.includes(x) || rest.slice(0, count - mine.length).includes(x));
+  return bank.filter(
+    (x) => mine.includes(x) || rest.slice(0, count - mine.length).includes(x),
+  );
 }
 
 /** A small seeded shuffle, so the objective part is mixed (as on the Board paper) but the same every time. */
 function shuffled<T>(xs: T[], seed: number): T[] {
   let s = seed >>> 0;
-  const rnd = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32);
+  const rnd = () => (s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32;
   const out = [...xs];
   for (let i = out.length - 1; i > 0; i--) {
     const j = Math.floor(rnd() * (i + 1));
@@ -109,13 +131,28 @@ function shuffled<T>(xs: T[], seed: number): T[] {
   return out;
 }
 
-const checkpoints = (blocks: { type: string }[]) => blocks.filter((b): b is Checkpoint => b.type === "checkpoint");
+const checkpoints = (blocks: { type: string }[]) =>
+  blocks.filter((b): b is Checkpoint => b.type === "checkpoint");
 
 /** Build mock test n of a chapter from its three practice sets (English lesson blocks). */
-export function buildPaper(pattern: MockPattern, chapter: number, n: number, sets: { mcq: { type: string }[]; short: { type: string }[]; long: { type: string }[] }): Paper {
-  const mcqs = shuffled(pick(checkpoints(sets.mcq), n, pattern.mcqs), chapter * 100 + n).map((b) => question(b, 1));
+export function buildPaper(
+  pattern: MockPattern,
+  chapter: number,
+  n: number,
+  sets: {
+    mcq: { type: string }[];
+    short: { type: string }[];
+    long: { type: string }[];
+  },
+): Paper {
+  const mcqs = shuffled(
+    pick(checkpoints(sets.mcq), n, pattern.mcqs),
+    chapter * 100 + n,
+  ).map((b) => question(b, 1));
   const shortCount = pattern.short.reduce((a, s) => a + s.asked, 0);
-  const shorts = pick(checkpoints(sets.short), n, shortCount).map((b) => question(b, 2));
+  const shorts = pick(checkpoints(sets.short), n, shortCount).map((b) =>
+    question(b, 2),
+  );
   let at = 0;
   const short = pattern.short.map((s) => {
     const parts = shorts.slice(at, at + s.asked);
@@ -127,8 +164,15 @@ export function buildPaper(pattern: MockPattern, chapter: number, n: number, set
   // The long set is written as (a) theory + (b) numerical pairs on the same section; keep each pair together.
   const pairs: { a: Checkpoint; b: Checkpoint }[] = [];
   for (let i = 0; i + 1 < longs.length; i++) {
-    if (marksOf(longs[i].prompt ?? "") === ma && marksOf(longs[i + 1].prompt ?? "") === mb) pairs.push({ a: longs[i], b: longs[++i] });
+    if (
+      marksOf(longs[i].prompt ?? "") === ma &&
+      marksOf(longs[i + 1].prompt ?? "") === mb
+    )
+      pairs.push({ a: longs[i], b: longs[++i] });
   }
-  const long = pick(pairs, n, pattern.long.asked).map((p) => ({ a: question(p.a, ma), b: question(p.b, mb) }));
+  const long = pick(pairs, n, pattern.long.asked).map((p) => ({
+    a: question(p.a, ma),
+    b: question(p.b, mb),
+  }));
   return { pattern, mcqs, short, long };
 }

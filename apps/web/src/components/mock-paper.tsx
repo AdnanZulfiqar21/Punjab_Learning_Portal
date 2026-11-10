@@ -6,10 +6,31 @@
 import { useEffect, useRef, useState } from "react";
 import type { Paper, PaperQuestion } from "@/lib/chapter-mocks";
 
-const ROMAN = ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii", "xiii", "xiv", "xv"];
+const ROMAN = [
+  "i",
+  "ii",
+  "iii",
+  "iv",
+  "v",
+  "vi",
+  "vii",
+  "viii",
+  "ix",
+  "x",
+  "xi",
+  "xii",
+  "xiii",
+  "xiv",
+  "xv",
+];
 const LETTER = ["A", "B", "C", "D"];
 
-type Head = { part: string; className: string; subject: string; chapter: string };
+type Head = {
+  part: string;
+  className: string;
+  subject: string;
+  chapter: string;
+};
 
 function clock(s: number) {
   const h = Math.floor(s / 3600);
@@ -22,22 +43,41 @@ function useTimer(seconds: number, onEnd?: () => void) {
   const [left, setLeft] = useState(seconds);
   const [running, setRunning] = useState(false);
   const end = useRef(onEnd);
-  end.current = onEnd;
+  useEffect(() => {
+    end.current = onEnd;
+  });
   useEffect(() => {
     if (!running) return;
-    const id = setInterval(() => setLeft((l) => (l > 0 ? l - 1 : 0)), 1000);
+    const id = setInterval(() => {
+      setLeft((l) => {
+        if (l > 1) return l - 1;
+        clearInterval(id);
+        setRunning(false);
+        queueMicrotask(() => end.current?.());
+        return 0;
+      });
+    }, 1000);
     return () => clearInterval(id);
   }, [running]);
-  useEffect(() => {
-    if (running && left === 0) {
-      setRunning(false);
-      end.current?.();
-    }
-  }, [left, running]);
-  return { left, running, start: () => setRunning(true), stop: () => setRunning(false) };
+  return {
+    left,
+    running,
+    start: () => setRunning(true),
+    stop: () => setRunning(false),
+  };
 }
 
-function PaperHead({ head, kind, time, marks }: { head: Head; kind: string; time: string; marks: number }) {
+function PaperHead({
+  head,
+  kind,
+  time,
+  marks,
+}: {
+  head: Head;
+  kind: string;
+  time: string;
+  marks: number;
+}) {
   const cell = "border border-border px-3 py-1.5";
   return (
     <table className="w-full table-fixed border-collapse text-sm [overflow-wrap:anywhere]">
@@ -74,7 +114,10 @@ function Answer({ q }: { q: PaperQuestion }) {
             <thead>
               <tr>
                 {a.table.header.map((h) => (
-                  <th key={h} className="border border-border bg-surface px-2 py-1.5 text-left align-top">
+                  <th
+                    key={h}
+                    className="border border-border bg-surface px-2 py-1.5 text-left align-top"
+                  >
                     {h}
                   </th>
                 ))}
@@ -84,7 +127,10 @@ function Answer({ q }: { q: PaperQuestion }) {
               {a.table.rows.map((r, i) => (
                 <tr key={i}>
                   {r.map((c, j) => (
-                    <td key={j} className="border border-border px-2 py-1.5 align-top">
+                    <td
+                      key={j}
+                      className="border border-border px-2 py-1.5 align-top"
+                    >
                       {c}
                     </td>
                   ))}
@@ -113,17 +159,31 @@ function QHead({ title, marks }: { title: string; marks: string }) {
   return (
     <div className="flex items-baseline justify-between gap-3 border-b-2 border-border pt-4 pb-2">
       <h3 className="font-display text-lg font-semibold">{title}</h3>
-      <span className="font-display text-sm font-semibold whitespace-nowrap">{marks}</span>
+      <span className="font-display text-sm font-semibold whitespace-nowrap">
+        {marks}
+      </span>
     </div>
   );
 }
 
-function Row({ label, q, marks, solved }: { label: string; q: PaperQuestion; marks?: number; solved: boolean }) {
+function Row({
+  label,
+  q,
+  marks,
+  solved,
+}: {
+  label: string;
+  q: PaperQuestion;
+  marks?: number;
+  solved: boolean;
+}) {
   return (
     <div className="grid grid-cols-[3.25rem_1fr_auto] gap-x-2 gap-y-2 border-b border-border/70 py-3">
       <span className="font-semibold text-muted">{label}</span>
       <p>{q.q}</p>
-      <span className="font-display text-sm font-semibold text-muted">{marks ?? ""}</span>
+      <span className="font-display text-sm font-semibold text-muted">
+        {marks ?? ""}
+      </span>
       {solved && (
         <div className="col-span-3 sm:col-start-2">
           <Answer q={q} />
@@ -138,20 +198,35 @@ function Subjective({ paper, solved }: { paper: Paper; solved: boolean }) {
   const total = p.long.parts[0] + p.long.parts[1];
   return (
     <div>
-      <p className="pt-5 text-center font-display font-bold tracking-[0.08em]">SECTION-I</p>
+      <p className="pt-5 text-center font-display font-bold tracking-[0.08em]">
+        SECTION-I
+      </p>
       {paper.short.map((s) => (
         <div key={s.no}>
-          <QHead title={`${s.no}. Write the answers of any ${s.attempt === 8 ? "eight" : s.attempt === 6 ? "six" : s.attempt} parts.`} marks={`${s.attempt} × 2 = ${s.attempt * 2}`} />
+          <QHead
+            title={`${s.no}. Write the answers of any ${s.attempt === 8 ? "eight" : s.attempt === 6 ? "six" : s.attempt} parts.`}
+            marks={`${s.attempt} × 2 = ${s.attempt * 2}`}
+          />
           {s.parts.map((q, i) => (
             <Row key={i} label={`(${ROMAN[i]})`} q={q} solved={solved} />
           ))}
         </div>
       ))}
-      <p className="pt-6 text-center font-display font-bold tracking-[0.08em]">SECTION-II</p>
-      <QHead title={`NOTE: Write answers of any ${p.long.attempt === 3 ? "three" : p.long.attempt} questions.`} marks={`${p.long.attempt} × ${total} = ${p.long.attempt * total}`} />
+      <p className="pt-6 text-center font-display font-bold tracking-[0.08em]">
+        SECTION-II
+      </p>
+      <QHead
+        title={`NOTE: Write answers of any ${p.long.attempt === 3 ? "three" : p.long.attempt} questions.`}
+        marks={`${p.long.attempt} × ${total} = ${p.long.attempt * total}`}
+      />
       {paper.long.map((pr, i) => (
         <div key={i}>
-          <Row label={`${i + 5}.(a)`} q={pr.a} marks={pr.a.marks} solved={solved} />
+          <Row
+            label={`${i + 5}.(a)`}
+            q={pr.a}
+            marks={pr.a.marks}
+            solved={solved}
+          />
           <Row label="(b)" q={pr.b} marks={pr.b.marks} solved={solved} />
         </div>
       ))}
@@ -161,7 +236,9 @@ function Subjective({ paper, solved }: { paper: Paper; solved: boolean }) {
 
 export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
   const [tab, setTab] = useState<"question" | "solution">("question");
-  const [chosen, setChosen] = useState<(number | null)[]>(() => paper.mcqs.map(() => null));
+  const [chosen, setChosen] = useState<(number | null)[]>(() =>
+    paper.mcqs.map(() => null),
+  );
   const [checked, setChecked] = useState(false);
   const p = paper.pattern;
   const objective = useTimer(p.objectiveMinutes * 60, () => {
@@ -169,7 +246,9 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
     setTab("solution");
   });
   const subjective = useTimer(p.subjectiveMinutes * 60);
-  const subjMarks = p.short.reduce((a, s) => a + s.attempt * 2, 0) + p.long.attempt * (p.long.parts[0] + p.long.parts[1]);
+  const subjMarks =
+    p.short.reduce((a, s) => a + s.attempt * 2, 0) +
+    p.long.attempt * (p.long.parts[0] + p.long.parts[1]);
   const right = paper.mcqs.filter((q, i) => chosen[i] === q.key).length;
   const blank = chosen.filter((c) => c === null).length;
   const wrong = paper.mcqs.length - right - blank;
@@ -180,12 +259,18 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   const subjTime = `${Math.floor(p.subjectiveMinutes / 60)}.${String(p.subjectiveMinutes % 60).padStart(2, "0")} Hours`;
-  const tabBtn = "min-h-12 flex-1 rounded-full px-4 text-[15px] font-semibold transition-colors";
-  const btn = "inline-flex min-h-11 items-center rounded-full px-5 text-sm font-semibold transition-colors disabled:opacity-45";
+  const tabBtn =
+    "min-h-12 flex-1 rounded-full px-4 text-[15px] font-semibold transition-colors";
+  const btn =
+    "inline-flex min-h-11 items-center rounded-full px-5 text-sm font-semibold transition-colors disabled:opacity-45";
 
   return (
     <div className="space-y-5">
-      <div role="tablist" aria-label="Mock test" className="glass flex gap-1 rounded-full p-1">
+      <div
+        role="tablist"
+        aria-label="Mock test"
+        className="glass flex gap-1 rounded-full p-1"
+      >
         {(
           [
             ["question", "Question paper"],
@@ -205,21 +290,43 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
         ))}
       </div>
 
-      <section className="glass space-y-4 rounded-card px-5 py-6 sm:px-8" aria-label="Objective">
-        <PaperHead head={head} kind="OBJECTIVE" time={`${p.objectiveMinutes} Minutes`} marks={p.mcqs} />
+      <section
+        className="glass space-y-4 rounded-card px-5 py-6 sm:px-8"
+        aria-label="Objective"
+      >
+        <PaperHead
+          head={head}
+          kind="OBJECTIVE"
+          time={`${p.objectiveMinutes} Minutes`}
+          marks={p.mcqs}
+        />
         <p className="text-sm text-muted">
-          Q.No.1 — You have four choices for each objective type question as A, B, C and D. Choose the one you think is
-          correct. Each question carries 1 mark.
+          Q.No.1 — You have four choices for each objective type question as A,
+          B, C and D. Choose the one you think is correct. Each question carries
+          1 mark.
         </p>
         {tab === "question" ? (
           <div className="flex flex-wrap items-center gap-3">
-            <span className="rounded-inner bg-accent-soft px-3 py-1.5 font-display text-xl font-bold text-accent tabular-nums" aria-label="Time left">
+            <span
+              className="rounded-inner bg-accent-soft px-3 py-1.5 font-display text-xl font-bold text-accent tabular-nums"
+              aria-label="Time left"
+            >
               {clock(objective.left)}
             </span>
-            <button type="button" className={`${btn} bg-foreground text-background`} disabled={objective.running || checked} onClick={objective.start}>
+            <button
+              type="button"
+              className={`${btn} bg-foreground text-background`}
+              disabled={objective.running || checked}
+              onClick={objective.start}
+            >
               Start
             </button>
-            <button type="button" className={`${btn} border border-border`} disabled={checked} onClick={submit}>
+            <button
+              type="button"
+              className={`${btn} border border-border`}
+              disabled={checked}
+              onClick={submit}
+            >
               Submit MCQs
             </button>
             {checked && (
@@ -235,7 +342,9 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
               <p className="text-sm font-semibold">Correct</p>
             </div>
             <div className="rounded-inner bg-danger-soft px-3 py-3">
-              <p className="font-display text-2xl font-bold text-danger">{wrong}</p>
+              <p className="font-display text-2xl font-bold text-danger">
+                {wrong}
+              </p>
               <p className="text-sm font-semibold">Wrong</p>
             </div>
             <div className="rounded-inner bg-surface-muted px-3 py-3">
@@ -248,31 +357,46 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
           </div>
         ) : (
           <p className="rounded-inner bg-surface-muted px-4 py-3 text-sm">
-            Answer the MCQs in the Question paper and press Submit MCQs: your correct and wrong answers are shown here.
+            Answer the MCQs in the Question paper and press Submit MCQs: your
+            correct and wrong answers are shown here.
           </p>
         )}
         <ol className="divide-y divide-border/70">
           {paper.mcqs.map((q, i) => {
             const mine = chosen[i];
             const solution = tab === "solution";
-            const verdict = !solution || !checked ? null : mine === null ? "blank" : mine === q.key ? "right" : "wrong";
+            const verdict =
+              !solution || !checked
+                ? null
+                : mine === null
+                  ? "blank"
+                  : mine === q.key
+                    ? "right"
+                    : "wrong";
             return (
               <li key={i} className="space-y-2 py-3">
                 <p className="flex gap-3 font-medium">
-                  <span className="inline-grid size-7 shrink-0 place-items-center rounded-lg bg-accent-soft font-display text-sm text-accent">{i + 1}</span>
+                  <span className="inline-grid size-7 shrink-0 place-items-center rounded-lg bg-accent-soft font-display text-sm text-accent">
+                    {i + 1}
+                  </span>
                   <span className="flex-1">{q.q}</span>
                   {verdict && (
                     <span
                       className={`shrink-0 self-start rounded-full px-2.5 py-0.5 text-xs font-bold ${verdict === "right" ? "bg-ok-soft text-ok" : verdict === "wrong" ? "bg-danger-soft text-danger" : "bg-surface-muted text-muted"}`}
                     >
-                      {verdict === "right" ? "Correct" : verdict === "wrong" ? "Wrong" : "Not attempted"}
+                      {verdict === "right"
+                        ? "Correct"
+                        : verdict === "wrong"
+                          ? "Wrong"
+                          : "Not attempted"}
                     </span>
                   )}
                 </p>
                 <div className="grid gap-2 sm:grid-cols-2 sm:pl-10">
                   {(q.options ?? []).map((o, j) => {
                     const isKey = solution && j === q.key;
-                    const isWrong = solution && checked && mine === j && j !== q.key;
+                    const isWrong =
+                      solution && checked && mine === j && j !== q.key;
                     return (
                       <label
                         key={j}
@@ -285,21 +409,40 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
                             className="mt-1.5"
                             disabled={checked}
                             checked={mine === j}
-                            onChange={() => setChosen((c) => c.map((x, k) => (k === i ? j : x)))}
+                            onChange={() =>
+                              setChosen((c) =>
+                                c.map((x, k) => (k === i ? j : x)),
+                              )
+                            }
                           />
                         )}
-                        <span className="font-semibold text-muted">{LETTER[j]}</span>
+                        <span className="font-semibold text-muted">
+                          {LETTER[j]}
+                        </span>
                         <span className="flex-1">{o}</span>
-                        {solution && checked && mine === j && <span className="shrink-0 text-xs font-bold">Your answer</span>}
+                        {solution && checked && mine === j && (
+                          <span className="shrink-0 text-xs font-bold">
+                            Your answer
+                          </span>
+                        )}
                       </label>
                     );
                   })}
                 </div>
                 {solution && (
                   <p className="text-sm sm:pl-10">
-                    <span className="font-semibold text-ok">Correct answer: {LETTER[q.key ?? 0]}</span>
-                    {verdict === "wrong" && <span className="text-danger"> · you chose {LETTER[mine ?? 0]}</span>}
-                    {q.answer.text && <span className="text-muted"> — {q.answer.text}</span>}
+                    <span className="font-semibold text-ok">
+                      Correct answer: {LETTER[q.key ?? 0]}
+                    </span>
+                    {verdict === "wrong" && (
+                      <span className="text-danger">
+                        {" "}
+                        · you chose {LETTER[mine ?? 0]}
+                      </span>
+                    )}
+                    {q.answer.text && (
+                      <span className="text-muted"> — {q.answer.text}</span>
+                    )}
                   </p>
                 )}
               </li>
@@ -308,20 +451,42 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
         </ol>
       </section>
 
-      <section className="glass space-y-2 rounded-card px-5 py-6 sm:px-8" aria-label="Subjective">
-        <PaperHead head={head} kind="SUBJECTIVE" time={subjTime} marks={subjMarks} />
+      <section
+        className="glass space-y-2 rounded-card px-5 py-6 sm:px-8"
+        aria-label="Subjective"
+      >
+        <PaperHead
+          head={head}
+          kind="SUBJECTIVE"
+          time={subjTime}
+          marks={subjMarks}
+        />
         {tab === "question" ? (
           <div className="flex flex-wrap items-center gap-3 pt-2">
-            <span className="rounded-inner bg-accent-soft px-3 py-1.5 font-display text-xl font-bold text-accent tabular-nums" aria-label="Time left">
+            <span
+              className="rounded-inner bg-accent-soft px-3 py-1.5 font-display text-xl font-bold text-accent tabular-nums"
+              aria-label="Time left"
+            >
               {clock(subjective.left)}
             </span>
-            <button type="button" className={`${btn} bg-foreground text-background`} disabled={subjective.running} onClick={subjective.start}>
+            <button
+              type="button"
+              className={`${btn} bg-foreground text-background`}
+              disabled={subjective.running}
+              onClick={subjective.start}
+            >
               Start
             </button>
-            <span className="text-sm text-muted">Write the answers on paper, then open the Solution paper to check them.</span>
+            <span className="text-sm text-muted">
+              Write the answers on paper, then open the Solution paper to check
+              them.
+            </span>
           </div>
         ) : (
-          <p className="pt-2 text-sm text-muted">Model answers for every part. In the examination you answer only the parts asked for.</p>
+          <p className="pt-2 text-sm text-muted">
+            Model answers for every part. In the examination you answer only the
+            parts asked for.
+          </p>
         )}
         <Subjective paper={paper} solved={tab === "solution"} />
       </section>
