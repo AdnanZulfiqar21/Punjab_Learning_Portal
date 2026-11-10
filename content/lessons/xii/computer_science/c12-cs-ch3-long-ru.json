@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-LONG-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-long-questions",
+      "title": "Long Questions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH3-LONG",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 37,
+          "pdf_to": 48,
+          "note": "Roman Urdu: practice long questions written from Chapter 3 (PDF 37-48), not printed in the book; same questions and order as the English set. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Yeh chapter 3 (Object Oriented Programming Using Python) ke poore chapter se practice long questions (tafseeli sawal) hain, Board ke long question ki shakal mein: har sawal 8 number ka hai (definition, misalon ke saath wazahat, farq, program likh kar samjhana), aksar definition aur wazahat ke hisson mein (jaise 2 + 3 x 2). Har sawal ka poora model jawab hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Object-Oriented Programming has several benefits for software development. Explain modularity, reusability and easier maintenance, and two further advantages of the structure of OOP. (8 marks)\n(Object-Oriented Programming ke software development ke liye kai faide hain. Modularity, reusability aur aasan maintenance, aur OOP ke dhanche ke do mazeed faide samjhayein.)",
+            "explanation": "Object-Oriented Programming objects aur classes se programs design karta hai; har object haqeeqi duniya ki aik cheez hai jis ki properties aur behaviors hain.\n\n1. Modularity: code modules mein baanta jata hai, sambhalna aasan hota hai. Modularity ka matlab program ko chhote hisson mein baantna hai taake har hissa alag banaya aur sambhala ja sake.\n2. Reusability: classes aur objects kai programs mein dobara istemal hote hain, takrar kam hoti hai.\n3. Aasan maintenance: aik hisse ki tabdeeli poore system par asar nahin karti, is liye update aasan hai.\n4. Scalability aur adaptability: OOP ka dhancha software ko barhne aur dhalne mein madad deta hai.\n5. Collaboration: code samajh mein aane wala aur munazzam hota hai; programmers haqeeqi cheezon (students, cars) ke andaz mein sochte hain.",
+            "book_ref": {
+              "topic_id": "d8fe6f21-d0ad-5333-a2e0-046a7a8ef1aa",
+              "quote": "Classes and objects can be reused in multiple programs or parts of a program, reducing repetition."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Write a Python program with a class Student that stores a name and marks and has a method result() which prints whether the student passed (marks 40 or more) or failed. Create three objects and call result() for each. Explain how the program uses class, object, attributes, method, __init__ and self. (8 marks)\n(Python program likhein jis mein Student class name aur marks rakhe aur result() method bataye ke talib-e-ilm pass (40 ya zyada) hua ya fail. Teen objects bana kar har aik ke liye result() call karein. Wazahat karein ke program class, object, attributes, method, __init__ aur self kaise istemal karta hai.)",
+            "explanation": "Program:\nclass Student:\n    def __init__(self, name, marks):\n        self.name = name\n        self.marks = marks\n\n    def result(self):\n        if self.marks >= 40:\n            print(self.name, \"passed with\", self.marks)\n        else:\n            print(self.name, \"failed with\", self.marks)\n\ns1 = Student(\"Ayesha\", 78)\ns2 = Student(\"Bilal\", 35)\ns3 = Student(\"Hamza\", 40)\n\ns1.result()\ns2.result()\ns3.result()\n\nOutput:\nAyesha passed with 78\nBilal failed with 35\nHamza passed with 40\n\nWazahat:\n1. Class: class Student har student ke attributes aur methods ka blueprint (naqsha) hai.\n2. __init__: object bante hi khud chalta hai aur name aur marks set karta hai.\n3. Attributes: self.name aur self.marks properties hain; har object ki apni values hain.\n4. Method: result() kaam hai; marks check kar ke nateeja print karta hai.\n5. self: mojooda object ka reference, khud ba khud milta hai, is liye result() usi object ka data istemal karta hai.\n6. Objects: s1, s2, s3 Student ke teen instances hain jin ka data alag hai; Hamza pass hai kyunke 40 >= 40 True hai.",
+            "book_ref": {
+              "topic_id": "9f9a9e3b-bcdc-5f0f-8948-e6e6bcbf01df",
+              "quote": "Using classes and objects helps organize data and related functionality together, making programs more structured."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Python controls the visibility of class members with naming prefixes. Explain public, protected and private members with their syntax and compare them in a table. Write a program that has one member of each kind and show what happens when the private member is accessed from outside the class. (8 marks)\n(Python naming prefixes se class members ki visibility control karta hai. Public, protected aur private members un ke syntax ke saath samjhayein aur table mein muqabla karein. Aisa program likhein jis mein har qism ka aik member ho aur dikhayein ke private member ko class ke bahar se chhune par kya hota hai.)",
+            "explanation": "Access control ke darje:\n1. Public (self.attribute_name): class ke andar aur bahar har jagah se. Default se sab members public hain.\n2. Protected (self._attribute_name, aik underscore): class aur subclasses ke andar istemal ke liye; sirf convention hai, pabandi nahin.\n3. Private (self.__attribute_name, do underscores): sakht pabandi; class ke bahar se aasani se nahin milta. Python name mangling se variable ka andaruni naam badal deta hai.\n\nProgram:\nclass Mobile:\n    def __init__(self):\n        self.brand = \"Nokia\"\n        self._model = \"N100\"\n        self.__pin = 4321\n\n    def check_pin(self, p):\n        return p == self.__pin\n\nm = Mobile()\nprint(m.brand)\nprint(m._model)\nprint(m.check_pin(1234))\nprint(m.check_pin(4321))\n\nOutput:\nNokia\nN100\nFalse\nTrue\n\nAgar aakhir mein print(m.__pin) likh dein to upar ki chaar lines ke baad program AttributeError par ruk jata hai, kyunke __pin private hai (name mangling). PIN sirf check_pin() method se istemal ho sakta hai.\n\nMuqabla (table dekhein).",
+            "book_ref": {
+              "topic_id": "f3ae7809-6855-5cea-b598-9877ddd04081",
+              "quote": "In Python, you can control the visibility of class members using specific naming prefixes:"
+            },
+            "answer_table": {
+              "header": [
+                "Public",
+                "Protected",
+                "Private"
+              ],
+              "rows": [
+                [
+                  "self.attribute_name",
+                  "self._attribute_name (aik underscore)",
+                  "self.__attribute_name (do underscores)"
+                ],
+                [
+                  "Har jagah se rasai",
+                  "Class aur subclasses ke liye",
+                  "Sirf class tak"
+                ],
+                [
+                  "Sab members ka default",
+                  "Sirf convention, pabandi nahin",
+                  "Name mangling se mehfooz"
+                ],
+                [
+                  "m.brand se Nokia print",
+                  "m._model se phir bhi N100 print",
+                  "m.__pin se AttributeError"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Write a Python program for a class SavingsAccount whose balance is private and can be changed only through deposit() and withdraw() (withdraw must refuse an amount larger than the balance). Trace the given transactions and explain how the program shows encapsulation and why encapsulation is important. (8 marks)\n(SavingsAccount class ka Python program likhein jis ka balance private ho aur sirf deposit() aur withdraw() se badle (balance se zyada raqam withdraw na ho). Transactions trace karein aur samjhayein ke program encapsulation kaise dikhata hai aur encapsulation kyun ahem hai.)",
+            "explanation": "Program:\nclass SavingsAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.__balance = balance\n\n    def deposit(self, amount):\n        self.__balance += amount\n        print(\"Deposited\", amount)\n\n    def withdraw(self, amount):\n        if amount <= self.__balance:\n            self.__balance -= amount\n            print(\"Withdrawn\", amount)\n        else:\n            print(\"Insufficient balance\")\n\n    def get_balance(self):\n        return self.__balance\n\nacc = SavingsAccount(\"Zara\", 5000)\nacc.deposit(1500)\nacc.withdraw(8000)\nacc.withdraw(2500)\nprint(\"Balance:\", acc.get_balance())\n\nOutput:\nDeposited 1500\nInsufficient balance\nWithdrawn 2500\nBalance: 4000\n\nTrace: balance 5000 se shuru; deposit(1500) se 6500; withdraw(8000) inkar kyunke 8000 > 6500; withdraw(2500) ke baad 4000.\n\nEncapsulation kaise:\n1. Data (owner, __balance) aur methods (deposit, withdraw, get_balance) aik unit, yani class, mein band hain.\n2. __balance private hai (do underscores), bahar se seedhi rasai mehdood hai; balance chhupa hai.\n3. Balance sirf deposit() aur withdraw() se badalta aur get_balance() se parha jata hai; withdraw() pehle raqam check karta hai, is liye tabdeeli control mein hai.\n\nAhmiyat: data ko ghair-zaroori rasai se bachati, security barhati, code aasan banati aur control ke saath tabdeeli deti hai.",
+            "book_ref": {
+              "topic_id": "26296edf-f4db-5cdf-b40d-1e23e082fe51",
+              "quote": "You cannot directly change the balance; this is encapsulation."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Define single inheritance, parent class and child class. Write a program in which a child class Student inherits from a parent class Person, overrides its introduce() method and uses super(). Explain method overriding and super() with the help of the output. (8 marks)\n(Single inheritance, parent class aur child class ki definitions likhein. Program likhein jis mein child class Student, parent class Person se inherit kare, introduce() method override kare aur super() istemal kare. Output ki madad se method overriding aur super() samjhayein.)",
+            "explanation": "Single inheritance: child class (subclass) theek aik parent class (superclass) se attributes aur methods leti hai. Yeh Python mein inheritance ki sab se bunyadi shakal hai aur code reuse barhati hai.\nParent class (base class): jis ki properties inherit hon (yahan Person).\nChild class (derived class): jo parent se inherit kare, likhte hain class Student(Person):.\n\nProgram:\nclass Person:\n    def __init__(self, name):\n        self.name = name\n\n    def introduce(self):\n        print(\"I am\", self.name)\n\nclass Student(Person):\n    def __init__(self, name, roll):\n        super().__init__(name)\n        self.roll = roll\n\n    def introduce(self):\n        super().introduce()\n        print(\"My roll number is\", self.roll)\n\np = Person(\"Usman\")\np.introduce()\ns = Student(\"Fatima\", 12)\ns.introduce()\n\nOutput:\nI am Usman\nI am Fatima\nMy roll number is 12\n\nMethod overriding: Student ne Person ke introduce() ka apna version diya. Person object p ke liye Person wala, Student object s ke liye Student wala version chalta hai.\nsuper(): parent wala version call karta hai. super().__init__(name) se Person name set karta hai aur super().introduce() pehle \"I am Fatima\" print karta hai, phir child roll number jorti hai. Yun child parent ka code dobara istemal karti hai.",
+            "book_ref": {
+              "topic_id": "1dfe9ccc-7ac0-57a2-80da-2d26c40b79a5",
+              "quote": "Single inheritance occurs when a child class (subclass) inherits attributes and methods from exactly one parent class (superclass)."
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "super() ko aise samjhein: child class kehti hai \"pehle mere parent ka kaam kar do, phir main apna hissa joron gi\". Is se parent ka code dobara likhna nahin parta."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Define multiple inheritance. Write a program in which a class Smartphone inherits from both a Camera class and a Computer class and adds its own method. Explain the program and its output. (8 marks)\n(Multiple inheritance ki definition likhein. Program likhein jis mein Smartphone class, Camera aur Computer dono classes se inherit kare aur apna method bhi rakhe. Program aur us ka output samjhayein.)",
+            "explanation": "Multiple inheritance mein aik class aik se zyada parent classes se attributes aur methods leti hai, jaise Smartphone, Camera aur Computer dono se (Figure 3.4).\n\nProgram:\nclass Camera:\n    def take_photo(self):\n        print(\"Photo taken\")\n\nclass Computer:\n    def run_app(self, app):\n        print(\"Running\", app)\n\nclass Smartphone(Camera, Computer):\n    def call(self, number):\n        print(\"Calling\", number)\n\nphone = Smartphone()\nphone.take_photo()\nphone.run_app(\"Maps\")\nphone.call(\"0300-1234567\")\n\nOutput:\nPhoto taken\nRunning Maps\nCalling 0300-1234567\n\nWazahat:\n1. Camera aur Computer do alag parent classes hain jin ke apne methods hain.\n2. class Smartphone(Camera, Computer): mein dono parents ke naam hain, is liye Smartphone dono se inherit karti hai.\n3. Smartphone apna method call() jorti hai.\n4. Aik object phone, Camera ka take_photo(), Computer ka run_app() aur apna call() chala sakta hai; methods call ki tarteeb se chalte hain.",
+            "book_ref": {
+              "topic_id": "f4dfe0fd-b795-59e0-9682-00ecf038452e",
+              "quote": "This enables a child class to combine behaviors from different sources"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Define multilevel inheritance. Write a program with a chain of three classes and show that the bottom-most object can use methods from every level. Compare single, multiple and multilevel inheritance in a table. (8 marks)\n(Multilevel inheritance ki definition likhein. Teen classes ki zanjeer wala program likhein aur dikhayein ke sab se neeche wali class ka object har darje ke methods istemal kar sakta hai. Single, multiple aur multilevel inheritance ka table mein muqabla karein.)",
+            "explanation": "Multilevel inheritance mein class aik derived class se inherit karti hai aur khandani shajre jaisi zanjeer banti hai (Grandparent → Parent → Child). Grandchild ko parent aur grandparent dono ke methods aur attributes milte hain (Figure 3.5).\n\nProgram:\nclass LivingBeing:\n    def breathe(self):\n        print(\"Breathing\")\n\nclass Animal(LivingBeing):\n    def eat(self):\n        print(\"Eating\")\n\nclass Dog(Animal):\n    def bark(self):\n        print(\"Barking\")\n\nd = Dog()\nd.breathe()\nd.eat()\nd.bark()\n\nOutput:\nBreathing\nEating\nBarking\n\nWazahat: Animal, LivingBeing se aur Dog, Animal se inherit karti hai. Object d grandparent ka breathe(), parent ka eat() aur apna bark() chalata hai. (Book ki misal bhi aisi hi zanjeer hai: Vehicle → Car → ElectricCar.)\n\nMuqabla (table dekhein).",
+            "book_ref": {
+              "topic_id": "783d4a00-dcd9-5b99-b328-460df7b357b4",
+              "quote": "In this example, ElectricCar inherits from Car, which in turn inherits from Vehicle."
+            },
+            "answer_table": {
+              "header": [
+                "Single",
+                "Multiple",
+                "Multilevel"
+              ],
+              "rows": [
+                [
+                  "Child theek aik parent se",
+                  "Child aik se zyada parents se",
+                  "Class aik derived class se"
+                ],
+                [
+                  "class Dog(Animal):",
+                  "class Child(Father, Mother):",
+                  "Vehicle → Car → ElectricCar"
+                ],
+                [
+                  "Sab se bunyadi shakal",
+                  "Mukhtalif zaraye ke rawayye milata hai",
+                  "Grandchild ko parent aur grandparent ke methods"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Explain compile-time polymorphism and why Python does not support true method overloading. Write a program in which one method find() gives the area of a square with one argument and of a rectangle with two arguments, using a default argument and conditional logic. (8 marks)\n(Compile-time polymorphism samjhayein aur bataen ke Python asal method overloading kyun support nahin karta. Program likhein jis mein aik method find() aik argument par square aur do arguments par rectangle ka area de, default argument aur condition ke zariye.)",
+            "explanation": "Compile-time polymorphism ka matlab compilation ke waqt faisla karna ke kaun sa method chale, aam taur par method ya operator overloading se; Java ya C++ yeh support karti hain.\n\nPython mein farq: Python function signatures par mabni asal method overloading support nahin karta. Python dynamically typed hai, aik function mukhtalif types ke arguments le sakta hai. Is jaisa rawayya default arguments, variable-length arguments (*args, **kwargs) ya function ke andar condition se milta hai.\n\nProgram:\nclass Area:\n    def find(self, a, b=None):\n        if b is None:\n            return a * a\n        else:\n            return a * b\n\nx = Area()\nprint(x.find(6))\nprint(x.find(4, 9))\n\nOutput:\n36\n36\n\nWazahat: b ki default value None hai. Aik argument par b None rehta hai aur a * a (square: 6 x 6 = 36) aata hai. Do arguments par a * b (rectangle: 4 x 9 = 36). Aik hi method naam mukhtalif inputs ke saath chalta hai.",
+            "book_ref": {
+              "topic_id": "dda18819-7281-56a6-97b9-7526823c14a7",
+              "quote": "Instead, similar behavior can be achieved using default arguments, variable-length arguments (*args, **kwargs), or conditional logic inside the function."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 The chapter's Calculator class has a method multiply(self, a=1, b=1, *args). Trace the call calc.multiply(3, 5, 2, 4) step by step, and then state what calc.multiply() and calc.multiply(7) return. Explain how this method mimics compile-time polymorphism. (8 marks)\n(Chapter ki Calculator class mein method multiply(self, a=1, b=1, *args) hai. calc.multiply(3, 5, 2, 4) ko qadam ba qadam trace karein, phir bataen ke calc.multiply() aur calc.multiply(7) kya dete hain. Samjhayein ke yeh method compile-time polymorphism ki naql kaise karta hai.)",
+            "explanation": "Pehle parameters trace karein (a aur b pehli do values lete hain, *args baqi jama karta hai), phir loop. Method default arguments (a=1, b=1) aur variable-length argument (*args) istemal karta hai, is liye aik hi multiply() 0, 1, 2 ya zyada inputs ke saath chalta hai: yeh compile-time polymorphism (method overloading) ki naql hai.\n\nProgram:\nclass Calculator:\n    def multiply(self, a=1, b=1, *args):\n        result = a * b\n        for num in args:\n            result *= num\n        return result\n\ncalc = Calculator()\nprint(calc.multiply(3, 5, 2, 4))\n\nOutput:\n120",
+            "book_ref": {
+              "topic_id": "dda18819-7281-56a6-97b9-7526823c14a7",
+              "quote": "The multiply() method works with different numbers of inputs, mimicking compile-time polymorphism."
+            },
+            "steps": [
+              "a = 3, b = 5, args = (2, 4)",
+              "result = a * b = 3 * 5 = 15",
+              "Loop, num = 2: result = 15 * 2 = 30",
+              "Loop, num = 4: result = 30 * 4 = 120",
+              "result wapas: 120",
+              "calc.multiply(): a = 1, b = 1, args khali, nateeja 1",
+              "calc.multiply(7): a = 7, b = 1, nateeja 7"
+            ],
+            "final_answer": "calc.multiply(3, 5, 2, 4) ka nateeja 120; calc.multiply() ka 1; calc.multiply(7) ka 7."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Explain runtime polymorphism and method overriding. Write a program in which a pay() method of a parent class Employee is overridden in two child classes, and objects of all three classes are processed in one loop. Explain the output. (8 marks)\n(Runtime polymorphism aur method overriding samjhayein. Program likhein jis mein parent class Employee ka pay() method do child classes mein override ho aur teeno classes ke objects aik loop mein chalayen. Output samjhayein.)",
+            "explanation": "Runtime polymorphism ka matlab hai method ka rawayya program chalte waqt call karne wale object ke mutabiq tay ho. Yeh method overriding se hoti hai: child class parent ke method ka apna version deti hai.\n\nProgram:\nclass Employee:\n    def __init__(self, name):\n        self.name = name\n\n    def pay(self):\n        return 30000\n\nclass Manager(Employee):\n    def pay(self):\n        return 80000\n\nclass Intern(Employee):\n    def pay(self):\n        return 15000\n\nstaff = [Manager(\"Asad\"), Intern(\"Hira\"), Employee(\"Kamran\")]\nfor person in staff:\n    print(person.name, person.pay())\n\nOutput:\nAsad 80000\nHira 15000\nKamran 30000\n\nWazahat:\n1. pay() parent Employee mein hai aur Manager aur Intern mein override hai; name Employee ke __init__ se milta hai.\n2. Loop har object ke liye aik hi line person.pay() chalata hai.\n3. Chalte waqt Python har object ki class dekhta hai: Manager 80000, Intern 15000, Employee 30000.\n4. Aik hi method naam object ke mutabiq alag rawayya deta hai; Python ki dynamic fitrat ise taaqatwar banati hai.",
+            "book_ref": {
+              "topic_id": "7ac1a756-adca-5cc7-bd77-9fc0a7f1b820",
+              "quote": "This dynamic nature makes Python particularly powerful for runtime polymorphism."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Polymorphism means \"many forms\". Explain it with the chapter's payment-system example, and compare its two types, compile-time and runtime polymorphism, in a table. (8 marks)\n(Polymorphism ka matlab \"bohat si shaklein\" hai. Ise chapter ki payment system misal se samjhayein aur is ki do qismon, compile-time aur runtime polymorphism, ka table mein muqabla karein.)",
+            "explanation": "Polymorphism kisi cheez (function ya object) ki mauqe ke mutabiq mukhtalif kaam karne ki salahiyat hai. Takneeki taur par yeh aik hi method, function ya operator ko object ke mutabiq alag rawayya dene deti hai, jis se code lachakdar aur dobara istemal ke qabil banta hai.\n\nPayment misal: payment system mein Credit Card, UPI, NetBanking aur Wallet hain. Sab processPayment() istemal karte hain magar alag tareeqe se; NetBanking mein yeh bank login par le jata hai. Naam wahi, kaam payment type ke mutabiq badalta hai.\n\nQismein: compile-time aur runtime polymorphism (Figure 3.6). Muqabla (table dekhein).",
+            "book_ref": {
+              "topic_id": "faca0831-a5d0-58bc-aa34-614c5147ed58",
+              "quote": "Polymorphism refers to the ability of the same method or operation to behave differently based on object or context."
+            },
+            "answer_table": {
+              "header": [
+                "Compile-time polymorphism",
+                "Runtime polymorphism"
+              ],
+              "rows": [
+                [
+                  "Compilation ke waqt tay hota hai",
+                  "Program chalte waqt object ke mutabiq tay hota hai"
+                ],
+                [
+                  "Aam taur par method ya operator overloading se",
+                  "Method overriding se"
+                ],
+                [
+                  "Asal shakal Java ya C++ mein",
+                  "Python ki dynamic fitrat ise taaqatwar banati hai"
+                ],
+                [
+                  "Python default arguments, *args/**kwargs ya condition se naql karta hai, maslan multiply()",
+                  "Misal: Animal ka sound(), Dog aur Cat mein override"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Write one Python program that uses encapsulation, inheritance and polymorphism together: a parent class Account with a private balance and a describe() method, and two child classes Saving and Current that override describe(). Show the output and point out where each of the three concepts appears in the program. (8 marks)\n(Aik Python program likhein jo encapsulation, inheritance aur polymorphism teeno istemal kare: parent class Account jis ka balance private ho aur describe() method ho, aur do child classes Saving aur Current jo describe() override karein. Output dikhayein aur bataen ke program mein teeno tasawwurat kahan hain.)",
+            "explanation": "Program:\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.__balance = balance\n\n    def get_balance(self):\n        return self.__balance\n\n    def describe(self):\n        return \"General account\"\n\nclass Saving(Account):\n    def describe(self):\n        return \"Saving account\"\n\nclass Current(Account):\n    def describe(self):\n        return \"Current account\"\n\nfor acc in [Saving(\"Ali\", 9000), Current(\"Sana\", 4500)]:\n    print(acc.owner, acc.describe(), acc.get_balance())\n\nOutput:\nAli Saving account 9000\nSana Current account 4500\n\nTeeno tasawwurat kahan:\n1. Encapsulation: owner, __balance aur methods Account class mein band hain; __balance private hai, sirf get_balance() se parha jata hai.\n2. Inheritance: Saving aur Current, Account ki child classes hain (class Saving(Account):); woh __init__ aur get_balance() dobara likhe baghair istemal karti hain.\n3. Polymorphism (runtime, overriding): describe() har child mein override hai; loop mein aik hi call acc.describe() object ke mutabiq \"Saving account\" ya \"Current account\" deti hai.\nTeeno mil kar program ko munazzam, dobara istemal ke qabil aur aasan banate hain.",
+            "book_ref": {
+              "topic_id": "dc7774cb-2f90-53a7-8495-2dbe7b2f8c94",
+              "quote": "This makes code more flexible and reusable."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
