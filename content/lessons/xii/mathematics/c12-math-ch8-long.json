@@ -1,0 +1,382 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-LONG",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-long-questions",
+      "title": "Long Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 234,
+          "pdf_to": 255,
+          "note": "Practice long questions written from Unit 8 (PDF 234-255, printed 232-253); not printed in the book. Based on the unit's text, theorems, formulas and worked examples (changed values); none repeats the unit's exercises. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice long questions for the whole of Unit 8 (Numerical Solutions of Nonlinear Equations (TOC: 'Numerical Method')), in the shape of a Board Section-II question part: each carries 5 marks (a longer problem, a proof or a derivation). Each one is solved in full, step by step."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Show that \\(f(x) = x^{4} - 4x^{3} + 2\\) has at least two real roots by finding its intervals of sign change. (5 marks)",
+            "explanation": "Check continuity, tabulate f at whole numbers, and apply the LRT on each interval where the sign flips.",
+            "book_ref": {
+              "topic_id": "b87abba1-0438-5576-93df-6ab74299ae31",
+              "quote": "Separate (non-overlapping) intervals of sign change give separate roots"
+            },
+            "steps": [
+              "\\(f\\) is a polynomial: \\(\\lim_{x \\to c} f(x) = f(c)\\) for every \\(c \\in \\mathbb{R}\\), so \\(f\\) is continuous everywhere",
+              "\\(f(-1) = 1 + 4 + 2 = 7\\), \\(f(0) = 2\\), \\(f(1) = 1 - 4 + 2 = -1\\)",
+              "\\(f(2) = 16 - 32 + 2 = -14\\), \\(f(3) = 81 - 108 + 2 = -25\\), \\(f(4) = 256 - 256 + 2 = 2\\)",
+              "\\(f(0)f(1) = (2)(-1) < 0\\) and \\(f(3)f(4) = (-25)(2) < 0\\)",
+              "By the LRT there is a root in \\(]0, 1[\\) and a root in \\(]3, 4[\\); the intervals do not overlap"
+            ],
+            "final_answer": "Hence proved: \\(f\\) has at least two real roots, one in \\(]0, 1[\\) and one in \\(]3, 4[\\) (they are about \\(0.8604\\) and \\(3.9680\\))."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Find the real root of \\(f(x) = x^{3} + x - 1\\) in \\([0, 1]\\) graphically, correct to two decimal places. (5 marks)",
+            "explanation": "Tabulate f at steps of 0.1 inside the interval of sign change, plot, read the crossing, then confirm the rounding by a sign test.",
+            "book_ref": {
+              "topic_id": "6300eab8-e4a7-54fd-b342-b7ceb66b33f8",
+              "quote": "Draw the graph of \\(y = f(x)\\) on \\(xy\\)-plane within the interval of sign change only."
+            },
+            "steps": [
+              "\\(f\\) is a polynomial, so it is continuous; \\(f(0) = -1 < 0\\), \\(f(1) = 1 > 0\\): \\([0, 1]\\) is an interval of sign change",
+              "Table: \\(f(0.1) = -0.899\\), \\(f(0.2) = -0.792\\), \\(f(0.3) = -0.673\\), \\(f(0.4) = -0.536\\), \\(f(0.5) = -0.375\\)",
+              "\\(f(0.6) = -0.184\\), \\(f(0.7) = 0.043\\), \\(f(0.8) = 0.312\\), \\(f(0.9) = 0.629\\)",
+              "The sign changes between 0.6 and 0.7; the curve rises \\(0.227\\) over this step and reaches 0 about \\(\\frac{0.184}{0.227} \\approx 0.8\\) of the way, near \\(x = 0.68\\)",
+              "Check: \\(f(0.675) = -0.0175 < 0\\) and \\(f(0.685) = 0.0064 > 0\\), so by the LRT the root lies in \\(]0.675, 0.685[\\)"
+            ],
+            "final_answer": "\\(x \\approx 0.68\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Use the bisection method to find a root of \\(f(x) = x^{3} - 2x - 5\\) in \\([2, 3]\\) correct to two decimal places. (5 marks)",
+            "explanation": "Halve the interval each time, keep the half with the sign change, and stop when \\(|f(c)| < 0.005\\).",
+            "book_ref": {
+              "topic_id": "55455903-780e-54ca-915e-03d09d1e64e8",
+              "quote": "The method systematically halves the interval to narrow down the location of the root until the desired accuracy is reached."
+            },
+            "steps": [
+              "\\(f\\) is a polynomial (continuous); \\(f(2) = -1 < 0\\), \\(f(3) = 16 > 0\\), so a root lies in \\([2, 3]\\)",
+              "\\(c_1 = 2.5\\), \\(f = 5.625 > 0\\): \\([2, 2.5]\\); \\(c_2 = 2.25\\), \\(f = 1.8906 > 0\\): \\([2, 2.25]\\)",
+              "\\(c_3 = 2.125\\), \\(f = 0.3457 > 0\\): \\([2, 2.125]\\); \\(c_4 = 2.0625\\), \\(f = -0.3513 < 0\\): \\([2.0625, 2.125]\\)",
+              "\\(c_5 = 2.0938\\), \\(f = -0.0084 < 0\\): \\([2.0938, 2.125]\\); \\(c_6 = 2.1094\\), \\(f = 0.1671 > 0\\): \\([2.0938, 2.1094]\\)",
+              "\\(c_7 = 2.1016\\), \\(f = 0.0790 > 0\\): \\([2.0938, 2.1016]\\); \\(c_8 = 2.0977\\), \\(f = 0.0352 > 0\\): \\([2.0938, 2.0977]\\)",
+              "\\(c_9 = 2.0958\\), \\(f = 0.0139 > 0\\): \\([2.0938, 2.0958]\\); \\(c_{10} = 2.0948\\), \\(f = 0.0028\\)",
+              "\\(|f(2.0948)| = 0.0028 < 0.005\\): stop. Check: \\(f(2.085) = -0.1060 < 0\\), \\(f(2.095) = 0.0050 > 0\\)"
+            ],
+            "final_answer": "\\(x \\approx 2.09\\) (10 iterations)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Use the bisection method to find the root of \\(\\cos x = 2x\\) in \\([0, 1]\\) correct to two decimal places. (5 marks)",
+            "explanation": "Write \\(f(x) = \\cos x - 2x\\), work in radian mode, and replace the end whose \\(f\\) has the same sign as \\(f(c)\\).",
+            "book_ref": {
+              "topic_id": "55455903-780e-54ca-915e-03d09d1e64e8",
+              "quote": "How to decide which half to keep: look only at signs."
+            },
+            "steps": [
+              "\\(f(x) = \\cos x - 2x\\) is continuous; \\(f(0) = 1 > 0\\), \\(f(1) = 0.5403 - 2 = -1.4597 < 0\\)",
+              "\\(c_1 = 0.5\\), \\(f = -0.1224 < 0\\): \\([0, 0.5]\\); \\(c_2 = 0.25\\), \\(f = 0.4689 > 0\\): \\([0.25, 0.5]\\)",
+              "\\(c_3 = 0.375\\), \\(f = 0.1805 > 0\\): \\([0.375, 0.5]\\); \\(c_4 = 0.4375\\), \\(f = 0.0308 > 0\\): \\([0.4375, 0.5]\\)",
+              "\\(c_5 = 0.4688\\), \\(f = -0.0455 < 0\\): \\([0.4375, 0.4688]\\); \\(c_6 = 0.4532\\), \\(f = -0.0073 < 0\\): \\([0.4375, 0.4532]\\)",
+              "\\(c_7 = 0.4454\\), \\(f = 0.0116 > 0\\): \\([0.4454, 0.4532]\\); \\(c_8 = 0.4493\\), \\(f = 0.0022\\)",
+              "\\(|f(0.4493)| = 0.0022 < 0.005\\): stop. Check: \\(f(0.445) = 0.0126 > 0\\), \\(f(0.455) = -0.0117 < 0\\)"
+            ],
+            "final_answer": "\\(x \\approx 0.45\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Use the Regula-Falsi method to find the root of \\(x^{3} + x - 1 = 0\\) in \\([0, 1]\\) correct to two decimal places. (5 marks)",
+            "explanation": "Use \\(c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\) and keep the part with the sign change; here \\(b = 1\\) never moves.",
+            "book_ref": {
+              "topic_id": "c2268ff9-f83b-55ce-97e6-4257d6ba8bf2",
+              "quote": "The idea of Regula-Falsi is to approximate the root by drawing a straight line through the points"
+            },
+            "steps": [
+              "\\(f\\) is continuous; \\(f(0) = -1 < 0\\), \\(f(1) = 1 > 0\\)",
+              "\\(c_1 = \\frac{(0)(1) - (1)(-1)}{1 + 1} = 0.5\\), \\(f(0.5) = -0.375 < 0\\): \\([0.5, 1]\\)",
+              "\\(c_2 = \\frac{(0.5)(1) - (1)(-0.375)}{1 + 0.375} = \\frac{0.875}{1.375} = 0.6364\\), \\(f = -0.1059 < 0\\): \\([0.6364, 1]\\)",
+              "\\(c_3 = \\frac{0.6364 + 0.1059}{1.1059} = \\frac{0.7423}{1.1059} = 0.6712\\), \\(f = -0.0264 < 0\\): \\([0.6712, 1]\\)",
+              "\\(c_4 = \\frac{0.6712 + 0.0264}{1.0264} = \\frac{0.6976}{1.0264} = 0.6797\\), \\(f = -0.0063 < 0\\): \\([0.6797, 1]\\)",
+              "\\(c_5 = \\frac{0.6797 + 0.0063}{1.0063} = \\frac{0.6860}{1.0063} = 0.6817\\), \\(f = -0.0015\\)",
+              "\\(|f(0.6817)| = 0.0015 < 0.005\\): stop. Check: \\(f(0.675) = -0.0175 < 0\\), \\(f(0.685) = 0.0064 > 0\\)"
+            ],
+            "final_answer": "\\(x \\approx 0.68\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Use the Regula-Falsi method to find a root of \\(f(x) = x^{3} - 4x - 9\\) in \\([2, 3]\\) correct to two decimal places. (5 marks)",
+            "explanation": "Apply the secant formula with brackets round negative values; every \\(f(c)\\) is negative, so \\(a\\) moves and \\(b = 3\\) stays.",
+            "book_ref": {
+              "topic_id": "c2268ff9-f83b-55ce-97e6-4257d6ba8bf2",
+              "quote": "Write negative values in brackets when substituting"
+            },
+            "steps": [
+              "\\(f\\) is continuous; \\(f(2) = 8 - 8 - 9 = -9 < 0\\), \\(f(3) = 27 - 12 - 9 = 6 > 0\\)",
+              "\\(c_1 = \\frac{(2)(6) - (3)(-9)}{6 - (-9)} = \\frac{39}{15} = 2.6\\), \\(f(2.6) = -1.824 < 0\\): \\([2.6, 3]\\)",
+              "\\(c_2 = \\frac{(2.6)(6) - (3)(-1.824)}{6 + 1.824} = \\frac{21.072}{7.824} = 2.6933\\), \\(f = -0.2364 < 0\\): \\([2.6933, 3]\\)",
+              "\\(c_3 = \\frac{(2.6933)(6) + 3(0.2364)}{6.2364} = \\frac{16.8690}{6.2364} = 2.7049\\), \\(f = -0.0292 < 0\\): \\([2.7049, 3]\\)",
+              "\\(c_4 = \\frac{(2.7049)(6) + 3(0.0292)}{6.0292} = \\frac{16.3170}{6.0292} = 2.7063\\), \\(f = -0.0041\\)",
+              "\\(|f(2.7063)| = 0.0041 < 0.005\\): stop. Check: \\(f(2.705) = -0.0274 < 0\\), \\(f(2.715) = 0.1529 > 0\\)"
+            ],
+            "final_answer": "\\(x \\approx 2.71\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Use the Regula-Falsi method to find the root of \\(x^{3} - 2x - 5 = 0\\) in \\([2, 3]\\) correct to two decimal places, and compare the number of iterations with bisection (which needs 10). (5 marks)",
+            "explanation": "With \\(b = 3\\), \\(f(b) = 16\\) fixed, \\(c = \\frac{16a - 3f(a)}{16 - f(a)}\\); repeat until \\(|f(c)| < 0.005\\).",
+            "book_ref": {
+              "topic_id": "c2268ff9-f83b-55ce-97e6-4257d6ba8bf2",
+              "quote": "It is usually faster than bisection"
+            },
+            "steps": [
+              "\\(f(2) = -1 < 0\\), \\(f(3) = 16 > 0\\); \\(c_1 = \\frac{(2)(16) - (3)(-1)}{17} = \\frac{35}{17} = 2.0588\\), \\(f = -0.3911\\)",
+              "\\(c_2 = \\frac{34.1141}{16.3911} = 2.0813\\), \\(f = -0.1468\\); \\(c_3 = \\frac{33.7412}{16.1468} = 2.0897\\), \\(f = -0.0540\\)",
+              "\\(c_4 = \\frac{33.5972}{16.0540} = 2.0928\\), \\(f = -0.0195\\); \\(c_5 = \\frac{33.5433}{16.0195} = 2.0939\\), \\(f = -0.0073\\)",
+              "\\(c_6 = \\frac{33.5243}{16.0073} = 2.0943\\), \\(f = -0.0028\\); \\(0.0028 < 0.005\\): stop",
+              "Each \\(f(c) < 0\\) replaced \\(a\\); \\(b = 3\\) never moved",
+              "Regula-Falsi needed 6 iterations; bisection needed 10 for the same accuracy"
+            ],
+            "final_answer": "\\(x \\approx 2.09\\); Regula-Falsi took 6 iterations against 10 for bisection."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Use the Newton-Raphson method with \\(x_0 = 2\\) to find the root of \\(x^{3} - 2x - 5 = 0\\) correct to two decimal places. (5 marks)",
+            "explanation": "Find \\(f'(x)\\), check \\(f'(x) \\ne 0\\) near \\(x_0\\), and iterate \\(x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}\\).",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "This method works by drawing a tangent to the curve"
+            },
+            "steps": [
+              "\\(f(2) = -1 < 0\\), \\(f(3) = 16 > 0\\): a root lies in \\([2, 3]\\); \\(f'(x) = 3x^{2} - 2 > 0\\) on \\([2, 3]\\)",
+              "\\(f(2) = -1\\), \\(f'(2) = 10\\): \\(x_1 = 2 - \\frac{-1}{10} = 2.1\\)",
+              "\\(f(2.1) = 9.261 - 4.2 - 5 = 0.061\\), \\(f'(2.1) = 13.23 - 2 = 11.23\\)",
+              "\\(x_2 = 2.1 - \\frac{0.061}{11.23} = 2.1 - 0.0054 = 2.0946\\)",
+              "\\(f(2.0946) = 0.0005\\), \\(|f| < 0.005\\): stop"
+            ],
+            "final_answer": "\\(x \\approx 2.09\\) (two iterations)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Show that the Newton-Raphson iteration for \\(\\sqrt{N}\\) is \\(x_{n+1} = \\frac{1}{2}\\left(x_n + \\frac{N}{x_n}\\right)\\). Hence find \\(\\sqrt{10}\\) correct to three decimal places, starting from \\(x_0 = 3\\). (5 marks)",
+            "explanation": "\\(\\sqrt{N}\\) is the positive root of \\(x^{2} - N = 0\\); simplify the formula, then iterate with the tolerance 0.0005.",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "Repeating this process produces a sequence of"
+            },
+            "steps": [
+              "\\(f(x) = x^{2} - N\\), \\(f'(x) = 2x \\ne 0\\) for \\(x > 0\\)",
+              "\\(x_{n+1} = x_n - \\dfrac{x_n^{2} - N}{2x_n} = \\dfrac{x_n^{2} + N}{2x_n} = \\dfrac{1}{2}\\left(x_n + \\dfrac{N}{x_n}\\right)\\)",
+              "\\(N = 10\\), \\(x_0 = 3\\): \\(x_1 = \\frac{1}{2}\\left(3 + \\frac{10}{3}\\right) = \\frac{1}{2}(3 + 3.3333) = 3.1667\\), \\(f(3.1667) = 0.0280\\)",
+              "\\(x_2 = \\frac{1}{2}\\left(3.1667 + \\frac{10}{3.1667}\\right) = \\frac{1}{2}(3.1667 + 3.1579) = 3.1623\\)",
+              "\\(f(3.1623) = 10.0001 - 10 = 0.0001 < 0.0005\\): stop. Check: \\(f(3.1615) = -0.0049 < 0\\), \\(f(3.1625) = 0.0014 > 0\\)"
+            ],
+            "final_answer": "Hence proved: \\(x_{n+1} = \\frac{1}{2}\\left(x_n + \\frac{N}{x_n}\\right)\\); \\(\\sqrt{10} \\approx 3.162\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 The equation \\(e^{x} = 3x\\) has two real roots, one in \\([0, 1]\\) and one in \\([1, 2]\\). Find both by the Newton-Raphson method correct to three decimal places, starting from \\(x_0 = 0.5\\) and \\(x_0 = 1.5\\). (5 marks)",
+            "explanation": "\\(f(x) = e^{x} - 3x\\), \\(f'(x) = e^{x} - 3\\); tolerance for three places is \\(|f| < 0.0005\\).",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "Choose an initial approximation"
+            },
+            "steps": [
+              "\\(f(0) = 1\\), \\(f(1) = -0.2817\\), \\(f(2) = 1.3891\\): sign changes on \\([0, 1]\\) and \\([1, 2]\\); \\(f'(x) = 0\\) only at \\(x = \\ln 3 = 1.0986\\), away from both starts",
+              "\\(x_0 = 0.5\\): \\(f = 0.1487\\), \\(f' = -1.3513\\), \\(x_1 = 0.5 + 0.1100 = 0.6100\\)",
+              "\\(f(0.61) = 0.0104\\), \\(f'(0.61) = -1.1596\\), \\(x_2 = 0.61 + 0.0090 = 0.6190\\); \\(f(0.619) = 0.0001 < 0.0005\\)",
+              "\\(x_0 = 1.5\\): \\(f = 4.4817 - 4.5 = -0.0183\\), \\(f' = 1.4817\\), \\(x_1 = 1.5 + 0.0124 = 1.5124\\)",
+              "\\(f(1.5124) = 0.0004 < 0.0005\\): stop",
+              "Checks: \\(f(0.6185) > 0 > f(0.6195)\\) and \\(f(1.5115) < 0 < f(1.5125)\\)"
+            ],
+            "final_answer": "\\(x \\approx 0.619\\) and \\(x \\approx 1.512\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Use the Newton-Raphson method with \\(x_0 = 1.5\\) to find the positive root of \\(x^{4} + x - 3 = 0\\) correct to two decimal places. (5 marks)",
+            "explanation": "\\(f'(x) = 4x^{3} + 1 > 0\\) for \\(x > 0\\), so the tangent is never horizontal there; iterate until \\(|f| < 0.005\\).",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "is the root correct to the desired accuracy"
+            },
+            "steps": [
+              "\\(f(1) = -1 < 0\\), \\(f(2) = 15 > 0\\): root in \\([1, 2]\\); \\(f'(x) = 4x^{3} + 1\\)",
+              "\\(f(1.5) = 3.5625\\), \\(f'(1.5) = 14.5\\): \\(x_1 = 1.5 - 0.2457 = 1.2543\\)",
+              "\\(f(1.2543) = 0.7295\\), \\(f'(1.2543) = 8.8934\\): \\(x_2 = 1.2543 - 0.0820 = 1.1723\\)",
+              "\\(f(1.1723) = 0.0610\\), \\(f'(1.1723) = 7.4443\\): \\(x_3 = 1.1723 - 0.0082 = 1.1641\\)",
+              "\\(f(1.1641) = 0.0005 < 0.005\\): stop. Check: \\(f(1.155) = -0.0654 < 0\\), \\(f(1.165) = 0.0071 > 0\\)"
+            ],
+            "final_answer": "\\(x \\approx 1.16\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Derive the Trapezium Rule \\(\\int_{a}^{b} f(x)\\,dx \\approx \\frac{h}{2}[f(x_0) + 2f(x_1) + \\dots + 2f(x_{n-1}) + f(x_n)]\\) for a continuous \\(f(x) \\ge 0\\) on \\([a, b]\\). (5 marks)",
+            "explanation": "Cut the region into n strips of width h, replace each strip by a trapezium, and add the areas.",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "represent the lengths of parallel sides of"
+            },
+            "steps": [
+              "Let \\(h = \\frac{b - a}{n}\\), \\(x_i = a + ih\\) (\\(i = 0, 1, \\dots, n\\)); subintervals \\([x_0, x_1], [x_1, x_2], \\dots, [x_{n-1}, x_n]\\)",
+              "On \\([x_{i-1}, x_i]\\) the parallel sides are \\(f(x_{i-1})\\), \\(f(x_i)\\) and the distance between them is \\(h\\)",
+              "Area of the \\(i\\)-th trapezium: \\(A_i = \\frac{h}{2}[f(x_{i-1}) + f(x_i)]\\)",
+              "\\(\\int_{a}^{b} f(x)\\,dx \\approx A_1 + \\dots + A_n = \\frac{h}{2}[f(x_0) + f(x_1)] + \\frac{h}{2}[f(x_1) + f(x_2)] + \\dots + \\frac{h}{2}[f(x_{n-1}) + f(x_n)]\\)",
+              "Each inner value \\(f(x_1), \\dots, f(x_{n-1})\\) appears in two brackets, the end values in one"
+            ],
+            "final_answer": "Hence proved: \\(\\int_{a}^{b} f(x)\\,dx \\approx \\frac{h}{2}[f(x_0) + 2f(x_1) + 2f(x_2) + \\dots + 2f(x_{n-1}) + f(x_n)]\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 Use the Trapezium Rule with \\(n = 5\\) to approximate \\(\\int_{0}^{1} \\frac{1}{1 + x^{2}}\\,dx\\). Compare with the exact value \\(\\frac{\\pi}{4}\\) and hence estimate \\(\\pi\\). (5 marks)",
+            "explanation": "\\(h = 0.2\\); tabulate \\(\\frac{1}{1 + x^{2}}\\) at six points to four decimals, then apply the rule.",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "the accuracy of the approximation improves as n is taken sufficiently large"
+            },
+            "steps": [
+              "\\(f(x) = \\frac{1}{1 + x^{2}}\\) is continuous (\\(1 + x^{2} \\ge 1\\)); \\(h = \\frac{1 - 0}{5} = 0.2\\)",
+              "\\(f(0) = 1\\), \\(f(0.2) = 0.9615\\), \\(f(0.4) = 0.8621\\), \\(f(0.6) = 0.7353\\), \\(f(0.8) = 0.6098\\), \\(f(1) = 0.5\\)",
+              "Inner sum \\(= 0.9615 + 0.8621 + 0.7353 + 0.6098 = 3.1687\\)",
+              "\\(\\int_{0}^{1} \\frac{dx}{1 + x^{2}} \\approx \\frac{0.2}{2}[1 + 2(3.1687) + 0.5] = 0.1(7.8374) = 0.7837\\)",
+              "Exact: \\(\\left[\\tan^{-1} x\\right]_{0}^{1} = \\frac{\\pi}{4} = 0.7854\\); difference \\(0.0017\\)",
+              "\\(\\pi \\approx 4 \\times 0.7837 = 3.1348\\)"
+            ],
+            "final_answer": "\\(\\int_{0}^{1} \\frac{dx}{1 + x^{2}} \\approx 0.7837\\) (exact \\(0.7854\\)); \\(\\pi \\approx 3.1348\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Use the Trapezium Rule with \\(n = 6\\) to approximate \\(\\int_{0}^{\\pi/2} \\sin x\\,dx\\) and compare with the exact value. (5 marks)",
+            "explanation": "\\(h = \\frac{\\pi}{12}\\); work in radian mode, four decimals in every value.",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "For trigonometric functions put the calculator in radian mode."
+            },
+            "steps": [
+              "\\(h = \\frac{\\pi/2 - 0}{6} = \\frac{\\pi}{12}\\), so \\(\\frac{h}{2} = \\frac{\\pi}{24} = 0.1309\\)",
+              "\\(\\sin 0 = 0\\), \\(\\sin\\frac{\\pi}{12} = 0.2588\\), \\(\\sin\\frac{\\pi}{6} = 0.5\\), \\(\\sin\\frac{\\pi}{4} = 0.7071\\), \\(\\sin\\frac{\\pi}{3} = 0.8660\\), \\(\\sin\\frac{5\\pi}{12} = 0.9659\\), \\(\\sin\\frac{\\pi}{2} = 1\\)",
+              "Inner sum \\(= 0.2588 + 0.5 + 0.7071 + 0.8660 + 0.9659 = 3.2978\\)",
+              "\\(\\int_{0}^{\\pi/2} \\sin x\\,dx \\approx 0.1309[0 + 2(3.2978) + 1] = 0.1309(7.5956) = 0.9943\\)",
+              "Exact: \\(\\left[-\\cos x\\right]_{0}^{\\pi/2} = 0 + 1 = 1\\); the rule is \\(0.0057\\) too small (\\(\\sin x\\) bends downwards here)"
+            ],
+            "final_answer": "\\(\\int_{0}^{\\pi/2} \\sin x\\,dx \\approx 0.9943\\); exact value \\(1\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 Use the Trapezium Rule with \\(h = 1\\) to approximate \\(\\int_{0}^{4} \\frac{1}{1 + x}\\,dx\\). Find the exact value and the difference. (5 marks)",
+            "explanation": "Here \\(h\\) is given, so first \\(n = \\frac{b - a}{h}\\); for the exact value use \\(\\int \\frac{1}{u}\\,du = \\ln|u| + c\\).",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "When an exact value can be found (as in Example 7), compare it with the trapezium value"
+            },
+            "steps": [
+              "\\(n = \\frac{4 - 0}{1} = 4\\), points \\(0, 1, 2, 3, 4\\); \\(f(x) = \\frac{1}{1 + x}\\) is continuous on \\([0, 4]\\)",
+              "\\(f(0) = 1\\), \\(f(1) = 0.5\\), \\(f(2) = 0.3333\\), \\(f(3) = 0.25\\), \\(f(4) = 0.2\\)",
+              "\\(\\approx \\frac{1}{2}[1 + 2(0.5 + 0.3333 + 0.25) + 0.2] = 0.5[1 + 2(1.0833) + 0.2] = 0.5(3.3666) = 1.6833\\)",
+              "Exact: \\(\\left[\\ln|1 + x|\\right]_{0}^{4} = \\ln 5 - \\ln 1 = \\ln 5 = 1.6094\\)",
+              "Difference \\(= 1.6833 - 1.6094 = 0.0739\\); the rule overestimates because \\(\\frac{1}{1 + x}\\) bends upwards"
+            ],
+            "final_answer": "\\(\\int_{0}^{4} \\frac{dx}{1 + x} \\approx 1.6833\\); exact \\(\\ln 5 = 1.6094\\); difference \\(0.0739\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 The equilibrium concentration \\(x\\) (moles per liter) of a product satisfies \\(xe^{2x} = 1\\). Find \\(x\\) correct to two decimal places by the Newton-Raphson method. (5 marks)",
+            "explanation": "\\(f(x) = xe^{2x} - 1\\), \\(f'(x) = (1 + 2x)e^{2x}\\) by the product rule; start in the middle of the interval of sign change.",
+            "book_ref": {
+              "topic_id": "3e53d734-fb8f-5610-bdb2-5858787050bc",
+              "quote": "These equations are often difficult to solve analytically, so numerical methods are used to find approximate values."
+            },
+            "steps": [
+              "\\(f(x) = xe^{2x} - 1\\), \\(f'(x) = e^{2x} + 2xe^{2x} = (1 + 2x)e^{2x}\\), which exists and is non-zero for \\(x > 0\\)",
+              "\\(f(0) = -1 < 0\\), \\(f(1) = e^{2} - 1 = 6.3891 > 0\\): root in \\([0, 1]\\); take \\(x_0 = 0.5\\)",
+              "\\(f(0.5) = 0.5e - 1 = 0.3591\\), \\(f'(0.5) = 2e = 5.4366\\): \\(x_1 = 0.5 - 0.0661 = 0.4339\\)",
+              "\\(f(0.4339) = 0.0334\\), \\(f'(0.4339) = 4.4485\\): \\(x_2 = 0.4339 - 0.0075 = 0.4264\\)",
+              "\\(f(0.4264) = 0.0004 < 0.005\\): stop. Check: \\(f(0.425) = -0.0057 < 0\\), \\(f(0.435) = 0.0383 > 0\\)"
+            ],
+            "final_answer": "\\(x \\approx 0.43\\) moles per liter"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 At steady state a heartbeat signal \\(x\\) satisfies \\(x^{3} - 2x - 2 = 0\\). Find the real root in \\([1, 2]\\) by the bisection method, correct to two decimal places. (5 marks)",
+            "explanation": "Check the sign change, halve the interval each time keeping the sign change, intermediate values to 4 decimals.",
+            "book_ref": {
+              "topic_id": "7c531a95-876d-5149-9401-fc1488c8a4da",
+              "quote": "The human heartbeat is regulated by electrical signals"
+            },
+            "steps": [
+              "\\(f\\) is a polynomial (continuous); \\(f(1) = -3 < 0\\), \\(f(2) = 2 > 0\\)",
+              "\\(c_1 = 1.5\\), \\(f = -1.625\\): \\([1.5, 2]\\); \\(c_2 = 1.75\\), \\(f = -0.1406\\): \\([1.75, 2]\\)",
+              "\\(c_3 = 1.875\\), \\(f = 0.8418\\): \\([1.75, 1.875]\\); \\(c_4 = 1.8125\\), \\(f = 0.3293\\): \\([1.75, 1.8125]\\)",
+              "\\(c_5 = 1.7813\\), \\(f = 0.0895\\): \\([1.75, 1.7813]\\); \\(c_6 = 1.7657\\), \\(f = -0.0265\\): \\([1.7657, 1.7813]\\)",
+              "\\(c_7 = 1.7735\\), \\(f = 0.0312\\): \\([1.7657, 1.7735]\\); \\(c_8 = 1.7696\\), \\(f = 0.0023\\)",
+              "\\(|f(1.7696)| = 0.0023 < 0.005\\): stop. Check: \\(f(1.765) = -0.0316 < 0\\), \\(f(1.775) = 0.0424 > 0\\)"
+            ],
+            "final_answer": "\\(x \\approx 1.77\\): the steady-state signal is about 1.77 units."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 The voltage \\(V\\) (volts) across a component satisfies \\(\\sin V - 0.6V = 0\\). Find the non-zero root in \\([1, 2]\\) by the Regula-Falsi method, correct to two decimal places. (5 marks)",
+            "explanation": "Radian mode; \\(V = 0\\) is the trivial root. \\(f(b) < 0\\) stays fixed and each positive \\(f(V_c)\\) replaces \\(a\\).",
+            "book_ref": {
+              "topic_id": "55feea47-507a-51c9-8210-3a159816995e",
+              "quote": "In circuits, the voltage or current at certain points may satisfy nonlinear equations."
+            },
+            "steps": [
+              "\\(f(V) = \\sin V - 0.6V\\) is continuous; \\(f(1) = 0.2415 > 0\\), \\(f(2) = -0.2907 < 0\\)",
+              "\\(V_1 = \\frac{(1)(-0.2907) - (2)(0.2415)}{-0.2907 - 0.2415} = \\frac{-0.7737}{-0.5322} = 1.4538\\), \\(f = 0.1209 > 0\\): \\([1.4538, 2]\\)",
+              "\\(V_2 = \\frac{(1.4538)(-0.2907) - 2(0.1209)}{-0.2907 - 0.1209} = \\frac{-0.6644}{-0.4116} = 1.6142\\), \\(f = 0.0305\\): \\([1.6142, 2]\\)",
+              "\\(V_3 = \\frac{-0.5302}{-0.3212} = 1.6508\\), \\(f = 0.0063\\): \\([1.6508, 2]\\)",
+              "\\(V_4 = \\frac{-0.4925}{-0.2970} = 1.6582\\), \\(f = 0.0013 < 0.005\\): stop",
+              "Check: \\(f(1.655) = 0.0035 > 0\\), \\(f(1.665) = -0.0034 < 0\\), so the root lies in \\(]1.655, 1.665[\\)"
+            ],
+            "final_answer": "\\(V \\approx 1.66\\) volts"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 A key parameter \\(x\\) satisfies \\(x^{5} - 4x + 1 = 0\\). Find its root in \\([0, 1]\\) by the Regula-Falsi method, correct to two decimal places. (5 marks)",
+            "explanation": "No formula exists for degree five; use the secant estimate on the interval of sign change.",
+            "book_ref": {
+              "topic_id": "e910fc34-8226-512a-a4cf-d077dc3186ba",
+              "quote": "Cryptographic algorithms sometimes involve high-degree nonlinear equations"
+            },
+            "steps": [
+              "\\(f(x) = x^{5} - 4x + 1\\) is continuous; \\(f(0) = 1 > 0\\), \\(f(1) = -2 < 0\\)",
+              "\\(x_1 = \\frac{(0)(-2) - (1)(1)}{-2 - 1} = \\frac{1}{3} = 0.3333\\), \\(f(0.3333) = 0.0041 - 1.3332 + 1 = -0.3291 < 0\\)",
+              "\\(f(0)f(0.3333) < 0\\): the root lies in \\([0, 0.3333]\\), so \\(b = 0.3333\\)",
+              "\\(x_2 = \\frac{(0)(-0.3291) - (0.3333)(1)}{-0.3291 - 1} = \\frac{-0.3333}{-1.3291} = 0.2508\\), \\(f(0.2508) = -0.0022\\)",
+              "\\(|f(0.2508)| = 0.0022 < 0.005\\): stop. Check: \\(f(0.245) = 0.0209 > 0\\), \\(f(0.255) = -0.0189 < 0\\)"
+            ],
+            "final_answer": "\\(x \\approx 0.25\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

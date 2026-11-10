@@ -1,0 +1,581 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-SHORT-RU",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-short-questions",
+      "title": "Short Questions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-MATH-CH8-SHORT",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 234,
+          "pdf_to": 255,
+          "note": "Roman Urdu: practice short questions written from Unit 8 (PDF 234-255), not printed in the book; same questions and order as the English set. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Yeh Unit 8 (Numerical Solutions of Nonlinear Equations (TOC: 'Numerical Method')) ke poore unit se practice short questions (mukhtasar sawal) hain, unit ke sections ki tarteeb mein, Board ke 2 number wale sawal ke andaz mein. Har sawal mukhtasar qadmon mein hal kiya gaya hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.1 Basic Principles of Approximating Real Roots of Nonlinear Equations"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Define a root of a function \\(y = f(x)\\). What is its geometric meaning?\n(Function \\(y = f(x)\\) ke root ki definition likhein. Is ka geometric matlab kya hai?)",
+            "explanation": "Root (zero) \\(x\\) ki woh qeemat hai jis par \\(y = f(x) = 0\\) ho. Geometry mein yeh us point ka \\(x\\)-coordinate hai jahan graph x-axis ko milta hai.",
+            "book_ref": {
+              "topic_id": "5b57ede7-ec57-5851-8e53-4866e43cdd96",
+              "quote": "A root (or zero) of a function"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 What is a nonlinear equation? Give two examples.\n(Nonlinear equation (ghair-khatti muadla) kya hai? Do misalein dein.)",
+            "explanation": "Aisi equation \\(f(x) = 0\\) jis mein \\(f(x)\\) ko \\(ax + b\\) nahin likh sakte; \\(x\\) ki power aik se zyada ho ya \\(x\\) sin, cos, \\(e^{x}\\), ln ke andar ho. Misalein: \\(x^{3} - 5x + 1 = 0\\), \\(e^{x} - 3x = 0\\).",
+            "book_ref": {
+              "topic_id": "5b57ede7-ec57-5851-8e53-4866e43cdd96",
+              "quote": "A nonlinear equation is an equation of the form"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Why are numerical methods needed to find roots of nonlinear equations?\n(Nonlinear equations ke roots ke liye numerical methods kyun zaroori hain?)",
+            "explanation": "Aksar nonlinear equations (maslan \\(x - 2\\sin x = 0\\)) ka koi exact algebraic hal nahin, aur degree 5 ya zyada ke liye aam formula nahin; formula ho bhi to bohat pecheeda. Numerical methods jitni chahein utni durusti ka andaza dete hain.",
+            "book_ref": {
+              "topic_id": "5b57ede7-ec57-5851-8e53-4866e43cdd96",
+              "quote": "Therefore, numerical methods are essential for finding approximate roots in such cases."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Find the roots of \\(f(x) = x^{2} - x - 6\\) and name the points where its graph meets the \\(x\\)-axis.\n(\\(f(x) = x^{2} - x - 6\\) ke roots nikalein aur woh points batayein jahan graph x-axis ko milta hai.)",
+            "explanation": "\\((x - 3)(x + 2) = 0 \\Rightarrow x = 3\\) ya \\(x = -2\\). Graph x-axis ko \\((3, 0)\\) aur \\((-2, 0)\\) par milta hai.",
+            "book_ref": {
+              "topic_id": "5b57ede7-ec57-5851-8e53-4866e43cdd96",
+              "quote": "Two ways of seeing the same root"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.1.1 Location of Root Theorem (LRT)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 State the Location of Root Theorem.\n(Location of Root Theorem (LRT) bayan karein.)",
+            "explanation": "Agar \\(f\\) band interval \\([a, b]\\) par continuous (musalsal) ho aur \\(f(a)f(b) < 0\\), to khule interval \\(]a, b[\\) mein \\(f\\) ka kam az kam aik real root \\(c\\) hai.",
+            "book_ref": {
+              "topic_id": "b87abba1-0438-5576-93df-6ab74299ae31",
+              "quote": "real-valued function which is continuous on a closed interval"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Show that \\(f(x) = x^{3} - 3x + 1\\) has a real root in \\(]0, 1[\\).\n(Dikhayein ke \\(f(x) = x^{3} - 3x + 1\\) ka \\(]0, 1[\\) mein real root hai.)",
+            "explanation": "\\(f\\) polynomial hai, is liye \\([0, 1]\\) par continuous. \\(f(0) = 1\\), \\(f(1) = -1\\), \\(f(0)f(1) < 0\\). LRT se \\(]0, 1[\\) mein root hai.",
+            "book_ref": {
+              "topic_id": "b87abba1-0438-5576-93df-6ab74299ae31",
+              "quote": "an interval of sign change for the function"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Show that \\(f(x) = x^{3} - 6x + 2\\) has three real roots by finding intervals of sign change.\n(Sign change ke intervals se dikhayein ke \\(f(x) = x^{3} - 6x + 2\\) ke teen real roots hain.)",
+            "explanation": "\\(f\\) continuous polynomial hai.",
+            "book_ref": {
+              "topic_id": "b87abba1-0438-5576-93df-6ab74299ae31",
+              "quote": "Separate (non-overlapping) intervals of sign change give separate roots"
+            },
+            "steps": [
+              "\\(f(-3) = -7\\), \\(f(-2) = 6\\): ulte signs",
+              "\\(f(0) = 2\\), \\(f(1) = -3\\): ulte signs",
+              "\\(f(2) = -2\\), \\(f(3) = 11\\): ulte signs"
+            ],
+            "final_answer": "LRT se \\(]-3, -2[\\), \\(]0, 1[\\), \\(]2, 3[\\) har aik mein root; yeh alag alag hain, is liye teen real roots (cubic ke zyada se zyada teen)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 \\(\\tan\\frac{\\pi}{4} = 1\\) and \\(\\tan\\frac{3\\pi}{4} = -1\\). Does the LRT prove that \\(\\tan x\\) has a root in \\(\\left]\\frac{\\pi}{4}, \\frac{3\\pi}{4}\\right[\\)? Explain.\n(\\(\\tan\\frac{\\pi}{4} = 1\\), \\(\\tan\\frac{3\\pi}{4} = -1\\). Kya LRT saabit karta hai ke \\(\\tan x\\) ka root \\(\\left]\\frac{\\pi}{4}, \\frac{3\\pi}{4}\\right[\\) mein hai? Wazahat karein.)",
+            "explanation": "Nahin. \\(\\tan x\\) is interval par continuous nahin: \\(x = \\frac{\\pi}{2}\\) par defined nahin (asymptote). LRT ke liye continuity zaroori hai (asal mein yahan \\(\\tan x \\ne 0\\)).",
+            "book_ref": {
+              "topic_id": "b87abba1-0438-5576-93df-6ab74299ae31",
+              "quote": "Using the LRT on an interval where"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 For \\(f(x) = (x - 1)(x - 2)\\), find \\(f(0)\\) and \\(f(3)\\). What does this show about the LRT?\n(\\(f(x) = (x - 1)(x - 2)\\) ke liye \\(f(0)\\) aur \\(f(3)\\) nikalein. Is se LRT ke bare mein kya pata chalta hai?)",
+            "explanation": "\\(f(0) = 2\\), \\(f(3) = 2\\): aik jaisa sign, phir bhi \\(]0, 3[\\) mein roots \\(1, 2\\) hain. Sign change na hone ka matlab root na hona nahin.",
+            "book_ref": {
+              "topic_id": "b87abba1-0438-5576-93df-6ab74299ae31",
+              "quote": "No sign change does not mean no root."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Show that the equation \\(e^{x} = 3x\\) has a root in \\(]1, 2[\\).\n(Dikhayein ke \\(e^{x} = 3x\\) ka root \\(]1, 2[\\) mein hai.)",
+            "explanation": "\\(f(x) = e^{x} - 3x\\) har jagah continuous. \\(f(1) = -0.2817\\), \\(f(2) = 1.3891\\): \\(f(1)f(2) < 0\\), LRT se \\(]1, 2[\\) mein root.",
+            "book_ref": {
+              "topic_id": "b87abba1-0438-5576-93df-6ab74299ae31",
+              "quote": "Always check continuity first"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.2 Graphical Method for Approximating Real Roots"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Write the steps of the graphical method for approximating a real root.\n(Real root ke andaze ke liye graphical method ke qadam likhein.)",
+            "explanation": "(1) Sign change ka interval \\([a, b]\\) dhoondein (\\(f(a)f(b) < 0\\)). (2) Sirf us interval mein \\(y = f(x)\\) ka graph banayein. (3) Dekhein graph x-axis ko kahan kaatta hai; woh \\(x\\) root ka andaza hai.",
+            "book_ref": {
+              "topic_id": "6300eab8-e4a7-54fd-b342-b7ceb66b33f8",
+              "quote": "Observe where the graph crosses the"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 The graph of \\(f(x) = e^{x} - 3x\\) crosses the \\(x\\)-axis near \\(0.62\\). Confirm that \\(0.62\\) is correct to two decimal places.\n(\\(f(x) = e^{x} - 3x\\) ka graph x-axis ko \\(0.62\\) ke qareeb kaatta hai. Tasdeeq karein ke \\(0.62\\) do decimal places tak durust hai.)",
+            "explanation": "\\(f(0.615) = 0.0047 > 0\\), \\(f(0.625) = -0.0068 < 0\\). LRT se root \\(]0.615, 0.625[\\) mein hai jo round ho kar \\(0.62\\) banta hai.",
+            "book_ref": {
+              "topic_id": "6300eab8-e4a7-54fd-b342-b7ceb66b33f8",
+              "quote": "used to provide an initial estimate for numerical methods"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 Why must the calculator be in radian mode when tabulating \\(f(x) = x - 2\\sin x\\)?\n(\\(f(x) = x - 2\\sin x\\) ki table banate waqt calculator radian mode mein kyun ho?)",
+            "explanation": "Calculus mein \\(\\sin x\\) ka \\(x\\) radians mein hota hai. Degree mode mein \\(\\sin 2 = 0.0349\\) aata, \\(0.9093\\) nahin, aur poori table ghalat ho jati.",
+            "book_ref": {
+              "topic_id": "6300eab8-e4a7-54fd-b342-b7ceb66b33f8",
+              "quote": "always keep your calculator in radian mode"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3 Numerical Methods for Solving Nonlinear Equations"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Name the three numerical methods of this unit for solving f(x) = 0. Which of them need an interval of sign change?\n(f(x) = 0 hal karne ke is unit ke teen numerical methods ke naam likhein. Kin ko sign change ka interval chahiye?)",
+            "explanation": "Bisection, Regula-Falsi aur Newton-Raphson. Bisection aur Regula-Falsi sign change ke interval se chalte hain; Newton-Raphson aik qeemat x0 aur derivative istemal karta hai.",
+            "book_ref": {
+              "topic_id": "7359b3a9-f07a-5488-90b2-91df88b99870",
+              "quote": "we will study three important numerical techniques"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3.1 General Rule of Accuracy, Tolerance and Calculator Setup"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 Write the tolerance for a root correct to (i) 3 decimal places (ii) 4 decimal places.\n(Root ke liye tolerance likhein: (i) 3 decimal places (ii) 4 decimal places.)",
+            "explanation": "\\(|f(c)| < \\frac{10^{-n}}{2}\\). (i) \\(0.0005\\) (ii) \\(0.00005\\).",
+            "book_ref": {
+              "topic_id": "72bd8eda-9cff-5954-b24d-172aac6bba39",
+              "quote": "is the number of decimal places required for the root"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 Why should the calculator be fixed to at least n + 1 decimal places to get a root correct to n decimal places?\n(n decimal places ke root ke liye calculator kam az kam n + 1 decimal places par kyun rakha jaye?)",
+            "explanation": "Agar har darmiyani qeemat n decimals tak round ho to chhoti ghaltiyan jama ho kar aakhri digit badal sakti hain. Aik zyada decimal rakhne se bachao hota hai; sirf aakhri jawab round karein.",
+            "book_ref": {
+              "topic_id": "72bd8eda-9cff-5954-b24d-172aac6bba39",
+              "quote": "If you round every intermediate value to"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Is \\(c = 1.4142\\) an acceptable root of \\(x^{2} - 2 = 0\\) correct to 3 decimal places?\n(Kya \\(c = 1.4142\\), \\(x^{2} - 2 = 0\\) ka 3 decimal places tak qabil-e-qabool root hai?)",
+            "explanation": "\\(f(1.4142) = -0.0000384\\), \\(|f(c)| < 0.0005\\). Haan: 3 decimal places tak root \\(1.414\\).",
+            "book_ref": {
+              "topic_id": "72bd8eda-9cff-5954-b24d-172aac6bba39",
+              "quote": "consider the root accurate when"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3.2 Bisection Method"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 Write the steps of the bisection method.\n(Bisection method ke qadam likhein.)",
+            "explanation": "(1) \\([a, b]\\) par continuity aur \\(f(a)f(b) < 0\\) check karein. (2) \\(c = \\frac{a + b}{2}\\). (3) \\(|f(c)|\\) tolerance se kam ho to \\(c\\) root; warna \\(f(a)f(c) < 0\\) ho to \\(b = c\\), nahin to \\(a = c\\). (4) Qadam 2-3 dohrayein.",
+            "book_ref": {
+              "topic_id": "55455903-780e-54ca-915e-03d09d1e64e8",
+              "quote": "determine the subinterval containing the root"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 Perform one iteration of the bisection method for \\(f(x) = x^{3} - 4x - 9\\) on \\([2, 3]\\).\n(\\(f(x) = x^{3} - 4x - 9\\) par \\([2, 3]\\) mein bisection ki aik iteration karein.)",
+            "explanation": "\\(f(2) = -9\\), \\(f(3) = 6\\). \\(c = 2.5\\), \\(f(2.5) = -3.375 < 0\\); \\(f(2)\\) jaisa sign, is liye root \\([2.5, 3]\\) mein.",
+            "book_ref": {
+              "topic_id": "55455903-780e-54ca-915e-03d09d1e64e8",
+              "quote": "Keep the half where the sign changes"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 Perform two iterations of the bisection method for \\(f(x) = e^{x} - 3x\\) on \\([0, 1]\\).\n(\\(f(x) = e^{x} - 3x\\) par \\([0, 1]\\) mein bisection ki do iterations karein.)",
+            "explanation": "\\(f(0) = 1\\), \\(f(1) = -0.2817\\).",
+            "book_ref": {
+              "topic_id": "55455903-780e-54ca-915e-03d09d1e64e8",
+              "quote": "Keep the half where the sign changes: replace the end whose"
+            },
+            "steps": [
+              "\\(c_1 = 0.5\\), \\(f(0.5) = 0.1487 > 0\\): root \\([0.5, 1]\\) mein",
+              "\\(c_2 = 0.75\\), \\(f(0.75) = -0.1330 < 0\\): root \\([0.5, 0.75]\\) mein",
+              "\\(|f(0.75)|\\) abhi tolerance se zyada hai, iterations jari rahengi"
+            ],
+            "final_answer": "Do iterations ke baad root \\([0.5, 0.75]\\) mein hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 Starting from \\([1, 2]\\), how many bisection steps make the interval containing the root shorter than \\(0.0005\\)?\n(\\([1, 2]\\) se shuru karke kitne bisection qadmon mein root wala interval \\(0.0005\\) se chhota hoga?)",
+            "explanation": "\\(k\\) qadmon ke baad lambai \\(\\frac{1}{2^{k}}\\). \\(\\frac{1}{1024} > 0.0005\\), \\(\\frac{1}{2048} < 0.0005\\). Is liye 11 qadam.",
+            "book_ref": {
+              "topic_id": "55455903-780e-54ca-915e-03d09d1e64e8",
+              "quote": "That is why bisection always works, but slowly."
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3.3 Regula-Falsi Method (False Position Method)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "22 Show that the secant line through \\((a, f(a))\\) and \\((b, f(b))\\) cuts the \\(x\\)-axis at \\(c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\).\n(Dikhayein ke \\((a, f(a))\\) aur \\((b, f(b))\\) se guzarne wali secant line x-axis ko \\(c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\) par kaatti hai.)",
+            "explanation": "Secant: \\(y - f(a) = \\frac{f(b) - f(a)}{b - a}(x - a)\\).",
+            "book_ref": {
+              "topic_id": "c2268ff9-f83b-55ce-97e6-4257d6ba8bf2",
+              "quote": "intercepts of the secant line, we substitute"
+            },
+            "steps": [
+              "\\(y = 0\\), \\(x = c\\): \\(c - a = -\\dfrac{f(a)(b - a)}{f(b) - f(a)}\\)",
+              "\\(c = \\dfrac{a\\big(f(b) - f(a)\\big) - f(a)(b - a)}{f(b) - f(a)}\\)",
+              "Numerator \\(= af(b) - bf(a)\\)"
+            ],
+            "final_answer": "Is liye \\(c = \\dfrac{af(b) - bf(a)}{f(b) - f(a)}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "23 Perform one iteration of the Regula-Falsi method for \\(f(x) = x^{3} - 4x - 9\\) on \\([2, 3]\\).\n(\\(f(x) = x^{3} - 4x - 9\\) par \\([2, 3]\\) mein Regula-Falsi ki aik iteration karein.)",
+            "explanation": "\\(f(2) = -9\\), \\(f(3) = 6\\): \\(c = \\frac{12 + 27}{15} = 2.6\\). \\(f(2.6) = -1.824 < 0\\), is liye root \\([2.6, 3]\\) mein.",
+            "book_ref": {
+              "topic_id": "c2268ff9-f83b-55ce-97e6-4257d6ba8bf2",
+              "quote": "using the Regula-Falsi formula"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "24 How do the bisection and Regula-Falsi methods differ?\n(Bisection aur Regula-Falsi methods mein kya farq hai?)",
+            "explanation": "Sirf naye andaze mein: bisection midpoint \\(\\frac{a + b}{2}\\), Regula-Falsi secant ka x-intercept \\(\\frac{af(b) - bf(a)}{f(b) - f(a)}\\). Baqi qadam aik jaise; Regula-Falsi aam tor par tez.",
+            "book_ref": {
+              "topic_id": "c2268ff9-f83b-55ce-97e6-4257d6ba8bf2",
+              "quote": "Bisection and Regula-Falsi differ only in Step 2"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "25 Perform one iteration of the Regula-Falsi method for \\(f(x) = \\ln x + x - 2\\) on \\([1, 2]\\).\n(\\(f(x) = \\ln x + x - 2\\) par \\([1, 2]\\) mein Regula-Falsi ki aik iteration karein.)",
+            "explanation": "\\(f(1) = -1\\), \\(f(2) = 0.6931\\): \\(c = \\frac{2.6931}{1.6931} = 1.5906\\). \\(f(1.5906) = 0.0547 > 0\\), root \\([1, 1.5906]\\) mein.",
+            "book_ref": {
+              "topic_id": "c2268ff9-f83b-55ce-97e6-4257d6ba8bf2",
+              "quote": "the secant takes this into account, the midpoint does not"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "26 For \\(f(x) = x^{2} - 3\\) on \\([1, 2]\\), the first Regula-Falsi estimate is \\(1.6667\\) with \\(f(1.6667) = -0.2221\\). Find the second estimate.\n(\\(f(x) = x^{2} - 3\\), \\([1, 2]\\): pehla Regula-Falsi andaza \\(1.6667\\), \\(f(1.6667) = -0.2221\\). Doosra andaza nikalein.)",
+            "explanation": "\\(f(1.6667) < 0\\), is liye \\(a = 1.6667\\), \\(b = 2\\): \\(c = \\frac{2.1109}{1.2221} = 1.7273\\). \\(b = 2\\) apni jagah hai.",
+            "book_ref": {
+              "topic_id": "c2268ff9-f83b-55ce-97e6-4257d6ba8bf2",
+              "quote": "Often one end never moves"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3.4 Newton–Raphson Method"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "27 Derive the Newton-Raphson formula \\(x_1 = x_0 - \\frac{f(x_0)}{f'(x_0)}\\).\n(Newton-Raphson formula \\(x_1 = x_0 - \\frac{f(x_0)}{f'(x_0)}\\) akhaz karein.)",
+            "explanation": "\\((x_0, f(x_0))\\) par tangent \\(y - f(x_0) = f'(x_0)(x - x_0)\\). x-axis par \\(y = 0\\), \\(x = x_1\\): \\(-f(x_0) = f'(x_0)(x_1 - x_0)\\); \\(f'(x_0) \\ne 0\\) se taqseem: \\(x_1 = x_0 - \\frac{f(x_0)}{f'(x_0)}\\).",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "This tangent intersects the"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "28 Write the conditions under which the Newton-Raphson method can be applied.\n(Newton-Raphson method kin sharaait par lagaya ja sakta hai?)",
+            "explanation": "Equation ko \\(f(x) = 0\\) likhein; \\(x_0\\) sign change ke interval se lein; \\(x_0\\) ke qareeb \\(f\\) differentiable ho aur \\(f'(x) \\ne 0\\) (warna tangent ufuqi aur sifar se taqseem).",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "should not be zero near the root"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "29 Use the Newton-Raphson method with \\(x_0 = 2\\) to find \\(\\sqrt{5}\\) correct to 3 decimal places.\n(Newton-Raphson se \\(x_0 = 2\\) le kar \\(\\sqrt{5}\\) 3 decimal places tak nikalein.)",
+            "explanation": "\\(f(x) = x^{2} - 5\\), \\(f'(x) = 2x\\).",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "Repeating this process produces a sequence of"
+            },
+            "steps": [
+              "\\(x_1 = 2 + 0.25 = 2.25\\), \\(f(2.25) = 0.0625\\)",
+              "\\(x_2 = 2.25 - \\frac{0.0625}{4.5} = 2.2361\\), \\(f(2.2361) = 0.0001\\)",
+              "\\(|f(2.2361)| < 0.0005\\): ruk jayein"
+            ],
+            "final_answer": "\\(\\sqrt{5} \\approx 2.236\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "30 Use one Newton-Raphson step from \\(x_0 = 0.5\\) to find the root of \\(\\cos x = 2x\\) correct to two decimal places.\n(\\(x_0 = 0.5\\) se Newton-Raphson ka aik qadam le kar \\(\\cos x = 2x\\) ka root do decimal places tak nikalein.)",
+            "explanation": "\\(f(x) = \\cos x - 2x\\), \\(f'(x) = -\\sin x - 2\\).",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "Unlike bisection and Regula-Falsi, the root is not trapped in an interval"
+            },
+            "steps": [
+              "\\(f(0.5) = -0.1224\\), \\(f'(0.5) = -2.4794\\)",
+              "\\(x_1 = 0.5 - 0.0494 = 0.4506\\)",
+              "\\(f(0.4506) = -0.0010\\), \\(|f| < 0.005\\): ruk jayein"
+            ],
+            "final_answer": "\\(x \\approx 0.45\\) (radian mode)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "31 Why can the Newton-Raphson method not start at \\(x_0 = 2\\) for \\(f(x) = x^{3} - 12x + 1\\)?\n(\\(f(x) = x^{3} - 12x + 1\\) ke liye Newton-Raphson \\(x_0 = 2\\) se kyun shuru nahin ho sakta?)",
+            "explanation": "\\(f'(2) = 12 - 12 = 0\\). \\(x = 2\\) par tangent ufuqi hai jo x-axis ko kabhi nahin milta; formula sifar se taqseem karega.",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "A zero slope means a horizontal tangent, which never meets the x-axis"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "32 Show that the Newton-Raphson formula for \\(\\sqrt{N}\\) (\\(N > 0\\)) is \\(x_{n+1} = \\frac{1}{2}\\left(x_n + \\frac{N}{x_n}\\right)\\).\n(Dikhayein ke \\(\\sqrt{N}\\) ke liye Newton-Raphson formula \\(x_{n+1} = \\frac{1}{2}\\left(x_n + \\frac{N}{x_n}\\right)\\) hai.)",
+            "explanation": "\\(f(x) = x^{2} - N\\), \\(f'(x) = 2x\\): \\(x_{n+1} = x_n - \\frac{x_n^{2} - N}{2x_n} = \\frac{x_n^{2} + N}{2x_n} = \\frac{1}{2}\\left(x_n + \\frac{N}{x_n}\\right)\\).",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "Write the given equation in the form"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.4 Estimating the Value of a Definite Integral"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "33 Why are numerical methods needed to evaluate some definite integrals? Give an example.\n(Kuch definite integrals ke liye numerical methods kyun zaroori hain? Misal dein.)",
+            "explanation": "Fundamental Theorem ko antiderivative \\(F\\) chahiye, magar \\(e^{-x^{2}}\\) ka elementary antiderivative nahin. Integral phir bhi mojood hai (area), is liye Trapezium Rule se andaza.",
+            "book_ref": {
+              "topic_id": "5ffcb6fa-2e27-508d-ad6d-922c9d2d8ffd",
+              "quote": "cannot be evaluated easily by elementary methods"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.4.1 Trapezium (Trapezoidal) Rule"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "34 State the Trapezium Rule.\n(Trapezium Rule bayan karein.)",
+            "explanation": "Agar \\(f\\), \\([a, b]\\) par continuous, \\(h = \\frac{b - a}{n}\\), \\(x_i = a + ih\\), to \\(\\int_{a}^{b} f(x)\\,dx \\approx \\frac{h}{2}\\big[f(x_0) + 2f(x_1) + \\dots + 2f(x_{n-1}) + f(x_n)\\big]\\).",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "is approximately equal to the sum of areas of the trapeziums"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "35 In the Trapezium Rule, why are the inner values multiplied by 2 but not the end values?\n(Trapezium Rule mein andar wali qeematein 2 se zarb kyun hoti hain, kinare wali kyun nahin?)",
+            "explanation": "Har andar wali qeemat aik trapezium ki daayin aur agle ki baayin side hai, is liye do baar ginti. \\(f(x_0)\\) aur \\(f(x_n)\\) sirf aik aik trapezium mein.",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "is the right side of one trapezium and the left side of the next"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "36 For \\(\\int_{-1}^{2} f(x)\\,dx\\) with \\(h = 0.5\\), find \\(n\\) and the points \\(x_i\\).\n(\\(\\int_{-1}^{2} f(x)\\,dx\\), \\(h = 0.5\\): \\(n\\) aur points \\(x_i\\) nikalein.)",
+            "explanation": "\\(n = \\frac{3}{0.5} = 6\\). Points \\(-1, -0.5, 0, 0.5, 1, 1.5, 2\\) (7 points).",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "Let \\(x_{i} = a + ih;\\ i = 0, 1, 2, \\dots, n\\)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "37 Use the Trapezium Rule with \\(n = 3\\) to approximate \\(\\int_{0}^{3} x^{2}\\,dx\\) and compare with the exact value.\n(Trapezium Rule, \\(n = 3\\), se \\(\\int_{0}^{3} x^{2}\\,dx\\) ka andaza lagayein aur exact qeemat se muqabla karein.)",
+            "explanation": "\\(h = 1\\): \\(\\frac{1}{2}[0 + 10 + 9] = 9.5\\). Exact \\(= 9\\). Rule \\(0.5\\) zyada deta hai (curve oopar ko mudti hai).",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "each trapezium approximates the signed area"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "38 Use the Trapezium Rule with \\(n = 2\\) to approximate \\(\\int_{0}^{1} \\frac{1}{1 + x^{2}}\\,dx\\).\n(Trapezium Rule, \\(n = 2\\), se \\(\\int_{0}^{1} \\frac{1}{1 + x^{2}}\\,dx\\) ka andaza lagayein.)",
+            "explanation": "\\(h = 0.5\\): \\(0.25[1 + 1.6 + 0.5] = 0.775\\).",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "the accuracy of the approximation improves as n is taken sufficiently large"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "39 Use the Trapezium Rule with \\(n = 4\\) to approximate \\(\\int_{1}^{2} \\frac{1}{x}\\,dx\\).\n(Trapezium Rule, \\(n = 4\\), se \\(\\int_{1}^{2} \\frac{1}{x}\\,dx\\) ka andaza lagayein.)",
+            "explanation": "\\(h = 0.25\\); points \\(1, 1.25, 1.5, 1.75, 2\\).",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "should be rounded to at least four decimal places to maintain accuracy in the final result"
+            },
+            "steps": [
+              "Qeematein: \\(1,\\ 0.8,\\ 0.6667,\\ 0.5714,\\ 0.5\\)",
+              "Andar wali qeematon ka jama \\(= 2.0381\\)",
+              "\\(0.125(5.5762) = 0.6970\\)"
+            ],
+            "final_answer": "\\(\\int_{1}^{2} \\frac{1}{x}\\,dx \\approx 0.6970\\) (exact \\(\\ln 2 = 0.6931\\))"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5 Real-Life Applications of Nonlinear Equations"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "40 Write the general recipe for solving a real-life nonlinear equation numerically.\n(Real-life nonlinear equation ko numerically hal karne ka aam tareeqa likhein.)",
+            "explanation": "(1) Model ko \\(f(x) = 0\\) likhein. (2) Continuity aur \\(f(a)f(b) < 0\\) wala \\([a, b]\\). (3) Bataya gaya method, kam az kam 4 decimals. (4) \\(|f(c)| < \\frac{10^{-n}}{2}\\) par rukein. (5) Round karein, unit aur matlab likhein.",
+            "book_ref": {
+              "topic_id": "179c60a8-ac68-577f-ae69-3e6dfac67d1f",
+              "quote": "bring every term to one side"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5.1 Chemical Reactions"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "41 A concentration \\(x\\) satisfies \\(xe^{2x} = 1\\). Write \\(f(x)\\), \\(f'(x)\\) and the Newton-Raphson formula for it.\n(Concentration \\(x\\), \\(xe^{2x} = 1\\) poori karti hai. Is ke liye \\(f(x)\\), \\(f'(x)\\) aur Newton-Raphson formula likhein.)",
+            "explanation": "\\(f(x) = xe^{2x} - 1\\), \\(f'(x) = (1 + 2x)e^{2x}\\) (product rule). \\(x_{n+1} = x_n - \\dfrac{x_n e^{2x_n} - 1}{(1 + 2x_n)e^{2x_n}}\\).",
+            "book_ref": {
+              "topic_id": "3e53d734-fb8f-5610-bdb2-5858787050bc",
+              "quote": "the equilibrium concentration or the reaction rate leads to nonlinear equations"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5.2 Regulation of Heartbeats"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "42 A signal strength \\(x\\) satisfies \\(x^{3} - 2x - 2 = 0\\). Perform two bisection iterations on \\([1, 2]\\).\n(Signal strength \\(x\\), \\(x^{3} - 2x - 2 = 0\\) poori karti hai. \\([1, 2]\\) par bisection ki do iterations karein.)",
+            "explanation": "\\(f(1) = -3\\), \\(f(2) = 2\\). \\(c_1 = 1.5\\), \\(f = -1.625\\): \\([1.5, 2]\\). \\(c_2 = 1.75\\), \\(f = -0.1406\\): \\([1.75, 2]\\).",
+            "book_ref": {
+              "topic_id": "7c531a95-876d-5149-9401-fc1488c8a4da",
+              "quote": "The variation of these signals over time can often be modelled by nonlinear equations."
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5.3 Electronic Circuits"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "43 A voltage satisfies \\(\\sin V - 0.6V = 0\\). Show that a non-zero root lies in \\(]1, 2[\\) and find the first Regula-Falsi estimate.\n(Voltage \\(\\sin V - 0.6V = 0\\) poora karta hai. Dikhayein ke non-zero root \\(]1, 2[\\) mein hai aur pehla Regula-Falsi andaza nikalein.)",
+            "explanation": "Radian mode: \\(f(1) = 0.2415\\), \\(f(2) = -0.2907\\); LRT se \\(]1, 2[\\) mein root. \\(V_c = \\frac{-0.7737}{-0.5322} = 1.4538\\).",
+            "book_ref": {
+              "topic_id": "55feea47-507a-51c9-8210-3a159816995e",
+              "quote": "often produce nonlinear voltage-current relationships"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5.4 Cryptography"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "44 Show that \\(x^{5} - 4x + 1 = 0\\) has a real root in \\(]0, 1[\\) and another in \\(]1, 2[\\).\n(Dikhayein ke \\(x^{5} - 4x + 1 = 0\\) ka aik real root \\(]0, 1[\\) mein aur doosra \\(]1, 2[\\) mein hai.)",
+            "explanation": "\\(f(0) = 1\\), \\(f(1) = -2\\), \\(f(2) = 25\\). \\(f(0)f(1) < 0\\), \\(f(1)f(2) < 0\\); LRT se dono intervals mein aik aik root.",
+            "book_ref": {
+              "topic_id": "e910fc34-8226-512a-a4cf-d077dc3186ba",
+              "quote": "involve high-degree nonlinear equations to generate secure keys"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
