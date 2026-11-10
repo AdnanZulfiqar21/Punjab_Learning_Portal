@@ -108,42 +108,50 @@ async function Chapters({ grade: rawGrade, subject: rawSubject }: { grade?: stri
           <SectionHeader id="chapter-practice" title={`${GRADE_LABEL[grade]} ${name}`} description="Every chapter in the book's order." />
           {/* PRACTICE-ACCORDION-01 (owner, 2026-11-10): each chapter is a fold like the phone's contents menu; tapping it
               shows its MCQs, Short questions and Long questions. */}
-          <ol className="grid items-start gap-4 sm:grid-cols-2">
-            {chapters.map((ch) => {
-              const sets = [ch.mcqs, ch.shorts, ch.longs].filter(Boolean).length;
-              return (
-                <li key={ch.number}>
-                  <GlassCard padded={false} className="p-0">
-                    <details className="outline-fold group">
-                      <summary className="flex min-h-11 cursor-pointer list-none items-center gap-4 rounded-[inherit] p-5 focus-visible:outline-2 focus-visible:outline-accent [&::-webkit-details-marker]:hidden">
-                        <span
-                          aria-hidden="true"
-                          className="flex size-12 shrink-0 items-center justify-center rounded-inner bg-accent-soft font-display text-xl font-bold text-accent ring-1 ring-accent/20"
-                        >
-                          {ch.number}
-                        </span>
-                        <span className="flex min-w-0 flex-1 flex-col gap-1">
-                          <span className="text-xs font-semibold tracking-wide text-muted uppercase">
-                            {res.data.chapter_label} {ch.number}
-                          </span>
-                          <h3 className="font-display text-lg leading-snug font-semibold text-foreground">{ch.title}</h3>
-                        </span>
-                        <span className="flex shrink-0 items-center gap-1 text-sm text-muted">
-                          <span aria-label={`${sets} question sets`}>{sets}</span>
-                          <Icon name="chevron-right" size={18} className="transition-transform duration-200 group-open:rotate-90" />
-                        </span>
-                      </summary>
-                      <ul className="grid gap-2 px-5 pb-5">
-                        <SetLink kind="MCQs" item={ch.mcqs} />
-                        <SetLink kind="Short questions" item={ch.shorts} />
-                        <SetLink kind="Long questions" item={ch.longs} />
-                      </ul>
-                    </details>
-                  </GlassCard>
-                </li>
-              );
-            })}
-          </ol>
+          {/* PRACTICE-COLUMNS-01 (owner, 2026-11-10): two independent columns (odd chapters left, even right) so an open
+              fold pushes down only the chapters under it and never leaves a gap beside it. On a phone the two lists
+              dissolve (display: contents) into one column ordered 1, 2, 3 ... by `order`. */}
+          <div className="flex flex-col gap-4 sm:grid sm:grid-cols-2 sm:items-start">
+            {[0, 1].map((col) => (
+              <ol key={col} className="contents sm:flex sm:flex-col sm:gap-4">
+                {chapters.map((ch, i) => {
+                  if (i % 2 !== col) return null;
+                  const sets = [ch.mcqs, ch.shorts, ch.longs].filter(Boolean).length;
+                  return (
+                    <li key={ch.number} style={{ order: i }}>
+                      <GlassCard padded={false} className="p-0">
+                        <details className="outline-fold group">
+                          <summary className="flex min-h-11 cursor-pointer list-none items-center gap-4 rounded-[inherit] p-5 focus-visible:outline-2 focus-visible:outline-accent [&::-webkit-details-marker]:hidden">
+                            <span
+                              aria-hidden="true"
+                              className="flex size-12 shrink-0 items-center justify-center rounded-inner bg-accent-soft font-display text-xl font-bold text-accent ring-1 ring-accent/20"
+                            >
+                              {ch.number}
+                            </span>
+                            <span className="flex min-w-0 flex-1 flex-col gap-1">
+                              <span className="text-xs font-semibold tracking-wide text-muted uppercase">
+                                {res.data.chapter_label} {ch.number}
+                              </span>
+                              <h3 className="font-display text-lg leading-snug font-semibold text-foreground">{ch.title}</h3>
+                            </span>
+                            <span className="flex shrink-0 items-center gap-1 text-sm text-muted">
+                              <span aria-label={`${sets} question sets`}>{sets}</span>
+                              <Icon name="chevron-right" size={18} className="transition-transform duration-200 group-open:rotate-90" />
+                            </span>
+                          </summary>
+                          <ul className="grid gap-2 px-5 pb-5">
+                            <SetLink kind="MCQs" item={ch.mcqs} />
+                            <SetLink kind="Short questions" item={ch.shorts} />
+                            <SetLink kind="Long questions" item={ch.longs} />
+                          </ul>
+                        </details>
+                      </GlassCard>
+                    </li>
+                  );
+                })}
+              </ol>
+            ))}
+          </div>
         </section>
       )}
     </div>
