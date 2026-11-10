@@ -29,14 +29,15 @@
             "book_errors": [
               "color self.color = color, size",
               "\"large”",
-              "carl.describe"
+              "carl.describe",
+              "return \"This toy car is\" , self.color , \"size\", self.size, \"and has \" , self.wheels , \"Wheels.\""
             ]
           },
           {
             "type": "callout",
             "tone": "correction",
             "title": "Book correction",
-            "text": "Three printing errors stop this program. The __init__ line has a stray self.color = color inside its brackets; it should be def __init__(self, color, size, wheels):. The string \"large” ends with a curly quote, so it is never closed; it should be \"large\". The first print uses carl (letter l) for car1, which is a NameError; it should be print(car1.describe())."
+            "text": "Three printing errors stop this program. The __init__ line has a stray self.color = color inside its brackets; it should be def __init__(self, color, size, wheels):. The string \"large” ends with a curly quote, so it is never closed; it should be \"large\". The first print uses carl (letter l) for car1, which is a NameError; it should be print(car1.describe()). The return line also needs a change: with commas, return gives a tuple, so print shows ('This toy car is', 'red', 'size', 'small', 'and has ', 4, 'Wheels.') with brackets and quotes instead of a description. Written as return f\"This toy car is {self.color}, size {self.size}, and has {self.wheels} wheels.\", the program prints This toy car is red, size small, and has 4 wheels. and This toy car is blue, size large, and has 6 wheels."
           },
           {
             "type": "paragraph",
