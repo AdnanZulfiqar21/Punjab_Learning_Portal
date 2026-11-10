@@ -15,7 +15,8 @@ import { api, GRADE_LABEL, SUBJECTS as ALL_SUBJECTS, type SubjectCode } from "@/
 import { useAuth } from "@/lib/auth";
 import { exerciseStatus, practiceChapters } from "@/lib/exercises";
 
-const SUBJECTS = ALL_SUBJECTS.filter(([code]) => code !== "mathematics");
+// PRACTICE-MATHS-01 (owner, 2026-11-10): Mathematics 11 has chapter practice too; its formulas read as plain text here.
+const SUBJECTS = ALL_SUBJECTS;
 
 export default function ChapterPracticeScreen() {
   const { state } = useAuth();

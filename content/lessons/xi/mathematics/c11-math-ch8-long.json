@@ -1,0 +1,580 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-LONG",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-long-questions",
+      "title": "Long Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 145,
+          "pdf_to": 174,
+          "note": "Practice long questions written from Unit 8 (PDF 145-174, printed 140-169); not printed in the book. Based on the unit's text, theorems, formulas and worked examples (changed values); none repeats the unit's exercises. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice long questions for the whole of Unit 8 (Mathematical Induction and Binomial Theorem), in the shape of a Board Section-II question part: each carries 5 marks (a longer problem, a proof or a derivation). Each one is solved in full, step by step."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Prove by mathematical induction that \\(1 \\cdot 2 + 2 \\cdot 3 + 3 \\cdot 4 + \\ldots + n(n + 1) = \\frac{n(n + 1)(n + 2)}{3}\\) for every positive integer \\(n\\). (5 marks)",
+            "explanation": "Base case \\(n = 1\\); assume \\(S(k)\\) as (A), add the next term \\((k + 1)(k + 2)\\) and take \\((k + 1)(k + 2)\\) common.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "A good way to write every induction proof for a sum:"
+            },
+            "steps": [
+              "Base case \\(n = 1\\): left \\(1 \\cdot 2 = 2\\); right \\(\\frac{1 \\cdot 2 \\cdot 3}{3} = 2\\). So \\(S(1)\\) is true.",
+              "Hypothesis: \\(1 \\cdot 2 + \\ldots + k(k + 1) = \\frac{k(k + 1)(k + 2)}{3}\\) (A).",
+              "Target \\(S(k + 1)\\): \\(1 \\cdot 2 + \\ldots + k(k + 1) + (k + 1)(k + 2) = \\frac{(k + 1)(k + 2)(k + 3)}{3}\\) (B).",
+              "Add \\((k + 1)(k + 2)\\) to both sides of (A): left side of (B) \\(= \\frac{k(k + 1)(k + 2)}{3} + (k + 1)(k + 2)\\).",
+              "\\(= (k + 1)(k + 2)\\left(\\frac{k}{3} + 1\\right) = \\frac{(k + 1)(k + 2)(k + 3)}{3}\\), the right side of (B).",
+              "Both conditions hold, so by mathematical induction \\(S(n)\\) is true for every positive integer \\(n\\)."
+            ],
+            "final_answer": "Hence proved: \\(1 \\cdot 2 + 2 \\cdot 3 + \\ldots + n(n + 1) = \\frac{n(n + 1)(n + 2)}{3}\\) for every positive integer \\(n\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Prove by mathematical induction that \\(1^{3} + 2^{3} + 3^{3} + \\ldots + n^{3} = \\left[\\frac{n(n + 1)}{2}\\right]^{2}\\) for every positive integer \\(n\\). (5 marks)",
+            "explanation": "Add \\((k + 1)^{3}\\) and take \\(\\frac{(k + 1)^{2}}{4}\\) common; the bracket becomes a perfect square.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "Expanding everything into a big polynomial instead of taking the common factor"
+            },
+            "steps": [
+              "Base case \\(n = 1\\): left \\(1^{3} = 1\\); right \\(\\left[\\frac{1 \\cdot 2}{2}\\right]^{2} = 1\\). True.",
+              "Hypothesis: \\(1^{3} + \\ldots + k^{3} = \\frac{k^{2}(k + 1)^{2}}{4}\\) (A). Target: \\(1^{3} + \\ldots + (k + 1)^{3} = \\frac{(k + 1)^{2}(k + 2)^{2}}{4}\\) (B).",
+              "Add \\((k + 1)^{3}\\) to both sides of (A): \\(\\frac{k^{2}(k + 1)^{2}}{4} + (k + 1)^{3}\\).",
+              "\\(= \\frac{(k + 1)^{2}}{4}\\left[k^{2} + 4(k + 1)\\right] = \\frac{(k + 1)^{2}(k^{2} + 4k + 4)}{4}\\).",
+              "\\(= \\frac{(k + 1)^{2}(k + 2)^{2}}{4} = \\left[\\frac{(k + 1)(k + 2)}{2}\\right]^{2}\\), the right side of (B).",
+              "By mathematical induction the formula holds for every positive integer \\(n\\)."
+            ],
+            "final_answer": "Hence proved: \\(1^{3} + 2^{3} + \\ldots + n^{3} = \\left[\\frac{n(n + 1)}{2}\\right]^{2}\\) for all \\(n \\in \\mathbb{N}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Prove by mathematical induction that \\(11^{n} - 6\\) is divisible by 5 for every \\(n \\in \\mathbb{N}\\). (5 marks)",
+            "explanation": "Write the hypothesis as \\(11^{k} - 6 = 5m\\), express \\(11^{k + 1}\\) through \\(11^{k}\\) and substitute.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "so we write the assumption as an equation and substitute it into"
+            },
+            "steps": [
+              "Base case \\(n = 1\\): \\(11 - 6 = 5\\), divisible by 5.",
+              "Hypothesis: \\(11^{k} - 6 = 5m\\) for some integer \\(m\\), so \\(11^{k} = 5m + 6\\).",
+              "\\(11^{k + 1} - 6 = 11 \\cdot 11^{k} - 6 = 11(5m + 6) - 6\\).",
+              "\\(= 55m + 66 - 6 = 55m + 60 = 5(11m + 12)\\), divisible by 5 since \\(11m + 12\\) is an integer.",
+              "So \\(S(k + 1)\\) is true whenever \\(S(k)\\) is true; with the base case, the statement holds for all \\(n \\in \\mathbb{N}\\)."
+            ],
+            "final_answer": "Hence proved: \\(11^{n} - 6\\) is divisible by 5 for every \\(n \\in \\mathbb{N}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Prove by mathematical induction that \\(3^{2n} - 1\\) is divisible by 8 for every \\(n \\in \\mathbb{N}\\). (5 marks)",
+            "explanation": "\\(3^{2(k + 1)} = 9 \\cdot 3^{2k}\\); substitute \\(3^{2k} = 8m + 1\\) from the hypothesis.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "Method: induction. \"Divisible by 9\" means"
+            },
+            "steps": [
+              "Base case \\(n = 1\\): \\(3^{2} - 1 = 8\\), divisible by 8.",
+              "Hypothesis: \\(3^{2k} - 1 = 8m\\) for an integer \\(m\\), so \\(3^{2k} = 8m + 1\\).",
+              "\\(3^{2(k + 1)} - 1 = 3^{2k + 2} - 1 = 9 \\cdot 3^{2k} - 1 = 9(8m + 1) - 1\\).",
+              "\\(= 72m + 8 = 8(9m + 1)\\), a multiple of 8.",
+              "Both conditions hold, so by induction \\(3^{2n} - 1\\) is divisible by 8 for all \\(n \\in \\mathbb{N}\\)."
+            ],
+            "final_answer": "Hence proved: \\(8 \\mid 3^{2n} - 1\\) for every \\(n \\in \\mathbb{N}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Prove by mathematical induction that \\(4 + 4 \\cdot 5 + 4 \\cdot 5^{2} + \\ldots + 4 \\cdot 5^{n} = 5^{n + 1} - 1\\) for every non-negative integer \\(n\\). (5 marks)",
+            "explanation": "The statement starts at \\(n = 0\\), so the base case is \\(S(0)\\); then add \\(4 \\cdot 5^{k + 1}\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "because the statement is claimed for"
+            },
+            "steps": [
+              "Base case \\(n = 0\\): left \\(4 \\cdot 5^{0} = 4\\); right \\(5^{1} - 1 = 4\\). True.",
+              "Hypothesis (\\(k \\ge 0\\)): \\(4 + 4 \\cdot 5 + \\ldots + 4 \\cdot 5^{k} = 5^{k + 1} - 1\\) (A). Target: sum up to \\(4 \\cdot 5^{k + 1}\\) \\(= 5^{k + 2} - 1\\) (B).",
+              "Add \\(4 \\cdot 5^{k + 1}\\) to both sides of (A): \\(5^{k + 1} - 1 + 4 \\cdot 5^{k + 1}\\).",
+              "\\(= 5^{k + 1}(1 + 4) - 1 = 5 \\cdot 5^{k + 1} - 1 = 5^{k + 2} - 1\\), the right side of (B).",
+              "By induction the formula holds for every whole number \\(n = 0, 1, 2, \\ldots\\)"
+            ],
+            "final_answer": "Hence proved: \\(4 + 4 \\cdot 5 + \\ldots + 4 \\cdot 5^{n} = 5^{n + 1} - 1\\) for every \\(n \\in W\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Prove by mathematical induction that \\(\\sum_{k=1}^{n} \\frac{1}{(3k - 2)(3k + 1)} = \\frac{n}{3n + 1}\\) for every positive integer \\(n\\). (5 marks)",
+            "explanation": "Use \\(m\\) for the induction step (\\(k\\) is the counter). Add the term for \\(k = m + 1\\) and factorize the numerator.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "is already used as the counter inside the sum, so the book uses"
+            },
+            "steps": [
+              "Base case \\(n = 1\\): left \\(\\frac{1}{1 \\cdot 4} = \\frac{1}{4}\\); right \\(\\frac{1}{3 + 1} = \\frac{1}{4}\\). True.",
+              "Hypothesis: \\(\\sum_{k=1}^{m} \\frac{1}{(3k - 2)(3k + 1)} = \\frac{m}{3m + 1}\\) (A). The next term (\\(k = m + 1\\)) is \\(\\frac{1}{(3m + 1)(3m + 4)}\\).",
+              "\\(\\sum_{k=1}^{m+1} = \\frac{m}{3m + 1} + \\frac{1}{(3m + 1)(3m + 4)} = \\frac{m(3m + 4) + 1}{(3m + 1)(3m + 4)}\\).",
+              "\\(= \\frac{3m^{2} + 4m + 1}{(3m + 1)(3m + 4)} = \\frac{(m + 1)(3m + 1)}{(3m + 1)(3m + 4)} = \\frac{m + 1}{3m + 4}\\).",
+              "\\(\\frac{m + 1}{3m + 4} = \\frac{m + 1}{3(m + 1) + 1}\\), which is \\(\\frac{n}{3n + 1}\\) with \\(n = m + 1\\).",
+              "So \\(S(m) \\Rightarrow S(m + 1)\\); with the base case, \\(S(n)\\) holds for every \\(n \\in \\mathbb{N}\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\sum_{k=1}^{n} \\frac{1}{(3k - 2)(3k + 1)} = \\frac{n}{3n + 1}\\) for all \\(n \\in \\mathbb{N}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Prove that \\(3^{n} > 2^{n} + 4\\) for all integers \\(n \\ge 2\\). (5 marks)",
+            "explanation": "Extended induction from \\(i = 2\\): multiply the hypothesis by 3, split the right side so that \\(2^{k + 1} + 4\\) appears, drop the positive rest.",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "For an inequality we multiply the hypothesis by a positive number and then compare."
+            },
+            "steps": [
+              "Base case \\(n = 2\\): \\(3^{2} = 9\\) and \\(2^{2} + 4 = 8\\); \\(9 > 8\\). (At \\(n = 1\\): \\(3 > 6\\) is false, so we start at 2.)",
+              "Hypothesis: \\(3^{k} > 2^{k} + 4\\) for some integer \\(k \\ge 2\\) (A).",
+              "Multiply (A) by 3 (positive): \\(3^{k + 1} > 3 \\cdot 2^{k} + 12\\).",
+              "Split: \\(3 \\cdot 2^{k} + 12 = 2^{k + 1} + 2^{k} + 4 + 8\\), so \\(3^{k + 1} > 2^{k + 1} + 4 + (2^{k} + 8)\\).",
+              "Since \\(2^{k} + 8 > 0\\), dropping it from the smaller side gives \\(3^{k + 1} > 2^{k + 1} + 4\\), i.e. \\(S(k + 1)\\).",
+              "By the principle of extended mathematical induction the inequality holds for all integers \\(n \\ge 2\\)."
+            ],
+            "final_answer": "Hence proved: \\(3^{n} > 2^{n} + 4\\) for all integers \\(n \\ge 2\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Prove that \\(2 + 4 + 6 + \\ldots + (2n + 6) = (n + 3)(n + 4)\\) for all integers \\(n \\ge -2\\). (5 marks)",
+            "explanation": "Extended induction with \\(i = -2\\); the term after \\(2k + 6\\) is \\(2(k + 1) + 6 = 2k + 8\\).",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "The chain of dominoes now starts at domino number"
+            },
+            "steps": [
+              "Base case \\(n = -2\\): the last term is \\(2(-2) + 6 = 2\\), so the left side is 2; right side \\((1)(2) = 2\\). True.",
+              "Hypothesis (\\(k \\ge -2\\)): \\(2 + 4 + \\ldots + (2k + 6) = (k + 3)(k + 4)\\) (A).",
+              "Target: \\(2 + 4 + \\ldots + (2k + 6) + (2k + 8) = (k + 4)(k + 5)\\) (B).",
+              "Add \\(2k + 8\\) to both sides of (A): \\((k + 3)(k + 4) + 2(k + 4) = (k + 4)(k + 3 + 2)\\).",
+              "\\(= (k + 4)(k + 5)\\), the right side of (B).",
+              "By extended induction the formula holds for all integers \\(n \\ge -2\\)."
+            ],
+            "final_answer": "Hence proved: \\(2 + 4 + \\ldots + (2n + 6) = (n + 3)(n + 4)\\) for all integers \\(n \\ge -2\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Prove that \\(2^{n} > 2n + 1\\) for all integers \\(n \\ge 3\\). (5 marks)",
+            "explanation": "Start at \\(i = 3\\); multiply the hypothesis by 2 and write \\(4k + 2\\) as \\(2(k + 1) + 1\\) plus a positive part.",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "We may drop a positive part only from the smaller side"
+            },
+            "steps": [
+              "Base case \\(n = 3\\): \\(2^{3} = 8\\), \\(2(3) + 1 = 7\\); \\(8 > 7\\). (For \\(n = 1, 2\\) it fails: \\(2 > 3\\), \\(4 > 5\\) are false.)",
+              "Hypothesis: \\(2^{k} > 2k + 1\\) for some integer \\(k \\ge 3\\) (A).",
+              "Multiply (A) by 2: \\(2^{k + 1} > 4k + 2\\).",
+              "\\(4k + 2 = 2(k + 1) + 1 + (2k - 1)\\), so \\(2^{k + 1} > 2(k + 1) + 1 + (2k - 1)\\).",
+              "For \\(k \\ge 3\\), \\(2k - 1 > 0\\); dropping it gives \\(2^{k + 1} > 2(k + 1) + 1\\), i.e. \\(S(k + 1)\\).",
+              "By extended induction the inequality holds for all integers \\(n \\ge 3\\)."
+            ],
+            "final_answer": "Hence proved: \\(2^{n} > 2n + 1\\) for all integers \\(n \\ge 3\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Bilal does 6 push-ups on the first day and each day he does 4 more than the day before. Prove by mathematical induction that the total number of push-ups in \\(n\\) days is \\(2n^{2} + 4n\\). (5 marks)",
+            "explanation": "On day \\(d\\) he does \\(6 + 4(d - 1)\\); in the step add the day-\\((k + 1)\\) number \\(6 + 4k\\) to the total of \\(k\\) days.",
+            "book_ref": {
+              "topic_id": "4a03df67-4d91-5b84-b571-eb102fd694fa",
+              "quote": "A real-life rule that adds (or removes) a fixed amount each step gives a formula in"
+            },
+            "steps": [
+              "Base case \\(n = 1\\): on day 1 he does 6, and \\(2(1)^{2} + 4(1) = 6\\). True.",
+              "Hypothesis: the total after \\(k\\) days is \\(2k^{2} + 4k\\).",
+              "On day \\(k + 1\\) he does \\(6 + 4[(k + 1) - 1] = 6 + 4k\\) push-ups.",
+              "Total after \\(k + 1\\) days: \\(2k^{2} + 4k + 6 + 4k = 2k^{2} + 8k + 6\\).",
+              "\\(= 2(k^{2} + 2k + 1) + 4k + 4 = 2(k + 1)^{2} + 4(k + 1)\\), the formula with \\(n = k + 1\\).",
+              "By mathematical induction, after \\(n\\) days Bilal has done \\(2n^{2} + 4n\\) push-ups in total (e.g. 3 days: \\(6 + 10 + 14 = 30\\))."
+            ],
+            "final_answer": "Hence proved: the total number of push-ups in \\(n\\) days is \\(2n^{2} + 4n\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Prove the binomial theorem \\((a + x)^{n} = \\sum_{r=0}^{n}\\binom{n}{r}a^{n-r}x^{r}\\) for every positive integer \\(n\\) by mathematical induction. (5 marks)",
+            "explanation": "Base case \\(n = 1\\); multiply the case \\(n = k\\) by \\((a + x)\\), collect like terms and use Pascal's rule.",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Now we prove the Binomial theorem for any positive integer"
+            },
+            "steps": [
+              "Base case \\(n = 1\\): \\(\\binom{1}{0}a + \\binom{1}{1}x = a + x = (a + x)^{1}\\). True.",
+              "Hypothesis: \\((a + x)^{k} = \\binom{k}{0}a^{k} + \\binom{k}{1}a^{k-1}x + \\ldots + \\binom{k}{r}a^{k-r}x^{r} + \\ldots + \\binom{k}{k}x^{k}\\) (B).",
+              "Multiply (B) by \\((a + x)\\): \\((a + x)^{k+1} = a(a + x)^{k} + x(a + x)^{k}\\). The term in \\(a^{k-r+1}x^{r}\\) comes from \\(a \\cdot \\binom{k}{r}a^{k-r}x^{r}\\) and from \\(x \\cdot \\binom{k}{r-1}a^{k-r+1}x^{r-1}\\).",
+              "So \\((a + x)^{k+1} = \\binom{k}{0}a^{k+1} + \\ldots + \\left[\\binom{k}{r} + \\binom{k}{r-1}\\right]a^{k-r+1}x^{r} + \\ldots + \\binom{k}{k}x^{k+1}\\).",
+              "Use \\(\\binom{k}{0} = \\binom{k+1}{0}\\), \\(\\binom{k}{k} = \\binom{k+1}{k+1}\\) and Pascal's rule \\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k+1}{r}\\): \\((a + x)^{k+1} = \\sum_{r=0}^{k+1}\\binom{k+1}{r}a^{k+1-r}x^{r}\\).",
+              "This is the statement for \\(n = k + 1\\). By mathematical induction the theorem holds for all positive integers \\(n\\)."
+            ],
+            "final_answer": "Hence proved: \\((a + x)^{n} = \\sum_{r=0}^{n}\\binom{n}{r}a^{n-r}x^{r}\\) for every positive integer \\(n\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Expand \\(\\left(2x - \\frac{1}{x}\\right)^{5}\\) and find its general term. (5 marks)",
+            "explanation": "First term \\(2x\\), second term \\(-\\frac{1}{x}\\), \\(n = 5\\), six terms; the signs alternate.",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Dropping the minus sign of the second term"
+            },
+            "steps": [
+              "Coefficients \\(\\binom{5}{0}, \\ldots, \\binom{5}{5} = 1, 5, 10, 10, 5, 1\\).",
+              "\\((2x)^{5} + 5(2x)^{4}\\left(-\\frac{1}{x}\\right) + 10(2x)^{3}\\left(-\\frac{1}{x}\\right)^{2} + 10(2x)^{2}\\left(-\\frac{1}{x}\\right)^{3} + 5(2x)\\left(-\\frac{1}{x}\\right)^{4} + \\left(-\\frac{1}{x}\\right)^{5}\\).",
+              "Terms: \\(32x^{5}\\), \\(5 \\cdot 16x^{4}\\cdot\\left(-\\frac{1}{x}\\right) = -80x^{3}\\), \\(10 \\cdot 8x^{3}\\cdot\\frac{1}{x^{2}} = 80x\\), \\(10 \\cdot 4x^{2}\\cdot\\left(-\\frac{1}{x^{3}}\\right) = -\\frac{40}{x}\\), \\(5 \\cdot 2x \\cdot \\frac{1}{x^{4}} = \\frac{10}{x^{3}}\\), \\(-\\frac{1}{x^{5}}\\).",
+              "So \\(\\left(2x - \\frac{1}{x}\\right)^{5} = 32x^{5} - 80x^{3} + 80x - \\frac{40}{x} + \\frac{10}{x^{3}} - \\frac{1}{x^{5}}\\).",
+              "General term: \\(T_{r+1} = \\binom{5}{r}(2x)^{5-r}\\left(-\\frac{1}{x}\\right)^{r} = (-1)^{r}\\binom{5}{r}2^{5-r}x^{5-2r}\\).",
+              "Check: \\(r = 2\\) gives \\(\\binom{5}{2}2^{3}x = 80x\\), the third term; and \\(x = 1\\) gives \\(1^{5} = 32 - 80 + 80 - 40 + 10 - 1 = 1\\)."
+            ],
+            "final_answer": "\\(\\left(2x - \\frac{1}{x}\\right)^{5} = 32x^{5} - 80x^{3} + 80x - \\frac{40}{x} + \\frac{10}{x^{3}} - \\frac{1}{x^{5}}\\); \\(T_{r+1} = (-1)^{r}\\binom{5}{r}2^{5-r}x^{5-2r}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 In the expansion of \\(\\left(2x^{2} - \\frac{1}{x}\\right)^{9}\\) find: (i) the term involving \\(x^{6}\\) (ii) the fourth term (iii) the coefficient of \\(x^{-3}\\). (5 marks)",
+            "explanation": "Simplify the general term once; then choose \\(r\\) from the power of \\(x\\) or from the term number.",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "This is much faster than writing all 12 terms."
+            },
+            "steps": [
+              "\\(T_{r+1} = \\binom{9}{r}(2x^{2})^{9-r}\\left(-\\frac{1}{x}\\right)^{r} = (-1)^{r}\\binom{9}{r}2^{9-r}x^{18-2r}x^{-r} = (-1)^{r}\\binom{9}{r}2^{9-r}x^{18-3r}\\).",
+              "(i) \\(18 - 3r = 6 \\Rightarrow r = 4\\): \\(T_{5} = \\binom{9}{4}2^{5}x^{6} = 126 \\times 32x^{6} = 4032x^{6}\\).",
+              "(ii) Fourth term, \\(r = 3\\): \\(T_{4} = (-1)^{3}\\binom{9}{3}2^{6}x^{9} = -84 \\times 64x^{9} = -5376x^{9}\\).",
+              "(iii) \\(18 - 3r = -3 \\Rightarrow r = 7\\): \\(T_{8} = (-1)^{7}\\binom{9}{7}2^{2}x^{-3} = -36 \\times 4x^{-3} = -144x^{-3}\\).",
+              "So the coefficient of \\(x^{-3}\\) is \\(-144\\). (Signs: \\(r = 4\\) even, positive; \\(r = 3, 7\\) odd, negative.)"
+            ],
+            "final_answer": "(i) \\(4032x^{6}\\) (ii) \\(T_{4} = -5376x^{9}\\) (iii) \\(-144\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 For the expansion of \\(\\left(x^{2} + \\frac{1}{2x}\\right)^{9}\\) find (i) the term independent of \\(x\\) (ii) the middle terms. (5 marks)",
+            "explanation": "Write \\(T_{r+1}\\) with one power of \\(x\\); \\(n = 9\\) is odd, so there are two middle terms.",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "terms of the expansion will be the two middle terms"
+            },
+            "steps": [
+              "\\(T_{r+1} = \\binom{9}{r}(x^{2})^{9-r}\\left(\\frac{1}{2x}\\right)^{r} = \\binom{9}{r}2^{-r}x^{18-2r-r} = \\binom{9}{r}\\frac{x^{18-3r}}{2^{r}}\\).",
+              "(i) \\(18 - 3r = 0 \\Rightarrow r = 6\\): \\(T_{7} = \\binom{9}{6}\\frac{1}{2^{6}} = \\frac{84}{64} = \\frac{21}{16}\\).",
+              "(ii) \\(n = 9\\) odd: middle terms are the \\(\\frac{9 + 1}{2} = 5\\)th and \\(\\frac{9 + 3}{2} = 6\\)th, i.e. \\(r = 4\\) and \\(r = 5\\).",
+              "\\(T_{5} = \\binom{9}{4}\\frac{x^{6}}{2^{4}} = \\frac{126}{16}x^{6} = \\frac{63}{8}x^{6}\\).",
+              "\\(T_{6} = \\binom{9}{5}\\frac{x^{3}}{2^{5}} = \\frac{126}{32}x^{3} = \\frac{63}{16}x^{3}\\)."
+            ],
+            "final_answer": "(i) \\(T_{7} = \\frac{21}{16}\\) (ii) \\(T_{5} = \\frac{63}{8}x^{6}\\) and \\(T_{6} = \\frac{63}{16}x^{3}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 For \\(\\left(x - \\frac{3}{x}\\right)^{8}\\) find (i) the middle term (ii) the term involving \\(x^{-4}\\). (5 marks)",
+            "explanation": "\\(n = 8\\) is even, so one middle term (\\(r = 4\\)); for (ii) set the power of \\(x\\) equal to \\(-4\\).",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "will be the only one middle term in the expansion"
+            },
+            "steps": [
+              "\\(T_{r+1} = \\binom{8}{r}x^{8-r}\\left(-\\frac{3}{x}\\right)^{r} = (-1)^{r}\\binom{8}{r}3^{r}x^{8-2r}\\).",
+              "(i) 9 terms; the middle is the \\(\\frac{8}{2} + 1 = 5\\)th, \\(r = 4\\): \\(T_{5} = \\binom{8}{4}3^{4} = 70 \\times 81 = 5670\\).",
+              "(ii) \\(8 - 2r = -4 \\Rightarrow r = 6\\).",
+              "\\(T_{7} = (-1)^{6}\\binom{8}{6}3^{6}x^{-4} = 28 \\times 729x^{-4} = \\frac{20412}{x^{4}}\\)."
+            ],
+            "final_answer": "(i) \\(T_{5} = 5670\\) (ii) \\(T_{7} = \\frac{20412}{x^{4}}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 Prove that \\(\\binom{n}{0} + 2\\binom{n}{1} + 3\\binom{n}{2} + \\ldots + (n + 1)\\binom{n}{n} = (n + 2)2^{n-1}\\). (5 marks)",
+            "explanation": "Split each multiplier \\(r + 1\\) as \\(r\\) and \\(1\\); use \\(r\\binom{n}{r} = n\\binom{n-1}{r-1}\\) and the sum of coefficients.",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "and recognise the bracket as the sum of all the coefficients of"
+            },
+            "steps": [
+              "The sum is \\(\\sum_{r=0}^{n}(r + 1)\\binom{n}{r} = \\sum_{r=0}^{n} r\\binom{n}{r} + \\sum_{r=0}^{n}\\binom{n}{r}\\).",
+              "Second part: \\(\\binom{n}{0} + \\binom{n}{1} + \\ldots + \\binom{n}{n} = 2^{n}\\) (put \\(a = x = 1\\)).",
+              "First part: \\(r\\binom{n}{r} = r\\cdot\\frac{n(n-1)\\cdots(n-r+1)}{r!} = n\\cdot\\frac{(n-1)\\cdots(n-r+1)}{(r-1)!} = n\\binom{n-1}{r-1}\\) for \\(r \\ge 1\\) (the \\(r = 0\\) term is 0).",
+              "So \\(\\sum_{r=1}^{n} r\\binom{n}{r} = n\\left[\\binom{n-1}{0} + \\binom{n-1}{1} + \\ldots + \\binom{n-1}{n-1}\\right] = n \\cdot 2^{n-1}\\).",
+              "Total \\(= n \\cdot 2^{n-1} + 2^{n} = n \\cdot 2^{n-1} + 2 \\cdot 2^{n-1} = (n + 2)2^{n-1}\\).",
+              "Check \\(n = 2\\): \\(1 + 2(2) + 3(1) = 8\\) and \\((2 + 2)2^{1} = 8\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\binom{n}{0} + 2\\binom{n}{1} + \\ldots + (n + 1)\\binom{n}{n} = (n + 2)2^{n-1}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Prove that in the expansion of \\((1 + x)^{n}\\) the sum of the coefficients in the odd places equals the sum of those in the even places, and that each sum is \\(2^{n-1}\\). (5 marks)",
+            "explanation": "Put \\(x = 1\\) and \\(x = -1\\) in \\((1 + x)^{n}\\); add and subtract the two results.",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "Thus, sum of odd coefficients of a binomial expansion equals to the sum of its even coefficients."
+            },
+            "steps": [
+              "Let \\(P = \\binom{n}{0} + \\binom{n}{2} + \\binom{n}{4} + \\ldots\\) (odd places) and \\(Q = \\binom{n}{1} + \\binom{n}{3} + \\ldots\\) (even places).",
+              "\\(x = 1\\) in \\((1 + x)^{n} = \\sum\\binom{n}{r}x^{r}\\): \\(P + Q = 2^{n}\\).",
+              "\\(x = -1\\): \\((1 - 1)^{n} = \\binom{n}{0} - \\binom{n}{1} + \\binom{n}{2} - \\ldots\\), so \\(P - Q = 0\\).",
+              "Hence \\(P = Q\\), and \\(2P = 2^{n}\\), so \\(P = Q = 2^{n-1}\\).",
+              "Check \\(n = 5\\): \\(1 + 10 + 5 = 16\\) and \\(5 + 10 + 1 = 16 = 2^{4}\\)."
+            ],
+            "final_answer": "Hence proved: \\(\\binom{n}{0} + \\binom{n}{2} + \\ldots = \\binom{n}{1} + \\binom{n}{3} + \\ldots = 2^{n-1}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 Find the general term in the expansion of \\((1 + x)^{-4}\\), \\(|x| < 1\\), and use it to write the first four terms. (5 marks)",
+            "explanation": "Put \\(n = -4\\) in \\(T_{r+1} = \\frac{n(n-1)\\cdots(n-r+1)}{r!}x^{r}\\), take out \\((-1)^{r}\\) and complete the factorial.",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "take the minus signs out, and write the product with factorials so that it cancels"
+            },
+            "steps": [
+              "\\(T_{r+1} = \\frac{(-4)(-5)(-6)\\cdots(-4 - r + 1)}{r!}x^{r}\\); the last factor is \\(-(r + 3)\\) and there are \\(r\\) factors.",
+              "\\(= (-1)^{r}\\frac{4 \\cdot 5 \\cdot 6\\cdots(r + 3)}{r!}x^{r} = (-1)^{r}\\frac{1 \\cdot 2 \\cdot 3 \\cdot 4\\cdots(r + 3)}{1 \\cdot 2 \\cdot 3 \\cdot r!}x^{r}\\).",
+              "\\(= (-1)^{r}\\frac{r!\\,(r + 1)(r + 2)(r + 3)}{6 \\cdot r!}x^{r} = (-1)^{r}\\frac{(r + 1)(r + 2)(r + 3)}{6}x^{r}\\).",
+              "\\(r = 0, 1, 2, 3\\): \\(1\\), \\(-\\frac{2 \\cdot 3 \\cdot 4}{6}x = -4x\\), \\(\\frac{3 \\cdot 4 \\cdot 5}{6}x^{2} = 10x^{2}\\), \\(-\\frac{4 \\cdot 5 \\cdot 6}{6}x^{3} = -20x^{3}\\).",
+              "So \\((1 + x)^{-4} = 1 - 4x + 10x^{2} - 20x^{3} + \\ldots\\), \\(|x| < 1\\)."
+            ],
+            "final_answer": "\\(T_{r+1} = (-1)^{r}\\frac{(r + 1)(r + 2)(r + 3)}{6}x^{r}\\); \\((1 + x)^{-4} = 1 - 4x + 10x^{2} - 20x^{3} + \\ldots\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 Expand \\((8 - 3x)^{1/3}\\) up to four terms and state the values of \\(x\\) for which the expansion is valid. (5 marks)",
+            "explanation": "Take \\(8^{1/3} = 2\\) outside so that the bracket starts with 1; then \\(n = \\frac{1}{3}\\) and the second term is \\(-\\frac{3x}{8}\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "The first term must be 1. The form is"
+            },
+            "steps": [
+              "\\((8 - 3x)^{1/3} = 8^{1/3}\\left(1 - \\frac{3x}{8}\\right)^{1/3} = 2\\left(1 - \\frac{3x}{8}\\right)^{1/3}\\); valid for \\(\\left|\\frac{3x}{8}\\right| < 1\\), i.e. \\(|x| < \\frac{8}{3}\\).",
+              "Coefficients for \\(n = \\frac{1}{3}\\): \\(n = \\frac{1}{3}\\), \\(\\frac{n(n-1)}{2!} = -\\frac{1}{9}\\), \\(\\frac{n(n-1)(n-2)}{3!} = \\frac{5}{81}\\).",
+              "\\(\\left(1 - \\frac{3x}{8}\\right)^{1/3} = 1 + \\frac{1}{3}\\left(-\\frac{3x}{8}\\right) - \\frac{1}{9}\\left(\\frac{9x^{2}}{64}\\right) + \\frac{5}{81}\\left(-\\frac{27x^{3}}{512}\\right) + \\ldots\\)",
+              "\\(= 1 - \\frac{x}{8} - \\frac{x^{2}}{64} - \\frac{5x^{3}}{1536} - \\ldots\\)",
+              "Multiply by 2: \\((8 - 3x)^{1/3} = 2 - \\frac{x}{4} - \\frac{x^{2}}{32} - \\frac{5x^{3}}{768} - \\ldots\\)"
+            ],
+            "final_answer": "\\((8 - 3x)^{1/3} = 2 - \\frac{x}{4} - \\frac{x^{2}}{32} - \\frac{5x^{3}}{768} - \\ldots\\), valid for \\(|x| < \\frac{8}{3}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 Evaluate \\(\\sqrt[3]{126}\\) correct to three places of decimals by the binomial theorem. (5 marks)",
+            "explanation": "125 is the nearest perfect cube: \\(126 = 125\\left(1 + \\frac{1}{125}\\right)\\); take 5 out and expand with \\(n = \\frac{1}{3}\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "Strategy for a root or power of a number"
+            },
+            "steps": [
+              "\\(\\sqrt[3]{126} = (125)^{1/3}\\left(1 + \\frac{1}{125}\\right)^{1/3} = 5\\left(1 + \\frac{1}{125}\\right)^{1/3}\\), with \\(x = \\frac{1}{125} < 1\\).",
+              "\\(= 5\\left[1 + \\frac{1}{3}\\cdot\\frac{1}{125} - \\frac{1}{9}\\left(\\frac{1}{125}\\right)^{2} + \\frac{5}{81}\\left(\\frac{1}{125}\\right)^{3} - \\ldots\\right]\\).",
+              "\\(\\frac{1}{375} \\approx 0.0026667\\), \\(\\frac{1}{9}\\cdot\\frac{1}{15625} \\approx 0.0000071\\); the next term is about \\(0.00000003\\), too small to matter.",
+              "\\(\\approx 5[1 + 0.0026667 - 0.0000071] = 5(1.0026596) = 5.013298\\).",
+              "Correct to three decimal places, \\(\\sqrt[3]{126} \\approx 5.013\\). (Check: \\(5.013^{3} \\approx 125.98\\).)"
+            ],
+            "final_answer": "\\(\\sqrt[3]{126} \\approx 5.013\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 If \\(x\\) is so small that its cube and higher powers can be neglected, show that \\((1 + x)^{1/3}(1 - x)^{-2/3} \\approx 1 + x + \\frac{2}{3}x^{2}\\). (5 marks)",
+            "explanation": "Expand each bracket up to \\(x^{2}\\), multiply, and keep only terms up to \\(x^{2}\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "each multiply the second bracket"
+            },
+            "steps": [
+              "\\((1 + x)^{1/3} = 1 + \\frac{1}{3}x + \\frac{\\frac{1}{3}\\left(-\\frac{2}{3}\\right)}{2}x^{2} + \\ldots = 1 + \\frac{1}{3}x - \\frac{1}{9}x^{2} + \\ldots\\)",
+              "\\((1 - x)^{-2/3} = 1 + \\left(-\\frac{2}{3}\\right)(-x) + \\frac{\\left(-\\frac{2}{3}\\right)\\left(-\\frac{5}{3}\\right)}{2}x^{2} + \\ldots = 1 + \\frac{2}{3}x + \\frac{5}{9}x^{2} + \\ldots\\)",
+              "Product up to \\(x^{2}\\): \\(1 + \\left(\\frac{1}{3} + \\frac{2}{3}\\right)x + \\left(\\frac{5}{9} + \\frac{1}{3}\\cdot\\frac{2}{3} - \\frac{1}{9}\\right)x^{2}\\).",
+              "\\(= 1 + x + \\left(\\frac{5}{9} + \\frac{2}{9} - \\frac{1}{9}\\right)x^{2} = 1 + x + \\frac{6}{9}x^{2} = 1 + x + \\frac{2}{3}x^{2}\\).",
+              "Check \\(x = 0.01\\): \\((1.01)^{1/3}(0.99)^{-2/3} \\approx 1.010067\\) and \\(1 + 0.01 + 0.0000667 = 1.0100667\\)."
+            ],
+            "final_answer": "Hence shown: \\((1 + x)^{1/3}(1 - x)^{-2/3} \\approx 1 + x + \\frac{2}{3}x^{2}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "22 If \\(y = \\frac{1}{2}\\left(\\frac{1}{3}\\right) + \\frac{1 \\cdot 3}{2 \\cdot 4}\\left(\\frac{1}{3}\\right)^{2} + \\frac{1 \\cdot 3 \\cdot 5}{2 \\cdot 4 \\cdot 6}\\left(\\frac{1}{3}\\right)^{3} + \\ldots\\), prove that \\(2y^{2} + 4y - 1 = 0\\). (5 marks)",
+            "explanation": "Add 1 so that the series starts with 1, compare the 2nd and 3rd terms with \\(nx\\) and \\(\\frac{n(n-1)}{2!}x^{2}\\), then \\(1 + y = (1 + x)^{n}\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "forgetting to add 1 to both sides before comparing"
+            },
+            "steps": [
+              "\\(1 + y = 1 + \\frac{1}{2}\\left(\\frac{1}{3}\\right) + \\frac{1 \\cdot 3}{2 \\cdot 4}\\left(\\frac{1}{3}\\right)^{2} + \\ldots\\); compare with \\(1 + nx + \\frac{n(n-1)}{2!}x^{2} + \\ldots\\)",
+              "\\(nx = \\frac{1}{6}\\) (i) and \\(\\frac{n(n-1)}{2}x^{2} = \\frac{3}{8}\\cdot\\frac{1}{9} = \\frac{1}{24}\\) (ii). From (i), \\(x = \\frac{1}{6n}\\).",
+              "Put in (ii): \\(\\frac{n(n-1)}{2}\\cdot\\frac{1}{36n^{2}} = \\frac{1}{24} \\Rightarrow \\frac{n - 1}{72n} = \\frac{1}{24} \\Rightarrow n - 1 = 3n \\Rightarrow n = -\\frac{1}{2}\\).",
+              "Then \\(x = \\frac{1}{6\\left(-\\frac{1}{2}\\right)} = -\\frac{1}{3}\\); \\(|x| < 1\\). (Check of the 4th term: \\(\\frac{(-\\frac{1}{2})(-\\frac{3}{2})(-\\frac{5}{2})}{6}\\left(-\\frac{1}{27}\\right) = \\frac{15}{1296} = \\frac{1 \\cdot 3 \\cdot 5}{2 \\cdot 4 \\cdot 6}\\cdot\\frac{1}{27}\\).)",
+              "\\(1 + y = \\left(1 - \\frac{1}{3}\\right)^{-1/2} = \\left(\\frac{2}{3}\\right)^{-1/2} = \\sqrt{\\frac{3}{2}}\\).",
+              "Square: \\((1 + y)^{2} = \\frac{3}{2} \\Rightarrow 2(1 + 2y + y^{2}) = 3 \\Rightarrow 2y^{2} + 4y - 1 = 0\\)."
+            ],
+            "final_answer": "Hence proved: \\(1 + y = \\sqrt{\\frac{3}{2}}\\), so \\(2y^{2} + 4y - 1 = 0\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "23 Use the binomial theorem to show that \\(1 + \\frac{1}{3}\\left(\\frac{1}{2}\\right) + \\frac{1 \\cdot 4}{3 \\cdot 6}\\left(\\frac{1}{2}\\right)^{2} + \\frac{1 \\cdot 4 \\cdot 7}{3 \\cdot 6 \\cdot 9}\\left(\\frac{1}{2}\\right)^{3} + \\ldots = \\sqrt[3]{2}\\). (5 marks)",
+            "explanation": "Compare with \\((1 + X)^{n}\\): the 2nd term gives \\(nX\\), the 3rd gives \\(\\frac{n(n-1)}{2!}X^{2}\\); solve for \\(n\\) and \\(X\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "The binomial series are conveniently used for summation of infinite series."
+            },
+            "steps": [
+              "\\(nX = \\frac{1}{3}\\cdot\\frac{1}{2} = \\frac{1}{6}\\) (i); \\(\\frac{n(n-1)}{2}X^{2} = \\frac{4}{18}\\cdot\\frac{1}{4} = \\frac{1}{18}\\) (ii).",
+              "From (i) \\(X = \\frac{1}{6n}\\); in (ii): \\(\\frac{n(n-1)}{2}\\cdot\\frac{1}{36n^{2}} = \\frac{1}{18} \\Rightarrow \\frac{n - 1}{72n} = \\frac{1}{18} \\Rightarrow n - 1 = 4n \\Rightarrow n = -\\frac{1}{3}\\).",
+              "\\(X = \\frac{1}{6\\left(-\\frac{1}{3}\\right)} = -\\frac{1}{2}\\), and \\(|X| < 1\\).",
+              "Check the 4th term: \\(\\frac{\\left(-\\frac{1}{3}\\right)\\left(-\\frac{4}{3}\\right)\\left(-\\frac{7}{3}\\right)}{3!}\\left(-\\frac{1}{2}\\right)^{3} = \\frac{28}{162}\\cdot\\frac{1}{8} = \\frac{1 \\cdot 4 \\cdot 7}{3 \\cdot 6 \\cdot 9}\\left(\\frac{1}{2}\\right)^{3}\\).",
+              "Sum \\(= (1 + X)^{n} = \\left(1 - \\frac{1}{2}\\right)^{-1/3} = \\left(\\frac{1}{2}\\right)^{-1/3} = 2^{1/3} = \\sqrt[3]{2}\\)."
+            ],
+            "final_answer": "Hence shown: the series is \\(\\left(1 - \\frac{1}{2}\\right)^{-1/3} = \\sqrt[3]{2}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "24 Find the coefficient of \\(x^{n}\\) in the expansion of \\(\\frac{1 + 2x}{(1 - x)^{2}}\\), \\(|x| < 1\\). (5 marks)",
+            "explanation": "Write it as \\((1 + 2x)(1 - x)^{-2}\\); the \\(x^{n}\\) term comes from \\(1 \\times x^{n}\\) and \\(2x \\times x^{n-1}\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "term in the product comes from two places"
+            },
+            "steps": [
+              "\\(\\frac{1 + 2x}{(1 - x)^{2}} = (1 + 2x)(1 - x)^{-2}\\).",
+              "\\((1 - x)^{-2} = 1 + 2x + 3x^{2} + \\ldots + (r + 1)x^{r} + \\ldots\\) (general term \\((r + 1)x^{r}\\)).",
+              "Terms in \\(x^{n-1}\\) and \\(x^{n}\\): \\(nx^{n-1}\\) and \\((n + 1)x^{n}\\).",
+              "Coefficient of \\(x^{n}\\): \\(1 \\cdot (n + 1) + 2 \\cdot n = 3n + 1\\).",
+              "Check: \\(n = 2\\): \\((1 + 2x)(1 + 2x + 3x^{2})\\) has \\(x^{2}\\) coefficient \\(3 + 4 = 7 = 3(2) + 1\\)."
+            ],
+            "final_answer": "Coefficient of \\(x^{n}\\) \\(= 3n + 1\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "25 Expand \\((x - 3)^{5}\\) by the binomial theorem and check the coefficients with Pascal's triangle. (5 marks)",
+            "explanation": "Write \\(a = x\\), \\(b = -3\\); keep \\((-3)\\) in brackets so that the signs alternate.",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "row of Pascal's Triangle correspond to the binomial coefficients"
+            },
+            "steps": [
+              "\\({}^{5}C_{0}, \\ldots, {}^{5}C_{5} = 1, 5, 10, 10, 5, 1\\), which is row 5 of Pascal's triangle (from row 4: \\(1, 1 + 4, 4 + 6, 6 + 4, 4 + 1, 1\\)).",
+              "\\((x - 3)^{5} = x^{5} + 5x^{4}(-3) + 10x^{3}(-3)^{2} + 10x^{2}(-3)^{3} + 5x(-3)^{4} + (-3)^{5}\\).",
+              "Powers of \\(-3\\): \\(-3, 9, -27, 81, -243\\).",
+              "\\(= x^{5} - 15x^{4} + 90x^{3} - 270x^{2} + 405x - 243\\).",
+              "Check \\(x = 1\\): \\((1 - 3)^{5} = -32\\) and \\(1 - 15 + 90 - 270 + 405 - 243 = -32\\)."
+            ],
+            "final_answer": "\\((x - 3)^{5} = x^{5} - 15x^{4} + 90x^{3} - 270x^{2} + 405x - 243\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "26 Find the remainder when \\(5^{99}\\) is divided by 13, using the binomial theorem. (5 marks)",
+            "explanation": "\\(5^{2} = 25 = 26 - 1\\) is one less than a multiple of 13; write \\(5^{99} = 5 \\cdot (25)^{49}\\).",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "The idea of every example on this page: to divide a large power"
+            },
+            "steps": [
+              "\\(5^{99} = 5 \\cdot 5^{98} = 5(25)^{49} = 5(26 - 1)^{49}\\).",
+              "In \\((26 - 1)^{49}\\) every term except the last contains 26 (a multiple of 13); the last is \\((-1)^{49} = -1\\). So \\((26 - 1)^{49} = 13h - 1\\).",
+              "\\(5^{99} = 5(13h - 1) = 65h - 5 = 13(5h) - 5\\).",
+              "\\(= 13(5h - 1) + 8\\), and \\(0 \\le 8 < 13\\).",
+              "So the remainder is 8. (Check: \\(5^{4} = 625 = 13 \\times 48 + 1\\); \\(99 = 4 \\times 24 + 3\\), so \\(5^{99}\\) leaves the same as \\(5^{3} = 125 = 13 \\times 9 + 8\\).)"
+            ],
+            "final_answer": "The remainder is 8."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "27 Show that \\(9^{7} + 11^{9}\\) is divisible by 10. (5 marks)",
+            "explanation": "Write \\(9 = 10 - 1\\) and \\(11 = 10 + 1\\); the last terms \\(-1\\) and \\(+1\\) cancel.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "Expand both powers; all terms except the last ones contain 14, and the two last terms cancel."
+            },
+            "steps": [
+              "\\(9^{7} + 11^{9} = (10 - 1)^{7} + (10 + 1)^{9}\\).",
+              "\\((10 - 1)^{7} = {}^{7}C_{0}10^{7} - {}^{7}C_{1}10^{6} + \\ldots + {}^{7}C_{6}(10) - 1\\) (last term \\((-1)^{7} = -1\\)).",
+              "\\((10 + 1)^{9} = {}^{9}C_{0}10^{9} + {}^{9}C_{1}10^{8} + \\ldots + {}^{9}C_{8}(10) + 1\\).",
+              "Adding, \\(-1 + 1 = 0\\), and every remaining term contains 10.",
+              "So \\(9^{7} + 11^{9} = 10[{}^{7}C_{0}10^{6} - \\ldots + {}^{7}C_{6} + {}^{9}C_{0}10^{8} + \\ldots + {}^{9}C_{8}] = 10k\\), \\(k\\) an integer."
+            ],
+            "final_answer": "Hence proved: \\(9^{7} + 11^{9} = 10k\\) is divisible by 10."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "28 Find the last two digits of \\(41^{8}\\) using the binomial theorem. (5 marks)",
+            "explanation": "Last two digits = remainder on division by 100; in \\((40 + 1)^{8}\\) every term with \\(40^{2}\\) or more is a multiple of 100.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "Only the last two terms of the expansion will matter."
+            },
+            "steps": [
+              "\\(41^{8} = (40 + 1)^{8} = {}^{8}C_{0}40^{8} + \\ldots + {}^{8}C_{6}40^{2} + {}^{8}C_{7}40 + {}^{8}C_{8}\\).",
+              "Every term up to \\({}^{8}C_{6}40^{2}\\) contains \\(40^{2} = 1600\\), a multiple of 100.",
+              "Remaining: \\({}^{8}C_{7}(40) + 1 = 8(40) + 1 = 321\\).",
+              "\\(41^{8} = (\\text{multiple of } 100) + 321 = 100k + 21\\).",
+              "So the last two digits are 21. (Check: \\(41^{2} = 1681\\), \\(41^{4} \\equiv 81^{2} = 6561\\), \\(41^{8} \\equiv 61^{2} = 3721\\): ends in 21.)"
+            ],
+            "final_answer": "The last two digits of \\(41^{8}\\) are 21."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "29 Rs. 200,000 is invested at 4% compound interest per year for 3 years. Using the binomial theorem, find the exact amount, the estimate from the first three terms, and the difference. (5 marks)",
+            "explanation": "\\(A = P(1 + r)^{t}\\); expand \\((1 + 0.04)^{3}\\) with the coefficients \\(1, 3, 3, 1\\).",
+            "book_ref": {
+              "topic_id": "19937ae1-a3a7-5a0e-89fe-e7421e22ac91",
+              "quote": "with compound interest each year's interest is added to the amount"
+            },
+            "steps": [
+              "\\(A = 200000(1 + 0.04)^{3}\\) (\\(P = 200000\\), \\(r = 0.04\\), \\(t = 3\\)).",
+              "\\((1 + 0.04)^{3} = 1 + 3(0.04) + 3(0.04)^{2} + (0.04)^{3} = 1 + 0.12 + 0.0048 + 0.000064 = 1.124864\\).",
+              "Exact amount: \\(200000 \\times 1.124864 = 224972.80\\).",
+              "Three terms: \\(1 + 0.12 + 0.0048 = 1.1248\\); estimate \\(200000 \\times 1.1248 = 224960\\).",
+              "Difference \\(= 200000 \\times (0.04)^{3} = 200000 \\times 0.000064 = 12.80\\)."
+            ],
+            "final_answer": "Exact amount Rs. 224,972.80; three-term estimate Rs. 224,960; difference Rs. 12.80."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "30 A shop starts with 300 items. Every month it sells half of its stock and then restocks 60 items. Find a formula for the stock \\(I_{n}\\) after \\(n\\) months, prove it by mathematical induction, and find \\(I_{4}\\). (5 marks)",
+            "explanation": "Recurrence \\(I_{n+1} = 0.5I_{n} + 60\\); the fixed level \\(L\\) satisfies \\(L = 0.5L + 60\\); then \\(I_{n} = L + (I_{0} - L)(0.5)^{n}\\).",
+            "book_ref": {
+              "topic_id": "19937ae1-a3a7-5a0e-89fe-e7421e22ac91",
+              "quote": "Write the month-to-month rule (a recurrence relation), find a formula for"
+            },
+            "steps": [
+              "Rule: \\(I_{n+1} = 0.5\\,I_{n} + 60\\), \\(I_{0} = 300\\). First values: \\(I_{1} = 210\\), \\(I_{2} = 165\\), \\(I_{3} = 142.5\\).",
+              "Fixed level: \\(L = 0.5L + 60 \\Rightarrow L = 120\\); \\(I_{0} - L = 180\\). Formula: \\(I_{n} = 120 + 180(0.5)^{n}\\) (gives 210, 165, 142.5).",
+              "Base case \\(n = 0\\): \\(120 + 180(0.5)^{0} = 300 = I_{0}\\).",
+              "Hypothesis: \\(I_{k} = 120 + 180(0.5)^{k}\\). Then \\(I_{k+1} = 0.5\\left(120 + 180(0.5)^{k}\\right) + 60 = 60 + 180(0.5)^{k+1} + 60 = 120 + 180(0.5)^{k+1}\\).",
+              "So the formula holds for \\(k + 1\\); by induction it holds for all \\(n \\ge 0\\).",
+              "\\(I_{4} = 120 + 180(0.5)^{4} = 120 + \\frac{180}{16} = 120 + 11.25 = 131.25\\), about 131 items."
+            ],
+            "final_answer": "\\(I_{n} = 120 + 180(0.5)^{n}\\) for all \\(n \\ge 0\\); \\(I_{4} = 131.25\\), about 131 items."
+          }
+        ]
+      }
+    }
+  ]
+}

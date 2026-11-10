@@ -1,0 +1,389 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH7-LONG",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch7",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch7/u-long-questions",
+      "title": "Long Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 128,
+          "pdf_to": 144,
+          "note": "Practice long questions written from Unit 7 (PDF 128-144, printed 123-139); not printed in the book. Based on the unit's text, theorems, formulas and worked examples (changed values); none repeats the unit's exercises. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice long questions for the whole of Unit 7 (Permutation and Combination), in the shape of a Board Section-II question part: each carries 5 marks (a longer problem, a proof or a derivation). Each one is solved in full, step by step."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 State the Fundamental Principle of Counting. A canteen offers 4 sandwiches, 3 drinks and 2 desserts. How many meals of one sandwich, one drink and one dessert are possible? How many if the meal may also be taken without a dessert? (5 marks)",
+            "explanation": "Each stage multiplies; 'no dessert' is one more choice at the dessert stage.",
+            "book_ref": {
+              "topic_id": "4a6cdb51-beb1-5b26-aa3b-0e1d88961329",
+              "quote": "then the total number of ways that the two events together can occur is the product of m and n."
+            },
+            "steps": [
+              "Statement: if one event can occur in \\(m\\) ways and, after it, a second in \\(n\\) ways, both together can occur in \\(m \\times n\\) ways; this extends to three or more events.",
+              "Stages: sandwich 4 ways, drink 3 ways, dessert 2 ways.",
+              "Meals: \\(4 \\times 3 \\times 2 = 24\\).",
+              "Without dessert allowed: the dessert stage has \\(2 + 1 = 3\\) choices.",
+              "Meals: \\(4 \\times 3 \\times 3 = 36\\)."
+            ],
+            "final_answer": "24 meals; 36 meals when the dessert may be left out."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Show that \\(\\frac{(n + 1)!}{(n - 1)!} = n^{2} + n\\), and hence find \\(n\\) if \\(\\frac{(n + 1)!}{(n - 1)!} = 56\\). (5 marks)",
+            "explanation": "Write \\((n + 1)! = (n + 1)\\,n\\,(n - 1)!\\), cancel, then solve the quadratic.",
+            "book_ref": {
+              "topic_id": "4a6cdb51-beb1-5b26-aa3b-0e1d88961329",
+              "quote": "Factorials grow very fast:"
+            },
+            "steps": [
+              "\\((n + 1)! = (n + 1)\\,n\\,(n - 1)!\\).",
+              "\\(\\frac{(n + 1)!}{(n - 1)!} = (n + 1)n = n^{2} + n\\).",
+              "\\(n^{2} + n = 56 \\Rightarrow n^{2} + n - 56 = 0\\).",
+              "\\((n + 8)(n - 7) = 0 \\Rightarrow n = 7\\) or \\(n = -8\\).",
+              "\\(n\\) must be a positive integer, so \\(n = -8\\) is rejected. Check: \\(\\frac{8!}{6!} = 8 \\cdot 7 = 56\\)."
+            ],
+            "final_answer": "\\(\\frac{(n + 1)!}{(n - 1)!} = n^{2} + n\\); \\(n = 7\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Prove that \\({}^{n}P_{r} = n(n - 1)(n - 2)\\cdots(n - r + 1) = \\frac{n!}{(n - r)!}\\), and use it to explain why \\(0! = 1\\). (5 marks)",
+            "explanation": "Fill \\(r\\) places one by one with the Fundamental Principle of Counting, then multiply and divide by \\((n - r)!\\).",
+            "book_ref": {
+              "topic_id": "cace83bf-7d25-54f7-91ee-9a3d9144c211",
+              "quote": "Since repetitions are not allowed, after placing one object we are left with"
+            },
+            "steps": [
+              "Arranging \\(r\\) of \\(n\\) different objects is filling \\(r\\) places. The first place can be filled in \\(n\\) ways; with no repetition, the second in \\(n - 1\\) ways, the third in \\(n - 2\\) ways.",
+              "Before the \\(r\\)th place, \\(r - 1\\) objects are used, so it can be filled in \\(n - (r - 1) = n - r + 1\\) ways.",
+              "By the Fundamental Principle of Counting, \\({}^{n}P_{r} = n(n - 1)(n - 2)\\cdots(n - r + 1)\\).",
+              "Multiply and divide by \\((n - r)!\\): \\({}^{n}P_{r} = \\frac{n(n - 1)\\cdots(n - r + 1)(n - r)!}{(n - r)!} = \\frac{n!}{(n - r)!}\\).",
+              "For \\(r = n\\): all \\(n\\) objects are arranged in \\(n!\\) ways, and the formula gives \\(\\frac{n!}{0!}\\). So \\(n! = \\frac{n!}{0!}\\), which requires \\(0! = 1\\)."
+            ],
+            "final_answer": "\\({}^{n}P_{r} = \\frac{n!}{(n - r)!}\\), and \\({}^{n}P_{n} = n!\\) forces \\(0! = 1\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 4-digit numbers are formed from the digits 1, 2, 3, 4, 5, 6, 7 without repetition. How many are (i) possible in all (ii) even (iii) greater than 5000 (iv) greater than 5000 and even? (5 marks)",
+            "explanation": "Always fill the restricted place first; in (iv) split on whether the first digit is even.",
+            "book_ref": {
+              "topic_id": "cace83bf-7d25-54f7-91ee-9a3d9144c211",
+              "quote": "The thousands place has 6 choices, then 5, 4 and 3 for the remaining places."
+            },
+            "steps": [
+              "(i) \\({}^{7}P_{4} = 7 \\cdot 6 \\cdot 5 \\cdot 4 = 840\\).",
+              "(ii) Units digit 2, 4 or 6: 3 ways; other places \\(6 \\cdot 5 \\cdot 4 = 120\\); total \\(360\\).",
+              "(iii) Thousands digit 5, 6 or 7: 3 ways; other places \\(6 \\cdot 5 \\cdot 4 = 120\\); total \\(360\\).",
+              "(iv) First digit 5 or 7 (odd): \\(2\\) ways, units from 2, 4, 6: \\(3\\) ways, middle \\(5 \\cdot 4 = 20\\): \\(2 \\cdot 3 \\cdot 20 = 120\\).",
+              "First digit 6 (even): units from 2, 4: \\(2\\) ways, middle \\(20\\): \\(40\\). Total \\(120 + 40 = 160\\)."
+            ],
+            "final_answer": "(i) 840 (ii) 360 (iii) 360 (iv) 160."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 5 different Urdu, 2 different English and 3 different Islamiat books are to be placed on a shelf. In how many ways can this be done if (i) there is no condition (ii) books of each subject are together (iii) only the English books must be together? (5 marks)",
+            "explanation": "Treat each group that must stay together as one block; arrange the blocks, then arrange inside each block.",
+            "book_ref": {
+              "topic_id": "cace83bf-7d25-54f7-91ee-9a3d9144c211",
+              "quote": "forgetting the 3! that arranges the subject blocks themselves"
+            },
+            "steps": [
+              "(i) 10 different books: \\(10! = 3628800\\).",
+              "(ii) Three subject blocks arranged in \\(3! = 6\\) ways.",
+              "Inside: Urdu \\(5! = 120\\), English \\(2! = 2\\), Islamiat \\(3! = 6\\); total \\(6 \\times 120 \\times 2 \\times 6 = 8640\\).",
+              "(iii) English block + 8 other books = 9 units: \\(9! = 362880\\) ways.",
+              "Inside the English block \\(2!\\): \\(362880 \\times 2 = 725760\\)."
+            ],
+            "final_answer": "(i) 3628800 (ii) 8640 (iii) 725760."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 4 boys and 3 girls are to stand in a row. In how many ways can they stand if (i) no two girls are next to each other (ii) all the girls are together? (5 marks)",
+            "explanation": "(i) Gap method: seat the boys, put the girls in the gaps. (ii) Block method.",
+            "book_ref": {
+              "topic_id": "cace83bf-7d25-54f7-91ee-9a3d9144c211",
+              "quote": "this leaves 4 gaps, and the 3 people take 3 of them in"
+            },
+            "steps": [
+              "(i) Boys first: \\(4! = 24\\) ways. They make 5 gaps: _ B _ B _ B _ B _.",
+              "Girls take 3 of the 5 gaps in order: \\({}^{5}P_{3} = 60\\); total \\(24 \\times 60 = 1440\\).",
+              "(ii) The 3 girls as one block: 4 boys + 1 block = 5 units in \\(5! = 120\\) ways.",
+              "Inside the block: \\(3! = 6\\) ways.",
+              "Total \\(120 \\times 6 = 720\\)."
+            ],
+            "final_answer": "(i) 1440 (ii) 720."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 In how many ways can 6 people sit on a bench if (i) there is no condition (ii) two particular people sit together (iii) these two do not sit together? (5 marks)",
+            "explanation": "Use the block method for 'together' and subtract from the total for 'not together'.",
+            "book_ref": {
+              "topic_id": "cace83bf-7d25-54f7-91ee-9a3d9144c211",
+              "quote": "every seating either has A and B together or not"
+            },
+            "steps": [
+              "(i) \\(6! = 720\\).",
+              "(ii) The two as one unit: 5 units in \\(5! = 120\\) ways.",
+              "Inside the unit \\(2! = 2\\): \\(120 \\times 2 = 240\\).",
+              "(iii) Every seating has the two either together or apart.",
+              "Apart \\(= 720 - 240 = 480\\)."
+            ],
+            "final_answer": "(i) 720 (ii) 240 (iii) 480."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Find the number of arrangements of the letters of the word STATISTICS. How many of them begin and end with S? (5 marks)",
+            "explanation": "Count each repeated letter, use \\(\\frac{n!}{n_{1}!\\,n_{2}!\\cdots}\\); for the second part fix the two S and arrange the middle 8.",
+            "book_ref": {
+              "topic_id": "83494997-9435-56bc-bdd4-6063c007e069",
+              "quote": "Adding the repeats instead of taking their factorials"
+            },
+            "steps": [
+              "STATISTICS has 10 letters: S 3 times, T 3 times, I 2 times, A once, C once.",
+              "Arrangements \\(= \\frac{10!}{3!\\,3!\\,2!} = \\frac{3628800}{72} = 50400\\).",
+              "Begin and end with S: two S are fixed at the ends; the middle 8 letters are T, A, T, I, T, I, C, S.",
+              "Middle letters: T 3 times, I 2 times, A, C, S once each.",
+              "Arrangements \\(= \\frac{8!}{3!\\,2!} = \\frac{40320}{12} = 3360\\)."
+            ],
+            "final_answer": "50400 arrangements; 3360 begin and end with S."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Find the number of arrangements of the letters of BALLOON. In how many of them are the two L together, and in how many are they not together? (5 marks)",
+            "explanation": "Use alike-object counting; treat LL as one letter for 'together' and subtract for 'not together'.",
+            "book_ref": {
+              "topic_id": "83494997-9435-56bc-bdd4-6063c007e069",
+              "quote": "so every real word has been counted"
+            },
+            "steps": [
+              "BALLOON: 7 letters, L twice, O twice: \\(\\frac{7!}{2!\\,2!} = \\frac{5040}{4} = 1260\\).",
+              "L together: treat LL as one letter; units B, A, (LL), O, O, N = 6, with O twice.",
+              "Arrangements \\(= \\frac{6!}{2!} = 360\\) (the two L are alike, so there is no inside swap).",
+              "Not together \\(= 1260 - 360\\).",
+              "\\(= 900\\)."
+            ],
+            "final_answer": "1260 in all; 360 with LL together; 900 with the L apart."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Explain why \\(n\\) different objects can be arranged in a circle in \\((n - 1)!\\) ways, and in \\(\\frac{(n - 1)!}{2}\\) ways when clockwise and anticlockwise orders are the same. Hence find the number of seatings of 8 people at a round table and of necklaces of 8 different beads. (5 marks)",
+            "explanation": "Rotations give no new circle, so fix one object; a necklace can be turned over, so halve.",
+            "book_ref": {
+              "topic_id": "83494997-9435-56bc-bdd4-6063c007e069",
+              "quote": "fix one person's seat (rotation no longer matters)"
+            },
+            "steps": [
+              "In a row \\(n\\) objects give \\(n!\\) arrangements. Turning a circle through one place gives the same circular arrangement; each circle appears as \\(n\\) different rows.",
+              "So circular arrangements \\(= \\frac{n!}{n} = (n - 1)!\\) (Case-I), as if one object's place is fixed and the rest are arranged.",
+              "If the arrangement can be turned over (necklace, garland), each circle and its mirror image are the same, so divide by 2: \\(\\frac{(n - 1)!}{2}\\) for \\(n \\ge 3\\) (Case-II).",
+              "8 people at a table (Case-I): \\(7! = 5040\\).",
+              "8-bead necklace (Case-II): \\(\\frac{7!}{2} = 2520\\)."
+            ],
+            "final_answer": "Round table: 5040 seatings; necklace: 2520."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 7 people are to sit at a round table. In how many ways can they sit if (i) there is no condition (ii) two particular people sit together (iii) these two do not sit together? (5 marks)",
+            "explanation": "Case-I circular count; block method for together; subtract for apart.",
+            "book_ref": {
+              "topic_id": "83494997-9435-56bc-bdd4-6063c007e069",
+              "quote": "4 people round a table give"
+            },
+            "steps": [
+              "(i) \\((7 - 1)! = 6! = 720\\).",
+              "(ii) The two as one unit: 6 units round the table in \\((6 - 1)! = 120\\) ways.",
+              "Inside the unit \\(2!\\): \\(120 \\times 2 = 240\\).",
+              "(iii) Apart \\(= 720 - 240\\).",
+              "\\(= 480\\)."
+            ],
+            "final_answer": "(i) 720 (ii) 240 (iii) 480."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Prove that \\({}^{n}C_{r} = \\frac{n!}{r!\\,(n - r)!}\\). Deduce that \\({}^{n}C_{n} = {}^{n}C_{0} = 1\\), and verify the formula for \\({}^{9}C_{4}\\). (5 marks)",
+            "explanation": "Each combination of \\(r\\) objects gives \\(r!\\) permutations, so \\({}^{n}C_{r} \\times r! = {}^{n}P_{r}\\).",
+            "book_ref": {
+              "topic_id": "97f0a3f4-6a9d-5f48-ab23-d86da0e39e8a",
+              "quote": "So, each combination will give rise to"
+            },
+            "steps": [
+              "Each combination of \\(r\\) objects can be arranged among themselves in \\(r!\\) ways, so all combinations together give \\({}^{n}C_{r} \\times r!\\) permutations.",
+              "These are exactly all permutations of \\(r\\) out of \\(n\\): \\({}^{n}C_{r} \\times r! = {}^{n}P_{r} = \\frac{n!}{(n - r)!}\\).",
+              "Hence \\({}^{n}C_{r} = \\frac{n!}{r!\\,(n - r)!}\\).",
+              "\\(r = n\\): \\({}^{n}C_{n} = \\frac{n!}{n!\\,0!} = 1\\); \\(r = 0\\): \\({}^{n}C_{0} = \\frac{n!}{0!\\,n!} = 1\\).",
+              "\\({}^{9}C_{4} = \\frac{9!}{4!\\,5!} = \\frac{9 \\cdot 8 \\cdot 7 \\cdot 6}{24} = 126\\), and \\(126 \\times 4! = 3024 = {}^{9}P_{4}\\)."
+            ],
+            "final_answer": "\\({}^{n}C_{r} = \\frac{n!}{r!\\,(n - r)!}\\); \\({}^{n}C_{n} = {}^{n}C_{0} = 1\\); \\({}^{9}C_{4} = 126\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 10 points lie in a plane and no three of them are on one straight line. Find the number of (i) straight lines (ii) triangles (iii) quadrilaterals (choosing 4 vertices) that can be formed. Also, how many handshakes take place among 10 people? (5 marks)",
+            "explanation": "Each figure is fixed by which points are chosen, not their order: use combinations.",
+            "book_ref": {
+              "topic_id": "97f0a3f4-6a9d-5f48-ab23-d86da0e39e8a",
+              "quote": "A combination of \\(r\\) objects taken out of \\(n\\) objects is a subset of"
+            },
+            "steps": [
+              "(i) A line is fixed by 2 points: \\({}^{10}C_{2} = \\frac{10 \\cdot 9}{2} = 45\\).",
+              "(ii) A triangle by 3 points: \\({}^{10}C_{3} = \\frac{10 \\cdot 9 \\cdot 8}{6} = 120\\).",
+              "(iii) Choosing 4 vertices: \\({}^{10}C_{4} = \\frac{10 \\cdot 9 \\cdot 8 \\cdot 7}{24} = 210\\).",
+              "Handshakes: each is a pair of people, order does not matter.",
+              "\\({}^{10}C_{2} = 45\\), the same count as the lines."
+            ],
+            "final_answer": "(i) 45 lines (ii) 120 triangles (iii) 210 choices of 4 vertices; 45 handshakes."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 A committee of 5 is to be chosen from 7 men and 5 women. In how many ways can this be done if the committee contains (i) exactly 2 women (ii) at least 4 women (iii) no woman (iv) at most one woman? (5 marks)",
+            "explanation": "Choose men and women separately and multiply; for 'at least' or 'at most', add the cases.",
+            "book_ref": {
+              "topic_id": "117f7003-b383-515c-9604-7d28ab2099b7",
+              "quote": "Girls AND boys are chosen together, so multiply."
+            },
+            "steps": [
+              "(i) 2 women and 3 men: \\({}^{5}C_{2} \\times {}^{7}C_{3} = 10 \\times 35 = 350\\).",
+              "(ii) 4 women 1 man: \\({}^{5}C_{4} \\times {}^{7}C_{1} = 35\\); 5 women: \\({}^{5}C_{5} = 1\\); total \\(36\\).",
+              "(iii) All 5 men: \\({}^{7}C_{5} = 21\\).",
+              "(iv) No woman: \\(21\\); one woman and 4 men: \\({}^{5}C_{1} \\times {}^{7}C_{4} = 5 \\times 35 = 175\\).",
+              "Total \\(21 + 175 = 196\\)."
+            ],
+            "final_answer": "(i) 350 (ii) 36 (iii) 21 (iv) 196."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 A team of 5 players is to be chosen from 9 players. In how many ways can it be chosen if (i) there is no condition (ii) a particular player must be in the team (iii) that player must be left out? Show that (ii) and (iii) together give (i). (5 marks)",
+            "explanation": "Put the particular player in (or out) first, then choose the rest from the others.",
+            "book_ref": {
+              "topic_id": "117f7003-b383-515c-9604-7d28ab2099b7",
+              "quote": "the remaining 3 places must still be filled with boys"
+            },
+            "steps": [
+              "(i) \\({}^{9}C_{5} = \\frac{9 \\cdot 8 \\cdot 7 \\cdot 6 \\cdot 5}{120} = 126\\).",
+              "(ii) He is in; choose 4 more from the other 8: \\({}^{8}C_{4} = 70\\).",
+              "(iii) He is out; choose all 5 from the other 8: \\({}^{8}C_{5} = {}^{8}C_{3} = 56\\).",
+              "Every team either has him or does not, and no team is in both lists.",
+              "So \\(70 + 56 = 126 = {}^{9}C_{5}\\)."
+            ],
+            "final_answer": "(i) 126 (ii) 70 (iii) 56, and 70 + 56 = 126."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 Prove that \\({}^{n}C_{r} = {}^{n}C_{n - r}\\). Hence evaluate \\({}^{50}C_{48}\\) and find \\(n\\) if \\({}^{n}C_{3} = {}^{n}C_{9}\\). (5 marks)",
+            "explanation": "Replace \\(r\\) by \\(n - r\\) in the formula and compare; then use the smaller of \\(r\\) and \\(n - r\\).",
+            "book_ref": {
+              "topic_id": "e1f477a0-90a8-5fa2-a0e0-e79145d01ecc",
+              "quote": "Corresponding to every combination of"
+            },
+            "steps": [
+              "\\({}^{n}C_{n - r} = \\frac{n!}{(n - r)!\\,(n - (n - r))!} = \\frac{n!}{(n - r)!\\,r!}\\).",
+              "This equals \\(\\frac{n!}{r!\\,(n - r)!} = {}^{n}C_{r}\\). (Every choice of \\(r\\) objects leaves exactly one group of \\(n - r\\).)",
+              "\\({}^{50}C_{48} = {}^{50}C_{2} = \\frac{50 \\cdot 49}{2} = 1225\\).",
+              "\\({}^{n}C_{3} = {}^{n}C_{9}\\) with \\(3 \\ne 9\\) means \\(3 = n - 9\\).",
+              "So \\(n = 12\\)."
+            ],
+            "final_answer": "\\({}^{n}C_{r} = {}^{n}C_{n - r}\\); \\({}^{50}C_{48} = 1225\\); \\(n = 12\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Show that a polygon of \\(n\\) sides has \\(\\frac{n(n - 3)}{2}\\) diagonals. Find the number of diagonals of a 10-sided polygon, and the number of sides of a polygon with 44 diagonals. (5 marks)",
+            "explanation": "Any 2 vertices give a segment; remove the \\(n\\) sides.",
+            "book_ref": {
+              "topic_id": "e1f477a0-90a8-5fa2-a0e0-e79145d01ecc",
+              "quote": "A diagonal joins two vertices that are not next to each other"
+            },
+            "steps": [
+              "Any 2 of the \\(n\\) vertices give a segment: \\({}^{n}C_{2} = \\frac{n(n - 1)}{2}\\); \\(n\\) of these are sides.",
+              "Diagonals \\(= \\frac{n(n - 1)}{2} - n = \\frac{n^{2} - 3n}{2} = \\frac{n(n - 3)}{2}\\).",
+              "10 sides: \\(\\frac{10 \\times 7}{2} = 35\\).",
+              "\\(\\frac{n(n - 3)}{2} = 44 \\Rightarrow n^{2} - 3n - 88 = 0 \\Rightarrow (n - 11)(n + 8) = 0\\).",
+              "\\(n = -8\\) is rejected, so \\(n = 11\\). Check: \\(\\frac{11 \\times 8}{2} = 44\\)."
+            ],
+            "final_answer": "Diagonals = n(n - 3)/2; a decagon has 35; 44 diagonals means 11 sides."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 A PIN of 4 characters is made from the 15 characters A to O. Find the number of PINs (i) if no character is repeated (ii) if characters may be repeated. If someone guesses one PIN at random, what is the chance of being right in each case? (5 marks)",
+            "explanation": "Order matters in a PIN: permutation without repetition, power with repetition.",
+            "book_ref": {
+              "topic_id": "e1f477a0-90a8-5fa2-a0e0-e79145d01ecc",
+              "quote": "With repetition each place has all 36 choices"
+            },
+            "steps": [
+              "Order matters, since ABCD and DCBA are different PINs.",
+              "(i) \\({}^{15}P_{4} = 15 \\cdot 14 \\cdot 13 \\cdot 12 = 32760\\).",
+              "(ii) Each of the 4 places has all 15 choices: \\(15^{4} = 50625\\).",
+              "Chance (i): \\(\\frac{1}{32760}\\).",
+              "Chance (ii): \\(\\frac{1}{50625}\\); allowing repetition makes guessing harder."
+            ],
+            "final_answer": "(i) 32760, chance \\(\\frac{1}{32760}\\) (ii) 50625, chance \\(\\frac{1}{50625}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 Cards numbered 1 to 20 are in a box and 4 cards are drawn one by one. Hamid wins if he draws 5, 10, 15, 20. Find his chance of winning if (i) the cards must come in exactly that order (ii) the order does not matter. (5 marks)",
+            "explanation": "Ordered draws use \\({}^{20}P_{4}\\); unordered sets use \\({}^{20}C_{4}\\); one winning outcome in each case.",
+            "book_ref": {
+              "topic_id": "e1f477a0-90a8-5fa2-a0e0-e79145d01ecc",
+              "quote": "This is why real lotteries where the order does not matter are counted with combinations."
+            },
+            "steps": [
+              "(i) Ordered draws: \\({}^{20}P_{4} = 20 \\cdot 19 \\cdot 18 \\cdot 17 = 116280\\).",
+              "Only one order wins: chance \\(\\frac{1}{116280} \\approx 0.0000086\\).",
+              "(ii) Sets of 4 cards: \\({}^{20}C_{4} = \\frac{116280}{4!} = \\frac{116280}{24} = 4845\\).",
+              "Only one set wins: chance \\(\\frac{1}{4845} \\approx 0.000206\\).",
+              "The chance in (ii) is \\(4! = 24\\) times the chance in (i)."
+            ],
+            "final_answer": "(i) \\(\\frac{1}{116280}\\) (ii) \\(\\frac{1}{4845}\\), which is 24 times larger."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 A singer knows 12 songs and will sing 4 of them in a programme. Find the number of programmes if (i) the order of the songs matters (ii) only the choice of songs matters. Show how the two answers are related. (5 marks)",
+            "explanation": "Ordered list: \\({}^{12}P_{4}\\); a set of songs: \\({}^{12}C_{4}\\); each set gives \\(4!\\) orders.",
+            "book_ref": {
+              "topic_id": "e1f477a0-90a8-5fa2-a0e0-e79145d01ecc",
+              "quote": "Each set of 5 songs can be played in"
+            },
+            "steps": [
+              "(i) Order matters: \\({}^{12}P_{4} = 12 \\cdot 11 \\cdot 10 \\cdot 9 = 11880\\).",
+              "(ii) Only the choice: \\({}^{12}C_{4} = \\frac{11880}{4!}\\).",
+              "\\(= \\frac{11880}{24} = 495\\).",
+              "Each set of 4 songs can be sung in \\(4! = 24\\) orders.",
+              "So \\({}^{12}P_{4} = 4!\\,{}^{12}C_{4}\\): \\(495 \\times 24 = 11880\\)."
+            ],
+            "final_answer": "(i) 11880 (ii) 495; 11880 = 4! x 495."
+          }
+        ]
+      }
+    }
+  ]
+}

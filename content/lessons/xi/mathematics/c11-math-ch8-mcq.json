@@ -1,0 +1,2902 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-MCQ",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-mcq",
+      "title": "MCQs",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 145,
+          "pdf_to": 174,
+          "note": "Practice MCQs written from Unit 8 (PDF 145-174, printed 140-169); not printed in the book. Based on the unit's text, theorems, formulas and worked examples (changed values); none repeats the unit's exercises. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice MCQs for the whole of Unit 8 (Mathematical Induction and Binomial Theorem), arranged by the unit's sections. Each question has one correct answer with a short explanation that shows the working."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.1 Principle of Mathematical Induction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "1 Who devised the method of mathematical induction and first used it to prove that the sum of the first \\(n\\) odd positive integers is \\(n^{2}\\)?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Francesco Maurolico"
+              },
+              {
+                "id": "b",
+                "text": "Leonhard Euler"
+              },
+              {
+                "id": "c",
+                "text": "Blaise Pascal"
+              },
+              {
+                "id": "d",
+                "text": "Isaac Newton"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "The unit's introduction: Francesco Maurolico (1494-1575) devised the method of induction and first used it for the sum of the first n odd positive integers.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "devised the method of induction and applied this device first to prove"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "2 A single case which fails a mathematical formula or statement is called",
+            "options": [
+              {
+                "id": "a",
+                "text": "a hypothesis"
+              },
+              {
+                "id": "b",
+                "text": "a base case"
+              },
+              {
+                "id": "c",
+                "text": "a counter example"
+              },
+              {
+                "id": "d",
+                "text": "an induction step"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "One exception is enough to prove a formula false; such a case is called a counter example.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "Such a case or exception which fails the mathematical formula or statement is called a counter example."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "3 The claim \"\\(n^{2} - n + 41\\) is a prime number for every natural number \\(n\\)\" first fails at",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(n = 40\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(n = 41\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(n = 11\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(n = 1\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "For \\(n = 1\\) to \\(40\\) the values are prime (e.g. \\(n = 40\\) gives \\(1601\\), a prime). At \\(n = 41\\): \\(41^{2} - 41 + 41 = 41^{2} = 1681\\), which has the factor 41.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "as a counter example which fails the claim of the above statement"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "4 The counter example for \"\\(n^{2} - n + 41\\) is always prime\" was discovered by",
+            "options": [
+              {
+                "id": "a",
+                "text": "Maurolico"
+              },
+              {
+                "id": "b",
+                "text": "Pascal"
+              },
+              {
+                "id": "c",
+                "text": "Newton"
+              },
+              {
+                "id": "d",
+                "text": "Euler"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "The unit states that this example was discovered by Euler (1707-1783).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "This example was discovered by Euler (1707-1783)."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "5 Using \\(1 + 3 + 5 + \\ldots + (2n - 1) = n^{2}\\), the sum \\(1 + 3 + 5 + \\ldots + 29\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(196\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(225\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(256\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(841\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "\\(2n - 1 = 29 \\Rightarrow n = 15\\), so the sum is \\(15^{2} = 225\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "We see that each sum is the square of the number of terms in the sum."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "6 The \\(n\\)th term of the odd numbers \\(1, 3, 5, \\ldots\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(2n + 1\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(1 - 2(n - 1)\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(2n - 1\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(n^{2}\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "First term 1, common difference 2: \\(a_{n} = 1 + 2(n - 1) = 2n - 1\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "The correct statement (i) is"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "7 For a statement \\(S(n)\\) about every positive integer \\(n\\), the base case of mathematical induction is to show that",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(S(1)\\) is true"
+              },
+              {
+                "id": "b",
+                "text": "\\(S(0)\\) is true"
+              },
+              {
+                "id": "c",
+                "text": "\\(S(k)\\) is true"
+              },
+              {
+                "id": "d",
+                "text": "\\(S(k + 1)\\) is true"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "For positive integers the first value is \\(n = 1\\), so the base case is \\(S(1)\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "The principle of mathematical induction is stated as follows:"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "8 In the second condition of mathematical induction we",
+            "options": [
+              {
+                "id": "a",
+                "text": "prove \\(S(k)\\) for every \\(k\\) directly"
+              },
+              {
+                "id": "b",
+                "text": "check \\(S(1)\\) and \\(S(2)\\) only"
+              },
+              {
+                "id": "c",
+                "text": "assume \\(S(k + 1)\\) and deduce \\(S(k)\\)"
+              },
+              {
+                "id": "d",
+                "text": "assume \\(S(k)\\) and show that \\(S(k + 1)\\) follows"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "\\(S(k)\\) is the assumption (induction hypothesis); what must be shown is \\(S(k + 1)\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "then show that it is true for the next higher integer."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "9 The statement \\(4 + 4 \\cdot 5 + 4 \\cdot 5^{2} + \\ldots + 4 \\cdot 5^{n} = 5^{n + 1} - 1\\) is claimed for every non-negative integer \\(n\\). Its base case is checked at",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(n = 1\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(n = -1\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(n = 0\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(n = 4\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "Non-negative integers start at 0. At \\(n = 0\\): left side \\(4 \\cdot 5^{0} = 4\\), right side \\(5^{1} - 1 = 4\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "but in some cases, it is also used to prove the statements relating to the set"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "10 A hypothesis is",
+            "options": [
+              {
+                "id": "a",
+                "text": "an educated guess based on limited evidence"
+              },
+              {
+                "id": "b",
+                "text": "a proof that covers all cases"
+              },
+              {
+                "id": "c",
+                "text": "a statement that is always false"
+              },
+              {
+                "id": "d",
+                "text": "a case that fails a formula"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "The unit defines a hypothesis as an educated guess or proposed explanation for a statement based on limited evidence.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "A hypothesis is an educated guess or proposed explanation for a statement based on limited evidence."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "11 For \\(S(n): 2 + 4 + 6 + \\ldots + 2n = n(n + 1)\\), the right side of \\(S(k + 1)\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(k(k + 1)\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\((k + 1)^{2}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\((k + 2)(k + 3)\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\((k + 1)(k + 2)\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "Replace every \\(n\\) by \\(k + 1\\): \\((k + 1)[(k + 1) + 1] = (k + 1)(k + 2)\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "Writing the target first tells us where the algebra must end."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "12 To prove \\(5 + 10 + 15 + \\ldots + 5n = \\frac{5n(n + 1)}{2}\\) by induction, the term added to both sides of \\(S(k)\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(5k + 1\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(5(k + 1)\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(5k\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(5(k + 2)\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "The \\((k + 1)\\)th term is the general term \\(5n\\) with \\(n = k + 1\\), i.e. \\(5(k + 1)\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "Whatever is added on the left must be added on the right too."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "13 Using \\(1^{2} + 2^{2} + \\ldots + n^{2} = \\frac{n(n + 1)(2n + 1)}{6}\\), the sum \\(1^{2} + 2^{2} + \\ldots + 10^{2}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(385\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(55\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(350\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(3025\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "\\(\\frac{10 \\cdot 11 \\cdot 21}{6} = \\frac{2310}{6} = 385\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "in the step we add the next square"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "14 If \\(\\frac{k^{3} + 5k}{3}\\) is an integer, then \\(\\frac{(k + 1)^{3} + 5(k + 1)}{3}\\) equals",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(\\frac{k^{3} + 5k}{3} + (k^{2} + k + 1)\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(\\frac{k^{3} + 5k}{3} + 3k^{2}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(\\frac{k^{3} + 5k}{3} + \\frac{2}{3}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(\\frac{k^{3} + 5k}{3} + (k^{2} + k + 2)\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "\\((k + 1)^{3} + 5(k + 1) = k^{3} + 3k^{2} + 3k + 1 + 5k + 5 = (k^{3} + 5k) + 3(k^{2} + k + 2)\\); divide by 3.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "everything left over has a factor 3, which cancels the denominator."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "15 For every \\(n \\in \\mathbb{N}\\), the number \\(7^{n} - 1\\) is divisible by",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(4\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(6\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(5\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(8\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "\\(n = 1\\) gives \\(6\\), which 4, 5 and 8 do not divide. If \\(7^{k} - 1 = 6m\\), then \\(7^{k + 1} - 1 = 7(6m + 1) - 1 = 6(7m + 1)\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "so we write the assumption as an equation and substitute it into"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "16 Assume \\(5^{k} - 1 = 4m\\) for an integer \\(m\\). Then \\(5^{k + 1} - 1\\) equals",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(4(5m - 1)\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(20m\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(4(5m + 1)\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(5(4m + 1)\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "\\(5^{k} = 4m + 1\\), so \\(5^{k + 1} - 1 = 5(4m + 1) - 1 = 20m + 4 = 4(5m + 1)\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "Method: induction. \"Divisible by 9\" means"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "17 Using \\(\\sum_{k=1}^{n} \\frac{1}{(2k - 1)(2k + 1)} = \\frac{n}{2n + 1}\\), the sum \\(\\frac{1}{1 \\cdot 3} + \\frac{1}{3 \\cdot 5} + \\ldots + \\frac{1}{9 \\cdot 11}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(\\frac{4}{9}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(\\frac{1}{11}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(\\frac{5}{11}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(\\frac{10}{11}\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "The last term has \\(2n + 1 = 11\\), so \\(n = 5\\) and the sum is \\(\\frac{5}{11}\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "is already used as the counter inside the sum, so the book uses"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "18 If only the second condition (\\(S(k) \\Rightarrow S(k + 1)\\)) is proved and the base case is not checked, then",
+            "options": [
+              {
+                "id": "a",
+                "text": "nothing is proved, because the chain never starts"
+              },
+              {
+                "id": "b",
+                "text": "the statement is proved for all n"
+              },
+              {
+                "id": "c",
+                "text": "the statement is proved only for even n"
+              },
+              {
+                "id": "d",
+                "text": "the statement is proved from n = 2 onwards"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "Both conditions are needed: without the base case the chain of implications has no first true statement.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "Both steps are needed: without the base case the chain never starts, and without the second step it never moves."
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.1.1 Principle of Extended Mathematical Induction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "19 Extended mathematical induction proves \\(S(n)\\) for all integers \\(n \\ge i\\). Its base case is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(S(1)\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(S(0)\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(S(i + 1)\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(S(i)\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "The base case is the first value in the statement, \\(S(i)\\); then \\(S(k) \\Rightarrow S(k + 1)\\) is shown for \\(k \\ge i\\).",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "it may be 0, negative, or greater than 1"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "20 The smallest positive integer \\(n\\) for which \\(2^{n} > 2n + 1\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(1\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(3\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(2\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(4\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "\\(n = 1\\): \\(2 > 3\\) false; \\(n = 2\\): \\(4 > 5\\) false; \\(n = 3\\): \\(8 > 7\\) true.",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "Some statements are false for small values."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "21 The inequality \\(n! > 3^{n}\\) holds for all integers \\(n \\ge i\\). The least such \\(i\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(4\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(6\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(7\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(8\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "\\(6! = 720 < 729 = 3^{6}\\), but \\(7! = 5040 > 2187 = 3^{7}\\).",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "The chain of dominoes now starts at domino number"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "22 The statement \\(2 + 4 + 6 + \\ldots + (2n + 6) = (n + 3)(n + 4)\\) holds for integers \\(n \\ge -2\\). Its base case is checked at",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(n = 1\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(n = -2\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(n = 0\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(n = -3\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "The statement starts at \\(n = -2\\); then the last term is \\(2(-2) + 6 = 2\\) and the right side is \\((1)(2) = 2\\).",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "A formula or identity or statement"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "23 In an induction proof of an inequality, the hypothesis is multiplied only by a positive number because",
+            "options": [
+              {
+                "id": "a",
+                "text": "a positive multiplier reverses the inequality"
+              },
+              {
+                "id": "b",
+                "text": "negative numbers are not integers"
+              },
+              {
+                "id": "c",
+                "text": "it makes the base case true"
+              },
+              {
+                "id": "d",
+                "text": "a positive multiplier keeps the direction of the inequality"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "Multiplying an inequality by a positive number keeps its direction; a negative number would reverse it.",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "For an inequality we multiply the hypothesis by a positive number and then compare."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "24 If \\(a > b + c\\) and \\(c > 0\\), then",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(a > b\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(a < b\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(b > a + c\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(a = b + c\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "\\(a > b + c > b\\), since adding the positive \\(c\\) to \\(b\\) makes it bigger.",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "We may drop a positive part only from the smaller side"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "25 In the step of an inequality proof, \\(3 \\cdot 3^{k}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(3^{k + 1}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(9^{k}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(3^{2k}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(9^{k + 1}\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "Laws of exponents: \\(3^{1} \\cdot 3^{k} = 3^{k + 1}\\).",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "Writing \\(3 \\cdot 3^{k} = 9^{k}\\)."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "26 The inequality \\(3^{n} > 2^{n} + 4\\) should be proved by extended induction starting from",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(n = 1\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(n = 0\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(n = 3\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(n = 2\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "\\(n = 1\\): \\(3 > 6\\) is false; \\(n = 2\\): \\(9 > 8\\) is true, and it stays true for larger \\(n\\).",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "would fail at the base case, so we start at"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.1.2 Real Life Application of Mathematical Induction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "27 Mathematical induction is a method used to prove statements that are formulated for",
+            "options": [
+              {
+                "id": "a",
+                "text": "irrational numbers"
+              },
+              {
+                "id": "b",
+                "text": "complex numbers only"
+              },
+              {
+                "id": "c",
+                "text": "natural numbers"
+              },
+              {
+                "id": "d",
+                "text": "negative fractions"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "The unit: induction proves statements formulated for natural numbers (and, extended, for integers from a starting value).",
+            "book_ref": {
+              "topic_id": "4a03df67-4d91-5b84-b571-eb102fd694fa",
+              "quote": "Mathematical induction is a powerful method used to prove statements that are formulated for natural numbers."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "28 Hina deposits Rs. 2,000 every month. By the formula \\(S(n) = 2000n\\), her total savings after 18 months are",
+            "options": [
+              {
+                "id": "a",
+                "text": "Rs. 34,000"
+              },
+              {
+                "id": "b",
+                "text": "Rs. 36,000"
+              },
+              {
+                "id": "c",
+                "text": "Rs. 38,000"
+              },
+              {
+                "id": "d",
+                "text": "Rs. 3,600"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "\\(S(18) = 2000 \\times 18 = 36000\\).",
+            "book_ref": {
+              "topic_id": "4a03df67-4d91-5b84-b571-eb102fd694fa",
+              "quote": "In real life many quantities change by a fixed amount at each step"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "29 A daily intake starts at 2200 calories and is cut by 40 calories each week, so after \\(n\\) weeks it is \\(2200 - 40n\\). After 5 weeks it is",
+            "options": [
+              {
+                "id": "a",
+                "text": "2040 calories"
+              },
+              {
+                "id": "b",
+                "text": "2160 calories"
+              },
+              {
+                "id": "c",
+                "text": "2000 calories"
+              },
+              {
+                "id": "d",
+                "text": "1800 calories"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "\\(2200 - 40(5) = 2200 - 200 = 2000\\).",
+            "book_ref": {
+              "topic_id": "4a03df67-4d91-5b84-b571-eb102fd694fa",
+              "quote": "one more week means 50 calories less than after"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "30 Bilal does 6 push-ups on day 1 and 4 more each day than the day before. On day \\(k + 1\\) he does",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(6 + 4k\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(6 + 4(k + 1)\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(4k\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(6k + 4\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "Day 1 has 6; by day \\(k + 1\\) there have been \\(k\\) increases of 4, so \\(6 + 4k\\).",
+            "book_ref": {
+              "topic_id": "4a03df67-4d91-5b84-b571-eb102fd694fa",
+              "quote": "day 1 already has 10, so only"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "31 For the push-ups 6, 10, 14, ... (one number per day), the total number done in \\(n\\) days is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(4n + 2\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(n^{2} + 5n\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(2n^{2} + 6n\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(2n^{2} + 4n\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "\\(\\frac{n}{2}[2(6) + (n - 1)4] = \\frac{n}{2}(4n + 8) = 2n^{2} + 4n\\); check \\(n = 1\\): 6. (\\(4n + 2\\) is the number on day \\(n\\), not the total.)",
+            "book_ref": {
+              "topic_id": "4a03df67-4d91-5b84-b571-eb102fd694fa",
+              "quote": "Mixing up the amount in one step (push-ups on day"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.2 Binomial Theorem"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "32 Which of the following is a binomial?",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(a + b + c\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(3x - 5\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(x^{2} + x + 1\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(7\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "A binomial has exactly two terms; \\(3x - 5\\) has two, the others have three or one.",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "is called a binomial or a binomial expression"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "33 The number of terms in the expansion of \\((2x - 3y)^{9}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(9\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(11\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(10\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(18\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "The number of terms is one more than the index: \\(9 + 1 = 10\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "The number of terms in the expansion is one greater than its index."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "34 In every term of the expansion of \\((a + x)^{n}\\), the sum of the exponents of \\(a\\) and \\(x\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(n + 1\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(n\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(r\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(n - r\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "In \\(\\binom{n}{r}a^{n-r}x^{r}\\) the exponents add up to \\((n - r) + r = n\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "in each term of the expansion is equal to its index"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "35 The general term \\(T_{r+1}\\) of \\((a + x)^{n}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(\\binom{n}{r}a^{n-r}x^{r}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(\\binom{n}{r+1}a^{n-r}x^{r}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(\\binom{n}{r-1}a^{n-r+1}x^{r-1}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(\\binom{n}{r}a^{r}x^{n+r}\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "\\(r = 0, 1, \\ldots, n\\) gives all the terms; the \\((r + 1)\\)th term is \\(\\binom{n}{r}a^{n-r}x^{r}\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "so we call it as the general term of the expansion"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "36 The 4th term in the expansion of \\((2x + 1)^{6}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(240x^{4}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(20x^{3}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(192x^{5}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(160x^{3}\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "4th term: \\(r = 3\\): \\(\\binom{6}{3}(2x)^{3}(1)^{3} = 20 \\cdot 8x^{3} = 160x^{3}\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Raising only part of a term to the power"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "37 The coefficient of \\(x^{3}\\) in the expansion of \\((1 - 2x)^{5}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(80\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(-40\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(-10\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(-80\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "\\(\\binom{5}{3}(-2x)^{3} = 10(-8x^{3}) = -80x^{3}\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Dropping the minus sign of the second term"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "38 In the expansion of \\((a + x)^{15}\\), the coefficient of the 5th term equals the coefficient of the",
+            "options": [
+              {
+                "id": "a",
+                "text": "11th term"
+              },
+              {
+                "id": "b",
+                "text": "12th term"
+              },
+              {
+                "id": "c",
+                "text": "10th term"
+              },
+              {
+                "id": "d",
+                "text": "13th term"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "5th term has \\(\\binom{15}{4}\\); \\(\\binom{15}{4} = \\binom{15}{11}\\), the coefficient of \\(T_{12}\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "The coefficients of the terms equidistant from beginning and end of the expansion are equal"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "39 In the expansion of \\(\\left(x + \\frac{1}{x}\\right)^{10}\\), the 4th term from the end is which term from the beginning?",
+            "options": [
+              {
+                "id": "a",
+                "text": "7th"
+              },
+              {
+                "id": "b",
+                "text": "6th"
+              },
+              {
+                "id": "c",
+                "text": "8th"
+              },
+              {
+                "id": "d",
+                "text": "9th"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "There are 11 terms; the 4th from the end has \\(11 - 4 = 7\\) terms before it, so it is the 8th (\\(n - m + 2 = 10 - 4 + 2\\)).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Forgetting that the number of terms is"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "40 In the proof of the binomial theorem by induction, the like terms are combined by the rule",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k+1}{r}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k+1}{r-1}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{2k}{r}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k}{r+1}\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "Pascal's rule: \\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k+1}{r}\\); e.g. \\(\\binom{4}{2} + \\binom{4}{1} = 10 = \\binom{5}{2}\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Plan of the proof (the same three steps as in 8.1)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "41 Using \\((10 + 0.1)^{4}\\), the value of \\((10.1)^{4}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(10406.0401\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(10406.401\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(10460.0401\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(10046.0401\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "\\(10000 + 4(1000)(0.1) + 6(100)(0.01) + 4(10)(0.001) + 0.0001 = 10000 + 400 + 6 + 0.04 + 0.0001\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Powers of 10 and of 0.1 are easy to work out"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "42 The term containing \\(x^{4}\\) in the expansion of \\((2 - x)^{7}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(-280x^{4}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(35x^{4}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(560x^{4}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(280x^{4}\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "\\(r = 4\\): \\((-1)^{4}\\binom{7}{4}2^{3}x^{4} = 35 \\cdot 8x^{4} = 280x^{4}\\); \\(r\\) even, so positive.",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "When the binomial has a minus sign"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "43 The proof of the binomial theorem by mathematical induction starts by checking",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(n = 0\\): \\((a + x)^{0} = 0\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(n = 1\\): \\((a + x)^{1} = a + x\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(n = 2\\): \\((a + x)^{2} = a^{2} + x^{2}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(n = k\\): \\((a + x)^{k} = a^{k} + x^{k}\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Base case \\(n = 1\\): \\(\\binom{1}{0}a + \\binom{1}{1}x = a + x\\), which is true.",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Now we prove the Binomial theorem for any positive integer"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.2.1 The Middle Term in the Expansion of (a + x)^n"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "44 The middle terms of the expansion of \\((a + x)^{11}\\) are",
+            "options": [
+              {
+                "id": "a",
+                "text": "the 6th term only"
+              },
+              {
+                "id": "b",
+                "text": "the 5th and 6th terms"
+              },
+              {
+                "id": "c",
+                "text": "the 6th and 7th terms"
+              },
+              {
+                "id": "d",
+                "text": "the 7th term only"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "\\(n = 11\\) is odd: the \\(\\frac{n+1}{2} = 6\\)th and \\(\\frac{n+3}{2} = 7\\)th terms.",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "terms of the expansion will be the two middle terms"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "45 The middle term of \\(\\left(\\frac{x}{2} + \\frac{2}{x}\\right)^{8}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(70\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(35\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(140\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(56\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "\\(n = 8\\) even: the 5th term, \\(r = 4\\): \\(\\binom{8}{4}\\frac{x^{4}}{16}\\cdot\\frac{16}{x^{4}} = 70\\).",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "will be the only one middle term in the expansion"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "46 The term independent of \\(x\\) in \\(\\left(x^{2} + \\frac{1}{x}\\right)^{6}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(20\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(15\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(6\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(30\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "\\(T_{r+1} = \\binom{6}{r}x^{12-3r}\\); \\(12 - 3r = 0 \\Rightarrow r = 4\\); \\(\\binom{6}{4} = 15\\).",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "Find it by setting the power of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "47 The term independent of \\(x\\) in \\(\\left(2x - \\frac{1}{x}\\right)^{6}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(160\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(-20\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(20\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(-160\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "Power of \\(x\\): \\(6 - 2r = 0 \\Rightarrow r = 3\\); \\(\\binom{6}{3}(2)^{3}(-1)^{3} = -160\\).",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "is a whole number between 0 and 12, so the term exists"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "48 In the expansion of \\(\\left(x + \\frac{1}{x^{2}}\\right)^{10}\\), the term independent of \\(x\\)",
+            "options": [
+              {
+                "id": "a",
+                "text": "is \\(\\binom{10}{3}\\)"
+              },
+              {
+                "id": "b",
+                "text": "is \\(\\binom{10}{4}\\)"
+              },
+              {
+                "id": "c",
+                "text": "does not exist"
+              },
+              {
+                "id": "d",
+                "text": "is \\(1\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "Power of \\(x\\) in \\(T_{r+1}\\) is \\(10 - 3r\\); \\(10 - 3r = 0\\) gives \\(r = \\frac{10}{3}\\), not a whole number, so there is no such term.",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "that is not a whole number from 0 to"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "49 To find the middle term of \\((a + x)^{12}\\) from \\(T_{r+1}\\), we put",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(r = 7\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(r = 6\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(r = 12\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(r = 5\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "13 terms; the middle is the 7th term \\(T_{7}\\), so \\(r + 1 = 7\\), \\(r = 6\\).",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "Putting the term number in place of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "50 The middle term of \\((a + x)^{10}\\) is the",
+            "options": [
+              {
+                "id": "a",
+                "text": "5th term"
+              },
+              {
+                "id": "b",
+                "text": "5th and 6th terms"
+              },
+              {
+                "id": "c",
+                "text": "6th term"
+              },
+              {
+                "id": "d",
+                "text": "7th term"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "\\(n = 10\\) even: one middle term, the \\(\\left(\\frac{10}{2} + 1\\right) = 6\\)th, with 5 terms on each side.",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "The middle term is the term with the same number of terms before it and after it."
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.2.2 Some Deductions from the binomial expansion of (a + x)^n"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "51 \\(\\binom{7}{0} + \\binom{7}{1} + \\binom{7}{2} + \\ldots + \\binom{7}{7}\\) equals",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(14\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(64\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(127\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(128\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "Put \\(a = 1\\), \\(x = 1\\): the sum is \\(2^{7} = 128\\).",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "Thus, the sum of coefficients in the binomial expansion equals to"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "52 \\(\\binom{n}{0} - \\binom{n}{1} + \\binom{n}{2} - \\ldots + (-1)^{n}\\binom{n}{n}\\) equals",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(0\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(1\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(2^{n}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(-1\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "Put \\(a = 1\\), \\(x = -1\\): \\((1 - 1)^{n} = 0\\).",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "So we may put particular values in it"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "53 \\(\\binom{9}{1} + \\binom{9}{3} + \\binom{9}{5} + \\binom{9}{7} + \\binom{9}{9}\\) equals",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(256\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(512\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(128\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(255\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "The two groups are equal and together make \\(2^{9} = 512\\), so each is \\(2^{8} = 256\\).",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "Thus, sum of odd coefficients of a binomial expansion equals to the sum of its even coefficients."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "54 \\(\\binom{5}{1} + 2\\binom{5}{2} + 3\\binom{5}{3} + 4\\binom{5}{4} + 5\\binom{5}{5}\\) equals",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(32\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(80\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(160\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(40\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "By \\(n \\cdot 2^{n-1}\\): \\(5 \\cdot 2^{4} = 80\\). Directly: \\(5 + 20 + 30 + 20 + 5 = 80\\).",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "and recognise the bracket as the sum of all the coefficients of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "55 For \\(1 \\le r \\le n\\), \\(r\\binom{n}{r}\\) equals",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(n\\binom{n-1}{r}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\((n - 1)\\binom{n}{r-1}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(n\\binom{n-1}{r-1}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(r\\binom{n-1}{r-1}\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "\\(r\\cdot\\frac{n!}{r!\\,(n-r)!} = n\\cdot\\frac{(n-1)!}{(r-1)!\\,(n-r)!} = n\\binom{n-1}{r-1}\\).",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "Starting the alternating sum with a minus sign"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "56 In the expansion of \\((1 - x)^{n}\\) (\\(n \\ge 5\\)), the term in \\(x^{5}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(\\binom{n}{5}x^{5}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(-\\binom{n}{4}x^{5}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(\\binom{n}{6}x^{5}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(-\\binom{n}{5}x^{5}\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "\\(\\binom{n}{5}(-x)^{5} = -\\binom{n}{5}x^{5}\\): odd powers of \\(x\\) are negative.",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "are negative and those with even powers are positive"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "57 A set of 6 objects has how many subsets in all?",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(36\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(64\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(12\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(720\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "\\(\\binom{6}{0} + \\binom{6}{1} + \\ldots + \\binom{6}{6} = 2^{6} = 64\\).",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "Each object is either in or out, so there are"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3 The Binomial Theorem When the Index n is a Negative Integer or a Fraction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "58 When \\(n\\) is a negative integer or a fraction, the expansion of \\((1 + x)^{n}\\) is valid when",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(|x| > 1\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(x > 0\\) only"
+              },
+              {
+                "id": "c",
+                "text": "\\(|x| \\le 2\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(|x| < 1\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "The binomial series needs \\(|x| < 1\\); only then do the terms get smaller and the sum settles.",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "is essential. Only then do the terms get smaller and smaller"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "59 The expansion of \\((1 + 2x)^{-1/2}\\) in powers of \\(x\\) is valid for",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(|x| < \\frac{1}{2}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(|x| < 2\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(|x| < 1\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(|x| < \\frac{1}{4}\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "Need \\(|2x| < 1\\), i.e. \\(|x| < \\frac{1}{2}\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "2. Forgetting the condition"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "60 The term in \\(x^{2}\\) in the expansion of \\((1 + x)^{1/2}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(\\frac{1}{8}x^{2}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(-\\frac{1}{4}x^{2}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(-\\frac{1}{8}x^{2}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(\\frac{1}{4}x^{2}\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "\\(\\frac{n(n-1)}{2!}x^{2} = \\frac{\\frac{1}{2}\\left(-\\frac{1}{2}\\right)}{2}x^{2} = -\\frac{1}{8}x^{2}\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "is called the binomial series"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "61 The general term of \\((1 - x)^{-2}\\), \\(|x| < 1\\), is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\((-1)^{r}(r + 1)x^{r}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\((r + 1)x^{r}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(rx^{r}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(\\frac{(r + 1)(r + 2)}{2}x^{r}\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "\\((1 - x)^{-2} = 1 + 2x + 3x^{2} + 4x^{3} + \\ldots\\); all signs are \\(+\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "Some particular cases of the expansion of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "62 The coefficient of \\(x^{3}\\) in the expansion of \\((1 - x)^{-4}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(-20\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(10\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(20\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(15\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "\\(\\frac{(-4)(-5)(-6)}{3!}(-x)^{3} = (-20)(-x^{3}) = 20x^{3}\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "The general term in the expansion is"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "63 When \\(n\\) is a negative integer or a fraction, the symbol \\(\\binom{n}{r}\\) is not used in the general term because",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(n!\\) is not defined for such \\(n\\)"
+              },
+              {
+                "id": "b",
+                "text": "the series has only \\(n + 1\\) terms"
+              },
+              {
+                "id": "c",
+                "text": "\\(r!\\) is not defined"
+              },
+              {
+                "id": "d",
+                "text": "all coefficients are zero"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "\\(\\binom{n}{r} = \\frac{n!}{r!\\,(n-r)!}\\) needs \\(n!\\), which has no meaning for \\(n = -3\\) or \\(\\frac{1}{2}\\); the product form is used instead.",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "The proof of this theorem is beyond the scope of this book."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "64 The number of terms in the expansion of \\((1 + x)^{-2}\\), \\(|x| < 1\\), is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(-1\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(3\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(2\\)"
+              },
+              {
+                "id": "d",
+                "text": "infinitely many"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "For a negative index no factor \\((n - r + 1)\\) becomes zero, so the series never ends.",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "The series never ends. For a positive integer"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "65 To expand \\((9 - 2x)^{1/2}\\) by the binomial series, it is first written as",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(9\\left(1 - \\frac{2x}{9}\\right)^{1/2}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(3(1 - 2x)^{1/2}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(\\frac{1}{3}\\left(1 - \\frac{2x}{9}\\right)^{1/2}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(3\\left(1 - \\frac{2x}{9}\\right)^{1/2}\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "\\((9 - 2x)^{1/2} = 9^{1/2}\\left(1 - \\frac{2x}{9}\\right)^{1/2} = 3\\left(1 - \\frac{2x}{9}\\right)^{1/2}\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "The first term must be 1. The form is"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "66 The first four terms of \\((1 + x)^{-1}\\), \\(|x| < 1\\), are",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(1 + x + x^{2} + x^{3}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(1 - x - x^{2} - x^{3}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(1 - x + x^{2} - x^{3}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(1 - 2x + 3x^{2} - 4x^{3}\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "With \\(n = -1\\): \\(1 + (-1)x + \\frac{(-1)(-2)}{2!}x^{2} + \\frac{(-1)(-2)(-3)}{3!}x^{3} = 1 - x + x^{2} - x^{3}\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "Cases (iv), (v), (vi) come from (i), (ii), (iii) by replacing"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3.1 Application of the Binomial Theorem"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "67 Using \\(\\sqrt{26} = 5\\left(1 + \\frac{1}{25}\\right)^{1/2}\\), the value of \\(\\sqrt{26}\\) correct to three decimal places is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(5.099\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(5.010\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(5.199\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(5.090\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "\\(5(1 + 0.02 - 0.0002 + 0.000004) = 5(1.019804) = 5.09902 \\approx 5.099\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "Strategy for a root or power of a number"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "68 If \\(x\\) is so small that \\(x^{2}\\) and higher powers can be neglected, then \\(\\frac{(1 + x)^{1/2}}{1 + 2x}\\) is approximately",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(1 + \\frac{3}{2}x\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(1 - \\frac{3}{2}x\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(1 - \\frac{5}{2}x\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(1 + \\frac{5}{2}x\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "\\((1 + x)^{1/2}(1 + 2x)^{-1} \\approx \\left(1 + \\frac{x}{2}\\right)(1 - 2x) \\approx 1 - \\frac{3}{2}x\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "each multiply the second bracket"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "69 The series \\(1 + 2x + 3x^{2} + 4x^{3} + \\ldots\\), \\(|x| < 1\\), is the expansion of",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\((1 + x)^{-2}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\((1 - x)^{-1}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\((1 - x)^{2}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\((1 - x)^{-2}\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "\\((1 - x)^{-2}\\) has general term \\((r + 1)x^{r}\\) with all signs positive.",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "This is the reverse use of the theorem"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "70 Comparing with \\((1 + x)^{-1}\\), the sum of \\(1 - \\frac{1}{2} + \\frac{1}{4} - \\frac{1}{8} + \\ldots\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(\\frac{2}{3}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(\\frac{3}{2}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(2\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(\\frac{1}{2}\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "It is \\(1 - x + x^{2} - x^{3} + \\ldots\\) with \\(x = \\frac{1}{2}\\): \\(\\left(1 + \\frac{1}{2}\\right)^{-1} = \\frac{2}{3}\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "Then the sum is calculated by putting the values of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "71 To evaluate \\(\\sqrt[3]{126}\\) by the binomial series, it is written as",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\((1 + 125)^{1/3}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(5\\left(1 + \\frac{1}{125}\\right)^{1/3}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(125\\left(1 + \\frac{1}{125}\\right)^{1/3}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(5(1 + 1)^{1/3}\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "\\(126 = 125\\left(1 + \\frac{1}{125}\\right)\\) and \\(125^{1/3} = 5\\); the bracket starts with 1 and \\(\\frac{1}{125}\\) is small.",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "the bracket must start with 1, so take 27 out first"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "72 The coefficient of \\(x^{n}\\) in the expansion of \\(\\frac{1 + 2x}{(1 - x)^{2}}\\), \\(|x| < 1\\), is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(n + 1\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(2n + 1\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(3n + 1\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(3n + 2\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "\\((1 + 2x)(1 + 2x + 3x^{2} + \\ldots)\\): \\(x^{n}\\) gets \\((n + 1)\\) from 1 and \\(2n\\) from \\(2x\\); total \\(3n + 1\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "term in the product comes from two places"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "73 To sum a series by comparing it with the binomial series, the first thing to make sure is that",
+            "options": [
+              {
+                "id": "a",
+                "text": "the series has finitely many terms"
+              },
+              {
+                "id": "b",
+                "text": "all its terms are positive"
+              },
+              {
+                "id": "c",
+                "text": "the series starts with 1 (add 1 if needed)"
+              },
+              {
+                "id": "d",
+                "text": "its first term is x"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "A binomial series always starts with 1; then the 2nd and 3rd terms are compared with \\(nx\\) and \\(\\frac{n(n-1)}{2!}x^{2}\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "a binomial series always starts with 1"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.4 Binomial Coefficients Using Pascal's Triangle"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "74 Row 6 of Pascal's triangle (the top 1 is row 0) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(1, 5, 10, 10, 5, 1\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(1, 6, 12, 20, 12, 6, 1\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(1, 7, 21, 35, 35, 21, 7, 1\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(1, 6, 15, 20, 15, 6, 1\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "Row \\(n\\) lists \\(\\binom{n}{0}, \\ldots, \\binom{n}{n}\\); for \\(n = 6\\): \\(1, 6, 15, 20, 15, 6, 1\\).",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "rows and columns are both counted from 0"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "75 By Pascal's rule, \\(\\binom{9}{4} + \\binom{9}{5}\\) equals",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(\\binom{9}{5} = 126\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(\\binom{10}{5} = 252\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(\\binom{10}{4} = 210\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(\\binom{11}{5} = 462\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "\\(\\binom{n-1}{k-1} + \\binom{n-1}{k} = \\binom{n}{k}\\) with \\(n = 10\\), \\(k = 5\\): \\(126 + 126 = 252\\).",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "Mathematically, this is expressed by Pascal's Rule:"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "76 How many entries are there in row 9 of Pascal's triangle?",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(10\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(9\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(11\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(18\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "Row \\(n\\) has \\(n + 1\\) entries \\(\\binom{n}{0}, \\ldots, \\binom{n}{n}\\).",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "Each subsequent row begins and ends with 1."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "77 Using row 4 of Pascal's triangle, the coefficient of \\(x^{2}\\) in \\((x + 3)^{4}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(6\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(18\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(54\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(36\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "Row 4: \\(1, 4, 6, 4, 1\\); the \\(x^{2}\\) term is \\(6x^{2}(3)^{2} = 54x^{2}\\).",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "Forgetting to multiply the coefficient by the power of the second term"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "78 The coefficient of \\(x\\) in the expansion of \\((2x - 1)^{4}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(8\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(-4\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(4\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(-8\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "Row 4 entry 4: \\(4(2x)(-1)^{3} = -8x\\).",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "Check an expansion by putting 1 for the letters"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "79 The sum of the entries in row 7 of Pascal's triangle is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(128\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(64\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(256\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(49\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "Row \\(n\\) adds up to \\(2^{n}\\): \\(1 + 7 + 21 + 35 + 35 + 21 + 7 + 1 = 128 = 2^{7}\\).",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "every row reads the same from both ends"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "80 The middle entry of row 8 of Pascal's triangle is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(56\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(70\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(35\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(28\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Row 8: \\(1, 8, 28, 56, 70, 56, 28, 8, 1\\); the middle is \\(\\binom{8}{4} = 70 = 35 + 35\\).",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "Pascal's Triangle provides a combinatorial method to compute binomial coefficients without directly using factorials."
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5 Application of Binomial Theorem"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "81 To find the remainder when \\(9^{40}\\) is divided by 8 by the binomial theorem, the base is written as",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(10 - 1\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(8 + 1\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(3^{2}\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(4 + 5\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Write the base as a multiple of the divisor plus a small number: \\(9 = 8 + 1\\); then \\((8 + 1)^{40}\\) leaves remainder 1.",
+            "book_ref": {
+              "topic_id": "270bb31a-b8b1-5f90-a9d9-cc6795ce21ad",
+              "quote": "write the base as (a multiple of the divisor)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "82 In the expansion of \\((7 - 1)^{25}\\), the only term that is not a multiple of 7 is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(+1\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(25 \\cdot 7\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(-1\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(7^{25}\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "The last term is \\((-1)^{25} = -1\\); every other term contains a power of 7.",
+            "book_ref": {
+              "topic_id": "270bb31a-b8b1-5f90-a9d9-cc6795ce21ad",
+              "quote": "so only the last term decides the answer"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5.1 Finding the Remainder using Binomial Theorem"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "83 The remainder when \\(6^{25}\\) is divided by 7 is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(6\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(1\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(0\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(5\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "\\(6^{25} = (7 - 1)^{25} = 7q - 1 = 7(q - 1) + 6\\), so the remainder is 6.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "Forgetting the sign of the last term in"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "84 The remainder when \\(2^{60}\\) is divided by 7 is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(2\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(4\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(6\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(1\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "\\(2^{60} = (2^{3})^{20} = 8^{20} = (7 + 1)^{20} = 7q + 1\\).",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "A sum of multiples of 7 is a multiple of 7, so it leaves remainder 0."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "85 The unit digit of \\(7^{35}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(7\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(3\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(9\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(1\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Last digits of powers of 7: \\(7, 9, 3, 1\\). \\(35 = 4 \\times 8 + 3\\), so the digit is that of \\(7^{3} = 343\\): 3.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "The last digits of powers repeat in a cycle, so we divide the exponent by 4 and use the remainder."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "86 The unit digit of \\(36^{99}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(3\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(9\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(4\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(6\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "Only the unit digit 6 matters, and every power of a number ending in 6 ends in 6.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "the unit digit of a power depends only on the unit digit of the base"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "87 The unit digit of \\(29^{51}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(9\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(1\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(3\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(7\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "Powers of 9 end in \\(9, 1, 9, 1, \\ldots\\) (cycle 2); 51 is odd, so the digit is 9.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "powers of 3 and 7 repeat every 4, powers of 4 and 9 every 2, powers of 5 and 6 every 1"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "88 The last two digits of \\(31^{5}\\) are",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(15\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(31\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(51\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(01\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "\\((30 + 1)^{5}\\): terms with \\(30^{2}\\) or more are multiples of 100; left \\(\\binom{5}{1}30 + 1 = 151\\), so 51.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "the last two digits are its remainder on division by 100"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "89 The last two digits of \\(21^{10}\\) are",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(01\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(21\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(10\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(11\\)"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "\\((20 + 1)^{10}\\): left after dropping multiples of 100: \\(\\binom{10}{1}20 + 1 = 201\\), so 01.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "Only the last two terms of the expansion will matter."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "90 The fractional part of \\(\\frac{3^{100}}{8}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(\\frac{3}{8}\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(\\frac{7}{8}\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(0\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(\\frac{1}{8}\\)"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "\\(3^{100} = 9^{50} = (8 + 1)^{50} = 8h + 1\\), so \\(\\frac{3^{100}}{8} = h + \\frac{1}{8}\\).",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "write the number as (an integer) + (a proper fraction)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "91 The number \\(9^{7} + 11^{9}\\) is divisible by",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(9\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(10\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(11\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(7\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "\\((10 - 1)^{7} + (10 + 1)^{9}\\): the last terms are \\(-1\\) and \\(+1\\), which cancel; every other term contains 10. (It leaves remainders 8, 4, 3 on division by 9, 11, 7.)",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "Expand both powers; all terms except the last ones contain 14, and the two last terms cancel."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "92 When \\((d - 1)^{m}\\), with \\(m\\) odd and \\(d > 1\\), is divided by \\(d\\), the remainder is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(1\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(0\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(d - 1\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(-1\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "\\((d - 1)^{m} = dq - 1 = d(q - 1) + (d - 1)\\); a remainder cannot be negative, so it is \\(d - 1\\).",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "Taking the remainder as 0 because"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.6 Real Life Application of Binomial Theorem and Mathematical Induction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "93 Rs. 200,000 is invested at 4% compound interest per year. Its exact value after 3 years is",
+            "options": [
+              {
+                "id": "a",
+                "text": "Rs. 224,960"
+              },
+              {
+                "id": "b",
+                "text": "Rs. 224,000"
+              },
+              {
+                "id": "c",
+                "text": "Rs. 216,000"
+              },
+              {
+                "id": "d",
+                "text": "Rs. 224,972.80"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "\\(200000(1.04)^{3} = 200000(1 + 0.12 + 0.0048 + 0.000064) = 200000(1.124864) = 224972.80\\).",
+            "book_ref": {
+              "topic_id": "19937ae1-a3a7-5a0e-89fe-e7421e22ac91",
+              "quote": "with compound interest each year's interest is added to the amount"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "94 Keeping three terms of the binomial expansion, \\((1.02)^{4}\\) is approximately",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(1.08\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(1.0824\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(1.0816\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(1.0842\\)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "\\(1 + 4(0.02) + 6(0.02)^{2} = 1 + 0.08 + 0.0024 = 1.0824\\).",
+            "book_ref": {
+              "topic_id": "19937ae1-a3a7-5a0e-89fe-e7421e22ac91",
+              "quote": "the binomial theorem allows us to expand"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "95 In the domino picture of mathematical induction, the base case corresponds to",
+            "options": [
+              {
+                "id": "a",
+                "text": "the first domino falling"
+              },
+              {
+                "id": "b",
+                "text": "the last domino falling"
+              },
+              {
+                "id": "c",
+                "text": "every domino knocking the next"
+              },
+              {
+                "id": "d",
+                "text": "dominoes standing close together"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "The base case starts the chain (the first domino falls); the step from k to k + 1 is each domino knocking the next.",
+            "book_ref": {
+              "topic_id": "19937ae1-a3a7-5a0e-89fe-e7421e22ac91",
+              "quote": "If the first domino is not pushed (no base case), nothing falls."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "96 Stock follows \\(I_{n+1} = 0.5\\,I_{n} + 60\\) with \\(I_{0} = 300\\). The value \\(I_{2}\\) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(210\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(180\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(165\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(150\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "\\(I_{1} = 0.5(300) + 60 = 210\\), \\(I_{2} = 0.5(210) + 60 = 165\\).",
+            "book_ref": {
+              "topic_id": "19937ae1-a3a7-5a0e-89fe-e7421e22ac91",
+              "quote": "Always test a formula on the first few values before proving it."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "97 For \\(I_{n+1} = 0.5\\,I_{n} + 60\\), the level \\(L\\) that does not change (\\(L = 0.5L + 60\\)) is",
+            "options": [
+              {
+                "id": "a",
+                "text": "\\(60\\)"
+              },
+              {
+                "id": "b",
+                "text": "\\(30\\)"
+              },
+              {
+                "id": "c",
+                "text": "\\(120\\)"
+              },
+              {
+                "id": "d",
+                "text": "\\(240\\)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "\\(0.5L = 60 \\Rightarrow L = 120\\).",
+            "book_ref": {
+              "topic_id": "19937ae1-a3a7-5a0e-89fe-e7421e22ac91",
+              "quote": "Write the month-to-month rule (a recurrence relation), find a formula for"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

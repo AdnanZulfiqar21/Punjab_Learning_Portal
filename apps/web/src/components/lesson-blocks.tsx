@@ -504,7 +504,7 @@ function BlockView({
               <tr>
                 {head.map((h, i) => (
                   <th key={i} scope="col" className="border border-border bg-surface px-3 py-2 text-left">
-                    {h}
+                    {hasMath(h) ? <MathText text={h} html={math} /> : h}
                   </th>
                 ))}
               </tr>
@@ -514,7 +514,7 @@ function BlockView({
                 <tr key={i}>
                   {r.map((c, j) => (
                     <td key={j} data-label={head[j] ?? ""} className="border border-border bg-surface px-3 py-2 align-top">
-                      {c}
+                      {hasMath(c) ? <MathText text={c} html={math} /> : c}
                     </td>
                   ))}
                 </tr>
@@ -525,6 +525,7 @@ function BlockView({
       // INLINE-MATH-01 / SOLVED-QUESTION-01: formulas typeset here, so the client component gets ready markup.
       const steps = Array.isArray(b.steps) ? strs(b.steps).map((s, i) => <Marked math={math} key={i} text={stepText(s)} marks={[]} />) : undefined;
       const q = numbered ? splitQuestionNumber(str(b.prompt)) : null; // QUESTION-NUMBER-01
+      const options = Array.isArray(b.options) ? (b.options as { id: string; text: string }[]) : [];
       const words = q ? q.text : str(b.prompt);
       return (
         <Checkpoint
@@ -532,7 +533,8 @@ function BlockView({
           prompt={str(b.prompt)}
           promptView={hasMath(words) ? <MathText text={words} html={math} /> : q ? words : undefined}
           number={q?.number}
-          options={Array.isArray(b.options) ? (b.options as { id: string; text: string }[]) : []}
+          options={options}
+          optionViews={options.some((o) => hasMath(o.text)) ? options.map((o) => (hasMath(o.text) ? <MathText key={o.id} text={o.text} html={math} /> : undefined)) : undefined}
           answerId={typeof b.answer_id === "string" ? b.answer_id : null}
           explanation={str(b.explanation)}
           explanationView={hasMath(str(b.explanation)) ? <MathText text={str(b.explanation)} html={math} /> : undefined}
