@@ -1,0 +1,358 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-LONG",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/u-long-questions",
+      "title": "Long Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 90,
+          "pdf_to": 125,
+          "note": "Practice long questions written from Chapter 4 (PDF 90-125, printed 87-122); not printed in the book. Based on the chapter's text, tables, boxes and worked examples (numericals with changed values); none repeats the chapter exercise. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice long questions for the whole of Chapter 4 (Computational Structures), in the shape of a Board long question: each theory question carries 8 marks (define, explain with examples, compare, write and explain a program), often as a definition plus explained points (e.g. 2 + 3 x 2). Each question has a full model answer."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Define a list. Explain any three properties of lists other than dynamic size, with an example of each. (8 marks)",
+            "explanation": "Definition: a list is a data structure used to store multiple pieces of data in a specific sequence. Each piece of data, called an element, is at a particular index. In Python a list is written in square brackets with items separated by commas.\n\n1. Index-based access: every item has a position called an index; the first item has index 0, the second 1, and so on. Example: in marks = [45, 67, 89], marks[0] is 45.\n\n2. Ordered collection: the order in which items are added is preserved; an item added first stays in that position unless you change it. Example: [\"Decorations\", \"Snacks\", \"Plates\"] always prints in that order.\n\n3. Heterogeneous elements: a list can hold different types of items together, such as numbers, words and even other lists. Example: [\"Apple\", 42, 3.14, True].\n\n(Other properties: mutability, the list can be updated after creation; supports duplicates, the same item can appear more than once.)",
+            "book_ref": {
+              "topic_id": "054330db-3814-5e10-ac99-af2cbf8a43c6",
+              "quote": "Index-Based Access: Every item in a list has a position, called an index."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Explain the three ways of deleting items from a Python list and the two ways of searching a list. Write a program that uses all five and show its output. (8 marks)",
+            "explanation": "Deletion (like crossing off a completed task):\n1. remove(value): deletes the first occurrence of a specific item.\n2. pop(index): removes the item at a specific index.\n3. clear(): removes all items, leaving an empty list.\n\nSearching (like looking for a task in a to-do list):\n1. The in keyword checks whether an item exists in the list (True or False).\n2. index(value) finds the position of an item in the list.\n\nProgram:\nparty = [\"Invite friends\", \"Buy snacks\", \"Buy drinks\", \"Buy snacks\"]\nparty.remove(\"Buy snacks\")\nprint(party)\nparty.pop(0)\nprint(party)\nprint(\"Buy drinks\" in party)\nprint(party.index(\"Buy snacks\"))\nparty.clear()\nprint(party)\n\nOutput:\n['Invite friends', 'Buy drinks', 'Buy snacks']\n['Buy drinks', 'Buy snacks']\nTrue\n1\n[]\n\nExplanation: remove() deletes only the first \"Buy snacks\"; pop(0) removes \"Invite friends\"; in finds \"Buy drinks\"; index() gives the position 1 of the remaining \"Buy snacks\"; clear() empties the list.",
+            "book_ref": {
+              "topic_id": "34522a45-d095-5d68-b10a-e5d8fd89bb17",
+              "quote": "2. Deletion: Removing an item from your list is like crossing off a task"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Explain the push and pop operations of a stack. Write a Python program that uses a list as a stack for a web browser's Back button: visit Home, News and Sports, then go back once, and explain the output. (8 marks)",
+            "explanation": "Push: adding an item to the top of the stack. In Python a list is used as the stack and append() adds an element to the top.\nPop: removing the item from the top of the stack. The list function pop() removes (and returns) the top element.\nBoth happen at the top only, so the stack follows LIFO: the last item added is the first removed. Navigating back through web pages is a LIFO problem.\n\nProgram:\nhistory = []\nhistory.append(\"Home\")\nhistory.append(\"News\")\nhistory.append(\"Sports\")\nprint(\"Pages:\", history)\nleft = history.pop()\nprint(\"Back from:\", left)\nprint(\"Now on:\", history[len(history) - 1])\nprint(\"Pages:\", history)\n\nOutput:\nPages: ['Home', 'News', 'Sports']\nBack from: Sports\nNow on: News\nPages: ['Home', 'News']\n\nExplanation: the three pages are pushed in the order visited, so Sports is on top. Going back pops Sports (the last page visited) and the page now on top is News.",
+            "book_ref": {
+              "topic_id": "c9034781-78e6-5fe6-86f2-4761159fb201",
+              "quote": "Push Operation: Push means adding an item to the top of the stack."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Explain infix, postfix and prefix notations with one example each. Why do postfix and prefix need no parentheses? (8 marks)",
+            "explanation": "1. Infix notation: the operator is placed between the operands. It is the standard notation of arithmetic and algebra. Example: A + B or (A + B) x C. Parentheses may be used to show the order of operations.\n\n2. Postfix notation (Reverse Polish Notation, RPN): the operator is placed after the operands. Example: A + B = AB+, and (A + B) x C = AB+Cx: first add A and B, then multiply the result by C.\n\n3. Prefix notation (Polish Notation): the operator is placed before the operands. Example: A + B = +AB, and +A x BC means first multiply B and C, then add A to the result.\n\nNo parentheses: in postfix and prefix the position of each operator already fixes which operands it works on and in what order the operations are done, so parentheses are not required to show the order of operations. This also makes postfix easier for computers to calculate.",
+            "book_ref": {
+              "topic_id": "199743fc-2d41-52fb-a442-7a50dc9bc6ec",
+              "quote": "In mathematics and computer science, expressions can be written in different notations."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Convert the infix expression A + B * C - D to postfix notation using a stack. Show the stack and the output list after each token. (8 marks)",
+            "explanation": "Read the expression from left to right: operands go straight to the output; an operator is pushed, but first any operator on the stack with higher or equal priority is popped to the output; at the end the stack is emptied into the output.",
+            "book_ref": {
+              "topic_id": "199743fc-2d41-52fb-a442-7a50dc9bc6ec",
+              "quote": "Start with an empty stack and an empty output list."
+            },
+            "steps": [
+              "Start: stack [ ], output [ ]",
+              "Read A: operand, output [A]; stack [ ]",
+              "Read +: stack is empty, push: stack [+]; output [A]",
+              "Read B: output [A, B]; stack [+]",
+              "Read *: + has lower priority than *, so push: stack [+, *]; output [A, B]",
+              "Read C: output [A, B, C]; stack [+, *]",
+              "Read -: * has higher priority, pop it: output [A, B, C, *]; + has equal priority, pop it: output [A, B, C, *, +]; push -: stack [-]",
+              "Read D: output [A, B, C, *, +, D]; stack [-]",
+              "End: pop the remaining -: output [A, B, C, *, +, D, -]; stack [ ]"
+            ],
+            "final_answer": "Postfix: A B C * + D -"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Evaluate the postfix expression 8 2 3 * + 4 - using a stack. Show the stack after each token. (8 marks)",
+            "explanation": "Read from left to right: push every number; for an operator pop two items, perform the operation (first popped item is the right operand) and push the result. The last item on the stack is the answer.",
+            "book_ref": {
+              "topic_id": "13f1c0cd-85e5-5ebe-93c6-4c8b6cdeb33e",
+              "quote": "When you find an operator, pop the required number of items from the stack, perform the operation"
+            },
+            "steps": [
+              "Read 8: push, stack [8]",
+              "Read 2: push, stack [8, 2]",
+              "Read 3: push, stack [8, 2, 3]",
+              "Read *: pop 3 and 2, 2 * 3 = 6, push: stack [8, 6]",
+              "Read +: pop 6 and 8, 8 + 6 = 14, push: stack [14]",
+              "Read 4: push, stack [14, 4]",
+              "Read -: pop 4 and 14, 14 - 4 = 10, push: stack [10]"
+            ],
+            "final_answer": "The value of 8 2 3 * + 4 - is 10."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Why is balancing parentheses important? Write a Python function that uses a list as a stack to check whether the parentheses of an expression are balanced. Test it on three expressions and explain the output. (8 marks)",
+            "explanation": "In infix expressions parentheses show which operations are done first, so every opening parenthesis must have a matching closing parenthesis.\nMethod: push every ( onto the stack; for every ) pop the top. If the stack is empty at the end, the parentheses are balanced. If the stack is not empty, or a pop is tried on an empty stack, they are not balanced.\n\nProgram:\ndef is_balanced(expr):\n    stack = []\n    for ch in expr:\n        if ch == \"(\":\n            stack.append(ch)\n        elif ch == \")\":\n            if len(stack) == 0:\n                return False\n            stack.pop()\n    return len(stack) == 0\n\nprint(is_balanced(\"(3 + 4) * (5 - 2)\"))\nprint(is_balanced(\"((7 - 1)\"))\nprint(is_balanced(\"(9 - 3))\"))\n\nOutput:\nTrue\nFalse\nFalse\n\nExplanation:\n1. (3 + 4) * (5 - 2): each ( is matched by a ), the stack ends empty, so True.\n2. ((7 - 1): one ( is left on the stack, so False.\n3. (9 - 3)): the second ) finds the stack empty (nothing to pop), so False.",
+            "book_ref": {
+              "topic_id": "1c020db5-64b2-5d3f-a9c9-3f73b2d569e7",
+              "quote": "Balancing parentheses is important to ensure that every opening parenthesis has a matching closing parenthesis."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Explain how a stack implements the undo mechanism of a text editor. Write a Python program in which the words Hello, World and Pakistan are typed one by one and undo is pressed twice; explain the output. (8 marks)",
+            "explanation": "Undo in applications such as Notepad and Microsoft Word uses a stack:\n1. Performing actions: each change (typing or deleting text) is pushed onto the stack.\n2. Undoing an action: pressing undo pops the most recent action and the editor reverses it (e.g. deletes the typed word).\n3. Multiple undos: pressing undo again reverses the earlier actions one by one, in reverse order (LIFO).\n\nProgram:\ndocument = []\nactions = []\nfor word in [\"Hello\", \"World\", \"Pakistan\"]:\n    document.append(word)\n    actions.append(word)\nprint(\"Document:\", document)\nlast = actions.pop()\ndocument.remove(last)\nprint(\"Undo removed:\", last)\nlast = actions.pop()\ndocument.remove(last)\nprint(\"Undo removed:\", last)\nprint(\"Document:\", document)\n\nOutput:\nDocument: ['Hello', 'World', 'Pakistan']\nUndo removed: Pakistan\nUndo removed: World\nDocument: ['Hello']\n\nExplanation: each typed word is pushed onto the actions stack. The first undo pops \"Pakistan\" (the most recent action) and removes it from the document; the second pops \"World\". Only \"Hello\" is left.",
+            "book_ref": {
+              "topic_id": "0ca12aa2-4856-5281-bfca-48c925b11c66",
+              "quote": "When you want to undo an action, the most recent action is removed from the stack and reversed."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Define a queue and explain its properties. Write a Python program using the queue module that schedules three tasks, Print, Save and Email, peeks at the next task and then processes all of them; explain the output. (8 marks)",
+            "explanation": "Definition: a queue keeps track of items so that the first item added is the first one taken out, like a line at a bank. Items are added at the back and removed from the front (FIFO).\n\nProperties:\n1. Order preservation: the queue keeps the order of items; the first in is the first out.\n2. FIFO principle: the first item added to the queue is the first one removed.\n3. Dynamic size: the queue grows or shrinks as items are added or removed.\n\nProgram:\nfrom queue import Queue\ntasks = [\"Print\", \"Save\", \"Email\"]\nq = Queue()\nfor t in tasks:\n    q.put(t)\nprint(\"Next task:\", q.queue[0])\nfor t in tasks:\n    print(\"Processing:\", q.get())\nprint(\"Waiting tasks:\", list(q.queue))\n\nOutput:\nNext task: Print\nProcessing: Print\nProcessing: Save\nProcessing: Email\nWaiting tasks: []\n\nExplanation: put() enqueues the tasks at the back in the order they arrive; q.queue[0] peeks at the front task without removing it; each get() dequeues the task at the front, so the tasks are processed in the order they arrived and the queue is empty at the end.",
+            "book_ref": {
+              "topic_id": "f7620f99-156e-5db5-ade4-ecd96b246e03",
+              "quote": "FIFO Principle: A queue works on the"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Name the uses of queues in computers. Explain print spooling, task scheduling and data buffering. (8 marks)",
+            "explanation": "Queues are used to implement Breadth-First Search (BFS) in graphs, task scheduling, print spooling, data buffering and call centre systems.\n\n1. Print spooling: a system that manages print jobs sent to a printer. Documents are placed in a queue; each new document joins the end, and documents are printed in the order they were submitted. This prevents documents being printed out of sequence and confusion from simultaneous print requests.\n\n2. Task scheduling: tasks are like patients at a clinic and the queue is like the waiting list. A new task (e.g. pressing Print) is added to the end of the queue (enqueue); when the computer is ready it removes the first task from the front (dequeue). Tasks are processed in the order they arrive, efficiently and fairly.\n\n3. Data buffering: in online video streaming the video is buffered in small chunks; a queue stores and loads parts ahead of what is being watched, so the video plays smoothly even if data transfer is delayed. A printer queue similarly holds several documents and prints them one after the other.",
+            "book_ref": {
+              "topic_id": "2ee8147c-3cdf-5592-b9e1-dd529e1457af",
+              "quote": "Let's discuss them one by one."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 A tree has root 10 with children 20 and 30; node 20 has children 40 and 50; node 30 has one child 60. Traverse it by Breadth-First Search using a queue. Show the queue after each visit and write the BFS order. (8 marks)",
+            "explanation": "BFS visits the tree level by level: start by placing the root in the queue; repeatedly dequeue the front node, visit it and enqueue its children; stop when the queue is empty.",
+            "book_ref": {
+              "topic_id": "e09157a8-d2c4-52af-9db9-2a7b007d7194",
+              "quote": "This approach uses a queue to manage the nodes that need to be visited."
+            },
+            "steps": [
+              "Start at the root: queue [10]",
+              "Visit 10, enqueue its children 20 and 30: queue [20, 30]",
+              "Visit 20, enqueue 40 and 50: queue [30, 40, 50]",
+              "Visit 30, enqueue 60: queue [40, 50, 60]",
+              "Visit 40 (no children): queue [50, 60]",
+              "Visit 50 (no children): queue [60]",
+              "Visit 60 (no children): queue [ ]; the queue is empty, so all nodes are visited"
+            ],
+            "final_answer": "BFS order: 10, 20, 30, 40, 50, 60"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Define a tree data structure with an example. Explain the properties of trees: root node, edges and nodes, height and balanced trees. (8 marks)",
+            "explanation": "Definition: a tree organizes information spreading out from a main point called the root node. Each piece of information (a node) can connect to other nodes, forming a branching structure, unlike a list where items are in a straight line. Example: in a family tree the oldest ancestors are the root and their descendants form the next levels.\n\n1. Root node: the very first or top node of the tree, like the main folder that contains all other folders and files.\n2. Edges and nodes: nodes are the individual elements of the tree, connected by lines called edges. A node without any child nodes is a leaf, like a file that contains no other files.\n3. Height: the longest path from the root node down to the farthest leaf; it tells how deep or tall the tree is.\n4. Balanced trees: a tree is balanced if the branches on the left and right sides are nearly the same height.",
+            "book_ref": {
+              "topic_id": "d60cda27-5223-57a6-9a98-f9bbd9ccd7ea",
+              "quote": "Root Node: The root is the very first or top node in a tree"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 Write the chapter's FamilyTree program in Python, add 'Child3' under 'Parent2', print the children of 'Parent1' and search for a member who is not in the tree. Explain the two classes and the output. (8 marks)",
+            "explanation": "Program:\nclass FamilyMember:\n    def __init__(self, name):\n        self.name = name\n        self.children = []\n\nclass FamilyTree:\n    def __init__(self, ancestor_name):\n        self.root = FamilyMember(ancestor_name)\n\n    def add_child(self, parent_name, child_name):\n        parent_node = self._find_member(self.root, parent_name)\n        if parent_node:\n            parent_node.children.append(FamilyMember(child_name))\n\n    def _find_member(self, current_member, name):\n        if current_member.name == name:\n            return current_member\n        for child in current_member.children:\n            result = self._find_member(child, name)\n            if result:\n                return result\n        return None\n\nfamily_tree = FamilyTree('Grandparent')\nfamily_tree.add_child('Grandparent', 'Parent1')\nfamily_tree.add_child('Grandparent', 'Parent2')\nfamily_tree.add_child('Parent1', 'Child1')\nfamily_tree.add_child('Parent1', 'Child2')\nfamily_tree.add_child('Parent2', 'Child3')\nmember = family_tree._find_member(family_tree.root, 'Parent1')\nfor child in member.children:\n    print(child.name)\nprint(family_tree._find_member(family_tree.root, 'Uncle'))\n\nOutput:\nChild1\nChild2\nNone\n\nExplanation:\n1. FamilyMember represents a single person (a node); each person has a name and a list of children (descendants).\n2. FamilyTree manages the entire tree, starting with an ancestor at the root. add_child() finds the parent with _find_member() and appends a new FamilyMember to its children (insertion). _find_member() checks the current member and then searches each child in turn (searching).\n3. Output: Parent1's children Child1 and Child2 are printed; 'Uncle' is not found anywhere in the tree, so _find_member() returns None.",
+            "book_ref": {
+              "topic_id": "d60cda27-5223-57a6-9a98-f9bbd9ccd7ea",
+              "quote": "The 'FamilyTree' class manages the entire tree, starting with an ancestor at the root."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 A tree has root A; A's left child is B and right child is C; B has left child D and right child E; C has right child F. Write its in-order, pre-order and post-order traversals, showing the rule used for each. (8 marks)",
+            "explanation": "Apply each rule at every node, starting from the root: in-order = left, root, right; pre-order = root, left, right; post-order = left, right, root.",
+            "book_ref": {
+              "topic_id": "3ff4ec15-e7b3-55e9-8b24-96b1af245315",
+              "quote": "We will use the following simple tree structure with numeric data to understand traversal functions more easily."
+            },
+            "steps": [
+              "In-order (left, root, right): left subtree of A gives D, B, E; then A; right subtree of A gives C, F (C has no left child)",
+              "In-order: D, B, E, A, C, F",
+              "Pre-order (root, left, right): A first; then B's subtree B, D, E; then C's subtree C, F",
+              "Pre-order: A, B, D, E, C, F",
+              "Post-order (left, right, root): B's subtree D, E, B; then C's subtree F, C; then A last",
+              "Post-order: D, E, B, F, C, A"
+            ],
+            "final_answer": "In-order D, B, E, A, C, F; pre-order A, B, D, E, C, F; post-order D, E, B, F, C, A"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 Define a balanced tree and explain the library example. Describe binary trees and AVL trees with examples. (8 marks)",
+            "explanation": "Balanced tree: a tree whose height is kept as small as possible by keeping the height difference between the left and right subtrees of any node no more than a certain value (commonly 1). This keeps searching, insertion and deletion close to O(log n).\nLibrary example: the root is Science, divided into Physics and Biology; Physics into Classical Mechanics and Quantum Physics, Biology into Botany and Zoology. A book on Quantum Physics is found by going Science, then Physics, then Quantum Physics; because the tree is balanced the search is quick.\n\nBinary tree: a hierarchical data structure in which each node can have at most two children, the left and right children. Example (Figure 4.9): \"Grandparent\" is the root with two children \"Parent1\" and \"Parent2\", and each parent can have its own children such as \"Child1\" and \"Child2\".\n\nAVL tree: a type of binary tree that keeps itself balanced; if one side starts getting too tall compared to the other, the tree rearranges itself. Example (Figure 4.10): like balancing books on shelves, the tree stays balanced after each new number is added; the left side (15, 10, 18) and the right side (30) differ in height only a little.",
+            "book_ref": {
+              "topic_id": "0e77ba9d-e51d-5859-b952-448d0a6e13c1",
+              "quote": "This structure is analogous to a family tree, where each individual may have up to two descendants"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 Explain any four applications of trees. (8 marks)",
+            "explanation": "1. File systems (backup): pre-order traversal visits the root first and then backs up each directory recursively, so directories are backed up before their contents.\n\n2. File system deletion: post-order traversal deletes all subdirectories and files first and the parent directory last, so things are deleted in the correct order.\n\n3. Hierarchical data representation: trees represent data with a clear hierarchical relationship, such as organisational charts and family trees.\n\n4. Syntax parsing: in programming languages trees are used to parse and represent the syntax of source code, helping compilers understand and process the code structure.\n\n(Decision making: decision trees are used in algorithms to make decisions based on various conditions and outcomes.)",
+            "book_ref": {
+              "topic_id": "bb1d9c7f-0279-50c0-b1a3-2ce58974c086",
+              "quote": "Hierarchical Data Representation: Trees are used in representing data"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Define a graph with an example. Describe its characteristics (vertices and edges) and differentiate between a tree and a graph. (8 marks)",
+            "explanation": "Definition: a graph is a data structure that consists of a set of vertices (nodes) connected by edges. It represents networks of connections, where each connection is a relationship between two vertices. Example: mapping the cities of Pakistan, each city is a vertex and each road between two cities is an edge.\n\nCharacteristics:\n1. Vertices (nodes): the individual points or entities of the graph, e.g. each user in a social network graph.\n2. Edges (links): the connections between vertices, e.g. each road connecting two cities in a transport graph.\n\nA tree is a special kind of graph. Differences are given in the table.",
+            "book_ref": {
+              "topic_id": "6b975c6d-4863-5cee-90ce-70f0af3c7d24",
+              "quote": "Difference from a Tree: While both graphs and trees are used to represent relationships between objects"
+            },
+            "answer_table": {
+              "header": [
+                "Tree",
+                "Graph"
+              ],
+              "rows": [
+                [
+                  "Hierarchical: a single root node from which all other nodes branch out",
+                  "Does not necessarily have a hierarchy or a root"
+                ],
+                [
+                  "Exactly one path between any two nodes, so no cycles (loops)",
+                  "Multiple paths between nodes; cycles are allowed"
+                ],
+                [
+                  "Strict parent-child relationships",
+                  "Any two vertices can be connected, forming a complex web"
+                ],
+                [
+                  "Used for structured data such as family trees and organizational charts",
+                  "More flexible: networks, web links, transport systems"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 Explain the operations on graphs (insertion, deletion, traversal and searching) with examples. Describe the two traversal techniques. (8 marks)",
+            "explanation": "1. Insertion: adding a new vertex or edge. Example: a new city added to the transport map introduces a new vertex and possibly new edges.\n\n2. Deletion: removing a vertex or edge. Example: if a city is removed from the map, its vertex and all edges connected to it are deleted.\n\n3. Traversal: visiting all vertices and edges systematically, by two techniques:\n   Breadth-First Search (BFS): starts from a source vertex and explores all its immediate neighbours before moving to the next level of vertices. Example: from a central train station you first visit every neighbourhood directly connected to it, then the neighbourhoods connected to those, until all reachable ones are explored.\n   Depth-First Search (DFS): starts from a source vertex and explores as far as possible along each branch before backtracking.\n\n4. Searching: finding a specific vertex or edge in the graph, e.g. locating particular cities or routes efficiently.",
+            "book_ref": {
+              "topic_id": "060b70ad-4070-5b19-99b7-489cddbb046c",
+              "quote": "Traversal: Visiting all vertices and edges systematically."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 Explain the properties of graphs (degree, weight and direction). Describe the three main types of graphs with examples. (8 marks)",
+            "explanation": "Properties:\n1. Degree: the number of edges connected to a vertex; a city connected to three other cities has degree 3.\n2. Weight: in some graphs edges carry weights representing values like distances or costs; a 50 km road can have weight 50.\n3. Direction: edges are directed (one-way: a road from A to B does not mean a return road from B to A) or undirected (two-way).\n\nTypes:\n1. Directed graph: edges have a direction from one vertex to another (Figure 4.11). Example: you can travel from city A to city B only in the direction the sign permits; with no one-way street from A to B you cannot go directly.\n2. Undirected graph: edges have no direction, so you can travel both ways (Figure 4.12). Example: if Person A is friends with Person B, then B is also friends with A.\n3. Weighted graph: each edge has a weight or cost, representing the distance, time or cost to travel between vertices. Example: a city map with the distance or travel time of each road, used to find the shortest or quickest route between landmarks.",
+            "book_ref": {
+              "topic_id": "be0c4516-54da-538a-bee6-3e68343765f7",
+              "quote": "Each type has its own characteristics, which can be better understood through simple examples."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 Why is choosing the right data structure important? Explain when a stack, a queue, a list, a tree and a graph should be used, with one application of each. (8 marks)",
+            "explanation": "Different data structures suit different types of problems; selecting the right one makes the solution more efficient and easier to implement. When to use each is shown in the table.",
+            "book_ref": {
+              "topic_id": "0ac30122-7359-58e6-90eb-e7f71a941448",
+              "quote": "Let's break down when each of the five data structures"
+            },
+            "answer_table": {
+              "header": [
+                "Structure",
+                "When to use",
+                "Application"
+              ],
+              "rows": [
+                [
+                  "Stack",
+                  "Data processed in reverse order of arrival (LIFO); backtracking",
+                  "Undo in text editors; expression evaluation; DFS"
+                ],
+                [
+                  "Queue",
+                  "Processing in First-In, First-Out (FIFO) order",
+                  "Task scheduling such as print jobs or web server requests; BFS"
+                ],
+                [
+                  "List",
+                  "Ordered collection where order matters and access by index is needed",
+                  "Storing a to-do list or playlist; building stacks and queues"
+                ],
+                [
+                  "Tree",
+                  "Hierarchical data with parent-child relationships",
+                  "File systems, XML/HTML documents; binary search trees"
+                ],
+                [
+                  "Graph",
+                  "Objects (nodes) and connections (edges) in a network",
+                  "Social networks; shortest path in maps; build order of software"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 A graph is drawn as a tree: node 1 has children 2 and 3; node 2 has children 4 and 5; node 3 has one child 6. Using a stack, traverse it by Depth-First Search, showing the stack after each step (push children so that the left child is on top). (8 marks)",
+            "explanation": "DFS pushes the root, then repeatedly pops the top node, marks it visited and pushes its unvisited children. The stack is written with the top at the right.",
+            "book_ref": {
+              "topic_id": "78179912-f24b-568e-8924-68f8599faa8c",
+              "quote": "This method is particularly useful when we need to explore as far as possible along a branch before backtracking"
+            },
+            "steps": [
+              "Push the root: stack [1]",
+              "Pop 1, visit it, push its children 3 and 2: stack [3, 2]",
+              "Pop 2, visit it, push its children 5 and 4: stack [3, 5, 4]",
+              "Pop 4, visit it (no children): stack [3, 5]",
+              "Pop 5, visit it (no children): stack [3]",
+              "Pop 3, visit it, push its child 6: stack [6]",
+              "Pop 6, visit it (no children): stack [ ]; the stack is empty"
+            ],
+            "final_answer": "DFS order: 1, 2, 4, 5, 3, 6"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "22 Why are computational structures combined to solve complex problems? Write a Python program that combines a list and a stack to reverse the list [\"Ali\", \"Sara\", \"Zain\", \"Hina\"], and explain it. (8 marks)",
+            "explanation": "Each structure (list, stack, queue, tree, graph) has its own strengths. Combining them gives stronger and more efficient solutions and helps manage complex data relationships, e.g. stacks with queues to evaluate expressions, a stack with a graph for DFS and a queue with a graph for BFS. A list gives flexible storage and access, while a stack imposes LIFO order, which is useful for reversing, undoing and backtracking.\n\nProgram:\nnames = [\"Ali\", \"Sara\", \"Zain\", \"Hina\"]\nstack = []\nfor n in names:\n    stack.append(n)\nprint(\"Stack:\", stack)\nreversed_names = []\nfor n in names:\n    reversed_names.append(stack.pop())\nprint(\"Reversed list:\", reversed_names)\n\nOutput:\nStack: ['Ali', 'Sara', 'Zain', 'Hina']\nReversed list: ['Hina', 'Zain', 'Sara', 'Ali']\n\nExplanation: step 1 pushes each element of the list onto the stack, so \"Hina\" is on top. Step 2 pops the elements one by one into a new list; because the stack is LIFO, they come out in reverse order.",
+            "book_ref": {
+              "topic_id": "c1d6729e-5ca6-5937-9635-1ea490a129d1",
+              "quote": "A list allows for flexible data storage and access, while a stack imposes a Last-In-First-Out (LIFO) order"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
