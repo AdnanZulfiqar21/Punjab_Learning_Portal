@@ -78,7 +78,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             >
               <BrandMark id="hdr" className="size-8 shrink-0 sm:size-9" />
               <span>
-                Sirf <span className="text-[#b07510] dark:text-[#f2c25c]">Concepts</span>
+                Sirf <span className="text-[#8f5b00] dark:text-[#f2c25c]">Concepts</span>
               </span>
             </Link>
             <Suspense fallback={<SiteNavFallback account={<AccountSlot />} />}>
