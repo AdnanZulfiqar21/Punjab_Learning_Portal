@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH5-LONG-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch5",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch5/u-long-questions",
+      "title": "Long Questions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH5-LONG",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 64,
+          "pdf_to": 75,
+          "note": "Roman Urdu: practice long questions written from Chapter 5 (PDF 64-75), not printed in the book; same questions and order as the English set. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Yeh chapter 5 (Code Testing and Debugging) ke poore chapter se practice long questions (tafseeli sawal) hain, Board ke long question ki shakal mein: har sawal 8 number ka hai (definition, misalon ke saath wazahat, farq, program likh kar samjhana), aksar definition aur wazahat ke hisson mein (jaise 2 + 3 x 2). Har sawal ka poora model jawab hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Define a syntax error, a logic error and a runtime error (3). For each program below, name the error, correct it and give the output of the corrected program (5).\n\nProgram A:\nprint(\"Average:\" 72)\n\nProgram B:\ntotal = 360\nsubjects = 0\nprint(total / subjects)\n\nProgram C:\nlength = 5\nwidth = 3\narea = length + width\nprint(area) (8 marks)\n(Syntax error, logic error aur runtime error ki definition likhein (3). Neeche har program ka error batayein, use durust karein aur durust program ka output likhein (5).\n\nProgram A:\nprint(\"Average:\" 72)\n\nProgram B:\ntotal = 360\nsubjects = 0\nprint(total / subjects)\n\nProgram C:\nlength = 5\nwidth = 3\narea = length + width\nprint(area))",
+            "explanation": "Definitions (3):\n1. Syntax error: jab code zaban ke usool par na ho; program chalta hi nahin.\n2. Logic error: program chalta hai magar ghalat nateeja deta hai.\n3. Runtime error: program chalte waqt aata hai.\n(Doosre aam bugs: data errors aur resource leaks.)\n\nPrograms (5):\nProgram A - syntax error: do values ke darmiyan comma ghaib hai.\nprint(\"Average:\", 72)\n\nOutput:\nAverage: 72\n\nProgram B - runtime error: subjects 0 hone ki wajah se program ZeroDivisionError: division by zero par ruk jata hai. Subjects ki asal tadaad (5) ke saath:\ntotal = 360\nsubjects = 5\nprint(total / subjects)\n\nOutput:\n72.0\n\nProgram C - logic error: yeh 8 print karta hai kyunke zarb ki jagah jama karta hai.\nlength = 5\nwidth = 3\narea = length * width\nprint(area)\n\nOutput:\n15",
+            "book_ref": {
+              "topic_id": "eec0ef62-5f3c-5aff-ac1a-c403d6abf91e",
+              "quote": "Identifying these errors is key to building stable applications"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Explain how unit testing catches a logic error early (2). A function rectangle_area() is tested with pytest as shown. Give the result pytest reports, find the error, correct it and give the new result (6).\n\ndef rectangle_area(length, width):\n    return length + width\n\ndef test_area_small():\n    assert rectangle_area(2, 2) == 4\n\ndef test_area():\n    assert rectangle_area(5, 3) == 15\n (8 marks)\n(Samjhayein ke unit testing logic error ko jaldi kaise pakadti hai (2). Function rectangle_area() ko pytest se aise test kiya gaya hai. pytest ka nateeja batayein, ghalti dhoondein, durust karein aur naya nateeja batayein (6).\n\ndef rectangle_area(length, width):\n    return length + width\n\ndef test_area_small():\n    assert rectangle_area(2, 2) == 4\n\ndef test_area():\n    assert rectangle_area(5, 3) == 15\n)",
+            "explanation": "Unit testing (2): yeh program ke alag hisson (units), jaise function, ko test karti hai taake woh sahi chalein. Har test inputs de kar mutawaqqa output check karta hai, is liye ghalat nateeja jaldi pakda jata hai, poore program mein istemal se pehle; is se debugging aasan hoti hai.\n\nNateeja aur durusti (6):\n1. File ke folder mein command line par pytest chalane se nateeja: 1 failed, 1 passed.\n2. test_area_small pass hota hai kyunke 2 + 2 ittefaq se 2 x 2 = 4 ke barabar hai; test_area AssertionError ke saath fail hota hai kyunke rectangle_area(5, 3) 8 deta hai, 15 nahin.\n3. Function bina message ke chalta hai magar ghalat nateeja deta hai: logic error (zarb ki jagah jama).\n4. Durusti: return length * width\n5. Dobara pytest chalane par nateeja: 2 passed.\n6. Sabaq: aik se zyada test cases chahiyein; aik ittefaqi input (2, 2) ne ghalti chhupa di thi, aur baar baar testing durusti ki tasdeeq karti hai.",
+            "book_ref": {
+              "topic_id": "529768a1-9e82-5661-836c-5c3aca7f4acb",
+              "quote": "Unit testing is the process of testing individual parts or units of a program to ensure they work correctly."
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "Dhyan dein: (2, 2) par jama aur zarb dono 4 dete hain, is liye sirf yeh test ghalti nahin pakadta. Isi liye mukhtalif inputs wale test cases likhe jate hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 What does a test case define (2)? Write a function grade(marks) that returns \"A\" for 80 and above, \"B\" for 60 to 79 and \"C\" below 60, with three pytest test functions, and explain how the tests are run and what is reported (6). (8 marks)\n(Test case kya tay karta hai (2)? Aik function grade(marks) likhein jo 80 aur zyada par \"A\", 60 se 79 par \"B\" aur 60 se kam par \"C\" de, saath teen pytest test functions, aur samjhayein ke tests kaise chalte hain aur kya nateeja aata hai (6).)",
+            "explanation": "Test case (2): test case kisi function ke khaas inputs aur mutawaqqa output (aur jaanch ki sharait) tay karta hai. Python tests chala kar failures ya errors batata hai.\n\nProgram (file test_grade.py) (6):\ndef grade(marks):\n    if marks >= 80:\n        return \"A\"\n    elif marks >= 60:\n        return \"B\"\n    else:\n        return \"C\"\n\ndef test_grade_a():\n    assert grade(85) == \"A\"\n\ndef test_grade_b():\n    assert grade(60) == \"B\"\n\ndef test_grade_c():\n    assert grade(45) == \"C\"\n\nWazahat:\n1. Har test function test_ se shuru hota hai, is liye pytest use khud dhoond kar chalata hai.\n2. Har test aik input (85, 60, 45) deta hai aur assert se mutawaqqa grade check karta hai; 60 grade B ki had (boundary) check karta hai.\n3. Tests chalane ke liye file ke folder mein command line par pytest chalayein.\n4. pytest ka nateeja: 3 passed. Agar baad mein koi tabdeeli grade() ko kharab kare to fail hone wala test bata dega; yun baar baar testing purane kaam ki hifazat karti hai.",
+            "book_ref": {
+              "topic_id": "baaf6a58-0318-5472-b61e-523acc590052",
+              "quote": "Test cases define specific inputs and the expected output for a function."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Compare Python's unittest and pytest modules (4). Explain what makes test cases useful in development: clear inputs and expected outputs, automated and repeated execution (4). (8 marks)\n(Python ke unittest aur pytest modules ka muqabla karein (4). Samjhayein ke development mein test cases kis wajah se mufeed hain: saaf inputs aur mutawaqqa outputs, automated aur baar baar chalana (4).)",
+            "explanation": "unittest aur pytest (4): table dekhein.\n\nMufeed test cases (4):\n1. Saaf inputs aur mutawaqqa output: test case khaas inputs aur expected output tay karta hai, jaise calculator function ko jama aur tafreeq ke nataij ke liye test karna; saaf aur saade tests bharosa barhate hain.\n2. Reporting: Python tests chala kar failures ya errors batata hai, jis se ghalat hissa saamne aata hai.\n3. Baar baar testing yaqeeni banati hai ke code ki tabdeeli purana kaam kharab na kare.\n4. Automated test execution development mein waqt bachata, durustagi barhata aur bade applications mein ghaltiyan kam karta hai.",
+            "book_ref": {
+              "topic_id": "8ceb305b-c283-5682-97ee-dcbd6c122348",
+              "quote": "Both modules help verify that code behaves as expected."
+            },
+            "answer_table": {
+              "header": [
+                "unittest",
+                "pytest"
+              ],
+              "rows": [
+                [
+                  "Python mein pehle se shamil.",
+                  "External module."
+                ],
+                [
+                  "Test cases banane ka framework, test case classes ke saath.",
+                  "Test case classes ya boilerplate code nahin; tests likhna aur chalana aasan."
+                ],
+                [
+                  "Tests test case classes ke andar methods hote hain.",
+                  "Tests saade functions jo test_ se shuru hon aur assert se check hon."
+                ],
+                [
+                  "Functions, classes ya poore modules test kar sakta hai.",
+                  "Functions, classes ya poore modules test kar sakta hai; command line par pytest se chalta hai."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 The program below should print the average 70.0 of three marks but prints a different value. Explain how you would use a breakpoint and watch expressions to find the bug, then correct it (8).\n\ndef average(marks):\n    total = 0\n    for m in marks:\n        total = total + m\n    return total / (len(marks) + 1)\n\nprint(average([60, 70, 80])) (8 marks)\n(Neeche wala program teen marks ka average 70.0 print karna chahiye magar kuch aur print karta hai. Samjhayein ke breakpoint aur watch expressions se bug kaise dhoondenge, phir use durust karein (8).\n\ndef average(marks):\n    total = 0\n    for m in marks:\n        total = total + m\n    return total / (len(marks) + 1)\n\nprint(average([60, 70, 80])))",
+            "explanation": "1. Chalayein: program 70.0 ki jagah 52.5 print karta hai. Koi error message nahin, is liye yeh logic error hai jise sirf testing jagah samet nahin batati.\n2. Breakpoint lagayein: PyCharm mein return wali line ke saath margin ke line number par click karein. Program wahan pohanch kar ruk jata hai aur us ki halat dekhi ja sakti hai.\n3. total, len(marks) aur len(marks) + 1 ki watch expressions lagayein. Watches program chalte waqt values dekhti aur khud update hoti hain.\n4. Loop mein qadam ba qadam chalein (har line par Step Over): total ki watch 0, 60, 130, 210 dikhati hai, jo sahi hai.\n5. Return line par watches total = 210 aur len(marks) + 1 = 4 dikhati hain, yani program 3 ki jagah 4 se taqseem karta hai: bug + 1 hai.\n6. Line ko return total / len(marks) karein:\ndef average(marks):\n    total = 0\n    for m in marks:\n        total = total + m\n    return total / len(marks)\n\nprint(average([60, 70, 80]))\n\nOutput:\n70.0\n7. Breakpoints aur watches program ko chuni jagah rok kar data dikhate hain, is liye debugging andaze se tez aur durust hoti hai.",
+            "book_ref": {
+              "topic_id": "06f3ce6f-835d-558c-9327-79fba66e7056",
+              "quote": "These tools help identify errors and understand how code flows."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Breakpoints are set at radius = 3 and radius = 6 in the program below, and a watch is added for radius. Trace a step-by-step debugging session using Continue, Step Into and Step Over, and give what is printed (8).\n\ndef calculate_area(radius):\n    area = 3.14 * radius ** 2\n    return area\n\ndef main():\n    radius = 3\n    print(\"Area of circle:\", calculate_area(radius))\n    radius = 6\n    print(\"Area of circle:\", calculate_area(radius))\n\nif __name__ == \"__main__\":\n    main() (8 marks)\n(Neeche ke program mein radius = 3 aur radius = 6 par breakpoints lage hain aur radius ki watch lagi hai. Continue, Step Into aur Step Over istemal karte hue step-by-step debugging ka trace likhein aur print hone wali cheezein batayein (8).\n\ndef calculate_area(radius):\n    area = 3.14 * radius ** 2\n    return area\n\ndef main():\n    radius = 3\n    print(\"Area of circle:\", calculate_area(radius))\n    radius = 6\n    print(\"Area of circle:\", calculate_area(radius))\n\nif __name__ == \"__main__\":\n    main())",
+            "explanation": "Step-by-step debugging code ko aik line ya aik function kar ke chalati hai; ruknay ki jagah, watch ki value aur har command ko follow karein.",
+            "book_ref": {
+              "topic_id": "accc3833-d8b7-5dac-96f1-ed4c892f1fe2",
+              "quote": "This process makes it easier to locate and fix bugs accurately"
+            },
+            "steps": [
+              "Debugger shuru karein: program main() mein ja kar pehle breakpoint radius = 3 par rukta hai (yeh line abhi nahin chali).",
+              "Step Over: radius = 3 chalti hai; watch ab radius = 3 dikhati hai.",
+              "Print wali line par Step Into: debugger calculate_area(radius) ke andar ja kar dikhata hai; area = 3.14 * 3 ** 2 = 28.26 banta hai.",
+              "Baqi lines par Step Over: value wapas aa kar print hoti hai: Area of circle: 28.26.",
+              "Continue: program agle breakpoint tak chal kar radius = 6 par rukta hai.",
+              "Step Over: radius = 6 chalti hai; radius ki watch 3 se 6 ho jati hai.",
+              "Print line par Step Over (function ke andar gaye baghair; function phir bhi chalta hai): Area of circle: 113.04.",
+              "Continue: koi breakpoint baqi nahin, program aakhir tak chalta hai."
+            ],
+            "final_answer": "Print: Area of circle: 28.26 aur Area of circle: 113.04; radius ki watch pehle 3, phir 6 dikhati hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 A breakpoint is set on the line total = total + num and watch expressions are added for num and total. Trace the values shown by the watches each time the program pauses, and give the output (8).\n\nnumbers = [4, 7, 9]\ntotal = 0\nfor num in numbers:\n    total = total + num\nprint(\"Total:\", total) (8 marks)\n(Line total = total + num par breakpoint laga hai aur num aur total ki watch expressions lagi hain. Har baar program rukne par watches ki values ka trace likhein aur output batayein (8).\n\nnumbers = [4, 7, 9]\ntotal = 0\nfor num in numbers:\n    total = total + num\nprint(\"Total:\", total))",
+            "explanation": "Watch expressions program chalte waqt variables ki values dekhti hain aur badalne par khud update hoti hain; breakpoint har baar line chalne se pehle loop ko rokta hai.",
+            "book_ref": {
+              "topic_id": "acb684c7-47ef-5169-a8c3-64be5103eb76",
+              "quote": "Watches allow observing how data changes step by step in real time."
+            },
+            "steps": [
+              "Loop se pehle: total = 0.",
+              "Rukna 1 (pehli baar): watches num = 4, total = 0 dikhati hain. Line chalne ke baad (Continue) total 4 ho jata hai.",
+              "Rukna 2: num = 7, total = 4. Line ke baad total = 11.",
+              "Rukna 3: num = 9, total = 11. Line ke baad total = 20.",
+              "Mazeed items nahin: loop khatam aur print chalta hai: Total: 20.",
+              "Agar kisi rukne par total ghalat lagta to watch theek woh iteration dikhati jahan data ghalat hua."
+            ],
+            "final_answer": "Watch values: (num, line se pehle total) = (4, 0), (7, 4), (9, 11); output Total: 20."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Write a Python program that takes two numbers from the user and divides them, using exception handling to show an error message if the user enters invalid input or tries to divide by zero. Explain how each exception type gets its own response and show three runs (8). (8 marks)\n(Aisa Python program likhein jo user se do numbers le kar taqseem kare aur exception handling se error message dikhaye agar user ghalat input de ya zero se taqseem kare. Samjhayein ke har exception ki qism ko apna jawab kaise milta hai aur teen runs dikhayein (8).)",
+            "explanation": "try:\n    a = int(input(\"Enter first number: \"))\n    b = int(input(\"Enter second number: \"))\n    print(\"Result:\", a / b)\nexcept ValueError:\n    print(\"Error: please enter whole numbers only\")\nexcept ZeroDivisionError:\n    print(\"Error: cannot divide by zero\")\nfinally:\n    print(\"Program finished\")\n\nRun 1:\nEnter first number: 20\nEnter second number: 4\nResult: 5.0\nProgram finished\n\nRun 2:\nEnter first number: 20\nEnter second number: 0\nError: cannot divide by zero\nProgram finished\n\nRun 3:\nEnter first number: 20\nEnter second number: abc\nError: please enter whole numbers only\nProgram finished\n\nWazahat:\n1. Khatre wale statements (input ko number banana aur taqseem) try ke andar hain.\n2. Aik program ko mukhtalif exceptions mil sakti hain: digits ke ilawa par int() ValueError deta hai; 0 se taqseem ZeroDivisionError deti hai.\n3. Har exception ki qism ka apna except block aur khaas jawab hai, is liye user ko sahi message milta hai.\n4. finally har haal mein chalta hai. Program kabhi crash nahin hota; kai exceptions sambhalne se mazbooti aur errors par control barhta hai.",
+            "book_ref": {
+              "topic_id": "6527fef5-bcab-506d-9bd0-0b09585e42ac",
+              "quote": "A single program may encounter different types of exceptions."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Explain the roles of try-except, commit(), rollback() and finally in the chapter's database example (2 x 4). The example is run on a new school.db file that has no students table yet: what does it print? (8 marks)\n(Chapter ki database misal mein try-except, commit(), rollback() aur finally ka kirdar samjhayein (2 x 4). Yeh misal aisi nayi school.db file par chalai jaye jis mein abhi students table nahin: yeh kya print karegi?)",
+            "explanation": "1. try-except: errors sambhalta aur crash rokta hai. Connection, cursor, INSERT aur commit try ke andar hain; database error (sqlite3.Error) aaye to except block error print karta hai, program achanak nahin rukta.\n\n2. commit(): sahi data save karta aur data ki durustagi (integrity) yaqeeni banata hai; yeh sirf INSERT kamyab hone par chalta hai.\n\n3. rollback(): except block mein error ki surat mein tabdeeliyan mansookh (undo) karta hai, taake adhoora data na rahe.\n\n4. finally: error ho ya na ho, hamesha chalta hai aur database connection mehfooz tareeqe se band karta hai.\n\nNayi school.db par jahan students table nahin, INSERT nakam hota hai, is liye except aur finally chalte hain:\nError occurred: no such table: students\nConnection closed",
+            "book_ref": {
+              "topic_id": "256f8a51-ec4a-5483-9bed-97ed0965c4ff",
+              "quote": "Proper exception handling improves program reliability and user experience."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Define profiling and optimization (2 + 2). For the nested loop below, work out how many times the inner statement runs and explain why such code becomes a performance bottleneck (4).\n\ncount = 0\nfor i in range(2000):\n    for j in range(3000):\n        count = count + 1\nprint(count) (8 marks)\n(Profiling aur optimization ki definition likhein (2 + 2). Neeche ke nested loop mein andar wala statement kitni baar chalta hai nikalein aur samjhayein ke aisa code performance bottleneck kyun banta hai (4).\n\ncount = 0\nfor i in range(2000):\n    for j in range(3000):\n        count = count + 1\nprint(count))",
+            "explanation": "Profiling napti hai ke code ka har hissa kitna waqt aur resources leta hai; optimization sust ya bhari hisson ko tez banati hai. Nested loop mein andar wala statement (bahar ki ginti) x (andar ki ginti) baar chalta hai.",
+            "book_ref": {
+              "topic_id": "7bd47f48-3543-5750-badc-f8b4bddedc1b",
+              "quote": "This means the inner statement may run one hundred million times"
+            },
+            "steps": [
+              "Profiling: program ki performance napne ka amal taake pata chale code ke kaun se hisse zyada waqt ya resources lete hain.",
+              "Optimization: code ko behtar karne ka amal taake woh tez chale, kam resources le ya zyada efficient ho.",
+              "Bahar wala loop 2000 baar chalta hai.",
+              "Bahar wale loop ki har aik baar par andar wala loop 3000 baar chalta hai.",
+              "Kul executions = 2000 x 3000 = 6,000,000 (program 6000000 print karta hai).",
+              "Ginti zarb se barhti hai (kitab ka 10000 x 10000 loop 100,000,000 baar chalta hai), is liye aisa hissa program ko bohat sust kar sakta hai: performance bottleneck. Profiling tools ise dhoondte hain taake optimise kiya ja sake."
+            ],
+            "final_answer": "Andar wala statement 6,000,000 baar chalta hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Write a Python program that adds the numbers 1 to 100000 in two ways, with a manual loop (slow_sum) and with the built-in sum() (fast_sum), and uses timeit to compare their execution times. Give the output and explain which function is the bottleneck and why (8). (8 marks)\n(Aisa Python program likhein jo 1 se 100000 tak ke numbers do tareeqon se jode, manual loop (slow_sum) aur built-in sum() (fast_sum), aur timeit se dono ka execution time compare kare. Output dein aur samjhayein ke kaun sa function bottleneck hai aur kyun (8).)",
+            "explanation": "import timeit\n\ndef slow_sum(numbers):\n    total = 0\n    for num in numbers:\n        total = total + num\n    return total\n\ndef fast_sum(numbers):\n    return sum(numbers)\n\nnumbers = list(range(1, 100001))\nprint(\"Slow code result:\", slow_sum(numbers))\nprint(\"Fast code result:\", fast_sum(numbers))\n\nslow_time = timeit.timeit(lambda: slow_sum(numbers), number=10)\nfast_time = timeit.timeit(lambda: fast_sum(numbers), number=10)\nprint(\"Slow code time:\", round(slow_time, 3))\nprint(\"Fast code time:\", round(fast_time, 3))\n\nOutput (aik run; waqt ki values har computer par mukhtalif hoti hain):\nSlow code result: 5000050000\nFast code result: 5000050000\nSlow code time: 0.015\nFast code time: 0.003\n\nWazahat:\n1. Dono functions ka nateeja aik hai, 5000050000; sirf raftar mukhtalif hai.\n2. timeit har function ko 10 baar (number=10) chala kar kul waqt deta hai, is liye dono waqt compare ho sakte hain.\n3. slow_sum() zyada waqt leta hai kyunke loop mein aik aik number khud jodta hai; fast_sum() kam waqt leta hai kyunke Python ka built-in sum() pehle se optimised hai.\n4. Jo function zyada execution time le woh bottleneck hai, is liye slow_sum() bottleneck hai. Ise sum() se badalna optimization hai (ghair zaroori operations kam karna), jis se program ki raftar aur responsiveness barhti hai. cProfile.run(\"main()\") har function ke waqt ki report bhi de sakta hai.",
+            "book_ref": {
+              "topic_id": "c60e0135-5823-5035-bbc2-d820fb56bb0b",
+              "quote": "Fixing bottlenecks improves overall program speed and responsiveness"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Explain how profiling tools measure performance and what their reports show (4). What is a performance bottleneck? Explain three optimization techniques for fixing it (4). (8 marks)\n(Samjhayein ke profiling tools performance kaise napte hain aur un ki reports kya dikhati hain (4). Performance bottleneck kya hai? Ise theek karne ki teen optimization techniques samjhayein (4).)",
+            "explanation": "Profiling tools (4):\n1. Profiling tools program ke mukhtalif functions ka execution time aur memory ka istemal track karte hain.\n2. Python cProfile (har function ke waqt ki report) aur timeit (execution time ka muqabla) jaise modules deta hai.\n3. Reports dikhati hain ke code ke kaun se hisse sust ya bhari hain; Figure 5.3 aisa output dikhati hai jis ke columns Function, Call Count, Time, Cumulative Time aur Description hain.\n4. Performance napne se optimization ki tarjeeh tay hoti hai, aur baqaida profiling code ko barhne ke saath efficient rakhti hai.\n\nBottleneck aur optimization (4):\nPerformance bottleneck code ka woh hissa hai jo program ko sust aur kam efficient karta hai; profiling reports ise dhoondti hain. Optimization techniques:\n1. Algorithms behtar karna: wahi kaam tez tareeqe se.\n2. Ghair zaroori operations kam karna, jaise manual loop ki jagah optimised built-in sum().\n3. Efficient data structures istemal karna.\nBottlenecks theek karne se program ki raftar aur responsiveness barhti hai.",
+            "book_ref": {
+              "topic_id": "8e15c934-bc3f-5d84-bada-6df039f78f5e",
+              "quote": "These tools generate reports showing which parts of the code are slow or resource-intensive"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

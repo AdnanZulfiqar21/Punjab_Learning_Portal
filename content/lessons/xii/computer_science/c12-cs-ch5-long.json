@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH5-LONG",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch5",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch5/u-long-questions",
+      "title": "Long Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 64,
+          "pdf_to": 75,
+          "note": "Practice long questions written from Chapter 5 (PDF 64-75, printed 60-71); not printed in the book. Based on the chapter's text, tables, boxes and worked examples (numericals with changed values); none repeats the chapter exercise. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice long questions for the whole of Chapter 5 (Code Testing and Debugging), in the shape of a Board long question: each theory question carries 8 marks (define, explain with examples, compare, write and explain a program), often as a definition plus explained points (e.g. 2 + 3 x 2). Each question has a full model answer."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Define a syntax error, a logic error and a runtime error (3). For each program below, name the error, correct it and give the output of the corrected program (5).\n\nProgram A:\nprint(\"Average:\" 72)\n\nProgram B:\ntotal = 360\nsubjects = 0\nprint(total / subjects)\n\nProgram C:\nlength = 5\nwidth = 3\narea = length + width\nprint(area) (8 marks)",
+            "explanation": "Definitions (3):\n1. Syntax error: occurs when code does not follow the language rules; the program does not run.\n2. Logic error: the program runs but produces incorrect results.\n3. Runtime error: appears while the program is running.\n(Other common bugs include data errors and resource leaks.)\n\nPrograms (5):\nProgram A - syntax error: the comma between the two values is missing.\nprint(\"Average:\", 72)\n\nOutput:\nAverage: 72\n\nProgram B - runtime error: it stops with ZeroDivisionError: division by zero because subjects is 0. Using the real number of subjects (5):\ntotal = 360\nsubjects = 5\nprint(total / subjects)\n\nOutput:\n72.0\n\nProgram C - logic error: it prints 8 because it adds instead of multiplying.\nlength = 5\nwidth = 3\narea = length * width\nprint(area)\n\nOutput:\n15",
+            "book_ref": {
+              "topic_id": "eec0ef62-5f3c-5aff-ac1a-c403d6abf91e",
+              "quote": "Identifying these errors is key to building stable applications"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Explain how unit testing catches a logic error early (2). A function rectangle_area() is tested with pytest as shown. Give the result pytest reports, find the error, correct it and give the new result (6).\n\ndef rectangle_area(length, width):\n    return length + width\n\ndef test_area_small():\n    assert rectangle_area(2, 2) == 4\n\ndef test_area():\n    assert rectangle_area(5, 3) == 15\n (8 marks)",
+            "explanation": "Unit testing (2): it tests individual units of a program, such as a function, to ensure they work correctly. Each test gives inputs and checks the expected output, so a wrong result is caught early, before the function is used in the whole program, which makes debugging easier.\n\nResult and correction (6):\n1. Running pytest in the command line in the file's directory reports: 1 failed, 1 passed.\n2. test_area_small passes because 2 + 2 happens to equal 2 x 2 = 4; test_area fails with an AssertionError because rectangle_area(5, 3) returns 8, not 15.\n3. The function runs without any message but gives a wrong result: a logic error (it adds instead of multiplying).\n4. Correction: return length * width\n5. Running pytest again reports: 2 passed.\n6. Lesson: more than one test case is needed; one lucky input (2, 2) hid the error, and repeated testing confirms the fix.",
+            "book_ref": {
+              "topic_id": "529768a1-9e82-5661-836c-5c3aca7f4acb",
+              "quote": "Unit testing is the process of testing individual parts or units of a program to ensure they work correctly."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 What does a test case define (2)? Write a function grade(marks) that returns \"A\" for 80 and above, \"B\" for 60 to 79 and \"C\" below 60, with three pytest test functions, and explain how the tests are run and what is reported (6). (8 marks)",
+            "explanation": "Test case (2): a test case defines specific inputs and the expected output for a function (with the conditions of the check). Python executes the tests and reports failures or errors.\n\nProgram (file test_grade.py) (6):\ndef grade(marks):\n    if marks >= 80:\n        return \"A\"\n    elif marks >= 60:\n        return \"B\"\n    else:\n        return \"C\"\n\ndef test_grade_a():\n    assert grade(85) == \"A\"\n\ndef test_grade_b():\n    assert grade(60) == \"B\"\n\ndef test_grade_c():\n    assert grade(45) == \"C\"\n\nExplanation:\n1. Each test function starts with test_, so pytest automatically detects and runs it.\n2. Each test passes one input (85, 60, 45) and uses assert to check the expected grade; 60 checks the boundary of grade B.\n3. To run the tests, execute pytest in the command line in the directory where the file is located.\n4. pytest reports: 3 passed. If a later change broke grade(), the failing test would show it, so repeated testing protects existing functionality.",
+            "book_ref": {
+              "topic_id": "baaf6a58-0318-5472-b61e-523acc590052",
+              "quote": "Test cases define specific inputs and the expected output for a function."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Compare Python's unittest and pytest modules (4). Explain what makes test cases useful in development: clear inputs and expected outputs, automated and repeated execution (4). (8 marks)",
+            "explanation": "unittest vs pytest (4): see the table.\n\nUseful test cases (4):\n1. Clear inputs and expected output: a test case defines specific inputs and the expected output, e.g. a calculator function tested for addition and subtraction results; clear and simple tests improve reliability.\n2. Reporting: Python executes the tests and reports failures or errors, showing which unit is wrong.\n3. Repeated testing ensures that changes in code do not break existing functionality.\n4. Automated test execution saves time and improves accuracy in development, and reduces errors in larger applications.",
+            "book_ref": {
+              "topic_id": "8ceb305b-c283-5682-97ee-dcbd6c122348",
+              "quote": "Both modules help verify that code behaves as expected."
+            },
+            "answer_table": {
+              "header": [
+                "unittest",
+                "pytest"
+              ],
+              "rows": [
+                [
+                  "Built into Python.",
+                  "An external module."
+                ],
+                [
+                  "Provides a framework for creating test cases, with test case classes.",
+                  "No test case classes or boilerplate code; simplifies writing and running tests."
+                ],
+                [
+                  "Tests are methods inside test case classes.",
+                  "Tests are simple functions starting with test_, checked with assert."
+                ],
+                [
+                  "Can test functions, classes or entire modules.",
+                  "Can test functions, classes or entire modules; run with pytest in the command line."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 The program below should print the average 70.0 of three marks but prints a different value. Explain how you would use a breakpoint and watch expressions to find the bug, then correct it (8).\n\ndef average(marks):\n    total = 0\n    for m in marks:\n        total = total + m\n    return total / (len(marks) + 1)\n\nprint(average([60, 70, 80])) (8 marks)",
+            "explanation": "1. Run it: the program prints 52.5 instead of 70.0. There is no error message, so it is a logic error that testing alone does not locate.\n2. Set a breakpoint: in PyCharm click the line number in the margin next to the return line. When the program reaches the breakpoint, execution stops and the current state can be examined.\n3. Add watch expressions for total, len(marks) and len(marks) + 1. Watches track values while the program runs and update automatically.\n4. Step through the loop (Step Over each line): the watch on total changes 0, 60, 130, 210, which is correct.\n5. At the return line the watches show total = 210 and len(marks) + 1 = 4, so the program divides by 4 instead of 3: the bug is the + 1.\n6. Correct the line to return total / len(marks):\ndef average(marks):\n    total = 0\n    for m in marks:\n        total = total + m\n    return total / len(marks)\n\nprint(average([60, 70, 80]))\n\nOutput:\n70.0\n7. Breakpoints and watches pause execution and show the data at a chosen point, making debugging faster and more precise than guessing.",
+            "book_ref": {
+              "topic_id": "06f3ce6f-835d-558c-9327-79fba66e7056",
+              "quote": "These tools help identify errors and understand how code flows."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Breakpoints are set at radius = 3 and radius = 6 in the program below, and a watch is added for radius. Trace a step-by-step debugging session using Continue, Step Into and Step Over, and give what is printed (8).\n\ndef calculate_area(radius):\n    area = 3.14 * radius ** 2\n    return area\n\ndef main():\n    radius = 3\n    print(\"Area of circle:\", calculate_area(radius))\n    radius = 6\n    print(\"Area of circle:\", calculate_area(radius))\n\nif __name__ == \"__main__\":\n    main() (8 marks)",
+            "explanation": "Step-by-step debugging executes code one line or function at a time; follow the pauses, the watch value and each command.",
+            "book_ref": {
+              "topic_id": "accc3833-d8b7-5dac-96f1-ed4c892f1fe2",
+              "quote": "This process makes it easier to locate and fix bugs accurately"
+            },
+            "steps": [
+              "Start the debugger: execution runs into main() and pauses at the first breakpoint, radius = 3 (the line has not run yet).",
+              "Step Over: the line radius = 3 executes; the watch now shows radius = 3.",
+              "Step Into on the print line: the debugger goes inside calculate_area(radius) to show how it works; area = 3.14 * 3 ** 2 is calculated as 28.26.",
+              "Step Over the remaining lines: the value is returned and printed: Area of circle: 28.26.",
+              "Continue: execution continues until the next breakpoint and pauses at radius = 6.",
+              "Step Over: radius = 6 executes; the watch on radius changes from 3 to 6.",
+              "Step Over the print line (without going inside the function; the function still runs): Area of circle: 113.04.",
+              "Continue: no breakpoint is left, so the program runs to the end."
+            ],
+            "final_answer": "Printed: Area of circle: 28.26 and Area of circle: 113.04; the watch on radius shows 3, then 6."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 A breakpoint is set on the line total = total + num and watch expressions are added for num and total. Trace the values shown by the watches each time the program pauses, and give the output (8).\n\nnumbers = [4, 7, 9]\ntotal = 0\nfor num in numbers:\n    total = total + num\nprint(\"Total:\", total) (8 marks)",
+            "explanation": "Watch expressions track the values of variables while the program runs and update automatically when the values change; the breakpoint pauses the loop before the line runs each time.",
+            "book_ref": {
+              "topic_id": "acb684c7-47ef-5169-a8c3-64be5103eb76",
+              "quote": "Watches allow observing how data changes step by step in real time."
+            },
+            "steps": [
+              "Before the loop: total = 0 is set.",
+              "Pause 1 (first iteration): watches show num = 4, total = 0. After the line runs (Continue), total becomes 4.",
+              "Pause 2: num = 7, total = 4. After the line, total = 11.",
+              "Pause 3: num = 9, total = 11. After the line, total = 20.",
+              "No more items: the loop ends and print runs: Total: 20.",
+              "If a total looked wrong at any pause, the watch would show the exact iteration where the data became incorrect."
+            ],
+            "final_answer": "Watch values: (num, total before the line) = (4, 0), (7, 4), (9, 11); output Total: 20."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Write a Python program that takes two numbers from the user and divides them, using exception handling to show an error message if the user enters invalid input or tries to divide by zero. Explain how each exception type gets its own response and show three runs (8). (8 marks)",
+            "explanation": "try:\n    a = int(input(\"Enter first number: \"))\n    b = int(input(\"Enter second number: \"))\n    print(\"Result:\", a / b)\nexcept ValueError:\n    print(\"Error: please enter whole numbers only\")\nexcept ZeroDivisionError:\n    print(\"Error: cannot divide by zero\")\nfinally:\n    print(\"Program finished\")\n\nRun 1:\nEnter first number: 20\nEnter second number: 4\nResult: 5.0\nProgram finished\n\nRun 2:\nEnter first number: 20\nEnter second number: 0\nError: cannot divide by zero\nProgram finished\n\nRun 3:\nEnter first number: 20\nEnter second number: abc\nError: please enter whole numbers only\nProgram finished\n\nExplanation:\n1. The risky statements (input conversion and division) are inside try.\n2. A single program may meet different exceptions: int() of non-digits raises ValueError; dividing by 0 raises ZeroDivisionError.\n3. Each exception type is handled with a specific response in its own except block, so the user gets the right message.\n4. finally runs in every case. The program never crashes; handling multiple exceptions improves stability and control over errors.",
+            "book_ref": {
+              "topic_id": "6527fef5-bcab-506d-9bd0-0b09585e42ac",
+              "quote": "A single program may encounter different types of exceptions."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Explain the roles of try-except, commit(), rollback() and finally in the chapter's database example (2 x 4). The example is run on a new school.db file that has no students table yet: what does it print? (8 marks)",
+            "explanation": "1. try-except: handles errors and prevents crashes. The connection, cursor, INSERT and commit are inside try; if a database error (sqlite3.Error) occurs, the except block prints the error instead of the program stopping suddenly.\n\n2. commit(): saves the correct data and ensures data integrity; it runs only when the INSERT succeeded.\n\n3. rollback(): in the except block, it cancels (undoes) the changes if an error occurs, so no half-finished data is kept.\n\n4. finally: always runs, error or not, and safely closes the database connection.\n\nRun on a new school.db with no students table, the INSERT fails, so the except and finally blocks run:\nError occurred: no such table: students\nConnection closed",
+            "book_ref": {
+              "topic_id": "256f8a51-ec4a-5483-9bed-97ed0965c4ff",
+              "quote": "Proper exception handling improves program reliability and user experience."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Define profiling and optimization (2 + 2). For the nested loop below, work out how many times the inner statement runs and explain why such code becomes a performance bottleneck (4).\n\ncount = 0\nfor i in range(2000):\n    for j in range(3000):\n        count = count + 1\nprint(count) (8 marks)",
+            "explanation": "Profiling measures how much time and resources each part of the code uses; optimization makes slow or resource-heavy parts faster. For a nested loop, the inner statement runs (outer count) x (inner count) times.",
+            "book_ref": {
+              "topic_id": "7bd47f48-3543-5750-badc-f8b4bddedc1b",
+              "quote": "This means the inner statement may run one hundred million times"
+            },
+            "steps": [
+              "Profiling: the process of measuring a program's performance to find which parts of the code take more time or use more resources.",
+              "Optimization: the process of improving code so that it runs faster, uses fewer resources or performs more efficiently.",
+              "The outer loop runs 2000 times.",
+              "For every single iteration of the outer loop, the inner loop runs 3000 times.",
+              "Total executions = 2000 x 3000 = 6,000,000 (the program prints 6000000).",
+              "The count grows by multiplication (the book's 10000 x 10000 loop runs 100,000,000 times), so such a part can make the program very slow: a performance bottleneck. Profiling tools find it so it can be optimised."
+            ],
+            "final_answer": "The inner statement runs 6,000,000 times."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Write a Python program that adds the numbers 1 to 100000 in two ways, with a manual loop (slow_sum) and with the built-in sum() (fast_sum), and uses timeit to compare their execution times. Give the output and explain which function is the bottleneck and why (8). (8 marks)",
+            "explanation": "import timeit\n\ndef slow_sum(numbers):\n    total = 0\n    for num in numbers:\n        total = total + num\n    return total\n\ndef fast_sum(numbers):\n    return sum(numbers)\n\nnumbers = list(range(1, 100001))\nprint(\"Slow code result:\", slow_sum(numbers))\nprint(\"Fast code result:\", fast_sum(numbers))\n\nslow_time = timeit.timeit(lambda: slow_sum(numbers), number=10)\nfast_time = timeit.timeit(lambda: fast_sum(numbers), number=10)\nprint(\"Slow code time:\", round(slow_time, 3))\nprint(\"Fast code time:\", round(fast_time, 3))\n\nOutput (one run; the exact time values differ on each computer):\nSlow code result: 5000050000\nFast code result: 5000050000\nSlow code time: 0.015\nFast code time: 0.003\n\nExplanation:\n1. Both functions give the same result, 5000050000; only their speed differs.\n2. timeit runs each function 10 times (number=10) and returns the total time, so the two times can be compared.\n3. slow_sum() takes more time because it adds the numbers manually using a loop; fast_sum() takes less time because Python's built-in sum() is already optimised.\n4. The function taking more execution time is the bottleneck, so slow_sum() is the bottleneck. Replacing it with sum() is an optimization (reducing unnecessary operations), which improves program speed and responsiveness. cProfile.run(\"main()\") could also give a report of each function's time.",
+            "book_ref": {
+              "topic_id": "c60e0135-5823-5035-bbc2-d820fb56bb0b",
+              "quote": "Fixing bottlenecks improves overall program speed and responsiveness"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Explain how profiling tools measure performance and what their reports show (4). What is a performance bottleneck? Explain three optimization techniques for fixing it (4). (8 marks)",
+            "explanation": "Profiling tools (4):\n1. Profiling tools track the execution time and memory usage of different functions in a program.\n2. Python provides modules like cProfile (a report of how much time each function takes) and timeit (compares execution times).\n3. The reports show which parts of the code are slow or resource-intensive; Figure 5.3 shows such output with the columns Function, Call Count, Time, Cumulative Time and Description.\n4. Measuring performance helps prioritize areas for optimization, and regular profiling keeps code efficient as it grows.\n\nBottleneck and optimization (4):\nA performance bottleneck is a section of code that slows down the program and reduces efficiency; profiling reports help locate it. Optimization techniques:\n1. Improving algorithms: use a faster method for the same task.\n2. Reducing unnecessary operations, e.g. avoiding a manual loop when the optimised built-in sum() does the job.\n3. Using efficient data structures.\nFixing bottlenecks improves overall program speed and responsiveness.",
+            "book_ref": {
+              "topic_id": "8e15c934-bc3f-5d84-bada-6df039f78f5e",
+              "quote": "These tools generate reports showing which parts of the code are slow or resource-intensive"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

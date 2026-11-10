@@ -1,0 +1,510 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH5-SHORT",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch5",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch5/u-short-questions",
+      "title": "Short Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 64,
+          "pdf_to": 75,
+          "note": "Practice short questions written from Chapter 5 (PDF 64-75, printed 60-71); not printed in the book. Based on the chapter's text, tables, boxes and worked examples (numericals with changed values); none repeats the chapter exercise. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice short questions for the whole of Chapter 5 (Code Testing and Debugging), arranged by the chapter's sections, in the style of a 2-mark Board short question. Each answer is a short model answer; small numericals show the working, and a comparison is answered as a table."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "5.1 Introduction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Name four topics of testing and debugging that this chapter covers.",
+            "explanation": "1. Unit testing with Python's unittest and pytest modules. 2. Debugging with breakpoints, watch expressions and step-by-step debugging. 3. Exception handling, including multiple exception types. 4. Profiling and optimization to find bottlenecks.",
+            "book_ref": {
+              "topic_id": "44176b39-268f-5c47-a174-c86a410e3204",
+              "quote": "They will understand the importance of testing for creating reliable applications"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "5.2 Testing and Debugging Techniques"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 How are advanced testing and debugging techniques more than basic error fixing?",
+            "explanation": "They go beyond basic error fixing to ensure program quality: they identify hidden problems that may affect functionality, improve performance and user satisfaction, and make future maintenance easier.",
+            "book_ref": {
+              "topic_id": "6a087824-5497-539a-b947-aea55e79def7",
+              "quote": "These techniques identify hidden problems that may affect functionality."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Differentiate between testing and debugging.",
+            "explanation": "The two practices compared:",
+            "book_ref": {
+              "topic_id": "5b9f7ce5-8b5d-5aae-9748-a2de5905fada",
+              "quote": "Debugging locates the cause of errors and fixes them efficiently."
+            },
+            "answer_table": {
+              "header": [
+                "Testing",
+                "Debugging"
+              ],
+              "rows": [
+                [
+                  "Checks a program to make sure it works correctly and gives the expected output.",
+                  "Finds and fixes errors or bugs in a program."
+                ],
+                [
+                  "Detects that errors exist before the software is released.",
+                  "Locates the cause of the errors and fixes them efficiently."
+                ],
+                [
+                  "Regular testing prevents unexpected failures during operation.",
+                  "Uses tools such as breakpoints, watches and step-by-step execution."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 How does testing help when a programmer changes existing code?",
+            "explanation": "Running the tests again verifies that the changes do not break existing features and that all functions still produce correct results, reducing the risk of crashes or incorrect outputs.",
+            "book_ref": {
+              "topic_id": "52a87d81-146f-580f-99b6-4cb491109936",
+              "quote": "It also helps verify that changes do not break existing features."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Identify the type of error and correct the statement:\n\nprint(\"Total marks\" 450)",
+            "explanation": "Syntax error: the code does not follow Python's rules (the comma between the two values is missing), so Python does not run it.\nCorrect: print(\"Total marks\", 450)\nOutput: Total marks 450",
+            "book_ref": {
+              "topic_id": "eec0ef62-5f3c-5aff-ac1a-c403d6abf91e",
+              "quote": "Syntax errors occur when code does not follow language rules."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Find the error in this program and correct it:\n\nlength = 5\nwidth = 3\narea = length + width\nprint(area)",
+            "explanation": "It is a logic error: the program runs but prints 8, an incorrect area, because it adds instead of multiplying.\nCorrect: area = length * width, which prints 15.",
+            "book_ref": {
+              "topic_id": "eec0ef62-5f3c-5aff-ac1a-c403d6abf91e",
+              "quote": "Logic errors happen when the program produces incorrect results."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 What is a runtime error? What happens when this program runs?\n\ntotal = 900\ncount = 0\nprint(total / count)",
+            "explanation": "A runtime error appears while the program is running, even though the code follows the language rules. Here dividing by zero stops the program with:\nZeroDivisionError: division by zero",
+            "book_ref": {
+              "topic_id": "eec0ef62-5f3c-5aff-ac1a-c403d6abf91e",
+              "quote": "Runtime errors appear while the program is running."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Differentiate between a syntax error and a logic error.",
+            "explanation": "The two error types compared:",
+            "book_ref": {
+              "topic_id": "eec0ef62-5f3c-5aff-ac1a-c403d6abf91e",
+              "quote": "Syntax errors occur when code does not follow language rules."
+            },
+            "answer_table": {
+              "header": [
+                "Syntax error",
+                "Logic error"
+              ],
+              "rows": [
+                [
+                  "Occurs when code does not follow the language rules.",
+                  "Occurs when the program produces incorrect results."
+                ],
+                [
+                  "The program does not run.",
+                  "The program runs but its output is wrong."
+                ],
+                [
+                  "Example: print(\"Total marks\" 450) (missing comma).",
+                  "Example: area = length + width instead of length * width."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Why should unit test cases be clear and simple? What does each unit test check?",
+            "explanation": "Each unit test checks whether one component (such as a function) produces the expected output. Writing clear and simple test cases improves code reliability, because each test shows exactly which unit fails.",
+            "book_ref": {
+              "topic_id": "529768a1-9e82-5661-836c-5c3aca7f4acb",
+              "quote": "Writing clear and simple test cases improves code reliability."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Differentiate between the unittest and pytest modules.",
+            "explanation": "The two testing modules compared:",
+            "book_ref": {
+              "topic_id": "8ceb305b-c283-5682-97ee-dcbd6c122348",
+              "quote": "Pytest is an external module that simplifies writing and running tests."
+            },
+            "answer_table": {
+              "header": [
+                "unittest",
+                "pytest"
+              ],
+              "rows": [
+                [
+                  "Built into Python.",
+                  "An external module."
+                ],
+                [
+                  "Provides a framework for creating test cases, using test case classes.",
+                  "Simplifies writing and running tests; no test case classes or boilerplate code."
+                ],
+                [
+                  "Tests are written inside test case classes.",
+                  "Tests are simple functions that use assert; run by executing pytest in the command line."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Write a pytest test function that checks a function subtract(a, b) with the inputs 9 and 4.",
+            "explanation": "def subtract(a, b):\n    return a - b\n\ndef test_subtract():\n    assert subtract(9, 4) == 5\n\nThe test name starts with test_ so pytest finds it; assert checks the expected output 5. Running pytest reports: 1 passed.",
+            "book_ref": {
+              "topic_id": "baaf6a58-0318-5472-b61e-523acc590052",
+              "quote": "For example, a calculator function can be tested for addition and subtraction results."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 What is the role of assert in a pytest test? What does pytest report for this file?\n\ndef multiply(a, b):\n    return a + b\n\ndef test_multiply():\n    assert multiply(2, 3) == 6\n",
+            "explanation": "assert checks whether the output is correct; if the condition is False the test fails. Here multiply(2, 3) returns 5, not 6, so pytest reports: 1 failed (an AssertionError in test_multiply).",
+            "book_ref": {
+              "topic_id": "baaf6a58-0318-5472-b61e-523acc590052",
+              "quote": "The tests are written as simple functions, and assert is used to check if the output is correct."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 How are pytest tests run, and how does pytest know which functions are tests?",
+            "explanation": "Open the command line in the directory where the test file is located and execute pytest. Test functions usually start with the word test_, and pytest automatically detects and runs them.",
+            "book_ref": {
+              "topic_id": "baaf6a58-0318-5472-b61e-523acc590052",
+              "quote": "To run the tests, simply execute pytest in the command line in the directory where the file is located."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Why is automated, repeated test execution useful?",
+            "explanation": "Python executes the tests and reports failures or errors automatically. Repeated testing ensures that changes in code do not break existing functionality, and automation saves time and improves accuracy in development.",
+            "book_ref": {
+              "topic_id": "baaf6a58-0318-5472-b61e-523acc590052",
+              "quote": "Automated test execution saves time and improves accuracy in development."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 Differentiate between a breakpoint and a watch expression.",
+            "explanation": "The two debugging tools compared:",
+            "book_ref": {
+              "topic_id": "06f3ce6f-835d-558c-9327-79fba66e7056",
+              "quote": "Breakpoints and watches are tools used in debugging to analyze program behavior."
+            },
+            "answer_table": {
+              "header": [
+                "Breakpoint",
+                "Watch expression"
+              ],
+              "rows": [
+                [
+                  "A marker that pauses execution at a chosen line of code.",
+                  "Tracks the value of a variable or expression while the program runs."
+                ],
+                [
+                  "When reached, execution stops and the current state can be examined.",
+                  "Updates automatically when the value changes."
+                ],
+                [
+                  "Set by clicking the line number in the margin (PyCharm).",
+                  "Added in the IDE for a variable, e.g. radius."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 What happens when a running program reaches a breakpoint?",
+            "explanation": "Execution stops (pauses) at that line, and the current state of the program can be examined, for example the values of its variables, before execution is continued.",
+            "book_ref": {
+              "topic_id": "b8216251-51f5-5ab9-98d3-a224c673b5c5",
+              "quote": "When the program reaches a breakpoint, execution stops, and the current state can be examined."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Why are breakpoints useful in a long program?",
+            "explanation": "Breakpoints help focus on specific sections of code without running the entire program at once; the programmer pauses exactly where a problem is suspected and examines the data there.",
+            "book_ref": {
+              "topic_id": "b8216251-51f5-5ab9-98d3-a224c673b5c5",
+              "quote": "Breakpoints help focus on specific sections of code without running the entire program."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 In the chapter's calculate_area program (radius 5, then radius 10), what does a watch on radius show, and what does the program print?",
+            "explanation": "The watch shows radius changing from 5 to 10 as the program runs. The program prints:\nArea of circle: 78.5\nArea of circle: 314.0",
+            "book_ref": {
+              "topic_id": "accc3833-d8b7-5dac-96f1-ed4c892f1fe2",
+              "quote": "When you run the debugger, watch expressions will display how the value of radius changes as the program runs."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 Differentiate between Step Into and Step Over.",
+            "explanation": "The two stepping commands compared:",
+            "book_ref": {
+              "topic_id": "accc3833-d8b7-5dac-96f1-ed4c892f1fe2",
+              "quote": "Step Over: Execute the current line and move to the next one without going inside any functions."
+            },
+            "answer_table": {
+              "header": [
+                "Step Into",
+                "Step Over"
+              ],
+              "rows": [
+                [
+                  "Goes inside a function to see how it works.",
+                  "Executes the current line and moves to the next one."
+                ],
+                [
+                  "Example: step into calculate_area() to examine how the area is calculated.",
+                  "Does not go inside any function; the called function still runs."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 What does the Continue command do during debugging?",
+            "explanation": "After the program has paused, Continue resumes the execution and runs it until the next breakpoint, where it pauses again.",
+            "book_ref": {
+              "topic_id": "accc3833-d8b7-5dac-96f1-ed4c892f1fe2",
+              "quote": "Continue: Continue the execution until the next breakpoint."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 In the chapter's database example, what are the roles of commit() and rollback()?",
+            "explanation": "commit() saves the correct data to the database (ensures data integrity). rollback() cancels (undoes) the changes if an error occurs, in the except block.",
+            "book_ref": {
+              "topic_id": "256f8a51-ec4a-5483-9bed-97ed0965c4ff",
+              "quote": "commit() → saves correct data (ensures integrity)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "22 Why is the finally block used in the database example?",
+            "explanation": "The finally block runs whether an error occurs or not, so it safely closes the database connection in every case (and prints Connection closed).",
+            "book_ref": {
+              "topic_id": "256f8a51-ec4a-5483-9bed-97ed0965c4ff",
+              "quote": "finally → safely closes the database"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "23 Write the output of the following code:\n\ntry:\n    marks = int(\"ninety\")\n    print(\"Marks:\", marks)\nexcept ValueError:\n    print(\"Please enter digits\")\nfinally:\n    print(\"Thank you\")",
+            "explanation": "Please enter digits\nThank you\n\nint(\"ninety\") raises ValueError, so Marks: is skipped; except handles the error and finally always runs.",
+            "book_ref": {
+              "topic_id": "256f8a51-ec4a-5483-9bed-97ed0965c4ff",
+              "quote": "try-except → handles errors and prevents crashes"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "24 What happens to a program when an error occurs without exception handling, and what does exception handling change?",
+            "explanation": "Without exception handling the program crashes (stops suddenly) at the error. With exception handling the error is caught, the program responds gracefully (e.g. shows a message) and keeps running, which improves reliability and user experience.",
+            "book_ref": {
+              "topic_id": "256f8a51-ec4a-5483-9bed-97ed0965c4ff",
+              "quote": "Exception handling helps programs manage unexpected problems without stopping suddenly."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "25 Write one except clause that catches both ValueError and ZeroDivisionError, and give the output of this code:\n\ntry:\n    x = int(\"7\")\n    print(x / 0)\nexcept (ValueError, ZeroDivisionError):\n    print(\"Invalid value\")",
+            "explanation": "except (ValueError, ZeroDivisionError):\nOutput: Invalid value (int(\"7\") works, but 7 / 0 raises ZeroDivisionError, which this clause catches).",
+            "book_ref": {
+              "topic_id": "6527fef5-bcab-506d-9bd0-0b09585e42ac",
+              "quote": "Python allows catching multiple exceptions in one try–except block."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "26 Write the output of the following code:\n\nfor v in [\"4\", \"0\", \"five\"]:\n    try:\n        print(20 / int(v))\n    except ZeroDivisionError:\n        print(\"Cannot divide by zero\")\n    except ValueError:\n        print(\"Enter a number\")",
+            "explanation": "5.0\nCannot divide by zero\nEnter a number\n\nEach exception type gets its own except block and its own response.",
+            "book_ref": {
+              "topic_id": "6527fef5-bcab-506d-9bd0-0b09585e42ac",
+              "quote": "Each exception type can be handled with a specific response."
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "5.3 Profiling and Optimization"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "27 Differentiate between profiling and optimization.",
+            "explanation": "The two techniques compared:",
+            "book_ref": {
+              "topic_id": "7bd47f48-3543-5750-badc-f8b4bddedc1b",
+              "quote": "Profiling and optimization help improve the speed and efficiency of a program."
+            },
+            "answer_table": {
+              "header": [
+                "Profiling",
+                "Optimization"
+              ],
+              "rows": [
+                [
+                  "Measures how much time and resources each part of the code uses.",
+                  "Makes slow or resource-heavy parts faster."
+                ],
+                [
+                  "Finds which parts of the code take more time (bottlenecks).",
+                  "Improves the code so it runs faster, uses fewer resources or works more efficiently."
+                ],
+                [
+                  "Tools: cProfile and timeit.",
+                  "Techniques: better algorithms, fewer unnecessary operations, efficient data structures."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "28 How many times does the inner statement of this nested loop run? Why can such loops become a bottleneck?\n\ncount = 0\nfor i in range(500):\n    for j in range(200):\n        count = count + 1\nprint(count)",
+            "explanation": "For each of the 500 outer iterations the inner loop runs 200 times: 500 x 200 = 100000. The count multiplies, so with large ranges (10000 x 10000 = 100,000,000) the program becomes very slow: a performance bottleneck.",
+            "book_ref": {
+              "topic_id": "7bd47f48-3543-5750-badc-f8b4bddedc1b",
+              "quote": "Therefore, the total number of executions becomes:"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "29 Differentiate between cProfile and timeit.",
+            "explanation": "The two profiling modules compared:",
+            "book_ref": {
+              "topic_id": "c60e0135-5823-5035-bbc2-d820fb56bb0b",
+              "quote": "cProfile generates a profiling report that shows how much time each function takes during program execution."
+            },
+            "answer_table": {
+              "header": [
+                "cProfile",
+                "timeit"
+              ],
+              "rows": [
+                [
+                  "Generates a profiling report.",
+                  "Measures and compares execution time."
+                ],
+                [
+                  "Shows how much time each function takes during program execution.",
+                  "Compares the execution time of slow and fast code."
+                ],
+                [
+                  "Example: cProfile.run(\"main()\")",
+                  "Example: timeit.timeit(lambda: slow_sum(numbers), number=10)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "30 What is a performance bottleneck? Name three ways to fix it.",
+            "explanation": "A performance bottleneck is a section of code that slows down the program. It can be fixed by improving algorithms, reducing unnecessary operations, or using efficient data structures.",
+            "book_ref": {
+              "topic_id": "c60e0135-5823-5035-bbc2-d820fb56bb0b",
+              "quote": "Optimization techniques include improving algorithms, reducing unnecessary operations, or using efficient data structures."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "31 Why is slow_sum() slower than fast_sum() although both give the same result?",
+            "explanation": "slow_sum() adds the numbers manually, one by one, using a loop, while fast_sum() uses Python's built-in sum() function, which is already optimised. Both return 499999500000 for the list 1 to 999999.",
+            "book_ref": {
+              "topic_id": "c60e0135-5823-5035-bbc2-d820fb56bb0b",
+              "quote": "slow_sum() is slower because it adds numbers manually using a loop."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "32 How is the bottleneck identified from a profiling report?",
+            "explanation": "The report shows the time taken by each function; the function taking more execution time is the bottleneck. In the example slow_sum() takes more time than fast_sum(), so slow_sum() is the bottleneck.",
+            "book_ref": {
+              "topic_id": "c60e0135-5823-5035-bbc2-d820fb56bb0b",
+              "quote": "The function taking more execution time is called the bottleneck."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "33 Why should performance be measured before optimizing a program?",
+            "explanation": "Profiling tools track the execution time and memory usage of each function and show which parts are slow or resource-intensive. Measuring first helps prioritize the areas for optimization, so effort goes to the real bottlenecks.",
+            "book_ref": {
+              "topic_id": "8e15c934-bc3f-5d84-bada-6df039f78f5e",
+              "quote": "Measuring performance helps prioritize areas for optimization."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
