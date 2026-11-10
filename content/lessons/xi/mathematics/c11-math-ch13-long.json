@@ -1,0 +1,461 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-LONG",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-long-questions",
+      "title": "Long Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 242,
+          "pdf_to": 263,
+          "note": "Practice long questions written from Unit 13 (PDF 242-263, printed 237-258); not printed in the book. Based on the unit's text, theorems, formulas and worked examples (changed values); none repeats the unit's exercises. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice long questions for the whole of Unit 13 (Differentiation), in the shape of a Board Section-II question part: each carries 5 marks (a longer problem, a proof or a derivation). Each one is solved in full, step by step."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Find, by using \\(m_{\\text{tan}} = \\lim_{\\delta x \\to 0}\\dfrac{f(x+\\delta x) - f(x)}{\\delta x}\\), the gradient and an equation of the tangent line to \\(f(x) = x^{2} + 2x\\) at \\(P(1, 3)\\). Show that the tangent meets the curve only at \\(P\\). (5 marks)",
+            "explanation": "Check \\(P\\) is on the curve, put \\(x = 1\\) in the limit, cancel \\(\\delta x\\), then use the point-slope form.",
+            "book_ref": {
+              "topic_id": "e20dc2a2-f8ee-5001-b629-abe160639d77",
+              "quote": "the line touches the curve at \\(P\\) and does not cut it again"
+            },
+            "steps": [
+              "\\(f(1) = 1 + 2 = 3\\), so \\(P(1, 3)\\) lies on the curve.",
+              "\\(f(1 + \\delta x) = (1 + \\delta x)^{2} + 2(1 + \\delta x) = 3 + 4\\delta x + \\delta x^{2}\\)",
+              "\\(f(1 + \\delta x) - f(1) = 4\\delta x + \\delta x^{2} = \\delta x(4 + \\delta x)\\)",
+              "\\(m_{\\text{tan}} = \\lim_{\\delta x \\to 0}\\dfrac{\\delta x(4 + \\delta x)}{\\delta x} = \\lim_{\\delta x \\to 0}(4 + \\delta x) = 4\\)",
+              "Tangent: \\(y - 3 = 4(x - 1) \\Rightarrow y = 4x - 1\\)",
+              "Meeting points: \\(x^{2} + 2x = 4x - 1 \\Rightarrow x^{2} - 2x + 1 = 0 \\Rightarrow (x - 1)^{2} = 0\\), only \\(x = 1\\) (repeated root)."
+            ],
+            "final_answer": "Gradient \\(= 4\\); tangent \\(y = 4x - 1\\), touching the curve only at \\(P(1, 3)\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 For \\(f(x) = x^{3}\\), find the average rate of change from \\(x = 1\\) to \\(x = 1 + \\delta x\\). Evaluate it for \\(\\delta x = 0.1\\) and \\(\\delta x = 0.01\\), and find the instantaneous rate of change at \\(x = 1\\). (5 marks)",
+            "explanation": "Average rate = difference quotient; its limit as \\(\\delta x \\to 0\\) is the instantaneous rate.",
+            "book_ref": {
+              "topic_id": "87158a14-ba1f-5cd4-8b66-ab27fba394ee",
+              "quote": "If \\(x_{1}\\) approaches \\(x\\), then"
+            },
+            "steps": [
+              "\\(f(1 + \\delta x) - f(1) = (1 + \\delta x)^{3} - 1 = 3\\delta x + 3\\delta x^{2} + \\delta x^{3}\\)",
+              "Average rate \\(= \\dfrac{3\\delta x + 3\\delta x^{2} + \\delta x^{3}}{\\delta x} = 3 + 3\\delta x + \\delta x^{2}\\)",
+              "\\(\\delta x = 0.1\\): \\(3 + 0.3 + 0.01 = 3.31\\)",
+              "\\(\\delta x = 0.01\\): \\(3 + 0.03 + 0.0001 = 3.0301\\)",
+              "Instantaneous rate \\(= \\lim_{\\delta x \\to 0}(3 + 3\\delta x + \\delta x^{2}) = 3\\)"
+            ],
+            "final_answer": "Average rate \\(3 + 3\\delta x + \\delta x^{2}\\) (\\(3.31\\), \\(3.0301\\)); instantaneous rate at \\(x = 1\\) is \\(3\\), i.e. \\(f'(1) = 3\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 A particle moves along a line with position \\(s(t) = 2t^{2} + 3t + 1\\) metres after \\(t\\) seconds. Find (i) the average velocity over \\([1, 4]\\) and (ii) the instantaneous velocity at \\(t = 2\\) by the limit. (5 marks)",
+            "explanation": "(i) uses \\(v_{\\text{avg}} = \\frac{s(t_{1}) - s(t)}{t_{1} - t}\\); (ii) uses \\(v_{\\text{inst}} = \\lim_{\\delta t \\to 0}\\frac{s(t+\\delta t) - s(t)}{\\delta t}\\).",
+            "book_ref": {
+              "topic_id": "70b2207a-5e0d-5d65-b2da-41ea00028f6d",
+              "quote": "the average velocity becomes the instantaneous velocity"
+            },
+            "steps": [
+              "\\(s(4) = 32 + 12 + 1 = 45\\), \\(s(1) = 2 + 3 + 1 = 6\\)",
+              "\\(v_{\\text{avg}} = \\dfrac{45 - 6}{4 - 1} = \\dfrac{39}{3} = 13\\) m/sec",
+              "\\(s(2 + \\delta t) = 2(4 + 4\\delta t + \\delta t^{2}) + 6 + 3\\delta t + 1 = 15 + 11\\delta t + 2\\delta t^{2}\\)",
+              "\\(s(2) = 8 + 6 + 1 = 15\\), so \\(s(2 + \\delta t) - s(2) = 11\\delta t + 2\\delta t^{2}\\)",
+              "\\(v_{\\text{inst}} = \\lim_{\\delta t \\to 0}\\dfrac{\\delta t(11 + 2\\delta t)}{\\delta t} = \\lim_{\\delta t \\to 0}(11 + 2\\delta t) = 11\\) m/sec"
+            ],
+            "final_answer": "(i) \\(13\\) m/sec (ii) \\(11\\) m/sec"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Using \\(f'(a) = \\lim_{x \\to a}\\dfrac{f(x) - f(a)}{x - a}\\), find the derivative of \\(f(x) = \\dfrac{1}{x}\\) at \\(x = a\\) (\\(a \\ne 0\\)). Hence find the gradient of the curve at \\(x = 2\\). (5 marks)",
+            "explanation": "Make one fraction on top; the factor \\(x - a\\) appears with a minus sign and cancels.",
+            "book_ref": {
+              "topic_id": "746d35dc-b26e-5275-9bc0-67979da62461",
+              "quote": "is called the derivative or gradient of"
+            },
+            "steps": [
+              "\\(f(x) - f(a) = \\dfrac{1}{x} - \\dfrac{1}{a} = \\dfrac{a - x}{ax}\\)",
+              "\\(\\dfrac{f(x) - f(a)}{x - a} = \\dfrac{a - x}{ax(x - a)} = \\dfrac{-(x - a)}{ax(x - a)}\\)",
+              "\\(= \\dfrac{-1}{ax}\\), \\((x \\ne a)\\)",
+              "\\(f'(a) = \\lim_{x \\to a}\\dfrac{-1}{ax} = \\dfrac{-1}{a^{2}}\\)",
+              "At \\(a = 2\\): \\(f'(2) = -\\dfrac{1}{4}\\)"
+            ],
+            "final_answer": "\\(f'(a) = -\\dfrac{1}{a^{2}}\\); gradient at \\(x = 2\\) is \\(-\\dfrac{1}{4}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Find from first principles the derivative of \\(f(x) = x^{3} - 2x\\). (5 marks)",
+            "explanation": "The four steps; expand \\((x + \\delta x)^{3}\\).",
+            "book_ref": {
+              "topic_id": "dbd326cb-283e-5f8b-8f65-920eba46fabb",
+              "quote": "can be found by the following four steps"
+            },
+            "steps": [
+              "Step I: \\(f(x + \\delta x) = (x + \\delta x)^{3} - 2(x + \\delta x)\\)",
+              "Step II: \\(f(x + \\delta x) - f(x) = x^{3} + 3x^{2}\\delta x + 3x(\\delta x)^{2} + (\\delta x)^{3} - 2x - 2\\delta x - x^{3} + 2x\\)",
+              "\\(= 3x^{2}\\delta x + 3x(\\delta x)^{2} + (\\delta x)^{3} - 2\\delta x\\)",
+              "Step III: \\(\\dfrac{f(x + \\delta x) - f(x)}{\\delta x} = 3x^{2} + 3x\\,\\delta x + (\\delta x)^{2} - 2\\)",
+              "Step IV: \\(f'(x) = \\lim_{\\delta x \\to 0}\\left(3x^{2} + 3x\\,\\delta x + (\\delta x)^{2} - 2\\right) = 3x^{2} - 2\\)"
+            ],
+            "final_answer": "\\(f'(x) = 3x^{2} - 2\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Find from first principles the derivative of \\(f(x) = \\sqrt{3x + 1}\\) and the gradient of its graph at \\(x = 5\\). (5 marks)",
+            "explanation": "Rationalize the numerator to bring out the factor \\(\\delta x\\).",
+            "book_ref": {
+              "topic_id": "dbd326cb-283e-5f8b-8f65-920eba46fabb",
+              "quote": "Whenever a square root appears in the numerator of the difference quotient, rationalize the numerator"
+            },
+            "steps": [
+              "Step I: \\(f(x + \\delta x) = \\sqrt{3x + 3\\delta x + 1}\\)",
+              "Step II: \\(f(x + \\delta x) - f(x) = \\dfrac{(3x + 3\\delta x + 1) - (3x + 1)}{\\sqrt{3x + 3\\delta x + 1} + \\sqrt{3x + 1}} = \\dfrac{3\\delta x}{\\sqrt{3x + 3\\delta x + 1} + \\sqrt{3x + 1}}\\)",
+              "Step III: \\(\\dfrac{f(x + \\delta x) - f(x)}{\\delta x} = \\dfrac{3}{\\sqrt{3x + 3\\delta x + 1} + \\sqrt{3x + 1}}\\), \\((\\delta x \\ne 0)\\)",
+              "Step IV: \\(f'(x) = \\dfrac{3}{2\\sqrt{3x + 1}}\\), \\(\\left(x > -\\dfrac{1}{3}\\right)\\)",
+              "At \\(x = 5\\): \\(f'(5) = \\dfrac{3}{2\\sqrt{16}} = \\dfrac{3}{8}\\)"
+            ],
+            "final_answer": "\\(f'(x) = \\dfrac{3}{2\\sqrt{3x + 1}}\\); gradient at \\(x = 5\\) is \\(\\dfrac{3}{8}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Find by definition the derivative of \\(f(x) = \\dfrac{x}{x + 1}\\), \\(x \\ne -1\\). (5 marks)",
+            "explanation": "Take the common denominator \\((x + 1)(x + \\delta x + 1)\\); the numerator simplifies to \\(\\delta x\\).",
+            "book_ref": {
+              "topic_id": "dbd326cb-283e-5f8b-8f65-920eba46fabb",
+              "quote": "With fractions, the key algebra move is taking a common denominator."
+            },
+            "steps": [
+              "Step I: \\(f(x + \\delta x) = \\dfrac{x + \\delta x}{x + \\delta x + 1}\\)",
+              "Step II: \\(f(x + \\delta x) - f(x) = \\dfrac{(x + \\delta x)(x + 1) - x(x + \\delta x + 1)}{(x + 1)(x + \\delta x + 1)}\\)",
+              "Numerator: \\(x^{2} + x + x\\,\\delta x + \\delta x - x^{2} - x\\,\\delta x - x = \\delta x\\), so \\(f(x + \\delta x) - f(x) = \\dfrac{\\delta x}{(x + 1)(x + \\delta x + 1)}\\)",
+              "Step III: \\(\\dfrac{f(x + \\delta x) - f(x)}{\\delta x} = \\dfrac{1}{(x + 1)(x + \\delta x + 1)}\\)",
+              "Step IV: \\(f'(x) = \\lim_{\\delta x \\to 0}\\dfrac{1}{(x + 1)(x + \\delta x + 1)} = \\dfrac{1}{(x + 1)^{2}}\\)"
+            ],
+            "final_answer": "\\(f'(x) = \\dfrac{1}{(x + 1)^{2}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 If \\(y = \\dfrac{1}{x^{3}}\\), find \\(\\dfrac{dy}{dx}\\) by ab-initio method and its value at \\(x = -1\\). (5 marks)",
+            "explanation": "Common denominator, then factorize \\(x^{3} - (x + \\delta x)^{3}\\) to bring out \\(-\\delta x\\).",
+            "book_ref": {
+              "topic_id": "dbd326cb-283e-5f8b-8f65-920eba46fabb",
+              "quote": "The value of \\(\\frac{dy}{dx}\\) at \\(x = -1\\) is written as"
+            },
+            "steps": [
+              "\\(y + \\delta y = \\dfrac{1}{(x + \\delta x)^{3}}\\), so \\(\\delta y = \\dfrac{x^{3} - (x + \\delta x)^{3}}{x^{3}(x + \\delta x)^{3}}\\)",
+              "\\(x^{3} - (x + \\delta x)^{3} = -\\delta x\\left[3x^{2} + 3x\\,\\delta x + (\\delta x)^{2}\\right]\\)",
+              "\\(\\dfrac{\\delta y}{\\delta x} = \\dfrac{-\\left[3x^{2} + 3x\\,\\delta x + (\\delta x)^{2}\\right]}{x^{3}(x + \\delta x)^{3}}\\), \\((\\delta x \\ne 0)\\)",
+              "\\(\\dfrac{dy}{dx} = \\lim_{\\delta x \\to 0}\\dfrac{\\delta y}{\\delta x} = \\dfrac{-3x^{2}}{x^{6}} = \\dfrac{-3}{x^{4}}\\)",
+              "\\(\\left.\\dfrac{dy}{dx}\\right|_{x=-1} = \\dfrac{-3}{(-1)^{4}} = -3\\)"
+            ],
+            "final_answer": "\\(\\dfrac{dy}{dx} = -\\dfrac{3}{x^{4}}\\); at \\(x = -1\\) it is \\(-3\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Prove that \\(\\dfrac{d}{dx}(x^{n}) = nx^{n-1}\\) when \\(n\\) is a positive integer. (5 marks)",
+            "explanation": "First principles with the binomial expansion of \\((x + \\delta x)^{n}\\).",
+            "book_ref": {
+              "topic_id": "91843e85-3d86-5443-ab96-3946006999f3",
+              "quote": "We find the derivative of \\(x^{n}\\) when \\(n\\) is positive integer."
+            },
+            "steps": [
+              "Let \\(y = x^{n}\\). Then \\(y + \\delta y = (x + \\delta x)^{n}\\) and \\(\\delta y = (x + \\delta x)^{n} - x^{n}\\)",
+              "Binomial theorem: \\(\\delta y = \\left[x^{n} + nx^{n-1}\\delta x + \\dfrac{n(n-1)}{2!}x^{n-2}(\\delta x)^{2} + \\ldots + (\\delta x)^{n}\\right] - x^{n}\\)",
+              "\\(\\delta y = \\delta x\\left[nx^{n-1} + \\dfrac{n(n-1)}{2!}x^{n-2}\\delta x + \\ldots + (\\delta x)^{n-1}\\right]\\)",
+              "\\(\\dfrac{\\delta y}{\\delta x} = nx^{n-1} + \\dfrac{n(n-1)}{2!}x^{n-2}\\delta x + \\ldots + (\\delta x)^{n-1}\\)",
+              "Every term except the first contains \\(\\delta x\\), so as \\(\\delta x \\to 0\\): \\(\\dfrac{dy}{dx} = nx^{n-1}\\)"
+            ],
+            "final_answer": "Hence proved: \\(\\dfrac{d}{dx}(x^{n}) = nx^{n-1}\\) for every positive integer \\(n\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Prove that \\(\\dfrac{d}{dx}(x^{n}) = nx^{n-1}\\) when \\(n\\) is a negative integer (\\(x \\ne 0\\)). (5 marks)",
+            "explanation": "Put \\(n = -m\\) with \\(m\\) a positive integer, so \\(y = \\frac{1}{x^{m}}\\); expand \\((x + \\delta x)^{m}\\) in the numerator.",
+            "book_ref": {
+              "topic_id": "91843e85-3d86-5443-ab96-3946006999f3",
+              "quote": "Let \\(n = -m\\) (\\(m\\) is a positive integer)"
+            },
+            "steps": [
+              "Let \\(n = -m\\). Then \\(y = \\dfrac{1}{x^{m}}\\) and \\(y + \\delta y = \\dfrac{1}{(x + \\delta x)^{m}}\\)",
+              "\\(\\delta y = \\dfrac{x^{m} - (x + \\delta x)^{m}}{x^{m}(x + \\delta x)^{m}}\\)",
+              "By the binomial theorem \\(x^{m} - (x + \\delta x)^{m} = -\\delta x\\left[mx^{m-1} + \\dfrac{m(m-1)}{2!}x^{m-2}\\delta x + \\ldots + (\\delta x)^{m-1}\\right]\\)",
+              "\\(\\dfrac{\\delta y}{\\delta x} = \\dfrac{-1}{x^{m}(x + \\delta x)^{m}}\\left(mx^{m-1} + \\dfrac{m(m-1)}{2!}x^{m-2}\\delta x + \\ldots + (\\delta x)^{m-1}\\right)\\)",
+              "As \\(\\delta x \\to 0\\): \\(\\dfrac{dy}{dx} = \\dfrac{-mx^{m-1}}{x^{m} \\cdot x^{m}} = -mx^{m-1-2m} = -mx^{-m-1} = nx^{n-1}\\) (since \\(-m = n\\))"
+            ],
+            "final_answer": "Hence proved: \\(\\dfrac{d}{dx}(x^{n}) = nx^{n-1}\\) for every negative integer \\(n\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Show that \\(f(x) = |x|\\) is continuous at \\(x = 0\\) but not differentiable there. (5 marks)",
+            "explanation": "Continuity: both one-sided limits of \\(f\\) equal \\(f(0)\\). Differentiability: the one-sided limits of \\(\\frac{|\\delta x|}{\\delta x}\\) differ.",
+            "book_ref": {
+              "topic_id": "6e6d2fcc-d164-5468-8cf0-80673b9ce23b",
+              "quote": "Now we check the differentiability of"
+            },
+            "steps": [
+              "\\(f(0) = 0\\); \\(\\lim_{x \\to 0^{+}}|x| = \\lim_{x \\to 0^{+}}x = 0\\) and \\(\\lim_{x \\to 0^{-}}|x| = \\lim_{x \\to 0^{-}}(-x) = 0\\), so \\(\\lim_{x \\to 0}f(x) = f(0)\\): \\(f\\) is continuous at \\(0\\).",
+              "\\(\\dfrac{f(0 + \\delta x) - f(0)}{\\delta x} = \\dfrac{|\\delta x|}{\\delta x}\\)",
+              "\\(\\lim_{\\delta x \\to 0^{+}}\\dfrac{|\\delta x|}{\\delta x} = \\lim_{\\delta x \\to 0^{+}}\\dfrac{\\delta x}{\\delta x} = 1\\)",
+              "\\(\\lim_{\\delta x \\to 0^{-}}\\dfrac{|\\delta x|}{\\delta x} = \\lim_{\\delta x \\to 0^{-}}\\dfrac{-\\delta x}{\\delta x} = -1\\)",
+              "The right-hand and left-hand limits are not equal, so \\(f'(0) = \\lim_{\\delta x \\to 0}\\dfrac{|\\delta x|}{\\delta x}\\) does not exist."
+            ],
+            "final_answer": "Hence proved: \\(|x|\\) is continuous at \\(0\\) but not differentiable there (no tangent at the corner)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Let \\(f(x) = |x - 1|\\). Show that \\(f\\) is continuous at \\(x = 1\\) but \\(f'(1)\\) does not exist. Also find \\(f'(x)\\) for \\(x > 1\\) and for \\(x < 1\\). (5 marks)",
+            "explanation": "Same method as for \\(|x|\\) at \\(0\\), with the corner at \\(x = 1\\).",
+            "book_ref": {
+              "topic_id": "6e6d2fcc-d164-5468-8cf0-80673b9ce23b",
+              "quote": "A function can be continuous at a point but not necessarily differentiable there."
+            },
+            "steps": [
+              "\\(f(1) = 0\\); \\(\\lim_{x \\to 1^{+}}(x - 1) = 0\\) and \\(\\lim_{x \\to 1^{-}}(1 - x) = 0\\), so \\(f\\) is continuous at \\(1\\).",
+              "\\(\\dfrac{f(1 + \\delta x) - f(1)}{\\delta x} = \\dfrac{|\\delta x|}{\\delta x}\\)",
+              "Right-hand limit (\\(\\delta x \\to 0^{+}\\)) \\(= 1\\); left-hand limit (\\(\\delta x \\to 0^{-}\\)) \\(= -1\\). Not equal, so \\(f'(1)\\) does not exist.",
+              "For \\(x > 1\\): \\(f(x) = x - 1\\), so \\(f'(x) = 1\\).",
+              "For \\(x < 1\\): \\(f(x) = 1 - x\\), so \\(f'(x) = -1\\)."
+            ],
+            "final_answer": "\\(f\\) is continuous at \\(1\\), \\(f'(1)\\) does not exist; \\(f'(x) = 1\\) for \\(x > 1\\) and \\(f'(x) = -1\\) for \\(x < 1\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 If \\(c\\) is a constant and \\(f\\) is differentiable at \\(x\\), prove that \\(\\dfrac{d}{dx}[cf(x)] = c\\dfrac{d}{dx}[f(x)]\\). (5 marks)",
+            "explanation": "Use the four steps on \\(y = cf(x)\\) and take the constant out of the limit.",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "A constant factor can be taken out from a limit sign."
+            },
+            "steps": [
+              "Let \\(y = cf(x)\\). Then \\(y + \\delta y = cf(x + \\delta x)\\)",
+              "\\(\\delta y = cf(x + \\delta x) - cf(x) = c[f(x + \\delta x) - f(x)]\\)",
+              "\\(\\dfrac{\\delta y}{\\delta x} = c\\left[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x}\\right]\\)",
+              "\\(\\lim_{\\delta x \\to 0}\\dfrac{\\delta y}{\\delta x} = c\\lim_{\\delta x \\to 0}\\dfrac{f(x + \\delta x) - f(x)}{\\delta x}\\) (a constant factor comes out of a limit)",
+              "\\(\\dfrac{dy}{dx} = cf'(x)\\)"
+            ],
+            "final_answer": "Hence proved: \\(\\dfrac{d}{dx}[cf(x)] = c\\dfrac{d}{dx}[f(x)]\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 If \\(f\\) and \\(g\\) are differentiable at \\(x\\), prove that \\(\\dfrac{d}{dx}[f(x) + g(x)] = \\dfrac{d}{dx}[f(x)] + \\dfrac{d}{dx}[g(x)]\\). (5 marks)",
+            "explanation": "Let \\(\\phi = f + g\\); rearrange the change of \\(\\phi\\) into the change of \\(f\\) plus the change of \\(g\\).",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "The limit of a sum is the sum of the limits"
+            },
+            "steps": [
+              "Let \\(\\phi(x) = f(x) + g(x)\\). Then \\(\\phi(x + \\delta x) = f(x + \\delta x) + g(x + \\delta x)\\)",
+              "\\(\\phi(x + \\delta x) - \\phi(x) = [f(x + \\delta x) - f(x)] + [g(x + \\delta x) - g(x)]\\)",
+              "\\(\\dfrac{\\phi(x + \\delta x) - \\phi(x)}{\\delta x} = \\dfrac{f(x + \\delta x) - f(x)}{\\delta x} + \\dfrac{g(x + \\delta x) - g(x)}{\\delta x}\\)",
+              "Taking \\(\\lim_{\\delta x \\to 0}\\) (the limit of a sum is the sum of the limits): \\(\\phi'(x) = f'(x) + g'(x)\\)",
+              "The difference rule is proved the same way with \\(\\phi(x) = f(x) - g(x)\\): \\(\\phi'(x) = f'(x) - g'(x)\\)"
+            ],
+            "final_answer": "Hence proved: \\([f(x) + g(x)]' = f'(x) + g'(x)\\) (and \\([f(x) - g(x)]' = f'(x) - g'(x)\\))."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 If \\(f\\) and \\(g\\) are differentiable at \\(x\\), prove the product rule \\([f(x)g(x)]' = f'(x)g(x) + f(x)g'(x)\\). (5 marks)",
+            "explanation": "Subtract and add \\(f(x)g(x + \\delta x)\\), then use the limit theorems and continuity of \\(g\\).",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "Subtracting and adding \\(f(x)\\,g(x + \\delta x)\\)"
+            },
+            "steps": [
+              "Let \\(\\phi(x) = f(x)g(x)\\). Then \\(\\phi(x + \\delta x) - \\phi(x) = f(x + \\delta x)g(x + \\delta x) - f(x)g(x)\\)",
+              "Subtract and add \\(f(x)g(x + \\delta x)\\): \\(= [f(x + \\delta x) - f(x)]g(x + \\delta x) + f(x)[g(x + \\delta x) - g(x)]\\)",
+              "\\(\\dfrac{\\phi(x + \\delta x) - \\phi(x)}{\\delta x} = \\left[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x}\\right]g(x + \\delta x) + f(x)\\left[\\dfrac{g(x + \\delta x) - g(x)}{\\delta x}\\right]\\)",
+              "Taking \\(\\lim_{\\delta x \\to 0}\\) with the limit theorems: \\(\\phi'(x) = f'(x)\\lim_{\\delta x \\to 0}g(x + \\delta x) + f(x)g'(x)\\)",
+              "Since \\(g\\) is differentiable it is continuous, so \\(\\lim_{\\delta x \\to 0}g(x + \\delta x) = g(x)\\); thus \\(\\phi'(x) = f'(x)g(x) + f(x)g'(x)\\)"
+            ],
+            "final_answer": "Hence proved: \\(\\dfrac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 If \\(f\\) and \\(g\\) are differentiable at \\(x\\) and \\(g(x) \\ne 0\\), prove the quotient rule \\(\\left(\\dfrac{f(x)}{g(x)}\\right)' = \\dfrac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^{2}}\\). (5 marks)",
+            "explanation": "Take a common denominator, subtract and add \\(f(x)g(x)\\) in the numerator, divide by \\(\\delta x\\) and take the limit.",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "Subtracting and adding \\(f(x)g(x)\\) in the numerator of step (ii) gives"
+            },
+            "steps": [
+              "Let \\(\\phi(x) = \\dfrac{f(x)}{g(x)}\\). Then \\(\\phi(x + \\delta x) - \\phi(x) = \\dfrac{f(x + \\delta x)g(x) - f(x)g(x + \\delta x)}{g(x)g(x + \\delta x)}\\)",
+              "Subtract and add \\(f(x)g(x)\\) in the numerator: \\(= \\dfrac{1}{g(x)g(x + \\delta x)}\\Big[\\big(f(x + \\delta x) - f(x)\\big)g(x) - f(x)\\big(g(x + \\delta x) - g(x)\\big)\\Big]\\)",
+              "\\(\\dfrac{\\phi(x + \\delta x) - \\phi(x)}{\\delta x} = \\dfrac{1}{g(x)g(x + \\delta x)}\\Big[\\dfrac{f(x + \\delta x) - f(x)}{\\delta x}g(x) - f(x)\\dfrac{g(x + \\delta x) - g(x)}{\\delta x}\\Big]\\)",
+              "Taking \\(\\lim_{\\delta x \\to 0}\\), using \\(\\lim_{\\delta x \\to 0}g(x + \\delta x) = g(x)\\): \\(\\phi'(x) = \\dfrac{1}{g(x)\\cdot g(x)}[f'(x)g(x) - f(x)g'(x)]\\)",
+              "\\(\\phi'(x) = \\dfrac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^{2}}\\)"
+            ],
+            "final_answer": "Hence proved: \\(\\left(\\dfrac{f(x)}{g(x)}\\right)' = \\dfrac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^{2}}\\), \\(g(x) \\ne 0\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Differentiate \\(y = (x^{2} + 1)(x^{3} - 2x)\\) with respect to \\(x\\) by the product rule, and verify the answer by multiplying out first. (5 marks)",
+            "explanation": "Product rule with \\(f = x^{2} + 1\\), \\(g = x^{3} - 2x\\); then expand and use the sum rule.",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "If \\(f\\) and \\(g\\) are differentiable at \\(x\\), then \\(fg\\) is also differentiable"
+            },
+            "steps": [
+              "\\(f'(x) = 2x\\), \\(g'(x) = 3x^{2} - 2\\)",
+              "\\(\\dfrac{dy}{dx} = 2x(x^{3} - 2x) + (x^{2} + 1)(3x^{2} - 2)\\)",
+              "\\(= 2x^{4} - 4x^{2} + 3x^{4} - 2x^{2} + 3x^{2} - 2 = 5x^{4} - 3x^{2} - 2\\)",
+              "Check: \\(y = x^{5} - 2x^{3} + x^{3} - 2x = x^{5} - x^{3} - 2x\\)",
+              "\\(\\dfrac{dy}{dx} = 5x^{4} - 3x^{2} - 2\\), the same."
+            ],
+            "final_answer": "\\(\\dfrac{dy}{dx} = 5x^{4} - 3x^{2} - 2\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 Differentiate \\(\\dfrac{x^{2} - 3x + 1}{x^{2} + 2}\\) with respect to \\(x\\). (5 marks)",
+            "explanation": "Quotient rule; \\(x^{2} + 2 \\ne 0\\) for every real \\(x\\).",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "Unlike the product rule, the ORDER matters here because of the minus sign"
+            },
+            "steps": [
+              "\\(f(x) = x^{2} - 3x + 1\\), \\(f'(x) = 2x - 3\\); \\(g(x) = x^{2} + 2\\), \\(g'(x) = 2x\\)",
+              "\\(\\dfrac{dy}{dx} = \\dfrac{(2x - 3)(x^{2} + 2) - (x^{2} - 3x + 1)(2x)}{(x^{2} + 2)^{2}}\\)",
+              "\\((2x - 3)(x^{2} + 2) = 2x^{3} - 3x^{2} + 4x - 6\\); \\((x^{2} - 3x + 1)(2x) = 2x^{3} - 6x^{2} + 2x\\)",
+              "Numerator: \\(2x^{3} - 3x^{2} + 4x - 6 - 2x^{3} + 6x^{2} - 2x = 3x^{2} + 2x - 6\\)",
+              "\\(\\dfrac{dy}{dx} = \\dfrac{3x^{2} + 2x - 6}{(x^{2} + 2)^{2}}\\)"
+            ],
+            "final_answer": "\\(\\dfrac{dy}{dx} = \\dfrac{3x^{2} + 2x - 6}{(x^{2} + 2)^{2}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 If \\(y = \\dfrac{x^{2} + 1}{x}\\), \\(x \\ne 0\\), find \\(\\dfrac{dy}{dx}\\) by the quotient rule and show that \\(x^{2}\\dfrac{dy}{dx} = x^{2} - 1\\). (5 marks)",
+            "explanation": "Quotient rule, then multiply by \\(x^{2}\\); check by writing \\(y = x + x^{-1}\\).",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "then \\(\\frac{f}{g}\\) is differentiable at"
+            },
+            "steps": [
+              "\\(f(x) = x^{2} + 1\\), \\(f'(x) = 2x\\); \\(g(x) = x\\), \\(g'(x) = 1\\)",
+              "\\(\\dfrac{dy}{dx} = \\dfrac{2x \\cdot x - (x^{2} + 1)(1)}{x^{2}} = \\dfrac{x^{2} - 1}{x^{2}}\\)",
+              "\\(x^{2}\\dfrac{dy}{dx} = x^{2} \\cdot \\dfrac{x^{2} - 1}{x^{2}} = x^{2} - 1\\)",
+              "Check: \\(y = x + x^{-1}\\), so \\(\\dfrac{dy}{dx} = 1 - x^{-2} = \\dfrac{x^{2} - 1}{x^{2}}\\)"
+            ],
+            "final_answer": "Hence proved: \\(x^{2}\\dfrac{dy}{dx} = x^{2} - 1\\), with \\(\\dfrac{dy}{dx} = \\dfrac{x^{2} - 1}{x^{2}}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 A firm's profit from \\(x\\) units is \\(P(x) = 240x - 6x^{2} - 900\\). (i) Find the marginal profit when \\(x = 15\\). (ii) Find the number of units that gives the largest profit and that profit. (5 marks)",
+            "explanation": "Marginal profit \\(= P'(x)\\); the largest profit is where \\(P'(x) = 0\\) and \\(P'\\) changes from positive to negative.",
+            "book_ref": {
+              "topic_id": "c57a5140-d3cb-59df-a4aa-e42af63e483c",
+              "quote": "the marginal profit is the derivative of the profit function with respect to"
+            },
+            "steps": [
+              "\\(P'(x) = 240 - 12x\\)",
+              "(i) \\(P'(15) = 240 - 180 = 60\\)",
+              "(ii) \\(P'(x) = 0 \\Rightarrow 240 - 12x = 0 \\Rightarrow x = 20\\)",
+              "\\(P'(19) = 12 > 0\\) and \\(P'(21) = -12 < 0\\): profit rises, then falls, so \\(x = 20\\) gives the largest profit.",
+              "\\(P(20) = 4800 - 2400 - 900 = 1500\\)"
+            ],
+            "final_answer": "(i) Marginal profit \\(60\\) per unit at \\(x = 15\\). (ii) \\(20\\) units give the largest profit, \\(1500\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 A particle moves along a line with \\(s(t) = 2t^{3} - 15t^{2} + 24t\\) metres after \\(t\\) seconds. Find (i) the velocity and acceleration at \\(t = 3\\) s, (ii) the times when the particle is at rest. (5 marks)",
+            "explanation": "\\(v = s'(t)\\), \\(a = v'(t)\\); at rest means \\(v = 0\\).",
+            "book_ref": {
+              "topic_id": "c57a5140-d3cb-59df-a4aa-e42af63e483c",
+              "quote": "velocity is the derivative of the position function, and acceleration is the derivative of the velocity function"
+            },
+            "steps": [
+              "\\(v(t) = 6t^{2} - 30t + 24\\)",
+              "\\(v(3) = 54 - 90 + 24 = -12\\) m/s (moving in the negative direction)",
+              "\\(a(t) = 12t - 30\\); \\(a(3) = 36 - 30 = 6\\ \\text{m/s}^{2}\\)",
+              "At rest: \\(6t^{2} - 30t + 24 = 0 \\Rightarrow t^{2} - 5t + 4 = 0 \\Rightarrow (t - 1)(t - 4) = 0\\)",
+              "\\(t = 1\\) s or \\(t = 4\\) s"
+            ],
+            "final_answer": "(i) \\(v(3) = -12\\) m/s, \\(a(3) = 6\\ \\text{m/s}^{2}\\). (ii) At rest at \\(t = 1\\) s and \\(t = 4\\) s."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "22 The cost of building a cylindrical tank of base radius \\(r\\) is \\(C(r) = 2000\\pi r^{2} + \\dfrac{32000}{r}\\), \\(r > 0\\). Find the radius that minimizes the cost and the least cost. (5 marks)",
+            "explanation": "Set \\(C'(r) = 0\\), solve for \\(r\\) (cube root gives \\(r\\)), check the sign of \\(C'\\) on both sides.",
+            "book_ref": {
+              "topic_id": "c57a5140-d3cb-59df-a4aa-e42af63e483c",
+              "quote": "at the lowest point of the cost curve the rate of change of cost is zero"
+            },
+            "steps": [
+              "\\(C'(r) = 4000\\pi r - \\dfrac{32000}{r^{2}}\\)",
+              "\\(C'(r) = 0 \\Rightarrow 4000\\pi r^{3} = 32000 \\Rightarrow r^{3} = \\dfrac{8}{\\pi}\\)",
+              "\\(r = \\left(\\dfrac{8}{\\pi}\\right)^{\\frac{1}{3}} = \\dfrac{2}{\\pi^{\\frac{1}{3}}} \\approx 1.366\\)",
+              "\\(C'(1) = 4000\\pi - 32000 < 0\\), \\(C'(2) = 8000\\pi - 8000 > 0\\): the cost falls, then rises, so this \\(r\\) gives the least cost.",
+              "Least cost: \\(C = 2000\\pi \\cdot \\dfrac{4}{\\pi^{\\frac{2}{3}}} + 16000\\pi^{\\frac{1}{3}} = 8000\\pi^{\\frac{1}{3}} + 16000\\pi^{\\frac{1}{3}} = 24000\\pi^{\\frac{1}{3}} \\approx 35150\\)"
+            ],
+            "final_answer": "\\(r = \\dfrac{2}{\\pi^{\\frac{1}{3}}} \\approx 1.366\\); least cost \\(24000\\pi^{\\frac{1}{3}} \\approx 35150\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "23 The value of an investment after \\(t\\) years is \\(V(t) = 8000(1 + 0.05t)^{2}\\) rupees. Find (i) the rate of change of its value after \\(5\\) years, (ii) its value after \\(5\\) years. (5 marks)",
+            "explanation": "Expand the square first so that only formulas 1 to 4 are needed.",
+            "book_ref": {
+              "topic_id": "c57a5140-d3cb-59df-a4aa-e42af63e483c",
+              "quote": "the rate of change of the investment is the derivative of"
+            },
+            "steps": [
+              "\\(V(t) = 8000(1 + 0.1t + 0.0025t^{2}) = 8000 + 800t + 20t^{2}\\)",
+              "\\(V'(t) = 800 + 40t\\)",
+              "(i) \\(V'(5) = 800 + 200 = 1000\\) rupees per year",
+              "(ii) \\(V(5) = 8000(1 + 0.25)^{2} = 8000 \\times 1.5625\\)",
+              "\\(= 12500\\) rupees"
+            ],
+            "final_answer": "(i) Rs. \\(1000\\) per year (ii) Rs. \\(12500\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "24 The stress on a beam is \\(S(x) = 600x - 2x^{3}\\) Pa at \\(x\\) metres from the fixed end. (i) Find the rate of change of stress at \\(x = 5\\) m and say whether the stress is increasing or decreasing there. (ii) Find where the stress is largest and the largest stress. (5 marks)",
+            "explanation": "\\(S'(x)\\) gives the rate; the largest stress is where \\(S'(x) = 0\\) with \\(S'\\) changing from positive to negative.",
+            "book_ref": {
+              "topic_id": "c57a5140-d3cb-59df-a4aa-e42af63e483c",
+              "quote": "the rate of change of stress is the derivative of"
+            },
+            "steps": [
+              "\\(S'(x) = 600 - 6x^{2}\\)",
+              "(i) \\(S'(5) = 600 - 150 = 450\\) Pa per metre; positive, so the stress is increasing at \\(x = 5\\) m.",
+              "(ii) \\(S'(x) = 0 \\Rightarrow 6x^{2} = 600 \\Rightarrow x^{2} = 100 \\Rightarrow x = 10\\) (\\(x > 0\\))",
+              "\\(S'(9) = 114 > 0\\), \\(S'(11) = -126 < 0\\): so the stress is largest at \\(x = 10\\) m.",
+              "\\(S(10) = 6000 - 2000 = 4000\\) Pa"
+            ],
+            "final_answer": "(i) \\(450\\) Pa per metre, increasing. (ii) Largest stress \\(4000\\) Pa at \\(x = 10\\) m."
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,645 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH13-SHORT",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch13",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch13/u-short-questions",
+      "title": "Short Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 242,
+          "pdf_to": 263,
+          "note": "Practice short questions written from Unit 13 (PDF 242-263, printed 237-258); not printed in the book. Based on the unit's text, theorems, formulas and worked examples (changed values); none repeats the unit's exercises. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice short questions for the whole of Unit 13 (Differentiation), arranged by the unit's sections, in the style of a 2-mark Board short question. Each one is solved briefly, step by step."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "13.1 Tangent to a Curve at a Point"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Define a secant line of a curve and write the slope of the secant through the points with x-coordinates \\(x\\) and \\(x + \\delta x\\) on \\(y = f(x)\\).",
+            "explanation": "A secant is a line that cuts a curve in two points. Through \\(P(x, f(x))\\) and \\(Q(x + \\delta x, f(x + \\delta x))\\): \\(m_{\\text{sec}} = \\dfrac{f(x+\\delta x) - f(x)}{\\delta x}\\).",
+            "book_ref": {
+              "topic_id": "e20dc2a2-f8ee-5001-b629-abe160639d77",
+              "quote": "A secant cuts a curve at two points"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Write the slope of the tangent to \\(y = f(x)\\) at \\(P(x, f(x))\\) as a limit, and say how it is related to the secant.",
+            "explanation": "\\(m_{\\text{tan}} = \\lim_{\\delta x \\to 0}\\dfrac{f(x+\\delta x) - f(x)}{\\delta x}\\). As \\(\\delta x \\to 0\\), \\(Q\\) approaches \\(P\\) and the secant \\(PQ\\) becomes the tangent \\(PT\\); so \\(m_{\\text{tan}}\\) is the limit of \\(m_{\\text{sec}}\\).",
+            "book_ref": {
+              "topic_id": "e20dc2a2-f8ee-5001-b629-abe160639d77",
+              "quote": "the secant line becomes the tangent line"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Find the slope of the secant to \\(f(x) = x^{2} - 4x\\) through the points where \\(x = 1\\) and \\(x = 4\\).",
+            "explanation": "\\(f(4) = 16 - 16 = 0\\), \\(f(1) = 1 - 4 = -3\\). \\(m_{\\text{sec}} = \\dfrac{0 - (-3)}{4 - 1} = \\dfrac{3}{3} = 1\\).",
+            "book_ref": {
+              "topic_id": "e20dc2a2-f8ee-5001-b629-abe160639d77",
+              "quote": "every derivative is a limit"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Using the limit for \\(m_{\\text{tan}}\\), find the gradient of the tangent to \\(f(x) = x^{2} + 4\\) at the point \\((2, 8)\\).",
+            "explanation": "Put \\(x = 2\\) in the limit and cancel \\(\\delta x\\).",
+            "book_ref": {
+              "topic_id": "e20dc2a2-f8ee-5001-b629-abe160639d77",
+              "quote": "Working pattern: substitute, expand, cancel the common factor"
+            },
+            "steps": [
+              "\\(f(2+\\delta x) - f(2) = (2+\\delta x)^{2} + 4 - 8 = 4\\delta x + \\delta x^{2}\\)",
+              "\\(\\dfrac{f(2+\\delta x) - f(2)}{\\delta x} = 4 + \\delta x\\)",
+              "\\(m_{\\text{tan}} = \\lim_{\\delta x \\to 0}(4 + \\delta x) = 4\\)"
+            ],
+            "final_answer": "Gradient \\(= 4\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 The tangent to \\(f(x) = x^{2} + 4\\) at \\((2, 8)\\) has slope \\(4\\). Find its equation.",
+            "explanation": "\\(y - 8 = 4(x - 2) \\Rightarrow y = 4x - 8 + 8 \\Rightarrow y = 4x\\).",
+            "book_ref": {
+              "topic_id": "e20dc2a2-f8ee-5001-b629-abe160639d77",
+              "quote": "Then use the point-slope form"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "13.2 Derivative as the Limit of a Difference Quotient"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Define the derivative of a function \\(f\\) with respect to \\(x\\).",
+            "explanation": "\\(f'(x) = \\lim_{\\delta x \\to 0}\\dfrac{f(x+\\delta x) - f(x)}{\\delta x}\\), provided the limit exists, is the derivative (differential coefficient) of \\(f\\) with respect to \\(x\\), read \\\"\\(f\\) prime of \\(x\\)\\\".",
+            "book_ref": {
+              "topic_id": "87158a14-ba1f-5cd4-8b66-ab27fba394ee",
+              "quote": "provided the limit exists, is defined to be the derivative of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Find the average rate of change of \\(f(x) = x^{2} - 3x\\) as \\(x\\) changes from \\(1\\) to \\(5\\).",
+            "explanation": "\\(f(5) = 25 - 15 = 10\\), \\(f(1) = -2\\). \\(\\dfrac{f(5) - f(1)}{5 - 1} = \\dfrac{12}{4} = 3\\).",
+            "book_ref": {
+              "topic_id": "87158a14-ba1f-5cd4-8b66-ab27fba394ee",
+              "quote": "represents the average rate of change in the value of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 When is a function \\(f\\) said to be differentiable at \\(x\\)? What is the domain of \\(f'\\)?",
+            "explanation": "If \\(x \\in D_{f}\\) and \\(f'(x)\\) exists, \\(f\\) is differentiable at \\(x\\). The domain of \\(f'\\) consists of all \\(x\\) for which the limit exists.",
+            "book_ref": {
+              "topic_id": "87158a14-ba1f-5cd4-8b66-ab27fba394ee",
+              "quote": "is said to be differentiable at"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "13.2.1 Derivative as the rate of change of velocity"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 A particle moves so that \\(s(t) = t^{2} + 5t\\) metres after \\(t\\) seconds. Find its average velocity over \\([1, 3]\\).",
+            "explanation": "\\(s(3) = 24\\), \\(s(1) = 6\\). \\(v_{\\text{avg}} = \\dfrac{24 - 6}{3 - 1} = 9\\) m/sec.",
+            "book_ref": {
+              "topic_id": "70b2207a-5e0d-5d65-b2da-41ea00028f6d",
+              "quote": "The average velocity over the interval from"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 For \\(s(t) = t^{2} + 5t\\) metres, find the instantaneous velocity at \\(t = 1\\) by the limit.",
+            "explanation": "Use \\(v_{\\text{inst}} = \\lim_{\\delta t \\to 0}\\dfrac{s(1+\\delta t) - s(1)}{\\delta t}\\).",
+            "book_ref": {
+              "topic_id": "70b2207a-5e0d-5d65-b2da-41ea00028f6d",
+              "quote": "the instantaneous velocity is the derivative of the position function"
+            },
+            "steps": [
+              "\\(s(1+\\delta t) - s(1) = (1+\\delta t)^{2} + 5(1+\\delta t) - 6 = 7\\delta t + \\delta t^{2}\\)",
+              "\\(\\dfrac{7\\delta t + \\delta t^{2}}{\\delta t} = 7 + \\delta t\\)",
+              "\\(v_{\\text{inst}} = \\lim_{\\delta t \\to 0}(7 + \\delta t) = 7\\)"
+            ],
+            "final_answer": "\\(7\\) m/sec"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Differentiate between average velocity and instantaneous velocity.",
+            "explanation": "Average velocity is over an interval; instantaneous velocity is at one instant (the limit).",
+            "book_ref": {
+              "topic_id": "70b2207a-5e0d-5d65-b2da-41ea00028f6d",
+              "quote": "the average velocity becomes the instantaneous velocity"
+            },
+            "answer_table": {
+              "header": [
+                "Average velocity",
+                "Instantaneous velocity"
+              ],
+              "rows": [
+                [
+                  "Over an interval \\([t, t_{1}]\\).",
+                  "At one instant \\(t\\)."
+                ],
+                [
+                  "\\(v_{\\text{avg}} = \\dfrac{s(t_{1}) - s(t)}{t_{1} - t}\\)",
+                  "\\(v_{\\text{inst}} = \\lim_{\\delta t \\to 0}\\dfrac{s(t+\\delta t) - s(t)}{\\delta t}\\)"
+                ],
+                [
+                  "Slope of a secant of the position graph.",
+                  "Slope of the tangent; the derivative of s(t)."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "13.3.1 Notation of Derivative"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Write the notations for the derivative of \\(y = f(x)\\) used by Leibniz, Newton, Lagrange and Euler.",
+            "explanation": "All four mean the same derivative of \\(y = f(x)\\).",
+            "book_ref": {
+              "topic_id": "746d35dc-b26e-5275-9bc0-67979da62461",
+              "quote": "Notations for the derivative of y = f(x) used by different mathematicians"
+            },
+            "answer_table": {
+              "header": [
+                "Mathematician",
+                "Notation"
+              ],
+              "rows": [
+                [
+                  "Leibniz",
+                  "\\(\\dfrac{dy}{dx}\\) or \\(\\dfrac{df}{dx}\\)"
+                ],
+                [
+                  "Newton",
+                  "\\(\\dot{f}(x)\\) or \\(\\dot{y}\\)"
+                ],
+                [
+                  "Lagrange",
+                  "\\(f'(x)\\)"
+                ],
+                [
+                  "Euler",
+                  "\\(Df(x)\\)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 Is \\(\\dfrac{dy}{dx}\\) a quotient of \\(dy\\) and \\(dx\\)? Explain.",
+            "explanation": "No. \\(\\dfrac{dy}{dx}\\) is one symbol for \\(\\lim_{\\delta x \\to 0}\\dfrac{\\delta y}{\\delta x}\\), the derivative of \\(y\\) with respect to \\(x\\). It is also written \\(y'\\).",
+            "book_ref": {
+              "topic_id": "746d35dc-b26e-5275-9bc0-67979da62461",
+              "quote": "and here it is not a quotient of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Using \\(f'(a) = \\lim_{x \\to a}\\dfrac{f(x) - f(a)}{x - a}\\), find \\(f'(2)\\) for \\(f(x) = x^{3}\\).",
+            "explanation": "\\(\\dfrac{x^{3} - 8}{x - 2} = \\dfrac{(x - 2)(x^{2} + 2x + 4)}{x - 2} = x^{2} + 2x + 4\\) (\\(x \\ne 2\\)); \\(f'(2) = 4 + 4 + 4 = 12\\).",
+            "book_ref": {
+              "topic_id": "746d35dc-b26e-5275-9bc0-67979da62461",
+              "quote": "is called the derivative or gradient of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 If \\(y = x^{2} + 1\\), find \\(\\delta y\\) when \\(x\\) changes from \\(3\\) to \\(3.1\\).",
+            "explanation": "\\(\\delta y = f(3.1) - f(3) = (9.61 + 1) - (9 + 1) = 0.61\\); so \\(\\dfrac{\\delta y}{\\delta x} = \\dfrac{0.61}{0.1} = 6.1\\).",
+            "book_ref": {
+              "topic_id": "746d35dc-b26e-5275-9bc0-67979da62461",
+              "quote": "subtract \\(y = f(x)\\) from both sides of (iv) to get the change in \\(y\\) alone"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "13.3.2 Finding f'(x) by Definition of Derivative"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 Write the four steps for finding \\(f'(x)\\) by definition.",
+            "explanation": "Step I: find \\(f(x + \\delta x)\\). Step II: simplify \\(f(x + \\delta x) - f(x)\\). Step III: divide by \\(\\delta x\\) and simplify. Step IV: find \\(\\lim_{\\delta x \\to 0}\\dfrac{f(x+\\delta x) - f(x)}{\\delta x}\\).",
+            "book_ref": {
+              "topic_id": "dbd326cb-283e-5f8b-8f65-920eba46fabb",
+              "quote": "can be found by the following four steps"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Find by definition the derivative of \\(f(x) = 4x - 7\\).",
+            "explanation": "\\(f(x + \\delta x) - f(x) = 4(x + \\delta x) - 7 - (4x - 7) = 4\\delta x\\); \\(\\dfrac{4\\delta x}{\\delta x} = 4\\); \\(f'(x) = \\lim_{\\delta x \\to 0} 4 = 4\\).",
+            "book_ref": {
+              "topic_id": "dbd326cb-283e-5f8b-8f65-920eba46fabb",
+              "quote": "The method of finding derivatives by this process is called differentiation by definition"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 Find by definition the derivative of \\(f(x) = x^{2} - 5x\\).",
+            "explanation": "Four steps; the \\(x^{2}\\) and \\(-5x\\) terms cancel.",
+            "book_ref": {
+              "topic_id": "dbd326cb-283e-5f8b-8f65-920eba46fabb",
+              "quote": "Expand \\((x+\\delta x)^{n}\\), cancel, take out \\(\\delta x\\)"
+            },
+            "steps": [
+              "\\(f(x + \\delta x) = (x + \\delta x)^{2} - 5(x + \\delta x)\\)",
+              "\\(f(x + \\delta x) - f(x) = 2x\\,\\delta x + (\\delta x)^{2} - 5\\delta x\\)",
+              "\\(\\dfrac{f(x + \\delta x) - f(x)}{\\delta x} = 2x + \\delta x - 5\\)",
+              "\\(f'(x) = \\lim_{\\delta x \\to 0}(2x + \\delta x - 5) = 2x - 5\\)"
+            ],
+            "final_answer": "\\(f'(x) = 2x - 5\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 Find by definition the derivative of \\(f(x) = \\dfrac{3}{x}\\), \\(x \\ne 0\\).",
+            "explanation": "Take a common denominator, then cancel \\(\\delta x\\).",
+            "book_ref": {
+              "topic_id": "dbd326cb-283e-5f8b-8f65-920eba46fabb",
+              "quote": "Common denominator, then factorize"
+            },
+            "steps": [
+              "\\(f(x + \\delta x) - f(x) = \\dfrac{3}{x + \\delta x} - \\dfrac{3}{x} = \\dfrac{3x - 3(x + \\delta x)}{x(x + \\delta x)} = \\dfrac{-3\\delta x}{x(x + \\delta x)}\\)",
+              "\\(\\dfrac{f(x + \\delta x) - f(x)}{\\delta x} = \\dfrac{-3}{x(x + \\delta x)}\\)",
+              "\\(f'(x) = \\lim_{\\delta x \\to 0}\\dfrac{-3}{x(x + \\delta x)} = \\dfrac{-3}{x^{2}}\\)"
+            ],
+            "final_answer": "\\(f'(x) = -\\dfrac{3}{x^{2}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 Find by definition the derivative of \\(f(x) = 2\\sqrt{x}\\), \\(x > 0\\).",
+            "explanation": "Rationalize the numerator.",
+            "book_ref": {
+              "topic_id": "dbd326cb-283e-5f8b-8f65-920eba46fabb",
+              "quote": "Whenever a square root appears in the numerator of the difference quotient, rationalize the numerator"
+            },
+            "steps": [
+              "\\(f(x + \\delta x) - f(x) = 2(\\sqrt{x + \\delta x} - \\sqrt{x}) = \\dfrac{2\\delta x}{\\sqrt{x + \\delta x} + \\sqrt{x}}\\)",
+              "\\(\\dfrac{f(x + \\delta x) - f(x)}{\\delta x} = \\dfrac{2}{\\sqrt{x + \\delta x} + \\sqrt{x}}\\)",
+              "\\(f'(x) = \\dfrac{2}{\\sqrt{x} + \\sqrt{x}} = \\dfrac{1}{\\sqrt{x}}\\)"
+            ],
+            "final_answer": "\\(f'(x) = \\dfrac{1}{\\sqrt{x}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 Find \\(\\dfrac{dy}{dx}\\) at \\(x = 1\\) by ab-initio method if \\(y = \\dfrac{1}{x + 1}\\).",
+            "explanation": "Find \\(\\delta y\\) with a common denominator, divide, take the limit, then put \\(x = 1\\).",
+            "book_ref": {
+              "topic_id": "dbd326cb-283e-5f8b-8f65-920eba46fabb",
+              "quote": "With fractions, the key algebra move is taking a common denominator."
+            },
+            "steps": [
+              "\\(\\delta y = \\dfrac{1}{x + \\delta x + 1} - \\dfrac{1}{x + 1} = \\dfrac{-\\delta x}{(x + 1)(x + \\delta x + 1)}\\)",
+              "\\(\\dfrac{\\delta y}{\\delta x} = \\dfrac{-1}{(x + 1)(x + \\delta x + 1)} \\to \\dfrac{-1}{(x + 1)^{2}}\\)",
+              "\\(\\left.\\dfrac{dy}{dx}\\right|_{x=1} = \\dfrac{-1}{4}\\)"
+            ],
+            "final_answer": "\\(-\\dfrac{1}{4}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "22 Why must \\(\\delta x\\) be cancelled before letting \\(\\delta x \\to 0\\) in Step III?",
+            "explanation": "Putting \\(\\delta x = 0\\) before simplifying gives \\(\\frac{0}{0}\\), which has no value. Since \\(\\delta x \\ne 0\\) while it approaches \\(0\\), we may cancel it first; then the limit can be taken.",
+            "book_ref": {
+              "topic_id": "dbd326cb-283e-5f8b-8f65-920eba46fabb",
+              "quote": "Using a shortcut rule when the question says"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "13.4 Derivation of x^n where n in Z"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "23 State the power rule. For which values of n does the unit prove it?",
+            "explanation": "\\(\\dfrac{d}{dx}(x^{n}) = nx^{n-1}\\). It is proved for \\(n \\in \\mathbb{Z}\\): positive integers (binomial theorem) and negative integers (\\(n = -m\\)). It also holds for rational powers; the proof for \\(n \\in \\mathbb{Q} - \\mathbb{Z}\\) is left as an exercise.",
+            "book_ref": {
+              "topic_id": "91843e85-3d86-5443-ab96-3946006999f3",
+              "quote": "is called power rule. Where"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "24 Differentiate \\(\\dfrac{1}{\\sqrt[3]{x}}\\) with respect to \\(x\\).",
+            "explanation": "\\(\\dfrac{1}{\\sqrt[3]{x}} = x^{-\\frac{1}{3}}\\); \\(\\dfrac{d}{dx}\\left(x^{-\\frac{1}{3}}\\right) = -\\dfrac{1}{3}x^{-\\frac{4}{3}} = -\\dfrac{1}{3x^{\\frac{4}{3}}}\\).",
+            "book_ref": {
+              "topic_id": "91843e85-3d86-5443-ab96-3946006999f3",
+              "quote": "Before using the power rule, write roots and reciprocals as powers"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "25 Differentiate \\(x^{-\\frac{5}{2}}\\) with respect to \\(x\\).",
+            "explanation": "\\(n = -\\frac{5}{2}\\): \\(-\\frac{5}{2}x^{-\\frac{5}{2} - 1} = -\\frac{5}{2}x^{-\\frac{7}{2}}\\).",
+            "book_ref": {
+              "topic_id": "91843e85-3d86-5443-ab96-3946006999f3",
+              "quote": "Reducing the power by one in the wrong direction for negative powers"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "26 Find the gradient of \\(y = x^{\\frac{3}{2}}\\) at \\(x = 9\\).",
+            "explanation": "\\(\\dfrac{dy}{dx} = \\dfrac{3}{2}x^{\\frac{1}{2}}\\); at \\(x = 9\\): \\(\\dfrac{3}{2} \\cdot 3 = \\dfrac{9}{2}\\).",
+            "book_ref": {
+              "topic_id": "91843e85-3d86-5443-ab96-3946006999f3",
+              "quote": "The above rule also holds if"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "27 Using the binomial theorem, find \\(\\delta y\\) for \\(y = x^{4}\\) and hence \\(\\dfrac{dy}{dx}\\).",
+            "explanation": "\\(\\delta y = (x + \\delta x)^{4} - x^{4} = 4x^{3}\\delta x + 6x^{2}(\\delta x)^{2} + 4x(\\delta x)^{3} + (\\delta x)^{4}\\); \\(\\dfrac{\\delta y}{\\delta x} = 4x^{3} + 6x^{2}\\delta x + 4x(\\delta x)^{2} + (\\delta x)^{3} \\to 4x^{3}\\).",
+            "book_ref": {
+              "topic_id": "91843e85-3d86-5443-ab96-3946006999f3",
+              "quote": "Using the binomial theorem, we have"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "28 Can the power rule be used to differentiate \\(2^{x}\\)? Give a reason.",
+            "explanation": "No. The power rule \\(\\frac{d}{dx}(x^{n}) = nx^{n-1}\\) works only for \\(x^{n}\\) with a constant power \\(n\\). In \\(2^{x}\\) the variable is in the power.",
+            "book_ref": {
+              "topic_id": "91843e85-3d86-5443-ab96-3946006999f3",
+              "quote": "Using the power rule for \\(a^{x}\\) (variable in the power)"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "13.5 Connection Between Derivatives and Continuity"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "29 State the relation between continuity and differentiability of a function at a point.",
+            "explanation": "If a function is differentiable at a point, it must also be continuous there. The reverse is not necessarily true: \\(f(x) = |x|\\) is continuous at \\(x = 0\\) but not differentiable there.",
+            "book_ref": {
+              "topic_id": "6e6d2fcc-d164-5468-8cf0-80673b9ce23b",
+              "quote": "differentiability implies continuity, but the reverse is not necessarily true"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "30 For \\(f(x) = |x|\\), find \\(f'(-2)\\) and \\(f'(5)\\).",
+            "explanation": "For \\(x < 0\\), \\(|x| = -x\\), so \\(f'(-2) = -1\\). For \\(x > 0\\), \\(|x| = x\\), so \\(f'(5) = 1\\).",
+            "book_ref": {
+              "topic_id": "6e6d2fcc-d164-5468-8cf0-80673b9ce23b",
+              "quote": "However the derivative exists at all other points of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "31 Is \\(f(x) = |x + 3|\\) differentiable at \\(x = -3\\)? Give a reason.",
+            "explanation": "\\(\\dfrac{f(-3 + \\delta x) - f(-3)}{\\delta x} = \\dfrac{|\\delta x|}{\\delta x}\\): right-hand limit \\(1\\), left-hand limit \\(-1\\). They differ, so \\(f'(-3)\\) does not exist: not differentiable at \\(x = -3\\).",
+            "book_ref": {
+              "topic_id": "6e6d2fcc-d164-5468-8cf0-80673b9ce23b",
+              "quote": "The right hand and left hand limits are not equal"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "32 Why is there no tangent line to the graph of \\(f(x) = |x|\\) at the origin?",
+            "explanation": "At \\(O\\) the graph has a sharp corner: slope \\(-1\\) on the left (\\(y = -x\\)) and \\(1\\) on the right (\\(y = x\\)). A tangent needs one definite slope, but \\(f'(0)\\) does not exist.",
+            "book_ref": {
+              "topic_id": "6e6d2fcc-d164-5468-8cf0-80673b9ce23b",
+              "quote": "there is no tangent line to the graph of"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "13.6 Theorems on Differentiation"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "33 Differentiate \\(6x^{\\frac{5}{3}}\\) with respect to \\(x\\).",
+            "explanation": "Formula 3 and the power rule: \\(6 \\cdot \\frac{5}{3}x^{\\frac{5}{3} - 1} = 10x^{\\frac{2}{3}}\\).",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "the derivative of a constant function is zero"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "34 Find \\(\\dfrac{dy}{dx}\\) if \\(y = \\dfrac{1}{2}x^{4} - 3x^{2} + 7x - 1\\).",
+            "explanation": "Term by term: \\(\\dfrac{dy}{dx} = \\dfrac{1}{2}(4x^{3}) - 3(2x) + 7 - 0 = 2x^{3} - 6x + 7\\).",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "The sum or difference formula can be extended to find the derivative of more than two functions."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "35 Differentiate \\((x^{2} + 3)(x - 2)\\) by the product rule.",
+            "explanation": "\\(2x(x - 2) + (x^{2} + 3)(1) = 2x^{2} - 4x + x^{2} + 3 = 3x^{2} - 4x + 3\\).",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "first's derivative times second, plus first times second's derivative"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "36 Differentiate \\(\\dfrac{x + 1}{x - 1}\\), \\(x \\ne 1\\), with respect to \\(x\\).",
+            "explanation": "\\(\\dfrac{(1)(x - 1) - (x + 1)(1)}{(x - 1)^{2}} = \\dfrac{-2}{(x - 1)^{2}}\\).",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "(bottom times derivative of top) minus (top times derivative of bottom), all over bottom squared"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "37 Differentiate \\((\\sqrt{x} + 1)^{2}\\) with respect to \\(x\\).",
+            "explanation": "Expand: \\((\\sqrt{x} + 1)^{2} = x + 2x^{\\frac{1}{2}} + 1\\). Derivative: \\(1 + 2 \\cdot \\frac{1}{2}x^{-\\frac{1}{2}} = 1 + \\dfrac{1}{\\sqrt{x}}\\).",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "Write roots as powers before differentiating"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "38 Differentiate \\(\\dfrac{x^{2}}{x^{2} + 4}\\) with respect to \\(x\\).",
+            "explanation": "\\(\\dfrac{2x(x^{2} + 4) - x^{2}(2x)}{(x^{2} + 4)^{2}} = \\dfrac{2x^{3} + 8x - 2x^{3}}{(x^{2} + 4)^{2}} = \\dfrac{8x}{(x^{2} + 4)^{2}}\\).",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "Losing the minus sign in front of the second product in the quotient rule"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "39 Find \\(\\dfrac{dy}{dx}\\) if \\(y = (2x - 1)(3x + 4)\\).",
+            "explanation": "Product rule: \\(2(3x + 4) + (2x - 1)(3) = 6x + 8 + 6x - 3 = 12x + 5\\).",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "If \\(f\\) and \\(g\\) are differentiable at \\(x\\), then \\(fg\\) is also differentiable"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "40 State the product rule and the quotient rule of differentiation.",
+            "explanation": "Product rule: \\([f(x)g(x)]' = f'(x)g(x) + f(x)g'(x)\\). Quotient rule (\\(g(x) \\ne 0\\)): \\(\\left(\\dfrac{f(x)}{g(x)}\\right)' = \\dfrac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^{2}}\\).",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "Now we will prove other important formulas (or rules)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "41 Find \\(\\dfrac{dy}{dx}\\) if \\(y = \\dfrac{x^{3} - 1}{x - 1}\\), \\(x \\ne 1\\).",
+            "explanation": "Simplify first: \\(y = \\dfrac{(x - 1)(x^{2} + x + 1)}{x - 1} = x^{2} + x + 1\\). So \\(\\dfrac{dy}{dx} = 2x + 1\\).",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "Simplifying first (Examples 8, 9) or using the product rule (Example 10) gives the same answer"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "42 Find \\(\\dfrac{dy}{dx}\\) if \\(y = x^{3} + \\dfrac{1}{x^{3}}\\).",
+            "explanation": "\\(y = x^{3} + x^{-3}\\); \\(\\dfrac{dy}{dx} = 3x^{2} - 3x^{-4} = 3x^{2} - \\dfrac{3}{x^{4}}\\).",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "Power rule slips with fractions"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "43 Differentiate \\(\\dfrac{1}{3x + 2}\\) with respect to \\(x\\) by the quotient rule.",
+            "explanation": "\\(\\dfrac{0 \\cdot (3x + 2) - 1 \\cdot 3}{(3x + 2)^{2}} = \\dfrac{-3}{(3x + 2)^{2}}\\).",
+            "book_ref": {
+              "topic_id": "3f7e82ce-65ee-5ae4-a224-80762874294a",
+              "quote": "Forgetting that the derivative of a constant term is 0"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "13.7 Application of Differentiation"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "44 A firm's profit is \\(P(x) = 200x - 4x^{2}\\). Find the marginal profit when \\(x = 15\\) units.",
+            "explanation": "\\(P'(x) = 200 - 8x\\); \\(P'(15) = 200 - 120 = 80\\): one more unit adds about \\(80\\) to the profit.",
+            "book_ref": {
+              "topic_id": "c57a5140-d3cb-59df-a4aa-e42af63e483c",
+              "quote": "the marginal profit is the derivative of the profit function with respect to"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "45 A particle moves with \\(s(t) = 2t^{3} + t^{2}\\) metres. Find its velocity and acceleration at \\(t = 1\\) s.",
+            "explanation": "\\(v(t) = 6t^{2} + 2t\\), \\(v(1) = 8\\) m/s; \\(a(t) = 12t + 2\\), \\(a(1) = 14\\ \\text{m/s}^{2}\\).",
+            "book_ref": {
+              "topic_id": "c57a5140-d3cb-59df-a4aa-e42af63e483c",
+              "quote": "velocity is the derivative of the position function, and acceleration is the derivative of the velocity function"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "46 An investment is worth \\(V(t) = 3000(1 + 0.02t)^{2}\\) rupees after \\(t\\) years. Find its rate of change after \\(5\\) years.",
+            "explanation": "Expand: \\(V(t) = 3000 + 120t + 1.2t^{2}\\). \\(V'(t) = 120 + 2.4t\\); \\(V'(5) = 120 + 12 = 132\\) rupees per year.",
+            "book_ref": {
+              "topic_id": "c57a5140-d3cb-59df-a4aa-e42af63e483c",
+              "quote": "the rate of change of the investment is the derivative of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "47 The stress in a beam is \\(S(x) = 200x - x^{3}\\) Pa at \\(x\\) metres from the fixed end. Find the rate of change of stress at \\(x = 4\\) m. Is the stress increasing or decreasing there?",
+            "explanation": "\\(S'(x) = 200 - 3x^{2}\\); \\(S'(4) = 200 - 48 = 152\\) Pa per metre. It is positive, so the stress is increasing at \\(x = 4\\) m.",
+            "book_ref": {
+              "topic_id": "c57a5140-d3cb-59df-a4aa-e42af63e483c",
+              "quote": "the rate of change of stress is the derivative of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "48 The cost of a tank is \\(C(r) = 3000\\pi r^{2} + \\dfrac{24000}{r}\\), \\(r > 0\\). Find the radius at which \\(C'(r) = 0\\).",
+            "explanation": "\\(C'(r) = 6000\\pi r - \\dfrac{24000}{r^{2}} = 0 \\Rightarrow r^{3} = \\dfrac{4}{\\pi} \\Rightarrow r = \\left(\\dfrac{4}{\\pi}\\right)^{\\frac{1}{3}} \\approx 1.084\\).",
+            "book_ref": {
+              "topic_id": "c57a5140-d3cb-59df-a4aa-e42af63e483c",
+              "quote": "A smallest (or largest) value occurs where the derivative is zero"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "49 A particle moves with \\(s(t) = t^{3} - 9t^{2} + 24t\\) metres. When is it at rest?",
+            "explanation": "\\(v(t) = 3t^{2} - 18t + 24 = 3(t - 2)(t - 4)\\). \\(v = 0\\) at \\(t = 2\\) s and \\(t = 4\\) s.",
+            "book_ref": {
+              "topic_id": "c57a5140-d3cb-59df-a4aa-e42af63e483c",
+              "quote": "Position \\(s(t)\\) \\(\\to\\) \\(s'(t)\\) is velocity"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
