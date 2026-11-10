@@ -13,6 +13,7 @@ export function Checkpoint({
   prompt,
   promptView,
   options,
+  optionViews,
   answerId,
   explanation,
   explanationView,
@@ -30,6 +31,8 @@ export function Checkpoint({
   /** How the prompt is shown (e.g. with its formulas typeset); the plain prompt names the question for screen readers. */
   promptView?: ReactNode;
   options: Option[];
+  /** INLINE-MATH-01: how each option is shown (formulas typeset); same order as `options`. */
+  optionViews?: (ReactNode | undefined)[];
   answerId: string | null;
   explanation: string;
   explanationView?: ReactNode;
@@ -150,13 +153,13 @@ export function Checkpoint({
       {mode === "question" ? (
         <fieldset className="space-y-2" disabled={chosen !== null}>
           <legend className="sr-only">{prompt}</legend>
-          {options.map((o) => {
+          {options.map((o, i) => {
             const state = chosen === null ? "" : o.id === answerId ? "border-ok" : o.id === chosen ? "border-warn" : "border-border";
             return (
               <label key={o.id} className={`flex items-start gap-2 rounded-lg border bg-surface px-3 py-2 ${state || "border-border"}`}>
                 <input type="radio" name={name} value={o.id} checked={chosen === o.id} onChange={() => setChosen(o.id)} className="mt-1" />
                 <span>
-                  {o.text}
+                  {optionViews?.[i] ?? o.text}
                   {chosen !== null && o.id === answerId && <span className="ml-2 text-sm font-medium">✓ Correct</span>}
                 </span>
               </label>
