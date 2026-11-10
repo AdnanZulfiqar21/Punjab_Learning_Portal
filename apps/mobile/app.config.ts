@@ -16,9 +16,9 @@ const IDS: Record<Variant, string> = {
   production: BASE_ID,
 };
 const NAMES: Record<Variant, string> = {
-  development: "Punjab Portal (Dev)",
-  preview: "Punjab Portal (Preview)",
-  production: "Punjab Learning Portal",
+  development: "Sirf Concepts (Dev)",
+  preview: "Sirf Concepts (Preview)",
+  production: "Sirf Concepts",
 };
 
 // The API origin is variant configuration. Production and preview builds must receive it explicitly; a production
@@ -61,7 +61,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
             ...config.ios?.infoPlist,
             ITSAppUsesNonExemptEncryption: false,
             NSLocalNetworkUsageDescription:
-              "Punjab Portal (Preview) connects to the learning service on this Wi-Fi.",
+              "Sirf Concepts (Preview) connects to the learning service on this Wi-Fi.",
             NSAppTransportSecurity: { NSAllowsLocalNetworking: true },
           },
   },

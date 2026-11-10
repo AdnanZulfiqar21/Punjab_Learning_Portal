@@ -35,7 +35,7 @@ class Template:
 TEMPLATES: dict[str, Template] = {
     # Account and money
     "account.verification": Template(
-        "service", ("email",), True, ("code",), "Your verification code", "Your Punjab Learning Portal code is {code}."
+        "service", ("email",), True, ("code",), "Your verification code", "Your Sirf Concepts code is {code}."
     ),
     "payment.receipt": Template(
         "service", ("email",), False, ("plan", "amount"), "Payment received", "Thank you. {plan} is active ({amount})."
