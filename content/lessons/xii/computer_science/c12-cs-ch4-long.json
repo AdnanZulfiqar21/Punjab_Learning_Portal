@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-LONG",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-long-questions",
+      "title": "Long Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 49,
+          "pdf_to": 63,
+          "note": "Practice long questions written from Chapter 4 (PDF 49-63, printed 45-59); not printed in the book. Based on the chapter's text, tables, boxes and worked examples (numericals with changed values); none repeats the chapter exercise. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice long questions for the whole of Chapter 4 (Development of Graphical User Interface (GUI)), in the shape of a Board long question: each theory question carries 8 marks (define, explain with examples, compare, write and explain a program), often as a definition plus explained points (e.g. 2 + 3 x 2). Each question has a full model answer."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Write a Tkinter program for a window titled Library, 350 x 250 pixels, divided into two frames: a light blue header frame with the label School Library, and a light yellow body frame holding an entry field and a Search button. Explain how the program builds the window and how the frames keep the interface clean. (8 marks)",
+            "explanation": "Program:\nimport tkinter as tk\n\nwindow = tk.Tk()\nwindow.title(\"Library\")\nwindow.geometry(\"350x250\")\n\nheader = tk.Frame(window, bg=\"lightblue\", height=80)\nheader.pack(fill=\"x\")\n\nbody = tk.Frame(window, bg=\"lightyellow\")\nbody.pack(fill=\"both\", expand=True)\n\ntk.Label(header, text=\"School Library\", bg=\"lightblue\").pack(pady=20)\nentry_book = tk.Entry(body)\nentry_book.pack(pady=10)\ntk.Button(body, text=\"Search\").pack(pady=10)\n\nwindow.mainloop()\n\nOutput: a window titled Library, 350 x 250 pixels. A light blue strip across the top shows School Library; the rest of the window is light yellow and holds an entry field with a Search button below it.\n\nExplanation:\n1. tk.Tk() creates the main window, the base for all other elements; title() and geometry() give it a title and size.\n2. tk.Frame(...) creates frames, sections within the window that divide it into smaller parts so related widgets can be grouped.\n3. header.pack(fill=\"x\") stretches the header across the width; body.pack(fill=\"both\", expand=True) makes the body take all the remaining space.\n4. The label is placed in header, and the entry and button in body, so each widget sits in its own section; pack(pady=...) leaves space between them.\n5. window.mainloop() runs the GUI.\n\nClean interface: frames keep related widgets together, and spacing and alignment keep widgets well arranged and easy to read; this structure improves clarity and keeps the interface well-arranged.",
+            "book_ref": {
+              "topic_id": "f7914bba-0e46-5a9b-8ccf-7ee29fa1fc48",
+              "quote": "A Tkinter program begins by creating a main window, which serves as the base for all other elements."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Write a Tkinter program that uses grid() to build an Admission Form with a Name label and entry in the first row, an Age label and entry in the second row, and a Submit button spanning both columns in the third row. Explain the grid() options used (row, column, padx, pady, columnspan) and why grid() suits this layout. (8 marks)",
+            "explanation": "Program:\nimport tkinter as tk\n\nwindow = tk.Tk()\nwindow.title(\"Admission Form\")\nwindow.geometry(\"320x180\")\n\ntk.Label(window, text=\"Name\").grid(row=0, column=0, padx=10, pady=10)\nentry_name = tk.Entry(window)\nentry_name.grid(row=0, column=1, padx=10, pady=10)\n\ntk.Label(window, text=\"Age\").grid(row=1, column=0, padx=10, pady=10)\nentry_age = tk.Entry(window)\nentry_age.grid(row=1, column=1, padx=10, pady=10)\n\nsubmit = tk.Button(window, text=\"Submit\", width=24)\nsubmit.grid(row=2, column=0, columnspan=2, pady=10)\n\nwindow.mainloop()\n\nOutput: a window titled Admission Form. The labels Name and Age are in the left column with their entry fields beside them on the right; a wide Submit button sits below, across both columns. (The layout has 2 columns and 3 rows.)\n\ngrid() options:\n1. row and column: the cell of the widget; counting starts at 0, so row=0, column=1 is the first row, second column.\n2. padx and pady: space left and right (padx) and above and below (pady) the widget.\n3. columnspan=2: the Submit button stretches over two columns.\n\nWhy grid(): the grid() method arranges widgets in rows and columns like a table, so labels line up in one column and entries in the next. It is useful for forms and structured layouts, which pack() (simple vertical or horizontal order) does not give so neatly.",
+            "book_ref": {
+              "topic_id": "48febcb5-f084-5e5e-8084-46d5c131c5e0",
+              "quote": "It is useful for forms and structured layouts."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Write a Tkinter program that places an OK button and a Cancel button side by side at exact positions using place(). Explain the x and y options, state one advantage and one care needed with place(), and compare it with pack() and grid() in a table. (8 marks)",
+            "explanation": "Program:\nimport tkinter as tk\n\nwindow = tk.Tk()\nwindow.title(\"place()\")\nwindow.geometry(\"300x200\")\n\nok = tk.Button(window, text=\"OK\", width=8)\ncancel = tk.Button(window, text=\"Cancel\", width=8)\nok.place(x=50, y=120)\ncancel.place(x=170, y=120)\n\nwindow.mainloop()\n\nOutput: a 300 x 200 window with the OK button at x=50, y=120 and the Cancel button at x=170, y=120, side by side in the lower part of the window.\n\nx and y: x is the distance in pixels from the left edge of the window and y from the top edge, so both buttons have the same y and are level.\n\nAdvantage and care: place() positions widgets at exact locations and gives more control, but it needs careful adjustment (here the x values must leave room so the buttons do not overlap).\n\nComparison: see the table.",
+            "book_ref": {
+              "topic_id": "48febcb5-f084-5e5e-8084-46d5c131c5e0",
+              "quote": "The place() method positions widgets at exact locations on the window"
+            },
+            "answer_table": {
+              "header": [
+                "pack()",
+                "grid()",
+                "place()"
+              ],
+              "rows": [
+                [
+                  "Places widgets in a simple vertical or horizontal order.",
+                  "Arranges widgets in rows and columns like a table.",
+                  "Positions widgets at exact locations (x, y)."
+                ],
+                [
+                  "Easy to use; works well for small applications.",
+                  "Useful for forms and structured layouts.",
+                  "Gives more control but needs careful adjustment."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Write a Tkinter program with a label Enter your name, an entry field and a Greet button; clicking the button should change the label to Hello, followed by the typed name. Using this program, explain event-driven programming: the event, the idle program, the linked function and the use of command and config(). (8 marks)",
+            "explanation": "Program:\nimport tkinter as tk\n\nwindow = tk.Tk()\nwindow.title(\"Greeting\")\nwindow.geometry(\"300x200\")\n\ndef greet():\n    name = entry.get()\n    label.config(text=\"Hello, \" + name)\n\nlabel = tk.Label(window, text=\"Enter your name\")\nlabel.pack(pady=10)\nentry = tk.Entry(window)\nentry.pack(pady=10)\nbutton = tk.Button(window, text=\"Greet\", command=greet)\nbutton.pack(pady=10)\n\nwindow.mainloop()\n\nOutput: the window titled Greeting first shows Enter your name, an empty entry field and a Greet button. If the user types Ayesha and clicks Greet, the label changes to: Hello, Ayesha\n\nExplanation:\n1. Event: event-driven programming is based on actions called events; here the event is the click on the Greet button (typing text is also an event).\n2. Idle program: window.mainloop() runs the GUI; the program remains idle until an event occurs instead of running all the time, which saves system resources.\n3. Linked function: each event is linked to a specific function; command=greet links the button click to greet(), and the function runs only when the event happens.\n4. Processing the input: inside greet(), entry.get() reads the typed name and label.config(text=\"Hello, \" + name) changes the label text, so the user sees the response at once.",
+            "book_ref": {
+              "topic_id": "a31ce23b-d95a-5cbf-8703-cb3fb554daa5",
+              "quote": "Event-driven programming is based on actions called events."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 A login form program is given below. Explain the role of its Entry fields, Button, check_login() and messagebox, then trace what happens for three attempts: (a) student / pass99, (b) student / pass90, (c) Student / pass99.\nimport tkinter as tk\nfrom tkinter import messagebox\n\nwindow = tk.Tk()\nwindow.title(\"Student Login\")\nwindow.geometry(\"300x200\")\n\ndef check_login():\n    username = entry_user.get()\n    password = entry_pass.get()\n    if username == \"student\" and password == \"pass99\":\n        messagebox.showinfo(\"Success\", \"Welcome, student!\")\n    else:\n        messagebox.showerror(\"Error\", \"Wrong username or password\")\n\ntk.Label(window, text=\"Username\").pack()\nentry_user = tk.Entry(window)\nentry_user.pack()\ntk.Label(window, text=\"Password\").pack()\nentry_pass = tk.Entry(window, show=\"*\")\nentry_pass.pack()\nlogin_button = tk.Button(window, text=\"Login\", command=check_login)\nlogin_button.pack(pady=10)\n\nwindow.mainloop() (8 marks)",
+            "explanation": "Roles: the two Entry fields take the username and password (show=\"*\" hides the password); the Login button submits the data; check_login() reads both values with get() and checks them; messagebox shows a success (showinfo) or error (showerror) message. The form works on event-driven programming: check_login() runs only when the button is clicked. (The three attempts below were run and these are the real results.)",
+            "book_ref": {
+              "topic_id": "02caa526-6004-54e6-86a9-4e81f1778e7b",
+              "quote": "When the button is clicked, the program checks the entered data."
+            },
+            "steps": [
+              "(a) username = \"student\", password = \"pass99\": both comparisons are True, so the and condition is True and messagebox.showinfo shows Success: Welcome, student!",
+              "(b) username = \"student\", password = \"pass90\": the password comparison is False, so the and condition is False and the else part shows Error: Wrong username or password",
+              "(c) username = \"Student\", password = \"pass99\": \"Student\" is not equal to \"student\" (the capital S makes the strings different), so the condition is False and Error: Wrong username or password is shown"
+            ],
+            "final_answer": "Only attempt (a) logs in; attempts (b) and (c) show the error message."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Define a database and give its advantages (2). Explain the four concepts entity, attribute, relationship and identifier, with the chapter's examples (4 x 1.5). (8 marks)",
+            "explanation": "Database: an organized collection of data stored in a structured format, so data can be accessed and managed easily. Advantages: it reduces data duplication, improves reliability and supports secure storage of information.\n\n1. Entity: a real-world object, person, place, event or concept about which data is stored. Examples: Student, Teacher, Course, Book, Employee.\n\n2. Attribute: a property or characteristic of an entity that describes specific information about it. Example: for Student, the attributes Student Name, Roll Number, Class and Age.\n\n3. Relationship: shows how two or more entities are connected. Example: A Student enrols in a Course; enrols in is the relationship between Student and Course.\n\n4. Identifier: an attribute that uniquely identifies each record of an entity. Example: Roll Number for Student, because each student has a unique roll number.",
+            "book_ref": {
+              "topic_id": "9b1a2950-baa4-5421-abb9-1be85a10a8d3",
+              "quote": "Identifier: An identifier is an attribute that uniquely identifies each record or object of an entity."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Define a relational database (2). Explain table, record, field (column), primary key and foreign key (5). What is SQL (1)? (8 marks)",
+            "explanation": "Relational database: a database that stores data in tables made of rows and columns and links the tables using relationships; relationships between tables are maintained using keys.\n\n1. Table: a collection of related data organised in rows and columns; each table stores related data in a structured manner.\n2. Record: a row of a table, e.g. one student's data (1, 'Ali', 14, '8th').\n3. Field (column): a property or characteristic of an entity, e.g. name, age.\n4. Primary key: a unique identifier for each record in a table, e.g. id INTEGER PRIMARY KEY in the students table.\n5. Foreign key: a field that links one table to another by referring to the primary key of another table.\n\nSQL: Structured Query Language, used to interact with databases; its commands help create, read, update and delete data.",
+            "book_ref": {
+              "topic_id": "ddb841f0-b673-5cbc-8b14-2889b60c3688",
+              "quote": "Foreign Key: A field that links one table to another by referring to the primary key of another table."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Write a Python program using sqlite3 that creates a books table (id, title, author, price) in library.db, adds three books, then reads and displays all records and the total number of books. Explain each step of the program. (8 marks)",
+            "explanation": "Program:\nimport sqlite3\nconnection = sqlite3.connect(\"library.db\")\ncursor = connection.cursor()\ncursor.execute(\"CREATE TABLE IF NOT EXISTS books (id INTEGER PRIMARY KEY, title TEXT, author TEXT, price INTEGER)\")\ncursor.execute(\"INSERT INTO books (title, author, price) VALUES ('Python Basics', 'Ahmad', 450)\")\ncursor.execute(\"INSERT INTO books (title, author, price) VALUES ('Data Science', 'Fatima', 700)\")\ncursor.execute(\"INSERT INTO books (title, author, price) VALUES ('Web Design', 'Kamran', 550)\")\nconnection.commit()\ncursor.execute(\"SELECT * FROM books\")\nrecords = cursor.fetchall()\nfor row in records:\n    print(row)\nprint(\"Total books:\", len(records))\nconnection.close()\n\nOutput:\n(1, 'Python Basics', 'Ahmad', 450)\n(2, 'Data Science', 'Fatima', 700)\n(3, 'Web Design', 'Kamran', 550)\nTotal books: 3\n\nExplanation:\n1. Connect: sqlite3.connect(\"library.db\") establishes a connection; sqlite3 is built into Python and stores the database in a single file, created automatically if it does not exist.\n2. Create cursor: connection.cursor() creates a cursor object, used to execute SQL commands.\n3. Create table and insert (Create): CREATE TABLE IF NOT EXISTS makes the table; three INSERT INTO commands add new records; id INTEGER PRIMARY KEY gives each book a unique id 1, 2, 3.\n4. Save: connection.commit() saves the changes in the database.\n5. Read: SELECT * FROM books retrieves all columns; fetchall() returns a list of rows, and the for loop prints each row; len(records) gives 3.\n6. Close: connection.close() closes the connection after the operation.",
+            "book_ref": {
+              "topic_id": "27e5f810-bc59-5917-b702-fb4cdbfdc447",
+              "quote": "Fetch and Display Data: Fetches all records and prints each row in the result."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 What does CRUD stand for (1)? Explain each of the four CRUD operations, giving its SQL command and an example statement on a students table (4 x 1.5). Why do database applications depend on CRUD (1)? (8 marks)",
+            "explanation": "CRUD stands for Create, Read, Update and Delete; it defines the basic database actions.\n\n1. Create: adds new data (a new record) to a table using the SQL INSERT command. Example: INSERT INTO students (ID, Name, Age) VALUES (2, 'Amna', 17);\n\n2. Read: retrieves and displays data using the SQL SELECT command; it does not change the stored data. Example: SELECT * FROM students;\n\n3. Update: modifies existing records using the SQL UPDATE command with a condition, used when information needs correction. Example: UPDATE students SET Age = 18 WHERE ID = 2;\n\n4. Delete: removes unwanted records using the SQL DELETE command with a condition; careful use prevents loss of important data. Example: DELETE FROM students WHERE ID = 2;\n\nWhy: these operations manage the data stored in a database and keep the information accurate and up to date, so every database-based application depends on them. Python performs them by sending SQL commands.",
+            "book_ref": {
+              "topic_id": "6eecb2bb-8b2b-5627-9c69-6558dfdc6eec",
+              "quote": "Every database-based application depends on CRUD operations."
+            },
+            "answer_table": {
+              "header": [
+                "Operation",
+                "SQL command",
+                "Purpose"
+              ],
+              "rows": [
+                [
+                  "Create",
+                  "INSERT",
+                  "Adds a new record to a table."
+                ],
+                [
+                  "Read",
+                  "SELECT",
+                  "Retrieves data from a table."
+                ],
+                [
+                  "Update",
+                  "UPDATE",
+                  "Modifies an existing record in a table."
+                ],
+                [
+                  "Delete",
+                  "DELETE",
+                  "Removes a record from a table."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Write a Python program using sqlite3 that stores two students' marks in a results table, then updates the marks of the student with id 2 to 81 and displays the data before and after the update. Explain the Update operation with reference to your program. (8 marks)",
+            "explanation": "Program:\nimport sqlite3\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\ncursor.execute(\"CREATE TABLE IF NOT EXISTS results (id INTEGER PRIMARY KEY, name TEXT, marks INTEGER)\")\ncursor.execute(\"INSERT INTO results (name, marks) VALUES ('Ali', 72)\")\ncursor.execute(\"INSERT INTO results (name, marks) VALUES ('Sara', 65)\")\nconnection.commit()\n\ncursor.execute(\"SELECT * FROM results\")\nprint(\"Before:\", cursor.fetchall())\n\ncursor.execute(\"UPDATE results SET marks = 81 WHERE id = 2\")\nconnection.commit()\n\ncursor.execute(\"SELECT * FROM results\")\nprint(\"After:\", cursor.fetchall())\nconnection.close()\n\nOutput:\nBefore: [(1, 'Ali', 72), (2, 'Sara', 65)]\nAfter: [(1, 'Ali', 72), (2, 'Sara', 81)]\n\nExplanation:\n1. The Update operation changes existing data in a database; it is used when stored information needs correction, here Sara's marks.\n2. The SQL command UPDATE results SET marks = 81 WHERE id = 2 modifies only the selected record; Python executes it through the cursor based on the condition WHERE id = 2.\n3. Only the specified data is changed: Ali's record stays (1, 'Ali', 72).\n4. connection.commit() saves the change in the database, and the Read operation (SELECT * FROM results) before and after shows the effect.",
+            "book_ref": {
+              "topic_id": "b8b10414-0b71-59e5-b737-6c78124b4510",
+              "quote": "SQL update commands modify selected records."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Write a Python program using sqlite3 that adds three students to a students table, deletes only the student with id 2, and displays the remaining records. Explain why the delete command uses a condition and why commit() is needed. (8 marks)",
+            "explanation": "Program:\nimport sqlite3\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\ncursor.execute(\"CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY, name TEXT, age INTEGER, grade TEXT)\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Ali', 14, '8th')\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Sara', 15, '9th')\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Omar', 16, '10th')\")\nconnection.commit()\n\ncursor.execute(\"DELETE FROM students WHERE id = 2\")\nconnection.commit()\nprint(\"Record deleted successfully\")\n\ncursor.execute(\"SELECT * FROM students\")\nfor row in cursor.fetchall():\n    print(row)\nconnection.close()\n\nOutput:\nRecord deleted successfully\n(1, 'Ali', 14, '8th')\n(3, 'Omar', 16, '10th')\n\nExplanation:\n1. The Delete operation removes unwanted data from a database and helps keep it clean and accurate.\n2. Condition: SQL delete commands are used with conditions. DELETE FROM students WHERE id = 2 removes a specific record (Sara) only; the records of Ali and Omar remain. Careful use of the condition prevents loss of important data.\n3. commit(): connection.commit() saves the changes in the database; without commit() the deletion will not be permanent.\n4. The SELECT that follows reads the table to confirm that only the selected record was removed, and close() ends the connection.",
+            "book_ref": {
+              "topic_id": "6d2edc65-86f1-53fe-a356-5bbf023d7a58",
+              "quote": "Python ensures only selected records are removed."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 A program is meant to delete Ali (id 1) from school.db. It prints Record deleted successfully, but when the table is read again Ali is still there. Trace the program, explain the mistake and correct it, showing the output before and after the correction.\nimport sqlite3\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\ncursor.execute(\"CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY, name TEXT, age INTEGER, grade TEXT)\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Ali', 14, '8th')\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Sara', 15, '9th')\")\nconnection.commit()\nconnection.close()\n\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\ncursor.execute(\"DELETE FROM students WHERE id = 1\")\nprint(\"Record deleted successfully\")\nconnection.close()\n\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\ncursor.execute(\"SELECT * FROM students\")\nprint(cursor.fetchall())\nconnection.close() (8 marks)",
+            "explanation": "Think of what makes a change permanent: connection.commit() saves the changes in the database; a change that is not committed is lost when the connection is closed. (Both versions were run; the outputs below are real.)",
+            "book_ref": {
+              "topic_id": "6d2edc65-86f1-53fe-a356-5bbf023d7a58",
+              "quote": "Without commit(), deletion will not be permanent"
+            },
+            "steps": [
+              "Part 1 creates the table, inserts Ali (id 1) and Sara (id 2), commits and closes: both records are saved in school.db.",
+              "Part 2 opens a new connection and runs DELETE FROM students WHERE id = 1, prints Record deleted successfully, then closes WITHOUT connection.commit(), so the deletion is not saved.",
+              "Part 3 reads the table again. Output of the given program:\nRecord deleted successfully\n[(1, 'Ali', 14, '8th'), (2, 'Sara', 15, '9th')]",
+              "Correction: add connection.commit() right after the DELETE command:\ncursor.execute(\"DELETE FROM students WHERE id = 1\")\nconnection.commit()",
+              "Output after the correction:\nRecord deleted successfully\n[(2, 'Sara', 15, '9th')]"
+            ],
+            "final_answer": "The mistake is the missing connection.commit() after DELETE; without commit() the deletion is not permanent."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 Trace the following program: give the contents of the students table after each Create, Update and Delete command, name the CRUD operation each line performs, and write the final output.\nimport sqlite3\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\ncursor.execute(\"CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY, name TEXT, age INTEGER, grade TEXT)\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Ali', 14, '8th')\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Sara', 15, '9th')\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Omar', 16, '10th')\")\ncursor.execute(\"UPDATE students SET grade = '10th' WHERE id = 2\")\ncursor.execute(\"DELETE FROM students WHERE id = 1\")\nconnection.commit()\ncursor.execute(\"SELECT * FROM students\")\nfor row in cursor.fetchall():\n    print(row)\nconnection.close() (8 marks)",
+            "explanation": "Follow the table one command at a time: INSERT adds a record (id 1, 2, 3 are given automatically by id INTEGER PRIMARY KEY), UPDATE and DELETE change only the records that match WHERE, and the final SELECT is the Read operation. (Each state below was produced by running the program up to that line.)",
+            "book_ref": {
+              "topic_id": "6eecb2bb-8b2b-5627-9c69-6558dfdc6eec",
+              "quote": "They help maintain accurate and up-to-date information."
+            },
+            "steps": [
+              "Create (INSERT): Ali gets id 1.\nTable now:\n(1, 'Ali', 14, '8th')",
+              "Create (INSERT): Sara gets id 2.\nTable now:\n(1, 'Ali', 14, '8th')\n(2, 'Sara', 15, '9th')",
+              "Create (INSERT): Omar gets id 3.\nTable now:\n(1, 'Ali', 14, '8th')\n(2, 'Sara', 15, '9th')\n(3, 'Omar', 16, '10th')",
+              "Update: only Sara's grade changes to 10th.\nTable now:\n(1, 'Ali', 14, '8th')\n(2, 'Sara', 15, '10th')\n(3, 'Omar', 16, '10th')",
+              "Delete: only Ali's record is removed.\nTable now:\n(2, 'Sara', 15, '10th')\n(3, 'Omar', 16, '10th')",
+              "Read (SELECT * FROM students): fetchall() returns the remaining rows, which the loop prints."
+            ],
+            "final_answer": "Final output:\n(2, 'Sara', 15, '10th')\n(3, 'Omar', 16, '10th')"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Define the following terms from the chapter (8 x 1): Graphical User Interface, Tkinter, window, frame, widget, event-driven programming, relational database, SQL. (8 marks)",
+            "explanation": "1. Graphical User Interface (GUI): a visual way of interacting with a computer program using windows, buttons, menus, text boxes and other graphical elements.\n2. Tkinter: Python's built-in library used to create desktop-based graphical user interfaces.\n3. Window: the main screen or container in a GUI application where different interface elements are displayed.\n4. Frame: a container used to organize and group widgets inside a GUI window.\n5. Widget: a GUI element, such as a label, button, entry field, menu or listbox, used to display information or receive input from the user.\n6. Event-driven programming: a programming approach in which the program responds to events or actions performed by the user.\n7. Relational database: stores data in tables of rows and columns, where related data can be connected using keys.\n8. SQL: Structured Query Language, a language used to create, manage and manipulate data in relational databases.",
+            "book_ref": {
+              "topic_id": "3381edd3-9634-5974-a27d-1dc1ae7d4d49",
+              "quote": "A widget is a GUI element, such as a label, button, entry field, menu, or listbox"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

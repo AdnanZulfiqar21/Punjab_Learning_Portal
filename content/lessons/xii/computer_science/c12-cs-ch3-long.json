@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-LONG",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-long-questions",
+      "title": "Long Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 37,
+          "pdf_to": 48,
+          "note": "Practice long questions written from Chapter 3 (PDF 37-48, printed 33-44); not printed in the book. Based on the chapter's text, tables, boxes and worked examples (numericals with changed values); none repeats the chapter exercise. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice long questions for the whole of Chapter 3 (Object Oriented Programming Using Python), in the shape of a Board long question: each theory question carries 8 marks (define, explain with examples, compare, write and explain a program), often as a definition plus explained points (e.g. 2 + 3 x 2). Each question has a full model answer."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Object-Oriented Programming has several benefits for software development. Explain modularity, reusability and easier maintenance, and two further advantages of the structure of OOP. (8 marks)",
+            "explanation": "Object-Oriented Programming designs programs using objects and classes; each object represents a real-world entity with properties and behaviors.\n\n1. Modularity: OOP allows code to be divided into modules, making it easier to manage. Modularity means dividing a program into smaller, manageable parts so that each part can be developed and maintained separately.\n2. Reusability: classes and objects can be reused in multiple programs or parts of a program, reducing repetition. Reusability means using already written code again in different parts of a program or in other programs.\n3. Easier maintenance: programs built with OOP are easier to maintain and update because changes in one part do not affect the entire system.\n4. Scalability and adaptability: the structure of OOP supports scalability and adaptability in software development.\n5. Collaboration: OOP improves collaboration by making code more understandable and organized; programmers think in terms of real-life objects, like students or cars, which makes programs easier to understand and manage.",
+            "book_ref": {
+              "topic_id": "d8fe6f21-d0ad-5333-a2e0-046a7a8ef1aa",
+              "quote": "Classes and objects can be reused in multiple programs or parts of a program, reducing repetition."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Write a Python program with a class Student that stores a name and marks and has a method result() which prints whether the student passed (marks 40 or more) or failed. Create three objects and call result() for each. Explain how the program uses class, object, attributes, method, __init__ and self. (8 marks)",
+            "explanation": "Program:\nclass Student:\n    def __init__(self, name, marks):\n        self.name = name\n        self.marks = marks\n\n    def result(self):\n        if self.marks >= 40:\n            print(self.name, \"passed with\", self.marks)\n        else:\n            print(self.name, \"failed with\", self.marks)\n\ns1 = Student(\"Ayesha\", 78)\ns2 = Student(\"Bilal\", 35)\ns3 = Student(\"Hamza\", 40)\n\ns1.result()\ns2.result()\ns3.result()\n\nOutput:\nAyesha passed with 78\nBilal failed with 35\nHamza passed with 40\n\nExplanation:\n1. Class: class Student is the blueprint that defines the attributes and methods of every student.\n2. __init__: runs automatically when an object is created and sets name and marks.\n3. Attributes: self.name and self.marks are the properties; each object holds its own values.\n4. Method: result() is the action; it checks the marks and prints the result.\n5. self: the reference to the current object, passed automatically, so result() uses that object's own data.\n6. Objects: s1, s2 and s3 are three instances of Student with different data (Ayesha 78, Bilal 35, Hamza 40); Hamza passes because 40 >= 40 is True.",
+            "book_ref": {
+              "topic_id": "9f9a9e3b-bcdc-5f0f-8948-e6e6bcbf01df",
+              "quote": "Using classes and objects helps organize data and related functionality together, making programs more structured."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Python controls the visibility of class members with naming prefixes. Explain public, protected and private members with their syntax and compare them in a table. Write a program that has one member of each kind and show what happens when the private member is accessed from outside the class. (8 marks)",
+            "explanation": "Levels of access control:\n1. Public members (self.attribute_name): accessible from anywhere, inside or outside the class. By default, all members in Python are public.\n2. Protected members (self._attribute_name, single underscore): intended for internal use within the class and its subclasses. It is a convention (not a restriction) that tells other developers not to access it from outside.\n3. Private members (self.__attribute_name, double underscore): highly restricted and cannot be easily accessed from outside the class. Python uses name mangling to change the internal name of the variable to prevent accidental access.\n\nProgram:\nclass Mobile:\n    def __init__(self):\n        self.brand = \"Nokia\"\n        self._model = \"N100\"\n        self.__pin = 4321\n\n    def check_pin(self, p):\n        return p == self.__pin\n\nm = Mobile()\nprint(m.brand)\nprint(m._model)\nprint(m.check_pin(1234))\nprint(m.check_pin(4321))\n\nOutput:\nNokia\nN100\nFalse\nTrue\n\nIf the line print(m.__pin) is added at the end, the four lines above are printed and then the program stops with an AttributeError, because __pin is private (name mangling). The PIN can only be used through the method check_pin().\n\nComparison (see table).",
+            "book_ref": {
+              "topic_id": "f3ae7809-6855-5cea-b598-9877ddd04081",
+              "quote": "In Python, you can control the visibility of class members using specific naming prefixes:"
+            },
+            "answer_table": {
+              "header": [
+                "Public",
+                "Protected",
+                "Private"
+              ],
+              "rows": [
+                [
+                  "self.attribute_name",
+                  "self._attribute_name (one underscore)",
+                  "self.__attribute_name (two underscores)"
+                ],
+                [
+                  "Accessible from anywhere",
+                  "For the class and its subclasses",
+                  "Restricted to the class"
+                ],
+                [
+                  "Default for all members",
+                  "A convention, not a restriction",
+                  "Protected by name mangling"
+                ],
+                [
+                  "m.brand prints Nokia",
+                  "m._model still prints N100",
+                  "m.__pin gives AttributeError"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Write a Python program for a class SavingsAccount whose balance is private and can be changed only through deposit() and withdraw() (withdraw must refuse an amount larger than the balance). Trace the given transactions and explain how the program shows encapsulation and why encapsulation is important. (8 marks)",
+            "explanation": "Program:\nclass SavingsAccount:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.__balance = balance\n\n    def deposit(self, amount):\n        self.__balance += amount\n        print(\"Deposited\", amount)\n\n    def withdraw(self, amount):\n        if amount <= self.__balance:\n            self.__balance -= amount\n            print(\"Withdrawn\", amount)\n        else:\n            print(\"Insufficient balance\")\n\n    def get_balance(self):\n        return self.__balance\n\nacc = SavingsAccount(\"Zara\", 5000)\nacc.deposit(1500)\nacc.withdraw(8000)\nacc.withdraw(2500)\nprint(\"Balance:\", acc.get_balance())\n\nOutput:\nDeposited 1500\nInsufficient balance\nWithdrawn 2500\nBalance: 4000\n\nTrace: balance starts at 5000; deposit(1500) makes it 6500; withdraw(8000) is refused because 8000 > 6500; withdraw(2500) leaves 4000.\n\nHow it shows encapsulation:\n1. The data (owner, __balance) and the methods (deposit, withdraw, get_balance) are bundled in one unit, the class.\n2. __balance is private (two underscores), so direct access from outside is restricted; the balance is hidden.\n3. The balance can be changed only through deposit() and withdraw(), and read through get_balance(); withdraw() checks the amount first, so the modification is controlled.\n\nWhy encapsulation is important: it protects data from unwanted access, improves security, makes code easier to manage, and allows controlled modification.",
+            "book_ref": {
+              "topic_id": "26296edf-f4db-5cdf-b40d-1e23e082fe51",
+              "quote": "You cannot directly change the balance; this is encapsulation."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Define single inheritance, parent class and child class. Write a program in which a child class Student inherits from a parent class Person, overrides its introduce() method and uses super(). Explain method overriding and super() with the help of the output. (8 marks)",
+            "explanation": "Single inheritance: a child class (subclass) inherits attributes and methods from exactly one parent class (superclass). It is the most fundamental form of inheritance in Python and promotes code reusability by letting the child extend or modify the parent's behavior.\nParent class (base class): the class whose properties are inherited (here Person).\nChild class (derived class): the class that inherits from the parent, defined by writing the parent's name in parentheses: class Student(Person):.\n\nProgram:\nclass Person:\n    def __init__(self, name):\n        self.name = name\n\n    def introduce(self):\n        print(\"I am\", self.name)\n\nclass Student(Person):\n    def __init__(self, name, roll):\n        super().__init__(name)\n        self.roll = roll\n\n    def introduce(self):\n        super().introduce()\n        print(\"My roll number is\", self.roll)\n\np = Person(\"Usman\")\np.introduce()\ns = Student(\"Fatima\", 12)\ns.introduce()\n\nOutput:\nI am Usman\nI am Fatima\nMy roll number is 12\n\nMethod overriding: Student provides its own version of introduce(), a method already provided by Person. For the Person object p, Person's version runs; for the Student object s, Student's version runs.\nsuper(): calls the parent's version of a method. super().__init__(name) lets Person set the name, and super().introduce() prints \"I am Fatima\" before the child adds the roll number. So the child reuses the parent's code and only adds what is new.",
+            "book_ref": {
+              "topic_id": "1dfe9ccc-7ac0-57a2-80da-2d26c40b79a5",
+              "quote": "Single inheritance occurs when a child class (subclass) inherits attributes and methods from exactly one parent class (superclass)."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Define multiple inheritance. Write a program in which a class Smartphone inherits from both a Camera class and a Computer class and adds its own method. Explain the program and its output. (8 marks)",
+            "explanation": "Multiple inheritance allows a single class to inherit features (attributes and methods) from more than one parent class. It lets a child class combine behaviors from different sources, such as a Smartphone inheriting from both a Camera and a Computer (Figure 3.4).\n\nProgram:\nclass Camera:\n    def take_photo(self):\n        print(\"Photo taken\")\n\nclass Computer:\n    def run_app(self, app):\n        print(\"Running\", app)\n\nclass Smartphone(Camera, Computer):\n    def call(self, number):\n        print(\"Calling\", number)\n\nphone = Smartphone()\nphone.take_photo()\nphone.run_app(\"Maps\")\nphone.call(\"0300-1234567\")\n\nOutput:\nPhoto taken\nRunning Maps\nCalling 0300-1234567\n\nExplanation:\n1. Camera and Computer are two separate parent (base) classes with their own methods.\n2. class Smartphone(Camera, Computer): names both parents in the parentheses, so Smartphone inherits from both.\n3. Smartphone adds its own method call().\n4. The single object phone can use take_photo() from Camera, run_app() from Computer and its own call(); the methods run in the order they are called. The child combines the behaviors of both parents without rewriting them.",
+            "book_ref": {
+              "topic_id": "f4dfe0fd-b795-59e0-9682-00ecf038452e",
+              "quote": "This enables a child class to combine behaviors from different sources"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Define multilevel inheritance. Write a program with a chain of three classes and show that the bottom-most object can use methods from every level. Compare single, multiple and multilevel inheritance in a table. (8 marks)",
+            "explanation": "Multilevel inheritance occurs when a class inherits from another derived class, creating a chain of inheritance like a family tree (Grandparent → Parent → Child). The grandchild class has access to all methods and attributes of both its immediate parent and its grandparent (Figure 3.5).\n\nProgram:\nclass LivingBeing:\n    def breathe(self):\n        print(\"Breathing\")\n\nclass Animal(LivingBeing):\n    def eat(self):\n        print(\"Eating\")\n\nclass Dog(Animal):\n    def bark(self):\n        print(\"Barking\")\n\nd = Dog()\nd.breathe()\nd.eat()\nd.bark()\n\nOutput:\nBreathing\nEating\nBarking\n\nExplanation: Animal inherits from LivingBeing, and Dog inherits from Animal. The object d of the bottom-most class uses breathe() from the grandparent LivingBeing, eat() from the parent Animal and its own bark(). (The book's example is the same chain: Vehicle → Car → ElectricCar.)\n\nComparison (see table).",
+            "book_ref": {
+              "topic_id": "783d4a00-dcd9-5b99-b328-460df7b357b4",
+              "quote": "In this example, ElectricCar inherits from Car, which in turn inherits from Vehicle."
+            },
+            "answer_table": {
+              "header": [
+                "Single",
+                "Multiple",
+                "Multilevel"
+              ],
+              "rows": [
+                [
+                  "Child inherits from exactly one parent",
+                  "Child inherits from more than one parent",
+                  "Class inherits from another derived class"
+                ],
+                [
+                  "class Dog(Animal):",
+                  "class Child(Father, Mother):",
+                  "Vehicle → Car → ElectricCar"
+                ],
+                [
+                  "Most fundamental form",
+                  "Combines behaviors from different sources",
+                  "Grandchild gets methods of parent and grandparent"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Explain compile-time polymorphism and why Python does not support true method overloading. Write a program in which one method find() gives the area of a square with one argument and of a rectangle with two arguments, using a default argument and conditional logic. (8 marks)",
+            "explanation": "Compile-time polymorphism means deciding which method or operation to run during compilation, usually through method or operator overloading; languages like Java or C++ support this.\n\nWhy Python is different: Python does not support true method overloading based on function signatures. Because Python is dynamically typed, a single function can accept arguments of different types, so signature-based overloading is unnecessary. Similar behavior is achieved with default arguments, variable-length arguments (*args, **kwargs) or conditional logic inside the function.\n\nProgram:\nclass Area:\n    def find(self, a, b=None):\n        if b is None:\n            return a * a\n        else:\n            return a * b\n\nx = Area()\nprint(x.find(6))\nprint(x.find(4, 9))\n\nOutput:\n36\n36\n\nExplanation: b has the default value None. With one argument, b stays None, so the condition chooses a * a (square: 6 x 6 = 36). With two arguments, a * b is returned (rectangle: 4 x 9 = 36). One method name works with different numbers of inputs, mimicking compile-time polymorphism.",
+            "book_ref": {
+              "topic_id": "dda18819-7281-56a6-97b9-7526823c14a7",
+              "quote": "Instead, similar behavior can be achieved using default arguments, variable-length arguments (*args, **kwargs), or conditional logic inside the function."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 The chapter's Calculator class has a method multiply(self, a=1, b=1, *args). Trace the call calc.multiply(3, 5, 2, 4) step by step, and then state what calc.multiply() and calc.multiply(7) return. Explain how this method mimics compile-time polymorphism. (8 marks)",
+            "explanation": "Trace the parameters first (a and b take the first two values, *args collects the rest), then the loop. The method uses default arguments (a=1, b=1) and a variable-length argument (*args), so one multiply() works with 0, 1, 2 or more inputs: this mimics compile-time polymorphism (method overloading), which Python does not support in the signature-based form.\n\nProgram:\nclass Calculator:\n    def multiply(self, a=1, b=1, *args):\n        result = a * b\n        for num in args:\n            result *= num\n        return result\n\ncalc = Calculator()\nprint(calc.multiply(3, 5, 2, 4))\n\nOutput:\n120",
+            "book_ref": {
+              "topic_id": "dda18819-7281-56a6-97b9-7526823c14a7",
+              "quote": "The multiply() method works with different numbers of inputs, mimicking compile-time polymorphism."
+            },
+            "steps": [
+              "a = 3, b = 5, args = (2, 4)",
+              "result = a * b = 3 * 5 = 15",
+              "Loop, num = 2: result = 15 * 2 = 30",
+              "Loop, num = 4: result = 30 * 4 = 120",
+              "Return result: 120",
+              "calc.multiply(): a = 1, b = 1, no args, returns 1",
+              "calc.multiply(7): a = 7, b = 1, returns 7"
+            ],
+            "final_answer": "calc.multiply(3, 5, 2, 4) returns 120; calc.multiply() returns 1; calc.multiply(7) returns 7."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Explain runtime polymorphism and method overriding. Write a program in which a pay() method of a parent class Employee is overridden in two child classes, and objects of all three classes are processed in one loop. Explain the output. (8 marks)",
+            "explanation": "Runtime polymorphism means that the behavior of a method is decided while the program is running, based on the object calling it. It happens through method overriding: a child class provides its own version of a method already defined in the parent class.\n\nProgram:\nclass Employee:\n    def __init__(self, name):\n        self.name = name\n\n    def pay(self):\n        return 30000\n\nclass Manager(Employee):\n    def pay(self):\n        return 80000\n\nclass Intern(Employee):\n    def pay(self):\n        return 15000\n\nstaff = [Manager(\"Asad\"), Intern(\"Hira\"), Employee(\"Kamran\")]\nfor person in staff:\n    print(person.name, person.pay())\n\nOutput:\nAsad 80000\nHira 15000\nKamran 30000\n\nExplanation:\n1. pay() is defined in the parent Employee and overridden in Manager and Intern; the name is inherited through __init__ from Employee.\n2. The loop calls the same line person.pay() for every object.\n3. At runtime Python checks each object's class: Manager's version gives 80000, Intern's gives 15000, and Employee's own gives 30000.\n4. The same method name behaves differently depending on the object; this dynamic nature makes Python particularly powerful for runtime polymorphism.",
+            "book_ref": {
+              "topic_id": "7ac1a756-adca-5cc7-bd77-9fc0a7f1b820",
+              "quote": "This dynamic nature makes Python particularly powerful for runtime polymorphism."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Polymorphism means \"many forms\". Explain it with the chapter's payment-system example, and compare its two types, compile-time and runtime polymorphism, in a table. (8 marks)",
+            "explanation": "Polymorphism refers to the ability of an entity (like a function or object) to perform different actions based on the context. Technically, it allows the same method, function or operator to behave differently depending on the object it is working with, which makes code more flexible and reusable.\n\nPayment-system example: a backend payment system offers Credit Card, UPI, NetBanking and Wallet. All payment types use a common method processPayment(), but with different implementations; for NetBanking it redirects to bank login. The method name remains the same, but the action changes with the payment type.\n\nTypes: polymorphism mainly includes compile-time and runtime polymorphism (Figure 3.6). Comparison (see table).",
+            "book_ref": {
+              "topic_id": "faca0831-a5d0-58bc-aa34-614c5147ed58",
+              "quote": "Polymorphism refers to the ability of the same method or operation to behave differently based on object or context."
+            },
+            "answer_table": {
+              "header": [
+                "Compile-time polymorphism",
+                "Runtime polymorphism"
+              ],
+              "rows": [
+                [
+                  "Which method runs is decided during compilation",
+                  "Decided while the program is running, based on the object"
+                ],
+                [
+                  "Usually through method or operator overloading",
+                  "Through method overriding"
+                ],
+                [
+                  "Supported in true form by Java or C++",
+                  "Python's dynamic nature makes it particularly powerful"
+                ],
+                [
+                  "Python imitates it with default arguments, *args/**kwargs or conditional logic, e.g. multiply()",
+                  "Example: sound() of Animal overridden in Dog and Cat"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Write one Python program that uses encapsulation, inheritance and polymorphism together: a parent class Account with a private balance and a describe() method, and two child classes Saving and Current that override describe(). Show the output and point out where each of the three concepts appears in the program. (8 marks)",
+            "explanation": "Program:\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.__balance = balance\n\n    def get_balance(self):\n        return self.__balance\n\n    def describe(self):\n        return \"General account\"\n\nclass Saving(Account):\n    def describe(self):\n        return \"Saving account\"\n\nclass Current(Account):\n    def describe(self):\n        return \"Current account\"\n\nfor acc in [Saving(\"Ali\", 9000), Current(\"Sana\", 4500)]:\n    print(acc.owner, acc.describe(), acc.get_balance())\n\nOutput:\nAli Saving account 9000\nSana Current account 4500\n\nWhere each concept appears:\n1. Encapsulation: owner, __balance and the methods are bundled in the class Account; __balance is private (two underscores), so it is read only through get_balance(), never directly.\n2. Inheritance: Saving and Current are child classes of Account (class Saving(Account):); they reuse __init__ and get_balance() without rewriting them, which reduces redundancy.\n3. Polymorphism (runtime, by overriding): describe() is overridden in each child; in the loop the same call acc.describe() gives \"Saving account\" or \"Current account\" depending on the object.\nTogether these make the program organized, reusable and easier to maintain.",
+            "book_ref": {
+              "topic_id": "dc7774cb-2f90-53a7-8495-2dbe7b2f8c94",
+              "quote": "This makes code more flexible and reusable."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

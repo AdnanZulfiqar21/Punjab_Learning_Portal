@@ -1,0 +1,344 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH7-LONG",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch7",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch7/u-long-questions",
+      "title": "Long Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 93,
+          "pdf_to": 106,
+          "note": "Practice long questions written from Chapter 7 (PDF 93-106, printed 89-102); not printed in the book. Based on the chapter's text, tables, boxes and worked examples (numericals with changed values); none repeats the chapter exercise. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice long questions for the whole of Chapter 7 (Hypothesis Testing), in the shape of a Board long question: each theory question carries 8 marks (define, explain with examples, compare, write and explain a program), often as a definition plus explained points (e.g. 2 + 3 x 2). Each question has a full model answer."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Differentiate between a hypothesis and hypothesis testing (4). Write the hypothesis function hθ(x) = y and explain each of its symbols (4). (8 marks)",
+            "explanation": "Part 1: see the table.\n\nPart 2: hθ(x) = y\nhθ(x): the hypothesis function with parameters θ applied to the input x.\nx: the input features or data points, e.g. the attributes of a dataset.\ny: the predicted output or target value, i.e. the model's prediction for the given input.\nθ: the parameters or weights of the model, for example the coefficients in a linear regression model.",
+            "book_ref": {
+              "topic_id": "2d87459e-9470-593d-97db-62f522340aa7",
+              "quote": "The statement can be tested using data."
+            },
+            "answer_table": {
+              "header": [
+                "Hypothesis",
+                "Hypothesis testing"
+              ],
+              "rows": [
+                [
+                  "An assumption or statement in research made before testing begins.",
+                  "A method used to make decisions using data; it checks whether an assumption is true or false."
+                ],
+                [
+                  "A testable statement about a population, situation or relationship between variables.",
+                  "A statistical method to decide whether sample data has enough evidence to support or reject a claim."
+                ],
+                [
+                  "Predicts an outcome; must be clear and measurable.",
+                  "Follows a clear process that helps accept or reject assumptions."
+                ],
+                [
+                  "Guides the analysis and focuses the study.",
+                  "Reduces guesswork and supports evidence-based decisions."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Explain the connection between research questions and hypotheses in four points (4). For the research questions 'Does a new teaching method improve students' marks?' and 'Is a new drug more effective than an old drug?', write H₀ and H₁ (4). (8 marks)",
+            "explanation": "Part 1:\n1. Research questions define what is being studied, and a hypothesis is formed from the research question.\n2. Questions guide data collection, while hypotheses provide possible answers.\n3. Clear questions lead to clear hypotheses; good research starts with good questions.\n4. Both are closely connected: hypotheses make the analysis focused and improve study direction.\n\nPart 2:\nTeaching method: H₀: The new teaching method has no effect on students' marks. H₁: The new teaching method improves students' marks.\nNew drug: H₀: The new drug is not more effective than the old drug (no difference). H₁: The new drug is more effective than the old drug.",
+            "book_ref": {
+              "topic_id": "70662270-12cf-528e-afb2-cb772713cbf6",
+              "quote": "Questions guide data collection."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Explain how hypothesis testing helps in data analysis under four headings: logic, avoiding random conclusions, accuracy, and confidence (8). (8 marks)",
+            "explanation": "1. Logic: hypothesis testing helps analyze data logically to check whether results are meaningful. It follows a clear process in which data is collected and analyzed carefully.\n\n2. Avoiding random conclusions: testing avoids random conclusions because it compares results with expectations instead of relying on guesswork.\n\n3. Accuracy: hypothesis testing supports accuracy, which is why it is used in experiments and surveys; results depend on proper testing.\n\n4. Confidence: decisions are based on evidence, so this method improves confidence in results and supports evidence-based decisions.",
+            "book_ref": {
+              "topic_id": "762d6c29-07ea-50e1-a80d-233c71c24393",
+              "quote": "Hypothesis testing helps analyze data logically to check whether results are meaningful."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Why do many tests start with the null hypothesis? Give four reasons (4). Explain the two possible decisions about H₀, 'reject' and 'fail to reject', with the decision rule and one example of each (4). (8 marks)",
+            "explanation": "Part 1:\n1. H₀ states that there is no effect or difference, so it is the default assumption.\n2. Data is tested against this hypothesis.\n3. It provides a comparison base.\n4. It helps avoid bias, and it is important in decision-making.\n\nPart 2: the decision rule is used to decide whether to reject or fail to reject H₀: if p-value < α, H₀ is rejected; otherwise H₀ is not rejected. See the table.",
+            "book_ref": {
+              "topic_id": "6da623ea-50c8-59e4-b7c8-f3e7c6f36ce7",
+              "quote": "Many tests start with this hypothesis."
+            },
+            "answer_table": {
+              "header": [
+                "Reject H₀",
+                "Fail to reject H₀"
+              ],
+              "rows": [
+                [
+                  "p-value < α: the evidence against H₀ is strong.",
+                  "p-value ≥ α: the evidence against H₀ is not strong enough."
+                ],
+                [
+                  "The result is unlikely to have occurred by chance; the data supports H₁.",
+                  "There is not enough evidence to support H₁."
+                ],
+                [
+                  "Example: the new teaching method gives p = 0.03 with α = 0.05; since 0.03 < 0.05, H₀ is rejected.",
+                  "Example: a test gives p = 0.20 with α = 0.05; since 0.20 > 0.05, H₀ is not rejected."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Explain any four rules for formulating correct hypotheses (4). Point out what is wrong with each statement and rewrite it as a correct hypothesis: (A) 'Exercise is good.' (B) 'Students may do something better with computers.' (4) (8 marks)",
+            "explanation": "Part 1:\n1. Clear and specific: correct hypotheses must be clear and specific, because vague statements reduce accuracy.\n2. Testable: they should be testable using data.\n3. Matching: hypotheses must match the research questions.\n4. Defined variables in simple language: variables should be defined clearly, and simple language improves understanding. Correct formulation saves time and leads to reliable results.\n\nPart 2:\n(A) It is vague: 'good' is not measurable and no variables are defined. Rewrite: H₁: Daily exercise significantly affects students' marks; H₀: Daily exercise has no effect on students' marks.\n(B) It is vague and not testable: 'something better' is not specific and the variable is not defined. Rewrite: H₁: Students who use computers for study obtain higher marks than students who do not; H₀: There is no difference in marks between the two groups.",
+            "book_ref": {
+              "topic_id": "8e73802c-18e1-5908-b7cb-0bb8955f4522",
+              "quote": "Hypotheses must match research questions."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Define test statistics and give two of their uses (2). Write the formula of the t-value with its symbols (2). A sample of 36 students has an average score of 81 and a sample standard deviation of 12. Calculate t to test whether the mean is different from the population mean of 78 (4). (8 marks)",
+            "explanation": "Test statistics are numerical values calculated from sample data; they summarize data behavior, help compare results and support decisions, and show how far results are from expectations. Examples are the t-value and the chi-square value.\nFormula: t = (x̄ − μ₀)/(s/√n), where x̄ = sample mean, μ₀ = population mean under the null hypothesis, s = sample standard deviation and n = sample size.",
+            "book_ref": {
+              "topic_id": "4886e90e-7721-54ca-8355-8350b3ba56c6",
+              "quote": "They are calculated from sample data."
+            },
+            "steps": [
+              "Given: n = 36, x̄ = 81, μ₀ = 78, s = 12.",
+              "√n = √36 = 6, so s/√n = 12/6 = 2.",
+              "x̄ − μ₀ = 81 − 78 = 3.",
+              "t = 3/2 = 1.5"
+            ],
+            "final_answer": "t = 1.5"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Write the chi-square formula and explain its symbols (2). A fair die is rolled 120 times and the faces 1 to 6 appear 18, 22, 20, 25, 15 and 20 times. Find the expected frequencies and calculate χ² (5). What is done with this value next? (1) (8 marks)",
+            "explanation": "χ² = Σ (Oᵢ − Eᵢ)²/Eᵢ, where Oᵢ is the observed frequency and Eᵢ the expected frequency in each category. (Book correction: the symbol is the Greek letter chi, χ², not the letter x.) The Chi-Square test checks relationships and is used with categorical data.",
+            "book_ref": {
+              "topic_id": "4886e90e-7721-54ca-8355-8350b3ba56c6",
+              "quote": "Observed and expected frequencies of a fair die rolled 60 times"
+            },
+            "steps": [
+              "A fair die has 6 equally likely faces, so Eᵢ = 120/6 = 20 for every face.",
+              "Differences Oᵢ − Eᵢ: −2, 2, 0, 5, −5, 0.",
+              "Squares (Oᵢ − Eᵢ)²: 4, 4, 0, 25, 25, 0.",
+              "Divide each by 20: 0.2, 0.2, 0, 1.25, 1.25, 0.",
+              "χ² = 0.2 + 0.2 + 0 + 1.25 + 1.25 + 0 = 2.9",
+              "Next, χ² is compared with the critical value from the Chi-Square distribution table at a chosen significance level (e.g. α = 0.05) and degrees of freedom to make a decision."
+            ],
+            "final_answer": "Expected frequency = 20 for each face; χ² = 2.9"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Define the critical region (2) and the significance level (2). Explain how the two are related and how they are used to make a decision (4). (8 marks)",
+            "explanation": "Critical region: a range of values (the area in a statistical distribution) where the null hypothesis is rejected; if the test statistic falls in this region, H₀ is rejected. It shows extreme outcomes.\n\nSignificance level (α): the maximum probability of rejecting the null hypothesis when it is actually true. It shows the risk of error; a common value is 0.05.\n\nRelation and use:\n1. Both are fixed before testing: the significance level is chosen before analysis and the critical region is defined before testing.\n2. The critical region depends on the significance level; α defines how strict the test is, and lower values mean stricter testing.\n3. After the test statistic is calculated, the decision is made: if it falls in the critical region, H₀ is rejected; otherwise it is not rejected. In the same way the p-value is compared with α.\n4. Together they help make decisions, reduce uncertainty and control false results; graphs often show the critical region.",
+            "book_ref": {
+              "topic_id": "3e76433d-df31-58bf-96b5-5f74ddbbf33a",
+              "quote": "The critical region is a range of values."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Explain the p-value and its importance in four points (4). Write the decision in each case and give the reason: (A) p = 0.04, α = 0.05; (B) p = 0.09, α = 0.05; (C) p = 0.03, α = 0.01; (D) p = 0.002, α = 0.01 (4). (8 marks)",
+            "explanation": "Part 1:\n1. The p-value shows the strength of evidence against the null hypothesis.\n2. It measures the probability of getting the observed results, or more extreme results, if H₀ is true.\n3. A small p-value supports rejection of H₀ because the result is unlikely to have occurred by chance; it is compared with the significance level, such as 0.05.\n4. P-values simplify statistical decisions and support data-driven conclusions; a clear understanding avoids rejecting or accepting a hypothesis without proper evidence.\n\nPart 2: see the table (rule: if p-value < α, reject H₀).",
+            "book_ref": {
+              "topic_id": "d37bdfd8-6b0b-58f4-b99d-6468064844a0",
+              "quote": "It measures the probability of getting the observed results, or more extreme results, if the null hypothesis is true."
+            },
+            "answer_table": {
+              "header": [
+                "Case",
+                "Decision and reason"
+              ],
+              "rows": [
+                [
+                  "(A) p = 0.04, α = 0.05",
+                  "Reject H₀, because 0.04 < 0.05."
+                ],
+                [
+                  "(B) p = 0.09, α = 0.05",
+                  "Fail to reject H₀, because 0.09 > 0.05."
+                ],
+                [
+                  "(C) p = 0.03, α = 0.01",
+                  "Fail to reject H₀, because 0.03 > 0.01; the stricter test needs stronger evidence."
+                ],
+                [
+                  "(D) p = 0.002, α = 0.01",
+                  "Reject H₀, because 0.002 < 0.01."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 The previous average marks of a class were 60. After a new revision method, a sample of 5 students obtained 60, 64, 66, 62 and 68. Using α = 0.05, test whether the method has improved the marks. Statistical software gives the one-tailed p-value for the calculated t as about 0.024. Show all steps (8). (8 marks)",
+            "explanation": "Follow the steps of hypothesis testing as in the book's worked example: hypotheses, significance level, sample mean, standard deviation, t-value, decision rule, conclusion.",
+            "book_ref": {
+              "topic_id": "efacd87e-0820-5ffa-a86b-906b6dd6ce57",
+              "quote": "A school wants to check whether a new teaching method has improved students' marks."
+            },
+            "steps": [
+              "Step 1: H₀: the new method does not improve marks (μ = 60). H₁: the new method improves marks (μ > 60).",
+              "Step 2: significance level α = 0.05.",
+              "Step 3: sample mean x̄ = (60 + 64 + 66 + 62 + 68)/5 = 320/5 = 64.",
+              "Step 4: deviations −4, 0, 2, −2, 4; squares 16, 0, 4, 4, 16; sum = 40. s = √(40/(5 − 1)) = √10 ≈ 3.16.",
+              "Step 5: t = (x̄ − μ)/(s/√n) = (64 − 60)/(3.16/√5) ≈ 4/1.41 ≈ 2.83.",
+              "Step 6: df = n − 1 = 5 − 1 = 4; the one-tailed p-value for t = 2.83 and df = 4 is about 0.024.",
+              "Step 7: since p-value (0.024) < α (0.05), we reject the null hypothesis."
+            ],
+            "final_answer": "t ≈ 2.83, p ≈ 0.024 < 0.05: reject H₀; the new revision method significantly improves the marks."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Explain the F-test and the Chi-Square test, giving the use and formula of each (4). Two groups of students have marks with variances 20 and 8. Calculate the F-value and state how the decision is made (4). (8 marks)",
+            "explanation": "Advanced tests handle complex data and support deeper analysis; they follow strict rules.\nF-test: compares variances and is used in analysis of variance. F = S₁²/S₂², where S₁² is the variance of sample 1 and S₂² the variance of sample 2.\nChi-Square test: checks relationships and is used with categorical data. χ² = Σ (Oᵢ − Eᵢ)²/Eᵢ, with Oᵢ the observed and Eᵢ the expected frequency in each category.",
+            "book_ref": {
+              "topic_id": "efacd87e-0820-5ffa-a86b-906b6dd6ce57",
+              "quote": "These tests support deeper analysis."
+            },
+            "steps": [
+              "Given: S₁² = 20, S₂² = 8.",
+              "F = S₁²/S₂² = 20/8 = 2.5.",
+              "The calculated F-value (2.5) is compared with a critical value from the F-table.",
+              "If F is beyond the critical value (in the critical region), the variances are significantly different; otherwise they are not."
+            ],
+            "final_answer": "F = 2.5; compared with the F-table critical value to decide whether the variances differ significantly."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Name the most suitable chart for each situation and justify it: (A) average marks of students taught by the old and new methods, (B) monthly attendance over a year, (C) percentage of students choosing each subject, (D) hours of study against marks (4). Explain how such visuals are linked with a hypothesis (4). (8 marks)",
+            "explanation": "Part 1: see the table.\n\nPart 2:\n1. Data visuals help in directly linking results with the proposed hypothesis; they let researchers visually check whether the data support or reject it.\n2. A comparison graph can show differences between control and experimental treatment groups, as in case (A).\n3. Trends in line graphs can confirm predicted outcomes, and scatter plots help identify relationships stated in the hypothesis.\n4. Visual evidence strengthens logical reasoning, so visualization gives strong support in validating or disproving hypotheses.",
+            "book_ref": {
+              "topic_id": "fada2b4c-8c08-5d36-bcf6-fa7b920a9665",
+              "quote": "Bar charts are useful for comparing categories or groups."
+            },
+            "answer_table": {
+              "header": [
+                "Situation",
+                "Chart and reason"
+              ],
+              "rows": [
+                [
+                  "(A) Old vs new method marks",
+                  "Bar chart: useful for comparing categories or groups."
+                ],
+                [
+                  "(B) Monthly attendance over a year",
+                  "Line graph: shows trends and changes over time."
+                ],
+                [
+                  "(C) Percentage choosing each subject",
+                  "Pie chart: represents proportions and percentages."
+                ],
+                [
+                  "(D) Study hours against marks",
+                  "Scatter plot: displays relationships between two variables."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 Explain the use of data visualization (i) before applying statistical tests and (ii) after testing, while interpreting and communicating results, with four points each (8). (8 marks)",
+            "explanation": "(i) Before applying statistical tests:\n1. Visualization converts raw data into meaningful visual forms.\n2. It helps researchers observe patterns, trends and relationships in data, and understand large datasets that are difficult to analyze numerically.\n3. Visual tools highlight trends, distributions and variations clearly.\n4. It assists in identifying outliers and anomalies; making unusual patterns visible reduces errors.\n\n(ii) After testing:\n1. It supports better interpretation of statistical findings and reduces the chances of misunderstanding results.\n2. Through charts and graphs, differences between groups can be easily compared.\n3. It provides visual evidence, which supports better decision-making.\n4. It makes communication of results easier for both technical and non-technical audiences. Overall, visualization strengthens hypothesis testing by improving clarity and accuracy.",
+            "book_ref": {
+              "topic_id": "2d889e2a-e141-5794-89d3-4f0b4d8dd9a9",
+              "quote": "It supports better interpretation of statistical findings."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Define bias (2). Name the type of bias in each case and say how it could be avoided: (A) an online survey about internet use is answered only by city students; (B) a study on sleep and health includes only university students; (C) an analyst reports only the months in which sales went up (6). (8 marks)",
+            "explanation": "Bias is an unfair influence in data collection, analysis or interpretation that may lead to incorrect or misleading conclusions. In data collection it occurs when data does not fairly represent all groups, due to limited data sources or unfair sampling methods; during analysis, personal assumptions may also introduce bias.\n\nSee the table. In every case, bias must be identified and mitigated through careful data collection and objective analysis.",
+            "book_ref": {
+              "topic_id": "cb327ef5-547a-5ce6-9544-d6e6aae5279e",
+              "quote": "Therefore, careful data collection and objective analysis are necessary to ensure fairness."
+            },
+            "answer_table": {
+              "header": [
+                "Case",
+                "Type of bias and how to avoid it"
+              ],
+              "rows": [
+                [
+                  "(A) Survey answered only by city students",
+                  "Geographical bias (data only from urban areas used for everyone). Avoid: collect data from both urban and rural areas."
+                ],
+                [
+                  "(B) Study includes only university students",
+                  "Sampling bias (the sample does not represent other age groups). Avoid: include people of all age groups."
+                ],
+                [
+                  "(C) Only months with rising sales are reported",
+                  "Confirmation bias (focusing only on data that supports a belief and ignoring contradictory results). Avoid: report all months, without selective reporting."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 Explain how ethics applies at three stages of data science: (i) collecting data, (ii) building machine learning models, (iii) reporting results (6). Why are transparency and accountability essential? (2) (8 marks)",
+            "explanation": "(i) Collecting data: respect the privacy and confidentiality of individuals; collect data with proper consent and use it only for intended purposes; protect sensitive data from unauthorized access; make sure the data fairly represents all groups to avoid bias.\n\n(ii) Building models: machine learning models must be designed to avoid discrimination; ethical guidelines help prevent misuse of predictive models; transparency in model design builds trust among users.\n\n(iii) Reporting results: present results honestly without exaggeration or manipulation; clearly state the limitations of the data and analysis; avoid misleading visuals or selective reporting.\n\nTransparency and accountability are essential in every stage of data analysis because ethical practices ensure fairness, accuracy and trust in data-driven decisions, while poor ethical standards lead to misuse of data and harm to individuals or groups. Ethical awareness maintains public confidence in data science applications.",
+            "book_ref": {
+              "topic_id": "051e4e6b-4195-5237-afa5-8461b006abb9",
+              "quote": "Sensitive data should be protected from unauthorized access."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 A teacher tests whether a new teaching method improves marks and finds p = 0.03 with α = 0.05. (i) Interpret this result (3). (ii) Write a conclusion connected to the hypothesis (2). (iii) A student writes: 'The method is the best in the world and will work in every school.' Give three reasons why this conclusion is wrong (3). (8 marks)",
+            "explanation": "(i) H₀: the new method has no effect; H₁: it improves marks. The p-value (0.03) is smaller than α (0.05), so the result is unlikely to have occurred by chance and H₀ may be rejected. The researcher must consider the context of the data while interpreting.\n\n(ii) Conclusion: the null hypothesis is rejected; there is statistical evidence that the new teaching method may have improved students' performance, so the hypothesis H₁ is supported by the data.\n\n(iii) It is wrong because:\n1. Conclusions should be based strictly on analyzed data; the test only compared this sample with the old method, not 'the world'.\n2. It goes beyond the original hypothesis; the conclusion must be directly linked to the hypothesis and justified by the test results, without personal opinions.\n3. It is exaggerated and ignores the limitations of the data; results should be presented honestly without exaggeration, and misinterpretation leads to incorrect conclusions.",
+            "book_ref": {
+              "topic_id": "a8f3a900-43d2-5573-8c45-4375350ee07b",
+              "quote": "Clear explanation of results is essential for accuracy."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Write five rules for presenting findings clearly (5). Using these rules, write a short clear report of the book's worked example on the new teaching method (10 students, mean 77 against the previous average 70, t ≈ 7.93) (3). (8 marks)",
+            "explanation": "Rules:\n1. Organize results in a logical and structured way.\n2. Use tables, charts and graphs to support explanations.\n3. Use simple language instead of technical jargon.\n4. Highlight the key points for better understanding.\n5. Link the findings to the original hypothesis, base them strictly on analyzed data and state the limitations honestly.\n\nReport:\nQuestion: has the new teaching method improved marks? (H₀: μ = 70; H₁: μ > 70; α = 0.05.)\nResult: the 10 students taught with the new method had an average of 77 marks, 7 marks above the previous average of 70 (t ≈ 7.93, df = 9, one-tailed p ≈ 0.000012, far below 0.05).\nConclusion: the null hypothesis is rejected; the new teaching method significantly improves students' marks. Limitation: the sample has only 10 students.",
+            "book_ref": {
+              "topic_id": "16df9126-bd62-596a-a865-724812ee6df1",
+              "quote": "Well-presented findings make the research more effective and useful."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
