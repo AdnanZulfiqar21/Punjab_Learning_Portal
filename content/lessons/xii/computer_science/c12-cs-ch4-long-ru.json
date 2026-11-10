@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-LONG-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-long-questions",
+      "title": "Long Questions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH4-LONG",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 49,
+          "pdf_to": 63,
+          "note": "Roman Urdu: practice long questions written from Chapter 4 (PDF 49-63), not printed in the book; same questions and order as the English set. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Yeh chapter 4 (Development of Graphical User Interface (GUI)) ke poore chapter se practice long questions (tafseeli sawal) hain, Board ke long question ki shakal mein: har sawal 8 number ka hai (definition, misalon ke saath wazahat, farq, program likh kar samjhana), aksar definition aur wazahat ke hisson mein (jaise 2 + 3 x 2). Har sawal ka poora model jawab hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Write a Tkinter program for a window titled Library, 350 x 250 pixels, divided into two frames: a light blue header frame with the label School Library, and a light yellow body frame holding an entry field and a Search button. Explain how the program builds the window and how the frames keep the interface clean. (8 marks)\n(Aisa Tkinter program likhein jis ki window ka title Library ho, size 350 x 250 pixels, aur do frames hon: halke neele header frame mein School Library label, aur halke peele body frame mein entry field aur Search button. Samjhayein ke program window kaise banata hai aur frames interface ko saaf kaise rakhte hain.)",
+            "explanation": "Program:\nimport tkinter as tk\n\nwindow = tk.Tk()\nwindow.title(\"Library\")\nwindow.geometry(\"350x250\")\n\nheader = tk.Frame(window, bg=\"lightblue\", height=80)\nheader.pack(fill=\"x\")\n\nbody = tk.Frame(window, bg=\"lightyellow\")\nbody.pack(fill=\"both\", expand=True)\n\ntk.Label(header, text=\"School Library\", bg=\"lightblue\").pack(pady=20)\nentry_book = tk.Entry(body)\nentry_book.pack(pady=10)\ntk.Button(body, text=\"Search\").pack(pady=10)\n\nwindow.mainloop()\n\nOutput: Library title wali 350 x 250 window. Upar halki neeli patti mein School Library; baqi window halki peeli jis mein entry field aur us ke neeche Search button.\n\nWazahat:\n1. tk.Tk() main window banata hai jo baqi sab ki bunyad hai; title() aur geometry() title aur size dete hain.\n2. tk.Frame(...) frames banata hai, window ke hisse jo mutaliqa widgets ko group karte hain.\n3. header.pack(fill=\"x\") header ko poori chaurai mein phailata hai; body.pack(fill=\"both\", expand=True) body ko baqi saari jagah deta hai.\n4. Label header mein aur entry aur button body mein hain, is liye har widget apne hisse mein hai; pack(pady=...) darmiyan jagah chhorta hai.\n5. window.mainloop() GUI chalata hai.\n\nSaaf interface: frames mutaliqa widgets ko aik saath rakhte hain aur faasla aur alignment widgets ko munazzam aur parhne mein aasan rakhte hain.",
+            "book_ref": {
+              "topic_id": "f7914bba-0e46-5a9b-8ccf-7ee29fa1fc48",
+              "quote": "A Tkinter program begins by creating a main window, which serves as the base for all other elements."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Write a Tkinter program that uses grid() to build an Admission Form with a Name label and entry in the first row, an Age label and entry in the second row, and a Submit button spanning both columns in the third row. Explain the grid() options used (row, column, padx, pady, columnspan) and why grid() suits this layout. (8 marks)\n(grid() se Admission Form ka Tkinter program likhein: pehli row mein Name label aur entry, doosri mein Age label aur entry, aur teesri row mein dono columns par phaila Submit button. Istemal kiye gaye grid() options (row, column, padx, pady, columnspan) aur grid() ke munasib hone ki wajah samjhayein.)",
+            "explanation": "Program:\nimport tkinter as tk\n\nwindow = tk.Tk()\nwindow.title(\"Admission Form\")\nwindow.geometry(\"320x180\")\n\ntk.Label(window, text=\"Name\").grid(row=0, column=0, padx=10, pady=10)\nentry_name = tk.Entry(window)\nentry_name.grid(row=0, column=1, padx=10, pady=10)\n\ntk.Label(window, text=\"Age\").grid(row=1, column=0, padx=10, pady=10)\nentry_age = tk.Entry(window)\nentry_age.grid(row=1, column=1, padx=10, pady=10)\n\nsubmit = tk.Button(window, text=\"Submit\", width=24)\nsubmit.grid(row=2, column=0, columnspan=2, pady=10)\n\nwindow.mainloop()\n\nOutput: Admission Form title wali window. Name aur Age labels baayen column mein aur un ki entry fields daayen; neeche dono columns par phaila chaura Submit button. (Layout mein 2 columns aur 3 rows.)\n\ngrid() options:\n1. row aur column: widget ka khana; ginti 0 se, is liye row=0, column=1 pehli row, doosra column.\n2. padx aur pady: widget ke daayen baayen (padx) aur upar neeche (pady) jagah.\n3. columnspan=2: Submit button do columns par phail jata hai.\n\ngrid() kyun: grid() widgets ko table ki tarah rows aur columns mein rakhta hai, is liye labels aik column mein aur entries agle column mein seedh mein aate hain. Yeh forms ke liye mufeed hai, jo pack() (saada upar neeche tarteeb) itni safai se nahin deta.",
+            "book_ref": {
+              "topic_id": "48febcb5-f084-5e5e-8084-46d5c131c5e0",
+              "quote": "It is useful for forms and structured layouts."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Write a Tkinter program that places an OK button and a Cancel button side by side at exact positions using place(). Explain the x and y options, state one advantage and one care needed with place(), and compare it with pack() and grid() in a table. (8 marks)\n(place() se OK aur Cancel buttons ko theek jagahon par saath saath rakhne wala Tkinter program likhein. x aur y options samjhayein, place() ka aik faida aur aik ehtiyat likhein, aur table mein pack() aur grid() se muqabla karein.)",
+            "explanation": "Program:\nimport tkinter as tk\n\nwindow = tk.Tk()\nwindow.title(\"place()\")\nwindow.geometry(\"300x200\")\n\nok = tk.Button(window, text=\"OK\", width=8)\ncancel = tk.Button(window, text=\"Cancel\", width=8)\nok.place(x=50, y=120)\ncancel.place(x=170, y=120)\n\nwindow.mainloop()\n\nOutput: 300 x 200 window jis mein OK button x=50, y=120 aur Cancel button x=170, y=120 par, neeche ke hisse mein saath saath.\n\nx aur y: x window ke baayen kinare se aur y upar ke kinare se pixels mein faasla; dono ka y aik hai, is liye seedh mein hain.\n\nFaida aur ehtiyat: place() widgets ko bilkul theek jagah rakhta aur zyada control deta hai, magar ehtiyat se adjust karna parta hai (yahan x aise rakhe ke buttons aik doosre par na charhein).\n\nMuqabla: table dekhein.",
+            "book_ref": {
+              "topic_id": "48febcb5-f084-5e5e-8084-46d5c131c5e0",
+              "quote": "The place() method positions widgets at exact locations on the window"
+            },
+            "answer_table": {
+              "header": [
+                "pack()",
+                "grid()",
+                "place()"
+              ],
+              "rows": [
+                [
+                  "Saada upar neeche ya daayen baayen tarteeb.",
+                  "Table ki tarah rows aur columns.",
+                  "Theek jagah (x, y) par."
+                ],
+                [
+                  "Aasan; chhoti applications ke liye.",
+                  "Forms aur munazzam layouts ke liye.",
+                  "Zyada control, magar ehtiyat se adjust."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Write a Tkinter program with a label Enter your name, an entry field and a Greet button; clicking the button should change the label to Hello, followed by the typed name. Using this program, explain event-driven programming: the event, the idle program, the linked function and the use of command and config(). (8 marks)\n(Aisa Tkinter program likhein jis mein Enter your name label, entry field aur Greet button ho; button dabane par label Hello, aur likha gaya naam dikhaye. Is program se event-driven programming samjhayein: event, idle program, jura function, aur command aur config() ka istemal.)",
+            "explanation": "Program:\nimport tkinter as tk\n\nwindow = tk.Tk()\nwindow.title(\"Greeting\")\nwindow.geometry(\"300x200\")\n\ndef greet():\n    name = entry.get()\n    label.config(text=\"Hello, \" + name)\n\nlabel = tk.Label(window, text=\"Enter your name\")\nlabel.pack(pady=10)\nentry = tk.Entry(window)\nentry.pack(pady=10)\nbutton = tk.Button(window, text=\"Greet\", command=greet)\nbutton.pack(pady=10)\n\nwindow.mainloop()\n\nOutput: Greeting title wali window pehle Enter your name, khali entry field aur Greet button dikhati hai. User Ayesha likh kar Greet dabaye to label ho jata hai: Hello, Ayesha\n\nWazahat:\n1. Event: event-driven programming events par mabni hai; yahan event Greet button ka click hai (text type karna bhi event hai).\n2. Idle program: window.mainloop() GUI chalata hai; program har waqt chalne ke bajaye event tak idle rehta hai, is se wasail bachte hain.\n3. Jura function: har event aik function se jura hota hai; command=greet button click ko greet() se jorta hai aur function sirf event par chalta hai.\n4. Input ki processing: greet() mein entry.get() naam parhta hai aur label.config(text=\"Hello, \" + name) label ka text badalta hai, user ko fauran jawab nazar aata hai.",
+            "book_ref": {
+              "topic_id": "a31ce23b-d95a-5cbf-8703-cb3fb554daa5",
+              "quote": "Event-driven programming is based on actions called events."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 A login form program is given below. Explain the role of its Entry fields, Button, check_login() and messagebox, then trace what happens for three attempts: (a) student / pass99, (b) student / pass90, (c) Student / pass99.\nimport tkinter as tk\nfrom tkinter import messagebox\n\nwindow = tk.Tk()\nwindow.title(\"Student Login\")\nwindow.geometry(\"300x200\")\n\ndef check_login():\n    username = entry_user.get()\n    password = entry_pass.get()\n    if username == \"student\" and password == \"pass99\":\n        messagebox.showinfo(\"Success\", \"Welcome, student!\")\n    else:\n        messagebox.showerror(\"Error\", \"Wrong username or password\")\n\ntk.Label(window, text=\"Username\").pack()\nentry_user = tk.Entry(window)\nentry_user.pack()\ntk.Label(window, text=\"Password\").pack()\nentry_pass = tk.Entry(window, show=\"*\")\nentry_pass.pack()\nlogin_button = tk.Button(window, text=\"Login\", command=check_login)\nlogin_button.pack(pady=10)\n\nwindow.mainloop() (8 marks)\n(Neeche login form ka program hai. Is ke Entry fields, Button, check_login() aur messagebox ka kirdar samjhayein, phir teen koshishon ka trace karein: (a) student / pass99, (b) student / pass90, (c) Student / pass99.)",
+            "explanation": "Kirdar: do Entry fields username aur password lete hain (show=\"*\" password chhupata hai); Login button data submit karta hai; check_login() get() se dono values parh kar check karta hai; messagebox kamyabi (showinfo) ya ghalti (showerror) dikhata hai. Form event-driven hai: check_login() sirf button dabane par chalta hai. (Neeche ki teeno koshishein chala kar asal nataij diye gaye hain.)",
+            "book_ref": {
+              "topic_id": "02caa526-6004-54e6-86a9-4e81f1778e7b",
+              "quote": "When the button is clicked, the program checks the entered data."
+            },
+            "steps": [
+              "(a) username = \"student\", password = \"pass99\": dono muqable True, and sharat True, messagebox.showinfo dikhata hai Success: Welcome, student!",
+              "(b) username = \"student\", password = \"pass90\": password ka muqabla False, and sharat False, else hissa dikhata hai Error: Wrong username or password",
+              "(c) username = \"Student\", password = \"pass99\": \"Student\" aur \"student\" barabar nahin (bara S strings ko alag banata hai), sharat False, Error: Wrong username or password"
+            ],
+            "final_answer": "Sirf koshish (a) login hoti hai; (b) aur (c) par error ka paigham aata hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Define a database and give its advantages (2). Explain the four concepts entity, attribute, relationship and identifier, with the chapter's examples (4 x 1.5). (8 marks)\n(Database ki definition aur faide likhein (2). Chaar concepts entity, attribute, relationship aur identifier chapter ki misalon ke saath samjhayein (4 x 1.5).)",
+            "explanation": "Database: munazzam shakal mein rakha data ka majmooa, jis se data aasani se hasil aur manage hota hai. Faide: dohrao kam, aitbaar zyada aur mehfooz storage.\n\n1. Entity: haqeeqi cheez, shakhs, jagah, waqia ya tasawwur jis ka data rakha jaye. Misal: Student, Teacher, Course, Book, Employee.\n\n2. Attribute: entity ki khoobi jo us ki khaas maloomat batati hai. Misal: Student ke Student Name, Roll Number, Class, Age.\n\n3. Relationship: do ya zyada entities ka aapas mein taluq. Misal: A Student enrols in a Course; enrols in Student aur Course ka relationship hai.\n\n4. Identifier: woh attribute jo entity ke har record ko alag pehchane. Misal: Student ke liye Roll Number, kyunke har roll number munfarid hai.",
+            "book_ref": {
+              "topic_id": "9b1a2950-baa4-5421-abb9-1be85a10a8d3",
+              "quote": "Identifier: An identifier is an attribute that uniquely identifies each record or object of an entity."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Define a relational database (2). Explain table, record, field (column), primary key and foreign key (5). What is SQL (1)? (8 marks)\n(Relational database ki definition likhein (2). Table, record, field (column), primary key aur foreign key samjhayein (5). SQL kya hai (1)?)",
+            "explanation": "Relational database: aisa database jo data ko rows aur columns wale tables mein rakhta aur tables ko relationships se jorta hai; tables ka taluq keys se qaim rehta hai.\n\n1. Table: rows aur columns mein mutaliqa data ka majmooa.\n2. Record: table ki aik row, jaise aik talib-e-ilm ka data (1, 'Ali', 14, '8th').\n3. Field (column): entity ki khoobi, jaise name, age.\n4. Primary key: table ke har record ki munfarid pehchan, jaise students table mein id INTEGER PRIMARY KEY.\n5. Foreign key: woh field jo doosre table ki primary key ka hawala de kar tables ko jorti hai.\n\nSQL: Structured Query Language, databases se rabte ki zaban; is ke commands data create, read, update aur delete karte hain.",
+            "book_ref": {
+              "topic_id": "ddb841f0-b673-5cbc-8b14-2889b60c3688",
+              "quote": "Foreign Key: A field that links one table to another by referring to the primary key of another table."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Write a Python program using sqlite3 that creates a books table (id, title, author, price) in library.db, adds three books, then reads and displays all records and the total number of books. Explain each step of the program. (8 marks)\n(sqlite3 se aisa Python program likhein jo library.db mein books table (id, title, author, price) banaye, teen kitabein shamil kare, phir tamam records aur kitabon ki kul tadaad dikhaye. Program ka har qadam samjhayein.)",
+            "explanation": "Program:\nimport sqlite3\nconnection = sqlite3.connect(\"library.db\")\ncursor = connection.cursor()\ncursor.execute(\"CREATE TABLE IF NOT EXISTS books (id INTEGER PRIMARY KEY, title TEXT, author TEXT, price INTEGER)\")\ncursor.execute(\"INSERT INTO books (title, author, price) VALUES ('Python Basics', 'Ahmad', 450)\")\ncursor.execute(\"INSERT INTO books (title, author, price) VALUES ('Data Science', 'Fatima', 700)\")\ncursor.execute(\"INSERT INTO books (title, author, price) VALUES ('Web Design', 'Kamran', 550)\")\nconnection.commit()\ncursor.execute(\"SELECT * FROM books\")\nrecords = cursor.fetchall()\nfor row in records:\n    print(row)\nprint(\"Total books:\", len(records))\nconnection.close()\n\nOutput:\n(1, 'Python Basics', 'Ahmad', 450)\n(2, 'Data Science', 'Fatima', 700)\n(3, 'Web Design', 'Kamran', 550)\nTotal books: 3\n\nWazahat:\n1. Connect: sqlite3.connect(\"library.db\") connection banata hai; sqlite3 Python mein built-in hai aur database aik file mein rakhta hai, file na ho to khud banti hai.\n2. Cursor: connection.cursor() cursor object banata hai jo SQL commands chalata hai.\n3. Table aur insert (Create): CREATE TABLE IF NOT EXISTS table banata hai; teen INSERT INTO naye records dalte hain; id INTEGER PRIMARY KEY har kitab ko munfarid id 1, 2, 3 deta hai.\n4. Save: connection.commit() tabdeeliyan save karta hai.\n5. Read: SELECT * FROM books tamam columns nikalta hai; fetchall() rows ki list deta hai aur for loop har row print karta hai; len(records) 3 hai.\n6. Close: connection.close() kaam ke baad connection band karta hai.",
+            "book_ref": {
+              "topic_id": "27e5f810-bc59-5917-b702-fb4cdbfdc447",
+              "quote": "Fetch and Display Data: Fetches all records and prints each row in the result."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 What does CRUD stand for (1)? Explain each of the four CRUD operations, giving its SQL command and an example statement on a students table (4 x 1.5). Why do database applications depend on CRUD (1)? (8 marks)\n(CRUD ka poora naam kya hai (1)? Chaaron CRUD operations samjhayein, har aik ki SQL command aur students table par misal ke saath (4 x 1.5). Database applications CRUD par kyun munhasir hain (1)?)",
+            "explanation": "CRUD yani Create, Read, Update aur Delete; database ke bunyadi kaam.\n\n1. Create: SQL INSERT se table mein naya record. Misal: INSERT INTO students (ID, Name, Age) VALUES (2, 'Amna', 17);\n\n2. Read: SQL SELECT se data nikalna aur dikhana; stored data nahin badalta. Misal: SELECT * FROM students;\n\n3. Update: shart ke saath SQL UPDATE se maujooda record badalna, jab durusti chahiye. Misal: UPDATE students SET Age = 18 WHERE ID = 2;\n\n4. Delete: shart ke saath SQL DELETE se ghair zaroori record hatana; ehtiyat ahem data bachati hai. Misal: DELETE FROM students WHERE ID = 2;\n\nKyun: yeh operations database ka data sambhalte aur maloomat durust aur taaza rakhte hain, is liye har database application in par munhasir hai. Python yeh SQL commands bhej kar karta hai.",
+            "book_ref": {
+              "topic_id": "6eecb2bb-8b2b-5627-9c69-6558dfdc6eec",
+              "quote": "Every database-based application depends on CRUD operations."
+            },
+            "answer_table": {
+              "header": [
+                "Operation",
+                "SQL command",
+                "Maqsad"
+              ],
+              "rows": [
+                [
+                  "Create",
+                  "INSERT",
+                  "Table mein naya record."
+                ],
+                [
+                  "Read",
+                  "SELECT",
+                  "Table se data nikalna."
+                ],
+                [
+                  "Update",
+                  "UPDATE",
+                  "Maujooda record badalna."
+                ],
+                [
+                  "Delete",
+                  "DELETE",
+                  "Record hatana."
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "Table 4.1 mein Read ke saamne Command column mein 'READ' chhapa hai; SQL mein yeh command SELECT hai (usi row ki misal SELECT * FROM students; hai). Yahan sahi command SELECT likhi gayi hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Write a Python program using sqlite3 that stores two students' marks in a results table, then updates the marks of the student with id 2 to 81 and displays the data before and after the update. Explain the Update operation with reference to your program. (8 marks)\n(sqlite3 se aisa program likhein jo results table mein do talaba ke marks rakhe, phir id 2 wale talib-e-ilm ke marks 81 kare aur update se pehle aur baad ka data dikhaye. Apne program ke hawale se Update operation samjhayein.)",
+            "explanation": "Program:\nimport sqlite3\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\ncursor.execute(\"CREATE TABLE IF NOT EXISTS results (id INTEGER PRIMARY KEY, name TEXT, marks INTEGER)\")\ncursor.execute(\"INSERT INTO results (name, marks) VALUES ('Ali', 72)\")\ncursor.execute(\"INSERT INTO results (name, marks) VALUES ('Sara', 65)\")\nconnection.commit()\n\ncursor.execute(\"SELECT * FROM results\")\nprint(\"Before:\", cursor.fetchall())\n\ncursor.execute(\"UPDATE results SET marks = 81 WHERE id = 2\")\nconnection.commit()\n\ncursor.execute(\"SELECT * FROM results\")\nprint(\"After:\", cursor.fetchall())\nconnection.close()\n\nOutput:\nBefore: [(1, 'Ali', 72), (2, 'Sara', 65)]\nAfter: [(1, 'Ali', 72), (2, 'Sara', 81)]\n\nWazahat:\n1. Update operation maujooda data badalta hai; jab stored maloomat durust karni ho, yahan Sara ke marks.\n2. UPDATE results SET marks = 81 WHERE id = 2 sirf chuna hua record badalta hai; Python ise cursor se shart WHERE id = 2 ke mutabiq chalata hai.\n3. Sirf makhsoos data badalta hai: Ali ka record (1, 'Ali', 72) hi rehta hai.\n4. connection.commit() tabdeeli save karta hai, aur pehle aur baad ka Read (SELECT * FROM results) asar dikhata hai.",
+            "book_ref": {
+              "topic_id": "b8b10414-0b71-59e5-b737-6c78124b4510",
+              "quote": "SQL update commands modify selected records."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Write a Python program using sqlite3 that adds three students to a students table, deletes only the student with id 2, and displays the remaining records. Explain why the delete command uses a condition and why commit() is needed. (8 marks)\n(sqlite3 se aisa program likhein jo students table mein teen talaba dale, sirf id 2 wale ko delete kare aur baqi records dikhaye. Samjhayein ke delete command shart ke saath kyun hai aur commit() kyun zaroori hai.)",
+            "explanation": "Program:\nimport sqlite3\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\ncursor.execute(\"CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY, name TEXT, age INTEGER, grade TEXT)\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Ali', 14, '8th')\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Sara', 15, '9th')\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Omar', 16, '10th')\")\nconnection.commit()\n\ncursor.execute(\"DELETE FROM students WHERE id = 2\")\nconnection.commit()\nprint(\"Record deleted successfully\")\n\ncursor.execute(\"SELECT * FROM students\")\nfor row in cursor.fetchall():\n    print(row)\nconnection.close()\n\nOutput:\nRecord deleted successfully\n(1, 'Ali', 14, '8th')\n(3, 'Omar', 16, '10th')\n\nWazahat:\n1. Delete operation database se ghair zaroori data hata kar use saaf aur durust rakhta hai.\n2. Shart: delete commands shart ke saath chalti hain. DELETE FROM students WHERE id = 2 sirf aik record (Sara) hatati hai; Ali aur Omar baqi rehte hain. Shart ka ehtiyat se istemal ahem data bachata hai.\n3. commit(): connection.commit() tabdeeli database mein save karta hai; is ke baghair deletion pakki nahin hoti.\n4. Baad ka SELECT tasdeeq karta hai ke sirf chuna hua record hata, aur close() connection band karta hai.",
+            "book_ref": {
+              "topic_id": "6d2edc65-86f1-53fe-a356-5bbf023d7a58",
+              "quote": "Python ensures only selected records are removed."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 A program is meant to delete Ali (id 1) from school.db. It prints Record deleted successfully, but when the table is read again Ali is still there. Trace the program, explain the mistake and correct it, showing the output before and after the correction.\nimport sqlite3\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\ncursor.execute(\"CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY, name TEXT, age INTEGER, grade TEXT)\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Ali', 14, '8th')\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Sara', 15, '9th')\")\nconnection.commit()\nconnection.close()\n\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\ncursor.execute(\"DELETE FROM students WHERE id = 1\")\nprint(\"Record deleted successfully\")\nconnection.close()\n\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\ncursor.execute(\"SELECT * FROM students\")\nprint(cursor.fetchall())\nconnection.close() (8 marks)\n(Program ka maqsad school.db se Ali (id 1) ko delete karna hai. Yeh Record deleted successfully print karta hai magar dobara parhne par Ali wahin hai. Program ka trace karein, ghalti samjhayein aur durust karein, durusti se pehle aur baad ka output dikhayein.)",
+            "explanation": "Sochiye tabdeeli pakki kaise hoti hai: connection.commit() tabdeeliyan database mein save karta hai; jo tabdeeli commit na ho woh connection band hone par khatam ho jati hai. (Dono versions chala kar asal output diya gaya hai.)",
+            "book_ref": {
+              "topic_id": "6d2edc65-86f1-53fe-a356-5bbf023d7a58",
+              "quote": "Without commit(), deletion will not be permanent"
+            },
+            "steps": [
+              "Hissa 1 table banata, Ali (id 1) aur Sara (id 2) dalta, commit kar ke band karta hai: dono records school.db mein save.",
+              "Hissa 2 naya connection khol kar DELETE FROM students WHERE id = 1 chalata, Record deleted successfully print karta, phir connection.commit() ke BAGHAIR band karta hai, is liye deletion save nahin hoti.",
+              "Hissa 3 table dobara parhta hai. Diye gaye program ka output:\nRecord deleted successfully\n[(1, 'Ali', 14, '8th'), (2, 'Sara', 15, '9th')]",
+              "Durusti: DELETE command ke foran baad connection.commit() likhein:\ncursor.execute(\"DELETE FROM students WHERE id = 1\")\nconnection.commit()",
+              "Durusti ke baad output:\nRecord deleted successfully\n[(2, 'Sara', 15, '9th')]"
+            ],
+            "final_answer": "Ghalti DELETE ke baad connection.commit() ka na hona hai; commit() ke baghair deletion pakki nahin hoti."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 Trace the following program: give the contents of the students table after each Create, Update and Delete command, name the CRUD operation each line performs, and write the final output.\nimport sqlite3\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\ncursor.execute(\"CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY, name TEXT, age INTEGER, grade TEXT)\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Ali', 14, '8th')\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Sara', 15, '9th')\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Omar', 16, '10th')\")\ncursor.execute(\"UPDATE students SET grade = '10th' WHERE id = 2\")\ncursor.execute(\"DELETE FROM students WHERE id = 1\")\nconnection.commit()\ncursor.execute(\"SELECT * FROM students\")\nfor row in cursor.fetchall():\n    print(row)\nconnection.close() (8 marks)\n(Neeche ke program ka trace karein: har Create, Update aur Delete command ke baad students table ka mawad likhein, har line ka CRUD operation batayein aur aakhri output likhein.)",
+            "explanation": "Table ko aik aik command ke saath dekhein: INSERT record dalta hai (id 1, 2, 3 khud milti hain), UPDATE aur DELETE sirf WHERE se milne wale records badalte hain, aur aakhri SELECT Read operation hai. (Har halat program ko us line tak chala kar hasil ki gayi.)",
+            "book_ref": {
+              "topic_id": "6eecb2bb-8b2b-5627-9c69-6558dfdc6eec",
+              "quote": "They help maintain accurate and up-to-date information."
+            },
+            "steps": [
+              "Create (INSERT): Ali ko id 1.\nTable ab:\n(1, 'Ali', 14, '8th')",
+              "Create (INSERT): Sara ko id 2.\nTable ab:\n(1, 'Ali', 14, '8th')\n(2, 'Sara', 15, '9th')",
+              "Create (INSERT): Omar ko id 3.\nTable ab:\n(1, 'Ali', 14, '8th')\n(2, 'Sara', 15, '9th')\n(3, 'Omar', 16, '10th')",
+              "Update: sirf Sara ka grade 10th.\nTable ab:\n(1, 'Ali', 14, '8th')\n(2, 'Sara', 15, '10th')\n(3, 'Omar', 16, '10th')",
+              "Delete: sirf Ali ka record hat-ta hai.\nTable ab:\n(2, 'Sara', 15, '10th')\n(3, 'Omar', 16, '10th')",
+              "Read (SELECT * FROM students): fetchall() baqi rows deta hai jo loop print karta hai."
+            ],
+            "final_answer": "Aakhri output:\n(2, 'Sara', 15, '10th')\n(3, 'Omar', 16, '10th')"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Define the following terms from the chapter (8 x 1): Graphical User Interface, Tkinter, window, frame, widget, event-driven programming, relational database, SQL. (8 marks)\n(Chapter ki yeh istilahat define karein (8 x 1): Graphical User Interface, Tkinter, window, frame, widget, event-driven programming, relational database, SQL.)",
+            "explanation": "1. GUI: windows, buttons, menus, text boxes waghera se computer program se rabte ka nazar aane wala tareeqa.\n2. Tkinter: desktop GUI banane ki Python ki built-in library.\n3. Window: GUI application ki main screen ya container jahan interface ke elements dikhte hain.\n4. Frame: GUI window ke andar widgets ko munazzam aur group karne wala container.\n5. Widget: label, button, entry field, menu ya listbox jaisa GUI element jo maloomat dikhaye ya user se input le.\n6. Event-driven programming: programming ka tareeqa jis mein program user ke events ya amal par jawab deta hai.\n7. Relational database: rows aur columns wale tables mein data, jahan mutaliqa data keys se jurta hai.\n8. SQL: Structured Query Language, relational databases mein data banane, sambhalne aur badalne ki zaban.",
+            "book_ref": {
+              "topic_id": "3381edd3-9634-5974-a27d-1dc1ae7d4d49",
+              "quote": "A widget is a GUI element, such as a label, button, entry field, menu, or listbox"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
