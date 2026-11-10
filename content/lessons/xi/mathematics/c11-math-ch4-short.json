@@ -1,0 +1,802 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-SHORT",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-short-questions",
+      "title": "Short Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 49,
+          "pdf_to": 82,
+          "note": "Practice short questions written from Unit 4 (PDF 49-82, printed 44-77); not printed in the book. Based on the unit's text, theorems, formulas and worked examples (changed values); none repeats the unit's exercises. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice short questions for the whole of Unit 4 (Matrices & Determinants), arranged by the unit's sections, in the style of a 2-mark Board short question. Each one is solved briefly, step by step."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.1 Matrix"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Define a matrix and its order. Write the order of \\(\\begin{bmatrix}1 & 0 & -2 & 3 \\\\ 4 & 5 & 6 & -1\\end{bmatrix}\\).",
+            "explanation": "A rectangular array of numbers enclosed by a pair of brackets is a matrix. A matrix with \\(m\\) rows and \\(n\\) columns has order \\(m \\times n\\). The given matrix has 2 rows and 4 columns: order \\(2 \\times 4\\).",
+            "book_ref": {
+              "topic_id": "7bcdef37-3bbf-50a5-b738-82c91f4c0f5b",
+              "quote": "A rectangular array of numbers enclosed by a pair of brackets is called a matrix"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Distinguish between a row matrix and a column matrix.",
+            "explanation": "The difference is shown in the table.",
+            "book_ref": {
+              "topic_id": "7bcdef37-3bbf-50a5-b738-82c91f4c0f5b",
+              "quote": "is said to be a row matrix or a row vector"
+            },
+            "answer_table": {
+              "header": [
+                "Row matrix",
+                "Column matrix"
+              ],
+              "rows": [
+                [
+                  "has only one row",
+                  "has only one column"
+                ],
+                [
+                  "order \\(1 \\times n\\)",
+                  "order \\(m \\times 1\\)"
+                ],
+                [
+                  "e.g. \\(\\begin{bmatrix}2 & -1 & 7\\end{bmatrix}\\)",
+                  "e.g. \\(\\begin{bmatrix}4 \\\\ 0\\end{bmatrix}\\)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Write the entries of the principal and secondary diagonals of \\(\\begin{bmatrix}2 & -1 & 0 \\\\ 5 & 3 & 7 \\\\ 4 & 8 & -6\\end{bmatrix}\\).",
+            "explanation": "Principal diagonal \\(a_{11}, a_{22}, a_{33}\\): \\(2, 3, -6\\). Secondary diagonal \\(a_{13}, a_{22}, a_{31}\\): \\(0, 3, 4\\).",
+            "book_ref": {
+              "topic_id": "7bcdef37-3bbf-50a5-b738-82c91f4c0f5b",
+              "quote": "form the principal diagonal of the matrix"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Distinguish between a diagonal matrix and a scalar matrix.",
+            "explanation": "The difference is shown in the table.",
+            "book_ref": {
+              "topic_id": "7bcdef37-3bbf-50a5-b738-82c91f4c0f5b",
+              "quote": "then the matrix \\(A\\) is called a scalar matrix of order \\(n\\)"
+            },
+            "answer_table": {
+              "header": [
+                "Diagonal matrix",
+                "Scalar matrix"
+              ],
+              "rows": [
+                [
+                  "square; \\(a_{ij} = 0\\) for all \\(i \\ne j\\)",
+                  "square; \\(a_{ij} = 0\\) for all \\(i \\ne j\\)"
+                ],
+                [
+                  "diagonal entries may differ; not all zero",
+                  "all diagonal entries equal the same \\(k \\ne 0\\)"
+                ],
+                [
+                  "e.g. \\(\\begin{bmatrix}1 & 0 \\\\ 0 & 4\\end{bmatrix}\\)",
+                  "e.g. \\(\\begin{bmatrix}4 & 0 \\\\ 0 & 4\\end{bmatrix}\\)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Find \\(x\\) and \\(y\\) if \\(\\begin{bmatrix}2x - 1 & 4 \\\\ 3 & y + 2\\end{bmatrix} = \\begin{bmatrix}5 & 4 \\\\ 3 & -1\\end{bmatrix}\\).",
+            "explanation": "Equal matrices have equal corresponding entries: \\(2x - 1 = 5 \\Rightarrow x = 3\\); \\(y + 2 = -1 \\Rightarrow y = -3\\).",
+            "book_ref": {
+              "topic_id": "7bcdef37-3bbf-50a5-b738-82c91f4c0f5b",
+              "quote": "In other words, \\(A\\) and \\(B\\) represent the same matrix."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Find the transpose of \\(P = \\begin{bmatrix}3 & -1 & 2 \\\\ 0 & 4 & 5\\end{bmatrix}\\) and write its order.",
+            "explanation": "Rows become columns: \\(P^{t} = \\begin{bmatrix}3 & 0 \\\\ -1 & 4 \\\\ 2 & 5\\end{bmatrix}\\), of order \\(3 \\times 2\\) (\\(P\\) is \\(2 \\times 3\\)).",
+            "book_ref": {
+              "topic_id": "7bcdef37-3bbf-50a5-b738-82c91f4c0f5b",
+              "quote": "then the \\(n \\times m\\) matrix obtained by interchanging the rows and columns of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Define a null matrix. Can a null matrix be rectangular? Give an example.",
+            "explanation": "A square or rectangular matrix whose every element is zero is a null (zero) matrix. Yes, null matrices may be of any order, e.g. \\(O_{2 \\times 3} = \\begin{bmatrix}0 & 0 & 0 \\\\ 0 & 0 & 0\\end{bmatrix}\\).",
+            "book_ref": {
+              "topic_id": "7bcdef37-3bbf-50a5-b738-82c91f4c0f5b",
+              "quote": "Null matrices may be of any order"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.2.1 Addition of Matrices"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 When are two matrices conformable for addition? Is \\(\\begin{bmatrix}1 & -1 & 0\\end{bmatrix} + \\begin{bmatrix}2 \\\\ 3 \\\\ 4\\end{bmatrix}\\) defined?",
+            "explanation": "Two matrices are conformable for addition if they are of the same order. Here the orders are \\(1 \\times 3\\) and \\(3 \\times 1\\), which differ, so the sum is not defined (although both have 3 entries).",
+            "book_ref": {
+              "topic_id": "07ac387d-353a-5451-9fed-d331e6f9b0a2",
+              "quote": "Two matrices are conformable for addition if they are of the same order."
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.2.2 Subtraction of Matrices"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 For the same \\(A\\) and \\(B\\), find the matrix \\(X\\) such that \\(X + A = B\\).",
+            "explanation": "\\(X = B - A = \\begin{bmatrix}-1 - 2 & 5 - (-3) \\\\ 0 - 1 & 2 - 4\\end{bmatrix} = \\begin{bmatrix}-3 & 8 \\\\ -1 & -2\\end{bmatrix}\\).",
+            "book_ref": {
+              "topic_id": "9e32dda3-fe2a-5f40-a65f-e4bf5cc29e56",
+              "quote": "Thus, the matrix \\(A - B\\) is formed by subtracting each entry of"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.2.3 Scalar Multiplication"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 If \\(A = \\begin{bmatrix}2 & -3 \\\\ 1 & 4\\end{bmatrix}\\) and \\(B = \\begin{bmatrix}-1 & 5 \\\\ 0 & 2\\end{bmatrix}\\), find \\(2A - 3B\\).",
+            "explanation": "\\(2A = \\begin{bmatrix}4 & -6 \\\\ 2 & 8\\end{bmatrix}\\), \\(3B = \\begin{bmatrix}-3 & 15 \\\\ 0 & 6\\end{bmatrix}\\), so \\(2A - 3B = \\begin{bmatrix}4 + 3 & -6 - 15 \\\\ 2 - 0 & 8 - 6\\end{bmatrix} = \\begin{bmatrix}7 & -21 \\\\ 2 & 2\\end{bmatrix}\\).",
+            "book_ref": {
+              "topic_id": "28293501-70f2-5f76-92eb-ddcd5878bec6",
+              "quote": "is the matrix formed by multiplying each entry of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 For the same \\(A\\) and \\(B\\), solve \\(2X - A = B\\) for \\(X\\).",
+            "explanation": "\\(2X = A + B = \\begin{bmatrix}1 & 2 \\\\ 1 & 6\\end{bmatrix}\\), so \\(X = \\dfrac{1}{2}\\begin{bmatrix}1 & 2 \\\\ 1 & 6\\end{bmatrix} = \\begin{bmatrix}\\frac{1}{2} & 1 \\\\ \\frac{1}{2} & 3\\end{bmatrix}\\).",
+            "book_ref": {
+              "topic_id": "28293501-70f2-5f76-92eb-ddcd5878bec6",
+              "quote": "is a real or complex number, then the product of"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.2.4 Multiplication of two Matrices"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 If \\(C = \\begin{bmatrix}1 & 2 \\\\ 0 & -1\\end{bmatrix}\\) and \\(D = \\begin{bmatrix}3 & 1 \\\\ 2 & 4\\end{bmatrix}\\), find \\(CD\\) and \\(DC\\). Is \\(CD = DC\\)?",
+            "explanation": "\\(CD = \\begin{bmatrix}3 + 4 & 1 + 8 \\\\ 0 - 2 & 0 - 4\\end{bmatrix} = \\begin{bmatrix}7 & 9 \\\\ -2 & -4\\end{bmatrix}\\), \\(DC = \\begin{bmatrix}3 + 0 & 6 - 1 \\\\ 2 + 0 & 4 - 4\\end{bmatrix} = \\begin{bmatrix}3 & 5 \\\\ 2 & 0\\end{bmatrix}\\). So \\(CD \\ne DC\\).",
+            "book_ref": {
+              "topic_id": "eb9c4343-1d8a-5284-ab45-64ce75ecb736",
+              "quote": "In general, \\(AB \\ne BA\\)."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 \\(A\\) is of order \\(2 \\times 3\\) and \\(B\\) is of order \\(3 \\times 4\\). Is \\(AB\\) defined? Is \\(BA\\) defined? Give the order where defined.",
+            "explanation": "\\(AB\\): columns of \\(A\\) = 3 = rows of \\(B\\), so \\(AB\\) is defined, of order \\(2 \\times 4\\). \\(BA\\): columns of \\(B\\) = 4, rows of \\(A\\) = 2; \\(4 \\ne 2\\), so \\(BA\\) is not defined.",
+            "book_ref": {
+              "topic_id": "eb9c4343-1d8a-5284-ab45-64ce75ecb736",
+              "quote": "If the product \\(AB\\) is defined, then the order of the product can be illustrated as given below"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 If \\(A = \\begin{bmatrix}2 & 1 \\\\ -1 & 0\\end{bmatrix}\\), find \\(A^{2}\\) and \\(A^{3}\\).",
+            "explanation": "\\(A^{2} = A \\cdot A = \\begin{bmatrix}4 - 1 & 2 + 0 \\\\ -2 + 0 & -1 + 0\\end{bmatrix} = \\begin{bmatrix}3 & 2 \\\\ -2 & -1\\end{bmatrix}\\); \\(A^{3} = A^{2}A = \\begin{bmatrix}6 - 2 & 3 + 0 \\\\ -4 + 1 & -2 + 0\\end{bmatrix} = \\begin{bmatrix}4 & 3 \\\\ -3 & -2\\end{bmatrix}\\).",
+            "book_ref": {
+              "topic_id": "eb9c4343-1d8a-5284-ab45-64ce75ecb736",
+              "quote": "Powers of square matrices are defined as"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 Find \\(\\begin{bmatrix}1 & 2 & 3\\end{bmatrix}\\begin{bmatrix}4 \\\\ -1 \\\\ 2\\end{bmatrix}\\) and write the order of the product.",
+            "explanation": "\\((1 \\times 3)(3 \\times 1) = 1 \\times 1\\): \\(1(4) + 2(-1) + 3(2) = 4 - 2 + 6 = 8\\), i.e. \\([8]\\).",
+            "book_ref": {
+              "topic_id": "eb9c4343-1d8a-5284-ab45-64ce75ecb736",
+              "quote": "are said to be conformable for the product"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 If \\(F = \\begin{bmatrix}2 & 3 \\\\ 1 & 4\\end{bmatrix}\\), show that \\(F^{2} - 6F + 5I = O\\).",
+            "explanation": "\\(F^{2} = \\begin{bmatrix}4 + 3 & 6 + 12 \\\\ 2 + 4 & 3 + 16\\end{bmatrix} = \\begin{bmatrix}7 & 18 \\\\ 6 & 19\\end{bmatrix}\\). Then \\(F^{2} - 6F + 5I = \\begin{bmatrix}7 - 12 + 5 & 18 - 18 + 0 \\\\ 6 - 6 + 0 & 19 - 24 + 5\\end{bmatrix} = \\begin{bmatrix}0 & 0 \\\\ 0 & 0\\end{bmatrix} = O\\).",
+            "book_ref": {
+              "topic_id": "eb9c4343-1d8a-5284-ab45-64ce75ecb736",
+              "quote": "is the \\(3 \\times 3\\) matrix"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.3 Properties of Matrix Addition, Scalar Multiplication and Matrix Multiplication"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 State the left and right distributive properties of matrix multiplication.",
+            "explanation": "For conformable matrices: left distributive \\(A(B + C) = AB + AC\\); right distributive \\((A + B)C = AC + BC\\). They are listed separately because \\(AB \\ne BA\\) in general.",
+            "book_ref": {
+              "topic_id": "12d024b4-5241-5549-91ef-9ff9dea2b9ac",
+              "quote": "Right distributive property"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 Verify \\((c + d)A = cA + dA\\) for \\(c = 2\\), \\(d = -3\\) and \\(A = \\begin{bmatrix}1 & 2 \\\\ 0 & -1\\end{bmatrix}\\).",
+            "explanation": "L.H.S. \\(= (-1)A = \\begin{bmatrix}-1 & -2 \\\\ 0 & 1\\end{bmatrix}\\). R.H.S. \\(= \\begin{bmatrix}2 & 4 \\\\ 0 & -2\\end{bmatrix} + \\begin{bmatrix}-3 & -6 \\\\ 0 & 3\\end{bmatrix} = \\begin{bmatrix}-1 & -2 \\\\ 0 & 1\\end{bmatrix}\\). L.H.S. = R.H.S.",
+            "book_ref": {
+              "topic_id": "12d024b4-5241-5549-91ef-9ff9dea2b9ac",
+              "quote": "and \\(c\\) and \\(d\\) are scalars, then the following properties are true"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.4 Determinants"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 Evaluate \\(\\begin{vmatrix}a + b & a \\\\ a & a - b\\end{vmatrix}\\).",
+            "explanation": "\\(ad - bc = (a + b)(a - b) - a \\cdot a = a^{2} - b^{2} - a^{2} = -b^{2}\\).",
+            "book_ref": {
+              "topic_id": "d43b08c8-7cd3-5913-b0ab-9cc41816c9b4",
+              "quote": "Recall the determinant of order 2, which you met in earlier classes"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 Find \\(x\\) if \\(\\begin{vmatrix}x + 1 & 2 \\\\ 4 & x - 1\\end{vmatrix} = 0\\).",
+            "explanation": "\\((x + 1)(x - 1) - 8 = 0 \\Rightarrow x^{2} - 9 = 0 \\Rightarrow x = \\pm 3\\).",
+            "book_ref": {
+              "topic_id": "d43b08c8-7cd3-5913-b0ab-9cc41816c9b4",
+              "quote": "Every square matrix has one special number attached to it, called its determinant"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.4.1 Minor and Cofactor of an Element of a Matrix or its Determinant"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 Define the minor \\(M_{ij}\\) and the cofactor \\(A_{ij}\\) of an element \\(a_{ij}\\) of a square matrix.",
+            "explanation": "Minor \\(M_{ij}\\): the determinant formed by deleting the \\(i\\)th row and the \\(j\\)th column of \\(A\\). Cofactor: \\(A_{ij} = (-1)^{i+j}M_{ij}\\), i.e. the minor with the sign \\(+\\) if \\(i + j\\) is even and \\(-\\) if \\(i + j\\) is odd.",
+            "book_ref": {
+              "topic_id": "855fcb6f-bd87-517d-a3cb-dfe3d0f4c148",
+              "quote": "Let us consider a square matrix \\(A\\) of order \\(n\\), then the minor of an element"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "22 For \\(A = \\begin{bmatrix}2 & 1 & -1 \\\\ 3 & 0 & 2 \\\\ 1 & 4 & 1\\end{bmatrix}\\), find the cofactors \\(A_{21}, A_{22}, A_{23}\\) and hence \\(|A|\\) by expanding along \\(R_{2}\\).",
+            "explanation": "Work step by step as shown.",
+            "book_ref": {
+              "topic_id": "855fcb6f-bd87-517d-a3cb-dfe3d0f4c148",
+              "quote": "The factor \\((-1)^{i+j}\\) only decides a sign"
+            },
+            "steps": [
+              "\\(A_{21} = -\\begin{vmatrix}1 & -1 \\\\ 4 & 1\\end{vmatrix} = -(1 + 4) = -5\\)",
+              "\\(A_{22} = +\\begin{vmatrix}2 & -1 \\\\ 1 & 1\\end{vmatrix} = 2 + 1 = 3\\)",
+              "\\(A_{23} = -\\begin{vmatrix}2 & 1 \\\\ 1 & 4\\end{vmatrix} = -(8 - 1) = -7\\)",
+              "\\(|A| = a_{21}A_{21} + a_{22}A_{22} + a_{23}A_{23} = 3(-5) + 0(3) + 2(-7) = -15 - 14\\)"
+            ],
+            "final_answer": "\\(A_{21} = -5,\\ A_{22} = 3,\\ A_{23} = -7\\); \\(|A| = -29\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "23 Write the sign pattern of the cofactors of a square matrix of order 3 and explain it.",
+            "explanation": "\\(\\begin{bmatrix}+ & - & + \\\\ - & + & - \\\\ + & - & +\\end{bmatrix}\\): the sign of \\(A_{ij}\\) is \\((-1)^{i+j}\\), plus when \\(i + j\\) is even and minus when it is odd.",
+            "book_ref": {
+              "topic_id": "855fcb6f-bd87-517d-a3cb-dfe3d0f4c148",
+              "quote": "For order 3 the signs form a chessboard pattern"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.4.2 Determinant of a Square Matrix of Order n = 3"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "24 Evaluate \\(\\begin{vmatrix}2 & 1 & -1 \\\\ 3 & 0 & 2 \\\\ 1 & 4 & 1\\end{vmatrix}\\) by expanding along \\(C_{2}\\).",
+            "explanation": "Signs of column 2: \\(-, +, -\\). \\(|A| = -1\\begin{vmatrix}3 & 2 \\\\ 1 & 1\\end{vmatrix} + 0 - 4\\begin{vmatrix}2 & -1 \\\\ 3 & 2\\end{vmatrix} = -1(1) - 4(7) = -29\\).",
+            "book_ref": {
+              "topic_id": "cdd7265d-5a56-5341-b7b2-5a09ca7bc055",
+              "quote": "Equation (vii) is the required expansion of determinant of square matrix of order 3."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "25 Evaluate \\(\\begin{vmatrix}x & 0 & 1 \\\\ 2 & x & 3 \\\\ 1 & 0 & x\\end{vmatrix}\\).",
+            "explanation": "Expand along \\(C_{2}\\) (two zeros): only \\(a_{22} = x\\) with sign \\(+\\): \\(x\\begin{vmatrix}x & 1 \\\\ 1 & x\\end{vmatrix} = x(x^{2} - 1) = x^{3} - x\\).",
+            "book_ref": {
+              "topic_id": "cdd7265d-5a56-5341-b7b2-5a09ca7bc055",
+              "quote": "When to use which: to save work"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.4.3 Properties of Determinants"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "26 Without expansion, show that \\(\\begin{vmatrix}x + 1 & x + 2 & x + 3 \\\\ x + 4 & x + 5 & x + 6 \\\\ x + 7 & x + 8 & x + 9\\end{vmatrix} = 0\\).",
+            "explanation": "\\(C_{2} - C_{1} \\to C_{2}\\) and \\(C_{3} - C_{1} \\to C_{3}\\) (value unchanged) give columns \\(1, 1, 1\\) and \\(2, 2, 2\\). Taking 2 out of \\(C_{3}\\) makes \\(C_{2}\\) and \\(C_{3}\\) identical, so the determinant is \\(0\\).",
+            "book_ref": {
+              "topic_id": "e38a74c4-8dc9-570d-8503-a7f554e68b8d",
+              "quote": "the value of the determinant does not change"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "27 Without expansion, show that \\(\\begin{vmatrix}2 & 4 & 6 \\\\ 1 & 5 & 3 \\\\ 3 & 7 & 9\\end{vmatrix} = 0\\).",
+            "explanation": "Every entry of \\(C_{3}\\) is 3 times the entry of \\(C_{1}\\). Taking 3 out of \\(C_{3}\\) (property v) gives \\(3\\begin{vmatrix}2 & 4 & 2 \\\\ 1 & 5 & 1 \\\\ 3 & 7 & 3\\end{vmatrix}\\), whose \\(C_{1}\\) and \\(C_{3}\\) are identical, so the value is \\(3 \\times 0 = 0\\).",
+            "book_ref": {
+              "topic_id": "e38a74c4-8dc9-570d-8503-a7f554e68b8d",
+              "quote": "a common factor of a row or column can be taken outside the determinant"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "28 If \\(A\\) is a square matrix of order 3 with \\(|A| = -3\\), find \\(|2A|\\) and \\(|A^{t}|\\).",
+            "explanation": "\\(2A\\) multiplies each of the 3 rows by 2: \\(|2A| = 2^{3}|A| = 8(-3) = -24\\). By property i, \\(|A^{t}| = |A| = -3\\).",
+            "book_ref": {
+              "topic_id": "e38a74c4-8dc9-570d-8503-a7f554e68b8d",
+              "quote": "Taking \\(k\\) out of the whole matrix"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "29 Write, without expansion, the value of \\(\\begin{vmatrix}3 & 0 & 0 \\\\ 2 & -1 & 0 \\\\ 5 & 4 & 2\\end{vmatrix}\\).",
+            "explanation": "It is lower triangular, so the value is the product of the main-diagonal entries: \\(3 \\times (-1) \\times 2 = -6\\).",
+            "book_ref": {
+              "topic_id": "e38a74c4-8dc9-570d-8503-a7f554e68b8d",
+              "quote": "If a matrix is in triangular form, then the value of its determinant is the product of the entries on its main diagonal."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "30 If \\(|A| = 7\\) (order 3), find the determinant of the matrix obtained by (i) \\(R_{1} \\leftrightarrow R_{3}\\) (ii) multiplying \\(R_{2}\\) by 4 (iii) \\(R_{3} + 2R_{1} \\to R_{3}\\).",
+            "explanation": "(i) interchange changes the sign: \\(-7\\). (ii) one row times 4: \\(4 \\times 7 = 28\\). (iii) adding a multiple of a row: unchanged, \\(7\\).",
+            "book_ref": {
+              "topic_id": "e38a74c4-8dc9-570d-8503-a7f554e68b8d",
+              "quote": "If any row (column) of a determinant is multiplied by a non-zero number"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.5 Adjoint and Inverse of a Square Matrix"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "31 Define the adjoint and the inverse of a square matrix, and write the formula for the inverse.",
+            "explanation": "\\(\\operatorname{adj} A\\) is the transpose of the matrix of cofactors of \\(A\\). If there is a matrix \\(B\\) with \\(AB = BA = I_{n}\\), then \\(B = A^{-1}\\). For a non-singular \\(A\\) (\\(|A| \\ne 0\\)): \\(A^{-1} = \\dfrac{1}{|A|}\\operatorname{adj} A\\).",
+            "book_ref": {
+              "topic_id": "93301f92-46c1-599c-9dd8-0908771610cb",
+              "quote": "If \\(A\\) is non singular matrix then"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "32 Show that \\(A = \\begin{bmatrix}1 & 2 & 1 \\\\ 0 & 1 & 2 \\\\ 1 & 3 & 4\\end{bmatrix}\\) is non-singular.",
+            "explanation": "\\(|A| = 1(4 - 6) - 2(0 - 2) + 1(0 - 1) = -2 + 4 - 1 = 1 \\ne 0\\), so \\(A\\) is non-singular and \\(A^{-1}\\) exists.",
+            "book_ref": {
+              "topic_id": "93301f92-46c1-599c-9dd8-0908771610cb",
+              "quote": "square matrix of order \\(n\\). If there exists a matrix"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "33 Find the values of \\(k\\) for which \\(\\begin{bmatrix}k & 2 & 0 \\\\ 1 & k & 1 \\\\ 0 & 1 & 1\\end{bmatrix}\\) has no inverse.",
+            "explanation": "No inverse when \\(|A| = 0\\): \\(k(k - 1) - 2(1 - 0) + 0 = k^{2} - k - 2 = (k - 2)(k + 1) = 0\\), so \\(k = 2\\) or \\(k = -1\\).",
+            "book_ref": {
+              "topic_id": "93301f92-46c1-599c-9dd8-0908771610cb",
+              "quote": "This is also why \\(|A| \\ne 0\\) is needed: we cannot divide by zero."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "34 Find the cofactors of the first row of \\(A = \\begin{bmatrix}1 & 2 & 1 \\\\ 0 & 1 & 2 \\\\ 1 & 3 & 4\\end{bmatrix}\\) and write where they stand in \\(\\operatorname{adj} A\\).",
+            "explanation": "\\(A_{11} = \\begin{vmatrix}1 & 2 \\\\ 3 & 4\\end{vmatrix} = -2\\), \\(A_{12} = -\\begin{vmatrix}0 & 2 \\\\ 1 & 4\\end{vmatrix} = 2\\), \\(A_{13} = \\begin{vmatrix}0 & 1 \\\\ 1 & 3\\end{vmatrix} = -1\\). They form the first column of \\(\\operatorname{adj} A\\).",
+            "book_ref": {
+              "topic_id": "93301f92-46c1-599c-9dd8-0908771610cb",
+              "quote": "The cofactors of row 1 of \\(A\\) stand in column 1 of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "35 If \\(A\\) is a square matrix of order 3 and \\(A(\\operatorname{adj} A) = 5I\\), find \\(|A|\\) and \\(A^{-1}\\) in terms of \\(\\operatorname{adj} A\\).",
+            "explanation": "\\(A(\\operatorname{adj} A) = |A|\\,I\\), so \\(|A| = 5\\) and \\(A^{-1} = \\dfrac{1}{5}\\operatorname{adj} A\\).",
+            "book_ref": {
+              "topic_id": "93301f92-46c1-599c-9dd8-0908771610cb",
+              "quote": "Each off-diagonal entry is a row times the cofactors of a different row"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.6 Elementary Row Operations on a Matrix"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "36 Name the three elementary row operations and their notations.",
+            "explanation": "(i) Interchanging two rows: \\(R_{i} \\leftrightarrow R_{j}\\). (ii) Multiplying a row by a non-zero number: \\(kR_{i} \\to R_{i}'\\). (iii) Adding a multiple of one row to another row: \\(R_{i} + kR_{j} \\to R_{i}'\\).",
+            "book_ref": {
+              "topic_id": "730c5709-4f1a-5deb-864c-46aa94c1cd0b",
+              "quote": "Adding a multiple of one row to another row."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "37 Distinguish between an upper triangular and a lower triangular matrix.",
+            "explanation": "The difference is shown in the table.",
+            "book_ref": {
+              "topic_id": "730c5709-4f1a-5deb-864c-46aa94c1cd0b",
+              "quote": "is named as triangular matrix whether it is upper triangular or lower triangular"
+            },
+            "answer_table": {
+              "header": [
+                "Upper triangular",
+                "Lower triangular"
+              ],
+              "rows": [
+                [
+                  "square; all elements below the principal diagonal are zero",
+                  "square; all elements above the principal diagonal are zero"
+                ],
+                [
+                  "\\(a_{ij} = 0\\) for all \\(i > j\\)",
+                  "\\(a_{ij} = 0\\) for all \\(i < j\\)"
+                ],
+                [
+                  "e.g. \\(\\begin{bmatrix}2 & 5 \\\\ 0 & 3\\end{bmatrix}\\)",
+                  "e.g. \\(\\begin{bmatrix}2 & 0 \\\\ 5 & 3\\end{bmatrix}\\)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "38 Apply \\(R_{2} + (-3)R_{1} \\to R_{2}'\\) to \\(\\begin{bmatrix}1 & 2 & -1 \\\\ 3 & 4 & 2\\end{bmatrix}\\).",
+            "explanation": "\\((3, 4, 2) + (-3)(1, 2, -1) = (0, -2, 5)\\); \\(R_{1}\\) stays: \\(\\begin{bmatrix}1 & 2 & -1 \\\\ 0 & -2 & 5\\end{bmatrix}\\).",
+            "book_ref": {
+              "topic_id": "730c5709-4f1a-5deb-864c-46aa94c1cd0b",
+              "quote": "is the new row obtained after applying the row operation"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.7 Echelon and Reduced Echelon Forms of Matrices"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "39 When is a matrix said to be in echelon form?",
+            "explanation": "(i) The number of zeros before the leading entry of each row is greater than in the preceding row. (ii) Every non-zero row precedes every zero row. (iii) The leading entry of each non-zero row is 1.",
+            "book_ref": {
+              "topic_id": "960792ad-af8b-5e6f-a397-7c384ad21a63",
+              "quote": "precedes every zero row (if any)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "40 Find the rank of \\(\\begin{bmatrix}1 & -1 & 2 \\\\ 2 & 1 & 1 \\\\ 3 & 0 & 3\\end{bmatrix}\\).",
+            "explanation": "Work step by step as shown.",
+            "book_ref": {
+              "topic_id": "960792ad-af8b-5e6f-a397-7c384ad21a63",
+              "quote": "then \\(r\\) is called the rank of the matrix"
+            },
+            "steps": [
+              "\\(R_{2} - 2R_{1}\\): \\((0, 3, -3)\\); \\(R_{3} - 3R_{1}\\): \\((0, 3, -3)\\)",
+              "\\(\\frac{1}{3}R_{2}\\): \\((0, 1, -1)\\); \\(R_{3} - 3R_{2}\\): \\((0, 0, 0)\\)",
+              "Echelon form \\(\\begin{bmatrix}1 & -1 & 2 \\\\ 0 & 1 & -1 \\\\ 0 & 0 & 0\\end{bmatrix}\\) has 2 non-zero rows"
+            ],
+            "final_answer": "Rank \\(= 2\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "41 Reduce \\(\\begin{bmatrix}1 & 2 \\\\ 3 & 7\\end{bmatrix}\\) to reduced echelon form and write its rank.",
+            "explanation": "\\(R_{2} - 3R_{1}\\): \\((0, 1)\\); then \\(R_{1} - 2R_{2}\\): \\((1, 0)\\). Reduced echelon form \\(\\begin{bmatrix}1 & 0 \\\\ 0 & 1\\end{bmatrix} = I_{2}\\); two non-zero rows, rank 2.",
+            "book_ref": {
+              "topic_id": "960792ad-af8b-5e6f-a397-7c384ad21a63",
+              "quote": "Reduced Echelon Form of a Matrix: An"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "42 Is \\(\\begin{bmatrix}1 & 0 & 3 \\\\ 0 & 1 & 2 \\\\ 0 & 0 & 0\\end{bmatrix}\\) in reduced echelon form? Give a reason.",
+            "explanation": "Yes. It is in echelon form (leading 1s move to the right, the zero row is last), and the columns of the leading 1s (columns 1 and 2) have no other non-zero entry. Column 3 has no leading 1, so its entries 3, 2 are allowed.",
+            "book_ref": {
+              "topic_id": "960792ad-af8b-5e6f-a397-7c384ad21a63",
+              "quote": "In full: a matrix is in reduced echelon form when it is in echelon form"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "43 Find the inverse of \\(\\begin{bmatrix}1 & 2 \\\\ 3 & 7\\end{bmatrix}\\) by row operations.",
+            "explanation": "\\(\\left[\\begin{array}{cc|cc}1 & 2 & 1 & 0 \\\\ 3 & 7 & 0 & 1\\end{array}\\right]\\); \\(R_{2} - 3R_{1}\\): \\((0, 1 \\mid -3, 1)\\); \\(R_{1} - 2R_{2}\\): \\((1, 0 \\mid 7, -2)\\). So the inverse is \\(\\begin{bmatrix}7 & -2 \\\\ -3 & 1\\end{bmatrix}\\).",
+            "book_ref": {
+              "topic_id": "960792ad-af8b-5e6f-a397-7c384ad21a63",
+              "quote": "If the application of elementary row operations on"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.8 System of Non-Homogeneous Linear Equations"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "44 Distinguish between a consistent and an inconsistent system of linear equations.",
+            "explanation": "The difference is shown in the table.",
+            "book_ref": {
+              "topic_id": "5af39cc8-8be1-5a4d-8669-1fc3e34820ed",
+              "quote": "is said to be consistent if the system has a unique solution or it has infinitely many solutions"
+            },
+            "answer_table": {
+              "header": [
+                "Consistent system",
+                "Inconsistent system"
+              ],
+              "rows": [
+                [
+                  "has a unique solution or infinitely many solutions",
+                  "has no solution"
+                ],
+                [
+                  "rank of coefficient matrix = rank of augmented matrix",
+                  "the two ranks are different"
+                ],
+                [
+                  "e.g. \\(x + y = 2,\\ x - y = 0\\)",
+                  "e.g. \\(x + y = 2,\\ x + y = 3\\)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "45 Write the system \\(x + 2y - z = 4,\\ 3x - y + 2z = 1,\\ y + z = 3\\) in the form \\(AX = B\\).",
+            "explanation": "\\(\\begin{bmatrix}1 & 2 & -1 \\\\ 3 & -1 & 2 \\\\ 0 & 1 & 1\\end{bmatrix}\\begin{bmatrix}x \\\\ y \\\\ z\\end{bmatrix} = \\begin{bmatrix}4 \\\\ 1 \\\\ 3\\end{bmatrix}\\); the missing \\(x\\) in the third equation gives the entry 0.",
+            "book_ref": {
+              "topic_id": "5af39cc8-8be1-5a4d-8669-1fc3e34820ed",
+              "quote": "In matrix language system (i) is"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.8.1 Reduced Echelon Form"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "46 State the rank conditions for a non-homogeneous system in n variables to have a unique solution, infinitely many solutions or no solution.",
+            "explanation": "Unique solution: rank \\(A\\) = rank \\([A \\mid B] = n\\). Infinitely many: rank \\(A\\) = rank \\([A \\mid B] < n\\). No solution (inconsistent): rank \\(A \\ne\\) rank \\([A \\mid B]\\).",
+            "book_ref": {
+              "topic_id": "8c8ca82f-0e8c-52f1-8a69-5dd96b68a195",
+              "quote": "Thus a linear system is consistent and has a unique solution if the rank of the coefficient matrix is the same as that of the augmented matrix and equal to the number of variables."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "47 The augmented matrix of a system reduces to \\(\\left[\\begin{array}{ccc|c}1 & 0 & 2 & 3 \\\\ 0 & 1 & -1 & 1 \\\\ 0 & 0 & 0 & 0\\end{array}\\right]\\). Write the solution.",
+            "explanation": "\\(x + 2z = 3\\), \\(y - z = 1\\), \\(0z = 0\\) (\\(z\\) free). Put \\(z = t\\): \\(x = 3 - 2t\\), \\(y = 1 + t\\), \\(z = t\\), infinitely many solutions.",
+            "book_ref": {
+              "topic_id": "8c8ca82f-0e8c-52f1-8a69-5dd96b68a195",
+              "quote": "Convert to reduced echelon form"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.8.2 Matrix Inversion Method"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "48 Show that the solution of \\(AX = B\\) is \\(X = A^{-1}B\\) when \\(|A| \\ne 0\\).",
+            "explanation": "Since \\(|A| \\ne 0\\), \\(A^{-1}\\) exists. Multiply on the left: \\(A^{-1}(AX) = A^{-1}B \\Rightarrow (A^{-1}A)X = A^{-1}B \\Rightarrow IX = A^{-1}B \\Rightarrow X = A^{-1}B\\).",
+            "book_ref": {
+              "topic_id": "010f9c6d-d4a8-52a1-83fb-8120ca8be751",
+              "quote": "It is the matrix version of solving"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "49 For a system \\(AX = B\\) it is given that \\(A^{-1} = \\begin{bmatrix}-2 & -5 & 3 \\\\ 2 & 3 & -2 \\\\ -1 & -1 & 1\\end{bmatrix}\\) and \\(B = \\begin{bmatrix}3 \\\\ 5 \\\\ 11\\end{bmatrix}\\). Find \\(X\\).",
+            "explanation": "\\(X = A^{-1}B = \\begin{bmatrix}-6 - 25 + 33 \\\\ 6 + 15 - 22 \\\\ -3 - 5 + 11\\end{bmatrix} = \\begin{bmatrix}2 \\\\ -1 \\\\ 3\\end{bmatrix}\\): \\(x = 2,\\ y = -1,\\ z = 3\\).",
+            "book_ref": {
+              "topic_id": "010f9c6d-d4a8-52a1-83fb-8120ca8be751",
+              "quote": "must be on the LEFT of \\(B\\); matrix multiplication is not commutative"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.8.3 Cramer's Rule"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "50 State Cramer's rule for a system of three linear equations in three variables.",
+            "explanation": "For \\(AX = B\\) with \\(|A| \\ne 0\\): \\(x_{1} = \\dfrac{D_{1}}{|A|}\\), \\(x_{2} = \\dfrac{D_{2}}{|A|}\\), \\(x_{3} = \\dfrac{D_{3}}{|A|}\\), where \\(D_{k}\\) is \\(|A|\\) with its \\(k\\)th column replaced by the constants \\(b_{1}, b_{2}, b_{3}\\).",
+            "book_ref": {
+              "topic_id": "7e662e40-07ba-503f-99c8-46dd09bd3d8b",
+              "quote": "The method of solving the system with the help of results (iii), (iv) and (v)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "51 For \\(x - y + z = 2,\\ 2x + y - z = 1,\\ x + 2y + 2z = 11\\), find \\(|A|\\) and say whether Cramer's rule can be used.",
+            "explanation": "\\(|A| = \\begin{vmatrix}1 & -1 & 1 \\\\ 2 & 1 & -1 \\\\ 1 & 2 & 2\\end{vmatrix} = 1(2 + 2) + 1(4 + 1) + 1(4 - 1) = 4 + 5 + 3 = 12 \\ne 0\\), so Cramer's rule can be used (unique solution).",
+            "book_ref": {
+              "topic_id": "7e662e40-07ba-503f-99c8-46dd09bd3d8b",
+              "quote": "Writing \\(D = |A|\\) and \\(D_1, D_2, D_3\\) for these determinants"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.9 System of Homogeneous Linear Equations"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "52 Define the trivial and non-trivial solutions of a homogeneous system. Why is such a system always consistent?",
+            "explanation": "Trivial solution: \\((0, 0, 0)\\). Non-trivial: any other solution. The system is always satisfied by \\(x_{1} = x_{2} = x_{3} = 0\\), so it always has at least one solution: it is consistent.",
+            "book_ref": {
+              "topic_id": "8c6dc2cd-a9f4-5256-85b0-67ffddb11093",
+              "quote": "Any other solution of system (i) other than the trivial solution is called a non-trivial solution."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "53 Does the system \\(x + y + z = 0,\\ x - y + 2z = 0,\\ 2x + y - z = 0\\) have a non-trivial solution?",
+            "explanation": "\\(|A| = 1(1 - 2) - 1(-1 - 4) + 1(1 + 2) = -1 + 5 + 3 = 7 \\ne 0\\). So only the trivial solution \\((0, 0, 0)\\); no non-trivial solution.",
+            "book_ref": {
+              "topic_id": "8c6dc2cd-a9f4-5256-85b0-67ffddb11093",
+              "quote": "The determinant of the coefficient matrix decides which case we are in"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.9.1 Solution of System of Homogeneous Linear Equations by Gaussian Elimination Method"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "54 State the two rules for the solutions of a homogeneous system in terms of rank.",
+            "explanation": "Rule I: only the trivial solution if rank of \\(A\\) = number of variables. Rule II: non-trivial solutions if rank of \\(A\\) < number of variables.",
+            "book_ref": {
+              "topic_id": "93b49ade-9439-5acb-9faf-462981537490",
+              "quote": "From above examples we observe that:"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "55 A homogeneous system reduces to \\(\\left[\\begin{array}{ccc|c}1 & 2 & -1 & 0 \\\\ 0 & 1 & -1 & 0 \\\\ 0 & 0 & 0 & 0\\end{array}\\right]\\). Find its general solution.",
+            "explanation": "Rank 2 < 3, so \\(z\\) is free: \\(z = t\\). From \\(y - z = 0\\): \\(y = t\\). From \\(x + 2y - z = 0\\): \\(x = -2t + t = -t\\). Solution \\((-t, t, t)\\).",
+            "book_ref": {
+              "topic_id": "93b49ade-9439-5acb-9faf-462981537490",
+              "quote": "If some variable has no leading entry, it is free"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.10 Applications of Matrices in Real World"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "56 Using a transformation matrix, find the reflection of the point \\((4, -1)\\) in the line \\(y = x\\).",
+            "explanation": "\\(\\begin{bmatrix}0 & 1 \\\\ 1 & 0\\end{bmatrix}\\begin{bmatrix}4 \\\\ -1\\end{bmatrix} = \\begin{bmatrix}0 - 1 \\\\ 4 + 0\\end{bmatrix} = \\begin{bmatrix}-1 \\\\ 4\\end{bmatrix}\\): the image is \\((-1, 4)\\).",
+            "book_ref": {
+              "topic_id": "eb19ad6a-9aa3-5539-87d9-0b15baf96c12",
+              "quote": "To reflect a matrix over the line \\(y = x\\), we multiply it by"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "57 Encode the word GO with \\(A = \\begin{bmatrix}2 & 1 \\\\ 1 & 1\\end{bmatrix}\\), where A to Z correspond to 1 to 26.",
+            "explanation": "G = 7, O = 15: \\(\\begin{bmatrix}2 & 1 \\\\ 1 & 1\\end{bmatrix}\\begin{bmatrix}7 \\\\ 15\\end{bmatrix} = \\begin{bmatrix}14 + 15 \\\\ 7 + 15\\end{bmatrix} = \\begin{bmatrix}29 \\\\ 22\\end{bmatrix}\\): the code is 29, 22.",
+            "book_ref": {
+              "topic_id": "eb19ad6a-9aa3-5539-87d9-0b15baf96c12",
+              "quote": "A code is a system of symbols, words or signals used to represent other words or meanings."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "58 The code \\(\\begin{bmatrix}21 \\\\ 13\\end{bmatrix}\\) was made with \\(A = \\begin{bmatrix}2 & 1 \\\\ 1 & 1\\end{bmatrix}\\) (A to Z = 1 to 26). Decode it.",
+            "explanation": "\\(|A| = 2 - 1 = 1\\), \\(A^{-1} = \\begin{bmatrix}1 & -1 \\\\ -1 & 2\\end{bmatrix}\\). \\(A^{-1}\\begin{bmatrix}21 \\\\ 13\\end{bmatrix} = \\begin{bmatrix}21 - 13 \\\\ -21 + 26\\end{bmatrix} = \\begin{bmatrix}8 \\\\ 5\\end{bmatrix}\\): H, E. The message is HE.",
+            "book_ref": {
+              "topic_id": "eb19ad6a-9aa3-5539-87d9-0b15baf96c12",
+              "quote": "To decode a message, we multiply coded matrix by the inverse of the given matrix."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
