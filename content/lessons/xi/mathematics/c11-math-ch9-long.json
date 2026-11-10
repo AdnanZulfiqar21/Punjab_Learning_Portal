@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH9-LONG",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch9",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch9/u-long-questions",
+      "title": "Long Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 175,
+          "pdf_to": 181,
+          "note": "Practice long questions written from Unit 9 (PDF 175-181, printed 170-176); not printed in the book. Based on the unit's text, theorems, formulas and worked examples (changed values); none repeats the unit's exercises. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice long questions for the whole of Unit 9 (Division of Polynomials), in the shape of a Board Section-II question part: each carries 5 marks (a longer problem, a proof or a derivation). Each one is solved in full, step by step."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Divide \\(2x^{4} - 3x^{3} + x^{2} + 5x - 4\\) by \\(x^{2} - x + 2\\). Find the quotient and remainder and verify the result. (5 marks)",
+            "explanation": "Divide leading term by leading term, multiply back, subtract, and repeat until the remainder has degree less than 2.",
+            "book_ref": {
+              "topic_id": "a5a377ae-2e8e-56de-9d7f-0331f52ed3fc",
+              "quote": "This unit studies the division of one polynomial by another to find the quotient and the remainder."
+            },
+            "steps": [
+              "\\(2x^{4} \\div x^{2} = 2x^{2}\\); \\(2x^{2}(x^{2} - x + 2) = 2x^{4} - 2x^{3} + 4x^{2}\\); subtract: \\(-x^{3} - 3x^{2} + 5x - 4\\)",
+              "\\(-x^{3} \\div x^{2} = -x\\); \\(-x(x^{2} - x + 2) = -x^{3} + x^{2} - 2x\\); subtract: \\(-4x^{2} + 7x - 4\\)",
+              "\\(-4x^{2} \\div x^{2} = -4\\); \\(-4(x^{2} - x + 2) = -4x^{2} + 4x - 8\\); subtract: \\(3x + 4\\)",
+              "The remainder \\(3x + 4\\) has degree 1 < 2, so we stop: quotient \\(2x^{2} - x - 4\\)",
+              "Check: \\((x^{2} - x + 2)(2x^{2} - x - 4) = 2x^{4} - 3x^{3} + x^{2} + 2x - 8\\); adding \\(3x + 4\\) gives \\(2x^{4} - 3x^{3} + x^{2} + 5x - 4\\)"
+            ],
+            "final_answer": "Quotient \\(= 2x^{2} - x - 4\\), remainder \\(= 3x + 4\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Divide \\(x^{4} + 2x^{3} - 3x^{2} + x - 1\\) by \\(x + 3\\) by long division, and check the remainder by the remainder theorem. (5 marks)",
+            "explanation": "Long division step by step; the remainder must equal f(-3).",
+            "book_ref": {
+              "topic_id": "a5a377ae-2e8e-56de-9d7f-0331f52ed3fc",
+              "quote": "This unit studies the division of one polynomial by another to find the quotient and the remainder."
+            },
+            "steps": [
+              "\\(x^{3}(x + 3) = x^{4} + 3x^{3}\\); subtract: \\(-x^{3} - 3x^{2} + x - 1\\)",
+              "\\(-x^{2}(x + 3) = -x^{3} - 3x^{2}\\); subtract: \\(0x^{2} + x - 1\\)",
+              "\\(0x\\) is the next quotient term; then \\(1(x + 3) = x + 3\\); subtract: \\(-4\\)",
+              "Quotient \\(x^{3} - x^{2} + 0x + 1 = x^{3} - x^{2} + 1\\), remainder \\(-4\\)",
+              "Check: \\(f(-3) = 81 - 54 - 27 - 3 - 1 = -4\\)"
+            ],
+            "final_answer": "Quotient \\(= x^{3} - x^{2} + 1\\), remainder \\(= -4 = f(-3)\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 State and prove the remainder theorem. Use it to find the remainder when \\(3x^{4} - 2x^{2} + x - 7\\) is divided by \\(x - 2\\). (5 marks)",
+            "explanation": "Write the division identity f(x) = (x - a)q(x) + R and put x = a.",
+            "book_ref": {
+              "topic_id": "d9487255-a0bd-5318-bf5c-31cfa1ef4685",
+              "quote": "till no \\(x\\)-term exists in the remainder, then \\(f(a)\\) is the remainder."
+            },
+            "steps": [
+              "Statement: if \\(f(x)\\) of degree \\(n \\ge 1\\) is divided by \\(x - a\\) till no \\(x\\)-term exists in the remainder, then the remainder is \\(f(a)\\)",
+              "Proof: there is a unique quotient \\(q(x)\\) and remainder \\(R\\) with \\(f(x) = (x - a)q(x) + R\\) ...(i)",
+              "Put \\(x = a\\) in (i): \\(f(a) = (a - a)q(a) + R = 0 \\cdot q(a) + R = R\\). Hence remainder \\(= f(a)\\)",
+              "Here \\(a = 2\\): remainder \\(= f(2) = 3(16) - 2(4) + 2 - 7\\)",
+              "\\(= 48 - 8 + 2 - 7 = 35\\)"
+            ],
+            "final_answer": "Hence proved: remainder \\(= f(a)\\). The required remainder is \\(35\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 The polynomial \\(x^{3} + ax^{2} + bx + 6\\) leaves remainder 2 when divided by \\(x - 1\\) and remainder 6 when divided by \\(x + 1\\). Find \\(a\\) and \\(b\\). (5 marks)",
+            "explanation": "Each remainder gives one equation by the remainder theorem; solve the pair.",
+            "book_ref": {
+              "topic_id": "d9487255-a0bd-5318-bf5c-31cfa1ef4685",
+              "quote": "till no \\(x\\)-term exists in the remainder, then \\(f(a)\\) is the remainder."
+            },
+            "steps": [
+              "\\(f(1) = 1 + a + b + 6 = 2 \\Rightarrow a + b = -5\\) ...(i)",
+              "\\(f(-1) = -1 + a - b + 6 = 6 \\Rightarrow a - b = 1\\) ...(ii)",
+              "Adding (i) and (ii): \\(2a = -4 \\Rightarrow a = -2\\)",
+              "From (i): \\(b = -5 - a = -3\\)",
+              "Check: \\(f(x) = x^{3} - 2x^{2} - 3x + 6\\); \\(f(1) = 2\\), \\(f(-1) = -1 - 2 + 3 + 6 = 6\\)"
+            ],
+            "final_answer": "\\(a = -2\\), \\(b = -3\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 State and prove the factor theorem. Use it to show that \\(x - 2\\) and \\(x + 3\\) are factors of \\(x^{3} + 2x^{2} - 5x - 6\\), and find the third factor. (5 marks)",
+            "explanation": "Use the remainder theorem with R = f(a) in both directions; then divide by the product of the two factors.",
+            "book_ref": {
+              "topic_id": "428febb3-efcc-5cb9-94fc-fe0456d179f9",
+              "quote": "is a factor of the polynomial \\(f(x)\\) iff \\(f(a) = 0\\)."
+            },
+            "steps": [
+              "Statement: \\(x - a\\) is a factor of \\(f(x)\\) iff \\(f(a) = 0\\)",
+              "Proof: \\(f(x) = (x - a)q(x) + R\\) with \\(R = f(a)\\). If \\(f(a) = 0\\), then \\(R = 0\\) and \\(f(x) = (x - a)q(x)\\): \\(x - a\\) is a factor",
+              "Conversely, if \\(f(x) = (x - a)q(x)\\), then \\(f(a) = (a - a)q(a) = 0\\)",
+              "\\(f(2) = 8 + 8 - 10 - 6 = 0\\) and \\(f(-3) = -27 + 18 + 15 - 6 = 0\\), so \\(x - 2\\) and \\(x + 3\\) are factors",
+              "\\((x - 2)(x + 3) = x^{2} + x - 6\\) and \\(x^{3} + 2x^{2} - 5x - 6 = (x^{2} + x - 6)(x + 1)\\), so the third factor is \\(x + 1\\)"
+            ],
+            "final_answer": "Hence proved. \\(x^{3} + 2x^{2} - 5x - 6 = (x - 2)(x + 3)(x + 1)\\); the third factor is \\(x + 1\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 If \\(x - 1\\) and \\(x - 3\\) are factors of \\(x^{3} + px^{2} + qx - 3\\), find \\(p\\) and \\(q\\) and factorize the polynomial completely. (5 marks)",
+            "explanation": "Set f(1) = 0 and f(3) = 0, solve, then divide out the known factors.",
+            "book_ref": {
+              "topic_id": "428febb3-efcc-5cb9-94fc-fe0456d179f9",
+              "quote": "is a factor of the polynomial \\(f(x)\\) iff \\(f(a) = 0\\)."
+            },
+            "steps": [
+              "\\(f(1) = 1 + p + q - 3 = 0 \\Rightarrow p + q = 2\\) ...(i)",
+              "\\(f(3) = 27 + 9p + 3q - 3 = 0 \\Rightarrow 3p + q = -8\\) ...(ii)",
+              "(ii) \\(-\\) (i): \\(2p = -10 \\Rightarrow p = -5\\); then \\(q = 7\\)",
+              "\\(f(x) = x^{3} - 5x^{2} + 7x - 3\\); \\((x - 1)(x - 3) = x^{2} - 4x + 3\\)",
+              "\\(x^{3} - 5x^{2} + 7x - 3 = (x^{2} - 4x + 3)(x - 1)\\)"
+            ],
+            "final_answer": "\\(p = -5\\), \\(q = 7\\); \\(x^{3} - 5x^{2} + 7x - 3 = (x - 1)^{2}(x - 3)\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 If \\(-1\\) and \\(3\\) are roots of \\(x^{3} + ax^{2} + bx + 3 = 0\\), find \\(a\\) and \\(b\\), and find the third root. (5 marks)",
+            "explanation": "A root a gives f(a) = 0, i.e. x - a is a factor; two roots give two equations.",
+            "book_ref": {
+              "topic_id": "428febb3-efcc-5cb9-94fc-fe0456d179f9",
+              "quote": "is the root of the polynomial equation"
+            },
+            "steps": [
+              "\\(f(-1) = -1 + a - b + 3 = 0 \\Rightarrow a - b = -2\\) ...(i)",
+              "\\(f(3) = 27 + 9a + 3b + 3 = 0 \\Rightarrow 3a + b = -10\\) ...(ii)",
+              "Adding: \\(4a = -12 \\Rightarrow a = -3\\); then \\(b = -1\\)",
+              "\\(f(x) = x^{3} - 3x^{2} - x + 3\\); \\((x + 1)(x - 3) = x^{2} - 2x - 3\\)",
+              "\\(x^{3} - 3x^{2} - x + 3 = (x^{2} - 2x - 3)(x - 1)\\), so the third factor is \\(x - 1\\) and the third root is \\(1\\)"
+            ],
+            "final_answer": "\\(a = -3\\), \\(b = -1\\); the third root is \\(x = 1\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Find \\(k\\) if \\(x - 2\\) is a factor of \\(x^{3} + kx^{2} - 4x + 12\\). Then factorize the polynomial completely using synthetic division. (5 marks)",
+            "explanation": "Factor theorem gives k; synthetic division by x - 2 gives a quadratic quotient to factorize.",
+            "book_ref": {
+              "topic_id": "428febb3-efcc-5cb9-94fc-fe0456d179f9",
+              "quote": "is a factor of the polynomial \\(f(x)\\) iff \\(f(a) = 0\\)."
+            },
+            "steps": [
+              "\\(f(2) = 8 + 4k - 8 + 12 = 4k + 12 = 0 \\Rightarrow k = -3\\)",
+              "\\(f(x) = x^{3} - 3x^{2} - 4x + 12\\)",
+              "\\(a = 2\\): first line \\(1, -3, -4, 12\\); third line \\(1, -1, -6, 0\\)",
+              "Quotient \\(x^{2} - x - 6 = (x - 3)(x + 2)\\)"
+            ],
+            "final_answer": "\\(k = -3\\); \\(x^{3} - 3x^{2} - 4x + 12 = (x - 2)(x - 3)(x + 2)\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 If \\(x - 1\\) and \\(x + 2\\) are factors of \\(x^{4} - 5x^{2} + 4\\), use synthetic division to find the other two factors. (5 marks)",
+            "explanation": "Divide synthetically by x - 1, then divide the quotient by x + 2; factorize the quadratic left over.",
+            "book_ref": {
+              "topic_id": "d2975598-fd61-5c14-a676-0ff3862b764a",
+              "quote": "Use the following patterns to write the second and third lines:"
+            },
+            "steps": [
+              "First line (0 for \\(x^{3}\\) and \\(x\\)): \\(1, 0, -5, 0, 4\\); \\(a = 1\\)",
+              "Third line \\(1, 1, -4, -4, 0\\): remainder 0, quotient \\(x^{3} + x^{2} - 4x - 4\\)",
+              "Divide \\(1, 1, -4, -4\\) by \\(x + 2\\) (\\(a = -2\\)): third line \\(1, -1, -2, 0\\)",
+              "Quotient \\(x^{2} - x - 2 = (x - 2)(x + 1)\\)"
+            ],
+            "final_answer": "The other two factors are \\(x - 2\\) and \\(x + 1\\): \\(x^{4} - 5x^{2} + 4 = (x - 1)(x + 2)(x - 2)(x + 1)\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Use synthetic division to show that \\(x = 2\\) and \\(x = -1\\) are zeros of \\(2x^{4} - x^{3} - 8x^{2} + x + 6\\), and factorize it completely. (5 marks)",
+            "explanation": "A zero remainder in synthetic division shows a zero; divide twice and factorize the quadratic.",
+            "book_ref": {
+              "topic_id": "d2975598-fd61-5c14-a676-0ff3862b764a",
+              "quote": "Use the following patterns to write the second and third lines:"
+            },
+            "steps": [
+              "\\(a = 2\\): first line \\(2, -1, -8, 1, 6\\); third line \\(2, 3, -2, -3, 0\\): remainder 0, so \\(x = 2\\) is a zero",
+              "\\(a = -1\\) on \\(2, 3, -2, -3\\): third line \\(2, 1, -3, 0\\): remainder 0, so \\(x = -1\\) is a zero",
+              "Remaining quotient \\(2x^{2} + x - 3\\)",
+              "\\(2x^{2} + x - 3 = 2x^{2} + 3x - 2x - 3 = (2x + 3)(x - 1)\\)"
+            ],
+            "final_answer": "\\(2x^{4} - x^{3} - 8x^{2} + x + 6 = (x - 2)(x + 1)(x - 1)(2x + 3)\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Use synthetic division to find the quotient and remainder when \\(3x^{4} - 2x^{3} + 5x - 7\\) is divided by \\(x + 2\\). Verify the remainder by the remainder theorem. (5 marks)",
+            "explanation": "Write all coefficients with 0 for the missing x² term and use a = -2.",
+            "book_ref": {
+              "topic_id": "d2975598-fd61-5c14-a676-0ff3862b764a",
+              "quote": "Insert 0 for any missing term."
+            },
+            "steps": [
+              "\\(a = -2\\); first line \\(3, -2, 0, 5, -7\\)",
+              "Second line (multiply by \\(-2\\)): \\(-6, 16, -32, 54\\)",
+              "Third line (add): \\(3, -8, 16, -27, 47\\)",
+              "Quotient \\(3x^{3} - 8x^{2} + 16x - 27\\), remainder \\(47\\)",
+              "Check: \\(f(-2) = 48 + 16 - 10 - 7 = 47\\)"
+            ],
+            "final_answer": "Quotient \\(= 3x^{3} - 8x^{2} + 16x - 27\\), remainder \\(= 47\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 If \\(x - 2\\) and \\(x + 1\\) are factors of \\(x^{3} + px^{2} + qx - 4\\), use synthetic division to find \\(p\\) and \\(q\\), and factorize the polynomial. (5 marks)",
+            "explanation": "For each factor the last number of the third line (the remainder) must be zero.",
+            "book_ref": {
+              "topic_id": "d2975598-fd61-5c14-a676-0ff3862b764a",
+              "quote": "Use the following patterns to write the second and third lines:"
+            },
+            "steps": [
+              "\\(a = 2\\) on \\(1, p, q, -4\\): third line \\(1,\\ p + 2,\\ 2p + q + 4,\\ 4p + 2q + 4\\); remainder \\(4p + 2q + 4 = 0 \\Rightarrow 2p + q = -2\\)",
+              "\\(a = -1\\) on \\(1, p, q, -4\\): third line \\(1,\\ p - 1,\\ q - p + 1,\\ p - q - 5\\); remainder \\(p - q - 5 = 0 \\Rightarrow p - q = 5\\)",
+              "Adding: \\(3p = 3 \\Rightarrow p = 1\\); then \\(q = -4\\)",
+              "\\(f(x) = x^{3} + x^{2} - 4x - 4\\); with \\(a = 2\\) the quotient is \\(x^{2} + 3x + 2 = (x + 1)(x + 2)\\)"
+            ],
+            "final_answer": "\\(p = 1\\), \\(q = -4\\); \\(x^{3} + x^{2} - 4x - 4 = (x - 2)(x + 1)(x + 2)\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 A regression model \\(P(x) = 2x^{3} - x^{2} + 3x + 1\\) is fitted to monthly sales data. The observed sales in the 4th month are 130 units. Using synthetic division (remainder theorem) find the predicted sales, the error and the percentage error. (5 marks)",
+            "explanation": "The predicted value P(4) is the remainder on dividing by x - 4; Error = Observed - Predicted; percentage error = |Error/Observed| × 100.",
+            "book_ref": {
+              "topic_id": "977a7c02-b0ac-5d88-8eb4-168a8ef84ff2",
+              "quote": "It is a type of regression analysis where the relationship"
+            },
+            "steps": [
+              "\\(a = 4\\): first line \\(2, -1, 3, 1\\); third line \\(2, 7, 31, 125\\)",
+              "Predicted sales \\(= P(4) = 125\\) units (check: \\(128 - 16 + 12 + 1 = 125\\))",
+              "Error \\(= 130 - 125 = 5\\) units",
+              "Percentage error \\(= \\left|\\dfrac{5}{130}\\right| \\times 100 = \\dfrac{50}{13}\\% \\approx 3.85\\%\\)"
+            ],
+            "final_answer": "Predicted 125 units; error 5 units; percentage error \\(\\dfrac{50}{13}\\% \\approx 3.85\\%\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 A system is represented by \\(P(z) = z^{4} + 2z^{3} - z^{2} - 2z\\). Show that the system response is zero at \\(z = 1\\) and \\(z = -2\\), and factorize \\(P(z)\\) completely. (5 marks)",
+            "explanation": "Zero responses give factors z - 1 and z + 2 (factor theorem); synthetic division removes them.",
+            "book_ref": {
+              "topic_id": "977a7c02-b0ac-5d88-8eb4-168a8ef84ff2",
+              "quote": "If the remainder is zero, it means that the system has no error at that input."
+            },
+            "steps": [
+              "\\(P(1) = 1 + 2 - 1 - 2 = 0\\) and \\(P(-2) = 16 - 16 - 4 + 4 = 0\\): no error at these inputs, so \\(z - 1\\) and \\(z + 2\\) are factors",
+              "\\(a = 1\\) on \\(1, 2, -1, -2, 0\\): third line \\(1, 3, 2, 0, 0\\); quotient \\(z^{3} + 3z^{2} + 2z\\)",
+              "\\(a = -2\\) on \\(1, 3, 2, 0\\): third line \\(1, 1, 0, 0\\); quotient \\(z^{2} + z\\)",
+              "\\(z^{2} + z = z(z + 1)\\)"
+            ],
+            "final_answer": "\\(P(z) = z(z - 1)(z + 1)(z + 2)\\); the response is zero at \\(z = 0, 1, -1, -2\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

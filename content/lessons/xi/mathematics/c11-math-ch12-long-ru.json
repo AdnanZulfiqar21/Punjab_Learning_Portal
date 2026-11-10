@@ -1,0 +1,402 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH12-LONG-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch12",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch12/u-long-questions",
+      "title": "Long Questions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH12-LONG",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 223,
+          "pdf_to": 241,
+          "note": "Roman Urdu: practice long questions written from Unit 12 (PDF 223-241), not printed in the book; same questions and order as the English set. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Yeh Unit 12 (Limit and Continuity) ke poore unit se practice long questions (tafseeli sawal) hain, Board ke Section-II ke sawal ke hisse ki shakal mein: har sawal 5 number ka hai (lamba sawal, saboot (proof) ya derivation). Har sawal poore qadmon ke saath hal kiya gaya hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Evaluate (i) \\(\\lim_{x \\to 3}\\frac{x^{2} - x - 6}{x^{2} - 9}\\) (ii) \\(\\lim_{x \\to 5}\\frac{x - 5}{\\sqrt{x + 4} - 3}\\). (5 marks)\n(Nikalein: (i) \\(\\lim_{x \\to 3}\\frac{x^{2} - x - 6}{x^{2} - 9}\\) (ii) \\(\\lim_{x \\to 5}\\frac{x - 5}{\\sqrt{x + 4} - 3}\\).)",
+            "explanation": "Dono mein \\(\\frac{0}{0}\\): (i) mein factors, (ii) mein denominator ko rationalize karein.",
+            "book_ref": {
+              "topic_id": "dae59391-de49-5d37-af0b-cce44fdbb367",
+              "quote": "We simplify the given function by using the algebraic technique of making factors"
+            },
+            "steps": [
+              "(i) \\(x = 3\\) par: \\(\\frac{9 - 3 - 6}{9 - 9} = \\frac{0}{0}\\). Factors: \\(\\frac{(x - 3)(x + 2)}{(x - 3)(x + 3)}\\).",
+              "\\(x - 3 \\ne 0\\) cancel karein: \\(\\lim_{x \\to 3}\\frac{x + 2}{x + 3} = \\frac{5}{6}\\).",
+              "(ii) \\(x = 5\\) par: \\(\\frac{0}{\\sqrt{9} - 3} = \\frac{0}{0}\\). Upar neeche \\(\\sqrt{x + 4} + 3\\) se zarb dein.",
+              "\\(\\frac{(x - 5)\\left(\\sqrt{x + 4} + 3\\right)}{(x + 4) - 9} = \\frac{(x - 5)\\left(\\sqrt{x + 4} + 3\\right)}{x - 5} = \\sqrt{x + 4} + 3\\)",
+              "\\(\\lim_{x \\to 5}\\left(\\sqrt{x + 4} + 3\\right) = 3 + 3 = 6\\)."
+            ],
+            "final_answer": "(i) \\(\\frac{5}{6}\\) (ii) \\(6\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Prove that \\(\\lim_{x \\to a}\\frac{x^{n} - a^{n}}{x - a} = na^{n-1}\\) when \\(n\\) is a positive integer. (5 marks)\n(Saabit karein ke jab \\(n\\) positive integer ho to \\(\\lim_{x \\to a}\\frac{x^{n} - a^{n}}{x - a} = na^{n-1}\\).)",
+            "explanation": "Rakhne se \\(\\frac{0}{0}\\) aata hai; \\(x^{n} - a^{n}\\) ke factors banayein, \\(x - a\\) cancel karein, phir rakhein.",
+            "book_ref": {
+              "topic_id": "63863e9c-f49d-5702-bdc0-93c7ca1a0594",
+              "quote": "Suppose \\(n\\) is a positive integer."
+            },
+            "steps": [
+              "\\(x = a\\) rakhne se \\(\\frac{a^{n} - a^{n}}{a - a} = \\frac{0}{0}\\), is liye factors banate hain.",
+              "\\(x^{n} - a^{n} = (x - a)\\left(x^{n-1} + ax^{n-2} + a^{2}x^{n-3} + \\dots + a^{n-1}\\right)\\), bracket mein \\(n\\) terms.",
+              "\\(\\lim_{x \\to a}\\frac{x^{n} - a^{n}}{x - a} = \\lim_{x \\to a}\\left(x^{n-1} + ax^{n-2} + \\dots + a^{n-1}\\right)\\), \\(x - a \\ne 0\\) cancel karke.",
+              "\\(x = a\\) rakhne se: \\(a^{n-1} + a\\cdot a^{n-2} + a^{2}a^{n-3} + \\dots + a^{n-1}\\).",
+              "Har term \\(a^{n-1}\\) hai (powers ka jor \\(n - 1\\)), aur \\(n\\) terms hain: majmooa \\(na^{n-1}\\)."
+            ],
+            "final_answer": "Saabit hua: har positive integer \\(n\\) ke liye \\(\\lim_{x \\to a}\\frac{x^{n} - a^{n}}{x - a} = na^{n-1}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Prove that \\(\\lim_{x \\to a}\\frac{x^{n} - a^{n}}{x - a} = na^{n-1}\\) when \\(n\\) is a negative integer (\\(a > 0\\)). Use the result for positive integers. (5 marks)\n(Saabit karein ke jab \\(n\\) negative integer ho (\\(a > 0\\)) to \\(\\lim_{x \\to a}\\frac{x^{n} - a^{n}}{x - a} = na^{n-1}\\). Positive integers wala natija istemal karein.)",
+            "explanation": "\\(n = -m\\) rakhein (\\(m\\) positive integer), positive powers mein likhein aur Case 1 istemal karein.",
+            "book_ref": {
+              "topic_id": "63863e9c-f49d-5702-bdc0-93c7ca1a0594",
+              "quote": "where \\(m\\) is a positive integer"
+            },
+            "steps": [
+              "\\(n = -m\\) rakhein, jahan \\(m\\) positive integer hai.",
+              "\\(\\frac{x^{n} - a^{n}}{x - a} = \\frac{\\frac{1}{x^{m}} - \\frac{1}{a^{m}}}{x - a} = \\frac{a^{m} - x^{m}}{x^{m}a^{m}(x - a)} = \\left(\\frac{-1}{x^{m}a^{m}}\\right)\\left(\\frac{x^{m} - a^{m}}{x - a}\\right)\\)",
+              "\\(\\lim_{x \\to a}\\frac{x^{n} - a^{n}}{x - a} = \\lim_{x \\to a}\\left(\\frac{-1}{x^{m}a^{m}}\\right)\\cdot\\lim_{x \\to a}\\frac{x^{m} - a^{m}}{x - a}\\) (product ki limit)",
+              "\\(= \\frac{-1}{a^{m}a^{m}}\\left(ma^{m-1}\\right)\\) (Case 1 se) \\(= -ma^{m-1-2m} = -ma^{-m-1}\\)",
+              "\\(n = -m\\) ke saath: \\(-ma^{-m-1} = na^{n-1}\\)."
+            ],
+            "final_answer": "Saabit hua: har negative integer \\(n\\) ke liye bhi \\(\\lim_{x \\to a}\\frac{x^{n} - a^{n}}{x - a} = na^{n-1}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Prove that \\(\\lim_{x \\to 0}\\frac{\\sqrt{x + a} - \\sqrt{a}}{x} = \\frac{1}{2\\sqrt{a}}\\), \\(a > 0\\). Hence evaluate \\(\\lim_{x \\to 0}\\frac{\\sqrt{x + 25} - 5}{x}\\). (5 marks)\n(Saabit karein ke \\(\\lim_{x \\to 0}\\frac{\\sqrt{x + a} - \\sqrt{a}}{x} = \\frac{1}{2\\sqrt{a}}\\), \\(a > 0\\). Phir \\(\\lim_{x \\to 0}\\frac{\\sqrt{x + 25} - 5}{x}\\) nikalein.)",
+            "explanation": "Square roots ki wajah se \\(\\frac{0}{0}\\): numerator ko conjugate \\(\\sqrt{x + a} + \\sqrt{a}\\) se rationalize karein.",
+            "book_ref": {
+              "topic_id": "c9b85ca4-da32-5eac-9b17-48d70cd7598f",
+              "quote": "so rationalizing the numerator"
+            },
+            "steps": [
+              "\\(x = 0\\) rakhne se \\(\\frac{\\sqrt{a} - \\sqrt{a}}{0} = \\frac{0}{0}\\).",
+              "\\(\\frac{\\sqrt{x + a} - \\sqrt{a}}{x}\\cdot\\frac{\\sqrt{x + a} + \\sqrt{a}}{\\sqrt{x + a} + \\sqrt{a}} = \\frac{(x + a) - a}{x\\left(\\sqrt{x + a} + \\sqrt{a}\\right)} = \\frac{x}{x\\left(\\sqrt{x + a} + \\sqrt{a}\\right)}\\)",
+              "\\(x \\ne 0\\) cancel karke: \\(\\lim_{x \\to 0}\\frac{1}{\\sqrt{x + a} + \\sqrt{a}} = \\frac{1}{\\sqrt{a} + \\sqrt{a}} = \\frac{1}{2\\sqrt{a}}\\).",
+              "Doosri limit mein \\(5 = \\sqrt{25}\\), yani \\(a = 25\\) wali shakal.",
+              "\\(\\lim_{x \\to 0}\\frac{\\sqrt{x + 25} - \\sqrt{25}}{x} = \\frac{1}{2\\sqrt{25}} = \\frac{1}{10}\\)."
+            ],
+            "final_answer": "Saabit hua: \\(\\lim_{x \\to 0}\\frac{\\sqrt{x + a} - \\sqrt{a}}{x} = \\frac{1}{2\\sqrt{a}}\\); aur \\(\\lim_{x \\to 0}\\frac{\\sqrt{x + 25} - 5}{x} = \\frac{1}{10}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Prove from the definition that the sequence \\(a_{n} = \\frac{3}{n}\\) converges to \\(0\\). Find a suitable \\(N\\) when \\(\\varepsilon = 0.001\\). (5 marks)\n(Definition se saabit karein ke sequence \\(a_{n} = \\frac{3}{n}\\), \\(0\\) ki taraf converge karti hai. \\(\\varepsilon = 0.001\\) ke liye munasib \\(N\\) maloom karein.)",
+            "explanation": "Har \\(\\varepsilon > 0\\) ke liye sirf \\(\\varepsilon\\) par munhasir position \\(N\\) dhoondein jis ke baad \\(|a_{n} - 0| < \\varepsilon\\).",
+            "book_ref": {
+              "topic_id": "0a51ef26-d9af-52d2-9860-8b2ba4f79e6f",
+              "quote": "for any arbitrarily small positive number"
+            },
+            "steps": [
+              "\\(|a_{n} - 0| = \\left|\\frac{3}{n}\\right| = \\frac{3}{n}\\), kyunke \\(n\\) positive integer hai.",
+              "\\(\\frac{3}{n} < \\varepsilon \\Leftrightarrow n > \\frac{3}{\\varepsilon}\\); is liye aisa positive integer \\(N \\ge \\frac{3}{\\varepsilon}\\) chunein.",
+              "\\(n > N\\) par: \\(|a_{n} - 0| = \\frac{3}{n} < \\frac{3}{N} \\le \\varepsilon\\).",
+              "Yeh har \\(\\varepsilon > 0\\) ke liye durust hai, is liye definition se \\(\\lim_{n \\to \\infty}\\frac{3}{n} = 0\\).",
+              "\\(\\varepsilon = 0.001\\) ke liye: \\(N \\ge \\frac{3}{0.001} = 3000\\), \\(N = 3000\\) lein; maslan \\(a_{3001} = \\frac{3}{3001} \\approx 0.00099967 < 0.001\\)."
+            ],
+            "final_answer": "Saabit hua: \\(\\lim_{n \\to \\infty}\\frac{3}{n} = 0\\); \\(\\varepsilon = 0.001\\) ke liye \\(N = 3000\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Find the limits of the sequences, if they exist: (i) \\(a_{n} = \\frac{n^{2} + 3n}{4n^{2} - 1}\\) (ii) \\(b_{n} = \\frac{(-1)^{n}\\,n}{n + 1}\\) (look at the even and odd terms). (5 marks)\n(Sequences ki limits nikalein agar maujood hon: (i) \\(a_{n} = \\frac{n^{2} + 3n}{4n^{2} - 1}\\) (ii) \\(b_{n} = \\frac{(-1)^{n}\\,n}{n + 1}\\) (juft aur taaq terms dekhein).)",
+            "explanation": "(i) \\(n^{2}\\) common lein aur \\(\\frac{a}{n^{p}} \\to 0\\) istemal karein. (ii) Dekhein ke terms aik qeemat ke qareeb tehartin ya nahi.",
+            "book_ref": {
+              "topic_id": "0a51ef26-d9af-52d2-9860-8b2ba4f79e6f",
+              "quote": "Find the limit of the sequence"
+            },
+            "steps": [
+              "(i) \\(a_{n} = \\frac{n^{2}\\left(1 + \\frac{3}{n}\\right)}{n^{2}\\left(4 - \\frac{1}{n^{2}}\\right)} = \\frac{1 + \\frac{3}{n}}{4 - \\frac{1}{n^{2}}}\\)",
+              "\\(n \\to \\infty\\) par: \\(\\frac{1 + 0}{4 - 0} = \\frac{1}{4}\\).",
+              "(ii) Juft (even) \\(n\\): \\(b_{n} = \\frac{n}{n + 1} = \\frac{1}{1 + \\frac{1}{n}} \\to 1\\) (maslan \\(b_{100} = \\frac{100}{101}\\)).",
+              "Taaq (odd) \\(n\\): \\(b_{n} = -\\frac{n}{n + 1} \\to -1\\) (maslan \\(b_{101} = -\\frac{101}{102}\\)).",
+              "Terms \\(1\\) aur \\(-1\\) ke qareeb qeematon ke darmiyan jhoolti rehti hain, aik qeemat par nahi tehartin, is liye \\(\\{b_{n}\\}\\) diverge karti hai."
+            ],
+            "final_answer": "(i) \\(\\frac{1}{4}\\) (ii) limit maujood nahi (sequence jhoolne ki wajah se diverge karti hai)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Evaluate (i) \\(\\lim_{x \\to +\\infty}\\frac{3x^{3} - 2x + 1}{6x^{3} + x^{2} - 4}\\) (ii) \\(\\lim_{x \\to -\\infty}\\frac{2x^{4} + x}{-x^{3} + 5}\\). (5 marks)\n(Nikalein: (i) \\(\\lim_{x \\to +\\infty}\\frac{3x^{3} - 2x + 1}{6x^{3} + x^{2} - 4}\\) (ii) \\(\\lim_{x \\to -\\infty}\\frac{2x^{4} + x}{-x^{3} + 5}\\).)",
+            "explanation": "Har term ko denominator ki sab se bari power (dono mein \\(x^{3}\\)) se taqseem karein, phir \\(\\frac{a}{x^{p}} \\to 0\\).",
+            "book_ref": {
+              "topic_id": "a2d7026d-868c-50a7-a0de-74aa168d670a",
+              "quote": "In this case we first divide each term of both the numerator and the denominator"
+            },
+            "steps": [
+              "(i) \\(= \\lim_{x \\to +\\infty}\\frac{3 - \\frac{2}{x^{2}} + \\frac{1}{x^{3}}}{6 + \\frac{1}{x} - \\frac{4}{x^{3}}}\\)",
+              "\\(= \\frac{3 - 0 + 0}{6 + 0 - 0} = \\frac{1}{2}\\)",
+              "(ii) \\(= \\lim_{x \\to -\\infty}\\frac{2x + \\frac{1}{x^{2}}}{-1 + \\frac{5}{x^{3}}}\\)",
+              "\\(x \\to -\\infty\\) par: \\(\\frac{1}{x^{2}} \\to 0\\), \\(\\frac{5}{x^{3}} \\to 0\\), denominator \\(\\to -1\\), aur \\(2x\\) manfi hai aur size mein beghair had barhta hai.",
+              "Bohat bara manfi number \\(-1\\) se taqseem ho to bohat bara musbat number banta hai, is liye limit \\(+\\infty\\) (jaanch: \\(x = -100\\) par taqreeban \\(1.9999 \\times 10^{2}\\))."
+            ],
+            "final_answer": "(i) \\(\\frac{1}{2}\\) (ii) \\(+\\infty\\) (koi finite limit nahi)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Evaluate (i) \\(\\lim_{x \\to +\\infty}\\frac{5x - 2}{\\sqrt{x^{2} + 4x}}\\) (ii) \\(\\lim_{x \\to -\\infty}\\frac{5x - 2}{\\sqrt{x^{2} + 4x}}\\). (5 marks)\n(Nikalein: (i) \\(\\lim_{x \\to +\\infty}\\frac{5x - 2}{\\sqrt{x^{2} + 4x}}\\) (ii) \\(\\lim_{x \\to -\\infty}\\frac{5x - 2}{\\sqrt{x^{2} + 4x}}\\).)",
+            "explanation": "Denominator \\(\\sqrt{x^{2}} = |x|\\) jaisa hai: \\(x > 0\\) par \\(x\\) se, \\(x < 0\\) par \\(-x\\) se taqseem karein.",
+            "book_ref": {
+              "topic_id": "a2d7026d-868c-50a7-a0de-74aa168d670a",
+              "quote": "Here \\(\\sqrt{x^{2}} = |x| = -x\\) as \\(x < 0\\)."
+            },
+            "steps": [
+              "(i) \\(x > 0\\) par \\(\\sqrt{x^{2}} = x\\). Upar neeche \\(x\\) se taqseem: \\(\\frac{5 - \\frac{2}{x}}{\\sqrt{1 + \\frac{4}{x}}}\\).",
+              "\\(x \\to +\\infty\\) par: \\(\\frac{5 - 0}{\\sqrt{1 + 0}} = 5\\).",
+              "(ii) \\(x < 0\\) par \\(\\sqrt{x^{2}} = |x| = -x\\). Upar neeche \\(-x\\) se taqseem.",
+              "Numerator: \\(\\frac{5x - 2}{-x} = -5 + \\frac{2}{x}\\); denominator: \\(\\frac{\\sqrt{x^{2} + 4x}}{\\sqrt{x^{2}}} = \\sqrt{1 + \\frac{4}{x}}\\).",
+              "\\(x \\to -\\infty\\) par: \\(\\frac{-5 + 0}{\\sqrt{1 + 0}} = -5\\)."
+            ],
+            "final_answer": "(i) \\(5\\) (ii) \\(-5\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "Dhyan dein: \\(x \\to -\\infty\\) par \\(\\sqrt{x^{2}} = -x\\) likhna hi jawab ka sign tay karta hai. Agar ghalti se \\(\\sqrt{x^{2}} = x\\) likh dein to (ii) ka jawab bhi \\(5\\) aa jayega, jo ghalat hai: \\(x = -1000\\) par qeemat taqreeban \\(-5\\) hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Show that \\(\\lim_{n \\to +\\infty}\\left(1 + \\frac{1}{n}\\right)^{n} = e\\), and deduce that \\(\\lim_{x \\to 0}(1 + x)^{\\frac{1}{x}} = e\\). (5 marks)\n(Dikhayein ke \\(\\lim_{n \\to +\\infty}\\left(1 + \\frac{1}{n}\\right)^{n} = e\\), aur is se natija nikalein ke \\(\\lim_{x \\to 0}(1 + x)^{\\frac{1}{x}} = e\\).)",
+            "explanation": "Binomial theorem se phelayein, har term mein \\(n \\to \\infty\\) karein, phir \\(n = \\frac{1}{x}\\) rakhein.",
+            "book_ref": {
+              "topic_id": "86e64fdd-e894-5669-9e82-4ed873a48e97",
+              "quote": "By the binomial theorem, we have"
+            },
+            "steps": [
+              "\\(\\left(1 + \\frac{1}{n}\\right)^{n} = 1 + n\\left(\\frac{1}{n}\\right) + \\frac{n(n - 1)}{2!}\\left(\\frac{1}{n}\\right)^{2} + \\frac{n(n - 1)(n - 2)}{3!}\\left(\\frac{1}{n}\\right)^{3} + \\dots\\)",
+              "\\(= 1 + 1 + \\frac{1}{2!}\\left(1 - \\frac{1}{n}\\right) + \\frac{1}{3!}\\left(1 - \\frac{1}{n}\\right)\\left(1 - \\frac{2}{n}\\right) + \\dots\\) (har factor ko aik \\(n\\) se taqseem)",
+              "\\(n \\to +\\infty\\) par \\(\\frac{1}{n}, \\frac{2}{n}, \\dots \\to 0\\): \\(\\lim_{n \\to +\\infty}\\left(1 + \\frac{1}{n}\\right)^{n} = 1 + 1 + \\frac{1}{2!} + \\frac{1}{3!} + \\frac{1}{4!} + \\dots\\)",
+              "\\(= 2.718281\\dots = e\\).",
+              "\\(n = \\frac{1}{x}\\) rakhein: \\(\\left(1 + \\frac{1}{n}\\right)^{n} = (1 + x)^{\\frac{1}{x}}\\), aur \\(n \\to \\infty\\) par \\(x \\to 0\\); is liye \\(\\lim_{x \\to 0}(1 + x)^{\\frac{1}{x}} = e\\)."
+            ],
+            "final_answer": "Saabit hua: \\(\\lim_{n \\to +\\infty}\\left(1 + \\frac{1}{n}\\right)^{n} = e \\approx 2.718281\\) aur \\(\\lim_{x \\to 0}(1 + x)^{\\frac{1}{x}} = e\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Express each limit in terms of \\(e\\): (i) \\(\\lim_{n \\to +\\infty}\\left(1 + \\frac{5}{n}\\right)^{\\frac{n}{2}}\\) (ii) \\(\\lim_{x \\to 0}\\left(1 + \\frac{x}{3}\\right)^{\\frac{2}{x}}\\). (5 marks)\n(Har limit ko \\(e\\) ki shakal mein likhein: (i) \\(\\lim_{n \\to +\\infty}\\left(1 + \\frac{5}{n}\\right)^{\\frac{n}{2}}\\) (ii) \\(\\lim_{x \\to 0}\\left(1 + \\frac{x}{3}\\right)^{\\frac{2}{x}}\\).)",
+            "explanation": "Power ko aise torein ke \\(\\left(1 + \\frac{1}{m}\\right)^{m}\\) (\\(m \\to \\infty\\)) ya \\((1 + m)^{\\frac{1}{m}}\\) (\\(m \\to 0\\)) ban jaye.",
+            "book_ref": {
+              "topic_id": "86e64fdd-e894-5669-9e82-4ed873a48e97",
+              "quote": "Put \\(n = \\frac{1}{x}\\) in (i), then"
+            },
+            "steps": [
+              "(i) \\(\\frac{5}{n} = \\frac{1}{n/5}\\) aur \\(\\frac{n}{2} = \\frac{n}{5}\\cdot\\frac{5}{2}\\): \\(\\left(1 + \\frac{5}{n}\\right)^{\\frac{n}{2}} = \\left[\\left(1 + \\frac{1}{n/5}\\right)^{\\frac{n}{5}}\\right]^{\\frac{5}{2}}\\)",
+              "\\(m = \\frac{n}{5}\\) rakhein; \\(n \\to +\\infty\\) par \\(m \\to +\\infty\\): limit \\(\\lim_{m \\to +\\infty}\\left[\\left(1 + \\frac{1}{m}\\right)^{m}\\right]^{\\frac{5}{2}} = e^{\\frac{5}{2}}\\).",
+              "(ii) \\(m = \\frac{x}{3}\\) rakhein; \\(x \\to 0\\) par \\(m \\to 0\\), aur \\(\\frac{2}{x} = \\frac{2}{3m}\\).",
+              "\\(\\left(1 + \\frac{x}{3}\\right)^{\\frac{2}{x}} = \\left[(1 + m)^{\\frac{1}{m}}\\right]^{\\frac{2}{3}}\\)",
+              "\\(\\lim_{m \\to 0}\\left[(1 + m)^{\\frac{1}{m}}\\right]^{\\frac{2}{3}} = e^{\\frac{2}{3}}\\)."
+            ],
+            "final_answer": "(i) \\(e^{\\frac{5}{2}}\\) (ii) \\(e^{\\frac{2}{3}}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Prove that \\(\\lim_{x \\to 0}\\frac{a^{x} - 1}{x} = \\log_{e} a\\) (\\(a > 0\\), \\(a \\ne 1\\)), and deduce \\(\\lim_{x \\to 0}\\frac{e^{x} - 1}{x}\\). (5 marks)\n(Saabit karein ke \\(\\lim_{x \\to 0}\\frac{a^{x} - 1}{x} = \\log_{e} a\\) (\\(a > 0\\), \\(a \\ne 1\\)), aur is se \\(\\lim_{x \\to 0}\\frac{e^{x} - 1}{x}\\) nikalein.)",
+            "explanation": "\\(y = a^{x} - 1\\) se variable badlein taake \\(\\lim_{y \\to 0}(1 + y)^{\\frac{1}{y}} = e\\) samne aa jaye.",
+            "book_ref": {
+              "topic_id": "86ecbaf0-c514-502c-89d0-98e9cb98376c",
+              "quote": "From (i), when \\(x \\to 0\\), \\(y \\to 0\\)."
+            },
+            "steps": [
+              "\\(a^{x} - 1 = y\\) rakhein; phir \\(a^{x} = 1 + y\\) aur \\(x = \\log_{a}(1 + y)\\). \\(x \\to 0\\) par \\(a^{x} \\to 1\\), is liye \\(y \\to 0\\).",
+              "\\(\\lim_{x \\to 0}\\frac{a^{x} - 1}{x} = \\lim_{y \\to 0}\\frac{y}{\\log_{a}(1 + y)} = \\lim_{y \\to 0}\\frac{1}{\\frac{1}{y}\\log_{a}(1 + y)}\\)",
+              "\\(= \\lim_{y \\to 0}\\frac{1}{\\log_{a}(1 + y)^{\\frac{1}{y}}} = \\frac{1}{\\log_{a} e}\\) (kyunke \\((1 + y)^{\\frac{1}{y}} \\to e\\); log ka qaida \\(k\\log N = \\log N^{k}\\))",
+              "Change of base se \\(\\log_{a} e = \\frac{1}{\\log_{e} a}\\), is liye \\(\\frac{1}{\\log_{a} e} = \\log_{e} a\\).",
+              "Natija: \\(a = e\\) rakhein: \\(\\lim_{x \\to 0}\\frac{e^{x} - 1}{x} = \\log_{e} e = 1\\)."
+            ],
+            "final_answer": "Saabit hua: \\(\\lim_{x \\to 0}\\frac{a^{x} - 1}{x} = \\log_{e} a\\); aur \\(\\lim_{x \\to 0}\\frac{e^{x} - 1}{x} = 1\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 State the Sandwich Theorem and use it to show that \\(\\lim_{x \\to 0} x\\sin\\frac{1}{x} = 0\\). (5 marks)\n(Sandwich Theorem bayan karein aur is se dikhayein ke \\(\\lim_{x \\to 0} x\\sin\\frac{1}{x} = 0\\).)",
+            "explanation": "\\(x\\sin\\frac{1}{x}\\) ko do aasaan functions ke darmiyan qaid karein jin ki limit \\(0\\) ho.",
+            "book_ref": {
+              "topic_id": "6652a353-3a2b-5576-ae94-59a337d385c8",
+              "quote": "Many limit problems arise that cannot be directly evaluated by algebraic techniques."
+            },
+            "steps": [
+              "Theorem: agar \\(c\\) wale open interval mein (shayad \\(c\\) ke ilawa) tamam \\(x\\) ke liye \\(f(x) \\le g(x) \\le h(x)\\) aur \\(\\lim_{x \\to c} f(x) = \\lim_{x \\to c} h(x) = L\\) ho to \\(\\lim_{x \\to c} g(x) = L\\).",
+              "Rakhna kaam nahi karta: \\(\\sin\\frac{1}{x}\\), \\(x = 0\\) par defined nahi, aur \\(\\lim_{x \\to 0}\\sin\\frac{1}{x}\\) maujood nahi, is liye product wala qaida nahi lag sakta.",
+              "\\(x \\ne 0\\) ke liye: \\(\\left|\\sin\\frac{1}{x}\\right| \\le 1\\), is liye \\(\\left|x\\sin\\frac{1}{x}\\right| \\le |x|\\), yani \\(-|x| \\le x\\sin\\frac{1}{x} \\le |x|\\).",
+              "\\(\\lim_{x \\to 0}(-|x|) = 0\\) aur \\(\\lim_{x \\to 0}|x| = 0\\): dono ki limit \\(0\\).",
+              "Sandwich Theorem se \\(\\lim_{x \\to 0} x\\sin\\frac{1}{x} = 0\\)."
+            ],
+            "final_answer": "Saabit hua: \\(\\lim_{x \\to 0} x\\sin\\frac{1}{x} = 0\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 If \\(\\theta\\) is measured in radian, prove that \\(\\lim_{\\theta \\to 0}\\frac{\\sin\\theta}{\\theta} = 1\\). (5 marks)\n(Agar \\(\\theta\\) radian mein ho to saabit karein ke \\(\\lim_{\\theta \\to 0}\\frac{\\sin\\theta}{\\theta} = 1\\).)",
+            "explanation": "Unit circle mein \\(\\Delta OAB\\), sector \\(OAB\\) aur \\(\\Delta OAD\\) ke areas ka muqabla karein, phir Sandwich Theorem lagayein.",
+            "book_ref": {
+              "topic_id": "e324ce62-95d1-5ee1-9fe3-27cf38ba99af",
+              "quote": "From the figure we see that Area of"
+            },
+            "steps": [
+              "\\(0 < \\theta < \\frac{\\pi}{2}\\) ko radius \\(1\\) wale circle ka markazi zaviya lein; \\(|OA| = |OB| = 1\\), \\(BC \\perp OA\\), \\(AD \\perp OA\\) aur \\(D\\), \\(OB\\) ki barhai hui line par: \\(|BC| = \\sin\\theta\\), \\(|AD| = \\tan\\theta\\).",
+              "\\(\\Delta OAB\\) ka area \\(= \\frac{1}{2}\\sin\\theta\\); sector \\(OAB\\) ka area \\(= \\frac{1}{2}r^{2}\\theta = \\frac{\\theta}{2}\\); \\(\\Delta OAD\\) ka area \\(= \\frac{1}{2}\\tan\\theta\\).",
+              "\\(\\Delta OAB\\) sector ke andar, sector \\(\\Delta OAD\\) ke andar: \\(\\frac{1}{2}\\sin\\theta < \\frac{\\theta}{2} < \\frac{1}{2}\\tan\\theta\\).",
+              "\\(\\frac{1}{2}\\sin\\theta > 0\\) se taqseem: \\(1 < \\frac{\\theta}{\\sin\\theta} < \\frac{1}{\\cos\\theta}\\); reciprocal lene se \\(\\cos\\theta < \\frac{\\sin\\theta}{\\theta} < 1\\).",
+              "\\(\\theta \\to 0\\) par \\(\\cos\\theta \\to 1\\); \\(\\frac{\\sin\\theta}{\\theta}\\), \\(\\cos\\theta\\) aur \\(1\\) ke darmiyan daba hua hai, is liye \\(1\\) ki taraf jata hai. \\(-\\frac{\\pi}{2} < \\theta < 0\\) ke liye \\(\\frac{\\sin(-\\theta)}{-\\theta} = \\frac{\\sin\\theta}{\\theta}\\), wahi natija."
+            ],
+            "final_answer": "Saabit hua: \\(\\lim_{\\theta \\to 0}\\frac{\\sin\\theta}{\\theta} = 1\\) (\\(\\theta\\) radian mein)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Evaluate (i) \\(\\lim_{\\theta \\to 0}\\frac{1 - \\cos 2\\theta}{\\theta\\sin\\theta}\\) (ii) \\(\\lim_{x \\to 0}\\frac{\\tan x - \\sin x}{x^{3}}\\). (5 marks)\n(Nikalein: (i) \\(\\lim_{\\theta \\to 0}\\frac{1 - \\cos 2\\theta}{\\theta\\sin\\theta}\\) (ii) \\(\\lim_{x \\to 0}\\frac{\\tan x - \\sin x}{x^{3}}\\).)",
+            "explanation": "Dono \\(\\frac{0}{0}\\) hain. Conjugate se \\(1 - \\cos\\) ko \\(\\sin^{2}\\) banayein, phir \\(\\frac{\\sin u}{u}\\) banayein.",
+            "book_ref": {
+              "topic_id": "e324ce62-95d1-5ee1-9fe3-27cf38ba99af",
+              "quote": "When \\(\\theta \\to 0\\), \\(\\cos\\theta \\to 1\\)."
+            },
+            "steps": [
+              "(i) \\(\\frac{1 - \\cos 2\\theta}{\\theta\\sin\\theta}\\cdot\\frac{1 + \\cos 2\\theta}{1 + \\cos 2\\theta} = \\frac{\\sin^{2} 2\\theta}{\\theta\\sin\\theta\\,(1 + \\cos 2\\theta)} = 4\\cdot\\left(\\frac{\\sin 2\\theta}{2\\theta}\\right)^{2}\\cdot\\frac{\\theta}{\\sin\\theta}\\cdot\\frac{1}{1 + \\cos 2\\theta}\\)",
+              "\\(\\to 4(1)^{2}(1)\\cdot\\frac{1}{1 + 1} = 2\\).",
+              "(ii) \\(\\tan x - \\sin x = \\frac{\\sin x}{\\cos x} - \\sin x = \\frac{\\sin x\\,(1 - \\cos x)}{\\cos x}\\).",
+              "\\(\\frac{\\tan x - \\sin x}{x^{3}} = \\frac{\\sin x}{x}\\cdot\\frac{1 - \\cos x}{x^{2}}\\cdot\\frac{1}{\\cos x} = \\frac{\\sin x}{x}\\cdot\\left(\\frac{\\sin x}{x}\\right)^{2}\\cdot\\frac{1}{1 + \\cos x}\\cdot\\frac{1}{\\cos x}\\) (\\(1 - \\cos x = \\frac{\\sin^{2} x}{1 + \\cos x}\\))",
+              "\\(\\to (1)(1)^{2}\\cdot\\frac{1}{2}\\cdot\\frac{1}{1} = \\frac{1}{2}\\)."
+            ],
+            "final_answer": "(i) \\(2\\) (ii) \\(\\frac{1}{2}\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "(ii) mein \\(\\lim \\tan x - \\lim \\sin x = 0 - 0\\) likh kar ruk jana ghalat hai, kyunke denominator \\(x^{3}\\) bhi \\(0\\) ki taraf jata hai. Pehle common factor \\(\\sin x\\) nikalein aur \\(1 - \\cos x\\) ko \\(1 + \\cos x\\) se zarb de kar \\(\\sin^{2} x\\) banayein."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 Determine whether \\(\\lim_{x \\to 1} f(x)\\) and \\(\\lim_{x \\to 3} f(x)\\) exist, where \\(f(x) = x^{2} + 1\\) for \\(0 \\le x \\le 1\\), \\(f(x) = 3x - 1\\) for \\(1 < x < 3\\), and \\(f(x) = x + 4\\) for \\(3 \\le x \\le 5\\). (5 marks)\n(Maloom karein ke \\(\\lim_{x \\to 1} f(x)\\) aur \\(\\lim_{x \\to 3} f(x)\\) maujood hain ya nahi, jahan \\(0 \\le x \\le 1\\) par \\(f(x) = x^{2} + 1\\), \\(1 < x < 3\\) par \\(f(x) = 3x - 1\\), aur \\(3 \\le x \\le 5\\) par \\(f(x) = x + 4\\).)",
+            "explanation": "Har jor wale nuqte par sahi hisse se left aur right hand limits nikalein aur muqabla karein.",
+            "book_ref": {
+              "topic_id": "fc5dace1-d787-5263-8429-1bca64cfa372",
+              "quote": "Determine whether \\(\\lim_{x \\to 2} f(x)\\) and \\(\\lim_{x \\to 4} f(x)\\) exist, when"
+            },
+            "steps": [
+              "\\(x = 1\\) par baen taraf (\\(x < 1\\)): \\(\\lim_{x \\to 1^{-}}(x^{2} + 1) = 1 + 1 = 2\\).",
+              "\\(x = 1\\) par daen taraf (\\(1 < x < 3\\)): \\(\\lim_{x \\to 1^{+}}(3x - 1) = 3 - 1 = 2\\). Barabar, is liye \\(\\lim_{x \\to 1} f(x) = 2\\).",
+              "\\(x = 3\\) par baen taraf (\\(1 < x < 3\\)): \\(\\lim_{x \\to 3^{-}}(3x - 1) = 9 - 1 = 8\\).",
+              "\\(x = 3\\) par daen taraf (\\(3 \\le x\\)): \\(\\lim_{x \\to 3^{+}}(x + 4) = 3 + 4 = 7\\).",
+              "\\(8 \\ne 7\\), is liye criterion se \\(\\lim_{x \\to 3} f(x)\\) maujood nahi (halanke \\(f(3) = 7\\) defined hai)."
+            ],
+            "final_answer": "\\(\\lim_{x \\to 1} f(x) = 2\\) maujood hai; \\(\\lim_{x \\to 3} f(x)\\) maujood nahi (LHL \\(8\\), RHL \\(7\\))."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 Discuss the continuity of \\(f\\) at \\(x = 0\\) and at \\(x = 2\\), where \\(f(x) = 2x + 1\\) for \\(x \\le 0\\), \\(f(x) = x^{2} + 1\\) for \\(0 < x < 2\\), and \\(f(x) = 4x - 2\\) for \\(x \\ge 2\\). (5 marks)\n(\\(x = 0\\) aur \\(x = 2\\) par \\(f\\) ki continuity par behas karein, jahan \\(x \\le 0\\) par \\(f(x) = 2x + 1\\), \\(0 < x < 2\\) par \\(f(x) = x^{2} + 1\\), aur \\(x \\ge 2\\) par \\(f(x) = 4x - 2\\).)",
+            "explanation": "Har nuqte par jaanchein: (i) \\(f(c)\\) defined, (ii) limit maujood (LHL \\(=\\) RHL), (iii) limit \\(= f(c)\\).",
+            "book_ref": {
+              "topic_id": "2a34aa86-5821-576a-a80b-74053f62364a",
+              "quote": "Discuss continuity of \\(f(x)\\) at \\(x = 3\\), when"
+            },
+            "steps": [
+              "\\(x = 0\\) par: \\(f(0) = 2(0) + 1 = 1\\), shart (i) poori.",
+              "LHL \\(= \\lim_{x \\to 0^{-}}(2x + 1) = 1\\); RHL \\(= \\lim_{x \\to 0^{+}}(x^{2} + 1) = 1\\); is liye \\(\\lim_{x \\to 0} f(x) = 1 = f(0)\\): \\(x = 0\\) par continuous.",
+              "\\(x = 2\\) par: \\(f(2) = 4(2) - 2 = 6\\), shart (i) poori.",
+              "LHL \\(= \\lim_{x \\to 2^{-}}(x^{2} + 1) = 5\\); RHL \\(= \\lim_{x \\to 2^{+}}(4x - 2) = 6\\).",
+              "\\(5 \\ne 6\\): \\(\\lim_{x \\to 2} f(x)\\) maujood nahi, shart (ii) poori nahi, is liye \\(f\\), \\(x = 2\\) par discontinuous hai (chhalang, jump)."
+            ],
+            "final_answer": "\\(f\\), \\(x = 0\\) par continuous aur \\(x = 2\\) par discontinuous hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Find \\(m\\) and \\(n\\) so that \\(f\\) is continuous at \\(x = 2\\), where \\(f(x) = mx + 1\\) for \\(x < 2\\), \\(f(2) = n\\), and \\(f(x) = x^{2} + 3\\) for \\(x > 2\\). (5 marks)\n(\\(m\\) aur \\(n\\) maloom karein taake \\(f\\), \\(x = 2\\) par continuous ho, jahan \\(x < 2\\) par \\(f(x) = mx + 1\\), \\(f(2) = n\\), aur \\(x > 2\\) par \\(f(x) = x^{2} + 3\\).)",
+            "explanation": "Continuity ke liye LHL \\(=\\) RHL \\(= f(2)\\); maloom hissa mushtarka qeemat tay karta hai.",
+            "book_ref": {
+              "topic_id": "2a34aa86-5821-576a-a80b-74053f62364a",
+              "quote": "if and only if the following three conditions are satisfied"
+            },
+            "steps": [
+              "RHL \\(= \\lim_{x \\to 2^{+}}(x^{2} + 3) = 4 + 3 = 7\\).",
+              "LHL \\(= \\lim_{x \\to 2^{-}}(mx + 1) = 2m + 1\\).",
+              "Limit maujood hone ke liye: \\(2m + 1 = 7 \\Rightarrow m = 3\\); phir \\(\\lim_{x \\to 2} f(x) = 7\\).",
+              "Shart (iii): \\(\\lim_{x \\to 2} f(x) = f(2) \\Rightarrow n = 7\\).",
+              "Jaanch: \\(m = 3\\), \\(n = 7\\) ke saath LHL \\(= 3(2) + 1 = 7\\), RHL \\(= 7\\), \\(f(2) = 7\\); teeno sharaait poori."
+            ],
+            "final_answer": "\\(m = 3\\), \\(n = 7\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 Find \\(k\\) so that \\(f\\) is continuous at \\(x = 3\\), where \\(f(x) = \\frac{\\sqrt{x + 6} - 3}{x - 3}\\) for \\(x \\ne 3\\) and \\(f(3) = k\\). (5 marks)\n(\\(k\\) maloom karein taake \\(f\\), \\(x = 3\\) par continuous ho, jahan \\(x \\ne 3\\) par \\(f(x) = \\frac{\\sqrt{x + 6} - 3}{x - 3}\\) aur \\(f(3) = k\\).)",
+            "explanation": "\\(\\lim_{x \\to 3} f(x)\\) nikalein (\\(\\frac{0}{0}\\) form; rationalize) aur use \\(f(3) = k\\) ke barabar rakhein.",
+            "book_ref": {
+              "topic_id": "2a34aa86-5821-576a-a80b-74053f62364a",
+              "quote": "Discuss the continuity of the functions"
+            },
+            "steps": [
+              "\\(x = 3\\) par: \\(\\frac{\\sqrt{9} - 3}{0} = \\frac{0}{0}\\). Upar neeche \\(\\sqrt{x + 6} + 3\\) se zarb dein.",
+              "\\(\\frac{(x + 6) - 9}{(x - 3)\\left(\\sqrt{x + 6} + 3\\right)} = \\frac{x - 3}{(x - 3)\\left(\\sqrt{x + 6} + 3\\right)} = \\frac{1}{\\sqrt{x + 6} + 3}\\)",
+              "\\(\\lim_{x \\to 3} f(x) = \\frac{1}{\\sqrt{9} + 3} = \\frac{1}{6}\\), shart (ii) poori.",
+              "Shart (iii) ke liye \\(f(3) = \\lim_{x \\to 3} f(x)\\), yani \\(k = \\frac{1}{6}\\).",
+              "\\(k = \\frac{1}{6}\\) ke saath \\(f(3)\\) defined, limit maujood aur dono barabar: \\(f\\), \\(x = 3\\) par continuous hai."
+            ],
+            "final_answer": "\\(k = \\frac{1}{6}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 A population is modelled by \\(P(t) = \\frac{5000}{1 + 4e^{-0.2t}}\\), \\(t\\) in years. Find (i) the initial population (ii) \\(P(10)\\) correct to the nearest whole number (iii) the long-term population \\(\\lim_{t \\to \\infty} P(t)\\). (5 marks)\n(Aabadi \\(P(t) = \\frac{5000}{1 + 4e^{-0.2t}}\\) se zahir hai, \\(t\\) saalon mein. Nikalein: (i) shuru ki aabadi (ii) \\(P(10)\\) qareeb tareen poore number tak (iii) lambe arse ki aabadi \\(\\lim_{t \\to \\infty} P(t)\\).)",
+            "explanation": "\\(t = 0\\) aur \\(t = 10\\) rakhein; lambe arse ke liye \\(t \\to \\infty\\) par \\(e^{-kt} \\to 0\\) (\\(k > 0\\)).",
+            "book_ref": {
+              "topic_id": "8cbc15b6-8bd0-5668-9bbb-0ba22be3209c",
+              "quote": "These concepts help us model, analyze and solve problems in various fields"
+            },
+            "steps": [
+              "(i) \\(P(0) = \\frac{5000}{1 + 4e^{0}} = \\frac{5000}{5} = 1000\\).",
+              "(ii) \\(P(10) = \\frac{5000}{1 + 4e^{-2}}\\); \\(e^{-2} \\approx 0.135335\\), is liye \\(1 + 4e^{-2} \\approx 1.541341\\).",
+              "\\(P(10) \\approx \\frac{5000}{1.541341} \\approx 3243.9 \\approx 3244\\).",
+              "(iii) \\(t \\to \\infty\\) par \\(e^{-0.2t} = \\frac{1}{e^{0.2t}} \\to 0\\).",
+              "\\(\\lim_{t \\to \\infty} P(t) = \\frac{5000}{1 + 4(0)} = 5000\\)."
+            ],
+            "final_answer": "(i) \\(1000\\) (ii) taqreeban \\(3244\\) (iii) \\(5000\\): aabadi \\(5000\\) ki taraf barhti hai magar us se aage nahi jati."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 A factory's cost function is \\(C(x) = 15x + 400\\) for \\(x \\le 200\\) and \\(C(x) = 12x + k\\) for \\(x > 200\\). Find \\(k\\) so that \\(C\\) is continuous at \\(x = 200\\), and then find \\(C(250)\\). (5 marks)\n(Factory ka cost function \\(x \\le 200\\) par \\(C(x) = 15x + 400\\) aur \\(x > 200\\) par \\(C(x) = 12x + k\\) hai. \\(k\\) maloom karein taake \\(C\\), \\(x = 200\\) par continuous ho, phir \\(C(250)\\) nikalein.)",
+            "explanation": "\\(200\\) par continuity: \\(C(200) =\\) LHL \\(=\\) RHL.",
+            "book_ref": {
+              "topic_id": "8cbc15b6-8bd0-5668-9bbb-0ba22be3209c",
+              "quote": "Limit and continuity of transcendental functions are fundamental concepts in calculus"
+            },
+            "steps": [
+              "\\(C(200) = 15(200) + 400 = 3400\\), aur LHL \\(= \\lim_{x \\to 200^{-}}(15x + 400) = 3400\\).",
+              "RHL \\(= \\lim_{x \\to 200^{+}}(12x + k) = 2400 + k\\).",
+              "Continuity ke liye \\(2400 + k = 3400\\), is liye \\(k = 1000\\).",
+              "Phir \\(\\lim_{x \\to 200} C(x) = 3400 = C(200)\\): teeno sharaait poori.",
+              "\\(C(250) = 12(250) + 1000 = 3000 + 1000 = 4000\\)."
+            ],
+            "final_answer": "\\(k = 1000\\); \\(C(250) = 4000\\)"
+          }
+        ]
+      }
+    }
+  ]
+}

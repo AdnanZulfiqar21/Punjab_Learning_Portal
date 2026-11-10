@@ -1,0 +1,650 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-SHORT-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-short-questions",
+      "title": "Short Questions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH8-SHORT",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 145,
+          "pdf_to": 174,
+          "note": "Roman Urdu: practice short questions written from Unit 8 (PDF 145-174), not printed in the book; same questions and order as the English set. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Yeh Unit 8 (Mathematical Induction and Binomial Theorem) ke poore unit se practice short questions (mukhtasar sawal) hain, unit ke sections ki tarteeb mein, Board ke 2 number wale sawal ke andaz mein. Har sawal mukhtasar qadmon mein hal kiya gaya hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.1 Principle of Mathematical Induction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Define a counter example. Give a counter example to the claim that \\(n^{2} - n + 41\\) is prime for every natural number \\(n\\).\n(Counter example ki tareef karein. Daawa \"\\(n^{2} - n + 41\\) har natural number ke liye prime hai\" ki counter example dein.)",
+            "explanation": "Jo case kisi formula ya statement ko ghalat kar de use counter example (mukhalif misaal) kehte hain. \\(n = 41\\) par \\(41^{2} - 41 + 41 = 41^{2} = 1681 = 41 \\times 41\\), jo prime nahin.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "Such a case or exception which fails the mathematical formula or statement is called a counter example."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 State the principle of mathematical induction.\n(Mathematical induction ka usool bayan karein.)",
+            "explanation": "Agar statement \\(S(n)\\) aisi ho ke (1) \\(S(1)\\) sach ho, aur (2) jab bhi \\(S(k)\\) sach ho to \\(S(k + 1)\\) bhi sach ho (har musbat integer \\(k\\) ke liye), to \\(S(n)\\) tamam musbat integers ke liye sach hai.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "The principle of mathematical induction is stated as follows:"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Why can the formula \\(1 + 3 + 5 + \\ldots + (2n - 1) = n^{2}\\) not be established by checking values of \\(n\\) one by one?\n(Formula \\(1 + 3 + 5 + \\ldots + (2n - 1) = n^{2}\\) ko \\(n\\) ki values aik aik kar ke check karne se kyun sabit nahin kiya ja sakta?)",
+            "explanation": "Kyunke is ke liye la-tadaad hisaab chahiye jo kabhi khatam na hon; chand sahi cases saboot nahin (maslan \\(n^{2} - n + 41\\) \\(n = 1\\) se \\(40\\) tak prime hai magar \\(41\\) par nahin). Induction tamam \\(n\\) ko aik saath cover karti hai.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "because it involves infinitely many calculations which never end"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 What is meant by induction of hypothesis?\n(Induction of hypothesis se kya muraad hai?)",
+            "explanation": "Yeh khaas misalon ya patterns se aik aam statement (conjecture, andaza) banane ka amal hai; is andaze ko baad mein baqaida saboot se sabit kiya jata hai.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "It refers to the process of formulating a general statement or hypothesis based on specific examples"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 For \\(S(n): 2 + 4 + 6 + \\ldots + 2n = n(n + 1)\\), verify \\(S(1)\\) and write \\(S(k + 1)\\).\n(\\(S(n): 2 + 4 + 6 + \\ldots + 2n = n(n + 1)\\) ke liye \\(S(1)\\) check karein aur \\(S(k + 1)\\) likhein.)",
+            "explanation": "\\(S(1)\\): left side \\(2\\), right side \\(1(2) = 2\\); sahi. \\(S(k + 1)\\): \\(2 + 4 + \\ldots + 2k + 2(k + 1) = (k + 1)(k + 2)\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "Writing the target first tells us where the algebra must end."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 For \\(S(n): 1 \\cdot 2 + 2 \\cdot 3 + \\ldots + n(n + 1) = \\frac{n(n + 1)(n + 2)}{3}\\), verify \\(S(1)\\) and write \\(S(k)\\).\n(\\(S(n): 1 \\cdot 2 + 2 \\cdot 3 + \\ldots + n(n + 1) = \\frac{n(n + 1)(n + 2)}{3}\\) ke liye \\(S(1)\\) check karein aur \\(S(k)\\) likhein.)",
+            "explanation": "\\(S(1)\\): left \\(2\\), right \\(\\frac{6}{3} = 2\\); sahi. \\(S(k)\\): \\(1 \\cdot 2 + \\ldots + k(k + 1) = \\frac{k(k + 1)(k + 2)}{3}\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "A good way to write every induction proof for a sum:"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 If \\(5^{k} - 1 = 4m\\) for some integer \\(m\\), show that \\(5^{k + 1} - 1\\) is divisible by 4.\n(Agar kisi integer \\(m\\) ke liye \\(5^{k} - 1 = 4m\\) ho to dikhayein ke \\(5^{k + 1} - 1\\) 4 se divisible hai.)",
+            "explanation": "\\(5^{k} = 4m + 1\\), to \\(5^{k + 1} - 1 = 5(4m + 1) - 1 = 20m + 4 = 4(5m + 1)\\); \\(5m + 1\\) integer hai, is liye 4 ka multiple.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "so we write the assumption as an equation and substitute it into"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Show that if \\(\\frac{k^{3} + 5k}{3}\\) is an integer, then \\(\\frac{(k + 1)^{3} + 5(k + 1)}{3}\\) is also an integer.\n(Dikhayein ke agar \\(\\frac{k^{3} + 5k}{3}\\) integer ho to \\(\\frac{(k + 1)^{3} + 5(k + 1)}{3}\\) bhi integer hai.)",
+            "explanation": "\\((k + 1)^{3} + 5(k + 1) = (k^{3} + 5k) + 3(k^{2} + k + 2)\\). To number \\(\\frac{k^{3} + 5k}{3} + (k^{2} + k + 2)\\) hai, do integers ka majmua, is liye integer.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "everything left over has a factor 3, which cancels the denominator."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Use \\(\\sum_{k=1}^{n} \\frac{1}{(2k - 1)(2k + 1)} = \\frac{n}{2n + 1}\\) to find \\(\\frac{1}{1 \\cdot 3} + \\frac{1}{3 \\cdot 5} + \\ldots + \\frac{1}{13 \\cdot 15}\\).\n(\\(\\sum_{k=1}^{n} \\frac{1}{(2k - 1)(2k + 1)} = \\frac{n}{2n + 1}\\) se \\(\\frac{1}{1 \\cdot 3} + \\ldots + \\frac{1}{13 \\cdot 15}\\) nikalein.)",
+            "explanation": "Aakhri term: \\(2n + 1 = 15\\), to \\(n = 7\\). Majmua \\(= \\frac{7}{15}\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "is already used as the counter inside the sum, so the book uses"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.1.1 Principle of Extended Mathematical Induction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 State the principle of extended mathematical induction.\n(Extended mathematical induction ka usool bayan karein.)",
+            "explanation": "Farz karein \\(i\\) integer hai. Agar \\(n \\ge i\\) ke liye statement \\(S(n)\\) aisi ho ke (1) \\(S(i)\\) sach ho, aur (2) har integer \\(k \\ge i\\) ke liye \\(S(k)\\) sach hone par \\(S(k + 1)\\) sach ho, to \\(S(n)\\) tamam \\(n \\ge i\\) ke liye sach hai.",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "A formula or identity or statement"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Show that \\(2^{n} > n^{2} + 1\\) is false for \\(n = 4\\) but true for \\(n = 5\\). With which value should the base case of extended induction start?\n(Dikhayein ke \\(2^{n} > n^{2} + 1\\) \\(n = 4\\) par ghalat aur \\(n = 5\\) par sahi hai. Extended induction ka base case kis value se shuru hoga?)",
+            "explanation": "\\(n = 4\\): \\(16 > 17\\) ghalat. \\(n = 5\\): \\(32 > 26\\) sahi. Base case \\(n = 5\\) (\\(i = 5\\)) hai.",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "Some statements are false for small values."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 In an induction proof of an inequality, why may we multiply the hypothesis \\(3^{k} > 2^{k} + 4\\) by 3 but not by \\(-3\\)?\n(Inequality ke saboot mein hypothesis \\(3^{k} > 2^{k} + 4\\) ko 3 se zarb de sakte hain magar \\(-3\\) se kyun nahin?)",
+            "explanation": "Musbat 3 se zarb dene se simt wohi rehti hai: \\(3^{k + 1} > 3 \\cdot 2^{k} + 12\\). \\(-3\\) se zarb dene se inequality ulat jati, aur zaroori simt na rehti.",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "For an inequality we multiply the hypothesis by a positive number and then compare."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 For \\(S(n): 2 + 4 + 6 + \\ldots + (2n + 6) = (n + 3)(n + 4)\\), \\(n \\ge -2\\), verify \\(S(-2)\\) and \\(S(0)\\).\n(\\(S(n): 2 + 4 + 6 + \\ldots + (2n + 6) = (n + 3)(n + 4)\\), \\(n \\ge -2\\), ke liye \\(S(-2)\\) aur \\(S(0)\\) check karein.)",
+            "explanation": "\\(S(-2)\\): aakhri term 2; left 2, right \\((1)(2) = 2\\). \\(S(0)\\): left \\(2 + 4 + 6 = 12\\), right \\(3 \\cdot 4 = 12\\). Dono sahi.",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "The chain of dominoes now starts at domino number"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.1.2 Real Life Application of Mathematical Induction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Ayesha deposits Rs. 2,500 every month. Write \\(S(n)\\) for her total savings after \\(n\\) months, check \\(S(1)\\), and show the step from \\(k\\) to \\(k + 1\\) months.\n(Ayesha har maheene Rs. 2,500 jama karti hai. \\(n\\) maheenon ki kul bachat \\(S(n)\\) likhein, \\(S(1)\\) check karein, aur \\(k\\) se \\(k + 1\\) maheene ka qadam dikhayein.)",
+            "explanation": "\\(S(n) = 2500n\\). \\(S(1) = 2500\\), aik deposit. Qadam: \\(S(k + 1) = 2500k + 2500 = 2500(k + 1)\\), yani formula \\(n = k + 1\\) ke saath.",
+            "book_ref": {
+              "topic_id": "4a03df67-4d91-5b84-b571-eb102fd694fa",
+              "quote": "In real life many quantities change by a fixed amount at each step"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 Bilal does 6 push-ups on day 1 and 4 more each day than the day before. How many does he do on day \\(k + 1\\)? Check that the total formula \\(2n^{2} + 4n\\) is right for \\(n = 3\\).\n(Bilal din 1 par 6 push-ups karta hai aur har din 4 zyada. Din \\(k + 1\\) par kitne? Kul formula \\(2n^{2} + 4n\\) ko \\(n = 3\\) par check karein.)",
+            "explanation": "Din \\(k + 1\\): \\(6 + 4k\\). \\(n = 3\\): \\(6 + 10 + 14 = 30\\) aur \\(2(9) + 12 = 30\\). Sahi.",
+            "book_ref": {
+              "topic_id": "4a03df67-4d91-5b84-b571-eb102fd694fa",
+              "quote": "Mixing up the amount in one step (push-ups on day"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 A van uses 1200 litres of fuel in the first period and the use is reduced by 30 litres every week, so after \\(n\\) weeks it is \\(F(n) = 1200 - 30n\\). Show the induction step and find \\(F(8)\\).\n(Aik van ka fuel 1200 litre hai aur har hafte 30 litre kam hota hai, yani \\(n\\) hafton baad \\(F(n) = 1200 - 30n\\). Induction ka qadam dikhayein aur \\(F(8)\\) nikalein.)",
+            "explanation": "Qadam: \\(F(k + 1) = (1200 - 30k) - 30 = 1200 - 30(k + 1)\\). \\(F(8) = 1200 - 240 = 960\\) litre.",
+            "book_ref": {
+              "topic_id": "4a03df67-4d91-5b84-b571-eb102fd694fa",
+              "quote": "one more week means 50 calories less than after"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.2 Binomial Theorem"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Define a binomial and write the binomial theorem in sigma form.\n(Binomial ki tareef karein aur binomial theorem sigma ki shakal mein likhein.)",
+            "explanation": "Do terms wala algebraic expression, jaise \\(a + x\\) ya \\(2x - 3\\), binomial kehlata hai. Musbat integer \\(n\\) ke liye \\((a + x)^{n} = \\sum_{r=0}^{n}\\binom{n}{r}a^{n-r}x^{r}\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "is called a binomial or a binomial expression"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 Write the number of terms and the sum of the exponents of \\(a\\) and \\(b\\) in each term of \\((3a - 4b)^{12}\\).\n(\\((3a - 4b)^{12}\\) mein terms ki tadaad aur har term mein \\(a\\) aur \\(b\\) ke exponents ka majmua likhein.)",
+            "explanation": "Terms \\(= 12 + 1 = 13\\); har term mein exponents ka majmua index 12 hai.",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "in each term of the expansion is equal to its index"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 Expand \\((x + 2)^{4}\\) by the binomial theorem.\n(\\((x + 2)^{4}\\) ko binomial theorem se phelayein.)",
+            "explanation": "\\(x^{4} + 4x^{3}(2) + 6x^{2}(4) + 4x(8) + 16 = x^{4} + 8x^{3} + 24x^{2} + 32x + 16\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Index means the power. Look at the coefficients"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 Evaluate \\((10.1)^{4}\\) using the binomial theorem.\n(Binomial theorem se \\((10.1)^{4}\\) ki qeemat nikalein.)",
+            "explanation": "\\((10 + 0.1)^{4} = 10000 + 400 + 6 + 0.04 + 0.0001 = 10406.0401\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Powers of 10 and of 0.1 are easy to work out"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 Find the 5th term in the expansion of \\(\\left(x - \\frac{2}{x}\\right)^{8}\\).\n(\\(\\left(x - \\frac{2}{x}\\right)^{8}\\) ke phelao ki 5th term nikalein.)",
+            "explanation": "\\(r = 4\\): \\(T_{5} = \\binom{8}{4}x^{4}\\cdot\\frac{16}{x^{4}} = 70 \\times 16 = 1120\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "so we call it as the general term of the expansion"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "22 Find the coefficient of \\(x^{3}\\) in the expansion of \\((1 - 2x)^{7}\\).\n(\\((1 - 2x)^{7}\\) mein \\(x^{3}\\) ka coefficient nikalein.)",
+            "explanation": "\\(T_{4} = \\binom{7}{3}(-2x)^{3} = 35(-8)x^{3} = -280x^{3}\\); coefficient \\(-280\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Dropping the minus sign of the second term"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "23 Find the 3rd term from the end in the expansion of \\(\\left(2x + \\frac{1}{x}\\right)^{7}\\).\n(\\(\\left(2x + \\frac{1}{x}\\right)^{7}\\) mein aakhir se 3rd term nikalein.)",
+            "explanation": "8 terms; aakhir se 3rd = shuru se 6th, \\(r = 5\\): \\(T_{6} = \\binom{7}{5}(2x)^{2}x^{-5} = 21 \\cdot 4 \\cdot x^{-3} = \\frac{84}{x^{3}}\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Forgetting that the number of terms is"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "24 Show that in \\((a + x)^{12}\\) the 6th term and the 8th term have the same coefficient, and find it.\n(Dikhayein ke \\((a + x)^{12}\\) mein 6th aur 8th term ka coefficient barabar hai, aur woh nikalein.)",
+            "explanation": "6th term: \\(\\binom{12}{5}\\); 8th term: \\(\\binom{12}{7}\\). \\(\\binom{n}{r} = \\binom{n}{n-r}\\) se dono \\(792\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "The coefficients of the terms equidistant from beginning and end of the expansion are equal"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "25 Verify Pascal's rule \\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k+1}{r}\\) for \\(k = 6\\), \\(r = 3\\).\n(Pascal ka qaida \\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k+1}{r}\\) \\(k = 6\\), \\(r = 3\\) ke liye check karein.)",
+            "explanation": "\\(\\binom{6}{3} + \\binom{6}{2} = 20 + 15 = 35 = \\binom{7}{3}\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Plan of the proof (the same three steps as in 8.1)"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.2.1 The Middle Term in the Expansion of (a + x)^n"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "26 Which terms are the middle terms in the expansion of \\((a + x)^{15}\\)?\n(\\((a + x)^{15}\\) ke phelao mein middle terms kaunsi hain?)",
+            "explanation": "\\(n = 15\\) taaq: 16 terms, do middle terms: \\(8\\)th aur \\(9\\)th.",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "terms of the expansion will be the two middle terms"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "27 Find the middle term of \\(\\left(x + \\frac{1}{x}\\right)^{10}\\).\n(\\(\\left(x + \\frac{1}{x}\\right)^{10}\\) ki middle term nikalein.)",
+            "explanation": "\\(n = 10\\) jufat: 6th term, \\(r = 5\\): \\(T_{6} = \\binom{10}{5} = 252\\).",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "will be the only one middle term in the expansion"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "28 Find the term independent of \\(x\\) in \\(\\left(x^{2} + \\frac{1}{x}\\right)^{9}\\).\n(\\(\\left(x^{2} + \\frac{1}{x}\\right)^{9}\\) mein \\(x\\) se azad term nikalein.)",
+            "explanation": "\\(T_{r+1} = \\binom{9}{r}x^{18-3r}\\); \\(r = 6\\); \\(T_{7} = \\binom{9}{6} = 84\\).",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "Find it by setting the power of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "29 Find the term involving \\(x^{4}\\) in the expansion of \\(\\left(x + \\frac{3}{x}\\right)^{8}\\).\n(\\(\\left(x + \\frac{3}{x}\\right)^{8}\\) mein \\(x^{4}\\) wali term nikalein.)",
+            "explanation": "\\(T_{r+1} = \\binom{8}{r}3^{r}x^{8-2r}\\); \\(r = 2\\); \\(T_{3} = 28 \\cdot 9x^{4} = 252x^{4}\\).",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "Putting the term number in place of"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.2.2 Some Deductions from the binomial expansion of (a + x)^n"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "30 Prove that \\(\\binom{n}{0} + \\binom{n}{1} + \\binom{n}{2} + \\ldots + \\binom{n}{n} = 2^{n}\\).\n(Sabit karein ke \\(\\binom{n}{0} + \\binom{n}{1} + \\ldots + \\binom{n}{n} = 2^{n}\\).)",
+            "explanation": "\\((a + x)^{n}\\) mein \\(a = 1\\), \\(x = 1\\) rakhein: \\(2^{n} = \\binom{n}{0} + \\binom{n}{1} + \\ldots + \\binom{n}{n}\\).",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "Thus, the sum of coefficients in the binomial expansion equals to"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "31 Show that \\(\\binom{n}{0} - \\binom{n}{1} + \\binom{n}{2} - \\ldots + (-1)^{n}\\binom{n}{n} = 0\\).\n(Dikhayein ke \\(\\binom{n}{0} - \\binom{n}{1} + \\binom{n}{2} - \\ldots + (-1)^{n}\\binom{n}{n} = 0\\).)",
+            "explanation": "\\((a + x)^{n}\\) mein \\(a = 1\\), \\(x = -1\\): \\((1 - 1)^{n} = \\sum_{r=0}^{n}(-1)^{r}\\binom{n}{r} = 0\\).",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "So we may put particular values in it"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "32 Find \\(\\binom{10}{0} + \\binom{10}{2} + \\binom{10}{4} + \\ldots + \\binom{10}{10}\\).\n(\\(\\binom{10}{0} + \\binom{10}{2} + \\ldots + \\binom{10}{10}\\) nikalein.)",
+            "explanation": "Odd jagah aur even jagah ke coefficients ke majmue barabar hain aur mil kar \\(2^{10}\\); is liye yeh \\(2^{9} = 512\\).",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "Thus, sum of odd coefficients of a binomial expansion equals to the sum of its even coefficients."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "33 Find the sum of the coefficients in the expansion of \\((3x - 1)^{5}\\).\n(\\((3x - 1)^{5}\\) ke phelao ke coefficients ka majmua nikalein.)",
+            "explanation": "Phelao mein \\(x = 1\\) rakhne se tamam coefficients ka majmua milta hai: \\((3 - 1)^{5} = 32\\).",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "These results are called deductions (consequences) of the binomial theorem."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "34 Verify \\(\\binom{n}{1} + 2\\binom{n}{2} + \\ldots + n\\binom{n}{n} = n \\cdot 2^{n-1}\\) for \\(n = 5\\).\n(\\(\\binom{n}{1} + 2\\binom{n}{2} + \\ldots + n\\binom{n}{n} = n \\cdot 2^{n-1}\\) ko \\(n = 5\\) ke liye check karein.)",
+            "explanation": "Left: \\(5 + 20 + 30 + 20 + 5 = 80\\). Right: \\(5 \\cdot 16 = 80\\). Barabar.",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "and recognise the bracket as the sum of all the coefficients of"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3 The Binomial Theorem When the Index n is a Negative Integer or a Fraction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "35 State the binomial theorem when the index n is a negative integer or a fraction.\n(Binomial theorem bayan karein jab index n manfi integer ya fraction ho.)",
+            "explanation": "\\((1 + x)^{n} = 1 + nx + \\frac{n(n-1)}{2!}x^{2} + \\ldots + \\frac{n(n-1)\\cdots(n-r+1)}{r!}x^{r} + \\ldots\\), shart \\(|x| < 1\\). Yeh series kabhi khatam nahin hoti.",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "is called the binomial series"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "36 Expand \\((1 + 2x)^{-1/2}\\) up to the term in \\(x^{3}\\) and state when it is valid.\n(\\((1 + 2x)^{-1/2}\\) ko \\(x^{3}\\) wali term tak phelayein aur durust hone ki shart likhein.)",
+            "explanation": "\\(n = -\\frac{1}{2}\\), \\(X = 2x\\): \\(1 - x + \\frac{3}{2}x^{2} - \\frac{5}{2}x^{3}\\); shart \\(|2x| < 1\\), yani \\(|x| < \\frac{1}{2}\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "2. Forgetting the condition"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "37 Write the first four terms of \\((1 + 3x)^{-2}\\) and state the condition.\n(\\((1 + 3x)^{-2}\\) ki pehli chaar terms aur shart likhein.)",
+            "explanation": "\\(X = 3x\\) rakhein: \\(1 - 6x + 27x^{2} - 108x^{3} + \\ldots\\), shart \\(|x| < \\frac{1}{3}\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "Cases (iv), (v), (vi) come from (i), (ii), (iii) by replacing"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "38 Why are the symbols \\(\\binom{n}{r}\\) not used when \\(n\\) is a negative integer or a fraction? How is the general term written instead?\n(Jab \\(n\\) manfi integer ya fraction ho to \\(\\binom{n}{r}\\) kyun istemal nahin hota? General term kaise likhte hain?)",
+            "explanation": "\\(\\binom{n}{r}\\) ko \\(n!\\) chahiye jo aise \\(n\\) ke liye be-maani hai. General term \\(T_{r+1} = \\frac{n(n-1)\\cdots(n-r+1)}{r!}x^{r}\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "The proof of this theorem is beyond the scope of this book."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "39 Find the coefficient of \\(x^{4}\\) in the expansion of \\((1 - 2x)^{-1/2}\\).\n(\\((1 - 2x)^{-1/2}\\) mein \\(x^{4}\\) ka coefficient nikalein.)",
+            "explanation": "\\(T_{5} = \\frac{35}{128}(-2x)^{4} = \\frac{35}{128}\\cdot 16x^{4} = \\frac{35}{8}x^{4}\\); coefficient \\(\\frac{35}{8}\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "The general term in the expansion is"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3.1 Application of the Binomial Theorem"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "40 Find \\(\\sqrt{26}\\) correct to three decimal places using the binomial theorem.\n(Binomial theorem se \\(\\sqrt{26}\\) teen decimal tak nikalein.)",
+            "explanation": "\\(\\sqrt{26} = 5(1 + 0.04)^{1/2} = 5(1 + 0.02 - 0.0002 + 0.000004) = 5.09902 \\approx 5.099\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "Strategy for a root or power of a number"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "41 If \\(x\\) is so small that \\(x^{2}\\) and higher powers can be neglected, show that \\(\\frac{(1 + x)^{1/2}}{1 + 2x} \\approx 1 - \\frac{3}{2}x\\).\n(Agar \\(x^{2}\\) aur ooper ki powers chhor di jayen to dikhayein ke \\(\\frac{(1 + x)^{1/2}}{1 + 2x} \\approx 1 - \\frac{3}{2}x\\).)",
+            "explanation": "\\(\\left(1 + \\frac{1}{2}x\\right)(1 - 2x) \\approx 1 - 2x + \\frac{1}{2}x = 1 - \\frac{3}{2}x\\) (\\(x^{2}\\) wali term chhor di).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "each multiply the second bracket"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "42 Find the sum of the series \\(1 + 2\\left(\\frac{1}{3}\\right) + 3\\left(\\frac{1}{3}\\right)^{2} + 4\\left(\\frac{1}{3}\\right)^{3} + \\ldots\\)\n(Series \\(1 + 2\\left(\\frac{1}{3}\\right) + 3\\left(\\frac{1}{3}\\right)^{2} + 4\\left(\\frac{1}{3}\\right)^{3} + \\ldots\\) ka majmua nikalein.)",
+            "explanation": "Yeh \\((1 - x)^{-2}\\) hai \\(x = \\frac{1}{3}\\) ke saath. Majmua \\(= \\left(\\frac{2}{3}\\right)^{-2} = \\frac{9}{4}\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "This is the reverse use of the theorem"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "43 Find the coefficient of \\(x^{n}\\) in the expansion of \\(\\frac{1 + 2x}{(1 - x)^{2}}\\), \\(|x| < 1\\).\n(\\(\\frac{1 + 2x}{(1 - x)^{2}}\\) mein \\(x^{n}\\) ka coefficient nikalein.)",
+            "explanation": "\\((1 + 2x)(1 + 2x + \\ldots + nx^{n-1} + (n + 1)x^{n} + \\ldots)\\). \\(x^{n}\\) ka coefficient: \\((n + 1) + 2n = 3n + 1\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "term in the product comes from two places"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.4 Binomial Coefficients Using Pascal's Triangle"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "44 Write rows 6 and 7 of Pascal's triangle, building row 7 from row 6.\n(Pascal triangle ki row 6 aur 7 likhein; row 7 ko row 6 se banayein.)",
+            "explanation": "Row 6: \\(1, 6, 15, 20, 15, 6, 1\\). Row 7: padosi jorhe jama karein: \\(1, 7, 21, 35, 35, 21, 7, 1\\).",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "Every interior entry is the sum of the two entries directly above it from the previous row."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "45 Expand \\((x + 3)^{4}\\) using Pascal's triangle.\n(Pascal triangle se \\((x + 3)^{4}\\) phelayein.)",
+            "explanation": "Row 4: \\(1, 4, 6, 4, 1\\). \\(x^{4} + 12x^{3} + 54x^{2} + 108x + 81\\).",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "row of Pascal's Triangle correspond to the binomial coefficients"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "46 Expand \\((2x - 1)^{4}\\) using Pascal's triangle.\n(Pascal triangle se \\((2x - 1)^{4}\\) phelayein.)",
+            "explanation": "Row 4: \\(1, 4, 6, 4, 1\\). \\(16x^{4} - 32x^{3} + 24x^{2} - 8x + 1\\).",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "Forgetting to multiply the coefficient by the power of the second term"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "47 State Pascal's rule and use row 7 of Pascal's triangle to find \\(\\binom{8}{3}\\).\n(Pascal ka qaida bayan karein aur row 7 se \\(\\binom{8}{3}\\) nikalein.)",
+            "explanation": "\\(\\binom{n}{k} = \\binom{n-1}{k-1} + \\binom{n-1}{k}\\). \\(\\binom{8}{3} = 21 + 35 = 56\\).",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "Mathematically, this is expressed by Pascal's Rule:"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5 Application of Binomial Theorem"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "48 Explain why \\(8^{50}\\) leaves remainder 1 when divided by 7.\n(Wazeh karein ke \\(8^{50}\\) ko 7 se taqseem karne par baqi 1 kyun hai.)",
+            "explanation": "\\(8^{50} = (7 + 1)^{50}\\). Aakhri term \\(1\\) ke siwa har term mein 7 hai, to \\(8^{50} = 7q + 1\\); baqi 1.",
+            "book_ref": {
+              "topic_id": "270bb31a-b8b1-5f90-a9d9-cc6795ce21ad",
+              "quote": "write the base as (a multiple of the divisor)"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5.1 Finding the Remainder using Binomial Theorem"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "49 Find the remainder when \\(6^{25}\\) is divided by 7.\n(\\(6^{25}\\) ko 7 se taqseem karne par baqi nikalein.)",
+            "explanation": "\\(6^{25} = (7 - 1)^{25} = 7q - 1 = 7(q - 1) + 6\\). Baqi 6.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "Forgetting the sign of the last term in"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "50 Find the remainder when \\(2^{60}\\) is divided by 7.\n(\\(2^{60}\\) ko 7 se taqseem karne par baqi nikalein.)",
+            "explanation": "\\(2^{60} = 8^{20} = (7 + 1)^{20} = 7q + 1\\). Baqi 1.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "A sum of multiples of 7 is a multiple of 7, so it leaves remainder 0."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "51 Find the unit digit of \\(7^{35}\\).\n(\\(7^{35}\\) ka unit digit nikalein.)",
+            "explanation": "\\(7\\) ki powers ke aakhri digits \\(7, 9, 3, 1\\). \\(35 = 4 \\times 8 + 3\\), to unit digit \\(7^{3} = 343\\) jaisa: 3.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "The last digits of powers repeat in a cycle, so we divide the exponent by 4 and use the remainder."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "52 Find the last two digits of \\(31^{5}\\).\n(\\(31^{5}\\) ke aakhri do digits nikalein.)",
+            "explanation": "\\((30 + 1)^{5}\\): \\(30^{2}\\) ya ooper wali terms 100 ke multiple. Baqi \\(5(30) + 1 = 151\\). Aakhri do digits 51.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "the last two digits are its remainder on division by 100"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "53 Find the fractional part of \\(\\frac{3^{100}}{8}\\).\n(\\(\\frac{3^{100}}{8}\\) ka fractional hissa nikalein.)",
+            "explanation": "\\(3^{100} = (8 + 1)^{50} = 8h + 1\\). To \\(\\frac{3^{100}}{8} = h + \\frac{1}{8}\\); fractional hissa \\(\\frac{1}{8}\\).",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "write the number as (an integer) + (a proper fraction)"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.6 Real Life Application of Binomial Theorem and Mathematical Induction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "54 Rs. 200,000 is invested at 4% compound interest per year for 3 years. Estimate the amount using three terms of the binomial expansion, and give the exact amount.\n(Rs. 200,000, 4% salana compound interest par 3 saal. Binomial phelao ki teen terms se andaza aur theek raqam nikalein.)",
+            "explanation": "Andaza: \\(1 + 0.12 + 0.0048 = 1.1248\\), \\(200000 \\times 1.1248 = \\text{Rs. } 224{,}960\\). Theek: \\(1.124864\\), raqam \\(\\text{Rs. } 224{,}972.80\\).",
+            "book_ref": {
+              "topic_id": "19937ae1-a3a7-5a0e-89fe-e7421e22ac91",
+              "quote": "This is why the approximation is good when"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "55 In the domino argument for a line of dominoes, what plays the role of the base case and what plays the role of the induction step?\n(Dominoes ki qataar wali daleel mein base case kya hai aur induction ka qadam kya hai?)",
+            "explanation": "Base case: pehla domino girta hai (\\(S(1)\\)). Qadam: jab \\(k\\)th domino girta hai to \\((k + 1)\\)th ko gira deta hai. Dono mil kar har domino gira dete hain.",
+            "book_ref": {
+              "topic_id": "19937ae1-a3a7-5a0e-89fe-e7421e22ac91",
+              "quote": "If the first domino is not pushed (no base case), nothing falls."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "56 Stock follows \\(I_{n+1} = 0.5\\,I_{n} + 60\\) with \\(I_{0} = 300\\). Find \\(I_{1}\\), \\(I_{2}\\), \\(I_{3}\\) and check them against \\(I_{n} = 120 + 180(0.5)^{n}\\).\n(Stock \\(I_{n+1} = 0.5\\,I_{n} + 60\\), \\(I_{0} = 300\\). \\(I_{1}\\), \\(I_{2}\\), \\(I_{3}\\) nikalein aur \\(I_{n} = 120 + 180(0.5)^{n}\\) se milayein.)",
+            "explanation": "\\(I_{1} = 210\\), \\(I_{2} = 165\\), \\(I_{3} = 142.5\\). Formula: \\(120 + 90\\), \\(120 + 45\\), \\(120 + 22.5\\): wohi values.",
+            "book_ref": {
+              "topic_id": "19937ae1-a3a7-5a0e-89fe-e7421e22ac91",
+              "quote": "Always test a formula on the first few values before proving it."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

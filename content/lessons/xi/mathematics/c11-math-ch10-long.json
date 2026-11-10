@@ -1,0 +1,399 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH10-LONG",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch10",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch10/u-long-questions",
+      "title": "Long Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 182,
+          "pdf_to": 204,
+          "note": "Practice long questions written from Unit 10 (PDF 182-204, printed 177-199); not printed in the book. Based on the unit's text, theorems, formulas and worked examples (changed values); none repeats the unit's exercises. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice long questions for the whole of Unit 10 (Trigonometric Identities), in the shape of a Board Section-II question part: each carries 5 marks (a longer problem, a proof or a derivation). Each one is solved in full, step by step."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Using the distance formula, show that \\(A(1, 1)\\), \\(B(4, 5)\\) and \\(C(8, 2)\\) are the vertices of a right isosceles triangle, and find its area. (5 marks)",
+            "explanation": "Find the three sides, compare two of them, and test Pythagoras.",
+            "book_ref": {
+              "topic_id": "2fda6d2a-30f6-52ed-9d24-b9755b183e47",
+              "quote": "The order of subtraction does not matter, because the differences are squared."
+            },
+            "steps": [
+              "\\(AB = \\sqrt{(4 - 1)^{2} + (5 - 1)^{2}} = \\sqrt{9 + 16} = 5\\)",
+              "\\(BC = \\sqrt{(8 - 4)^{2} + (2 - 5)^{2}} = \\sqrt{16 + 9} = 5\\)",
+              "\\(AC = \\sqrt{(8 - 1)^{2} + (2 - 1)^{2}} = \\sqrt{49 + 1} = \\sqrt{50}\\)",
+              "\\(AB = BC\\), so the triangle is isosceles; \\(AB^{2} + BC^{2} = 25 + 25 = 50 = AC^{2}\\), so the angle at \\(B\\) is a right angle.",
+              "Area \\(= \\frac{1}{2}\\cdot AB \\cdot BC = \\frac{1}{2}\\cdot 5 \\cdot 5 = \\frac{25}{2}\\) square units."
+            ],
+            "final_answer": "Right isosceles triangle (right angle at \\(B\\)); area \\(= \\frac{25}{2}\\) square units."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Prove the fundamental law of trigonometry \\(\\cos(\\alpha - \\beta) = \\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta\\) for \\(\\alpha > \\beta > 0\\), using the unit circle and the distance formula. (5 marks)",
+            "explanation": "Take two chords of the unit circle that subtend the same angle \\(\\alpha - \\beta\\), square their lengths and equate.",
+            "book_ref": {
+              "topic_id": "7cf30dd5-7135-533a-9e0b-677a40244f90",
+              "quote": "Two sides and the included angle are equal, which is the SAS rule."
+            },
+            "steps": [
+              "On the unit circle take \\(A(\\cos\\alpha, \\sin\\alpha)\\), \\(B(\\cos\\beta, \\sin\\beta)\\), \\(C(\\cos(\\alpha - \\beta), \\sin(\\alpha - \\beta))\\) and \\(D(1, 0)\\); then \\(m\\angle AOB = m\\angle COD = \\alpha - \\beta\\).",
+              "\\(\\triangle AOB \\cong \\triangle COD\\) (SAS: \\(OA = OC = OB = OD = 1\\), included angles equal), so \\(|AB| = |CD|\\).",
+              "\\(|AB|^{2} = (\\cos\\alpha - \\cos\\beta)^{2} + (\\sin\\alpha - \\sin\\beta)^{2} = 2 - 2(\\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta)\\)",
+              "\\(|CD|^{2} = (\\cos(\\alpha - \\beta) - 1)^{2} + \\sin^{2}(\\alpha - \\beta) = 2 - 2\\cos(\\alpha - \\beta)\\)",
+              "\\(|AB|^{2} = |CD|^{2} \\Rightarrow 2 - 2(\\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta) = 2 - 2\\cos(\\alpha - \\beta)\\), so \\(\\cos(\\alpha - \\beta) = \\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta\\)."
+            ],
+            "final_answer": "\\(\\cos(\\alpha - \\beta) = \\cos\\alpha\\cos\\beta + \\sin\\alpha\\sin\\beta\\) (true for all \\(\\alpha\\), \\(\\beta\\))."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Starting from the fundamental law and the results \\(\\cos\\left(\\frac{\\pi}{2} - \\theta\\right) = \\sin\\theta\\), \\(\\sin\\left(\\frac{\\pi}{2} - \\theta\\right) = \\cos\\theta\\), prove that \\(\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta\\), and check it for \\(\\alpha = \\beta = 45^{\\circ}\\). (5 marks)",
+            "explanation": "Write the sine as the cosine of the complement and split the angle as a difference.",
+            "book_ref": {
+              "topic_id": "97d91995-25cc-5c97-ab9e-b5da4ba7d191",
+              "quote": "the cosine of an angle is the sine of its complement"
+            },
+            "steps": [
+              "\\(\\sin(\\alpha + \\beta) = \\cos\\left[\\frac{\\pi}{2} - (\\alpha + \\beta)\\right] = \\cos\\left[\\left(\\frac{\\pi}{2} - \\alpha\\right) - \\beta\\right]\\)",
+              "By the fundamental law: \\(= \\cos\\left(\\frac{\\pi}{2} - \\alpha\\right)\\cos\\beta + \\sin\\left(\\frac{\\pi}{2} - \\alpha\\right)\\sin\\beta\\)",
+              "\\(= \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta\\)",
+              "Check: \\(\\sin 90^{\\circ} = 1\\) and \\(\\frac{1}{\\sqrt{2}}\\cdot\\frac{1}{\\sqrt{2}} + \\frac{1}{\\sqrt{2}}\\cdot\\frac{1}{\\sqrt{2}} = \\frac{1}{2} + \\frac{1}{2} = 1\\)."
+            ],
+            "final_answer": "\\(\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta\\); verified for \\(45^{\\circ}, 45^{\\circ}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Prove that \\(\\tan(\\alpha + \\beta) = \\dfrac{\\tan\\alpha + \\tan\\beta}{1 - \\tan\\alpha\\tan\\beta}\\). Use it to find \\(\\tan(\\alpha + \\beta)\\) when \\(\\tan\\alpha = \\frac{2}{3}\\) and \\(\\tan\\beta = \\frac{1}{5}\\). (5 marks)",
+            "explanation": "Write tan as sin over cos, expand, and divide top and bottom by \\(\\cos\\alpha\\cos\\beta\\).",
+            "book_ref": {
+              "topic_id": "97d91995-25cc-5c97-ab9e-b5da4ba7d191",
+              "quote": "Why divide by \\(\\cos\\alpha\\cos\\beta\\)? Because"
+            },
+            "steps": [
+              "\\(\\tan(\\alpha + \\beta) = \\dfrac{\\sin(\\alpha + \\beta)}{\\cos(\\alpha + \\beta)} = \\dfrac{\\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta}{\\cos\\alpha\\cos\\beta - \\sin\\alpha\\sin\\beta}\\)",
+              "Divide numerator and denominator by \\(\\cos\\alpha\\cos\\beta\\) (\\(\\ne 0\\)): \\(= \\dfrac{\\tan\\alpha + \\tan\\beta}{1 - \\tan\\alpha\\tan\\beta}\\)",
+              "With \\(\\tan\\alpha = \\frac{2}{3}\\), \\(\\tan\\beta = \\frac{1}{5}\\): numerator \\(= \\frac{2}{3} + \\frac{1}{5} = \\frac{13}{15}\\)",
+              "Denominator \\(= 1 - \\frac{2}{15} = \\frac{13}{15}\\)",
+              "\\(\\tan(\\alpha + \\beta) = \\dfrac{13/15}{13/15} = 1\\)"
+            ],
+            "final_answer": "Formula proved; \\(\\tan(\\alpha + \\beta) = 1\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 If \\(\\sin\\alpha = \\frac{4}{5}\\) and \\(\\cos\\beta = \\frac{5}{13}\\), where \\(\\alpha\\) and \\(\\beta\\) are acute, find \\(\\sin(\\alpha + \\beta)\\), \\(\\cos(\\alpha + \\beta)\\) and \\(\\tan(\\alpha + \\beta)\\). In which quadrant does the terminal side of \\(\\alpha + \\beta\\) lie? (5 marks)",
+            "explanation": "Find the missing ratios (both positive), use the sum formulas, then read the quadrant from the signs.",
+            "book_ref": {
+              "topic_id": "97d91995-25cc-5c97-ab9e-b5da4ba7d191",
+              "quote": "From the single law of 10.1.1 the book now deduces ten results"
+            },
+            "steps": [
+              "\\(\\cos\\alpha = \\sqrt{1 - \\frac{16}{25}} = \\frac{3}{5}\\), \\(\\sin\\beta = \\sqrt{1 - \\frac{25}{169}} = \\frac{12}{13}\\)",
+              "\\(\\sin(\\alpha + \\beta) = \\frac{4}{5}\\cdot\\frac{5}{13} + \\frac{3}{5}\\cdot\\frac{12}{13} = \\frac{20 + 36}{65} = \\frac{56}{65}\\)",
+              "\\(\\cos(\\alpha + \\beta) = \\frac{3}{5}\\cdot\\frac{5}{13} - \\frac{4}{5}\\cdot\\frac{12}{13} = \\frac{15 - 48}{65} = -\\frac{33}{65}\\)",
+              "\\(\\tan(\\alpha + \\beta) = \\dfrac{56/65}{-33/65} = -\\dfrac{56}{33}\\)",
+              "Sine positive and cosine negative: the terminal side of \\(\\alpha + \\beta\\) is in quadrant II."
+            ],
+            "final_answer": "\\(\\sin(\\alpha + \\beta) = \\frac{56}{65}\\), \\(\\cos(\\alpha + \\beta) = -\\frac{33}{65}\\), \\(\\tan(\\alpha + \\beta) = -\\frac{56}{33}\\); quadrant II."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Without using tables, find the value of \\(\\sin 420^{\\circ}\\cos 390^{\\circ} + \\cos(-660^{\\circ})\\sin(-330^{\\circ})\\). (5 marks)",
+            "explanation": "Reduce each ratio with the odd/even multiple rule and the quadrant sign, then combine.",
+            "book_ref": {
+              "topic_id": "c2d1fa49-1e2f-51e2-8a26-c33e75354c37",
+              "quote": "write each angle as \\(n \\times 90^{\\circ} \\pm \\theta\\) with \\(\\theta\\) acute"
+            },
+            "steps": [
+              "\\(\\sin 420^{\\circ} = \\sin(4 \\times 90^{\\circ} + 60^{\\circ}) = \\sin 60^{\\circ} = \\frac{\\sqrt{3}}{2}\\) (quadrant I)",
+              "\\(\\cos 390^{\\circ} = \\cos(4 \\times 90^{\\circ} + 30^{\\circ}) = \\cos 30^{\\circ} = \\frac{\\sqrt{3}}{2}\\)",
+              "\\(\\cos(-660^{\\circ}) = \\cos 660^{\\circ} = \\cos(8 \\times 90^{\\circ} - 60^{\\circ}) = \\cos 60^{\\circ} = \\frac{1}{2}\\) (quadrant IV, cos positive)",
+              "\\(\\sin(-330^{\\circ}) = -\\sin 330^{\\circ} = -\\sin(4 \\times 90^{\\circ} - 30^{\\circ}) = -(-\\sin 30^{\\circ}) = \\frac{1}{2}\\)",
+              "Value \\(= \\frac{\\sqrt{3}}{2}\\cdot\\frac{\\sqrt{3}}{2} + \\frac{1}{2}\\cdot\\frac{1}{2} = \\frac{3}{4} + \\frac{1}{4} = 1\\)"
+            ],
+            "final_answer": "The value is \\(1\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Prove that \\(\\dfrac{\\sin(\\pi - \\theta)\\tan\\left(\\frac{\\pi}{2} + \\theta\\right)}{\\cos(2\\pi - \\theta)} + \\dfrac{\\cos\\left(\\frac{\\pi}{2} + \\theta\\right)}{\\sin(\\pi + \\theta)} = 0\\). (5 marks)",
+            "explanation": "Change every allied ratio into a ratio of \\(\\theta\\) with the correct sign, then simplify each fraction.",
+            "book_ref": {
+              "topic_id": "c2d1fa49-1e2f-51e2-8a26-c33e75354c37",
+              "quote": "Taking the sign from the new ratio"
+            },
+            "steps": [
+              "\\(\\sin(\\pi - \\theta) = \\sin\\theta\\) (quadrant II, sin positive); \\(\\tan\\left(\\frac{\\pi}{2} + \\theta\\right) = -\\cot\\theta\\) (odd multiple, quadrant II, tan negative)",
+              "\\(\\cos(2\\pi - \\theta) = \\cos\\theta\\) (quadrant IV, cos positive)",
+              "First fraction \\(= \\dfrac{\\sin\\theta(-\\cot\\theta)}{\\cos\\theta} = \\dfrac{-\\cos\\theta}{\\cos\\theta} = -1\\)",
+              "\\(\\cos\\left(\\frac{\\pi}{2} + \\theta\\right) = -\\sin\\theta\\) and \\(\\sin(\\pi + \\theta) = -\\sin\\theta\\), so the second fraction \\(= \\dfrac{-\\sin\\theta}{-\\sin\\theta} = 1\\)",
+              "L.H.S. \\(= -1 + 1 = 0\\) = R.H.S."
+            ],
+            "final_answer": "L.H.S. \\(= -1 + 1 = 0\\); proved."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 If \\(\\tan\\alpha = -\\frac{4}{3}\\) with the terminal side of \\(\\alpha\\) in quadrant II, and \\(\\sin\\beta = -\\frac{5}{13}\\) with the terminal side of \\(\\beta\\) in quadrant III, find \\(\\sin(\\alpha + \\beta)\\), \\(\\cos(\\alpha + \\beta)\\), \\(\\tan(\\alpha + \\beta)\\) and the quadrant of \\(\\alpha + \\beta\\). (5 marks)",
+            "explanation": "Find all four missing ratios with the quadrant signs, then use the sum formulas.",
+            "book_ref": {
+              "topic_id": "b4e67428-a9dc-5340-a982-f61de0a0da34",
+              "quote": "Forgetting the quadrant when taking a square root"
+            },
+            "steps": [
+              "\\(\\sec\\alpha = -\\sqrt{1 + \\frac{16}{9}} = -\\frac{5}{3}\\) (quadrant II), so \\(\\cos\\alpha = -\\frac{3}{5}\\), \\(\\sin\\alpha = \\tan\\alpha\\cos\\alpha = \\frac{4}{5}\\)",
+              "\\(\\cos\\beta = -\\sqrt{1 - \\frac{25}{169}} = -\\frac{12}{13}\\) (quadrant III)",
+              "\\(\\sin(\\alpha + \\beta) = \\frac{4}{5}\\left(-\\frac{12}{13}\\right) + \\left(-\\frac{3}{5}\\right)\\left(-\\frac{5}{13}\\right) = \\frac{-48 + 15}{65} = -\\frac{33}{65}\\)",
+              "\\(\\cos(\\alpha + \\beta) = \\left(-\\frac{3}{5}\\right)\\left(-\\frac{12}{13}\\right) - \\frac{4}{5}\\left(-\\frac{5}{13}\\right) = \\frac{36 + 20}{65} = \\frac{56}{65}\\)",
+              "\\(\\tan(\\alpha + \\beta) = -\\frac{33}{56}\\); sine negative, cosine positive: quadrant IV."
+            ],
+            "final_answer": "\\(\\sin(\\alpha + \\beta) = -\\frac{33}{65}\\), \\(\\cos(\\alpha + \\beta) = \\frac{56}{65}\\), \\(\\tan(\\alpha + \\beta) = -\\frac{33}{56}\\); quadrant IV."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 If \\(\\alpha + \\beta = 45^{\\circ}\\), prove that \\((1 + \\tan\\alpha)(1 + \\tan\\beta) = 2\\). Hence find the value of \\((1 + \\tan 20^{\\circ})(1 + \\tan 25^{\\circ})\\). (5 marks)",
+            "explanation": "Take tan of both sides of \\(\\alpha + \\beta = 45^{\\circ}\\), clear the fraction and add 1.",
+            "book_ref": {
+              "topic_id": "b4e67428-a9dc-5340-a982-f61de0a0da34",
+              "quote": "In the same way \\(\\frac{\\cos x - \\sin x}{\\cos x + \\sin x} = \\tan(45^{\\circ} - x)\\)."
+            },
+            "steps": [
+              "\\(\\tan(\\alpha + \\beta) = \\tan 45^{\\circ} = 1 \\Rightarrow \\dfrac{\\tan\\alpha + \\tan\\beta}{1 - \\tan\\alpha\\tan\\beta} = 1\\)",
+              "\\(\\tan\\alpha + \\tan\\beta = 1 - \\tan\\alpha\\tan\\beta \\Rightarrow \\tan\\alpha + \\tan\\beta + \\tan\\alpha\\tan\\beta = 1\\)",
+              "\\((1 + \\tan\\alpha)(1 + \\tan\\beta) = 1 + \\tan\\alpha + \\tan\\beta + \\tan\\alpha\\tan\\beta = 1 + 1 = 2\\)",
+              "\\(20^{\\circ} + 25^{\\circ} = 45^{\\circ}\\), so \\((1 + \\tan 20^{\\circ})(1 + \\tan 25^{\\circ}) = 2\\)."
+            ],
+            "final_answer": "Proved; \\((1 + \\tan 20^{\\circ})(1 + \\tan 25^{\\circ}) = 2\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Express \\(15\\sin\\theta + 8\\cos\\theta\\) in the form \\(r\\sin(\\theta + \\phi)\\) with \\(\\phi\\) in quadrant I. Hence find the greatest and least values of \\(15\\sin\\theta + 8\\cos\\theta\\), and \\(\\sin\\theta\\) when the greatest value occurs (\\(0^{\\circ} < \\theta < 90^{\\circ}\\)). (5 marks)",
+            "explanation": "Compare with \\(r\\sin\\theta\\cos\\phi + r\\cos\\theta\\sin\\phi\\), find \\(r\\) and \\(\\phi\\), then use \\(-1 \\le \\sin \\le 1\\).",
+            "book_ref": {
+              "topic_id": "b4e67428-a9dc-5340-a982-f61de0a0da34",
+              "quote": "\\(a\\sin\\theta + b\\cos\\theta = r\\sin(\\theta + \\phi)\\), \\(r = \\sqrt{a^{2}+b^{2}}\\)"
+            },
+            "steps": [
+              "\\(r\\sin(\\theta + \\phi) = r\\cos\\phi\\sin\\theta + r\\sin\\phi\\cos\\theta\\), so \\(r\\cos\\phi = 15\\), \\(r\\sin\\phi = 8\\)",
+              "\\(r^{2} = 225 + 64 = 289 \\Rightarrow r = 17\\); \\(\\tan\\phi = \\frac{8}{15}\\), \\(\\sin\\phi = \\frac{8}{17}\\), \\(\\cos\\phi = \\frac{15}{17}\\)",
+              "\\(15\\sin\\theta + 8\\cos\\theta = 17\\sin(\\theta + \\phi)\\); since \\(-1 \\le \\sin(\\theta + \\phi) \\le 1\\), the values lie from \\(-17\\) to \\(17\\)",
+              "The greatest value \\(17\\) occurs when \\(\\theta + \\phi = 90^{\\circ}\\), i.e. \\(\\theta = 90^{\\circ} - \\phi\\)",
+              "Then \\(\\sin\\theta = \\sin(90^{\\circ} - \\phi) = \\cos\\phi = \\frac{15}{17}\\)"
+            ],
+            "final_answer": "\\(17\\sin(\\theta + \\phi)\\), \\(\\tan\\phi = \\frac{8}{15}\\); greatest \\(17\\), least \\(-17\\); \\(\\sin\\theta = \\frac{15}{17}\\) at the greatest value."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 If \\(\\cos\\alpha = -\\frac{3}{5}\\) and \\(90^{\\circ} < \\alpha < 180^{\\circ}\\), find \\(\\sin 2\\alpha\\), \\(\\cos 2\\alpha\\) and \\(\\tan 2\\alpha\\). In which quadrant does the terminal side of \\(2\\alpha\\) lie? (5 marks)",
+            "explanation": "Find \\(\\sin\\alpha\\) with the quadrant sign, apply the double angle formulas, read the quadrant from the signs.",
+            "book_ref": {
+              "topic_id": "cedc2356-1c48-59e0-a83a-38321640675a",
+              "quote": "only \\(\\cos\\alpha\\) known: use"
+            },
+            "steps": [
+              "\\(\\sin\\alpha = +\\sqrt{1 - \\frac{9}{25}} = \\frac{4}{5}\\) (quadrant II)",
+              "\\(\\sin 2\\alpha = 2\\sin\\alpha\\cos\\alpha = 2\\cdot\\frac{4}{5}\\cdot\\left(-\\frac{3}{5}\\right) = -\\frac{24}{25}\\)",
+              "\\(\\cos 2\\alpha = 2\\cos^{2}\\alpha - 1 = \\frac{18}{25} - 1 = -\\frac{7}{25}\\)",
+              "\\(\\tan 2\\alpha = \\dfrac{-24/25}{-7/25} = \\dfrac{24}{7}\\)",
+              "\\(180^{\\circ} < 2\\alpha < 360^{\\circ}\\) with sine and cosine both negative: quadrant III."
+            ],
+            "final_answer": "\\(\\sin 2\\alpha = -\\frac{24}{25}\\), \\(\\cos 2\\alpha = -\\frac{7}{25}\\), \\(\\tan 2\\alpha = \\frac{24}{7}\\); quadrant III."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Prove that \\(\\dfrac{1 + \\sin 2\\theta + \\cos 2\\theta}{1 + \\sin 2\\theta - \\cos 2\\theta} = \\cot\\theta\\). (5 marks)",
+            "explanation": "Use \\(1 + \\cos 2\\theta = 2\\cos^{2}\\theta\\), \\(1 - \\cos 2\\theta = 2\\sin^{2}\\theta\\), \\(\\sin 2\\theta = 2\\sin\\theta\\cos\\theta\\) and factorize.",
+            "book_ref": {
+              "topic_id": "cedc2356-1c48-59e0-a83a-38321640675a",
+              "quote": "Rearranging the last two forms gives two very useful results"
+            },
+            "steps": [
+              "Numerator \\(= (1 + \\cos 2\\theta) + \\sin 2\\theta = 2\\cos^{2}\\theta + 2\\sin\\theta\\cos\\theta\\)",
+              "\\(= 2\\cos\\theta(\\cos\\theta + \\sin\\theta)\\)",
+              "Denominator \\(= (1 - \\cos 2\\theta) + \\sin 2\\theta = 2\\sin^{2}\\theta + 2\\sin\\theta\\cos\\theta = 2\\sin\\theta(\\sin\\theta + \\cos\\theta)\\)",
+              "L.H.S. \\(= \\dfrac{2\\cos\\theta(\\cos\\theta + \\sin\\theta)}{2\\sin\\theta(\\sin\\theta + \\cos\\theta)} = \\dfrac{\\cos\\theta}{\\sin\\theta} = \\cot\\theta\\) = R.H.S."
+            ],
+            "final_answer": "L.H.S. reduces to \\(\\cot\\theta\\); proved."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 If \\(\\cos\\alpha = -\\frac{119}{169}\\) and \\(180^{\\circ} < \\alpha < 270^{\\circ}\\), find \\(\\sin\\dfrac{\\alpha}{2}\\), \\(\\cos\\dfrac{\\alpha}{2}\\) and \\(\\tan\\dfrac{\\alpha}{2}\\). (5 marks)",
+            "explanation": "Locate \\(\\frac{\\alpha}{2}\\) first, then use the half angle identities with the right signs.",
+            "book_ref": {
+              "topic_id": "cc5d5db5-bfb3-5c8f-a109-a40553523956",
+              "quote": "The sign is chosen from the quadrant of"
+            },
+            "steps": [
+              "\\(90^{\\circ} < \\frac{\\alpha}{2} < 135^{\\circ}\\): quadrant II, so sine is positive and cosine and tangent are negative.",
+              "\\(\\sin\\frac{\\alpha}{2} = +\\sqrt{\\dfrac{1 + \\frac{119}{169}}{2}} = \\sqrt{\\dfrac{288}{338}} = \\sqrt{\\dfrac{144}{169}} = \\dfrac{12}{13}\\)",
+              "\\(\\cos\\frac{\\alpha}{2} = -\\sqrt{\\dfrac{1 - \\frac{119}{169}}{2}} = -\\sqrt{\\dfrac{50}{338}} = -\\sqrt{\\dfrac{25}{169}} = -\\dfrac{5}{13}\\)",
+              "\\(\\tan\\frac{\\alpha}{2} = \\dfrac{12/13}{-5/13} = -\\dfrac{12}{5}\\)"
+            ],
+            "final_answer": "\\(\\sin\\frac{\\alpha}{2} = \\frac{12}{13}\\), \\(\\cos\\frac{\\alpha}{2} = -\\frac{5}{13}\\), \\(\\tan\\frac{\\alpha}{2} = -\\frac{12}{5}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Using half angle identities, find the exact values of \\(\\sin 157.5^{\\circ}\\), \\(\\cos 157.5^{\\circ}\\) and \\(\\tan 157.5^{\\circ}\\). (5 marks)",
+            "explanation": "Write \\(157.5^{\\circ} = \\frac{315^{\\circ}}{2}\\) with \\(\\cos 315^{\\circ} = \\frac{1}{\\sqrt{2}}\\); \\(157.5^{\\circ}\\) is in quadrant II.",
+            "book_ref": {
+              "topic_id": "cc5d5db5-bfb3-5c8f-a109-a40553523956",
+              "quote": "Plus inside goes with cosine, minus inside goes with sine."
+            },
+            "steps": [
+              "\\(\\cos 315^{\\circ} = \\cos(360^{\\circ} - 45^{\\circ}) = \\frac{1}{\\sqrt{2}}\\); \\(157.5^{\\circ}\\) lies in quadrant II.",
+              "\\(\\sin 157.5^{\\circ} = +\\sqrt{\\dfrac{1 - \\frac{1}{\\sqrt{2}}}{2}} = \\dfrac{\\sqrt{2 - \\sqrt{2}}}{2}\\)",
+              "\\(\\cos 157.5^{\\circ} = -\\sqrt{\\dfrac{1 + \\frac{1}{\\sqrt{2}}}{2}} = -\\dfrac{\\sqrt{2 + \\sqrt{2}}}{2}\\)",
+              "\\(\\tan 157.5^{\\circ} = -\\sqrt{\\dfrac{1 - \\frac{1}{\\sqrt{2}}}{1 + \\frac{1}{\\sqrt{2}}}} = -\\sqrt{\\dfrac{\\sqrt{2} - 1}{\\sqrt{2} + 1}} = -(\\sqrt{2} - 1) = 1 - \\sqrt{2}\\)"
+            ],
+            "final_answer": "\\(\\sin 157.5^{\\circ} = \\frac{\\sqrt{2 - \\sqrt{2}}}{2}\\), \\(\\cos 157.5^{\\circ} = -\\frac{\\sqrt{2 + \\sqrt{2}}}{2}\\), \\(\\tan 157.5^{\\circ} = 1 - \\sqrt{2}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 Prove that \\(\\sin 3\\alpha = 3\\sin\\alpha - 4\\sin^{3}\\alpha\\), and verify it for \\(\\alpha = 30^{\\circ}\\). (5 marks)",
+            "explanation": "Write \\(3\\alpha = 2\\alpha + \\alpha\\), use the sum formula, then the double angle formulas in sines only.",
+            "book_ref": {
+              "topic_id": "19cd47fa-ac30-5eae-a691-bce9cea03673",
+              "quote": "The whole idea of every proof below is one line"
+            },
+            "steps": [
+              "\\(\\sin 3\\alpha = \\sin(2\\alpha + \\alpha) = \\sin 2\\alpha\\cos\\alpha + \\cos 2\\alpha\\sin\\alpha\\)",
+              "\\(= 2\\sin\\alpha\\cos^{2}\\alpha + (1 - 2\\sin^{2}\\alpha)\\sin\\alpha\\)",
+              "\\(= 2\\sin\\alpha(1 - \\sin^{2}\\alpha) + \\sin\\alpha - 2\\sin^{3}\\alpha\\)",
+              "\\(= 3\\sin\\alpha - 4\\sin^{3}\\alpha\\)",
+              "Check \\(\\alpha = 30^{\\circ}\\): \\(\\sin 90^{\\circ} = 1\\) and \\(3\\cdot\\frac{1}{2} - 4\\cdot\\frac{1}{8} = 1\\)."
+            ],
+            "final_answer": "\\(\\sin 3\\alpha = 3\\sin\\alpha - 4\\sin^{3}\\alpha\\); verified at \\(30^{\\circ}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 Prove that \\(\\cos 3\\alpha = 4\\cos^{3}\\alpha - 3\\cos\\alpha\\), and verify it for \\(\\alpha = 60^{\\circ}\\). (5 marks)",
+            "explanation": "Write \\(3\\alpha = 2\\alpha + \\alpha\\), use the sum formula, then the double angle formulas in cosines only.",
+            "book_ref": {
+              "topic_id": "19cd47fa-ac30-5eae-a691-bce9cea03673",
+              "quote": "only cosines; the signs are the other way round"
+            },
+            "steps": [
+              "\\(\\cos 3\\alpha = \\cos(2\\alpha + \\alpha) = \\cos 2\\alpha\\cos\\alpha - \\sin 2\\alpha\\sin\\alpha\\)",
+              "\\(= (2\\cos^{2}\\alpha - 1)\\cos\\alpha - 2\\sin^{2}\\alpha\\cos\\alpha\\)",
+              "\\(= 2\\cos^{3}\\alpha - \\cos\\alpha - 2(1 - \\cos^{2}\\alpha)\\cos\\alpha\\)",
+              "\\(= 4\\cos^{3}\\alpha - 3\\cos\\alpha\\)",
+              "Check \\(\\alpha = 60^{\\circ}\\): \\(\\cos 180^{\\circ} = -1\\) and \\(4\\cdot\\frac{1}{8} - 3\\cdot\\frac{1}{2} = -1\\)."
+            ],
+            "final_answer": "\\(\\cos 3\\alpha = 4\\cos^{3}\\alpha - 3\\cos\\alpha\\); verified at \\(60^{\\circ}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Show that \\(\\sin^{4}\\theta + \\cos^{4}\\theta = \\dfrac{3 + \\cos 4\\theta}{4}\\), an expression in first powers of multiples of \\(\\theta\\). (5 marks)",
+            "explanation": "Complete the square with \\(\\sin^{2}\\theta + \\cos^{2}\\theta = 1\\), then use \\(\\sin 2\\theta\\) and \\(\\sin^{2}2\\theta = \\frac{1 - \\cos 4\\theta}{2}\\).",
+            "book_ref": {
+              "topic_id": "19cd47fa-ac30-5eae-a691-bce9cea03673",
+              "quote": "To remove powers use \\(\\cos^{2}\\theta = \\frac{1 + \\cos 2\\theta}{2}\\)"
+            },
+            "steps": [
+              "\\(\\sin^{4}\\theta + \\cos^{4}\\theta = (\\sin^{2}\\theta + \\cos^{2}\\theta)^{2} - 2\\sin^{2}\\theta\\cos^{2}\\theta\\)",
+              "\\(= 1 - \\frac{1}{2}(2\\sin\\theta\\cos\\theta)^{2} = 1 - \\frac{1}{2}\\sin^{2}2\\theta\\)",
+              "\\(= 1 - \\frac{1}{2}\\cdot\\dfrac{1 - \\cos 4\\theta}{2} = 1 - \\dfrac{1 - \\cos 4\\theta}{4}\\)",
+              "\\(= \\dfrac{4 - 1 + \\cos 4\\theta}{4} = \\dfrac{3 + \\cos 4\\theta}{4}\\)"
+            ],
+            "final_answer": "\\(\\sin^{4}\\theta + \\cos^{4}\\theta = \\dfrac{3 + \\cos 4\\theta}{4}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 If \\(\\tan\\theta = \\frac{3}{4}\\) and \\(\\theta\\) is acute, find \\(\\sin 2\\theta\\) and \\(\\cos 2\\theta\\) through \\(\\tan\\theta\\) alone, and find \\(\\sin 3\\theta\\) and \\(\\cos 3\\theta\\). (5 marks)",
+            "explanation": "Use the tan forms of \\(\\sin 2\\theta\\), \\(\\cos 2\\theta\\); find \\(\\sin\\theta\\), \\(\\cos\\theta\\) and use the triple angle formulas.",
+            "book_ref": {
+              "topic_id": "19cd47fa-ac30-5eae-a691-bce9cea03673",
+              "quote": "they express \\(\\sin 2\\theta\\) and \\(\\cos 2\\theta\\) through \\(\\tan\\theta\\) alone"
+            },
+            "steps": [
+              "\\(\\sin 2\\theta = \\dfrac{2\\tan\\theta}{1 + \\tan^{2}\\theta} = \\dfrac{\\frac{3}{2}}{\\frac{25}{16}} = \\dfrac{24}{25}\\)",
+              "\\(\\cos 2\\theta = \\dfrac{1 - \\tan^{2}\\theta}{1 + \\tan^{2}\\theta} = \\dfrac{\\frac{7}{16}}{\\frac{25}{16}} = \\dfrac{7}{25}\\)",
+              "\\(\\theta\\) acute: \\(\\sin\\theta = \\frac{3}{5}\\), \\(\\cos\\theta = \\frac{4}{5}\\)",
+              "\\(\\sin 3\\theta = 3\\cdot\\frac{3}{5} - 4\\cdot\\frac{27}{125} = \\frac{225 - 108}{125} = \\frac{117}{125}\\)",
+              "\\(\\cos 3\\theta = 4\\cdot\\frac{64}{125} - 3\\cdot\\frac{4}{5} = \\frac{256 - 300}{125} = -\\frac{44}{125}\\)"
+            ],
+            "final_answer": "\\(\\sin 2\\theta = \\frac{24}{25}\\), \\(\\cos 2\\theta = \\frac{7}{25}\\), \\(\\sin 3\\theta = \\frac{117}{125}\\), \\(\\cos 3\\theta = -\\frac{44}{125}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 Starting from \\(\\sin(\\alpha + \\beta)\\) and \\(\\sin(\\alpha - \\beta)\\), prove that \\(\\sin P + \\sin Q = 2\\sin\\dfrac{P + Q}{2}\\cos\\dfrac{P - Q}{2}\\) and \\(\\sin P - \\sin Q = 2\\cos\\dfrac{P + Q}{2}\\sin\\dfrac{P - Q}{2}\\). (5 marks)",
+            "explanation": "Add and subtract the two sum formulas, then put \\(\\alpha + \\beta = P\\), \\(\\alpha - \\beta = Q\\).",
+            "book_ref": {
+              "topic_id": "eaba70d6-7abc-55a0-a24d-7d638b3e34bd",
+              "quote": "Adding (i) and (ii) we get"
+            },
+            "steps": [
+              "\\(\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta\\) and \\(\\sin(\\alpha - \\beta) = \\sin\\alpha\\cos\\beta - \\cos\\alpha\\sin\\beta\\)",
+              "Adding: \\(\\sin(\\alpha + \\beta) + \\sin(\\alpha - \\beta) = 2\\sin\\alpha\\cos\\beta\\); subtracting: \\(\\sin(\\alpha + \\beta) - \\sin(\\alpha - \\beta) = 2\\cos\\alpha\\sin\\beta\\)",
+              "Put \\(\\alpha + \\beta = P\\), \\(\\alpha - \\beta = Q\\): then \\(\\alpha = \\dfrac{P + Q}{2}\\), \\(\\beta = \\dfrac{P - Q}{2}\\)",
+              "\\(\\sin P + \\sin Q = 2\\sin\\dfrac{P + Q}{2}\\cos\\dfrac{P - Q}{2}\\)",
+              "\\(\\sin P - \\sin Q = 2\\cos\\dfrac{P + Q}{2}\\sin\\dfrac{P - Q}{2}\\)"
+            ],
+            "final_answer": "Both sum-to-product formulas for sines are proved."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 Prove that \\(\\cos 10^{\\circ} + \\cos 110^{\\circ} + \\cos 130^{\\circ} = 0\\). (5 marks)",
+            "explanation": "Pair the last two terms with the sum-to-product formula.",
+            "book_ref": {
+              "topic_id": "eaba70d6-7abc-55a0-a24d-7d638b3e34bd",
+              "quote": "Use \\(\\cos(-\\theta) = \\cos\\theta\\), \\(\\sin(-\\theta) = -\\sin\\theta\\)"
+            },
+            "steps": [
+              "\\(\\cos 110^{\\circ} + \\cos 130^{\\circ} = 2\\cos\\dfrac{110^{\\circ} + 130^{\\circ}}{2}\\cos\\dfrac{110^{\\circ} - 130^{\\circ}}{2}\\)",
+              "\\(= 2\\cos 120^{\\circ}\\cos(-10^{\\circ}) = 2\\cos 120^{\\circ}\\cos 10^{\\circ}\\)",
+              "\\(\\cos 120^{\\circ} = \\cos(180^{\\circ} - 60^{\\circ}) = -\\frac{1}{2}\\), so this is \\(-\\cos 10^{\\circ}\\)",
+              "L.H.S. \\(= \\cos 10^{\\circ} - \\cos 10^{\\circ} = 0\\) = R.H.S."
+            ],
+            "final_answer": "L.H.S. \\(= 0\\); proved."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 Prove that \\(\\sin\\theta + \\sin 2\\theta + \\sin 3\\theta = \\sin 2\\theta\\,(1 + 2\\cos\\theta)\\), and check it for \\(\\theta = 30^{\\circ}\\). (5 marks)",
+            "explanation": "Pair \\(\\sin 3\\theta\\) with \\(\\sin\\theta\\), then take \\(\\sin 2\\theta\\) common.",
+            "book_ref": {
+              "topic_id": "eaba70d6-7abc-55a0-a24d-7d638b3e34bd",
+              "quote": "Sum to product: half sum and half difference"
+            },
+            "steps": [
+              "\\(\\sin 3\\theta + \\sin\\theta = 2\\sin\\dfrac{3\\theta + \\theta}{2}\\cos\\dfrac{3\\theta - \\theta}{2} = 2\\sin 2\\theta\\cos\\theta\\)",
+              "L.H.S. \\(= 2\\sin 2\\theta\\cos\\theta + \\sin 2\\theta\\)",
+              "\\(= \\sin 2\\theta\\,(1 + 2\\cos\\theta)\\) = R.H.S.",
+              "Check \\(\\theta = 30^{\\circ}\\): L.H.S. \\(= \\frac{1}{2} + \\frac{\\sqrt{3}}{2} + 1 = \\frac{3 + \\sqrt{3}}{2}\\); R.H.S. \\(= \\frac{\\sqrt{3}}{2}(1 + \\sqrt{3}) = \\frac{\\sqrt{3} + 3}{2}\\)."
+            ],
+            "final_answer": "Proved; both sides equal \\(\\frac{3 + \\sqrt{3}}{2}\\) at \\(\\theta = 30^{\\circ}\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

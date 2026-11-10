@@ -1,0 +1,425 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH4-LONG",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch4",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch4/u-long-questions",
+      "title": "Long Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 49,
+          "pdf_to": 82,
+          "note": "Practice long questions written from Unit 4 (PDF 49-82, printed 44-77); not printed in the book. Based on the unit's text, theorems, formulas and worked examples (changed values); none repeats the unit's exercises. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice long questions for the whole of Unit 4 (Matrices & Determinants), in the shape of a Board Section-II question part: each carries 5 marks (a longer problem, a proof or a derivation). Each one is solved in full, step by step."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 If \\(A = \\begin{bmatrix}2 & -1 & 0 \\\\ 3 & 4 & 1\\end{bmatrix}\\) and \\(B = \\begin{bmatrix}1 & 2 & -3 \\\\ 0 & -2 & 5\\end{bmatrix}\\), show that \\((A - B)^{t} = A^{t} - B^{t}\\). (5 marks)",
+            "explanation": "Work out each side separately: subtract then transpose; transpose then subtract; compare.",
+            "book_ref": {
+              "topic_id": "9e32dda3-fe2a-5f40-a65f-e4bf5cc29e56",
+              "quote": "The same is true for a difference"
+            },
+            "steps": [
+              "\\(A - B = \\begin{bmatrix}2 - 1 & -1 - 2 & 0 + 3 \\\\ 3 - 0 & 4 + 2 & 1 - 5\\end{bmatrix} = \\begin{bmatrix}1 & -3 & 3 \\\\ 3 & 6 & -4\\end{bmatrix}\\)",
+              "\\((A - B)^{t} = \\begin{bmatrix}1 & 3 \\\\ -3 & 6 \\\\ 3 & -4\\end{bmatrix}\\) ... (i)",
+              "\\(A^{t} = \\begin{bmatrix}2 & 3 \\\\ -1 & 4 \\\\ 0 & 1\\end{bmatrix}\\), \\(B^{t} = \\begin{bmatrix}1 & 0 \\\\ 2 & -2 \\\\ -3 & 5\\end{bmatrix}\\)",
+              "\\(A^{t} - B^{t} = \\begin{bmatrix}2 - 1 & 3 - 0 \\\\ -1 - 2 & 4 + 2 \\\\ 0 + 3 & 1 - 5\\end{bmatrix} = \\begin{bmatrix}1 & 3 \\\\ -3 & 6 \\\\ 3 & -4\\end{bmatrix}\\) ... (ii)",
+              "(i) and (ii) have the same order \\(3 \\times 2\\) and equal corresponding entries"
+            ],
+            "final_answer": "Hence proved: \\((A - B)^{t} = A^{t} - B^{t}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 If \\(A = \\begin{bmatrix}1 & 2 & 0 \\\\ 0 & 1 & 1 \\\\ 1 & 0 & 2\\end{bmatrix}\\), find the matrix \\(X\\) such that \\(A^{2} - 3A + 2I - X = O\\). (5 marks)",
+            "explanation": "\\(X = A^{2} - 3A + 2I\\); find \\(A^{2} = A \\cdot A\\) row by column, then combine entry by entry.",
+            "book_ref": {
+              "topic_id": "eb9c4343-1d8a-5284-ab45-64ce75ecb736",
+              "quote": "Powers exist only for square matrices"
+            },
+            "steps": [
+              "\\(A^{2} = \\begin{bmatrix}1 & 2 & 0 \\\\ 0 & 1 & 1 \\\\ 1 & 0 & 2\\end{bmatrix}\\begin{bmatrix}1 & 2 & 0 \\\\ 0 & 1 & 1 \\\\ 1 & 0 & 2\\end{bmatrix}\\)",
+              "Row 1: \\((1 + 0 + 0,\\ 2 + 2 + 0,\\ 0 + 2 + 0) = (1, 4, 2)\\)",
+              "Row 2: \\((0 + 0 + 1,\\ 0 + 1 + 0,\\ 0 + 1 + 2) = (1, 1, 3)\\); Row 3: \\((1 + 0 + 2,\\ 2 + 0 + 0,\\ 0 + 0 + 4) = (3, 2, 4)\\)",
+              "\\(3A = \\begin{bmatrix}3 & 6 & 0 \\\\ 0 & 3 & 3 \\\\ 3 & 0 & 6\\end{bmatrix}\\), \\(2I = \\begin{bmatrix}2 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 2\\end{bmatrix}\\)",
+              "\\(X = A^{2} - 3A + 2I = \\begin{bmatrix}1 - 3 + 2 & 4 - 6 + 0 & 2 - 0 + 0 \\\\ 1 - 0 + 0 & 1 - 3 + 2 & 3 - 3 + 0 \\\\ 3 - 3 + 0 & 2 - 0 + 0 & 4 - 6 + 2\\end{bmatrix}\\)"
+            ],
+            "final_answer": "\\(X = \\begin{bmatrix}0 & -2 & 2 \\\\ 1 & 0 & 0 \\\\ 0 & 2 & 0\\end{bmatrix}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Verify the left distributive property \\(A(B + C) = AB + AC\\) for \\(A = \\begin{bmatrix}1 & -1 \\\\ 2 & 0\\end{bmatrix}\\), \\(B = \\begin{bmatrix}3 & 1 \\\\ 0 & 2\\end{bmatrix}\\), \\(C = \\begin{bmatrix}-1 & 2 \\\\ 4 & 1\\end{bmatrix}\\). (5 marks)",
+            "explanation": "Compute the left side (add, then multiply) and the right side (multiply twice, then add); keep A on the left throughout.",
+            "book_ref": {
+              "topic_id": "12d024b4-5241-5549-91ef-9ff9dea2b9ac",
+              "quote": "Left distributive property"
+            },
+            "steps": [
+              "\\(B + C = \\begin{bmatrix}3 - 1 & 1 + 2 \\\\ 0 + 4 & 2 + 1\\end{bmatrix} = \\begin{bmatrix}2 & 3 \\\\ 4 & 3\\end{bmatrix}\\)",
+              "\\(A(B + C) = \\begin{bmatrix}1 & -1 \\\\ 2 & 0\\end{bmatrix}\\begin{bmatrix}2 & 3 \\\\ 4 & 3\\end{bmatrix} = \\begin{bmatrix}2 - 4 & 3 - 3 \\\\ 4 + 0 & 6 + 0\\end{bmatrix} = \\begin{bmatrix}-2 & 0 \\\\ 4 & 6\\end{bmatrix}\\)",
+              "\\(AB = \\begin{bmatrix}3 - 0 & 1 - 2 \\\\ 6 + 0 & 2 + 0\\end{bmatrix} = \\begin{bmatrix}3 & -1 \\\\ 6 & 2\\end{bmatrix}\\)",
+              "\\(AC = \\begin{bmatrix}-1 - 4 & 2 - 1 \\\\ -2 + 0 & 4 + 0\\end{bmatrix} = \\begin{bmatrix}-5 & 1 \\\\ -2 & 4\\end{bmatrix}\\)",
+              "\\(AB + AC = \\begin{bmatrix}3 - 5 & -1 + 1 \\\\ 6 - 2 & 2 + 4\\end{bmatrix} = \\begin{bmatrix}-2 & 0 \\\\ 4 & 6\\end{bmatrix} = A(B + C)\\)"
+            ],
+            "final_answer": "Verified: \\(A(B + C) = AB + AC = \\begin{bmatrix}-2 & 0 \\\\ 4 & 6\\end{bmatrix}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 For \\(A = \\begin{bmatrix}2 & 1 & -1 \\\\ 3 & 0 & 2 \\\\ 1 & 4 & 1\\end{bmatrix}\\), find all nine cofactors. Hence find \\(|A|\\) by expanding along \\(R_{1}\\) and along \\(C_{3}\\). (5 marks)",
+            "explanation": "\\(A_{ij} = (-1)^{i+j}M_{ij}\\) with the chessboard signs; then (element) \\(\\times\\) (its cofactor), added, along any line.",
+            "book_ref": {
+              "topic_id": "855fcb6f-bd87-517d-a3cb-dfe3d0f4c148",
+              "quote": "These are used again in 4.4.2"
+            },
+            "steps": [
+              "\\(A_{11} = +\\begin{vmatrix}0 & 2 \\\\ 4 & 1\\end{vmatrix} = -8\\), \\(A_{12} = -\\begin{vmatrix}3 & 2 \\\\ 1 & 1\\end{vmatrix} = -1\\), \\(A_{13} = +\\begin{vmatrix}3 & 0 \\\\ 1 & 4\\end{vmatrix} = 12\\)",
+              "\\(A_{21} = -\\begin{vmatrix}1 & -1 \\\\ 4 & 1\\end{vmatrix} = -5\\), \\(A_{22} = +\\begin{vmatrix}2 & -1 \\\\ 1 & 1\\end{vmatrix} = 3\\), \\(A_{23} = -\\begin{vmatrix}2 & 1 \\\\ 1 & 4\\end{vmatrix} = -7\\)",
+              "\\(A_{31} = +\\begin{vmatrix}1 & -1 \\\\ 0 & 2\\end{vmatrix} = 2\\), \\(A_{32} = -\\begin{vmatrix}2 & -1 \\\\ 3 & 2\\end{vmatrix} = -7\\), \\(A_{33} = +\\begin{vmatrix}2 & 1 \\\\ 3 & 0\\end{vmatrix} = -3\\)",
+              "Along \\(R_{1}\\): \\(|A| = 2(-8) + 1(-1) + (-1)(12) = -16 - 1 - 12 = -29\\)",
+              "Along \\(C_{3}\\): \\(|A| = (-1)(12) + 2(-7) + 1(-3) = -12 - 14 - 3 = -29\\), the same value"
+            ],
+            "final_answer": "Cofactor matrix \\(\\begin{bmatrix}-8 & -1 & 12 \\\\ -5 & 3 & -7 \\\\ 2 & -7 & -3\\end{bmatrix}\\); \\(|A| = -29\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Find the values of \\(x\\) for which \\(\\begin{vmatrix}x & 1 & 0 \\\\ 1 & x & 1 \\\\ 0 & 1 & x\\end{vmatrix} = 0\\). (5 marks)",
+            "explanation": "Expand along the first row (it has a zero), factorise the cubic and solve.",
+            "book_ref": {
+              "topic_id": "cdd7265d-5a56-5341-b7b2-5a09ca7bc055",
+              "quote": "is the required expansion of determinant of square matrix of order 3"
+            },
+            "steps": [
+              "Expand along \\(R_{1}\\): \\(\\begin{vmatrix}x & 1 & 0 \\\\ 1 & x & 1 \\\\ 0 & 1 & x\\end{vmatrix} = x\\begin{vmatrix}x & 1 \\\\ 1 & x\\end{vmatrix} - 1\\begin{vmatrix}1 & 1 \\\\ 0 & x\\end{vmatrix} + 0\\)",
+              "\\(= x(x^{2} - 1) - 1(x - 0)\\)",
+              "\\(= x^{3} - x - x = x^{3} - 2x = x(x^{2} - 2)\\)",
+              "\\(x(x^{2} - 2) = 0 \\Rightarrow x = 0\\) or \\(x^{2} = 2\\)",
+              "\\(x = 0,\\ x = \\sqrt{2},\\ x = -\\sqrt{2}\\)"
+            ],
+            "final_answer": "\\(x = 0,\\ \\pm\\sqrt{2}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Without expansion, show that \\(\\begin{vmatrix}a & b & c \\\\ b + c & c + a & a + b \\\\ 1 & 1 & 1\\end{vmatrix} = 0\\). (5 marks)",
+            "explanation": "Make two rows identical with the properties: add R1 to R2, take the common factor out, and compare with R3.",
+            "book_ref": {
+              "topic_id": "e38a74c4-8dc9-570d-8503-a7f554e68b8d",
+              "quote": "Two uses of v: a common factor of a row or column can be taken outside the determinant"
+            },
+            "steps": [
+              "\\(R_{2} + R_{1} \\to R_{2}\\) (property vii, value unchanged): \\(R_{2}\\) becomes \\((a + b + c,\\ a + b + c,\\ a + b + c)\\)",
+              "\\(= \\begin{vmatrix}a & b & c \\\\ a + b + c & a + b + c & a + b + c \\\\ 1 & 1 & 1\\end{vmatrix}\\)",
+              "Take \\(a + b + c\\) out of \\(R_{2}\\) (property v): \\(= (a + b + c)\\begin{vmatrix}a & b & c \\\\ 1 & 1 & 1 \\\\ 1 & 1 & 1\\end{vmatrix}\\)",
+              "\\(R_{2}\\) and \\(R_{3}\\) are identical, so the determinant is \\(0\\) (property iii)",
+              "\\(= (a + b + c) \\cdot 0 = 0\\)"
+            ],
+            "final_answer": "Hence proved: the determinant \\(= 0\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Show that \\(\\begin{vmatrix}1 + a & 1 & 1 \\\\ 1 & 1 + b & 1 \\\\ 1 & 1 & 1 + c\\end{vmatrix} = abc + ab + bc + ca\\). (5 marks)",
+            "explanation": "Create zeros with row operations (value unchanged), then expand along the row with a zero.",
+            "book_ref": {
+              "topic_id": "e38a74c4-8dc9-570d-8503-a7f554e68b8d",
+              "quote": "This is how zeros are created before expanding."
+            },
+            "steps": [
+              "\\(R_{1} - R_{3} \\to R_{1}\\), \\(R_{2} - R_{3} \\to R_{2}\\) (property vii): \\(\\begin{vmatrix}a & 0 & -c \\\\ 0 & b & -c \\\\ 1 & 1 & 1 + c\\end{vmatrix}\\)",
+              "Expand along \\(R_{1}\\): \\(= a\\begin{vmatrix}b & -c \\\\ 1 & 1 + c\\end{vmatrix} - 0 + (-c)\\begin{vmatrix}0 & b \\\\ 1 & 1\\end{vmatrix}\\)",
+              "\\(= a[b(1 + c) + c] - c(0 - b)\\)",
+              "\\(= ab + abc + ac + bc\\)",
+              "\\(= abc + ab + bc + ca\\)"
+            ],
+            "final_answer": "Hence proved: the determinant \\(= abc + ab + bc + ca\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Show that \\(\\begin{vmatrix}x & y & x + y \\\\ y & x + y & x \\\\ x + y & x & y\\end{vmatrix} = -2(x^{3} + y^{3})\\). (5 marks)",
+            "explanation": "Each row adds up to 2(x + y): collect it in the first column, take it out, make zeros and expand.",
+            "book_ref": {
+              "topic_id": "e38a74c4-8dc9-570d-8503-a7f554e68b8d",
+              "quote": "Adding \\(k\\) times one row (column) to another: value unchanged"
+            },
+            "steps": [
+              "\\(C_{1} + C_{2} + C_{3} \\to C_{1}\\) (property vii): every entry of \\(C_{1}\\) becomes \\(2(x + y)\\)",
+              "Take \\(2(x + y)\\) out of \\(C_{1}\\): \\(= 2(x + y)\\begin{vmatrix}1 & y & x + y \\\\ 1 & x + y & x \\\\ 1 & x & y\\end{vmatrix}\\)",
+              "\\(R_{2} - R_{1} \\to R_{2}\\), \\(R_{3} - R_{1} \\to R_{3}\\): \\(= 2(x + y)\\begin{vmatrix}1 & y & x + y \\\\ 0 & x & -y \\\\ 0 & x - y & -x\\end{vmatrix}\\)",
+              "Expand along \\(C_{1}\\): \\(= 2(x + y)[x(-x) - (-y)(x - y)] = 2(x + y)(-x^{2} + xy - y^{2})\\)",
+              "\\(= -2(x + y)(x^{2} - xy + y^{2}) = -2(x^{3} + y^{3})\\)"
+            ],
+            "final_answer": "Hence proved: the determinant \\(= -2(x^{3} + y^{3})\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Find \\(A^{-1}\\) by the adjoint method if \\(A = \\begin{bmatrix}1 & 2 & 1 \\\\ 0 & 1 & 2 \\\\ 1 & 3 & 4\\end{bmatrix}\\), and verify that \\(AA^{-1} = I_{3}\\). (5 marks)",
+            "explanation": "\\(A^{-1} = \\dfrac{1}{|A|}\\operatorname{adj} A\\): determinant, nine cofactors, transpose, divide, check.",
+            "book_ref": {
+              "topic_id": "93301f92-46c1-599c-9dd8-0908771610cb",
+              "quote": "Find all nine cofactors \\(A_{ij} = (-1)^{i+j}M_{ij}\\)."
+            },
+            "steps": [
+              "\\(|A| = 1(4 - 6) - 2(0 - 2) + 1(0 - 1) = -2 + 4 - 1 = 1 \\ne 0\\), so \\(A^{-1}\\) exists",
+              "Row 1 cofactors: \\(A_{11} = -2,\\ A_{12} = -(0 - 2) = 2,\\ A_{13} = 0 - 1 = -1\\)",
+              "Row 2: \\(A_{21} = -(8 - 3) = -5,\\ A_{22} = 4 - 1 = 3,\\ A_{23} = -(3 - 2) = -1\\); Row 3: \\(A_{31} = 4 - 1 = 3,\\ A_{32} = -(2 - 0) = -2,\\ A_{33} = 1 - 0 = 1\\)",
+              "\\(\\operatorname{adj} A = \\begin{bmatrix}-2 & 2 & -1 \\\\ -5 & 3 & -1 \\\\ 3 & -2 & 1\\end{bmatrix}^{t} = \\begin{bmatrix}-2 & -5 & 3 \\\\ 2 & 3 & -2 \\\\ -1 & -1 & 1\\end{bmatrix}\\); \\(A^{-1} = \\dfrac{1}{1}\\operatorname{adj} A\\)",
+              "Check: \\(AA^{-1}\\) row 1: \\((-2 + 4 - 1,\\ -5 + 6 - 1,\\ 3 - 4 + 1) = (1, 0, 0)\\); rows 2 and 3 give \\((0, 1, 0)\\) and \\((0, 0, 1)\\), so \\(AA^{-1} = I_{3}\\)"
+            ],
+            "final_answer": "\\(A^{-1} = \\begin{bmatrix}-2 & -5 & 3 \\\\ 2 & 3 & -2 \\\\ -1 & -1 & 1\\end{bmatrix}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 For \\(A = \\begin{bmatrix}2 & 0 & 1 \\\\ 1 & 1 & 0 \\\\ 0 & 3 & 1\\end{bmatrix}\\), find \\(\\operatorname{adj} A\\) and verify that \\(A(\\operatorname{adj} A) = |A|\\,I_{3}\\). (5 marks)",
+            "explanation": "Find |A| and the adjoint, then multiply: each diagonal entry should be |A| and every other entry 0.",
+            "book_ref": {
+              "topic_id": "93301f92-46c1-599c-9dd8-0908771610cb",
+              "quote": "Each diagonal entry is (a row of"
+            },
+            "steps": [
+              "\\(|A| = 2(1 - 0) - 0 + 1(3 - 0) = 5\\)",
+              "Cofactors: \\(A_{11} = 1,\\ A_{12} = -1,\\ A_{13} = 3\\); \\(A_{21} = -(0 - 3) = 3,\\ A_{22} = 2,\\ A_{23} = -(6 - 0) = -6\\)",
+              "\\(A_{31} = 0 - 1 = -1,\\ A_{32} = -(0 - 1) = 1,\\ A_{33} = 2\\); \\(\\operatorname{adj} A = \\begin{bmatrix}1 & 3 & -1 \\\\ -1 & 2 & 1 \\\\ 3 & -6 & 2\\end{bmatrix}\\)",
+              "\\(A(\\operatorname{adj} A)\\): row 1 \\((2 + 0 + 3,\\ 6 + 0 - 6,\\ -2 + 0 + 2) = (5, 0, 0)\\); row 2 \\((1 - 1 + 0,\\ 3 + 2 + 0,\\ -1 + 1 + 0) = (0, 5, 0)\\)",
+              "row 3 \\((0 - 3 + 3,\\ 0 + 6 - 6,\\ 0 + 3 + 2) = (0, 0, 5)\\), so \\(A(\\operatorname{adj} A) = \\begin{bmatrix}5 & 0 & 0 \\\\ 0 & 5 & 0 \\\\ 0 & 0 & 5\\end{bmatrix} = 5I_{3}\\)"
+            ],
+            "final_answer": "Verified: \\(A(\\operatorname{adj} A) = 5I_{3} = |A|\\,I_{3}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Find the inverse of \\(A = \\begin{bmatrix}1 & 2 & 0 \\\\ 2 & 5 & 1 \\\\ 0 & 1 & 2\\end{bmatrix}\\) by elementary row operations. (5 marks)",
+            "explanation": "Check \\(|A| \\ne 0\\), then reduce \\(A \\vdots I_{3}\\) to \\(I_{3} \\vdots A^{-1}\\), applying every operation to the whole row.",
+            "book_ref": {
+              "topic_id": "960792ad-af8b-5e6f-a397-7c384ad21a63",
+              "quote": "Writing all three right sides next to"
+            },
+            "steps": [
+              "\\(|A| = 1(10 - 1) - 2(4 - 0) + 0 = 1 \\ne 0\\); write \\(\\left[\\begin{array}{ccc|ccc}1 & 2 & 0 & 1 & 0 & 0 \\\\ 2 & 5 & 1 & 0 & 1 & 0 \\\\ 0 & 1 & 2 & 0 & 0 & 1\\end{array}\\right]\\)",
+              "\\(R_{2} + (-2)R_{1} \\to R_{2}'\\): \\((0, 1, 1 \\mid -2, 1, 0)\\)",
+              "\\(R_{1} + (-2)R_{2} \\to R_{1}'\\): \\((1, 0, -2 \\mid 5, -2, 0)\\); \\(R_{3} + (-1)R_{2} \\to R_{3}'\\): \\((0, 0, 1 \\mid 2, -1, 1)\\)",
+              "\\(R_{1} + 2R_{3} \\to R_{1}'\\): \\((1, 0, 0 \\mid 9, -4, 2)\\); \\(R_{2} + (-1)R_{3} \\to R_{2}'\\): \\((0, 1, 0 \\mid -4, 2, -1)\\)",
+              "The left half is \\(I_{3}\\); the right half is \\(A^{-1}\\)"
+            ],
+            "final_answer": "\\(A^{-1} = \\begin{bmatrix}9 & -4 & 2 \\\\ -4 & 2 & -1 \\\\ 2 & -1 & 1\\end{bmatrix}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Reduce \\(\\begin{bmatrix}2 & 4 & -2 & 2 \\\\ 1 & 3 & 1 & 4 \\\\ 3 & 7 & 0 & 8\\end{bmatrix}\\) to echelon form and to reduced echelon form. (5 marks)",
+            "explanation": "Get a leading 1 in each row and zeros below it (echelon); then clear the entries above every leading 1 (reduced).",
+            "book_ref": {
+              "topic_id": "960792ad-af8b-5e6f-a397-7c384ad21a63",
+              "quote": "Echelon form is enough to find a rank"
+            },
+            "steps": [
+              "\\(R_{1} \\leftrightarrow R_{2}\\): rows \\((1, 3, 1, 4),\\ (2, 4, -2, 2),\\ (3, 7, 0, 8)\\)",
+              "\\(R_{2} + (-2)R_{1}\\): \\((0, -2, -4, -6)\\); \\(R_{3} + (-3)R_{1}\\): \\((0, -2, -3, -4)\\)",
+              "\\(-\\frac{1}{2}R_{2}\\): \\((0, 1, 2, 3)\\); \\(R_{3} + 2R_{2}\\): \\((0, 0, 1, 2)\\). Echelon form: \\(\\begin{bmatrix}1 & 3 & 1 & 4 \\\\ 0 & 1 & 2 & 3 \\\\ 0 & 0 & 1 & 2\\end{bmatrix}\\)",
+              "\\(R_{1} + (-3)R_{2}\\): \\((1, 0, -5, -5)\\); then \\(R_{1} + 5R_{3}\\): \\((1, 0, 0, 5)\\)",
+              "\\(R_{2} + (-2)R_{3}\\): \\((0, 1, 0, -1)\\)"
+            ],
+            "final_answer": "Echelon: \\(\\begin{bmatrix}1 & 3 & 1 & 4 \\\\ 0 & 1 & 2 & 3 \\\\ 0 & 0 & 1 & 2\\end{bmatrix}\\); reduced: \\(\\begin{bmatrix}1 & 0 & 0 & 5 \\\\ 0 & 1 & 0 & -1 \\\\ 0 & 0 & 1 & 2\\end{bmatrix}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 Find the rank of \\(\\begin{bmatrix}1 & -1 & 2 & 0 \\\\ 2 & 1 & 1 & 3 \\\\ 1 & 2 & -1 & 3 \\\\ 3 & 0 & 3 & 3\\end{bmatrix}\\). (5 marks)",
+            "explanation": "Reduce to echelon form and count the non-zero rows.",
+            "book_ref": {
+              "topic_id": "960792ad-af8b-5e6f-a397-7c384ad21a63",
+              "quote": "The rank counts how many rows carry genuinely new information."
+            },
+            "steps": [
+              "\\(R_{2} + (-2)R_{1}\\): \\((0, 3, -3, 3)\\); \\(R_{3} + (-1)R_{1}\\): \\((0, 3, -3, 3)\\); \\(R_{4} + (-3)R_{1}\\): \\((0, 3, -3, 3)\\)",
+              "\\(\\frac{1}{3}R_{2}\\): \\((0, 1, -1, 1)\\)",
+              "\\(R_{3} + (-3)R_{2}\\): \\((0, 0, 0, 0)\\); \\(R_{4} + (-3)R_{2}\\): \\((0, 0, 0, 0)\\)",
+              "Echelon form: \\(\\begin{bmatrix}1 & -1 & 2 & 0 \\\\ 0 & 1 & -1 & 1 \\\\ 0 & 0 & 0 & 0 \\\\ 0 & 0 & 0 & 0\\end{bmatrix}\\)",
+              "Number of non-zero rows \\(r = 2\\)"
+            ],
+            "final_answer": "Rank \\(= 2\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Solve by reducing the augmented matrix to reduced echelon form: \\(x + y + z = 6,\\ 2x - y + z = 3,\\ x + 2y - z = 2\\). (5 marks)",
+            "explanation": "Reduce the whole augmented matrix (constants included) until the coefficient part is the identity; then read the last column.",
+            "book_ref": {
+              "topic_id": "8c8ca82f-0e8c-52f1-8a69-5dd96b68a195",
+              "quote": "If the coefficient part becomes"
+            },
+            "steps": [
+              "Augmented matrix \\(\\left[\\begin{array}{ccc|c}1 & 1 & 1 & 6 \\\\ 2 & -1 & 1 & 3 \\\\ 1 & 2 & -1 & 2\\end{array}\\right]\\); \\(R_{2} + (-2)R_{1}\\): \\((0, -3, -1 \\mid -9)\\); \\(R_{3} + (-1)R_{1}\\): \\((0, 1, -2 \\mid -4)\\)",
+              "\\(R_{2} \\leftrightarrow R_{3}\\): rows \\((0, 1, -2 \\mid -4)\\) and \\((0, -3, -1 \\mid -9)\\); \\(R_{3} + 3R_{2}\\): \\((0, 0, -7 \\mid -21)\\)",
+              "\\(-\\frac{1}{7}R_{3}\\): \\((0, 0, 1 \\mid 3)\\); \\(R_{2} + 2R_{3}\\): \\((0, 1, 0 \\mid 2)\\)",
+              "\\(R_{1} + (-1)R_{2} + (-1)R_{3}\\): \\((1, 0, 0 \\mid 1)\\); the coefficient part is \\(I_{3}\\)",
+              "Check: \\(1 + 2 + 3 = 6\\), \\(2 - 2 + 3 = 3\\), \\(1 + 4 - 3 = 2\\)"
+            ],
+            "final_answer": "\\(x = 1,\\ y = 2,\\ z = 3\\) (unique solution, consistent)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 Show that the system \\(x + y - z = 2,\\ 2x + 3y + z = 7,\\ 3x + 4y = 9\\) is consistent and find its general solution. (5 marks)",
+            "explanation": "Reduce the augmented matrix, compare the two ranks with the number of variables, and write the free variable as t.",
+            "book_ref": {
+              "topic_id": "8c8ca82f-0e8c-52f1-8a69-5dd96b68a195",
+              "quote": "In system (ii), the rank of the coefficient matrix is the same as that of the augmented matrix"
+            },
+            "steps": [
+              "Augmented matrix \\(\\left[\\begin{array}{ccc|c}1 & 1 & -1 & 2 \\\\ 2 & 3 & 1 & 7 \\\\ 3 & 4 & 0 & 9\\end{array}\\right]\\); \\(R_{2} + (-2)R_{1}\\): \\((0, 1, 3 \\mid 3)\\); \\(R_{3} + (-3)R_{1}\\): \\((0, 1, 3 \\mid 3)\\)",
+              "\\(R_{3} + (-1)R_{2}\\): \\((0, 0, 0 \\mid 0)\\); \\(R_{1} + (-1)R_{2}\\): \\((1, 0, -4 \\mid -1)\\)",
+              "Rank of coefficient matrix = rank of augmented matrix = 2 < 3: consistent, infinitely many solutions",
+              "Equivalent system: \\(x - 4z = -1\\), \\(y + 3z = 3\\), \\(0z = 0\\); put \\(z = t\\)",
+              "Check \\(t = 1\\): \\((3, 0, 1)\\): \\(3 + 0 - 1 = 2\\), \\(6 + 0 + 1 = 7\\), \\(9 + 0 + 0 = 9\\)"
+            ],
+            "final_answer": "\\(x = 4t - 1,\\ y = 3 - 3t,\\ z = t\\) for any real \\(t\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 Use the matrix inversion method to solve \\(x + 2y = -1,\\ 2x + 5y + z = -1,\\ y + 2z = 3\\). (5 marks)",
+            "explanation": "Write \\(AX = B\\), check \\(|A| \\ne 0\\), find \\(A^{-1} = \\dfrac{1}{|A|}\\operatorname{adj} A\\), then \\(X = A^{-1}B\\).",
+            "book_ref": {
+              "topic_id": "010f9c6d-d4a8-52a1-83fb-8120ca8be751",
+              "quote": "multiply both sides on the left by"
+            },
+            "steps": [
+              "\\(AX = B\\) with \\(A = \\begin{bmatrix}1 & 2 & 0 \\\\ 2 & 5 & 1 \\\\ 0 & 1 & 2\\end{bmatrix}\\), \\(B = \\begin{bmatrix}-1 \\\\ -1 \\\\ 3\\end{bmatrix}\\); \\(|A| = 1(10 - 1) - 2(4 - 0) + 0 = 1 \\ne 0\\)",
+              "Cofactors: \\(A_{11} = 9,\\ A_{12} = -4,\\ A_{13} = 2,\\ A_{21} = -4,\\ A_{22} = 2,\\ A_{23} = -1,\\ A_{31} = 2,\\ A_{32} = -1,\\ A_{33} = 1\\)",
+              "\\(\\operatorname{adj} A = \\begin{bmatrix}9 & -4 & 2 \\\\ -4 & 2 & -1 \\\\ 2 & -1 & 1\\end{bmatrix}\\) (the cofactor matrix is symmetric); \\(A^{-1} = \\dfrac{1}{1}\\operatorname{adj} A\\)",
+              "\\(X = A^{-1}B = \\begin{bmatrix}-9 + 4 + 6 \\\\ 4 - 2 - 3 \\\\ -2 + 1 + 3\\end{bmatrix} = \\begin{bmatrix}1 \\\\ -1 \\\\ 2\\end{bmatrix}\\)",
+              "Check: \\(1 - 2 = -1\\), \\(2 - 5 + 2 = -1\\), \\(-1 + 4 = 3\\)"
+            ],
+            "final_answer": "\\(x = 1,\\ y = -1,\\ z = 2\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Solve by Cramer's rule: \\(x - y + z = 2,\\ 2x + y - z = 1,\\ x + 2y + 2z = 11\\). (5 marks)",
+            "explanation": "\\(x_{k} = \\dfrac{D_{k}}{|A|}\\): replace column \\(k\\) of \\(|A|\\) by the constants; first check \\(|A| \\ne 0\\).",
+            "book_ref": {
+              "topic_id": "7e662e40-07ba-503f-99c8-46dd09bd3d8b",
+              "quote": "replaced by the constants) divided by"
+            },
+            "steps": [
+              "\\(|A| = \\begin{vmatrix}1 & -1 & 1 \\\\ 2 & 1 & -1 \\\\ 1 & 2 & 2\\end{vmatrix} = 1(2 + 2) + 1(4 + 1) + 1(4 - 1) = 12 \\ne 0\\)",
+              "\\(D_{1} = \\begin{vmatrix}2 & -1 & 1 \\\\ 1 & 1 & -1 \\\\ 11 & 2 & 2\\end{vmatrix} = 2(4) + 1(13) + 1(-9) = 12\\), so \\(x = \\dfrac{12}{12} = 1\\)",
+              "\\(D_{2} = \\begin{vmatrix}1 & 2 & 1 \\\\ 2 & 1 & -1 \\\\ 1 & 11 & 2\\end{vmatrix} = 1(13) - 2(5) + 1(21) = 24\\), so \\(y = \\dfrac{24}{12} = 2\\)",
+              "\\(D_{3} = \\begin{vmatrix}1 & -1 & 2 \\\\ 2 & 1 & 1 \\\\ 1 & 2 & 11\\end{vmatrix} = 1(9) + 1(21) + 2(3) = 36\\), so \\(z = \\dfrac{36}{12} = 3\\)",
+              "Check: \\(1 - 2 + 3 = 2\\), \\(2 + 2 - 3 = 1\\), \\(1 + 4 + 6 = 11\\)"
+            ],
+            "final_answer": "\\(x = 1,\\ y = 2,\\ z = 3\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 For the system \\(a_{i1}x_{1} + a_{i2}x_{2} + a_{i3}x_{3} = b_{i}\\) (\\(i = 1, 2, 3\\)) with \\(|A| \\ne 0\\), derive Cramer's rule. (5 marks)",
+            "explanation": "Start from \\(X = A^{-1}B\\) with \\(A^{-1} = \\dfrac{1}{|A|}\\operatorname{adj} A\\) and recognise each numerator as a determinant expanded along a column.",
+            "book_ref": {
+              "topic_id": "7e662e40-07ba-503f-99c8-46dd09bd3d8b",
+              "quote": "We have already proved that"
+            },
+            "steps": [
+              "Write the system as \\(AX = B\\); if \\(|A| \\ne 0\\), \\(X = A^{-1}B = \\dfrac{1}{|A|}(\\operatorname{adj} A)B\\)",
+              "\\(\\operatorname{adj} A = \\begin{bmatrix}A_{11} & A_{21} & A_{31} \\\\ A_{12} & A_{22} & A_{32} \\\\ A_{13} & A_{23} & A_{33}\\end{bmatrix}\\), so \\(\\begin{bmatrix}x_{1} \\\\ x_{2} \\\\ x_{3}\\end{bmatrix} = \\dfrac{1}{|A|}\\begin{bmatrix}A_{11}b_{1} + A_{21}b_{2} + A_{31}b_{3} \\\\ A_{12}b_{1} + A_{22}b_{2} + A_{32}b_{3} \\\\ A_{13}b_{1} + A_{23}b_{2} + A_{33}b_{3}\\end{bmatrix}\\)",
+              "\\(x_{1} = \\dfrac{b_{1}A_{11} + b_{2}A_{21} + b_{3}A_{31}}{|A|}\\); \\(A_{11}, A_{21}, A_{31}\\) are the cofactors of column 1 and do not contain column 1",
+              "So the numerator is the expansion along column 1 of \\(\\begin{vmatrix}b_{1} & a_{12} & a_{13} \\\\ b_{2} & a_{22} & a_{23} \\\\ b_{3} & a_{32} & a_{33}\\end{vmatrix} = D_{1}\\)",
+              "In the same way \\(x_{2}\\) has numerator \\(b_{1}A_{12} + b_{2}A_{22} + b_{3}A_{32} = D_{2}\\) (column 2 replaced) and \\(x_{3}\\) has \\(D_{3}\\) (column 3 replaced)"
+            ],
+            "final_answer": "Hence proved: \\(x_{1} = \\dfrac{D_{1}}{|A|},\\ x_{2} = \\dfrac{D_{2}}{|A|},\\ x_{3} = \\dfrac{D_{3}}{|A|}\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 Solve by Gaussian elimination: \\(x + 2y - z = 0,\\ 2x + y + z = 0,\\ x - y + 2z = 0\\). (5 marks)",
+            "explanation": "Reduce the augmented matrix to row-echelon form, read the rank, and back-substitute with a free variable.",
+            "book_ref": {
+              "topic_id": "93b49ade-9439-5acb-9faf-462981537490",
+              "quote": "It involves performing a series of row operations on the system's augmented matrix"
+            },
+            "steps": [
+              "\\(A_{b} = \\left[\\begin{array}{ccc|c}1 & 2 & -1 & 0 \\\\ 2 & 1 & 1 & 0 \\\\ 1 & -1 & 2 & 0\\end{array}\\right]\\); \\(R_{2} + (-2)R_{1}\\): \\((0, -3, 3 \\mid 0)\\); \\(R_{3} + (-1)R_{1}\\): \\((0, -3, 3 \\mid 0)\\)",
+              "\\(\\left(-\\frac{1}{3}\\right)R_{2}\\): \\((0, 1, -1 \\mid 0)\\); \\(R_{3} + 3R_{2}\\): \\((0, 0, 0 \\mid 0)\\)",
+              "Row-echelon form has 2 non-zero rows: rank of \\(A = 2 < 3\\), so non-trivial solutions exist (Rule II)",
+              "Back substitution: \\(y - z = 0 \\Rightarrow y = z\\); \\(x + 2y - z = 0 \\Rightarrow x = -2z + z = -z\\); put \\(z = t\\)",
+              "Check: \\(-t + 2t - t = 0\\), \\(-2t + t + t = 0\\), \\(-t - t + 2t = 0\\)"
+            ],
+            "final_answer": "\\(x = -t,\\ y = t,\\ z = t\\) for any \\(t\\) (non-trivial for \\(t \\ne 0\\))"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 Find \\(\\lambda\\) so that \\(x + 2y + z = 0,\\ 2x - y + 3z = 0,\\ 3x + y + \\lambda z = 0\\) has a non-trivial solution, and find that solution. (5 marks)",
+            "explanation": "Non-trivial solutions need rank less than 3, i.e. \\(|A| = 0\\); find \\(\\lambda\\), then solve by Gaussian elimination.",
+            "book_ref": {
+              "topic_id": "93b49ade-9439-5acb-9faf-462981537490",
+              "quote": "Homogeneous system of linear equation has non-trivial solution if rank of"
+            },
+            "steps": [
+              "Non-trivial solutions need rank \\(< 3\\), i.e. \\(|A| = \\begin{vmatrix}1 & 2 & 1 \\\\ 2 & -1 & 3 \\\\ 3 & 1 & \\lambda\\end{vmatrix} = 0\\)",
+              "\\(1(-\\lambda - 3) - 2(2\\lambda - 9) + 1(2 + 3) = -\\lambda - 3 - 4\\lambda + 18 + 5 = 20 - 5\\lambda = 0 \\Rightarrow \\lambda = 4\\)",
+              "With \\(\\lambda = 4\\): \\(R_{2} + (-2)R_{1}\\): \\((0, -5, 1 \\mid 0)\\); \\(R_{3} + (-3)R_{1}\\): \\((0, -5, 1 \\mid 0)\\); \\(R_{3} + (-1)R_{2}\\): \\((0, 0, 0 \\mid 0)\\)",
+              "\\(-5y + z = 0 \\Rightarrow y = \\dfrac{z}{5}\\); \\(x = -2y - z = -\\dfrac{2z}{5} - z = -\\dfrac{7z}{5}\\)",
+              "Put \\(z = 5t\\): \\(x = -7t,\\ y = t,\\ z = 5t\\). Check: \\(-7t + 2t + 5t = 0\\), \\(-14t - t + 15t = 0\\), \\(-21t + t + 20t = 0\\)"
+            ],
+            "final_answer": "\\(\\lambda = 4\\); \\(x = -7t,\\ y = t,\\ z = 5t\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 A triangle has vertices \\(P(1, 4)\\), \\(Q(-3, 2)\\) and \\(R(5, -1)\\). Find the vertices of its reflection in the line \\(y = x\\) using a transformation matrix. (5 marks)",
+            "explanation": "Write each vertex as a 2 x 1 column and multiply it on the left by the reflection matrix of y = x.",
+            "book_ref": {
+              "topic_id": "eb19ad6a-9aa3-5539-87d9-0b15baf96c12",
+              "quote": "Transformation or Reflection Matrix is a mathematical tool"
+            },
+            "steps": [
+              "Reflection in \\(y = x\\) uses \\(\\begin{bmatrix}0 & 1 \\\\ 1 & 0\\end{bmatrix}\\); write each vertex as a column",
+              "\\(P'\\): \\(\\begin{bmatrix}0 & 1 \\\\ 1 & 0\\end{bmatrix}\\begin{bmatrix}1 \\\\ 4\\end{bmatrix} = \\begin{bmatrix}0 + 4 \\\\ 1 + 0\\end{bmatrix} = \\begin{bmatrix}4 \\\\ 1\\end{bmatrix}\\)",
+              "\\(Q'\\): \\(\\begin{bmatrix}0 & 1 \\\\ 1 & 0\\end{bmatrix}\\begin{bmatrix}-3 \\\\ 2\\end{bmatrix} = \\begin{bmatrix}0 + 2 \\\\ -3 + 0\\end{bmatrix} = \\begin{bmatrix}2 \\\\ -3\\end{bmatrix}\\)",
+              "\\(R'\\): \\(\\begin{bmatrix}0 & 1 \\\\ 1 & 0\\end{bmatrix}\\begin{bmatrix}5 \\\\ -1\\end{bmatrix} = \\begin{bmatrix}0 - 1 \\\\ 5 + 0\\end{bmatrix} = \\begin{bmatrix}-1 \\\\ 5\\end{bmatrix}\\)",
+              "Check: reflection in \\(y = x\\) swaps the coordinates: \\((1, 4) \\to (4, 1)\\), \\((-3, 2) \\to (2, -3)\\), \\((5, -1) \\to (-1, 5)\\)"
+            ],
+            "final_answer": "\\(P'(4, 1)\\), \\(Q'(2, -3)\\), \\(R'(-1, 5)\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "22 Use \\(A = \\begin{bmatrix}2 & 1 \\\\ 1 & 1\\end{bmatrix}\\) to encode the message HELP (A to Z = 1 to 26), and decode the result to check it. (5 marks)",
+            "explanation": "Change letters to numbers, group them in twos as \\(2 \\times 1\\) columns, multiply each by \\(A\\); decode with \\(A^{-1}\\).",
+            "book_ref": {
+              "topic_id": "eb19ad6a-9aa3-5539-87d9-0b15baf96c12",
+              "quote": "It is often used to hide the actual meaning of a message."
+            },
+            "steps": [
+              "HELP in groups of two: HE, LP; H = 8, E = 5, L = 12, P = 16: \\(\\begin{bmatrix}8 \\\\ 5\\end{bmatrix}, \\begin{bmatrix}12 \\\\ 16\\end{bmatrix}\\)",
+              "\\(\\begin{bmatrix}2 & 1 \\\\ 1 & 1\\end{bmatrix}\\begin{bmatrix}8 \\\\ 5\\end{bmatrix} = \\begin{bmatrix}16 + 5 \\\\ 8 + 5\\end{bmatrix} = \\begin{bmatrix}21 \\\\ 13\\end{bmatrix}\\)",
+              "\\(\\begin{bmatrix}2 & 1 \\\\ 1 & 1\\end{bmatrix}\\begin{bmatrix}12 \\\\ 16\\end{bmatrix} = \\begin{bmatrix}24 + 16 \\\\ 12 + 16\\end{bmatrix} = \\begin{bmatrix}40 \\\\ 28\\end{bmatrix}\\)",
+              "Decode: \\(|A| = 2 - 1 = 1\\), \\(A^{-1} = \\begin{bmatrix}1 & -1 \\\\ -1 & 2\\end{bmatrix}\\); \\(A^{-1}\\begin{bmatrix}21 \\\\ 13\\end{bmatrix} = \\begin{bmatrix}8 \\\\ 5\\end{bmatrix}\\)",
+              "\\(A^{-1}\\begin{bmatrix}40 \\\\ 28\\end{bmatrix} = \\begin{bmatrix}40 - 28 \\\\ -40 + 56\\end{bmatrix} = \\begin{bmatrix}12 \\\\ 16\\end{bmatrix}\\): H, E, L, P again"
+            ],
+            "final_answer": "Coded message: 21, 13, 40, 28"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,593 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-LONG-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-long-questions",
+      "title": "Long Questions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH8-LONG",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 145,
+          "pdf_to": 174,
+          "note": "Roman Urdu: practice long questions written from Unit 8 (PDF 145-174), not printed in the book; same questions and order as the English set. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Yeh Unit 8 (Mathematical Induction and Binomial Theorem) ke poore unit se practice long questions (tafseeli sawal) hain, Board ke Section-II ke sawal ke hisse ki shakal mein: har sawal 5 number ka hai (lamba sawal, saboot (proof) ya derivation). Har sawal poore qadmon ke saath hal kiya gaya hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Prove by mathematical induction that \\(1 \\cdot 2 + 2 \\cdot 3 + 3 \\cdot 4 + \\ldots + n(n + 1) = \\frac{n(n + 1)(n + 2)}{3}\\) for every positive integer \\(n\\). (5 marks)\n(Mathematical induction se sabit karein ke har musbat integer \\(n\\) ke liye \\(1 \\cdot 2 + 2 \\cdot 3 + \\ldots + n(n + 1) = \\frac{n(n + 1)(n + 2)}{3}\\).)",
+            "explanation": "Base case \\(n = 1\\); \\(S(k)\\) ko (A) farz karein, agli term \\((k + 1)(k + 2)\\) jama karein aur \\((k + 1)(k + 2)\\) common lein.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "A good way to write every induction proof for a sum:"
+            },
+            "steps": [
+              "Base case \\(n = 1\\): left \\(2\\); right \\(\\frac{6}{3} = 2\\). \\(S(1)\\) sach.",
+              "Hypothesis: \\(1 \\cdot 2 + \\ldots + k(k + 1) = \\frac{k(k + 1)(k + 2)}{3}\\) (A).",
+              "Hadaf \\(S(k + 1)\\): \\(\\ldots + (k + 1)(k + 2) = \\frac{(k + 1)(k + 2)(k + 3)}{3}\\) (B).",
+              "(A) ki dono taraf \\((k + 1)(k + 2)\\) jama karein: \\(\\frac{k(k + 1)(k + 2)}{3} + (k + 1)(k + 2)\\).",
+              "\\(= (k + 1)(k + 2)\\left(\\frac{k}{3} + 1\\right) = \\frac{(k + 1)(k + 2)(k + 3)}{3}\\), jo (B) ki right side hai.",
+              "Dono sharten poori, is liye induction se \\(S(n)\\) har musbat integer ke liye sach."
+            ],
+            "final_answer": "Sabit hua: \\(1 \\cdot 2 + 2 \\cdot 3 + \\ldots + n(n + 1) = \\frac{n(n + 1)(n + 2)}{3}\\) har musbat integer \\(n\\) ke liye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 Prove by mathematical induction that \\(1^{3} + 2^{3} + 3^{3} + \\ldots + n^{3} = \\left[\\frac{n(n + 1)}{2}\\right]^{2}\\) for every positive integer \\(n\\). (5 marks)\n(Induction se sabit karein ke \\(1^{3} + 2^{3} + \\ldots + n^{3} = \\left[\\frac{n(n + 1)}{2}\\right]^{2}\\) har musbat integer \\(n\\) ke liye.)",
+            "explanation": "\\((k + 1)^{3}\\) jama karein aur \\(\\frac{(k + 1)^{2}}{4}\\) common lein; bracket poora murabba ban jata hai.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "Expanding everything into a big polynomial instead of taking the common factor"
+            },
+            "steps": [
+              "Base case \\(n = 1\\): left 1; right \\(1^{2} = 1\\). Sach.",
+              "Hypothesis: \\(1^{3} + \\ldots + k^{3} = \\frac{k^{2}(k + 1)^{2}}{4}\\) (A). Hadaf: \\(\\frac{(k + 1)^{2}(k + 2)^{2}}{4}\\) (B).",
+              "(A) mein \\((k + 1)^{3}\\) jama karein: \\(\\frac{k^{2}(k + 1)^{2}}{4} + (k + 1)^{3}\\).",
+              "\\(= \\frac{(k + 1)^{2}}{4}\\left[k^{2} + 4k + 4\\right]\\).",
+              "\\(= \\frac{(k + 1)^{2}(k + 2)^{2}}{4}\\), jo (B) hai.",
+              "Induction se formula har musbat integer ke liye sach."
+            ],
+            "final_answer": "Sabit hua: \\(1^{3} + 2^{3} + \\ldots + n^{3} = \\left[\\frac{n(n + 1)}{2}\\right]^{2}\\) tamam \\(n \\in \\mathbb{N}\\) ke liye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Prove by mathematical induction that \\(11^{n} - 6\\) is divisible by 5 for every \\(n \\in \\mathbb{N}\\). (5 marks)\n(Induction se sabit karein ke har \\(n \\in \\mathbb{N}\\) ke liye \\(11^{n} - 6\\) 5 se divisible hai.)",
+            "explanation": "Hypothesis ko \\(11^{k} - 6 = 5m\\) likhein, \\(11^{k + 1}\\) ko \\(11^{k}\\) se likh kar substitute karein.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "so we write the assumption as an equation and substitute it into"
+            },
+            "steps": [
+              "Base case \\(n = 1\\): \\(11 - 6 = 5\\), 5 se divisible.",
+              "Hypothesis: \\(11^{k} - 6 = 5m\\), yani \\(11^{k} = 5m + 6\\).",
+              "\\(11^{k + 1} - 6 = 11(5m + 6) - 6\\).",
+              "\\(= 55m + 60 = 5(11m + 12)\\), 5 se divisible.",
+              "Is liye \\(S(k)\\) se \\(S(k + 1)\\); base case ke saath statement tamam \\(n\\) ke liye sach."
+            ],
+            "final_answer": "Sabit hua: \\(11^{n} - 6\\) har \\(n \\in \\mathbb{N}\\) ke liye 5 se divisible hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Prove by mathematical induction that \\(3^{2n} - 1\\) is divisible by 8 for every \\(n \\in \\mathbb{N}\\). (5 marks)\n(Induction se sabit karein ke \\(3^{2n} - 1\\) har \\(n \\in \\mathbb{N}\\) ke liye 8 se divisible hai.)",
+            "explanation": "\\(3^{2(k + 1)} = 9 \\cdot 3^{2k}\\); hypothesis se \\(3^{2k} = 8m + 1\\) rakhein.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "Method: induction. \"Divisible by 9\" means"
+            },
+            "steps": [
+              "Base case: \\(9 - 1 = 8\\).",
+              "Hypothesis: \\(3^{2k} = 8m + 1\\).",
+              "\\(3^{2k + 2} - 1 = 9(8m + 1) - 1\\).",
+              "\\(= 72m + 8 = 8(9m + 1)\\), 8 ka multiple.",
+              "Dono sharten poori; induction se natija sach."
+            ],
+            "final_answer": "Sabit hua: \\(3^{2n} - 1\\) har \\(n \\in \\mathbb{N}\\) ke liye 8 se divisible."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 Prove by mathematical induction that \\(4 + 4 \\cdot 5 + 4 \\cdot 5^{2} + \\ldots + 4 \\cdot 5^{n} = 5^{n + 1} - 1\\) for every non-negative integer \\(n\\). (5 marks)\n(Induction se sabit karein ke har ghair-manfi integer \\(n\\) ke liye \\(4 + 4 \\cdot 5 + \\ldots + 4 \\cdot 5^{n} = 5^{n + 1} - 1\\).)",
+            "explanation": "Statement \\(n = 0\\) se shuru hai, is liye base case \\(S(0)\\); phir \\(4 \\cdot 5^{k + 1}\\) jama karein.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "because the statement is claimed for"
+            },
+            "steps": [
+              "Base case \\(n = 0\\): left 4; right \\(5 - 1 = 4\\).",
+              "Hypothesis: \\(4 + \\ldots + 4 \\cdot 5^{k} = 5^{k + 1} - 1\\) (A). Hadaf: \\(5^{k + 2} - 1\\) (B).",
+              "(A) mein \\(4 \\cdot 5^{k + 1}\\) jama karein: \\(5^{k + 1} - 1 + 4 \\cdot 5^{k + 1}\\).",
+              "\\(= 5 \\cdot 5^{k + 1} - 1 = 5^{k + 2} - 1\\).",
+              "Induction se formula har whole number ke liye sach."
+            ],
+            "final_answer": "Sabit hua: \\(4 + 4 \\cdot 5 + \\ldots + 4 \\cdot 5^{n} = 5^{n + 1} - 1\\) har \\(n \\in W\\) ke liye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Prove by mathematical induction that \\(\\sum_{k=1}^{n} \\frac{1}{(3k - 2)(3k + 1)} = \\frac{n}{3n + 1}\\) for every positive integer \\(n\\). (5 marks)\n(Induction se sabit karein ke \\(\\sum_{k=1}^{n} \\frac{1}{(3k - 2)(3k + 1)} = \\frac{n}{3n + 1}\\) har musbat integer \\(n\\) ke liye.)",
+            "explanation": "Induction ke liye \\(m\\) istemal karein (\\(k\\) counter hai). \\(k = m + 1\\) wali term jama kar ke numerator ke factors banayein.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "is already used as the counter inside the sum, so the book uses"
+            },
+            "steps": [
+              "Base case \\(n = 1\\): left \\(\\frac{1}{4}\\), right \\(\\frac{1}{4}\\).",
+              "Hypothesis: \\(\\sum_{k=1}^{m} = \\frac{m}{3m + 1}\\) (A). Agli term \\(\\frac{1}{(3m + 1)(3m + 4)}\\).",
+              "\\(\\frac{m}{3m + 1} + \\frac{1}{(3m + 1)(3m + 4)} = \\frac{m(3m + 4) + 1}{(3m + 1)(3m + 4)}\\).",
+              "\\(= \\frac{(m + 1)(3m + 1)}{(3m + 1)(3m + 4)} = \\frac{m + 1}{3m + 4}\\).",
+              "\\(= \\frac{m + 1}{3(m + 1) + 1}\\), yani \\(n = m + 1\\) wala formula.",
+              "Is liye \\(S(m) \\Rightarrow S(m + 1)\\); induction se natija sach."
+            ],
+            "final_answer": "Sabit hua: \\(\\sum_{k=1}^{n} \\frac{1}{(3k - 2)(3k + 1)} = \\frac{n}{3n + 1}\\) tamam \\(n \\in \\mathbb{N}\\) ke liye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Prove that \\(3^{n} > 2^{n} + 4\\) for all integers \\(n \\ge 2\\). (5 marks)\n(Sabit karein ke tamam integers \\(n \\ge 2\\) ke liye \\(3^{n} > 2^{n} + 4\\).)",
+            "explanation": "\\(i = 2\\) se extended induction: hypothesis ko 3 se zarb dein, right side ko yun torein ke \\(2^{k + 1} + 4\\) nazar aaye, baqi musbat hissa chhor dein.",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "For an inequality we multiply the hypothesis by a positive number and then compare."
+            },
+            "steps": [
+              "Base case \\(n = 2\\): \\(9 > 8\\). (\\(n = 1\\) par \\(3 > 6\\) ghalat, is liye 2 se shuru.)",
+              "Hypothesis: \\(3^{k} > 2^{k} + 4\\), \\(k \\ge 2\\) (A).",
+              "(A) ko 3 se zarb: \\(3^{k + 1} > 3 \\cdot 2^{k} + 12\\).",
+              "\\(3 \\cdot 2^{k} + 12 = 2^{k + 1} + 2^{k} + 4 + 8\\), to \\(3^{k + 1} > 2^{k + 1} + 4 + (2^{k} + 8)\\).",
+              "\\(2^{k} + 8 > 0\\) chhor dein: \\(3^{k + 1} > 2^{k + 1} + 4\\), yani \\(S(k + 1)\\).",
+              "Extended induction se tamam \\(n \\ge 2\\) ke liye sach."
+            ],
+            "final_answer": "Sabit hua: \\(3^{n} > 2^{n} + 4\\) tamam integers \\(n \\ge 2\\) ke liye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Prove that \\(2 + 4 + 6 + \\ldots + (2n + 6) = (n + 3)(n + 4)\\) for all integers \\(n \\ge -2\\). (5 marks)\n(Sabit karein ke tamam integers \\(n \\ge -2\\) ke liye \\(2 + 4 + 6 + \\ldots + (2n + 6) = (n + 3)(n + 4)\\).)",
+            "explanation": "\\(i = -2\\) ke saath extended induction; \\(2k + 6\\) ke baad agli term \\(2k + 8\\) hai.",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "The chain of dominoes now starts at domino number"
+            },
+            "steps": [
+              "Base case \\(n = -2\\): aakhri term 2; left 2, right \\((1)(2) = 2\\).",
+              "Hypothesis: \\(2 + \\ldots + (2k + 6) = (k + 3)(k + 4)\\) (A).",
+              "Hadaf: \\(\\ldots + (2k + 8) = (k + 4)(k + 5)\\) (B).",
+              "(A) mein \\(2k + 8\\) jama: \\((k + 3)(k + 4) + 2(k + 4) = (k + 4)(k + 5)\\).",
+              "Yeh (B) ki right side hai.",
+              "Extended induction se tamam \\(n \\ge -2\\) ke liye sach."
+            ],
+            "final_answer": "Sabit hua: \\(2 + 4 + \\ldots + (2n + 6) = (n + 3)(n + 4)\\) tamam \\(n \\ge -2\\) ke liye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Prove that \\(2^{n} > 2n + 1\\) for all integers \\(n \\ge 3\\). (5 marks)\n(Sabit karein ke tamam integers \\(n \\ge 3\\) ke liye \\(2^{n} > 2n + 1\\).)",
+            "explanation": "\\(i = 3\\) se shuru; hypothesis ko 2 se zarb dein aur \\(4k + 2\\) ko \\(2(k + 1) + 1\\) jama musbat hissa likhein.",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "We may drop a positive part only from the smaller side"
+            },
+            "steps": [
+              "Base case \\(n = 3\\): \\(8 > 7\\). (\\(n = 1, 2\\) par ghalat.)",
+              "Hypothesis: \\(2^{k} > 2k + 1\\), \\(k \\ge 3\\) (A).",
+              "2 se zarb: \\(2^{k + 1} > 4k + 2\\).",
+              "\\(4k + 2 = 2(k + 1) + 1 + (2k - 1)\\).",
+              "\\(k \\ge 3\\) par \\(2k - 1 > 0\\); chhor kar \\(2^{k + 1} > 2(k + 1) + 1\\).",
+              "Extended induction se tamam \\(n \\ge 3\\) ke liye sach."
+            ],
+            "final_answer": "Sabit hua: \\(2^{n} > 2n + 1\\) tamam integers \\(n \\ge 3\\) ke liye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Bilal does 6 push-ups on the first day and each day he does 4 more than the day before. Prove by mathematical induction that the total number of push-ups in \\(n\\) days is \\(2n^{2} + 4n\\). (5 marks)\n(Bilal pehle din 6 push-ups karta hai aur har din pichhle din se 4 zyada. Induction se sabit karein ke \\(n\\) dinon mein kul push-ups \\(2n^{2} + 4n\\) hain.)",
+            "explanation": "Din \\(d\\) par \\(6 + 4(d - 1)\\); qadam mein \\(k\\) dinon ke kul mein din \\(k + 1\\) ke \\(6 + 4k\\) jama karein.",
+            "book_ref": {
+              "topic_id": "4a03df67-4d91-5b84-b571-eb102fd694fa",
+              "quote": "A real-life rule that adds (or removes) a fixed amount each step gives a formula in"
+            },
+            "steps": [
+              "Base case \\(n = 1\\): pehle din 6, aur \\(2 + 4 = 6\\).",
+              "Hypothesis: \\(k\\) dinon ka kul \\(2k^{2} + 4k\\).",
+              "Din \\(k + 1\\) par \\(6 + 4k\\) push-ups.",
+              "\\(k + 1\\) dinon ka kul: \\(2k^{2} + 8k + 6\\).",
+              "\\(= 2(k + 1)^{2} + 4(k + 1)\\), yani \\(n = k + 1\\) wala formula.",
+              "Induction se \\(n\\) dinon ka kul \\(2n^{2} + 4n\\) (maslan 3 din: 30)."
+            ],
+            "final_answer": "Sabit hua: \\(n\\) dinon mein kul push-ups \\(2n^{2} + 4n\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Prove the binomial theorem \\((a + x)^{n} = \\sum_{r=0}^{n}\\binom{n}{r}a^{n-r}x^{r}\\) for every positive integer \\(n\\) by mathematical induction. (5 marks)\n(Mathematical induction se binomial theorem \\((a + x)^{n} = \\sum_{r=0}^{n}\\binom{n}{r}a^{n-r}x^{r}\\) har musbat integer \\(n\\) ke liye sabit karein.)",
+            "explanation": "Base case \\(n = 1\\); \\(n = k\\) wale case ko \\((a + x)\\) se zarb dein, milti julti terms jama karein aur Pascal ka qaida lagayein.",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Now we prove the Binomial theorem for any positive integer"
+            },
+            "steps": [
+              "Base case \\(n = 1\\): \\(\\binom{1}{0}a + \\binom{1}{1}x = a + x\\). Sach.",
+              "Hypothesis: \\((a + x)^{k} = \\binom{k}{0}a^{k} + \\ldots + \\binom{k}{r}a^{k-r}x^{r} + \\ldots + \\binom{k}{k}x^{k}\\) (B).",
+              "(B) ko \\((a + x)\\) se zarb: \\(a(a + x)^{k} + x(a + x)^{k}\\). \\(a^{k-r+1}x^{r}\\) wali term \\(\\binom{k}{r}\\) aur \\(\\binom{k}{r-1}\\) dono se aati hai.",
+              "To \\((a + x)^{k+1} = \\binom{k}{0}a^{k+1} + \\ldots + \\left[\\binom{k}{r} + \\binom{k}{r-1}\\right]a^{k-r+1}x^{r} + \\ldots + \\binom{k}{k}x^{k+1}\\).",
+              "\\(\\binom{k}{0} = \\binom{k+1}{0}\\), \\(\\binom{k}{k} = \\binom{k+1}{k+1}\\) aur Pascal ka qaida: \\((a + x)^{k+1} = \\sum_{r=0}^{k+1}\\binom{k+1}{r}a^{k+1-r}x^{r}\\).",
+              "Yeh \\(n = k + 1\\) ki statement hai. Induction se theorem tamam musbat integers ke liye sach."
+            ],
+            "final_answer": "Sabit hua: \\((a + x)^{n} = \\sum_{r=0}^{n}\\binom{n}{r}a^{n-r}x^{r}\\) har musbat integer \\(n\\) ke liye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 Expand \\(\\left(2x - \\frac{1}{x}\\right)^{5}\\) and find its general term. (5 marks)\n(\\(\\left(2x - \\frac{1}{x}\\right)^{5}\\) ko phelayein aur is ki general term nikalein.)",
+            "explanation": "Pehli term \\(2x\\), doosri \\(-\\frac{1}{x}\\), \\(n = 5\\), chhe terms; signs baari baari badalte hain.",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Dropping the minus sign of the second term"
+            },
+            "steps": [
+              "Coefficients \\(1, 5, 10, 10, 5, 1\\).",
+              "\\((2x)^{5} + 5(2x)^{4}\\left(-\\frac{1}{x}\\right) + 10(2x)^{3}\\left(-\\frac{1}{x}\\right)^{2} + 10(2x)^{2}\\left(-\\frac{1}{x}\\right)^{3} + 5(2x)\\left(-\\frac{1}{x}\\right)^{4} + \\left(-\\frac{1}{x}\\right)^{5}\\).",
+              "Terms: \\(32x^{5}\\), \\(-80x^{3}\\), \\(80x\\), \\(-\\frac{40}{x}\\), \\(\\frac{10}{x^{3}}\\), \\(-\\frac{1}{x^{5}}\\).",
+              "To \\(32x^{5} - 80x^{3} + 80x - \\frac{40}{x} + \\frac{10}{x^{3}} - \\frac{1}{x^{5}}\\).",
+              "General term: \\(T_{r+1} = (-1)^{r}\\binom{5}{r}2^{5-r}x^{5-2r}\\).",
+              "Check: \\(r = 2\\) par \\(80x\\); \\(x = 1\\) par \\(32 - 80 + 80 - 40 + 10 - 1 = 1\\)."
+            ],
+            "final_answer": "\\(\\left(2x - \\frac{1}{x}\\right)^{5} = 32x^{5} - 80x^{3} + 80x - \\frac{40}{x} + \\frac{10}{x^{3}} - \\frac{1}{x^{5}}\\); \\(T_{r+1} = (-1)^{r}\\binom{5}{r}2^{5-r}x^{5-2r}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 In the expansion of \\(\\left(2x^{2} - \\frac{1}{x}\\right)^{9}\\) find: (i) the term involving \\(x^{6}\\) (ii) the fourth term (iii) the coefficient of \\(x^{-3}\\). (5 marks)\n(\\(\\left(2x^{2} - \\frac{1}{x}\\right)^{9}\\) ke phelao mein nikalein: (i) \\(x^{6}\\) wali term (ii) chauthi term (iii) \\(x^{-3}\\) ka coefficient.)",
+            "explanation": "General term aik dafa saada karein; phir \\(x\\) ki power ya term number se \\(r\\) chunein.",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "This is much faster than writing all 12 terms."
+            },
+            "steps": [
+              "\\(T_{r+1} = (-1)^{r}\\binom{9}{r}2^{9-r}x^{18-3r}\\).",
+              "(i) \\(18 - 3r = 6 \\Rightarrow r = 4\\): \\(T_{5} = 126 \\times 32x^{6} = 4032x^{6}\\).",
+              "(ii) \\(r = 3\\): \\(T_{4} = -84 \\times 64x^{9} = -5376x^{9}\\).",
+              "(iii) \\(18 - 3r = -3 \\Rightarrow r = 7\\): \\(T_{8} = -36 \\times 4x^{-3} = -144x^{-3}\\).",
+              "\\(x^{-3}\\) ka coefficient \\(-144\\). (\\(r\\) jufat to musbat, taaq to manfi.)"
+            ],
+            "final_answer": "(i) \\(4032x^{6}\\) (ii) \\(T_{4} = -5376x^{9}\\) (iii) \\(-144\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 For the expansion of \\(\\left(x^{2} + \\frac{1}{2x}\\right)^{9}\\) find (i) the term independent of \\(x\\) (ii) the middle terms. (5 marks)\n(\\(\\left(x^{2} + \\frac{1}{2x}\\right)^{9}\\) ke phelao ke liye nikalein: (i) \\(x\\) se azad term (ii) middle terms.)",
+            "explanation": "\\(T_{r+1}\\) mein \\(x\\) ki aik power banayein; \\(n = 9\\) taaq hai, is liye do middle terms.",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "terms of the expansion will be the two middle terms"
+            },
+            "steps": [
+              "\\(T_{r+1} = \\binom{9}{r}\\frac{x^{18-3r}}{2^{r}}\\).",
+              "(i) \\(r = 6\\): \\(T_{7} = \\frac{84}{64} = \\frac{21}{16}\\).",
+              "(ii) \\(n = 9\\) taaq: 5th aur 6th terms, \\(r = 4, 5\\).",
+              "\\(T_{5} = \\frac{126}{16}x^{6} = \\frac{63}{8}x^{6}\\).",
+              "\\(T_{6} = \\frac{126}{32}x^{3} = \\frac{63}{16}x^{3}\\)."
+            ],
+            "final_answer": "(i) \\(T_{7} = \\frac{21}{16}\\) (ii) \\(T_{5} = \\frac{63}{8}x^{6}\\) aur \\(T_{6} = \\frac{63}{16}x^{3}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 For \\(\\left(x - \\frac{3}{x}\\right)^{8}\\) find (i) the middle term (ii) the term involving \\(x^{-4}\\). (5 marks)\n(\\(\\left(x - \\frac{3}{x}\\right)^{8}\\) ke liye nikalein: (i) middle term (ii) \\(x^{-4}\\) wali term.)",
+            "explanation": "\\(n = 8\\) jufat, aik middle term (\\(r = 4\\)); (ii) mein \\(x\\) ki power \\(-4\\) ke barabar rakhein.",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "will be the only one middle term in the expansion"
+            },
+            "steps": [
+              "\\(T_{r+1} = (-1)^{r}\\binom{8}{r}3^{r}x^{8-2r}\\).",
+              "(i) 5th term, \\(r = 4\\): \\(70 \\times 81 = 5670\\).",
+              "(ii) \\(8 - 2r = -4 \\Rightarrow r = 6\\).",
+              "\\(T_{7} = 28 \\times 729x^{-4} = \\frac{20412}{x^{4}}\\)."
+            ],
+            "final_answer": "(i) \\(T_{5} = 5670\\) (ii) \\(T_{7} = \\frac{20412}{x^{4}}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 Prove that \\(\\binom{n}{0} + 2\\binom{n}{1} + 3\\binom{n}{2} + \\ldots + (n + 1)\\binom{n}{n} = (n + 2)2^{n-1}\\). (5 marks)\n(Sabit karein ke \\(\\binom{n}{0} + 2\\binom{n}{1} + 3\\binom{n}{2} + \\ldots + (n + 1)\\binom{n}{n} = (n + 2)2^{n-1}\\).)",
+            "explanation": "Har multiplier \\(r + 1\\) ko \\(r\\) aur \\(1\\) mein torein; \\(r\\binom{n}{r} = n\\binom{n-1}{r-1}\\) aur coefficients ka majmua istemal karein.",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "and recognise the bracket as the sum of all the coefficients of"
+            },
+            "steps": [
+              "Majmua \\(= \\sum r\\binom{n}{r} + \\sum\\binom{n}{r}\\).",
+              "Doosra hissa: \\(\\binom{n}{0} + \\ldots + \\binom{n}{n} = 2^{n}\\).",
+              "Pehla hissa: \\(r\\binom{n}{r} = n\\binom{n-1}{r-1}\\) (\\(r \\ge 1\\); \\(r = 0\\) wali term 0).",
+              "To \\(\\sum r\\binom{n}{r} = n\\left[\\binom{n-1}{0} + \\ldots + \\binom{n-1}{n-1}\\right] = n \\cdot 2^{n-1}\\).",
+              "Kul \\(= n \\cdot 2^{n-1} + 2 \\cdot 2^{n-1} = (n + 2)2^{n-1}\\).",
+              "Check \\(n = 2\\): \\(1 + 4 + 3 = 8 = 4 \\cdot 2\\)."
+            ],
+            "final_answer": "Sabit hua: \\(\\binom{n}{0} + 2\\binom{n}{1} + \\ldots + (n + 1)\\binom{n}{n} = (n + 2)2^{n-1}\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "Yahan har coefficient ke saath \\(r + 1\\) zarb hai. Isay do hisson mein torna asaan hai: \\(r\\binom{n}{r}\\) wala hissa Example 14 jaisa \\(n \\cdot 2^{n-1}\\) deta hai, aur \\(\\binom{n}{r}\\) wala hissa tamam coefficients ka majmua \\(2^{n}\\) hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Prove that in the expansion of \\((1 + x)^{n}\\) the sum of the coefficients in the odd places equals the sum of those in the even places, and that each sum is \\(2^{n-1}\\). (5 marks)\n(Sabit karein ke \\((1 + x)^{n}\\) ke phelao mein taaq jagah (odd places) ke coefficients ka majmua jufat jagah wale coefficients ke majmue ke barabar hai, aur har aik \\(2^{n-1}\\) hai.)",
+            "explanation": "\\((1 + x)^{n}\\) mein \\(x = 1\\) aur \\(x = -1\\) rakhein; dono natijon ko jama aur tafreeq karein.",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "Thus, sum of odd coefficients of a binomial expansion equals to the sum of its even coefficients."
+            },
+            "steps": [
+              "\\(P = \\binom{n}{0} + \\binom{n}{2} + \\ldots\\), \\(Q = \\binom{n}{1} + \\binom{n}{3} + \\ldots\\).",
+              "\\(x = 1\\): \\(P + Q = 2^{n}\\).",
+              "\\(x = -1\\): \\(P - Q = 0\\).",
+              "To \\(P = Q\\) aur \\(P = Q = 2^{n-1}\\).",
+              "Check \\(n = 5\\): \\(16 = 16 = 2^{4}\\)."
+            ],
+            "final_answer": "Sabit hua: \\(\\binom{n}{0} + \\binom{n}{2} + \\ldots = \\binom{n}{1} + \\binom{n}{3} + \\ldots = 2^{n-1}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 Find the general term in the expansion of \\((1 + x)^{-4}\\), \\(|x| < 1\\), and use it to write the first four terms. (5 marks)\n(\\((1 + x)^{-4}\\), \\(|x| < 1\\), ki general term nikalein aur is se pehli chaar terms likhein.)",
+            "explanation": "\\(T_{r+1}\\) mein \\(n = -4\\) rakhein, \\((-1)^{r}\\) bahar nikalein aur factorial poora karein.",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "take the minus signs out, and write the product with factorials so that it cancels"
+            },
+            "steps": [
+              "\\(T_{r+1} = \\frac{(-4)(-5)\\cdots(-(r + 3))}{r!}x^{r}\\), \\(r\\) factors.",
+              "\\(= (-1)^{r}\\frac{4 \\cdot 5\\cdots(r + 3)}{r!}x^{r}\\); ooper neeche \\(1 \\cdot 2 \\cdot 3\\) zarb karein.",
+              "\\(= (-1)^{r}\\frac{(r + 1)(r + 2)(r + 3)}{6}x^{r}\\).",
+              "\\(r = 0, 1, 2, 3\\): \\(1, -4x, 10x^{2}, -20x^{3}\\).",
+              "To \\((1 + x)^{-4} = 1 - 4x + 10x^{2} - 20x^{3} + \\ldots\\)"
+            ],
+            "final_answer": "\\(T_{r+1} = (-1)^{r}\\frac{(r + 1)(r + 2)(r + 3)}{6}x^{r}\\); \\((1 + x)^{-4} = 1 - 4x + 10x^{2} - 20x^{3} + \\ldots\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 Expand \\((8 - 3x)^{1/3}\\) up to four terms and state the values of \\(x\\) for which the expansion is valid. (5 marks)\n(\\((8 - 3x)^{1/3}\\) ko chaar terms tak phelayein aur batayein ke kin values of \\(x\\) ke liye durust hai.)",
+            "explanation": "\\(8^{1/3} = 2\\) bahar nikalein taake bracket 1 se shuru ho; phir \\(n = \\frac{1}{3}\\) aur doosri term \\(-\\frac{3x}{8}\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "The first term must be 1. The form is"
+            },
+            "steps": [
+              "\\(2\\left(1 - \\frac{3x}{8}\\right)^{1/3}\\); shart \\(|x| < \\frac{8}{3}\\).",
+              "\\(n = \\frac{1}{3}\\) ke coefficients: \\(\\frac{1}{3}, -\\frac{1}{9}, \\frac{5}{81}\\).",
+              "\\(1 + \\frac{1}{3}\\left(-\\frac{3x}{8}\\right) - \\frac{1}{9}\\left(\\frac{9x^{2}}{64}\\right) + \\frac{5}{81}\\left(-\\frac{27x^{3}}{512}\\right) + \\ldots\\)",
+              "\\(= 1 - \\frac{x}{8} - \\frac{x^{2}}{64} - \\frac{5x^{3}}{1536} - \\ldots\\)",
+              "2 se zarb: \\(2 - \\frac{x}{4} - \\frac{x^{2}}{32} - \\frac{5x^{3}}{768} - \\ldots\\)"
+            ],
+            "final_answer": "\\((8 - 3x)^{1/3} = 2 - \\frac{x}{4} - \\frac{x^{2}}{32} - \\frac{5x^{3}}{768} - \\ldots\\), shart \\(|x| < \\frac{8}{3}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 Evaluate \\(\\sqrt[3]{126}\\) correct to three places of decimals by the binomial theorem. (5 marks)\n(Binomial theorem se \\(\\sqrt[3]{126}\\) teen decimal tak nikalein.)",
+            "explanation": "125 qareeb tareen poora cube hai: \\(126 = 125\\left(1 + \\frac{1}{125}\\right)\\); 5 bahar nikal kar \\(n = \\frac{1}{3}\\) se phelayein.",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "Strategy for a root or power of a number"
+            },
+            "steps": [
+              "\\(\\sqrt[3]{126} = 5\\left(1 + \\frac{1}{125}\\right)^{1/3}\\), \\(x = \\frac{1}{125}\\).",
+              "\\(= 5\\left[1 + \\frac{1}{3}\\cdot\\frac{1}{125} - \\frac{1}{9}\\left(\\frac{1}{125}\\right)^{2} + \\ldots\\right]\\).",
+              "\\(\\frac{1}{375} \\approx 0.0026667\\), \\(\\frac{1}{140625} \\approx 0.0000071\\); agli term bohat chhoti.",
+              "\\(\\approx 5(1.0026596) = 5.013298\\).",
+              "Teen decimal tak \\(\\sqrt[3]{126} \\approx 5.013\\)."
+            ],
+            "final_answer": "\\(\\sqrt[3]{126} \\approx 5.013\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 If \\(x\\) is so small that its cube and higher powers can be neglected, show that \\((1 + x)^{1/3}(1 - x)^{-2/3} \\approx 1 + x + \\frac{2}{3}x^{2}\\). (5 marks)\n(Agar \\(x\\) itna chhota ho ke \\(x^{3}\\) aur ooper ki powers chhor di jayen to dikhayein ke \\((1 + x)^{1/3}(1 - x)^{-2/3} \\approx 1 + x + \\frac{2}{3}x^{2}\\).)",
+            "explanation": "Har bracket ko \\(x^{2}\\) tak phelayein, zarb dein, aur sirf \\(x^{2}\\) tak ki terms rakhein.",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "each multiply the second bracket"
+            },
+            "steps": [
+              "\\((1 + x)^{1/3} = 1 + \\frac{1}{3}x - \\frac{1}{9}x^{2} + \\ldots\\)",
+              "\\((1 - x)^{-2/3} = 1 + \\frac{2}{3}x + \\frac{5}{9}x^{2} + \\ldots\\)",
+              "Zarb (\\(x^{2}\\) tak): \\(1 + \\left(\\frac{1}{3} + \\frac{2}{3}\\right)x + \\left(\\frac{5}{9} + \\frac{2}{9} - \\frac{1}{9}\\right)x^{2}\\).",
+              "\\(= 1 + x + \\frac{2}{3}x^{2}\\).",
+              "Check \\(x = 0.01\\): dono taraf taqreeban \\(1.010067\\)."
+            ],
+            "final_answer": "Sabit hua: \\((1 + x)^{1/3}(1 - x)^{-2/3} \\approx 1 + x + \\frac{2}{3}x^{2}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "22 If \\(y = \\frac{1}{2}\\left(\\frac{1}{3}\\right) + \\frac{1 \\cdot 3}{2 \\cdot 4}\\left(\\frac{1}{3}\\right)^{2} + \\frac{1 \\cdot 3 \\cdot 5}{2 \\cdot 4 \\cdot 6}\\left(\\frac{1}{3}\\right)^{3} + \\ldots\\), prove that \\(2y^{2} + 4y - 1 = 0\\). (5 marks)\n(Agar \\(y = \\frac{1}{2}\\left(\\frac{1}{3}\\right) + \\frac{1 \\cdot 3}{2 \\cdot 4}\\left(\\frac{1}{3}\\right)^{2} + \\frac{1 \\cdot 3 \\cdot 5}{2 \\cdot 4 \\cdot 6}\\left(\\frac{1}{3}\\right)^{3} + \\ldots\\) ho to sabit karein ke \\(2y^{2} + 4y - 1 = 0\\).)",
+            "explanation": "1 jama karein taake series 1 se shuru ho, 2nd aur 3rd terms ko \\(nx\\) aur \\(\\frac{n(n-1)}{2!}x^{2}\\) se milayein, phir \\(1 + y = (1 + x)^{n}\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "forgetting to add 1 to both sides before comparing"
+            },
+            "steps": [
+              "\\(1 + y\\) ki series ko \\(1 + nx + \\frac{n(n-1)}{2!}x^{2} + \\ldots\\) se milayein.",
+              "\\(nx = \\frac{1}{6}\\) (i), \\(\\frac{n(n-1)}{2}x^{2} = \\frac{1}{24}\\) (ii). (i) se \\(x = \\frac{1}{6n}\\).",
+              "(ii) mein: \\(\\frac{n - 1}{72n} = \\frac{1}{24} \\Rightarrow n - 1 = 3n \\Rightarrow n = -\\frac{1}{2}\\).",
+              "\\(x = -\\frac{1}{3}\\); \\(|x| < 1\\). (4th term bhi milti hai: \\(\\frac{15}{1296}\\).)",
+              "\\(1 + y = \\left(\\frac{2}{3}\\right)^{-1/2} = \\sqrt{\\frac{3}{2}}\\).",
+              "Murabba: \\(2(1 + y)^{2} = 3 \\Rightarrow 2y^{2} + 4y - 1 = 0\\)."
+            ],
+            "final_answer": "Sabit hua: \\(1 + y = \\sqrt{\\frac{3}{2}}\\), is liye \\(2y^{2} + 4y - 1 = 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "Series ko pehchanne ke liye pehle 1 jama karein, kyunke binomial series hamesha 1 se shuru hoti hai. Phir sirf doosri aur teesri term se do equations bana kar \\(n\\) aur \\(x\\) nikalte hain; chauthi term se check kar lein ke sahi pehchana."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "23 Use the binomial theorem to show that \\(1 + \\frac{1}{3}\\left(\\frac{1}{2}\\right) + \\frac{1 \\cdot 4}{3 \\cdot 6}\\left(\\frac{1}{2}\\right)^{2} + \\frac{1 \\cdot 4 \\cdot 7}{3 \\cdot 6 \\cdot 9}\\left(\\frac{1}{2}\\right)^{3} + \\ldots = \\sqrt[3]{2}\\). (5 marks)\n(Binomial theorem se dikhayein ke \\(1 + \\frac{1}{3}\\left(\\frac{1}{2}\\right) + \\frac{1 \\cdot 4}{3 \\cdot 6}\\left(\\frac{1}{2}\\right)^{2} + \\frac{1 \\cdot 4 \\cdot 7}{3 \\cdot 6 \\cdot 9}\\left(\\frac{1}{2}\\right)^{3} + \\ldots = \\sqrt[3]{2}\\).)",
+            "explanation": "\\((1 + X)^{n}\\) se milayein: 2nd term \\(nX\\), 3rd term \\(\\frac{n(n-1)}{2!}X^{2}\\); \\(n\\) aur \\(X\\) hal karein.",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "The binomial series are conveniently used for summation of infinite series."
+            },
+            "steps": [
+              "\\(nX = \\frac{1}{6}\\) (i); \\(\\frac{n(n-1)}{2}X^{2} = \\frac{1}{18}\\) (ii).",
+              "\\(X = \\frac{1}{6n}\\) rakh kar: \\(\\frac{n - 1}{72n} = \\frac{1}{18} \\Rightarrow n = -\\frac{1}{3}\\).",
+              "\\(X = -\\frac{1}{2}\\), \\(|X| < 1\\).",
+              "4th term bhi milti hai: \\(\\frac{28}{162}\\cdot\\frac{1}{8}\\).",
+              "Majmua \\(= \\left(1 - \\frac{1}{2}\\right)^{-1/3} = 2^{1/3} = \\sqrt[3]{2}\\)."
+            ],
+            "final_answer": "Sabit hua: series \\(\\left(1 - \\frac{1}{2}\\right)^{-1/3} = \\sqrt[3]{2}\\) hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "24 Find the coefficient of \\(x^{n}\\) in the expansion of \\(\\frac{1 + 2x}{(1 - x)^{2}}\\), \\(|x| < 1\\). (5 marks)\n(\\(\\frac{1 + 2x}{(1 - x)^{2}}\\), \\(|x| < 1\\), ke phelao mein \\(x^{n}\\) ka coefficient nikalein.)",
+            "explanation": "Isay \\((1 + 2x)(1 - x)^{-2}\\) likhein; \\(x^{n}\\) wali term \\(1 \\times x^{n}\\) aur \\(2x \\times x^{n-1}\\) se aati hai.",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "term in the product comes from two places"
+            },
+            "steps": [
+              "\\((1 + 2x)(1 - x)^{-2}\\).",
+              "\\((1 - x)^{-2} = 1 + 2x + 3x^{2} + \\ldots + (r + 1)x^{r} + \\ldots\\)",
+              "\\(x^{n-1}\\) aur \\(x^{n}\\) wali terms: \\(nx^{n-1}\\), \\((n + 1)x^{n}\\).",
+              "\\(x^{n}\\) ka coefficient: \\((n + 1) + 2n = 3n + 1\\).",
+              "Check \\(n = 2\\): \\(3 + 4 = 7\\)."
+            ],
+            "final_answer": "\\(x^{n}\\) ka coefficient \\(= 3n + 1\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "25 Expand \\((x - 3)^{5}\\) by the binomial theorem and check the coefficients with Pascal's triangle. (5 marks)\n(\\((x - 3)^{5}\\) ko binomial theorem se phelayein aur coefficients Pascal triangle se check karein.)",
+            "explanation": "\\(a = x\\), \\(b = -3\\) likhein; \\((-3)\\) ko brackets mein rakhein taake signs sahi aayen.",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "row of Pascal's Triangle correspond to the binomial coefficients"
+            },
+            "steps": [
+              "Coefficients \\(1, 5, 10, 10, 5, 1\\), Pascal triangle ki row 5.",
+              "\\((x - 3)^{5} = x^{5} + 5x^{4}(-3) + 10x^{3}(-3)^{2} + 10x^{2}(-3)^{3} + 5x(-3)^{4} + (-3)^{5}\\).",
+              "\\(-3\\) ki powers: \\(-3, 9, -27, 81, -243\\).",
+              "\\(= x^{5} - 15x^{4} + 90x^{3} - 270x^{2} + 405x - 243\\).",
+              "Check \\(x = 1\\): dono taraf \\(-32\\)."
+            ],
+            "final_answer": "\\((x - 3)^{5} = x^{5} - 15x^{4} + 90x^{3} - 270x^{2} + 405x - 243\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "26 Find the remainder when \\(5^{99}\\) is divided by 13, using the binomial theorem. (5 marks)\n(Binomial theorem se \\(5^{99}\\) ko 13 se taqseem karne par baqi nikalein.)",
+            "explanation": "\\(5^{2} = 25 = 26 - 1\\), 13 ke multiple se aik kam; \\(5^{99} = 5 \\cdot (25)^{49}\\) likhein.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "The idea of every example on this page: to divide a large power"
+            },
+            "steps": [
+              "\\(5^{99} = 5(26 - 1)^{49}\\).",
+              "\\((26 - 1)^{49}\\) mein aakhri term \\((-1)^{49} = -1\\); baqi sab 13 ke multiple: \\(13h - 1\\).",
+              "\\(5^{99} = 65h - 5\\).",
+              "\\(= 13(5h - 1) + 8\\).",
+              "Baqi 8. (Check: \\(5^{3} = 125 = 13 \\times 9 + 8\\) wala natija.)"
+            ],
+            "final_answer": "Baqi 8 hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "27 Show that \\(9^{7} + 11^{9}\\) is divisible by 10. (5 marks)\n(Dikhayein ke \\(9^{7} + 11^{9}\\) 10 se divisible hai.)",
+            "explanation": "\\(9 = 10 - 1\\) aur \\(11 = 10 + 1\\) likhein; aakhri terms \\(-1\\) aur \\(+1\\) cancel ho jati hain.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "Expand both powers; all terms except the last ones contain 14, and the two last terms cancel."
+            },
+            "steps": [
+              "\\(9^{7} + 11^{9} = (10 - 1)^{7} + (10 + 1)^{9}\\).",
+              "\\((10 - 1)^{7}\\) ki aakhri term \\(-1\\).",
+              "\\((10 + 1)^{9}\\) ki aakhri term \\(+1\\).",
+              "Jama karne par \\(-1 + 1 = 0\\); baqi har term mein 10.",
+              "To \\(9^{7} + 11^{9} = 10k\\), \\(k\\) integer."
+            ],
+            "final_answer": "Sabit hua: \\(9^{7} + 11^{9} = 10k\\), 10 se divisible."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "28 Find the last two digits of \\(41^{8}\\) using the binomial theorem. (5 marks)\n(Binomial theorem se \\(41^{8}\\) ke aakhri do digits nikalein.)",
+            "explanation": "Aakhri do digits = 100 se taqseem ka baqi; \\((40 + 1)^{8}\\) mein \\(40^{2}\\) ya ooper wali har term 100 ka multiple.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "Only the last two terms of the expansion will matter."
+            },
+            "steps": [
+              "\\(41^{8} = (40 + 1)^{8}\\).",
+              "\\(40^{2} = 1600\\) wali tamam terms 100 ke multiple.",
+              "Baqi: \\(8(40) + 1 = 321\\).",
+              "\\(41^{8} = 100k + 21\\).",
+              "Aakhri do digits 21."
+            ],
+            "final_answer": "\\(41^{8}\\) ke aakhri do digits 21 hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "29 Rs. 200,000 is invested at 4% compound interest per year for 3 years. Using the binomial theorem, find the exact amount, the estimate from the first three terms, and the difference. (5 marks)\n(Rs. 200,000, 4% salana compound interest par 3 saal ke liye. Binomial theorem se theek raqam, pehli teen terms wala andaza, aur farq nikalein.)",
+            "explanation": "\\(A = P(1 + r)^{t}\\); \\((1 + 0.04)^{3}\\) ko coefficients \\(1, 3, 3, 1\\) se phelayein.",
+            "book_ref": {
+              "topic_id": "19937ae1-a3a7-5a0e-89fe-e7421e22ac91",
+              "quote": "with compound interest each year's interest is added to the amount"
+            },
+            "steps": [
+              "\\(A = 200000(1.04)^{3}\\).",
+              "\\((1.04)^{3} = 1 + 0.12 + 0.0048 + 0.000064 = 1.124864\\).",
+              "Theek raqam: \\(224972.80\\).",
+              "Teen terms: \\(1.1248\\); andaza \\(224960\\).",
+              "Farq \\(= 200000 \\times 0.000064 = 12.80\\)."
+            ],
+            "final_answer": "Theek raqam Rs. 224,972.80; teen terms ka andaza Rs. 224,960; farq Rs. 12.80."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "30 A shop starts with 300 items. Every month it sells half of its stock and then restocks 60 items. Find a formula for the stock \\(I_{n}\\) after \\(n\\) months, prove it by mathematical induction, and find \\(I_{4}\\). (5 marks)\n(Aik dukan 300 cheezon se shuru karti hai. Har maheene aadha stock bechti hai aur phir 60 cheezen mazeed laati hai. \\(n\\) maheenon baad stock \\(I_{n}\\) ka formula nikalein, induction se sabit karein, aur \\(I_{4}\\) nikalein.)",
+            "explanation": "Recurrence \\(I_{n+1} = 0.5I_{n} + 60\\); mustaqil level \\(L = 0.5L + 60\\); phir \\(I_{n} = L + (I_{0} - L)(0.5)^{n}\\).",
+            "book_ref": {
+              "topic_id": "19937ae1-a3a7-5a0e-89fe-e7421e22ac91",
+              "quote": "Write the month-to-month rule (a recurrence relation), find a formula for"
+            },
+            "steps": [
+              "Qaida: \\(I_{n+1} = 0.5\\,I_{n} + 60\\), \\(I_{0} = 300\\). \\(I_{1} = 210\\), \\(I_{2} = 165\\), \\(I_{3} = 142.5\\).",
+              "\\(L = 120\\); \\(I_{0} - L = 180\\). Formula \\(I_{n} = 120 + 180(0.5)^{n}\\).",
+              "Base case \\(n = 0\\): \\(120 + 180 = 300\\).",
+              "Hypothesis \\(I_{k} = 120 + 180(0.5)^{k}\\): \\(I_{k+1} = 0.5I_{k} + 60 = 120 + 180(0.5)^{k+1}\\).",
+              "Formula \\(k + 1\\) ke liye bhi sach; induction se tamam \\(n \\ge 0\\).",
+              "\\(I_{4} = 120 + 11.25 = 131.25\\), taqreeban 131 cheezen."
+            ],
+            "final_answer": "\\(I_{n} = 120 + 180(0.5)^{n}\\) tamam \\(n \\ge 0\\) ke liye; \\(I_{4} = 131.25\\), taqreeban 131 cheezen."
+          }
+        ]
+      }
+    }
+  ]
+}

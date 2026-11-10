@@ -1,0 +1,649 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH8-SHORT",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch8",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch8/u-short-questions",
+      "title": "Short Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 145,
+          "pdf_to": 174,
+          "note": "Practice short questions written from Unit 8 (PDF 145-174, printed 140-169); not printed in the book. Based on the unit's text, theorems, formulas and worked examples (changed values); none repeats the unit's exercises. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice short questions for the whole of Unit 8 (Mathematical Induction and Binomial Theorem), arranged by the unit's sections, in the style of a 2-mark Board short question. Each one is solved briefly, step by step."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.1 Principle of Mathematical Induction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Define a counter example. Give a counter example to the claim that \\(n^{2} - n + 41\\) is prime for every natural number \\(n\\).",
+            "explanation": "A case which fails a formula or statement is called a counter example. For \\(n = 41\\): \\(41^{2} - 41 + 41 = 41^{2} = 1681 = 41 \\times 41\\), which is not prime.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "Such a case or exception which fails the mathematical formula or statement is called a counter example."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 State the principle of mathematical induction.",
+            "explanation": "If a statement \\(S(n)\\) for each positive integer \\(n\\) is such that (1) \\(S(1)\\) is true, and (2) \\(S(k + 1)\\) is true whenever \\(S(k)\\) is true for any positive integer \\(k\\), then \\(S(n)\\) is true for all positive integers.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "The principle of mathematical induction is stated as follows:"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Why can the formula \\(1 + 3 + 5 + \\ldots + (2n - 1) = n^{2}\\) not be established by checking values of \\(n\\) one by one?",
+            "explanation": "Because it would need infinitely many calculations which never end; a few true cases are not a proof (e.g. \\(n^{2} - n + 41\\) is prime for \\(n = 1\\) to \\(40\\) but not for \\(41\\)). Mathematical induction covers all \\(n\\) at once.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "because it involves infinitely many calculations which never end"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 What is meant by induction of hypothesis?",
+            "explanation": "It is the process of formulating a general statement (a conjecture) from specific examples or patterns observed in particular cases; the conjecture is later proved rigorously.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "It refers to the process of formulating a general statement or hypothesis based on specific examples"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 For \\(S(n): 2 + 4 + 6 + \\ldots + 2n = n(n + 1)\\), verify \\(S(1)\\) and write \\(S(k + 1)\\).",
+            "explanation": "\\(S(1)\\): left side \\(2\\), right side \\(1(1 + 1) = 2\\); true. \\(S(k + 1)\\): \\(2 + 4 + \\ldots + 2k + 2(k + 1) = (k + 1)(k + 2)\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "Writing the target first tells us where the algebra must end."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 For \\(S(n): 1 \\cdot 2 + 2 \\cdot 3 + \\ldots + n(n + 1) = \\frac{n(n + 1)(n + 2)}{3}\\), verify \\(S(1)\\) and write \\(S(k)\\).",
+            "explanation": "\\(S(1)\\): left \\(1 \\cdot 2 = 2\\), right \\(\\frac{1 \\cdot 2 \\cdot 3}{3} = 2\\); true. \\(S(k)\\): \\(1 \\cdot 2 + 2 \\cdot 3 + \\ldots + k(k + 1) = \\frac{k(k + 1)(k + 2)}{3}\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "A good way to write every induction proof for a sum:"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 If \\(5^{k} - 1 = 4m\\) for some integer \\(m\\), show that \\(5^{k + 1} - 1\\) is divisible by 4.",
+            "explanation": "\\(5^{k} = 4m + 1\\), so \\(5^{k + 1} - 1 = 5(4m + 1) - 1 = 20m + 4 = 4(5m + 1)\\), a multiple of 4 since \\(5m + 1\\) is an integer.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "so we write the assumption as an equation and substitute it into"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 Show that if \\(\\frac{k^{3} + 5k}{3}\\) is an integer, then \\(\\frac{(k + 1)^{3} + 5(k + 1)}{3}\\) is also an integer.",
+            "explanation": "\\((k + 1)^{3} + 5(k + 1) = k^{3} + 3k^{2} + 8k + 6 = (k^{3} + 5k) + 3(k^{2} + k + 2)\\). So the number is \\(\\frac{k^{3} + 5k}{3} + (k^{2} + k + 2)\\), a sum of two integers.",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "everything left over has a factor 3, which cancels the denominator."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 Use \\(\\sum_{k=1}^{n} \\frac{1}{(2k - 1)(2k + 1)} = \\frac{n}{2n + 1}\\) to find \\(\\frac{1}{1 \\cdot 3} + \\frac{1}{3 \\cdot 5} + \\ldots + \\frac{1}{13 \\cdot 15}\\).",
+            "explanation": "Last term: \\(2n - 1 = 13\\), \\(2n + 1 = 15\\), so \\(n = 7\\). Sum \\(= \\frac{7}{2(7) + 1} = \\frac{7}{15}\\).",
+            "book_ref": {
+              "topic_id": "614b4821-5c60-54c3-ae87-c9795fba0fe1",
+              "quote": "is already used as the counter inside the sum, so the book uses"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.1.1 Principle of Extended Mathematical Induction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 State the principle of extended mathematical induction.",
+            "explanation": "Let \\(i\\) be an integer. If a statement \\(S(n)\\) for \\(n \\ge i\\) is such that (1) \\(S(i)\\) is true, and (2) \\(S(k + 1)\\) is true whenever \\(S(k)\\) is true for any integer \\(k \\ge i\\), then \\(S(n)\\) is true for all integers \\(n \\ge i\\).",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "A formula or identity or statement"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Show that \\(2^{n} > n^{2} + 1\\) is false for \\(n = 4\\) but true for \\(n = 5\\). With which value should the base case of extended induction start?",
+            "explanation": "\\(n = 4\\): \\(2^{4} = 16\\), \\(4^{2} + 1 = 17\\); \\(16 > 17\\) is false. \\(n = 5\\): \\(32 > 26\\) is true. The base case is \\(n = 5\\) (\\(i = 5\\)).",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "Some statements are false for small values."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 In an induction proof of an inequality, why may we multiply the hypothesis \\(3^{k} > 2^{k} + 4\\) by 3 but not by \\(-3\\)?",
+            "explanation": "Multiplying by the positive number 3 keeps the direction: \\(3^{k + 1} > 3 \\cdot 2^{k} + 12\\). Multiplying by \\(-3\\) would reverse the inequality, so the comparison would no longer be in the needed direction.",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "For an inequality we multiply the hypothesis by a positive number and then compare."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 For \\(S(n): 2 + 4 + 6 + \\ldots + (2n + 6) = (n + 3)(n + 4)\\), \\(n \\ge -2\\), verify \\(S(-2)\\) and \\(S(0)\\).",
+            "explanation": "\\(S(-2)\\): last term \\(2(-2) + 6 = 2\\); left \\(2\\), right \\((1)(2) = 2\\). \\(S(0)\\): last term 6; left \\(2 + 4 + 6 = 12\\), right \\((3)(4) = 12\\). Both true.",
+            "book_ref": {
+              "topic_id": "7e4144c6-97b7-52e8-a2fb-f7811d8359d9",
+              "quote": "The chain of dominoes now starts at domino number"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.1.2 Real Life Application of Mathematical Induction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Ayesha deposits Rs. 2,500 every month. Write \\(S(n)\\) for her total savings after \\(n\\) months, check \\(S(1)\\), and show the step from \\(k\\) to \\(k + 1\\) months.",
+            "explanation": "\\(S(n) = 2500n\\). \\(S(1) = 2500\\), one deposit. Step: \\(S(k + 1) = 2500k + 2500 = 2500(k + 1)\\), which is the formula with \\(n = k + 1\\).",
+            "book_ref": {
+              "topic_id": "4a03df67-4d91-5b84-b571-eb102fd694fa",
+              "quote": "In real life many quantities change by a fixed amount at each step"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 Bilal does 6 push-ups on day 1 and 4 more each day than the day before. How many does he do on day \\(k + 1\\)? Check that the total formula \\(2n^{2} + 4n\\) is right for \\(n = 3\\).",
+            "explanation": "Day \\(k + 1\\): \\(6 + 4k\\) (only \\(k\\) increases of 4). For \\(n = 3\\): \\(6 + 10 + 14 = 30\\) and \\(2(9) + 4(3) = 30\\). Correct.",
+            "book_ref": {
+              "topic_id": "4a03df67-4d91-5b84-b571-eb102fd694fa",
+              "quote": "Mixing up the amount in one step (push-ups on day"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 A van uses 1200 litres of fuel in the first period and the use is reduced by 30 litres every week, so after \\(n\\) weeks it is \\(F(n) = 1200 - 30n\\). Show the induction step and find \\(F(8)\\).",
+            "explanation": "Step: \\(F(k + 1) = (1200 - 30k) - 30 = 1200 - 30(k + 1)\\), the formula with \\(n = k + 1\\). \\(F(8) = 1200 - 240 = 960\\) litres.",
+            "book_ref": {
+              "topic_id": "4a03df67-4d91-5b84-b571-eb102fd694fa",
+              "quote": "one more week means 50 calories less than after"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.2 Binomial Theorem"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Define a binomial and write the binomial theorem in sigma form.",
+            "explanation": "An algebraic expression of two terms, such as \\(a + x\\) or \\(2x - 3\\), is a binomial. For a positive integer \\(n\\): \\((a + x)^{n} = \\sum_{r=0}^{n}\\binom{n}{r}a^{n-r}x^{r}\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "is called a binomial or a binomial expression"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 Write the number of terms and the sum of the exponents of \\(a\\) and \\(b\\) in each term of \\((3a - 4b)^{12}\\).",
+            "explanation": "Number of terms \\(= 12 + 1 = 13\\); in each term the exponents of \\(a\\) and \\(b\\) add up to the index 12.",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "in each term of the expansion is equal to its index"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 Expand \\((x + 2)^{4}\\) by the binomial theorem.",
+            "explanation": "\\(x^{4} + 4x^{3}(2) + 6x^{2}(2)^{2} + 4x(2)^{3} + 2^{4} = x^{4} + 8x^{3} + 24x^{2} + 32x + 16\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Index means the power. Look at the coefficients"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 Evaluate \\((10.1)^{4}\\) using the binomial theorem.",
+            "explanation": "\\((10 + 0.1)^{4} = 10^{4} + 4(10)^{3}(0.1) + 6(10)^{2}(0.1)^{2} + 4(10)(0.1)^{3} + (0.1)^{4} = 10000 + 400 + 6 + 0.04 + 0.0001 = 10406.0401\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Powers of 10 and of 0.1 are easy to work out"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 Find the 5th term in the expansion of \\(\\left(x - \\frac{2}{x}\\right)^{8}\\).",
+            "explanation": "\\(r = 4\\): \\(T_{5} = \\binom{8}{4}x^{4}\\left(-\\frac{2}{x}\\right)^{4} = 70 \\cdot x^{4}\\cdot\\frac{16}{x^{4}} = 1120\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "so we call it as the general term of the expansion"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "22 Find the coefficient of \\(x^{3}\\) in the expansion of \\((1 - 2x)^{7}\\).",
+            "explanation": "\\(T_{4} = \\binom{7}{3}(-2x)^{3} = 35(-8x^{3}) = -280x^{3}\\); coefficient \\(-280\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Dropping the minus sign of the second term"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "23 Find the 3rd term from the end in the expansion of \\(\\left(2x + \\frac{1}{x}\\right)^{7}\\).",
+            "explanation": "8 terms; 3rd from the end is the \\(8 - 3 + 1 = 6\\)th term, \\(r = 5\\): \\(T_{6} = \\binom{7}{5}(2x)^{2}\\left(\\frac{1}{x}\\right)^{5} = 21 \\cdot 4x^{2}\\cdot x^{-5} = \\frac{84}{x^{3}}\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Forgetting that the number of terms is"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "24 Show that in \\((a + x)^{12}\\) the 6th term and the 8th term have the same coefficient, and find it.",
+            "explanation": "6th term: \\(\\binom{12}{5}\\); 8th term: \\(\\binom{12}{7}\\). Since \\(\\binom{n}{r} = \\binom{n}{n-r}\\), \\(\\binom{12}{5} = \\binom{12}{7} = \\frac{12 \\cdot 11 \\cdot 10 \\cdot 9 \\cdot 8}{5!} = 792\\).",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "The coefficients of the terms equidistant from beginning and end of the expansion are equal"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "25 Verify Pascal's rule \\(\\binom{k}{r} + \\binom{k}{r-1} = \\binom{k+1}{r}\\) for \\(k = 6\\), \\(r = 3\\).",
+            "explanation": "\\(\\binom{6}{3} + \\binom{6}{2} = 20 + 15 = 35\\) and \\(\\binom{7}{3} = \\frac{7 \\cdot 6 \\cdot 5}{3!} = 35\\). Equal.",
+            "book_ref": {
+              "topic_id": "cdcb387d-ae3c-50af-adc4-476d52e82d70",
+              "quote": "Plan of the proof (the same three steps as in 8.1)"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.2.1 The Middle Term in the Expansion of (a + x)^n"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "26 Which terms are the middle terms in the expansion of \\((a + x)^{15}\\)?",
+            "explanation": "\\(n = 15\\) is odd, so there are \\(16\\) terms and two middle terms: the \\(\\frac{15 + 1}{2} = 8\\)th and the \\(\\frac{15 + 3}{2} = 9\\)th.",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "terms of the expansion will be the two middle terms"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "27 Find the middle term of \\(\\left(x + \\frac{1}{x}\\right)^{10}\\).",
+            "explanation": "\\(n = 10\\) even: the 6th term, \\(r = 5\\): \\(T_{6} = \\binom{10}{5}x^{5}\\left(\\frac{1}{x}\\right)^{5} = 252\\).",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "will be the only one middle term in the expansion"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "28 Find the term independent of \\(x\\) in \\(\\left(x^{2} + \\frac{1}{x}\\right)^{9}\\).",
+            "explanation": "\\(T_{r+1} = \\binom{9}{r}x^{2(9-r)}x^{-r} = \\binom{9}{r}x^{18-3r}\\); \\(18 - 3r = 0 \\Rightarrow r = 6\\); \\(T_{7} = \\binom{9}{6} = 84\\).",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "Find it by setting the power of"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "29 Find the term involving \\(x^{4}\\) in the expansion of \\(\\left(x + \\frac{3}{x}\\right)^{8}\\).",
+            "explanation": "\\(T_{r+1} = \\binom{8}{r}3^{r}x^{8-2r}\\); \\(8 - 2r = 4 \\Rightarrow r = 2\\); \\(T_{3} = \\binom{8}{2}(9)x^{4} = 252x^{4}\\).",
+            "book_ref": {
+              "topic_id": "f2b3dacd-2684-5457-bb94-cd9b1491e784",
+              "quote": "Putting the term number in place of"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.2.2 Some Deductions from the binomial expansion of (a + x)^n"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "30 Prove that \\(\\binom{n}{0} + \\binom{n}{1} + \\binom{n}{2} + \\ldots + \\binom{n}{n} = 2^{n}\\).",
+            "explanation": "In \\((a + x)^{n} = \\sum_{r=0}^{n}\\binom{n}{r}a^{n-r}x^{r}\\) put \\(a = 1\\), \\(x = 1\\): \\((1 + 1)^{n} = \\binom{n}{0} + \\binom{n}{1} + \\ldots + \\binom{n}{n}\\), i.e. the sum is \\(2^{n}\\).",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "Thus, the sum of coefficients in the binomial expansion equals to"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "31 Show that \\(\\binom{n}{0} - \\binom{n}{1} + \\binom{n}{2} - \\ldots + (-1)^{n}\\binom{n}{n} = 0\\).",
+            "explanation": "Put \\(a = 1\\), \\(x = -1\\) in the expansion of \\((a + x)^{n}\\): \\((1 - 1)^{n} = \\sum_{r=0}^{n}(-1)^{r}\\binom{n}{r}\\), and \\(0^{n} = 0\\).",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "So we may put particular values in it"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "32 Find \\(\\binom{10}{0} + \\binom{10}{2} + \\binom{10}{4} + \\ldots + \\binom{10}{10}\\).",
+            "explanation": "The coefficients in odd places and in even places have equal sums, together \\(2^{10}\\); so this sum is \\(2^{9} = 512\\).",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "Thus, sum of odd coefficients of a binomial expansion equals to the sum of its even coefficients."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "33 Find the sum of the coefficients in the expansion of \\((3x - 1)^{5}\\).",
+            "explanation": "Putting \\(x = 1\\) in the expansion gives the sum of all its coefficients: \\((3 - 1)^{5} = 2^{5} = 32\\).",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "These results are called deductions (consequences) of the binomial theorem."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "34 Verify \\(\\binom{n}{1} + 2\\binom{n}{2} + \\ldots + n\\binom{n}{n} = n \\cdot 2^{n-1}\\) for \\(n = 5\\).",
+            "explanation": "Left: \\(5 + 2(10) + 3(10) + 4(5) + 5(1) = 5 + 20 + 30 + 20 + 5 = 80\\). Right: \\(5 \\cdot 2^{4} = 80\\). Equal.",
+            "book_ref": {
+              "topic_id": "854cc653-d7da-59bb-92d3-ca9e10327643",
+              "quote": "and recognise the bracket as the sum of all the coefficients of"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3 The Binomial Theorem When the Index n is a Negative Integer or a Fraction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "35 State the binomial theorem when the index n is a negative integer or a fraction.",
+            "explanation": "\\((1 + x)^{n} = 1 + nx + \\frac{n(n-1)}{2!}x^{2} + \\frac{n(n-1)(n-2)}{3!}x^{3} + \\ldots + \\frac{n(n-1)\\cdots(n-r+1)}{r!}x^{r} + \\ldots\\), provided \\(|x| < 1\\). The series never ends.",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "is called the binomial series"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "36 Expand \\((1 + 2x)^{-1/2}\\) up to the term in \\(x^{3}\\) and state when it is valid.",
+            "explanation": "\\(n = -\\frac{1}{2}\\), \\(X = 2x\\): \\(1 + \\left(-\\frac{1}{2}\\right)(2x) + \\frac{\\left(-\\frac{1}{2}\\right)\\left(-\\frac{3}{2}\\right)}{2}(4x^{2}) + \\frac{\\left(-\\frac{1}{2}\\right)\\left(-\\frac{3}{2}\\right)\\left(-\\frac{5}{2}\\right)}{6}(8x^{3}) = 1 - x + \\frac{3}{2}x^{2} - \\frac{5}{2}x^{3}\\); valid for \\(|2x| < 1\\), i.e. \\(|x| < \\frac{1}{2}\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "2. Forgetting the condition"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "37 Write the first four terms of \\((1 + 3x)^{-2}\\) and state the condition.",
+            "explanation": "\\((1 + X)^{-2} = 1 - 2X + 3X^{2} - 4X^{3} + \\ldots\\) with \\(X = 3x\\): \\(1 - 6x + 27x^{2} - 108x^{3} + \\ldots\\), valid for \\(|x| < \\frac{1}{3}\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "Cases (iv), (v), (vi) come from (i), (ii), (iii) by replacing"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "38 Why are the symbols \\(\\binom{n}{r}\\) not used when \\(n\\) is a negative integer or a fraction? How is the general term written instead?",
+            "explanation": "\\(\\binom{n}{r} = \\frac{n!}{r!\\,(n-r)!}\\) needs \\(n!\\), which has no meaning for such \\(n\\). The general term is \\(T_{r+1} = \\frac{n(n-1)(n-2)\\cdots(n-r+1)}{r!}x^{r}\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "The proof of this theorem is beyond the scope of this book."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "39 Find the coefficient of \\(x^{4}\\) in the expansion of \\((1 - 2x)^{-1/2}\\).",
+            "explanation": "\\(T_{5} = \\frac{\\left(-\\frac{1}{2}\\right)\\left(-\\frac{3}{2}\\right)\\left(-\\frac{5}{2}\\right)\\left(-\\frac{7}{2}\\right)}{4!}(-2x)^{4} = \\frac{105/16}{24}(16x^{4}) = \\frac{35}{128}(16x^{4}) = \\frac{35}{8}x^{4}\\); coefficient \\(\\frac{35}{8}\\).",
+            "book_ref": {
+              "topic_id": "53fc63b0-454d-5588-96cf-33beed211308",
+              "quote": "The general term in the expansion is"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3.1 Application of the Binomial Theorem"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "40 Find \\(\\sqrt{26}\\) correct to three decimal places using the binomial theorem.",
+            "explanation": "\\(\\sqrt{26} = 5\\left(1 + \\frac{1}{25}\\right)^{1/2} = 5\\left[1 + \\frac{1}{2}(0.04) - \\frac{1}{8}(0.04)^{2} + \\frac{1}{16}(0.04)^{3} - \\ldots\\right] = 5(1 + 0.02 - 0.0002 + 0.000004) = 5.09902 \\approx 5.099\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "Strategy for a root or power of a number"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "41 If \\(x\\) is so small that \\(x^{2}\\) and higher powers can be neglected, show that \\(\\frac{(1 + x)^{1/2}}{1 + 2x} \\approx 1 - \\frac{3}{2}x\\).",
+            "explanation": "\\((1 + x)^{1/2}(1 + 2x)^{-1} \\approx \\left(1 + \\frac{1}{2}x\\right)(1 - 2x) \\approx 1 - 2x + \\frac{1}{2}x = 1 - \\frac{3}{2}x\\) (the \\(x^{2}\\) product is dropped).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "each multiply the second bracket"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "42 Find the sum of the series \\(1 + 2\\left(\\frac{1}{3}\\right) + 3\\left(\\frac{1}{3}\\right)^{2} + 4\\left(\\frac{1}{3}\\right)^{3} + \\ldots\\)",
+            "explanation": "It is \\(1 + 2x + 3x^{2} + 4x^{3} + \\ldots = (1 - x)^{-2}\\) with \\(x = \\frac{1}{3}\\) (\\(|x| < 1\\)). Sum \\(= \\left(\\frac{2}{3}\\right)^{-2} = \\frac{9}{4}\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "This is the reverse use of the theorem"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "43 Find the coefficient of \\(x^{n}\\) in the expansion of \\(\\frac{1 + 2x}{(1 - x)^{2}}\\), \\(|x| < 1\\).",
+            "explanation": "\\((1 + 2x)(1 + 2x + 3x^{2} + \\ldots + nx^{n-1} + (n + 1)x^{n} + \\ldots)\\). Coefficient of \\(x^{n}\\): \\((n + 1) + 2n = 3n + 1\\).",
+            "book_ref": {
+              "topic_id": "3b823e8d-f2de-5bba-9e0f-5008a2d96dbc",
+              "quote": "term in the product comes from two places"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.4 Binomial Coefficients Using Pascal's Triangle"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "44 Write rows 6 and 7 of Pascal's triangle, building row 7 from row 6.",
+            "explanation": "Row 6: \\(1, 6, 15, 20, 15, 6, 1\\). Row 7: \\(1, 1 + 6, 6 + 15, 15 + 20, 20 + 15, 15 + 6, 6 + 1, 1 = 1, 7, 21, 35, 35, 21, 7, 1\\).",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "Every interior entry is the sum of the two entries directly above it from the previous row."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "45 Expand \\((x + 3)^{4}\\) using Pascal's triangle.",
+            "explanation": "Row 4: \\(1, 4, 6, 4, 1\\). \\(x^{4} + 4x^{3}(3) + 6x^{2}(9) + 4x(27) + 81 = x^{4} + 12x^{3} + 54x^{2} + 108x + 81\\).",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "row of Pascal's Triangle correspond to the binomial coefficients"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "46 Expand \\((2x - 1)^{4}\\) using Pascal's triangle.",
+            "explanation": "Row 4: \\(1, 4, 6, 4, 1\\). \\((2x)^{4} + 4(2x)^{3}(-1) + 6(2x)^{2}(-1)^{2} + 4(2x)(-1)^{3} + (-1)^{4} = 16x^{4} - 32x^{3} + 24x^{2} - 8x + 1\\).",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "Forgetting to multiply the coefficient by the power of the second term"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "47 State Pascal's rule and use row 7 of Pascal's triangle to find \\(\\binom{8}{3}\\).",
+            "explanation": "\\(\\binom{n}{k} = \\binom{n-1}{k-1} + \\binom{n-1}{k}\\), \\(0 < k < n\\). So \\(\\binom{8}{3} = \\binom{7}{2} + \\binom{7}{3} = 21 + 35 = 56\\).",
+            "book_ref": {
+              "topic_id": "33516cf9-a7de-5ffa-b205-3d6b9eee40e7",
+              "quote": "Mathematically, this is expressed by Pascal's Rule:"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5 Application of Binomial Theorem"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "48 Explain why \\(8^{50}\\) leaves remainder 1 when divided by 7.",
+            "explanation": "\\(8^{50} = (7 + 1)^{50}\\). In the expansion every term except the last, \\(1^{50} = 1\\), contains 7, so \\(8^{50} = 7q + 1\\) and the remainder is 1.",
+            "book_ref": {
+              "topic_id": "270bb31a-b8b1-5f90-a9d9-cc6795ce21ad",
+              "quote": "write the base as (a multiple of the divisor)"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5.1 Finding the Remainder using Binomial Theorem"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "49 Find the remainder when \\(6^{25}\\) is divided by 7.",
+            "explanation": "\\(6^{25} = (7 - 1)^{25} = 7q + (-1)^{25} = 7q - 1 = 7(q - 1) + 6\\). Remainder 6.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "Forgetting the sign of the last term in"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "50 Find the remainder when \\(2^{60}\\) is divided by 7.",
+            "explanation": "\\(2^{60} = (2^{3})^{20} = (7 + 1)^{20} = 7q + 1\\). Remainder 1.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "A sum of multiples of 7 is a multiple of 7, so it leaves remainder 0."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "51 Find the unit digit of \\(7^{35}\\).",
+            "explanation": "Last digits of \\(7, 7^{2}, 7^{3}, 7^{4}\\): \\(7, 9, 3, 1\\). \\(35 = 4 \\times 8 + 3\\), so \\(7^{35} = (7^{4})^{8}\\cdot 7^{3}\\) ends like \\(1 \\times 343\\): unit digit 3.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "The last digits of powers repeat in a cycle, so we divide the exponent by 4 and use the remainder."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "52 Find the last two digits of \\(31^{5}\\).",
+            "explanation": "\\((30 + 1)^{5}\\): every term with \\(30^{2} = 900\\) or a higher power is a multiple of 100. Left: \\(\\binom{5}{1}(30) + 1 = 151 = 100 + 51\\). Last two digits 51.",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "the last two digits are its remainder on division by 100"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "53 Find the fractional part of \\(\\frac{3^{100}}{8}\\).",
+            "explanation": "\\(3^{100} = 9^{50} = (8 + 1)^{50} = 8h + 1\\). So \\(\\frac{3^{100}}{8} = h + \\frac{1}{8}\\), and the fractional part is \\(\\frac{1}{8}\\).",
+            "book_ref": {
+              "topic_id": "b93c739d-d1e0-5596-a8f5-1fadc679e458",
+              "quote": "write the number as (an integer) + (a proper fraction)"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.6 Real Life Application of Binomial Theorem and Mathematical Induction"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "54 Rs. 200,000 is invested at 4% compound interest per year for 3 years. Estimate the amount using three terms of the binomial expansion, and give the exact amount.",
+            "explanation": "\\((1.04)^{3} \\approx 1 + 3(0.04) + 3(0.04)^{2} = 1.1248\\); estimate \\(200000 \\times 1.1248 = \\text{Rs. } 224{,}960\\). Exact: \\((1.04)^{3} = 1.124864\\), amount \\(\\text{Rs. } 224{,}972.80\\).",
+            "book_ref": {
+              "topic_id": "19937ae1-a3a7-5a0e-89fe-e7421e22ac91",
+              "quote": "This is why the approximation is good when"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "55 In the domino argument for a line of dominoes, what plays the role of the base case and what plays the role of the induction step?",
+            "explanation": "Base case: the first domino falls (\\(S(1)\\)). Induction step: whenever the \\(k\\)th domino falls it knocks down the \\((k + 1)\\)th (\\(S(k) \\Rightarrow S(k + 1)\\)). Together they make every domino fall.",
+            "book_ref": {
+              "topic_id": "19937ae1-a3a7-5a0e-89fe-e7421e22ac91",
+              "quote": "If the first domino is not pushed (no base case), nothing falls."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "56 Stock follows \\(I_{n+1} = 0.5\\,I_{n} + 60\\) with \\(I_{0} = 300\\). Find \\(I_{1}\\), \\(I_{2}\\), \\(I_{3}\\) and check them against \\(I_{n} = 120 + 180(0.5)^{n}\\).",
+            "explanation": "\\(I_{1} = 150 + 60 = 210\\), \\(I_{2} = 105 + 60 = 165\\), \\(I_{3} = 82.5 + 60 = 142.5\\). Formula: \\(120 + 90 = 210\\), \\(120 + 45 = 165\\), \\(120 + 22.5 = 142.5\\). They agree.",
+            "book_ref": {
+              "topic_id": "19937ae1-a3a7-5a0e-89fe-e7421e22ac91",
+              "quote": "Always test a formula on the first few values before proving it."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
