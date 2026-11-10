@@ -12,10 +12,11 @@ import { exerciseStatus, practiceChapters } from "@/lib/exercises";
 import { GRADE_LABEL } from "@/lib/format";
 import { subjectKey } from "@/lib/learn-context";
 import { SUBJECTS as ALL_SUBJECTS } from "@/lib/practice";
-import { taughtSubjects } from "@/lib/practice-filters";
 import { api, currentUser } from "@/lib/session";
 
-const SUBJECTS = taughtSubjects(ALL_SUBJECTS);
+// PRACTICE-MATHS-01 (owner, 2026-11-10): Mathematics 11 has chapter practice too (Board-style MCQs, short and long
+// questions per unit), so this page offers every subject; Book exercises and the other Practice pages keep their filters.
+const SUBJECTS: [string, string][] = ALL_SUBJECTS.map(([code, name]) => [code, name]);
 
 export const metadata: Metadata = { title: "Chapter practice", robots: { index: false } };
 
