@@ -2,6 +2,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 import type { Dashboard, Discovery } from "@portal/contracts";
+import { BrandMark } from "@/components/brand-mark";
 import { ButtonLink } from "@/components/button";
 import { DashboardView } from "@/components/dashboard";
 import { GlassCard } from "@/components/glass-card";
@@ -75,7 +76,13 @@ function Welcome({ d, grade }: { d: Discovery | null; grade?: number }) {
   return (
     <div className="space-y-12">
       <PageHero
-        eyebrow="Class 11 · Class 12"
+        eyebrow={
+          <>
+            {/* BRAND-LOGO-01: the mark glows gently here (home hero only). */}
+            <BrandMark id="hero" animated className="mx-auto mb-4 block size-20 drop-shadow-xl sm:size-24" />
+            Class 11 · Class 12
+          </>
+        }
         title={
           // PREMIUM-LOOK-01: the words rise in one by one (CSS only; still for reduced motion), the last line in the
           // subject accent as a gradient.

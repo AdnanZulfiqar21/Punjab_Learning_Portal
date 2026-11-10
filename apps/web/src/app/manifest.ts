@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
-// P11.S4.T2 (PWA-01): installable web. The icons are a provisional text mark until the owner supplies a brand mark.
+// P11.S4.T2 (PWA-01): installable web. BRAND-LOGO-01 (owner, 2026-11-10): icons are the Sirf Concepts mark (logo 2A,
+// vector source in docs/brand).
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Sirf Concepts",

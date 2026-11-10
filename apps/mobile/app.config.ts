@@ -51,7 +51,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     bundleIdentifier: IDS[variant],
     // Local source of truth (eas.json appVersionSource). Build 1 is the installed preview of 7d1be98.
     buildNumber: "10",
-    icon: "./assets/expo.icon",
+    icon: "./assets/images/icon.png",
     // A preview or development build may call an http API on the same Wi-Fi. Production stays on the default
     // App Transport Security rules, so it does not accept cleartext.
     infoPlist:
@@ -69,7 +69,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ...config.android,
     package: IDS[variant].replaceAll("-", "_"),
     adaptiveIcon: {
-      backgroundColor: "#E3F1F5",
+      backgroundColor: "#0B5D73",
       foregroundImage: "./assets/images/android-icon-foreground.png",
       backgroundImage: "./assets/images/android-icon-background.png",
       monochromeImage: "./assets/images/android-icon-monochrome.png",
@@ -80,7 +80,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   plugins: [
     "expo-router",
     "expo-secure-store",
-    ["expo-splash-screen", { backgroundColor: "#0B5D73", image: "./assets/images/splash-icon.png", imageWidth: 76 }],
+    ["expo-splash-screen", { backgroundColor: "#0B5D73", image: "./assets/images/splash-icon.png", imageWidth: 160 }],
     [
       "expo-image-picker",
       {

@@ -780,3 +780,39 @@ mark.find-in-book {
     box-shadow: 0 0 0 0.35em rgb(255 214 0 / 0.45);
   }
 }
+
+/* BRAND-LOGO-01: the logo's gentle glow and ray pulse (home hero only); still for users who reduce motion. */
+@keyframes brand-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes brand-ray {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.18);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .brand-anim .brand-glow {
+    animation: brand-glow 2.4s ease-in-out infinite;
+  }
+  .brand-anim .brand-ray {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: brand-ray 2.4s ease-in-out infinite;
+  }
+  .brand-anim .brand-ray:nth-child(2) {
+    animation-delay: 0.25s;
+  }
+  .brand-anim .brand-ray:nth-child(3) {
+    animation-delay: 0.5s;
+  }
+}
