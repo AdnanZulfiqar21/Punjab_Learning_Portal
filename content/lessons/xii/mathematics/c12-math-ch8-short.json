@@ -1,0 +1,580 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-MATH-CH8-SHORT",
+      "chapter": "pk-punjab/xii/mathematics/c12-math/ch8",
+      "topic": "pk-punjab/xii/mathematics/c12-math/ch8/u-short-questions",
+      "title": "Short Questions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "028cd881-a5c6-52b5-ad6c-efa5d9f5dba3",
+          "pdf_from": 234,
+          "pdf_to": 255,
+          "note": "Practice short questions written from Unit 8 (PDF 234-255, printed 232-253); not printed in the book. Based on the unit's text, theorems, formulas and worked examples (changed values); none repeats the unit's exercises. Drafts needing academic review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Practice short questions for the whole of Unit 8 (Numerical Solutions of Nonlinear Equations (TOC: 'Numerical Method')), arranged by the unit's sections, in the style of a 2-mark Board short question. Each one is solved briefly, step by step."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.1 Basic Principles of Approximating Real Roots of Nonlinear Equations"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1 Define a root of a function \\(y = f(x)\\). What is its geometric meaning?",
+            "explanation": "A root (zero) of \\(y = f(x)\\) is a value of \\(x\\) for which \\(y = 0\\), i.e. a solution of \\(f(x) = 0\\). Geometrically it is the \\(x\\)-coordinate of the point where the graph of \\(f\\) meets the \\(x\\)-axis.",
+            "book_ref": {
+              "topic_id": "5b57ede7-ec57-5851-8e53-4866e43cdd96",
+              "quote": "A root (or zero) of a function"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2 What is a nonlinear equation? Give two examples.",
+            "explanation": "An equation \\(f(x) = 0\\) in which \\(f(x)\\) cannot be written as \\(ax + b\\) (\\(a \\ne 0\\)); \\(x\\) appears with a power above one or inside a trigonometric, exponential or logarithmic function. Examples: \\(x^{3} - 5x + 1 = 0\\), \\(e^{x} - 3x = 0\\).",
+            "book_ref": {
+              "topic_id": "5b57ede7-ec57-5851-8e53-4866e43cdd96",
+              "quote": "A nonlinear equation is an equation of the form"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3 Why are numerical methods needed to find roots of nonlinear equations?",
+            "explanation": "Most nonlinear equations (e.g. \\(x - 2\\sin x = 0\\)) have no exact algebraic solution, and no general formula exists for polynomial equations of degree five or more; even when a formula exists it may be too complicated. Numerical methods give an approximate root to any accuracy we need.",
+            "book_ref": {
+              "topic_id": "5b57ede7-ec57-5851-8e53-4866e43cdd96",
+              "quote": "Therefore, numerical methods are essential for finding approximate roots in such cases."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4 Find the roots of \\(f(x) = x^{2} - x - 6\\) and name the points where its graph meets the \\(x\\)-axis.",
+            "explanation": "\\(x^{2} - x - 6 = (x - 3)(x + 2) = 0 \\Rightarrow x = 3\\) or \\(x = -2\\). The graph meets the \\(x\\)-axis at \\((3, 0)\\) and \\((-2, 0)\\).",
+            "book_ref": {
+              "topic_id": "5b57ede7-ec57-5851-8e53-4866e43cdd96",
+              "quote": "Two ways of seeing the same root"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.1.1 Location of Root Theorem (LRT)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5 State the Location of Root Theorem.",
+            "explanation": "Let \\(f\\) be a real-valued function continuous on the closed interval \\([a, b]\\). If \\(f(a)f(b) < 0\\), then \\(f\\) has at least one real root \\(c\\) in the open interval \\(]a, b[\\).",
+            "book_ref": {
+              "topic_id": "b87abba1-0438-5576-93df-6ab74299ae31",
+              "quote": "real-valued function which is continuous on a closed interval"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6 Show that \\(f(x) = x^{3} - 3x + 1\\) has a real root in \\(]0, 1[\\).",
+            "explanation": "\\(f\\) is a polynomial, so it is continuous on \\([0, 1]\\). \\(f(0) = 1 > 0\\), \\(f(1) = 1 - 3 + 1 = -1 < 0\\), so \\(f(0)f(1) < 0\\). By the LRT, \\(f\\) has a root in \\(]0, 1[\\).",
+            "book_ref": {
+              "topic_id": "b87abba1-0438-5576-93df-6ab74299ae31",
+              "quote": "an interval of sign change for the function"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7 Show that \\(f(x) = x^{3} - 6x + 2\\) has three real roots by finding intervals of sign change.",
+            "explanation": "\\(f\\) is a continuous polynomial.",
+            "book_ref": {
+              "topic_id": "b87abba1-0438-5576-93df-6ab74299ae31",
+              "quote": "Separate (non-overlapping) intervals of sign change give separate roots"
+            },
+            "steps": [
+              "\\(f(-3) = -7\\), \\(f(-2) = 6\\): \\(f(-3)f(-2) < 0\\)",
+              "\\(f(0) = 2\\), \\(f(1) = -3\\): \\(f(0)f(1) < 0\\)",
+              "\\(f(2) = -2\\), \\(f(3) = 11\\): \\(f(2)f(3) < 0\\)"
+            ],
+            "final_answer": "By the LRT there is a root in each of \\(]-3, -2[\\), \\(]0, 1[\\), \\(]2, 3[\\); these do not overlap, so \\(f\\) has three real roots (a cubic has at most three)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8 \\(\\tan\\frac{\\pi}{4} = 1\\) and \\(\\tan\\frac{3\\pi}{4} = -1\\). Does the LRT prove that \\(\\tan x\\) has a root in \\(\\left]\\frac{\\pi}{4}, \\frac{3\\pi}{4}\\right[\\)? Explain.",
+            "explanation": "No. \\(\\tan x\\) is not continuous on \\(\\left[\\frac{\\pi}{4}, \\frac{3\\pi}{4}\\right]\\): it is undefined at \\(x = \\frac{\\pi}{2}\\) (asymptote). The LRT needs continuity, so the sign change proves nothing (in fact \\(\\tan x \\ne 0\\) on this interval).",
+            "book_ref": {
+              "topic_id": "b87abba1-0438-5576-93df-6ab74299ae31",
+              "quote": "Using the LRT on an interval where"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9 For \\(f(x) = (x - 1)(x - 2)\\), find \\(f(0)\\) and \\(f(3)\\). What does this show about the LRT?",
+            "explanation": "\\(f(0) = (-1)(-2) = 2\\), \\(f(3) = (2)(1) = 2\\): same sign, yet \\(f\\) has roots \\(1\\) and \\(2\\) in \\(]0, 3[\\). So no sign change does not mean no root; the LRT only works one way.",
+            "book_ref": {
+              "topic_id": "b87abba1-0438-5576-93df-6ab74299ae31",
+              "quote": "No sign change does not mean no root."
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10 Show that the equation \\(e^{x} = 3x\\) has a root in \\(]1, 2[\\).",
+            "explanation": "Let \\(f(x) = e^{x} - 3x\\), continuous everywhere. \\(f(1) = e - 3 = -0.2817 < 0\\), \\(f(2) = e^{2} - 6 = 1.3891 > 0\\). Since \\(f(1)f(2) < 0\\), by the LRT a root lies in \\(]1, 2[\\).",
+            "book_ref": {
+              "topic_id": "b87abba1-0438-5576-93df-6ab74299ae31",
+              "quote": "Always check continuity first"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.2 Graphical Method for Approximating Real Roots"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "11 Write the steps of the graphical method for approximating a real root.",
+            "explanation": "(1) Find an interval of sign change \\([a, b]\\) with \\(f(a)f(b) < 0\\), if not given. (2) Draw the graph of \\(y = f(x)\\) inside that interval only. (3) Read where the graph crosses the \\(x\\)-axis; that \\(x\\) is the approximate root.",
+            "book_ref": {
+              "topic_id": "6300eab8-e4a7-54fd-b342-b7ceb66b33f8",
+              "quote": "Observe where the graph crosses the"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "12 The graph of \\(f(x) = e^{x} - 3x\\) crosses the \\(x\\)-axis near \\(0.62\\). Confirm that \\(0.62\\) is correct to two decimal places.",
+            "explanation": "\\(f(0.615) = 1.8497 - 1.8450 = 0.0047 > 0\\) and \\(f(0.625) = 1.8682 - 1.8750 = -0.0068 < 0\\). By the LRT the root lies in \\(]0.615, 0.625[\\), and every number there rounds to \\(0.62\\).",
+            "book_ref": {
+              "topic_id": "6300eab8-e4a7-54fd-b342-b7ceb66b33f8",
+              "quote": "used to provide an initial estimate for numerical methods"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "13 Why must the calculator be in radian mode when tabulating \\(f(x) = x - 2\\sin x\\)?",
+            "explanation": "In calculus \\(\\sin x\\) takes \\(x\\) in radians. In degree mode \\(\\sin 2\\) would be \\(\\sin 2^{\\circ} = 0.0349\\) instead of \\(0.9093\\), so \\(f(2)\\) would be \\(1.9302\\) instead of \\(0.1814\\) and the whole table would be wrong.",
+            "book_ref": {
+              "topic_id": "6300eab8-e4a7-54fd-b342-b7ceb66b33f8",
+              "quote": "always keep your calculator in radian mode"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3 Numerical Methods for Solving Nonlinear Equations"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "14 Name the three numerical methods of this unit for solving f(x) = 0. Which of them need an interval of sign change?",
+            "explanation": "Bisection, Regula-Falsi and Newton-Raphson. Bisection and Regula-Falsi start from (and keep) an interval of sign change; Newton-Raphson starts from one value x0 and uses the derivative.",
+            "book_ref": {
+              "topic_id": "7359b3a9-f07a-5488-90b2-91df88b99870",
+              "quote": "we will study three important numerical techniques"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3.1 General Rule of Accuracy, Tolerance and Calculator Setup"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "15 Write the tolerance for a root correct to (i) 3 decimal places (ii) 4 decimal places.",
+            "explanation": "Tolerance \\(|f(c)| < \\frac{10^{-n}}{2}\\). (i) \\(n = 3\\): \\(|f(c)| < 0.0005\\). (ii) \\(n = 4\\): \\(|f(c)| < 0.00005\\).",
+            "book_ref": {
+              "topic_id": "72bd8eda-9cff-5954-b24d-172aac6bba39",
+              "quote": "is the number of decimal places required for the root"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "16 Why should the calculator be fixed to at least n + 1 decimal places to get a root correct to n decimal places?",
+            "explanation": "If every intermediate value is rounded to n decimals, the small rounding errors add up and can change the last digit of the answer. Keeping at least one extra decimal protects it; only the final answer is rounded.",
+            "book_ref": {
+              "topic_id": "72bd8eda-9cff-5954-b24d-172aac6bba39",
+              "quote": "If you round every intermediate value to"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "17 Is \\(c = 1.4142\\) an acceptable root of \\(x^{2} - 2 = 0\\) correct to 3 decimal places?",
+            "explanation": "\\(f(1.4142) = 1.99996164 - 2 = -0.0000384\\), and \\(|f(c)| = 0.0000384 < 0.0005\\). Yes: the root is \\(1.414\\) to 3 decimal places.",
+            "book_ref": {
+              "topic_id": "72bd8eda-9cff-5954-b24d-172aac6bba39",
+              "quote": "consider the root accurate when"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3.2 Bisection Method"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "18 Write the steps of the bisection method.",
+            "explanation": "(1) Check that \\(f\\) is continuous on \\([a, b]\\) and \\(f(a)f(b) < 0\\). (2) Take \\(c = \\frac{a + b}{2}\\). (3) If \\(|f(c)|\\) is below the tolerance, \\(c\\) is the root; otherwise if \\(f(a)f(c) < 0\\) set \\(b = c\\), else set \\(a = c\\). (4) Repeat steps 2-3.",
+            "book_ref": {
+              "topic_id": "55455903-780e-54ca-915e-03d09d1e64e8",
+              "quote": "determine the subinterval containing the root"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "19 Perform one iteration of the bisection method for \\(f(x) = x^{3} - 4x - 9\\) on \\([2, 3]\\).",
+            "explanation": "\\(f(2) = -9 < 0\\), \\(f(3) = 6 > 0\\). \\(c = \\frac{2 + 3}{2} = 2.5\\), \\(f(2.5) = 15.625 - 10 - 9 = -3.375 < 0\\). It has the sign of \\(f(2)\\), so the root lies in \\([2.5, 3]\\).",
+            "book_ref": {
+              "topic_id": "55455903-780e-54ca-915e-03d09d1e64e8",
+              "quote": "Keep the half where the sign changes"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "20 Perform two iterations of the bisection method for \\(f(x) = e^{x} - 3x\\) on \\([0, 1]\\).",
+            "explanation": "\\(f(0) = 1 > 0\\), \\(f(1) = -0.2817 < 0\\).",
+            "book_ref": {
+              "topic_id": "55455903-780e-54ca-915e-03d09d1e64e8",
+              "quote": "Keep the half where the sign changes: replace the end whose"
+            },
+            "steps": [
+              "\\(c_1 = 0.5\\), \\(f(0.5) = 1.6487 - 1.5 = 0.1487 > 0\\): root in \\([0.5, 1]\\)",
+              "\\(c_2 = \\frac{0.5 + 1}{2} = 0.75\\), \\(f(0.75) = 2.1170 - 2.25 = -0.1330 < 0\\): root in \\([0.5, 0.75]\\)",
+              "\\(|f(0.75)| = 0.1330\\) is still above the tolerance, so the iterations would continue"
+            ],
+            "final_answer": "After two iterations the root lies in \\([0.5, 0.75]\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "21 Starting from \\([1, 2]\\), how many bisection steps make the interval containing the root shorter than \\(0.0005\\)?",
+            "explanation": "After \\(k\\) steps the length is \\(\\frac{1}{2^{k}}\\). \\(\\frac{1}{2^{10}} = \\frac{1}{1024} \\approx 0.00098 > 0.0005\\) but \\(\\frac{1}{2^{11}} = \\frac{1}{2048} \\approx 0.00049 < 0.0005\\). So 11 steps.",
+            "book_ref": {
+              "topic_id": "55455903-780e-54ca-915e-03d09d1e64e8",
+              "quote": "That is why bisection always works, but slowly."
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3.3 Regula-Falsi Method (False Position Method)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "22 Show that the secant line through \\((a, f(a))\\) and \\((b, f(b))\\) cuts the \\(x\\)-axis at \\(c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\).",
+            "explanation": "Secant: \\(y - f(a) = \\frac{f(b) - f(a)}{b - a}(x - a)\\).",
+            "book_ref": {
+              "topic_id": "c2268ff9-f83b-55ce-97e6-4257d6ba8bf2",
+              "quote": "intercepts of the secant line, we substitute"
+            },
+            "steps": [
+              "Put \\(y = 0\\), \\(x = c\\): \\(c - a = -\\dfrac{f(a)(b - a)}{f(b) - f(a)}\\)",
+              "\\(c = \\dfrac{a\\big(f(b) - f(a)\\big) - f(a)(b - a)}{f(b) - f(a)}\\)",
+              "Numerator \\(= af(b) - af(a) - bf(a) + af(a) = af(b) - bf(a)\\)"
+            ],
+            "final_answer": "Hence \\(c = \\dfrac{af(b) - bf(a)}{f(b) - f(a)}\\)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "23 Perform one iteration of the Regula-Falsi method for \\(f(x) = x^{3} - 4x - 9\\) on \\([2, 3]\\).",
+            "explanation": "\\(f(2) = -9\\), \\(f(3) = 6\\): \\(c = \\frac{(2)(6) - (3)(-9)}{6 - (-9)} = \\frac{39}{15} = 2.6\\). \\(f(2.6) = 17.576 - 10.4 - 9 = -1.824 < 0\\), so the root lies in \\([2.6, 3]\\).",
+            "book_ref": {
+              "topic_id": "c2268ff9-f83b-55ce-97e6-4257d6ba8bf2",
+              "quote": "using the Regula-Falsi formula"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "24 How do the bisection and Regula-Falsi methods differ?",
+            "explanation": "Only in the new estimate: bisection takes the midpoint \\(c = \\frac{a + b}{2}\\), Regula-Falsi takes the \\(x\\)-intercept of the secant, \\(c = \\frac{af(b) - bf(a)}{f(b) - f(a)}\\). The start (continuity, \\(f(a)f(b) < 0\\)), the choice of the new interval and the stopping rule are the same; Regula-Falsi is usually faster.",
+            "book_ref": {
+              "topic_id": "c2268ff9-f83b-55ce-97e6-4257d6ba8bf2",
+              "quote": "Bisection and Regula-Falsi differ only in Step 2"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "25 Perform one iteration of the Regula-Falsi method for \\(f(x) = \\ln x + x - 2\\) on \\([1, 2]\\).",
+            "explanation": "\\(f(1) = -1\\), \\(f(2) = \\ln 2 = 0.6931\\): \\(c = \\frac{(1)(0.6931) - (2)(-1)}{0.6931 + 1} = \\frac{2.6931}{1.6931} = 1.5906\\). \\(f(1.5906) = 0.0547 > 0\\), so the root lies in \\([1, 1.5906]\\).",
+            "book_ref": {
+              "topic_id": "c2268ff9-f83b-55ce-97e6-4257d6ba8bf2",
+              "quote": "the secant takes this into account, the midpoint does not"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "26 For \\(f(x) = x^{2} - 3\\) on \\([1, 2]\\), the first Regula-Falsi estimate is \\(1.6667\\) with \\(f(1.6667) = -0.2221\\). Find the second estimate.",
+            "explanation": "\\(f(1.6667) < 0\\), so \\(a = 1.6667\\), \\(b = 2\\) (\\(f(2) = 1\\)): \\(c = \\frac{(1.6667)(1) - (2)(-0.2221)}{1 + 0.2221} = \\frac{2.1109}{1.2221} = 1.7273\\). The end \\(b = 2\\) has not moved.",
+            "book_ref": {
+              "topic_id": "c2268ff9-f83b-55ce-97e6-4257d6ba8bf2",
+              "quote": "Often one end never moves"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.3.4 Newton–Raphson Method"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "27 Derive the Newton-Raphson formula \\(x_1 = x_0 - \\frac{f(x_0)}{f'(x_0)}\\).",
+            "explanation": "The tangent at \\((x_0, f(x_0))\\) is \\(y - f(x_0) = f'(x_0)(x - x_0)\\). It meets the \\(x\\)-axis at \\(x = x_1\\), \\(y = 0\\): \\(-f(x_0) = f'(x_0)(x_1 - x_0)\\). Dividing by \\(f'(x_0) \\ne 0\\): \\(x_1 = x_0 - \\frac{f(x_0)}{f'(x_0)}\\).",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "This tangent intersects the"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "28 Write the conditions under which the Newton-Raphson method can be applied.",
+            "explanation": "Write the equation as \\(f(x) = 0\\); choose \\(x_0\\) from an interval of sign change; \\(f\\) must be differentiable near \\(x_0\\) and \\(f'(x) \\ne 0\\) near \\(x_0\\) (otherwise the tangent is horizontal and the formula divides by zero).",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "should not be zero near the root"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "29 Use the Newton-Raphson method with \\(x_0 = 2\\) to find \\(\\sqrt{5}\\) correct to 3 decimal places.",
+            "explanation": "\\(f(x) = x^{2} - 5\\), \\(f'(x) = 2x\\).",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "Repeating this process produces a sequence of"
+            },
+            "steps": [
+              "\\(x_1 = 2 - \\frac{-1}{4} = 2.25\\), \\(f(2.25) = 0.0625\\)",
+              "\\(x_2 = 2.25 - \\frac{0.0625}{4.5} = 2.2361\\), \\(f(2.2361) = 0.0001\\)",
+              "\\(|f(2.2361)| = 0.0001 < 0.0005\\): stop"
+            ],
+            "final_answer": "\\(\\sqrt{5} \\approx 2.236\\)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "30 Use one Newton-Raphson step from \\(x_0 = 0.5\\) to find the root of \\(\\cos x = 2x\\) correct to two decimal places.",
+            "explanation": "\\(f(x) = \\cos x - 2x\\), \\(f'(x) = -\\sin x - 2\\).",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "Unlike bisection and Regula-Falsi, the root is not trapped in an interval"
+            },
+            "steps": [
+              "\\(f(0.5) = 0.8776 - 1 = -0.1224\\), \\(f'(0.5) = -0.4794 - 2 = -2.4794\\)",
+              "\\(x_1 = 0.5 - \\frac{-0.1224}{-2.4794} = 0.5 - 0.0494 = 0.4506\\)",
+              "\\(f(0.4506) = -0.0010\\), \\(|f| < 0.005\\): stop"
+            ],
+            "final_answer": "\\(x \\approx 0.45\\) (radian mode)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "31 Why can the Newton-Raphson method not start at \\(x_0 = 2\\) for \\(f(x) = x^{3} - 12x + 1\\)?",
+            "explanation": "\\(f'(x) = 3x^{2} - 12\\), so \\(f'(2) = 0\\). The tangent at \\(x = 2\\) is horizontal and never meets the \\(x\\)-axis; the formula \\(x_1 = x_0 - \\frac{f(x_0)}{f'(x_0)}\\) would divide by zero.",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "A zero slope means a horizontal tangent, which never meets the x-axis"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "32 Show that the Newton-Raphson formula for \\(\\sqrt{N}\\) (\\(N > 0\\)) is \\(x_{n+1} = \\frac{1}{2}\\left(x_n + \\frac{N}{x_n}\\right)\\).",
+            "explanation": "Take \\(f(x) = x^{2} - N\\), \\(f'(x) = 2x\\). Then \\(x_{n+1} = x_n - \\frac{x_n^{2} - N}{2x_n} = \\frac{2x_n^{2} - x_n^{2} + N}{2x_n} = \\frac{x_n^{2} + N}{2x_n} = \\frac{1}{2}\\left(x_n + \\frac{N}{x_n}\\right)\\).",
+            "book_ref": {
+              "topic_id": "23adcf22-82f2-5466-8625-58877b650299",
+              "quote": "Write the given equation in the form"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.4 Estimating the Value of a Definite Integral"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "33 Why are numerical methods needed to evaluate some definite integrals? Give an example.",
+            "explanation": "The Fundamental Theorem needs an antiderivative \\(F\\), but functions like \\(e^{-x^{2}}\\) have no elementary antiderivative, so \\(\\int_{0}^{1} e^{-x^{2}}\\,dx\\) cannot be found by it. The integral still exists (an area), so it is estimated numerically, e.g. by the Trapezium Rule.",
+            "book_ref": {
+              "topic_id": "5ffcb6fa-2e27-508d-ad6d-922c9d2d8ffd",
+              "quote": "cannot be evaluated easily by elementary methods"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.4.1 Trapezium (Trapezoidal) Rule"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "34 State the Trapezium Rule.",
+            "explanation": "If \\(f\\) is continuous on \\([a, b]\\), \\(h = \\frac{b - a}{n}\\) and \\(x_i = a + ih\\), then \\(\\int_{a}^{b} f(x)\\,dx \\approx \\frac{h}{2}\\big[f(x_0) + 2f(x_1) + 2f(x_2) + \\dots + 2f(x_{n-1}) + f(x_n)\\big]\\).",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "is approximately equal to the sum of areas of the trapeziums"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "35 In the Trapezium Rule, why are the inner values multiplied by 2 but not the end values?",
+            "explanation": "Each inner value \\(f(x_1), \\dots, f(x_{n-1})\\) is the right side of one trapezium and the left side of the next, so it is counted twice. \\(f(x_0)\\) and \\(f(x_n)\\) belong to one trapezium each.",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "is the right side of one trapezium and the left side of the next"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "36 For \\(\\int_{-1}^{2} f(x)\\,dx\\) with \\(h = 0.5\\), find \\(n\\) and the points \\(x_i\\).",
+            "explanation": "\\(n = \\frac{b - a}{h} = \\frac{2 - (-1)}{0.5} = 6\\). \\(x_i = -1 + 0.5i\\): \\(-1, -0.5, 0, 0.5, 1, 1.5, 2\\) (7 points).",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "Let \\(x_{i} = a + ih;\\ i = 0, 1, 2, \\dots, n\\)"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "37 Use the Trapezium Rule with \\(n = 3\\) to approximate \\(\\int_{0}^{3} x^{2}\\,dx\\) and compare with the exact value.",
+            "explanation": "\\(h = 1\\), values \\(0, 1, 4, 9\\): \\(\\frac{1}{2}[0 + 2(1 + 4) + 9] = 9.5\\). Exact: \\(\\left[\\frac{x^{3}}{3}\\right]_{0}^{3} = 9\\). The rule overestimates by \\(0.5\\) (the curve bends upwards).",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "each trapezium approximates the signed area"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "38 Use the Trapezium Rule with \\(n = 2\\) to approximate \\(\\int_{0}^{1} \\frac{1}{1 + x^{2}}\\,dx\\).",
+            "explanation": "\\(h = 0.5\\), values \\(f(0) = 1\\), \\(f(0.5) = 0.8\\), \\(f(1) = 0.5\\): \\(\\frac{0.5}{2}[1 + 2(0.8) + 0.5] = 0.25(3.1) = 0.775\\).",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "the accuracy of the approximation improves as n is taken sufficiently large"
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "39 Use the Trapezium Rule with \\(n = 4\\) to approximate \\(\\int_{1}^{2} \\frac{1}{x}\\,dx\\).",
+            "explanation": "\\(h = 0.25\\); points \\(1, 1.25, 1.5, 1.75, 2\\).",
+            "book_ref": {
+              "topic_id": "1316dc4d-f258-51e6-a8e4-ad8474f1e077",
+              "quote": "should be rounded to at least four decimal places to maintain accuracy in the final result"
+            },
+            "steps": [
+              "Values: \\(1,\\ 0.8,\\ 0.6667,\\ 0.5714,\\ 0.5\\)",
+              "Inner sum \\(= 0.8 + 0.6667 + 0.5714 = 2.0381\\)",
+              "\\(\\frac{0.25}{2}[1 + 2(2.0381) + 0.5] = 0.125(5.5762) = 0.6970\\)"
+            ],
+            "final_answer": "\\(\\int_{1}^{2} \\frac{1}{x}\\,dx \\approx 0.6970\\) (exact \\(\\ln 2 = 0.6931\\))"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5 Real-Life Applications of Nonlinear Equations"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "40 Write the general recipe for solving a real-life nonlinear equation numerically.",
+            "explanation": "(1) Write the model as \\(f(x) = 0\\). (2) Check continuity and find \\([a, b]\\) with \\(f(a)f(b) < 0\\). (3) Apply the named method with at least 4 decimals. (4) Stop when \\(|f(c)| < \\frac{10^{-n}}{2}\\). (5) Round, give the unit and say what the number means.",
+            "book_ref": {
+              "topic_id": "179c60a8-ac68-577f-ae69-3e6dfac67d1f",
+              "quote": "bring every term to one side"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5.1 Chemical Reactions"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "41 A concentration \\(x\\) satisfies \\(xe^{2x} = 1\\). Write \\(f(x)\\), \\(f'(x)\\) and the Newton-Raphson formula for it.",
+            "explanation": "\\(f(x) = xe^{2x} - 1\\), \\(f'(x) = e^{2x} + 2xe^{2x} = (1 + 2x)e^{2x}\\). \\(x_{n+1} = x_n - \\dfrac{x_n e^{2x_n} - 1}{(1 + 2x_n)e^{2x_n}}\\).",
+            "book_ref": {
+              "topic_id": "3e53d734-fb8f-5610-bdb2-5858787050bc",
+              "quote": "the equilibrium concentration or the reaction rate leads to nonlinear equations"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5.2 Regulation of Heartbeats"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "42 A signal strength \\(x\\) satisfies \\(x^{3} - 2x - 2 = 0\\). Perform two bisection iterations on \\([1, 2]\\).",
+            "explanation": "\\(f(1) = -3 < 0\\), \\(f(2) = 2 > 0\\). \\(c_1 = 1.5\\): \\(f(1.5) = -1.625 < 0\\), interval \\([1.5, 2]\\). \\(c_2 = 1.75\\): \\(f(1.75) = 5.3594 - 3.5 - 2 = -0.1406 < 0\\), interval \\([1.75, 2]\\).",
+            "book_ref": {
+              "topic_id": "7c531a95-876d-5149-9401-fc1488c8a4da",
+              "quote": "The variation of these signals over time can often be modelled by nonlinear equations."
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5.3 Electronic Circuits"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "43 A voltage satisfies \\(\\sin V - 0.6V = 0\\). Show that a non-zero root lies in \\(]1, 2[\\) and find the first Regula-Falsi estimate.",
+            "explanation": "Radian mode: \\(f(1) = 0.8415 - 0.6 = 0.2415 > 0\\), \\(f(2) = 0.9093 - 1.2 = -0.2907 < 0\\); \\(f\\) is continuous, so a root lies in \\(]1, 2[\\). \\(V_c = \\frac{(1)(-0.2907) - (2)(0.2415)}{-0.2907 - 0.2415} = \\frac{-0.7737}{-0.5322} = 1.4538\\).",
+            "book_ref": {
+              "topic_id": "55feea47-507a-51c9-8210-3a159816995e",
+              "quote": "often produce nonlinear voltage-current relationships"
+            }
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "8.5.4 Cryptography"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "44 Show that \\(x^{5} - 4x + 1 = 0\\) has a real root in \\(]0, 1[\\) and another in \\(]1, 2[\\).",
+            "explanation": "\\(f(x) = x^{5} - 4x + 1\\) is a continuous polynomial. \\(f(0) = 1 > 0\\), \\(f(1) = -2 < 0\\), \\(f(2) = 32 - 8 + 1 = 25 > 0\\). So \\(f(0)f(1) < 0\\) and \\(f(1)f(2) < 0\\); by the LRT there is a root in each interval.",
+            "book_ref": {
+              "topic_id": "e910fc34-8226-512a-a4cf-d077dc3186ba",
+              "quote": "involve high-degree nonlinear equations to generate secure keys"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
