@@ -21,7 +21,13 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Ipconfig Windows operating system mein istemal hoti hai. Ifconfig Linux aur macOS systems mein istemal hoti hai. Yeh commands network settings dikhati hain. Yeh IP address aur subnet mask (address ka kaun sa hissa network ka hai, yeh batane wala number) dikhati hain. Yeh gateway aur network status (halat) bhi dikhati hain. Yeh commands network troubleshooting mein madad deti hain."
+            "text": "Ipconfig Windows operating system mein istemal hoti hai. Ifconfig Linux aur macOS systems mein istemal hoti hai. Yeh commands network settings dikhati hain. Yeh IP address aur subnet mask (address ka kaun sa hissa network ka hai, yeh batane wala number) dikhati hain. Ipconfig default gateway bhi dikhati hai; dono commands network status (halat) dikhati hain. Yeh commands network troubleshooting mein madad deti hain."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab kehti hai ke dono commands gateway bhi dikhati hain. Yeh sirf ipconfig ke liye sahi hai: ifconfig har network interface ki settings dikhati hai (IP address, netmask, aur interface chal raha hai ya nahi), magar default gateway nahi. Gateway routing table (raaston ki fehrist) ka hissa hai, jo Linux aur macOS par alag command se dekha jata hai, maslan route -n ya netstat -rn. Oopar sahi baat likhi gayi hai."
           },
           {
             "type": "callout",
@@ -33,7 +39,7 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Windows aur Linux par IP settings dekhne ki commands kaun si hain, aur yeh kya dikhati hain?",
-            "explanation": "Windows: ipconfig; Linux/macOS: ifconfig. Yeh IP address, subnet mask, gateway aur network status dikhati hain."
+            "explanation": "Windows: ipconfig; Linux/macOS: ifconfig. Dono IP address, subnet mask aur network status dikhati hain; default gateway sirf ipconfig dikhati hai."
           },
           {
             "type": "heading",
@@ -44,7 +50,7 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "ipconfig (Windows) / ifconfig (Linux, macOS): IP address, subnet mask, gateway, status; troubleshooting mein madad."
+              "ipconfig (Windows) / ifconfig (Linux, macOS): IP address, subnet mask, status (gateway sirf ipconfig mein); troubleshooting mein madad."
             ]
           }
         ]

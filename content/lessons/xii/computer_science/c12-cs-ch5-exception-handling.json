@@ -38,7 +38,17 @@
           {
             "type": "code",
             "language": "python",
-            "text": "import sqlite3\n\ntry:\n    # Connect to database\n    connection = sqlite3.connect(\"school.db\")\n    cursor = connection.cursor()\n\n    # Insert data into table\n    cursor.execute(\"INSERT INTO students (ID, Name, Age) VALUES (?, ?, ?)\", (1, \"Ali\", 20))\n\n    # Save changes (ensures data integrity)\n    connection.commit()\n    print(\"Data inserted successfully\")\n\nexcept sqlite3.Error as e:\n    # Handle database errors\n    print(\"Error occurred:\", e)\n    connection.rollback()  # Undo changes if error occurs\n\nfinally:\n    # Close connection\n    if connection:\n        connection.close()\n        print(\"Connection closed\")"
+            "text": "import sqlite3\n\ntry:\n    # Connect to database\n    connection = sqlite3.connect(\"school.db\")\n    cursor = connection.cursor()\n\n    # Insert data into table\n    cursor.execute(\"INSERT INTO students (ID, Name, Age) VALUES (?, ?, ?)\", (1, \"Ali\", 20))\n\n    # Save changes (ensures data integrity)\n    connection.commit()\n    print(\"Data inserted successfully\")\n\nexcept sqlite3.Error as e:\n    # Handle database errors\n    print(\"Error occurred:\", e)\n    connection.rollback()  # Undo changes if error occurs\n\nfinally:\n    # Close connection\n    if connection:\n        connection.close()\n        print(\"Connection closed\")",
+            "book_errors": [
+              "connection.rollback()  # Undo changes if error occurs",
+              "if connection:"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "This program crashes if sqlite3.connect() itself fails (for example, when the database file cannot be opened): the name connection is never created, so connection.rollback() in except and if connection: in finally both raise NameError. Write connection = None before try:, and in except write if connection: connection.rollback(). Then the program prints Error occurred: unable to open database file and ends without crashing."
           },
           {
             "type": "list",

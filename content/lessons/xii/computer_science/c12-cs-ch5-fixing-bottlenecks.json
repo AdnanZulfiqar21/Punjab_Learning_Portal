@@ -61,7 +61,17 @@
           {
             "type": "code",
             "language": "text",
-            "text": "Profiling Report:\nSlow code result: 499999500000\nFast code result: 499999500000\n\n6 function calls in 0.080 seconds\n\nOrdered by: standard name\n\nncalls  tottime  percall  cumtime  percall  function\n1       0.060    0.060    0.080    0.080    <module>\n1       0.050    0.050    0.050    0.050    slow_sum\n1       0.010    0.010    0.010    0.010    {built-in sum}\n1       0.010    0.010    0.010    0.010    fast_sum\n1       0.000    0.000    0.080    0.080    main\n\nTime Comparison Report:\nSlow code time: 0.42\nFast code time: 0.09"
+            "text": "Profiling Report:\nSlow code result: 499999500000\nFast code result: 499999500000\n\n6 function calls in 0.080 seconds\n\nOrdered by: standard name\n\nncalls  tottime  percall  cumtime  percall  function\n1       0.060    0.060    0.080    0.080    <module>\n1       0.050    0.050    0.050    0.050    slow_sum\n1       0.010    0.010    0.010    0.010    {built-in sum}\n1       0.010    0.010    0.010    0.010    fast_sum\n1       0.000    0.000    0.080    0.080    main\n\nTime Comparison Report:\nSlow code time: 0.42\nFast code time: 0.09",
+            "book_errors": [
+              "6 function calls in 0.080 seconds",
+              "1       0.010    0.010    0.010    0.010    fast_sum"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The printed report is only a sketch, and its numbers do not add up: it says 6 function calls but lists 5. In a real cProfile report every call is counted and shown with its file name and line number (for this program about 9 calls, including exec, print and sum). tottime is a function's own time, so fast_sum() shows almost 0 there and its time appears under {built-in method builtins.sum}; cumtime of main() is its own time (building the list) plus the times of slow_sum() and fast_sum(). The conclusion is right: slow_sum() has the largest time, so it is the bottleneck."
           },
           {
             "type": "list",

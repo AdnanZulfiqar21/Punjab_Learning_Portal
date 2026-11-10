@@ -91,7 +91,16 @@
           },
           {
             "type": "paragraph",
-            "text": "Example: You can step over the line area = 3.14 * radius ** 2 to skip calculating the area, or step into calculate_area() to examine how the area is calculated."
+            "text": "Example: You can step over the line area = 3.14 * radius ** 2 to skip calculating the area, or step into calculate_area() to examine how the area is calculated.",
+            "book_errors": [
+              "to skip calculating the area"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Step Over does not skip a line: it executes the current line and stops on the next one, as the list above says; it only avoids going inside any function called on that line. When the debugger is paused inside calculate_area() on area = 3.14 * radius ** 2, Step Over runs that line, so area gets its value (78.5 when radius is 5). On the line print(\"Area of circle:\", calculate_area(radius)) in main(), Step Over runs the whole function call in one step, while Step Into goes inside calculate_area() to examine how the area is calculated."
           },
           {
             "type": "diagram",
