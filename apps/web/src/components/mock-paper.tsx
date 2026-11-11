@@ -451,7 +451,7 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
         </ol>
         {/* Owner (2026-11-10): Submit at the end of the MCQs too, so the student needn't scroll back up. */}
         {tab === "question" && (
-          <div className="flex flex-wrap items-center gap-3 border-t border-border pt-4">
+          <div className="flex flex-col items-center gap-2 border-t border-border pt-5 text-center">
             <button
               type="button"
               className={`${btn} bg-foreground text-background`}
