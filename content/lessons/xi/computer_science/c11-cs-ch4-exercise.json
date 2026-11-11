@@ -452,8 +452,14 @@
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "7. Consider the following graph and perform the operations specified below:\n[Graph as printed: A has arrows to B, C and D; B has arrows to E and F; C has an arrow to G; D has arrows to H and I.]\n(a) Start from node A, write down the sequence of nodes visited during a depth-first search traversal of the graph.\n(b) Start from node A, write down the sequence of nodes visited throughout a breadth-first search traversal of the graph.",
+            "prompt": "7. Consider the following graph and perform the operations specified below:\n(a) Start from node A, write down the sequence of nodes visited during a depth-first search traversal of the graph.\n(b) Start from node A, write down the sequence of nodes visited throughout a breadth-first search traversal of the graph.",
             "explanation": "Neighbours are taken from left to right, as in the book's examples (4.3.2, 4.3.3).\n(a) Depth-first search (DFS) with a stack:\n- Push A. Pop A, visit it, push its children D, C, B (so B is on top). Stack: [D, C, B]\n- Pop B, visit it, push F, E. Stack: [D, C, F, E]\n- Pop E, visit it (no children). Stack: [D, C, F]\n- Pop F, visit it. Stack: [D, C]\n- Pop C, visit it, push G. Stack: [D, G]\n- Pop G, visit it. Stack: [D]\n- Pop D, visit it, push I, H. Stack: [I, H]\n- Pop H, visit it. Stack: [I]\n- Pop I, visit it. Stack: [] (empty, traversal ends)\nDFS order: A, B, E, F, C, G, D, H, I\n(b) Breadth-first search (BFS) with a queue:\n- Enqueue A. Dequeue A, visit it, enqueue B, C, D. Queue: [B, C, D]\n- Dequeue B, visit it, enqueue E, F. Queue: [C, D, E, F]\n- Dequeue C, visit it, enqueue G. Queue: [D, E, F, G]\n- Dequeue D, visit it, enqueue H, I. Queue: [E, F, G, H, I]\n- Dequeue E, F, G, H and I in turn (none has children). Queue: [] (empty, traversal ends)\nBFS order: A, B, C, D, E, F, G, H, I\nDFS finishes each branch (A-B-E-F) before the next, while BFS visits level by level (A; then B, C, D; then E, F, G, H, I)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch4-fig-ex-long-q7-graph",
+            "alt": "Graph of nine circles joined by downward arrows: A at the top points to B, C and D; B points to E and F; C points to G; D points to H and I.",
+            "caption": "Long question 7: the graph for the DFS and BFS operations (original drawing after the figure printed in the textbook)."
           },
           {
             "type": "checkpoint",
