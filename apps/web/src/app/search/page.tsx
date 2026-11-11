@@ -167,7 +167,8 @@ const body = "min-w-0 flex-1 space-y-0.5";
 
 function OutlineHit({ h }: { h: SearchHit }) {
   return (
-    <GlassCardLink href={`/learn/chapter/${h.chapter_id}`} className={card}>
+    // SEARCH-TOPIC-LINK-01 (owner, 2026-11-11): a topic result opens that topic itself, a chapter result its chapter.
+    <GlassCardLink href={h.kind === "topic" ? `/learn/topic/${h.id}` : `/learn/chapter/${h.chapter_id}`} className={card}>
       <SubjectIcon subject={h.subject_code} size={40} />
       <span className={body}>
         <span className="block text-xs font-semibold text-accent">
