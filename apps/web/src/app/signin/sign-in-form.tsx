@@ -48,6 +48,30 @@ export function PasswordForm({ next, devShortcuts }: { next: string; devShortcut
     // `key` remounts the fields with what was typed after a failed submit (React empties a form after its action).
     <form key={JSON.stringify(typed)} action={action} className="space-y-4" noValidate>
       <input type="hidden" name="next" value={next} />
+      {register && (
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Field
+            id="first_name"
+            label="First name"
+            autoComplete="given-name"
+            autoCapitalize="words"
+            maxLength={60}
+            required
+            defaultValue={typed.first_name}
+            error={errors.first_name}
+          />
+          <Field
+            id="surname"
+            label="Surname"
+            autoComplete="family-name"
+            autoCapitalize="words"
+            maxLength={60}
+            required
+            defaultValue={typed.surname}
+            error={errors.surname}
+          />
+        </div>
+      )}
       <Field id="email" label="Email" type="email" autoComplete="email" required defaultValue={typed.email} error={errors.email} />
       <Field
         id="password"

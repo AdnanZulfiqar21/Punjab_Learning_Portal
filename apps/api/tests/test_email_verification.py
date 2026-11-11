@@ -32,6 +32,7 @@ from portal_api.modules.identity.models import AppUser, EmailCode, PasswordCrede
 
 PASSWORD = "correct-horse-battery"
 DOB = "2008-05-14"  # a technical fixture value
+NAMES = {"first_name": "Test", "surname": "Learner"}  # technical fixture values
 
 
 def _email() -> str:
@@ -51,7 +52,7 @@ def _codes(address: str) -> list[str]:
 def _register(client: TestClient, address: str, password: str = PASSWORD) -> None:
     r = client.post(
         "/v1/auth/register",
-        json={"email": address, "password": password, "phone": "0300 1234567", "date_of_birth": DOB},
+        json={"email": address, "password": password, "phone": "0300 1234567", "date_of_birth": DOB, **NAMES},
     )
     assert r.status_code == 202, r.text
 
@@ -90,6 +91,11 @@ def test_sign_up_needs_the_emailed_code_then_signs_in(client: TestClient, db: Se
     assert me.status_code == 200 and me.json()["email"] == address
     assert me.json()["phone"] == "+923001234567"  # stored in E.164, not verified
     assert me.json()["date_of_birth"] == DOB
+    assert (me.json()["first_name"], me.json()["surname"], me.json()["display_name"]) == (
+        "Test",
+        "Learner",
+        "Test Learner",
+    )
     assert not [c for c in me.json()["consents"] if c["document"] == "marketing_messages"]  # no opt-in, no consent
     # Afterwards the password signs in, and the used code can't be used again.
     assert client.post("/v1/auth/token", json={"email": address, "password": PASSWORD}).status_code == 200
@@ -109,11 +115,11 @@ def test_answers_do_not_reveal_which_emails_have_accounts(client: TestClient) ->
     sent_before = len(email.outbox())
     again = client.post(
         "/v1/auth/register",
-        json={"email": taken, "password": "another-password-x", "phone": "03001234567", "date_of_birth": DOB},
+        json={"email": taken, "password": "another-password-x", "phone": "03001234567", "date_of_birth": DOB, **NAMES},
     )
     fresh = client.post(
         "/v1/auth/register",
-        json={"email": _email(), "password": PASSWORD, "phone": "03001234567", "date_of_birth": DOB},
+        json={"email": _email(), "password": PASSWORD, "phone": "03001234567", "date_of_birth": DOB, **NAMES},
     )
     assert again.status_code == fresh.status_code == 202 and again.json() == fresh.json()
     assert len(email.outbox()) == sent_before + 1  # only the new address got a code
@@ -183,11 +189,12 @@ def test_validation(client: TestClient) -> None:
     bad_email = {"email": "not-an-email", "password": PASSWORD, "phone": ph}
     assert client.post("/v1/auth/register", json=bad_email).status_code == 422
     # The phone number is required and must look like a mobile number.
-    no_phone = {"email": _email(), "password": PASSWORD, "date_of_birth": DOB}
+    no_phone = {"email": _email(), "password": PASSWORD, "date_of_birth": DOB, **NAMES}
     assert client.post("/v1/auth/register", json=no_phone).status_code == 422
     for bad in ("12345", "0300 123", "+92 21 1234567", "phone"):
         r = client.post(
-            "/v1/auth/register", json={"email": _email(), "password": PASSWORD, "phone": bad, "date_of_birth": DOB}
+            "/v1/auth/register",
+            json={"email": _email(), "password": PASSWORD, "phone": bad, "date_of_birth": DOB, **NAMES},
         )
         assert r.status_code == 422, bad
     # The date of birth is required and must be plausible.
@@ -224,7 +231,8 @@ def test_a_code_that_could_not_be_sent_is_reported_and_removed(
 ) -> None:
     address = _email()
     r = client.post(
-        "/v1/auth/register", json={"email": address, "password": PASSWORD, "phone": "03001234567", "date_of_birth": DOB}
+        "/v1/auth/register",
+        json={"email": address, "password": PASSWORD, "phone": "03001234567", "date_of_birth": DOB, **NAMES},
     )
     assert r.status_code == 503 and r.json()["code_reason"] == "EMAIL_UNAVAILABLE"
     user_id = db.scalar(select(PasswordCredential.user_id).where(PasswordCredential.email == address))
@@ -435,7 +443,7 @@ def test_phone_numbers_are_stored_in_one_format(typed: str, stored: str) -> None
 
 def test_promotional_emails_need_the_opt_in(client: TestClient) -> None:
     address = _email()
-    body = {"email": address, "password": PASSWORD, "phone": "03001234567", "date_of_birth": DOB}
+    body = {"email": address, "password": PASSWORD, "phone": "03001234567", "date_of_birth": DOB, **NAMES}
     assert client.post("/v1/auth/register", json={**body, "marketing_emails": True}).status_code == 202
     token = client.post("/v1/auth/verify-email", json={"email": address, "code": _codes(address)[-1]}).json()
     me = client.get("/v1/me", headers={"Authorization": f"Bearer {token['access_token']}"}).json()
@@ -450,7 +458,7 @@ def test_promotional_emails_need_the_opt_in(client: TestClient) -> None:
 
 def test_registering_again_before_verifying_updates_the_opt_in(client: TestClient, db: Session) -> None:
     address = _email()
-    body = {"email": address, "password": PASSWORD, "phone": "03001234567", "date_of_birth": DOB}
+    body = {"email": address, "password": PASSWORD, "phone": "03001234567", "date_of_birth": DOB, **NAMES}
     client.post("/v1/auth/register", json={**body, "marketing_emails": True})
     client.post("/v1/auth/register", json={**body, "marketing_emails": False, "date_of_birth": "2007-01-02"})
     user = db.scalar(select(AppUser).where(AppUser.email == address))
@@ -459,3 +467,30 @@ def test_registering_again_before_verifying_updates_the_opt_in(client: TestClien
 
     rows = db.scalars(select(ConsentRecord).where(ConsentRecord.user_id == user.id)).all()
     assert rows and all(r.withdrawn_at is not None for r in rows)
+
+
+def test_names_required_and_tidied(client: TestClient, db: Session) -> None:
+    base = {"email": _email(), "password": PASSWORD, "phone": "03001234567", "date_of_birth": DOB}
+    for missing in ("first_name", "surname"):
+        body = {**base, **NAMES}
+        del body[missing]
+        assert client.post("/v1/auth/register", json=body).status_code == 422, missing
+    for bad in ("", "   ", "R2D2", "<b>x</b>", "a@b", "-x"):
+        r = client.post("/v1/auth/register", json={**base, "first_name": bad, "surname": "Learner"})
+        assert r.status_code == 422, bad
+    address = _email()
+    r = client.post(
+        "/v1/auth/register",
+        json={**base, "email": address, "first_name": "  Muhammad   Ali ", "surname": "O'Neil-Khan"},
+    )
+    assert r.status_code == 202, r.text
+    user = db.scalar(select(AppUser).where(AppUser.email == address))
+    assert user is not None
+    assert (user.first_name, user.surname, user.display_name) == (
+        "Muhammad Ali",
+        "O'Neil-Khan",
+        "Muhammad Ali O'Neil-Khan",
+    )
+    # Names in Urdu script are letters too.
+    r = client.post("/v1/auth/register", json={**base, "email": _email(), "first_name": "علی", "surname": "خان"})
+    assert r.status_code == 202, r.text

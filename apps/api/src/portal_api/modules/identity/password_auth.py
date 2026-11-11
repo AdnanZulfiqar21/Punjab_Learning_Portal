@@ -43,7 +43,7 @@ from portal_api.db import get_session
 from portal_api.errors import AppError, Forbidden, TooMany, Unauthorized, Unavailable
 from portal_api.modules.audit.models import record
 from portal_api.modules.identity.models import AppUser, ConsentRecord, EmailCode, PasswordCredential
-from portal_api.modules.identity.schemas import TokenOut, check_date_of_birth, normalize_phone
+from portal_api.modules.identity.schemas import TokenOut, check_date_of_birth, clean_name, normalize_phone
 from portal_api.modules.identity.tokens import get_local_issuer
 
 router = APIRouter(prefix="/v1/auth", tags=["auth"])
@@ -75,13 +75,25 @@ class RegisterIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
     email: EmailStr
     password: str = Field(min_length=10, max_length=200)
+    # Required (owner 2026-11-11).
+    first_name: str = Field(min_length=1, max_length=60)
+    surname: str = Field(min_length=1, max_length=60)
     # Required (owner 2026-11-11), stored in E.164 and not verified.
     phone: str = Field(min_length=7, max_length=30, description="Mobile number, e.g. 0300 1234567 or +92 300 1234567")
     date_of_birth: date = Field(description="Required (owner 2026-11-11); not verified")
     # Promotional emails only with this explicit opt-in (unticked by default); recorded as a marketing_messages consent
     # the person can withdraw at any time.
     marketing_emails: bool = False
-    display_name: str | None = Field(default=None, max_length=120)
+    display_name: str | None = Field(default=None, max_length=120, description="Defaults to first name + surname")
+
+    @field_validator("first_name", "surname")
+    @classmethod
+    def _name(cls, v: str) -> str:
+        return clean_name(v)
+
+    @property
+    def full_name(self) -> str:
+        return self.display_name or f"{self.first_name} {self.surname}"
 
     @field_validator("phone")
     @classmethod
@@ -215,9 +227,11 @@ def register(body: RegisterIn, db: DB) -> AcceptedOut:
             issuer=settings.password_auth_issuer,
             subject=f"pwd|{uuid.uuid4().hex}",
             email=address,
+            first_name=body.first_name,
+            surname=body.surname,
             phone=body.phone,
             date_of_birth=body.date_of_birth,
-            display_name=body.display_name,
+            display_name=body.full_name,
         )
         db.add(user)
         db.flush()
@@ -238,11 +252,12 @@ def register(body: RegisterIn, db: DB) -> AcceptedOut:
         cred.password_hash = password_hash
         owner = db.get(AppUser, cred.user_id)
         if owner is not None:
+            owner.first_name = body.first_name
+            owner.surname = body.surname
+            owner.display_name = body.full_name
             owner.phone = body.phone
             owner.date_of_birth = body.date_of_birth
             _set_marketing(db, owner.id, body.marketing_emails)
-            if body.display_name:
-                owner.display_name = body.display_name
         if _retry_after(db, cred.user_id, now) == 0:
             pending = _new_code(db, cred.user_id, now)
     # An already verified address gets nothing new: the person signs in (or, later, resets the password).

@@ -8744,6 +8744,17 @@
             ],
             "title": "Email"
           },
+          "first_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "First Name"
+          },
           "id": {
             "format": "uuid",
             "title": "Id",
@@ -8784,6 +8795,17 @@
           "status": {
             "title": "Status",
             "type": "string"
+          },
+          "surname": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Surname"
           }
         },
         "required": [
@@ -12677,11 +12699,18 @@
                 "type": "null"
               }
             ],
+            "description": "Defaults to first name + surname",
             "title": "Display Name"
           },
           "email": {
             "format": "email",
             "title": "Email",
+            "type": "string"
+          },
+          "first_name": {
+            "maxLength": 60,
+            "minLength": 1,
+            "title": "First Name",
             "type": "string"
           },
           "marketing_emails": {
@@ -12701,11 +12730,19 @@
             "minLength": 7,
             "title": "Phone",
             "type": "string"
+          },
+          "surname": {
+            "maxLength": 60,
+            "minLength": 1,
+            "title": "Surname",
+            "type": "string"
           }
         },
         "required": [
           "email",
           "password",
+          "first_name",
+          "surname",
           "phone",
           "date_of_birth"
         ],

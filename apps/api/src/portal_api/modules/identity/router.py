@@ -46,6 +46,8 @@ def _me(db: Session, principal: Principal) -> MeOut:
     return MeOut(
         id=user.id,
         email=user.email,
+        first_name=user.first_name,
+        surname=user.surname,
         phone=user.phone,
         date_of_birth=user.date_of_birth,
         display_name=user.display_name,

@@ -8492,6 +8492,8 @@ export interface components {
             display_name: string | null;
             /** Email */
             email: string | null;
+            /** First Name */
+            first_name?: string | null;
             /**
              * Id
              * Format: uuid
@@ -8506,6 +8508,8 @@ export interface components {
             roles: components["schemas"]["Role"][];
             /** Status */
             status: string;
+            /** Surname */
+            surname?: string | null;
         };
         /** MediaEntryOut */
         MediaEntryOut: {
@@ -10138,13 +10142,18 @@ export interface components {
              * @description Required (owner 2026-11-11); not verified
              */
             date_of_birth: string;
-            /** Display Name */
+            /**
+             * Display Name
+             * @description Defaults to first name + surname
+             */
             display_name?: string | null;
             /**
              * Email
              * Format: email
              */
             email: string;
+            /** First Name */
+            first_name: string;
             /**
              * Marketing Emails
              * @default false
@@ -10157,6 +10166,8 @@ export interface components {
              * @description Mobile number, e.g. 0300 1234567 or +92 300 1234567
              */
             phone: string;
+            /** Surname */
+            surname: string;
         };
         /** RegradeAttemptsOut */
         RegradeAttemptsOut: {

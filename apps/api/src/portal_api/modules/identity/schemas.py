@@ -67,6 +67,9 @@ class RoleGrantOut(BaseModel):
     revoke_reason: str | None
 
 
+NAME_RE = re.compile(r"[^\W\d_](?:[^\W\d_]|[ .'\-])*")
+
+
 def normalize_phone(value: str) -> str:
     """AUTH-PASSWORD-01: a mobile number in E.164. Pakistani numbers may be typed locally (0300 1234567, 92300…);
     others need their + country code. Spaces, dashes, dots and brackets are ignored. Not verified."""
@@ -84,6 +87,15 @@ def normalize_phone(value: str) -> str:
     return raw
 
 
+def clean_name(value: str) -> str:
+    """AUTH-PASSWORD-01: a first name or surname as typed, with spaces tidied. Letters in any script, spaces, dots,
+    apostrophes and hyphens; no digits or symbols."""
+    name = " ".join((value or "").split())
+    if not name or not NAME_RE.fullmatch(name):
+        raise ValueError("Enter your name in letters.")
+    return name
+
+
 def check_date_of_birth(value: date, today: date | None = None) -> date:
     """AUTH-PASSWORD-01: a plausible date of birth for a learner (between 8 and 100 years old). Not verified."""
     today = today or date.today()
@@ -96,6 +108,8 @@ def check_date_of_birth(value: date, today: date | None = None) -> date:
 class MeOut(BaseModel):
     id: uuid.UUID
     email: str | None
+    first_name: str | None = None
+    surname: str | None = None
     phone: str | None = None
     date_of_birth: date | None = None
     display_name: str | None

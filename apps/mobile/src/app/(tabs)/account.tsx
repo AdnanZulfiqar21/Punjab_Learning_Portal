@@ -73,6 +73,8 @@ function PasswordForm() {
   const [mode, setMode] = useState<"signin" | "register" | "verify">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [surname, setSurname] = useState("");
   const [phone, setPhone] = useState("");
   const [dob, setDob] = useState("");
   const [marketing, setMarketing] = useState(false);
@@ -125,6 +127,8 @@ function PasswordForm() {
       const errs: Record<string, string> = {};
       if (!email.trim()) errs.email = "Enter your email address.";
       if (password.length < 10) errs.password = "Use at least 10 characters.";
+      if (!firstName.trim()) errs.first_name = "Enter your first name.";
+      if (!surname.trim()) errs.surname = "Enter your surname.";
       if (!phone.trim()) errs.phone = "Enter your mobile number.";
       const dateOfBirth = isoDate(dob);
       if (!dateOfBirth) errs.date_of_birth = "Enter your date of birth as DD/MM/YYYY.";
@@ -133,6 +137,8 @@ function PasswordForm() {
         await register({
           email: email.trim(),
           password,
+          first_name: firstName.trim(),
+          surname: surname.trim(),
           phone: phone.trim(),
           date_of_birth: dateOfBirth!,
           marketing_emails: marketing,
@@ -143,6 +149,8 @@ function PasswordForm() {
           const fields = (e.problem?.errors ?? []).map((x) => String(x.loc.at(-1)));
           const known: Record<string, string> = {
             email: "Enter a valid email address.",
+            first_name: "Enter your first name in letters.",
+            surname: "Enter your surname in letters.",
             phone: "Enter a mobile number like 0300 1234567 (or +country code for other countries).",
             date_of_birth: "Enter your real date of birth.",
             password: "Use at least 10 characters.",
@@ -223,6 +231,30 @@ function PasswordForm() {
   const registering = mode === "register";
   return (
     <View style={{ gap: Space.lg }}>
+      {registering && (
+        <>
+          <Field
+            label="First name"
+            value={firstName}
+            onChangeText={setFirstName}
+            autoCapitalize="words"
+            autoComplete="given-name"
+            textContentType="givenName"
+            maxLength={60}
+            error={fieldErrors.first_name}
+          />
+          <Field
+            label="Surname"
+            value={surname}
+            onChangeText={setSurname}
+            autoCapitalize="words"
+            autoComplete="family-name"
+            textContentType="familyName"
+            maxLength={60}
+            error={fieldErrors.surname}
+          />
+        </>
+      )}
       <Field
         label="Email"
         value={email}

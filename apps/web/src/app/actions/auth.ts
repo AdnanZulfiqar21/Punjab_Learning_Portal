@@ -86,6 +86,8 @@ export async function signInWithPassword(_prev: FormState, form: FormData): Prom
 }
 
 const REGISTER_FIELD_ERRORS: Record<string, string> = {
+  first_name: "Enter your first name in letters.",
+  surname: "Enter your surname in letters.",
   email: "Enter a valid email address.",
   password: "Use at least 10 characters.",
   phone: "Enter a mobile number like 0300 1234567 (or +country code for other countries).",
@@ -97,11 +99,15 @@ const REGISTER_FIELD_ERRORS: Record<string, string> = {
 export async function registerWithPassword(_prev: FormState, form: FormData): Promise<FormState> {
   const email = String(form.get("email") ?? "").trim();
   const password = String(form.get("password") ?? "");
+  const firstName = String(form.get("first_name") ?? "").trim();
+  const surname = String(form.get("surname") ?? "").trim();
   const phone = String(form.get("phone") ?? "").trim();
   const dateOfBirth = String(form.get("date_of_birth") ?? "");
   const marketing = form.get("marketing_emails") === "on";
-  const values = { email, phone, date_of_birth: dateOfBirth, marketing_emails: marketing ? "on" : "" };
+  const values = { first_name: firstName, surname, email, phone, date_of_birth: dateOfBirth, marketing_emails: marketing ? "on" : "" };
   const missing: Record<string, string> = {};
+  if (!firstName) missing.first_name = "Enter your first name.";
+  if (!surname) missing.surname = "Enter your surname.";
   if (password.length < 10) missing.password = REGISTER_FIELD_ERRORS.password;
   if (!phone) missing.phone = "Enter your mobile number.";
   if (!dateOfBirth) missing.date_of_birth = "Enter your date of birth.";
@@ -111,6 +117,8 @@ export async function registerWithPassword(_prev: FormState, form: FormData): Pr
     body: JSON.stringify({
       email,
       password,
+      first_name: firstName,
+      surname,
       phone,
       date_of_birth: dateOfBirth,
       marketing_emails: marketing,

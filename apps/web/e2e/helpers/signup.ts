@@ -8,9 +8,13 @@ const SLOW = { timeout: 20_000 };
 /** Technical fixture values for the required sign-up fields (not real personal data). */
 export const SIGNUP_PHONE = "0300 0000000";
 export const SIGNUP_DOB = "2008-01-01";
+export const SIGNUP_FIRST_NAME = "Test";
+export const SIGNUP_SURNAME = "Learner";
 
 /** Fill the sign-up fields that the sign-in form doesn't have (call after switching to "Create account"). */
 export async function fillSignupExtras(page: Page): Promise<void> {
+  await page.getByLabel("First name").fill(SIGNUP_FIRST_NAME);
+  await page.getByLabel("Surname").fill(SIGNUP_SURNAME);
   await page.getByLabel("Mobile number").fill(SIGNUP_PHONE);
   await page.getByLabel("Date of birth").fill(SIGNUP_DOB);
 }

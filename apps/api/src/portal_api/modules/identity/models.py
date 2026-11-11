@@ -37,6 +37,9 @@ class AppUser(Base):
     subject: Mapped[str] = mapped_column(String(255))
     email: Mapped[str | None] = mapped_column(String(320), index=True)
     display_name: Mapped[str | None] = mapped_column(String(120))
+    # AUTH-PASSWORD-01 (owner 2026-11-11): required at sign-up; older accounts have none.
+    first_name: Mapped[str | None] = mapped_column(String(60))
+    surname: Mapped[str | None] = mapped_column(String(60))
     # AUTH-PASSWORD-01 (owner 2026-11-11): required at sign-up, stored in E.164 (+923001234567) and not verified.
     # Older accounts have none.
     phone: Mapped[str | None] = mapped_column(String(20))

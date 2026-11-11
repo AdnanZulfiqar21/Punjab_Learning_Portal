@@ -70,6 +70,8 @@ function deviceName(): string {
 export type SignUpInput = {
   email: string;
   password: string;
+  first_name: string;
+  surname: string;
   phone: string;
   date_of_birth: string; // YYYY-MM-DD
   marketing_emails: boolean;
