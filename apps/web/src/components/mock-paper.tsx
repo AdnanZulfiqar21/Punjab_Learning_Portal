@@ -315,7 +315,7 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
             </span>
             <button
               type="button"
-              className={`${btn} bg-foreground text-background`}
+              className={`${btn} bg-foreground text-background enabled:hover:bg-accent`}
               disabled={objective.running || checked}
               onClick={objective.start}
             >
@@ -323,7 +323,7 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
             </button>
             <button
               type="button"
-              className={`${btn} border border-border`}
+              className={`${btn} border border-border enabled:hover:border-accent enabled:hover:bg-accent-soft enabled:hover:text-accent`}
               disabled={checked}
               onClick={submit}
             >
@@ -454,7 +454,7 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
           <div className="flex flex-col items-center gap-2 border-t border-border pt-5 text-center">
             <button
               type="button"
-              className={`${btn} bg-foreground text-background`}
+              className={`${btn} bg-foreground text-background enabled:hover:bg-accent`}
               disabled={checked}
               onClick={submit}
             >
@@ -489,7 +489,7 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
             </span>
             <button
               type="button"
-              className={`${btn} bg-foreground text-background`}
+              className={`${btn} bg-foreground text-background enabled:hover:bg-accent`}
               disabled={subjective.running}
               onClick={subjective.start}
             >
