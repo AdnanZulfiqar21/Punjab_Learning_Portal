@@ -6,17 +6,11 @@ import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import type { ProfileInput, SessionCreated, StudySettings } from "@portal/contracts";
 import { DISPLAY_COOKIE, DISPLAY_MAX_AGE_S, fromAccount, parseDisplay, serializeDisplay } from "@/lib/display";
+import { safeAppPath } from "@/lib/safe-path";
 import { api, cookieOptions, SESSION_COOKIE, sessionToken } from "@/lib/session";
 
 export type FormState = { error?: string; fieldErrors?: Record<string, string> } | undefined;
 
-function safeNext(next: FormDataEntryValue | null): string {
-  const n = typeof next === "string" ? next : "";
-  // Only same-site relative paths; never an open redirect. Browsers drop tabs/newlines inside URLs and read "\" as
-  // "/", so "/\t/evil" or "/\evil" would become "//evil": any control character or backslash is refused outright.
-  if (/[\u0000-\u001f\u007f\\]/.test(n)) return "/account";
-  return /^\/(?!\/)/.test(n) ? n : "/account";
-}
 
 /** Development-only email/password sign-in (the API refuses this adapter outside development/test). */
 export async function signInWithPassword(_prev: FormState, form: FormData): Promise<FormState> {
@@ -49,7 +43,7 @@ export async function signInWithPassword(_prev: FormState, form: FormData): Prom
       jar.set(DISPLAY_COOKIE, serializeDisplay(fromAccount(usual.data)), { ...cookieOptions(), httpOnly: false, maxAge: DISPLAY_MAX_AGE_S });
     }
   }
-  redirect(safeNext(form.get("next")));
+  redirect(safeAppPath(form.get("next"), "/account"));
 }
 
 /** Development-only registration (enumeration-safe on the API side). */
