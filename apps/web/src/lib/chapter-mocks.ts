@@ -31,12 +31,15 @@ const PHYSICS: MockPattern = {
 export const PATTERNS: Record<string, MockPattern> = { physics: PHYSICS };
 
 /** Tests offered now, by "subject-grade" and chapter (owner: Physics 11 chapter 1 first, for checking; all three tests
- * from 2026-11-11; then the whole Physics 11 book, 2026-11-11). */
-const ALL = [1, 2, 3];
+ * from 2026-11-11; then the whole Physics 11 book and then Physics 12, chapters 13-21, 2026-11-11). Physics Part-II has
+ * the same paper pattern as Part-I. */
+const chapters = (first: number, last: number) =>
+  Object.fromEntries(
+    Array.from({ length: last - first + 1 }, (_, i) => [first + i, [1, 2, 3]]),
+  );
 export const OPEN: Record<string, Record<number, number[]>> = {
-  "physics-11": Object.fromEntries(
-    Array.from({ length: 12 }, (_, i) => [i + 1, ALL]),
-  ),
+  "physics-11": chapters(1, 12),
+  "physics-12": chapters(13, 21),
 };
 
 export function openTests(
