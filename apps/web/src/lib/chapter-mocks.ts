@@ -28,7 +28,17 @@ const PHYSICS: MockPattern = {
   subjectiveMinutes: 160,
 };
 
-export const PATTERNS: Record<string, MockPattern> = { physics: PHYSICS };
+// Chemistry Part-I and Part-II papers (owner's Board papers, 2025-2026, new course): the same as Physics except that each
+// Section-II question is (a) 4 + (b) 4 marks.
+const CHEMISTRY: MockPattern = {
+  ...PHYSICS,
+  long: { asked: 5, attempt: 3, parts: [4, 4] },
+};
+
+export const PATTERNS: Record<string, MockPattern> = {
+  physics: PHYSICS,
+  chemistry: CHEMISTRY,
+};
 
 /** Tests offered now, by "subject-grade" and chapter (owner: Physics 11 chapter 1 first, for checking; all three tests
  * from 2026-11-11; then the whole Physics 11 book and then Physics 12, chapters 13-21, 2026-11-11). Physics Part-II has
@@ -40,6 +50,7 @@ const chapters = (first: number, last: number) =>
 export const OPEN: Record<string, Record<number, number[]>> = {
   "physics-11": chapters(1, 12),
   "physics-12": chapters(13, 21),
+  "chemistry-11": chapters(1, 16),
 };
 
 export function openTests(
