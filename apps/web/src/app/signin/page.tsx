@@ -3,7 +3,8 @@ import { Suspense } from "react";
 import { CenteredCard } from "@/components/learner-pages";
 import { Notice, SkeletonLines } from "@/components/ui";
 import { signInMethods } from "@/lib/session";
-import { MODE_COPY, ModeText, PasswordForm } from "./sign-in-form";
+import { MODE_COPY } from "./mode-copy";
+import { ModeText, PasswordForm } from "./sign-in-form";
 
 export const metadata: Metadata = { title: "Sign in", robots: { index: false } };
 

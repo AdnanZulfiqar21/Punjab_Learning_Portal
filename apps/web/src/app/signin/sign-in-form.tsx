@@ -5,6 +5,7 @@ import { useActionState } from "react";
 import { registerWithPassword, signInWithPassword, type FormState } from "@/app/actions/auth";
 import { buttonClasses } from "@/components/button";
 import { FIELD, LABEL } from "@/components/learner-pages";
+import { MODE_COPY } from "./mode-copy";
 
 function Field({
   id,
@@ -36,17 +37,6 @@ function Field({
 
 /** AUTH-PASSWORD-01: email + password sign-in, and sign-up that emails a 6-digit code. `devShortcuts` adds the
  * development-only MFA simulation for staff actions. */
-export const MODE_COPY = {
-  signin: {
-    title: "Sign in",
-    lead: "Sign in to keep your place in each book and to practise. A new account can start the free 30-day trial.",
-  },
-  register: {
-    title: "Create your account",
-    lead: "Sign up to keep your place in each book and to practise. A new account starts the free 30-day trial.",
-  },
-} as const;
-
 type Mode = keyof typeof MODE_COPY;
 
 /** `?mode=register` opens sign-up; anything else is sign-in. */
