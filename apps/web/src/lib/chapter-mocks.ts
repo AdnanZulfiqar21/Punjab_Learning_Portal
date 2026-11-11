@@ -31,9 +31,12 @@ const PHYSICS: MockPattern = {
 export const PATTERNS: Record<string, MockPattern> = { physics: PHYSICS };
 
 /** Tests offered now, by "subject-grade" and chapter (owner: Physics 11 chapter 1 first, for checking; all three tests
- * from 2026-11-11). */
+ * from 2026-11-11; then the whole Physics 11 book, 2026-11-11). */
+const ALL = [1, 2, 3];
 export const OPEN: Record<string, Record<number, number[]>> = {
-  "physics-11": { 1: [1, 2, 3] },
+  "physics-11": Object.fromEntries(
+    Array.from({ length: 12 }, (_, i) => [i + 1, ALL]),
+  ),
 };
 
 export function openTests(
