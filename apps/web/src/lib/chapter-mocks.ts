@@ -30,9 +30,10 @@ const PHYSICS: MockPattern = {
 
 export const PATTERNS: Record<string, MockPattern> = { physics: PHYSICS };
 
-/** Tests offered now, by "subject-grade" and chapter (owner: Physics 11, chapter 1, Mock test 1 first, for checking). */
+/** Tests offered now, by "subject-grade" and chapter (owner: Physics 11 chapter 1 first, for checking; all three tests
+ * from 2026-11-11). */
 export const OPEN: Record<string, Record<number, number[]>> = {
-  "physics-11": { 1: [1] },
+  "physics-11": { 1: [1, 2, 3] },
 };
 
 export function openTests(
@@ -104,19 +105,38 @@ function question(b: Checkpoint, marks: number): PaperQuestion {
   };
 }
 
-/** `count` items for test n: every 3rd item from n-1 (spread over the whole chapter, never in another test), evenly
- * thinned; topped up from the rest of the bank if the chapter is short. Book order is kept. */
-function pick<T>(bank: T[], n: number, count: number): T[] {
-  const mine = bank.filter((_, i) => i % TESTS_PER_CHAPTER === n - 1);
-  if (mine.length >= count)
-    return Array.from(
-      { length: count },
-      (_, j) => mine[Math.floor((j * mine.length) / count)],
+/** `count` items for each of the chapter's tests (indexes into the bank, book order kept). Test n first takes every
+ * 3rd item from n-1, so each test covers the whole chapter, evenly thinned when there are more than it needs. A
+ * chapter too short for three full tests tops a test up with the items the earlier tests used least (then the earliest),
+ * so the tests repeat as few questions as possible. Test 1 is built first and does not depend on the later ones. */
+function allocate(size: number, count: number): number[][] {
+  const used = new Array<number>(size).fill(0);
+  const tests: number[][] = [];
+  for (let n = 1; n <= TESTS_PER_CHAPTER; n++) {
+    const mine = Array.from({ length: size }, (_, i) => i).filter(
+      (i) => i % TESTS_PER_CHAPTER === n - 1,
     );
-  const rest = bank.filter((x) => !mine.includes(x));
-  return bank.filter(
-    (x) => mine.includes(x) || rest.slice(0, count - mine.length).includes(x),
-  );
+    let chosen: number[];
+    if (mine.length >= count) {
+      chosen = Array.from(
+        { length: count },
+        (_, j) => mine[Math.floor((j * mine.length) / count)],
+      );
+    } else {
+      const extra = Array.from({ length: size }, (_, i) => i)
+        .filter((i) => i % TESTS_PER_CHAPTER !== n - 1)
+        .sort((x, y) => used[x] - used[y] || x - y)
+        .slice(0, count - mine.length);
+      chosen = [...mine, ...extra].sort((x, y) => x - y);
+    }
+    chosen.forEach((i) => used[i]++);
+    tests.push(chosen);
+  }
+  return tests;
+}
+
+function pick<T>(bank: T[], n: number, count: number): T[] {
+  return allocate(bank.length, count)[n - 1].map((i) => bank[i]);
 }
 
 /** A small seeded shuffle, so the objective part is mixed (as on the Board paper) but the same every time. */
