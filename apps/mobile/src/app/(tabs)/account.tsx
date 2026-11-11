@@ -266,10 +266,10 @@ function PasswordForm() {
           />
           <View style={{ flexDirection: "row", alignItems: "center", gap: Space.md }}>
             <T variant="muted" style={{ flex: 1 }}>
-              Email me about new features and offers. You can stop these at any time.
+              Send me news about new features and offers. You can stop these at any time.
             </T>
             <Switch
-              accessibilityLabel="Email me about new features and offers"
+              accessibilityLabel="Send me news about new features and offers"
               value={marketing}
               onValueChange={setMarketing}
               trackColor={{ true: c.accent, false: c.border }}

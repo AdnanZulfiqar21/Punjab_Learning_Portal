@@ -72,7 +72,7 @@ export function PasswordForm({ next, devShortcuts }: { next: string; devShortcut
           <Field id="date_of_birth" label="Date of birth" type="date" autoComplete="bday" required error={errors.date_of_birth} />
           <label className="flex min-h-11 cursor-pointer items-start gap-2.5 text-sm text-muted">
             <input type="checkbox" name="marketing_emails" className="mt-0.5 size-4 shrink-0 accent-[var(--accent)]" />
-            Email me about new features and offers. You can stop these at any time.
+            Send me news about new features and offers. You can stop these at any time.
           </label>
         </>
       )}
