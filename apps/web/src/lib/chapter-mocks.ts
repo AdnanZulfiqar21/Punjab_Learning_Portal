@@ -69,6 +69,7 @@ export const OPEN: Record<string, Record<number, number[]>> = {
   "chemistry-11": chapters(1, 16),
   "chemistry-12": chapters(17, 33),
   "computer_science-11": chapters(1, 9),
+  "computer_science-12": chapters(1, 9),
 };
 
 export function openTests(
