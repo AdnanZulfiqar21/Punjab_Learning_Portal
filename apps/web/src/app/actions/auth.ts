@@ -8,7 +8,16 @@ import type { ProfileInput, SessionCreated, StudySettings } from "@portal/contra
 import { DISPLAY_COOKIE, DISPLAY_MAX_AGE_S, fromAccount, parseDisplay, serializeDisplay } from "@/lib/display";
 import { api, cookieOptions, PENDING_COOKIE, pendingEmail, SESSION_COOKIE, sessionToken } from "@/lib/session";
 
-export type FormState = { error?: string; notice?: string; fieldErrors?: Record<string, string> } | undefined;
+export type FormState =
+  | {
+      error?: string;
+      notice?: string;
+      fieldErrors?: Record<string, string>;
+      /** What was typed, sent back so a failed submit doesn't empty the form (React resets a form after its action).
+       * Passwords are never echoed. */
+      values?: Record<string, string>;
+    }
+  | undefined;
 
 function safeNext(next: FormDataEntryValue | null): string {
   const n = typeof next === "string" ? next : "";
@@ -57,7 +66,8 @@ const EMAIL_DOWN = "We couldn't send the email just now. Please try again in a m
 export async function signInWithPassword(_prev: FormState, form: FormData): Promise<FormState> {
   const email = String(form.get("email") ?? "").trim();
   const password = String(form.get("password") ?? "");
-  if (!email || !password) return { error: "Enter your email and password." };
+  const values = { email };
+  if (!email || !password) return { error: "Enter your email and password.", values };
   // Development only: the dev shortcut can simulate an MFA sign-in so MFA-gated staff actions can be exercised locally.
   const mfa = form.get("mfa") === "on";
   const tok = await api<{ access_token: string }>(mfa ? "/v1/dev-auth/token" : "/v1/auth/token", {
@@ -70,7 +80,7 @@ export async function signInWithPassword(_prev: FormState, form: FormData): Prom
       await api("/v1/auth/resend-code", { method: "POST", body: JSON.stringify({ email }) }); // a recent code may stand
       redirect(verifyPath(form.get("next")));
     }
-    return { error: tok.status === 401 ? "Email or password is incorrect." : "Sign-in is unavailable right now." };
+    return { error: tok.status === 401 ? "Email or password is incorrect." : "Sign-in is unavailable right now.", values };
   }
   return startSession(tok.data.access_token, form.get("next"));
 }
@@ -89,11 +99,13 @@ export async function registerWithPassword(_prev: FormState, form: FormData): Pr
   const password = String(form.get("password") ?? "");
   const phone = String(form.get("phone") ?? "").trim();
   const dateOfBirth = String(form.get("date_of_birth") ?? "");
+  const marketing = form.get("marketing_emails") === "on";
+  const values = { email, phone, date_of_birth: dateOfBirth, marketing_emails: marketing ? "on" : "" };
   const missing: Record<string, string> = {};
   if (password.length < 10) missing.password = REGISTER_FIELD_ERRORS.password;
   if (!phone) missing.phone = "Enter your mobile number.";
   if (!dateOfBirth) missing.date_of_birth = "Enter your date of birth.";
-  if (Object.keys(missing).length) return { fieldErrors: missing };
+  if (Object.keys(missing).length) return { fieldErrors: missing, values };
   const res = await api("/v1/auth/register", {
     method: "POST",
     body: JSON.stringify({
@@ -101,16 +113,16 @@ export async function registerWithPassword(_prev: FormState, form: FormData): Pr
       password,
       phone,
       date_of_birth: dateOfBirth,
-      marketing_emails: form.get("marketing_emails") === "on",
+      marketing_emails: marketing,
     }),
   });
   if (!res.ok) {
     if (res.status === 422) {
       const fields = (res.problem?.errors ?? []).map((e) => String(e.loc.at(-1))).filter((f) => f in REGISTER_FIELD_ERRORS);
       const fieldErrors = Object.fromEntries((fields.length ? fields : ["email"]).map((f) => [f, REGISTER_FIELD_ERRORS[f]]));
-      return { fieldErrors };
+      return { fieldErrors, values };
     }
-    return { error: res.status === 503 ? EMAIL_DOWN : "Registration is unavailable right now." };
+    return { error: res.status === 503 ? EMAIL_DOWN : "Registration is unavailable right now.", values };
   }
   await rememberPending(email);
   redirect(verifyPath(form.get("next")));

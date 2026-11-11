@@ -43,10 +43,12 @@ export function PasswordForm({ next, devShortcuts }: { next: string; devShortcut
   );
   const register = mode === "register";
   const errors = state?.fieldErrors ?? {};
+  const typed = state?.values ?? {};
   return (
-    <form action={action} className="space-y-4" noValidate>
+    // `key` remounts the fields with what was typed after a failed submit (React empties a form after its action).
+    <form key={JSON.stringify(typed)} action={action} className="space-y-4" noValidate>
       <input type="hidden" name="next" value={next} />
-      <Field id="email" label="Email" type="email" autoComplete="email" required error={errors.email} />
+      <Field id="email" label="Email" type="email" autoComplete="email" required defaultValue={typed.email} error={errors.email} />
       <Field
         id="password"
         label="Password"
@@ -67,11 +69,25 @@ export function PasswordForm({ next, devShortcuts }: { next: string; devShortcut
             autoComplete="tel"
             placeholder="0300 1234567"
             required
+            defaultValue={typed.phone}
             error={errors.phone}
           />
-          <Field id="date_of_birth" label="Date of birth" type="date" autoComplete="bday" required error={errors.date_of_birth} />
+          <Field
+            id="date_of_birth"
+            label="Date of birth"
+            type="date"
+            autoComplete="bday"
+            required
+            defaultValue={typed.date_of_birth}
+            error={errors.date_of_birth}
+          />
           <label className="flex min-h-11 cursor-pointer items-start gap-2.5 text-sm text-muted">
-            <input type="checkbox" name="marketing_emails" className="mt-0.5 size-4 shrink-0 accent-[var(--accent)]" />
+            <input
+              type="checkbox"
+              name="marketing_emails"
+              defaultChecked={typed.marketing_emails === "on"}
+              className="mt-0.5 size-4 shrink-0 accent-[var(--accent)]"
+            />
             Send me news about new features and offers. You can stop these at any time.
           </label>
         </>
