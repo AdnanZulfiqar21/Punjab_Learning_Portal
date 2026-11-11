@@ -449,6 +449,24 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
             );
           })}
         </ol>
+        {/* Owner (2026-11-10): Submit at the end of the MCQs too, so the student needn't scroll back up. */}
+        {tab === "question" && (
+          <div className="flex flex-wrap items-center gap-3 border-t border-border pt-4">
+            <button
+              type="button"
+              className={`${btn} bg-foreground text-background`}
+              disabled={checked}
+              onClick={submit}
+            >
+              Submit MCQs
+            </button>
+            <span className="text-sm text-muted">
+              {checked
+                ? "Submitted. Open the Solution paper to see your result."
+                : `${chosen.filter((c) => c !== null).length} of ${paper.mcqs.length} answered`}
+            </span>
+          </div>
+        )}
       </section>
 
       <section
