@@ -174,9 +174,6 @@ async function Chapters({
                                     <span className="font-semibold">
                                       Mock test {n}
                                     </span>
-                                    <span className="text-sm">
-                                      Question paper · Solution paper
-                                    </span>
                                   </Link>
                                 </li>
                               ) : (
