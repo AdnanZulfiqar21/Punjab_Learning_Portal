@@ -11,7 +11,7 @@ from enum import StrEnum
 from functools import lru_cache
 from typing import Literal
 
-from pydantic import Field, model_validator
+from pydantic import Field, SecretStr, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -26,6 +26,8 @@ class ConfigurationError(RuntimeError):
     """Raised at startup when settings are missing or conflict."""
 
 
+# The issuer of development/test accounts (the local password issuer outside deployed roles).
+DEV_ISSUER = "urn:portal:dev-local-issuer"
 DEV_MARKERS = ("localhost", "127.0.0.1", "dev-only", "portal-dev", "sandbox", "staging")
 
 
@@ -62,15 +64,22 @@ class Settings(BaseSettings):
     api_admission_slots: int = Field(default=0, ge=0)
     api_admission_wait_s: float = Field(default=5.0, gt=0)
 
-    # Identity (P04). Production trusts exactly one managed OIDC issuer (Cognito proposed; BLOCKERS B04).
+    # Identity (P04). AUTH-PASSWORD-01 (owner 2026-11-11): the portal's own email + password sign-up, with the email
+    # proved by a 6-digit code (sent through the email adapter, Resend in deployed roles), is the production sign-in.
+    # Its issuer signs short-lived access tokens with `password_auth_signing_key` (an RSA private key, PEM; a deployment
+    # secret). Without a key (development/test only) the key is generated per process. An external OIDC issuer may be
+    # trusted as well (or instead, with password_auth_enabled=false).
+    password_auth_enabled: bool = True
+    password_auth_issuer: str = DEV_ISSUER
+    password_auth_audience: str = "portal-api"  # noqa: S105 (a token audience, not a password)
+    password_auth_token_ttl_s: int = 900
+    password_auth_signing_key: SecretStr = SecretStr("")
     oidc_issuer: str | None = None
     oidc_audience: str | None = None
     oidc_jwks_url: str | None = None  # defaults to <issuer>/.well-known/jwks.json
-    # Development/test-only local issuer (email + password). Refused in staging/production by the validator.
+    # Development/test-only shortcuts on the same issuer: registration without an email code and a simulated MFA claim.
+    # Refused in staging/production by the validator.
     dev_auth_enabled: bool = True
-    dev_auth_issuer: str = "urn:portal:dev-local-issuer"
-    dev_auth_audience: str = "portal-api"
-    dev_auth_token_ttl_s: int = 900
 
     # Handwritten-answer evidence and lesson assets (W03, P03.S1.T2). "local" is a private directory for
     # development/test only. "s3" is the path-style client: the compose emulator in development, or a private bucket
@@ -99,7 +108,12 @@ class Settings(BaseSettings):
 
     # Notifications (P15.S1). "dev_outbox" records rendered email locally (development/test only); "none" leaves email
     # deliveries visibly unavailable until an approved sender exists (BLOCKERS B04). Push has no provider until B07.
-    notification_email_adapter: Literal["dev_outbox", "none"] = "dev_outbox"
+    # "resend" sends through Resend's HTTPS API (AUTH-PASSWORD-01) with `resend_api_key` (a deployment secret) from
+    # `email_from`, an address on a domain verified in Resend (e.g. "Sirf Concepts <no-reply@sirfconcepts.com>").
+    notification_email_adapter: Literal["dev_outbox", "none", "resend"] = "dev_outbox"
+    resend_api_key: SecretStr = SecretStr("")
+    resend_api_url: str = "https://api.resend.com/emails"
+    email_from: str = ""
     # Automatic written assessment (W05). "none" until a qualified provider is approved (BLOCKERS B10); "fixture" is a
     # deterministic technical fixture for development/test only.
     written_assessor: Literal["none", "fixture"] = "none"
@@ -131,9 +145,17 @@ class Settings(BaseSettings):
                 )
             if self.dev_auth_enabled:
                 problems.append("dev_auth_enabled must be false (development identity adapter)")
-            if not (self.oidc_issuer and self.oidc_audience):
-                problems.append("oidc_issuer and oidc_audience are required")
-            elif (
+            if self.password_auth_enabled:
+                if not self.password_auth_signing_key.get_secret_value().strip():
+                    problems.append("password_auth_signing_key is required (RSA private key, PEM)")
+                issuer = self.password_auth_issuer.lower()
+                if "dev-local" in issuer or any(m in issuer for m in DEV_MARKERS if m != "staging"):
+                    problems.append("password_auth_issuer is a development issuer")
+                if self.notification_email_adapter != "resend":
+                    problems.append("password_auth_enabled needs an email sender (notification_email_adapter=resend)")
+            elif not (self.oidc_issuer and self.oidc_audience):
+                problems.append("oidc_issuer and oidc_audience are required when password_auth_enabled is false")
+            if self.oidc_issuer and (
                 any(m in self.oidc_issuer.lower() for m in DEV_MARKERS if m != "staging")
                 or "dev-local" in self.oidc_issuer
             ):
@@ -168,6 +190,14 @@ class Settings(BaseSettings):
                 problems.append("trial_device_evidence must be set explicitly (required or fallback; roadmap §16)")
             if self.notification_email_adapter == "dev_outbox":
                 problems.append("notification_email_adapter dev_outbox is development/test only")
+            if self.notification_email_adapter == "resend":
+                if not self.resend_api_key.get_secret_value().strip():
+                    problems.append("notification_email_adapter=resend needs resend_api_key")
+                if "@" not in self.email_from:
+                    problems.append("notification_email_adapter=resend needs email_from")
+                elif self.role is Role.production and "resend.dev" in self.email_from.lower():
+                    # Resend's shared test address only delivers to the Resend account's own inbox.
+                    problems.append("email_from must be on the portal's own verified domain, not resend.dev")
             if self.upload_scanner == "none":
                 problems.append("upload_scanner must scan uploads (clamd) in deployed roles")
             if self.written_assessor == "fixture":
@@ -176,6 +206,10 @@ class Settings(BaseSettings):
                 problems.append("trial_ref_pepper must be a deployment secret")
             if problems:
                 raise ConfigurationError(f"refusing to start role={self.role.value}: " + "; ".join(problems))
+        elif self.notification_email_adapter == "resend" and not (
+            self.resend_api_key.get_secret_value().strip() and "@" in self.email_from
+        ):
+            raise ConfigurationError("notification_email_adapter=resend needs resend_api_key and email_from")
         elif self.evidence_store == "s3" and not all(
             (
                 self.evidence_s3_endpoint,
@@ -194,6 +228,15 @@ class Settings(BaseSettings):
         if self.written_release is not None:
             return self.written_release == "r0_pilot"
         return self.role in (Role.production, Role.staging)
+
+    @property
+    def test_account_issuer(self) -> str:
+        """Accounts from this issuer are development/test accounts, kept out of learner analytics and cohorts. In
+        development/test every local account is one; in deployed roles real learners sign up with the password issuer,
+        so only the development issuer (never trusted there) counts."""
+        if self.role in (Role.production, Role.staging):
+            return DEV_ISSUER
+        return self.password_auth_issuer
 
     @property
     def jwks_url(self) -> str | None:

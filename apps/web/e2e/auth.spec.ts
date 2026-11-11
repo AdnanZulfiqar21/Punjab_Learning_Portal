@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // Uses the development identity adapter, which the API exposes only in development/test roles.
 // Each test registers a fresh technical-fixture account; no real personal data.
@@ -12,7 +13,9 @@ async function register(page: Page, email: string, next = "/account") {
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill(PASSWORD);
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
 }
 
 test("protected pages redirect to sign-in and return afterwards", async ({ page }) => {

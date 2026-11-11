@@ -68,7 +68,9 @@ def test_tokens_from_untrusted_issuers_or_wrong_audience_are_rejected(client: Te
     foreign_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
     now = int(time.time())
     base = {"sub": "attacker", "iat": now, "exp": now + 300}
-    forged_dev = jwt.encode({**base, "iss": get_settings().dev_auth_issuer, "aud": "portal-api"}, foreign_key, "RS256")
+    forged_dev = jwt.encode(
+        {**base, "iss": get_settings().password_auth_issuer, "aud": "portal-api"}, foreign_key, "RS256"
+    )
     other_iss = jwt.encode({**base, "iss": "https://evil.example", "aud": "portal-api"}, foreign_key, "RS256")
     for tok in (forged_dev, other_iss):
         assert client.get("/v1/me", headers=_auth(tok)).status_code == 401

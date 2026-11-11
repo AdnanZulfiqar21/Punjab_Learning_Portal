@@ -24,6 +24,7 @@ DEPLOYED_ENV = {
     "PORTAL_BUILD_ID": "sha-0123456",
     "PORTAL_CORS_ORIGINS": '["https://example.org"]',
     "PORTAL_DEV_AUTH_ENABLED": "false",
+    "PORTAL_PASSWORD_AUTH_ENABLED": "false",  # this file covers the external-OIDC configuration
     "PORTAL_OIDC_ISSUER": "https://idp.example.org/pool",
     "PORTAL_OIDC_AUDIENCE": "client-1",
     "PORTAL_EVIDENCE_STORE": "s3",

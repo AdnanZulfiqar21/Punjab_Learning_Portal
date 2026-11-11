@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // P18.S2.T1 (SECURITY-SUITE-01): one place for the common web risks this app handles itself.
 // * CSRF: every route handler that changes something with the session cookie refuses a cross-site request (Origin must
@@ -52,7 +53,9 @@ test("the session cookie is HttpOnly and SameSite, and typed text is never marku
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(`e2e-security-${Date.now()}@example.com`);
   await page.getByLabel("Password").fill("security-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/help/, AUTH);
   const cookie = (await page.context().cookies()).find((c) => c.name === "portal_session");
   expect(cookie?.httpOnly).toBe(true);

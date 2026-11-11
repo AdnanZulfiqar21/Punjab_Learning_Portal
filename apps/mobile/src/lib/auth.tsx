@@ -5,7 +5,7 @@ import { createContext, use, useCallback, useEffect, useMemo, useState, type Rea
 import { AppState } from "react-native";
 import type { Me } from "@portal/contracts";
 
-import { api, ApiError } from "@/lib/api";
+import { api, ApiError, type SignUpInput } from "@/lib/api";
 import { clearDrafts } from "@/lib/note-drafts";
 import { clearPageDrafts } from "@/lib/page-drafts";
 import { clearPacks } from "@/lib/study-packs";
@@ -21,8 +21,12 @@ export type AuthState =
 
 type AuthContextValue = {
   state: AuthState;
+  /** Throws ApiError with problem.title EMAIL_NOT_VERIFIED when the email still needs its code. */
   signIn: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string) => Promise<void>;
+  /** Emails a 6-digit code; the account signs in with verifyEmail. */
+  register: (details: SignUpInput) => Promise<void>;
+  verifyEmail: (email: string, code: string) => Promise<void>;
+  resendCode: (email: string) => Promise<void>;
   signOut: () => Promise<void>;
   refresh: () => Promise<void>;
   /** Call when an authenticated request fails; ends the local session on 401. */
@@ -61,23 +65,38 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     tokenStore.get().then(load, () => setState({ status: "signed_out" }));
   }, [load]);
 
-  const signIn = useCallback(
-    async (email: string, password: string) => {
-      const { access_token } = await api.devToken(email, password);
-      const created = await api.createSession(access_token, deviceLabel());
+  const startSession = useCallback(
+    async (accessToken: string) => {
+      const created = await api.createSession(accessToken, deviceLabel());
       await tokenStore.set(created.session_token);
       await load(created.session_token);
     },
     [load],
   );
 
-  const register = useCallback(
+  const signIn = useCallback(
     async (email: string, password: string) => {
-      await api.devRegister(email, password);
-      await signIn(email, password);
+      const { access_token } = await api.passwordToken(email, password);
+      await startSession(access_token);
     },
-    [signIn],
+    [startSession],
   );
+
+  const register = useCallback(async (details: SignUpInput) => {
+    await api.register(details);
+  }, []);
+
+  const verifyEmail = useCallback(
+    async (email: string, code: string) => {
+      const { access_token } = await api.verifyEmail(email, code);
+      await startSession(access_token);
+    },
+    [startSession],
+  );
+
+  const resendCode = useCallback(async (email: string) => {
+    await api.resendCode(email);
+  }, []);
 
   const signOut = useCallback(async () => {
     const token = await tokenStore.get();
@@ -108,8 +127,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ state, signIn, register, signOut, refresh, handleError }),
-    [state, signIn, register, signOut, refresh, handleError],
+    () => ({ state, signIn, register, verifyEmail, resendCode, signOut, refresh, handleError }),
+    [state, signIn, register, verifyEmail, resendCode, signOut, refresh, handleError],
   );
   return <AuthContext value={value}>{children}</AuthContext>;
 }

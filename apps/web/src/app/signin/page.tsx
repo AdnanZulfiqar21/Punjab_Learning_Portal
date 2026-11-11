@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { CenteredCard } from "@/components/learner-pages";
 import { Notice, SkeletonLines } from "@/components/ui";
 import { signInMethods } from "@/lib/session";
-import { DevPasswordForm } from "./sign-in-form";
+import { PasswordForm } from "./sign-in-form";
 
 export const metadata: Metadata = { title: "Sign in", robots: { index: false } };
 
@@ -27,16 +27,8 @@ export default function SignInPage({ searchParams }: PageProps<"/signin">) {
 
 async function Methods({ next }: { next: string }) {
   const methods = await signInMethods();
-  if (methods.includes("dev_password")) {
-    return (
-      <div className="space-y-4">
-        <Notice tone="warn" title="Development sign-in">
-          This environment uses a local development identity service. Real accounts will sign in through the managed
-          identity provider.
-        </Notice>
-        <DevPasswordForm next={next} />
-      </div>
-    );
+  if (methods.includes("password")) {
+    return <PasswordForm next={next} devShortcuts={methods.includes("dev_password")} />;
   }
   if (methods.includes("oidc")) {
     return (

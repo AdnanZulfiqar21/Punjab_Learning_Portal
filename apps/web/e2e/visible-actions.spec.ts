@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // P11.S4.T3 (ACTIONS-01): every link a learner can see leads somewhere real, and no page shows placeholder text.
 // Crawls internal links breadth-first from the main entry points (signed out, then as a new learner), two levels deep,
@@ -62,7 +63,9 @@ test("signed in: every visible link resolves and no page shows placeholder text"
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("actions-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/(account|onboarding)(\?|$)/, AUTH);
   const { problems, visited } = await crawl(
     page,

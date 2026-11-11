@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+import re
 import uuid
-from datetime import datetime
+from datetime import date, datetime
 from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
@@ -66,9 +67,37 @@ class RoleGrantOut(BaseModel):
     revoke_reason: str | None
 
 
+def normalize_phone(value: str) -> str:
+    """AUTH-PASSWORD-01: a mobile number in E.164. Pakistani numbers may be typed locally (0300 1234567, 92300…);
+    others need their + country code. Spaces, dashes, dots and brackets are ignored. Not verified."""
+    raw = re.sub(r"[\s\-().]", "", value or "")
+    if re.fullmatch(r"03\d{9}", raw):
+        raw = "+92" + raw[1:]
+    elif re.fullmatch(r"923\d{9}", raw):
+        raw = "+" + raw
+    elif raw.startswith("00"):
+        raw = "+" + raw[2:]
+    if raw.startswith("+92") and not re.fullmatch(r"\+923\d{9}", raw):
+        raise ValueError("Enter a Pakistani mobile number like 0300 1234567.")
+    if not re.fullmatch(r"\+[1-9]\d{7,14}", raw):
+        raise ValueError("Enter a mobile number like 0300 1234567 (or +country code for other countries).")
+    return raw
+
+
+def check_date_of_birth(value: date, today: date | None = None) -> date:
+    """AUTH-PASSWORD-01: a plausible date of birth for a learner (between 8 and 100 years old). Not verified."""
+    today = today or date.today()
+    age = today.year - value.year - ((today.month, today.day) < (value.month, value.day))
+    if value > today or age < 8 or age > 100:
+        raise ValueError("Enter your real date of birth.")
+    return value
+
+
 class MeOut(BaseModel):
     id: uuid.UUID
     email: str | None
+    phone: str | None = None
+    date_of_birth: date | None = None
     display_name: str | None
     status: str
     roles: list[Role]
@@ -94,6 +123,12 @@ class DevRegisterIn(BaseModel):
     email: EmailStr
     password: str = Field(min_length=10, max_length=200)
     display_name: str | None = Field(default=None, max_length=120)
+    phone: str | None = Field(default=None, max_length=30)  # optional for the development shortcut
+
+    @field_validator("phone")
+    @classmethod
+    def _phone(cls, v: str | None) -> str | None:
+        return normalize_phone(v) if v else None
 
 
 class DevTokenIn(BaseModel):

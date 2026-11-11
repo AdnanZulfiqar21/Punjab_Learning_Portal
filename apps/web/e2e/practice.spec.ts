@@ -1,5 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import { audit } from "./helpers/a11y";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // Learner practice journeys (P09/P10) against the development fixtures from `portal-dev-seed-practice`: technical
 // fixture questions in Class 11 Biology, chapter 1, whose stems say which option is the key. Not academic content.
@@ -11,7 +12,9 @@ async function newLearner(page: Page) {
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("practice-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/practice\?/, AUTH);
   // New learners start the one-time free trial before practising (P14.S5).
   await page.getByRole("button", { name: "Start my free 30-day trial" }).click();
@@ -50,7 +53,9 @@ test("practice needs a plan, and the free trial is offered once", async ({ page 
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("practice-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page.getByText("Practice tests needs a plan")).toBeVisible(AUTH);
   await expect(page.getByText(/doesn't ask for payment details/)).toBeVisible();
   await page.getByRole("button", { name: "Start my free 30-day trial" }).click();

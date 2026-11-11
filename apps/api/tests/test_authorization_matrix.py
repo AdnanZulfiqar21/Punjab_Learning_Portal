@@ -48,6 +48,11 @@ PUBLIC = {
     "GET /v1/status": "public incident status",
     "POST /v1/dev-auth/register": "development/test identity adapter only (not mounted in production)",
     "POST /v1/dev-auth/token": "development/test identity adapter only (not mounted in production)",
+    "POST /v1/dev-auth/last-code": "development/test identity adapter only (not mounted in production)",
+    "POST /v1/auth/register": "sign-up (AUTH-PASSWORD-01): enumeration-safe 202, emails a code",
+    "POST /v1/auth/resend-code": "sign-up (AUTH-PASSWORD-01): enumeration-safe, rate-limited per account",
+    "POST /v1/auth/verify-email": "sign-up (AUTH-PASSWORD-01): proves the inbox; 5 tries per code, 15 minutes",
+    "POST /v1/auth/token": "sign-in (AUTH-PASSWORD-01): verifies the password, issues a short access token",
 }
 STAFF_PREFIXES = ("/v1/studio", "/v1/staff", "/v1/ops", "/v1/admin")
 

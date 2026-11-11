@@ -757,6 +757,74 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/auth/register": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create an account; emails a code */
+        post: operations["register_v1_auth_register_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/auth/resend-code": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Email a new verification code */
+        post: operations["resend_code_v1_auth_resend_code_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/auth/token": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Sign in with email and password */
+        post: operations["token_v1_auth_token_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/auth/verify-email": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Confirm the email with its code and sign in */
+        post: operations["verify_email_v1_auth_verify_email_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/books/{book_id}": {
         parameters: {
             query?: never;
@@ -4859,6 +4927,16 @@ export interface components {
             /** Subject */
             subject: string;
         };
+        /** AcceptedOut */
+        AcceptedOut: {
+            /** Detail */
+            detail: string;
+            /**
+             * Status
+             * @default accepted
+             */
+            status: string;
+        };
         /** AccessOut */
         AccessOut: {
             /**
@@ -6700,6 +6778,14 @@ export interface components {
             /** Window Days */
             window_days: number;
         };
+        /** EmailIn */
+        EmailIn: {
+            /**
+             * Email
+             * Format: email
+             */
+            email: string;
+        };
         /** Engagement */
         Engagement: {
             /** Learners Completing */
@@ -8400,6 +8486,8 @@ export interface components {
         MeOut: {
             /** Consents */
             consents: components["schemas"]["ConsentOut"][];
+            /** Date Of Birth */
+            date_of_birth?: string | null;
             /** Display Name */
             display_name: string | null;
             /** Email */
@@ -8411,6 +8499,8 @@ export interface components {
             id: string;
             /** Mfa Session */
             mfa_session: boolean;
+            /** Phone */
+            phone?: string | null;
             profile: components["schemas"]["ProfileOut"] | null;
             /** Roles */
             roles: components["schemas"]["Role"][];
@@ -10040,6 +10130,34 @@ export interface components {
             /** Position */
             position?: number | null;
         };
+        /** RegisterIn */
+        RegisterIn: {
+            /**
+             * Date Of Birth
+             * Format: date
+             * @description Required (owner 2026-11-11); not verified
+             */
+            date_of_birth: string;
+            /** Display Name */
+            display_name?: string | null;
+            /**
+             * Email
+             * Format: email
+             */
+            email: string;
+            /**
+             * Marketing Emails
+             * @default false
+             */
+            marketing_emails: boolean;
+            /** Password */
+            password: string;
+            /**
+             * Phone
+             * @description Mobile number, e.g. 0300 1234567 or +92 300 1234567
+             */
+            phone: string;
+        };
         /** RegradeAttemptsOut */
         RegradeAttemptsOut: {
             /** Items */
@@ -10974,6 +11092,16 @@ export interface components {
             /** User Agent */
             user_agent: string | null;
         };
+        /** SignInIn */
+        SignInIn: {
+            /**
+             * Email
+             * Format: email
+             */
+            email: string;
+            /** Password */
+            password: string;
+        };
         /** SignalOut */
         SignalOut: {
             /** Alert At */
@@ -11716,6 +11844,19 @@ export interface components {
             events: components["schemas"]["TimelineEventOut"][];
             learner: components["schemas"]["LearnerOut"];
         };
+        /** TokenOut */
+        TokenOut: {
+            /** Access Token */
+            access_token: string;
+            /** Expires In */
+            expires_in: number;
+            /**
+             * Token Type
+             * @default Bearer
+             * @constant
+             */
+            token_type: "Bearer";
+        };
         /** TopicAvailability */
         TopicAvailability: {
             /**
@@ -12266,14 +12407,6 @@ export interface components {
             /** Translation Origin */
             translation_origin: ("human" | "machine_draft") | null;
         };
-        /** VerifyIn */
-        VerifyIn: {
-            /**
-             * Note
-             * @description What you checked against the official source
-             */
-            note: string;
-        };
         /** VersionOut */
         VersionOut: {
             /** Approved At */
@@ -12751,6 +12884,14 @@ export interface components {
             /** Subject */
             subject: string;
         };
+        /** VerifyIn */
+        portal_api__modules__assessment__router__VerifyIn: {
+            /**
+             * Note
+             * @description What you checked against the official source
+             */
+            note: string;
+        };
         /**
          * ComparisonOut
          * @description P12.S2.T3 (COMPARISON-01): how a scheduled session's fixed-form result compares with other learners'.
@@ -12890,6 +13031,19 @@ export interface components {
             tags?: string[];
             /** Title */
             title: string;
+        };
+        /** VerifyIn */
+        portal_api__modules__identity__password_auth__VerifyIn: {
+            /**
+             * Code
+             * @description The 6-digit code from the email
+             */
+            code: string;
+            /**
+             * Email
+             * Format: email
+             */
+            email: string;
         };
         /** RevokeIn */
         portal_api__modules__identity__schemas__RevokeIn: {
@@ -13500,7 +13654,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["VerifyIn"];
+                "application/json": components["schemas"]["portal_api__modules__assessment__router__VerifyIn"];
             };
         };
         responses: {
@@ -14448,6 +14602,138 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SubmitOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    register_v1_auth_register_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RegisterIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AcceptedOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    resend_code_v1_auth_resend_code_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EmailIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AcceptedOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    token_v1_auth_token_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SignInIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TokenOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    verify_email_v1_auth_verify_email_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["portal_api__modules__identity__password_auth__VerifyIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TokenOut"];
                 };
             };
             /** @description Validation Error */

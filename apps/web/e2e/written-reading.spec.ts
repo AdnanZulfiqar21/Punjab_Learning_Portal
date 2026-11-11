@@ -1,5 +1,6 @@
 import { expect, test, type Browser, type Page } from "@playwright/test";
 import { audit, reflows } from "./helpers/a11y";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // W07.S3.T1: reading and navigating written practice. A learner maps and submits pages with the keyboard alone, with a
 // visible focus ring; the builder, the script and the released result have no serious axe violations and reflow at
@@ -36,7 +37,9 @@ test("written practice reads, navigates and reflows accessibly", async ({ page, 
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(`e2e-written-a11y-${Date.now()}@example.com`);
   await page.getByLabel("Password").fill("practice-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/practice\?/, AUTH);
   await page.getByRole("button", { name: "Start my free 30-day trial" }).click();
   await expect(page.getByText(/Free trial until/)).toBeVisible(AUTH);
