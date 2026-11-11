@@ -3,13 +3,26 @@ import { Suspense } from "react";
 import { CenteredCard } from "@/components/learner-pages";
 import { Notice, SkeletonLines } from "@/components/ui";
 import { signInMethods } from "@/lib/session";
-import { PasswordForm } from "./sign-in-form";
+import { MODE_COPY, ModeText, PasswordForm } from "./sign-in-form";
 
 export const metadata: Metadata = { title: "Sign in", robots: { index: false } };
 
+/** Sign in, or sign up with `?mode=register`: the heading follows the form, so a new learner never reads "Sign in". */
 export default function SignInPage({ searchParams }: PageProps<"/signin">) {
   return (
-    <CenteredCard icon="user" title="Sign in" lead="Sign in to keep your place in each book and to practise. A new account can start the free 30-day trial.">
+    <CenteredCard
+      icon="user"
+      title={
+        <Suspense fallback="Sign in">
+          <ModeText part="title" />
+        </Suspense>
+      }
+      lead={
+        <Suspense fallback={MODE_COPY.signin.lead}>
+          <ModeText part="lead" />
+        </Suspense>
+      }
+    >
       <Suspense fallback={<SkeletonLines lines={4} label="Loading sign-in options" />}>
         {searchParams.then((sp) => (
           <div className="space-y-4">

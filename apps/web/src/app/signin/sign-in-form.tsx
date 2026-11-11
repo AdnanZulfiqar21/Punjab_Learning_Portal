@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useActionState } from "react";
 import { registerWithPassword, signInWithPassword, type FormState } from "@/app/actions/auth";
 import { buttonClasses } from "@/components/button";
 import { FIELD, LABEL } from "@/components/learner-pages";
@@ -35,8 +36,38 @@ function Field({
 
 /** AUTH-PASSWORD-01: email + password sign-in, and sign-up that emails a 6-digit code. `devShortcuts` adds the
  * development-only MFA simulation for staff actions. */
+export const MODE_COPY = {
+  signin: {
+    title: "Sign in",
+    lead: "Sign in to keep your place in each book and to practise. A new account can start the free 30-day trial.",
+  },
+  register: {
+    title: "Create your account",
+    lead: "Sign up to keep your place in each book and to practise. A new account starts the free 30-day trial.",
+  },
+} as const;
+
+type Mode = keyof typeof MODE_COPY;
+
+/** `?mode=register` opens sign-up; anything else is sign-in. */
+function useMode(): Mode {
+  return useSearchParams().get("mode") === "register" ? "register" : "signin";
+}
+
+/** The page heading and lead, which follow the form's mode. */
+export function ModeText({ part }: { part: "title" | "lead" }) {
+  return MODE_COPY[useMode()][part];
+}
+
 export function PasswordForm({ next, devShortcuts }: { next: string; devShortcuts: boolean }) {
-  const [mode, setMode] = useState<"signin" | "register">("signin");
+  const mode = useMode();
+  // Switching mode only rewrites the address (no reload): the heading updates, and a shared or reloaded link keeps it.
+  function setMode(to: Mode) {
+    const params = new URLSearchParams(window.location.search);
+    if (to === "register") params.set("mode", "register");
+    else params.delete("mode");
+    window.history.replaceState(null, "", `${window.location.pathname}?${params}`);
+  }
   const [state, action, pending] = useActionState<FormState, FormData>(
     mode === "signin" ? signInWithPassword : registerWithPassword,
     undefined,
