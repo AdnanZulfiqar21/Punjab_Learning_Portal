@@ -82,7 +82,8 @@ test("the session cookie is HttpOnly and SameSite, and typed text is never marku
 // JavaScript and no way to make a request, so it can never act as the signed-in reader against the portal.
 test("the code runner can print but cannot reach JavaScript or the network", async ({ page }) => {
   test.slow();
-  await page.goto("/help");
+  // A static same-origin page: the worker gets the site's headers, and nothing navigates while it runs.
+  await page.goto("/offline.html");
   const run = (code: string) =>
     page.evaluate(
       (program) =>
