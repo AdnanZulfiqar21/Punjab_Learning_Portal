@@ -3,8 +3,17 @@
 // objective part is answered here on a 20-minute timer and submitted; the subjective part is written on paper) and
 // "Solution paper" (owner: how many MCQs were correct, the right answer of each wrong one, and a model answer for every
 // short and long part).
-import { useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { MathText, type MathHtml } from "@/components/math-text";
 import type { Paper, PaperQuestion } from "@/lib/chapter-mocks";
+import { hasMath } from "@/lib/inline-math";
+
+// Mathematics papers: formulas are typeset on the server (`typesetMath`) and shown where they stand.
+const MathCtx = createContext<MathHtml | undefined>(undefined);
+function T({ t }: { t: string }) {
+  const html = useContext(MathCtx);
+  return hasMath(t) ? <MathText text={t} html={html} /> : t;
+}
 
 const ROMAN = [
   "i",
@@ -24,6 +33,12 @@ const ROMAN = [
   "xv",
 ];
 const LETTER = ["A", "B", "C", "D"];
+const WORDS: Record<number, string> = {
+  3: "three",
+  6: "six",
+  8: "eight",
+  9: "nine",
+};
 
 type Head = {
   part: string;
@@ -107,7 +122,11 @@ function Answer({ q }: { q: PaperQuestion }) {
   const a = q.answer;
   return (
     <div className="space-y-2 rounded-inner bg-accent-soft/60 px-4 py-3 text-[15px] leading-relaxed">
-      {a.text && !a.steps && <p className="whitespace-pre-line">{a.text}</p>}
+      {a.text && !a.steps && (
+        <p className="whitespace-pre-line">
+          <T t={a.text} />
+        </p>
+      )}
       {a.table && (
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-sm">
@@ -118,7 +137,7 @@ function Answer({ q }: { q: PaperQuestion }) {
                     key={h}
                     className="border border-border bg-surface px-2 py-1.5 text-left align-top"
                   >
-                    {h}
+                    <T t={h} />
                   </th>
                 ))}
               </tr>
@@ -131,7 +150,7 @@ function Answer({ q }: { q: PaperQuestion }) {
                       key={j}
                       className="border border-border px-2 py-1.5 align-top"
                     >
-                      {c}
+                      <T t={c} />
                     </td>
                   ))}
                 </tr>
@@ -142,15 +161,25 @@ function Answer({ q }: { q: PaperQuestion }) {
       )}
       {a.steps && (
         <>
-          {a.text && <p className="text-muted">{a.text}</p>}
+          {a.text && (
+            <p className="text-muted">
+              <T t={a.text} />
+            </p>
+          )}
           <ol className="list-decimal space-y-1 pl-5">
             {a.steps.map((s, i) => (
-              <li key={i}>{s}</li>
+              <li key={i}>
+                <T t={s} />
+              </li>
             ))}
           </ol>
         </>
       )}
-      {a.final && <p className="font-semibold">{a.final}</p>}
+      {a.final && (
+        <p className="font-semibold">
+          <T t={a.final} />
+        </p>
+      )}
     </div>
   );
 }
@@ -180,7 +209,9 @@ function Row({
   return (
     <div className="grid grid-cols-[3.25rem_1fr_auto] gap-x-2 gap-y-2 border-b border-border/70 py-3">
       <span className="font-semibold text-muted">{label}</span>
-      <p>{q.q}</p>
+      <p>
+        <T t={q.q} />
+      </p>
       <span className="font-display text-sm font-semibold text-muted">
         {marks ?? ""}
       </span>
@@ -204,7 +235,7 @@ function Subjective({ paper, solved }: { paper: Paper; solved: boolean }) {
       {paper.short.map((s) => (
         <div key={s.no}>
           <QHead
-            title={`${s.no}. Write the answers of any ${s.attempt === 8 ? "eight" : s.attempt === 6 ? "six" : s.attempt} parts.`}
+            title={`${s.no}. Write the answers of any ${WORDS[s.attempt] ?? s.attempt} parts.`}
             marks={`${s.attempt} × 2 = ${s.attempt * 2}`}
           />
           {s.parts.map((q, i) => (
@@ -216,7 +247,7 @@ function Subjective({ paper, solved }: { paper: Paper; solved: boolean }) {
         SECTION-II
       </p>
       <QHead
-        title={`NOTE: Write answers of any ${p.long.attempt === 3 ? "three" : p.long.attempt} questions.`}
+        title={`NOTE: Write answers of any ${WORDS[p.long.attempt] ?? p.long.attempt} questions.`}
         marks={`${p.long.attempt} × ${total} = ${p.long.attempt * total}`}
       />
       {paper.long.map((pr, i) => (
@@ -236,7 +267,23 @@ function Subjective({ paper, solved }: { paper: Paper; solved: boolean }) {
   );
 }
 
-export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
+export function MockPaper({
+  paper,
+  head,
+  math,
+}: {
+  paper: Paper;
+  head: Head;
+  math?: MathHtml;
+}) {
+  return (
+    <MathCtx.Provider value={math}>
+      <PaperBody paper={paper} head={head} />
+    </MathCtx.Provider>
+  );
+}
+
+function PaperBody({ paper, head }: { paper: Paper; head: Head }) {
   const [tab, setTab] = useState<"question" | "solution">("question");
   const [chosen, setChosen] = useState<(number | null)[]>(() =>
     paper.mcqs.map(() => null),
@@ -381,7 +428,9 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
                   <span className="inline-grid size-7 shrink-0 place-items-center rounded-lg bg-accent-soft font-display text-sm text-accent">
                     {i + 1}
                   </span>
-                  <span className="flex-1">{q.q}</span>
+                  <span className="flex-1">
+                    <T t={q.q} />
+                  </span>
                   {verdict && (
                     <span
                       className={`shrink-0 self-start rounded-full px-2.5 py-0.5 text-xs font-bold ${verdict === "right" ? "bg-ok-soft text-ok" : verdict === "wrong" ? "bg-danger-soft text-danger" : "bg-surface-muted text-muted"}`}
@@ -421,7 +470,9 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
                         <span className="font-semibold text-muted">
                           {LETTER[j]}
                         </span>
-                        <span className="flex-1">{o}</span>
+                        <span className="flex-1">
+                          <T t={o} />
+                        </span>
                         {solution && checked && mine === j && (
                           <span className="shrink-0 text-xs font-bold">
                             Your answer
@@ -443,7 +494,10 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
                       </span>
                     )}
                     {q.answer.text && (
-                      <span className="text-muted"> — {q.answer.text}</span>
+                      <span className="text-muted">
+                        {" "}
+                        — <T t={q.answer.text} />
+                      </span>
                     )}
                   </p>
                 )}

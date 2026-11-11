@@ -11,6 +11,7 @@ import { GRADE_LABEL } from "@/lib/format";
 import { subjectKey } from "@/lib/learn-context";
 import { SUBJECTS } from "@/lib/practice";
 import { api, currentUser } from "@/lib/session";
+import { typesetMath } from "@/lib/typeset";
 
 export const metadata: Metadata = {
   title: "Mock test",
@@ -109,6 +110,10 @@ async function Paper({
     (r) => r.ok && r.data.availability !== "published",
   );
   const label = book.data.chapter_label;
+  const paper =
+    mcq && short && long
+      ? buildPaper(pattern, chapter, n, { mcq, short, long })
+      : null;
   return (
     <div className="space-y-8" data-subject={subjectKey(subject)}>
       <div>
@@ -131,14 +136,15 @@ async function Paper({
           </p>
         )}
       </div>
-      {!mcq || !short || !long ? (
+      {!paper ? (
         <Notice title="Sign in to open this mock test">
           This mock test is still being reviewed. Sign in with a reviewer
           account to see it.
         </Notice>
       ) : (
         <MockPaper
-          paper={buildPaper(pattern, chapter, n, { mcq, short, long })}
+          paper={paper}
+          math={subject === "mathematics" ? typesetMath(paper) : undefined}
           head={{
             part: grade === 11 ? "INTERMEDIATE PART-I" : "INTERMEDIATE PART-II",
             className: `Class ${grade === 11 ? "XI" : "XII"}`,

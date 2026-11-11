@@ -50,7 +50,27 @@ const COMPUTER_SCIENCE: MockPattern = {
   subjectiveMinutes: 130,
 };
 
+// Biology Part-I and Part-II papers (owner's Board papers, 2025-2026): the same pattern as Chemistry.
+const BIOLOGY: MockPattern = CHEMISTRY;
+
+// Mathematics Part-I and Part-II papers (owner's Board papers, 2026, new course): 20 MCQs; Section-I 8 of 12, 8 of 12,
+// 9 of 13; Section-II 3 of 5, each (a) 5 + (b) 5 marks; 2:30 hours; 20 + 80 = 100 marks. The objective part's 30
+// minutes is the Board's usual time for 20 MCQs (the owner's papers show the subjective header only).
+const MATHEMATICS: MockPattern = {
+  mcqs: 20,
+  objectiveMinutes: 30,
+  short: [
+    { no: 2, asked: 12, attempt: 8 },
+    { no: 3, asked: 12, attempt: 8 },
+    { no: 4, asked: 13, attempt: 9 },
+  ],
+  long: { asked: 5, attempt: 3, parts: [5, 5] },
+  subjectiveMinutes: 150,
+};
+
 export const PATTERNS: Record<string, MockPattern> = {
+  mathematics: MATHEMATICS,
+  biology: BIOLOGY,
   computer_science: COMPUTER_SCIENCE,
   physics: PHYSICS,
   chemistry: CHEMISTRY,
@@ -63,6 +83,10 @@ const chapters = (first: number, last: number) =>
   Object.fromEntries(
     Array.from({ length: last - first + 1 }, (_, i) => [first + i, [1, 2, 3]]),
   );
+const without = (open: Record<number, number[]>, chapter: number) =>
+  Object.fromEntries(
+    Object.entries(open).filter(([k]) => Number(k) !== chapter),
+  );
 export const OPEN: Record<string, Record<number, number[]>> = {
   "physics-11": chapters(1, 12),
   "physics-12": chapters(13, 21),
@@ -70,6 +94,13 @@ export const OPEN: Record<string, Record<number, number[]>> = {
   "chemistry-12": chapters(17, 33),
   "computer_science-11": chapters(1, 9),
   "computer_science-12": chapters(1, 9),
+  // Biology 11 chapter 7 (28 short questions, 4 long pairs) and Biology 12 chapter 23 (31 short questions) have fewer
+  // practice questions than one Board paper needs (33 short, 5 long), so they get mock tests once more are added.
+  "biology-11": without(chapters(1, 12), 7),
+  "biology-12": without(chapters(13, 25), 23),
+  // Mathematics 11 units 5 and 9 have 34 short questions each, fewer than one Board paper needs (37).
+  "mathematics-11": without(without(chapters(1, 14), 5), 9),
+  "mathematics-12": chapters(1, 11),
 };
 
 export function openTests(
