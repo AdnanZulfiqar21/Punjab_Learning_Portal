@@ -195,7 +195,7 @@ function Row({
 
 function Subjective({ paper, solved }: { paper: Paper; solved: boolean }) {
   const p = paper.pattern;
-  const total = p.long.parts[0] + p.long.parts[1];
+  const total = p.long.parts.reduce((x: number, y) => x + y, 0);
   return (
     <div>
       <p className="pt-5 text-center font-display font-bold tracking-[0.08em]">
@@ -222,12 +222,14 @@ function Subjective({ paper, solved }: { paper: Paper; solved: boolean }) {
       {paper.long.map((pr, i) => (
         <div key={i}>
           <Row
-            label={`${i + 5}.(a)`}
+            label={pr.b ? `${i + 5}.(a)` : `${i + 5}.`}
             q={pr.a}
             marks={pr.a.marks}
             solved={solved}
           />
-          <Row label="(b)" q={pr.b} marks={pr.b.marks} solved={solved} />
+          {pr.b && (
+            <Row label="(b)" q={pr.b} marks={pr.b.marks} solved={solved} />
+          )}
         </div>
       ))}
     </div>
@@ -248,7 +250,7 @@ export function MockPaper({ paper, head }: { paper: Paper; head: Head }) {
   const subjective = useTimer(p.subjectiveMinutes * 60);
   const subjMarks =
     p.short.reduce((a, s) => a + s.attempt * 2, 0) +
-    p.long.attempt * (p.long.parts[0] + p.long.parts[1]);
+    p.long.attempt * p.long.parts.reduce((x: number, y) => x + y, 0);
   const right = paper.mcqs.filter((q, i) => chosen[i] === q.key).length;
   const blank = chosen.filter((c) => c === null).length;
   const wrong = paper.mcqs.length - right - blank;

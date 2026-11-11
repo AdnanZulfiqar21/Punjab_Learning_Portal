@@ -9,8 +9,9 @@ export type MockPattern = {
   objectiveMinutes: number;
   /** Section-I: question number, parts asked, parts to attempt (2 marks each). */
   short: { no: number; asked: number; attempt: number }[];
-  /** Section-II: questions asked, questions to attempt, marks of the (a) and (b) parts. */
-  long: { asked: number; attempt: number; parts: [number, number] };
+  /** Section-II: questions asked, questions to attempt, and the marks of each question's (a) and (b) parts, or of the
+   * whole question when it has no parts (Computer Science). */
+  long: { asked: number; attempt: number; parts: [number, number] | [number] };
   subjectiveMinutes: number;
 };
 
@@ -35,7 +36,22 @@ const CHEMISTRY: MockPattern = {
   long: { asked: 5, attempt: 3, parts: [4, 4] },
 };
 
+// Computer Science Part-I and Part-II papers (owner's Board papers, 2025): 15 MCQs in 20 minutes; Section-I 6 of 9 in
+// each of Q2, Q3 and Q4; Section-II 3 of 5 whole questions of 8 marks; 2:10 hours; 15 + 60 = 75 marks.
+const COMPUTER_SCIENCE: MockPattern = {
+  mcqs: 15,
+  objectiveMinutes: 20,
+  short: [
+    { no: 2, asked: 9, attempt: 6 },
+    { no: 3, asked: 9, attempt: 6 },
+    { no: 4, asked: 9, attempt: 6 },
+  ],
+  long: { asked: 5, attempt: 3, parts: [8] },
+  subjectiveMinutes: 130,
+};
+
 export const PATTERNS: Record<string, MockPattern> = {
+  computer_science: COMPUTER_SCIENCE,
   physics: PHYSICS,
   chemistry: CHEMISTRY,
 };
@@ -52,6 +68,7 @@ export const OPEN: Record<string, Record<number, number[]>> = {
   "physics-12": chapters(13, 21),
   "chemistry-11": chapters(1, 16),
   "chemistry-12": chapters(17, 33),
+  "computer_science-11": chapters(1, 9),
 };
 
 export function openTests(
@@ -93,7 +110,7 @@ export type Paper = {
   pattern: MockPattern;
   mcqs: PaperQuestion[];
   short: { no: number; attempt: number; parts: PaperQuestion[] }[];
-  long: { a: PaperQuestion; b: PaperQuestion }[];
+  long: { a: PaperQuestion; b?: PaperQuestion }[];
 };
 
 const clean = (p: string) =>
@@ -199,6 +216,14 @@ export function buildPaper(
   });
   const longs = checkpoints(sets.long);
   const [ma, mb] = pattern.long.parts;
+  if (mb === undefined) {
+    // One whole question per Section-II number (Computer Science: 8 marks each).
+    const whole = longs.filter((q) => marksOf(q.prompt ?? "") === ma);
+    const long = pick(whole, n, pattern.long.asked).map((q) => ({
+      a: question(q, ma),
+    }));
+    return { pattern, mcqs, short, long };
+  }
   // The long set is written as (a) theory + (b) numerical pairs on the same section; keep each pair together.
   const pairs: { a: Checkpoint; b: Checkpoint }[] = [];
   for (let i = 0; i + 1 < longs.length; i++) {
