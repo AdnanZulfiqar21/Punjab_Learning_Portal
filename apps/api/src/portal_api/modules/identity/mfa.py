@@ -201,23 +201,23 @@ def remove(db: Session, user_id: uuid.UUID) -> bool:
 
 
 # ------------------------------------------------------------------ API
-class CodeIn(BaseModel):
+class MfaCodeIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
     code: str = Field(min_length=6, max_length=20, description="The 6-digit code, or a recovery code")
 
 
-class StatusOut(BaseModel):
+class MfaStatusOut(BaseModel):
     enabled: bool
     session_verified: bool = Field(description="This session has proved the second factor and it is still fresh")
     recovery_codes_left: int
 
 
-class EnrolOut(BaseModel):
+class MfaEnrolOut(BaseModel):
     secret: str = Field(description="The setup key to type into the authenticator app (shown once)")
     otpauth_uri: str = Field(description="The same as a link or QR content for the authenticator app")
 
 
-class RecoveryOut(BaseModel):
+class MfaRecoveryOut(BaseModel):
     recovery_codes: list[str] = Field(description="One-time codes for a lost phone. Shown once: keep them safe")
 
 
@@ -225,7 +225,7 @@ def _private(response: Response) -> None:
     response.headers["Cache-Control"] = "no-store"
 
 
-def _status(db: Session, who: Principal) -> StatusOut:
+def _status(db: Session, who: Principal) -> MfaStatusOut:
     cred = db.get(TotpCredential, who.user.id)
     enabled = cred is not None and cred.confirmed_at is not None
     left = db.scalar(
@@ -233,17 +233,17 @@ def _status(db: Session, who: Principal) -> StatusOut:
         .select_from(TotpRecoveryCode)
         .where(TotpRecoveryCode.user_id == who.user.id, TotpRecoveryCode.used_at.is_(None))
     )
-    return StatusOut(enabled=enabled, session_verified=who.claims.mfa, recovery_codes_left=int(left or 0))
+    return MfaStatusOut(enabled=enabled, session_verified=who.claims.mfa, recovery_codes_left=int(left or 0))
 
 
-@router.get("", response_model=StatusOut, summary="Whether two-step sign-in is set up, and this session's state")
-def status(db: DB, who: CurrentPrincipal, response: Response) -> StatusOut:
+@router.get("", response_model=MfaStatusOut, summary="Whether two-step sign-in is set up, and this session's state")
+def status(db: DB, who: CurrentPrincipal, response: Response) -> MfaStatusOut:
     _private(response)
     return _status(db, who)
 
 
-@router.post("/enrol", response_model=EnrolOut, summary="Start setting up an authenticator app (shows the key once)")
-def enrol(db: DB, who: CurrentPrincipal, response: Response) -> EnrolOut:
+@router.post("/enrol", response_model=MfaEnrolOut, summary="Start setting up an authenticator app (shows the key once)")
+def enrol(db: DB, who: CurrentPrincipal, response: Response) -> MfaEnrolOut:
     _private(response)
     require_recent_sign_in(who)
     cred = _locked(db, who.user.id)
@@ -259,11 +259,11 @@ def enrol(db: DB, who: CurrentPrincipal, response: Response) -> EnrolOut:
     key = base64.b32encode(secret).decode().rstrip("=")
     label = quote(f"{ISSUER_NAME}:{who.user.email or who.user.id}")
     uri = f"otpauth://totp/{label}?secret={key}&issuer={quote(ISSUER_NAME)}&algorithm=SHA1&digits=6&period={PERIOD_S}"
-    return EnrolOut(secret=" ".join(key[i : i + 4] for i in range(0, len(key), 4)), otpauth_uri=uri)
+    return MfaEnrolOut(secret=" ".join(key[i : i + 4] for i in range(0, len(key), 4)), otpauth_uri=uri)
 
 
-@router.post("/confirm", response_model=RecoveryOut, summary="Finish set-up with the first code; gives recovery codes")
-def confirm(body: CodeIn, db: DB, who: CurrentPrincipal, response: Response) -> RecoveryOut:
+@router.post("/confirm", response_model=MfaRecoveryOut, summary="Finish set-up with the first code")
+def confirm(body: MfaCodeIn, db: DB, who: CurrentPrincipal, response: Response) -> MfaRecoveryOut:
     _private(response)
     cred = _locked(db, who.user.id)
     if cred is None:
@@ -279,11 +279,11 @@ def confirm(body: CodeIn, db: DB, who: CurrentPrincipal, response: Response) -> 
     _mark(who.session, now)
     record(db, actor=who.user.id, action="mfa.enabled", target_type="app_user", target_id=str(who.user.id))
     db.commit()
-    return RecoveryOut(recovery_codes=codes)
+    return MfaRecoveryOut(recovery_codes=codes)
 
 
-@router.post("/verify", response_model=StatusOut, summary="Prove the second factor for this session (12 hours)")
-def verify(body: CodeIn, db: DB, who: CurrentPrincipal, response: Response) -> StatusOut:
+@router.post("/verify", response_model=MfaStatusOut, summary="Prove the second factor for this session (12 hours)")
+def verify(body: MfaCodeIn, db: DB, who: CurrentPrincipal, response: Response) -> MfaStatusOut:
     _private(response)
     if who.session is None:
         raise Conflict("Sign in on this device first.", code_reason="SESSION_REQUIRED")
@@ -308,7 +308,7 @@ def verify(body: CodeIn, db: DB, who: CurrentPrincipal, response: Response) -> S
 
 
 @router.post("/disable", status_code=204, summary="Turn two-step sign-in off (needs a code)")
-def disable(body: CodeIn, db: DB, who: CurrentPrincipal) -> Response:
+def disable(body: MfaCodeIn, db: DB, who: CurrentPrincipal) -> Response:
     cred = _locked(db, who.user.id)
     if cred is None or cred.confirmed_at is None:
         db.rollback()

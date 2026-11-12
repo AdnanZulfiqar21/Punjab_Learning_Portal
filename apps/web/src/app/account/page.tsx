@@ -17,12 +17,13 @@ import { getAccess } from "@/lib/access";
 import { PlanStatus } from "@/components/plan-status";
 import { RemoveTrialDevice } from "@/components/trial-devices";
 import { NotificationPreferences } from "@/components/notification-preferences";
-import type { AssistedAccess, NotificationPreferences as Prefs, StudySettings, TrialDevice } from "@portal/contracts";
+import type { AssistedAccess, MfaStatus, NotificationPreferences as Prefs, StudySettings, TrialDevice } from "@portal/contracts";
 import { AssistedAccessList } from "@/components/assisted-access";
 import { DeleteAccount } from "@/components/delete-account";
 import { api } from "@/lib/session";
 import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
 import { StudySettingsForm } from "@/components/study-settings";
+import { TwoStep } from "@/components/two-step";
 import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Your account", robots: { index: false } };
@@ -79,7 +80,7 @@ async function Account() {
   const user = await currentUser();
   if (!user) redirect("/signin?next=/account");
   const { me, token } = user;
-  const [sessions, access, prefs, assists, trialDevices, settings, jar] = await Promise.all([
+  const [sessions, access, prefs, assists, trialDevices, settings, jar, mfa] = await Promise.all([
     listSessions(token),
     getAccess(token),
     api<Prefs>("/v1/me/notification-preferences", { token }),
@@ -87,6 +88,7 @@ async function Account() {
     api<TrialDevice[]>("/v1/me/trial/devices", { token }),
     api<StudySettings>("/v1/me/settings", { token }),
     cookies(),
+    api<MfaStatus>("/v1/me/mfa", { token }),
   ]);
   const p = me.profile;
   const staffLinks = STAFF_LINKS.filter((l) => l.show(me.roles));
@@ -95,6 +97,9 @@ async function Account() {
   if (access) jump.push(["plan", "Plan"]);
   if (prefs.ok) jump.push(["notifications", "Notifications"]);
   if (settings.ok) jump.push(["display", "Display"]);
+  // STAFF-MFA-01: two-step sign-in is shown to staff, and to anyone who already turned it on.
+  const twoStep = mfa.ok && (me.roles.length > 0 || mfa.data.enabled) ? mfa.data : null;
+  if (twoStep) jump.push(["two-step", "Two-step sign-in"]);
   jump.push(["your-data", "Your data"], ["devices", "Devices"]);
   return (
     <div className="space-y-6">
@@ -225,6 +230,15 @@ async function Account() {
           </CardTitle>
           <p className="text-sm text-muted">Times a support team member could see a summary of your activity to help with a request. They can never act as you.</p>
           <AssistedAccessList items={assists.data} now={new Date().toISOString()} />
+        </GlassCard>
+      )}
+
+      {twoStep && (
+        <GlassCard as="section" id="two-step" aria-labelledby="two-step-heading" className={`${CARD} space-y-4`}>
+          <CardTitle id="two-step-heading" icon="lock">
+            Two-step sign-in
+          </CardTitle>
+          <TwoStep status={twoStep} />
         </GlassCard>
       )}
 

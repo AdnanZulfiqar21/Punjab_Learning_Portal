@@ -166,3 +166,5 @@ export type InclusionRecord = S["RecordOut"];
 export type InclusionReport = S["ReportOut"];
 export type InclusionCoverage = S["CoverageOut"];
 export type TopicLecture = S["TopicLectureOut"];
+export type MfaStatus = S["MfaStatusOut"];
+export type MfaEnrolment = S["MfaEnrolOut"];

@@ -152,7 +152,8 @@ def require(permission: Permission) -> Callable[[Principal], Principal]:
             raise Forbidden("You don't have permission to do this.")
         if permission in MFA_REQUIRED and not principal.claims.mfa:
             raise Forbidden(
-                "This action needs a multi-factor authenticated session. Sign in again with MFA.",
+                "This action needs a multi-factor (two-step) sign-in. Open your account, go to Two-step sign-in, "
+                "and enter the code from your authenticator app.",
                 code_reason="MFA_REQUIRED",
             )
         return principal
