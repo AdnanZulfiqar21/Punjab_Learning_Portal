@@ -99,6 +99,9 @@ async function Chapter({ id }: { id: string }) {
   );
 }
 
+// An excerpt has no text for a side figure or a short printed box to sit beside: draw them across the width.
+const alone = (b: Record<string, unknown>) => (b.type === "diagram" ? { ...b, side: false } : b.type === "callout" ? { ...b, wide: true } : b);
+
 const topicLabel = (t: BookMistakeTopic) => (t.practice_only ? "Exercise" : [t.number, t.title].filter(Boolean).join(" "));
 
 function TopicMistakes({ topic, premium }: { topic: BookMistakeTopic; premium: boolean }) {
@@ -123,7 +126,7 @@ function TopicMistakes({ topic, premium }: { topic: BookMistakeTopic; premium: b
       ) : (
         <ol className="space-y-4">
           {topic.mistakes.map((m, i) => {
-            const blocks = [...m.context, ...m.corrections] as { type: string }[];
+            const blocks = [...m.context.map(alone), ...m.corrections] as { type: string }[];
             return (
               <li key={i} className="space-y-2 rounded-card border border-border bg-surface px-4 py-4 text-[1.0625rem] leading-7 shadow-glass sm:px-6 sm:py-5" lang="en">
                 <p className="text-xs font-semibold tracking-wide text-muted uppercase">Mistake {i + 1}</p>

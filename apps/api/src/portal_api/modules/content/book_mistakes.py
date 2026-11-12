@@ -38,6 +38,8 @@ from portal_api.modules.curriculum.regions import book_is_released
 from portal_api.modules.identity.deps import Principal
 
 Block = dict[str, Any]
+# Blocks that are a printed figure: wrong as a whole, so never marked passage by passage.
+FIGURES = {"diagram", "scene", "model3d"}
 
 
 def _is_correction(block: object) -> bool:
@@ -47,9 +49,12 @@ def _is_correction(block: object) -> bool:
 def mistakes_in(blocks: Iterable[object]) -> list[BookMistakeOut]:
     """Each correction box with the printed passage it corrects.
 
-    The passage is every block carrying red book-error marks since the previous correction. A correction that follows
-    a block without marks (a printed figure or question that is wrong as a whole) takes that block. Boxes that follow
-    one another directly correct the same passage, so they stay together."""
+    The passage is every block carrying red book-error marks since the previous correction. A figure printed just
+    before the boxes is part of it too: a figure is wrong as a whole (it carries no marks), and the book often prints
+    one between a marked passage and its corrections. A correction with no marked block before it takes the block just
+    before it (a printed figure or question that is wrong as a whole) and the last side figure since the previous box
+    (a side figure is printed before the text it belongs to). Boxes that follow one another directly belong to
+    the same passage, so they stay together."""
     found: list[BookMistakeOut] = []
     since: list[Block] = []  # blocks after the previous correction
     last: Block | None = None  # the latest block that is not a correction
@@ -61,8 +66,12 @@ def mistakes_in(blocks: Iterable[object]) -> list[BookMistakeOut]:
             if previous_was_correction and found:
                 found[-1].corrections.append(block)
             else:
-                marked = [b for b in since if b.get("book_errors")]
-                context = marked or ([last] if last is not None else [])
+                context = [b for b in since if b.get("book_errors") or (b is last and b.get("type") in FIGURES)]
+                if not context and last is not None:
+                    # Nothing marked: the block just before is what is wrong. A figure the book prints at the side
+                    # comes before the text it belongs to, so the last figure since the previous box comes too.
+                    figures = [b for b in since if b.get("type") in FIGURES and b.get("side")]
+                    context = [figures[-1], last] if figures and figures[-1] is not last else [last]
                 found.append(BookMistakeOut(context=context, corrections=[block]))
             since = []
             previous_was_correction = True

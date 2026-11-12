@@ -26,6 +26,17 @@ def test_each_correction_takes_the_marked_passage_or_the_block_before_it() -> No
     assert mistakes_in(["junk", None, FIX])[0].corrections == [FIX]
 
 
+def test_a_figure_printed_with_the_passage_comes_with_it() -> None:
+    chart = {"type": "diagram", "$asset": "fixture-chart", "alt": "A fixture chart."}
+    side = {**chart, "side": True}
+    # A figure between the marked passage and its boxes (the book prints it there) belongs to the mistake.
+    assert mistakes_in([MARKED, chart, FIX, FIX2])[0].context == [MARKED, chart]
+    # A side figure is printed before its text; with nothing marked it comes with the block before the box.
+    assert mistakes_in([side, PLAIN, FIGURE, FIX])[0].context == [side, FIGURE]
+    # A figure that is not at the side stays out unless it is the block just before the box.
+    assert mistakes_in([chart, PLAIN, FIGURE, FIX])[0].context == [FIGURE]
+
+
 def test_drafts_show_to_staff_in_scope_and_the_summary_carries_no_text(client: TestClient) -> None:
     with get_sessionmaker()() as db:
         chapter, doc = _chapter(db, 12, "physics", index=-1)
