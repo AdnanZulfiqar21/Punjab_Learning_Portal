@@ -45,7 +45,8 @@ EXPORTED_TABLES = frozenset(
     }
 )  # fmt: skip
 NOT_EXPORTED = {
-    "dev_credential": "a development-only sign-in secret",
+    "dev_credential": "a sign-in secret (password hash; the portal's own accounts, AUTH-PASSWORD-01)",
+    "email_code": "one-time sign-up code hashes",
     "push_token": "a device delivery secret",
     "notification_delivery": "provider delivery log; the notifications themselves are exported",
     "staff_role_grant": "staff authorisation, not learner data",

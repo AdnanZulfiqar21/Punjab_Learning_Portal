@@ -1,5 +1,6 @@
 import { expect, test, type Browser, type Page } from "@playwright/test";
 import { audit } from "./helpers/a11y";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // Written results as the learner sees them. Technical fixture question and labelled dev-seed staff only.
 // * W02.S1.T3 (COMPLETENESS-01, §20.9.3): when a teacher finds that none of a script's questions can be assessed, the
@@ -28,7 +29,9 @@ async function submitScript(page: Page, label: string): Promise<string> {
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(`e2e-${label}-${Date.now()}@example.com`);
   await page.getByLabel("Password").fill("practice-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/practice\?/, AUTH);
   await page.getByRole("button", { name: "Start my free 30-day trial" }).click();
   await expect(page.getByText(/Free trial until/)).toBeVisible(AUTH);

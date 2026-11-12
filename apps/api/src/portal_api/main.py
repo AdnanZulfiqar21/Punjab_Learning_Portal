@@ -37,7 +37,7 @@ from portal_api.modules.curriculum.admin import router as catalogue_admin_router
 from portal_api.modules.curriculum.router import router as curriculum_router
 from portal_api.modules.exports.router import router as exports_router
 from portal_api.modules.help.router import router as help_router
-from portal_api.modules.identity import dev_auth
+from portal_api.modules.identity import dev_auth, password_auth
 from portal_api.modules.identity.router import router as identity_router
 from portal_api.modules.identity.settings import router as settings_router
 from portal_api.modules.notifications.router import router as notifications_router
@@ -170,6 +170,8 @@ def create_app() -> FastAPI:
     app.include_router(search_router)
     app.include_router(search_terms_router)
     app.include_router(identity_router)
+    if settings.password_auth_enabled:
+        app.include_router(password_auth.router)
     app.include_router(settings_router)
     app.include_router(content.router)
     app.include_router(content.public)

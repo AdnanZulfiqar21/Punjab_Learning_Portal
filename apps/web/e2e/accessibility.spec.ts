@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { audit } from "./helpers/a11y";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // P19 accessibility (A11Y-01): automated WCAG 2 A/AA checks with axe on the main learner pages, signed out and in.
 // Serious and critical violations fail the build. Automated rules cover only part of WCAG; manual screen-reader and
@@ -27,7 +28,9 @@ test("signed in: dashboard, practice, help and account have no serious accessibi
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("a11y-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/account$/, AUTH);
   // P11.S1.T2 (DASHBOARD-01): a signed-in learner's home is their dashboard, with the three meters kept separate.
   await audit(page, "/");

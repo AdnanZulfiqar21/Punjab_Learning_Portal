@@ -9,6 +9,7 @@ from portal_api.config import ConfigurationError, Role, Settings
 PROD_DB = "postgresql+psycopg://app@db.internal.example:5432/portal"
 OIDC = {
     "dev_auth_enabled": False,
+    "password_auth_enabled": False,  # the external-OIDC configuration (password auth: test_email_verification.py)
     "oidc_issuer": "https://idp.example.org/pool",
     "oidc_audience": "client-1",
     "evidence_store": "s3",
@@ -106,6 +107,7 @@ def test_production_refuses_the_development_identity_adapter() -> None:
             build_id="sha-abc",
             cors_origins=["https://example.org"],
             dev_auth_enabled=False,
+            password_auth_enabled=False,
         )
 
 

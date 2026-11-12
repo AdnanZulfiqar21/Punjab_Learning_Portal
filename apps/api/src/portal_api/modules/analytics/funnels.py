@@ -41,7 +41,7 @@ def report(db: Session) -> dict[str, Any]:
 
     now: datetime = db.execute(select(func.now())).scalar_one()
     staff = exists().where(StaffRoleGrant.user_id == AppUser.id, StaffRoleGrant.revoked_at.is_(None))
-    learner = and_(AppUser.status == "active", ~staff, AppUser.issuer != get_settings().dev_auth_issuer)
+    learner = and_(AppUser.status == "active", ~staff, AppUser.issuer != get_settings().test_account_issuer)
     week = week_of(AppUser.created_at)  # Pakistan weeks and days (P12.S4.T3)
     since = now - timedelta(weeks=WEEKS)
 
