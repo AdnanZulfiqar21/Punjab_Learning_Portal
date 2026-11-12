@@ -125,7 +125,10 @@ def build_topics(topics: list, parent_key: str, depth: int, seen: dict[str, int]
             "id": None,  # assigned by identity.reconcile against the ID registry
             "natural_key": key,
             "number": number,
-            "title": display_title(str(t.get("title", ""))),
+            # BOOK-TITLE-01: where the index title carries the indexer's notes ("Monohybrid cross; Interpretation …;
+            # Testcross"), `printed_title` gives the heading as the book prints it, or the book's own words for a part
+            # with no heading of its own. The natural key still uses `title`, so IDs never change.
+            "title": display_title(str(t.get("printed_title") or t.get("title", ""))),
             "depth": depth,
             "pdf_page": t.get("pdf_page") if isinstance(t.get("pdf_page"), int) else None,
             "points": points,
