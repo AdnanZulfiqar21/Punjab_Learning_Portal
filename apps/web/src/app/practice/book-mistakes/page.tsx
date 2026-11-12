@@ -76,7 +76,7 @@ async function Book({ grade: rawGrade, subject: rawSubject }: { grade?: string; 
           <p className="flex flex-wrap gap-2">
             <StatChip>
               <PracticeIcon name="book-x" size={16} className="text-accent" />
-              {mistakeCount(total)} checked so far
+              {mistakeCount(total)} {res.data.chapters.every((c) => checked(c.number)) ? "in this book" : "checked so far"}
             </StatChip>
             <StatChip>
               <Icon name="layers" size={16} className="text-accent" />
