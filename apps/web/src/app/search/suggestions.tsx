@@ -122,7 +122,7 @@ export function SearchSuggestions({ inputId, formId }: { inputId: string; formId
       id={LIST_ID}
       role="listbox"
       aria-label="Suggestions"
-      className="glass absolute inset-x-0 top-full z-30 mt-2 max-h-[min(26rem,60vh)] overflow-y-auto rounded-card p-2 shadow-glass"
+      className="absolute inset-x-0 top-full z-30 mt-2 max-h-[min(26rem,60vh)] overflow-y-auto rounded-card border border-border bg-surface p-2 shadow-glass"
     >
       {items.length === 0 ? (
         <li role="presentation" className="px-3 py-3 text-sm text-muted">
@@ -150,7 +150,7 @@ export function SearchSuggestions({ inputId, formId }: { inputId: string; formId
                 {s.number && s.kind === "topic" && <span className="mr-1.5 font-mono text-xs text-muted">{s.number}</span>}
                 {markTyped(s.title, typed).map((p, k) =>
                   p.match ? (
-                    <mark key={k} className="rounded bg-accent-soft px-0.5 font-semibold text-foreground">
+                    <mark key={k} className="rounded-sm bg-accent-soft font-semibold text-foreground">
                       {p.text}
                     </mark>
                   ) : (
