@@ -162,3 +162,35 @@ def test_a_started_timed_attempt_outlives_the_plan_but_new_starts_do_not(
     )
     assert done.status_code == 200, done.text
     assert _form(client, who, physics["chapter"]).status_code == 403  # nothing new starts after the plan ends
+
+
+def test_a_combined_test_needs_the_subject_in_both_classes(
+    client: TestClient, db: Session, physics: dict[str, Any]
+) -> None:
+    """COMBINED-SCOPE-01: an 11+12 combined practice test takes questions from both classes, so a one-class package
+    doesn't open it (from either class), and a package for both classes does."""
+    finance = _finance(client, db)
+
+    def combined(who: Staff, grade: int) -> Any:
+        return client.post(
+            "/v1/practice/forms",
+            headers={**who.headers, "Idempotency-Key": uuid.uuid4().hex},
+            json={"grade": grade, "subject": "physics", "scope": "combined", "question_count": 4},
+        )
+
+    def package(*grades: int) -> str:
+        return _product(client, finance, "subject_package", {"grades": list(grades), "subjects": ["physics"]})
+
+    xi = Staff(client, db, [])
+    _grant(client, finance, xi, package(11))
+    assert _form(client, xi, physics["chapter"]).status_code == 201  # its own class still opens
+    _refused(combined(xi, 11), "Class 12 Physics")
+
+    xii = Staff(client, db, [])
+    _grant(client, finance, xii, package(12))
+    _refused(combined(xii, 12), "Class 11 Physics")
+
+    both = Staff(client, db, [])
+    _grant(client, finance, both, package(11, 12))
+    assert combined(both, 11).status_code == 201
+    assert combined(_learner(client), 11).status_code == 201  # the trial opens everything
