@@ -15,13 +15,14 @@ from portal_api.db import get_session
 from portal_api.errors import Forbidden, NotFound
 from portal_api.modules.access import service as access
 from portal_api.modules.audit.models import AuditEvent
-from portal_api.modules.content import blocks, duplicates, item_stats, kinds, reading, workflow
+from portal_api.modules.content import blocks, book_mistakes, duplicates, item_stats, kinds, reading, workflow
 from portal_api.modules.content.models import Availability, ContentItem, ContentVersion, ItemState
 from portal_api.modules.content.schemas import (
     AccessTierIn,
     Actions,
     AssignIn,
     BookExercisesOut,
+    BookMistakesOut,
     ChangeReasonIn,
     DraftIn,
     HistoryEvent,
@@ -691,6 +692,41 @@ def book_exercises(
     response.headers["Cache-Control"] = "private, no-store"
     response.headers["Vary"] = "Authorization"
     return reading.book_exercises(db, who, grade, subject)
+
+
+@public.get(
+    "/grades/{grade}/subjects/{subject}/book-mistakes",
+    response_model=BookMistakesOut,
+    summary="How many printed mistakes each chapter and topic of one class's book has, for Practice (no lesson text)",
+)
+def book_mistakes_summary(
+    db: DB,
+    who: OptionalPrincipal,
+    response: Response,
+    grade: Annotated[int, Path(ge=11, le=12)],
+    subject: Annotated[str, Path(min_length=2, max_length=40)],
+) -> BookMistakesOut:
+    """BOOK-MISTAKES-01. Staff in scope also count drafts, so the answer depends on the caller: not shared-cached."""
+    response.headers["Cache-Control"] = "private, no-store"
+    response.headers["Vary"] = "Authorization"
+    return book_mistakes.book_mistakes(db, who, grade, subject)
+
+
+@public.get(
+    "/chapters/{chapter_id}/book-mistakes",
+    response_model=BookMistakesOut,
+    summary="One chapter's printed mistakes, each with its correction, as the English lessons show them",
+)
+def chapter_book_mistakes(
+    db: DB,
+    who: OptionalPrincipal,
+    response: Response,
+    chapter_id: uuid.UUID,
+) -> BookMistakesOut:
+    """BOOK-MISTAKES-01. Premium lesson text goes only to an entitled caller; the response is personal."""
+    response.headers["Cache-Control"] = "private, no-store"
+    response.headers["Vary"] = "Authorization"
+    return book_mistakes.chapter_mistakes(db, who, chapter_id)
 
 
 @public.get(

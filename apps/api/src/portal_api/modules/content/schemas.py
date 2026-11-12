@@ -329,6 +329,47 @@ class BookExercisesOut(BaseModel):
     long_sets: list[BookExerciseOut] = []
 
 
+class BookMistakeOut(BaseModel):
+    """BOOK-MISTAKES-01: one printed mistake, as the English lesson shows it: the printed passage (its wrong words carry
+    `book_errors` marks; a wrong figure or question is the block itself) and the green correction box or boxes."""
+
+    context: list[dict[str, Any]]
+    corrections: list[dict[str, Any]]
+
+
+class BookMistakeTopicOut(BaseModel):
+    topic_id: uuid.UUID
+    number: str | None
+    title: str
+    # The end-of-chapter exercise and other Practice-only topics open in Practice, not Learn.
+    practice_only: bool
+    availability: Literal["published", "private_preview"]
+    lesson_id: uuid.UUID
+    # A premium lesson for a caller without a plan or trial: counted, but no lesson text is sent.
+    locked: bool
+    count: int
+    # Filled for one chapter (`/chapters/{id}/book-mistakes`); empty in the whole-book summary and when locked.
+    mistakes: list[BookMistakeOut] = []
+
+
+class BookMistakeChapterOut(BaseModel):
+    chapter_id: uuid.UUID
+    number: int
+    title: str
+    count: int
+    # Only topics with at least one mistake, in the book's reading order, then the exercise.
+    topics: list[BookMistakeTopicOut]
+
+
+class BookMistakesOut(BaseModel):
+    grade_number: int
+    subject_code: str
+    subject_name: str
+    chapter_label: str
+    total: int
+    chapters: list[BookMistakeChapterOut]
+
+
 class VariantOut(BaseModel):
     item_id: uuid.UUID
     language: Literal["en", "ur", "roman_ur"]
