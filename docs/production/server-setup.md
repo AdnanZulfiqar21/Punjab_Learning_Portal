@@ -19,6 +19,7 @@ development value (`apps/api/src/portal_api/config.py`, `apps/web/src/lib/runtim
 | `PORTAL_UPLOAD_SCANNER` | API | `clamd`, with `PORTAL_CLAMD_HOST` and `PORTAL_CLAMD_PORT` | Needs a running ClamAV. Set `StreamMaxLength 45M` in `clamd.conf`: the default 25M is below the 40 MB upload limit |
 | `PORTAL_TRIAL_DEVICE_EVIDENCE` | API | `required` or `fallback` | Must be chosen explicitly |
 | `PORTAL_TRIAL_REF_PEPPER` | API | a new random secret | The development value is refused |
+| `PORTAL_MFA_SECRET_KEY` | API | a new random secret, 32 characters or more | Encrypts staff authenticator secrets (STAFF-MFA-01). Keep it for the life of the deployment: if it changes, everyone sets two-step sign-in up again |
 
 The web server's production check refuses an API address on `localhost` or `127.0.0.1`. On a single machine, give the
 API an internal host name (a compose service name or a hosts-file entry) and use that in `PORTAL_API_INTERNAL_ORIGIN`.
@@ -101,6 +102,14 @@ None of these is done by the application itself. Each one must be set up on the 
   export files (these are written to local disk even with `PORTAL_EVIDENCE_STORE=s3`).
 - Schedule the orphan sweep, export expiry and upload reconcile commands.
 
+**Staff two-step sign-in (STAFF-MFA-01)**
+- The first owner: sign up, then `portal-grant-role --email … --role owner_admin --reason …` on the server.
+- Every staff member turns on two-step sign-in under Account, with an authenticator app, and keeps the recovery codes.
+  Publishing, roles, finance, audit and operations answer 403 until the code has been entered on that device (it
+  lasts twelve hours).
+- A lost phone with no recovery codes: `portal-mfa-reset --email … --reason …` on the server, after checking who is
+  asking. Never loosen the MFA list or enable the development sign-in instead.
+
 **After every deploy (smoke checks)**
 - `POST /v1/dev-auth/token` answers 404 and `/docs` answers 404.
 - `GET /v1/runtime-config` says `production` and lists only `password` under `sign_in_methods`.
@@ -111,7 +120,3 @@ None of these is done by the application itself. Each one must be set up on the 
 
 - Promotional emails: sign-up stores an opt-in only. A campaign sender still has to check consent and the suppression
   list and add an unsubscribe link before any promotion is sent.
-- Real staff MFA (the development simulation is off in deployed roles). Until it exists, no session can carry a
-  second factor on the server, so every staff action that needs one (publishing, roles, finance, audit, operations)
-  answers 403 there. The first owner role is given with `portal-grant-role`. Never loosen the MFA list or enable the
-  development sign-in to get round this.
