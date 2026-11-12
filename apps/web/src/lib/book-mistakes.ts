@@ -1,10 +1,18 @@
 // BOOK-MISTAKES-01 (owner, 2026-11-12): Practice → Book mistakes lists the errors printed in a textbook, by chapter and
-// topic, each with its correction. The owner reviews one book first (Class 11 Physics); the others open once they
-// approve it. A book not listed here shows a short "being checked" notice instead of its list.
-export const BOOK_MISTAKES_READY: readonly (readonly [number, string])[] = [[11, "physics"]];
+// topic, each with its correction. Owner, same day: check every box against the printed page before it is shown, and
+// add the books chapter by chapter as they are checked (Maths is not listed). A chapter shows here only once each of
+// its boxes has been checked against the printed page; the others say "being checked".
+export const BOOK_MISTAKES_VERIFIED: Readonly<Record<string, readonly number[]>> = {
+  "11/physics": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+};
 
-export const bookMistakesReady = (grade: number, subject: string) =>
-  BOOK_MISTAKES_READY.some(([g, s]) => g === grade && s === subject);
+const verified = (grade: number, subject: string) => BOOK_MISTAKES_VERIFIED[`${grade}/${subject}`] ?? [];
+
+/** Whether any chapter of the book has been checked. */
+export const bookMistakesReady = (grade: number, subject: string) => verified(grade, subject).length > 0;
+
+/** Whether this chapter's mistakes have been checked against the printed book. */
+export const chapterVerified = (grade: number, subject: string, chapter: number) => verified(grade, subject).includes(chapter);
 
 /** "1 mistake", "3 mistakes". */
 export const mistakeCount = (n: number) => `${n} ${n === 1 ? "mistake" : "mistakes"}`;

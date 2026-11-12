@@ -8,7 +8,7 @@ import { ClassSubjectFilter, PracticeIcon } from "@/components/practice-ui";
 import { SectionHeader } from "@/components/section-header";
 import { StatChip } from "@/components/stat-chip";
 import { Badge, Breadcrumbs, Notice, SkeletonCards } from "@/components/ui";
-import { bookMistakesReady, mistakeCount } from "@/lib/book-mistakes";
+import { bookMistakesReady, chapterVerified, mistakeCount } from "@/lib/book-mistakes";
 import { GRADE_LABEL } from "@/lib/format";
 import { subjectKey } from "@/lib/learn-context";
 import { SUBJECTS as ALL_SUBJECTS } from "@/lib/practice";
@@ -58,6 +58,9 @@ async function Book({ grade: rawGrade, subject: rawSubject }: { grade?: string; 
     );
   }
   const res = await api<BookMistakes>(`/v1/grades/${grade}/subjects/${encodeURIComponent(subject)}/book-mistakes`, user ? { token: user.token } : {});
+  // Only chapters checked against the printed book count and open; the rest are still being checked.
+  const checked = (n: number) => chapterVerified(grade, subject, n);
+  const total = res.ok ? res.data.chapters.reduce((sum, c) => sum + (checked(c.number) ? c.count : 0), 0) : 0;
   return (
     <div className="space-y-8" data-subject={subjectKey(subject)}>
       {filter}
@@ -65,7 +68,7 @@ async function Book({ grade: rawGrade, subject: rawSubject }: { grade?: string; 
         <Notice tone="warn" title="Couldn't load the book mistakes">
           {res.problem?.detail ?? "Please try again."}
         </Notice>
-      ) : res.data.total === 0 ? (
+      ) : total === 0 && res.data.chapters.every((c) => checked(c.number)) ? (
         <Notice title="Nothing here yet">No printed mistakes of the {book} book can be shown yet.</Notice>
       ) : (
         <section aria-labelledby="book-chapters" className="space-y-5">
@@ -73,15 +76,16 @@ async function Book({ grade: rawGrade, subject: rawSubject }: { grade?: string; 
           <p className="flex flex-wrap gap-2">
             <StatChip>
               <PracticeIcon name="book-x" size={16} className="text-accent" />
-              {mistakeCount(res.data.total)} in this book
+              {mistakeCount(total)} checked so far
             </StatChip>
             <StatChip>
               <Icon name="layers" size={16} className="text-accent" />
-              {res.data.chapters.filter((c) => c.count > 0).length} chapters
+              {res.data.chapters.filter((c) => checked(c.number)).length} of {res.data.chapters.length} chapters checked
             </StatChip>
           </p>
           <ol className="grid gap-4 sm:grid-cols-2">
             {res.data.chapters.map((c) => {
+              const open = checked(c.number) && c.count > 0;
               const inner = (
                 <>
                   <span
@@ -94,9 +98,11 @@ async function Book({ grade: rawGrade, subject: rawSubject }: { grade?: string; 
                     <span className="text-xs font-semibold tracking-wide text-muted uppercase">
                       {res.data.chapter_label} {c.number}
                     </span>
-                    <span className={`font-display text-lg leading-snug font-semibold ${c.count ? "text-foreground group-hover:text-accent" : ""}`}>{c.title}</span>
+                    <span className={`font-display text-lg leading-snug font-semibold ${open ? "text-foreground group-hover:text-accent" : ""}`}>{c.title}</span>
                     <span className="mt-auto flex flex-wrap items-center gap-2 pt-1 text-sm text-muted">
-                      {c.count ? (
+                      {!checked(c.number) ? (
+                        <Badge tone="info">Being checked</Badge>
+                      ) : c.count ? (
                         <>
                           <Badge tone="warn">{mistakeCount(c.count)}</Badge>
                           {c.topics.length} {c.topics.length === 1 ? "topic" : "topics"}
@@ -110,7 +116,7 @@ async function Book({ grade: rawGrade, subject: rawSubject }: { grade?: string; 
               );
               return (
                 <li key={c.chapter_id}>
-                  {c.count ? (
+                  {open ? (
                     <GlassCardLink href={`/practice/book-mistakes/${c.chapter_id}`} padded={false} className="group flex h-full gap-4 p-5">
                       {inner}
                     </GlassCardLink>

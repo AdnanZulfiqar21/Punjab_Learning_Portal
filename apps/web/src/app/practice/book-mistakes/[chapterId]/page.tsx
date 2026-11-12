@@ -8,7 +8,7 @@ import { LessonBlocks } from "@/components/lesson-blocks";
 import { PracticeIcon } from "@/components/practice-ui";
 import { StatChip } from "@/components/stat-chip";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
-import { bookMistakesReady, mistakeCount, topicHref } from "@/lib/book-mistakes";
+import { chapterVerified, mistakeCount, topicHref } from "@/lib/book-mistakes";
 import { premiumBook } from "@/lib/book-style";
 import { GRADE_LABEL } from "@/lib/format";
 import { subjectKey } from "@/lib/learn-context";
@@ -38,7 +38,7 @@ async function Chapter({ id }: { id: string }) {
   if (!res.ok) notFound();
   const book = res.data;
   const chapter = book.chapters[0];
-  if (!chapter || !bookMistakesReady(book.grade_number, book.subject_code)) notFound();
+  if (!chapter || !chapterVerified(book.grade_number, book.subject_code, chapter.number)) notFound();
   const subject = subjectKey(book.subject_name);
   const bookName = `${GRADE_LABEL[book.grade_number] ?? `Class ${book.grade_number}`} ${book.subject_name}`;
   const back = `/practice/book-mistakes?grade=${book.grade_number}&subject=${book.subject_code}`;
@@ -57,7 +57,10 @@ async function Chapter({ id }: { id: string }) {
             {bookName} · {book.chapter_label} {chapter.number}
           </p>
           <h1 className="font-display text-3xl leading-tight font-semibold tracking-tight sm:text-4xl">{chapter.title}</h1>
-          <p className="text-muted">What the book prints is marked in red; the green box below it gives the right version.</p>
+          <p className="text-muted">
+            What the book prints is marked in red; the green box below it gives the right version. Each one has been checked
+            against the printed page.
+          </p>
           <p className="flex flex-wrap gap-2 pt-1">
             <StatChip>
               <PracticeIcon name="book-x" size={16} className="text-accent" />
