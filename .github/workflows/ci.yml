@@ -254,8 +254,11 @@ jobs:
           set +e
           PORTAL_ROLE=production PORTAL_API_INTERNAL_ORIGIN= timeout 60 npx next start -p 3199; a=$?
           PORTAL_ROLE=production PORTAL_API_INTERNAL_ORIGIN=http://localhost:8100 timeout 60 npx next start -p 3198; b=$?
-          echo "exit codes: missing=$a dev-host=$b"
-          test "$a" = 78 && test "$b" = 78
+          # ROLE-EXPLICIT-01: a production build with no role, or a misspelt one, refuses too.
+          env -u PORTAL_ROLE timeout 60 npx next start -p 3197; c=$?
+          PORTAL_ROLE=prodution timeout 60 npx next start -p 3196; d=$?
+          echo "exit codes: missing=$a dev-host=$b no-role=$c misspelt-role=$d"
+          test "$a" = 78 && test "$b" = 78 && test "$c" = 78 && test "$d" = 78
       - uses: astral-sh/setup-uv@v10.2.0
         with:
           version: "0.12.23"
@@ -277,7 +280,7 @@ jobs:
       - name: Start web
         working-directory: apps/web
         run: |
-          nohup pnpm start > /tmp/web.log 2>&1 &
+          PORTAL_ROLE=development nohup pnpm start > /tmp/web.log 2>&1 &
           for i in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3100/ && break; sleep 1; done
       - run: pnpm --filter web exec playwright install --with-deps chromium firefox webkit  # P19.S2.T1 (BROWSERS-01)
       - name: End-to-end journeys
@@ -305,6 +308,9 @@ jobs:
         run: |
           docker buildx build -f apps/api/Dockerfile -t portal-api:ci --load --metadata-file /tmp/api-image.json .
           docker run -d --name portal-api -p 8100:8100 -e PORTAL_ROLE=development -e PORTAL_HEALTH_SAMPLE_S=0 portal-api:ci
+          # ROLE-EXPLICIT-01: with no role the image is production, and refuses to start without its settings.
+          if docker run --rm portal-api:ci > /tmp/api-norole.log 2>&1; then echo "started without a role"; exit 1; fi
+          grep -q "refusing to start role=production" /tmp/api-norole.log
           for i in $(seq 1 30); do curl -sf http://127.0.0.1:8100/healthz && break; sleep 1; done
           curl -sf http://127.0.0.1:8100/healthz
       - name: Build the web image

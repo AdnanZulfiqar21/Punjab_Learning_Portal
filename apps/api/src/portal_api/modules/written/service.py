@@ -521,6 +521,21 @@ def pages_of_file(db: Session, file_id: uuid.UUID) -> list[WrittenPage]:
     return list(db.scalars(select(WrittenPage).where(WrittenPage.file_id == file_id).order_by(WrittenPage.page_index)))
 
 
+def upload_target(db: Session, who: Principal, attempt_id: uuid.UUID, *, open_only: bool) -> None:
+    """UPLOAD-OWNER-FIRST-01 (security audit 2026-11): called before a request body is read, so the server never
+    buffers a large file for an attempt that isn't the caller's or, for page uploads (`open_only`), one that is
+    already closed. `upload_page` and `submit_rescan` make every check again. The read transaction ends here: no
+    pooled connection is held while the body arrives."""
+    try:
+        attempt = db.get(WrittenAttempt, attempt_id)
+        if attempt is None or attempt.user_id != who.user.id:
+            raise NotFound("Attempt not found.")
+        if open_only:
+            _require_open(attempt)
+    finally:
+        db.rollback()
+
+
 def upload_page(
     db: Session, who: Principal, attempt_id: uuid.UUID, data: bytes
 ) -> tuple[WrittenFile, list[WrittenPage], bool, list[str]]:

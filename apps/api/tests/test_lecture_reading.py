@@ -157,6 +157,7 @@ def test_deployed_roles_refuse_the_development_media_directory(monkeypatch: pyte
         "public_api_origin": "https://api.example.pk",
         "build_id": "abc123",
         "dev_auth_enabled": False,
+        "password_auth_enabled": False,
         "oidc_issuer": "https://id.example.pk",
         "oidc_audience": "portal",
         "evidence_store": "s3",

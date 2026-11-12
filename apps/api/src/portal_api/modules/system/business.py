@@ -53,7 +53,7 @@ def report(db: Session) -> dict[str, Any]:
     from portal_api.modules.written.models import WrittenAttempt
 
     now: datetime = db.execute(select(func.now())).scalar_one()
-    dev_issuer = get_settings().dev_auth_issuer
+    dev_issuer = get_settings().test_account_issuer
     staff = exists().where(StaffRoleGrant.user_id == AppUser.id, StaffRoleGrant.revoked_at.is_(None))
     learner = and_(AppUser.status == "active", ~staff, AppUser.issuer != dev_issuer)
     learner_ids = select(AppUser.id).where(learner)

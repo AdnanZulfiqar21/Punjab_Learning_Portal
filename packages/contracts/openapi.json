@@ -232,6 +232,24 @@
         "title": "AcademicReviewOut",
         "type": "object"
       },
+      "AcceptedOut": {
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "string"
+          },
+          "status": {
+            "default": "accepted",
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "detail"
+        ],
+        "title": "AcceptedOut",
+        "type": "object"
+      },
       "AccessOut": {
         "properties": {
           "device_check": {
@@ -4586,6 +4604,21 @@
         "title": "EconomicsReport",
         "type": "object"
       },
+      "EmailIn": {
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "format": "email",
+            "title": "Email",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email"
+        ],
+        "title": "EmailIn",
+        "type": "object"
+      },
       "Engagement": {
         "properties": {
           "learners_completing": {
@@ -8677,6 +8710,18 @@
             "title": "Consents",
             "type": "array"
           },
+          "date_of_birth": {
+            "anyOf": [
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Date Of Birth"
+          },
           "display_name": {
             "anyOf": [
               {
@@ -8699,6 +8744,17 @@
             ],
             "title": "Email"
           },
+          "first_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "First Name"
+          },
           "id": {
             "format": "uuid",
             "title": "Id",
@@ -8707,6 +8763,17 @@
           "mfa_session": {
             "title": "Mfa Session",
             "type": "boolean"
+          },
+          "phone": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Phone"
           },
           "profile": {
             "anyOf": [
@@ -8728,6 +8795,17 @@
           "status": {
             "title": "Status",
             "type": "string"
+          },
+          "surname": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Surname"
           }
         },
         "required": [
@@ -12602,6 +12680,75 @@
         "title": "ReferenceIn",
         "type": "object"
       },
+      "RegisterIn": {
+        "additionalProperties": false,
+        "properties": {
+          "date_of_birth": {
+            "description": "Required (owner 2026-11-11); not verified",
+            "format": "date",
+            "title": "Date Of Birth",
+            "type": "string"
+          },
+          "display_name": {
+            "anyOf": [
+              {
+                "maxLength": 120,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Defaults to first name + surname",
+            "title": "Display Name"
+          },
+          "email": {
+            "format": "email",
+            "title": "Email",
+            "type": "string"
+          },
+          "first_name": {
+            "maxLength": 60,
+            "minLength": 1,
+            "title": "First Name",
+            "type": "string"
+          },
+          "marketing_emails": {
+            "default": false,
+            "title": "Marketing Emails",
+            "type": "boolean"
+          },
+          "password": {
+            "maxLength": 200,
+            "minLength": 10,
+            "title": "Password",
+            "type": "string"
+          },
+          "phone": {
+            "description": "Mobile number, e.g. 0300 1234567 or +92 300 1234567",
+            "maxLength": 30,
+            "minLength": 7,
+            "title": "Phone",
+            "type": "string"
+          },
+          "surname": {
+            "maxLength": 60,
+            "minLength": 1,
+            "title": "Surname",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password",
+          "first_name",
+          "surname",
+          "phone",
+          "date_of_birth"
+        ],
+        "title": "RegisterIn",
+        "type": "object"
+      },
       "RegradeAttemptsOut": {
         "properties": {
           "items": {
@@ -13136,6 +13283,35 @@
           "code"
         ],
         "title": "ReportRow",
+        "type": "object"
+      },
+      "ResetIn": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "description": "The 6-digit code from the email",
+            "pattern": "^\\s*\\d{6}\\s*$",
+            "title": "Code",
+            "type": "string"
+          },
+          "email": {
+            "format": "email",
+            "title": "Email",
+            "type": "string"
+          },
+          "new_password": {
+            "maxLength": 200,
+            "minLength": 10,
+            "title": "New Password",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "code",
+          "new_password"
+        ],
+        "title": "ResetIn",
         "type": "object"
       },
       "ResultCounts": {
@@ -14918,6 +15094,28 @@
           "expires_at"
         ],
         "title": "SessionOut",
+        "type": "object"
+      },
+      "SignInIn": {
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "format": "email",
+            "title": "Email",
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Password",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ],
+        "title": "SignInIn",
         "type": "object"
       },
       "SignalOut": {
@@ -16736,6 +16934,30 @@
         "title": "TimelineOut",
         "type": "object"
       },
+      "TokenOut": {
+        "properties": {
+          "access_token": {
+            "title": "Access Token",
+            "type": "string"
+          },
+          "expires_in": {
+            "title": "Expires In",
+            "type": "integer"
+          },
+          "token_type": {
+            "const": "Bearer",
+            "default": "Bearer",
+            "title": "Token Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "access_token",
+          "expires_in"
+        ],
+        "title": "TokenOut",
+        "type": "object"
+      },
       "TopicAvailability": {
         "properties": {
           "number": {
@@ -18141,22 +18363,6 @@
         "title": "VariantOut",
         "type": "object"
       },
-      "VerifyIn": {
-        "properties": {
-          "note": {
-            "description": "What you checked against the official source",
-            "maxLength": 2000,
-            "minLength": 10,
-            "title": "Note",
-            "type": "string"
-          }
-        },
-        "required": [
-          "note"
-        ],
-        "title": "VerifyIn",
-        "type": "object"
-      },
       "VersionOut": {
         "properties": {
           "approved_at": {
@@ -19313,6 +19519,22 @@
         "title": "ReviewIn",
         "type": "object"
       },
+      "portal_api__modules__assessment__router__VerifyIn": {
+        "properties": {
+          "note": {
+            "description": "What you checked against the official source",
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Note",
+            "type": "string"
+          }
+        },
+        "required": [
+          "note"
+        ],
+        "title": "VerifyIn",
+        "type": "object"
+      },
       "portal_api__modules__assessment__schemas__ComparisonOut": {
         "description": "P12.S2.T3 (COMPARISON-01): how a scheduled session's fixed-form result compares with other learners'.",
         "properties": {
@@ -19641,6 +19863,28 @@
           "markdown"
         ],
         "title": "DraftIn",
+        "type": "object"
+      },
+      "portal_api__modules__identity__password_auth__VerifyIn": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "description": "The 6-digit code from the email",
+            "pattern": "^\\s*\\d{6}\\s*$",
+            "title": "Code",
+            "type": "string"
+          },
+          "email": {
+            "format": "email",
+            "title": "Email",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "code"
+        ],
+        "title": "VerifyIn",
         "type": "object"
       },
       "portal_api__modules__identity__schemas__RevokeIn": {
@@ -20639,7 +20883,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/VerifyIn"
+                "$ref": "#/components/schemas/portal_api__modules__assessment__router__VerifyIn"
               }
             }
           },
@@ -22039,6 +22283,287 @@
         "summary": "Final submission (idempotent)",
         "tags": [
           "practice"
+        ]
+      }
+    },
+    "/v1/auth/password-reset/check": {
+      "post": {
+        "operationId": "check_password_reset_v1_auth_password_reset_check_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/portal_api__modules__identity__password_auth__VerifyIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Check a password reset code before choosing a password",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/password-reset/confirm": {
+      "post": {
+        "operationId": "confirm_password_reset_v1_auth_password_reset_confirm_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Set a new password with the emailed code",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/password-reset/request": {
+      "post": {
+        "description": "Always 202, so the answer doesn't reveal which emails have accounts. Within the code limits nothing new is\nsent; the code already in the inbox still works.",
+        "operationId": "request_password_reset_v1_auth_password_reset_request_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcceptedOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Email a password reset code",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/register": {
+      "post": {
+        "operationId": "register_v1_auth_register_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcceptedOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create an account; emails a code",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/resend-code": {
+      "post": {
+        "operationId": "resend_code_v1_auth_resend_code_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcceptedOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Email a new verification code",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/token": {
+      "post": {
+        "operationId": "token_v1_auth_token_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignInIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Sign in with email and password",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
+    "/v1/auth/verify-email": {
+      "post": {
+        "operationId": "verify_email_v1_auth_verify_email_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/portal_api__modules__identity__password_auth__VerifyIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Confirm the email with its code and sign in",
+        "tags": [
+          "auth"
         ]
       }
     },

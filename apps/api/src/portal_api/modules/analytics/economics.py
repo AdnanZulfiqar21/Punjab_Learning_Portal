@@ -144,7 +144,7 @@ def _populations(db: Session, now: datetime) -> dict[str, Any]:
     from portal_api.modules.identity.models import AppUser, StaffRoleGrant
 
     staff = exists().where(StaffRoleGrant.user_id == AppUser.id, StaffRoleGrant.revoked_at.is_(None))
-    learner = and_(AppUser.status == "active", ~staff, AppUser.issuer != get_settings().dev_auth_issuer)
+    learner = and_(AppUser.status == "active", ~staff, AppUser.issuer != get_settings().test_account_issuer)
     paid_now = exists().where(
         Entitlement.user_id == AppUser.id,
         Entitlement.source == "paid",

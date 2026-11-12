@@ -102,7 +102,7 @@ def overview(db: Session) -> list[dict[str, Any]]:
             "name": "Email delivery",
             "adapter": s.notification_email_adapter,
             "mode": {"dev_outbox": "development", "none": "unavailable"}.get(s.notification_email_adapter, "live"),
-            "blocker": "B04" if s.notification_email_adapter == "none" else None,
+            "blocker": "B04" if s.notification_email_adapter == "none" else None,  # Resend once configured
             "health": "not_checked",
             "usage_24h": email,
             "budget_daily": s.email_daily_budget,

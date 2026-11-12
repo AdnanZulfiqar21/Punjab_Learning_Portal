@@ -268,6 +268,7 @@ def test_production_refuses_the_development_email_adapter() -> None:
         "public_api_origin": "https://api.example.invalid",
         "build_id": "abc123",
         "dev_auth_enabled": False,
+        "password_auth_enabled": False,
         "oidc_issuer": "https://issuer.example.invalid",
         "oidc_audience": "portal",
         "evidence_store": "s3",

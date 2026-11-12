@@ -1,5 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // P04.S1.T3: the devices using a learner's free trial are listed on the account page and can be removed after a second
 // confirmation. The "phone" is a labelled technical fixture registered through the API's development/test evidence
@@ -15,7 +16,9 @@ test("a learner sees the devices on their free trial and removes one", async ({ 
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(`e2e-trial-devices-${hex().slice(0, 12)}@example.com`);
   await page.getByLabel("Password").fill("trial-devices-fixture-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/(account|onboarding)/, AUTH);
 
   const session = (await context.cookies()).find((c) => c.name === "portal_session");

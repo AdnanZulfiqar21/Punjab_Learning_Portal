@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // P19.S2.T1 (BROWSERS-01): the core journeys in every supported engine — Chromium (Chrome, Edge), Firefox and WebKit
 // (Safari, and iPhone browsers, which all use WebKit) — with keyboard-only checks. The supported range and known limits
@@ -35,7 +36,10 @@ test("keyboard: the skip link reaches the content, and sign-up works without a m
   await page.keyboard.type(`e2e-browsers-${browserName}-${Date.now()}@example.com`);
   await page.getByLabel("Password").focus();
   await page.keyboard.type("browsers-fixture-pass-1");
+  await fillSignupExtras(page); // names, mobile number and date of birth (filled, not clicked)
+  await page.getByLabel("Password").focus();
   await page.keyboard.press("Enter"); // submits the form
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/practice\?/, AUTH);
 });
 
@@ -45,7 +49,9 @@ test("practice: start a test, answer by keyboard where available, and submit", a
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(`e2e-browsers-practice-${browserName}-${Date.now()}@example.com`);
   await page.getByLabel("Password").fill("browsers-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/practice\?/, AUTH);
   await page.getByRole("button", { name: "Start my free 30-day trial" }).click();
   await expect(page.getByText(/Free trial until/)).toBeVisible(AUTH);

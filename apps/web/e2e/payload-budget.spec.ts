@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // P11.S4.T1 (PERF-01): initial client JavaScript budget per learner route, measured as transferred (compressed) bytes
 // from Resource Timing on a production build. Measured 2026-10-11: 140–148 KB on every learner route (mostly the
@@ -36,7 +37,9 @@ test("learner routes, including the exam room, stay within the initial JavaScrip
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(`e2e-budget-${Date.now()}-${Math.random().toString(36).slice(2, 7)}@example.com`);
   await page.getByLabel("Password").fill("budget-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/(account|onboarding)(\?|$)/, AUTH);
   await page.goto("/practice?grade=11&subject=biology");
   await page.getByRole("button", { name: "Start my free 30-day trial" }).click();

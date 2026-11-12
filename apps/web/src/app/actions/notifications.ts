@@ -4,6 +4,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import type { NotificationPreferences, Problem } from "@portal/contracts";
+import { safeAppPath } from "@/lib/safe-path";
 import { api, sessionToken } from "@/lib/session";
 
 async function token(next: string): Promise<string> {
@@ -17,7 +18,7 @@ export async function openNotification(id: string, link: string | null): Promise
   const t = await token("/notifications");
   await api<null>(`/v1/me/notifications/${encodeURIComponent(id)}/read`, { method: "POST", token: t });
   revalidatePath("/notifications");
-  redirect(link && link.startsWith("/") && !link.startsWith("//") ? link : "/notifications");
+  redirect(safeAppPath(link, "/notifications"));
 }
 
 export async function readAllNotifications(): Promise<void> {

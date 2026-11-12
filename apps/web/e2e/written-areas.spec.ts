@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // W03.S2.T2 (REGION-MAP-01): one photographed page holds the answers to two parts. Submitting is held until the page's
 // numbering is clear: marking each part's area (here by keyboard-friendly preset buttons) settles it, the areas are
@@ -13,7 +14,9 @@ test("a page shared by two parts is submitted once each part's area is marked", 
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill(PASSWORD);
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/practice\?/, AUTH);
   await page.getByRole("button", { name: "Start my free 30-day trial" }).click();
   await expect(page.getByText(/Free trial until/)).toBeVisible(AUTH);

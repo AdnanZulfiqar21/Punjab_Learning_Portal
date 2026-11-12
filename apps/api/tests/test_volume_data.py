@@ -32,7 +32,7 @@ def test_a_small_run_matches_what_the_application_computes(physics: dict[str, An
 
     with get_sessionmaker()() as db:
         users = list(db.scalars(select(AppUser).where(AppUser.subject.like(f"load-{run}-%"))))
-        assert len(users) == 3 and {u.issuer for u in users} == {get_settings().dev_auth_issuer}  # test accounts
+        assert len(users) == 3 and {u.issuer for u in users} == {get_settings().test_account_issuer}  # test accounts
         ids = [u.id for u in users]
         tries = list(db.scalars(select(Attempt).where(Attempt.user_id.in_(ids))))
         assert len(tries) == 6 and {a.status for a in tries} == {"finalised"}
