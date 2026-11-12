@@ -113,7 +113,8 @@ test("a forgotten password is reset with the emailed code, then the new one sign
   await page.goto("/signin");
   await page.getByRole("link", { name: "Forgot password?" }).click();
   await expect(page.getByRole("heading", { name: "Reset your password" })).toBeVisible();
-  await page.getByLabel("Email").fill(email);
+  // By role: Next keeps the sign-in page in the document (hidden) after the link, with its own "Email" field.
+  await page.getByRole("textbox", { name: "Email", exact: true }).fill(email);
   await page.getByRole("button", { name: "Send code" }).click();
   await expect(page.getByTestId("reset-email")).toHaveText(email, AUTH);
   // A wrong code is refused before any new password is asked for.
