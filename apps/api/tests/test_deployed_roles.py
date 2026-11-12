@@ -34,6 +34,7 @@ DEPLOYED_ENV = {
     "PORTAL_EVIDENCE_S3_SECRET_KEY": "deployed-secret-value",  # pragma: allowlist secret
     "PORTAL_TRIAL_DEVICE_EVIDENCE": "fallback",
     "PORTAL_TRIAL_REF_PEPPER": "deployment-secret-fixture",
+    "PORTAL_MFA_SECRET_KEY": "deployment-mfa-secret-fixture-0123456789",  # pragma: allowlist secret
     "PORTAL_NOTIFICATION_EMAIL_ADAPTER": "none",  # P15.S1: the dev outbox is refused in deployed roles
     "PORTAL_UPLOAD_SCANNER": "clamd",  # P06.S4.T1
 }

@@ -47,6 +47,8 @@ EXPORTED_TABLES = frozenset(
 NOT_EXPORTED = {
     "dev_credential": "a sign-in secret (password hash; the portal's own accounts, AUTH-PASSWORD-01)",
     "email_code": "one-time sign-up code hashes",
+    "totp_credential": "a sign-in secret (the authenticator key, encrypted; STAFF-MFA-01)",
+    "totp_recovery_code": "one-time recovery code hashes",
     "push_token": "a device delivery secret",
     "notification_delivery": "provider delivery log; the notifications themselves are exported",
     "staff_role_grant": "staff authorisation, not learner data",

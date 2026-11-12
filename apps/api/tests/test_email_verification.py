@@ -341,6 +341,7 @@ DEPLOYED: dict[str, Any] = {
     "evidence_s3_secret_key": "deployed-secret-value",  # pragma: allowlist secret
     "trial_device_evidence": "fallback",
     "trial_ref_pepper": "deployment-secret-fixture",
+    "mfa_secret_key": "deployment-mfa-secret-fixture-0123456789",  # pragma: allowlist secret
     "upload_scanner": "clamd",
     "password_auth_issuer": "https://api.example.org/auth",  # pragma: allowlist secret
     "notification_email_adapter": "resend",
@@ -405,6 +406,7 @@ def test_deployed_app_mounts_sign_up_but_not_the_dev_shortcuts(monkeypatch: pyte
         "PORTAL_EVIDENCE_S3_SECRET_KEY": DEPLOYED["evidence_s3_secret_key"],
         "PORTAL_TRIAL_DEVICE_EVIDENCE": "fallback",
         "PORTAL_TRIAL_REF_PEPPER": "deployment-secret-fixture",
+        "PORTAL_MFA_SECRET_KEY": "deployment-mfa-secret-fixture-0123456789",  # pragma: allowlist secret
         "PORTAL_UPLOAD_SCANNER": "clamd",
         "PORTAL_PASSWORD_AUTH_ISSUER": DEPLOYED["password_auth_issuer"],
         "PORTAL_PASSWORD_AUTH_SIGNING_KEY": _pem(),
