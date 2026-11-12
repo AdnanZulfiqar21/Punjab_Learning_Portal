@@ -1,5 +1,6 @@
 // BOOK-MOCK-01 (owner, 2026-11-13): Practice → Book Mock Test has two tabs, "Full book mock test" and "Half book mock
-// test". A half book is the book split in two (e.g. chapters 1-6 and 7-12). Each test is a full Board-pattern paper put
+// test". A half book is the book split in two (e.g. chapters 1-6 and 7-12). Owner, same day: a third kind, the book in
+// four parts ("12 chapter ko 4 hisso ma ... 3 3"): "Quarter book mock test" (e.g. chapters 1-3, 4-6, 7-9, 10-12). Each test is a full Board-pattern paper put
 // together from the chapters' own practice questions (Chapter practice), as many tests as the questions allow without
 // repeating a question. Owner, same day: "seedhy seedhy mt banana, shuffle kr ka tricky sa banana": the questions are
 // drawn at random from all the chapters, mixed together, and the MCQ options are shuffled. Every test is still the same
@@ -18,38 +19,51 @@ import {
 /** A stretch of the book with its own numbered tests. */
 export type BookPart = { key: string; from: number; to: number; tests: number };
 
-/** What a book offers: the full book, and the two halves. */
-export type BookMocks = { full: BookPart; halves: BookPart[] };
+/** What a book offers: the full book, its two halves and its four quarters. */
+export type BookMocks = { full: BookPart; halves: BookPart[]; quarters: BookPart[] };
+
+/** The three kinds of book mock test (the page's tabs). */
+export type BookMockKind = "full" | "half" | "quarter";
+
+/** A kind's parts: the full book alone, the halves or the quarters. */
+export const partsOf = (b: BookMocks, kind: BookMockKind): BookPart[] =>
+  kind === "full" ? [b.full] : kind === "half" ? b.halves : b.quarters;
 
 const part = (from: number, to: number, tests: number): BookPart => ({ key: `${from}-${to}`, from, to, tests });
 
-/** Books with book mock tests, by "subject-grade". A half book is the first and second half of the book's chapters (an
- * odd count gives the first half one more). `tests` is how many Board papers the practice questions fill without
+/** Books with book mock tests, by "subject-grade". A half book is the first and second half of the book's chapters, a
+ * quarter one of four parts (a count that does not divide evenly gives the first parts one more chapter). `tests` is how many Board papers the practice questions fill without
  * repeating a question: the smallest of MCQs / paper MCQs, short questions / paper short questions and Section-II
  * questions / 5 (counted 2026-11-13 from the practice sets; e.g. Physics 11 chapters 1-6 have 811 MCQs, 434 short
  * questions and 76 long pairs: 13 papers of 17, 33 and 5). Owner: Physics 11 first, then every book the same day. */
 export const BOOK_OPEN: Record<string, BookMocks> = {
-  "physics-11": { full: part(1, 12, 26), halves: [part(1, 6, 13), part(7, 12, 13)] },
-  "physics-12": { full: part(13, 21, 20), halves: [part(13, 17, 11), part(18, 21, 8)] },
-  "chemistry-11": { full: part(1, 16, 34), halves: [part(1, 8, 18), part(9, 16, 16)] },
-  "chemistry-12": { full: part(17, 33, 32), halves: [part(17, 25, 17), part(26, 33, 15)] },
-  "biology-11": { full: part(1, 12, 20), halves: [part(1, 6, 11), part(7, 12, 9)] },
-  "biology-12": { full: part(13, 25, 22), halves: [part(13, 19, 12), part(20, 25, 8)] },
-  "computer_science-11": { full: part(1, 9, 21), halves: [part(1, 5, 13), part(6, 9, 7)] },
-  "computer_science-12": { full: part(1, 9, 19), halves: [part(1, 5, 9), part(6, 9, 9)] },
-  "mathematics-11": { full: part(1, 14, 19), halves: [part(1, 7, 9), part(8, 14, 9)] },
-  "mathematics-12": { full: part(1, 11, 16), halves: [part(1, 6, 10), part(7, 11, 6)] },
+  "physics-11": { full: part(1, 12, 26), halves: [part(1, 6, 13), part(7, 12, 13)], quarters: [part(1, 3, 6), part(4, 6, 6), part(7, 9, 7), part(10, 12, 5)] },
+  "chemistry-11": { full: part(1, 16, 34), halves: [part(1, 8, 18), part(9, 16, 16)], quarters: [part(1, 4, 9), part(5, 8, 9), part(9, 12, 9), part(13, 16, 6)] },
+  "biology-11": { full: part(1, 12, 20), halves: [part(1, 6, 11), part(7, 12, 9)], quarters: [part(1, 3, 6), part(4, 6, 5), part(7, 9, 4), part(10, 12, 4)] },
+  "computer_science-11": { full: part(1, 9, 21), halves: [part(1, 5, 13), part(6, 9, 7)], quarters: [part(1, 3, 8), part(4, 5, 5), part(6, 7, 4), part(8, 9, 3)] },
+  "mathematics-11": { full: part(1, 14, 19), halves: [part(1, 7, 9), part(8, 14, 9)], quarters: [part(1, 4, 5), part(5, 8, 5), part(9, 11, 3), part(12, 14, 4)] },
+  "physics-12": { full: part(13, 21, 20), halves: [part(13, 17, 11), part(18, 21, 8)], quarters: [part(13, 15, 6), part(16, 17, 5), part(18, 19, 4), part(20, 21, 4)] },
+  "chemistry-12": { full: part(17, 33, 32), halves: [part(17, 25, 17), part(26, 33, 15)], quarters: [part(17, 21, 10), part(22, 25, 7), part(26, 29, 7), part(30, 33, 8)] },
+  "biology-12": { full: part(13, 25, 22), halves: [part(13, 19, 12), part(20, 25, 8)], quarters: [part(13, 16, 7), part(17, 19, 5), part(20, 22, 5), part(23, 25, 3)] },
+  "computer_science-12": { full: part(1, 9, 19), halves: [part(1, 5, 9), part(6, 9, 9)], quarters: [part(1, 3, 6), part(4, 5, 3), part(6, 7, 4), part(8, 9, 4)] },
+  "mathematics-12": { full: part(1, 11, 16), halves: [part(1, 6, 10), part(7, 11, 6)], quarters: [part(1, 3, 6), part(4, 6, 4), part(7, 9, 3), part(10, 11, 2)] },
 };
 
 export const bookMocks = (subject: string, grade: number): BookMocks | undefined => BOOK_OPEN[`${subject}-${grade}`];
 
-/** The full book or a half, by its key ("1-12", "1-6"). */
-export function bookPart(subject: string, grade: number, key: string): { part: BookPart; half: boolean } | undefined {
+/** The full book, a half or a quarter, by its key ("1-12", "1-6", "1-3"). */
+export function bookPart(
+  subject: string,
+  grade: number,
+  key: string,
+): { part: BookPart; kind: BookMockKind } | undefined {
   const b = bookMocks(subject, grade);
   if (!b) return undefined;
-  if (b.full.key === key) return { part: b.full, half: false };
-  const h = b.halves.find((x) => x.key === key);
-  return h ? { part: h, half: true } : undefined;
+  for (const kind of ["full", "half", "quarter"] as const) {
+    const part = partsOf(b, kind).find((x) => x.key === key);
+    if (part) return { part, kind };
+  }
+  return undefined;
 }
 
 /** "Chapters 1–6". */

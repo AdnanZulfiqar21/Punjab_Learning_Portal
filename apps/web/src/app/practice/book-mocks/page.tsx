@@ -7,7 +7,7 @@ import { Icon, subjectIconName } from "@/components/icons";
 import { PageHero } from "@/components/page-hero";
 import { SectionHeader } from "@/components/section-header";
 import { Breadcrumbs, Notice, SkeletonCards } from "@/components/ui";
-import { bookMocks, partLabel, type BookPart } from "@/lib/book-mocks";
+import { bookMocks, partLabel, partsOf, type BookMockKind } from "@/lib/book-mocks";
 import { practiceChapters } from "@/lib/exercises";
 import { GRADE_LABEL } from "@/lib/format";
 import { subjectKey } from "@/lib/learn-context";
@@ -19,12 +19,18 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-type Tab = "full" | "half";
+type Tab = BookMockKind;
+
+const TABS: { key: Tab; text: string; pick: string }[] = [
+  { key: "full", text: "Full book mock test", pick: "Each test covers the whole book." },
+  { key: "half", text: "Half book mock test", pick: "Then choose its first or second half." },
+  { key: "quarter", text: "Quarter book mock test", pick: "Then choose one of its four parts." },
+];
 
 /**
  * BOOK-MOCK-01 (owner, 2026-11-13): Book Mock Test, in two tabs. "Half book mock test": the student picks a book, then
  * a half (e.g. chapters 1–6 or 7–12), and sees its numbered tests. "Full book mock test" does the same for the whole
- * book. Each test is a Board-pattern paper from the chapters' own practice questions, mixed (see lib/book-mocks).
+ * book. Owner, same day: "Quarter book mock test" does the same with the book in four parts. Each test is a Board-pattern paper from the chapters' own practice questions, mixed (see lib/book-mocks).
  */
 export default function BookMocksPage({ searchParams }: PageProps<"/practice/book-mocks">) {
   return (
@@ -35,7 +41,7 @@ export default function BookMocksPage({ searchParams }: PageProps<"/practice/boo
           align="start"
           eyebrow="Practice · Board paper pattern"
           title="Book Mock Test"
-          lead="Full Board-pattern papers from the whole book or from half of it. The questions come from every chapter, mixed. Answer the MCQs here, write the short and long answers, then check them in the Solution paper."
+          lead="Full Board-pattern papers from the whole book, half of it or a quarter of it. The questions come from every chapter, mixed. Answer the MCQs here, write the short and long answers, then check them in the Solution paper."
           backdrop={
             <span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-accent-soft opacity-50" />
           }
@@ -44,7 +50,8 @@ export default function BookMocksPage({ searchParams }: PageProps<"/practice/boo
       <Suspense fallback={<SkeletonCards count={6} label="Loading the book mock tests" />}>
         {searchParams.then((sp) => {
           const one = (k: string) => (typeof sp[k] === "string" ? (sp[k] as string) : "");
-          return <Body tab={one("tab") === "full" ? "full" : "half"} book={one("book")} part={one("part")} />;
+          const tab = TABS.find((t) => t.key === one("tab"))?.key ?? "half";
+          return <Body tab={tab} book={one("book")} part={one("part")} />;
         })}
       </Suspense>
     </div>
@@ -82,11 +89,13 @@ async function Body({ tab, book, part }: { tab: Tab; book: string; part: string 
   return (
     <div className="space-y-8">
       <TabLinks
-        label="Full book or half book"
-        items={[
-          { key: "full", text: "Full book mock test", href: href(book ? { tab: "full", book } : { tab: "full" }), active: tab === "full" },
-          { key: "half", text: "Half book mock test", href: href(book ? { tab: "half", book } : { tab: "half" }), active: tab === "half" },
-        ]}
+        label="Full, half or quarter book"
+        items={TABS.map((t) => ({
+          key: t.key,
+          text: t.text,
+          href: href(book ? { tab: t.key, book } : { tab: t.key }),
+          active: tab === t.key,
+        }))}
       />
       {mocks ? <Book tab={tab} subject={subject} grade={grade} part={part} /> : <Books tab={tab} />}
     </div>
@@ -100,7 +109,7 @@ function Books({ tab }: { tab: Tab }) {
       <SectionHeader
         id="books"
         title="Choose a book"
-        description={tab === "half" ? "Then choose its first or second half." : "Each test covers the whole book."}
+        description={TABS.find((t) => t.key === tab)!.pick}
       />
       {[11, 12].map((grade) => (
         <div key={grade} className="space-y-3">
@@ -108,7 +117,7 @@ function Books({ tab }: { tab: Tab }) {
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {SUBJECTS.map(([code, name]) => {
               const m = bookMocks(code, grade);
-              const count = m ? (tab === "full" ? m.full.tests : m.halves.reduce((a, h) => a + h.tests, 0)) : 0;
+              const count = m ? partsOf(m, tab).reduce((a, h) => a + h.tests, 0) : 0;
               const inner = (
                 <>
                   <span
@@ -159,8 +168,8 @@ async function Book({ tab, subject, grade, part: rawPart }: { tab: Tab; subject:
   );
   const chapters = res.ok ? practiceChapters(res.data) : [];
   const label = res.ok ? res.data.chapter_label : "Chapter";
-  const part: BookPart =
-    tab === "full" ? mocks.full : (mocks.halves.find((h) => h.key === rawPart) ?? mocks.halves[0]);
+  const parts = partsOf(mocks, tab);
+  const part = parts.find((h) => h.key === rawPart) ?? parts[0];
   const covered = chapters.filter((c) => c.number >= part.from && c.number <= part.to);
   return (
     <section aria-labelledby="book-tests" className="space-y-6" data-subject={subjectKey(subject)}>
@@ -168,16 +177,22 @@ async function Book({ tab, subject, grade, part: rawPart }: { tab: Tab; subject:
         <SectionHeader
           id="book-tests"
           title={`${GRADE_LABEL[grade]} ${name}`}
-          description={tab === "full" ? "Full book mock tests." : "Half book mock tests: choose a half."}
+          description={
+            tab === "full"
+              ? "Full book mock tests."
+              : tab === "half"
+                ? "Half book mock tests: choose a half."
+                : "Quarter book mock tests: choose a part."
+          }
         />
         <Link href={href({ tab })} className="text-sm font-semibold text-accent hover:underline">
           Choose another book
         </Link>
       </div>
-      {tab === "half" && (
+      {tab !== "full" && (
         <TabLinks
-          label="Which half of the book"
-          items={mocks.halves.map((h) => ({
+          label={tab === "half" ? "Which half of the book" : "Which part of the book"}
+          items={parts.map((h) => ({
             key: h.key,
             text: partLabel(h, label),
             href: href({ tab, book, part: h.key }),

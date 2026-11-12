@@ -24,7 +24,7 @@ type SetReading = {
   lesson: { body: { blocks: { type: string }[] } | null; locked?: boolean } | null;
 };
 
-/** BOOK-MOCK-01: one full-book or half-book mock test, from the chapters' own MCQ, short and long question sets. */
+/** BOOK-MOCK-01: one full-book, half-book or quarter-book mock test, from the chapters' own MCQ, short and long question sets. */
 export default function BookMockPaperPage({ searchParams }: PageProps<"/practice/book-mocks/paper">) {
   return (
     <Suspense fallback={<SkeletonCards count={3} label="Loading the mock test" />}>
@@ -40,7 +40,9 @@ async function Paper({ grade, subject, partKey, n }: { grade: number; subject: s
   const pattern = PATTERNS[subject];
   const found = bookPart(subject, grade, partKey);
   if (!pattern || !found || !Number.isInteger(n) || n < 1 || n > found.part.tests) notFound();
-  const { part, half } = found;
+  const { part, kind } = found;
+  const half = kind !== "full";
+  const kindName = kind === "full" ? "Full book" : kind === "half" ? "Half book" : "Quarter book";
   const user = await currentUser();
   const opts = user ? { token: user.token } : {};
   const book = await api<BookExercises>(`/v1/grades/${grade}/subjects/${encodeURIComponent(subject)}/exercises`, opts);
@@ -49,7 +51,7 @@ async function Paper({ grade, subject, partKey, n }: { grade: number; subject: s
     : [];
   const name = SUBJECTS.find(([c]) => c === subject)?.[1] ?? subject;
   const label = book.ok ? book.data.chapter_label : "Chapter";
-  const tab = half ? "half" : "full";
+  const tab = kind;
   const back = `/practice/book-mocks?tab=${tab}&book=${subject}-${grade}${half ? `&part=${part.key}` : ""}`;
   const crumbs = (
     <Breadcrumbs
@@ -95,7 +97,7 @@ async function Paper({ grade, subject, partKey, n }: { grade: number; subject: s
         {crumbs}
         <PageHero
           align="start"
-          eyebrow={`${GRADE_LABEL[grade]} ${name} · ${half ? "Half book" : "Full book"} mock test`}
+          eyebrow={`${GRADE_LABEL[grade]} ${name} · ${kindName} mock test`}
           title={`Mock test ${n}: ${scope}`}
           lead="Board paper pattern, with questions from every chapter mixed together. Answer the MCQs in the Question paper and submit them; write the short and long answers on paper. The Solution paper shows your MCQ result and a model answer for every part."
           backdrop={<span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-accent-soft opacity-50" />}
@@ -118,7 +120,7 @@ async function Paper({ grade, subject, partKey, n }: { grade: number; subject: s
             part: grade === 11 ? "INTERMEDIATE PART-I" : "INTERMEDIATE PART-II",
             className: `Class ${grade === 11 ? "XI" : "XII"}`,
             subject: name.toUpperCase(),
-            chapter: half ? `${scope} (half book)` : "Full book",
+            chapter: half ? `${scope} (${kindName.toLowerCase()})` : "Full book",
           }}
         />
       )}
