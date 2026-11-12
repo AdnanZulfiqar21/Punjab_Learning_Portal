@@ -56,7 +56,8 @@ DRIFT_STEPS = 1  # the code before and after the current one is accepted (a phon
 MAX_WRONG = 5
 LOCK = timedelta(minutes=15)
 RECOVERY_CODES = 8
-_RECOVERY_ALPHABET = "abcdefghjkmnpqrstuvwxyz23456789"  # no look-alikes (0/o, 1/l/i)
+# Recovery-code letters, without look-alikes (0/o, 1/l/i). Not a credential.
+_RECOVERY_ALPHABET = "abcdefghjkmnpqrstuvwxyz23456789"  # pragma: allowlist secret
 
 
 class TotpCredential(Base):
