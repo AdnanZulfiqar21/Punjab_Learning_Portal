@@ -22,6 +22,7 @@ Three separately evidenced states (roadmap §2.3). Nothing is ticked without cur
   - The manifest (`python -m portal_api.release manifest`, RELEASE-CANDIDATE-01) must be produced against the deployment database so `content_release_id` and `runtime_overrides` are not null, with image digests (B03) and the native build's OTA runtime (B07) filled in.
 - [ ] Requalification check (§6.4, P20.S4.T4, QUALIFICATION-01): on the candidate checkout with full history, take a content snapshot against the deployment database (`python -m portal_api.qualification snapshot > candidate.json`) and run `python -m portal_api.qualification impact --content candidate.json`. Every record it lists as invalidated is retested, with a new record, before its claim is reused; any other difference from a measured manifest is listed with its impact assessment. A report with no records (`standard_checks_only: null`) means no capacity, security or device claim is evidenced.
 - [ ] Store decisions, P23/W11 staged live evidence, owner launch authorization
+- [ ] Server settings in `docs/production/server-setup.md` applied and checked on the deployment: Resend email adapter, key and `no-reply@sirfconcepts.com` sender, a new password-auth signing key and public issuer, development auth off, `alembic upgrade head` as a release step, and a real sign-up and password reset received (AUTH-PASSWORD-01, SERVER-SETUP-01)
 - [ ] Production web sets `PORTAL_PUBLIC_ORIGIN`; `robots.txt` and `sitemap.xml` checked on the live host (PUBLIC-SITE-01)
 
 ## Release stop conditions (§13.1)
