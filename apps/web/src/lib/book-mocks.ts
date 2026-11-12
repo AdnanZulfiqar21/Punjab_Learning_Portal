@@ -23,11 +23,22 @@ export type BookMocks = { full: BookPart; halves: BookPart[] };
 
 const part = (from: number, to: number, tests: number): BookPart => ({ key: `${from}-${to}`, from, to, tests });
 
-/** Books with book mock tests, by "subject-grade". `tests` is how many Board papers the practice questions fill without
- * repeating a question: the short questions decide it (Physics 11: chapters 1-6 have 434 short questions, 13 papers of
- * 33; chapters 7-12 have 431, 13 papers; the whole book 865, 26 papers). Owner: Physics 11 first, for checking. */
+/** Books with book mock tests, by "subject-grade". A half book is the first and second half of the book's chapters (an
+ * odd count gives the first half one more). `tests` is how many Board papers the practice questions fill without
+ * repeating a question: the smallest of MCQs / paper MCQs, short questions / paper short questions and Section-II
+ * questions / 5 (counted 2026-11-13 from the practice sets; e.g. Physics 11 chapters 1-6 have 811 MCQs, 434 short
+ * questions and 76 long pairs: 13 papers of 17, 33 and 5). Owner: Physics 11 first, then every book the same day. */
 export const BOOK_OPEN: Record<string, BookMocks> = {
   "physics-11": { full: part(1, 12, 26), halves: [part(1, 6, 13), part(7, 12, 13)] },
+  "physics-12": { full: part(13, 21, 20), halves: [part(13, 17, 11), part(18, 21, 8)] },
+  "chemistry-11": { full: part(1, 16, 34), halves: [part(1, 8, 18), part(9, 16, 16)] },
+  "chemistry-12": { full: part(17, 33, 32), halves: [part(17, 25, 17), part(26, 33, 15)] },
+  "biology-11": { full: part(1, 12, 20), halves: [part(1, 6, 11), part(7, 12, 9)] },
+  "biology-12": { full: part(13, 25, 22), halves: [part(13, 19, 12), part(20, 25, 8)] },
+  "computer_science-11": { full: part(1, 9, 21), halves: [part(1, 5, 13), part(6, 9, 7)] },
+  "computer_science-12": { full: part(1, 9, 19), halves: [part(1, 5, 9), part(6, 9, 9)] },
+  "mathematics-11": { full: part(1, 14, 19), halves: [part(1, 7, 9), part(8, 14, 9)] },
+  "mathematics-12": { full: part(1, 11, 16), halves: [part(1, 6, 10), part(7, 11, 6)] },
 };
 
 export const bookMocks = (subject: string, grade: number): BookMocks | undefined => BOOK_OPEN[`${subject}-${grade}`];
@@ -89,6 +100,21 @@ function mixOptions(q: PaperQuestion, b: Checkpoint, seed: number): PaperQuestio
   return { ...q, options: order.map((i) => q.options![i]), key: order.indexOf(q.key) };
 }
 
+/** The same question is sometimes written twice in the practice sets: in two chapters ("State Avogadro's law." in
+ * Chemistry 11 chapters 4 and 5), or as a short and a long question of one chapter. A book mock test uses it once:
+ * Section-II keeps it, then the short questions, then the MCQs, each from the first chapter that has it. */
+function unique<T>(banks: T[][], texts: (x: T) => string[], seen: Set<string>): T[][] {
+  const key = (t: string) => t.replace(/\s+/g, " ").trim().toLowerCase();
+  return banks.map((b) =>
+    b.filter((x) => {
+      const ks = texts(x).map(key);
+      if (ks.some((k) => seen.has(k))) return false;
+      ks.forEach((k) => seen.add(k));
+      return true;
+    }),
+  );
+}
+
 /** Build book mock test n of a part from its chapters' practice sets (English lesson blocks), in chapter order. */
 export function buildBookPaper(
   pattern: MockPattern,
@@ -97,21 +123,30 @@ export function buildBookPaper(
   chapters: { mcq: { type: string }[]; short: { type: string }[]; long: { type: string }[] }[],
 ): Paper {
   const seed = part.from * 1000 + part.to * 10;
-  const mcqBanks = chapters.map((c) => checkpoints(c.mcq));
+  const prompt = (b: Checkpoint) => question(b, 0).q;
+  const seen = new Set<string>();
+  const longBanks = unique(
+    chapters.map((c) => longUnits(pattern, checkpoints(c.long))),
+    (u) => (u.b ? [prompt(u.a), prompt(u.b)] : [prompt(u.a)]),
+    seen,
+  );
+  const shortBanks = unique(
+    chapters.map((c) => checkpoints(c.short)),
+    (b) => [prompt(b)],
+    seen,
+  );
+  const mcqBanks = unique(
+    chapters.map((c) => checkpoints(c.mcq)),
+    (b) => [prompt(b)],
+    seen,
+  );
   const mcqs = shuffled(deal(mcqBanks, part.tests, n, pattern.mcqs, seed + 1), seed + n).map((b, i) =>
     mixOptions(question(b, 1), b, seed * 7 + n * 101 + i),
   );
   const shortCount = pattern.short.reduce((a, s) => a + s.asked, 0);
-  const shorts = shuffled(
-    deal(
-      chapters.map((c) => checkpoints(c.short)),
-      part.tests,
-      n,
-      shortCount,
-      seed + 2,
-    ),
-    seed + 50 + n,
-  ).map((b) => question(b, 2));
+  const shorts = shuffled(deal(shortBanks, part.tests, n, shortCount, seed + 2), seed + 50 + n).map((b) =>
+    question(b, 2),
+  );
   let at = 0;
   const short = pattern.short.map((s) => {
     const parts = shorts.slice(at, at + s.asked);
@@ -119,15 +154,9 @@ export function buildBookPaper(
     return { no: s.no, attempt: s.attempt, parts };
   });
   const [ma, mb] = pattern.long.parts;
-  const long = shuffled(
-    deal(
-      chapters.map((c) => longUnits(pattern, checkpoints(c.long))),
-      part.tests,
-      n,
-      pattern.long.asked,
-      seed + 3,
-    ),
-    seed + 90 + n,
-  ).map((u) => ({ a: question(u.a, ma), ...(u.b && mb !== undefined ? { b: question(u.b, mb) } : {}) }));
+  const long = shuffled(deal(longBanks, part.tests, n, pattern.long.asked, seed + 3), seed + 90 + n).map((u) => ({
+    a: question(u.a, ma),
+    ...(u.b && mb !== undefined ? { b: question(u.b, mb) } : {}),
+  }));
   return { pattern, mcqs, short, long };
 }
