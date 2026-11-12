@@ -10,6 +10,7 @@ export const BOOK_MISTAKES_VERIFIED: Readonly<Record<string, readonly number[]>>
   "11/biology": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
   "12/biology": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
   "11/computer_science": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  "12/computer_science": [1, 2, 3, 4, 5, 6, 7, 8, 9],
 };
 
 const verified = (grade: number, subject: string) => BOOK_MISTAKES_VERIFIED[`${grade}/${subject}`] ?? [];
