@@ -132,7 +132,7 @@ class EmailCode(Base):
 
     __tablename__ = "email_code"
     __table_args__ = (
-        CheckConstraint("purpose in ('verify_email')", name="email_code_purpose"),
+        CheckConstraint("purpose in ('verify_email','reset_password')", name="email_code_purpose"),
         Index("ix_email_code_user_purpose", "user_id", "purpose", "created_at"),
     )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)

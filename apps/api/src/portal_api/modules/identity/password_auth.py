@@ -17,6 +17,10 @@ Rules:
 * A code lasts 15 minutes and allows 5 wrong tries. Only the newest code counts. New codes: one a minute and 5 an
   hour per account. Only a salted SHA-256 of a code is stored.
 * No pooled connection is held while hashing a password or sending an email (review R08).
+* Forgotten password: a 6-digit code goes to the address (same lifetime and limits as above, counted separately).
+  Asking always answers 202, so it doesn't reveal accounts. The person enters the code first (`check`, which counts
+  wrong tries but doesn't use the code up), then chooses a new password (`confirm`, which checks the code again). That
+  sets the password, confirms the email, signs out every session and signs the person in.
 """
 
 from __future__ import annotations
@@ -44,6 +48,8 @@ from portal_api.errors import AppError, Forbidden, TooMany, Unauthorized, Unavai
 from portal_api.modules.audit.models import record
 from portal_api.modules.identity.models import AppUser, ConsentRecord, EmailCode, PasswordCredential
 from portal_api.modules.identity.schemas import TokenOut, check_date_of_birth, clean_name, normalize_phone
+from portal_api.modules.identity.sessions import UserSession
+from portal_api.modules.identity.sessions import revoke as revoke_session
 from portal_api.modules.identity.tokens import get_local_issuer
 
 router = APIRouter(prefix="/v1/auth", tags=["auth"])
@@ -53,11 +59,13 @@ _hasher = PasswordHasher()
 _DUMMY_HASH = _hasher.hash("not-a-real-password-placeholder")
 
 PURPOSE = "verify_email"
+RESET = "reset_password"
 CODE_TTL = timedelta(minutes=15)
 MAX_TRIES = 5
 COOLDOWN = timedelta(seconds=60)
 MAX_CODES_PER_HOUR = 5
 ACCEPTED = "If this email can be registered, we have sent a 6-digit code to it."
+RESET_ACCEPTED = "If an account uses this email, we have sent a 6-digit code to it."
 # The wording shown beside the sign-up opt-in; a new wording needs a new version.
 MARKETING_CONSENT_VERSION = "signup-2026-11-11"
 
@@ -106,6 +114,13 @@ class RegisterIn(BaseModel):
         return check_date_of_birth(v)
 
 
+class ResetIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    email: EmailStr
+    code: str = Field(pattern=r"^\s*\d{6}\s*$", description="The 6-digit code from the email")
+    new_password: str = Field(min_length=10, max_length=200)
+
+
 class EmailIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
     email: EmailStr
@@ -130,6 +145,27 @@ class AcceptedOut(BaseModel):
 
 def _hash_code(code_id: uuid.UUID, code: str) -> str:
     return hashlib.sha256(f"{code_id}:{code}".encode()).hexdigest()
+
+
+def _reset_message(to: str, code: str) -> email.Message:
+    text = (
+        f"Your Sirf Concepts password reset code is {code}.\n\n"
+        "Enter it in the app to choose a new password. It expires in 15 minutes.\n"
+        f"Aap ka password reset code {code} hai. Yeh 15 minute tak chalega.\n\n"
+        "If you didn't ask for this, ignore this email; your password stays the same."
+    )
+    body = (
+        '<div style="font-family:Arial,Helvetica,sans-serif;max-width:480px;margin:auto;color:#1f2937">'
+        '<h2 style="margin:0 0 12px">Sirf Concepts</h2>'
+        "<p>Your password reset code is:</p>"
+        f'<p style="font-size:32px;font-weight:bold;letter-spacing:8px;margin:8px 0 16px">{html.escape(code)}</p>'
+        "<p>Enter it in the app to choose a new password. It expires in 15 minutes.</p>"
+        f'<p style="color:#4b5563">Aap ka password reset code <b>{html.escape(code)}</b> hai. '
+        "Yeh 15 minute tak chalega.</p>"
+        '<p style="color:#6b7280;font-size:13px">If you didn\'t ask for this, ignore this email; '
+        "your password stays the same.</p></div>"
+    )
+    return email.Message(to=to, subject="Reset your Sirf Concepts password", text=text, html=body, tag="reset-password")
 
 
 def _code_message(to: str, code: str) -> email.Message:
@@ -175,12 +211,12 @@ def _now(db: Session) -> datetime:
     return db.execute(select(func.now())).scalar_one()
 
 
-def _retry_after(db: Session, user_id: uuid.UUID, now: datetime) -> int:
+def _retry_after(db: Session, user_id: uuid.UUID, now: datetime, purpose: str = PURPOSE) -> int:
     """Seconds until another code may be sent to this account; 0 when one may be sent now."""
     times = db.scalars(
         select(EmailCode.created_at)
         .where(
-            EmailCode.user_id == user_id, EmailCode.purpose == PURPOSE, EmailCode.created_at > now - timedelta(hours=1)
+            EmailCode.user_id == user_id, EmailCode.purpose == purpose, EmailCode.created_at > now - timedelta(hours=1)
         )
         .order_by(EmailCode.created_at.desc())
     ).all()
@@ -192,9 +228,9 @@ def _retry_after(db: Session, user_id: uuid.UUID, now: datetime) -> int:
     return max(0, int(wait + 0.999))
 
 
-def _new_code(db: Session, user_id: uuid.UUID, now: datetime) -> tuple[uuid.UUID, str]:
+def _new_code(db: Session, user_id: uuid.UUID, now: datetime, purpose: str = PURPOSE) -> tuple[uuid.UUID, str]:
     code = f"{secrets.randbelow(1_000_000):06d}"
-    row = EmailCode(id=uuid.uuid4(), user_id=user_id, purpose=PURPOSE, expires_at=now + CODE_TTL)
+    row = EmailCode(id=uuid.uuid4(), user_id=user_id, purpose=purpose, expires_at=now + CODE_TTL)
     row.code_hash = _hash_code(row.id, code)
     db.add(row)
     db.flush()
@@ -285,6 +321,24 @@ def resend_code(body: EmailIn, db: DB) -> AcceptedOut:
     return AcceptedOut(detail=ACCEPTED)
 
 
+def _take_code(db: Session, user_id: uuid.UUID, purpose: str, code: str, now: datetime, wrong: AppError) -> EmailCode:
+    """The newest code for this purpose when `code` matches it; otherwise counts a wrong try and raises `wrong`."""
+    latest = db.scalar(
+        select(EmailCode)
+        .where(EmailCode.user_id == user_id, EmailCode.purpose == purpose)
+        .order_by(EmailCode.created_at.desc())
+        .limit(1)
+    )
+    if latest is None or latest.consumed_at is not None or latest.expires_at <= now or latest.attempts >= MAX_TRIES:
+        db.rollback()
+        raise wrong
+    if not hmac.compare_digest(_hash_code(latest.id, code.strip()), latest.code_hash):
+        latest.attempts += 1
+        db.commit()
+        raise wrong
+    return latest
+
+
 @router.post("/verify-email", response_model=TokenOut, summary="Confirm the email with its code and sign in")
 def verify_email(body: VerifyIn, db: DB, response: Response) -> TokenOut:
     response.headers["Cache-Control"] = "no-store"
@@ -294,20 +348,8 @@ def verify_email(body: VerifyIn, db: DB, response: Response) -> TokenOut:
     if cred is None or cred.email_verified_at is not None:
         db.rollback()
         raise wrong
-    latest = db.scalar(
-        select(EmailCode)
-        .where(EmailCode.user_id == cred.user_id, EmailCode.purpose == PURPOSE)
-        .order_by(EmailCode.created_at.desc())
-        .limit(1)
-    )
     now = _now(db)
-    if latest is None or latest.consumed_at is not None or latest.expires_at <= now or latest.attempts >= MAX_TRIES:
-        db.rollback()
-        raise wrong
-    if not hmac.compare_digest(_hash_code(latest.id, body.code.strip()), latest.code_hash):
-        latest.attempts += 1
-        db.commit()
-        raise wrong
+    latest = _take_code(db, cred.user_id, PURPOSE, body.code, now, wrong)
     latest.consumed_at = now
     cred.email_verified_at = now
     user = db.get(AppUser, cred.user_id)
@@ -342,3 +384,68 @@ def token(body: SignInIn, db: DB, response: Response) -> TokenOut:
     if not verified:
         raise EmailNotVerified("Confirm your email first: enter the 6-digit code we sent, or ask for a new one.")
     return TokenOut(access_token=issuer.issue(user.subject, user.email), expires_in=issuer.ttl_s)
+
+
+@router.post(
+    "/password-reset/request", status_code=202, response_model=AcceptedOut, summary="Email a password reset code"
+)
+def request_password_reset(body: EmailIn, db: DB) -> AcceptedOut:
+    """Always 202, so the answer doesn't reveal which emails have accounts. Within the code limits nothing new is
+    sent; the code already in the inbox still works."""
+    address = body.email.lower()
+    cred = db.scalar(select(PasswordCredential).where(PasswordCredential.email == address).with_for_update())
+    user = db.get(AppUser, cred.user_id) if cred is not None else None
+    if cred is None or user is None or user.status != "active":
+        db.rollback()
+        return AcceptedOut(detail=RESET_ACCEPTED)
+    now = _now(db)
+    if _retry_after(db, cred.user_id, now, RESET):
+        db.rollback()
+        return AcceptedOut(detail=RESET_ACCEPTED)
+    pending = _new_code(db, cred.user_id, now, RESET)
+    db.commit()
+    _deliver(db, pending[0], _reset_message(address, pending[1]))
+    return AcceptedOut(detail=RESET_ACCEPTED)
+
+
+@router.post("/password-reset/check", status_code=204, summary="Check a password reset code before choosing a password")
+def check_password_reset(body: VerifyIn, db: DB) -> Response:
+    wrong = InvalidCode("That code is wrong or has expired. Check the email or ask for a new code.")
+    cred = db.scalar(select(PasswordCredential).where(PasswordCredential.email == body.email.lower()).with_for_update())
+    if cred is None:
+        db.rollback()
+        raise wrong
+    _take_code(db, cred.user_id, RESET, body.code, _now(db), wrong)
+    db.rollback()  # nothing to keep: the code stays usable for `confirm`
+    return Response(status_code=204, headers={"Cache-Control": "no-store"})
+
+
+@router.post("/password-reset/confirm", response_model=TokenOut, summary="Set a new password with the emailed code")
+def confirm_password_reset(body: ResetIn, db: DB, response: Response) -> TokenOut:
+    response.headers["Cache-Control"] = "no-store"
+    wrong = InvalidCode("That code is wrong or has expired. Check the email or ask for a new code.")
+    password_hash = _hasher.hash(body.new_password)  # before taking a pooled connection (R08)
+    address = body.email.lower()
+    cred = db.scalar(select(PasswordCredential).where(PasswordCredential.email == address).with_for_update())
+    if cred is None:
+        db.rollback()
+        raise wrong
+    now = _now(db)
+    code = _take_code(db, cred.user_id, RESET, body.code, now, wrong)
+    user = db.get(AppUser, cred.user_id)
+    if user is None or user.status != "active":
+        db.rollback()
+        raise wrong
+    code.consumed_at = now
+    cred.password_hash = password_hash
+    if cred.email_verified_at is None:  # the code proves the inbox, just as the sign-up code does
+        cred.email_verified_at = now
+    # Whoever knew the old password is signed out everywhere.
+    active = db.scalars(select(UserSession).where(UserSession.user_id == user.id, UserSession.revoked_at.is_(None)))
+    for row in active.all():
+        revoke_session(db, row, "password_reset")
+    record(db, actor=user.id, action="account.password_reset", target_type="app_user", target_id=str(user.id))
+    subject, user_email = user.subject, user.email
+    db.commit()
+    issuer = get_local_issuer()
+    return TokenOut(access_token=issuer.issue(subject, user_email), expires_in=issuer.ttl_s)

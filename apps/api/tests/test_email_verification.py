@@ -504,3 +504,102 @@ def test_names_required_and_tidied(client: TestClient, db: Session) -> None:
     # Names in Urdu script are letters too.
     r = client.post("/v1/auth/register", json={**base, "email": _email(), "first_name": "علی", "surname": "خان"})
     assert r.status_code == 202, r.text
+
+
+def _reset_codes(address: str) -> list[str]:
+    out = []
+    for entry in email.outbox():
+        if entry.message.to == address and entry.message.tag == "reset-password":
+            found = re.search(r"\b(\d{6})\b", entry.message.text)
+            assert found
+            out.append(found.group(1))
+    return out
+
+
+def _verified_session(client: TestClient, address: str) -> str:
+    _register(client, address)
+    ok = client.post("/v1/auth/verify-email", json={"email": address, "code": _codes(address)[-1]})
+    s = client.post(
+        "/v1/sessions",
+        json={"kind": "web", "device_label": "test"},
+        headers={"Authorization": f"Bearer {ok.json()['access_token']}"},
+    )
+    assert s.status_code == 201, s.text
+    return str(s.json()["session_token"])
+
+
+def test_forgotten_password_is_reset_with_the_emailed_code(client: TestClient, db: Session) -> None:
+    address = _email()
+    old_session = _verified_session(client, address)
+    r = client.post("/v1/auth/password-reset/request", json={"email": address.upper()})
+    assert r.status_code == 202, r.text
+    [code] = _reset_codes(address)
+    assert email.outbox()[-1].message.subject == "Reset your Sirf Concepts password"
+    new = "a-brand-new-passphrase"  # pragma: allowlist secret
+    bad = {"email": address, "code": "000000" if code != "000000" else "111111", "new_password": new}
+    wrong = client.post("/v1/auth/password-reset/confirm", json=bad)
+    assert wrong.status_code == 400 and wrong.json()["title"] == "INVALID_CODE"
+    # The code is checked on its own first (before the new password is typed); that doesn't use it up.
+    check = {"email": address, "code": bad["code"]}
+    assert client.post("/v1/auth/password-reset/check", json=check).status_code == 400
+    assert client.post("/v1/auth/password-reset/check", json={**check, "code": code}).status_code == 204
+    short = client.post("/v1/auth/password-reset/confirm", json={**bad, "code": code, "new_password": "short"})
+    assert short.status_code == 422
+    ok = client.post("/v1/auth/password-reset/confirm", json={**bad, "code": code})
+    assert ok.status_code == 200, ok.text
+    assert ok.json()["access_token"]
+    # The old password no longer works, the new one does, and every earlier session is signed out.
+    old = {"email": address, "password": PASSWORD}
+    assert client.post("/v1/auth/token", json=old).status_code == 401
+    assert client.post("/v1/auth/token", json={"email": address, "password": new}).status_code == 200
+    assert client.get("/v1/me", headers={"Authorization": f"Bearer {old_session}"}).status_code == 401
+    # A code works once.
+    again = client.post("/v1/auth/password-reset/confirm", json={**bad, "code": code})
+    assert again.status_code == 400
+    user = db.scalar(select(AppUser).where(AppUser.email == address))
+    assert user is not None
+    actions = db.scalars(select(AuditEvent.action).where(AuditEvent.actor_user_id == user.id)).all()
+    assert "account.password_reset" in actions
+
+
+def test_password_reset_does_not_reveal_accounts_and_is_limited(client: TestClient) -> None:
+    unknown = _email()
+    sent = len(email.outbox())
+    r = client.post("/v1/auth/password-reset/request", json={"email": unknown})
+    assert r.status_code == 202 and len(email.outbox()) == sent  # same answer, nothing sent
+    nope = {"email": unknown, "code": "123456", "new_password": "whatever-password-1"}  # pragma: allowlist secret
+    assert client.post("/v1/auth/password-reset/confirm", json=nope).status_code == 400
+    address = _email()
+    _verified_session(client, address)
+    client.post("/v1/auth/password-reset/request", json={"email": address})
+    # Asking again within a minute answers the same but sends nothing new; the first code still works.
+    assert client.post("/v1/auth/password-reset/request", json={"email": address}).status_code == 202
+    [code] = _reset_codes(address)
+    # Five wrong tries use the code up.
+    other = "000000" if code != "000000" else "111111"
+    body = {"email": address, "code": other, "new_password": "another-pass-12"}  # pragma: allowlist secret
+    for i in range(5):  # wrong tries count on both steps
+        step = "check" if i % 2 else "confirm"
+        payload = body if step == "confirm" else {"email": address, "code": body["code"]}
+        assert client.post(f"/v1/auth/password-reset/{step}", json=payload).status_code == 400
+    assert client.post("/v1/auth/password-reset/check", json={"email": address, "code": code}).status_code == 400
+    assert client.post("/v1/auth/password-reset/confirm", json={**body, "code": code}).status_code == 400
+
+
+def test_password_reset_confirms_an_unverified_email(client: TestClient, db: Session) -> None:
+    address = _email()
+    _register(client, address)  # never entered the sign-up code
+    client.post("/v1/auth/password-reset/request", json={"email": address})
+    [code] = _reset_codes(address)
+    new = "fresh-passphrase-123"  # pragma: allowlist secret
+    ok = client.post("/v1/auth/password-reset/confirm", json={"email": address, "code": code, "new_password": new})
+    assert ok.status_code == 200, ok.text
+    assert client.post("/v1/auth/token", json={"email": address, "password": new}).status_code == 200
+
+
+def test_dev_last_code_reads_reset_codes(client: TestClient) -> None:
+    address = _email()
+    _verified_session(client, address)
+    client.post("/v1/auth/password-reset/request", json={"email": address})
+    r = client.post("/v1/dev-auth/last-code", json={"email": address, "purpose": "reset-password"})
+    assert r.status_code == 200 and r.json()["code"] == _reset_codes(address)[-1]

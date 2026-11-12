@@ -9,7 +9,7 @@ end-to-end tests can complete the real verification flow. Responses are enumerat
 from __future__ import annotations
 
 import re
-from typing import Annotated
+from typing import Annotated, Literal
 
 from argon2 import PasswordHasher
 from argon2.exceptions import VerificationError
@@ -83,6 +83,7 @@ def token(body: DevTokenIn, db: DB, response: Response) -> TokenOut:
 class LastCodeIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
     email: EmailStr
+    purpose: Literal["verify-email", "reset-password"] = "verify-email"
 
 
 _CODE = re.compile(r"\b(\d{6})\b")
@@ -92,7 +93,7 @@ _CODE = re.compile(r"\b(\d{6})\b")
 def last_code(body: LastCodeIn) -> dict[str, str | None]:
     address = body.email.lower()
     for entry in reversed(email_transport.outbox()):
-        if entry.message.to.lower() == address and entry.message.tag == "verify-email":
+        if entry.message.to.lower() == address and entry.message.tag == body.purpose:
             found = _CODE.search(entry.message.text)
             return {"code": found.group(1) if found else None}
     return {"code": None}
