@@ -13,17 +13,17 @@ import { api, currentUser } from "@/lib/session";
 import { JoinSession } from "./join-session";
 import { StartMock } from "./start-mock";
 
-export const metadata: Metadata = { title: "Mock tests", robots: { index: false } };
+export const metadata: Metadata = { title: "Book Mock Test", robots: { index: false } };
 
 export default function MocksPage() {
   return (
     <div className="space-y-8">
       <div>
-        <Breadcrumbs items={[{ href: "/practice", label: "Practice" }, { label: "Mock tests" }]} />
+        <Breadcrumbs items={[{ href: "/practice", label: "Practice" }, { label: "Book Mock Test" }]} />
         <PageHero
           align="start"
           eyebrow="Practice · Official patterns"
-          title="Mock tests"
+          title="Book Mock Test"
           lead="Full-length tests that follow an official test pattern, as verified by two reviewers. Taking a mock doesn't affect admission eligibility."
           backdrop={<span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-accent-soft opacity-50" />}
         />
