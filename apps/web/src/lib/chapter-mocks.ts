@@ -152,7 +152,7 @@ const clean = (p: string) =>
     .trim();
 const marksOf = (p: string) => Number(/\((\d+) marks?\)\s*$/.exec(p)?.[1] ?? 0);
 
-function question(b: Checkpoint, marks: number): PaperQuestion {
+export function question(b: Checkpoint, marks: number): PaperQuestion {
   const opts = b.options ?? [];
   return {
     q: clean(b.prompt ?? ""),
@@ -207,7 +207,7 @@ function pick<T>(bank: T[], n: number, count: number): T[] {
 }
 
 /** A small seeded shuffle, so the objective part is mixed (as on the Board paper) but the same every time. */
-function shuffled<T>(xs: T[], seed: number): T[] {
+export function shuffled<T>(xs: T[], seed: number): T[] {
   let s = seed >>> 0;
   const rnd = () => (s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32;
   const out = [...xs];
@@ -218,7 +218,7 @@ function shuffled<T>(xs: T[], seed: number): T[] {
   return out;
 }
 
-const checkpoints = (blocks: { type: string }[]) =>
+export const checkpoints = (blocks: { type: string }[]) =>
   blocks.filter((b): b is Checkpoint => b.type === "checkpoint");
 
 /** Build mock test n of a chapter from its three practice sets (English lesson blocks). */
@@ -246,28 +246,23 @@ export function buildPaper(
     at += s.asked;
     return { no: s.no, attempt: s.attempt, parts };
   });
-  const longs = checkpoints(sets.long);
   const [ma, mb] = pattern.long.parts;
-  if (mb === undefined) {
-    // One whole question per Section-II number (Computer Science: 8 marks each).
-    const whole = longs.filter((q) => marksOf(q.prompt ?? "") === ma);
-    const long = pick(whole, n, pattern.long.asked).map((q) => ({
-      a: question(q, ma),
-    }));
-    return { pattern, mcqs, short, long };
-  }
-  // The long set is written as (a) theory + (b) numerical pairs on the same section; keep each pair together.
-  const pairs: { a: Checkpoint; b: Checkpoint }[] = [];
-  for (let i = 0; i + 1 < longs.length; i++) {
-    if (
-      marksOf(longs[i].prompt ?? "") === ma &&
-      marksOf(longs[i + 1].prompt ?? "") === mb
-    )
-      pairs.push({ a: longs[i], b: longs[++i] });
-  }
-  const long = pick(pairs, n, pattern.long.asked).map((p) => ({
-    a: question(p.a, ma),
-    b: question(p.b, mb),
+  const long = pick(longUnits(pattern, checkpoints(sets.long)), n, pattern.long.asked).map((u) => ({
+    a: question(u.a, ma),
+    ...(u.b && mb !== undefined ? { b: question(u.b, mb) } : {}),
   }));
   return { pattern, mcqs, short, long };
+}
+
+/** The Section-II questions a long set offers: whole questions of the pattern's marks (Computer Science), or the set's
+ * (a) theory + (b) numerical pairs on the same section, kept together. */
+export function longUnits(pattern: MockPattern, longs: Checkpoint[]): { a: Checkpoint; b?: Checkpoint }[] {
+  const [ma, mb] = pattern.long.parts;
+  if (mb === undefined) return longs.filter((q) => marksOf(q.prompt ?? "") === ma).map((a) => ({ a }));
+  const pairs: { a: Checkpoint; b: Checkpoint }[] = [];
+  for (let i = 0; i + 1 < longs.length; i++) {
+    if (marksOf(longs[i].prompt ?? "") === ma && marksOf(longs[i + 1].prompt ?? "") === mb)
+      pairs.push({ a: longs[i], b: longs[++i] });
+  }
+  return pairs;
 }

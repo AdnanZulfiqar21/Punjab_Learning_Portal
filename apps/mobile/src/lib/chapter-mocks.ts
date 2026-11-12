@@ -1,0 +1,268 @@
+// CHAPTER-MOCK-01 (owner, 2026-11-10): chapter-wise mock tests in the Board paper pattern, made from the chapter's own
+// practice questions (Chapter practice: MCQs, short and long questions). The owner checks one test before more are
+// added, so only the tests listed in OPEN are offered.
+
+/** One Board paper pattern (Intermediate, new course). */
+export type MockPattern = {
+  /** Objective part: number of MCQs (1 mark each) and minutes. */
+  mcqs: number;
+  objectiveMinutes: number;
+  /** Section-I: question number, parts asked, parts to attempt (2 marks each). */
+  short: { no: number; asked: number; attempt: number }[];
+  /** Section-II: questions asked, questions to attempt, and the marks of each question's (a) and (b) parts, or of the
+   * whole question when it has no parts (Computer Science). */
+  long: { asked: number; attempt: number; parts: [number, number] | [number] };
+  subjectiveMinutes: number;
+};
+
+// Physics Part-I and Part-II papers (owner's Board papers, 2025-2026): 17 MCQs in 20 minutes; Section-I 8 of 12, 8 of 12,
+// 6 of 9; Section-II 3 of 5, each (a) 5 + (b) 3 marks; 2:40 hours; 17 + 68 = 85 marks.
+const PHYSICS: MockPattern = {
+  mcqs: 17,
+  objectiveMinutes: 20,
+  short: [
+    { no: 2, asked: 12, attempt: 8 },
+    { no: 3, asked: 12, attempt: 8 },
+    { no: 4, asked: 9, attempt: 6 },
+  ],
+  long: { asked: 5, attempt: 3, parts: [5, 3] },
+  subjectiveMinutes: 160,
+};
+
+// Chemistry Part-I and Part-II papers (owner's Board papers, 2025-2026, new course): the same as Physics except that each
+// Section-II question is (a) 4 + (b) 4 marks.
+const CHEMISTRY: MockPattern = {
+  ...PHYSICS,
+  long: { asked: 5, attempt: 3, parts: [4, 4] },
+};
+
+// Computer Science Part-I and Part-II papers (owner's Board papers, 2025): 15 MCQs in 20 minutes; Section-I 6 of 9 in
+// each of Q2, Q3 and Q4; Section-II 3 of 5 whole questions of 8 marks; 2:10 hours; 15 + 60 = 75 marks.
+const COMPUTER_SCIENCE: MockPattern = {
+  mcqs: 15,
+  objectiveMinutes: 20,
+  short: [
+    { no: 2, asked: 9, attempt: 6 },
+    { no: 3, asked: 9, attempt: 6 },
+    { no: 4, asked: 9, attempt: 6 },
+  ],
+  long: { asked: 5, attempt: 3, parts: [8] },
+  subjectiveMinutes: 130,
+};
+
+// Biology Part-I and Part-II papers (owner's Board papers, 2025-2026): the same pattern as Chemistry.
+const BIOLOGY: MockPattern = CHEMISTRY;
+
+// Mathematics Part-I and Part-II papers (owner's Board papers, 2026, new course): 20 MCQs; Section-I 8 of 12, 8 of 12,
+// 9 of 13; Section-II 3 of 5, each (a) 5 + (b) 5 marks; 2:30 hours; 20 + 80 = 100 marks. The objective part's 30
+// minutes is the Board's usual time for 20 MCQs (the owner's papers show the subjective header only).
+const MATHEMATICS: MockPattern = {
+  mcqs: 20,
+  objectiveMinutes: 30,
+  short: [
+    { no: 2, asked: 12, attempt: 8 },
+    { no: 3, asked: 12, attempt: 8 },
+    { no: 4, asked: 13, attempt: 9 },
+  ],
+  long: { asked: 5, attempt: 3, parts: [5, 5] },
+  subjectiveMinutes: 150,
+};
+
+export const PATTERNS: Record<string, MockPattern> = {
+  mathematics: MATHEMATICS,
+  biology: BIOLOGY,
+  computer_science: COMPUTER_SCIENCE,
+  physics: PHYSICS,
+  chemistry: CHEMISTRY,
+};
+
+/** Tests offered now, by "subject-grade" and chapter (owner: Physics 11 chapter 1 first, for checking; all three tests
+ * from 2026-11-11; then the whole Physics 11 book and then Physics 12, chapters 13-21, 2026-11-11). Physics Part-II has
+ * the same paper pattern as Part-I. */
+const chapters = (first: number, last: number) =>
+  Object.fromEntries(
+    Array.from({ length: last - first + 1 }, (_, i) => [first + i, [1, 2, 3]]),
+  );
+const without = (open: Record<number, number[]>, chapter: number) =>
+  Object.fromEntries(
+    Object.entries(open).filter(([k]) => Number(k) !== chapter),
+  );
+export const OPEN: Record<string, Record<number, number[]>> = {
+  "physics-11": chapters(1, 12),
+  "physics-12": chapters(13, 21),
+  "chemistry-11": chapters(1, 16),
+  "chemistry-12": chapters(17, 33),
+  "computer_science-11": chapters(1, 9),
+  "computer_science-12": chapters(1, 9),
+  // Biology 11 chapter 7 (28 short questions, 4 long pairs) and Biology 12 chapter 23 (31 short questions) have fewer
+  // practice questions than one Board paper needs (33 short, 5 long), so they get mock tests once more are added.
+  "biology-11": without(chapters(1, 12), 7),
+  "biology-12": without(chapters(13, 25), 23),
+  // Mathematics 11 units 5 and 9 have 34 short questions each, fewer than one Board paper needs (37).
+  "mathematics-11": without(without(chapters(1, 14), 5), 9),
+  "mathematics-12": chapters(1, 11),
+};
+
+export function openTests(
+  subject: string,
+  grade: number,
+  chapter: number,
+): number[] {
+  return OPEN[`${subject}-${grade}`]?.[chapter] ?? [];
+}
+
+/** How many mock tests a chapter will have; test n uses every 3rd question from n, so the tests don't repeat questions. */
+export const TESTS_PER_CHAPTER = 3;
+
+export type Checkpoint = {
+  type: string;
+  prompt?: string;
+  options?: { id: string; text: string }[];
+  answer_id?: string;
+  explanation?: string;
+  answer_table?: { header: string[]; rows: string[][] } | null;
+  steps?: string[] | null;
+  final_answer?: string | null;
+};
+
+export type PaperQuestion = {
+  q: string;
+  marks: number;
+  options?: string[];
+  key?: number;
+  answer: {
+    text?: string;
+    table?: { header: string[]; rows: string[][] };
+    steps?: string[];
+    final?: string;
+  };
+};
+
+export type Paper = {
+  pattern: MockPattern;
+  mcqs: PaperQuestion[];
+  short: { no: number; attempt: number; parts: PaperQuestion[] }[];
+  long: { a: PaperQuestion; b?: PaperQuestion }[];
+};
+
+const clean = (p: string) =>
+  p
+    .replace(/^\d+\s+/, "")
+    .replace(/\s*\((\d+) marks?\)\s*$/, "")
+    .trim();
+const marksOf = (p: string) => Number(/\((\d+) marks?\)\s*$/.exec(p)?.[1] ?? 0);
+
+export function question(b: Checkpoint, marks: number): PaperQuestion {
+  const opts = b.options ?? [];
+  return {
+    q: clean(b.prompt ?? ""),
+    marks,
+    ...(opts.length
+      ? {
+          options: opts.map((o) => o.text),
+          key: opts.findIndex((o) => o.id === b.answer_id),
+        }
+      : {}),
+    answer: {
+      text: b.explanation || undefined,
+      table: b.answer_table ?? undefined,
+      steps: b.steps ?? undefined,
+      final: b.final_answer ?? undefined,
+    },
+  };
+}
+
+/** `count` items for each of the chapter's tests (indexes into the bank, book order kept). Test n first takes every
+ * 3rd item from n-1, so each test covers the whole chapter, evenly thinned when there are more than it needs. A
+ * chapter too short for three full tests tops a test up with the items the earlier tests used least (then the earliest),
+ * so the tests repeat as few questions as possible. Test 1 is built first and does not depend on the later ones. */
+function allocate(size: number, count: number): number[][] {
+  const used = new Array<number>(size).fill(0);
+  const tests: number[][] = [];
+  for (let n = 1; n <= TESTS_PER_CHAPTER; n++) {
+    const mine = Array.from({ length: size }, (_, i) => i).filter(
+      (i) => i % TESTS_PER_CHAPTER === n - 1,
+    );
+    let chosen: number[];
+    if (mine.length >= count) {
+      chosen = Array.from(
+        { length: count },
+        (_, j) => mine[Math.floor((j * mine.length) / count)],
+      );
+    } else {
+      const extra = Array.from({ length: size }, (_, i) => i)
+        .filter((i) => i % TESTS_PER_CHAPTER !== n - 1)
+        .sort((x, y) => used[x] - used[y] || x - y)
+        .slice(0, count - mine.length);
+      chosen = [...mine, ...extra].sort((x, y) => x - y);
+    }
+    chosen.forEach((i) => used[i]++);
+    tests.push(chosen);
+  }
+  return tests;
+}
+
+function pick<T>(bank: T[], n: number, count: number): T[] {
+  return allocate(bank.length, count)[n - 1].map((i) => bank[i]);
+}
+
+/** A small seeded shuffle, so the objective part is mixed (as on the Board paper) but the same every time. */
+export function shuffled<T>(xs: T[], seed: number): T[] {
+  let s = seed >>> 0;
+  const rnd = () => (s = (s * 1664525 + 1013904223) >>> 0) / 2 ** 32;
+  const out = [...xs];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(rnd() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
+export const checkpoints = (blocks: { type: string }[]) =>
+  blocks.filter((b): b is Checkpoint => b.type === "checkpoint");
+
+/** Build mock test n of a chapter from its three practice sets (English lesson blocks). */
+export function buildPaper(
+  pattern: MockPattern,
+  chapter: number,
+  n: number,
+  sets: {
+    mcq: { type: string }[];
+    short: { type: string }[];
+    long: { type: string }[];
+  },
+): Paper {
+  const mcqs = shuffled(
+    pick(checkpoints(sets.mcq), n, pattern.mcqs),
+    chapter * 100 + n,
+  ).map((b) => question(b, 1));
+  const shortCount = pattern.short.reduce((a, s) => a + s.asked, 0);
+  const shorts = pick(checkpoints(sets.short), n, shortCount).map((b) =>
+    question(b, 2),
+  );
+  let at = 0;
+  const short = pattern.short.map((s) => {
+    const parts = shorts.slice(at, at + s.asked);
+    at += s.asked;
+    return { no: s.no, attempt: s.attempt, parts };
+  });
+  const [ma, mb] = pattern.long.parts;
+  const long = pick(longUnits(pattern, checkpoints(sets.long)), n, pattern.long.asked).map((u) => ({
+    a: question(u.a, ma),
+    ...(u.b && mb !== undefined ? { b: question(u.b, mb) } : {}),
+  }));
+  return { pattern, mcqs, short, long };
+}
+
+/** The Section-II questions a long set offers: whole questions of the pattern's marks (Computer Science), or the set's
+ * (a) theory + (b) numerical pairs on the same section, kept together. */
+export function longUnits(pattern: MockPattern, longs: Checkpoint[]): { a: Checkpoint; b?: Checkpoint }[] {
+  const [ma, mb] = pattern.long.parts;
+  if (mb === undefined) return longs.filter((q) => marksOf(q.prompt ?? "") === ma).map((a) => ({ a }));
+  const pairs: { a: Checkpoint; b: Checkpoint }[] = [];
+  for (let i = 0; i + 1 < longs.length; i++) {
+    if (marksOf(longs[i].prompt ?? "") === ma && marksOf(longs[i + 1].prompt ?? "") === mb)
+      pairs.push({ a: longs[i], b: longs[++i] });
+  }
+  return pairs;
+}
