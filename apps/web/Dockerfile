@@ -15,5 +15,8 @@ COPY packages/contracts packages/contracts
 RUN pnpm --filter web build
 
 ENV NODE_ENV=production
+# ROLE-EXPLICIT-01: a deployed artifact starts as production unless told otherwise (Secure cookies, a required API
+# origin); a missing setting fails the start instead of running with development defaults.
+ENV PORTAL_ROLE=production
 EXPOSE 3100
 CMD ["pnpm", "--filter", "web", "start"]

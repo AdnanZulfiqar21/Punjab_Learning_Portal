@@ -10,6 +10,9 @@ COPY apps/api/migrations ./migrations
 
 RUN uv sync --frozen --no-dev --no-editable
 ENV PATH="/srv/.venv/bin:$PATH"
+# ROLE-EXPLICIT-01: the image is a deployed artifact, so it starts as production unless told otherwise. A missing
+# setting then fails the start (the configuration validator) instead of opening the development sign-in shortcuts.
+ENV PORTAL_ROLE=production
 
 EXPOSE 8100
 # A release runs `alembic upgrade head` as its own step, then starts this process or a worker command.
