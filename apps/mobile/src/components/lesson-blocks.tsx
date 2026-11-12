@@ -598,7 +598,7 @@ function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block
         if (labelled)
           return (
             <View style={{ flexDirection: "row", gap: Space.sm }}>
-              <T style={{ minWidth: (labelled[0].length + 1) * LABEL_CH }}>{labelled[0]}</T>
+              <T style={{ minWidth: labelled[0].length * LABEL_CH }}>{labelled[0]}</T>
               <T style={{ flex: 1 }}>
                 <Marked text={labelled[1]} marks={marks} bold={bold} />
               </T>

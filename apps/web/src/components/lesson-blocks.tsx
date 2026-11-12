@@ -333,7 +333,7 @@ function BlockView({
         if (labelled)
           return (
             <p dir="auto" className="flex gap-2 whitespace-pre-line">
-              <span className="shrink-0" style={{ minWidth: `${labelled[0].length + 1}ch` }}>
+              <span className="shrink-0" style={{ minWidth: `${labelled[0].length}ch` }}>
                 {labelled[0]}
               </span>
               <span className="min-w-0 flex-1">
