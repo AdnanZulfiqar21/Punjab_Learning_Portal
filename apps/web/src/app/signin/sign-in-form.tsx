@@ -168,7 +168,6 @@ export function PasswordForm({ next, devShortcuts }: { next: string; devShortcut
           error={errors.email}
         />
         <PasswordField
-          key={mode}
           id="password"
           label="Password"
           autoComplete={register ? "new-password" : "current-password"}

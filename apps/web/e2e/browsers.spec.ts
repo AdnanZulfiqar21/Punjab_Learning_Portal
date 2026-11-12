@@ -36,7 +36,10 @@ test("keyboard: the skip link reaches the content, and sign-up works without a m
   await page.keyboard.type(`e2e-browsers-${browserName}-${Date.now()}@example.com`);
   await page.getByLabel("Password").focus();
   await page.keyboard.type("browsers-fixture-pass-1");
+  await fillSignupExtras(page); // names, mobile number and date of birth (filled, not clicked)
+  await page.getByLabel("Password").focus();
   await page.keyboard.press("Enter"); // submits the form
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/practice\?/, AUTH);
 });
 
