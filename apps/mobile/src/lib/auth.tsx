@@ -27,6 +27,8 @@ type AuthContextValue = {
   register: (details: SignUpInput) => Promise<void>;
   verifyEmail: (email: string, code: string) => Promise<void>;
   resendCode: (email: string) => Promise<void>;
+  /** Sets the new password with a checked reset code; this signs in (and signs out every other device). */
+  resetPassword: (email: string, code: string, newPassword: string) => Promise<void>;
   signOut: () => Promise<void>;
   refresh: () => Promise<void>;
   /** Call when an authenticated request fails; ends the local session on 401. */
@@ -98,6 +100,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await api.resendCode(email);
   }, []);
 
+  const resetPassword = useCallback(
+    async (email: string, code: string, newPassword: string) => {
+      const { access_token } = await api.resetConfirm(email, code, newPassword);
+      await startSession(access_token);
+    },
+    [startSession],
+  );
+
   const signOut = useCallback(async () => {
     const token = await tokenStore.get();
     if (token) await api.signOut(token).catch(() => undefined); // local sign-out must succeed even offline
@@ -127,8 +137,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ state, signIn, register, verifyEmail, resendCode, signOut, refresh, handleError }),
-    [state, signIn, register, verifyEmail, resendCode, signOut, refresh, handleError],
+    () => ({ state, signIn, register, verifyEmail, resendCode, resetPassword, signOut, refresh, handleError }),
+    [state, signIn, register, verifyEmail, resendCode, resetPassword, signOut, refresh, handleError],
   );
   return <AuthContext value={value}>{children}</AuthContext>;
 }

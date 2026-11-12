@@ -272,6 +272,12 @@ export const api = {
   verifyEmail: (email: string, code: string) =>
     request<{ access_token: string }>("/v1/auth/verify-email", { method: "POST", body: { email, code } }),
   resendCode: (email: string) => request<void>("/v1/auth/resend-code", { method: "POST", body: { email } }),
+  // Forgotten password (owner 2026-11-12): email a code (always accepted), check it, then set the new password.
+  resetRequest: (email: string) => request<void>("/v1/auth/password-reset/request", { method: "POST", body: { email } }),
+  resetCheck: (email: string, code: string) =>
+    request<void>("/v1/auth/password-reset/check", { method: "POST", body: { email, code } }),
+  resetConfirm: (email: string, code: string, new_password: string) =>
+    request<{ access_token: string }>("/v1/auth/password-reset/confirm", { method: "POST", body: { email, code, new_password } }),
 
   // App sessions (IMPL-12) are created only from a verified IdP access token.
   createSession: (idpToken: string, deviceLabel: string) =>
