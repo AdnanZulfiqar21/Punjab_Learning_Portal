@@ -29,9 +29,11 @@ export default function PracticeScreen() {
           <Button variant="link" label="Chapter practice" onPress={() => router.push("/chapter-practice")} />
           {/* BOOK-EXERCISES-01: each chapter's end-of-chapter exercise, solved (Learn no longer lists it). */}
           <Button variant="link" label="Book exercises" onPress={() => router.push("/exercises")} />
+          {/* CHAPTER-MOCK-01 / BOOK-MOCK-01 (owner, 2026-11-13): Board-pattern papers per chapter and per book. */}
+          <Button variant="link" label="Chapter mock tests" onPress={() => router.push("/chapter-mocks")} />
+          <Button variant="link" label="Book Mock Test" onPress={() => router.push("/book-mocks")} />
           {state.status === "signed_in" && (
             <>
-              <Button variant="link" label="Book Mock Test" onPress={() => router.push("/mocks")} />
               <Button variant="link" label="Mistake notebook" onPress={() => router.push("/notebook")} />
               <Button variant="link" label="Progress" onPress={() => router.push("/progress")} />
               <Button variant="link" label="What you've shown" onPress={() => router.push("/evidence")} />
