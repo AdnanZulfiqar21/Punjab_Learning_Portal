@@ -30,7 +30,7 @@ from portal_api.modules.audit.models import AuditEvent
 from portal_api.modules.identity import password_auth, tokens
 from portal_api.modules.identity.models import AppUser, EmailCode, PasswordCredential
 
-PASSWORD = "correct-horse-battery"
+PASSWORD = "correct-horse-battery"  # pragma: allowlist secret
 DOB = "2008-05-14"  # a technical fixture value
 NAMES = {"first_name": "Test", "surname": "Learner"}  # technical fixture values
 
@@ -77,7 +77,8 @@ def test_sign_up_needs_the_emailed_code_then_signs_in(client: TestClient, db: Se
     # Can't sign in yet; the right password says so, a wrong one doesn't.
     blocked = client.post("/v1/auth/token", json={"email": address, "password": PASSWORD})
     assert blocked.status_code == 403 and blocked.json()["title"] == "EMAIL_NOT_VERIFIED"
-    assert client.post("/v1/auth/token", json={"email": address, "password": "wrong-password"}).status_code == 401
+    wrong = {"email": address, "password": "wrong-password"}  # pragma: allowlist secret
+    assert client.post("/v1/auth/token", json=wrong).status_code == 401
     # The code signs in and the token makes an app session like any identity provider's.
     ok = client.post("/v1/auth/verify-email", json={"email": address.upper(), "code": code})
     assert ok.status_code == 200, ok.text
@@ -115,7 +116,13 @@ def test_answers_do_not_reveal_which_emails_have_accounts(client: TestClient) ->
     sent_before = len(email.outbox())
     again = client.post(
         "/v1/auth/register",
-        json={"email": taken, "password": "another-password-x", "phone": "03001234567", "date_of_birth": DOB, **NAMES},
+        json={
+            "email": taken,
+            "password": "another-password-x",  # pragma: allowlist secret
+            "phone": "03001234567",
+            "date_of_birth": DOB,
+            **NAMES,
+        },
     )
     fresh = client.post(
         "/v1/auth/register",
@@ -142,8 +149,10 @@ def test_registering_again_before_verifying_replaces_the_password(client: TestCl
     if codes[0] != codes[1]:
         assert client.post("/v1/auth/verify-email", json={"email": address, "code": codes[0]}).status_code == 400
     assert client.post("/v1/auth/verify-email", json={"email": address, "code": codes[1]}).status_code == 200
-    assert client.post("/v1/auth/token", json={"email": address, "password": "first-password-1"}).status_code == 401
-    assert client.post("/v1/auth/token", json={"email": address, "password": "second-password-2"}).status_code == 200
+    first = {"email": address, "password": "first-password-1"}  # pragma: allowlist secret
+    second = {"email": address, "password": "second-password-2"}  # pragma: allowlist secret
+    assert client.post("/v1/auth/token", json=first).status_code == 401
+    assert client.post("/v1/auth/token", json=second).status_code == 200
 
 
 def test_five_wrong_tries_spend_the_code(client: TestClient) -> None:
@@ -333,9 +342,9 @@ DEPLOYED: dict[str, Any] = {
     "trial_device_evidence": "fallback",
     "trial_ref_pepper": "deployment-secret-fixture",
     "upload_scanner": "clamd",
-    "password_auth_issuer": "https://api.example.org/auth",
+    "password_auth_issuer": "https://api.example.org/auth",  # pragma: allowlist secret
     "notification_email_adapter": "resend",
-    "resend_api_key": "re_deployed_fixture",
+    "resend_api_key": "re_deployed_fixture",  # pragma: allowlist secret
     "email_from": "Sirf Concepts <no-reply@example.org>",
 }
 
@@ -345,7 +354,8 @@ def test_production_password_auth_configuration() -> None:
     with pytest.raises(ConfigurationError, match="password_auth_signing_key"):
         Settings(**DEPLOYED)
     with pytest.raises(ConfigurationError, match="development issuer"):
-        Settings(**{**DEPLOYED, "password_auth_issuer": "urn:portal:dev-local-issuer"}, password_auth_signing_key="k")
+        dev_issuer = {"password_auth_issuer": "urn:portal:dev-local-issuer"}  # pragma: allowlist secret
+        Settings(**{**DEPLOYED, **dev_issuer}, password_auth_signing_key="k")
     with pytest.raises(ConfigurationError, match="email sender"):
         Settings(**{**DEPLOYED, "notification_email_adapter": "none"}, password_auth_signing_key="k")
     with pytest.raises(ConfigurationError, match="resend_api_key"):
@@ -399,7 +409,7 @@ def test_deployed_app_mounts_sign_up_but_not_the_dev_shortcuts(monkeypatch: pyte
         "PORTAL_PASSWORD_AUTH_ISSUER": DEPLOYED["password_auth_issuer"],
         "PORTAL_PASSWORD_AUTH_SIGNING_KEY": _pem(),
         "PORTAL_NOTIFICATION_EMAIL_ADAPTER": "resend",
-        "PORTAL_RESEND_API_KEY": "re_deployed_fixture",
+        "PORTAL_RESEND_API_KEY": "re_deployed_fixture",  # pragma: allowlist secret
         "PORTAL_EMAIL_FROM": DEPLOYED["email_from"],
     }
     for k, v in env.items():

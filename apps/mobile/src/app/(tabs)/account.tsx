@@ -126,7 +126,7 @@ function PasswordForm() {
     run(async () => {
       const errs: Record<string, string> = {};
       if (!email.trim()) errs.email = "Enter your email address.";
-      if (password.length < 10) errs.password = "Use at least 10 characters.";
+      if (password.length < 10) errs.password = "Use at least 10 characters."; // pragma: allowlist secret
       if (!firstName.trim()) errs.first_name = "Enter your first name.";
       if (!surname.trim()) errs.surname = "Enter your surname.";
       if (!phone.trim()) errs.phone = "Enter your mobile number.";
@@ -153,7 +153,7 @@ function PasswordForm() {
             surname: "Enter your surname in letters.",
             phone: "Enter a mobile number like 0300 1234567 (or +country code for other countries).",
             date_of_birth: "Enter your real date of birth.",
-            password: "Use at least 10 characters.",
+            password: "Use at least 10 characters.", // pragma: allowlist secret
           };
           const hit = fields.filter((f) => f in known);
           return setFieldErrors(Object.fromEntries((hit.length ? hit : ["email"]).map((f) => [f, known[f]])));
