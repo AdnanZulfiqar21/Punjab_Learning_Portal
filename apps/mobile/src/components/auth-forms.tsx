@@ -99,7 +99,7 @@ function Tabs({ mode, onChange }: { mode: "signin" | "register"; onChange: (m: "
 function Steps({ labels, at }: { labels: readonly string[]; at: number }) {
   const c = useTheme();
   return (
-    <View accessibilityLabel={`Step ${at + 1} of ${labels.length}: ${labels[at]}`} style={{ flexDirection: "row", alignItems: "center", gap: Space.sm }}>
+    <View accessibilityLabel={`Step ${at + 1} of ${labels.length}`} style={{ flexDirection: "row", alignItems: "center", gap: Space.sm }}>
       {labels.map((label, i) => (
         <View key={label} style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, flex: i === 0 ? 0 : 1 }}>
           {i > 0 ? <View style={{ flex: 1, height: 2, borderRadius: 1, backgroundColor: i <= at ? c.accent : c.border }} /> : null}
