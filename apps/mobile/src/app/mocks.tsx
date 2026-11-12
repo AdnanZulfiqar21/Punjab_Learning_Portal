@@ -20,7 +20,7 @@ export default function MocksScreen() {
   const c = useTheme();
   return (
     <ScrollView style={{ backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg, gap: Space.md }}>
-      <Stack.Screen options={{ title: "Mock tests" }} />
+      <Stack.Screen options={{ title: "Book Mock Test" }} />
       <T variant="muted">Full-length tests that follow an official pattern checked by two reviewers. Taking a mock doesn&apos;t affect admission eligibility.</T>
       {state.status === "signed_in" ? <Mocks token={state.token} /> : <Notice title="Sign in to take a mock">Open the Account tab to sign in.</Notice>}
     </ScrollView>

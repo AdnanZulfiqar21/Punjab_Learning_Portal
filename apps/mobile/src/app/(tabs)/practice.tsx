@@ -31,7 +31,7 @@ export default function PracticeScreen() {
           <Button variant="link" label="Book exercises" onPress={() => router.push("/exercises")} />
           {state.status === "signed_in" && (
             <>
-              <Button variant="link" label="Mock tests" onPress={() => router.push("/mocks")} />
+              <Button variant="link" label="Book Mock Test" onPress={() => router.push("/mocks")} />
               <Button variant="link" label="Mistake notebook" onPress={() => router.push("/notebook")} />
               <Button variant="link" label="Progress" onPress={() => router.push("/progress")} />
               <Button variant="link" label="What you've shown" onPress={() => router.push("/evidence")} />
@@ -278,7 +278,7 @@ function Builder({ token, initialGrade, initialSubject }: { token: string; initi
       <View style={{ gap: Space.lg }}>
         <T variant="small">
           Custom practice from each subject&apos;s whole book in {GRADE_LABEL[grade]}. It isn&apos;t an official test pattern; for those, use
-          Mock tests. Choose two to five subjects.
+          Book Mock Test. Choose two to five subjects.
         </T>
         {SUBJECTS.map(([code, name]) => (
           <Field
