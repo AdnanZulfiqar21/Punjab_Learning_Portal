@@ -6,6 +6,7 @@ import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import type { ProfileInput, SessionCreated, StudySettings } from "@portal/contracts";
 import { DISPLAY_COOKIE, DISPLAY_MAX_AGE_S, fromAccount, parseDisplay, serializeDisplay } from "@/lib/display";
+import { safeAppPath } from "@/lib/safe-path";
 import { api, cookieOptions, PENDING_COOKIE, pendingEmail, SESSION_COOKIE, sessionToken } from "@/lib/session";
 
 export type FormState =
@@ -21,13 +22,6 @@ export type FormState =
     }
   | undefined;
 
-function safeNext(next: FormDataEntryValue | null): string {
-  const n = typeof next === "string" ? next : "";
-  // Only same-site relative paths; never an open redirect. Browsers drop tabs/newlines inside URLs and read "\" as
-  // "/", so "/\t/evil" or "/\evil" would become "//evil": any control character or backslash is refused outright.
-  if (/[\u0000-\u001f\u007f\\]/.test(n)) return "/account";
-  return /^\/(?!\/)/.test(n) ? n : "/account";
-}
 
 const PENDING_MAX_AGE_S = 30 * 60;
 
@@ -36,7 +30,7 @@ async function rememberPending(email: string): Promise<void> {
 }
 
 function verifyPath(next: FormDataEntryValue | null): string {
-  return `/signin/verify?next=${encodeURIComponent(safeNext(next))}`;
+  return `/signin/verify?next=${encodeURIComponent(safeAppPath(next, "/account"))}`;
 }
 
 /** Exchange an access token (the portal's password issuer) for an application session cookie, then go on. */
@@ -59,7 +53,7 @@ async function startSession(accessToken: string, next: FormDataEntryValue | null
       jar.set(DISPLAY_COOKIE, serializeDisplay(fromAccount(usual.data)), { ...cookieOptions(), httpOnly: false, maxAge: DISPLAY_MAX_AGE_S });
     }
   }
-  redirect(safeNext(next));
+  redirect(safeAppPath(next, "/account"));
 }
 
 const EMAIL_DOWN = "We couldn't send the email just now. Please try again in a minute.";
