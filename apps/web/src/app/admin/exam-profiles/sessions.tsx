@@ -56,7 +56,7 @@ export function ScheduleSession({ code }: { code: string }) {
       >
         Schedule this mock
       </button>
-      {done && <p className="text-sm">Scheduled. Learners see it under Practice → Mock tests.</p>}
+      {done && <p className="text-sm">Scheduled. Learners see it under Practice → Book Mock Test.</p>}
       {error && (
         <p role="alert" className="text-sm text-danger">
           {error}

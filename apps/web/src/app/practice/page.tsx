@@ -30,7 +30,7 @@ const WAYS: Way[] = [
   { href: "/practice/chapter-mocks", title: "Chapter mock tests", text: "A Board-pattern paper for each chapter, with its solution paper.", icon: <PracticeIcon name="timer" size={22} /> },
   { href: "/practice/exercises", title: "Book exercises", text: "Each chapter's exercise, solved, in English and Roman Urdu.", icon: <Icon name="book-open" size={22} /> },
   { href: "/practice/written", title: "Written practice", text: "Answer on paper, photograph your pages, teacher-marked.", icon: <PracticeIcon name="pen-line" size={22} /> },
-  { href: "/practice/mocks", title: "Mock tests", text: "Full-length tests that follow official patterns.", icon: <PracticeIcon name="timer" size={22} /> },
+  { href: "/practice/mocks", title: "Book Mock Test", text: "Full-length tests that follow official patterns.", icon: <PracticeIcon name="timer" size={22} /> },
   { href: "/practice/notebook", title: "Mistake notebook", text: "Questions you missed or flagged come back for review.", icon: <PracticeIcon name="bookmark" size={22} /> },
   { href: "/practice/progress", title: "Progress report", text: "Your tests, answers and results, ready to print.", icon: <PracticeIcon name="trending-up" size={22} /> },
   { href: "/practice/evidence", title: "What you've shown", text: "Each topic judged from your recent answers.", icon: <PracticeIcon name="circle-check" size={22} /> },
