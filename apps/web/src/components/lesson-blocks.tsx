@@ -61,7 +61,8 @@ function Marked({ text, marks, bold = [], math }: { text: string; marks: string[
     <>
       {styledPieces(text, marks, bold).map((p, i) => {
         const inner = p.bold ? (
-          <strong className="font-semibold">
+          // BOOK-BOLD-01: a term the book prints in bold stands out as in print (full bold, as the app draws it).
+          <strong className="font-bold">
             <Vectors text={p.text} math={math} />
           </strong>
         ) : (
