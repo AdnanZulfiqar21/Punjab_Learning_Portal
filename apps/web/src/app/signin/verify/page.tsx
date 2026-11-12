@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import { CenteredCard } from "@/components/learner-pages";
 import { SkeletonLines } from "@/components/ui";
 import { pendingEmail } from "@/lib/session";
+import { AuthShell } from "../auth-shell";
 import { VerifyForm } from "./verify-form";
 
 export const metadata: Metadata = { title: "Confirm your email", robots: { index: false } };
@@ -11,13 +11,13 @@ export const metadata: Metadata = { title: "Confirm your email", robots: { index
 /** AUTH-PASSWORD-01: enter the 6-digit code emailed at sign-up. The address comes from an HTTP-only cookie. */
 export default function VerifyEmailPage({ searchParams }: PageProps<"/signin/verify">) {
   return (
-    <CenteredCard icon="user" title="Confirm your email" lead="Enter the 6-digit code we emailed you. It works for 15 minutes.">
+    <AuthShell title="Confirm your email" lead="Enter the 6-digit code we emailed you. It works for 15 minutes.">
       <Suspense fallback={<SkeletonLines lines={3} label="Loading" />}>
         {searchParams.then((sp) => (
           <Pending next={sameSitePath(sp.next)} />
         ))}
       </Suspense>
-    </CenteredCard>
+    </AuthShell>
   );
 }
 

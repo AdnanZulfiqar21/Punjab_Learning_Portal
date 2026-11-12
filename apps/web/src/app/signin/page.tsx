@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { CenteredCard } from "@/components/learner-pages";
 import { Notice, SkeletonLines } from "@/components/ui";
 import { signInMethods } from "@/lib/session";
+import { AuthShell } from "./auth-shell";
 import { MODE_COPY } from "./mode-copy";
 import { ModeText, PasswordForm } from "./sign-in-form";
 
@@ -11,10 +11,9 @@ export const metadata: Metadata = { title: "Sign in", robots: { index: false } }
 /** Sign in, or sign up with `?mode=register`: the heading follows the form, so a new learner never reads "Sign in". */
 export default function SignInPage({ searchParams }: PageProps<"/signin">) {
   return (
-    <CenteredCard
-      icon="user"
+    <AuthShell
       title={
-        <Suspense fallback="Sign in">
+        <Suspense fallback={MODE_COPY.signin.title}>
           <ModeText part="title" />
         </Suspense>
       }
@@ -35,7 +34,7 @@ export default function SignInPage({ searchParams }: PageProps<"/signin">) {
           </div>
         ))}
       </Suspense>
-    </CenteredCard>
+    </AuthShell>
   );
 }
 

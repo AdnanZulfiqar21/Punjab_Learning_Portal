@@ -16,6 +16,8 @@ export type FormState =
       /** What was typed, sent back so a failed submit doesn't empty the form (React resets a form after its action).
        * Passwords are never echoed. */
       values?: Record<string, string>;
+      /** A step of a multi-step flow finished (forgotten password). */
+      done?: boolean;
     }
   | undefined;
 
@@ -164,6 +166,51 @@ export async function resendEmailCode(): Promise<FormState> {
     return { error: `Please wait ${wait} seconds before asking for another code.` };
   }
   return { error: res.status === 503 ? EMAIL_DOWN : "We couldn't send a new code right now." };
+}
+
+const WRONG_CODE = "That code is wrong or has expired. Check the email or ask for a new code.";
+
+/** Forgotten password, step 1: email a 6-digit code. The answer is the same whether or not the email has an account. */
+export async function requestPasswordReset(_prev: FormState, form: FormData): Promise<FormState> {
+  const email = String(form.get("email") ?? "").trim();
+  const values = { email };
+  if (!email) return { fieldErrors: { email: "Enter the email you signed up with." }, values };
+  const res = await api("/v1/auth/password-reset/request", { method: "POST", body: JSON.stringify({ email }) });
+  if (res.ok) return { done: true, values, notice: "If an account uses this email, a 6-digit code is on its way." };
+  if (res.status === 422) return { fieldErrors: { email: "Enter a valid email address." }, values };
+  return { error: res.status === 503 ? EMAIL_DOWN : "We couldn't send the code right now. Please try again.", values };
+}
+
+/** Step 2: check the code before the new password is typed (wrong tries count; the code stays usable). */
+export async function checkResetCode(_prev: FormState, form: FormData): Promise<FormState> {
+  const email = String(form.get("email") ?? "").trim();
+  const code = String(form.get("code") ?? "").replace(/\s/g, "");
+  if (!/^\d{6}$/.test(code)) return { fieldErrors: { code: "Enter the 6 digits from the email." }, values: { email } };
+  const res = await api("/v1/auth/password-reset/check", { method: "POST", body: JSON.stringify({ email, code }) });
+  if (res.ok) return { done: true, values: { email, code } };
+  if (res.status === 400 || res.status === 422) return { fieldErrors: { code: WRONG_CODE }, values: { email } };
+  return { error: "We couldn't check the code right now. Please try again.", values: { email } };
+}
+
+/** Step 3: set the new password; this signs the person in (and signs out every other session). */
+export async function finishPasswordReset(_prev: FormState, form: FormData): Promise<FormState> {
+  const email = String(form.get("email") ?? "").trim();
+  const code = String(form.get("code") ?? "").replace(/\s/g, "");
+  const password = String(form.get("new_password") ?? "");
+  const again = String(form.get("confirm_password") ?? "");
+  const values = { email, code };
+  if (password.length < 10) return { fieldErrors: { new_password: "Use at least 10 characters." }, values };
+  if (password !== again) return { fieldErrors: { confirm_password: "The two passwords don't match." }, values };
+  const res = await api<{ access_token: string }>("/v1/auth/password-reset/confirm", {
+    method: "POST",
+    body: JSON.stringify({ email, code, new_password: password }),
+  });
+  if (!res.ok) {
+    if (res.status === 400) return { error: `${WRONG_CODE} Ask for a new code to start again.`, values };
+    if (res.status === 422) return { fieldErrors: { new_password: "Use at least 10 characters." }, values };
+    return { error: "We couldn't change the password right now. Please try again.", values };
+  }
+  return startSession(res.data.access_token, form.get("next"));
 }
 
 export async function revokeSession(form: FormData): Promise<void> {
