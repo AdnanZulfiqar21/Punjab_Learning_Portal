@@ -249,3 +249,12 @@ def test_questions_cannot_carry_handouts(client: TestClient, db: Session) -> Non
     assert saved.status_code == 200, saved.text  # drafts may hold work in progress
     submitted = _post(client, author, item["id"], "submit")
     assert submitted.status_code == 422 and any("lessons only" in e for e in submitted.json()["errors"]), submitted.text
+
+
+def test_a_list_names_the_label_the_book_prints() -> None:
+    """BOOK-LIST-01: "i-", "(a)", "1-" are the book's own item labels; anything else is refused."""
+    base = {"type": "list", "ordered": True, "items": ["Fixture first item", "Fixture second item"]}
+    for marker in ("i-", "(a)", "1-", "(I)"):
+        assert blocks.validate_body({"blocks": [{**base, "marker": marker}]}, for_publication=False).errors == []
+    assert blocks.validate_body({"blocks": [base]}, for_publication=False).errors == []  # plain numbers
+    assert blocks.validate_body({"blocks": [{**base, "marker": "*"}]}, for_publication=False).errors

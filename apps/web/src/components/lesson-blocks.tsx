@@ -8,6 +8,7 @@ import { SaverImage } from "@/components/saver-image";
 import { bookBoxKind, boxRow, isMarginNote, isRowBox, isSideBox, isSideFigure, sideOrder } from "@/lib/book-box";
 import { bookErrors, markLatex, markPieces, styledPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
+import { isListMarker, labelWidth, listLabel, splitLabel } from "@/lib/book-list";
 import { leadIn, leadTerm } from "@/lib/book-style";
 import { hasMath } from "@/lib/inline-math";
 import { splitQuestionNumber } from "@/lib/question-number";
@@ -326,30 +327,65 @@ function BlockView({
             </span>
           </p>
         );
+      {
+        // BOOK-LIST-01: "(a) In electroporation, …" shows its label in a column, the lines hanging beside it.
+        const labelled = splitLabel(str(b.text), marks);
+        if (labelled)
+          return (
+            <p dir="auto" className="flex gap-2 whitespace-pre-line">
+              <span className="shrink-0" style={{ minWidth: `${labelled[0].length + 1}ch` }}>
+                {labelled[0]}
+              </span>
+              <span className="min-w-0 flex-1">
+                <Marked math={math} text={labelled[1]} marks={marks} bold={bold} />
+              </span>
+            </p>
+          );
+      }
       return (
         <p dir="auto" className="whitespace-pre-line">
           <Marked math={math} text={str(b.text)} marks={marks} bold={bold} />
         </p>
       );
     case "list": {
-      const items = strs(b.items).map((t, i) => {
+      const texts = strs(b.items);
+      const content = (t: string) => {
         // BOOK-STYLE-01: "Term: what it means" shows the term bold in the subject colour.
         const lead = premium ? leadTerm(t, marks) : null;
-        return (
-          <li key={i} dir="auto">
-            {lead ? (
-              <>
-                <span className="font-semibold text-accent">
-                  <Marked math={math} text={`${lead[0]}:`} marks={marks} bold={bold} />
-                </span>{" "}
-                <Marked math={math} text={lead[1]} marks={marks} bold={bold} />
-              </>
-            ) : (
-              <Marked math={math} text={t} marks={marks} bold={bold} />
-            )}
-          </li>
+        return lead ? (
+          <>
+            <span className="font-semibold text-accent">
+              <Marked math={math} text={`${lead[0]}:`} marks={marks} bold={bold} />
+            </span>{" "}
+            <Marked math={math} text={lead[1]} marks={marks} bold={bold} />
+          </>
+        ) : (
+          <Marked math={math} text={t} marks={marks} bold={bold} />
         );
-      });
+      };
+      // BOOK-LIST-01: the label the book prints ("i-", "(a)", "1-") in its own column, the item's lines hanging beside it.
+      if (b.ordered && isListMarker(b.marker)) {
+        const marker = b.marker;
+        const first = typeof b.start === "number" ? b.start : 1;
+        const width = labelWidth(marker, first, texts.length);
+        return (
+          <ol start={first} className="list-none space-y-2">
+            {texts.map((t, i) => (
+              <li key={i} dir="auto" className="flex gap-2">
+                <span className="shrink-0" style={{ minWidth: `${width}ch` }}>
+                  {listLabel(marker, first + i)}
+                </span>
+                <span className="min-w-0 flex-1">{content(t)}</span>
+              </li>
+            ))}
+          </ol>
+        );
+      }
+      const items = texts.map((t, i) => (
+        <li key={i} dir="auto">
+          {content(t)}
+        </li>
+      ));
       return b.ordered ? (
         <ol start={typeof b.start === "number" ? b.start : undefined} className="list-decimal space-y-2 pl-7 marker:font-semibold marker:text-accent">
           {items}

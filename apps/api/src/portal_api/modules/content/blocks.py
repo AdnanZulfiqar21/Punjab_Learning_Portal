@@ -173,12 +173,25 @@ class Paragraph(_Emphasised):
         return [self.text]
 
 
+# The label styles a book prints before list items (the same list as apps/web/src/lib/book-list.ts).
+ListMarker = Literal[
+    "1.", "1-", "1)", "(1)",
+    "a.", "a-", "a)", "(a)",
+    "A.", "A-", "A)", "(A)",
+    "i.", "i-", "i)", "(i)",
+    "I.", "I-", "I)", "(I)",
+]  # fmt: skip
+
+
 class ListBlock(_Emphasised):
     type: Literal["list"]
     ordered: bool = False
     # BOOK-LAYOUT-01: a numbered list the book interrupts (a figure or box printed between two steps) continues from
     # this number, so the steps keep the book's numbers (owner, 2026-11-03).
     start: Annotated[int, Field(ge=1, le=999)] | None = None
+    # BOOK-LIST-01: the label the book prints before the first item ("i-", "(a)", "1-"); the renderers count on in that
+    # style. Absent means plain numbers (owner, 2026-11-13).
+    marker: ListMarker | None = None
     items: list[Annotated[str, Field(min_length=1, max_length=1000)]] = Field(min_length=1, max_length=50)
 
     def _texts(self) -> list[str]:
