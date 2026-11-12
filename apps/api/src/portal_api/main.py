@@ -84,6 +84,8 @@ def create_app() -> FastAPI:
         allow_headers=[
             "Content-Type",
             "Authorization",
+            # The app asks for a fresh lesson (`Cache-Control: no-cache`); without it a browser build's preflight fails.
+            "Cache-Control",
             "Idempotency-Key",
             "X-Portal-Client",
             "X-Portal-Install",
