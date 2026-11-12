@@ -1894,6 +1894,180 @@
         "title": "BookExercisesOut",
         "type": "object"
       },
+      "BookMistakeChapterOut": {
+        "properties": {
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "count": {
+            "title": "Count",
+            "type": "integer"
+          },
+          "number": {
+            "title": "Number",
+            "type": "integer"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topics": {
+            "items": {
+              "$ref": "#/components/schemas/BookMistakeTopicOut"
+            },
+            "title": "Topics",
+            "type": "array"
+          }
+        },
+        "required": [
+          "chapter_id",
+          "number",
+          "title",
+          "count",
+          "topics"
+        ],
+        "title": "BookMistakeChapterOut",
+        "type": "object"
+      },
+      "BookMistakeOut": {
+        "description": "BOOK-MISTAKES-01: one printed mistake, as the English lesson shows it: the printed passage (its wrong words carry\n`book_errors` marks; a wrong figure or question is the block itself) and the green correction box or boxes.",
+        "properties": {
+          "context": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Context",
+            "type": "array"
+          },
+          "corrections": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Corrections",
+            "type": "array"
+          }
+        },
+        "required": [
+          "context",
+          "corrections"
+        ],
+        "title": "BookMistakeOut",
+        "type": "object"
+      },
+      "BookMistakeTopicOut": {
+        "properties": {
+          "availability": {
+            "enum": [
+              "published",
+              "private_preview"
+            ],
+            "title": "Availability",
+            "type": "string"
+          },
+          "count": {
+            "title": "Count",
+            "type": "integer"
+          },
+          "lesson_id": {
+            "format": "uuid",
+            "title": "Lesson Id",
+            "type": "string"
+          },
+          "locked": {
+            "title": "Locked",
+            "type": "boolean"
+          },
+          "mistakes": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/BookMistakeOut"
+            },
+            "title": "Mistakes",
+            "type": "array"
+          },
+          "number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Number"
+          },
+          "practice_only": {
+            "title": "Practice Only",
+            "type": "boolean"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topic_id": {
+            "format": "uuid",
+            "title": "Topic Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic_id",
+          "number",
+          "title",
+          "practice_only",
+          "availability",
+          "lesson_id",
+          "locked",
+          "count"
+        ],
+        "title": "BookMistakeTopicOut",
+        "type": "object"
+      },
+      "BookMistakesOut": {
+        "properties": {
+          "chapter_label": {
+            "title": "Chapter Label",
+            "type": "string"
+          },
+          "chapters": {
+            "items": {
+              "$ref": "#/components/schemas/BookMistakeChapterOut"
+            },
+            "title": "Chapters",
+            "type": "array"
+          },
+          "grade_number": {
+            "title": "Grade Number",
+            "type": "integer"
+          },
+          "subject_code": {
+            "title": "Subject Code",
+            "type": "string"
+          },
+          "subject_name": {
+            "title": "Subject Name",
+            "type": "string"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "grade_number",
+          "subject_code",
+          "subject_name",
+          "chapter_label",
+          "total",
+          "chapters"
+        ],
+        "title": "BookMistakesOut",
+        "type": "object"
+      },
       "BookOut": {
         "properties": {
           "authority": {
@@ -22149,6 +22323,50 @@
         ]
       }
     },
+    "/v1/chapters/{chapter_id}/book-mistakes": {
+      "get": {
+        "description": "BOOK-MISTAKES-01. Premium lesson text goes only to an entitled caller; the response is personal.",
+        "operationId": "chapter_book_mistakes_v1_chapters__chapter_id__book_mistakes_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chapter_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Chapter Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookMistakesOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "One chapter's printed mistakes, each with its correction, as the English lessons show them",
+        "tags": [
+          "lessons"
+        ]
+      }
+    },
     "/v1/chapters/{chapter_id}/lessons": {
       "get": {
         "description": "Every live lesson concept is listed once. Premium bodies go only to callers with an active plan or trial (review\nR07); others see the title marked locked. Free previews are readable by everyone.\n\nP07.S1.T2: a concept's reviewed variant in `language` is shown when one is live. Otherwise another reviewed variant\n(English first) is shown with `requested_language_missing`: a missing translation is explicit, never filled in.",
@@ -22731,6 +22949,62 @@
         "summary": "The book for one grade+subject",
         "tags": [
           "curriculum"
+        ]
+      }
+    },
+    "/v1/grades/{grade}/subjects/{subject}/book-mistakes": {
+      "get": {
+        "description": "BOOK-MISTAKES-01. Staff in scope also count drafts, so the answer depends on the caller: not shared-cached.",
+        "operationId": "book_mistakes_summary_v1_grades__grade__subjects__subject__book_mistakes_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "grade",
+            "required": true,
+            "schema": {
+              "maximum": 12,
+              "minimum": 11,
+              "title": "Grade",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "subject",
+            "required": true,
+            "schema": {
+              "maxLength": 40,
+              "minLength": 2,
+              "title": "Subject",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookMistakesOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "How many printed mistakes each chapter and topic of one class's book has, for Practice (no lesson text)",
+        "tags": [
+          "lessons"
         ]
       }
     },

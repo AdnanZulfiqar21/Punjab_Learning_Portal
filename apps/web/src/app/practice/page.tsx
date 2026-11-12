@@ -27,6 +27,8 @@ type Way = { href: string; title: string; text: string; icon: ReactNode };
 const WAYS: Way[] = [
   // BOOK-EXERCISES-01: the textbook's own end-of-chapter exercises, solved (Chapter practice leads, owner 2026-11-08).
   { href: "/practice/exercises", title: "Book exercises", text: "Each chapter's exercise, solved, in English and Roman Urdu.", icon: <Icon name="book-open" size={22} /> },
+  // BOOK-MISTAKES-01 (owner, 2026-11-12): the textbook's own printed mistakes, each with its correction.
+  { href: "/practice/book-mistakes", title: "Book mistakes", text: "Errors printed in your textbook, each with the right version.", icon: <PracticeIcon name="book-x" size={22} /> },
   { href: "/practice/written", title: "Written practice", text: "Answer on paper, photograph your pages, teacher-marked.", icon: <PracticeIcon name="pen-line" size={22} /> },
   { href: "/practice/mocks", title: "Mock tests", text: "Full-length tests that follow official patterns.", icon: <PracticeIcon name="timer" size={22} /> },
   { href: "/practice/notebook", title: "Mistake notebook", text: "Questions you missed or flagged come back for review.", icon: <PracticeIcon name="bookmark" size={22} /> },

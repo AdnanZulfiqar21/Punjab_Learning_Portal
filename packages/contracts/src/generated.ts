@@ -808,6 +808,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/chapters/{chapter_id}/book-mistakes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * One chapter's printed mistakes, each with its correction, as the English lessons show them
+         * @description BOOK-MISTAKES-01. Premium lesson text goes only to an entitled caller; the response is personal.
+         */
+        get: operations["chapter_book_mistakes_v1_chapters__chapter_id__book_mistakes_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/chapters/{chapter_id}/lessons": {
         parameters: {
             query?: never;
@@ -995,6 +1015,26 @@ export interface paths {
         };
         /** The book for one grade+subject */
         get: operations["book_for_v1_grades__grade__subjects__subject__book_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/grades/{grade}/subjects/{subject}/book-mistakes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * How many printed mistakes each chapter and topic of one class's book has, for Practice (no lesson text)
+         * @description BOOK-MISTAKES-01. Staff in scope also count drafts, so the answer depends on the caller: not shared-cached.
+         */
+        get: operations["book_mistakes_summary_v1_grades__grade__subjects__subject__book_mistakes_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -5622,6 +5662,85 @@ export interface components {
             subject_code: string;
             /** Subject Name */
             subject_name: string;
+        };
+        /** BookMistakeChapterOut */
+        BookMistakeChapterOut: {
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /** Count */
+            count: number;
+            /** Number */
+            number: number;
+            /** Title */
+            title: string;
+            /** Topics */
+            topics: components["schemas"]["BookMistakeTopicOut"][];
+        };
+        /**
+         * BookMistakeOut
+         * @description BOOK-MISTAKES-01: one printed mistake, as the English lesson shows it: the printed passage (its wrong words carry
+         *     `book_errors` marks; a wrong figure or question is the block itself) and the green correction box or boxes.
+         */
+        BookMistakeOut: {
+            /** Context */
+            context: {
+                [key: string]: unknown;
+            }[];
+            /** Corrections */
+            corrections: {
+                [key: string]: unknown;
+            }[];
+        };
+        /** BookMistakeTopicOut */
+        BookMistakeTopicOut: {
+            /**
+             * Availability
+             * @enum {string}
+             */
+            availability: "published" | "private_preview";
+            /** Count */
+            count: number;
+            /**
+             * Lesson Id
+             * Format: uuid
+             */
+            lesson_id: string;
+            /** Locked */
+            locked: boolean;
+            /**
+             * Mistakes
+             * @default []
+             */
+            mistakes: components["schemas"]["BookMistakeOut"][];
+            /** Number */
+            number: string | null;
+            /** Practice Only */
+            practice_only: boolean;
+            /** Title */
+            title: string;
+            /**
+             * Topic Id
+             * Format: uuid
+             */
+            topic_id: string;
+        };
+        /** BookMistakesOut */
+        BookMistakesOut: {
+            /** Chapter Label */
+            chapter_label: string;
+            /** Chapters */
+            chapters: components["schemas"]["BookMistakeChapterOut"][];
+            /** Grade Number */
+            grade_number: number;
+            /** Subject Code */
+            subject_code: string;
+            /** Subject Name */
+            subject_name: string;
+            /** Total */
+            total: number;
         };
         /** BookOut */
         BookOut: {
@@ -14543,6 +14662,37 @@ export interface operations {
             };
         };
     };
+    chapter_book_mistakes_v1_chapters__chapter_id__book_mistakes_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                chapter_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookMistakesOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     chapter_lessons_v1_chapters__chapter_id__lessons_get: {
         parameters: {
             query?: {
@@ -14879,6 +15029,38 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["BookOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    book_mistakes_summary_v1_grades__grade__subjects__subject__book_mistakes_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                grade: number;
+                subject: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookMistakesOut"];
                 };
             };
             /** @description Validation Error */
