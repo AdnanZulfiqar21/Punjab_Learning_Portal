@@ -21,6 +21,7 @@ export function ModeText({ part }: { part: "title" | "lead" }) {
 
 // On a phone, sign-up comes in two short steps (owner 2026-11-12, draft B); on a computer it is one form (draft A).
 const STEP_ONE = ["first_name", "surname", "email", "password"] as const;
+const TOO_SHORT = "Use at least 10 characters.";
 
 /** AUTH-PASSWORD-01 + AUTH-PREMIUM-01: email + password sign-in, and sign-up that emails a 6-digit code.
  * `devShortcuts` adds the development-only MFA simulation for staff actions. */
@@ -71,7 +72,7 @@ export function PasswordForm({ next, devShortcuts }: { next: string; devShortcut
     if (!v("first_name")) errs.first_name = "Enter your first name.";
     if (!v("surname")) errs.surname = "Enter your surname.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v("email"))) errs.email = "Enter a valid email address.";
-    if (String(new FormData(form).get("password") ?? "").length < 10) errs.password = "Use at least 10 characters.";
+    if (String(new FormData(form).get("password") ?? "").length < 10) errs.password = TOO_SHORT;
     setStepErrors(errs);
     if (!Object.keys(errs).length) setStep(2);
   }
