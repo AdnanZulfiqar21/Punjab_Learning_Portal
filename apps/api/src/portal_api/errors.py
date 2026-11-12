@@ -7,7 +7,7 @@ import logging
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-from sqlalchemy.exc import OperationalError
+from sqlalchemy.exc import DataError, OperationalError
 from sqlalchemy.exc import TimeoutError as SATimeoutError
 
 
@@ -153,6 +153,19 @@ def install(app: FastAPI) -> None:
         response.headers["Retry-After"] = "10"
         return response
 
+    @app.exception_handler(DataError)
+    async def _unstorable(request: Request, exc: DataError) -> JSONResponse:
+        # SECURITY-HARDEN-01: a value the database refuses as data (a NUL character, a number out of range) came from
+        # the request, so it is the client's error: a 422 problem, never a bare 500.
+        orig = getattr(exc, "orig", exc)
+        logging.getLogger("portal_api.db").info(
+            "refused data: %s path=%s cid=%s",
+            type(orig).__name__,
+            request.url.path,
+            getattr(request.state, "correlation_id", None),
+        )
+        return _problem(request, 422, "VALIDATION_FAILED", "The request contains a value that can't be used.")
+
     @app.exception_handler(OperationalError)
     async def _db_unavailable(request: Request, exc: OperationalError) -> JSONResponse:
         # Log the driver error class and first line (no parameters, which may hold user data) with the correlation id.
@@ -166,3 +179,22 @@ def install(app: FastAPI) -> None:
             getattr(request.state, "correlation_id", None),
         )
         return _problem(request, 503, "SERVICE_UNAVAILABLE", "The service is temporarily unavailable. Please retry.")
+
+    @app.exception_handler(Exception)
+    async def _unhandled(request: Request, exc: Exception) -> JSONResponse:
+        # SECURITY-HARDEN-01: anything unexpected is a problem+json 500 with no internals in it. Starlette answers this
+        # outside the middleware stack, so the defensive headers are set here as well.
+        # The server logs the traceback itself; this line ties it to the correlation id, without the message.
+        logging.getLogger("portal_api").error(
+            "unhandled error: %s path=%s cid=%s",
+            type(exc).__name__,
+            request.url.path,
+            getattr(request.state, "correlation_id", None),
+        )
+        response = _problem(request, 500, "INTERNAL_ERROR", "Something went wrong on our side. Please try again.")
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["X-Frame-Options"] = "DENY"
+        response.headers["Referrer-Policy"] = "no-referrer"
+        response.headers["Cache-Control"] = "private, no-store"
+        response.headers["Content-Security-Policy"] = "default-src 'none'; frame-ancestors 'none'"
+        return response

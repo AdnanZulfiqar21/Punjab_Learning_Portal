@@ -77,3 +77,43 @@ test("the session cookie is HttpOnly and SameSite, and typed text is never marku
   expect(await agent.locator('main img[src="x"]').count()).toBe(0);
   expect(await agent.evaluate(() => (window as unknown as { __xss?: number }).__xss)).toBeUndefined();
 });
+
+// SECURITY-HARDEN-01: a lesson program runs in a worker that can only compute and print. It has no bridge to
+// JavaScript and no way to make a request, so it can never act as the signed-in reader against the portal.
+test("the code runner can print but cannot reach JavaScript or the network", async ({ page }) => {
+  test.slow();
+  // A static same-origin page: the worker gets the site's headers, and nothing navigates while it runs.
+  await page.goto("/offline.html");
+  const run = (code: string) =>
+    page.evaluate(
+      (program) =>
+        new Promise<{ type: string; output?: string; error?: string | null }>((resolve) => {
+          const worker = new Worker("/py-runner.js", { type: "module" });
+          worker.onmessage = (e: MessageEvent<{ type: string; output?: string; error?: string | null }>) => {
+            if (e.data.type === "done" || e.data.type === "failed") {
+              worker.terminate();
+              resolve(e.data);
+            }
+          };
+          worker.postMessage({ code: program, stdin: [] });
+        }),
+      code,
+    );
+  const ok = await run('print("hello", 6 * 7)');
+  expect(ok).toMatchObject({ type: "done", output: "hello 42\n", error: null });
+  const probe = await run(
+    [
+      "out = []",
+      'for name in ("js", "pyodide_js", "pyodide.ffi", "pyodide.http", "pyodide.code"):',
+      "    try:",
+      "        __import__(name)",
+      '        out.append(name + " imported")',
+      "    except ImportError:",
+      '        out.append(name + " blocked")',
+      'print("; ".join(out))',
+    ].join("\n"),
+  );
+  expect(probe.output?.trim()).toBe(
+    "js blocked; pyodide_js blocked; pyodide.ffi blocked; pyodide.http blocked; pyodide.code blocked",
+  );
+});
