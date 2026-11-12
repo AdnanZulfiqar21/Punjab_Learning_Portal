@@ -158,3 +158,36 @@ def test_the_emulator_is_accepted_in_development_and_refused_when_deployed() -> 
         Settings(**{**OIDC, **emulator}, **base)
     with pytest.raises(ConfigurationError, match="endpoint, bucket"):
         Settings(**{**OIDC, "evidence_s3_endpoint": "", "evidence_s3_bucket": ""}, **base)
+
+
+@pytest.mark.parametrize(
+    "overrides",
+    [
+        {"database_url": PROD_DB},
+        {"public_api_origin": "https://api.sirfconcepts.example.org"},
+        {"cors_origins": ["http://localhost:3100", "https://sirfconcepts.example.org"]},
+        {"database_url": "postgresql+psycopg://app@52.95.110.1:5432/portal"},  # a public address (never contacted)
+    ],
+)
+@pytest.mark.parametrize("role", [Role.development, Role.test])
+def test_development_roles_refuse_a_real_deployments_addresses(role: Role, overrides: dict[str, object]) -> None:
+    """ROLE-EXPLICIT-01: a server started without PORTAL_ROLE falls back to development, which mounts the code-free
+    sign-in shortcuts and /docs. A non-local database or origin means the role was forgotten, so it refuses."""
+    with pytest.raises(ConfigurationError, match="set PORTAL_ROLE"):
+        Settings(role=role, **overrides)  # type: ignore[arg-type]
+
+
+@pytest.mark.parametrize(
+    "overrides",
+    [
+        {},
+        {"database_url": "postgresql+psycopg://portal@postgres:5432/portal"},  # a compose service name
+        {"database_url": "postgresql+psycopg://portal@[::1]:5432/portal"},
+        # a phone on the same Wi-Fi
+        {"public_api_origin": "http://192.168.1.20:8100", "cors_origins": ["http://192.168.1.20:8190"]},
+        {"public_api_origin": "http://api.portal.test:8100"},
+        {"cors_origins": []},
+    ],
+)
+def test_development_role_still_starts_on_a_laptop(overrides: dict[str, object]) -> None:
+    assert Settings(role=Role.development, **overrides).role is Role.development  # type: ignore[arg-type]
