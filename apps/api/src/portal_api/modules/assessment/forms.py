@@ -258,7 +258,11 @@ def create_form(
     from portal_api.modules.access import service as access
 
     subjects = [s for s, _ in mix or []] if scope_mode == "multi_subject" and mix else [subject]
-    access.require_access(db, who.user.id, purpose="Practice tests", need=access.Need.subjects(grade, *subjects))
+    # COMBINED-SCOPE-01 (security audit 2026-11): an 11+12 combined test draws from both classes' books, so the
+    # plan must cover the subject in both, not only in the class the request names.
+    grades = (11, 12) if scope_mode == "combined" else (grade,)
+    need = access.Need(pairs=frozenset((g, s) for g in grades for s in subjects))
+    access.require_access(db, who.user.id, purpose="Practice tests", need=need)
     if scope_mode == "multi_subject":
         seed, chosen, scope = _multi_subject(db, grade, mix or [], question_count, chapter_ids, topic_ids, half)
         subject = mix[0][0] if mix else subject
