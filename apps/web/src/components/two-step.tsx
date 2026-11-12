@@ -96,7 +96,7 @@ export function TwoStep({ status }: { status: MfaStatus }) {
       <div className="space-y-3">
         <ol className="list-decimal space-y-2 pl-5 text-sm">
           <li>
-            In your authenticator app, add an account and choose to enter a setup key. On this phone you can{" "}
+            In your authenticator app, add an account and choose to enter a setup key. On a phone you can{" "}
             <a href={setup.otpauth_uri} className="font-medium text-accent underline">
               open the app directly
             </a>
