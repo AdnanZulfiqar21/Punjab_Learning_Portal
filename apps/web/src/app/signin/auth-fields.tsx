@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type InputHTMLAttributes, type ReactNode } from "react";
+import { useId, useState, type InputHTMLAttributes, type ReactNode } from "react";
 import { LABEL, PageIcon, type PageIconName } from "@/components/learner-pages";
 
 // AUTH-PREMIUM-01: the form parts shared by sign-in, sign-up and the forgotten-password steps.
@@ -9,7 +9,10 @@ const INPUT =
   "w-full min-h-[3.125rem] rounded-[14px] border border-border bg-surface pl-11 pr-4 text-foreground outline-none transition duration-150 placeholder:text-muted/70 hover:border-accent/60 focus-visible:border-accent focus-visible:ring-4 focus-visible:ring-accent/15 aria-[invalid=true]:border-danger";
 
 type FieldProps = {
+  /** The form field's name. */
   id: string;
+  /** The element id, when the caller needs it (e.g. a button that controls the input); otherwise one is made. */
+  domId?: string;
   label: string;
   icon: PageIconName;
   hint?: string;
@@ -17,17 +20,21 @@ type FieldProps = {
   trailing?: ReactNode;
 } & InputHTMLAttributes<HTMLInputElement>;
 
-export function AuthField({ id, label, icon, hint, error, trailing, className = "", ...input }: FieldProps) {
-  const described = [hint ? `${id}-hint` : "", error ? `${id}-error` : ""].filter(Boolean).join(" ") || undefined;
+// Element ids are unique per page instance (useId), not the field's name: Next keeps the previous page in the document
+// while it is hidden, and a second `id="email"` there would take this page's label.
+export function AuthField({ id, domId, label, icon, hint, error, trailing, className = "", ...input }: FieldProps) {
+  const made = useId();
+  const el = domId ?? `${id}-${made}`;
+  const described = [hint ? `${el}-hint` : "", error ? `${el}-error` : ""].filter(Boolean).join(" ") || undefined;
   return (
     <div className={`space-y-1.5 ${className}`}>
-      <label htmlFor={id} className={LABEL}>
+      <label htmlFor={el} className={LABEL}>
         {label}
       </label>
       <div className="relative flex items-center">
         <PageIcon name={icon} size={18} className="pointer-events-none absolute left-3.5 text-muted" />
         <input
-          id={id}
+          id={el}
           name={id}
           aria-invalid={!!error}
           aria-describedby={described}
@@ -37,12 +44,12 @@ export function AuthField({ id, label, icon, hint, error, trailing, className = 
         {trailing}
       </div>
       {hint && (
-        <p id={`${id}-hint`} className="text-[0.8125rem] text-muted">
+        <p id={`${el}-hint`} className="text-[0.8125rem] text-muted">
           {hint}
         </p>
       )}
       {error && (
-        <p id={`${id}-error`} className="text-sm text-danger">
+        <p id={`${el}-error`} className="text-sm text-danger">
           {error}
         </p>
       )}
@@ -80,11 +87,13 @@ export function PasswordField({
 }) {
   const [shown, setShown] = useState(false);
   const [value, setValue] = useState("");
+  const el = `${id}-${useId()}`;
   const s = meter ? strength(value) : 0;
   return (
     <div className="space-y-1.5">
       <AuthField
         id={id}
+        domId={el}
         label={label}
         icon="lock"
         type={shown ? "text" : "password"}
@@ -99,7 +108,7 @@ export function PasswordField({
             type="button"
             // Named "Show"/"Hide" (not "… password") so the field keeps the only "Password" label.
             aria-label={shown ? "Hide" : "Show"}
-            aria-controls={id}
+            aria-controls={el}
             aria-pressed={shown}
             title={shown ? "Hide password" : "Show password"}
             onClick={() => setShown((v) => !v)}
@@ -163,13 +172,14 @@ export function FormAlert({ error, notice }: { error?: string; notice?: string }
 
 /** The 6-digit code from an email: large, spaced digits, filled from the SMS/email one-time-code suggestion. */
 export function CodeField({ error, defaultValue }: { error?: string; defaultValue?: string }) {
+  const el = `code-${useId()}`;
   return (
     <div className="space-y-1.5">
-      <label htmlFor="code" className={LABEL}>
+      <label htmlFor={el} className={LABEL}>
         6-digit code
       </label>
       <input
-        id="code"
+        id={el}
         name="code"
         inputMode="numeric"
         autoComplete="one-time-code"
@@ -179,11 +189,11 @@ export function CodeField({ error, defaultValue }: { error?: string; defaultValu
         autoFocus
         defaultValue={defaultValue}
         aria-invalid={!!error}
-        aria-describedby={error ? "code-error" : undefined}
+        aria-describedby={error ? `${el}-error` : undefined}
         className="min-h-14 w-full rounded-[14px] border border-border bg-surface px-4 text-center font-display text-[1.75rem] font-semibold tracking-[0.5em] text-foreground outline-none transition hover:border-accent/60 focus-visible:border-accent focus-visible:ring-4 focus-visible:ring-accent/15 aria-[invalid=true]:border-danger"
       />
       {error && (
-        <p id="code-error" className="text-sm text-danger">
+        <p id={`${el}-error`} className="text-sm text-danger">
           {error}
         </p>
       )}
