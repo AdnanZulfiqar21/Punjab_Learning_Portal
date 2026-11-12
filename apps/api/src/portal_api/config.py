@@ -7,9 +7,11 @@ silently carry them.
 
 from __future__ import annotations
 
+import ipaddress
 from enum import StrEnum
 from functools import lru_cache
 from typing import Literal
+from urllib.parse import urlsplit
 
 from pydantic import Field, SecretStr, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -29,6 +31,19 @@ class ConfigurationError(RuntimeError):
 # The issuer of development/test accounts (the local password issuer outside deployed roles).
 DEV_ISSUER = "urn:portal:dev-local-issuer"
 DEV_MARKERS = ("localhost", "127.0.0.1", "dev-only", "portal-dev", "sandbox", "staging")
+
+
+def _is_local_host(host: str | None) -> bool:
+    """A host on this machine or a private network: a developer's laptop, a phone on the same Wi-Fi, a compose
+    service name. Any other name or a public address belongs to a real deployment."""
+    if not host:
+        return True
+    name = host.strip("[]").lower()
+    try:
+        ip = ipaddress.ip_address(name)
+    except ValueError:
+        return "." not in name or name == "host.docker.internal" or name.endswith((".localhost", ".local", ".test"))
+    return ip.is_loopback or ip.is_private or ip.is_link_local
 
 
 class Settings(BaseSettings):
@@ -227,6 +242,37 @@ class Settings(BaseSettings):
             raise ConfigurationError("evidence_store=s3 needs an endpoint, bucket, access key and secret key")
         if self.db_max_overflow != 0 and self.role is Role.production:
             raise ConfigurationError("db_max_overflow must be 0 in production (connection budget, roadmap §5.8)")
+        return self
+
+    @model_validator(mode="after")
+    def _validate_role_is_deliberate(self) -> Settings:
+        """ROLE-EXPLICIT-01 (security audit 2026-11, H1): `development` is the default so a laptop needs no setup, and
+        it mounts the code-free sign-in shortcuts, a simulated second factor and /docs. A server started without
+        PORTAL_ROLE would therefore be wide open without any error. So the development and test roles refuse any
+        address that is not on this machine or a private network: a real database or a public origin means the role
+        was forgotten."""
+        if self.role in (Role.production, Role.staging):
+            return self
+        remote = []
+        checked = (
+            ("database_url", [self.database_url]),
+            ("public_api_origin", [self.public_api_origin]),
+            ("cors_origins", self.cors_origins),
+        )
+        for name, values in checked:
+            for value in values:
+                try:
+                    host = urlsplit(value).hostname
+                except ValueError:
+                    host = None
+                if not _is_local_host(host):
+                    remote.append(name)
+                    break
+        if remote:
+            raise ConfigurationError(
+                f"refusing to start role={self.role.value} with a non-local {', '.join(remote)}: set PORTAL_ROLE to "
+                "production or staging on a server (the development role opens sign-in shortcuts and /docs)"
+            )
         return self
 
     @property

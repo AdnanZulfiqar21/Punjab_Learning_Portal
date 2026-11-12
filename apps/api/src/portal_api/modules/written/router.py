@@ -291,6 +291,8 @@ async def upload(
     declared = request.headers.get("content-length")
     if declared and declared.isdigit() and int(declared) > UPLOAD_LIMIT:
         raise TooLarge("This file is larger than any accepted page.")
+    # UPLOAD-OWNER-FIRST-01: whose attempt this is, and that it is still open, before any of the body is read.
+    await run_in_threadpool(service.upload_target, db, who, attempt_id, open_only=True)
     buf = bytearray()
     async for chunk in request.stream():
         buf.extend(chunk)

@@ -1262,20 +1262,25 @@ async def rescan(
     from starlette.concurrency import run_in_threadpool
 
     from portal_api.errors import TooLarge
-    from portal_api.modules.written import rescans
+    from portal_api.modules.written import rescans, service
 
     _private(response)
-    buf = bytearray()
-    async for chunk in request.stream():
-        buf.extend(chunk)
-        if len(buf) > RESCAN_LIMIT:
-            raise TooLarge("This file is larger than any accepted page.")
+    # UPLOAD-OWNER-FIRST-01: everything that can be refused without the file is refused before the body is read.
+    declared = request.headers.get("content-length")
+    if declared and declared.isdigit() and int(declared) > RESCAN_LIMIT:
+        raise TooLarge("This file is larger than any accepted page.")
     if not idempotency_key:
         from portal_api.errors import Unprocessable
 
         raise Unprocessable(
             "Send an Idempotency-Key so a retry can't create a second copy.", code_reason="KEY_REQUIRED"
         )
+    await run_in_threadpool(service.upload_target, db, who, attempt_id, open_only=False)
+    buf = bytearray()
+    async for chunk in request.stream():
+        buf.extend(chunk)
+        if len(buf) > RESCAN_LIMIT:
+            raise TooLarge("This file is larger than any accepted page.")
     rev, replay = await run_in_threadpool(
         rescans.submit_rescan, db, who, attempt_id, position, bytes(buf), note, idempotency_key
     )

@@ -244,6 +244,12 @@ export const api = {
     if (grade) params.set("grade", String(grade));
     return request<SearchResult>(`/v1/search?${params.toString()}`, { token, signal });
   },
+  /** SEARCH-SUGGEST-01: chapters and topics whose titles match what is being typed (no lessons, no session). */
+  suggest: (q: string, grade: number | undefined, signal?: AbortSignal) => {
+    const params = new URLSearchParams({ q, limit: "8" });
+    if (grade) params.set("grade", String(grade));
+    return request<SearchResult>(`/v1/search?${params.toString()}`, { token: null, signal });
+  },
   runtimeConfig: (signal?: AbortSignal) => getJSON<RuntimeConfig>("/v1/runtime-config", signal),
   /** Published, live lessons only (independently reviewed); drafts never reach the app. */
   // Premium bodies come back only with a session that has an active plan or trial (review R07).
