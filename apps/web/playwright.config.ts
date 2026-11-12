@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 // End-to-end journeys against a running API (real imported catalogue) and web server.
-// Locally: start the API on :8100 and `pnpm build && pnpm start`, then `pnpm e2e`. CI starts both first.
+// Locally: start the API on :8100 and `pnpm build && PORTAL_ROLE=development pnpm start`, then `pnpm e2e`. CI starts both first.
 export default defineConfig({
   testDir: "./e2e",
   timeout: 30_000,

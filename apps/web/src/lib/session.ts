@@ -24,6 +24,13 @@ export async function sessionToken(): Promise<string | undefined> {
   return (await cookies()).get(SESSION_COOKIE)?.value;
 }
 
+/** AUTH-PASSWORD-01: the email waiting for its 6-digit code, kept in an HTTP-only cookie (never in the URL). */
+export const PENDING_COOKIE = "portal_pending_email";
+
+export async function pendingEmail(): Promise<string | undefined> {
+  return (await cookies()).get(PENDING_COOKIE)?.value;
+}
+
 export type ApiResult<T> = { ok: true; data: T } | { ok: false; status: number; problem: Problem | null };
 
 /** Call the API on behalf of the signed-in learner (or anonymously when `token` is absent). */

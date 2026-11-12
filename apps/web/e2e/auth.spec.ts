@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // Uses the development identity adapter, which the API exposes only in development/test roles.
 // Each test registers a fresh technical-fixture account; no real personal data.
@@ -12,7 +13,9 @@ async function register(page: Page, email: string, next = "/account") {
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill(PASSWORD);
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
 }
 
 test("protected pages redirect to sign-in and return afterwards", async ({ page }) => {
@@ -99,3 +102,44 @@ for (const sneaky of ["/\t/evil.example.com/", "/\n/evil.example.com/", "/\\evil
     await expect(page).toHaveURL(/localhost:\d+\/account$/, AUTH);
   });
 }
+
+test("a forgotten password is reset with the emailed code, then the new one signs in", async ({ page }) => {
+  const email = newEmail("reset");
+  await register(page, email);
+  await expect(page).toHaveURL(/\/account$/, AUTH);
+  await page.getByRole("button", { name: "Sign out of this device" }).click();
+  await expect(page).toHaveURL(/\/$/);
+
+  await page.goto("/signin");
+  await page.getByRole("link", { name: "Forgot password?" }).click();
+  await expect(page.getByRole("heading", { name: "Reset your password" })).toBeVisible();
+  // By role: Next keeps the sign-in page in the document (hidden) after the link, with its own "Email" field.
+  await page.getByRole("textbox", { name: "Email", exact: true }).fill(email);
+  await page.getByRole("button", { name: "Send code" }).click();
+  await expect(page.getByTestId("reset-email")).toHaveText(email, AUTH);
+  // A wrong code is refused before any new password is asked for.
+  await page.getByLabel("6-digit code").fill("000000");
+  await page.getByRole("button", { name: "Check code" }).click();
+  await expect(page.getByText("That code is wrong or has expired")).toBeVisible(AUTH);
+  const res = await page.request.post(`${process.env.PORTAL_API_INTERNAL_ORIGIN ?? "http://127.0.0.1:8100"}/v1/dev-auth/last-code`, {
+    data: { email, purpose: "reset-password" },
+  });
+  const { code } = (await res.json()) as { code: string };
+  await page.getByLabel("6-digit code").fill(code);
+  await page.getByRole("button", { name: "Check code" }).click();
+  const fresh = "e2e-fixture-new-password-2"; // pragma: allowlist secret
+  await page.getByLabel("New password").fill(fresh);
+  await page.getByLabel("Type it again").fill(fresh);
+  await page.getByRole("button", { name: "Save password and sign in" }).click();
+  await expect(page).toHaveURL(/\/account$/, AUTH);
+
+  await page.getByRole("button", { name: "Sign out of this device" }).click();
+  await page.goto("/signin");
+  await page.getByLabel("Email").fill(email);
+  await page.getByLabel("Password").fill(PASSWORD);
+  await page.getByRole("button", { name: "Sign in" }).click();
+  await expect(page.getByRole("alert").filter({ hasText: /\S/ })).toHaveText("Email or password is incorrect.", AUTH);
+  await page.getByLabel("Password").fill(fresh);
+  await page.getByRole("button", { name: "Sign in" }).click();
+  await expect(page).toHaveURL(/\/account$/, AUTH);
+});

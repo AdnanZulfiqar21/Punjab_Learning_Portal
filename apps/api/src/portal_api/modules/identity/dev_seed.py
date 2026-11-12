@@ -13,12 +13,12 @@ from __future__ import annotations
 import sys
 
 from argon2 import PasswordHasher
-from sqlalchemy import select
+from sqlalchemy import func, select
 
 from portal_api.config import get_settings
 from portal_api.db import get_sessionmaker
 from portal_api.modules.audit.models import record
-from portal_api.modules.identity.models import AppUser, DevCredential, StaffRoleGrant
+from portal_api.modules.identity.models import AppUser, PasswordCredential, StaffRoleGrant
 
 # Development-only fixture password for the local identity adapter. Never valid anywhere else.
 FIXTURE_PASSWORD = "studio-fixture-pass-1"  # noqa: S105 - dev-adapter fixture, refused outside development/test
@@ -51,14 +51,21 @@ def main(argv: list[str] | None = None) -> int:
             user = db.scalar(select(AppUser).where(AppUser.email == email))
             if user is None:
                 user = AppUser(
-                    issuer=settings.dev_auth_issuer,
+                    issuer=settings.password_auth_issuer,
                     subject=f"dev|{email}",
                     email=email,
                     display_name=email.split("@")[0],
                 )
                 db.add(user)
                 db.flush()
-                db.add(DevCredential(user_id=user.id, email=email, password_hash=hasher.hash(FIXTURE_PASSWORD)))
+                db.add(
+                    PasswordCredential(
+                        user_id=user.id,
+                        email=email,
+                        password_hash=hasher.hash(FIXTURE_PASSWORD),
+                        email_verified_at=func.now(),
+                    )
+                )
             for role in roles:
                 held = db.scalar(
                     select(StaffRoleGrant).where(

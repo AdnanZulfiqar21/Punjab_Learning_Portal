@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // P11.S2.T1 (LESSON-PROGRESS-01): the chapter page remembers the lesson a learner reached and offers to continue there,
 // on this or another device. Technical fixture lessons (the structured-blocks fixture chapter) and a fixture account.
@@ -12,7 +13,9 @@ test("a chapter offers to continue at the lesson the learner reached", async ({ 
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("practice-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/practice\?/, AUTH);
   await page.getByRole("button", { name: "Start my free 30-day trial" }).click();
   await expect(page.getByText(/Free trial until/)).toBeVisible(AUTH);

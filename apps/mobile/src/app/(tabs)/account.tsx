@@ -4,6 +4,7 @@ import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import type { AppSession, Me } from "@portal/contracts";
 
+import { AuthForms } from "@/components/auth-forms";
 import { Button, Field, FormError } from "@/components/form";
 import { PlanCard } from "@/components/plan-card";
 import { Screen } from "@/components/premium";
@@ -40,7 +41,7 @@ function SignIn() {
   if (methods.state.status === "loading") return <Loading label="Loading sign-in options" />;
   if (methods.state.status === "error") return <ErrorState error={methods.state.error} onRetry={methods.retry} />;
   const available = methods.state.data.sign_in_methods;
-  if (available.includes("dev_password")) return <DevPasswordForm />;
+  if (available.includes("password")) return <AuthForms />;
   if (available.includes("oidc")) {
     return (
       <Notice title="Sign-in provider not yet connected">
@@ -49,75 +50,6 @@ function SignIn() {
     );
   }
   return <Notice tone="warn" title="Sign-in is not available in this environment" />;
-}
-
-function DevPasswordForm() {
-  const { signIn, register } = useAuth();
-  const [mode, setMode] = useState<"signin" | "register">("signin");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [passwordError, setPasswordError] = useState<string | undefined>();
-
-  async function submit() {
-    setError(null);
-    setPasswordError(undefined);
-    if (!email.trim() || !password) return setError("Enter your email and password.");
-    if (mode === "register" && password.length < 10) return setPasswordError("Use at least 10 characters.");
-    setBusy(true);
-    try {
-      await (mode === "signin" ? signIn : register)(email.trim(), password);
-    } catch (e) {
-      const kind = e instanceof ApiError ? e.kind : "server";
-      setError(
-        kind === "unauthorized"
-          ? "Email or password is incorrect."
-          : kind === "invalid"
-            ? "Enter a valid email address."
-            : kind === "offline"
-              ? "Can't reach the learning service. Check your connection and try again."
-              : "Sign-in is unavailable right now.",
-      );
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  return (
-    <View style={{ gap: Space.lg }}>
-      <Notice tone="warn" title="Development sign-in">
-        This build uses a local development identity service. Real accounts will sign in through the managed identity
-        provider.
-      </Notice>
-      <Field
-        label="Email"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        autoComplete="email"
-        keyboardType="email-address"
-        textContentType="username"
-      />
-      <Field
-        label="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        autoComplete={mode === "signin" ? "current-password" : "new-password"}
-        textContentType={mode === "signin" ? "password" : "newPassword"}
-        error={passwordError}
-        onSubmitEditing={submit}
-      />
-      <FormError message={error} />
-      <Button label={mode === "signin" ? "Sign in" : "Create account"} onPress={submit} busy={busy} />
-      <Button
-        variant="link"
-        label={mode === "signin" ? "New here? Create an account" : "Already have an account? Sign in"}
-        onPress={() => setMode(mode === "signin" ? "register" : "signin")}
-      />
-    </View>
-  );
 }
 
 const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });

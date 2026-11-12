@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // P19.S3.T3 (ISOLATION-01): two people on one browser. Signing out leaves nothing of the first person in the tab, its
 // history or the browser's storage, and an unsent note draft stays with its own account even when a session simply
@@ -13,7 +14,9 @@ async function register(page: Page, tag: string): Promise<string> {
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("isolation-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/(account|onboarding)/, AUTH);
   return email;
 }

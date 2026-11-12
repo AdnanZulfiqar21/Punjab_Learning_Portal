@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // P11.S2.T3 (SEARCH-01): search finds published lessons. Lesson text is matched and quoted only where the learner may
 // read it; anyone finds a lesson by its title. Uses the labelled fixture lessons from `portal-dev-seed-practice`
@@ -31,7 +32,9 @@ test("a learner on the free trial finds premium lesson text", async ({ page, isM
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("search-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/(account|onboarding)/, AUTH);
   await page.goto("/account");
   await page.getByRole("button", { name: "Start my free 30-day trial" }).click();

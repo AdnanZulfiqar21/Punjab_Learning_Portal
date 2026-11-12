@@ -66,7 +66,7 @@ def report(db: Session, grade: int, subject: str) -> dict[str, Any]:
     chapter_ids = [c.id for c in chapters]
     topics = set(db.scalars(select(Topic.id).where(Topic.chapter_id.in_(chapter_ids), Topic.retired_at.is_(None))))
     staff = exists().where(StaffRoleGrant.user_id == AppUser.id, StaffRoleGrant.revoked_at.is_(None))
-    learner = and_(AppUser.status == "active", ~staff, AppUser.issuer != get_settings().dev_auth_issuer)
+    learner = and_(AppUser.status == "active", ~staff, AppUser.issuer != get_settings().test_account_issuer)
     window = now - evidence.WINDOW
     recent = (
         select(Attempt.user_id, func.max(Attempt.finalised_at).label("last"))

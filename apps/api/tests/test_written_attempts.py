@@ -217,3 +217,45 @@ def test_seal_detects_tampered_evidence(client: TestClient, published_written: d
     path.write_bytes(path.read_bytes() + b"tampered")
     r = _seal(client, who, a["id"], m["manifest_revision"])
     assert r.status_code == 409 and "integrity check" in r.json()["detail"]
+
+
+def test_a_body_is_not_read_for_someone_elses_or_a_closed_attempt(
+    client: TestClient, published_written: dict[str, Any], monkeypatch: Any
+) -> None:
+    """UPLOAD-OWNER-FIRST-01: the attempt is checked before the body is read. With the size limit lowered, an oversized
+    body would be refused as too large if it were read first; the answer about the attempt comes back instead."""
+    from portal_api.modules.written import review_router, router
+
+    owner, other = _learner(client), _learner(client)
+    attempt = _start(client, owner, published_written["chapter"])
+    monkeypatch.setattr(router, "UPLOAD_LIMIT", 1024)
+    monkeypatch.setattr(review_router, "RESCAN_LIMIT", 1024)
+
+    def chunks() -> Any:  # sent chunked, so no Content-Length gives the size away
+        for _ in range(8):
+            yield b"x" * 1024
+
+    octet = {"Content-Type": "application/octet-stream"}
+    for target in (attempt["id"], str(uuid.uuid4())):
+        r = client.post(f"/v1/written-attempts/{target}/pages", headers={**other.headers, **octet}, content=chunks())
+        assert r.status_code == 404, r.text
+        r = client.post(
+            f"/v1/written-attempts/{target}/questions/1/rescan",
+            headers={**other.headers, **octet, "Idempotency-Key": uuid.uuid4().hex},
+            content=chunks(),
+        )
+        assert r.status_code == 404, r.text
+    # the owner's own oversized body is still read and refused for its size
+    r = client.post(f"/v1/written-attempts/{attempt['id']}/pages", headers={**owner.headers, **octet}, content=chunks())
+    assert r.status_code == 413, r.text
+    # a rescan without a key is refused before the body, as before
+    r = client.post(
+        f"/v1/written-attempts/{attempt['id']}/questions/1/rescan", headers={**owner.headers, **octet}, content=chunks()
+    )
+    assert r.status_code == 422 and r.json()["code_reason"] == "KEY_REQUIRED", r.text
+    # a closed attempt: the refusal comes without reading the body
+    with get_sessionmaker()() as db:
+        db.execute(text("update written_attempt set status = 'expired' where id = :id"), {"id": attempt["id"]})
+        db.commit()
+    r = client.post(f"/v1/written-attempts/{attempt['id']}/pages", headers={**owner.headers, **octet}, content=chunks())
+    assert r.status_code == 409, r.text

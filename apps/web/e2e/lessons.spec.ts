@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // Lesson access (review R07): premium lessons need a plan or the free trial; previews are open to everyone. Uses the two
 // labelled fixture lessons from `portal-dev-seed-practice` (Class 11 Biology, first chapter). Not academic content.
@@ -32,7 +33,9 @@ test("a learner on the free trial reads premium lessons", async ({ page }) => {
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("lessons-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/(account|onboarding)/, AUTH);
   await page.goto("/account");
   await page.getByRole("button", { name: "Start my free 30-day trial" }).click();
@@ -108,7 +111,9 @@ test("a learner keeps a private note, a saved formula and a favourite topic", as
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("study-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/(account|onboarding)/, AUTH);
   const lessons = await openFirstBiologyChapter(page);
   const lesson = lessons.getByRole("article", { name: "[FIXTURE] Structured blocks lesson" });

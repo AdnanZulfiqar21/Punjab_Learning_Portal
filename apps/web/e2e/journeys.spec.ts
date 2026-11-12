@@ -1,5 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Browser, type Page } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // P19.S1.T1 (JOURNEYS-01): new-to-returning learner journeys across two devices, on the free trial and on staff-granted
 // access. Uses the technical fixture questions and lessons from `portal-dev-seed-practice` (Class 11 Biology, chapter
@@ -17,7 +18,9 @@ async function register(browser: Browser, email: string): Promise<Page> {
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("journey-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/(account|onboarding)/, AUTH);
   return page;
 }

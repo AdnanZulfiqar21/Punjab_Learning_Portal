@@ -1,4 +1,5 @@
 import { expect, test, type Browser } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // W07.S3.T2: an interrupted written journey keeps one receipt. After submitting, the learner signs out, signs in again
 // on another browser (a second device), and finds the same receipt and the same "waiting for a teacher" state,
@@ -23,7 +24,9 @@ test("the same receipt after signing out and in again on another device", async 
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill(PASSWORD);
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/practice\?/, AUTH);
   await page.getByRole("button", { name: "Start my free 30-day trial" }).click();
   await expect(page.getByText(/Free trial until/)).toBeVisible(AUTH);

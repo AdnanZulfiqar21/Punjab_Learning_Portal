@@ -1,4 +1,5 @@
 import { expect, test, type Browser, type Page } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // P04.S3.T2 (SETTINGS-01): display settings belong to the device and are applied before the first paint; saved as the
 // usual settings, they reach a new device at sign-in but never replace a device's own choice. Data saver holds lesson
@@ -12,7 +13,9 @@ async function signIn(page: Page, email: string, register = false) {
   if (register) await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("settings-fixture-pass-1");
+  if (register) await fillSignupExtras(page);
   await page.getByRole("button", { name: register ? "Create account" : "Sign in", exact: true }).click();
+  if (register) await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/(account|onboarding)/, AUTH);
   await page.goto("/account");
   return page.getByRole("region", { name: "Display and data" });
