@@ -225,7 +225,7 @@
             "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
-            "text": "Kitab ke aakhir ki answer key (Unit 4) (d) deti hai. Chapter (4.1.7.1) mein pre-order hi woh traversal hai jo root pehle dekhta hai, is liye sahi jawab (b) hai. (Level-order chapter ke teen traversals mein shamil nahi.)"
+            "text": "Kitab ke aakhir ki answer key (Unit 4) (d) deti hai. Chapter (4.1.7.1) teen traversals parhata hai, aur pre-order woh hai jo root pehle, phir left aur right subtree dekhta hai, is liye mutawaqqa (expected) jawab (b) Pre-order hai. (Level-order chapter mein nahi; woh bhi har node ko us ke bachon se pehle dekhta hai, is liye sawal thora dheela hai, lekin poocha pre-order hi gaya hai.)"
           },
           {
             "type": "checkpoint",
@@ -493,8 +493,14 @@
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "7. Consider the following graph and perform the operations specified below:\n[Graph as printed: A has arrows to B, C and D; B has arrows to E and F; C has an arrow to G; D has arrows to H and I.]\n(a) Start from node A, write down the sequence of nodes visited during a depth-first search traversal of the graph.\n(b) Start from node A, write down the sequence of nodes visited throughout a breadth-first search traversal of the graph.\nGraph (A se B, C, D ki taraf teer; B se E, F; C se G; D se H, I) mein A se shuru kar ke (a) DFS aur (b) BFS ka order likhiye.",
+            "prompt": "7. Consider the following graph and perform the operations specified below:\n(a) Start from node A, write down the sequence of nodes visited during a depth-first search traversal of the graph.\n(b) Start from node A, write down the sequence of nodes visited throughout a breadth-first search traversal of the graph.\nNeeche diye graph mein A se shuru kar ke (a) DFS aur (b) BFS ka order likhiye.",
             "explanation": "Neighbours (parosi) baen se daen liye gaye hain, jaise kitab ki misalon mein (4.3.2, 4.3.3).\n(a) Depth-first search (DFS), stack ke saath:\n- A push. A pop kar ke visit, us ke children D, C, B push (B top par). Stack: [D, C, B]\n- B pop, visit, F, E push. Stack: [D, C, F, E]\n- E pop, visit (koi child nahi). Stack: [D, C, F]\n- F pop, visit. Stack: [D, C]\n- C pop, visit, G push. Stack: [D, G]\n- G pop, visit. Stack: [D]\n- D pop, visit, I, H push. Stack: [I, H]\n- H pop, visit. Stack: [I]\n- I pop, visit. Stack: [] (khali, traversal khatam)\nDFS order: A, B, E, F, C, G, D, H, I\n(b) Breadth-first search (BFS), queue ke saath:\n- A enqueue. A dequeue kar ke visit, B, C, D enqueue. Queue: [B, C, D]\n- B dequeue, visit, E, F enqueue. Queue: [C, D, E, F]\n- C dequeue, visit, G enqueue. Queue: [D, E, F, G]\n- D dequeue, visit, H, I enqueue. Queue: [E, F, G, H, I]\n- E, F, G, H aur I baari baari dequeue (kisi ka child nahi). Queue: [] (khali, traversal khatam)\nBFS order: A, B, C, D, E, F, G, H, I\nDFS har branch (A-B-E-F) poori kar ke agli par jata hai, jabke BFS level ba level chalta hai (A; phir B, C, D; phir E, F, G, H, I)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch4-fig-ex-long-q7-graph",
+            "alt": "Nau circles ka graph jo neeche ki taraf teeron se jure hain: oopar A se B, C aur D ki taraf teer; B se E aur F; C se G; D se H aur I.",
+            "caption": "Long question 7: DFS aur BFS wale sawal ka graph (kitab mein chhapi figure ke mutabiq asal khaaka)."
           },
           {
             "type": "callout",
