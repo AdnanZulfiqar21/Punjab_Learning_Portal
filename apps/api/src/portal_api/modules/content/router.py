@@ -1496,21 +1496,32 @@ class MediaPackOut(BaseModel):
     entries: list[MediaEntryOut]
 
 
-def _asset_out(db: Session, a: Any, with_versions: bool = True) -> AssetOut:
+def _asset_out(
+    db: Session,
+    a: Any,
+    with_versions: bool = True,
+    *,
+    versions: list[Any] | None = None,
+    refs: set[uuid.UUID] | None = None,
+) -> AssetOut:
+    """An asset with its versions. A list passes `versions` and `refs` it loaded for every asset at once."""
     from portal_api.modules.content import assets
 
-    versions = (
-        list(
-            db.scalars(
-                select(assets.AssetVersion)
-                .where(assets.AssetVersion.asset_id == a.id)
-                .order_by(assets.AssetVersion.number)
+    if versions is None:
+        loaded: list[assets.AssetVersion] = (
+            list(
+                db.scalars(
+                    select(assets.AssetVersion)
+                    .where(assets.AssetVersion.asset_id == a.id)
+                    .order_by(assets.AssetVersion.number)
+                )
             )
+            if with_versions
+            else []
         )
-        if with_versions
-        else []
-    )
-    refs = assets.referenced(db, [v.id for v in versions])
+        versions = loaded
+    if refs is None:
+        refs = assets.referenced(db, [v.id for v in versions])
     return AssetOut(
         id=a.id,
         kind=a.kind,
@@ -1609,13 +1620,25 @@ def list_assets(
     _no_store(response)
     if not workflow.roles_in_scope(db, who.user.id, grade, subject) & CONTENT_ROLES:
         return []
-    rows = db.scalars(
-        select(assets.Asset)
-        .where(assets.Asset.grade_number == grade, assets.Asset.subject_code == subject)
-        .order_by(assets.Asset.created_at.desc())
-        .limit(200)
+    rows = list(
+        db.scalars(
+            select(assets.Asset)
+            .where(assets.Asset.grade_number == grade, assets.Asset.subject_code == subject)
+            .order_by(assets.Asset.created_at.desc())
+            .limit(200)
+        )
     )
-    return [_asset_out(db, a) for a in rows]
+    # Two queries for the whole list (versions, then which are in use), not two per asset: a book's archived figures
+    # fill the list, and per-asset scans of every lesson body timed the studio page out.
+    by_asset: dict[uuid.UUID, list[Any]] = {a.id: [] for a in rows}
+    for v in db.scalars(
+        select(assets.AssetVersion)
+        .where(assets.AssetVersion.asset_id.in_(list(by_asset)))
+        .order_by(assets.AssetVersion.asset_id, assets.AssetVersion.number)
+    ):
+        by_asset[v.asset_id].append(v)
+    refs = assets.referenced(db, [v.id for vs in by_asset.values() for v in vs])
+    return [_asset_out(db, a, versions=by_asset[a.id], refs=refs) for a in rows]
 
 
 @router.get("/assets/{asset_id}", response_model=AssetOut, summary="An asset and every archived version")
