@@ -1,5 +1,6 @@
 // DESIGN-01: pill buttons. Primary is the dark text colour with the page colour on it (light and dark themes invert
-// together); secondary is glass; ghost is text only. md is 44 px tall and lg 48 px, both at least the 44 px touch size.
+// together); secondary is glass; ghost is text only. BUTTON-HOVER-01 (owner, 2026-11-11): every button visibly
+// changes on hover (primary turns the subject accent, secondary takes the soft accent). md is 44 px tall and lg 48 px, both at least the 44 px touch size.
 import Link, { type LinkProps } from "next/link";
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 
@@ -12,8 +13,8 @@ export type ButtonSize = "md" | "lg";
 const BASE =
   "inline-flex shrink-0 items-center justify-center gap-2 rounded-full font-semibold whitespace-nowrap transition duration-200 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50";
 const VARIANTS: Record<ButtonVariant, string> = {
-  primary: "bg-foreground text-background shadow-glass hover:opacity-90",
-  secondary: "glass text-foreground hover:border-accent hover:text-accent",
+  primary: "bg-foreground text-background shadow-glass hover:bg-accent",
+  secondary: "glass text-foreground hover:border-accent hover:bg-accent-soft hover:text-accent",
   ghost: "text-foreground hover:bg-surface-muted",
 };
 const SIZES: Record<ButtonSize, string> = {

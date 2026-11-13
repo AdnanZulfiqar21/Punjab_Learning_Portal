@@ -786,6 +786,29 @@ mark.find-in-book {
   }
 }
 
+/* BUTTON-HOVER-01 (owner, 2026-11-11): "hover effect dalo application ka hr button pr". Every enabled button shows the
+   hand cursor; a button that styles its own hover keeps it, and one that doesn't (no hover: class) is tinted. */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary {
+    cursor: pointer;
+  }
+}
+@media (hover: hover) {
+  :where(button:not(:disabled):not([class*="hover:"])):hover {
+    filter: brightness(0.93);
+  }
+  :root[data-theme="dark"] :where(button:not(:disabled):not([class*="hover:"])):hover {
+    filter: brightness(1.2);
+  }
+}
+@media (hover: hover) and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) :where(button:not(:disabled):not([class*="hover:"])):hover {
+    filter: brightness(1.2);
+  }
+}
+
 /* AUTH-PREMIUM-01 (owner 2026-11-12): sign-in and sign-up. Desktop = draft A (story panel beside the form); phone =
    draft B (one card, sign-up in two steps). CSS only. */
 .auth-story {
