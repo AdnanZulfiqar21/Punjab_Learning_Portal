@@ -97,16 +97,7 @@
           {
             "type": "code",
             "language": "python",
-            "text": "import networkx as nx\nimport matplotlib.pyplot as pit\n#    Create a graph object\nG = nx.Graph()\n#    Add vertices (nodes)\nG . add_node( ’ A ’ )\nG.add_node( ’B ’ )\nG . add_node( ’ C ’)\n#    Add edges (links) between vertices\nG. add_edge(’A’ , ’B ’)\nG . add_edge(’B ’, ’ C ’)\n#    Draw the graph\nnx.draw(G , with_labels=True)\npit.show ()",
-            "book_errors": [
-              "’"
-            ]
-          },
-          {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Book correction",
-            "text": "The node names are printed between curly quotes (’ A ’), which Python does not accept: SyntaxError: invalid character '’' (U+2019). Use straight quotes and no spaces inside the names, so that the nodes and the edges use the same names: G.add_node('A'), G.add_node('B'), G.add_node('C'), G.add_edge('A', 'B'), G.add_edge('B', 'C'). The short name pit for matplotlib.pyplot works because it is used in both places; it is usually written plt."
+            "text": "import networkx as nx\nimport matplotlib.pyplot as pit\n#    Create a graph object\nG = nx.Graph()\n#    Add vertices (nodes)\nG . add_node('A')\nG.add_node('B')\nG . add_node('C')\n#    Add edges (links) between vertices\nG. add_edge('A' , 'B')\nG . add_edge('B', 'C')\n#    Draw the graph\nnx.draw(G , with_labels=True)\npit.show ()"
           },
           {
             "type": "paragraph",

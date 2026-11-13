@@ -65,12 +65,6 @@
             "text": "\"stack_of_books = []\": khali list banti hai jo stack (dher) ka kaam karegi. List ka aakhri item stack ka top (sab se oopar) hai.\n\"print(\"Initial stack:\", stack_of_books)\": shuru mein khali stack [] dikhata hai.\n\"print(\"\\n Adding books ...\")\": \\n nayi line banata hai, is liye pehle ek khali line aati hai. \\n ke baad wali space bhi chhapti hai, is liye yeh line ek space se shuru hoti hai.\n\"stack_of_books.append('Book A')\" (aur B, C): append push operation hai: kitab dher ke oopar rakhi jati hai. Har push ke baad stack print hota hai.\n\"top_book = stack_of_books.pop()\": pop bina index ke aakhri item nikalta hai, yani sab se oopar wali kitab \"Book C\". Yahi LIFO (Last In, First Out: jo aakhir mein aaya woh pehle nikla) hai.\nAakhri do print nikali gayi kitab aur bacha hua stack dikhate hain.\nOutput: shuru mein \"Initial stack: []\", phir teen push ke baad stack ['Book A', 'Book B', 'Book C'], phir \"Removed book: Book C\" aur aakhir mein \"Stack after popping the top book: ['Book A', 'Book B']\".\nKhud try karein: top_book = stack_of_books.pop() wali line do baar likh kar Run karein: ab \"Removed book: Book B\" aayega aur stack ['Book A'] bachega."
           },
           {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Kitab ki ghalti",
-            "text": "Kitab ke code mein do ghaltiyan hain: (1) pehli line mein stack_of_books = [] comment ke saath hi likha hai, is liye list banti hi nahi aur NameError aata hai; upar ise alag line par likha gaya hai. (2) append(’Book A’) waghaira mein tirchhe quotes ’ hain, jinhein Python nahi maanta (SyntaxError); sahi append('Book A') hai."
-          },
-          {
             "type": "diagram",
             "$asset": "c11-cs-ch4-fig-stack-push-pop",
             "alt": "Chaar stack dabbe: pehle mein Book A, doosre mein Book A aur B, teesre mein Book A, B aur C (har baar oopar se push yani append), aur chauthe mein pop() ke baad Book A aur B, jab ke Book C oopar se bahar nikal gayi.",
