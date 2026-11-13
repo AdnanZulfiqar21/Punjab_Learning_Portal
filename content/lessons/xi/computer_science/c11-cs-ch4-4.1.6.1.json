@@ -41,31 +41,7 @@
           {
             "type": "code",
             "language": "python",
-            "text": "class Fami1yMember :\n    def _ _init_ _ (self , name): self.name = name self.children = []\nclass FamilyTre e:\n    def _ _init_ _ (self , an c e s t o r _ n am e ) :\n        self.root = Fami1yMember(ancestor_name)\n    def add_child(self , parent_name , ctii 1 d_name ) :\n        parent_node = self._find_member(self.root, parent_name\n       if parent_node:\n           parent_node.children.append(FamilyMember( child_name))\n   def _find_member (self , current.member, name):\n       if current.member.name == name:\n           return current.member\n      for child in current_member.children:\n           result = self._find_member(child, name)\n           if result :\n           return result\n     return None\n• Example usage\nfamily_tree = FamilyTree (’Grandparent ’)\nfamily_tree.add_child(’Grandparent’ , ’Parenti’)\nfamily_tree.add_child(’Grandparent’, ’Parent2’) family_tree.add_child(’Parenti’,\n’Childl’) family_tree.add_child(’Parenti’, ’Child2’)",
-            "book_errors": [
-              "Fami1yMember",
-              "_ _init_ _",
-              "self.name = name self.children = []",
-              "FamilyTre e",
-              "an c e s t o r _ n am e",
-              "ctii 1 d_name",
-              "self._find_member(self.root, parent_name",
-              "current.member",
-              "• Example usage",
-              "Parenti"
-            ]
-          },
-          {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Book correction",
-            "text": "As printed this program does not run: Python stops with SyntaxError: invalid character '•' (U+2022) before it reaches the other errors. The listing has: Fami1yMember for FamilyMember; _ _init_ _ for __init__; two statements on one line (self.name = name self.children = []); FamilyTre e for FamilyTree; the names ancestor_name and child_name broken by spaces; a missing ) after parent_name; current.member for current_member; wrong indentation (return result must be inside if result:, and _find_member, its for loop and return None must line up with the other parts of the class); a bullet • for the comment sign #; curly quotes ’ for straight quotes; a space inside 'Grandparent ' (the root would be called 'Grandparent ', so add_child('Grandparent', ...) would find no parent and add nothing); Parenti and Childl for Parent1 and Child1; and two add_child calls on one line. The program as it should be printed is given below; it builds the tree of Figure 4.6."
-          },
-          {
-            "type": "code",
-            "language": "python",
-            "text": "class FamilyMember:\n    def __init__(self, name):\n        self.name = name\n        self.children = []\n\nclass FamilyTree:\n    def __init__(self, ancestor_name):\n        self.root = FamilyMember(ancestor_name)\n\n    def add_child(self, parent_name, child_name):\n        parent_node = self._find_member(self.root, parent_name)\n        if parent_node:\n            parent_node.children.append(FamilyMember(child_name))\n\n    def _find_member(self, current_member, name):\n        if current_member.name == name:\n            return current_member\n        for child in current_member.children:\n            result = self._find_member(child, name)\n            if result:\n                return result\n        return None\n\n# Example usage\nfamily_tree = FamilyTree('Grandparent')\nfamily_tree.add_child('Grandparent', 'Parent1')\nfamily_tree.add_child('Grandparent', 'Parent2')\nfamily_tree.add_child('Parent1', 'Child1')\nfamily_tree.add_child('Parent1', 'Child2')",
-            "caption": "Book correction: the family tree program written correctly"
+            "text": "class FamilyMember:\n    def __init__(self, name):\n        self.name = name\n        self.children = []\n\nclass FamilyTree:\n    def __init__(self, ancestor_name):\n        self.root = FamilyMember(ancestor_name)\n\n    def add_child(self, parent_name, child_name):\n        parent_node = self._find_member(self.root, parent_name)\n        if parent_node:\n            parent_node.children.append(FamilyMember(child_name))\n\n    def _find_member(self, current_member, name):\n        if current_member.name == name:\n            return current_member\n        for child in current_member.children:\n            result = self._find_member(child, name)\n            if result:\n                return result\n        return None\n\n# Example usage\nfamily_tree = FamilyTree('Grandparent')\nfamily_tree.add_child('Grandparent', 'Parent1')\nfamily_tree.add_child('Grandparent', 'Parent2')\nfamily_tree.add_child('Parent1', 'Child1')\nfamily_tree.add_child('Parent1', 'Child2')"
           },
           {
             "type": "paragraph",

@@ -36,37 +36,30 @@
             "items": [
               "O(1) Constant Time: The runtime does not change with the size of the input. For instance, accessing a specific item in an array by its index is constant time because it takes the same amount of time regardless of the array size.",
               "O(n) Linear Time: The runtime grows linearly with the size of the input. For example, consider a scenario where there are n students in a college, each with a unique student ID. If we need to find a specific student by searching through the list of all n students, the time it takes to find the student will depend on the number of students we have to check. In the worst-case scenario, the student we are looking for might be the very last one on the list, meaning we would have to check all n students. This process involves examining each student one by one, making the search take a time proportional to n. Therefore, this example represents a linear time complexity O(n), where the time taken increases directly with the number of students.",
-              "O(n2) Quadratic Time: The runtime grows quadratically as the size of the input increases. For instance, consider a scenario where n students in a college are participating in a programming competition, and we want to compare the performance of each pair of students to determine the best team. To do this, we must compare each student with every other student. The number of comparisons required is the sum of the first n - 1 integers, which can be approximated as n(n -1). Thus, the time complexity for this task is quadratic, represented as O(n²). The time taken increases quadratically as the number of students n increases.",
+              "O(n²) Quadratic Time: The runtime grows quadratically as the size of the input increases. For instance, consider a scenario where n students in a college are participating in a programming competition, and we want to compare the performance of each pair of students to determine the best team. To do this, we must compare each student with every other student. The number of comparisons required is the sum of the first n - 1 integers, which can be approximated as n(n -1). Thus, the time complexity for this task is quadratic, represented as O(n²). The time taken increases quadratically as the number of students n increases.",
               "O(log n) Logarithmic Time: The runtime grows logarithmically, meaning it increases very slowly relative to the input size. For example, imagine a scenario where you are playing a guessing game with n students in a college. One student thinks of a number between 1 and n, and your task is to guess the number. After each guess, the student will tell you whether the actual number is higher or lower than your guess. By starting in the middle of the range and adjusting your guess based on the feedback, you can quickly narrow down the possible numbers. The number of guesses required to find the correct number is proportional to the number of times you can halve the range, which is logarithmic in nature. Therefore, the time complexity of this guessing process is O(log n)."
-            ],
-            "book_errors": [
-              "O(n2)",
-              "n(n -1)"
             ],
             "bold": [
               "O(1) Constant Time",
               "O(n) Linear Time",
-              "O(n2) Quadratic Time",
+              "O(n²) Quadratic Time",
               "O(log n) Logarithmic Time"
+            ],
+            "book_errors": [
+              "n(n -1)"
             ]
           },
           {
             "type": "callout",
             "tone": "correction",
             "title": "Book correction",
-            "text": "The heading “O(n2)” means O(n²), n squared. The sum of the first n − 1 integers, 1 + 2 + … + (n − 1), is exactly n(n − 1)/2, not n(n − 1): each pair of students is compared once. The time complexity is still O(n²)."
+            "text": "The sum of the first n − 1 integers, 1 + 2 + … + (n − 1), is n(n − 1)/2, not n(n − 1): each pair of students is compared once (for 4 students, 3 + 2 + 1 = 6 = 4 × 3 / 2). The time complexity is still O(n²)."
           },
           {
             "type": "diagram",
             "$asset": "c11-cs-ch3-fig-big-o-notation",
             "alt": "Graph in a light grey frame titled Big O Notation, with Time on the vertical axis and Input Size on the horizontal axis. O(1) is a flat line; O(log n) rises quickly and then levels off; O(n) is a straight rising line; O(n²) curves up steeply. Each name is written at the end of its line.",
-            "caption": "Big O Notation: growth of O(1), O(log n), O(n) and O(n²) (original drawing after the textbook's graph, which is captioned in error 'Figure 1.1: System development life cycle stages')."
-          },
-          {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Book correction",
-            "text": "The book captions this graph 'Figure 1.1: System development life cycle stages'; it is the Big O Notation graph."
+            "caption": "Big O Notation: growth of O(1), O(log n), O(n) and O(n²) (original drawing after the textbook's graph)."
           },
           {
             "type": "paragraph",

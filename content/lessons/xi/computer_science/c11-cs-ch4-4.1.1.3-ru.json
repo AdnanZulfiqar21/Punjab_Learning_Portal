@@ -53,7 +53,7 @@
             "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
-            "text": "Kitab mein function ka naam 'insertf()' chhapa hai; sahi naam insert() hai. Kitab ke code mein tirchhe quotes “ ” ’ aur 0 ke baad ek faltu ’ hai, is liye chhapa hua code SyntaxError deta hai. Kitab ka Output comment bhi ghalat hai: us mein \"Invite friends\" nahi; asal output upar likha hai."
+            "text": "Kitab ka Output comment ghalat hai: us mein \"Invite friends\" nahi, halanke insert(0, \"Invite friends\") use list ke shuru mein dalta hai. Asal output upar likha hai: ['Invite friends', 'Buy drinks', 'Buy decorations', 'Buy snacks', 'Buy cold drinks ']."
           },
           {
             "type": "paragraph",
@@ -73,12 +73,6 @@
             "text": "\"party_list = [...]\": 4 kaamon ki list banti hai.\n\"party_list.append(\"Order cake\")\": append hamesha item ko list ke bilkul aakhir mein jorta hai; index batane ki zaroorat nahi.\n\"print(party_list)\": badli hui list dikhata hai.\nOutput: ['Invite friends', 'Buy cold drinks', 'Buy decorations', 'Buy snacks', 'Order cake'] — 'Order cake' aakhir mein aa gaya.\nKhud try karein: ek aur line party_list.append(\"Buy balloons\") print se pehle jor kar Run karein: 'Buy balloons' 'Order cake' ke baad aakhir mein aayega."
           },
           {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Kitab ki ghalti",
-            "text": "Kitab mein 'append!)' chhapa hai; sahi naam append() hai. Kitab ke code mein bhi tirchhe quotes hain (“Invite friends”, \"Order cake”), is liye woh SyntaxError deta hai; upar seedhe quotes ke saath sahi code hai."
-          },
-          {
             "type": "paragraph",
             "text": "c. List ko lamba karna (extend): extend() function ek hi baar mein kai items list ke aakhir mein jor deta hai."
           },
@@ -94,12 +88,6 @@
             "tone": "tip",
             "title": "Code Explanation (Wazahat)",
             "text": "\"party_list = [...]\": 4 kaamon ki list. \"Buy decorations \" ke aakhir mein ek space hai.\n\"party_list.extend([\"Party hats\", \"Streamers\"])\": extend ek poori list ke saare items ek saath aakhir mein jor deta hai. append ek item jorta hai, extend kai items.\n\"print(party_list)\": ab 6 items wali list dikhti hai.\nOutput: ['Invite friends', 'Buy decorations ', 'Buy snacks', 'Buy cold drinks', 'Party hats', 'Streamers'] — 'Buy decorations ' mein space bhi nazar aati hai.\nKhud try karein: extend ki jagah append([\"Party hats\", \"Streamers\"]) likh kar Run karein: ab poori list ek hi item ban kar andar jati hai, yani aakhir mein ['Party hats', 'Streamers'] brackets ke saath dikhega."
-          },
-          {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Kitab ki ghalti",
-            "text": "Kitab ke code mein \"Buy snacks” ke aakhir mein tirchha quote ” hai, is liye Python string ka khatma nahi pehchanta aur SyntaxError deta hai."
           },
           {
             "type": "heading",
@@ -128,12 +116,6 @@
             "text": "\"party_list = [...]\": 4 kaamon ki list. \"Invite friends \" ke aakhir mein space hai.\n\"party_list.remove(\"Buy snacks\")\": remove value (qeemat) dekh kar item nikalta hai; jahan \"Buy snacks\" pehli baar mile wahan se hata deta hai.\n\"print(party_list)\": baaqi 3 items dikhata hai.\nOutput: ['Invite friends ', 'Buy decorations', 'Buy cold drinks']\nKhud try karein: remove(\"Buy pizza\") likh kar Run karein: yeh item list mein nahi, is liye Python ValueError (ghalti) dega. remove sirf maujood item nikal sakta hai."
           },
           {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Kitab ki ghalti",
-            "text": "Kitab ke code mein \"Buy decorations” aur \"Buy snacks” ke aakhir mein tirchhe quotes ” hain, is liye SyntaxError aata hai; upar sahi code hai."
-          },
-          {
             "type": "paragraph",
             "text": "b. Index se nikalna: pop() function kisi khaas index wala item nikal deta hai. pop(0) pehla item nikalta hai."
           },
@@ -148,12 +130,6 @@
             "tone": "tip",
             "title": "Code Explanation (Wazahat)",
             "text": "\"party_list = [...]\": 3 kaamon ki list. \"Invite friends \" aur \"Buy cold drinks \" dono ke aakhir mein space hai.\n\"party_list.pop (0)\": pop(index) us index wala item nikalta hai; 0 yani pehla item \"Invite friends \". (pop aur ( ke beech space se farq nahi parta, code phir bhi chalta hai.)\n\"print(party_list)\": baaqi list dikhata hai.\nOutput: ['Buy decorations', 'Buy cold drinks '] — kitab ke comment mein 'Buy cold drinks' bina space ke aur tirchhe quotes mein likha hai, lekin asal output mein aakhri item ke saath space aati hai kyun ke list mein wohi likha hai.\nKhud try karein: pop (0) ko pop() kar ke Run karein: bina index ke pop aakhri item nikalta hai, is liye ['Invite friends ', 'Buy decorations'] bachega."
-          },
-          {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Kitab ki ghalti",
-            "text": "Kitab mein function ka naam 'popO' chhapa hai; sahi naam pop() hai, jaisa code mein hai."
           },
           {
             "type": "paragraph",
@@ -214,12 +190,6 @@
             "tone": "tip",
             "title": "Code Explanation (Wazahat)",
             "text": "\"party_list = [...]\": 3 kaamon ki list banti hai.\n\"index = party_list.index(\"Buy decorations\")\": index() batata hai ke item list mein kis jagah par hai. Ginti 0 se shuru hoti hai: \"Invite friends\" 0, \"Buy decorations\" 1.\n\"print(\"Index of ’Buy decorations’:\", index)\": label aur mila hua index dikhata hai. Label ke andar tirchhe quotes ’ ’ string ka hissa hain, is liye woh bhi waise hi chhapte hain (koi ghalti nahi, sirf text hai).\nOutput: Index of ’Buy decorations’: 1\nKhud try karein: index(\"Buy cold drinks\") likh kar Run karein: ValueError aayega, kyun ke list mein yeh item aakhir mein space ke saath (\"Buy cold drinks \") likha hai, aur string mein ek space ka farq bhi farq hota hai."
-          },
-          {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Kitab ki ghalti",
-            "text": "Kitab mein function ka naam 'indexO' chhapa hai; sahi naam index() hai, jaisa code mein hai."
           },
           {
             "type": "heading",

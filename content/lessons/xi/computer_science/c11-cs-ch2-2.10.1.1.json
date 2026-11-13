@@ -31,17 +31,7 @@
           {
             "type": "code",
             "language": "python",
-            "text": "import unittest\ndef add (a , b) :\n return a + b\nclass TestMathOperations(unittest.TestCase):\ndef test_add(self):\nself.assertEqual(add(2, 3), 5)\nself.assertEqual(add(-1, 1), 0)\nif __name__ == ’__main__’:\nunittest.main()",
-            "book_errors": [
-              "def test_add(self):\nself.assertEqual(add(2, 3), 5)\nself.assertEqual(add(-1, 1), 0)",
-              "’__main__’:\nunittest.main()"
-            ]
-          },
-          {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Book correction",
-            "text": "The listing is printed without indentation: def test_add must be indented inside the class and its two assertEqual lines inside def test_add (IndentationError as printed), and unittest.main() inside the if. The quotes in ’__main__’ are curly; Python needs '__main__'. Corrected, the test runs and reports OK."
+            "text": "import unittest\ndef add (a , b) :\n return a + b\nclass TestMathOperations(unittest.TestCase):\n    def test_add(self):\n        self.assertEqual(add(2, 3), 5)\n        self.assertEqual(add(-1, 1), 0)\nif __name__ == '__main__':\n    unittest.main()"
           },
           {
             "type": "paragraph",

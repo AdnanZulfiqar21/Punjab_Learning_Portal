@@ -56,12 +56,6 @@
             "text": "\"from queue import Queue\": Python ke built-in (pehle se mojood) queue module se Queue class laata hai.\n\"q = Queue()\": ek khali queue banti hai.\n\"q.put(\"Ahmed\")\" (phir Fatima, Ali): put enqueue hai: har shakhs line ke peeche (back) lagta hai. Ab queue: Ahmed, Fatima, Ali.\n\"front_person = q.queue[0]\": q.queue andar ki list hai; [0] sab se aage wala shakhs dikhata hai bina nikale (peek). Yeh \"Ahmed\" hai.\n\"removed_person = q.get()\": get dequeue hai: sab se aage wala (Ahmed) nikal kar wapas deta hai. FIFO (First In, First Out: jo pehle aaya woh pehle gaya).\n\"q.put(\"Sara\")\": Sara line ke peeche lagti hai.\n\"updated_queue = list(q.queue)\": queue ko aam list bana kar print karta hai.\nOutput: pehli line Ahmed (peek), doosri line Ahmed (jo nikala gaya), teesri line ['Fatima', 'Ali', 'Sara'].\nKhud try karein: q.put(\"Sara\") ke baad ek aur q.get() jor kar Run karein: Fatima bhi nikal jayegi aur aakhri line ['Ali', 'Sara'] hogi."
           },
           {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Kitab ki ghalti",
-            "text": "Kitab ke code mein do ghaltiyan hain: (1) q.getO likha hai; aisa koi method nahi, is liye AttributeError aata hai; sahi q.get() hai. (2) updated_queue = list(q.queue) comment wali line par hi chhapa hai, is liye chalta nahi aur print(updated_queue) par NameError aata hai; upar ise alag line par likha gaya hai. Kitab mein \" Ahmed\" ke shuru mein ek space bhi hai, jo naam ke saath print hota hai; upar use hata diya gaya hai."
-          },
-          {
             "type": "diagram",
             "$asset": "c11-cs-ch4-fig-queue-put-get",
             "alt": "Do qataarein: pehli mein put() ke baad Ahmed (aage), Fatima, Ali (peeche). Doosri mein get() ne Ahmed ko aage se nikal diya aur put() ne Sara ko peeche jor diya: Fatima, Ali, Sara.",

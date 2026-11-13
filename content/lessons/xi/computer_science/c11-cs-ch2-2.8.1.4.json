@@ -32,18 +32,7 @@
           {
             "type": "code",
             "language": "python",
-            "text": "class Book :\n    def __init__(self , title):\n        self.title = title\nclass Library :\n    def __init__(self ) :\n        self, books = [ ]\ndef add_book(self, book):\n    self.books.append(book)\n        print(\"Book \", book.title, \"added to the library.”)",
-            "book_errors": [
-              "self, books = [ ]",
-              "def add_book(self, book):",
-              "added to the library.”)"
-            ]
-          },
-          {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Book correction",
-            "text": "As printed this code does not work: self, books = [ ] should be self.books = [ ] (the comma makes a ValueError); def add_book must be indented inside class Library, with its two lines indented under it (the print line is over-indented); and the string \"added to the library.” ends with a curly quote, so it is never closed. Corrected, lib.add_book(Book(\"...\")) prints Book  ... added to the library."
+            "text": "class Book :\n    def __init__(self , title):\n        self.title = title\nclass Library :\n    def __init__(self ) :\n        self.books = [ ]\n    def add_book(self, book):\n        self.books.append(book)\n        print(\"Book \", book.title, \"added to the library.\")"
           },
           {
             "type": "paragraph",
@@ -62,18 +51,7 @@
           {
             "type": "code",
             "language": "python",
-            "text": "class Room:\n    def __init__(self, name):\nself.name = name\nclass House :\n    def __init__(self) :\n        self.rooms = [Room(\"Living Room\"), Room( \" Bedroom\")]\n        print (“House with rooms created”)\n\nprint(\"House with rooms created.\")",
-            "book_errors": [
-              "\nself.name = name",
-              "print (“House with rooms created”)",
-              "\nprint(\"House with rooms created.\")"
-            ]
-          },
-          {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Book correction",
-            "text": "self.name = name is printed at the margin; it must be indented inside __init__ (IndentationError). The print inside House uses curly quotes (“House with rooms created”), which Python does not accept; use straight quotes. The last line, print(\"House with rooms created.\"), is an extra copy outside the class. The house is made with house = House(), which prints House with rooms created."
+            "text": "class Room:\n    def __init__(self, name):\n        self.name = name\nclass House :\n    def __init__(self) :\n        self.rooms = [Room(\"Living Room\"), Room( \" Bedroom\")]\n        print (\"House with rooms created\")\n\nprint(\"House with rooms created.\")"
           },
           {
             "type": "paragraph",

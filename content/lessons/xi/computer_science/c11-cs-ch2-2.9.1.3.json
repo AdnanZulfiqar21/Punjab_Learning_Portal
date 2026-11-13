@@ -25,16 +25,7 @@
           {
             "type": "code",
             "language": "python",
-            "text": "class CustomError(Exception):\n    pass # pass statement is a placeholder that does nothing when executed\ndef check_value(value):\n    if value < 0:\n        raise CustomError(\"Value must be non-negative ! \" )\ntry :\ncheck_value(-1)\nexcept CustomError as e:\n    print(\"Error :\" , e)",
-            "book_errors": [
-              "try :\ncheck_value(-1)"
-            ]
-          },
-          {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Book correction",
-            "text": "check_value(-1) is printed at the margin under try :, which is an IndentationError. It must be indented inside the try block; the program then prints Error : Value must be non-negative ! ."
+            "text": "class CustomError(Exception):\n    pass # pass statement is a placeholder that does nothing when executed\ndef check_value(value):\n    if value < 0:\n        raise CustomError(\"Value must be non-negative ! \" )\ntry :\n    check_value(-1)\nexcept CustomError as e:\n    print(\"Error :\" , e)"
           },
           {
             "type": "paragraph",
