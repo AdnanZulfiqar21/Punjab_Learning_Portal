@@ -218,6 +218,10 @@ class Callout(_Emphasised):
 class Table(_Emphasised):
     type: Literal["table"]
     caption: Short
+    # BOOK-TABLE-01: the book prints no caption (or no header row) for this table. The caption and header still name it
+    # for screen readers and the folded cards, but are not drawn (owner, 2026-11-13: "book jasi formatting").
+    caption_hidden: bool | None = None
+    header_hidden: bool | None = None
     header: list[Annotated[str, Field(max_length=200)]] = Field(min_length=1, max_length=12)
     rows: list[list[Annotated[str, Field(max_length=500)]]] = Field(min_length=1, max_length=60)
     # TABLE-MERGE-01: columns where the book merges a cell down over several rows; there a blank cell continues the

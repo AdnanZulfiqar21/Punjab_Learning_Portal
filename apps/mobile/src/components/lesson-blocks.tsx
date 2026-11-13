@@ -684,9 +684,12 @@ function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block
       const cards = comparisonCards(header, rows);
       return (
         <View style={{ gap: Space.sm }} accessibilityLabel={`Table: ${str(b.caption)}`}>
-          <T style={{ fontWeight: "600", color: premium ? c.accent : c.text }}>
-            <Marked text={str(b.caption)} marks={marks} bold={bold} />
-          </T>
+          {/* BOOK-TABLE-01: a caption the book doesn't print is only the table's spoken label. */}
+          {b.caption_hidden === true ? null : (
+            <T style={{ fontWeight: "600", color: premium ? c.accent : c.text }}>
+              <Marked text={str(b.caption)} marks={marks} bold={bold} />
+            </T>
+          )}
           {cards ? (
             cards.map((card, i) => (
               <View key={i} style={{ borderWidth: 1, borderColor: c.border, backgroundColor: c.surface, borderRadius: Radius.md, padding: Space.md, gap: Space.xs }}>
@@ -695,9 +698,11 @@ function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block
                 </T>
                 {card.fields.map((f) => (
                   <View key={f.label} style={{ flexDirection: "row", gap: Space.sm }}>
-                    <T variant="small" style={{ width: 104, fontWeight: "600" }}>
-                      {f.label}
-                    </T>
+                    {b.header_hidden === true ? null : (
+                      <T variant="small" style={{ width: 104, fontWeight: "600" }}>
+                        {f.label}
+                      </T>
+                    )}
                     <T style={{ flex: 1 }}>
                       <Marked text={f.value} marks={marks} bold={bold} />
                     </T>

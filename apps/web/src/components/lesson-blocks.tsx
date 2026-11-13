@@ -450,7 +450,7 @@ function BlockView({
       if (header.length === 1) {
         return (
           <figure className="lesson-list-table space-y-2 text-sm">
-            <figcaption className="font-medium">
+            <figcaption className={b.caption_hidden === true ? "sr-only" : "font-medium"}>
               <Marked math={math} text={str(b.caption)} marks={marks} bold={bold} />
             </figcaption>
             <div className="overflow-hidden rounded-inner border border-border bg-surface">
@@ -475,12 +475,14 @@ function BlockView({
           </figure>
         );
       }
+      // BOOK-TABLE-01: a caption or header row the book doesn't print stays for screen readers only.
+      const hideHeader = b.header_hidden === true;
       return (
         <table className="lesson-table w-full border-collapse text-sm">
-          <caption className="mb-2 text-left font-medium">
+          <caption className={b.caption_hidden === true ? "sr-only" : "mb-2 text-left font-medium"}>
             <Marked math={math} text={str(b.caption)} marks={marks} bold={bold} />
           </caption>
-          <thead>
+          <thead className={hideHeader ? "sr-only" : undefined}>
             <tr>
               {header.map((h, i) => (
                 <th key={i} scope="col" className="border border-border bg-surface-muted px-3 py-2 text-left">
@@ -494,15 +496,15 @@ function BlockView({
               <tr key={i}>
                 {r.map((c, j) =>
                   spans[i][j] === 0 ? (
-                    <td key={j} data-label={header[j] ?? ""} className="merged-repeat border border-border px-3 py-2 align-top">
+                    <td key={j} data-label={hideHeader ? "" : (header[j] ?? "")} className="merged-repeat border border-border px-3 py-2 align-top whitespace-pre-line">
                       <Marked math={math} text={filled[i][j]} marks={marks} bold={bold} />
                     </td>
                   ) : (
                     <td
                       key={j}
                       rowSpan={spans[i][j] > 1 ? spans[i][j] : undefined}
-                      data-label={header[j] ?? ""}
-                      className={`border border-border px-3 py-2 ${spans[i][j] > 1 ? "align-middle font-medium" : "align-top"}`}>
+                      data-label={hideHeader ? "" : (header[j] ?? "")}
+                      className={`border border-border px-3 py-2 whitespace-pre-line ${spans[i][j] > 1 ? "align-middle font-medium" : "align-top"}`}>
                       <Marked math={math} text={c} marks={marks} bold={bold} />
                     </td>
                   ),

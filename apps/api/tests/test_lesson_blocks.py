@@ -258,3 +258,11 @@ def test_a_list_names_the_label_the_book_prints() -> None:
         assert blocks.validate_body({"blocks": [{**base, "marker": marker}]}, for_publication=False).errors == []
     assert blocks.validate_body({"blocks": [base]}, for_publication=False).errors == []  # plain numbers
     assert blocks.validate_body({"blocks": [{**base, "marker": "*"}]}, for_publication=False).errors
+
+
+def test_a_table_may_hide_a_caption_or_header_the_book_does_not_print() -> None:
+    """BOOK-TABLE-01: the caption and header stay (spoken labels); the flags only say the book doesn't print them."""
+    base = {"type": "table", "caption": "Fixture table", "header": ["No.", "Step"], "rows": [["1.", "Fixture"]]}
+    hidden = {**base, "caption_hidden": True, "header_hidden": True}
+    assert blocks.validate_body({"blocks": [hidden]}, for_publication=False).errors == []
+    assert blocks.validate_body({"blocks": [{**base, "caption": ""}]}, for_publication=False).errors
