@@ -82,7 +82,24 @@ function Marked({ text, marks, bold = [] }: { text: string; marks: string[]; bol
   const c = useTheme();
   const scheme = useScheme();
   const find = useContext(Find);
+  const hl = useContext(Highlight);
   const hit = find ? findRange(text, find) : null;
+  if (hl.length) {
+    // BOOK-HIGHLIGHT-01: words the book prints in colour, drawn in its highlight colour where they stand.
+    return (
+      <Highlight.Provider value={[]}>
+        {markPieces(text, hl).map((p, i) =>
+          p.error ? (
+            <Text key={i} style={{ color: scheme === "dark" ? "#ff7ab8" : "#b0005f", fontWeight: "600" }}>
+              <Marked text={p.text} marks={marks} bold={bold} />
+            </Text>
+          ) : (
+            <Marked key={i} text={p.text} marks={marks} bold={bold} />
+          ),
+        )}
+      </Highlight.Provider>
+    );
+  }
   if (hit) {
     // MCQ-BOOK-LINK-01: the book's words a practice question comes from, marked like a highlighter pen.
     return (
@@ -152,6 +169,8 @@ const Numbered = createContext(false);
 const Solved = createContext<SolvedLabels>(SOLVED_LABELS_EN);
 /** MCQ-BOOK-LINK-01: the book's words to mark, given only to the block that holds them. */
 const Find = createContext<string | null>(null);
+/** BOOK-HIGHLIGHT-01: the words the block being drawn prints in colour (its `highlight`). */
+const Highlight = createContext<string[]>([]);
 
 export function LessonBlocks({
   blocks: authored,
@@ -542,7 +561,15 @@ function sideRunStart(blocks: readonly Block[], i: number): number {
   return -1;
 }
 
-function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block; assetSource?: AssetSource; dataSaver?: boolean; compact?: boolean }) {
+function BlockView(props: { block: Block; assetSource?: AssetSource; dataSaver?: boolean; compact?: boolean }) {
+  return (
+    <Highlight.Provider value={bookErrors(props.block.highlight)}>
+      <BlockBody {...props} />
+    </Highlight.Provider>
+  );
+}
+
+function BlockBody({ block: b, assetSource, dataSaver, compact }: { block: Block; assetSource?: AssetSource; dataSaver?: boolean; compact?: boolean }) {
   const c = useTheme();
   const scheme = useScheme();
   const premium = useContext(Premium);

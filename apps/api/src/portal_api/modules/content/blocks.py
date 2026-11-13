@@ -145,6 +145,10 @@ class _Emphasised(_Marked):
     """A block of running text that can carry the book's bold terms (BOOK-BOLD-01)."""
 
     bold: Bold = None  # absent, not empty, so stored bodies stay as authored
+    # BOOK-HIGHLIGHT-01: words the book prints in colour inside running text (a definition printed in magenta in the
+    # middle of its paragraph, owner 2026-11-02: "ousy highlight kia huwa hy wasy he"). Clients draw them in the book's
+    # highlight colour where they stand; they are never pulled out into a box.
+    highlight: Annotated[list[Text] | None, Field(max_length=20)] = None
 
     @model_validator(mode="after")
     def _bold_in_text(self) -> _Emphasised:
@@ -152,6 +156,9 @@ class _Emphasised(_Marked):
         for term in self.bold or []:
             if not any(term in t for t in texts):
                 raise ValueError(f"bold term {term!r} does not occur in the block's text")
+        for words in self.highlight or []:
+            if not any(words in t for t in texts):
+                raise ValueError(f"highlighted words {words[:40]!r} do not occur in the block's text")
         return self
 
 

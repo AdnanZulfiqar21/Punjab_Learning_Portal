@@ -266,3 +266,11 @@ def test_a_table_may_hide_a_caption_or_header_the_book_does_not_print() -> None:
     hidden = {**base, "caption_hidden": True, "header_hidden": True}
     assert blocks.validate_body({"blocks": [hidden]}, for_publication=False).errors == []
     assert blocks.validate_body({"blocks": [{**base, "caption": ""}]}, for_publication=False).errors
+
+
+def test_words_the_book_prints_in_colour_must_be_in_the_text() -> None:
+    """BOOK-HIGHLIGHT-01: a highlighted definition stays in its paragraph; the words must be the block's own."""
+    base = {"type": "paragraph", "text": "Fixture text. The mole is the amount of substance. More fixture text."}
+    ok = {**base, "highlight": ["The mole is the amount of substance."]}
+    assert blocks.validate_body({"blocks": [ok]}, for_publication=False).errors == []
+    assert blocks.validate_body({"blocks": [{**base, "highlight": ["not in the text"]}]}, for_publication=False).errors
