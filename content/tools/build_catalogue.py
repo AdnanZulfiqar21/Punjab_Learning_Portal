@@ -261,7 +261,7 @@ def main() -> int:
                 "order": order,
                 "number": ch["number"],
                 "contents_number": ch.get("contents_number"),
-                "title": display_title(ch["title"]),
+                "title": display_title(str(ch.get("printed_title") or ch["title"])),  # BOOK-TITLE-01
                 "status": ch.get("status") or "complete",
                 "printed_start": ch.get("printed_start"),
                 "printed_end": ch.get("printed_end"),
