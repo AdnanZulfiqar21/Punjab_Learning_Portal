@@ -74,6 +74,7 @@ ENTRY_POINTS: dict[str, str] = {
     "portal-import-reconcile": "bulk",  # OCT14 review: orphaned uploads
     "portal-import-catalogue": "reserve",
     "portal-grant-role": "reserve",
+    "portal-mfa-reset": "reserve",  # STAFF-MFA-01
     "portal-written-previews": "written.ingestion",
     "portal-written-sweep-orphans": "written.ingestion",
     "portal-written-learner-deadlines": "written.reading",
