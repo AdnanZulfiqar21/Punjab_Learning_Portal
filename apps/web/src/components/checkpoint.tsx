@@ -142,6 +142,60 @@ export function Checkpoint({
       </article>
     );
   }
+  if (mode === "question" && number) {
+    // MCQ-PAPER-LAYOUT-01 (owner, 2026-11-10): a numbered practice MCQ is laid out as on the chapter mock test paper:
+    // a soft number tile, then options A-D two to a row; once chosen, the right option turns green and a wrong choice red.
+    const verdict = chosen === null ? null : chosen === answerId ? "right" : "wrong";
+    return (
+      <article aria-label={`${labels.question} ${number}`} className="mcq-paper space-y-3 border-b border-border/70 py-4">
+        <div className="flex items-start gap-3">
+          <span aria-hidden="true" className="question-number inline-grid h-8 min-w-8 shrink-0 place-items-center rounded-lg bg-accent-soft px-2 font-display text-sm font-bold text-accent tabular-nums">
+            {number}
+          </span>
+          <p className="min-w-0 flex-1 pt-0.5 font-medium whitespace-pre-wrap">
+            <span className="sr-only">{`${labels.question} ${number}: `}</span>
+            {promptView ?? prompt}
+          </p>
+          {verdict && (
+            <span className={`hidden shrink-0 rounded-full px-2.5 py-0.5 text-xs font-bold sm:inline ${verdict === "right" ? "bg-ok-soft text-ok" : "bg-danger-soft text-danger"}`}>
+              {verdict === "right" ? "Correct" : "Wrong"}
+            </span>
+          )}
+        </div>
+        <fieldset className="grid gap-2 sm:grid-cols-2 sm:ps-11" disabled={chosen !== null}>
+          <legend className="sr-only">{prompt}</legend>
+          {options.map((o, i) => {
+            const right = chosen !== null && o.id === answerId;
+            const wrong = chosen === o.id && o.id !== answerId;
+            return (
+              <label
+                key={o.id}
+                className={`flex min-h-11 items-start gap-2 rounded-inner border px-3 py-2 ${right ? "border-ok bg-ok-soft" : wrong ? "border-danger bg-danger-soft" : "border-border bg-surface"} ${chosen === null ? "cursor-pointer hover:border-accent" : ""}`}
+              >
+                <input type="radio" name={name} value={o.id} checked={chosen === o.id} onChange={() => setChosen(o.id)} className="mt-1.5" />
+                <span className="font-semibold text-muted">{String.fromCharCode(65 + i)}</span>
+                <span className="min-w-0 flex-1">{optionViews?.[i] ?? o.text}</span>
+              </label>
+            );
+          })}
+        </fieldset>
+        {(done || bookLink) && (
+          <div className="space-y-2 sm:ps-11">
+            {done && (
+              <p id={panelId} role="status" className="text-sm">
+                <span className={`font-semibold ${verdict === "right" ? "text-ok" : "text-danger"}`}>
+                  {verdict === "right" ? "Right. " : `Not quite: the answer is ${String.fromCharCode(65 + Math.max(0, options.findIndex((o) => o.id === answerId)))}. `}
+                </span>
+                <span className="whitespace-pre-wrap">{explanationView ?? explanation}</span>
+              </p>
+            )}
+            {done && answerFigure}
+            {bookLink}
+          </div>
+        )}
+      </article>
+    );
+  }
   return (
     <aside aria-label="Check your understanding" className="space-y-3 rounded-xl border border-accent/40 bg-accent-soft p-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
