@@ -54,7 +54,7 @@ def _from_session(db: Session, token: str) -> tuple[AppUser, tokens.Claims, sess
         email=user.email,
         token_id=str(row.id),
         expires_at=int(row.expires_at.timestamp()),
-        mfa=row.mfa,
+        mfa=sessions.has_mfa(row),
         authenticated_at=int(row.created_at.timestamp()),
     )
     return user, claims, row
@@ -151,7 +151,11 @@ def require(permission: Permission) -> Callable[[Principal], Principal]:
         if permission not in principal.permissions:
             raise Forbidden("You don't have permission to do this.")
         if permission in MFA_REQUIRED and not principal.claims.mfa:
-            raise Forbidden("This action needs a multi-factor authenticated session. Sign in again with MFA.")
+            raise Forbidden(
+                "This action needs a multi-factor (two-step) sign-in. Open your account, go to Two-step sign-in, "
+                "and enter the code from your authenticator app.",
+                code_reason="MFA_REQUIRED",
+            )
         return principal
 
     return check

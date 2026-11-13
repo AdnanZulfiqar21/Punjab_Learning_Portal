@@ -120,6 +120,9 @@ class Settings(BaseSettings):
     # records that it did. Deployed roles must choose explicitly. The pepper salts opaque installation references.
     trial_device_evidence: Literal["required", "fallback"] | None = None
     trial_ref_pepper: str = "dev-only-trial-pepper"
+    # STAFF-MFA-01: encrypts authenticator secrets at rest (two-step sign-in). A deployment secret: if it changes,
+    # everyone with two-step sign-in has to set it up again.
+    mfa_secret_key: SecretStr = SecretStr("dev-only-mfa-secret-key")
 
     # Notifications (P15.S1). "dev_outbox" records rendered email locally (development/test only); "none" leaves email
     # deliveries visibly unavailable until an approved sender exists (BLOCKERS B04). Push has no provider until B07.
@@ -219,6 +222,9 @@ class Settings(BaseSettings):
                 problems.append("written_assessor fixture is development/test only")
             if self.trial_ref_pepper.startswith("dev-only"):
                 problems.append("trial_ref_pepper must be a deployment secret")
+            mfa_key = self.mfa_secret_key.get_secret_value()
+            if mfa_key.startswith("dev-only") or len(mfa_key) < 32:
+                problems.append("mfa_secret_key must be a deployment secret of at least 32 characters")
             if problems:
                 raise ConfigurationError(f"refusing to start role={self.role.value}: " + "; ".join(problems))
         elif self.notification_email_adapter == "resend" and not (

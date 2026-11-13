@@ -26,6 +26,8 @@ SessionKind = Literal["web", "native"]
 ABSOLUTE_LIFETIME = {"web": timedelta(days=30), "native": timedelta(days=60)}
 IDLE_TIMEOUT = {"web": timedelta(days=7), "native": timedelta(days=30)}
 LAST_SEEN_RESOLUTION = timedelta(seconds=60)
+# STAFF-MFA-01: how long a session's own second-factor check counts before the code is asked for again.
+MFA_STEP_UP_WINDOW = timedelta(hours=12)
 
 
 class UserSession(Base):
@@ -41,6 +43,9 @@ class UserSession(Base):
     device_label: Mapped[str | None] = mapped_column(String(120))
     user_agent: Mapped[str | None] = mapped_column(Text)
     mfa: Mapped[bool] = mapped_column(Boolean, default=False)
+    # STAFF-MFA-01: when this session proved the second factor itself (an authenticator code). Empty when the
+    # identity provider asserted it at sign-in.
+    mfa_verified_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     last_seen_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
@@ -95,6 +100,16 @@ def resolve(db: Session, token: str) -> UserSession | None:
         row.last_seen_at = now
         db.commit()
     return row
+
+
+def has_mfa(row: UserSession, now: datetime | None = None) -> bool:
+    """Whether this session counts as multi-factor now: asserted by the identity provider at sign-in, or proved here
+    with an authenticator code within the step-up window (STAFF-MFA-01)."""
+    if not row.mfa:
+        return False
+    if row.mfa_verified_at is None:
+        return True
+    return (now or datetime.now(UTC)) - row.mfa_verified_at < MFA_STEP_UP_WINDOW
 
 
 def revoke(db: Session, row: UserSession, reason: str) -> None:

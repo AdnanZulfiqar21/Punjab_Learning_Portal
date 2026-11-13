@@ -19,6 +19,7 @@ OIDC = {
     "evidence_s3_secret_key": "deployed-secret-value",  # pragma: allowlist secret
     "trial_device_evidence": "fallback",
     "trial_ref_pepper": "deployment-secret-fixture",
+    "mfa_secret_key": "deployment-mfa-secret-fixture-0123456789",  # pragma: allowlist secret
     "notification_email_adapter": "none",  # P15.S1: the dev outbox is refused; "none" until a sender exists (B04)
     "upload_scanner": "clamd",  # P06.S4.T1: deployed roles scan uploads
 }

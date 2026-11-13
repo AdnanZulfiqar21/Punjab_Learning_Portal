@@ -9213,6 +9213,84 @@
         "title": "Meter",
         "type": "object"
       },
+      "MfaCodeIn": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "description": "The 6-digit code, or a recovery code",
+            "maxLength": 20,
+            "minLength": 6,
+            "title": "Code",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "title": "MfaCodeIn",
+        "type": "object"
+      },
+      "MfaEnrolOut": {
+        "properties": {
+          "otpauth_uri": {
+            "description": "The same as a link or QR content for the authenticator app",
+            "title": "Otpauth Uri",
+            "type": "string"
+          },
+          "secret": {
+            "description": "The setup key to type into the authenticator app (shown once)",
+            "title": "Secret",
+            "type": "string"
+          }
+        },
+        "required": [
+          "secret",
+          "otpauth_uri"
+        ],
+        "title": "MfaEnrolOut",
+        "type": "object"
+      },
+      "MfaRecoveryOut": {
+        "properties": {
+          "recovery_codes": {
+            "description": "One-time codes for a lost phone. Shown once: keep them safe",
+            "items": {
+              "type": "string"
+            },
+            "title": "Recovery Codes",
+            "type": "array"
+          }
+        },
+        "required": [
+          "recovery_codes"
+        ],
+        "title": "MfaRecoveryOut",
+        "type": "object"
+      },
+      "MfaStatusOut": {
+        "properties": {
+          "enabled": {
+            "title": "Enabled",
+            "type": "boolean"
+          },
+          "recovery_codes_left": {
+            "title": "Recovery Codes Left",
+            "type": "integer"
+          },
+          "session_verified": {
+            "description": "This session has proved the second factor and it is still fresh",
+            "title": "Session Verified",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "enabled",
+          "session_verified",
+          "recovery_codes_left"
+        ],
+        "title": "MfaStatusOut",
+        "type": "object"
+      },
       "MockIn": {
         "properties": {
           "code": {
@@ -24464,6 +24542,164 @@
         "summary": "Save your note (refused with the current note if it changed or was deleted elsewhere)",
         "tags": [
           "study"
+        ]
+      }
+    },
+    "/v1/me/mfa": {
+      "get": {
+        "operationId": "status_v1_me_mfa_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MfaStatusOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Whether two-step sign-in is set up, and this session's state",
+        "tags": [
+          "mfa"
+        ]
+      }
+    },
+    "/v1/me/mfa/confirm": {
+      "post": {
+        "operationId": "confirm_v1_me_mfa_confirm_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MfaCodeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MfaRecoveryOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Finish set-up with the first code",
+        "tags": [
+          "mfa"
+        ]
+      }
+    },
+    "/v1/me/mfa/disable": {
+      "post": {
+        "operationId": "disable_v1_me_mfa_disable_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MfaCodeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Turn two-step sign-in off (needs a code)",
+        "tags": [
+          "mfa"
+        ]
+      }
+    },
+    "/v1/me/mfa/enrol": {
+      "post": {
+        "operationId": "enrol_v1_me_mfa_enrol_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MfaEnrolOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Start setting up an authenticator app (shows the key once)",
+        "tags": [
+          "mfa"
+        ]
+      }
+    },
+    "/v1/me/mfa/verify": {
+      "post": {
+        "operationId": "verify_v1_me_mfa_verify_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MfaCodeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MfaStatusOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Prove the second factor for this session (12 hours)",
+        "tags": [
+          "mfa"
         ]
       }
     },

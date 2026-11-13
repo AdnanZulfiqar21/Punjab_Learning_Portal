@@ -278,6 +278,7 @@ def test_production_refuses_the_development_email_adapter() -> None:
         "evidence_s3_secret_key": "deployed-secret-value",  # pragma: allowlist secret
         "trial_device_evidence": "required",
         "trial_ref_pepper": "secret",
+        "mfa_secret_key": "deployment-mfa-secret-fixture-0123456789",  # pragma: allowlist secret
         "cors_origins": ["https://app.example.invalid"],
         "upload_scanner": "clamd",
     }
