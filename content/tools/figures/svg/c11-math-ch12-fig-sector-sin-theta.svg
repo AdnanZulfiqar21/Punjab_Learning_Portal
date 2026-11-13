@@ -1,39 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" font-family="Inter, Arial, sans-serif" font-size="24">
-  <!-- Unit circle sector, theta = 40 degrees, scale 540 px per unit. O(90,520), A(630,520),
-       B = (cos40, sin40) -> (503.67, 172.89), C = (cos40, 0) -> (503.67, 520), D = (1, tan40) -> (630, 66.89) -->
-  <rect x="0" y="0" width="800" height="600" fill="#ffffff"/>
-  <!-- sector OAB lightly shaded -->
-  <path d="M 90 520 L 630 520 A 540 540 0 0 0 503.67 172.89 Z" fill="#fde7ef" stroke="none"/>
-  <!-- triangle OAD outline -->
-  <line x1="90" y1="520" x2="630" y2="520" stroke="#c2185b" stroke-width="3"/>
-  <line x1="90" y1="520" x2="630" y2="66.89" stroke="#c2185b" stroke-width="3"/>
-  <line x1="630" y1="520" x2="630" y2="66.89" stroke="#c2185b" stroke-width="3"/>
-  <!-- arc AB of the unit circle -->
-  <path d="M 630 520 A 540 540 0 0 0 503.67 172.89" fill="none" stroke="#7b1fa2" stroke-width="3"/>
-  <!-- chord AB and perpendicular BC -->
-  <line x1="503.67" y1="172.89" x2="630" y2="520" stroke="#0288d1" stroke-width="3"/>
-  <line x1="503.67" y1="172.89" x2="503.67" y2="520" stroke="#0288d1" stroke-width="3"/>
-  <!-- right-angle marks at C and A -->
-  <polyline points="503.67,496 527.67,496 527.67,520" fill="none" stroke="#333333" stroke-width="2"/>
-  <polyline points="606,520 606,496 630,496" fill="none" stroke="#333333" stroke-width="2"/>
-  <!-- angle theta at O -->
-  <path d="M 160 520 A 70 70 0 0 0 143.62 475.00" fill="none" stroke="#333333" stroke-width="2"/>
-  <text x="168" y="500" font-size="26" font-style="italic">θ</text>
-  <!-- points -->
-  <circle cx="90" cy="520" r="6" fill="#222222"/>
-  <circle cx="630" cy="520" r="6" fill="#222222"/>
-  <circle cx="503.67" cy="172.89" r="6" fill="#222222"/>
-  <circle cx="503.67" cy="520" r="6" fill="#222222"/>
-  <circle cx="630" cy="66.89" r="6" fill="#222222"/>
-  <!-- labels -->
-  <text x="58" y="530" font-size="28" font-style="italic">O</text>
-  <text x="642" y="548" font-size="28" font-style="italic">A</text>
-  <text x="478" y="160" font-size="28" font-style="italic">B</text>
-  <text x="494" y="556" font-size="28" font-style="italic">C</text>
-  <text x="642" y="70" font-size="28" font-style="italic">D</text>
-  <text x="300" y="556" font-size="24"><tspan font-style="italic">r</tspan> = 1</text>
-  <text x="250" y="330" font-size="24" transform="rotate(-40 250 330)"><tspan font-style="italic">r</tspan> = 1</text>
-  <text x="646" y="300" font-size="22">tan θ</text>
-  <text x="400" y="360" font-size="22">sin θ</text>
-  <text x="250" y="590" font-size="22" fill="#555555">unit circle, 0 &lt; θ &lt; π/2 (drawn for θ = 40°)</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 760" font-family="'Times New Roman', Times, serif">
+  <!-- Theorem 12.2.9 figure (C11-MATH, PDF p233): sector OAB of the unit circle, angle theta at O with arrow; OB extended to D with AD perpendicular to OA; BC perpendicular to OA (right-angle mark at C); chord BA; r = 1 on OB and on OA, as printed. -->
+  <defs><marker id="ah0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" markerUnits="strokeWidth" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a"/></marker></defs>
+  <rect width="1000" height="760" fill="#fffac2"/>
+  <line x1="80" y1="700" x2="820" y2="79.1" stroke="#d6247f" stroke-width="3.5"/>
+  <line x1="80" y1="700" x2="820" y2="700" stroke="#d6247f" stroke-width="3.5"/>
+  <line x1="820" y1="700" x2="820" y2="79.1" stroke="#d6247f" stroke-width="3.5"/>
+  <path d="M 820 700 A 740 740 0 0 0 646.9 224.3" fill="none" stroke="#d6247f" stroke-width="3.5"/>
+  <line x1="646.9" y1="224.3" x2="646.9" y2="700" stroke="#1a9fd6" stroke-width="3.5"/>
+  <line x1="646.9" y1="224.3" x2="820" y2="700" stroke="#1a9fd6" stroke-width="3.5"/>
+  <path d="M 620.9 700 L 620.9 674 L 646.9 674" fill="none" stroke="#d6247f" stroke-width="3"/>
+  <path d="M 189.9 696.2 A 110 110 0 0 0 166.7 632.3" fill="none" stroke="#1a1a1a" stroke-width="2.5" marker-end="url(#ah0)"/>
+  <text x="206.9" y="663.8" font-size="30" text-anchor="middle" fill="#1a1a1a">θ</text>
+  <text x="68" y="710" font-size="30" text-anchor="end" fill="#1a1a1a" font-style="italic">O</text>
+  <text x="828" y="734" font-size="30" text-anchor="middle" fill="#1a1a1a" font-style="italic">A</text>
+  <text x="646.9" y="738" font-size="30" text-anchor="middle" fill="#1a1a1a" font-style="italic">C</text>
+  <text x="636.9" y="210.3" font-size="30" text-anchor="middle" fill="#1a1a1a" font-style="italic">B</text>
+  <text x="814" y="67.1" font-size="30" text-anchor="middle" fill="#1a1a1a" font-style="italic">D</text>
+  <text x="321.1" y="472" font-size="30" text-anchor="middle" fill="#1a1a1a" transform="rotate(-40 321.1 472)"><tspan font-style="italic">r</tspan> = 1</text>
+  <text x="423.4" y="738" font-size="30" text-anchor="middle" fill="#1a1a1a"><tspan font-style="italic">r</tspan> = 1</text>
 </svg>
