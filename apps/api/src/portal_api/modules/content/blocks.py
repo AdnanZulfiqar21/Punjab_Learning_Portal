@@ -223,7 +223,8 @@ class Table(_Emphasised):
     caption_hidden: bool | None = None
     header_hidden: bool | None = None
     header: list[Annotated[str, Field(max_length=200)]] = Field(min_length=1, max_length=12)
-    rows: list[list[Annotated[str, Field(max_length=500)]]] = Field(min_length=1, max_length=60)
+    # A cell may hold a whole printed paragraph (Biology 12 p205 "Draw conclusions").
+    rows: list[list[Annotated[str, Field(max_length=1500)]]] = Field(min_length=1, max_length=60)
     # TABLE-MERGE-01: columns where the book merges a cell down over several rows; there a blank cell continues the
     # filled cell above it.
     merged_columns: list[Annotated[int, Field(ge=0)]] | None = Field(default=None, max_length=12)
