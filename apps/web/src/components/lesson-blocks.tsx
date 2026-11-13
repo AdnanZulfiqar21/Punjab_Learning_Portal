@@ -8,7 +8,7 @@ import { SaverImage } from "@/components/saver-image";
 import { bookBoxKind, boxRow, isMarginNote, isRowBox, isSideBox, isSideFigure, sideOrder } from "@/lib/book-box";
 import { bookErrors, markLatex, markPieces, styledPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
-import { isListMarker, labelWidth, listLabel, splitLabel } from "@/lib/book-list";
+import { isListMarker, listLabel, splitLabel } from "@/lib/book-list";
 import { leadIn, leadTerm } from "@/lib/book-style";
 import { hasMath } from "@/lib/inline-math";
 import { splitQuestionNumber } from "@/lib/question-number";
@@ -368,15 +368,13 @@ function BlockView({
       if (b.ordered && isListMarker(b.marker)) {
         const marker = b.marker;
         const first = typeof b.start === "number" ? b.start : 1;
-        const width = labelWidth(marker, first, texts.length);
+        // One grid: the label column is as wide as the longest label, so the items line up as in print.
         return (
-          <ol start={first} className="list-none space-y-2">
+          <ol start={first} className="grid list-none grid-cols-[max-content_1fr] gap-x-3 gap-y-2">
             {texts.map((t, i) => (
-              <li key={i} dir="auto" className="flex gap-2">
-                <span className="shrink-0" style={{ minWidth: `${width}ch` }}>
-                  {listLabel(marker, first + i)}
-                </span>
-                <span className="min-w-0 flex-1">{content(t)}</span>
+              <li key={i} dir="auto" className="col-span-2 grid grid-cols-subgrid">
+                <span>{listLabel(marker, first + i)}</span>
+                <span className="min-w-0">{content(t)}</span>
               </li>
             ))}
           </ol>

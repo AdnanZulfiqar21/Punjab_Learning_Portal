@@ -16,11 +16,14 @@ export const BOOK_BOX_KINDS = [
   "keep",
   "activity",
   "fact",
+  "outcomes",
 ] as const;
 export type BookBoxKind = (typeof BOOK_BOX_KINDS)[number];
 
 // The first match wins, so the more specific titles come first ("Interesting Application" is a fact, not information).
 const KINDS: [BookBoxKind, RegExp][] = [
+  // BOOK-LIST-01: the chapter's Students' Learning Outcomes, a pale yellow box in the book.
+  ["outcomes", /learning outcomes/i],
   ["rule", /thumb rule|remember\b/i],
   ["keep", /keep in mind|yaad rakh/i],
   ["know", /d(o|id) you know|kya aap jante/i],

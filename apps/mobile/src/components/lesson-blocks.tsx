@@ -351,6 +351,7 @@ const BOOK_BOX_HEAD: Record<BookBoxKind, string> = {
   keep: "#a3480a",
   activity: "#b4380f",
   fact: "#0f5f8a",
+  outcomes: "#84650a",
 };
 // An untitled margin note: a gold edge and a pale yellow body, as on the web.
 const MARGIN_NOTE = "#c9a227";
