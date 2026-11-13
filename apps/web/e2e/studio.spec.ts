@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { expect, test, type Browser, type Page } from "@playwright/test";
 import { png, zip } from "./helpers/zip";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // Staff studio journeys (P06) using the development fixtures from `portal-dev-seed-staff` (Class 11 Biology scope).
 // Lesson text here is a technical fixture. Publication rights stay UNVERIFIED in development, so nothing published
@@ -32,7 +33,9 @@ test("the studio is for signed-in staff only", async ({ page }) => {
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("student-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/studio$/, AUTH);
   await expect(page.getByText("Staff only")).toBeVisible();
 });

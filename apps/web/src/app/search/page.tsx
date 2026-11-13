@@ -12,6 +12,7 @@ import { PageHero } from "@/components/page-hero";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { subjectKey } from "@/lib/learn-context";
 import { QuerySync } from "./query-sync";
+import { SearchSuggestions } from "./suggestions";
 
 export const metadata: Metadata = { title: "Search" };
 
@@ -80,6 +81,8 @@ function SearchForm() {
           <span className="sr-only sm:not-sr-only">Search</span>
           <Icon name="arrow-right" size={18} className="sm:hidden" />
         </button>
+        {/* SEARCH-SUGGEST-01: matching chapters and topics under the box while typing. */}
+        <SearchSuggestions inputId="q" formId={FORM_ID} />
       </div>
       <div className="flex flex-wrap items-center gap-2 px-1">
         <span className="flex items-center gap-1.5 pr-1 text-sm text-muted">

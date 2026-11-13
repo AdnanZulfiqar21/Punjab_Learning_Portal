@@ -20,7 +20,7 @@ deployment (none exists yet: B03). It is not an independent assessment; P18.S4.T
 
 ## Data classes and where they live
 
-- **Account and session:** `app_user`, `user_session` (hashed tokens), `dev_credential` (development only).
+- **Account and session:** `app_user`, `user_session` (hashed tokens), `dev_credential` (password hashes and email verification; name kept from development), `email_code` (code hashes).
 - **Learning records:** attempts, answers, scores, notebook (with private notes), evidence, completions, analytics events
   (pseudonymous; no private words allowed in properties).
 - **Written evidence:** private object keys (local directory in development; private object storage required in deployed

@@ -43,6 +43,7 @@ describe("book boxes", () => {
     assert.equal(bookBoxKind("Class Activity"), "activity");
     assert.equal(bookBoxKind("A Scientific Fact"), "fact");
     assert.equal(bookBoxKind("Interesting Application"), "fact");
+    assert.equal(bookBoxKind("Students’ Learning Outcomes"), "outcomes"); // BOOK-LIST-01
     assert.equal(bookBoxKind("Significance of Archaea"), "info"); // any other printed box
   });
 

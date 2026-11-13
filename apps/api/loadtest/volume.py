@@ -244,7 +244,7 @@ def generate(engine: Engine, plan: Plan, *, allow_database: str | None = None) -
             f"{plan.questions}. Publish more questions or ask for fewer per test."
         )
     params: dict[str, Any] = {
-        "issuer": get_settings().dev_auth_issuer,
+        "issuer": get_settings().password_auth_issuer,
         "run": plan.run,
         "attempts": plan.attempts,
         "questions": plan.questions,

@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // W03.S3.T3 (UPLOAD-RETRY-01): interruption and concurrency while a written script is being prepared.
 // * An upload lost to the network keeps its file on the device and can be sent again; it never adds a second page,
@@ -14,7 +15,9 @@ test("a lost upload is retried without duplicates, and two tabs never overwrite 
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(`e2e-interrupt-${Date.now()}-${Math.random().toString(36).slice(2, 7)}@example.com`);
   await page.getByLabel("Password").fill("practice-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/practice\?/, AUTH);
   await page.getByRole("button", { name: "Start my free 30-day trial" }).click();
   await expect(page.getByText(/Free trial until/)).toBeVisible(AUTH);
@@ -70,7 +73,9 @@ test("offline, the written test says what it means, then saves the page map and 
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(`e2e-offline-written-${Date.now()}-${Math.random().toString(36).slice(2, 7)}@example.com`);
   await page.getByLabel("Password").fill("practice-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/practice\?/, AUTH);
   await page.getByRole("button", { name: "Start my free 30-day trial" }).click();
   await expect(page.getByText(/Free trial until/)).toBeVisible(AUTH);
@@ -125,7 +130,9 @@ test("a withdrawn plan ends the open written test, and the learner is told why",
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("practice-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(/:\d+\/practice\?/, AUTH);
 
   const finance = await (await browser.newContext()).newPage();

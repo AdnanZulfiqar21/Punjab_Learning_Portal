@@ -1,4 +1,5 @@
 import { expect, test, type Browser, type Page } from "@playwright/test";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // Help requests, question reports and the staff support queue (P15.S3) with the development fixtures from
 // `portal-dev-seed-staff` and `portal-dev-seed-practice`. Every question here is a technical fixture.
@@ -14,7 +15,9 @@ async function newLearner(page: Page, next: string): Promise<string> {
   await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("support-fixture-pass-1");
+  await fillSignupExtras(page);
   await page.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(page);
   await expect(page).toHaveURL(new RegExp(`:\\d+${next.replace(/[?]/g, "\\?")}`), AUTH);
   return email;
 }

@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { audit } from "./helpers/a11y";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // P04.S2.T3 (ACCESS-GRANTS-01): finance grants a learner pilot access from the web, sees it with its written units,
 // and revokes it with a reason. Labelled fixture accounts only.
@@ -15,7 +16,9 @@ test("finance grants and revokes pilot access from the web", async ({ page, brow
   await learner.getByRole("button", { name: "New here? Create an account" }).click();
   await learner.getByLabel("Email").fill(email);
   await learner.getByLabel("Password").fill("practice-fixture-pass-1");
+  await fillSignupExtras(learner);
   await learner.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(learner);
   await expect(learner).toHaveURL(/:\d+\/account$/, AUTH);
 
   await page.goto("/signin?next=/admin/access");

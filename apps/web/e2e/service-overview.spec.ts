@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { audit } from "./helpers/a11y";
+import { enterEmailCode, fillSignupExtras } from "./helpers/signup";
 
 // The operator's service overview (OPS-01, STAFFING-01, LIFECYCLE-01) with the labelled dev-seed operator account.
 const AUTH = { timeout: 20_000 };
@@ -55,7 +56,9 @@ test("staffing decides whether written tests start, and learners are told", asyn
   await learner.getByRole("button", { name: "New here? Create an account" }).click();
   await learner.getByLabel("Email").fill(`e2e-staffing-${Date.now()}@example.com`);
   await learner.getByLabel("Password").fill("practice-fixture-pass-1");
+  await fillSignupExtras(learner);
   await learner.getByRole("button", { name: "Create account" }).click();
+  await enterEmailCode(learner);
   await expect(learner).toHaveURL(/:\d+\/practice\?/, AUTH);
   await learner.getByRole("button", { name: "Start my free 30-day trial" }).click();
   await expect(learner.getByText(/Free trial until/)).toBeVisible(AUTH);

@@ -57,7 +57,7 @@ def report(db: Session) -> dict[str, Any]:
     now: datetime = db.execute(select(func.now())).scalar_one()
     staff = exists().where(StaffRoleGrant.user_id == AppUser.id, StaffRoleGrant.revoked_at.is_(None))
     learner_ids = select(AppUser.id).where(
-        AppUser.status != "deleted", ~staff, AppUser.issuer != get_settings().dev_auth_issuer
+        AppUser.status != "deleted", ~staff, AppUser.issuer != get_settings().test_account_issuer
     )
     week = week_of(TrialClaim.created_at)
     denied = and_(TrialClaim.status == "CLOSED_INELIGIBLE", TrialClaim.outcome == "device_used")

@@ -67,6 +67,16 @@ function deviceName(): string {
   return Platform.OS === "ios" ? "iPhone or iPad" : Platform.OS === "android" ? "Android device" : "Web browser";
 }
 
+export type SignUpInput = {
+  email: string;
+  password: string;
+  first_name: string;
+  surname: string;
+  phone: string;
+  date_of_birth: string; // YYYY-MM-DD
+  marketing_emails: boolean;
+};
+
 export class ApiError extends Error {
   constructor(
     message: string,
@@ -234,6 +244,12 @@ export const api = {
     if (grade) params.set("grade", String(grade));
     return request<SearchResult>(`/v1/search?${params.toString()}`, { token, signal });
   },
+  /** SEARCH-SUGGEST-01: chapters and topics whose titles match what is being typed (no lessons, no session). */
+  suggest: (q: string, grade: number | undefined, signal?: AbortSignal) => {
+    const params = new URLSearchParams({ q, limit: "8" });
+    if (grade) params.set("grade", String(grade));
+    return request<SearchResult>(`/v1/search?${params.toString()}`, { token: null, signal });
+  },
   runtimeConfig: (signal?: AbortSignal) => getJSON<RuntimeConfig>("/v1/runtime-config", signal),
   /** Published, live lessons only (independently reviewed); drafts never reach the app. */
   // Premium bodies come back only with a session that has an active plan or trial (review R07).
@@ -254,11 +270,20 @@ export const api = {
       { token, signal },
     ),
 
-  // Development identity adapter: the API exposes it only in development/test and keeps it out of the contract.
-  devRegister: (email: string, password: string) =>
-    request<void>("/v1/dev-auth/register", { method: "POST", body: { email, password } }),
-  devToken: (email: string, password: string) =>
-    request<{ access_token: string }>("/v1/dev-auth/token", { method: "POST", body: { email, password } }),
+  // AUTH-PASSWORD-01: the portal's own sign-up. Registering emails a 6-digit code; the code confirms the email and
+  // signs in. Mobile number and date of birth are required (not verified); promotional emails only with the opt-in.
+  register: (body: SignUpInput) => request<void>("/v1/auth/register", { method: "POST", body }),
+  passwordToken: (email: string, password: string) =>
+    request<{ access_token: string }>("/v1/auth/token", { method: "POST", body: { email, password } }),
+  verifyEmail: (email: string, code: string) =>
+    request<{ access_token: string }>("/v1/auth/verify-email", { method: "POST", body: { email, code } }),
+  resendCode: (email: string) => request<void>("/v1/auth/resend-code", { method: "POST", body: { email } }),
+  // Forgotten password (owner 2026-11-12): email a code (always accepted), check it, then set the new password.
+  resetRequest: (email: string) => request<void>("/v1/auth/password-reset/request", { method: "POST", body: { email } }),
+  resetCheck: (email: string, code: string) =>
+    request<void>("/v1/auth/password-reset/check", { method: "POST", body: { email, code } }),
+  resetConfirm: (email: string, code: string, new_password: string) =>
+    request<{ access_token: string }>("/v1/auth/password-reset/confirm", { method: "POST", body: { email, code, new_password } }),
 
   // App sessions (IMPL-12) are created only from a verified IdP access token.
   createSession: (idpToken: string, deviceLabel: string) =>

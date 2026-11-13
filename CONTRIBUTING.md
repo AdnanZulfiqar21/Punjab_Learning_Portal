@@ -90,7 +90,7 @@ pnpm --filter @portal/contracts generate && git diff --exit-code -- packages/con
 pnpm --filter web lint && pnpm --filter web typecheck && pnpm --filter web build
 node apps/web/scripts/check-bundle.mjs && node apps/web/scripts/check-tokens.mjs
 # API on :8100 with PORTAL_HEALTH_SAMPLE_S=0, catalogue imported, both dev seeds, both workers, import_lessons.py;
-# then `pnpm start` in apps/web
+# then `PORTAL_ROLE=development pnpm start` in apps/web (a production build must be told its role)
 pnpm --filter web exec playwright install --with-deps chromium firefox webkit
 pnpm --filter web exec playwright test
 ```

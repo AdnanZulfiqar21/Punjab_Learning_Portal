@@ -567,6 +567,11 @@ html:has(.lesson-flow, [data-reading-bar]) {
 .book-box[data-book-box="keep"] { --bb-head: #a3480a; --bb-body: #fcf1e6; }
 .book-box[data-book-box="activity"] { --bb-head: #b4380f; --bb-body: #fcede6; }
 .book-box[data-book-box="fact"] { --bb-head: #0f5f8a; --bb-body: #e8f2f8; }
+.book-box[data-book-box="outcomes"] { --bb-head: #84650a; --bb-body: #fdf8e1; }
+/* BOOK-HIGHLIGHT-01: words the book prints in colour inside running text (Chemistry's magenta definitions). */
+.book-highlight { color: #b0005f; font-weight: 600; }
+:root[data-theme="dark"] .book-highlight { color: #ff7ab8; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .book-highlight { color: #ff7ab8; } }
 /* An untitled margin note: no header, a pale yellow body with a gold edge, like the book's margin notes. */
 .book-box[data-book-box="note"] { --bb-head: #c9a227; --bb-body: #fdf8e1; }
 .book-box-head {
@@ -778,5 +783,45 @@ mark.find-in-book {
 @keyframes find-in-book {
   50% {
     box-shadow: 0 0 0 0.35em rgb(255 214 0 / 0.45);
+  }
+}
+
+/* AUTH-PREMIUM-01 (owner 2026-11-12): sign-in and sign-up. Desktop = draft A (story panel beside the form); phone =
+   draft B (one card, sign-up in two steps). CSS only. */
+.auth-story {
+  background: radial-gradient(120% 80% at 0% 0%, #1497ae 0%, #0b5d73 45%, #05303c 100%);
+}
+.auth-story::after {
+  content: "";
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  right: -120px;
+  top: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(255 212 99 / 0.33), transparent 65%);
+  pointer-events: none;
+}
+.auth-tabs-pill {
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.auth-tabs[data-mode="register"] .auth-tabs-pill {
+  transform: translateX(100%);
+}
+.auth-submit {
+  background: linear-gradient(135deg, #1497ae, #0b5d73 55%, #08485a);
+  box-shadow: 0 10px 24px -10px rgb(11 93 115 / 0.7);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+.auth-submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px -10px rgb(11 93 115 / 0.8);
+}
+@media (prefers-reduced-motion: reduce) {
+  .auth-tabs-pill,
+  .auth-submit {
+    transition: none;
   }
 }

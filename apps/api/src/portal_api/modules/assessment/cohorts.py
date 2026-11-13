@@ -145,7 +145,7 @@ def _test_issuer() -> str:
     """Accounts from this issuer are development/test accounts and are never compared."""
     from portal_api.config import get_settings
 
-    return get_settings().dev_auth_issuer
+    return get_settings().test_account_issuer
 
 
 def _eligible_learner() -> Any:

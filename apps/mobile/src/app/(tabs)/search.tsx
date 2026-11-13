@@ -1,5 +1,5 @@
 import { router } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FlatList, Pressable, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import type { SearchHit } from "@portal/contracts";
@@ -35,6 +35,7 @@ export default function SearchScreen() {
           value={draft}
           onChangeText={setDraft}
           onSubmitEditing={() => setQuery(draft.trim())}
+          accessibilityHint="Suggestions appear below as you type"
           returnKeyType="search"
           autoCorrect={false}
           style={{ borderWidth: 1, borderColor: c.border, backgroundColor: c.surface, color: c.text, borderRadius: Radius.sm, padding: Space.md, fontSize: 16, minHeight: 48 }}
@@ -57,7 +58,13 @@ export default function SearchScreen() {
           })}
         </View>
       </View>
-      {query.length >= 2 ? <Results q={query} grade={grade} /> : <T variant="muted" style={{ paddingHorizontal: Space.lg }}>Enter at least two characters.</T>}
+      {draft.trim().length >= 2 && draft.trim() !== query ? (
+        <Suggestions typed={draft.trim()} grade={grade} onSearch={() => setQuery(draft.trim())} />
+      ) : query.length >= 2 ? (
+        <Results q={query} grade={grade} />
+      ) : (
+        <T variant="muted" style={{ paddingHorizontal: Space.lg }}>Enter at least two characters.</T>
+      )}
     </SafeAreaView>
     </Screen>
   );
@@ -116,5 +123,61 @@ function ResultList({ q, grade, token }: { q: string; grade?: number; token: str
         );
       }}
     />
+  );
+}
+
+/**
+ * SEARCH-SUGGEST-01 (owner, 2026-11-13): while the learner types, the chapters and topics whose titles match, under the
+ * box; a tap opens one. "Search" (or the keyboard's search key) runs the full search, lessons included.
+ */
+function Suggestions({ typed, grade, onSearch }: { typed: string; grade?: number; onSearch: () => void }) {
+  const c = useTheme();
+  const [q, setQ] = useState(typed);
+  useEffect(() => {
+    const id = setTimeout(() => setQ(typed), 200);
+    return () => clearTimeout(id);
+  }, [typed]);
+  const { state } = useRequest((signal) => api.suggest(q, grade, signal), [q, grade]);
+  const hits = state.status === "success" ? state.data.hits.filter((h) => h.kind === "chapter" || h.kind === "topic") : [];
+  const lower = q.toLowerCase();
+  return (
+    <View style={{ paddingHorizontal: Space.lg, gap: Space.xs }} accessibilityLabel="Suggestions">
+      {state.status === "success" && hits.length === 0 ? (
+        <T variant="muted">{`No chapter or topic is named like “${q}”.`}</T>
+      ) : null}
+      {hits.map((h) => {
+        const at = h.title.toLowerCase().indexOf(lower);
+        return (
+          <Pressable
+            key={`${h.kind}-${h.id}`}
+            accessibilityRole="button"
+            accessibilityLabel={`${h.title}. ${GRADE_LABEL[h.grade]} ${h.subject_name} ${h.kind === "chapter" ? "chapter" : "topic"}`}
+            onPress={() =>
+              h.kind === "topic"
+                ? router.push({ pathname: "/topic/[id]", params: { id: h.id } })
+                : router.push({ pathname: "/chapter/[id]", params: { id: h.chapter_id } })
+            }
+            style={({ pressed }) => ({ minHeight: 52, justifyContent: "center", paddingHorizontal: Space.md, paddingVertical: Space.sm, borderRadius: Radius.lg, backgroundColor: pressed ? c.accentSoft : c.surface, borderWidth: 1, borderColor: c.border })}>
+            <T style={{ fontWeight: "600" }} numberOfLines={2}>
+              {at < 0 ? (
+                h.title
+              ) : (
+                <>
+                  {h.title.slice(0, at)}
+                  <T style={{ fontWeight: "800", backgroundColor: c.accentSoft }}>{h.title.slice(at, at + q.length)}</T>
+                  {h.title.slice(at + q.length)}
+                </>
+              )}
+            </T>
+            <T variant="small" numberOfLines={1} style={{ color: c.muted }}>
+              {`${GRADE_LABEL[h.grade]} · ${h.subject_name} · ${h.kind === "chapter" ? "Chapter" : `Topic in ${h.chapter_title}`}`}
+            </T>
+          </Pressable>
+        );
+      })}
+      <Pressable accessibilityRole="button" onPress={onSearch} style={{ minHeight: 48, justifyContent: "center", paddingHorizontal: Space.md }}>
+        <T style={{ color: c.accent, fontWeight: "700" }}>{`Search for “${typed}” in lessons too`}</T>
+      </Pressable>
+    </View>
   );
 }

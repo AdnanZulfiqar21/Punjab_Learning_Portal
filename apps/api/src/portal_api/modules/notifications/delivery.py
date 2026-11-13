@@ -5,8 +5,8 @@ same one. Non-urgent deliveries wait out the learner's quiet hours and an hourly
 of events (or a retry storm) never floods anyone. Failures retry with backoff, then stop as ``failed``. A channel with
 no configured provider records ``unavailable`` with the reason instead of pretending to send:
 
-* email: ``dev_outbox`` (development/test only; records the rendered message, refused in staging/production) or
-  ``none`` until an approved sender exists (BLOCKERS B04);
+* email: ``resend`` (AUTH-PASSWORD-01), ``dev_outbox`` (development/test only; records the rendered message, refused
+  in staging/production) or ``none``;
 * push: ``none`` until installable builds and push credentials exist (BLOCKERS B07). Tokens can be registered now.
 
 SMS is an optional approved-cost channel (roadmap) and has no adapter.
@@ -14,6 +14,7 @@ SMS is an optional approved-cost channel (roadmap) and has no adapter.
 
 from __future__ import annotations
 
+import html
 import logging
 import time
 from dataclasses import dataclass
@@ -22,6 +23,7 @@ from datetime import datetime, timedelta
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
+from portal_api import email
 from portal_api.budget import process_class
 from portal_api.config import get_settings
 from portal_api.db import get_sessionmaker
@@ -45,13 +47,27 @@ def _send_email(db: Session, d: NotificationDelivery, n: Notification) -> Outcom
     adapter = get_settings().notification_email_adapter
     if adapter == "none":
         return Outcome("unavailable", error="no email sender is configured (BLOCKERS B04)")
-    if adapter != "dev_outbox":  # DEGRADATION-01: an adapter this code doesn't implement never counts as sent
+    if adapter not in ("dev_outbox", "resend"):  # DEGRADATION-01: an unimplemented adapter never counts as sent
         return Outcome("unavailable", error=f"email adapter {adapter!r} is not implemented; nothing was sent")
     user = db.get(AppUser, d.user_id)
     if user is None or not user.email:
         return Outcome("skipped", error="no email address on the account")
     if service.is_suppressed(db, "email", user.email):
         return Outcome("skipped", error="address suppressed (bounce, complaint or request)")
+    if adapter == "resend":
+        result = email.send(
+            email.Message(
+                to=user.email,
+                subject=n.title,
+                text=n.body,
+                html=f"<p><strong>{html.escape(n.title)}</strong></p><p>{html.escape(n.body)}</p>",
+                tag=f"notification-{n.category}",
+            ),
+            idempotency_key=f"notification-delivery-{d.id}",
+        )
+        if result.status == "sent":
+            return Outcome("sent", ref=result.ref)
+        return Outcome("failed" if result.retryable else "unavailable", error=result.error)
     # dev_outbox: development/test only (refused in staging/production by the configuration validator).
     log.info("dev email to=%s subject=%r", user.email, n.title)
     return Outcome("sent", ref=f"dev-outbox:{n.id}")
