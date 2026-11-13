@@ -40,7 +40,7 @@ from sqlalchemy import (
     select,
     text,
 )
-from sqlalchemy.dialects.postgresql import JSONB, UUID
+from sqlalchemy.dialects.postgresql import ARRAY, JSONB, UUID
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
 from portal_api.budget import process_class
@@ -371,24 +371,31 @@ def rederive(db: Session, who: Principal, version_id: uuid.UUID) -> AssetVersion
 
 
 # ------------------------------------------------------------------ references and retention
+# A version ID as it appears in content bodies (lowercase, as `str(uuid)` writes it).
+_UUID_RE = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+
+
 def referenced(db: Session, version_ids: list[uuid.UUID]) -> set[uuid.UUID]:
     """Asset versions that any content version (draft, published or superseded) names. Content versions are never
-    deleted and attempts pin content versions, so this covers retained attempts and published lessons."""
-    from sqlalchemy import Text as SAText
-    from sqlalchemy import cast, or_
+    deleted and attempts pin content versions, so this covers retained attempts and published lessons.
 
-    from portal_api.modules.content.models import ContentVersion
+    One pass over the content bodies, however many versions are asked about: every ID-shaped string is pulled out of
+    each body once and matched against the list. (Asking body-by-body per version scanned every lesson once per
+    version, which made the studio's asset list time out once a book's figures were archived.)"""
+    from sqlalchemy import bindparam, text
 
     if not version_ids:
         return set()
-    out = set()
-    for vid in version_ids:
-        hit = db.scalar(
-            select(ContentVersion.id).where(or_(cast(ContentVersion.body, SAText).contains(str(vid)))).limit(1)
-        )
-        if hit is not None:
-            out.add(vid)
-    return out
+    wanted = {str(v) for v in version_ids}
+    rows = db.execute(
+        text(
+            "SELECT DISTINCT m[1] FROM content_version AS cv "
+            "CROSS JOIN LATERAL regexp_matches(cv.body::text, :pattern, 'g') AS m "
+            "WHERE m[1] = ANY(:ids)"
+        ).bindparams(bindparam("ids", type_=ARRAY(Text))),
+        {"pattern": _UUID_RE, "ids": sorted(wanted)},
+    ).scalars()
+    return {uuid.UUID(r) for r in rows}
 
 
 def collect(db: Session, *, apply: bool, actor: uuid.UUID | None = None, now: datetime | None = None) -> list[str]:

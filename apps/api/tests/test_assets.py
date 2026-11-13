@@ -127,6 +127,13 @@ def test_retention_keeps_masters_and_referenced_versions(client: TestClient, db:
     assert _save(client, author, lesson, body={"blocks": [eq]}).status_code == 200  # a draft names kept v1
     issues = client.get(f"/v1/studio/items/{lesson['id']}/surfaces", headers=author.headers).json()["issues"]
     assert not any("asset archive" in i for i in issues)  # a ready archived image satisfies the surface check
+    # The list loads every asset's versions and in-use flags at once; each asset still gets exactly its own versions.
+    listed = client.get("/v1/studio/assets", params={"grade": 11, "subject": "biology"}, headers=author.headers).json()
+    in_use = {a["id"]: [(v["number"], v["referenced"]) for v in a["versions"]] for a in listed}
+    assert in_use[kept["id"]] == [(1, True), (2, False)]
+    assert in_use[loose["id"]] == [(1, False), (2, False)]
+    one = client.get(f"/v1/studio/assets/{kept['id']}", headers=author.headers).json()
+    assert [v["referenced"] for v in one["versions"]] == [True, False]
 
     assert client.post("/v1/studio/assets/retention", headers=author.headers).status_code == 403
     dry = client.post("/v1/studio/assets/retention", headers=operator.headers).json()
