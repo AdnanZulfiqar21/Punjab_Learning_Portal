@@ -111,28 +111,13 @@
               "Step Over: Execute the current line and move to the next one without going inside any functions.",
               "Continue: Continue the execution until the next breakpoint.",
               "Example: You can step over the line area = 3.14 * radius ** 2 to skip calculating the area, or step into calculate_area() to examine how the area is calculated."
-            ],
-            "book_errors": [
-              "to skip calculating the area"
             ]
-          },
-          {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Book correction",
-            "text": "Step Over does not skip a line: it executes the current line and stops on the next one, as the list above says; it only avoids going inside any function called on that line. When the debugger is paused inside calculate_area() on area = 3.14 * radius ** 2, Step Over runs that line, so area gets its value (78.5 when radius is 5). On the line print(\"Area of circle:\", calculate_area(radius)) in main(), Step Over runs the whole function call in one step, while Step Into goes inside calculate_area() to examine how the area is calculated."
           },
           {
             "type": "diagram",
             "$asset": "c12-cs-ch5-fig-debugging",
-            "alt": "A PyCharm-style debugger. Left, the code pane: calculate_area(radius) with area = 3.14 * radius ** 2, and main() with radius = 5 and the print line; red breakpoint dots at lines 6, 8 and 12, and the paused line radius = 5 highlighted, with the label Breakpoint pointing at it. Top right, a Watches pane: radius = 5, area = 78.5. Bottom right, a Variables pane with the same values, labelled Watch Expressions. Bottom, the console: Area of circle: 78.5.",
+            "alt": "A PyCharm-style debugger. Left, the code pane: calculate_area(radius) with area = 3.14 * radius ** 2, and main() with radius = 5 and the print line; red breakpoint dots at lines 6, 8 and 12, and the paused line radius = 5 highlighted; a label Breakpoint beside the code points with an arrow at the Watches pane. Top right, a Watches pane: radius = 5, area = 78.5. Bottom right, a Variables pane with the same values, labelled Watch Expressions. Bottom, the console: Area of circle: 78.5.",
             "caption": "Figure 5.2: Debugging in PyCharm (original drawing after the textbook's Figure 5.2)."
-          },
-          {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Book correction",
-            "text": "The printed Figure 5.2 points its Breakpoint label at the Watches pane; a breakpoint is set on a code line, here the paused line radius = 5, as drawn above."
           }
         ]
       }
