@@ -42,10 +42,16 @@
             "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"pack()\")\nwindow.geometry(\"300x220\")\n\n# Create buttons\nbutton1 = tk.Button(window, text=\"Button 1\", width=12)\nbutton2 = tk.Button(window, text=\"Button 2\", width=12)\nbutton3 = tk.Button(window, text=\"Button 3\", width=12)\n\n# Arrange buttons using pack()\nbutton1.pack(pady=10)\nbutton2.pack(pady=10)\nbutton3.pack(pady=10)\n\n# Run the application\nwindow.mainloop()"
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-pack-output",
+            "alt": "Pack() naam ki output window: Button 1, Button 2 aur Button 3 window ke beech mein aik ke neeche aik.",
+            "caption": "pack() misal ka output (kitab mein code ke saath chhapi window ke mutabiq asal khaaka)."
+          },
+          {
             "type": "callout",
             "tone": "tip",
             "title": "Code Explanation (Wazahat)",
-            "text": "\"window.title(\"pack()\")\" aur \"window.geometry(\"300x220\")\": window ka naam pack() aur size 300 x 220 pixel.\n\"button1 = tk.Button(window, text=\"Button 1\", width=12)\": teen buttons bante hain; width=12 har button ko taqreeban 12 huroof (characters) jitna chaura rakhta hai.\n\"button1.pack(pady=10)\": pack() har button ko pichhle widget ke neeche rakhta hai; pady=10 oopar neeche 10 pixel jagah chhorta hai.\n\"window.mainloop()\": window khuli rakhta hai.\nOutput: \"pack()\" naam ki window jis mein Button 1, Button 2 aur Button 3 beech mein aik ke neeche aik hain (Figure 4.2 ka Pack() hissa). Koi text print nahi hota. Tkinter browser ke Run mein nahi chalta; yeh program apne computer par Python (IDLE ya VS Code) mein chala kar dekhein."
+            "text": "\"window.title(\"pack()\")\" aur \"window.geometry(\"300x220\")\": window ka naam pack() aur size 300 x 220 pixel.\n\"button1 = tk.Button(window, text=\"Button 1\", width=12)\": teen buttons bante hain; width=12 har button ko taqreeban 12 huroof (characters) jitna chaura rakhta hai.\n\"button1.pack(pady=10)\": pack() har button ko pichhle widget ke neeche rakhta hai; pady=10 oopar neeche 10 pixel jagah chhorta hai.\n\"window.mainloop()\": window khuli rakhta hai.\nOutput: \"pack()\" naam ki window jis mein Button 1, Button 2 aur Button 3 beech mein aik ke neeche aik hain (oopar ki output window dekhein; Figure 4.2 ka Pack() hissa bhi yahi hai. Kitab ki tasveer mein window ka naam \"Pack()\" bare harf se chhapa hai, jabke program \"pack()\" likhta hai). Koi text print nahi hota. Tkinter browser ke Run mein nahi chalta; yeh program apne computer par Python (IDLE ya VS Code) mein chala kar dekhein."
           },
           {
             "type": "paragraph",
@@ -60,10 +66,16 @@
             "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"grid()\")\nwindow.geometry(\"300x220\")\n\n# Create buttons\nbutton1 = tk.Button(window, text=\"Button 1\", width=10)\nbutton2 = tk.Button(window, text=\"Button 2\", width=10)\nbutton3 = tk.Button(window, text=\"Button 3\", width=24)\n\n# Arrange buttons using grid()\nbutton1.grid(row=0, column=0, padx=10, pady=20)\nbutton2.grid(row=0, column=1, padx=10, pady=20)\n\n# Button 3 spans two columns\nbutton3.grid(row=1, column=0, columnspan=2, padx=10, pady=10)\n\n# Keep content centred\nwindow.grid_columnconfigure(0, weight=1)\nwindow.grid_columnconfigure(1, weight=1)\n\n# Run the application\nwindow.mainloop()"
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-grid-output",
+            "alt": "Grid() naam ki output window: oopar wali row mein Button 1 aur Button 2 saath saath, un ke neeche chaura Button 3 dono columns par phaila hua.",
+            "caption": "grid() misal ka output (kitab mein code ke saath chhapi window ke mutabiq asal khaaka)."
+          },
+          {
             "type": "callout",
             "tone": "tip",
             "title": "Code Explanation (Wazahat)",
-            "text": "\"button3 = tk.Button(window, text=\"Button 3\", width=24)\": teesra button baqi dono (width=10) se dugne se bhi zyada chaura hai.\n\"button1.grid(row=0, column=0, padx=10, pady=20)\": Button 1 pehli row aur pehle column mein (Python mein ginti 0 se shuru hoti hai); padx daayein baayein aur pady oopar neeche jagah deta hai.\n\"button2.grid(row=0, column=1, ...)\": Button 2 usi row ke doosre column mein, yani Button 1 ke saath.\n\"button3.grid(row=1, column=0, columnspan=2, ...)\": Button 3 doosri row mein; columnspan=2 ki wajah se woh dono columns par phaila hota hai.\n\"window.grid_columnconfigure(0, weight=1)\" aur \"(1, weight=1)\": dono columns ko barabar hissa (weight) deta hai, is liye buttons window ke beech mein rehte hain.\nOutput: \"grid()\" window: oopar wali row mein Button 1 aur Button 2 saath saath, neeche chaura Button 3 (Figure 4.2 ka Grid() hissa). Tkinter browser ke Run mein nahi chalta; yeh program apne computer par Python (IDLE ya VS Code) mein chala kar dekhein."
+            "text": "\"button3 = tk.Button(window, text=\"Button 3\", width=24)\": teesra button baqi dono (width=10) se dugne se bhi zyada chaura hai.\n\"button1.grid(row=0, column=0, padx=10, pady=20)\": Button 1 pehli row aur pehle column mein (Python mein ginti 0 se shuru hoti hai); padx daayein baayein aur pady oopar neeche jagah deta hai.\n\"button2.grid(row=0, column=1, ...)\": Button 2 usi row ke doosre column mein, yani Button 1 ke saath.\n\"button3.grid(row=1, column=0, columnspan=2, ...)\": Button 3 doosri row mein; columnspan=2 ki wajah se woh dono columns par phaila hota hai.\n\"window.grid_columnconfigure(0, weight=1)\" aur \"(1, weight=1)\": dono columns ko barabar hissa (weight) deta hai, is liye buttons window ke beech mein rehte hain.\nOutput: \"grid()\" window: oopar wali row mein Button 1 aur Button 2 saath saath, neeche chaura Button 3 (oopar ki output window dekhein; Figure 4.2 ka Grid() hissa bhi yahi hai. Kitab ki tasveer mein window ka naam \"Grid()\" bare harf se chhapa hai, jabke program \"grid()\" likhta hai). Tkinter browser ke Run mein nahi chalta; yeh program apne computer par Python (IDLE ya VS Code) mein chala kar dekhein."
           },
           {
             "type": "paragraph",
@@ -78,10 +90,16 @@
             "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"place()\")\nwindow.geometry(\"300x220\")\n\n# Create buttons\nbutton1 = tk.Button(window, text=\"Button 1\", width=10)\nbutton2 = tk.Button(window, text=\"Button 2\", width=10)\nbutton3 = tk.Button(window, text=\"Button 3\", width=10)\n\n# Arrange buttons using place()\nbutton1.place(x=30, y=40)\nbutton2.place(x=170, y=85)\nbutton3.place(x=30, y=140)\n\n# Run the application\nwindow.mainloop()"
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-place-output",
+            "alt": "Place() naam ki output window: Button 1 oopar baayein, Button 2 thora neeche daayein, aur Button 3 neeche baayein.",
+            "caption": "place() misal ka output (kitab mein code ke saath chhapi window ke mutabiq asal khaaka)."
+          },
+          {
             "type": "callout",
             "tone": "tip",
             "title": "Code Explanation (Wazahat)",
-            "text": "\"button1.place(x=30, y=40)\": place() button ko bilkul theek jagah par rakhta hai: x = window ke baayein kinare se 30 pixel, y = oopar ke kinare se 40 pixel.\n\"button2.place(x=170, y=85)\": Button 2 daayein taraf aur thora neeche.\n\"button3.place(x=30, y=140)\": Button 3 baayein taraf, sab se neeche.\nOutput: \"place()\" window jis mein Button 1 oopar baayein, Button 2 beech mein daayein aur Button 3 neeche baayein (Figure 4.2 ka Place() hissa). Window chhoti ya bari karne par yeh buttons apni jagah se nahi hilte, is liye place() mein ehtiyat chahiye. Tkinter browser ke Run mein nahi chalta; yeh program apne computer par Python (IDLE ya VS Code) mein chala kar dekhein.\nKhud try karein: apne computer par button2.place(x=170, y=85) ko place(x=100, y=100) kar ke dekhein ke button kahan chala jata hai."
+            "text": "\"button1.place(x=30, y=40)\": place() button ko bilkul theek jagah par rakhta hai: x = window ke baayein kinare se 30 pixel, y = oopar ke kinare se 40 pixel.\n\"button2.place(x=170, y=85)\": Button 2 daayein taraf aur thora neeche.\n\"button3.place(x=30, y=140)\": Button 3 baayein taraf, sab se neeche.\nOutput: \"place()\" window jis mein Button 1 oopar baayein, Button 2 beech mein daayein aur Button 3 neeche baayein (oopar ki output window dekhein; Figure 4.2 ka Place() hissa bhi yahi hai. Kitab ki tasveer mein window ka naam \"Place()\" bare harf se chhapa hai, jabke program \"place()\" likhta hai). Window chhoti ya bari karne par yeh buttons apni jagah se nahi hilte, is liye place() mein ehtiyat chahiye. Tkinter browser ke Run mein nahi chalta; yeh program apne computer par Python (IDLE ya VS Code) mein chala kar dekhein.\nKhud try karein: apne computer par button2.place(x=170, y=85) ko place(x=100, y=100) kar ke dekhein ke button kahan chala jata hai."
           },
           {
             "type": "callout",
