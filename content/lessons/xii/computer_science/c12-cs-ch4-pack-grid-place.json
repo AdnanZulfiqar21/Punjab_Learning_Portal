@@ -41,6 +41,12 @@
             "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"pack()\")\nwindow.geometry(\"300x220\")\n\n# Create buttons\nbutton1 = tk.Button(window, text=\"Button 1\", width=12)\nbutton2 = tk.Button(window, text=\"Button 2\", width=12)\nbutton3 = tk.Button(window, text=\"Button 3\", width=12)\n\n# Arrange buttons using pack()\nbutton1.pack(pady=10)\nbutton2.pack(pady=10)\nbutton3.pack(pady=10)\n\n# Run the application\nwindow.mainloop()"
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-pack-output",
+            "alt": "Output window titled Pack(): Button 1, Button 2 and Button 3 stacked one below another in the centre of the window.",
+            "caption": "Output of the pack() example (original drawing after the output window printed beside the textbook's code)."
+          },
+          {
             "type": "paragraph",
             "text": "Example grid():",
             "bold": [
@@ -53,6 +59,12 @@
             "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"grid()\")\nwindow.geometry(\"300x220\")\n\n# Create buttons\nbutton1 = tk.Button(window, text=\"Button 1\", width=10)\nbutton2 = tk.Button(window, text=\"Button 2\", width=10)\nbutton3 = tk.Button(window, text=\"Button 3\", width=24)\n\n# Arrange buttons using grid()\nbutton1.grid(row=0, column=0, padx=10, pady=20)\nbutton2.grid(row=0, column=1, padx=10, pady=20)\n\n# Button 3 spans two columns\nbutton3.grid(row=1, column=0, columnspan=2, padx=10, pady=10)\n\n# Keep content centred\nwindow.grid_columnconfigure(0, weight=1)\nwindow.grid_columnconfigure(1, weight=1)\n\n# Run the application\nwindow.mainloop()"
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-grid-output",
+            "alt": "Output window titled Grid(): Button 1 and Button 2 side by side in the top row, and a wider Button 3 below them spanning both columns.",
+            "caption": "Output of the grid() example (original drawing after the output window printed beside the textbook's code)."
+          },
+          {
             "type": "paragraph",
             "text": "Example place():",
             "bold": [
@@ -63,6 +75,12 @@
             "type": "code",
             "language": "python",
             "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"place()\")\nwindow.geometry(\"300x220\")\n\n# Create buttons\nbutton1 = tk.Button(window, text=\"Button 1\", width=10)\nbutton2 = tk.Button(window, text=\"Button 2\", width=10)\nbutton3 = tk.Button(window, text=\"Button 3\", width=10)\n\n# Arrange buttons using place()\nbutton1.place(x=30, y=40)\nbutton2.place(x=170, y=85)\nbutton3.place(x=30, y=140)\n\n# Run the application\nwindow.mainloop()"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-place-output",
+            "alt": "Output window titled Place(): Button 1 near the top left, Button 2 lower down on the right, and Button 3 near the bottom left.",
+            "caption": "Output of the place() example (original drawing after the output window printed beside the textbook's code)."
           }
         ]
       }
