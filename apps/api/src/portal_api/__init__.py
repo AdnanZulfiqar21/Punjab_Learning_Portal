@@ -1,1 +1,1 @@
-"""Punjab Learning Portal backend (modular monolith; roadmap §5)."""
+"""Sirf Concepts backend (modular monolith; roadmap §5)."""

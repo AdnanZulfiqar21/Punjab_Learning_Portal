@@ -59,7 +59,7 @@ export default function LearnScreen() {
     <SafeAreaView edges={["top"]} style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ padding: Space.lg, paddingTop: TAB_SCREEN_TOP, paddingBottom: Space.xxl * 3, gap: Space.lg }}>
         <View style={{ gap: 2 }}>
-          <T variant="eyebrow">Punjab Learning Portal</T>
+          <T variant="eyebrow">Sirf Concepts</T>
           <T variant="title" accessibilityRole="header" style={{ fontSize: 34, lineHeight: 40 }}>
             Learn
           </T>

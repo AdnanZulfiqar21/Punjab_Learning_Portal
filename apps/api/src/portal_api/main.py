@@ -70,7 +70,7 @@ def create_app() -> FastAPI:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")
     app = FastAPI(
         lifespan=_lifespan,
-        title="Punjab Learning Portal API",
+        title="Sirf Concepts API",
         version="0.1.0",
         summary="Authoritative backend for student web, Android, iOS and staff admin.",
         docs_url="/docs" if settings.role.value in ("development", "test") else None,

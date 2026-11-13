@@ -3,6 +3,7 @@ import { Geist_Mono, Inter, Noto_Nastaliq_Urdu, Outfit } from "next/font/google"
 import Link from "next/link";
 import { Suspense } from "react";
 import { AccountNav } from "@/components/account-nav";
+import { BrandMark } from "@/components/brand-mark";
 import { ConnectionStatus } from "@/components/connection-status";
 import { DisplaySync } from "@/components/display-sync";
 import { IncidentBanner } from "@/components/incident-banner";
@@ -20,7 +21,7 @@ const mono = Geist_Mono({ variable: "--font-mono-ui", subsets: ["latin"] });
 const urdu = Noto_Nastaliq_Urdu({ variable: "--font-urdu", subsets: ["arabic"], weight: "variable", preload: false });
 
 export const metadata: Metadata = {
-  title: { default: "Punjab Learning Portal", template: "%s · Punjab Learning Portal" },
+  title: { default: "Sirf Concepts", template: "%s · Sirf Concepts" },
   description:
     "Class 11 and Class 12 Biology, Chemistry, Physics, Computer Science and Mathematics for Punjab, organised by the official textbooks.",
 };
@@ -71,8 +72,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* DESIGN-01: a floating glass header inside the page container (globals.css .site-header keeps it in view). */}
         <header className="site-header mx-auto mt-3 w-full max-w-6xl px-4">
           <div className="glass relative flex items-center justify-between gap-2 rounded-card py-2 pr-2 pl-4 sm:px-5">
-            <Link href="/" className="min-w-0 font-display text-base leading-tight font-bold tracking-tight text-foreground sm:text-lg">
-              Punjab Learning Portal
+            <Link
+              href="/"
+              className="flex min-w-0 items-center gap-2 font-display text-base leading-tight font-bold tracking-tight text-foreground sm:text-lg"
+            >
+              <BrandMark id="hdr" className="size-8 shrink-0 sm:size-9" />
+              <span>
+                Sirf <span className="text-[#8f5b00] dark:text-[#f2c25c]">Concepts</span>
+              </span>
             </Link>
             <Suspense fallback={<SiteNavFallback account={<AccountSlot />} />}>
               <SiteNav account={<AccountSlot />} />

@@ -16,9 +16,9 @@ const IDS: Record<Variant, string> = {
   production: BASE_ID,
 };
 const NAMES: Record<Variant, string> = {
-  development: "Punjab Portal (Dev)",
-  preview: "Punjab Portal (Preview)",
-  production: "Punjab Learning Portal",
+  development: "Sirf Concepts (Dev)",
+  preview: "Sirf Concepts (Preview)",
+  production: "Sirf Concepts",
 };
 
 // The API origin is variant configuration. Production and preview builds must receive it explicitly; a production
@@ -51,7 +51,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     bundleIdentifier: IDS[variant],
     // Local source of truth (eas.json appVersionSource). Build 1 is the installed preview of 7d1be98.
     buildNumber: "10",
-    icon: "./assets/expo.icon",
+    icon: "./assets/images/icon.png",
     // A preview or development build may call an http API on the same Wi-Fi. Production stays on the default
     // App Transport Security rules, so it does not accept cleartext.
     infoPlist:
@@ -61,7 +61,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
             ...config.ios?.infoPlist,
             ITSAppUsesNonExemptEncryption: false,
             NSLocalNetworkUsageDescription:
-              "Punjab Portal (Preview) connects to the learning service on this Wi-Fi.",
+              "Sirf Concepts (Preview) connects to the learning service on this Wi-Fi.",
             NSAppTransportSecurity: { NSAllowsLocalNetworking: true },
           },
   },
@@ -69,7 +69,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ...config.android,
     package: IDS[variant].replaceAll("-", "_"),
     adaptiveIcon: {
-      backgroundColor: "#E3F1F5",
+      backgroundColor: "#0B5D73",
       foregroundImage: "./assets/images/android-icon-foreground.png",
       backgroundImage: "./assets/images/android-icon-background.png",
       monochromeImage: "./assets/images/android-icon-monochrome.png",
@@ -80,7 +80,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   plugins: [
     "expo-router",
     "expo-secure-store",
-    ["expo-splash-screen", { backgroundColor: "#0B5D73", image: "./assets/images/splash-icon.png", imageWidth: 76 }],
+    ["expo-splash-screen", { backgroundColor: "#0B5D73", image: "./assets/images/splash-icon.png", imageWidth: 160 }],
     [
       "expo-image-picker",
       {
