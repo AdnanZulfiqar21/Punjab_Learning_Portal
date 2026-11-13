@@ -15,6 +15,7 @@ import { CodeColors, Fonts, Radius, Space } from "@/constants/theme";
 import { useScheme, useTheme } from "@/hooks/use-theme";
 import { bookBoxKind, boxRow, isMarginNote, isSideBox, isSideFigure, type BookBoxKind } from "@/lib/book-box";
 import { bookErrors, markPieces, styledPieces } from "@/lib/book-errors";
+import { isListMarker, labelWidth, listLabel, splitLabel, type ListMarker } from "@/lib/book-list";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
 import { splitQuestionNumber } from "@/lib/question-number";
@@ -81,7 +82,24 @@ function Marked({ text, marks, bold = [] }: { text: string; marks: string[]; bol
   const c = useTheme();
   const scheme = useScheme();
   const find = useContext(Find);
+  const hl = useContext(Highlight);
   const hit = find ? findRange(text, find) : null;
+  if (hl.length) {
+    // BOOK-HIGHLIGHT-01: words the book prints in colour, drawn in its highlight colour where they stand.
+    return (
+      <Highlight.Provider value={[]}>
+        {markPieces(text, hl).map((p, i) =>
+          p.error ? (
+            <Text key={i} style={{ color: scheme === "dark" ? "#ff7ab8" : "#b0005f", fontWeight: "600" }}>
+              <Marked text={p.text} marks={marks} bold={bold} />
+            </Text>
+          ) : (
+            <Marked key={i} text={p.text} marks={marks} bold={bold} />
+          ),
+        )}
+      </Highlight.Provider>
+    );
+  }
   if (hit) {
     // MCQ-BOOK-LINK-01: the book's words a practice question comes from, marked like a highlighter pen.
     return (
@@ -151,6 +169,8 @@ const Numbered = createContext(false);
 const Solved = createContext<SolvedLabels>(SOLVED_LABELS_EN);
 /** MCQ-BOOK-LINK-01: the book's words to mark, given only to the block that holds them. */
 const Find = createContext<string | null>(null);
+/** BOOK-HIGHLIGHT-01: the words the block being drawn prints in colour (its `highlight`). */
+const Highlight = createContext<string[]>([]);
 
 export function LessonBlocks({
   blocks: authored,
@@ -350,9 +370,13 @@ const BOOK_BOX_HEAD: Record<BookBoxKind, string> = {
   keep: "#a3480a",
   activity: "#b4380f",
   fact: "#0f5f8a",
+  outcomes: "#84650a",
 };
 // An untitled margin note: a gold edge and a pale yellow body, as on the web.
 const MARGIN_NOTE = "#c9a227";
+/** BOOK-LIST-01: about one character of the reading font, for a label column sized in characters. */
+const LABEL_CH = 8.5;
+const labelColumn = (marker: ListMarker, start: number, count: number) => labelWidth(marker, start, count) * LABEL_CH;
 
 function Lines({
   items,
@@ -361,9 +385,12 @@ function Lines({
   bold = [],
   start = 1,
   continued = false,
+  marker,
 }: {
   items: string[];
   ordered: boolean;
+  /** BOOK-LIST-01: the label style the book prints ("i-", "(a)"); absent means plain numbers. */
+  marker?: ListMarker;
   marks?: string[];
   bold?: string[];
   start?: number;
@@ -372,11 +399,17 @@ function Lines({
 }) {
   const c = useTheme();
   const premium = useContext(Premium);
+  const booked = ordered && marker ? marker : null;
+  const width = booked ? labelColumn(booked, start, items.length) : 24;
   return (
     <View style={{ gap: Space.sm }} accessibilityRole="list">
       {items.map((item, i) => (
         <View key={i} style={{ flexDirection: "row", gap: Space.sm }}>
-          <T style={{ width: 24, textAlign: "right", color: c.accent, fontWeight: "700" }}>{continued && i === 0 ? "" : ordered ? `${start + i}.` : "•"}</T>
+          {booked ? (
+            <T style={{ width }}>{continued && i === 0 ? "" : listLabel(booked, start + i)}</T>
+          ) : (
+            <T style={{ width: 24, textAlign: "right", color: c.accent, fontWeight: "700" }}>{continued && i === 0 ? "" : ordered ? `${start + i}.` : "•"}</T>
+          )}
           <T style={{ flex: 1 }}>
             <Item text={item} marks={premium ? marks : null} bold={bold} />
           </T>
@@ -466,7 +499,7 @@ function SideRow({ text, side, render }: { text: Block; side: ReactNode; render:
             style={{ position: "absolute", left: 0, right: 0, opacity: 0, gap: isList ? Space.sm : 0 }}>
             {items.map((item, i) => (
               <View key={i} style={{ flexDirection: "row", gap: isList ? Space.sm : 0 }}>
-                {isList ? <View style={{ width: 24 }} /> : null}
+                {isList ? <View style={{ width: isList && text.ordered === true && isListMarker(text.marker) ? labelColumn(text.marker, start, items.length) : 24 }} /> : null}
                 <T
                   style={{ flex: 1 }}
                   onTextLayout={(e) => {
@@ -528,7 +561,15 @@ function sideRunStart(blocks: readonly Block[], i: number): number {
   return -1;
 }
 
-function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block; assetSource?: AssetSource; dataSaver?: boolean; compact?: boolean }) {
+function BlockView(props: { block: Block; assetSource?: AssetSource; dataSaver?: boolean; compact?: boolean }) {
+  return (
+    <Highlight.Provider value={bookErrors(props.block.highlight)}>
+      <BlockBody {...props} />
+    </Highlight.Provider>
+  );
+}
+
+function BlockBody({ block: b, assetSource, dataSaver, compact }: { block: Block; assetSource?: AssetSource; dataSaver?: boolean; compact?: boolean }) {
   const c = useTheme();
   const scheme = useScheme();
   const premium = useContext(Premium);
@@ -579,13 +620,36 @@ function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block
             </T>
           </View>
         );
+      {
+        // BOOK-LIST-01: "(a) In electroporation, …" shows its label in a column, the lines hanging beside it.
+        const labelled = splitLabel(str(b.text), marks);
+        if (labelled)
+          return (
+            <View style={{ flexDirection: "row", gap: Space.sm }}>
+              <T style={{ minWidth: labelled[0].length * LABEL_CH }}>{labelled[0]}</T>
+              <T style={{ flex: 1 }}>
+                <Marked text={labelled[1]} marks={marks} bold={bold} />
+              </T>
+            </View>
+          );
+      }
       return (
         <T>
           <Marked text={str(b.text)} marks={marks} bold={bold} />
         </T>
       );
     case "list":
-      return <Lines items={strs(b.items)} ordered={b.ordered === true} marks={marks} bold={bold} start={typeof b.start === "number" ? b.start : 1} continued={b.continued === true} />;
+      return (
+        <Lines
+          items={strs(b.items)}
+          ordered={b.ordered === true}
+          marks={marks}
+          bold={bold}
+          start={typeof b.start === "number" ? b.start : 1}
+          continued={b.continued === true}
+          marker={isListMarker(b.marker) ? b.marker : undefined}
+        />
+      );
     case "callout": {
       const tone = str(b.tone) || "note";
       // A tip is green, as on the web: the diagram explanations ("Understanding the diagram") use it. So is a book
@@ -647,9 +711,12 @@ function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block
       const cards = comparisonCards(header, rows);
       return (
         <View style={{ gap: Space.sm }} accessibilityLabel={`Table: ${str(b.caption)}`}>
-          <T style={{ fontWeight: "600", color: premium ? c.accent : c.text }}>
-            <Marked text={str(b.caption)} marks={marks} bold={bold} />
-          </T>
+          {/* BOOK-TABLE-01: a caption the book doesn't print is only the table's spoken label. */}
+          {b.caption_hidden === true ? null : (
+            <T style={{ fontWeight: "600", color: premium ? c.accent : c.text }}>
+              <Marked text={str(b.caption)} marks={marks} bold={bold} />
+            </T>
+          )}
           {cards ? (
             cards.map((card, i) => (
               <View key={i} style={{ borderWidth: 1, borderColor: c.border, backgroundColor: c.surface, borderRadius: Radius.md, padding: Space.md, gap: Space.xs }}>
@@ -658,9 +725,11 @@ function BlockView({ block: b, assetSource, dataSaver, compact }: { block: Block
                 </T>
                 {card.fields.map((f) => (
                   <View key={f.label} style={{ flexDirection: "row", gap: Space.sm }}>
-                    <T variant="small" style={{ width: 104, fontWeight: "600" }}>
-                      {f.label}
-                    </T>
+                    {b.header_hidden === true ? null : (
+                      <T variant="small" style={{ width: 104, fontWeight: "600" }}>
+                        {f.label}
+                      </T>
+                    )}
                     <T style={{ flex: 1 }}>
                       <Marked text={f.value} marks={marks} bold={bold} />
                     </T>

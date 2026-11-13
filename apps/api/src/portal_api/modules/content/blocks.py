@@ -145,6 +145,10 @@ class _Emphasised(_Marked):
     """A block of running text that can carry the book's bold terms (BOOK-BOLD-01)."""
 
     bold: Bold = None  # absent, not empty, so stored bodies stay as authored
+    # BOOK-HIGHLIGHT-01: words the book prints in colour inside running text (a definition printed in magenta in the
+    # middle of its paragraph, owner 2026-11-02: "ousy highlight kia huwa hy wasy he"). Clients draw them in the book's
+    # highlight colour where they stand; they are never pulled out into a box.
+    highlight: Annotated[list[Text] | None, Field(max_length=20)] = None
 
     @model_validator(mode="after")
     def _bold_in_text(self) -> _Emphasised:
@@ -152,6 +156,9 @@ class _Emphasised(_Marked):
         for term in self.bold or []:
             if not any(term in t for t in texts):
                 raise ValueError(f"bold term {term!r} does not occur in the block's text")
+        for words in self.highlight or []:
+            if not any(words in t for t in texts):
+                raise ValueError(f"highlighted words {words[:40]!r} do not occur in the block's text")
         return self
 
 
@@ -173,12 +180,25 @@ class Paragraph(_Emphasised):
         return [self.text]
 
 
+# The label styles a book prints before list items (the same list as apps/web/src/lib/book-list.ts).
+ListMarker = Literal[
+    "1.", "1-", "1)", "(1)",
+    "a.", "a-", "a)", "(a)",
+    "A.", "A-", "A)", "(A)",
+    "i.", "i-", "i)", "(i)",
+    "I.", "I-", "I)", "(I)",
+]  # fmt: skip
+
+
 class ListBlock(_Emphasised):
     type: Literal["list"]
     ordered: bool = False
     # BOOK-LAYOUT-01: a numbered list the book interrupts (a figure or box printed between two steps) continues from
     # this number, so the steps keep the book's numbers (owner, 2026-11-03).
     start: Annotated[int, Field(ge=1, le=999)] | None = None
+    # BOOK-LIST-01: the label the book prints before the first item ("i-", "(a)", "1-"); the renderers count on in that
+    # style. Absent means plain numbers (owner, 2026-11-13).
+    marker: ListMarker | None = None
     items: list[Annotated[str, Field(min_length=1, max_length=1000)]] = Field(min_length=1, max_length=50)
 
     def _texts(self) -> list[str]:
@@ -205,8 +225,13 @@ class Callout(_Emphasised):
 class Table(_Emphasised):
     type: Literal["table"]
     caption: Short
+    # BOOK-TABLE-01: the book prints no caption (or no header row) for this table. The caption and header still name it
+    # for screen readers and the folded cards, but are not drawn (owner, 2026-11-13: "book jasi formatting").
+    caption_hidden: bool | None = None
+    header_hidden: bool | None = None
     header: list[Annotated[str, Field(max_length=200)]] = Field(min_length=1, max_length=12)
-    rows: list[list[Annotated[str, Field(max_length=500)]]] = Field(min_length=1, max_length=60)
+    # A cell may hold a whole printed paragraph (Biology 12 p205 "Draw conclusions").
+    rows: list[list[Annotated[str, Field(max_length=1500)]]] = Field(min_length=1, max_length=60)
     # TABLE-MERGE-01: columns where the book merges a cell down over several rows; there a blank cell continues the
     # filled cell above it.
     merged_columns: list[Annotated[int, Field(ge=0)]] | None = Field(default=None, max_length=12)

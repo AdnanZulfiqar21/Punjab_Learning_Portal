@@ -249,3 +249,28 @@ def test_questions_cannot_carry_handouts(client: TestClient, db: Session) -> Non
     assert saved.status_code == 200, saved.text  # drafts may hold work in progress
     submitted = _post(client, author, item["id"], "submit")
     assert submitted.status_code == 422 and any("lessons only" in e for e in submitted.json()["errors"]), submitted.text
+
+
+def test_a_list_names_the_label_the_book_prints() -> None:
+    """BOOK-LIST-01: "i-", "(a)", "1-" are the book's own item labels; anything else is refused."""
+    base = {"type": "list", "ordered": True, "items": ["Fixture first item", "Fixture second item"]}
+    for marker in ("i-", "(a)", "1-", "(I)"):
+        assert blocks.validate_body({"blocks": [{**base, "marker": marker}]}, for_publication=False).errors == []
+    assert blocks.validate_body({"blocks": [base]}, for_publication=False).errors == []  # plain numbers
+    assert blocks.validate_body({"blocks": [{**base, "marker": "*"}]}, for_publication=False).errors
+
+
+def test_a_table_may_hide_a_caption_or_header_the_book_does_not_print() -> None:
+    """BOOK-TABLE-01: the caption and header stay (spoken labels); the flags only say the book doesn't print them."""
+    base = {"type": "table", "caption": "Fixture table", "header": ["No.", "Step"], "rows": [["1.", "Fixture"]]}
+    hidden = {**base, "caption_hidden": True, "header_hidden": True}
+    assert blocks.validate_body({"blocks": [hidden]}, for_publication=False).errors == []
+    assert blocks.validate_body({"blocks": [{**base, "caption": ""}]}, for_publication=False).errors
+
+
+def test_words_the_book_prints_in_colour_must_be_in_the_text() -> None:
+    """BOOK-HIGHLIGHT-01: a highlighted definition stays in its paragraph; the words must be the block's own."""
+    base = {"type": "paragraph", "text": "Fixture text. The mole is the amount of substance. More fixture text."}
+    ok = {**base, "highlight": ["The mole is the amount of substance."]}
+    assert blocks.validate_body({"blocks": [ok]}, for_publication=False).errors == []
+    assert blocks.validate_body({"blocks": [{**base, "highlight": ["not in the text"]}]}, for_publication=False).errors
