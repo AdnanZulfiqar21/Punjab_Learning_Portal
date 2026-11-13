@@ -341,8 +341,9 @@ function isGroup(topic: TopicNode): boolean {
   return topic.children.length > 0 && !topic.number && /^(book examples|exercise \d)/i.test(topic.title);
 }
 
-/** Each topic opens its own lesson page. Subtopics are always listed under their topic, indented, as the book's
- * contents show them (owner, 2026-10-28: "baki ka sb topics ... kaha hain"); only bullet points fold under "Outline".
+/** Each topic opens its own lesson page. Subtopics are listed under their topic, indented, as the book's contents show
+ * them (owner, 2026-10-28: "baki ka sb topics ... kaha hain"), folded until the topic is opened (TOPIC-FOLD-01, owner,
+ * 2026-11-11); bullet points fold under "Outline".
  * The contents stay plain: every number in the text colour (owner, 2026-10-28). */
 function TopicItem({ topic, favourites, depth = 0, fold = false }: { topic: TopicNode; favourites: Set<string> | null; depth?: number; fold?: boolean }) {
   // OUTLINE-FOLD-01 (owner, 2026-11-05): the Mathematics contents are long, so each "Book Examples" and "Exercise 1.1"
@@ -372,38 +373,61 @@ function TopicItem({ topic, favourites, depth = 0, fold = false }: { topic: Topi
   const star = favourites && (
     <FavouriteButton topicId={topic.id} label={topic.number ? `${topic.number} ${topic.title}` : topic.title} initial={favourites.has(topic.id)} />
   );
+  const row = (
+    <>
+      <Link href={`/learn/topic/${topic.id}`} className="flex min-w-0 flex-1 items-baseline gap-3 py-1.5 hover:text-accent">
+        {topic.number && (
+          <span className={`shrink-0 text-sm font-semibold text-foreground ${depth ? "w-14 sm:w-16" : "w-12"}`}>
+            {topic.number}
+            {/* BOOK-NUMBER-01: where the book misprints the number, its own number to find the page. */}
+            {topic.book_number && <span className="block text-xs font-normal whitespace-nowrap text-muted">Book# {topic.book_number}</span>}
+          </span>
+        )}
+        <span className={depth ? "" : "font-medium"}>{topic.title}</span>
+      </Link>
+      {star}
+    </>
+  );
+  const outline = topic.points.length > 0 && (
+    <details className="text-sm">
+      <summary className="cursor-pointer list-none py-1 pl-15 text-muted hover:text-foreground">Outline</summary>
+      <ul className="mt-1 ml-15 list-disc space-y-1 pl-5 text-muted">
+        {topic.points.map((p) => (
+          <li key={p}>{p}</li>
+        ))}
+      </ul>
+    </details>
+  );
+  if (topic.children.length > 0) {
+    // TOPIC-FOLD-01 (owner, 2026-11-11): a topic's subtopics fold under it like the Chapter practice folds. The title
+    // still opens the topic's lesson; the arrow beside it shows or hides the subtopics. The arrow is the fold's own
+    // button, set on the row (a link can't sit inside it).
+    const count = topic.children.length;
+    return (
+      <li className={`relative ${depth ? "py-0.5" : "px-4 py-2 sm:px-5"}`}>
+        <div className="flex items-center gap-2 pr-14">{row}</div>
+        {outline}
+        <details className="outline-fold group">
+          <summary
+            aria-label={`${topic.number ? `${topic.number} ` : ""}${topic.title}: ${count} subtopics`}
+            className={`absolute flex min-h-11 min-w-11 cursor-pointer list-none items-center justify-end gap-1 rounded-lg text-sm text-muted hover:text-accent focus-visible:outline-2 focus-visible:outline-accent [&::-webkit-details-marker]:hidden ${depth ? "top-0 right-0" : "top-1.5 right-3 sm:right-4"}`}
+          >
+            <span aria-hidden="true">{count}</span>
+            <Icon name="chevron-right" size={18} className="transition-transform duration-200 group-open:rotate-90" />
+          </summary>
+          <ol className="mt-1 ml-3 border-l-2 border-border pl-2 sm:ml-15 sm:pl-3">
+            {topic.children.map((c) => (
+              <TopicItem key={c.id} topic={c} favourites={favourites} depth={depth + 1} fold={fold} />
+            ))}
+          </ol>
+        </details>
+      </li>
+    );
+  }
   return (
     <li className={depth ? "py-0.5" : "px-4 py-2 sm:px-5"}>
-      <div className="flex items-center gap-2">
-        <Link href={`/learn/topic/${topic.id}`} className="flex min-w-0 flex-1 items-baseline gap-3 py-1.5 hover:text-accent">
-          {topic.number && (
-            <span className={`shrink-0 text-sm font-semibold text-foreground ${depth ? "w-14 sm:w-16" : "w-12"}`}>
-              {topic.number}
-              {/* BOOK-NUMBER-01: where the book misprints the number, its own number to find the page. */}
-              {topic.book_number && <span className="block text-xs font-normal whitespace-nowrap text-muted">Book# {topic.book_number}</span>}
-            </span>
-          )}
-          <span className={depth ? "" : "font-medium"}>{topic.title}</span>
-        </Link>
-        {star}
-      </div>
-      {topic.points.length > 0 && (
-        <details className="text-sm">
-          <summary className="cursor-pointer list-none py-1 pl-15 text-muted hover:text-foreground">Outline</summary>
-          <ul className="mt-1 ml-15 list-disc space-y-1 pl-5 text-muted">
-            {topic.points.map((p) => (
-              <li key={p}>{p}</li>
-            ))}
-          </ul>
-        </details>
-      )}
-      {topic.children.length > 0 && (
-        <ol className="mt-1 ml-3 border-l-2 border-border pl-2 sm:ml-15 sm:pl-3">
-          {topic.children.map((c) => (
-            <TopicItem key={c.id} topic={c} favourites={favourites} depth={depth + 1} fold={fold} />
-          ))}
-        </ol>
-      )}
+      <div className="flex items-center gap-2">{row}</div>
+      {outline}
     </li>
   );
 }
